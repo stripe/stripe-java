@@ -18,15 +18,15 @@ public class WebhookEndpointCreateParams extends ApiRequestParams {
   ApiVersion apiVersion;
 
   /**
-   * Whether this endpoint should receive events from connected accounts (`true`), or from your
-   * account (`false`). Defaults to `false`.
+   * Whether this endpoint should receive events from connected accounts ({@code true}), or from
+   * your account ({@code false}). Defaults to {@code false}.
    */
   @SerializedName("connect")
   Boolean connect;
 
   /**
-   * The list of events to enable for this endpoint. You may specify `['*']` to enable all events,
-   * except those that require explicit selection.
+   * The list of events to enable for this endpoint. You may specify {@code ['*']} to enable all
+   * events, except those that require explicit selection.
    */
   @SerializedName("enabled_events")
   List<EnabledEvent> enabledEvents;
@@ -101,8 +101,8 @@ public class WebhookEndpointCreateParams extends ApiRequestParams {
     }
 
     /**
-     * Whether this endpoint should receive events from connected accounts (`true`), or from your
-     * account (`false`). Defaults to `false`.
+     * Whether this endpoint should receive events from connected accounts ({@code true}), or from
+     * your account ({@code false}). Defaults to {@code false}.
      */
     public Builder setConnect(Boolean connect) {
       this.connect = connect;

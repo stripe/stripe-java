@@ -15,8 +15,8 @@ public class PayoutCreateParams extends ApiRequestParams {
   Long amount;
 
   /**
-   * Three-letter [ISO currency code](https://www.iso.org/iso-4217-currency-codes.html), in
-   * lowercase. Must be a [supported currency](https://stripe.com/docs/currencies).
+   * Three-letter <a href="https://www.iso.org/iso-4217-currency-codes.html">ISO currency code</a>,
+   * in lowercase. Must be a <a href="https://stripe.com/docs/currencies">supported currency</a>.
    */
   @SerializedName("currency")
   String currency;
@@ -48,15 +48,17 @@ public class PayoutCreateParams extends ApiRequestParams {
   /**
    * Set of key-value pairs that you can attach to an object. This can be useful for storing
    * additional information about the object in a structured format. Individual keys can be unset by
-   * posting an empty value to them. All keys can be unset by posting an empty value to `metadata`.
+   * posting an empty value to them. All keys can be unset by posting an empty value to {@code
+   * metadata}.
    */
   @SerializedName("metadata")
   Map<String, String> metadata;
 
   /**
-   * The method used to send this payout, which can be `standard` or `instant`. `instant` is only
-   * supported for payouts to debit cards. (See [Instant payouts for marketplaces for more
-   * information](https://stripe.com/blog/instant-payouts-for-marketplaces).)
+   * The method used to send this payout, which can be {@code standard} or {@code instant}. {@code
+   * instant} is only supported for payouts to debit cards. (See <a
+   * href="https://stripe.com/blog/instant-payouts-for-marketplaces">Instant payouts for
+   * marketplaces for more information</a>.)
    */
   @SerializedName("method")
   Method method;
@@ -64,16 +66,16 @@ public class PayoutCreateParams extends ApiRequestParams {
   /**
    * The balance type of your Stripe balance to draw this payout from. Balances for different
    * payment sources are kept separately. You can find the amounts with the balances API. One of
-   * `bank_account` or `card`.
+   * {@code bank_account} or {@code card}.
    */
   @SerializedName("source_type")
   SourceType sourceType;
 
   /**
    * A string to be displayed on the recipient's bank or card statement. This may be at most 22
-   * characters. Attempting to use a `statement_descriptor` longer than 22 characters will return an
-   * error. Note: Most banks will truncate this information and/or display it inconsistently. Some
-   * may not display it at all.
+   * characters. Attempting to use a {@code statement_descriptor} longer than 22 characters will
+   * return an error. Note: Most banks will truncate this information and/or display it
+   * inconsistently. Some may not display it at all.
    */
   @SerializedName("statement_descriptor")
   String statementDescriptor;
@@ -148,8 +150,9 @@ public class PayoutCreateParams extends ApiRequestParams {
     }
 
     /**
-     * Three-letter [ISO currency code](https://www.iso.org/iso-4217-currency-codes.html), in
-     * lowercase. Must be a [supported currency](https://stripe.com/docs/currencies).
+     * Three-letter <a href="https://www.iso.org/iso-4217-currency-codes.html">ISO currency
+     * code</a>, in lowercase. Must be a <a href="https://stripe.com/docs/currencies">supported
+     * currency</a>.
      */
     public Builder setCurrency(String currency) {
       this.currency = currency;
@@ -250,9 +253,10 @@ public class PayoutCreateParams extends ApiRequestParams {
     }
 
     /**
-     * The method used to send this payout, which can be `standard` or `instant`. `instant` is only
-     * supported for payouts to debit cards. (See [Instant payouts for marketplaces for more
-     * information](https://stripe.com/blog/instant-payouts-for-marketplaces).)
+     * The method used to send this payout, which can be {@code standard} or {@code instant}. {@code
+     * instant} is only supported for payouts to debit cards. (See <a
+     * href="https://stripe.com/blog/instant-payouts-for-marketplaces">Instant payouts for
+     * marketplaces for more information</a>.)
      */
     public Builder setMethod(Method method) {
       this.method = method;
@@ -262,7 +266,7 @@ public class PayoutCreateParams extends ApiRequestParams {
     /**
      * The balance type of your Stripe balance to draw this payout from. Balances for different
      * payment sources are kept separately. You can find the amounts with the balances API. One of
-     * `bank_account` or `card`.
+     * {@code bank_account} or {@code card}.
      */
     public Builder setSourceType(SourceType sourceType) {
       this.sourceType = sourceType;
@@ -271,9 +275,9 @@ public class PayoutCreateParams extends ApiRequestParams {
 
     /**
      * A string to be displayed on the recipient's bank or card statement. This may be at most 22
-     * characters. Attempting to use a `statement_descriptor` longer than 22 characters will return
-     * an error. Note: Most banks will truncate this information and/or display it inconsistently.
-     * Some may not display it at all.
+     * characters. Attempting to use a {@code statement_descriptor} longer than 22 characters will
+     * return an error. Note: Most banks will truncate this information and/or display it
+     * inconsistently. Some may not display it at all.
      */
     public Builder setStatementDescriptor(String statementDescriptor) {
       this.statementDescriptor = statementDescriptor;

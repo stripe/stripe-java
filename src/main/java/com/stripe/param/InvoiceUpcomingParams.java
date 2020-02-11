@@ -13,11 +13,11 @@ import lombok.Getter;
 @Getter
 public class InvoiceUpcomingParams extends ApiRequestParams {
   /**
-   * The code of the coupon to apply. If `subscription` or `subscription_items` is provided, the
-   * invoice returned will preview updating or creating a subscription with that coupon. Otherwise,
-   * it will preview applying that coupon to the customer for the next upcoming invoice from among
-   * the customer's subscriptions. The invoice can be previewed without a coupon by passing this
-   * value as an empty string.
+   * The code of the coupon to apply. If {@code subscription} or {@code subscription_items} is
+   * provided, the invoice returned will preview updating or creating a subscription with that
+   * coupon. Otherwise, it will preview applying that coupon to the customer for the next upcoming
+   * invoice from among the customer's subscriptions. The invoice can be previewed without a coupon
+   * by passing this value as an empty string.
    */
   @SerializedName("coupon")
   String coupon;
@@ -52,26 +52,27 @@ public class InvoiceUpcomingParams extends ApiRequestParams {
 
   /**
    * The identifier of the subscription for which you'd like to retrieve the upcoming invoice. If
-   * not provided, but a `subscription_items` is provided, you will preview creating a subscription
-   * with those items. If neither `subscription` nor `subscription_items` is provided, you will
-   * retrieve the next upcoming invoice from among the customer's subscriptions.
+   * not provided, but a {@code subscription_items} is provided, you will preview creating a
+   * subscription with those items. If neither {@code subscription} nor {@code subscription_items}
+   * is provided, you will retrieve the next upcoming invoice from among the customer's
+   * subscriptions.
    */
   @SerializedName("subscription")
   String subscription;
 
   /**
-   * For new subscriptions, a future timestamp to anchor the subscription's [billing
-   * cycle](https://stripe.com/docs/subscriptions/billing-cycle). This is used to determine the date
-   * of the first full invoice, and, for plans with `month` or `year` intervals, the day of the
-   * month for subsequent invoices. For existing subscriptions, the value can only be set to `now`
-   * or `unchanged`.
+   * For new subscriptions, a future timestamp to anchor the subscription's <a
+   * href="https://stripe.com/docs/subscriptions/billing-cycle">billing cycle</a>. This is used to
+   * determine the date of the first full invoice, and, for plans with {@code month} or {@code year}
+   * intervals, the day of the month for subsequent invoices. For existing subscriptions, the value
+   * can only be set to {@code now} or {@code unchanged}.
    */
   @SerializedName("subscription_billing_cycle_anchor")
   Object subscriptionBillingCycleAnchor;
 
   /**
    * Timestamp indicating when the subscription should be scheduled to cancel. Will prorate if
-   * within the current period and prorations have been enabled using `proration_behavior`.`
+   * within the current period and prorations have been enabled using {@code proration_behavior}.`
    */
   @SerializedName("subscription_cancel_at")
   Object subscriptionCancelAt;
@@ -88,8 +89,8 @@ public class InvoiceUpcomingParams extends ApiRequestParams {
 
   /**
    * If provided, the invoice returned will preview updating or creating a subscription with these
-   * default tax rates. The default tax rates will apply to any line item that does not have
-   * `tax_rates` set.
+   * default tax rates. The default tax rates will apply to any line item that does not have {@code
+   * tax_rates} set.
    */
   @SerializedName("subscription_default_tax_rates")
   Object subscriptionDefaultTaxRates;
@@ -100,36 +101,38 @@ public class InvoiceUpcomingParams extends ApiRequestParams {
 
   /**
    * If previewing an update to a subscription, this decides whether the preview will show the
-   * result of applying prorations or not. If set, one of `subscription_items` or `subscription`,
-   * and one of `subscription_items` or `subscription_trial_end` are required.
+   * result of applying prorations or not. If set, one of {@code subscription_items} or {@code
+   * subscription}, and one of {@code subscription_items} or {@code subscription_trial_end} are
+   * required.
    */
   @SerializedName("subscription_prorate")
   Boolean subscriptionProrate;
 
   /**
-   * Determines how to handle
-   * [prorations](https://stripe.com/docs/subscriptions/billing-cycle#prorations) when the billing
-   * cycle changes (e.g., when switching plans, resetting `billing_cycle_anchor=now`, or starting a
-   * trial), or if an item's `quantity` changes. Valid values are `create_prorations`, `none`, or
-   * `always_invoice`.
+   * Determines how to handle <a
+   * href="https://stripe.com/docs/subscriptions/billing-cycle#prorations">prorations</a> when the
+   * billing cycle changes (e.g., when switching plans, resetting {@code billing_cycle_anchor=now},
+   * or starting a trial), or if an item's {@code quantity} changes. Valid values are {@code
+   * create_prorations}, {@code none}, or {@code always_invoice}.
    *
-   * <p>Passing `create_prorations` will cause proration invoice items to be created when
-   * applicable. These proration items will only be invoiced immediately under [certain
-   * conditions](https://stripe.com/docs/subscriptions/upgrading-downgrading#immediate-payment). In
-   * order to always invoice immediately for prorations, pass `always_invoice`.
+   * <p>Passing {@code create_prorations} will cause proration invoice items to be created when
+   * applicable. These proration items will only be invoiced immediately under <a
+   * href="https://stripe.com/docs/subscriptions/upgrading-downgrading#immediate-payment">certain
+   * conditions</a>. In order to always invoice immediately for prorations, pass {@code
+   * always_invoice}.
    *
-   * <p>Prorations can be disabled by passing `none`.
+   * <p>Prorations can be disabled by passing {@code none}.
    */
   @SerializedName("subscription_proration_behavior")
   SubscriptionProrationBehavior subscriptionProrationBehavior;
 
   /**
-   * If previewing an update to a subscription, and doing proration, `subscription_proration_date`
-   * forces the proration to be calculated as though the update was done at the specified time. The
-   * time given must be within the current subscription period, and cannot be before the
-   * subscription was on its current plan. If set, `subscription`, and one of `subscription_items`,
-   * or `subscription_trial_end` are required. Also, `subscription_proration` cannot be set to
-   * false.
+   * If previewing an update to a subscription, and doing proration, {@code
+   * subscription_proration_date} forces the proration to be calculated as though the update was
+   * done at the specified time. The time given must be within the current subscription period, and
+   * cannot be before the subscription was on its current plan. If set, {@code subscription}, and
+   * one of {@code subscription_items}, or {@code subscription_trial_end} are required. Also, {@code
+   * subscription_proration} cannot be set to false.
    */
   @SerializedName("subscription_proration_date")
   Long subscriptionProrationDate;
@@ -140,24 +143,26 @@ public class InvoiceUpcomingParams extends ApiRequestParams {
 
   /**
    * If provided, the invoice returned will preview updating or creating a subscription with that
-   * tax percent. If set, one of `subscription_items` or `subscription` is required. This field has
-   * been deprecated and will be removed in a future API version, for further information view the
-   * [migration docs](https://stripe.com/docs/billing/migration/taxes) for `tax_rates`.
+   * tax percent. If set, one of {@code subscription_items} or {@code subscription} is required.
+   * This field has been deprecated and will be removed in a future API version, for further
+   * information view the <a href="https://stripe.com/docs/billing/migration/taxes">migration
+   * docs</a> for {@code tax_rates}.
    */
   @SerializedName("subscription_tax_percent")
   BigDecimal subscriptionTaxPercent;
 
   /**
    * If provided, the invoice returned will preview updating or creating a subscription with that
-   * trial end. If set, one of `subscription_items` or `subscription` is required.
+   * trial end. If set, one of {@code subscription_items} or {@code subscription} is required.
    */
   @SerializedName("subscription_trial_end")
   Object subscriptionTrialEnd;
 
   /**
-   * Indicates if a plan's `trial_period_days` should be applied to the subscription. Setting
-   * `subscription_trial_end` per subscription is preferred, and this defaults to `false`. Setting
-   * this flag to `true` together with `subscription_trial_end` is not allowed.
+   * Indicates if a plan's {@code trial_period_days} should be applied to the subscription. Setting
+   * {@code subscription_trial_end} per subscription is preferred, and this defaults to {@code
+   * false}. Setting this flag to {@code true} together with {@code subscription_trial_end} is not
+   * allowed.
    */
   @SerializedName("subscription_trial_from_plan")
   Boolean subscriptionTrialFromPlan;
@@ -276,11 +281,11 @@ public class InvoiceUpcomingParams extends ApiRequestParams {
     }
 
     /**
-     * The code of the coupon to apply. If `subscription` or `subscription_items` is provided, the
-     * invoice returned will preview updating or creating a subscription with that coupon.
-     * Otherwise, it will preview applying that coupon to the customer for the next upcoming invoice
-     * from among the customer's subscriptions. The invoice can be previewed without a coupon by
-     * passing this value as an empty string.
+     * The code of the coupon to apply. If {@code subscription} or {@code subscription_items} is
+     * provided, the invoice returned will preview updating or creating a subscription with that
+     * coupon. Otherwise, it will preview applying that coupon to the customer for the next upcoming
+     * invoice from among the customer's subscriptions. The invoice can be previewed without a
+     * coupon by passing this value as an empty string.
      */
     public Builder setCoupon(String coupon) {
       this.coupon = coupon;
@@ -382,9 +387,9 @@ public class InvoiceUpcomingParams extends ApiRequestParams {
 
     /**
      * The identifier of the subscription for which you'd like to retrieve the upcoming invoice. If
-     * not provided, but a `subscription_items` is provided, you will preview creating a
-     * subscription with those items. If neither `subscription` nor `subscription_items` is
-     * provided, you will retrieve the next upcoming invoice from among the customer's
+     * not provided, but a {@code subscription_items} is provided, you will preview creating a
+     * subscription with those items. If neither {@code subscription} nor {@code subscription_items}
+     * is provided, you will retrieve the next upcoming invoice from among the customer's
      * subscriptions.
      */
     public Builder setSubscription(String subscription) {
@@ -393,11 +398,11 @@ public class InvoiceUpcomingParams extends ApiRequestParams {
     }
 
     /**
-     * For new subscriptions, a future timestamp to anchor the subscription's [billing
-     * cycle](https://stripe.com/docs/subscriptions/billing-cycle). This is used to determine the
-     * date of the first full invoice, and, for plans with `month` or `year` intervals, the day of
-     * the month for subsequent invoices. For existing subscriptions, the value can only be set to
-     * `now` or `unchanged`.
+     * For new subscriptions, a future timestamp to anchor the subscription's <a
+     * href="https://stripe.com/docs/subscriptions/billing-cycle">billing cycle</a>. This is used to
+     * determine the date of the first full invoice, and, for plans with {@code month} or {@code
+     * year} intervals, the day of the month for subsequent invoices. For existing subscriptions,
+     * the value can only be set to {@code now} or {@code unchanged}.
      */
     public Builder setSubscriptionBillingCycleAnchor(
         SubscriptionBillingCycleAnchor subscriptionBillingCycleAnchor) {
@@ -406,11 +411,11 @@ public class InvoiceUpcomingParams extends ApiRequestParams {
     }
 
     /**
-     * For new subscriptions, a future timestamp to anchor the subscription's [billing
-     * cycle](https://stripe.com/docs/subscriptions/billing-cycle). This is used to determine the
-     * date of the first full invoice, and, for plans with `month` or `year` intervals, the day of
-     * the month for subsequent invoices. For existing subscriptions, the value can only be set to
-     * `now` or `unchanged`.
+     * For new subscriptions, a future timestamp to anchor the subscription's <a
+     * href="https://stripe.com/docs/subscriptions/billing-cycle">billing cycle</a>. This is used to
+     * determine the date of the first full invoice, and, for plans with {@code month} or {@code
+     * year} intervals, the day of the month for subsequent invoices. For existing subscriptions,
+     * the value can only be set to {@code now} or {@code unchanged}.
      */
     public Builder setSubscriptionBillingCycleAnchor(Long subscriptionBillingCycleAnchor) {
       this.subscriptionBillingCycleAnchor = subscriptionBillingCycleAnchor;
@@ -419,7 +424,7 @@ public class InvoiceUpcomingParams extends ApiRequestParams {
 
     /**
      * Timestamp indicating when the subscription should be scheduled to cancel. Will prorate if
-     * within the current period and prorations have been enabled using `proration_behavior`.`
+     * within the current period and prorations have been enabled using {@code proration_behavior}.`
      */
     public Builder setSubscriptionCancelAt(Long subscriptionCancelAt) {
       this.subscriptionCancelAt = subscriptionCancelAt;
@@ -428,7 +433,7 @@ public class InvoiceUpcomingParams extends ApiRequestParams {
 
     /**
      * Timestamp indicating when the subscription should be scheduled to cancel. Will prorate if
-     * within the current period and prorations have been enabled using `proration_behavior`.`
+     * within the current period and prorations have been enabled using {@code proration_behavior}.`
      */
     public Builder setSubscriptionCancelAt(EmptyParam subscriptionCancelAt) {
       this.subscriptionCancelAt = subscriptionCancelAt;
@@ -482,7 +487,7 @@ public class InvoiceUpcomingParams extends ApiRequestParams {
     /**
      * If provided, the invoice returned will preview updating or creating a subscription with these
      * default tax rates. The default tax rates will apply to any line item that does not have
-     * `tax_rates` set.
+     * {@code tax_rates} set.
      */
     public Builder setSubscriptionDefaultTaxRates(EmptyParam subscriptionDefaultTaxRates) {
       this.subscriptionDefaultTaxRates = subscriptionDefaultTaxRates;
@@ -492,7 +497,7 @@ public class InvoiceUpcomingParams extends ApiRequestParams {
     /**
      * If provided, the invoice returned will preview updating or creating a subscription with these
      * default tax rates. The default tax rates will apply to any line item that does not have
-     * `tax_rates` set.
+     * {@code tax_rates} set.
      */
     public Builder setSubscriptionDefaultTaxRates(List<String> subscriptionDefaultTaxRates) {
       this.subscriptionDefaultTaxRates = subscriptionDefaultTaxRates;
@@ -527,8 +532,9 @@ public class InvoiceUpcomingParams extends ApiRequestParams {
 
     /**
      * If previewing an update to a subscription, this decides whether the preview will show the
-     * result of applying prorations or not. If set, one of `subscription_items` or `subscription`,
-     * and one of `subscription_items` or `subscription_trial_end` are required.
+     * result of applying prorations or not. If set, one of {@code subscription_items} or {@code
+     * subscription}, and one of {@code subscription_items} or {@code subscription_trial_end} are
+     * required.
      */
     public Builder setSubscriptionProrate(Boolean subscriptionProrate) {
       this.subscriptionProrate = subscriptionProrate;
@@ -536,18 +542,19 @@ public class InvoiceUpcomingParams extends ApiRequestParams {
     }
 
     /**
-     * Determines how to handle
-     * [prorations](https://stripe.com/docs/subscriptions/billing-cycle#prorations) when the billing
-     * cycle changes (e.g., when switching plans, resetting `billing_cycle_anchor=now`, or starting
-     * a trial), or if an item's `quantity` changes. Valid values are `create_prorations`, `none`,
-     * or `always_invoice`.
+     * Determines how to handle <a
+     * href="https://stripe.com/docs/subscriptions/billing-cycle#prorations">prorations</a> when the
+     * billing cycle changes (e.g., when switching plans, resetting {@code
+     * billing_cycle_anchor=now}, or starting a trial), or if an item's {@code quantity} changes.
+     * Valid values are {@code create_prorations}, {@code none}, or {@code always_invoice}.
      *
-     * <p>Passing `create_prorations` will cause proration invoice items to be created when
-     * applicable. These proration items will only be invoiced immediately under [certain
-     * conditions](https://stripe.com/docs/subscriptions/upgrading-downgrading#immediate-payment).
-     * In order to always invoice immediately for prorations, pass `always_invoice`.
+     * <p>Passing {@code create_prorations} will cause proration invoice items to be created when
+     * applicable. These proration items will only be invoiced immediately under <a
+     * href="https://stripe.com/docs/subscriptions/upgrading-downgrading#immediate-payment">certain
+     * conditions</a>. In order to always invoice immediately for prorations, pass {@code
+     * always_invoice}.
      *
-     * <p>Prorations can be disabled by passing `none`.
+     * <p>Prorations can be disabled by passing {@code none}.
      */
     public Builder setSubscriptionProrationBehavior(
         SubscriptionProrationBehavior subscriptionProrationBehavior) {
@@ -556,12 +563,12 @@ public class InvoiceUpcomingParams extends ApiRequestParams {
     }
 
     /**
-     * If previewing an update to a subscription, and doing proration, `subscription_proration_date`
-     * forces the proration to be calculated as though the update was done at the specified time.
-     * The time given must be within the current subscription period, and cannot be before the
-     * subscription was on its current plan. If set, `subscription`, and one of
-     * `subscription_items`, or `subscription_trial_end` are required. Also,
-     * `subscription_proration` cannot be set to false.
+     * If previewing an update to a subscription, and doing proration, {@code
+     * subscription_proration_date} forces the proration to be calculated as though the update was
+     * done at the specified time. The time given must be within the current subscription period,
+     * and cannot be before the subscription was on its current plan. If set, {@code subscription},
+     * and one of {@code subscription_items}, or {@code subscription_trial_end} are required. Also,
+     * {@code subscription_proration} cannot be set to false.
      */
     public Builder setSubscriptionProrationDate(Long subscriptionProrationDate) {
       this.subscriptionProrationDate = subscriptionProrationDate;
@@ -576,9 +583,10 @@ public class InvoiceUpcomingParams extends ApiRequestParams {
 
     /**
      * If provided, the invoice returned will preview updating or creating a subscription with that
-     * tax percent. If set, one of `subscription_items` or `subscription` is required. This field
-     * has been deprecated and will be removed in a future API version, for further information view
-     * the [migration docs](https://stripe.com/docs/billing/migration/taxes) for `tax_rates`.
+     * tax percent. If set, one of {@code subscription_items} or {@code subscription} is required.
+     * This field has been deprecated and will be removed in a future API version, for further
+     * information view the <a href="https://stripe.com/docs/billing/migration/taxes">migration
+     * docs</a> for {@code tax_rates}.
      */
     public Builder setSubscriptionTaxPercent(BigDecimal subscriptionTaxPercent) {
       this.subscriptionTaxPercent = subscriptionTaxPercent;
@@ -587,7 +595,7 @@ public class InvoiceUpcomingParams extends ApiRequestParams {
 
     /**
      * If provided, the invoice returned will preview updating or creating a subscription with that
-     * trial end. If set, one of `subscription_items` or `subscription` is required.
+     * trial end. If set, one of {@code subscription_items} or {@code subscription} is required.
      */
     public Builder setSubscriptionTrialEnd(SubscriptionTrialEnd subscriptionTrialEnd) {
       this.subscriptionTrialEnd = subscriptionTrialEnd;
@@ -596,7 +604,7 @@ public class InvoiceUpcomingParams extends ApiRequestParams {
 
     /**
      * If provided, the invoice returned will preview updating or creating a subscription with that
-     * trial end. If set, one of `subscription_items` or `subscription` is required.
+     * trial end. If set, one of {@code subscription_items} or {@code subscription} is required.
      */
     public Builder setSubscriptionTrialEnd(Long subscriptionTrialEnd) {
       this.subscriptionTrialEnd = subscriptionTrialEnd;
@@ -604,9 +612,10 @@ public class InvoiceUpcomingParams extends ApiRequestParams {
     }
 
     /**
-     * Indicates if a plan's `trial_period_days` should be applied to the subscription. Setting
-     * `subscription_trial_end` per subscription is preferred, and this defaults to `false`. Setting
-     * this flag to `true` together with `subscription_trial_end` is not allowed.
+     * Indicates if a plan's {@code trial_period_days} should be applied to the subscription.
+     * Setting {@code subscription_trial_end} per subscription is preferred, and this defaults to
+     * {@code false}. Setting this flag to {@code true} together with {@code subscription_trial_end}
+     * is not allowed.
      */
     public Builder setSubscriptionTrialFromPlan(Boolean subscriptionTrialFromPlan) {
       this.subscriptionTrialFromPlan = subscriptionTrialFromPlan;
@@ -616,14 +625,14 @@ public class InvoiceUpcomingParams extends ApiRequestParams {
 
   @Getter
   public static class InvoiceItem {
-    /** The integer amount in **%s** of previewed invoice item. */
+    /** The integer amount in <strong>%s</strong> of previewed invoice item. */
     @SerializedName("amount")
     Long amount;
 
     /**
-     * Three-letter [ISO currency code](https://www.iso.org/iso-4217-currency-codes.html), in
-     * lowercase. Must be a [supported currency](https://stripe.com/docs/currencies). Only
-     * applicable to new invoice items.
+     * Three-letter <a href="https://www.iso.org/iso-4217-currency-codes.html">ISO currency
+     * code</a>, in lowercase. Must be a <a href="https://stripe.com/docs/currencies">supported
+     * currency</a>. Only applicable to new invoice items.
      */
     @SerializedName("currency")
     String currency;
@@ -661,8 +670,8 @@ public class InvoiceUpcomingParams extends ApiRequestParams {
     /**
      * Set of key-value pairs that you can attach to an object. This can be useful for storing
      * additional information about the object in a structured format. Individual keys can be unset
-     * by posting an empty value to them. All keys can be unset by posting an empty value to
-     * `metadata`.
+     * by posting an empty value to them. All keys can be unset by posting an empty value to {@code
+     * metadata}.
      */
     @SerializedName("metadata")
     Map<String, String> metadata;
@@ -679,16 +688,16 @@ public class InvoiceUpcomingParams extends ApiRequestParams {
     Object taxRates;
 
     /**
-     * The integer unit amount in **%s** of the charge to be applied to the upcoming invoice. This
-     * unit_amount will be multiplied by the quantity to get the full amount. If you want to apply a
-     * credit to the customer's account, pass a negative unit_amount.
+     * The integer unit amount in <strong>%s</strong> of the charge to be applied to the upcoming
+     * invoice. This unit_amount will be multiplied by the quantity to get the full amount. If you
+     * want to apply a credit to the customer's account, pass a negative unit_amount.
      */
     @SerializedName("unit_amount")
     Long unitAmount;
 
     /**
-     * Same as `unit_amount`, but accepts a decimal string with at most 12 decimal places. Only one
-     * of `unit_amount` and `unit_amount_decimal` can be set.
+     * Same as {@code unit_amount}, but accepts a decimal string with at most 12 decimal places.
+     * Only one of {@code unit_amount} and {@code unit_amount_decimal} can be set.
      */
     @SerializedName("unit_amount_decimal")
     BigDecimal unitAmountDecimal;
@@ -766,16 +775,16 @@ public class InvoiceUpcomingParams extends ApiRequestParams {
             this.unitAmountDecimal);
       }
 
-      /** The integer amount in **%s** of previewed invoice item. */
+      /** The integer amount in <strong>%s</strong> of previewed invoice item. */
       public Builder setAmount(Long amount) {
         this.amount = amount;
         return this;
       }
 
       /**
-       * Three-letter [ISO currency code](https://www.iso.org/iso-4217-currency-codes.html), in
-       * lowercase. Must be a [supported currency](https://stripe.com/docs/currencies). Only
-       * applicable to new invoice items.
+       * Three-letter <a href="https://www.iso.org/iso-4217-currency-codes.html">ISO currency
+       * code</a>, in lowercase. Must be a <a href="https://stripe.com/docs/currencies">supported
+       * currency</a>. Only applicable to new invoice items.
        */
       public Builder setCurrency(String currency) {
         this.currency = currency;
@@ -912,9 +921,9 @@ public class InvoiceUpcomingParams extends ApiRequestParams {
       }
 
       /**
-       * The integer unit amount in **%s** of the charge to be applied to the upcoming invoice. This
-       * unit_amount will be multiplied by the quantity to get the full amount. If you want to apply
-       * a credit to the customer's account, pass a negative unit_amount.
+       * The integer unit amount in <strong>%s</strong> of the charge to be applied to the upcoming
+       * invoice. This unit_amount will be multiplied by the quantity to get the full amount. If you
+       * want to apply a credit to the customer's account, pass a negative unit_amount.
        */
       public Builder setUnitAmount(Long unitAmount) {
         this.unitAmount = unitAmount;
@@ -922,8 +931,8 @@ public class InvoiceUpcomingParams extends ApiRequestParams {
       }
 
       /**
-       * Same as `unit_amount`, but accepts a decimal string with at most 12 decimal places. Only
-       * one of `unit_amount` and `unit_amount_decimal` can be set.
+       * Same as {@code unit_amount}, but accepts a decimal string with at most 12 decimal places.
+       * Only one of {@code unit_amount} and {@code unit_amount_decimal} can be set.
        */
       public Builder setUnitAmountDecimal(BigDecimal unitAmountDecimal) {
         this.unitAmountDecimal = unitAmountDecimal;
@@ -1025,13 +1034,13 @@ public class InvoiceUpcomingParams extends ApiRequestParams {
     Object billingThresholds;
 
     /**
-     * Delete all usage for a given subscription item. Allowed only when `deleted` is set to `true`
-     * and the current plan's `usage_type` is `metered`.
+     * Delete all usage for a given subscription item. Allowed only when {@code deleted} is set to
+     * {@code true} and the current plan's {@code usage_type} is {@code metered}.
      */
     @SerializedName("clear_usage")
     Boolean clearUsage;
 
-    /** A flag that, if set to `true`, will delete the specified item. */
+    /** A flag that, if set to {@code true}, will delete the specified item. */
     @SerializedName("deleted")
     Boolean deleted;
 
@@ -1051,8 +1060,8 @@ public class InvoiceUpcomingParams extends ApiRequestParams {
     /**
      * Set of key-value pairs that you can attach to an object. This can be useful for storing
      * additional information about the object in a structured format. Individual keys can be unset
-     * by posting an empty value to them. All keys can be unset by posting an empty value to
-     * `metadata`.
+     * by posting an empty value to them. All keys can be unset by posting an empty value to {@code
+     * metadata}.
      */
     @SerializedName("metadata")
     Map<String, String> metadata;
@@ -1066,11 +1075,11 @@ public class InvoiceUpcomingParams extends ApiRequestParams {
     Long quantity;
 
     /**
-     * A list of [Tax Rate](https://stripe.com/docs/api/tax_rates) ids. These Tax Rates will
-     * override the
-     * [`default_tax_rates`](https://stripe.com/docs/api/subscriptions/create#create_subscription-default_tax_rates)
-     * on the Subscription. When updating, pass an empty string to remove previously-defined tax
-     * rates.
+     * A list of <a href="https://stripe.com/docs/api/tax_rates">Tax Rate</a> ids. These Tax Rates
+     * will override the <a
+     * href="https://stripe.com/docs/api/subscriptions/create#create_subscription-default_tax_rates">{@code
+     * default_tax_rates}</a> on the Subscription. When updating, pass an empty string to remove
+     * previously-defined tax rates.
      */
     @SerializedName("tax_rates")
     Object taxRates;
@@ -1154,15 +1163,15 @@ public class InvoiceUpcomingParams extends ApiRequestParams {
       }
 
       /**
-       * Delete all usage for a given subscription item. Allowed only when `deleted` is set to
-       * `true` and the current plan's `usage_type` is `metered`.
+       * Delete all usage for a given subscription item. Allowed only when {@code deleted} is set to
+       * {@code true} and the current plan's {@code usage_type} is {@code metered}.
        */
       public Builder setClearUsage(Boolean clearUsage) {
         this.clearUsage = clearUsage;
         return this;
       }
 
-      /** A flag that, if set to `true`, will delete the specified item. */
+      /** A flag that, if set to {@code true}, will delete the specified item. */
       public Builder setDeleted(Boolean deleted) {
         this.deleted = deleted;
         return this;
@@ -1267,11 +1276,11 @@ public class InvoiceUpcomingParams extends ApiRequestParams {
       }
 
       /**
-       * A list of [Tax Rate](https://stripe.com/docs/api/tax_rates) ids. These Tax Rates will
-       * override the
-       * [`default_tax_rates`](https://stripe.com/docs/api/subscriptions/create#create_subscription-default_tax_rates)
-       * on the Subscription. When updating, pass an empty string to remove previously-defined tax
-       * rates.
+       * A list of <a href="https://stripe.com/docs/api/tax_rates">Tax Rate</a> ids. These Tax Rates
+       * will override the <a
+       * href="https://stripe.com/docs/api/subscriptions/create#create_subscription-default_tax_rates">{@code
+       * default_tax_rates}</a> on the Subscription. When updating, pass an empty string to remove
+       * previously-defined tax rates.
        */
       public Builder setTaxRates(EmptyParam taxRates) {
         this.taxRates = taxRates;
@@ -1279,11 +1288,11 @@ public class InvoiceUpcomingParams extends ApiRequestParams {
       }
 
       /**
-       * A list of [Tax Rate](https://stripe.com/docs/api/tax_rates) ids. These Tax Rates will
-       * override the
-       * [`default_tax_rates`](https://stripe.com/docs/api/subscriptions/create#create_subscription-default_tax_rates)
-       * on the Subscription. When updating, pass an empty string to remove previously-defined tax
-       * rates.
+       * A list of <a href="https://stripe.com/docs/api/tax_rates">Tax Rate</a> ids. These Tax Rates
+       * will override the <a
+       * href="https://stripe.com/docs/api/subscriptions/create#create_subscription-default_tax_rates">{@code
+       * default_tax_rates}</a> on the Subscription. When updating, pass an empty string to remove
+       * previously-defined tax rates.
        */
       public Builder setTaxRates(List<String> taxRates) {
         this.taxRates = taxRates;

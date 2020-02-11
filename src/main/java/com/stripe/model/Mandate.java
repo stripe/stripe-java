@@ -24,8 +24,8 @@ public class Mandate extends ApiResource implements HasId {
   String id;
 
   /**
-   * Has the value `true` if the object exists in live mode or the value `false` if the object
-   * exists in test mode.
+   * Has the value {@code true} if the object exists in live mode or the value {@code false} if the
+   * object exists in test mode.
    */
   @SerializedName("livemode")
   Boolean livemode;
@@ -36,7 +36,7 @@ public class Mandate extends ApiResource implements HasId {
   /**
    * String representing the object's type. Objects of the same type share the same value.
    *
-   * <p>Equal to `mandate`.
+   * <p>Equal to {@code mandate}.
    */
   @SerializedName("object")
   String object;
@@ -54,17 +54,17 @@ public class Mandate extends ApiResource implements HasId {
   SingleUse singleUse;
 
   /**
-   * The status of the Mandate, one of `pending`, `inactive`, or `active`. The Mandate can be used
-   * to initiate a payment only if status=active.
+   * The status of the Mandate, one of {@code pending}, {@code inactive}, or {@code active}. The
+   * Mandate can be used to initiate a payment only if status=active.
    */
   @SerializedName("status")
   String status;
 
-  /** The type of the mandate, one of `single_use` or `multi_use`. */
+  /** The type of the mandate, one of {@code single_use} or {@code multi_use}. */
   @SerializedName("type")
   String type;
 
-  /** Get id of expandable `paymentMethod` object. */
+  /** Get ID of expandable {@code paymentMethod} object. */
   public String getPaymentMethod() {
     return (this.paymentMethod != null) ? this.paymentMethod.getId() : null;
   }
@@ -73,7 +73,7 @@ public class Mandate extends ApiResource implements HasId {
     this.paymentMethod = ApiResource.setExpandableFieldId(id, this.paymentMethod);
   }
 
-  /** Get expanded `paymentMethod`. */
+  /** Get expanded {@code paymentMethod}. */
   public PaymentMethod getPaymentMethodObject() {
     return (this.paymentMethod != null) ? this.paymentMethod.getExpanded() : null;
   }
@@ -138,8 +138,8 @@ public class Mandate extends ApiResource implements HasId {
     Online online;
 
     /**
-     * The type of customer acceptance information included with the Mandate. One of `online` or
-     * `offline`.
+     * The type of customer acceptance information included with the Mandate. One of {@code online}
+     * or {@code offline}.
      */
     @SerializedName("type")
     String type;
@@ -183,8 +183,8 @@ public class Mandate extends ApiResource implements HasId {
 
     /**
      * The type of the payment method associated with this mandate. An additional hash is included
-     * on `payment_method_details` with a name matching this value. It contains mandate information
-     * specific to the payment method.
+     * on {@code payment_method_details} with a name matching this value. It contains mandate
+     * information specific to the payment method.
      */
     @SerializedName("type")
     String type;

@@ -35,7 +35,8 @@ public class LocationUpdateParams extends ApiRequestParams {
   /**
    * Set of key-value pairs that you can attach to an object. This can be useful for storing
    * additional information about the object in a structured format. Individual keys can be unset by
-   * posting an empty value to them. All keys can be unset by posting an empty value to `metadata`.
+   * posting an empty value to them. All keys can be unset by posting an empty value to {@code
+   * metadata}.
    */
   @SerializedName("metadata")
   Map<String, String> metadata;
@@ -178,8 +179,8 @@ public class LocationUpdateParams extends ApiRequestParams {
     Object city;
 
     /**
-     * Two-letter country code ([ISO 3166-1
-     * alpha-2](https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2)).
+     * Two-letter country code (<a href="https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2">ISO
+     * 3166-1 alpha-2</a>).
      */
     @SerializedName("country")
     Object country;
@@ -270,8 +271,8 @@ public class LocationUpdateParams extends ApiRequestParams {
       }
 
       /**
-       * Two-letter country code ([ISO 3166-1
-       * alpha-2](https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2)).
+       * Two-letter country code (<a href="https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2">ISO
+       * 3166-1 alpha-2</a>).
        */
       public Builder setCountry(String country) {
         this.country = country;
@@ -279,8 +280,8 @@ public class LocationUpdateParams extends ApiRequestParams {
       }
 
       /**
-       * Two-letter country code ([ISO 3166-1
-       * alpha-2](https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2)).
+       * Two-letter country code (<a href="https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2">ISO
+       * 3166-1 alpha-2</a>).
        */
       public Builder setCountry(EmptyParam country) {
         this.country = country;

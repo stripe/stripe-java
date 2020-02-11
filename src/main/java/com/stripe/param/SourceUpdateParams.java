@@ -38,7 +38,8 @@ public class SourceUpdateParams extends ApiRequestParams {
   /**
    * Set of key-value pairs that you can attach to an object. This can be useful for storing
    * additional information about the object in a structured format. Individual keys can be unset by
-   * posting an empty value to them. All keys can be unset by posting an empty value to `metadata`.
+   * posting an empty value to them. All keys can be unset by posting an empty value to {@code
+   * metadata}.
    */
   @SerializedName("metadata")
   Map<String, String> metadata;
@@ -229,7 +230,7 @@ public class SourceUpdateParams extends ApiRequestParams {
     @SerializedName("amount")
     Object amount;
 
-    /** The currency specified by the mandate. (Must match `currency` of the source) */
+    /** The currency specified by the mandate. (Must match {@code currency} of the source) */
     @SerializedName("currency")
     Object currency;
 
@@ -243,19 +244,20 @@ public class SourceUpdateParams extends ApiRequestParams {
     Map<String, Object> extraParams;
 
     /**
-     * The interval of debits permitted by the mandate. Either `one_time` (just permitting a single
-     * debit), `scheduled` (with debits on an agreed schedule or for clearly-defined events), or
-     * `variable`(for debits with any frequency)
+     * The interval of debits permitted by the mandate. Either {@code one_time} (just permitting a
+     * single debit), {@code scheduled} (with debits on an agreed schedule or for clearly-defined
+     * events), or {@code variable}(for debits with any frequency)
      */
     @SerializedName("interval")
     Interval interval;
 
     /**
      * The method Stripe should use to notify the customer of upcoming debit instructions and/or
-     * mandate confirmation as required by the underlying debit network. Either `email` (an email is
-     * sent directly to the customer), `manual` (a `source.mandate_notification` event is sent to
-     * your webhooks endpoint and you should handle the notification) or `none` (the underlying
-     * debit network does not require any notification).
+     * mandate confirmation as required by the underlying debit network. Either {@code email} (an
+     * email is sent directly to the customer), {@code manual} (a {@code
+     * source.mandate_notification} event is sent to your webhooks endpoint and you should handle
+     * the notification) or {@code none} (the underlying debit network does not require any
+     * notification).
      */
     @SerializedName("notification_method")
     NotificationMethod notificationMethod;
@@ -324,13 +326,13 @@ public class SourceUpdateParams extends ApiRequestParams {
         return this;
       }
 
-      /** The currency specified by the mandate. (Must match `currency` of the source) */
+      /** The currency specified by the mandate. (Must match {@code currency} of the source) */
       public Builder setCurrency(String currency) {
         this.currency = currency;
         return this;
       }
 
-      /** The currency specified by the mandate. (Must match `currency` of the source) */
+      /** The currency specified by the mandate. (Must match {@code currency} of the source) */
       public Builder setCurrency(EmptyParam currency) {
         this.currency = currency;
         return this;
@@ -363,9 +365,9 @@ public class SourceUpdateParams extends ApiRequestParams {
       }
 
       /**
-       * The interval of debits permitted by the mandate. Either `one_time` (just permitting a
-       * single debit), `scheduled` (with debits on an agreed schedule or for clearly-defined
-       * events), or `variable`(for debits with any frequency)
+       * The interval of debits permitted by the mandate. Either {@code one_time} (just permitting a
+       * single debit), {@code scheduled} (with debits on an agreed schedule or for clearly-defined
+       * events), or {@code variable}(for debits with any frequency)
        */
       public Builder setInterval(Interval interval) {
         this.interval = interval;
@@ -374,10 +376,11 @@ public class SourceUpdateParams extends ApiRequestParams {
 
       /**
        * The method Stripe should use to notify the customer of upcoming debit instructions and/or
-       * mandate confirmation as required by the underlying debit network. Either `email` (an email
-       * is sent directly to the customer), `manual` (a `source.mandate_notification` event is sent
-       * to your webhooks endpoint and you should handle the notification) or `none` (the underlying
-       * debit network does not require any notification).
+       * mandate confirmation as required by the underlying debit network. Either {@code email} (an
+       * email is sent directly to the customer), {@code manual} (a {@code
+       * source.mandate_notification} event is sent to your webhooks endpoint and you should handle
+       * the notification) or {@code none} (the underlying debit network does not require any
+       * notification).
        */
       public Builder setNotificationMethod(NotificationMethod notificationMethod) {
         this.notificationMethod = notificationMethod;
@@ -407,28 +410,29 @@ public class SourceUpdateParams extends ApiRequestParams {
       Object ip;
 
       /**
-       * The parameters required to store a mandate accepted offline. Should only be set if
-       * `mandate[type]` is `offline`
+       * The parameters required to store a mandate accepted offline. Should only be set if {@code
+       * mandate[type]} is {@code offline}
        */
       @SerializedName("offline")
       Offline offline;
 
       /**
-       * The parameters required to store a mandate accepted online. Should only be set if
-       * `mandate[type]` is `online`
+       * The parameters required to store a mandate accepted online. Should only be set if {@code
+       * mandate[type]} is {@code online}
        */
       @SerializedName("online")
       Online online;
 
       /**
-       * The status of the mandate acceptance. Either `accepted` (the mandate was accepted) or
-       * `refused` (the mandate was refused).
+       * The status of the mandate acceptance. Either {@code accepted} (the mandate was accepted) or
+       * {@code refused} (the mandate was refused).
        */
       @SerializedName("status")
       Status status;
 
       /**
-       * The type of acceptance information included with the mandate. Either `online` or `offline`
+       * The type of acceptance information included with the mandate. Either {@code online} or
+       * {@code offline}
        */
       @SerializedName("type")
       Type type;
@@ -542,8 +546,8 @@ public class SourceUpdateParams extends ApiRequestParams {
         }
 
         /**
-         * The parameters required to store a mandate accepted offline. Should only be set if
-         * `mandate[type]` is `offline`
+         * The parameters required to store a mandate accepted offline. Should only be set if {@code
+         * mandate[type]} is {@code offline}
          */
         public Builder setOffline(Offline offline) {
           this.offline = offline;
@@ -551,8 +555,8 @@ public class SourceUpdateParams extends ApiRequestParams {
         }
 
         /**
-         * The parameters required to store a mandate accepted online. Should only be set if
-         * `mandate[type]` is `online`
+         * The parameters required to store a mandate accepted online. Should only be set if {@code
+         * mandate[type]} is {@code online}
          */
         public Builder setOnline(Online online) {
           this.online = online;
@@ -560,8 +564,8 @@ public class SourceUpdateParams extends ApiRequestParams {
         }
 
         /**
-         * The status of the mandate acceptance. Either `accepted` (the mandate was accepted) or
-         * `refused` (the mandate was refused).
+         * The status of the mandate acceptance. Either {@code accepted} (the mandate was accepted)
+         * or {@code refused} (the mandate was refused).
          */
         public Builder setStatus(Status status) {
           this.status = status;
@@ -569,8 +573,8 @@ public class SourceUpdateParams extends ApiRequestParams {
         }
 
         /**
-         * The type of acceptance information included with the mandate. Either `online` or
-         * `offline`
+         * The type of acceptance information included with the mandate. Either {@code online} or
+         * {@code offline}
          */
         public Builder setType(Type type) {
           this.type = type;
@@ -599,8 +603,8 @@ public class SourceUpdateParams extends ApiRequestParams {
       @Getter
       public static class Offline {
         /**
-         * An email to contact you with if a copy of the mandate is requested, required if `type` is
-         * `offline`.
+         * An email to contact you with if a copy of the mandate is requested, required if {@code
+         * type} is {@code offline}.
          */
         @SerializedName("contact_email")
         Object contactEmail;
@@ -635,8 +639,8 @@ public class SourceUpdateParams extends ApiRequestParams {
           }
 
           /**
-           * An email to contact you with if a copy of the mandate is requested, required if `type`
-           * is `offline`.
+           * An email to contact you with if a copy of the mandate is requested, required if {@code
+           * type} is {@code offline}.
            */
           public Builder setContactEmail(String contactEmail) {
             this.contactEmail = contactEmail;
@@ -644,8 +648,8 @@ public class SourceUpdateParams extends ApiRequestParams {
           }
 
           /**
-           * An email to contact you with if a copy of the mandate is requested, required if `type`
-           * is `offline`.
+           * An email to contact you with if a copy of the mandate is requested, required if {@code
+           * type} is {@code offline}.
            */
           public Builder setContactEmail(EmptyParam contactEmail) {
             this.contactEmail = contactEmail;
@@ -1017,8 +1021,8 @@ public class SourceUpdateParams extends ApiRequestParams {
       Object city;
 
       /**
-       * Two-letter country code ([ISO 3166-1
-       * alpha-2](https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2)).
+       * Two-letter country code (<a href="https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2">ISO
+       * 3166-1 alpha-2</a>).
        */
       @SerializedName("country")
       Object country;
@@ -1109,8 +1113,8 @@ public class SourceUpdateParams extends ApiRequestParams {
         }
 
         /**
-         * Two-letter country code ([ISO 3166-1
-         * alpha-2](https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2)).
+         * Two-letter country code (<a href="https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2">ISO
+         * 3166-1 alpha-2</a>).
          */
         public Builder setCountry(String country) {
           this.country = country;
@@ -1118,8 +1122,8 @@ public class SourceUpdateParams extends ApiRequestParams {
         }
 
         /**
-         * Two-letter country code ([ISO 3166-1
-         * alpha-2](https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2)).
+         * Two-letter country code (<a href="https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2">ISO
+         * 3166-1 alpha-2</a>).
          */
         public Builder setCountry(EmptyParam country) {
           this.country = country;
@@ -1221,8 +1225,8 @@ public class SourceUpdateParams extends ApiRequestParams {
     List<Item> items;
 
     /**
-     * Shipping address for the order. Required if any of the SKUs are for products that have
-     * `shippable` set to true.
+     * Shipping address for the order. Required if any of the SKUs are for products that have {@code
+     * shippable} set to true.
      */
     @SerializedName("shipping")
     Shipping shipping;
@@ -1303,7 +1307,7 @@ public class SourceUpdateParams extends ApiRequestParams {
 
       /**
        * Shipping address for the order. Required if any of the SKUs are for products that have
-       * `shippable` set to true.
+       * {@code shippable} set to true.
        */
       public Builder setShipping(Shipping shipping) {
         this.shipping = shipping;
@@ -1336,8 +1340,8 @@ public class SourceUpdateParams extends ApiRequestParams {
       Object parent;
 
       /**
-       * The quantity of this order item. When type is `sku`, this is the number of instances of the
-       * SKU to be ordered.
+       * The quantity of this order item. When type is {@code sku}, this is the number of instances
+       * of the SKU to be ordered.
        */
       @SerializedName("quantity")
       Long quantity;
@@ -1459,8 +1463,8 @@ public class SourceUpdateParams extends ApiRequestParams {
         }
 
         /**
-         * The quantity of this order item. When type is `sku`, this is the number of instances of
-         * the SKU to be ordered.
+         * The quantity of this order item. When type is {@code sku}, this is the number of
+         * instances of the SKU to be ordered.
          */
         public Builder setQuantity(Long quantity) {
           this.quantity = quantity;
@@ -1670,8 +1674,8 @@ public class SourceUpdateParams extends ApiRequestParams {
         Object city;
 
         /**
-         * Two-letter country code ([ISO 3166-1
-         * alpha-2](https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2)).
+         * Two-letter country code (<a href="https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2">ISO
+         * 3166-1 alpha-2</a>).
          */
         @SerializedName("country")
         Object country;
@@ -1763,8 +1767,8 @@ public class SourceUpdateParams extends ApiRequestParams {
           }
 
           /**
-           * Two-letter country code ([ISO 3166-1
-           * alpha-2](https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2)).
+           * Two-letter country code (<a href="https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2">ISO
+           * 3166-1 alpha-2</a>).
            */
           public Builder setCountry(String country) {
             this.country = country;
@@ -1772,8 +1776,8 @@ public class SourceUpdateParams extends ApiRequestParams {
           }
 
           /**
-           * Two-letter country code ([ISO 3166-1
-           * alpha-2](https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2)).
+           * Two-letter country code (<a href="https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2">ISO
+           * 3166-1 alpha-2</a>).
            */
           public Builder setCountry(EmptyParam country) {
             this.country = country;

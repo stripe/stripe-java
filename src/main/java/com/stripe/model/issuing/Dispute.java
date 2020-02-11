@@ -24,8 +24,8 @@ import lombok.Setter;
 @EqualsAndHashCode(callSuper = false)
 public class Dispute extends ApiResource implements HasId, MetadataStore<Dispute> {
   /**
-   * Disputed amount. Usually the amount of the `disputed_transaction`, but can differ (usually
-   * because of currency fluctuation or because only part of the order is disputed).
+   * Disputed amount. Usually the amount of the {@code disputed_transaction}, but can differ
+   * (usually because of currency fluctuation or because only part of the order is disputed).
    */
   @SerializedName("amount")
   Long amount;
@@ -34,7 +34,7 @@ public class Dispute extends ApiResource implements HasId, MetadataStore<Dispute
   @SerializedName("created")
   Long created;
 
-  /** The currency the `disputed_transaction` was made in. */
+  /** The currency the {@code disputed_transaction} was made in. */
   @SerializedName("currency")
   String currency;
 
@@ -53,8 +53,8 @@ public class Dispute extends ApiResource implements HasId, MetadataStore<Dispute
   String id;
 
   /**
-   * Has the value `true` if the object exists in live mode or the value `false` if the object
-   * exists in test mode.
+   * Has the value {@code true} if the object exists in live mode or the value {@code false} if the
+   * object exists in test mode.
    */
   @SerializedName("livemode")
   Boolean livemode;
@@ -70,20 +70,23 @@ public class Dispute extends ApiResource implements HasId, MetadataStore<Dispute
   /**
    * String representing the object's type. Objects of the same type share the same value.
    *
-   * <p>Equal to `issuing.dispute`.
+   * <p>Equal to {@code issuing.dispute}.
    */
   @SerializedName("object")
   String object;
 
-  /** Reason for this dispute. One of `fraudulent` or `other`. */
+  /** Reason for this dispute. One of {@code fraudulent} or {@code other}. */
   @SerializedName("reason")
   String reason;
 
-  /** Current status of dispute. One of `unsubmitted`, `under_review`, `won`, or `lost`. */
+  /**
+   * Current status of dispute. One of {@code unsubmitted}, {@code under_review}, {@code won}, or
+   * {@code lost}.
+   */
   @SerializedName("status")
   String status;
 
-  /** Get id of expandable `disputedTransaction` object. */
+  /** Get ID of expandable {@code disputedTransaction} object. */
   public String getDisputedTransaction() {
     return (this.disputedTransaction != null) ? this.disputedTransaction.getId() : null;
   }
@@ -92,7 +95,7 @@ public class Dispute extends ApiResource implements HasId, MetadataStore<Dispute
     this.disputedTransaction = ApiResource.setExpandableFieldId(id, this.disputedTransaction);
   }
 
-  /** Get expanded `disputedTransaction`. */
+  /** Get expanded {@code disputedTransaction}. */
   public Transaction getDisputedTransactionObject() {
     return (this.disputedTransaction != null) ? this.disputedTransaction.getExpanded() : null;
   }
@@ -243,15 +246,15 @@ public class Dispute extends ApiResource implements HasId, MetadataStore<Dispute
   @EqualsAndHashCode(callSuper = false)
   public static class Evidence extends StripeObject {
     /**
-     * Evidence to support a fraudulent dispute. This will only be present if your dispute's
-     * `reason` is `fraudulent`.
+     * Evidence to support a fraudulent dispute. This will only be present if your dispute's {@code
+     * reason} is {@code fraudulent}.
      */
     @SerializedName("fraudulent")
     EvidenceFraudulent fraudulent;
 
     /**
      * Evidence to support an uncategorized dispute. This will only be present if your dispute's
-     * `reason` is `other`.
+     * {@code reason} is {@code other}.
      */
     @SerializedName("other")
     EvidenceOther other;
@@ -266,15 +269,15 @@ public class Dispute extends ApiResource implements HasId, MetadataStore<Dispute
     String disputeExplanation;
 
     /**
-     * (ID of a [file upload](https://stripe.com/docs/guides/file-upload)) Additional file evidence
-     * supporting your dispute.
+     * (ID of a <a href="https://stripe.com/docs/guides/file-upload">file upload</a>) Additional
+     * file evidence supporting your dispute.
      */
     @SerializedName("uncategorized_file")
     @Getter(lombok.AccessLevel.NONE)
     @Setter(lombok.AccessLevel.NONE)
     ExpandableField<File> uncategorizedFile;
 
-    /** Get id of expandable `uncategorizedFile` object. */
+    /** Get ID of expandable {@code uncategorizedFile} object. */
     public String getUncategorizedFile() {
       return (this.uncategorizedFile != null) ? this.uncategorizedFile.getId() : null;
     }
@@ -283,7 +286,7 @@ public class Dispute extends ApiResource implements HasId, MetadataStore<Dispute
       this.uncategorizedFile = ApiResource.setExpandableFieldId(id, this.uncategorizedFile);
     }
 
-    /** Get expanded `uncategorizedFile`. */
+    /** Get expanded {@code uncategorizedFile}. */
     public File getUncategorizedFileObject() {
       return (this.uncategorizedFile != null) ? this.uncategorizedFile.getExpanded() : null;
     }
@@ -303,15 +306,15 @@ public class Dispute extends ApiResource implements HasId, MetadataStore<Dispute
     String disputeExplanation;
 
     /**
-     * (ID of a [file upload](https://stripe.com/docs/guides/file-upload)) Additional file evidence
-     * supporting your dispute.
+     * (ID of a <a href="https://stripe.com/docs/guides/file-upload">file upload</a>) Additional
+     * file evidence supporting your dispute.
      */
     @SerializedName("uncategorized_file")
     @Getter(lombok.AccessLevel.NONE)
     @Setter(lombok.AccessLevel.NONE)
     ExpandableField<File> uncategorizedFile;
 
-    /** Get id of expandable `uncategorizedFile` object. */
+    /** Get ID of expandable {@code uncategorizedFile} object. */
     public String getUncategorizedFile() {
       return (this.uncategorizedFile != null) ? this.uncategorizedFile.getId() : null;
     }
@@ -320,7 +323,7 @@ public class Dispute extends ApiResource implements HasId, MetadataStore<Dispute
       this.uncategorizedFile = ApiResource.setExpandableFieldId(id, this.uncategorizedFile);
     }
 
-    /** Get expanded `uncategorizedFile`. */
+    /** Get expanded {@code uncategorizedFile}. */
     public File getUncategorizedFileObject() {
       return (this.uncategorizedFile != null) ? this.uncategorizedFile.getExpanded() : null;
     }

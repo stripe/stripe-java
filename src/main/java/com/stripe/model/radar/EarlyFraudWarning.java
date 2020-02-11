@@ -38,9 +38,9 @@ public class EarlyFraudWarning extends ApiResource implements HasId {
   Long created;
 
   /**
-   * The type of fraud labelled by the issuer. One of `card_never_received`,
-   * `fraudulent_card_application`, `made_with_counterfeit_card`, `made_with_lost_card`,
-   * `made_with_stolen_card`, `misc`, `unauthorized_use_of_card`.
+   * The type of fraud labelled by the issuer. One of {@code card_never_received}, {@code
+   * fraudulent_card_application}, {@code made_with_counterfeit_card}, {@code made_with_lost_card},
+   * {@code made_with_stolen_card}, {@code misc}, {@code unauthorized_use_of_card}.
    */
   @SerializedName("fraud_type")
   String fraudType;
@@ -51,8 +51,8 @@ public class EarlyFraudWarning extends ApiResource implements HasId {
   String id;
 
   /**
-   * Has the value `true` if the object exists in live mode or the value `false` if the object
-   * exists in test mode.
+   * Has the value {@code true} if the object exists in live mode or the value {@code false} if the
+   * object exists in test mode.
    */
   @SerializedName("livemode")
   Boolean livemode;
@@ -60,12 +60,12 @@ public class EarlyFraudWarning extends ApiResource implements HasId {
   /**
    * String representing the object's type. Objects of the same type share the same value.
    *
-   * <p>Equal to `radar.early_fraud_warning`.
+   * <p>Equal to {@code radar.early_fraud_warning}.
    */
   @SerializedName("object")
   String object;
 
-  /** Get id of expandable `charge` object. */
+  /** Get ID of expandable {@code charge} object. */
   public String getCharge() {
     return (this.charge != null) ? this.charge.getId() : null;
   }
@@ -74,7 +74,7 @@ public class EarlyFraudWarning extends ApiResource implements HasId {
     this.charge = ApiResource.setExpandableFieldId(id, this.charge);
   }
 
-  /** Get expanded `charge`. */
+  /** Get expanded {@code charge}. */
   public Charge getChargeObject() {
     return (this.charge != null) ? this.charge.getExpanded() : null;
   }
@@ -112,8 +112,8 @@ public class EarlyFraudWarning extends ApiResource implements HasId {
   /**
    * Retrieves the details of an early fraud warning that has previously been created.
    *
-   * <p>Please refer to the <a href="#early_fraud_warning_object">early fraud warning</a> object
-   * reference for more details.
+   * <p>Please refer to the <a href="https://stripe.com/docs/api#early_fraud_warning_object">early
+   * fraud warning</a> object reference for more details.
    */
   public static EarlyFraudWarning retrieve(String earlyFraudWarning) throws StripeException {
     return retrieve(earlyFraudWarning, (Map<String, Object>) null, (RequestOptions) null);
@@ -122,8 +122,8 @@ public class EarlyFraudWarning extends ApiResource implements HasId {
   /**
    * Retrieves the details of an early fraud warning that has previously been created.
    *
-   * <p>Please refer to the <a href="#early_fraud_warning_object">early fraud warning</a> object
-   * reference for more details.
+   * <p>Please refer to the <a href="https://stripe.com/docs/api#early_fraud_warning_object">early
+   * fraud warning</a> object reference for more details.
    */
   public static EarlyFraudWarning retrieve(String earlyFraudWarning, RequestOptions options)
       throws StripeException {
@@ -133,8 +133,8 @@ public class EarlyFraudWarning extends ApiResource implements HasId {
   /**
    * Retrieves the details of an early fraud warning that has previously been created.
    *
-   * <p>Please refer to the <a href="#early_fraud_warning_object">early fraud warning</a> object
-   * reference for more details.
+   * <p>Please refer to the <a href="https://stripe.com/docs/api#early_fraud_warning_object">early
+   * fraud warning</a> object reference for more details.
    */
   public static EarlyFraudWarning retrieve(
       String earlyFraudWarning, Map<String, Object> params, RequestOptions options)
@@ -152,8 +152,8 @@ public class EarlyFraudWarning extends ApiResource implements HasId {
   /**
    * Retrieves the details of an early fraud warning that has previously been created.
    *
-   * <p>Please refer to the <a href="#early_fraud_warning_object">early fraud warning</a> object
-   * reference for more details.
+   * <p>Please refer to the <a href="https://stripe.com/docs/api#early_fraud_warning_object">early
+   * fraud warning</a> object reference for more details.
    */
   public static EarlyFraudWarning retrieve(
       String earlyFraudWarning, EarlyFraudWarningRetrieveParams params, RequestOptions options)

@@ -21,9 +21,10 @@ public class TokenCreateParams extends ApiRequestParams {
 
   /**
    * The customer (owned by the application's account) for which to create a token. This can be used
-   * only with an [OAuth access token](https://stripe.com/docs/connect/standard-accounts) or
-   * [Stripe-Account header](https://stripe.com/docs/connect/authentication). For more details, see
-   * [Cloning Saved Payment Methods](https://stripe.com/docs/connect/cloning-saved-payment-methods).
+   * only with an <a href="https://stripe.com/docs/connect/standard-accounts">OAuth access token</a>
+   * or <a href="https://stripe.com/docs/connect/authentication">Stripe-Account header</a>. For more
+   * details, see <a href="https://stripe.com/docs/connect/cloning-saved-payment-methods">Cloning
+   * Saved Payment Methods</a>.
    */
   @SerializedName("customer")
   String customer;
@@ -115,10 +116,11 @@ public class TokenCreateParams extends ApiRequestParams {
 
     /**
      * The customer (owned by the application's account) for which to create a token. This can be
-     * used only with an [OAuth access token](https://stripe.com/docs/connect/standard-accounts) or
-     * [Stripe-Account header](https://stripe.com/docs/connect/authentication). For more details,
-     * see [Cloning Saved Payment
-     * Methods](https://stripe.com/docs/connect/cloning-saved-payment-methods).
+     * used only with an <a href="https://stripe.com/docs/connect/standard-accounts">OAuth access
+     * token</a> or <a href="https://stripe.com/docs/connect/authentication">Stripe-Account
+     * header</a>. For more details, see <a
+     * href="https://stripe.com/docs/connect/cloning-saved-payment-methods">Cloning Saved Payment
+     * Methods</a>.
      */
     public Builder setCustomer(String customer) {
       this.customer = customer;
@@ -194,14 +196,14 @@ public class TokenCreateParams extends ApiRequestParams {
   public static class BankAccount {
     /**
      * The name of the person or business that owns the bank account.This field is required when
-     * attaching the bank account to a `Customer` object.
+     * attaching the bank account to a {@code Customer} object.
      */
     @SerializedName("account_holder_name")
     String accountHolderName;
 
     /**
-     * The type of entity that holds the account. It can be `company` or `individual`. This field is
-     * required when attaching the bank account to a `Customer` object.
+     * The type of entity that holds the account. It can be {@code company} or {@code individual}.
+     * This field is required when attaching the bank account to a {@code Customer} object.
      */
     @SerializedName("account_holder_type")
     AccountHolderType accountHolderType;
@@ -215,8 +217,8 @@ public class TokenCreateParams extends ApiRequestParams {
     String country;
 
     /**
-     * The currency the bank account is in. This must be a country/currency pairing that [Stripe
-     * supports.](docs/payouts)
+     * The currency the bank account is in. This must be a country/currency pairing that <a
+     * href="docs/payouts">Stripe supports.</a>
      */
     @SerializedName("currency")
     String currency;
@@ -233,8 +235,8 @@ public class TokenCreateParams extends ApiRequestParams {
     /**
      * The routing number, sort code, or other country-appropriateinstitution number for the bank
      * account. For US bank accounts, this is required and should bethe ACH routing number, not the
-     * wire routing number. If you are providing an IBAN for`account_number`, this field is not
-     * required.
+     * wire routing number. If you are providing an IBAN for{@code account_number}, this field is
+     * not required.
      */
     @SerializedName("routing_number")
     String routingNumber;
@@ -289,7 +291,7 @@ public class TokenCreateParams extends ApiRequestParams {
 
       /**
        * The name of the person or business that owns the bank account.This field is required when
-       * attaching the bank account to a `Customer` object.
+       * attaching the bank account to a {@code Customer} object.
        */
       public Builder setAccountHolderName(String accountHolderName) {
         this.accountHolderName = accountHolderName;
@@ -297,8 +299,8 @@ public class TokenCreateParams extends ApiRequestParams {
       }
 
       /**
-       * The type of entity that holds the account. It can be `company` or `individual`. This field
-       * is required when attaching the bank account to a `Customer` object.
+       * The type of entity that holds the account. It can be {@code company} or {@code individual}.
+       * This field is required when attaching the bank account to a {@code Customer} object.
        */
       public Builder setAccountHolderType(AccountHolderType accountHolderType) {
         this.accountHolderType = accountHolderType;
@@ -318,8 +320,8 @@ public class TokenCreateParams extends ApiRequestParams {
       }
 
       /**
-       * The currency the bank account is in. This must be a country/currency pairing that [Stripe
-       * supports.](docs/payouts)
+       * The currency the bank account is in. This must be a country/currency pairing that <a
+       * href="docs/payouts">Stripe supports.</a>
        */
       public Builder setCurrency(String currency) {
         this.currency = currency;
@@ -355,8 +357,8 @@ public class TokenCreateParams extends ApiRequestParams {
       /**
        * The routing number, sort code, or other country-appropriateinstitution number for the bank
        * account. For US bank accounts, this is required and should bethe ACH routing number, not
-       * the wire routing number. If you are providing an IBAN for`account_number`, this field is
-       * not required.
+       * the wire routing number. If you are providing an IBAN for{@code account_number}, this field
+       * is not required.
        */
       public Builder setRoutingNumber(String routingNumber) {
         this.routingNumber = routingNumber;
@@ -636,15 +638,18 @@ public class TokenCreateParams extends ApiRequestParams {
     @SerializedName("first_name_kanji")
     String firstNameKanji;
 
-    /** The person's gender (International regulations require either "male" or "female"). */
+    /**
+     * The person's gender (International regulations require either &quot;male&quot; or
+     * &quot;female&quot;).
+     */
     @SerializedName("gender")
     String gender;
 
     /**
      * The person's ID number, as appropriate for their country. For example, a social security
      * number in the U.S., social insurance number in Canada, etc. Instead of the number itself, you
-     * can also provide a [PII token provided by
-     * Stripe.js](https://stripe.com/docs/stripe.js#collecting-pii-data).
+     * can also provide a <a href="https://stripe.com/docs/stripe.js#collecting-pii-data">PII token
+     * provided by Stripe.js</a>.
      */
     @SerializedName("id_number")
     String idNumber;
@@ -668,8 +673,8 @@ public class TokenCreateParams extends ApiRequestParams {
     /**
      * Set of key-value pairs that you can attach to an object. This can be useful for storing
      * additional information about the object in a structured format. Individual keys can be unset
-     * by posting an empty value to them. All keys can be unset by posting an empty value to
-     * `metadata`.
+     * by posting an empty value to them. All keys can be unset by posting an empty value to {@code
+     * metadata}.
      */
     @SerializedName("metadata")
     Map<String, String> metadata;
@@ -883,7 +888,10 @@ public class TokenCreateParams extends ApiRequestParams {
         return this;
       }
 
-      /** The person's gender (International regulations require either "male" or "female"). */
+      /**
+       * The person's gender (International regulations require either &quot;male&quot; or
+       * &quot;female&quot;).
+       */
       public Builder setGender(String gender) {
         this.gender = gender;
         return this;
@@ -892,8 +900,8 @@ public class TokenCreateParams extends ApiRequestParams {
       /**
        * The person's ID number, as appropriate for their country. For example, a social security
        * number in the U.S., social insurance number in Canada, etc. Instead of the number itself,
-       * you can also provide a [PII token provided by
-       * Stripe.js](https://stripe.com/docs/stripe.js#collecting-pii-data).
+       * you can also provide a <a href="https://stripe.com/docs/stripe.js#collecting-pii-data">PII
+       * token provided by Stripe.js</a>.
        */
       public Builder setIdNumber(String idNumber) {
         this.idNumber = idNumber;
@@ -982,8 +990,8 @@ public class TokenCreateParams extends ApiRequestParams {
       String city;
 
       /**
-       * Two-letter country code ([ISO 3166-1
-       * alpha-2](https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2)).
+       * Two-letter country code (<a href="https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2">ISO
+       * 3166-1 alpha-2</a>).
        */
       @SerializedName("country")
       String country;
@@ -1068,8 +1076,8 @@ public class TokenCreateParams extends ApiRequestParams {
         }
 
         /**
-         * Two-letter country code ([ISO 3166-1
-         * alpha-2](https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2)).
+         * Two-letter country code (<a href="https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2">ISO
+         * 3166-1 alpha-2</a>).
          */
         public Builder setCountry(String country) {
           this.country = country;
@@ -1137,8 +1145,8 @@ public class TokenCreateParams extends ApiRequestParams {
       String city;
 
       /**
-       * Two-letter country code ([ISO 3166-1
-       * alpha-2](https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2)).
+       * Two-letter country code (<a href="https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2">ISO
+       * 3166-1 alpha-2</a>).
        */
       @SerializedName("country")
       String country;
@@ -1232,8 +1240,8 @@ public class TokenCreateParams extends ApiRequestParams {
         }
 
         /**
-         * Two-letter country code ([ISO 3166-1
-         * alpha-2](https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2)).
+         * Two-letter country code (<a href="https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2">ISO
+         * 3166-1 alpha-2</a>).
          */
         public Builder setCountry(String country) {
           this.country = country;
@@ -1307,8 +1315,8 @@ public class TokenCreateParams extends ApiRequestParams {
       String city;
 
       /**
-       * Two-letter country code ([ISO 3166-1
-       * alpha-2](https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2)).
+       * Two-letter country code (<a href="https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2">ISO
+       * 3166-1 alpha-2</a>).
        */
       @SerializedName("country")
       String country;
@@ -1402,8 +1410,8 @@ public class TokenCreateParams extends ApiRequestParams {
         }
 
         /**
-         * Two-letter country code ([ISO 3166-1
-         * alpha-2](https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2)).
+         * Two-letter country code (<a href="https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2">ISO
+         * 3166-1 alpha-2</a>).
          */
         public Builder setCountry(String country) {
           this.country = country;
@@ -1839,9 +1847,10 @@ public class TokenCreateParams extends ApiRequestParams {
       @Getter
       public static class AdditionalDocument {
         /**
-         * The back of an ID returned by a [file upload](#create_file) with a `purpose` value of
-         * `identity_document`. The uploaded file needs to be a color image (smaller than 8,000px by
-         * 8,000px), in JPG or PNG format, and less than 10 MB in size.
+         * The back of an ID returned by a <a href="https://stripe.com/docs/api#create_file">file
+         * upload</a> with a {@code purpose} value of {@code identity_document}. The uploaded file
+         * needs to be a color image (smaller than 8,000px by 8,000px), in JPG or PNG format, and
+         * less than 10 MB in size.
          */
         @SerializedName("back")
         String back;
@@ -1857,9 +1866,10 @@ public class TokenCreateParams extends ApiRequestParams {
         Map<String, Object> extraParams;
 
         /**
-         * The front of an ID returned by a [file upload](#create_file) with a `purpose` value of
-         * `identity_document`. The uploaded file needs to be a color image (smaller than 8,000px by
-         * 8,000px), in JPG or PNG format, and less than 10 MB in size.
+         * The front of an ID returned by a <a href="https://stripe.com/docs/api#create_file">file
+         * upload</a> with a {@code purpose} value of {@code identity_document}. The uploaded file
+         * needs to be a color image (smaller than 8,000px by 8,000px), in JPG or PNG format, and
+         * less than 10 MB in size.
          */
         @SerializedName("front")
         String front;
@@ -1887,9 +1897,10 @@ public class TokenCreateParams extends ApiRequestParams {
           }
 
           /**
-           * The back of an ID returned by a [file upload](#create_file) with a `purpose` value of
-           * `identity_document`. The uploaded file needs to be a color image (smaller than 8,000px
-           * by 8,000px), in JPG or PNG format, and less than 10 MB in size.
+           * The back of an ID returned by a <a href="https://stripe.com/docs/api#create_file">file
+           * upload</a> with a {@code purpose} value of {@code identity_document}. The uploaded file
+           * needs to be a color image (smaller than 8,000px by 8,000px), in JPG or PNG format, and
+           * less than 10 MB in size.
            */
           public Builder setBack(String back) {
             this.back = back;
@@ -1925,9 +1936,10 @@ public class TokenCreateParams extends ApiRequestParams {
           }
 
           /**
-           * The front of an ID returned by a [file upload](#create_file) with a `purpose` value of
-           * `identity_document`. The uploaded file needs to be a color image (smaller than 8,000px
-           * by 8,000px), in JPG or PNG format, and less than 10 MB in size.
+           * The front of an ID returned by a <a href="https://stripe.com/docs/api#create_file">file
+           * upload</a> with a {@code purpose} value of {@code identity_document}. The uploaded file
+           * needs to be a color image (smaller than 8,000px by 8,000px), in JPG or PNG format, and
+           * less than 10 MB in size.
            */
           public Builder setFront(String front) {
             this.front = front;
@@ -1939,9 +1951,10 @@ public class TokenCreateParams extends ApiRequestParams {
       @Getter
       public static class Document {
         /**
-         * The back of an ID returned by a [file upload](#create_file) with a `purpose` value of
-         * `identity_document`. The uploaded file needs to be a color image (smaller than 8,000px by
-         * 8,000px), in JPG or PNG format, and less than 10 MB in size.
+         * The back of an ID returned by a <a href="https://stripe.com/docs/api#create_file">file
+         * upload</a> with a {@code purpose} value of {@code identity_document}. The uploaded file
+         * needs to be a color image (smaller than 8,000px by 8,000px), in JPG or PNG format, and
+         * less than 10 MB in size.
          */
         @SerializedName("back")
         String back;
@@ -1957,9 +1970,10 @@ public class TokenCreateParams extends ApiRequestParams {
         Map<String, Object> extraParams;
 
         /**
-         * The front of an ID returned by a [file upload](#create_file) with a `purpose` value of
-         * `identity_document`. The uploaded file needs to be a color image (smaller than 8,000px by
-         * 8,000px), in JPG or PNG format, and less than 10 MB in size.
+         * The front of an ID returned by a <a href="https://stripe.com/docs/api#create_file">file
+         * upload</a> with a {@code purpose} value of {@code identity_document}. The uploaded file
+         * needs to be a color image (smaller than 8,000px by 8,000px), in JPG or PNG format, and
+         * less than 10 MB in size.
          */
         @SerializedName("front")
         String front;
@@ -1987,9 +2001,10 @@ public class TokenCreateParams extends ApiRequestParams {
           }
 
           /**
-           * The back of an ID returned by a [file upload](#create_file) with a `purpose` value of
-           * `identity_document`. The uploaded file needs to be a color image (smaller than 8,000px
-           * by 8,000px), in JPG or PNG format, and less than 10 MB in size.
+           * The back of an ID returned by a <a href="https://stripe.com/docs/api#create_file">file
+           * upload</a> with a {@code purpose} value of {@code identity_document}. The uploaded file
+           * needs to be a color image (smaller than 8,000px by 8,000px), in JPG or PNG format, and
+           * less than 10 MB in size.
            */
           public Builder setBack(String back) {
             this.back = back;
@@ -2025,9 +2040,10 @@ public class TokenCreateParams extends ApiRequestParams {
           }
 
           /**
-           * The front of an ID returned by a [file upload](#create_file) with a `purpose` value of
-           * `identity_document`. The uploaded file needs to be a color image (smaller than 8,000px
-           * by 8,000px), in JPG or PNG format, and less than 10 MB in size.
+           * The front of an ID returned by a <a href="https://stripe.com/docs/api#create_file">file
+           * upload</a> with a {@code purpose} value of {@code identity_document}. The uploaded file
+           * needs to be a color image (smaller than 8,000px by 8,000px), in JPG or PNG format, and
+           * less than 10 MB in size.
            */
           public Builder setFront(String front) {
             this.front = front;
@@ -2049,7 +2065,7 @@ public class TokenCreateParams extends ApiRequestParams {
     @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
     Map<String, Object> extraParams;
 
-    /** The `id_number` for the PII, in string form. */
+    /** The {@code id_number} for the PII, in string form. */
     @SerializedName("id_number")
     String idNumber;
 
@@ -2098,7 +2114,7 @@ public class TokenCreateParams extends ApiRequestParams {
         return this;
       }
 
-      /** The `id_number` for the PII, in string form. */
+      /** The {@code id_number} for the PII, in string form. */
       public Builder setIdNumber(String idNumber) {
         this.idNumber = idNumber;
         return this;

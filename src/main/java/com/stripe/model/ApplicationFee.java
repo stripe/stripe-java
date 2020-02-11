@@ -59,8 +59,8 @@ public class ApplicationFee extends ApiResource implements BalanceTransactionSou
   Long created;
 
   /**
-   * Three-letter [ISO currency code](https://www.iso.org/iso-4217-currency-codes.html), in
-   * lowercase. Must be a [supported currency](https://stripe.com/docs/currencies).
+   * Three-letter <a href="https://www.iso.org/iso-4217-currency-codes.html">ISO currency code</a>,
+   * in lowercase. Must be a <a href="https://stripe.com/docs/currencies">supported currency</a>.
    */
   @SerializedName("currency")
   String currency;
@@ -71,8 +71,8 @@ public class ApplicationFee extends ApiResource implements BalanceTransactionSou
   String id;
 
   /**
-   * Has the value `true` if the object exists in live mode or the value `false` if the object
-   * exists in test mode.
+   * Has the value {@code true} if the object exists in live mode or the value {@code false} if the
+   * object exists in test mode.
    */
   @SerializedName("livemode")
   Boolean livemode;
@@ -80,14 +80,14 @@ public class ApplicationFee extends ApiResource implements BalanceTransactionSou
   /**
    * String representing the object's type. Objects of the same type share the same value.
    *
-   * <p>Equal to `application_fee`.
+   * <p>Equal to {@code application_fee}.
    */
   @SerializedName("object")
   String object;
 
   /**
    * ID of the corresponding charge on the platform account, if this fee was the result of a charge
-   * using the `destination` parameter.
+   * using the {@code destination} parameter.
    */
   @SerializedName("originating_transaction")
   @Getter(lombok.AccessLevel.NONE)
@@ -105,7 +105,7 @@ public class ApplicationFee extends ApiResource implements BalanceTransactionSou
   @SerializedName("refunds")
   FeeRefundCollection refunds;
 
-  /** Get id of expandable `account` object. */
+  /** Get ID of expandable {@code account} object. */
   public String getAccount() {
     return (this.account != null) ? this.account.getId() : null;
   }
@@ -114,7 +114,7 @@ public class ApplicationFee extends ApiResource implements BalanceTransactionSou
     this.account = ApiResource.setExpandableFieldId(id, this.account);
   }
 
-  /** Get expanded `account`. */
+  /** Get expanded {@code account}. */
   public Account getAccountObject() {
     return (this.account != null) ? this.account.getExpanded() : null;
   }
@@ -123,7 +123,7 @@ public class ApplicationFee extends ApiResource implements BalanceTransactionSou
     this.account = new ExpandableField<Account>(expandableObject.getId(), expandableObject);
   }
 
-  /** Get id of expandable `application` object. */
+  /** Get ID of expandable {@code application} object. */
   public String getApplication() {
     return (this.application != null) ? this.application.getId() : null;
   }
@@ -132,7 +132,7 @@ public class ApplicationFee extends ApiResource implements BalanceTransactionSou
     this.application = ApiResource.setExpandableFieldId(id, this.application);
   }
 
-  /** Get expanded `application`. */
+  /** Get expanded {@code application}. */
   public Application getApplicationObject() {
     return (this.application != null) ? this.application.getExpanded() : null;
   }
@@ -141,7 +141,7 @@ public class ApplicationFee extends ApiResource implements BalanceTransactionSou
     this.application = new ExpandableField<Application>(expandableObject.getId(), expandableObject);
   }
 
-  /** Get id of expandable `balanceTransaction` object. */
+  /** Get ID of expandable {@code balanceTransaction} object. */
   public String getBalanceTransaction() {
     return (this.balanceTransaction != null) ? this.balanceTransaction.getId() : null;
   }
@@ -150,7 +150,7 @@ public class ApplicationFee extends ApiResource implements BalanceTransactionSou
     this.balanceTransaction = ApiResource.setExpandableFieldId(id, this.balanceTransaction);
   }
 
-  /** Get expanded `balanceTransaction`. */
+  /** Get expanded {@code balanceTransaction}. */
   public BalanceTransaction getBalanceTransactionObject() {
     return (this.balanceTransaction != null) ? this.balanceTransaction.getExpanded() : null;
   }
@@ -160,7 +160,7 @@ public class ApplicationFee extends ApiResource implements BalanceTransactionSou
         new ExpandableField<BalanceTransaction>(expandableObject.getId(), expandableObject);
   }
 
-  /** Get id of expandable `charge` object. */
+  /** Get ID of expandable {@code charge} object. */
   public String getCharge() {
     return (this.charge != null) ? this.charge.getId() : null;
   }
@@ -169,7 +169,7 @@ public class ApplicationFee extends ApiResource implements BalanceTransactionSou
     this.charge = ApiResource.setExpandableFieldId(id, this.charge);
   }
 
-  /** Get expanded `charge`. */
+  /** Get expanded {@code charge}. */
   public Charge getChargeObject() {
     return (this.charge != null) ? this.charge.getExpanded() : null;
   }
@@ -178,7 +178,7 @@ public class ApplicationFee extends ApiResource implements BalanceTransactionSou
     this.charge = new ExpandableField<Charge>(expandableObject.getId(), expandableObject);
   }
 
-  /** Get id of expandable `originatingTransaction` object. */
+  /** Get ID of expandable {@code originatingTransaction} object. */
   public String getOriginatingTransaction() {
     return (this.originatingTransaction != null) ? this.originatingTransaction.getId() : null;
   }
@@ -187,7 +187,7 @@ public class ApplicationFee extends ApiResource implements BalanceTransactionSou
     this.originatingTransaction = ApiResource.setExpandableFieldId(id, this.originatingTransaction);
   }
 
-  /** Get expanded `originatingTransaction`. */
+  /** Get expanded {@code originatingTransaction}. */
   public Charge getOriginatingTransactionObject() {
     return (this.originatingTransaction != null) ? this.originatingTransaction.getExpanded() : null;
   }

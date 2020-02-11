@@ -40,8 +40,8 @@ public class ScheduledQueryRun extends ApiResource implements HasId {
   String id;
 
   /**
-   * Has the value `true` if the object exists in live mode or the value `false` if the object
-   * exists in test mode.
+   * Has the value {@code true} if the object exists in live mode or the value {@code false} if the
+   * object exists in test mode.
    */
   @SerializedName("livemode")
   Boolean livemode;
@@ -49,7 +49,7 @@ public class ScheduledQueryRun extends ApiResource implements HasId {
   /**
    * String representing the object's type. Objects of the same type share the same value.
    *
-   * <p>Equal to `scheduled_query_run`.
+   * <p>Equal to {@code scheduled_query_run}.
    */
   @SerializedName("object")
   String object;
@@ -63,8 +63,8 @@ public class ScheduledQueryRun extends ApiResource implements HasId {
   String sql;
 
   /**
-   * The query's execution status, which will be `completed` for successful runs, and `canceled`,
-   * `failed`, or `timed_out` otherwise.
+   * The query's execution status, which will be {@code completed} for successful runs, and {@code
+   * canceled}, {@code failed}, or {@code timed_out} otherwise.
    */
   @SerializedName("status")
   String status;

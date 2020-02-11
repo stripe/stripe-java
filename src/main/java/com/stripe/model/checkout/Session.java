@@ -27,7 +27,8 @@ import lombok.Setter;
 @EqualsAndHashCode(callSuper = false)
 public class Session extends ApiResource implements HasId {
   /**
-   * The value (`auto` or `required`) for whether Checkout collected the customer's billing address.
+   * The value ({@code auto} or {@code required}) for whether Checkout collected the customer's
+   * billing address.
    */
   @SerializedName("billing_address_collection")
   String billingAddressCollection;
@@ -47,9 +48,9 @@ public class Session extends ApiResource implements HasId {
   String clientReferenceId;
 
   /**
-   * The ID of the customer for this session. For Checkout Sessions in `payment` or `subscription`
-   * mode, Checkout will create a new customer object based on information provided during the
-   * session unless an existing customer was provided when the session was created.
+   * The ID of the customer for this session. For Checkout Sessions in {@code payment} or {@code
+   * subscription} mode, Checkout will create a new customer object based on information provided
+   * during the session unless an existing customer was provided when the session was created.
    */
   @SerializedName("customer")
   @Getter(lombok.AccessLevel.NONE)
@@ -60,7 +61,7 @@ public class Session extends ApiResource implements HasId {
    * If provided, this value will be used when the Customer object is created. If not provided,
    * customers will be asked to enter their email address. Use this parameter to prefill customer
    * data if you already have an email on file. To access information about the customer once a
-   * session is complete, use the `customer` field.
+   * session is complete, use the {@code customer} field.
    */
   @SerializedName("customer_email")
   String customerEmail;
@@ -69,24 +70,25 @@ public class Session extends ApiResource implements HasId {
   @SerializedName("display_items")
   List<Session.DisplayItem> displayItems;
 
-  /** Unique identifier for the object. Used to pass to `redirectToCheckout` in Stripe.js. */
+  /** Unique identifier for the object. Used to pass to {@code redirectToCheckout} in Stripe.js. */
   @Getter(onMethod_ = {@Override})
   @SerializedName("id")
   String id;
 
   /**
-   * Has the value `true` if the object exists in live mode or the value `false` if the object
-   * exists in test mode.
+   * Has the value {@code true} if the object exists in live mode or the value {@code false} if the
+   * object exists in test mode.
    */
   @SerializedName("livemode")
   Boolean livemode;
 
   /**
-   * The IETF language tag of the locale Checkout is displayed in. If blank or `auto`, the browser's
-   * locale is used.
+   * The IETF language tag of the locale Checkout is displayed in. If blank or {@code auto}, the
+   * browser's locale is used.
    *
-   * <p>One of `auto`, `da`, `de`, `en`, `es`, `fi`, `fr`, `it`, `ja`, `ms`, `nb`, `nl`, `pl`, `pt`,
-   * `sv`, or `zh`.
+   * <p>One of {@code auto}, {@code da}, {@code de}, {@code en}, {@code es}, {@code fi}, {@code fr},
+   * {@code it}, {@code ja}, {@code ms}, {@code nb}, {@code nl}, {@code pl}, {@code pt}, {@code sv},
+   * or {@code zh}.
    */
   @SerializedName("locale")
   String locale;
@@ -98,19 +100,22 @@ public class Session extends ApiResource implements HasId {
   @SerializedName("metadata")
   Map<String, String> metadata;
 
-  /** The mode of the Checkout Session, one of `payment`, `setup`, or `subscription`. */
+  /**
+   * The mode of the Checkout Session, one of {@code payment}, {@code setup}, or {@code
+   * subscription}.
+   */
   @SerializedName("mode")
   String mode;
 
   /**
    * String representing the object's type. Objects of the same type share the same value.
    *
-   * <p>Equal to `checkout.session`.
+   * <p>Equal to {@code checkout.session}.
    */
   @SerializedName("object")
   String object;
 
-  /** The ID of the PaymentIntent for Checkout Sessions in `payment` mode. */
+  /** The ID of the PaymentIntent for Checkout Sessions in {@code payment} mode. */
   @SerializedName("payment_intent")
   @Getter(lombok.AccessLevel.NONE)
   @Setter(lombok.AccessLevel.NONE)
@@ -122,7 +127,7 @@ public class Session extends ApiResource implements HasId {
   @SerializedName("payment_method_types")
   List<String> paymentMethodTypes;
 
-  /** The ID of the SetupIntent for Checkout Sessions in `setup` mode. */
+  /** The ID of the SetupIntent for Checkout Sessions in {@code setup} mode. */
   @SerializedName("setup_intent")
   @Getter(lombok.AccessLevel.NONE)
   @Setter(lombok.AccessLevel.NONE)
@@ -130,15 +135,16 @@ public class Session extends ApiResource implements HasId {
 
   /**
    * Describes the type of transaction being performed by Checkout in order to customize relevant
-   * text on the page, such as the submit button. `submit_type` can only be specified on Checkout
-   * Sessions in `payment` mode, but not Checkout Sessions in `subscription` or `setup` mode.
+   * text on the page, such as the submit button. {@code submit_type} can only be specified on
+   * Checkout Sessions in {@code payment} mode, but not Checkout Sessions in {@code subscription} or
+   * {@code setup} mode.
    *
-   * <p>One of `auto`, `book`, `donate`, or `pay`.
+   * <p>One of {@code auto}, {@code book}, {@code donate}, or {@code pay}.
    */
   @SerializedName("submit_type")
   String submitType;
 
-  /** The ID of the subscription for Checkout Sessions in `subscription` mode. */
+  /** The ID of the subscription for Checkout Sessions in {@code subscription} mode. */
   @SerializedName("subscription")
   @Getter(lombok.AccessLevel.NONE)
   @Setter(lombok.AccessLevel.NONE)
@@ -151,7 +157,7 @@ public class Session extends ApiResource implements HasId {
   @SerializedName("success_url")
   String successUrl;
 
-  /** Get id of expandable `customer` object. */
+  /** Get ID of expandable {@code customer} object. */
   public String getCustomer() {
     return (this.customer != null) ? this.customer.getId() : null;
   }
@@ -160,7 +166,7 @@ public class Session extends ApiResource implements HasId {
     this.customer = ApiResource.setExpandableFieldId(id, this.customer);
   }
 
-  /** Get expanded `customer`. */
+  /** Get expanded {@code customer}. */
   public Customer getCustomerObject() {
     return (this.customer != null) ? this.customer.getExpanded() : null;
   }
@@ -169,7 +175,7 @@ public class Session extends ApiResource implements HasId {
     this.customer = new ExpandableField<Customer>(expandableObject.getId(), expandableObject);
   }
 
-  /** Get id of expandable `paymentIntent` object. */
+  /** Get ID of expandable {@code paymentIntent} object. */
   public String getPaymentIntent() {
     return (this.paymentIntent != null) ? this.paymentIntent.getId() : null;
   }
@@ -178,7 +184,7 @@ public class Session extends ApiResource implements HasId {
     this.paymentIntent = ApiResource.setExpandableFieldId(id, this.paymentIntent);
   }
 
-  /** Get expanded `paymentIntent`. */
+  /** Get expanded {@code paymentIntent}. */
   public PaymentIntent getPaymentIntentObject() {
     return (this.paymentIntent != null) ? this.paymentIntent.getExpanded() : null;
   }
@@ -188,7 +194,7 @@ public class Session extends ApiResource implements HasId {
         new ExpandableField<PaymentIntent>(expandableObject.getId(), expandableObject);
   }
 
-  /** Get id of expandable `setupIntent` object. */
+  /** Get ID of expandable {@code setupIntent} object. */
   public String getSetupIntent() {
     return (this.setupIntent != null) ? this.setupIntent.getId() : null;
   }
@@ -197,7 +203,7 @@ public class Session extends ApiResource implements HasId {
     this.setupIntent = ApiResource.setExpandableFieldId(id, this.setupIntent);
   }
 
-  /** Get expanded `setupIntent`. */
+  /** Get expanded {@code setupIntent}. */
   public SetupIntent getSetupIntentObject() {
     return (this.setupIntent != null) ? this.setupIntent.getExpanded() : null;
   }
@@ -206,7 +212,7 @@ public class Session extends ApiResource implements HasId {
     this.setupIntent = new ExpandableField<SetupIntent>(expandableObject.getId(), expandableObject);
   }
 
-  /** Get id of expandable `subscription` object. */
+  /** Get ID of expandable {@code subscription} object. */
   public String getSubscription() {
     return (this.subscription != null) ? this.subscription.getId() : null;
   }
@@ -215,7 +221,7 @@ public class Session extends ApiResource implements HasId {
     this.subscription = ApiResource.setExpandableFieldId(id, this.subscription);
   }
 
-  /** Get expanded `subscription`. */
+  /** Get expanded {@code subscription}. */
   public Subscription getSubscriptionObject() {
     return (this.subscription != null) ? this.subscription.getExpanded() : null;
   }
@@ -290,8 +296,9 @@ public class Session extends ApiResource implements HasId {
     Long amount;
 
     /**
-     * Three-letter [ISO currency code](https://www.iso.org/iso-4217-currency-codes.html), in
-     * lowercase. Must be a [supported currency](https://stripe.com/docs/currencies).
+     * Three-letter <a href="https://www.iso.org/iso-4217-currency-codes.html">ISO currency
+     * code</a>, in lowercase. Must be a <a href="https://stripe.com/docs/currencies">supported
+     * currency</a>.
      */
     @SerializedName("currency")
     String currency;
@@ -309,7 +316,7 @@ public class Session extends ApiResource implements HasId {
     @SerializedName("sku")
     Sku sku;
 
-    /** The type of display item. One of `custom`, `plan` or `sku` */
+    /** The type of display item. One of {@code custom}, {@code plan} or {@code sku} */
     @SerializedName("type")
     String type;
 

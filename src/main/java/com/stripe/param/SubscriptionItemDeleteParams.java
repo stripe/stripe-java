@@ -9,8 +9,8 @@ import lombok.Getter;
 @Getter
 public class SubscriptionItemDeleteParams extends ApiRequestParams {
   /**
-   * Delete all usage for the given subscription item. Allowed only when the current plan's
-   * `usage_type` is `metered`.
+   * Delete all usage for the given subscription item. Allowed only when the current plan's {@code
+   * usage_type} is {@code metered}.
    */
   @SerializedName("clear_usage")
   Boolean clearUsage;
@@ -25,16 +25,17 @@ public class SubscriptionItemDeleteParams extends ApiRequestParams {
   Map<String, Object> extraParams;
 
   /**
-   * Flag indicating whether to [prorate](https://stripe.com/docs/billing/subscriptions/prorations)
-   * switching plans during a billing cycle.
+   * Flag indicating whether to <a
+   * href="https://stripe.com/docs/billing/subscriptions/prorations">prorate</a> switching plans
+   * during a billing cycle.
    */
   @SerializedName("prorate")
   Boolean prorate;
 
   /**
    * If set, the proration will be calculated as though the subscription was updated at the given
-   * time. This can be used to apply the same proration that was previewed with the [upcoming
-   * invoice](#retrieve_customer_invoice) endpoint.
+   * time. This can be used to apply the same proration that was previewed with the <a
+   * href="https://stripe.com/docs/api#retrieve_customer_invoice">upcoming invoice</a> endpoint.
    */
   @SerializedName("proration_date")
   Long prorationDate;
@@ -67,8 +68,8 @@ public class SubscriptionItemDeleteParams extends ApiRequestParams {
     }
 
     /**
-     * Delete all usage for the given subscription item. Allowed only when the current plan's
-     * `usage_type` is `metered`.
+     * Delete all usage for the given subscription item. Allowed only when the current plan's {@code
+     * usage_type} is {@code metered}.
      */
     public Builder setClearUsage(Boolean clearUsage) {
       this.clearUsage = clearUsage;
@@ -102,9 +103,9 @@ public class SubscriptionItemDeleteParams extends ApiRequestParams {
     }
 
     /**
-     * Flag indicating whether to
-     * [prorate](https://stripe.com/docs/billing/subscriptions/prorations) switching plans during a
-     * billing cycle.
+     * Flag indicating whether to <a
+     * href="https://stripe.com/docs/billing/subscriptions/prorations">prorate</a> switching plans
+     * during a billing cycle.
      */
     public Builder setProrate(Boolean prorate) {
       this.prorate = prorate;
@@ -113,8 +114,8 @@ public class SubscriptionItemDeleteParams extends ApiRequestParams {
 
     /**
      * If set, the proration will be calculated as though the subscription was updated at the given
-     * time. This can be used to apply the same proration that was previewed with the [upcoming
-     * invoice](#retrieve_customer_invoice) endpoint.
+     * time. This can be used to apply the same proration that was previewed with the <a
+     * href="https://stripe.com/docs/api#retrieve_customer_invoice">upcoming invoice</a> endpoint.
      */
     public Builder setProrationDate(Long prorationDate) {
       this.prorationDate = prorationDate;

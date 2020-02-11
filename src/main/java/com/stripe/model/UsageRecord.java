@@ -21,8 +21,8 @@ public class UsageRecord extends ApiResource implements HasId {
   String id;
 
   /**
-   * Has the value `true` if the object exists in live mode or the value `false` if the object
-   * exists in test mode.
+   * Has the value {@code true} if the object exists in live mode or the value {@code false} if the
+   * object exists in test mode.
    */
   @SerializedName("livemode")
   Boolean livemode;
@@ -30,7 +30,7 @@ public class UsageRecord extends ApiResource implements HasId {
   /**
    * String representing the object's type. Objects of the same type share the same value.
    *
-   * <p>Equal to `usage_record`.
+   * <p>Equal to {@code usage_record}.
    */
   @SerializedName("object")
   String object;
@@ -59,14 +59,14 @@ public class UsageRecord extends ApiResource implements HasId {
    * <p>The default calculation for usage is to add up all the <code>quantity</code> values of the
    * usage records within a billing period. You can change this default behavior with the billing
    * plan’s <code>aggregate_usage</code> <a
-   * href="/docs/api/plans/create#create_plan-aggregate_usage">parameter</a>. When there is more
-   * than one usage record with the same timestamp, Stripe adds the <code>quantity</code> values
-   * together. In most cases, this is the desired resolution, however, you can change this behavior
-   * with the <code>action</code> parameter.
+   * href="https://stripe.com/docs/api/plans/create#create_plan-aggregate_usage">parameter</a>. When
+   * there is more than one usage record with the same timestamp, Stripe adds the <code>quantity
+   * </code> values together. In most cases, this is the desired resolution, however, you can change
+   * this behavior with the <code>action</code> parameter.
    *
    * <p>The default pricing model for metered billing is <a
-   * href="/docs/api/plans/object#plan_object-billing_scheme">per-unit pricing</a>. For finer
-   * granularity, you can configure metered billing to have a <a
+   * href="https://stripe.com/docs/api/plans/object#plan_object-billing_scheme">per-unit
+   * pricing</a>. For finer granularity, you can configure metered billing to have a <a
    * href="https://stripe.com/docs/billing/subscriptions/tiers">tiered pricing</a> model.
    */
   public static UsageRecord createOnSubscriptionItem(
@@ -95,14 +95,14 @@ public class UsageRecord extends ApiResource implements HasId {
    * <p>The default calculation for usage is to add up all the <code>quantity</code> values of the
    * usage records within a billing period. You can change this default behavior with the billing
    * plan’s <code>aggregate_usage</code> <a
-   * href="/docs/api/plans/create#create_plan-aggregate_usage">parameter</a>. When there is more
-   * than one usage record with the same timestamp, Stripe adds the <code>quantity</code> values
-   * together. In most cases, this is the desired resolution, however, you can change this behavior
-   * with the <code>action</code> parameter.
+   * href="https://stripe.com/docs/api/plans/create#create_plan-aggregate_usage">parameter</a>. When
+   * there is more than one usage record with the same timestamp, Stripe adds the <code>quantity
+   * </code> values together. In most cases, this is the desired resolution, however, you can change
+   * this behavior with the <code>action</code> parameter.
    *
    * <p>The default pricing model for metered billing is <a
-   * href="/docs/api/plans/object#plan_object-billing_scheme">per-unit pricing</a>. For finer
-   * granularity, you can configure metered billing to have a <a
+   * href="https://stripe.com/docs/api/plans/object#plan_object-billing_scheme">per-unit
+   * pricing</a>. For finer granularity, you can configure metered billing to have a <a
    * href="https://stripe.com/docs/billing/subscriptions/tiers">tiered pricing</a> model.
    */
   public static UsageRecord createOnSubscriptionItem(

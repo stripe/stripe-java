@@ -11,11 +11,11 @@ import lombok.Getter;
 @Getter
 public class UsageRecordCreateOnSubscriptionItemParams extends ApiRequestParams {
   /**
-   * Valid values are `increment` (default) or `set`. When using `increment` the specified
-   * `quantity` will be added to the usage at the specified timestamp. The `set` action will
-   * overwrite the usage quantity at that timestamp. If the subscription has [billing
-   * thresholds](https://stripe.com/docs/api/subscriptions/object#subscription_object-billing_thresholds),
-   * `increment` is the only allowed value.
+   * Valid values are {@code increment} (default) or {@code set}. When using {@code increment} the
+   * specified {@code quantity} will be added to the usage at the specified timestamp. The {@code
+   * set} action will overwrite the usage quantity at that timestamp. If the subscription has <a
+   * href="https://stripe.com/docs/api/subscriptions/object#subscription_object-billing_thresholds">billing
+   * thresholds</a>, {@code increment} is the only allowed value.
    */
   @SerializedName("action")
   Action action;
@@ -39,7 +39,7 @@ public class UsageRecordCreateOnSubscriptionItemParams extends ApiRequestParams 
 
   /**
    * The timestamp for the usage event. This timestamp must be within the current billing period of
-   * the subscription of the provided `subscription_item`.
+   * the subscription of the provided {@code subscription_item}.
    */
   @SerializedName("timestamp")
   Long timestamp;
@@ -79,11 +79,11 @@ public class UsageRecordCreateOnSubscriptionItemParams extends ApiRequestParams 
     }
 
     /**
-     * Valid values are `increment` (default) or `set`. When using `increment` the specified
-     * `quantity` will be added to the usage at the specified timestamp. The `set` action will
-     * overwrite the usage quantity at that timestamp. If the subscription has [billing
-     * thresholds](https://stripe.com/docs/api/subscriptions/object#subscription_object-billing_thresholds),
-     * `increment` is the only allowed value.
+     * Valid values are {@code increment} (default) or {@code set}. When using {@code increment} the
+     * specified {@code quantity} will be added to the usage at the specified timestamp. The {@code
+     * set} action will overwrite the usage quantity at that timestamp. If the subscription has <a
+     * href="https://stripe.com/docs/api/subscriptions/object#subscription_object-billing_thresholds">billing
+     * thresholds</a>, {@code increment} is the only allowed value.
      */
     public Builder setAction(Action action) {
       this.action = action;
@@ -151,7 +151,7 @@ public class UsageRecordCreateOnSubscriptionItemParams extends ApiRequestParams 
 
     /**
      * The timestamp for the usage event. This timestamp must be within the current billing period
-     * of the subscription of the provided `subscription_item`.
+     * of the subscription of the provided {@code subscription_item}.
      */
     public Builder setTimestamp(Long timestamp) {
       this.timestamp = timestamp;

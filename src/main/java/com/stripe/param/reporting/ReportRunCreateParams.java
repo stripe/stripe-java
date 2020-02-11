@@ -25,15 +25,16 @@ public class ReportRunCreateParams extends ApiRequestParams {
 
   /**
    * Parameters specifying how the report should be run. Different Report Types have different
-   * required and optional parameters, listed in the [API Access to
-   * Reports](https://stripe.com/docs/reporting/statements/api) documentation.
+   * required and optional parameters, listed in the <a
+   * href="https://stripe.com/docs/reporting/statements/api">API Access to Reports</a>
+   * documentation.
    */
   @SerializedName("parameters")
   Parameters parameters;
 
   /**
-   * The ID of the [report type](https://stripe.com/docs/reporting/statements/api#report-types) to
-   * run, such as `"balance.summary.1"`.
+   * The ID of the <a href="https://stripe.com/docs/reporting/statements/api#report-types">report
+   * type</a> to run, such as {@code "balance.summary.1"}.
    */
   @SerializedName("report_type")
   String reportType;
@@ -122,8 +123,9 @@ public class ReportRunCreateParams extends ApiRequestParams {
 
     /**
      * Parameters specifying how the report should be run. Different Report Types have different
-     * required and optional parameters, listed in the [API Access to
-     * Reports](https://stripe.com/docs/reporting/statements/api) documentation.
+     * required and optional parameters, listed in the <a
+     * href="https://stripe.com/docs/reporting/statements/api">API Access to Reports</a>
+     * documentation.
      */
     public Builder setParameters(Parameters parameters) {
       this.parameters = parameters;
@@ -131,8 +133,8 @@ public class ReportRunCreateParams extends ApiRequestParams {
     }
 
     /**
-     * The ID of the [report type](https://stripe.com/docs/reporting/statements/api#report-types) to
-     * run, such as `"balance.summary.1"`.
+     * The ID of the <a href="https://stripe.com/docs/reporting/statements/api#report-types">report
+     * type</a> to run, such as {@code "balance.summary.1"}.
      */
     public Builder setReportType(String reportType) {
       this.reportType = reportType;

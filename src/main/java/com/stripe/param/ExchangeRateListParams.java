@@ -11,10 +11,10 @@ import lombok.Getter;
 @Getter
 public class ExchangeRateListParams extends ApiRequestParams {
   /**
-   * A cursor for use in pagination. `ending_before` is the currency that defines your place in the
-   * list. For instance, if you make a list request and receive 100 objects, starting with the
-   * exchange rate for currency X your subsequent call can include `ending_before=obj_bar` in order
-   * to fetch the previous page of the list.
+   * A cursor for use in pagination. {@code ending_before} is the currency that defines your place
+   * in the list. For instance, if you make a list request and receive 100 objects, starting with
+   * the exchange rate for currency X your subsequent call can include {@code ending_before=obj_bar}
+   * in order to fetch the previous page of the list.
    */
   @SerializedName("ending_before")
   String endingBefore;
@@ -40,10 +40,10 @@ public class ExchangeRateListParams extends ApiRequestParams {
   Long limit;
 
   /**
-   * A cursor for use in pagination. `starting_after` is the currency that defines your place in the
-   * list. For instance, if you make a list request and receive 100 objects, ending with the
-   * exchange rate for currency X, your subsequent call can include `starting_after=X` in order to
-   * fetch the next page of the list.
+   * A cursor for use in pagination. {@code starting_after} is the currency that defines your place
+   * in the list. For instance, if you make a list request and receive 100 objects, ending with the
+   * exchange rate for currency X, your subsequent call can include {@code starting_after=X} in
+   * order to fetch the next page of the list.
    */
   @SerializedName("starting_after")
   String startingAfter;
@@ -83,10 +83,10 @@ public class ExchangeRateListParams extends ApiRequestParams {
     }
 
     /**
-     * A cursor for use in pagination. `ending_before` is the currency that defines your place in
-     * the list. For instance, if you make a list request and receive 100 objects, starting with the
-     * exchange rate for currency X your subsequent call can include `ending_before=obj_bar` in
-     * order to fetch the previous page of the list.
+     * A cursor for use in pagination. {@code ending_before} is the currency that defines your place
+     * in the list. For instance, if you make a list request and receive 100 objects, starting with
+     * the exchange rate for currency X your subsequent call can include {@code
+     * ending_before=obj_bar} in order to fetch the previous page of the list.
      */
     public Builder setEndingBefore(String endingBefore) {
       this.endingBefore = endingBefore;
@@ -155,10 +155,10 @@ public class ExchangeRateListParams extends ApiRequestParams {
     }
 
     /**
-     * A cursor for use in pagination. `starting_after` is the currency that defines your place in
-     * the list. For instance, if you make a list request and receive 100 objects, ending with the
-     * exchange rate for currency X, your subsequent call can include `starting_after=X` in order to
-     * fetch the next page of the list.
+     * A cursor for use in pagination. {@code starting_after} is the currency that defines your
+     * place in the list. For instance, if you make a list request and receive 100 objects, ending
+     * with the exchange rate for currency X, your subsequent call can include {@code
+     * starting_after=X} in order to fetch the next page of the list.
      */
     public Builder setStartingAfter(String startingAfter) {
       this.startingAfter = startingAfter;

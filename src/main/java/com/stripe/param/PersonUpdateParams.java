@@ -57,15 +57,18 @@ public class PersonUpdateParams extends ApiRequestParams {
   @SerializedName("first_name_kanji")
   Object firstNameKanji;
 
-  /** The person's gender (International regulations require either "male" or "female"). */
+  /**
+   * The person's gender (International regulations require either &quot;male&quot; or
+   * &quot;female&quot;).
+   */
   @SerializedName("gender")
   Object gender;
 
   /**
    * The person's ID number, as appropriate for their country. For example, a social security number
    * in the U.S., social insurance number in Canada, etc. Instead of the number itself, you can also
-   * provide a [PII token provided by
-   * Stripe.js](https://stripe.com/docs/stripe.js#collecting-pii-data).
+   * provide a <a href="https://stripe.com/docs/stripe.js#collecting-pii-data">PII token provided by
+   * Stripe.js</a>.
    */
   @SerializedName("id_number")
   Object idNumber;
@@ -89,14 +92,15 @@ public class PersonUpdateParams extends ApiRequestParams {
   /**
    * Set of key-value pairs that you can attach to an object. This can be useful for storing
    * additional information about the object in a structured format. Individual keys can be unset by
-   * posting an empty value to them. All keys can be unset by posting an empty value to `metadata`.
+   * posting an empty value to them. All keys can be unset by posting an empty value to {@code
+   * metadata}.
    */
   @SerializedName("metadata")
   Map<String, String> metadata;
 
   /**
-   * A [person token](https://stripe.com/docs/connect/account-tokens), used to securely provide
-   * details to the person.
+   * A <a href="https://stripe.com/docs/connect/account-tokens">person token</a>, used to securely
+   * provide details to the person.
    */
   @SerializedName("person_token")
   Object personToken;
@@ -370,13 +374,19 @@ public class PersonUpdateParams extends ApiRequestParams {
       return this;
     }
 
-    /** The person's gender (International regulations require either "male" or "female"). */
+    /**
+     * The person's gender (International regulations require either &quot;male&quot; or
+     * &quot;female&quot;).
+     */
     public Builder setGender(String gender) {
       this.gender = gender;
       return this;
     }
 
-    /** The person's gender (International regulations require either "male" or "female"). */
+    /**
+     * The person's gender (International regulations require either &quot;male&quot; or
+     * &quot;female&quot;).
+     */
     public Builder setGender(EmptyParam gender) {
       this.gender = gender;
       return this;
@@ -385,8 +395,8 @@ public class PersonUpdateParams extends ApiRequestParams {
     /**
      * The person's ID number, as appropriate for their country. For example, a social security
      * number in the U.S., social insurance number in Canada, etc. Instead of the number itself, you
-     * can also provide a [PII token provided by
-     * Stripe.js](https://stripe.com/docs/stripe.js#collecting-pii-data).
+     * can also provide a <a href="https://stripe.com/docs/stripe.js#collecting-pii-data">PII token
+     * provided by Stripe.js</a>.
      */
     public Builder setIdNumber(String idNumber) {
       this.idNumber = idNumber;
@@ -396,8 +406,8 @@ public class PersonUpdateParams extends ApiRequestParams {
     /**
      * The person's ID number, as appropriate for their country. For example, a social security
      * number in the U.S., social insurance number in Canada, etc. Instead of the number itself, you
-     * can also provide a [PII token provided by
-     * Stripe.js](https://stripe.com/docs/stripe.js#collecting-pii-data).
+     * can also provide a <a href="https://stripe.com/docs/stripe.js#collecting-pii-data">PII token
+     * provided by Stripe.js</a>.
      */
     public Builder setIdNumber(EmptyParam idNumber) {
       this.idNumber = idNumber;
@@ -479,8 +489,8 @@ public class PersonUpdateParams extends ApiRequestParams {
     }
 
     /**
-     * A [person token](https://stripe.com/docs/connect/account-tokens), used to securely provide
-     * details to the person.
+     * A <a href="https://stripe.com/docs/connect/account-tokens">person token</a>, used to securely
+     * provide details to the person.
      */
     public Builder setPersonToken(String personToken) {
       this.personToken = personToken;
@@ -488,8 +498,8 @@ public class PersonUpdateParams extends ApiRequestParams {
     }
 
     /**
-     * A [person token](https://stripe.com/docs/connect/account-tokens), used to securely provide
-     * details to the person.
+     * A <a href="https://stripe.com/docs/connect/account-tokens">person token</a>, used to securely
+     * provide details to the person.
      */
     public Builder setPersonToken(EmptyParam personToken) {
       this.personToken = personToken;
@@ -540,8 +550,8 @@ public class PersonUpdateParams extends ApiRequestParams {
     Object city;
 
     /**
-     * Two-letter country code ([ISO 3166-1
-     * alpha-2](https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2)).
+     * Two-letter country code (<a href="https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2">ISO
+     * 3166-1 alpha-2</a>).
      */
     @SerializedName("country")
     Object country;
@@ -632,8 +642,8 @@ public class PersonUpdateParams extends ApiRequestParams {
       }
 
       /**
-       * Two-letter country code ([ISO 3166-1
-       * alpha-2](https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2)).
+       * Two-letter country code (<a href="https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2">ISO
+       * 3166-1 alpha-2</a>).
        */
       public Builder setCountry(String country) {
         this.country = country;
@@ -641,8 +651,8 @@ public class PersonUpdateParams extends ApiRequestParams {
       }
 
       /**
-       * Two-letter country code ([ISO 3166-1
-       * alpha-2](https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2)).
+       * Two-letter country code (<a href="https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2">ISO
+       * 3166-1 alpha-2</a>).
        */
       public Builder setCountry(EmptyParam country) {
         this.country = country;
@@ -732,8 +742,8 @@ public class PersonUpdateParams extends ApiRequestParams {
     Object city;
 
     /**
-     * Two-letter country code ([ISO 3166-1
-     * alpha-2](https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2)).
+     * Two-letter country code (<a href="https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2">ISO
+     * 3166-1 alpha-2</a>).
      */
     @SerializedName("country")
     Object country;
@@ -833,8 +843,8 @@ public class PersonUpdateParams extends ApiRequestParams {
       }
 
       /**
-       * Two-letter country code ([ISO 3166-1
-       * alpha-2](https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2)).
+       * Two-letter country code (<a href="https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2">ISO
+       * 3166-1 alpha-2</a>).
        */
       public Builder setCountry(String country) {
         this.country = country;
@@ -842,8 +852,8 @@ public class PersonUpdateParams extends ApiRequestParams {
       }
 
       /**
-       * Two-letter country code ([ISO 3166-1
-       * alpha-2](https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2)).
+       * Two-letter country code (<a href="https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2">ISO
+       * 3166-1 alpha-2</a>).
        */
       public Builder setCountry(EmptyParam country) {
         this.country = country;
@@ -945,8 +955,8 @@ public class PersonUpdateParams extends ApiRequestParams {
     Object city;
 
     /**
-     * Two-letter country code ([ISO 3166-1
-     * alpha-2](https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2)).
+     * Two-letter country code (<a href="https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2">ISO
+     * 3166-1 alpha-2</a>).
      */
     @SerializedName("country")
     Object country;
@@ -1046,8 +1056,8 @@ public class PersonUpdateParams extends ApiRequestParams {
       }
 
       /**
-       * Two-letter country code ([ISO 3166-1
-       * alpha-2](https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2)).
+       * Two-letter country code (<a href="https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2">ISO
+       * 3166-1 alpha-2</a>).
        */
       public Builder setCountry(String country) {
         this.country = country;
@@ -1055,8 +1065,8 @@ public class PersonUpdateParams extends ApiRequestParams {
       }
 
       /**
-       * Two-letter country code ([ISO 3166-1
-       * alpha-2](https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2)).
+       * Two-letter country code (<a href="https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2">ISO
+       * 3166-1 alpha-2</a>).
        */
       public Builder setCountry(EmptyParam country) {
         this.country = country;
@@ -1520,9 +1530,10 @@ public class PersonUpdateParams extends ApiRequestParams {
     @Getter
     public static class AdditionalDocument {
       /**
-       * The back of an ID returned by a [file upload](#create_file) with a `purpose` value of
-       * `identity_document`. The uploaded file needs to be a color image (smaller than 8,000px by
-       * 8,000px), in JPG or PNG format, and less than 10 MB in size.
+       * The back of an ID returned by a <a href="https://stripe.com/docs/api#create_file">file
+       * upload</a> with a {@code purpose} value of {@code identity_document}. The uploaded file
+       * needs to be a color image (smaller than 8,000px by 8,000px), in JPG or PNG format, and less
+       * than 10 MB in size.
        */
       @SerializedName("back")
       Object back;
@@ -1537,9 +1548,10 @@ public class PersonUpdateParams extends ApiRequestParams {
       Map<String, Object> extraParams;
 
       /**
-       * The front of an ID returned by a [file upload](#create_file) with a `purpose` value of
-       * `identity_document`. The uploaded file needs to be a color image (smaller than 8,000px by
-       * 8,000px), in JPG or PNG format, and less than 10 MB in size.
+       * The front of an ID returned by a <a href="https://stripe.com/docs/api#create_file">file
+       * upload</a> with a {@code purpose} value of {@code identity_document}. The uploaded file
+       * needs to be a color image (smaller than 8,000px by 8,000px), in JPG or PNG format, and less
+       * than 10 MB in size.
        */
       @SerializedName("front")
       Object front;
@@ -1567,9 +1579,10 @@ public class PersonUpdateParams extends ApiRequestParams {
         }
 
         /**
-         * The back of an ID returned by a [file upload](#create_file) with a `purpose` value of
-         * `identity_document`. The uploaded file needs to be a color image (smaller than 8,000px by
-         * 8,000px), in JPG or PNG format, and less than 10 MB in size.
+         * The back of an ID returned by a <a href="https://stripe.com/docs/api#create_file">file
+         * upload</a> with a {@code purpose} value of {@code identity_document}. The uploaded file
+         * needs to be a color image (smaller than 8,000px by 8,000px), in JPG or PNG format, and
+         * less than 10 MB in size.
          */
         public Builder setBack(String back) {
           this.back = back;
@@ -1577,9 +1590,10 @@ public class PersonUpdateParams extends ApiRequestParams {
         }
 
         /**
-         * The back of an ID returned by a [file upload](#create_file) with a `purpose` value of
-         * `identity_document`. The uploaded file needs to be a color image (smaller than 8,000px by
-         * 8,000px), in JPG or PNG format, and less than 10 MB in size.
+         * The back of an ID returned by a <a href="https://stripe.com/docs/api#create_file">file
+         * upload</a> with a {@code purpose} value of {@code identity_document}. The uploaded file
+         * needs to be a color image (smaller than 8,000px by 8,000px), in JPG or PNG format, and
+         * less than 10 MB in size.
          */
         public Builder setBack(EmptyParam back) {
           this.back = back;
@@ -1615,9 +1629,10 @@ public class PersonUpdateParams extends ApiRequestParams {
         }
 
         /**
-         * The front of an ID returned by a [file upload](#create_file) with a `purpose` value of
-         * `identity_document`. The uploaded file needs to be a color image (smaller than 8,000px by
-         * 8,000px), in JPG or PNG format, and less than 10 MB in size.
+         * The front of an ID returned by a <a href="https://stripe.com/docs/api#create_file">file
+         * upload</a> with a {@code purpose} value of {@code identity_document}. The uploaded file
+         * needs to be a color image (smaller than 8,000px by 8,000px), in JPG or PNG format, and
+         * less than 10 MB in size.
          */
         public Builder setFront(String front) {
           this.front = front;
@@ -1625,9 +1640,10 @@ public class PersonUpdateParams extends ApiRequestParams {
         }
 
         /**
-         * The front of an ID returned by a [file upload](#create_file) with a `purpose` value of
-         * `identity_document`. The uploaded file needs to be a color image (smaller than 8,000px by
-         * 8,000px), in JPG or PNG format, and less than 10 MB in size.
+         * The front of an ID returned by a <a href="https://stripe.com/docs/api#create_file">file
+         * upload</a> with a {@code purpose} value of {@code identity_document}. The uploaded file
+         * needs to be a color image (smaller than 8,000px by 8,000px), in JPG or PNG format, and
+         * less than 10 MB in size.
          */
         public Builder setFront(EmptyParam front) {
           this.front = front;
@@ -1639,9 +1655,10 @@ public class PersonUpdateParams extends ApiRequestParams {
     @Getter
     public static class Document {
       /**
-       * The back of an ID returned by a [file upload](#create_file) with a `purpose` value of
-       * `identity_document`. The uploaded file needs to be a color image (smaller than 8,000px by
-       * 8,000px), in JPG or PNG format, and less than 10 MB in size.
+       * The back of an ID returned by a <a href="https://stripe.com/docs/api#create_file">file
+       * upload</a> with a {@code purpose} value of {@code identity_document}. The uploaded file
+       * needs to be a color image (smaller than 8,000px by 8,000px), in JPG or PNG format, and less
+       * than 10 MB in size.
        */
       @SerializedName("back")
       Object back;
@@ -1656,9 +1673,10 @@ public class PersonUpdateParams extends ApiRequestParams {
       Map<String, Object> extraParams;
 
       /**
-       * The front of an ID returned by a [file upload](#create_file) with a `purpose` value of
-       * `identity_document`. The uploaded file needs to be a color image (smaller than 8,000px by
-       * 8,000px), in JPG or PNG format, and less than 10 MB in size.
+       * The front of an ID returned by a <a href="https://stripe.com/docs/api#create_file">file
+       * upload</a> with a {@code purpose} value of {@code identity_document}. The uploaded file
+       * needs to be a color image (smaller than 8,000px by 8,000px), in JPG or PNG format, and less
+       * than 10 MB in size.
        */
       @SerializedName("front")
       Object front;
@@ -1686,9 +1704,10 @@ public class PersonUpdateParams extends ApiRequestParams {
         }
 
         /**
-         * The back of an ID returned by a [file upload](#create_file) with a `purpose` value of
-         * `identity_document`. The uploaded file needs to be a color image (smaller than 8,000px by
-         * 8,000px), in JPG or PNG format, and less than 10 MB in size.
+         * The back of an ID returned by a <a href="https://stripe.com/docs/api#create_file">file
+         * upload</a> with a {@code purpose} value of {@code identity_document}. The uploaded file
+         * needs to be a color image (smaller than 8,000px by 8,000px), in JPG or PNG format, and
+         * less than 10 MB in size.
          */
         public Builder setBack(String back) {
           this.back = back;
@@ -1696,9 +1715,10 @@ public class PersonUpdateParams extends ApiRequestParams {
         }
 
         /**
-         * The back of an ID returned by a [file upload](#create_file) with a `purpose` value of
-         * `identity_document`. The uploaded file needs to be a color image (smaller than 8,000px by
-         * 8,000px), in JPG or PNG format, and less than 10 MB in size.
+         * The back of an ID returned by a <a href="https://stripe.com/docs/api#create_file">file
+         * upload</a> with a {@code purpose} value of {@code identity_document}. The uploaded file
+         * needs to be a color image (smaller than 8,000px by 8,000px), in JPG or PNG format, and
+         * less than 10 MB in size.
          */
         public Builder setBack(EmptyParam back) {
           this.back = back;
@@ -1734,9 +1754,10 @@ public class PersonUpdateParams extends ApiRequestParams {
         }
 
         /**
-         * The front of an ID returned by a [file upload](#create_file) with a `purpose` value of
-         * `identity_document`. The uploaded file needs to be a color image (smaller than 8,000px by
-         * 8,000px), in JPG or PNG format, and less than 10 MB in size.
+         * The front of an ID returned by a <a href="https://stripe.com/docs/api#create_file">file
+         * upload</a> with a {@code purpose} value of {@code identity_document}. The uploaded file
+         * needs to be a color image (smaller than 8,000px by 8,000px), in JPG or PNG format, and
+         * less than 10 MB in size.
          */
         public Builder setFront(String front) {
           this.front = front;
@@ -1744,9 +1765,10 @@ public class PersonUpdateParams extends ApiRequestParams {
         }
 
         /**
-         * The front of an ID returned by a [file upload](#create_file) with a `purpose` value of
-         * `identity_document`. The uploaded file needs to be a color image (smaller than 8,000px by
-         * 8,000px), in JPG or PNG format, and less than 10 MB in size.
+         * The front of an ID returned by a <a href="https://stripe.com/docs/api#create_file">file
+         * upload</a> with a {@code purpose} value of {@code identity_document}. The uploaded file
+         * needs to be a color image (smaller than 8,000px by 8,000px), in JPG or PNG format, and
+         * less than 10 MB in size.
          */
         public Builder setFront(EmptyParam front) {
           this.front = front;

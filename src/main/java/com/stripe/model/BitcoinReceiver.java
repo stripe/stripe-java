@@ -20,17 +20,17 @@ public class BitcoinReceiver extends ApiResource implements PaymentSource {
   @SerializedName("active")
   Boolean active;
 
-  /** The amount of `currency` that you are collecting as payment. */
+  /** The amount of {@code currency} that you are collecting as payment. */
   @SerializedName("amount")
   Long amount;
 
-  /** The amount of `currency` to which `bitcoin_amount_received` has been converted. */
+  /** The amount of {@code currency} to which {@code bitcoin_amount_received} has been converted. */
   @SerializedName("amount_received")
   Long amountReceived;
 
   /**
-   * The amount of bitcoin that the customer should send to fill the receiver. The `bitcoin_amount`
-   * is denominated in Satoshi: there are 10^8 Satoshi in one bitcoin.
+   * The amount of bitcoin that the customer should send to fill the receiver. The {@code
+   * bitcoin_amount} is denominated in Satoshi: there are 10^8 Satoshi in one bitcoin.
    */
   @SerializedName("bitcoin_amount")
   Long bitcoinAmount;
@@ -51,8 +51,8 @@ public class BitcoinReceiver extends ApiResource implements PaymentSource {
   Long created;
 
   /**
-   * Three-letter [ISO code for the currency](https://stripe.com/docs/currencies) to which the
-   * bitcoin will be converted.
+   * Three-letter <a href="https://stripe.com/docs/currencies">ISO code for the currency</a> to
+   * which the bitcoin will be converted.
    */
   @SerializedName("currency")
   String currency;
@@ -74,8 +74,8 @@ public class BitcoinReceiver extends ApiResource implements PaymentSource {
   String email;
 
   /**
-   * This flag is initially false and updates to true when the customer sends the `bitcoin_amount`
-   * to this receiver.
+   * This flag is initially false and updates to true when the customer sends the {@code
+   * bitcoin_amount} to this receiver.
    */
   @SerializedName("filled")
   Boolean filled;
@@ -93,8 +93,8 @@ public class BitcoinReceiver extends ApiResource implements PaymentSource {
   String inboundAddress;
 
   /**
-   * Has the value `true` if the object exists in live mode or the value `false` if the object
-   * exists in test mode.
+   * Has the value {@code true} if the object exists in live mode or the value {@code false} if the
+   * object exists in test mode.
    */
   @SerializedName("livemode")
   Boolean livemode;
@@ -109,7 +109,7 @@ public class BitcoinReceiver extends ApiResource implements PaymentSource {
   /**
    * String representing the object's type. Objects of the same type share the same value.
    *
-   * <p>Equal to `bitcoin_receiver`.
+   * <p>Equal to {@code bitcoin_receiver}.
    */
   @SerializedName("object")
   String object;

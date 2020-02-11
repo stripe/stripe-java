@@ -42,8 +42,8 @@ public class FileLink extends ApiResource implements HasId, MetadataStore<FileLi
   String id;
 
   /**
-   * Has the value `true` if the object exists in live mode or the value `false` if the object
-   * exists in test mode.
+   * Has the value {@code true} if the object exists in live mode or the value {@code false} if the
+   * object exists in test mode.
    */
   @SerializedName("livemode")
   Boolean livemode;
@@ -59,7 +59,7 @@ public class FileLink extends ApiResource implements HasId, MetadataStore<FileLi
   /**
    * String representing the object's type. Objects of the same type share the same value.
    *
-   * <p>Equal to `file_link`.
+   * <p>Equal to {@code file_link}.
    */
   @SerializedName("object")
   String object;
@@ -68,7 +68,7 @@ public class FileLink extends ApiResource implements HasId, MetadataStore<FileLi
   @SerializedName("url")
   String url;
 
-  /** Get id of expandable `file` object. */
+  /** Get ID of expandable {@code file} object. */
   public String getFile() {
     return (this.file != null) ? this.file.getId() : null;
   }
@@ -77,7 +77,7 @@ public class FileLink extends ApiResource implements HasId, MetadataStore<FileLi
     this.file = ApiResource.setExpandableFieldId(id, this.file);
   }
 
-  /** Get expanded `file`. */
+  /** Get expanded {@code file}. */
   public File getFileObject() {
     return (this.file != null) ? this.file.getExpanded() : null;
   }

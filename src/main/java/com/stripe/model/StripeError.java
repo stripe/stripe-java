@@ -14,22 +14,23 @@ public class StripeError extends StripeObject {
   String charge;
 
   /**
-   * For some errors that could be handled programmatically, a short string indicating the [error
-   * code](https://stripe.com/docs/error-codes) reported.
+   * For some errors that could be handled programmatically, a short string indicating the <a
+   * href="https://stripe.com/docs/error-codes">error code</a> reported.
    */
   @SerializedName("code")
   String code;
 
   /**
-   * For card errors resulting from a card issuer decline, a short string indicating the [card
-   * issuer's reason for the decline](https://stripe.com/docs/declines#issuer-declines) if they
-   * provide one.
+   * For card errors resulting from a card issuer decline, a short string indicating the <a
+   * href="https://stripe.com/docs/declines#issuer-declines">card issuer's reason for the
+   * decline</a> if they provide one.
    */
   @SerializedName("decline_code")
   String declineCode;
 
   /**
-   * A URL to more information about the [error code](https://stripe.com/docs/error-codes) reported.
+   * A URL to more information about the <a href="https://stripe.com/docs/error-codes">error
+   * code</a> reported.
    */
   @SerializedName("doc_url")
   String docUrl;
@@ -61,8 +62,9 @@ public class StripeError extends StripeObject {
   PaymentSource source;
 
   /**
-   * The type of error returned. One of `api_connection_error`, `api_error`, `authentication_error`,
-   * `card_error`, `idempotency_error`, `invalid_request_error`, or `rate_limit_error`
+   * The type of error returned. One of {@code api_connection_error}, {@code api_error}, {@code
+   * authentication_error}, {@code card_error}, {@code idempotency_error}, {@code
+   * invalid_request_error}, or {@code rate_limit_error}
    */
   @SerializedName("type")
   String type;

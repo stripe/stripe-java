@@ -21,10 +21,10 @@ public class InvoiceItemListParams extends ApiRequestParams {
   String customer;
 
   /**
-   * A cursor for use in pagination. `ending_before` is an object ID that defines your place in the
-   * list. For instance, if you make a list request and receive 100 objects, starting with
-   * `obj_bar`, your subsequent call can include `ending_before=obj_bar` in order to fetch the
-   * previous page of the list.
+   * A cursor for use in pagination. {@code ending_before} is an object ID that defines your place
+   * in the list. For instance, if you make a list request and receive 100 objects, starting with
+   * {@code obj_bar}, your subsequent call can include {@code ending_before=obj_bar} in order to
+   * fetch the previous page of the list.
    */
   @SerializedName("ending_before")
   String endingBefore;
@@ -57,18 +57,18 @@ public class InvoiceItemListParams extends ApiRequestParams {
   Long limit;
 
   /**
-   * Set to `true` to only show pending invoice items, which are not yet attached to any invoices.
-   * Set to `false` to only show invoice items already attached to invoices. If unspecified, no
-   * filter is applied.
+   * Set to {@code true} to only show pending invoice items, which are not yet attached to any
+   * invoices. Set to {@code false} to only show invoice items already attached to invoices. If
+   * unspecified, no filter is applied.
    */
   @SerializedName("pending")
   Boolean pending;
 
   /**
-   * A cursor for use in pagination. `starting_after` is an object ID that defines your place in the
-   * list. For instance, if you make a list request and receive 100 objects, ending with `obj_foo`,
-   * your subsequent call can include `starting_after=obj_foo` in order to fetch the next page of
-   * the list.
+   * A cursor for use in pagination. {@code starting_after} is an object ID that defines your place
+   * in the list. For instance, if you make a list request and receive 100 objects, ending with
+   * {@code obj_foo}, your subsequent call can include {@code starting_after=obj_foo} in order to
+   * fetch the next page of the list.
    */
   @SerializedName("starting_after")
   String startingAfter;
@@ -151,10 +151,10 @@ public class InvoiceItemListParams extends ApiRequestParams {
     }
 
     /**
-     * A cursor for use in pagination. `ending_before` is an object ID that defines your place in
-     * the list. For instance, if you make a list request and receive 100 objects, starting with
-     * `obj_bar`, your subsequent call can include `ending_before=obj_bar` in order to fetch the
-     * previous page of the list.
+     * A cursor for use in pagination. {@code ending_before} is an object ID that defines your place
+     * in the list. For instance, if you make a list request and receive 100 objects, starting with
+     * {@code obj_bar}, your subsequent call can include {@code ending_before=obj_bar} in order to
+     * fetch the previous page of the list.
      */
     public Builder setEndingBefore(String endingBefore) {
       this.endingBefore = endingBefore;
@@ -232,9 +232,9 @@ public class InvoiceItemListParams extends ApiRequestParams {
     }
 
     /**
-     * Set to `true` to only show pending invoice items, which are not yet attached to any invoices.
-     * Set to `false` to only show invoice items already attached to invoices. If unspecified, no
-     * filter is applied.
+     * Set to {@code true} to only show pending invoice items, which are not yet attached to any
+     * invoices. Set to {@code false} to only show invoice items already attached to invoices. If
+     * unspecified, no filter is applied.
      */
     public Builder setPending(Boolean pending) {
       this.pending = pending;
@@ -242,10 +242,10 @@ public class InvoiceItemListParams extends ApiRequestParams {
     }
 
     /**
-     * A cursor for use in pagination. `starting_after` is an object ID that defines your place in
-     * the list. For instance, if you make a list request and receive 100 objects, ending with
-     * `obj_foo`, your subsequent call can include `starting_after=obj_foo` in order to fetch the
-     * next page of the list.
+     * A cursor for use in pagination. {@code starting_after} is an object ID that defines your
+     * place in the list. For instance, if you make a list request and receive 100 objects, ending
+     * with {@code obj_foo}, your subsequent call can include {@code starting_after=obj_foo} in
+     * order to fetch the next page of the list.
      */
     public Builder setStartingAfter(String startingAfter) {
       this.startingAfter = startingAfter;

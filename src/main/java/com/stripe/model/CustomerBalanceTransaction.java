@@ -18,7 +18,7 @@ public class CustomerBalanceTransaction extends ApiResource
     implements HasId, MetadataStore<CustomerBalanceTransaction> {
   /**
    * The amount of the transaction. A negative value is a credit for the customer's balance, and a
-   * positive value is a debit to the customer's `balance`.
+   * positive value is a debit to the customer's {@code balance}.
    */
   @SerializedName("amount")
   Long amount;
@@ -34,8 +34,8 @@ public class CustomerBalanceTransaction extends ApiResource
   ExpandableField<CreditNote> creditNote;
 
   /**
-   * Three-letter [ISO currency code](https://www.iso.org/iso-4217-currency-codes.html), in
-   * lowercase. Must be a [supported currency](https://stripe.com/docs/currencies).
+   * Three-letter <a href="https://www.iso.org/iso-4217-currency-codes.html">ISO currency code</a>,
+   * in lowercase. Must be a <a href="https://stripe.com/docs/currencies">supported currency</a>.
    */
   @SerializedName("currency")
   String currency;
@@ -51,8 +51,8 @@ public class CustomerBalanceTransaction extends ApiResource
   String description;
 
   /**
-   * The customer's `balance` after the transaction was applied. A negative value decreases the
-   * amount due on the customer's next invoice. A positive value increases the amount due on the
+   * The customer's {@code balance} after the transaction was applied. A negative value decreases
+   * the amount due on the customer's next invoice. A positive value increases the amount due on the
    * customer's next invoice.
    */
   @SerializedName("ending_balance")
@@ -70,8 +70,8 @@ public class CustomerBalanceTransaction extends ApiResource
   ExpandableField<Invoice> invoice;
 
   /**
-   * Has the value `true` if the object exists in live mode or the value `false` if the object
-   * exists in test mode.
+   * Has the value {@code true} if the object exists in live mode or the value {@code false} if the
+   * object exists in test mode.
    */
   @SerializedName("livemode")
   Boolean livemode;
@@ -87,25 +87,26 @@ public class CustomerBalanceTransaction extends ApiResource
   /**
    * String representing the object's type. Objects of the same type share the same value.
    *
-   * <p>Equal to `customer_balance_transaction`.
+   * <p>Equal to {@code customer_balance_transaction}.
    */
   @SerializedName("object")
   String object;
 
   /**
-   * Transaction type: `adjustment`, `applied_to_invoice`, `credit_note`, `initial`,
-   * `invoice_too_large`, `invoice_too_small`, `unspent_receiver_credit`, or
-   * `unapplied_from_invoice`. See the [Customer Balance
-   * page](https://stripe.com/docs/billing/customer/balance#types) to learn more about transaction
-   * types.
+   * Transaction type: {@code adjustment}, {@code applied_to_invoice}, {@code credit_note}, {@code
+   * initial}, {@code invoice_too_large}, {@code invoice_too_small}, {@code
+   * unspent_receiver_credit}, or {@code unapplied_from_invoice}. See the <a
+   * href="https://stripe.com/docs/billing/customer/balance#types">Customer Balance page</a> to
+   * learn more about transaction types.
    *
-   * <p>One of `adjustment`, `applied_to_invoice`, `credit_note`, `initial`, `invoice_too_large`,
-   * `invoice_too_small`, `migration`, `unapplied_from_invoice`, or `unspent_receiver_credit`.
+   * <p>One of {@code adjustment}, {@code applied_to_invoice}, {@code credit_note}, {@code initial},
+   * {@code invoice_too_large}, {@code invoice_too_small}, {@code migration}, {@code
+   * unapplied_from_invoice}, or {@code unspent_receiver_credit}.
    */
   @SerializedName("type")
   String type;
 
-  /** Get id of expandable `creditNote` object. */
+  /** Get ID of expandable {@code creditNote} object. */
   public String getCreditNote() {
     return (this.creditNote != null) ? this.creditNote.getId() : null;
   }
@@ -114,7 +115,7 @@ public class CustomerBalanceTransaction extends ApiResource
     this.creditNote = ApiResource.setExpandableFieldId(id, this.creditNote);
   }
 
-  /** Get expanded `creditNote`. */
+  /** Get expanded {@code creditNote}. */
   public CreditNote getCreditNoteObject() {
     return (this.creditNote != null) ? this.creditNote.getExpanded() : null;
   }
@@ -123,7 +124,7 @@ public class CustomerBalanceTransaction extends ApiResource
     this.creditNote = new ExpandableField<CreditNote>(expandableObject.getId(), expandableObject);
   }
 
-  /** Get id of expandable `customer` object. */
+  /** Get ID of expandable {@code customer} object. */
   public String getCustomer() {
     return (this.customer != null) ? this.customer.getId() : null;
   }
@@ -132,7 +133,7 @@ public class CustomerBalanceTransaction extends ApiResource
     this.customer = ApiResource.setExpandableFieldId(id, this.customer);
   }
 
-  /** Get expanded `customer`. */
+  /** Get expanded {@code customer}. */
   public Customer getCustomerObject() {
     return (this.customer != null) ? this.customer.getExpanded() : null;
   }
@@ -141,7 +142,7 @@ public class CustomerBalanceTransaction extends ApiResource
     this.customer = new ExpandableField<Customer>(expandableObject.getId(), expandableObject);
   }
 
-  /** Get id of expandable `invoice` object. */
+  /** Get ID of expandable {@code invoice} object. */
   public String getInvoice() {
     return (this.invoice != null) ? this.invoice.getId() : null;
   }
@@ -150,7 +151,7 @@ public class CustomerBalanceTransaction extends ApiResource
     this.invoice = ApiResource.setExpandableFieldId(id, this.invoice);
   }
 
-  /** Get expanded `invoice`. */
+  /** Get expanded {@code invoice}. */
   public Invoice getInvoiceObject() {
     return (this.invoice != null) ? this.invoice.getExpanded() : null;
   }

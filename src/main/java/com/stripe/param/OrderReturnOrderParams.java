@@ -150,7 +150,7 @@ public class OrderReturnOrderParams extends ApiRequestParams {
     @SerializedName("amount")
     Long amount;
 
-    /** If returning a `tax` item, use description to disambiguate which one to return. */
+    /** If returning a {@code tax} item, use description to disambiguate which one to return. */
     @SerializedName("description")
     String description;
 
@@ -167,11 +167,11 @@ public class OrderReturnOrderParams extends ApiRequestParams {
     @SerializedName("parent")
     String parent;
 
-    /** When type is `sku`, this is the number of instances of the SKU to be returned. */
+    /** When type is {@code sku}, this is the number of instances of the SKU to be returned. */
     @SerializedName("quantity")
     Long quantity;
 
-    /** The type of this order item. Must be `sku`, `tax`, or `shipping`. */
+    /** The type of this order item. Must be {@code sku}, {@code tax}, or {@code shipping}. */
     @SerializedName("type")
     Type type;
 
@@ -219,7 +219,7 @@ public class OrderReturnOrderParams extends ApiRequestParams {
         return this;
       }
 
-      /** If returning a `tax` item, use description to disambiguate which one to return. */
+      /** If returning a {@code tax} item, use description to disambiguate which one to return. */
       public Builder setDescription(String description) {
         this.description = description;
         return this;
@@ -257,13 +257,13 @@ public class OrderReturnOrderParams extends ApiRequestParams {
         return this;
       }
 
-      /** When type is `sku`, this is the number of instances of the SKU to be returned. */
+      /** When type is {@code sku}, this is the number of instances of the SKU to be returned. */
       public Builder setQuantity(Long quantity) {
         this.quantity = quantity;
         return this;
       }
 
-      /** The type of this order item. Must be `sku`, `tax`, or `shipping`. */
+      /** The type of this order item. Must be {@code sku}, {@code tax}, or {@code shipping}. */
       public Builder setType(Type type) {
         this.type = type;
         return this;

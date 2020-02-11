@@ -21,7 +21,7 @@ public class ExternalAccountCollectionCreateParams extends ApiRequestParams {
   @SerializedName("expand")
   List<String> expand;
 
-  /** Please refer to full [documentation](https://stripe.com/docs/api) instead. */
+  /** Please refer to full <a href="https://stripe.com/docs/api">documentation</a> instead. */
   @SerializedName("external_account")
   String externalAccount;
 
@@ -37,7 +37,8 @@ public class ExternalAccountCollectionCreateParams extends ApiRequestParams {
   /**
    * Set of key-value pairs that you can attach to an object. This can be useful for storing
    * additional information about the object in a structured format. Individual keys can be unset by
-   * posting an empty value to them. All keys can be unset by posting an empty value to `metadata`.
+   * posting an empty value to them. All keys can be unset by posting an empty value to {@code
+   * metadata}.
    */
   @SerializedName("metadata")
   Map<String, String> metadata;
@@ -115,7 +116,7 @@ public class ExternalAccountCollectionCreateParams extends ApiRequestParams {
       return this;
     }
 
-    /** Please refer to full [documentation](https://stripe.com/docs/api) instead. */
+    /** Please refer to full <a href="https://stripe.com/docs/api">documentation</a> instead. */
     public Builder setExternalAccount(String externalAccount) {
       this.externalAccount = externalAccount;
       return this;

@@ -19,10 +19,10 @@ public class CardholderListParams extends ApiRequestParams {
   String email;
 
   /**
-   * A cursor for use in pagination. `ending_before` is an object ID that defines your place in the
-   * list. For instance, if you make a list request and receive 100 objects, starting with
-   * `obj_bar`, your subsequent call can include `ending_before=obj_bar` in order to fetch the
-   * previous page of the list.
+   * A cursor for use in pagination. {@code ending_before} is an object ID that defines your place
+   * in the list. For instance, if you make a list request and receive 100 objects, starting with
+   * {@code obj_bar}, your subsequent call can include {@code ending_before=obj_bar} in order to
+   * fetch the previous page of the list.
    */
   @SerializedName("ending_before")
   String endingBefore;
@@ -56,21 +56,25 @@ public class CardholderListParams extends ApiRequestParams {
   String phoneNumber;
 
   /**
-   * A cursor for use in pagination. `starting_after` is an object ID that defines your place in the
-   * list. For instance, if you make a list request and receive 100 objects, ending with `obj_foo`,
-   * your subsequent call can include `starting_after=obj_foo` in order to fetch the next page of
-   * the list.
+   * A cursor for use in pagination. {@code starting_after} is an object ID that defines your place
+   * in the list. For instance, if you make a list request and receive 100 objects, ending with
+   * {@code obj_foo}, your subsequent call can include {@code starting_after=obj_foo} in order to
+   * fetch the next page of the list.
    */
   @SerializedName("starting_after")
   String startingAfter;
 
   /**
-   * Only return cardholders that have the given status. One of `active`, `inactive`, or `blocked`.
+   * Only return cardholders that have the given status. One of {@code active}, {@code inactive}, or
+   * {@code blocked}.
    */
   @SerializedName("status")
   Status status;
 
-  /** Only return cardholders that have the given type. One of `individual` or `business_entity`. */
+  /**
+   * Only return cardholders that have the given type. One of {@code individual} or {@code
+   * business_entity}.
+   */
   @SerializedName("type")
   Type type;
 
@@ -161,10 +165,10 @@ public class CardholderListParams extends ApiRequestParams {
     }
 
     /**
-     * A cursor for use in pagination. `ending_before` is an object ID that defines your place in
-     * the list. For instance, if you make a list request and receive 100 objects, starting with
-     * `obj_bar`, your subsequent call can include `ending_before=obj_bar` in order to fetch the
-     * previous page of the list.
+     * A cursor for use in pagination. {@code ending_before} is an object ID that defines your place
+     * in the list. For instance, if you make a list request and receive 100 objects, starting with
+     * {@code obj_bar}, your subsequent call can include {@code ending_before=obj_bar} in order to
+     * fetch the previous page of the list.
      */
     public Builder setEndingBefore(String endingBefore) {
       this.endingBefore = endingBefore;
@@ -245,10 +249,10 @@ public class CardholderListParams extends ApiRequestParams {
     }
 
     /**
-     * A cursor for use in pagination. `starting_after` is an object ID that defines your place in
-     * the list. For instance, if you make a list request and receive 100 objects, ending with
-     * `obj_foo`, your subsequent call can include `starting_after=obj_foo` in order to fetch the
-     * next page of the list.
+     * A cursor for use in pagination. {@code starting_after} is an object ID that defines your
+     * place in the list. For instance, if you make a list request and receive 100 objects, ending
+     * with {@code obj_foo}, your subsequent call can include {@code starting_after=obj_foo} in
+     * order to fetch the next page of the list.
      */
     public Builder setStartingAfter(String startingAfter) {
       this.startingAfter = startingAfter;
@@ -256,8 +260,8 @@ public class CardholderListParams extends ApiRequestParams {
     }
 
     /**
-     * Only return cardholders that have the given status. One of `active`, `inactive`, or
-     * `blocked`.
+     * Only return cardholders that have the given status. One of {@code active}, {@code inactive},
+     * or {@code blocked}.
      */
     public Builder setStatus(Status status) {
       this.status = status;
@@ -265,7 +269,8 @@ public class CardholderListParams extends ApiRequestParams {
     }
 
     /**
-     * Only return cardholders that have the given type. One of `individual` or `business_entity`.
+     * Only return cardholders that have the given type. One of {@code individual} or {@code
+     * business_entity}.
      */
     public Builder setType(Type type) {
       this.type = type;

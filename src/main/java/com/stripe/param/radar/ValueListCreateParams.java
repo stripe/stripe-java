@@ -28,9 +28,9 @@ public class ValueListCreateParams extends ApiRequestParams {
   Map<String, Object> extraParams;
 
   /**
-   * Type of the items in the value list. One of `card_fingerprint`, `card_bin`, `email`,
-   * `ip_address`, `country`, `string`, or `case_sensitive_string`. Use `string` if the item type is
-   * unknown or mixed.
+   * Type of the items in the value list. One of {@code card_fingerprint}, {@code card_bin}, {@code
+   * email}, {@code ip_address}, {@code country}, {@code string}, or {@code case_sensitive_string}.
+   * Use {@code string} if the item type is unknown or mixed.
    */
   @SerializedName("item_type")
   ItemType itemType;
@@ -38,7 +38,8 @@ public class ValueListCreateParams extends ApiRequestParams {
   /**
    * Set of key-value pairs that you can attach to an object. This can be useful for storing
    * additional information about the object in a structured format. Individual keys can be unset by
-   * posting an empty value to them. All keys can be unset by posting an empty value to `metadata`.
+   * posting an empty value to them. All keys can be unset by posting an empty value to {@code
+   * metadata}.
    */
   @SerializedName("metadata")
   Map<String, String> metadata;
@@ -144,9 +145,9 @@ public class ValueListCreateParams extends ApiRequestParams {
     }
 
     /**
-     * Type of the items in the value list. One of `card_fingerprint`, `card_bin`, `email`,
-     * `ip_address`, `country`, `string`, or `case_sensitive_string`. Use `string` if the item type
-     * is unknown or mixed.
+     * Type of the items in the value list. One of {@code card_fingerprint}, {@code card_bin},
+     * {@code email}, {@code ip_address}, {@code country}, {@code string}, or {@code
+     * case_sensitive_string}. Use {@code string} if the item type is unknown or mixed.
      */
     public Builder setItemType(ItemType itemType) {
       this.itemType = itemType;

@@ -21,10 +21,10 @@ public class EventListParams extends ApiRequestParams {
   Boolean deliverySuccess;
 
   /**
-   * A cursor for use in pagination. `ending_before` is an object ID that defines your place in the
-   * list. For instance, if you make a list request and receive 100 objects, starting with
-   * `obj_bar`, your subsequent call can include `ending_before=obj_bar` in order to fetch the
-   * previous page of the list.
+   * A cursor for use in pagination. {@code ending_before} is an object ID that defines your place
+   * in the list. For instance, if you make a list request and receive 100 objects, starting with
+   * {@code obj_bar}, your subsequent call can include {@code ending_before=obj_bar} in order to
+   * fetch the previous page of the list.
    */
   @SerializedName("ending_before")
   String endingBefore;
@@ -50,10 +50,10 @@ public class EventListParams extends ApiRequestParams {
   Long limit;
 
   /**
-   * A cursor for use in pagination. `starting_after` is an object ID that defines your place in the
-   * list. For instance, if you make a list request and receive 100 objects, ending with `obj_foo`,
-   * your subsequent call can include `starting_after=obj_foo` in order to fetch the next page of
-   * the list.
+   * A cursor for use in pagination. {@code starting_after} is an object ID that defines your place
+   * in the list. For instance, if you make a list request and receive 100 objects, ending with
+   * {@code obj_foo}, your subsequent call can include {@code starting_after=obj_foo} in order to
+   * fetch the next page of the list.
    */
   @SerializedName("starting_after")
   String startingAfter;
@@ -67,8 +67,8 @@ public class EventListParams extends ApiRequestParams {
 
   /**
    * An array of up to 20 strings containing specific event names. The list will be filtered to
-   * include only events with a matching event property. You may pass either `type` or `types`, but
-   * not both.
+   * include only events with a matching event property. You may pass either {@code type} or {@code
+   * types}, but not both.
    */
   @SerializedName("types")
   List<String> types;
@@ -151,10 +151,10 @@ public class EventListParams extends ApiRequestParams {
     }
 
     /**
-     * A cursor for use in pagination. `ending_before` is an object ID that defines your place in
-     * the list. For instance, if you make a list request and receive 100 objects, starting with
-     * `obj_bar`, your subsequent call can include `ending_before=obj_bar` in order to fetch the
-     * previous page of the list.
+     * A cursor for use in pagination. {@code ending_before} is an object ID that defines your place
+     * in the list. For instance, if you make a list request and receive 100 objects, starting with
+     * {@code obj_bar}, your subsequent call can include {@code ending_before=obj_bar} in order to
+     * fetch the previous page of the list.
      */
     public Builder setEndingBefore(String endingBefore) {
       this.endingBefore = endingBefore;
@@ -223,10 +223,10 @@ public class EventListParams extends ApiRequestParams {
     }
 
     /**
-     * A cursor for use in pagination. `starting_after` is an object ID that defines your place in
-     * the list. For instance, if you make a list request and receive 100 objects, ending with
-     * `obj_foo`, your subsequent call can include `starting_after=obj_foo` in order to fetch the
-     * next page of the list.
+     * A cursor for use in pagination. {@code starting_after} is an object ID that defines your
+     * place in the list. For instance, if you make a list request and receive 100 objects, ending
+     * with {@code obj_foo}, your subsequent call can include {@code starting_after=obj_foo} in
+     * order to fetch the next page of the list.
      */
     public Builder setStartingAfter(String startingAfter) {
       this.startingAfter = startingAfter;

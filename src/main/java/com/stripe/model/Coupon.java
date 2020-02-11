@@ -20,8 +20,8 @@ import lombok.Setter;
 @EqualsAndHashCode(callSuper = false)
 public class Coupon extends ApiResource implements HasId, MetadataStore<Coupon> {
   /**
-   * Amount (in the `currency` specified) that will be taken off the subtotal of any invoices for
-   * this customer.
+   * Amount (in the {@code currency} specified) that will be taken off the subtotal of any invoices
+   * for this customer.
    */
   @SerializedName("amount_off")
   Long amountOff;
@@ -31,8 +31,9 @@ public class Coupon extends ApiResource implements HasId, MetadataStore<Coupon> 
   Long created;
 
   /**
-   * If `amount_off` has been set, the three-letter [ISO code for the
-   * currency](https://stripe.com/docs/currencies) of the amount to take off.
+   * If {@code amount_off} has been set, the three-letter <a
+   * href="https://stripe.com/docs/currencies">ISO code for the currency</a> of the amount to take
+   * off.
    */
   @SerializedName("currency")
   String currency;
@@ -42,15 +43,15 @@ public class Coupon extends ApiResource implements HasId, MetadataStore<Coupon> 
   Boolean deleted;
 
   /**
-   * One of `forever`, `once`, and `repeating`. Describes how long a customer who applies this
-   * coupon will get the discount.
+   * One of {@code forever}, {@code once}, and {@code repeating}. Describes how long a customer who
+   * applies this coupon will get the discount.
    */
   @SerializedName("duration")
   String duration;
 
   /**
-   * If `duration` is `repeating`, the number of months the coupon applies. Null if coupon
-   * `duration` is `forever` or `once`.
+   * If {@code duration} is {@code repeating}, the number of months the coupon applies. Null if
+   * coupon {@code duration} is {@code forever} or {@code once}.
    */
   @SerializedName("duration_in_months")
   Long durationInMonths;
@@ -61,8 +62,8 @@ public class Coupon extends ApiResource implements HasId, MetadataStore<Coupon> 
   String id;
 
   /**
-   * Has the value `true` if the object exists in live mode or the value `false` if the object
-   * exists in test mode.
+   * Has the value {@code true} if the object exists in live mode or the value {@code false} if the
+   * object exists in test mode.
    */
   @SerializedName("livemode")
   Boolean livemode;
@@ -89,7 +90,7 @@ public class Coupon extends ApiResource implements HasId, MetadataStore<Coupon> 
   /**
    * String representing the object's type. Objects of the same type share the same value.
    *
-   * <p>Equal to `coupon`.
+   * <p>Equal to {@code coupon}.
    */
   @SerializedName("object")
   String object;

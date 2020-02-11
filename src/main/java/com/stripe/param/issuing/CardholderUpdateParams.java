@@ -12,8 +12,8 @@ import lombok.Getter;
 @Getter
 public class CardholderUpdateParams extends ApiRequestParams {
   /**
-   * Spending rules that give you some control over how your cards can be used. Refer to our
-   * [authorizations](https://stripe.com/docs/issuing/authorizations) documentation for more
+   * Spending rules that give you some control over how your cards can be used. Refer to our <a
+   * href="https://stripe.com/docs/issuing/authorizations">authorizations</a> documentation for more
    * details.
    */
   @SerializedName("authorization_controls")
@@ -23,7 +23,7 @@ public class CardholderUpdateParams extends ApiRequestParams {
   @SerializedName("billing")
   Billing billing;
 
-  /** Additional information about a `business_entity` cardholder. */
+  /** Additional information about a {@code business_entity} cardholder. */
   @SerializedName("company")
   Company company;
 
@@ -44,7 +44,7 @@ public class CardholderUpdateParams extends ApiRequestParams {
   @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
   Map<String, Object> extraParams;
 
-  /** Additional information about an `individual` cardholder. */
+  /** Additional information about an {@code individual} cardholder. */
   @SerializedName("individual")
   Individual individual;
 
@@ -55,7 +55,8 @@ public class CardholderUpdateParams extends ApiRequestParams {
   /**
    * Set of key-value pairs that you can attach to an object. This can be useful for storing
    * additional information about the object in a structured format. Individual keys can be unset by
-   * posting an empty value to them. All keys can be unset by posting an empty value to `metadata`.
+   * posting an empty value to them. All keys can be unset by posting an empty value to {@code
+   * metadata}.
    */
   @SerializedName("metadata")
   Map<String, String> metadata;
@@ -137,9 +138,9 @@ public class CardholderUpdateParams extends ApiRequestParams {
     }
 
     /**
-     * Spending rules that give you some control over how your cards can be used. Refer to our
-     * [authorizations](https://stripe.com/docs/issuing/authorizations) documentation for more
-     * details.
+     * Spending rules that give you some control over how your cards can be used. Refer to our <a
+     * href="https://stripe.com/docs/issuing/authorizations">authorizations</a> documentation for
+     * more details.
      */
     public Builder setAuthorizationControls(AuthorizationControls authorizationControls) {
       this.authorizationControls = authorizationControls;
@@ -152,7 +153,7 @@ public class CardholderUpdateParams extends ApiRequestParams {
       return this;
     }
 
-    /** Additional information about a `business_entity` cardholder. */
+    /** Additional information about a {@code business_entity} cardholder. */
     public Builder setCompany(Company company) {
       this.company = company;
       return this;
@@ -222,7 +223,7 @@ public class CardholderUpdateParams extends ApiRequestParams {
       return this;
     }
 
-    /** Additional information about an `individual` cardholder. */
+    /** Additional information about an {@code individual} cardholder. */
     public Builder setIndividual(Individual individual) {
       this.individual = individual;
       return this;
@@ -282,16 +283,16 @@ public class CardholderUpdateParams extends ApiRequestParams {
   @Getter
   public static class AuthorizationControls {
     /**
-     * Array of strings containing
-     * [categories](https://stripe.com/docs/api#issuing_authorization_object-merchant_data-category)
+     * Array of strings containing <a
+     * href="https://stripe.com/docs/api#issuing_authorization_object-merchant_data-category">categories</a>
      * of authorizations permitted on this card.
      */
     @SerializedName("allowed_categories")
     List<AllowedCategory> allowedCategories;
 
     /**
-     * Array of strings containing
-     * [categories](https://stripe.com/docs/api#issuing_authorization_object-merchant_data-category)
+     * Array of strings containing <a
+     * href="https://stripe.com/docs/api#issuing_authorization_object-merchant_data-category">categories</a>
      * of authorizations to always decline on this card.
      */
     @SerializedName("blocked_categories")
@@ -481,8 +482,8 @@ public class CardholderUpdateParams extends ApiRequestParams {
       Long amount;
 
       /**
-       * Array of strings containing
-       * [categories](https://stripe.com/docs/api#issuing_authorization_object-merchant_data-category)
+       * Array of strings containing <a
+       * href="https://stripe.com/docs/api#issuing_authorization_object-merchant_data-category">categories</a>
        * on which to apply the spending limit. Leave this blank to limit all charges.
        */
       @SerializedName("categories")
@@ -3381,8 +3382,8 @@ public class CardholderUpdateParams extends ApiRequestParams {
       Object city;
 
       /**
-       * Two-letter country code ([ISO 3166-1
-       * alpha-2](https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2)).
+       * Two-letter country code (<a href="https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2">ISO
+       * 3166-1 alpha-2</a>).
        */
       @SerializedName("country")
       Object country;
@@ -3473,8 +3474,8 @@ public class CardholderUpdateParams extends ApiRequestParams {
         }
 
         /**
-         * Two-letter country code ([ISO 3166-1
-         * alpha-2](https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2)).
+         * Two-letter country code (<a href="https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2">ISO
+         * 3166-1 alpha-2</a>).
          */
         public Builder setCountry(String country) {
           this.country = country;
@@ -3482,8 +3483,8 @@ public class CardholderUpdateParams extends ApiRequestParams {
         }
 
         /**
-         * Two-letter country code ([ISO 3166-1
-         * alpha-2](https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2)).
+         * Two-letter country code (<a href="https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2">ISO
+         * 3166-1 alpha-2</a>).
          */
         public Builder setCountry(EmptyParam country) {
           this.country = country;
@@ -3935,8 +3936,8 @@ public class CardholderUpdateParams extends ApiRequestParams {
       @Getter
       public static class Document {
         /**
-         * The back of an ID returned by a [file upload](#create_file) with a `purpose` value of
-         * `identity_document`.
+         * The back of an ID returned by a <a href="https://stripe.com/docs/api#create_file">file
+         * upload</a> with a {@code purpose} value of {@code identity_document}.
          */
         @SerializedName("back")
         Object back;
@@ -3952,8 +3953,8 @@ public class CardholderUpdateParams extends ApiRequestParams {
         Map<String, Object> extraParams;
 
         /**
-         * The front of an ID returned by a [file upload](#create_file) with a `purpose` value of
-         * `identity_document`.
+         * The front of an ID returned by a <a href="https://stripe.com/docs/api#create_file">file
+         * upload</a> with a {@code purpose} value of {@code identity_document}.
          */
         @SerializedName("front")
         Object front;
@@ -3981,8 +3982,8 @@ public class CardholderUpdateParams extends ApiRequestParams {
           }
 
           /**
-           * The back of an ID returned by a [file upload](#create_file) with a `purpose` value of
-           * `identity_document`.
+           * The back of an ID returned by a <a href="https://stripe.com/docs/api#create_file">file
+           * upload</a> with a {@code purpose} value of {@code identity_document}.
            */
           public Builder setBack(String back) {
             this.back = back;
@@ -3990,8 +3991,8 @@ public class CardholderUpdateParams extends ApiRequestParams {
           }
 
           /**
-           * The back of an ID returned by a [file upload](#create_file) with a `purpose` value of
-           * `identity_document`.
+           * The back of an ID returned by a <a href="https://stripe.com/docs/api#create_file">file
+           * upload</a> with a {@code purpose} value of {@code identity_document}.
            */
           public Builder setBack(EmptyParam back) {
             this.back = back;
@@ -4027,8 +4028,8 @@ public class CardholderUpdateParams extends ApiRequestParams {
           }
 
           /**
-           * The front of an ID returned by a [file upload](#create_file) with a `purpose` value of
-           * `identity_document`.
+           * The front of an ID returned by a <a href="https://stripe.com/docs/api#create_file">file
+           * upload</a> with a {@code purpose} value of {@code identity_document}.
            */
           public Builder setFront(String front) {
             this.front = front;
@@ -4036,8 +4037,8 @@ public class CardholderUpdateParams extends ApiRequestParams {
           }
 
           /**
-           * The front of an ID returned by a [file upload](#create_file) with a `purpose` value of
-           * `identity_document`.
+           * The front of an ID returned by a <a href="https://stripe.com/docs/api#create_file">file
+           * upload</a> with a {@code purpose} value of {@code identity_document}.
            */
           public Builder setFront(EmptyParam front) {
             this.front = front;

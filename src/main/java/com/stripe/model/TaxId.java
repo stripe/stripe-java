@@ -38,8 +38,8 @@ public class TaxId extends ApiResource implements HasId {
   String id;
 
   /**
-   * Has the value `true` if the object exists in live mode or the value `false` if the object
-   * exists in test mode.
+   * Has the value {@code true} if the object exists in live mode or the value {@code false} if the
+   * object exists in test mode.
    */
   @SerializedName("livemode")
   Boolean livemode;
@@ -47,16 +47,17 @@ public class TaxId extends ApiResource implements HasId {
   /**
    * String representing the object's type. Objects of the same type share the same value.
    *
-   * <p>Equal to `tax_id`.
+   * <p>Equal to {@code tax_id}.
    */
   @SerializedName("object")
   String object;
 
   /**
-   * Type of the tax ID, one of `eu_vat`, `nz_gst`, `au_abn`, `in_gst`, `no_vat`, `za_vat`,
-   * `ch_vat`, `mx_rfc`, `sg_uen`, `ru_inn`, `ca_bn`, `hk_br`, `es_cif`, `tw_vat`, `th_vat`,
-   * `jp_cn`, `li_uid`, `my_itn`, `us_ein`, `kr_brn`, or `ca_qst`. Note that some legacy tax IDs
-   * have type `unknown`
+   * Type of the tax ID, one of {@code eu_vat}, {@code nz_gst}, {@code au_abn}, {@code in_gst},
+   * {@code no_vat}, {@code za_vat}, {@code ch_vat}, {@code mx_rfc}, {@code sg_uen}, {@code ru_inn},
+   * {@code ca_bn}, {@code hk_br}, {@code es_cif}, {@code tw_vat}, {@code th_vat}, {@code jp_cn},
+   * {@code li_uid}, {@code my_itn}, {@code us_ein}, {@code kr_brn}, or {@code ca_qst}. Note that
+   * some legacy tax IDs have type {@code unknown}
    */
   @SerializedName("type")
   String type;
@@ -68,7 +69,7 @@ public class TaxId extends ApiResource implements HasId {
   @SerializedName("verification")
   Verification verification;
 
-  /** Get id of expandable `customer` object. */
+  /** Get ID of expandable {@code customer} object. */
   public String getCustomer() {
     return (this.customer != null) ? this.customer.getId() : null;
   }
@@ -77,7 +78,7 @@ public class TaxId extends ApiResource implements HasId {
     this.customer = ApiResource.setExpandableFieldId(id, this.customer);
   }
 
-  /** Get expanded `customer`. */
+  /** Get expanded {@code customer}. */
   public Customer getCustomerObject() {
     return (this.customer != null) ? this.customer.getExpanded() : null;
   }
@@ -118,7 +119,10 @@ public class TaxId extends ApiResource implements HasId {
   @Setter
   @EqualsAndHashCode(callSuper = false)
   public static class Verification extends StripeObject {
-    /** Verification status, one of `pending`, `verified`, `unverified`, or `unavailable`. */
+    /**
+     * Verification status, one of {@code pending}, {@code verified}, {@code unverified}, or {@code
+     * unavailable}.
+     */
     @SerializedName("status")
     String status;
 

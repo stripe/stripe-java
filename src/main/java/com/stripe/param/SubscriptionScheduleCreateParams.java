@@ -21,10 +21,10 @@ public class SubscriptionScheduleCreateParams extends ApiRequestParams {
   DefaultSettings defaultSettings;
 
   /**
-   * Configures how the subscription schedule behaves when it ends. Possible values are `release` or
-   * `cancel` with the default being `release`. `release` will end the subscription schedule and
-   * keep the underlying subscription running.`cancel` will end the subscription schedule and cancel
-   * the underlying subscription.
+   * Configures how the subscription schedule behaves when it ends. Possible values are {@code
+   * release} or {@code cancel} with the default being {@code release}. {@code release} will end the
+   * subscription schedule and keep the underlying subscription running.{@code cancel} will end the
+   * subscription schedule and cancel the underlying subscription.
    */
   @SerializedName("end_behavior")
   EndBehavior endBehavior;
@@ -55,24 +55,26 @@ public class SubscriptionScheduleCreateParams extends ApiRequestParams {
   /**
    * Set of key-value pairs that you can attach to an object. This can be useful for storing
    * additional information about the object in a structured format. Individual keys can be unset by
-   * posting an empty value to them. All keys can be unset by posting an empty value to `metadata`.
+   * posting an empty value to them. All keys can be unset by posting an empty value to {@code
+   * metadata}.
    */
   @SerializedName("metadata")
   Map<String, String> metadata;
 
   /**
    * List representing phases of the subscription schedule. Each phase can be customized to have
-   * different durations, plans, and coupons. If there are multiple phases, the `end_date` of one
-   * phase will always equal the `start_date` of the next phase.
+   * different durations, plans, and coupons. If there are multiple phases, the {@code end_date} of
+   * one phase will always equal the {@code start_date} of the next phase.
    */
   @SerializedName("phases")
   List<Phase> phases;
 
   /**
-   * When the subscription schedule starts. We recommend using `now` so that it starts the
+   * When the subscription schedule starts. We recommend using {@code now} so that it starts the
    * subscription immediately. You can also use a Unix timestamp to backdate the subscription so
    * that it starts on a past date, or set a future date for the subscription to start on. When you
-   * backdate, the `billing_cycle_anchor` of the subscription is equivalent to the `start_date`.
+   * backdate, the {@code billing_cycle_anchor} of the subscription is equivalent to the {@code
+   * start_date}.
    */
   @SerializedName("start_date")
   Object startDate;
@@ -148,10 +150,10 @@ public class SubscriptionScheduleCreateParams extends ApiRequestParams {
     }
 
     /**
-     * Configures how the subscription schedule behaves when it ends. Possible values are `release`
-     * or `cancel` with the default being `release`. `release` will end the subscription schedule
-     * and keep the underlying subscription running.`cancel` will end the subscription schedule and
-     * cancel the underlying subscription.
+     * Configures how the subscription schedule behaves when it ends. Possible values are {@code
+     * release} or {@code cancel} with the default being {@code release}. {@code release} will end
+     * the subscription schedule and keep the underlying subscription running.{@code cancel} will
+     * end the subscription schedule and cancel the underlying subscription.
      */
     public Builder setEndBehavior(EndBehavior endBehavior) {
       this.endBehavior = endBehavior;
@@ -275,11 +277,11 @@ public class SubscriptionScheduleCreateParams extends ApiRequestParams {
     }
 
     /**
-     * When the subscription schedule starts. We recommend using `now` so that it starts the
+     * When the subscription schedule starts. We recommend using {@code now} so that it starts the
      * subscription immediately. You can also use a Unix timestamp to backdate the subscription so
      * that it starts on a past date, or set a future date for the subscription to start on. When
-     * you backdate, the `billing_cycle_anchor` of the subscription is equivalent to the
-     * `start_date`.
+     * you backdate, the {@code billing_cycle_anchor} of the subscription is equivalent to the
+     * {@code start_date}.
      */
     public Builder setStartDate(Long startDate) {
       this.startDate = startDate;
@@ -287,11 +289,11 @@ public class SubscriptionScheduleCreateParams extends ApiRequestParams {
     }
 
     /**
-     * When the subscription schedule starts. We recommend using `now` so that it starts the
+     * When the subscription schedule starts. We recommend using {@code now} so that it starts the
      * subscription immediately. You can also use a Unix timestamp to backdate the subscription so
      * that it starts on a past date, or set a future date for the subscription to start on. When
-     * you backdate, the `billing_cycle_anchor` of the subscription is equivalent to the
-     * `start_date`.
+     * you backdate, the {@code billing_cycle_anchor} of the subscription is equivalent to the
+     * {@code start_date}.
      */
     public Builder setStartDate(StartDate startDate) {
       this.startDate = startDate;
@@ -309,10 +311,11 @@ public class SubscriptionScheduleCreateParams extends ApiRequestParams {
     Object billingThresholds;
 
     /**
-     * Either `charge_automatically`, or `send_invoice`. When charging automatically, Stripe will
-     * attempt to pay the underlying subscription at the end of each billing cycle using the default
-     * source attached to the customer. When sending an invoice, Stripe will email your customer an
-     * invoice with payment instructions. Defaults to `charge_automatically` on creation.
+     * Either {@code charge_automatically}, or {@code send_invoice}. When charging automatically,
+     * Stripe will attempt to pay the underlying subscription at the end of each billing cycle using
+     * the default source attached to the customer. When sending an invoice, Stripe will email your
+     * customer an invoice with payment instructions. Defaults to {@code charge_automatically} on
+     * creation.
      */
     @SerializedName("collection_method")
     CollectionMethod collectionMethod;
@@ -395,11 +398,11 @@ public class SubscriptionScheduleCreateParams extends ApiRequestParams {
       }
 
       /**
-       * Either `charge_automatically`, or `send_invoice`. When charging automatically, Stripe will
-       * attempt to pay the underlying subscription at the end of each billing cycle using the
-       * default source attached to the customer. When sending an invoice, Stripe will email your
-       * customer an invoice with payment instructions. Defaults to `charge_automatically` on
-       * creation.
+       * Either {@code charge_automatically}, or {@code send_invoice}. When charging automatically,
+       * Stripe will attempt to pay the underlying subscription at the end of each billing cycle
+       * using the default source attached to the customer. When sending an invoice, Stripe will
+       * email your customer an invoice with payment instructions. Defaults to {@code
+       * charge_automatically} on creation.
        */
       public Builder setCollectionMethod(CollectionMethod collectionMethod) {
         this.collectionMethod = collectionMethod;
@@ -466,9 +469,9 @@ public class SubscriptionScheduleCreateParams extends ApiRequestParams {
       Map<String, Object> extraParams;
 
       /**
-       * Indicates if the `billing_cycle_anchor` should be reset when a threshold is reached. If
-       * true, `billing_cycle_anchor` will be updated to the date/time the threshold was last
-       * reached; otherwise, the value will remain unchanged.
+       * Indicates if the {@code billing_cycle_anchor} should be reset when a threshold is reached.
+       * If true, {@code billing_cycle_anchor} will be updated to the date/time the threshold was
+       * last reached; otherwise, the value will remain unchanged.
        */
       @SerializedName("reset_billing_cycle_anchor")
       Boolean resetBillingCycleAnchor;
@@ -534,9 +537,9 @@ public class SubscriptionScheduleCreateParams extends ApiRequestParams {
         }
 
         /**
-         * Indicates if the `billing_cycle_anchor` should be reset when a threshold is reached. If
-         * true, `billing_cycle_anchor` will be updated to the date/time the threshold was last
-         * reached; otherwise, the value will remain unchanged.
+         * Indicates if the {@code billing_cycle_anchor} should be reset when a threshold is
+         * reached. If true, {@code billing_cycle_anchor} will be updated to the date/time the
+         * threshold was last reached; otherwise, the value will remain unchanged.
          */
         public Builder setResetBillingCycleAnchor(Boolean resetBillingCycleAnchor) {
           this.resetBillingCycleAnchor = resetBillingCycleAnchor;
@@ -549,8 +552,8 @@ public class SubscriptionScheduleCreateParams extends ApiRequestParams {
     public static class InvoiceSettings {
       /**
        * Number of days within which a customer must pay invoices generated by this subscription
-       * schedule. This value will be `null` for subscription schedules where
-       * `billing=charge_automatically`.
+       * schedule. This value will be {@code null} for subscription schedules where {@code
+       * billing=charge_automatically}.
        */
       @SerializedName("days_until_due")
       Long daysUntilDue;
@@ -585,8 +588,8 @@ public class SubscriptionScheduleCreateParams extends ApiRequestParams {
 
         /**
          * Number of days within which a customer must pay invoices generated by this subscription
-         * schedule. This value will be `null` for subscription schedules where
-         * `billing=charge_automatically`.
+         * schedule. This value will be {@code null} for subscription schedules where {@code
+         * billing=charge_automatically}.
          */
         public Builder setDaysUntilDue(Long daysUntilDue) {
           this.daysUntilDue = daysUntilDue;
@@ -648,8 +651,8 @@ public class SubscriptionScheduleCreateParams extends ApiRequestParams {
      * the percentage of the subscription invoice subtotal that will be transferred to the
      * application owner's Stripe account. The request must be made by a platform account on a
      * connected account in order to set an application fee percentage. For more information, see
-     * the application fees
-     * [documentation](https://stripe.com/docs/connect/subscriptions#collecting-fees-on-subscriptions).
+     * the application fees <a
+     * href="https://stripe.com/docs/connect/subscriptions#collecting-fees-on-subscriptions">documentation</a>.
      */
     @SerializedName("application_fee_percent")
     BigDecimal applicationFeePercent;
@@ -662,10 +665,11 @@ public class SubscriptionScheduleCreateParams extends ApiRequestParams {
     Object billingThresholds;
 
     /**
-     * Either `charge_automatically`, or `send_invoice`. When charging automatically, Stripe will
-     * attempt to pay the underlying subscription at the end of each billing cycle using the default
-     * source attached to the customer. When sending an invoice, Stripe will email your customer an
-     * invoice with payment instructions. Defaults to `charge_automatically` on creation.
+     * Either {@code charge_automatically}, or {@code send_invoice}. When charging automatically,
+     * Stripe will attempt to pay the underlying subscription at the end of each billing cycle using
+     * the default source attached to the customer. When sending an invoice, Stripe will email your
+     * customer an invoice with payment instructions. Defaults to {@code charge_automatically} on
+     * creation.
      */
     @SerializedName("collection_method")
     CollectionMethod collectionMethod;
@@ -683,20 +687,20 @@ public class SubscriptionScheduleCreateParams extends ApiRequestParams {
     String defaultPaymentMethod;
 
     /**
-     * A list of [Tax Rate](https://stripe.com/docs/api/tax_rates) ids. These Tax Rates will set the
-     * Subscription's
-     * [`default_tax_rates`](https://stripe.com/docs/api/subscriptions/create#create_subscription-default_tax_rates),
-     * which means they will be the Invoice's
-     * [`default_tax_rates`](https://stripe.com/docs/api/invoices/create#create_invoice-default_tax_rates)
-     * for any Invoices issued by the Subscription during this Phase. When updating, pass an empty
-     * string to remove previously-defined tax rates.
+     * A list of <a href="https://stripe.com/docs/api/tax_rates">Tax Rate</a> ids. These Tax Rates
+     * will set the Subscription's <a
+     * href="https://stripe.com/docs/api/subscriptions/create#create_subscription-default_tax_rates">{@code
+     * default_tax_rates}</a>, which means they will be the Invoice's <a
+     * href="https://stripe.com/docs/api/invoices/create#create_invoice-default_tax_rates">{@code
+     * default_tax_rates}</a> for any Invoices issued by the Subscription during this Phase. When
+     * updating, pass an empty string to remove previously-defined tax rates.
      */
     @SerializedName("default_tax_rates")
     Object defaultTaxRates;
 
     /**
-     * The date at which this phase of the subscription schedule ends. If set, `iterations` must not
-     * be set.
+     * The date at which this phase of the subscription schedule ends. If set, {@code iterations}
+     * must not be set.
      */
     @SerializedName("end_date")
     Long endDate;
@@ -715,9 +719,10 @@ public class SubscriptionScheduleCreateParams extends ApiRequestParams {
     InvoiceSettings invoiceSettings;
 
     /**
-     * Integer representing the multiplier applied to the plan interval. For example, `iterations=2`
-     * applied to a plan with `interval=month` and `interval_count=3` results in a phase of duration
-     * `2 * 3 months = 6 months`. If set, `end_date` must not be set.
+     * Integer representing the multiplier applied to the plan interval. For example, {@code
+     * iterations=2} applied to a plan with {@code interval=month} and {@code interval_count=3}
+     * results in a phase of duration {@code 2 * 3 months = 6 months}. If set, {@code end_date} must
+     * not be set.
      */
     @SerializedName("iterations")
     Long iterations;
@@ -733,10 +738,11 @@ public class SubscriptionScheduleCreateParams extends ApiRequestParams {
      * A non-negative decimal (with at most four decimal places) between 0 and 100. This represents
      * the percentage of the subscription invoice subtotal that will be calculated and added as tax
      * to the final amount in each billing period during thise phase of the schedule. For example, a
-     * plan which charges $10/month with a `tax_percent` of `20.0` will charge $12 per invoice. To
-     * unset a previously-set value, pass an empty string. This field has been deprecated and will
-     * be removed in a future API version, for further information view the [migration
-     * docs](https://stripe.com/docs/billing/migration/taxes) for `tax_rates`.
+     * plan which charges $10/month with a {@code tax_percent} of {@code 20.0} will charge $12 per
+     * invoice. To unset a previously-set value, pass an empty string. This field has been
+     * deprecated and will be removed in a future API version, for further information view the <a
+     * href="https://stripe.com/docs/billing/migration/taxes">migration docs</a> for {@code
+     * tax_rates}.
      */
     @SerializedName("tax_percent")
     BigDecimal taxPercent;
@@ -750,7 +756,7 @@ public class SubscriptionScheduleCreateParams extends ApiRequestParams {
 
     /**
      * Sets the phase to trialing from the start date to this date. Must be before the phase end
-     * date, can not be combined with `trial`
+     * date, can not be combined with {@code trial}
      */
     @SerializedName("trial_end")
     Long trialEnd;
@@ -843,8 +849,8 @@ public class SubscriptionScheduleCreateParams extends ApiRequestParams {
        * the percentage of the subscription invoice subtotal that will be transferred to the
        * application owner's Stripe account. The request must be made by a platform account on a
        * connected account in order to set an application fee percentage. For more information, see
-       * the application fees
-       * [documentation](https://stripe.com/docs/connect/subscriptions#collecting-fees-on-subscriptions).
+       * the application fees <a
+       * href="https://stripe.com/docs/connect/subscriptions#collecting-fees-on-subscriptions">documentation</a>.
        */
       public Builder setApplicationFeePercent(BigDecimal applicationFeePercent) {
         this.applicationFeePercent = applicationFeePercent;
@@ -870,11 +876,11 @@ public class SubscriptionScheduleCreateParams extends ApiRequestParams {
       }
 
       /**
-       * Either `charge_automatically`, or `send_invoice`. When charging automatically, Stripe will
-       * attempt to pay the underlying subscription at the end of each billing cycle using the
-       * default source attached to the customer. When sending an invoice, Stripe will email your
-       * customer an invoice with payment instructions. Defaults to `charge_automatically` on
-       * creation.
+       * Either {@code charge_automatically}, or {@code send_invoice}. When charging automatically,
+       * Stripe will attempt to pay the underlying subscription at the end of each billing cycle
+       * using the default source attached to the customer. When sending an invoice, Stripe will
+       * email your customer an invoice with payment instructions. Defaults to {@code
+       * charge_automatically} on creation.
        */
       public Builder setCollectionMethod(CollectionMethod collectionMethod) {
         this.collectionMethod = collectionMethod;
@@ -926,13 +932,13 @@ public class SubscriptionScheduleCreateParams extends ApiRequestParams {
       }
 
       /**
-       * A list of [Tax Rate](https://stripe.com/docs/api/tax_rates) ids. These Tax Rates will set
-       * the Subscription's
-       * [`default_tax_rates`](https://stripe.com/docs/api/subscriptions/create#create_subscription-default_tax_rates),
-       * which means they will be the Invoice's
-       * [`default_tax_rates`](https://stripe.com/docs/api/invoices/create#create_invoice-default_tax_rates)
-       * for any Invoices issued by the Subscription during this Phase. When updating, pass an empty
-       * string to remove previously-defined tax rates.
+       * A list of <a href="https://stripe.com/docs/api/tax_rates">Tax Rate</a> ids. These Tax Rates
+       * will set the Subscription's <a
+       * href="https://stripe.com/docs/api/subscriptions/create#create_subscription-default_tax_rates">{@code
+       * default_tax_rates}</a>, which means they will be the Invoice's <a
+       * href="https://stripe.com/docs/api/invoices/create#create_invoice-default_tax_rates">{@code
+       * default_tax_rates}</a> for any Invoices issued by the Subscription during this Phase. When
+       * updating, pass an empty string to remove previously-defined tax rates.
        */
       public Builder setDefaultTaxRates(EmptyParam defaultTaxRates) {
         this.defaultTaxRates = defaultTaxRates;
@@ -940,13 +946,13 @@ public class SubscriptionScheduleCreateParams extends ApiRequestParams {
       }
 
       /**
-       * A list of [Tax Rate](https://stripe.com/docs/api/tax_rates) ids. These Tax Rates will set
-       * the Subscription's
-       * [`default_tax_rates`](https://stripe.com/docs/api/subscriptions/create#create_subscription-default_tax_rates),
-       * which means they will be the Invoice's
-       * [`default_tax_rates`](https://stripe.com/docs/api/invoices/create#create_invoice-default_tax_rates)
-       * for any Invoices issued by the Subscription during this Phase. When updating, pass an empty
-       * string to remove previously-defined tax rates.
+       * A list of <a href="https://stripe.com/docs/api/tax_rates">Tax Rate</a> ids. These Tax Rates
+       * will set the Subscription's <a
+       * href="https://stripe.com/docs/api/subscriptions/create#create_subscription-default_tax_rates">{@code
+       * default_tax_rates}</a>, which means they will be the Invoice's <a
+       * href="https://stripe.com/docs/api/invoices/create#create_invoice-default_tax_rates">{@code
+       * default_tax_rates}</a> for any Invoices issued by the Subscription during this Phase. When
+       * updating, pass an empty string to remove previously-defined tax rates.
        */
       public Builder setDefaultTaxRates(List<String> defaultTaxRates) {
         this.defaultTaxRates = defaultTaxRates;
@@ -954,8 +960,8 @@ public class SubscriptionScheduleCreateParams extends ApiRequestParams {
       }
 
       /**
-       * The date at which this phase of the subscription schedule ends. If set, `iterations` must
-       * not be set.
+       * The date at which this phase of the subscription schedule ends. If set, {@code iterations}
+       * must not be set.
        */
       public Builder setEndDate(Long endDate) {
         this.endDate = endDate;
@@ -995,9 +1001,10 @@ public class SubscriptionScheduleCreateParams extends ApiRequestParams {
       }
 
       /**
-       * Integer representing the multiplier applied to the plan interval. For example,
-       * `iterations=2` applied to a plan with `interval=month` and `interval_count=3` results in a
-       * phase of duration `2 * 3 months = 6 months`. If set, `end_date` must not be set.
+       * Integer representing the multiplier applied to the plan interval. For example, {@code
+       * iterations=2} applied to a plan with {@code interval=month} and {@code interval_count=3}
+       * results in a phase of duration {@code 2 * 3 months = 6 months}. If set, {@code end_date}
+       * must not be set.
        */
       public Builder setIterations(Long iterations) {
         this.iterations = iterations;
@@ -1034,10 +1041,11 @@ public class SubscriptionScheduleCreateParams extends ApiRequestParams {
        * A non-negative decimal (with at most four decimal places) between 0 and 100. This
        * represents the percentage of the subscription invoice subtotal that will be calculated and
        * added as tax to the final amount in each billing period during thise phase of the schedule.
-       * For example, a plan which charges $10/month with a `tax_percent` of `20.0` will charge $12
-       * per invoice. To unset a previously-set value, pass an empty string. This field has been
-       * deprecated and will be removed in a future API version, for further information view the
-       * [migration docs](https://stripe.com/docs/billing/migration/taxes) for `tax_rates`.
+       * For example, a plan which charges $10/month with a {@code tax_percent} of {@code 20.0} will
+       * charge $12 per invoice. To unset a previously-set value, pass an empty string. This field
+       * has been deprecated and will be removed in a future API version, for further information
+       * view the <a href="https://stripe.com/docs/billing/migration/taxes">migration docs</a> for
+       * {@code tax_rates}.
        */
       public Builder setTaxPercent(BigDecimal taxPercent) {
         this.taxPercent = taxPercent;
@@ -1055,7 +1063,7 @@ public class SubscriptionScheduleCreateParams extends ApiRequestParams {
 
       /**
        * Sets the phase to trialing from the start date to this date. Must be before the phase end
-       * date, can not be combined with `trial`
+       * date, can not be combined with {@code trial}
        */
       public Builder setTrialEnd(Long trialEnd) {
         this.trialEnd = trialEnd;
@@ -1079,9 +1087,9 @@ public class SubscriptionScheduleCreateParams extends ApiRequestParams {
       Map<String, Object> extraParams;
 
       /**
-       * Indicates if the `billing_cycle_anchor` should be reset when a threshold is reached. If
-       * true, `billing_cycle_anchor` will be updated to the date/time the threshold was last
-       * reached; otherwise, the value will remain unchanged.
+       * Indicates if the {@code billing_cycle_anchor} should be reset when a threshold is reached.
+       * If true, {@code billing_cycle_anchor} will be updated to the date/time the threshold was
+       * last reached; otherwise, the value will remain unchanged.
        */
       @SerializedName("reset_billing_cycle_anchor")
       Boolean resetBillingCycleAnchor;
@@ -1145,9 +1153,9 @@ public class SubscriptionScheduleCreateParams extends ApiRequestParams {
         }
 
         /**
-         * Indicates if the `billing_cycle_anchor` should be reset when a threshold is reached. If
-         * true, `billing_cycle_anchor` will be updated to the date/time the threshold was last
-         * reached; otherwise, the value will remain unchanged.
+         * Indicates if the {@code billing_cycle_anchor} should be reset when a threshold is
+         * reached. If true, {@code billing_cycle_anchor} will be updated to the date/time the
+         * threshold was last reached; otherwise, the value will remain unchanged.
          */
         public Builder setResetBillingCycleAnchor(Boolean resetBillingCycleAnchor) {
           this.resetBillingCycleAnchor = resetBillingCycleAnchor;
@@ -1160,8 +1168,8 @@ public class SubscriptionScheduleCreateParams extends ApiRequestParams {
     public static class InvoiceSettings {
       /**
        * Number of days within which a customer must pay invoices generated by this subscription
-       * schedule. This value will be `null` for subscription schedules where
-       * `billing=charge_automatically`.
+       * schedule. This value will be {@code null} for subscription schedules where {@code
+       * billing=charge_automatically}.
        */
       @SerializedName("days_until_due")
       Long daysUntilDue;
@@ -1196,8 +1204,8 @@ public class SubscriptionScheduleCreateParams extends ApiRequestParams {
 
         /**
          * Number of days within which a customer must pay invoices generated by this subscription
-         * schedule. This value will be `null` for subscription schedules where
-         * `billing=charge_automatically`.
+         * schedule. This value will be {@code null} for subscription schedules where {@code
+         * billing=charge_automatically}.
          */
         public Builder setDaysUntilDue(Long daysUntilDue) {
           this.daysUntilDue = daysUntilDue;
@@ -1258,18 +1266,18 @@ public class SubscriptionScheduleCreateParams extends ApiRequestParams {
       String plan;
 
       /**
-       * Quantity for the given plan. Can be set only if the plan's `usage_type` is `licensed` and
-       * not `metered`.
+       * Quantity for the given plan. Can be set only if the plan's {@code usage_type} is {@code
+       * licensed} and not {@code metered}.
        */
       @SerializedName("quantity")
       Long quantity;
 
       /**
-       * A list of [Tax Rate](https://stripe.com/docs/api/tax_rates) ids. These Tax Rates will
-       * override the
-       * [`default_tax_rates`](https://stripe.com/docs/api/subscriptions/create#create_subscription-default_tax_rates)
-       * on the Subscription. When updating, pass an empty string to remove previously-defined tax
-       * rates.
+       * A list of <a href="https://stripe.com/docs/api/tax_rates">Tax Rate</a> ids. These Tax Rates
+       * will override the <a
+       * href="https://stripe.com/docs/api/subscriptions/create#create_subscription-default_tax_rates">{@code
+       * default_tax_rates}</a> on the Subscription. When updating, pass an empty string to remove
+       * previously-defined tax rates.
        */
       @SerializedName("tax_rates")
       Object taxRates;
@@ -1363,8 +1371,8 @@ public class SubscriptionScheduleCreateParams extends ApiRequestParams {
         }
 
         /**
-         * Quantity for the given plan. Can be set only if the plan's `usage_type` is `licensed` and
-         * not `metered`.
+         * Quantity for the given plan. Can be set only if the plan's {@code usage_type} is {@code
+         * licensed} and not {@code metered}.
          */
         public Builder setQuantity(Long quantity) {
           this.quantity = quantity;
@@ -1400,11 +1408,11 @@ public class SubscriptionScheduleCreateParams extends ApiRequestParams {
         }
 
         /**
-         * A list of [Tax Rate](https://stripe.com/docs/api/tax_rates) ids. These Tax Rates will
-         * override the
-         * [`default_tax_rates`](https://stripe.com/docs/api/subscriptions/create#create_subscription-default_tax_rates)
-         * on the Subscription. When updating, pass an empty string to remove previously-defined tax
-         * rates.
+         * A list of <a href="https://stripe.com/docs/api/tax_rates">Tax Rate</a> ids. These Tax
+         * Rates will override the <a
+         * href="https://stripe.com/docs/api/subscriptions/create#create_subscription-default_tax_rates">{@code
+         * default_tax_rates}</a> on the Subscription. When updating, pass an empty string to remove
+         * previously-defined tax rates.
          */
         public Builder setTaxRates(EmptyParam taxRates) {
           this.taxRates = taxRates;
@@ -1412,11 +1420,11 @@ public class SubscriptionScheduleCreateParams extends ApiRequestParams {
         }
 
         /**
-         * A list of [Tax Rate](https://stripe.com/docs/api/tax_rates) ids. These Tax Rates will
-         * override the
-         * [`default_tax_rates`](https://stripe.com/docs/api/subscriptions/create#create_subscription-default_tax_rates)
-         * on the Subscription. When updating, pass an empty string to remove previously-defined tax
-         * rates.
+         * A list of <a href="https://stripe.com/docs/api/tax_rates">Tax Rate</a> ids. These Tax
+         * Rates will override the <a
+         * href="https://stripe.com/docs/api/subscriptions/create#create_subscription-default_tax_rates">{@code
+         * default_tax_rates}</a> on the Subscription. When updating, pass an empty string to remove
+         * previously-defined tax rates.
          */
         public Builder setTaxRates(List<String> taxRates) {
           this.taxRates = taxRates;

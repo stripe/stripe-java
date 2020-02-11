@@ -18,8 +18,8 @@ import lombok.Setter;
 @EqualsAndHashCode(callSuper = false)
 public class ExchangeRate extends ApiResource implements HasId {
   /**
-   * Unique identifier for the object. Represented as the three-letter [ISO currency
-   * code](https://www.iso.org/iso-4217-currency-codes.html) in lowercase.
+   * Unique identifier for the object. Represented as the three-letter <a
+   * href="https://www.iso.org/iso-4217-currency-codes.html">ISO currency code</a> in lowercase.
    */
   @Getter(onMethod_ = {@Override})
   @SerializedName("id")
@@ -28,7 +28,7 @@ public class ExchangeRate extends ApiResource implements HasId {
   /**
    * String representing the object's type. Objects of the same type share the same value.
    *
-   * <p>Equal to `exchange_rate`.
+   * <p>Equal to {@code exchange_rate}.
    */
   @SerializedName("object")
   String object;

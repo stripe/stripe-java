@@ -18,8 +18,8 @@ public class OrderCreateParams extends ApiRequestParams {
   String coupon;
 
   /**
-   * Three-letter [ISO currency code](https://www.iso.org/iso-4217-currency-codes.html), in
-   * lowercase. Must be a [supported currency](https://stripe.com/docs/currencies).
+   * Three-letter <a href="https://www.iso.org/iso-4217-currency-codes.html">ISO currency code</a>,
+   * in lowercase. Must be a <a href="https://stripe.com/docs/currencies">supported currency</a>.
    */
   @SerializedName("currency")
   String currency;
@@ -27,8 +27,8 @@ public class OrderCreateParams extends ApiRequestParams {
   /**
    * The ID of an existing customer to use for this order. If provided, the customer email and
    * shipping address will be used to create the order. Subsequently, the customer will also be
-   * charged to pay the order. If `email` or `shipping` are also provided, they will override the
-   * values retrieved from the customer object.
+   * charged to pay the order. If {@code email} or {@code shipping} are also provided, they will
+   * override the values retrieved from the customer object.
    */
   @SerializedName("customer")
   String customer;
@@ -57,14 +57,15 @@ public class OrderCreateParams extends ApiRequestParams {
   /**
    * Set of key-value pairs that you can attach to an object. This can be useful for storing
    * additional information about the object in a structured format. Individual keys can be unset by
-   * posting an empty value to them. All keys can be unset by posting an empty value to `metadata`.
+   * posting an empty value to them. All keys can be unset by posting an empty value to {@code
+   * metadata}.
    */
   @SerializedName("metadata")
   Map<String, String> metadata;
 
   /**
-   * Shipping address for the order. Required if any of the SKUs are for products that have
-   * `shippable` set to true.
+   * Shipping address for the order. Required if any of the SKUs are for products that have {@code
+   * shippable} set to true.
    */
   @SerializedName("shipping")
   Shipping shipping;
@@ -137,8 +138,9 @@ public class OrderCreateParams extends ApiRequestParams {
     }
 
     /**
-     * Three-letter [ISO currency code](https://www.iso.org/iso-4217-currency-codes.html), in
-     * lowercase. Must be a [supported currency](https://stripe.com/docs/currencies).
+     * Three-letter <a href="https://www.iso.org/iso-4217-currency-codes.html">ISO currency
+     * code</a>, in lowercase. Must be a <a href="https://stripe.com/docs/currencies">supported
+     * currency</a>.
      */
     public Builder setCurrency(String currency) {
       this.currency = currency;
@@ -148,8 +150,8 @@ public class OrderCreateParams extends ApiRequestParams {
     /**
      * The ID of an existing customer to use for this order. If provided, the customer email and
      * shipping address will be used to create the order. Subsequently, the customer will also be
-     * charged to pay the order. If `email` or `shipping` are also provided, they will override the
-     * values retrieved from the customer object.
+     * charged to pay the order. If {@code email} or {@code shipping} are also provided, they will
+     * override the values retrieved from the customer object.
      */
     public Builder setCustomer(String customer) {
       this.customer = customer;
@@ -267,8 +269,8 @@ public class OrderCreateParams extends ApiRequestParams {
     }
 
     /**
-     * Shipping address for the order. Required if any of the SKUs are for products that have
-     * `shippable` set to true.
+     * Shipping address for the order. Required if any of the SKUs are for products that have {@code
+     * shippable} set to true.
      */
     public Builder setShipping(Shipping shipping) {
       this.shipping = shipping;
@@ -301,8 +303,8 @@ public class OrderCreateParams extends ApiRequestParams {
     String parent;
 
     /**
-     * The quantity of this order item. When type is `sku`, this is the number of instances of the
-     * SKU to be ordered.
+     * The quantity of this order item. When type is {@code sku}, this is the number of instances of
+     * the SKU to be ordered.
      */
     @SerializedName("quantity")
     Long quantity;
@@ -406,8 +408,8 @@ public class OrderCreateParams extends ApiRequestParams {
       }
 
       /**
-       * The quantity of this order item. When type is `sku`, this is the number of instances of the
-       * SKU to be ordered.
+       * The quantity of this order item. When type is {@code sku}, this is the number of instances
+       * of the SKU to be ordered.
        */
       public Builder setQuantity(Long quantity) {
         this.quantity = quantity;
@@ -542,8 +544,8 @@ public class OrderCreateParams extends ApiRequestParams {
       String city;
 
       /**
-       * Two-letter country code ([ISO 3166-1
-       * alpha-2](https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2)).
+       * Two-letter country code (<a href="https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2">ISO
+       * 3166-1 alpha-2</a>).
        */
       @SerializedName("country")
       String country;
@@ -628,8 +630,8 @@ public class OrderCreateParams extends ApiRequestParams {
         }
 
         /**
-         * Two-letter country code ([ISO 3166-1
-         * alpha-2](https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2)).
+         * Two-letter country code (<a href="https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2">ISO
+         * 3166-1 alpha-2</a>).
          */
         public Builder setCountry(String country) {
           this.country = country;

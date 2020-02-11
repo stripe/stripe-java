@@ -26,8 +26,8 @@ public class ReportRun extends ApiResource implements HasId {
   Long created;
 
   /**
-   * If something should go wrong during the run, a message about the failure (populated when
-   * `status=failed`).
+   * If something should go wrong during the run, a message about the failure (populated when {@code
+   * status=failed}).
    */
   @SerializedName("error")
   String error;
@@ -37,14 +37,14 @@ public class ReportRun extends ApiResource implements HasId {
   @SerializedName("id")
   String id;
 
-  /** Always `true`: reports can only be run on live-mode data. */
+  /** Always {@code true}: reports can only be run on live-mode data. */
   @SerializedName("livemode")
   Boolean livemode;
 
   /**
    * String representing the object's type. Objects of the same type share the same value.
    *
-   * <p>Equal to `reporting.report_run`.
+   * <p>Equal to {@code reporting.report_run}.
    */
   @SerializedName("object")
   String object;
@@ -53,30 +53,31 @@ public class ReportRun extends ApiResource implements HasId {
   Parameters parameters;
 
   /**
-   * The ID of the [report type](https://stripe.com/docs/reporting/statements/api#report-types) to
-   * run, such as `"balance.summary.1"`.
+   * The ID of the <a href="https://stripe.com/docs/reporting/statements/api#report-types">report
+   * type</a> to run, such as {@code "balance.summary.1"}.
    */
   @SerializedName("report_type")
   String reportType;
 
   /**
-   * The file object representing the result of the report run (populated when `status=succeeded`).
+   * The file object representing the result of the report run (populated when {@code
+   * status=succeeded}).
    */
   @SerializedName("result")
   File result;
 
   /**
-   * Status of this report run. This will be `pending` when the run is initially created. When the
-   * run finishes, this will be set to `succeeded` and the `result` field will be populated. Rarely,
-   * we may encounter an error, at which point this will be set to `failed` and the `error` field
-   * will be populated.
+   * Status of this report run. This will be {@code pending} when the run is initially created. When
+   * the run finishes, this will be set to {@code succeeded} and the {@code result} field will be
+   * populated. Rarely, we may encounter an error, at which point this will be set to {@code failed}
+   * and the {@code error} field will be populated.
    */
   @SerializedName("status")
   String status;
 
   /**
-   * Timestamp at which this run successfully finished (populated when `status=succeeded`). Measured
-   * in seconds since the Unix epoch.
+   * Timestamp at which this run successfully finished (populated when {@code status=succeeded}).
+   * Measured in seconds since the Unix epoch.
    */
   @SerializedName("succeeded_at")
   Long succeededAt;

@@ -29,11 +29,14 @@ public class BankAccount extends ApiResource
   @SerializedName("account_holder_name")
   String accountHolderName;
 
-  /** The type of entity that holds the account. This can be either `individual` or `company`. */
+  /**
+   * The type of entity that holds the account. This can be either {@code individual} or {@code
+   * company}.
+   */
   @SerializedName("account_holder_type")
   String accountHolderType;
 
-  /** Name of the bank associated with the routing number (e.g., `WELLS FARGO`). */
+  /** Name of the bank associated with the routing number (e.g., {@code WELLS FARGO}). */
   @SerializedName("bank_name")
   String bankName;
 
@@ -42,8 +45,8 @@ public class BankAccount extends ApiResource
   String country;
 
   /**
-   * Three-letter [ISO code for the currency](https://stripe.com/docs/payouts) paid out to the bank
-   * account.
+   * Three-letter <a href="https://stripe.com/docs/payouts">ISO code for the currency</a> paid out
+   * to the bank account.
    */
   @SerializedName("currency")
   String currency;
@@ -89,7 +92,7 @@ public class BankAccount extends ApiResource
   /**
    * String representing the object's type. Objects of the same type share the same value.
    *
-   * <p>Equal to `bank_account`.
+   * <p>Equal to {@code bank_account}.
    */
   @SerializedName("object")
   String object;
@@ -99,25 +102,25 @@ public class BankAccount extends ApiResource
   String routingNumber;
 
   /**
-   * For bank accounts, possible values are `new`, `validated`, `verified`, `verification_failed`,
-   * or `errored`. A bank account that hasn't had any activity or validation performed is `new`. If
-   * Stripe can determine that the bank account exists, its status will be `validated`. Note that
-   * there often isn’t enough information to know (e.g., for smaller credit unions), and the
-   * validation is not always run. If customer bank account verification has succeeded, the bank
-   * account status will be `verified`. If the verification failed for any reason, such as
-   * microdeposit failure, the status will be `verification_failed`. If a transfer sent to this bank
-   * account fails, we'll set the status to `errored` and will not continue to send transfers until
-   * the bank details are updated.
+   * For bank accounts, possible values are {@code new}, {@code validated}, {@code verified}, {@code
+   * verification_failed}, or {@code errored}. A bank account that hasn't had any activity or
+   * validation performed is {@code new}. If Stripe can determine that the bank account exists, its
+   * status will be {@code validated}. Note that there often isn’t enough information to know (e.g.,
+   * for smaller credit unions), and the validation is not always run. If customer bank account
+   * verification has succeeded, the bank account status will be {@code verified}. If the
+   * verification failed for any reason, such as microdeposit failure, the status will be {@code
+   * verification_failed}. If a transfer sent to this bank account fails, we'll set the status to
+   * {@code errored} and will not continue to send transfers until the bank details are updated.
    *
-   * <p>For external accounts, possible values are `new` and `errored`. Validations aren't run
-   * against external accounts because they're only used for payouts. This means the other statuses
-   * don't apply. If a transfer fails, the status is set to `errored` and transfers are stopped
-   * until account details are updated.
+   * <p>For external accounts, possible values are {@code new} and {@code errored}. Validations
+   * aren't run against external accounts because they're only used for payouts. This means the
+   * other statuses don't apply. If a transfer fails, the status is set to {@code errored} and
+   * transfers are stopped until account details are updated.
    */
   @SerializedName("status")
   String status;
 
-  /** Get id of expandable `account` object. */
+  /** Get ID of expandable {@code account} object. */
   public String getAccount() {
     return (this.account != null) ? this.account.getId() : null;
   }
@@ -126,7 +129,7 @@ public class BankAccount extends ApiResource
     this.account = ApiResource.setExpandableFieldId(id, this.account);
   }
 
-  /** Get expanded `account`. */
+  /** Get expanded {@code account}. */
   public Account getAccountObject() {
     return (this.account != null) ? this.account.getExpanded() : null;
   }
@@ -135,7 +138,7 @@ public class BankAccount extends ApiResource
     this.account = new ExpandableField<Account>(expandableObject.getId(), expandableObject);
   }
 
-  /** Get id of expandable `customer` object. */
+  /** Get ID of expandable {@code customer} object. */
   public String getCustomer() {
     return (this.customer != null) ? this.customer.getId() : null;
   }
@@ -144,7 +147,7 @@ public class BankAccount extends ApiResource
     this.customer = ApiResource.setExpandableFieldId(id, this.customer);
   }
 
-  /** Get expanded `customer`. */
+  /** Get expanded {@code customer}. */
   public Customer getCustomerObject() {
     return (this.customer != null) ? this.customer.getExpanded() : null;
   }
@@ -205,8 +208,9 @@ public class BankAccount extends ApiResource
 
   /**
    * Updates the metadata, account holder name, and account holder type of a bank account belonging
-   * to a <a href="/docs/connect/custom-accounts">Custom account</a>, and optionally sets it as the
-   * default for its currency. Other bank account details are not editable by design.
+   * to a <a href="https://stripe.com/docs/connect/custom-accounts">Custom account</a>, and
+   * optionally sets it as the default for its currency. Other bank account details are not editable
+   * by design.
    *
    * <p>You can re-enable a disabled bank account by performing an update call without providing any
    * arguments or changes.
@@ -222,8 +226,9 @@ public class BankAccount extends ApiResource
 
   /**
    * Updates the metadata, account holder name, and account holder type of a bank account belonging
-   * to a <a href="/docs/connect/custom-accounts">Custom account</a>, and optionally sets it as the
-   * default for its currency. Other bank account details are not editable by design.
+   * to a <a href="https://stripe.com/docs/connect/custom-accounts">Custom account</a>, and
+   * optionally sets it as the default for its currency. Other bank account details are not editable
+   * by design.
    *
    * <p>You can re-enable a disabled bank account by performing an update call without providing any
    * arguments or changes.
@@ -268,8 +273,9 @@ public class BankAccount extends ApiResource
 
   /**
    * Updates the metadata, account holder name, and account holder type of a bank account belonging
-   * to a <a href="/docs/connect/custom-accounts">Custom account</a>, and optionally sets it as the
-   * default for its currency. Other bank account details are not editable by design.
+   * to a <a href="https://stripe.com/docs/connect/custom-accounts">Custom account</a>, and
+   * optionally sets it as the default for its currency. Other bank account details are not editable
+   * by design.
    *
    * <p>You can re-enable a disabled bank account by performing an update call without providing any
    * arguments or changes.
@@ -284,8 +290,9 @@ public class BankAccount extends ApiResource
 
   /**
    * Updates the metadata, account holder name, and account holder type of a bank account belonging
-   * to a <a href="/docs/connect/custom-accounts">Custom account</a>, and optionally sets it as the
-   * default for its currency. Other bank account details are not editable by design.
+   * to a <a href="https://stripe.com/docs/connect/custom-accounts">Custom account</a>, and
+   * optionally sets it as the default for its currency. Other bank account details are not editable
+   * by design.
    *
    * <p>You can re-enable a disabled bank account by performing an update call without providing any
    * arguments or changes.
@@ -320,8 +327,9 @@ public class BankAccount extends ApiResource
 
   /**
    * Updates the metadata, account holder name, and account holder type of a bank account belonging
-   * to a <a href="/docs/connect/custom-accounts">Custom account</a>, and optionally sets it as the
-   * default for its currency. Other bank account details are not editable by design.
+   * to a <a href="https://stripe.com/docs/connect/custom-accounts">Custom account</a>, and
+   * optionally sets it as the default for its currency. Other bank account details are not editable
+   * by design.
    *
    * <p>You can re-enable a disabled bank account by performing an update call without providing any
    * arguments or changes.
@@ -336,8 +344,9 @@ public class BankAccount extends ApiResource
 
   /**
    * Updates the metadata, account holder name, and account holder type of a bank account belonging
-   * to a <a href="/docs/connect/custom-accounts">Custom account</a>, and optionally sets it as the
-   * default for its currency. Other bank account details are not editable by design.
+   * to a <a href="https://stripe.com/docs/connect/custom-accounts">Custom account</a>, and
+   * optionally sets it as the default for its currency. Other bank account details are not editable
+   * by design.
    *
    * <p>You can re-enable a disabled bank account by performing an update call without providing any
    * arguments or changes.

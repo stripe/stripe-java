@@ -15,37 +15,39 @@ public class InvoiceUpdateParams extends ApiRequestParams {
   /**
    * A fee in %s that will be applied to the invoice and transferred to the application owner's
    * Stripe account. The request must be made with an OAuth key or the Stripe-Account header in
-   * order to take an application fee. For more information, see the application fees
-   * [documentation](https://stripe.com/docs/connect/subscriptions#invoices).
+   * order to take an application fee. For more information, see the application fees <a
+   * href="https://stripe.com/docs/connect/subscriptions#invoices">documentation</a>.
    */
   @SerializedName("application_fee_amount")
   Long applicationFeeAmount;
 
   /**
-   * Controls whether Stripe will perform [automatic
-   * collection](https://stripe.com/docs/billing/invoices/workflow/#auto_advance) of the invoice.
+   * Controls whether Stripe will perform <a
+   * href="https://stripe.com/docs/billing/invoices/workflow/#auto_advance">automatic collection</a>
+   * of the invoice.
    */
   @SerializedName("auto_advance")
   Boolean autoAdvance;
 
   /**
-   * Either `charge_automatically` or `send_invoice`. This field can be updated only on `draft`
-   * invoices.
+   * Either {@code charge_automatically} or {@code send_invoice}. This field can be updated only on
+   * {@code draft} invoices.
    */
   @SerializedName("collection_method")
   CollectionMethod collectionMethod;
 
   /**
-   * A list of up to 4 custom fields to be displayed on the invoice. If a value for `custom_fields`
-   * is specified, the list specified will replace the existing custom field list on this invoice.
-   * Pass an empty string to remove previously-defined fields.
+   * A list of up to 4 custom fields to be displayed on the invoice. If a value for {@code
+   * custom_fields} is specified, the list specified will replace the existing custom field list on
+   * this invoice. Pass an empty string to remove previously-defined fields.
    */
   @SerializedName("custom_fields")
   Object customFields;
 
   /**
    * The number of days from which the invoice is created until it is due. Only valid for invoices
-   * where `collection_method=send_invoice`. This field can only be updated on `draft` invoices.
+   * where {@code collection_method=send_invoice}. This field can only be updated on {@code draft}
+   * invoices.
    */
   @SerializedName("days_until_due")
   Long daysUntilDue;
@@ -67,8 +69,8 @@ public class InvoiceUpdateParams extends ApiRequestParams {
   Object defaultSource;
 
   /**
-   * The tax rates that will apply to any line item that does not have `tax_rates` set. Pass an
-   * empty string to remove previously-defined tax rates.
+   * The tax rates that will apply to any line item that does not have {@code tax_rates} set. Pass
+   * an empty string to remove previously-defined tax rates.
    */
   @SerializedName("default_tax_rates")
   Object defaultTaxRates;
@@ -81,8 +83,8 @@ public class InvoiceUpdateParams extends ApiRequestParams {
   Object description;
 
   /**
-   * The date on which payment for this invoice is due. Only valid for invoices where
-   * `collection_method=send_invoice`. This field can only be updated on `draft` invoices.
+   * The date on which payment for this invoice is due. Only valid for invoices where {@code
+   * collection_method=send_invoice}. This field can only be updated on {@code draft} invoices.
    */
   @SerializedName("due_date")
   Long dueDate;
@@ -107,7 +109,8 @@ public class InvoiceUpdateParams extends ApiRequestParams {
   /**
    * Set of key-value pairs that you can attach to an object. This can be useful for storing
    * additional information about the object in a structured format. Individual keys can be unset by
-   * posting an empty value to them. All keys can be unset by posting an empty value to `metadata`.
+   * posting an empty value to them. All keys can be unset by posting an empty value to {@code
+   * metadata}.
    */
   @SerializedName("metadata")
   Map<String, String> metadata;
@@ -115,8 +118,8 @@ public class InvoiceUpdateParams extends ApiRequestParams {
   /**
    * Extra information about a charge for the customer's credit card statement. It must contain at
    * least one letter. If not specified and this invoice is part of a subscription, the default
-   * `statement_descriptor` will be set to the first subscription item's product's
-   * `statement_descriptor`.
+   * {@code statement_descriptor} will be set to the first subscription item's product's {@code
+   * statement_descriptor}.
    */
   @SerializedName("statement_descriptor")
   Object statementDescriptor;
@@ -124,9 +127,10 @@ public class InvoiceUpdateParams extends ApiRequestParams {
   /**
    * The percent tax rate applied to the invoice, represented as a non-negative decimal number (with
    * at most four decimal places) between 0 and 100. To unset a previously-set value, pass an empty
-   * string. This field can be updated only on `draft` invoices. This field has been deprecated and
-   * will be removed in a future API version, for further information view the [migration
-   * docs](https://stripe.com/docs/billing/migration/taxes) for `tax_rates`.
+   * string. This field can be updated only on {@code draft} invoices. This field has been
+   * deprecated and will be removed in a future API version, for further information view the <a
+   * href="https://stripe.com/docs/billing/migration/taxes">migration docs</a> for {@code
+   * tax_rates}.
    */
   @SerializedName("tax_percent")
   Object taxPercent;
@@ -240,8 +244,8 @@ public class InvoiceUpdateParams extends ApiRequestParams {
     /**
      * A fee in %s that will be applied to the invoice and transferred to the application owner's
      * Stripe account. The request must be made with an OAuth key or the Stripe-Account header in
-     * order to take an application fee. For more information, see the application fees
-     * [documentation](https://stripe.com/docs/connect/subscriptions#invoices).
+     * order to take an application fee. For more information, see the application fees <a
+     * href="https://stripe.com/docs/connect/subscriptions#invoices">documentation</a>.
      */
     public Builder setApplicationFeeAmount(Long applicationFeeAmount) {
       this.applicationFeeAmount = applicationFeeAmount;
@@ -249,8 +253,9 @@ public class InvoiceUpdateParams extends ApiRequestParams {
     }
 
     /**
-     * Controls whether Stripe will perform [automatic
-     * collection](https://stripe.com/docs/billing/invoices/workflow/#auto_advance) of the invoice.
+     * Controls whether Stripe will perform <a
+     * href="https://stripe.com/docs/billing/invoices/workflow/#auto_advance">automatic
+     * collection</a> of the invoice.
      */
     public Builder setAutoAdvance(Boolean autoAdvance) {
       this.autoAdvance = autoAdvance;
@@ -258,8 +263,8 @@ public class InvoiceUpdateParams extends ApiRequestParams {
     }
 
     /**
-     * Either `charge_automatically` or `send_invoice`. This field can be updated only on `draft`
-     * invoices.
+     * Either {@code charge_automatically} or {@code send_invoice}. This field can be updated only
+     * on {@code draft} invoices.
      */
     public Builder setCollectionMethod(CollectionMethod collectionMethod) {
       this.collectionMethod = collectionMethod;
@@ -295,8 +300,8 @@ public class InvoiceUpdateParams extends ApiRequestParams {
     }
 
     /**
-     * A list of up to 4 custom fields to be displayed on the invoice. If a value for
-     * `custom_fields` is specified, the list specified will replace the existing custom field list
+     * A list of up to 4 custom fields to be displayed on the invoice. If a value for {@code
+     * custom_fields} is specified, the list specified will replace the existing custom field list
      * on this invoice. Pass an empty string to remove previously-defined fields.
      */
     public Builder setCustomFields(EmptyParam customFields) {
@@ -305,8 +310,8 @@ public class InvoiceUpdateParams extends ApiRequestParams {
     }
 
     /**
-     * A list of up to 4 custom fields to be displayed on the invoice. If a value for
-     * `custom_fields` is specified, the list specified will replace the existing custom field list
+     * A list of up to 4 custom fields to be displayed on the invoice. If a value for {@code
+     * custom_fields} is specified, the list specified will replace the existing custom field list
      * on this invoice. Pass an empty string to remove previously-defined fields.
      */
     public Builder setCustomFields(List<CustomField> customFields) {
@@ -316,7 +321,8 @@ public class InvoiceUpdateParams extends ApiRequestParams {
 
     /**
      * The number of days from which the invoice is created until it is due. Only valid for invoices
-     * where `collection_method=send_invoice`. This field can only be updated on `draft` invoices.
+     * where {@code collection_method=send_invoice}. This field can only be updated on {@code draft}
+     * invoices.
      */
     public Builder setDaysUntilDue(Long daysUntilDue) {
       this.daysUntilDue = daysUntilDue;
@@ -392,8 +398,8 @@ public class InvoiceUpdateParams extends ApiRequestParams {
     }
 
     /**
-     * The tax rates that will apply to any line item that does not have `tax_rates` set. Pass an
-     * empty string to remove previously-defined tax rates.
+     * The tax rates that will apply to any line item that does not have {@code tax_rates} set. Pass
+     * an empty string to remove previously-defined tax rates.
      */
     public Builder setDefaultTaxRates(EmptyParam defaultTaxRates) {
       this.defaultTaxRates = defaultTaxRates;
@@ -401,8 +407,8 @@ public class InvoiceUpdateParams extends ApiRequestParams {
     }
 
     /**
-     * The tax rates that will apply to any line item that does not have `tax_rates` set. Pass an
-     * empty string to remove previously-defined tax rates.
+     * The tax rates that will apply to any line item that does not have {@code tax_rates} set. Pass
+     * an empty string to remove previously-defined tax rates.
      */
     public Builder setDefaultTaxRates(List<String> defaultTaxRates) {
       this.defaultTaxRates = defaultTaxRates;
@@ -428,8 +434,8 @@ public class InvoiceUpdateParams extends ApiRequestParams {
     }
 
     /**
-     * The date on which payment for this invoice is due. Only valid for invoices where
-     * `collection_method=send_invoice`. This field can only be updated on `draft` invoices.
+     * The date on which payment for this invoice is due. Only valid for invoices where {@code
+     * collection_method=send_invoice}. This field can only be updated on {@code draft} invoices.
      */
     public Builder setDueDate(Long dueDate) {
       this.dueDate = dueDate;
@@ -529,8 +535,8 @@ public class InvoiceUpdateParams extends ApiRequestParams {
     /**
      * Extra information about a charge for the customer's credit card statement. It must contain at
      * least one letter. If not specified and this invoice is part of a subscription, the default
-     * `statement_descriptor` will be set to the first subscription item's product's
-     * `statement_descriptor`.
+     * {@code statement_descriptor} will be set to the first subscription item's product's {@code
+     * statement_descriptor}.
      */
     public Builder setStatementDescriptor(String statementDescriptor) {
       this.statementDescriptor = statementDescriptor;
@@ -540,8 +546,8 @@ public class InvoiceUpdateParams extends ApiRequestParams {
     /**
      * Extra information about a charge for the customer's credit card statement. It must contain at
      * least one letter. If not specified and this invoice is part of a subscription, the default
-     * `statement_descriptor` will be set to the first subscription item's product's
-     * `statement_descriptor`.
+     * {@code statement_descriptor} will be set to the first subscription item's product's {@code
+     * statement_descriptor}.
      */
     public Builder setStatementDescriptor(EmptyParam statementDescriptor) {
       this.statementDescriptor = statementDescriptor;
@@ -551,9 +557,10 @@ public class InvoiceUpdateParams extends ApiRequestParams {
     /**
      * The percent tax rate applied to the invoice, represented as a non-negative decimal number
      * (with at most four decimal places) between 0 and 100. To unset a previously-set value, pass
-     * an empty string. This field can be updated only on `draft` invoices. This field has been
-     * deprecated and will be removed in a future API version, for further information view the
-     * [migration docs](https://stripe.com/docs/billing/migration/taxes) for `tax_rates`.
+     * an empty string. This field can be updated only on {@code draft} invoices. This field has
+     * been deprecated and will be removed in a future API version, for further information view the
+     * <a href="https://stripe.com/docs/billing/migration/taxes">migration docs</a> for {@code
+     * tax_rates}.
      */
     public Builder setTaxPercent(BigDecimal taxPercent) {
       this.taxPercent = taxPercent;
@@ -563,9 +570,10 @@ public class InvoiceUpdateParams extends ApiRequestParams {
     /**
      * The percent tax rate applied to the invoice, represented as a non-negative decimal number
      * (with at most four decimal places) between 0 and 100. To unset a previously-set value, pass
-     * an empty string. This field can be updated only on `draft` invoices. This field has been
-     * deprecated and will be removed in a future API version, for further information view the
-     * [migration docs](https://stripe.com/docs/billing/migration/taxes) for `tax_rates`.
+     * an empty string. This field can be updated only on {@code draft} invoices. This field has
+     * been deprecated and will be removed in a future API version, for further information view the
+     * <a href="https://stripe.com/docs/billing/migration/taxes">migration docs</a> for {@code
+     * tax_rates}.
      */
     public Builder setTaxPercent(EmptyParam taxPercent) {
       this.taxPercent = taxPercent;

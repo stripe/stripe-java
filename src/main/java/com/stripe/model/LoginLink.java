@@ -22,7 +22,7 @@ public class LoginLink extends ApiResource {
   /**
    * String representing the object's type. Objects of the same type share the same value.
    *
-   * <p>Equal to `login_link`.
+   * <p>Equal to {@code login_link}.
    */
   @SerializedName("object")
   String object;
@@ -34,8 +34,9 @@ public class LoginLink extends ApiResource {
   /**
    * Creates a single-use login link for an Express account to access their Stripe dashboard.
    *
-   * <p><strong>You may only create login links for <a href="/docs/connect/express-accounts">Express
-   * accounts</a> connected to your platform</strong>.
+   * <p><strong>You may only create login links for <a
+   * href="https://stripe.com/docs/connect/express-accounts">Express accounts</a> connected to your
+   * platform</strong>.
    */
   public static LoginLink createOnAccount(
       String account, Map<String, Object> params, RequestOptions options) throws StripeException {
@@ -51,8 +52,9 @@ public class LoginLink extends ApiResource {
   /**
    * Creates a single-use login link for an Express account to access their Stripe dashboard.
    *
-   * <p><strong>You may only create login links for <a href="/docs/connect/express-accounts">Express
-   * accounts</a> connected to your platform</strong>.
+   * <p><strong>You may only create login links for <a
+   * href="https://stripe.com/docs/connect/express-accounts">Express accounts</a> connected to your
+   * platform</strong>.
    */
   public static LoginLink createOnAccount(
       String account, LoginLinkCreateOnAccountParams params, RequestOptions options)

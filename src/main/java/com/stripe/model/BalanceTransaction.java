@@ -31,8 +31,8 @@ public class BalanceTransaction extends ApiResource implements HasId {
   Long created;
 
   /**
-   * Three-letter [ISO currency code](https://www.iso.org/iso-4217-currency-codes.html), in
-   * lowercase. Must be a [supported currency](https://stripe.com/docs/currencies).
+   * Three-letter <a href="https://www.iso.org/iso-4217-currency-codes.html">ISO currency code</a>,
+   * in lowercase. Must be a <a href="https://stripe.com/docs/currencies">supported currency</a>.
    */
   @SerializedName("currency")
   String currency;
@@ -43,12 +43,12 @@ public class BalanceTransaction extends ApiResource implements HasId {
 
   /**
    * The exchange rate used, if applicable, for this transaction. Specifically, if money was
-   * converted from currency A to currency B, then the `amount` in currency A, times
-   * `exchange_rate`, would be the `amount` in currency B. For example, suppose you charged a
-   * customer 10.00 EUR. Then the PaymentIntent's `amount` would be `1000` and `currency` would be
-   * `eur`. Suppose this was converted into 12.34 USD in your Stripe account. Then the
-   * BalanceTransaction's `amount` would be `1234`, `currency` would be `usd`, and `exchange_rate`
-   * would be `1.234`.
+   * converted from currency A to currency B, then the {@code amount} in currency A, times {@code
+   * exchange_rate}, would be the {@code amount} in currency B. For example, suppose you charged a
+   * customer 10.00 EUR. Then the PaymentIntent's {@code amount} would be {@code 1000} and {@code
+   * currency} would be {@code eur}. Suppose this was converted into 12.34 USD in your Stripe
+   * account. Then the BalanceTransaction's {@code amount} would be {@code 1234}, {@code currency}
+   * would be {@code usd}, and {@code exchange_rate} would be {@code 1.234}.
    */
   @SerializedName("exchange_rate")
   BigDecimal exchangeRate;
@@ -73,14 +73,15 @@ public class BalanceTransaction extends ApiResource implements HasId {
   /**
    * String representing the object's type. Objects of the same type share the same value.
    *
-   * <p>Equal to `balance_transaction`.
+   * <p>Equal to {@code balance_transaction}.
    */
   @SerializedName("object")
   String object;
 
   /**
-   * [Learn more](https://stripe.com/docs/reports/reporting-categories) about how reporting
-   * categories can help you understand balance transactions from an accounting perspective.
+   * <a href="https://stripe.com/docs/reports/reporting-categories">Learn more</a> about how
+   * reporting categories can help you understand balance transactions from an accounting
+   * perspective.
    */
   @SerializedName("reporting_category")
   String reportingCategory;
@@ -92,36 +93,40 @@ public class BalanceTransaction extends ApiResource implements HasId {
   ExpandableField<BalanceTransactionSource> source;
 
   /**
-   * If the transaction's net funds are available in the Stripe balance yet. Either `available` or
-   * `pending`.
+   * If the transaction's net funds are available in the Stripe balance yet. Either {@code
+   * available} or {@code pending}.
    */
   @SerializedName("status")
   String status;
 
   /**
-   * Transaction type: `adjustment`, `advance`, `advance_funding`, `application_fee`,
-   * `application_fee_refund`, `charge`, `connect_collection_transfer`,
-   * `issuing_authorization_hold`, `issuing_authorization_release`, `issuing_transaction`,
-   * `payment`, `payment_failure_refund`, `payment_refund`, `payout`, `payout_cancel`,
-   * `payout_failure`, `refund`, `refund_failure`, `reserve_transaction`, `reserved_funds`,
-   * `stripe_fee`, `stripe_fx_fee`, `tax_fee`, `topup`, `topup_reversal`, `transfer`,
-   * `transfer_cancel`, `transfer_failure`, or `transfer_refund`. [Learn
-   * more](https://stripe.com/docs/reports/balance-transaction-types) about balance transaction
-   * types and what they represent. If you are looking to classify transactions for accounting
-   * purposes, you might want to consider `reporting_category` instead.
+   * Transaction type: {@code adjustment}, {@code advance}, {@code advance_funding}, {@code
+   * application_fee}, {@code application_fee_refund}, {@code charge}, {@code
+   * connect_collection_transfer}, {@code issuing_authorization_hold}, {@code
+   * issuing_authorization_release}, {@code issuing_transaction}, {@code payment}, {@code
+   * payment_failure_refund}, {@code payment_refund}, {@code payout}, {@code payout_cancel}, {@code
+   * payout_failure}, {@code refund}, {@code refund_failure}, {@code reserve_transaction}, {@code
+   * reserved_funds}, {@code stripe_fee}, {@code stripe_fx_fee}, {@code tax_fee}, {@code topup},
+   * {@code topup_reversal}, {@code transfer}, {@code transfer_cancel}, {@code transfer_failure}, or
+   * {@code transfer_refund}. <a
+   * href="https://stripe.com/docs/reports/balance-transaction-types">Learn more</a> about balance
+   * transaction types and what they represent. If you are looking to classify transactions for
+   * accounting purposes, you might want to consider {@code reporting_category} instead.
    *
-   * <p>One of `adjustment`, `advance`, `advance_funding`, `application_fee`,
-   * `application_fee_refund`, `charge`, `connect_collection_transfer`,
-   * `issuing_authorization_hold`, `issuing_authorization_release`, `issuing_transaction`,
-   * `payment`, `payment_failure_refund`, `payment_refund`, `payout`, `payout_cancel`,
-   * `payout_failure`, `refund`, `refund_failure`, `reserve_transaction`, `reserved_funds`,
-   * `stripe_fee`, `stripe_fx_fee`, `tax_fee`, `topup`, `topup_reversal`, `transfer`,
-   * `transfer_cancel`, `transfer_failure`, or `transfer_refund`.
+   * <p>One of {@code adjustment}, {@code advance}, {@code advance_funding}, {@code
+   * application_fee}, {@code application_fee_refund}, {@code charge}, {@code
+   * connect_collection_transfer}, {@code issuing_authorization_hold}, {@code
+   * issuing_authorization_release}, {@code issuing_transaction}, {@code payment}, {@code
+   * payment_failure_refund}, {@code payment_refund}, {@code payout}, {@code payout_cancel}, {@code
+   * payout_failure}, {@code refund}, {@code refund_failure}, {@code reserve_transaction}, {@code
+   * reserved_funds}, {@code stripe_fee}, {@code stripe_fx_fee}, {@code tax_fee}, {@code topup},
+   * {@code topup_reversal}, {@code transfer}, {@code transfer_cancel}, {@code transfer_failure}, or
+   * {@code transfer_refund}.
    */
   @SerializedName("type")
   String type;
 
-  /** Get id of expandable `source` object. */
+  /** Get ID of expandable {@code source} object. */
   public String getSource() {
     return (this.source != null) ? this.source.getId() : null;
   }
@@ -130,7 +135,7 @@ public class BalanceTransaction extends ApiResource implements HasId {
     this.source = ApiResource.setExpandableFieldId(id, this.source);
   }
 
-  /** Get expanded `source`. */
+  /** Get expanded {@code source}. */
   public BalanceTransactionSource getSourceObject() {
     return (this.source != null) ? this.source.getExpanded() : null;
   }
@@ -259,8 +264,9 @@ public class BalanceTransaction extends ApiResource implements HasId {
     String application;
 
     /**
-     * Three-letter [ISO currency code](https://www.iso.org/iso-4217-currency-codes.html), in
-     * lowercase. Must be a [supported currency](https://stripe.com/docs/currencies).
+     * Three-letter <a href="https://www.iso.org/iso-4217-currency-codes.html">ISO currency
+     * code</a>, in lowercase. Must be a <a href="https://stripe.com/docs/currencies">supported
+     * currency</a>.
      */
     @SerializedName("currency")
     String currency;
@@ -269,7 +275,7 @@ public class BalanceTransaction extends ApiResource implements HasId {
     @SerializedName("description")
     String description;
 
-    /** Type of the fee, one of: `application_fee`, `stripe_fee` or `tax`. */
+    /** Type of the fee, one of: {@code application_fee}, {@code stripe_fee} or {@code tax}. */
     @SerializedName("type")
     String type;
   }

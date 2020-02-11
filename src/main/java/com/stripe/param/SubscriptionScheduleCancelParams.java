@@ -24,16 +24,16 @@ public class SubscriptionScheduleCancelParams extends ApiRequestParams {
   Map<String, Object> extraParams;
 
   /**
-   * If the subscription schedule is `active`, indicates whether or not to generate a final invoice
-   * that contains any un-invoiced metered usage and new/pending proration invoice items. Defaults
-   * to `true`.
+   * If the subscription schedule is {@code active}, indicates whether or not to generate a final
+   * invoice that contains any un-invoiced metered usage and new/pending proration invoice items.
+   * Defaults to {@code true}.
    */
   @SerializedName("invoice_now")
   Boolean invoiceNow;
 
   /**
-   * If the subscription schedule is `active`, indicates if the cancellation should be prorated.
-   * Defaults to `true`.
+   * If the subscription schedule is {@code active}, indicates if the cancellation should be
+   * prorated. Defaults to {@code true}.
    */
   @SerializedName("prorate")
   Boolean prorate;
@@ -118,9 +118,9 @@ public class SubscriptionScheduleCancelParams extends ApiRequestParams {
     }
 
     /**
-     * If the subscription schedule is `active`, indicates whether or not to generate a final
+     * If the subscription schedule is {@code active}, indicates whether or not to generate a final
      * invoice that contains any un-invoiced metered usage and new/pending proration invoice items.
-     * Defaults to `true`.
+     * Defaults to {@code true}.
      */
     public Builder setInvoiceNow(Boolean invoiceNow) {
       this.invoiceNow = invoiceNow;
@@ -128,8 +128,8 @@ public class SubscriptionScheduleCancelParams extends ApiRequestParams {
     }
 
     /**
-     * If the subscription schedule is `active`, indicates if the cancellation should be prorated.
-     * Defaults to `true`.
+     * If the subscription schedule is {@code active}, indicates if the cancellation should be
+     * prorated. Defaults to {@code true}.
      */
     public Builder setProrate(Boolean prorate) {
       this.prorate = prorate;

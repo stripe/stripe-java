@@ -11,21 +11,21 @@ import lombok.Getter;
 @Getter
 public class CardCreateParams extends ApiRequestParams {
   /**
-   * Spending rules that give you some control over how your cards can be used. Refer to our
-   * [authorizations](https://stripe.com/docs/issuing/authorizations) documentation for more
+   * Spending rules that give you some control over how your cards can be used. Refer to our <a
+   * href="https://stripe.com/docs/issuing/authorizations">authorizations</a> documentation for more
    * details.
    */
   @SerializedName("authorization_controls")
   AuthorizationControls authorizationControls;
 
   /**
-   * The [Cardholder](https://stripe.com/docs/api#issuing_cardholder_object) object with which the
-   * card will be associated.
+   * The <a href="https://stripe.com/docs/api#issuing_cardholder_object">Cardholder</a> object with
+   * which the card will be associated.
    */
   @SerializedName("cardholder")
   String cardholder;
 
-  /** The currency for the card. This currently must be `usd`. */
+  /** The currency for the card. This currently must be {@code usd}. */
   @SerializedName("currency")
   String currency;
 
@@ -45,7 +45,8 @@ public class CardCreateParams extends ApiRequestParams {
   /**
    * Set of key-value pairs that you can attach to an object. This can be useful for storing
    * additional information about the object in a structured format. Individual keys can be unset by
-   * posting an empty value to them. All keys can be unset by posting an empty value to `metadata`.
+   * posting an empty value to them. All keys can be unset by posting an empty value to {@code
+   * metadata}.
    */
   @SerializedName("metadata")
   Map<String, String> metadata;
@@ -54,7 +55,9 @@ public class CardCreateParams extends ApiRequestParams {
   @SerializedName("replacement_for")
   String replacementFor;
 
-  /** If `replacement_for` is specified, this should indicate why that card is being replaced. */
+  /**
+   * If {@code replacement_for} is specified, this should indicate why that card is being replaced.
+   */
   @SerializedName("replacement_reason")
   ReplacementReason replacementReason;
 
@@ -62,11 +65,11 @@ public class CardCreateParams extends ApiRequestParams {
   @SerializedName("shipping")
   Shipping shipping;
 
-  /** Whether authorizations can be approved on this card. Defaults to `inactive`. */
+  /** Whether authorizations can be approved on this card. Defaults to {@code inactive}. */
   @SerializedName("status")
   Status status;
 
-  /** The type of card to issue. Possible values are `physical` or `virtual`. */
+  /** The type of card to issue. Possible values are {@code physical} or {@code virtual}. */
   @SerializedName("type")
   Type type;
 
@@ -139,9 +142,9 @@ public class CardCreateParams extends ApiRequestParams {
     }
 
     /**
-     * Spending rules that give you some control over how your cards can be used. Refer to our
-     * [authorizations](https://stripe.com/docs/issuing/authorizations) documentation for more
-     * details.
+     * Spending rules that give you some control over how your cards can be used. Refer to our <a
+     * href="https://stripe.com/docs/issuing/authorizations">authorizations</a> documentation for
+     * more details.
      */
     public Builder setAuthorizationControls(AuthorizationControls authorizationControls) {
       this.authorizationControls = authorizationControls;
@@ -149,15 +152,15 @@ public class CardCreateParams extends ApiRequestParams {
     }
 
     /**
-     * The [Cardholder](https://stripe.com/docs/api#issuing_cardholder_object) object with which the
-     * card will be associated.
+     * The <a href="https://stripe.com/docs/api#issuing_cardholder_object">Cardholder</a> object
+     * with which the card will be associated.
      */
     public Builder setCardholder(String cardholder) {
       this.cardholder = cardholder;
       return this;
     }
 
-    /** The currency for the card. This currently must be `usd`. */
+    /** The currency for the card. This currently must be {@code usd}. */
     public Builder setCurrency(String currency) {
       this.currency = currency;
       return this;
@@ -247,7 +250,10 @@ public class CardCreateParams extends ApiRequestParams {
       return this;
     }
 
-    /** If `replacement_for` is specified, this should indicate why that card is being replaced. */
+    /**
+     * If {@code replacement_for} is specified, this should indicate why that card is being
+     * replaced.
+     */
     public Builder setReplacementReason(ReplacementReason replacementReason) {
       this.replacementReason = replacementReason;
       return this;
@@ -259,13 +265,13 @@ public class CardCreateParams extends ApiRequestParams {
       return this;
     }
 
-    /** Whether authorizations can be approved on this card. Defaults to `inactive`. */
+    /** Whether authorizations can be approved on this card. Defaults to {@code inactive}. */
     public Builder setStatus(Status status) {
       this.status = status;
       return this;
     }
 
-    /** The type of card to issue. Possible values are `physical` or `virtual`. */
+    /** The type of card to issue. Possible values are {@code physical} or {@code virtual}. */
     public Builder setType(Type type) {
       this.type = type;
       return this;
@@ -275,16 +281,16 @@ public class CardCreateParams extends ApiRequestParams {
   @Getter
   public static class AuthorizationControls {
     /**
-     * Array of strings containing
-     * [categories](https://stripe.com/docs/api#issuing_authorization_object-merchant_data-category)
+     * Array of strings containing <a
+     * href="https://stripe.com/docs/api#issuing_authorization_object-merchant_data-category">categories</a>
      * of authorizations permitted on this card.
      */
     @SerializedName("allowed_categories")
     List<AllowedCategory> allowedCategories;
 
     /**
-     * Array of strings containing
-     * [categories](https://stripe.com/docs/api#issuing_authorization_object-merchant_data-category)
+     * Array of strings containing <a
+     * href="https://stripe.com/docs/api#issuing_authorization_object-merchant_data-category">categories</a>
      * of authorizations to always decline on this card.
      */
     @SerializedName("blocked_categories")
@@ -473,8 +479,8 @@ public class CardCreateParams extends ApiRequestParams {
       Long amount;
 
       /**
-       * Array of strings containing
-       * [categories](https://stripe.com/docs/api#issuing_authorization_object-merchant_data-category)
+       * Array of strings containing <a
+       * href="https://stripe.com/docs/api#issuing_authorization_object-merchant_data-category">categories</a>
        * on which to apply the spending limit. Leave this blank to limit all charges.
        */
       @SerializedName("categories")
@@ -3413,8 +3419,8 @@ public class CardCreateParams extends ApiRequestParams {
       String city;
 
       /**
-       * Two-letter country code ([ISO 3166-1
-       * alpha-2](https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2)).
+       * Two-letter country code (<a href="https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2">ISO
+       * 3166-1 alpha-2</a>).
        */
       @SerializedName("country")
       String country;
@@ -3499,8 +3505,8 @@ public class CardCreateParams extends ApiRequestParams {
         }
 
         /**
-         * Two-letter country code ([ISO 3166-1
-         * alpha-2](https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2)).
+         * Two-letter country code (<a href="https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2">ISO
+         * 3166-1 alpha-2</a>).
          */
         public Builder setCountry(String country) {
           this.country = country;

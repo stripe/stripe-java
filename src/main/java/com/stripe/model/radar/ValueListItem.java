@@ -36,8 +36,8 @@ public class ValueListItem extends ApiResource implements HasId {
   String id;
 
   /**
-   * Has the value `true` if the object exists in live mode or the value `false` if the object
-   * exists in test mode.
+   * Has the value {@code true} if the object exists in live mode or the value {@code false} if the
+   * object exists in test mode.
    */
   @SerializedName("livemode")
   Boolean livemode;
@@ -45,7 +45,7 @@ public class ValueListItem extends ApiResource implements HasId {
   /**
    * String representing the object's type. Objects of the same type share the same value.
    *
-   * <p>Equal to `radar.value_list_item`.
+   * <p>Equal to {@code radar.value_list_item}.
    */
   @SerializedName("object")
   String object;

@@ -36,7 +36,7 @@ public class CustomerCreateParams extends ApiRequestParams {
 
   /**
    * Customer's email address. It's displayed alongside the customer in your dashboard and can be
-   * useful for searching and tracking. This may be up to *512 characters*.
+   * useful for searching and tracking. This may be up to <em>512 characters</em>.
    */
   @SerializedName("email")
   String email;
@@ -68,7 +68,8 @@ public class CustomerCreateParams extends ApiRequestParams {
   /**
    * Set of key-value pairs that you can attach to an object. This can be useful for storing
    * additional information about the object in a structured format. Individual keys can be unset by
-   * posting an empty value to them. All keys can be unset by posting an empty value to `metadata`.
+   * posting an empty value to them. All keys can be unset by posting an empty value to {@code
+   * metadata}.
    */
   @SerializedName("metadata")
   Map<String, String> metadata;
@@ -95,7 +96,7 @@ public class CustomerCreateParams extends ApiRequestParams {
   @SerializedName("source")
   String source;
 
-  /** The customer's tax exemption. One of `none`, `exempt`, or `reverse`. */
+  /** The customer's tax exemption. One of {@code none}, {@code exempt}, or {@code reverse}. */
   @SerializedName("tax_exempt")
   EnumParam taxExempt;
 
@@ -244,7 +245,7 @@ public class CustomerCreateParams extends ApiRequestParams {
 
     /**
      * Customer's email address. It's displayed alongside the customer in your dashboard and can be
-     * useful for searching and tracking. This may be up to *512 characters*.
+     * useful for searching and tracking. This may be up to <em>512 characters</em>.
      */
     public Builder setEmail(String email) {
       this.email = email;
@@ -404,13 +405,13 @@ public class CustomerCreateParams extends ApiRequestParams {
       return this;
     }
 
-    /** The customer's tax exemption. One of `none`, `exempt`, or `reverse`. */
+    /** The customer's tax exemption. One of {@code none}, {@code exempt}, or {@code reverse}. */
     public Builder setTaxExempt(TaxExempt taxExempt) {
       this.taxExempt = taxExempt;
       return this;
     }
 
-    /** The customer's tax exemption. One of `none`, `exempt`, or `reverse`. */
+    /** The customer's tax exemption. One of {@code none}, {@code exempt}, or {@code reverse}. */
     public Builder setTaxExempt(EmptyParam taxExempt) {
       this.taxExempt = taxExempt;
       return this;
@@ -450,8 +451,8 @@ public class CustomerCreateParams extends ApiRequestParams {
     String city;
 
     /**
-     * Two-letter country code ([ISO 3166-1
-     * alpha-2](https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2)).
+     * Two-letter country code (<a href="https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2">ISO
+     * 3166-1 alpha-2</a>).
      */
     @SerializedName("country")
     String country;
@@ -536,8 +537,8 @@ public class CustomerCreateParams extends ApiRequestParams {
       }
 
       /**
-       * Two-letter country code ([ISO 3166-1
-       * alpha-2](https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2)).
+       * Two-letter country code (<a href="https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2">ISO
+       * 3166-1 alpha-2</a>).
        */
       public Builder setCountry(String country) {
         this.country = country;
@@ -928,8 +929,8 @@ public class CustomerCreateParams extends ApiRequestParams {
       String city;
 
       /**
-       * Two-letter country code ([ISO 3166-1
-       * alpha-2](https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2)).
+       * Two-letter country code (<a href="https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2">ISO
+       * 3166-1 alpha-2</a>).
        */
       @SerializedName("country")
       String country;
@@ -1014,8 +1015,8 @@ public class CustomerCreateParams extends ApiRequestParams {
         }
 
         /**
-         * Two-letter country code ([ISO 3166-1
-         * alpha-2](https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2)).
+         * Two-letter country code (<a href="https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2">ISO
+         * 3166-1 alpha-2</a>).
          */
         public Builder setCountry(String country) {
           this.country = country;
@@ -1089,9 +1090,10 @@ public class CustomerCreateParams extends ApiRequestParams {
     Map<String, Object> extraParams;
 
     /**
-     * Type of the tax ID, one of `eu_vat`, `nz_gst`, `au_abn`, `in_gst`, `no_vat`, `za_vat`,
-     * `ch_vat`, `mx_rfc`, `sg_uen`, `ru_inn`, `ca_bn`, `hk_br`, `es_cif`, `tw_vat`, `th_vat`,
-     * `jp_cn`, `li_uid`, `my_itn`, `us_ein`, `kr_brn`, or `ca_qst`.
+     * Type of the tax ID, one of {@code eu_vat}, {@code nz_gst}, {@code au_abn}, {@code in_gst},
+     * {@code no_vat}, {@code za_vat}, {@code ch_vat}, {@code mx_rfc}, {@code sg_uen}, {@code
+     * ru_inn}, {@code ca_bn}, {@code hk_br}, {@code es_cif}, {@code tw_vat}, {@code th_vat}, {@code
+     * jp_cn}, {@code li_uid}, {@code my_itn}, {@code us_ein}, {@code kr_brn}, or {@code ca_qst}.
      */
     @SerializedName("type")
     Type type;
@@ -1149,9 +1151,11 @@ public class CustomerCreateParams extends ApiRequestParams {
       }
 
       /**
-       * Type of the tax ID, one of `eu_vat`, `nz_gst`, `au_abn`, `in_gst`, `no_vat`, `za_vat`,
-       * `ch_vat`, `mx_rfc`, `sg_uen`, `ru_inn`, `ca_bn`, `hk_br`, `es_cif`, `tw_vat`, `th_vat`,
-       * `jp_cn`, `li_uid`, `my_itn`, `us_ein`, `kr_brn`, or `ca_qst`.
+       * Type of the tax ID, one of {@code eu_vat}, {@code nz_gst}, {@code au_abn}, {@code in_gst},
+       * {@code no_vat}, {@code za_vat}, {@code ch_vat}, {@code mx_rfc}, {@code sg_uen}, {@code
+       * ru_inn}, {@code ca_bn}, {@code hk_br}, {@code es_cif}, {@code tw_vat}, {@code th_vat},
+       * {@code jp_cn}, {@code li_uid}, {@code my_itn}, {@code us_ein}, {@code kr_brn}, or {@code
+       * ca_qst}.
        */
       public Builder setType(Type type) {
         this.type = type;

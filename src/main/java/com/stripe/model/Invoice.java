@@ -43,9 +43,10 @@ public class Invoice extends ApiResource implements HasId, MetadataStore<Invoice
   /**
    * Final amount due at this time for this invoice. If the invoice's total is smaller than the
    * minimum charge amount, for example, or if there is account credit that can be applied to the
-   * invoice, the `amount_due` may be 0. If there is a positive `starting_balance` for the invoice
-   * (the customer owes money), the `amount_due` will also take that into account. The charge that
-   * gets generated for the invoice will be for the amount specified in `amount_due`.
+   * invoice, the {@code amount_due} may be 0. If there is a positive {@code starting_balance} for
+   * the invoice (the customer owes money), the {@code amount_due} will also take that into account.
+   * The charge that gets generated for the invoice will be for the amount specified in {@code
+   * amount_due}.
    */
   @SerializedName("amount_due")
   Long amountDue;
@@ -76,33 +77,35 @@ public class Invoice extends ApiResource implements HasId, MetadataStore<Invoice
 
   /**
    * Whether an attempt has been made to pay the invoice. An invoice is not attempted until 1 hour
-   * after the `invoice.created` webhook, for example, so you might not want to display that invoice
-   * as unpaid to your users.
+   * after the {@code invoice.created} webhook, for example, so you might not want to display that
+   * invoice as unpaid to your users.
    */
   @SerializedName("attempted")
   Boolean attempted;
 
   /**
-   * Controls whether Stripe will perform [automatic
-   * collection](https://stripe.com/docs/billing/invoices/workflow/#auto_advance) of the invoice.
-   * When `false`, the invoice's state will not automatically advance without an explicit action.
+   * Controls whether Stripe will perform <a
+   * href="https://stripe.com/docs/billing/invoices/workflow/#auto_advance">automatic collection</a>
+   * of the invoice. When {@code false}, the invoice's state will not automatically advance without
+   * an explicit action.
    */
   @SerializedName("auto_advance")
   Boolean autoAdvance;
 
   /**
-   * Indicates the reason why the invoice was created. `subscription_cycle` indicates an invoice
-   * created by a subscription advancing into a new period. `subscription_create` indicates an
-   * invoice created due to creating a subscription. `subscription_update` indicates an invoice
-   * created due to updating a subscription. `subscription` is set for all old invoices to indicate
-   * either a change to a subscription or a period advancement. `manual` is set for all invoices
-   * unrelated to a subscription (for example: created via the invoice editor). The `upcoming` value
-   * is reserved for simulated invoices per the upcoming invoice endpoint. `subscription_threshold`
-   * indicates an invoice created due to a billing threshold being reached.
+   * Indicates the reason why the invoice was created. {@code subscription_cycle} indicates an
+   * invoice created by a subscription advancing into a new period. {@code subscription_create}
+   * indicates an invoice created due to creating a subscription. {@code subscription_update}
+   * indicates an invoice created due to updating a subscription. {@code subscription} is set for
+   * all old invoices to indicate either a change to a subscription or a period advancement. {@code
+   * manual} is set for all invoices unrelated to a subscription (for example: created via the
+   * invoice editor). The {@code upcoming} value is reserved for simulated invoices per the upcoming
+   * invoice endpoint. {@code subscription_threshold} indicates an invoice created due to a billing
+   * threshold being reached.
    *
-   * <p>One of `automatic_pending_invoice_item_invoice`, `manual`, `subscription`,
-   * `subscription_create`, `subscription_cycle`, `subscription_threshold`, `subscription_update`,
-   * or `upcoming`.
+   * <p>One of {@code automatic_pending_invoice_item_invoice}, {@code manual}, {@code subscription},
+   * {@code subscription_create}, {@code subscription_cycle}, {@code subscription_threshold}, {@code
+   * subscription_update}, or {@code upcoming}.
    */
   @SerializedName("billing_reason")
   String billingReason;
@@ -114,11 +117,11 @@ public class Invoice extends ApiResource implements HasId, MetadataStore<Invoice
   ExpandableField<Charge> charge;
 
   /**
-   * Either `charge_automatically`, or `send_invoice`. When charging automatically, Stripe will
-   * attempt to pay this invoice using the default source attached to the customer. When sending an
-   * invoice, Stripe will email this invoice to the customer with payment instructions.
+   * Either {@code charge_automatically}, or {@code send_invoice}. When charging automatically,
+   * Stripe will attempt to pay this invoice using the default source attached to the customer. When
+   * sending an invoice, Stripe will email this invoice to the customer with payment instructions.
    *
-   * <p>One of `charge_automatically`, or `send_invoice`.
+   * <p>One of {@code charge_automatically}, or {@code send_invoice}.
    */
   @SerializedName("collection_method")
   String collectionMethod;
@@ -128,8 +131,8 @@ public class Invoice extends ApiResource implements HasId, MetadataStore<Invoice
   Long created;
 
   /**
-   * Three-letter [ISO currency code](https://www.iso.org/iso-4217-currency-codes.html), in
-   * lowercase. Must be a [supported currency](https://stripe.com/docs/currencies).
+   * Three-letter <a href="https://www.iso.org/iso-4217-currency-codes.html">ISO currency code</a>,
+   * in lowercase. Must be a <a href="https://stripe.com/docs/currencies">supported currency</a>.
    */
   @SerializedName("currency")
   String currency;
@@ -145,52 +148,53 @@ public class Invoice extends ApiResource implements HasId, MetadataStore<Invoice
   ExpandableField<Customer> customer;
 
   /**
-   * The customer's address. Until the invoice is finalized, this field will equal
-   * `customer.address`. Once the invoice is finalized, this field will no longer be updated.
+   * The customer's address. Until the invoice is finalized, this field will equal {@code
+   * customer.address}. Once the invoice is finalized, this field will no longer be updated.
    */
   @SerializedName("customer_address")
   Address customerAddress;
 
   /**
-   * The customer's email. Until the invoice is finalized, this field will equal `customer.email`.
-   * Once the invoice is finalized, this field will no longer be updated.
+   * The customer's email. Until the invoice is finalized, this field will equal {@code
+   * customer.email}. Once the invoice is finalized, this field will no longer be updated.
    */
   @SerializedName("customer_email")
   String customerEmail;
 
   /**
-   * The customer's name. Until the invoice is finalized, this field will equal `customer.name`.
-   * Once the invoice is finalized, this field will no longer be updated.
+   * The customer's name. Until the invoice is finalized, this field will equal {@code
+   * customer.name}. Once the invoice is finalized, this field will no longer be updated.
    */
   @SerializedName("customer_name")
   String customerName;
 
   /**
-   * The customer's phone number. Until the invoice is finalized, this field will equal
-   * `customer.phone`. Once the invoice is finalized, this field will no longer be updated.
+   * The customer's phone number. Until the invoice is finalized, this field will equal {@code
+   * customer.phone}. Once the invoice is finalized, this field will no longer be updated.
    */
   @SerializedName("customer_phone")
   String customerPhone;
 
   /**
    * The customer's shipping information. Until the invoice is finalized, this field will equal
-   * `customer.shipping`. Once the invoice is finalized, this field will no longer be updated.
+   * {@code customer.shipping}. Once the invoice is finalized, this field will no longer be updated.
    */
   @SerializedName("customer_shipping")
   ShippingDetails customerShipping;
 
   /**
-   * The customer's tax exempt status. Until the invoice is finalized, this field will equal
-   * `customer.tax_exempt`. Once the invoice is finalized, this field will no longer be updated.
+   * The customer's tax exempt status. Until the invoice is finalized, this field will equal {@code
+   * customer.tax_exempt}. Once the invoice is finalized, this field will no longer be updated.
    *
-   * <p>One of `exempt`, `none`, or `reverse`.
+   * <p>One of {@code exempt}, {@code none}, or {@code reverse}.
    */
   @SerializedName("customer_tax_exempt")
   String customerTaxExempt;
 
   /**
    * The customer's tax IDs. Until the invoice is finalized, this field will contain the same tax
-   * IDs as `customer.tax_ids`. Once the invoice is finalized, this field will no longer be updated.
+   * IDs as {@code customer.tax_ids}. Once the invoice is finalized, this field will no longer be
+   * updated.
    */
   @SerializedName("customer_tax_ids")
   List<Invoice.CustomerTaxId> customerTaxIds;
@@ -235,8 +239,8 @@ public class Invoice extends ApiResource implements HasId, MetadataStore<Invoice
   Discount discount;
 
   /**
-   * The date on which payment for this invoice is due. This value will be `null` for invoices where
-   * `collection_method=charge_automatically`.
+   * The date on which payment for this invoice is due. This value will be {@code null} for invoices
+   * where {@code collection_method=charge_automatically}.
    */
   @SerializedName("due_date")
   Long dueDate;
@@ -273,15 +277,15 @@ public class Invoice extends ApiResource implements HasId, MetadataStore<Invoice
   String invoicePdf;
 
   /**
-   * The individual line items that make up the invoice. `lines` is sorted as follows: invoice items
-   * in reverse chronological order, followed by the subscription, if any.
+   * The individual line items that make up the invoice. {@code lines} is sorted as follows: invoice
+   * items in reverse chronological order, followed by the subscription, if any.
    */
   @SerializedName("lines")
   InvoiceLineItemCollection lines;
 
   /**
-   * Has the value `true` if the object exists in live mode or the value `false` if the object
-   * exists in test mode.
+   * Has the value {@code true} if the object exists in live mode or the value {@code false} if the
+   * object exists in test mode.
    */
   @SerializedName("livemode")
   Boolean livemode;
@@ -295,8 +299,8 @@ public class Invoice extends ApiResource implements HasId, MetadataStore<Invoice
   Map<String, String> metadata;
 
   /**
-   * The time at which payment will next be attempted. This value will be `null` for invoices where
-   * `collection_method=send_invoice`.
+   * The time at which payment will next be attempted. This value will be {@code null} for invoices
+   * where {@code collection_method=send_invoice}.
    */
   @SerializedName("next_payment_attempt")
   Long nextPaymentAttempt;
@@ -311,7 +315,7 @@ public class Invoice extends ApiResource implements HasId, MetadataStore<Invoice
   /**
    * String representing the object's type. Objects of the same type share the same value.
    *
-   * <p>Equal to `invoice`.
+   * <p>Equal to {@code invoice}.
    */
   @SerializedName("object")
   String object;
@@ -365,8 +369,9 @@ public class Invoice extends ApiResource implements HasId, MetadataStore<Invoice
   String statementDescriptor;
 
   /**
-   * The status of the invoice, one of `draft`, `open`, `paid`, `uncollectible`, or `void`. [Learn
-   * more](https://stripe.com/docs/billing/invoices/workflow#workflow-overview)
+   * The status of the invoice, one of {@code draft}, {@code open}, {@code paid}, {@code
+   * uncollectible}, or {@code void}. <a
+   * href="https://stripe.com/docs/billing/invoices/workflow#workflow-overview">Learn more</a>
    */
   @SerializedName("status")
   String status;
@@ -399,8 +404,8 @@ public class Invoice extends ApiResource implements HasId, MetadataStore<Invoice
 
   /**
    * This percentage of the subtotal has been added to the total amount of the invoice, including
-   * invoice line items and discounts. This field is inherited from the subscription's `tax_percent`
-   * field, but can be changed before the invoice is paid. This field defaults to null.
+   * invoice line items and discounts. This field is inherited from the subscription's {@code
+   * tax_percent} field, but can be changed before the invoice is paid. This field defaults to null.
    */
   @SerializedName("tax_percent")
   BigDecimal taxPercent;
@@ -425,13 +430,13 @@ public class Invoice extends ApiResource implements HasId, MetadataStore<Invoice
 
   /**
    * The time at which webhooks for this invoice were successfully delivered (if the invoice had no
-   * webhooks to deliver, this will match `created`). Invoice payment is delayed until webhooks are
-   * delivered, or until all webhook delivery attempts have been exhausted.
+   * webhooks to deliver, this will match {@code created}). Invoice payment is delayed until
+   * webhooks are delivered, or until all webhook delivery attempts have been exhausted.
    */
   @SerializedName("webhooks_delivered_at")
   Long webhooksDeliveredAt;
 
-  /** Get id of expandable `charge` object. */
+  /** Get ID of expandable {@code charge} object. */
   public String getCharge() {
     return (this.charge != null) ? this.charge.getId() : null;
   }
@@ -440,7 +445,7 @@ public class Invoice extends ApiResource implements HasId, MetadataStore<Invoice
     this.charge = ApiResource.setExpandableFieldId(id, this.charge);
   }
 
-  /** Get expanded `charge`. */
+  /** Get expanded {@code charge}. */
   public Charge getChargeObject() {
     return (this.charge != null) ? this.charge.getExpanded() : null;
   }
@@ -449,7 +454,7 @@ public class Invoice extends ApiResource implements HasId, MetadataStore<Invoice
     this.charge = new ExpandableField<Charge>(expandableObject.getId(), expandableObject);
   }
 
-  /** Get id of expandable `customer` object. */
+  /** Get ID of expandable {@code customer} object. */
   public String getCustomer() {
     return (this.customer != null) ? this.customer.getId() : null;
   }
@@ -458,7 +463,7 @@ public class Invoice extends ApiResource implements HasId, MetadataStore<Invoice
     this.customer = ApiResource.setExpandableFieldId(id, this.customer);
   }
 
-  /** Get expanded `customer`. */
+  /** Get expanded {@code customer}. */
   public Customer getCustomerObject() {
     return (this.customer != null) ? this.customer.getExpanded() : null;
   }
@@ -467,7 +472,7 @@ public class Invoice extends ApiResource implements HasId, MetadataStore<Invoice
     this.customer = new ExpandableField<Customer>(expandableObject.getId(), expandableObject);
   }
 
-  /** Get id of expandable `defaultPaymentMethod` object. */
+  /** Get ID of expandable {@code defaultPaymentMethod} object. */
   public String getDefaultPaymentMethod() {
     return (this.defaultPaymentMethod != null) ? this.defaultPaymentMethod.getId() : null;
   }
@@ -476,7 +481,7 @@ public class Invoice extends ApiResource implements HasId, MetadataStore<Invoice
     this.defaultPaymentMethod = ApiResource.setExpandableFieldId(id, this.defaultPaymentMethod);
   }
 
-  /** Get expanded `defaultPaymentMethod`. */
+  /** Get expanded {@code defaultPaymentMethod}. */
   public PaymentMethod getDefaultPaymentMethodObject() {
     return (this.defaultPaymentMethod != null) ? this.defaultPaymentMethod.getExpanded() : null;
   }
@@ -486,7 +491,7 @@ public class Invoice extends ApiResource implements HasId, MetadataStore<Invoice
         new ExpandableField<PaymentMethod>(expandableObject.getId(), expandableObject);
   }
 
-  /** Get id of expandable `defaultSource` object. */
+  /** Get ID of expandable {@code defaultSource} object. */
   public String getDefaultSource() {
     return (this.defaultSource != null) ? this.defaultSource.getId() : null;
   }
@@ -495,7 +500,7 @@ public class Invoice extends ApiResource implements HasId, MetadataStore<Invoice
     this.defaultSource = ApiResource.setExpandableFieldId(id, this.defaultSource);
   }
 
-  /** Get expanded `defaultSource`. */
+  /** Get expanded {@code defaultSource}. */
   public PaymentSource getDefaultSourceObject() {
     return (this.defaultSource != null) ? this.defaultSource.getExpanded() : null;
   }
@@ -505,7 +510,7 @@ public class Invoice extends ApiResource implements HasId, MetadataStore<Invoice
         new ExpandableField<PaymentSource>(expandableObject.getId(), expandableObject);
   }
 
-  /** Get id of expandable `paymentIntent` object. */
+  /** Get ID of expandable {@code paymentIntent} object. */
   public String getPaymentIntent() {
     return (this.paymentIntent != null) ? this.paymentIntent.getId() : null;
   }
@@ -514,7 +519,7 @@ public class Invoice extends ApiResource implements HasId, MetadataStore<Invoice
     this.paymentIntent = ApiResource.setExpandableFieldId(id, this.paymentIntent);
   }
 
-  /** Get expanded `paymentIntent`. */
+  /** Get expanded {@code paymentIntent}. */
   public PaymentIntent getPaymentIntentObject() {
     return (this.paymentIntent != null) ? this.paymentIntent.getExpanded() : null;
   }
@@ -524,7 +529,7 @@ public class Invoice extends ApiResource implements HasId, MetadataStore<Invoice
         new ExpandableField<PaymentIntent>(expandableObject.getId(), expandableObject);
   }
 
-  /** Get id of expandable `subscription` object. */
+  /** Get ID of expandable {@code subscription} object. */
   public String getSubscription() {
     return (this.subscription != null) ? this.subscription.getId() : null;
   }
@@ -533,7 +538,7 @@ public class Invoice extends ApiResource implements HasId, MetadataStore<Invoice
     this.subscription = ApiResource.setExpandableFieldId(id, this.subscription);
   }
 
-  /** Get expanded `subscription`. */
+  /** Get expanded {@code subscription}. */
   public Subscription getSubscriptionObject() {
     return (this.subscription != null) ? this.subscription.getExpanded() : null;
   }
@@ -773,13 +778,13 @@ public class Invoice extends ApiResource implements HasId, MetadataStore<Invoice
 
   /**
    * Draft invoices are fully editable. Once an invoice is <a
-   * href="/docs/billing/invoices/workflow#finalized">finalized</a>, monetary values, as well as
-   * <code>collection_method</code>, become uneditable.
+   * href="https://stripe.com/docs/billing/invoices/workflow#finalized">finalized</a>, monetary
+   * values, as well as <code>collection_method</code>, become uneditable.
    *
    * <p>If you would like to stop the Stripe Billing engine from automatically finalizing,
    * reattempting payments on, sending reminders for, or <a
-   * href="/docs/billing/invoices/reconciliation">automatically reconciling</a> invoices, pass
-   * <code>auto_advance=false</code>.
+   * href="https://stripe.com/docs/billing/invoices/reconciliation">automatically reconciling</a>
+   * invoices, pass <code>auto_advance=false</code>.
    */
   @Override
   public Invoice update(Map<String, Object> params) throws StripeException {
@@ -788,13 +793,13 @@ public class Invoice extends ApiResource implements HasId, MetadataStore<Invoice
 
   /**
    * Draft invoices are fully editable. Once an invoice is <a
-   * href="/docs/billing/invoices/workflow#finalized">finalized</a>, monetary values, as well as
-   * <code>collection_method</code>, become uneditable.
+   * href="https://stripe.com/docs/billing/invoices/workflow#finalized">finalized</a>, monetary
+   * values, as well as <code>collection_method</code>, become uneditable.
    *
    * <p>If you would like to stop the Stripe Billing engine from automatically finalizing,
    * reattempting payments on, sending reminders for, or <a
-   * href="/docs/billing/invoices/reconciliation">automatically reconciling</a> invoices, pass
-   * <code>auto_advance=false</code>.
+   * href="https://stripe.com/docs/billing/invoices/reconciliation">automatically reconciling</a>
+   * invoices, pass <code>auto_advance=false</code>.
    */
   @Override
   public Invoice update(Map<String, Object> params, RequestOptions options) throws StripeException {
@@ -808,13 +813,13 @@ public class Invoice extends ApiResource implements HasId, MetadataStore<Invoice
 
   /**
    * Draft invoices are fully editable. Once an invoice is <a
-   * href="/docs/billing/invoices/workflow#finalized">finalized</a>, monetary values, as well as
-   * <code>collection_method</code>, become uneditable.
+   * href="https://stripe.com/docs/billing/invoices/workflow#finalized">finalized</a>, monetary
+   * values, as well as <code>collection_method</code>, become uneditable.
    *
    * <p>If you would like to stop the Stripe Billing engine from automatically finalizing,
    * reattempting payments on, sending reminders for, or <a
-   * href="/docs/billing/invoices/reconciliation">automatically reconciling</a> invoices, pass
-   * <code>auto_advance=false</code>.
+   * href="https://stripe.com/docs/billing/invoices/reconciliation">automatically reconciling</a>
+   * invoices, pass <code>auto_advance=false</code>.
    */
   public Invoice update(InvoiceUpdateParams params) throws StripeException {
     return update(params, (RequestOptions) null);
@@ -822,13 +827,13 @@ public class Invoice extends ApiResource implements HasId, MetadataStore<Invoice
 
   /**
    * Draft invoices are fully editable. Once an invoice is <a
-   * href="/docs/billing/invoices/workflow#finalized">finalized</a>, monetary values, as well as
-   * <code>collection_method</code>, become uneditable.
+   * href="https://stripe.com/docs/billing/invoices/workflow#finalized">finalized</a>, monetary
+   * values, as well as <code>collection_method</code>, become uneditable.
    *
    * <p>If you would like to stop the Stripe Billing engine from automatically finalizing,
    * reattempting payments on, sending reminders for, or <a
-   * href="/docs/billing/invoices/reconciliation">automatically reconciling</a> invoices, pass
-   * <code>auto_advance=false</code>.
+   * href="https://stripe.com/docs/billing/invoices/reconciliation">automatically reconciling</a>
+   * invoices, pass <code>auto_advance=false</code>.
    */
   public Invoice update(InvoiceUpdateParams params, RequestOptions options) throws StripeException {
     String url =
@@ -842,7 +847,7 @@ public class Invoice extends ApiResource implements HasId, MetadataStore<Invoice
   /**
    * Permanently deletes a draft invoice. This cannot be undone. Attempts to delete invoices that
    * are no longer in a draft state will fail; once an invoice has been finalized, it must be <a
-   * href="#void_invoice">voided</a>.
+   * href="https://stripe.com/docs/api#void_invoice">voided</a>.
    */
   public Invoice delete() throws StripeException {
     return delete((Map<String, Object>) null, (RequestOptions) null);
@@ -851,7 +856,7 @@ public class Invoice extends ApiResource implements HasId, MetadataStore<Invoice
   /**
    * Permanently deletes a draft invoice. This cannot be undone. Attempts to delete invoices that
    * are no longer in a draft state will fail; once an invoice has been finalized, it must be <a
-   * href="#void_invoice">voided</a>.
+   * href="https://stripe.com/docs/api#void_invoice">voided</a>.
    */
   public Invoice delete(RequestOptions options) throws StripeException {
     return delete((Map<String, Object>) null, options);
@@ -860,7 +865,7 @@ public class Invoice extends ApiResource implements HasId, MetadataStore<Invoice
   /**
    * Permanently deletes a draft invoice. This cannot be undone. Attempts to delete invoices that
    * are no longer in a draft state will fail; once an invoice has been finalized, it must be <a
-   * href="#void_invoice">voided</a>.
+   * href="https://stripe.com/docs/api#void_invoice">voided</a>.
    */
   public Invoice delete(Map<String, Object> params) throws StripeException {
     return delete(params, (RequestOptions) null);
@@ -869,7 +874,7 @@ public class Invoice extends ApiResource implements HasId, MetadataStore<Invoice
   /**
    * Permanently deletes a draft invoice. This cannot be undone. Attempts to delete invoices that
    * are no longer in a draft state will fail; once an invoice has been finalized, it must be <a
-   * href="#void_invoice">voided</a>.
+   * href="https://stripe.com/docs/api#void_invoice">voided</a>.
    */
   public Invoice delete(Map<String, Object> params, RequestOptions options) throws StripeException {
     String url =
@@ -1177,8 +1182,8 @@ public class Invoice extends ApiResource implements HasId, MetadataStore<Invoice
 
   /**
    * Mark a finalized invoice as void. This cannot be undone. Voiding an invoice is similar to <a
-   * href="#delete_invoice">deletion</a>, however it only applies to finalized invoices and
-   * maintains a papertrail where the invoice can still be found.
+   * href="https://stripe.com/docs/api#delete_invoice">deletion</a>, however it only applies to
+   * finalized invoices and maintains a papertrail where the invoice can still be found.
    */
   public Invoice voidInvoice() throws StripeException {
     return voidInvoice((Map<String, Object>) null, (RequestOptions) null);
@@ -1186,8 +1191,8 @@ public class Invoice extends ApiResource implements HasId, MetadataStore<Invoice
 
   /**
    * Mark a finalized invoice as void. This cannot be undone. Voiding an invoice is similar to <a
-   * href="#delete_invoice">deletion</a>, however it only applies to finalized invoices and
-   * maintains a papertrail where the invoice can still be found.
+   * href="https://stripe.com/docs/api#delete_invoice">deletion</a>, however it only applies to
+   * finalized invoices and maintains a papertrail where the invoice can still be found.
    */
   public Invoice voidInvoice(RequestOptions options) throws StripeException {
     return voidInvoice((Map<String, Object>) null, options);
@@ -1195,8 +1200,8 @@ public class Invoice extends ApiResource implements HasId, MetadataStore<Invoice
 
   /**
    * Mark a finalized invoice as void. This cannot be undone. Voiding an invoice is similar to <a
-   * href="#delete_invoice">deletion</a>, however it only applies to finalized invoices and
-   * maintains a papertrail where the invoice can still be found.
+   * href="https://stripe.com/docs/api#delete_invoice">deletion</a>, however it only applies to
+   * finalized invoices and maintains a papertrail where the invoice can still be found.
    */
   public Invoice voidInvoice(Map<String, Object> params) throws StripeException {
     return voidInvoice(params, (RequestOptions) null);
@@ -1204,8 +1209,8 @@ public class Invoice extends ApiResource implements HasId, MetadataStore<Invoice
 
   /**
    * Mark a finalized invoice as void. This cannot be undone. Voiding an invoice is similar to <a
-   * href="#delete_invoice">deletion</a>, however it only applies to finalized invoices and
-   * maintains a papertrail where the invoice can still be found.
+   * href="https://stripe.com/docs/api#delete_invoice">deletion</a>, however it only applies to
+   * finalized invoices and maintains a papertrail where the invoice can still be found.
    */
   public Invoice voidInvoice(Map<String, Object> params, RequestOptions options)
       throws StripeException {
@@ -1219,8 +1224,8 @@ public class Invoice extends ApiResource implements HasId, MetadataStore<Invoice
 
   /**
    * Mark a finalized invoice as void. This cannot be undone. Voiding an invoice is similar to <a
-   * href="#delete_invoice">deletion</a>, however it only applies to finalized invoices and
-   * maintains a papertrail where the invoice can still be found.
+   * href="https://stripe.com/docs/api#delete_invoice">deletion</a>, however it only applies to
+   * finalized invoices and maintains a papertrail where the invoice can still be found.
    */
   public Invoice voidInvoice(InvoiceVoidInvoiceParams params) throws StripeException {
     return voidInvoice(params, (RequestOptions) null);
@@ -1228,8 +1233,8 @@ public class Invoice extends ApiResource implements HasId, MetadataStore<Invoice
 
   /**
    * Mark a finalized invoice as void. This cannot be undone. Voiding an invoice is similar to <a
-   * href="#delete_invoice">deletion</a>, however it only applies to finalized invoices and
-   * maintains a papertrail where the invoice can still be found.
+   * href="https://stripe.com/docs/api#delete_invoice">deletion</a>, however it only applies to
+   * finalized invoices and maintains a papertrail where the invoice can still be found.
    */
   public Invoice voidInvoice(InvoiceVoidInvoiceParams params, RequestOptions options)
       throws StripeException {
@@ -1259,9 +1264,11 @@ public class Invoice extends ApiResource implements HasId, MetadataStore<Invoice
   @EqualsAndHashCode(callSuper = false)
   public static class CustomerTaxId extends StripeObject {
     /**
-     * The type of the tax ID, one of `eu_vat`, `nz_gst`, `au_abn`, `in_gst`, `no_vat`, `za_vat`,
-     * `ch_vat`, `mx_rfc`, `sg_uen`, `ru_inn`, `ca_bn`, `hk_br`, `es_cif`, `tw_vat`, `th_vat`,
-     * `jp_cn`, `li_uid`, `my_itn`, `us_ein`, `kr_brn`, `ca_qst`, or `unknown`.
+     * The type of the tax ID, one of {@code eu_vat}, {@code nz_gst}, {@code au_abn}, {@code
+     * in_gst}, {@code no_vat}, {@code za_vat}, {@code ch_vat}, {@code mx_rfc}, {@code sg_uen},
+     * {@code ru_inn}, {@code ca_bn}, {@code hk_br}, {@code es_cif}, {@code tw_vat}, {@code th_vat},
+     * {@code jp_cn}, {@code li_uid}, {@code my_itn}, {@code us_ein}, {@code kr_brn}, {@code
+     * ca_qst}, or {@code unknown}.
      */
     @SerializedName("type")
     String type;
@@ -1310,7 +1317,7 @@ public class Invoice extends ApiResource implements HasId, MetadataStore<Invoice
     @Setter(lombok.AccessLevel.NONE)
     ExpandableField<TaxRate> taxRate;
 
-    /** Get id of expandable `taxRate` object. */
+    /** Get ID of expandable {@code taxRate} object. */
     public String getTaxRate() {
       return (this.taxRate != null) ? this.taxRate.getId() : null;
     }
@@ -1319,7 +1326,7 @@ public class Invoice extends ApiResource implements HasId, MetadataStore<Invoice
       this.taxRate = ApiResource.setExpandableFieldId(id, this.taxRate);
     }
 
-    /** Get expanded `taxRate`. */
+    /** Get expanded {@code taxRate}. */
     public TaxRate getTaxRateObject() {
       return (this.taxRate != null) ? this.taxRate.getExpanded() : null;
     }
@@ -1368,7 +1375,7 @@ public class Invoice extends ApiResource implements HasId, MetadataStore<Invoice
     @Setter(lombok.AccessLevel.NONE)
     ExpandableField<Account> destination;
 
-    /** Get id of expandable `destination` object. */
+    /** Get ID of expandable {@code destination} object. */
     public String getDestination() {
       return (this.destination != null) ? this.destination.getId() : null;
     }
@@ -1377,7 +1384,7 @@ public class Invoice extends ApiResource implements HasId, MetadataStore<Invoice
       this.destination = ApiResource.setExpandableFieldId(id, this.destination);
     }
 
-    /** Get expanded `destination`. */
+    /** Get expanded {@code destination}. */
     public Account getDestinationObject() {
       return (this.destination != null) ? this.destination.getExpanded() : null;
     }

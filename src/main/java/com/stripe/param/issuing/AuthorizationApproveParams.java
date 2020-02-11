@@ -25,10 +25,10 @@ public class AuthorizationApproveParams extends ApiRequestParams {
   Map<String, Object> extraParams;
 
   /**
-   * If the authorization's `is_held_amount_controllable` property is `true`, you may provide this
-   * value to control how much to hold for the authorization. Must be positive (use
-   * [`decline`](https://stripe.com/docs/api/issuing/authorizations/decline) to decline an
-   * authorization request).
+   * If the authorization's {@code is_held_amount_controllable} property is {@code true}, you may
+   * provide this value to control how much to hold for the authorization. Must be positive (use <a
+   * href="https://stripe.com/docs/api/issuing/authorizations/decline">{@code decline}</a> to
+   * decline an authorization request).
    */
   @SerializedName("held_amount")
   Long heldAmount;
@@ -36,7 +36,8 @@ public class AuthorizationApproveParams extends ApiRequestParams {
   /**
    * Set of key-value pairs that you can attach to an object. This can be useful for storing
    * additional information about the object in a structured format. Individual keys can be unset by
-   * posting an empty value to them. All keys can be unset by posting an empty value to `metadata`.
+   * posting an empty value to them. All keys can be unset by posting an empty value to {@code
+   * metadata}.
    */
   @SerializedName("metadata")
   Object metadata;
@@ -121,10 +122,10 @@ public class AuthorizationApproveParams extends ApiRequestParams {
     }
 
     /**
-     * If the authorization's `is_held_amount_controllable` property is `true`, you may provide this
-     * value to control how much to hold for the authorization. Must be positive (use
-     * [`decline`](https://stripe.com/docs/api/issuing/authorizations/decline) to decline an
-     * authorization request).
+     * If the authorization's {@code is_held_amount_controllable} property is {@code true}, you may
+     * provide this value to control how much to hold for the authorization. Must be positive (use
+     * <a href="https://stripe.com/docs/api/issuing/authorizations/decline">{@code decline}</a> to
+     * decline an authorization request).
      */
     public Builder setHeldAmount(Long heldAmount) {
       this.heldAmount = heldAmount;
@@ -162,8 +163,8 @@ public class AuthorizationApproveParams extends ApiRequestParams {
     /**
      * Set of key-value pairs that you can attach to an object. This can be useful for storing
      * additional information about the object in a structured format. Individual keys can be unset
-     * by posting an empty value to them. All keys can be unset by posting an empty value to
-     * `metadata`.
+     * by posting an empty value to them. All keys can be unset by posting an empty value to {@code
+     * metadata}.
      */
     public Builder setMetadata(EmptyParam metadata) {
       this.metadata = metadata;
@@ -173,8 +174,8 @@ public class AuthorizationApproveParams extends ApiRequestParams {
     /**
      * Set of key-value pairs that you can attach to an object. This can be useful for storing
      * additional information about the object in a structured format. Individual keys can be unset
-     * by posting an empty value to them. All keys can be unset by posting an empty value to
-     * `metadata`.
+     * by posting an empty value to them. All keys can be unset by posting an empty value to {@code
+     * metadata}.
      */
     public Builder setMetadata(Map<String, String> metadata) {
       this.metadata = metadata;

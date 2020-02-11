@@ -25,13 +25,13 @@ public class Plan extends ApiResource implements HasId, MetadataStore<Plan> {
   Boolean active;
 
   /**
-   * Specifies a usage aggregation strategy for plans of `usage_type=metered`. Allowed values are
-   * `sum` for summing up all usage during a period, `last_during_period` for picking the last usage
-   * record reported within a period, `last_ever` for picking the last usage record ever (across
-   * period bounds) or `max` which picks the usage record with the maximum reported usage during a
-   * period. Defaults to `sum`.
+   * Specifies a usage aggregation strategy for plans of {@code usage_type=metered}. Allowed values
+   * are {@code sum} for summing up all usage during a period, {@code last_during_period} for
+   * picking the last usage record reported within a period, {@code last_ever} for picking the last
+   * usage record ever (across period bounds) or {@code max} which picks the usage record with the
+   * maximum reported usage during a period. Defaults to {@code sum}.
    *
-   * <p>One of `last_during_period`, `last_ever`, `max`, or `sum`.
+   * <p>One of {@code last_during_period}, {@code last_ever}, {@code max}, or {@code sum}.
    */
   @SerializedName("aggregate_usage")
   String aggregateUsage;
@@ -40,18 +40,19 @@ public class Plan extends ApiResource implements HasId, MetadataStore<Plan> {
   @SerializedName("amount")
   Long amount;
 
-  /** Same as `amount`, but contains a decimal value with at most 12 decimal places. */
+  /** Same as {@code amount}, but contains a decimal value with at most 12 decimal places. */
   @SerializedName("amount_decimal")
   BigDecimal amountDecimal;
 
   /**
-   * Describes how to compute the price per period. Either `per_unit` or `tiered`. `per_unit`
-   * indicates that the fixed amount (specified in `amount`) will be charged per unit in `quantity`
-   * (for plans with `usage_type=licensed`), or per unit of total usage (for plans with
-   * `usage_type=metered`). `tiered` indicates that the unit pricing will be computed using a
-   * tiering strategy as defined using the `tiers` and `tiers_mode` attributes.
+   * Describes how to compute the price per period. Either {@code per_unit} or {@code tiered}.
+   * {@code per_unit} indicates that the fixed amount (specified in {@code amount}) will be charged
+   * per unit in {@code quantity} (for plans with {@code usage_type=licensed}), or per unit of total
+   * usage (for plans with {@code usage_type=metered}). {@code tiered} indicates that the unit
+   * pricing will be computed using a tiering strategy as defined using the {@code tiers} and {@code
+   * tiers_mode} attributes.
    *
-   * <p>One of `per_unit`, or `tiered`.
+   * <p>One of {@code per_unit}, or {@code tiered}.
    */
   @SerializedName("billing_scheme")
   String billingScheme;
@@ -61,8 +62,8 @@ public class Plan extends ApiResource implements HasId, MetadataStore<Plan> {
   Long created;
 
   /**
-   * Three-letter [ISO currency code](https://www.iso.org/iso-4217-currency-codes.html), in
-   * lowercase. Must be a [supported currency](https://stripe.com/docs/currencies).
+   * Three-letter <a href="https://www.iso.org/iso-4217-currency-codes.html">ISO currency code</a>,
+   * in lowercase. Must be a <a href="https://stripe.com/docs/currencies">supported currency</a>.
    */
   @SerializedName("currency")
   String currency;
@@ -77,22 +78,23 @@ public class Plan extends ApiResource implements HasId, MetadataStore<Plan> {
   String id;
 
   /**
-   * One of `day`, `week`, `month` or `year`. The frequency with which a subscription should be
-   * billed.
+   * One of {@code day}, {@code week}, {@code month} or {@code year}. The frequency with which a
+   * subscription should be billed.
    */
   @SerializedName("interval")
   String interval;
 
   /**
-   * The number of intervals (specified in the `interval` property) between subscription billings.
-   * For example, `interval=month` and `interval_count=3` bills every 3 months.
+   * The number of intervals (specified in the {@code interval} property) between subscription
+   * billings. For example, {@code interval=month} and {@code interval_count=3} bills every 3
+   * months.
    */
   @SerializedName("interval_count")
   Long intervalCount;
 
   /**
-   * Has the value `true` if the object exists in live mode or the value `false` if the object
-   * exists in test mode.
+   * Has the value {@code true} if the object exists in live mode or the value {@code false} if the
+   * object exists in test mode.
    */
   @SerializedName("livemode")
   Boolean livemode;
@@ -112,7 +114,7 @@ public class Plan extends ApiResource implements HasId, MetadataStore<Plan> {
   /**
    * String representing the object's type. Objects of the same type share the same value.
    *
-   * <p>Equal to `plan`.
+   * <p>Equal to {@code plan}.
    */
   @SerializedName("object")
   String object;
@@ -124,48 +126,49 @@ public class Plan extends ApiResource implements HasId, MetadataStore<Plan> {
   ExpandableField<Product> product;
 
   /**
-   * Each element represents a pricing tier. This parameter requires `billing_scheme` to be set to
-   * `tiered`. See also the documentation for `billing_scheme`.
+   * Each element represents a pricing tier. This parameter requires {@code billing_scheme} to be
+   * set to {@code tiered}. See also the documentation for {@code billing_scheme}.
    */
   @SerializedName("tiers")
   List<Plan.Tier> tiers;
 
   /**
-   * Defines if the tiering price should be `graduated` or `volume` based. In `volume`-based
-   * tiering, the maximum quantity within a period determines the per unit price, in `graduated`
-   * tiering pricing can successively change as the quantity grows.
+   * Defines if the tiering price should be {@code graduated} or {@code volume} based. In {@code
+   * volume}-based tiering, the maximum quantity within a period determines the per unit price, in
+   * {@code graduated} tiering pricing can successively change as the quantity grows.
    *
-   * <p>One of `graduated`, or `volume`.
+   * <p>One of {@code graduated}, or {@code volume}.
    */
   @SerializedName("tiers_mode")
   String tiersMode;
 
   /**
    * Apply a transformation to the reported usage or set quantity before computing the billed price.
-   * Cannot be combined with `tiers`.
+   * Cannot be combined with {@code tiers}.
    */
   @SerializedName("transform_usage")
   TransformUsage transformUsage;
 
   /**
-   * Default number of trial days when subscribing a customer to this plan using
-   * [`trial_from_plan=true`](https://stripe.com/docs/api#create_subscription-trial_from_plan).
+   * Default number of trial days when subscribing a customer to this plan using <a
+   * href="https://stripe.com/docs/api#create_subscription-trial_from_plan">{@code
+   * trial_from_plan=true}</a>.
    */
   @SerializedName("trial_period_days")
   Long trialPeriodDays;
 
   /**
-   * Configures how the quantity per period should be determined, can be either `metered` or
-   * `licensed`. `licensed` will automatically bill the `quantity` set when adding it to a
-   * subscription, `metered` will aggregate the total usage based on usage records. Defaults to
-   * `licensed`.
+   * Configures how the quantity per period should be determined, can be either {@code metered} or
+   * {@code licensed}. {@code licensed} will automatically bill the {@code quantity} set when adding
+   * it to a subscription, {@code metered} will aggregate the total usage based on usage records.
+   * Defaults to {@code licensed}.
    *
-   * <p>One of `licensed`, or `metered`.
+   * <p>One of {@code licensed}, or {@code metered}.
    */
   @SerializedName("usage_type")
   String usageType;
 
-  /** Get id of expandable `product` object. */
+  /** Get ID of expandable {@code product} object. */
   public String getProduct() {
     return (this.product != null) ? this.product.getId() : null;
   }
@@ -174,7 +177,7 @@ public class Plan extends ApiResource implements HasId, MetadataStore<Plan> {
     this.product = ApiResource.setExpandableFieldId(id, this.product);
   }
 
-  /** Get expanded `product`. */
+  /** Get expanded {@code product}. */
   public Product getProductObject() {
     return (this.product != null) ? this.product.getExpanded() : null;
   }
@@ -354,7 +357,7 @@ public class Plan extends ApiResource implements HasId, MetadataStore<Plan> {
     @SerializedName("flat_amount")
     Long flatAmount;
 
-    /** Same as `flat_amount`, but contains a decimal value with at most 12 decimal places. */
+    /** Same as {@code flat_amount}, but contains a decimal value with at most 12 decimal places. */
     @SerializedName("flat_amount_decimal")
     BigDecimal flatAmountDecimal;
 
@@ -362,7 +365,7 @@ public class Plan extends ApiResource implements HasId, MetadataStore<Plan> {
     @SerializedName("unit_amount")
     Long unitAmount;
 
-    /** Same as `unit_amount`, but contains a decimal value with at most 12 decimal places. */
+    /** Same as {@code unit_amount}, but contains a decimal value with at most 12 decimal places. */
     @SerializedName("unit_amount_decimal")
     BigDecimal unitAmountDecimal;
 
@@ -380,9 +383,9 @@ public class Plan extends ApiResource implements HasId, MetadataStore<Plan> {
     Long divideBy;
 
     /**
-     * After division, either round the result `up` or `down`.
+     * After division, either round the result {@code up} or {@code down}.
      *
-     * <p>One of `down`, or `up`.
+     * <p>One of {@code down}, or {@code up}.
      */
     @SerializedName("round")
     String round;

@@ -21,7 +21,7 @@ public class Application extends StripeObject implements HasId {
   /**
    * String representing the object's type. Objects of the same type share the same value.
    *
-   * <p>Equal to `application`.
+   * <p>Equal to {@code application}.
    */
   @SerializedName("object")
   String object;

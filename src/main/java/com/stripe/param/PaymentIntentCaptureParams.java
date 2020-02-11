@@ -12,16 +12,16 @@ import lombok.Getter;
 public class PaymentIntentCaptureParams extends ApiRequestParams {
   /**
    * The amount to capture from the PaymentIntent, which must be less than or equal to the original
-   * amount. Any additional amount will be automatically refunded. Defaults to the full
-   * `amount_capturable` if not provided.
+   * amount. Any additional amount will be automatically refunded. Defaults to the full {@code
+   * amount_capturable} if not provided.
    */
   @SerializedName("amount_to_capture")
   Long amountToCapture;
 
   /**
    * The amount of the application fee (if any) that will be applied to the payment and transferred
-   * to the application owner's Stripe account. For more information, see the PaymentIntents [use
-   * case for connected accounts](https://stripe.com/docs/payments/connected-accounts).
+   * to the application owner's Stripe account. For more information, see the PaymentIntents <a
+   * href="https://stripe.com/docs/payments/connected-accounts">use case for connected accounts</a>.
    */
   @SerializedName("application_fee_amount")
   Long applicationFeeAmount;
@@ -56,8 +56,8 @@ public class PaymentIntentCaptureParams extends ApiRequestParams {
 
   /**
    * The parameters used to automatically create a Transfer when the payment is captured. For more
-   * information, see the PaymentIntents [use case for connected
-   * accounts](https://stripe.com/docs/payments/connected-accounts).
+   * information, see the PaymentIntents <a
+   * href="https://stripe.com/docs/payments/connected-accounts">use case for connected accounts</a>.
    */
   @SerializedName("transfer_data")
   TransferData transferData;
@@ -113,7 +113,7 @@ public class PaymentIntentCaptureParams extends ApiRequestParams {
     /**
      * The amount to capture from the PaymentIntent, which must be less than or equal to the
      * original amount. Any additional amount will be automatically refunded. Defaults to the full
-     * `amount_capturable` if not provided.
+     * {@code amount_capturable} if not provided.
      */
     public Builder setAmountToCapture(Long amountToCapture) {
       this.amountToCapture = amountToCapture;
@@ -123,8 +123,8 @@ public class PaymentIntentCaptureParams extends ApiRequestParams {
     /**
      * The amount of the application fee (if any) that will be applied to the payment and
      * transferred to the application owner's Stripe account. For more information, see the
-     * PaymentIntents [use case for connected
-     * accounts](https://stripe.com/docs/payments/connected-accounts).
+     * PaymentIntents <a href="https://stripe.com/docs/payments/connected-accounts">use case for
+     * connected accounts</a>.
      */
     public Builder setApplicationFeeAmount(Long applicationFeeAmount) {
       this.applicationFeeAmount = applicationFeeAmount;
@@ -205,8 +205,9 @@ public class PaymentIntentCaptureParams extends ApiRequestParams {
 
     /**
      * The parameters used to automatically create a Transfer when the payment is captured. For more
-     * information, see the PaymentIntents [use case for connected
-     * accounts](https://stripe.com/docs/payments/connected-accounts).
+     * information, see the PaymentIntents <a
+     * href="https://stripe.com/docs/payments/connected-accounts">use case for connected
+     * accounts</a>.
      */
     public Builder setTransferData(TransferData transferData) {
       this.transferData = transferData;

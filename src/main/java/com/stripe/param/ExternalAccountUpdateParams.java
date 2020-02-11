@@ -16,7 +16,10 @@ public class ExternalAccountUpdateParams extends ApiRequestParams {
   @SerializedName("account_holder_name")
   Object accountHolderName;
 
-  /** The type of entity that holds the account. This can be either `individual` or `company`. */
+  /**
+   * The type of entity that holds the account. This can be either {@code individual} or {@code
+   * company}.
+   */
   @SerializedName("account_holder_type")
   EnumParam accountHolderType;
 
@@ -72,7 +75,8 @@ public class ExternalAccountUpdateParams extends ApiRequestParams {
   /**
    * Set of key-value pairs that you can attach to an object. This can be useful for storing
    * additional information about the object in a structured format. Individual keys can be unset by
-   * posting an empty value to them. All keys can be unset by posting an empty value to `metadata`.
+   * posting an empty value to them. All keys can be unset by posting an empty value to {@code
+   * metadata}.
    */
   @SerializedName("metadata")
   Map<String, String> metadata;
@@ -181,13 +185,19 @@ public class ExternalAccountUpdateParams extends ApiRequestParams {
       return this;
     }
 
-    /** The type of entity that holds the account. This can be either `individual` or `company`. */
+    /**
+     * The type of entity that holds the account. This can be either {@code individual} or {@code
+     * company}.
+     */
     public Builder setAccountHolderType(AccountHolderType accountHolderType) {
       this.accountHolderType = accountHolderType;
       return this;
     }
 
-    /** The type of entity that holds the account. This can be either `individual` or `company`. */
+    /**
+     * The type of entity that holds the account. This can be either {@code individual} or {@code
+     * company}.
+     */
     public Builder setAccountHolderType(EmptyParam accountHolderType) {
       this.accountHolderType = accountHolderType;
       return this;

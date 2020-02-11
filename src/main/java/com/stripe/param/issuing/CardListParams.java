@@ -19,10 +19,10 @@ public class CardListParams extends ApiRequestParams {
   Object created;
 
   /**
-   * A cursor for use in pagination. `ending_before` is an object ID that defines your place in the
-   * list. For instance, if you make a list request and receive 100 objects, starting with
-   * `obj_bar`, your subsequent call can include `ending_before=obj_bar` in order to fetch the
-   * previous page of the list.
+   * A cursor for use in pagination. {@code ending_before} is an object ID that defines your place
+   * in the list. For instance, if you make a list request and receive 100 objects, starting with
+   * {@code obj_bar}, your subsequent call can include {@code ending_before=obj_bar} in order to
+   * fetch the previous page of the list.
    */
   @SerializedName("ending_before")
   String endingBefore;
@@ -68,22 +68,22 @@ public class CardListParams extends ApiRequestParams {
   String source;
 
   /**
-   * A cursor for use in pagination. `starting_after` is an object ID that defines your place in the
-   * list. For instance, if you make a list request and receive 100 objects, ending with `obj_foo`,
-   * your subsequent call can include `starting_after=obj_foo` in order to fetch the next page of
-   * the list.
+   * A cursor for use in pagination. {@code starting_after} is an object ID that defines your place
+   * in the list. For instance, if you make a list request and receive 100 objects, ending with
+   * {@code obj_foo}, your subsequent call can include {@code starting_after=obj_foo} in order to
+   * fetch the next page of the list.
    */
   @SerializedName("starting_after")
   String startingAfter;
 
   /**
-   * Only return cards that have the given status. One of `active`, `inactive`, `canceled`, `lost`,
-   * or `stolen`.
+   * Only return cards that have the given status. One of {@code active}, {@code inactive}, {@code
+   * canceled}, {@code lost}, or {@code stolen}.
    */
   @SerializedName("status")
   Status status;
 
-  /** Only return cards that have the given type. One of `virtual` or `physical`. */
+  /** Only return cards that have the given type. One of {@code virtual} or {@code physical}. */
   @SerializedName("type")
   Type type;
 
@@ -189,10 +189,10 @@ public class CardListParams extends ApiRequestParams {
     }
 
     /**
-     * A cursor for use in pagination. `ending_before` is an object ID that defines your place in
-     * the list. For instance, if you make a list request and receive 100 objects, starting with
-     * `obj_bar`, your subsequent call can include `ending_before=obj_bar` in order to fetch the
-     * previous page of the list.
+     * A cursor for use in pagination. {@code ending_before} is an object ID that defines your place
+     * in the list. For instance, if you make a list request and receive 100 objects, starting with
+     * {@code obj_bar}, your subsequent call can include {@code ending_before=obj_bar} in order to
+     * fetch the previous page of the list.
      */
     public Builder setEndingBefore(String endingBefore) {
       this.endingBefore = endingBefore;
@@ -291,10 +291,10 @@ public class CardListParams extends ApiRequestParams {
     }
 
     /**
-     * A cursor for use in pagination. `starting_after` is an object ID that defines your place in
-     * the list. For instance, if you make a list request and receive 100 objects, ending with
-     * `obj_foo`, your subsequent call can include `starting_after=obj_foo` in order to fetch the
-     * next page of the list.
+     * A cursor for use in pagination. {@code starting_after} is an object ID that defines your
+     * place in the list. For instance, if you make a list request and receive 100 objects, ending
+     * with {@code obj_foo}, your subsequent call can include {@code starting_after=obj_foo} in
+     * order to fetch the next page of the list.
      */
     public Builder setStartingAfter(String startingAfter) {
       this.startingAfter = startingAfter;
@@ -302,15 +302,15 @@ public class CardListParams extends ApiRequestParams {
     }
 
     /**
-     * Only return cards that have the given status. One of `active`, `inactive`, `canceled`,
-     * `lost`, or `stolen`.
+     * Only return cards that have the given status. One of {@code active}, {@code inactive}, {@code
+     * canceled}, {@code lost}, or {@code stolen}.
      */
     public Builder setStatus(Status status) {
       this.status = status;
       return this;
     }
 
-    /** Only return cards that have the given type. One of `virtual` or `physical`. */
+    /** Only return cards that have the given type. One of {@code virtual} or {@code physical}. */
     public Builder setType(Type type) {
       this.type = type;
       return this;

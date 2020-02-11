@@ -26,7 +26,7 @@ public class CapabilityUpdateParams extends ApiRequestParams {
   /**
    * Passing true requests the capability for the account, if it is not already requested. A
    * requested capability may not immediately become active. Any requirements to activate the
-   * capability are returned in the `requirements` arrays.
+   * capability are returned in the {@code requirements} arrays.
    */
   @SerializedName("requested")
   Boolean requested;
@@ -109,7 +109,7 @@ public class CapabilityUpdateParams extends ApiRequestParams {
     /**
      * Passing true requests the capability for the account, if it is not already requested. A
      * requested capability may not immediately become active. Any requirements to activate the
-     * capability are returned in the `requirements` arrays.
+     * capability are returned in the {@code requirements} arrays.
      */
     public Builder setRequested(Boolean requested) {
       this.requested = requested;

@@ -37,7 +37,7 @@ public class Source extends ApiResource implements MetadataStore<Source>, Paymen
    * A positive integer in the smallest currency unit (that is, 100 cents for $1.00, or 1 for ¥1,
    * Japanese Yen being a zero-decimal currency) representing the total amount associated with the
    * source. This is the amount for which the source will be chargeable once ready. Required for
-   * `single_use` sources.
+   * {@code single_use} sources.
    */
   @SerializedName("amount")
   Long amount;
@@ -66,9 +66,9 @@ public class Source extends ApiResource implements MetadataStore<Source>, Paymen
   Long created;
 
   /**
-   * Three-letter [ISO code for the currency](https://stripe.com/docs/currencies) associated with
-   * the source. This is the currency for which the source will be chargeable once ready. Required
-   * for `single_use` sources.
+   * Three-letter <a href="https://stripe.com/docs/currencies">ISO code for the currency</a>
+   * associated with the source. This is the currency for which the source will be chargeable once
+   * ready. Required for {@code single_use} sources.
    */
   @SerializedName("currency")
   String currency;
@@ -84,8 +84,8 @@ public class Source extends ApiResource implements MetadataStore<Source>, Paymen
   Eps eps;
 
   /**
-   * The authentication `flow` of the source. `flow` is one of `redirect`, `receiver`,
-   * `code_verification`, `none`.
+   * The authentication {@code flow} of the source. {@code flow} is one of {@code redirect}, {@code
+   * receiver}, {@code code_verification}, {@code none}.
    */
   @SerializedName("flow")
   String flow;
@@ -105,8 +105,8 @@ public class Source extends ApiResource implements MetadataStore<Source>, Paymen
   Klarna klarna;
 
   /**
-   * Has the value `true` if the object exists in live mode or the value `false` if the object
-   * exists in test mode.
+   * Has the value {@code true} if the object exists in live mode or the value {@code false} if the
+   * object exists in test mode.
    */
   @SerializedName("livemode")
   Boolean livemode;
@@ -125,7 +125,7 @@ public class Source extends ApiResource implements MetadataStore<Source>, Paymen
   /**
    * String representing the object's type. Objects of the same type share the same value.
    *
-   * <p>Equal to `source`.
+   * <p>Equal to {@code source}.
    */
   @SerializedName("object")
   String object;
@@ -166,8 +166,8 @@ public class Source extends ApiResource implements MetadataStore<Source>, Paymen
   String statementDescriptor;
 
   /**
-   * The status of the source, one of `canceled`, `chargeable`, `consumed`, `failed`, or `pending`.
-   * Only `chargeable` sources can be used to create a charge.
+   * The status of the source, one of {@code canceled}, {@code chargeable}, {@code consumed}, {@code
+   * failed}, or {@code pending}. Only {@code chargeable} sources can be used to create a charge.
    */
   @SerializedName("status")
   String status;
@@ -176,19 +176,21 @@ public class Source extends ApiResource implements MetadataStore<Source>, Paymen
   ThreeDSecure threeDSecure;
 
   /**
-   * The `type` of the source. The `type` is a payment method, one of `ach_credit_transfer`,
-   * `ach_debit`, `alipay`, `bancontact`, `card`, `card_present`, `eps`, `giropay`, `ideal`,
-   * `multibanco`, `klarna`, `p24`, `sepa_debit`, `sofort`, `three_d_secure`, or `wechat`. An
-   * additional hash is included on the source with a name matching this value. It contains
-   * additional information specific to the [payment method](https://stripe.com/docs/sources) used.
+   * The {@code type} of the source. The {@code type} is a payment method, one of {@code
+   * ach_credit_transfer}, {@code ach_debit}, {@code alipay}, {@code bancontact}, {@code card},
+   * {@code card_present}, {@code eps}, {@code giropay}, {@code ideal}, {@code multibanco}, {@code
+   * klarna}, {@code p24}, {@code sepa_debit}, {@code sofort}, {@code three_d_secure}, or {@code
+   * wechat}. An additional hash is included on the source with a name matching this value. It
+   * contains additional information specific to the <a
+   * href="https://stripe.com/docs/sources">payment method</a> used.
    */
   @SerializedName("type")
   String type;
 
   /**
-   * Either `reusable` or `single_use`. Whether this source should be reusable or not. Some source
-   * types may or may not be reusable by construction, while others may leave the option at
-   * creation. If an incompatible value is passed, an error will be returned.
+   * Either {@code reusable} or {@code single_use}. Whether this source should be reusable or not.
+   * Some source types may or may not be reusable by construction, while others may leave the option
+   * at creation. If an incompatible value is passed, an error will be returned.
    */
   @SerializedName("usage")
   String usage;
@@ -311,7 +313,7 @@ public class Source extends ApiResource implements MetadataStore<Source>, Paymen
    *
    * <p>This request accepts the <code>metadata</code> and <code>owner</code> as arguments. It is
    * also possible to update type specific information for selected payment methods. Please refer to
-   * our <a href="/docs/sources">payment method guides</a> for more detail.
+   * our <a href="https://stripe.com/docs/sources">payment method guides</a> for more detail.
    */
   @Override
   public Source update(Map<String, Object> params) throws StripeException {
@@ -324,7 +326,7 @@ public class Source extends ApiResource implements MetadataStore<Source>, Paymen
    *
    * <p>This request accepts the <code>metadata</code> and <code>owner</code> as arguments. It is
    * also possible to update type specific information for selected payment methods. Please refer to
-   * our <a href="/docs/sources">payment method guides</a> for more detail.
+   * our <a href="https://stripe.com/docs/sources">payment method guides</a> for more detail.
    */
   @Override
   public Source update(Map<String, Object> params, RequestOptions options) throws StripeException {
@@ -342,7 +344,7 @@ public class Source extends ApiResource implements MetadataStore<Source>, Paymen
    *
    * <p>This request accepts the <code>metadata</code> and <code>owner</code> as arguments. It is
    * also possible to update type specific information for selected payment methods. Please refer to
-   * our <a href="/docs/sources">payment method guides</a> for more detail.
+   * our <a href="https://stripe.com/docs/sources">payment method guides</a> for more detail.
    */
   public Source update(SourceUpdateParams params) throws StripeException {
     return update(params, (RequestOptions) null);
@@ -354,7 +356,7 @@ public class Source extends ApiResource implements MetadataStore<Source>, Paymen
    *
    * <p>This request accepts the <code>metadata</code> and <code>owner</code> as arguments. It is
    * also possible to update type specific information for selected payment methods. Please refer to
-   * our <a href="/docs/sources">payment method guides</a> for more detail.
+   * our <a href="https://stripe.com/docs/sources">payment method guides</a> for more detail.
    */
   public Source update(SourceUpdateParams params, RequestOptions options) throws StripeException {
     String url =
@@ -724,10 +726,10 @@ public class Source extends ApiResource implements MetadataStore<Source>, Paymen
     Long attemptsRemaining;
 
     /**
-     * The status of the code verification, either `pending` (awaiting verification,
-     * `attempts_remaining` should be greater than 0), `succeeded` (successful verification) or
-     * `failed` (failed verification, cannot be verified anymore as `attempts_remaining` should be
-     * 0).
+     * The status of the code verification, either {@code pending} (awaiting verification, {@code
+     * attempts_remaining} should be greater than 0), {@code succeeded} (successful verification) or
+     * {@code failed} (failed verification, cannot be verified anymore as {@code attempts_remaining}
+     * should be 0).
      */
     @SerializedName("status")
     String status;
@@ -905,8 +907,9 @@ public class Source extends ApiResource implements MetadataStore<Source>, Paymen
     Long amount;
 
     /**
-     * Three-letter [ISO currency code](https://www.iso.org/iso-4217-currency-codes.html), in
-     * lowercase. Must be a [supported currency](https://stripe.com/docs/currencies).
+     * Three-letter <a href="https://www.iso.org/iso-4217-currency-codes.html">ISO currency
+     * code</a>, in lowercase. Must be a <a href="https://stripe.com/docs/currencies">supported
+     * currency</a>.
      */
     @SerializedName("currency")
     String currency;
@@ -931,7 +934,7 @@ public class Source extends ApiResource implements MetadataStore<Source>, Paymen
     @SerializedName("amount")
     Long amount;
 
-    /** This currency of this order item. Required when `amount` is present. */
+    /** This currency of this order item. Required when {@code amount} is present. */
     @SerializedName("currency")
     String currency;
 
@@ -940,13 +943,13 @@ public class Source extends ApiResource implements MetadataStore<Source>, Paymen
     String description;
 
     /**
-     * The quantity of this order item. When type is `sku`, this is the number of instances of the
-     * SKU to be ordered.
+     * The quantity of this order item. When type is {@code sku}, this is the number of instances of
+     * the SKU to be ordered.
      */
     @SerializedName("quantity")
     Long quantity;
 
-    /** The type of this order item. Must be `sku`, `tax`, or `shipping`. */
+    /** The type of this order item. Must be {@code sku}, {@code tax}, or {@code shipping}. */
     @SerializedName("type")
     String type;
   }
@@ -1031,8 +1034,8 @@ public class Source extends ApiResource implements MetadataStore<Source>, Paymen
     Long amountCharged;
 
     /**
-     * The total amount received by the receiver source. `amount_received = amount_returned +
-     * amount_charged` is true at all time. The amount received is expressed in the source's
+     * The total amount received by the receiver source. {@code amount_received = amount_returned +
+     * amount_charged} is true at all time. The amount received is expressed in the source's
      * currency.
      */
     @SerializedName("amount_received")
@@ -1045,11 +1048,14 @@ public class Source extends ApiResource implements MetadataStore<Source>, Paymen
     @SerializedName("amount_returned")
     Long amountReturned;
 
-    /** Type of refund attribute method, one of `email`, `manual`, or `none`. */
+    /** Type of refund attribute method, one of {@code email}, {@code manual}, or {@code none}. */
     @SerializedName("refund_attributes_method")
     String refundAttributesMethod;
 
-    /** Type of refund attribute status, one of `missing`, `requested`, or `available`. */
+    /**
+     * Type of refund attribute status, one of {@code missing}, {@code requested}, or {@code
+     * available}.
+     */
     @SerializedName("refund_attributes_status")
     String refundAttributesStatus;
   }
@@ -1059,10 +1065,10 @@ public class Source extends ApiResource implements MetadataStore<Source>, Paymen
   @EqualsAndHashCode(callSuper = false)
   public static class RedirectFlow extends StripeObject {
     /**
-     * The failure reason for the redirect, either `user_abort` (the customer aborted or dropped out
-     * of the redirect flow), `declined` (the authentication failed or the transaction was
-     * declined), or `processing_error` (the redirect failed due to a technical error). Present only
-     * if the redirect status is `failed`.
+     * The failure reason for the redirect, either {@code user_abort} (the customer aborted or
+     * dropped out of the redirect flow), {@code declined} (the authentication failed or the
+     * transaction was declined), or {@code processing_error} (the redirect failed due to a
+     * technical error). Present only if the redirect status is {@code failed}.
      */
     @SerializedName("failure_reason")
     String failureReason;
@@ -1072,17 +1078,17 @@ public class Source extends ApiResource implements MetadataStore<Source>, Paymen
     String returnUrl;
 
     /**
-     * The status of the redirect, either `pending` (ready to be used by your customer to
-     * authenticate the transaction), `succeeded` (succesful authentication, cannot be reused) or
-     * `not_required` (redirect should not be used) or `failed` (failed authentication, cannot be
-     * reused).
+     * The status of the redirect, either {@code pending} (ready to be used by your customer to
+     * authenticate the transaction), {@code succeeded} (succesful authentication, cannot be reused)
+     * or {@code not_required} (redirect should not be used) or {@code failed} (failed
+     * authentication, cannot be reused).
      */
     @SerializedName("status")
     String status;
 
     /**
-     * The URL provided to you to redirect a customer to as part of a `redirect` authentication
-     * flow.
+     * The URL provided to you to redirect a customer to as part of a {@code redirect}
+     * authentication flow.
      */
     @SerializedName("url")
     String url;

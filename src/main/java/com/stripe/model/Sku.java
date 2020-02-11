@@ -24,8 +24,8 @@ public class Sku extends ApiResource implements HasId, MetadataStore<Sku> {
 
   /**
    * A dictionary of attributes and values for the attributes defined by the product. If, for
-   * example, a product's attributes are `["size", "gender"]`, a valid SKU has the following
-   * dictionary of attributes: `{"size": "Medium", "gender": "Unisex"}`.
+   * example, a product's attributes are {@code ["size", "gender"]}, a valid SKU has the following
+   * dictionary of attributes: {@code {"size": "Medium", "gender": "Unisex"}}.
    */
   @SerializedName("attributes")
   Map<String, String> attributes;
@@ -35,8 +35,8 @@ public class Sku extends ApiResource implements HasId, MetadataStore<Sku> {
   Long created;
 
   /**
-   * Three-letter [ISO currency code](https://www.iso.org/iso-4217-currency-codes.html), in
-   * lowercase. Must be a [supported currency](https://stripe.com/docs/currencies).
+   * Three-letter <a href="https://www.iso.org/iso-4217-currency-codes.html">ISO currency code</a>,
+   * in lowercase. Must be a <a href="https://stripe.com/docs/currencies">supported currency</a>.
    */
   @SerializedName("currency")
   String currency;
@@ -58,8 +58,8 @@ public class Sku extends ApiResource implements HasId, MetadataStore<Sku> {
   Inventory inventory;
 
   /**
-   * Has the value `true` if the object exists in live mode or the value `false` if the object
-   * exists in test mode.
+   * Has the value {@code true} if the object exists in live mode or the value {@code false} if the
+   * object exists in test mode.
    */
   @SerializedName("livemode")
   Boolean livemode;
@@ -75,7 +75,7 @@ public class Sku extends ApiResource implements HasId, MetadataStore<Sku> {
   /**
    * String representing the object's type. Objects of the same type share the same value.
    *
-   * <p>Equal to `sku`.
+   * <p>Equal to {@code sku}.
    */
   @SerializedName("object")
   String object;
@@ -101,7 +101,7 @@ public class Sku extends ApiResource implements HasId, MetadataStore<Sku> {
   @SerializedName("updated")
   Long updated;
 
-  /** Get id of expandable `product` object. */
+  /** Get ID of expandable {@code product} object. */
   public String getProduct() {
     return (this.product != null) ? this.product.getId() : null;
   }
@@ -110,7 +110,7 @@ public class Sku extends ApiResource implements HasId, MetadataStore<Sku> {
     this.product = ApiResource.setExpandableFieldId(id, this.product);
   }
 
-  /** Get expanded `product`. */
+  /** Get expanded {@code product}. */
   public Product getProductObject() {
     return (this.product != null) ? this.product.getExpanded() : null;
   }
@@ -303,17 +303,24 @@ public class Sku extends ApiResource implements HasId, MetadataStore<Sku> {
   @Setter
   @EqualsAndHashCode(callSuper = false)
   public static class Inventory extends StripeObject {
-    /** The count of inventory available. Will be present if and only if `type` is `finite`. */
+    /**
+     * The count of inventory available. Will be present if and only if {@code type} is {@code
+     * finite}.
+     */
     @SerializedName("quantity")
     Long quantity;
 
-    /** Inventory type. Possible values are `finite`, `bucket` (not quantified), and `infinite`. */
+    /**
+     * Inventory type. Possible values are {@code finite}, {@code bucket} (not quantified), and
+     * {@code infinite}.
+     */
     @SerializedName("type")
     String type;
 
     /**
-     * An indicator of the inventory available. Possible values are `in_stock`, `limited`, and
-     * `out_of_stock`. Will be present if and only if `type` is `bucket`.
+     * An indicator of the inventory available. Possible values are {@code in_stock}, {@code
+     * limited}, and {@code out_of_stock}. Will be present if and only if {@code type} is {@code
+     * bucket}.
      */
     @SerializedName("value")
     String value;

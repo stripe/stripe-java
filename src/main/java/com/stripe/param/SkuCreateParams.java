@@ -13,21 +13,21 @@ import lombok.Getter;
 
 @Getter
 public class SkuCreateParams extends ApiRequestParams {
-  /** Whether the SKU is available for purchase. Default to `true`. */
+  /** Whether the SKU is available for purchase. Default to {@code true}. */
   @SerializedName("active")
   Boolean active;
 
   /**
    * A dictionary of attributes and values for the attributes defined by the product. If, for
-   * example, a product's attributes are `["size", "gender"]`, a valid SKU has the following
-   * dictionary of attributes: `{"size": "Medium", "gender": "Unisex"}`.
+   * example, a product's attributes are {@code ["size", "gender"]}, a valid SKU has the following
+   * dictionary of attributes: {@code {"size": "Medium", "gender": "Unisex"}}.
    */
   @SerializedName("attributes")
   Map<String, String> attributes;
 
   /**
-   * Three-letter [ISO currency code](https://www.iso.org/iso-4217-currency-codes.html), in
-   * lowercase. Must be a [supported currency](https://stripe.com/docs/currencies).
+   * Three-letter <a href="https://www.iso.org/iso-4217-currency-codes.html">ISO currency code</a>,
+   * in lowercase. Must be a <a href="https://stripe.com/docs/currencies">supported currency</a>.
    */
   @SerializedName("currency")
   String currency;
@@ -63,7 +63,8 @@ public class SkuCreateParams extends ApiRequestParams {
   /**
    * Set of key-value pairs that you can attach to an object. This can be useful for storing
    * additional information about the object in a structured format. Individual keys can be unset by
-   * posting an empty value to them. All keys can be unset by posting an empty value to `metadata`.
+   * posting an empty value to them. All keys can be unset by posting an empty value to {@code
+   * metadata}.
    */
   @SerializedName("metadata")
   Map<String, String> metadata;
@@ -79,7 +80,9 @@ public class SkuCreateParams extends ApiRequestParams {
   @SerializedName("price")
   Long price;
 
-  /** The ID of the product this SKU is associated with. Must be a product with type `good`. */
+  /**
+   * The ID of the product this SKU is associated with. Must be a product with type {@code good}.
+   */
   @SerializedName("product")
   String product;
 
@@ -156,7 +159,7 @@ public class SkuCreateParams extends ApiRequestParams {
           this.product);
     }
 
-    /** Whether the SKU is available for purchase. Default to `true`. */
+    /** Whether the SKU is available for purchase. Default to {@code true}. */
     public Builder setActive(Boolean active) {
       this.active = active;
       return this;
@@ -189,8 +192,9 @@ public class SkuCreateParams extends ApiRequestParams {
     }
 
     /**
-     * Three-letter [ISO currency code](https://www.iso.org/iso-4217-currency-codes.html), in
-     * lowercase. Must be a [supported currency](https://stripe.com/docs/currencies).
+     * Three-letter <a href="https://www.iso.org/iso-4217-currency-codes.html">ISO currency
+     * code</a>, in lowercase. Must be a <a href="https://stripe.com/docs/currencies">supported
+     * currency</a>.
      */
     public Builder setCurrency(String currency) {
       this.currency = currency;
@@ -311,7 +315,9 @@ public class SkuCreateParams extends ApiRequestParams {
       return this;
     }
 
-    /** The ID of the product this SKU is associated with. Must be a product with type `good`. */
+    /**
+     * The ID of the product this SKU is associated with. Must be a product with type {@code good}.
+     */
     public Builder setProduct(String product) {
       this.product = product;
       return this;
@@ -329,17 +335,21 @@ public class SkuCreateParams extends ApiRequestParams {
     @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
     Map<String, Object> extraParams;
 
-    /** The count of inventory available. Required if `type` is `finite`. */
+    /** The count of inventory available. Required if {@code type} is {@code finite}. */
     @SerializedName("quantity")
     Long quantity;
 
-    /** Inventory type. Possible values are `finite`, `bucket` (not quantified), and `infinite`. */
+    /**
+     * Inventory type. Possible values are {@code finite}, {@code bucket} (not quantified), and
+     * {@code infinite}.
+     */
     @SerializedName("type")
     Type type;
 
     /**
-     * An indicator of the inventory available. Possible values are `in_stock`, `limited`, and
-     * `out_of_stock`. Will be present if and only if `type` is `bucket`.
+     * An indicator of the inventory available. Possible values are {@code in_stock}, {@code
+     * limited}, and {@code out_of_stock}. Will be present if and only if {@code type} is {@code
+     * bucket}.
      */
     @SerializedName("value")
     EnumParam value;
@@ -395,14 +405,15 @@ public class SkuCreateParams extends ApiRequestParams {
         return this;
       }
 
-      /** The count of inventory available. Required if `type` is `finite`. */
+      /** The count of inventory available. Required if {@code type} is {@code finite}. */
       public Builder setQuantity(Long quantity) {
         this.quantity = quantity;
         return this;
       }
 
       /**
-       * Inventory type. Possible values are `finite`, `bucket` (not quantified), and `infinite`.
+       * Inventory type. Possible values are {@code finite}, {@code bucket} (not quantified), and
+       * {@code infinite}.
        */
       public Builder setType(Type type) {
         this.type = type;
@@ -410,8 +421,9 @@ public class SkuCreateParams extends ApiRequestParams {
       }
 
       /**
-       * An indicator of the inventory available. Possible values are `in_stock`, `limited`, and
-       * `out_of_stock`. Will be present if and only if `type` is `bucket`.
+       * An indicator of the inventory available. Possible values are {@code in_stock}, {@code
+       * limited}, and {@code out_of_stock}. Will be present if and only if {@code type} is {@code
+       * bucket}.
        */
       public Builder setValue(Value value) {
         this.value = value;
@@ -419,8 +431,9 @@ public class SkuCreateParams extends ApiRequestParams {
       }
 
       /**
-       * An indicator of the inventory available. Possible values are `in_stock`, `limited`, and
-       * `out_of_stock`. Will be present if and only if `type` is `bucket`.
+       * An indicator of the inventory available. Possible values are {@code in_stock}, {@code
+       * limited}, and {@code out_of_stock}. Will be present if and only if {@code type} is {@code
+       * bucket}.
        */
       public Builder setValue(EmptyParam value) {
         this.value = value;

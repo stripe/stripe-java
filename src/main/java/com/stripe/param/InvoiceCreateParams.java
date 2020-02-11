@@ -15,25 +15,26 @@ public class InvoiceCreateParams extends ApiRequestParams {
   /**
    * A fee in %s that will be applied to the invoice and transferred to the application owner's
    * Stripe account. The request must be made with an OAuth key or the Stripe-Account header in
-   * order to take an application fee. For more information, see the application fees
-   * [documentation](https://stripe.com/docs/connect/subscriptions#invoices).
+   * order to take an application fee. For more information, see the application fees <a
+   * href="https://stripe.com/docs/connect/subscriptions#invoices">documentation</a>.
    */
   @SerializedName("application_fee_amount")
   Long applicationFeeAmount;
 
   /**
-   * Controls whether Stripe will perform [automatic
-   * collection](https://stripe.com/docs/billing/invoices/workflow/#auto_advance) of the invoice.
-   * When `false`, the invoice's state will not automatically advance without an explicit action.
+   * Controls whether Stripe will perform <a
+   * href="https://stripe.com/docs/billing/invoices/workflow/#auto_advance">automatic collection</a>
+   * of the invoice. When {@code false}, the invoice's state will not automatically advance without
+   * an explicit action.
    */
   @SerializedName("auto_advance")
   Boolean autoAdvance;
 
   /**
-   * Either `charge_automatically`, or `send_invoice`. When charging automatically, Stripe will
-   * attempt to pay this invoice using the default source attached to the customer. When sending an
-   * invoice, Stripe will email this invoice to the customer with payment instructions. Defaults to
-   * `charge_automatically`.
+   * Either {@code charge_automatically}, or {@code send_invoice}. When charging automatically,
+   * Stripe will attempt to pay this invoice using the default source attached to the customer. When
+   * sending an invoice, Stripe will email this invoice to the customer with payment instructions.
+   * Defaults to {@code charge_automatically}.
    */
   @SerializedName("collection_method")
   CollectionMethod collectionMethod;
@@ -48,7 +49,7 @@ public class InvoiceCreateParams extends ApiRequestParams {
 
   /**
    * The number of days from when the invoice is created until it is due. Valid only for invoices
-   * where `collection_method=send_invoice`.
+   * where {@code collection_method=send_invoice}.
    */
   @SerializedName("days_until_due")
   Long daysUntilDue;
@@ -69,7 +70,7 @@ public class InvoiceCreateParams extends ApiRequestParams {
   @SerializedName("default_source")
   String defaultSource;
 
-  /** The tax rates that will apply to any line item that does not have `tax_rates` set. */
+  /** The tax rates that will apply to any line item that does not have {@code tax_rates} set. */
   @SerializedName("default_tax_rates")
   List<String> defaultTaxRates;
 
@@ -81,8 +82,8 @@ public class InvoiceCreateParams extends ApiRequestParams {
   String description;
 
   /**
-   * The date on which payment for this invoice is due. Valid only for invoices where
-   * `collection_method=send_invoice`.
+   * The date on which payment for this invoice is due. Valid only for invoices where {@code
+   * collection_method=send_invoice}.
    */
   @SerializedName("due_date")
   Long dueDate;
@@ -107,7 +108,8 @@ public class InvoiceCreateParams extends ApiRequestParams {
   /**
    * Set of key-value pairs that you can attach to an object. This can be useful for storing
    * additional information about the object in a structured format. Individual keys can be unset by
-   * posting an empty value to them. All keys can be unset by posting an empty value to `metadata`.
+   * posting an empty value to them. All keys can be unset by posting an empty value to {@code
+   * metadata}.
    */
   @SerializedName("metadata")
   Map<String, String> metadata;
@@ -115,8 +117,8 @@ public class InvoiceCreateParams extends ApiRequestParams {
   /**
    * Extra information about a charge for the customer's credit card statement. It must contain at
    * least one letter. If not specified and this invoice is part of a subscription, the default
-   * `statement_descriptor` will be set to the first subscription item's product's
-   * `statement_descriptor`.
+   * {@code statement_descriptor} will be set to the first subscription item's product's {@code
+   * statement_descriptor}.
    */
   @SerializedName("statement_descriptor")
   String statementDescriptor;
@@ -134,7 +136,8 @@ public class InvoiceCreateParams extends ApiRequestParams {
   /**
    * The percent tax rate applied to the invoice, represented as a decimal number. This field has
    * been deprecated and will be removed in a future API version, for further information view the
-   * [migration docs](https://stripe.com/docs/billing/migration/taxes) for `tax_rates`.
+   * <a href="https://stripe.com/docs/billing/migration/taxes">migration docs</a> for {@code
+   * tax_rates}.
    */
   @SerializedName("tax_percent")
   BigDecimal taxPercent;
@@ -258,8 +261,8 @@ public class InvoiceCreateParams extends ApiRequestParams {
     /**
      * A fee in %s that will be applied to the invoice and transferred to the application owner's
      * Stripe account. The request must be made with an OAuth key or the Stripe-Account header in
-     * order to take an application fee. For more information, see the application fees
-     * [documentation](https://stripe.com/docs/connect/subscriptions#invoices).
+     * order to take an application fee. For more information, see the application fees <a
+     * href="https://stripe.com/docs/connect/subscriptions#invoices">documentation</a>.
      */
     public Builder setApplicationFeeAmount(Long applicationFeeAmount) {
       this.applicationFeeAmount = applicationFeeAmount;
@@ -267,9 +270,10 @@ public class InvoiceCreateParams extends ApiRequestParams {
     }
 
     /**
-     * Controls whether Stripe will perform [automatic
-     * collection](https://stripe.com/docs/billing/invoices/workflow/#auto_advance) of the invoice.
-     * When `false`, the invoice's state will not automatically advance without an explicit action.
+     * Controls whether Stripe will perform <a
+     * href="https://stripe.com/docs/billing/invoices/workflow/#auto_advance">automatic
+     * collection</a> of the invoice. When {@code false}, the invoice's state will not automatically
+     * advance without an explicit action.
      */
     public Builder setAutoAdvance(Boolean autoAdvance) {
       this.autoAdvance = autoAdvance;
@@ -277,10 +281,10 @@ public class InvoiceCreateParams extends ApiRequestParams {
     }
 
     /**
-     * Either `charge_automatically`, or `send_invoice`. When charging automatically, Stripe will
-     * attempt to pay this invoice using the default source attached to the customer. When sending
-     * an invoice, Stripe will email this invoice to the customer with payment instructions.
-     * Defaults to `charge_automatically`.
+     * Either {@code charge_automatically}, or {@code send_invoice}. When charging automatically,
+     * Stripe will attempt to pay this invoice using the default source attached to the customer.
+     * When sending an invoice, Stripe will email this invoice to the customer with payment
+     * instructions. Defaults to {@code charge_automatically}.
      */
     public Builder setCollectionMethod(CollectionMethod collectionMethod) {
       this.collectionMethod = collectionMethod;
@@ -335,7 +339,7 @@ public class InvoiceCreateParams extends ApiRequestParams {
 
     /**
      * The number of days from when the invoice is created until it is due. Valid only for invoices
-     * where `collection_method=send_invoice`.
+     * where {@code collection_method=send_invoice}.
      */
     public Builder setDaysUntilDue(Long daysUntilDue) {
       this.daysUntilDue = daysUntilDue;
@@ -398,8 +402,8 @@ public class InvoiceCreateParams extends ApiRequestParams {
     }
 
     /**
-     * The date on which payment for this invoice is due. Valid only for invoices where
-     * `collection_method=send_invoice`.
+     * The date on which payment for this invoice is due. Valid only for invoices where {@code
+     * collection_method=send_invoice}.
      */
     public Builder setDueDate(Long dueDate) {
       this.dueDate = dueDate;
@@ -493,8 +497,8 @@ public class InvoiceCreateParams extends ApiRequestParams {
     /**
      * Extra information about a charge for the customer's credit card statement. It must contain at
      * least one letter. If not specified and this invoice is part of a subscription, the default
-     * `statement_descriptor` will be set to the first subscription item's product's
-     * `statement_descriptor`.
+     * {@code statement_descriptor} will be set to the first subscription item's product's {@code
+     * statement_descriptor}.
      */
     public Builder setStatementDescriptor(String statementDescriptor) {
       this.statementDescriptor = statementDescriptor;
@@ -516,7 +520,8 @@ public class InvoiceCreateParams extends ApiRequestParams {
     /**
      * The percent tax rate applied to the invoice, represented as a decimal number. This field has
      * been deprecated and will be removed in a future API version, for further information view the
-     * [migration docs](https://stripe.com/docs/billing/migration/taxes) for `tax_rates`.
+     * <a href="https://stripe.com/docs/billing/migration/taxes">migration docs</a> for {@code
+     * tax_rates}.
      */
     public Builder setTaxPercent(BigDecimal taxPercent) {
       this.taxPercent = taxPercent;

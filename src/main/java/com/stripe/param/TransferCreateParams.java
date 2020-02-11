@@ -14,7 +14,7 @@ public class TransferCreateParams extends ApiRequestParams {
   @SerializedName("amount")
   Long amount;
 
-  /** 3-letter [ISO code for currency](https://stripe.com/docs/payouts). */
+  /** 3-letter <a href="https://stripe.com/docs/payouts">ISO code for currency</a>. */
   @SerializedName("currency")
   String currency;
 
@@ -23,8 +23,9 @@ public class TransferCreateParams extends ApiRequestParams {
   String description;
 
   /**
-   * The ID of a connected Stripe account. <a href="/docs/connect/charges-transfers">See the Connect
-   * documentation</a> for details.
+   * The ID of a connected Stripe account. &lt;a
+   * href=&quot;/docs/connect/charges-transfers&quot;&gt;See the Connect documentation&lt;/a&gt; for
+   * details.
    */
   @SerializedName("destination")
   String destination;
@@ -45,7 +46,8 @@ public class TransferCreateParams extends ApiRequestParams {
   /**
    * Set of key-value pairs that you can attach to an object. This can be useful for storing
    * additional information about the object in a structured format. Individual keys can be unset by
-   * posting an empty value to them. All keys can be unset by posting an empty value to `metadata`.
+   * posting an empty value to them. All keys can be unset by posting an empty value to {@code
+   * metadata}.
    */
   @SerializedName("metadata")
   Map<String, String> metadata;
@@ -53,24 +55,24 @@ public class TransferCreateParams extends ApiRequestParams {
   /**
    * You can use this parameter to transfer funds from a charge before they are added to your
    * available balance. A pending balance will transfer immediately but the funds will not become
-   * available until the original charge becomes available. [See the Connect
-   * documentation](https://stripe.com/docs/connect/charges-transfers#transfer-availability) for
-   * details.
+   * available until the original charge becomes available. <a
+   * href="https://stripe.com/docs/connect/charges-transfers#transfer-availability">See the Connect
+   * documentation</a> for details.
    */
   @SerializedName("source_transaction")
   String sourceTransaction;
 
   /**
-   * The source balance to use for this transfer. One of `bank_account` or `card`. For most users,
-   * this will default to `card`.
+   * The source balance to use for this transfer. One of {@code bank_account} or {@code card}. For
+   * most users, this will default to {@code card}.
    */
   @SerializedName("source_type")
   SourceType sourceType;
 
   /**
-   * A string that identifies this transaction as part of a group. See the [Connect
-   * documentation](https://stripe.com/docs/connect/charges-transfers#grouping-transactions) for
-   * details.
+   * A string that identifies this transaction as part of a group. See the <a
+   * href="https://stripe.com/docs/connect/charges-transfers#grouping-transactions">Connect
+   * documentation</a> for details.
    */
   @SerializedName("transfer_group")
   String transferGroup;
@@ -144,7 +146,7 @@ public class TransferCreateParams extends ApiRequestParams {
       return this;
     }
 
-    /** 3-letter [ISO code for currency](https://stripe.com/docs/payouts). */
+    /** 3-letter <a href="https://stripe.com/docs/payouts">ISO code for currency</a>. */
     public Builder setCurrency(String currency) {
       this.currency = currency;
       return this;
@@ -157,8 +159,9 @@ public class TransferCreateParams extends ApiRequestParams {
     }
 
     /**
-     * The ID of a connected Stripe account. <a href="/docs/connect/charges-transfers">See the
-     * Connect documentation</a> for details.
+     * The ID of a connected Stripe account. &lt;a
+     * href=&quot;/docs/connect/charges-transfers&quot;&gt;See the Connect documentation&lt;/a&gt;
+     * for details.
      */
     public Builder setDestination(String destination) {
       this.destination = destination;
@@ -246,9 +249,9 @@ public class TransferCreateParams extends ApiRequestParams {
     /**
      * You can use this parameter to transfer funds from a charge before they are added to your
      * available balance. A pending balance will transfer immediately but the funds will not become
-     * available until the original charge becomes available. [See the Connect
-     * documentation](https://stripe.com/docs/connect/charges-transfers#transfer-availability) for
-     * details.
+     * available until the original charge becomes available. <a
+     * href="https://stripe.com/docs/connect/charges-transfers#transfer-availability">See the
+     * Connect documentation</a> for details.
      */
     public Builder setSourceTransaction(String sourceTransaction) {
       this.sourceTransaction = sourceTransaction;
@@ -256,8 +259,8 @@ public class TransferCreateParams extends ApiRequestParams {
     }
 
     /**
-     * The source balance to use for this transfer. One of `bank_account` or `card`. For most users,
-     * this will default to `card`.
+     * The source balance to use for this transfer. One of {@code bank_account} or {@code card}. For
+     * most users, this will default to {@code card}.
      */
     public Builder setSourceType(SourceType sourceType) {
       this.sourceType = sourceType;
@@ -265,9 +268,9 @@ public class TransferCreateParams extends ApiRequestParams {
     }
 
     /**
-     * A string that identifies this transaction as part of a group. See the [Connect
-     * documentation](https://stripe.com/docs/connect/charges-transfers#grouping-transactions) for
-     * details.
+     * A string that identifies this transaction as part of a group. See the <a
+     * href="https://stripe.com/docs/connect/charges-transfers#grouping-transactions">Connect
+     * documentation</a> for details.
      */
     public Builder setTransferGroup(String transferGroup) {
       this.transferGroup = transferGroup;

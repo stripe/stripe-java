@@ -16,8 +16,8 @@ public class InvoiceLineItem extends StripeObject implements HasId {
   Long amount;
 
   /**
-   * Three-letter [ISO currency code](https://www.iso.org/iso-4217-currency-codes.html), in
-   * lowercase. Must be a [supported currency](https://stripe.com/docs/currencies).
+   * Three-letter <a href="https://www.iso.org/iso-4217-currency-codes.html">ISO currency code</a>,
+   * in lowercase. Must be a <a href="https://stripe.com/docs/currencies">supported currency</a>.
    */
   @SerializedName("currency")
   String currency;
@@ -36,15 +36,15 @@ public class InvoiceLineItem extends StripeObject implements HasId {
   String id;
 
   /**
-   * The ID of the [invoice item](https://stripe.com/docs/api/invoiceitems) associated with this
-   * line item if any.
+   * The ID of the <a href="https://stripe.com/docs/api/invoiceitems">invoice item</a> associated
+   * with this line item if any.
    */
   @SerializedName("invoice_item")
   String invoiceItem;
 
   /**
-   * Has the value `true` if the object exists in live mode or the value `false` if the object
-   * exists in test mode.
+   * Has the value {@code true} if the object exists in live mode or the value {@code false} if the
+   * object exists in test mode.
    */
   @SerializedName("livemode")
   Boolean livemode;
@@ -52,8 +52,8 @@ public class InvoiceLineItem extends StripeObject implements HasId {
   /**
    * Set of key-value pairs that you can attach to an object. This can be useful for storing
    * additional information about the object in a structured format. Note that for line items with
-   * `type=subscription` this will reflect the metadata of the subscription that caused the line
-   * item to be created.
+   * {@code type=subscription} this will reflect the metadata of the subscription that caused the
+   * line item to be created.
    */
   @SerializedName("metadata")
   Map<String, String> metadata;
@@ -61,7 +61,7 @@ public class InvoiceLineItem extends StripeObject implements HasId {
   /**
    * String representing the object's type. Objects of the same type share the same value.
    *
-   * <p>Equal to `line_item`.
+   * <p>Equal to {@code line_item}.
    */
   @SerializedName("object")
   String object;
@@ -101,10 +101,10 @@ public class InvoiceLineItem extends StripeObject implements HasId {
   List<TaxRate> taxRates;
 
   /**
-   * A string identifying the type of the source of this line item, either an `invoiceitem` or a
-   * `subscription`.
+   * A string identifying the type of the source of this line item, either an {@code invoiceitem} or
+   * a {@code subscription}.
    *
-   * <p>One of `invoiceitem`, or `subscription`.
+   * <p>One of {@code invoiceitem}, or {@code subscription}.
    */
   @SerializedName("type")
   String type;

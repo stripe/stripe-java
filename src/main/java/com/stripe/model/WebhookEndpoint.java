@@ -36,8 +36,8 @@ public class WebhookEndpoint extends ApiResource implements HasId {
   Boolean deleted;
 
   /**
-   * The list of events to enable for this endpoint. `['*']` indicates that all events are enabled,
-   * except those that require explicit selection.
+   * The list of events to enable for this endpoint. {@code ['*']} indicates that all events are
+   * enabled, except those that require explicit selection.
    */
   @SerializedName("enabled_events")
   List<String> enabledEvents;
@@ -48,8 +48,8 @@ public class WebhookEndpoint extends ApiResource implements HasId {
   String id;
 
   /**
-   * Has the value `true` if the object exists in live mode or the value `false` if the object
-   * exists in test mode.
+   * Has the value {@code true} if the object exists in live mode or the value {@code false} if the
+   * object exists in test mode.
    */
   @SerializedName("livemode")
   Boolean livemode;
@@ -57,19 +57,20 @@ public class WebhookEndpoint extends ApiResource implements HasId {
   /**
    * String representing the object's type. Objects of the same type share the same value.
    *
-   * <p>Equal to `webhook_endpoint`.
+   * <p>Equal to {@code webhook_endpoint}.
    */
   @SerializedName("object")
   String object;
 
   /**
-   * The endpoint's secret, used to generate [webhook
-   * signatures](https://stripe.com/docs/webhooks/signatures). Only returned at creation.
+   * The endpoint's secret, used to generate <a
+   * href="https://stripe.com/docs/webhooks/signatures">webhook signatures</a>. Only returned at
+   * creation.
    */
   @SerializedName("secret")
   String secret;
 
-  /** The status of the webhook. It can be `enabled` or `disabled`. */
+  /** The status of the webhook. It can be {@code enabled} or {@code disabled}. */
   @SerializedName("status")
   String status;
 

@@ -272,8 +272,8 @@ public class SetupIntentConfirmParams extends ApiRequestParams {
       Online online;
 
       /**
-       * The type of customer acceptance information included with the Mandate. One of `online` or
-       * `offline`.
+       * The type of customer acceptance information included with the Mandate. One of {@code
+       * online} or {@code offline}.
        */
       @SerializedName("type")
       Type type;
@@ -365,8 +365,8 @@ public class SetupIntentConfirmParams extends ApiRequestParams {
         }
 
         /**
-         * The type of customer acceptance information included with the Mandate. One of `online` or
-         * `offline`.
+         * The type of customer acceptance information included with the Mandate. One of {@code
+         * online} or {@code offline}.
          */
         public Builder setType(Type type) {
           this.type = type;
@@ -626,13 +626,14 @@ public class SetupIntentConfirmParams extends ApiRequestParams {
 
       /**
        * We strongly recommend that you rely on our SCA Engine to automatically prompt your
-       * customers for authentication based on risk level and [other
-       * requirements](https://stripe.com/docs/strong-customer-authentication). However, if you wish
-       * to request 3D Secure based on logic from your own fraud engine, provide this option.
-       * Permitted values include: `automatic` or `any`. If not provided, defaults to `automatic`.
-       * Read our guide on [manually requesting 3D
-       * Secure](https://stripe.com/docs/payments/3d-secure#manual-three-ds) for more information on
-       * how this configuration interacts with Radar and our SCA Engine.
+       * customers for authentication based on risk level and <a
+       * href="https://stripe.com/docs/strong-customer-authentication">other requirements</a>.
+       * However, if you wish to request 3D Secure based on logic from your own fraud engine,
+       * provide this option. Permitted values include: {@code automatic} or {@code any}. If not
+       * provided, defaults to {@code automatic}. Read our guide on <a
+       * href="https://stripe.com/docs/payments/3d-secure#manual-three-ds">manually requesting 3D
+       * Secure</a> for more information on how this configuration interacts with Radar and our SCA
+       * Engine.
        */
       @SerializedName("request_three_d_secure")
       RequestThreeDSecure requestThreeDSecure;
@@ -700,13 +701,14 @@ public class SetupIntentConfirmParams extends ApiRequestParams {
 
         /**
          * We strongly recommend that you rely on our SCA Engine to automatically prompt your
-         * customers for authentication based on risk level and [other
-         * requirements](https://stripe.com/docs/strong-customer-authentication). However, if you
-         * wish to request 3D Secure based on logic from your own fraud engine, provide this option.
-         * Permitted values include: `automatic` or `any`. If not provided, defaults to `automatic`.
-         * Read our guide on [manually requesting 3D
-         * Secure](https://stripe.com/docs/payments/3d-secure#manual-three-ds) for more information
-         * on how this configuration interacts with Radar and our SCA Engine.
+         * customers for authentication based on risk level and <a
+         * href="https://stripe.com/docs/strong-customer-authentication">other requirements</a>.
+         * However, if you wish to request 3D Secure based on logic from your own fraud engine,
+         * provide this option. Permitted values include: {@code automatic} or {@code any}. If not
+         * provided, defaults to {@code automatic}. Read our guide on <a
+         * href="https://stripe.com/docs/payments/3d-secure#manual-three-ds">manually requesting 3D
+         * Secure</a> for more information on how this configuration interacts with Radar and our
+         * SCA Engine.
          */
         public Builder setRequestThreeDSecure(RequestThreeDSecure requestThreeDSecure) {
           this.requestThreeDSecure = requestThreeDSecure;

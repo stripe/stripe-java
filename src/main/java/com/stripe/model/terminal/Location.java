@@ -38,8 +38,8 @@ public class Location extends ApiResource implements HasId, MetadataStore<Locati
   String id;
 
   /**
-   * Has the value `true` if the object exists in live mode or the value `false` if the object
-   * exists in test mode.
+   * Has the value {@code true} if the object exists in live mode or the value {@code false} if the
+   * object exists in test mode.
    */
   @SerializedName("livemode")
   Boolean livemode;
@@ -55,7 +55,7 @@ public class Location extends ApiResource implements HasId, MetadataStore<Locati
   /**
    * String representing the object's type. Objects of the same type share the same value.
    *
-   * <p>Equal to `terminal.location`.
+   * <p>Equal to {@code terminal.location}.
    */
   @SerializedName("object")
   String object;

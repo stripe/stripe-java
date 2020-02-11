@@ -43,8 +43,8 @@ public class Token extends ApiResource implements HasId {
   String id;
 
   /**
-   * Has the value `true` if the object exists in live mode or the value `false` if the object
-   * exists in test mode.
+   * Has the value {@code true} if the object exists in live mode or the value {@code false} if the
+   * object exists in test mode.
    */
   @SerializedName("livemode")
   Boolean livemode;
@@ -52,12 +52,12 @@ public class Token extends ApiResource implements HasId {
   /**
    * String representing the object's type. Objects of the same type share the same value.
    *
-   * <p>Equal to `token`.
+   * <p>Equal to {@code token}.
    */
   @SerializedName("object")
   String object;
 
-  /** Type of the token: `account`, `bank_account`, `card`, or `pii`. */
+  /** Type of the token: {@code account}, {@code bank_account}, {@code card}, or {@code pii}. */
   @SerializedName("type")
   String type;
 
@@ -98,7 +98,7 @@ public class Token extends ApiResource implements HasId {
   /**
    * Creates a single-use token that represents a bank account’s details. This token can be used
    * with any API method in place of a bank account dictionary. This token can be used only once, by
-   * attaching it to a <a href="#accounts">Custom account</a>.
+   * attaching it to a <a href="https://stripe.com/docs/api#accounts">Custom account</a>.
    */
   public static Token create(Map<String, Object> params) throws StripeException {
     return create(params, (RequestOptions) null);
@@ -107,7 +107,7 @@ public class Token extends ApiResource implements HasId {
   /**
    * Creates a single-use token that represents a bank account’s details. This token can be used
    * with any API method in place of a bank account dictionary. This token can be used only once, by
-   * attaching it to a <a href="#accounts">Custom account</a>.
+   * attaching it to a <a href="https://stripe.com/docs/api#accounts">Custom account</a>.
    */
   public static Token create(Map<String, Object> params, RequestOptions options)
       throws StripeException {
@@ -118,7 +118,7 @@ public class Token extends ApiResource implements HasId {
   /**
    * Creates a single-use token that represents a bank account’s details. This token can be used
    * with any API method in place of a bank account dictionary. This token can be used only once, by
-   * attaching it to a <a href="#accounts">Custom account</a>.
+   * attaching it to a <a href="https://stripe.com/docs/api#accounts">Custom account</a>.
    */
   public static Token create(TokenCreateParams params) throws StripeException {
     return create(params, (RequestOptions) null);
@@ -127,7 +127,7 @@ public class Token extends ApiResource implements HasId {
   /**
    * Creates a single-use token that represents a bank account’s details. This token can be used
    * with any API method in place of a bank account dictionary. This token can be used only once, by
-   * attaching it to a <a href="#accounts">Custom account</a>.
+   * attaching it to a <a href="https://stripe.com/docs/api#accounts">Custom account</a>.
    */
   public static Token create(TokenCreateParams params, RequestOptions options)
       throws StripeException {

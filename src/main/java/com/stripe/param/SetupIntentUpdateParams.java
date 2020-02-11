@@ -40,7 +40,8 @@ public class SetupIntentUpdateParams extends ApiRequestParams {
   /**
    * Set of key-value pairs that you can attach to an object. This can be useful for storing
    * additional information about the object in a structured format. Individual keys can be unset by
-   * posting an empty value to them. All keys can be unset by posting an empty value to `metadata`.
+   * posting an empty value to them. All keys can be unset by posting an empty value to {@code
+   * metadata}.
    */
   @SerializedName("metadata")
   Map<String, String> metadata;
@@ -54,7 +55,7 @@ public class SetupIntentUpdateParams extends ApiRequestParams {
 
   /**
    * The list of payment method types (e.g. card) that this SetupIntent is allowed to set up. If
-   * this is not provided, defaults to ["card"].
+   * this is not provided, defaults to [&quot;card&quot;].
    */
   @SerializedName("payment_method_types")
   List<String> paymentMethodTypes;

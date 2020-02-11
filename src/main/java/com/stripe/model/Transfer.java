@@ -41,8 +41,8 @@ public class Transfer extends ApiResource
   Long created;
 
   /**
-   * Three-letter [ISO currency code](https://www.iso.org/iso-4217-currency-codes.html), in
-   * lowercase. Must be a [supported currency](https://stripe.com/docs/currencies).
+   * Three-letter <a href="https://www.iso.org/iso-4217-currency-codes.html">ISO currency code</a>,
+   * in lowercase. Must be a <a href="https://stripe.com/docs/currencies">supported currency</a>.
    */
   @SerializedName("currency")
   String currency;
@@ -72,8 +72,8 @@ public class Transfer extends ApiResource
   String id;
 
   /**
-   * Has the value `true` if the object exists in live mode or the value `false` if the object
-   * exists in test mode.
+   * Has the value {@code true} if the object exists in live mode or the value {@code false} if the
+   * object exists in test mode.
    */
   @SerializedName("livemode")
   Boolean livemode;
@@ -89,7 +89,7 @@ public class Transfer extends ApiResource
   /**
    * String representing the object's type. Objects of the same type share the same value.
    *
-   * <p>Equal to `transfer`.
+   * <p>Equal to {@code transfer}.
    */
   @SerializedName("object")
   String object;
@@ -114,19 +114,19 @@ public class Transfer extends ApiResource
   @Setter(lombok.AccessLevel.NONE)
   ExpandableField<Charge> sourceTransaction;
 
-  /** The source balance this transfer came from. One of `card` or `bank_account`. */
+  /** The source balance this transfer came from. One of {@code card} or {@code bank_account}. */
   @SerializedName("source_type")
   String sourceType;
 
   /**
-   * A string that identifies this transaction as part of a group. See the [Connect
-   * documentation](https://stripe.com/docs/connect/charges-transfers#grouping-transactions) for
-   * details.
+   * A string that identifies this transaction as part of a group. See the <a
+   * href="https://stripe.com/docs/connect/charges-transfers#grouping-transactions">Connect
+   * documentation</a> for details.
    */
   @SerializedName("transfer_group")
   String transferGroup;
 
-  /** Get id of expandable `balanceTransaction` object. */
+  /** Get ID of expandable {@code balanceTransaction} object. */
   public String getBalanceTransaction() {
     return (this.balanceTransaction != null) ? this.balanceTransaction.getId() : null;
   }
@@ -135,7 +135,7 @@ public class Transfer extends ApiResource
     this.balanceTransaction = ApiResource.setExpandableFieldId(id, this.balanceTransaction);
   }
 
-  /** Get expanded `balanceTransaction`. */
+  /** Get expanded {@code balanceTransaction}. */
   public BalanceTransaction getBalanceTransactionObject() {
     return (this.balanceTransaction != null) ? this.balanceTransaction.getExpanded() : null;
   }
@@ -145,7 +145,7 @@ public class Transfer extends ApiResource
         new ExpandableField<BalanceTransaction>(expandableObject.getId(), expandableObject);
   }
 
-  /** Get id of expandable `destination` object. */
+  /** Get ID of expandable {@code destination} object. */
   public String getDestination() {
     return (this.destination != null) ? this.destination.getId() : null;
   }
@@ -154,7 +154,7 @@ public class Transfer extends ApiResource
     this.destination = ApiResource.setExpandableFieldId(id, this.destination);
   }
 
-  /** Get expanded `destination`. */
+  /** Get expanded {@code destination}. */
   public Account getDestinationObject() {
     return (this.destination != null) ? this.destination.getExpanded() : null;
   }
@@ -163,7 +163,7 @@ public class Transfer extends ApiResource
     this.destination = new ExpandableField<Account>(expandableObject.getId(), expandableObject);
   }
 
-  /** Get id of expandable `destinationPayment` object. */
+  /** Get ID of expandable {@code destinationPayment} object. */
   public String getDestinationPayment() {
     return (this.destinationPayment != null) ? this.destinationPayment.getId() : null;
   }
@@ -172,7 +172,7 @@ public class Transfer extends ApiResource
     this.destinationPayment = ApiResource.setExpandableFieldId(id, this.destinationPayment);
   }
 
-  /** Get expanded `destinationPayment`. */
+  /** Get expanded {@code destinationPayment}. */
   public Charge getDestinationPaymentObject() {
     return (this.destinationPayment != null) ? this.destinationPayment.getExpanded() : null;
   }
@@ -182,7 +182,7 @@ public class Transfer extends ApiResource
         new ExpandableField<Charge>(expandableObject.getId(), expandableObject);
   }
 
-  /** Get id of expandable `sourceTransaction` object. */
+  /** Get ID of expandable {@code sourceTransaction} object. */
   public String getSourceTransaction() {
     return (this.sourceTransaction != null) ? this.sourceTransaction.getId() : null;
   }
@@ -191,7 +191,7 @@ public class Transfer extends ApiResource
     this.sourceTransaction = ApiResource.setExpandableFieldId(id, this.sourceTransaction);
   }
 
-  /** Get expanded `sourceTransaction`. */
+  /** Get expanded {@code sourceTransaction}. */
   public Charge getSourceTransactionObject() {
     return (this.sourceTransaction != null) ? this.sourceTransaction.getExpanded() : null;
   }
@@ -203,8 +203,8 @@ public class Transfer extends ApiResource
 
   /**
    * To send funds from your Stripe account to a connected account, you create a new transfer
-   * object. Your <a href="#balance">Stripe balance</a> must be able to cover the transfer amount,
-   * or you’ll receive an “Insufficient Funds” error.
+   * object. Your <a href="https://stripe.com/docs/api#balance">Stripe balance</a> must be able to
+   * cover the transfer amount, or you’ll receive an “Insufficient Funds” error.
    */
   public static Transfer create(Map<String, Object> params) throws StripeException {
     return create(params, (RequestOptions) null);
@@ -212,8 +212,8 @@ public class Transfer extends ApiResource
 
   /**
    * To send funds from your Stripe account to a connected account, you create a new transfer
-   * object. Your <a href="#balance">Stripe balance</a> must be able to cover the transfer amount,
-   * or you’ll receive an “Insufficient Funds” error.
+   * object. Your <a href="https://stripe.com/docs/api#balance">Stripe balance</a> must be able to
+   * cover the transfer amount, or you’ll receive an “Insufficient Funds” error.
    */
   public static Transfer create(Map<String, Object> params, RequestOptions options)
       throws StripeException {
@@ -224,8 +224,8 @@ public class Transfer extends ApiResource
 
   /**
    * To send funds from your Stripe account to a connected account, you create a new transfer
-   * object. Your <a href="#balance">Stripe balance</a> must be able to cover the transfer amount,
-   * or you’ll receive an “Insufficient Funds” error.
+   * object. Your <a href="https://stripe.com/docs/api#balance">Stripe balance</a> must be able to
+   * cover the transfer amount, or you’ll receive an “Insufficient Funds” error.
    */
   public static Transfer create(TransferCreateParams params) throws StripeException {
     return create(params, (RequestOptions) null);
@@ -233,8 +233,8 @@ public class Transfer extends ApiResource
 
   /**
    * To send funds from your Stripe account to a connected account, you create a new transfer
-   * object. Your <a href="#balance">Stripe balance</a> must be able to cover the transfer amount,
-   * or you’ll receive an “Insufficient Funds” error.
+   * object. Your <a href="https://stripe.com/docs/api#balance">Stripe balance</a> must be able to
+   * cover the transfer amount, or you’ll receive an “Insufficient Funds” error.
    */
   public static Transfer create(TransferCreateParams params, RequestOptions options)
       throws StripeException {

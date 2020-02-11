@@ -11,8 +11,8 @@ import lombok.Getter;
 @Getter
 public class SubscriptionListParams extends ApiRequestParams {
   /**
-   * The collection method of the subscriptions to retrieve. Either `charge_automatically` or
-   * `send_invoice`.
+   * The collection method of the subscriptions to retrieve. Either {@code charge_automatically} or
+   * {@code send_invoice}.
    */
   @SerializedName("collection_method")
   CollectionMethod collectionMethod;
@@ -31,10 +31,10 @@ public class SubscriptionListParams extends ApiRequestParams {
   String customer;
 
   /**
-   * A cursor for use in pagination. `ending_before` is an object ID that defines your place in the
-   * list. For instance, if you make a list request and receive 100 objects, starting with
-   * `obj_bar`, your subsequent call can include `ending_before=obj_bar` in order to fetch the
-   * previous page of the list.
+   * A cursor for use in pagination. {@code ending_before} is an object ID that defines your place
+   * in the list. For instance, if you make a list request and receive 100 objects, starting with
+   * {@code obj_bar}, your subsequent call can include {@code ending_before=obj_bar} in order to
+   * fetch the previous page of the list.
    */
   @SerializedName("ending_before")
   String endingBefore;
@@ -64,19 +64,20 @@ public class SubscriptionListParams extends ApiRequestParams {
   String plan;
 
   /**
-   * A cursor for use in pagination. `starting_after` is an object ID that defines your place in the
-   * list. For instance, if you make a list request and receive 100 objects, ending with `obj_foo`,
-   * your subsequent call can include `starting_after=obj_foo` in order to fetch the next page of
-   * the list.
+   * A cursor for use in pagination. {@code starting_after} is an object ID that defines your place
+   * in the list. For instance, if you make a list request and receive 100 objects, ending with
+   * {@code obj_foo}, your subsequent call can include {@code starting_after=obj_foo} in order to
+   * fetch the next page of the list.
    */
   @SerializedName("starting_after")
   String startingAfter;
 
   /**
-   * The status of the subscriptions to retrieve. One of: `incomplete`, `incomplete_expired`,
-   * `trialing`, `active`, `past_due`, `unpaid`, `canceled`, or `all`. Passing in a value of
-   * `canceled` will return all canceled subscriptions, including those belonging to deleted
-   * customers. Passing in a value of `all` will return subscriptions of all statuses.
+   * The status of the subscriptions to retrieve. One of: {@code incomplete}, {@code
+   * incomplete_expired}, {@code trialing}, {@code active}, {@code past_due}, {@code unpaid}, {@code
+   * canceled}, or {@code all}. Passing in a value of {@code canceled} will return all canceled
+   * subscriptions, including those belonging to deleted customers. Passing in a value of {@code
+   * all} will return subscriptions of all statuses.
    */
   @SerializedName("status")
   Status status;
@@ -155,8 +156,8 @@ public class SubscriptionListParams extends ApiRequestParams {
     }
 
     /**
-     * The collection method of the subscriptions to retrieve. Either `charge_automatically` or
-     * `send_invoice`.
+     * The collection method of the subscriptions to retrieve. Either {@code charge_automatically}
+     * or {@code send_invoice}.
      */
     public Builder setCollectionMethod(CollectionMethod collectionMethod) {
       this.collectionMethod = collectionMethod;
@@ -200,10 +201,10 @@ public class SubscriptionListParams extends ApiRequestParams {
     }
 
     /**
-     * A cursor for use in pagination. `ending_before` is an object ID that defines your place in
-     * the list. For instance, if you make a list request and receive 100 objects, starting with
-     * `obj_bar`, your subsequent call can include `ending_before=obj_bar` in order to fetch the
-     * previous page of the list.
+     * A cursor for use in pagination. {@code ending_before} is an object ID that defines your place
+     * in the list. For instance, if you make a list request and receive 100 objects, starting with
+     * {@code obj_bar}, your subsequent call can include {@code ending_before=obj_bar} in order to
+     * fetch the previous page of the list.
      */
     public Builder setEndingBefore(String endingBefore) {
       this.endingBefore = endingBefore;
@@ -278,10 +279,10 @@ public class SubscriptionListParams extends ApiRequestParams {
     }
 
     /**
-     * A cursor for use in pagination. `starting_after` is an object ID that defines your place in
-     * the list. For instance, if you make a list request and receive 100 objects, ending with
-     * `obj_foo`, your subsequent call can include `starting_after=obj_foo` in order to fetch the
-     * next page of the list.
+     * A cursor for use in pagination. {@code starting_after} is an object ID that defines your
+     * place in the list. For instance, if you make a list request and receive 100 objects, ending
+     * with {@code obj_foo}, your subsequent call can include {@code starting_after=obj_foo} in
+     * order to fetch the next page of the list.
      */
     public Builder setStartingAfter(String startingAfter) {
       this.startingAfter = startingAfter;
@@ -289,10 +290,11 @@ public class SubscriptionListParams extends ApiRequestParams {
     }
 
     /**
-     * The status of the subscriptions to retrieve. One of: `incomplete`, `incomplete_expired`,
-     * `trialing`, `active`, `past_due`, `unpaid`, `canceled`, or `all`. Passing in a value of
-     * `canceled` will return all canceled subscriptions, including those belonging to deleted
-     * customers. Passing in a value of `all` will return subscriptions of all statuses.
+     * The status of the subscriptions to retrieve. One of: {@code incomplete}, {@code
+     * incomplete_expired}, {@code trialing}, {@code active}, {@code past_due}, {@code unpaid},
+     * {@code canceled}, or {@code all}. Passing in a value of {@code canceled} will return all
+     * canceled subscriptions, including those belonging to deleted customers. Passing in a value of
+     * {@code all} will return subscriptions of all statuses.
      */
     public Builder setStatus(Status status) {
       this.status = status;

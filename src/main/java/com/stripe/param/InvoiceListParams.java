@@ -11,8 +11,8 @@ import lombok.Getter;
 @Getter
 public class InvoiceListParams extends ApiRequestParams {
   /**
-   * The collection method of the invoice to retrieve. Either `charge_automatically` or
-   * `send_invoice`.
+   * The collection method of the invoice to retrieve. Either {@code charge_automatically} or {@code
+   * send_invoice}.
    */
   @SerializedName("collection_method")
   CollectionMethod collectionMethod;
@@ -28,10 +28,10 @@ public class InvoiceListParams extends ApiRequestParams {
   Object dueDate;
 
   /**
-   * A cursor for use in pagination. `ending_before` is an object ID that defines your place in the
-   * list. For instance, if you make a list request and receive 100 objects, starting with
-   * `obj_bar`, your subsequent call can include `ending_before=obj_bar` in order to fetch the
-   * previous page of the list.
+   * A cursor for use in pagination. {@code ending_before} is an object ID that defines your place
+   * in the list. For instance, if you make a list request and receive 100 objects, starting with
+   * {@code obj_bar}, your subsequent call can include {@code ending_before=obj_bar} in order to
+   * fetch the previous page of the list.
    */
   @SerializedName("ending_before")
   String endingBefore;
@@ -57,17 +57,18 @@ public class InvoiceListParams extends ApiRequestParams {
   Long limit;
 
   /**
-   * A cursor for use in pagination. `starting_after` is an object ID that defines your place in the
-   * list. For instance, if you make a list request and receive 100 objects, ending with `obj_foo`,
-   * your subsequent call can include `starting_after=obj_foo` in order to fetch the next page of
-   * the list.
+   * A cursor for use in pagination. {@code starting_after} is an object ID that defines your place
+   * in the list. For instance, if you make a list request and receive 100 objects, ending with
+   * {@code obj_foo}, your subsequent call can include {@code starting_after=obj_foo} in order to
+   * fetch the next page of the list.
    */
   @SerializedName("starting_after")
   String startingAfter;
 
   /**
-   * The status of the invoice, one of `draft`, `open`, `paid`, `uncollectible`, or `void`. [Learn
-   * more](https://stripe.com/docs/billing/invoices/workflow#workflow-overview)
+   * The status of the invoice, one of {@code draft}, {@code open}, {@code paid}, {@code
+   * uncollectible}, or {@code void}. <a
+   * href="https://stripe.com/docs/billing/invoices/workflow#workflow-overview">Learn more</a>
    */
   @SerializedName("status")
   Status status;
@@ -145,8 +146,8 @@ public class InvoiceListParams extends ApiRequestParams {
     }
 
     /**
-     * The collection method of the invoice to retrieve. Either `charge_automatically` or
-     * `send_invoice`.
+     * The collection method of the invoice to retrieve. Either {@code charge_automatically} or
+     * {@code send_invoice}.
      */
     public Builder setCollectionMethod(CollectionMethod collectionMethod) {
       this.collectionMethod = collectionMethod;
@@ -180,10 +181,10 @@ public class InvoiceListParams extends ApiRequestParams {
     }
 
     /**
-     * A cursor for use in pagination. `ending_before` is an object ID that defines your place in
-     * the list. For instance, if you make a list request and receive 100 objects, starting with
-     * `obj_bar`, your subsequent call can include `ending_before=obj_bar` in order to fetch the
-     * previous page of the list.
+     * A cursor for use in pagination. {@code ending_before} is an object ID that defines your place
+     * in the list. For instance, if you make a list request and receive 100 objects, starting with
+     * {@code obj_bar}, your subsequent call can include {@code ending_before=obj_bar} in order to
+     * fetch the previous page of the list.
      */
     public Builder setEndingBefore(String endingBefore) {
       this.endingBefore = endingBefore;
@@ -252,10 +253,10 @@ public class InvoiceListParams extends ApiRequestParams {
     }
 
     /**
-     * A cursor for use in pagination. `starting_after` is an object ID that defines your place in
-     * the list. For instance, if you make a list request and receive 100 objects, ending with
-     * `obj_foo`, your subsequent call can include `starting_after=obj_foo` in order to fetch the
-     * next page of the list.
+     * A cursor for use in pagination. {@code starting_after} is an object ID that defines your
+     * place in the list. For instance, if you make a list request and receive 100 objects, ending
+     * with {@code obj_foo}, your subsequent call can include {@code starting_after=obj_foo} in
+     * order to fetch the next page of the list.
      */
     public Builder setStartingAfter(String startingAfter) {
       this.startingAfter = startingAfter;
@@ -263,8 +264,9 @@ public class InvoiceListParams extends ApiRequestParams {
     }
 
     /**
-     * The status of the invoice, one of `draft`, `open`, `paid`, `uncollectible`, or `void`. [Learn
-     * more](https://stripe.com/docs/billing/invoices/workflow#workflow-overview)
+     * The status of the invoice, one of {@code draft}, {@code open}, {@code paid}, {@code
+     * uncollectible}, or {@code void}. <a
+     * href="https://stripe.com/docs/billing/invoices/workflow#workflow-overview">Learn more</a>
      */
     public Builder setStatus(Status status) {
       this.status = status;

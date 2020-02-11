@@ -35,15 +35,16 @@ public class DisputeUpdateParams extends ApiRequestParams {
   /**
    * Set of key-value pairs that you can attach to an object. This can be useful for storing
    * additional information about the object in a structured format. Individual keys can be unset by
-   * posting an empty value to them. All keys can be unset by posting an empty value to `metadata`.
+   * posting an empty value to them. All keys can be unset by posting an empty value to {@code
+   * metadata}.
    */
   @SerializedName("metadata")
   Map<String, String> metadata;
 
   /**
-   * Whether to immediately submit evidence to the bank. If `false`, evidence is staged on the
+   * Whether to immediately submit evidence to the bank. If {@code false}, evidence is staged on the
    * dispute. Staged evidence is visible in the API and Dashboard, and can be submitted to the bank
-   * by making another request with this attribute set to `true` (the default).
+   * by making another request with this attribute set to {@code true} (the default).
    */
   @SerializedName("submit")
   Boolean submit;
@@ -171,9 +172,9 @@ public class DisputeUpdateParams extends ApiRequestParams {
     }
 
     /**
-     * Whether to immediately submit evidence to the bank. If `false`, evidence is staged on the
-     * dispute. Staged evidence is visible in the API and Dashboard, and can be submitted to the
-     * bank by making another request with this attribute set to `true` (the default).
+     * Whether to immediately submit evidence to the bank. If {@code false}, evidence is staged on
+     * the dispute. Staged evidence is visible in the API and Dashboard, and can be submitted to the
+     * bank by making another request with this attribute set to {@code true} (the default).
      */
     public Builder setSubmit(Boolean submit) {
       this.submit = submit;
@@ -196,8 +197,8 @@ public class DisputeUpdateParams extends ApiRequestParams {
     Object billingAddress;
 
     /**
-     * (ID of a [file upload](https://stripe.com/docs/guides/file-upload)) Your subscription
-     * cancellation policy, as shown to the customer.
+     * (ID of a <a href="https://stripe.com/docs/guides/file-upload">file upload</a>) Your
+     * subscription cancellation policy, as shown to the customer.
      */
     @SerializedName("cancellation_policy")
     Object cancellationPolicy;
@@ -217,10 +218,10 @@ public class DisputeUpdateParams extends ApiRequestParams {
     Object cancellationRebuttal;
 
     /**
-     * (ID of a [file upload](https://stripe.com/docs/guides/file-upload)) Any communication with
-     * the customer that you feel is relevant to your case. Examples include emails proving that the
-     * customer received the product or service, or demonstrating their use of or satisfaction with
-     * the product or service.
+     * (ID of a <a href="https://stripe.com/docs/guides/file-upload">file upload</a>) Any
+     * communication with the customer that you feel is relevant to your case. Examples include
+     * emails proving that the customer received the product or service, or demonstrating their use
+     * of or satisfaction with the product or service.
      */
     @SerializedName("customer_communication")
     Object customerCommunication;
@@ -238,17 +239,17 @@ public class DisputeUpdateParams extends ApiRequestParams {
     Object customerPurchaseIp;
 
     /**
-     * (ID of a [file upload](https://stripe.com/docs/guides/file-upload)) A relevant document or
-     * contract showing the customer's signature.
+     * (ID of a <a href="https://stripe.com/docs/guides/file-upload">file upload</a>) A relevant
+     * document or contract showing the customer's signature.
      */
     @SerializedName("customer_signature")
     Object customerSignature;
 
     /**
-     * (ID of a [file upload](https://stripe.com/docs/guides/file-upload)) Documentation for the
-     * prior charge that can uniquely identify the charge, such as a receipt, shipping label, work
-     * order, etc. This document should be paired with a similar document from the disputed payment
-     * that proves the two payments are separate.
+     * (ID of a <a href="https://stripe.com/docs/guides/file-upload">file upload</a>) Documentation
+     * for the prior charge that can uniquely identify the charge, such as a receipt, shipping
+     * label, work order, etc. This document should be paired with a similar document from the
+     * disputed payment that proves the two payments are separate.
      */
     @SerializedName("duplicate_charge_documentation")
     Object duplicateChargeDocumentation;
@@ -283,15 +284,15 @@ public class DisputeUpdateParams extends ApiRequestParams {
     Object productDescription;
 
     /**
-     * (ID of a [file upload](https://stripe.com/docs/guides/file-upload)) Any receipt or message
-     * sent to the customer notifying them of the charge.
+     * (ID of a <a href="https://stripe.com/docs/guides/file-upload">file upload</a>) Any receipt or
+     * message sent to the customer notifying them of the charge.
      */
     @SerializedName("receipt")
     Object receipt;
 
     /**
-     * (ID of a [file upload](https://stripe.com/docs/guides/file-upload)) Your refund policy, as
-     * shown to the customer.
+     * (ID of a <a href="https://stripe.com/docs/guides/file-upload">file upload</a>) Your refund
+     * policy, as shown to the customer.
      */
     @SerializedName("refund_policy")
     Object refundPolicy;
@@ -318,9 +319,9 @@ public class DisputeUpdateParams extends ApiRequestParams {
     Object serviceDate;
 
     /**
-     * (ID of a [file upload](https://stripe.com/docs/guides/file-upload)) Documentation showing
-     * proof that a service was provided to the customer. This could include a copy of a signed
-     * contract, work order, or other form of written agreement.
+     * (ID of a <a href="https://stripe.com/docs/guides/file-upload">file upload</a>) Documentation
+     * showing proof that a service was provided to the customer. This could include a copy of a
+     * signed contract, work order, or other form of written agreement.
      */
     @SerializedName("service_documentation")
     Object serviceDocumentation;
@@ -347,10 +348,10 @@ public class DisputeUpdateParams extends ApiRequestParams {
     Object shippingDate;
 
     /**
-     * (ID of a [file upload](https://stripe.com/docs/guides/file-upload)) Documentation showing
-     * proof that a product was shipped to the customer at the same address the customer provided to
-     * you. This could include a copy of the shipment receipt, shipping label, etc. It should show
-     * the customer's full shipping address, if possible.
+     * (ID of a <a href="https://stripe.com/docs/guides/file-upload">file upload</a>) Documentation
+     * showing proof that a product was shipped to the customer at the same address the customer
+     * provided to you. This could include a copy of the shipment receipt, shipping label, etc. It
+     * should show the customer's full shipping address, if possible.
      */
     @SerializedName("shipping_documentation")
     Object shippingDocumentation;
@@ -363,8 +364,8 @@ public class DisputeUpdateParams extends ApiRequestParams {
     Object shippingTrackingNumber;
 
     /**
-     * (ID of a [file upload](https://stripe.com/docs/guides/file-upload)) Any additional evidence
-     * or statements.
+     * (ID of a <a href="https://stripe.com/docs/guides/file-upload">file upload</a>) Any additional
+     * evidence or statements.
      */
     @SerializedName("uncategorized_file")
     Object uncategorizedFile;
@@ -559,8 +560,8 @@ public class DisputeUpdateParams extends ApiRequestParams {
       }
 
       /**
-       * (ID of a [file upload](https://stripe.com/docs/guides/file-upload)) Your subscription
-       * cancellation policy, as shown to the customer.
+       * (ID of a <a href="https://stripe.com/docs/guides/file-upload">file upload</a>) Your
+       * subscription cancellation policy, as shown to the customer.
        */
       public Builder setCancellationPolicy(String cancellationPolicy) {
         this.cancellationPolicy = cancellationPolicy;
@@ -568,8 +569,8 @@ public class DisputeUpdateParams extends ApiRequestParams {
       }
 
       /**
-       * (ID of a [file upload](https://stripe.com/docs/guides/file-upload)) Your subscription
-       * cancellation policy, as shown to the customer.
+       * (ID of a <a href="https://stripe.com/docs/guides/file-upload">file upload</a>) Your
+       * subscription cancellation policy, as shown to the customer.
        */
       public Builder setCancellationPolicy(EmptyParam cancellationPolicy) {
         this.cancellationPolicy = cancellationPolicy;
@@ -613,10 +614,10 @@ public class DisputeUpdateParams extends ApiRequestParams {
       }
 
       /**
-       * (ID of a [file upload](https://stripe.com/docs/guides/file-upload)) Any communication with
-       * the customer that you feel is relevant to your case. Examples include emails proving that
-       * the customer received the product or service, or demonstrating their use of or satisfaction
-       * with the product or service.
+       * (ID of a <a href="https://stripe.com/docs/guides/file-upload">file upload</a>) Any
+       * communication with the customer that you feel is relevant to your case. Examples include
+       * emails proving that the customer received the product or service, or demonstrating their
+       * use of or satisfaction with the product or service.
        */
       public Builder setCustomerCommunication(String customerCommunication) {
         this.customerCommunication = customerCommunication;
@@ -624,10 +625,10 @@ public class DisputeUpdateParams extends ApiRequestParams {
       }
 
       /**
-       * (ID of a [file upload](https://stripe.com/docs/guides/file-upload)) Any communication with
-       * the customer that you feel is relevant to your case. Examples include emails proving that
-       * the customer received the product or service, or demonstrating their use of or satisfaction
-       * with the product or service.
+       * (ID of a <a href="https://stripe.com/docs/guides/file-upload">file upload</a>) Any
+       * communication with the customer that you feel is relevant to your case. Examples include
+       * emails proving that the customer received the product or service, or demonstrating their
+       * use of or satisfaction with the product or service.
        */
       public Builder setCustomerCommunication(EmptyParam customerCommunication) {
         this.customerCommunication = customerCommunication;
@@ -671,8 +672,8 @@ public class DisputeUpdateParams extends ApiRequestParams {
       }
 
       /**
-       * (ID of a [file upload](https://stripe.com/docs/guides/file-upload)) A relevant document or
-       * contract showing the customer's signature.
+       * (ID of a <a href="https://stripe.com/docs/guides/file-upload">file upload</a>) A relevant
+       * document or contract showing the customer's signature.
        */
       public Builder setCustomerSignature(String customerSignature) {
         this.customerSignature = customerSignature;
@@ -680,8 +681,8 @@ public class DisputeUpdateParams extends ApiRequestParams {
       }
 
       /**
-       * (ID of a [file upload](https://stripe.com/docs/guides/file-upload)) A relevant document or
-       * contract showing the customer's signature.
+       * (ID of a <a href="https://stripe.com/docs/guides/file-upload">file upload</a>) A relevant
+       * document or contract showing the customer's signature.
        */
       public Builder setCustomerSignature(EmptyParam customerSignature) {
         this.customerSignature = customerSignature;
@@ -689,10 +690,10 @@ public class DisputeUpdateParams extends ApiRequestParams {
       }
 
       /**
-       * (ID of a [file upload](https://stripe.com/docs/guides/file-upload)) Documentation for the
-       * prior charge that can uniquely identify the charge, such as a receipt, shipping label, work
-       * order, etc. This document should be paired with a similar document from the disputed
-       * payment that proves the two payments are separate.
+       * (ID of a <a href="https://stripe.com/docs/guides/file-upload">file upload</a>)
+       * Documentation for the prior charge that can uniquely identify the charge, such as a
+       * receipt, shipping label, work order, etc. This document should be paired with a similar
+       * document from the disputed payment that proves the two payments are separate.
        */
       public Builder setDuplicateChargeDocumentation(String duplicateChargeDocumentation) {
         this.duplicateChargeDocumentation = duplicateChargeDocumentation;
@@ -700,10 +701,10 @@ public class DisputeUpdateParams extends ApiRequestParams {
       }
 
       /**
-       * (ID of a [file upload](https://stripe.com/docs/guides/file-upload)) Documentation for the
-       * prior charge that can uniquely identify the charge, such as a receipt, shipping label, work
-       * order, etc. This document should be paired with a similar document from the disputed
-       * payment that proves the two payments are separate.
+       * (ID of a <a href="https://stripe.com/docs/guides/file-upload">file upload</a>)
+       * Documentation for the prior charge that can uniquely identify the charge, such as a
+       * receipt, shipping label, work order, etc. This document should be paired with a similar
+       * document from the disputed payment that proves the two payments are separate.
        */
       public Builder setDuplicateChargeDocumentation(EmptyParam duplicateChargeDocumentation) {
         this.duplicateChargeDocumentation = duplicateChargeDocumentation;
@@ -789,8 +790,8 @@ public class DisputeUpdateParams extends ApiRequestParams {
       }
 
       /**
-       * (ID of a [file upload](https://stripe.com/docs/guides/file-upload)) Any receipt or message
-       * sent to the customer notifying them of the charge.
+       * (ID of a <a href="https://stripe.com/docs/guides/file-upload">file upload</a>) Any receipt
+       * or message sent to the customer notifying them of the charge.
        */
       public Builder setReceipt(String receipt) {
         this.receipt = receipt;
@@ -798,8 +799,8 @@ public class DisputeUpdateParams extends ApiRequestParams {
       }
 
       /**
-       * (ID of a [file upload](https://stripe.com/docs/guides/file-upload)) Any receipt or message
-       * sent to the customer notifying them of the charge.
+       * (ID of a <a href="https://stripe.com/docs/guides/file-upload">file upload</a>) Any receipt
+       * or message sent to the customer notifying them of the charge.
        */
       public Builder setReceipt(EmptyParam receipt) {
         this.receipt = receipt;
@@ -807,8 +808,8 @@ public class DisputeUpdateParams extends ApiRequestParams {
       }
 
       /**
-       * (ID of a [file upload](https://stripe.com/docs/guides/file-upload)) Your refund policy, as
-       * shown to the customer.
+       * (ID of a <a href="https://stripe.com/docs/guides/file-upload">file upload</a>) Your refund
+       * policy, as shown to the customer.
        */
       public Builder setRefundPolicy(String refundPolicy) {
         this.refundPolicy = refundPolicy;
@@ -816,8 +817,8 @@ public class DisputeUpdateParams extends ApiRequestParams {
       }
 
       /**
-       * (ID of a [file upload](https://stripe.com/docs/guides/file-upload)) Your refund policy, as
-       * shown to the customer.
+       * (ID of a <a href="https://stripe.com/docs/guides/file-upload">file upload</a>) Your refund
+       * policy, as shown to the customer.
        */
       public Builder setRefundPolicy(EmptyParam refundPolicy) {
         this.refundPolicy = refundPolicy;
@@ -879,9 +880,9 @@ public class DisputeUpdateParams extends ApiRequestParams {
       }
 
       /**
-       * (ID of a [file upload](https://stripe.com/docs/guides/file-upload)) Documentation showing
-       * proof that a service was provided to the customer. This could include a copy of a signed
-       * contract, work order, or other form of written agreement.
+       * (ID of a <a href="https://stripe.com/docs/guides/file-upload">file upload</a>)
+       * Documentation showing proof that a service was provided to the customer. This could include
+       * a copy of a signed contract, work order, or other form of written agreement.
        */
       public Builder setServiceDocumentation(String serviceDocumentation) {
         this.serviceDocumentation = serviceDocumentation;
@@ -889,9 +890,9 @@ public class DisputeUpdateParams extends ApiRequestParams {
       }
 
       /**
-       * (ID of a [file upload](https://stripe.com/docs/guides/file-upload)) Documentation showing
-       * proof that a service was provided to the customer. This could include a copy of a signed
-       * contract, work order, or other form of written agreement.
+       * (ID of a <a href="https://stripe.com/docs/guides/file-upload">file upload</a>)
+       * Documentation showing proof that a service was provided to the customer. This could include
+       * a copy of a signed contract, work order, or other form of written agreement.
        */
       public Builder setServiceDocumentation(EmptyParam serviceDocumentation) {
         this.serviceDocumentation = serviceDocumentation;
@@ -953,10 +954,10 @@ public class DisputeUpdateParams extends ApiRequestParams {
       }
 
       /**
-       * (ID of a [file upload](https://stripe.com/docs/guides/file-upload)) Documentation showing
-       * proof that a product was shipped to the customer at the same address the customer provided
-       * to you. This could include a copy of the shipment receipt, shipping label, etc. It should
-       * show the customer's full shipping address, if possible.
+       * (ID of a <a href="https://stripe.com/docs/guides/file-upload">file upload</a>)
+       * Documentation showing proof that a product was shipped to the customer at the same address
+       * the customer provided to you. This could include a copy of the shipment receipt, shipping
+       * label, etc. It should show the customer's full shipping address, if possible.
        */
       public Builder setShippingDocumentation(String shippingDocumentation) {
         this.shippingDocumentation = shippingDocumentation;
@@ -964,10 +965,10 @@ public class DisputeUpdateParams extends ApiRequestParams {
       }
 
       /**
-       * (ID of a [file upload](https://stripe.com/docs/guides/file-upload)) Documentation showing
-       * proof that a product was shipped to the customer at the same address the customer provided
-       * to you. This could include a copy of the shipment receipt, shipping label, etc. It should
-       * show the customer's full shipping address, if possible.
+       * (ID of a <a href="https://stripe.com/docs/guides/file-upload">file upload</a>)
+       * Documentation showing proof that a product was shipped to the customer at the same address
+       * the customer provided to you. This could include a copy of the shipment receipt, shipping
+       * label, etc. It should show the customer's full shipping address, if possible.
        */
       public Builder setShippingDocumentation(EmptyParam shippingDocumentation) {
         this.shippingDocumentation = shippingDocumentation;
@@ -993,8 +994,8 @@ public class DisputeUpdateParams extends ApiRequestParams {
       }
 
       /**
-       * (ID of a [file upload](https://stripe.com/docs/guides/file-upload)) Any additional evidence
-       * or statements.
+       * (ID of a <a href="https://stripe.com/docs/guides/file-upload">file upload</a>) Any
+       * additional evidence or statements.
        */
       public Builder setUncategorizedFile(String uncategorizedFile) {
         this.uncategorizedFile = uncategorizedFile;
@@ -1002,8 +1003,8 @@ public class DisputeUpdateParams extends ApiRequestParams {
       }
 
       /**
-       * (ID of a [file upload](https://stripe.com/docs/guides/file-upload)) Any additional evidence
-       * or statements.
+       * (ID of a <a href="https://stripe.com/docs/guides/file-upload">file upload</a>) Any
+       * additional evidence or statements.
        */
       public Builder setUncategorizedFile(EmptyParam uncategorizedFile) {
         this.uncategorizedFile = uncategorizedFile;

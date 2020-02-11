@@ -13,8 +13,8 @@ import lombok.Getter;
 @Getter
 public class PaymentIntentConfirmParams extends ApiRequestParams {
   /**
-   * Set to `true` to fail the payment attempt if the PaymentIntent transitions into
-   * `requires_action`. This parameter is intended for simpler integrations that do not handle
+   * Set to {@code true} to fail the payment attempt if the PaymentIntent transitions into {@code
+   * requires_action}. This parameter is intended for simpler integrations that do not handle
    * customer actions.
    */
   @SerializedName("error_on_requires_action")
@@ -42,18 +42,18 @@ public class PaymentIntentConfirmParams extends ApiRequestParams {
   Object mandateData;
 
   /**
-   * Set to `true` to indicate that the customer is not in your checkout flow during this payment
-   * attempt, and therefore is unable to authenticate. This parameter is intended for scenarios
-   * where you collect card details and [charge them
-   * later](https://stripe.com/docs/payments/cards/charging-saved-cards).
+   * Set to {@code true} to indicate that the customer is not in your checkout flow during this
+   * payment attempt, and therefore is unable to authenticate. This parameter is intended for
+   * scenarios where you collect card details and <a
+   * href="https://stripe.com/docs/payments/cards/charging-saved-cards">charge them later</a>.
    */
   @SerializedName("off_session")
   Object offSession;
 
   /**
-   * ID of the payment method (a PaymentMethod, Card, or [compatible
-   * Source](https://stripe.com/docs/payments/payment-methods#compatibility) object) to attach to
-   * this PaymentIntent.
+   * ID of the payment method (a PaymentMethod, Card, or <a
+   * href="https://stripe.com/docs/payments/payment-methods#compatibility">compatible Source</a>
+   * object) to attach to this PaymentIntent.
    */
   @SerializedName("payment_method")
   String paymentMethod;
@@ -76,19 +76,21 @@ public class PaymentIntentConfirmParams extends ApiRequestParams {
   String returnUrl;
 
   /**
-   * If the PaymentIntent has a `payment_method` and a `customer` or if you're attaching a payment
-   * method to the PaymentIntent in this request, you can pass `save_payment_method=true` to save
-   * the payment method to the customer. Defaults to `false`.
+   * If the PaymentIntent has a {@code payment_method} and a {@code customer} or if you're attaching
+   * a payment method to the PaymentIntent in this request, you can pass {@code
+   * save_payment_method=true} to save the payment method to the customer. Defaults to {@code
+   * false}.
    *
    * <p>If the payment method is already saved to a customer, this does nothing. If this type of
    * payment method cannot be saved to a customer, the request will error.
    *
-   * <p>_Note that saving a payment method using this parameter does not guarantee that the payment
-   * method can be charged._ To ensure that only payment methods which can be charged are saved to a
-   * customer, you can [manually
-   * save](https://stripe.com/docs/api/customers/create#create_customer-source) the payment method
-   * in response to the [`payment_intent.succeeded`
-   * webhook](https://stripe.com/docs/api/events/types#event_types-payment_intent.succeeded).
+   * <p><em>Note that saving a payment method using this parameter does not guarantee that the
+   * payment method can be charged.</em> To ensure that only payment methods which can be charged
+   * are saved to a customer, you can <a
+   * href="https://stripe.com/docs/api/customers/create#create_customer-source">manually save</a>
+   * the payment method in response to the <a
+   * href="https://stripe.com/docs/api/events/types#event_types-payment_intent.succeeded">{@code
+   * payment_intent.succeeded} webhook</a>.
    */
   @SerializedName("save_payment_method")
   Boolean savePaymentMethod;
@@ -96,24 +98,24 @@ public class PaymentIntentConfirmParams extends ApiRequestParams {
   /**
    * Indicates that you intend to make future payments with this PaymentIntent's payment method.
    *
-   * <p>If present, the payment method used with this PaymentIntent can be
-   * [attached](https://stripe.com/docs/api/payment_methods/attach) to a Customer, even after the
-   * transaction completes.
+   * <p>If present, the payment method used with this PaymentIntent can be <a
+   * href="https://stripe.com/docs/api/payment_methods/attach">attached</a> to a Customer, even
+   * after the transaction completes.
    *
-   * <p>Use `on_session` if you intend to only reuse the payment method when your customer is
-   * present in your checkout flow. Use `off_session` if your customer may or may not be in your
-   * checkout flow.
+   * <p>Use {@code on_session} if you intend to only reuse the payment method when your customer is
+   * present in your checkout flow. Use {@code off_session} if your customer may or may not be in
+   * your checkout flow.
    *
-   * <p>Stripe uses `setup_future_usage` to dynamically optimize your payment flow and comply with
-   * regional legislation and network rules. For example, if your customer is impacted by
-   * [SCA](https://stripe.com/docs/strong-customer-authentication), using `off_session` will ensure
-   * that they are authenticated while processing this PaymentIntent. You will then be able to
-   * collect [off-session
-   * payments](https://stripe.com/docs/payments/cards/charging-saved-cards#off-session-payments-with-saved-cards)
-   * for this customer.
+   * <p>Stripe uses {@code setup_future_usage} to dynamically optimize your payment flow and comply
+   * with regional legislation and network rules. For example, if your customer is impacted by <a
+   * href="https://stripe.com/docs/strong-customer-authentication">SCA</a>, using {@code
+   * off_session} will ensure that they are authenticated while processing this PaymentIntent. You
+   * will then be able to collect <a
+   * href="https://stripe.com/docs/payments/cards/charging-saved-cards#off-session-payments-with-saved-cards">off-session
+   * payments</a> for this customer.
    *
-   * <p>If `setup_future_usage` is already set and you are performing a request using a publishable
-   * key, you may only update the value from `on_session` to `off_session`.
+   * <p>If {@code setup_future_usage} is already set and you are performing a request using a
+   * publishable key, you may only update the value from {@code on_session} to {@code off_session}.
    */
   @SerializedName("setup_future_usage")
   EnumParam setupFutureUsage;
@@ -124,15 +126,16 @@ public class PaymentIntentConfirmParams extends ApiRequestParams {
 
   /**
    * This is a legacy field that will be removed in the future. It is the ID of the Source object to
-   * attach to this PaymentIntent. Please use the `payment_method` field instead, which also
-   * supports Cards and [compatible
-   * Source](https://stripe.com/docs/payments/payment-methods#compatibility) objects.
+   * attach to this PaymentIntent. Please use the {@code payment_method} field instead, which also
+   * supports Cards and <a
+   * href="https://stripe.com/docs/payments/payment-methods#compatibility">compatible Source</a>
+   * objects.
    */
   @SerializedName("source")
   String source;
 
   /**
-   * Set to `true` only when using manual confirmation and the iOS or Android SDKs to handle
+   * Set to {@code true} only when using manual confirmation and the iOS or Android SDKs to handle
    * additional authentication steps.
    */
   @SerializedName("use_stripe_sdk")
@@ -227,8 +230,8 @@ public class PaymentIntentConfirmParams extends ApiRequestParams {
     }
 
     /**
-     * Set to `true` to fail the payment attempt if the PaymentIntent transitions into
-     * `requires_action`. This parameter is intended for simpler integrations that do not handle
+     * Set to {@code true} to fail the payment attempt if the PaymentIntent transitions into {@code
+     * requires_action}. This parameter is intended for simpler integrations that do not handle
      * customer actions.
      */
     public Builder setErrorOnRequiresAction(Boolean errorOnRequiresAction) {
@@ -301,10 +304,10 @@ public class PaymentIntentConfirmParams extends ApiRequestParams {
     }
 
     /**
-     * Set to `true` to indicate that the customer is not in your checkout flow during this payment
-     * attempt, and therefore is unable to authenticate. This parameter is intended for scenarios
-     * where you collect card details and [charge them
-     * later](https://stripe.com/docs/payments/cards/charging-saved-cards).
+     * Set to {@code true} to indicate that the customer is not in your checkout flow during this
+     * payment attempt, and therefore is unable to authenticate. This parameter is intended for
+     * scenarios where you collect card details and <a
+     * href="https://stripe.com/docs/payments/cards/charging-saved-cards">charge them later</a>.
      */
     public Builder setOffSession(Boolean offSession) {
       this.offSession = offSession;
@@ -312,10 +315,10 @@ public class PaymentIntentConfirmParams extends ApiRequestParams {
     }
 
     /**
-     * Set to `true` to indicate that the customer is not in your checkout flow during this payment
-     * attempt, and therefore is unable to authenticate. This parameter is intended for scenarios
-     * where you collect card details and [charge them
-     * later](https://stripe.com/docs/payments/cards/charging-saved-cards).
+     * Set to {@code true} to indicate that the customer is not in your checkout flow during this
+     * payment attempt, and therefore is unable to authenticate. This parameter is intended for
+     * scenarios where you collect card details and <a
+     * href="https://stripe.com/docs/payments/cards/charging-saved-cards">charge them later</a>.
      */
     public Builder setOffSession(OffSession offSession) {
       this.offSession = offSession;
@@ -323,9 +326,9 @@ public class PaymentIntentConfirmParams extends ApiRequestParams {
     }
 
     /**
-     * ID of the payment method (a PaymentMethod, Card, or [compatible
-     * Source](https://stripe.com/docs/payments/payment-methods#compatibility) object) to attach to
-     * this PaymentIntent.
+     * ID of the payment method (a PaymentMethod, Card, or <a
+     * href="https://stripe.com/docs/payments/payment-methods#compatibility">compatible Source</a>
+     * object) to attach to this PaymentIntent.
      */
     public Builder setPaymentMethod(String paymentMethod) {
       this.paymentMethod = paymentMethod;
@@ -362,19 +365,21 @@ public class PaymentIntentConfirmParams extends ApiRequestParams {
     }
 
     /**
-     * If the PaymentIntent has a `payment_method` and a `customer` or if you're attaching a payment
-     * method to the PaymentIntent in this request, you can pass `save_payment_method=true` to save
-     * the payment method to the customer. Defaults to `false`.
+     * If the PaymentIntent has a {@code payment_method} and a {@code customer} or if you're
+     * attaching a payment method to the PaymentIntent in this request, you can pass {@code
+     * save_payment_method=true} to save the payment method to the customer. Defaults to {@code
+     * false}.
      *
      * <p>If the payment method is already saved to a customer, this does nothing. If this type of
      * payment method cannot be saved to a customer, the request will error.
      *
-     * <p>_Note that saving a payment method using this parameter does not guarantee that the
-     * payment method can be charged._ To ensure that only payment methods which can be charged are
-     * saved to a customer, you can [manually
-     * save](https://stripe.com/docs/api/customers/create#create_customer-source) the payment method
-     * in response to the [`payment_intent.succeeded`
-     * webhook](https://stripe.com/docs/api/events/types#event_types-payment_intent.succeeded).
+     * <p><em>Note that saving a payment method using this parameter does not guarantee that the
+     * payment method can be charged.</em> To ensure that only payment methods which can be charged
+     * are saved to a customer, you can <a
+     * href="https://stripe.com/docs/api/customers/create#create_customer-source">manually save</a>
+     * the payment method in response to the <a
+     * href="https://stripe.com/docs/api/events/types#event_types-payment_intent.succeeded">{@code
+     * payment_intent.succeeded} webhook</a>.
      */
     public Builder setSavePaymentMethod(Boolean savePaymentMethod) {
       this.savePaymentMethod = savePaymentMethod;
@@ -384,24 +389,25 @@ public class PaymentIntentConfirmParams extends ApiRequestParams {
     /**
      * Indicates that you intend to make future payments with this PaymentIntent's payment method.
      *
-     * <p>If present, the payment method used with this PaymentIntent can be
-     * [attached](https://stripe.com/docs/api/payment_methods/attach) to a Customer, even after the
-     * transaction completes.
+     * <p>If present, the payment method used with this PaymentIntent can be <a
+     * href="https://stripe.com/docs/api/payment_methods/attach">attached</a> to a Customer, even
+     * after the transaction completes.
      *
-     * <p>Use `on_session` if you intend to only reuse the payment method when your customer is
-     * present in your checkout flow. Use `off_session` if your customer may or may not be in your
-     * checkout flow.
+     * <p>Use {@code on_session} if you intend to only reuse the payment method when your customer
+     * is present in your checkout flow. Use {@code off_session} if your customer may or may not be
+     * in your checkout flow.
      *
-     * <p>Stripe uses `setup_future_usage` to dynamically optimize your payment flow and comply with
-     * regional legislation and network rules. For example, if your customer is impacted by
-     * [SCA](https://stripe.com/docs/strong-customer-authentication), using `off_session` will
-     * ensure that they are authenticated while processing this PaymentIntent. You will then be able
-     * to collect [off-session
-     * payments](https://stripe.com/docs/payments/cards/charging-saved-cards#off-session-payments-with-saved-cards)
-     * for this customer.
+     * <p>Stripe uses {@code setup_future_usage} to dynamically optimize your payment flow and
+     * comply with regional legislation and network rules. For example, if your customer is impacted
+     * by <a href="https://stripe.com/docs/strong-customer-authentication">SCA</a>, using {@code
+     * off_session} will ensure that they are authenticated while processing this PaymentIntent. You
+     * will then be able to collect <a
+     * href="https://stripe.com/docs/payments/cards/charging-saved-cards#off-session-payments-with-saved-cards">off-session
+     * payments</a> for this customer.
      *
-     * <p>If `setup_future_usage` is already set and you are performing a request using a
-     * publishable key, you may only update the value from `on_session` to `off_session`.
+     * <p>If {@code setup_future_usage} is already set and you are performing a request using a
+     * publishable key, you may only update the value from {@code on_session} to {@code
+     * off_session}.
      */
     public Builder setSetupFutureUsage(SetupFutureUsage setupFutureUsage) {
       this.setupFutureUsage = setupFutureUsage;
@@ -411,24 +417,25 @@ public class PaymentIntentConfirmParams extends ApiRequestParams {
     /**
      * Indicates that you intend to make future payments with this PaymentIntent's payment method.
      *
-     * <p>If present, the payment method used with this PaymentIntent can be
-     * [attached](https://stripe.com/docs/api/payment_methods/attach) to a Customer, even after the
-     * transaction completes.
+     * <p>If present, the payment method used with this PaymentIntent can be <a
+     * href="https://stripe.com/docs/api/payment_methods/attach">attached</a> to a Customer, even
+     * after the transaction completes.
      *
-     * <p>Use `on_session` if you intend to only reuse the payment method when your customer is
-     * present in your checkout flow. Use `off_session` if your customer may or may not be in your
-     * checkout flow.
+     * <p>Use {@code on_session} if you intend to only reuse the payment method when your customer
+     * is present in your checkout flow. Use {@code off_session} if your customer may or may not be
+     * in your checkout flow.
      *
-     * <p>Stripe uses `setup_future_usage` to dynamically optimize your payment flow and comply with
-     * regional legislation and network rules. For example, if your customer is impacted by
-     * [SCA](https://stripe.com/docs/strong-customer-authentication), using `off_session` will
-     * ensure that they are authenticated while processing this PaymentIntent. You will then be able
-     * to collect [off-session
-     * payments](https://stripe.com/docs/payments/cards/charging-saved-cards#off-session-payments-with-saved-cards)
-     * for this customer.
+     * <p>Stripe uses {@code setup_future_usage} to dynamically optimize your payment flow and
+     * comply with regional legislation and network rules. For example, if your customer is impacted
+     * by <a href="https://stripe.com/docs/strong-customer-authentication">SCA</a>, using {@code
+     * off_session} will ensure that they are authenticated while processing this PaymentIntent. You
+     * will then be able to collect <a
+     * href="https://stripe.com/docs/payments/cards/charging-saved-cards#off-session-payments-with-saved-cards">off-session
+     * payments</a> for this customer.
      *
-     * <p>If `setup_future_usage` is already set and you are performing a request using a
-     * publishable key, you may only update the value from `on_session` to `off_session`.
+     * <p>If {@code setup_future_usage} is already set and you are performing a request using a
+     * publishable key, you may only update the value from {@code on_session} to {@code
+     * off_session}.
      */
     public Builder setSetupFutureUsage(EmptyParam setupFutureUsage) {
       this.setupFutureUsage = setupFutureUsage;
@@ -449,9 +456,10 @@ public class PaymentIntentConfirmParams extends ApiRequestParams {
 
     /**
      * This is a legacy field that will be removed in the future. It is the ID of the Source object
-     * to attach to this PaymentIntent. Please use the `payment_method` field instead, which also
-     * supports Cards and [compatible
-     * Source](https://stripe.com/docs/payments/payment-methods#compatibility) objects.
+     * to attach to this PaymentIntent. Please use the {@code payment_method} field instead, which
+     * also supports Cards and <a
+     * href="https://stripe.com/docs/payments/payment-methods#compatibility">compatible Source</a>
+     * objects.
      */
     public Builder setSource(String source) {
       this.source = source;
@@ -459,7 +467,7 @@ public class PaymentIntentConfirmParams extends ApiRequestParams {
     }
 
     /**
-     * Set to `true` only when using manual confirmation and the iOS or Android SDKs to handle
+     * Set to {@code true} only when using manual confirmation and the iOS or Android SDKs to handle
      * additional authentication steps.
      */
     public Builder setUseStripeSdk(Boolean useStripeSdk) {
@@ -565,8 +573,8 @@ public class PaymentIntentConfirmParams extends ApiRequestParams {
       Online online;
 
       /**
-       * The type of customer acceptance information included with the Mandate. One of `online` or
-       * `offline`.
+       * The type of customer acceptance information included with the Mandate. One of {@code
+       * online} or {@code offline}.
        */
       @SerializedName("type")
       Type type;
@@ -658,8 +666,8 @@ public class PaymentIntentConfirmParams extends ApiRequestParams {
         }
 
         /**
-         * The type of customer acceptance information included with the Mandate. One of `online` or
-         * `offline`.
+         * The type of customer acceptance information included with the Mandate. One of {@code
+         * online} or {@code offline}.
          */
         public Builder setType(Type type) {
           this.type = type;
@@ -912,8 +920,8 @@ public class PaymentIntentConfirmParams extends ApiRequestParams {
       /**
        * Installment configuration for payments attempted on this PaymentIntent (Mexico Only).
        *
-       * <p>For more information, see the [installments integration
-       * guide](https://stripe.com/docs/payments/installments).
+       * <p>For more information, see the <a
+       * href="https://stripe.com/docs/payments/installments">installments integration guide</a>.
        */
       @SerializedName("installments")
       Installments installments;
@@ -928,13 +936,14 @@ public class PaymentIntentConfirmParams extends ApiRequestParams {
 
       /**
        * We strongly recommend that you rely on our SCA Engine to automatically prompt your
-       * customers for authentication based on risk level and [other
-       * requirements](https://stripe.com/docs/strong-customer-authentication). However, if you wish
-       * to request 3D Secure based on logic from your own fraud engine, provide this option.
-       * Permitted values include: `automatic` or `any`. If not provided, defaults to `automatic`.
-       * Read our guide on [manually requesting 3D
-       * Secure](https://stripe.com/docs/payments/3d-secure#manual-three-ds) for more information on
-       * how this configuration interacts with Radar and our SCA Engine.
+       * customers for authentication based on risk level and <a
+       * href="https://stripe.com/docs/strong-customer-authentication">other requirements</a>.
+       * However, if you wish to request 3D Secure based on logic from your own fraud engine,
+       * provide this option. Permitted values include: {@code automatic} or {@code any}. If not
+       * provided, defaults to {@code automatic}. Read our guide on <a
+       * href="https://stripe.com/docs/payments/3d-secure#manual-three-ds">manually requesting 3D
+       * Secure</a> for more information on how this configuration interacts with Radar and our SCA
+       * Engine.
        */
       @SerializedName("request_three_d_secure")
       RequestThreeDSecure requestThreeDSecure;
@@ -999,8 +1008,8 @@ public class PaymentIntentConfirmParams extends ApiRequestParams {
         /**
          * Installment configuration for payments attempted on this PaymentIntent (Mexico Only).
          *
-         * <p>For more information, see the [installments integration
-         * guide](https://stripe.com/docs/payments/installments).
+         * <p>For more information, see the <a
+         * href="https://stripe.com/docs/payments/installments">installments integration guide</a>.
          */
         public Builder setInstallments(Installments installments) {
           this.installments = installments;
@@ -1019,13 +1028,14 @@ public class PaymentIntentConfirmParams extends ApiRequestParams {
 
         /**
          * We strongly recommend that you rely on our SCA Engine to automatically prompt your
-         * customers for authentication based on risk level and [other
-         * requirements](https://stripe.com/docs/strong-customer-authentication). However, if you
-         * wish to request 3D Secure based on logic from your own fraud engine, provide this option.
-         * Permitted values include: `automatic` or `any`. If not provided, defaults to `automatic`.
-         * Read our guide on [manually requesting 3D
-         * Secure](https://stripe.com/docs/payments/3d-secure#manual-three-ds) for more information
-         * on how this configuration interacts with Radar and our SCA Engine.
+         * customers for authentication based on risk level and <a
+         * href="https://stripe.com/docs/strong-customer-authentication">other requirements</a>.
+         * However, if you wish to request 3D Secure based on logic from your own fraud engine,
+         * provide this option. Permitted values include: {@code automatic} or {@code any}. If not
+         * provided, defaults to {@code automatic}. Read our guide on <a
+         * href="https://stripe.com/docs/payments/3d-secure#manual-three-ds">manually requesting 3D
+         * Secure</a> for more information on how this configuration interacts with Radar and our
+         * SCA Engine.
          */
         public Builder setRequestThreeDSecure(RequestThreeDSecure requestThreeDSecure) {
           this.requestThreeDSecure = requestThreeDSecure;
@@ -1144,8 +1154,8 @@ public class PaymentIntentConfirmParams extends ApiRequestParams {
         @Getter
         public static class Plan {
           /**
-           * For `fixed_count` installment plans, this is the number of installment payments your
-           * customer will make to their credit card.
+           * For {@code fixed_count} installment plans, this is the number of installment payments
+           * your customer will make to their credit card.
            */
           @SerializedName("count")
           Long count;
@@ -1161,13 +1171,13 @@ public class PaymentIntentConfirmParams extends ApiRequestParams {
           Map<String, Object> extraParams;
 
           /**
-           * For `fixed_count` installment plans, this is the interval between installment payments
-           * your customer will make to their credit card. One of `month`.
+           * For {@code fixed_count} installment plans, this is the interval between installment
+           * payments your customer will make to their credit card. One of {@code month}.
            */
           @SerializedName("interval")
           Interval interval;
 
-          /** Type of installment plan, one of `fixed_count`. */
+          /** Type of installment plan, one of {@code fixed_count}. */
           @SerializedName("type")
           Type type;
 
@@ -1197,8 +1207,8 @@ public class PaymentIntentConfirmParams extends ApiRequestParams {
             }
 
             /**
-             * For `fixed_count` installment plans, this is the number of installment payments your
-             * customer will make to their credit card.
+             * For {@code fixed_count} installment plans, this is the number of installment payments
+             * your customer will make to their credit card.
              */
             public Builder setCount(Long count) {
               this.count = count;
@@ -1236,15 +1246,15 @@ public class PaymentIntentConfirmParams extends ApiRequestParams {
             }
 
             /**
-             * For `fixed_count` installment plans, this is the interval between installment
-             * payments your customer will make to their credit card. One of `month`.
+             * For {@code fixed_count} installment plans, this is the interval between installment
+             * payments your customer will make to their credit card. One of {@code month}.
              */
             public Builder setInterval(Interval interval) {
               this.interval = interval;
               return this;
             }
 
-            /** Type of installment plan, one of `fixed_count`. */
+            /** Type of installment plan, one of {@code fixed_count}. */
             public Builder setType(Type type) {
               this.type = type;
               return this;
@@ -1438,8 +1448,8 @@ public class PaymentIntentConfirmParams extends ApiRequestParams {
       String city;
 
       /**
-       * Two-letter country code ([ISO 3166-1
-       * alpha-2](https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2)).
+       * Two-letter country code (<a href="https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2">ISO
+       * 3166-1 alpha-2</a>).
        */
       @SerializedName("country")
       String country;
@@ -1524,8 +1534,8 @@ public class PaymentIntentConfirmParams extends ApiRequestParams {
         }
 
         /**
-         * Two-letter country code ([ISO 3166-1
-         * alpha-2](https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2)).
+         * Two-letter country code (<a href="https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2">ISO
+         * 3166-1 alpha-2</a>).
          */
         public Builder setCountry(String country) {
           this.country = country;

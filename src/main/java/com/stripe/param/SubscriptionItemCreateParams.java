@@ -34,25 +34,26 @@ public class SubscriptionItemCreateParams extends ApiRequestParams {
   /**
    * Set of key-value pairs that you can attach to an object. This can be useful for storing
    * additional information about the object in a structured format. Individual keys can be unset by
-   * posting an empty value to them. All keys can be unset by posting an empty value to `metadata`.
+   * posting an empty value to them. All keys can be unset by posting an empty value to {@code
+   * metadata}.
    */
   @SerializedName("metadata")
   Map<String, String> metadata;
 
   /**
-   * Use `allow_incomplete` to create subscriptions with `status=incomplete` if the first invoice
-   * cannot be paid. Creating subscriptions with this status allows you to manage scenarios where
-   * additional user actions are needed to pay a subscription's invoice. For example, SCA regulation
-   * may require 3DS authentication to complete payment. See the [SCA Migration
-   * Guide](https://stripe.com/docs/billing/migration/strong-customer-authentication) for Billing to
-   * learn more. This is the default behavior.
+   * Use {@code allow_incomplete} to create subscriptions with {@code status=incomplete} if the
+   * first invoice cannot be paid. Creating subscriptions with this status allows you to manage
+   * scenarios where additional user actions are needed to pay a subscription's invoice. For
+   * example, SCA regulation may require 3DS authentication to complete payment. See the <a
+   * href="https://stripe.com/docs/billing/migration/strong-customer-authentication">SCA Migration
+   * Guide</a> for Billing to learn more. This is the default behavior.
    *
-   * <p>Use `error_if_incomplete` if you want Stripe to return an HTTP 402 status code if a
+   * <p>Use {@code error_if_incomplete} if you want Stripe to return an HTTP 402 status code if a
    * subscription's first invoice cannot be paid. For example, if a payment method requires 3DS
    * authentication due to SCA regulation and further user action is needed, this parameter does not
    * create a subscription and returns an error instead. This was the default behavior for API
-   * versions prior to 2019-03-14. See the [changelog](https://stripe.com/docs/upgrades#2019-03-14)
-   * to learn more.
+   * versions prior to 2019-03-14. See the <a
+   * href="https://stripe.com/docs/upgrades#2019-03-14">changelog</a> to learn more.
    */
   @SerializedName("payment_behavior")
   PaymentBehavior paymentBehavior;
@@ -62,35 +63,37 @@ public class SubscriptionItemCreateParams extends ApiRequestParams {
   String plan;
 
   /**
-   * Flag indicating whether to [prorate](https://stripe.com/docs/billing/subscriptions/prorations)
-   * switching plans during a billing cycle. This field has been deprecated and will be removed in a
-   * future API version. Use `proration_behavior=create_prorations` as a replacement for
-   * `prorate=true` and `proration_behavior=none` for `prorate=false`.
+   * Flag indicating whether to <a
+   * href="https://stripe.com/docs/billing/subscriptions/prorations">prorate</a> switching plans
+   * during a billing cycle. This field has been deprecated and will be removed in a future API
+   * version. Use {@code proration_behavior=create_prorations} as a replacement for {@code
+   * prorate=true} and {@code proration_behavior=none} for {@code prorate=false}.
    */
   @SerializedName("prorate")
   Boolean prorate;
 
   /**
-   * Determines how to handle
-   * [prorations](https://stripe.com/docs/subscriptions/billing-cycle#prorations) when the billing
-   * cycle changes (e.g., when switching plans, resetting `billing_cycle_anchor=now`, or starting a
-   * trial), or if an item's `quantity` changes. Valid values are `create_prorations`, `none`, or
-   * `always_invoice`.
+   * Determines how to handle <a
+   * href="https://stripe.com/docs/subscriptions/billing-cycle#prorations">prorations</a> when the
+   * billing cycle changes (e.g., when switching plans, resetting {@code billing_cycle_anchor=now},
+   * or starting a trial), or if an item's {@code quantity} changes. Valid values are {@code
+   * create_prorations}, {@code none}, or {@code always_invoice}.
    *
-   * <p>Passing `create_prorations` will cause proration invoice items to be created when
-   * applicable. These proration items will only be invoiced immediately under [certain
-   * conditions](https://stripe.com/docs/subscriptions/upgrading-downgrading#immediate-payment). In
-   * order to always invoice immediately for prorations, pass `always_invoice`.
+   * <p>Passing {@code create_prorations} will cause proration invoice items to be created when
+   * applicable. These proration items will only be invoiced immediately under <a
+   * href="https://stripe.com/docs/subscriptions/upgrading-downgrading#immediate-payment">certain
+   * conditions</a>. In order to always invoice immediately for prorations, pass {@code
+   * always_invoice}.
    *
-   * <p>Prorations can be disabled by passing `none`.
+   * <p>Prorations can be disabled by passing {@code none}.
    */
   @SerializedName("proration_behavior")
   ProrationBehavior prorationBehavior;
 
   /**
    * If set, the proration will be calculated as though the subscription was updated at the given
-   * time. This can be used to apply the same proration that was previewed with the [upcoming
-   * invoice](#retrieve_customer_invoice) endpoint.
+   * time. This can be used to apply the same proration that was previewed with the <a
+   * href="https://stripe.com/docs/api#retrieve_customer_invoice">upcoming invoice</a> endpoint.
    */
   @SerializedName("proration_date")
   Long prorationDate;
@@ -104,11 +107,11 @@ public class SubscriptionItemCreateParams extends ApiRequestParams {
   String subscription;
 
   /**
-   * A list of [Tax Rate](https://stripe.com/docs/api/tax_rates) ids. These Tax Rates will override
-   * the
-   * [`default_tax_rates`](https://stripe.com/docs/api/subscriptions/create#create_subscription-default_tax_rates)
-   * on the Subscription. When updating, pass an empty string to remove previously-defined tax
-   * rates.
+   * A list of <a href="https://stripe.com/docs/api/tax_rates">Tax Rate</a> ids. These Tax Rates
+   * will override the <a
+   * href="https://stripe.com/docs/api/subscriptions/create#create_subscription-default_tax_rates">{@code
+   * default_tax_rates}</a> on the Subscription. When updating, pass an empty string to remove
+   * previously-defined tax rates.
    */
   @SerializedName("tax_rates")
   Object taxRates;
@@ -283,19 +286,19 @@ public class SubscriptionItemCreateParams extends ApiRequestParams {
     }
 
     /**
-     * Use `allow_incomplete` to create subscriptions with `status=incomplete` if the first invoice
-     * cannot be paid. Creating subscriptions with this status allows you to manage scenarios where
-     * additional user actions are needed to pay a subscription's invoice. For example, SCA
-     * regulation may require 3DS authentication to complete payment. See the [SCA Migration
-     * Guide](https://stripe.com/docs/billing/migration/strong-customer-authentication) for Billing
-     * to learn more. This is the default behavior.
+     * Use {@code allow_incomplete} to create subscriptions with {@code status=incomplete} if the
+     * first invoice cannot be paid. Creating subscriptions with this status allows you to manage
+     * scenarios where additional user actions are needed to pay a subscription's invoice. For
+     * example, SCA regulation may require 3DS authentication to complete payment. See the <a
+     * href="https://stripe.com/docs/billing/migration/strong-customer-authentication">SCA Migration
+     * Guide</a> for Billing to learn more. This is the default behavior.
      *
-     * <p>Use `error_if_incomplete` if you want Stripe to return an HTTP 402 status code if a
+     * <p>Use {@code error_if_incomplete} if you want Stripe to return an HTTP 402 status code if a
      * subscription's first invoice cannot be paid. For example, if a payment method requires 3DS
      * authentication due to SCA regulation and further user action is needed, this parameter does
      * not create a subscription and returns an error instead. This was the default behavior for API
-     * versions prior to 2019-03-14. See the
-     * [changelog](https://stripe.com/docs/upgrades#2019-03-14) to learn more.
+     * versions prior to 2019-03-14. See the <a
+     * href="https://stripe.com/docs/upgrades#2019-03-14">changelog</a> to learn more.
      */
     public Builder setPaymentBehavior(PaymentBehavior paymentBehavior) {
       this.paymentBehavior = paymentBehavior;
@@ -309,11 +312,11 @@ public class SubscriptionItemCreateParams extends ApiRequestParams {
     }
 
     /**
-     * Flag indicating whether to
-     * [prorate](https://stripe.com/docs/billing/subscriptions/prorations) switching plans during a
-     * billing cycle. This field has been deprecated and will be removed in a future API version.
-     * Use `proration_behavior=create_prorations` as a replacement for `prorate=true` and
-     * `proration_behavior=none` for `prorate=false`.
+     * Flag indicating whether to <a
+     * href="https://stripe.com/docs/billing/subscriptions/prorations">prorate</a> switching plans
+     * during a billing cycle. This field has been deprecated and will be removed in a future API
+     * version. Use {@code proration_behavior=create_prorations} as a replacement for {@code
+     * prorate=true} and {@code proration_behavior=none} for {@code prorate=false}.
      */
     public Builder setProrate(Boolean prorate) {
       this.prorate = prorate;
@@ -321,18 +324,19 @@ public class SubscriptionItemCreateParams extends ApiRequestParams {
     }
 
     /**
-     * Determines how to handle
-     * [prorations](https://stripe.com/docs/subscriptions/billing-cycle#prorations) when the billing
-     * cycle changes (e.g., when switching plans, resetting `billing_cycle_anchor=now`, or starting
-     * a trial), or if an item's `quantity` changes. Valid values are `create_prorations`, `none`,
-     * or `always_invoice`.
+     * Determines how to handle <a
+     * href="https://stripe.com/docs/subscriptions/billing-cycle#prorations">prorations</a> when the
+     * billing cycle changes (e.g., when switching plans, resetting {@code
+     * billing_cycle_anchor=now}, or starting a trial), or if an item's {@code quantity} changes.
+     * Valid values are {@code create_prorations}, {@code none}, or {@code always_invoice}.
      *
-     * <p>Passing `create_prorations` will cause proration invoice items to be created when
-     * applicable. These proration items will only be invoiced immediately under [certain
-     * conditions](https://stripe.com/docs/subscriptions/upgrading-downgrading#immediate-payment).
-     * In order to always invoice immediately for prorations, pass `always_invoice`.
+     * <p>Passing {@code create_prorations} will cause proration invoice items to be created when
+     * applicable. These proration items will only be invoiced immediately under <a
+     * href="https://stripe.com/docs/subscriptions/upgrading-downgrading#immediate-payment">certain
+     * conditions</a>. In order to always invoice immediately for prorations, pass {@code
+     * always_invoice}.
      *
-     * <p>Prorations can be disabled by passing `none`.
+     * <p>Prorations can be disabled by passing {@code none}.
      */
     public Builder setProrationBehavior(ProrationBehavior prorationBehavior) {
       this.prorationBehavior = prorationBehavior;
@@ -341,8 +345,8 @@ public class SubscriptionItemCreateParams extends ApiRequestParams {
 
     /**
      * If set, the proration will be calculated as though the subscription was updated at the given
-     * time. This can be used to apply the same proration that was previewed with the [upcoming
-     * invoice](#retrieve_customer_invoice) endpoint.
+     * time. This can be used to apply the same proration that was previewed with the <a
+     * href="https://stripe.com/docs/api#retrieve_customer_invoice">upcoming invoice</a> endpoint.
      */
     public Builder setProrationDate(Long prorationDate) {
       this.prorationDate = prorationDate;
@@ -390,11 +394,11 @@ public class SubscriptionItemCreateParams extends ApiRequestParams {
     }
 
     /**
-     * A list of [Tax Rate](https://stripe.com/docs/api/tax_rates) ids. These Tax Rates will
-     * override the
-     * [`default_tax_rates`](https://stripe.com/docs/api/subscriptions/create#create_subscription-default_tax_rates)
-     * on the Subscription. When updating, pass an empty string to remove previously-defined tax
-     * rates.
+     * A list of <a href="https://stripe.com/docs/api/tax_rates">Tax Rate</a> ids. These Tax Rates
+     * will override the <a
+     * href="https://stripe.com/docs/api/subscriptions/create#create_subscription-default_tax_rates">{@code
+     * default_tax_rates}</a> on the Subscription. When updating, pass an empty string to remove
+     * previously-defined tax rates.
      */
     public Builder setTaxRates(EmptyParam taxRates) {
       this.taxRates = taxRates;
@@ -402,11 +406,11 @@ public class SubscriptionItemCreateParams extends ApiRequestParams {
     }
 
     /**
-     * A list of [Tax Rate](https://stripe.com/docs/api/tax_rates) ids. These Tax Rates will
-     * override the
-     * [`default_tax_rates`](https://stripe.com/docs/api/subscriptions/create#create_subscription-default_tax_rates)
-     * on the Subscription. When updating, pass an empty string to remove previously-defined tax
-     * rates.
+     * A list of <a href="https://stripe.com/docs/api/tax_rates">Tax Rate</a> ids. These Tax Rates
+     * will override the <a
+     * href="https://stripe.com/docs/api/subscriptions/create#create_subscription-default_tax_rates">{@code
+     * default_tax_rates}</a> on the Subscription. When updating, pass an empty string to remove
+     * previously-defined tax rates.
      */
     public Builder setTaxRates(List<String> taxRates) {
       this.taxRates = taxRates;

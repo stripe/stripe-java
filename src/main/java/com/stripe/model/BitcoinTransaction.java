@@ -9,7 +9,7 @@ import lombok.Setter;
 @Setter
 @EqualsAndHashCode(callSuper = false)
 public class BitcoinTransaction extends StripeObject implements HasId {
-  /** The amount of `currency` that the transaction was converted to in real-time. */
+  /** The amount of {@code currency} that the transaction was converted to in real-time. */
   @SerializedName("amount")
   Long amount;
 
@@ -22,8 +22,8 @@ public class BitcoinTransaction extends StripeObject implements HasId {
   Long created;
 
   /**
-   * Three-letter [ISO code for the currency](https://stripe.com/docs/currencies) to which this
-   * transaction was converted.
+   * Three-letter <a href="https://stripe.com/docs/currencies">ISO code for the currency</a> to
+   * which this transaction was converted.
    */
   @SerializedName("currency")
   String currency;
@@ -36,7 +36,7 @@ public class BitcoinTransaction extends StripeObject implements HasId {
   /**
    * String representing the object's type. Objects of the same type share the same value.
    *
-   * <p>Equal to `bitcoin_transaction`.
+   * <p>Equal to {@code bitcoin_transaction}.
    */
   @SerializedName("object")
   String object;

@@ -30,12 +30,12 @@ public class SessionCreateParams extends ApiRequestParams {
   String clientReferenceId;
 
   /**
-   * ID of an existing customer, if one exists. Only supported for Checkout Sessions in `payment` or
-   * `subscription` mode, but not Checkout Sessions in `setup` mode. The email stored on the
-   * customer will be used to prefill the email field on the Checkout page. If the customer changes
-   * their email on the Checkout page, the Customer object will be updated with the new email. If
-   * blank for Checkout Sessions in `payment` or `subscription` mode, Checkout will create a new
-   * customer object based on information provided during the session.
+   * ID of an existing customer, if one exists. Only supported for Checkout Sessions in {@code
+   * payment} or {@code subscription} mode, but not Checkout Sessions in {@code setup} mode. The
+   * email stored on the customer will be used to prefill the email field on the Checkout page. If
+   * the customer changes their email on the Checkout page, the Customer object will be updated with
+   * the new email. If blank for Checkout Sessions in {@code payment} or {@code subscription} mode,
+   * Checkout will create a new customer object based on information provided during the session.
    */
   @SerializedName("customer")
   String customer;
@@ -44,7 +44,7 @@ public class SessionCreateParams extends ApiRequestParams {
    * If provided, this value will be used when the Customer object is created. If not provided,
    * customers will be asked to enter their email address. Use this parameter to prefill customer
    * data if you already have an email on file. To access information about the customer once a
-   * session is complete, use the `customer` field.
+   * session is complete, use the {@code customer} field.
    */
   @SerializedName("customer_email")
   String customerEmail;
@@ -64,14 +64,14 @@ public class SessionCreateParams extends ApiRequestParams {
 
   /**
    * A list of items the customer is purchasing. Use this parameter for one-time payments or adding
-   * invoice line items to a subscription (used in conjunction with `subscription_data`).
+   * invoice line items to a subscription (used in conjunction with {@code subscription_data}).
    */
   @SerializedName("line_items")
   List<LineItem> lineItems;
 
   /**
-   * The IETF language tag of the locale Checkout is displayed in. If blank or `auto`, the browser's
-   * locale is used.
+   * The IETF language tag of the locale Checkout is displayed in. If blank or {@code auto}, the
+   * browser's locale is used.
    */
   @SerializedName("locale")
   Locale locale;
@@ -79,47 +79,52 @@ public class SessionCreateParams extends ApiRequestParams {
   /**
    * Set of key-value pairs that you can attach to an object. This can be useful for storing
    * additional information about the object in a structured format. Individual keys can be unset by
-   * posting an empty value to them. All keys can be unset by posting an empty value to `metadata`.
+   * posting an empty value to them. All keys can be unset by posting an empty value to {@code
+   * metadata}.
    */
   @SerializedName("metadata")
   Map<String, String> metadata;
 
-  /** The mode of the Checkout Session, one of `payment`, `setup`, or `subscription`. */
+  /**
+   * The mode of the Checkout Session, one of {@code payment}, {@code setup}, or {@code
+   * subscription}.
+   */
   @SerializedName("mode")
   Mode mode;
 
   /**
-   * A subset of parameters to be passed to PaymentIntent creation for Checkout Sessions in
-   * `payment` mode.
+   * A subset of parameters to be passed to PaymentIntent creation for Checkout Sessions in {@code
+   * payment} mode.
    */
   @SerializedName("payment_intent_data")
   PaymentIntentData paymentIntentData;
 
   /**
    * A list of the types of payment methods (e.g. card) this Checkout Session is allowed to accept.
-   * The only supported values today are `card` and `ideal`.
+   * The only supported values today are {@code card} and {@code ideal}.
    */
   @SerializedName("payment_method_types")
   List<PaymentMethodType> paymentMethodTypes;
 
   /**
-   * A subset of parameters to be passed to SetupIntent creation for Checkout Sessions in `setup`
-   * mode.
+   * A subset of parameters to be passed to SetupIntent creation for Checkout Sessions in {@code
+   * setup} mode.
    */
   @SerializedName("setup_intent_data")
   SetupIntentData setupIntentData;
 
   /**
    * Describes the type of transaction being performed by Checkout in order to customize relevant
-   * text on the page, such as the submit button. `submit_type` can only be specified on Checkout
-   * Sessions in `payment` mode, but not Checkout Sessions in `subscription` or `setup` mode.
+   * text on the page, such as the submit button. {@code submit_type} can only be specified on
+   * Checkout Sessions in {@code payment} mode, but not Checkout Sessions in {@code subscription} or
+   * {@code setup} mode.
    */
   @SerializedName("submit_type")
   SubmitType submitType;
 
   /**
-   * A subset of parameters to be passed to subscription creation for Checkout Sessions in
-   * `subscription` mode.
+   * A subset of parameters to be passed to subscription creation for Checkout Sessions in {@code
+   * subscription} mode.
    */
   @SerializedName("subscription_data")
   SubscriptionData subscriptionData;
@@ -127,7 +132,8 @@ public class SessionCreateParams extends ApiRequestParams {
   /**
    * The URL to which Stripe should send customers when payment or setup is complete. If you’d like
    * access to the Checkout Session for the successful payment, read more about it in our guide on
-   * [fulfilling your payments with webhooks](/docs/payments/checkout/fulfillment#webhooks).
+   * <a href="https://stripe.com/docs/payments/checkout/fulfillment#webhooks">fulfilling your
+   * payments with webhooks</a>.
    */
   @SerializedName("success_url")
   String successUrl;
@@ -255,12 +261,13 @@ public class SessionCreateParams extends ApiRequestParams {
     }
 
     /**
-     * ID of an existing customer, if one exists. Only supported for Checkout Sessions in `payment`
-     * or `subscription` mode, but not Checkout Sessions in `setup` mode. The email stored on the
-     * customer will be used to prefill the email field on the Checkout page. If the customer
-     * changes their email on the Checkout page, the Customer object will be updated with the new
-     * email. If blank for Checkout Sessions in `payment` or `subscription` mode, Checkout will
-     * create a new customer object based on information provided during the session.
+     * ID of an existing customer, if one exists. Only supported for Checkout Sessions in {@code
+     * payment} or {@code subscription} mode, but not Checkout Sessions in {@code setup} mode. The
+     * email stored on the customer will be used to prefill the email field on the Checkout page. If
+     * the customer changes their email on the Checkout page, the Customer object will be updated
+     * with the new email. If blank for Checkout Sessions in {@code payment} or {@code subscription}
+     * mode, Checkout will create a new customer object based on information provided during the
+     * session.
      */
     public Builder setCustomer(String customer) {
       this.customer = customer;
@@ -271,7 +278,7 @@ public class SessionCreateParams extends ApiRequestParams {
      * If provided, this value will be used when the Customer object is created. If not provided,
      * customers will be asked to enter their email address. Use this parameter to prefill customer
      * data if you already have an email on file. To access information about the customer once a
-     * session is complete, use the `customer` field.
+     * session is complete, use the {@code customer} field.
      */
     public Builder setCustomerEmail(String customerEmail) {
       this.customerEmail = customerEmail;
@@ -357,7 +364,7 @@ public class SessionCreateParams extends ApiRequestParams {
     }
 
     /**
-     * The IETF language tag of the locale Checkout is displayed in. If blank or `auto`, the
+     * The IETF language tag of the locale Checkout is displayed in. If blank or {@code auto}, the
      * browser's locale is used.
      */
     public Builder setLocale(Locale locale) {
@@ -391,15 +398,18 @@ public class SessionCreateParams extends ApiRequestParams {
       return this;
     }
 
-    /** The mode of the Checkout Session, one of `payment`, `setup`, or `subscription`. */
+    /**
+     * The mode of the Checkout Session, one of {@code payment}, {@code setup}, or {@code
+     * subscription}.
+     */
     public Builder setMode(Mode mode) {
       this.mode = mode;
       return this;
     }
 
     /**
-     * A subset of parameters to be passed to PaymentIntent creation for Checkout Sessions in
-     * `payment` mode.
+     * A subset of parameters to be passed to PaymentIntent creation for Checkout Sessions in {@code
+     * payment} mode.
      */
     public Builder setPaymentIntentData(PaymentIntentData paymentIntentData) {
       this.paymentIntentData = paymentIntentData;
@@ -433,8 +443,8 @@ public class SessionCreateParams extends ApiRequestParams {
     }
 
     /**
-     * A subset of parameters to be passed to SetupIntent creation for Checkout Sessions in `setup`
-     * mode.
+     * A subset of parameters to be passed to SetupIntent creation for Checkout Sessions in {@code
+     * setup} mode.
      */
     public Builder setSetupIntentData(SetupIntentData setupIntentData) {
       this.setupIntentData = setupIntentData;
@@ -443,8 +453,9 @@ public class SessionCreateParams extends ApiRequestParams {
 
     /**
      * Describes the type of transaction being performed by Checkout in order to customize relevant
-     * text on the page, such as the submit button. `submit_type` can only be specified on Checkout
-     * Sessions in `payment` mode, but not Checkout Sessions in `subscription` or `setup` mode.
+     * text on the page, such as the submit button. {@code submit_type} can only be specified on
+     * Checkout Sessions in {@code payment} mode, but not Checkout Sessions in {@code subscription}
+     * or {@code setup} mode.
      */
     public Builder setSubmitType(SubmitType submitType) {
       this.submitType = submitType;
@@ -452,8 +463,8 @@ public class SessionCreateParams extends ApiRequestParams {
     }
 
     /**
-     * A subset of parameters to be passed to subscription creation for Checkout Sessions in
-     * `subscription` mode.
+     * A subset of parameters to be passed to subscription creation for Checkout Sessions in {@code
+     * subscription} mode.
      */
     public Builder setSubscriptionData(SubscriptionData subscriptionData) {
       this.subscriptionData = subscriptionData;
@@ -463,8 +474,8 @@ public class SessionCreateParams extends ApiRequestParams {
     /**
      * The URL to which Stripe should send customers when payment or setup is complete. If you’d
      * like access to the Checkout Session for the successful payment, read more about it in our
-     * guide on [fulfilling your payments with
-     * webhooks](/docs/payments/checkout/fulfillment#webhooks).
+     * guide on <a href="https://stripe.com/docs/payments/checkout/fulfillment#webhooks">fulfilling
+     * your payments with webhooks</a>.
      */
     public Builder setSuccessUrl(String successUrl) {
       this.successUrl = successUrl;
@@ -479,8 +490,9 @@ public class SessionCreateParams extends ApiRequestParams {
     Long amount;
 
     /**
-     * Three-letter [ISO currency code](https://www.iso.org/iso-4217-currency-codes.html), in
-     * lowercase. Must be a [supported currency](https://stripe.com/docs/currencies).
+     * Three-letter <a href="https://www.iso.org/iso-4217-currency-codes.html">ISO currency
+     * code</a>, in lowercase. Must be a <a href="https://stripe.com/docs/currencies">supported
+     * currency</a>.
      */
     @SerializedName("currency")
     String currency;
@@ -565,8 +577,9 @@ public class SessionCreateParams extends ApiRequestParams {
       }
 
       /**
-       * Three-letter [ISO currency code](https://www.iso.org/iso-4217-currency-codes.html), in
-       * lowercase. Must be a [supported currency](https://stripe.com/docs/currencies).
+       * Three-letter <a href="https://www.iso.org/iso-4217-currency-codes.html">ISO currency
+       * code</a>, in lowercase. Must be a <a href="https://stripe.com/docs/currencies">supported
+       * currency</a>.
        */
       public Builder setCurrency(String currency) {
         this.currency = currency;
@@ -650,9 +663,10 @@ public class SessionCreateParams extends ApiRequestParams {
     /**
      * The amount of the application fee (if any) that will be applied to the payment and
      * transferred to the application owner's Stripe account. To use an application fee, the request
-     * must be made on behalf of another account, using the `Stripe-Account` header or an OAuth key.
-     * For more information, see the PaymentIntents [use case for connected
-     * accounts](https://stripe.com/docs/payments/connected-accounts).
+     * must be made on behalf of another account, using the {@code Stripe-Account} header or an
+     * OAuth key. For more information, see the PaymentIntents <a
+     * href="https://stripe.com/docs/payments/connected-accounts">use case for connected
+     * accounts</a>.
      */
     @SerializedName("application_fee_amount")
     Long applicationFeeAmount;
@@ -677,15 +691,16 @@ public class SessionCreateParams extends ApiRequestParams {
     /**
      * Set of key-value pairs that you can attach to an object. This can be useful for storing
      * additional information about the object in a structured format. Individual keys can be unset
-     * by posting an empty value to them. All keys can be unset by posting an empty value to
-     * `metadata`.
+     * by posting an empty value to them. All keys can be unset by posting an empty value to {@code
+     * metadata}.
      */
     @SerializedName("metadata")
     Map<String, String> metadata;
 
     /**
      * The Stripe account ID for which these funds are intended. For details, see the PaymentIntents
-     * [use case for connected accounts](/docs/payments/connected-accounts).
+     * <a href="https://stripe.com/docs/payments/connected-accounts">use case for connected
+     * accounts</a>.
      */
     @SerializedName("on_behalf_of")
     String onBehalfOf;
@@ -697,20 +712,20 @@ public class SessionCreateParams extends ApiRequestParams {
     /**
      * Indicates that you intend to make future payments with this PaymentIntent's payment method.
      *
-     * <p>If present, the payment method used with this PaymentIntent can be
-     * [attached](https://stripe.com/docs/api/payment_methods/attach) to a Customer, even after the
-     * transaction completes.
+     * <p>If present, the payment method used with this PaymentIntent can be <a
+     * href="https://stripe.com/docs/api/payment_methods/attach">attached</a> to a Customer, even
+     * after the transaction completes.
      *
-     * <p>For more, learn to [save card details after a
-     * payment](https://stripe.com/docs/payments/save-after-payment).
+     * <p>For more, learn to <a href="https://stripe.com/docs/payments/save-after-payment">save card
+     * details after a payment</a>.
      *
-     * <p>Stripe uses `setup_future_usage` to dynamically optimize your payment flow and comply with
-     * regional legislation and network rules. For example, if your customer is impacted by
-     * [SCA](https://stripe.com/docs/strong-customer-authentication), using `off_session` will
-     * ensure that they are authenticated while processing this PaymentIntent. You will then be able
-     * to collect [off-session
-     * payments](https://stripe.com/docs/payments/cards/charging-saved-cards#off-session-payments-with-saved-cards)
-     * for this customer.
+     * <p>Stripe uses {@code setup_future_usage} to dynamically optimize your payment flow and
+     * comply with regional legislation and network rules. For example, if your customer is impacted
+     * by <a href="https://stripe.com/docs/strong-customer-authentication">SCA</a>, using {@code
+     * off_session} will ensure that they are authenticated while processing this PaymentIntent. You
+     * will then be able to collect <a
+     * href="https://stripe.com/docs/payments/cards/charging-saved-cards#off-session-payments-with-saved-cards">off-session
+     * payments</a> for this customer.
      */
     @SerializedName("setup_future_usage")
     SetupFutureUsage setupFutureUsage;
@@ -737,8 +752,9 @@ public class SessionCreateParams extends ApiRequestParams {
 
     /**
      * The parameters used to automatically create a Transfer when the payment succeeds. For more
-     * information, see the PaymentIntents [use case for connected
-     * accounts](https://stripe.com/docs/payments/connected-accounts).
+     * information, see the PaymentIntents <a
+     * href="https://stripe.com/docs/payments/connected-accounts">use case for connected
+     * accounts</a>.
      */
     @SerializedName("transfer_data")
     TransferData transferData;
@@ -819,9 +835,10 @@ public class SessionCreateParams extends ApiRequestParams {
       /**
        * The amount of the application fee (if any) that will be applied to the payment and
        * transferred to the application owner's Stripe account. To use an application fee, the
-       * request must be made on behalf of another account, using the `Stripe-Account` header or an
-       * OAuth key. For more information, see the PaymentIntents [use case for connected
-       * accounts](https://stripe.com/docs/payments/connected-accounts).
+       * request must be made on behalf of another account, using the {@code Stripe-Account} header
+       * or an OAuth key. For more information, see the PaymentIntents <a
+       * href="https://stripe.com/docs/payments/connected-accounts">use case for connected
+       * accounts</a>.
        */
       public Builder setApplicationFeeAmount(Long applicationFeeAmount) {
         this.applicationFeeAmount = applicationFeeAmount;
@@ -894,7 +911,8 @@ public class SessionCreateParams extends ApiRequestParams {
 
       /**
        * The Stripe account ID for which these funds are intended. For details, see the
-       * PaymentIntents [use case for connected accounts](/docs/payments/connected-accounts).
+       * PaymentIntents <a href="https://stripe.com/docs/payments/connected-accounts">use case for
+       * connected accounts</a>.
        */
       public Builder setOnBehalfOf(String onBehalfOf) {
         this.onBehalfOf = onBehalfOf;
@@ -910,20 +928,20 @@ public class SessionCreateParams extends ApiRequestParams {
       /**
        * Indicates that you intend to make future payments with this PaymentIntent's payment method.
        *
-       * <p>If present, the payment method used with this PaymentIntent can be
-       * [attached](https://stripe.com/docs/api/payment_methods/attach) to a Customer, even after
-       * the transaction completes.
+       * <p>If present, the payment method used with this PaymentIntent can be <a
+       * href="https://stripe.com/docs/api/payment_methods/attach">attached</a> to a Customer, even
+       * after the transaction completes.
        *
-       * <p>For more, learn to [save card details after a
-       * payment](https://stripe.com/docs/payments/save-after-payment).
+       * <p>For more, learn to <a href="https://stripe.com/docs/payments/save-after-payment">save
+       * card details after a payment</a>.
        *
-       * <p>Stripe uses `setup_future_usage` to dynamically optimize your payment flow and comply
-       * with regional legislation and network rules. For example, if your customer is impacted by
-       * [SCA](https://stripe.com/docs/strong-customer-authentication), using `off_session` will
-       * ensure that they are authenticated while processing this PaymentIntent. You will then be
-       * able to collect [off-session
-       * payments](https://stripe.com/docs/payments/cards/charging-saved-cards#off-session-payments-with-saved-cards)
-       * for this customer.
+       * <p>Stripe uses {@code setup_future_usage} to dynamically optimize your payment flow and
+       * comply with regional legislation and network rules. For example, if your customer is
+       * impacted by <a href="https://stripe.com/docs/strong-customer-authentication">SCA</a>, using
+       * {@code off_session} will ensure that they are authenticated while processing this
+       * PaymentIntent. You will then be able to collect <a
+       * href="https://stripe.com/docs/payments/cards/charging-saved-cards#off-session-payments-with-saved-cards">off-session
+       * payments</a> for this customer.
        */
       public Builder setSetupFutureUsage(SetupFutureUsage setupFutureUsage) {
         this.setupFutureUsage = setupFutureUsage;
@@ -958,8 +976,9 @@ public class SessionCreateParams extends ApiRequestParams {
 
       /**
        * The parameters used to automatically create a Transfer when the payment succeeds. For more
-       * information, see the PaymentIntents [use case for connected
-       * accounts](https://stripe.com/docs/payments/connected-accounts).
+       * information, see the PaymentIntents <a
+       * href="https://stripe.com/docs/payments/connected-accounts">use case for connected
+       * accounts</a>.
        */
       public Builder setTransferData(TransferData transferData) {
         this.transferData = transferData;
@@ -1114,8 +1133,8 @@ public class SessionCreateParams extends ApiRequestParams {
         String city;
 
         /**
-         * Two-letter country code ([ISO 3166-1
-         * alpha-2](https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2)).
+         * Two-letter country code (<a href="https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2">ISO
+         * 3166-1 alpha-2</a>).
          */
         @SerializedName("country")
         String country;
@@ -1201,8 +1220,8 @@ public class SessionCreateParams extends ApiRequestParams {
           }
 
           /**
-           * Two-letter country code ([ISO 3166-1
-           * alpha-2](https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2)).
+           * Two-letter country code (<a href="https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2">ISO
+           * 3166-1 alpha-2</a>).
            */
           public Builder setCountry(String country) {
             this.country = country;
@@ -1269,7 +1288,8 @@ public class SessionCreateParams extends ApiRequestParams {
       /**
        * If specified, successful charges will be attributed to the destination account for tax
        * reporting, and the funds from charges will be transferred to the destination account. The
-       * ID of the resulting transfer will be returned on the successful charge's `transfer` field.
+       * ID of the resulting transfer will be returned on the successful charge's {@code transfer}
+       * field.
        */
       @SerializedName("destination")
       String destination;
@@ -1305,7 +1325,7 @@ public class SessionCreateParams extends ApiRequestParams {
         /**
          * If specified, successful charges will be attributed to the destination account for tax
          * reporting, and the funds from charges will be transferred to the destination account. The
-         * ID of the resulting transfer will be returned on the successful charge's `transfer`
+         * ID of the resulting transfer will be returned on the successful charge's {@code transfer}
          * field.
          */
         public Builder setDestination(String destination) {
@@ -1392,8 +1412,8 @@ public class SessionCreateParams extends ApiRequestParams {
     /**
      * Set of key-value pairs that you can attach to an object. This can be useful for storing
      * additional information about the object in a structured format. Individual keys can be unset
-     * by posting an empty value to them. All keys can be unset by posting an empty value to
-     * `metadata`.
+     * by posting an empty value to them. All keys can be unset by posting an empty value to {@code
+     * metadata}.
      */
     @SerializedName("metadata")
     Map<String, String> metadata;
@@ -1504,9 +1524,9 @@ public class SessionCreateParams extends ApiRequestParams {
      * A non-negative decimal between 0 and 100, with at most two decimal places. This represents
      * the percentage of the subscription invoice subtotal that will be transferred to the
      * application owner's Stripe account. To use an application fee percent, the request must be
-     * made on behalf of another account, using the `Stripe-Account` header or an OAuth key. For
-     * more information, see the application fees
-     * [documentation](https://stripe.com/docs/connect/subscriptions#collecting-fees-on-subscriptions).
+     * made on behalf of another account, using the {@code Stripe-Account} header or an OAuth key.
+     * For more information, see the application fees <a
+     * href="https://stripe.com/docs/connect/subscriptions#collecting-fees-on-subscriptions">documentation</a>.
      */
     @SerializedName("application_fee_percent")
     BigDecimal applicationFeePercent;
@@ -1522,7 +1542,7 @@ public class SessionCreateParams extends ApiRequestParams {
 
     /**
      * A list of items, each with an attached plan, that the customer is subscribing to. Use this
-     * parameter for subscriptions. To create one-time payments, use `line_items`.
+     * parameter for subscriptions. To create one-time payments, use {@code line_items}.
      */
     @SerializedName("items")
     List<Item> items;
@@ -1530,8 +1550,8 @@ public class SessionCreateParams extends ApiRequestParams {
     /**
      * Set of key-value pairs that you can attach to an object. This can be useful for storing
      * additional information about the object in a structured format. Individual keys can be unset
-     * by posting an empty value to them. All keys can be unset by posting an empty value to
-     * `metadata`.
+     * by posting an empty value to them. All keys can be unset by posting an empty value to {@code
+     * metadata}.
      */
     @SerializedName("metadata")
     Map<String, String> metadata;
@@ -1544,8 +1564,9 @@ public class SessionCreateParams extends ApiRequestParams {
     Long trialEnd;
 
     /**
-     * Indicates if a plan’s `trial_period_days` should be applied to the subscription. Setting
-     * `trial_end` on `subscription_data` is preferred. Defaults to `false`.
+     * Indicates if a plan’s {@code trial_period_days} should be applied to the subscription.
+     * Setting {@code trial_end} on {@code subscription_data} is preferred. Defaults to {@code
+     * false}.
      */
     @SerializedName("trial_from_plan")
     Boolean trialFromPlan;
@@ -1609,9 +1630,9 @@ public class SessionCreateParams extends ApiRequestParams {
        * A non-negative decimal between 0 and 100, with at most two decimal places. This represents
        * the percentage of the subscription invoice subtotal that will be transferred to the
        * application owner's Stripe account. To use an application fee percent, the request must be
-       * made on behalf of another account, using the `Stripe-Account` header or an OAuth key. For
-       * more information, see the application fees
-       * [documentation](https://stripe.com/docs/connect/subscriptions#collecting-fees-on-subscriptions).
+       * made on behalf of another account, using the {@code Stripe-Account} header or an OAuth key.
+       * For more information, see the application fees <a
+       * href="https://stripe.com/docs/connect/subscriptions#collecting-fees-on-subscriptions">documentation</a>.
        */
       public Builder setApplicationFeePercent(BigDecimal applicationFeePercent) {
         this.applicationFeePercent = applicationFeePercent;
@@ -1706,8 +1727,9 @@ public class SessionCreateParams extends ApiRequestParams {
       }
 
       /**
-       * Indicates if a plan’s `trial_period_days` should be applied to the subscription. Setting
-       * `trial_end` on `subscription_data` is preferred. Defaults to `false`.
+       * Indicates if a plan’s {@code trial_period_days} should be applied to the subscription.
+       * Setting {@code trial_end} on {@code subscription_data} is preferred. Defaults to {@code
+       * false}.
        */
       public Builder setTrialFromPlan(Boolean trialFromPlan) {
         this.trialFromPlan = trialFromPlan;

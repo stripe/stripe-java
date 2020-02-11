@@ -11,23 +11,24 @@ import lombok.Getter;
 @Getter
 public class PlanListParams extends ApiRequestParams {
   /**
-   * Only return plans that are active or inactive (e.g., pass `false` to list all inactive plans).
+   * Only return plans that are active or inactive (e.g., pass {@code false} to list all inactive
+   * plans).
    */
   @SerializedName("active")
   Boolean active;
 
   /**
-   * A filter on the list, based on the object `created` field. The value can be a string with an
-   * integer Unix timestamp, or it can be a dictionary with a number of different query options.
+   * A filter on the list, based on the object {@code created} field. The value can be a string with
+   * an integer Unix timestamp, or it can be a dictionary with a number of different query options.
    */
   @SerializedName("created")
   Object created;
 
   /**
-   * A cursor for use in pagination. `ending_before` is an object ID that defines your place in the
-   * list. For instance, if you make a list request and receive 100 objects, starting with
-   * `obj_bar`, your subsequent call can include `ending_before=obj_bar` in order to fetch the
-   * previous page of the list.
+   * A cursor for use in pagination. {@code ending_before} is an object ID that defines your place
+   * in the list. For instance, if you make a list request and receive 100 objects, starting with
+   * {@code obj_bar}, your subsequent call can include {@code ending_before=obj_bar} in order to
+   * fetch the previous page of the list.
    */
   @SerializedName("ending_before")
   String endingBefore;
@@ -57,10 +58,10 @@ public class PlanListParams extends ApiRequestParams {
   String product;
 
   /**
-   * A cursor for use in pagination. `starting_after` is an object ID that defines your place in the
-   * list. For instance, if you make a list request and receive 100 objects, ending with `obj_foo`,
-   * your subsequent call can include `starting_after=obj_foo` in order to fetch the next page of
-   * the list.
+   * A cursor for use in pagination. {@code starting_after} is an object ID that defines your place
+   * in the list. For instance, if you make a list request and receive 100 objects, ending with
+   * {@code obj_foo}, your subsequent call can include {@code starting_after=obj_foo} in order to
+   * fetch the next page of the list.
    */
   @SerializedName("starting_after")
   String startingAfter;
@@ -119,7 +120,7 @@ public class PlanListParams extends ApiRequestParams {
     }
 
     /**
-     * Only return plans that are active or inactive (e.g., pass `false` to list all inactive
+     * Only return plans that are active or inactive (e.g., pass {@code false} to list all inactive
      * plans).
      */
     public Builder setActive(Boolean active) {
@@ -128,8 +129,9 @@ public class PlanListParams extends ApiRequestParams {
     }
 
     /**
-     * A filter on the list, based on the object `created` field. The value can be a string with an
-     * integer Unix timestamp, or it can be a dictionary with a number of different query options.
+     * A filter on the list, based on the object {@code created} field. The value can be a string
+     * with an integer Unix timestamp, or it can be a dictionary with a number of different query
+     * options.
      */
     public Builder setCreated(Created created) {
       this.created = created;
@@ -137,8 +139,9 @@ public class PlanListParams extends ApiRequestParams {
     }
 
     /**
-     * A filter on the list, based on the object `created` field. The value can be a string with an
-     * integer Unix timestamp, or it can be a dictionary with a number of different query options.
+     * A filter on the list, based on the object {@code created} field. The value can be a string
+     * with an integer Unix timestamp, or it can be a dictionary with a number of different query
+     * options.
      */
     public Builder setCreated(Long created) {
       this.created = created;
@@ -146,10 +149,10 @@ public class PlanListParams extends ApiRequestParams {
     }
 
     /**
-     * A cursor for use in pagination. `ending_before` is an object ID that defines your place in
-     * the list. For instance, if you make a list request and receive 100 objects, starting with
-     * `obj_bar`, your subsequent call can include `ending_before=obj_bar` in order to fetch the
-     * previous page of the list.
+     * A cursor for use in pagination. {@code ending_before} is an object ID that defines your place
+     * in the list. For instance, if you make a list request and receive 100 objects, starting with
+     * {@code obj_bar}, your subsequent call can include {@code ending_before=obj_bar} in order to
+     * fetch the previous page of the list.
      */
     public Builder setEndingBefore(String endingBefore) {
       this.endingBefore = endingBefore;
@@ -224,10 +227,10 @@ public class PlanListParams extends ApiRequestParams {
     }
 
     /**
-     * A cursor for use in pagination. `starting_after` is an object ID that defines your place in
-     * the list. For instance, if you make a list request and receive 100 objects, ending with
-     * `obj_foo`, your subsequent call can include `starting_after=obj_foo` in order to fetch the
-     * next page of the list.
+     * A cursor for use in pagination. {@code starting_after} is an object ID that defines your
+     * place in the list. For instance, if you make a list request and receive 100 objects, ending
+     * with {@code obj_foo}, your subsequent call can include {@code starting_after=obj_foo} in
+     * order to fetch the next page of the list.
      */
     public Builder setStartingAfter(String startingAfter) {
       this.startingAfter = startingAfter;

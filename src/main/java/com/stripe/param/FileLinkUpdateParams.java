@@ -16,8 +16,8 @@ public class FileLinkUpdateParams extends ApiRequestParams {
   List<String> expand;
 
   /**
-   * A future timestamp after which the link will no longer be usable, or `now` to expire the link
-   * immediately.
+   * A future timestamp after which the link will no longer be usable, or {@code now} to expire the
+   * link immediately.
    */
   @SerializedName("expires_at")
   Object expiresAt;
@@ -34,7 +34,8 @@ public class FileLinkUpdateParams extends ApiRequestParams {
   /**
    * Set of key-value pairs that you can attach to an object. This can be useful for storing
    * additional information about the object in a structured format. Individual keys can be unset by
-   * posting an empty value to them. All keys can be unset by posting an empty value to `metadata`.
+   * posting an empty value to them. All keys can be unset by posting an empty value to {@code
+   * metadata}.
    */
   @SerializedName("metadata")
   Map<String, String> metadata;
@@ -95,8 +96,8 @@ public class FileLinkUpdateParams extends ApiRequestParams {
     }
 
     /**
-     * A future timestamp after which the link will no longer be usable, or `now` to expire the link
-     * immediately.
+     * A future timestamp after which the link will no longer be usable, or {@code now} to expire
+     * the link immediately.
      */
     public Builder setExpiresAt(ExpiresAt expiresAt) {
       this.expiresAt = expiresAt;
@@ -104,8 +105,8 @@ public class FileLinkUpdateParams extends ApiRequestParams {
     }
 
     /**
-     * A future timestamp after which the link will no longer be usable, or `now` to expire the link
-     * immediately.
+     * A future timestamp after which the link will no longer be usable, or {@code now} to expire
+     * the link immediately.
      */
     public Builder setExpiresAt(Long expiresAt) {
       this.expiresAt = expiresAt;
@@ -113,8 +114,8 @@ public class FileLinkUpdateParams extends ApiRequestParams {
     }
 
     /**
-     * A future timestamp after which the link will no longer be usable, or `now` to expire the link
-     * immediately.
+     * A future timestamp after which the link will no longer be usable, or {@code now} to expire
+     * the link immediately.
      */
     public Builder setExpiresAt(EmptyParam expiresAt) {
       this.expiresAt = expiresAt;

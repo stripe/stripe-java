@@ -26,7 +26,7 @@ public class AccountLink extends ApiResource {
   /**
    * String representing the object's type. Objects of the same type share the same value.
    *
-   * <p>Equal to `account_link`.
+   * <p>Equal to {@code account_link}.
    */
   @SerializedName("object")
   String object;

@@ -41,8 +41,8 @@ public class Card extends ApiResource
   String addressLine1;
 
   /**
-   * If `address_line1` was provided, results of the check: `pass`, `fail`, `unavailable`, or
-   * `unchecked`.
+   * If {@code address_line1} was provided, results of the check: {@code pass}, {@code fail}, {@code
+   * unavailable}, or {@code unchecked}.
    */
   @SerializedName("address_line1_check")
   String addressLine1Check;
@@ -60,23 +60,23 @@ public class Card extends ApiResource
   String addressZip;
 
   /**
-   * If `address_zip` was provided, results of the check: `pass`, `fail`, `unavailable`, or
-   * `unchecked`.
+   * If {@code address_zip} was provided, results of the check: {@code pass}, {@code fail}, {@code
+   * unavailable}, or {@code unchecked}.
    */
   @SerializedName("address_zip_check")
   String addressZipCheck;
 
   /**
-   * A set of available payout methods for this card. Will be either `["standard"]` or `["standard",
-   * "instant"]`. Only values from this set should be passed as the `method` when creating a
-   * transfer.
+   * A set of available payout methods for this card. Will be either {@code ["standard"]} or {@code
+   * ["standard", "instant"]}. Only values from this set should be passed as the {@code method} when
+   * creating a transfer.
    */
   @SerializedName("available_payout_methods")
   List<String> availablePayoutMethods;
 
   /**
-   * Card brand. Can be `American Express`, `Diners Club`, `Discover`, `JCB`, `MasterCard`,
-   * `UnionPay`, `Visa`, or `Unknown`.
+   * Card brand. Can be {@code American Express}, {@code Diners Club}, {@code Discover}, {@code
+   * JCB}, {@code MasterCard}, {@code UnionPay}, {@code Visa}, or {@code Unknown}.
    */
   @SerializedName("brand")
   String brand;
@@ -89,8 +89,8 @@ public class Card extends ApiResource
   String country;
 
   /**
-   * Three-letter [ISO currency code](https://www.iso.org/iso-4217-currency-codes.html), in
-   * lowercase. Must be a [supported currency](https://stripe.com/docs/currencies).
+   * Three-letter <a href="https://www.iso.org/iso-4217-currency-codes.html">ISO currency code</a>,
+   * in lowercase. Must be a <a href="https://stripe.com/docs/currencies">supported currency</a>.
    */
   @SerializedName("currency")
   String currency;
@@ -104,7 +104,10 @@ public class Card extends ApiResource
   @Setter(lombok.AccessLevel.NONE)
   ExpandableField<Customer> customer;
 
-  /** If a CVC was provided, results of the check: `pass`, `fail`, `unavailable`, or `unchecked`. */
+  /**
+   * If a CVC was provided, results of the check: {@code pass}, {@code fail}, {@code unavailable},
+   * or {@code unchecked}.
+   */
   @SerializedName("cvc_check")
   String cvcCheck;
 
@@ -142,7 +145,9 @@ public class Card extends ApiResource
   @SerializedName("fingerprint")
   String fingerprint;
 
-  /** Card funding type. Can be `credit`, `debit`, `prepaid`, or `unknown`. */
+  /**
+   * Card funding type. Can be {@code credit}, {@code debit}, {@code prepaid}, or {@code unknown}.
+   */
   @SerializedName("funding")
   String funding;
 
@@ -184,7 +189,7 @@ public class Card extends ApiResource
   /**
    * String representing the object's type. Objects of the same type share the same value.
    *
-   * <p>Equal to `card`.
+   * <p>Equal to {@code card}.
    */
   @SerializedName("object")
   String object;
@@ -199,14 +204,14 @@ public class Card extends ApiResource
   ExpandableField<Recipient> recipient;
 
   /**
-   * If the card number is tokenized, this is the method that was used. Can be
-   * `amex_express_checkout`, `android_pay` (includes Google Pay), `apple_pay`, `masterpass`,
-   * `visa_checkout`, or null.
+   * If the card number is tokenized, this is the method that was used. Can be {@code
+   * amex_express_checkout}, {@code android_pay} (includes Google Pay), {@code apple_pay}, {@code
+   * masterpass}, {@code visa_checkout}, or null.
    */
   @SerializedName("tokenization_method")
   String tokenizationMethod;
 
-  /** Get id of expandable `account` object. */
+  /** Get ID of expandable {@code account} object. */
   public String getAccount() {
     return (this.account != null) ? this.account.getId() : null;
   }
@@ -215,7 +220,7 @@ public class Card extends ApiResource
     this.account = ApiResource.setExpandableFieldId(id, this.account);
   }
 
-  /** Get expanded `account`. */
+  /** Get expanded {@code account}. */
   public Account getAccountObject() {
     return (this.account != null) ? this.account.getExpanded() : null;
   }
@@ -224,7 +229,7 @@ public class Card extends ApiResource
     this.account = new ExpandableField<Account>(expandableObject.getId(), expandableObject);
   }
 
-  /** Get id of expandable `customer` object. */
+  /** Get ID of expandable {@code customer} object. */
   public String getCustomer() {
     return (this.customer != null) ? this.customer.getId() : null;
   }
@@ -233,7 +238,7 @@ public class Card extends ApiResource
     this.customer = ApiResource.setExpandableFieldId(id, this.customer);
   }
 
-  /** Get expanded `customer`. */
+  /** Get expanded {@code customer}. */
   public Customer getCustomerObject() {
     return (this.customer != null) ? this.customer.getExpanded() : null;
   }
@@ -242,7 +247,7 @@ public class Card extends ApiResource
     this.customer = new ExpandableField<Customer>(expandableObject.getId(), expandableObject);
   }
 
-  /** Get id of expandable `recipient` object. */
+  /** Get ID of expandable {@code recipient} object. */
   public String getRecipient() {
     return (this.recipient != null) ? this.recipient.getId() : null;
   }
@@ -251,7 +256,7 @@ public class Card extends ApiResource
     this.recipient = ApiResource.setExpandableFieldId(id, this.recipient);
   }
 
-  /** Get expanded `recipient`. */
+  /** Get expanded {@code recipient}. */
   public Recipient getRecipientObject() {
     return (this.recipient != null) ? this.recipient.getExpanded() : null;
   }
