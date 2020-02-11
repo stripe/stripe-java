@@ -727,6 +727,15 @@ public class SessionCreateParams extends ApiRequestParams {
     String statementDescriptor;
 
     /**
+     * Provides information about the charge that customers see on their statements. Concatenated
+     * with the prefix (shortened descriptor) or statement descriptor that’s set on the account to
+     * form the complete statement descriptor. Maximum 22 characters for the concatenated
+     * descriptor.
+     */
+    @SerializedName("statement_descriptor_suffix")
+    String statementDescriptorSuffix;
+
+    /**
      * The parameters used to automatically create a Transfer when the payment succeeds. For more
      * information, see the PaymentIntents [use case for connected
      * accounts](https://stripe.com/docs/payments/connected-accounts).
@@ -745,6 +754,7 @@ public class SessionCreateParams extends ApiRequestParams {
         SetupFutureUsage setupFutureUsage,
         Shipping shipping,
         String statementDescriptor,
+        String statementDescriptorSuffix,
         TransferData transferData) {
       this.applicationFeeAmount = applicationFeeAmount;
       this.captureMethod = captureMethod;
@@ -756,6 +766,7 @@ public class SessionCreateParams extends ApiRequestParams {
       this.setupFutureUsage = setupFutureUsage;
       this.shipping = shipping;
       this.statementDescriptor = statementDescriptor;
+      this.statementDescriptorSuffix = statementDescriptorSuffix;
       this.transferData = transferData;
     }
 
@@ -784,6 +795,8 @@ public class SessionCreateParams extends ApiRequestParams {
 
       private String statementDescriptor;
 
+      private String statementDescriptorSuffix;
+
       private TransferData transferData;
 
       /** Finalize and obtain parameter instance from this builder. */
@@ -799,6 +812,7 @@ public class SessionCreateParams extends ApiRequestParams {
             this.setupFutureUsage,
             this.shipping,
             this.statementDescriptor,
+            this.statementDescriptorSuffix,
             this.transferData);
       }
 
@@ -928,6 +942,17 @@ public class SessionCreateParams extends ApiRequestParams {
        */
       public Builder setStatementDescriptor(String statementDescriptor) {
         this.statementDescriptor = statementDescriptor;
+        return this;
+      }
+
+      /**
+       * Provides information about the charge that customers see on their statements. Concatenated
+       * with the prefix (shortened descriptor) or statement descriptor that’s set on the account to
+       * form the complete statement descriptor. Maximum 22 characters for the concatenated
+       * descriptor.
+       */
+      public Builder setStatementDescriptorSuffix(String statementDescriptorSuffix) {
+        this.statementDescriptorSuffix = statementDescriptorSuffix;
         return this;
       }
 

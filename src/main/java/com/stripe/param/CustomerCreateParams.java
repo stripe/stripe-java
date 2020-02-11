@@ -1089,8 +1089,9 @@ public class CustomerCreateParams extends ApiRequestParams {
     Map<String, Object> extraParams;
 
     /**
-     * Type of the tax ID, one of `au_abn`, `ca_bn`, `ch_vat`, `es_cif`, `eu_vat`, `hk_br`,
-     * `in_gst`, `mx_rfc`, `no_vat`, `nz_gst`, `ru_inn`, `sg_uen`, `th_vat`, `tw_vat`, or `za_vat`.
+     * Type of the tax ID, one of `eu_vat`, `nz_gst`, `au_abn`, `in_gst`, `no_vat`, `za_vat`,
+     * `ch_vat`, `mx_rfc`, `sg_uen`, `ru_inn`, `ca_bn`, `hk_br`, `es_cif`, `tw_vat`, `th_vat`,
+     * `jp_cn`, `li_uid`, `my_itn`, `us_ein`, `kr_brn`, or `ca_qst`.
      */
     @SerializedName("type")
     Type type;
@@ -1148,9 +1149,9 @@ public class CustomerCreateParams extends ApiRequestParams {
       }
 
       /**
-       * Type of the tax ID, one of `au_abn`, `ca_bn`, `ch_vat`, `es_cif`, `eu_vat`, `hk_br`,
-       * `in_gst`, `mx_rfc`, `no_vat`, `nz_gst`, `ru_inn`, `sg_uen`, `th_vat`, `tw_vat`, or
-       * `za_vat`.
+       * Type of the tax ID, one of `eu_vat`, `nz_gst`, `au_abn`, `in_gst`, `no_vat`, `za_vat`,
+       * `ch_vat`, `mx_rfc`, `sg_uen`, `ru_inn`, `ca_bn`, `hk_br`, `es_cif`, `tw_vat`, `th_vat`,
+       * `jp_cn`, `li_uid`, `my_itn`, `us_ein`, `kr_brn`, or `ca_qst`.
        */
       public Builder setType(Type type) {
         this.type = type;
@@ -1171,6 +1172,9 @@ public class CustomerCreateParams extends ApiRequestParams {
       @SerializedName("ca_bn")
       CA_BN("ca_bn"),
 
+      @SerializedName("ca_qst")
+      CA_QST("ca_qst"),
+
       @SerializedName("ch_vat")
       CH_VAT("ch_vat"),
 
@@ -1186,8 +1190,20 @@ public class CustomerCreateParams extends ApiRequestParams {
       @SerializedName("in_gst")
       IN_GST("in_gst"),
 
+      @SerializedName("jp_cn")
+      JP_CN("jp_cn"),
+
+      @SerializedName("kr_brn")
+      KR_BRN("kr_brn"),
+
+      @SerializedName("li_uid")
+      LI_UID("li_uid"),
+
       @SerializedName("mx_rfc")
       MX_RFC("mx_rfc"),
+
+      @SerializedName("my_itn")
+      MY_ITN("my_itn"),
 
       @SerializedName("no_vat")
       NO_VAT("no_vat"),
@@ -1206,6 +1222,9 @@ public class CustomerCreateParams extends ApiRequestParams {
 
       @SerializedName("tw_vat")
       TW_VAT("tw_vat"),
+
+      @SerializedName("us_ein")
+      US_EIN("us_ein"),
 
       @SerializedName("za_vat")
       ZA_VAT("za_vat");

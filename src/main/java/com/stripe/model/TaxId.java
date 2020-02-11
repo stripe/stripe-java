@@ -53,8 +53,10 @@ public class TaxId extends ApiResource implements HasId {
   String object;
 
   /**
-   * Type of the tax ID, one of `au_abn`, `ca_bn`, `ch_vat`, `es_cif`, `eu_vat`, `hk_br`, `in_gst`,
-   * `mx_rfc`, `no_vat`, `nz_gst`, `ru_inn`, `sg_uen`, `th_vat`, `tw_vat`, `za_vat`, or `unknown`.
+   * Type of the tax ID, one of `eu_vat`, `nz_gst`, `au_abn`, `in_gst`, `no_vat`, `za_vat`,
+   * `ch_vat`, `mx_rfc`, `sg_uen`, `ru_inn`, `ca_bn`, `hk_br`, `es_cif`, `tw_vat`, `th_vat`,
+   * `jp_cn`, `li_uid`, `my_itn`, `us_ein`, `kr_brn`, or `ca_qst`. Note that some legacy tax IDs
+   * have type `unknown`
    */
   @SerializedName("type")
   String type;
@@ -116,7 +118,7 @@ public class TaxId extends ApiResource implements HasId {
   @Setter
   @EqualsAndHashCode(callSuper = false)
   public static class Verification extends StripeObject {
-    /** Verification status, one of `pending`, `unavailable`, `unverified`, or `verified`. */
+    /** Verification status, one of `pending`, `verified`, `unverified`, or `unavailable`. */
     @SerializedName("status")
     String status;
 

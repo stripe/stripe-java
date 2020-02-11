@@ -468,14 +468,14 @@ public class Authorization extends ApiResource
     @EqualsAndHashCode(callSuper = false)
     public static class ViolatedAuthorizationControl extends StripeObject {
       /**
-       * Entity which the authorization control acts on. One of `account`, `card`, or `cardholder`.
+       * Entity which the authorization control acts on. One of `card`, `cardholder`, or `account`.
        */
       @SerializedName("entity")
       String entity;
 
       /**
        * Name of the authorization control. One of `allowed_categories`, `blocked_categories`,
-       * `max_amount`, `max_approvals`, or `spending_limits`.
+       * `spending_limits`, `max_approvals`, or `max_amount`.
        */
       @SerializedName("name")
       String name;
@@ -500,7 +500,7 @@ public class Authorization extends ApiResource
     @SerializedName("address_zip_check")
     String addressZipCheck;
 
-    /** One of `exempt`, `failure`, `none`, or `success`. */
+    /** One of `success`, `failure`, `exempt`, or `none`. */
     @SerializedName("authentication")
     String authentication;
 

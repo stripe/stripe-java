@@ -111,7 +111,7 @@ public class Payout extends ApiResource implements MetadataStore<Payout>, Balanc
   /**
    * The method used to send this payout, which can be `standard` or `instant`. `instant` is only
    * supported for payouts to debit cards. (See [Instant payouts for
-   * marketplaces](/blog/instant-payouts-for-marketplaces) for more information.)
+   * marketplaces](https://stripe.com/blog/instant-payouts-for-marketplaces) for more information.)
    */
   @SerializedName("method")
   String method;

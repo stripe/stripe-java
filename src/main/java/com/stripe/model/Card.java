@@ -199,8 +199,9 @@ public class Card extends ApiResource
   ExpandableField<Recipient> recipient;
 
   /**
-   * If the card number is tokenized, this is the method that was used. Can be `apple_pay` or
-   * `google_pay`.
+   * If the card number is tokenized, this is the method that was used. Can be
+   * `amex_express_checkout`, `android_pay` (includes Google Pay), `apple_pay`, `masterpass`,
+   * `visa_checkout`, or null.
    */
   @SerializedName("tokenization_method")
   String tokenizationMethod;

@@ -353,7 +353,7 @@ public class CreditNotePreviewParams extends ApiRequestParams {
     @SerializedName("tax_rates")
     Object taxRates;
 
-    /** Type of the credit note line item, one of `custom_line_item` or `invoice_line_item`. */
+    /** Type of the credit note line item, one of `invoice_line_item` or `custom_line_item`. */
     @SerializedName("type")
     Type type;
 
@@ -532,7 +532,7 @@ public class CreditNotePreviewParams extends ApiRequestParams {
         return this;
       }
 
-      /** Type of the credit note line item, one of `custom_line_item` or `invoice_line_item`. */
+      /** Type of the credit note line item, one of `invoice_line_item` or `custom_line_item`. */
       public Builder setType(Type type) {
         this.type = type;
         return this;
