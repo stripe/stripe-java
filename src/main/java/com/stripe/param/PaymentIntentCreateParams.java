@@ -73,7 +73,11 @@ public class PaymentIntentCreateParams extends ApiRequestParams {
   /**
    * Set to {@code true} to fail the payment attempt if the PaymentIntent transitions into {@code
    * requires_action}. This parameter is intended for simpler integrations that do not handle
-   * customer actions. This can only be set when {@code confirm=true} is supplied.
+   * customer actions, like <a
+   * href="https://stripe.com/docs/payments/save-card-without-authentication">saving cards without
+   * authentication</a>. This parameter can only be used with <a
+   * href="https://stripe.com/docs/api/payment_intents/create#create_payment_intent-confirm">{@code
+   * confirm=true}</a>.
    */
   @SerializedName("error_on_requires_action")
   Boolean errorOnRequiresAction;
@@ -514,7 +518,11 @@ public class PaymentIntentCreateParams extends ApiRequestParams {
     /**
      * Set to {@code true} to fail the payment attempt if the PaymentIntent transitions into {@code
      * requires_action}. This parameter is intended for simpler integrations that do not handle
-     * customer actions. This can only be set when {@code confirm=true} is supplied.
+     * customer actions, like <a
+     * href="https://stripe.com/docs/payments/save-card-without-authentication">saving cards without
+     * authentication</a>. This parameter can only be used with <a
+     * href="https://stripe.com/docs/api/payment_intents/create#create_payment_intent-confirm">{@code
+     * confirm=true}</a>.
      */
     public Builder setErrorOnRequiresAction(Boolean errorOnRequiresAction) {
       this.errorOnRequiresAction = errorOnRequiresAction;

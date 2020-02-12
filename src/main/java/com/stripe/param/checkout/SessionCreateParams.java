@@ -1285,6 +1285,10 @@ public class SessionCreateParams extends ApiRequestParams {
 
     @Getter
     public static class TransferData {
+      /** The amount that will be transferred automatically when a charge succeeds. */
+      @SerializedName("amount")
+      Long amount;
+
       /**
        * If specified, successful charges will be attributed to the destination account for tax
        * reporting, and the funds from charges will be transferred to the destination account. The
@@ -1303,7 +1307,8 @@ public class SessionCreateParams extends ApiRequestParams {
       @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
       Map<String, Object> extraParams;
 
-      private TransferData(String destination, Map<String, Object> extraParams) {
+      private TransferData(Long amount, String destination, Map<String, Object> extraParams) {
+        this.amount = amount;
         this.destination = destination;
         this.extraParams = extraParams;
       }
@@ -1313,13 +1318,21 @@ public class SessionCreateParams extends ApiRequestParams {
       }
 
       public static class Builder {
+        private Long amount;
+
         private String destination;
 
         private Map<String, Object> extraParams;
 
         /** Finalize and obtain parameter instance from this builder. */
         public TransferData build() {
-          return new TransferData(this.destination, this.extraParams);
+          return new TransferData(this.amount, this.destination, this.extraParams);
+        }
+
+        /** The amount that will be transferred automatically when a charge succeeds. */
+        public Builder setAmount(Long amount) {
+          this.amount = amount;
+          return this;
         }
 
         /**
