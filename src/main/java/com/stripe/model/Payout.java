@@ -127,7 +127,10 @@ public class Payout extends ApiResource implements MetadataStore<Payout>, Balanc
   @SerializedName("object")
   String object;
 
-  /** The source balance this payout came from. One of {@code card} or {@code bank_account}. */
+  /**
+   * The source balance this payout came from. One of {@code card}, {@code fpx}, or {@code
+   * bank_account}.
+   */
   @SerializedName("source_type")
   String sourceType;
 

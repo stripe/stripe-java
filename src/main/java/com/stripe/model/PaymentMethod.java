@@ -360,12 +360,18 @@ public class PaymentMethod extends ApiResource implements HasId, MetadataStore<P
   @Setter
   @EqualsAndHashCode(callSuper = false)
   public static class AuBecsDebit extends StripeObject {
+    /** Six-digit number identifying bank and branch associated with this bank account. */
     @SerializedName("bsb_number")
     String bsbNumber;
 
+    /**
+     * Uniquely identifies this particular bank account. You can use this attribute to check whether
+     * two bank accounts are the same.
+     */
     @SerializedName("fingerprint")
     String fingerprint;
 
+    /** Last four digits of the bank account number. */
     @SerializedName("last4")
     String last4;
   }

@@ -17,10 +17,10 @@ public class PlanCreateParams extends ApiRequestParams {
 
   /**
    * Specifies a usage aggregation strategy for plans of {@code usage_type=metered}. Allowed values
-   * are {@code sum} for summing up all usage during a period, {@code last_during_period} for
-   * picking the last usage record reported within a period, {@code last_ever} for picking the last
-   * usage record ever (across period bounds) or {@code max} which picks the usage record with the
-   * maximum reported usage during a period. Defaults to {@code sum}.
+   * are {@code sum} for summing up all usage during a period, {@code last_during_period} for using
+   * the last usage record reported within a period, {@code last_ever} for using the last usage
+   * record ever (across period bounds) or {@code max} which uses the usage record with the maximum
+   * reported usage during a period. Defaults to {@code sum}.
    */
   @SerializedName("aggregate_usage")
   AggregateUsage aggregateUsage;
@@ -139,10 +139,10 @@ public class PlanCreateParams extends ApiRequestParams {
   Long trialPeriodDays;
 
   /**
-   * Configures how the quantity per period should be determined, can be either {@code metered} or
-   * {@code licensed}. {@code licensed} will automatically bill the {@code quantity} set for a plan
-   * when adding it to a subscription, {@code metered} will aggregate the total usage based on usage
-   * records. Defaults to {@code licensed}.
+   * Configures how the quantity per period should be determined. Can be either {@code metered} or
+   * {@code licensed}. {@code licensed} automatically bills the {@code quantity} set when adding it
+   * to a subscription. {@code metered} aggregates the total usage based on usage records. Defaults
+   * to {@code licensed}.
    */
   @SerializedName("usage_type")
   UsageType usageType;
@@ -264,9 +264,9 @@ public class PlanCreateParams extends ApiRequestParams {
     /**
      * Specifies a usage aggregation strategy for plans of {@code usage_type=metered}. Allowed
      * values are {@code sum} for summing up all usage during a period, {@code last_during_period}
-     * for picking the last usage record reported within a period, {@code last_ever} for picking the
-     * last usage record ever (across period bounds) or {@code max} which picks the usage record
-     * with the maximum reported usage during a period. Defaults to {@code sum}.
+     * for using the last usage record reported within a period, {@code last_ever} for using the
+     * last usage record ever (across period bounds) or {@code max} which uses the usage record with
+     * the maximum reported usage during a period. Defaults to {@code sum}.
      */
     public Builder setAggregateUsage(AggregateUsage aggregateUsage) {
       this.aggregateUsage = aggregateUsage;
@@ -492,10 +492,10 @@ public class PlanCreateParams extends ApiRequestParams {
     }
 
     /**
-     * Configures how the quantity per period should be determined, can be either {@code metered} or
-     * {@code licensed}. {@code licensed} will automatically bill the {@code quantity} set for a
-     * plan when adding it to a subscription, {@code metered} will aggregate the total usage based
-     * on usage records. Defaults to {@code licensed}.
+     * Configures how the quantity per period should be determined. Can be either {@code metered} or
+     * {@code licensed}. {@code licensed} automatically bills the {@code quantity} set when adding
+     * it to a subscription. {@code metered} aggregates the total usage based on usage records.
+     * Defaults to {@code licensed}.
      */
     public Builder setUsageType(UsageType usageType) {
       this.usageType = usageType;

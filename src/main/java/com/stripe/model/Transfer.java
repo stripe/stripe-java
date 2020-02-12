@@ -114,7 +114,10 @@ public class Transfer extends ApiResource
   @Setter(lombok.AccessLevel.NONE)
   ExpandableField<Charge> sourceTransaction;
 
-  /** The source balance this transfer came from. One of {@code card} or {@code bank_account}. */
+  /**
+   * The source balance this transfer came from. One of {@code card}, {@code fpx}, or {@code
+   * bank_account}.
+   */
   @SerializedName("source_type")
   String sourceType;
 

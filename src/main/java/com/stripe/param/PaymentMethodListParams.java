@@ -207,6 +207,9 @@ public class PaymentMethodListParams extends ApiRequestParams {
     @SerializedName("card_present")
     CARD_PRESENT("card_present"),
 
+    @SerializedName("fpx")
+    FPX("fpx"),
+
     @SerializedName("ideal")
     IDEAL("ideal"),
 
