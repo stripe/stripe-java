@@ -1,5 +1,12 @@
 # Changelog
 
+## 17.10.0 - 2020-02-12
+* [#967](https://github.com/stripe/stripe-java/pull/967) Multiple API changes
+  * Add `fpx` as a valid `source_type` on `Balance`, `Payout` and `Transfer`
+  * Add `fpx` support on Checkout `Session`
+  * Fields inside `verification_data` on Issuing `Authorization` are now enums
+  * Support updating `payment_method_options` on `PaymentIntent` and `SetupIntent`
+
 ## 17.9.1 - 2020-02-11
 * [#964](https://github.com/stripe/stripe-java/pull/964) Convert Markdown to HTML in Javadoc
 * [#965](https://github.com/stripe/stripe-java/pull/965) Add Gradle plugin for publishing JavaDoc to GitHub Pages
