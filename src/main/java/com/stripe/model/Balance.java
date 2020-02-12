@@ -129,6 +129,10 @@ public class Balance extends ApiResource {
       /** Amount for card. */
       @SerializedName("card")
       Long card;
+
+      /** Amount for FPX. */
+      @SerializedName("fpx")
+      Long fpx;
     }
   }
 }

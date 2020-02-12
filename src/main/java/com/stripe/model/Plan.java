@@ -26,10 +26,10 @@ public class Plan extends ApiResource implements HasId, MetadataStore<Plan> {
 
   /**
    * Specifies a usage aggregation strategy for plans of {@code usage_type=metered}. Allowed values
-   * are {@code sum} for summing up all usage during a period, {@code last_during_period} for
-   * picking the last usage record reported within a period, {@code last_ever} for picking the last
-   * usage record ever (across period bounds) or {@code max} which picks the usage record with the
-   * maximum reported usage during a period. Defaults to {@code sum}.
+   * are {@code sum} for summing up all usage during a period, {@code last_during_period} for using
+   * the last usage record reported within a period, {@code last_ever} for using the last usage
+   * record ever (across period bounds) or {@code max} which uses the usage record with the maximum
+   * reported usage during a period. Defaults to {@code sum}.
    *
    * <p>One of {@code last_during_period}, {@code last_ever}, {@code max}, or {@code sum}.
    */
@@ -78,14 +78,14 @@ public class Plan extends ApiResource implements HasId, MetadataStore<Plan> {
   String id;
 
   /**
-   * One of {@code day}, {@code week}, {@code month} or {@code year}. The frequency with which a
-   * subscription should be billed.
+   * The frequency at which a subscription is billed. One of {@code day}, {@code week}, {@code
+   * month} or {@code year}.
    */
   @SerializedName("interval")
   String interval;
 
   /**
-   * The number of intervals (specified in the {@code interval} property) between subscription
+   * The number of intervals (specified in the {@code interval} attribute) between subscription
    * billings. For example, {@code interval=month} and {@code interval_count=3} bills every 3
    * months.
    */
@@ -134,8 +134,8 @@ public class Plan extends ApiResource implements HasId, MetadataStore<Plan> {
 
   /**
    * Defines if the tiering price should be {@code graduated} or {@code volume} based. In {@code
-   * volume}-based tiering, the maximum quantity within a period determines the per unit price, in
-   * {@code graduated} tiering pricing can successively change as the quantity grows.
+   * volume}-based tiering, the maximum quantity within a period determines the per unit price. In
+   * {@code graduated} tiering, pricing can change as the quantity grows.
    *
    * <p>One of {@code graduated}, or {@code volume}.
    */
@@ -143,8 +143,8 @@ public class Plan extends ApiResource implements HasId, MetadataStore<Plan> {
   String tiersMode;
 
   /**
-   * Apply a transformation to the reported usage or set quantity before computing the billed price.
-   * Cannot be combined with {@code tiers}.
+   * Apply a transformation to the reported usage or set quantity before computing the amount
+   * billed. Cannot be combined with {@code tiers}.
    */
   @SerializedName("transform_usage")
   TransformUsage transformUsage;
@@ -158,12 +158,10 @@ public class Plan extends ApiResource implements HasId, MetadataStore<Plan> {
   Long trialPeriodDays;
 
   /**
-   * Configures how the quantity per period should be determined, can be either {@code metered} or
-   * {@code licensed}. {@code licensed} will automatically bill the {@code quantity} set when adding
-   * it to a subscription, {@code metered} will aggregate the total usage based on usage records.
-   * Defaults to {@code licensed}.
-   *
-   * <p>One of {@code licensed}, or {@code metered}.
+   * Configures how the quantity per period should be determined. Can be either {@code metered} or
+   * {@code licensed}. {@code licensed} automatically bills the {@code quantity} set when adding it
+   * to a subscription. {@code metered} aggregates the total usage based on usage records. Defaults
+   * to {@code licensed}.
    */
   @SerializedName("usage_type")
   String usageType;

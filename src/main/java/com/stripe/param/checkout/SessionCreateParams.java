@@ -1924,6 +1924,9 @@ public class SessionCreateParams extends ApiRequestParams {
     @SerializedName("card")
     CARD("card"),
 
+    @SerializedName("fpx")
+    FPX("fpx"),
+
     @SerializedName("ideal")
     IDEAL("ideal");
 

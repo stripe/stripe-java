@@ -66,7 +66,7 @@ public class PayoutCreateParams extends ApiRequestParams {
   /**
    * The balance type of your Stripe balance to draw this payout from. Balances for different
    * payment sources are kept separately. You can find the amounts with the balances API. One of
-   * {@code bank_account} or {@code card}.
+   * {@code bank_account}, {@code card}, or {@code fpx}.
    */
   @SerializedName("source_type")
   SourceType sourceType;
@@ -266,7 +266,7 @@ public class PayoutCreateParams extends ApiRequestParams {
     /**
      * The balance type of your Stripe balance to draw this payout from. Balances for different
      * payment sources are kept separately. You can find the amounts with the balances API. One of
-     * {@code bank_account} or {@code card}.
+     * {@code bank_account}, {@code card}, or {@code fpx}.
      */
     public Builder setSourceType(SourceType sourceType) {
       this.sourceType = sourceType;
@@ -305,7 +305,10 @@ public class PayoutCreateParams extends ApiRequestParams {
     BANK_ACCOUNT("bank_account"),
 
     @SerializedName("card")
-    CARD("card");
+    CARD("card"),
+
+    @SerializedName("fpx")
+    FPX("fpx");
 
     @Getter(onMethod_ = {@Override})
     private final String value;

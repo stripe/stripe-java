@@ -63,8 +63,8 @@ public class TransferCreateParams extends ApiRequestParams {
   String sourceTransaction;
 
   /**
-   * The source balance to use for this transfer. One of {@code bank_account} or {@code card}. For
-   * most users, this will default to {@code card}.
+   * The source balance to use for this transfer. One of {@code bank_account}, {@code card}, or
+   * {@code fpx}. For most users, this will default to {@code card}.
    */
   @SerializedName("source_type")
   SourceType sourceType;
@@ -259,8 +259,8 @@ public class TransferCreateParams extends ApiRequestParams {
     }
 
     /**
-     * The source balance to use for this transfer. One of {@code bank_account} or {@code card}. For
-     * most users, this will default to {@code card}.
+     * The source balance to use for this transfer. One of {@code bank_account}, {@code card}, or
+     * {@code fpx}. For most users, this will default to {@code card}.
      */
     public Builder setSourceType(SourceType sourceType) {
       this.sourceType = sourceType;
@@ -283,7 +283,10 @@ public class TransferCreateParams extends ApiRequestParams {
     BANK_ACCOUNT("bank_account"),
 
     @SerializedName("card")
-    CARD("card");
+    CARD("card"),
+
+    @SerializedName("fpx")
+    FPX("fpx");
 
     @Getter(onMethod_ = {@Override})
     private final String value;

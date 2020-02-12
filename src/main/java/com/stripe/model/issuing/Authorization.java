@@ -492,27 +492,34 @@ public class Authorization extends ApiResource
   public static class VerificationData extends StripeObject {
     /**
      * Whether the cardholder provided an address first line and if it matched the cardholder’s
-     * {@code billing.address.line1}. One of {@code match}, {@code mismatch}, or {@code
-     * not_provided}.
+     * {@code billing.address.line1}.
+     *
+     * <p>One of {@code match}, {@code mismatch}, or {@code not_provided}.
      */
     @SerializedName("address_line1_check")
     String addressLine1Check;
 
     /**
      * Whether the cardholder provided a zip (or postal code) and if it matched the cardholder’s
-     * {@code billing.address.postal_code}. One of {@code match}, {@code mismatch}, or {@code
-     * not_provided}.
+     * {@code billing.address.postal_code}.
+     *
+     * <p>One of {@code match}, {@code mismatch}, or {@code not_provided}.
      */
     @SerializedName("address_zip_check")
     String addressZipCheck;
 
-    /** One of {@code success}, {@code failure}, {@code exempt}, or {@code none}. */
+    /**
+     * Whether 3DS authentication was performed.
+     *
+     * <p>One of {@code failure}, {@code none}, or {@code success}.
+     */
     @SerializedName("authentication")
     String authentication;
 
     /**
-     * Whether the cardholder provided a CVC and if it matched Stripe’s record. One of {@code
-     * match}, {@code mismatch}, or {@code not_provided}.
+     * Whether the cardholder provided a CVC and if it matched Stripe’s record.
+     *
+     * <p>One of {@code match}, {@code mismatch}, or {@code not_provided}.
      */
     @SerializedName("cvc_check")
     String cvcCheck;

@@ -11,7 +11,7 @@ import lombok.Getter;
 @Getter
 public class PaymentMethodCreateParams extends ApiRequestParams {
   /**
-   * If this is a {@code au_becs_debit} PaymentMethod, this hash contains details about the bank
+   * If this is an {@code au_becs_debit} PaymentMethod, this hash contains details about the bank
    * account.
    */
   @SerializedName("au_becs_debit")
@@ -170,7 +170,7 @@ public class PaymentMethodCreateParams extends ApiRequestParams {
     }
 
     /**
-     * If this is a {@code au_becs_debit} PaymentMethod, this hash contains details about the bank
+     * If this is an {@code au_becs_debit} PaymentMethod, this hash contains details about the bank
      * account.
      */
     public Builder setAuBecsDebit(AuBecsDebit auBecsDebit) {
