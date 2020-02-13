@@ -1,5 +1,8 @@
 # Changelog
 
+## 17.11.0 - 2020-02-12
+* [#968](https://github.com/stripe/stripe-java/pull/968) Add support for `payment_intent_data[transfer_data][amount]` on Checkout `Session`
+
 ## 17.10.0 - 2020-02-12
 * [#967](https://github.com/stripe/stripe-java/pull/967) Multiple API changes
   * Add `fpx` as a valid `source_type` on `Balance`, `Payout` and `Transfer`
