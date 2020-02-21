@@ -39,7 +39,7 @@ notifications:
 script:
   - ./gradlew --version
   - ./gradlew clean
-  - if [ "$TRAVIS_JDK_VERSION" == "openjdk8" ]; then ./gradlew check; fi
+  - ./gradlew check
   - ./gradlew -Djdk.tls.client.protocols="TLSv1.2" jacocoTestReport coveralls
 
 before_cache:
