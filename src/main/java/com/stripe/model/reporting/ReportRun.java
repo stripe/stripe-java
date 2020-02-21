@@ -235,5 +235,13 @@ public class ReportRun extends ApiResource implements HasId {
     /** Category of balance transactions to be included in the report run. */
     @SerializedName("reporting_category")
     String reportingCategory;
+
+    /**
+     * Defaults to {@code Etc/UTC}. The output timezone for all timestamps in the report. A list of
+     * possible time zone values is maintained at the <a href="http://www.iana.org/time-zones">IANA
+     * Time Zone Database</a>. Has no effect on {@code interval_start} or {@code interval_end}.
+     */
+    @SerializedName("timezone")
+    String timezone;
   }
 }

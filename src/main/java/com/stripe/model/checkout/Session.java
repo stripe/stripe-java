@@ -306,6 +306,15 @@ public class Session extends ApiResource implements HasId {
     @SerializedName("custom")
     Custom custom;
 
+    /**
+     * Plans define the base price, currency, and billing cycle for subscriptions. For example, you
+     * might have a &lt;currency&gt;5&lt;/currency&gt;/month plan that provides limited access to
+     * your products, and a &lt;currency&gt;15&lt;/currency&gt;/month plan that allows full access.
+     *
+     * <p>Related guide: <a
+     * href="https://stripe.com/docs/billing/subscriptions/products-and-plans">Managing Products and
+     * Plans</a>.
+     */
     @SerializedName("plan")
     Plan plan;
 
@@ -313,6 +322,17 @@ public class Session extends ApiResource implements HasId {
     @SerializedName("quantity")
     Long quantity;
 
+    /**
+     * Stores representations of <a href="http://en.wikipedia.org/wiki/Stock_keeping_unit">stock
+     * keeping units</a>. SKUs describe specific product variations, taking into account any
+     * combination of: attributes, currency, and cost. For example, a product may be a T-shirt,
+     * whereas a specific SKU represents the {@code size: large}, {@code color: red} version of that
+     * shirt.
+     *
+     * <p>Can also be used to manage inventory.
+     *
+     * <p>Related guide: <a href="https://stripe.com/docs/orders">Tax, Shipping, and Inventory</a>.
+     */
     @SerializedName("sku")
     Sku sku;
 

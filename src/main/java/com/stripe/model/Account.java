@@ -85,6 +85,13 @@ public class Account extends ApiResource implements MetadataStore<Account>, Paym
   @SerializedName("id")
   String id;
 
+  /**
+   * This is an object representing a person associated with a Stripe account.
+   *
+   * <p>Related guide: <a
+   * href="https://stripe.com/docs/connect/identity-verification-api#person-information">Handling
+   * Identity Verification with the API</a>.
+   */
   @SerializedName("individual")
   Person individual;
 

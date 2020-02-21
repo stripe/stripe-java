@@ -620,6 +620,15 @@ public class SubscriptionSchedule extends ApiResource
     @SerializedName("plans")
     List<SubscriptionSchedule.PhaseItem> plans;
 
+    /**
+     * Controls whether or not the subscription schedule will prorate when transitioning to this
+     * phase. Values are {@code create_prorations} and {@code none}.
+     *
+     * <p>One of {@code always_invoice}, {@code create_prorations}, or {@code none}.
+     */
+    @SerializedName("proration_behavior")
+    String prorationBehavior;
+
     /** The start of this phase of the subscription schedule. */
     @SerializedName("start_date")
     Long startDate;
