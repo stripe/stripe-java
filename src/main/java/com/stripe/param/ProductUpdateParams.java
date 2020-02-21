@@ -60,10 +60,7 @@ public class ProductUpdateParams extends ApiRequestParams {
   @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
   Map<String, Object> extraParams;
 
-  /**
-   * A list of up to 8 URLs of images for this product, meant to be displayable to the customer. May
-   * only be set if {@code type=good}.
-   */
+  /** A list of up to 8 URLs of images for this product, meant to be displayable to the customer. */
   @SerializedName("images")
   Object images;
 
@@ -415,7 +412,6 @@ public class ProductUpdateParams extends ApiRequestParams {
 
     /**
      * A list of up to 8 URLs of images for this product, meant to be displayable to the customer.
-     * May only be set if {@code type=good}.
      */
     public Builder setImages(EmptyParam images) {
       this.images = images;
@@ -424,7 +420,6 @@ public class ProductUpdateParams extends ApiRequestParams {
 
     /**
      * A list of up to 8 URLs of images for this product, meant to be displayable to the customer.
-     * May only be set if {@code type=good}.
      */
     public Builder setImages(List<String> images) {
       this.images = images;

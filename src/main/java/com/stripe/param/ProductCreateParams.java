@@ -61,10 +61,7 @@ public class ProductCreateParams extends ApiRequestParams {
   @SerializedName("id")
   String id;
 
-  /**
-   * A list of up to 8 URLs of images for this product, meant to be displayable to the customer. May
-   * only be set if type={@code good}.
-   */
+  /** A list of up to 8 URLs of images for this product, meant to be displayable to the customer. */
   @SerializedName("images")
   List<String> images;
 

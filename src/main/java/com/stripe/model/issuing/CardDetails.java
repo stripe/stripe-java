@@ -10,6 +10,10 @@ import lombok.Setter;
 @Setter
 @EqualsAndHashCode(callSuper = false)
 public class CardDetails extends StripeObject {
+  /**
+   * You can <a href="https://stripe.com/docs/issuing/cards">create physical or virtual cards</a>
+   * that are issued to cardholders.
+   */
   @SerializedName("card")
   Card card;
 

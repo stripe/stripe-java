@@ -735,6 +735,15 @@ public class SubscriptionScheduleCreateParams extends ApiRequestParams {
     List<Plan> plans;
 
     /**
+     * Controls whether or not a subscription schedule will create prorations when transitioning to
+     * this phase. Valid values are {@code create_prorations} or {@code none}, and the default value
+     * is {@code create_prorations}. See <a
+     * href="https://stripe.com/docs/billing/subscriptions/prorations">Prorations</a>.
+     */
+    @SerializedName("proration_behavior")
+    ProrationBehavior prorationBehavior;
+
+    /**
      * A non-negative decimal (with at most four decimal places) between 0 and 100. This represents
      * the percentage of the subscription invoice subtotal that will be calculated and added as tax
      * to the final amount in each billing period during thise phase of the schedule. For example, a
@@ -773,6 +782,7 @@ public class SubscriptionScheduleCreateParams extends ApiRequestParams {
         InvoiceSettings invoiceSettings,
         Long iterations,
         List<Plan> plans,
+        ProrationBehavior prorationBehavior,
         BigDecimal taxPercent,
         Boolean trial,
         Long trialEnd) {
@@ -787,6 +797,7 @@ public class SubscriptionScheduleCreateParams extends ApiRequestParams {
       this.invoiceSettings = invoiceSettings;
       this.iterations = iterations;
       this.plans = plans;
+      this.prorationBehavior = prorationBehavior;
       this.taxPercent = taxPercent;
       this.trial = trial;
       this.trialEnd = trialEnd;
@@ -819,6 +830,8 @@ public class SubscriptionScheduleCreateParams extends ApiRequestParams {
 
       private List<Plan> plans;
 
+      private ProrationBehavior prorationBehavior;
+
       private BigDecimal taxPercent;
 
       private Boolean trial;
@@ -839,6 +852,7 @@ public class SubscriptionScheduleCreateParams extends ApiRequestParams {
             this.invoiceSettings,
             this.iterations,
             this.plans,
+            this.prorationBehavior,
             this.taxPercent,
             this.trial,
             this.trialEnd);
@@ -1034,6 +1048,17 @@ public class SubscriptionScheduleCreateParams extends ApiRequestParams {
           this.plans = new ArrayList<>();
         }
         this.plans.addAll(elements);
+        return this;
+      }
+
+      /**
+       * Controls whether or not a subscription schedule will create prorations when transitioning
+       * to this phase. Valid values are {@code create_prorations} or {@code none}, and the default
+       * value is {@code create_prorations}. See <a
+       * href="https://stripe.com/docs/billing/subscriptions/prorations">Prorations</a>.
+       */
+      public Builder setProrationBehavior(ProrationBehavior prorationBehavior) {
+        this.prorationBehavior = prorationBehavior;
         return this;
       }
 
@@ -1517,6 +1542,24 @@ public class SubscriptionScheduleCreateParams extends ApiRequestParams {
       private final String value;
 
       CollectionMethod(String value) {
+        this.value = value;
+      }
+    }
+
+    public enum ProrationBehavior implements ApiRequestParams.EnumParam {
+      @SerializedName("always_invoice")
+      ALWAYS_INVOICE("always_invoice"),
+
+      @SerializedName("create_prorations")
+      CREATE_PRORATIONS("create_prorations"),
+
+      @SerializedName("none")
+      NONE("none");
+
+      @Getter(onMethod_ = {@Override})
+      private final String value;
+
+      ProrationBehavior(String value) {
         this.value = value;
       }
     }

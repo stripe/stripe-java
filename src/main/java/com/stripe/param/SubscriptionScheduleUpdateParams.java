@@ -57,11 +57,20 @@ public class SubscriptionScheduleUpdateParams extends ApiRequestParams {
   List<Phase> phases;
 
   /**
-   * If the update changes the current phase, indicates if the changes should be prorated. Defaults
-   * to {@code true}.
+   * This field has been renamed to {@code proration_behavior}. {@code prorate=true} can be replaced
+   * with {@code proration_behavior=create_prorations} and {@code prorate=false} can be replaced
+   * with {@code proration_behavior=none}.
    */
   @SerializedName("prorate")
   Boolean prorate;
+
+  /**
+   * If the update changes the current phase, indicates if the changes should be prorated. Valid
+   * values are {@code create_prorations} or {@code none}, and the default value is {@code
+   * create_prorations}.
+   */
+  @SerializedName("proration_behavior")
+  ProrationBehavior prorationBehavior;
 
   private SubscriptionScheduleUpdateParams(
       DefaultSettings defaultSettings,
@@ -70,7 +79,8 @@ public class SubscriptionScheduleUpdateParams extends ApiRequestParams {
       Map<String, Object> extraParams,
       Map<String, String> metadata,
       List<Phase> phases,
-      Boolean prorate) {
+      Boolean prorate,
+      ProrationBehavior prorationBehavior) {
     this.defaultSettings = defaultSettings;
     this.endBehavior = endBehavior;
     this.expand = expand;
@@ -78,6 +88,7 @@ public class SubscriptionScheduleUpdateParams extends ApiRequestParams {
     this.metadata = metadata;
     this.phases = phases;
     this.prorate = prorate;
+    this.prorationBehavior = prorationBehavior;
   }
 
   public static Builder builder() {
@@ -99,6 +110,8 @@ public class SubscriptionScheduleUpdateParams extends ApiRequestParams {
 
     private Boolean prorate;
 
+    private ProrationBehavior prorationBehavior;
+
     /** Finalize and obtain parameter instance from this builder. */
     public SubscriptionScheduleUpdateParams build() {
       return new SubscriptionScheduleUpdateParams(
@@ -108,7 +121,8 @@ public class SubscriptionScheduleUpdateParams extends ApiRequestParams {
           this.extraParams,
           this.metadata,
           this.phases,
-          this.prorate);
+          this.prorate,
+          this.prorationBehavior);
     }
 
     /** Object representing the subscription schedule's default settings. */
@@ -233,11 +247,22 @@ public class SubscriptionScheduleUpdateParams extends ApiRequestParams {
     }
 
     /**
-     * If the update changes the current phase, indicates if the changes should be prorated.
-     * Defaults to {@code true}.
+     * This field has been renamed to {@code proration_behavior}. {@code prorate=true} can be
+     * replaced with {@code proration_behavior=create_prorations} and {@code prorate=false} can be
+     * replaced with {@code proration_behavior=none}.
      */
     public Builder setProrate(Boolean prorate) {
       this.prorate = prorate;
+      return this;
+    }
+
+    /**
+     * If the update changes the current phase, indicates if the changes should be prorated. Valid
+     * values are {@code create_prorations} or {@code none}, and the default value is {@code
+     * create_prorations}.
+     */
+    public Builder setProrationBehavior(ProrationBehavior prorationBehavior) {
+      this.prorationBehavior = prorationBehavior;
       return this;
     }
   }
@@ -686,6 +711,15 @@ public class SubscriptionScheduleUpdateParams extends ApiRequestParams {
     List<Plan> plans;
 
     /**
+     * Controls whether or not a subscription schedule will create prorations when transitioning to
+     * this phase. Valid values are {@code create_prorations} or {@code none}, and the default value
+     * is {@code create_prorations}. See <a
+     * href="https://stripe.com/docs/billing/subscriptions/prorations">Prorations</a>.
+     */
+    @SerializedName("proration_behavior")
+    ProrationBehavior prorationBehavior;
+
+    /**
      * The date at which this phase of the subscription schedule starts or {@code now}. Must be set
      * on the first phase.
      */
@@ -731,6 +765,7 @@ public class SubscriptionScheduleUpdateParams extends ApiRequestParams {
         InvoiceSettings invoiceSettings,
         Long iterations,
         List<Plan> plans,
+        ProrationBehavior prorationBehavior,
         Object startDate,
         BigDecimal taxPercent,
         Boolean trial,
@@ -746,6 +781,7 @@ public class SubscriptionScheduleUpdateParams extends ApiRequestParams {
       this.invoiceSettings = invoiceSettings;
       this.iterations = iterations;
       this.plans = plans;
+      this.prorationBehavior = prorationBehavior;
       this.startDate = startDate;
       this.taxPercent = taxPercent;
       this.trial = trial;
@@ -779,6 +815,8 @@ public class SubscriptionScheduleUpdateParams extends ApiRequestParams {
 
       private List<Plan> plans;
 
+      private ProrationBehavior prorationBehavior;
+
       private Object startDate;
 
       private BigDecimal taxPercent;
@@ -801,6 +839,7 @@ public class SubscriptionScheduleUpdateParams extends ApiRequestParams {
             this.invoiceSettings,
             this.iterations,
             this.plans,
+            this.prorationBehavior,
             this.startDate,
             this.taxPercent,
             this.trial,
@@ -1022,6 +1061,17 @@ public class SubscriptionScheduleUpdateParams extends ApiRequestParams {
           this.plans = new ArrayList<>();
         }
         this.plans.addAll(elements);
+        return this;
+      }
+
+      /**
+       * Controls whether or not a subscription schedule will create prorations when transitioning
+       * to this phase. Valid values are {@code create_prorations} or {@code none}, and the default
+       * value is {@code create_prorations}. See <a
+       * href="https://stripe.com/docs/billing/subscriptions/prorations">Prorations</a>.
+       */
+      public Builder setProrationBehavior(ProrationBehavior prorationBehavior) {
+        this.prorationBehavior = prorationBehavior;
         return this;
       }
 
@@ -1554,6 +1604,24 @@ public class SubscriptionScheduleUpdateParams extends ApiRequestParams {
       }
     }
 
+    public enum ProrationBehavior implements ApiRequestParams.EnumParam {
+      @SerializedName("always_invoice")
+      ALWAYS_INVOICE("always_invoice"),
+
+      @SerializedName("create_prorations")
+      CREATE_PRORATIONS("create_prorations"),
+
+      @SerializedName("none")
+      NONE("none");
+
+      @Getter(onMethod_ = {@Override})
+      private final String value;
+
+      ProrationBehavior(String value) {
+        this.value = value;
+      }
+    }
+
     public enum StartDate implements ApiRequestParams.EnumParam {
       @SerializedName("now")
       NOW("now");
@@ -1596,6 +1664,24 @@ public class SubscriptionScheduleUpdateParams extends ApiRequestParams {
     private final String value;
 
     EndBehavior(String value) {
+      this.value = value;
+    }
+  }
+
+  public enum ProrationBehavior implements ApiRequestParams.EnumParam {
+    @SerializedName("always_invoice")
+    ALWAYS_INVOICE("always_invoice"),
+
+    @SerializedName("create_prorations")
+    CREATE_PRORATIONS("create_prorations"),
+
+    @SerializedName("none")
+    NONE("none");
+
+    @Getter(onMethod_ = {@Override})
+    private final String value;
+
+    ProrationBehavior(String value) {
       this.value = value;
     }
   }

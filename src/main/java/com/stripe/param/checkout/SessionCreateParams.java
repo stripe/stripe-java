@@ -716,8 +716,8 @@ public class SessionCreateParams extends ApiRequestParams {
      * href="https://stripe.com/docs/api/payment_methods/attach">attached</a> to a Customer, even
      * after the transaction completes.
      *
-     * <p>For more, learn to <a href="https://stripe.com/docs/payments/save-after-payment">save card
-     * details after a payment</a>.
+     * <p>For more, learn to <a href="https://stripe.com/docs/payments/save-during-payment">save
+     * card details during payment</a>.
      *
      * <p>Stripe uses {@code setup_future_usage} to dynamically optimize your payment flow and
      * comply with regional legislation and network rules. For example, if your customer is impacted
@@ -932,8 +932,8 @@ public class SessionCreateParams extends ApiRequestParams {
        * href="https://stripe.com/docs/api/payment_methods/attach">attached</a> to a Customer, even
        * after the transaction completes.
        *
-       * <p>For more, learn to <a href="https://stripe.com/docs/payments/save-after-payment">save
-       * card details after a payment</a>.
+       * <p>For more, learn to <a href="https://stripe.com/docs/payments/save-during-payment">save
+       * card details during payment</a>.
        *
        * <p>Stripe uses {@code setup_future_usage} to dynamically optimize your payment flow and
        * comply with regional legislation and network rules. For example, if your customer is
