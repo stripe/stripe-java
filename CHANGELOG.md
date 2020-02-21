@@ -1,5 +1,10 @@
 # Changelog
 
+## 17.12.0 - 2020-02-21
+* [#970](https://github.com/stripe/stripe-java/pull/970) Multiple API changes
+  * Add support for `timezone` on `ReportRun`
+  * Add support for `proration_behavior` on `SubscriptionSchedule`
+
 ## 17.11.0 - 2020-02-12
 * [#968](https://github.com/stripe/stripe-java/pull/968) Add support for `payment_intent_data[transfer_data][amount]` on Checkout `Session`
 
