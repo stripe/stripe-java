@@ -4,6 +4,7 @@ import com.stripe.Stripe;
 import com.stripe.exception.ApiConnectionException;
 import com.stripe.util.StreamUtils;
 import java.io.IOException;
+import java.io.InputStream;
 import java.io.OutputStream;
 import java.net.Authenticator;
 import java.net.HttpURLConnection;
@@ -29,21 +30,22 @@ public class HttpURLConnectionClient extends HttpClient {
    */
   @Override
   public StripeResponse request(StripeRequest request) throws ApiConnectionException {
-    HttpURLConnection conn = null;
-
     try {
-      conn = createStripeConnection(request);
+      final HttpURLConnection conn = createStripeConnection(request);
 
-      // trigger the request
-      int responseCode = conn.getResponseCode();
-      HttpHeaders headers = HttpHeaders.of(conn.getHeaderFields());
-      String responseBody;
+      // Calling `getResponseCode()` triggers the request.
+      final int responseCode = conn.getResponseCode();
 
-      if (responseCode >= 200 && responseCode < 300) {
-        responseBody = StreamUtils.readToEnd(conn.getInputStream(), ApiResource.CHARSET);
-      } else {
-        responseBody = StreamUtils.readToEnd(conn.getErrorStream(), ApiResource.CHARSET);
-      }
+      final HttpHeaders headers = HttpHeaders.of(conn.getHeaderFields());
+
+      final InputStream responseStream =
+          (responseCode >= 200 && responseCode < 300)
+              ? conn.getInputStream()
+              : conn.getErrorStream();
+
+      final String responseBody = StreamUtils.readToEnd(responseStream, ApiResource.CHARSET);
+
+      responseStream.close();
 
       return new StripeResponse(responseCode, headers, responseBody);
 
@@ -56,10 +58,6 @@ public class HttpURLConnectionClient extends HttpClient {
                   + " or let us know at support@stripe.com.",
               Stripe.getApiBase(), e.getMessage()),
           e);
-    } finally {
-      if (conn != null) {
-        conn.disconnect();
-      }
     }
   }
 
