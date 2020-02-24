@@ -1,5 +1,8 @@
 # Changelog
 
+## 17.13.0 - 2020-02-24
+* [#973](https://github.com/stripe/stripe-java/pull/973) Add support for listing Checkout `Session` and passing tax rate information
+
 ## 17.12.0 - 2020-02-21
 * [#970](https://github.com/stripe/stripe-java/pull/970) Multiple API changes
   * Add support for `timezone` on `ReportRun`
