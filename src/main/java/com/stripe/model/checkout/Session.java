@@ -15,6 +15,7 @@ import com.stripe.model.Subscription;
 import com.stripe.net.ApiResource;
 import com.stripe.net.RequestOptions;
 import com.stripe.param.checkout.SessionCreateParams;
+import com.stripe.param.checkout.SessionListParams;
 import com.stripe.param.checkout.SessionRetrieveParams;
 import java.util.List;
 import java.util.Map;
@@ -229,6 +230,30 @@ public class Session extends ApiResource implements HasId {
   public void setSubscriptionObject(Subscription expandableObject) {
     this.subscription =
         new ExpandableField<Subscription>(expandableObject.getId(), expandableObject);
+  }
+
+  /** Returns a list of Checkout Sessions. */
+  public static SessionCollection list(Map<String, Object> params) throws StripeException {
+    return list(params, (RequestOptions) null);
+  }
+
+  /** Returns a list of Checkout Sessions. */
+  public static SessionCollection list(Map<String, Object> params, RequestOptions options)
+      throws StripeException {
+    String url = String.format("%s%s", Stripe.getApiBase(), "/v1/checkout/sessions");
+    return ApiResource.requestCollection(url, params, SessionCollection.class, options);
+  }
+
+  /** Returns a list of Checkout Sessions. */
+  public static SessionCollection list(SessionListParams params) throws StripeException {
+    return list(params, (RequestOptions) null);
+  }
+
+  /** Returns a list of Checkout Sessions. */
+  public static SessionCollection list(SessionListParams params, RequestOptions options)
+      throws StripeException {
+    String url = String.format("%s%s", Stripe.getApiBase(), "/v1/checkout/sessions");
+    return ApiResource.requestCollection(url, params, SessionCollection.class, options);
   }
 
   /** Retrieves a Session object. */
