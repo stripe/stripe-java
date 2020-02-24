@@ -522,6 +522,10 @@ public class SessionCreateParams extends ApiRequestParams {
     @SerializedName("quantity")
     Long quantity;
 
+    /** The tax rates which apply to this line item. This is only allowed in subscription mode. */
+    @SerializedName("tax_rates")
+    List<String> taxRates;
+
     private LineItem(
         Long amount,
         String currency,
@@ -529,7 +533,8 @@ public class SessionCreateParams extends ApiRequestParams {
         Map<String, Object> extraParams,
         List<String> images,
         String name,
-        Long quantity) {
+        Long quantity,
+        List<String> taxRates) {
       this.amount = amount;
       this.currency = currency;
       this.description = description;
@@ -537,6 +542,7 @@ public class SessionCreateParams extends ApiRequestParams {
       this.images = images;
       this.name = name;
       this.quantity = quantity;
+      this.taxRates = taxRates;
     }
 
     public static Builder builder() {
@@ -558,6 +564,8 @@ public class SessionCreateParams extends ApiRequestParams {
 
       private Long quantity;
 
+      private List<String> taxRates;
+
       /** Finalize and obtain parameter instance from this builder. */
       public LineItem build() {
         return new LineItem(
@@ -567,7 +575,8 @@ public class SessionCreateParams extends ApiRequestParams {
             this.extraParams,
             this.images,
             this.name,
-            this.quantity);
+            this.quantity,
+            this.taxRates);
       }
 
       /** The amount to be collected per unit of the line item. */
@@ -653,6 +662,32 @@ public class SessionCreateParams extends ApiRequestParams {
       /** The quantity of the line item being purchased. */
       public Builder setQuantity(Long quantity) {
         this.quantity = quantity;
+        return this;
+      }
+
+      /**
+       * Add an element to `taxRates` list. A list is initialized for the first `add/addAll` call,
+       * and subsequent calls adds additional elements to the original list. See {@link
+       * SessionCreateParams.LineItem#taxRates} for the field documentation.
+       */
+      public Builder addTaxRate(String element) {
+        if (this.taxRates == null) {
+          this.taxRates = new ArrayList<>();
+        }
+        this.taxRates.add(element);
+        return this;
+      }
+
+      /**
+       * Add all elements to `taxRates` list. A list is initialized for the first `add/addAll` call,
+       * and subsequent calls adds additional elements to the original list. See {@link
+       * SessionCreateParams.LineItem#taxRates} for the field documentation.
+       */
+      public Builder addAllTaxRate(List<String> elements) {
+        if (this.taxRates == null) {
+          this.taxRates = new ArrayList<>();
+        }
+        this.taxRates.addAll(elements);
         return this;
       }
     }
@@ -1545,6 +1580,14 @@ public class SessionCreateParams extends ApiRequestParams {
     BigDecimal applicationFeePercent;
 
     /**
+     * The tax rates that will apply to any subscription item that does not have {@code tax_rates}
+     * set. Invoices created will have their {@code default_tax_rates} populated from the
+     * subscription.
+     */
+    @SerializedName("default_tax_rates")
+    List<String> defaultTaxRates;
+
+    /**
      * Map of extra parameters for custom features not available in this client library. The content
      * in this map is not serialized under this field's {@code @SerializedName} value. Instead, each
      * key/value pair is serialized as if the key is a root-level field (serialized) name in this
@@ -1593,6 +1636,7 @@ public class SessionCreateParams extends ApiRequestParams {
 
     private SubscriptionData(
         BigDecimal applicationFeePercent,
+        List<String> defaultTaxRates,
         Map<String, Object> extraParams,
         List<Item> items,
         Map<String, String> metadata,
@@ -1600,6 +1644,7 @@ public class SessionCreateParams extends ApiRequestParams {
         Boolean trialFromPlan,
         Long trialPeriodDays) {
       this.applicationFeePercent = applicationFeePercent;
+      this.defaultTaxRates = defaultTaxRates;
       this.extraParams = extraParams;
       this.items = items;
       this.metadata = metadata;
@@ -1614,6 +1659,8 @@ public class SessionCreateParams extends ApiRequestParams {
 
     public static class Builder {
       private BigDecimal applicationFeePercent;
+
+      private List<String> defaultTaxRates;
 
       private Map<String, Object> extraParams;
 
@@ -1631,6 +1678,7 @@ public class SessionCreateParams extends ApiRequestParams {
       public SubscriptionData build() {
         return new SubscriptionData(
             this.applicationFeePercent,
+            this.defaultTaxRates,
             this.extraParams,
             this.items,
             this.metadata,
@@ -1649,6 +1697,32 @@ public class SessionCreateParams extends ApiRequestParams {
        */
       public Builder setApplicationFeePercent(BigDecimal applicationFeePercent) {
         this.applicationFeePercent = applicationFeePercent;
+        return this;
+      }
+
+      /**
+       * Add an element to `defaultTaxRates` list. A list is initialized for the first `add/addAll`
+       * call, and subsequent calls adds additional elements to the original list. See {@link
+       * SessionCreateParams.SubscriptionData#defaultTaxRates} for the field documentation.
+       */
+      public Builder addDefaultTaxRate(String element) {
+        if (this.defaultTaxRates == null) {
+          this.defaultTaxRates = new ArrayList<>();
+        }
+        this.defaultTaxRates.add(element);
+        return this;
+      }
+
+      /**
+       * Add all elements to `defaultTaxRates` list. A list is initialized for the first
+       * `add/addAll` call, and subsequent calls adds additional elements to the original list. See
+       * {@link SessionCreateParams.SubscriptionData#defaultTaxRates} for the field documentation.
+       */
+      public Builder addAllDefaultTaxRate(List<String> elements) {
+        if (this.defaultTaxRates == null) {
+          this.defaultTaxRates = new ArrayList<>();
+        }
+        this.defaultTaxRates.addAll(elements);
         return this;
       }
 
@@ -1778,10 +1852,19 @@ public class SessionCreateParams extends ApiRequestParams {
       @SerializedName("quantity")
       Long quantity;
 
-      private Item(Map<String, Object> extraParams, String plan, Long quantity) {
+      /**
+       * The tax rates which apply to this item. When set, the {@code default_tax_rates} on {@code
+       * subscription_data} do not apply to this item.
+       */
+      @SerializedName("tax_rates")
+      List<String> taxRates;
+
+      private Item(
+          Map<String, Object> extraParams, String plan, Long quantity, List<String> taxRates) {
         this.extraParams = extraParams;
         this.plan = plan;
         this.quantity = quantity;
+        this.taxRates = taxRates;
       }
 
       public static Builder builder() {
@@ -1795,9 +1878,11 @@ public class SessionCreateParams extends ApiRequestParams {
 
         private Long quantity;
 
+        private List<String> taxRates;
+
         /** Finalize and obtain parameter instance from this builder. */
         public Item build() {
-          return new Item(this.extraParams, this.plan, this.quantity);
+          return new Item(this.extraParams, this.plan, this.quantity, this.taxRates);
         }
 
         /**
@@ -1837,6 +1922,32 @@ public class SessionCreateParams extends ApiRequestParams {
         /** Quantity for this item. */
         public Builder setQuantity(Long quantity) {
           this.quantity = quantity;
+          return this;
+        }
+
+        /**
+         * Add an element to `taxRates` list. A list is initialized for the first `add/addAll` call,
+         * and subsequent calls adds additional elements to the original list. See {@link
+         * SessionCreateParams.SubscriptionData.Item#taxRates} for the field documentation.
+         */
+        public Builder addTaxRate(String element) {
+          if (this.taxRates == null) {
+            this.taxRates = new ArrayList<>();
+          }
+          this.taxRates.add(element);
+          return this;
+        }
+
+        /**
+         * Add all elements to `taxRates` list. A list is initialized for the first `add/addAll`
+         * call, and subsequent calls adds additional elements to the original list. See {@link
+         * SessionCreateParams.SubscriptionData.Item#taxRates} for the field documentation.
+         */
+        public Builder addAllTaxRate(List<String> elements) {
+          if (this.taxRates == null) {
+            this.taxRates = new ArrayList<>();
+          }
+          this.taxRates.addAll(elements);
           return this;
         }
       }
