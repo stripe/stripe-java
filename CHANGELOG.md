@@ -1,5 +1,8 @@
 # Changelog
 
+## 17.14.0 - 2020-02-24
+* [#974](https://github.com/stripe/stripe-java/pull/974) Add new enum values in `reason` for Issuing `Dispute` creation
+
 ## 17.13.0 - 2020-02-24
 * [#973](https://github.com/stripe/stripe-java/pull/973) Add support for listing Checkout `Session` and passing tax rate information
 
