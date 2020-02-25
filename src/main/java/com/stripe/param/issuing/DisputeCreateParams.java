@@ -212,6 +212,13 @@ public class DisputeCreateParams extends ApiRequestParams {
   @Getter
   public static class Evidence {
     /**
+     * Evidence to support a duplicate dispute. Only provide this if your dispute's {@code reason}
+     * is {@code duplicate}.
+     */
+    @SerializedName("duplicate")
+    Duplicate duplicate;
+
+    /**
      * Map of extra parameters for custom features not available in this client library. The content
      * in this map is not serialized under this field's {@code @SerializedName} value. Instead, each
      * key/value pair is serialized as if the key is a root-level field (serialized) name in this
@@ -234,10 +241,24 @@ public class DisputeCreateParams extends ApiRequestParams {
     @SerializedName("other")
     Other other;
 
-    private Evidence(Map<String, Object> extraParams, Fraudulent fraudulent, Other other) {
+    /**
+     * Evidence to support a dispute for a product that wasn't received. Only provide this if your
+     * dispute's {@code reason} is {@code product_not_received}.
+     */
+    @SerializedName("product_not_received")
+    ProductNotReceived productNotReceived;
+
+    private Evidence(
+        Duplicate duplicate,
+        Map<String, Object> extraParams,
+        Fraudulent fraudulent,
+        Other other,
+        ProductNotReceived productNotReceived) {
+      this.duplicate = duplicate;
       this.extraParams = extraParams;
       this.fraudulent = fraudulent;
       this.other = other;
+      this.productNotReceived = productNotReceived;
     }
 
     public static Builder builder() {
@@ -245,15 +266,29 @@ public class DisputeCreateParams extends ApiRequestParams {
     }
 
     public static class Builder {
+      private Duplicate duplicate;
+
       private Map<String, Object> extraParams;
 
       private Fraudulent fraudulent;
 
       private Other other;
 
+      private ProductNotReceived productNotReceived;
+
       /** Finalize and obtain parameter instance from this builder. */
       public Evidence build() {
-        return new Evidence(this.extraParams, this.fraudulent, this.other);
+        return new Evidence(
+            this.duplicate, this.extraParams, this.fraudulent, this.other, this.productNotReceived);
+      }
+
+      /**
+       * Evidence to support a duplicate dispute. Only provide this if your dispute's {@code reason}
+       * is {@code duplicate}.
+       */
+      public Builder setDuplicate(Duplicate duplicate) {
+        this.duplicate = duplicate;
+        return this;
       }
 
       /**
@@ -298,6 +333,131 @@ public class DisputeCreateParams extends ApiRequestParams {
       public Builder setOther(Other other) {
         this.other = other;
         return this;
+      }
+
+      /**
+       * Evidence to support a dispute for a product that wasn't received. Only provide this if your
+       * dispute's {@code reason} is {@code product_not_received}.
+       */
+      public Builder setProductNotReceived(ProductNotReceived productNotReceived) {
+        this.productNotReceived = productNotReceived;
+        return this;
+      }
+    }
+
+    @Getter
+    public static class Duplicate {
+      /** Brief freeform text explaining why you are disputing this transaction. */
+      @SerializedName("dispute_explanation")
+      String disputeExplanation;
+
+      /**
+       * Map of extra parameters for custom features not available in this client library. The
+       * content in this map is not serialized under this field's {@code @SerializedName} value.
+       * Instead, each key/value pair is serialized as if the key is a root-level field (serialized)
+       * name in this param object. Effectively, this map is flattened to its parent instance.
+       */
+      @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
+      Map<String, Object> extraParams;
+
+      /**
+       * Transaction (e.g., ipi_...) that the disputed transaction is a duplicate of. Of the two or
+       * more transactions that are copies of each other, this is original undisputed one.
+       */
+      @SerializedName("original_transaction")
+      String originalTransaction;
+
+      /**
+       * (ID of a <a href="https://stripe.com/docs/guides/file-upload">file upload</a>) Additional
+       * file evidence supporting your dispute.
+       */
+      @SerializedName("uncategorized_file")
+      String uncategorizedFile;
+
+      private Duplicate(
+          String disputeExplanation,
+          Map<String, Object> extraParams,
+          String originalTransaction,
+          String uncategorizedFile) {
+        this.disputeExplanation = disputeExplanation;
+        this.extraParams = extraParams;
+        this.originalTransaction = originalTransaction;
+        this.uncategorizedFile = uncategorizedFile;
+      }
+
+      public static Builder builder() {
+        return new Builder();
+      }
+
+      public static class Builder {
+        private String disputeExplanation;
+
+        private Map<String, Object> extraParams;
+
+        private String originalTransaction;
+
+        private String uncategorizedFile;
+
+        /** Finalize and obtain parameter instance from this builder. */
+        public Duplicate build() {
+          return new Duplicate(
+              this.disputeExplanation,
+              this.extraParams,
+              this.originalTransaction,
+              this.uncategorizedFile);
+        }
+
+        /** Brief freeform text explaining why you are disputing this transaction. */
+        public Builder setDisputeExplanation(String disputeExplanation) {
+          this.disputeExplanation = disputeExplanation;
+          return this;
+        }
+
+        /**
+         * Add a key/value pair to `extraParams` map. A map is initialized for the first
+         * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
+         * map. See {@link DisputeCreateParams.Evidence.Duplicate#extraParams} for the field
+         * documentation.
+         */
+        public Builder putExtraParam(String key, Object value) {
+          if (this.extraParams == null) {
+            this.extraParams = new HashMap<>();
+          }
+          this.extraParams.put(key, value);
+          return this;
+        }
+
+        /**
+         * Add all map key/value pairs to `extraParams` map. A map is initialized for the first
+         * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
+         * map. See {@link DisputeCreateParams.Evidence.Duplicate#extraParams} for the field
+         * documentation.
+         */
+        public Builder putAllExtraParam(Map<String, Object> map) {
+          if (this.extraParams == null) {
+            this.extraParams = new HashMap<>();
+          }
+          this.extraParams.putAll(map);
+          return this;
+        }
+
+        /**
+         * Transaction (e.g., ipi_...) that the disputed transaction is a duplicate of. Of the two
+         * or more transactions that are copies of each other, this is original undisputed one.
+         */
+        public Builder setOriginalTransaction(String originalTransaction) {
+          this.originalTransaction = originalTransaction;
+          return this;
+        }
+
+        /**
+         * (ID of a <a href="https://stripe.com/docs/guides/file-upload">file upload</a>) Additional
+         * file evidence supporting your dispute.
+         */
+        public Builder setUncategorizedFile(String uncategorizedFile) {
+          this.uncategorizedFile = uncategorizedFile;
+          return this;
+        }
       }
     }
 
@@ -480,14 +640,111 @@ public class DisputeCreateParams extends ApiRequestParams {
         }
       }
     }
+
+    @Getter
+    public static class ProductNotReceived {
+      /** Brief freeform text explaining why you are disputing this transaction. */
+      @SerializedName("dispute_explanation")
+      String disputeExplanation;
+
+      /**
+       * Map of extra parameters for custom features not available in this client library. The
+       * content in this map is not serialized under this field's {@code @SerializedName} value.
+       * Instead, each key/value pair is serialized as if the key is a root-level field (serialized)
+       * name in this param object. Effectively, this map is flattened to its parent instance.
+       */
+      @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
+      Map<String, Object> extraParams;
+
+      /**
+       * (ID of a <a href="https://stripe.com/docs/guides/file-upload">file upload</a>) Additional
+       * file evidence supporting your dispute.
+       */
+      @SerializedName("uncategorized_file")
+      String uncategorizedFile;
+
+      private ProductNotReceived(
+          String disputeExplanation, Map<String, Object> extraParams, String uncategorizedFile) {
+        this.disputeExplanation = disputeExplanation;
+        this.extraParams = extraParams;
+        this.uncategorizedFile = uncategorizedFile;
+      }
+
+      public static Builder builder() {
+        return new Builder();
+      }
+
+      public static class Builder {
+        private String disputeExplanation;
+
+        private Map<String, Object> extraParams;
+
+        private String uncategorizedFile;
+
+        /** Finalize and obtain parameter instance from this builder. */
+        public ProductNotReceived build() {
+          return new ProductNotReceived(
+              this.disputeExplanation, this.extraParams, this.uncategorizedFile);
+        }
+
+        /** Brief freeform text explaining why you are disputing this transaction. */
+        public Builder setDisputeExplanation(String disputeExplanation) {
+          this.disputeExplanation = disputeExplanation;
+          return this;
+        }
+
+        /**
+         * Add a key/value pair to `extraParams` map. A map is initialized for the first
+         * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
+         * map. See {@link DisputeCreateParams.Evidence.ProductNotReceived#extraParams} for the
+         * field documentation.
+         */
+        public Builder putExtraParam(String key, Object value) {
+          if (this.extraParams == null) {
+            this.extraParams = new HashMap<>();
+          }
+          this.extraParams.put(key, value);
+          return this;
+        }
+
+        /**
+         * Add all map key/value pairs to `extraParams` map. A map is initialized for the first
+         * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
+         * map. See {@link DisputeCreateParams.Evidence.ProductNotReceived#extraParams} for the
+         * field documentation.
+         */
+        public Builder putAllExtraParam(Map<String, Object> map) {
+          if (this.extraParams == null) {
+            this.extraParams = new HashMap<>();
+          }
+          this.extraParams.putAll(map);
+          return this;
+        }
+
+        /**
+         * (ID of a <a href="https://stripe.com/docs/guides/file-upload">file upload</a>) Additional
+         * file evidence supporting your dispute.
+         */
+        public Builder setUncategorizedFile(String uncategorizedFile) {
+          this.uncategorizedFile = uncategorizedFile;
+          return this;
+        }
+      }
+    }
   }
 
   public enum Reason implements ApiRequestParams.EnumParam {
+    @SerializedName("duplicate")
+    DUPLICATE("duplicate"),
+
     @SerializedName("fraudulent")
     FRAUDULENT("fraudulent"),
 
     @SerializedName("other")
-    OTHER("other");
+    OTHER("other"),
+
+    @SerializedName("product_not_received")
+    PRODUCT_NOT_RECEIVED("product_not_received");
 
     @Getter(onMethod_ = {@Override})
     private final String value;
