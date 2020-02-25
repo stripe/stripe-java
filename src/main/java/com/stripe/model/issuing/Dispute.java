@@ -75,7 +75,10 @@ public class Dispute extends ApiResource implements HasId, MetadataStore<Dispute
   @SerializedName("object")
   String object;
 
-  /** Reason for this dispute. One of {@code fraudulent} or {@code other}. */
+  /**
+   * Reason for this dispute. One of {@code duplicate}, {@code product_not_received}, {@code
+   * fraudulent}, or {@code other}.
+   */
   @SerializedName("reason")
   String reason;
 
@@ -246,6 +249,13 @@ public class Dispute extends ApiResource implements HasId, MetadataStore<Dispute
   @EqualsAndHashCode(callSuper = false)
   public static class Evidence extends StripeObject {
     /**
+     * Evidence to support a duplicate product dispute. This will only be present if your dispute's
+     * {@code reason} is {@code duplicate}.
+     */
+    @SerializedName("duplicate")
+    EvidenceDuplicate duplicate;
+
+    /**
      * Evidence to support a fraudulent dispute. This will only be present if your dispute's {@code
      * reason} is {@code fraudulent}.
      */
@@ -258,6 +268,57 @@ public class Dispute extends ApiResource implements HasId, MetadataStore<Dispute
      */
     @SerializedName("other")
     EvidenceOther other;
+
+    /**
+     * Evidence to support a dispute where the product wasn't received. This will only be present if
+     * your dispute's {@code reason} is {@code product_not_received}.
+     */
+    @SerializedName("product_not_received")
+    EvidenceProductNotReceived productNotReceived;
+  }
+
+  @Getter
+  @Setter
+  @EqualsAndHashCode(callSuper = false)
+  public static class EvidenceDuplicate extends StripeObject {
+    /** Brief freeform text explaining why you are disputing this transaction. */
+    @SerializedName("dispute_explanation")
+    String disputeExplanation;
+
+    /**
+     * Transaction (e.g., ipi_...) that the disputed transaction is a duplicate of. Of the two or
+     * more transactions that are copies of each other, this is original undisputed one.
+     */
+    @SerializedName("original_transaction")
+    String originalTransaction;
+
+    /**
+     * (ID of a <a href="https://stripe.com/docs/guides/file-upload">file upload</a>) Additional
+     * file evidence supporting your dispute.
+     */
+    @SerializedName("uncategorized_file")
+    @Getter(lombok.AccessLevel.NONE)
+    @Setter(lombok.AccessLevel.NONE)
+    ExpandableField<File> uncategorizedFile;
+
+    /** Get ID of expandable {@code uncategorizedFile} object. */
+    public String getUncategorizedFile() {
+      return (this.uncategorizedFile != null) ? this.uncategorizedFile.getId() : null;
+    }
+
+    public void setUncategorizedFile(String id) {
+      this.uncategorizedFile = ApiResource.setExpandableFieldId(id, this.uncategorizedFile);
+    }
+
+    /** Get expanded {@code uncategorizedFile}. */
+    public File getUncategorizedFileObject() {
+      return (this.uncategorizedFile != null) ? this.uncategorizedFile.getExpanded() : null;
+    }
+
+    public void setUncategorizedFileObject(File expandableObject) {
+      this.uncategorizedFile =
+          new ExpandableField<File>(expandableObject.getId(), expandableObject);
+    }
   }
 
   @Getter
@@ -301,6 +362,43 @@ public class Dispute extends ApiResource implements HasId, MetadataStore<Dispute
   @Setter
   @EqualsAndHashCode(callSuper = false)
   public static class EvidenceOther extends StripeObject {
+    /** Brief freeform text explaining why you are disputing this transaction. */
+    @SerializedName("dispute_explanation")
+    String disputeExplanation;
+
+    /**
+     * (ID of a <a href="https://stripe.com/docs/guides/file-upload">file upload</a>) Additional
+     * file evidence supporting your dispute.
+     */
+    @SerializedName("uncategorized_file")
+    @Getter(lombok.AccessLevel.NONE)
+    @Setter(lombok.AccessLevel.NONE)
+    ExpandableField<File> uncategorizedFile;
+
+    /** Get ID of expandable {@code uncategorizedFile} object. */
+    public String getUncategorizedFile() {
+      return (this.uncategorizedFile != null) ? this.uncategorizedFile.getId() : null;
+    }
+
+    public void setUncategorizedFile(String id) {
+      this.uncategorizedFile = ApiResource.setExpandableFieldId(id, this.uncategorizedFile);
+    }
+
+    /** Get expanded {@code uncategorizedFile}. */
+    public File getUncategorizedFileObject() {
+      return (this.uncategorizedFile != null) ? this.uncategorizedFile.getExpanded() : null;
+    }
+
+    public void setUncategorizedFileObject(File expandableObject) {
+      this.uncategorizedFile =
+          new ExpandableField<File>(expandableObject.getId(), expandableObject);
+    }
+  }
+
+  @Getter
+  @Setter
+  @EqualsAndHashCode(callSuper = false)
+  public static class EvidenceProductNotReceived extends StripeObject {
     /** Brief freeform text explaining why you are disputing this transaction. */
     @SerializedName("dispute_explanation")
     String disputeExplanation;
