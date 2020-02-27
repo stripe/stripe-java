@@ -157,6 +157,9 @@ public class SubscriptionCreateParams extends ApiRequestParams {
    * create a subscription and returns an error instead. This was the default behavior for API
    * versions prior to 2019-03-14. See the <a
    * href="https://stripe.com/docs/upgrades#2019-03-14">changelog</a> to learn more.
+   *
+   * <p>{@code pending_if_incomplete} is only used with updates and cannot be passed when creating a
+   * subscription.
    */
   @SerializedName("payment_behavior")
   PaymentBehavior paymentBehavior;
@@ -682,6 +685,9 @@ public class SubscriptionCreateParams extends ApiRequestParams {
      * not create a subscription and returns an error instead. This was the default behavior for API
      * versions prior to 2019-03-14. See the <a
      * href="https://stripe.com/docs/upgrades#2019-03-14">changelog</a> to learn more.
+     *
+     * <p>{@code pending_if_incomplete} is only used with updates and cannot be passed when creating
+     * a subscription.
      */
     public Builder setPaymentBehavior(PaymentBehavior paymentBehavior) {
       this.paymentBehavior = paymentBehavior;

@@ -157,7 +157,7 @@ public class ChargeCreateParams extends ApiRequestParams {
 
   /**
    * A string that identifies this transaction as part of a group. For details, see <a
-   * href="https://stripe.com/docs/connect/charges-transfers#grouping-transactions">Grouping
+   * href="https://stripe.com/docs/connect/charges-transfers#transfer-options">Grouping
    * transactions</a>.
    */
   @SerializedName("transfer_group")
@@ -506,7 +506,7 @@ public class ChargeCreateParams extends ApiRequestParams {
 
     /**
      * A string that identifies this transaction as part of a group. For details, see <a
-     * href="https://stripe.com/docs/connect/charges-transfers#grouping-transactions">Grouping
+     * href="https://stripe.com/docs/connect/charges-transfers#transfer-options">Grouping
      * transactions</a>.
      */
     public Builder setTransferGroup(String transferGroup) {
