@@ -41,12 +41,18 @@ public class SubscriptionItemCreateParams extends ApiRequestParams {
   Map<String, String> metadata;
 
   /**
-   * Use {@code allow_incomplete} to create subscriptions with {@code status=incomplete} if the
-   * first invoice cannot be paid. Creating subscriptions with this status allows you to manage
-   * scenarios where additional user actions are needed to pay a subscription's invoice. For
-   * example, SCA regulation may require 3DS authentication to complete payment. See the <a
+   * Use {@code allow_incomplete} to transition the subscription to {@code status=past_due} if a
+   * payment is required but cannot be paid. This allows you to manage scenarios where additional
+   * user actions are needed to pay a subscription's invoice. For example, SCA regulation may
+   * require 3DS authentication to complete payment. See the <a
    * href="https://stripe.com/docs/billing/migration/strong-customer-authentication">SCA Migration
    * Guide</a> for Billing to learn more. This is the default behavior.
+   *
+   * <p>Use {@code pending_if_incomplete} to update the subscription using <a
+   * href="https://stripe.com/docs/billing/subscriptions/pending-updates">pending updates</a>. When
+   * you use {@code pending_if_incomplete} you can only pass the parameters <a
+   * href="https://stripe.com/docs/billing/pending-updates-reference#supported-attributes">supported
+   * by pending updates</a>.
    *
    * <p>Use {@code error_if_incomplete} if you want Stripe to return an HTTP 402 status code if a
    * subscription's first invoice cannot be paid. For example, if a payment method requires 3DS
@@ -286,12 +292,18 @@ public class SubscriptionItemCreateParams extends ApiRequestParams {
     }
 
     /**
-     * Use {@code allow_incomplete} to create subscriptions with {@code status=incomplete} if the
-     * first invoice cannot be paid. Creating subscriptions with this status allows you to manage
-     * scenarios where additional user actions are needed to pay a subscription's invoice. For
-     * example, SCA regulation may require 3DS authentication to complete payment. See the <a
+     * Use {@code allow_incomplete} to transition the subscription to {@code status=past_due} if a
+     * payment is required but cannot be paid. This allows you to manage scenarios where additional
+     * user actions are needed to pay a subscription's invoice. For example, SCA regulation may
+     * require 3DS authentication to complete payment. See the <a
      * href="https://stripe.com/docs/billing/migration/strong-customer-authentication">SCA Migration
      * Guide</a> for Billing to learn more. This is the default behavior.
+     *
+     * <p>Use {@code pending_if_incomplete} to update the subscription using <a
+     * href="https://stripe.com/docs/billing/subscriptions/pending-updates">pending updates</a>.
+     * When you use {@code pending_if_incomplete} you can only pass the parameters <a
+     * href="https://stripe.com/docs/billing/pending-updates-reference#supported-attributes">supported
+     * by pending updates</a>.
      *
      * <p>Use {@code error_if_incomplete} if you want Stripe to return an HTTP 402 status code if a
      * subscription's first invoice cannot be paid. For example, if a payment method requires 3DS

@@ -50,7 +50,7 @@ public class AccountLinkCreateParams extends ApiRequestParams {
    * custom_account_verification} or {@code custom_account_update}.
    */
   @SerializedName("type")
-  String type;
+  Type type;
 
   private AccountLinkCreateParams(
       String account,
@@ -59,7 +59,7 @@ public class AccountLinkCreateParams extends ApiRequestParams {
       Map<String, Object> extraParams,
       String failureUrl,
       String successUrl,
-      String type) {
+      Type type) {
     this.account = account;
     this.collect = collect;
     this.expand = expand;
@@ -86,7 +86,7 @@ public class AccountLinkCreateParams extends ApiRequestParams {
 
     private String successUrl;
 
-    private String type;
+    private Type type;
 
     /** Finalize and obtain parameter instance from this builder. */
     public AccountLinkCreateParams build() {
@@ -186,7 +186,7 @@ public class AccountLinkCreateParams extends ApiRequestParams {
      * The type of account link the user is requesting. Possible values are {@code
      * custom_account_verification} or {@code custom_account_update}.
      */
-    public Builder setType(String type) {
+    public Builder setType(Type type) {
       this.type = type;
       return this;
     }
@@ -203,6 +203,21 @@ public class AccountLinkCreateParams extends ApiRequestParams {
     private final String value;
 
     Collect(String value) {
+      this.value = value;
+    }
+  }
+
+  public enum Type implements ApiRequestParams.EnumParam {
+    @SerializedName("custom_account_update")
+    CUSTOM_ACCOUNT_UPDATE("custom_account_update"),
+
+    @SerializedName("custom_account_verification")
+    CUSTOM_ACCOUNT_VERIFICATION("custom_account_verification");
+
+    @Getter(onMethod_ = {@Override})
+    private final String value;
+
+    Type(String value) {
       this.value = value;
     }
   }
