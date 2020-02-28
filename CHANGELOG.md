@@ -1,5 +1,8 @@
 # Changelog
 
+## 17.16.0 - 2020-02-28
+* [#976](https://github.com/stripe/stripe-java/pull/976) Add `my_sst` as a valid value for `type` on `TaxId`
+
 ## 17.15.0 - 2020-02-27
 * [#975](https://github.com/stripe/stripe-java/pull/975) Make `type` on `AccountLink` an enum
 
