@@ -69,11 +69,9 @@ public class SubscriptionItemCreateParams extends ApiRequestParams {
   String plan;
 
   /**
-   * Flag indicating whether to <a
-   * href="https://stripe.com/docs/billing/subscriptions/prorations">prorate</a> switching plans
-   * during a billing cycle. This field has been deprecated and will be removed in a future API
-   * version. Use {@code proration_behavior=create_prorations} as a replacement for {@code
-   * prorate=true} and {@code proration_behavior=none} for {@code prorate=false}.
+   * This field has been renamed to {@code proration_behavior}. {@code prorate=true} can be replaced
+   * with {@code proration_behavior=create_prorations} and {@code prorate=false} can be replaced
+   * with {@code proration_behavior=none}.
    */
   @SerializedName("prorate")
   Boolean prorate;
@@ -324,11 +322,9 @@ public class SubscriptionItemCreateParams extends ApiRequestParams {
     }
 
     /**
-     * Flag indicating whether to <a
-     * href="https://stripe.com/docs/billing/subscriptions/prorations">prorate</a> switching plans
-     * during a billing cycle. This field has been deprecated and will be removed in a future API
-     * version. Use {@code proration_behavior=create_prorations} as a replacement for {@code
-     * prorate=true} and {@code proration_behavior=none} for {@code prorate=false}.
+     * This field has been renamed to {@code proration_behavior}. {@code prorate=true} can be
+     * replaced with {@code proration_behavior=create_prorations} and {@code prorate=false} can be
+     * replaced with {@code proration_behavior=none}.
      */
     public Builder setProrate(Boolean prorate) {
       this.prorate = prorate;

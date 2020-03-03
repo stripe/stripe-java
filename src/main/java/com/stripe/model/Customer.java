@@ -112,6 +112,10 @@ public class Customer extends ApiResource implements HasId, MetadataStore<Custom
   @SerializedName("name")
   String name;
 
+  /** The suffix of the customer's next invoice number, e.g., 0001. */
+  @SerializedName("next_invoice_sequence")
+  Long nextInvoiceSequence;
+
   /**
    * String representing the object's type. Objects of the same type share the same value.
    *
