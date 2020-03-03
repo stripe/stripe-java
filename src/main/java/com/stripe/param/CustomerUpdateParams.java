@@ -92,6 +92,10 @@ public class CustomerUpdateParams extends ApiRequestParams {
   @SerializedName("name")
   Object name;
 
+  /** The sequence to be used on the customer's next invoice. Defaults to 1. */
+  @SerializedName("next_invoice_sequence")
+  Long nextInvoiceSequence;
+
   /** The customer's phone number. */
   @SerializedName("phone")
   Object phone;
@@ -134,6 +138,7 @@ public class CustomerUpdateParams extends ApiRequestParams {
       InvoiceSettings invoiceSettings,
       Map<String, String> metadata,
       Object name,
+      Long nextInvoiceSequence,
       Object phone,
       List<String> preferredLocales,
       Object shipping,
@@ -152,6 +157,7 @@ public class CustomerUpdateParams extends ApiRequestParams {
     this.invoiceSettings = invoiceSettings;
     this.metadata = metadata;
     this.name = name;
+    this.nextInvoiceSequence = nextInvoiceSequence;
     this.phone = phone;
     this.preferredLocales = preferredLocales;
     this.shipping = shipping;
@@ -189,6 +195,8 @@ public class CustomerUpdateParams extends ApiRequestParams {
 
     private Object name;
 
+    private Long nextInvoiceSequence;
+
     private Object phone;
 
     private List<String> preferredLocales;
@@ -216,6 +224,7 @@ public class CustomerUpdateParams extends ApiRequestParams {
           this.invoiceSettings,
           this.metadata,
           this.name,
+          this.nextInvoiceSequence,
           this.phone,
           this.preferredLocales,
           this.shipping,
@@ -437,6 +446,12 @@ public class CustomerUpdateParams extends ApiRequestParams {
     /** The customer's full name or business name. */
     public Builder setName(EmptyParam name) {
       this.name = name;
+      return this;
+    }
+
+    /** The sequence to be used on the customer's next invoice. Defaults to 1. */
+    public Builder setNextInvoiceSequence(Long nextInvoiceSequence) {
+      this.nextInvoiceSequence = nextInvoiceSequence;
       return this;
     }
 

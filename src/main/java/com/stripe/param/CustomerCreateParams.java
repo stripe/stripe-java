@@ -78,6 +78,10 @@ public class CustomerCreateParams extends ApiRequestParams {
   @SerializedName("name")
   String name;
 
+  /** The sequence to be used on the customer's next invoice. Defaults to 1. */
+  @SerializedName("next_invoice_sequence")
+  Long nextInvoiceSequence;
+
   @SerializedName("payment_method")
   String paymentMethod;
 
@@ -116,6 +120,7 @@ public class CustomerCreateParams extends ApiRequestParams {
       InvoiceSettings invoiceSettings,
       Map<String, String> metadata,
       String name,
+      Long nextInvoiceSequence,
       String paymentMethod,
       String phone,
       List<String> preferredLocales,
@@ -134,6 +139,7 @@ public class CustomerCreateParams extends ApiRequestParams {
     this.invoiceSettings = invoiceSettings;
     this.metadata = metadata;
     this.name = name;
+    this.nextInvoiceSequence = nextInvoiceSequence;
     this.paymentMethod = paymentMethod;
     this.phone = phone;
     this.preferredLocales = preferredLocales;
@@ -170,6 +176,8 @@ public class CustomerCreateParams extends ApiRequestParams {
 
     private String name;
 
+    private Long nextInvoiceSequence;
+
     private String paymentMethod;
 
     private String phone;
@@ -198,6 +206,7 @@ public class CustomerCreateParams extends ApiRequestParams {
           this.invoiceSettings,
           this.metadata,
           this.name,
+          this.nextInvoiceSequence,
           this.paymentMethod,
           this.phone,
           this.preferredLocales,
@@ -348,6 +357,12 @@ public class CustomerCreateParams extends ApiRequestParams {
     /** The customer's full name or business name. */
     public Builder setName(String name) {
       this.name = name;
+      return this;
+    }
+
+    /** The sequence to be used on the customer's next invoice. Defaults to 1. */
+    public Builder setNextInvoiceSequence(Long nextInvoiceSequence) {
+      this.nextInvoiceSequence = nextInvoiceSequence;
       return this;
     }
 

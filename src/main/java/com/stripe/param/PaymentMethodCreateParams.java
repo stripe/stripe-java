@@ -1014,10 +1014,7 @@ public class PaymentMethodCreateParams extends ApiRequestParams {
       STANDARD_CHARTERED("standard_chartered"),
 
       @SerializedName("uob")
-      UOB("uob"),
-
-      @SerializedName("uob_regional")
-      UOB_REGIONAL("uob_regional");
+      UOB("uob");
 
       @Getter(onMethod_ = {@Override})
       private final String value;
