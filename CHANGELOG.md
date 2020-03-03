@@ -1,5 +1,12 @@
 # Changelog
 
+## 18.0.0 - 2020-03-03
+* [#977](https://github.com/stripe/stripe-java/pull/977) Multiple API changes:
+  * Pin to API version `2020-03-02`
+  * Remove `uob_regional` as a value on `bank` for FPX as this is deprecated and was never used
+  * Add support for `next_invoice_sequence` on `Customer`
+  * Add support for `proration_behavior` on `SubscriptionItem` delete
+
 ## 17.16.0 - 2020-02-28
 * [#976](https://github.com/stripe/stripe-java/pull/976) Add `my_sst` as a valid value for `type` on `TaxId`
 
