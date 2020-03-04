@@ -925,6 +925,13 @@ public class Account extends ApiResource implements MetadataStore<Account>, Paym
     String disabledReason;
 
     /**
+     * The fields that need to be collected again because validation or verification failed for some
+     * reason.
+     */
+    @SerializedName("errors")
+    List<Account.Requirements.Errors> errors;
+
+    /**
      * The fields that need to be collected assuming all volume thresholds are reached. As they
      * become required, these fields appear in {@code currently_due} as well, and the {@code
      * current_deadline} is set.
@@ -946,6 +953,51 @@ public class Account extends ApiResource implements MetadataStore<Account>, Paym
      */
     @SerializedName("pending_verification")
     List<String> pendingVerification;
+
+    @Getter
+    @Setter
+    @EqualsAndHashCode(callSuper = false)
+    public static class Errors extends StripeObject {
+      /**
+       * The code for the type of error.
+       *
+       * <p>One of {@code invalid_address_city_state_postal_code}, {@code invalid_street_address},
+       * {@code invalid_value_other}, {@code verification_document_address_mismatch}, {@code
+       * verification_document_address_missing}, {@code verification_document_corrupt}, {@code
+       * verification_document_country_not_supported}, {@code verification_document_dob_mismatch},
+       * {@code verification_document_duplicate_type}, {@code verification_document_expired}, {@code
+       * verification_document_failed_copy}, {@code verification_document_failed_greyscale}, {@code
+       * verification_document_failed_other}, {@code verification_document_failed_test_mode}, {@code
+       * verification_document_fraudulent}, {@code verification_document_id_number_mismatch}, {@code
+       * verification_document_id_number_missing}, {@code verification_document_incomplete}, {@code
+       * verification_document_invalid}, {@code verification_document_manipulated}, {@code
+       * verification_document_missing_back}, {@code verification_document_missing_front}, {@code
+       * verification_document_name_mismatch}, {@code verification_document_name_missing}, {@code
+       * verification_document_nationality_mismatch}, {@code verification_document_not_readable},
+       * {@code verification_document_not_uploaded}, {@code verification_document_photo_mismatch},
+       * {@code verification_document_too_large}, {@code verification_document_type_not_supported},
+       * {@code verification_failed_address_match}, {@code verification_failed_business_iec_number},
+       * {@code verification_failed_document_match}, {@code verification_failed_id_number_match},
+       * {@code verification_failed_keyed_identity}, {@code verification_failed_keyed_match}, {@code
+       * verification_failed_name_match}, or {@code verification_failed_other}.
+       */
+      @SerializedName("code")
+      String code;
+
+      /**
+       * An informative message that indicates the error type and provides additional details about
+       * the error.
+       */
+      @SerializedName("reason")
+      String reason;
+
+      /**
+       * The specific user onboarding requirement field (in the requirements hash) that needs to be
+       * resolved.
+       */
+      @SerializedName("requirement")
+      String requirement;
+    }
   }
 
   @Getter

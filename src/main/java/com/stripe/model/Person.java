@@ -320,6 +320,13 @@ public class Person extends ApiResource implements HasId, MetadataStore<Person> 
     List<String> currentlyDue;
 
     /**
+     * The fields that need to be collected again because validation or verification failed for some
+     * reason.
+     */
+    @SerializedName("errors")
+    List<Account.Requirements.Errors> errors;
+
+    /**
      * Fields that need to be collected assuming all volume thresholds are reached. As fields are
      * needed, they are moved to {@code currently_due} and the account's {@code current_deadline} is
      * set.

@@ -1532,8 +1532,8 @@ public class PersonUpdateParams extends ApiRequestParams {
       /**
        * The back of an ID returned by a <a href="https://stripe.com/docs/api#create_file">file
        * upload</a> with a {@code purpose} value of {@code identity_document}. The uploaded file
-       * needs to be a color image (smaller than 8,000px by 8,000px), in JPG or PNG format, and less
-       * than 10 MB in size.
+       * needs to be a color image (smaller than 8,000px by 8,000px), in JPG, PNG, or PDF format,
+       * and less than 10 MB in size.
        */
       @SerializedName("back")
       Object back;
@@ -1550,8 +1550,8 @@ public class PersonUpdateParams extends ApiRequestParams {
       /**
        * The front of an ID returned by a <a href="https://stripe.com/docs/api#create_file">file
        * upload</a> with a {@code purpose} value of {@code identity_document}. The uploaded file
-       * needs to be a color image (smaller than 8,000px by 8,000px), in JPG or PNG format, and less
-       * than 10 MB in size.
+       * needs to be a color image (smaller than 8,000px by 8,000px), in JPG, PNG, or PDF format,
+       * and less than 10 MB in size.
        */
       @SerializedName("front")
       Object front;
@@ -1581,8 +1581,8 @@ public class PersonUpdateParams extends ApiRequestParams {
         /**
          * The back of an ID returned by a <a href="https://stripe.com/docs/api#create_file">file
          * upload</a> with a {@code purpose} value of {@code identity_document}. The uploaded file
-         * needs to be a color image (smaller than 8,000px by 8,000px), in JPG or PNG format, and
-         * less than 10 MB in size.
+         * needs to be a color image (smaller than 8,000px by 8,000px), in JPG, PNG, or PDF format,
+         * and less than 10 MB in size.
          */
         public Builder setBack(String back) {
           this.back = back;
@@ -1592,8 +1592,8 @@ public class PersonUpdateParams extends ApiRequestParams {
         /**
          * The back of an ID returned by a <a href="https://stripe.com/docs/api#create_file">file
          * upload</a> with a {@code purpose} value of {@code identity_document}. The uploaded file
-         * needs to be a color image (smaller than 8,000px by 8,000px), in JPG or PNG format, and
-         * less than 10 MB in size.
+         * needs to be a color image (smaller than 8,000px by 8,000px), in JPG, PNG, or PDF format,
+         * and less than 10 MB in size.
          */
         public Builder setBack(EmptyParam back) {
           this.back = back;
@@ -1631,8 +1631,8 @@ public class PersonUpdateParams extends ApiRequestParams {
         /**
          * The front of an ID returned by a <a href="https://stripe.com/docs/api#create_file">file
          * upload</a> with a {@code purpose} value of {@code identity_document}. The uploaded file
-         * needs to be a color image (smaller than 8,000px by 8,000px), in JPG or PNG format, and
-         * less than 10 MB in size.
+         * needs to be a color image (smaller than 8,000px by 8,000px), in JPG, PNG, or PDF format,
+         * and less than 10 MB in size.
          */
         public Builder setFront(String front) {
           this.front = front;
@@ -1642,8 +1642,8 @@ public class PersonUpdateParams extends ApiRequestParams {
         /**
          * The front of an ID returned by a <a href="https://stripe.com/docs/api#create_file">file
          * upload</a> with a {@code purpose} value of {@code identity_document}. The uploaded file
-         * needs to be a color image (smaller than 8,000px by 8,000px), in JPG or PNG format, and
-         * less than 10 MB in size.
+         * needs to be a color image (smaller than 8,000px by 8,000px), in JPG, PNG, or PDF format,
+         * and less than 10 MB in size.
          */
         public Builder setFront(EmptyParam front) {
           this.front = front;
@@ -1657,8 +1657,8 @@ public class PersonUpdateParams extends ApiRequestParams {
       /**
        * The back of an ID returned by a <a href="https://stripe.com/docs/api#create_file">file
        * upload</a> with a {@code purpose} value of {@code identity_document}. The uploaded file
-       * needs to be a color image (smaller than 8,000px by 8,000px), in JPG or PNG format, and less
-       * than 10 MB in size.
+       * needs to be a color image (smaller than 8,000px by 8,000px), in JPG, PNG, or PDF format,
+       * and less than 10 MB in size.
        */
       @SerializedName("back")
       Object back;
@@ -1675,8 +1675,8 @@ public class PersonUpdateParams extends ApiRequestParams {
       /**
        * The front of an ID returned by a <a href="https://stripe.com/docs/api#create_file">file
        * upload</a> with a {@code purpose} value of {@code identity_document}. The uploaded file
-       * needs to be a color image (smaller than 8,000px by 8,000px), in JPG or PNG format, and less
-       * than 10 MB in size.
+       * needs to be a color image (smaller than 8,000px by 8,000px), in JPG, PNG, or PDF format,
+       * and less than 10 MB in size.
        */
       @SerializedName("front")
       Object front;
@@ -1706,8 +1706,8 @@ public class PersonUpdateParams extends ApiRequestParams {
         /**
          * The back of an ID returned by a <a href="https://stripe.com/docs/api#create_file">file
          * upload</a> with a {@code purpose} value of {@code identity_document}. The uploaded file
-         * needs to be a color image (smaller than 8,000px by 8,000px), in JPG or PNG format, and
-         * less than 10 MB in size.
+         * needs to be a color image (smaller than 8,000px by 8,000px), in JPG, PNG, or PDF format,
+         * and less than 10 MB in size.
          */
         public Builder setBack(String back) {
           this.back = back;
@@ -1717,8 +1717,8 @@ public class PersonUpdateParams extends ApiRequestParams {
         /**
          * The back of an ID returned by a <a href="https://stripe.com/docs/api#create_file">file
          * upload</a> with a {@code purpose} value of {@code identity_document}. The uploaded file
-         * needs to be a color image (smaller than 8,000px by 8,000px), in JPG or PNG format, and
-         * less than 10 MB in size.
+         * needs to be a color image (smaller than 8,000px by 8,000px), in JPG, PNG, or PDF format,
+         * and less than 10 MB in size.
          */
         public Builder setBack(EmptyParam back) {
           this.back = back;
@@ -1756,8 +1756,8 @@ public class PersonUpdateParams extends ApiRequestParams {
         /**
          * The front of an ID returned by a <a href="https://stripe.com/docs/api#create_file">file
          * upload</a> with a {@code purpose} value of {@code identity_document}. The uploaded file
-         * needs to be a color image (smaller than 8,000px by 8,000px), in JPG or PNG format, and
-         * less than 10 MB in size.
+         * needs to be a color image (smaller than 8,000px by 8,000px), in JPG, PNG, or PDF format,
+         * and less than 10 MB in size.
          */
         public Builder setFront(String front) {
           this.front = front;
@@ -1767,8 +1767,8 @@ public class PersonUpdateParams extends ApiRequestParams {
         /**
          * The front of an ID returned by a <a href="https://stripe.com/docs/api#create_file">file
          * upload</a> with a {@code purpose} value of {@code identity_document}. The uploaded file
-         * needs to be a color image (smaller than 8,000px by 8,000px), in JPG or PNG format, and
-         * less than 10 MB in size.
+         * needs to be a color image (smaller than 8,000px by 8,000px), in JPG, PNG, or PDF format,
+         * and less than 10 MB in size.
          */
         public Builder setFront(EmptyParam front) {
           this.front = front;
