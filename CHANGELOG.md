@@ -1,5 +1,10 @@
 # Changelog
 
+## 18.1.0 - 2020-03-04
+* [#978](https://github.com/stripe/stripe-java/pull/978) Multiple API changes
+  * Add support for `errors` in `requirements` on `Account`, `Capability` and `Person`
+  * Add support for `payment_intent.processing` as a new `type` on `Event`.
+
 ## 18.0.0 - 2020-03-03
 * [#977](https://github.com/stripe/stripe-java/pull/977) Multiple API changes:
   * Pin to API version `2020-03-02`
