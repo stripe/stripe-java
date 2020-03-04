@@ -457,8 +457,9 @@ public class Authorization extends ApiResource
      * <p>One of {@code account_compliance_disabled}, {@code account_inactive}, {@code
      * authentication_failed}, {@code authorization_controls}, {@code card_active}, {@code
      * card_inactive}, {@code cardholder_inactive}, {@code cardholder_verification_required}, {@code
-     * insufficient_funds}, {@code not_allowed}, {@code suspected_fraud}, {@code webhook_approved},
-     * {@code webhook_declined}, or {@code webhook_timeout}.
+     * incorrect_cvc}, {@code incorrect_expiry}, {@code insufficient_funds}, {@code not_allowed},
+     * {@code suspected_fraud}, {@code webhook_approved}, {@code webhook_declined}, or {@code
+     * webhook_timeout}.
      */
     @SerializedName("reason")
     String reason;
@@ -527,5 +528,13 @@ public class Authorization extends ApiResource
      */
     @SerializedName("cvc_check")
     String cvcCheck;
+
+    /**
+     * Whether the cardholder provided an expiry date and if it matched Stripe’s record.
+     *
+     * <p>One of {@code match}, {@code mismatch}, or {@code not_provided}.
+     */
+    @SerializedName("expiry_check")
+    String expiryCheck;
   }
 }
