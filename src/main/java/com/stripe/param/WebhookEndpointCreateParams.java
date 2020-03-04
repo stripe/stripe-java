@@ -756,6 +756,9 @@ public class WebhookEndpointCreateParams extends ApiRequestParams {
     @SerializedName("payment_intent.payment_failed")
     PAYMENT_INTENT__PAYMENT_FAILED("payment_intent.payment_failed"),
 
+    @SerializedName("payment_intent.processing")
+    PAYMENT_INTENT__PROCESSING("payment_intent.processing"),
+
     @SerializedName("payment_intent.succeeded")
     PAYMENT_INTENT__SUCCEEDED("payment_intent.succeeded"),
 
