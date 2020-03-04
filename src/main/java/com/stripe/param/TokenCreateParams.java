@@ -2,6 +2,7 @@ package com.stripe.param;
 
 import com.google.gson.annotations.SerializedName;
 import com.stripe.net.ApiRequestParams;
+import com.stripe.net.ApiRequestParams.EnumParam;
 import com.stripe.param.common.EmptyParam;
 import java.math.BigDecimal;
 import java.util.ArrayList;
@@ -12,6 +13,10 @@ import lombok.Getter;
 
 @Getter
 public class TokenCreateParams extends ApiRequestParams {
+  /** Information for the account this token will represent. */
+  @SerializedName("account")
+  Account account;
+
   /** The bank account this token will represent. */
   @SerializedName("bank_account")
   BankAccount bankAccount;
@@ -51,6 +56,7 @@ public class TokenCreateParams extends ApiRequestParams {
   Pii pii;
 
   private TokenCreateParams(
+      Account account,
       BankAccount bankAccount,
       Object card,
       String customer,
@@ -58,6 +64,7 @@ public class TokenCreateParams extends ApiRequestParams {
       Map<String, Object> extraParams,
       Person person,
       Pii pii) {
+    this.account = account;
     this.bankAccount = bankAccount;
     this.card = card;
     this.customer = customer;
@@ -72,6 +79,8 @@ public class TokenCreateParams extends ApiRequestParams {
   }
 
   public static class Builder {
+    private Account account;
+
     private BankAccount bankAccount;
 
     private Object card;
@@ -89,6 +98,7 @@ public class TokenCreateParams extends ApiRequestParams {
     /** Finalize and obtain parameter instance from this builder. */
     public TokenCreateParams build() {
       return new TokenCreateParams(
+          this.account,
           this.bankAccount,
           this.card,
           this.customer,
@@ -96,6 +106,12 @@ public class TokenCreateParams extends ApiRequestParams {
           this.extraParams,
           this.person,
           this.pii);
+    }
+
+    /** Information for the account this token will represent. */
+    public Builder setAccount(Account account) {
+      this.account = account;
+      return this;
     }
 
     /** The bank account this token will represent. */
@@ -189,6 +205,2492 @@ public class TokenCreateParams extends ApiRequestParams {
     public Builder setPii(Pii pii) {
       this.pii = pii;
       return this;
+    }
+  }
+
+  @Getter
+  public static class Account {
+    /** The business type. */
+    @SerializedName("business_type")
+    BusinessType businessType;
+
+    /** Information about the company or business. */
+    @SerializedName("company")
+    Company company;
+
+    /**
+     * Map of extra parameters for custom features not available in this client library. The content
+     * in this map is not serialized under this field's {@code @SerializedName} value. Instead, each
+     * key/value pair is serialized as if the key is a root-level field (serialized) name in this
+     * param object. Effectively, this map is flattened to its parent instance.
+     */
+    @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
+    Map<String, Object> extraParams;
+
+    /** Information about the person represented by the account. */
+    @SerializedName("individual")
+    Individual individual;
+
+    /**
+     * Whether the user described by the data in the token has been shown <a
+     * href="https://stripe.com/docs/connect/account-tokens#stripe-connected-account-agreement">the
+     * Stripe Connected Account Agreement</a>. When creating an account token to create a new
+     * Connect account, this value must be {@code true}.
+     */
+    @SerializedName("tos_shown_and_accepted")
+    Boolean tosShownAndAccepted;
+
+    private Account(
+        BusinessType businessType,
+        Company company,
+        Map<String, Object> extraParams,
+        Individual individual,
+        Boolean tosShownAndAccepted) {
+      this.businessType = businessType;
+      this.company = company;
+      this.extraParams = extraParams;
+      this.individual = individual;
+      this.tosShownAndAccepted = tosShownAndAccepted;
+    }
+
+    public static Builder builder() {
+      return new Builder();
+    }
+
+    public static class Builder {
+      private BusinessType businessType;
+
+      private Company company;
+
+      private Map<String, Object> extraParams;
+
+      private Individual individual;
+
+      private Boolean tosShownAndAccepted;
+
+      /** Finalize and obtain parameter instance from this builder. */
+      public Account build() {
+        return new Account(
+            this.businessType,
+            this.company,
+            this.extraParams,
+            this.individual,
+            this.tosShownAndAccepted);
+      }
+
+      /** The business type. */
+      public Builder setBusinessType(BusinessType businessType) {
+        this.businessType = businessType;
+        return this;
+      }
+
+      /** Information about the company or business. */
+      public Builder setCompany(Company company) {
+        this.company = company;
+        return this;
+      }
+
+      /**
+       * Add a key/value pair to `extraParams` map. A map is initialized for the first `put/putAll`
+       * call, and subsequent calls add additional key/value pairs to the original map. See {@link
+       * TokenCreateParams.Account#extraParams} for the field documentation.
+       */
+      public Builder putExtraParam(String key, Object value) {
+        if (this.extraParams == null) {
+          this.extraParams = new HashMap<>();
+        }
+        this.extraParams.put(key, value);
+        return this;
+      }
+
+      /**
+       * Add all map key/value pairs to `extraParams` map. A map is initialized for the first
+       * `put/putAll` call, and subsequent calls add additional key/value pairs to the original map.
+       * See {@link TokenCreateParams.Account#extraParams} for the field documentation.
+       */
+      public Builder putAllExtraParam(Map<String, Object> map) {
+        if (this.extraParams == null) {
+          this.extraParams = new HashMap<>();
+        }
+        this.extraParams.putAll(map);
+        return this;
+      }
+
+      /** Information about the person represented by the account. */
+      public Builder setIndividual(Individual individual) {
+        this.individual = individual;
+        return this;
+      }
+
+      /**
+       * Whether the user described by the data in the token has been shown <a
+       * href="https://stripe.com/docs/connect/account-tokens#stripe-connected-account-agreement">the
+       * Stripe Connected Account Agreement</a>. When creating an account token to create a new
+       * Connect account, this value must be {@code true}.
+       */
+      public Builder setTosShownAndAccepted(Boolean tosShownAndAccepted) {
+        this.tosShownAndAccepted = tosShownAndAccepted;
+        return this;
+      }
+    }
+
+    @Getter
+    public static class Company {
+      /** The company's primary address. */
+      @SerializedName("address")
+      Address address;
+
+      /** The Kana variation of the company's primary address (Japan only). */
+      @SerializedName("address_kana")
+      AddressKana addressKana;
+
+      /** The Kanji variation of the company's primary address (Japan only). */
+      @SerializedName("address_kanji")
+      AddressKanji addressKanji;
+
+      /**
+       * Whether the company's directors have been provided. Set this Boolean to {@code true} after
+       * creating all the company's directors with <a href="https://stripe.com/docs/api/persons">the
+       * Persons API</a> for accounts with a {@code relationship.director} requirement. This value
+       * is not automatically set to {@code true} after creating directors, so it needs to be
+       * updated to indicate all directors have been provided.
+       */
+      @SerializedName("directors_provided")
+      Boolean directorsProvided;
+
+      /**
+       * Whether the company's executives have been provided. Set this Boolean to {@code true} after
+       * creating all the company's executives with <a
+       * href="https://stripe.com/docs/api/persons">the Persons API</a> for accounts with a {@code
+       * relationship.executive} requirement.
+       */
+      @SerializedName("executives_provided")
+      Boolean executivesProvided;
+
+      /**
+       * Map of extra parameters for custom features not available in this client library. The
+       * content in this map is not serialized under this field's {@code @SerializedName} value.
+       * Instead, each key/value pair is serialized as if the key is a root-level field (serialized)
+       * name in this param object. Effectively, this map is flattened to its parent instance.
+       */
+      @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
+      Map<String, Object> extraParams;
+
+      /** The company's legal name. */
+      @SerializedName("name")
+      String name;
+
+      /** The Kana variation of the company's legal name (Japan only). */
+      @SerializedName("name_kana")
+      String nameKana;
+
+      /** The Kanji variation of the company's legal name (Japan only). */
+      @SerializedName("name_kanji")
+      String nameKanji;
+
+      /**
+       * Whether the company's owners have been provided. Set this Boolean to {@code true} after
+       * creating all the company's owners with <a href="https://stripe.com/docs/api/persons">the
+       * Persons API</a> for accounts with a {@code relationship.owner} requirement.
+       */
+      @SerializedName("owners_provided")
+      Boolean ownersProvided;
+
+      /** The company's phone number (used for verification). */
+      @SerializedName("phone")
+      String phone;
+
+      /** The category identifying the legal structure of the company or legal entity. */
+      @SerializedName("structure")
+      EnumParam structure;
+
+      /**
+       * The business ID number of the company, as appropriate for the company’s country. (Examples
+       * are an Employer ID Number in the U.S., a Business Number in Canada, or a Company Number in
+       * the UK.)
+       */
+      @SerializedName("tax_id")
+      String taxId;
+
+      /**
+       * The jurisdiction in which the {@code tax_id} is registered (Germany-based companies only).
+       */
+      @SerializedName("tax_id_registrar")
+      String taxIdRegistrar;
+
+      /** The VAT number of the company. */
+      @SerializedName("vat_id")
+      String vatId;
+
+      /** Information on the verification state of the company. */
+      @SerializedName("verification")
+      Verification verification;
+
+      private Company(
+          Address address,
+          AddressKana addressKana,
+          AddressKanji addressKanji,
+          Boolean directorsProvided,
+          Boolean executivesProvided,
+          Map<String, Object> extraParams,
+          String name,
+          String nameKana,
+          String nameKanji,
+          Boolean ownersProvided,
+          String phone,
+          EnumParam structure,
+          String taxId,
+          String taxIdRegistrar,
+          String vatId,
+          Verification verification) {
+        this.address = address;
+        this.addressKana = addressKana;
+        this.addressKanji = addressKanji;
+        this.directorsProvided = directorsProvided;
+        this.executivesProvided = executivesProvided;
+        this.extraParams = extraParams;
+        this.name = name;
+        this.nameKana = nameKana;
+        this.nameKanji = nameKanji;
+        this.ownersProvided = ownersProvided;
+        this.phone = phone;
+        this.structure = structure;
+        this.taxId = taxId;
+        this.taxIdRegistrar = taxIdRegistrar;
+        this.vatId = vatId;
+        this.verification = verification;
+      }
+
+      public static Builder builder() {
+        return new Builder();
+      }
+
+      public static class Builder {
+        private Address address;
+
+        private AddressKana addressKana;
+
+        private AddressKanji addressKanji;
+
+        private Boolean directorsProvided;
+
+        private Boolean executivesProvided;
+
+        private Map<String, Object> extraParams;
+
+        private String name;
+
+        private String nameKana;
+
+        private String nameKanji;
+
+        private Boolean ownersProvided;
+
+        private String phone;
+
+        private EnumParam structure;
+
+        private String taxId;
+
+        private String taxIdRegistrar;
+
+        private String vatId;
+
+        private Verification verification;
+
+        /** Finalize and obtain parameter instance from this builder. */
+        public Company build() {
+          return new Company(
+              this.address,
+              this.addressKana,
+              this.addressKanji,
+              this.directorsProvided,
+              this.executivesProvided,
+              this.extraParams,
+              this.name,
+              this.nameKana,
+              this.nameKanji,
+              this.ownersProvided,
+              this.phone,
+              this.structure,
+              this.taxId,
+              this.taxIdRegistrar,
+              this.vatId,
+              this.verification);
+        }
+
+        /** The company's primary address. */
+        public Builder setAddress(Address address) {
+          this.address = address;
+          return this;
+        }
+
+        /** The Kana variation of the company's primary address (Japan only). */
+        public Builder setAddressKana(AddressKana addressKana) {
+          this.addressKana = addressKana;
+          return this;
+        }
+
+        /** The Kanji variation of the company's primary address (Japan only). */
+        public Builder setAddressKanji(AddressKanji addressKanji) {
+          this.addressKanji = addressKanji;
+          return this;
+        }
+
+        /**
+         * Whether the company's directors have been provided. Set this Boolean to {@code true}
+         * after creating all the company's directors with <a
+         * href="https://stripe.com/docs/api/persons">the Persons API</a> for accounts with a {@code
+         * relationship.director} requirement. This value is not automatically set to {@code true}
+         * after creating directors, so it needs to be updated to indicate all directors have been
+         * provided.
+         */
+        public Builder setDirectorsProvided(Boolean directorsProvided) {
+          this.directorsProvided = directorsProvided;
+          return this;
+        }
+
+        /**
+         * Whether the company's executives have been provided. Set this Boolean to {@code true}
+         * after creating all the company's executives with <a
+         * href="https://stripe.com/docs/api/persons">the Persons API</a> for accounts with a {@code
+         * relationship.executive} requirement.
+         */
+        public Builder setExecutivesProvided(Boolean executivesProvided) {
+          this.executivesProvided = executivesProvided;
+          return this;
+        }
+
+        /**
+         * Add a key/value pair to `extraParams` map. A map is initialized for the first
+         * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
+         * map. See {@link TokenCreateParams.Account.Company#extraParams} for the field
+         * documentation.
+         */
+        public Builder putExtraParam(String key, Object value) {
+          if (this.extraParams == null) {
+            this.extraParams = new HashMap<>();
+          }
+          this.extraParams.put(key, value);
+          return this;
+        }
+
+        /**
+         * Add all map key/value pairs to `extraParams` map. A map is initialized for the first
+         * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
+         * map. See {@link TokenCreateParams.Account.Company#extraParams} for the field
+         * documentation.
+         */
+        public Builder putAllExtraParam(Map<String, Object> map) {
+          if (this.extraParams == null) {
+            this.extraParams = new HashMap<>();
+          }
+          this.extraParams.putAll(map);
+          return this;
+        }
+
+        /** The company's legal name. */
+        public Builder setName(String name) {
+          this.name = name;
+          return this;
+        }
+
+        /** The Kana variation of the company's legal name (Japan only). */
+        public Builder setNameKana(String nameKana) {
+          this.nameKana = nameKana;
+          return this;
+        }
+
+        /** The Kanji variation of the company's legal name (Japan only). */
+        public Builder setNameKanji(String nameKanji) {
+          this.nameKanji = nameKanji;
+          return this;
+        }
+
+        /**
+         * Whether the company's owners have been provided. Set this Boolean to {@code true} after
+         * creating all the company's owners with <a href="https://stripe.com/docs/api/persons">the
+         * Persons API</a> for accounts with a {@code relationship.owner} requirement.
+         */
+        public Builder setOwnersProvided(Boolean ownersProvided) {
+          this.ownersProvided = ownersProvided;
+          return this;
+        }
+
+        /** The company's phone number (used for verification). */
+        public Builder setPhone(String phone) {
+          this.phone = phone;
+          return this;
+        }
+
+        /** The category identifying the legal structure of the company or legal entity. */
+        public Builder setStructure(Structure structure) {
+          this.structure = structure;
+          return this;
+        }
+
+        /** The category identifying the legal structure of the company or legal entity. */
+        public Builder setStructure(EmptyParam structure) {
+          this.structure = structure;
+          return this;
+        }
+
+        /**
+         * The business ID number of the company, as appropriate for the company’s country.
+         * (Examples are an Employer ID Number in the U.S., a Business Number in Canada, or a
+         * Company Number in the UK.)
+         */
+        public Builder setTaxId(String taxId) {
+          this.taxId = taxId;
+          return this;
+        }
+
+        /**
+         * The jurisdiction in which the {@code tax_id} is registered (Germany-based companies
+         * only).
+         */
+        public Builder setTaxIdRegistrar(String taxIdRegistrar) {
+          this.taxIdRegistrar = taxIdRegistrar;
+          return this;
+        }
+
+        /** The VAT number of the company. */
+        public Builder setVatId(String vatId) {
+          this.vatId = vatId;
+          return this;
+        }
+
+        /** Information on the verification state of the company. */
+        public Builder setVerification(Verification verification) {
+          this.verification = verification;
+          return this;
+        }
+      }
+
+      @Getter
+      public static class Address {
+        /** City, district, suburb, town, or village. */
+        @SerializedName("city")
+        String city;
+
+        /**
+         * Two-letter country code (<a href="https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2">ISO
+         * 3166-1 alpha-2</a>).
+         */
+        @SerializedName("country")
+        String country;
+
+        /**
+         * Map of extra parameters for custom features not available in this client library. The
+         * content in this map is not serialized under this field's {@code @SerializedName} value.
+         * Instead, each key/value pair is serialized as if the key is a root-level field
+         * (serialized) name in this param object. Effectively, this map is flattened to its parent
+         * instance.
+         */
+        @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
+        Map<String, Object> extraParams;
+
+        /** Address line 1 (e.g., street, PO Box, or company name). */
+        @SerializedName("line1")
+        String line1;
+
+        /** Address line 2 (e.g., apartment, suite, unit, or building). */
+        @SerializedName("line2")
+        String line2;
+
+        /** ZIP or postal code. */
+        @SerializedName("postal_code")
+        String postalCode;
+
+        /** State, county, province, or region. */
+        @SerializedName("state")
+        String state;
+
+        private Address(
+            String city,
+            String country,
+            Map<String, Object> extraParams,
+            String line1,
+            String line2,
+            String postalCode,
+            String state) {
+          this.city = city;
+          this.country = country;
+          this.extraParams = extraParams;
+          this.line1 = line1;
+          this.line2 = line2;
+          this.postalCode = postalCode;
+          this.state = state;
+        }
+
+        public static Builder builder() {
+          return new Builder();
+        }
+
+        public static class Builder {
+          private String city;
+
+          private String country;
+
+          private Map<String, Object> extraParams;
+
+          private String line1;
+
+          private String line2;
+
+          private String postalCode;
+
+          private String state;
+
+          /** Finalize and obtain parameter instance from this builder. */
+          public Address build() {
+            return new Address(
+                this.city,
+                this.country,
+                this.extraParams,
+                this.line1,
+                this.line2,
+                this.postalCode,
+                this.state);
+          }
+
+          /** City, district, suburb, town, or village. */
+          public Builder setCity(String city) {
+            this.city = city;
+            return this;
+          }
+
+          /**
+           * Two-letter country code (<a href="https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2">ISO
+           * 3166-1 alpha-2</a>).
+           */
+          public Builder setCountry(String country) {
+            this.country = country;
+            return this;
+          }
+
+          /**
+           * Add a key/value pair to `extraParams` map. A map is initialized for the first
+           * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
+           * map. See {@link TokenCreateParams.Account.Company.Address#extraParams} for the field
+           * documentation.
+           */
+          public Builder putExtraParam(String key, Object value) {
+            if (this.extraParams == null) {
+              this.extraParams = new HashMap<>();
+            }
+            this.extraParams.put(key, value);
+            return this;
+          }
+
+          /**
+           * Add all map key/value pairs to `extraParams` map. A map is initialized for the first
+           * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
+           * map. See {@link TokenCreateParams.Account.Company.Address#extraParams} for the field
+           * documentation.
+           */
+          public Builder putAllExtraParam(Map<String, Object> map) {
+            if (this.extraParams == null) {
+              this.extraParams = new HashMap<>();
+            }
+            this.extraParams.putAll(map);
+            return this;
+          }
+
+          /** Address line 1 (e.g., street, PO Box, or company name). */
+          public Builder setLine1(String line1) {
+            this.line1 = line1;
+            return this;
+          }
+
+          /** Address line 2 (e.g., apartment, suite, unit, or building). */
+          public Builder setLine2(String line2) {
+            this.line2 = line2;
+            return this;
+          }
+
+          /** ZIP or postal code. */
+          public Builder setPostalCode(String postalCode) {
+            this.postalCode = postalCode;
+            return this;
+          }
+
+          /** State, county, province, or region. */
+          public Builder setState(String state) {
+            this.state = state;
+            return this;
+          }
+        }
+      }
+
+      @Getter
+      public static class AddressKana {
+        /** City or ward. */
+        @SerializedName("city")
+        String city;
+
+        /**
+         * Two-letter country code (<a href="https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2">ISO
+         * 3166-1 alpha-2</a>).
+         */
+        @SerializedName("country")
+        String country;
+
+        /**
+         * Map of extra parameters for custom features not available in this client library. The
+         * content in this map is not serialized under this field's {@code @SerializedName} value.
+         * Instead, each key/value pair is serialized as if the key is a root-level field
+         * (serialized) name in this param object. Effectively, this map is flattened to its parent
+         * instance.
+         */
+        @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
+        Map<String, Object> extraParams;
+
+        /** Block or building number. */
+        @SerializedName("line1")
+        String line1;
+
+        /** Building details. */
+        @SerializedName("line2")
+        String line2;
+
+        /** Postal code. */
+        @SerializedName("postal_code")
+        String postalCode;
+
+        /** Prefecture. */
+        @SerializedName("state")
+        String state;
+
+        /** Town or cho-me. */
+        @SerializedName("town")
+        String town;
+
+        private AddressKana(
+            String city,
+            String country,
+            Map<String, Object> extraParams,
+            String line1,
+            String line2,
+            String postalCode,
+            String state,
+            String town) {
+          this.city = city;
+          this.country = country;
+          this.extraParams = extraParams;
+          this.line1 = line1;
+          this.line2 = line2;
+          this.postalCode = postalCode;
+          this.state = state;
+          this.town = town;
+        }
+
+        public static Builder builder() {
+          return new Builder();
+        }
+
+        public static class Builder {
+          private String city;
+
+          private String country;
+
+          private Map<String, Object> extraParams;
+
+          private String line1;
+
+          private String line2;
+
+          private String postalCode;
+
+          private String state;
+
+          private String town;
+
+          /** Finalize and obtain parameter instance from this builder. */
+          public AddressKana build() {
+            return new AddressKana(
+                this.city,
+                this.country,
+                this.extraParams,
+                this.line1,
+                this.line2,
+                this.postalCode,
+                this.state,
+                this.town);
+          }
+
+          /** City or ward. */
+          public Builder setCity(String city) {
+            this.city = city;
+            return this;
+          }
+
+          /**
+           * Two-letter country code (<a href="https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2">ISO
+           * 3166-1 alpha-2</a>).
+           */
+          public Builder setCountry(String country) {
+            this.country = country;
+            return this;
+          }
+
+          /**
+           * Add a key/value pair to `extraParams` map. A map is initialized for the first
+           * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
+           * map. See {@link TokenCreateParams.Account.Company.AddressKana#extraParams} for the
+           * field documentation.
+           */
+          public Builder putExtraParam(String key, Object value) {
+            if (this.extraParams == null) {
+              this.extraParams = new HashMap<>();
+            }
+            this.extraParams.put(key, value);
+            return this;
+          }
+
+          /**
+           * Add all map key/value pairs to `extraParams` map. A map is initialized for the first
+           * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
+           * map. See {@link TokenCreateParams.Account.Company.AddressKana#extraParams} for the
+           * field documentation.
+           */
+          public Builder putAllExtraParam(Map<String, Object> map) {
+            if (this.extraParams == null) {
+              this.extraParams = new HashMap<>();
+            }
+            this.extraParams.putAll(map);
+            return this;
+          }
+
+          /** Block or building number. */
+          public Builder setLine1(String line1) {
+            this.line1 = line1;
+            return this;
+          }
+
+          /** Building details. */
+          public Builder setLine2(String line2) {
+            this.line2 = line2;
+            return this;
+          }
+
+          /** Postal code. */
+          public Builder setPostalCode(String postalCode) {
+            this.postalCode = postalCode;
+            return this;
+          }
+
+          /** Prefecture. */
+          public Builder setState(String state) {
+            this.state = state;
+            return this;
+          }
+
+          /** Town or cho-me. */
+          public Builder setTown(String town) {
+            this.town = town;
+            return this;
+          }
+        }
+      }
+
+      @Getter
+      public static class AddressKanji {
+        /** City or ward. */
+        @SerializedName("city")
+        String city;
+
+        /**
+         * Two-letter country code (<a href="https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2">ISO
+         * 3166-1 alpha-2</a>).
+         */
+        @SerializedName("country")
+        String country;
+
+        /**
+         * Map of extra parameters for custom features not available in this client library. The
+         * content in this map is not serialized under this field's {@code @SerializedName} value.
+         * Instead, each key/value pair is serialized as if the key is a root-level field
+         * (serialized) name in this param object. Effectively, this map is flattened to its parent
+         * instance.
+         */
+        @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
+        Map<String, Object> extraParams;
+
+        /** Block or building number. */
+        @SerializedName("line1")
+        String line1;
+
+        /** Building details. */
+        @SerializedName("line2")
+        String line2;
+
+        /** Postal code. */
+        @SerializedName("postal_code")
+        String postalCode;
+
+        /** Prefecture. */
+        @SerializedName("state")
+        String state;
+
+        /** Town or cho-me. */
+        @SerializedName("town")
+        String town;
+
+        private AddressKanji(
+            String city,
+            String country,
+            Map<String, Object> extraParams,
+            String line1,
+            String line2,
+            String postalCode,
+            String state,
+            String town) {
+          this.city = city;
+          this.country = country;
+          this.extraParams = extraParams;
+          this.line1 = line1;
+          this.line2 = line2;
+          this.postalCode = postalCode;
+          this.state = state;
+          this.town = town;
+        }
+
+        public static Builder builder() {
+          return new Builder();
+        }
+
+        public static class Builder {
+          private String city;
+
+          private String country;
+
+          private Map<String, Object> extraParams;
+
+          private String line1;
+
+          private String line2;
+
+          private String postalCode;
+
+          private String state;
+
+          private String town;
+
+          /** Finalize and obtain parameter instance from this builder. */
+          public AddressKanji build() {
+            return new AddressKanji(
+                this.city,
+                this.country,
+                this.extraParams,
+                this.line1,
+                this.line2,
+                this.postalCode,
+                this.state,
+                this.town);
+          }
+
+          /** City or ward. */
+          public Builder setCity(String city) {
+            this.city = city;
+            return this;
+          }
+
+          /**
+           * Two-letter country code (<a href="https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2">ISO
+           * 3166-1 alpha-2</a>).
+           */
+          public Builder setCountry(String country) {
+            this.country = country;
+            return this;
+          }
+
+          /**
+           * Add a key/value pair to `extraParams` map. A map is initialized for the first
+           * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
+           * map. See {@link TokenCreateParams.Account.Company.AddressKanji#extraParams} for the
+           * field documentation.
+           */
+          public Builder putExtraParam(String key, Object value) {
+            if (this.extraParams == null) {
+              this.extraParams = new HashMap<>();
+            }
+            this.extraParams.put(key, value);
+            return this;
+          }
+
+          /**
+           * Add all map key/value pairs to `extraParams` map. A map is initialized for the first
+           * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
+           * map. See {@link TokenCreateParams.Account.Company.AddressKanji#extraParams} for the
+           * field documentation.
+           */
+          public Builder putAllExtraParam(Map<String, Object> map) {
+            if (this.extraParams == null) {
+              this.extraParams = new HashMap<>();
+            }
+            this.extraParams.putAll(map);
+            return this;
+          }
+
+          /** Block or building number. */
+          public Builder setLine1(String line1) {
+            this.line1 = line1;
+            return this;
+          }
+
+          /** Building details. */
+          public Builder setLine2(String line2) {
+            this.line2 = line2;
+            return this;
+          }
+
+          /** Postal code. */
+          public Builder setPostalCode(String postalCode) {
+            this.postalCode = postalCode;
+            return this;
+          }
+
+          /** Prefecture. */
+          public Builder setState(String state) {
+            this.state = state;
+            return this;
+          }
+
+          /** Town or cho-me. */
+          public Builder setTown(String town) {
+            this.town = town;
+            return this;
+          }
+        }
+      }
+
+      @Getter
+      public static class Verification {
+        /** A document verifying the business. */
+        @SerializedName("document")
+        Document document;
+
+        /**
+         * Map of extra parameters for custom features not available in this client library. The
+         * content in this map is not serialized under this field's {@code @SerializedName} value.
+         * Instead, each key/value pair is serialized as if the key is a root-level field
+         * (serialized) name in this param object. Effectively, this map is flattened to its parent
+         * instance.
+         */
+        @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
+        Map<String, Object> extraParams;
+
+        private Verification(Document document, Map<String, Object> extraParams) {
+          this.document = document;
+          this.extraParams = extraParams;
+        }
+
+        public static Builder builder() {
+          return new Builder();
+        }
+
+        public static class Builder {
+          private Document document;
+
+          private Map<String, Object> extraParams;
+
+          /** Finalize and obtain parameter instance from this builder. */
+          public Verification build() {
+            return new Verification(this.document, this.extraParams);
+          }
+
+          /** A document verifying the business. */
+          public Builder setDocument(Document document) {
+            this.document = document;
+            return this;
+          }
+
+          /**
+           * Add a key/value pair to `extraParams` map. A map is initialized for the first
+           * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
+           * map. See {@link TokenCreateParams.Account.Company.Verification#extraParams} for the
+           * field documentation.
+           */
+          public Builder putExtraParam(String key, Object value) {
+            if (this.extraParams == null) {
+              this.extraParams = new HashMap<>();
+            }
+            this.extraParams.put(key, value);
+            return this;
+          }
+
+          /**
+           * Add all map key/value pairs to `extraParams` map. A map is initialized for the first
+           * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
+           * map. See {@link TokenCreateParams.Account.Company.Verification#extraParams} for the
+           * field documentation.
+           */
+          public Builder putAllExtraParam(Map<String, Object> map) {
+            if (this.extraParams == null) {
+              this.extraParams = new HashMap<>();
+            }
+            this.extraParams.putAll(map);
+            return this;
+          }
+        }
+
+        @Getter
+        public static class Document {
+          /**
+           * The back of a document returned by a <a
+           * href="https://stripe.com/docs/api#create_file">file upload</a> with a {@code purpose}
+           * value of {@code additional_verification}. The uploaded file needs to be a color image
+           * (smaller than 8,000px by 8,000px), in JPG, PNG, or PDF format, and less than 10 MB in
+           * size.
+           */
+          @SerializedName("back")
+          String back;
+
+          /**
+           * Map of extra parameters for custom features not available in this client library. The
+           * content in this map is not serialized under this field's {@code @SerializedName} value.
+           * Instead, each key/value pair is serialized as if the key is a root-level field
+           * (serialized) name in this param object. Effectively, this map is flattened to its
+           * parent instance.
+           */
+          @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
+          Map<String, Object> extraParams;
+
+          /**
+           * The front of a document returned by a <a
+           * href="https://stripe.com/docs/api#create_file">file upload</a> with a {@code purpose}
+           * value of {@code additional_verification}. The uploaded file needs to be a color image
+           * (smaller than 8,000px by 8,000px), in JPG, PNG, or PDF format, and less than 10 MB in
+           * size.
+           */
+          @SerializedName("front")
+          String front;
+
+          private Document(String back, Map<String, Object> extraParams, String front) {
+            this.back = back;
+            this.extraParams = extraParams;
+            this.front = front;
+          }
+
+          public static Builder builder() {
+            return new Builder();
+          }
+
+          public static class Builder {
+            private String back;
+
+            private Map<String, Object> extraParams;
+
+            private String front;
+
+            /** Finalize and obtain parameter instance from this builder. */
+            public Document build() {
+              return new Document(this.back, this.extraParams, this.front);
+            }
+
+            /**
+             * The back of a document returned by a <a
+             * href="https://stripe.com/docs/api#create_file">file upload</a> with a {@code purpose}
+             * value of {@code additional_verification}. The uploaded file needs to be a color image
+             * (smaller than 8,000px by 8,000px), in JPG, PNG, or PDF format, and less than 10 MB in
+             * size.
+             */
+            public Builder setBack(String back) {
+              this.back = back;
+              return this;
+            }
+
+            /**
+             * Add a key/value pair to `extraParams` map. A map is initialized for the first
+             * `put/putAll` call, and subsequent calls add additional key/value pairs to the
+             * original map. See {@link
+             * TokenCreateParams.Account.Company.Verification.Document#extraParams} for the field
+             * documentation.
+             */
+            public Builder putExtraParam(String key, Object value) {
+              if (this.extraParams == null) {
+                this.extraParams = new HashMap<>();
+              }
+              this.extraParams.put(key, value);
+              return this;
+            }
+
+            /**
+             * Add all map key/value pairs to `extraParams` map. A map is initialized for the first
+             * `put/putAll` call, and subsequent calls add additional key/value pairs to the
+             * original map. See {@link
+             * TokenCreateParams.Account.Company.Verification.Document#extraParams} for the field
+             * documentation.
+             */
+            public Builder putAllExtraParam(Map<String, Object> map) {
+              if (this.extraParams == null) {
+                this.extraParams = new HashMap<>();
+              }
+              this.extraParams.putAll(map);
+              return this;
+            }
+
+            /**
+             * The front of a document returned by a <a
+             * href="https://stripe.com/docs/api#create_file">file upload</a> with a {@code purpose}
+             * value of {@code additional_verification}. The uploaded file needs to be a color image
+             * (smaller than 8,000px by 8,000px), in JPG, PNG, or PDF format, and less than 10 MB in
+             * size.
+             */
+            public Builder setFront(String front) {
+              this.front = front;
+              return this;
+            }
+          }
+        }
+      }
+
+      public enum Structure implements ApiRequestParams.EnumParam {
+        @SerializedName("government_instrumentality")
+        GOVERNMENT_INSTRUMENTALITY("government_instrumentality"),
+
+        @SerializedName("governmental_unit")
+        GOVERNMENTAL_UNIT("governmental_unit"),
+
+        @SerializedName("incorporated_non_profit")
+        INCORPORATED_NON_PROFIT("incorporated_non_profit"),
+
+        @SerializedName("multi_member_llc")
+        MULTI_MEMBER_LLC("multi_member_llc"),
+
+        @SerializedName("private_corporation")
+        PRIVATE_CORPORATION("private_corporation"),
+
+        @SerializedName("private_partnership")
+        PRIVATE_PARTNERSHIP("private_partnership"),
+
+        @SerializedName("public_corporation")
+        PUBLIC_CORPORATION("public_corporation"),
+
+        @SerializedName("public_partnership")
+        PUBLIC_PARTNERSHIP("public_partnership"),
+
+        @SerializedName("tax_exempt_government_instrumentality")
+        TAX_EXEMPT_GOVERNMENT_INSTRUMENTALITY("tax_exempt_government_instrumentality"),
+
+        @SerializedName("unincorporated_association")
+        UNINCORPORATED_ASSOCIATION("unincorporated_association"),
+
+        @SerializedName("unincorporated_non_profit")
+        UNINCORPORATED_NON_PROFIT("unincorporated_non_profit");
+
+        @Getter(onMethod_ = {@Override})
+        private final String value;
+
+        Structure(String value) {
+          this.value = value;
+        }
+      }
+    }
+
+    @Getter
+    public static class Individual {
+      /** The individual's primary address. */
+      @SerializedName("address")
+      Address address;
+
+      /** The Kana variation of the the individual's primary address (Japan only). */
+      @SerializedName("address_kana")
+      AddressKana addressKana;
+
+      /** The Kanji variation of the the individual's primary address (Japan only). */
+      @SerializedName("address_kanji")
+      AddressKanji addressKanji;
+
+      /** The individual's date of birth. */
+      @SerializedName("dob")
+      Object dob;
+
+      /** The individual's email address. */
+      @SerializedName("email")
+      String email;
+
+      /**
+       * Map of extra parameters for custom features not available in this client library. The
+       * content in this map is not serialized under this field's {@code @SerializedName} value.
+       * Instead, each key/value pair is serialized as if the key is a root-level field (serialized)
+       * name in this param object. Effectively, this map is flattened to its parent instance.
+       */
+      @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
+      Map<String, Object> extraParams;
+
+      /** The individual's first name. */
+      @SerializedName("first_name")
+      String firstName;
+
+      /** The Kana variation of the the individual's first name (Japan only). */
+      @SerializedName("first_name_kana")
+      String firstNameKana;
+
+      /** The Kanji variation of the individual's first name (Japan only). */
+      @SerializedName("first_name_kanji")
+      String firstNameKanji;
+
+      /**
+       * The individual's gender (International regulations require either &quot;male&quot; or
+       * &quot;female&quot;).
+       */
+      @SerializedName("gender")
+      String gender;
+
+      /**
+       * The government-issued ID number of the individual, as appropriate for the representative’s
+       * country. (Examples are a Social Security Number in the U.S., or a Social Insurance Number
+       * in Canada). Instead of the number itself, you can also provide a <a
+       * href="https://stripe.com/docs/stripe.js#collecting-pii-data">PII token created with
+       * Stripe.js</a>.
+       */
+      @SerializedName("id_number")
+      String idNumber;
+
+      /** The individual's last name. */
+      @SerializedName("last_name")
+      String lastName;
+
+      /** The Kana varation of the individual's last name (Japan only). */
+      @SerializedName("last_name_kana")
+      String lastNameKana;
+
+      /** The Kanji varation of the individual's last name (Japan only). */
+      @SerializedName("last_name_kanji")
+      String lastNameKanji;
+
+      /** The individual's maiden name. */
+      @SerializedName("maiden_name")
+      String maidenName;
+
+      /**
+       * Set of key-value pairs that you can attach to an object. This can be useful for storing
+       * additional information about the object in a structured format. Individual keys can be
+       * unset by posting an empty value to them. All keys can be unset by posting an empty value to
+       * {@code metadata}.
+       */
+      @SerializedName("metadata")
+      Map<String, String> metadata;
+
+      /** The individual's phone number. */
+      @SerializedName("phone")
+      String phone;
+
+      /** The last four digits of the individual's Social Security Number (U.S. only). */
+      @SerializedName("ssn_last_4")
+      String ssnLast4;
+
+      /** The individual's verification document information. */
+      @SerializedName("verification")
+      Verification verification;
+
+      private Individual(
+          Address address,
+          AddressKana addressKana,
+          AddressKanji addressKanji,
+          Object dob,
+          String email,
+          Map<String, Object> extraParams,
+          String firstName,
+          String firstNameKana,
+          String firstNameKanji,
+          String gender,
+          String idNumber,
+          String lastName,
+          String lastNameKana,
+          String lastNameKanji,
+          String maidenName,
+          Map<String, String> metadata,
+          String phone,
+          String ssnLast4,
+          Verification verification) {
+        this.address = address;
+        this.addressKana = addressKana;
+        this.addressKanji = addressKanji;
+        this.dob = dob;
+        this.email = email;
+        this.extraParams = extraParams;
+        this.firstName = firstName;
+        this.firstNameKana = firstNameKana;
+        this.firstNameKanji = firstNameKanji;
+        this.gender = gender;
+        this.idNumber = idNumber;
+        this.lastName = lastName;
+        this.lastNameKana = lastNameKana;
+        this.lastNameKanji = lastNameKanji;
+        this.maidenName = maidenName;
+        this.metadata = metadata;
+        this.phone = phone;
+        this.ssnLast4 = ssnLast4;
+        this.verification = verification;
+      }
+
+      public static Builder builder() {
+        return new Builder();
+      }
+
+      public static class Builder {
+        private Address address;
+
+        private AddressKana addressKana;
+
+        private AddressKanji addressKanji;
+
+        private Object dob;
+
+        private String email;
+
+        private Map<String, Object> extraParams;
+
+        private String firstName;
+
+        private String firstNameKana;
+
+        private String firstNameKanji;
+
+        private String gender;
+
+        private String idNumber;
+
+        private String lastName;
+
+        private String lastNameKana;
+
+        private String lastNameKanji;
+
+        private String maidenName;
+
+        private Map<String, String> metadata;
+
+        private String phone;
+
+        private String ssnLast4;
+
+        private Verification verification;
+
+        /** Finalize and obtain parameter instance from this builder. */
+        public Individual build() {
+          return new Individual(
+              this.address,
+              this.addressKana,
+              this.addressKanji,
+              this.dob,
+              this.email,
+              this.extraParams,
+              this.firstName,
+              this.firstNameKana,
+              this.firstNameKanji,
+              this.gender,
+              this.idNumber,
+              this.lastName,
+              this.lastNameKana,
+              this.lastNameKanji,
+              this.maidenName,
+              this.metadata,
+              this.phone,
+              this.ssnLast4,
+              this.verification);
+        }
+
+        /** The individual's primary address. */
+        public Builder setAddress(Address address) {
+          this.address = address;
+          return this;
+        }
+
+        /** The Kana variation of the the individual's primary address (Japan only). */
+        public Builder setAddressKana(AddressKana addressKana) {
+          this.addressKana = addressKana;
+          return this;
+        }
+
+        /** The Kanji variation of the the individual's primary address (Japan only). */
+        public Builder setAddressKanji(AddressKanji addressKanji) {
+          this.addressKanji = addressKanji;
+          return this;
+        }
+
+        /** The individual's date of birth. */
+        public Builder setDob(Dob dob) {
+          this.dob = dob;
+          return this;
+        }
+
+        /** The individual's date of birth. */
+        public Builder setDob(EmptyParam dob) {
+          this.dob = dob;
+          return this;
+        }
+
+        /** The individual's email address. */
+        public Builder setEmail(String email) {
+          this.email = email;
+          return this;
+        }
+
+        /**
+         * Add a key/value pair to `extraParams` map. A map is initialized for the first
+         * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
+         * map. See {@link TokenCreateParams.Account.Individual#extraParams} for the field
+         * documentation.
+         */
+        public Builder putExtraParam(String key, Object value) {
+          if (this.extraParams == null) {
+            this.extraParams = new HashMap<>();
+          }
+          this.extraParams.put(key, value);
+          return this;
+        }
+
+        /**
+         * Add all map key/value pairs to `extraParams` map. A map is initialized for the first
+         * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
+         * map. See {@link TokenCreateParams.Account.Individual#extraParams} for the field
+         * documentation.
+         */
+        public Builder putAllExtraParam(Map<String, Object> map) {
+          if (this.extraParams == null) {
+            this.extraParams = new HashMap<>();
+          }
+          this.extraParams.putAll(map);
+          return this;
+        }
+
+        /** The individual's first name. */
+        public Builder setFirstName(String firstName) {
+          this.firstName = firstName;
+          return this;
+        }
+
+        /** The Kana variation of the the individual's first name (Japan only). */
+        public Builder setFirstNameKana(String firstNameKana) {
+          this.firstNameKana = firstNameKana;
+          return this;
+        }
+
+        /** The Kanji variation of the individual's first name (Japan only). */
+        public Builder setFirstNameKanji(String firstNameKanji) {
+          this.firstNameKanji = firstNameKanji;
+          return this;
+        }
+
+        /**
+         * The individual's gender (International regulations require either &quot;male&quot; or
+         * &quot;female&quot;).
+         */
+        public Builder setGender(String gender) {
+          this.gender = gender;
+          return this;
+        }
+
+        /**
+         * The government-issued ID number of the individual, as appropriate for the
+         * representative’s country. (Examples are a Social Security Number in the U.S., or a Social
+         * Insurance Number in Canada). Instead of the number itself, you can also provide a <a
+         * href="https://stripe.com/docs/stripe.js#collecting-pii-data">PII token created with
+         * Stripe.js</a>.
+         */
+        public Builder setIdNumber(String idNumber) {
+          this.idNumber = idNumber;
+          return this;
+        }
+
+        /** The individual's last name. */
+        public Builder setLastName(String lastName) {
+          this.lastName = lastName;
+          return this;
+        }
+
+        /** The Kana varation of the individual's last name (Japan only). */
+        public Builder setLastNameKana(String lastNameKana) {
+          this.lastNameKana = lastNameKana;
+          return this;
+        }
+
+        /** The Kanji varation of the individual's last name (Japan only). */
+        public Builder setLastNameKanji(String lastNameKanji) {
+          this.lastNameKanji = lastNameKanji;
+          return this;
+        }
+
+        /** The individual's maiden name. */
+        public Builder setMaidenName(String maidenName) {
+          this.maidenName = maidenName;
+          return this;
+        }
+
+        /**
+         * Add a key/value pair to `metadata` map. A map is initialized for the first `put/putAll`
+         * call, and subsequent calls add additional key/value pairs to the original map. See {@link
+         * TokenCreateParams.Account.Individual#metadata} for the field documentation.
+         */
+        public Builder putMetadata(String key, String value) {
+          if (this.metadata == null) {
+            this.metadata = new HashMap<>();
+          }
+          this.metadata.put(key, value);
+          return this;
+        }
+
+        /**
+         * Add all map key/value pairs to `metadata` map. A map is initialized for the first
+         * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
+         * map. See {@link TokenCreateParams.Account.Individual#metadata} for the field
+         * documentation.
+         */
+        public Builder putAllMetadata(Map<String, String> map) {
+          if (this.metadata == null) {
+            this.metadata = new HashMap<>();
+          }
+          this.metadata.putAll(map);
+          return this;
+        }
+
+        /** The individual's phone number. */
+        public Builder setPhone(String phone) {
+          this.phone = phone;
+          return this;
+        }
+
+        /** The last four digits of the individual's Social Security Number (U.S. only). */
+        public Builder setSsnLast4(String ssnLast4) {
+          this.ssnLast4 = ssnLast4;
+          return this;
+        }
+
+        /** The individual's verification document information. */
+        public Builder setVerification(Verification verification) {
+          this.verification = verification;
+          return this;
+        }
+      }
+
+      @Getter
+      public static class Address {
+        /** City, district, suburb, town, or village. */
+        @SerializedName("city")
+        String city;
+
+        /**
+         * Two-letter country code (<a href="https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2">ISO
+         * 3166-1 alpha-2</a>).
+         */
+        @SerializedName("country")
+        String country;
+
+        /**
+         * Map of extra parameters for custom features not available in this client library. The
+         * content in this map is not serialized under this field's {@code @SerializedName} value.
+         * Instead, each key/value pair is serialized as if the key is a root-level field
+         * (serialized) name in this param object. Effectively, this map is flattened to its parent
+         * instance.
+         */
+        @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
+        Map<String, Object> extraParams;
+
+        /** Address line 1 (e.g., street, PO Box, or company name). */
+        @SerializedName("line1")
+        String line1;
+
+        /** Address line 2 (e.g., apartment, suite, unit, or building). */
+        @SerializedName("line2")
+        String line2;
+
+        /** ZIP or postal code. */
+        @SerializedName("postal_code")
+        String postalCode;
+
+        /** State, county, province, or region. */
+        @SerializedName("state")
+        String state;
+
+        private Address(
+            String city,
+            String country,
+            Map<String, Object> extraParams,
+            String line1,
+            String line2,
+            String postalCode,
+            String state) {
+          this.city = city;
+          this.country = country;
+          this.extraParams = extraParams;
+          this.line1 = line1;
+          this.line2 = line2;
+          this.postalCode = postalCode;
+          this.state = state;
+        }
+
+        public static Builder builder() {
+          return new Builder();
+        }
+
+        public static class Builder {
+          private String city;
+
+          private String country;
+
+          private Map<String, Object> extraParams;
+
+          private String line1;
+
+          private String line2;
+
+          private String postalCode;
+
+          private String state;
+
+          /** Finalize and obtain parameter instance from this builder. */
+          public Address build() {
+            return new Address(
+                this.city,
+                this.country,
+                this.extraParams,
+                this.line1,
+                this.line2,
+                this.postalCode,
+                this.state);
+          }
+
+          /** City, district, suburb, town, or village. */
+          public Builder setCity(String city) {
+            this.city = city;
+            return this;
+          }
+
+          /**
+           * Two-letter country code (<a href="https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2">ISO
+           * 3166-1 alpha-2</a>).
+           */
+          public Builder setCountry(String country) {
+            this.country = country;
+            return this;
+          }
+
+          /**
+           * Add a key/value pair to `extraParams` map. A map is initialized for the first
+           * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
+           * map. See {@link TokenCreateParams.Account.Individual.Address#extraParams} for the field
+           * documentation.
+           */
+          public Builder putExtraParam(String key, Object value) {
+            if (this.extraParams == null) {
+              this.extraParams = new HashMap<>();
+            }
+            this.extraParams.put(key, value);
+            return this;
+          }
+
+          /**
+           * Add all map key/value pairs to `extraParams` map. A map is initialized for the first
+           * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
+           * map. See {@link TokenCreateParams.Account.Individual.Address#extraParams} for the field
+           * documentation.
+           */
+          public Builder putAllExtraParam(Map<String, Object> map) {
+            if (this.extraParams == null) {
+              this.extraParams = new HashMap<>();
+            }
+            this.extraParams.putAll(map);
+            return this;
+          }
+
+          /** Address line 1 (e.g., street, PO Box, or company name). */
+          public Builder setLine1(String line1) {
+            this.line1 = line1;
+            return this;
+          }
+
+          /** Address line 2 (e.g., apartment, suite, unit, or building). */
+          public Builder setLine2(String line2) {
+            this.line2 = line2;
+            return this;
+          }
+
+          /** ZIP or postal code. */
+          public Builder setPostalCode(String postalCode) {
+            this.postalCode = postalCode;
+            return this;
+          }
+
+          /** State, county, province, or region. */
+          public Builder setState(String state) {
+            this.state = state;
+            return this;
+          }
+        }
+      }
+
+      @Getter
+      public static class AddressKana {
+        /** City or ward. */
+        @SerializedName("city")
+        String city;
+
+        /**
+         * Two-letter country code (<a href="https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2">ISO
+         * 3166-1 alpha-2</a>).
+         */
+        @SerializedName("country")
+        String country;
+
+        /**
+         * Map of extra parameters for custom features not available in this client library. The
+         * content in this map is not serialized under this field's {@code @SerializedName} value.
+         * Instead, each key/value pair is serialized as if the key is a root-level field
+         * (serialized) name in this param object. Effectively, this map is flattened to its parent
+         * instance.
+         */
+        @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
+        Map<String, Object> extraParams;
+
+        /** Block or building number. */
+        @SerializedName("line1")
+        String line1;
+
+        /** Building details. */
+        @SerializedName("line2")
+        String line2;
+
+        /** Postal code. */
+        @SerializedName("postal_code")
+        String postalCode;
+
+        /** Prefecture. */
+        @SerializedName("state")
+        String state;
+
+        /** Town or cho-me. */
+        @SerializedName("town")
+        String town;
+
+        private AddressKana(
+            String city,
+            String country,
+            Map<String, Object> extraParams,
+            String line1,
+            String line2,
+            String postalCode,
+            String state,
+            String town) {
+          this.city = city;
+          this.country = country;
+          this.extraParams = extraParams;
+          this.line1 = line1;
+          this.line2 = line2;
+          this.postalCode = postalCode;
+          this.state = state;
+          this.town = town;
+        }
+
+        public static Builder builder() {
+          return new Builder();
+        }
+
+        public static class Builder {
+          private String city;
+
+          private String country;
+
+          private Map<String, Object> extraParams;
+
+          private String line1;
+
+          private String line2;
+
+          private String postalCode;
+
+          private String state;
+
+          private String town;
+
+          /** Finalize and obtain parameter instance from this builder. */
+          public AddressKana build() {
+            return new AddressKana(
+                this.city,
+                this.country,
+                this.extraParams,
+                this.line1,
+                this.line2,
+                this.postalCode,
+                this.state,
+                this.town);
+          }
+
+          /** City or ward. */
+          public Builder setCity(String city) {
+            this.city = city;
+            return this;
+          }
+
+          /**
+           * Two-letter country code (<a href="https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2">ISO
+           * 3166-1 alpha-2</a>).
+           */
+          public Builder setCountry(String country) {
+            this.country = country;
+            return this;
+          }
+
+          /**
+           * Add a key/value pair to `extraParams` map. A map is initialized for the first
+           * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
+           * map. See {@link TokenCreateParams.Account.Individual.AddressKana#extraParams} for the
+           * field documentation.
+           */
+          public Builder putExtraParam(String key, Object value) {
+            if (this.extraParams == null) {
+              this.extraParams = new HashMap<>();
+            }
+            this.extraParams.put(key, value);
+            return this;
+          }
+
+          /**
+           * Add all map key/value pairs to `extraParams` map. A map is initialized for the first
+           * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
+           * map. See {@link TokenCreateParams.Account.Individual.AddressKana#extraParams} for the
+           * field documentation.
+           */
+          public Builder putAllExtraParam(Map<String, Object> map) {
+            if (this.extraParams == null) {
+              this.extraParams = new HashMap<>();
+            }
+            this.extraParams.putAll(map);
+            return this;
+          }
+
+          /** Block or building number. */
+          public Builder setLine1(String line1) {
+            this.line1 = line1;
+            return this;
+          }
+
+          /** Building details. */
+          public Builder setLine2(String line2) {
+            this.line2 = line2;
+            return this;
+          }
+
+          /** Postal code. */
+          public Builder setPostalCode(String postalCode) {
+            this.postalCode = postalCode;
+            return this;
+          }
+
+          /** Prefecture. */
+          public Builder setState(String state) {
+            this.state = state;
+            return this;
+          }
+
+          /** Town or cho-me. */
+          public Builder setTown(String town) {
+            this.town = town;
+            return this;
+          }
+        }
+      }
+
+      @Getter
+      public static class AddressKanji {
+        /** City or ward. */
+        @SerializedName("city")
+        String city;
+
+        /**
+         * Two-letter country code (<a href="https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2">ISO
+         * 3166-1 alpha-2</a>).
+         */
+        @SerializedName("country")
+        String country;
+
+        /**
+         * Map of extra parameters for custom features not available in this client library. The
+         * content in this map is not serialized under this field's {@code @SerializedName} value.
+         * Instead, each key/value pair is serialized as if the key is a root-level field
+         * (serialized) name in this param object. Effectively, this map is flattened to its parent
+         * instance.
+         */
+        @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
+        Map<String, Object> extraParams;
+
+        /** Block or building number. */
+        @SerializedName("line1")
+        String line1;
+
+        /** Building details. */
+        @SerializedName("line2")
+        String line2;
+
+        /** Postal code. */
+        @SerializedName("postal_code")
+        String postalCode;
+
+        /** Prefecture. */
+        @SerializedName("state")
+        String state;
+
+        /** Town or cho-me. */
+        @SerializedName("town")
+        String town;
+
+        private AddressKanji(
+            String city,
+            String country,
+            Map<String, Object> extraParams,
+            String line1,
+            String line2,
+            String postalCode,
+            String state,
+            String town) {
+          this.city = city;
+          this.country = country;
+          this.extraParams = extraParams;
+          this.line1 = line1;
+          this.line2 = line2;
+          this.postalCode = postalCode;
+          this.state = state;
+          this.town = town;
+        }
+
+        public static Builder builder() {
+          return new Builder();
+        }
+
+        public static class Builder {
+          private String city;
+
+          private String country;
+
+          private Map<String, Object> extraParams;
+
+          private String line1;
+
+          private String line2;
+
+          private String postalCode;
+
+          private String state;
+
+          private String town;
+
+          /** Finalize and obtain parameter instance from this builder. */
+          public AddressKanji build() {
+            return new AddressKanji(
+                this.city,
+                this.country,
+                this.extraParams,
+                this.line1,
+                this.line2,
+                this.postalCode,
+                this.state,
+                this.town);
+          }
+
+          /** City or ward. */
+          public Builder setCity(String city) {
+            this.city = city;
+            return this;
+          }
+
+          /**
+           * Two-letter country code (<a href="https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2">ISO
+           * 3166-1 alpha-2</a>).
+           */
+          public Builder setCountry(String country) {
+            this.country = country;
+            return this;
+          }
+
+          /**
+           * Add a key/value pair to `extraParams` map. A map is initialized for the first
+           * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
+           * map. See {@link TokenCreateParams.Account.Individual.AddressKanji#extraParams} for the
+           * field documentation.
+           */
+          public Builder putExtraParam(String key, Object value) {
+            if (this.extraParams == null) {
+              this.extraParams = new HashMap<>();
+            }
+            this.extraParams.put(key, value);
+            return this;
+          }
+
+          /**
+           * Add all map key/value pairs to `extraParams` map. A map is initialized for the first
+           * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
+           * map. See {@link TokenCreateParams.Account.Individual.AddressKanji#extraParams} for the
+           * field documentation.
+           */
+          public Builder putAllExtraParam(Map<String, Object> map) {
+            if (this.extraParams == null) {
+              this.extraParams = new HashMap<>();
+            }
+            this.extraParams.putAll(map);
+            return this;
+          }
+
+          /** Block or building number. */
+          public Builder setLine1(String line1) {
+            this.line1 = line1;
+            return this;
+          }
+
+          /** Building details. */
+          public Builder setLine2(String line2) {
+            this.line2 = line2;
+            return this;
+          }
+
+          /** Postal code. */
+          public Builder setPostalCode(String postalCode) {
+            this.postalCode = postalCode;
+            return this;
+          }
+
+          /** Prefecture. */
+          public Builder setState(String state) {
+            this.state = state;
+            return this;
+          }
+
+          /** Town or cho-me. */
+          public Builder setTown(String town) {
+            this.town = town;
+            return this;
+          }
+        }
+      }
+
+      @Getter
+      public static class Dob {
+        /** The day of birth, between 1 and 31. */
+        @SerializedName("day")
+        Long day;
+
+        /**
+         * Map of extra parameters for custom features not available in this client library. The
+         * content in this map is not serialized under this field's {@code @SerializedName} value.
+         * Instead, each key/value pair is serialized as if the key is a root-level field
+         * (serialized) name in this param object. Effectively, this map is flattened to its parent
+         * instance.
+         */
+        @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
+        Map<String, Object> extraParams;
+
+        /** The month of birth, between 1 and 12. */
+        @SerializedName("month")
+        Long month;
+
+        /** The four-digit year of birth. */
+        @SerializedName("year")
+        Long year;
+
+        private Dob(Long day, Map<String, Object> extraParams, Long month, Long year) {
+          this.day = day;
+          this.extraParams = extraParams;
+          this.month = month;
+          this.year = year;
+        }
+
+        public static Builder builder() {
+          return new Builder();
+        }
+
+        public static class Builder {
+          private Long day;
+
+          private Map<String, Object> extraParams;
+
+          private Long month;
+
+          private Long year;
+
+          /** Finalize and obtain parameter instance from this builder. */
+          public Dob build() {
+            return new Dob(this.day, this.extraParams, this.month, this.year);
+          }
+
+          /** The day of birth, between 1 and 31. */
+          public Builder setDay(Long day) {
+            this.day = day;
+            return this;
+          }
+
+          /**
+           * Add a key/value pair to `extraParams` map. A map is initialized for the first
+           * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
+           * map. See {@link TokenCreateParams.Account.Individual.Dob#extraParams} for the field
+           * documentation.
+           */
+          public Builder putExtraParam(String key, Object value) {
+            if (this.extraParams == null) {
+              this.extraParams = new HashMap<>();
+            }
+            this.extraParams.put(key, value);
+            return this;
+          }
+
+          /**
+           * Add all map key/value pairs to `extraParams` map. A map is initialized for the first
+           * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
+           * map. See {@link TokenCreateParams.Account.Individual.Dob#extraParams} for the field
+           * documentation.
+           */
+          public Builder putAllExtraParam(Map<String, Object> map) {
+            if (this.extraParams == null) {
+              this.extraParams = new HashMap<>();
+            }
+            this.extraParams.putAll(map);
+            return this;
+          }
+
+          /** The month of birth, between 1 and 12. */
+          public Builder setMonth(Long month) {
+            this.month = month;
+            return this;
+          }
+
+          /** The four-digit year of birth. */
+          public Builder setYear(Long year) {
+            this.year = year;
+            return this;
+          }
+        }
+      }
+
+      @Getter
+      public static class Verification {
+        /**
+         * A document showing address, either a passport, local ID card, or utility bill from a
+         * well-known utility company.
+         */
+        @SerializedName("additional_document")
+        AdditionalDocument additionalDocument;
+
+        /** An identifying document, either a passport or local ID card. */
+        @SerializedName("document")
+        Document document;
+
+        /**
+         * Map of extra parameters for custom features not available in this client library. The
+         * content in this map is not serialized under this field's {@code @SerializedName} value.
+         * Instead, each key/value pair is serialized as if the key is a root-level field
+         * (serialized) name in this param object. Effectively, this map is flattened to its parent
+         * instance.
+         */
+        @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
+        Map<String, Object> extraParams;
+
+        private Verification(
+            AdditionalDocument additionalDocument,
+            Document document,
+            Map<String, Object> extraParams) {
+          this.additionalDocument = additionalDocument;
+          this.document = document;
+          this.extraParams = extraParams;
+        }
+
+        public static Builder builder() {
+          return new Builder();
+        }
+
+        public static class Builder {
+          private AdditionalDocument additionalDocument;
+
+          private Document document;
+
+          private Map<String, Object> extraParams;
+
+          /** Finalize and obtain parameter instance from this builder. */
+          public Verification build() {
+            return new Verification(this.additionalDocument, this.document, this.extraParams);
+          }
+
+          /**
+           * A document showing address, either a passport, local ID card, or utility bill from a
+           * well-known utility company.
+           */
+          public Builder setAdditionalDocument(AdditionalDocument additionalDocument) {
+            this.additionalDocument = additionalDocument;
+            return this;
+          }
+
+          /** An identifying document, either a passport or local ID card. */
+          public Builder setDocument(Document document) {
+            this.document = document;
+            return this;
+          }
+
+          /**
+           * Add a key/value pair to `extraParams` map. A map is initialized for the first
+           * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
+           * map. See {@link TokenCreateParams.Account.Individual.Verification#extraParams} for the
+           * field documentation.
+           */
+          public Builder putExtraParam(String key, Object value) {
+            if (this.extraParams == null) {
+              this.extraParams = new HashMap<>();
+            }
+            this.extraParams.put(key, value);
+            return this;
+          }
+
+          /**
+           * Add all map key/value pairs to `extraParams` map. A map is initialized for the first
+           * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
+           * map. See {@link TokenCreateParams.Account.Individual.Verification#extraParams} for the
+           * field documentation.
+           */
+          public Builder putAllExtraParam(Map<String, Object> map) {
+            if (this.extraParams == null) {
+              this.extraParams = new HashMap<>();
+            }
+            this.extraParams.putAll(map);
+            return this;
+          }
+        }
+
+        @Getter
+        public static class AdditionalDocument {
+          /**
+           * The back of an ID returned by a <a href="https://stripe.com/docs/api#create_file">file
+           * upload</a> with a {@code purpose} value of {@code identity_document}. The uploaded file
+           * needs to be a color image (smaller than 8,000px by 8,000px), in JPG, PNG, or PDF
+           * format, and less than 10 MB in size.
+           */
+          @SerializedName("back")
+          String back;
+
+          /**
+           * Map of extra parameters for custom features not available in this client library. The
+           * content in this map is not serialized under this field's {@code @SerializedName} value.
+           * Instead, each key/value pair is serialized as if the key is a root-level field
+           * (serialized) name in this param object. Effectively, this map is flattened to its
+           * parent instance.
+           */
+          @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
+          Map<String, Object> extraParams;
+
+          /**
+           * The front of an ID returned by a <a href="https://stripe.com/docs/api#create_file">file
+           * upload</a> with a {@code purpose} value of {@code identity_document}. The uploaded file
+           * needs to be a color image (smaller than 8,000px by 8,000px), in JPG, PNG, or PDF
+           * format, and less than 10 MB in size.
+           */
+          @SerializedName("front")
+          String front;
+
+          private AdditionalDocument(String back, Map<String, Object> extraParams, String front) {
+            this.back = back;
+            this.extraParams = extraParams;
+            this.front = front;
+          }
+
+          public static Builder builder() {
+            return new Builder();
+          }
+
+          public static class Builder {
+            private String back;
+
+            private Map<String, Object> extraParams;
+
+            private String front;
+
+            /** Finalize and obtain parameter instance from this builder. */
+            public AdditionalDocument build() {
+              return new AdditionalDocument(this.back, this.extraParams, this.front);
+            }
+
+            /**
+             * The back of an ID returned by a <a
+             * href="https://stripe.com/docs/api#create_file">file upload</a> with a {@code purpose}
+             * value of {@code identity_document}. The uploaded file needs to be a color image
+             * (smaller than 8,000px by 8,000px), in JPG, PNG, or PDF format, and less than 10 MB in
+             * size.
+             */
+            public Builder setBack(String back) {
+              this.back = back;
+              return this;
+            }
+
+            /**
+             * Add a key/value pair to `extraParams` map. A map is initialized for the first
+             * `put/putAll` call, and subsequent calls add additional key/value pairs to the
+             * original map. See {@link
+             * TokenCreateParams.Account.Individual.Verification.AdditionalDocument#extraParams} for
+             * the field documentation.
+             */
+            public Builder putExtraParam(String key, Object value) {
+              if (this.extraParams == null) {
+                this.extraParams = new HashMap<>();
+              }
+              this.extraParams.put(key, value);
+              return this;
+            }
+
+            /**
+             * Add all map key/value pairs to `extraParams` map. A map is initialized for the first
+             * `put/putAll` call, and subsequent calls add additional key/value pairs to the
+             * original map. See {@link
+             * TokenCreateParams.Account.Individual.Verification.AdditionalDocument#extraParams} for
+             * the field documentation.
+             */
+            public Builder putAllExtraParam(Map<String, Object> map) {
+              if (this.extraParams == null) {
+                this.extraParams = new HashMap<>();
+              }
+              this.extraParams.putAll(map);
+              return this;
+            }
+
+            /**
+             * The front of an ID returned by a <a
+             * href="https://stripe.com/docs/api#create_file">file upload</a> with a {@code purpose}
+             * value of {@code identity_document}. The uploaded file needs to be a color image
+             * (smaller than 8,000px by 8,000px), in JPG, PNG, or PDF format, and less than 10 MB in
+             * size.
+             */
+            public Builder setFront(String front) {
+              this.front = front;
+              return this;
+            }
+          }
+        }
+
+        @Getter
+        public static class Document {
+          /**
+           * The back of an ID returned by a <a href="https://stripe.com/docs/api#create_file">file
+           * upload</a> with a {@code purpose} value of {@code identity_document}. The uploaded file
+           * needs to be a color image (smaller than 8,000px by 8,000px), in JPG, PNG, or PDF
+           * format, and less than 10 MB in size.
+           */
+          @SerializedName("back")
+          String back;
+
+          /**
+           * Map of extra parameters for custom features not available in this client library. The
+           * content in this map is not serialized under this field's {@code @SerializedName} value.
+           * Instead, each key/value pair is serialized as if the key is a root-level field
+           * (serialized) name in this param object. Effectively, this map is flattened to its
+           * parent instance.
+           */
+          @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
+          Map<String, Object> extraParams;
+
+          /**
+           * The front of an ID returned by a <a href="https://stripe.com/docs/api#create_file">file
+           * upload</a> with a {@code purpose} value of {@code identity_document}. The uploaded file
+           * needs to be a color image (smaller than 8,000px by 8,000px), in JPG, PNG, or PDF
+           * format, and less than 10 MB in size.
+           */
+          @SerializedName("front")
+          String front;
+
+          private Document(String back, Map<String, Object> extraParams, String front) {
+            this.back = back;
+            this.extraParams = extraParams;
+            this.front = front;
+          }
+
+          public static Builder builder() {
+            return new Builder();
+          }
+
+          public static class Builder {
+            private String back;
+
+            private Map<String, Object> extraParams;
+
+            private String front;
+
+            /** Finalize and obtain parameter instance from this builder. */
+            public Document build() {
+              return new Document(this.back, this.extraParams, this.front);
+            }
+
+            /**
+             * The back of an ID returned by a <a
+             * href="https://stripe.com/docs/api#create_file">file upload</a> with a {@code purpose}
+             * value of {@code identity_document}. The uploaded file needs to be a color image
+             * (smaller than 8,000px by 8,000px), in JPG, PNG, or PDF format, and less than 10 MB in
+             * size.
+             */
+            public Builder setBack(String back) {
+              this.back = back;
+              return this;
+            }
+
+            /**
+             * Add a key/value pair to `extraParams` map. A map is initialized for the first
+             * `put/putAll` call, and subsequent calls add additional key/value pairs to the
+             * original map. See {@link
+             * TokenCreateParams.Account.Individual.Verification.Document#extraParams} for the field
+             * documentation.
+             */
+            public Builder putExtraParam(String key, Object value) {
+              if (this.extraParams == null) {
+                this.extraParams = new HashMap<>();
+              }
+              this.extraParams.put(key, value);
+              return this;
+            }
+
+            /**
+             * Add all map key/value pairs to `extraParams` map. A map is initialized for the first
+             * `put/putAll` call, and subsequent calls add additional key/value pairs to the
+             * original map. See {@link
+             * TokenCreateParams.Account.Individual.Verification.Document#extraParams} for the field
+             * documentation.
+             */
+            public Builder putAllExtraParam(Map<String, Object> map) {
+              if (this.extraParams == null) {
+                this.extraParams = new HashMap<>();
+              }
+              this.extraParams.putAll(map);
+              return this;
+            }
+
+            /**
+             * The front of an ID returned by a <a
+             * href="https://stripe.com/docs/api#create_file">file upload</a> with a {@code purpose}
+             * value of {@code identity_document}. The uploaded file needs to be a color image
+             * (smaller than 8,000px by 8,000px), in JPG, PNG, or PDF format, and less than 10 MB in
+             * size.
+             */
+            public Builder setFront(String front) {
+              this.front = front;
+              return this;
+            }
+          }
+        }
+      }
+    }
+
+    public enum BusinessType implements ApiRequestParams.EnumParam {
+      @SerializedName("company")
+      COMPANY("company"),
+
+      @SerializedName("government_entity")
+      GOVERNMENT_ENTITY("government_entity"),
+
+      @SerializedName("individual")
+      INDIVIDUAL("individual"),
+
+      @SerializedName("non_profit")
+      NON_PROFIT("non_profit");
+
+      @Getter(onMethod_ = {@Override})
+      private final String value;
+
+      BusinessType(String value) {
+        this.value = value;
+      }
     }
   }
 

@@ -99,10 +99,7 @@ public class SessionCreateParams extends ApiRequestParams {
   @SerializedName("payment_intent_data")
   PaymentIntentData paymentIntentData;
 
-  /**
-   * A list of the types of payment methods (e.g. card) this Checkout Session is allowed to accept.
-   * The only supported values today are {@code card} and {@code ideal}.
-   */
+  /** A list of the types of payment methods (e.g., card) this Checkout session can accept. */
   @SerializedName("payment_method_types")
   List<PaymentMethodType> paymentMethodTypes;
 
