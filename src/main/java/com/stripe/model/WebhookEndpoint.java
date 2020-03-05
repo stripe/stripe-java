@@ -18,7 +18,7 @@ import lombok.Setter;
 @Getter
 @Setter
 @EqualsAndHashCode(callSuper = false)
-public class WebhookEndpoint extends ApiResource implements HasId {
+public class WebhookEndpoint extends ApiResource implements HasId, MetadataStore<WebhookEndpoint> {
   /** The API version events are rendered as for this webhook endpoint. */
   @SerializedName("api_version")
   String apiVersion;
@@ -53,6 +53,14 @@ public class WebhookEndpoint extends ApiResource implements HasId {
    */
   @SerializedName("livemode")
   Boolean livemode;
+
+  /**
+   * Set of key-value pairs that you can attach to an object. This can be useful for storing
+   * additional information about the object in a structured format.
+   */
+  @Getter(onMethod_ = {@Override})
+  @SerializedName("metadata")
+  Map<String, String> metadata;
 
   /**
    * String representing the object's type. Objects of the same type share the same value.
@@ -202,6 +210,7 @@ public class WebhookEndpoint extends ApiResource implements HasId {
    * Updates the webhook endpoint. You may edit the <code>url</code>, the list of <code>
    * enabled_events</code>, and the status of your endpoint.
    */
+  @Override
   public WebhookEndpoint update(Map<String, Object> params) throws StripeException {
     return update(params, (RequestOptions) null);
   }
@@ -210,6 +219,7 @@ public class WebhookEndpoint extends ApiResource implements HasId {
    * Updates the webhook endpoint. You may edit the <code>url</code>, the list of <code>
    * enabled_events</code>, and the status of your endpoint.
    */
+  @Override
   public WebhookEndpoint update(Map<String, Object> params, RequestOptions options)
       throws StripeException {
     String url =

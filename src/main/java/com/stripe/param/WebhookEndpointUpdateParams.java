@@ -35,6 +35,15 @@ public class WebhookEndpointUpdateParams extends ApiRequestParams {
   @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
   Map<String, Object> extraParams;
 
+  /**
+   * Set of key-value pairs that you can attach to an object. This can be useful for storing
+   * additional information about the object in a structured format. Individual keys can be unset by
+   * posting an empty value to them. All keys can be unset by posting an empty value to {@code
+   * metadata}.
+   */
+  @SerializedName("metadata")
+  Object metadata;
+
   /** The URL of the webhook endpoint. */
   @SerializedName("url")
   Object url;
@@ -44,11 +53,13 @@ public class WebhookEndpointUpdateParams extends ApiRequestParams {
       List<EnabledEvent> enabledEvents,
       List<String> expand,
       Map<String, Object> extraParams,
+      Object metadata,
       Object url) {
     this.disabled = disabled;
     this.enabledEvents = enabledEvents;
     this.expand = expand;
     this.extraParams = extraParams;
+    this.metadata = metadata;
     this.url = url;
   }
 
@@ -65,12 +76,19 @@ public class WebhookEndpointUpdateParams extends ApiRequestParams {
 
     private Map<String, Object> extraParams;
 
+    private Object metadata;
+
     private Object url;
 
     /** Finalize and obtain parameter instance from this builder. */
     public WebhookEndpointUpdateParams build() {
       return new WebhookEndpointUpdateParams(
-          this.disabled, this.enabledEvents, this.expand, this.extraParams, this.url);
+          this.disabled,
+          this.enabledEvents,
+          this.expand,
+          this.extraParams,
+          this.metadata,
+          this.url);
     }
 
     /** Disable the webhook endpoint if set to true. */
@@ -154,6 +172,56 @@ public class WebhookEndpointUpdateParams extends ApiRequestParams {
         this.extraParams = new HashMap<>();
       }
       this.extraParams.putAll(map);
+      return this;
+    }
+
+    /**
+     * Add a key/value pair to `metadata` map. A map is initialized for the first `put/putAll` call,
+     * and subsequent calls add additional key/value pairs to the original map. See {@link
+     * WebhookEndpointUpdateParams#metadata} for the field documentation.
+     */
+    @SuppressWarnings("unchecked")
+    public Builder putMetadata(String key, String value) {
+      if (this.metadata == null || this.metadata instanceof EmptyParam) {
+        this.metadata = new HashMap<String, String>();
+      }
+      ((Map<String, String>) this.metadata).put(key, value);
+      return this;
+    }
+
+    /**
+     * Add all map key/value pairs to `metadata` map. A map is initialized for the first
+     * `put/putAll` call, and subsequent calls add additional key/value pairs to the original map.
+     * See {@link WebhookEndpointUpdateParams#metadata} for the field documentation.
+     */
+    @SuppressWarnings("unchecked")
+    public Builder putAllMetadata(Map<String, String> map) {
+      if (this.metadata == null || this.metadata instanceof EmptyParam) {
+        this.metadata = new HashMap<String, String>();
+      }
+      ((Map<String, String>) this.metadata).putAll(map);
+      return this;
+    }
+
+    /**
+     * Set of key-value pairs that you can attach to an object. This can be useful for storing
+     * additional information about the object in a structured format. Individual keys can be unset
+     * by posting an empty value to them. All keys can be unset by posting an empty value to {@code
+     * metadata}.
+     */
+    public Builder setMetadata(EmptyParam metadata) {
+      this.metadata = metadata;
+      return this;
+    }
+
+    /**
+     * Set of key-value pairs that you can attach to an object. This can be useful for storing
+     * additional information about the object in a structured format. Individual keys can be unset
+     * by posting an empty value to them. All keys can be unset by posting an empty value to {@code
+     * metadata}.
+     */
+    public Builder setMetadata(Map<String, String> metadata) {
+      this.metadata = metadata;
       return this;
     }
 
