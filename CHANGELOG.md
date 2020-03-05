@@ -1,5 +1,8 @@
 # Changelog
 
+## 18.3.0 - 2020-03-04
+* [#980](https://github.com/stripe/stripe-java/pull/980) Add support for `metadata` on `WebhookEndpoint`
+
 ## 18.2.0 - 2020-03-04
 * [#979](https://github.com/stripe/stripe-java/pull/979) Multiple API changes
   * Add support for `account` as a parameter on `Token` to create Account tokens
