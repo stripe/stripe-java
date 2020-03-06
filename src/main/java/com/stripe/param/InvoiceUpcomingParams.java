@@ -674,7 +674,7 @@ public class InvoiceUpcomingParams extends ApiRequestParams {
      * metadata}.
      */
     @SerializedName("metadata")
-    Map<String, String> metadata;
+    Object metadata;
 
     /** The period associated with this invoice item. */
     @SerializedName("period")
@@ -709,7 +709,7 @@ public class InvoiceUpcomingParams extends ApiRequestParams {
         Boolean discountable,
         Map<String, Object> extraParams,
         String invoiceitem,
-        Map<String, String> metadata,
+        Object metadata,
         Period period,
         Long quantity,
         Object taxRates,
@@ -746,7 +746,7 @@ public class InvoiceUpcomingParams extends ApiRequestParams {
 
       private String invoiceitem;
 
-      private Map<String, String> metadata;
+      private Object metadata;
 
       private Period period;
 
@@ -849,11 +849,12 @@ public class InvoiceUpcomingParams extends ApiRequestParams {
        * call, and subsequent calls add additional key/value pairs to the original map. See {@link
        * InvoiceUpcomingParams.InvoiceItem#metadata} for the field documentation.
        */
+      @SuppressWarnings("unchecked")
       public Builder putMetadata(String key, String value) {
-        if (this.metadata == null) {
-          this.metadata = new HashMap<>();
+        if (this.metadata == null || this.metadata instanceof EmptyParam) {
+          this.metadata = new HashMap<String, String>();
         }
-        this.metadata.put(key, value);
+        ((Map<String, String>) this.metadata).put(key, value);
         return this;
       }
 
@@ -862,11 +863,34 @@ public class InvoiceUpcomingParams extends ApiRequestParams {
        * `put/putAll` call, and subsequent calls add additional key/value pairs to the original map.
        * See {@link InvoiceUpcomingParams.InvoiceItem#metadata} for the field documentation.
        */
+      @SuppressWarnings("unchecked")
       public Builder putAllMetadata(Map<String, String> map) {
-        if (this.metadata == null) {
-          this.metadata = new HashMap<>();
+        if (this.metadata == null || this.metadata instanceof EmptyParam) {
+          this.metadata = new HashMap<String, String>();
         }
-        this.metadata.putAll(map);
+        ((Map<String, String>) this.metadata).putAll(map);
+        return this;
+      }
+
+      /**
+       * Set of key-value pairs that you can attach to an object. This can be useful for storing
+       * additional information about the object in a structured format. Individual keys can be
+       * unset by posting an empty value to them. All keys can be unset by posting an empty value to
+       * {@code metadata}.
+       */
+      public Builder setMetadata(EmptyParam metadata) {
+        this.metadata = metadata;
+        return this;
+      }
+
+      /**
+       * Set of key-value pairs that you can attach to an object. This can be useful for storing
+       * additional information about the object in a structured format. Individual keys can be
+       * unset by posting an empty value to them. All keys can be unset by posting an empty value to
+       * {@code metadata}.
+       */
+      public Builder setMetadata(Map<String, String> metadata) {
+        this.metadata = metadata;
         return this;
       }
 
@@ -1064,7 +1088,7 @@ public class InvoiceUpcomingParams extends ApiRequestParams {
      * metadata}.
      */
     @SerializedName("metadata")
-    Map<String, String> metadata;
+    Object metadata;
 
     /** Plan ID for this item, as a string. */
     @SerializedName("plan")
@@ -1090,7 +1114,7 @@ public class InvoiceUpcomingParams extends ApiRequestParams {
         Boolean deleted,
         Map<String, Object> extraParams,
         String id,
-        Map<String, String> metadata,
+        Object metadata,
         String plan,
         Long quantity,
         Object taxRates) {
@@ -1120,7 +1144,7 @@ public class InvoiceUpcomingParams extends ApiRequestParams {
 
       private String id;
 
-      private Map<String, String> metadata;
+      private Object metadata;
 
       private String plan;
 
@@ -1214,11 +1238,12 @@ public class InvoiceUpcomingParams extends ApiRequestParams {
        * call, and subsequent calls add additional key/value pairs to the original map. See {@link
        * InvoiceUpcomingParams.SubscriptionItem#metadata} for the field documentation.
        */
+      @SuppressWarnings("unchecked")
       public Builder putMetadata(String key, String value) {
-        if (this.metadata == null) {
-          this.metadata = new HashMap<>();
+        if (this.metadata == null || this.metadata instanceof EmptyParam) {
+          this.metadata = new HashMap<String, String>();
         }
-        this.metadata.put(key, value);
+        ((Map<String, String>) this.metadata).put(key, value);
         return this;
       }
 
@@ -1227,11 +1252,34 @@ public class InvoiceUpcomingParams extends ApiRequestParams {
        * `put/putAll` call, and subsequent calls add additional key/value pairs to the original map.
        * See {@link InvoiceUpcomingParams.SubscriptionItem#metadata} for the field documentation.
        */
+      @SuppressWarnings("unchecked")
       public Builder putAllMetadata(Map<String, String> map) {
-        if (this.metadata == null) {
-          this.metadata = new HashMap<>();
+        if (this.metadata == null || this.metadata instanceof EmptyParam) {
+          this.metadata = new HashMap<String, String>();
         }
-        this.metadata.putAll(map);
+        ((Map<String, String>) this.metadata).putAll(map);
+        return this;
+      }
+
+      /**
+       * Set of key-value pairs that you can attach to an object. This can be useful for storing
+       * additional information about the object in a structured format. Individual keys can be
+       * unset by posting an empty value to them. All keys can be unset by posting an empty value to
+       * {@code metadata}.
+       */
+      public Builder setMetadata(EmptyParam metadata) {
+        this.metadata = metadata;
+        return this;
+      }
+
+      /**
+       * Set of key-value pairs that you can attach to an object. This can be useful for storing
+       * additional information about the object in a structured format. Individual keys can be
+       * unset by posting an empty value to them. All keys can be unset by posting an empty value to
+       * {@code metadata}.
+       */
+      public Builder setMetadata(Map<String, String> metadata) {
+        this.metadata = metadata;
         return this;
       }
 

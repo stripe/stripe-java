@@ -71,7 +71,7 @@ public class ProductUpdateParams extends ApiRequestParams {
    * metadata}.
    */
   @SerializedName("metadata")
-  Map<String, String> metadata;
+  Object metadata;
 
   /**
    * The product's name, meant to be displayable to the customer. Whenever this product is sold via
@@ -131,7 +131,7 @@ public class ProductUpdateParams extends ApiRequestParams {
       List<String> expand,
       Map<String, Object> extraParams,
       Object images,
-      Map<String, String> metadata,
+      Object metadata,
       Object name,
       Object packageDimensions,
       Boolean shippable,
@@ -176,7 +176,7 @@ public class ProductUpdateParams extends ApiRequestParams {
 
     private Object images;
 
-    private Map<String, String> metadata;
+    private Object metadata;
 
     private Object name;
 
@@ -431,11 +431,12 @@ public class ProductUpdateParams extends ApiRequestParams {
      * and subsequent calls add additional key/value pairs to the original map. See {@link
      * ProductUpdateParams#metadata} for the field documentation.
      */
+    @SuppressWarnings("unchecked")
     public Builder putMetadata(String key, String value) {
-      if (this.metadata == null) {
-        this.metadata = new HashMap<>();
+      if (this.metadata == null || this.metadata instanceof EmptyParam) {
+        this.metadata = new HashMap<String, String>();
       }
-      this.metadata.put(key, value);
+      ((Map<String, String>) this.metadata).put(key, value);
       return this;
     }
 
@@ -444,11 +445,34 @@ public class ProductUpdateParams extends ApiRequestParams {
      * `put/putAll` call, and subsequent calls add additional key/value pairs to the original map.
      * See {@link ProductUpdateParams#metadata} for the field documentation.
      */
+    @SuppressWarnings("unchecked")
     public Builder putAllMetadata(Map<String, String> map) {
-      if (this.metadata == null) {
-        this.metadata = new HashMap<>();
+      if (this.metadata == null || this.metadata instanceof EmptyParam) {
+        this.metadata = new HashMap<String, String>();
       }
-      this.metadata.putAll(map);
+      ((Map<String, String>) this.metadata).putAll(map);
+      return this;
+    }
+
+    /**
+     * Set of key-value pairs that you can attach to an object. This can be useful for storing
+     * additional information about the object in a structured format. Individual keys can be unset
+     * by posting an empty value to them. All keys can be unset by posting an empty value to {@code
+     * metadata}.
+     */
+    public Builder setMetadata(EmptyParam metadata) {
+      this.metadata = metadata;
+      return this;
+    }
+
+    /**
+     * Set of key-value pairs that you can attach to an object. This can be useful for storing
+     * additional information about the object in a structured format. Individual keys can be unset
+     * by posting an empty value to them. All keys can be unset by posting an empty value to {@code
+     * metadata}.
+     */
+    public Builder setMetadata(Map<String, String> metadata) {
+      this.metadata = metadata;
       return this;
     }
 
