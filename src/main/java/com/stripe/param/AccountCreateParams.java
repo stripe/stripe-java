@@ -98,7 +98,7 @@ public class AccountCreateParams extends ApiRequestParams {
    * metadata}.
    */
   @SerializedName("metadata")
-  Map<String, String> metadata;
+  Object metadata;
 
   /**
    * The set of capabilities you want to unlock for this account. Each capability will be inactive
@@ -140,7 +140,7 @@ public class AccountCreateParams extends ApiRequestParams {
       String externalAccount,
       Map<String, Object> extraParams,
       Individual individual,
-      Map<String, String> metadata,
+      Object metadata,
       List<RequestedCapability> requestedCapabilities,
       Settings settings,
       TosAcceptance tosAcceptance,
@@ -190,7 +190,7 @@ public class AccountCreateParams extends ApiRequestParams {
 
     private Individual individual;
 
-    private Map<String, String> metadata;
+    private Object metadata;
 
     private List<RequestedCapability> requestedCapabilities;
 
@@ -368,11 +368,12 @@ public class AccountCreateParams extends ApiRequestParams {
      * and subsequent calls add additional key/value pairs to the original map. See {@link
      * AccountCreateParams#metadata} for the field documentation.
      */
+    @SuppressWarnings("unchecked")
     public Builder putMetadata(String key, String value) {
-      if (this.metadata == null) {
-        this.metadata = new HashMap<>();
+      if (this.metadata == null || this.metadata instanceof EmptyParam) {
+        this.metadata = new HashMap<String, String>();
       }
-      this.metadata.put(key, value);
+      ((Map<String, String>) this.metadata).put(key, value);
       return this;
     }
 
@@ -381,11 +382,34 @@ public class AccountCreateParams extends ApiRequestParams {
      * `put/putAll` call, and subsequent calls add additional key/value pairs to the original map.
      * See {@link AccountCreateParams#metadata} for the field documentation.
      */
+    @SuppressWarnings("unchecked")
     public Builder putAllMetadata(Map<String, String> map) {
-      if (this.metadata == null) {
-        this.metadata = new HashMap<>();
+      if (this.metadata == null || this.metadata instanceof EmptyParam) {
+        this.metadata = new HashMap<String, String>();
       }
-      this.metadata.putAll(map);
+      ((Map<String, String>) this.metadata).putAll(map);
+      return this;
+    }
+
+    /**
+     * Set of key-value pairs that you can attach to an object. This can be useful for storing
+     * additional information about the object in a structured format. Individual keys can be unset
+     * by posting an empty value to them. All keys can be unset by posting an empty value to {@code
+     * metadata}.
+     */
+    public Builder setMetadata(EmptyParam metadata) {
+      this.metadata = metadata;
+      return this;
+    }
+
+    /**
+     * Set of key-value pairs that you can attach to an object. This can be useful for storing
+     * additional information about the object in a structured format. Individual keys can be unset
+     * by posting an empty value to them. All keys can be unset by posting an empty value to {@code
+     * metadata}.
+     */
+    public Builder setMetadata(Map<String, String> metadata) {
+      this.metadata = metadata;
       return this;
     }
 
@@ -1745,7 +1769,7 @@ public class AccountCreateParams extends ApiRequestParams {
      * metadata}.
      */
     @SerializedName("metadata")
-    Map<String, String> metadata;
+    Object metadata;
 
     /** The individual's phone number. */
     @SerializedName("phone")
@@ -1775,7 +1799,7 @@ public class AccountCreateParams extends ApiRequestParams {
         String lastNameKana,
         String lastNameKanji,
         String maidenName,
-        Map<String, String> metadata,
+        Object metadata,
         String phone,
         String ssnLast4,
         Verification verification) {
@@ -1835,7 +1859,7 @@ public class AccountCreateParams extends ApiRequestParams {
 
       private String maidenName;
 
-      private Map<String, String> metadata;
+      private Object metadata;
 
       private String phone;
 
@@ -1997,11 +2021,12 @@ public class AccountCreateParams extends ApiRequestParams {
        * call, and subsequent calls add additional key/value pairs to the original map. See {@link
        * AccountCreateParams.Individual#metadata} for the field documentation.
        */
+      @SuppressWarnings("unchecked")
       public Builder putMetadata(String key, String value) {
-        if (this.metadata == null) {
-          this.metadata = new HashMap<>();
+        if (this.metadata == null || this.metadata instanceof EmptyParam) {
+          this.metadata = new HashMap<String, String>();
         }
-        this.metadata.put(key, value);
+        ((Map<String, String>) this.metadata).put(key, value);
         return this;
       }
 
@@ -2010,11 +2035,34 @@ public class AccountCreateParams extends ApiRequestParams {
        * `put/putAll` call, and subsequent calls add additional key/value pairs to the original map.
        * See {@link AccountCreateParams.Individual#metadata} for the field documentation.
        */
+      @SuppressWarnings("unchecked")
       public Builder putAllMetadata(Map<String, String> map) {
-        if (this.metadata == null) {
-          this.metadata = new HashMap<>();
+        if (this.metadata == null || this.metadata instanceof EmptyParam) {
+          this.metadata = new HashMap<String, String>();
         }
-        this.metadata.putAll(map);
+        ((Map<String, String>) this.metadata).putAll(map);
+        return this;
+      }
+
+      /**
+       * Set of key-value pairs that you can attach to an object. This can be useful for storing
+       * additional information about the object in a structured format. Individual keys can be
+       * unset by posting an empty value to them. All keys can be unset by posting an empty value to
+       * {@code metadata}.
+       */
+      public Builder setMetadata(EmptyParam metadata) {
+        this.metadata = metadata;
+        return this;
+      }
+
+      /**
+       * Set of key-value pairs that you can attach to an object. This can be useful for storing
+       * additional information about the object in a structured format. Individual keys can be
+       * unset by posting an empty value to them. All keys can be unset by posting an empty value to
+       * {@code metadata}.
+       */
+      public Builder setMetadata(Map<String, String> metadata) {
+        this.metadata = metadata;
         return this;
       }
 

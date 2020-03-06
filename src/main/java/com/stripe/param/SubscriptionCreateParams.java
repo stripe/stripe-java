@@ -137,7 +137,7 @@ public class SubscriptionCreateParams extends ApiRequestParams {
    * metadata}.
    */
   @SerializedName("metadata")
-  Map<String, String> metadata;
+  Object metadata;
 
   /** Indicates if a customer is on or off-session while an invoice payment is attempted. */
   @SerializedName("off_session")
@@ -256,7 +256,7 @@ public class SubscriptionCreateParams extends ApiRequestParams {
       List<String> expand,
       Map<String, Object> extraParams,
       List<Item> items,
-      Map<String, String> metadata,
+      Object metadata,
       Boolean offSession,
       PaymentBehavior paymentBehavior,
       Object pendingInvoiceItemInterval,
@@ -333,7 +333,7 @@ public class SubscriptionCreateParams extends ApiRequestParams {
 
     private List<Item> items;
 
-    private Map<String, String> metadata;
+    private Object metadata;
 
     private Boolean offSession;
 
@@ -644,11 +644,12 @@ public class SubscriptionCreateParams extends ApiRequestParams {
      * and subsequent calls add additional key/value pairs to the original map. See {@link
      * SubscriptionCreateParams#metadata} for the field documentation.
      */
+    @SuppressWarnings("unchecked")
     public Builder putMetadata(String key, String value) {
-      if (this.metadata == null) {
-        this.metadata = new HashMap<>();
+      if (this.metadata == null || this.metadata instanceof EmptyParam) {
+        this.metadata = new HashMap<String, String>();
       }
-      this.metadata.put(key, value);
+      ((Map<String, String>) this.metadata).put(key, value);
       return this;
     }
 
@@ -657,11 +658,34 @@ public class SubscriptionCreateParams extends ApiRequestParams {
      * `put/putAll` call, and subsequent calls add additional key/value pairs to the original map.
      * See {@link SubscriptionCreateParams#metadata} for the field documentation.
      */
+    @SuppressWarnings("unchecked")
     public Builder putAllMetadata(Map<String, String> map) {
-      if (this.metadata == null) {
-        this.metadata = new HashMap<>();
+      if (this.metadata == null || this.metadata instanceof EmptyParam) {
+        this.metadata = new HashMap<String, String>();
       }
-      this.metadata.putAll(map);
+      ((Map<String, String>) this.metadata).putAll(map);
+      return this;
+    }
+
+    /**
+     * Set of key-value pairs that you can attach to an object. This can be useful for storing
+     * additional information about the object in a structured format. Individual keys can be unset
+     * by posting an empty value to them. All keys can be unset by posting an empty value to {@code
+     * metadata}.
+     */
+    public Builder setMetadata(EmptyParam metadata) {
+      this.metadata = metadata;
+      return this;
+    }
+
+    /**
+     * Set of key-value pairs that you can attach to an object. This can be useful for storing
+     * additional information about the object in a structured format. Individual keys can be unset
+     * by posting an empty value to them. All keys can be unset by posting an empty value to {@code
+     * metadata}.
+     */
+    public Builder setMetadata(Map<String, String> metadata) {
+      this.metadata = metadata;
       return this;
     }
 
