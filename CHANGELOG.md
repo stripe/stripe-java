@@ -1,5 +1,8 @@
 # Changelog
 
+## 18.4.0 - 2020-03-05
+* [#981](https://github.com/stripe/stripe-java/pull/981) Make metadata nullable in many methods
+
 ## 18.3.0 - 2020-03-04
 * [#980](https://github.com/stripe/stripe-java/pull/980) Add support for `metadata` on `WebhookEndpoint`
 
