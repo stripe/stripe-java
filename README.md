@@ -223,7 +223,7 @@ The library uses [Project Lombok][lombok]. While it is not a requirement, you
 might want to install a [plugin][lombok-plugins] for your favorite IDE to
 facilitate development.
 
-[api-docs]: https://stripe.com/docs/api/go
+[api-docs]: https://stripe.com/docs/api?lang=java
 [connect-auth]: https://stripe.com/docs/connect/authentication#stripe-account-header
 [functional-tests]: https://github.com/stripe/stripe-java/blob/master/src/test/java/com/stripe/functional/
 [google-java-format]: https://github.com/google/google-java-format
