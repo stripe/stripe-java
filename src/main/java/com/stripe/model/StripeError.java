@@ -60,9 +60,8 @@ public class StripeError extends StripeObject {
    * throughout its lifetime as it interfaces with Stripe.js to perform authentication flows and
    * ultimately creates at most one successful charge.
    *
-   * <p>Related guide: <a
-   * href="https://stripe.com/docs/payments/payment-intents/creating-payment-intents">Payment
-   * Intents API</a>.
+   * <p>Related guide: <a href="https://stripe.com/docs/payments/payment-intents">Payment Intents
+   * API</a>.
    */
   @SerializedName("payment_intent")
   PaymentIntent paymentIntent;
@@ -101,6 +100,9 @@ public class StripeError extends StripeObject {
    *
    * <p>By using SetupIntents, you ensure that your customers experience the minimum set of required
    * friction, even as regulations change over time.
+   *
+   * <p>Related guide: <a href="https://stripe.com/docs/payments/setup-intents">Setup Intents
+   * API</a>.
    */
   @SerializedName("setup_intent")
   SetupIntent setupIntent;
