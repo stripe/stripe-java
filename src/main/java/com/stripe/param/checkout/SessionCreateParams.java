@@ -111,6 +111,12 @@ public class SessionCreateParams extends ApiRequestParams {
   SetupIntentData setupIntentData;
 
   /**
+   * When set, provides configuration for Checkout to collect a shipping address from a customer.
+   */
+  @SerializedName("shipping_address_collection")
+  ShippingAddressCollection shippingAddressCollection;
+
+  /**
    * Describes the type of transaction being performed by Checkout in order to customize relevant
    * text on the page, such as the submit button. {@code submit_type} can only be specified on
    * Checkout Sessions in {@code payment} mode, but not Checkout Sessions in {@code subscription} or
@@ -150,6 +156,7 @@ public class SessionCreateParams extends ApiRequestParams {
       PaymentIntentData paymentIntentData,
       List<PaymentMethodType> paymentMethodTypes,
       SetupIntentData setupIntentData,
+      ShippingAddressCollection shippingAddressCollection,
       SubmitType submitType,
       SubscriptionData subscriptionData,
       String successUrl) {
@@ -167,6 +174,7 @@ public class SessionCreateParams extends ApiRequestParams {
     this.paymentIntentData = paymentIntentData;
     this.paymentMethodTypes = paymentMethodTypes;
     this.setupIntentData = setupIntentData;
+    this.shippingAddressCollection = shippingAddressCollection;
     this.submitType = submitType;
     this.subscriptionData = subscriptionData;
     this.successUrl = successUrl;
@@ -205,6 +213,8 @@ public class SessionCreateParams extends ApiRequestParams {
 
     private SetupIntentData setupIntentData;
 
+    private ShippingAddressCollection shippingAddressCollection;
+
     private SubmitType submitType;
 
     private SubscriptionData subscriptionData;
@@ -228,6 +238,7 @@ public class SessionCreateParams extends ApiRequestParams {
           this.paymentIntentData,
           this.paymentMethodTypes,
           this.setupIntentData,
+          this.shippingAddressCollection,
           this.submitType,
           this.subscriptionData,
           this.successUrl);
@@ -445,6 +456,15 @@ public class SessionCreateParams extends ApiRequestParams {
      */
     public Builder setSetupIntentData(SetupIntentData setupIntentData) {
       this.setupIntentData = setupIntentData;
+      return this;
+    }
+
+    /**
+     * When set, provides configuration for Checkout to collect a shipping address from a customer.
+     */
+    public Builder setShippingAddressCollection(
+        ShippingAddressCollection shippingAddressCollection) {
+      this.shippingAddressCollection = shippingAddressCollection;
       return this;
     }
 
@@ -1559,6 +1579,822 @@ public class SessionCreateParams extends ApiRequestParams {
       public Builder setOnBehalfOf(String onBehalfOf) {
         this.onBehalfOf = onBehalfOf;
         return this;
+      }
+    }
+  }
+
+  @Getter
+  public static class ShippingAddressCollection {
+    /**
+     * An array of two-letter ISO country codes representing which countries Checkout should provide
+     * as options for shipping locations. Unsupported country codes: {@code AS, CX, CC, CU, HM, IR,
+     * KP, MH, FM, NF, MP, PW, SD, SY, UM, VI}.'
+     */
+    @SerializedName("allowed_countries")
+    List<AllowedCountry> allowedCountries;
+
+    /**
+     * Map of extra parameters for custom features not available in this client library. The content
+     * in this map is not serialized under this field's {@code @SerializedName} value. Instead, each
+     * key/value pair is serialized as if the key is a root-level field (serialized) name in this
+     * param object. Effectively, this map is flattened to its parent instance.
+     */
+    @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
+    Map<String, Object> extraParams;
+
+    private ShippingAddressCollection(
+        List<AllowedCountry> allowedCountries, Map<String, Object> extraParams) {
+      this.allowedCountries = allowedCountries;
+      this.extraParams = extraParams;
+    }
+
+    public static Builder builder() {
+      return new Builder();
+    }
+
+    public static class Builder {
+      private List<AllowedCountry> allowedCountries;
+
+      private Map<String, Object> extraParams;
+
+      /** Finalize and obtain parameter instance from this builder. */
+      public ShippingAddressCollection build() {
+        return new ShippingAddressCollection(this.allowedCountries, this.extraParams);
+      }
+
+      /**
+       * Add an element to `allowedCountries` list. A list is initialized for the first `add/addAll`
+       * call, and subsequent calls adds additional elements to the original list. See {@link
+       * SessionCreateParams.ShippingAddressCollection#allowedCountries} for the field
+       * documentation.
+       */
+      public Builder addAllowedCountry(AllowedCountry element) {
+        if (this.allowedCountries == null) {
+          this.allowedCountries = new ArrayList<>();
+        }
+        this.allowedCountries.add(element);
+        return this;
+      }
+
+      /**
+       * Add all elements to `allowedCountries` list. A list is initialized for the first
+       * `add/addAll` call, and subsequent calls adds additional elements to the original list. See
+       * {@link SessionCreateParams.ShippingAddressCollection#allowedCountries} for the field
+       * documentation.
+       */
+      public Builder addAllAllowedCountry(List<AllowedCountry> elements) {
+        if (this.allowedCountries == null) {
+          this.allowedCountries = new ArrayList<>();
+        }
+        this.allowedCountries.addAll(elements);
+        return this;
+      }
+
+      /**
+       * Add a key/value pair to `extraParams` map. A map is initialized for the first `put/putAll`
+       * call, and subsequent calls add additional key/value pairs to the original map. See {@link
+       * SessionCreateParams.ShippingAddressCollection#extraParams} for the field documentation.
+       */
+      public Builder putExtraParam(String key, Object value) {
+        if (this.extraParams == null) {
+          this.extraParams = new HashMap<>();
+        }
+        this.extraParams.put(key, value);
+        return this;
+      }
+
+      /**
+       * Add all map key/value pairs to `extraParams` map. A map is initialized for the first
+       * `put/putAll` call, and subsequent calls add additional key/value pairs to the original map.
+       * See {@link SessionCreateParams.ShippingAddressCollection#extraParams} for the field
+       * documentation.
+       */
+      public Builder putAllExtraParam(Map<String, Object> map) {
+        if (this.extraParams == null) {
+          this.extraParams = new HashMap<>();
+        }
+        this.extraParams.putAll(map);
+        return this;
+      }
+    }
+
+    public enum AllowedCountry implements ApiRequestParams.EnumParam {
+      @SerializedName("AC")
+      AC("AC"),
+
+      @SerializedName("AD")
+      AD("AD"),
+
+      @SerializedName("AE")
+      AE("AE"),
+
+      @SerializedName("AF")
+      AF("AF"),
+
+      @SerializedName("AG")
+      AG("AG"),
+
+      @SerializedName("AI")
+      AI("AI"),
+
+      @SerializedName("AL")
+      AL("AL"),
+
+      @SerializedName("AM")
+      AM("AM"),
+
+      @SerializedName("AO")
+      AO("AO"),
+
+      @SerializedName("AQ")
+      AQ("AQ"),
+
+      @SerializedName("AR")
+      AR("AR"),
+
+      @SerializedName("AT")
+      AT("AT"),
+
+      @SerializedName("AU")
+      AU("AU"),
+
+      @SerializedName("AW")
+      AW("AW"),
+
+      @SerializedName("AX")
+      AX("AX"),
+
+      @SerializedName("AZ")
+      AZ("AZ"),
+
+      @SerializedName("BA")
+      BA("BA"),
+
+      @SerializedName("BB")
+      BB("BB"),
+
+      @SerializedName("BD")
+      BD("BD"),
+
+      @SerializedName("BE")
+      BE("BE"),
+
+      @SerializedName("BF")
+      BF("BF"),
+
+      @SerializedName("BG")
+      BG("BG"),
+
+      @SerializedName("BH")
+      BH("BH"),
+
+      @SerializedName("BI")
+      BI("BI"),
+
+      @SerializedName("BJ")
+      BJ("BJ"),
+
+      @SerializedName("BL")
+      BL("BL"),
+
+      @SerializedName("BM")
+      BM("BM"),
+
+      @SerializedName("BN")
+      BN("BN"),
+
+      @SerializedName("BO")
+      BO("BO"),
+
+      @SerializedName("BQ")
+      BQ("BQ"),
+
+      @SerializedName("BR")
+      BR("BR"),
+
+      @SerializedName("BS")
+      BS("BS"),
+
+      @SerializedName("BT")
+      BT("BT"),
+
+      @SerializedName("BV")
+      BV("BV"),
+
+      @SerializedName("BW")
+      BW("BW"),
+
+      @SerializedName("BY")
+      BY("BY"),
+
+      @SerializedName("BZ")
+      BZ("BZ"),
+
+      @SerializedName("CA")
+      CA("CA"),
+
+      @SerializedName("CD")
+      CD("CD"),
+
+      @SerializedName("CF")
+      CF("CF"),
+
+      @SerializedName("CG")
+      CG("CG"),
+
+      @SerializedName("CH")
+      CH("CH"),
+
+      @SerializedName("CI")
+      CI("CI"),
+
+      @SerializedName("CK")
+      CK("CK"),
+
+      @SerializedName("CL")
+      CL("CL"),
+
+      @SerializedName("CM")
+      CM("CM"),
+
+      @SerializedName("CN")
+      CN("CN"),
+
+      @SerializedName("CO")
+      CO("CO"),
+
+      @SerializedName("CR")
+      CR("CR"),
+
+      @SerializedName("CV")
+      CV("CV"),
+
+      @SerializedName("CW")
+      CW("CW"),
+
+      @SerializedName("CY")
+      CY("CY"),
+
+      @SerializedName("CZ")
+      CZ("CZ"),
+
+      @SerializedName("DE")
+      DE("DE"),
+
+      @SerializedName("DJ")
+      DJ("DJ"),
+
+      @SerializedName("DK")
+      DK("DK"),
+
+      @SerializedName("DM")
+      DM("DM"),
+
+      @SerializedName("DO")
+      DO("DO"),
+
+      @SerializedName("DZ")
+      DZ("DZ"),
+
+      @SerializedName("EC")
+      EC("EC"),
+
+      @SerializedName("EE")
+      EE("EE"),
+
+      @SerializedName("EG")
+      EG("EG"),
+
+      @SerializedName("EH")
+      EH("EH"),
+
+      @SerializedName("ER")
+      ER("ER"),
+
+      @SerializedName("ES")
+      ES("ES"),
+
+      @SerializedName("ET")
+      ET("ET"),
+
+      @SerializedName("FI")
+      FI("FI"),
+
+      @SerializedName("FJ")
+      FJ("FJ"),
+
+      @SerializedName("FK")
+      FK("FK"),
+
+      @SerializedName("FO")
+      FO("FO"),
+
+      @SerializedName("FR")
+      FR("FR"),
+
+      @SerializedName("GA")
+      GA("GA"),
+
+      @SerializedName("GB")
+      GB("GB"),
+
+      @SerializedName("GD")
+      GD("GD"),
+
+      @SerializedName("GE")
+      GE("GE"),
+
+      @SerializedName("GF")
+      GF("GF"),
+
+      @SerializedName("GG")
+      GG("GG"),
+
+      @SerializedName("GH")
+      GH("GH"),
+
+      @SerializedName("GI")
+      GI("GI"),
+
+      @SerializedName("GL")
+      GL("GL"),
+
+      @SerializedName("GM")
+      GM("GM"),
+
+      @SerializedName("GN")
+      GN("GN"),
+
+      @SerializedName("GP")
+      GP("GP"),
+
+      @SerializedName("GQ")
+      GQ("GQ"),
+
+      @SerializedName("GR")
+      GR("GR"),
+
+      @SerializedName("GS")
+      GS("GS"),
+
+      @SerializedName("GT")
+      GT("GT"),
+
+      @SerializedName("GU")
+      GU("GU"),
+
+      @SerializedName("GW")
+      GW("GW"),
+
+      @SerializedName("GY")
+      GY("GY"),
+
+      @SerializedName("HK")
+      HK("HK"),
+
+      @SerializedName("HN")
+      HN("HN"),
+
+      @SerializedName("HR")
+      HR("HR"),
+
+      @SerializedName("HT")
+      HT("HT"),
+
+      @SerializedName("HU")
+      HU("HU"),
+
+      @SerializedName("ID")
+      ID("ID"),
+
+      @SerializedName("IE")
+      IE("IE"),
+
+      @SerializedName("IL")
+      IL("IL"),
+
+      @SerializedName("IM")
+      IM("IM"),
+
+      @SerializedName("IN")
+      IN("IN"),
+
+      @SerializedName("IO")
+      IO("IO"),
+
+      @SerializedName("IQ")
+      IQ("IQ"),
+
+      @SerializedName("IS")
+      IS("IS"),
+
+      @SerializedName("IT")
+      IT("IT"),
+
+      @SerializedName("JE")
+      JE("JE"),
+
+      @SerializedName("JM")
+      JM("JM"),
+
+      @SerializedName("JO")
+      JO("JO"),
+
+      @SerializedName("JP")
+      JP("JP"),
+
+      @SerializedName("KE")
+      KE("KE"),
+
+      @SerializedName("KG")
+      KG("KG"),
+
+      @SerializedName("KH")
+      KH("KH"),
+
+      @SerializedName("KI")
+      KI("KI"),
+
+      @SerializedName("KM")
+      KM("KM"),
+
+      @SerializedName("KN")
+      KN("KN"),
+
+      @SerializedName("KR")
+      KR("KR"),
+
+      @SerializedName("KW")
+      KW("KW"),
+
+      @SerializedName("KY")
+      KY("KY"),
+
+      @SerializedName("KZ")
+      KZ("KZ"),
+
+      @SerializedName("LA")
+      LA("LA"),
+
+      @SerializedName("LB")
+      LB("LB"),
+
+      @SerializedName("LC")
+      LC("LC"),
+
+      @SerializedName("LI")
+      LI("LI"),
+
+      @SerializedName("LK")
+      LK("LK"),
+
+      @SerializedName("LR")
+      LR("LR"),
+
+      @SerializedName("LS")
+      LS("LS"),
+
+      @SerializedName("LT")
+      LT("LT"),
+
+      @SerializedName("LU")
+      LU("LU"),
+
+      @SerializedName("LV")
+      LV("LV"),
+
+      @SerializedName("LY")
+      LY("LY"),
+
+      @SerializedName("MA")
+      MA("MA"),
+
+      @SerializedName("MC")
+      MC("MC"),
+
+      @SerializedName("MD")
+      MD("MD"),
+
+      @SerializedName("ME")
+      ME("ME"),
+
+      @SerializedName("MF")
+      MF("MF"),
+
+      @SerializedName("MG")
+      MG("MG"),
+
+      @SerializedName("MK")
+      MK("MK"),
+
+      @SerializedName("ML")
+      ML("ML"),
+
+      @SerializedName("MM")
+      MM("MM"),
+
+      @SerializedName("MN")
+      MN("MN"),
+
+      @SerializedName("MO")
+      MO("MO"),
+
+      @SerializedName("MQ")
+      MQ("MQ"),
+
+      @SerializedName("MR")
+      MR("MR"),
+
+      @SerializedName("MS")
+      MS("MS"),
+
+      @SerializedName("MT")
+      MT("MT"),
+
+      @SerializedName("MU")
+      MU("MU"),
+
+      @SerializedName("MV")
+      MV("MV"),
+
+      @SerializedName("MW")
+      MW("MW"),
+
+      @SerializedName("MX")
+      MX("MX"),
+
+      @SerializedName("MY")
+      MY("MY"),
+
+      @SerializedName("MZ")
+      MZ("MZ"),
+
+      @SerializedName("NA")
+      NA("NA"),
+
+      @SerializedName("NC")
+      NC("NC"),
+
+      @SerializedName("NE")
+      NE("NE"),
+
+      @SerializedName("NG")
+      NG("NG"),
+
+      @SerializedName("NI")
+      NI("NI"),
+
+      @SerializedName("NL")
+      NL("NL"),
+
+      @SerializedName("NO")
+      NO("NO"),
+
+      @SerializedName("NP")
+      NP("NP"),
+
+      @SerializedName("NR")
+      NR("NR"),
+
+      @SerializedName("NU")
+      NU("NU"),
+
+      @SerializedName("NZ")
+      NZ("NZ"),
+
+      @SerializedName("OM")
+      OM("OM"),
+
+      @SerializedName("PA")
+      PA("PA"),
+
+      @SerializedName("PE")
+      PE("PE"),
+
+      @SerializedName("PF")
+      PF("PF"),
+
+      @SerializedName("PG")
+      PG("PG"),
+
+      @SerializedName("PH")
+      PH("PH"),
+
+      @SerializedName("PK")
+      PK("PK"),
+
+      @SerializedName("PL")
+      PL("PL"),
+
+      @SerializedName("PM")
+      PM("PM"),
+
+      @SerializedName("PN")
+      PN("PN"),
+
+      @SerializedName("PR")
+      PR("PR"),
+
+      @SerializedName("PS")
+      PS("PS"),
+
+      @SerializedName("PT")
+      PT("PT"),
+
+      @SerializedName("PY")
+      PY("PY"),
+
+      @SerializedName("QA")
+      QA("QA"),
+
+      @SerializedName("RE")
+      RE("RE"),
+
+      @SerializedName("RO")
+      RO("RO"),
+
+      @SerializedName("RS")
+      RS("RS"),
+
+      @SerializedName("RU")
+      RU("RU"),
+
+      @SerializedName("RW")
+      RW("RW"),
+
+      @SerializedName("SA")
+      SA("SA"),
+
+      @SerializedName("SB")
+      SB("SB"),
+
+      @SerializedName("SC")
+      SC("SC"),
+
+      @SerializedName("SE")
+      SE("SE"),
+
+      @SerializedName("SG")
+      SG("SG"),
+
+      @SerializedName("SH")
+      SH("SH"),
+
+      @SerializedName("SI")
+      SI("SI"),
+
+      @SerializedName("SJ")
+      SJ("SJ"),
+
+      @SerializedName("SK")
+      SK("SK"),
+
+      @SerializedName("SL")
+      SL("SL"),
+
+      @SerializedName("SM")
+      SM("SM"),
+
+      @SerializedName("SN")
+      SN("SN"),
+
+      @SerializedName("SO")
+      SO("SO"),
+
+      @SerializedName("SR")
+      SR("SR"),
+
+      @SerializedName("SS")
+      SS("SS"),
+
+      @SerializedName("ST")
+      ST("ST"),
+
+      @SerializedName("SV")
+      SV("SV"),
+
+      @SerializedName("SX")
+      SX("SX"),
+
+      @SerializedName("SZ")
+      SZ("SZ"),
+
+      @SerializedName("TA")
+      TA("TA"),
+
+      @SerializedName("TC")
+      TC("TC"),
+
+      @SerializedName("TD")
+      TD("TD"),
+
+      @SerializedName("TF")
+      TF("TF"),
+
+      @SerializedName("TG")
+      TG("TG"),
+
+      @SerializedName("TH")
+      TH("TH"),
+
+      @SerializedName("TJ")
+      TJ("TJ"),
+
+      @SerializedName("TK")
+      TK("TK"),
+
+      @SerializedName("TL")
+      TL("TL"),
+
+      @SerializedName("TM")
+      TM("TM"),
+
+      @SerializedName("TN")
+      TN("TN"),
+
+      @SerializedName("TO")
+      TO("TO"),
+
+      @SerializedName("TR")
+      TR("TR"),
+
+      @SerializedName("TT")
+      TT("TT"),
+
+      @SerializedName("TV")
+      TV("TV"),
+
+      @SerializedName("TW")
+      TW("TW"),
+
+      @SerializedName("TZ")
+      TZ("TZ"),
+
+      @SerializedName("UA")
+      UA("UA"),
+
+      @SerializedName("UG")
+      UG("UG"),
+
+      @SerializedName("US")
+      US("US"),
+
+      @SerializedName("UY")
+      UY("UY"),
+
+      @SerializedName("UZ")
+      UZ("UZ"),
+
+      @SerializedName("VA")
+      VA("VA"),
+
+      @SerializedName("VC")
+      VC("VC"),
+
+      @SerializedName("VE")
+      VE("VE"),
+
+      @SerializedName("VG")
+      VG("VG"),
+
+      @SerializedName("VN")
+      VN("VN"),
+
+      @SerializedName("VU")
+      VU("VU"),
+
+      @SerializedName("WF")
+      WF("WF"),
+
+      @SerializedName("WS")
+      WS("WS"),
+
+      @SerializedName("XK")
+      XK("XK"),
+
+      @SerializedName("YE")
+      YE("YE"),
+
+      @SerializedName("YT")
+      YT("YT"),
+
+      @SerializedName("ZA")
+      ZA("ZA"),
+
+      @SerializedName("ZM")
+      ZM("ZM"),
+
+      @SerializedName("ZW")
+      ZW("ZW"),
+
+      @SerializedName("ZZ")
+      ZZ("ZZ");
+
+      @Getter(onMethod_ = {@Override})
+      private final String value;
+
+      AllowedCountry(String value) {
+        this.value = value;
       }
     }
   }
