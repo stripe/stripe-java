@@ -10,11 +10,11 @@ import lombok.Getter;
 
 @Getter
 public class DisputeListParams extends ApiRequestParams {
-  /** Only return issuing disputes that were created during the given date interval. */
+  /** Select issuing disputes that were created during the given date interval. */
   @SerializedName("created")
   Object created;
 
-  /** Only return issuing disputes for the given transaction. */
+  /** Select the issuing dispute for the given transaction. */
   @SerializedName("disputed_transaction")
   String disputedTransaction;
 
@@ -104,19 +104,19 @@ public class DisputeListParams extends ApiRequestParams {
           this.startingAfter);
     }
 
-    /** Only return issuing disputes that were created during the given date interval. */
+    /** Select issuing disputes that were created during the given date interval. */
     public Builder setCreated(Created created) {
       this.created = created;
       return this;
     }
 
-    /** Only return issuing disputes that were created during the given date interval. */
+    /** Select issuing disputes that were created during the given date interval. */
     public Builder setCreated(Long created) {
       this.created = created;
       return this;
     }
 
-    /** Only return issuing disputes for the given transaction. */
+    /** Select the issuing dispute for the given transaction. */
     public Builder setDisputedTransaction(String disputedTransaction) {
       this.disputedTransaction = disputedTransaction;
       return this;

@@ -494,6 +494,19 @@ public class Authorization extends ApiResource
   @Getter
   @Setter
   @EqualsAndHashCode(callSuper = false)
+  public static class ThreeDSecure extends StripeObject {
+    /**
+     * The outcome of the 3D Secure authentication request.
+     *
+     * <p>One of {@code attempt_acknowledged}, {@code authenticated}, or {@code failed}.
+     */
+    @SerializedName("result")
+    String result;
+  }
+
+  @Getter
+  @Setter
+  @EqualsAndHashCode(callSuper = false)
   public static class VerificationData extends StripeObject {
     /**
      * Whether the cardholder provided an address first line and if it matched the cardholder’s
@@ -514,7 +527,7 @@ public class Authorization extends ApiResource
     String addressZipCheck;
 
     /**
-     * Whether 3DS authentication was performed.
+     * [DEPRECATED] Whether 3DS authentication was performed.
      *
      * <p>One of {@code failure}, {@code none}, or {@code success}.
      */
@@ -536,5 +549,9 @@ public class Authorization extends ApiResource
      */
     @SerializedName("expiry_check")
     String expiryCheck;
+
+    /** 3D Secure details on this authorization. */
+    @SerializedName("three_d_secure")
+    ThreeDSecure threeDSecure;
   }
 }
