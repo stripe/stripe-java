@@ -1,5 +1,8 @@
 # Changelog
 
+## 18.6.0 - 2020-03-12
+* [#985](https://github.com/stripe/stripe-java/pull/985) Add support for `shipping` and `shipping_address_collection` on Checkout `Session`
+
 ## 18.5.0 - 2020-03-12
 * [#984](https://github.com/stripe/stripe-java/pull/984) Add support for `ThreeDSecure` on Issuing `Authorization`
 
