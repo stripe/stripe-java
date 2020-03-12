@@ -9,6 +9,7 @@ import com.stripe.model.HasId;
 import com.stripe.model.PaymentIntent;
 import com.stripe.model.Plan;
 import com.stripe.model.SetupIntent;
+import com.stripe.model.ShippingDetails;
 import com.stripe.model.Sku;
 import com.stripe.model.StripeObject;
 import com.stripe.model.Subscription;
@@ -133,6 +134,16 @@ public class Session extends ApiResource implements HasId {
   @Getter(lombok.AccessLevel.NONE)
   @Setter(lombok.AccessLevel.NONE)
   ExpandableField<SetupIntent> setupIntent;
+
+  /** Shipping information for this Checkout Session. */
+  @SerializedName("shipping")
+  ShippingDetails shipping;
+
+  /**
+   * When set, provides configuration for Checkout to collect a shipping address from a customer.
+   */
+  @SerializedName("shipping_address_collection")
+  ShippingAddressCollection shippingAddressCollection;
 
   /**
    * Describes the type of transaction being performed by Checkout in order to customize relevant
@@ -381,5 +392,18 @@ public class Session extends ApiResource implements HasId {
       @SerializedName("name")
       String name;
     }
+  }
+
+  @Getter
+  @Setter
+  @EqualsAndHashCode(callSuper = false)
+  public static class ShippingAddressCollection extends StripeObject {
+    /**
+     * An array of two-letter ISO country codes representing which countries Checkout should provide
+     * as options for shipping locations. Unsupported country codes: {@code AS, CX, CC, CU, HM, IR,
+     * KP, MH, FM, NF, MP, PW, SD, SY, UM, VI}.
+     */
+    @SerializedName("allowed_countries")
+    List<String> allowedCountries;
   }
 }
