@@ -57,7 +57,7 @@ public class Cardholder extends ApiResource implements HasId, MetadataStore<Card
   @SerializedName("individual")
   Individual individual;
 
-  /** Whether or not this cardholder is the default cardholder. */
+  /** [DEPRECATED] Whether or not this cardholder is the default cardholder. */
   @SerializedName("is_default")
   Boolean isDefault;
 

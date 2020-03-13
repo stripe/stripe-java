@@ -40,7 +40,7 @@ public class CardholderListParams extends ApiRequestParams {
   @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
   Map<String, Object> extraParams;
 
-  /** Only return the default cardholder. */
+  /** [DEPRECATED] Only return the default cardholder. */
   @SerializedName("is_default")
   Boolean isDefault;
 
@@ -227,7 +227,7 @@ public class CardholderListParams extends ApiRequestParams {
       return this;
     }
 
-    /** Only return the default cardholder. */
+    /** [DEPRECATED] Only return the default cardholder. */
     public Builder setIsDefault(Boolean isDefault) {
       this.isDefault = isDefault;
       return this;

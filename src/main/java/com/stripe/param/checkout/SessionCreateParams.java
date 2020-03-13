@@ -1588,7 +1588,7 @@ public class SessionCreateParams extends ApiRequestParams {
     /**
      * An array of two-letter ISO country codes representing which countries Checkout should provide
      * as options for shipping locations. Unsupported country codes: {@code AS, CX, CC, CU, HM, IR,
-     * KP, MH, FM, NF, MP, PW, SD, SY, UM, VI}.'
+     * KP, MH, FM, NF, MP, PW, SD, SY, UM, VI}.
      */
     @SerializedName("allowed_countries")
     List<AllowedCountry> allowedCountries;

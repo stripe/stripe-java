@@ -47,7 +47,7 @@ public class CardholderCreateParams extends ApiRequestParams {
   @SerializedName("individual")
   Individual individual;
 
-  /** Specifies whether to set this as the default cardholder. */
+  /** [DEPRECATED] Specifies whether to set this as the default cardholder. */
   @SerializedName("is_default")
   Boolean isDefault;
 
@@ -247,7 +247,7 @@ public class CardholderCreateParams extends ApiRequestParams {
       return this;
     }
 
-    /** Specifies whether to set this as the default cardholder. */
+    /** [DEPRECATED] Specifies whether to set this as the default cardholder. */
     public Builder setIsDefault(Boolean isDefault) {
       this.isDefault = isDefault;
       return this;

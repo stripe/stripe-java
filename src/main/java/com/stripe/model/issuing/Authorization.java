@@ -178,6 +178,13 @@ public class Authorization extends ApiResource
    * What, if any, digital wallet was used for this authorization. One of {@code apple_pay}, {@code
    * google_pay}, or {@code samsung_pay}.
    */
+  @SerializedName("wallet")
+  String wallet;
+
+  /**
+   * [DEPRECATED] What, if any, digital wallet was used for this authorization. One of {@code
+   * apple_pay}, {@code google_pay}, or {@code samsung_pay}.
+   */
   @SerializedName("wallet_provider")
   String walletProvider;
 
@@ -518,7 +525,16 @@ public class Authorization extends ApiResource
     String addressLine1Check;
 
     /**
-     * Whether the cardholder provided a zip (or postal code) and if it matched the cardholder’s
+     * Whether the cardholder provided a postal code and if it matched the cardholder’s {@code
+     * billing.address.postal_code}.
+     *
+     * <p>One of {@code match}, {@code mismatch}, or {@code not_provided}.
+     */
+    @SerializedName("address_postal_code_check")
+    String addressPostalCodeCheck;
+
+    /**
+     * [DEPRECATED] Whether the cardholder provided a postal code and if it matched the cardholder’s
      * {@code billing.address.postal_code}.
      *
      * <p>One of {@code match}, {@code mismatch}, or {@code not_provided}.
