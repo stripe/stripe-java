@@ -425,7 +425,15 @@ public class Card extends ApiResource implements HasId, MetadataStore<Card> {
     String name;
 
     /**
-     * Shipment speed.
+     * Shipment service, such as standard or overnight.
+     *
+     * <p>One of {@code express}, {@code overnight}, or {@code standard}.
+     */
+    @SerializedName("service")
+    String service;
+
+    /**
+     * [DEPRECATED] Shipment service, such as standard or overnight.
      *
      * <p>One of {@code express}, {@code overnight}, or {@code standard}.
      */

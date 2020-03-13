@@ -3324,7 +3324,11 @@ public class CardCreateParams extends ApiRequestParams {
     @SerializedName("name")
     String name;
 
-    /** Shipment speed. */
+    /** Shipment service. */
+    @SerializedName("service")
+    Service service;
+
+    /** [DEPRECATED] Shipment service. */
     @SerializedName("speed")
     Speed speed;
 
@@ -3333,10 +3337,16 @@ public class CardCreateParams extends ApiRequestParams {
     Type type;
 
     private Shipping(
-        Address address, Map<String, Object> extraParams, String name, Speed speed, Type type) {
+        Address address,
+        Map<String, Object> extraParams,
+        String name,
+        Service service,
+        Speed speed,
+        Type type) {
       this.address = address;
       this.extraParams = extraParams;
       this.name = name;
+      this.service = service;
       this.speed = speed;
       this.type = type;
     }
@@ -3352,13 +3362,16 @@ public class CardCreateParams extends ApiRequestParams {
 
       private String name;
 
+      private Service service;
+
       private Speed speed;
 
       private Type type;
 
       /** Finalize and obtain parameter instance from this builder. */
       public Shipping build() {
-        return new Shipping(this.address, this.extraParams, this.name, this.speed, this.type);
+        return new Shipping(
+            this.address, this.extraParams, this.name, this.service, this.speed, this.type);
       }
 
       /** The address that the card is shipped to. */
@@ -3399,7 +3412,13 @@ public class CardCreateParams extends ApiRequestParams {
         return this;
       }
 
-      /** Shipment speed. */
+      /** Shipment service. */
+      public Builder setService(Service service) {
+        this.service = service;
+        return this;
+      }
+
+      /** [DEPRECATED] Shipment service. */
       public Builder setSpeed(Speed speed) {
         this.speed = speed;
         return this;
@@ -3564,6 +3583,24 @@ public class CardCreateParams extends ApiRequestParams {
           this.state = state;
           return this;
         }
+      }
+    }
+
+    public enum Service implements ApiRequestParams.EnumParam {
+      @SerializedName("express")
+      EXPRESS("express"),
+
+      @SerializedName("overnight")
+      OVERNIGHT("overnight"),
+
+      @SerializedName("standard")
+      STANDARD("standard");
+
+      @Getter(onMethod_ = {@Override})
+      private final String value;
+
+      Service(String value) {
+        this.value = value;
       }
     }
 
