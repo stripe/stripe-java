@@ -1,5 +1,11 @@
 # Changelog
 
+## 18.7.0 - 2020-03-13
+* [#986](https://github.com/stripe/stripe-java/pull/986) Multiple API changes for Issuing:
+  * Rename `speed` to `service` on Issuing `Card`
+  * Rename `wallet_provider` to `wallet` and `address_zip_check` to `address_postal_code_check` on Issuing `Authorization`
+  * Mark `is_default` as deprecated on Issuing `Cardholder`
+
 ## 18.6.0 - 2020-03-12
 * [#985](https://github.com/stripe/stripe-java/pull/985) Add support for `shipping` and `shipping_address_collection` on Checkout `Session`
 
