@@ -21,8 +21,8 @@ public class SetupIntentCreateParams extends ApiRequestParams {
   /**
    * ID of the Customer this SetupIntent belongs to, if one exists.
    *
-   * <p>If present, payment methods used with this SetupIntent can only be attached to this
-   * Customer, and payment methods attached to other Customers cannot be used with this SetupIntent.
+   * <p>If present, the SetupIntent's payment method will be attached to the Customer on successful
+   * setup. Payment methods attached to other Customers cannot be used with this SetupIntent.
    */
   @SerializedName("customer")
   String customer;
@@ -200,8 +200,8 @@ public class SetupIntentCreateParams extends ApiRequestParams {
     /**
      * ID of the Customer this SetupIntent belongs to, if one exists.
      *
-     * <p>If present, payment methods used with this SetupIntent can only be attached to this
-     * Customer, and payment methods attached to other Customers cannot be used with this
+     * <p>If present, the SetupIntent's payment method will be attached to the Customer on
+     * successful setup. Payment methods attached to other Customers cannot be used with this
      * SetupIntent.
      */
     public Builder setCustomer(String customer) {
@@ -941,8 +941,8 @@ public class SetupIntentCreateParams extends ApiRequestParams {
   @Getter
   public static class SingleUse {
     /**
-     * Amount intended to be collected by this PaymentIntent. A positive integer representing how
-     * much to charge in the <a href="https://stripe.com/docs/currencies#zero-decimal">smallest
+     * Amount the customer is granting permission to collect later. A positive integer representing
+     * how much to charge in the <a href="https://stripe.com/docs/currencies#zero-decimal">smallest
      * currency unit</a> (e.g., 100 cents to charge $1.00 or 100 to charge ¥100, a zero-decimal
      * currency). The minimum amount is $0.50 US or <a
      * href="https://stripe.com/docs/currencies#minimum-and-maximum-charge-amounts">equivalent in
@@ -992,10 +992,11 @@ public class SetupIntentCreateParams extends ApiRequestParams {
       }
 
       /**
-       * Amount intended to be collected by this PaymentIntent. A positive integer representing how
-       * much to charge in the <a href="https://stripe.com/docs/currencies#zero-decimal">smallest
-       * currency unit</a> (e.g., 100 cents to charge $1.00 or 100 to charge ¥100, a zero-decimal
-       * currency). The minimum amount is $0.50 US or <a
+       * Amount the customer is granting permission to collect later. A positive integer
+       * representing how much to charge in the <a
+       * href="https://stripe.com/docs/currencies#zero-decimal">smallest currency unit</a> (e.g.,
+       * 100 cents to charge $1.00 or 100 to charge ¥100, a zero-decimal currency). The minimum
+       * amount is $0.50 US or <a
        * href="https://stripe.com/docs/currencies#minimum-and-maximum-charge-amounts">equivalent in
        * charge currency</a>. The amount value supports up to eight digits (e.g., a value of
        * 99999999 for a USD charge of $999,999.99).

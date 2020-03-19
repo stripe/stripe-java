@@ -117,9 +117,12 @@ public class PaymentIntent extends ApiResource implements HasId, MetadataStore<P
   /**
    * ID of the Customer this PaymentIntent belongs to, if one exists.
    *
-   * <p>If present, payment methods used with this PaymentIntent can only be attached to this
-   * Customer, and payment methods attached to other Customers cannot be used with this
-   * PaymentIntent.
+   * <p>Payment methods attached to other Customers cannot be used with this PaymentIntent.
+   *
+   * <p>If present in combination with <a
+   * href="https://stripe.com/docs/api#payment_intents/object#payment_intent_object-setup_future_usage">setup_future_usage</a>,
+   * this PaymentIntent's payment method will be attached to the Customer after the PaymentIntent
+   * has been confirmed and any required actions from the user are complete.
    */
   @SerializedName("customer")
   @Getter(lombok.AccessLevel.NONE)
@@ -217,9 +220,11 @@ public class PaymentIntent extends ApiResource implements HasId, MetadataStore<P
   /**
    * Indicates that you intend to make future payments with this PaymentIntent's payment method.
    *
-   * <p>If present, the payment method used with this PaymentIntent can be <a
-   * href="https://stripe.com/docs/api/payment_methods/attach">attached</a> to a Customer, even
-   * after the transaction completes.
+   * <p>Providing this parameter will attach the payment method to the PaymentIntent's Customer, if
+   * present, after the PaymentIntent is confirmed and any required actions from the user are
+   * complete. If no Customer was provided, the payment method can still be <a
+   * href="https://stripe.com/docs/api/payment_methods/attach">attached</a> to a Customer after the
+   * transaction completes.
    *
    * <p>For more, learn to <a href="https://stripe.com/docs/payments/save-during-payment">save card
    * details during payment</a>.

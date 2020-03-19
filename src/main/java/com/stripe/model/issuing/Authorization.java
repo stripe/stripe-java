@@ -26,6 +26,10 @@ import lombok.Setter;
 @EqualsAndHashCode(callSuper = false)
 public class Authorization extends ApiResource
     implements MetadataStore<Authorization>, BalanceTransactionSource {
+  /** The total amount in the card's currency that was authorized or rejected. */
+  @SerializedName("amount")
+  Long amount;
+
   /** Whether the authorization has been approved. */
   @SerializedName("approved")
   Boolean approved;
@@ -76,6 +80,13 @@ public class Authorization extends ApiResource
   Long created;
 
   /**
+   * Three-letter <a href="https://www.iso.org/iso-4217-currency-codes.html">ISO currency code</a>,
+   * in lowercase. Must be a <a href="https://stripe.com/docs/currencies">supported currency</a>.
+   */
+  @SerializedName("currency")
+  String currency;
+
+  /**
    * The amount the authorization is expected to be in {@code held_currency}. When Stripe holds
    * funds from you, this is the amount reserved for the authorization. This will be {@code 0} when
    * the object is created, and increase after it has been approved. For multi-currency
@@ -112,6 +123,18 @@ public class Authorization extends ApiResource
   @SerializedName("livemode")
   Boolean livemode;
 
+  /** The total amount that was authorized or rejected in the local merchant_currency. */
+  @SerializedName("merchant_amount")
+  Long merchantAmount;
+
+  /**
+   * The currency that was presented to the cardholder for the authorization. Three-letter <a
+   * href="https://www.iso.org/iso-4217-currency-codes.html">ISO currency code</a>, in lowercase.
+   * Must be a <a href="https://stripe.com/docs/currencies">supported currency</a>.
+   */
+  @SerializedName("merchant_currency")
+  String merchantCurrency;
+
   @SerializedName("merchant_data")
   MerchantData merchantData;
 
@@ -146,12 +169,19 @@ public class Authorization extends ApiResource
   Long pendingHeldAmount;
 
   /**
+   * The pending authorization request. This field will only be non-null during an {@code
+   * issuing.authorization.request} webhook.
+   */
+  @SerializedName("pending_request")
+  PendingRequest pendingRequest;
+
+  /**
    * History of every time the authorization was approved/denied (whether approved/denied by you
    * directly, or by Stripe based on your authorization_controls). If the merchant changes the
    * authorization by performing an <a
-   * href="https://stripe.com/docs/issuing/authorizations/special_scenarios#incremental-authorizations">incremental
-   * authorization or partial capture</a>, you can look at request_history to see the previous
-   * states of the authorization.
+   * href="https://stripe.com/docs/issuing/purchases/authorizations">incremental authorization or
+   * partial capture</a>, you can look at request_history to see the previous states of the
+   * authorization.
    */
   @SerializedName("request_history")
   List<Authorization.RequestHistory> requestHistory;
@@ -423,7 +453,51 @@ public class Authorization extends ApiResource
   @Getter
   @Setter
   @EqualsAndHashCode(callSuper = false)
+  public static class PendingRequest extends StripeObject {
+    /**
+     * The additional amount Stripe will hold if the authorization is approved, in the <a
+     * href="https://stripe.com/docs/api#issuing_authorization_object-pending-request-currency">currency</a>,
+     * which is always the card's currency.
+     */
+    @SerializedName("amount")
+    Long amount;
+
+    /**
+     * Three-letter <a href="https://www.iso.org/iso-4217-currency-codes.html">ISO currency
+     * code</a>, in lowercase. Must be a <a href="https://stripe.com/docs/currencies">supported
+     * currency</a>.
+     */
+    @SerializedName("currency")
+    String currency;
+
+    /**
+     * If set {@code true}, you may provide <a
+     * href="https://stripe.com/docs/api/issuing/authorizations/approve#approve_issuing_authorization-amount">amount</a>
+     * to control how much to hold for the authorization.
+     */
+    @SerializedName("is_amount_controllable")
+    Boolean isAmountControllable;
+
+    /** The amount the merchant is requesting to be authorized in the {@code merchant_currency}. */
+    @SerializedName("merchant_amount")
+    Long merchantAmount;
+
+    /** The local currency the merchant is requesting to authorize. */
+    @SerializedName("merchant_currency")
+    String merchantCurrency;
+  }
+
+  @Getter
+  @Setter
+  @EqualsAndHashCode(callSuper = false)
   public static class RequestHistory extends StripeObject {
+    /**
+     * The amount of the authorization is your card's currency. Stripe held this amount from your
+     * account to fund the authorization, if the request was approved
+     */
+    @SerializedName("amount")
+    Long amount;
+
     /** Whether this request was approved. */
     @SerializedName("approved")
     Boolean approved;
@@ -445,6 +519,14 @@ public class Authorization extends ApiResource
     Long created;
 
     /**
+     * Three-letter <a href="https://www.iso.org/iso-4217-currency-codes.html">ISO currency
+     * code</a>, in lowercase. Must be a <a href="https://stripe.com/docs/currencies">supported
+     * currency</a>.
+     */
+    @SerializedName("currency")
+    String currency;
+
+    /**
      * The amount Stripe held from your account to fund the authorization, if the request was
      * approved.
      */
@@ -457,6 +539,19 @@ public class Authorization extends ApiResource
      */
     @SerializedName("held_currency")
     String heldCurrency;
+
+    /** The amount that was authorized at the time of this request. */
+    @SerializedName("merchant_amount")
+    Long merchantAmount;
+
+    /**
+     * The currency that was collected by the merchant and presented to the cardholder for the
+     * authorization. Three-letter <a href="https://www.iso.org/iso-4217-currency-codes.html">ISO
+     * currency code</a>, in lowercase. Must be a <a
+     * href="https://stripe.com/docs/currencies">supported currency</a>.
+     */
+    @SerializedName("merchant_currency")
+    String merchantCurrency;
 
     /**
      * The reason for the approval or decline.
