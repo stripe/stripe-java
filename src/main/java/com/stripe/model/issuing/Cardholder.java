@@ -27,7 +27,7 @@ import lombok.Setter;
 public class Cardholder extends ApiResource implements HasId, MetadataStore<Cardholder> {
   /**
    * Spending rules that give you some control over how this cardholder's cards can be used. Refer
-   * to our <a href="https://stripe.com/docs/issuing/authorizations">authorizations</a>
+   * to our <a href="https://stripe.com/docs/issuing/purchases/authorizations">authorizations</a>
    * documentation for more details.
    */
   @SerializedName("authorization_controls")

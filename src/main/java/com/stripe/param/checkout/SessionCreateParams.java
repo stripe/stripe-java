@@ -30,12 +30,11 @@ public class SessionCreateParams extends ApiRequestParams {
   String clientReferenceId;
 
   /**
-   * ID of an existing customer, if one exists. Only supported for Checkout Sessions in {@code
-   * payment} or {@code subscription} mode, but not Checkout Sessions in {@code setup} mode. The
-   * email stored on the customer will be used to prefill the email field on the Checkout page. If
-   * the customer changes their email on the Checkout page, the Customer object will be updated with
-   * the new email. If blank for Checkout Sessions in {@code payment} or {@code subscription} mode,
-   * Checkout will create a new customer object based on information provided during the session.
+   * ID of an existing customer, if one exists. The email stored on the customer will be used to
+   * prefill the email field on the Checkout page. If the customer changes their email on the
+   * Checkout page, the Customer object will be updated with the new email. If blank for Checkout
+   * Sessions in {@code payment} or {@code subscription} mode, Checkout will create a new customer
+   * object based on information provided during the session.
    */
   @SerializedName("customer")
   String customer;
@@ -269,13 +268,11 @@ public class SessionCreateParams extends ApiRequestParams {
     }
 
     /**
-     * ID of an existing customer, if one exists. Only supported for Checkout Sessions in {@code
-     * payment} or {@code subscription} mode, but not Checkout Sessions in {@code setup} mode. The
-     * email stored on the customer will be used to prefill the email field on the Checkout page. If
-     * the customer changes their email on the Checkout page, the Customer object will be updated
-     * with the new email. If blank for Checkout Sessions in {@code payment} or {@code subscription}
-     * mode, Checkout will create a new customer object based on information provided during the
-     * session.
+     * ID of an existing customer, if one exists. The email stored on the customer will be used to
+     * prefill the email field on the Checkout page. If the customer changes their email on the
+     * Checkout page, the Customer object will be updated with the new email. If blank for Checkout
+     * Sessions in {@code payment} or {@code subscription} mode, Checkout will create a new customer
+     * object based on information provided during the session.
      */
     public Builder setCustomer(String customer) {
       this.customer = customer;
@@ -514,7 +511,7 @@ public class SessionCreateParams extends ApiRequestParams {
     @SerializedName("currency")
     String currency;
 
-    /** The description for the line item. */
+    /** The description for the line item, to be displayed on the Checkout page. */
     @SerializedName("description")
     String description;
 
@@ -612,7 +609,7 @@ public class SessionCreateParams extends ApiRequestParams {
         return this;
       }
 
-      /** The description for the line item. */
+      /** The description for the line item, to be displayed on the Checkout page. */
       public Builder setDescription(String description) {
         this.description = description;
         return this;
@@ -764,9 +761,11 @@ public class SessionCreateParams extends ApiRequestParams {
     /**
      * Indicates that you intend to make future payments with this PaymentIntent's payment method.
      *
-     * <p>If present, the payment method used with this PaymentIntent can be <a
-     * href="https://stripe.com/docs/api/payment_methods/attach">attached</a> to a Customer, even
-     * after the transaction completes.
+     * <p>Providing this parameter will attach the payment method to the PaymentIntent's Customer,
+     * if present, after the PaymentIntent is confirmed and any required actions from the user are
+     * complete. If no Customer was provided, the payment method can still be <a
+     * href="https://stripe.com/docs/api/payment_methods/attach">attached</a> to a Customer after
+     * the transaction completes.
      *
      * <p>For more, learn to <a href="https://stripe.com/docs/payments/save-during-payment">save
      * card details during payment</a>.
@@ -980,9 +979,11 @@ public class SessionCreateParams extends ApiRequestParams {
       /**
        * Indicates that you intend to make future payments with this PaymentIntent's payment method.
        *
-       * <p>If present, the payment method used with this PaymentIntent can be <a
-       * href="https://stripe.com/docs/api/payment_methods/attach">attached</a> to a Customer, even
-       * after the transaction completes.
+       * <p>Providing this parameter will attach the payment method to the PaymentIntent's Customer,
+       * if present, after the PaymentIntent is confirmed and any required actions from the user are
+       * complete. If no Customer was provided, the payment method can still be <a
+       * href="https://stripe.com/docs/api/payment_methods/attach">attached</a> to a Customer after
+       * the transaction completes.
        *
        * <p>For more, learn to <a href="https://stripe.com/docs/payments/save-during-payment">save
        * card details during payment</a>.

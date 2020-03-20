@@ -51,8 +51,8 @@ public class SetupIntent extends ApiResource implements HasId, MetadataStore<Set
   /**
    * ID of the Customer this SetupIntent belongs to, if one exists.
    *
-   * <p>If present, payment methods used with this SetupIntent can only be attached to this
-   * Customer, and payment methods attached to other Customers cannot be used with this SetupIntent.
+   * <p>If present, the SetupIntent's payment method will be attached to the Customer on successful
+   * setup. Payment methods attached to other Customers cannot be used with this SetupIntent.
    */
   @SerializedName("customer")
   @Getter(lombok.AccessLevel.NONE)
