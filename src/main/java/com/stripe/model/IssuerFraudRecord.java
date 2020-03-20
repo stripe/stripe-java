@@ -44,7 +44,7 @@ public class IssuerFraudRecord extends ApiResource implements HasId {
 
   /**
    * If true, the associated charge is subject to <a
-   * href="https://stripe.com/docs/sources/three-d-secure#disputed-payments">liability shift</a>.
+   * href="https://stripe.com/docs/payments/3d-secure#disputed-payments">liability shift</a>.
    */
   @SerializedName("has_liability_shift")
   Boolean hasLiabilityShift;

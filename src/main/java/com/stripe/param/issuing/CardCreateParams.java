@@ -12,8 +12,8 @@ import lombok.Getter;
 public class CardCreateParams extends ApiRequestParams {
   /**
    * Spending rules that give you some control over how your cards can be used. Refer to our <a
-   * href="https://stripe.com/docs/issuing/authorizations">authorizations</a> documentation for more
-   * details.
+   * href="https://stripe.com/docs/issuing/purchases/authorizations">authorizations</a>
+   * documentation for more details.
    */
   @SerializedName("authorization_controls")
   AuthorizationControls authorizationControls;
@@ -143,8 +143,8 @@ public class CardCreateParams extends ApiRequestParams {
 
     /**
      * Spending rules that give you some control over how your cards can be used. Refer to our <a
-     * href="https://stripe.com/docs/issuing/authorizations">authorizations</a> documentation for
-     * more details.
+     * href="https://stripe.com/docs/issuing/purchases/authorizations">authorizations</a>
+     * documentation for more details.
      */
     public Builder setAuthorizationControls(AuthorizationControls authorizationControls) {
       this.authorizationControls = authorizationControls;

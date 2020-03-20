@@ -42,9 +42,12 @@ public class PaymentIntentUpdateParams extends ApiRequestParams {
   /**
    * ID of the Customer this PaymentIntent belongs to, if one exists.
    *
-   * <p>If present, payment methods used with this PaymentIntent can only be attached to this
-   * Customer, and payment methods attached to other Customers cannot be used with this
-   * PaymentIntent.
+   * <p>Payment methods attached to other Customers cannot be used with this PaymentIntent.
+   *
+   * <p>If present in combination with <a
+   * href="https://stripe.com/docs/api#payment_intent_object-setup_future_usage">setup_future_usage</a>,
+   * this PaymentIntent's payment method will be attached to the Customer after the PaymentIntent
+   * has been confirmed and any required actions from the user are complete.
    */
   @SerializedName("customer")
   Object customer;
@@ -98,19 +101,17 @@ public class PaymentIntentUpdateParams extends ApiRequestParams {
   /**
    * If the PaymentIntent has a {@code payment_method} and a {@code customer} or if you're attaching
    * a payment method to the PaymentIntent in this request, you can pass {@code
-   * save_payment_method=true} to save the payment method to the customer. Defaults to {@code
-   * false}.
+   * save_payment_method=true} to save the payment method to the customer immediately.
    *
-   * <p>If the payment method is already saved to a customer, this does nothing. If this type of
-   * payment method cannot be saved to a customer, the request will error.
+   * <p>If the payment method is already saved to a customer, this parameter does nothing. If this
+   * type of payment method cannot be saved to a customer, the request will error.
    *
-   * <p><em>Note that saving a payment method using this parameter does not guarantee that the
-   * payment method can be charged.</em> To ensure that only payment methods which can be charged
-   * are saved to a customer, you can <a
-   * href="https://stripe.com/docs/api/customers/create#create_customer-source">manually save</a>
-   * the payment method in response to the <a
-   * href="https://stripe.com/docs/api/events/types#event_types-payment_intent.succeeded">{@code
-   * payment_intent.succeeded} webhook</a>.
+   * <p>Saving a payment method using this parameter is <em>not recommended</em> because it will
+   * save the payment method even if it cannot be charged (e.g. the user made a typo). To ensure
+   * that only payment methods which are likely to be chargeable are saved to a customer, use the
+   * (setup_future_usage)[#payment_intents/object#payment_intent_object-setup_future_usage]
+   * property, which saves the payment method after the PaymentIntent has been confirmed and all
+   * required actions by the customer are complete.
    */
   @SerializedName("save_payment_method")
   Boolean savePaymentMethod;
@@ -118,13 +119,14 @@ public class PaymentIntentUpdateParams extends ApiRequestParams {
   /**
    * Indicates that you intend to make future payments with this PaymentIntent's payment method.
    *
-   * <p>If present, the payment method used with this PaymentIntent can be <a
-   * href="https://stripe.com/docs/api/payment_methods/attach">attached</a> to a Customer, even
-   * after the transaction completes.
+   * <p>Providing this parameter will attach the payment method to the PaymentIntent's Customer, if
+   * present, after the PaymentIntent is confirmed and any required actions from the user are
+   * complete. If no Customer was provided, the payment method can still be <a
+   * href="https://stripe.com/docs/api/payment_methods/attach">attached</a> to a Customer after the
+   * transaction completes.
    *
-   * <p>Use {@code on_session} if you intend to only reuse the payment method when your customer is
-   * present in your checkout flow. Use {@code off_session} if your customer may or may not be in
-   * your checkout flow.
+   * <p>For more, learn to <a href="https://stripe.com/docs/payments/save-during-payment">save card
+   * details during payment</a>.
    *
    * <p>Stripe uses {@code setup_future_usage} to dynamically optimize your payment flow and comply
    * with regional legislation and network rules. For example, if your customer is impacted by <a
@@ -356,9 +358,12 @@ public class PaymentIntentUpdateParams extends ApiRequestParams {
     /**
      * ID of the Customer this PaymentIntent belongs to, if one exists.
      *
-     * <p>If present, payment methods used with this PaymentIntent can only be attached to this
-     * Customer, and payment methods attached to other Customers cannot be used with this
-     * PaymentIntent.
+     * <p>Payment methods attached to other Customers cannot be used with this PaymentIntent.
+     *
+     * <p>If present in combination with <a
+     * href="https://stripe.com/docs/api#payment_intent_object-setup_future_usage">setup_future_usage</a>,
+     * this PaymentIntent's payment method will be attached to the Customer after the PaymentIntent
+     * has been confirmed and any required actions from the user are complete.
      */
     public Builder setCustomer(String customer) {
       this.customer = customer;
@@ -368,9 +373,12 @@ public class PaymentIntentUpdateParams extends ApiRequestParams {
     /**
      * ID of the Customer this PaymentIntent belongs to, if one exists.
      *
-     * <p>If present, payment methods used with this PaymentIntent can only be attached to this
-     * Customer, and payment methods attached to other Customers cannot be used with this
-     * PaymentIntent.
+     * <p>Payment methods attached to other Customers cannot be used with this PaymentIntent.
+     *
+     * <p>If present in combination with <a
+     * href="https://stripe.com/docs/api#payment_intent_object-setup_future_usage">setup_future_usage</a>,
+     * this PaymentIntent's payment method will be attached to the Customer after the PaymentIntent
+     * has been confirmed and any required actions from the user are complete.
      */
     public Builder setCustomer(EmptyParam customer) {
       this.customer = customer;
@@ -534,19 +542,17 @@ public class PaymentIntentUpdateParams extends ApiRequestParams {
     /**
      * If the PaymentIntent has a {@code payment_method} and a {@code customer} or if you're
      * attaching a payment method to the PaymentIntent in this request, you can pass {@code
-     * save_payment_method=true} to save the payment method to the customer. Defaults to {@code
-     * false}.
+     * save_payment_method=true} to save the payment method to the customer immediately.
      *
-     * <p>If the payment method is already saved to a customer, this does nothing. If this type of
-     * payment method cannot be saved to a customer, the request will error.
+     * <p>If the payment method is already saved to a customer, this parameter does nothing. If this
+     * type of payment method cannot be saved to a customer, the request will error.
      *
-     * <p><em>Note that saving a payment method using this parameter does not guarantee that the
-     * payment method can be charged.</em> To ensure that only payment methods which can be charged
-     * are saved to a customer, you can <a
-     * href="https://stripe.com/docs/api/customers/create#create_customer-source">manually save</a>
-     * the payment method in response to the <a
-     * href="https://stripe.com/docs/api/events/types#event_types-payment_intent.succeeded">{@code
-     * payment_intent.succeeded} webhook</a>.
+     * <p>Saving a payment method using this parameter is <em>not recommended</em> because it will
+     * save the payment method even if it cannot be charged (e.g. the user made a typo). To ensure
+     * that only payment methods which are likely to be chargeable are saved to a customer, use the
+     * (setup_future_usage)[#payment_intents/object#payment_intent_object-setup_future_usage]
+     * property, which saves the payment method after the PaymentIntent has been confirmed and all
+     * required actions by the customer are complete.
      */
     public Builder setSavePaymentMethod(Boolean savePaymentMethod) {
       this.savePaymentMethod = savePaymentMethod;
@@ -556,13 +562,14 @@ public class PaymentIntentUpdateParams extends ApiRequestParams {
     /**
      * Indicates that you intend to make future payments with this PaymentIntent's payment method.
      *
-     * <p>If present, the payment method used with this PaymentIntent can be <a
-     * href="https://stripe.com/docs/api/payment_methods/attach">attached</a> to a Customer, even
-     * after the transaction completes.
+     * <p>Providing this parameter will attach the payment method to the PaymentIntent's Customer,
+     * if present, after the PaymentIntent is confirmed and any required actions from the user are
+     * complete. If no Customer was provided, the payment method can still be <a
+     * href="https://stripe.com/docs/api/payment_methods/attach">attached</a> to a Customer after
+     * the transaction completes.
      *
-     * <p>Use {@code on_session} if you intend to only reuse the payment method when your customer
-     * is present in your checkout flow. Use {@code off_session} if your customer may or may not be
-     * in your checkout flow.
+     * <p>For more, learn to <a href="https://stripe.com/docs/payments/save-during-payment">save
+     * card details during payment</a>.
      *
      * <p>Stripe uses {@code setup_future_usage} to dynamically optimize your payment flow and
      * comply with regional legislation and network rules. For example, if your customer is impacted
@@ -584,13 +591,14 @@ public class PaymentIntentUpdateParams extends ApiRequestParams {
     /**
      * Indicates that you intend to make future payments with this PaymentIntent's payment method.
      *
-     * <p>If present, the payment method used with this PaymentIntent can be <a
-     * href="https://stripe.com/docs/api/payment_methods/attach">attached</a> to a Customer, even
-     * after the transaction completes.
+     * <p>Providing this parameter will attach the payment method to the PaymentIntent's Customer,
+     * if present, after the PaymentIntent is confirmed and any required actions from the user are
+     * complete. If no Customer was provided, the payment method can still be <a
+     * href="https://stripe.com/docs/api/payment_methods/attach">attached</a> to a Customer after
+     * the transaction completes.
      *
-     * <p>Use {@code on_session} if you intend to only reuse the payment method when your customer
-     * is present in your checkout flow. Use {@code off_session} if your customer may or may not be
-     * in your checkout flow.
+     * <p>For more, learn to <a href="https://stripe.com/docs/payments/save-during-payment">save
+     * card details during payment</a>.
      *
      * <p>Stripe uses {@code setup_future_usage} to dynamically optimize your payment flow and
      * comply with regional legislation and network rules. For example, if your customer is impacted

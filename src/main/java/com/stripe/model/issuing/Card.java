@@ -98,6 +98,12 @@ public class Card extends ApiResource implements HasId, MetadataStore<Card> {
   @SerializedName("pin")
   Pin pin;
 
+  /** The latest card that replaces this card, if any. */
+  @SerializedName("replaced_by")
+  @Getter(lombok.AccessLevel.NONE)
+  @Setter(lombok.AccessLevel.NONE)
+  ExpandableField<Card> replacedBy;
+
   /** The card this card replaces, if any. */
   @SerializedName("replacement_for")
   @Getter(lombok.AccessLevel.NONE)
@@ -131,6 +137,24 @@ public class Card extends ApiResource implements HasId, MetadataStore<Card> {
    */
   @SerializedName("type")
   String type;
+
+  /** Get ID of expandable {@code replacedBy} object. */
+  public String getReplacedBy() {
+    return (this.replacedBy != null) ? this.replacedBy.getId() : null;
+  }
+
+  public void setReplacedBy(String id) {
+    this.replacedBy = ApiResource.setExpandableFieldId(id, this.replacedBy);
+  }
+
+  /** Get expanded {@code replacedBy}. */
+  public Card getReplacedByObject() {
+    return (this.replacedBy != null) ? this.replacedBy.getExpanded() : null;
+  }
+
+  public void setReplacedByObject(Card expandableObject) {
+    this.replacedBy = new ExpandableField<Card>(expandableObject.getId(), expandableObject);
+  }
 
   /** Get ID of expandable {@code replacementFor} object. */
   public String getReplacementFor() {
@@ -288,7 +312,7 @@ public class Card extends ApiResource implements HasId, MetadataStore<Card> {
 
   /**
    * For virtual cards only. Retrieves an Issuing <code>card_details</code> object that contains <a
-   * href="https://stripe.com/docs/issuing/cards/management#virtual-card-info">the sensitive
+   * href="https://stripe.com/docs/issuing/cards/virtual#virtual-card-info">the sensitive
    * details</a> of a virtual card.
    */
   public CardDetails details() throws StripeException {
@@ -297,7 +321,7 @@ public class Card extends ApiResource implements HasId, MetadataStore<Card> {
 
   /**
    * For virtual cards only. Retrieves an Issuing <code>card_details</code> object that contains <a
-   * href="https://stripe.com/docs/issuing/cards/management#virtual-card-info">the sensitive
+   * href="https://stripe.com/docs/issuing/cards/virtual#virtual-card-info">the sensitive
    * details</a> of a virtual card.
    */
   public CardDetails details(Map<String, Object> params) throws StripeException {
@@ -306,7 +330,7 @@ public class Card extends ApiResource implements HasId, MetadataStore<Card> {
 
   /**
    * For virtual cards only. Retrieves an Issuing <code>card_details</code> object that contains <a
-   * href="https://stripe.com/docs/issuing/cards/management#virtual-card-info">the sensitive
+   * href="https://stripe.com/docs/issuing/cards/virtual#virtual-card-info">the sensitive
    * details</a> of a virtual card.
    */
   public CardDetails details(Map<String, Object> params, RequestOptions options)
@@ -322,7 +346,7 @@ public class Card extends ApiResource implements HasId, MetadataStore<Card> {
 
   /**
    * For virtual cards only. Retrieves an Issuing <code>card_details</code> object that contains <a
-   * href="https://stripe.com/docs/issuing/cards/management#virtual-card-info">the sensitive
+   * href="https://stripe.com/docs/issuing/cards/virtual#virtual-card-info">the sensitive
    * details</a> of a virtual card.
    */
   public CardDetails details(CardDetailsParams params) throws StripeException {
@@ -331,7 +355,7 @@ public class Card extends ApiResource implements HasId, MetadataStore<Card> {
 
   /**
    * For virtual cards only. Retrieves an Issuing <code>card_details</code> object that contains <a
-   * href="https://stripe.com/docs/issuing/cards/management#virtual-card-info">the sensitive
+   * href="https://stripe.com/docs/issuing/cards/virtual#virtual-card-info">the sensitive
    * details</a> of a virtual card.
    */
   public CardDetails details(CardDetailsParams params, RequestOptions options)

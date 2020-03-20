@@ -11,6 +11,15 @@ import lombok.Getter;
 
 @Getter
 public class AuthorizationApproveParams extends ApiRequestParams {
+  /**
+   * If the authorization's {@code pending_request.is_amount_controllable} property is {@code true},
+   * you may provide this value to control how much to hold for the authorization. Must be positive
+   * (use <a href="https://stripe.com/docs/api/issuing/authorizations/decline">{@code decline}</a>
+   * to decline an authorization request).
+   */
+  @SerializedName("amount")
+  Long amount;
+
   /** Specifies which fields in the response should be expanded. */
   @SerializedName("expand")
   List<String> expand;
@@ -43,7 +52,12 @@ public class AuthorizationApproveParams extends ApiRequestParams {
   Object metadata;
 
   private AuthorizationApproveParams(
-      List<String> expand, Map<String, Object> extraParams, Long heldAmount, Object metadata) {
+      Long amount,
+      List<String> expand,
+      Map<String, Object> extraParams,
+      Long heldAmount,
+      Object metadata) {
+    this.amount = amount;
     this.expand = expand;
     this.extraParams = extraParams;
     this.heldAmount = heldAmount;
@@ -55,6 +69,8 @@ public class AuthorizationApproveParams extends ApiRequestParams {
   }
 
   public static class Builder {
+    private Long amount;
+
     private List<String> expand;
 
     private Map<String, Object> extraParams;
@@ -66,7 +82,18 @@ public class AuthorizationApproveParams extends ApiRequestParams {
     /** Finalize and obtain parameter instance from this builder. */
     public AuthorizationApproveParams build() {
       return new AuthorizationApproveParams(
-          this.expand, this.extraParams, this.heldAmount, this.metadata);
+          this.amount, this.expand, this.extraParams, this.heldAmount, this.metadata);
+    }
+
+    /**
+     * If the authorization's {@code pending_request.is_amount_controllable} property is {@code
+     * true}, you may provide this value to control how much to hold for the authorization. Must be
+     * positive (use <a href="https://stripe.com/docs/api/issuing/authorizations/decline">{@code
+     * decline}</a> to decline an authorization request).
+     */
+    public Builder setAmount(Long amount) {
+      this.amount = amount;
+      return this;
     }
 
     /**
