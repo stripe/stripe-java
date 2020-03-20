@@ -1,5 +1,13 @@
 # Changelog
 
+## 18.8.0 - 2020-03-20
+* [#989](https://github.com/stripe/stripe-java/pull/989) Multiple API changes for Issuing:
+  * Add `amount`, `currency`, `merchant_amount` and `merchant_currency` on `Authorization`
+  * Add `amount`, `currency`, `merchant_amount` and `merchant_currency` inside `request_history` on `Authorization`
+  * Add `pending_request` on `Authorization`
+  * Add `amount` when approving an `Authorization`
+  * Add `replaced_by` on `Card`.
+
 ## 18.7.0 - 2020-03-13
 * [#986](https://github.com/stripe/stripe-java/pull/986) Multiple API changes for Issuing:
   * Rename `speed` to `service` on Issuing `Card`
