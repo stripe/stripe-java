@@ -63,7 +63,7 @@ public class CardListParams extends ApiRequestParams {
   @SerializedName("name")
   String name;
 
-  /** Only return cards whose full card number matches that of this card source ID. */
+  /** [DEPRECATED] Only return cards whose full card number matches that of this card source ID. */
   @SerializedName("source")
   String source;
 
@@ -284,7 +284,9 @@ public class CardListParams extends ApiRequestParams {
       return this;
     }
 
-    /** Only return cards whose full card number matches that of this card source ID. */
+    /**
+     * [DEPRECATED] Only return cards whose full card number matches that of this card source ID.
+     */
     public Builder setSource(String source) {
       this.source = source;
       return this;

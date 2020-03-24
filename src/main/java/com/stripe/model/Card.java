@@ -140,7 +140,9 @@ public class Card extends ApiResource
 
   /**
    * Uniquely identifies this particular card number. You can use this attribute to check whether
-   * two customers who've signed up with you are using the same card number, for example.
+   * two customers who’ve signed up with you are using the same card number,for example. For payment
+   * methods that tokenize card information (Apple Pay, Google Pay), the tokenized number might be
+   * provided instead of the underlying card number.
    */
   @SerializedName("fingerprint")
   String fingerprint;
