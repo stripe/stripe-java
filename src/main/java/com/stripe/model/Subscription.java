@@ -188,6 +188,10 @@ public class Subscription extends ApiResource implements HasId, MetadataStore<Su
   @SerializedName("object")
   String object;
 
+  /** If specified, payment collection for this subscription will be paused. */
+  @SerializedName("pause_collection")
+  PauseCollection pauseCollection;
+
   /**
    * Specifies an interval for how often to bill for any pending invoice items. It is analogous to
    * calling <a href="https://stripe.com/docs/api#create_invoice">Create an invoice</a> for the
@@ -734,6 +738,22 @@ public class Subscription extends ApiResource implements HasId, MetadataStore<Su
      */
     @SerializedName("reset_billing_cycle_anchor")
     Boolean resetBillingCycleAnchor;
+  }
+
+  @Getter
+  @Setter
+  @EqualsAndHashCode(callSuper = false)
+  public static class PauseCollection extends StripeObject {
+    /**
+     * The payment collection behavior for this subscription while paused. One of {@code
+     * keep_as_draft}, {@code mark_uncollectible}, or {@code void}.
+     */
+    @SerializedName("behavior")
+    String behavior;
+
+    /** The time after which the subscription will resume collecting payments. */
+    @SerializedName("resumes_at")
+    Long resumesAt;
   }
 
   @Getter

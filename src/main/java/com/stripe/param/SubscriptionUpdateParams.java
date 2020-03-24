@@ -130,6 +130,10 @@ public class SubscriptionUpdateParams extends ApiRequestParams {
   @SerializedName("off_session")
   Boolean offSession;
 
+  /** If specified, payment collection for this subscription will be paused. */
+  @SerializedName("pause_collection")
+  Object pauseCollection;
+
   /**
    * Use {@code allow_incomplete} to transition the subscription to {@code status=past_due} if a
    * payment is required but cannot be paid. This allows you to manage scenarios where additional
@@ -254,6 +258,7 @@ public class SubscriptionUpdateParams extends ApiRequestParams {
       List<Item> items,
       Object metadata,
       Boolean offSession,
+      Object pauseCollection,
       PaymentBehavior paymentBehavior,
       Object pendingInvoiceItemInterval,
       Boolean prorate,
@@ -279,6 +284,7 @@ public class SubscriptionUpdateParams extends ApiRequestParams {
     this.items = items;
     this.metadata = metadata;
     this.offSession = offSession;
+    this.pauseCollection = pauseCollection;
     this.paymentBehavior = paymentBehavior;
     this.pendingInvoiceItemInterval = pendingInvoiceItemInterval;
     this.prorate = prorate;
@@ -327,6 +333,8 @@ public class SubscriptionUpdateParams extends ApiRequestParams {
 
     private Boolean offSession;
 
+    private Object pauseCollection;
+
     private PaymentBehavior paymentBehavior;
 
     private Object pendingInvoiceItemInterval;
@@ -364,6 +372,7 @@ public class SubscriptionUpdateParams extends ApiRequestParams {
           this.items,
           this.metadata,
           this.offSession,
+          this.pauseCollection,
           this.paymentBehavior,
           this.pendingInvoiceItemInterval,
           this.prorate,
@@ -704,6 +713,18 @@ public class SubscriptionUpdateParams extends ApiRequestParams {
     /** Indicates if a customer is on or off-session while an invoice payment is attempted. */
     public Builder setOffSession(Boolean offSession) {
       this.offSession = offSession;
+      return this;
+    }
+
+    /** If specified, payment collection for this subscription will be paused. */
+    public Builder setPauseCollection(PauseCollection pauseCollection) {
+      this.pauseCollection = pauseCollection;
+      return this;
+    }
+
+    /** If specified, payment collection for this subscription will be paused. */
+    public Builder setPauseCollection(EmptyParam pauseCollection) {
+      this.pauseCollection = pauseCollection;
       return this;
     }
 
@@ -1352,6 +1373,112 @@ public class SubscriptionUpdateParams extends ApiRequestParams {
           this.usageGte = usageGte;
           return this;
         }
+      }
+    }
+  }
+
+  @Getter
+  public static class PauseCollection {
+    /**
+     * The payment collection behavior for this subscription while paused. One of {@code
+     * keep_as_draft}, {@code mark_uncollectible}, or {@code void}.
+     */
+    @SerializedName("behavior")
+    Behavior behavior;
+
+    /**
+     * Map of extra parameters for custom features not available in this client library. The content
+     * in this map is not serialized under this field's {@code @SerializedName} value. Instead, each
+     * key/value pair is serialized as if the key is a root-level field (serialized) name in this
+     * param object. Effectively, this map is flattened to its parent instance.
+     */
+    @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
+    Map<String, Object> extraParams;
+
+    /** The time after which the subscription will resume collecting payments. */
+    @SerializedName("resumes_at")
+    Long resumesAt;
+
+    private PauseCollection(Behavior behavior, Map<String, Object> extraParams, Long resumesAt) {
+      this.behavior = behavior;
+      this.extraParams = extraParams;
+      this.resumesAt = resumesAt;
+    }
+
+    public static Builder builder() {
+      return new Builder();
+    }
+
+    public static class Builder {
+      private Behavior behavior;
+
+      private Map<String, Object> extraParams;
+
+      private Long resumesAt;
+
+      /** Finalize and obtain parameter instance from this builder. */
+      public PauseCollection build() {
+        return new PauseCollection(this.behavior, this.extraParams, this.resumesAt);
+      }
+
+      /**
+       * The payment collection behavior for this subscription while paused. One of {@code
+       * keep_as_draft}, {@code mark_uncollectible}, or {@code void}.
+       */
+      public Builder setBehavior(Behavior behavior) {
+        this.behavior = behavior;
+        return this;
+      }
+
+      /**
+       * Add a key/value pair to `extraParams` map. A map is initialized for the first `put/putAll`
+       * call, and subsequent calls add additional key/value pairs to the original map. See {@link
+       * SubscriptionUpdateParams.PauseCollection#extraParams} for the field documentation.
+       */
+      public Builder putExtraParam(String key, Object value) {
+        if (this.extraParams == null) {
+          this.extraParams = new HashMap<>();
+        }
+        this.extraParams.put(key, value);
+        return this;
+      }
+
+      /**
+       * Add all map key/value pairs to `extraParams` map. A map is initialized for the first
+       * `put/putAll` call, and subsequent calls add additional key/value pairs to the original map.
+       * See {@link SubscriptionUpdateParams.PauseCollection#extraParams} for the field
+       * documentation.
+       */
+      public Builder putAllExtraParam(Map<String, Object> map) {
+        if (this.extraParams == null) {
+          this.extraParams = new HashMap<>();
+        }
+        this.extraParams.putAll(map);
+        return this;
+      }
+
+      /** The time after which the subscription will resume collecting payments. */
+      public Builder setResumesAt(Long resumesAt) {
+        this.resumesAt = resumesAt;
+        return this;
+      }
+    }
+
+    public enum Behavior implements ApiRequestParams.EnumParam {
+      @SerializedName("keep_as_draft")
+      KEEP_AS_DRAFT("keep_as_draft"),
+
+      @SerializedName("mark_uncollectible")
+      MARK_UNCOLLECTIBLE("mark_uncollectible"),
+
+      @SerializedName("void")
+      VOID("void");
+
+      @Getter(onMethod_ = {@Override})
+      private final String value;
+
+      Behavior(String value) {
+        this.value = value;
       }
     }
   }
