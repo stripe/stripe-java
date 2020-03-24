@@ -1,5 +1,8 @@
 # Changelog
 
+## 18.10.0 - 2020-03-24
+* [#992](https://github.com/stripe/stripe-java/pull/992) Add support for `pause_collection` on `Subscription`
+
 ## 18.9.0 - 2020-03-23
 * [#991](https://github.com/stripe/stripe-java/pull/991) Add support for capabilities for AU Becs Debit and Tax reporting
 
