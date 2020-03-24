@@ -345,9 +345,11 @@ public class PaymentMethodCreateParams extends ApiRequestParams {
 
   @Getter
   public static class AuBecsDebit {
+    /** The account number for the bank account. */
     @SerializedName("account_number")
     String accountNumber;
 
+    /** Bank-State-Branch number of the bank account. */
     @SerializedName("bsb_number")
     String bsbNumber;
 
@@ -382,11 +384,13 @@ public class PaymentMethodCreateParams extends ApiRequestParams {
         return new AuBecsDebit(this.accountNumber, this.bsbNumber, this.extraParams);
       }
 
+      /** The account number for the bank account. */
       public Builder setAccountNumber(String accountNumber) {
         this.accountNumber = accountNumber;
         return this;
       }
 
+      /** Bank-State-Branch number of the bank account. */
       public Builder setBsbNumber(String bsbNumber) {
         this.bsbNumber = bsbNumber;
         return this;

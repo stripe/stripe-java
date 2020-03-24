@@ -4618,6 +4618,9 @@ public class AccountUpdateParams extends ApiRequestParams {
   }
 
   public enum RequestedCapability implements ApiRequestParams.EnumParam {
+    @SerializedName("au_becs_debit_payments")
+    AU_BECS_DEBIT_PAYMENTS("au_becs_debit_payments"),
+
     @SerializedName("card_issuing")
     CARD_ISSUING("card_issuing"),
 
@@ -4626,6 +4629,12 @@ public class AccountUpdateParams extends ApiRequestParams {
 
     @SerializedName("legacy_payments")
     LEGACY_PAYMENTS("legacy_payments"),
+
+    @SerializedName("tax_reporting_us_1099_k")
+    TAX_REPORTING_US_1099_K("tax_reporting_us_1099_k"),
+
+    @SerializedName("tax_reporting_us_1099_misc")
+    TAX_REPORTING_US_1099_MISC("tax_reporting_us_1099_misc"),
 
     @SerializedName("transfers")
     TRANSFERS("transfers");
