@@ -22,7 +22,7 @@ public class CardholderCreateParams extends ApiRequestParams {
   @SerializedName("billing")
   Billing billing;
 
-  /** Additional information about a {@code business_entity} cardholder. */
+  /** Additional information about a {@code company} cardholder. */
   @SerializedName("company")
   Company company;
 
@@ -79,7 +79,7 @@ public class CardholderCreateParams extends ApiRequestParams {
   @SerializedName("status")
   Status status;
 
-  /** One of {@code individual} or {@code business_entity}. */
+  /** One of {@code individual}, {@code business_entity}, or {@code company}. */
   @SerializedName("type")
   Type type;
 
@@ -177,7 +177,7 @@ public class CardholderCreateParams extends ApiRequestParams {
       return this;
     }
 
-    /** Additional information about a {@code business_entity} cardholder. */
+    /** Additional information about a {@code company} cardholder. */
     public Builder setCompany(Company company) {
       this.company = company;
       return this;
@@ -304,7 +304,7 @@ public class CardholderCreateParams extends ApiRequestParams {
       return this;
     }
 
-    /** One of {@code individual} or {@code business_entity}. */
+    /** One of {@code individual}, {@code business_entity}, or {@code company}. */
     public Builder setType(Type type) {
       this.type = type;
       return this;
@@ -4017,6 +4017,9 @@ public class CardholderCreateParams extends ApiRequestParams {
   public enum Type implements ApiRequestParams.EnumParam {
     @SerializedName("business_entity")
     BUSINESS_ENTITY("business_entity"),
+
+    @SerializedName("company")
+    COMPANY("company"),
 
     @SerializedName("individual")
     INDIVIDUAL("individual");

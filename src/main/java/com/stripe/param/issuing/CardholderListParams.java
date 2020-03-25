@@ -72,8 +72,8 @@ public class CardholderListParams extends ApiRequestParams {
   Status status;
 
   /**
-   * Only return cardholders that have the given type. One of {@code individual} or {@code
-   * business_entity}.
+   * Only return cardholders that have the given type. One of {@code individual}, {@code
+   * business_entity}, or {@code company}.
    */
   @SerializedName("type")
   Type type;
@@ -269,8 +269,8 @@ public class CardholderListParams extends ApiRequestParams {
     }
 
     /**
-     * Only return cardholders that have the given type. One of {@code individual} or {@code
-     * business_entity}.
+     * Only return cardholders that have the given type. One of {@code individual}, {@code
+     * business_entity}, or {@code company}.
      */
     public Builder setType(Type type) {
       this.type = type;
@@ -406,6 +406,9 @@ public class CardholderListParams extends ApiRequestParams {
   public enum Type implements ApiRequestParams.EnumParam {
     @SerializedName("business_entity")
     BUSINESS_ENTITY("business_entity"),
+
+    @SerializedName("company")
+    COMPANY("company"),
 
     @SerializedName("individual")
     INDIVIDUAL("individual");

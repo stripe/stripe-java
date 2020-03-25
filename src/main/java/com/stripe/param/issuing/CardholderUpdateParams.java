@@ -23,7 +23,7 @@ public class CardholderUpdateParams extends ApiRequestParams {
   @SerializedName("billing")
   Billing billing;
 
-  /** Additional information about a {@code business_entity} cardholder. */
+  /** Additional information about a {@code company} cardholder. */
   @SerializedName("company")
   Company company;
 
@@ -153,7 +153,7 @@ public class CardholderUpdateParams extends ApiRequestParams {
       return this;
     }
 
-    /** Additional information about a {@code business_entity} cardholder. */
+    /** Additional information about a {@code company} cardholder. */
     public Builder setCompany(Company company) {
       this.company = company;
       return this;
