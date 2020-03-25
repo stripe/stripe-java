@@ -1,5 +1,10 @@
 # Changelog
 
+## 18.11.0 - 2020-03-25
+* [#993](https://github.com/stripe/stripe-java/pull/993) Multiple API changes
+  * Add support for `pt-BR` as a `locale` on Checkout `Session`
+  * Add support for `company` as a `type` on Issuing `Cardholder`
+
 ## 18.10.0 - 2020-03-24
 * [#992](https://github.com/stripe/stripe-java/pull/992) Add support for `pause_collection` on `Subscription`
 
