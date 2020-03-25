@@ -89,8 +89,8 @@ public class Session extends ApiResource implements HasId {
    * browser's locale is used.
    *
    * <p>One of {@code auto}, {@code da}, {@code de}, {@code en}, {@code es}, {@code fi}, {@code fr},
-   * {@code it}, {@code ja}, {@code ms}, {@code nb}, {@code nl}, {@code pl}, {@code pt}, {@code sv},
-   * or {@code zh}.
+   * {@code it}, {@code ja}, {@code ms}, {@code nb}, {@code nl}, {@code pl}, {@code pt}, {@code
+   * pt-BR}, {@code sv}, or {@code zh}.
    */
   @SerializedName("locale")
   String locale;

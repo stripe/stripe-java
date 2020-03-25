@@ -36,7 +36,7 @@ public class Cardholder extends ApiResource implements HasId, MetadataStore<Card
   @SerializedName("billing")
   Billing billing;
 
-  /** Additional information about a {@code business_entity} cardholder. */
+  /** Additional information about a {@code company} cardholder. */
   @SerializedName("company")
   Company company;
 
@@ -103,7 +103,7 @@ public class Cardholder extends ApiResource implements HasId, MetadataStore<Card
   @SerializedName("status")
   String status;
 
-  /** One of {@code individual} or {@code business_entity}. */
+  /** One of {@code individual} or {@code company}. */
   @SerializedName("type")
   String type;
 
