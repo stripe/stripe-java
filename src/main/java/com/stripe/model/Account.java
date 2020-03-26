@@ -754,7 +754,9 @@ public class Account extends ApiResource implements MetadataStore<Account>, Paym
     String phone;
 
     /**
-     * The category identifying the legal structure of the company or legal entity.
+     * The category identifying the legal structure of the company or legal entity. See <a
+     * href="https://stripe.com/docs/connect/identity-verification#business-structure">Business
+     * structure</a> for more details.
      *
      * <p>One of {@code government_instrumentality}, {@code governmental_unit}, {@code
      * incorporated_non_profit}, {@code multi_member_llc}, {@code private_corporation}, {@code

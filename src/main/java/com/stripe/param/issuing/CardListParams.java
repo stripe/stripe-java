@@ -59,7 +59,7 @@ public class CardListParams extends ApiRequestParams {
   @SerializedName("limit")
   Long limit;
 
-  /** Only return cards that have the given name. */
+  /** [DEPRECATED] Only return cards that have the given name. */
   @SerializedName("name")
   String name;
 
@@ -278,7 +278,7 @@ public class CardListParams extends ApiRequestParams {
       return this;
     }
 
-    /** Only return cards that have the given name. */
+    /** [DEPRECATED] Only return cards that have the given name. */
     public Builder setName(String name) {
       this.name = name;
       return this;
