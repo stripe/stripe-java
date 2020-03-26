@@ -400,7 +400,11 @@ public class TokenCreateParams extends ApiRequestParams {
       @SerializedName("phone")
       String phone;
 
-      /** The category identifying the legal structure of the company or legal entity. */
+      /**
+       * The category identifying the legal structure of the company or legal entity. See <a
+       * href="https://stripe.com/docs/connect/identity-verification#business-structure">Business
+       * structure</a> for more details.
+       */
       @SerializedName("structure")
       EnumParam structure;
 
@@ -623,13 +627,21 @@ public class TokenCreateParams extends ApiRequestParams {
           return this;
         }
 
-        /** The category identifying the legal structure of the company or legal entity. */
+        /**
+         * The category identifying the legal structure of the company or legal entity. See <a
+         * href="https://stripe.com/docs/connect/identity-verification#business-structure">Business
+         * structure</a> for more details.
+         */
         public Builder setStructure(Structure structure) {
           this.structure = structure;
           return this;
         }
 
-        /** The category identifying the legal structure of the company or legal entity. */
+        /**
+         * The category identifying the legal structure of the company or legal entity. See <a
+         * href="https://stripe.com/docs/connect/identity-verification#business-structure">Business
+         * structure</a> for more details.
+         */
         public Builder setStructure(EmptyParam structure) {
           this.structure = structure;
           return this;

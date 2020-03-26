@@ -26,8 +26,9 @@ import lombok.Setter;
 @EqualsAndHashCode(callSuper = false)
 public class Cardholder extends ApiResource implements HasId, MetadataStore<Cardholder> {
   /**
-   * Spending rules that give you some control over how this cardholder's cards can be used. Refer
-   * to our <a href="https://stripe.com/docs/issuing/purchases/authorizations">authorizations</a>
+   * [DEPRECATED] Spending rules that give you some control over how this cardholder's cards can be
+   * used. Refer to our <a
+   * href="https://stripe.com/docs/issuing/purchases/authorizations">authorizations</a>
    * documentation for more details.
    */
   @SerializedName("authorization_controls")
@@ -94,6 +95,14 @@ public class Cardholder extends ApiResource implements HasId, MetadataStore<Card
 
   @SerializedName("requirements")
   Requirements requirements;
+
+  /**
+   * Spending rules that give you some control over how this cardholder's cards can be used. Refer
+   * to our <a href="https://stripe.com/docs/issuing/purchases/authorizations">authorizations</a>
+   * documentation for more details.
+   */
+  @SerializedName("spending_controls")
+  AuthorizationControls spendingControls;
 
   /**
    * Specifies whether to permit authorizations on this cardholder's cards.

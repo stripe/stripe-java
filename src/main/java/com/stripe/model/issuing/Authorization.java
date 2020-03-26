@@ -560,15 +560,16 @@ public class Authorization extends ApiResource
      * authentication_failed}, {@code authorization_controls}, {@code card_active}, {@code
      * card_inactive}, {@code cardholder_inactive}, {@code cardholder_verification_required}, {@code
      * incorrect_cvc}, {@code incorrect_expiry}, {@code insufficient_funds}, {@code not_allowed},
-     * {@code suspected_fraud}, {@code webhook_approved}, {@code webhook_declined}, or {@code
-     * webhook_timeout}.
+     * {@code spending_controls}, {@code suspected_fraud}, {@code verification_failed}, {@code
+     * webhook_approved}, {@code webhook_declined}, or {@code webhook_timeout}.
      */
     @SerializedName("reason")
     String reason;
 
     /**
-     * When an authorization is declined due to {@code authorization_controls}, this array contains
-     * details about the authorization controls that were violated. Otherwise, it is empty.
+     * [DEPRECATED] When an authorization is declined due to {@code authorization_controls}, this
+     * array contains details about the authorization controls that were violated. Otherwise, it is
+     * empty.
      */
     @SerializedName("violated_authorization_controls")
     List<Authorization.RequestHistory.ViolatedAuthorizationControl> violatedAuthorizationControls;
