@@ -11,14 +11,6 @@ import lombok.Getter;
 
 @Getter
 public class CardUpdateParams extends ApiRequestParams {
-  /**
-   * Spending rules that give you some control over how your cards can be used. Refer to our <a
-   * href="https://stripe.com/docs/issuing/purchases/authorizations">authorizations</a>
-   * documentation for more details.
-   */
-  @SerializedName("authorization_controls")
-  AuthorizationControls authorizationControls;
-
   /** Specifies which fields in the response should be expanded. */
   @SerializedName("expand")
   List<String> expand;
@@ -41,20 +33,28 @@ public class CardUpdateParams extends ApiRequestParams {
   @SerializedName("metadata")
   Object metadata;
 
+  /**
+   * Spending rules that give you some control over how your cards can be used. Refer to our <a
+   * href="https://stripe.com/docs/issuing/purchases/authorizations">authorizations</a>
+   * documentation for more details.
+   */
+  @SerializedName("spending_controls")
+  SpendingControls spendingControls;
+
   /** Whether authorizations can be approved on this card. */
   @SerializedName("status")
   Status status;
 
   private CardUpdateParams(
-      AuthorizationControls authorizationControls,
       List<String> expand,
       Map<String, Object> extraParams,
       Object metadata,
+      SpendingControls spendingControls,
       Status status) {
-    this.authorizationControls = authorizationControls;
     this.expand = expand;
     this.extraParams = extraParams;
     this.metadata = metadata;
+    this.spendingControls = spendingControls;
     this.status = status;
   }
 
@@ -63,30 +63,20 @@ public class CardUpdateParams extends ApiRequestParams {
   }
 
   public static class Builder {
-    private AuthorizationControls authorizationControls;
-
     private List<String> expand;
 
     private Map<String, Object> extraParams;
 
     private Object metadata;
 
+    private SpendingControls spendingControls;
+
     private Status status;
 
     /** Finalize and obtain parameter instance from this builder. */
     public CardUpdateParams build() {
       return new CardUpdateParams(
-          this.authorizationControls, this.expand, this.extraParams, this.metadata, this.status);
-    }
-
-    /**
-     * Spending rules that give you some control over how your cards can be used. Refer to our <a
-     * href="https://stripe.com/docs/issuing/purchases/authorizations">authorizations</a>
-     * documentation for more details.
-     */
-    public Builder setAuthorizationControls(AuthorizationControls authorizationControls) {
-      this.authorizationControls = authorizationControls;
-      return this;
+          this.expand, this.extraParams, this.metadata, this.spendingControls, this.status);
     }
 
     /**
@@ -191,6 +181,16 @@ public class CardUpdateParams extends ApiRequestParams {
       return this;
     }
 
+    /**
+     * Spending rules that give you some control over how your cards can be used. Refer to our <a
+     * href="https://stripe.com/docs/issuing/purchases/authorizations">authorizations</a>
+     * documentation for more details.
+     */
+    public Builder setSpendingControls(SpendingControls spendingControls) {
+      this.spendingControls = spendingControls;
+      return this;
+    }
+
     /** Whether authorizations can be approved on this card. */
     public Builder setStatus(Status status) {
       this.status = status;
@@ -199,7 +199,7 @@ public class CardUpdateParams extends ApiRequestParams {
   }
 
   @Getter
-  public static class AuthorizationControls {
+  public static class SpendingControls {
     /**
      * Array of strings containing <a
      * href="https://stripe.com/docs/api#issuing_authorization_object-merchant_data-category">categories</a>
@@ -236,7 +236,7 @@ public class CardUpdateParams extends ApiRequestParams {
     @SerializedName("spending_limits")
     List<SpendingLimit> spendingLimits;
 
-    private AuthorizationControls(
+    private SpendingControls(
         List<AllowedCategory> allowedCategories,
         List<BlockedCategory> blockedCategories,
         Map<String, Object> extraParams,
@@ -265,8 +265,8 @@ public class CardUpdateParams extends ApiRequestParams {
       private List<SpendingLimit> spendingLimits;
 
       /** Finalize and obtain parameter instance from this builder. */
-      public AuthorizationControls build() {
-        return new AuthorizationControls(
+      public SpendingControls build() {
+        return new SpendingControls(
             this.allowedCategories,
             this.blockedCategories,
             this.extraParams,
@@ -277,8 +277,7 @@ public class CardUpdateParams extends ApiRequestParams {
       /**
        * Add an element to `allowedCategories` list. A list is initialized for the first
        * `add/addAll` call, and subsequent calls adds additional elements to the original list. See
-       * {@link CardUpdateParams.AuthorizationControls#allowedCategories} for the field
-       * documentation.
+       * {@link CardUpdateParams.SpendingControls#allowedCategories} for the field documentation.
        */
       public Builder addAllowedCategory(AllowedCategory element) {
         if (this.allowedCategories == null) {
@@ -291,8 +290,7 @@ public class CardUpdateParams extends ApiRequestParams {
       /**
        * Add all elements to `allowedCategories` list. A list is initialized for the first
        * `add/addAll` call, and subsequent calls adds additional elements to the original list. See
-       * {@link CardUpdateParams.AuthorizationControls#allowedCategories} for the field
-       * documentation.
+       * {@link CardUpdateParams.SpendingControls#allowedCategories} for the field documentation.
        */
       public Builder addAllAllowedCategory(List<AllowedCategory> elements) {
         if (this.allowedCategories == null) {
@@ -305,8 +303,7 @@ public class CardUpdateParams extends ApiRequestParams {
       /**
        * Add an element to `blockedCategories` list. A list is initialized for the first
        * `add/addAll` call, and subsequent calls adds additional elements to the original list. See
-       * {@link CardUpdateParams.AuthorizationControls#blockedCategories} for the field
-       * documentation.
+       * {@link CardUpdateParams.SpendingControls#blockedCategories} for the field documentation.
        */
       public Builder addBlockedCategory(BlockedCategory element) {
         if (this.blockedCategories == null) {
@@ -319,8 +316,7 @@ public class CardUpdateParams extends ApiRequestParams {
       /**
        * Add all elements to `blockedCategories` list. A list is initialized for the first
        * `add/addAll` call, and subsequent calls adds additional elements to the original list. See
-       * {@link CardUpdateParams.AuthorizationControls#blockedCategories} for the field
-       * documentation.
+       * {@link CardUpdateParams.SpendingControls#blockedCategories} for the field documentation.
        */
       public Builder addAllBlockedCategory(List<BlockedCategory> elements) {
         if (this.blockedCategories == null) {
@@ -333,7 +329,7 @@ public class CardUpdateParams extends ApiRequestParams {
       /**
        * Add a key/value pair to `extraParams` map. A map is initialized for the first `put/putAll`
        * call, and subsequent calls add additional key/value pairs to the original map. See {@link
-       * CardUpdateParams.AuthorizationControls#extraParams} for the field documentation.
+       * CardUpdateParams.SpendingControls#extraParams} for the field documentation.
        */
       public Builder putExtraParam(String key, Object value) {
         if (this.extraParams == null) {
@@ -346,7 +342,7 @@ public class CardUpdateParams extends ApiRequestParams {
       /**
        * Add all map key/value pairs to `extraParams` map. A map is initialized for the first
        * `put/putAll` call, and subsequent calls add additional key/value pairs to the original map.
-       * See {@link CardUpdateParams.AuthorizationControls#extraParams} for the field documentation.
+       * See {@link CardUpdateParams.SpendingControls#extraParams} for the field documentation.
        */
       public Builder putAllExtraParam(Map<String, Object> map) {
         if (this.extraParams == null) {
@@ -368,7 +364,7 @@ public class CardUpdateParams extends ApiRequestParams {
       /**
        * Add an element to `spendingLimits` list. A list is initialized for the first `add/addAll`
        * call, and subsequent calls adds additional elements to the original list. See {@link
-       * CardUpdateParams.AuthorizationControls#spendingLimits} for the field documentation.
+       * CardUpdateParams.SpendingControls#spendingLimits} for the field documentation.
        */
       public Builder addSpendingLimit(SpendingLimit element) {
         if (this.spendingLimits == null) {
@@ -381,7 +377,7 @@ public class CardUpdateParams extends ApiRequestParams {
       /**
        * Add all elements to `spendingLimits` list. A list is initialized for the first `add/addAll`
        * call, and subsequent calls adds additional elements to the original list. See {@link
-       * CardUpdateParams.AuthorizationControls#spendingLimits} for the field documentation.
+       * CardUpdateParams.SpendingControls#spendingLimits} for the field documentation.
        */
       public Builder addAllSpendingLimit(List<SpendingLimit> elements) {
         if (this.spendingLimits == null) {
@@ -457,8 +453,7 @@ public class CardUpdateParams extends ApiRequestParams {
         /**
          * Add an element to `categories` list. A list is initialized for the first `add/addAll`
          * call, and subsequent calls adds additional elements to the original list. See {@link
-         * CardUpdateParams.AuthorizationControls.SpendingLimit#categories} for the field
-         * documentation.
+         * CardUpdateParams.SpendingControls.SpendingLimit#categories} for the field documentation.
          */
         public Builder addCategory(Category element) {
           if (this.categories == null) {
@@ -471,8 +466,7 @@ public class CardUpdateParams extends ApiRequestParams {
         /**
          * Add all elements to `categories` list. A list is initialized for the first `add/addAll`
          * call, and subsequent calls adds additional elements to the original list. See {@link
-         * CardUpdateParams.AuthorizationControls.SpendingLimit#categories} for the field
-         * documentation.
+         * CardUpdateParams.SpendingControls.SpendingLimit#categories} for the field documentation.
          */
         public Builder addAllCategory(List<Category> elements) {
           if (this.categories == null) {
@@ -485,7 +479,7 @@ public class CardUpdateParams extends ApiRequestParams {
         /**
          * Add a key/value pair to `extraParams` map. A map is initialized for the first
          * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
-         * map. See {@link CardUpdateParams.AuthorizationControls.SpendingLimit#extraParams} for the
+         * map. See {@link CardUpdateParams.SpendingControls.SpendingLimit#extraParams} for the
          * field documentation.
          */
         public Builder putExtraParam(String key, Object value) {
@@ -499,7 +493,7 @@ public class CardUpdateParams extends ApiRequestParams {
         /**
          * Add all map key/value pairs to `extraParams` map. A map is initialized for the first
          * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
-         * map. See {@link CardUpdateParams.AuthorizationControls.SpendingLimit#extraParams} for the
+         * map. See {@link CardUpdateParams.SpendingControls.SpendingLimit#extraParams} for the
          * field documentation.
          */
         public Builder putAllExtraParam(Map<String, Object> map) {

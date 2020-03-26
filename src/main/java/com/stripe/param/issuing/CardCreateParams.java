@@ -11,14 +11,6 @@ import lombok.Getter;
 @Getter
 public class CardCreateParams extends ApiRequestParams {
   /**
-   * Spending rules that give you some control over how your cards can be used. Refer to our <a
-   * href="https://stripe.com/docs/issuing/purchases/authorizations">authorizations</a>
-   * documentation for more details.
-   */
-  @SerializedName("authorization_controls")
-  AuthorizationControls authorizationControls;
-
-  /**
    * The <a href="https://stripe.com/docs/api#issuing_cardholder_object">Cardholder</a> object with
    * which the card will be associated.
    */
@@ -65,6 +57,14 @@ public class CardCreateParams extends ApiRequestParams {
   @SerializedName("shipping")
   Shipping shipping;
 
+  /**
+   * Spending rules that give you some control over how your cards can be used. Refer to our <a
+   * href="https://stripe.com/docs/issuing/purchases/authorizations">authorizations</a>
+   * documentation for more details.
+   */
+  @SerializedName("spending_controls")
+  SpendingControls spendingControls;
+
   /** Whether authorizations can be approved on this card. Defaults to {@code inactive}. */
   @SerializedName("status")
   Status status;
@@ -74,7 +74,6 @@ public class CardCreateParams extends ApiRequestParams {
   Type type;
 
   private CardCreateParams(
-      AuthorizationControls authorizationControls,
       String cardholder,
       String currency,
       List<String> expand,
@@ -83,9 +82,9 @@ public class CardCreateParams extends ApiRequestParams {
       String replacementFor,
       ReplacementReason replacementReason,
       Shipping shipping,
+      SpendingControls spendingControls,
       Status status,
       Type type) {
-    this.authorizationControls = authorizationControls;
     this.cardholder = cardholder;
     this.currency = currency;
     this.expand = expand;
@@ -94,6 +93,7 @@ public class CardCreateParams extends ApiRequestParams {
     this.replacementFor = replacementFor;
     this.replacementReason = replacementReason;
     this.shipping = shipping;
+    this.spendingControls = spendingControls;
     this.status = status;
     this.type = type;
   }
@@ -103,8 +103,6 @@ public class CardCreateParams extends ApiRequestParams {
   }
 
   public static class Builder {
-    private AuthorizationControls authorizationControls;
-
     private String cardholder;
 
     private String currency;
@@ -121,6 +119,8 @@ public class CardCreateParams extends ApiRequestParams {
 
     private Shipping shipping;
 
+    private SpendingControls spendingControls;
+
     private Status status;
 
     private Type type;
@@ -128,7 +128,6 @@ public class CardCreateParams extends ApiRequestParams {
     /** Finalize and obtain parameter instance from this builder. */
     public CardCreateParams build() {
       return new CardCreateParams(
-          this.authorizationControls,
           this.cardholder,
           this.currency,
           this.expand,
@@ -137,18 +136,9 @@ public class CardCreateParams extends ApiRequestParams {
           this.replacementFor,
           this.replacementReason,
           this.shipping,
+          this.spendingControls,
           this.status,
           this.type);
-    }
-
-    /**
-     * Spending rules that give you some control over how your cards can be used. Refer to our <a
-     * href="https://stripe.com/docs/issuing/purchases/authorizations">authorizations</a>
-     * documentation for more details.
-     */
-    public Builder setAuthorizationControls(AuthorizationControls authorizationControls) {
-      this.authorizationControls = authorizationControls;
-      return this;
     }
 
     /**
@@ -265,6 +255,16 @@ public class CardCreateParams extends ApiRequestParams {
       return this;
     }
 
+    /**
+     * Spending rules that give you some control over how your cards can be used. Refer to our <a
+     * href="https://stripe.com/docs/issuing/purchases/authorizations">authorizations</a>
+     * documentation for more details.
+     */
+    public Builder setSpendingControls(SpendingControls spendingControls) {
+      this.spendingControls = spendingControls;
+      return this;
+    }
+
     /** Whether authorizations can be approved on this card. Defaults to {@code inactive}. */
     public Builder setStatus(Status status) {
       this.status = status;
@@ -279,7 +279,306 @@ public class CardCreateParams extends ApiRequestParams {
   }
 
   @Getter
-  public static class AuthorizationControls {
+  public static class Shipping {
+    /** The address that the card is shipped to. */
+    @SerializedName("address")
+    Address address;
+
+    /**
+     * Map of extra parameters for custom features not available in this client library. The content
+     * in this map is not serialized under this field's {@code @SerializedName} value. Instead, each
+     * key/value pair is serialized as if the key is a root-level field (serialized) name in this
+     * param object. Effectively, this map is flattened to its parent instance.
+     */
+    @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
+    Map<String, Object> extraParams;
+
+    /** The name printed on the shipping label when shipping the card. */
+    @SerializedName("name")
+    String name;
+
+    /** Shipment service. */
+    @SerializedName("service")
+    Service service;
+
+    /** Packaging options. */
+    @SerializedName("type")
+    Type type;
+
+    private Shipping(
+        Address address, Map<String, Object> extraParams, String name, Service service, Type type) {
+      this.address = address;
+      this.extraParams = extraParams;
+      this.name = name;
+      this.service = service;
+      this.type = type;
+    }
+
+    public static Builder builder() {
+      return new Builder();
+    }
+
+    public static class Builder {
+      private Address address;
+
+      private Map<String, Object> extraParams;
+
+      private String name;
+
+      private Service service;
+
+      private Type type;
+
+      /** Finalize and obtain parameter instance from this builder. */
+      public Shipping build() {
+        return new Shipping(this.address, this.extraParams, this.name, this.service, this.type);
+      }
+
+      /** The address that the card is shipped to. */
+      public Builder setAddress(Address address) {
+        this.address = address;
+        return this;
+      }
+
+      /**
+       * Add a key/value pair to `extraParams` map. A map is initialized for the first `put/putAll`
+       * call, and subsequent calls add additional key/value pairs to the original map. See {@link
+       * CardCreateParams.Shipping#extraParams} for the field documentation.
+       */
+      public Builder putExtraParam(String key, Object value) {
+        if (this.extraParams == null) {
+          this.extraParams = new HashMap<>();
+        }
+        this.extraParams.put(key, value);
+        return this;
+      }
+
+      /**
+       * Add all map key/value pairs to `extraParams` map. A map is initialized for the first
+       * `put/putAll` call, and subsequent calls add additional key/value pairs to the original map.
+       * See {@link CardCreateParams.Shipping#extraParams} for the field documentation.
+       */
+      public Builder putAllExtraParam(Map<String, Object> map) {
+        if (this.extraParams == null) {
+          this.extraParams = new HashMap<>();
+        }
+        this.extraParams.putAll(map);
+        return this;
+      }
+
+      /** The name printed on the shipping label when shipping the card. */
+      public Builder setName(String name) {
+        this.name = name;
+        return this;
+      }
+
+      /** Shipment service. */
+      public Builder setService(Service service) {
+        this.service = service;
+        return this;
+      }
+
+      /** Packaging options. */
+      public Builder setType(Type type) {
+        this.type = type;
+        return this;
+      }
+    }
+
+    @Getter
+    public static class Address {
+      /** City, district, suburb, town, or village. */
+      @SerializedName("city")
+      String city;
+
+      /**
+       * Two-letter country code (<a href="https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2">ISO
+       * 3166-1 alpha-2</a>).
+       */
+      @SerializedName("country")
+      String country;
+
+      /**
+       * Map of extra parameters for custom features not available in this client library. The
+       * content in this map is not serialized under this field's {@code @SerializedName} value.
+       * Instead, each key/value pair is serialized as if the key is a root-level field (serialized)
+       * name in this param object. Effectively, this map is flattened to its parent instance.
+       */
+      @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
+      Map<String, Object> extraParams;
+
+      /** Address line 1 (e.g., street, PO Box, or company name). */
+      @SerializedName("line1")
+      String line1;
+
+      /** Address line 2 (e.g., apartment, suite, unit, or building). */
+      @SerializedName("line2")
+      String line2;
+
+      /** ZIP or postal code. */
+      @SerializedName("postal_code")
+      String postalCode;
+
+      /** State, county, province, or region. */
+      @SerializedName("state")
+      String state;
+
+      private Address(
+          String city,
+          String country,
+          Map<String, Object> extraParams,
+          String line1,
+          String line2,
+          String postalCode,
+          String state) {
+        this.city = city;
+        this.country = country;
+        this.extraParams = extraParams;
+        this.line1 = line1;
+        this.line2 = line2;
+        this.postalCode = postalCode;
+        this.state = state;
+      }
+
+      public static Builder builder() {
+        return new Builder();
+      }
+
+      public static class Builder {
+        private String city;
+
+        private String country;
+
+        private Map<String, Object> extraParams;
+
+        private String line1;
+
+        private String line2;
+
+        private String postalCode;
+
+        private String state;
+
+        /** Finalize and obtain parameter instance from this builder. */
+        public Address build() {
+          return new Address(
+              this.city,
+              this.country,
+              this.extraParams,
+              this.line1,
+              this.line2,
+              this.postalCode,
+              this.state);
+        }
+
+        /** City, district, suburb, town, or village. */
+        public Builder setCity(String city) {
+          this.city = city;
+          return this;
+        }
+
+        /**
+         * Two-letter country code (<a href="https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2">ISO
+         * 3166-1 alpha-2</a>).
+         */
+        public Builder setCountry(String country) {
+          this.country = country;
+          return this;
+        }
+
+        /**
+         * Add a key/value pair to `extraParams` map. A map is initialized for the first
+         * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
+         * map. See {@link CardCreateParams.Shipping.Address#extraParams} for the field
+         * documentation.
+         */
+        public Builder putExtraParam(String key, Object value) {
+          if (this.extraParams == null) {
+            this.extraParams = new HashMap<>();
+          }
+          this.extraParams.put(key, value);
+          return this;
+        }
+
+        /**
+         * Add all map key/value pairs to `extraParams` map. A map is initialized for the first
+         * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
+         * map. See {@link CardCreateParams.Shipping.Address#extraParams} for the field
+         * documentation.
+         */
+        public Builder putAllExtraParam(Map<String, Object> map) {
+          if (this.extraParams == null) {
+            this.extraParams = new HashMap<>();
+          }
+          this.extraParams.putAll(map);
+          return this;
+        }
+
+        /** Address line 1 (e.g., street, PO Box, or company name). */
+        public Builder setLine1(String line1) {
+          this.line1 = line1;
+          return this;
+        }
+
+        /** Address line 2 (e.g., apartment, suite, unit, or building). */
+        public Builder setLine2(String line2) {
+          this.line2 = line2;
+          return this;
+        }
+
+        /** ZIP or postal code. */
+        public Builder setPostalCode(String postalCode) {
+          this.postalCode = postalCode;
+          return this;
+        }
+
+        /** State, county, province, or region. */
+        public Builder setState(String state) {
+          this.state = state;
+          return this;
+        }
+      }
+    }
+
+    public enum Service implements ApiRequestParams.EnumParam {
+      @SerializedName("express")
+      EXPRESS("express"),
+
+      @SerializedName("overnight")
+      OVERNIGHT("overnight"),
+
+      @SerializedName("priority")
+      PRIORITY("priority"),
+
+      @SerializedName("standard")
+      STANDARD("standard");
+
+      @Getter(onMethod_ = {@Override})
+      private final String value;
+
+      Service(String value) {
+        this.value = value;
+      }
+    }
+
+    public enum Type implements ApiRequestParams.EnumParam {
+      @SerializedName("bulk")
+      BULK("bulk"),
+
+      @SerializedName("individual")
+      INDIVIDUAL("individual");
+
+      @Getter(onMethod_ = {@Override})
+      private final String value;
+
+      Type(String value) {
+        this.value = value;
+      }
+    }
+  }
+
+  @Getter
+  public static class SpendingControls {
     /**
      * Array of strings containing <a
      * href="https://stripe.com/docs/api#issuing_authorization_object-merchant_data-category">categories</a>
@@ -316,7 +615,7 @@ public class CardCreateParams extends ApiRequestParams {
     @SerializedName("spending_limits")
     List<SpendingLimit> spendingLimits;
 
-    private AuthorizationControls(
+    private SpendingControls(
         List<AllowedCategory> allowedCategories,
         List<BlockedCategory> blockedCategories,
         Map<String, Object> extraParams,
@@ -345,8 +644,8 @@ public class CardCreateParams extends ApiRequestParams {
       private List<SpendingLimit> spendingLimits;
 
       /** Finalize and obtain parameter instance from this builder. */
-      public AuthorizationControls build() {
-        return new AuthorizationControls(
+      public SpendingControls build() {
+        return new SpendingControls(
             this.allowedCategories,
             this.blockedCategories,
             this.extraParams,
@@ -357,8 +656,7 @@ public class CardCreateParams extends ApiRequestParams {
       /**
        * Add an element to `allowedCategories` list. A list is initialized for the first
        * `add/addAll` call, and subsequent calls adds additional elements to the original list. See
-       * {@link CardCreateParams.AuthorizationControls#allowedCategories} for the field
-       * documentation.
+       * {@link CardCreateParams.SpendingControls#allowedCategories} for the field documentation.
        */
       public Builder addAllowedCategory(AllowedCategory element) {
         if (this.allowedCategories == null) {
@@ -371,8 +669,7 @@ public class CardCreateParams extends ApiRequestParams {
       /**
        * Add all elements to `allowedCategories` list. A list is initialized for the first
        * `add/addAll` call, and subsequent calls adds additional elements to the original list. See
-       * {@link CardCreateParams.AuthorizationControls#allowedCategories} for the field
-       * documentation.
+       * {@link CardCreateParams.SpendingControls#allowedCategories} for the field documentation.
        */
       public Builder addAllAllowedCategory(List<AllowedCategory> elements) {
         if (this.allowedCategories == null) {
@@ -385,8 +682,7 @@ public class CardCreateParams extends ApiRequestParams {
       /**
        * Add an element to `blockedCategories` list. A list is initialized for the first
        * `add/addAll` call, and subsequent calls adds additional elements to the original list. See
-       * {@link CardCreateParams.AuthorizationControls#blockedCategories} for the field
-       * documentation.
+       * {@link CardCreateParams.SpendingControls#blockedCategories} for the field documentation.
        */
       public Builder addBlockedCategory(BlockedCategory element) {
         if (this.blockedCategories == null) {
@@ -399,8 +695,7 @@ public class CardCreateParams extends ApiRequestParams {
       /**
        * Add all elements to `blockedCategories` list. A list is initialized for the first
        * `add/addAll` call, and subsequent calls adds additional elements to the original list. See
-       * {@link CardCreateParams.AuthorizationControls#blockedCategories} for the field
-       * documentation.
+       * {@link CardCreateParams.SpendingControls#blockedCategories} for the field documentation.
        */
       public Builder addAllBlockedCategory(List<BlockedCategory> elements) {
         if (this.blockedCategories == null) {
@@ -413,7 +708,7 @@ public class CardCreateParams extends ApiRequestParams {
       /**
        * Add a key/value pair to `extraParams` map. A map is initialized for the first `put/putAll`
        * call, and subsequent calls add additional key/value pairs to the original map. See {@link
-       * CardCreateParams.AuthorizationControls#extraParams} for the field documentation.
+       * CardCreateParams.SpendingControls#extraParams} for the field documentation.
        */
       public Builder putExtraParam(String key, Object value) {
         if (this.extraParams == null) {
@@ -426,7 +721,7 @@ public class CardCreateParams extends ApiRequestParams {
       /**
        * Add all map key/value pairs to `extraParams` map. A map is initialized for the first
        * `put/putAll` call, and subsequent calls add additional key/value pairs to the original map.
-       * See {@link CardCreateParams.AuthorizationControls#extraParams} for the field documentation.
+       * See {@link CardCreateParams.SpendingControls#extraParams} for the field documentation.
        */
       public Builder putAllExtraParam(Map<String, Object> map) {
         if (this.extraParams == null) {
@@ -448,7 +743,7 @@ public class CardCreateParams extends ApiRequestParams {
       /**
        * Add an element to `spendingLimits` list. A list is initialized for the first `add/addAll`
        * call, and subsequent calls adds additional elements to the original list. See {@link
-       * CardCreateParams.AuthorizationControls#spendingLimits} for the field documentation.
+       * CardCreateParams.SpendingControls#spendingLimits} for the field documentation.
        */
       public Builder addSpendingLimit(SpendingLimit element) {
         if (this.spendingLimits == null) {
@@ -461,7 +756,7 @@ public class CardCreateParams extends ApiRequestParams {
       /**
        * Add all elements to `spendingLimits` list. A list is initialized for the first `add/addAll`
        * call, and subsequent calls adds additional elements to the original list. See {@link
-       * CardCreateParams.AuthorizationControls#spendingLimits} for the field documentation.
+       * CardCreateParams.SpendingControls#spendingLimits} for the field documentation.
        */
       public Builder addAllSpendingLimit(List<SpendingLimit> elements) {
         if (this.spendingLimits == null) {
@@ -537,8 +832,7 @@ public class CardCreateParams extends ApiRequestParams {
         /**
          * Add an element to `categories` list. A list is initialized for the first `add/addAll`
          * call, and subsequent calls adds additional elements to the original list. See {@link
-         * CardCreateParams.AuthorizationControls.SpendingLimit#categories} for the field
-         * documentation.
+         * CardCreateParams.SpendingControls.SpendingLimit#categories} for the field documentation.
          */
         public Builder addCategory(Category element) {
           if (this.categories == null) {
@@ -551,8 +845,7 @@ public class CardCreateParams extends ApiRequestParams {
         /**
          * Add all elements to `categories` list. A list is initialized for the first `add/addAll`
          * call, and subsequent calls adds additional elements to the original list. See {@link
-         * CardCreateParams.AuthorizationControls.SpendingLimit#categories} for the field
-         * documentation.
+         * CardCreateParams.SpendingControls.SpendingLimit#categories} for the field documentation.
          */
         public Builder addAllCategory(List<Category> elements) {
           if (this.categories == null) {
@@ -565,7 +858,7 @@ public class CardCreateParams extends ApiRequestParams {
         /**
          * Add a key/value pair to `extraParams` map. A map is initialized for the first
          * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
-         * map. See {@link CardCreateParams.AuthorizationControls.SpendingLimit#extraParams} for the
+         * map. See {@link CardCreateParams.SpendingControls.SpendingLimit#extraParams} for the
          * field documentation.
          */
         public Builder putExtraParam(String key, Object value) {
@@ -579,7 +872,7 @@ public class CardCreateParams extends ApiRequestParams {
         /**
          * Add all map key/value pairs to `extraParams` map. A map is initialized for the first
          * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
-         * map. See {@link CardCreateParams.AuthorizationControls.SpendingLimit#extraParams} for the
+         * map. See {@link CardCreateParams.SpendingControls.SpendingLimit#extraParams} for the
          * field documentation.
          */
         public Builder putAllExtraParam(Map<String, Object> map) {
@@ -3300,339 +3593,6 @@ public class CardCreateParams extends ApiRequestParams {
       private final String value;
 
       BlockedCategory(String value) {
-        this.value = value;
-      }
-    }
-  }
-
-  @Getter
-  public static class Shipping {
-    /** The address that the card is shipped to. */
-    @SerializedName("address")
-    Address address;
-
-    /**
-     * Map of extra parameters for custom features not available in this client library. The content
-     * in this map is not serialized under this field's {@code @SerializedName} value. Instead, each
-     * key/value pair is serialized as if the key is a root-level field (serialized) name in this
-     * param object. Effectively, this map is flattened to its parent instance.
-     */
-    @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
-    Map<String, Object> extraParams;
-
-    /** The name printed on the shipping label when shipping the card. */
-    @SerializedName("name")
-    String name;
-
-    /** Shipment service. */
-    @SerializedName("service")
-    Service service;
-
-    /** [DEPRECATED] Shipment service. */
-    @SerializedName("speed")
-    Speed speed;
-
-    /** Packaging options. */
-    @SerializedName("type")
-    Type type;
-
-    private Shipping(
-        Address address,
-        Map<String, Object> extraParams,
-        String name,
-        Service service,
-        Speed speed,
-        Type type) {
-      this.address = address;
-      this.extraParams = extraParams;
-      this.name = name;
-      this.service = service;
-      this.speed = speed;
-      this.type = type;
-    }
-
-    public static Builder builder() {
-      return new Builder();
-    }
-
-    public static class Builder {
-      private Address address;
-
-      private Map<String, Object> extraParams;
-
-      private String name;
-
-      private Service service;
-
-      private Speed speed;
-
-      private Type type;
-
-      /** Finalize and obtain parameter instance from this builder. */
-      public Shipping build() {
-        return new Shipping(
-            this.address, this.extraParams, this.name, this.service, this.speed, this.type);
-      }
-
-      /** The address that the card is shipped to. */
-      public Builder setAddress(Address address) {
-        this.address = address;
-        return this;
-      }
-
-      /**
-       * Add a key/value pair to `extraParams` map. A map is initialized for the first `put/putAll`
-       * call, and subsequent calls add additional key/value pairs to the original map. See {@link
-       * CardCreateParams.Shipping#extraParams} for the field documentation.
-       */
-      public Builder putExtraParam(String key, Object value) {
-        if (this.extraParams == null) {
-          this.extraParams = new HashMap<>();
-        }
-        this.extraParams.put(key, value);
-        return this;
-      }
-
-      /**
-       * Add all map key/value pairs to `extraParams` map. A map is initialized for the first
-       * `put/putAll` call, and subsequent calls add additional key/value pairs to the original map.
-       * See {@link CardCreateParams.Shipping#extraParams} for the field documentation.
-       */
-      public Builder putAllExtraParam(Map<String, Object> map) {
-        if (this.extraParams == null) {
-          this.extraParams = new HashMap<>();
-        }
-        this.extraParams.putAll(map);
-        return this;
-      }
-
-      /** The name printed on the shipping label when shipping the card. */
-      public Builder setName(String name) {
-        this.name = name;
-        return this;
-      }
-
-      /** Shipment service. */
-      public Builder setService(Service service) {
-        this.service = service;
-        return this;
-      }
-
-      /** [DEPRECATED] Shipment service. */
-      public Builder setSpeed(Speed speed) {
-        this.speed = speed;
-        return this;
-      }
-
-      /** Packaging options. */
-      public Builder setType(Type type) {
-        this.type = type;
-        return this;
-      }
-    }
-
-    @Getter
-    public static class Address {
-      /** City, district, suburb, town, or village. */
-      @SerializedName("city")
-      String city;
-
-      /**
-       * Two-letter country code (<a href="https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2">ISO
-       * 3166-1 alpha-2</a>).
-       */
-      @SerializedName("country")
-      String country;
-
-      /**
-       * Map of extra parameters for custom features not available in this client library. The
-       * content in this map is not serialized under this field's {@code @SerializedName} value.
-       * Instead, each key/value pair is serialized as if the key is a root-level field (serialized)
-       * name in this param object. Effectively, this map is flattened to its parent instance.
-       */
-      @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
-      Map<String, Object> extraParams;
-
-      /** Address line 1 (e.g., street, PO Box, or company name). */
-      @SerializedName("line1")
-      String line1;
-
-      /** Address line 2 (e.g., apartment, suite, unit, or building). */
-      @SerializedName("line2")
-      String line2;
-
-      /** ZIP or postal code. */
-      @SerializedName("postal_code")
-      String postalCode;
-
-      /** State, county, province, or region. */
-      @SerializedName("state")
-      String state;
-
-      private Address(
-          String city,
-          String country,
-          Map<String, Object> extraParams,
-          String line1,
-          String line2,
-          String postalCode,
-          String state) {
-        this.city = city;
-        this.country = country;
-        this.extraParams = extraParams;
-        this.line1 = line1;
-        this.line2 = line2;
-        this.postalCode = postalCode;
-        this.state = state;
-      }
-
-      public static Builder builder() {
-        return new Builder();
-      }
-
-      public static class Builder {
-        private String city;
-
-        private String country;
-
-        private Map<String, Object> extraParams;
-
-        private String line1;
-
-        private String line2;
-
-        private String postalCode;
-
-        private String state;
-
-        /** Finalize and obtain parameter instance from this builder. */
-        public Address build() {
-          return new Address(
-              this.city,
-              this.country,
-              this.extraParams,
-              this.line1,
-              this.line2,
-              this.postalCode,
-              this.state);
-        }
-
-        /** City, district, suburb, town, or village. */
-        public Builder setCity(String city) {
-          this.city = city;
-          return this;
-        }
-
-        /**
-         * Two-letter country code (<a href="https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2">ISO
-         * 3166-1 alpha-2</a>).
-         */
-        public Builder setCountry(String country) {
-          this.country = country;
-          return this;
-        }
-
-        /**
-         * Add a key/value pair to `extraParams` map. A map is initialized for the first
-         * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
-         * map. See {@link CardCreateParams.Shipping.Address#extraParams} for the field
-         * documentation.
-         */
-        public Builder putExtraParam(String key, Object value) {
-          if (this.extraParams == null) {
-            this.extraParams = new HashMap<>();
-          }
-          this.extraParams.put(key, value);
-          return this;
-        }
-
-        /**
-         * Add all map key/value pairs to `extraParams` map. A map is initialized for the first
-         * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
-         * map. See {@link CardCreateParams.Shipping.Address#extraParams} for the field
-         * documentation.
-         */
-        public Builder putAllExtraParam(Map<String, Object> map) {
-          if (this.extraParams == null) {
-            this.extraParams = new HashMap<>();
-          }
-          this.extraParams.putAll(map);
-          return this;
-        }
-
-        /** Address line 1 (e.g., street, PO Box, or company name). */
-        public Builder setLine1(String line1) {
-          this.line1 = line1;
-          return this;
-        }
-
-        /** Address line 2 (e.g., apartment, suite, unit, or building). */
-        public Builder setLine2(String line2) {
-          this.line2 = line2;
-          return this;
-        }
-
-        /** ZIP or postal code. */
-        public Builder setPostalCode(String postalCode) {
-          this.postalCode = postalCode;
-          return this;
-        }
-
-        /** State, county, province, or region. */
-        public Builder setState(String state) {
-          this.state = state;
-          return this;
-        }
-      }
-    }
-
-    public enum Service implements ApiRequestParams.EnumParam {
-      @SerializedName("express")
-      EXPRESS("express"),
-
-      @SerializedName("overnight")
-      OVERNIGHT("overnight"),
-
-      @SerializedName("standard")
-      STANDARD("standard");
-
-      @Getter(onMethod_ = {@Override})
-      private final String value;
-
-      Service(String value) {
-        this.value = value;
-      }
-    }
-
-    public enum Speed implements ApiRequestParams.EnumParam {
-      @SerializedName("express")
-      EXPRESS("express"),
-
-      @SerializedName("overnight")
-      OVERNIGHT("overnight"),
-
-      @SerializedName("standard")
-      STANDARD("standard");
-
-      @Getter(onMethod_ = {@Override})
-      private final String value;
-
-      Speed(String value) {
-        this.value = value;
-      }
-    }
-
-    public enum Type implements ApiRequestParams.EnumParam {
-      @SerializedName("bulk")
-      BULK("bulk"),
-
-      @SerializedName("individual")
-      INDIVIDUAL("individual");
-
-      @Getter(onMethod_ = {@Override})
-      private final String value;
-
-      Type(String value) {
         this.value = value;
       }
     }

@@ -25,14 +25,6 @@ import lombok.Setter;
 @Setter
 @EqualsAndHashCode(callSuper = false)
 public class Cardholder extends ApiResource implements HasId, MetadataStore<Cardholder> {
-  /**
-   * Spending rules that give you some control over how this cardholder's cards can be used. Refer
-   * to our <a href="https://stripe.com/docs/issuing/purchases/authorizations">authorizations</a>
-   * documentation for more details.
-   */
-  @SerializedName("authorization_controls")
-  AuthorizationControls authorizationControls;
-
   @SerializedName("billing")
   Billing billing;
 
@@ -56,10 +48,6 @@ public class Cardholder extends ApiResource implements HasId, MetadataStore<Card
   /** Additional information about an {@code individual} cardholder. */
   @SerializedName("individual")
   Individual individual;
-
-  /** [DEPRECATED] Whether or not this cardholder is the default cardholder. */
-  @SerializedName("is_default")
-  Boolean isDefault;
 
   /**
    * Has the value {@code true} if the object exists in live mode or the value {@code false} if the
@@ -94,6 +82,14 @@ public class Cardholder extends ApiResource implements HasId, MetadataStore<Card
 
   @SerializedName("requirements")
   Requirements requirements;
+
+  /**
+   * Spending rules that give you some control over how this cardholder's cards can be used. Refer
+   * to our <a href="https://stripe.com/docs/issuing/purchases/authorizations">authorizations</a>
+   * documentation for more details.
+   */
+  @SerializedName("spending_controls")
+  SpendingControls spendingControls;
 
   /**
    * Specifies whether to permit authorizations on this cardholder's cards.
@@ -257,42 +253,9 @@ public class Cardholder extends ApiResource implements HasId, MetadataStore<Card
   @Getter
   @Setter
   @EqualsAndHashCode(callSuper = false)
-  public static class AuthorizationControls extends StripeObject {
-    /**
-     * Array of strings containing <a
-     * href="https://stripe.com/docs/api#issuing_authorization_object-merchant_data-category">categories</a>
-     * of authorizations permitted on this cardholder's cards.
-     */
-    @SerializedName("allowed_categories")
-    List<String> allowedCategories;
-
-    /**
-     * Array of strings containing <a
-     * href="https://stripe.com/docs/api#issuing_authorization_object-merchant_data-category">categories</a>
-     * of authorizations to always decline on this cardholder's cards.
-     */
-    @SerializedName("blocked_categories")
-    List<String> blockedCategories;
-
-    /** Limit the spending with rules based on time intervals and categories. */
-    @SerializedName("spending_limits")
-    List<Cardholder.SpendingLimit> spendingLimits;
-
-    /** Currency for the amounts within spending_limits. */
-    @SerializedName("spending_limits_currency")
-    String spendingLimitsCurrency;
-  }
-
-  @Getter
-  @Setter
-  @EqualsAndHashCode(callSuper = false)
   public static class Billing extends StripeObject {
     @SerializedName("address")
     Address address;
-
-    /** [DEPRECATED] The cardholder’s billing name. */
-    @SerializedName("name")
-    String name;
   }
 
   @Getter
@@ -431,6 +394,35 @@ public class Cardholder extends ApiResource implements HasId, MetadataStore<Card
      */
     @SerializedName("past_due")
     List<String> pastDue;
+  }
+
+  @Getter
+  @Setter
+  @EqualsAndHashCode(callSuper = false)
+  public static class SpendingControls extends StripeObject {
+    /**
+     * Array of strings containing <a
+     * href="https://stripe.com/docs/api#issuing_authorization_object-merchant_data-category">categories</a>
+     * of authorizations permitted on this cardholder's cards.
+     */
+    @SerializedName("allowed_categories")
+    List<String> allowedCategories;
+
+    /**
+     * Array of strings containing <a
+     * href="https://stripe.com/docs/api#issuing_authorization_object-merchant_data-category">categories</a>
+     * of authorizations to always decline on this cardholder's cards.
+     */
+    @SerializedName("blocked_categories")
+    List<String> blockedCategories;
+
+    /** Limit the spending with rules based on time intervals and categories. */
+    @SerializedName("spending_limits")
+    List<Cardholder.SpendingLimit> spendingLimits;
+
+    /** Currency for the amounts within spending_limits. */
+    @SerializedName("spending_limits_currency")
+    String spendingLimitsCurrency;
   }
 
   @Getter
