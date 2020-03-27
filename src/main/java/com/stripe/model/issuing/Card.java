@@ -25,9 +25,6 @@ import lombok.Setter;
 @Setter
 @EqualsAndHashCode(callSuper = false)
 public class Card extends ApiResource implements HasId, MetadataStore<Card> {
-  @SerializedName("authorization_controls")
-  AuthorizationControls authorizationControls;
-
   /** The brand of the card. */
   @SerializedName("brand")
   String brand;
@@ -86,13 +83,6 @@ public class Card extends ApiResource implements HasId, MetadataStore<Card> {
   Map<String, String> metadata;
 
   /**
-   * [DEPRECATED] The name of the cardholder, printed on the card. Refer to {@code cardholder.name}
-   * instead.
-   */
-  @SerializedName("name")
-  String name;
-
-  /**
    * String representing the object's type. Objects of the same type share the same value.
    *
    * <p>Equal to {@code issuing.card}.
@@ -129,7 +119,7 @@ public class Card extends ApiResource implements HasId, MetadataStore<Card> {
   Shipping shipping;
 
   @SerializedName("spending_controls")
-  AuthorizationControls spendingControls;
+  SpendingControls spendingControls;
 
   /**
    * Whether authorizations can be approved on this card.
@@ -381,49 +371,6 @@ public class Card extends ApiResource implements HasId, MetadataStore<Card> {
   @Getter
   @Setter
   @EqualsAndHashCode(callSuper = false)
-  public static class AuthorizationControls extends StripeObject {
-    /**
-     * Array of strings containing <a
-     * href="https://stripe.com/docs/api#issuing_authorization_object-merchant_data-category">categories</a>
-     * of authorizations permitted on this card.
-     */
-    @SerializedName("allowed_categories")
-    List<String> allowedCategories;
-
-    /**
-     * Array of strings containing <a
-     * href="https://stripe.com/docs/api#issuing_authorization_object-merchant_data-category">categories</a>
-     * of authorizations to always decline on this card.
-     */
-    @SerializedName("blocked_categories")
-    List<String> blockedCategories;
-
-    /**
-     * [DEPRECATED] The currency of the card. See <a
-     * href="https://stripe.com/docs/api#issuing_card_object-authorization_controls-max_amount">max_amount</a>
-     */
-    @SerializedName("currency")
-    String currency;
-
-    /**
-     * Maximum count of approved authorizations on this card. Counts all authorizations
-     * retroactively.
-     */
-    @SerializedName("max_approvals")
-    Long maxApprovals;
-
-    /** Limit the spending with rules based on time intervals and categories. */
-    @SerializedName("spending_limits")
-    List<Card.SpendingLimit> spendingLimits;
-
-    /** Currency for the amounts within spending_limits. Locked to the currency of the card. */
-    @SerializedName("spending_limits_currency")
-    String spendingLimitsCurrency;
-  }
-
-  @Getter
-  @Setter
-  @EqualsAndHashCode(callSuper = false)
   public static class Pin extends StripeObject {
     /**
      * Wether the PIN will be accepted or not.
@@ -460,18 +407,10 @@ public class Card extends ApiResource implements HasId, MetadataStore<Card> {
     /**
      * Shipment service, such as {@code standard} or {@code express}.
      *
-     * <p>One of {@code express}, {@code overnight}, {@code priority}, or {@code standard}.
+     * <p>One of {@code express}, {@code priority}, or {@code standard}.
      */
     @SerializedName("service")
     String service;
-
-    /**
-     * [DEPRECATED] Shipment service, such as {@code standard} or {@code express}.
-     *
-     * <p>One of {@code express}, {@code overnight}, {@code priority}, or {@code standard}.
-     */
-    @SerializedName("speed")
-    String speed;
 
     /**
      * The delivery status of the card.
@@ -500,6 +439,42 @@ public class Card extends ApiResource implements HasId, MetadataStore<Card> {
      */
     @SerializedName("type")
     String type;
+  }
+
+  @Getter
+  @Setter
+  @EqualsAndHashCode(callSuper = false)
+  public static class SpendingControls extends StripeObject {
+    /**
+     * Array of strings containing <a
+     * href="https://stripe.com/docs/api#issuing_authorization_object-merchant_data-category">categories</a>
+     * of authorizations permitted on this card.
+     */
+    @SerializedName("allowed_categories")
+    List<String> allowedCategories;
+
+    /**
+     * Array of strings containing <a
+     * href="https://stripe.com/docs/api#issuing_authorization_object-merchant_data-category">categories</a>
+     * of authorizations to always decline on this card.
+     */
+    @SerializedName("blocked_categories")
+    List<String> blockedCategories;
+
+    /**
+     * Maximum count of approved authorizations on this card. Counts all authorizations
+     * retroactively.
+     */
+    @SerializedName("max_approvals")
+    Long maxApprovals;
+
+    /** Limit the spending with rules based on time intervals and categories. */
+    @SerializedName("spending_limits")
+    List<Card.SpendingLimit> spendingLimits;
+
+    /** Currency for the amounts within spending_limits. Locked to the currency of the card. */
+    @SerializedName("spending_limits_currency")
+    String spendingLimitsCurrency;
   }
 
   @Getter

@@ -43,21 +43,6 @@ public class Authorization extends ApiResource
   @SerializedName("authorization_method")
   String authorizationMethod;
 
-  /**
-   * The amount that has been authorized. This will be {@code 0} when the object is created, and
-   * increase after it has been approved.
-   */
-  @SerializedName("authorized_amount")
-  Long authorizedAmount;
-
-  /**
-   * The currency that was presented to the cardholder for the authorization. Three-letter <a
-   * href="https://www.iso.org/iso-4217-currency-codes.html">ISO currency code</a>, in lowercase.
-   * Must be a <a href="https://stripe.com/docs/currencies">supported currency</a>.
-   */
-  @SerializedName("authorized_currency")
-  String authorizedCurrency;
-
   /** List of balance transactions associated with this authorization. */
   @SerializedName("balance_transactions")
   List<BalanceTransaction> balanceTransactions;
@@ -86,35 +71,10 @@ public class Authorization extends ApiResource
   @SerializedName("currency")
   String currency;
 
-  /**
-   * The amount the authorization is expected to be in {@code held_currency}. When Stripe holds
-   * funds from you, this is the amount reserved for the authorization. This will be {@code 0} when
-   * the object is created, and increase after it has been approved. For multi-currency
-   * transactions, {@code held_amount} can be used to determine the expected exchange rate.
-   */
-  @SerializedName("held_amount")
-  Long heldAmount;
-
-  /**
-   * The currency of the <a
-   * href="https://stripe.com/docs/api#issuing_authorization_object-held_amount">held amount</a>.
-   * This will always be the card currency.
-   */
-  @SerializedName("held_currency")
-  String heldCurrency;
-
   /** Unique identifier for the object. */
   @Getter(onMethod_ = {@Override})
   @SerializedName("id")
   String id;
-
-  /**
-   * If set {@code true}, you may provide <a
-   * href="https://stripe.com/docs/api/issuing/authorizations/approve#approve_issuing_authorization-held_amount">held_amount</a>
-   * to control how much to hold for the authorization.
-   */
-  @SerializedName("is_held_amount_controllable")
-  Boolean isHeldAmountControllable;
 
   /**
    * Has the value {@code true} if the object exists in live mode or the value {@code false} if the
@@ -153,20 +113,6 @@ public class Authorization extends ApiResource
    */
   @SerializedName("object")
   String object;
-
-  /**
-   * The amount the user is requesting to be authorized. This field will only be non-zero during an
-   * {@code issuing.authorization.request} webhook.
-   */
-  @SerializedName("pending_authorized_amount")
-  Long pendingAuthorizedAmount;
-
-  /**
-   * The additional amount Stripe will hold if the authorization is approved. This field will only
-   * be non-zero during an {@code issuing.authorization.request} webhook.
-   */
-  @SerializedName("pending_held_amount")
-  Long pendingHeldAmount;
 
   /**
    * The pending authorization request. This field will only be non-null during an {@code
@@ -210,13 +156,6 @@ public class Authorization extends ApiResource
    */
   @SerializedName("wallet")
   String wallet;
-
-  /**
-   * [DEPRECATED] What, if any, digital wallet was used for this authorization. One of {@code
-   * apple_pay}, {@code google_pay}, or {@code samsung_pay}.
-   */
-  @SerializedName("wallet_provider")
-  String walletProvider;
 
   /** Get ID of expandable {@code cardholder} object. */
   public String getCardholder() {
@@ -453,6 +392,47 @@ public class Authorization extends ApiResource
   @Getter
   @Setter
   @EqualsAndHashCode(callSuper = false)
+  public static class MerchantData extends StripeObject {
+    /**
+     * A categorization of the seller's type of business. See our <a
+     * href="https://stripe.com/docs/issuing/merchant-categories">merchant categories guide</a> for
+     * a list of possible values.
+     */
+    @SerializedName("category")
+    String category;
+
+    /** City where the seller is located. */
+    @SerializedName("city")
+    String city;
+
+    /** Country where the seller is located. */
+    @SerializedName("country")
+    String country;
+
+    /** Name of the seller. */
+    @SerializedName("name")
+    String name;
+
+    /** Identifier assigned to the seller by the card brand. */
+    @SerializedName("network_id")
+    String networkId;
+
+    /** Postal code where the seller is located. */
+    @SerializedName("postal_code")
+    String postalCode;
+
+    /** State where the seller is located. */
+    @SerializedName("state")
+    String state;
+
+    /** The url an online purchase was made from. */
+    @SerializedName("url")
+    String url;
+  }
+
+  @Getter
+  @Setter
+  @EqualsAndHashCode(callSuper = false)
   public static class PendingRequest extends StripeObject {
     /**
      * The additional amount Stripe will hold if the authorization is approved, in the <a
@@ -492,8 +472,8 @@ public class Authorization extends ApiResource
   @EqualsAndHashCode(callSuper = false)
   public static class RequestHistory extends StripeObject {
     /**
-     * The amount of the authorization is your card's currency. Stripe held this amount from your
-     * account to fund the authorization, if the request was approved
+     * The amount of the authorization in your card's currency. Stripe held this amount from your
+     * account to fund the authorization, if the request was approved.
      */
     @SerializedName("amount")
     Long amount;
@@ -501,18 +481,6 @@ public class Authorization extends ApiResource
     /** Whether this request was approved. */
     @SerializedName("approved")
     Boolean approved;
-
-    /** The amount that was authorized at the time of this request. */
-    @SerializedName("authorized_amount")
-    Long authorizedAmount;
-
-    /**
-     * The currency that was presented to the cardholder for the authorization. Three-letter <a
-     * href="https://www.iso.org/iso-4217-currency-codes.html">ISO currency code</a>, in lowercase.
-     * Must be a <a href="https://stripe.com/docs/currencies">supported currency</a>.
-     */
-    @SerializedName("authorized_currency")
-    String authorizedCurrency;
 
     /** Time at which the object was created. Measured in seconds since the Unix epoch. */
     @SerializedName("created")
@@ -525,20 +493,6 @@ public class Authorization extends ApiResource
      */
     @SerializedName("currency")
     String currency;
-
-    /**
-     * The amount Stripe held from your account to fund the authorization, if the request was
-     * approved.
-     */
-    @SerializedName("held_amount")
-    Long heldAmount;
-
-    /**
-     * The currency of the <a
-     * href="https://stripe.com/docs/api#issuing_authorization_object-held_amount">held amount.</a>
-     */
-    @SerializedName("held_currency")
-    String heldCurrency;
 
     /** The amount that was authorized at the time of this request. */
     @SerializedName("merchant_amount")
@@ -556,42 +510,14 @@ public class Authorization extends ApiResource
     /**
      * The reason for the approval or decline.
      *
-     * <p>One of {@code account_compliance_disabled}, {@code account_inactive}, {@code
-     * authentication_failed}, {@code authorization_controls}, {@code card_active}, {@code
-     * card_inactive}, {@code cardholder_inactive}, {@code cardholder_verification_required}, {@code
-     * incorrect_cvc}, {@code incorrect_expiry}, {@code insufficient_funds}, {@code not_allowed},
-     * {@code spending_controls}, {@code suspected_fraud}, {@code verification_failed}, {@code
-     * webhook_approved}, {@code webhook_declined}, or {@code webhook_timeout}.
+     * <p>One of {@code account_compliance_disabled}, {@code account_inactive}, {@code card_active},
+     * {@code card_inactive}, {@code cardholder_inactive}, {@code cardholder_verification_required},
+     * {@code insufficient_funds}, {@code not_allowed}, {@code spending_controls}, {@code
+     * suspected_fraud}, {@code verification_failed}, {@code webhook_approved}, {@code
+     * webhook_declined}, or {@code webhook_timeout}.
      */
     @SerializedName("reason")
     String reason;
-
-    /**
-     * [DEPRECATED] When an authorization is declined due to {@code authorization_controls}, this
-     * array contains details about the authorization controls that were violated. Otherwise, it is
-     * empty.
-     */
-    @SerializedName("violated_authorization_controls")
-    List<Authorization.RequestHistory.ViolatedAuthorizationControl> violatedAuthorizationControls;
-
-    @Getter
-    @Setter
-    @EqualsAndHashCode(callSuper = false)
-    public static class ViolatedAuthorizationControl extends StripeObject {
-      /**
-       * Entity which the authorization control acts on. One of {@code card}, {@code cardholder}, or
-       * {@code account}.
-       */
-      @SerializedName("entity")
-      String entity;
-
-      /**
-       * Name of the authorization control. One of {@code allowed_categories}, {@code
-       * blocked_categories}, {@code spending_limits}, {@code max_approvals}, or {@code max_amount}.
-       */
-      @SerializedName("name")
-      String name;
-    }
   }
 
   @Getter
@@ -628,23 +554,6 @@ public class Authorization extends ApiResource
      */
     @SerializedName("address_postal_code_check")
     String addressPostalCodeCheck;
-
-    /**
-     * [DEPRECATED] Whether the cardholder provided a postal code and if it matched the cardholder’s
-     * {@code billing.address.postal_code}.
-     *
-     * <p>One of {@code match}, {@code mismatch}, or {@code not_provided}.
-     */
-    @SerializedName("address_zip_check")
-    String addressZipCheck;
-
-    /**
-     * [DEPRECATED] Whether 3DS authentication was performed.
-     *
-     * <p>One of {@code failure}, {@code none}, or {@code success}.
-     */
-    @SerializedName("authentication")
-    String authentication;
 
     /**
      * Whether the cardholder provided a CVC and if it matched Stripe’s record.

@@ -59,14 +59,6 @@ public class CardListParams extends ApiRequestParams {
   @SerializedName("limit")
   Long limit;
 
-  /** [DEPRECATED] Only return cards that have the given name. */
-  @SerializedName("name")
-  String name;
-
-  /** [DEPRECATED] Only return cards whose full card number matches that of this card source ID. */
-  @SerializedName("source")
-  String source;
-
   /**
    * A cursor for use in pagination. {@code starting_after} is an object ID that defines your place
    * in the list. For instance, if you make a list request and receive 100 objects, ending with
@@ -97,8 +89,6 @@ public class CardListParams extends ApiRequestParams {
       Map<String, Object> extraParams,
       String last4,
       Long limit,
-      String name,
-      String source,
       String startingAfter,
       Status status,
       Type type) {
@@ -111,8 +101,6 @@ public class CardListParams extends ApiRequestParams {
     this.extraParams = extraParams;
     this.last4 = last4;
     this.limit = limit;
-    this.name = name;
-    this.source = source;
     this.startingAfter = startingAfter;
     this.status = status;
     this.type = type;
@@ -141,10 +129,6 @@ public class CardListParams extends ApiRequestParams {
 
     private Long limit;
 
-    private String name;
-
-    private String source;
-
     private String startingAfter;
 
     private Status status;
@@ -163,8 +147,6 @@ public class CardListParams extends ApiRequestParams {
           this.extraParams,
           this.last4,
           this.limit,
-          this.name,
-          this.source,
           this.startingAfter,
           this.status,
           this.type);
@@ -275,20 +257,6 @@ public class CardListParams extends ApiRequestParams {
      */
     public Builder setLimit(Long limit) {
       this.limit = limit;
-      return this;
-    }
-
-    /** [DEPRECATED] Only return cards that have the given name. */
-    public Builder setName(String name) {
-      this.name = name;
-      return this;
-    }
-
-    /**
-     * [DEPRECATED] Only return cards whose full card number matches that of this card source ID.
-     */
-    public Builder setSource(String source) {
-      this.source = source;
       return this;
     }
 

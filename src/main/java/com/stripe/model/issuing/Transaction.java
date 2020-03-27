@@ -67,10 +67,7 @@ public class Transaction extends ApiResource
   @SerializedName("currency")
   String currency;
 
-  /**
-   * If you've disputed the transaction, the ID of the <a
-   * href="https://stripe.com/docs/api/issuing/disputes/object">dispute object</a>.
-   */
+  /** If you've disputed the transaction, the ID of the dispute. */
   @SerializedName("dispute")
   @Getter(lombok.AccessLevel.NONE)
   @Setter(lombok.AccessLevel.NONE)
@@ -100,7 +97,7 @@ public class Transaction extends ApiResource
   String merchantCurrency;
 
   @SerializedName("merchant_data")
-  MerchantData merchantData;
+  Authorization.MerchantData merchantData;
 
   /**
    * Set of key-value pairs that you can attach to an object. This can be useful for storing
@@ -121,8 +118,7 @@ public class Transaction extends ApiResource
   /**
    * The nature of the transaction.
    *
-   * <p>One of {@code capture}, {@code cash_withdrawal}, {@code dispute}, {@code dispute_loss},
-   * {@code refund}, or {@code refund_reversal}.
+   * <p>One of {@code capture}, {@code dispute}, or {@code refund}.
    */
   @SerializedName("type")
   String type;
