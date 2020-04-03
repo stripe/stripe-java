@@ -1,5 +1,8 @@
 # Changelog
 
+## 18.13.0 - 2020-04-03
+* [#998](https://github.com/stripe/stripe-java/pull/998) Add support for `calculatedStatementDescriptor` on `Charge`
+
 ## 18.12.0 - 2020-03-26
 * [#994](https://github.com/stripe/stripe-java/pull/994) Add support for `spending_controls` on Issuing `Card` and `Cardholder`
 
