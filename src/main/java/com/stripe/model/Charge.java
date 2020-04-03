@@ -84,6 +84,14 @@ public class Charge extends ApiResource implements MetadataStore<Charge>, Balanc
   PaymentMethod.BillingDetails billingDetails;
 
   /**
+   * The full statement descriptor that is passed to card networks, and that is displayed on your
+   * customers' credit card and bank statements. Allows you to see what the statement descriptor
+   * looks like after the static and dynamic portions are combined.
+   */
+  @SerializedName("calculated_statement_descriptor")
+  String calculatedStatementDescriptor;
+
+  /**
    * If the charge was created without capturing, this Boolean represents whether it is still
    * uncaptured or has since been captured.
    */

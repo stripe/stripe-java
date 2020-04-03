@@ -347,9 +347,11 @@ public class Session extends ApiResource implements HasId {
      * might have a &lt;currency&gt;5&lt;/currency&gt;/month plan that provides limited access to
      * your products, and a &lt;currency&gt;15&lt;/currency&gt;/month plan that allows full access.
      *
-     * <p>Related guide: <a
-     * href="https://stripe.com/docs/billing/subscriptions/products-and-plans">Managing Products and
-     * Plans</a>.
+     * <p>Related guides: <a
+     * href="https://stripe.com/docs/billing/subscriptions/set-up-subscription">Set up a
+     * subscription</a> and more about <a
+     * href="https://stripe.com/docs/billing/subscriptions/products-and-plans">products and
+     * plans</a>.
      */
     @SerializedName("plan")
     Plan plan;

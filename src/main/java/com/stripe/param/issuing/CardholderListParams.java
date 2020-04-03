@@ -72,8 +72,7 @@ public class CardholderListParams extends ApiRequestParams {
   Status status;
 
   /**
-   * Only return cardholders that have the given type. One of {@code individual}, {@code
-   * business_entity}, or {@code company}.
+   * Only return cardholders that have the given type. One of {@code individual} or {@code company}.
    */
   @SerializedName("type")
   Type type;
@@ -269,8 +268,8 @@ public class CardholderListParams extends ApiRequestParams {
     }
 
     /**
-     * Only return cardholders that have the given type. One of {@code individual}, {@code
-     * business_entity}, or {@code company}.
+     * Only return cardholders that have the given type. One of {@code individual} or {@code
+     * company}.
      */
     public Builder setType(Type type) {
       this.type = type;

@@ -67,10 +67,7 @@ public class Transaction extends ApiResource
   @SerializedName("currency")
   String currency;
 
-  /**
-   * If you've disputed the transaction, the ID of the <a
-   * href="https://stripe.com/docs/api/issuing/disputes/object">dispute object</a>.
-   */
+  /** If you've disputed the transaction, the ID of the dispute. */
   @SerializedName("dispute")
   @Getter(lombok.AccessLevel.NONE)
   @Setter(lombok.AccessLevel.NONE)

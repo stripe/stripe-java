@@ -88,7 +88,7 @@ public class CardholderCreateParams extends ApiRequestParams {
   @SerializedName("status")
   Status status;
 
-  /** One of {@code individual}, {@code business_entity}, or {@code company}. */
+  /** One of {@code individual} or {@code company}. */
   @SerializedName("type")
   Type type;
 
@@ -329,7 +329,7 @@ public class CardholderCreateParams extends ApiRequestParams {
       return this;
     }
 
-    /** One of {@code individual}, {@code business_entity}, or {@code company}. */
+    /** One of {@code individual} or {@code company}. */
     public Builder setType(Type type) {
       this.type = type;
       return this;
