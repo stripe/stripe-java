@@ -253,7 +253,7 @@ public class CardUpdateParams extends ApiRequestParams {
     Map<String, Object> extraParams;
 
     /**
-     * Maximum count of approved authorizations on this card. Counts all authorizations
+     * [DEPRECATED] Maximum count of approved authorizations on this card. Counts all authorizations
      * retroactively.
      */
     @SerializedName("max_approvals")
@@ -384,8 +384,8 @@ public class CardUpdateParams extends ApiRequestParams {
       }
 
       /**
-       * Maximum count of approved authorizations on this card. Counts all authorizations
-       * retroactively.
+       * [DEPRECATED] Maximum count of approved authorizations on this card. Counts all
+       * authorizations retroactively.
        */
       public Builder setMaxApprovals(Long maxApprovals) {
         this.maxApprovals = maxApprovals;
@@ -3280,7 +3280,7 @@ public class CardUpdateParams extends ApiRequestParams {
     Map<String, Object> extraParams;
 
     /**
-     * Maximum count of approved authorizations on this card. Counts all authorizations
+     * [DEPRECATED] Maximum count of approved authorizations on this card. Counts all authorizations
      * retroactively.
      */
     @SerializedName("max_approvals")
@@ -3407,8 +3407,8 @@ public class CardUpdateParams extends ApiRequestParams {
       }
 
       /**
-       * Maximum count of approved authorizations on this card. Counts all authorizations
-       * retroactively.
+       * [DEPRECATED] Maximum count of approved authorizations on this card. Counts all
+       * authorizations retroactively.
        */
       public Builder setMaxApprovals(Long maxApprovals) {
         this.maxApprovals = maxApprovals;

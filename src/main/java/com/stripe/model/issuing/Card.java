@@ -406,7 +406,7 @@ public class Card extends ApiResource implements HasId, MetadataStore<Card> {
     String currency;
 
     /**
-     * Maximum count of approved authorizations on this card. Counts all authorizations
+     * [DEPRECATED] Maximum count of approved authorizations on this card. Counts all authorizations
      * retroactively.
      */
     @SerializedName("max_approvals")

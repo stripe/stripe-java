@@ -34,10 +34,10 @@ public class AuthorizationApproveParams extends ApiRequestParams {
   Map<String, Object> extraParams;
 
   /**
-   * If the authorization's {@code is_held_amount_controllable} property is {@code true}, you may
-   * provide this value to control how much to hold for the authorization. Must be positive (use <a
-   * href="https://stripe.com/docs/api/issuing/authorizations/decline">{@code decline}</a> to
-   * decline an authorization request).
+   * [DEPRECATED] If the authorization's {@code is_held_amount_controllable} property is {@code
+   * true}, you may provide this value to control how much to hold for the authorization. Must be
+   * positive (use <a href="https://stripe.com/docs/api/issuing/authorizations/decline">{@code
+   * decline}</a> to decline an authorization request).
    */
   @SerializedName("held_amount")
   Long heldAmount;
@@ -149,10 +149,10 @@ public class AuthorizationApproveParams extends ApiRequestParams {
     }
 
     /**
-     * If the authorization's {@code is_held_amount_controllable} property is {@code true}, you may
-     * provide this value to control how much to hold for the authorization. Must be positive (use
-     * <a href="https://stripe.com/docs/api/issuing/authorizations/decline">{@code decline}</a> to
-     * decline an authorization request).
+     * [DEPRECATED] If the authorization's {@code is_held_amount_controllable} property is {@code
+     * true}, you may provide this value to control how much to hold for the authorization. Must be
+     * positive (use <a href="https://stripe.com/docs/api/issuing/authorizations/decline">{@code
+     * decline}</a> to decline an authorization request).
      */
     public Builder setHeldAmount(Long heldAmount) {
       this.heldAmount = heldAmount;

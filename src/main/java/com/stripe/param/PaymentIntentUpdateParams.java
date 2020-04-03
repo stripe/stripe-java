@@ -119,22 +119,16 @@ public class PaymentIntentUpdateParams extends ApiRequestParams {
   /**
    * Indicates that you intend to make future payments with this PaymentIntent's payment method.
    *
-   * <p>Providing this parameter will attach the payment method to the PaymentIntent's Customer, if
-   * present, after the PaymentIntent is confirmed and any required actions from the user are
-   * complete. If no Customer was provided, the payment method can still be <a
-   * href="https://stripe.com/docs/api/payment_methods/attach">attached</a> to a Customer after the
-   * transaction completes.
+   * <p>Providing this parameter will <a
+   * href="https://stripe.com/docs/payments/save-during-payment">attach the payment method</a> to
+   * the PaymentIntent's Customer, if present, after the PaymentIntent is confirmed and any required
+   * actions from the user are complete. If no Customer was provided, the payment method can still
+   * be <a href="https://stripe.com/docs/api/payment_methods/attach">attached</a> to a Customer
+   * after the transaction completes.
    *
-   * <p>For more, learn to <a href="https://stripe.com/docs/payments/save-during-payment">save card
-   * details during payment</a>.
-   *
-   * <p>Stripe uses {@code setup_future_usage} to dynamically optimize your payment flow and comply
-   * with regional legislation and network rules. For example, if your customer is impacted by <a
-   * href="https://stripe.com/docs/strong-customer-authentication">SCA</a>, using {@code
-   * off_session} will ensure that they are authenticated while processing this PaymentIntent. You
-   * will then be able to collect <a
-   * href="https://stripe.com/docs/payments/cards/charging-saved-cards#off-session-payments-with-saved-cards">off-session
-   * payments</a> for this customer.
+   * <p>When processing card payments, Stripe also uses {@code setup_future_usage} to dynamically
+   * optimize your payment flow and comply with regional legislation and network rules, such as <a
+   * href="https://stripe.com/docs/strong-customer-authentication">SCA</a>.
    *
    * <p>If {@code setup_future_usage} is already set and you are performing a request using a
    * publishable key, you may only update the value from {@code on_session} to {@code off_session}.
@@ -562,22 +556,16 @@ public class PaymentIntentUpdateParams extends ApiRequestParams {
     /**
      * Indicates that you intend to make future payments with this PaymentIntent's payment method.
      *
-     * <p>Providing this parameter will attach the payment method to the PaymentIntent's Customer,
-     * if present, after the PaymentIntent is confirmed and any required actions from the user are
-     * complete. If no Customer was provided, the payment method can still be <a
-     * href="https://stripe.com/docs/api/payment_methods/attach">attached</a> to a Customer after
-     * the transaction completes.
+     * <p>Providing this parameter will <a
+     * href="https://stripe.com/docs/payments/save-during-payment">attach the payment method</a> to
+     * the PaymentIntent's Customer, if present, after the PaymentIntent is confirmed and any
+     * required actions from the user are complete. If no Customer was provided, the payment method
+     * can still be <a href="https://stripe.com/docs/api/payment_methods/attach">attached</a> to a
+     * Customer after the transaction completes.
      *
-     * <p>For more, learn to <a href="https://stripe.com/docs/payments/save-during-payment">save
-     * card details during payment</a>.
-     *
-     * <p>Stripe uses {@code setup_future_usage} to dynamically optimize your payment flow and
-     * comply with regional legislation and network rules. For example, if your customer is impacted
-     * by <a href="https://stripe.com/docs/strong-customer-authentication">SCA</a>, using {@code
-     * off_session} will ensure that they are authenticated while processing this PaymentIntent. You
-     * will then be able to collect <a
-     * href="https://stripe.com/docs/payments/cards/charging-saved-cards#off-session-payments-with-saved-cards">off-session
-     * payments</a> for this customer.
+     * <p>When processing card payments, Stripe also uses {@code setup_future_usage} to dynamically
+     * optimize your payment flow and comply with regional legislation and network rules, such as <a
+     * href="https://stripe.com/docs/strong-customer-authentication">SCA</a>.
      *
      * <p>If {@code setup_future_usage} is already set and you are performing a request using a
      * publishable key, you may only update the value from {@code on_session} to {@code
@@ -591,22 +579,16 @@ public class PaymentIntentUpdateParams extends ApiRequestParams {
     /**
      * Indicates that you intend to make future payments with this PaymentIntent's payment method.
      *
-     * <p>Providing this parameter will attach the payment method to the PaymentIntent's Customer,
-     * if present, after the PaymentIntent is confirmed and any required actions from the user are
-     * complete. If no Customer was provided, the payment method can still be <a
-     * href="https://stripe.com/docs/api/payment_methods/attach">attached</a> to a Customer after
-     * the transaction completes.
+     * <p>Providing this parameter will <a
+     * href="https://stripe.com/docs/payments/save-during-payment">attach the payment method</a> to
+     * the PaymentIntent's Customer, if present, after the PaymentIntent is confirmed and any
+     * required actions from the user are complete. If no Customer was provided, the payment method
+     * can still be <a href="https://stripe.com/docs/api/payment_methods/attach">attached</a> to a
+     * Customer after the transaction completes.
      *
-     * <p>For more, learn to <a href="https://stripe.com/docs/payments/save-during-payment">save
-     * card details during payment</a>.
-     *
-     * <p>Stripe uses {@code setup_future_usage} to dynamically optimize your payment flow and
-     * comply with regional legislation and network rules. For example, if your customer is impacted
-     * by <a href="https://stripe.com/docs/strong-customer-authentication">SCA</a>, using {@code
-     * off_session} will ensure that they are authenticated while processing this PaymentIntent. You
-     * will then be able to collect <a
-     * href="https://stripe.com/docs/payments/cards/charging-saved-cards#off-session-payments-with-saved-cards">off-session
-     * payments</a> for this customer.
+     * <p>When processing card payments, Stripe also uses {@code setup_future_usage} to dynamically
+     * optimize your payment flow and comply with regional legislation and network rules, such as <a
+     * href="https://stripe.com/docs/strong-customer-authentication">SCA</a>.
      *
      * <p>If {@code setup_future_usage} is already set and you are performing a request using a
      * publishable key, you may only update the value from {@code on_session} to {@code

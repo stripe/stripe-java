@@ -1027,16 +1027,18 @@ public class Source extends ApiResource implements MetadataStore<Source>, Paymen
     String address;
 
     /**
-     * The total amount that was charged by you. The amount charged is expressed in the source's
-     * currency.
+     * The total amount that was moved to your balance. This is almost always equal to the amount
+     * charged. In rare cases when customers deposit excess funds and we are unable to refund those,
+     * those funds get moved to your balance and show up in amount_charged as well. The amount
+     * charged is expressed in the source's currency.
      */
     @SerializedName("amount_charged")
     Long amountCharged;
 
     /**
      * The total amount received by the receiver source. {@code amount_received = amount_returned +
-     * amount_charged} is true at all time. The amount received is expressed in the source's
-     * currency.
+     * amount_charged} should be true for consumed sources unless customers deposit excess funds.
+     * The amount received is expressed in the source's currency.
      */
     @SerializedName("amount_received")
     Long amountReceived;
