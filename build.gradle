@@ -14,10 +14,10 @@ plugins {
     id "maven"
     id "jacoco"
     id "io.franzbecker.gradle-lombok" version "3.3.0"
-    id "com.diffplug.gradle.spotless" version "3.27.1"
+    id "com.diffplug.gradle.spotless" version "3.28.1"
     id "net.ltgt.errorprone" version "1.1.1"
-    id "com.github.kt3k.coveralls" version "2.10.0"
-    id "biz.aQute.bnd.builder" version "4.3.1"
+    id "com.github.kt3k.coveralls" version "2.10.1"
+    id "biz.aQute.bnd.builder" version "5.0.1"
     id "org.ajoberstar.git-publish" version "3.0.0-rc.1"
 }
 
@@ -59,10 +59,10 @@ dependencies {
     errorproneJavac group: "com.google.errorprone", name: "javac", version:"9+181-r4173-1"
     implementation group: "com.google.code.gson", name: "gson", version:"2.8.6"
     testImplementation group: "com.google.guava", name: "guava", version:"28.2-jre"
-    testImplementation group: "com.squareup.okhttp3", name: "mockwebserver", version: "4.4.0"
-    testImplementation group: "org.mockito", name: "mockito-core", version:"3.2.4"
-    testImplementation group: "org.junit.jupiter", name: "junit-jupiter-api", version: "5.6.0"
-    testRuntimeOnly group: "org.junit.jupiter", name: "junit-jupiter-engine", version: "5.6.0"
+    testImplementation group: "com.squareup.okhttp3", name: "mockwebserver", version: "4.4.1"
+    testImplementation group: "org.mockito", name: "mockito-core", version:"3.3.3"
+    testImplementation group: "org.junit.jupiter", name: "junit-jupiter-api", version: "5.6.1"
+    testRuntimeOnly group: "org.junit.jupiter", name: "junit-jupiter-engine", version: "5.6.1"
     testRuntimeOnly group: "org.slf4j", name: "slf4j-api", version: "1.7.30"
 }
 
