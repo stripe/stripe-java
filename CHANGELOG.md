@@ -1,5 +1,9 @@
 # Changelog
 
+## 18.13.1 - 2020-04-06
+* [#971](https://github.com/stripe/stripe-java/pull/971) Improve connection reuse
+* [#999](https://github.com/stripe/stripe-java/pull/999) Bump Gradle and other dependencies
+
 ## 18.13.0 - 2020-04-03
 * [#998](https://github.com/stripe/stripe-java/pull/998) Add support for `calculatedStatementDescriptor` on `Charge`
 
