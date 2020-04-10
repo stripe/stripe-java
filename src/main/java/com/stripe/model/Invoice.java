@@ -429,9 +429,11 @@ public class Invoice extends ApiResource implements HasId, MetadataStore<Invoice
   TransferData transferData;
 
   /**
-   * The time at which webhooks for this invoice were successfully delivered (if the invoice had no
-   * webhooks to deliver, this will match {@code created}). Invoice payment is delayed until
-   * webhooks are delivered, or until all webhook delivery attempts have been exhausted.
+   * Invoices are automatically paid or sent 1 hour after webhooks are delivered, or until all
+   * webhook delivery attempts have <a
+   * href="https://stripe.com/docs/billing/webhooks#understand">been exhausted</a>. This field
+   * tracks the time when webhooks for this invoice were successfully delivered. If the invoice had
+   * no webhooks to deliver, this will be set while the invoice is being created.
    */
   @SerializedName("webhooks_delivered_at")
   Long webhooksDeliveredAt;
@@ -1268,7 +1270,7 @@ public class Invoice extends ApiResource implements HasId, MetadataStore<Invoice
      * in_gst}, {@code no_vat}, {@code za_vat}, {@code ch_vat}, {@code mx_rfc}, {@code sg_uen},
      * {@code ru_inn}, {@code ca_bn}, {@code hk_br}, {@code es_cif}, {@code tw_vat}, {@code th_vat},
      * {@code jp_cn}, {@code li_uid}, {@code my_itn}, {@code us_ein}, {@code kr_brn}, {@code
-     * ca_qst}, {@code my_sst}, or {@code unknown}.
+     * ca_qst}, {@code my_sst}, {@code sg_gst}, or {@code unknown}.
      */
     @SerializedName("type")
     String type;
@@ -1366,10 +1368,7 @@ public class Invoice extends ApiResource implements HasId, MetadataStore<Invoice
   @Setter
   @EqualsAndHashCode(callSuper = false)
   public static class TransferData extends StripeObject {
-    /**
-     * The account (if any) where funds from the payment will be transferred to upon payment
-     * success.
-     */
+    /** The account where funds from the payment will be transferred to upon payment success. */
     @SerializedName("destination")
     @Getter(lombok.AccessLevel.NONE)
     @Setter(lombok.AccessLevel.NONE)

@@ -33,6 +33,14 @@ public class Card extends ApiResource implements HasId, MetadataStore<Card> {
   String brand;
 
   /**
+   * The reason why the card was canceled.
+   *
+   * <p>One of {@code lost}, or {@code stolen}.
+   */
+  @SerializedName("cancellation_reason")
+  String cancellationReason;
+
+  /**
    * An Issuing {@code Cardholder} object represents an individual or business entity who is <a
    * href="https://stripe.com/docs/issuing">issued</a> cards.
    *
@@ -119,7 +127,8 @@ public class Card extends ApiResource implements HasId, MetadataStore<Card> {
   /**
    * The reason why the previous card needed to be replaced.
    *
-   * <p>One of {@code damage}, {@code expiration}, {@code loss}, or {@code theft}.
+   * <p>One of {@code damage}, {@code damaged}, {@code expiration}, {@code expired}, {@code loss},
+   * {@code lost}, {@code stolen}, or {@code theft}.
    */
   @SerializedName("replacement_reason")
   String replacementReason;

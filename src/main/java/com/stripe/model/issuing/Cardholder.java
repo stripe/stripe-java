@@ -435,8 +435,7 @@ public class Cardholder extends ApiResource implements HasId, MetadataStore<Card
     String disabledReason;
 
     /**
-     * If not empty, this field contains the list of fields that need to be collected in order to
-     * verify and re-enabled the cardholder.
+     * Array of fields that need to be collected in order to verify and re-enable the cardholder.
      */
     @SerializedName("past_due")
     List<String> pastDue;

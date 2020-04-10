@@ -219,7 +219,9 @@ public class Charge extends ApiResource implements MetadataStore<Charge>, Balanc
 
   /** ID of the PaymentIntent associated with this charge, if one exists. */
   @SerializedName("payment_intent")
-  String paymentIntent;
+  @Getter(lombok.AccessLevel.NONE)
+  @Setter(lombok.AccessLevel.NONE)
+  ExpandableField<PaymentIntent> paymentIntent;
 
   /** ID of the payment method used in this charge. */
   @SerializedName("payment_method")
@@ -494,6 +496,25 @@ public class Charge extends ApiResource implements MetadataStore<Charge>, Balanc
 
   public void setOrderObject(Order expandableObject) {
     this.order = new ExpandableField<Order>(expandableObject.getId(), expandableObject);
+  }
+
+  /** Get ID of expandable {@code paymentIntent} object. */
+  public String getPaymentIntent() {
+    return (this.paymentIntent != null) ? this.paymentIntent.getId() : null;
+  }
+
+  public void setPaymentIntent(String id) {
+    this.paymentIntent = ApiResource.setExpandableFieldId(id, this.paymentIntent);
+  }
+
+  /** Get expanded {@code paymentIntent}. */
+  public PaymentIntent getPaymentIntentObject() {
+    return (this.paymentIntent != null) ? this.paymentIntent.getExpanded() : null;
+  }
+
+  public void setPaymentIntentObject(PaymentIntent expandableObject) {
+    this.paymentIntent =
+        new ExpandableField<PaymentIntent>(expandableObject.getId(), expandableObject);
   }
 
   /** Get ID of expandable {@code review} object. */

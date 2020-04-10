@@ -19,6 +19,10 @@ public class CardUpdateParams extends ApiRequestParams {
   @SerializedName("authorization_controls")
   AuthorizationControls authorizationControls;
 
+  /** Reason why the {@code status} of this card is {@code canceled}. */
+  @SerializedName("cancellation_reason")
+  CancellationReason cancellationReason;
+
   /** Specifies which fields in the response should be expanded. */
   @SerializedName("expand")
   List<String> expand;
@@ -49,18 +53,24 @@ public class CardUpdateParams extends ApiRequestParams {
   @SerializedName("spending_controls")
   SpendingControls spendingControls;
 
-  /** Whether authorizations can be approved on this card. */
+  /**
+   * Dictates whether authorizations can be approved on this card. If this card is being canceled
+   * because it was lost or stolen, this information should be provided as {@code
+   * cancellation_reason}.
+   */
   @SerializedName("status")
   Status status;
 
   private CardUpdateParams(
       AuthorizationControls authorizationControls,
+      CancellationReason cancellationReason,
       List<String> expand,
       Map<String, Object> extraParams,
       Object metadata,
       SpendingControls spendingControls,
       Status status) {
     this.authorizationControls = authorizationControls;
+    this.cancellationReason = cancellationReason;
     this.expand = expand;
     this.extraParams = extraParams;
     this.metadata = metadata;
@@ -74,6 +84,8 @@ public class CardUpdateParams extends ApiRequestParams {
 
   public static class Builder {
     private AuthorizationControls authorizationControls;
+
+    private CancellationReason cancellationReason;
 
     private List<String> expand;
 
@@ -89,6 +101,7 @@ public class CardUpdateParams extends ApiRequestParams {
     public CardUpdateParams build() {
       return new CardUpdateParams(
           this.authorizationControls,
+          this.cancellationReason,
           this.expand,
           this.extraParams,
           this.metadata,
@@ -103,6 +116,12 @@ public class CardUpdateParams extends ApiRequestParams {
      */
     public Builder setAuthorizationControls(AuthorizationControls authorizationControls) {
       this.authorizationControls = authorizationControls;
+      return this;
+    }
+
+    /** Reason why the {@code status} of this card is {@code canceled}. */
+    public Builder setCancellationReason(CancellationReason cancellationReason) {
+      this.cancellationReason = cancellationReason;
       return this;
     }
 
@@ -218,7 +237,11 @@ public class CardUpdateParams extends ApiRequestParams {
       return this;
     }
 
-    /** Whether authorizations can be approved on this card. */
+    /**
+     * Dictates whether authorizations can be approved on this card. If this card is being canceled
+     * because it was lost or stolen, this information should be provided as {@code
+     * cancellation_reason}.
+     */
     public Builder setStatus(Status status) {
       this.status = status;
       return this;
@@ -6270,6 +6293,21 @@ public class CardUpdateParams extends ApiRequestParams {
       BlockedCategory(String value) {
         this.value = value;
       }
+    }
+  }
+
+  public enum CancellationReason implements ApiRequestParams.EnumParam {
+    @SerializedName("lost")
+    LOST("lost"),
+
+    @SerializedName("stolen")
+    STOLEN("stolen");
+
+    @Getter(onMethod_ = {@Override})
+    private final String value;
+
+    CancellationReason(String value) {
+      this.value = value;
     }
   }
 

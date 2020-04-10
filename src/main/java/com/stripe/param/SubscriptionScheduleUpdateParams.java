@@ -692,8 +692,7 @@ public class SubscriptionScheduleUpdateParams extends ApiRequestParams {
      * href="https://stripe.com/docs/api/subscriptions/create#create_subscription-default_tax_rates">{@code
      * default_tax_rates}</a>, which means they will be the Invoice's <a
      * href="https://stripe.com/docs/api/invoices/create#create_invoice-default_tax_rates">{@code
-     * default_tax_rates}</a> for any Invoices issued by the Subscription during this Phase. When
-     * updating, pass an empty string to remove previously-defined tax rates.
+     * default_tax_rates}</a> for any Invoices issued by the Subscription during this Phase.
      */
     @SerializedName("default_tax_rates")
     Object defaultTaxRates;
@@ -979,8 +978,7 @@ public class SubscriptionScheduleUpdateParams extends ApiRequestParams {
        * href="https://stripe.com/docs/api/subscriptions/create#create_subscription-default_tax_rates">{@code
        * default_tax_rates}</a>, which means they will be the Invoice's <a
        * href="https://stripe.com/docs/api/invoices/create#create_invoice-default_tax_rates">{@code
-       * default_tax_rates}</a> for any Invoices issued by the Subscription during this Phase. When
-       * updating, pass an empty string to remove previously-defined tax rates.
+       * default_tax_rates}</a> for any Invoices issued by the Subscription during this Phase.
        */
       public Builder setDefaultTaxRates(EmptyParam defaultTaxRates) {
         this.defaultTaxRates = defaultTaxRates;
@@ -993,8 +991,7 @@ public class SubscriptionScheduleUpdateParams extends ApiRequestParams {
        * href="https://stripe.com/docs/api/subscriptions/create#create_subscription-default_tax_rates">{@code
        * default_tax_rates}</a>, which means they will be the Invoice's <a
        * href="https://stripe.com/docs/api/invoices/create#create_invoice-default_tax_rates">{@code
-       * default_tax_rates}</a> for any Invoices issued by the Subscription during this Phase. When
-       * updating, pass an empty string to remove previously-defined tax rates.
+       * default_tax_rates}</a> for any Invoices issued by the Subscription during this Phase.
        */
       public Builder setDefaultTaxRates(List<String> defaultTaxRates) {
         this.defaultTaxRates = defaultTaxRates;
