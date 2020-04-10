@@ -6692,11 +6692,23 @@ public class CardCreateParams extends ApiRequestParams {
     @SerializedName("damage")
     DAMAGE("damage"),
 
+    @SerializedName("damaged")
+    DAMAGED("damaged"),
+
     @SerializedName("expiration")
     EXPIRATION("expiration"),
 
+    @SerializedName("expired")
+    EXPIRED("expired"),
+
     @SerializedName("loss")
     LOSS("loss"),
+
+    @SerializedName("lost")
+    LOST("lost"),
+
+    @SerializedName("stolen")
+    STOLEN("stolen"),
 
     @SerializedName("theft")
     THEFT("theft");

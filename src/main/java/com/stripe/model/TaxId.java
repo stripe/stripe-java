@@ -56,8 +56,8 @@ public class TaxId extends ApiResource implements HasId {
    * Type of the tax ID, one of {@code au_abn}, {@code ca_bn}, {@code ca_qst}, {@code ch_vat},
    * {@code es_cif}, {@code eu_vat}, {@code hk_br}, {@code in_gst}, {@code jp_cn}, {@code kr_brn},
    * {@code li_uid}, {@code mx_rfc}, {@code my_itn}, {@code my_sst}, {@code no_vat}, {@code nz_gst},
-   * {@code ru_inn}, {@code sg_uen}, {@code th_vat}, {@code tw_vat}, {@code us_ein}, or {@code
-   * za_vat}. Note that some legacy tax IDs have type {@code unknown}
+   * {@code ru_inn}, {@code sg_gst}, {@code sg_uen}, {@code th_vat}, {@code tw_vat}, {@code us_ein},
+   * or {@code za_vat}. Note that some legacy tax IDs have type {@code unknown}
    */
   @SerializedName("type")
   String type;

@@ -26,7 +26,10 @@ import lombok.Setter;
 @EqualsAndHashCode(callSuper = false)
 public class Authorization extends ApiResource
     implements MetadataStore<Authorization>, BalanceTransactionSource {
-  /** The total amount in the card's currency that was authorized or rejected. */
+  /**
+   * The total amount that was authorized or rejected. This amount is in the card's currency and in
+   * the <a href="https://stripe.com/docs/currencies#zero-decimal">smallest currency unit</a>.
+   */
   @SerializedName("amount")
   Long amount;
 
@@ -124,7 +127,11 @@ public class Authorization extends ApiResource
   @SerializedName("livemode")
   Boolean livemode;
 
-  /** The total amount that was authorized or rejected in the local merchant_currency. */
+  /**
+   * The total amount that was authorized or rejected. This amount is in the {@code
+   * merchant_currency} and in the <a
+   * href="https://stripe.com/docs/currencies#zero-decimal">smallest currency unit</a>.
+   */
   @SerializedName("merchant_amount")
   Long merchantAmount;
 
@@ -359,22 +366,42 @@ public class Authorization extends ApiResource
         ApiResource.RequestMethod.POST, url, params, Authorization.class, options);
   }
 
-  /** Approves a pending Issuing <code>Authorization</code> object. */
+  /**
+   * Approves a pending Issuing <code>Authorization</code> object. This request should be made
+   * within the timeout window of the <a
+   * href="https://stripe.com/docs/issuing/controls/real-time-authorizations">real time
+   * authorization</a> flow.
+   */
   public Authorization approve() throws StripeException {
     return approve((Map<String, Object>) null, (RequestOptions) null);
   }
 
-  /** Approves a pending Issuing <code>Authorization</code> object. */
+  /**
+   * Approves a pending Issuing <code>Authorization</code> object. This request should be made
+   * within the timeout window of the <a
+   * href="https://stripe.com/docs/issuing/controls/real-time-authorizations">real time
+   * authorization</a> flow.
+   */
   public Authorization approve(RequestOptions options) throws StripeException {
     return approve((Map<String, Object>) null, options);
   }
 
-  /** Approves a pending Issuing <code>Authorization</code> object. */
+  /**
+   * Approves a pending Issuing <code>Authorization</code> object. This request should be made
+   * within the timeout window of the <a
+   * href="https://stripe.com/docs/issuing/controls/real-time-authorizations">real time
+   * authorization</a> flow.
+   */
   public Authorization approve(Map<String, Object> params) throws StripeException {
     return approve(params, (RequestOptions) null);
   }
 
-  /** Approves a pending Issuing <code>Authorization</code> object. */
+  /**
+   * Approves a pending Issuing <code>Authorization</code> object. This request should be made
+   * within the timeout window of the <a
+   * href="https://stripe.com/docs/issuing/controls/real-time-authorizations">real time
+   * authorization</a> flow.
+   */
   public Authorization approve(Map<String, Object> params, RequestOptions options)
       throws StripeException {
     String url =
@@ -387,12 +414,22 @@ public class Authorization extends ApiResource
         ApiResource.RequestMethod.POST, url, params, Authorization.class, options);
   }
 
-  /** Approves a pending Issuing <code>Authorization</code> object. */
+  /**
+   * Approves a pending Issuing <code>Authorization</code> object. This request should be made
+   * within the timeout window of the <a
+   * href="https://stripe.com/docs/issuing/controls/real-time-authorizations">real time
+   * authorization</a> flow.
+   */
   public Authorization approve(AuthorizationApproveParams params) throws StripeException {
     return approve(params, (RequestOptions) null);
   }
 
-  /** Approves a pending Issuing <code>Authorization</code> object. */
+  /**
+   * Approves a pending Issuing <code>Authorization</code> object. This request should be made
+   * within the timeout window of the <a
+   * href="https://stripe.com/docs/issuing/controls/real-time-authorizations">real time
+   * authorization</a> flow.
+   */
   public Authorization approve(AuthorizationApproveParams params, RequestOptions options)
       throws StripeException {
     String url =
@@ -405,22 +442,42 @@ public class Authorization extends ApiResource
         ApiResource.RequestMethod.POST, url, params, Authorization.class, options);
   }
 
-  /** Declines a pending Issuing <code>Authorization</code> object. */
+  /**
+   * Declines a pending Issuing <code>Authorization</code> object. This request should be made
+   * within the timeout window of the <a
+   * href="https://stripe.com/docs/issuing/controls/real-time-authorizations">real time
+   * authorization</a> flow.
+   */
   public Authorization decline() throws StripeException {
     return decline((Map<String, Object>) null, (RequestOptions) null);
   }
 
-  /** Declines a pending Issuing <code>Authorization</code> object. */
+  /**
+   * Declines a pending Issuing <code>Authorization</code> object. This request should be made
+   * within the timeout window of the <a
+   * href="https://stripe.com/docs/issuing/controls/real-time-authorizations">real time
+   * authorization</a> flow.
+   */
   public Authorization decline(RequestOptions options) throws StripeException {
     return decline((Map<String, Object>) null, options);
   }
 
-  /** Declines a pending Issuing <code>Authorization</code> object. */
+  /**
+   * Declines a pending Issuing <code>Authorization</code> object. This request should be made
+   * within the timeout window of the <a
+   * href="https://stripe.com/docs/issuing/controls/real-time-authorizations">real time
+   * authorization</a> flow.
+   */
   public Authorization decline(Map<String, Object> params) throws StripeException {
     return decline(params, (RequestOptions) null);
   }
 
-  /** Declines a pending Issuing <code>Authorization</code> object. */
+  /**
+   * Declines a pending Issuing <code>Authorization</code> object. This request should be made
+   * within the timeout window of the <a
+   * href="https://stripe.com/docs/issuing/controls/real-time-authorizations">real time
+   * authorization</a> flow.
+   */
   public Authorization decline(Map<String, Object> params, RequestOptions options)
       throws StripeException {
     String url =
@@ -433,12 +490,22 @@ public class Authorization extends ApiResource
         ApiResource.RequestMethod.POST, url, params, Authorization.class, options);
   }
 
-  /** Declines a pending Issuing <code>Authorization</code> object. */
+  /**
+   * Declines a pending Issuing <code>Authorization</code> object. This request should be made
+   * within the timeout window of the <a
+   * href="https://stripe.com/docs/issuing/controls/real-time-authorizations">real time
+   * authorization</a> flow.
+   */
   public Authorization decline(AuthorizationDeclineParams params) throws StripeException {
     return decline(params, (RequestOptions) null);
   }
 
-  /** Declines a pending Issuing <code>Authorization</code> object. */
+  /**
+   * Declines a pending Issuing <code>Authorization</code> object. This request should be made
+   * within the timeout window of the <a
+   * href="https://stripe.com/docs/issuing/controls/real-time-authorizations">real time
+   * authorization</a> flow.
+   */
   public Authorization decline(AuthorizationDeclineParams params, RequestOptions options)
       throws StripeException {
     String url =
@@ -456,9 +523,10 @@ public class Authorization extends ApiResource
   @EqualsAndHashCode(callSuper = false)
   public static class PendingRequest extends StripeObject {
     /**
-     * The additional amount Stripe will hold if the authorization is approved, in the <a
-     * href="https://stripe.com/docs/api#issuing_authorization_object-pending-request-currency">currency</a>,
-     * which is always the card's currency.
+     * The additional amount Stripe will hold if the authorization is approved, in the card's <a
+     * href="https://stripe.com/docs/api#issuing_authorization_object-pending-request-currency">currency</a>
+     * and in the <a href="https://stripe.com/docs/currencies#zero-decimal">smallest currency
+     * unit</a>.
      */
     @SerializedName("amount")
     Long amount;
@@ -479,7 +547,11 @@ public class Authorization extends ApiResource
     @SerializedName("is_amount_controllable")
     Boolean isAmountControllable;
 
-    /** The amount the merchant is requesting to be authorized in the {@code merchant_currency}. */
+    /**
+     * The amount the merchant is requesting to be authorized in the {@code merchant_currency}. The
+     * amount is in the <a href="https://stripe.com/docs/currencies#zero-decimal">smallest currency
+     * unit</a>.
+     */
     @SerializedName("merchant_amount")
     Long merchantAmount;
 
@@ -493,8 +565,9 @@ public class Authorization extends ApiResource
   @EqualsAndHashCode(callSuper = false)
   public static class RequestHistory extends StripeObject {
     /**
-     * The amount of the authorization in your card's currency. Stripe held this amount from your
-     * account to fund the authorization, if the request was approved.
+     * The authorization amount in your card's currency and in the <a
+     * href="https://stripe.com/docs/currencies#zero-decimal">smallest currency unit</a>. Stripe
+     * held this amount from your account to fund the authorization if the request was approved.
      */
     @SerializedName("amount")
     Long amount;
@@ -542,7 +615,11 @@ public class Authorization extends ApiResource
     @SerializedName("held_currency")
     String heldCurrency;
 
-    /** The amount that was authorized at the time of this request. */
+    /**
+     * The amount that was authorized at the time of this request. This amount is in the {@code
+     * merchant_currency} and in the <a
+     * href="https://stripe.com/docs/currencies#zero-decimal">smallest currency unit</a>.
+     */
     @SerializedName("merchant_amount")
     Long merchantAmount;
 

@@ -208,8 +208,7 @@ public class SubscriptionCreateParams extends ApiRequestParams {
 
   /**
    * If specified, the funds from the subscription's invoices will be transferred to the destination
-   * and the ID of the resulting transfers will be found on the resulting charges. This will be
-   * unset if you POST an empty value.
+   * and the ID of the resulting transfers will be found on the resulting charges.
    */
   @SerializedName("transfer_data")
   TransferData transferData;
@@ -797,7 +796,6 @@ public class SubscriptionCreateParams extends ApiRequestParams {
     /**
      * If specified, the funds from the subscription's invoices will be transferred to the
      * destination and the ID of the resulting transfers will be found on the resulting charges.
-     * This will be unset if you POST an empty value.
      */
     public Builder setTransferData(TransferData transferData) {
       this.transferData = transferData;

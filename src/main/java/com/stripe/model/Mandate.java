@@ -54,13 +54,18 @@ public class Mandate extends ApiResource implements HasId {
   SingleUse singleUse;
 
   /**
-   * The status of the Mandate, one of {@code pending}, {@code inactive}, or {@code active}. The
-   * Mandate can be used to initiate a payment only if status=active.
+   * The status of the mandate, which indicates whether it can be used to initiate a payment.
+   *
+   * <p>One of {@code active}, {@code inactive}, or {@code pending}.
    */
   @SerializedName("status")
   String status;
 
-  /** The type of the mandate, one of {@code single_use} or {@code multi_use}. */
+  /**
+   * The type of the mandate.
+   *
+   * <p>One of {@code multi_use}, or {@code single_use}.
+   */
   @SerializedName("type")
   String type;
 
