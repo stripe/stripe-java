@@ -1,5 +1,11 @@
 # Changelog
 
+## 18.14.0 - 2020-04-10
+* [#1002](https://github.com/stripe/stripe-java/pull/1002) Multiple API changes
+  * Make `payment_intent` expandable on `Charge`
+  * Add support for `sg_gst` as a value for `type` on `TaxId` and related APIs
+  * Add `cancellation_reason` and new enum values for `replacement_reason` on Issuing `Card`
+
 ## 18.13.1 - 2020-04-06
 * [#971](https://github.com/stripe/stripe-java/pull/971) Improve connection reuse
 * [#999](https://github.com/stripe/stripe-java/pull/999) Bump Gradle and other dependencies
