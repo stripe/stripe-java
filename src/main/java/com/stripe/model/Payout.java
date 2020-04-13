@@ -139,11 +139,11 @@ public class Payout extends ApiResource implements MetadataStore<Payout>, Balanc
   String statementDescriptor;
 
   /**
-   * Current status of the payout ({@code paid}, {@code pending}, {@code in_transit}, {@code
-   * canceled} or {@code failed}). A payout will be {@code pending} until it is submitted to the
-   * bank, at which point it becomes {@code in_transit}. It will then change to {@code paid} if the
-   * transaction goes through. If it does not go through successfully, its status will change to
-   * {@code failed} or {@code canceled}.
+   * Current status of the payout: {@code paid}, {@code pending}, {@code in_transit}, {@code
+   * canceled} or {@code failed}. A payout is {@code pending} until it is submitted to the bank,
+   * when it becomes {@code in_transit}. The status then changes to {@code paid} if the transaction
+   * goes through, or to {@code failed} or {@code canceled} (within 5 business days). Some failed
+   * payouts may initially show as {@code paid} but then change to {@code failed}.
    */
   @SerializedName("status")
   String status;
