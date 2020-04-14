@@ -17,22 +17,4 @@ public class DisputeTest extends BaseStripeTest {
     assertNotNull(dispute.getId());
     assertEquals("issuing.dispute", dispute.getObject());
   }
-
-  @Test
-  public void testDeserializeWithExpansions() throws Exception {
-    final String[] expansions = {
-      "disputed_transaction",
-    };
-    final String data = getFixture("/v1/issuing/disputes/idp_123", expansions);
-    final Dispute dispute = ApiResource.GSON.fromJson(data, Dispute.class);
-
-    assertNotNull(dispute);
-    assertNotNull(dispute.getId());
-    assertEquals("issuing.dispute", dispute.getObject());
-
-    final Transaction disputedTransaction = dispute.getDisputedTransactionObject();
-    assertNotNull(disputedTransaction);
-    assertNotNull(disputedTransaction.getId());
-    assertEquals(dispute.getDisputedTransaction(), disputedTransaction.getId());
-  }
 }

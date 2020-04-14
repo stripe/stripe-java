@@ -16,9 +16,10 @@ public class DisputeTest extends BaseStripeTest {
 
   @Test
   public void testCreate() throws StripeException {
+    final Map<String, String> metadata = new HashMap<>();
+    metadata.put("key", "value");
     final Map<String, Object> params = new HashMap<>();
-    params.put("reason", "fraudulent");
-    params.put("disputed_transaction", "ipi_123");
+    params.put("metadata", metadata);
 
     final Dispute dispute = Dispute.create(params);
 
