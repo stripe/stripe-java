@@ -3139,12 +3139,21 @@ public class AccountCreateParams extends ApiRequestParams {
       @SerializedName("primary_color")
       String primaryColor;
 
+      /** A CSS hex color value representing the secondary branding color for this account. */
+      @SerializedName("secondary_color")
+      String secondaryColor;
+
       private Branding(
-          Map<String, Object> extraParams, String icon, String logo, String primaryColor) {
+          Map<String, Object> extraParams,
+          String icon,
+          String logo,
+          String primaryColor,
+          String secondaryColor) {
         this.extraParams = extraParams;
         this.icon = icon;
         this.logo = logo;
         this.primaryColor = primaryColor;
+        this.secondaryColor = secondaryColor;
       }
 
       public static Builder builder() {
@@ -3160,9 +3169,12 @@ public class AccountCreateParams extends ApiRequestParams {
 
         private String primaryColor;
 
+        private String secondaryColor;
+
         /** Finalize and obtain parameter instance from this builder. */
         public Branding build() {
-          return new Branding(this.extraParams, this.icon, this.logo, this.primaryColor);
+          return new Branding(
+              this.extraParams, this.icon, this.logo, this.primaryColor, this.secondaryColor);
         }
 
         /**
@@ -3215,6 +3227,12 @@ public class AccountCreateParams extends ApiRequestParams {
         /** A CSS hex color value representing the primary branding color for this account. */
         public Builder setPrimaryColor(String primaryColor) {
           this.primaryColor = primaryColor;
+          return this;
+        }
+
+        /** A CSS hex color value representing the secondary branding color for this account. */
+        public Builder setSecondaryColor(String secondaryColor) {
+          this.secondaryColor = secondaryColor;
           return this;
         }
       }

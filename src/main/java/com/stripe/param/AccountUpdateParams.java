@@ -3647,12 +3647,21 @@ public class AccountUpdateParams extends ApiRequestParams {
       @SerializedName("primary_color")
       Object primaryColor;
 
+      /** A CSS hex color value representing the secondary branding color for this account. */
+      @SerializedName("secondary_color")
+      Object secondaryColor;
+
       private Branding(
-          Map<String, Object> extraParams, Object icon, Object logo, Object primaryColor) {
+          Map<String, Object> extraParams,
+          Object icon,
+          Object logo,
+          Object primaryColor,
+          Object secondaryColor) {
         this.extraParams = extraParams;
         this.icon = icon;
         this.logo = logo;
         this.primaryColor = primaryColor;
+        this.secondaryColor = secondaryColor;
       }
 
       public static Builder builder() {
@@ -3668,9 +3677,12 @@ public class AccountUpdateParams extends ApiRequestParams {
 
         private Object primaryColor;
 
+        private Object secondaryColor;
+
         /** Finalize and obtain parameter instance from this builder. */
         public Branding build() {
-          return new Branding(this.extraParams, this.icon, this.logo, this.primaryColor);
+          return new Branding(
+              this.extraParams, this.icon, this.logo, this.primaryColor, this.secondaryColor);
         }
 
         /**
@@ -3748,6 +3760,18 @@ public class AccountUpdateParams extends ApiRequestParams {
         /** A CSS hex color value representing the primary branding color for this account. */
         public Builder setPrimaryColor(EmptyParam primaryColor) {
           this.primaryColor = primaryColor;
+          return this;
+        }
+
+        /** A CSS hex color value representing the secondary branding color for this account. */
+        public Builder setSecondaryColor(String secondaryColor) {
+          this.secondaryColor = secondaryColor;
+          return this;
+        }
+
+        /** A CSS hex color value representing the secondary branding color for this account. */
+        public Builder setSecondaryColor(EmptyParam secondaryColor) {
+          this.secondaryColor = secondaryColor;
           return this;
         }
       }

@@ -1074,6 +1074,10 @@ public class Account extends ApiResource implements MetadataStore<Account>, Paym
     @SerializedName("primary_color")
     String primaryColor;
 
+    /** A CSS hex color value representing the secondary branding color for this account. */
+    @SerializedName("secondary_color")
+    String secondaryColor;
+
     /** Get ID of expandable {@code icon} object. */
     public String getIcon() {
       return (this.icon != null) ? this.icon.getId() : null;

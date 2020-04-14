@@ -1209,7 +1209,7 @@ public class PaymentIntentCreateParams extends ApiRequestParams {
   public static class PaymentMethodOptions {
     /** Configuration for any card payments attempted on this PaymentIntent. */
     @SerializedName("card")
-    Card card;
+    Object card;
 
     /**
      * Map of extra parameters for custom features not available in this client library. The content
@@ -1220,7 +1220,7 @@ public class PaymentIntentCreateParams extends ApiRequestParams {
     @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
     Map<String, Object> extraParams;
 
-    private PaymentMethodOptions(Card card, Map<String, Object> extraParams) {
+    private PaymentMethodOptions(Object card, Map<String, Object> extraParams) {
       this.card = card;
       this.extraParams = extraParams;
     }
@@ -1230,7 +1230,7 @@ public class PaymentIntentCreateParams extends ApiRequestParams {
     }
 
     public static class Builder {
-      private Card card;
+      private Object card;
 
       private Map<String, Object> extraParams;
 
@@ -1241,6 +1241,12 @@ public class PaymentIntentCreateParams extends ApiRequestParams {
 
       /** Configuration for any card payments attempted on this PaymentIntent. */
       public Builder setCard(Card card) {
+        this.card = card;
+        return this;
+      }
+
+      /** Configuration for any card payments attempted on this PaymentIntent. */
+      public Builder setCard(EmptyParam card) {
         this.card = card;
         return this;
       }
