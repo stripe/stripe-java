@@ -1130,10 +1130,6 @@ public class Charge extends ApiResource implements MetadataStore<Charge>, Balanc
     @Setter
     @EqualsAndHashCode(callSuper = false)
     public static class AcssDebit extends StripeObject {
-      /** Two-letter ISO code representing the country the bank account is located in. */
-      @SerializedName("country")
-      String country;
-
       /**
        * Uniquely identifies this particular bank account. You can use this attribute to check
        * whether two bank accounts are the same.
@@ -1144,10 +1140,6 @@ public class Charge extends ApiResource implements MetadataStore<Charge>, Balanc
       /** Last four digits of the bank account number. */
       @SerializedName("last4")
       String last4;
-
-      /** Routing transit number of the bank account. */
-      @SerializedName("routing_number")
-      String routingNumber;
     }
 
     @Getter

@@ -40,10 +40,6 @@ public class CardholderListParams extends ApiRequestParams {
   @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
   Map<String, Object> extraParams;
 
-  /** [DEPRECATED] Only return the default cardholder. */
-  @SerializedName("is_default")
-  Boolean isDefault;
-
   /**
    * A limit on the number of objects to be returned. Limit can range between 1 and 100, and the
    * default is 10.
@@ -83,7 +79,6 @@ public class CardholderListParams extends ApiRequestParams {
       String endingBefore,
       List<String> expand,
       Map<String, Object> extraParams,
-      Boolean isDefault,
       Long limit,
       String phoneNumber,
       String startingAfter,
@@ -94,7 +89,6 @@ public class CardholderListParams extends ApiRequestParams {
     this.endingBefore = endingBefore;
     this.expand = expand;
     this.extraParams = extraParams;
-    this.isDefault = isDefault;
     this.limit = limit;
     this.phoneNumber = phoneNumber;
     this.startingAfter = startingAfter;
@@ -117,8 +111,6 @@ public class CardholderListParams extends ApiRequestParams {
 
     private Map<String, Object> extraParams;
 
-    private Boolean isDefault;
-
     private Long limit;
 
     private String phoneNumber;
@@ -137,7 +129,6 @@ public class CardholderListParams extends ApiRequestParams {
           this.endingBefore,
           this.expand,
           this.extraParams,
-          this.isDefault,
           this.limit,
           this.phoneNumber,
           this.startingAfter,
@@ -223,12 +214,6 @@ public class CardholderListParams extends ApiRequestParams {
         this.extraParams = new HashMap<>();
       }
       this.extraParams.putAll(map);
-      return this;
-    }
-
-    /** [DEPRECATED] Only return the default cardholder. */
-    public Builder setIsDefault(Boolean isDefault) {
-      this.isDefault = isDefault;
       return this;
     }
 
@@ -403,9 +388,6 @@ public class CardholderListParams extends ApiRequestParams {
   }
 
   public enum Type implements ApiRequestParams.EnumParam {
-    @SerializedName("business_entity")
-    BUSINESS_ENTITY("business_entity"),
-
     @SerializedName("company")
     COMPANY("company"),
 

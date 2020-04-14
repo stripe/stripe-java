@@ -107,13 +107,6 @@ public class SubscriptionSchedule extends ApiResource
   String releasedSubscription;
 
   /**
-   * This field has been deprecated. Interval and duration at which the subscription schedule renews
-   * for when it ends if {@code renewal_behavior} is {@code renew}.
-   */
-  @SerializedName("renewal_interval")
-  RenewalInterval renewalInterval;
-
-  /**
    * The present status of the subscription schedule. Possible values are {@code not_started},
    * {@code active}, {@code completed}, {@code released}, and {@code canceled}. You can read more
    * about the different states in our <a
@@ -727,22 +720,5 @@ public class SubscriptionSchedule extends ApiResource
     public void setPlanObject(Plan expandableObject) {
       this.plan = new ExpandableField<Plan>(expandableObject.getId(), expandableObject);
     }
-  }
-
-  @Getter
-  @Setter
-  @EqualsAndHashCode(callSuper = false)
-  public static class RenewalInterval extends StripeObject {
-    /**
-     * Interval at which to renew the subscription schedule for when it ends.
-     *
-     * <p>One of {@code day}, {@code month}, {@code week}, or {@code year}.
-     */
-    @SerializedName("interval")
-    String interval;
-
-    /** Number of intervals to renew the subscription schedule for when it ends. */
-    @SerializedName("length")
-    Long length;
   }
 }
