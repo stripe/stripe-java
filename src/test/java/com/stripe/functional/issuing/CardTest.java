@@ -6,7 +6,6 @@ import com.stripe.BaseStripeTest;
 import com.stripe.exception.StripeException;
 import com.stripe.model.issuing.Card;
 import com.stripe.model.issuing.CardCollection;
-import com.stripe.model.issuing.CardDetails;
 import com.stripe.net.ApiResource;
 import java.util.HashMap;
 import java.util.Map;
@@ -25,19 +24,6 @@ public class CardTest extends BaseStripeTest {
 
     assertNotNull(card);
     verifyRequest(ApiResource.RequestMethod.POST, String.format("/v1/issuing/cards"), params);
-  }
-
-  @Test
-  public void testDetails() throws StripeException {
-    final Card card = Card.retrieve(CARD_ID);
-
-    final CardDetails cardDetails = card.details((Map<String, Object>) null);
-
-    assertNotNull(cardDetails);
-    verifyRequest(
-        ApiResource.RequestMethod.GET,
-        String.format("/v1/issuing/cards/%s/details", card.getId()),
-        null);
   }
 
   @Test
