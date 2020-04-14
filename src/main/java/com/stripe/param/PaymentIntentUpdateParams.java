@@ -76,7 +76,7 @@ public class PaymentIntentUpdateParams extends ApiRequestParams {
    * metadata}.
    */
   @SerializedName("metadata")
-  Map<String, String> metadata;
+  Object metadata;
 
   /**
    * ID of the payment method (a PaymentMethod, Card, or <a
@@ -190,7 +190,7 @@ public class PaymentIntentUpdateParams extends ApiRequestParams {
       Object description,
       List<String> expand,
       Map<String, Object> extraParams,
-      Map<String, String> metadata,
+      Object metadata,
       Object paymentMethod,
       PaymentMethodOptions paymentMethodOptions,
       List<String> paymentMethodTypes,
@@ -244,7 +244,7 @@ public class PaymentIntentUpdateParams extends ApiRequestParams {
 
     private Map<String, Object> extraParams;
 
-    private Map<String, String> metadata;
+    private Object metadata;
 
     private Object paymentMethod;
 
@@ -448,11 +448,12 @@ public class PaymentIntentUpdateParams extends ApiRequestParams {
      * and subsequent calls add additional key/value pairs to the original map. See {@link
      * PaymentIntentUpdateParams#metadata} for the field documentation.
      */
+    @SuppressWarnings("unchecked")
     public Builder putMetadata(String key, String value) {
-      if (this.metadata == null) {
-        this.metadata = new HashMap<>();
+      if (this.metadata == null || this.metadata instanceof EmptyParam) {
+        this.metadata = new HashMap<String, String>();
       }
-      this.metadata.put(key, value);
+      ((Map<String, String>) this.metadata).put(key, value);
       return this;
     }
 
@@ -461,11 +462,34 @@ public class PaymentIntentUpdateParams extends ApiRequestParams {
      * `put/putAll` call, and subsequent calls add additional key/value pairs to the original map.
      * See {@link PaymentIntentUpdateParams#metadata} for the field documentation.
      */
+    @SuppressWarnings("unchecked")
     public Builder putAllMetadata(Map<String, String> map) {
-      if (this.metadata == null) {
-        this.metadata = new HashMap<>();
+      if (this.metadata == null || this.metadata instanceof EmptyParam) {
+        this.metadata = new HashMap<String, String>();
       }
-      this.metadata.putAll(map);
+      ((Map<String, String>) this.metadata).putAll(map);
+      return this;
+    }
+
+    /**
+     * Set of key-value pairs that you can attach to an object. This can be useful for storing
+     * additional information about the object in a structured format. Individual keys can be unset
+     * by posting an empty value to them. All keys can be unset by posting an empty value to {@code
+     * metadata}.
+     */
+    public Builder setMetadata(EmptyParam metadata) {
+      this.metadata = metadata;
+      return this;
+    }
+
+    /**
+     * Set of key-value pairs that you can attach to an object. This can be useful for storing
+     * additional information about the object in a structured format. Individual keys can be unset
+     * by posting an empty value to them. All keys can be unset by posting an empty value to {@code
+     * metadata}.
+     */
+    public Builder setMetadata(Map<String, String> metadata) {
+      this.metadata = metadata;
       return this;
     }
 
@@ -713,7 +737,7 @@ public class PaymentIntentUpdateParams extends ApiRequestParams {
   public static class PaymentMethodOptions {
     /** Configuration for any card payments attempted on this PaymentIntent. */
     @SerializedName("card")
-    Card card;
+    Object card;
 
     /**
      * Map of extra parameters for custom features not available in this client library. The content
@@ -724,7 +748,7 @@ public class PaymentIntentUpdateParams extends ApiRequestParams {
     @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
     Map<String, Object> extraParams;
 
-    private PaymentMethodOptions(Card card, Map<String, Object> extraParams) {
+    private PaymentMethodOptions(Object card, Map<String, Object> extraParams) {
       this.card = card;
       this.extraParams = extraParams;
     }
@@ -734,7 +758,7 @@ public class PaymentIntentUpdateParams extends ApiRequestParams {
     }
 
     public static class Builder {
-      private Card card;
+      private Object card;
 
       private Map<String, Object> extraParams;
 
@@ -745,6 +769,12 @@ public class PaymentIntentUpdateParams extends ApiRequestParams {
 
       /** Configuration for any card payments attempted on this PaymentIntent. */
       public Builder setCard(Card card) {
+        this.card = card;
+        return this;
+      }
+
+      /** Configuration for any card payments attempted on this PaymentIntent. */
+      public Builder setCard(EmptyParam card) {
         this.card = card;
         return this;
       }
