@@ -369,7 +369,7 @@ public class Authorization extends ApiResource
   /**
    * Approves a pending Issuing <code>Authorization</code> object. This request should be made
    * within the timeout window of the <a
-   * href="https://stripe.com/docs/issuing/controls/real-time-authorizations">real time
+   * href="https://stripe.com/docs/issuing/controls/real-time-authorizations">real-time
    * authorization</a> flow.
    */
   public Authorization approve() throws StripeException {
@@ -379,7 +379,7 @@ public class Authorization extends ApiResource
   /**
    * Approves a pending Issuing <code>Authorization</code> object. This request should be made
    * within the timeout window of the <a
-   * href="https://stripe.com/docs/issuing/controls/real-time-authorizations">real time
+   * href="https://stripe.com/docs/issuing/controls/real-time-authorizations">real-time
    * authorization</a> flow.
    */
   public Authorization approve(RequestOptions options) throws StripeException {
@@ -389,7 +389,7 @@ public class Authorization extends ApiResource
   /**
    * Approves a pending Issuing <code>Authorization</code> object. This request should be made
    * within the timeout window of the <a
-   * href="https://stripe.com/docs/issuing/controls/real-time-authorizations">real time
+   * href="https://stripe.com/docs/issuing/controls/real-time-authorizations">real-time
    * authorization</a> flow.
    */
   public Authorization approve(Map<String, Object> params) throws StripeException {
@@ -399,7 +399,7 @@ public class Authorization extends ApiResource
   /**
    * Approves a pending Issuing <code>Authorization</code> object. This request should be made
    * within the timeout window of the <a
-   * href="https://stripe.com/docs/issuing/controls/real-time-authorizations">real time
+   * href="https://stripe.com/docs/issuing/controls/real-time-authorizations">real-time
    * authorization</a> flow.
    */
   public Authorization approve(Map<String, Object> params, RequestOptions options)
@@ -417,7 +417,7 @@ public class Authorization extends ApiResource
   /**
    * Approves a pending Issuing <code>Authorization</code> object. This request should be made
    * within the timeout window of the <a
-   * href="https://stripe.com/docs/issuing/controls/real-time-authorizations">real time
+   * href="https://stripe.com/docs/issuing/controls/real-time-authorizations">real-time
    * authorization</a> flow.
    */
   public Authorization approve(AuthorizationApproveParams params) throws StripeException {
@@ -427,7 +427,7 @@ public class Authorization extends ApiResource
   /**
    * Approves a pending Issuing <code>Authorization</code> object. This request should be made
    * within the timeout window of the <a
-   * href="https://stripe.com/docs/issuing/controls/real-time-authorizations">real time
+   * href="https://stripe.com/docs/issuing/controls/real-time-authorizations">real-time
    * authorization</a> flow.
    */
   public Authorization approve(AuthorizationApproveParams params, RequestOptions options)
@@ -742,7 +742,7 @@ public class Authorization extends ApiResource
     @SerializedName("expiry_check")
     String expiryCheck;
 
-    /** 3D Secure details on this authorization. */
+    /** 3D Secure details. */
     @SerializedName("three_d_secure")
     ThreeDSecure threeDSecure;
   }

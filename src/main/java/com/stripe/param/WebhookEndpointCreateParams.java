@@ -25,6 +25,10 @@ public class WebhookEndpointCreateParams extends ApiRequestParams {
   @SerializedName("connect")
   Boolean connect;
 
+  /** An optional description of what the wehbook is used for. */
+  @SerializedName("description")
+  String description;
+
   /**
    * The list of events to enable for this endpoint. You may specify {@code ['*']} to enable all
    * events, except those that require explicit selection.
@@ -61,6 +65,7 @@ public class WebhookEndpointCreateParams extends ApiRequestParams {
   private WebhookEndpointCreateParams(
       ApiVersion apiVersion,
       Boolean connect,
+      String description,
       List<EnabledEvent> enabledEvents,
       List<String> expand,
       Map<String, Object> extraParams,
@@ -68,6 +73,7 @@ public class WebhookEndpointCreateParams extends ApiRequestParams {
       String url) {
     this.apiVersion = apiVersion;
     this.connect = connect;
+    this.description = description;
     this.enabledEvents = enabledEvents;
     this.expand = expand;
     this.extraParams = extraParams;
@@ -84,6 +90,8 @@ public class WebhookEndpointCreateParams extends ApiRequestParams {
 
     private Boolean connect;
 
+    private String description;
+
     private List<EnabledEvent> enabledEvents;
 
     private List<String> expand;
@@ -99,6 +107,7 @@ public class WebhookEndpointCreateParams extends ApiRequestParams {
       return new WebhookEndpointCreateParams(
           this.apiVersion,
           this.connect,
+          this.description,
           this.enabledEvents,
           this.expand,
           this.extraParams,
@@ -121,6 +130,12 @@ public class WebhookEndpointCreateParams extends ApiRequestParams {
      */
     public Builder setConnect(Boolean connect) {
       this.connect = connect;
+      return this;
+    }
+
+    /** An optional description of what the wehbook is used for. */
+    public Builder setDescription(String description) {
+      this.description = description;
       return this;
     }
 

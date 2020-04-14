@@ -42,7 +42,7 @@ public class MerchantData extends StripeObject {
   @SerializedName("state")
   String state;
 
-  /** The url an online purchase was made from. */
+  /** URL provided by the merchant on a 3DS request. */
   @SerializedName("url")
   String url;
 }

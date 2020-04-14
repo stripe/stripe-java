@@ -11,6 +11,10 @@ import lombok.Getter;
 
 @Getter
 public class WebhookEndpointUpdateParams extends ApiRequestParams {
+  /** An optional description of what the wehbook is used for. */
+  @SerializedName("description")
+  Object description;
+
   /** Disable the webhook endpoint if set to true. */
   @SerializedName("disabled")
   Boolean disabled;
@@ -49,12 +53,14 @@ public class WebhookEndpointUpdateParams extends ApiRequestParams {
   Object url;
 
   private WebhookEndpointUpdateParams(
+      Object description,
       Boolean disabled,
       List<EnabledEvent> enabledEvents,
       List<String> expand,
       Map<String, Object> extraParams,
       Object metadata,
       Object url) {
+    this.description = description;
     this.disabled = disabled;
     this.enabledEvents = enabledEvents;
     this.expand = expand;
@@ -68,6 +74,8 @@ public class WebhookEndpointUpdateParams extends ApiRequestParams {
   }
 
   public static class Builder {
+    private Object description;
+
     private Boolean disabled;
 
     private List<EnabledEvent> enabledEvents;
@@ -83,12 +91,25 @@ public class WebhookEndpointUpdateParams extends ApiRequestParams {
     /** Finalize and obtain parameter instance from this builder. */
     public WebhookEndpointUpdateParams build() {
       return new WebhookEndpointUpdateParams(
+          this.description,
           this.disabled,
           this.enabledEvents,
           this.expand,
           this.extraParams,
           this.metadata,
           this.url);
+    }
+
+    /** An optional description of what the wehbook is used for. */
+    public Builder setDescription(String description) {
+      this.description = description;
+      return this;
+    }
+
+    /** An optional description of what the wehbook is used for. */
+    public Builder setDescription(EmptyParam description) {
+      this.description = description;
+      return this;
     }
 
     /** Disable the webhook endpoint if set to true. */
