@@ -1,5 +1,8 @@
 # Changelog
 
+## 18.16.0 - 2020-04-14
+* [#1006](https://github.com/stripe/stripe-java/pull/1006) Add support for `settings[branding][secondary_color]` on `Account`
+
 ## 18.15.0 - 2020-04-13
 * [#1003](https://github.com/stripe/stripe-java/pull/1003) Add support for `description` on `WebhookEndpoint`
 
