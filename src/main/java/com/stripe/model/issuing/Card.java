@@ -11,7 +11,6 @@ import com.stripe.model.StripeObject;
 import com.stripe.net.ApiResource;
 import com.stripe.net.RequestOptions;
 import com.stripe.param.issuing.CardCreateParams;
-import com.stripe.param.issuing.CardDetailsParams;
 import com.stripe.param.issuing.CardListParams;
 import com.stripe.param.issuing.CardRetrieveParams;
 import com.stripe.param.issuing.CardUpdateParams;
@@ -25,9 +24,6 @@ import lombok.Setter;
 @Setter
 @EqualsAndHashCode(callSuper = false)
 public class Card extends ApiResource implements HasId, MetadataStore<Card> {
-  @SerializedName("authorization_controls")
-  AuthorizationControls authorizationControls;
-
   /** The brand of the card. */
   @SerializedName("brand")
   String brand;
@@ -94,23 +90,12 @@ public class Card extends ApiResource implements HasId, MetadataStore<Card> {
   Map<String, String> metadata;
 
   /**
-   * [DEPRECATED] The name of the cardholder, printed on the card. Refer to {@code cardholder.name}
-   * instead.
-   */
-  @SerializedName("name")
-  String name;
-
-  /**
    * String representing the object's type. Objects of the same type share the same value.
    *
    * <p>Equal to {@code issuing.card}.
    */
   @SerializedName("object")
   String object;
-
-  /** Metadata about the PIN on the card. */
-  @SerializedName("pin")
-  Pin pin;
 
   /** The latest card that replaces this card, if any. */
   @SerializedName("replaced_by")
@@ -127,8 +112,7 @@ public class Card extends ApiResource implements HasId, MetadataStore<Card> {
   /**
    * The reason why the previous card needed to be replaced.
    *
-   * <p>One of {@code damage}, {@code damaged}, {@code expiration}, {@code expired}, {@code loss},
-   * {@code lost}, {@code stolen}, or {@code theft}.
+   * <p>One of {@code damaged}, {@code expired}, {@code lost}, or {@code stolen}.
    */
   @SerializedName("replacement_reason")
   String replacementReason;
@@ -138,12 +122,12 @@ public class Card extends ApiResource implements HasId, MetadataStore<Card> {
   Shipping shipping;
 
   @SerializedName("spending_controls")
-  AuthorizationControls spendingControls;
+  SpendingControls spendingControls;
 
   /**
    * Whether authorizations can be approved on this card.
    *
-   * <p>One of {@code active}, {@code canceled}, {@code inactive}, {@code lost}, or {@code stolen}.
+   * <p>One of {@code active}, {@code canceled}, or {@code inactive}.
    */
   @SerializedName("status")
   String status;
@@ -328,121 +312,6 @@ public class Card extends ApiResource implements HasId, MetadataStore<Card> {
     return ApiResource.request(ApiResource.RequestMethod.POST, url, params, Card.class, options);
   }
 
-  /**
-   * For virtual cards only. Retrieves an Issuing <code>card_details</code> object that contains <a
-   * href="https://stripe.com/docs/issuing/cards/virtual#virtual-card-info">the sensitive
-   * details</a> of a virtual card.
-   */
-  public CardDetails details() throws StripeException {
-    return details((Map<String, Object>) null, (RequestOptions) null);
-  }
-
-  /**
-   * For virtual cards only. Retrieves an Issuing <code>card_details</code> object that contains <a
-   * href="https://stripe.com/docs/issuing/cards/virtual#virtual-card-info">the sensitive
-   * details</a> of a virtual card.
-   */
-  public CardDetails details(Map<String, Object> params) throws StripeException {
-    return details(params, (RequestOptions) null);
-  }
-
-  /**
-   * For virtual cards only. Retrieves an Issuing <code>card_details</code> object that contains <a
-   * href="https://stripe.com/docs/issuing/cards/virtual#virtual-card-info">the sensitive
-   * details</a> of a virtual card.
-   */
-  public CardDetails details(Map<String, Object> params, RequestOptions options)
-      throws StripeException {
-    String url =
-        String.format(
-            "%s%s",
-            Stripe.getApiBase(),
-            String.format("/v1/issuing/cards/%s/details", ApiResource.urlEncodeId(this.getId())));
-    return ApiResource.request(
-        ApiResource.RequestMethod.GET, url, params, CardDetails.class, options);
-  }
-
-  /**
-   * For virtual cards only. Retrieves an Issuing <code>card_details</code> object that contains <a
-   * href="https://stripe.com/docs/issuing/cards/virtual#virtual-card-info">the sensitive
-   * details</a> of a virtual card.
-   */
-  public CardDetails details(CardDetailsParams params) throws StripeException {
-    return details(params, (RequestOptions) null);
-  }
-
-  /**
-   * For virtual cards only. Retrieves an Issuing <code>card_details</code> object that contains <a
-   * href="https://stripe.com/docs/issuing/cards/virtual#virtual-card-info">the sensitive
-   * details</a> of a virtual card.
-   */
-  public CardDetails details(CardDetailsParams params, RequestOptions options)
-      throws StripeException {
-    String url =
-        String.format(
-            "%s%s",
-            Stripe.getApiBase(),
-            String.format("/v1/issuing/cards/%s/details", ApiResource.urlEncodeId(this.getId())));
-    return ApiResource.request(
-        ApiResource.RequestMethod.GET, url, params, CardDetails.class, options);
-  }
-
-  @Getter
-  @Setter
-  @EqualsAndHashCode(callSuper = false)
-  public static class AuthorizationControls extends StripeObject {
-    /**
-     * Array of strings containing <a
-     * href="https://stripe.com/docs/api#issuing_authorization_object-merchant_data-category">categories</a>
-     * of authorizations permitted on this card.
-     */
-    @SerializedName("allowed_categories")
-    List<String> allowedCategories;
-
-    /**
-     * Array of strings containing <a
-     * href="https://stripe.com/docs/api#issuing_authorization_object-merchant_data-category">categories</a>
-     * of authorizations to always decline on this card.
-     */
-    @SerializedName("blocked_categories")
-    List<String> blockedCategories;
-
-    /**
-     * [DEPRECATED] The currency of the card. See <a
-     * href="https://stripe.com/docs/api#issuing_card_object-authorization_controls-max_amount">max_amount</a>
-     */
-    @SerializedName("currency")
-    String currency;
-
-    /**
-     * [DEPRECATED] Maximum count of approved authorizations on this card. Counts all authorizations
-     * retroactively.
-     */
-    @SerializedName("max_approvals")
-    Long maxApprovals;
-
-    /** Limit the spending with rules based on time intervals and categories. */
-    @SerializedName("spending_limits")
-    List<Card.SpendingLimit> spendingLimits;
-
-    /** Currency for the amounts within spending_limits. Locked to the currency of the card. */
-    @SerializedName("spending_limits_currency")
-    String spendingLimitsCurrency;
-  }
-
-  @Getter
-  @Setter
-  @EqualsAndHashCode(callSuper = false)
-  public static class Pin extends StripeObject {
-    /**
-     * Wether the PIN will be accepted or not.
-     *
-     * <p>One of {@code active}, or {@code blocked}.
-     */
-    @SerializedName("status")
-    String status;
-  }
-
   @Getter
   @Setter
   @EqualsAndHashCode(callSuper = false)
@@ -469,18 +338,10 @@ public class Card extends ApiResource implements HasId, MetadataStore<Card> {
     /**
      * Shipment service, such as {@code standard} or {@code express}.
      *
-     * <p>One of {@code express}, {@code overnight}, {@code priority}, or {@code standard}.
+     * <p>One of {@code express}, {@code priority}, or {@code standard}.
      */
     @SerializedName("service")
     String service;
-
-    /**
-     * [DEPRECATED] Shipment service, such as {@code standard} or {@code express}.
-     *
-     * <p>One of {@code express}, {@code overnight}, {@code priority}, or {@code standard}.
-     */
-    @SerializedName("speed")
-    String speed;
 
     /**
      * The delivery status of the card.
@@ -514,26 +375,55 @@ public class Card extends ApiResource implements HasId, MetadataStore<Card> {
   @Getter
   @Setter
   @EqualsAndHashCode(callSuper = false)
-  public static class SpendingLimit extends StripeObject {
-    /** Maximum amount allowed to spend per time interval. */
-    @SerializedName("amount")
-    Long amount;
+  public static class SpendingControls extends StripeObject {
+    /**
+     * Array of strings containing <a
+     * href="https://stripe.com/docs/api#issuing_authorization_object-merchant_data-category">categories</a>
+     * of authorizations permitted on this card.
+     */
+    @SerializedName("allowed_categories")
+    List<String> allowedCategories;
 
     /**
      * Array of strings containing <a
      * href="https://stripe.com/docs/api#issuing_authorization_object-merchant_data-category">categories</a>
-     * on which to apply the spending limit. Leave this blank to limit all charges.
+     * of authorizations to always decline on this card.
      */
-    @SerializedName("categories")
-    List<String> categories;
+    @SerializedName("blocked_categories")
+    List<String> blockedCategories;
 
-    /**
-     * The time interval or event with which to apply this spending limit towards.
-     *
-     * <p>One of {@code all_time}, {@code daily}, {@code monthly}, {@code per_authorization}, {@code
-     * weekly}, or {@code yearly}.
-     */
-    @SerializedName("interval")
-    String interval;
+    /** Limit the spending with rules based on time intervals and categories. */
+    @SerializedName("spending_limits")
+    List<Card.SpendingControls.SpendingLimit> spendingLimits;
+
+    /** Currency for the amounts within spending_limits. Locked to the currency of the card. */
+    @SerializedName("spending_limits_currency")
+    String spendingLimitsCurrency;
+
+    @Getter
+    @Setter
+    @EqualsAndHashCode(callSuper = false)
+    public static class SpendingLimit extends StripeObject {
+      /** Maximum amount allowed to spend per time interval. */
+      @SerializedName("amount")
+      Long amount;
+
+      /**
+       * Array of strings containing <a
+       * href="https://stripe.com/docs/api#issuing_authorization_object-merchant_data-category">categories</a>
+       * on which to apply the spending limit. Leave this blank to limit all charges.
+       */
+      @SerializedName("categories")
+      List<String> categories;
+
+      /**
+       * The time interval or event with which to apply this spending limit towards.
+       *
+       * <p>One of {@code all_time}, {@code daily}, {@code monthly}, {@code per_authorization},
+       * {@code weekly}, or {@code yearly}.
+       */
+      @SerializedName("interval")
+      String interval;
+    }
   }
 }

@@ -68,12 +68,6 @@ public class Transaction extends ApiResource
   @SerializedName("currency")
   String currency;
 
-  /** If you've disputed the transaction, the ID of the dispute. */
-  @SerializedName("dispute")
-  @Getter(lombok.AccessLevel.NONE)
-  @Setter(lombok.AccessLevel.NONE)
-  ExpandableField<Dispute> dispute;
-
   /** Unique identifier for the object. */
   @Getter(onMethod_ = {@Override})
   @SerializedName("id")
@@ -99,7 +93,7 @@ public class Transaction extends ApiResource
   String merchantCurrency;
 
   @SerializedName("merchant_data")
-  MerchantData merchantData;
+  Authorization.MerchantData merchantData;
 
   /**
    * Set of key-value pairs that you can attach to an object. This can be useful for storing
@@ -120,8 +114,7 @@ public class Transaction extends ApiResource
   /**
    * The nature of the transaction.
    *
-   * <p>One of {@code capture}, {@code cash_withdrawal}, {@code dispute}, {@code dispute_loss},
-   * {@code refund}, or {@code refund_reversal}.
+   * <p>One of {@code capture}, or {@code refund}.
    */
   @SerializedName("type")
   String type;
@@ -198,24 +191,6 @@ public class Transaction extends ApiResource
 
   public void setCardholderObject(Cardholder expandableObject) {
     this.cardholder = new ExpandableField<Cardholder>(expandableObject.getId(), expandableObject);
-  }
-
-  /** Get ID of expandable {@code dispute} object. */
-  public String getDispute() {
-    return (this.dispute != null) ? this.dispute.getId() : null;
-  }
-
-  public void setDispute(String id) {
-    this.dispute = ApiResource.setExpandableFieldId(id, this.dispute);
-  }
-
-  /** Get expanded {@code dispute}. */
-  public Dispute getDisputeObject() {
-    return (this.dispute != null) ? this.dispute.getExpanded() : null;
-  }
-
-  public void setDisputeObject(Dispute expandableObject) {
-    this.dispute = new ExpandableField<Dispute>(expandableObject.getId(), expandableObject);
   }
 
   /**
