@@ -51,10 +51,6 @@ public class TaxRateListParams extends ApiRequestParams {
   @SerializedName("limit")
   Long limit;
 
-  /** Optional range for tax rate percentage filtering. */
-  @SerializedName("percentage")
-  Object percentage;
-
   /**
    * A cursor for use in pagination. {@code starting_after} is an object ID that defines your place
    * in the list. For instance, if you make a list request and receive 100 objects, ending with
@@ -72,7 +68,6 @@ public class TaxRateListParams extends ApiRequestParams {
       Map<String, Object> extraParams,
       Boolean inclusive,
       Long limit,
-      Object percentage,
       String startingAfter) {
     this.active = active;
     this.created = created;
@@ -81,7 +76,6 @@ public class TaxRateListParams extends ApiRequestParams {
     this.extraParams = extraParams;
     this.inclusive = inclusive;
     this.limit = limit;
-    this.percentage = percentage;
     this.startingAfter = startingAfter;
   }
 
@@ -104,8 +98,6 @@ public class TaxRateListParams extends ApiRequestParams {
 
     private Long limit;
 
-    private Object percentage;
-
     private String startingAfter;
 
     /** Finalize and obtain parameter instance from this builder. */
@@ -118,7 +110,6 @@ public class TaxRateListParams extends ApiRequestParams {
           this.extraParams,
           this.inclusive,
           this.limit,
-          this.percentage,
           this.startingAfter);
     }
 
@@ -220,18 +211,6 @@ public class TaxRateListParams extends ApiRequestParams {
       return this;
     }
 
-    /** Optional range for tax rate percentage filtering. */
-    public Builder setPercentage(Percentage percentage) {
-      this.percentage = percentage;
-      return this;
-    }
-
-    /** Optional range for tax rate percentage filtering. */
-    public Builder setPercentage(Long percentage) {
-      this.percentage = percentage;
-      return this;
-    }
-
     /**
      * A cursor for use in pagination. {@code starting_after} is an object ID that defines your
      * place in the list. For instance, if you make a list request and receive 100 objects, ending
@@ -316,113 +295,6 @@ public class TaxRateListParams extends ApiRequestParams {
        * Add all map key/value pairs to `extraParams` map. A map is initialized for the first
        * `put/putAll` call, and subsequent calls add additional key/value pairs to the original map.
        * See {@link TaxRateListParams.Created#extraParams} for the field documentation.
-       */
-      public Builder putAllExtraParam(Map<String, Object> map) {
-        if (this.extraParams == null) {
-          this.extraParams = new HashMap<>();
-        }
-        this.extraParams.putAll(map);
-        return this;
-      }
-
-      /** Minimum value to filter by (exclusive). */
-      public Builder setGt(Long gt) {
-        this.gt = gt;
-        return this;
-      }
-
-      /** Minimum value to filter by (inclusive). */
-      public Builder setGte(Long gte) {
-        this.gte = gte;
-        return this;
-      }
-
-      /** Maximum value to filter by (exclusive). */
-      public Builder setLt(Long lt) {
-        this.lt = lt;
-        return this;
-      }
-
-      /** Maximum value to filter by (inclusive). */
-      public Builder setLte(Long lte) {
-        this.lte = lte;
-        return this;
-      }
-    }
-  }
-
-  @Getter
-  public static class Percentage {
-    /**
-     * Map of extra parameters for custom features not available in this client library. The content
-     * in this map is not serialized under this field's {@code @SerializedName} value. Instead, each
-     * key/value pair is serialized as if the key is a root-level field (serialized) name in this
-     * param object. Effectively, this map is flattened to its parent instance.
-     */
-    @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
-    Map<String, Object> extraParams;
-
-    /** Minimum value to filter by (exclusive). */
-    @SerializedName("gt")
-    Long gt;
-
-    /** Minimum value to filter by (inclusive). */
-    @SerializedName("gte")
-    Long gte;
-
-    /** Maximum value to filter by (exclusive). */
-    @SerializedName("lt")
-    Long lt;
-
-    /** Maximum value to filter by (inclusive). */
-    @SerializedName("lte")
-    Long lte;
-
-    private Percentage(Map<String, Object> extraParams, Long gt, Long gte, Long lt, Long lte) {
-      this.extraParams = extraParams;
-      this.gt = gt;
-      this.gte = gte;
-      this.lt = lt;
-      this.lte = lte;
-    }
-
-    public static Builder builder() {
-      return new Builder();
-    }
-
-    public static class Builder {
-      private Map<String, Object> extraParams;
-
-      private Long gt;
-
-      private Long gte;
-
-      private Long lt;
-
-      private Long lte;
-
-      /** Finalize and obtain parameter instance from this builder. */
-      public Percentage build() {
-        return new Percentage(this.extraParams, this.gt, this.gte, this.lt, this.lte);
-      }
-
-      /**
-       * Add a key/value pair to `extraParams` map. A map is initialized for the first `put/putAll`
-       * call, and subsequent calls add additional key/value pairs to the original map. See {@link
-       * TaxRateListParams.Percentage#extraParams} for the field documentation.
-       */
-      public Builder putExtraParam(String key, Object value) {
-        if (this.extraParams == null) {
-          this.extraParams = new HashMap<>();
-        }
-        this.extraParams.put(key, value);
-        return this;
-      }
-
-      /**
-       * Add all map key/value pairs to `extraParams` map. A map is initialized for the first
-       * `put/putAll` call, and subsequent calls add additional key/value pairs to the original map.
-       * See {@link TaxRateListParams.Percentage#extraParams} for the field documentation.
        */
       public Builder putAllExtraParam(Map<String, Object> map) {
         if (this.extraParams == null) {
