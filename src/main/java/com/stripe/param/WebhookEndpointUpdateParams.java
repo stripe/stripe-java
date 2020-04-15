@@ -479,18 +479,6 @@ public class WebhookEndpointUpdateParams extends ApiRequestParams {
     @SerializedName("issuing_cardholder.updated")
     ISSUING_CARDHOLDER__UPDATED("issuing_cardholder.updated"),
 
-    @SerializedName("issuing_dispute.created")
-    ISSUING_DISPUTE__CREATED("issuing_dispute.created"),
-
-    @SerializedName("issuing_dispute.updated")
-    ISSUING_DISPUTE__UPDATED("issuing_dispute.updated"),
-
-    @SerializedName("issuing_settlement.created")
-    ISSUING_SETTLEMENT__CREATED("issuing_settlement.created"),
-
-    @SerializedName("issuing_settlement.updated")
-    ISSUING_SETTLEMENT__UPDATED("issuing_settlement.updated"),
-
     @SerializedName("issuing_transaction.created")
     ISSUING_TRANSACTION__CREATED("issuing_transaction.created"),
 

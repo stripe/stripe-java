@@ -48,13 +48,6 @@ public class Token extends ApiResource implements HasId {
   @SerializedName("created")
   Long created;
 
-  /**
-   * Email of the user, whose token is created during Stripe Checkout. This field is non-standard,
-   * and maybe removed in the future.
-   */
-  @SerializedName("email")
-  String email;
-
   /** Unique identifier for the object. */
   @Getter(onMethod_ = {@Override})
   @SerializedName("id")

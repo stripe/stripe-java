@@ -22,10 +22,6 @@ public class TransactionListParams extends ApiRequestParams {
   @SerializedName("created")
   Object created;
 
-  /** Only return transactions that originate from a given dispute. */
-  @SerializedName("dispute")
-  String dispute;
-
   /**
    * A cursor for use in pagination. {@code ending_before} is an object ID that defines your place
    * in the list. For instance, if you make a list request and receive 100 objects, starting with
@@ -68,7 +64,6 @@ public class TransactionListParams extends ApiRequestParams {
       String card,
       String cardholder,
       Object created,
-      String dispute,
       String endingBefore,
       List<String> expand,
       Map<String, Object> extraParams,
@@ -77,7 +72,6 @@ public class TransactionListParams extends ApiRequestParams {
     this.card = card;
     this.cardholder = cardholder;
     this.created = created;
-    this.dispute = dispute;
     this.endingBefore = endingBefore;
     this.expand = expand;
     this.extraParams = extraParams;
@@ -96,8 +90,6 @@ public class TransactionListParams extends ApiRequestParams {
 
     private Object created;
 
-    private String dispute;
-
     private String endingBefore;
 
     private List<String> expand;
@@ -114,7 +106,6 @@ public class TransactionListParams extends ApiRequestParams {
           this.card,
           this.cardholder,
           this.created,
-          this.dispute,
           this.endingBefore,
           this.expand,
           this.extraParams,
@@ -143,12 +134,6 @@ public class TransactionListParams extends ApiRequestParams {
     /** Only return transactions that were created during the given date interval. */
     public Builder setCreated(Long created) {
       this.created = created;
-      return this;
-    }
-
-    /** Only return transactions that originate from a given dispute. */
-    public Builder setDispute(String dispute) {
-      this.dispute = dispute;
       return this;
     }
 

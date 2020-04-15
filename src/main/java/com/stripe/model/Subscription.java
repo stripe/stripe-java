@@ -292,7 +292,7 @@ public class Subscription extends ApiResource implements HasId, MetadataStore<Su
    * and the ID of the resulting transfers will be found on the resulting charges.
    */
   @SerializedName("transfer_data")
-  Invoice.TransferData transferData;
+  TransferData transferData;
 
   /** If the subscription has a trial, the end of that trial. */
   @SerializedName("trial_end")
@@ -817,5 +817,34 @@ public class Subscription extends ApiResource implements HasId, MetadataStore<Su
      */
     @SerializedName("trial_from_plan")
     Boolean trialFromPlan;
+  }
+
+  @Getter
+  @Setter
+  @EqualsAndHashCode(callSuper = false)
+  public static class TransferData extends StripeObject {
+    /** The account where funds from the payment will be transferred to upon payment success. */
+    @SerializedName("destination")
+    @Getter(lombok.AccessLevel.NONE)
+    @Setter(lombok.AccessLevel.NONE)
+    ExpandableField<Account> destination;
+
+    /** Get ID of expandable {@code destination} object. */
+    public String getDestination() {
+      return (this.destination != null) ? this.destination.getId() : null;
+    }
+
+    public void setDestination(String id) {
+      this.destination = ApiResource.setExpandableFieldId(id, this.destination);
+    }
+
+    /** Get expanded {@code destination}. */
+    public Account getDestinationObject() {
+      return (this.destination != null) ? this.destination.getExpanded() : null;
+    }
+
+    public void setDestinationObject(Account expandableObject) {
+      this.destination = new ExpandableField<Account>(expandableObject.getId(), expandableObject);
+    }
   }
 }

@@ -34,15 +34,6 @@ public class AuthorizationApproveParams extends ApiRequestParams {
   Map<String, Object> extraParams;
 
   /**
-   * [DEPRECATED] If the authorization's {@code is_held_amount_controllable} property is {@code
-   * true}, you may provide this value to control how much to hold for the authorization. Must be
-   * positive (use <a href="https://stripe.com/docs/api/issuing/authorizations/decline">{@code
-   * decline}</a> to decline an authorization request).
-   */
-  @SerializedName("held_amount")
-  Long heldAmount;
-
-  /**
    * Set of key-value pairs that you can attach to an object. This can be useful for storing
    * additional information about the object in a structured format. Individual keys can be unset by
    * posting an empty value to them. All keys can be unset by posting an empty value to {@code
@@ -52,15 +43,10 @@ public class AuthorizationApproveParams extends ApiRequestParams {
   Object metadata;
 
   private AuthorizationApproveParams(
-      Long amount,
-      List<String> expand,
-      Map<String, Object> extraParams,
-      Long heldAmount,
-      Object metadata) {
+      Long amount, List<String> expand, Map<String, Object> extraParams, Object metadata) {
     this.amount = amount;
     this.expand = expand;
     this.extraParams = extraParams;
-    this.heldAmount = heldAmount;
     this.metadata = metadata;
   }
 
@@ -75,14 +61,12 @@ public class AuthorizationApproveParams extends ApiRequestParams {
 
     private Map<String, Object> extraParams;
 
-    private Long heldAmount;
-
     private Object metadata;
 
     /** Finalize and obtain parameter instance from this builder. */
     public AuthorizationApproveParams build() {
       return new AuthorizationApproveParams(
-          this.amount, this.expand, this.extraParams, this.heldAmount, this.metadata);
+          this.amount, this.expand, this.extraParams, this.metadata);
     }
 
     /**
@@ -145,17 +129,6 @@ public class AuthorizationApproveParams extends ApiRequestParams {
         this.extraParams = new HashMap<>();
       }
       this.extraParams.putAll(map);
-      return this;
-    }
-
-    /**
-     * [DEPRECATED] If the authorization's {@code is_held_amount_controllable} property is {@code
-     * true}, you may provide this value to control how much to hold for the authorization. Must be
-     * positive (use <a href="https://stripe.com/docs/api/issuing/authorizations/decline">{@code
-     * decline}</a> to decline an authorization request).
-     */
-    public Builder setHeldAmount(Long heldAmount) {
-      this.heldAmount = heldAmount;
       return this;
     }
 

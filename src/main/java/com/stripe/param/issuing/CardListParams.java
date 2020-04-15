@@ -59,14 +59,6 @@ public class CardListParams extends ApiRequestParams {
   @SerializedName("limit")
   Long limit;
 
-  /** [DEPRECATED] Only return cards that have the given name. */
-  @SerializedName("name")
-  String name;
-
-  /** [DEPRECATED] Only return cards whose full card number matches that of this card source ID. */
-  @SerializedName("source")
-  String source;
-
   /**
    * A cursor for use in pagination. {@code starting_after} is an object ID that defines your place
    * in the list. For instance, if you make a list request and receive 100 objects, ending with
@@ -77,8 +69,8 @@ public class CardListParams extends ApiRequestParams {
   String startingAfter;
 
   /**
-   * Only return cards that have the given status. One of {@code active}, {@code inactive}, {@code
-   * canceled}, {@code lost}, or {@code stolen}.
+   * Only return cards that have the given status. One of {@code active}, {@code inactive}, or
+   * {@code canceled}.
    */
   @SerializedName("status")
   Status status;
@@ -97,8 +89,6 @@ public class CardListParams extends ApiRequestParams {
       Map<String, Object> extraParams,
       String last4,
       Long limit,
-      String name,
-      String source,
       String startingAfter,
       Status status,
       Type type) {
@@ -111,8 +101,6 @@ public class CardListParams extends ApiRequestParams {
     this.extraParams = extraParams;
     this.last4 = last4;
     this.limit = limit;
-    this.name = name;
-    this.source = source;
     this.startingAfter = startingAfter;
     this.status = status;
     this.type = type;
@@ -141,10 +129,6 @@ public class CardListParams extends ApiRequestParams {
 
     private Long limit;
 
-    private String name;
-
-    private String source;
-
     private String startingAfter;
 
     private Status status;
@@ -163,8 +147,6 @@ public class CardListParams extends ApiRequestParams {
           this.extraParams,
           this.last4,
           this.limit,
-          this.name,
-          this.source,
           this.startingAfter,
           this.status,
           this.type);
@@ -278,20 +260,6 @@ public class CardListParams extends ApiRequestParams {
       return this;
     }
 
-    /** [DEPRECATED] Only return cards that have the given name. */
-    public Builder setName(String name) {
-      this.name = name;
-      return this;
-    }
-
-    /**
-     * [DEPRECATED] Only return cards whose full card number matches that of this card source ID.
-     */
-    public Builder setSource(String source) {
-      this.source = source;
-      return this;
-    }
-
     /**
      * A cursor for use in pagination. {@code starting_after} is an object ID that defines your
      * place in the list. For instance, if you make a list request and receive 100 objects, ending
@@ -304,8 +272,8 @@ public class CardListParams extends ApiRequestParams {
     }
 
     /**
-     * Only return cards that have the given status. One of {@code active}, {@code inactive}, {@code
-     * canceled}, {@code lost}, or {@code stolen}.
+     * Only return cards that have the given status. One of {@code active}, {@code inactive}, or
+     * {@code canceled}.
      */
     public Builder setStatus(Status status) {
       this.status = status;
@@ -434,13 +402,7 @@ public class CardListParams extends ApiRequestParams {
     CANCELED("canceled"),
 
     @SerializedName("inactive")
-    INACTIVE("inactive"),
-
-    @SerializedName("lost")
-    LOST("lost"),
-
-    @SerializedName("stolen")
-    STOLEN("stolen");
+    INACTIVE("inactive");
 
     @Getter(onMethod_ = {@Override})
     private final String value;
