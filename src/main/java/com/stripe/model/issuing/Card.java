@@ -57,6 +57,17 @@ public class Card extends ApiResource implements HasId, MetadataStore<Card> {
   @SerializedName("currency")
   String currency;
 
+  /**
+   * The card's CVC. For security reasons, this is only available for virtual cards, and will be
+   * omitted unless you explicitly request it with <a
+   * href="https://stripe.com/docs/api/expanding_objects">the {@code expand} parameter</a>.
+   * Additionally, it's only available via the <a
+   * href="https://stripe.com/docs/api/issuing/cards/retrieve">&quot;Retrieve a card&quot;
+   * endpoint</a>, not via &quot;List all cards&quot; or any other endpoint.
+   */
+  @SerializedName("cvc")
+  String cvc;
+
   /** The expiration month of the card. */
   @SerializedName("exp_month")
   Long expMonth;
@@ -88,6 +99,17 @@ public class Card extends ApiResource implements HasId, MetadataStore<Card> {
   @Getter(onMethod_ = {@Override})
   @SerializedName("metadata")
   Map<String, String> metadata;
+
+  /**
+   * The full unredacted card number. For security reasons, this is only available for virtual
+   * cards, and will be omitted unless you explicitly request it with <a
+   * href="https://stripe.com/docs/api/expanding_objects">the {@code expand} parameter</a>.
+   * Additionally, it's only available via the <a
+   * href="https://stripe.com/docs/api/issuing/cards/retrieve">&quot;Retrieve a card&quot;
+   * endpoint</a>, not via &quot;List all cards&quot; or any other endpoint.
+   */
+  @SerializedName("number")
+  String number;
 
   /**
    * String representing the object's type. Objects of the same type share the same value.

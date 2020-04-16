@@ -1137,9 +1137,17 @@ public class Charge extends ApiResource implements MetadataStore<Charge>, Balanc
       @SerializedName("fingerprint")
       String fingerprint;
 
+      /** Institution number of the bank account. */
+      @SerializedName("institution_number")
+      String institutionNumber;
+
       /** Last four digits of the bank account number. */
       @SerializedName("last4")
       String last4;
+
+      /** Transit number of the bank account. */
+      @SerializedName("transit_number")
+      String transitNumber;
     }
 
     @Getter
