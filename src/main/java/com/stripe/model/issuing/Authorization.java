@@ -189,6 +189,9 @@ public class Authorization extends ApiResource
   @SerializedName("request_history")
   List<Authorization.RequestHistory> requestHistory;
 
+  @SerializedName("risk_score")
+  Long riskScore;
+
   /**
    * The current status of the authorization in its lifecycle.
    *
