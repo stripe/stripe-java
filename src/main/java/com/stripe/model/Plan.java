@@ -20,7 +20,7 @@ import lombok.Setter;
 @Setter
 @EqualsAndHashCode(callSuper = false)
 public class Plan extends ApiResource implements HasId, MetadataStore<Plan> {
-  /** Whether the plan is currently available for new subscriptions. */
+  /** Whether the price can be used for new purchases. */
   @SerializedName("active")
   Boolean active;
 
@@ -46,11 +46,11 @@ public class Plan extends ApiResource implements HasId, MetadataStore<Plan> {
 
   /**
    * Describes how to compute the price per period. Either {@code per_unit} or {@code tiered}.
-   * {@code per_unit} indicates that the fixed amount (specified in {@code amount}) will be charged
-   * per unit in {@code quantity} (for plans with {@code usage_type=licensed}), or per unit of total
-   * usage (for plans with {@code usage_type=metered}). {@code tiered} indicates that the unit
-   * pricing will be computed using a tiering strategy as defined using the {@code tiers} and {@code
-   * tiers_mode} attributes.
+   * {@code per_unit} indicates that the fixed amount (specified in {@code unit_amount} or {@code
+   * unit_amount_decimal}) will be charged per unit in {@code quantity} (for prices with {@code
+   * usage_type=licensed}), or per unit of total usage (for prices with {@code usage_type=metered}).
+   * {@code tiered} indicates that the unit pricing will be computed using a tiering strategy as
+   * defined using the {@code tiers} and {@code tiers_mode} attributes.
    *
    * <p>One of {@code per_unit}, or {@code tiered}.
    */
