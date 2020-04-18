@@ -1531,6 +1531,14 @@ public class Charge extends ApiResource implements MetadataStore<Charge>, Balanc
       String brand;
 
       /**
+       * The cardholder name as read from the card, in <a
+       * href="https://en.wikipedia.org/wiki/ISO/IEC_7813">ISO 7813</a> format. May include
+       * alphanumeric characters, special characters and first/last name separator ({@code /}).
+       */
+      @SerializedName("cardholder_name")
+      String cardholderName;
+
+      /**
        * Two-letter ISO code representing the country of the card. You could use this attribute to
        * get a sense of the international breakdown of cards you've collected.
        */
