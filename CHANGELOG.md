@@ -1,5 +1,10 @@
 # Changelog
 
+## 19.2.0 - 2020-04-17
+* [#1013](https://github.com/stripe/stripe-java/pull/1013) Multiple API changes
+  * Add support for `cardholder_name` in `payment_method_details[card_present]` on `Charge`
+  * Add new enum values for `company[structure]` on `Account`
+
 ## 19.1.0 - 2020-04-16
 * [#1010](https://github.com/stripe/stripe-java/pull/1010) Multiple API changes
   * Add `institution_number` and `transit_number` in `payment_method_details[acss]` on `Charge`
