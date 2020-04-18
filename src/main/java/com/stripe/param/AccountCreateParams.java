@@ -1665,8 +1665,14 @@ public class AccountCreateParams extends ApiRequestParams {
       @SerializedName("incorporated_non_profit")
       INCORPORATED_NON_PROFIT("incorporated_non_profit"),
 
+      @SerializedName("limited_liability_partnership")
+      LIMITED_LIABILITY_PARTNERSHIP("limited_liability_partnership"),
+
       @SerializedName("multi_member_llc")
       MULTI_MEMBER_LLC("multi_member_llc"),
+
+      @SerializedName("private_company")
+      PRIVATE_COMPANY("private_company"),
 
       @SerializedName("private_corporation")
       PRIVATE_CORPORATION("private_corporation"),
@@ -1674,11 +1680,17 @@ public class AccountCreateParams extends ApiRequestParams {
       @SerializedName("private_partnership")
       PRIVATE_PARTNERSHIP("private_partnership"),
 
+      @SerializedName("public_company")
+      PUBLIC_COMPANY("public_company"),
+
       @SerializedName("public_corporation")
       PUBLIC_CORPORATION("public_corporation"),
 
       @SerializedName("public_partnership")
       PUBLIC_PARTNERSHIP("public_partnership"),
+
+      @SerializedName("sole_proprietorship")
+      SOLE_PROPRIETORSHIP("sole_proprietorship"),
 
       @SerializedName("tax_exempt_government_instrumentality")
       TAX_EXEMPT_GOVERNMENT_INSTRUMENTALITY("tax_exempt_government_instrumentality"),
