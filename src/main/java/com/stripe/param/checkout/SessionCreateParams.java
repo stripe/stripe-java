@@ -2403,6 +2403,13 @@ public class SessionCreateParams extends ApiRequestParams {
     BigDecimal applicationFeePercent;
 
     /**
+     * The code of the coupon to apply to this subscription. A coupon applied to a subscription will
+     * only affect invoices created for that particular subscription.
+     */
+    @SerializedName("coupon")
+    String coupon;
+
+    /**
      * The tax rates that will apply to any subscription item that does not have {@code tax_rates}
      * set. Invoices created will have their {@code default_tax_rates} populated from the
      * subscription.
@@ -2459,6 +2466,7 @@ public class SessionCreateParams extends ApiRequestParams {
 
     private SubscriptionData(
         BigDecimal applicationFeePercent,
+        String coupon,
         List<String> defaultTaxRates,
         Map<String, Object> extraParams,
         List<Item> items,
@@ -2467,6 +2475,7 @@ public class SessionCreateParams extends ApiRequestParams {
         Boolean trialFromPlan,
         Long trialPeriodDays) {
       this.applicationFeePercent = applicationFeePercent;
+      this.coupon = coupon;
       this.defaultTaxRates = defaultTaxRates;
       this.extraParams = extraParams;
       this.items = items;
@@ -2482,6 +2491,8 @@ public class SessionCreateParams extends ApiRequestParams {
 
     public static class Builder {
       private BigDecimal applicationFeePercent;
+
+      private String coupon;
 
       private List<String> defaultTaxRates;
 
@@ -2501,6 +2512,7 @@ public class SessionCreateParams extends ApiRequestParams {
       public SubscriptionData build() {
         return new SubscriptionData(
             this.applicationFeePercent,
+            this.coupon,
             this.defaultTaxRates,
             this.extraParams,
             this.items,
@@ -2520,6 +2532,15 @@ public class SessionCreateParams extends ApiRequestParams {
        */
       public Builder setApplicationFeePercent(BigDecimal applicationFeePercent) {
         this.applicationFeePercent = applicationFeePercent;
+        return this;
+      }
+
+      /**
+       * The code of the coupon to apply to this subscription. A coupon applied to a subscription
+       * will only affect invoices created for that particular subscription.
+       */
+      public Builder setCoupon(String coupon) {
+        this.coupon = coupon;
         return this;
       }
 
