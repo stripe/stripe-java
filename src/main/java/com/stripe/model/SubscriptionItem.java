@@ -60,8 +60,8 @@ public class SubscriptionItem extends ApiResource
 
   /**
    * Plans define the base price, currency, and billing cycle for subscriptions. For example, you
-   * might have a &lt;currency&gt;5&lt;/currency&gt;/month plan that provides limited access to your
-   * products, and a &lt;currency&gt;15&lt;/currency&gt;/month plan that allows full access.
+   * might have a $5/month plan that provides limited access to your products, and a $15/month plan
+   * that allows full access.
    *
    * <p>Related guides: <a
    * href="https://stripe.com/docs/billing/subscriptions/set-up-subscription">Set up a
