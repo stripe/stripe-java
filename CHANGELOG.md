@@ -1,5 +1,8 @@
 # Changelog
 
+## 19.3.0 - 2020-04-22
+* [#1014](https://github.com/stripe/stripe-java/pull/1014) Add support for `billingportal` namespace and `Session` resource and APIs
+
 ## 19.2.0 - 2020-04-17
 * [#1013](https://github.com/stripe/stripe-java/pull/1013) Multiple API changes
   * Add support for `cardholder_name` in `payment_method_details[card_present]` on `Charge`
