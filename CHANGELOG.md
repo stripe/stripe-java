@@ -1,5 +1,8 @@
 # Changelog
 
+## 19.4.0 - 2020-04-22
+* [#1015](https://github.com/stripe/stripe-java/pull/1015) Add support for `coupon` for subscriptions on Checkout
+
 ## 19.3.0 - 2020-04-22
 * [#1014](https://github.com/stripe/stripe-java/pull/1014) Add support for `billingportal` namespace and `Session` resource and APIs
 
