@@ -100,10 +100,10 @@ public class InvoiceUpcomingParams extends ApiRequestParams {
   List<SubscriptionItem> subscriptionItems;
 
   /**
-   * If previewing an update to a subscription, this decides whether the preview will show the
-   * result of applying prorations or not. If set, one of {@code subscription_items} or {@code
-   * subscription}, and one of {@code subscription_items} or {@code subscription_trial_end} are
-   * required.
+   * This field has been renamed to {@code subscription_proration_behavior}. {@code
+   * subscription_prorate=true} can be replaced with {@code
+   * subscription_proration_behavior=create_prorations} and {@code subscription_prorate=false} can
+   * be replaced with {@code subscription_proration_behavior=none}.
    */
   @SerializedName("subscription_prorate")
   Boolean subscriptionProrate;
@@ -531,10 +531,10 @@ public class InvoiceUpcomingParams extends ApiRequestParams {
     }
 
     /**
-     * If previewing an update to a subscription, this decides whether the preview will show the
-     * result of applying prorations or not. If set, one of {@code subscription_items} or {@code
-     * subscription}, and one of {@code subscription_items} or {@code subscription_trial_end} are
-     * required.
+     * This field has been renamed to {@code subscription_proration_behavior}. {@code
+     * subscription_prorate=true} can be replaced with {@code
+     * subscription_proration_behavior=create_prorations} and {@code subscription_prorate=false} can
+     * be replaced with {@code subscription_proration_behavior=none}.
      */
     public Builder setSubscriptionProrate(Boolean subscriptionProrate) {
       this.subscriptionProrate = subscriptionProrate;
