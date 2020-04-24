@@ -4071,6 +4071,9 @@ public class AccountCreateParams extends ApiRequestParams {
     @SerializedName("card_payments")
     CARD_PAYMENTS("card_payments"),
 
+    @SerializedName("jcb_payments")
+    JCB_PAYMENTS("jcb_payments"),
+
     @SerializedName("legacy_payments")
     LEGACY_PAYMENTS("legacy_payments"),
 

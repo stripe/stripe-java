@@ -147,36 +147,24 @@ public class Product extends ApiResource implements HasId, MetadataStore<Product
   @SerializedName("url")
   String url;
 
-  /**
-   * Creates a new product object. To create a product for use with orders, see <a
-   * href="https://stripe.com/docs/api#create_product">Products</a>.
-   */
+  /** Creates a new product object. */
   public static Product create(Map<String, Object> params) throws StripeException {
     return create(params, (RequestOptions) null);
   }
 
-  /**
-   * Creates a new product object. To create a product for use with orders, see <a
-   * href="https://stripe.com/docs/api#create_product">Products</a>.
-   */
+  /** Creates a new product object. */
   public static Product create(Map<String, Object> params, RequestOptions options)
       throws StripeException {
     String url = String.format("%s%s", Stripe.getApiBase(), "/v1/products");
     return ApiResource.request(ApiResource.RequestMethod.POST, url, params, Product.class, options);
   }
 
-  /**
-   * Creates a new product object. To create a product for use with orders, see <a
-   * href="https://stripe.com/docs/api#create_product">Products</a>.
-   */
+  /** Creates a new product object. */
   public static Product create(ProductCreateParams params) throws StripeException {
     return create(params, (RequestOptions) null);
   }
 
-  /**
-   * Creates a new product object. To create a product for use with orders, see <a
-   * href="https://stripe.com/docs/api#create_product">Products</a>.
-   */
+  /** Creates a new product object. */
   public static Product create(ProductCreateParams params, RequestOptions options)
       throws StripeException {
     String url = String.format("%s%s", Stripe.getApiBase(), "/v1/products");
