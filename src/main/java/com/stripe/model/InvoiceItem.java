@@ -100,6 +100,10 @@ public class InvoiceItem extends ApiResource implements HasId, MetadataStore<Inv
   @SerializedName("plan")
   Plan plan;
 
+  /** The price of the invoice item. */
+  @SerializedName("price")
+  Price price;
+
   /**
    * Whether the invoice item was created automatically as a proration adjustment when the customer
    * switched plans.

@@ -13,6 +13,13 @@ import lombok.Getter;
 @Getter
 public class SubscriptionUpdateParams extends ApiRequestParams {
   /**
+   * A list of prices and quantities that will generate invoice items appended to the first invoice
+   * for this subscription. You may pass up to 10 items.
+   */
+  @SerializedName("add_invoice_items")
+  List<AddInvoiceItem> addInvoiceItems;
+
+  /**
    * A non-negative decimal between 0 and 100, with at most two decimal places. This represents the
    * percentage of the subscription invoice subtotal that will be transferred to the application
    * owner's Stripe account. The request must be made by a platform account on a connected account
@@ -242,6 +249,7 @@ public class SubscriptionUpdateParams extends ApiRequestParams {
   Boolean trialFromPlan;
 
   private SubscriptionUpdateParams(
+      List<AddInvoiceItem> addInvoiceItems,
       BigDecimal applicationFeePercent,
       BillingCycleAnchor billingCycleAnchor,
       Object billingThresholds,
@@ -268,6 +276,7 @@ public class SubscriptionUpdateParams extends ApiRequestParams {
       Object transferData,
       Object trialEnd,
       Boolean trialFromPlan) {
+    this.addInvoiceItems = addInvoiceItems;
     this.applicationFeePercent = applicationFeePercent;
     this.billingCycleAnchor = billingCycleAnchor;
     this.billingThresholds = billingThresholds;
@@ -301,6 +310,8 @@ public class SubscriptionUpdateParams extends ApiRequestParams {
   }
 
   public static class Builder {
+    private List<AddInvoiceItem> addInvoiceItems;
+
     private BigDecimal applicationFeePercent;
 
     private BillingCycleAnchor billingCycleAnchor;
@@ -356,6 +367,7 @@ public class SubscriptionUpdateParams extends ApiRequestParams {
     /** Finalize and obtain parameter instance from this builder. */
     public SubscriptionUpdateParams build() {
       return new SubscriptionUpdateParams(
+          this.addInvoiceItems,
           this.applicationFeePercent,
           this.billingCycleAnchor,
           this.billingThresholds,
@@ -382,6 +394,32 @@ public class SubscriptionUpdateParams extends ApiRequestParams {
           this.transferData,
           this.trialEnd,
           this.trialFromPlan);
+    }
+
+    /**
+     * Add an element to `addInvoiceItems` list. A list is initialized for the first `add/addAll`
+     * call, and subsequent calls adds additional elements to the original list. See {@link
+     * SubscriptionUpdateParams#addInvoiceItems} for the field documentation.
+     */
+    public Builder addAddInvoiceItem(AddInvoiceItem element) {
+      if (this.addInvoiceItems == null) {
+        this.addInvoiceItems = new ArrayList<>();
+      }
+      this.addInvoiceItems.add(element);
+      return this;
+    }
+
+    /**
+     * Add all elements to `addInvoiceItems` list. A list is initialized for the first `add/addAll`
+     * call, and subsequent calls adds additional elements to the original list. See {@link
+     * SubscriptionUpdateParams#addInvoiceItems} for the field documentation.
+     */
+    public Builder addAllAddInvoiceItem(List<AddInvoiceItem> elements) {
+      if (this.addInvoiceItems == null) {
+        this.addInvoiceItems = new ArrayList<>();
+      }
+      this.addInvoiceItems.addAll(elements);
+      return this;
     }
 
     /**
@@ -903,6 +941,521 @@ public class SubscriptionUpdateParams extends ApiRequestParams {
   }
 
   @Getter
+  public static class AddInvoiceItem {
+    /**
+     * Map of extra parameters for custom features not available in this client library. The content
+     * in this map is not serialized under this field's {@code @SerializedName} value. Instead, each
+     * key/value pair is serialized as if the key is a root-level field (serialized) name in this
+     * param object. Effectively, this map is flattened to its parent instance.
+     */
+    @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
+    Map<String, Object> extraParams;
+
+    /** The ID of the price object. */
+    @SerializedName("price")
+    Object price;
+
+    /** Data used to generate a new price object inline. */
+    @SerializedName("price_data")
+    PriceData priceData;
+
+    /** Quantity for this item. Defaults to 1. */
+    @SerializedName("quantity")
+    Long quantity;
+
+    private AddInvoiceItem(
+        Map<String, Object> extraParams, Object price, PriceData priceData, Long quantity) {
+      this.extraParams = extraParams;
+      this.price = price;
+      this.priceData = priceData;
+      this.quantity = quantity;
+    }
+
+    public static Builder builder() {
+      return new Builder();
+    }
+
+    public static class Builder {
+      private Map<String, Object> extraParams;
+
+      private Object price;
+
+      private PriceData priceData;
+
+      private Long quantity;
+
+      /** Finalize and obtain parameter instance from this builder. */
+      public AddInvoiceItem build() {
+        return new AddInvoiceItem(this.extraParams, this.price, this.priceData, this.quantity);
+      }
+
+      /**
+       * Add a key/value pair to `extraParams` map. A map is initialized for the first `put/putAll`
+       * call, and subsequent calls add additional key/value pairs to the original map. See {@link
+       * SubscriptionUpdateParams.AddInvoiceItem#extraParams} for the field documentation.
+       */
+      public Builder putExtraParam(String key, Object value) {
+        if (this.extraParams == null) {
+          this.extraParams = new HashMap<>();
+        }
+        this.extraParams.put(key, value);
+        return this;
+      }
+
+      /**
+       * Add all map key/value pairs to `extraParams` map. A map is initialized for the first
+       * `put/putAll` call, and subsequent calls add additional key/value pairs to the original map.
+       * See {@link SubscriptionUpdateParams.AddInvoiceItem#extraParams} for the field
+       * documentation.
+       */
+      public Builder putAllExtraParam(Map<String, Object> map) {
+        if (this.extraParams == null) {
+          this.extraParams = new HashMap<>();
+        }
+        this.extraParams.putAll(map);
+        return this;
+      }
+
+      /** The ID of the price object. */
+      public Builder setPrice(String price) {
+        this.price = price;
+        return this;
+      }
+
+      /** The ID of the price object. */
+      public Builder setPrice(EmptyParam price) {
+        this.price = price;
+        return this;
+      }
+
+      /** Data used to generate a new price object inline. */
+      public Builder setPriceData(PriceData priceData) {
+        this.priceData = priceData;
+        return this;
+      }
+
+      /** Quantity for this item. Defaults to 1. */
+      public Builder setQuantity(Long quantity) {
+        this.quantity = quantity;
+        return this;
+      }
+    }
+
+    @Getter
+    public static class PriceData {
+      /**
+       * Three-letter <a href="https://www.iso.org/iso-4217-currency-codes.html">ISO currency
+       * code</a>, in lowercase. Must be a <a href="https://stripe.com/docs/currencies">supported
+       * currency</a>.
+       */
+      @SerializedName("currency")
+      Object currency;
+
+      /**
+       * Map of extra parameters for custom features not available in this client library. The
+       * content in this map is not serialized under this field's {@code @SerializedName} value.
+       * Instead, each key/value pair is serialized as if the key is a root-level field (serialized)
+       * name in this param object. Effectively, this map is flattened to its parent instance.
+       */
+      @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
+      Map<String, Object> extraParams;
+
+      /** The ID of the product that this price will belong to. */
+      @SerializedName("product")
+      Object product;
+
+      /** The recurring components of a price such as {@code interval} and {@code usage_type}. */
+      @SerializedName("recurring")
+      Recurring recurring;
+
+      /** A positive integer in %s (or 0 for a free price) representing how much to charge. */
+      @SerializedName("unit_amount")
+      Long unitAmount;
+
+      /**
+       * Same as {@code unit_amount}, but accepts a decimal value with at most 12 decimal places.
+       * Only one of {@code unit_amount} and {@code unit_amount_decimal} can be set.
+       */
+      @SerializedName("unit_amount_decimal")
+      Object unitAmountDecimal;
+
+      private PriceData(
+          Object currency,
+          Map<String, Object> extraParams,
+          Object product,
+          Recurring recurring,
+          Long unitAmount,
+          Object unitAmountDecimal) {
+        this.currency = currency;
+        this.extraParams = extraParams;
+        this.product = product;
+        this.recurring = recurring;
+        this.unitAmount = unitAmount;
+        this.unitAmountDecimal = unitAmountDecimal;
+      }
+
+      public static Builder builder() {
+        return new Builder();
+      }
+
+      public static class Builder {
+        private Object currency;
+
+        private Map<String, Object> extraParams;
+
+        private Object product;
+
+        private Recurring recurring;
+
+        private Long unitAmount;
+
+        private Object unitAmountDecimal;
+
+        /** Finalize and obtain parameter instance from this builder. */
+        public PriceData build() {
+          return new PriceData(
+              this.currency,
+              this.extraParams,
+              this.product,
+              this.recurring,
+              this.unitAmount,
+              this.unitAmountDecimal);
+        }
+
+        /**
+         * Three-letter <a href="https://www.iso.org/iso-4217-currency-codes.html">ISO currency
+         * code</a>, in lowercase. Must be a <a href="https://stripe.com/docs/currencies">supported
+         * currency</a>.
+         */
+        public Builder setCurrency(String currency) {
+          this.currency = currency;
+          return this;
+        }
+
+        /**
+         * Three-letter <a href="https://www.iso.org/iso-4217-currency-codes.html">ISO currency
+         * code</a>, in lowercase. Must be a <a href="https://stripe.com/docs/currencies">supported
+         * currency</a>.
+         */
+        public Builder setCurrency(EmptyParam currency) {
+          this.currency = currency;
+          return this;
+        }
+
+        /**
+         * Add a key/value pair to `extraParams` map. A map is initialized for the first
+         * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
+         * map. See {@link SubscriptionUpdateParams.AddInvoiceItem.PriceData#extraParams} for the
+         * field documentation.
+         */
+        public Builder putExtraParam(String key, Object value) {
+          if (this.extraParams == null) {
+            this.extraParams = new HashMap<>();
+          }
+          this.extraParams.put(key, value);
+          return this;
+        }
+
+        /**
+         * Add all map key/value pairs to `extraParams` map. A map is initialized for the first
+         * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
+         * map. See {@link SubscriptionUpdateParams.AddInvoiceItem.PriceData#extraParams} for the
+         * field documentation.
+         */
+        public Builder putAllExtraParam(Map<String, Object> map) {
+          if (this.extraParams == null) {
+            this.extraParams = new HashMap<>();
+          }
+          this.extraParams.putAll(map);
+          return this;
+        }
+
+        /** The ID of the product that this price will belong to. */
+        public Builder setProduct(String product) {
+          this.product = product;
+          return this;
+        }
+
+        /** The ID of the product that this price will belong to. */
+        public Builder setProduct(EmptyParam product) {
+          this.product = product;
+          return this;
+        }
+
+        /** The recurring components of a price such as {@code interval} and {@code usage_type}. */
+        public Builder setRecurring(Recurring recurring) {
+          this.recurring = recurring;
+          return this;
+        }
+
+        /** A positive integer in %s (or 0 for a free price) representing how much to charge. */
+        public Builder setUnitAmount(Long unitAmount) {
+          this.unitAmount = unitAmount;
+          return this;
+        }
+
+        /**
+         * Same as {@code unit_amount}, but accepts a decimal value with at most 12 decimal places.
+         * Only one of {@code unit_amount} and {@code unit_amount_decimal} can be set.
+         */
+        public Builder setUnitAmountDecimal(BigDecimal unitAmountDecimal) {
+          this.unitAmountDecimal = unitAmountDecimal;
+          return this;
+        }
+
+        /**
+         * Same as {@code unit_amount}, but accepts a decimal value with at most 12 decimal places.
+         * Only one of {@code unit_amount} and {@code unit_amount_decimal} can be set.
+         */
+        public Builder setUnitAmountDecimal(EmptyParam unitAmountDecimal) {
+          this.unitAmountDecimal = unitAmountDecimal;
+          return this;
+        }
+      }
+
+      @Getter
+      public static class Recurring {
+        /**
+         * Specifies a usage aggregation strategy for prices of {@code usage_type=metered}. Allowed
+         * values are {@code sum} for summing up all usage during a period, {@code
+         * last_during_period} for using the last usage record reported within a period, {@code
+         * last_ever} for using the last usage record ever (across period bounds) or {@code max}
+         * which uses the usage record with the maximum reported usage during a period. Defaults to
+         * {@code sum}.
+         */
+        @SerializedName("aggregate_usage")
+        AggregateUsage aggregateUsage;
+
+        /**
+         * Map of extra parameters for custom features not available in this client library. The
+         * content in this map is not serialized under this field's {@code @SerializedName} value.
+         * Instead, each key/value pair is serialized as if the key is a root-level field
+         * (serialized) name in this param object. Effectively, this map is flattened to its parent
+         * instance.
+         */
+        @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
+        Map<String, Object> extraParams;
+
+        /**
+         * Specifies billing frequency. Either {@code day}, {@code week}, {@code month} or {@code
+         * year}.
+         */
+        @SerializedName("interval")
+        Interval interval;
+
+        /**
+         * The number of intervals between subscription billings. For example, {@code
+         * interval=month} and {@code interval_count=3} bills every 3 months. Maximum of one year
+         * interval allowed (1 year, 12 months, or 52 weeks).
+         */
+        @SerializedName("interval_count")
+        Long intervalCount;
+
+        /**
+         * Default number of trial days when subscribing a customer to this price using <a
+         * href="https://stripe.com/docs/api#create_subscription-trial_from_plan">{@code
+         * trial_from_plan=true}</a>.
+         */
+        @SerializedName("trial_period_days")
+        Long trialPeriodDays;
+
+        /**
+         * Configures how the quantity per period should be determined. Can be either {@code
+         * metered} or {@code licensed}. {@code licensed} automatically bills the {@code quantity}
+         * set when adding it to a subscription. {@code metered} aggregates the total usage based on
+         * usage records. Defaults to {@code licensed}.
+         */
+        @SerializedName("usage_type")
+        UsageType usageType;
+
+        private Recurring(
+            AggregateUsage aggregateUsage,
+            Map<String, Object> extraParams,
+            Interval interval,
+            Long intervalCount,
+            Long trialPeriodDays,
+            UsageType usageType) {
+          this.aggregateUsage = aggregateUsage;
+          this.extraParams = extraParams;
+          this.interval = interval;
+          this.intervalCount = intervalCount;
+          this.trialPeriodDays = trialPeriodDays;
+          this.usageType = usageType;
+        }
+
+        public static Builder builder() {
+          return new Builder();
+        }
+
+        public static class Builder {
+          private AggregateUsage aggregateUsage;
+
+          private Map<String, Object> extraParams;
+
+          private Interval interval;
+
+          private Long intervalCount;
+
+          private Long trialPeriodDays;
+
+          private UsageType usageType;
+
+          /** Finalize and obtain parameter instance from this builder. */
+          public Recurring build() {
+            return new Recurring(
+                this.aggregateUsage,
+                this.extraParams,
+                this.interval,
+                this.intervalCount,
+                this.trialPeriodDays,
+                this.usageType);
+          }
+
+          /**
+           * Specifies a usage aggregation strategy for prices of {@code usage_type=metered}.
+           * Allowed values are {@code sum} for summing up all usage during a period, {@code
+           * last_during_period} for using the last usage record reported within a period, {@code
+           * last_ever} for using the last usage record ever (across period bounds) or {@code max}
+           * which uses the usage record with the maximum reported usage during a period. Defaults
+           * to {@code sum}.
+           */
+          public Builder setAggregateUsage(AggregateUsage aggregateUsage) {
+            this.aggregateUsage = aggregateUsage;
+            return this;
+          }
+
+          /**
+           * Add a key/value pair to `extraParams` map. A map is initialized for the first
+           * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
+           * map. See {@link
+           * SubscriptionUpdateParams.AddInvoiceItem.PriceData.Recurring#extraParams} for the field
+           * documentation.
+           */
+          public Builder putExtraParam(String key, Object value) {
+            if (this.extraParams == null) {
+              this.extraParams = new HashMap<>();
+            }
+            this.extraParams.put(key, value);
+            return this;
+          }
+
+          /**
+           * Add all map key/value pairs to `extraParams` map. A map is initialized for the first
+           * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
+           * map. See {@link
+           * SubscriptionUpdateParams.AddInvoiceItem.PriceData.Recurring#extraParams} for the field
+           * documentation.
+           */
+          public Builder putAllExtraParam(Map<String, Object> map) {
+            if (this.extraParams == null) {
+              this.extraParams = new HashMap<>();
+            }
+            this.extraParams.putAll(map);
+            return this;
+          }
+
+          /**
+           * Specifies billing frequency. Either {@code day}, {@code week}, {@code month} or {@code
+           * year}.
+           */
+          public Builder setInterval(Interval interval) {
+            this.interval = interval;
+            return this;
+          }
+
+          /**
+           * The number of intervals between subscription billings. For example, {@code
+           * interval=month} and {@code interval_count=3} bills every 3 months. Maximum of one year
+           * interval allowed (1 year, 12 months, or 52 weeks).
+           */
+          public Builder setIntervalCount(Long intervalCount) {
+            this.intervalCount = intervalCount;
+            return this;
+          }
+
+          /**
+           * Default number of trial days when subscribing a customer to this price using <a
+           * href="https://stripe.com/docs/api#create_subscription-trial_from_plan">{@code
+           * trial_from_plan=true}</a>.
+           */
+          public Builder setTrialPeriodDays(Long trialPeriodDays) {
+            this.trialPeriodDays = trialPeriodDays;
+            return this;
+          }
+
+          /**
+           * Configures how the quantity per period should be determined. Can be either {@code
+           * metered} or {@code licensed}. {@code licensed} automatically bills the {@code quantity}
+           * set when adding it to a subscription. {@code metered} aggregates the total usage based
+           * on usage records. Defaults to {@code licensed}.
+           */
+          public Builder setUsageType(UsageType usageType) {
+            this.usageType = usageType;
+            return this;
+          }
+        }
+
+        public enum AggregateUsage implements ApiRequestParams.EnumParam {
+          @SerializedName("last_during_period")
+          LAST_DURING_PERIOD("last_during_period"),
+
+          @SerializedName("last_ever")
+          LAST_EVER("last_ever"),
+
+          @SerializedName("max")
+          MAX("max"),
+
+          @SerializedName("sum")
+          SUM("sum");
+
+          @Getter(onMethod_ = {@Override})
+          private final String value;
+
+          AggregateUsage(String value) {
+            this.value = value;
+          }
+        }
+
+        public enum Interval implements ApiRequestParams.EnumParam {
+          @SerializedName("day")
+          DAY("day"),
+
+          @SerializedName("month")
+          MONTH("month"),
+
+          @SerializedName("week")
+          WEEK("week"),
+
+          @SerializedName("year")
+          YEAR("year");
+
+          @Getter(onMethod_ = {@Override})
+          private final String value;
+
+          Interval(String value) {
+            this.value = value;
+          }
+        }
+
+        public enum UsageType implements ApiRequestParams.EnumParam {
+          @SerializedName("licensed")
+          LICENSED("licensed"),
+
+          @SerializedName("metered")
+          METERED("metered");
+
+          @Getter(onMethod_ = {@Override})
+          private final String value;
+
+          UsageType(String value) {
+            this.value = value;
+          }
+        }
+      }
+    }
+  }
+
+  @Getter
   public static class BillingThresholds {
     /** Monetary threshold that triggers the subscription to advance to a new billing period. */
     @SerializedName("amount_gte")
@@ -1040,6 +1593,14 @@ public class SubscriptionUpdateParams extends ApiRequestParams {
     @SerializedName("plan")
     Object plan;
 
+    /** The ID of the price object. */
+    @SerializedName("price")
+    Object price;
+
+    /** Data used to generate a new price object inline. */
+    @SerializedName("price_data")
+    PriceData priceData;
+
     /** Quantity for this item. */
     @SerializedName("quantity")
     Long quantity;
@@ -1062,6 +1623,8 @@ public class SubscriptionUpdateParams extends ApiRequestParams {
         Object id,
         Object metadata,
         Object plan,
+        Object price,
+        PriceData priceData,
         Long quantity,
         Object taxRates) {
       this.billingThresholds = billingThresholds;
@@ -1071,6 +1634,8 @@ public class SubscriptionUpdateParams extends ApiRequestParams {
       this.id = id;
       this.metadata = metadata;
       this.plan = plan;
+      this.price = price;
+      this.priceData = priceData;
       this.quantity = quantity;
       this.taxRates = taxRates;
     }
@@ -1094,6 +1659,10 @@ public class SubscriptionUpdateParams extends ApiRequestParams {
 
       private Object plan;
 
+      private Object price;
+
+      private PriceData priceData;
+
       private Long quantity;
 
       private Object taxRates;
@@ -1108,6 +1677,8 @@ public class SubscriptionUpdateParams extends ApiRequestParams {
             this.id,
             this.metadata,
             this.plan,
+            this.price,
+            this.priceData,
             this.quantity,
             this.taxRates);
       }
@@ -1247,6 +1818,24 @@ public class SubscriptionUpdateParams extends ApiRequestParams {
         return this;
       }
 
+      /** The ID of the price object. */
+      public Builder setPrice(String price) {
+        this.price = price;
+        return this;
+      }
+
+      /** The ID of the price object. */
+      public Builder setPrice(EmptyParam price) {
+        this.price = price;
+        return this;
+      }
+
+      /** Data used to generate a new price object inline. */
+      public Builder setPriceData(PriceData priceData) {
+        this.priceData = priceData;
+        return this;
+      }
+
       /** Quantity for this item. */
       public Builder setQuantity(Long quantity) {
         this.quantity = quantity;
@@ -1372,6 +1961,417 @@ public class SubscriptionUpdateParams extends ApiRequestParams {
         public Builder setUsageGte(Long usageGte) {
           this.usageGte = usageGte;
           return this;
+        }
+      }
+    }
+
+    @Getter
+    public static class PriceData {
+      /**
+       * Three-letter <a href="https://www.iso.org/iso-4217-currency-codes.html">ISO currency
+       * code</a>, in lowercase. Must be a <a href="https://stripe.com/docs/currencies">supported
+       * currency</a>.
+       */
+      @SerializedName("currency")
+      Object currency;
+
+      /**
+       * Map of extra parameters for custom features not available in this client library. The
+       * content in this map is not serialized under this field's {@code @SerializedName} value.
+       * Instead, each key/value pair is serialized as if the key is a root-level field (serialized)
+       * name in this param object. Effectively, this map is flattened to its parent instance.
+       */
+      @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
+      Map<String, Object> extraParams;
+
+      /** The ID of the product that this price will belong to. */
+      @SerializedName("product")
+      Object product;
+
+      /** The recurring components of a price such as {@code interval} and {@code usage_type}. */
+      @SerializedName("recurring")
+      Recurring recurring;
+
+      /** A positive integer in %s (or 0 for a free price) representing how much to charge. */
+      @SerializedName("unit_amount")
+      Long unitAmount;
+
+      /**
+       * Same as {@code unit_amount}, but accepts a decimal value with at most 12 decimal places.
+       * Only one of {@code unit_amount} and {@code unit_amount_decimal} can be set.
+       */
+      @SerializedName("unit_amount_decimal")
+      Object unitAmountDecimal;
+
+      private PriceData(
+          Object currency,
+          Map<String, Object> extraParams,
+          Object product,
+          Recurring recurring,
+          Long unitAmount,
+          Object unitAmountDecimal) {
+        this.currency = currency;
+        this.extraParams = extraParams;
+        this.product = product;
+        this.recurring = recurring;
+        this.unitAmount = unitAmount;
+        this.unitAmountDecimal = unitAmountDecimal;
+      }
+
+      public static Builder builder() {
+        return new Builder();
+      }
+
+      public static class Builder {
+        private Object currency;
+
+        private Map<String, Object> extraParams;
+
+        private Object product;
+
+        private Recurring recurring;
+
+        private Long unitAmount;
+
+        private Object unitAmountDecimal;
+
+        /** Finalize and obtain parameter instance from this builder. */
+        public PriceData build() {
+          return new PriceData(
+              this.currency,
+              this.extraParams,
+              this.product,
+              this.recurring,
+              this.unitAmount,
+              this.unitAmountDecimal);
+        }
+
+        /**
+         * Three-letter <a href="https://www.iso.org/iso-4217-currency-codes.html">ISO currency
+         * code</a>, in lowercase. Must be a <a href="https://stripe.com/docs/currencies">supported
+         * currency</a>.
+         */
+        public Builder setCurrency(String currency) {
+          this.currency = currency;
+          return this;
+        }
+
+        /**
+         * Three-letter <a href="https://www.iso.org/iso-4217-currency-codes.html">ISO currency
+         * code</a>, in lowercase. Must be a <a href="https://stripe.com/docs/currencies">supported
+         * currency</a>.
+         */
+        public Builder setCurrency(EmptyParam currency) {
+          this.currency = currency;
+          return this;
+        }
+
+        /**
+         * Add a key/value pair to `extraParams` map. A map is initialized for the first
+         * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
+         * map. See {@link SubscriptionUpdateParams.Item.PriceData#extraParams} for the field
+         * documentation.
+         */
+        public Builder putExtraParam(String key, Object value) {
+          if (this.extraParams == null) {
+            this.extraParams = new HashMap<>();
+          }
+          this.extraParams.put(key, value);
+          return this;
+        }
+
+        /**
+         * Add all map key/value pairs to `extraParams` map. A map is initialized for the first
+         * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
+         * map. See {@link SubscriptionUpdateParams.Item.PriceData#extraParams} for the field
+         * documentation.
+         */
+        public Builder putAllExtraParam(Map<String, Object> map) {
+          if (this.extraParams == null) {
+            this.extraParams = new HashMap<>();
+          }
+          this.extraParams.putAll(map);
+          return this;
+        }
+
+        /** The ID of the product that this price will belong to. */
+        public Builder setProduct(String product) {
+          this.product = product;
+          return this;
+        }
+
+        /** The ID of the product that this price will belong to. */
+        public Builder setProduct(EmptyParam product) {
+          this.product = product;
+          return this;
+        }
+
+        /** The recurring components of a price such as {@code interval} and {@code usage_type}. */
+        public Builder setRecurring(Recurring recurring) {
+          this.recurring = recurring;
+          return this;
+        }
+
+        /** A positive integer in %s (or 0 for a free price) representing how much to charge. */
+        public Builder setUnitAmount(Long unitAmount) {
+          this.unitAmount = unitAmount;
+          return this;
+        }
+
+        /**
+         * Same as {@code unit_amount}, but accepts a decimal value with at most 12 decimal places.
+         * Only one of {@code unit_amount} and {@code unit_amount_decimal} can be set.
+         */
+        public Builder setUnitAmountDecimal(BigDecimal unitAmountDecimal) {
+          this.unitAmountDecimal = unitAmountDecimal;
+          return this;
+        }
+
+        /**
+         * Same as {@code unit_amount}, but accepts a decimal value with at most 12 decimal places.
+         * Only one of {@code unit_amount} and {@code unit_amount_decimal} can be set.
+         */
+        public Builder setUnitAmountDecimal(EmptyParam unitAmountDecimal) {
+          this.unitAmountDecimal = unitAmountDecimal;
+          return this;
+        }
+      }
+
+      @Getter
+      public static class Recurring {
+        /**
+         * Specifies a usage aggregation strategy for prices of {@code usage_type=metered}. Allowed
+         * values are {@code sum} for summing up all usage during a period, {@code
+         * last_during_period} for using the last usage record reported within a period, {@code
+         * last_ever} for using the last usage record ever (across period bounds) or {@code max}
+         * which uses the usage record with the maximum reported usage during a period. Defaults to
+         * {@code sum}.
+         */
+        @SerializedName("aggregate_usage")
+        AggregateUsage aggregateUsage;
+
+        /**
+         * Map of extra parameters for custom features not available in this client library. The
+         * content in this map is not serialized under this field's {@code @SerializedName} value.
+         * Instead, each key/value pair is serialized as if the key is a root-level field
+         * (serialized) name in this param object. Effectively, this map is flattened to its parent
+         * instance.
+         */
+        @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
+        Map<String, Object> extraParams;
+
+        /**
+         * Specifies billing frequency. Either {@code day}, {@code week}, {@code month} or {@code
+         * year}.
+         */
+        @SerializedName("interval")
+        Interval interval;
+
+        /**
+         * The number of intervals between subscription billings. For example, {@code
+         * interval=month} and {@code interval_count=3} bills every 3 months. Maximum of one year
+         * interval allowed (1 year, 12 months, or 52 weeks).
+         */
+        @SerializedName("interval_count")
+        Long intervalCount;
+
+        /**
+         * Default number of trial days when subscribing a customer to this price using <a
+         * href="https://stripe.com/docs/api#create_subscription-trial_from_plan">{@code
+         * trial_from_plan=true}</a>.
+         */
+        @SerializedName("trial_period_days")
+        Long trialPeriodDays;
+
+        /**
+         * Configures how the quantity per period should be determined. Can be either {@code
+         * metered} or {@code licensed}. {@code licensed} automatically bills the {@code quantity}
+         * set when adding it to a subscription. {@code metered} aggregates the total usage based on
+         * usage records. Defaults to {@code licensed}.
+         */
+        @SerializedName("usage_type")
+        UsageType usageType;
+
+        private Recurring(
+            AggregateUsage aggregateUsage,
+            Map<String, Object> extraParams,
+            Interval interval,
+            Long intervalCount,
+            Long trialPeriodDays,
+            UsageType usageType) {
+          this.aggregateUsage = aggregateUsage;
+          this.extraParams = extraParams;
+          this.interval = interval;
+          this.intervalCount = intervalCount;
+          this.trialPeriodDays = trialPeriodDays;
+          this.usageType = usageType;
+        }
+
+        public static Builder builder() {
+          return new Builder();
+        }
+
+        public static class Builder {
+          private AggregateUsage aggregateUsage;
+
+          private Map<String, Object> extraParams;
+
+          private Interval interval;
+
+          private Long intervalCount;
+
+          private Long trialPeriodDays;
+
+          private UsageType usageType;
+
+          /** Finalize and obtain parameter instance from this builder. */
+          public Recurring build() {
+            return new Recurring(
+                this.aggregateUsage,
+                this.extraParams,
+                this.interval,
+                this.intervalCount,
+                this.trialPeriodDays,
+                this.usageType);
+          }
+
+          /**
+           * Specifies a usage aggregation strategy for prices of {@code usage_type=metered}.
+           * Allowed values are {@code sum} for summing up all usage during a period, {@code
+           * last_during_period} for using the last usage record reported within a period, {@code
+           * last_ever} for using the last usage record ever (across period bounds) or {@code max}
+           * which uses the usage record with the maximum reported usage during a period. Defaults
+           * to {@code sum}.
+           */
+          public Builder setAggregateUsage(AggregateUsage aggregateUsage) {
+            this.aggregateUsage = aggregateUsage;
+            return this;
+          }
+
+          /**
+           * Add a key/value pair to `extraParams` map. A map is initialized for the first
+           * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
+           * map. See {@link SubscriptionUpdateParams.Item.PriceData.Recurring#extraParams} for the
+           * field documentation.
+           */
+          public Builder putExtraParam(String key, Object value) {
+            if (this.extraParams == null) {
+              this.extraParams = new HashMap<>();
+            }
+            this.extraParams.put(key, value);
+            return this;
+          }
+
+          /**
+           * Add all map key/value pairs to `extraParams` map. A map is initialized for the first
+           * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
+           * map. See {@link SubscriptionUpdateParams.Item.PriceData.Recurring#extraParams} for the
+           * field documentation.
+           */
+          public Builder putAllExtraParam(Map<String, Object> map) {
+            if (this.extraParams == null) {
+              this.extraParams = new HashMap<>();
+            }
+            this.extraParams.putAll(map);
+            return this;
+          }
+
+          /**
+           * Specifies billing frequency. Either {@code day}, {@code week}, {@code month} or {@code
+           * year}.
+           */
+          public Builder setInterval(Interval interval) {
+            this.interval = interval;
+            return this;
+          }
+
+          /**
+           * The number of intervals between subscription billings. For example, {@code
+           * interval=month} and {@code interval_count=3} bills every 3 months. Maximum of one year
+           * interval allowed (1 year, 12 months, or 52 weeks).
+           */
+          public Builder setIntervalCount(Long intervalCount) {
+            this.intervalCount = intervalCount;
+            return this;
+          }
+
+          /**
+           * Default number of trial days when subscribing a customer to this price using <a
+           * href="https://stripe.com/docs/api#create_subscription-trial_from_plan">{@code
+           * trial_from_plan=true}</a>.
+           */
+          public Builder setTrialPeriodDays(Long trialPeriodDays) {
+            this.trialPeriodDays = trialPeriodDays;
+            return this;
+          }
+
+          /**
+           * Configures how the quantity per period should be determined. Can be either {@code
+           * metered} or {@code licensed}. {@code licensed} automatically bills the {@code quantity}
+           * set when adding it to a subscription. {@code metered} aggregates the total usage based
+           * on usage records. Defaults to {@code licensed}.
+           */
+          public Builder setUsageType(UsageType usageType) {
+            this.usageType = usageType;
+            return this;
+          }
+        }
+
+        public enum AggregateUsage implements ApiRequestParams.EnumParam {
+          @SerializedName("last_during_period")
+          LAST_DURING_PERIOD("last_during_period"),
+
+          @SerializedName("last_ever")
+          LAST_EVER("last_ever"),
+
+          @SerializedName("max")
+          MAX("max"),
+
+          @SerializedName("sum")
+          SUM("sum");
+
+          @Getter(onMethod_ = {@Override})
+          private final String value;
+
+          AggregateUsage(String value) {
+            this.value = value;
+          }
+        }
+
+        public enum Interval implements ApiRequestParams.EnumParam {
+          @SerializedName("day")
+          DAY("day"),
+
+          @SerializedName("month")
+          MONTH("month"),
+
+          @SerializedName("week")
+          WEEK("week"),
+
+          @SerializedName("year")
+          YEAR("year");
+
+          @Getter(onMethod_ = {@Override})
+          private final String value;
+
+          Interval(String value) {
+            this.value = value;
+          }
+        }
+
+        public enum UsageType implements ApiRequestParams.EnumParam {
+          @SerializedName("licensed")
+          LICENSED("licensed"),
+
+          @SerializedName("metered")
+          METERED("metered");
+
+          @Getter(onMethod_ = {@Override})
+          private final String value;
+
+          UsageType(String value) {
+            this.value = value;
+          }
         }
       }
     }

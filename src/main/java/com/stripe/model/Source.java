@@ -27,9 +27,6 @@ public class Source extends ApiResource implements MetadataStore<Source>, Paymen
   @SerializedName("ach_debit")
   AchDebit achDebit;
 
-  @SerializedName("acss_debit")
-  AcssDebit acssDebit;
-
   @SerializedName("alipay")
   Alipay alipay;
 
@@ -488,41 +485,6 @@ public class Source extends ApiResource implements MetadataStore<Source>, Paymen
 
     @SerializedName("type")
     String type;
-  }
-
-  @Getter
-  @Setter
-  @EqualsAndHashCode(callSuper = false)
-  public static class AcssDebit extends StripeObject {
-    @SerializedName("bank_address_city")
-    String bankAddressCity;
-
-    @SerializedName("bank_address_line_1")
-    String bankAddressLine1;
-
-    @SerializedName("bank_address_line_2")
-    String bankAddressLine2;
-
-    @SerializedName("bank_address_postal_code")
-    String bankAddressPostalCode;
-
-    @SerializedName("bank_name")
-    String bankName;
-
-    @SerializedName("category")
-    String category;
-
-    @SerializedName("country")
-    String country;
-
-    @SerializedName("fingerprint")
-    String fingerprint;
-
-    @SerializedName("last4")
-    String last4;
-
-    @SerializedName("routing_number")
-    String routingNumber;
   }
 
   @Getter
