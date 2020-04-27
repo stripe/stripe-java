@@ -1,6 +1,6 @@
 # Changelog
 
-## 19.5.0 - 2020-04-24
+## 19.5.0 ([API Version: 2020-03-02](https://github.com/stripe/stripe-java/blob/v19.5.0/src/main/java/com/stripe/Stripe.java#L12)) - Released: 2020-04-24
 * [#1016](https://github.com/stripe/stripe-java/pull/1016) Add support for `jcb_payments` as a `Capability`
 
 ## 19.4.0 - 2020-04-22
@@ -19,7 +19,7 @@
   * Add `institution_number` and `transit_number` in `payment_method_details[acss]` on `Charge`
   * Add `cvc` and `number` as properties that can be included when retrieving an Issuing `Card`
 
-## 19.0.0 - 2020-04-15
+## 19.0.0 ([API Version: 2020-03-02](https://github.com/stripe/stripe-java/blob/v19.0.0/src/main/java/com/stripe/Stripe.java#L12)) - Released: 2020-04-15
 * [#1009](https://github.com/stripe/stripe-java/pull/1009) Multiple breaking API changes while removing deprecated Issuing features:
   * Moved `SettingsBranding` on `Account` is now `Branding` inside the `Settings` on `Account`
   * Removed `percentage` filter from the List `TaxRate` API
@@ -124,7 +124,7 @@
   * Add support for `errors` in `requirements` on `Account`, `Capability` and `Person`
   * Add support for `payment_intent.processing` as a new `type` on `Event`.
 
-## 18.0.0 - 2020-03-03
+## 18.0.0 ([API Version: 2020-03-02](https://github.com/stripe/stripe-java/blob/v18.0.0/src/main/java/com/stripe/Stripe.java#L12)) - Released: 2020-03-03
 * [#977](https://github.com/stripe/stripe-java/pull/977) Multiple API changes:
   * Pin to API version `2020-03-02`
   * Remove `uob_regional` as a value on `bank` for FPX as this is deprecated and was never used
@@ -197,7 +197,7 @@
 * [#943](https://github.com/stripe/stripe-java/pull/943) Add support for `metadata` on Checkout `Session`
 * [#940](https://github.com/stripe/stripe-java/pull/940) Add `StripeObjectInterface` interface
 
-## 17.0.0 - 2020-01-15
+## 17.0.0 ([API Version: 2019-12-03](https://github.com/stripe/stripe-java/blob/v17.0.0/src/main/java/com/stripe/Stripe.java#L12)) - Released: 2020-01-15
 * [#869](https://github.com/stripe/stripe-java/pull/869)
 Major version release. Refer to our [migration guide for v17](https://github.com/stripe/stripe-java/wiki/Migration-guide-for-v17) for a list of new features and backwards incompatible changes to watch out for.
 
@@ -259,7 +259,7 @@ Pull requests included in this release (cf. [#869](https://github.com/stripe/str
 ## 16.1.0 - 2019-12-04
 * [#912](https://github.com/stripe/stripe-java/pull/912) Add support for `network` on `Charge` and `funding_method` on `SourceTransaction`
 
-## 16.0.0 - 2019-12-03
+## 16.0.0 ([API Version: 2019-12-03](https://github.com/stripe/stripe-java/blob/v16.0.0/src/main/java/com/stripe/Stripe.java#L12)) - Released: 2019-12-03
 * [#910](https://github.com/stripe/stripe-java/pull/910) Use global timeouts in RequestOptions
 * [#911](https://github.com/stripe/stripe-java/pull/911) Multiple API changes
   * Pin to API version `2019-12-03`
@@ -300,7 +300,7 @@ Pull requests included in this release (cf. [#869](https://github.com/stripe/str
 ## 15.1.0 - 2019-11-06
 * [#888](https://github.com/stripe/stripe-java/pull/888) Add support for SEPA and iDEAL on `PaymentMethod` and `Mandate`
 
-## 15.0.0 - 2019-11-05
+## 15.0.0 ([API Version: 2019-11-05](https://github.com/stripe/stripe-java/blob/v15.0.0/src/main/java/com/stripe/Stripe.java#L12)) - Released: 2019-11-05
 * [#886](https://github.com/stripe/stripe-java/pull/886) Move to the latest API version and add new changes
   * Move to API version `2019-11-05`
   * Add `default_settings` on `SubscritionSchedule`
@@ -340,7 +340,7 @@ Pull requests included in this release (cf. [#869](https://github.com/stripe/str
   * Remove `renewal_interval` on Subscription Schedule parameter classes
   * The above are technically breaking changes and should have been released with 14.0.0.
 
-## 14.0.0 - 2019-10-18
+## 14.0.0 ([API Version: 2019-10-17](https://github.com/stripe/stripe-java/blob/v14.0.0/src/main/java/com/stripe/Stripe.java#L12)) - Released: 2019-10-18
 * [#863](https://github.com/stripe/stripe-java/pull/863) Upgrade to new API version [`2019-10-17`](https://stripe.com/docs/upgrades#2019-10-17)
   * Pin to API version `2019-10-17`
   * Remove `account_balance` from Customer model and parameter classes
@@ -367,7 +367,7 @@ Pull requests included in this release (cf. [#869](https://github.com/stripe/str
   * Add support for `description`, `iin` and `issuer` on `Source.Card`, `Source.CardPresent` and `Source.ThreeDSecure`
   * Add support for `deviceType` on `ReaderListParams`
 
-## 13.0.0 - 2019-10-08
+## 13.0.0 ([API Version: 2019-10-08](https://github.com/stripe/stripe-java/blob/v13.0.0/src/main/java/com/stripe/Stripe.java#L12)) - Released: 2019-10-08
 * [#853](https://github.com/stripe/stripe-java/pull/853) Upgrade to new API version [`2019-10-08`](https://stripe.com/docs/upgrades#2019-10-08)
 
 ## 12.2.0 - 2019-10-08
