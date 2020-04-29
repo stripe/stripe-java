@@ -1,5 +1,8 @@
 # Changelog
 
+## 19.6.0 - 2020-04-29
+* [#1019](https://github.com/stripe/stripe-java/pull/1019) Add support for the `Price` resource and APIs
+
 ## 19.5.0 - 2020-04-24
 * [#1016](https://github.com/stripe/stripe-java/pull/1016) Add support for `jcb_payments` as a `Capability`
 
