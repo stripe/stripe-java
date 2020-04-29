@@ -73,6 +73,10 @@ public class InvoiceLineItem extends StripeObject implements HasId {
   @SerializedName("plan")
   Plan plan;
 
+  /** The price of the line item. */
+  @SerializedName("price")
+  Price price;
+
   /** Whether this is a proration. */
   @SerializedName("proration")
   Boolean proration;

@@ -9,26 +9,24 @@ import java.util.Map;
 import lombok.Getter;
 
 @Getter
-public class SubscriptionListParams extends ApiRequestParams {
+public class PriceListParams extends ApiRequestParams {
   /**
-   * The collection method of the subscriptions to retrieve. Either {@code charge_automatically} or
-   * {@code send_invoice}.
+   * Only return prices that are active or inactive (e.g., pass {@code false} to list all inactive
+   * prices).
    */
-  @SerializedName("collection_method")
-  CollectionMethod collectionMethod;
+  @SerializedName("active")
+  Boolean active;
 
+  /**
+   * A filter on the list, based on the object {@code created} field. The value can be a string with
+   * an integer Unix timestamp, or it can be a dictionary with a number of different query options.
+   */
   @SerializedName("created")
   Object created;
 
-  @SerializedName("current_period_end")
-  Object currentPeriodEnd;
-
-  @SerializedName("current_period_start")
-  Object currentPeriodStart;
-
-  /** The ID of the customer whose subscriptions will be retrieved. */
-  @SerializedName("customer")
-  String customer;
+  /** Only return prices for the given currency. */
+  @SerializedName("currency")
+  String currency;
 
   /**
    * A cursor for use in pagination. {@code ending_before} is an object ID that defines your place
@@ -59,13 +57,17 @@ public class SubscriptionListParams extends ApiRequestParams {
   @SerializedName("limit")
   Long limit;
 
-  /** The ID of the plan whose subscriptions will be retrieved. */
-  @SerializedName("plan")
-  String plan;
+  /** Only return the price with these lookup_keys, if any exist. */
+  @SerializedName("lookup_keys")
+  List<String> lookupKeys;
 
-  /** Filter for subscriptions that contain this recurring price ID. */
-  @SerializedName("price")
-  String price;
+  /** Only return prices for the given product. */
+  @SerializedName("product")
+  String product;
+
+  /** Only return prices with these recurring fields. */
+  @SerializedName("recurring")
+  Recurring recurring;
 
   /**
    * A cursor for use in pagination. {@code starting_after} is an object ID that defines your place
@@ -76,43 +78,35 @@ public class SubscriptionListParams extends ApiRequestParams {
   @SerializedName("starting_after")
   String startingAfter;
 
-  /**
-   * The status of the subscriptions to retrieve. One of: {@code incomplete}, {@code
-   * incomplete_expired}, {@code trialing}, {@code active}, {@code past_due}, {@code unpaid}, {@code
-   * canceled}, or {@code all}. Passing in a value of {@code canceled} will return all canceled
-   * subscriptions, including those belonging to deleted customers. Passing in a value of {@code
-   * all} will return subscriptions of all statuses.
-   */
-  @SerializedName("status")
-  Status status;
+  /** Only return prices of type {@code recurring} or {@code one_time}. */
+  @SerializedName("type")
+  Type type;
 
-  private SubscriptionListParams(
-      CollectionMethod collectionMethod,
+  private PriceListParams(
+      Boolean active,
       Object created,
-      Object currentPeriodEnd,
-      Object currentPeriodStart,
-      String customer,
+      String currency,
       String endingBefore,
       List<String> expand,
       Map<String, Object> extraParams,
       Long limit,
-      String plan,
-      String price,
+      List<String> lookupKeys,
+      String product,
+      Recurring recurring,
       String startingAfter,
-      Status status) {
-    this.collectionMethod = collectionMethod;
+      Type type) {
+    this.active = active;
     this.created = created;
-    this.currentPeriodEnd = currentPeriodEnd;
-    this.currentPeriodStart = currentPeriodStart;
-    this.customer = customer;
+    this.currency = currency;
     this.endingBefore = endingBefore;
     this.expand = expand;
     this.extraParams = extraParams;
     this.limit = limit;
-    this.plan = plan;
-    this.price = price;
+    this.lookupKeys = lookupKeys;
+    this.product = product;
+    this.recurring = recurring;
     this.startingAfter = startingAfter;
-    this.status = status;
+    this.type = type;
   }
 
   public static Builder builder() {
@@ -120,15 +114,11 @@ public class SubscriptionListParams extends ApiRequestParams {
   }
 
   public static class Builder {
-    private CollectionMethod collectionMethod;
+    private Boolean active;
 
     private Object created;
 
-    private Object currentPeriodEnd;
-
-    private Object currentPeriodStart;
-
-    private String customer;
+    private String currency;
 
     private String endingBefore;
 
@@ -138,74 +128,65 @@ public class SubscriptionListParams extends ApiRequestParams {
 
     private Long limit;
 
-    private String plan;
+    private List<String> lookupKeys;
 
-    private String price;
+    private String product;
+
+    private Recurring recurring;
 
     private String startingAfter;
 
-    private Status status;
+    private Type type;
 
     /** Finalize and obtain parameter instance from this builder. */
-    public SubscriptionListParams build() {
-      return new SubscriptionListParams(
-          this.collectionMethod,
+    public PriceListParams build() {
+      return new PriceListParams(
+          this.active,
           this.created,
-          this.currentPeriodEnd,
-          this.currentPeriodStart,
-          this.customer,
+          this.currency,
           this.endingBefore,
           this.expand,
           this.extraParams,
           this.limit,
-          this.plan,
-          this.price,
+          this.lookupKeys,
+          this.product,
+          this.recurring,
           this.startingAfter,
-          this.status);
+          this.type);
     }
 
     /**
-     * The collection method of the subscriptions to retrieve. Either {@code charge_automatically}
-     * or {@code send_invoice}.
+     * Only return prices that are active or inactive (e.g., pass {@code false} to list all inactive
+     * prices).
      */
-    public Builder setCollectionMethod(CollectionMethod collectionMethod) {
-      this.collectionMethod = collectionMethod;
+    public Builder setActive(Boolean active) {
+      this.active = active;
       return this;
     }
 
+    /**
+     * A filter on the list, based on the object {@code created} field. The value can be a string
+     * with an integer Unix timestamp, or it can be a dictionary with a number of different query
+     * options.
+     */
     public Builder setCreated(Created created) {
       this.created = created;
       return this;
     }
 
+    /**
+     * A filter on the list, based on the object {@code created} field. The value can be a string
+     * with an integer Unix timestamp, or it can be a dictionary with a number of different query
+     * options.
+     */
     public Builder setCreated(Long created) {
       this.created = created;
       return this;
     }
 
-    public Builder setCurrentPeriodEnd(CurrentPeriodEnd currentPeriodEnd) {
-      this.currentPeriodEnd = currentPeriodEnd;
-      return this;
-    }
-
-    public Builder setCurrentPeriodEnd(Long currentPeriodEnd) {
-      this.currentPeriodEnd = currentPeriodEnd;
-      return this;
-    }
-
-    public Builder setCurrentPeriodStart(CurrentPeriodStart currentPeriodStart) {
-      this.currentPeriodStart = currentPeriodStart;
-      return this;
-    }
-
-    public Builder setCurrentPeriodStart(Long currentPeriodStart) {
-      this.currentPeriodStart = currentPeriodStart;
-      return this;
-    }
-
-    /** The ID of the customer whose subscriptions will be retrieved. */
-    public Builder setCustomer(String customer) {
-      this.customer = customer;
+    /** Only return prices for the given currency. */
+    public Builder setCurrency(String currency) {
+      this.currency = currency;
       return this;
     }
 
@@ -223,7 +204,7 @@ public class SubscriptionListParams extends ApiRequestParams {
     /**
      * Add an element to `expand` list. A list is initialized for the first `add/addAll` call, and
      * subsequent calls adds additional elements to the original list. See {@link
-     * SubscriptionListParams#expand} for the field documentation.
+     * PriceListParams#expand} for the field documentation.
      */
     public Builder addExpand(String element) {
       if (this.expand == null) {
@@ -236,7 +217,7 @@ public class SubscriptionListParams extends ApiRequestParams {
     /**
      * Add all elements to `expand` list. A list is initialized for the first `add/addAll` call, and
      * subsequent calls adds additional elements to the original list. See {@link
-     * SubscriptionListParams#expand} for the field documentation.
+     * PriceListParams#expand} for the field documentation.
      */
     public Builder addAllExpand(List<String> elements) {
       if (this.expand == null) {
@@ -249,7 +230,7 @@ public class SubscriptionListParams extends ApiRequestParams {
     /**
      * Add a key/value pair to `extraParams` map. A map is initialized for the first `put/putAll`
      * call, and subsequent calls add additional key/value pairs to the original map. See {@link
-     * SubscriptionListParams#extraParams} for the field documentation.
+     * PriceListParams#extraParams} for the field documentation.
      */
     public Builder putExtraParam(String key, Object value) {
       if (this.extraParams == null) {
@@ -262,7 +243,7 @@ public class SubscriptionListParams extends ApiRequestParams {
     /**
      * Add all map key/value pairs to `extraParams` map. A map is initialized for the first
      * `put/putAll` call, and subsequent calls add additional key/value pairs to the original map.
-     * See {@link SubscriptionListParams#extraParams} for the field documentation.
+     * See {@link PriceListParams#extraParams} for the field documentation.
      */
     public Builder putAllExtraParam(Map<String, Object> map) {
       if (this.extraParams == null) {
@@ -281,15 +262,41 @@ public class SubscriptionListParams extends ApiRequestParams {
       return this;
     }
 
-    /** The ID of the plan whose subscriptions will be retrieved. */
-    public Builder setPlan(String plan) {
-      this.plan = plan;
+    /**
+     * Add an element to `lookupKeys` list. A list is initialized for the first `add/addAll` call,
+     * and subsequent calls adds additional elements to the original list. See {@link
+     * PriceListParams#lookupKeys} for the field documentation.
+     */
+    public Builder addLookupKeys(String element) {
+      if (this.lookupKeys == null) {
+        this.lookupKeys = new ArrayList<>();
+      }
+      this.lookupKeys.add(element);
       return this;
     }
 
-    /** Filter for subscriptions that contain this recurring price ID. */
-    public Builder setPrice(String price) {
-      this.price = price;
+    /**
+     * Add all elements to `lookupKeys` list. A list is initialized for the first `add/addAll` call,
+     * and subsequent calls adds additional elements to the original list. See {@link
+     * PriceListParams#lookupKeys} for the field documentation.
+     */
+    public Builder addAllLookupKeys(List<String> elements) {
+      if (this.lookupKeys == null) {
+        this.lookupKeys = new ArrayList<>();
+      }
+      this.lookupKeys.addAll(elements);
+      return this;
+    }
+
+    /** Only return prices for the given product. */
+    public Builder setProduct(String product) {
+      this.product = product;
+      return this;
+    }
+
+    /** Only return prices with these recurring fields. */
+    public Builder setRecurring(Recurring recurring) {
+      this.recurring = recurring;
       return this;
     }
 
@@ -304,15 +311,9 @@ public class SubscriptionListParams extends ApiRequestParams {
       return this;
     }
 
-    /**
-     * The status of the subscriptions to retrieve. One of: {@code incomplete}, {@code
-     * incomplete_expired}, {@code trialing}, {@code active}, {@code past_due}, {@code unpaid},
-     * {@code canceled}, or {@code all}. Passing in a value of {@code canceled} will return all
-     * canceled subscriptions, including those belonging to deleted customers. Passing in a value of
-     * {@code all} will return subscriptions of all statuses.
-     */
-    public Builder setStatus(Status status) {
-      this.status = status;
+    /** Only return prices of type {@code recurring} or {@code one_time}. */
+    public Builder setType(Type type) {
+      this.type = type;
       return this;
     }
   }
@@ -375,7 +376,7 @@ public class SubscriptionListParams extends ApiRequestParams {
       /**
        * Add a key/value pair to `extraParams` map. A map is initialized for the first `put/putAll`
        * call, and subsequent calls add additional key/value pairs to the original map. See {@link
-       * SubscriptionListParams.Created#extraParams} for the field documentation.
+       * PriceListParams.Created#extraParams} for the field documentation.
        */
       public Builder putExtraParam(String key, Object value) {
         if (this.extraParams == null) {
@@ -388,7 +389,7 @@ public class SubscriptionListParams extends ApiRequestParams {
       /**
        * Add all map key/value pairs to `extraParams` map. A map is initialized for the first
        * `put/putAll` call, and subsequent calls add additional key/value pairs to the original map.
-       * See {@link SubscriptionListParams.Created#extraParams} for the field documentation.
+       * See {@link PriceListParams.Created#extraParams} for the field documentation.
        */
       public Builder putAllExtraParam(Map<String, Object> map) {
         if (this.extraParams == null) {
@@ -425,7 +426,7 @@ public class SubscriptionListParams extends ApiRequestParams {
   }
 
   @Getter
-  public static class CurrentPeriodEnd {
+  public static class Recurring {
     /**
      * Map of extra parameters for custom features not available in this client library. The content
      * in this map is not serialized under this field's {@code @SerializedName} value. Instead, each
@@ -435,29 +436,22 @@ public class SubscriptionListParams extends ApiRequestParams {
     @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
     Map<String, Object> extraParams;
 
-    /** Minimum value to filter by (exclusive). */
-    @SerializedName("gt")
-    Long gt;
+    /**
+     * Filter by billing frequency. Either {@code day}, {@code week}, {@code month} or {@code year}.
+     */
+    @SerializedName("interval")
+    Interval interval;
 
-    /** Minimum value to filter by (inclusive). */
-    @SerializedName("gte")
-    Long gte;
+    /**
+     * Filter by the usage type for this price. Can be either {@code metered} or {@code licensed}.
+     */
+    @SerializedName("usage_type")
+    UsageType usageType;
 
-    /** Maximum value to filter by (exclusive). */
-    @SerializedName("lt")
-    Long lt;
-
-    /** Maximum value to filter by (inclusive). */
-    @SerializedName("lte")
-    Long lte;
-
-    private CurrentPeriodEnd(
-        Map<String, Object> extraParams, Long gt, Long gte, Long lt, Long lte) {
+    private Recurring(Map<String, Object> extraParams, Interval interval, UsageType usageType) {
       this.extraParams = extraParams;
-      this.gt = gt;
-      this.gte = gte;
-      this.lt = lt;
-      this.lte = lte;
+      this.interval = interval;
+      this.usageType = usageType;
     }
 
     public static Builder builder() {
@@ -467,23 +461,19 @@ public class SubscriptionListParams extends ApiRequestParams {
     public static class Builder {
       private Map<String, Object> extraParams;
 
-      private Long gt;
+      private Interval interval;
 
-      private Long gte;
-
-      private Long lt;
-
-      private Long lte;
+      private UsageType usageType;
 
       /** Finalize and obtain parameter instance from this builder. */
-      public CurrentPeriodEnd build() {
-        return new CurrentPeriodEnd(this.extraParams, this.gt, this.gte, this.lt, this.lte);
+      public Recurring build() {
+        return new Recurring(this.extraParams, this.interval, this.usageType);
       }
 
       /**
        * Add a key/value pair to `extraParams` map. A map is initialized for the first `put/putAll`
        * call, and subsequent calls add additional key/value pairs to the original map. See {@link
-       * SubscriptionListParams.CurrentPeriodEnd#extraParams} for the field documentation.
+       * PriceListParams.Recurring#extraParams} for the field documentation.
        */
       public Builder putExtraParam(String key, Object value) {
         if (this.extraParams == null) {
@@ -496,8 +486,7 @@ public class SubscriptionListParams extends ApiRequestParams {
       /**
        * Add all map key/value pairs to `extraParams` map. A map is initialized for the first
        * `put/putAll` call, and subsequent calls add additional key/value pairs to the original map.
-       * See {@link SubscriptionListParams.CurrentPeriodEnd#extraParams} for the field
-       * documentation.
+       * See {@link PriceListParams.Recurring#extraParams} for the field documentation.
        */
       public Builder putAllExtraParam(Map<String, Object> map) {
         if (this.extraParams == null) {
@@ -507,188 +496,72 @@ public class SubscriptionListParams extends ApiRequestParams {
         return this;
       }
 
-      /** Minimum value to filter by (exclusive). */
-      public Builder setGt(Long gt) {
-        this.gt = gt;
-        return this;
-      }
-
-      /** Minimum value to filter by (inclusive). */
-      public Builder setGte(Long gte) {
-        this.gte = gte;
-        return this;
-      }
-
-      /** Maximum value to filter by (exclusive). */
-      public Builder setLt(Long lt) {
-        this.lt = lt;
-        return this;
-      }
-
-      /** Maximum value to filter by (inclusive). */
-      public Builder setLte(Long lte) {
-        this.lte = lte;
-        return this;
-      }
-    }
-  }
-
-  @Getter
-  public static class CurrentPeriodStart {
-    /**
-     * Map of extra parameters for custom features not available in this client library. The content
-     * in this map is not serialized under this field's {@code @SerializedName} value. Instead, each
-     * key/value pair is serialized as if the key is a root-level field (serialized) name in this
-     * param object. Effectively, this map is flattened to its parent instance.
-     */
-    @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
-    Map<String, Object> extraParams;
-
-    /** Minimum value to filter by (exclusive). */
-    @SerializedName("gt")
-    Long gt;
-
-    /** Minimum value to filter by (inclusive). */
-    @SerializedName("gte")
-    Long gte;
-
-    /** Maximum value to filter by (exclusive). */
-    @SerializedName("lt")
-    Long lt;
-
-    /** Maximum value to filter by (inclusive). */
-    @SerializedName("lte")
-    Long lte;
-
-    private CurrentPeriodStart(
-        Map<String, Object> extraParams, Long gt, Long gte, Long lt, Long lte) {
-      this.extraParams = extraParams;
-      this.gt = gt;
-      this.gte = gte;
-      this.lt = lt;
-      this.lte = lte;
-    }
-
-    public static Builder builder() {
-      return new Builder();
-    }
-
-    public static class Builder {
-      private Map<String, Object> extraParams;
-
-      private Long gt;
-
-      private Long gte;
-
-      private Long lt;
-
-      private Long lte;
-
-      /** Finalize and obtain parameter instance from this builder. */
-      public CurrentPeriodStart build() {
-        return new CurrentPeriodStart(this.extraParams, this.gt, this.gte, this.lt, this.lte);
-      }
-
       /**
-       * Add a key/value pair to `extraParams` map. A map is initialized for the first `put/putAll`
-       * call, and subsequent calls add additional key/value pairs to the original map. See {@link
-       * SubscriptionListParams.CurrentPeriodStart#extraParams} for the field documentation.
+       * Filter by billing frequency. Either {@code day}, {@code week}, {@code month} or {@code
+       * year}.
        */
-      public Builder putExtraParam(String key, Object value) {
-        if (this.extraParams == null) {
-          this.extraParams = new HashMap<>();
-        }
-        this.extraParams.put(key, value);
+      public Builder setInterval(Interval interval) {
+        this.interval = interval;
         return this;
       }
 
       /**
-       * Add all map key/value pairs to `extraParams` map. A map is initialized for the first
-       * `put/putAll` call, and subsequent calls add additional key/value pairs to the original map.
-       * See {@link SubscriptionListParams.CurrentPeriodStart#extraParams} for the field
-       * documentation.
+       * Filter by the usage type for this price. Can be either {@code metered} or {@code licensed}.
        */
-      public Builder putAllExtraParam(Map<String, Object> map) {
-        if (this.extraParams == null) {
-          this.extraParams = new HashMap<>();
-        }
-        this.extraParams.putAll(map);
+      public Builder setUsageType(UsageType usageType) {
+        this.usageType = usageType;
         return this;
       }
+    }
 
-      /** Minimum value to filter by (exclusive). */
-      public Builder setGt(Long gt) {
-        this.gt = gt;
-        return this;
+    public enum Interval implements ApiRequestParams.EnumParam {
+      @SerializedName("day")
+      DAY("day"),
+
+      @SerializedName("month")
+      MONTH("month"),
+
+      @SerializedName("week")
+      WEEK("week"),
+
+      @SerializedName("year")
+      YEAR("year");
+
+      @Getter(onMethod_ = {@Override})
+      private final String value;
+
+      Interval(String value) {
+        this.value = value;
       }
+    }
 
-      /** Minimum value to filter by (inclusive). */
-      public Builder setGte(Long gte) {
-        this.gte = gte;
-        return this;
-      }
+    public enum UsageType implements ApiRequestParams.EnumParam {
+      @SerializedName("licensed")
+      LICENSED("licensed"),
 
-      /** Maximum value to filter by (exclusive). */
-      public Builder setLt(Long lt) {
-        this.lt = lt;
-        return this;
-      }
+      @SerializedName("metered")
+      METERED("metered");
 
-      /** Maximum value to filter by (inclusive). */
-      public Builder setLte(Long lte) {
-        this.lte = lte;
-        return this;
+      @Getter(onMethod_ = {@Override})
+      private final String value;
+
+      UsageType(String value) {
+        this.value = value;
       }
     }
   }
 
-  public enum CollectionMethod implements ApiRequestParams.EnumParam {
-    @SerializedName("charge_automatically")
-    CHARGE_AUTOMATICALLY("charge_automatically"),
+  public enum Type implements ApiRequestParams.EnumParam {
+    @SerializedName("one_time")
+    ONE_TIME("one_time"),
 
-    @SerializedName("send_invoice")
-    SEND_INVOICE("send_invoice");
-
-    @Getter(onMethod_ = {@Override})
-    private final String value;
-
-    CollectionMethod(String value) {
-      this.value = value;
-    }
-  }
-
-  public enum Status implements ApiRequestParams.EnumParam {
-    @SerializedName("active")
-    ACTIVE("active"),
-
-    @SerializedName("all")
-    ALL("all"),
-
-    @SerializedName("canceled")
-    CANCELED("canceled"),
-
-    @SerializedName("ended")
-    ENDED("ended"),
-
-    @SerializedName("incomplete")
-    INCOMPLETE("incomplete"),
-
-    @SerializedName("incomplete_expired")
-    INCOMPLETE_EXPIRED("incomplete_expired"),
-
-    @SerializedName("past_due")
-    PAST_DUE("past_due"),
-
-    @SerializedName("trialing")
-    TRIALING("trialing"),
-
-    @SerializedName("unpaid")
-    UNPAID("unpaid");
+    @SerializedName("recurring")
+    RECURRING("recurring");
 
     @Getter(onMethod_ = {@Override})
     private final String value;
 
-    Status(String value) {
+    Type(String value) {
       this.value = value;
     }
   }

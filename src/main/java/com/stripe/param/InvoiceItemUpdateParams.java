@@ -60,6 +60,14 @@ public class InvoiceItemUpdateParams extends ApiRequestParams {
   @SerializedName("period")
   Period period;
 
+  /** The ID of the price object. */
+  @SerializedName("price")
+  Object price;
+
+  /** Data used to generate a new price object inline. */
+  @SerializedName("price_data")
+  PriceData priceData;
+
   /** Non-negative integer. The quantity of units for the invoice item. */
   @SerializedName("quantity")
   Long quantity;
@@ -95,6 +103,8 @@ public class InvoiceItemUpdateParams extends ApiRequestParams {
       Map<String, Object> extraParams,
       Object metadata,
       Period period,
+      Object price,
+      PriceData priceData,
       Long quantity,
       Object taxRates,
       Long unitAmount,
@@ -106,6 +116,8 @@ public class InvoiceItemUpdateParams extends ApiRequestParams {
     this.extraParams = extraParams;
     this.metadata = metadata;
     this.period = period;
+    this.price = price;
+    this.priceData = priceData;
     this.quantity = quantity;
     this.taxRates = taxRates;
     this.unitAmount = unitAmount;
@@ -131,6 +143,10 @@ public class InvoiceItemUpdateParams extends ApiRequestParams {
 
     private Period period;
 
+    private Object price;
+
+    private PriceData priceData;
+
     private Long quantity;
 
     private Object taxRates;
@@ -149,6 +165,8 @@ public class InvoiceItemUpdateParams extends ApiRequestParams {
           this.extraParams,
           this.metadata,
           this.period,
+          this.price,
+          this.priceData,
           this.quantity,
           this.taxRates,
           this.unitAmount,
@@ -297,6 +315,24 @@ public class InvoiceItemUpdateParams extends ApiRequestParams {
     /** The period associated with this invoice item. */
     public Builder setPeriod(Period period) {
       this.period = period;
+      return this;
+    }
+
+    /** The ID of the price object. */
+    public Builder setPrice(String price) {
+      this.price = price;
+      return this;
+    }
+
+    /** The ID of the price object. */
+    public Builder setPrice(EmptyParam price) {
+      this.price = price;
+      return this;
+    }
+
+    /** Data used to generate a new price object inline. */
+    public Builder setPriceData(PriceData priceData) {
+      this.priceData = priceData;
       return this;
     }
 
@@ -459,6 +495,158 @@ public class InvoiceItemUpdateParams extends ApiRequestParams {
       /** The start of the period. */
       public Builder setStart(Long start) {
         this.start = start;
+        return this;
+      }
+    }
+  }
+
+  @Getter
+  public static class PriceData {
+    /**
+     * Three-letter <a href="https://www.iso.org/iso-4217-currency-codes.html">ISO currency
+     * code</a>, in lowercase. Must be a <a href="https://stripe.com/docs/currencies">supported
+     * currency</a>.
+     */
+    @SerializedName("currency")
+    Object currency;
+
+    /**
+     * Map of extra parameters for custom features not available in this client library. The content
+     * in this map is not serialized under this field's {@code @SerializedName} value. Instead, each
+     * key/value pair is serialized as if the key is a root-level field (serialized) name in this
+     * param object. Effectively, this map is flattened to its parent instance.
+     */
+    @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
+    Map<String, Object> extraParams;
+
+    /** The ID of the product that this price will belong to. */
+    @SerializedName("product")
+    Object product;
+
+    /** A positive integer in %s (or 0 for a free price) representing how much to charge. */
+    @SerializedName("unit_amount")
+    Long unitAmount;
+
+    /**
+     * Same as {@code unit_amount}, but accepts a decimal value with at most 12 decimal places. Only
+     * one of {@code unit_amount} and {@code unit_amount_decimal} can be set.
+     */
+    @SerializedName("unit_amount_decimal")
+    Object unitAmountDecimal;
+
+    private PriceData(
+        Object currency,
+        Map<String, Object> extraParams,
+        Object product,
+        Long unitAmount,
+        Object unitAmountDecimal) {
+      this.currency = currency;
+      this.extraParams = extraParams;
+      this.product = product;
+      this.unitAmount = unitAmount;
+      this.unitAmountDecimal = unitAmountDecimal;
+    }
+
+    public static Builder builder() {
+      return new Builder();
+    }
+
+    public static class Builder {
+      private Object currency;
+
+      private Map<String, Object> extraParams;
+
+      private Object product;
+
+      private Long unitAmount;
+
+      private Object unitAmountDecimal;
+
+      /** Finalize and obtain parameter instance from this builder. */
+      public PriceData build() {
+        return new PriceData(
+            this.currency, this.extraParams, this.product, this.unitAmount, this.unitAmountDecimal);
+      }
+
+      /**
+       * Three-letter <a href="https://www.iso.org/iso-4217-currency-codes.html">ISO currency
+       * code</a>, in lowercase. Must be a <a href="https://stripe.com/docs/currencies">supported
+       * currency</a>.
+       */
+      public Builder setCurrency(String currency) {
+        this.currency = currency;
+        return this;
+      }
+
+      /**
+       * Three-letter <a href="https://www.iso.org/iso-4217-currency-codes.html">ISO currency
+       * code</a>, in lowercase. Must be a <a href="https://stripe.com/docs/currencies">supported
+       * currency</a>.
+       */
+      public Builder setCurrency(EmptyParam currency) {
+        this.currency = currency;
+        return this;
+      }
+
+      /**
+       * Add a key/value pair to `extraParams` map. A map is initialized for the first `put/putAll`
+       * call, and subsequent calls add additional key/value pairs to the original map. See {@link
+       * InvoiceItemUpdateParams.PriceData#extraParams} for the field documentation.
+       */
+      public Builder putExtraParam(String key, Object value) {
+        if (this.extraParams == null) {
+          this.extraParams = new HashMap<>();
+        }
+        this.extraParams.put(key, value);
+        return this;
+      }
+
+      /**
+       * Add all map key/value pairs to `extraParams` map. A map is initialized for the first
+       * `put/putAll` call, and subsequent calls add additional key/value pairs to the original map.
+       * See {@link InvoiceItemUpdateParams.PriceData#extraParams} for the field documentation.
+       */
+      public Builder putAllExtraParam(Map<String, Object> map) {
+        if (this.extraParams == null) {
+          this.extraParams = new HashMap<>();
+        }
+        this.extraParams.putAll(map);
+        return this;
+      }
+
+      /** The ID of the product that this price will belong to. */
+      public Builder setProduct(String product) {
+        this.product = product;
+        return this;
+      }
+
+      /** The ID of the product that this price will belong to. */
+      public Builder setProduct(EmptyParam product) {
+        this.product = product;
+        return this;
+      }
+
+      /** A positive integer in %s (or 0 for a free price) representing how much to charge. */
+      public Builder setUnitAmount(Long unitAmount) {
+        this.unitAmount = unitAmount;
+        return this;
+      }
+
+      /**
+       * Same as {@code unit_amount}, but accepts a decimal value with at most 12 decimal places.
+       * Only one of {@code unit_amount} and {@code unit_amount_decimal} can be set.
+       */
+      public Builder setUnitAmountDecimal(BigDecimal unitAmountDecimal) {
+        this.unitAmountDecimal = unitAmountDecimal;
+        return this;
+      }
+
+      /**
+       * Same as {@code unit_amount}, but accepts a decimal value with at most 12 decimal places.
+       * Only one of {@code unit_amount} and {@code unit_amount_decimal} can be set.
+       */
+      public Builder setUnitAmountDecimal(EmptyParam unitAmountDecimal) {
+        this.unitAmountDecimal = unitAmountDecimal;
         return this;
       }
     }
