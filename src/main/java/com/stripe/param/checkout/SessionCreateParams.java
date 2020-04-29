@@ -524,7 +524,7 @@ public class SessionCreateParams extends ApiRequestParams {
     @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
     Map<String, Object> extraParams;
 
-    /** A list of images representing this line item. */
+    /** A list of images representing this line item. Each image can be up to 5 MB in size. */
     @SerializedName("images")
     List<String> images;
 
