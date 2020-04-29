@@ -120,7 +120,7 @@ public class Price extends ApiResource implements HasId, MetadataStore<Price> {
    * billed. Cannot be combined with {@code tiers}.
    */
   @SerializedName("transform_quantity")
-  Plan.TransformUsage transformQuantity;
+  TransformQuantity transformQuantity;
 
   /**
    * One of {@code one_time} or {@code recurring} depending on whether the price is for a one-time
@@ -349,5 +349,22 @@ public class Price extends ApiResource implements HasId, MetadataStore<Price> {
     /** Up to and including to this quantity will be contained in the tier. */
     @SerializedName("up_to")
     Long upTo;
+  }
+
+  @Getter
+  @Setter
+  @EqualsAndHashCode(callSuper = false)
+  public static class TransformQuantity extends StripeObject {
+    /** Divide usage by this number. */
+    @SerializedName("divide_by")
+    Long divideBy;
+
+    /**
+     * After division, either round the result {@code up} or {@code down}.
+     *
+     * <p>One of {@code down}, or {@code up}.
+     */
+    @SerializedName("round")
+    String round;
   }
 }

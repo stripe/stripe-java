@@ -727,6 +727,12 @@ public class SubscriptionSchedule extends ApiResource
     @Setter(lombok.AccessLevel.NONE)
     ExpandableField<Plan> plan;
 
+    /** ID of the price to which the customer should be subscribed. */
+    @SerializedName("price")
+    @Getter(lombok.AccessLevel.NONE)
+    @Setter(lombok.AccessLevel.NONE)
+    ExpandableField<Price> price;
+
     /** Quantity of the plan to which the customer should be subscribed. */
     @SerializedName("quantity")
     Long quantity;
@@ -754,6 +760,24 @@ public class SubscriptionSchedule extends ApiResource
 
     public void setPlanObject(Plan expandableObject) {
       this.plan = new ExpandableField<Plan>(expandableObject.getId(), expandableObject);
+    }
+
+    /** Get ID of expandable {@code price} object. */
+    public String getPrice() {
+      return (this.price != null) ? this.price.getId() : null;
+    }
+
+    public void setPrice(String id) {
+      this.price = ApiResource.setExpandableFieldId(id, this.price);
+    }
+
+    /** Get expanded {@code price}. */
+    public Price getPriceObject() {
+      return (this.price != null) ? this.price.getExpanded() : null;
+    }
+
+    public void setPriceObject(Price expandableObject) {
+      this.price = new ExpandableField<Price>(expandableObject.getId(), expandableObject);
     }
   }
 }
