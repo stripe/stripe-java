@@ -1,5 +1,8 @@
 # Changelog
 
+## 19.7.0 - 2020-04-29
+* [#1020](https://github.com/stripe/stripe-java/pull/1020) Add support for `br_cpf` and `br_cnpj` as `type` on `TaxId`
+
 ## 19.6.0 - 2020-04-29
 * [#1019](https://github.com/stripe/stripe-java/pull/1019) Add support for the `Price` resource and APIs
 
