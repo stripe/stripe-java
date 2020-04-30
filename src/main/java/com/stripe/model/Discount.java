@@ -9,7 +9,12 @@ import lombok.Setter;
 @Getter
 @Setter
 @EqualsAndHashCode(callSuper = false)
-public class Discount extends StripeObject {
+public class Discount extends StripeObject implements HasId {
+
+  /** Unique identifier for the object. */
+  @Getter(onMethod_ = {@Override})
+  @SerializedName("id")
+  String id;
   /**
    * A coupon contains information about a percent-off or amount-off discount you might want to
    * apply to a customer. Coupons may be applied to <a

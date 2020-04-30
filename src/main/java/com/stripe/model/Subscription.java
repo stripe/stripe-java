@@ -13,6 +13,7 @@ import com.stripe.param.SubscriptionUpdateParams;
 import java.math.BigDecimal;
 import java.util.List;
 import java.util.Map;
+import java.util.stream.Collectors;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.Setter;
@@ -138,6 +139,50 @@ public class Subscription extends ApiResource implements HasId, MetadataStore<Su
    */
   @SerializedName("discount")
   Discount discount;
+
+  @SerializedName("discounts")
+  @Getter(lombok.AccessLevel.NONE)
+  @Setter(lombok.AccessLevel.NONE)
+  List<ExpandableField<Discount>> discounts;
+
+  public List<String> getDiscounts() {
+    return (this.discounts != null)
+        ? this.discounts.stream().map(x -> x.getId()).collect(Collectors.toList())
+        : null;
+  }
+
+  public void setDiscounts(List<String> ids) {
+    if (id == null) {
+      this.discounts = null;
+      return;
+    }
+    if (this.discounts.stream().map(x -> x.getId()).collect(Collectors.toList()).equals(ids)) {
+      // noop if the ids are equal to what are already present
+      return;
+    }
+    this.discounts =
+        (ids != null)
+            ? ids.stream()
+                .map(id -> new ExpandableField<Discount>(id, null))
+                .collect(Collectors.toList())
+            : null;
+  }
+
+  /** Get expanded {@code discounts}. */
+  public List<Discount> getDiscountObjects() {
+    return (this.discounts != null)
+        ? this.discounts.stream().map(x -> x.getExpanded()).collect(Collectors.toList())
+        : null;
+  }
+
+  public void setDiscountObjects(List<Discount> objs) {
+    this.discounts =
+        objs != null
+            ? objs.stream()
+                .map(x -> new ExpandableField<Discount>(x.getId(), x))
+                .collect(Collectors.toList())
+            : null;
+  }
 
   /** If the subscription has ended, the date the subscription ended. */
   @SerializedName("ended_at")

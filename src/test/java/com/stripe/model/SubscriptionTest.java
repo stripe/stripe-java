@@ -2,11 +2,15 @@ package com.stripe.model;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
+import static org.junit.jupiter.api.Assertions.assertNull;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import com.stripe.BaseStripeTest;
 import com.stripe.net.ApiResource;
 import java.math.BigDecimal;
+import java.util.Arrays;
+import java.util.List;
+import java.util.stream.Collectors;
 import org.junit.jupiter.api.Test;
 
 public class SubscriptionTest extends BaseStripeTest {
@@ -43,6 +47,59 @@ public class SubscriptionTest extends BaseStripeTest {
     assertNotNull(invoice);
     assertNotNull(invoice.getId());
     assertEquals(subscription.getLatestInvoice(), invoice.getId());
+  }
+
+  @Test
+  public void testDeserializeWithArrayExpansions() throws Exception {
+    final String data =
+        getResourceAsString("/api_fixtures/subscription_with_discount_objects.json");
+    final Subscription subscription = ApiResource.GSON.fromJson(data, Subscription.class);
+    assertNotNull(subscription);
+    assertNotNull(subscription.getDiscounts().get(1));
+    assertEquals(
+        subscription.getDiscounts().get(1), subscription.getDiscountObjects().get(1).getId());
+  }
+
+  @Test
+  public void testDeserializeWithUnexpandedArrayExpansions() throws Exception {
+    final String data =
+        getResourceAsString("/api_fixtures/subscription_with_discount_ids.json");
+    final Subscription subscription = ApiResource.GSON.fromJson(data, Subscription.class);
+    assertNotNull(subscription);
+    assertEquals("bar", subscription.getDiscounts().get(1));
+    assertNull(subscription.getDiscountObjects().get(1));
+    assertEquals(2, subscription.getDiscounts().size());
+    assertEquals(2, subscription.getDiscountObjects().size());
+  }
+
+  @Test
+  public void testSerializeWithArrayExpansions() throws Exception {
+    final Subscription subscription =
+        ApiResource.GSON.fromJson(
+            getResourceAsString("/api_fixtures/subscription_with_discount_objects.json"),
+            Subscription.class);
+
+    assertEquals(
+        subscription,
+        ApiResource.GSON.fromJson(ApiResource.GSON.toJson(subscription), Subscription.class));
+  }
+
+  @Test
+  public void testSetDiscounts() throws Exception {
+    final String data =
+        getResourceAsString("/api_fixtures/subscription_with_discount_objects.json");
+    final Subscription subscription = ApiResource.GSON.fromJson(data, Subscription.class);
+    List<Discount> discounts = subscription.getDiscountObjects();
+    List<String> discountIds = discounts.stream().map(x -> x.getId()).collect(Collectors.toList());
+    subscription.setDiscounts(discountIds);
+    assertEquals(discounts, subscription.getDiscountObjects());
+    subscription.setDiscounts(Arrays.asList(discountIds.get(0)));
+    assertEquals(subscription.getDiscountObjects().size(), 1);
+    assertNull(subscription.getDiscountObjects().get(0));
+    subscription.setDiscounts(discountIds);
+    assertEquals(Arrays.asList(null, null), subscription.getDiscountObjects());
+    subscription.setDiscountObjects(discounts);
+    assertEquals(discounts, subscription.getDiscountObjects());
   }
 
   @Test
