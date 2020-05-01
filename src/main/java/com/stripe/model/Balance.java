@@ -32,6 +32,9 @@ public class Balance extends ApiResource {
   @SerializedName("connect_reserved")
   List<Balance.Money> connectReserved;
 
+  @SerializedName("issuing")
+  Details issuing;
+
   /**
    * Has the value {@code true} if the object exists in live mode or the value {@code false} if the
    * object exists in test mode.
@@ -97,6 +100,15 @@ public class Balance extends ApiResource {
       throws StripeException {
     String url = String.format("%s%s", Stripe.getApiBase(), "/v1/balance");
     return ApiResource.request(ApiResource.RequestMethod.GET, url, params, Balance.class, options);
+  }
+
+  @Getter
+  @Setter
+  @EqualsAndHashCode(callSuper = false)
+  public static class Details extends StripeObject {
+    /** Funds that are available for use. */
+    @SerializedName("available")
+    List<Balance.Money> available;
   }
 
   @Getter
