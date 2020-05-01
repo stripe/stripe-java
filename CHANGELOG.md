@@ -1,5 +1,8 @@
 # Changelog
 
+## 19.8.0 - 2020-05-01
+* [#1022](https://github.com/stripe/stripe-java/pull/1022) Add support for `issuing` on `Balance`
+
 ## 19.7.0 - 2020-04-29
 * [#1020](https://github.com/stripe/stripe-java/pull/1020) Add support for `br_cpf` and `br_cnpj` as `type` on `TaxId`
 
