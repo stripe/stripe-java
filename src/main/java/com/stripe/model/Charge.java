@@ -1387,7 +1387,11 @@ public class Charge extends ApiResource implements MetadataStore<Charge>, Balanc
         @SerializedName("succeeded")
         Boolean succeeded;
 
-        /** The version of 3D Secure that was used for this payment. */
+        /**
+         * The version of 3D Secure that was used for this payment.
+         *
+         * <p>One of {@code 1.0.2}, {@code 2.1.0}, or {@code 2.2.0}.
+         */
         @SerializedName("version")
         String version;
       }

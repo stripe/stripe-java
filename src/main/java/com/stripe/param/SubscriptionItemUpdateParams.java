@@ -735,16 +735,6 @@ public class SubscriptionItemUpdateParams extends ApiRequestParams {
     @Getter
     public static class Recurring {
       /**
-       * Specifies a usage aggregation strategy for prices of {@code usage_type=metered}. Allowed
-       * values are {@code sum} for summing up all usage during a period, {@code last_during_period}
-       * for using the last usage record reported within a period, {@code last_ever} for using the
-       * last usage record ever (across period bounds) or {@code max} which uses the usage record
-       * with the maximum reported usage during a period. Defaults to {@code sum}.
-       */
-      @SerializedName("aggregate_usage")
-      AggregateUsage aggregateUsage;
-
-      /**
        * Map of extra parameters for custom features not available in this client library. The
        * content in this map is not serialized under this field's {@code @SerializedName} value.
        * Instead, each key/value pair is serialized as if the key is a root-level field (serialized)
@@ -768,36 +758,10 @@ public class SubscriptionItemUpdateParams extends ApiRequestParams {
       @SerializedName("interval_count")
       Long intervalCount;
 
-      /**
-       * Default number of trial days when subscribing a customer to this price using <a
-       * href="https://stripe.com/docs/api#create_subscription-trial_from_plan">{@code
-       * trial_from_plan=true}</a>.
-       */
-      @SerializedName("trial_period_days")
-      Long trialPeriodDays;
-
-      /**
-       * Configures how the quantity per period should be determined. Can be either {@code metered}
-       * or {@code licensed}. {@code licensed} automatically bills the {@code quantity} set when
-       * adding it to a subscription. {@code metered} aggregates the total usage based on usage
-       * records. Defaults to {@code licensed}.
-       */
-      @SerializedName("usage_type")
-      UsageType usageType;
-
-      private Recurring(
-          AggregateUsage aggregateUsage,
-          Map<String, Object> extraParams,
-          Interval interval,
-          Long intervalCount,
-          Long trialPeriodDays,
-          UsageType usageType) {
-        this.aggregateUsage = aggregateUsage;
+      private Recurring(Map<String, Object> extraParams, Interval interval, Long intervalCount) {
         this.extraParams = extraParams;
         this.interval = interval;
         this.intervalCount = intervalCount;
-        this.trialPeriodDays = trialPeriodDays;
-        this.usageType = usageType;
       }
 
       public static Builder builder() {
@@ -805,40 +769,15 @@ public class SubscriptionItemUpdateParams extends ApiRequestParams {
       }
 
       public static class Builder {
-        private AggregateUsage aggregateUsage;
-
         private Map<String, Object> extraParams;
 
         private Interval interval;
 
         private Long intervalCount;
 
-        private Long trialPeriodDays;
-
-        private UsageType usageType;
-
         /** Finalize and obtain parameter instance from this builder. */
         public Recurring build() {
-          return new Recurring(
-              this.aggregateUsage,
-              this.extraParams,
-              this.interval,
-              this.intervalCount,
-              this.trialPeriodDays,
-              this.usageType);
-        }
-
-        /**
-         * Specifies a usage aggregation strategy for prices of {@code usage_type=metered}. Allowed
-         * values are {@code sum} for summing up all usage during a period, {@code
-         * last_during_period} for using the last usage record reported within a period, {@code
-         * last_ever} for using the last usage record ever (across period bounds) or {@code max}
-         * which uses the usage record with the maximum reported usage during a period. Defaults to
-         * {@code sum}.
-         */
-        public Builder setAggregateUsage(AggregateUsage aggregateUsage) {
-          this.aggregateUsage = aggregateUsage;
-          return this;
+          return new Recurring(this.extraParams, this.interval, this.intervalCount);
         }
 
         /**
@@ -887,48 +826,6 @@ public class SubscriptionItemUpdateParams extends ApiRequestParams {
           this.intervalCount = intervalCount;
           return this;
         }
-
-        /**
-         * Default number of trial days when subscribing a customer to this price using <a
-         * href="https://stripe.com/docs/api#create_subscription-trial_from_plan">{@code
-         * trial_from_plan=true}</a>.
-         */
-        public Builder setTrialPeriodDays(Long trialPeriodDays) {
-          this.trialPeriodDays = trialPeriodDays;
-          return this;
-        }
-
-        /**
-         * Configures how the quantity per period should be determined. Can be either {@code
-         * metered} or {@code licensed}. {@code licensed} automatically bills the {@code quantity}
-         * set when adding it to a subscription. {@code metered} aggregates the total usage based on
-         * usage records. Defaults to {@code licensed}.
-         */
-        public Builder setUsageType(UsageType usageType) {
-          this.usageType = usageType;
-          return this;
-        }
-      }
-
-      public enum AggregateUsage implements ApiRequestParams.EnumParam {
-        @SerializedName("last_during_period")
-        LAST_DURING_PERIOD("last_during_period"),
-
-        @SerializedName("last_ever")
-        LAST_EVER("last_ever"),
-
-        @SerializedName("max")
-        MAX("max"),
-
-        @SerializedName("sum")
-        SUM("sum");
-
-        @Getter(onMethod_ = {@Override})
-        private final String value;
-
-        AggregateUsage(String value) {
-          this.value = value;
-        }
       }
 
       public enum Interval implements ApiRequestParams.EnumParam {
@@ -948,21 +845,6 @@ public class SubscriptionItemUpdateParams extends ApiRequestParams {
         private final String value;
 
         Interval(String value) {
-          this.value = value;
-        }
-      }
-
-      public enum UsageType implements ApiRequestParams.EnumParam {
-        @SerializedName("licensed")
-        LICENSED("licensed"),
-
-        @SerializedName("metered")
-        METERED("metered");
-
-        @Getter(onMethod_ = {@Override})
-        private final String value;
-
-        UsageType(String value) {
           this.value = value;
         }
       }
