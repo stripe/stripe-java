@@ -1,5 +1,11 @@
 # Changelog
 
+## 19.9.0 - 2020-05-07
+* [#1025](https://github.com/stripe/stripe-java/pull/1025) Multiple API changes
+  * Remove parameters in `price_data[recurring]` across APIs as they were never supported
+  * Move `payment_method_details[card][three_d_secure]` to a list of enum values on `Charge`
+  * Add support for for `business_profile[support_address]` on `Account` create and update
+
 ## 19.8.0 - 2020-05-01
 * [#1022](https://github.com/stripe/stripe-java/pull/1022) Add support for `issuing` on `Balance`
 
