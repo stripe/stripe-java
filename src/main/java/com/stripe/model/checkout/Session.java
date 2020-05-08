@@ -6,6 +6,7 @@ import com.stripe.exception.StripeException;
 import com.stripe.model.Customer;
 import com.stripe.model.ExpandableField;
 import com.stripe.model.HasId;
+import com.stripe.model.LineItemCollection;
 import com.stripe.model.PaymentIntent;
 import com.stripe.model.Plan;
 import com.stripe.model.SetupIntent;
@@ -16,6 +17,7 @@ import com.stripe.model.Subscription;
 import com.stripe.net.ApiResource;
 import com.stripe.net.RequestOptions;
 import com.stripe.param.checkout.SessionCreateParams;
+import com.stripe.param.checkout.SessionLineItemCollectionListParams;
 import com.stripe.param.checkout.SessionListParams;
 import com.stripe.param.checkout.SessionRetrieveParams;
 import java.util.List;
@@ -76,6 +78,14 @@ public class Session extends ApiResource implements HasId {
   @Getter(onMethod_ = {@Override})
   @SerializedName("id")
   String id;
+
+  /**
+   * The line items purchased by the customer. <a
+   * href="https://stripe.com/docs/api/expanding_objects">Expand</a> this field to include it in the
+   * response.
+   */
+  @SerializedName("line_items")
+  LineItemCollection lineItems;
 
   /**
    * Has the value {@code true} if the object exists in live mode or the value {@code false} if the
@@ -321,6 +331,43 @@ public class Session extends ApiResource implements HasId {
       throws StripeException {
     String url = String.format("%s%s", Stripe.getApiBase(), "/v1/checkout/sessions");
     return ApiResource.request(ApiResource.RequestMethod.POST, url, params, Session.class, options);
+  }
+
+  /** Returns a list of Line Items */
+  public LineItemCollection listLineItems(Map<String, Object> params) throws StripeException {
+    return listLineItems(params, (RequestOptions) null);
+  }
+
+  /** Returns a list of Line Items */
+  public LineItemCollection listLineItems(Map<String, Object> params, RequestOptions options)
+      throws StripeException {
+    String url =
+        String.format(
+            "%s%s",
+            Stripe.getApiBase(),
+            String.format(
+                "/v1/checkout/sessions/%s/line_items", ApiResource.urlEncodeId(this.getId())));
+
+    return ApiResource.requestCollection(url, params, LineItemCollection.class, options);
+  }
+
+  /** Returns a list of Line Items */
+  public LineItemCollection listLineItems(SessionLineItemCollectionListParams params)
+      throws StripeException {
+    return listLineItems(params, (RequestOptions) null);
+  }
+
+  /** Returns a list of Line Items */
+  public LineItemCollection listLineItems(
+      SessionLineItemCollectionListParams params, RequestOptions options) throws StripeException {
+    String url =
+        String.format(
+            "%s%s",
+            Stripe.getApiBase(),
+            String.format(
+                "/v1/checkout/sessions/%s/line_items", ApiResource.urlEncodeId(this.getId())));
+
+    return ApiResource.requestCollection(url, params, LineItemCollection.class, options);
   }
 
   @Getter

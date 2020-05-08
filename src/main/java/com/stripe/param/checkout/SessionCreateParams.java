@@ -532,6 +532,14 @@ public class SessionCreateParams extends ApiRequestParams {
     @SerializedName("name")
     String name;
 
+    /** The ID of the price object. */
+    @SerializedName("price")
+    String price;
+
+    /** Data used to generate a new price object inline. */
+    @SerializedName("price_data")
+    PriceData priceData;
+
     /** The quantity of the line item being purchased. */
     @SerializedName("quantity")
     Long quantity;
@@ -547,6 +555,8 @@ public class SessionCreateParams extends ApiRequestParams {
         Map<String, Object> extraParams,
         List<String> images,
         String name,
+        String price,
+        PriceData priceData,
         Long quantity,
         List<String> taxRates) {
       this.amount = amount;
@@ -555,6 +565,8 @@ public class SessionCreateParams extends ApiRequestParams {
       this.extraParams = extraParams;
       this.images = images;
       this.name = name;
+      this.price = price;
+      this.priceData = priceData;
       this.quantity = quantity;
       this.taxRates = taxRates;
     }
@@ -576,6 +588,10 @@ public class SessionCreateParams extends ApiRequestParams {
 
       private String name;
 
+      private String price;
+
+      private PriceData priceData;
+
       private Long quantity;
 
       private List<String> taxRates;
@@ -589,6 +605,8 @@ public class SessionCreateParams extends ApiRequestParams {
             this.extraParams,
             this.images,
             this.name,
+            this.price,
+            this.priceData,
             this.quantity,
             this.taxRates);
       }
@@ -673,6 +691,18 @@ public class SessionCreateParams extends ApiRequestParams {
         return this;
       }
 
+      /** The ID of the price object. */
+      public Builder setPrice(String price) {
+        this.price = price;
+        return this;
+      }
+
+      /** Data used to generate a new price object inline. */
+      public Builder setPriceData(PriceData priceData) {
+        this.priceData = priceData;
+        return this;
+      }
+
       /** The quantity of the line item being purchased. */
       public Builder setQuantity(Long quantity) {
         this.quantity = quantity;
@@ -703,6 +733,273 @@ public class SessionCreateParams extends ApiRequestParams {
         }
         this.taxRates.addAll(elements);
         return this;
+      }
+    }
+
+    @Getter
+    public static class PriceData {
+      /**
+       * Three-letter <a href="https://www.iso.org/iso-4217-currency-codes.html">ISO currency
+       * code</a>, in lowercase. Must be a <a href="https://stripe.com/docs/currencies">supported
+       * currency</a>.
+       */
+      @SerializedName("currency")
+      String currency;
+
+      /**
+       * Map of extra parameters for custom features not available in this client library. The
+       * content in this map is not serialized under this field's {@code @SerializedName} value.
+       * Instead, each key/value pair is serialized as if the key is a root-level field (serialized)
+       * name in this param object. Effectively, this map is flattened to its parent instance.
+       */
+      @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
+      Map<String, Object> extraParams;
+
+      /** The ID of the product that this price will belong to. */
+      @SerializedName("product")
+      String product;
+
+      /** The recurring components of a price such as {@code interval} and {@code usage_type}. */
+      @SerializedName("recurring")
+      Recurring recurring;
+
+      /** A positive integer in %s (or 0 for a free price) representing how much to charge. */
+      @SerializedName("unit_amount")
+      Long unitAmount;
+
+      /**
+       * Same as {@code unit_amount}, but accepts a decimal value with at most 12 decimal places.
+       * Only one of {@code unit_amount} and {@code unit_amount_decimal} can be set.
+       */
+      @SerializedName("unit_amount_decimal")
+      BigDecimal unitAmountDecimal;
+
+      private PriceData(
+          String currency,
+          Map<String, Object> extraParams,
+          String product,
+          Recurring recurring,
+          Long unitAmount,
+          BigDecimal unitAmountDecimal) {
+        this.currency = currency;
+        this.extraParams = extraParams;
+        this.product = product;
+        this.recurring = recurring;
+        this.unitAmount = unitAmount;
+        this.unitAmountDecimal = unitAmountDecimal;
+      }
+
+      public static Builder builder() {
+        return new Builder();
+      }
+
+      public static class Builder {
+        private String currency;
+
+        private Map<String, Object> extraParams;
+
+        private String product;
+
+        private Recurring recurring;
+
+        private Long unitAmount;
+
+        private BigDecimal unitAmountDecimal;
+
+        /** Finalize and obtain parameter instance from this builder. */
+        public PriceData build() {
+          return new PriceData(
+              this.currency,
+              this.extraParams,
+              this.product,
+              this.recurring,
+              this.unitAmount,
+              this.unitAmountDecimal);
+        }
+
+        /**
+         * Three-letter <a href="https://www.iso.org/iso-4217-currency-codes.html">ISO currency
+         * code</a>, in lowercase. Must be a <a href="https://stripe.com/docs/currencies">supported
+         * currency</a>.
+         */
+        public Builder setCurrency(String currency) {
+          this.currency = currency;
+          return this;
+        }
+
+        /**
+         * Add a key/value pair to `extraParams` map. A map is initialized for the first
+         * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
+         * map. See {@link SessionCreateParams.LineItem.PriceData#extraParams} for the field
+         * documentation.
+         */
+        public Builder putExtraParam(String key, Object value) {
+          if (this.extraParams == null) {
+            this.extraParams = new HashMap<>();
+          }
+          this.extraParams.put(key, value);
+          return this;
+        }
+
+        /**
+         * Add all map key/value pairs to `extraParams` map. A map is initialized for the first
+         * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
+         * map. See {@link SessionCreateParams.LineItem.PriceData#extraParams} for the field
+         * documentation.
+         */
+        public Builder putAllExtraParam(Map<String, Object> map) {
+          if (this.extraParams == null) {
+            this.extraParams = new HashMap<>();
+          }
+          this.extraParams.putAll(map);
+          return this;
+        }
+
+        /** The ID of the product that this price will belong to. */
+        public Builder setProduct(String product) {
+          this.product = product;
+          return this;
+        }
+
+        /** The recurring components of a price such as {@code interval} and {@code usage_type}. */
+        public Builder setRecurring(Recurring recurring) {
+          this.recurring = recurring;
+          return this;
+        }
+
+        /** A positive integer in %s (or 0 for a free price) representing how much to charge. */
+        public Builder setUnitAmount(Long unitAmount) {
+          this.unitAmount = unitAmount;
+          return this;
+        }
+
+        /**
+         * Same as {@code unit_amount}, but accepts a decimal value with at most 12 decimal places.
+         * Only one of {@code unit_amount} and {@code unit_amount_decimal} can be set.
+         */
+        public Builder setUnitAmountDecimal(BigDecimal unitAmountDecimal) {
+          this.unitAmountDecimal = unitAmountDecimal;
+          return this;
+        }
+      }
+
+      @Getter
+      public static class Recurring {
+        /**
+         * Map of extra parameters for custom features not available in this client library. The
+         * content in this map is not serialized under this field's {@code @SerializedName} value.
+         * Instead, each key/value pair is serialized as if the key is a root-level field
+         * (serialized) name in this param object. Effectively, this map is flattened to its parent
+         * instance.
+         */
+        @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
+        Map<String, Object> extraParams;
+
+        /**
+         * Specifies billing frequency. Either {@code day}, {@code week}, {@code month} or {@code
+         * year}.
+         */
+        @SerializedName("interval")
+        Interval interval;
+
+        /**
+         * The number of intervals between subscription billings. For example, {@code
+         * interval=month} and {@code interval_count=3} bills every 3 months. Maximum of one year
+         * interval allowed (1 year, 12 months, or 52 weeks).
+         */
+        @SerializedName("interval_count")
+        Long intervalCount;
+
+        private Recurring(Map<String, Object> extraParams, Interval interval, Long intervalCount) {
+          this.extraParams = extraParams;
+          this.interval = interval;
+          this.intervalCount = intervalCount;
+        }
+
+        public static Builder builder() {
+          return new Builder();
+        }
+
+        public static class Builder {
+          private Map<String, Object> extraParams;
+
+          private Interval interval;
+
+          private Long intervalCount;
+
+          /** Finalize and obtain parameter instance from this builder. */
+          public Recurring build() {
+            return new Recurring(this.extraParams, this.interval, this.intervalCount);
+          }
+
+          /**
+           * Add a key/value pair to `extraParams` map. A map is initialized for the first
+           * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
+           * map. See {@link SessionCreateParams.LineItem.PriceData.Recurring#extraParams} for the
+           * field documentation.
+           */
+          public Builder putExtraParam(String key, Object value) {
+            if (this.extraParams == null) {
+              this.extraParams = new HashMap<>();
+            }
+            this.extraParams.put(key, value);
+            return this;
+          }
+
+          /**
+           * Add all map key/value pairs to `extraParams` map. A map is initialized for the first
+           * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
+           * map. See {@link SessionCreateParams.LineItem.PriceData.Recurring#extraParams} for the
+           * field documentation.
+           */
+          public Builder putAllExtraParam(Map<String, Object> map) {
+            if (this.extraParams == null) {
+              this.extraParams = new HashMap<>();
+            }
+            this.extraParams.putAll(map);
+            return this;
+          }
+
+          /**
+           * Specifies billing frequency. Either {@code day}, {@code week}, {@code month} or {@code
+           * year}.
+           */
+          public Builder setInterval(Interval interval) {
+            this.interval = interval;
+            return this;
+          }
+
+          /**
+           * The number of intervals between subscription billings. For example, {@code
+           * interval=month} and {@code interval_count=3} bills every 3 months. Maximum of one year
+           * interval allowed (1 year, 12 months, or 52 weeks).
+           */
+          public Builder setIntervalCount(Long intervalCount) {
+            this.intervalCount = intervalCount;
+            return this;
+          }
+        }
+
+        public enum Interval implements ApiRequestParams.EnumParam {
+          @SerializedName("day")
+          DAY("day"),
+
+          @SerializedName("month")
+          MONTH("month"),
+
+          @SerializedName("week")
+          WEEK("week"),
+
+          @SerializedName("year")
+          YEAR("year");
+
+          @Getter(onMethod_ = {@Override})
+          private final String value;
+
+          Interval(String value) {
+            this.value = value;
+          }
+        }
       }
     }
   }
