@@ -17,7 +17,7 @@ import com.stripe.model.Subscription;
 import com.stripe.net.ApiResource;
 import com.stripe.net.RequestOptions;
 import com.stripe.param.checkout.SessionCreateParams;
-import com.stripe.param.checkout.SessionLineItemCollectionListParams;
+import com.stripe.param.checkout.SessionListLineItemsParams;
 import com.stripe.param.checkout.SessionListParams;
 import com.stripe.param.checkout.SessionRetrieveParams;
 import java.util.List;
@@ -352,14 +352,14 @@ public class Session extends ApiResource implements HasId {
   }
 
   /** Returns a list of Line Items */
-  public LineItemCollection listLineItems(SessionLineItemCollectionListParams params)
+  public LineItemCollection listLineItems(SessionListLineItemsParams params)
       throws StripeException {
     return listLineItems(params, (RequestOptions) null);
   }
 
   /** Returns a list of Line Items */
-  public LineItemCollection listLineItems(
-      SessionLineItemCollectionListParams params, RequestOptions options) throws StripeException {
+  public LineItemCollection listLineItems(SessionListLineItemsParams params, RequestOptions options)
+      throws StripeException {
     String url =
         String.format(
             "%s%s",

@@ -6,7 +6,7 @@ import com.stripe.BaseStripeTest;
 import com.stripe.exception.StripeException;
 import com.stripe.model.checkout.Session;
 import com.stripe.net.ApiResource;
-import com.stripe.param.checkout.SessionLineItemCollectionListParams;
+import com.stripe.param.checkout.SessionListLineItemsParams;
 import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Map;
@@ -44,8 +44,8 @@ public class SessionTest extends BaseStripeTest {
       verifyRequest(ApiResource.RequestMethod.POST, "/v1/checkout/sessions");
       assertNotNull(session);
     }
-    final SessionLineItemCollectionListParams params =
-        SessionLineItemCollectionListParams.builder().build();
+    final SessionListLineItemsParams params =
+        SessionListLineItemsParams.builder().build();
     session.listLineItems(params);
     verifyRequest(
         ApiResource.RequestMethod.GET,

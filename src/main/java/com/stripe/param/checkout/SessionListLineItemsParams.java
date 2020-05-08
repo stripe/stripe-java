@@ -9,7 +9,7 @@ import java.util.Map;
 import lombok.Getter;
 
 @Getter
-public class SessionLineItemCollectionListParams extends ApiRequestParams {
+public class SessionListLineItemsParams extends ApiRequestParams {
   /**
    * A cursor for use in pagination. {@code ending_before} is an object ID that defines your place
    * in the list. For instance, if you make a list request and receive 100 objects, starting with
@@ -48,7 +48,7 @@ public class SessionLineItemCollectionListParams extends ApiRequestParams {
   @SerializedName("starting_after")
   String startingAfter;
 
-  private SessionLineItemCollectionListParams(
+  private SessionListLineItemsParams(
       String endingBefore,
       List<String> expand,
       Map<String, Object> extraParams,
@@ -77,8 +77,8 @@ public class SessionLineItemCollectionListParams extends ApiRequestParams {
     private String startingAfter;
 
     /** Finalize and obtain parameter instance from this builder. */
-    public SessionLineItemCollectionListParams build() {
-      return new SessionLineItemCollectionListParams(
+    public SessionListLineItemsParams build() {
+      return new SessionListLineItemsParams(
           this.endingBefore, this.expand, this.extraParams, this.limit, this.startingAfter);
     }
 
