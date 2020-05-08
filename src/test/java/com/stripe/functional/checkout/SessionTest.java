@@ -10,7 +10,6 @@ import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Map;
 import org.junit.jupiter.api.Test;
-import com.stripe.param.LineItemCollectionListParams;
 
 public class SessionTest extends BaseStripeTest {
   @Test
@@ -30,7 +29,7 @@ public class SessionTest extends BaseStripeTest {
 
     final Map<String, Object> params = new HashMap<String, Object>();
 
-    session.listLineItems(LineItemCollectionListParams.builder().build());
+    session.listLineItems(params);
     verifyRequest(
         ApiResource.RequestMethod.GET,
         String.format("/v1/checkout/sessions/%s/line_items", session.getId()));
