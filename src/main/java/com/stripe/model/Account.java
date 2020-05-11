@@ -305,10 +305,6 @@ public class Account extends ApiResource implements MetadataStore<Account>, Paym
    * With <a href="https://stripe.com/docs/connect">Connect</a>, you can create Stripe accounts for
    * your users. To do this, you’ll first need to <a
    * href="https://dashboard.stripe.com/account/applications/settings">register your platform</a>.
-   *
-   * <p>For Standard accounts, parameters other than <code>country</code>, <code>email</code>, and
-   * <code>type</code> are used to prefill the account application that we ask the account holder to
-   * complete.
    */
   public static Account create(Map<String, Object> params) throws StripeException {
     return create(params, (RequestOptions) null);
@@ -318,10 +314,6 @@ public class Account extends ApiResource implements MetadataStore<Account>, Paym
    * With <a href="https://stripe.com/docs/connect">Connect</a>, you can create Stripe accounts for
    * your users. To do this, you’ll first need to <a
    * href="https://dashboard.stripe.com/account/applications/settings">register your platform</a>.
-   *
-   * <p>For Standard accounts, parameters other than <code>country</code>, <code>email</code>, and
-   * <code>type</code> are used to prefill the account application that we ask the account holder to
-   * complete.
    */
   public static Account create(Map<String, Object> params, RequestOptions options)
       throws StripeException {
@@ -333,10 +325,6 @@ public class Account extends ApiResource implements MetadataStore<Account>, Paym
    * With <a href="https://stripe.com/docs/connect">Connect</a>, you can create Stripe accounts for
    * your users. To do this, you’ll first need to <a
    * href="https://dashboard.stripe.com/account/applications/settings">register your platform</a>.
-   *
-   * <p>For Standard accounts, parameters other than <code>country</code>, <code>email</code>, and
-   * <code>type</code> are used to prefill the account application that we ask the account holder to
-   * complete.
    */
   public static Account create(AccountCreateParams params) throws StripeException {
     return create(params, (RequestOptions) null);
@@ -346,10 +334,6 @@ public class Account extends ApiResource implements MetadataStore<Account>, Paym
    * With <a href="https://stripe.com/docs/connect">Connect</a>, you can create Stripe accounts for
    * your users. To do this, you’ll first need to <a
    * href="https://dashboard.stripe.com/account/applications/settings">register your platform</a>.
-   *
-   * <p>For Standard accounts, parameters other than <code>country</code>, <code>email</code>, and
-   * <code>type</code> are used to prefill the account application that we ask the account holder to
-   * complete.
    */
   public static Account create(AccountCreateParams params, RequestOptions options)
       throws StripeException {

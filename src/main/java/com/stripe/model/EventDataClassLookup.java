@@ -43,6 +43,7 @@ final class EventDataClassLookup {
     classLookup.put("invoice", Invoice.class);
     classLookup.put("invoiceitem", InvoiceItem.class);
     classLookup.put("issuer_fraud_record", IssuerFraudRecord.class);
+    classLookup.put("item", LineItem.class);
     classLookup.put("line_item", InvoiceLineItem.class);
     classLookup.put("login_link", LoginLink.class);
     classLookup.put("mandate", Mandate.class);

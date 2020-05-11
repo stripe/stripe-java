@@ -288,8 +288,8 @@ public class Subscription extends ApiResource implements HasId, MetadataStore<Su
   BigDecimal taxPercent;
 
   /**
-   * If specified, the funds from the subscription's invoices will be transferred to the destination
-   * and the ID of the resulting transfers will be found on the resulting charges.
+   * The account (if any) the subscription's payments will be attributed to for tax reporting, and
+   * where funds from each payment will be transferred to for each of the subscription's invoices.
    */
   @SerializedName("transfer_data")
   TransferData transferData;
