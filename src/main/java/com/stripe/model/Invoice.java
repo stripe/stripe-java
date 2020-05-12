@@ -422,8 +422,8 @@ public class Invoice extends ApiResource implements HasId, MetadataStore<Invoice
   List<Invoice.TaxAmount> totalTaxAmounts;
 
   /**
-   * If specified, the funds from the invoice will be transferred to the destination and the ID of
-   * the resulting transfer will be found on the invoice's charge.
+   * The account (if any) the payment will be attributed to for tax reporting, and where funds from
+   * the payment will be transferred to for the invoice.
    */
   @SerializedName("transfer_data")
   TransferData transferData;
