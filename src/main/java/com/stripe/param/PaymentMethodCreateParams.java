@@ -18,6 +18,13 @@ public class PaymentMethodCreateParams extends ApiRequestParams {
   AuBecsDebit auBecsDebit;
 
   /**
+   * If this is a {@code bacs_debit} PaymentMethod, this hash contains details about the Bacs Direct
+   * Debit bank account.
+   */
+  @SerializedName("bacs_debit")
+  BacsDebit bacsDebit;
+
+  /**
    * Billing information associated with the PaymentMethod that may be used or required by
    * particular types of payment methods.
    */
@@ -98,6 +105,7 @@ public class PaymentMethodCreateParams extends ApiRequestParams {
 
   private PaymentMethodCreateParams(
       AuBecsDebit auBecsDebit,
+      BacsDebit bacsDebit,
       BillingDetails billingDetails,
       Object card,
       String customer,
@@ -110,6 +118,7 @@ public class PaymentMethodCreateParams extends ApiRequestParams {
       SepaDebit sepaDebit,
       Type type) {
     this.auBecsDebit = auBecsDebit;
+    this.bacsDebit = bacsDebit;
     this.billingDetails = billingDetails;
     this.card = card;
     this.customer = customer;
@@ -129,6 +138,8 @@ public class PaymentMethodCreateParams extends ApiRequestParams {
 
   public static class Builder {
     private AuBecsDebit auBecsDebit;
+
+    private BacsDebit bacsDebit;
 
     private BillingDetails billingDetails;
 
@@ -156,6 +167,7 @@ public class PaymentMethodCreateParams extends ApiRequestParams {
     public PaymentMethodCreateParams build() {
       return new PaymentMethodCreateParams(
           this.auBecsDebit,
+          this.bacsDebit,
           this.billingDetails,
           this.card,
           this.customer,
@@ -175,6 +187,15 @@ public class PaymentMethodCreateParams extends ApiRequestParams {
      */
     public Builder setAuBecsDebit(AuBecsDebit auBecsDebit) {
       this.auBecsDebit = auBecsDebit;
+      return this;
+    }
+
+    /**
+     * If this is a {@code bacs_debit} PaymentMethod, this hash contains details about the Bacs
+     * Direct Debit bank account.
+     */
+    public Builder setBacsDebit(BacsDebit bacsDebit) {
+      this.bacsDebit = bacsDebit;
       return this;
     }
 
@@ -419,6 +440,99 @@ public class PaymentMethodCreateParams extends ApiRequestParams {
           this.extraParams = new HashMap<>();
         }
         this.extraParams.putAll(map);
+        return this;
+      }
+    }
+  }
+
+  @Getter
+  public static class BacsDebit {
+    /** Account number of the bank account that the funds will be debited from. */
+    @SerializedName("account_number")
+    String accountNumber;
+
+    /**
+     * Map of extra parameters for custom features not available in this client library. The content
+     * in this map is not serialized under this field's {@code @SerializedName} value. Instead, each
+     * key/value pair is serialized as if the key is a root-level field (serialized) name in this
+     * param object. Effectively, this map is flattened to its parent instance.
+     */
+    @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
+    Map<String, Object> extraParams;
+
+    @SerializedName("iban")
+    String iban;
+
+    /** Sort code of the bank account. (e.g., {@code 10-20-30}) */
+    @SerializedName("sort_code")
+    String sortCode;
+
+    private BacsDebit(
+        String accountNumber, Map<String, Object> extraParams, String iban, String sortCode) {
+      this.accountNumber = accountNumber;
+      this.extraParams = extraParams;
+      this.iban = iban;
+      this.sortCode = sortCode;
+    }
+
+    public static Builder builder() {
+      return new Builder();
+    }
+
+    public static class Builder {
+      private String accountNumber;
+
+      private Map<String, Object> extraParams;
+
+      private String iban;
+
+      private String sortCode;
+
+      /** Finalize and obtain parameter instance from this builder. */
+      public BacsDebit build() {
+        return new BacsDebit(this.accountNumber, this.extraParams, this.iban, this.sortCode);
+      }
+
+      /** Account number of the bank account that the funds will be debited from. */
+      public Builder setAccountNumber(String accountNumber) {
+        this.accountNumber = accountNumber;
+        return this;
+      }
+
+      /**
+       * Add a key/value pair to `extraParams` map. A map is initialized for the first `put/putAll`
+       * call, and subsequent calls add additional key/value pairs to the original map. See {@link
+       * PaymentMethodCreateParams.BacsDebit#extraParams} for the field documentation.
+       */
+      public Builder putExtraParam(String key, Object value) {
+        if (this.extraParams == null) {
+          this.extraParams = new HashMap<>();
+        }
+        this.extraParams.put(key, value);
+        return this;
+      }
+
+      /**
+       * Add all map key/value pairs to `extraParams` map. A map is initialized for the first
+       * `put/putAll` call, and subsequent calls add additional key/value pairs to the original map.
+       * See {@link PaymentMethodCreateParams.BacsDebit#extraParams} for the field documentation.
+       */
+      public Builder putAllExtraParam(Map<String, Object> map) {
+        if (this.extraParams == null) {
+          this.extraParams = new HashMap<>();
+        }
+        this.extraParams.putAll(map);
+        return this;
+      }
+
+      public Builder setIban(String iban) {
+        this.iban = iban;
+        return this;
+      }
+
+      /** Sort code of the bank account. (e.g., {@code 10-20-30}) */
+      public Builder setSortCode(String sortCode) {
+        this.sortCode = sortCode;
         return this;
       }
     }
@@ -1213,6 +1327,9 @@ public class PaymentMethodCreateParams extends ApiRequestParams {
   public enum Type implements ApiRequestParams.EnumParam {
     @SerializedName("au_becs_debit")
     AU_BECS_DEBIT("au_becs_debit"),
+
+    @SerializedName("bacs_debit")
+    BACS_DEBIT("bacs_debit"),
 
     @SerializedName("card")
     CARD("card"),

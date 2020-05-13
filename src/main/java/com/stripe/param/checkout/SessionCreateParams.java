@@ -62,9 +62,14 @@ public class SessionCreateParams extends ApiRequestParams {
   Map<String, Object> extraParams;
 
   /**
-   * A list of items the customer is purchasing. Use this parameter for one-time payments or adding
-   * invoice line items to a subscription (used in conjunction with {@code subscription_data}).
-   * There is a maximum of 100 line items, however it is recommended to consolidate line items if
+   * A list of items the customer is purchasing. Use this parameter to pass one-time or recurring <a
+   * href="https://stripe.com/docs/api/prices">prices</a>.
+   *
+   * <p>Alternatively, if not using recurring prices, this parameter is for one-time payments or
+   * adding invoice line items to a subscription (used in conjunction with {@code
+   * subscription_data.items}).
+   *
+   * <p>There is a maximum of 100 line items, however it is recommended to consolidate line items if
    * there are more than a few dozen.
    */
   @SerializedName("line_items")
@@ -88,7 +93,8 @@ public class SessionCreateParams extends ApiRequestParams {
 
   /**
    * The mode of the Checkout Session, one of {@code payment}, {@code setup}, or {@code
-   * subscription}.
+   * subscription}. Required when using prices or {@code setup} mode. Pass {@code subscription} if
+   * Checkout session includes at least one recurring item.
    */
   @SerializedName("mode")
   Mode mode;
@@ -407,7 +413,8 @@ public class SessionCreateParams extends ApiRequestParams {
 
     /**
      * The mode of the Checkout Session, one of {@code payment}, {@code setup}, or {@code
-     * subscription}.
+     * subscription}. Required when using prices or {@code setup} mode. Pass {@code subscription} if
+     * Checkout session includes at least one recurring item.
      */
     public Builder setMode(Mode mode) {
       this.mode = mode;
@@ -501,19 +508,27 @@ public class SessionCreateParams extends ApiRequestParams {
 
   @Getter
   public static class LineItem {
-    /** The amount to be collected per unit of the line item. */
+    /**
+     * The amount to be collected per unit of the line item. If specified, must also pass {@code
+     * currency} and {@code name}.
+     */
     @SerializedName("amount")
     Long amount;
 
     /**
      * Three-letter <a href="https://www.iso.org/iso-4217-currency-codes.html">ISO currency
      * code</a>, in lowercase. Must be a <a href="https://stripe.com/docs/currencies">supported
-     * currency</a>.
+     * currency</a>. Required if {@code amount} is passed.
      */
     @SerializedName("currency")
     String currency;
 
-    /** The description for the line item, to be displayed on the Checkout page. */
+    /**
+     * The description for the line item, to be displayed on the Checkout page.
+     *
+     * <p>If using {@code price} or {@code price_data}, will default to the name of the associated
+     * product.
+     */
     @SerializedName("description")
     String description;
 
@@ -526,19 +541,32 @@ public class SessionCreateParams extends ApiRequestParams {
     @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
     Map<String, Object> extraParams;
 
-    /** A list of images representing this line item. Each image can be up to 5 MB in size. */
+    /**
+     * A list of image URLs representing this line item. Each image can be up to 5 MB in size. If
+     * passing {@code price} or {@code price_data}, specify images on the associated product
+     * instead.
+     */
     @SerializedName("images")
     List<String> images;
 
-    /** The name for the line item. */
+    /**
+     * The name for the item to be displayed on the Checkout page. Required if {@code amount} is
+     * passed.
+     */
     @SerializedName("name")
     String name;
 
-    /** The ID of the price object. */
+    /**
+     * The ID of the price object. One of {@code price}, {@code price_data} or {@code amount} is
+     * required.
+     */
     @SerializedName("price")
     String price;
 
-    /** Data used to generate a new price object inline. */
+    /**
+     * Data used to generate a new price object inline. One of {@code price}, {@code price_data} or
+     * {@code amount} is required.
+     */
     @SerializedName("price_data")
     PriceData priceData;
 
@@ -613,7 +641,10 @@ public class SessionCreateParams extends ApiRequestParams {
             this.taxRates);
       }
 
-      /** The amount to be collected per unit of the line item. */
+      /**
+       * The amount to be collected per unit of the line item. If specified, must also pass {@code
+       * currency} and {@code name}.
+       */
       public Builder setAmount(Long amount) {
         this.amount = amount;
         return this;
@@ -622,14 +653,19 @@ public class SessionCreateParams extends ApiRequestParams {
       /**
        * Three-letter <a href="https://www.iso.org/iso-4217-currency-codes.html">ISO currency
        * code</a>, in lowercase. Must be a <a href="https://stripe.com/docs/currencies">supported
-       * currency</a>.
+       * currency</a>. Required if {@code amount} is passed.
        */
       public Builder setCurrency(String currency) {
         this.currency = currency;
         return this;
       }
 
-      /** The description for the line item, to be displayed on the Checkout page. */
+      /**
+       * The description for the line item, to be displayed on the Checkout page.
+       *
+       * <p>If using {@code price} or {@code price_data}, will default to the name of the associated
+       * product.
+       */
       public Builder setDescription(String description) {
         this.description = description;
         return this;
@@ -687,19 +723,28 @@ public class SessionCreateParams extends ApiRequestParams {
         return this;
       }
 
-      /** The name for the line item. */
+      /**
+       * The name for the item to be displayed on the Checkout page. Required if {@code amount} is
+       * passed.
+       */
       public Builder setName(String name) {
         this.name = name;
         return this;
       }
 
-      /** The ID of the price object. */
+      /**
+       * The ID of the price object. One of {@code price}, {@code price_data} or {@code amount} is
+       * required.
+       */
       public Builder setPrice(String price) {
         this.price = price;
         return this;
       }
 
-      /** Data used to generate a new price object inline. */
+      /**
+       * Data used to generate a new price object inline. One of {@code price}, {@code price_data}
+       * or {@code amount} is required.
+       */
       public Builder setPriceData(PriceData priceData) {
         this.priceData = priceData;
         return this;
