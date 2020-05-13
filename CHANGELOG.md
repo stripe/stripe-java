@@ -1,5 +1,8 @@
 # Changelog
 
+## 19.11.0 - 2020-05-13
+* [#1030](https://github.com/stripe/stripe-java/pull/1030) Add support for `purchase_details` on Issuing `Transaction`
+
 ## 19.10.0 - 2020-05-11
 * [#1028](https://github.com/stripe/stripe-java/pull/1028) Add support for the `LineItem` resource and APIs
 
