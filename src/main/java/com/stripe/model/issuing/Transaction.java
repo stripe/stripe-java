@@ -7,11 +7,14 @@ import com.stripe.model.BalanceTransaction;
 import com.stripe.model.BalanceTransactionSource;
 import com.stripe.model.ExpandableField;
 import com.stripe.model.MetadataStore;
+import com.stripe.model.StripeObject;
 import com.stripe.net.ApiResource;
 import com.stripe.net.RequestOptions;
 import com.stripe.param.issuing.TransactionListParams;
 import com.stripe.param.issuing.TransactionRetrieveParams;
 import com.stripe.param.issuing.TransactionUpdateParams;
+import java.math.BigDecimal;
+import java.util.List;
 import java.util.Map;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
@@ -110,6 +113,10 @@ public class Transaction extends ApiResource
    */
   @SerializedName("object")
   String object;
+
+  /** Additional purchase information that is optionally provided by the merchant. */
+  @SerializedName("purchase_details")
+  PurchaseDetails purchaseDetails;
 
   /**
    * The nature of the transaction.
@@ -312,5 +319,148 @@ public class Transaction extends ApiResource
             String.format("/v1/issuing/transactions/%s", ApiResource.urlEncodeId(this.getId())));
     return ApiResource.request(
         ApiResource.RequestMethod.POST, url, params, Transaction.class, options);
+  }
+
+  @Getter
+  @Setter
+  @EqualsAndHashCode(callSuper = false)
+  public static class PurchaseDetails extends StripeObject {
+    /** Information about the flight that was purchased with this transaction. */
+    @SerializedName("flight")
+    Flight flight;
+
+    /** Information about fuel that was purchased with this transaction. */
+    @SerializedName("fuel")
+    Fuel fuel;
+
+    /** Information about lodging that was purchased with this transaction. */
+    @SerializedName("lodging")
+    Lodging lodging;
+
+    /** The line items in the purchase. */
+    @SerializedName("receipt")
+    List<Transaction.PurchaseDetails.Receipt> receipt;
+
+    /** A merchant-specific order number. */
+    @SerializedName("reference")
+    String reference;
+
+    @Getter
+    @Setter
+    @EqualsAndHashCode(callSuper = false)
+    public static class Flight extends StripeObject {
+      /** The time that the flight departed. */
+      @SerializedName("departure_at")
+      Long departureAt;
+
+      /** The name of the passenger. */
+      @SerializedName("passenger_name")
+      String passengerName;
+
+      /** Whether the ticket is refundable. */
+      @SerializedName("refundable")
+      Boolean refundable;
+
+      /** The legs of the trip. */
+      @SerializedName("segments")
+      List<Transaction.PurchaseDetails.Flight.Segments> segments;
+
+      /** The travel agency that issued the ticket. */
+      @SerializedName("travel_agency")
+      String travelAgency;
+
+      @Getter
+      @Setter
+      @EqualsAndHashCode(callSuper = false)
+      public static class Segments extends StripeObject {
+        /** The flight's destination airport code. */
+        @SerializedName("arrival_airport_code")
+        String arrivalAirportCode;
+
+        /** The airline carrier code. */
+        @SerializedName("carrier")
+        String carrier;
+
+        /** The airport code that the flight departed from. */
+        @SerializedName("departure_airport_code")
+        String departureAirportCode;
+
+        /** The flight number. */
+        @SerializedName("flight_number")
+        String flightNumber;
+
+        /** The flight's service class. */
+        @SerializedName("service_class")
+        String serviceClass;
+
+        /** Whether a stopover is allowed on this flight. */
+        @SerializedName("stopover_allowed")
+        Boolean stopoverAllowed;
+      }
+    }
+
+    @Getter
+    @Setter
+    @EqualsAndHashCode(callSuper = false)
+    public static class Fuel extends StripeObject {
+      /**
+       * The type of fuel that was purchased. One of {@code diesel}, {@code unleaded_plus}, {@code
+       * unleaded_regular}, {@code unleaded_super}, or {@code other}.
+       */
+      @SerializedName("type")
+      String type;
+
+      /** The units for {@code volume}. One of {@code us_gallon} or {@code liter}. */
+      @SerializedName("unit")
+      String unit;
+
+      /**
+       * The cost in cents per each unit of fuel, represented as a decimal string with at most 12
+       * decimal places.
+       */
+      @SerializedName("unit_cost_decimal")
+      BigDecimal unitCostDecimal;
+
+      /**
+       * The volume of the fuel that was pumped, represented as a decimal string with at most 12
+       * decimal places.
+       */
+      @SerializedName("volume_decimal")
+      BigDecimal volumeDecimal;
+    }
+
+    @Getter
+    @Setter
+    @EqualsAndHashCode(callSuper = false)
+    public static class Lodging extends StripeObject {
+      /** The time of checking into the lodging. */
+      @SerializedName("check_in_at")
+      Long checkInAt;
+
+      /** The number of nights stayed at the lodging. */
+      @SerializedName("nights")
+      Long nights;
+    }
+
+    @Getter
+    @Setter
+    @EqualsAndHashCode(callSuper = false)
+    public static class Receipt extends StripeObject {
+      /** The description of the item. The maximum length of this field is 26 characters. */
+      @SerializedName("description")
+      String description;
+
+      /** The quantity of the item. */
+      @SerializedName("quantity")
+      BigDecimal quantity;
+
+      /** The total for this line item in cents. */
+      @SerializedName("total")
+      Long total;
+
+      /** The unit cost of the item in cents. */
+      @SerializedName("unit_cost")
+      Long unitCost;
+    }
   }
 }
