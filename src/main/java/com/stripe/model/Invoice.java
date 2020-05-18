@@ -847,8 +847,9 @@ public class Invoice extends ApiResource implements HasId, MetadataStore<Invoice
   }
 
   /**
-   * Permanently deletes a draft invoice. This cannot be undone. Attempts to delete invoices that
-   * are no longer in a draft state will fail; once an invoice has been finalized, it must be <a
+   * Permanently deletes a one-off invoice draft. This cannot be undone. Attempts to delete invoices
+   * that are no longer in a draft state will fail; once an invoice has been finalized or if an
+   * invoice is for a subscription, it must be <a
    * href="https://stripe.com/docs/api#void_invoice">voided</a>.
    */
   public Invoice delete() throws StripeException {
@@ -856,8 +857,9 @@ public class Invoice extends ApiResource implements HasId, MetadataStore<Invoice
   }
 
   /**
-   * Permanently deletes a draft invoice. This cannot be undone. Attempts to delete invoices that
-   * are no longer in a draft state will fail; once an invoice has been finalized, it must be <a
+   * Permanently deletes a one-off invoice draft. This cannot be undone. Attempts to delete invoices
+   * that are no longer in a draft state will fail; once an invoice has been finalized or if an
+   * invoice is for a subscription, it must be <a
    * href="https://stripe.com/docs/api#void_invoice">voided</a>.
    */
   public Invoice delete(RequestOptions options) throws StripeException {
@@ -865,8 +867,9 @@ public class Invoice extends ApiResource implements HasId, MetadataStore<Invoice
   }
 
   /**
-   * Permanently deletes a draft invoice. This cannot be undone. Attempts to delete invoices that
-   * are no longer in a draft state will fail; once an invoice has been finalized, it must be <a
+   * Permanently deletes a one-off invoice draft. This cannot be undone. Attempts to delete invoices
+   * that are no longer in a draft state will fail; once an invoice has been finalized or if an
+   * invoice is for a subscription, it must be <a
    * href="https://stripe.com/docs/api#void_invoice">voided</a>.
    */
   public Invoice delete(Map<String, Object> params) throws StripeException {
@@ -874,8 +877,9 @@ public class Invoice extends ApiResource implements HasId, MetadataStore<Invoice
   }
 
   /**
-   * Permanently deletes a draft invoice. This cannot be undone. Attempts to delete invoices that
-   * are no longer in a draft state will fail; once an invoice has been finalized, it must be <a
+   * Permanently deletes a one-off invoice draft. This cannot be undone. Attempts to delete invoices
+   * that are no longer in a draft state will fail; once an invoice has been finalized or if an
+   * invoice is for a subscription, it must be <a
    * href="https://stripe.com/docs/api#void_invoice">voided</a>.
    */
   public Invoice delete(Map<String, Object> params, RequestOptions options) throws StripeException {
@@ -1368,6 +1372,13 @@ public class Invoice extends ApiResource implements HasId, MetadataStore<Invoice
   @Setter
   @EqualsAndHashCode(callSuper = false)
   public static class TransferData extends StripeObject {
+    /**
+     * The amount in %s that will be transferred to the destination account when the invoice is
+     * paid. By default, the entire amount is transferred to the destination.
+     */
+    @SerializedName("amount")
+    Long amount;
+
     /** The account where funds from the payment will be transferred to upon payment success. */
     @SerializedName("destination")
     @Getter(lombok.AccessLevel.NONE)

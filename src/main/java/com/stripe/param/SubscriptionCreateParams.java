@@ -1919,6 +1919,14 @@ public class SubscriptionCreateParams extends ApiRequestParams {
 
   @Getter
   public static class TransferData {
+    /**
+     * A non-negative decimal between 0 and 100, with at most two decimal places. This represents
+     * the percentage of the subscription invoice subtotal that will be transferred to the
+     * destination account. By default, the entire amount is transferred to the destination.
+     */
+    @SerializedName("amount_percent")
+    BigDecimal amountPercent;
+
     /** ID of an existing, connected Stripe account. */
     @SerializedName("destination")
     String destination;
@@ -1932,7 +1940,9 @@ public class SubscriptionCreateParams extends ApiRequestParams {
     @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
     Map<String, Object> extraParams;
 
-    private TransferData(String destination, Map<String, Object> extraParams) {
+    private TransferData(
+        BigDecimal amountPercent, String destination, Map<String, Object> extraParams) {
+      this.amountPercent = amountPercent;
       this.destination = destination;
       this.extraParams = extraParams;
     }
@@ -1942,13 +1952,25 @@ public class SubscriptionCreateParams extends ApiRequestParams {
     }
 
     public static class Builder {
+      private BigDecimal amountPercent;
+
       private String destination;
 
       private Map<String, Object> extraParams;
 
       /** Finalize and obtain parameter instance from this builder. */
       public TransferData build() {
-        return new TransferData(this.destination, this.extraParams);
+        return new TransferData(this.amountPercent, this.destination, this.extraParams);
+      }
+
+      /**
+       * A non-negative decimal between 0 and 100, with at most two decimal places. This represents
+       * the percentage of the subscription invoice subtotal that will be transferred to the
+       * destination account. By default, the entire amount is transferred to the destination.
+       */
+      public Builder setAmountPercent(BigDecimal amountPercent) {
+        this.amountPercent = amountPercent;
+        return this;
       }
 
       /** ID of an existing, connected Stripe account. */

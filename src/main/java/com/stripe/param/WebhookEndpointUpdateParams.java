@@ -566,6 +566,15 @@ public class WebhookEndpointUpdateParams extends ApiRequestParams {
     @SerializedName("plan.updated")
     PLAN__UPDATED("plan.updated"),
 
+    @SerializedName("price.created")
+    PRICE__CREATED("price.created"),
+
+    @SerializedName("price.deleted")
+    PRICE__DELETED("price.deleted"),
+
+    @SerializedName("price.updated")
+    PRICE__UPDATED("price.updated"),
+
     @SerializedName("product.created")
     PRODUCT__CREATED("product.created"),
 

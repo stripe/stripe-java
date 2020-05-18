@@ -720,6 +720,13 @@ public class InvoiceUpdateParams extends ApiRequestParams {
 
   @Getter
   public static class TransferData {
+    /**
+     * The amount that will be transferred automatically when the invoice is paid. If no amount is
+     * set, the full amount is transferred.
+     */
+    @SerializedName("amount")
+    Long amount;
+
     /** ID of an existing, connected Stripe account. */
     @SerializedName("destination")
     Object destination;
@@ -733,7 +740,8 @@ public class InvoiceUpdateParams extends ApiRequestParams {
     @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
     Map<String, Object> extraParams;
 
-    private TransferData(Object destination, Map<String, Object> extraParams) {
+    private TransferData(Long amount, Object destination, Map<String, Object> extraParams) {
+      this.amount = amount;
       this.destination = destination;
       this.extraParams = extraParams;
     }
@@ -743,13 +751,24 @@ public class InvoiceUpdateParams extends ApiRequestParams {
     }
 
     public static class Builder {
+      private Long amount;
+
       private Object destination;
 
       private Map<String, Object> extraParams;
 
       /** Finalize and obtain parameter instance from this builder. */
       public TransferData build() {
-        return new TransferData(this.destination, this.extraParams);
+        return new TransferData(this.amount, this.destination, this.extraParams);
+      }
+
+      /**
+       * The amount that will be transferred automatically when the invoice is paid. If no amount is
+       * set, the full amount is transferred.
+       */
+      public Builder setAmount(Long amount) {
+        this.amount = amount;
+        return this;
       }
 
       /** ID of an existing, connected Stripe account. */

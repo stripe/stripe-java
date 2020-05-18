@@ -298,36 +298,36 @@ public class Product extends ApiResource implements HasId, MetadataStore<Product
   }
 
   /**
-   * Delete a product. Deleting a product with type=<code>good</code> is only possible if it has no
-   * SKUs associated with it. Deleting a product with type=<code>service</code> is only possible if
-   * it has no plans associated with it.
+   * Delete a product. Deleting a product is only possible if it has no prices associated with it.
+   * Additionally, deleting a product with <code>type=good</code> is only possible if it has no SKUs
+   * associated with it.
    */
   public Product delete() throws StripeException {
     return delete((Map<String, Object>) null, (RequestOptions) null);
   }
 
   /**
-   * Delete a product. Deleting a product with type=<code>good</code> is only possible if it has no
-   * SKUs associated with it. Deleting a product with type=<code>service</code> is only possible if
-   * it has no plans associated with it.
+   * Delete a product. Deleting a product is only possible if it has no prices associated with it.
+   * Additionally, deleting a product with <code>type=good</code> is only possible if it has no SKUs
+   * associated with it.
    */
   public Product delete(RequestOptions options) throws StripeException {
     return delete((Map<String, Object>) null, options);
   }
 
   /**
-   * Delete a product. Deleting a product with type=<code>good</code> is only possible if it has no
-   * SKUs associated with it. Deleting a product with type=<code>service</code> is only possible if
-   * it has no plans associated with it.
+   * Delete a product. Deleting a product is only possible if it has no prices associated with it.
+   * Additionally, deleting a product with <code>type=good</code> is only possible if it has no SKUs
+   * associated with it.
    */
   public Product delete(Map<String, Object> params) throws StripeException {
     return delete(params, (RequestOptions) null);
   }
 
   /**
-   * Delete a product. Deleting a product with type=<code>good</code> is only possible if it has no
-   * SKUs associated with it. Deleting a product with type=<code>service</code> is only possible if
-   * it has no plans associated with it.
+   * Delete a product. Deleting a product is only possible if it has no prices associated with it.
+   * Additionally, deleting a product with <code>type=good</code> is only possible if it has no SKUs
+   * associated with it.
    */
   public Product delete(Map<String, Object> params, RequestOptions options) throws StripeException {
     String url =

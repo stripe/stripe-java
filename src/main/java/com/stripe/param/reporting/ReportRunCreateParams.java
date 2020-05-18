@@ -396,6 +396,9 @@ public class ReportRunCreateParams extends ApiRequestParams {
       @SerializedName("issuing_authorization_release")
       ISSUING_AUTHORIZATION_RELEASE("issuing_authorization_release"),
 
+      @SerializedName("issuing_dispute")
+      ISSUING_DISPUTE("issuing_dispute"),
+
       @SerializedName("issuing_transaction")
       ISSUING_TRANSACTION("issuing_transaction"),
 
