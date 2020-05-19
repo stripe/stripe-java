@@ -77,37 +77,37 @@ public class ExchangeRate extends ApiResource implements HasId {
   }
 
   /** Retrieves the exchange rates from the given currency to every supported currency. */
-  public static ExchangeRate retrieve(String currency) throws StripeException {
-    return retrieve(currency, (Map<String, Object>) null, (RequestOptions) null);
+  public static ExchangeRate retrieve(String rateId) throws StripeException {
+    return retrieve(rateId, (Map<String, Object>) null, (RequestOptions) null);
   }
 
   /** Retrieves the exchange rates from the given currency to every supported currency. */
-  public static ExchangeRate retrieve(String currency, RequestOptions options)
+  public static ExchangeRate retrieve(String rateId, RequestOptions options)
       throws StripeException {
-    return retrieve(currency, (Map<String, Object>) null, options);
+    return retrieve(rateId, (Map<String, Object>) null, options);
   }
 
   /** Retrieves the exchange rates from the given currency to every supported currency. */
   public static ExchangeRate retrieve(
-      String currency, Map<String, Object> params, RequestOptions options) throws StripeException {
+      String rateId, Map<String, Object> params, RequestOptions options) throws StripeException {
     String url =
         String.format(
             "%s%s",
             Stripe.getApiBase(),
-            String.format("/v1/exchange_rates/%s", ApiResource.urlEncodeId(currency)));
+            String.format("/v1/exchange_rates/%s", ApiResource.urlEncodeId(rateId)));
     return ApiResource.request(
         ApiResource.RequestMethod.GET, url, params, ExchangeRate.class, options);
   }
 
   /** Retrieves the exchange rates from the given currency to every supported currency. */
   public static ExchangeRate retrieve(
-      String currency, ExchangeRateRetrieveParams params, RequestOptions options)
+      String rateId, ExchangeRateRetrieveParams params, RequestOptions options)
       throws StripeException {
     String url =
         String.format(
             "%s%s",
             Stripe.getApiBase(),
-            String.format("/v1/exchange_rates/%s", ApiResource.urlEncodeId(currency)));
+            String.format("/v1/exchange_rates/%s", ApiResource.urlEncodeId(rateId)));
     return ApiResource.request(
         ApiResource.RequestMethod.GET, url, params, ExchangeRate.class, options);
   }

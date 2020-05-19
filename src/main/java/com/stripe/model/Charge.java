@@ -1153,7 +1153,18 @@ public class Charge extends ApiResource implements MetadataStore<Charge>, Balanc
     @Getter
     @Setter
     @EqualsAndHashCode(callSuper = false)
-    public static class Alipay extends StripeObject {}
+    public static class Alipay extends StripeObject {
+      /**
+       * Uniquely identifies this particular Alipay account. You can use this attribute to check
+       * whether two Alipay accounts are the same.
+       */
+      @SerializedName("fingerprint")
+      String fingerprint;
+
+      /** Transaction ID of this particular Alipay transaction. */
+      @SerializedName("transaction_id")
+      String transactionId;
+    }
 
     @Getter
     @Setter

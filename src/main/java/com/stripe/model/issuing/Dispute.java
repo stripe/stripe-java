@@ -3,6 +3,7 @@ package com.stripe.model.issuing;
 import com.google.gson.annotations.SerializedName;
 import com.stripe.Stripe;
 import com.stripe.exception.StripeException;
+import com.stripe.model.BalanceTransaction;
 import com.stripe.model.HasId;
 import com.stripe.net.ApiResource;
 import com.stripe.net.RequestOptions;
@@ -10,6 +11,7 @@ import com.stripe.param.issuing.DisputeCreateParams;
 import com.stripe.param.issuing.DisputeListParams;
 import com.stripe.param.issuing.DisputeRetrieveParams;
 import com.stripe.param.issuing.DisputeUpdateParams;
+import java.util.List;
 import java.util.Map;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
@@ -19,6 +21,10 @@ import lombok.Setter;
 @Setter
 @EqualsAndHashCode(callSuper = false)
 public class Dispute extends ApiResource implements HasId {
+  /** List of balance transactions associated with this dispute. */
+  @SerializedName("balance_transactions")
+  List<BalanceTransaction> balanceTransactions;
+
   /** Unique identifier for the object. */
   @Getter(onMethod_ = {@Override})
   @SerializedName("id")

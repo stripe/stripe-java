@@ -477,6 +477,7 @@ public class SubscriptionSchedule extends ApiResource
     @Setter(lombok.AccessLevel.NONE)
     ExpandableField<Price> price;
 
+    /** The quantity of the invoice item. */
     @SerializedName("quantity")
     Long quantity;
 
@@ -584,6 +585,10 @@ public class SubscriptionSchedule extends ApiResource
   @Setter
   @EqualsAndHashCode(callSuper = false)
   public static class Phase extends StripeObject {
+    /**
+     * A list of prices and quantities that will generate invoice items appended to the first
+     * invoice for this phase.
+     */
     @SerializedName("add_invoice_items")
     List<SubscriptionSchedule.AddInvoiceItem> addInvoiceItems;
 
