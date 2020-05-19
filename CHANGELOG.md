@@ -1,5 +1,14 @@
 # Changelog
 
+## 19.12.0 - 2020-05-18
+* [#1032](https://github.com/stripe/stripe-java/pull/1032) Multiple API changes
+  * Add support for `issuing_dispute` as a `type` on `BalanceTransaction`
+  * Add `balance_transactions` as an array of `BalanceTransaction` on Issuing `Dispute`
+  * Add `fingerprint` and `transaction_id` in `payment_method_details[alipay]` on `Charge`
+  * Add `transfer_data[amount]` on `Invoice`
+  * Add `transfer_data[amount_percent]` on `Subscription`
+  * Add `price.created`, `price.deleted` and `price.updated` on `Event`.
+
 ## 19.11.0 - 2020-05-13
 * [#1030](https://github.com/stripe/stripe-java/pull/1030) Add support for `purchase_details` on Issuing `Transaction`
 
