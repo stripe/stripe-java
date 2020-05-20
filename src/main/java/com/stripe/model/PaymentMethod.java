@@ -56,6 +56,9 @@ public class PaymentMethod extends ApiResource implements HasId, MetadataStore<P
   @SerializedName("ideal")
   Ideal ideal;
 
+  @SerializedName("interac_present")
+  InteracPresent interacPresent;
+
   /**
    * Has the value {@code true} if the object exists in live mode or the value {@code false} if the
    * object exists in test mode.
@@ -715,6 +718,11 @@ public class PaymentMethod extends ApiResource implements HasId, MetadataStore<P
     @SerializedName("bic")
     String bic;
   }
+
+  @Getter
+  @Setter
+  @EqualsAndHashCode(callSuper = false)
+  public static class InteracPresent extends StripeObject {}
 
   @Getter
   @Setter

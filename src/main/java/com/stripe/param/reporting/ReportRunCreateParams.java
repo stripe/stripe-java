@@ -357,6 +357,9 @@ public class ReportRunCreateParams extends ApiRequestParams {
       @SerializedName("advance_funding")
       ADVANCE_FUNDING("advance_funding"),
 
+      @SerializedName("anticipation_repayment")
+      ANTICIPATION_REPAYMENT("anticipation_repayment"),
+
       @SerializedName("charge")
       CHARGE("charge"),
 

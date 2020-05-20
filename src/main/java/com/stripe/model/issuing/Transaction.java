@@ -373,7 +373,7 @@ public class Transaction extends ApiResource
       @Setter
       @EqualsAndHashCode(callSuper = false)
       public static class Segments extends StripeObject {
-        /** The flight's destination airport code. */
+        /** The three-letter IATA airport code of the flight's destination. */
         @SerializedName("arrival_airport_code")
         String arrivalAirportCode;
 
@@ -381,7 +381,7 @@ public class Transaction extends ApiResource
         @SerializedName("carrier")
         String carrier;
 
-        /** The airport code that the flight departed from. */
+        /** The three-letter IATA airport code that the flight departed from. */
         @SerializedName("departure_airport_code")
         String departureAirportCode;
 

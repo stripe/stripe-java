@@ -55,24 +55,24 @@ public class Session extends ApiResource implements HasId {
   @SerializedName("url")
   String url;
 
-  /** Creates a session of the self-serve Portal. */
+  /** Creates a session of the self-serve portal. */
   public static Session create(Map<String, Object> params) throws StripeException {
     return create(params, (RequestOptions) null);
   }
 
-  /** Creates a session of the self-serve Portal. */
+  /** Creates a session of the self-serve portal. */
   public static Session create(Map<String, Object> params, RequestOptions options)
       throws StripeException {
     String url = String.format("%s%s", Stripe.getApiBase(), "/v1/billing_portal/sessions");
     return ApiResource.request(ApiResource.RequestMethod.POST, url, params, Session.class, options);
   }
 
-  /** Creates a session of the self-serve Portal. */
+  /** Creates a session of the self-serve portal. */
   public static Session create(SessionCreateParams params) throws StripeException {
     return create(params, (RequestOptions) null);
   }
 
-  /** Creates a session of the self-serve Portal. */
+  /** Creates a session of the self-serve portal. */
   public static Session create(SessionCreateParams params, RequestOptions options)
       throws StripeException {
     String url = String.format("%s%s", Stripe.getApiBase(), "/v1/billing_portal/sessions");

@@ -101,8 +101,8 @@ public class BalanceTransaction extends ApiResource implements HasId {
 
   /**
    * Transaction type: {@code adjustment}, {@code advance}, {@code advance_funding}, {@code
-   * application_fee}, {@code application_fee_refund}, {@code charge}, {@code
-   * connect_collection_transfer}, {@code issuing_authorization_hold}, {@code
+   * anticipation_repayment}, {@code application_fee}, {@code application_fee_refund}, {@code
+   * charge}, {@code connect_collection_transfer}, {@code issuing_authorization_hold}, {@code
    * issuing_authorization_release}, {@code issuing_dispute}, {@code issuing_transaction}, {@code
    * payment}, {@code payment_failure_refund}, {@code payment_refund}, {@code payout}, {@code
    * payout_cancel}, {@code payout_failure}, {@code refund}, {@code refund_failure}, {@code
@@ -114,8 +114,8 @@ public class BalanceTransaction extends ApiResource implements HasId {
    * accounting purposes, you might want to consider {@code reporting_category} instead.
    *
    * <p>One of {@code adjustment}, {@code advance}, {@code advance_funding}, {@code
-   * application_fee}, {@code application_fee_refund}, {@code charge}, {@code
-   * connect_collection_transfer}, {@code issuing_authorization_hold}, {@code
+   * anticipation_repayment}, {@code application_fee}, {@code application_fee_refund}, {@code
+   * charge}, {@code connect_collection_transfer}, {@code issuing_authorization_hold}, {@code
    * issuing_authorization_release}, {@code issuing_dispute}, {@code issuing_transaction}, {@code
    * payment}, {@code payment_failure_refund}, {@code payment_refund}, {@code payout}, {@code
    * payout_cancel}, {@code payout_failure}, {@code refund}, {@code refund_failure}, {@code

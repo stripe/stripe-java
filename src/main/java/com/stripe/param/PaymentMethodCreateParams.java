@@ -67,6 +67,13 @@ public class PaymentMethodCreateParams extends ApiRequestParams {
   Ideal ideal;
 
   /**
+   * If this is an {@code interac_present} PaymentMethod, this hash contains details about the
+   * Interac Present payment method.
+   */
+  @SerializedName("interac_present")
+  InteracPresent interacPresent;
+
+  /**
    * Set of key-value pairs that you can attach to an object. This can be useful for storing
    * additional information about the object in a structured format. Individual keys can be unset by
    * posting an empty value to them. All keys can be unset by posting an empty value to {@code
@@ -105,6 +112,7 @@ public class PaymentMethodCreateParams extends ApiRequestParams {
       Map<String, Object> extraParams,
       Fpx fpx,
       Ideal ideal,
+      InteracPresent interacPresent,
       Map<String, String> metadata,
       String paymentMethod,
       SepaDebit sepaDebit,
@@ -117,6 +125,7 @@ public class PaymentMethodCreateParams extends ApiRequestParams {
     this.extraParams = extraParams;
     this.fpx = fpx;
     this.ideal = ideal;
+    this.interacPresent = interacPresent;
     this.metadata = metadata;
     this.paymentMethod = paymentMethod;
     this.sepaDebit = sepaDebit;
@@ -144,6 +153,8 @@ public class PaymentMethodCreateParams extends ApiRequestParams {
 
     private Ideal ideal;
 
+    private InteracPresent interacPresent;
+
     private Map<String, String> metadata;
 
     private String paymentMethod;
@@ -163,6 +174,7 @@ public class PaymentMethodCreateParams extends ApiRequestParams {
           this.extraParams,
           this.fpx,
           this.ideal,
+          this.interacPresent,
           this.metadata,
           this.paymentMethod,
           this.sepaDebit,
@@ -286,6 +298,15 @@ public class PaymentMethodCreateParams extends ApiRequestParams {
      */
     public Builder setIdeal(Ideal ideal) {
       this.ideal = ideal;
+      return this;
+    }
+
+    /**
+     * If this is an {@code interac_present} PaymentMethod, this hash contains details about the
+     * Interac Present payment method.
+     */
+    public Builder setInteracPresent(InteracPresent interacPresent) {
+      this.interacPresent = interacPresent;
       return this;
     }
 
@@ -1138,6 +1159,62 @@ public class PaymentMethodCreateParams extends ApiRequestParams {
 
       Bank(String value) {
         this.value = value;
+      }
+    }
+  }
+
+  @Getter
+  public static class InteracPresent {
+    /**
+     * Map of extra parameters for custom features not available in this client library. The content
+     * in this map is not serialized under this field's {@code @SerializedName} value. Instead, each
+     * key/value pair is serialized as if the key is a root-level field (serialized) name in this
+     * param object. Effectively, this map is flattened to its parent instance.
+     */
+    @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
+    Map<String, Object> extraParams;
+
+    private InteracPresent(Map<String, Object> extraParams) {
+      this.extraParams = extraParams;
+    }
+
+    public static Builder builder() {
+      return new Builder();
+    }
+
+    public static class Builder {
+      private Map<String, Object> extraParams;
+
+      /** Finalize and obtain parameter instance from this builder. */
+      public InteracPresent build() {
+        return new InteracPresent(this.extraParams);
+      }
+
+      /**
+       * Add a key/value pair to `extraParams` map. A map is initialized for the first `put/putAll`
+       * call, and subsequent calls add additional key/value pairs to the original map. See {@link
+       * PaymentMethodCreateParams.InteracPresent#extraParams} for the field documentation.
+       */
+      public Builder putExtraParam(String key, Object value) {
+        if (this.extraParams == null) {
+          this.extraParams = new HashMap<>();
+        }
+        this.extraParams.put(key, value);
+        return this;
+      }
+
+      /**
+       * Add all map key/value pairs to `extraParams` map. A map is initialized for the first
+       * `put/putAll` call, and subsequent calls add additional key/value pairs to the original map.
+       * See {@link PaymentMethodCreateParams.InteracPresent#extraParams} for the field
+       * documentation.
+       */
+      public Builder putAllExtraParam(Map<String, Object> map) {
+        if (this.extraParams == null) {
+          this.extraParams = new HashMap<>();
+        }
+        this.extraParams.putAll(map);
+        return this;
       }
     }
   }
