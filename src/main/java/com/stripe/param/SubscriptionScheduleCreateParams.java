@@ -359,17 +359,26 @@ public class SubscriptionScheduleCreateParams extends ApiRequestParams {
     @SerializedName("invoice_settings")
     InvoiceSettings invoiceSettings;
 
+    /**
+     * The data with which to automatically create a Transfer for each of the subscription's
+     * invoices.
+     */
+    @SerializedName("transfer_data")
+    Object transferData;
+
     private DefaultSettings(
         Object billingThresholds,
         CollectionMethod collectionMethod,
         String defaultPaymentMethod,
         Map<String, Object> extraParams,
-        InvoiceSettings invoiceSettings) {
+        InvoiceSettings invoiceSettings,
+        Object transferData) {
       this.billingThresholds = billingThresholds;
       this.collectionMethod = collectionMethod;
       this.defaultPaymentMethod = defaultPaymentMethod;
       this.extraParams = extraParams;
       this.invoiceSettings = invoiceSettings;
+      this.transferData = transferData;
     }
 
     public static Builder builder() {
@@ -387,6 +396,8 @@ public class SubscriptionScheduleCreateParams extends ApiRequestParams {
 
       private InvoiceSettings invoiceSettings;
 
+      private Object transferData;
+
       /** Finalize and obtain parameter instance from this builder. */
       public DefaultSettings build() {
         return new DefaultSettings(
@@ -394,7 +405,8 @@ public class SubscriptionScheduleCreateParams extends ApiRequestParams {
             this.collectionMethod,
             this.defaultPaymentMethod,
             this.extraParams,
-            this.invoiceSettings);
+            this.invoiceSettings,
+            this.transferData);
       }
 
       /**
@@ -467,6 +479,24 @@ public class SubscriptionScheduleCreateParams extends ApiRequestParams {
       /** All invoices will be billed using the specified settings. */
       public Builder setInvoiceSettings(InvoiceSettings invoiceSettings) {
         this.invoiceSettings = invoiceSettings;
+        return this;
+      }
+
+      /**
+       * The data with which to automatically create a Transfer for each of the subscription's
+       * invoices.
+       */
+      public Builder setTransferData(TransferData transferData) {
+        this.transferData = transferData;
+        return this;
+      }
+
+      /**
+       * The data with which to automatically create a Transfer for each of the subscription's
+       * invoices.
+       */
+      public Builder setTransferData(EmptyParam transferData) {
+        this.transferData = transferData;
         return this;
       }
     }
@@ -646,6 +676,101 @@ public class SubscriptionScheduleCreateParams extends ApiRequestParams {
       }
     }
 
+    @Getter
+    public static class TransferData {
+      /**
+       * A non-negative decimal between 0 and 100, with at most two decimal places. This represents
+       * the percentage of the subscription invoice subtotal that will be transferred to the
+       * destination account. By default, the entire amount is transferred to the destination.
+       */
+      @SerializedName("amount_percent")
+      BigDecimal amountPercent;
+
+      /** ID of an existing, connected Stripe account. */
+      @SerializedName("destination")
+      String destination;
+
+      /**
+       * Map of extra parameters for custom features not available in this client library. The
+       * content in this map is not serialized under this field's {@code @SerializedName} value.
+       * Instead, each key/value pair is serialized as if the key is a root-level field (serialized)
+       * name in this param object. Effectively, this map is flattened to its parent instance.
+       */
+      @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
+      Map<String, Object> extraParams;
+
+      private TransferData(
+          BigDecimal amountPercent, String destination, Map<String, Object> extraParams) {
+        this.amountPercent = amountPercent;
+        this.destination = destination;
+        this.extraParams = extraParams;
+      }
+
+      public static Builder builder() {
+        return new Builder();
+      }
+
+      public static class Builder {
+        private BigDecimal amountPercent;
+
+        private String destination;
+
+        private Map<String, Object> extraParams;
+
+        /** Finalize and obtain parameter instance from this builder. */
+        public TransferData build() {
+          return new TransferData(this.amountPercent, this.destination, this.extraParams);
+        }
+
+        /**
+         * A non-negative decimal between 0 and 100, with at most two decimal places. This
+         * represents the percentage of the subscription invoice subtotal that will be transferred
+         * to the destination account. By default, the entire amount is transferred to the
+         * destination.
+         */
+        public Builder setAmountPercent(BigDecimal amountPercent) {
+          this.amountPercent = amountPercent;
+          return this;
+        }
+
+        /** ID of an existing, connected Stripe account. */
+        public Builder setDestination(String destination) {
+          this.destination = destination;
+          return this;
+        }
+
+        /**
+         * Add a key/value pair to `extraParams` map. A map is initialized for the first
+         * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
+         * map. See {@link
+         * SubscriptionScheduleCreateParams.DefaultSettings.TransferData#extraParams} for the field
+         * documentation.
+         */
+        public Builder putExtraParam(String key, Object value) {
+          if (this.extraParams == null) {
+            this.extraParams = new HashMap<>();
+          }
+          this.extraParams.put(key, value);
+          return this;
+        }
+
+        /**
+         * Add all map key/value pairs to `extraParams` map. A map is initialized for the first
+         * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
+         * map. See {@link
+         * SubscriptionScheduleCreateParams.DefaultSettings.TransferData#extraParams} for the field
+         * documentation.
+         */
+        public Builder putAllExtraParam(Map<String, Object> map) {
+          if (this.extraParams == null) {
+            this.extraParams = new HashMap<>();
+          }
+          this.extraParams.putAll(map);
+          return this;
+        }
+      }
+    }
+
     public enum CollectionMethod implements ApiRequestParams.EnumParam {
       @SerializedName("charge_automatically")
       CHARGE_AUTOMATICALLY("charge_automatically"),
@@ -781,6 +906,13 @@ public class SubscriptionScheduleCreateParams extends ApiRequestParams {
     BigDecimal taxPercent;
 
     /**
+     * The data with which to automatically create a Transfer for each of the subscription's
+     * invoices.
+     */
+    @SerializedName("transfer_data")
+    TransferData transferData;
+
+    /**
      * If set to true the entire phase is counted as a trial and the customer will not be charged
      * for any fees.
      */
@@ -809,6 +941,7 @@ public class SubscriptionScheduleCreateParams extends ApiRequestParams {
         List<Plan> plans,
         ProrationBehavior prorationBehavior,
         BigDecimal taxPercent,
+        TransferData transferData,
         Boolean trial,
         Long trialEnd) {
       this.addInvoiceItems = addInvoiceItems;
@@ -825,6 +958,7 @@ public class SubscriptionScheduleCreateParams extends ApiRequestParams {
       this.plans = plans;
       this.prorationBehavior = prorationBehavior;
       this.taxPercent = taxPercent;
+      this.transferData = transferData;
       this.trial = trial;
       this.trialEnd = trialEnd;
     }
@@ -862,6 +996,8 @@ public class SubscriptionScheduleCreateParams extends ApiRequestParams {
 
       private BigDecimal taxPercent;
 
+      private TransferData transferData;
+
       private Boolean trial;
 
       private Long trialEnd;
@@ -883,6 +1019,7 @@ public class SubscriptionScheduleCreateParams extends ApiRequestParams {
             this.plans,
             this.prorationBehavior,
             this.taxPercent,
+            this.transferData,
             this.trial,
             this.trialEnd);
       }
@@ -1127,6 +1264,15 @@ public class SubscriptionScheduleCreateParams extends ApiRequestParams {
        */
       public Builder setTaxPercent(BigDecimal taxPercent) {
         this.taxPercent = taxPercent;
+        return this;
+      }
+
+      /**
+       * The data with which to automatically create a Transfer for each of the subscription's
+       * invoices.
+       */
+      public Builder setTransferData(TransferData transferData) {
+        this.transferData = transferData;
         return this;
       }
 
@@ -2120,6 +2266,99 @@ public class SubscriptionScheduleCreateParams extends ApiRequestParams {
               this.value = value;
             }
           }
+        }
+      }
+    }
+
+    @Getter
+    public static class TransferData {
+      /**
+       * A non-negative decimal between 0 and 100, with at most two decimal places. This represents
+       * the percentage of the subscription invoice subtotal that will be transferred to the
+       * destination account. By default, the entire amount is transferred to the destination.
+       */
+      @SerializedName("amount_percent")
+      BigDecimal amountPercent;
+
+      /** ID of an existing, connected Stripe account. */
+      @SerializedName("destination")
+      String destination;
+
+      /**
+       * Map of extra parameters for custom features not available in this client library. The
+       * content in this map is not serialized under this field's {@code @SerializedName} value.
+       * Instead, each key/value pair is serialized as if the key is a root-level field (serialized)
+       * name in this param object. Effectively, this map is flattened to its parent instance.
+       */
+      @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
+      Map<String, Object> extraParams;
+
+      private TransferData(
+          BigDecimal amountPercent, String destination, Map<String, Object> extraParams) {
+        this.amountPercent = amountPercent;
+        this.destination = destination;
+        this.extraParams = extraParams;
+      }
+
+      public static Builder builder() {
+        return new Builder();
+      }
+
+      public static class Builder {
+        private BigDecimal amountPercent;
+
+        private String destination;
+
+        private Map<String, Object> extraParams;
+
+        /** Finalize and obtain parameter instance from this builder. */
+        public TransferData build() {
+          return new TransferData(this.amountPercent, this.destination, this.extraParams);
+        }
+
+        /**
+         * A non-negative decimal between 0 and 100, with at most two decimal places. This
+         * represents the percentage of the subscription invoice subtotal that will be transferred
+         * to the destination account. By default, the entire amount is transferred to the
+         * destination.
+         */
+        public Builder setAmountPercent(BigDecimal amountPercent) {
+          this.amountPercent = amountPercent;
+          return this;
+        }
+
+        /** ID of an existing, connected Stripe account. */
+        public Builder setDestination(String destination) {
+          this.destination = destination;
+          return this;
+        }
+
+        /**
+         * Add a key/value pair to `extraParams` map. A map is initialized for the first
+         * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
+         * map. See {@link SubscriptionScheduleCreateParams.Phase.TransferData#extraParams} for the
+         * field documentation.
+         */
+        public Builder putExtraParam(String key, Object value) {
+          if (this.extraParams == null) {
+            this.extraParams = new HashMap<>();
+          }
+          this.extraParams.put(key, value);
+          return this;
+        }
+
+        /**
+         * Add all map key/value pairs to `extraParams` map. A map is initialized for the first
+         * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
+         * map. See {@link SubscriptionScheduleCreateParams.Phase.TransferData#extraParams} for the
+         * field documentation.
+         */
+        public Builder putAllExtraParam(Map<String, Object> map) {
+          if (this.extraParams == null) {
+            this.extraParams = new HashMap<>();
+          }
+          this.extraParams.putAll(map);
+          return this;
         }
       }
     }

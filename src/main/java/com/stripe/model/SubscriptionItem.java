@@ -74,9 +74,8 @@ public class SubscriptionItem extends ApiResource
    *
    * <p>Related guides: <a
    * href="https://stripe.com/docs/billing/subscriptions/set-up-subscription">Set up a
-   * subscription</a> and more about <a
-   * href="https://stripe.com/docs/billing/subscriptions/products-and-prices">products and
-   * prices</a>.
+   * subscription</a> and more about <a href="https://stripe.com/docs/billing/prices-guide">products
+   * and prices</a>.
    */
   @SerializedName("plan")
   Plan plan;

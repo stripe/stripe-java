@@ -862,7 +862,7 @@ public class PaymentIntent extends ApiResource implements HasId, MetadataStore<P
    *
    * <p>Once canceled, no additional charges will be made by the PaymentIntent and any operations on
    * the PaymentIntent will fail with an error. For PaymentIntents with <code>
-   * status='requires_capture'</code>, the remaining <code>amount_capturable</code> will
+   * status=’requires_capture’</code>, the remaining <code>amount_capturable</code> will
    * automatically be refunded.
    */
   public PaymentIntent cancel() throws StripeException {
@@ -876,7 +876,7 @@ public class PaymentIntent extends ApiResource implements HasId, MetadataStore<P
    *
    * <p>Once canceled, no additional charges will be made by the PaymentIntent and any operations on
    * the PaymentIntent will fail with an error. For PaymentIntents with <code>
-   * status='requires_capture'</code>, the remaining <code>amount_capturable</code> will
+   * status=’requires_capture’</code>, the remaining <code>amount_capturable</code> will
    * automatically be refunded.
    */
   public PaymentIntent cancel(RequestOptions options) throws StripeException {
@@ -890,7 +890,7 @@ public class PaymentIntent extends ApiResource implements HasId, MetadataStore<P
    *
    * <p>Once canceled, no additional charges will be made by the PaymentIntent and any operations on
    * the PaymentIntent will fail with an error. For PaymentIntents with <code>
-   * status='requires_capture'</code>, the remaining <code>amount_capturable</code> will
+   * status=’requires_capture’</code>, the remaining <code>amount_capturable</code> will
    * automatically be refunded.
    */
   public PaymentIntent cancel(Map<String, Object> params) throws StripeException {
@@ -904,7 +904,7 @@ public class PaymentIntent extends ApiResource implements HasId, MetadataStore<P
    *
    * <p>Once canceled, no additional charges will be made by the PaymentIntent and any operations on
    * the PaymentIntent will fail with an error. For PaymentIntents with <code>
-   * status='requires_capture'</code>, the remaining <code>amount_capturable</code> will
+   * status=’requires_capture’</code>, the remaining <code>amount_capturable</code> will
    * automatically be refunded.
    */
   public PaymentIntent cancel(Map<String, Object> params, RequestOptions options)
@@ -925,7 +925,7 @@ public class PaymentIntent extends ApiResource implements HasId, MetadataStore<P
    *
    * <p>Once canceled, no additional charges will be made by the PaymentIntent and any operations on
    * the PaymentIntent will fail with an error. For PaymentIntents with <code>
-   * status='requires_capture'</code>, the remaining <code>amount_capturable</code> will
+   * status=’requires_capture’</code>, the remaining <code>amount_capturable</code> will
    * automatically be refunded.
    */
   public PaymentIntent cancel(PaymentIntentCancelParams params) throws StripeException {
@@ -939,7 +939,7 @@ public class PaymentIntent extends ApiResource implements HasId, MetadataStore<P
    *
    * <p>Once canceled, no additional charges will be made by the PaymentIntent and any operations on
    * the PaymentIntent will fail with an error. For PaymentIntents with <code>
-   * status='requires_capture'</code>, the remaining <code>amount_capturable</code> will
+   * status=’requires_capture’</code>, the remaining <code>amount_capturable</code> will
    * automatically be refunded.
    */
   public PaymentIntent cancel(PaymentIntentCancelParams params, RequestOptions options)

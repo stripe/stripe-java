@@ -548,6 +548,13 @@ public class SubscriptionSchedule extends ApiResource
     @SerializedName("invoice_settings")
     InvoiceSettings invoiceSettings;
 
+    /**
+     * The account (if any) the subscription's payments will be attributed to for tax reporting, and
+     * where funds from each payment will be transferred to for each of the subscription's invoices.
+     */
+    @SerializedName("transfer_data")
+    Subscription.TransferData transferData;
+
     /** Get ID of expandable {@code defaultPaymentMethod} object. */
     public String getDefaultPaymentMethod() {
       return (this.defaultPaymentMethod != null) ? this.defaultPaymentMethod.getId() : null;
@@ -672,6 +679,13 @@ public class SubscriptionSchedule extends ApiResource
      */
     @SerializedName("tax_percent")
     BigDecimal taxPercent;
+
+    /**
+     * The account (if any) the subscription's payments will be attributed to for tax reporting, and
+     * where funds from each payment will be transferred to for each of the subscription's invoices.
+     */
+    @SerializedName("transfer_data")
+    Subscription.TransferData transferData;
 
     /** When the trial ends within the phase. */
     @SerializedName("trial_end")
