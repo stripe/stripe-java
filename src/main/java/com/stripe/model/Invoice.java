@@ -1274,7 +1274,8 @@ public class Invoice extends ApiResource implements HasId, MetadataStore<Invoice
      * nz_gst}, {@code au_abn}, {@code in_gst}, {@code no_vat}, {@code za_vat}, {@code ch_vat},
      * {@code mx_rfc}, {@code sg_uen}, {@code ru_inn}, {@code ca_bn}, {@code hk_br}, {@code es_cif},
      * {@code tw_vat}, {@code th_vat}, {@code jp_cn}, {@code li_uid}, {@code my_itn}, {@code
-     * us_ein}, {@code kr_brn}, {@code ca_qst}, {@code my_sst}, {@code sg_gst}, or {@code unknown}.
+     * us_ein}, {@code kr_brn}, {@code ca_qst}, {@code my_sst}, {@code sg_gst}, {@code ae_trn},
+     * {@code cl_tin}, {@code sa_vat}, or {@code unknown}.
      */
     @SerializedName("type")
     String type;

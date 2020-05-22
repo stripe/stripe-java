@@ -1133,7 +1133,8 @@ public class CustomerCreateParams extends ApiRequestParams {
      * {@code au_abn}, {@code in_gst}, {@code no_vat}, {@code za_vat}, {@code ch_vat}, {@code
      * mx_rfc}, {@code sg_uen}, {@code ru_inn}, {@code ca_bn}, {@code hk_br}, {@code es_cif}, {@code
      * tw_vat}, {@code th_vat}, {@code jp_cn}, {@code li_uid}, {@code my_itn}, {@code us_ein},
-     * {@code kr_brn}, {@code ca_qst}, {@code my_sst}, or {@code sg_gst}.
+     * {@code kr_brn}, {@code ca_qst}, {@code my_sst}, {@code sg_gst}, {@code ae_trn}, {@code
+     * cl_tin}, or {@code sa_vat}.
      */
     @SerializedName("type")
     Type type;
@@ -1195,7 +1196,8 @@ public class CustomerCreateParams extends ApiRequestParams {
        * {@code au_abn}, {@code in_gst}, {@code no_vat}, {@code za_vat}, {@code ch_vat}, {@code
        * mx_rfc}, {@code sg_uen}, {@code ru_inn}, {@code ca_bn}, {@code hk_br}, {@code es_cif},
        * {@code tw_vat}, {@code th_vat}, {@code jp_cn}, {@code li_uid}, {@code my_itn}, {@code
-       * us_ein}, {@code kr_brn}, {@code ca_qst}, {@code my_sst}, or {@code sg_gst}.
+       * us_ein}, {@code kr_brn}, {@code ca_qst}, {@code my_sst}, {@code sg_gst}, {@code ae_trn},
+       * {@code cl_tin}, or {@code sa_vat}.
        */
       public Builder setType(Type type) {
         this.type = type;
@@ -1210,6 +1212,9 @@ public class CustomerCreateParams extends ApiRequestParams {
     }
 
     public enum Type implements ApiRequestParams.EnumParam {
+      @SerializedName("ae_trn")
+      AE_TRN("ae_trn"),
+
       @SerializedName("au_abn")
       AU_ABN("au_abn"),
 
@@ -1227,6 +1232,9 @@ public class CustomerCreateParams extends ApiRequestParams {
 
       @SerializedName("ch_vat")
       CH_VAT("ch_vat"),
+
+      @SerializedName("cl_tin")
+      CL_TIN("cl_tin"),
 
       @SerializedName("es_cif")
       ES_CIF("es_cif"),
@@ -1266,6 +1274,9 @@ public class CustomerCreateParams extends ApiRequestParams {
 
       @SerializedName("ru_inn")
       RU_INN("ru_inn"),
+
+      @SerializedName("sa_vat")
+      SA_VAT("sa_vat"),
 
       @SerializedName("sg_gst")
       SG_GST("sg_gst"),
