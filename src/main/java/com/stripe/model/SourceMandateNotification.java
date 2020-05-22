@@ -9,6 +9,9 @@ import lombok.Setter;
 @Setter
 @EqualsAndHashCode(callSuper = false)
 public class SourceMandateNotification extends StripeObject implements HasId {
+  @SerializedName("acss_debit")
+  AcssDebitData acssDebit;
+
   /**
    * A positive integer in the smallest currency unit (that is, 100 cents for $1.00, or 1 for ¥1,
    * Japanese Yen being a zero-decimal currency) representing the amount associated with the mandate
@@ -79,6 +82,15 @@ public class SourceMandateNotification extends StripeObject implements HasId {
    */
   @SerializedName("type")
   String type;
+
+  @Getter
+  @Setter
+  @EqualsAndHashCode(callSuper = false)
+  public static class AcssDebitData extends StripeObject {
+    /** The statement descriptor associate with the debit. */
+    @SerializedName("statement_descriptor")
+    String statementDescriptor;
+  }
 
   @Getter
   @Setter

@@ -1397,12 +1397,31 @@ public class Charge extends ApiResource implements MetadataStore<Charge>, Balanc
         @SerializedName("authenticated")
         Boolean authenticated;
 
+        /**
+         * Indicates the outcome of 3D Secure authentication.
+         *
+         * <p>One of {@code attempt_acknowledged}, {@code authenticated}, {@code failed}, {@code
+         * not_supported}, or {@code processing_error}.
+         */
+        @SerializedName("result")
+        String result;
+
+        /**
+         * Additional information about why 3D Secure succeeded or failed.
+         *
+         * <p>One of {@code abandoned}, {@code bypassed}, {@code canceled}, {@code
+         * card_not_enrolled}, {@code network_not_supported}, {@code protocol_error}, or {@code
+         * rejected}.
+         */
+        @SerializedName("result_reason")
+        String resultReason;
+
         /** Whether or not 3D Secure succeeded. */
         @SerializedName("succeeded")
         Boolean succeeded;
 
         /**
-         * The version of 3D Secure that was used for this payment.
+         * The version of 3D Secure that was used.
          *
          * <p>One of {@code 1.0.2}, {@code 2.1.0}, or {@code 2.2.0}.
          */
