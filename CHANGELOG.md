@@ -1,5 +1,10 @@
 # Changelog
 
+## 19.15.0 - 2020-05-28
+* [#1035](https://github.com/stripe/stripe-java/pull/1035) Multiple API changes
+  * Add `payment_method_details[card][three_d_secure][authentication_flow]` on `Charge`
+  * Add `line_items[][price_data][product_data]` on Checkout `Session` creation
+
 ## 19.14.0 - 2020-05-22
 * [#1034](https://github.com/stripe/stripe-java/pull/1034) Multiple API changes
   * Add support for `ae_trn`, `cl_tin` and `sa_vat` as `type` on `TaxId`
