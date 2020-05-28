@@ -143,18 +143,18 @@ public class SubscriptionItem extends ApiResource
     return ApiResource.requestCollection(url, params, SubscriptionItemCollection.class, options);
   }
 
-  /** Retrieves the invoice item with the given ID. */
+  /** Retrieves the subscription item with the given ID. */
   public static SubscriptionItem retrieve(String item) throws StripeException {
     return retrieve(item, (Map<String, Object>) null, (RequestOptions) null);
   }
 
-  /** Retrieves the invoice item with the given ID. */
+  /** Retrieves the subscription item with the given ID. */
   public static SubscriptionItem retrieve(String item, RequestOptions options)
       throws StripeException {
     return retrieve(item, (Map<String, Object>) null, options);
   }
 
-  /** Retrieves the invoice item with the given ID. */
+  /** Retrieves the subscription item with the given ID. */
   public static SubscriptionItem retrieve(
       String item, Map<String, Object> params, RequestOptions options) throws StripeException {
     String url =
@@ -166,7 +166,7 @@ public class SubscriptionItem extends ApiResource
         ApiResource.RequestMethod.GET, url, params, SubscriptionItem.class, options);
   }
 
-  /** Retrieves the invoice item with the given ID. */
+  /** Retrieves the subscription item with the given ID. */
   public static SubscriptionItem retrieve(
       String item, SubscriptionItemRetrieveParams params, RequestOptions options)
       throws StripeException {

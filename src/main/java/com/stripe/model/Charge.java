@@ -1398,6 +1398,15 @@ public class Charge extends ApiResource implements MetadataStore<Charge>, Balanc
         Boolean authenticated;
 
         /**
+         * For authenticated transactions: whether issuing bank authenticated the cardholder with a
+         * traditional challenge screen, or with device data via the 3DS2 frictionless flow.
+         *
+         * <p>One of {@code challenge}, or {@code frictionless}.
+         */
+        @SerializedName("authentication_flow")
+        String authenticationFlow;
+
+        /**
          * Indicates the outcome of 3D Secure authentication.
          *
          * <p>One of {@code attempt_acknowledged}, {@code authenticated}, {@code failed}, {@code
@@ -1690,7 +1699,8 @@ public class Charge extends ApiResource implements MetadataStore<Charge>, Balanc
     public static class Eps extends StripeObject {
       /**
        * Owner's verified full name. Values are verified or provided by EPS directly (if supported)
-       * at the time of authorization or settlement. They cannot be set or mutated.
+       * at the time of authorization or settlement. They cannot be set or mutated. EPS rarely
+       * provides this information so the attribute is usually empty.
        */
       @SerializedName("verified_name")
       String verifiedName;
@@ -1738,6 +1748,7 @@ public class Charge extends ApiResource implements MetadataStore<Charge>, Balanc
       /**
        * Owner's verified full name. Values are verified or provided by Giropay directly (if
        * supported) at the time of authorization or settlement. They cannot be set or mutated.
+       * Giropay rarely provides this information so the attribute is usually empty.
        */
       @SerializedName("verified_name")
       String verifiedName;
@@ -1935,6 +1946,7 @@ public class Charge extends ApiResource implements MetadataStore<Charge>, Balanc
       /**
        * Owner's verified full name. Values are verified or provided by Przelewy24 directly (if
        * supported) at the time of authorization or settlement. They cannot be set or mutated.
+       * Przelewy24 rarely provides this information so the attribute is usually empty.
        */
       @SerializedName("verified_name")
       String verifiedName;

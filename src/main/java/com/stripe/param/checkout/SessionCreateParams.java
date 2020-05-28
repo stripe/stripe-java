@@ -803,9 +803,19 @@ public class SessionCreateParams extends ApiRequestParams {
       @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
       Map<String, Object> extraParams;
 
-      /** The ID of the product that this price will belong to. */
+      /**
+       * The ID of the product that this price will belong to. One of {@code product} or {@code
+       * product_data} is required.
+       */
       @SerializedName("product")
       String product;
+
+      /**
+       * Data used to generate a new product object inline. One of {@code product} or {@code
+       * product_data} is required.
+       */
+      @SerializedName("product_data")
+      ProductData productData;
 
       /** The recurring components of a price such as {@code interval} and {@code usage_type}. */
       @SerializedName("recurring")
@@ -826,12 +836,14 @@ public class SessionCreateParams extends ApiRequestParams {
           String currency,
           Map<String, Object> extraParams,
           String product,
+          ProductData productData,
           Recurring recurring,
           Long unitAmount,
           BigDecimal unitAmountDecimal) {
         this.currency = currency;
         this.extraParams = extraParams;
         this.product = product;
+        this.productData = productData;
         this.recurring = recurring;
         this.unitAmount = unitAmount;
         this.unitAmountDecimal = unitAmountDecimal;
@@ -848,6 +860,8 @@ public class SessionCreateParams extends ApiRequestParams {
 
         private String product;
 
+        private ProductData productData;
+
         private Recurring recurring;
 
         private Long unitAmount;
@@ -860,6 +874,7 @@ public class SessionCreateParams extends ApiRequestParams {
               this.currency,
               this.extraParams,
               this.product,
+              this.productData,
               this.recurring,
               this.unitAmount,
               this.unitAmountDecimal);
@@ -903,9 +918,21 @@ public class SessionCreateParams extends ApiRequestParams {
           return this;
         }
 
-        /** The ID of the product that this price will belong to. */
+        /**
+         * The ID of the product that this price will belong to. One of {@code product} or {@code
+         * product_data} is required.
+         */
         public Builder setProduct(String product) {
           this.product = product;
+          return this;
+        }
+
+        /**
+         * Data used to generate a new product object inline. One of {@code product} or {@code
+         * product_data} is required.
+         */
+        public Builder setProductData(ProductData productData) {
+          this.productData = productData;
           return this;
         }
 
@@ -928,6 +955,187 @@ public class SessionCreateParams extends ApiRequestParams {
         public Builder setUnitAmountDecimal(BigDecimal unitAmountDecimal) {
           this.unitAmountDecimal = unitAmountDecimal;
           return this;
+        }
+      }
+
+      @Getter
+      public static class ProductData {
+        /**
+         * The product's description, meant to be displayable to the customer. Use this field to
+         * optionally store a long form explanation of the product being sold for your own rendering
+         * purposes.
+         */
+        @SerializedName("description")
+        String description;
+
+        /**
+         * Map of extra parameters for custom features not available in this client library. The
+         * content in this map is not serialized under this field's {@code @SerializedName} value.
+         * Instead, each key/value pair is serialized as if the key is a root-level field
+         * (serialized) name in this param object. Effectively, this map is flattened to its parent
+         * instance.
+         */
+        @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
+        Map<String, Object> extraParams;
+
+        /**
+         * A list of up to 8 URLs of images for this product, meant to be displayable to the
+         * customer.
+         */
+        @SerializedName("images")
+        List<String> images;
+
+        /**
+         * Set of key-value pairs that you can attach to an object. This can be useful for storing
+         * additional information about the object in a structured format. Individual keys can be
+         * unset by posting an empty value to them. All keys can be unset by posting an empty value
+         * to {@code metadata}.
+         */
+        @SerializedName("metadata")
+        Map<String, String> metadata;
+
+        /**
+         * The product's name, meant to be displayable to the customer. Whenever this product is
+         * sold via a subscription, name will show up on associated invoice line item descriptions.
+         */
+        @SerializedName("name")
+        String name;
+
+        private ProductData(
+            String description,
+            Map<String, Object> extraParams,
+            List<String> images,
+            Map<String, String> metadata,
+            String name) {
+          this.description = description;
+          this.extraParams = extraParams;
+          this.images = images;
+          this.metadata = metadata;
+          this.name = name;
+        }
+
+        public static Builder builder() {
+          return new Builder();
+        }
+
+        public static class Builder {
+          private String description;
+
+          private Map<String, Object> extraParams;
+
+          private List<String> images;
+
+          private Map<String, String> metadata;
+
+          private String name;
+
+          /** Finalize and obtain parameter instance from this builder. */
+          public ProductData build() {
+            return new ProductData(
+                this.description, this.extraParams, this.images, this.metadata, this.name);
+          }
+
+          /**
+           * The product's description, meant to be displayable to the customer. Use this field to
+           * optionally store a long form explanation of the product being sold for your own
+           * rendering purposes.
+           */
+          public Builder setDescription(String description) {
+            this.description = description;
+            return this;
+          }
+
+          /**
+           * Add a key/value pair to `extraParams` map. A map is initialized for the first
+           * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
+           * map. See {@link SessionCreateParams.LineItem.PriceData.ProductData#extraParams} for the
+           * field documentation.
+           */
+          public Builder putExtraParam(String key, Object value) {
+            if (this.extraParams == null) {
+              this.extraParams = new HashMap<>();
+            }
+            this.extraParams.put(key, value);
+            return this;
+          }
+
+          /**
+           * Add all map key/value pairs to `extraParams` map. A map is initialized for the first
+           * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
+           * map. See {@link SessionCreateParams.LineItem.PriceData.ProductData#extraParams} for the
+           * field documentation.
+           */
+          public Builder putAllExtraParam(Map<String, Object> map) {
+            if (this.extraParams == null) {
+              this.extraParams = new HashMap<>();
+            }
+            this.extraParams.putAll(map);
+            return this;
+          }
+
+          /**
+           * Add an element to `images` list. A list is initialized for the first `add/addAll` call,
+           * and subsequent calls adds additional elements to the original list. See {@link
+           * SessionCreateParams.LineItem.PriceData.ProductData#images} for the field documentation.
+           */
+          public Builder addImage(String element) {
+            if (this.images == null) {
+              this.images = new ArrayList<>();
+            }
+            this.images.add(element);
+            return this;
+          }
+
+          /**
+           * Add all elements to `images` list. A list is initialized for the first `add/addAll`
+           * call, and subsequent calls adds additional elements to the original list. See {@link
+           * SessionCreateParams.LineItem.PriceData.ProductData#images} for the field documentation.
+           */
+          public Builder addAllImage(List<String> elements) {
+            if (this.images == null) {
+              this.images = new ArrayList<>();
+            }
+            this.images.addAll(elements);
+            return this;
+          }
+
+          /**
+           * Add a key/value pair to `metadata` map. A map is initialized for the first `put/putAll`
+           * call, and subsequent calls add additional key/value pairs to the original map. See
+           * {@link SessionCreateParams.LineItem.PriceData.ProductData#metadata} for the field
+           * documentation.
+           */
+          public Builder putMetadata(String key, String value) {
+            if (this.metadata == null) {
+              this.metadata = new HashMap<>();
+            }
+            this.metadata.put(key, value);
+            return this;
+          }
+
+          /**
+           * Add all map key/value pairs to `metadata` map. A map is initialized for the first
+           * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
+           * map. See {@link SessionCreateParams.LineItem.PriceData.ProductData#metadata} for the
+           * field documentation.
+           */
+          public Builder putAllMetadata(Map<String, String> map) {
+            if (this.metadata == null) {
+              this.metadata = new HashMap<>();
+            }
+            this.metadata.putAll(map);
+            return this;
+          }
+
+          /**
+           * The product's name, meant to be displayable to the customer. Whenever this product is
+           * sold via a subscription, name will show up on associated invoice line item
+           * descriptions.
+           */
+          public Builder setName(String name) {
+            this.name = name;
+            return this;
+          }
         }
       }
 
