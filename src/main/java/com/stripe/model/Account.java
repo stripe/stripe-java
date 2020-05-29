@@ -1025,6 +1025,9 @@ public class Account extends ApiResource implements MetadataStore<Account>, Paym
   @Setter
   @EqualsAndHashCode(callSuper = false)
   public static class Settings extends StripeObject {
+    @SerializedName("bacs_debit_payments")
+    BacsDebitPayments bacsDebitPayments;
+
     @SerializedName("branding")
     SettingsBranding branding;
 
@@ -1039,6 +1042,18 @@ public class Account extends ApiResource implements MetadataStore<Account>, Paym
 
     @SerializedName("payouts")
     SettingsPayouts payouts;
+
+    @Getter
+    @Setter
+    @EqualsAndHashCode(callSuper = false)
+    public static class BacsDebitPayments extends StripeObject {
+      /**
+       * The Bacs Direct Debit Display Name for this account. For payments made with Bacs Direct
+       * Debit, this will appear on the mandate, and as the statement descriptor.
+       */
+      @SerializedName("display_name")
+      String displayName;
+    }
   }
 
   @Getter

@@ -23,6 +23,9 @@ public class PaymentMethod extends ApiResource implements HasId, MetadataStore<P
   @SerializedName("au_becs_debit")
   AuBecsDebit auBecsDebit;
 
+  @SerializedName("bacs_debit")
+  BacsDebit bacsDebit;
+
   @SerializedName("billing_details")
   BillingDetails billingDetails;
 
@@ -89,8 +92,8 @@ public class PaymentMethod extends ApiResource implements HasId, MetadataStore<P
    * The type of the PaymentMethod. An additional hash is included on the PaymentMethod with a name
    * matching this value. It contains additional information specific to the PaymentMethod type.
    *
-   * <p>One of {@code au_becs_debit}, {@code card}, {@code card_present}, {@code fpx}, {@code
-   * ideal}, or {@code sepa_debit}.
+   * <p>One of {@code au_becs_debit}, {@code bacs_debit}, {@code card}, {@code card_present}, {@code
+   * fpx}, {@code ideal}, or {@code sepa_debit}.
    */
   @SerializedName("type")
   String type;
@@ -413,6 +416,26 @@ public class PaymentMethod extends ApiResource implements HasId, MetadataStore<P
     /** Last four digits of the bank account number. */
     @SerializedName("last4")
     String last4;
+  }
+
+  @Getter
+  @Setter
+  @EqualsAndHashCode(callSuper = false)
+  public static class BacsDebit extends StripeObject {
+    /**
+     * Uniquely identifies this particular bank account. You can use this attribute to check whether
+     * two bank accounts are the same.
+     */
+    @SerializedName("fingerprint")
+    String fingerprint;
+
+    /** Last four digits of the bank account number. */
+    @SerializedName("last4")
+    String last4;
+
+    /** Sort code of the bank account. (e.g., {@code 10-20-30}) */
+    @SerializedName("sort_code")
+    String sortCode;
   }
 
   @Getter

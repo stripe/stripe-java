@@ -65,9 +65,8 @@ public class SessionCreateParams extends ApiRequestParams {
    * A list of items the customer is purchasing. Use this parameter to pass one-time or recurring <a
    * href="https://stripe.com/docs/api/prices">prices</a>.
    *
-   * <p>Alternatively, if not using recurring prices, this parameter is for one-time payments or
-   * adding invoice line items to a subscription (used in conjunction with {@code
-   * subscription_data.items}).
+   * <p>If not using recurring prices, this parameter is for one-time payments or adding invoice
+   * line items to a subscription (used in conjunction with {@code subscription_data.items}).
    *
    * <p>There is a maximum of 100 line items, however it is recommended to consolidate line items if
    * there are more than a few dozen.
@@ -558,8 +557,8 @@ public class SessionCreateParams extends ApiRequestParams {
     String name;
 
     /**
-     * The ID of the price object. One of {@code price}, {@code price_data} or {@code amount} is
-     * required.
+     * The ID of the price or plan object. One of {@code price}, {@code price_data} or {@code
+     * amount} is required.
      */
     @SerializedName("price")
     String price;
@@ -734,8 +733,8 @@ public class SessionCreateParams extends ApiRequestParams {
       }
 
       /**
-       * The ID of the price object. One of {@code price}, {@code price_data} or {@code amount} is
-       * required.
+       * The ID of the price or plan object. One of {@code price}, {@code price_data} or {@code
+       * amount} is required.
        */
       public Builder setPrice(String price) {
         this.price = price;
@@ -2980,8 +2979,8 @@ public class SessionCreateParams extends ApiRequestParams {
     Map<String, Object> extraParams;
 
     /**
-     * A list of items, each with an attached plan, that the customer is subscribing to. Use this
-     * parameter for subscriptions. To create one-time payments, use {@code line_items}.
+     * A list of items, each with an attached plan, that the customer is subscribing to. Prefer
+     * using {@code line_items}.
      */
     @SerializedName("items")
     List<Item> items;

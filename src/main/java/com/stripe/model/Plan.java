@@ -213,7 +213,7 @@ public class Plan extends ApiResource implements HasId, MetadataStore<Plan> {
 
   /**
    * You can create plans using the API, or in the Stripe <a
-   * href="https://dashboard.stripe.com/subscriptions/products">Dashboard</a>.
+   * href="https://dashboard.stripe.com/products">Dashboard</a>.
    */
   public static Plan create(Map<String, Object> params) throws StripeException {
     return create(params, (RequestOptions) null);
@@ -221,7 +221,7 @@ public class Plan extends ApiResource implements HasId, MetadataStore<Plan> {
 
   /**
    * You can create plans using the API, or in the Stripe <a
-   * href="https://dashboard.stripe.com/subscriptions/products">Dashboard</a>.
+   * href="https://dashboard.stripe.com/products">Dashboard</a>.
    */
   public static Plan create(Map<String, Object> params, RequestOptions options)
       throws StripeException {
@@ -231,7 +231,7 @@ public class Plan extends ApiResource implements HasId, MetadataStore<Plan> {
 
   /**
    * You can create plans using the API, or in the Stripe <a
-   * href="https://dashboard.stripe.com/subscriptions/products">Dashboard</a>.
+   * href="https://dashboard.stripe.com/products">Dashboard</a>.
    */
   public static Plan create(PlanCreateParams params) throws StripeException {
     return create(params, (RequestOptions) null);
@@ -239,7 +239,7 @@ public class Plan extends ApiResource implements HasId, MetadataStore<Plan> {
 
   /**
    * You can create plans using the API, or in the Stripe <a
-   * href="https://dashboard.stripe.com/subscriptions/products">Dashboard</a>.
+   * href="https://dashboard.stripe.com/products">Dashboard</a>.
    */
   public static Plan create(PlanCreateParams params, RequestOptions options)
       throws StripeException {

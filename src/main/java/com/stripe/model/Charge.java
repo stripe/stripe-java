@@ -1008,6 +1008,9 @@ public class Charge extends ApiResource implements MetadataStore<Charge>, Balanc
     @SerializedName("au_becs_debit")
     AuBecsDebit auBecsDebit;
 
+    @SerializedName("bacs_debit")
+    BacsDebit bacsDebit;
+
     @SerializedName("bancontact")
     Bancontact bancontact;
 
@@ -1191,6 +1194,30 @@ public class Charge extends ApiResource implements MetadataStore<Charge>, Balanc
       /** ID of the mandate used to make this payment. */
       @SerializedName("mandate")
       String mandate;
+    }
+
+    @Getter
+    @Setter
+    @EqualsAndHashCode(callSuper = false)
+    public static class BacsDebit extends StripeObject {
+      /**
+       * Uniquely identifies this particular bank account. You can use this attribute to check
+       * whether two bank accounts are the same.
+       */
+      @SerializedName("fingerprint")
+      String fingerprint;
+
+      /** Last four digits of the bank account number. */
+      @SerializedName("last4")
+      String last4;
+
+      /** ID of the mandate used to make this payment. */
+      @SerializedName("mandate")
+      String mandate;
+
+      /** Sort code of the bank account. (e.g., {@code 10-20-30}) */
+      @SerializedName("sort_code")
+      String sortCode;
     }
 
     @Getter
@@ -1398,8 +1425,7 @@ public class Charge extends ApiResource implements MetadataStore<Charge>, Balanc
         Boolean authenticated;
 
         /**
-         * For authenticated transactions: whether issuing bank authenticated the cardholder with a
-         * traditional challenge screen, or with device data via the 3DS2 frictionless flow.
+         * For authenticated transactions: how the customer was authenticated by the issuing bank.
          *
          * <p>One of {@code challenge}, or {@code frictionless}.
          */
@@ -1416,7 +1442,8 @@ public class Charge extends ApiResource implements MetadataStore<Charge>, Balanc
         String result;
 
         /**
-         * Additional information about why 3D Secure succeeded or failed.
+         * Additional information about why 3D Secure succeeded or failed based on the {@code
+         * result}.
          *
          * <p>One of {@code abandoned}, {@code bypassed}, {@code canceled}, {@code
          * card_not_enrolled}, {@code network_not_supported}, {@code protocol_error}, or {@code

@@ -113,7 +113,7 @@ public class PersonCollectionCreateParams extends ApiRequestParams {
   @SerializedName("relationship")
   Relationship relationship;
 
-  /** The last 4 digits of the person's social security number. */
+  /** The last four digits of the person's Social Security number (U.S. only). */
   @SerializedName("ssn_last_4")
   String ssnLast4;
 
@@ -465,7 +465,7 @@ public class PersonCollectionCreateParams extends ApiRequestParams {
       return this;
     }
 
-    /** The last 4 digits of the person's social security number. */
+    /** The last four digits of the person's Social Security number (U.S. only). */
     public Builder setSsnLast4(String ssnLast4) {
       this.ssnLast4 = ssnLast4;
       return this;
