@@ -1,5 +1,8 @@
 # Changelog
 
+## 19.16.0 - 2020-05-29
+* [#1036](https://github.com/stripe/stripe-java/pull/1036) Add support for BACS Debit as a `PaymentMethod`
+
 ## 19.15.0 - 2020-05-28
 * [#1035](https://github.com/stripe/stripe-java/pull/1035) Multiple API changes
   * Add `payment_method_details[card][three_d_secure][authentication_flow]` on `Charge`
