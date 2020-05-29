@@ -121,7 +121,10 @@ public class Person extends ApiResource implements HasId, MetadataStore<Person> 
   @SerializedName("requirements")
   Requirements requirements;
 
-  /** Whether the last 4 digits of this person's SSN have been provided. */
+  /**
+   * Whether the last four digits of the person's Social Security number have been provided (U.S.
+   * only).
+   */
   @SerializedName("ssn_last_4_provided")
   Boolean ssnLast4Provided;
 

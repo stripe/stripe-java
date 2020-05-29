@@ -65,12 +65,12 @@ public class Session extends ApiResource implements HasId {
    * If provided, this value will be used when the Customer object is created. If not provided,
    * customers will be asked to enter their email address. Use this parameter to prefill customer
    * data if you already have an email on file. To access information about the customer once a
-   * session is complete, use the {@code customer} field.
+   * session is complete, use the {@code customer} attribute.
    */
   @SerializedName("customer_email")
   String customerEmail;
 
-  /** The line items, plans, or SKUs purchased by the customer. */
+  /** The line items, plans, or SKUs purchased by the customer. Prefer using {@code line_items}. */
   @SerializedName("display_items")
   List<Session.DisplayItem> displayItems;
 
