@@ -1,5 +1,8 @@
 # Changelog
 
+## 19.20.0 - 2020-06-03
+* [#1041](https://github.com/stripe/stripe-java/pull/1041) Add support for `payment_intent_data[transfer_group]` on Checkout `Session`
+
 ## 19.19.0 - 2020-06-03
 * [#1040](https://github.com/stripe/stripe-java/pull/1040) Add support for Bancontact, EPS, Giropay and P24 on Checkout `Session`
 
