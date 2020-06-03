@@ -1087,8 +1087,24 @@ public class PaymentIntent extends ApiResource implements HasId, MetadataStore<P
   @Setter
   @EqualsAndHashCode(callSuper = false)
   public static class PaymentMethodOptions extends StripeObject {
+    @SerializedName("bancontact")
+    Bancontact bancontact;
+
     @SerializedName("card")
     Card card;
+
+    @Getter
+    @Setter
+    @EqualsAndHashCode(callSuper = false)
+    public static class Bancontact extends StripeObject {
+      /**
+       * Preferred language of the Bancontact authorization page that the customer is redirected to.
+       *
+       * <p>One of {@code de}, {@code en}, {@code fr}, or {@code nl}.
+       */
+      @SerializedName("preferred_language")
+      String preferredLanguage;
+    }
 
     @Getter
     @Setter

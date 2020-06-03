@@ -63,10 +63,8 @@ public class SessionCreateParams extends ApiRequestParams {
 
   /**
    * A list of items the customer is purchasing. Use this parameter to pass one-time or recurring <a
-   * href="https://stripe.com/docs/api/prices">prices</a>.
-   *
-   * <p>If not using recurring prices, this parameter is for one-time payments or adding invoice
-   * line items to a subscription (used in conjunction with {@code subscription_data.items}).
+   * href="https://stripe.com/docs/api/prices">prices</a>. One-time prices in {@code subscription}
+   * mode will be on the initial invoice only.
    *
    * <p>There is a maximum of 100 line items, however it is recommended to consolidate line items if
    * there are more than a few dozen.
@@ -105,7 +103,16 @@ public class SessionCreateParams extends ApiRequestParams {
   @SerializedName("payment_intent_data")
   PaymentIntentData paymentIntentData;
 
-  /** A list of the types of payment methods (e.g., card) this Checkout session can accept. */
+  /**
+   * A list of the types of payment methods (e.g., {@code card}) this Checkout session can accept.
+   *
+   * <p>Read more about the supported payment methods and their requirements in our <a
+   * href="https://stripe.com/docs/payments/checkout/payment-methods">payment method details
+   * guide</a>.
+   *
+   * <p>If multiple payment methods are passed, Checkout will dynamically reorder them to prioritize
+   * the most relevant payment methods based on the customer's location and other characteristics.
+   */
   @SerializedName("payment_method_types")
   List<PaymentMethodType> paymentMethodTypes;
 
@@ -820,7 +827,7 @@ public class SessionCreateParams extends ApiRequestParams {
       @SerializedName("recurring")
       Recurring recurring;
 
-      /** A positive integer in %s (or 0 for a free price) representing how much to charge. */
+      /** A positive integer in %s representing how much to charge. */
       @SerializedName("unit_amount")
       Long unitAmount;
 
@@ -941,7 +948,7 @@ public class SessionCreateParams extends ApiRequestParams {
           return this;
         }
 
-        /** A positive integer in %s (or 0 for a free price) representing how much to charge. */
+        /** A positive integer in %s representing how much to charge. */
         public Builder setUnitAmount(Long unitAmount) {
           this.unitAmount = unitAmount;
           return this;
@@ -3369,11 +3376,20 @@ public class SessionCreateParams extends ApiRequestParams {
     @SerializedName("auto")
     AUTO("auto"),
 
+    @SerializedName("bg")
+    BG("bg"),
+
+    @SerializedName("cs")
+    CS("cs"),
+
     @SerializedName("da")
     DA("da"),
 
     @SerializedName("de")
     DE("de"),
+
+    @SerializedName("el")
+    EL("el"),
 
     @SerializedName("en")
     EN("en"),
@@ -3381,11 +3397,17 @@ public class SessionCreateParams extends ApiRequestParams {
     @SerializedName("es")
     ES("es"),
 
+    @SerializedName("et")
+    ET("et"),
+
     @SerializedName("fi")
     FI("fi"),
 
     @SerializedName("fr")
     FR("fr"),
+
+    @SerializedName("hu")
+    HU("hu"),
 
     @SerializedName("it")
     IT("it"),
@@ -3393,8 +3415,17 @@ public class SessionCreateParams extends ApiRequestParams {
     @SerializedName("ja")
     JA("ja"),
 
+    @SerializedName("lt")
+    LT("lt"),
+
+    @SerializedName("lv")
+    LV("lv"),
+
     @SerializedName("ms")
     MS("ms"),
+
+    @SerializedName("mt")
+    MT("mt"),
 
     @SerializedName("nb")
     NB("nb"),
@@ -3411,8 +3442,23 @@ public class SessionCreateParams extends ApiRequestParams {
     @SerializedName("pt-BR")
     PT_BR("pt-BR"),
 
+    @SerializedName("ro")
+    RO("ro"),
+
+    @SerializedName("ru")
+    RU("ru"),
+
+    @SerializedName("sk")
+    SK("sk"),
+
+    @SerializedName("sl")
+    SL("sl"),
+
     @SerializedName("sv")
     SV("sv"),
+
+    @SerializedName("tr")
+    TR("tr"),
 
     @SerializedName("zh")
     ZH("zh");

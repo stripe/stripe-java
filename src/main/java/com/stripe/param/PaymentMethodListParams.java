@@ -204,17 +204,29 @@ public class PaymentMethodListParams extends ApiRequestParams {
     @SerializedName("au_becs_debit")
     AU_BECS_DEBIT("au_becs_debit"),
 
+    @SerializedName("bancontact")
+    BANCONTACT("bancontact"),
+
     @SerializedName("card")
     CARD("card"),
 
     @SerializedName("card_present")
     CARD_PRESENT("card_present"),
 
+    @SerializedName("eps")
+    EPS("eps"),
+
     @SerializedName("fpx")
     FPX("fpx"),
 
+    @SerializedName("giropay")
+    GIROPAY("giropay"),
+
     @SerializedName("ideal")
     IDEAL("ideal"),
+
+    @SerializedName("p24")
+    P24("p24"),
 
     @SerializedName("sepa_debit")
     SEPA_DEBIT("sepa_debit");

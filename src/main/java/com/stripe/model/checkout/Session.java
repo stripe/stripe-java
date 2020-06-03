@@ -94,9 +94,10 @@ public class Session extends ApiResource implements HasId {
    * The IETF language tag of the locale Checkout is displayed in. If blank or {@code auto}, the
    * browser's locale is used.
    *
-   * <p>One of {@code auto}, {@code da}, {@code de}, {@code en}, {@code es}, {@code fi}, {@code fr},
-   * {@code it}, {@code ja}, {@code ms}, {@code nb}, {@code nl}, {@code pl}, {@code pt}, {@code
-   * pt-BR}, {@code sv}, or {@code zh}.
+   * <p>One of {@code auto}, {@code bg}, {@code cs}, {@code da}, {@code de}, {@code el}, {@code en},
+   * {@code es}, {@code et}, {@code fi}, {@code fr}, {@code hu}, {@code it}, {@code ja}, {@code lt},
+   * {@code lv}, {@code ms}, {@code mt}, {@code nb}, {@code nl}, {@code pl}, {@code pt}, {@code
+   * pt-BR}, {@code ro}, {@code ru}, {@code sk}, {@code sl}, {@code sv}, {@code tr}, or {@code zh}.
    */
   @SerializedName("locale")
   String locale;

@@ -1207,6 +1207,13 @@ public class PaymentIntentCreateParams extends ApiRequestParams {
 
   @Getter
   public static class PaymentMethodOptions {
+    /**
+     * If this is a {@code bancontact} PaymentMethod, this sub-hash contains details about the
+     * Bancontact payment method options.
+     */
+    @SerializedName("bancontact")
+    Object bancontact;
+
     /** Configuration for any card payments attempted on this PaymentIntent. */
     @SerializedName("card")
     Object card;
@@ -1220,7 +1227,8 @@ public class PaymentIntentCreateParams extends ApiRequestParams {
     @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
     Map<String, Object> extraParams;
 
-    private PaymentMethodOptions(Object card, Map<String, Object> extraParams) {
+    private PaymentMethodOptions(Object bancontact, Object card, Map<String, Object> extraParams) {
+      this.bancontact = bancontact;
       this.card = card;
       this.extraParams = extraParams;
     }
@@ -1230,13 +1238,33 @@ public class PaymentIntentCreateParams extends ApiRequestParams {
     }
 
     public static class Builder {
+      private Object bancontact;
+
       private Object card;
 
       private Map<String, Object> extraParams;
 
       /** Finalize and obtain parameter instance from this builder. */
       public PaymentMethodOptions build() {
-        return new PaymentMethodOptions(this.card, this.extraParams);
+        return new PaymentMethodOptions(this.bancontact, this.card, this.extraParams);
+      }
+
+      /**
+       * If this is a {@code bancontact} PaymentMethod, this sub-hash contains details about the
+       * Bancontact payment method options.
+       */
+      public Builder setBancontact(Bancontact bancontact) {
+        this.bancontact = bancontact;
+        return this;
+      }
+
+      /**
+       * If this is a {@code bancontact} PaymentMethod, this sub-hash contains details about the
+       * Bancontact payment method options.
+       */
+      public Builder setBancontact(EmptyParam bancontact) {
+        this.bancontact = bancontact;
+        return this;
       }
 
       /** Configuration for any card payments attempted on this PaymentIntent. */
@@ -1276,6 +1304,102 @@ public class PaymentIntentCreateParams extends ApiRequestParams {
         }
         this.extraParams.putAll(map);
         return this;
+      }
+    }
+
+    @Getter
+    public static class Bancontact {
+      /**
+       * Map of extra parameters for custom features not available in this client library. The
+       * content in this map is not serialized under this field's {@code @SerializedName} value.
+       * Instead, each key/value pair is serialized as if the key is a root-level field (serialized)
+       * name in this param object. Effectively, this map is flattened to its parent instance.
+       */
+      @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
+      Map<String, Object> extraParams;
+
+      /**
+       * Preferred language of the Bancontact authorization page that the customer is redirected to.
+       */
+      @SerializedName("preferred_language")
+      PreferredLanguage preferredLanguage;
+
+      private Bancontact(Map<String, Object> extraParams, PreferredLanguage preferredLanguage) {
+        this.extraParams = extraParams;
+        this.preferredLanguage = preferredLanguage;
+      }
+
+      public static Builder builder() {
+        return new Builder();
+      }
+
+      public static class Builder {
+        private Map<String, Object> extraParams;
+
+        private PreferredLanguage preferredLanguage;
+
+        /** Finalize and obtain parameter instance from this builder. */
+        public Bancontact build() {
+          return new Bancontact(this.extraParams, this.preferredLanguage);
+        }
+
+        /**
+         * Add a key/value pair to `extraParams` map. A map is initialized for the first
+         * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
+         * map. See {@link PaymentIntentCreateParams.PaymentMethodOptions.Bancontact#extraParams}
+         * for the field documentation.
+         */
+        public Builder putExtraParam(String key, Object value) {
+          if (this.extraParams == null) {
+            this.extraParams = new HashMap<>();
+          }
+          this.extraParams.put(key, value);
+          return this;
+        }
+
+        /**
+         * Add all map key/value pairs to `extraParams` map. A map is initialized for the first
+         * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
+         * map. See {@link PaymentIntentCreateParams.PaymentMethodOptions.Bancontact#extraParams}
+         * for the field documentation.
+         */
+        public Builder putAllExtraParam(Map<String, Object> map) {
+          if (this.extraParams == null) {
+            this.extraParams = new HashMap<>();
+          }
+          this.extraParams.putAll(map);
+          return this;
+        }
+
+        /**
+         * Preferred language of the Bancontact authorization page that the customer is redirected
+         * to.
+         */
+        public Builder setPreferredLanguage(PreferredLanguage preferredLanguage) {
+          this.preferredLanguage = preferredLanguage;
+          return this;
+        }
+      }
+
+      public enum PreferredLanguage implements ApiRequestParams.EnumParam {
+        @SerializedName("de")
+        DE("de"),
+
+        @SerializedName("en")
+        EN("en"),
+
+        @SerializedName("fr")
+        FR("fr"),
+
+        @SerializedName("nl")
+        NL("nl");
+
+        @Getter(onMethod_ = {@Override})
+        private final String value;
+
+        PreferredLanguage(String value) {
+          this.value = value;
+        }
       }
     }
 
