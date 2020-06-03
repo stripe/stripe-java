@@ -3493,14 +3493,26 @@ public class SessionCreateParams extends ApiRequestParams {
     @SerializedName("bacs_debit")
     BACS_DEBIT("bacs_debit"),
 
+    @SerializedName("bancontact")
+    BANCONTACT("bancontact"),
+
     @SerializedName("card")
     CARD("card"),
+
+    @SerializedName("eps")
+    EPS("eps"),
 
     @SerializedName("fpx")
     FPX("fpx"),
 
+    @SerializedName("giropay")
+    GIROPAY("giropay"),
+
     @SerializedName("ideal")
-    IDEAL("ideal");
+    IDEAL("ideal"),
+
+    @SerializedName("p24")
+    P24("p24");
 
     @Getter(onMethod_ = {@Override})
     private final String value;
