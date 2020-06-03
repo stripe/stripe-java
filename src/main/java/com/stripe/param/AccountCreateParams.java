@@ -4235,6 +4235,9 @@ public class AccountCreateParams extends ApiRequestParams {
     @SerializedName("au_becs_debit_payments")
     AU_BECS_DEBIT_PAYMENTS("au_becs_debit_payments"),
 
+    @SerializedName("bacs_debit_payments")
+    BACS_DEBIT_PAYMENTS("bacs_debit_payments"),
+
     @SerializedName("card_issuing")
     CARD_ISSUING("card_issuing"),
 
