@@ -1363,6 +1363,14 @@ public class SessionCreateParams extends ApiRequestParams {
     @SerializedName("transfer_data")
     TransferData transferData;
 
+    /**
+     * A string that identifies the resulting payment as part of a group. See the PaymentIntents <a
+     * href="https://stripe.com/docs/payments/connected-accounts">use case for connected
+     * accounts</a> for details.
+     */
+    @SerializedName("transfer_group")
+    String transferGroup;
+
     private PaymentIntentData(
         Long applicationFeeAmount,
         CaptureMethod captureMethod,
@@ -1375,7 +1383,8 @@ public class SessionCreateParams extends ApiRequestParams {
         Shipping shipping,
         String statementDescriptor,
         String statementDescriptorSuffix,
-        TransferData transferData) {
+        TransferData transferData,
+        String transferGroup) {
       this.applicationFeeAmount = applicationFeeAmount;
       this.captureMethod = captureMethod;
       this.description = description;
@@ -1388,6 +1397,7 @@ public class SessionCreateParams extends ApiRequestParams {
       this.statementDescriptor = statementDescriptor;
       this.statementDescriptorSuffix = statementDescriptorSuffix;
       this.transferData = transferData;
+      this.transferGroup = transferGroup;
     }
 
     public static Builder builder() {
@@ -1419,6 +1429,8 @@ public class SessionCreateParams extends ApiRequestParams {
 
       private TransferData transferData;
 
+      private String transferGroup;
+
       /** Finalize and obtain parameter instance from this builder. */
       public PaymentIntentData build() {
         return new PaymentIntentData(
@@ -1433,7 +1445,8 @@ public class SessionCreateParams extends ApiRequestParams {
             this.shipping,
             this.statementDescriptor,
             this.statementDescriptorSuffix,
-            this.transferData);
+            this.transferData,
+            this.transferGroup);
       }
 
       /**
@@ -1583,6 +1596,16 @@ public class SessionCreateParams extends ApiRequestParams {
        */
       public Builder setTransferData(TransferData transferData) {
         this.transferData = transferData;
+        return this;
+      }
+
+      /**
+       * A string that identifies the resulting payment as part of a group. See the PaymentIntents
+       * <a href="https://stripe.com/docs/payments/connected-accounts">use case for connected
+       * accounts</a> for details.
+       */
+      public Builder setTransferGroup(String transferGroup) {
+        this.transferGroup = transferGroup;
         return this;
       }
     }
