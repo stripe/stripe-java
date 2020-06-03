@@ -25,6 +25,13 @@ public class PaymentMethodCreateParams extends ApiRequestParams {
   BacsDebit bacsDebit;
 
   /**
+   * If this is a {@code bancontact} PaymentMethod, this hash contains details about the Bancontact
+   * payment method.
+   */
+  @SerializedName("bancontact")
+  Bancontact bancontact;
+
+  /**
    * Billing information associated with the PaymentMethod that may be used or required by
    * particular types of payment methods.
    */
@@ -46,6 +53,13 @@ public class PaymentMethodCreateParams extends ApiRequestParams {
   @SerializedName("customer")
   String customer;
 
+  /**
+   * If this is an {@code eps} PaymentMethod, this hash contains details about the EPS payment
+   * method.
+   */
+  @SerializedName("eps")
+  Eps eps;
+
   /** Specifies which fields in the response should be expanded. */
   @SerializedName("expand")
   List<String> expand;
@@ -65,6 +79,13 @@ public class PaymentMethodCreateParams extends ApiRequestParams {
    */
   @SerializedName("fpx")
   Fpx fpx;
+
+  /**
+   * If this is a {@code giropay} PaymentMethod, this hash contains details about the Giropay
+   * payment method.
+   */
+  @SerializedName("giropay")
+  Giropay giropay;
 
   /**
    * If this is an {@code ideal} PaymentMethod, this hash contains details about the iDEAL payment
@@ -88,6 +109,13 @@ public class PaymentMethodCreateParams extends ApiRequestParams {
    */
   @SerializedName("metadata")
   Map<String, String> metadata;
+
+  /**
+   * If this is a {@code p24} PaymentMethod, this hash contains details about the P24 payment
+   * method.
+   */
+  @SerializedName("p24")
+  P24 p24;
 
   /** The PaymentMethod to share. */
   @SerializedName("payment_method")
@@ -113,29 +141,37 @@ public class PaymentMethodCreateParams extends ApiRequestParams {
   private PaymentMethodCreateParams(
       AuBecsDebit auBecsDebit,
       BacsDebit bacsDebit,
+      Bancontact bancontact,
       BillingDetails billingDetails,
       Object card,
       String customer,
+      Eps eps,
       List<String> expand,
       Map<String, Object> extraParams,
       Fpx fpx,
+      Giropay giropay,
       Ideal ideal,
       InteracPresent interacPresent,
       Map<String, String> metadata,
+      P24 p24,
       String paymentMethod,
       SepaDebit sepaDebit,
       Type type) {
     this.auBecsDebit = auBecsDebit;
     this.bacsDebit = bacsDebit;
+    this.bancontact = bancontact;
     this.billingDetails = billingDetails;
     this.card = card;
     this.customer = customer;
+    this.eps = eps;
     this.expand = expand;
     this.extraParams = extraParams;
     this.fpx = fpx;
+    this.giropay = giropay;
     this.ideal = ideal;
     this.interacPresent = interacPresent;
     this.metadata = metadata;
+    this.p24 = p24;
     this.paymentMethod = paymentMethod;
     this.sepaDebit = sepaDebit;
     this.type = type;
@@ -150,11 +186,15 @@ public class PaymentMethodCreateParams extends ApiRequestParams {
 
     private BacsDebit bacsDebit;
 
+    private Bancontact bancontact;
+
     private BillingDetails billingDetails;
 
     private Object card;
 
     private String customer;
+
+    private Eps eps;
 
     private List<String> expand;
 
@@ -162,11 +202,15 @@ public class PaymentMethodCreateParams extends ApiRequestParams {
 
     private Fpx fpx;
 
+    private Giropay giropay;
+
     private Ideal ideal;
 
     private InteracPresent interacPresent;
 
     private Map<String, String> metadata;
+
+    private P24 p24;
 
     private String paymentMethod;
 
@@ -179,15 +223,19 @@ public class PaymentMethodCreateParams extends ApiRequestParams {
       return new PaymentMethodCreateParams(
           this.auBecsDebit,
           this.bacsDebit,
+          this.bancontact,
           this.billingDetails,
           this.card,
           this.customer,
+          this.eps,
           this.expand,
           this.extraParams,
           this.fpx,
+          this.giropay,
           this.ideal,
           this.interacPresent,
           this.metadata,
+          this.p24,
           this.paymentMethod,
           this.sepaDebit,
           this.type);
@@ -208,6 +256,15 @@ public class PaymentMethodCreateParams extends ApiRequestParams {
      */
     public Builder setBacsDebit(BacsDebit bacsDebit) {
       this.bacsDebit = bacsDebit;
+      return this;
+    }
+
+    /**
+     * If this is a {@code bancontact} PaymentMethod, this hash contains details about the
+     * Bancontact payment method.
+     */
+    public Builder setBancontact(Bancontact bancontact) {
+      this.bancontact = bancontact;
       return this;
     }
 
@@ -249,6 +306,15 @@ public class PaymentMethodCreateParams extends ApiRequestParams {
     /** The {@code Customer} to whom the original PaymentMethod is attached. */
     public Builder setCustomer(String customer) {
       this.customer = customer;
+      return this;
+    }
+
+    /**
+     * If this is an {@code eps} PaymentMethod, this hash contains details about the EPS payment
+     * method.
+     */
+    public Builder setEps(Eps eps) {
+      this.eps = eps;
       return this;
     }
 
@@ -314,6 +380,15 @@ public class PaymentMethodCreateParams extends ApiRequestParams {
     }
 
     /**
+     * If this is a {@code giropay} PaymentMethod, this hash contains details about the Giropay
+     * payment method.
+     */
+    public Builder setGiropay(Giropay giropay) {
+      this.giropay = giropay;
+      return this;
+    }
+
+    /**
      * If this is an {@code ideal} PaymentMethod, this hash contains details about the iDEAL payment
      * method.
      */
@@ -354,6 +429,15 @@ public class PaymentMethodCreateParams extends ApiRequestParams {
         this.metadata = new HashMap<>();
       }
       this.metadata.putAll(map);
+      return this;
+    }
+
+    /**
+     * If this is a {@code p24} PaymentMethod, this hash contains details about the P24 payment
+     * method.
+     */
+    public Builder setP24(P24 p24) {
+      this.p24 = p24;
       return this;
     }
 
@@ -542,6 +626,61 @@ public class PaymentMethodCreateParams extends ApiRequestParams {
       /** Sort code of the bank account. (e.g., {@code 10-20-30}) */
       public Builder setSortCode(String sortCode) {
         this.sortCode = sortCode;
+        return this;
+      }
+    }
+  }
+
+  @Getter
+  public static class Bancontact {
+    /**
+     * Map of extra parameters for custom features not available in this client library. The content
+     * in this map is not serialized under this field's {@code @SerializedName} value. Instead, each
+     * key/value pair is serialized as if the key is a root-level field (serialized) name in this
+     * param object. Effectively, this map is flattened to its parent instance.
+     */
+    @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
+    Map<String, Object> extraParams;
+
+    private Bancontact(Map<String, Object> extraParams) {
+      this.extraParams = extraParams;
+    }
+
+    public static Builder builder() {
+      return new Builder();
+    }
+
+    public static class Builder {
+      private Map<String, Object> extraParams;
+
+      /** Finalize and obtain parameter instance from this builder. */
+      public Bancontact build() {
+        return new Bancontact(this.extraParams);
+      }
+
+      /**
+       * Add a key/value pair to `extraParams` map. A map is initialized for the first `put/putAll`
+       * call, and subsequent calls add additional key/value pairs to the original map. See {@link
+       * PaymentMethodCreateParams.Bancontact#extraParams} for the field documentation.
+       */
+      public Builder putExtraParam(String key, Object value) {
+        if (this.extraParams == null) {
+          this.extraParams = new HashMap<>();
+        }
+        this.extraParams.put(key, value);
+        return this;
+      }
+
+      /**
+       * Add all map key/value pairs to `extraParams` map. A map is initialized for the first
+       * `put/putAll` call, and subsequent calls add additional key/value pairs to the original map.
+       * See {@link PaymentMethodCreateParams.Bancontact#extraParams} for the field documentation.
+       */
+      public Builder putAllExtraParam(Map<String, Object> map) {
+        if (this.extraParams == null) {
+          this.extraParams = new HashMap<>();
+        }
+        this.extraParams.putAll(map);
         return this;
       }
     }
@@ -988,6 +1127,61 @@ public class PaymentMethodCreateParams extends ApiRequestParams {
   }
 
   @Getter
+  public static class Eps {
+    /**
+     * Map of extra parameters for custom features not available in this client library. The content
+     * in this map is not serialized under this field's {@code @SerializedName} value. Instead, each
+     * key/value pair is serialized as if the key is a root-level field (serialized) name in this
+     * param object. Effectively, this map is flattened to its parent instance.
+     */
+    @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
+    Map<String, Object> extraParams;
+
+    private Eps(Map<String, Object> extraParams) {
+      this.extraParams = extraParams;
+    }
+
+    public static Builder builder() {
+      return new Builder();
+    }
+
+    public static class Builder {
+      private Map<String, Object> extraParams;
+
+      /** Finalize and obtain parameter instance from this builder. */
+      public Eps build() {
+        return new Eps(this.extraParams);
+      }
+
+      /**
+       * Add a key/value pair to `extraParams` map. A map is initialized for the first `put/putAll`
+       * call, and subsequent calls add additional key/value pairs to the original map. See {@link
+       * PaymentMethodCreateParams.Eps#extraParams} for the field documentation.
+       */
+      public Builder putExtraParam(String key, Object value) {
+        if (this.extraParams == null) {
+          this.extraParams = new HashMap<>();
+        }
+        this.extraParams.put(key, value);
+        return this;
+      }
+
+      /**
+       * Add all map key/value pairs to `extraParams` map. A map is initialized for the first
+       * `put/putAll` call, and subsequent calls add additional key/value pairs to the original map.
+       * See {@link PaymentMethodCreateParams.Eps#extraParams} for the field documentation.
+       */
+      public Builder putAllExtraParam(Map<String, Object> map) {
+        if (this.extraParams == null) {
+          this.extraParams = new HashMap<>();
+        }
+        this.extraParams.putAll(map);
+        return this;
+      }
+    }
+  }
+
+  @Getter
   public static class Fpx {
     /** Account holder type for FPX transaction. */
     @SerializedName("account_holder_type")
@@ -1148,6 +1342,61 @@ public class PaymentMethodCreateParams extends ApiRequestParams {
 
       Bank(String value) {
         this.value = value;
+      }
+    }
+  }
+
+  @Getter
+  public static class Giropay {
+    /**
+     * Map of extra parameters for custom features not available in this client library. The content
+     * in this map is not serialized under this field's {@code @SerializedName} value. Instead, each
+     * key/value pair is serialized as if the key is a root-level field (serialized) name in this
+     * param object. Effectively, this map is flattened to its parent instance.
+     */
+    @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
+    Map<String, Object> extraParams;
+
+    private Giropay(Map<String, Object> extraParams) {
+      this.extraParams = extraParams;
+    }
+
+    public static Builder builder() {
+      return new Builder();
+    }
+
+    public static class Builder {
+      private Map<String, Object> extraParams;
+
+      /** Finalize and obtain parameter instance from this builder. */
+      public Giropay build() {
+        return new Giropay(this.extraParams);
+      }
+
+      /**
+       * Add a key/value pair to `extraParams` map. A map is initialized for the first `put/putAll`
+       * call, and subsequent calls add additional key/value pairs to the original map. See {@link
+       * PaymentMethodCreateParams.Giropay#extraParams} for the field documentation.
+       */
+      public Builder putExtraParam(String key, Object value) {
+        if (this.extraParams == null) {
+          this.extraParams = new HashMap<>();
+        }
+        this.extraParams.put(key, value);
+        return this;
+      }
+
+      /**
+       * Add all map key/value pairs to `extraParams` map. A map is initialized for the first
+       * `put/putAll` call, and subsequent calls add additional key/value pairs to the original map.
+       * See {@link PaymentMethodCreateParams.Giropay#extraParams} for the field documentation.
+       */
+      public Builder putAllExtraParam(Map<String, Object> map) {
+        if (this.extraParams == null) {
+          this.extraParams = new HashMap<>();
+        }
+        this.extraParams.putAll(map);
+        return this;
       }
     }
   }
@@ -1322,6 +1571,61 @@ public class PaymentMethodCreateParams extends ApiRequestParams {
   }
 
   @Getter
+  public static class P24 {
+    /**
+     * Map of extra parameters for custom features not available in this client library. The content
+     * in this map is not serialized under this field's {@code @SerializedName} value. Instead, each
+     * key/value pair is serialized as if the key is a root-level field (serialized) name in this
+     * param object. Effectively, this map is flattened to its parent instance.
+     */
+    @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
+    Map<String, Object> extraParams;
+
+    private P24(Map<String, Object> extraParams) {
+      this.extraParams = extraParams;
+    }
+
+    public static Builder builder() {
+      return new Builder();
+    }
+
+    public static class Builder {
+      private Map<String, Object> extraParams;
+
+      /** Finalize and obtain parameter instance from this builder. */
+      public P24 build() {
+        return new P24(this.extraParams);
+      }
+
+      /**
+       * Add a key/value pair to `extraParams` map. A map is initialized for the first `put/putAll`
+       * call, and subsequent calls add additional key/value pairs to the original map. See {@link
+       * PaymentMethodCreateParams.P24#extraParams} for the field documentation.
+       */
+      public Builder putExtraParam(String key, Object value) {
+        if (this.extraParams == null) {
+          this.extraParams = new HashMap<>();
+        }
+        this.extraParams.put(key, value);
+        return this;
+      }
+
+      /**
+       * Add all map key/value pairs to `extraParams` map. A map is initialized for the first
+       * `put/putAll` call, and subsequent calls add additional key/value pairs to the original map.
+       * See {@link PaymentMethodCreateParams.P24#extraParams} for the field documentation.
+       */
+      public Builder putAllExtraParam(Map<String, Object> map) {
+        if (this.extraParams == null) {
+          this.extraParams = new HashMap<>();
+        }
+        this.extraParams.putAll(map);
+        return this;
+      }
+    }
+  }
+
+  @Getter
   public static class SepaDebit {
     /**
      * Map of extra parameters for custom features not available in this client library. The content
@@ -1396,17 +1700,29 @@ public class PaymentMethodCreateParams extends ApiRequestParams {
     @SerializedName("bacs_debit")
     BACS_DEBIT("bacs_debit"),
 
+    @SerializedName("bancontact")
+    BANCONTACT("bancontact"),
+
     @SerializedName("card")
     CARD("card"),
 
     @SerializedName("card_present")
     CARD_PRESENT("card_present"),
 
+    @SerializedName("eps")
+    EPS("eps"),
+
     @SerializedName("fpx")
     FPX("fpx"),
 
+    @SerializedName("giropay")
+    GIROPAY("giropay"),
+
     @SerializedName("ideal")
     IDEAL("ideal"),
+
+    @SerializedName("p24")
+    P24("p24"),
 
     @SerializedName("sepa_debit")
     SEPA_DEBIT("sepa_debit");

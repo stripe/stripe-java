@@ -1043,6 +1043,9 @@ public class Account extends ApiResource implements MetadataStore<Account>, Paym
     @SerializedName("payouts")
     SettingsPayouts payouts;
 
+    @SerializedName("sepa_debit_payments")
+    SepaDebitPayments sepaDebitPayments;
+
     @Getter
     @Setter
     @EqualsAndHashCode(callSuper = false)
@@ -1053,6 +1056,15 @@ public class Account extends ApiResource implements MetadataStore<Account>, Paym
        */
       @SerializedName("display_name")
       String displayName;
+    }
+
+    @Getter
+    @Setter
+    @EqualsAndHashCode(callSuper = false)
+    public static class SepaDebitPayments extends StripeObject {
+      /** SEPA creditor identifier that identifies the company making the payment. */
+      @SerializedName("creditor_id")
+      String creditorId;
     }
   }
 

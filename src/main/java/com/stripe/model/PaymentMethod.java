@@ -26,6 +26,9 @@ public class PaymentMethod extends ApiResource implements HasId, MetadataStore<P
   @SerializedName("bacs_debit")
   BacsDebit bacsDebit;
 
+  @SerializedName("bancontact")
+  Bancontact bancontact;
+
   @SerializedName("billing_details")
   BillingDetails billingDetails;
 
@@ -48,8 +51,14 @@ public class PaymentMethod extends ApiResource implements HasId, MetadataStore<P
   @Setter(lombok.AccessLevel.NONE)
   ExpandableField<Customer> customer;
 
+  @SerializedName("eps")
+  Eps eps;
+
   @SerializedName("fpx")
   Fpx fpx;
+
+  @SerializedName("giropay")
+  Giropay giropay;
 
   /** Unique identifier for the object. */
   @Getter(onMethod_ = {@Override})
@@ -85,6 +94,9 @@ public class PaymentMethod extends ApiResource implements HasId, MetadataStore<P
   @SerializedName("object")
   String object;
 
+  @SerializedName("p24")
+  P24 p24;
+
   @SerializedName("sepa_debit")
   SepaDebit sepaDebit;
 
@@ -92,8 +104,9 @@ public class PaymentMethod extends ApiResource implements HasId, MetadataStore<P
    * The type of the PaymentMethod. An additional hash is included on the PaymentMethod with a name
    * matching this value. It contains additional information specific to the PaymentMethod type.
    *
-   * <p>One of {@code au_becs_debit}, {@code bacs_debit}, {@code card}, {@code card_present}, {@code
-   * fpx}, {@code ideal}, or {@code sepa_debit}.
+   * <p>One of {@code au_becs_debit}, {@code bacs_debit}, {@code bancontact}, {@code card}, {@code
+   * card_present}, {@code eps}, {@code fpx}, {@code giropay}, {@code ideal}, {@code p24}, or {@code
+   * sepa_debit}.
    */
   @SerializedName("type")
   String type;
@@ -441,6 +454,11 @@ public class PaymentMethod extends ApiResource implements HasId, MetadataStore<P
   @Getter
   @Setter
   @EqualsAndHashCode(callSuper = false)
+  public static class Bancontact extends StripeObject {}
+
+  @Getter
+  @Setter
+  @EqualsAndHashCode(callSuper = false)
   public static class BillingDetails extends StripeObject {
     /** Billing address. */
     @SerializedName("address")
@@ -703,6 +721,11 @@ public class PaymentMethod extends ApiResource implements HasId, MetadataStore<P
   @Getter
   @Setter
   @EqualsAndHashCode(callSuper = false)
+  public static class Eps extends StripeObject {}
+
+  @Getter
+  @Setter
+  @EqualsAndHashCode(callSuper = false)
   public static class Fpx extends StripeObject {
     /** Account holder type, if provided. Can be one of {@code individual} or {@code company}. */
     @SerializedName("account_holder_type")
@@ -718,6 +741,11 @@ public class PaymentMethod extends ApiResource implements HasId, MetadataStore<P
     @SerializedName("bank")
     String bank;
   }
+
+  @Getter
+  @Setter
+  @EqualsAndHashCode(callSuper = false)
+  public static class Giropay extends StripeObject {}
 
   @Getter
   @Setter
@@ -746,6 +774,11 @@ public class PaymentMethod extends ApiResource implements HasId, MetadataStore<P
   @Setter
   @EqualsAndHashCode(callSuper = false)
   public static class InteracPresent extends StripeObject {}
+
+  @Getter
+  @Setter
+  @EqualsAndHashCode(callSuper = false)
+  public static class P24 extends StripeObject {}
 
   @Getter
   @Setter

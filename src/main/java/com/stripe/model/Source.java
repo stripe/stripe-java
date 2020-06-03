@@ -943,6 +943,13 @@ public class Source extends ApiResource implements MetadataStore<Source>, Paymen
     String description;
 
     /**
+     * The ID of the associated object for this line item. Expandable if not null (e.g., expandable
+     * to a SKU).
+     */
+    @SerializedName("parent")
+    String parent;
+
+    /**
      * The quantity of this order item. When type is {@code sku}, this is the number of instances of
      * the SKU to be ordered.
      */
