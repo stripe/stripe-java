@@ -335,6 +335,12 @@ public class WebhookEndpointUpdateParams extends ApiRequestParams {
     @SerializedName("charge.updated")
     CHARGE__UPDATED("charge.updated"),
 
+    @SerializedName("checkout.session.async_payment_failed")
+    CHECKOUT__SESSION__ASYNC_PAYMENT_FAILED("checkout.session.async_payment_failed"),
+
+    @SerializedName("checkout.session.async_payment_succeeded")
+    CHECKOUT__SESSION__ASYNC_PAYMENT_SUCCEEDED("checkout.session.async_payment_succeeded"),
+
     @SerializedName("checkout.session.completed")
     CHECKOUT__SESSION__COMPLETED("checkout.session.completed"),
 

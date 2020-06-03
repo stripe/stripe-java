@@ -204,6 +204,9 @@ public class PaymentMethodListParams extends ApiRequestParams {
     @SerializedName("au_becs_debit")
     AU_BECS_DEBIT("au_becs_debit"),
 
+    @SerializedName("bacs_debit")
+    BACS_DEBIT("bacs_debit"),
+
     @SerializedName("bancontact")
     BANCONTACT("bancontact"),
 

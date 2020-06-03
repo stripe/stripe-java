@@ -3490,6 +3490,9 @@ public class SessionCreateParams extends ApiRequestParams {
   }
 
   public enum PaymentMethodType implements ApiRequestParams.EnumParam {
+    @SerializedName("bacs_debit")
+    BACS_DEBIT("bacs_debit"),
+
     @SerializedName("card")
     CARD("card"),
 
