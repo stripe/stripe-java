@@ -1,5 +1,8 @@
 # Changelog
 
+## 19.19.0 - 2020-06-03
+* [#1040](https://github.com/stripe/stripe-java/pull/1040) Add support for Bancontact, EPS, Giropay and P24 on Checkout `Session`
+
 ## 19.18.0 - 2020-06-03
 * [#1039](https://github.com/stripe/stripe-java/pull/1039) Multiple API changes
   * Add `bacs_debit_payments` as a `Capability`
