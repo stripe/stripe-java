@@ -856,8 +856,8 @@ public class SubscriptionScheduleUpdateParams extends ApiRequestParams {
     InvoiceSettings invoiceSettings;
 
     /**
-     * Integer representing the multiplier applied to the plan interval. For example, {@code
-     * iterations=2} applied to a plan with {@code interval=month} and {@code interval_count=3}
+     * Integer representing the multiplier applied to the price interval. For example, {@code
+     * iterations=2} applied to a price with {@code interval=month} and {@code interval_count=3}
      * results in a phase of duration {@code 2 * 3 months = 6 months}. If set, {@code end_date} must
      * not be set.
      */
@@ -865,7 +865,7 @@ public class SubscriptionScheduleUpdateParams extends ApiRequestParams {
     Long iterations;
 
     /**
-     * List of configuration items, each with an attached plan, to apply during this phase of the
+     * List of configuration items, each with an attached price, to apply during this phase of the
      * subscription schedule.
      */
     @SerializedName("plans")
@@ -891,7 +891,7 @@ public class SubscriptionScheduleUpdateParams extends ApiRequestParams {
      * A non-negative decimal (with at most four decimal places) between 0 and 100. This represents
      * the percentage of the subscription invoice subtotal that will be calculated and added as tax
      * to the final amount in each billing period during thise phase of the schedule. For example, a
-     * plan which charges $10/month with a {@code tax_percent} of {@code 20.0} will charge $12 per
+     * price which charges $10/month with a {@code tax_percent} of {@code 20.0} will charge $12 per
      * invoice. To unset a previously-set value, pass an empty string. This field has been
      * deprecated and will be removed in a future API version, for further information view the <a
      * href="https://stripe.com/docs/billing/migration/taxes">migration docs</a> for {@code
@@ -1230,8 +1230,8 @@ public class SubscriptionScheduleUpdateParams extends ApiRequestParams {
       }
 
       /**
-       * Integer representing the multiplier applied to the plan interval. For example, {@code
-       * iterations=2} applied to a plan with {@code interval=month} and {@code interval_count=3}
+       * Integer representing the multiplier applied to the price interval. For example, {@code
+       * iterations=2} applied to a price with {@code interval=month} and {@code interval_count=3}
        * results in a phase of duration {@code 2 * 3 months = 6 months}. If set, {@code end_date}
        * must not be set.
        */
@@ -1299,11 +1299,11 @@ public class SubscriptionScheduleUpdateParams extends ApiRequestParams {
        * A non-negative decimal (with at most four decimal places) between 0 and 100. This
        * represents the percentage of the subscription invoice subtotal that will be calculated and
        * added as tax to the final amount in each billing period during thise phase of the schedule.
-       * For example, a plan which charges $10/month with a {@code tax_percent} of {@code 20.0} will
-       * charge $12 per invoice. To unset a previously-set value, pass an empty string. This field
-       * has been deprecated and will be removed in a future API version, for further information
-       * view the <a href="https://stripe.com/docs/billing/migration/taxes">migration docs</a> for
-       * {@code tax_rates}.
+       * For example, a price which charges $10/month with a {@code tax_percent} of {@code 20.0}
+       * will charge $12 per invoice. To unset a previously-set value, pass an empty string. This
+       * field has been deprecated and will be removed in a future API version, for further
+       * information view the <a href="https://stripe.com/docs/billing/migration/taxes">migration
+       * docs</a> for {@code tax_rates}.
        */
       public Builder setTaxPercent(BigDecimal taxPercent) {
         this.taxPercent = taxPercent;
@@ -1801,7 +1801,9 @@ public class SubscriptionScheduleUpdateParams extends ApiRequestParams {
       @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
       Map<String, Object> extraParams;
 
-      /** The plan ID to subscribe to. */
+      /**
+       * The plan ID to subscribe to. You may specify the same ID in {@code plan} and {@code price}.
+       */
       @SerializedName("plan")
       Object plan;
 
@@ -1814,7 +1816,7 @@ public class SubscriptionScheduleUpdateParams extends ApiRequestParams {
       PriceData priceData;
 
       /**
-       * Quantity for the given plan. Can be set only if the plan's {@code usage_type} is {@code
+       * Quantity for the given price. Can be set only if the price's {@code usage_type} is {@code
        * licensed} and not {@code metered}.
        */
       @SerializedName("quantity")
@@ -1926,13 +1928,19 @@ public class SubscriptionScheduleUpdateParams extends ApiRequestParams {
           return this;
         }
 
-        /** The plan ID to subscribe to. */
+        /**
+         * The plan ID to subscribe to. You may specify the same ID in {@code plan} and {@code
+         * price}.
+         */
         public Builder setPlan(String plan) {
           this.plan = plan;
           return this;
         }
 
-        /** The plan ID to subscribe to. */
+        /**
+         * The plan ID to subscribe to. You may specify the same ID in {@code plan} and {@code
+         * price}.
+         */
         public Builder setPlan(EmptyParam plan) {
           this.plan = plan;
           return this;
@@ -1957,7 +1965,7 @@ public class SubscriptionScheduleUpdateParams extends ApiRequestParams {
         }
 
         /**
-         * Quantity for the given plan. Can be set only if the plan's {@code usage_type} is {@code
+         * Quantity for the given price. Can be set only if the price's {@code usage_type} is {@code
          * licensed} and not {@code metered}.
          */
         public Builder setQuantity(Long quantity) {
