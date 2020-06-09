@@ -1318,18 +1318,15 @@ public class SessionCreateParams extends ApiRequestParams {
     String receiptEmail;
 
     /**
-     * Indicates that you intend to make future payments with this PaymentIntent's payment method.
+     * Indicates that you intend to make future payments with the payment method collected by this
+     * Checkout Session.
      *
-     * <p>Providing this parameter will <a
-     * href="https://stripe.com/docs/payments/save-during-payment">attach the payment method</a> to
-     * the PaymentIntent's Customer, if present, after the PaymentIntent is confirmed and any
-     * required actions from the user are complete. If no Customer was provided, the payment method
-     * can still be <a href="https://stripe.com/docs/api/payment_methods/attach">attached</a> to a
-     * Customer after the transaction completes.
+     * <p>When setting this to {@code off_session}, Checkout will show a notice to the customer that
+     * their payment details will be saved and used for future payments.
      *
-     * <p>When processing card payments, Stripe also uses {@code setup_future_usage} to dynamically
-     * optimize your payment flow and comply with regional legislation and network rules, such as <a
-     * href="https://stripe.com/docs/strong-customer-authentication">SCA</a>.
+     * <p>When processing card payments, Checkout also uses {@code setup_future_usage} to
+     * dynamically optimize your payment flow and comply with regional legislation and network
+     * rules, such as SCA.
      */
     @SerializedName("setup_future_usage")
     SetupFutureUsage setupFutureUsage;
@@ -1543,19 +1540,15 @@ public class SessionCreateParams extends ApiRequestParams {
       }
 
       /**
-       * Indicates that you intend to make future payments with this PaymentIntent's payment method.
+       * Indicates that you intend to make future payments with the payment method collected by this
+       * Checkout Session.
        *
-       * <p>Providing this parameter will <a
-       * href="https://stripe.com/docs/payments/save-during-payment">attach the payment method</a>
-       * to the PaymentIntent's Customer, if present, after the PaymentIntent is confirmed and any
-       * required actions from the user are complete. If no Customer was provided, the payment
-       * method can still be <a
-       * href="https://stripe.com/docs/api/payment_methods/attach">attached</a> to a Customer after
-       * the transaction completes.
+       * <p>When setting this to {@code off_session}, Checkout will show a notice to the customer
+       * that their payment details will be saved and used for future payments.
        *
-       * <p>When processing card payments, Stripe also uses {@code setup_future_usage} to
+       * <p>When processing card payments, Checkout also uses {@code setup_future_usage} to
        * dynamically optimize your payment flow and comply with regional legislation and network
-       * rules, such as <a href="https://stripe.com/docs/strong-customer-authentication">SCA</a>.
+       * rules, such as SCA.
        */
       public Builder setSetupFutureUsage(SetupFutureUsage setupFutureUsage) {
         this.setupFutureUsage = setupFutureUsage;

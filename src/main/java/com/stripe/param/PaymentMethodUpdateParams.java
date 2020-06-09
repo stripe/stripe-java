@@ -12,8 +12,8 @@ import lombok.Getter;
 @Getter
 public class PaymentMethodUpdateParams extends ApiRequestParams {
   /**
-   * If this is an {@code au_becs_debit} PaymentMethod, this hash contains details about the bank
-   * account.
+   * This is a legacy parameter that will be removed in the future. It is a hash that does not
+   * accept any keys.
    */
   @SerializedName("au_becs_debit")
   AuBecsDebit auBecsDebit;
@@ -52,8 +52,8 @@ public class PaymentMethodUpdateParams extends ApiRequestParams {
   Object metadata;
 
   /**
-   * If this is a {@code sepa_debit} PaymentMethod, this hash contains details about the SEPA debit
-   * bank account.
+   * This is a legacy parameter that will be removed in the future. It is a hash that does not
+   * accept any keys.
    */
   @SerializedName("sepa_debit")
   SepaDebit sepaDebit;
@@ -107,8 +107,8 @@ public class PaymentMethodUpdateParams extends ApiRequestParams {
     }
 
     /**
-     * If this is an {@code au_becs_debit} PaymentMethod, this hash contains details about the bank
-     * account.
+     * This is a legacy parameter that will be removed in the future. It is a hash that does not
+     * accept any keys.
      */
     public Builder setAuBecsDebit(AuBecsDebit auBecsDebit) {
       this.auBecsDebit = auBecsDebit;
@@ -233,8 +233,8 @@ public class PaymentMethodUpdateParams extends ApiRequestParams {
     }
 
     /**
-     * If this is a {@code sepa_debit} PaymentMethod, this hash contains details about the SEPA
-     * debit bank account.
+     * This is a legacy parameter that will be removed in the future. It is a hash that does not
+     * accept any keys.
      */
     public Builder setSepaDebit(SepaDebit sepaDebit) {
       this.sepaDebit = sepaDebit;
