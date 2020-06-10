@@ -1432,6 +1432,13 @@ public class PaymentIntentCreateParams extends ApiRequestParams {
       Boolean moto;
 
       /**
+       * Selected network to process this PaymentIntent on. Depends on the available networks of the
+       * card attached to the PaymentIntent. Can be only set confirm-time.
+       */
+      @SerializedName("network")
+      Network network;
+
+      /**
        * We strongly recommend that you rely on our SCA Engine to automatically prompt your
        * customers for authentication based on risk level and <a
        * href="https://stripe.com/docs/strong-customer-authentication">other requirements</a>.
@@ -1449,10 +1456,12 @@ public class PaymentIntentCreateParams extends ApiRequestParams {
           Map<String, Object> extraParams,
           Installments installments,
           Boolean moto,
+          Network network,
           RequestThreeDSecure requestThreeDSecure) {
         this.extraParams = extraParams;
         this.installments = installments;
         this.moto = moto;
+        this.network = network;
         this.requestThreeDSecure = requestThreeDSecure;
       }
 
@@ -1467,11 +1476,18 @@ public class PaymentIntentCreateParams extends ApiRequestParams {
 
         private Boolean moto;
 
+        private Network network;
+
         private RequestThreeDSecure requestThreeDSecure;
 
         /** Finalize and obtain parameter instance from this builder. */
         public Card build() {
-          return new Card(this.extraParams, this.installments, this.moto, this.requestThreeDSecure);
+          return new Card(
+              this.extraParams,
+              this.installments,
+              this.moto,
+              this.network,
+              this.requestThreeDSecure);
         }
 
         /**
@@ -1520,6 +1536,15 @@ public class PaymentIntentCreateParams extends ApiRequestParams {
          */
         public Builder setMoto(Boolean moto) {
           this.moto = moto;
+          return this;
+        }
+
+        /**
+         * Selected network to process this PaymentIntent on. Depends on the available networks of
+         * the card attached to the PaymentIntent. Can be only set confirm-time.
+         */
+        public Builder setNetwork(Network network) {
+          this.network = network;
           return this;
         }
 
@@ -1781,6 +1806,45 @@ public class PaymentIntentCreateParams extends ApiRequestParams {
               this.value = value;
             }
           }
+        }
+      }
+
+      public enum Network implements ApiRequestParams.EnumParam {
+        @SerializedName("amex")
+        AMEX("amex"),
+
+        @SerializedName("cartes_bancaires")
+        CARTES_BANCAIRES("cartes_bancaires"),
+
+        @SerializedName("diners")
+        DINERS("diners"),
+
+        @SerializedName("discover")
+        DISCOVER("discover"),
+
+        @SerializedName("interac")
+        INTERAC("interac"),
+
+        @SerializedName("jcb")
+        JCB("jcb"),
+
+        @SerializedName("mastercard")
+        MASTERCARD("mastercard"),
+
+        @SerializedName("unionpay")
+        UNIONPAY("unionpay"),
+
+        @SerializedName("unknown")
+        UNKNOWN("unknown"),
+
+        @SerializedName("visa")
+        VISA("visa");
+
+        @Getter(onMethod_ = {@Override})
+        private final String value;
+
+        Network(String value) {
+          this.value = value;
         }
       }
 

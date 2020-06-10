@@ -1363,9 +1363,9 @@ public class Charge extends ApiResource implements MetadataStore<Charge>, Balanc
       Boolean moto;
 
       /**
-       * Identifies which network this charge was processed on. Can be {@code amex}, {@code diners},
-       * {@code discover}, {@code interac}, {@code jcb}, {@code mastercard}, {@code unionpay},
-       * {@code visa}, or {@code unknown}.
+       * Identifies which network this charge was processed on. Can be {@code amex}, {@code
+       * cartes_bancaires}, {@code diners}, {@code discover}, {@code interac}, {@code jcb}, {@code
+       * mastercard}, {@code unionpay}, {@code visa}, or {@code unknown}.
        */
       @SerializedName("network")
       String network;
@@ -1659,9 +1659,9 @@ public class Charge extends ApiResource implements MetadataStore<Charge>, Balanc
       String last4;
 
       /**
-       * Identifies which network this charge was processed on. Can be {@code amex}, {@code diners},
-       * {@code discover}, {@code interac}, {@code jcb}, {@code mastercard}, {@code unionpay},
-       * {@code visa}, or {@code unknown}.
+       * Identifies which network this charge was processed on. Can be {@code amex}, {@code
+       * cartes_bancaires}, {@code diners}, {@code discover}, {@code interac}, {@code jcb}, {@code
+       * mastercard}, {@code unionpay}, {@code visa}, or {@code unknown}.
        */
       @SerializedName("network")
       String network;
@@ -1879,9 +1879,9 @@ public class Charge extends ApiResource implements MetadataStore<Charge>, Balanc
       String last4;
 
       /**
-       * Identifies which network this charge was processed on. Can be {@code amex}, {@code diners},
-       * {@code discover}, {@code interac}, {@code jcb}, {@code mastercard}, {@code unionpay},
-       * {@code visa}, or {@code unknown}.
+       * Identifies which network this charge was processed on. Can be {@code amex}, {@code
+       * cartes_bancaires}, {@code diners}, {@code discover}, {@code interac}, {@code jcb}, {@code
+       * mastercard}, {@code unionpay}, {@code visa}, or {@code unknown}.
        */
       @SerializedName("network")
       String network;

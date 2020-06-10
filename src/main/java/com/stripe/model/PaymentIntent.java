@@ -1120,6 +1120,13 @@ public class PaymentIntent extends ApiResource implements HasId, MetadataStore<P
       Installments installments;
 
       /**
+       * Selected network to process this PaymentIntent on. Depends on the available networks of the
+       * card attached to the PaymentIntent. Can be only set confirm-time.
+       */
+      @SerializedName("network")
+      String network;
+
+      /**
        * We strongly recommend that you rely on our SCA Engine to automatically prompt your
        * customers for authentication based on risk level and <a
        * href="https://stripe.com/docs/strong-customer-authentication">other requirements</a>.
