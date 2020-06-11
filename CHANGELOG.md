@@ -1,5 +1,8 @@
 # Changelog
 
+## 19.22.0 - 2020-06-10
+* [#1043](https://github.com/stripe/stripe-java/pull/1043) Add support for Cartes Bancaires payments on `PaymentIntent` and `Pay…
+
 ## 19.21.0 - 2020-06-09
 * [#1042](https://github.com/stripe/stripe-java/pull/1042) Add support for `id_npwp` and `my_frp` as `type` on `TaxId`
 
