@@ -1,5 +1,10 @@
 # Changelog
 
+## 19.23.0 - 2020-06-11
+* [#1044](https://github.com/stripe/stripe-java/pull/1044) Multiple API changes
+  * Add `transaction` on Issuing `Dispute`
+  * Add `payment_method_details[acss_debit][mandate]` on `Charge`
+
 ## 19.22.0 - 2020-06-10
 * [#1043](https://github.com/stripe/stripe-java/pull/1043) Add support for Cartes Bancaires payments on `PaymentIntent` and `Pay…
 
