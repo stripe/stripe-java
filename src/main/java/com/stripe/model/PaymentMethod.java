@@ -11,6 +11,7 @@ import com.stripe.param.PaymentMethodDetachParams;
 import com.stripe.param.PaymentMethodListParams;
 import com.stripe.param.PaymentMethodRetrieveParams;
 import com.stripe.param.PaymentMethodUpdateParams;
+import java.util.List;
 import java.util.Map;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
@@ -547,6 +548,10 @@ public class PaymentMethod extends ApiResource implements HasId, MetadataStore<P
     @SerializedName("last4")
     String last4;
 
+    /** Contains information about card networks that can be used to process the payment. */
+    @SerializedName("networks")
+    Networks networks;
+
     /** Contains details on how this Card maybe be used for 3D Secure authentication. */
     @SerializedName("three_d_secure_usage")
     ThreeDSecureUsage threeDSecureUsage;
@@ -579,6 +584,19 @@ public class PaymentMethod extends ApiResource implements HasId, MetadataStore<P
        */
       @SerializedName("cvc_check")
       String cvcCheck;
+    }
+
+    @Getter
+    @Setter
+    @EqualsAndHashCode(callSuper = false)
+    public static class Networks extends StripeObject {
+      /** All available networks for the card. */
+      @SerializedName("available")
+      List<String> available;
+
+      /** The preferred network for the card. */
+      @SerializedName("preferred")
+      String preferred;
     }
 
     @Getter
