@@ -4,6 +4,7 @@ import com.google.gson.annotations.SerializedName;
 import com.stripe.Stripe;
 import com.stripe.exception.StripeException;
 import com.stripe.model.BalanceTransaction;
+import com.stripe.model.ExpandableField;
 import com.stripe.model.HasId;
 import com.stripe.net.ApiResource;
 import com.stripe.net.RequestOptions;
@@ -44,6 +45,30 @@ public class Dispute extends ApiResource implements HasId {
    */
   @SerializedName("object")
   String object;
+
+  /** The transaction being disputed. */
+  @SerializedName("transaction")
+  @Getter(lombok.AccessLevel.NONE)
+  @Setter(lombok.AccessLevel.NONE)
+  ExpandableField<Transaction> transaction;
+
+  /** Get ID of expandable {@code transaction} object. */
+  public String getTransaction() {
+    return (this.transaction != null) ? this.transaction.getId() : null;
+  }
+
+  public void setTransaction(String id) {
+    this.transaction = ApiResource.setExpandableFieldId(id, this.transaction);
+  }
+
+  /** Get expanded {@code transaction}. */
+  public Transaction getTransactionObject() {
+    return (this.transaction != null) ? this.transaction.getExpanded() : null;
+  }
+
+  public void setTransactionObject(Transaction expandableObject) {
+    this.transaction = new ExpandableField<Transaction>(expandableObject.getId(), expandableObject);
+  }
 
   /**
    * Returns a list of Issuing <code>Dispute</code> objects. The objects are sorted in descending
