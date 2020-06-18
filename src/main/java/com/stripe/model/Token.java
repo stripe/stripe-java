@@ -24,8 +24,8 @@ public class Token extends ApiResource implements HasId {
    * href="https://stripe.com/docs/connect/custom-accounts">Custom accounts</a>. They can be bank
    * accounts or debit cards as well, and are documented in the links above.
    *
-   * <p>Related guide: <a href="https://stripe.com/docs/payments/ach-bank-transfers">Processing ACH
-   * &amp; Bank Transfers</a>.
+   * <p>Related guide: <a href="https://stripe.com/docs/payments/bank-debits-transfers">Bank Debits
+   * and Transfers</a>.
    */
   @SerializedName("bank_account")
   BankAccount bankAccount;

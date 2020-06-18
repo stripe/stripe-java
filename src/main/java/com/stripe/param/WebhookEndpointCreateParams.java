@@ -25,7 +25,7 @@ public class WebhookEndpointCreateParams extends ApiRequestParams {
   @SerializedName("connect")
   Boolean connect;
 
-  /** An optional description of what the wehbook is used for. */
+  /** An optional description of what the webhook is used for. */
   @SerializedName("description")
   String description;
 
@@ -133,7 +133,7 @@ public class WebhookEndpointCreateParams extends ApiRequestParams {
       return this;
     }
 
-    /** An optional description of what the wehbook is used for. */
+    /** An optional description of what the webhook is used for. */
     public Builder setDescription(String description) {
       this.description = description;
       return this;
@@ -793,6 +793,15 @@ public class WebhookEndpointCreateParams extends ApiRequestParams {
 
     @SerializedName("issuing_cardholder.updated")
     ISSUING_CARDHOLDER__UPDATED("issuing_cardholder.updated"),
+
+    @SerializedName("issuing_dispute.created")
+    ISSUING_DISPUTE__CREATED("issuing_dispute.created"),
+
+    @SerializedName("issuing_dispute.funds_reinstated")
+    ISSUING_DISPUTE__FUNDS_REINSTATED("issuing_dispute.funds_reinstated"),
+
+    @SerializedName("issuing_dispute.updated")
+    ISSUING_DISPUTE__UPDATED("issuing_dispute.updated"),
 
     @SerializedName("issuing_transaction.created")
     ISSUING_TRANSACTION__CREATED("issuing_transaction.created"),

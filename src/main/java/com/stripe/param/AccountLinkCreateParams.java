@@ -34,14 +34,23 @@ public class AccountLinkCreateParams extends ApiRequestParams {
   @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
   Map<String, Object> extraParams;
 
-  /** The URL that the user will be redirected to if the account link is no longer valid. */
+  /** Alternate name for refresh_url to ensure backwards compatibility. */
   @SerializedName("failure_url")
   String failureUrl;
 
   /**
-   * The URL that the user will be redirected to upon leaving or completing the linked flow
-   * successfully.
+   * The URL that the user will be redirected to if the account link is no longer valid. Your {@code
+   * refresh_url} should trigger a method on your server to create a new account link using this
+   * API, with the same parameters, and redirect the user to the new account link.
    */
+  @SerializedName("refresh_url")
+  String refreshUrl;
+
+  /** The URL that the user will be redirected to upon leaving or completing the linked flow. */
+  @SerializedName("return_url")
+  String returnUrl;
+
+  /** Alternate name for return_url to ensure backwards compatibility. */
   @SerializedName("success_url")
   String successUrl;
 
@@ -58,6 +67,8 @@ public class AccountLinkCreateParams extends ApiRequestParams {
       List<String> expand,
       Map<String, Object> extraParams,
       String failureUrl,
+      String refreshUrl,
+      String returnUrl,
       String successUrl,
       Type type) {
     this.account = account;
@@ -65,6 +76,8 @@ public class AccountLinkCreateParams extends ApiRequestParams {
     this.expand = expand;
     this.extraParams = extraParams;
     this.failureUrl = failureUrl;
+    this.refreshUrl = refreshUrl;
+    this.returnUrl = returnUrl;
     this.successUrl = successUrl;
     this.type = type;
   }
@@ -84,6 +97,10 @@ public class AccountLinkCreateParams extends ApiRequestParams {
 
     private String failureUrl;
 
+    private String refreshUrl;
+
+    private String returnUrl;
+
     private String successUrl;
 
     private Type type;
@@ -96,6 +113,8 @@ public class AccountLinkCreateParams extends ApiRequestParams {
           this.expand,
           this.extraParams,
           this.failureUrl,
+          this.refreshUrl,
+          this.returnUrl,
           this.successUrl,
           this.type);
     }
@@ -167,16 +186,29 @@ public class AccountLinkCreateParams extends ApiRequestParams {
       return this;
     }
 
-    /** The URL that the user will be redirected to if the account link is no longer valid. */
+    /** Alternate name for refresh_url to ensure backwards compatibility. */
     public Builder setFailureUrl(String failureUrl) {
       this.failureUrl = failureUrl;
       return this;
     }
 
     /**
-     * The URL that the user will be redirected to upon leaving or completing the linked flow
-     * successfully.
+     * The URL that the user will be redirected to if the account link is no longer valid. Your
+     * {@code refresh_url} should trigger a method on your server to create a new account link using
+     * this API, with the same parameters, and redirect the user to the new account link.
      */
+    public Builder setRefreshUrl(String refreshUrl) {
+      this.refreshUrl = refreshUrl;
+      return this;
+    }
+
+    /** The URL that the user will be redirected to upon leaving or completing the linked flow. */
+    public Builder setReturnUrl(String returnUrl) {
+      this.returnUrl = returnUrl;
+      return this;
+    }
+
+    /** Alternate name for return_url to ensure backwards compatibility. */
     public Builder setSuccessUrl(String successUrl) {
       this.successUrl = successUrl;
       return this;
