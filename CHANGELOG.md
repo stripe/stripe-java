@@ -1,5 +1,10 @@
 # Changelog
 
+## 19.24.0 - 2020-06-18
+* [#1047](https://github.com/stripe/stripe-java/pull/1047) Multiple API changes
+  * Add support for `refresh_url` and `return_url` on `AccountLink`
+  * Add support for `issuing_dispute.*` events
+
 ## 19.23.0 - 2020-06-11
 * [#1044](https://github.com/stripe/stripe-java/pull/1044) Multiple API changes
   * Add `transaction` on Issuing `Dispute`
