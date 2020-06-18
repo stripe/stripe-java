@@ -36,16 +36,16 @@ public class AccountLink extends ApiResource {
   String url;
 
   /**
-   * Creates an AccountLink object that returns a single-use Stripe URL that the user can redirect
-   * their user to in order to take them through the Connect Onboarding flow.
+   * Creates an AccountLink object that includes a single-use Stripe URL that the platform can
+   * redirect their user to in order to take them through the Connect Onboarding flow.
    */
   public static AccountLink create(Map<String, Object> params) throws StripeException {
     return create(params, (RequestOptions) null);
   }
 
   /**
-   * Creates an AccountLink object that returns a single-use Stripe URL that the user can redirect
-   * their user to in order to take them through the Connect Onboarding flow.
+   * Creates an AccountLink object that includes a single-use Stripe URL that the platform can
+   * redirect their user to in order to take them through the Connect Onboarding flow.
    */
   public static AccountLink create(Map<String, Object> params, RequestOptions options)
       throws StripeException {
@@ -55,16 +55,16 @@ public class AccountLink extends ApiResource {
   }
 
   /**
-   * Creates an AccountLink object that returns a single-use Stripe URL that the user can redirect
-   * their user to in order to take them through the Connect Onboarding flow.
+   * Creates an AccountLink object that includes a single-use Stripe URL that the platform can
+   * redirect their user to in order to take them through the Connect Onboarding flow.
    */
   public static AccountLink create(AccountLinkCreateParams params) throws StripeException {
     return create(params, (RequestOptions) null);
   }
 
   /**
-   * Creates an AccountLink object that returns a single-use Stripe URL that the user can redirect
-   * their user to in order to take them through the Connect Onboarding flow.
+   * Creates an AccountLink object that includes a single-use Stripe URL that the platform can
+   * redirect their user to in order to take them through the Connect Onboarding flow.
    */
   public static AccountLink create(AccountLinkCreateParams params, RequestOptions options)
       throws StripeException {

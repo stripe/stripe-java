@@ -35,7 +35,7 @@ public class WebhookEndpoint extends ApiResource implements HasId, MetadataStore
   @SerializedName("deleted")
   Boolean deleted;
 
-  /** An optional description of what the wehbook is used for. */
+  /** An optional description of what the webhook is used for. */
   @SerializedName("description")
   String description;
 

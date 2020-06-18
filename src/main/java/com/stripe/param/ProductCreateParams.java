@@ -15,7 +15,7 @@ public class ProductCreateParams extends ApiRequestParams {
   @SerializedName("active")
   Boolean active;
 
-  /** A list of up to 5 alphanumeric attributes. */
+  /** A list of up to 5 alphanumeric attributes. Should only be set if type={@code good}. */
   @SerializedName("attributes")
   List<String> attributes;
 
