@@ -854,6 +854,9 @@ public class Source extends ApiResource implements MetadataStore<Source>, Paymen
     @SerializedName("redirect_url")
     String redirectUrl;
 
+    @SerializedName("shipping_delay")
+    Long shippingDelay;
+
     @SerializedName("shipping_first_name")
     String shippingFirstName;
 
