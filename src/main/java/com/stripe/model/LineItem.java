@@ -32,6 +32,10 @@ public class LineItem extends StripeObject implements HasId {
   @SerializedName("description")
   String description;
 
+  /** The discounts applied to the line item. */
+  @SerializedName("discounts")
+  List<LineItem.Discount> discounts;
+
   /** Unique identifier for the object. */
   @Getter(onMethod_ = {@Override})
   @SerializedName("id")
@@ -72,6 +76,25 @@ public class LineItem extends StripeObject implements HasId {
   /** The taxes applied to the line item. */
   @SerializedName("taxes")
   List<LineItem.Tax> taxes;
+
+  @Getter
+  @Setter
+  @EqualsAndHashCode(callSuper = false)
+  public static class Discount extends StripeObject {
+    /** Discount amount for this line item. */
+    @SerializedName("amount")
+    Long amount;
+
+    /**
+     * A discount represents the actual application of a coupon to a particular customer. It
+     * contains information about when the discount began and when it will end.
+     *
+     * <p>Related guide: <a href="https://stripe.com/docs/billing/subscriptions/discounts">Applying
+     * Discounts to Subscriptions</a>.
+     */
+    @SerializedName("discount")
+    Discount discount;
+  }
 
   @Getter
   @Setter
