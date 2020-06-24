@@ -1,5 +1,8 @@
 # Changelog
 
+## 19.26.0 - 2020-06-23
+* [#1049](https://github.com/stripe/stripe-java/pull/1049) Add support for `payment_method_data` on `PaymentIntent`
+
 ## 19.25.0 - 2020-06-23
 * [#1048](https://github.com/stripe/stripe-java/pull/1048) Multiple API changes
   * Add `discounts` on `LineItem`
