@@ -42,7 +42,7 @@ public class PaymentMethodCreateParams extends ApiRequestParams {
    * If this is a {@code card} PaymentMethod, this hash contains the user's card details. For
    * backwards compatibility, you can alternatively provide a Stripe token (e.g., for Apple Pay,
    * Amex Express Checkout, or legacy Checkout) into the card hash with format {@code card: {token:
-   * "tok_visa"}}. When creating with a card number, you must meet the requirements for <a
+   * "tok_visa"}}. When providing a card number, you must meet the requirements for <a
    * href="https://stripe.com/docs/security#validating-pci-compliance">PCI compliance</a>. We
    * strongly recommend using Stripe.js instead of interacting with this API directly.
    */
@@ -131,9 +131,6 @@ public class PaymentMethodCreateParams extends ApiRequestParams {
   /**
    * The type of the PaymentMethod. An additional hash is included on the PaymentMethod with a name
    * matching this value. It contains additional information specific to the PaymentMethod type.
-   * Required unless {@code payment_method} is specified (see the <a
-   * href="https://stripe.com/docs/payments/payment-methods/connect#cloning-payment-methods">Cloning
-   * PaymentMethods</a> guide)
    */
   @SerializedName("type")
   Type type;
@@ -281,7 +278,7 @@ public class PaymentMethodCreateParams extends ApiRequestParams {
      * If this is a {@code card} PaymentMethod, this hash contains the user's card details. For
      * backwards compatibility, you can alternatively provide a Stripe token (e.g., for Apple Pay,
      * Amex Express Checkout, or legacy Checkout) into the card hash with format {@code card:
-     * {token: "tok_visa"}}. When creating with a card number, you must meet the requirements for <a
+     * {token: "tok_visa"}}. When providing a card number, you must meet the requirements for <a
      * href="https://stripe.com/docs/security#validating-pci-compliance">PCI compliance</a>. We
      * strongly recommend using Stripe.js instead of interacting with this API directly.
      */
@@ -294,7 +291,7 @@ public class PaymentMethodCreateParams extends ApiRequestParams {
      * If this is a {@code card} PaymentMethod, this hash contains the user's card details. For
      * backwards compatibility, you can alternatively provide a Stripe token (e.g., for Apple Pay,
      * Amex Express Checkout, or legacy Checkout) into the card hash with format {@code card:
-     * {token: "tok_visa"}}. When creating with a card number, you must meet the requirements for <a
+     * {token: "tok_visa"}}. When providing a card number, you must meet the requirements for <a
      * href="https://stripe.com/docs/security#validating-pci-compliance">PCI compliance</a>. We
      * strongly recommend using Stripe.js instead of interacting with this API directly.
      */
@@ -459,9 +456,7 @@ public class PaymentMethodCreateParams extends ApiRequestParams {
     /**
      * The type of the PaymentMethod. An additional hash is included on the PaymentMethod with a
      * name matching this value. It contains additional information specific to the PaymentMethod
-     * type. Required unless {@code payment_method} is specified (see the <a
-     * href="https://stripe.com/docs/payments/payment-methods/connect#cloning-payment-methods">Cloning
-     * PaymentMethods</a> guide)
+     * type.
      */
     public Builder setType(Type type) {
       this.type = type;
