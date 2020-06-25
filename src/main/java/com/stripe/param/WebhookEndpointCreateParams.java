@@ -743,6 +743,9 @@ public class WebhookEndpointCreateParams extends ApiRequestParams {
     @SerializedName("invoice.marked_uncollectible")
     INVOICE__MARKED_UNCOLLECTIBLE("invoice.marked_uncollectible"),
 
+    @SerializedName("invoice.paid")
+    INVOICE__PAID("invoice.paid"),
+
     @SerializedName("invoice.payment_action_required")
     INVOICE__PAYMENT_ACTION_REQUIRED("invoice.payment_action_required"),
 
