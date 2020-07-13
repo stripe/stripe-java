@@ -10,7 +10,7 @@ import lombok.Getter;
 
 @Getter
 public class TaxRateListParams extends ApiRequestParams {
-  /** Optional flag to filter by tax rates that are either active or not active (archived). */
+  /** Optional flag to filter by tax rates that are either active or inactive (archived). */
   @SerializedName("active")
   Boolean active;
 
@@ -113,7 +113,7 @@ public class TaxRateListParams extends ApiRequestParams {
           this.startingAfter);
     }
 
-    /** Optional flag to filter by tax rates that are either active or not active (archived). */
+    /** Optional flag to filter by tax rates that are either active or inactive (archived). */
     public Builder setActive(Boolean active) {
       this.active = active;
       return this;

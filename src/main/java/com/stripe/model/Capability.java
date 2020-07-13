@@ -137,8 +137,8 @@ public class Capability extends ApiResource implements HasId {
     String disabledReason;
 
     /**
-     * The fields that need to be collected again because validation or verification failed for some
-     * reason.
+     * The fields that are {@code currently_due} and need to be collected again because validation
+     * or verification failed for some reason.
      */
     @SerializedName("errors")
     List<Account.Requirements.Errors> errors;
