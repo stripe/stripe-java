@@ -1,5 +1,10 @@
 # Changelog
 
+## 19.28.0 - 2020-07-13
+* [#1055](https://github.com/stripe/stripe-java/pull/1055) Multiple API changes
+  * Adds `es-419` as a `locale` to Checkout `Session`
+  * Adds `billing_cycle_anchor` to `default_settings` and `phases` for `SubscriptionSchedule`
+
 ## 19.27.0 - 2020-06-24
 * [#1052](https://github.com/stripe/stripe-java/pull/1052) Add support for `invoice.paid` event
 
