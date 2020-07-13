@@ -581,7 +581,10 @@ public class SessionCreateParams extends ApiRequestParams {
     @SerializedName("quantity")
     Long quantity;
 
-    /** The tax rates which apply to this line item. This is only allowed in subscription mode. */
+    /**
+     * The <a href="https://stripe.com/docs/api/tax_rates">tax rates</a> which apply to this line
+     * item. This is only allowed in subscription mode.
+     */
     @SerializedName("tax_rates")
     List<String> taxRates;
 
@@ -3412,6 +3415,9 @@ public class SessionCreateParams extends ApiRequestParams {
 
     @SerializedName("es")
     ES("es"),
+
+    @SerializedName("es-419")
+    ES_419("es-419"),
 
     @SerializedName("et")
     ET("et"),

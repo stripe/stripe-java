@@ -411,7 +411,7 @@ public class Transaction extends ApiResource
       @SerializedName("type")
       String type;
 
-      /** The units for {@code volume}. One of {@code us_gallon} or {@code liter}. */
+      /** The units for {@code volume_decimal}. One of {@code us_gallon} or {@code liter}. */
       @SerializedName("unit")
       String unit;
 

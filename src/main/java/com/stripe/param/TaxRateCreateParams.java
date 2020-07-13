@@ -12,8 +12,9 @@ import lombok.Getter;
 @Getter
 public class TaxRateCreateParams extends ApiRequestParams {
   /**
-   * Flag determining whether the tax rate is active or inactive. Inactive tax rates continue to
-   * work where they are currently applied however they cannot be used for new applications.
+   * Flag determining whether the tax rate is active or inactive (archived). Inactive tax rates
+   * continue to work where they are currently applied however they cannot be used for new
+   * applications or Checkout Sessions.
    */
   @SerializedName("active")
   Boolean active;
@@ -122,8 +123,9 @@ public class TaxRateCreateParams extends ApiRequestParams {
     }
 
     /**
-     * Flag determining whether the tax rate is active or inactive. Inactive tax rates continue to
-     * work where they are currently applied however they cannot be used for new applications.
+     * Flag determining whether the tax rate is active or inactive (archived). Inactive tax rates
+     * continue to work where they are currently applied however they cannot be used for new
+     * applications or Checkout Sessions.
      */
     public Builder setActive(Boolean active) {
       this.active = active;

@@ -519,6 +519,18 @@ public class SubscriptionSchedule extends ApiResource
   @EqualsAndHashCode(callSuper = false)
   public static class DefaultSettings extends StripeObject {
     /**
+     * Possible values are {@code phase_start} or {@code automatic}. If {@code phase_start} then
+     * billing cycle anchor of the subscription is set to the start of the phase when entering the
+     * phase. If {@code automatic} then the billing cycle anchor is automatically modified as needed
+     * when entering the phase. For more information, see the billing cycle <a
+     * href="https://stripe.com/docs/billing/subscriptions/billing-cycle">documentation</a>.
+     *
+     * <p>One of {@code automatic}, or {@code phase_start}.
+     */
+    @SerializedName("billing_cycle_anchor")
+    String billingCycleAnchor;
+
+    /**
      * Define thresholds at which an invoice will be sent, and the subscription advanced to a new
      * billing period.
      */
@@ -607,6 +619,18 @@ public class SubscriptionSchedule extends ApiResource
      */
     @SerializedName("application_fee_percent")
     BigDecimal applicationFeePercent;
+
+    /**
+     * Possible values are {@code phase_start} or {@code automatic}. If {@code phase_start} then
+     * billing cycle anchor of the subscription is set to the start of the phase when entering the
+     * phase. If {@code automatic} then the billing cycle anchor is automatically modified as needed
+     * when entering the phase. For more information, see the billing cycle <a
+     * href="https://stripe.com/docs/billing/subscriptions/billing-cycle">documentation</a>.
+     *
+     * <p>One of {@code automatic}, or {@code phase_start}.
+     */
+    @SerializedName("billing_cycle_anchor")
+    String billingCycleAnchor;
 
     /**
      * Define thresholds at which an invoice will be sent, and the subscription advanced to a new

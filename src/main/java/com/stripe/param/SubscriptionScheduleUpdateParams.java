@@ -294,6 +294,15 @@ public class SubscriptionScheduleUpdateParams extends ApiRequestParams {
   @Getter
   public static class DefaultSettings {
     /**
+     * Can be set to {@code phase_start} to set the anchor to the start of the phase or {@code
+     * automatic} to automatically change it if needed. Cannot be set to {@code phase_start} if this
+     * phase specifies a trial. For more information, see the billing cycle <a
+     * href="https://stripe.com/docs/billing/subscriptions/billing-cycle">documentation</a>.
+     */
+    @SerializedName("billing_cycle_anchor")
+    BillingCycleAnchor billingCycleAnchor;
+
+    /**
      * Define thresholds at which an invoice will be sent, and the subscription advanced to a new
      * billing period. Pass an empty string to remove previously-defined thresholds.
      */
@@ -339,12 +348,14 @@ public class SubscriptionScheduleUpdateParams extends ApiRequestParams {
     Object transferData;
 
     private DefaultSettings(
+        BillingCycleAnchor billingCycleAnchor,
         Object billingThresholds,
         CollectionMethod collectionMethod,
         Object defaultPaymentMethod,
         Map<String, Object> extraParams,
         InvoiceSettings invoiceSettings,
         Object transferData) {
+      this.billingCycleAnchor = billingCycleAnchor;
       this.billingThresholds = billingThresholds;
       this.collectionMethod = collectionMethod;
       this.defaultPaymentMethod = defaultPaymentMethod;
@@ -358,6 +369,8 @@ public class SubscriptionScheduleUpdateParams extends ApiRequestParams {
     }
 
     public static class Builder {
+      private BillingCycleAnchor billingCycleAnchor;
+
       private Object billingThresholds;
 
       private CollectionMethod collectionMethod;
@@ -373,12 +386,24 @@ public class SubscriptionScheduleUpdateParams extends ApiRequestParams {
       /** Finalize and obtain parameter instance from this builder. */
       public DefaultSettings build() {
         return new DefaultSettings(
+            this.billingCycleAnchor,
             this.billingThresholds,
             this.collectionMethod,
             this.defaultPaymentMethod,
             this.extraParams,
             this.invoiceSettings,
             this.transferData);
+      }
+
+      /**
+       * Can be set to {@code phase_start} to set the anchor to the start of the phase or {@code
+       * automatic} to automatically change it if needed. Cannot be set to {@code phase_start} if
+       * this phase specifies a trial. For more information, see the billing cycle <a
+       * href="https://stripe.com/docs/billing/subscriptions/billing-cycle">documentation</a>.
+       */
+      public Builder setBillingCycleAnchor(BillingCycleAnchor billingCycleAnchor) {
+        this.billingCycleAnchor = billingCycleAnchor;
+        return this;
       }
 
       /**
@@ -759,6 +784,21 @@ public class SubscriptionScheduleUpdateParams extends ApiRequestParams {
       }
     }
 
+    public enum BillingCycleAnchor implements ApiRequestParams.EnumParam {
+      @SerializedName("automatic")
+      AUTOMATIC("automatic"),
+
+      @SerializedName("phase_start")
+      PHASE_START("phase_start");
+
+      @Getter(onMethod_ = {@Override})
+      private final String value;
+
+      BillingCycleAnchor(String value) {
+        this.value = value;
+      }
+    }
+
     public enum CollectionMethod implements ApiRequestParams.EnumParam {
       @SerializedName("charge_automatically")
       CHARGE_AUTOMATICALLY("charge_automatically"),
@@ -794,6 +834,15 @@ public class SubscriptionScheduleUpdateParams extends ApiRequestParams {
      */
     @SerializedName("application_fee_percent")
     BigDecimal applicationFeePercent;
+
+    /**
+     * Can be set to {@code phase_start} to set the anchor to the start of the phase or {@code
+     * automatic} to automatically change it if needed. Cannot be set to {@code phase_start} if this
+     * phase specifies a trial. For more information, see the billing cycle <a
+     * href="https://stripe.com/docs/billing/subscriptions/billing-cycle">documentation</a>.
+     */
+    @SerializedName("billing_cycle_anchor")
+    BillingCycleAnchor billingCycleAnchor;
 
     /**
      * Define thresholds at which an invoice will be sent, and the subscription advanced to a new
@@ -924,6 +973,7 @@ public class SubscriptionScheduleUpdateParams extends ApiRequestParams {
     private Phase(
         List<AddInvoiceItem> addInvoiceItems,
         BigDecimal applicationFeePercent,
+        BillingCycleAnchor billingCycleAnchor,
         Object billingThresholds,
         CollectionMethod collectionMethod,
         Object coupon,
@@ -942,6 +992,7 @@ public class SubscriptionScheduleUpdateParams extends ApiRequestParams {
         Object trialEnd) {
       this.addInvoiceItems = addInvoiceItems;
       this.applicationFeePercent = applicationFeePercent;
+      this.billingCycleAnchor = billingCycleAnchor;
       this.billingThresholds = billingThresholds;
       this.collectionMethod = collectionMethod;
       this.coupon = coupon;
@@ -968,6 +1019,8 @@ public class SubscriptionScheduleUpdateParams extends ApiRequestParams {
       private List<AddInvoiceItem> addInvoiceItems;
 
       private BigDecimal applicationFeePercent;
+
+      private BillingCycleAnchor billingCycleAnchor;
 
       private Object billingThresholds;
 
@@ -1006,6 +1059,7 @@ public class SubscriptionScheduleUpdateParams extends ApiRequestParams {
         return new Phase(
             this.addInvoiceItems,
             this.applicationFeePercent,
+            this.billingCycleAnchor,
             this.billingThresholds,
             this.collectionMethod,
             this.coupon,
@@ -1060,6 +1114,17 @@ public class SubscriptionScheduleUpdateParams extends ApiRequestParams {
        */
       public Builder setApplicationFeePercent(BigDecimal applicationFeePercent) {
         this.applicationFeePercent = applicationFeePercent;
+        return this;
+      }
+
+      /**
+       * Can be set to {@code phase_start} to set the anchor to the start of the phase or {@code
+       * automatic} to automatically change it if needed. Cannot be set to {@code phase_start} if
+       * this phase specifies a trial. For more information, see the billing cycle <a
+       * href="https://stripe.com/docs/billing/subscriptions/billing-cycle">documentation</a>.
+       */
+      public Builder setBillingCycleAnchor(BillingCycleAnchor billingCycleAnchor) {
+        this.billingCycleAnchor = billingCycleAnchor;
         return this;
       }
 
@@ -2494,6 +2559,21 @@ public class SubscriptionScheduleUpdateParams extends ApiRequestParams {
           this.extraParams.putAll(map);
           return this;
         }
+      }
+    }
+
+    public enum BillingCycleAnchor implements ApiRequestParams.EnumParam {
+      @SerializedName("automatic")
+      AUTOMATIC("automatic"),
+
+      @SerializedName("phase_start")
+      PHASE_START("phase_start");
+
+      @Getter(onMethod_ = {@Override})
+      private final String value;
+
+      BillingCycleAnchor(String value) {
+        this.value = value;
       }
     }
 

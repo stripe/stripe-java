@@ -20,8 +20,9 @@ import lombok.Setter;
 @EqualsAndHashCode(callSuper = false)
 public class TaxRate extends ApiResource implements HasId, MetadataStore<TaxRate> {
   /**
-   * Defaults to {@code true}. When set to {@code false}, this tax rate cannot be applied to objects
-   * in the API, but will still be applied to subscriptions and invoices that already have it set.
+   * Defaults to {@code true}. When set to {@code false}, this tax rate is considered archived and
+   * cannot be applied to new applications or Checkout Sessions, but will still be applied to
+   * subscriptions and invoices that already have it set.
    */
   @SerializedName("active")
   Boolean active;
