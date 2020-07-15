@@ -104,7 +104,11 @@ public class PaymentIntentUpdateParams extends ApiRequestParams {
   @SerializedName("payment_method_types")
   List<String> paymentMethodTypes;
 
-  /** Email address that the receipt for the resulting payment will be sent to. */
+  /**
+   * Email address that the receipt for the resulting payment will be sent to. If {@code
+   * receipt_email} is specified for a payment in live mode, a receipt will be sent regardless of
+   * your <a href="https://dashboard.stripe.com/account/emails">email settings</a>.
+   */
   @SerializedName("receipt_email")
   Object receiptEmail;
 
@@ -575,13 +579,21 @@ public class PaymentIntentUpdateParams extends ApiRequestParams {
       return this;
     }
 
-    /** Email address that the receipt for the resulting payment will be sent to. */
+    /**
+     * Email address that the receipt for the resulting payment will be sent to. If {@code
+     * receipt_email} is specified for a payment in live mode, a receipt will be sent regardless of
+     * your <a href="https://dashboard.stripe.com/account/emails">email settings</a>.
+     */
     public Builder setReceiptEmail(String receiptEmail) {
       this.receiptEmail = receiptEmail;
       return this;
     }
 
-    /** Email address that the receipt for the resulting payment will be sent to. */
+    /**
+     * Email address that the receipt for the resulting payment will be sent to. If {@code
+     * receipt_email} is specified for a payment in live mode, a receipt will be sent regardless of
+     * your <a href="https://dashboard.stripe.com/account/emails">email settings</a>.
+     */
     public Builder setReceiptEmail(EmptyParam receiptEmail) {
       this.receiptEmail = receiptEmail;
       return this;

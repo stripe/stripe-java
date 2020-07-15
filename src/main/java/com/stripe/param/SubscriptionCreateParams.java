@@ -133,7 +133,7 @@ public class SubscriptionCreateParams extends ApiRequestParams {
   @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
   Map<String, Object> extraParams;
 
-  /** A list of up to 20 subscription items, each with an attached plan. */
+  /** A list of up to 20 subscription items, each with an attached price. */
   @SerializedName("items")
   List<Item> items;
 
