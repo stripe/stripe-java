@@ -1,5 +1,8 @@
 # Changelog
 
+## 19.29.0 - 2020-07-15
+* [#1057](https://github.com/stripe/stripe-java/pull/1057) Add support for `amount_total`, `amount_subtotal`, `currency` and `total_details` on Checkout `Session`
+
 ## 19.28.0 - 2020-07-13
 * [#1055](https://github.com/stripe/stripe-java/pull/1055) Multiple API changes
   * Adds `es-419` as a `locale` to Checkout `Session`
