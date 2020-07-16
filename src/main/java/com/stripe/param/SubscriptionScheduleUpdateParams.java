@@ -65,7 +65,7 @@ public class SubscriptionScheduleUpdateParams extends ApiRequestParams {
   Boolean prorate;
 
   /**
-   * If the update changes the current phase, indicates if the changes should be prorated. Valid
+   * If the update changes the current phase, indicates if the changes should be prorated. Possible
    * values are {@code create_prorations} or {@code none}, and the default value is {@code
    * create_prorations}.
    */
@@ -281,9 +281,9 @@ public class SubscriptionScheduleUpdateParams extends ApiRequestParams {
     }
 
     /**
-     * If the update changes the current phase, indicates if the changes should be prorated. Valid
-     * values are {@code create_prorations} or {@code none}, and the default value is {@code
-     * create_prorations}.
+     * If the update changes the current phase, indicates if the changes should be prorated.
+     * Possible values are {@code create_prorations} or {@code none}, and the default value is
+     * {@code create_prorations}.
      */
     public Builder setProrationBehavior(ProrationBehavior prorationBehavior) {
       this.prorationBehavior = prorationBehavior;
@@ -922,8 +922,8 @@ public class SubscriptionScheduleUpdateParams extends ApiRequestParams {
 
     /**
      * Controls whether or not a subscription schedule will create prorations when transitioning to
-     * this phase. Valid values are {@code create_prorations} or {@code none}, and the default value
-     * is {@code create_prorations}. See <a
+     * this phase. Possible values are {@code create_prorations} or {@code none}, and the default
+     * value is {@code create_prorations}. See <a
      * href="https://stripe.com/docs/billing/subscriptions/prorations">Prorations</a>.
      */
     @SerializedName("proration_behavior")
@@ -1333,8 +1333,8 @@ public class SubscriptionScheduleUpdateParams extends ApiRequestParams {
 
       /**
        * Controls whether or not a subscription schedule will create prorations when transitioning
-       * to this phase. Valid values are {@code create_prorations} or {@code none}, and the default
-       * value is {@code create_prorations}. See <a
+       * to this phase. Possible values are {@code create_prorations} or {@code none}, and the
+       * default value is {@code create_prorations}. See <a
        * href="https://stripe.com/docs/billing/subscriptions/prorations">Prorations</a>.
        */
       public Builder setProrationBehavior(ProrationBehavior prorationBehavior) {

@@ -95,7 +95,7 @@ public class InvoiceUpcomingParams extends ApiRequestParams {
   @SerializedName("subscription_default_tax_rates")
   Object subscriptionDefaultTaxRates;
 
-  /** List of subscription items, each with an attached plan. */
+  /** A list of up to 20 subscription items, each with an attached price. */
   @SerializedName("subscription_items")
   List<SubscriptionItem> subscriptionItems;
 

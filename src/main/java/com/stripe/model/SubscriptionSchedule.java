@@ -57,7 +57,8 @@ public class SubscriptionSchedule extends ApiResource
   DefaultSettings defaultSettings;
 
   /**
-   * Behavior of the subscription schedule and underlying subscription when it ends.
+   * Behavior of the subscription schedule and underlying subscription when it ends. Possible values
+   * are {@code release} and {@code cancel}.
    *
    * <p>One of {@code cancel}, {@code none}, {@code release}, or {@code renew}.
    */
@@ -687,7 +688,7 @@ public class SubscriptionSchedule extends ApiResource
 
     /**
      * Controls whether or not the subscription schedule will prorate when transitioning to this
-     * phase. Values are {@code create_prorations} and {@code none}.
+     * phase. Possible values are {@code create_prorations} and {@code none}.
      *
      * <p>One of {@code always_invoice}, {@code create_prorations}, or {@code none}.
      */
