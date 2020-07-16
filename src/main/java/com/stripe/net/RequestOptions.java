@@ -31,29 +31,29 @@ public class RequestOptions {
 
   public static RequestOptions getDefault() {
     return new RequestOptions(
-      Stripe.apiKey,
-      Stripe.clientId,
-      null,
-      null,
-      null,
-      Stripe.getConnectTimeout(),
-      Stripe.getReadTimeout(),
-      Stripe.getMaxNetworkRetries(),
-      Stripe.getConnectionProxy(),
-      Stripe.getProxyCredential());
+        Stripe.apiKey,
+        Stripe.clientId,
+        null,
+        null,
+        null,
+        Stripe.getConnectTimeout(),
+        Stripe.getReadTimeout(),
+        Stripe.getMaxNetworkRetries(),
+        Stripe.getConnectionProxy(),
+        Stripe.getProxyCredential());
   }
 
   private RequestOptions(
-    String apiKey,
-    String clientId,
-    String idempotencyKey,
-    String stripeAccount,
-    String stripeVersionOverride,
-    int connectTimeout,
-    int readTimeout,
-    int maxNetworkRetries,
-    Proxy connectionProxy,
-    PasswordAuthentication proxyCredential) {
+      String apiKey,
+      String clientId,
+      String idempotencyKey,
+      String stripeAccount,
+      String stripeVersionOverride,
+      int connectTimeout,
+      int readTimeout,
+      int maxNetworkRetries,
+      Proxy connectionProxy,
+      PasswordAuthentication proxyCredential) {
     this.apiKey = apiKey;
     this.clientId = clientId;
     this.idempotencyKey = idempotencyKey;
@@ -307,16 +307,14 @@ public class RequestOptions {
     /** Constructs a {@link RequestOptions} with the specified values. */
     public RequestOptions build() {
       return new RequestOptions(
-        normalizeApiKey(this.apiKey),
-        normalizeClientId(this.clientId),
-        normalizeIdempotencyKey(this.idempotencyKey),
-        normalizeStripeAccount(this.stripeAccount),
-        normalizeStripeVersion(this.stripeVersionOverride),
-        connectTimeout,
-        readTimeout,
-        maxNetworkRetries,
-        connectionProxy,
-        proxyCredential);
+          normalizeApiKey(this.apiKey),
+          normalizeClientId(this.clientId),
+          normalizeIdempotencyKey(this.idempotencyKey),
+          normalizeStripeAccount(this.stripeAccount),
+          normalizeStripeVersion(this.stripeVersionOverride),
+          connectTimeout,
+          readTimeout,
+          maxNetworkRetries);
     }
   }
 
@@ -366,9 +364,9 @@ public class RequestOptions {
     }
     if (normalized.length() > 255) {
       throw new InvalidRequestOptionsException(
-        String.format(
-          "Idempotency Key length was %d, which is larger than the 255 character " + "maximum!",
-          normalized.length()));
+          String.format(
+              "Idempotency Key length was %d, which is larger than the 255 character " + "maximum!",
+              normalized.length()));
     }
     return normalized;
   }
