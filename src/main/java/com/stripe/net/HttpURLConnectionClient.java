@@ -39,9 +39,9 @@ public class HttpURLConnectionClient extends HttpClient {
       final HttpHeaders headers = HttpHeaders.of(conn.getHeaderFields());
 
       final InputStream responseStream =
-          (responseCode >= 200 && responseCode < 300)
-              ? conn.getInputStream()
-              : conn.getErrorStream();
+        (responseCode >= 200 && responseCode < 300)
+          ? conn.getInputStream()
+          : conn.getErrorStream();
 
       final String responseBody = StreamUtils.readToEnd(responseStream, ApiResource.CHARSET);
 
@@ -51,13 +51,13 @@ public class HttpURLConnectionClient extends HttpClient {
 
     } catch (IOException e) {
       throw new ApiConnectionException(
-          String.format(
-              "IOException during API request to Stripe (%s): %s "
-                  + "Please check your internet connection and try again. If this problem persists,"
-                  + "you should check Stripe's service status at https://twitter.com/stripestatus,"
-                  + " or let us know at support@stripe.com.",
-              Stripe.getApiBase(), e.getMessage()),
-          e);
+        String.format(
+          "IOException during API request to Stripe (%s): %s "
+            + "Please check your internet connection and try again. If this problem persists,"
+            + "you should check Stripe's service status at https://twitter.com/stripestatus,"
+            + " or let us know at support@stripe.com.",
+          Stripe.getApiBase(), e.getMessage()),
+        e);
     }
   }
 
@@ -66,24 +66,24 @@ public class HttpURLConnectionClient extends HttpClient {
 
     userAgentHeadersMap.put("User-Agent", Arrays.asList(buildUserAgentString()));
     userAgentHeadersMap.put(
-        "X-Stripe-Client-User-Agent", Arrays.asList(buildXStripeClientUserAgentString()));
+      "X-Stripe-Client-User-Agent", Arrays.asList(buildXStripeClientUserAgentString()));
 
     return request.headers().withAdditionalHeaders(userAgentHeadersMap);
   }
 
   private static HttpURLConnection createStripeConnection(StripeRequest request)
-      throws IOException, ApiConnectionException {
+    throws IOException, ApiConnectionException {
     HttpURLConnection conn = null;
 
-    if (Stripe.getConnectionProxy() != null) {
-      conn = (HttpURLConnection) request.url().openConnection(Stripe.getConnectionProxy());
+    if (request.options().getConnectionProxy() != null) {
+      conn = (HttpURLConnection) request.url().openConnection(request.options().getConnectionProxy());
       Authenticator.setDefault(
-          new Authenticator() {
-            @Override
-            protected PasswordAuthentication getPasswordAuthentication() {
-              return Stripe.getProxyCredential();
-            }
-          });
+        new Authenticator() {
+          @Override
+          protected PasswordAuthentication getPasswordAuthentication() {
+            return request.options().getProxyCredential();
+          }
+        });
     } else {
       conn = (HttpURLConnection) request.url().openConnection();
     }

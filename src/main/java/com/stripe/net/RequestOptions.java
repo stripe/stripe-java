@@ -1,6 +1,9 @@
 package com.stripe.net;
 
 import com.stripe.Stripe;
+
+import java.net.PasswordAuthentication;
+import java.net.Proxy;
 import java.util.Map;
 import lombok.EqualsAndHashCode;
 
@@ -23,27 +26,34 @@ public class RequestOptions {
 
   private final int maxNetworkRetries;
 
+  private final Proxy connectionProxy;
+  private final PasswordAuthentication proxyCredential;
+
   public static RequestOptions getDefault() {
     return new RequestOptions(
-        Stripe.apiKey,
-        Stripe.clientId,
-        null,
-        null,
-        null,
-        Stripe.getConnectTimeout(),
-        Stripe.getReadTimeout(),
-        Stripe.getMaxNetworkRetries());
+      Stripe.apiKey,
+      Stripe.clientId,
+      null,
+      null,
+      null,
+      Stripe.getConnectTimeout(),
+      Stripe.getReadTimeout(),
+      Stripe.getMaxNetworkRetries(),
+      Stripe.getConnectionProxy(),
+      Stripe.getProxyCredential());
   }
 
   private RequestOptions(
-      String apiKey,
-      String clientId,
-      String idempotencyKey,
-      String stripeAccount,
-      String stripeVersionOverride,
-      int connectTimeout,
-      int readTimeout,
-      int maxNetworkRetries) {
+    String apiKey,
+    String clientId,
+    String idempotencyKey,
+    String stripeAccount,
+    String stripeVersionOverride,
+    int connectTimeout,
+    int readTimeout,
+    int maxNetworkRetries,
+    Proxy connectionProxy,
+    PasswordAuthentication proxyCredential) {
     this.apiKey = apiKey;
     this.clientId = clientId;
     this.idempotencyKey = idempotencyKey;
@@ -52,6 +62,8 @@ public class RequestOptions {
     this.connectTimeout = connectTimeout;
     this.readTimeout = readTimeout;
     this.maxNetworkRetries = maxNetworkRetries;
+    this.connectionProxy = connectionProxy;
+    this.proxyCredential = proxyCredential;
   }
 
   public String getApiKey() {
@@ -90,6 +102,14 @@ public class RequestOptions {
     return maxNetworkRetries;
   }
 
+  public Proxy getConnectionProxy() {
+    return connectionProxy;
+  }
+
+  public PasswordAuthentication getProxyCredential() {
+    return proxyCredential;
+  }
+
   public static RequestOptionsBuilder builder() {
     return new RequestOptionsBuilder();
   }
@@ -112,6 +132,8 @@ public class RequestOptions {
     private int connectTimeout;
     private int readTimeout;
     private int maxNetworkRetries;
+    private Proxy connectionProxy;
+    private PasswordAuthentication proxyCredential;
 
     /**
      * Constructs a request options builder with the global parameters (API key and client ID) as
@@ -123,6 +145,8 @@ public class RequestOptions {
       this.connectTimeout = Stripe.getConnectTimeout();
       this.readTimeout = Stripe.getReadTimeout();
       this.maxNetworkRetries = Stripe.getMaxNetworkRetries();
+      this.connectionProxy = Stripe.getConnectionProxy();
+      this.proxyCredential = Stripe.getProxyCredential();
     }
 
     public String getApiKey() {
@@ -205,6 +229,34 @@ public class RequestOptions {
       return this;
     }
 
+    public Proxy getConnectionProxy() {
+      return connectionProxy;
+    }
+
+    /**
+     * Set proxy to tunnel requests.
+     *
+     * @param connectionProxy proxy host and port setting
+     */
+    public RequestOptionsBuilder setConnectionProxy(Proxy connectionProxy) {
+      this.connectionProxy = connectionProxy;
+      return this;
+    }
+
+    public PasswordAuthentication getProxyCredential() {
+      return proxyCredential;
+    }
+
+    /**
+     * Provide credential for proxy authorization if required.
+     *
+     * @param proxyCredential proxy required userName and password
+     */
+    public RequestOptionsBuilder setProxyCredential(PasswordAuthentication proxyCredential) {
+      this.proxyCredential = proxyCredential;
+      return this;
+    }
+
     public RequestOptionsBuilder clearIdempotencyKey() {
       this.idempotencyKey = null;
       return this;
@@ -255,14 +307,16 @@ public class RequestOptions {
     /** Constructs a {@link RequestOptions} with the specified values. */
     public RequestOptions build() {
       return new RequestOptions(
-          normalizeApiKey(this.apiKey),
-          normalizeClientId(this.clientId),
-          normalizeIdempotencyKey(this.idempotencyKey),
-          normalizeStripeAccount(this.stripeAccount),
-          normalizeStripeVersion(this.stripeVersionOverride),
-          connectTimeout,
-          readTimeout,
-          maxNetworkRetries);
+        normalizeApiKey(this.apiKey),
+        normalizeClientId(this.clientId),
+        normalizeIdempotencyKey(this.idempotencyKey),
+        normalizeStripeAccount(this.stripeAccount),
+        normalizeStripeVersion(this.stripeVersionOverride),
+        connectTimeout,
+        readTimeout,
+        maxNetworkRetries,
+        connectionProxy,
+        proxyCredential);
     }
   }
 
@@ -312,9 +366,9 @@ public class RequestOptions {
     }
     if (normalized.length() > 255) {
       throw new InvalidRequestOptionsException(
-          String.format(
-              "Idempotency Key length was %d, which is larger than the 255 character " + "maximum!",
-              normalized.length()));
+        String.format(
+          "Idempotency Key length was %d, which is larger than the 255 character " + "maximum!",
+          normalized.length()));
     }
     return normalized;
   }
