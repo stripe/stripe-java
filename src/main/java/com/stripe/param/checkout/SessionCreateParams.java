@@ -3421,6 +3421,9 @@ public class SessionCreateParams extends ApiRequestParams {
     @SerializedName("en")
     EN("en"),
 
+    @SerializedName("en-GB")
+    EN_GB("en-GB"),
+
     @SerializedName("es")
     ES("es"),
 
@@ -3436,8 +3439,14 @@ public class SessionCreateParams extends ApiRequestParams {
     @SerializedName("fr")
     FR("fr"),
 
+    @SerializedName("fr-CA")
+    FR_CA("fr-CA"),
+
     @SerializedName("hu")
     HU("hu"),
+
+    @SerializedName("id")
+    ID("id"),
 
     @SerializedName("it")
     IT("it"),
