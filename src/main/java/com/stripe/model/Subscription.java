@@ -148,7 +148,7 @@ public class Subscription extends ApiResource implements HasId, MetadataStore<Su
   @SerializedName("id")
   String id;
 
-  /** List of subscription items, each with an attached plan. */
+  /** List of subscription items, each with an attached price. */
   @SerializedName("items")
   SubscriptionItemCollection items;
 

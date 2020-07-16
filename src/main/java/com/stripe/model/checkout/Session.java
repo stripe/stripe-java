@@ -6,6 +6,7 @@ import com.stripe.exception.StripeException;
 import com.stripe.model.Customer;
 import com.stripe.model.ExpandableField;
 import com.stripe.model.HasId;
+import com.stripe.model.LineItem;
 import com.stripe.model.LineItemCollection;
 import com.stripe.model.PaymentIntent;
 import com.stripe.model.Plan;
@@ -30,9 +31,18 @@ import lombok.Setter;
 @Setter
 @EqualsAndHashCode(callSuper = false)
 public class Session extends ApiResource implements HasId {
+  /** Total of all items before discounts or taxes are applied. */
+  @SerializedName("amount_subtotal")
+  Long amountSubtotal;
+
+  /** Total of all items after discounts and taxes are applied. */
+  @SerializedName("amount_total")
+  Long amountTotal;
+
   /**
-   * The value ({@code auto} or {@code required}) for whether Checkout collected the customer's
-   * billing address.
+   * Describes whether Checkout should collect the customer's billing address.
+   *
+   * <p>One of {@code auto}, or {@code required}.
    */
   @SerializedName("billing_address_collection")
   String billingAddressCollection;
@@ -50,6 +60,13 @@ public class Session extends ApiResource implements HasId {
    */
   @SerializedName("client_reference_id")
   String clientReferenceId;
+
+  /**
+   * Three-letter <a href="https://www.iso.org/iso-4217-currency-codes.html">ISO currency code</a>,
+   * in lowercase. Must be a <a href="https://stripe.com/docs/currencies">supported currency</a>.
+   */
+  @SerializedName("currency")
+  String currency;
 
   /**
    * The ID of the customer for this session. For Checkout Sessions in {@code payment} or {@code
@@ -177,6 +194,10 @@ public class Session extends ApiResource implements HasId {
    */
   @SerializedName("success_url")
   String successUrl;
+
+  /** Tax and discount details for the computed total amount. */
+  @SerializedName("total_details")
+  TotalDetails totalDetails;
 
   /** Get ID of expandable {@code customer} object. */
   public String getCustomer() {
@@ -462,5 +483,34 @@ public class Session extends ApiResource implements HasId {
      */
     @SerializedName("allowed_countries")
     List<String> allowedCountries;
+  }
+
+  @Getter
+  @Setter
+  @EqualsAndHashCode(callSuper = false)
+  public static class TotalDetails extends StripeObject {
+    /** This is the sum of all the line item discounts. */
+    @SerializedName("amount_discount")
+    Long amountDiscount;
+
+    /** This is the sum of all the line item tax amounts. */
+    @SerializedName("amount_tax")
+    Long amountTax;
+
+    @SerializedName("breakdown")
+    Breakdown breakdown;
+
+    @Getter
+    @Setter
+    @EqualsAndHashCode(callSuper = false)
+    public static class Breakdown extends StripeObject {
+      /** The aggregated line item discounts. */
+      @SerializedName("discounts")
+      List<LineItem.Discount> discounts;
+
+      /** The aggregated line item tax amounts by rate. */
+      @SerializedName("taxes")
+      List<LineItem.Tax> taxes;
+    }
   }
 }

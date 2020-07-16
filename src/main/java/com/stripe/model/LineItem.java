@@ -81,7 +81,7 @@ public class LineItem extends StripeObject implements HasId {
   @Setter
   @EqualsAndHashCode(callSuper = false)
   public static class Discount extends StripeObject {
-    /** Discount amount for this line item. */
+    /** The amount discounted. */
     @SerializedName("amount")
     Long amount;
 
@@ -100,12 +100,16 @@ public class LineItem extends StripeObject implements HasId {
   @Setter
   @EqualsAndHashCode(callSuper = false)
   public static class Tax extends StripeObject {
-    /** Amount of tax for this line item. */
+    /** Amount of tax applied for this rate. */
     @SerializedName("amount")
     Long amount;
 
     /**
-     * Tax rates can be applied to invoices and subscriptions to collect tax.
+     * Tax rates can be applied to <a
+     * href="https://stripe.com/docs/billing/invoices/tax-rates">invoices</a>, <a
+     * href="https://stripe.com/docs/billing/subscriptions/taxes">subscriptions</a> and <a
+     * href="https://stripe.com/docs/payments/checkout/set-up-a-subscription#tax-rates">Checkout
+     * Sessions</a> to collect tax.
      *
      * <p>Related guide: <a href="https://stripe.com/docs/billing/taxes/tax-rates">Tax Rates</a>.
      */

@@ -207,7 +207,11 @@ public class PaymentIntent extends ApiResource implements HasId, MetadataStore<P
   @SerializedName("payment_method_types")
   List<String> paymentMethodTypes;
 
-  /** Email address that the receipt for the resulting payment will be sent to. */
+  /**
+   * Email address that the receipt for the resulting payment will be sent to. If {@code
+   * receipt_email} is specified for a payment in live mode, a receipt will be sent regardless of
+   * your <a href="https://dashboard.stripe.com/account/emails">email settings</a>.
+   */
   @SerializedName("receipt_email")
   String receiptEmail;
 
@@ -858,7 +862,7 @@ public class PaymentIntent extends ApiResource implements HasId, MetadataStore<P
   /**
    * A PaymentIntent object can be canceled when it is in one of these statuses: <code>
    * requires_payment_method</code>, <code>requires_capture</code>, <code>requires_confirmation
-   * </code>, <code>requires_action</code>.
+   * </code>, or <code>requires_action</code>.
    *
    * <p>Once canceled, no additional charges will be made by the PaymentIntent and any operations on
    * the PaymentIntent will fail with an error. For PaymentIntents with <code>
@@ -872,7 +876,7 @@ public class PaymentIntent extends ApiResource implements HasId, MetadataStore<P
   /**
    * A PaymentIntent object can be canceled when it is in one of these statuses: <code>
    * requires_payment_method</code>, <code>requires_capture</code>, <code>requires_confirmation
-   * </code>, <code>requires_action</code>.
+   * </code>, or <code>requires_action</code>.
    *
    * <p>Once canceled, no additional charges will be made by the PaymentIntent and any operations on
    * the PaymentIntent will fail with an error. For PaymentIntents with <code>
@@ -886,7 +890,7 @@ public class PaymentIntent extends ApiResource implements HasId, MetadataStore<P
   /**
    * A PaymentIntent object can be canceled when it is in one of these statuses: <code>
    * requires_payment_method</code>, <code>requires_capture</code>, <code>requires_confirmation
-   * </code>, <code>requires_action</code>.
+   * </code>, or <code>requires_action</code>.
    *
    * <p>Once canceled, no additional charges will be made by the PaymentIntent and any operations on
    * the PaymentIntent will fail with an error. For PaymentIntents with <code>
@@ -900,7 +904,7 @@ public class PaymentIntent extends ApiResource implements HasId, MetadataStore<P
   /**
    * A PaymentIntent object can be canceled when it is in one of these statuses: <code>
    * requires_payment_method</code>, <code>requires_capture</code>, <code>requires_confirmation
-   * </code>, <code>requires_action</code>.
+   * </code>, or <code>requires_action</code>.
    *
    * <p>Once canceled, no additional charges will be made by the PaymentIntent and any operations on
    * the PaymentIntent will fail with an error. For PaymentIntents with <code>
@@ -921,7 +925,7 @@ public class PaymentIntent extends ApiResource implements HasId, MetadataStore<P
   /**
    * A PaymentIntent object can be canceled when it is in one of these statuses: <code>
    * requires_payment_method</code>, <code>requires_capture</code>, <code>requires_confirmation
-   * </code>, <code>requires_action</code>.
+   * </code>, or <code>requires_action</code>.
    *
    * <p>Once canceled, no additional charges will be made by the PaymentIntent and any operations on
    * the PaymentIntent will fail with an error. For PaymentIntents with <code>
@@ -935,7 +939,7 @@ public class PaymentIntent extends ApiResource implements HasId, MetadataStore<P
   /**
    * A PaymentIntent object can be canceled when it is in one of these statuses: <code>
    * requires_payment_method</code>, <code>requires_capture</code>, <code>requires_confirmation
-   * </code>, <code>requires_action</code>.
+   * </code>, or <code>requires_action</code>.
    *
    * <p>Once canceled, no additional charges will be made by the PaymentIntent and any operations on
    * the PaymentIntent will fail with an error. For PaymentIntents with <code>

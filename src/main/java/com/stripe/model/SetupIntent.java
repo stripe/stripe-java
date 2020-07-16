@@ -556,8 +556,8 @@ public class SetupIntent extends ApiResource implements HasId, MetadataStore<Set
 
   /**
    * A SetupIntent object can be canceled when it is in one of these statuses: <code>
-   * requires_payment_method</code>, <code>requires_capture</code>, <code>requires_confirmation
-   * </code>, <code>requires_action</code>.
+   * requires_payment_method</code>, <code>requires_confirmation</code>, or <code>requires_action
+   * </code>.
    *
    * <p>Once canceled, setup is abandoned and any operations on the SetupIntent will fail with an
    * error.
@@ -568,8 +568,8 @@ public class SetupIntent extends ApiResource implements HasId, MetadataStore<Set
 
   /**
    * A SetupIntent object can be canceled when it is in one of these statuses: <code>
-   * requires_payment_method</code>, <code>requires_capture</code>, <code>requires_confirmation
-   * </code>, <code>requires_action</code>.
+   * requires_payment_method</code>, <code>requires_confirmation</code>, or <code>requires_action
+   * </code>.
    *
    * <p>Once canceled, setup is abandoned and any operations on the SetupIntent will fail with an
    * error.
@@ -580,8 +580,8 @@ public class SetupIntent extends ApiResource implements HasId, MetadataStore<Set
 
   /**
    * A SetupIntent object can be canceled when it is in one of these statuses: <code>
-   * requires_payment_method</code>, <code>requires_capture</code>, <code>requires_confirmation
-   * </code>, <code>requires_action</code>.
+   * requires_payment_method</code>, <code>requires_confirmation</code>, or <code>requires_action
+   * </code>.
    *
    * <p>Once canceled, setup is abandoned and any operations on the SetupIntent will fail with an
    * error.
@@ -592,8 +592,8 @@ public class SetupIntent extends ApiResource implements HasId, MetadataStore<Set
 
   /**
    * A SetupIntent object can be canceled when it is in one of these statuses: <code>
-   * requires_payment_method</code>, <code>requires_capture</code>, <code>requires_confirmation
-   * </code>, <code>requires_action</code>.
+   * requires_payment_method</code>, <code>requires_confirmation</code>, or <code>requires_action
+   * </code>.
    *
    * <p>Once canceled, setup is abandoned and any operations on the SetupIntent will fail with an
    * error.
@@ -611,8 +611,8 @@ public class SetupIntent extends ApiResource implements HasId, MetadataStore<Set
 
   /**
    * A SetupIntent object can be canceled when it is in one of these statuses: <code>
-   * requires_payment_method</code>, <code>requires_capture</code>, <code>requires_confirmation
-   * </code>, <code>requires_action</code>.
+   * requires_payment_method</code>, <code>requires_confirmation</code>, or <code>requires_action
+   * </code>.
    *
    * <p>Once canceled, setup is abandoned and any operations on the SetupIntent will fail with an
    * error.
@@ -623,8 +623,8 @@ public class SetupIntent extends ApiResource implements HasId, MetadataStore<Set
 
   /**
    * A SetupIntent object can be canceled when it is in one of these statuses: <code>
-   * requires_payment_method</code>, <code>requires_capture</code>, <code>requires_confirmation
-   * </code>, <code>requires_action</code>.
+   * requires_payment_method</code>, <code>requires_confirmation</code>, or <code>requires_action
+   * </code>.
    *
    * <p>Once canceled, setup is abandoned and any operations on the SetupIntent will fail with an
    * error.
