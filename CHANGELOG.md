@@ -1,5 +1,8 @@
 # Changelog
 
+## 19.30.0 - 2020-07-15
+* [#1058](https://github.com/stripe/stripe-java/pull/1058) Add support for `en-GB`, `fr-CA` and `id` as `locale` on Checkout `Session`
+
 ## 19.29.0 - 2020-07-15
 * [#1057](https://github.com/stripe/stripe-java/pull/1057) Add support for `amount_total`, `amount_subtotal`, `currency` and `total_details` on Checkout `Session`
 
