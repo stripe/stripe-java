@@ -109,6 +109,14 @@ public class PersonCollectionCreateParams extends ApiRequestParams {
   @SerializedName("phone")
   String phone;
 
+  /**
+   * Indicates if the person or any of their representatives, family members, or other closely
+   * related persons, declares that they hold or have held an important public job or function, in
+   * any jurisdiction.
+   */
+  @SerializedName("political_exposure")
+  String politicalExposure;
+
   /** The relationship that this person has with the account's legal entity. */
   @SerializedName("relationship")
   Relationship relationship;
@@ -141,6 +149,7 @@ public class PersonCollectionCreateParams extends ApiRequestParams {
       Object metadata,
       String personToken,
       String phone,
+      String politicalExposure,
       Relationship relationship,
       String ssnLast4,
       Verification verification) {
@@ -163,6 +172,7 @@ public class PersonCollectionCreateParams extends ApiRequestParams {
     this.metadata = metadata;
     this.personToken = personToken;
     this.phone = phone;
+    this.politicalExposure = politicalExposure;
     this.relationship = relationship;
     this.ssnLast4 = ssnLast4;
     this.verification = verification;
@@ -211,6 +221,8 @@ public class PersonCollectionCreateParams extends ApiRequestParams {
 
     private String phone;
 
+    private String politicalExposure;
+
     private Relationship relationship;
 
     private String ssnLast4;
@@ -239,6 +251,7 @@ public class PersonCollectionCreateParams extends ApiRequestParams {
           this.metadata,
           this.personToken,
           this.phone,
+          this.politicalExposure,
           this.relationship,
           this.ssnLast4,
           this.verification);
@@ -456,6 +469,16 @@ public class PersonCollectionCreateParams extends ApiRequestParams {
     /** The person's phone number. */
     public Builder setPhone(String phone) {
       this.phone = phone;
+      return this;
+    }
+
+    /**
+     * Indicates if the person or any of their representatives, family members, or other closely
+     * related persons, declares that they hold or have held an important public job or function, in
+     * any jurisdiction.
+     */
+    public Builder setPoliticalExposure(String politicalExposure) {
+      this.politicalExposure = politicalExposure;
       return this;
     }
 

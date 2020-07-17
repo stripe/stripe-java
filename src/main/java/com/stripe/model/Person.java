@@ -112,6 +112,16 @@ public class Person extends ApiResource implements HasId, MetadataStore<Person> 
   @SerializedName("phone")
   String phone;
 
+  /**
+   * Indicates if the person or any of their representatives, family members, or other closely
+   * related persons, declares that they hold or have held an important public job or function, in
+   * any jurisdiction.
+   *
+   * <p>One of {@code existing}, or {@code none}.
+   */
+  @SerializedName("political_exposure")
+  String politicalExposure;
+
   @SerializedName("relationship")
   Relationship relationship;
 

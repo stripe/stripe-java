@@ -1502,6 +1502,14 @@ public class TokenCreateParams extends ApiRequestParams {
       @SerializedName("phone")
       String phone;
 
+      /**
+       * Indicates if the person or any of their representatives, family members, or other closely
+       * related persons, declares that they hold or have held an important public job or function,
+       * in any jurisdiction.
+       */
+      @SerializedName("political_exposure")
+      PoliticalExposure politicalExposure;
+
       /** The last four digits of the individual's Social Security Number (U.S. only). */
       @SerializedName("ssn_last_4")
       String ssnLast4;
@@ -1528,6 +1536,7 @@ public class TokenCreateParams extends ApiRequestParams {
           String maidenName,
           Object metadata,
           String phone,
+          PoliticalExposure politicalExposure,
           String ssnLast4,
           Verification verification) {
         this.address = address;
@@ -1547,6 +1556,7 @@ public class TokenCreateParams extends ApiRequestParams {
         this.maidenName = maidenName;
         this.metadata = metadata;
         this.phone = phone;
+        this.politicalExposure = politicalExposure;
         this.ssnLast4 = ssnLast4;
         this.verification = verification;
       }
@@ -1590,6 +1600,8 @@ public class TokenCreateParams extends ApiRequestParams {
 
         private String phone;
 
+        private PoliticalExposure politicalExposure;
+
         private String ssnLast4;
 
         private Verification verification;
@@ -1614,6 +1626,7 @@ public class TokenCreateParams extends ApiRequestParams {
               this.maidenName,
               this.metadata,
               this.phone,
+              this.politicalExposure,
               this.ssnLast4,
               this.verification);
         }
@@ -1799,6 +1812,16 @@ public class TokenCreateParams extends ApiRequestParams {
         /** The individual's phone number. */
         public Builder setPhone(String phone) {
           this.phone = phone;
+          return this;
+        }
+
+        /**
+         * Indicates if the person or any of their representatives, family members, or other closely
+         * related persons, declares that they hold or have held an important public job or
+         * function, in any jurisdiction.
+         */
+        public Builder setPoliticalExposure(PoliticalExposure politicalExposure) {
+          this.politicalExposure = politicalExposure;
           return this;
         }
 
@@ -2718,6 +2741,21 @@ public class TokenCreateParams extends ApiRequestParams {
           }
         }
       }
+
+      public enum PoliticalExposure implements ApiRequestParams.EnumParam {
+        @SerializedName("existing")
+        EXISTING("existing"),
+
+        @SerializedName("none")
+        NONE("none");
+
+        @Getter(onMethod_ = {@Override})
+        private final String value;
+
+        PoliticalExposure(String value) {
+          this.value = value;
+        }
+      }
     }
 
     public enum BusinessType implements ApiRequestParams.EnumParam {
@@ -3233,6 +3271,14 @@ public class TokenCreateParams extends ApiRequestParams {
     @SerializedName("phone")
     String phone;
 
+    /**
+     * Indicates if the person or any of their representatives, family members, or other closely
+     * related persons, declares that they hold or have held an important public job or function, in
+     * any jurisdiction.
+     */
+    @SerializedName("political_exposure")
+    String politicalExposure;
+
     /** The relationship that this person has with the account's legal entity. */
     @SerializedName("relationship")
     Relationship relationship;
@@ -3263,6 +3309,7 @@ public class TokenCreateParams extends ApiRequestParams {
         String maidenName,
         Object metadata,
         String phone,
+        String politicalExposure,
         Relationship relationship,
         String ssnLast4,
         Verification verification) {
@@ -3283,6 +3330,7 @@ public class TokenCreateParams extends ApiRequestParams {
       this.maidenName = maidenName;
       this.metadata = metadata;
       this.phone = phone;
+      this.politicalExposure = politicalExposure;
       this.relationship = relationship;
       this.ssnLast4 = ssnLast4;
       this.verification = verification;
@@ -3327,6 +3375,8 @@ public class TokenCreateParams extends ApiRequestParams {
 
       private String phone;
 
+      private String politicalExposure;
+
       private Relationship relationship;
 
       private String ssnLast4;
@@ -3353,6 +3403,7 @@ public class TokenCreateParams extends ApiRequestParams {
             this.maidenName,
             this.metadata,
             this.phone,
+            this.politicalExposure,
             this.relationship,
             this.ssnLast4,
             this.verification);
@@ -3535,6 +3586,16 @@ public class TokenCreateParams extends ApiRequestParams {
       /** The person's phone number. */
       public Builder setPhone(String phone) {
         this.phone = phone;
+        return this;
+      }
+
+      /**
+       * Indicates if the person or any of their representatives, family members, or other closely
+       * related persons, declares that they hold or have held an important public job or function,
+       * in any jurisdiction.
+       */
+      public Builder setPoliticalExposure(String politicalExposure) {
+        this.politicalExposure = politicalExposure;
         return this;
       }
 

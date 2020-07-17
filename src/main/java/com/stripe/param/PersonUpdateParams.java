@@ -109,6 +109,14 @@ public class PersonUpdateParams extends ApiRequestParams {
   @SerializedName("phone")
   Object phone;
 
+  /**
+   * Indicates if the person or any of their representatives, family members, or other closely
+   * related persons, declares that they hold or have held an important public job or function, in
+   * any jurisdiction.
+   */
+  @SerializedName("political_exposure")
+  Object politicalExposure;
+
   /** The relationship that this person has with the account's legal entity. */
   @SerializedName("relationship")
   Relationship relationship;
@@ -141,6 +149,7 @@ public class PersonUpdateParams extends ApiRequestParams {
       Object metadata,
       Object personToken,
       Object phone,
+      Object politicalExposure,
       Relationship relationship,
       Object ssnLast4,
       Verification verification) {
@@ -163,6 +172,7 @@ public class PersonUpdateParams extends ApiRequestParams {
     this.metadata = metadata;
     this.personToken = personToken;
     this.phone = phone;
+    this.politicalExposure = politicalExposure;
     this.relationship = relationship;
     this.ssnLast4 = ssnLast4;
     this.verification = verification;
@@ -211,6 +221,8 @@ public class PersonUpdateParams extends ApiRequestParams {
 
     private Object phone;
 
+    private Object politicalExposure;
+
     private Relationship relationship;
 
     private Object ssnLast4;
@@ -239,6 +251,7 @@ public class PersonUpdateParams extends ApiRequestParams {
           this.metadata,
           this.personToken,
           this.phone,
+          this.politicalExposure,
           this.relationship,
           this.ssnLast4,
           this.verification);
@@ -539,6 +552,26 @@ public class PersonUpdateParams extends ApiRequestParams {
     /** The person's phone number. */
     public Builder setPhone(EmptyParam phone) {
       this.phone = phone;
+      return this;
+    }
+
+    /**
+     * Indicates if the person or any of their representatives, family members, or other closely
+     * related persons, declares that they hold or have held an important public job or function, in
+     * any jurisdiction.
+     */
+    public Builder setPoliticalExposure(String politicalExposure) {
+      this.politicalExposure = politicalExposure;
+      return this;
+    }
+
+    /**
+     * Indicates if the person or any of their representatives, family members, or other closely
+     * related persons, declares that they hold or have held an important public job or function, in
+     * any jurisdiction.
+     */
+    public Builder setPoliticalExposure(EmptyParam politicalExposure) {
+      this.politicalExposure = politicalExposure;
       return this;
     }
 
