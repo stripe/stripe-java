@@ -1,5 +1,10 @@
 # Changelog
 
+## 19.31.0 - 2020-07-16
+* [#1061](https://github.com/stripe/stripe-java/pull/1061) Multiple API changes
+  * Add `deleted` on `LineItem`
+  * Add support for `account_onboarding` and `account_update` as `type` on `AccountLink`
+
 ## 19.30.0 - 2020-07-15
 * [#1058](https://github.com/stripe/stripe-java/pull/1058) Add support for `en-GB`, `fr-CA` and `id` as `locale` on Checkout `Session`
 
