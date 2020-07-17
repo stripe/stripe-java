@@ -25,6 +25,10 @@ public class LineItem extends StripeObject implements HasId {
   @SerializedName("currency")
   String currency;
 
+  /** Always true for a deleted object. */
+  @SerializedName("deleted")
+  Boolean deleted;
+
   /**
    * An arbitrary string attached to the object. Often useful for displaying to users. Defaults to
    * product name.
