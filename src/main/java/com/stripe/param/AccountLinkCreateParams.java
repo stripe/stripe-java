@@ -55,8 +55,8 @@ public class AccountLinkCreateParams extends ApiRequestParams {
   String successUrl;
 
   /**
-   * The type of account link the user is requesting. Possible values are {@code
-   * custom_account_verification} or {@code custom_account_update}.
+   * The type of account link the user is requesting. Possible values are {@code account_onboarding}
+   * or {@code account_update}.
    */
   @SerializedName("type")
   Type type;
@@ -216,7 +216,7 @@ public class AccountLinkCreateParams extends ApiRequestParams {
 
     /**
      * The type of account link the user is requesting. Possible values are {@code
-     * custom_account_verification} or {@code custom_account_update}.
+     * account_onboarding} or {@code account_update}.
      */
     public Builder setType(Type type) {
       this.type = type;
@@ -240,6 +240,12 @@ public class AccountLinkCreateParams extends ApiRequestParams {
   }
 
   public enum Type implements ApiRequestParams.EnumParam {
+    @SerializedName("account_onboarding")
+    ACCOUNT_ONBOARDING("account_onboarding"),
+
+    @SerializedName("account_update")
+    ACCOUNT_UPDATE("account_update"),
+
     @SerializedName("custom_account_update")
     CUSTOM_ACCOUNT_UPDATE("custom_account_update"),
 
