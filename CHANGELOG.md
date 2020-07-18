@@ -1,5 +1,8 @@
 # Changelog
 
+## 19.32.0 - 2020-07-17
+* [#1062](https://github.com/stripe/stripe-java/pull/1062) Add support for `political_exposure` on `Person`
+
 ## 19.31.0 - 2020-07-16
 * [#1061](https://github.com/stripe/stripe-java/pull/1061) Multiple API changes
   * Add `deleted` on `LineItem`
