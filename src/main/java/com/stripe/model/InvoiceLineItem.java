@@ -1,6 +1,7 @@
 package com.stripe.model;
 
 import com.google.gson.annotations.SerializedName;
+import com.stripe.net.ApiResource;
 import java.util.List;
 import java.util.Map;
 import lombok.EqualsAndHashCode;
@@ -26,9 +27,22 @@ public class InvoiceLineItem extends StripeObject implements HasId {
   @SerializedName("description")
   String description;
 
+  /** The amount of discount calculated per discount for this line item. */
+  @SerializedName("discount_amounts")
+  List<Invoice.DiscountAmount> discountAmounts;
+
   /** If true, discounts will apply to this line item. Always false for prorations. */
   @SerializedName("discountable")
   Boolean discountable;
+
+  /**
+   * The discounts applied to the invoice line item. Line item discounts are applied before invoice
+   * discounts. Use {@code expand[]=discounts} to expand each discount.
+   */
+  @SerializedName("discounts")
+  @Getter(lombok.AccessLevel.NONE)
+  @Setter(lombok.AccessLevel.NONE)
+  ExpandableField<Discount> discounts;
 
   /** Unique identifier for the object. */
   @Getter(onMethod_ = {@Override})
@@ -119,4 +133,22 @@ public class InvoiceLineItem extends StripeObject implements HasId {
    */
   @SerializedName("unified_proration")
   Boolean unifiedProration;
+
+  /** Get ID of expandable {@code discounts} object. */
+  public String getDiscounts() {
+    return (this.discounts != null) ? this.discounts.getId() : null;
+  }
+
+  public void setDiscounts(String id) {
+    this.discounts = ApiResource.setExpandableFieldId(id, this.discounts);
+  }
+
+  /** Get expanded {@code discounts}. */
+  public Discount getDiscountsObject() {
+    return (this.discounts != null) ? this.discounts.getExpanded() : null;
+  }
+
+  public void setDiscountsObject(Discount expandableObject) {
+    this.discounts = new ExpandableField<Discount>(expandableObject.getId(), expandableObject);
+  }
 }

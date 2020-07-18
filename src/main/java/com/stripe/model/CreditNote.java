@@ -58,6 +58,10 @@ public class CreditNote extends ApiResource implements HasId, MetadataStore<Cred
   @SerializedName("discount_amount")
   Long discountAmount;
 
+  /** The aggregate amounts calculated per discount for all line items. */
+  @SerializedName("discount_amounts")
+  List<Invoice.DiscountAmount> discountAmounts;
+
   /** Unique identifier for the object. */
   @Getter(onMethod_ = {@Override})
   @SerializedName("id")

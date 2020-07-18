@@ -9,7 +9,7 @@ import lombok.Setter;
 @Getter
 @Setter
 @EqualsAndHashCode(callSuper = false)
-public class Discount extends StripeObject {
+public class Discount extends StripeObject implements HasId {
   /**
    * A coupon contains information about a percent-off or amount-off discount you might want to
    * apply to a customer. Coupons may be applied to <a
@@ -36,6 +36,29 @@ public class Discount extends StripeObject {
    */
   @SerializedName("end")
   Long end;
+
+  /**
+   * The ID of the discount object. Discounts cannot be fetched by ID. Use {@code
+   * expand[]=discounts} in API calls to expand discount IDs in an array.
+   */
+  @Getter(onMethod_ = {@Override})
+  @SerializedName("id")
+  String id;
+
+  /**
+   * The invoice that the discount's coupon was applied to, if it was applied directly to a
+   * particular invoice.
+   */
+  @SerializedName("invoice")
+  String invoice;
+
+  /**
+   * The invoice item {@code id} (or invoice line item {@code id} for invoice line items of
+   * type='subscription') that the discount's coupon was applied to, if it was applied directly to a
+   * particular invoice item or invoice line item.
+   */
+  @SerializedName("invoice_item")
+  String invoiceItem;
 
   /**
    * String representing the object's type. Objects of the same type share the same value.

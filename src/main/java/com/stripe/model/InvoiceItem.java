@@ -56,6 +56,15 @@ public class InvoiceItem extends ApiResource implements HasId, MetadataStore<Inv
   @SerializedName("discountable")
   Boolean discountable;
 
+  /**
+   * The discounts which apply to the invoice item. Item discounts are applied before invoice
+   * discounts. Use {@code expand[]=discounts} to expand each discount.
+   */
+  @SerializedName("discounts")
+  @Getter(lombok.AccessLevel.NONE)
+  @Setter(lombok.AccessLevel.NONE)
+  ExpandableField<Discount> discounts;
+
   /** Unique identifier for the object. */
   @Getter(onMethod_ = {@Override})
   @SerializedName("id")
@@ -167,6 +176,24 @@ public class InvoiceItem extends ApiResource implements HasId, MetadataStore<Inv
 
   public void setCustomerObject(Customer expandableObject) {
     this.customer = new ExpandableField<Customer>(expandableObject.getId(), expandableObject);
+  }
+
+  /** Get ID of expandable {@code discounts} object. */
+  public String getDiscounts() {
+    return (this.discounts != null) ? this.discounts.getId() : null;
+  }
+
+  public void setDiscounts(String id) {
+    this.discounts = ApiResource.setExpandableFieldId(id, this.discounts);
+  }
+
+  /** Get expanded {@code discounts}. */
+  public Discount getDiscountsObject() {
+    return (this.discounts != null) ? this.discounts.getExpanded() : null;
+  }
+
+  public void setDiscountsObject(Discount expandableObject) {
+    this.discounts = new ExpandableField<Discount>(expandableObject.getId(), expandableObject);
   }
 
   /** Get ID of expandable {@code invoice} object. */

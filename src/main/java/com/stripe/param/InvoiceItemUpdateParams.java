@@ -34,6 +34,14 @@ public class InvoiceItemUpdateParams extends ApiRequestParams {
   @SerializedName("discountable")
   Boolean discountable;
 
+  /**
+   * The coupons &amp; existing discounts which apply to the invoice item or invoice line item. Item
+   * discounts are applied before invoice discounts. Pass an empty string to remove
+   * previously-defined discounts.
+   */
+  @SerializedName("discounts")
+  Object discounts;
+
   /** Specifies which fields in the response should be expanded. */
   @SerializedName("expand")
   List<String> expand;
@@ -99,6 +107,7 @@ public class InvoiceItemUpdateParams extends ApiRequestParams {
       Long amount,
       Object description,
       Boolean discountable,
+      Object discounts,
       List<String> expand,
       Map<String, Object> extraParams,
       Object metadata,
@@ -112,6 +121,7 @@ public class InvoiceItemUpdateParams extends ApiRequestParams {
     this.amount = amount;
     this.description = description;
     this.discountable = discountable;
+    this.discounts = discounts;
     this.expand = expand;
     this.extraParams = extraParams;
     this.metadata = metadata;
@@ -134,6 +144,8 @@ public class InvoiceItemUpdateParams extends ApiRequestParams {
     private Object description;
 
     private Boolean discountable;
+
+    private Object discounts;
 
     private List<String> expand;
 
@@ -161,6 +173,7 @@ public class InvoiceItemUpdateParams extends ApiRequestParams {
           this.amount,
           this.description,
           this.discountable,
+          this.discounts,
           this.expand,
           this.extraParams,
           this.metadata,
@@ -207,6 +220,54 @@ public class InvoiceItemUpdateParams extends ApiRequestParams {
      */
     public Builder setDiscountable(Boolean discountable) {
       this.discountable = discountable;
+      return this;
+    }
+
+    /**
+     * Add an element to `discounts` list. A list is initialized for the first `add/addAll` call,
+     * and subsequent calls adds additional elements to the original list. See {@link
+     * InvoiceItemUpdateParams#discounts} for the field documentation.
+     */
+    @SuppressWarnings("unchecked")
+    public Builder addDiscount(Discount element) {
+      if (this.discounts == null || this.discounts instanceof EmptyParam) {
+        this.discounts = new ArrayList<InvoiceItemUpdateParams.Discount>();
+      }
+      ((List<InvoiceItemUpdateParams.Discount>) this.discounts).add(element);
+      return this;
+    }
+
+    /**
+     * Add all elements to `discounts` list. A list is initialized for the first `add/addAll` call,
+     * and subsequent calls adds additional elements to the original list. See {@link
+     * InvoiceItemUpdateParams#discounts} for the field documentation.
+     */
+    @SuppressWarnings("unchecked")
+    public Builder addAllDiscount(List<Discount> elements) {
+      if (this.discounts == null || this.discounts instanceof EmptyParam) {
+        this.discounts = new ArrayList<InvoiceItemUpdateParams.Discount>();
+      }
+      ((List<InvoiceItemUpdateParams.Discount>) this.discounts).addAll(elements);
+      return this;
+    }
+
+    /**
+     * The coupons &amp; existing discounts which apply to the invoice item or invoice line item.
+     * Item discounts are applied before invoice discounts. Pass an empty string to remove
+     * previously-defined discounts.
+     */
+    public Builder setDiscounts(EmptyParam discounts) {
+      this.discounts = discounts;
+      return this;
+    }
+
+    /**
+     * The coupons &amp; existing discounts which apply to the invoice item or invoice line item.
+     * Item discounts are applied before invoice discounts. Pass an empty string to remove
+     * previously-defined discounts.
+     */
+    public Builder setDiscounts(List<Discount> discounts) {
+      this.discounts = discounts;
       return this;
     }
 
@@ -416,6 +477,99 @@ public class InvoiceItemUpdateParams extends ApiRequestParams {
     public Builder setUnitAmountDecimal(EmptyParam unitAmountDecimal) {
       this.unitAmountDecimal = unitAmountDecimal;
       return this;
+    }
+  }
+
+  @Getter
+  public static class Discount {
+    /** ID of the coupon to create a new discount for. */
+    @SerializedName("coupon")
+    Object coupon;
+
+    /** ID of an existing discount on the object (or one of its ancestors) to reuse. */
+    @SerializedName("discount")
+    Object discount;
+
+    /**
+     * Map of extra parameters for custom features not available in this client library. The content
+     * in this map is not serialized under this field's {@code @SerializedName} value. Instead, each
+     * key/value pair is serialized as if the key is a root-level field (serialized) name in this
+     * param object. Effectively, this map is flattened to its parent instance.
+     */
+    @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
+    Map<String, Object> extraParams;
+
+    private Discount(Object coupon, Object discount, Map<String, Object> extraParams) {
+      this.coupon = coupon;
+      this.discount = discount;
+      this.extraParams = extraParams;
+    }
+
+    public static Builder builder() {
+      return new Builder();
+    }
+
+    public static class Builder {
+      private Object coupon;
+
+      private Object discount;
+
+      private Map<String, Object> extraParams;
+
+      /** Finalize and obtain parameter instance from this builder. */
+      public Discount build() {
+        return new Discount(this.coupon, this.discount, this.extraParams);
+      }
+
+      /** ID of the coupon to create a new discount for. */
+      public Builder setCoupon(String coupon) {
+        this.coupon = coupon;
+        return this;
+      }
+
+      /** ID of the coupon to create a new discount for. */
+      public Builder setCoupon(EmptyParam coupon) {
+        this.coupon = coupon;
+        return this;
+      }
+
+      /** ID of an existing discount on the object (or one of its ancestors) to reuse. */
+      public Builder setDiscount(String discount) {
+        this.discount = discount;
+        return this;
+      }
+
+      /** ID of an existing discount on the object (or one of its ancestors) to reuse. */
+      public Builder setDiscount(EmptyParam discount) {
+        this.discount = discount;
+        return this;
+      }
+
+      /**
+       * Add a key/value pair to `extraParams` map. A map is initialized for the first `put/putAll`
+       * call, and subsequent calls add additional key/value pairs to the original map. See {@link
+       * InvoiceItemUpdateParams.Discount#extraParams} for the field documentation.
+       */
+      public Builder putExtraParam(String key, Object value) {
+        if (this.extraParams == null) {
+          this.extraParams = new HashMap<>();
+        }
+        this.extraParams.put(key, value);
+        return this;
+      }
+
+      /**
+       * Add all map key/value pairs to `extraParams` map. A map is initialized for the first
+       * `put/putAll` call, and subsequent calls add additional key/value pairs to the original map.
+       * See {@link InvoiceItemUpdateParams.Discount#extraParams} for the field documentation.
+       */
+      public Builder putAllExtraParam(Map<String, Object> map) {
+        if (this.extraParams == null) {
+          this.extraParams = new HashMap<>();
+        }
+        this.extraParams.putAll(map);
+        return this;
+      }
     }
   }
 
