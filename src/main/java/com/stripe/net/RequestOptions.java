@@ -314,7 +314,9 @@ public class RequestOptions {
           normalizeStripeVersion(this.stripeVersionOverride),
           connectTimeout,
           readTimeout,
-          maxNetworkRetries);
+          maxNetworkRetries,
+          connectionProxy,
+          proxyCredential);
     }
   }
 
