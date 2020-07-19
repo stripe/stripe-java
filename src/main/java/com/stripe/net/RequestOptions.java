@@ -1,6 +1,8 @@
 package com.stripe.net;
 
 import com.stripe.Stripe;
+import java.net.PasswordAuthentication;
+import java.net.Proxy;
 import java.util.Map;
 import lombok.EqualsAndHashCode;
 
@@ -22,6 +24,8 @@ public class RequestOptions {
   private final int readTimeout;
 
   private final int maxNetworkRetries;
+  private final Proxy connectionProxy;
+  private final PasswordAuthentication proxyCredential;
 
   public static RequestOptions getDefault() {
     return new RequestOptions(
@@ -32,7 +36,9 @@ public class RequestOptions {
         null,
         Stripe.getConnectTimeout(),
         Stripe.getReadTimeout(),
-        Stripe.getMaxNetworkRetries());
+        Stripe.getMaxNetworkRetries(),
+        Stripe.getConnectionProxy(),
+        Stripe.getProxyCredential());
   }
 
   private RequestOptions(
@@ -43,7 +49,9 @@ public class RequestOptions {
       String stripeVersionOverride,
       int connectTimeout,
       int readTimeout,
-      int maxNetworkRetries) {
+      int maxNetworkRetries,
+      Proxy connectionProxy,
+      PasswordAuthentication proxyCredential) {
     this.apiKey = apiKey;
     this.clientId = clientId;
     this.idempotencyKey = idempotencyKey;
@@ -52,6 +60,8 @@ public class RequestOptions {
     this.connectTimeout = connectTimeout;
     this.readTimeout = readTimeout;
     this.maxNetworkRetries = maxNetworkRetries;
+    this.connectionProxy = connectionProxy;
+    this.proxyCredential = proxyCredential;
   }
 
   public String getApiKey() {
@@ -90,6 +100,14 @@ public class RequestOptions {
     return maxNetworkRetries;
   }
 
+  public Proxy getConnectionProxy() {
+    return connectionProxy;
+  }
+
+  public PasswordAuthentication getProxyCredential() {
+    return proxyCredential;
+  }
+
   public static RequestOptionsBuilder builder() {
     return new RequestOptionsBuilder();
   }
@@ -112,6 +130,8 @@ public class RequestOptions {
     private int connectTimeout;
     private int readTimeout;
     private int maxNetworkRetries;
+    private Proxy connectionProxy;
+    private PasswordAuthentication proxyCredential;
 
     /**
      * Constructs a request options builder with the global parameters (API key and client ID) as
@@ -123,6 +143,8 @@ public class RequestOptions {
       this.connectTimeout = Stripe.getConnectTimeout();
       this.readTimeout = Stripe.getReadTimeout();
       this.maxNetworkRetries = Stripe.getMaxNetworkRetries();
+      this.connectionProxy = Stripe.getConnectionProxy();
+      this.proxyCredential = Stripe.getProxyCredential();
     }
 
     public String getApiKey() {
@@ -205,6 +227,24 @@ public class RequestOptions {
       return this;
     }
 
+    public Proxy getConnectionProxy() {
+      return connectionProxy;
+    }
+
+    public RequestOptionsBuilder setConnectionProxy(Proxy connectionProxy) {
+      this.connectionProxy = connectionProxy;
+      return this;
+    }
+
+    public PasswordAuthentication getProxyCredential() {
+      return proxyCredential;
+    }
+
+    public RequestOptionsBuilder setProxyCredential(PasswordAuthentication proxyCredential) {
+      this.proxyCredential = proxyCredential;
+      return this;
+    }
+
     public RequestOptionsBuilder clearIdempotencyKey() {
       this.idempotencyKey = null;
       return this;
@@ -262,7 +302,9 @@ public class RequestOptions {
           normalizeStripeVersion(this.stripeVersionOverride),
           connectTimeout,
           readTimeout,
-          maxNetworkRetries);
+          maxNetworkRetries,
+          connectionProxy,
+          proxyCredential);
     }
   }
 
