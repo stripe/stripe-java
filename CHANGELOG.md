@@ -1,5 +1,8 @@
 # Changelog
 
+## 19.33.0 - 2020-07-20
+* [#1066](https://github.com/stripe/stripe-java/pull/1066) Add support for `capabilities` as a parameter on `Account` create and update
+
 ## 19.32.0 - 2020-07-17
 * [#1062](https://github.com/stripe/stripe-java/pull/1062) Add support for `political_exposure` on `Person`
 
