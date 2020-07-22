@@ -687,8 +687,8 @@ public class SubscriptionSchedule extends ApiResource
     List<SubscriptionSchedule.PhaseItem> plans;
 
     /**
-     * Controls whether or not the subscription schedule will prorate when transitioning to this
-     * phase. Possible values are {@code create_prorations} and {@code none}.
+     * If the subscription schedule will prorate when transitioning to this phase. Possible values
+     * are {@code create_prorations} and {@code none}.
      *
      * <p>One of {@code always_invoice}, {@code create_prorations}, or {@code none}.
      */
