@@ -652,6 +652,15 @@ public class Account extends ApiResource implements MetadataStore<Account>, Paym
     String cardPayments;
 
     /**
+     * The status of the Cartes Bancaires payments capability of the account, or whether the account
+     * can directly process Cartes Bancaires card charges in EUR currency.
+     *
+     * <p>One of {@code active}, {@code inactive}, or {@code pending}.
+     */
+    @SerializedName("cartes_bancaires_payments")
+    String cartesBancairesPayments;
+
+    /**
      * The status of the JCB payments capability of the account, or whether the account (Japan only)
      * can directly process JCB credit card charges in JPY currency.
      *

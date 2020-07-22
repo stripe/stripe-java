@@ -933,9 +933,9 @@ public class SubscriptionScheduleCreateParams extends ApiRequestParams {
     List<Plan> plans;
 
     /**
-     * Controls whether or not a subscription schedule will create prorations when transitioning to
-     * this phase. Possible values are {@code create_prorations} or {@code none}, and the default
-     * value is {@code create_prorations}. See <a
+     * If a subscription schedule will create prorations when transitioning to this phase. Possible
+     * values are {@code create_prorations} or {@code none}, and the default value is {@code
+     * create_prorations}. See <a
      * href="https://stripe.com/docs/billing/subscriptions/prorations">Prorations</a>.
      */
     @SerializedName("proration_behavior")
@@ -1307,9 +1307,9 @@ public class SubscriptionScheduleCreateParams extends ApiRequestParams {
       }
 
       /**
-       * Controls whether or not a subscription schedule will create prorations when transitioning
-       * to this phase. Possible values are {@code create_prorations} or {@code none}, and the
-       * default value is {@code create_prorations}. See <a
+       * If a subscription schedule will create prorations when transitioning to this phase.
+       * Possible values are {@code create_prorations} or {@code none}, and the default value is
+       * {@code create_prorations}. See <a
        * href="https://stripe.com/docs/billing/subscriptions/prorations">Prorations</a>.
        */
       public Builder setProrationBehavior(ProrationBehavior prorationBehavior) {

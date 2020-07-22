@@ -24,9 +24,9 @@ public class SubscriptionScheduleCancelParams extends ApiRequestParams {
   Map<String, Object> extraParams;
 
   /**
-   * If the subscription schedule is {@code active}, indicates whether or not to generate a final
-   * invoice that contains any un-invoiced metered usage and new/pending proration invoice items.
-   * Defaults to {@code true}.
+   * If the subscription schedule is {@code active}, indicates if a final invoice will be generated
+   * that contains any un-invoiced metered usage and new/pending proration invoice items. Defaults
+   * to {@code true}.
    */
   @SerializedName("invoice_now")
   Boolean invoiceNow;
@@ -118,9 +118,9 @@ public class SubscriptionScheduleCancelParams extends ApiRequestParams {
     }
 
     /**
-     * If the subscription schedule is {@code active}, indicates whether or not to generate a final
-     * invoice that contains any un-invoiced metered usage and new/pending proration invoice items.
-     * Defaults to {@code true}.
+     * If the subscription schedule is {@code active}, indicates if a final invoice will be
+     * generated that contains any un-invoiced metered usage and new/pending proration invoice
+     * items. Defaults to {@code true}.
      */
     public Builder setInvoiceNow(Boolean invoiceNow) {
       this.invoiceNow = invoiceNow;
