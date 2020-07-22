@@ -1,5 +1,8 @@
 # Changelog
 
+## 19.34.0 - 2020-07-22
+* [#1067](https://github.com/stripe/stripe-java/pull/1067) Add support for `cartes_bancaires_payments` as a `Capability`
+
 ## 19.33.0 - 2020-07-20
 * [#1066](https://github.com/stripe/stripe-java/pull/1066) Add support for `capabilities` as a parameter on `Account` create and update
 
