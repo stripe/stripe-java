@@ -4,6 +4,9 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNull;
 
 import com.stripe.Stripe;
+import java.net.InetSocketAddress;
+import java.net.PasswordAuthentication;
+import java.net.Proxy;
 import org.junit.jupiter.api.Test;
 
 public class RequestOptionsTest {
@@ -19,6 +22,9 @@ public class RequestOptionsTest {
             .setStripeVersionOverride("2015-05-05")
             .setConnectTimeout(100)
             .setReadTimeout(100)
+            .setConnectionProxy(
+                new Proxy(Proxy.Type.HTTP, new InetSocketAddress("localhost", 1234)))
+            .setProxyCredential(new PasswordAuthentication("username", "password".toCharArray()))
             .build();
 
     RequestOptions optsRebuilt = opts.toBuilder().build();
@@ -33,6 +39,8 @@ public class RequestOptionsTest {
     assertNull(optsRebuilt.getStripeVersionOverride());
     assertEquals(Stripe.DEFAULT_CONNECT_TIMEOUT, optsRebuilt.getConnectTimeout());
     assertEquals(Stripe.DEFAULT_READ_TIMEOUT, optsRebuilt.getReadTimeout());
+    assertEquals(Stripe.getConnectionProxy(), optsRebuilt.getConnectionProxy());
+    assertEquals(Stripe.getProxyCredential(), optsRebuilt.getProxyCredential());
   }
 
   @Test
@@ -50,6 +58,10 @@ public class RequestOptionsTest {
 
   @Test
   public void testHashCodeEqualOverride() {
+    Proxy connectionProxy = new Proxy(Proxy.Type.HTTP, new InetSocketAddress("localhost", 8080));
+    PasswordAuthentication proxyCredential =
+        new PasswordAuthentication("username", "password".toCharArray());
+
     RequestOptions opts1 =
         RequestOptions.builder()
             .setApiKey("sk_foo")
@@ -59,6 +71,8 @@ public class RequestOptionsTest {
             .setStripeVersionOverride("2015-05-05")
             .setConnectTimeout(100)
             .setReadTimeout(200)
+            .setConnectionProxy(connectionProxy)
+            .setProxyCredential(proxyCredential)
             .build();
 
     RequestOptions opts2 =
@@ -70,6 +84,8 @@ public class RequestOptionsTest {
             .setStripeVersionOverride("2015-05-05")
             .setConnectTimeout(100)
             .setReadTimeout(200)
+            .setConnectionProxy(connectionProxy)
+            .setProxyCredential(proxyCredential)
             .build();
 
     assertEquals(opts1, opts2);
@@ -92,6 +108,30 @@ public class RequestOptionsTest {
     } finally {
       Stripe.setConnectTimeout(origConnectTimeout);
       Stripe.setReadTimeout(origReadTimeout);
+    }
+  }
+
+  @Test
+  public void testProxyDefaultValues() {
+    Proxy origConnectionProxy = Stripe.getConnectionProxy();
+    PasswordAuthentication origProxyCredential = Stripe.getProxyCredential();
+
+    try {
+      Proxy newConnectionProxy =
+          new Proxy(Proxy.Type.HTTP, new InetSocketAddress("localhost", 8080));
+      PasswordAuthentication newProxyCredential =
+          new PasswordAuthentication("username", "password".toCharArray());
+
+      Stripe.setConnectionProxy(newConnectionProxy);
+      Stripe.setProxyCredential(newProxyCredential);
+
+      RequestOptions opts = RequestOptions.builder().build();
+
+      assertEquals(newConnectionProxy, opts.getConnectionProxy());
+      assertEquals(newProxyCredential, opts.getProxyCredential());
+    } finally {
+      Stripe.setConnectionProxy(origConnectionProxy);
+      Stripe.setProxyCredential(origProxyCredential);
     }
   }
 }
