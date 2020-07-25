@@ -1,5 +1,8 @@
 # Changelog
 
+## 19.35.0 - 2020-07-24
+* [#1068](https://github.com/stripe/stripe-java/pull/1068) Add `capabilities[fpx_payments]` on `Account` create and update
+
 ## 19.34.0 - 2020-07-22
 * [#1067](https://github.com/stripe/stripe-java/pull/1067) Add support for `cartes_bancaires_payments` as a `Capability`
 
