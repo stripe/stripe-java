@@ -661,6 +661,15 @@ public class Account extends ApiResource implements MetadataStore<Account>, Paym
     String cartesBancairesPayments;
 
     /**
+     * The status of the FPX payments capability of the account, or whether the account can directly
+     * process FPX charges.
+     *
+     * <p>One of {@code active}, {@code inactive}, or {@code pending}.
+     */
+    @SerializedName("fpx_payments")
+    String fpxPayments;
+
+    /**
      * The status of the JCB payments capability of the account, or whether the account (Japan only)
      * can directly process JCB credit card charges in JPY currency.
      *

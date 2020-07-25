@@ -52,7 +52,7 @@ public class CreditNote extends ApiResource implements HasId, MetadataStore<Cred
   ExpandableField<CustomerBalanceTransaction> customerBalanceTransaction;
 
   /**
-   * The integer amount in <strong>%s</strong> representing the amount of the discount that was
+   * The integer amount in <strong>%s</strong> representing the total amount of discount that was
    * credited.
    */
   @SerializedName("discount_amount")
@@ -138,7 +138,7 @@ public class CreditNote extends ApiResource implements HasId, MetadataStore<Cred
 
   /**
    * The integer amount in <strong>%s</strong> representing the amount of the credit note, excluding
-   * tax and discount.
+   * tax and invoice level discounts.
    */
   @SerializedName("subtotal")
   Long subtotal;
@@ -149,7 +149,7 @@ public class CreditNote extends ApiResource implements HasId, MetadataStore<Cred
 
   /**
    * The integer amount in <strong>%s</strong> representing the total amount of the credit note,
-   * including tax and discount.
+   * including tax and all discount.
    */
   @SerializedName("total")
   Long total;
