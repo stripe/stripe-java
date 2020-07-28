@@ -38,4 +38,28 @@ public class InvoiceTest extends BaseStripeTest {
     assertNotNull(customer.getId());
     assertEquals(invoice.getCustomer(), customer.getId());
   }
+
+  @Test
+  public void testDeserializeWithUnexpandedArrayExpansions() throws Exception {
+    final String data = getResourceAsString("/api_fixtures/invoice_with_discount_ids.json");
+    final Invoice invoice = ApiResource.GSON.fromJson(data, Invoice.class);
+    assertNotNull(invoice);
+    assertEquals("25_5OFF", invoice.getDiscounts().get(0));
+    assertNull(invoice.getDiscountObjects().get(1));
+    assertEquals("50_5OFF", invoice.getDiscounts().get(1));
+    assertNull(invoice.getDiscountObjects().get(1));
+    assertEquals(2, invoice.getDiscounts().size());
+    assertEquals(2, invoice.getDiscountObjects().size());
+  }
+
+  @Test
+  public void testDeserializeWithArrayExpansions() throws Exception {
+    final Invoice invoice =
+        ApiResource.GSON.fromJson(
+            getResourceAsString("/api_fixtures/invoiceitem_with_discount_objects.json"),
+            Invoice.class);
+
+    assertEquals(
+        invoice, ApiResource.GSON.fromJson(ApiResource.GSON.toJson(invoice), Invoice.class));
+  }
 }
