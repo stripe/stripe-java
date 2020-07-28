@@ -1,8 +1,10 @@
 package com.stripe.model;
 
 import com.google.gson.annotations.SerializedName;
+import com.stripe.net.ApiResource;
 import java.util.List;
 import java.util.Map;
+import java.util.stream.Collectors;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.Setter;
@@ -26,9 +28,20 @@ public class InvoiceLineItem extends StripeObject implements HasId {
   @SerializedName("description")
   String description;
 
+  /** The amount of discount calculated per discount for this line item. */
+  @SerializedName("discount_amounts")
+  List<DiscountAmount> discountAmounts;
+
   /** If true, discounts will apply to this line item. Always false for prorations. */
   @SerializedName("discountable")
   Boolean discountable;
+
+  /**
+   * The discounts applied to the invoice line item. Line item discounts are applied before invoice
+   * discounts. Use {@code expand[]=discounts} to expand each discount.
+   */
+  @SerializedName("discounts")
+  List<ExpandableField<Discount>> discounts;
 
   /** Unique identifier for the object. */
   @Getter(onMethod_ = {@Override})
@@ -119,4 +132,77 @@ public class InvoiceLineItem extends StripeObject implements HasId {
    */
   @SerializedName("unified_proration")
   Boolean unifiedProration;
+
+  /** Get IDs of expandable {@code discounts} object list. */
+  public List<String> getDiscounts() {
+    return (this.discounts != null)
+        ? this.discounts.stream().map(x -> x.getId()).collect(Collectors.toList())
+        : null;
+  }
+
+  public void setDiscounts(List<String> ids) {
+    if (ids == null) {
+      this.discounts = null;
+      return;
+    }
+    if (this.discounts.stream().map(x -> x.getId()).collect(Collectors.toList()).equals(ids)) {
+      // noop if the ids are equal to what are already present
+      return;
+    }
+    this.discounts =
+        (ids != null)
+            ? ids.stream()
+                .map(id -> new ExpandableField<Discount>(id, null))
+                .collect(Collectors.toList())
+            : null;
+  }
+
+  /** Get expanded {@code discounts}. */
+  public List<Discount> getDiscountObjects() {
+    return (this.discounts != null)
+        ? this.discounts.stream().map(x -> x.getExpanded()).collect(Collectors.toList())
+        : null;
+  }
+
+  public void setDiscountObjects(List<Discount> objs) {
+    this.discounts =
+        objs != null
+            ? objs.stream()
+                .map(x -> new ExpandableField<Discount>(x.getId(), x))
+                .collect(Collectors.toList())
+            : null;
+  }
+
+  @Getter
+  @Setter
+  @EqualsAndHashCode(callSuper = false)
+  public static class DiscountAmount extends StripeObject {
+    /** The amount, in %s, of the discount. */
+    @SerializedName("amount")
+    Long amount;
+
+    /** The discount that was applied to get this discount amount. */
+    @SerializedName("discount")
+    @Getter(lombok.AccessLevel.NONE)
+    @Setter(lombok.AccessLevel.NONE)
+    ExpandableField<Discount> discount;
+
+    /** Get ID of expandable {@code discount} object. */
+    public String getDiscount() {
+      return (this.discount != null) ? this.discount.getId() : null;
+    }
+
+    public void setDiscount(String id) {
+      this.discount = ApiResource.setExpandableFieldId(id, this.discount);
+    }
+
+    /** Get expanded {@code discount}. */
+    public Discount getDiscountObject() {
+      return (this.discount != null) ? this.discount.getExpanded() : null;
+    }
+
+    public void setDiscountObject(Discount expandableObject) {
+      this.discount = new ExpandableField<Discount>(expandableObject.getId(), expandableObject);
+    }
+  }
 }

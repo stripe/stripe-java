@@ -26,6 +26,9 @@ public class InvoiceUpcomingParams extends ApiRequestParams {
   @SerializedName("customer")
   String customer;
 
+  @SerializedName("discounts")
+  Object discounts;
+
   /** Specifies which fields in the response should be expanded. */
   @SerializedName("expand")
   List<String> expand;
@@ -170,6 +173,7 @@ public class InvoiceUpcomingParams extends ApiRequestParams {
   private InvoiceUpcomingParams(
       String coupon,
       String customer,
+      Object discounts,
       List<String> expand,
       Map<String, Object> extraParams,
       List<InvoiceItem> invoiceItems,
@@ -190,6 +194,7 @@ public class InvoiceUpcomingParams extends ApiRequestParams {
       Boolean subscriptionTrialFromPlan) {
     this.coupon = coupon;
     this.customer = customer;
+    this.discounts = discounts;
     this.expand = expand;
     this.extraParams = extraParams;
     this.invoiceItems = invoiceItems;
@@ -218,6 +223,8 @@ public class InvoiceUpcomingParams extends ApiRequestParams {
     private String coupon;
 
     private String customer;
+
+    private Object discounts;
 
     private List<String> expand;
 
@@ -260,6 +267,7 @@ public class InvoiceUpcomingParams extends ApiRequestParams {
       return new InvoiceUpcomingParams(
           this.coupon,
           this.customer,
+          this.discounts,
           this.expand,
           this.extraParams,
           this.invoiceItems,
@@ -295,6 +303,44 @@ public class InvoiceUpcomingParams extends ApiRequestParams {
     /** The identifier of the customer whose upcoming invoice you'd like to retrieve. */
     public Builder setCustomer(String customer) {
       this.customer = customer;
+      return this;
+    }
+
+    /**
+     * Add an element to `discounts` list. A list is initialized for the first `add/addAll` call,
+     * and subsequent calls adds additional elements to the original list. See {@link
+     * InvoiceUpcomingParams#discounts} for the field documentation.
+     */
+    @SuppressWarnings("unchecked")
+    public Builder addDiscount(Discount element) {
+      if (this.discounts == null || this.discounts instanceof EmptyParam) {
+        this.discounts = new ArrayList<InvoiceUpcomingParams.Discount>();
+      }
+      ((List<InvoiceUpcomingParams.Discount>) this.discounts).add(element);
+      return this;
+    }
+
+    /**
+     * Add all elements to `discounts` list. A list is initialized for the first `add/addAll` call,
+     * and subsequent calls adds additional elements to the original list. See {@link
+     * InvoiceUpcomingParams#discounts} for the field documentation.
+     */
+    @SuppressWarnings("unchecked")
+    public Builder addAllDiscount(List<Discount> elements) {
+      if (this.discounts == null || this.discounts instanceof EmptyParam) {
+        this.discounts = new ArrayList<InvoiceUpcomingParams.Discount>();
+      }
+      ((List<InvoiceUpcomingParams.Discount>) this.discounts).addAll(elements);
+      return this;
+    }
+
+    public Builder setDiscounts(EmptyParam discounts) {
+      this.discounts = discounts;
+      return this;
+    }
+
+    public Builder setDiscounts(List<Discount> discounts) {
+      this.discounts = discounts;
       return this;
     }
 
@@ -624,6 +670,87 @@ public class InvoiceUpcomingParams extends ApiRequestParams {
   }
 
   @Getter
+  public static class Discount {
+    /** ID of the coupon to create a new discount for. */
+    @SerializedName("coupon")
+    String coupon;
+
+    /** ID of an existing discount on the object (or one of its ancestors) to reuse. */
+    @SerializedName("discount")
+    String discount;
+
+    /**
+     * Map of extra parameters for custom features not available in this client library. The content
+     * in this map is not serialized under this field's {@code @SerializedName} value. Instead, each
+     * key/value pair is serialized as if the key is a root-level field (serialized) name in this
+     * param object. Effectively, this map is flattened to its parent instance.
+     */
+    @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
+    Map<String, Object> extraParams;
+
+    private Discount(String coupon, String discount, Map<String, Object> extraParams) {
+      this.coupon = coupon;
+      this.discount = discount;
+      this.extraParams = extraParams;
+    }
+
+    public static Builder builder() {
+      return new Builder();
+    }
+
+    public static class Builder {
+      private String coupon;
+
+      private String discount;
+
+      private Map<String, Object> extraParams;
+
+      /** Finalize and obtain parameter instance from this builder. */
+      public Discount build() {
+        return new Discount(this.coupon, this.discount, this.extraParams);
+      }
+
+      /** ID of the coupon to create a new discount for. */
+      public Builder setCoupon(String coupon) {
+        this.coupon = coupon;
+        return this;
+      }
+
+      /** ID of an existing discount on the object (or one of its ancestors) to reuse. */
+      public Builder setDiscount(String discount) {
+        this.discount = discount;
+        return this;
+      }
+
+      /**
+       * Add a key/value pair to `extraParams` map. A map is initialized for the first `put/putAll`
+       * call, and subsequent calls add additional key/value pairs to the original map. See {@link
+       * InvoiceUpcomingParams.Discount#extraParams} for the field documentation.
+       */
+      public Builder putExtraParam(String key, Object value) {
+        if (this.extraParams == null) {
+          this.extraParams = new HashMap<>();
+        }
+        this.extraParams.put(key, value);
+        return this;
+      }
+
+      /**
+       * Add all map key/value pairs to `extraParams` map. A map is initialized for the first
+       * `put/putAll` call, and subsequent calls add additional key/value pairs to the original map.
+       * See {@link InvoiceUpcomingParams.Discount#extraParams} for the field documentation.
+       */
+      public Builder putAllExtraParam(Map<String, Object> map) {
+        if (this.extraParams == null) {
+          this.extraParams = new HashMap<>();
+        }
+        this.extraParams.putAll(map);
+        return this;
+      }
+    }
+  }
+
+  @Getter
   public static class InvoiceItem {
     /** The integer amount in <strong>%s</strong> of previewed invoice item. */
     @SerializedName("amount")
@@ -650,6 +777,10 @@ public class InvoiceUpcomingParams extends ApiRequestParams {
      */
     @SerializedName("discountable")
     Boolean discountable;
+
+    /** The coupons to redeem into discounts for the invoice item in the preview. */
+    @SerializedName("discounts")
+    Object discounts;
 
     /**
      * Map of extra parameters for custom features not available in this client library. The content
@@ -684,7 +815,10 @@ public class InvoiceUpcomingParams extends ApiRequestParams {
     @SerializedName("price")
     String price;
 
-    /** Data used to generate a new price object inline. */
+    /**
+     * Data used to generate a new <a href="https://stripe.com/docs/api/prices">Price</a> object
+     * inline.
+     */
     @SerializedName("price_data")
     PriceData priceData;
 
@@ -715,6 +849,7 @@ public class InvoiceUpcomingParams extends ApiRequestParams {
         String currency,
         String description,
         Boolean discountable,
+        Object discounts,
         Map<String, Object> extraParams,
         String invoiceitem,
         Object metadata,
@@ -729,6 +864,7 @@ public class InvoiceUpcomingParams extends ApiRequestParams {
       this.currency = currency;
       this.description = description;
       this.discountable = discountable;
+      this.discounts = discounts;
       this.extraParams = extraParams;
       this.invoiceitem = invoiceitem;
       this.metadata = metadata;
@@ -753,6 +889,8 @@ public class InvoiceUpcomingParams extends ApiRequestParams {
       private String description;
 
       private Boolean discountable;
+
+      private Object discounts;
 
       private Map<String, Object> extraParams;
 
@@ -781,6 +919,7 @@ public class InvoiceUpcomingParams extends ApiRequestParams {
             this.currency,
             this.description,
             this.discountable,
+            this.discounts,
             this.extraParams,
             this.invoiceitem,
             this.metadata,
@@ -824,6 +963,46 @@ public class InvoiceUpcomingParams extends ApiRequestParams {
        */
       public Builder setDiscountable(Boolean discountable) {
         this.discountable = discountable;
+        return this;
+      }
+
+      /**
+       * Add an element to `discounts` list. A list is initialized for the first `add/addAll` call,
+       * and subsequent calls adds additional elements to the original list. See {@link
+       * InvoiceUpcomingParams.InvoiceItem#discounts} for the field documentation.
+       */
+      @SuppressWarnings("unchecked")
+      public Builder addDiscount(Discount element) {
+        if (this.discounts == null || this.discounts instanceof EmptyParam) {
+          this.discounts = new ArrayList<InvoiceUpcomingParams.InvoiceItem.Discount>();
+        }
+        ((List<InvoiceUpcomingParams.InvoiceItem.Discount>) this.discounts).add(element);
+        return this;
+      }
+
+      /**
+       * Add all elements to `discounts` list. A list is initialized for the first `add/addAll`
+       * call, and subsequent calls adds additional elements to the original list. See {@link
+       * InvoiceUpcomingParams.InvoiceItem#discounts} for the field documentation.
+       */
+      @SuppressWarnings("unchecked")
+      public Builder addAllDiscount(List<Discount> elements) {
+        if (this.discounts == null || this.discounts instanceof EmptyParam) {
+          this.discounts = new ArrayList<InvoiceUpcomingParams.InvoiceItem.Discount>();
+        }
+        ((List<InvoiceUpcomingParams.InvoiceItem.Discount>) this.discounts).addAll(elements);
+        return this;
+      }
+
+      /** The coupons to redeem into discounts for the invoice item in the preview. */
+      public Builder setDiscounts(EmptyParam discounts) {
+        this.discounts = discounts;
+        return this;
+      }
+
+      /** The coupons to redeem into discounts for the invoice item in the preview. */
+      public Builder setDiscounts(List<Discount> discounts) {
+        this.discounts = discounts;
         return this;
       }
 
@@ -924,7 +1103,10 @@ public class InvoiceUpcomingParams extends ApiRequestParams {
         return this;
       }
 
-      /** Data used to generate a new price object inline. */
+      /**
+       * Data used to generate a new <a href="https://stripe.com/docs/api/prices">Price</a> object
+       * inline.
+       */
       public Builder setPriceData(PriceData priceData) {
         this.priceData = priceData;
         return this;
@@ -991,6 +1173,89 @@ public class InvoiceUpcomingParams extends ApiRequestParams {
       public Builder setUnitAmountDecimal(BigDecimal unitAmountDecimal) {
         this.unitAmountDecimal = unitAmountDecimal;
         return this;
+      }
+    }
+
+    @Getter
+    public static class Discount {
+      /** ID of the coupon to create a new discount for. */
+      @SerializedName("coupon")
+      String coupon;
+
+      /** ID of an existing discount on the object (or one of its ancestors) to reuse. */
+      @SerializedName("discount")
+      String discount;
+
+      /**
+       * Map of extra parameters for custom features not available in this client library. The
+       * content in this map is not serialized under this field's {@code @SerializedName} value.
+       * Instead, each key/value pair is serialized as if the key is a root-level field (serialized)
+       * name in this param object. Effectively, this map is flattened to its parent instance.
+       */
+      @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
+      Map<String, Object> extraParams;
+
+      private Discount(String coupon, String discount, Map<String, Object> extraParams) {
+        this.coupon = coupon;
+        this.discount = discount;
+        this.extraParams = extraParams;
+      }
+
+      public static Builder builder() {
+        return new Builder();
+      }
+
+      public static class Builder {
+        private String coupon;
+
+        private String discount;
+
+        private Map<String, Object> extraParams;
+
+        /** Finalize and obtain parameter instance from this builder. */
+        public Discount build() {
+          return new Discount(this.coupon, this.discount, this.extraParams);
+        }
+
+        /** ID of the coupon to create a new discount for. */
+        public Builder setCoupon(String coupon) {
+          this.coupon = coupon;
+          return this;
+        }
+
+        /** ID of an existing discount on the object (or one of its ancestors) to reuse. */
+        public Builder setDiscount(String discount) {
+          this.discount = discount;
+          return this;
+        }
+
+        /**
+         * Add a key/value pair to `extraParams` map. A map is initialized for the first
+         * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
+         * map. See {@link InvoiceUpcomingParams.InvoiceItem.Discount#extraParams} for the field
+         * documentation.
+         */
+        public Builder putExtraParam(String key, Object value) {
+          if (this.extraParams == null) {
+            this.extraParams = new HashMap<>();
+          }
+          this.extraParams.put(key, value);
+          return this;
+        }
+
+        /**
+         * Add all map key/value pairs to `extraParams` map. A map is initialized for the first
+         * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
+         * map. See {@link InvoiceUpcomingParams.InvoiceItem.Discount#extraParams} for the field
+         * documentation.
+         */
+        public Builder putAllExtraParam(Map<String, Object> map) {
+          if (this.extraParams == null) {
+            this.extraParams = new HashMap<>();
+          }
+          this.extraParams.putAll(map);
+          return this;
+        }
       }
     }
 
@@ -1261,7 +1526,10 @@ public class InvoiceUpcomingParams extends ApiRequestParams {
     @SerializedName("price")
     String price;
 
-    /** Data used to generate a new price object inline. */
+    /**
+     * Data used to generate a new <a href="https://stripe.com/docs/api/prices">Price</a> object
+     * inline.
+     */
     @SerializedName("price_data")
     PriceData priceData;
 
@@ -1476,7 +1744,10 @@ public class InvoiceUpcomingParams extends ApiRequestParams {
         return this;
       }
 
-      /** Data used to generate a new price object inline. */
+      /**
+       * Data used to generate a new <a href="https://stripe.com/docs/api/prices">Price</a> object
+       * inline.
+       */
       public Builder setPriceData(PriceData priceData) {
         this.priceData = priceData;
         return this;

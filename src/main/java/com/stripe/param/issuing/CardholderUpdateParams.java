@@ -54,9 +54,9 @@ public class CardholderUpdateParams extends ApiRequestParams {
   Object phoneNumber;
 
   /**
-   * Spending rules that give you some control over how your cards can be used. Refer to our <a
-   * href="https://stripe.com/docs/issuing/purchases/authorizations">authorizations</a>
-   * documentation for more details.
+   * Rules that control spending across this cardholder's cards. Refer to our <a
+   * href="https://stripe.com/docs/issuing/controls/spending-controls">documentation</a> for more
+   * details.
    */
   @SerializedName("spending_controls")
   SpendingControls spendingControls;
@@ -249,9 +249,9 @@ public class CardholderUpdateParams extends ApiRequestParams {
     }
 
     /**
-     * Spending rules that give you some control over how your cards can be used. Refer to our <a
-     * href="https://stripe.com/docs/issuing/purchases/authorizations">authorizations</a>
-     * documentation for more details.
+     * Rules that control spending across this cardholder's cards. Refer to our <a
+     * href="https://stripe.com/docs/issuing/controls/spending-controls">documentation</a> for more
+     * details.
      */
     public Builder setSpendingControls(SpendingControls spendingControls) {
       this.spendingControls = spendingControls;
@@ -1011,7 +1011,8 @@ public class CardholderUpdateParams extends ApiRequestParams {
     /**
      * Array of strings containing <a
      * href="https://stripe.com/docs/api#issuing_authorization_object-merchant_data-category">categories</a>
-     * of authorizations permitted on this card.
+     * of authorizations to allow. All other categories will be blocked. Cannot be set with {@code
+     * blocked_categories}.
      */
     @SerializedName("allowed_categories")
     List<AllowedCategory> allowedCategories;
@@ -1019,7 +1020,8 @@ public class CardholderUpdateParams extends ApiRequestParams {
     /**
      * Array of strings containing <a
      * href="https://stripe.com/docs/api#issuing_authorization_object-merchant_data-category">categories</a>
-     * of authorizations to always decline on this card.
+     * of authorizations to decline. All other categories will be allowed. Cannot be set with {@code
+     * allowed_categories}.
      */
     @SerializedName("blocked_categories")
     List<BlockedCategory> blockedCategories;
@@ -1033,11 +1035,14 @@ public class CardholderUpdateParams extends ApiRequestParams {
     @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
     Map<String, Object> extraParams;
 
-    /** Limit the spending with rules based on time intervals and categories. */
+    /** Limit spending with amount-based rules that apply across this cardholder's cards. */
     @SerializedName("spending_limits")
     List<SpendingLimit> spendingLimits;
 
-    /** Currency for your spending limits. Defaults to your merchant country's currency. */
+    /**
+     * Currency of amounts within {@code spending_limits}. Defaults to your merchant country's
+     * currency.
+     */
     @SerializedName("spending_limits_currency")
     Object spendingLimitsCurrency;
 
@@ -1188,13 +1193,19 @@ public class CardholderUpdateParams extends ApiRequestParams {
         return this;
       }
 
-      /** Currency for your spending limits. Defaults to your merchant country's currency. */
+      /**
+       * Currency of amounts within {@code spending_limits}. Defaults to your merchant country's
+       * currency.
+       */
       public Builder setSpendingLimitsCurrency(String spendingLimitsCurrency) {
         this.spendingLimitsCurrency = spendingLimitsCurrency;
         return this;
       }
 
-      /** Currency for your spending limits. Defaults to your merchant country's currency. */
+      /**
+       * Currency of amounts within {@code spending_limits}. Defaults to your merchant country's
+       * currency.
+       */
       public Builder setSpendingLimitsCurrency(EmptyParam spendingLimitsCurrency) {
         this.spendingLimitsCurrency = spendingLimitsCurrency;
         return this;
@@ -1203,14 +1214,14 @@ public class CardholderUpdateParams extends ApiRequestParams {
 
     @Getter
     public static class SpendingLimit {
-      /** Maximum amount allowed to spend per time interval. */
+      /** Maximum amount allowed to spend per interval. */
       @SerializedName("amount")
       Long amount;
 
       /**
        * Array of strings containing <a
        * href="https://stripe.com/docs/api#issuing_authorization_object-merchant_data-category">categories</a>
-       * on which to apply the spending limit. Leave this blank to limit all charges.
+       * this limit applies to. Omitting this field will apply the limit to all categories.
        */
       @SerializedName("categories")
       List<Category> categories;
@@ -1224,7 +1235,7 @@ public class CardholderUpdateParams extends ApiRequestParams {
       @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
       Map<String, Object> extraParams;
 
-      /** The time interval with which to apply this spending limit towards. */
+      /** Interval (or event) to which the amount applies. */
       @SerializedName("interval")
       Interval interval;
 
@@ -1257,7 +1268,7 @@ public class CardholderUpdateParams extends ApiRequestParams {
           return new SpendingLimit(this.amount, this.categories, this.extraParams, this.interval);
         }
 
-        /** Maximum amount allowed to spend per time interval. */
+        /** Maximum amount allowed to spend per interval. */
         public Builder setAmount(Long amount) {
           this.amount = amount;
           return this;
@@ -1319,7 +1330,7 @@ public class CardholderUpdateParams extends ApiRequestParams {
           return this;
         }
 
-        /** The time interval with which to apply this spending limit towards. */
+        /** Interval (or event) to which the amount applies. */
         public Builder setInterval(Interval interval) {
           this.interval = interval;
           return this;

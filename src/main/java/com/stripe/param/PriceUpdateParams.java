@@ -11,7 +11,7 @@ import lombok.Getter;
 
 @Getter
 public class PriceUpdateParams extends ApiRequestParams {
-  /** Whether the price is currently active. Defaults to {@code true}. */
+  /** Whether the price can be used for new purchases. Defaults to {@code true}. */
   @SerializedName("active")
   Boolean active;
 
@@ -109,7 +109,7 @@ public class PriceUpdateParams extends ApiRequestParams {
           this.transferLookupKey);
     }
 
-    /** Whether the price is currently active. Defaults to {@code true}. */
+    /** Whether the price can be used for new purchases. Defaults to {@code true}. */
     public Builder setActive(Boolean active) {
       this.active = active;
       return this;
