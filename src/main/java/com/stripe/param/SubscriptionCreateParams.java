@@ -899,7 +899,10 @@ public class SubscriptionCreateParams extends ApiRequestParams {
     @SerializedName("price")
     String price;
 
-    /** Data used to generate a new price object inline. */
+    /**
+     * Data used to generate a new <a href="https://stripe.com/docs/api/prices">Price</a> object
+     * inline.
+     */
     @SerializedName("price_data")
     PriceData priceData;
 
@@ -966,7 +969,10 @@ public class SubscriptionCreateParams extends ApiRequestParams {
         return this;
       }
 
-      /** Data used to generate a new price object inline. */
+      /**
+       * Data used to generate a new <a href="https://stripe.com/docs/api/prices">Price</a> object
+       * inline.
+       */
       public Builder setPriceData(PriceData priceData) {
         this.priceData = priceData;
         return this;
@@ -1240,7 +1246,10 @@ public class SubscriptionCreateParams extends ApiRequestParams {
     @SerializedName("price")
     String price;
 
-    /** Data used to generate a new price object inline. */
+    /**
+     * Data used to generate a new <a href="https://stripe.com/docs/api/prices">Price</a> object
+     * inline.
+     */
     @SerializedName("price_data")
     PriceData priceData;
 
@@ -1395,7 +1404,10 @@ public class SubscriptionCreateParams extends ApiRequestParams {
         return this;
       }
 
-      /** Data used to generate a new price object inline. */
+      /**
+       * Data used to generate a new <a href="https://stripe.com/docs/api/prices">Price</a> object
+       * inline.
+       */
       public Builder setPriceData(PriceData priceData) {
         this.priceData = priceData;
         return this;

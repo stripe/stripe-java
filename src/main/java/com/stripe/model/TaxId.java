@@ -67,6 +67,7 @@ public class TaxId extends ApiResource implements HasId {
   @SerializedName("value")
   String value;
 
+  /** Tax ID verification information. */
   @SerializedName("verification")
   Verification verification;
 

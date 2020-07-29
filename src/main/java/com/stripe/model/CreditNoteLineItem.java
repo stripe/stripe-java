@@ -1,6 +1,7 @@
 package com.stripe.model;
 
 import com.google.gson.annotations.SerializedName;
+import com.stripe.net.ApiResource;
 import java.math.BigDecimal;
 import java.util.List;
 import lombok.EqualsAndHashCode;
@@ -28,6 +29,10 @@ public class CreditNoteLineItem extends StripeObject implements HasId {
    */
   @SerializedName("discount_amount")
   Long discountAmount;
+
+  /** The amount of discount calculated per discount for this line item. */
+  @SerializedName("discount_amounts")
+  List<DiscountAmount> discountAmounts;
 
   /** Unique identifier for the object. */
   @Getter(onMethod_ = {@Override})
@@ -81,4 +86,37 @@ public class CreditNoteLineItem extends StripeObject implements HasId {
   /** Same as {@code unit_amount}, but contains a decimal value with at most 12 decimal places. */
   @SerializedName("unit_amount_decimal")
   BigDecimal unitAmountDecimal;
+
+  @Getter
+  @Setter
+  @EqualsAndHashCode(callSuper = false)
+  public static class DiscountAmount extends StripeObject {
+    /** The amount, in %s, of the discount. */
+    @SerializedName("amount")
+    Long amount;
+
+    /** The discount that was applied to get this discount amount. */
+    @SerializedName("discount")
+    @Getter(lombok.AccessLevel.NONE)
+    @Setter(lombok.AccessLevel.NONE)
+    ExpandableField<Discount> discount;
+
+    /** Get ID of expandable {@code discount} object. */
+    public String getDiscount() {
+      return (this.discount != null) ? this.discount.getId() : null;
+    }
+
+    public void setDiscount(String id) {
+      this.discount = ApiResource.setExpandableFieldId(id, this.discount);
+    }
+
+    /** Get expanded {@code discount}. */
+    public Discount getDiscountObject() {
+      return (this.discount != null) ? this.discount.getExpanded() : null;
+    }
+
+    public void setDiscountObject(Discount expandableObject) {
+      this.discount = new ExpandableField<Discount>(expandableObject.getId(), expandableObject);
+    }
+  }
 }

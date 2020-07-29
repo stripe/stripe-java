@@ -15,9 +15,9 @@ public class AccountLinkTest extends BaseStripeTest {
   public void testCreate() throws StripeException {
     final Map<String, Object> params = new HashMap<String, Object>();
     params.put("account", "acct_123");
-    params.put("failure_url", "https://stripe.com/failure");
-    params.put("success_url", "https://stripe.com/success");
-    params.put("type", "custom_account_verification");
+    params.put("refresh_url", "https://stripe.com/refresh");
+    params.put("return_url", "https://stripe.com/return");
+    params.put("type", "account_onboarding");
 
     final AccountLink accountLink = AccountLink.create(params);
 

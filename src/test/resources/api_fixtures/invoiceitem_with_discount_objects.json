@@ -1,0 +1,77 @@
+{
+  "amount": 1000,
+  "currency": "usd",
+  "customer": "cus_Hj56dFLtzm170b",
+  "date": 1234567890,
+  "description": "My First Invoice Item (created for API docs)",
+  "discountable": true,
+  "discounts": [
+    {
+      "object": "discount",
+      "id": "25_5OFF",
+      "coupon": {
+        "id": "foo",
+        "object": "coupon",
+        "amount_off": null,
+        "created": 1588174211,
+        "currency": "usd",
+        "duration": "repeating",
+        "duration_in_months": 3,
+        "livemode": false,
+        "max_redemptions": null,
+        "metadata": {},
+        "name": "foo",
+        "percent_off": 25.5,
+        "redeem_by": null,
+        "times_redeemed": 0,
+        "valid": true
+      },
+      "customer": "cus_HBfBGo7CrHdTCy",
+      "end": 1596036611,
+      "start": 1588174211,
+      "subscription": null
+    },
+    {
+      "object": "discount",
+      "id": "50_5OFF",
+      "coupon": {
+        "id": "bar",
+        "object": "coupon",
+        "amount_off": null,
+        "created": 1588174211,
+        "currency": "usd",
+        "duration": "repeating",
+        "duration_in_months": 3,
+        "livemode": false,
+        "max_redemptions": null,
+        "metadata": {},
+        "name": "bar",
+        "percent_off": 35.5,
+        "redeem_by": null,
+        "times_redeemed": 0,
+        "valid": true
+      },
+      "customer": "cus_HBfBGo7CrHdTCy",
+      "end": 1596036611,
+      "start": 1588174211,
+      "subscription": null
+    }
+  ],
+  "id": "ii_123",
+  "invoice": null,
+  "livemode": false,
+  "metadata": {},
+  "object": "invoiceitem",
+  "period": {
+    "end": 1595970646,
+    "start": 1595970646
+  },
+  "plan": null,
+  "price": null,
+  "proration": false,
+  "quantity": 1,
+  "subscription": null,
+  "tax_rates": [],
+  "unit_amount": 1000,
+  "unit_amount_decimal": "1000"
+}

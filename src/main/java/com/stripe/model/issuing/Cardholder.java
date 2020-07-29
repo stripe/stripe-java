@@ -85,9 +85,9 @@ public class Cardholder extends ApiResource implements HasId, MetadataStore<Card
   Requirements requirements;
 
   /**
-   * Spending rules that give you some control over how this cardholder's cards can be used. Refer
-   * to our <a href="https://stripe.com/docs/issuing/purchases/authorizations">authorizations</a>
-   * documentation for more details.
+   * Rules that control spending across this cardholder's cards. Refer to our <a
+   * href="https://stripe.com/docs/issuing/controls/spending-controls">documentation</a> for more
+   * details.
    */
   @SerializedName("spending_controls")
   SpendingControls spendingControls;
@@ -403,7 +403,8 @@ public class Cardholder extends ApiResource implements HasId, MetadataStore<Card
     /**
      * Array of strings containing <a
      * href="https://stripe.com/docs/api#issuing_authorization_object-merchant_data-category">categories</a>
-     * of authorizations permitted on this cardholder's cards.
+     * of authorizations to allow. All other categories will be blocked. Cannot be set with {@code
+     * blocked_categories}.
      */
     @SerializedName("allowed_categories")
     List<String> allowedCategories;
@@ -411,16 +412,17 @@ public class Cardholder extends ApiResource implements HasId, MetadataStore<Card
     /**
      * Array of strings containing <a
      * href="https://stripe.com/docs/api#issuing_authorization_object-merchant_data-category">categories</a>
-     * of authorizations to always decline on this cardholder's cards.
+     * of authorizations to decline. All other categories will be allowed. Cannot be set with {@code
+     * allowed_categories}.
      */
     @SerializedName("blocked_categories")
     List<String> blockedCategories;
 
-    /** Limit the spending with rules based on time intervals and categories. */
+    /** Limit spending with amount-based rules that apply across this cardholder's cards. */
     @SerializedName("spending_limits")
     List<Cardholder.SpendingControls.SpendingLimit> spendingLimits;
 
-    /** Currency for the amounts within spending_limits. */
+    /** Currency of the amounts within {@code spending_limits}. */
     @SerializedName("spending_limits_currency")
     String spendingLimitsCurrency;
 
@@ -428,20 +430,20 @@ public class Cardholder extends ApiResource implements HasId, MetadataStore<Card
     @Setter
     @EqualsAndHashCode(callSuper = false)
     public static class SpendingLimit extends StripeObject {
-      /** Maximum amount allowed to spend per time interval. */
+      /** Maximum amount allowed to spend per interval. */
       @SerializedName("amount")
       Long amount;
 
       /**
        * Array of strings containing <a
        * href="https://stripe.com/docs/api#issuing_authorization_object-merchant_data-category">categories</a>
-       * on which to apply the spending limit. Leave this blank to limit all charges.
+       * this limit applies to. Omitting this field will apply the limit to all categories.
        */
       @SerializedName("categories")
       List<String> categories;
 
       /**
-       * The time interval or event with which to apply this spending limit towards.
+       * Interval (or event) to which the amount applies.
        *
        * <p>One of {@code all_time}, {@code daily}, {@code monthly}, {@code per_authorization},
        * {@code weekly}, or {@code yearly}.

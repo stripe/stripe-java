@@ -12,6 +12,7 @@ import com.stripe.param.InvoiceItemUpdateParams;
 import java.math.BigDecimal;
 import java.util.List;
 import java.util.Map;
+import java.util.stream.Collectors;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.Setter;
@@ -55,6 +56,13 @@ public class InvoiceItem extends ApiResource implements HasId, MetadataStore<Inv
   /** If true, discounts will apply to this invoice item. Always false for prorations. */
   @SerializedName("discountable")
   Boolean discountable;
+
+  /**
+   * The discounts which apply to the invoice item. Item discounts are applied before invoice
+   * discounts. Use {@code expand[]=discounts} to expand each discount.
+   */
+  @SerializedName("discounts")
+  List<ExpandableField<Discount>> discounts;
 
   /** Unique identifier for the object. */
   @Getter(onMethod_ = {@Override})
@@ -204,6 +212,46 @@ public class InvoiceItem extends ApiResource implements HasId, MetadataStore<Inv
   public void setSubscriptionObject(Subscription expandableObject) {
     this.subscription =
         new ExpandableField<Subscription>(expandableObject.getId(), expandableObject);
+  }
+
+  /** Get IDs of expandable {@code discounts} object list. */
+  public List<String> getDiscounts() {
+    return (this.discounts != null)
+        ? this.discounts.stream().map(x -> x.getId()).collect(Collectors.toList())
+        : null;
+  }
+
+  public void setDiscounts(List<String> ids) {
+    if (ids == null) {
+      this.discounts = null;
+      return;
+    }
+    if (this.discounts.stream().map(x -> x.getId()).collect(Collectors.toList()).equals(ids)) {
+      // noop if the ids are equal to what are already present
+      return;
+    }
+    this.discounts =
+        (ids != null)
+            ? ids.stream()
+                .map(id -> new ExpandableField<Discount>(id, null))
+                .collect(Collectors.toList())
+            : null;
+  }
+
+  /** Get expanded {@code discounts}. */
+  public List<Discount> getDiscountObjects() {
+    return (this.discounts != null)
+        ? this.discounts.stream().map(x -> x.getExpanded()).collect(Collectors.toList())
+        : null;
+  }
+
+  public void setDiscountObjects(List<Discount> objs) {
+    this.discounts =
+        objs != null
+            ? objs.stream()
+                .map(x -> new ExpandableField<Discount>(x.getId(), x))
+                .collect(Collectors.toList())
+            : null;
   }
 
   /**

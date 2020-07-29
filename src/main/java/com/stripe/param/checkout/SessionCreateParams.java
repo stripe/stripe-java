@@ -63,7 +63,7 @@ public class SessionCreateParams extends ApiRequestParams {
 
   /**
    * A list of items the customer is purchasing. Use this parameter to pass one-time or recurring <a
-   * href="https://stripe.com/docs/api/prices">prices</a>. One-time prices in {@code subscription}
+   * href="https://stripe.com/docs/api/prices">Prices</a>. One-time Prices in {@code subscription}
    * mode will be on the initial invoice only.
    *
    * <p>There is a maximum of 100 line items, however it is recommended to consolidate line items if
@@ -564,15 +564,16 @@ public class SessionCreateParams extends ApiRequestParams {
     String name;
 
     /**
-     * The ID of the price or plan object. One of {@code price}, {@code price_data} or {@code
-     * amount} is required.
+     * The ID of the <a href="https://stripe.com/docs/api/prices">Price</a> or <a
+     * href="https://stripe.com/docs/api/plans">Plan</a> object. One of {@code price}, {@code
+     * price_data} or {@code amount} is required.
      */
     @SerializedName("price")
     String price;
 
     /**
-     * Data used to generate a new price object inline. One of {@code price}, {@code price_data} or
-     * {@code amount} is required.
+     * Data used to generate a new <a href="https://stripe.com/docs/api/prices">Price</a> object
+     * inline. One of {@code price}, {@code price_data} or {@code amount} is required.
      */
     @SerializedName("price_data")
     PriceData priceData;
@@ -743,8 +744,9 @@ public class SessionCreateParams extends ApiRequestParams {
       }
 
       /**
-       * The ID of the price or plan object. One of {@code price}, {@code price_data} or {@code
-       * amount} is required.
+       * The ID of the <a href="https://stripe.com/docs/api/prices">Price</a> or <a
+       * href="https://stripe.com/docs/api/plans">Plan</a> object. One of {@code price}, {@code
+       * price_data} or {@code amount} is required.
        */
       public Builder setPrice(String price) {
         this.price = price;
@@ -752,8 +754,8 @@ public class SessionCreateParams extends ApiRequestParams {
       }
 
       /**
-       * Data used to generate a new price object inline. One of {@code price}, {@code price_data}
-       * or {@code amount} is required.
+       * Data used to generate a new <a href="https://stripe.com/docs/api/prices">Price</a> object
+       * inline. One of {@code price}, {@code price_data} or {@code amount} is required.
        */
       public Builder setPriceData(PriceData priceData) {
         this.priceData = priceData;
