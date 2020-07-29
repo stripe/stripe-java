@@ -1,5 +1,12 @@
 # Changelog
 
+## 19.36.0 - 2020-07-29
+* [#1070](https://github.com/stripe/stripe-java/pull/1070) Multiple API changes
+  * Add support for `id`, `invoice` and `invoice_item` on `Discount`
+  * Add support for `discount_amounts` on `CreditNote`, `CreditNoteLineItem`, `InvoiceLineItem`
+  * Add support for `discounts` on `InvoiceItem`, `InvoiceLineItem` and `Invoice`
+  * Add support for `total_discount_amounts` on `Invoice`
+
 ## 19.35.0 - 2020-07-24
 * [#1068](https://github.com/stripe/stripe-java/pull/1068) Add `capabilities[fpx_payments]` on `Account` create and update
 
