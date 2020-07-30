@@ -12,6 +12,7 @@ import com.stripe.BaseStripeTest;
 import com.stripe.exception.ApiConnectionException;
 import com.stripe.exception.StripeException;
 import java.net.ConnectException;
+import java.net.SocketTimeoutException;
 import java.util.Collections;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -70,6 +71,40 @@ public class HttpClientTest extends BaseStripeTest {
     assertEquals("3", e.getMessage());
     assertNotNull(e.getCause());
     assertTrue(e.getCause() instanceof ConnectException);
+    assertEquals("timeout 3", e.getCause().getMessage());
+  }
+
+  @Test
+  public void testRequestWithRetriesSocketTimeoutException() throws StripeException {
+    Mockito.when(this.client.request(this.request))
+        .thenThrow(
+            new ApiConnectionException("foo", new SocketTimeoutException("timeout or something")))
+        .thenReturn(new StripeResponse(200, emptyHeaders, "{}"));
+
+    StripeResponse response = this.client.requestWithRetries(this.request);
+
+    assertNotNull(response);
+    assertEquals(200, response.code());
+    assertEquals(1, response.numRetries());
+  }
+
+  @Test
+  public void testRequestWithRetriesSocketTimeoutExceptionRethrowAfterAllAttempts()
+      throws StripeException {
+    Mockito.when(this.client.request(this.request))
+        .thenThrow(new ApiConnectionException("1", new SocketTimeoutException("timeout 1")))
+        .thenThrow(new ApiConnectionException("2", new SocketTimeoutException("timeout 2")))
+        .thenThrow(new ApiConnectionException("3", new SocketTimeoutException("timeout 3")));
+
+    ApiConnectionException e =
+        assertThrows(
+            ApiConnectionException.class,
+            () -> {
+              this.client.requestWithRetries(this.request);
+            });
+    assertEquals("3", e.getMessage());
+    assertNotNull(e.getCause());
+    assertTrue(e.getCause() instanceof SocketTimeoutException);
     assertEquals("timeout 3", e.getCause().getMessage());
   }
 
