@@ -175,7 +175,8 @@ public abstract class HttpClient {
     // Retry on connection error.
     if ((exception != null)
         && (exception.getCause() != null)
-        && (exception.getCause() instanceof ConnectException || exception.getCause() instanceof SocketTimeoutException)) {
+        && (exception.getCause() instanceof ConnectException
+            || exception.getCause() instanceof SocketTimeoutException)) {
       return true;
     }
 

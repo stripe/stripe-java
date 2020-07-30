@@ -77,7 +77,8 @@ public class HttpClientTest extends BaseStripeTest {
   @Test
   public void testRequestWithRetriesSocketTimeoutException() throws StripeException {
     Mockito.when(this.client.request(this.request))
-        .thenThrow(new ApiConnectionException("foo", new SocketTimeoutException("timeout or something")))
+        .thenThrow(
+            new ApiConnectionException("foo", new SocketTimeoutException("timeout or something")))
         .thenReturn(new StripeResponse(200, emptyHeaders, "{}"));
 
     StripeResponse response = this.client.requestWithRetries(this.request);
