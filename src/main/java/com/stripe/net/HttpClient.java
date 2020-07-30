@@ -5,6 +5,7 @@ import com.stripe.exception.ApiConnectionException;
 import com.stripe.exception.StripeException;
 import com.stripe.util.Stopwatch;
 import java.net.ConnectException;
+import java.net.SocketTimeoutException;
 import java.time.Duration;
 import java.util.HashMap;
 import java.util.Map;
@@ -174,7 +175,7 @@ public abstract class HttpClient {
     // Retry on connection error.
     if ((exception != null)
         && (exception.getCause() != null)
-        && (exception.getCause() instanceof ConnectException)) {
+        && (exception.getCause() instanceof ConnectException || exception.getCause() instanceof SocketTimeoutException)) {
       return true;
     }
 
