@@ -47,6 +47,15 @@ public class InvoiceUpcomingParams extends ApiRequestParams {
   List<InvoiceItem> invoiceItems;
 
   /**
+   * The promotion code to apply. If {@code subscription} or {@code subscription_items} is provided,
+   * the invoice returned will preview updating or creating a subscription with that promotion code.
+   * Otherwise, it will preview applying that promotion code to the customer for the next upcoming
+   * invoice from among the customer's subscriptions.
+   */
+  @SerializedName("promotion_code")
+  String promotionCode;
+
+  /**
    * The identifier of the unstarted schedule whose upcoming invoice you'd like to retrieve. Cannot
    * be used with subscription or subscription fields.
    */
@@ -177,6 +186,7 @@ public class InvoiceUpcomingParams extends ApiRequestParams {
       List<String> expand,
       Map<String, Object> extraParams,
       List<InvoiceItem> invoiceItems,
+      String promotionCode,
       String schedule,
       String subscription,
       Object subscriptionBillingCycleAnchor,
@@ -198,6 +208,7 @@ public class InvoiceUpcomingParams extends ApiRequestParams {
     this.expand = expand;
     this.extraParams = extraParams;
     this.invoiceItems = invoiceItems;
+    this.promotionCode = promotionCode;
     this.schedule = schedule;
     this.subscription = subscription;
     this.subscriptionBillingCycleAnchor = subscriptionBillingCycleAnchor;
@@ -231,6 +242,8 @@ public class InvoiceUpcomingParams extends ApiRequestParams {
     private Map<String, Object> extraParams;
 
     private List<InvoiceItem> invoiceItems;
+
+    private String promotionCode;
 
     private String schedule;
 
@@ -271,6 +284,7 @@ public class InvoiceUpcomingParams extends ApiRequestParams {
           this.expand,
           this.extraParams,
           this.invoiceItems,
+          this.promotionCode,
           this.schedule,
           this.subscription,
           this.subscriptionBillingCycleAnchor,
@@ -419,6 +433,17 @@ public class InvoiceUpcomingParams extends ApiRequestParams {
         this.invoiceItems = new ArrayList<>();
       }
       this.invoiceItems.addAll(elements);
+      return this;
+    }
+
+    /**
+     * The promotion code to apply. If {@code subscription} or {@code subscription_items} is
+     * provided, the invoice returned will preview updating or creating a subscription with that
+     * promotion code. Otherwise, it will preview applying that promotion code to the customer for
+     * the next upcoming invoice from among the customer's subscriptions.
+     */
+    public Builder setPromotionCode(String promotionCode) {
+      this.promotionCode = promotionCode;
       return this;
     }
 

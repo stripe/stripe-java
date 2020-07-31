@@ -104,6 +104,14 @@ public class CustomerUpdateParams extends ApiRequestParams {
   @SerializedName("preferred_locales")
   List<String> preferredLocales;
 
+  /**
+   * The API ID of a promotion code to apply to the customer. The customer will have a discount
+   * applied on all recurring payments. Charges you create through the API will not have the
+   * discount.
+   */
+  @SerializedName("promotion_code")
+  Object promotionCode;
+
   /** The customer's shipping information. Appears on invoices emailed to this customer. */
   @SerializedName("shipping")
   Object shipping;
@@ -141,6 +149,7 @@ public class CustomerUpdateParams extends ApiRequestParams {
       Long nextInvoiceSequence,
       Object phone,
       List<String> preferredLocales,
+      Object promotionCode,
       Object shipping,
       Object source,
       EnumParam taxExempt,
@@ -160,6 +169,7 @@ public class CustomerUpdateParams extends ApiRequestParams {
     this.nextInvoiceSequence = nextInvoiceSequence;
     this.phone = phone;
     this.preferredLocales = preferredLocales;
+    this.promotionCode = promotionCode;
     this.shipping = shipping;
     this.source = source;
     this.taxExempt = taxExempt;
@@ -201,6 +211,8 @@ public class CustomerUpdateParams extends ApiRequestParams {
 
     private List<String> preferredLocales;
 
+    private Object promotionCode;
+
     private Object shipping;
 
     private Object source;
@@ -227,6 +239,7 @@ public class CustomerUpdateParams extends ApiRequestParams {
           this.nextInvoiceSequence,
           this.phone,
           this.preferredLocales,
+          this.promotionCode,
           this.shipping,
           this.source,
           this.taxExempt,
@@ -514,6 +527,26 @@ public class CustomerUpdateParams extends ApiRequestParams {
         this.preferredLocales = new ArrayList<>();
       }
       this.preferredLocales.addAll(elements);
+      return this;
+    }
+
+    /**
+     * The API ID of a promotion code to apply to the customer. The customer will have a discount
+     * applied on all recurring payments. Charges you create through the API will not have the
+     * discount.
+     */
+    public Builder setPromotionCode(String promotionCode) {
+      this.promotionCode = promotionCode;
+      return this;
+    }
+
+    /**
+     * The API ID of a promotion code to apply to the customer. The customer will have a discount
+     * applied on all recurring payments. Charges you create through the API will not have the
+     * discount.
+     */
+    public Builder setPromotionCode(EmptyParam promotionCode) {
+      this.promotionCode = promotionCode;
       return this;
     }
 
