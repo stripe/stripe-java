@@ -75,13 +75,14 @@ public class HttpURLConnectionClient extends HttpClient {
       throws IOException, ApiConnectionException {
     HttpURLConnection conn = null;
 
-    if (Stripe.getConnectionProxy() != null) {
-      conn = (HttpURLConnection) request.url().openConnection(Stripe.getConnectionProxy());
+    if (request.options().getConnectionProxy() != null) {
+      conn =
+          (HttpURLConnection) request.url().openConnection(request.options().getConnectionProxy());
       Authenticator.setDefault(
           new Authenticator() {
             @Override
             protected PasswordAuthentication getPasswordAuthentication() {
-              return Stripe.getProxyCredential();
+              return request.options().getProxyCredential();
             }
           });
     } else {
