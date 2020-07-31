@@ -1,5 +1,9 @@
 # Changelog
 
+## 19.37.0 - 2020-07-31
+* [#1065](https://github.com/stripe/stripe-java/pull/1065) Support setting "proxy" per-request
+* [#1072](https://github.com/stripe/stripe-java/pull/1072) Socket timeout exceptions are now also subject to retries
+
 ## 19.36.0 - 2020-07-29
 * [#1070](https://github.com/stripe/stripe-java/pull/1070) Multiple API changes
   * Add support for `id`, `invoice` and `invoice_item` on `Discount`
