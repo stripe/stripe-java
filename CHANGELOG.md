@@ -1,5 +1,10 @@
 # Changelog
 
+## 19.38.0 - 2020-08-04
+* [#1076](https://github.com/stripe/stripe-java/pull/1076) Multiple API changes
+  * Add `zh-HK` and `zh-TW` as `locale` on Checkout `Session`.
+  * Add `payment_method_details[card_present][receipt][account_type]` on `Charge`
+
 ## 19.37.0 - 2020-07-31
 * [#1065](https://github.com/stripe/stripe-java/pull/1065) Support setting "proxy" per-request
 * [#1072](https://github.com/stripe/stripe-java/pull/1072) Socket timeout exceptions are now also subject to retries
