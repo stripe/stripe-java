@@ -42,8 +42,8 @@ public class PlanUpdateParams extends ApiRequestParams {
   Object nickname;
 
   /**
-   * The product the plan belongs to. Note that after updating, statement descriptors and line items
-   * of the plan in active subscriptions will be affected.
+   * The product the plan belongs to. This cannot be changed once it has been used in a subscription
+   * or subscription schedule.
    */
   @SerializedName("product")
   Object product;
@@ -225,8 +225,8 @@ public class PlanUpdateParams extends ApiRequestParams {
     }
 
     /**
-     * The product the plan belongs to. Note that after updating, statement descriptors and line
-     * items of the plan in active subscriptions will be affected.
+     * The product the plan belongs to. This cannot be changed once it has been used in a
+     * subscription or subscription schedule.
      */
     public Builder setProduct(String product) {
       this.product = product;
@@ -234,8 +234,8 @@ public class PlanUpdateParams extends ApiRequestParams {
     }
 
     /**
-     * The product the plan belongs to. Note that after updating, statement descriptors and line
-     * items of the plan in active subscriptions will be affected.
+     * The product the plan belongs to. This cannot be changed once it has been used in a
+     * subscription or subscription schedule.
      */
     public Builder setProduct(EmptyParam product) {
       this.product = product;
