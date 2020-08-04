@@ -123,6 +123,18 @@ public class Mandate extends ApiResource implements HasId {
   @Getter
   @Setter
   @EqualsAndHashCode(callSuper = false)
+  public static class Alipay extends StripeObject {
+    /**
+     * Currency associatd with this particular payment method, only this currency and {@code cny}
+     * are valid currencies for charging this particular payment method.
+     */
+    @SerializedName("currency")
+    String currency;
+  }
+
+  @Getter
+  @Setter
+  @EqualsAndHashCode(callSuper = false)
   public static class AuBecsDebit extends StripeObject {
     /**
      * The URL of the mandate. This URL generally contains sensitive information about the customer
@@ -201,6 +213,9 @@ public class Mandate extends ApiResource implements HasId {
   @Setter
   @EqualsAndHashCode(callSuper = false)
   public static class PaymentMethodDetails extends StripeObject {
+    @SerializedName("alipay")
+    Alipay alipay;
+
     @SerializedName("au_becs_debit")
     AuBecsDebit auBecsDebit;
 

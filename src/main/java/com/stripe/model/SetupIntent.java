@@ -682,8 +682,24 @@ public class SetupIntent extends ApiResource implements HasId, MetadataStore<Set
   @Setter
   @EqualsAndHashCode(callSuper = false)
   public static class PaymentMethodOptions extends StripeObject {
+    @SerializedName("alipay")
+    Alipay alipay;
+
     @SerializedName("card")
     Card card;
+
+    @Getter
+    @Setter
+    @EqualsAndHashCode(callSuper = false)
+    public static class Alipay extends StripeObject {
+      /**
+       * Three-letter <a href="https://www.iso.org/iso-4217-currency-codes.html">ISO currency
+       * code</a>, in lowercase. Must be a <a href="https://stripe.com/docs/currencies">supported
+       * currency</a>.
+       */
+      @SerializedName("currency")
+      String currency;
+    }
 
     @Getter
     @Setter

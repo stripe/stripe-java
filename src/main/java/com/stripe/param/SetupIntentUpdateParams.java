@@ -308,6 +308,13 @@ public class SetupIntentUpdateParams extends ApiRequestParams {
 
   @Getter
   public static class PaymentMethodOptions {
+    /**
+     * If this is a {@code alipay} PaymentMethod, this sub-hash contains details about the Alipay
+     * payment method options.
+     */
+    @SerializedName("alipay")
+    Alipay alipay;
+
     /** Configuration for any card setup attempted on this SetupIntent. */
     @SerializedName("card")
     Card card;
@@ -321,7 +328,8 @@ public class SetupIntentUpdateParams extends ApiRequestParams {
     @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
     Map<String, Object> extraParams;
 
-    private PaymentMethodOptions(Card card, Map<String, Object> extraParams) {
+    private PaymentMethodOptions(Alipay alipay, Card card, Map<String, Object> extraParams) {
+      this.alipay = alipay;
       this.card = card;
       this.extraParams = extraParams;
     }
@@ -331,13 +339,24 @@ public class SetupIntentUpdateParams extends ApiRequestParams {
     }
 
     public static class Builder {
+      private Alipay alipay;
+
       private Card card;
 
       private Map<String, Object> extraParams;
 
       /** Finalize and obtain parameter instance from this builder. */
       public PaymentMethodOptions build() {
-        return new PaymentMethodOptions(this.card, this.extraParams);
+        return new PaymentMethodOptions(this.alipay, this.card, this.extraParams);
+      }
+
+      /**
+       * If this is a {@code alipay} PaymentMethod, this sub-hash contains details about the Alipay
+       * payment method options.
+       */
+      public Builder setAlipay(Alipay alipay) {
+        this.alipay = alipay;
+        return this;
       }
 
       /** Configuration for any card setup attempted on this SetupIntent. */
@@ -371,6 +390,79 @@ public class SetupIntentUpdateParams extends ApiRequestParams {
         }
         this.extraParams.putAll(map);
         return this;
+      }
+    }
+
+    @Getter
+    public static class Alipay {
+      @SerializedName("currency")
+      Object currency;
+
+      /**
+       * Map of extra parameters for custom features not available in this client library. The
+       * content in this map is not serialized under this field's {@code @SerializedName} value.
+       * Instead, each key/value pair is serialized as if the key is a root-level field (serialized)
+       * name in this param object. Effectively, this map is flattened to its parent instance.
+       */
+      @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
+      Map<String, Object> extraParams;
+
+      private Alipay(Object currency, Map<String, Object> extraParams) {
+        this.currency = currency;
+        this.extraParams = extraParams;
+      }
+
+      public static Builder builder() {
+        return new Builder();
+      }
+
+      public static class Builder {
+        private Object currency;
+
+        private Map<String, Object> extraParams;
+
+        /** Finalize and obtain parameter instance from this builder. */
+        public Alipay build() {
+          return new Alipay(this.currency, this.extraParams);
+        }
+
+        public Builder setCurrency(String currency) {
+          this.currency = currency;
+          return this;
+        }
+
+        public Builder setCurrency(EmptyParam currency) {
+          this.currency = currency;
+          return this;
+        }
+
+        /**
+         * Add a key/value pair to `extraParams` map. A map is initialized for the first
+         * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
+         * map. See {@link SetupIntentUpdateParams.PaymentMethodOptions.Alipay#extraParams} for the
+         * field documentation.
+         */
+        public Builder putExtraParam(String key, Object value) {
+          if (this.extraParams == null) {
+            this.extraParams = new HashMap<>();
+          }
+          this.extraParams.put(key, value);
+          return this;
+        }
+
+        /**
+         * Add all map key/value pairs to `extraParams` map. A map is initialized for the first
+         * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
+         * map. See {@link SetupIntentUpdateParams.PaymentMethodOptions.Alipay#extraParams} for the
+         * field documentation.
+         */
+        public Builder putAllExtraParam(Map<String, Object> map) {
+          if (this.extraParams == null) {
+            this.extraParams = new HashMap<>();
+          }
+          this.extraParams.putAll(map);
+          return this;
+        }
       }
     }
 

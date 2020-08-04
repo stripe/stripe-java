@@ -1053,6 +1053,9 @@ public class PaymentIntent extends ApiResource implements HasId, MetadataStore<P
   @Setter
   @EqualsAndHashCode(callSuper = false)
   public static class NextAction extends StripeObject {
+    @SerializedName("alipay_handle_redirect")
+    NextActionAlipayHandleRedirect alipayHandleRedirect;
+
     @SerializedName("redirect_to_url")
     NextActionRedirectToUrl redirectToUrl;
 
@@ -1074,7 +1077,21 @@ public class PaymentIntent extends ApiResource implements HasId, MetadataStore<P
   @Getter
   @Setter
   @EqualsAndHashCode(callSuper = false)
-  public static class NextActionRedirectToUrl extends StripeObject {
+  public static class NextActionAlipayHandleRedirect extends StripeObject {
+    /**
+     * The native data to be used with Alipay SDK you must redirect your customer to in order to
+     * authenticate the payment in an Android App.
+     */
+    @SerializedName("native_data")
+    String nativeData;
+
+    /**
+     * The native URL you must redirect your customer to in order to authenticate the payment in an
+     * iOS App.
+     */
+    @SerializedName("native_url")
+    String nativeUrl;
+
     /**
      * If the customer does not exit their browser while authenticating, they will be redirected to
      * this specified URL after completion.
@@ -1090,12 +1107,64 @@ public class PaymentIntent extends ApiResource implements HasId, MetadataStore<P
   @Getter
   @Setter
   @EqualsAndHashCode(callSuper = false)
+  public static class NextActionRedirectToUrl extends StripeObject {
+    @SerializedName("mobile")
+    NextActionRedirectToUrlMobile mobile;
+
+    /**
+     * If the customer does not exit their browser while authenticating, they will be redirected to
+     * this specified URL after completion.
+     */
+    @SerializedName("return_url")
+    String returnUrl;
+
+    /** The URL you must redirect your customer to in order to authenticate the payment. */
+    @SerializedName("url")
+    String url;
+  }
+
+  @Getter
+  @Setter
+  @EqualsAndHashCode(callSuper = false)
+  public static class NextActionRedirectToUrlMobile extends StripeObject {
+    @SerializedName("alipay")
+    NextActionRedirectToUrlMobileAlipay alipay;
+
+    /** The native URL you use to redirect your user in iOS App. */
+    @SerializedName("native_url")
+    String nativeUrl;
+
+    /** The payment method type. */
+    @SerializedName("type")
+    String type;
+  }
+
+  @Getter
+  @Setter
+  @EqualsAndHashCode(callSuper = false)
+  public static class NextActionRedirectToUrlMobileAlipay extends StripeObject {
+    /** Details about each object. */
+    @SerializedName("data")
+    String data;
+  }
+
+  @Getter
+  @Setter
+  @EqualsAndHashCode(callSuper = false)
   public static class PaymentMethodOptions extends StripeObject {
+    @SerializedName("alipay")
+    Alipay alipay;
+
     @SerializedName("bancontact")
     Bancontact bancontact;
 
     @SerializedName("card")
     Card card;
+
+    @Getter
+    @Setter
+    @EqualsAndHashCode(callSuper = false)
+    public static class Alipay extends StripeObject {}
 
     @Getter
     @Setter
