@@ -2991,7 +2991,7 @@ public class SessionCreateParams extends ApiRequestParams {
     BigDecimal applicationFeePercent;
 
     /**
-     * The code of the coupon to apply to this subscription. A coupon applied to a subscription will
+     * The ID of the coupon to apply to this subscription. A coupon applied to a subscription will
      * only affect invoices created for that particular subscription.
      */
     @SerializedName("coupon")
@@ -3124,8 +3124,8 @@ public class SessionCreateParams extends ApiRequestParams {
       }
 
       /**
-       * The code of the coupon to apply to this subscription. A coupon applied to a subscription
-       * will only affect invoices created for that particular subscription.
+       * The ID of the coupon to apply to this subscription. A coupon applied to a subscription will
+       * only affect invoices created for that particular subscription.
        */
       public Builder setCoupon(String coupon) {
         this.coupon = coupon;
@@ -3502,7 +3502,13 @@ public class SessionCreateParams extends ApiRequestParams {
     TR("tr"),
 
     @SerializedName("zh")
-    ZH("zh");
+    ZH("zh"),
+
+    @SerializedName("zh-HK")
+    ZH_HK("zh-HK"),
+
+    @SerializedName("zh-TW")
+    ZH_TW("zh-TW");
 
     @Getter(onMethod_ = {@Override})
     private final String value;
