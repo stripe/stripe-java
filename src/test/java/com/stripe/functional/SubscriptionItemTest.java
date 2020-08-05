@@ -25,7 +25,7 @@ public class SubscriptionItemTest extends BaseStripeTest {
   @Test
   public void testCreate() throws StripeException {
     final Map<String, Object> params = new HashMap<>();
-    params.put("plan", "plan_123");
+    params.put("price", "price_123");
     params.put("subscription", "cus_123");
     params.put("quantity", 99);
 

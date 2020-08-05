@@ -22,15 +22,6 @@ public class StripeObjectTest extends BaseStripeTest {
         subscription.getCreated(),
         subscription.getRawJsonObject().getAsJsonPrimitive("created").getAsLong());
 
-    // Access `plan[id]`, a nested string element
-    assertEquals(
-        subscription.getPlan().getId(),
-        subscription
-            .getRawJsonObject()
-            .getAsJsonObject("plan")
-            .getAsJsonPrimitive("id")
-            .getAsString());
-
     // Access `items[data][0][id]`, a deeply nested string element
     assertEquals(
         subscription.getItems().getData().get(0).getId(),
