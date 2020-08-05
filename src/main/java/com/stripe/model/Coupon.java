@@ -28,7 +28,7 @@ public class Coupon extends ApiResource implements HasId, MetadataStore<Coupon> 
   Long amountOff;
 
   @SerializedName("applies_to")
-  Restrictions appliesTo;
+  AppliesTo appliesTo;
 
   /** Time at which the object was created. Measured in seconds since the Unix epoch. */
   @SerializedName("created")
@@ -337,7 +337,7 @@ public class Coupon extends ApiResource implements HasId, MetadataStore<Coupon> 
   @Getter
   @Setter
   @EqualsAndHashCode(callSuper = false)
-  public static class Restrictions extends StripeObject {
+  public static class AppliesTo extends StripeObject {
     /** A list of product IDs this coupon applies to. */
     @SerializedName("products")
     List<String> products;

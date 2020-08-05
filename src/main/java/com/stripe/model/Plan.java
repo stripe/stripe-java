@@ -213,16 +213,18 @@ public class Plan extends ApiResource implements HasId, MetadataStore<Plan> {
   }
 
   /**
-   * You can create plans using the API, or in the Stripe <a
-   * href="https://dashboard.stripe.com/products">Dashboard</a>.
+   * You can now model subscriptions more flexibly using the <a
+   * href="https://stripe.com/docs/api#prices">Prices API</a>. It replaces the Plans API and is
+   * backwards compatible to simplify your migration.
    */
   public static Plan create(Map<String, Object> params) throws StripeException {
     return create(params, (RequestOptions) null);
   }
 
   /**
-   * You can create plans using the API, or in the Stripe <a
-   * href="https://dashboard.stripe.com/products">Dashboard</a>.
+   * You can now model subscriptions more flexibly using the <a
+   * href="https://stripe.com/docs/api#prices">Prices API</a>. It replaces the Plans API and is
+   * backwards compatible to simplify your migration.
    */
   public static Plan create(Map<String, Object> params, RequestOptions options)
       throws StripeException {
@@ -231,16 +233,18 @@ public class Plan extends ApiResource implements HasId, MetadataStore<Plan> {
   }
 
   /**
-   * You can create plans using the API, or in the Stripe <a
-   * href="https://dashboard.stripe.com/products">Dashboard</a>.
+   * You can now model subscriptions more flexibly using the <a
+   * href="https://stripe.com/docs/api#prices">Prices API</a>. It replaces the Plans API and is
+   * backwards compatible to simplify your migration.
    */
   public static Plan create(PlanCreateParams params) throws StripeException {
     return create(params, (RequestOptions) null);
   }
 
   /**
-   * You can create plans using the API, or in the Stripe <a
-   * href="https://dashboard.stripe.com/products">Dashboard</a>.
+   * You can now model subscriptions more flexibly using the <a
+   * href="https://stripe.com/docs/api#prices">Prices API</a>. It replaces the Plans API and is
+   * backwards compatible to simplify your migration.
    */
   public static Plan create(PlanCreateParams params, RequestOptions options)
       throws StripeException {
