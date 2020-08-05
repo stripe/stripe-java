@@ -1,5 +1,13 @@
 # Changelog
 
+## 19.39.0 - 2020-08-05
+* [#1077](https://github.com/stripe/stripe-java/pull/1077) Multiple API changes
+  * Add support for the `PromotionCode` resource and APIs
+  * Add support for `allow_promotion_codes` on Checkout `Session`
+  * Add support for `applies_to[products]` on `Coupon`
+  * Add support for `promotion_code` on `Customer` and `Subscription`
+  * Add support for `promotion_code` on `Discount`
+
 ## 19.38.0 - 2020-08-04
 * [#1076](https://github.com/stripe/stripe-java/pull/1076) Multiple API changes
   * Add `zh-HK` and `zh-TW` as `locale` on Checkout `Session`.
