@@ -10,6 +10,7 @@ import com.stripe.param.CouponListParams;
 import com.stripe.param.CouponRetrieveParams;
 import com.stripe.param.CouponUpdateParams;
 import java.math.BigDecimal;
+import java.util.List;
 import java.util.Map;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
@@ -25,6 +26,9 @@ public class Coupon extends ApiResource implements HasId, MetadataStore<Coupon> 
    */
   @SerializedName("amount_off")
   Long amountOff;
+
+  @SerializedName("applies_to")
+  Restrictions appliesTo;
 
   /** Time at which the object was created. Measured in seconds since the Unix epoch. */
   @SerializedName("created")
@@ -328,5 +332,14 @@ public class Coupon extends ApiResource implements HasId, MetadataStore<Coupon> 
             String.format("/v1/coupons/%s", ApiResource.urlEncodeId(this.getId())));
     return ApiResource.request(
         ApiResource.RequestMethod.DELETE, url, params, Coupon.class, options);
+  }
+
+  @Getter
+  @Setter
+  @EqualsAndHashCode(callSuper = false)
+  public static class Restrictions extends StripeObject {
+    /** A list of product IDs this coupon applies to. */
+    @SerializedName("products")
+    List<String> products;
   }
 }

@@ -68,6 +68,12 @@ public class Discount extends StripeObject implements HasId {
   @SerializedName("object")
   String object;
 
+  /** The promotion code applied to create this discount. */
+  @SerializedName("promotion_code")
+  @Getter(lombok.AccessLevel.NONE)
+  @Setter(lombok.AccessLevel.NONE)
+  ExpandableField<PromotionCode> promotionCode;
+
   /** Date that the coupon was applied. */
   @SerializedName("start")
   Long start;
@@ -94,5 +100,24 @@ public class Discount extends StripeObject implements HasId {
 
   public void setCustomerObject(Customer expandableObject) {
     this.customer = new ExpandableField<Customer>(expandableObject.getId(), expandableObject);
+  }
+
+  /** Get ID of expandable {@code promotionCode} object. */
+  public String getPromotionCode() {
+    return (this.promotionCode != null) ? this.promotionCode.getId() : null;
+  }
+
+  public void setPromotionCode(String id) {
+    this.promotionCode = ApiResource.setExpandableFieldId(id, this.promotionCode);
+  }
+
+  /** Get expanded {@code promotionCode}. */
+  public PromotionCode getPromotionCodeObject() {
+    return (this.promotionCode != null) ? this.promotionCode.getExpanded() : null;
+  }
+
+  public void setPromotionCodeObject(PromotionCode expandableObject) {
+    this.promotionCode =
+        new ExpandableField<PromotionCode>(expandableObject.getId(), expandableObject);
   }
 }

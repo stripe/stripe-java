@@ -11,6 +11,10 @@ import lombok.Getter;
 
 @Getter
 public class SessionCreateParams extends ApiRequestParams {
+  /** Enables user redeemable promotion codes. */
+  @SerializedName("allow_promotion_codes")
+  Boolean allowPromotionCodes;
+
   /** Specify whether Checkout should collect the customer's billing address. */
   @SerializedName("billing_address_collection")
   BillingAddressCollection billingAddressCollection;
@@ -155,6 +159,7 @@ public class SessionCreateParams extends ApiRequestParams {
   String successUrl;
 
   private SessionCreateParams(
+      Boolean allowPromotionCodes,
       BillingAddressCollection billingAddressCollection,
       String cancelUrl,
       String clientReferenceId,
@@ -173,6 +178,7 @@ public class SessionCreateParams extends ApiRequestParams {
       SubmitType submitType,
       SubscriptionData subscriptionData,
       String successUrl) {
+    this.allowPromotionCodes = allowPromotionCodes;
     this.billingAddressCollection = billingAddressCollection;
     this.cancelUrl = cancelUrl;
     this.clientReferenceId = clientReferenceId;
@@ -198,6 +204,8 @@ public class SessionCreateParams extends ApiRequestParams {
   }
 
   public static class Builder {
+    private Boolean allowPromotionCodes;
+
     private BillingAddressCollection billingAddressCollection;
 
     private String cancelUrl;
@@ -237,6 +245,7 @@ public class SessionCreateParams extends ApiRequestParams {
     /** Finalize and obtain parameter instance from this builder. */
     public SessionCreateParams build() {
       return new SessionCreateParams(
+          this.allowPromotionCodes,
           this.billingAddressCollection,
           this.cancelUrl,
           this.clientReferenceId,
@@ -255,6 +264,12 @@ public class SessionCreateParams extends ApiRequestParams {
           this.submitType,
           this.subscriptionData,
           this.successUrl);
+    }
+
+    /** Enables user redeemable promotion codes. */
+    public Builder setAllowPromotionCodes(Boolean allowPromotionCodes) {
+      this.allowPromotionCodes = allowPromotionCodes;
+      return this;
     }
 
     /** Specify whether Checkout should collect the customer's billing address. */

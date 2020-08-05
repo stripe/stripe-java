@@ -31,6 +31,10 @@ import lombok.Setter;
 @Setter
 @EqualsAndHashCode(callSuper = false)
 public class Session extends ApiResource implements HasId {
+  /** Enables user redeemable promotion codes. */
+  @SerializedName("allow_promotion_codes")
+  Boolean allowPromotionCodes;
+
   /** Total of all items before discounts or taxes are applied. */
   @SerializedName("amount_subtotal")
   Long amountSubtotal;

@@ -19,6 +19,10 @@ public class CouponCreateParams extends ApiRequestParams {
   @SerializedName("amount_off")
   Long amountOff;
 
+  /** A hash containing directions for what this Coupon will apply discounts to. */
+  @SerializedName("applies_to")
+  AppliesTo appliesTo;
+
   /**
    * Three-letter <a href="https://stripe.com/docs/currencies">ISO code for the currency</a> of the
    * {@code amount_off} parameter (required if {@code amount_off} is passed).
@@ -101,6 +105,7 @@ public class CouponCreateParams extends ApiRequestParams {
 
   private CouponCreateParams(
       Long amountOff,
+      AppliesTo appliesTo,
       String currency,
       Duration duration,
       Long durationInMonths,
@@ -113,6 +118,7 @@ public class CouponCreateParams extends ApiRequestParams {
       BigDecimal percentOff,
       Long redeemBy) {
     this.amountOff = amountOff;
+    this.appliesTo = appliesTo;
     this.currency = currency;
     this.duration = duration;
     this.durationInMonths = durationInMonths;
@@ -132,6 +138,8 @@ public class CouponCreateParams extends ApiRequestParams {
 
   public static class Builder {
     private Long amountOff;
+
+    private AppliesTo appliesTo;
 
     private String currency;
 
@@ -159,6 +167,7 @@ public class CouponCreateParams extends ApiRequestParams {
     public CouponCreateParams build() {
       return new CouponCreateParams(
           this.amountOff,
+          this.appliesTo,
           this.currency,
           this.duration,
           this.durationInMonths,
@@ -178,6 +187,12 @@ public class CouponCreateParams extends ApiRequestParams {
      */
     public Builder setAmountOff(Long amountOff) {
       this.amountOff = amountOff;
+      return this;
+    }
+
+    /** A hash containing directions for what this Coupon will apply discounts to. */
+    public Builder setAppliesTo(AppliesTo appliesTo) {
+      this.appliesTo = appliesTo;
       return this;
     }
 
@@ -355,6 +370,94 @@ public class CouponCreateParams extends ApiRequestParams {
     public Builder setRedeemBy(Long redeemBy) {
       this.redeemBy = redeemBy;
       return this;
+    }
+  }
+
+  @Getter
+  public static class AppliesTo {
+    /**
+     * Map of extra parameters for custom features not available in this client library. The content
+     * in this map is not serialized under this field's {@code @SerializedName} value. Instead, each
+     * key/value pair is serialized as if the key is a root-level field (serialized) name in this
+     * param object. Effectively, this map is flattened to its parent instance.
+     */
+    @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
+    Map<String, Object> extraParams;
+
+    /** An array of Product IDs that this Coupon will apply to. */
+    @SerializedName("products")
+    List<String> products;
+
+    private AppliesTo(Map<String, Object> extraParams, List<String> products) {
+      this.extraParams = extraParams;
+      this.products = products;
+    }
+
+    public static Builder builder() {
+      return new Builder();
+    }
+
+    public static class Builder {
+      private Map<String, Object> extraParams;
+
+      private List<String> products;
+
+      /** Finalize and obtain parameter instance from this builder. */
+      public AppliesTo build() {
+        return new AppliesTo(this.extraParams, this.products);
+      }
+
+      /**
+       * Add a key/value pair to `extraParams` map. A map is initialized for the first `put/putAll`
+       * call, and subsequent calls add additional key/value pairs to the original map. See {@link
+       * CouponCreateParams.AppliesTo#extraParams} for the field documentation.
+       */
+      public Builder putExtraParam(String key, Object value) {
+        if (this.extraParams == null) {
+          this.extraParams = new HashMap<>();
+        }
+        this.extraParams.put(key, value);
+        return this;
+      }
+
+      /**
+       * Add all map key/value pairs to `extraParams` map. A map is initialized for the first
+       * `put/putAll` call, and subsequent calls add additional key/value pairs to the original map.
+       * See {@link CouponCreateParams.AppliesTo#extraParams} for the field documentation.
+       */
+      public Builder putAllExtraParam(Map<String, Object> map) {
+        if (this.extraParams == null) {
+          this.extraParams = new HashMap<>();
+        }
+        this.extraParams.putAll(map);
+        return this;
+      }
+
+      /**
+       * Add an element to `products` list. A list is initialized for the first `add/addAll` call,
+       * and subsequent calls adds additional elements to the original list. See {@link
+       * CouponCreateParams.AppliesTo#products} for the field documentation.
+       */
+      public Builder addProduct(String element) {
+        if (this.products == null) {
+          this.products = new ArrayList<>();
+        }
+        this.products.add(element);
+        return this;
+      }
+
+      /**
+       * Add all elements to `products` list. A list is initialized for the first `add/addAll` call,
+       * and subsequent calls adds additional elements to the original list. See {@link
+       * CouponCreateParams.AppliesTo#products} for the field documentation.
+       */
+      public Builder addAllProduct(List<String> elements) {
+        if (this.products == null) {
+          this.products = new ArrayList<>();
+        }
+        this.products.addAll(elements);
+        return this;
+      }
     }
   }
 
