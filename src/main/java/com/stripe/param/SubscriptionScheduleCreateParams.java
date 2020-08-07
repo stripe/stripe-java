@@ -1492,7 +1492,8 @@ public class SubscriptionScheduleCreateParams extends ApiRequestParams {
 
         /**
          * Same as {@code unit_amount}, but accepts a decimal value with at most 12 decimal places.
-         * Only one of {@code unit_amount} and {@code unit_amount_decimal} can be set.
+         * Only one of {@code unit_amount} and {@code unit_amount_decimal} can be set, but at least
+         * one is required.
          */
         @SerializedName("unit_amount_decimal")
         BigDecimal unitAmountDecimal;
@@ -1589,7 +1590,8 @@ public class SubscriptionScheduleCreateParams extends ApiRequestParams {
 
           /**
            * Same as {@code unit_amount}, but accepts a decimal value with at most 12 decimal
-           * places. Only one of {@code unit_amount} and {@code unit_amount_decimal} can be set.
+           * places. Only one of {@code unit_amount} and {@code unit_amount_decimal} can be set, but
+           * at least one is required.
            */
           public Builder setUnitAmountDecimal(BigDecimal unitAmountDecimal) {
             this.unitAmountDecimal = unitAmountDecimal;
@@ -2112,7 +2114,8 @@ public class SubscriptionScheduleCreateParams extends ApiRequestParams {
 
         /**
          * Same as {@code unit_amount}, but accepts a decimal value with at most 12 decimal places.
-         * Only one of {@code unit_amount} and {@code unit_amount_decimal} can be set.
+         * Only one of {@code unit_amount} and {@code unit_amount_decimal} can be set, but at least
+         * one is required.
          */
         @SerializedName("unit_amount_decimal")
         BigDecimal unitAmountDecimal;
@@ -2220,7 +2223,8 @@ public class SubscriptionScheduleCreateParams extends ApiRequestParams {
 
           /**
            * Same as {@code unit_amount}, but accepts a decimal value with at most 12 decimal
-           * places. Only one of {@code unit_amount} and {@code unit_amount_decimal} can be set.
+           * places. Only one of {@code unit_amount} and {@code unit_amount_decimal} can be set, but
+           * at least one is required.
            */
           public Builder setUnitAmountDecimal(BigDecimal unitAmountDecimal) {
             this.unitAmountDecimal = unitAmountDecimal;

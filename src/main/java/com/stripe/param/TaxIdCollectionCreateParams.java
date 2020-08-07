@@ -24,12 +24,12 @@ public class TaxIdCollectionCreateParams extends ApiRequestParams {
   Map<String, Object> extraParams;
 
   /**
-   * Type of the tax ID, one of {@code eu_vat}, {@code br_cnpj}, {@code br_cpf}, {@code nz_gst},
-   * {@code au_abn}, {@code in_gst}, {@code no_vat}, {@code za_vat}, {@code ch_vat}, {@code mx_rfc},
-   * {@code sg_uen}, {@code ru_inn}, {@code ca_bn}, {@code hk_br}, {@code es_cif}, {@code tw_vat},
-   * {@code th_vat}, {@code jp_cn}, {@code li_uid}, {@code my_itn}, {@code us_ein}, {@code kr_brn},
-   * {@code ca_qst}, {@code my_sst}, {@code sg_gst}, {@code ae_trn}, {@code cl_tin}, {@code sa_vat},
-   * {@code id_npwp}, or {@code my_frp}.
+   * Type of the tax ID, one of {@code ae_trn}, {@code au_abn}, {@code br_cnpj}, {@code br_cpf},
+   * {@code ca_bn}, {@code ca_qst}, {@code ch_vat}, {@code cl_tin}, {@code es_cif}, {@code eu_vat},
+   * {@code hk_br}, {@code id_npwp}, {@code in_gst}, {@code jp_cn}, {@code kr_brn}, {@code li_uid},
+   * {@code mx_rfc}, {@code my_frp}, {@code my_itn}, {@code my_sst}, {@code no_vat}, {@code nz_gst},
+   * {@code ru_inn}, {@code sa_vat}, {@code sg_gst}, {@code sg_uen}, {@code th_vat}, {@code tw_vat},
+   * {@code us_ein}, or {@code za_vat}.
    */
   @SerializedName("type")
   Type type;
@@ -117,12 +117,12 @@ public class TaxIdCollectionCreateParams extends ApiRequestParams {
     }
 
     /**
-     * Type of the tax ID, one of {@code eu_vat}, {@code br_cnpj}, {@code br_cpf}, {@code nz_gst},
-     * {@code au_abn}, {@code in_gst}, {@code no_vat}, {@code za_vat}, {@code ch_vat}, {@code
-     * mx_rfc}, {@code sg_uen}, {@code ru_inn}, {@code ca_bn}, {@code hk_br}, {@code es_cif}, {@code
-     * tw_vat}, {@code th_vat}, {@code jp_cn}, {@code li_uid}, {@code my_itn}, {@code us_ein},
-     * {@code kr_brn}, {@code ca_qst}, {@code my_sst}, {@code sg_gst}, {@code ae_trn}, {@code
-     * cl_tin}, {@code sa_vat}, {@code id_npwp}, or {@code my_frp}.
+     * Type of the tax ID, one of {@code ae_trn}, {@code au_abn}, {@code br_cnpj}, {@code br_cpf},
+     * {@code ca_bn}, {@code ca_qst}, {@code ch_vat}, {@code cl_tin}, {@code es_cif}, {@code
+     * eu_vat}, {@code hk_br}, {@code id_npwp}, {@code in_gst}, {@code jp_cn}, {@code kr_brn},
+     * {@code li_uid}, {@code mx_rfc}, {@code my_frp}, {@code my_itn}, {@code my_sst}, {@code
+     * no_vat}, {@code nz_gst}, {@code ru_inn}, {@code sa_vat}, {@code sg_gst}, {@code sg_uen},
+     * {@code th_vat}, {@code tw_vat}, {@code us_ein}, or {@code za_vat}.
      */
     public Builder setType(Type type) {
       this.type = type;

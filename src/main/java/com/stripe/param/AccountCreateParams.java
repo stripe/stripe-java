@@ -61,8 +61,8 @@ public class AccountCreateParams extends ApiRequestParams {
   String defaultCurrency;
 
   /**
-   * The email address of the account holder. For Custom accounts, this is only to make the account
-   * easier to identify to you: Stripe will never directly email your users.
+   * The email address of the account holder. This is only to make the account easier to identify to
+   * you. Stripe will never directly email Custom accounts.
    */
   @SerializedName("email")
   String email;
@@ -133,9 +133,8 @@ public class AccountCreateParams extends ApiRequestParams {
   TosAcceptance tosAcceptance;
 
   /**
-   * The type of Stripe account to create. Currently must be {@code custom}, as only <a
-   * href="https://stripe.com/docs/connect/custom-accounts">Custom accounts</a> may be created via
-   * the API.
+   * The type of Stripe account to create. May be one of {@code custom}, {@code express} or {@code
+   * standard}.
    */
   @SerializedName("type")
   Type type;
@@ -307,8 +306,8 @@ public class AccountCreateParams extends ApiRequestParams {
     }
 
     /**
-     * The email address of the account holder. For Custom accounts, this is only to make the
-     * account easier to identify to you: Stripe will never directly email your users.
+     * The email address of the account holder. This is only to make the account easier to identify
+     * to you. Stripe will never directly email Custom accounts.
      */
     public Builder setEmail(String email) {
       this.email = email;
@@ -486,9 +485,8 @@ public class AccountCreateParams extends ApiRequestParams {
     }
 
     /**
-     * The type of Stripe account to create. Currently must be {@code custom}, as only <a
-     * href="https://stripe.com/docs/connect/custom-accounts">Custom accounts</a> may be created via
-     * the API.
+     * The type of Stripe account to create. May be one of {@code custom}, {@code express} or {@code
+     * standard}.
      */
     public Builder setType(Type type) {
       this.type = type;

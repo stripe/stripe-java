@@ -11,6 +11,13 @@ import lombok.Getter;
 @Getter
 public class PaymentMethodCreateParams extends ApiRequestParams {
   /**
+   * If this is an {@code Alipay} PaymentMethod, this hash contains details about the Alipay payment
+   * method.
+   */
+  @SerializedName("alipay")
+  Alipay alipay;
+
+  /**
    * If this is an {@code au_becs_debit} PaymentMethod, this hash contains details about the bank
    * account.
    */
@@ -136,6 +143,7 @@ public class PaymentMethodCreateParams extends ApiRequestParams {
   Type type;
 
   private PaymentMethodCreateParams(
+      Alipay alipay,
       AuBecsDebit auBecsDebit,
       BacsDebit bacsDebit,
       Bancontact bancontact,
@@ -154,6 +162,7 @@ public class PaymentMethodCreateParams extends ApiRequestParams {
       String paymentMethod,
       SepaDebit sepaDebit,
       Type type) {
+    this.alipay = alipay;
     this.auBecsDebit = auBecsDebit;
     this.bacsDebit = bacsDebit;
     this.bancontact = bancontact;
@@ -179,6 +188,8 @@ public class PaymentMethodCreateParams extends ApiRequestParams {
   }
 
   public static class Builder {
+    private Alipay alipay;
+
     private AuBecsDebit auBecsDebit;
 
     private BacsDebit bacsDebit;
@@ -218,6 +229,7 @@ public class PaymentMethodCreateParams extends ApiRequestParams {
     /** Finalize and obtain parameter instance from this builder. */
     public PaymentMethodCreateParams build() {
       return new PaymentMethodCreateParams(
+          this.alipay,
           this.auBecsDebit,
           this.bacsDebit,
           this.bancontact,
@@ -236,6 +248,15 @@ public class PaymentMethodCreateParams extends ApiRequestParams {
           this.paymentMethod,
           this.sepaDebit,
           this.type);
+    }
+
+    /**
+     * If this is an {@code Alipay} PaymentMethod, this hash contains details about the Alipay
+     * payment method.
+     */
+    public Builder setAlipay(Alipay alipay) {
+      this.alipay = alipay;
+      return this;
     }
 
     /**
@@ -461,6 +482,61 @@ public class PaymentMethodCreateParams extends ApiRequestParams {
     public Builder setType(Type type) {
       this.type = type;
       return this;
+    }
+  }
+
+  @Getter
+  public static class Alipay {
+    /**
+     * Map of extra parameters for custom features not available in this client library. The content
+     * in this map is not serialized under this field's {@code @SerializedName} value. Instead, each
+     * key/value pair is serialized as if the key is a root-level field (serialized) name in this
+     * param object. Effectively, this map is flattened to its parent instance.
+     */
+    @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
+    Map<String, Object> extraParams;
+
+    private Alipay(Map<String, Object> extraParams) {
+      this.extraParams = extraParams;
+    }
+
+    public static Builder builder() {
+      return new Builder();
+    }
+
+    public static class Builder {
+      private Map<String, Object> extraParams;
+
+      /** Finalize and obtain parameter instance from this builder. */
+      public Alipay build() {
+        return new Alipay(this.extraParams);
+      }
+
+      /**
+       * Add a key/value pair to `extraParams` map. A map is initialized for the first `put/putAll`
+       * call, and subsequent calls add additional key/value pairs to the original map. See {@link
+       * PaymentMethodCreateParams.Alipay#extraParams} for the field documentation.
+       */
+      public Builder putExtraParam(String key, Object value) {
+        if (this.extraParams == null) {
+          this.extraParams = new HashMap<>();
+        }
+        this.extraParams.put(key, value);
+        return this;
+      }
+
+      /**
+       * Add all map key/value pairs to `extraParams` map. A map is initialized for the first
+       * `put/putAll` call, and subsequent calls add additional key/value pairs to the original map.
+       * See {@link PaymentMethodCreateParams.Alipay#extraParams} for the field documentation.
+       */
+      public Builder putAllExtraParam(Map<String, Object> map) {
+        if (this.extraParams == null) {
+          this.extraParams = new HashMap<>();
+        }
+        this.extraParams.putAll(map);
+        return this;
+      }
     }
   }
 
@@ -1689,6 +1765,9 @@ public class PaymentMethodCreateParams extends ApiRequestParams {
   }
 
   public enum Type implements ApiRequestParams.EnumParam {
+    @SerializedName("alipay")
+    ALIPAY("alipay"),
+
     @SerializedName("au_becs_debit")
     AU_BECS_DEBIT("au_becs_debit"),
 
