@@ -847,13 +847,17 @@ public class SessionCreateParams extends ApiRequestParams {
       @SerializedName("recurring")
       Recurring recurring;
 
-      /** A positive integer in %s representing how much to charge. */
+      /**
+       * A positive integer in %s representing how much to charge. One of {@code unit_amount} or
+       * {@code unit_amount_decimal} is required.
+       */
       @SerializedName("unit_amount")
       Long unitAmount;
 
       /**
        * Same as {@code unit_amount}, but accepts a decimal value with at most 12 decimal places.
-       * Only one of {@code unit_amount} and {@code unit_amount_decimal} can be set.
+       * Only one of {@code unit_amount} and {@code unit_amount_decimal} can be set, but at least
+       * one is required.
        */
       @SerializedName("unit_amount_decimal")
       BigDecimal unitAmountDecimal;
@@ -968,7 +972,10 @@ public class SessionCreateParams extends ApiRequestParams {
           return this;
         }
 
-        /** A positive integer in %s representing how much to charge. */
+        /**
+         * A positive integer in %s representing how much to charge. One of {@code unit_amount} or
+         * {@code unit_amount_decimal} is required.
+         */
         public Builder setUnitAmount(Long unitAmount) {
           this.unitAmount = unitAmount;
           return this;
@@ -976,7 +983,8 @@ public class SessionCreateParams extends ApiRequestParams {
 
         /**
          * Same as {@code unit_amount}, but accepts a decimal value with at most 12 decimal places.
-         * Only one of {@code unit_amount} and {@code unit_amount_decimal} can be set.
+         * Only one of {@code unit_amount} and {@code unit_amount_decimal} can be set, but at least
+         * one is required.
          */
         public Builder setUnitAmountDecimal(BigDecimal unitAmountDecimal) {
           this.unitAmountDecimal = unitAmountDecimal;

@@ -52,9 +52,8 @@ public class AccountUpdateParams extends ApiRequestParams {
   Object defaultCurrency;
 
   /**
-   * Email address of the account representative. For Standard accounts, this is used to ask them to
-   * claim their Stripe account. For Custom accounts, this only makes the account easier to identify
-   * to platforms; Stripe does not email the account representative.
+   * The email address of the account holder. This is only to make the account easier to identify to
+   * you. Stripe will never directly email Custom accounts.
    */
   @SerializedName("email")
   Object email;
@@ -295,9 +294,8 @@ public class AccountUpdateParams extends ApiRequestParams {
     }
 
     /**
-     * Email address of the account representative. For Standard accounts, this is used to ask them
-     * to claim their Stripe account. For Custom accounts, this only makes the account easier to
-     * identify to platforms; Stripe does not email the account representative.
+     * The email address of the account holder. This is only to make the account easier to identify
+     * to you. Stripe will never directly email Custom accounts.
      */
     public Builder setEmail(String email) {
       this.email = email;
@@ -305,9 +303,8 @@ public class AccountUpdateParams extends ApiRequestParams {
     }
 
     /**
-     * Email address of the account representative. For Standard accounts, this is used to ask them
-     * to claim their Stripe account. For Custom accounts, this only makes the account easier to
-     * identify to platforms; Stripe does not email the account representative.
+     * The email address of the account holder. This is only to make the account easier to identify
+     * to you. Stripe will never directly email Custom accounts.
      */
     public Builder setEmail(EmptyParam email) {
       this.email = email;

@@ -21,6 +21,9 @@ import lombok.Setter;
 @Setter
 @EqualsAndHashCode(callSuper = false)
 public class PaymentMethod extends ApiResource implements HasId, MetadataStore<PaymentMethod> {
+  @SerializedName("alipay")
+  Alipay alipay;
+
   @SerializedName("au_becs_debit")
   AuBecsDebit auBecsDebit;
 
@@ -106,9 +109,9 @@ public class PaymentMethod extends ApiResource implements HasId, MetadataStore<P
    * The type of the PaymentMethod. An additional hash is included on the PaymentMethod with a name
    * matching this value. It contains additional information specific to the PaymentMethod type.
    *
-   * <p>One of {@code au_becs_debit}, {@code bacs_debit}, {@code bancontact}, {@code card}, {@code
-   * card_present}, {@code eps}, {@code fpx}, {@code giropay}, {@code ideal}, {@code p24}, or {@code
-   * sepa_debit}.
+   * <p>One of {@code alipay}, {@code au_becs_debit}, {@code bacs_debit}, {@code bancontact}, {@code
+   * card}, {@code card_present}, {@code eps}, {@code fpx}, {@code giropay}, {@code ideal}, {@code
+   * p24}, or {@code sepa_debit}.
    */
   @SerializedName("type")
   String type;
@@ -412,6 +415,11 @@ public class PaymentMethod extends ApiResource implements HasId, MetadataStore<P
     return ApiResource.request(
         ApiResource.RequestMethod.POST, url, params, PaymentMethod.class, options);
   }
+
+  @Getter
+  @Setter
+  @EqualsAndHashCode(callSuper = false)
+  public static class Alipay extends StripeObject {}
 
   @Getter
   @Setter
