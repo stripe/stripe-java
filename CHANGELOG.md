@@ -1,5 +1,9 @@
 # Changelog
 
+## 19.41.0 - 2020-08-13
+* [#1081](https://github.com/stripe/stripe-java/pull/1081) Add acss_debut to Charge.payment_method_details
+  * Add `payment_method_details[acss_debit]` on `Charge`
+
 ## 19.40.0 - 2020-08-07
 * [#1078](https://github.com/stripe/stripe-java/pull/1078) Add support for Alipay on `PaymentMethod` and `PaymentIntent`
 
