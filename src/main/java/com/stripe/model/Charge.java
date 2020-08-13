@@ -1137,6 +1137,10 @@ public class Charge extends ApiResource implements MetadataStore<Charge>, Balanc
     @Setter
     @EqualsAndHashCode(callSuper = false)
     public static class AcssDebit extends StripeObject {
+      /** Name of the bank associated with the bank account. */
+      @SerializedName("bank_name")
+      String bankName;
+
       /**
        * Uniquely identifies this particular bank account. You can use this attribute to check
        * whether two bank accounts are the same.
