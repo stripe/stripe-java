@@ -201,6 +201,9 @@ public class PaymentMethodListParams extends ApiRequestParams {
   }
 
   public enum Type implements ApiRequestParams.EnumParam {
+    @SerializedName("alipay")
+    ALIPAY("alipay"),
+
     @SerializedName("au_becs_debit")
     AU_BECS_DEBIT("au_becs_debit"),
 
