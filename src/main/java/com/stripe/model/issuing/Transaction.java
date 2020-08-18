@@ -33,6 +33,13 @@ public class Transaction extends ApiResource
   @SerializedName("amount")
   Long amount;
 
+  /**
+   * Detailed breakdown of amount components. These amounts are denominated in {@code currency} and
+   * in the <a href="https://stripe.com/docs/currencies#zero-decimal">smallest currency unit</a>.
+   */
+  @SerializedName("amount_details")
+  AmountDetails amountDetails;
+
   /** The {@code Authorization} object that led to this transaction. */
   @SerializedName("authorization")
   @Getter(lombok.AccessLevel.NONE)
@@ -320,6 +327,15 @@ public class Transaction extends ApiResource
             String.format("/v1/issuing/transactions/%s", ApiResource.urlEncodeId(this.getId())));
     return ApiResource.request(
         ApiResource.RequestMethod.POST, url, params, Transaction.class, options);
+  }
+
+  @Getter
+  @Setter
+  @EqualsAndHashCode(callSuper = false)
+  public static class AmountDetails extends StripeObject {
+    /** The fee charged by the ATM for the cash withdrawal. */
+    @SerializedName("atm_fee")
+    Long atmFee;
   }
 
   @Getter

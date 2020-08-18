@@ -33,6 +33,13 @@ public class Authorization extends ApiResource
   @SerializedName("amount")
   Long amount;
 
+  /**
+   * Detailed breakdown of amount components. These amounts are denominated in {@code currency} and
+   * in the <a href="https://stripe.com/docs/currencies#zero-decimal">smallest currency unit</a>.
+   */
+  @SerializedName("amount_details")
+  AmountDetails amountDetails;
+
   /** Whether the authorization has been approved. */
   @SerializedName("approved")
   Boolean approved;
@@ -460,6 +467,15 @@ public class Authorization extends ApiResource
   @Getter
   @Setter
   @EqualsAndHashCode(callSuper = false)
+  public static class AmountDetails extends StripeObject {
+    /** The fee charged by the ATM for the cash withdrawal. */
+    @SerializedName("atm_fee")
+    Long atmFee;
+  }
+
+  @Getter
+  @Setter
+  @EqualsAndHashCode(callSuper = false)
   public static class MerchantData extends StripeObject {
     /**
      * A categorization of the seller's type of business. See our <a
@@ -508,6 +524,14 @@ public class Authorization extends ApiResource
     Long amount;
 
     /**
+     * Detailed breakdown of amount components. These amounts are denominated in {@code currency}
+     * and in the <a href="https://stripe.com/docs/currencies#zero-decimal">smallest currency
+     * unit</a>.
+     */
+    @SerializedName("amount_details")
+    AmountDetails amountDetails;
+
+    /**
      * Three-letter <a href="https://www.iso.org/iso-4217-currency-codes.html">ISO currency
      * code</a>, in lowercase. Must be a <a href="https://stripe.com/docs/currencies">supported
      * currency</a>.
@@ -547,6 +571,14 @@ public class Authorization extends ApiResource
      */
     @SerializedName("amount")
     Long amount;
+
+    /**
+     * Detailed breakdown of amount components. These amounts are denominated in {@code currency}
+     * and in the <a href="https://stripe.com/docs/currencies#zero-decimal">smallest currency
+     * unit</a>.
+     */
+    @SerializedName("amount_details")
+    AmountDetails amountDetails;
 
     /** Whether this request was approved. */
     @SerializedName("approved")
