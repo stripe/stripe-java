@@ -20,6 +20,10 @@ public class File extends ApiResource implements HasId {
   @SerializedName("created")
   Long created;
 
+  /** The time at which the file expires and is no longer available in epoch seconds. */
+  @SerializedName("expires_at")
+  Long expiresAt;
+
   /** A filename for the file, suitable for saving to a filesystem. */
   @SerializedName("filename")
   String filename;
