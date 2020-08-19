@@ -1,5 +1,8 @@
 # Changelog
 
+## 19.45.0 - 2020-08-19
+* [#1085](https://github.com/stripe/stripe-java/pull/1085) Add support for `expires_at` on `File`
+
 ## 19.44.0 - 2020-08-17
 * [#1084](https://github.com/stripe/stripe-java/pull/1084) Add support for `amount_details` on Issuing `Authorization` and `Transaction`
 
