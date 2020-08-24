@@ -55,6 +55,16 @@ Confirm in UI that the branch is even with stripe:master.
 This branch is even with stripe:master.
 ```
 
+## Checkout `step` branch
+```
+git checkout step
+```
+If the command above does not work, and you are in a detached state, use the following command.
+```
+git checkout master
+git checkout --track origin/step
+```
+
 ## Backup `step` branch
 Check current Stripe SDK version of `step` branch.
 ```
