@@ -51,35 +51,43 @@ git push origin master
 ```
 
 Confirm in UI that the branch is even with stripe:master.
-
 ```
 This branch is even with stripe:master.
 ```
 
 ## Backup `step` branch
 Check current Stripe SDK version of `step` branch.
-
 ```
+git checkout step
 git log |grep "Bump version to" | head -1
 
 Bump version to 19.37.0
 ```
 
 Create a backup branch of `step` with SDK version.
-
 ```
 git checkout step
 git checkout -b step-with-19.37.0 # use version from above
+git push
 ```
 
 Confirm that last commits on both `step` and `step-with-19.37.0` are the same.
 
 ## Rebase `step` branch
+Note the latest version of Stripe SDK.
+```
+git checkout master
+git log |grep "Bump version to" | head -1
+
+Bump version to 19.45.0
+```
+
 Create staging version of rebase branch, in case things go sideways and rebase against master. Do not work on `step` backup branch.
 ```
 git checkout step
-git checkout am.step-with-19.38.0
+git checkout -b am.step-with-19.45.0 # use version from above
 git rebase master
+git push
 ```
 Resolve any conflicts and build the SDK locally.
 
@@ -95,7 +103,7 @@ Build and test.
 Once you are satisfied with test results, push your staging branch to `step` branch.
 Because we have both `step` tag and `step` branch, we have to specify which one we are pushing.
 ```
-git push -f origin am.step-with-19.37.0:refs/heads/step
+git push -f origin am.step-with-19.45.0:refs/heads/step
 ```
 Confirm that `step` branch has the same last commit as your staging branch.
 This completes the Stripe SDK update.
