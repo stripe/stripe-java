@@ -109,10 +109,18 @@ public class StripeRequest {
 
     sb.append(spec);
 
+    URL specUrl = new URL(spec);
+    String specQueryString = specUrl.getQuery();
+
     if ((method != ApiResource.RequestMethod.POST) && (params != null)) {
       String queryString = FormEncoder.createQueryString(params);
+
       if (queryString != null && !queryString.isEmpty()) {
-        sb.append("?");
+        if (specQueryString != null && !specQueryString.isEmpty()) {
+          sb.append("&");
+        } else {
+          sb.append("?");
+        }
         sb.append(queryString);
       }
     }

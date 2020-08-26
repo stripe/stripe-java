@@ -36,6 +36,26 @@ public class StripeRequestTest extends BaseStripeTest {
   }
 
   @Test
+  public void testCtorGetRequestWithQueryString() throws StripeException {
+    StripeRequest request =
+        new StripeRequest(
+            ApiResource.RequestMethod.GET,
+            "http://example.com/get?customer=cus_xxx",
+            ImmutableMap.of("string", "String!"),
+            null);
+
+    assertEquals(ApiResource.RequestMethod.GET, request.method());
+    assertEquals(
+        "http://example.com/get?customer=cus_xxx&string=String%21", request.url().toString());
+    assertEquals("Bearer sk_test_123", request.headers().firstValue("Authorization").orElse(null));
+    assertTrue(request.headers().firstValue("Stripe-Version").isPresent());
+    assertEquals(Stripe.API_VERSION, request.headers().firstValue("Stripe-Version").get());
+    assertFalse(request.headers().firstValue("Idempotency-Key").isPresent());
+    assertFalse(request.headers().firstValue("Stripe-Account").isPresent());
+    assertNull(request.content());
+  }
+
+  @Test
   public void testCtorPostRequest() throws StripeException {
     StripeRequest request =
         new StripeRequest(
