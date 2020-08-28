@@ -1456,7 +1456,7 @@ public class PaymentIntentUpdateParams extends ApiRequestParams {
     public static class BillingDetails {
       /** Billing address. */
       @SerializedName("address")
-      Address address;
+      Object address;
 
       /** Email address. */
       @SerializedName("email")
@@ -1480,7 +1480,7 @@ public class PaymentIntentUpdateParams extends ApiRequestParams {
       Object phone;
 
       private BillingDetails(
-          Address address,
+          Object address,
           Object email,
           Map<String, Object> extraParams,
           Object name,
@@ -1497,7 +1497,7 @@ public class PaymentIntentUpdateParams extends ApiRequestParams {
       }
 
       public static class Builder {
-        private Address address;
+        private Object address;
 
         private Object email;
 
@@ -1515,6 +1515,12 @@ public class PaymentIntentUpdateParams extends ApiRequestParams {
 
         /** Billing address. */
         public Builder setAddress(Address address) {
+          this.address = address;
+          return this;
+        }
+
+        /** Billing address. */
+        public Builder setAddress(EmptyParam address) {
           this.address = address;
           return this;
         }

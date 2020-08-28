@@ -282,13 +282,6 @@ public class Subscription extends ApiResource implements HasId, MetadataStore<Su
   String status;
 
   /**
-   * If provided, each invoice created by this subscription will apply the tax rate, increasing the
-   * amount billed to the customer.
-   */
-  @SerializedName("tax_percent")
-  BigDecimal taxPercent;
-
-  /**
    * The account (if any) the subscription's payments will be attributed to for tax reporting, and
    * where funds from each payment will be transferred to for each of the subscription's invoices.
    */

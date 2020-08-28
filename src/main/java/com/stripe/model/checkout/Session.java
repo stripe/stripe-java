@@ -9,10 +9,8 @@ import com.stripe.model.HasId;
 import com.stripe.model.LineItem;
 import com.stripe.model.LineItemCollection;
 import com.stripe.model.PaymentIntent;
-import com.stripe.model.Plan;
 import com.stripe.model.SetupIntent;
 import com.stripe.model.ShippingDetails;
-import com.stripe.model.Sku;
 import com.stripe.model.StripeObject;
 import com.stripe.model.Subscription;
 import com.stripe.net.ApiResource;
@@ -90,10 +88,6 @@ public class Session extends ApiResource implements HasId {
    */
   @SerializedName("customer_email")
   String customerEmail;
-
-  /** The line items, plans, or SKUs purchased by the customer. Prefer using {@code line_items}. */
-  @SerializedName("display_items")
-  List<Session.DisplayItem> displayItems;
 
   /** Unique identifier for the object. Used to pass to {@code redirectToCheckout} in Stripe.js. */
   @Getter(onMethod_ = {@Override})
@@ -392,88 +386,6 @@ public class Session extends ApiResource implements HasId {
                 "/v1/checkout/sessions/%s/line_items", ApiResource.urlEncodeId(this.getId())));
 
     return ApiResource.requestCollection(url, params, LineItemCollection.class, options);
-  }
-
-  @Getter
-  @Setter
-  @EqualsAndHashCode(callSuper = false)
-  public static class DisplayItem extends StripeObject {
-    /** Amount for the display item. */
-    @SerializedName("amount")
-    Long amount;
-
-    /**
-     * Three-letter <a href="https://www.iso.org/iso-4217-currency-codes.html">ISO currency
-     * code</a>, in lowercase. Must be a <a href="https://stripe.com/docs/currencies">supported
-     * currency</a>.
-     */
-    @SerializedName("currency")
-    String currency;
-
-    @SerializedName("custom")
-    Custom custom;
-
-    /**
-     * You can now model subscriptions more flexibly using the <a
-     * href="https://stripe.com/docs/api#prices">Prices API</a>. It replaces the Plans API and is
-     * backwards compatible to simplify your migration.
-     *
-     * <p>Plans define the base price, currency, and billing cycle for recurring purchases of
-     * products. <a href="https://stripe.com/docs/api#products">Products</a> help you track
-     * inventory or provisioning, and plans help you track pricing. Different physical goods or
-     * levels of service should be represented by products, and pricing options should be
-     * represented by plans. This approach lets you change prices without having to change your
-     * provisioning scheme.
-     *
-     * <p>For example, you might have a single &quot;gold&quot; product that has plans for
-     * $10/month, $100/year, €9/month, and €90/year.
-     *
-     * <p>Related guides: <a
-     * href="https://stripe.com/docs/billing/subscriptions/set-up-subscription">Set up a
-     * subscription</a> and more about <a
-     * href="https://stripe.com/docs/billing/prices-guide">products and prices</a>.
-     */
-    @SerializedName("plan")
-    Plan plan;
-
-    /** Quantity of the display item being purchased. */
-    @SerializedName("quantity")
-    Long quantity;
-
-    /**
-     * Stores representations of <a href="http://en.wikipedia.org/wiki/Stock_keeping_unit">stock
-     * keeping units</a>. SKUs describe specific product variations, taking into account any
-     * combination of: attributes, currency, and cost. For example, a product may be a T-shirt,
-     * whereas a specific SKU represents the {@code size: large}, {@code color: red} version of that
-     * shirt.
-     *
-     * <p>Can also be used to manage inventory.
-     *
-     * <p>Related guide: <a href="https://stripe.com/docs/orders">Tax, Shipping, and Inventory</a>.
-     */
-    @SerializedName("sku")
-    Sku sku;
-
-    /** The type of display item. One of {@code custom}, {@code plan} or {@code sku} */
-    @SerializedName("type")
-    String type;
-
-    @Getter
-    @Setter
-    @EqualsAndHashCode(callSuper = false)
-    public static class Custom extends StripeObject {
-      /** The description of the line item. */
-      @SerializedName("description")
-      String description;
-
-      /** The images of the line item. */
-      @SerializedName("images")
-      List<String> images;
-
-      /** The name of the line item. */
-      @SerializedName("name")
-      String name;
-    }
   }
 
   @Getter

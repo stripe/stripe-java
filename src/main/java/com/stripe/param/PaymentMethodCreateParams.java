@@ -2,6 +2,7 @@ package com.stripe.param;
 
 import com.google.gson.annotations.SerializedName;
 import com.stripe.net.ApiRequestParams;
+import com.stripe.param.common.EmptyParam;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -761,7 +762,7 @@ public class PaymentMethodCreateParams extends ApiRequestParams {
   public static class BillingDetails {
     /** Billing address. */
     @SerializedName("address")
-    Address address;
+    Object address;
 
     /** Email address. */
     @SerializedName("email")
@@ -785,7 +786,7 @@ public class PaymentMethodCreateParams extends ApiRequestParams {
     String phone;
 
     private BillingDetails(
-        Address address, String email, Map<String, Object> extraParams, String name, String phone) {
+        Object address, String email, Map<String, Object> extraParams, String name, String phone) {
       this.address = address;
       this.email = email;
       this.extraParams = extraParams;
@@ -798,7 +799,7 @@ public class PaymentMethodCreateParams extends ApiRequestParams {
     }
 
     public static class Builder {
-      private Address address;
+      private Object address;
 
       private String email;
 
@@ -816,6 +817,12 @@ public class PaymentMethodCreateParams extends ApiRequestParams {
 
       /** Billing address. */
       public Builder setAddress(Address address) {
+        this.address = address;
+        return this;
+      }
+
+      /** Billing address. */
+      public Builder setAddress(EmptyParam address) {
         this.address = address;
         return this;
       }

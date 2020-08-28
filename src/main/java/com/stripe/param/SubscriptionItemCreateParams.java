@@ -81,14 +81,6 @@ public class SubscriptionItemCreateParams extends ApiRequestParams {
   PriceData priceData;
 
   /**
-   * This field has been renamed to {@code proration_behavior}. {@code prorate=true} can be replaced
-   * with {@code proration_behavior=create_prorations} and {@code prorate=false} can be replaced
-   * with {@code proration_behavior=none}.
-   */
-  @SerializedName("prorate")
-  Boolean prorate;
-
-  /**
    * Determines how to handle <a
    * href="https://stripe.com/docs/subscriptions/billing-cycle#prorations">prorations</a> when the
    * billing cycle changes (e.g., when switching plans, resetting {@code billing_cycle_anchor=now},
@@ -141,7 +133,6 @@ public class SubscriptionItemCreateParams extends ApiRequestParams {
       String plan,
       String price,
       PriceData priceData,
-      Boolean prorate,
       ProrationBehavior prorationBehavior,
       Long prorationDate,
       Long quantity,
@@ -155,7 +146,6 @@ public class SubscriptionItemCreateParams extends ApiRequestParams {
     this.plan = plan;
     this.price = price;
     this.priceData = priceData;
-    this.prorate = prorate;
     this.prorationBehavior = prorationBehavior;
     this.prorationDate = prorationDate;
     this.quantity = quantity;
@@ -184,8 +174,6 @@ public class SubscriptionItemCreateParams extends ApiRequestParams {
 
     private PriceData priceData;
 
-    private Boolean prorate;
-
     private ProrationBehavior prorationBehavior;
 
     private Long prorationDate;
@@ -207,7 +195,6 @@ public class SubscriptionItemCreateParams extends ApiRequestParams {
           this.plan,
           this.price,
           this.priceData,
-          this.prorate,
           this.prorationBehavior,
           this.prorationDate,
           this.quantity,
@@ -355,16 +342,6 @@ public class SubscriptionItemCreateParams extends ApiRequestParams {
      */
     public Builder setPriceData(PriceData priceData) {
       this.priceData = priceData;
-      return this;
-    }
-
-    /**
-     * This field has been renamed to {@code proration_behavior}. {@code prorate=true} can be
-     * replaced with {@code proration_behavior=create_prorations} and {@code prorate=false} can be
-     * replaced with {@code proration_behavior=none}.
-     */
-    public Builder setProrate(Boolean prorate) {
-      this.prorate = prorate;
       return this;
     }
 

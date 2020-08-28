@@ -103,15 +103,6 @@ public class InvoiceUpcomingParams extends ApiRequestParams {
   List<SubscriptionItem> subscriptionItems;
 
   /**
-   * This field has been renamed to {@code subscription_proration_behavior}. {@code
-   * subscription_prorate=true} can be replaced with {@code
-   * subscription_proration_behavior=create_prorations} and {@code subscription_prorate=false} can
-   * be replaced with {@code subscription_proration_behavior=none}.
-   */
-  @SerializedName("subscription_prorate")
-  Boolean subscriptionProrate;
-
-  /**
    * Determines how to handle <a
    * href="https://stripe.com/docs/subscriptions/billing-cycle#prorations">prorations</a> when the
    * billing cycle changes (e.g., when switching plans, resetting {@code billing_cycle_anchor=now},
@@ -185,7 +176,6 @@ public class InvoiceUpcomingParams extends ApiRequestParams {
       Boolean subscriptionCancelNow,
       Object subscriptionDefaultTaxRates,
       List<SubscriptionItem> subscriptionItems,
-      Boolean subscriptionProrate,
       SubscriptionProrationBehavior subscriptionProrationBehavior,
       Long subscriptionProrationDate,
       Long subscriptionStartDate,
@@ -206,7 +196,6 @@ public class InvoiceUpcomingParams extends ApiRequestParams {
     this.subscriptionCancelNow = subscriptionCancelNow;
     this.subscriptionDefaultTaxRates = subscriptionDefaultTaxRates;
     this.subscriptionItems = subscriptionItems;
-    this.subscriptionProrate = subscriptionProrate;
     this.subscriptionProrationBehavior = subscriptionProrationBehavior;
     this.subscriptionProrationDate = subscriptionProrationDate;
     this.subscriptionStartDate = subscriptionStartDate;
@@ -248,8 +237,6 @@ public class InvoiceUpcomingParams extends ApiRequestParams {
 
     private List<SubscriptionItem> subscriptionItems;
 
-    private Boolean subscriptionProrate;
-
     private SubscriptionProrationBehavior subscriptionProrationBehavior;
 
     private Long subscriptionProrationDate;
@@ -279,7 +266,6 @@ public class InvoiceUpcomingParams extends ApiRequestParams {
           this.subscriptionCancelNow,
           this.subscriptionDefaultTaxRates,
           this.subscriptionItems,
-          this.subscriptionProrate,
           this.subscriptionProrationBehavior,
           this.subscriptionProrationDate,
           this.subscriptionStartDate,
@@ -573,17 +559,6 @@ public class InvoiceUpcomingParams extends ApiRequestParams {
         this.subscriptionItems = new ArrayList<>();
       }
       this.subscriptionItems.addAll(elements);
-      return this;
-    }
-
-    /**
-     * This field has been renamed to {@code subscription_proration_behavior}. {@code
-     * subscription_prorate=true} can be replaced with {@code
-     * subscription_proration_behavior=create_prorations} and {@code subscription_prorate=false} can
-     * be replaced with {@code subscription_proration_behavior=none}.
-     */
-    public Builder setSubscriptionProrate(Boolean subscriptionProrate) {
-      this.subscriptionProrate = subscriptionProrate;
       return this;
     }
 

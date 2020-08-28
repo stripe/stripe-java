@@ -132,7 +132,8 @@ public class Dispute extends ApiResource implements HasId {
 
   /**
    * Updates the specified Issuing <code>Dispute</code> object by setting the values of the
-   * parameters passed. Any parameters not provided will be left unchanged.
+   * parameters passed. Any parameters not provided will be left unchanged. Properties on the <code>
+   * evidence</code> object can be unset by passing in an empty string.
    */
   public Dispute update(Map<String, Object> params) throws StripeException {
     return update(params, (RequestOptions) null);
@@ -140,7 +141,8 @@ public class Dispute extends ApiResource implements HasId {
 
   /**
    * Updates the specified Issuing <code>Dispute</code> object by setting the values of the
-   * parameters passed. Any parameters not provided will be left unchanged.
+   * parameters passed. Any parameters not provided will be left unchanged. Properties on the <code>
+   * evidence</code> object can be unset by passing in an empty string.
    */
   public Dispute update(Map<String, Object> params, RequestOptions options) throws StripeException {
     String url =
@@ -153,7 +155,8 @@ public class Dispute extends ApiResource implements HasId {
 
   /**
    * Updates the specified Issuing <code>Dispute</code> object by setting the values of the
-   * parameters passed. Any parameters not provided will be left unchanged.
+   * parameters passed. Any parameters not provided will be left unchanged. Properties on the <code>
+   * evidence</code> object can be unset by passing in an empty string.
    */
   public Dispute update(DisputeUpdateParams params) throws StripeException {
     return update(params, (RequestOptions) null);
@@ -161,7 +164,8 @@ public class Dispute extends ApiResource implements HasId {
 
   /**
    * Updates the specified Issuing <code>Dispute</code> object by setting the values of the
-   * parameters passed. Any parameters not provided will be left unchanged.
+   * parameters passed. Any parameters not provided will be left unchanged. Properties on the <code>
+   * evidence</code> object can be unset by passing in an empty string.
    */
   public Dispute update(DisputeUpdateParams params, RequestOptions options) throws StripeException {
     String url =

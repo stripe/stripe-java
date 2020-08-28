@@ -3,7 +3,6 @@ package com.stripe.param;
 import com.google.gson.annotations.SerializedName;
 import com.stripe.net.ApiRequestParams;
 import com.stripe.param.common.EmptyParam;
-import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -132,17 +131,6 @@ public class InvoiceUpdateParams extends ApiRequestParams {
   Object statementDescriptor;
 
   /**
-   * The percent tax rate applied to the invoice, represented as a non-negative decimal number (with
-   * at most four decimal places) between 0 and 100. To unset a previously-set value, pass an empty
-   * string. This field can be updated only on {@code draft} invoices. This field has been
-   * deprecated and will be removed in a future API version, for further information view the <a
-   * href="https://stripe.com/docs/billing/migration/taxes">migration docs</a> for {@code
-   * tax_rates}.
-   */
-  @SerializedName("tax_percent")
-  Object taxPercent;
-
-  /**
    * If specified, the funds from the invoice will be transferred to the destination and the ID of
    * the resulting transfer will be found on the invoice's charge. This will be unset if you POST an
    * empty value.
@@ -167,7 +155,6 @@ public class InvoiceUpdateParams extends ApiRequestParams {
       Object footer,
       Object metadata,
       Object statementDescriptor,
-      Object taxPercent,
       Object transferData) {
     this.applicationFeeAmount = applicationFeeAmount;
     this.autoAdvance = autoAdvance;
@@ -185,7 +172,6 @@ public class InvoiceUpdateParams extends ApiRequestParams {
     this.footer = footer;
     this.metadata = metadata;
     this.statementDescriptor = statementDescriptor;
-    this.taxPercent = taxPercent;
     this.transferData = transferData;
   }
 
@@ -226,8 +212,6 @@ public class InvoiceUpdateParams extends ApiRequestParams {
 
     private Object statementDescriptor;
 
-    private Object taxPercent;
-
     private Object transferData;
 
     /** Finalize and obtain parameter instance from this builder. */
@@ -249,7 +233,6 @@ public class InvoiceUpdateParams extends ApiRequestParams {
           this.footer,
           this.metadata,
           this.statementDescriptor,
-          this.taxPercent,
           this.transferData);
     }
 
@@ -633,32 +616,6 @@ public class InvoiceUpdateParams extends ApiRequestParams {
      */
     public Builder setStatementDescriptor(EmptyParam statementDescriptor) {
       this.statementDescriptor = statementDescriptor;
-      return this;
-    }
-
-    /**
-     * The percent tax rate applied to the invoice, represented as a non-negative decimal number
-     * (with at most four decimal places) between 0 and 100. To unset a previously-set value, pass
-     * an empty string. This field can be updated only on {@code draft} invoices. This field has
-     * been deprecated and will be removed in a future API version, for further information view the
-     * <a href="https://stripe.com/docs/billing/migration/taxes">migration docs</a> for {@code
-     * tax_rates}.
-     */
-    public Builder setTaxPercent(BigDecimal taxPercent) {
-      this.taxPercent = taxPercent;
-      return this;
-    }
-
-    /**
-     * The percent tax rate applied to the invoice, represented as a non-negative decimal number
-     * (with at most four decimal places) between 0 and 100. To unset a previously-set value, pass
-     * an empty string. This field can be updated only on {@code draft} invoices. This field has
-     * been deprecated and will be removed in a future API version, for further information view the
-     * <a href="https://stripe.com/docs/billing/migration/taxes">migration docs</a> for {@code
-     * tax_rates}.
-     */
-    public Builder setTaxPercent(EmptyParam taxPercent) {
-      this.taxPercent = taxPercent;
       return this;
     }
 

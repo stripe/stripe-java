@@ -37,8 +37,8 @@ public class AccountUpdateParams extends ApiRequestParams {
   Capabilities capabilities;
 
   /**
-   * Information about the company or business. This field is null unless {@code business_type} is
-   * set to {@code company}, {@code government_entity}, or {@code non_profit}.
+   * Information about the company or business. This field is available for any {@code
+   * business_type}.
    */
   @SerializedName("company")
   Company company;
@@ -265,8 +265,8 @@ public class AccountUpdateParams extends ApiRequestParams {
     }
 
     /**
-     * Information about the company or business. This field is null unless {@code business_type} is
-     * set to {@code company}, {@code government_entity}, or {@code non_profit}.
+     * Information about the company or business. This field is available for any {@code
+     * business_type}.
      */
     public Builder setCompany(Company company) {
       this.company = company;
