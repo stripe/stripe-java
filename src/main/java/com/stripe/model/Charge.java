@@ -1015,9 +1015,6 @@ public class Charge extends ApiResource implements MetadataStore<Charge>, Balanc
     @SerializedName("bancontact")
     Bancontact bancontact;
 
-    @SerializedName("bitcoin")
-    Bitcoin bitcoin;
-
     @SerializedName("card")
     Card card;
 
@@ -1262,29 +1259,6 @@ public class Charge extends ApiResource implements MetadataStore<Charge>, Balanc
        */
       @SerializedName("verified_name")
       String verifiedName;
-    }
-
-    @Getter
-    @Setter
-    @EqualsAndHashCode(callSuper = false)
-    public static class Bitcoin extends StripeObject {
-      @SerializedName("address")
-      String address;
-
-      @SerializedName("amount")
-      Long amount;
-
-      @SerializedName("amount_charged")
-      Long amountCharged;
-
-      @SerializedName("amount_received")
-      Long amountReceived;
-
-      @SerializedName("amount_returned")
-      Long amountReturned;
-
-      @SerializedName("refund_address")
-      String refundAddress;
     }
 
     @Getter

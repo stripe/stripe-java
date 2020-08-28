@@ -25,16 +25,6 @@ public class SubscriptionItemDeleteParams extends ApiRequestParams {
   Map<String, Object> extraParams;
 
   /**
-   * Flag indicating whether to <a
-   * href="https://stripe.com/docs/billing/subscriptions/prorations">prorate</a> switching plans
-   * during a billing cycle. This field has been deprecated and will be removed in a future API
-   * version. Use {@code proration_behavior=create_prorations} as a replacement for {@code
-   * prorate=true} and {@code proration_behavior=none} for {@code prorate=false}.
-   */
-  @SerializedName("prorate")
-  Boolean prorate;
-
-  /**
    * Determines how to handle <a
    * href="https://stripe.com/docs/subscriptions/billing-cycle#prorations">prorations</a> when the
    * billing cycle changes (e.g., when switching plans, resetting {@code billing_cycle_anchor=now},
@@ -63,12 +53,10 @@ public class SubscriptionItemDeleteParams extends ApiRequestParams {
   private SubscriptionItemDeleteParams(
       Boolean clearUsage,
       Map<String, Object> extraParams,
-      Boolean prorate,
       ProrationBehavior prorationBehavior,
       Long prorationDate) {
     this.clearUsage = clearUsage;
     this.extraParams = extraParams;
-    this.prorate = prorate;
     this.prorationBehavior = prorationBehavior;
     this.prorationDate = prorationDate;
   }
@@ -82,8 +70,6 @@ public class SubscriptionItemDeleteParams extends ApiRequestParams {
 
     private Map<String, Object> extraParams;
 
-    private Boolean prorate;
-
     private ProrationBehavior prorationBehavior;
 
     private Long prorationDate;
@@ -91,11 +77,7 @@ public class SubscriptionItemDeleteParams extends ApiRequestParams {
     /** Finalize and obtain parameter instance from this builder. */
     public SubscriptionItemDeleteParams build() {
       return new SubscriptionItemDeleteParams(
-          this.clearUsage,
-          this.extraParams,
-          this.prorate,
-          this.prorationBehavior,
-          this.prorationDate);
+          this.clearUsage, this.extraParams, this.prorationBehavior, this.prorationDate);
     }
 
     /**
@@ -130,18 +112,6 @@ public class SubscriptionItemDeleteParams extends ApiRequestParams {
         this.extraParams = new HashMap<>();
       }
       this.extraParams.putAll(map);
-      return this;
-    }
-
-    /**
-     * Flag indicating whether to <a
-     * href="https://stripe.com/docs/billing/subscriptions/prorations">prorate</a> switching plans
-     * during a billing cycle. This field has been deprecated and will be removed in a future API
-     * version. Use {@code proration_behavior=create_prorations} as a replacement for {@code
-     * prorate=true} and {@code proration_behavior=none} for {@code prorate=false}.
-     */
-    public Builder setProrate(Boolean prorate) {
-      this.prorate = prorate;
       return this;
     }
 

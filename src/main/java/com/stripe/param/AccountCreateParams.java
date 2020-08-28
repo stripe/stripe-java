@@ -111,15 +111,6 @@ public class AccountCreateParams extends ApiRequestParams {
   @SerializedName("metadata")
   Object metadata;
 
-  /**
-   * (Deprecated) Alternative to {@code capabilities}. The set of capabilities you want to unlock
-   * for this account. Each capability will be inactive until you have provided its specific
-   * requirements and Stripe has verified them. An account may have some of its requested
-   * capabilities be active and some be inactive.
-   */
-  @SerializedName("requested_capabilities")
-  List<RequestedCapability> requestedCapabilities;
-
   /** Options for customizing how the account functions within Stripe. */
   @SerializedName("settings")
   Settings settings;
@@ -153,7 +144,6 @@ public class AccountCreateParams extends ApiRequestParams {
       Map<String, Object> extraParams,
       Individual individual,
       Object metadata,
-      List<RequestedCapability> requestedCapabilities,
       Settings settings,
       TosAcceptance tosAcceptance,
       Type type) {
@@ -170,7 +160,6 @@ public class AccountCreateParams extends ApiRequestParams {
     this.extraParams = extraParams;
     this.individual = individual;
     this.metadata = metadata;
-    this.requestedCapabilities = requestedCapabilities;
     this.settings = settings;
     this.tosAcceptance = tosAcceptance;
     this.type = type;
@@ -207,8 +196,6 @@ public class AccountCreateParams extends ApiRequestParams {
 
     private Object metadata;
 
-    private List<RequestedCapability> requestedCapabilities;
-
     private Settings settings;
 
     private TosAcceptance tosAcceptance;
@@ -231,7 +218,6 @@ public class AccountCreateParams extends ApiRequestParams {
           this.extraParams,
           this.individual,
           this.metadata,
-          this.requestedCapabilities,
           this.settings,
           this.tosAcceptance,
           this.type);
@@ -439,32 +425,6 @@ public class AccountCreateParams extends ApiRequestParams {
      */
     public Builder setMetadata(Map<String, String> metadata) {
       this.metadata = metadata;
-      return this;
-    }
-
-    /**
-     * Add an element to `requestedCapabilities` list. A list is initialized for the first
-     * `add/addAll` call, and subsequent calls adds additional elements to the original list. See
-     * {@link AccountCreateParams#requestedCapabilities} for the field documentation.
-     */
-    public Builder addRequestedCapability(RequestedCapability element) {
-      if (this.requestedCapabilities == null) {
-        this.requestedCapabilities = new ArrayList<>();
-      }
-      this.requestedCapabilities.add(element);
-      return this;
-    }
-
-    /**
-     * Add all elements to `requestedCapabilities` list. A list is initialized for the first
-     * `add/addAll` call, and subsequent calls adds additional elements to the original list. See
-     * {@link AccountCreateParams#requestedCapabilities} for the field documentation.
-     */
-    public Builder addAllRequestedCapability(List<RequestedCapability> elements) {
-      if (this.requestedCapabilities == null) {
-        this.requestedCapabilities = new ArrayList<>();
-      }
-      this.requestedCapabilities.addAll(elements);
       return this;
     }
 
@@ -5373,48 +5333,6 @@ public class AccountCreateParams extends ApiRequestParams {
     private final String value;
 
     BusinessType(String value) {
-      this.value = value;
-    }
-  }
-
-  public enum RequestedCapability implements ApiRequestParams.EnumParam {
-    @SerializedName("au_becs_debit_payments")
-    AU_BECS_DEBIT_PAYMENTS("au_becs_debit_payments"),
-
-    @SerializedName("bacs_debit_payments")
-    BACS_DEBIT_PAYMENTS("bacs_debit_payments"),
-
-    @SerializedName("card_issuing")
-    CARD_ISSUING("card_issuing"),
-
-    @SerializedName("card_payments")
-    CARD_PAYMENTS("card_payments"),
-
-    @SerializedName("cartes_bancaires_payments")
-    CARTES_BANCAIRES_PAYMENTS("cartes_bancaires_payments"),
-
-    @SerializedName("fpx_payments")
-    FPX_PAYMENTS("fpx_payments"),
-
-    @SerializedName("jcb_payments")
-    JCB_PAYMENTS("jcb_payments"),
-
-    @SerializedName("legacy_payments")
-    LEGACY_PAYMENTS("legacy_payments"),
-
-    @SerializedName("tax_reporting_us_1099_k")
-    TAX_REPORTING_US_1099_K("tax_reporting_us_1099_k"),
-
-    @SerializedName("tax_reporting_us_1099_misc")
-    TAX_REPORTING_US_1099_MISC("tax_reporting_us_1099_misc"),
-
-    @SerializedName("transfers")
-    TRANSFERS("transfers");
-
-    @Getter(onMethod_ = {@Override})
-    private final String value;
-
-    RequestedCapability(String value) {
       this.value = value;
     }
   }

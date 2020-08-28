@@ -443,9 +443,6 @@ public class WebhookEndpointUpdateParams extends ApiRequestParams {
     @SerializedName("invoice.payment_failed")
     INVOICE__PAYMENT_FAILED("invoice.payment_failed"),
 
-    @SerializedName("invoice.payment_succeeded")
-    INVOICE__PAYMENT_SUCCEEDED("invoice.payment_succeeded"),
-
     @SerializedName("invoice.sent")
     INVOICE__SENT("invoice.sent"),
 
@@ -544,9 +541,6 @@ public class WebhookEndpointUpdateParams extends ApiRequestParams {
 
     @SerializedName("payment_method.attached")
     PAYMENT_METHOD__ATTACHED("payment_method.attached"),
-
-    @SerializedName("payment_method.card_automatically_updated")
-    PAYMENT_METHOD__CARD_AUTOMATICALLY_UPDATED("payment_method.card_automatically_updated"),
 
     @SerializedName("payment_method.detached")
     PAYMENT_METHOD__DETACHED("payment_method.detached"),

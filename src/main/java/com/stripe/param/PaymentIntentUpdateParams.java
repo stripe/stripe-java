@@ -113,24 +113,6 @@ public class PaymentIntentUpdateParams extends ApiRequestParams {
   Object receiptEmail;
 
   /**
-   * If the PaymentIntent has a {@code payment_method} and a {@code customer} or if you're attaching
-   * a payment method to the PaymentIntent in this request, you can pass {@code
-   * save_payment_method=true} to save the payment method to the customer immediately.
-   *
-   * <p>If the payment method is already saved to a customer, this parameter does nothing. If this
-   * type of payment method cannot be saved to a customer, the request will error.
-   *
-   * <p>Saving a payment method using this parameter is <em>not recommended</em> because it will
-   * save the payment method even if it cannot be charged (e.g. the user made a typo). To ensure
-   * that only payment methods which are likely to be chargeable are saved to a customer, use the
-   * (setup_future_usage)[#payment_intents/object#payment_intent_object-setup_future_usage]
-   * property, which saves the payment method after the PaymentIntent has been confirmed and all
-   * required actions by the customer are complete.
-   */
-  @SerializedName("save_payment_method")
-  Boolean savePaymentMethod;
-
-  /**
    * Indicates that you intend to make future payments with this PaymentIntent's payment method.
    *
    * <p>Providing this parameter will <a
@@ -153,16 +135,6 @@ public class PaymentIntentUpdateParams extends ApiRequestParams {
   /** Shipping information for this PaymentIntent. */
   @SerializedName("shipping")
   Object shipping;
-
-  /**
-   * This is a legacy field that will be removed in the future. It is the ID of the Source object to
-   * attach to this PaymentIntent. Please use the {@code payment_method} field instead, which also
-   * supports Cards and <a
-   * href="https://stripe.com/docs/payments/payment-methods#compatibility">compatible Source</a>
-   * objects.
-   */
-  @SerializedName("source")
-  Object source;
 
   /**
    * For non-card charges, you can use this value as the complete description that appears on your
@@ -210,10 +182,8 @@ public class PaymentIntentUpdateParams extends ApiRequestParams {
       PaymentMethodOptions paymentMethodOptions,
       List<String> paymentMethodTypes,
       Object receiptEmail,
-      Boolean savePaymentMethod,
       EnumParam setupFutureUsage,
       Object shipping,
-      Object source,
       Object statementDescriptor,
       Object statementDescriptorSuffix,
       TransferData transferData,
@@ -231,10 +201,8 @@ public class PaymentIntentUpdateParams extends ApiRequestParams {
     this.paymentMethodOptions = paymentMethodOptions;
     this.paymentMethodTypes = paymentMethodTypes;
     this.receiptEmail = receiptEmail;
-    this.savePaymentMethod = savePaymentMethod;
     this.setupFutureUsage = setupFutureUsage;
     this.shipping = shipping;
-    this.source = source;
     this.statementDescriptor = statementDescriptor;
     this.statementDescriptorSuffix = statementDescriptorSuffix;
     this.transferData = transferData;
@@ -272,13 +240,9 @@ public class PaymentIntentUpdateParams extends ApiRequestParams {
 
     private Object receiptEmail;
 
-    private Boolean savePaymentMethod;
-
     private EnumParam setupFutureUsage;
 
     private Object shipping;
-
-    private Object source;
 
     private Object statementDescriptor;
 
@@ -304,10 +268,8 @@ public class PaymentIntentUpdateParams extends ApiRequestParams {
           this.paymentMethodOptions,
           this.paymentMethodTypes,
           this.receiptEmail,
-          this.savePaymentMethod,
           this.setupFutureUsage,
           this.shipping,
-          this.source,
           this.statementDescriptor,
           this.statementDescriptorSuffix,
           this.transferData,
@@ -600,26 +562,6 @@ public class PaymentIntentUpdateParams extends ApiRequestParams {
     }
 
     /**
-     * If the PaymentIntent has a {@code payment_method} and a {@code customer} or if you're
-     * attaching a payment method to the PaymentIntent in this request, you can pass {@code
-     * save_payment_method=true} to save the payment method to the customer immediately.
-     *
-     * <p>If the payment method is already saved to a customer, this parameter does nothing. If this
-     * type of payment method cannot be saved to a customer, the request will error.
-     *
-     * <p>Saving a payment method using this parameter is <em>not recommended</em> because it will
-     * save the payment method even if it cannot be charged (e.g. the user made a typo). To ensure
-     * that only payment methods which are likely to be chargeable are saved to a customer, use the
-     * (setup_future_usage)[#payment_intents/object#payment_intent_object-setup_future_usage]
-     * property, which saves the payment method after the PaymentIntent has been confirmed and all
-     * required actions by the customer are complete.
-     */
-    public Builder setSavePaymentMethod(Boolean savePaymentMethod) {
-      this.savePaymentMethod = savePaymentMethod;
-      return this;
-    }
-
-    /**
      * Indicates that you intend to make future payments with this PaymentIntent's payment method.
      *
      * <p>Providing this parameter will <a
@@ -674,30 +616,6 @@ public class PaymentIntentUpdateParams extends ApiRequestParams {
     /** Shipping information for this PaymentIntent. */
     public Builder setShipping(EmptyParam shipping) {
       this.shipping = shipping;
-      return this;
-    }
-
-    /**
-     * This is a legacy field that will be removed in the future. It is the ID of the Source object
-     * to attach to this PaymentIntent. Please use the {@code payment_method} field instead, which
-     * also supports Cards and <a
-     * href="https://stripe.com/docs/payments/payment-methods#compatibility">compatible Source</a>
-     * objects.
-     */
-    public Builder setSource(String source) {
-      this.source = source;
-      return this;
-    }
-
-    /**
-     * This is a legacy field that will be removed in the future. It is the ID of the Source object
-     * to attach to this PaymentIntent. Please use the {@code payment_method} field instead, which
-     * also supports Cards and <a
-     * href="https://stripe.com/docs/payments/payment-methods#compatibility">compatible Source</a>
-     * objects.
-     */
-    public Builder setSource(EmptyParam source) {
-      this.source = source;
       return this;
     }
 
@@ -2386,9 +2304,6 @@ public class PaymentIntentUpdateParams extends ApiRequestParams {
 
       @SerializedName("bancontact")
       BANCONTACT("bancontact"),
-
-      @SerializedName("card_present")
-      CARD_PRESENT("card_present"),
 
       @SerializedName("eps")
       EPS("eps"),

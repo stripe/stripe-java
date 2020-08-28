@@ -110,8 +110,8 @@ public class PaymentMethod extends ApiResource implements HasId, MetadataStore<P
    * matching this value. It contains additional information specific to the PaymentMethod type.
    *
    * <p>One of {@code alipay}, {@code au_becs_debit}, {@code bacs_debit}, {@code bancontact}, {@code
-   * card}, {@code card_present}, {@code eps}, {@code fpx}, {@code giropay}, {@code ideal}, {@code
-   * p24}, or {@code sepa_debit}.
+   * card}, {@code eps}, {@code fpx}, {@code giropay}, {@code ideal}, {@code p24}, or {@code
+   * sepa_debit}.
    */
   @SerializedName("type")
   String type;

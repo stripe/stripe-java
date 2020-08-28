@@ -1019,16 +1019,19 @@ public class Account extends ApiResource implements MetadataStore<Account>, Paym
        * verification_document_failed_other}, {@code verification_document_failed_test_mode}, {@code
        * verification_document_fraudulent}, {@code verification_document_id_number_mismatch}, {@code
        * verification_document_id_number_missing}, {@code verification_document_incomplete}, {@code
-       * verification_document_invalid}, {@code verification_document_manipulated}, {@code
-       * verification_document_missing_back}, {@code verification_document_missing_front}, {@code
-       * verification_document_name_mismatch}, {@code verification_document_name_missing}, {@code
+       * verification_document_invalid}, {@code verification_document_issue_or_expiry_date_missing},
+       * {@code verification_document_manipulated}, {@code verification_document_missing_back},
+       * {@code verification_document_missing_front}, {@code verification_document_name_mismatch},
+       * {@code verification_document_name_missing}, {@code
        * verification_document_nationality_mismatch}, {@code verification_document_not_readable},
-       * {@code verification_document_not_uploaded}, {@code verification_document_photo_mismatch},
-       * {@code verification_document_too_large}, {@code verification_document_type_not_supported},
-       * {@code verification_failed_address_match}, {@code verification_failed_business_iec_number},
-       * {@code verification_failed_document_match}, {@code verification_failed_id_number_match},
-       * {@code verification_failed_keyed_identity}, {@code verification_failed_keyed_match}, {@code
-       * verification_failed_name_match}, or {@code verification_failed_other}.
+       * {@code verification_document_not_signed}, {@code verification_document_not_uploaded},
+       * {@code verification_document_photo_mismatch}, {@code verification_document_too_large},
+       * {@code verification_document_type_not_supported}, {@code
+       * verification_failed_address_match}, {@code verification_failed_business_iec_number}, {@code
+       * verification_failed_document_match}, {@code verification_failed_id_number_match}, {@code
+       * verification_failed_keyed_identity}, {@code verification_failed_keyed_match}, {@code
+       * verification_failed_name_match}, {@code verification_failed_other}, {@code
+       * verification_failed_tax_id_match}, or {@code verification_failed_tax_id_not_issued}.
        */
       @SerializedName("code")
       String code;

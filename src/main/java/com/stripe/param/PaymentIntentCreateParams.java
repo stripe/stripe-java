@@ -196,24 +196,6 @@ public class PaymentIntentCreateParams extends ApiRequestParams {
   String returnUrl;
 
   /**
-   * If the PaymentIntent has a {@code payment_method} and a {@code customer} or if you're attaching
-   * a payment method to the PaymentIntent in this request, you can pass {@code
-   * save_payment_method=true} to save the payment method to the customer immediately.
-   *
-   * <p>If the payment method is already saved to a customer, this parameter does nothing. If this
-   * type of payment method cannot be saved to a customer, the request will error.
-   *
-   * <p>Saving a payment method using this parameter is <em>not recommended</em> because it will
-   * save the payment method even if it cannot be charged (e.g. the user made a typo). To ensure
-   * that only payment methods which are likely to be chargeable are saved to a customer, use the
-   * (setup_future_usage)[#payment_intents/object#payment_intent_object-setup_future_usage]
-   * property, which saves the payment method after the PaymentIntent has been confirmed and all
-   * required actions by the customer are complete.
-   */
-  @SerializedName("save_payment_method")
-  Boolean savePaymentMethod;
-
-  /**
    * Indicates that you intend to make future payments with this PaymentIntent's payment method.
    *
    * <p>Providing this parameter will <a
@@ -233,20 +215,6 @@ public class PaymentIntentCreateParams extends ApiRequestParams {
   /** Shipping information for this PaymentIntent. */
   @SerializedName("shipping")
   Shipping shipping;
-
-  /**
-   * This is a legacy field that will be removed in the future. It is the ID of the Source object to
-   * attach to this PaymentIntent. Please use the {@code payment_method} field instead, which also
-   * supports Cards and <a
-   * href="https://stripe.com/docs/payments/payment-methods#compatibility">compatible Source</a>
-   * objects.If neither the {@code payment_method} parameter nor the {@code source} parameter are
-   * provided with {@code confirm=true}, this field will be automatically populated with {@code
-   * customer.default_source} to improve the migration experience for users of the Charges API. We
-   * recommend that you explicitly provide the {@code source} or {@code payment_method} parameter
-   * going forward.
-   */
-  @SerializedName("source")
-  String source;
 
   /**
    * For non-card charges, you can use this value as the complete description that appears on your
@@ -309,10 +277,8 @@ public class PaymentIntentCreateParams extends ApiRequestParams {
       List<String> paymentMethodTypes,
       String receiptEmail,
       String returnUrl,
-      Boolean savePaymentMethod,
       SetupFutureUsage setupFutureUsage,
       Shipping shipping,
-      String source,
       String statementDescriptor,
       String statementDescriptorSuffix,
       TransferData transferData,
@@ -340,10 +306,8 @@ public class PaymentIntentCreateParams extends ApiRequestParams {
     this.paymentMethodTypes = paymentMethodTypes;
     this.receiptEmail = receiptEmail;
     this.returnUrl = returnUrl;
-    this.savePaymentMethod = savePaymentMethod;
     this.setupFutureUsage = setupFutureUsage;
     this.shipping = shipping;
-    this.source = source;
     this.statementDescriptor = statementDescriptor;
     this.statementDescriptorSuffix = statementDescriptorSuffix;
     this.transferData = transferData;
@@ -400,13 +364,9 @@ public class PaymentIntentCreateParams extends ApiRequestParams {
 
     private String returnUrl;
 
-    private Boolean savePaymentMethod;
-
     private SetupFutureUsage setupFutureUsage;
 
     private Shipping shipping;
-
-    private String source;
 
     private String statementDescriptor;
 
@@ -443,10 +403,8 @@ public class PaymentIntentCreateParams extends ApiRequestParams {
           this.paymentMethodTypes,
           this.receiptEmail,
           this.returnUrl,
-          this.savePaymentMethod,
           this.setupFutureUsage,
           this.shipping,
-          this.source,
           this.statementDescriptor,
           this.statementDescriptorSuffix,
           this.transferData,
@@ -767,26 +725,6 @@ public class PaymentIntentCreateParams extends ApiRequestParams {
     }
 
     /**
-     * If the PaymentIntent has a {@code payment_method} and a {@code customer} or if you're
-     * attaching a payment method to the PaymentIntent in this request, you can pass {@code
-     * save_payment_method=true} to save the payment method to the customer immediately.
-     *
-     * <p>If the payment method is already saved to a customer, this parameter does nothing. If this
-     * type of payment method cannot be saved to a customer, the request will error.
-     *
-     * <p>Saving a payment method using this parameter is <em>not recommended</em> because it will
-     * save the payment method even if it cannot be charged (e.g. the user made a typo). To ensure
-     * that only payment methods which are likely to be chargeable are saved to a customer, use the
-     * (setup_future_usage)[#payment_intents/object#payment_intent_object-setup_future_usage]
-     * property, which saves the payment method after the PaymentIntent has been confirmed and all
-     * required actions by the customer are complete.
-     */
-    public Builder setSavePaymentMethod(Boolean savePaymentMethod) {
-      this.savePaymentMethod = savePaymentMethod;
-      return this;
-    }
-
-    /**
      * Indicates that you intend to make future payments with this PaymentIntent's payment method.
      *
      * <p>Providing this parameter will <a
@@ -808,22 +746,6 @@ public class PaymentIntentCreateParams extends ApiRequestParams {
     /** Shipping information for this PaymentIntent. */
     public Builder setShipping(Shipping shipping) {
       this.shipping = shipping;
-      return this;
-    }
-
-    /**
-     * This is a legacy field that will be removed in the future. It is the ID of the Source object
-     * to attach to this PaymentIntent. Please use the {@code payment_method} field instead, which
-     * also supports Cards and <a
-     * href="https://stripe.com/docs/payments/payment-methods#compatibility">compatible Source</a>
-     * objects.If neither the {@code payment_method} parameter nor the {@code source} parameter are
-     * provided with {@code confirm=true}, this field will be automatically populated with {@code
-     * customer.default_source} to improve the migration experience for users of the Charges API. We
-     * recommend that you explicitly provide the {@code source} or {@code payment_method} parameter
-     * going forward.
-     */
-    public Builder setSource(String source) {
-      this.source = source;
       return this;
     }
 
@@ -2764,9 +2686,6 @@ public class PaymentIntentCreateParams extends ApiRequestParams {
 
       @SerializedName("bancontact")
       BANCONTACT("bancontact"),
-
-      @SerializedName("card_present")
-      CARD_PRESENT("card_present"),
 
       @SerializedName("eps")
       EPS("eps"),

@@ -222,21 +222,6 @@ public class Subscription extends ApiResource implements HasId, MetadataStore<Su
   @SerializedName("pending_update")
   PendingUpdate pendingUpdate;
 
-  /**
-   * Hash describing the plan the customer is subscribed to. Only set if the subscription contains a
-   * single plan.
-   */
-  @SerializedName("plan")
-  Plan plan;
-
-  /**
-   * The quantity of the plan to which the customer is subscribed. For example, if your plan is
-   * $10/user/month, and your customer has 5 users, you could pass 5 as the quantity to have the
-   * customer charged $50 (5 x $10) monthly. Only set if the subscription contains a single plan.
-   */
-  @SerializedName("quantity")
-  Long quantity;
-
   /** The schedule attached to the subscription. */
   @SerializedName("schedule")
   @Getter(lombok.AccessLevel.NONE)

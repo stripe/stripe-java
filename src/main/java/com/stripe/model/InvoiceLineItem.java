@@ -126,13 +126,6 @@ public class InvoiceLineItem extends StripeObject implements HasId {
   @SerializedName("type")
   String type;
 
-  /**
-   * For prorations this indicates whether Stripe automatically grouped multiple related debit and
-   * credit line items into a single combined line item.
-   */
-  @SerializedName("unified_proration")
-  Boolean unifiedProration;
-
   /** Get IDs of expandable {@code discounts} object list. */
   public List<String> getDiscounts() {
     return (this.discounts != null)
