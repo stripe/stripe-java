@@ -19,8 +19,17 @@ import java.util.Map;
 import org.junit.jupiter.api.Test;
 
 public class BankAccountTest extends BaseStripeTest {
-  public static final String CUSTOMER_ID = "cus_123";
   public static final String BANK_ACCOUNT_ID = "ba_123";
+
+  private Customer getCustomerFixture() throws IOException {
+    // We want a mocked version of the customer that has the `sources` sub-list present
+    final Customer customer =
+        ApiResource.GSON.fromJson(
+            getResourceAsString("/api_fixtures/customer_with_sources_and_tax_ids.json"),
+            Customer.class);
+
+    return customer;
+  }
 
   private BankAccount getBankAccountFixture(Customer customer) throws IOException, StripeException {
     // stripe-mock doesn't handle bank accounts very well just yet, so use a local fixture
@@ -34,7 +43,7 @@ public class BankAccountTest extends BaseStripeTest {
 
   @Test
   public void testCreate() throws IOException, StripeException {
-    final Customer customer = Customer.retrieve(CUSTOMER_ID);
+    final Customer customer = getCustomerFixture();
 
     final Map<String, Object> params = new HashMap<>();
     params.put("source", "btok_123");
@@ -58,7 +67,7 @@ public class BankAccountTest extends BaseStripeTest {
 
   @Test
   public void testRetrieve() throws IOException, StripeException {
-    final Customer customer = Customer.retrieve(CUSTOMER_ID);
+    final Customer customer = getCustomerFixture();
 
     // stripe-mock does not always return a Bank Account so we have to mock
     stubRequest(
@@ -78,7 +87,7 @@ public class BankAccountTest extends BaseStripeTest {
 
   @Test
   public void testUpdate() throws IOException, StripeException {
-    final Customer customer = Customer.retrieve(CUSTOMER_ID);
+    final Customer customer = getCustomerFixture();
     final BankAccount bankAccount = getBankAccountFixture(customer);
 
     final Map<String, Object> metadata = new HashMap<>();
@@ -105,7 +114,7 @@ public class BankAccountTest extends BaseStripeTest {
 
   @Test
   public void testList() throws IOException, StripeException {
-    final Customer customer = Customer.retrieve(CUSTOMER_ID);
+    final Customer customer = getCustomerFixture();
 
     Map<String, Object> params = new HashMap<>();
     params.put("object", "bank_account");
@@ -139,7 +148,7 @@ public class BankAccountTest extends BaseStripeTest {
 
   @Test
   public void testDelete() throws IOException, StripeException {
-    final Customer customer = Customer.retrieve(CUSTOMER_ID);
+    final Customer customer = getCustomerFixture();
     final BankAccount bankAccount = getBankAccountFixture(customer);
     final String deleteBankAccountData =
         String.format(
@@ -163,7 +172,7 @@ public class BankAccountTest extends BaseStripeTest {
 
   @Test
   public void testVerify() throws IOException, StripeException {
-    final Customer customer = Customer.retrieve(CUSTOMER_ID);
+    final Customer customer = getCustomerFixture();
     final BankAccount bankAccount = getBankAccountFixture(customer);
 
     final List<Integer> values = new ArrayList<>();

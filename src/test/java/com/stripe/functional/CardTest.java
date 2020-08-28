@@ -19,8 +19,17 @@ import java.util.Map;
 import org.junit.jupiter.api.Test;
 
 public class CardTest extends BaseStripeTest {
-  public static final String CUSTOMER_ID = "cus_123";
   public static final String CARD_ID = "card_123";
+
+  private Customer getCustomerFixture() throws IOException {
+    // We want a mocked version of the customer that has the `sources` sub-list present
+    final Customer customer =
+        ApiResource.GSON.fromJson(
+            getResourceAsString("/api_fixtures/customer_with_sources_and_tax_ids.json"),
+            Customer.class);
+
+    return customer;
+  }
 
   private Card getCardFixture(Customer customer) throws IOException {
     // stripe-mock doesn't handle cards very well just yet, so use a local fixture
@@ -33,7 +42,7 @@ public class CardTest extends BaseStripeTest {
 
   @Test
   public void testCreate() throws IOException, StripeException {
-    final Customer customer = Customer.retrieve(CUSTOMER_ID);
+    final Customer customer = getCustomerFixture();
 
     final Map<String, Object> params = new HashMap<>();
     params.put("source", "btok_123");
@@ -57,7 +66,7 @@ public class CardTest extends BaseStripeTest {
 
   @Test
   public void testRetrieve() throws IOException, StripeException {
-    final Customer customer = Customer.retrieve(CUSTOMER_ID);
+    final Customer customer = getCustomerFixture();
 
     // stripe-mock returns a BankAccount instance instead of a Card
     stubRequest(
@@ -77,7 +86,7 @@ public class CardTest extends BaseStripeTest {
 
   @Test
   public void testUpdate() throws IOException, StripeException {
-    final Customer customer = Customer.retrieve(CUSTOMER_ID);
+    final Customer customer = getCustomerFixture();
     final Card card = getCardFixture(customer);
 
     final Map<String, Object> metadata = new HashMap<>();
@@ -96,8 +105,10 @@ public class CardTest extends BaseStripeTest {
 
   @Test
   public void testList() throws IOException, StripeException {
-    final Customer customer = Customer.retrieve(CUSTOMER_ID);
+    final Customer customer = getCustomerFixture();
 
+    System.out.println("remiremi");
+    System.out.println(customer.getSources());
     final Map<String, Object> params = new HashMap<>();
     params.put("object", "card");
     params.put("limit", 1);
@@ -128,7 +139,7 @@ public class CardTest extends BaseStripeTest {
 
   @Test
   public void testDelete() throws IOException, StripeException {
-    final Customer customer = Customer.retrieve(CUSTOMER_ID);
+    final Customer customer = getCustomerFixture();
     final Card card = getCardFixture(customer);
     final String deleteCardData =
         String.format("{\"id\": \"%s\", \"object\": \"card\", \"deleted\": true}", card.getId());
