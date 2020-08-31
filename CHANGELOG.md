@@ -1,5 +1,8 @@
 # Changelog
 
+## 20.1.0 - 2020-08-31
+* [#1089](https://github.com/stripe/stripe-java/pull/1089) Add support for `payment_method.automatically_updated` on `WebhookEndpoint`
+
 ## 20.0.0 - 2020-08-31
 * [#1088](https://github.com/stripe/stripe-java/pull/1088) Multiple API changes
   * Pin to API version `2020-08-27`
