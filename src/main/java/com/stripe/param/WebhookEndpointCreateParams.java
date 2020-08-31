@@ -854,6 +854,9 @@ public class WebhookEndpointCreateParams extends ApiRequestParams {
     @SerializedName("payment_method.attached")
     PAYMENT_METHOD__ATTACHED("payment_method.attached"),
 
+    @SerializedName("payment_method.automatically_updated")
+    PAYMENT_METHOD__AUTOMATICALLY_UPDATED("payment_method.automatically_updated"),
+
     @SerializedName("payment_method.detached")
     PAYMENT_METHOD__DETACHED("payment_method.detached"),
 
