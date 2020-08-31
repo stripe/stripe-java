@@ -3,7 +3,6 @@ package com.stripe.param;
 import com.google.gson.annotations.SerializedName;
 import com.stripe.net.ApiRequestParams;
 import com.stripe.param.common.EmptyParam;
-import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -141,15 +140,6 @@ public class InvoiceCreateParams extends ApiRequestParams {
   String subscription;
 
   /**
-   * The percent tax rate applied to the invoice, represented as a decimal number. This field has
-   * been deprecated and will be removed in a future API version, for further information view the
-   * <a href="https://stripe.com/docs/billing/migration/taxes">migration docs</a> for {@code
-   * tax_rates}.
-   */
-  @SerializedName("tax_percent")
-  BigDecimal taxPercent;
-
-  /**
    * If specified, the funds from the invoice will be transferred to the destination and the ID of
    * the resulting transfer will be found on the invoice's charge.
    */
@@ -175,7 +165,6 @@ public class InvoiceCreateParams extends ApiRequestParams {
       Object metadata,
       String statementDescriptor,
       String subscription,
-      BigDecimal taxPercent,
       TransferData transferData) {
     this.applicationFeeAmount = applicationFeeAmount;
     this.autoAdvance = autoAdvance;
@@ -195,7 +184,6 @@ public class InvoiceCreateParams extends ApiRequestParams {
     this.metadata = metadata;
     this.statementDescriptor = statementDescriptor;
     this.subscription = subscription;
-    this.taxPercent = taxPercent;
     this.transferData = transferData;
   }
 
@@ -240,8 +228,6 @@ public class InvoiceCreateParams extends ApiRequestParams {
 
     private String subscription;
 
-    private BigDecimal taxPercent;
-
     private TransferData transferData;
 
     /** Finalize and obtain parameter instance from this builder. */
@@ -265,7 +251,6 @@ public class InvoiceCreateParams extends ApiRequestParams {
           this.metadata,
           this.statementDescriptor,
           this.subscription,
-          this.taxPercent,
           this.transferData);
     }
 
@@ -595,17 +580,6 @@ public class InvoiceCreateParams extends ApiRequestParams {
      */
     public Builder setSubscription(String subscription) {
       this.subscription = subscription;
-      return this;
-    }
-
-    /**
-     * The percent tax rate applied to the invoice, represented as a decimal number. This field has
-     * been deprecated and will be removed in a future API version, for further information view the
-     * <a href="https://stripe.com/docs/billing/migration/taxes">migration docs</a> for {@code
-     * tax_rates}.
-     */
-    public Builder setTaxPercent(BigDecimal taxPercent) {
-      this.taxPercent = taxPercent;
       return this;
     }
 

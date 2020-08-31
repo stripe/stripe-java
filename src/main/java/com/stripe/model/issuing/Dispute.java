@@ -22,7 +22,7 @@ import lombok.Setter;
 @Setter
 @EqualsAndHashCode(callSuper = false)
 public class Dispute extends ApiResource implements HasId {
-  /** List of balance transactions associated with this dispute. */
+  /** List of balance transactions associated with the dispute. */
   @SerializedName("balance_transactions")
   List<BalanceTransaction> balanceTransactions;
 
@@ -106,24 +106,48 @@ public class Dispute extends ApiResource implements HasId {
     return ApiResource.requestCollection(url, params, DisputeCollection.class, options);
   }
 
-  /** Creates an Issuing <code>Dispute</code> object. */
+  /**
+   * Creates an Issuing <code>Dispute</code> object. Individual pieces of evidence within the <code>
+   * evidence</code> object are optional at this point. Stripe only validates that required evidence
+   * is present during submission. Refer to <a
+   * href="https://stripe.com/docs/issuing/purchases/disputes#dispute-reasons-and-evidence">Dispute
+   * reasons and evidence</a> for more details about evidence requirements.
+   */
   public static Dispute create(Map<String, Object> params) throws StripeException {
     return create(params, (RequestOptions) null);
   }
 
-  /** Creates an Issuing <code>Dispute</code> object. */
+  /**
+   * Creates an Issuing <code>Dispute</code> object. Individual pieces of evidence within the <code>
+   * evidence</code> object are optional at this point. Stripe only validates that required evidence
+   * is present during submission. Refer to <a
+   * href="https://stripe.com/docs/issuing/purchases/disputes#dispute-reasons-and-evidence">Dispute
+   * reasons and evidence</a> for more details about evidence requirements.
+   */
   public static Dispute create(Map<String, Object> params, RequestOptions options)
       throws StripeException {
     String url = String.format("%s%s", Stripe.getApiBase(), "/v1/issuing/disputes");
     return ApiResource.request(ApiResource.RequestMethod.POST, url, params, Dispute.class, options);
   }
 
-  /** Creates an Issuing <code>Dispute</code> object. */
+  /**
+   * Creates an Issuing <code>Dispute</code> object. Individual pieces of evidence within the <code>
+   * evidence</code> object are optional at this point. Stripe only validates that required evidence
+   * is present during submission. Refer to <a
+   * href="https://stripe.com/docs/issuing/purchases/disputes#dispute-reasons-and-evidence">Dispute
+   * reasons and evidence</a> for more details about evidence requirements.
+   */
   public static Dispute create(DisputeCreateParams params) throws StripeException {
     return create(params, (RequestOptions) null);
   }
 
-  /** Creates an Issuing <code>Dispute</code> object. */
+  /**
+   * Creates an Issuing <code>Dispute</code> object. Individual pieces of evidence within the <code>
+   * evidence</code> object are optional at this point. Stripe only validates that required evidence
+   * is present during submission. Refer to <a
+   * href="https://stripe.com/docs/issuing/purchases/disputes#dispute-reasons-and-evidence">Dispute
+   * reasons and evidence</a> for more details about evidence requirements.
+   */
   public static Dispute create(DisputeCreateParams params, RequestOptions options)
       throws StripeException {
     String url = String.format("%s%s", Stripe.getApiBase(), "/v1/issuing/disputes");
@@ -132,7 +156,8 @@ public class Dispute extends ApiResource implements HasId {
 
   /**
    * Updates the specified Issuing <code>Dispute</code> object by setting the values of the
-   * parameters passed. Any parameters not provided will be left unchanged.
+   * parameters passed. Any parameters not provided will be left unchanged. Properties on the <code>
+   * evidence</code> object can be unset by passing in an empty string.
    */
   public Dispute update(Map<String, Object> params) throws StripeException {
     return update(params, (RequestOptions) null);
@@ -140,7 +165,8 @@ public class Dispute extends ApiResource implements HasId {
 
   /**
    * Updates the specified Issuing <code>Dispute</code> object by setting the values of the
-   * parameters passed. Any parameters not provided will be left unchanged.
+   * parameters passed. Any parameters not provided will be left unchanged. Properties on the <code>
+   * evidence</code> object can be unset by passing in an empty string.
    */
   public Dispute update(Map<String, Object> params, RequestOptions options) throws StripeException {
     String url =
@@ -153,7 +179,8 @@ public class Dispute extends ApiResource implements HasId {
 
   /**
    * Updates the specified Issuing <code>Dispute</code> object by setting the values of the
-   * parameters passed. Any parameters not provided will be left unchanged.
+   * parameters passed. Any parameters not provided will be left unchanged. Properties on the <code>
+   * evidence</code> object can be unset by passing in an empty string.
    */
   public Dispute update(DisputeUpdateParams params) throws StripeException {
     return update(params, (RequestOptions) null);
@@ -161,7 +188,8 @@ public class Dispute extends ApiResource implements HasId {
 
   /**
    * Updates the specified Issuing <code>Dispute</code> object by setting the values of the
-   * parameters passed. Any parameters not provided will be left unchanged.
+   * parameters passed. Any parameters not provided will be left unchanged. Properties on the <code>
+   * evidence</code> object can be unset by passing in an empty string.
    */
   public Dispute update(DisputeUpdateParams params, RequestOptions options) throws StripeException {
     String url =

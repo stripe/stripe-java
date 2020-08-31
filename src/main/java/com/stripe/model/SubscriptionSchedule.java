@@ -563,8 +563,9 @@ public class SubscriptionSchedule extends ApiResource
     InvoiceSettings invoiceSettings;
 
     /**
-     * The account (if any) the subscription's payments will be attributed to for tax reporting, and
-     * where funds from each payment will be transferred to for each of the subscription's invoices.
+     * The account (if any) the associated subscription's payments will be attributed to for tax
+     * reporting, and where funds from each payment will be transferred to for each of the
+     * subscription's invoices.
      */
     @SerializedName("transfer_data")
     Subscription.TransferData transferData;
@@ -682,9 +683,12 @@ public class SubscriptionSchedule extends ApiResource
     @SerializedName("invoice_settings")
     InvoiceSettings invoiceSettings;
 
-    /** Plans to subscribe during this phase of the subscription schedule. */
-    @SerializedName("plans")
-    List<SubscriptionSchedule.PhaseItem> plans;
+    /**
+     * Subscription items to configure the subscription to during this phase of the subscription
+     * schedule.
+     */
+    @SerializedName("items")
+    List<SubscriptionSchedule.PhaseItem> items;
 
     /**
      * If the subscription schedule will prorate when transitioning to this phase. Possible values
@@ -700,15 +704,9 @@ public class SubscriptionSchedule extends ApiResource
     Long startDate;
 
     /**
-     * If provided, each invoice created during this phase of the subscription schedule will apply
-     * the tax rate, increasing the amount billed to the customer.
-     */
-    @SerializedName("tax_percent")
-    BigDecimal taxPercent;
-
-    /**
-     * The account (if any) the subscription's payments will be attributed to for tax reporting, and
-     * where funds from each payment will be transferred to for each of the subscription's invoices.
+     * The account (if any) the associated subscription's payments will be attributed to for tax
+     * reporting, and where funds from each payment will be transferred to for each of the
+     * subscription's invoices.
      */
     @SerializedName("transfer_data")
     Subscription.TransferData transferData;

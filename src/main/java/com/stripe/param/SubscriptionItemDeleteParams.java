@@ -25,14 +25,6 @@ public class SubscriptionItemDeleteParams extends ApiRequestParams {
   Map<String, Object> extraParams;
 
   /**
-   * This field has been renamed to {@code proration_behavior}. {@code prorate=true} can be replaced
-   * with {@code proration_behavior=create_prorations} and {@code prorate=false} can be replaced
-   * with {@code proration_behavior=none}.
-   */
-  @SerializedName("prorate")
-  Boolean prorate;
-
-  /**
    * Determines how to handle <a
    * href="https://stripe.com/docs/subscriptions/billing-cycle#prorations">prorations</a> when the
    * billing cycle changes (e.g., when switching plans, resetting {@code billing_cycle_anchor=now},
@@ -61,12 +53,10 @@ public class SubscriptionItemDeleteParams extends ApiRequestParams {
   private SubscriptionItemDeleteParams(
       Boolean clearUsage,
       Map<String, Object> extraParams,
-      Boolean prorate,
       ProrationBehavior prorationBehavior,
       Long prorationDate) {
     this.clearUsage = clearUsage;
     this.extraParams = extraParams;
-    this.prorate = prorate;
     this.prorationBehavior = prorationBehavior;
     this.prorationDate = prorationDate;
   }
@@ -80,8 +70,6 @@ public class SubscriptionItemDeleteParams extends ApiRequestParams {
 
     private Map<String, Object> extraParams;
 
-    private Boolean prorate;
-
     private ProrationBehavior prorationBehavior;
 
     private Long prorationDate;
@@ -89,11 +77,7 @@ public class SubscriptionItemDeleteParams extends ApiRequestParams {
     /** Finalize and obtain parameter instance from this builder. */
     public SubscriptionItemDeleteParams build() {
       return new SubscriptionItemDeleteParams(
-          this.clearUsage,
-          this.extraParams,
-          this.prorate,
-          this.prorationBehavior,
-          this.prorationDate);
+          this.clearUsage, this.extraParams, this.prorationBehavior, this.prorationDate);
     }
 
     /**
@@ -128,16 +112,6 @@ public class SubscriptionItemDeleteParams extends ApiRequestParams {
         this.extraParams = new HashMap<>();
       }
       this.extraParams.putAll(map);
-      return this;
-    }
-
-    /**
-     * This field has been renamed to {@code proration_behavior}. {@code prorate=true} can be
-     * replaced with {@code proration_behavior=create_prorations} and {@code prorate=false} can be
-     * replaced with {@code proration_behavior=none}.
-     */
-    public Builder setProrate(Boolean prorate) {
-      this.prorate = prorate;
       return this;
     }
 

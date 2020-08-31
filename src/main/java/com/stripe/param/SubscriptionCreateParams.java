@@ -187,14 +187,6 @@ public class SubscriptionCreateParams extends ApiRequestParams {
   String promotionCode;
 
   /**
-   * This field has been renamed to {@code proration_behavior}. {@code prorate=true} can be replaced
-   * with {@code proration_behavior=create_prorations} and {@code prorate=false} can be replaced
-   * with {@code proration_behavior=none}.
-   */
-  @SerializedName("prorate")
-  Boolean prorate;
-
-  /**
    * Determines how to handle <a
    * href="https://stripe.com/docs/subscriptions/billing-cycle#prorations">prorations</a> resulting
    * from the {@code billing_cycle_anchor}. Valid values are {@code create_prorations} or {@code
@@ -206,19 +198,6 @@ public class SubscriptionCreateParams extends ApiRequestParams {
    */
   @SerializedName("proration_behavior")
   ProrationBehavior prorationBehavior;
-
-  /**
-   * A non-negative decimal (with at most four decimal places) between 0 and 100. This represents
-   * the percentage of the subscription invoice subtotal that will be calculated and added as tax to
-   * the final amount in each billing period. For example, a plan which charges $10/month with a
-   * {@code tax_percent} of {@code 20.0} will charge $12 per invoice. To unset a previously-set
-   * value, pass an empty string. This field has been deprecated and will be removed in a future API
-   * version, for further information view the <a
-   * href="https://stripe.com/docs/billing/migration/taxes">migration docs</a> for {@code
-   * tax_rates}.
-   */
-  @SerializedName("tax_percent")
-  Object taxPercent;
 
   /**
    * If specified, the funds from the subscription's invoices will be transferred to the destination
@@ -275,9 +254,7 @@ public class SubscriptionCreateParams extends ApiRequestParams {
       PaymentBehavior paymentBehavior,
       Object pendingInvoiceItemInterval,
       String promotionCode,
-      Boolean prorate,
       ProrationBehavior prorationBehavior,
-      Object taxPercent,
       TransferData transferData,
       Object trialEnd,
       Boolean trialFromPlan,
@@ -304,9 +281,7 @@ public class SubscriptionCreateParams extends ApiRequestParams {
     this.paymentBehavior = paymentBehavior;
     this.pendingInvoiceItemInterval = pendingInvoiceItemInterval;
     this.promotionCode = promotionCode;
-    this.prorate = prorate;
     this.prorationBehavior = prorationBehavior;
-    this.taxPercent = taxPercent;
     this.transferData = transferData;
     this.trialEnd = trialEnd;
     this.trialFromPlan = trialFromPlan;
@@ -362,11 +337,7 @@ public class SubscriptionCreateParams extends ApiRequestParams {
 
     private String promotionCode;
 
-    private Boolean prorate;
-
     private ProrationBehavior prorationBehavior;
-
-    private Object taxPercent;
 
     private TransferData transferData;
 
@@ -401,9 +372,7 @@ public class SubscriptionCreateParams extends ApiRequestParams {
           this.paymentBehavior,
           this.pendingInvoiceItemInterval,
           this.promotionCode,
-          this.prorate,
           this.prorationBehavior,
-          this.taxPercent,
           this.transferData,
           this.trialEnd,
           this.trialFromPlan,
@@ -798,16 +767,6 @@ public class SubscriptionCreateParams extends ApiRequestParams {
     }
 
     /**
-     * This field has been renamed to {@code proration_behavior}. {@code prorate=true} can be
-     * replaced with {@code proration_behavior=create_prorations} and {@code prorate=false} can be
-     * replaced with {@code proration_behavior=none}.
-     */
-    public Builder setProrate(Boolean prorate) {
-      this.prorate = prorate;
-      return this;
-    }
-
-    /**
      * Determines how to handle <a
      * href="https://stripe.com/docs/subscriptions/billing-cycle#prorations">prorations</a>
      * resulting from the {@code billing_cycle_anchor}. Valid values are {@code create_prorations}
@@ -819,36 +778,6 @@ public class SubscriptionCreateParams extends ApiRequestParams {
      */
     public Builder setProrationBehavior(ProrationBehavior prorationBehavior) {
       this.prorationBehavior = prorationBehavior;
-      return this;
-    }
-
-    /**
-     * A non-negative decimal (with at most four decimal places) between 0 and 100. This represents
-     * the percentage of the subscription invoice subtotal that will be calculated and added as tax
-     * to the final amount in each billing period. For example, a plan which charges $10/month with
-     * a {@code tax_percent} of {@code 20.0} will charge $12 per invoice. To unset a previously-set
-     * value, pass an empty string. This field has been deprecated and will be removed in a future
-     * API version, for further information view the <a
-     * href="https://stripe.com/docs/billing/migration/taxes">migration docs</a> for {@code
-     * tax_rates}.
-     */
-    public Builder setTaxPercent(BigDecimal taxPercent) {
-      this.taxPercent = taxPercent;
-      return this;
-    }
-
-    /**
-     * A non-negative decimal (with at most four decimal places) between 0 and 100. This represents
-     * the percentage of the subscription invoice subtotal that will be calculated and added as tax
-     * to the final amount in each billing period. For example, a plan which charges $10/month with
-     * a {@code tax_percent} of {@code 20.0} will charge $12 per invoice. To unset a previously-set
-     * value, pass an empty string. This field has been deprecated and will be removed in a future
-     * API version, for further information view the <a
-     * href="https://stripe.com/docs/billing/migration/taxes">migration docs</a> for {@code
-     * tax_rates}.
-     */
-    public Builder setTaxPercent(EmptyParam taxPercent) {
-      this.taxPercent = taxPercent;
       return this;
     }
 

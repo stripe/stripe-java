@@ -32,18 +32,21 @@ public class InvoicePayParams extends ApiRequestParams {
    * <p>Passing {@code forgive=false} will fail the charge if the source hasn't been pre-funded with
    * the right amount. An example for this case is with ACH Credit Transfers and wires: if the
    * amount wired is less than the amount due by a small amount, you might want to forgive the
-   * difference.
+   * difference. Defaults to {@code false}.
    */
   @SerializedName("forgive")
   Boolean forgive;
 
-  /** Indicates if a customer is on or off-session while an invoice payment is attempted. */
+  /**
+   * Indicates if a customer is on or off-session while an invoice payment is attempted. Defaults to
+   * {@code true} (off-session).
+   */
   @SerializedName("off_session")
   Boolean offSession;
 
   /**
    * Boolean representing whether an invoice is paid outside of Stripe. This will result in no
-   * charge being made.
+   * charge being made. Defaults to {@code false}.
    */
   @SerializedName("paid_out_of_band")
   Boolean paidOutOfBand;
@@ -171,14 +174,17 @@ public class InvoicePayParams extends ApiRequestParams {
      * <p>Passing {@code forgive=false} will fail the charge if the source hasn't been pre-funded
      * with the right amount. An example for this case is with ACH Credit Transfers and wires: if
      * the amount wired is less than the amount due by a small amount, you might want to forgive the
-     * difference.
+     * difference. Defaults to {@code false}.
      */
     public Builder setForgive(Boolean forgive) {
       this.forgive = forgive;
       return this;
     }
 
-    /** Indicates if a customer is on or off-session while an invoice payment is attempted. */
+    /**
+     * Indicates if a customer is on or off-session while an invoice payment is attempted. Defaults
+     * to {@code true} (off-session).
+     */
     public Builder setOffSession(Boolean offSession) {
       this.offSession = offSession;
       return this;
@@ -186,7 +192,7 @@ public class InvoicePayParams extends ApiRequestParams {
 
     /**
      * Boolean representing whether an invoice is paid outside of Stripe. This will result in no
-     * charge being made.
+     * charge being made. Defaults to {@code false}.
      */
     public Builder setPaidOutOfBand(Boolean paidOutOfBand) {
       this.paidOutOfBand = paidOutOfBand;

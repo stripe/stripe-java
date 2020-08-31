@@ -144,13 +144,6 @@ public class InvoiceItem extends ApiResource implements HasId, MetadataStore<Inv
   @SerializedName("tax_rates")
   List<TaxRate> taxRates;
 
-  /**
-   * For prorations this indicates whether Stripe automatically grouped multiple related debit and
-   * credit line items into a single combined line item.
-   */
-  @SerializedName("unified_proration")
-  Boolean unifiedProration;
-
   /** Unit Amount (in the {@code currency} specified) of the invoice item. */
   @SerializedName("unit_amount")
   Long unitAmount;
@@ -291,16 +284,16 @@ public class InvoiceItem extends ApiResource implements HasId, MetadataStore<Inv
   }
 
   /**
-   * Creates an item to be added to a draft invoice. If no invoice is specified, the item will be on
-   * the next invoice created for the customer specified.
+   * Creates an item to be added to a draft invoice (up to 250 items per invoice). If no invoice is
+   * specified, the item will be on the next invoice created for the customer specified.
    */
   public static InvoiceItem create(Map<String, Object> params) throws StripeException {
     return create(params, (RequestOptions) null);
   }
 
   /**
-   * Creates an item to be added to a draft invoice. If no invoice is specified, the item will be on
-   * the next invoice created for the customer specified.
+   * Creates an item to be added to a draft invoice (up to 250 items per invoice). If no invoice is
+   * specified, the item will be on the next invoice created for the customer specified.
    */
   public static InvoiceItem create(Map<String, Object> params, RequestOptions options)
       throws StripeException {
@@ -310,16 +303,16 @@ public class InvoiceItem extends ApiResource implements HasId, MetadataStore<Inv
   }
 
   /**
-   * Creates an item to be added to a draft invoice. If no invoice is specified, the item will be on
-   * the next invoice created for the customer specified.
+   * Creates an item to be added to a draft invoice (up to 250 items per invoice). If no invoice is
+   * specified, the item will be on the next invoice created for the customer specified.
    */
   public static InvoiceItem create(InvoiceItemCreateParams params) throws StripeException {
     return create(params, (RequestOptions) null);
   }
 
   /**
-   * Creates an item to be added to a draft invoice. If no invoice is specified, the item will be on
-   * the next invoice created for the customer specified.
+   * Creates an item to be added to a draft invoice (up to 250 items per invoice). If no invoice is
+   * specified, the item will be on the next invoice created for the customer specified.
    */
   public static InvoiceItem create(InvoiceItemCreateParams params, RequestOptions options)
       throws StripeException {

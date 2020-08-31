@@ -14,7 +14,6 @@ import com.stripe.param.InvoiceCreateParams;
 import com.stripe.param.InvoiceUpcomingParams;
 import com.stripe.param.InvoiceUpdateParams;
 import com.stripe.param.common.EmptyParam;
-import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
@@ -81,7 +80,6 @@ public class InvoiceTest extends BaseStripeTest {
 
     final Map<String, Object> params = new HashMap<>();
     params.put("custom_fields", Arrays.asList(customField1, customField2));
-    params.put("tax_percent", new BigDecimal("12.45333"));
     params.put("metadata", metadata);
 
     InvoiceUpdateParams.CustomField typedCustomField1 =
@@ -93,7 +91,6 @@ public class InvoiceTest extends BaseStripeTest {
     InvoiceUpdateParams typedParams =
         InvoiceUpdateParams.builder()
             .setCustomFields(Arrays.asList(typedCustomField1, typedCustomField2))
-            .setTaxPercent(new BigDecimal("12.45333"))
             .putMetadata("key", "value")
             .build();
 
@@ -110,14 +107,14 @@ public class InvoiceTest extends BaseStripeTest {
     InvoiceUpdateParams typedParamsWithEmpty =
         InvoiceUpdateParams.builder()
             .setCustomFields(EmptyParam.EMPTY)
-            .setTaxPercent(EmptyParam.EMPTY)
+            .setDefaultPaymentMethod(EmptyParam.EMPTY)
             .build();
 
     Invoice updatedInvoice = invoice.update(typedParamsWithEmpty, RequestOptions.getDefault());
 
     Map<String, Object> paramsWithEmpty = new HashMap<>();
     paramsWithEmpty.put("custom_fields", null);
-    paramsWithEmpty.put("tax_percent", null);
+    paramsWithEmpty.put("default_payment_method", null);
 
     assertNotNull(updatedInvoice);
     verifyRequest(

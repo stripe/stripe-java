@@ -1015,9 +1015,6 @@ public class Charge extends ApiResource implements MetadataStore<Charge>, Balanc
     @SerializedName("bancontact")
     Bancontact bancontact;
 
-    @SerializedName("bitcoin")
-    Bitcoin bitcoin;
-
     @SerializedName("card")
     Card card;
 
@@ -1267,29 +1264,6 @@ public class Charge extends ApiResource implements MetadataStore<Charge>, Balanc
     @Getter
     @Setter
     @EqualsAndHashCode(callSuper = false)
-    public static class Bitcoin extends StripeObject {
-      @SerializedName("address")
-      String address;
-
-      @SerializedName("amount")
-      Long amount;
-
-      @SerializedName("amount_charged")
-      Long amountCharged;
-
-      @SerializedName("amount_received")
-      Long amountReceived;
-
-      @SerializedName("amount_returned")
-      Long amountReturned;
-
-      @SerializedName("refund_address")
-      String refundAddress;
-    }
-
-    @Getter
-    @Setter
-    @EqualsAndHashCode(callSuper = false)
     public static class Card extends StripeObject {
       /**
        * Card brand. Can be {@code amex}, {@code diners}, {@code discover}, {@code jcb}, {@code
@@ -1427,13 +1401,6 @@ public class Charge extends ApiResource implements MetadataStore<Charge>, Balanc
       @EqualsAndHashCode(callSuper = false)
       public static class ThreeDSecure extends StripeObject {
         /**
-         * Whether or not authentication was performed. 3D Secure will succeed without
-         * authentication when the card is not enrolled.
-         */
-        @SerializedName("authenticated")
-        Boolean authenticated;
-
-        /**
          * For authenticated transactions: how the customer was authenticated by the issuing bank.
          *
          * <p>One of {@code challenge}, or {@code frictionless}.
@@ -1460,10 +1427,6 @@ public class Charge extends ApiResource implements MetadataStore<Charge>, Balanc
          */
         @SerializedName("result_reason")
         String resultReason;
-
-        /** Whether or not 3D Secure succeeded. */
-        @SerializedName("succeeded")
-        Boolean succeeded;
 
         /**
          * The version of 3D Secure that was used.
@@ -1676,8 +1639,10 @@ public class Charge extends ApiResource implements MetadataStore<Charge>, Balanc
       String network;
 
       /**
-       * How were card details read in this transaction. Can be contact_emv, contactless_emv,
-       * magnetic_stripe_fallback, magnetic_stripe_track2, or contactless_magstripe_mode
+       * How card details were read in this transaction.
+       *
+       * <p>One of {@code contact_emv}, {@code contactless_emv}, {@code contactless_magstripe_mode},
+       * {@code magnetic_stripe_fallback}, or {@code magnetic_stripe_track2}.
        */
       @SerializedName("read_method")
       String readMethod;
@@ -1904,8 +1869,10 @@ public class Charge extends ApiResource implements MetadataStore<Charge>, Balanc
       String network;
 
       /**
-       * How were card details read in this transaction. Can be contact_emv, contactless_emv,
-       * magnetic_stripe_fallback, magnetic_stripe_track2, or contactless_magstripe_mode
+       * How card details were read in this transaction.
+       *
+       * <p>One of {@code contact_emv}, {@code contactless_emv}, {@code contactless_magstripe_mode},
+       * {@code magnetic_stripe_fallback}, or {@code magnetic_stripe_track2}.
        */
       @SerializedName("read_method")
       String readMethod;

@@ -15,7 +15,6 @@ import com.stripe.param.InvoiceSendInvoiceParams;
 import com.stripe.param.InvoiceUpcomingParams;
 import com.stripe.param.InvoiceUpdateParams;
 import com.stripe.param.InvoiceVoidInvoiceParams;
-import java.math.BigDecimal;
 import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
@@ -410,14 +409,6 @@ public class Invoice extends ApiResource implements HasId, MetadataStore<Invoice
   /** The amount of tax on this invoice. This is the sum of all the tax amounts on this invoice. */
   @SerializedName("tax")
   Long tax;
-
-  /**
-   * This percentage of the subtotal has been added to the total amount of the invoice, including
-   * invoice line items and discounts. This field is inherited from the subscription's {@code
-   * tax_percent} field, but can be changed before the invoice is paid. This field defaults to null.
-   */
-  @SerializedName("tax_percent")
-  BigDecimal taxPercent;
 
   @SerializedName("threshold_reason")
   ThresholdReason thresholdReason;

@@ -103,15 +103,6 @@ public class InvoiceUpcomingParams extends ApiRequestParams {
   List<SubscriptionItem> subscriptionItems;
 
   /**
-   * This field has been renamed to {@code subscription_proration_behavior}. {@code
-   * subscription_prorate=true} can be replaced with {@code
-   * subscription_proration_behavior=create_prorations} and {@code subscription_prorate=false} can
-   * be replaced with {@code subscription_proration_behavior=none}.
-   */
-  @SerializedName("subscription_prorate")
-  Boolean subscriptionProrate;
-
-  /**
    * Determines how to handle <a
    * href="https://stripe.com/docs/subscriptions/billing-cycle#prorations">prorations</a> when the
    * billing cycle changes (e.g., when switching plans, resetting {@code billing_cycle_anchor=now},
@@ -135,7 +126,7 @@ public class InvoiceUpcomingParams extends ApiRequestParams {
    * done at the specified time. The time given must be within the current subscription period, and
    * cannot be before the subscription was on its current plan. If set, {@code subscription}, and
    * one of {@code subscription_items}, or {@code subscription_trial_end} are required. Also, {@code
-   * subscription_proration} cannot be set to false.
+   * subscription_proration_behavior} cannot be set to 'none'.
    */
   @SerializedName("subscription_proration_date")
   Long subscriptionProrationDate;
@@ -143,16 +134,6 @@ public class InvoiceUpcomingParams extends ApiRequestParams {
   /** Date a subscription is intended to start (can be future or past). */
   @SerializedName("subscription_start_date")
   Long subscriptionStartDate;
-
-  /**
-   * If provided, the invoice returned will preview updating or creating a subscription with that
-   * tax percent. If set, one of {@code subscription_items} or {@code subscription} is required.
-   * This field has been deprecated and will be removed in a future API version, for further
-   * information view the <a href="https://stripe.com/docs/billing/migration/taxes">migration
-   * docs</a> for {@code tax_rates}.
-   */
-  @SerializedName("subscription_tax_percent")
-  BigDecimal subscriptionTaxPercent;
 
   /**
    * If provided, the invoice returned will preview updating or creating a subscription with that
@@ -185,11 +166,9 @@ public class InvoiceUpcomingParams extends ApiRequestParams {
       Boolean subscriptionCancelNow,
       Object subscriptionDefaultTaxRates,
       List<SubscriptionItem> subscriptionItems,
-      Boolean subscriptionProrate,
       SubscriptionProrationBehavior subscriptionProrationBehavior,
       Long subscriptionProrationDate,
       Long subscriptionStartDate,
-      BigDecimal subscriptionTaxPercent,
       Object subscriptionTrialEnd,
       Boolean subscriptionTrialFromPlan) {
     this.coupon = coupon;
@@ -206,11 +185,9 @@ public class InvoiceUpcomingParams extends ApiRequestParams {
     this.subscriptionCancelNow = subscriptionCancelNow;
     this.subscriptionDefaultTaxRates = subscriptionDefaultTaxRates;
     this.subscriptionItems = subscriptionItems;
-    this.subscriptionProrate = subscriptionProrate;
     this.subscriptionProrationBehavior = subscriptionProrationBehavior;
     this.subscriptionProrationDate = subscriptionProrationDate;
     this.subscriptionStartDate = subscriptionStartDate;
-    this.subscriptionTaxPercent = subscriptionTaxPercent;
     this.subscriptionTrialEnd = subscriptionTrialEnd;
     this.subscriptionTrialFromPlan = subscriptionTrialFromPlan;
   }
@@ -248,15 +225,11 @@ public class InvoiceUpcomingParams extends ApiRequestParams {
 
     private List<SubscriptionItem> subscriptionItems;
 
-    private Boolean subscriptionProrate;
-
     private SubscriptionProrationBehavior subscriptionProrationBehavior;
 
     private Long subscriptionProrationDate;
 
     private Long subscriptionStartDate;
-
-    private BigDecimal subscriptionTaxPercent;
 
     private Object subscriptionTrialEnd;
 
@@ -279,11 +252,9 @@ public class InvoiceUpcomingParams extends ApiRequestParams {
           this.subscriptionCancelNow,
           this.subscriptionDefaultTaxRates,
           this.subscriptionItems,
-          this.subscriptionProrate,
           this.subscriptionProrationBehavior,
           this.subscriptionProrationDate,
           this.subscriptionStartDate,
-          this.subscriptionTaxPercent,
           this.subscriptionTrialEnd,
           this.subscriptionTrialFromPlan);
     }
@@ -577,17 +548,6 @@ public class InvoiceUpcomingParams extends ApiRequestParams {
     }
 
     /**
-     * This field has been renamed to {@code subscription_proration_behavior}. {@code
-     * subscription_prorate=true} can be replaced with {@code
-     * subscription_proration_behavior=create_prorations} and {@code subscription_prorate=false} can
-     * be replaced with {@code subscription_proration_behavior=none}.
-     */
-    public Builder setSubscriptionProrate(Boolean subscriptionProrate) {
-      this.subscriptionProrate = subscriptionProrate;
-      return this;
-    }
-
-    /**
      * Determines how to handle <a
      * href="https://stripe.com/docs/subscriptions/billing-cycle#prorations">prorations</a> when the
      * billing cycle changes (e.g., when switching plans, resetting {@code
@@ -614,7 +574,7 @@ public class InvoiceUpcomingParams extends ApiRequestParams {
      * done at the specified time. The time given must be within the current subscription period,
      * and cannot be before the subscription was on its current plan. If set, {@code subscription},
      * and one of {@code subscription_items}, or {@code subscription_trial_end} are required. Also,
-     * {@code subscription_proration} cannot be set to false.
+     * {@code subscription_proration_behavior} cannot be set to 'none'.
      */
     public Builder setSubscriptionProrationDate(Long subscriptionProrationDate) {
       this.subscriptionProrationDate = subscriptionProrationDate;
@@ -624,18 +584,6 @@ public class InvoiceUpcomingParams extends ApiRequestParams {
     /** Date a subscription is intended to start (can be future or past). */
     public Builder setSubscriptionStartDate(Long subscriptionStartDate) {
       this.subscriptionStartDate = subscriptionStartDate;
-      return this;
-    }
-
-    /**
-     * If provided, the invoice returned will preview updating or creating a subscription with that
-     * tax percent. If set, one of {@code subscription_items} or {@code subscription} is required.
-     * This field has been deprecated and will be removed in a future API version, for further
-     * information view the <a href="https://stripe.com/docs/billing/migration/taxes">migration
-     * docs</a> for {@code tax_rates}.
-     */
-    public Builder setSubscriptionTaxPercent(BigDecimal subscriptionTaxPercent) {
-      this.subscriptionTaxPercent = subscriptionTaxPercent;
       return this;
     }
 

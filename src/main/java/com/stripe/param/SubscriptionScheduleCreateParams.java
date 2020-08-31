@@ -369,8 +369,8 @@ public class SubscriptionScheduleCreateParams extends ApiRequestParams {
     InvoiceSettings invoiceSettings;
 
     /**
-     * The data with which to automatically create a Transfer for each of the subscription's
-     * invoices.
+     * The data with which to automatically create a Transfer for each of the associated
+     * subscription's invoices.
      */
     @SerializedName("transfer_data")
     Object transferData;
@@ -508,8 +508,8 @@ public class SubscriptionScheduleCreateParams extends ApiRequestParams {
       }
 
       /**
-       * The data with which to automatically create a Transfer for each of the subscription's
-       * invoices.
+       * The data with which to automatically create a Transfer for each of the associated
+       * subscription's invoices.
        */
       public Builder setTransferData(TransferData transferData) {
         this.transferData = transferData;
@@ -517,8 +517,8 @@ public class SubscriptionScheduleCreateParams extends ApiRequestParams {
       }
 
       /**
-       * The data with which to automatically create a Transfer for each of the subscription's
-       * invoices.
+       * The data with which to automatically create a Transfer for each of the associated
+       * subscription's invoices.
        */
       public Builder setTransferData(EmptyParam transferData) {
         this.transferData = transferData;
@@ -917,6 +917,13 @@ public class SubscriptionScheduleCreateParams extends ApiRequestParams {
     InvoiceSettings invoiceSettings;
 
     /**
+     * List of configuration items, each with an attached price, to apply during this phase of the
+     * subscription schedule.
+     */
+    @SerializedName("items")
+    List<Item> items;
+
+    /**
      * Integer representing the multiplier applied to the price interval. For example, {@code
      * iterations=2} applied to a price with {@code interval=month} and {@code interval_count=3}
      * results in a phase of duration {@code 2 * 3 months = 6 months}. If set, {@code end_date} must
@@ -924,13 +931,6 @@ public class SubscriptionScheduleCreateParams extends ApiRequestParams {
      */
     @SerializedName("iterations")
     Long iterations;
-
-    /**
-     * List of configuration items, each with an attached price, to apply during this phase of the
-     * subscription schedule.
-     */
-    @SerializedName("plans")
-    List<Plan> plans;
 
     /**
      * If a subscription schedule will create prorations when transitioning to this phase. Possible
@@ -942,21 +942,8 @@ public class SubscriptionScheduleCreateParams extends ApiRequestParams {
     ProrationBehavior prorationBehavior;
 
     /**
-     * A non-negative decimal (with at most four decimal places) between 0 and 100. This represents
-     * the percentage of the subscription invoice subtotal that will be calculated and added as tax
-     * to the final amount in each billing period during thise phase of the schedule. For example, a
-     * price which charges $10/month with a {@code tax_percent} of {@code 20.0} will charge $12 per
-     * invoice. To unset a previously-set value, pass an empty string. This field has been
-     * deprecated and will be removed in a future API version, for further information view the <a
-     * href="https://stripe.com/docs/billing/migration/taxes">migration docs</a> for {@code
-     * tax_rates}.
-     */
-    @SerializedName("tax_percent")
-    BigDecimal taxPercent;
-
-    /**
-     * The data with which to automatically create a Transfer for each of the subscription's
-     * invoices.
+     * The data with which to automatically create a Transfer for each of the associated
+     * subscription's invoices.
      */
     @SerializedName("transfer_data")
     TransferData transferData;
@@ -987,10 +974,9 @@ public class SubscriptionScheduleCreateParams extends ApiRequestParams {
         Long endDate,
         Map<String, Object> extraParams,
         InvoiceSettings invoiceSettings,
+        List<Item> items,
         Long iterations,
-        List<Plan> plans,
         ProrationBehavior prorationBehavior,
-        BigDecimal taxPercent,
         TransferData transferData,
         Boolean trial,
         Long trialEnd) {
@@ -1005,10 +991,9 @@ public class SubscriptionScheduleCreateParams extends ApiRequestParams {
       this.endDate = endDate;
       this.extraParams = extraParams;
       this.invoiceSettings = invoiceSettings;
+      this.items = items;
       this.iterations = iterations;
-      this.plans = plans;
       this.prorationBehavior = prorationBehavior;
-      this.taxPercent = taxPercent;
       this.transferData = transferData;
       this.trial = trial;
       this.trialEnd = trialEnd;
@@ -1041,13 +1026,11 @@ public class SubscriptionScheduleCreateParams extends ApiRequestParams {
 
       private InvoiceSettings invoiceSettings;
 
+      private List<Item> items;
+
       private Long iterations;
 
-      private List<Plan> plans;
-
       private ProrationBehavior prorationBehavior;
-
-      private BigDecimal taxPercent;
 
       private TransferData transferData;
 
@@ -1069,10 +1052,9 @@ public class SubscriptionScheduleCreateParams extends ApiRequestParams {
             this.endDate,
             this.extraParams,
             this.invoiceSettings,
+            this.items,
             this.iterations,
-            this.plans,
             this.prorationBehavior,
-            this.taxPercent,
             this.transferData,
             this.trial,
             this.trialEnd);
@@ -1270,6 +1252,32 @@ public class SubscriptionScheduleCreateParams extends ApiRequestParams {
       }
 
       /**
+       * Add an element to `items` list. A list is initialized for the first `add/addAll` call, and
+       * subsequent calls adds additional elements to the original list. See {@link
+       * SubscriptionScheduleCreateParams.Phase#items} for the field documentation.
+       */
+      public Builder addItem(Item element) {
+        if (this.items == null) {
+          this.items = new ArrayList<>();
+        }
+        this.items.add(element);
+        return this;
+      }
+
+      /**
+       * Add all elements to `items` list. A list is initialized for the first `add/addAll` call,
+       * and subsequent calls adds additional elements to the original list. See {@link
+       * SubscriptionScheduleCreateParams.Phase#items} for the field documentation.
+       */
+      public Builder addAllItem(List<Item> elements) {
+        if (this.items == null) {
+          this.items = new ArrayList<>();
+        }
+        this.items.addAll(elements);
+        return this;
+      }
+
+      /**
        * Integer representing the multiplier applied to the price interval. For example, {@code
        * iterations=2} applied to a price with {@code interval=month} and {@code interval_count=3}
        * results in a phase of duration {@code 2 * 3 months = 6 months}. If set, {@code end_date}
@@ -1277,32 +1285,6 @@ public class SubscriptionScheduleCreateParams extends ApiRequestParams {
        */
       public Builder setIterations(Long iterations) {
         this.iterations = iterations;
-        return this;
-      }
-
-      /**
-       * Add an element to `plans` list. A list is initialized for the first `add/addAll` call, and
-       * subsequent calls adds additional elements to the original list. See {@link
-       * SubscriptionScheduleCreateParams.Phase#plans} for the field documentation.
-       */
-      public Builder addPlan(Plan element) {
-        if (this.plans == null) {
-          this.plans = new ArrayList<>();
-        }
-        this.plans.add(element);
-        return this;
-      }
-
-      /**
-       * Add all elements to `plans` list. A list is initialized for the first `add/addAll` call,
-       * and subsequent calls adds additional elements to the original list. See {@link
-       * SubscriptionScheduleCreateParams.Phase#plans} for the field documentation.
-       */
-      public Builder addAllPlan(List<Plan> elements) {
-        if (this.plans == null) {
-          this.plans = new ArrayList<>();
-        }
-        this.plans.addAll(elements);
         return this;
       }
 
@@ -1318,23 +1300,8 @@ public class SubscriptionScheduleCreateParams extends ApiRequestParams {
       }
 
       /**
-       * A non-negative decimal (with at most four decimal places) between 0 and 100. This
-       * represents the percentage of the subscription invoice subtotal that will be calculated and
-       * added as tax to the final amount in each billing period during thise phase of the schedule.
-       * For example, a price which charges $10/month with a {@code tax_percent} of {@code 20.0}
-       * will charge $12 per invoice. To unset a previously-set value, pass an empty string. This
-       * field has been deprecated and will be removed in a future API version, for further
-       * information view the <a href="https://stripe.com/docs/billing/migration/taxes">migration
-       * docs</a> for {@code tax_rates}.
-       */
-      public Builder setTaxPercent(BigDecimal taxPercent) {
-        this.taxPercent = taxPercent;
-        return this;
-      }
-
-      /**
-       * The data with which to automatically create a Transfer for each of the subscription's
-       * invoices.
+       * The data with which to automatically create a Transfer for each of the associated
+       * subscription's invoices.
        */
       public Builder setTransferData(TransferData transferData) {
         this.transferData = transferData;
@@ -1773,7 +1740,7 @@ public class SubscriptionScheduleCreateParams extends ApiRequestParams {
     }
 
     @Getter
-    public static class Plan {
+    public static class Item {
       /**
        * Define thresholds at which an invoice will be sent, and the subscription advanced to a new
        * billing period. When updating, pass an empty string to remove previously-defined
@@ -1825,7 +1792,7 @@ public class SubscriptionScheduleCreateParams extends ApiRequestParams {
       @SerializedName("tax_rates")
       Object taxRates;
 
-      private Plan(
+      private Item(
           Object billingThresholds,
           Map<String, Object> extraParams,
           String plan,
@@ -1862,8 +1829,8 @@ public class SubscriptionScheduleCreateParams extends ApiRequestParams {
         private Object taxRates;
 
         /** Finalize and obtain parameter instance from this builder. */
-        public Plan build() {
-          return new Plan(
+        public Item build() {
+          return new Item(
               this.billingThresholds,
               this.extraParams,
               this.plan,
@@ -1896,7 +1863,7 @@ public class SubscriptionScheduleCreateParams extends ApiRequestParams {
         /**
          * Add a key/value pair to `extraParams` map. A map is initialized for the first
          * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
-         * map. See {@link SubscriptionScheduleCreateParams.Phase.Plan#extraParams} for the field
+         * map. See {@link SubscriptionScheduleCreateParams.Phase.Item#extraParams} for the field
          * documentation.
          */
         public Builder putExtraParam(String key, Object value) {
@@ -1910,7 +1877,7 @@ public class SubscriptionScheduleCreateParams extends ApiRequestParams {
         /**
          * Add all map key/value pairs to `extraParams` map. A map is initialized for the first
          * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
-         * map. See {@link SubscriptionScheduleCreateParams.Phase.Plan#extraParams} for the field
+         * map. See {@link SubscriptionScheduleCreateParams.Phase.Item#extraParams} for the field
          * documentation.
          */
         public Builder putAllExtraParam(Map<String, Object> map) {
@@ -1957,7 +1924,7 @@ public class SubscriptionScheduleCreateParams extends ApiRequestParams {
         /**
          * Add an element to `taxRates` list. A list is initialized for the first `add/addAll` call,
          * and subsequent calls adds additional elements to the original list. See {@link
-         * SubscriptionScheduleCreateParams.Phase.Plan#taxRates} for the field documentation.
+         * SubscriptionScheduleCreateParams.Phase.Item#taxRates} for the field documentation.
          */
         @SuppressWarnings("unchecked")
         public Builder addTaxRate(String element) {
@@ -1971,7 +1938,7 @@ public class SubscriptionScheduleCreateParams extends ApiRequestParams {
         /**
          * Add all elements to `taxRates` list. A list is initialized for the first `add/addAll`
          * call, and subsequent calls adds additional elements to the original list. See {@link
-         * SubscriptionScheduleCreateParams.Phase.Plan#taxRates} for the field documentation.
+         * SubscriptionScheduleCreateParams.Phase.Item#taxRates} for the field documentation.
          */
         @SuppressWarnings("unchecked")
         public Builder addAllTaxRate(List<String> elements) {
@@ -2046,7 +2013,7 @@ public class SubscriptionScheduleCreateParams extends ApiRequestParams {
            * Add a key/value pair to `extraParams` map. A map is initialized for the first
            * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
            * map. See {@link
-           * SubscriptionScheduleCreateParams.Phase.Plan.BillingThresholds#extraParams} for the
+           * SubscriptionScheduleCreateParams.Phase.Item.BillingThresholds#extraParams} for the
            * field documentation.
            */
           public Builder putExtraParam(String key, Object value) {
@@ -2061,7 +2028,7 @@ public class SubscriptionScheduleCreateParams extends ApiRequestParams {
            * Add all map key/value pairs to `extraParams` map. A map is initialized for the first
            * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
            * map. See {@link
-           * SubscriptionScheduleCreateParams.Phase.Plan.BillingThresholds#extraParams} for the
+           * SubscriptionScheduleCreateParams.Phase.Item.BillingThresholds#extraParams} for the
            * field documentation.
            */
           public Builder putAllExtraParam(Map<String, Object> map) {
@@ -2176,7 +2143,7 @@ public class SubscriptionScheduleCreateParams extends ApiRequestParams {
           /**
            * Add a key/value pair to `extraParams` map. A map is initialized for the first
            * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
-           * map. See {@link SubscriptionScheduleCreateParams.Phase.Plan.PriceData#extraParams} for
+           * map. See {@link SubscriptionScheduleCreateParams.Phase.Item.PriceData#extraParams} for
            * the field documentation.
            */
           public Builder putExtraParam(String key, Object value) {
@@ -2190,7 +2157,7 @@ public class SubscriptionScheduleCreateParams extends ApiRequestParams {
           /**
            * Add all map key/value pairs to `extraParams` map. A map is initialized for the first
            * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
-           * map. See {@link SubscriptionScheduleCreateParams.Phase.Plan.PriceData#extraParams} for
+           * map. See {@link SubscriptionScheduleCreateParams.Phase.Item.PriceData#extraParams} for
            * the field documentation.
            */
           public Builder putAllExtraParam(Map<String, Object> map) {
@@ -2286,7 +2253,7 @@ public class SubscriptionScheduleCreateParams extends ApiRequestParams {
              * Add a key/value pair to `extraParams` map. A map is initialized for the first
              * `put/putAll` call, and subsequent calls add additional key/value pairs to the
              * original map. See {@link
-             * SubscriptionScheduleCreateParams.Phase.Plan.PriceData.Recurring#extraParams} for the
+             * SubscriptionScheduleCreateParams.Phase.Item.PriceData.Recurring#extraParams} for the
              * field documentation.
              */
             public Builder putExtraParam(String key, Object value) {
@@ -2301,7 +2268,7 @@ public class SubscriptionScheduleCreateParams extends ApiRequestParams {
              * Add all map key/value pairs to `extraParams` map. A map is initialized for the first
              * `put/putAll` call, and subsequent calls add additional key/value pairs to the
              * original map. See {@link
-             * SubscriptionScheduleCreateParams.Phase.Plan.PriceData.Recurring#extraParams} for the
+             * SubscriptionScheduleCreateParams.Phase.Item.PriceData.Recurring#extraParams} for the
              * field documentation.
              */
             public Builder putAllExtraParam(Map<String, Object> map) {

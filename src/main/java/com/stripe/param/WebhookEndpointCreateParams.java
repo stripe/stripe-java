@@ -558,7 +558,10 @@ public class WebhookEndpointCreateParams extends ApiRequestParams {
     VERSION_2019_12_03("2019-12-03"),
 
     @SerializedName("2020-03-02")
-    VERSION_2020_03_02("2020-03-02");
+    VERSION_2020_03_02("2020-03-02"),
+
+    @SerializedName("2020-08-27")
+    VERSION_2020_08_27("2020-08-27");
 
     @Getter(onMethod_ = {@Override})
     private final String value;
@@ -752,9 +755,6 @@ public class WebhookEndpointCreateParams extends ApiRequestParams {
     @SerializedName("invoice.payment_failed")
     INVOICE__PAYMENT_FAILED("invoice.payment_failed"),
 
-    @SerializedName("invoice.payment_succeeded")
-    INVOICE__PAYMENT_SUCCEEDED("invoice.payment_succeeded"),
-
     @SerializedName("invoice.sent")
     INVOICE__SENT("invoice.sent"),
 
@@ -853,9 +853,6 @@ public class WebhookEndpointCreateParams extends ApiRequestParams {
 
     @SerializedName("payment_method.attached")
     PAYMENT_METHOD__ATTACHED("payment_method.attached"),
-
-    @SerializedName("payment_method.card_automatically_updated")
-    PAYMENT_METHOD__CARD_AUTOMATICALLY_UPDATED("payment_method.card_automatically_updated"),
 
     @SerializedName("payment_method.detached")
     PAYMENT_METHOD__DETACHED("payment_method.detached"),

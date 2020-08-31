@@ -2,11 +2,9 @@ package com.stripe.model;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
-import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import com.stripe.BaseStripeTest;
 import com.stripe.net.ApiResource;
-import java.math.BigDecimal;
 import org.junit.jupiter.api.Test;
 
 public class SubscriptionTest extends BaseStripeTest {
@@ -43,15 +41,5 @@ public class SubscriptionTest extends BaseStripeTest {
     assertNotNull(invoice);
     assertNotNull(invoice.getId());
     assertEquals(subscription.getLatestInvoice(), invoice.getId());
-  }
-
-  @Test
-  @SuppressWarnings("BigDecimalEquals")
-  public void testDeserializeBigDecimal() {
-    final String data = "{\"object\": \"subscription\", \"tax_percent\": 0.3}";
-    final Subscription subscription = ApiResource.GSON.fromJson(data, Subscription.class);
-    assertNotNull(subscription);
-    assertNotNull(subscription.getTaxPercent());
-    assertTrue(subscription.getTaxPercent().equals(new BigDecimal("0.3")));
   }
 }
