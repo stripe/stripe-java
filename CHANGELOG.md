@@ -1,5 +1,21 @@
 # Changelog
 
+## 20.0.0 - 2020-08-31
+* [#1088](https://github.com/stripe/stripe-java/pull/1088) Multiple API changes
+  * Pin to API version `2020-08-27`
+  * Removed `authenticated` and `succeeded` on `payment_method_details[card][three_d_secure]` on `Charge`
+  * Removed `tax_percent` and `prorate` across all Billing APIs
+  * Renamed `plans` to `items` on `SubscriptionSchedule`
+  * Removed `display_items` on Checkout `Session`
+  * Removed `save_payment_method` and `source` on `PaymentIntent` confirm, create and update. Those parameters still work in the API but are removed from the library
+  * Removed `payment_method_details[bitcoin]` on `Charge`
+  * Removed `unified_proration` on Billing API as this is a deprecated feature that never shipped publicly
+  * Removed `plan` and `quantity` from `Subscription`, use `items` instead
+  * Removed `requested_capabilities` on `Account` creation, use `capabilities` instead
+  * Removed `failure_url` and `success_url` from `AccountLink`, use `refresh_url` and `return_url` instead
+  * Removed `invoice.payment_succeeded` and `payment_method.card_automatically_updated` events
+* [#1087](https://github.com/stripe/stripe-java/pull/1087) Fix retrieval of upcoming Invoice line items
+
 ## 19.45.0 - 2020-08-19
 * [#1085](https://github.com/stripe/stripe-java/pull/1085) Add support for `expires_at` on `File`
 
