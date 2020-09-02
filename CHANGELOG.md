@@ -1,5 +1,12 @@
 # Changelog
 
+## 20.2.0 - 2020-09-02
+* [#1092](https://github.com/stripe/stripe-java/pull/1092) Multiple API changes
+  * Improve support for the Issuing `Dispute` APIs. Added the Submit API, missing parameters on creation, update and list and returned evidence details
+  * Add support for `dispute` on Issuing `Transaction`
+  * Add `available_payout_methods` on `BankAccount`
+  * Add `payment_status` on Checkout `Session`
+
 ## 20.1.0 - 2020-08-31
 * [#1089](https://github.com/stripe/stripe-java/pull/1089) Add support for `payment_method.automatically_updated` on `WebhookEndpoint`
 
