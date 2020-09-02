@@ -153,6 +153,13 @@ public class Session extends ApiResource implements HasId {
   @SerializedName("payment_method_types")
   List<String> paymentMethodTypes;
 
+  /**
+   * The payment status of the Checkout Session, one of {@code paid}, {@code unpaid}, or {@code
+   * no_payment_required}. You can use this value to decide when to fulfill your customer's order.
+   */
+  @SerializedName("payment_status")
+  String paymentStatus;
+
   /** The ID of the SetupIntent for Checkout Sessions in {@code setup} mode. */
   @SerializedName("setup_intent")
   @Getter(lombok.AccessLevel.NONE)
