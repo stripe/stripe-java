@@ -67,9 +67,8 @@ public class Card extends ApiResource
   String addressZipCheck;
 
   /**
-   * A set of available payout methods for this card. Will be either {@code ["standard"]} or {@code
-   * ["standard", "instant"]}. Only values from this set should be passed as the {@code method} when
-   * creating a transfer.
+   * A set of available payout methods for this card. Only values from this set should be passed as
+   * the {@code method} when creating a payout.
    */
   @SerializedName("available_payout_methods")
   List<String> availablePayoutMethods;
