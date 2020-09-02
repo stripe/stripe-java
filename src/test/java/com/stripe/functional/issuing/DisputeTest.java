@@ -16,10 +16,8 @@ public class DisputeTest extends BaseStripeTest {
 
   @Test
   public void testCreate() throws StripeException {
-    final Map<String, String> metadata = new HashMap<>();
-    metadata.put("key", "value");
     final Map<String, Object> params = new HashMap<>();
-    params.put("metadata", metadata);
+    params.put("transaction", "ipi_123");
 
     final Dispute dispute = Dispute.create(params);
 
@@ -34,6 +32,24 @@ public class DisputeTest extends BaseStripeTest {
     assertNotNull(dispute);
     verifyRequest(
         ApiResource.RequestMethod.GET, String.format("/v1/issuing/disputes/%s", DISPUTE_ID));
+  }
+
+  @Test
+  public void testsubmit() throws StripeException {
+    final Dispute dispute = Dispute.retrieve(DISPUTE_ID);
+
+    final Map<String, String> metadata = new HashMap<>();
+    metadata.put("key", "value");
+    final Map<String, Object> params = new HashMap<>();
+    params.put("metadata", metadata);
+
+    final Dispute submitdDispute = dispute.submit(params);
+
+    assertNotNull(submitdDispute);
+    verifyRequest(
+        ApiResource.RequestMethod.POST,
+        String.format("/v1/issuing/disputes/%s/submit", dispute.getId()),
+        params);
   }
 
   @Test

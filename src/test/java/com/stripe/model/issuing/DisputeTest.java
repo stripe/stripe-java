@@ -17,4 +17,20 @@ public class DisputeTest extends BaseStripeTest {
     assertNotNull(dispute.getId());
     assertEquals("issuing.dispute", dispute.getObject());
   }
+
+  @Test
+  public void testDeserializeWithExpansions() throws Exception {
+    // TODO: handle support for balance_transactions expansion as stripe-mock doesn't support this
+    // well
+    final String[] expansions = {
+      "transaction",
+    };
+    final String data = getFixture("/v1/issuing/disputes/idp_123", expansions);
+    final Dispute dispute = ApiResource.GSON.fromJson(data, Dispute.class);
+    assertNotNull(dispute);
+    final Transaction transaction = dispute.getTransactionObject();
+    assertNotNull(transaction);
+    assertNotNull(transaction.getId());
+    assertEquals(dispute.getTransaction(), transaction.getId());
+  }
 }
