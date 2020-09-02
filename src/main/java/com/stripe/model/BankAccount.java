@@ -9,6 +9,7 @@ import com.stripe.net.RequestOptions;
 import com.stripe.param.BankAccountUpdateOnAccountParams;
 import com.stripe.param.BankAccountUpdateOnCustomerParams;
 import com.stripe.param.BankAccountVerifyParams;
+import java.util.List;
 import java.util.Map;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
@@ -35,6 +36,13 @@ public class BankAccount extends ApiResource
    */
   @SerializedName("account_holder_type")
   String accountHolderType;
+
+  /**
+   * A set of available payout methods for this bank account. Only values from this set should be
+   * passed as the {@code method} when creating a payout.
+   */
+  @SerializedName("available_payout_methods")
+  List<String> availablePayoutMethods;
 
   /** Name of the bank associated with the routing number (e.g., {@code WELLS FARGO}). */
   @SerializedName("bank_name")
