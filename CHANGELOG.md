@@ -24,6 +24,7 @@
   * Removed `requested_capabilities` on `Account` creation, use `capabilities` instead
   * Removed `failure_url` and `success_url` from `AccountLink`, use `refresh_url` and `return_url` instead
   * Removed `invoice.payment_succeeded` and `payment_method.card_automatically_updated` events
+  * `sources` and `tax_ids` on `Customer` are now includable sub-lists and not returned by default when retrieving a customer. You need to explicitly expand those properties to call `getTaxIds()` or `getSources()` now to create those sub-resources. Our API Reference has been updated to reflect this.
 * [#1087](https://github.com/stripe/stripe-java/pull/1087) Fix retrieval of upcoming Invoice line items
 
 ## 19.45.0 - 2020-08-19
