@@ -7,6 +7,7 @@ import com.stripe.exception.StripeException;
 import com.stripe.model.oauth.DeauthorizedAccount;
 import com.stripe.model.oauth.TokenResponse;
 import java.util.Map;
+import java.util.HashMap;
 
 public final class OAuth {
   private static StripeResponseGetter stripeResponseGetter = new LiveStripeResponseGetter();
@@ -57,8 +58,11 @@ public final class OAuth {
    * @param options the request options.
    * @return the DeauthorizedAccount instance containing the response from the OAuth API.
    */
-  public static DeauthorizedAccount deauthorize(Map<String, Object> params, RequestOptions options)
-      throws StripeException {
+  public static DeauthorizedAccount deauthorize(
+      Map<String, Object> initialParams, RequestOptions options) throws StripeException {
+    Map<String, Object> params = new HashMap<>();
+    params.putAll(initialParams);
+
     String url = Stripe.getConnectBase() + "/oauth/deauthorize";
     params.put("client_id", getClientId(params, options));
     return OAuth.stripeResponseGetter.oauthRequest(
