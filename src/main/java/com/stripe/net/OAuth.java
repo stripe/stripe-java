@@ -58,13 +58,13 @@ public final class OAuth {
    * @param options the request options.
    * @return the DeauthorizedAccount instance containing the response from the OAuth API.
    */
-  public static DeauthorizedAccount deauthorize(
-      Map<String, Object> initialParams, RequestOptions options) throws StripeException {
-    Map<String, Object> params = new HashMap<>();
-    params.putAll(initialParams);
+  public static DeauthorizedAccount deauthorize(Map<String, Object> params, RequestOptions options)
+      throws StripeException {
+    Map<String, Object> paramsCopy = new HashMap<>();
+    paramsCopy.putAll(params);
 
     String url = Stripe.getConnectBase() + "/oauth/deauthorize";
-    params.put("client_id", getClientId(params, options));
+    paramsCopy.put("client_id", getClientId(paramsCopy, options));
     return OAuth.stripeResponseGetter.oauthRequest(
         ApiResource.RequestMethod.POST, url, params, DeauthorizedAccount.class, options);
   }
