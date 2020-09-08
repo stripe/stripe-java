@@ -1297,10 +1297,11 @@ public class SessionCreateParams extends ApiRequestParams {
   @Getter
   public static class PaymentIntentData {
     /**
-     * The amount of the application fee (if any) that will be applied to the payment and
-     * transferred to the application owner's Stripe account. To use an application fee, the request
-     * must be made on behalf of another account, using the {@code Stripe-Account} header or an
-     * OAuth key. For more information, see the PaymentIntents <a
+     * The amount of the application fee (if any) that will be requested to be applied to the
+     * payment and transferred to the application owner's Stripe account. The amount of the
+     * application fee collected will be capped at the total payment amount. To use an application
+     * fee, the request must be made on behalf of another account, using the {@code Stripe-Account}
+     * header or an OAuth key. For more information, see the PaymentIntents <a
      * href="https://stripe.com/docs/payments/connected-accounts">use case for connected
      * accounts</a>.
      */
@@ -1479,10 +1480,11 @@ public class SessionCreateParams extends ApiRequestParams {
       }
 
       /**
-       * The amount of the application fee (if any) that will be applied to the payment and
-       * transferred to the application owner's Stripe account. To use an application fee, the
-       * request must be made on behalf of another account, using the {@code Stripe-Account} header
-       * or an OAuth key. For more information, see the PaymentIntents <a
+       * The amount of the application fee (if any) that will be requested to be applied to the
+       * payment and transferred to the application owner's Stripe account. The amount of the
+       * application fee collected will be capped at the total payment amount. To use an application
+       * fee, the request must be made on behalf of another account, using the {@code
+       * Stripe-Account} header or an OAuth key. For more information, see the PaymentIntents <a
        * href="https://stripe.com/docs/payments/connected-accounts">use case for connected
        * accounts</a>.
        */
@@ -3585,7 +3587,10 @@ public class SessionCreateParams extends ApiRequestParams {
     IDEAL("ideal"),
 
     @SerializedName("p24")
-    P24("p24");
+    P24("p24"),
+
+    @SerializedName("sofort")
+    SOFORT("sofort");
 
     @Getter(onMethod_ = {@Override})
     private final String value;
