@@ -6,8 +6,8 @@ import com.stripe.exception.InvalidRequestException;
 import com.stripe.exception.StripeException;
 import com.stripe.model.oauth.DeauthorizedAccount;
 import com.stripe.model.oauth.TokenResponse;
-import java.util.Map;
 import java.util.HashMap;
+import java.util.Map;
 
 public final class OAuth {
   private static StripeResponseGetter stripeResponseGetter = new LiveStripeResponseGetter();
