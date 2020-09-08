@@ -105,7 +105,11 @@ public class Card extends ApiResource
 
   /**
    * If a CVC was provided, results of the check: {@code pass}, {@code fail}, {@code unavailable},
-   * or {@code unchecked}.
+   * or {@code unchecked}. A result of unchecked indicates that CVC was provided but hasn't been
+   * checked yet. Checks are typically performed when attaching a card to a Customer object, or when
+   * creating a charge. For more details, see <a
+   * href="https://support.stripe.com/questions/check-if-a-card-is-valid-without-a-charge">Check if
+   * a card is valid without a charge</a>.
    */
   @SerializedName("cvc_check")
   String cvcCheck;

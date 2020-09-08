@@ -895,6 +895,13 @@ public class PaymentIntentConfirmParams extends ApiRequestParams {
     SepaDebit sepaDebit;
 
     /**
+     * If this is a {@code sofort} PaymentMethod, this hash contains details about the SOFORT
+     * payment method.
+     */
+    @SerializedName("sofort")
+    Sofort sofort;
+
+    /**
      * The type of the PaymentMethod. An additional hash is included on the PaymentMethod with a
      * name matching this value. It contains additional information specific to the PaymentMethod
      * type.
@@ -917,6 +924,7 @@ public class PaymentIntentConfirmParams extends ApiRequestParams {
         Map<String, String> metadata,
         P24 p24,
         SepaDebit sepaDebit,
+        Sofort sofort,
         Type type) {
       this.alipay = alipay;
       this.auBecsDebit = auBecsDebit;
@@ -932,6 +940,7 @@ public class PaymentIntentConfirmParams extends ApiRequestParams {
       this.metadata = metadata;
       this.p24 = p24;
       this.sepaDebit = sepaDebit;
+      this.sofort = sofort;
       this.type = type;
     }
 
@@ -968,6 +977,8 @@ public class PaymentIntentConfirmParams extends ApiRequestParams {
 
       private SepaDebit sepaDebit;
 
+      private Sofort sofort;
+
       private Type type;
 
       /** Finalize and obtain parameter instance from this builder. */
@@ -987,6 +998,7 @@ public class PaymentIntentConfirmParams extends ApiRequestParams {
             this.metadata,
             this.p24,
             this.sepaDebit,
+            this.sofort,
             this.type);
       }
 
@@ -1149,6 +1161,15 @@ public class PaymentIntentConfirmParams extends ApiRequestParams {
        */
       public Builder setSepaDebit(SepaDebit sepaDebit) {
         this.sepaDebit = sepaDebit;
+        return this;
+      }
+
+      /**
+       * If this is a {@code sofort} PaymentMethod, this hash contains details about the SOFORT
+       * payment method.
+       */
+      public Builder setSofort(Sofort sofort) {
+        this.sofort = sofort;
         return this;
       }
 
@@ -2302,6 +2323,103 @@ public class PaymentIntentConfirmParams extends ApiRequestParams {
       }
     }
 
+    @Getter
+    public static class Sofort {
+      /** Two-letter ISO code representing the country the bank account is located in. */
+      @SerializedName("country")
+      Country country;
+
+      /**
+       * Map of extra parameters for custom features not available in this client library. The
+       * content in this map is not serialized under this field's {@code @SerializedName} value.
+       * Instead, each key/value pair is serialized as if the key is a root-level field (serialized)
+       * name in this param object. Effectively, this map is flattened to its parent instance.
+       */
+      @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
+      Map<String, Object> extraParams;
+
+      private Sofort(Country country, Map<String, Object> extraParams) {
+        this.country = country;
+        this.extraParams = extraParams;
+      }
+
+      public static Builder builder() {
+        return new Builder();
+      }
+
+      public static class Builder {
+        private Country country;
+
+        private Map<String, Object> extraParams;
+
+        /** Finalize and obtain parameter instance from this builder. */
+        public Sofort build() {
+          return new Sofort(this.country, this.extraParams);
+        }
+
+        /** Two-letter ISO code representing the country the bank account is located in. */
+        public Builder setCountry(Country country) {
+          this.country = country;
+          return this;
+        }
+
+        /**
+         * Add a key/value pair to `extraParams` map. A map is initialized for the first
+         * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
+         * map. See {@link PaymentIntentConfirmParams.PaymentMethodData.Sofort#extraParams} for the
+         * field documentation.
+         */
+        public Builder putExtraParam(String key, Object value) {
+          if (this.extraParams == null) {
+            this.extraParams = new HashMap<>();
+          }
+          this.extraParams.put(key, value);
+          return this;
+        }
+
+        /**
+         * Add all map key/value pairs to `extraParams` map. A map is initialized for the first
+         * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
+         * map. See {@link PaymentIntentConfirmParams.PaymentMethodData.Sofort#extraParams} for the
+         * field documentation.
+         */
+        public Builder putAllExtraParam(Map<String, Object> map) {
+          if (this.extraParams == null) {
+            this.extraParams = new HashMap<>();
+          }
+          this.extraParams.putAll(map);
+          return this;
+        }
+      }
+
+      public enum Country implements ApiRequestParams.EnumParam {
+        @SerializedName("AT")
+        AT("AT"),
+
+        @SerializedName("BE")
+        BE("BE"),
+
+        @SerializedName("DE")
+        DE("DE"),
+
+        @SerializedName("ES")
+        ES("ES"),
+
+        @SerializedName("IT")
+        IT("IT"),
+
+        @SerializedName("NL")
+        NL("NL");
+
+        @Getter(onMethod_ = {@Override})
+        private final String value;
+
+        Country(String value) {
+          this.value = value;
+        }
+      }
+    }
+
     public enum Type implements ApiRequestParams.EnumParam {
       @SerializedName("alipay")
       ALIPAY("alipay"),
@@ -2331,7 +2449,10 @@ public class PaymentIntentConfirmParams extends ApiRequestParams {
       P24("p24"),
 
       @SerializedName("sepa_debit")
-      SEPA_DEBIT("sepa_debit");
+      SEPA_DEBIT("sepa_debit"),
+
+      @SerializedName("sofort")
+      SOFORT("sofort");
 
       @Getter(onMethod_ = {@Override})
       private final String value;
@@ -2371,12 +2492,24 @@ public class PaymentIntentConfirmParams extends ApiRequestParams {
     @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
     Map<String, Object> extraParams;
 
+    /**
+     * If this is a {@code sofort} PaymentMethod, this sub-hash contains details about the SOFORT
+     * payment method options.
+     */
+    @SerializedName("sofort")
+    Object sofort;
+
     private PaymentMethodOptions(
-        Object alipay, Object bancontact, Object card, Map<String, Object> extraParams) {
+        Object alipay,
+        Object bancontact,
+        Object card,
+        Map<String, Object> extraParams,
+        Object sofort) {
       this.alipay = alipay;
       this.bancontact = bancontact;
       this.card = card;
       this.extraParams = extraParams;
+      this.sofort = sofort;
     }
 
     public static Builder builder() {
@@ -2392,9 +2525,12 @@ public class PaymentIntentConfirmParams extends ApiRequestParams {
 
       private Map<String, Object> extraParams;
 
+      private Object sofort;
+
       /** Finalize and obtain parameter instance from this builder. */
       public PaymentMethodOptions build() {
-        return new PaymentMethodOptions(this.alipay, this.bancontact, this.card, this.extraParams);
+        return new PaymentMethodOptions(
+            this.alipay, this.bancontact, this.card, this.extraParams, this.sofort);
       }
 
       /**
@@ -2469,6 +2605,24 @@ public class PaymentIntentConfirmParams extends ApiRequestParams {
           this.extraParams = new HashMap<>();
         }
         this.extraParams.putAll(map);
+        return this;
+      }
+
+      /**
+       * If this is a {@code sofort} PaymentMethod, this sub-hash contains details about the SOFORT
+       * payment method options.
+       */
+      public Builder setSofort(Sofort sofort) {
+        this.sofort = sofort;
+        return this;
+      }
+
+      /**
+       * If this is a {@code sofort} PaymentMethod, this sub-hash contains details about the SOFORT
+       * payment method options.
+       */
+      public Builder setSofort(EmptyParam sofort) {
+        this.sofort = sofort;
         return this;
       }
     }
@@ -3082,6 +3236,104 @@ public class PaymentIntentConfirmParams extends ApiRequestParams {
         private final String value;
 
         RequestThreeDSecure(String value) {
+          this.value = value;
+        }
+      }
+    }
+
+    @Getter
+    public static class Sofort {
+      /**
+       * Map of extra parameters for custom features not available in this client library. The
+       * content in this map is not serialized under this field's {@code @SerializedName} value.
+       * Instead, each key/value pair is serialized as if the key is a root-level field (serialized)
+       * name in this param object. Effectively, this map is flattened to its parent instance.
+       */
+      @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
+      Map<String, Object> extraParams;
+
+      @SerializedName("preferred_language")
+      PreferredLanguage preferredLanguage;
+
+      private Sofort(Map<String, Object> extraParams, PreferredLanguage preferredLanguage) {
+        this.extraParams = extraParams;
+        this.preferredLanguage = preferredLanguage;
+      }
+
+      public static Builder builder() {
+        return new Builder();
+      }
+
+      public static class Builder {
+        private Map<String, Object> extraParams;
+
+        private PreferredLanguage preferredLanguage;
+
+        /** Finalize and obtain parameter instance from this builder. */
+        public Sofort build() {
+          return new Sofort(this.extraParams, this.preferredLanguage);
+        }
+
+        /**
+         * Add a key/value pair to `extraParams` map. A map is initialized for the first
+         * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
+         * map. See {@link PaymentIntentConfirmParams.PaymentMethodOptions.Sofort#extraParams} for
+         * the field documentation.
+         */
+        public Builder putExtraParam(String key, Object value) {
+          if (this.extraParams == null) {
+            this.extraParams = new HashMap<>();
+          }
+          this.extraParams.put(key, value);
+          return this;
+        }
+
+        /**
+         * Add all map key/value pairs to `extraParams` map. A map is initialized for the first
+         * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
+         * map. See {@link PaymentIntentConfirmParams.PaymentMethodOptions.Sofort#extraParams} for
+         * the field documentation.
+         */
+        public Builder putAllExtraParam(Map<String, Object> map) {
+          if (this.extraParams == null) {
+            this.extraParams = new HashMap<>();
+          }
+          this.extraParams.putAll(map);
+          return this;
+        }
+
+        public Builder setPreferredLanguage(PreferredLanguage preferredLanguage) {
+          this.preferredLanguage = preferredLanguage;
+          return this;
+        }
+      }
+
+      public enum PreferredLanguage implements ApiRequestParams.EnumParam {
+        @SerializedName("de")
+        DE("de"),
+
+        @SerializedName("en")
+        EN("en"),
+
+        @SerializedName("es")
+        ES("es"),
+
+        @SerializedName("fr")
+        FR("fr"),
+
+        @SerializedName("it")
+        IT("it"),
+
+        @SerializedName("nl")
+        NL("nl"),
+
+        @SerializedName("pl")
+        PL("pl");
+
+        @Getter(onMethod_ = {@Override})
+        private final String value;
+
+        PreferredLanguage(String value) {
           this.value = value;
         }
       }

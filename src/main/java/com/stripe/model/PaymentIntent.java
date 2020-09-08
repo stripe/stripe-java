@@ -49,9 +49,9 @@ public class PaymentIntent extends ApiResource implements HasId, MetadataStore<P
   ExpandableField<Application> application;
 
   /**
-   * The amount of the application fee (if any) for the resulting payment. See the PaymentIntents <a
-   * href="https://stripe.com/docs/payments/connected-accounts">use case for connected accounts</a>
-   * for details.
+   * The amount of the application fee (if any) requested for the resulting payment. See the
+   * PaymentIntents <a href="https://stripe.com/docs/payments/connected-accounts">use case for
+   * connected accounts</a> for details.
    */
   @SerializedName("application_fee_amount")
   Long applicationFeeAmount;
@@ -1133,6 +1133,9 @@ public class PaymentIntent extends ApiResource implements HasId, MetadataStore<P
     @SerializedName("card")
     Card card;
 
+    @SerializedName("sofort")
+    Sofort sofort;
+
     @Getter
     @Setter
     @EqualsAndHashCode(callSuper = false)
@@ -1226,6 +1229,20 @@ public class PaymentIntent extends ApiResource implements HasId, MetadataStore<P
           String type;
         }
       }
+    }
+
+    @Getter
+    @Setter
+    @EqualsAndHashCode(callSuper = false)
+    public static class Sofort extends StripeObject {
+      /**
+       * Preferred language of the SOFORT authorization page that the customer is redirected to.
+       *
+       * <p>One of {@code de}, {@code en}, {@code es}, {@code fr}, {@code it}, {@code nl}, or {@code
+       * pl}.
+       */
+      @SerializedName("preferred_language")
+      String preferredLanguage;
     }
   }
 

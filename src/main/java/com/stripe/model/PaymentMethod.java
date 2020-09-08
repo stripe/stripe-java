@@ -105,13 +105,16 @@ public class PaymentMethod extends ApiResource implements HasId, MetadataStore<P
   @SerializedName("sepa_debit")
   SepaDebit sepaDebit;
 
+  @SerializedName("sofort")
+  Sofort sofort;
+
   /**
    * The type of the PaymentMethod. An additional hash is included on the PaymentMethod with a name
    * matching this value. It contains additional information specific to the PaymentMethod type.
    *
    * <p>One of {@code alipay}, {@code au_becs_debit}, {@code bacs_debit}, {@code bancontact}, {@code
-   * card}, {@code eps}, {@code fpx}, {@code giropay}, {@code ideal}, {@code p24}, or {@code
-   * sepa_debit}.
+   * card}, {@code eps}, {@code fpx}, {@code giropay}, {@code ideal}, {@code p24}, {@code
+   * sepa_debit}, or {@code sofort}.
    */
   @SerializedName("type")
   String type;
@@ -833,5 +836,14 @@ public class PaymentMethod extends ApiResource implements HasId, MetadataStore<P
     /** Last four characters of the IBAN. */
     @SerializedName("last4")
     String last4;
+  }
+
+  @Getter
+  @Setter
+  @EqualsAndHashCode(callSuper = false)
+  public static class Sofort extends StripeObject {
+    /** Two-letter ISO code representing the country the bank account is located in. */
+    @SerializedName("country")
+    String country;
   }
 }

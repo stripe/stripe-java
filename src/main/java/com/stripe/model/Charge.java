@@ -60,7 +60,7 @@ public class Charge extends ApiResource implements MetadataStore<Charge>, Balanc
   ExpandableField<ApplicationFee> applicationFee;
 
   /**
-   * The amount of the application fee (if any) for the charge. <a
+   * The amount of the application fee (if any) requested for the charge. <a
    * href="https://stripe.com/docs/connect/direct-charges#collecting-fees">See the Connect
    * documentation</a> for details.
    */
@@ -2039,6 +2039,14 @@ public class Charge extends ApiResource implements MetadataStore<Charge>, Balanc
       /** Last four characters of the IBAN. */
       @SerializedName("iban_last4")
       String ibanLast4;
+
+      /**
+       * Preferred language of the SOFORT authorization page that the customer is redirected to. Can
+       * be one of {@code de}, {@code en}, {@code es}, {@code fr}, {@code it}, {@code nl}, or {@code
+       * pl}
+       */
+      @SerializedName("preferred_language")
+      String preferredLanguage;
 
       /**
        * Owner's verified full name. Values are verified or provided by SOFORT directly (if
