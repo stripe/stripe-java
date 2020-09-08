@@ -1,5 +1,8 @@
 # Changelog
 
+## 20.3.0 - 2020-09-08
+* [#1096](https://github.com/stripe/stripe-java/pull/1096) Add support for Sofort on `PaymentMethod` and `PaymentIntent`
+
 ## 20.2.0 - 2020-09-02
 * [#1092](https://github.com/stripe/stripe-java/pull/1092) Multiple API changes
   * Improve support for the Issuing `Dispute` APIs. Added the Submit API, missing parameters on creation, update and list and returned evidence details
