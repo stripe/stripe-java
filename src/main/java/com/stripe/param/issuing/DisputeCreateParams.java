@@ -12,7 +12,7 @@ import lombok.Getter;
 
 @Getter
 public class DisputeCreateParams extends ApiRequestParams {
-  /** A hash containing all the evidence related to the dispute. */
+  /** Evidence provided for the dispute. */
   @SerializedName("evidence")
   Evidence evidence;
 
@@ -76,7 +76,7 @@ public class DisputeCreateParams extends ApiRequestParams {
           this.evidence, this.expand, this.extraParams, this.metadata, this.transaction);
     }
 
-    /** A hash containing all the evidence related to the dispute. */
+    /** Evidence provided for the dispute. */
     public Builder setEvidence(Evidence evidence) {
       this.evidence = evidence;
       return this;

@@ -443,6 +443,9 @@ public class WebhookEndpointUpdateParams extends ApiRequestParams {
     @SerializedName("invoice.payment_failed")
     INVOICE__PAYMENT_FAILED("invoice.payment_failed"),
 
+    @SerializedName("invoice.payment_succeeded")
+    INVOICE__PAYMENT_SUCCEEDED("invoice.payment_succeeded"),
+
     @SerializedName("invoice.sent")
     INVOICE__SENT("invoice.sent"),
 

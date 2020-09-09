@@ -43,7 +43,10 @@ public class TaxRateUpdateParams extends ApiRequestParams {
   @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
   Map<String, Object> extraParams;
 
-  /** The jurisdiction for the tax rate. */
+  /**
+   * The jurisdiction for the tax rate. You can use this label field for tax reporting purposes. It
+   * also appears on your customer’s invoice.
+   */
   @SerializedName("jurisdiction")
   Object jurisdiction;
 
@@ -196,13 +199,19 @@ public class TaxRateUpdateParams extends ApiRequestParams {
       return this;
     }
 
-    /** The jurisdiction for the tax rate. */
+    /**
+     * The jurisdiction for the tax rate. You can use this label field for tax reporting purposes.
+     * It also appears on your customer’s invoice.
+     */
     public Builder setJurisdiction(String jurisdiction) {
       this.jurisdiction = jurisdiction;
       return this;
     }
 
-    /** The jurisdiction for the tax rate. */
+    /**
+     * The jurisdiction for the tax rate. You can use this label field for tax reporting purposes.
+     * It also appears on your customer’s invoice.
+     */
     public Builder setJurisdiction(EmptyParam jurisdiction) {
       this.jurisdiction = jurisdiction;
       return this;

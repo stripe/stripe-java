@@ -64,8 +64,8 @@ public class AccountUpdateParams extends ApiRequestParams {
 
   /**
    * A card or bank account to attach to the account for receiving <a
-   * href="https://stripe.com/docs/connect/payouts">payouts</a> (you won’t be able to use it for
-   * top-ups). You can provide either a token, like the ones returned by <a
+   * href="https://stripe.com/docs/connect/bank-debit-card-payouts">payouts</a> (you won’t be able
+   * to use it for top-ups). You can provide either a token, like the ones returned by <a
    * href="https://stripe.com/docs/stripe.js">Stripe.js</a>, or a dictionary, as documented in the
    * {@code external_account} parameter for <a
    * href="https://stripe.com/docs/api#account_create_bank_account">bank account</a> creation.
@@ -325,8 +325,8 @@ public class AccountUpdateParams extends ApiRequestParams {
 
     /**
      * A card or bank account to attach to the account for receiving <a
-     * href="https://stripe.com/docs/connect/payouts">payouts</a> (you won’t be able to use it for
-     * top-ups). You can provide either a token, like the ones returned by <a
+     * href="https://stripe.com/docs/connect/bank-debit-card-payouts">payouts</a> (you won’t be able
+     * to use it for top-ups). You can provide either a token, like the ones returned by <a
      * href="https://stripe.com/docs/stripe.js">Stripe.js</a>, or a dictionary, as documented in the
      * {@code external_account} parameter for <a
      * href="https://stripe.com/docs/api#account_create_bank_account">bank account</a> creation.
@@ -342,8 +342,8 @@ public class AccountUpdateParams extends ApiRequestParams {
 
     /**
      * A card or bank account to attach to the account for receiving <a
-     * href="https://stripe.com/docs/connect/payouts">payouts</a> (you won’t be able to use it for
-     * top-ups). You can provide either a token, like the ones returned by <a
+     * href="https://stripe.com/docs/connect/bank-debit-card-payouts">payouts</a> (you won’t be able
+     * to use it for top-ups). You can provide either a token, like the ones returned by <a
      * href="https://stripe.com/docs/stripe.js">Stripe.js</a>, or a dictionary, as documented in the
      * {@code external_account} parameter for <a
      * href="https://stripe.com/docs/api#account_create_bank_account">bank account</a> creation.
