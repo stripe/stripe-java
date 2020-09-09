@@ -1,5 +1,8 @@
 # Changelog
 
+## 20.3.1 - 2020-09-09
+* [#1095](https://github.com/stripe/stripe-java/pull/1095) OAuth.deauthorize no longer mutates params
+
 ## 20.3.0 - 2020-09-08
 * [#1096](https://github.com/stripe/stripe-java/pull/1096) Add support for Sofort on `PaymentMethod` and `PaymentIntent`
 
