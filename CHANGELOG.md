@@ -1,7 +1,7 @@
 # Changelog
 
 ## 20.3.2 - 2020-09-09
-* [#999](https://github.com/stripe/stripe-java/pull/999) DESCRIBE CHANGES HERE (try to use the same style, tense, etc. as the other entries)
+* Increase `delayBetweenRetriesInMillis` deploy property from default of 2000 to 4000 to help mitigate close timeouts
 
 ## 20.3.1 - 2020-09-09
 * [#1095](https://github.com/stripe/stripe-java/pull/1095) OAuth.deauthorize no longer mutates params
