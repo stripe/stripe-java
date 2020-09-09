@@ -6,6 +6,7 @@ import com.stripe.exception.InvalidRequestException;
 import com.stripe.exception.StripeException;
 import com.stripe.model.oauth.DeauthorizedAccount;
 import com.stripe.model.oauth.TokenResponse;
+import java.util.HashMap;
 import java.util.Map;
 
 public final class OAuth {
@@ -59,8 +60,11 @@ public final class OAuth {
    */
   public static DeauthorizedAccount deauthorize(Map<String, Object> params, RequestOptions options)
       throws StripeException {
+    Map<String, Object> paramsCopy = new HashMap<>();
+    paramsCopy.putAll(params);
+
     String url = Stripe.getConnectBase() + "/oauth/deauthorize";
-    params.put("client_id", getClientId(params, options));
+    paramsCopy.put("client_id", getClientId(paramsCopy, options));
     return OAuth.stripeResponseGetter.oauthRequest(
         ApiResource.RequestMethod.POST, url, params, DeauthorizedAccount.class, options);
   }

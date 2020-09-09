@@ -1,6 +1,7 @@
 package com.stripe.net;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNull;
 
 import com.stripe.BaseStripeTest;
 import com.stripe.exception.AuthenticationException;
@@ -92,6 +93,7 @@ public class OAuthTest extends BaseStripeTest {
 
     final DeauthorizedAccount account = OAuth.deauthorize(deauthParams, null);
 
+    assertNull(deauthParams.get("client_id"));
     assertEquals("acct_test_deauth", account.getStripeUserId());
   }
 }
