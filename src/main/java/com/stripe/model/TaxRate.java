@@ -54,7 +54,10 @@ public class TaxRate extends ApiResource implements HasId, MetadataStore<TaxRate
   @SerializedName("inclusive")
   Boolean inclusive;
 
-  /** The jurisdiction for the tax rate. */
+  /**
+   * The jurisdiction for the tax rate. You can use this label field for tax reporting purposes. It
+   * also appears on your customer’s invoice.
+   */
   @SerializedName("jurisdiction")
   String jurisdiction;
 

@@ -47,7 +47,10 @@ public class TaxRateCreateParams extends ApiRequestParams {
   @SerializedName("inclusive")
   Boolean inclusive;
 
-  /** The jurisdiction for the tax rate. */
+  /**
+   * The jurisdiction for the tax rate. You can use this label field for tax reporting purposes. It
+   * also appears on your customer’s invoice.
+   */
   @SerializedName("jurisdiction")
   String jurisdiction;
 
@@ -205,7 +208,10 @@ public class TaxRateCreateParams extends ApiRequestParams {
       return this;
     }
 
-    /** The jurisdiction for the tax rate. */
+    /**
+     * The jurisdiction for the tax rate. You can use this label field for tax reporting purposes.
+     * It also appears on your customer’s invoice.
+     */
     public Builder setJurisdiction(String jurisdiction) {
       this.jurisdiction = jurisdiction;
       return this;

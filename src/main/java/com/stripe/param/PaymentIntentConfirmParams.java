@@ -3252,6 +3252,7 @@ public class PaymentIntentConfirmParams extends ApiRequestParams {
       @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
       Map<String, Object> extraParams;
 
+      /** Language shown to the payer on redirect. */
       @SerializedName("preferred_language")
       PreferredLanguage preferredLanguage;
 
@@ -3302,6 +3303,7 @@ public class PaymentIntentConfirmParams extends ApiRequestParams {
           return this;
         }
 
+        /** Language shown to the payer on redirect. */
         public Builder setPreferredLanguage(PreferredLanguage preferredLanguage) {
           this.preferredLanguage = preferredLanguage;
           return this;

@@ -235,7 +235,10 @@ public class PaymentMethodListParams extends ApiRequestParams {
     P24("p24"),
 
     @SerializedName("sepa_debit")
-    SEPA_DEBIT("sepa_debit");
+    SEPA_DEBIT("sepa_debit"),
+
+    @SerializedName("sofort")
+    SOFORT("sofort");
 
     @Getter(onMethod_ = {@Override})
     private final String value;
