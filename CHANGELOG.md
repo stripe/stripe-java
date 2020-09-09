@@ -1,5 +1,10 @@
 # Changelog
 
+## 20.4.0 - 2020-09-09
+* [#1098](https://github.com/stripe/stripe-java/pull/1098) Multiple API changes
+  * Add support for `sofort` as a `type` on the List PaymentMethods API
+  * Add back support for `invoice.payment_succeeded`
+
 ## 20.3.2 - 2020-09-09
 * Increase `delayBetweenRetriesInMillis` deploy property from default of 2000 to 4000 to help mitigate close timeouts
 
