@@ -3589,6 +3589,9 @@ public class SessionCreateParams extends ApiRequestParams {
     @SerializedName("p24")
     P24("p24"),
 
+    @SerializedName("sepa_debit")
+    SEPA_DEBIT("sepa_debit"),
+
     @SerializedName("sofort")
     SOFORT("sofort");
 
