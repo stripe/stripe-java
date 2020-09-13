@@ -917,6 +917,12 @@ public class WebhookEndpointCreateParams extends ApiRequestParams {
     @SerializedName("product.updated")
     PRODUCT__UPDATED("product.updated"),
 
+    @SerializedName("promotion_code.created")
+    PROMOTION_CODE__CREATED("promotion_code.created"),
+
+    @SerializedName("promotion_code.updated")
+    PROMOTION_CODE__UPDATED("promotion_code.updated"),
+
     @SerializedName("radar.early_fraud_warning.created")
     RADAR__EARLY_FRAUD_WARNING__CREATED("radar.early_fraud_warning.created"),
 
