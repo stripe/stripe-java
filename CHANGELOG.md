@@ -1,5 +1,10 @@
 # Changelog
 
+## 20.7.0 - 2020-09-21
+* [#1106](https://github.com/stripe/stripe-java/pull/1106) Multiple API changes
+  * Add support for `amount_captured` on `Charge`
+  * Add `checkout_session` on `Discount`
+
 ## 20.6.0 - 2020-09-13
 * [#1102](https://github.com/stripe/stripe-java/pull/1102) Add support for `promotion_code.created` and `promotion_code.updated` on `Event`
 
