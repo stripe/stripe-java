@@ -151,9 +151,8 @@ public class SessionCreateParams extends ApiRequestParams {
 
   /**
    * The URL to which Stripe should send customers when payment or setup is complete. If you’d like
-   * access to the Checkout Session for the successful payment, read more about it in our guide on
-   * <a href="https://stripe.com/docs/payments/checkout/accept-a-payment#payment-success">fulfilling
-   * your payments with webhooks</a>.
+   * access to the Checkout Session for the successful payment, read more about it in the guide on
+   * <a href="https://stripe.com/docs/payments/checkout/fulfill-orders">fulfilling orders</a>.
    */
   @SerializedName("success_url")
   String successUrl;
@@ -517,10 +516,9 @@ public class SessionCreateParams extends ApiRequestParams {
 
     /**
      * The URL to which Stripe should send customers when payment or setup is complete. If you’d
-     * like access to the Checkout Session for the successful payment, read more about it in our
-     * guide on <a
-     * href="https://stripe.com/docs/payments/checkout/accept-a-payment#payment-success">fulfilling
-     * your payments with webhooks</a>.
+     * like access to the Checkout Session for the successful payment, read more about it in the
+     * guide on <a href="https://stripe.com/docs/payments/checkout/fulfill-orders">fulfilling
+     * orders</a>.
      */
     public Builder setSuccessUrl(String successUrl) {
       this.successUrl = successUrl;

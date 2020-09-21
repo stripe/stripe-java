@@ -2806,7 +2806,7 @@ public class TokenCreateParams extends ApiRequestParams {
 
     /**
      * The currency the bank account is in. This must be a country/currency pairing that <a
-     * href="docs/payouts">Stripe supports.</a>
+     * href="https://stripe.com/docs/payouts">Stripe supports.</a>
      */
     @SerializedName("currency")
     String currency;
@@ -2909,7 +2909,7 @@ public class TokenCreateParams extends ApiRequestParams {
 
       /**
        * The currency the bank account is in. This must be a country/currency pairing that <a
-       * href="docs/payouts">Stripe supports.</a>
+       * href="https://stripe.com/docs/payouts">Stripe supports.</a>
        */
       public Builder setCurrency(String currency) {
         this.currency = currency;

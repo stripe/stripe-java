@@ -192,16 +192,16 @@ public class SubscriptionSchedule extends ApiResource
   }
 
   /**
-   * Creates a new subscription schedule object. Each customer can have up to 25 active or scheduled
-   * subscriptions.
+   * Creates a new subscription schedule object. Each customer can have up to 500 active or
+   * scheduled subscriptions.
    */
   public static SubscriptionSchedule create(Map<String, Object> params) throws StripeException {
     return create(params, (RequestOptions) null);
   }
 
   /**
-   * Creates a new subscription schedule object. Each customer can have up to 25 active or scheduled
-   * subscriptions.
+   * Creates a new subscription schedule object. Each customer can have up to 500 active or
+   * scheduled subscriptions.
    */
   public static SubscriptionSchedule create(Map<String, Object> params, RequestOptions options)
       throws StripeException {
@@ -211,8 +211,8 @@ public class SubscriptionSchedule extends ApiResource
   }
 
   /**
-   * Creates a new subscription schedule object. Each customer can have up to 25 active or scheduled
-   * subscriptions.
+   * Creates a new subscription schedule object. Each customer can have up to 500 active or
+   * scheduled subscriptions.
    */
   public static SubscriptionSchedule create(SubscriptionScheduleCreateParams params)
       throws StripeException {
@@ -220,8 +220,8 @@ public class SubscriptionSchedule extends ApiResource
   }
 
   /**
-   * Creates a new subscription schedule object. Each customer can have up to 25 active or scheduled
-   * subscriptions.
+   * Creates a new subscription schedule object. Each customer can have up to 500 active or
+   * scheduled subscriptions.
    */
   public static SubscriptionSchedule create(
       SubscriptionScheduleCreateParams params, RequestOptions options) throws StripeException {
