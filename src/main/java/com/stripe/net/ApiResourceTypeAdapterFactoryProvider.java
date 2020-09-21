@@ -1,3 +1,4 @@
+// File generated from our OpenAPI spec
 package com.stripe.net;
 
 import com.google.gson.TypeAdapterFactory;
