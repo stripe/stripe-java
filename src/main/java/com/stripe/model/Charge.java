@@ -37,6 +37,13 @@ public class Charge extends ApiResource implements MetadataStore<Charge>, Balanc
   Long amount;
 
   /**
+   * Amount in %s captured (can be less than the amount attribute on the charge if a partial capture
+   * was made).
+   */
+  @SerializedName("amount_captured")
+  Long amountCaptured;
+
+  /**
    * Amount in %s refunded (can be less than the amount attribute on the charge if a partial refund
    * was issued).
    */

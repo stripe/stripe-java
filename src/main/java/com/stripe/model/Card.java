@@ -88,8 +88,9 @@ public class Card extends ApiResource
   String country;
 
   /**
-   * Three-letter <a href="https://www.iso.org/iso-4217-currency-codes.html">ISO currency code</a>,
-   * in lowercase. Must be a <a href="https://stripe.com/docs/currencies">supported currency</a>.
+   * Three-letter <a href="https://stripe.com/docs/payouts">ISO code for currency</a>. Only
+   * applicable on accounts (not customers or recipients). The card can be used as a transfer
+   * destination for funds in this currency.
    */
   @SerializedName("currency")
   String currency;

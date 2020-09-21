@@ -11,6 +11,13 @@ import lombok.Setter;
 @EqualsAndHashCode(callSuper = false)
 public class Discount extends StripeObject implements HasId {
   /**
+   * The Checkout session that this coupon is applied to, if it is applied to a particular session
+   * in payment mode. Will not be present for subscription mode.
+   */
+  @SerializedName("checkout_session")
+  String checkoutSession;
+
+  /**
    * A coupon contains information about a percent-off or amount-off discount you might want to
    * apply to a customer. Coupons may be applied to <a
    * href="https://stripe.com/docs/api#invoices">invoices</a> or <a
