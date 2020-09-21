@@ -1,3 +1,4 @@
+// File generated from our OpenAPI spec
 package com.stripe.model;
 
 import com.google.gson.annotations.SerializedName;
@@ -430,7 +431,7 @@ public class Subscription extends ApiResource implements HasId, MetadataStore<Su
   }
 
   /**
-   * Creates a new subscription on an existing customer. Each customer can have up to 25 active or
+   * Creates a new subscription on an existing customer. Each customer can have up to 500 active or
    * scheduled subscriptions.
    */
   public static Subscription create(Map<String, Object> params) throws StripeException {
@@ -438,7 +439,7 @@ public class Subscription extends ApiResource implements HasId, MetadataStore<Su
   }
 
   /**
-   * Creates a new subscription on an existing customer. Each customer can have up to 25 active or
+   * Creates a new subscription on an existing customer. Each customer can have up to 500 active or
    * scheduled subscriptions.
    */
   public static Subscription create(Map<String, Object> params, RequestOptions options)
@@ -449,7 +450,7 @@ public class Subscription extends ApiResource implements HasId, MetadataStore<Su
   }
 
   /**
-   * Creates a new subscription on an existing customer. Each customer can have up to 25 active or
+   * Creates a new subscription on an existing customer. Each customer can have up to 500 active or
    * scheduled subscriptions.
    */
   public static Subscription create(SubscriptionCreateParams params) throws StripeException {
@@ -457,7 +458,7 @@ public class Subscription extends ApiResource implements HasId, MetadataStore<Su
   }
 
   /**
-   * Creates a new subscription on an existing customer. Each customer can have up to 25 active or
+   * Creates a new subscription on an existing customer. Each customer can have up to 500 active or
    * scheduled subscriptions.
    */
   public static Subscription create(SubscriptionCreateParams params, RequestOptions options)
