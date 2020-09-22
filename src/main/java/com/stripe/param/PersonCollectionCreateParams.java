@@ -1,3 +1,4 @@
+// File generated from our OpenAPI spec
 package com.stripe.param;
 
 import com.google.gson.annotations.SerializedName;
