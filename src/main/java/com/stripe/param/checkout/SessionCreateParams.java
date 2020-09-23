@@ -847,16 +847,15 @@ public class SessionCreateParams extends ApiRequestParams {
       Recurring recurring;
 
       /**
-       * A positive integer in %s representing how much to charge. One of {@code unit_amount} or
+       * A non-negative integer in %s representing how much to charge. One of {@code unit_amount} or
        * {@code unit_amount_decimal} is required.
        */
       @SerializedName("unit_amount")
       Long unitAmount;
 
       /**
-       * Same as {@code unit_amount}, but accepts a decimal value with at most 12 decimal places.
-       * Only one of {@code unit_amount} and {@code unit_amount_decimal} can be set, but at least
-       * one is required.
+       * Same as {@code unit_amount}, but accepts a decimal value in %s with at most 12 decimal
+       * places. Only one of {@code unit_amount} and {@code unit_amount_decimal} can be set.
        */
       @SerializedName("unit_amount_decimal")
       BigDecimal unitAmountDecimal;
@@ -972,8 +971,8 @@ public class SessionCreateParams extends ApiRequestParams {
         }
 
         /**
-         * A positive integer in %s representing how much to charge. One of {@code unit_amount} or
-         * {@code unit_amount_decimal} is required.
+         * A non-negative integer in %s representing how much to charge. One of {@code unit_amount}
+         * or {@code unit_amount_decimal} is required.
          */
         public Builder setUnitAmount(Long unitAmount) {
           this.unitAmount = unitAmount;
@@ -981,9 +980,8 @@ public class SessionCreateParams extends ApiRequestParams {
         }
 
         /**
-         * Same as {@code unit_amount}, but accepts a decimal value with at most 12 decimal places.
-         * Only one of {@code unit_amount} and {@code unit_amount_decimal} can be set, but at least
-         * one is required.
+         * Same as {@code unit_amount}, but accepts a decimal value in %s with at most 12 decimal
+         * places. Only one of {@code unit_amount} and {@code unit_amount_decimal} can be set.
          */
         public Builder setUnitAmountDecimal(BigDecimal unitAmountDecimal) {
           this.unitAmountDecimal = unitAmountDecimal;

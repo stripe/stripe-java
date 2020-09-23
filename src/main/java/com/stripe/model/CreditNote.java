@@ -22,10 +22,7 @@ import lombok.Setter;
 @Setter
 @EqualsAndHashCode(callSuper = false)
 public class CreditNote extends ApiResource implements HasId, MetadataStore<CreditNote> {
-  /**
-   * The integer amount in <strong>%s</strong> representing the total amount of the credit note,
-   * including tax.
-   */
+  /** The integer amount in %s representing the total amount of the credit note, including tax. */
   @SerializedName("amount")
   Long amount;
 
@@ -52,10 +49,7 @@ public class CreditNote extends ApiResource implements HasId, MetadataStore<Cred
   @Setter(lombok.AccessLevel.NONE)
   ExpandableField<CustomerBalanceTransaction> customerBalanceTransaction;
 
-  /**
-   * The integer amount in <strong>%s</strong> representing the total amount of discount that was
-   * credited.
-   */
+  /** The integer amount in %s representing the total amount of discount that was credited. */
   @SerializedName("discount_amount")
   Long discountAmount;
 
@@ -142,8 +136,8 @@ public class CreditNote extends ApiResource implements HasId, MetadataStore<Cred
   String status;
 
   /**
-   * The integer amount in <strong>%s</strong> representing the amount of the credit note, excluding
-   * tax and invoice level discounts.
+   * The integer amount in %s representing the amount of the credit note, excluding tax and invoice
+   * level discounts.
    */
   @SerializedName("subtotal")
   Long subtotal;
@@ -153,8 +147,8 @@ public class CreditNote extends ApiResource implements HasId, MetadataStore<Cred
   List<CreditNote.TaxAmount> taxAmounts;
 
   /**
-   * The integer amount in <strong>%s</strong> representing the total amount of the credit note,
-   * including tax and all discount.
+   * The integer amount in %s representing the total amount of the credit note, including tax and
+   * all discount.
    */
   @SerializedName("total")
   Long total;

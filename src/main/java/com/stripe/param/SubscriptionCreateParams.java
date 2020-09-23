@@ -99,16 +99,23 @@ public class SubscriptionCreateParams extends ApiRequestParams {
 
   /**
    * ID of the default payment method for the subscription. It must belong to the customer
-   * associated with the subscription. If not set, invoices will use the default payment method in
-   * the customer's invoice settings.
+   * associated with the subscription. This takes precedence over {@code default_source}. If neither
+   * are set, invoices will use the customer's <a
+   * href="https://stripe.com/docs/api/customers/object#customer_object-invoice_settings-default_payment_method">invoice_settings.default_payment_method</a>
+   * or <a
+   * href="https://stripe.com/docs/api/customers/object#customer_object-default_source">default_source</a>.
    */
   @SerializedName("default_payment_method")
   String defaultPaymentMethod;
 
   /**
    * ID of the default payment source for the subscription. It must belong to the customer
-   * associated with the subscription and be in a chargeable state. If not set, defaults to the
-   * customer's default source.
+   * associated with the subscription and be in a chargeable state. If {@code
+   * default_payment_method} is also set, {@code default_payment_method} will take precedence. If
+   * neither are set, invoices will use the customer's <a
+   * href="https://stripe.com/docs/api/customers/object#customer_object-invoice_settings-default_payment_method">invoice_settings.default_payment_method</a>
+   * or <a
+   * href="https://stripe.com/docs/api/customers/object#customer_object-default_source">default_source</a>.
    */
   @SerializedName("default_source")
   String defaultSource;
@@ -514,8 +521,11 @@ public class SubscriptionCreateParams extends ApiRequestParams {
 
     /**
      * ID of the default payment method for the subscription. It must belong to the customer
-     * associated with the subscription. If not set, invoices will use the default payment method in
-     * the customer's invoice settings.
+     * associated with the subscription. This takes precedence over {@code default_source}. If
+     * neither are set, invoices will use the customer's <a
+     * href="https://stripe.com/docs/api/customers/object#customer_object-invoice_settings-default_payment_method">invoice_settings.default_payment_method</a>
+     * or <a
+     * href="https://stripe.com/docs/api/customers/object#customer_object-default_source">default_source</a>.
      */
     public Builder setDefaultPaymentMethod(String defaultPaymentMethod) {
       this.defaultPaymentMethod = defaultPaymentMethod;
@@ -524,8 +534,12 @@ public class SubscriptionCreateParams extends ApiRequestParams {
 
     /**
      * ID of the default payment source for the subscription. It must belong to the customer
-     * associated with the subscription and be in a chargeable state. If not set, defaults to the
-     * customer's default source.
+     * associated with the subscription and be in a chargeable state. If {@code
+     * default_payment_method} is also set, {@code default_payment_method} will take precedence. If
+     * neither are set, invoices will use the customer's <a
+     * href="https://stripe.com/docs/api/customers/object#customer_object-invoice_settings-default_payment_method">invoice_settings.default_payment_method</a>
+     * or <a
+     * href="https://stripe.com/docs/api/customers/object#customer_object-default_source">default_source</a>.
      */
     public Builder setDefaultSource(String defaultSource) {
       this.defaultSource = defaultSource;
@@ -964,9 +978,8 @@ public class SubscriptionCreateParams extends ApiRequestParams {
       Long unitAmount;
 
       /**
-       * Same as {@code unit_amount}, but accepts a decimal value with at most 12 decimal places.
-       * Only one of {@code unit_amount} and {@code unit_amount_decimal} can be set, but at least
-       * one is required.
+       * Same as {@code unit_amount}, but accepts a decimal value in %s with at most 12 decimal
+       * places. Only one of {@code unit_amount} and {@code unit_amount_decimal} can be set.
        */
       @SerializedName("unit_amount_decimal")
       BigDecimal unitAmountDecimal;
@@ -1060,9 +1073,8 @@ public class SubscriptionCreateParams extends ApiRequestParams {
         }
 
         /**
-         * Same as {@code unit_amount}, but accepts a decimal value with at most 12 decimal places.
-         * Only one of {@code unit_amount} and {@code unit_amount_decimal} can be set, but at least
-         * one is required.
+         * Same as {@code unit_amount}, but accepts a decimal value in %s with at most 12 decimal
+         * places. Only one of {@code unit_amount} and {@code unit_amount_decimal} can be set.
          */
         public Builder setUnitAmountDecimal(BigDecimal unitAmountDecimal) {
           this.unitAmountDecimal = unitAmountDecimal;
@@ -1527,9 +1539,8 @@ public class SubscriptionCreateParams extends ApiRequestParams {
       Long unitAmount;
 
       /**
-       * Same as {@code unit_amount}, but accepts a decimal value with at most 12 decimal places.
-       * Only one of {@code unit_amount} and {@code unit_amount_decimal} can be set, but at least
-       * one is required.
+       * Same as {@code unit_amount}, but accepts a decimal value in %s with at most 12 decimal
+       * places. Only one of {@code unit_amount} and {@code unit_amount_decimal} can be set.
        */
       @SerializedName("unit_amount_decimal")
       BigDecimal unitAmountDecimal;
@@ -1634,9 +1645,8 @@ public class SubscriptionCreateParams extends ApiRequestParams {
         }
 
         /**
-         * Same as {@code unit_amount}, but accepts a decimal value with at most 12 decimal places.
-         * Only one of {@code unit_amount} and {@code unit_amount_decimal} can be set, but at least
-         * one is required.
+         * Same as {@code unit_amount}, but accepts a decimal value in %s with at most 12 decimal
+         * places. Only one of {@code unit_amount} and {@code unit_amount_decimal} can be set.
          */
         public Builder setUnitAmountDecimal(BigDecimal unitAmountDecimal) {
           this.unitAmountDecimal = unitAmountDecimal;
