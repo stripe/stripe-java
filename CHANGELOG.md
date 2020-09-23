@@ -1,5 +1,10 @@
 # Changelog
 
+## 20.8.0 - 2020-09-23
+* [#1109](https://github.com/stripe/stripe-java/pull/1109) Multiple API changes
+  * Add support for `issuing_dispute.closed` and `issuing_dispute.submitted` events
+  * Add support for `instant_available` on `Balance`
+
 ## 20.7.0 - 2020-09-21
 * [#1106](https://github.com/stripe/stripe-java/pull/1106) Multiple API changes
   * Add support for `amount_captured` on `Charge`
