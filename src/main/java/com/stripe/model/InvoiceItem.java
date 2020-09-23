@@ -145,7 +145,7 @@ public class InvoiceItem extends ApiResource implements HasId, MetadataStore<Inv
   @SerializedName("tax_rates")
   List<TaxRate> taxRates;
 
-  /** Unit Amount (in the {@code currency} specified) of the invoice item. */
+  /** Unit amount (in the {@code currency} specified) of the invoice item. */
   @SerializedName("unit_amount")
   Long unitAmount;
 

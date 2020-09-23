@@ -107,8 +107,11 @@ public class Subscription extends ApiResource implements HasId, MetadataStore<Su
 
   /**
    * ID of the default payment method for the subscription. It must belong to the customer
-   * associated with the subscription. If not set, invoices will use the default payment method in
-   * the customer's invoice settings.
+   * associated with the subscription. This takes precedence over {@code default_source}. If neither
+   * are set, invoices will use the customer's <a
+   * href="https://stripe.com/docs/api/customers/object#customer_object-invoice_settings-default_payment_method">invoice_settings.default_payment_method</a>
+   * or <a
+   * href="https://stripe.com/docs/api/customers/object#customer_object-default_source">default_source</a>.
    */
   @SerializedName("default_payment_method")
   @Getter(lombok.AccessLevel.NONE)
@@ -117,8 +120,12 @@ public class Subscription extends ApiResource implements HasId, MetadataStore<Su
 
   /**
    * ID of the default payment source for the subscription. It must belong to the customer
-   * associated with the subscription and be in a chargeable state. If not set, defaults to the
-   * customer's default source.
+   * associated with the subscription and be in a chargeable state. If {@code
+   * default_payment_method} is also set, {@code default_payment_method} will take precedence. If
+   * neither are set, invoices will use the customer's <a
+   * href="https://stripe.com/docs/api/customers/object#customer_object-invoice_settings-default_payment_method">invoice_settings.default_payment_method</a>
+   * or <a
+   * href="https://stripe.com/docs/api/customers/object#customer_object-default_source">default_source</a>.
    */
   @SerializedName("default_source")
   @Getter(lombok.AccessLevel.NONE)

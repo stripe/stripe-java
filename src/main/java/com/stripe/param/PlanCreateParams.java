@@ -765,8 +765,8 @@ public class PlanCreateParams extends ApiRequestParams {
     Long unitAmount;
 
     /**
-     * Same as {@code unit_amount}, but accepts a decimal value with at most 12 decimal places. Only
-     * one of {@code unit_amount} and {@code unit_amount_decimal} can be set.
+     * Same as {@code unit_amount}, but accepts a decimal value in %s with at most 12 decimal
+     * places. Only one of {@code unit_amount} and {@code unit_amount_decimal} can be set.
      */
     @SerializedName("unit_amount_decimal")
     BigDecimal unitAmountDecimal;
@@ -872,8 +872,8 @@ public class PlanCreateParams extends ApiRequestParams {
       }
 
       /**
-       * Same as {@code unit_amount}, but accepts a decimal value with at most 12 decimal places.
-       * Only one of {@code unit_amount} and {@code unit_amount_decimal} can be set.
+       * Same as {@code unit_amount}, but accepts a decimal value in %s with at most 12 decimal
+       * places. Only one of {@code unit_amount} and {@code unit_amount_decimal} can be set.
        */
       public Builder setUnitAmountDecimal(BigDecimal unitAmountDecimal) {
         this.unitAmountDecimal = unitAmountDecimal;

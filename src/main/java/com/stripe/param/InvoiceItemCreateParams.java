@@ -14,8 +14,8 @@ import lombok.Getter;
 @Getter
 public class InvoiceItemCreateParams extends ApiRequestParams {
   /**
-   * The integer amount in <strong>%s</strong> of the charge to be applied to the upcoming invoice.
-   * Passing in a negative {@code amount} will reduce the {@code amount_due} on the invoice.
+   * The integer amount in %s of the charge to be applied to the upcoming invoice. Passing in a
+   * negative {@code amount} will reduce the {@code amount_due} on the invoice.
    */
   @SerializedName("amount")
   Long amount;
@@ -116,16 +116,16 @@ public class InvoiceItemCreateParams extends ApiRequestParams {
   List<String> taxRates;
 
   /**
-   * The integer unit amount in <strong>%s</strong> of the charge to be applied to the upcoming
-   * invoice. This {@code unit_amount} will be multiplied by the quantity to get the full amount.
-   * Passing in a negative {@code unit_amount} will reduce the {@code amount_due} on the invoice.
+   * The integer unit amount in %s of the charge to be applied to the upcoming invoice. This {@code
+   * unit_amount} will be multiplied by the quantity to get the full amount. Passing in a negative
+   * {@code unit_amount} will reduce the {@code amount_due} on the invoice.
    */
   @SerializedName("unit_amount")
   Long unitAmount;
 
   /**
-   * Same as {@code unit_amount}, but accepts a decimal value with at most 12 decimal places. Only
-   * one of {@code unit_amount} and {@code unit_amount_decimal} can be set.
+   * Same as {@code unit_amount}, but accepts a decimal value in %s with at most 12 decimal places.
+   * Only one of {@code unit_amount} and {@code unit_amount_decimal} can be set.
    */
   @SerializedName("unit_amount_decimal")
   BigDecimal unitAmountDecimal;
@@ -234,9 +234,8 @@ public class InvoiceItemCreateParams extends ApiRequestParams {
     }
 
     /**
-     * The integer amount in <strong>%s</strong> of the charge to be applied to the upcoming
-     * invoice. Passing in a negative {@code amount} will reduce the {@code amount_due} on the
-     * invoice.
+     * The integer amount in %s of the charge to be applied to the upcoming invoice. Passing in a
+     * negative {@code amount} will reduce the {@code amount_due} on the invoice.
      */
     public Builder setAmount(Long amount) {
       this.amount = amount;
@@ -496,9 +495,9 @@ public class InvoiceItemCreateParams extends ApiRequestParams {
     }
 
     /**
-     * The integer unit amount in <strong>%s</strong> of the charge to be applied to the upcoming
-     * invoice. This {@code unit_amount} will be multiplied by the quantity to get the full amount.
-     * Passing in a negative {@code unit_amount} will reduce the {@code amount_due} on the invoice.
+     * The integer unit amount in %s of the charge to be applied to the upcoming invoice. This
+     * {@code unit_amount} will be multiplied by the quantity to get the full amount. Passing in a
+     * negative {@code unit_amount} will reduce the {@code amount_due} on the invoice.
      */
     public Builder setUnitAmount(Long unitAmount) {
       this.unitAmount = unitAmount;
@@ -506,8 +505,8 @@ public class InvoiceItemCreateParams extends ApiRequestParams {
     }
 
     /**
-     * Same as {@code unit_amount}, but accepts a decimal value with at most 12 decimal places. Only
-     * one of {@code unit_amount} and {@code unit_amount_decimal} can be set.
+     * Same as {@code unit_amount}, but accepts a decimal value in %s with at most 12 decimal
+     * places. Only one of {@code unit_amount} and {@code unit_amount_decimal} can be set.
      */
     public Builder setUnitAmountDecimal(BigDecimal unitAmountDecimal) {
       this.unitAmountDecimal = unitAmountDecimal;
@@ -705,9 +704,8 @@ public class InvoiceItemCreateParams extends ApiRequestParams {
     Long unitAmount;
 
     /**
-     * Same as {@code unit_amount}, but accepts a decimal value with at most 12 decimal places. Only
-     * one of {@code unit_amount} and {@code unit_amount_decimal} can be set, but at least one is
-     * required.
+     * Same as {@code unit_amount}, but accepts a decimal value in %s with at most 12 decimal
+     * places. Only one of {@code unit_amount} and {@code unit_amount_decimal} can be set.
      */
     @SerializedName("unit_amount_decimal")
     BigDecimal unitAmountDecimal;
@@ -795,9 +793,8 @@ public class InvoiceItemCreateParams extends ApiRequestParams {
       }
 
       /**
-       * Same as {@code unit_amount}, but accepts a decimal value with at most 12 decimal places.
-       * Only one of {@code unit_amount} and {@code unit_amount_decimal} can be set, but at least
-       * one is required.
+       * Same as {@code unit_amount}, but accepts a decimal value in %s with at most 12 decimal
+       * places. Only one of {@code unit_amount} and {@code unit_amount_decimal} can be set.
        */
       public Builder setUnitAmountDecimal(BigDecimal unitAmountDecimal) {
         this.unitAmountDecimal = unitAmountDecimal;

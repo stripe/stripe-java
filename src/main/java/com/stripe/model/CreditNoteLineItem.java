@@ -14,8 +14,8 @@ import lombok.Setter;
 @EqualsAndHashCode(callSuper = false)
 public class CreditNoteLineItem extends StripeObject implements HasId {
   /**
-   * The integer amount in <strong>%s</strong> representing the gross amount being credited for this
-   * line item, excluding (exclusive) tax and discounts.
+   * The integer amount in %s representing the gross amount being credited for this line item,
+   * excluding (exclusive) tax and discounts.
    */
   @SerializedName("amount")
   Long amount;
@@ -24,10 +24,7 @@ public class CreditNoteLineItem extends StripeObject implements HasId {
   @SerializedName("description")
   String description;
 
-  /**
-   * The integer amount in <strong>%s</strong> representing the discount being credited for this
-   * line item.
-   */
+  /** The integer amount in %s representing the discount being credited for this line item. */
   @SerializedName("discount_amount")
   Long discountAmount;
 

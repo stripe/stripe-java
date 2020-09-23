@@ -33,6 +33,10 @@ public class Balance extends ApiResource {
   @SerializedName("connect_reserved")
   List<Balance.Money> connectReserved;
 
+  /** Funds that can be paid out using Instant Payouts. */
+  @SerializedName("instant_available")
+  List<Balance.Money> instantAvailable;
+
   @SerializedName("issuing")
   Details issuing;
 
