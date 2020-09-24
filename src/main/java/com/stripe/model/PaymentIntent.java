@@ -1057,6 +1057,9 @@ public class PaymentIntent extends ApiResource implements HasId, MetadataStore<P
     @SerializedName("alipay_handle_redirect")
     NextActionAlipayHandleRedirect alipayHandleRedirect;
 
+    @SerializedName("oxxo_display_details")
+    NextActionDisplayOxxoDetails oxxoDisplayDetails;
+
     @SerializedName("redirect_to_url")
     NextActionRedirectToUrl redirectToUrl;
 
@@ -1108,6 +1111,26 @@ public class PaymentIntent extends ApiResource implements HasId, MetadataStore<P
   @Getter
   @Setter
   @EqualsAndHashCode(callSuper = false)
+  public static class NextActionDisplayOxxoDetails extends StripeObject {
+    /** The timestamp after which the OXXO voucher expires. */
+    @SerializedName("expires_after")
+    Long expiresAfter;
+
+    /**
+     * The URL for the hosted OXXO voucher page, which allows customers to view and print an OXXO
+     * voucher.
+     */
+    @SerializedName("hosted_voucher_url")
+    String hostedVoucherUrl;
+
+    /** OXXO reference number. */
+    @SerializedName("number")
+    String number;
+  }
+
+  @Getter
+  @Setter
+  @EqualsAndHashCode(callSuper = false)
   public static class NextActionRedirectToUrl extends StripeObject {
     /**
      * If the customer does not exit their browser while authenticating, they will be redirected to
@@ -1133,6 +1156,9 @@ public class PaymentIntent extends ApiResource implements HasId, MetadataStore<P
 
     @SerializedName("card")
     Card card;
+
+    @SerializedName("oxxo")
+    Oxxo oxxo;
 
     @SerializedName("sofort")
     Sofort sofort;
@@ -1230,6 +1256,19 @@ public class PaymentIntent extends ApiResource implements HasId, MetadataStore<P
           String type;
         }
       }
+    }
+
+    @Getter
+    @Setter
+    @EqualsAndHashCode(callSuper = false)
+    public static class Oxxo extends StripeObject {
+      /**
+       * The number of calendar days before an OXXO invoice expires. For example, if you create an
+       * OXXO invoice on Monday and you set expires_after_days to 2, the OXXO invoice will expire on
+       * Wednesday at 23:59 America/Mexico_City time.
+       */
+      @SerializedName("expires_after_days")
+      Long expiresAfterDays;
     }
 
     @Getter
