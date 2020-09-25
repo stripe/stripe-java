@@ -100,6 +100,9 @@ public class PaymentMethod extends ApiResource implements HasId, MetadataStore<P
   @SerializedName("object")
   String object;
 
+  @SerializedName("oxxo")
+  Oxxo oxxo;
+
   @SerializedName("p24")
   P24 p24;
 
@@ -114,8 +117,8 @@ public class PaymentMethod extends ApiResource implements HasId, MetadataStore<P
    * matching this value. It contains additional information specific to the PaymentMethod type.
    *
    * <p>One of {@code alipay}, {@code au_becs_debit}, {@code bacs_debit}, {@code bancontact}, {@code
-   * card}, {@code eps}, {@code fpx}, {@code giropay}, {@code ideal}, {@code p24}, {@code
-   * sepa_debit}, or {@code sofort}.
+   * card}, {@code eps}, {@code fpx}, {@code giropay}, {@code ideal}, {@code oxxo}, {@code p24},
+   * {@code sepa_debit}, or {@code sofort}.
    */
   @SerializedName("type")
   String type;
@@ -805,6 +808,11 @@ public class PaymentMethod extends ApiResource implements HasId, MetadataStore<P
   @Setter
   @EqualsAndHashCode(callSuper = false)
   public static class InteracPresent extends StripeObject {}
+
+  @Getter
+  @Setter
+  @EqualsAndHashCode(callSuper = false)
+  public static class Oxxo extends StripeObject {}
 
   @Getter
   @Setter
