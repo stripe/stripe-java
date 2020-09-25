@@ -1050,6 +1050,9 @@ public class Charge extends ApiResource implements MetadataStore<Charge>, Balanc
     @SerializedName("multibanco")
     Multibanco multibanco;
 
+    @SerializedName("oxxo")
+    Oxxo oxxo;
+
     @SerializedName("p24")
     P24 p24;
 
@@ -1956,6 +1959,15 @@ public class Charge extends ApiResource implements MetadataStore<Charge>, Balanc
       /** Reference number associated with this Multibanco payment. */
       @SerializedName("reference")
       String reference;
+    }
+
+    @Getter
+    @Setter
+    @EqualsAndHashCode(callSuper = false)
+    public static class Oxxo extends StripeObject {
+      /** OXXO reference number. */
+      @SerializedName("number")
+      String number;
     }
 
     @Getter

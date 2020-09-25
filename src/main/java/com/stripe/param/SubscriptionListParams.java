@@ -78,11 +78,11 @@ public class SubscriptionListParams extends ApiRequestParams {
   String startingAfter;
 
   /**
-   * The status of the subscriptions to retrieve. One of: {@code incomplete}, {@code
-   * incomplete_expired}, {@code trialing}, {@code active}, {@code past_due}, {@code unpaid}, {@code
-   * canceled}, or {@code all}. Passing in a value of {@code canceled} will return all canceled
-   * subscriptions, including those belonging to deleted customers. Passing in a value of {@code
-   * all} will return subscriptions of all statuses.
+   * The status of the subscriptions to retrieve. Passing in a value of {@code canceled} will return
+   * all canceled subscriptions, including those belonging to deleted customers. Pass {@code ended}
+   * to find subscriptions that are canceled and subscriptions that are expired due to <a
+   * href="https://stripe.com/docs/billing/subscriptions/overview#subscription-statuses">incomplete
+   * payment</a>. Passing in a value of {@code all} will return subscriptions of all statuses.
    */
   @SerializedName("status")
   Status status;
@@ -306,11 +306,12 @@ public class SubscriptionListParams extends ApiRequestParams {
     }
 
     /**
-     * The status of the subscriptions to retrieve. One of: {@code incomplete}, {@code
-     * incomplete_expired}, {@code trialing}, {@code active}, {@code past_due}, {@code unpaid},
-     * {@code canceled}, or {@code all}. Passing in a value of {@code canceled} will return all
-     * canceled subscriptions, including those belonging to deleted customers. Passing in a value of
-     * {@code all} will return subscriptions of all statuses.
+     * The status of the subscriptions to retrieve. Passing in a value of {@code canceled} will
+     * return all canceled subscriptions, including those belonging to deleted customers. Pass
+     * {@code ended} to find subscriptions that are canceled and subscriptions that are expired due
+     * to <a
+     * href="https://stripe.com/docs/billing/subscriptions/overview#subscription-statuses">incomplete
+     * payment</a>. Passing in a value of {@code all} will return subscriptions of all statuses.
      */
     public Builder setStatus(Status status) {
       this.status = status;
