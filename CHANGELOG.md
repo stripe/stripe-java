@@ -1,5 +1,8 @@
 # Changelog
 
+## 20.9.0 - 2020-09-24
+* [#1112](https://github.com/stripe/stripe-java/pull/1112) Add support for OXXO on `PaymentMethod` and `PaymentIntent`
+
 ## 20.8.0 - 2020-09-23
 * [#1109](https://github.com/stripe/stripe-java/pull/1109) Multiple API changes
   * Add support for `issuing_dispute.closed` and `issuing_dispute.submitted` events
