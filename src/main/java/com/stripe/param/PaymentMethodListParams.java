@@ -232,6 +232,9 @@ public class PaymentMethodListParams extends ApiRequestParams {
     @SerializedName("ideal")
     IDEAL("ideal"),
 
+    @SerializedName("oxxo")
+    OXXO("oxxo"),
+
     @SerializedName("p24")
     P24("p24"),
 
