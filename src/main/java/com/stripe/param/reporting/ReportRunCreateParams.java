@@ -373,6 +373,9 @@ public class ReportRunCreateParams extends ApiRequestParams {
       @SerializedName("connect_reserved_funds")
       CONNECT_RESERVED_FUNDS("connect_reserved_funds"),
 
+      @SerializedName("contribution")
+      CONTRIBUTION("contribution"),
+
       @SerializedName("dispute")
       DISPUTE("dispute"),
 
