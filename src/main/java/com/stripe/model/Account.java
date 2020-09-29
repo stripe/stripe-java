@@ -688,6 +688,15 @@ public class Account extends ApiResource implements MetadataStore<Account>, Paym
     String legacyPayments;
 
     /**
+     * The status of the OXXO payments capability of the account, or whether the account can
+     * directly process OXXO charges.
+     *
+     * <p>One of {@code active}, {@code inactive}, or {@code pending}.
+     */
+    @SerializedName("oxxo_payments")
+    String oxxoPayments;
+
+    /**
      * The status of the tax reporting 1099-K (US) capability of the account.
      *
      * <p>One of {@code active}, {@code inactive}, or {@code pending}.
