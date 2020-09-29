@@ -1,5 +1,8 @@
 # Changelog
 
+## 20.11.0 - 2020-09-28
+* [#1116](https://github.com/stripe/stripe-java/pull/1116) Add support for `oxxo_payments` capability on `Account`
+
 ## 20.10.0 - 2020-09-25
 * [#1113](https://github.com/stripe/stripe-java/pull/1113) Add support for `oxxo` as a valid `type` on the List PaymentMethod API
 
