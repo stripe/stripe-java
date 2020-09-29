@@ -844,6 +844,10 @@ public class AccountCreateParams extends ApiRequestParams {
     @SerializedName("legacy_payments")
     LegacyPayments legacyPayments;
 
+    /** The oxxo_payments capability. */
+    @SerializedName("oxxo_payments")
+    OxxoPayments oxxoPayments;
+
     /** The tax_reporting_us_1099_k capability. */
     @SerializedName("tax_reporting_us_1099_k")
     TaxReportingUs1099K taxReportingUs1099K;
@@ -866,6 +870,7 @@ public class AccountCreateParams extends ApiRequestParams {
         FpxPayments fpxPayments,
         JcbPayments jcbPayments,
         LegacyPayments legacyPayments,
+        OxxoPayments oxxoPayments,
         TaxReportingUs1099K taxReportingUs1099K,
         TaxReportingUs1099Misc taxReportingUs1099Misc,
         Transfers transfers) {
@@ -878,6 +883,7 @@ public class AccountCreateParams extends ApiRequestParams {
       this.fpxPayments = fpxPayments;
       this.jcbPayments = jcbPayments;
       this.legacyPayments = legacyPayments;
+      this.oxxoPayments = oxxoPayments;
       this.taxReportingUs1099K = taxReportingUs1099K;
       this.taxReportingUs1099Misc = taxReportingUs1099Misc;
       this.transfers = transfers;
@@ -906,6 +912,8 @@ public class AccountCreateParams extends ApiRequestParams {
 
       private LegacyPayments legacyPayments;
 
+      private OxxoPayments oxxoPayments;
+
       private TaxReportingUs1099K taxReportingUs1099K;
 
       private TaxReportingUs1099Misc taxReportingUs1099Misc;
@@ -924,6 +932,7 @@ public class AccountCreateParams extends ApiRequestParams {
             this.fpxPayments,
             this.jcbPayments,
             this.legacyPayments,
+            this.oxxoPayments,
             this.taxReportingUs1099K,
             this.taxReportingUs1099Misc,
             this.transfers);
@@ -1000,6 +1009,12 @@ public class AccountCreateParams extends ApiRequestParams {
       /** The legacy_payments capability. */
       public Builder setLegacyPayments(LegacyPayments legacyPayments) {
         this.legacyPayments = legacyPayments;
+        return this;
+      }
+
+      /** The oxxo_payments capability. */
+      public Builder setOxxoPayments(OxxoPayments oxxoPayments) {
+        this.oxxoPayments = oxxoPayments;
         return this;
       }
 
@@ -1625,6 +1640,84 @@ public class AccountCreateParams extends ApiRequestParams {
          * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
          * map. See {@link AccountCreateParams.Capabilities.LegacyPayments#extraParams} for the
          * field documentation.
+         */
+        public Builder putAllExtraParam(Map<String, Object> map) {
+          if (this.extraParams == null) {
+            this.extraParams = new HashMap<>();
+          }
+          this.extraParams.putAll(map);
+          return this;
+        }
+
+        /**
+         * Passing true requests the capability for the account, if it is not already requested. A
+         * requested capability may not immediately become active. Any requirements to activate the
+         * capability are returned in the {@code requirements} arrays.
+         */
+        public Builder setRequested(Boolean requested) {
+          this.requested = requested;
+          return this;
+        }
+      }
+    }
+
+    @Getter
+    public static class OxxoPayments {
+      /**
+       * Map of extra parameters for custom features not available in this client library. The
+       * content in this map is not serialized under this field's {@code @SerializedName} value.
+       * Instead, each key/value pair is serialized as if the key is a root-level field (serialized)
+       * name in this param object. Effectively, this map is flattened to its parent instance.
+       */
+      @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
+      Map<String, Object> extraParams;
+
+      /**
+       * Passing true requests the capability for the account, if it is not already requested. A
+       * requested capability may not immediately become active. Any requirements to activate the
+       * capability are returned in the {@code requirements} arrays.
+       */
+      @SerializedName("requested")
+      Boolean requested;
+
+      private OxxoPayments(Map<String, Object> extraParams, Boolean requested) {
+        this.extraParams = extraParams;
+        this.requested = requested;
+      }
+
+      public static Builder builder() {
+        return new Builder();
+      }
+
+      public static class Builder {
+        private Map<String, Object> extraParams;
+
+        private Boolean requested;
+
+        /** Finalize and obtain parameter instance from this builder. */
+        public OxxoPayments build() {
+          return new OxxoPayments(this.extraParams, this.requested);
+        }
+
+        /**
+         * Add a key/value pair to `extraParams` map. A map is initialized for the first
+         * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
+         * map. See {@link AccountCreateParams.Capabilities.OxxoPayments#extraParams} for the field
+         * documentation.
+         */
+        public Builder putExtraParam(String key, Object value) {
+          if (this.extraParams == null) {
+            this.extraParams = new HashMap<>();
+          }
+          this.extraParams.put(key, value);
+          return this;
+        }
+
+        /**
+         * Add all map key/value pairs to `extraParams` map. A map is initialized for the first
+         * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
+         * map. See {@link AccountCreateParams.Capabilities.OxxoPayments#extraParams} for the field
+         * documentation.
          */
         public Builder putAllExtraParam(Map<String, Object> map) {
           if (this.extraParams == null) {
