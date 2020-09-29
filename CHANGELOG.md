@@ -1,5 +1,8 @@
 # Changelog
 
+## 20.12.0 - 2020-09-29
+* [#1117](https://github.com/stripe/stripe-java/pull/1117) Add support for `contribution` in `reporting_category` on `ReportRun`
+
 ## 20.11.0 - 2020-09-28
 * [#1116](https://github.com/stripe/stripe-java/pull/1116) Add support for `oxxo_payments` capability on `Account`
 
