@@ -64,6 +64,7 @@ final class EventDataClassLookup {
     classLookup.put("refund", Refund.class);
     classLookup.put("reserve_transaction", ReserveTransaction.class);
     classLookup.put("review", Review.class);
+    classLookup.put("setup_attempt", SetupAttempt.class);
     classLookup.put("setup_intent", SetupIntent.class);
     classLookup.put("sku", Sku.class);
     classLookup.put("source", Source.class);
