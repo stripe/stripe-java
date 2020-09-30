@@ -1,5 +1,8 @@
 # Changelog
 
+## 20.13.0 - 2020-09-29
+* [#1118](https://github.com/stripe/stripe-java/pull/1118) Add support for the `SetupAttempt` resource and List API
+
 ## 20.12.0 - 2020-09-29
 * [#1117](https://github.com/stripe/stripe-java/pull/1117) Add support for `contribution` in `reporting_category` on `ReportRun`
 
