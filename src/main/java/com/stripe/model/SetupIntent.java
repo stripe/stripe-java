@@ -73,6 +73,12 @@ public class SetupIntent extends ApiResource implements HasId, MetadataStore<Set
   @SerializedName("last_setup_error")
   StripeError lastSetupError;
 
+  /** The most recent SetupAttempt for this SetupIntent. */
+  @SerializedName("latest_attempt")
+  @Getter(lombok.AccessLevel.NONE)
+  @Setter(lombok.AccessLevel.NONE)
+  ExpandableField<SetupAttempt> latestAttempt;
+
   /**
    * Has the value {@code true} if the object exists in live mode or the value {@code false} if the
    * object exists in test mode.
@@ -188,6 +194,25 @@ public class SetupIntent extends ApiResource implements HasId, MetadataStore<Set
 
   public void setCustomerObject(Customer expandableObject) {
     this.customer = new ExpandableField<Customer>(expandableObject.getId(), expandableObject);
+  }
+
+  /** Get ID of expandable {@code latestAttempt} object. */
+  public String getLatestAttempt() {
+    return (this.latestAttempt != null) ? this.latestAttempt.getId() : null;
+  }
+
+  public void setLatestAttempt(String id) {
+    this.latestAttempt = ApiResource.setExpandableFieldId(id, this.latestAttempt);
+  }
+
+  /** Get expanded {@code latestAttempt}. */
+  public SetupAttempt getLatestAttemptObject() {
+    return (this.latestAttempt != null) ? this.latestAttempt.getExpanded() : null;
+  }
+
+  public void setLatestAttemptObject(SetupAttempt expandableObject) {
+    this.latestAttempt =
+        new ExpandableField<SetupAttempt>(expandableObject.getId(), expandableObject);
   }
 
   /** Get ID of expandable {@code mandate} object. */
