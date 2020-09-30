@@ -42,7 +42,6 @@ public class ProductTest extends BaseStripeTest {
     params.put("url", "http://example.com");
     params.put("shippable", true);
     params.put("package_dimensions", packageDimensions);
-    params.put("type", "good");
 
     final Product product = Product.create(params);
 
