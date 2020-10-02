@@ -415,8 +415,7 @@ public class Customer extends ApiResource implements HasId, MetadataStore<Custom
 
   /**
    * Returns a list of transactions that updated the customer’s <a
-   * href="https://stripe.com/docs/api/customers/object#customer_object-balance"><code>balance
-   * </code></a>.
+   * href="https://stripe.com/docs/billing/customer/balance">balances</a>.
    */
   public CustomerBalanceTransactionCollection balanceTransactions() throws StripeException {
     return balanceTransactions((Map<String, Object>) null, (RequestOptions) null);
@@ -424,8 +423,7 @@ public class Customer extends ApiResource implements HasId, MetadataStore<Custom
 
   /**
    * Returns a list of transactions that updated the customer’s <a
-   * href="https://stripe.com/docs/api/customers/object#customer_object-balance"><code>balance
-   * </code></a>.
+   * href="https://stripe.com/docs/billing/customer/balance">balances</a>.
    */
   public CustomerBalanceTransactionCollection balanceTransactions(Map<String, Object> params)
       throws StripeException {
@@ -434,8 +432,7 @@ public class Customer extends ApiResource implements HasId, MetadataStore<Custom
 
   /**
    * Returns a list of transactions that updated the customer’s <a
-   * href="https://stripe.com/docs/api/customers/object#customer_object-balance"><code>balance
-   * </code></a>.
+   * href="https://stripe.com/docs/billing/customer/balance">balances</a>.
    */
   public CustomerBalanceTransactionCollection balanceTransactions(
       Map<String, Object> params, RequestOptions options) throws StripeException {
@@ -451,8 +448,7 @@ public class Customer extends ApiResource implements HasId, MetadataStore<Custom
 
   /**
    * Returns a list of transactions that updated the customer’s <a
-   * href="https://stripe.com/docs/api/customers/object#customer_object-balance"><code>balance
-   * </code></a>.
+   * href="https://stripe.com/docs/billing/customer/balance">balances</a>.
    */
   public CustomerBalanceTransactionCollection balanceTransactions(
       CustomerBalanceTransactionsParams params) throws StripeException {
@@ -461,8 +457,7 @@ public class Customer extends ApiResource implements HasId, MetadataStore<Custom
 
   /**
    * Returns a list of transactions that updated the customer’s <a
-   * href="https://stripe.com/docs/api/customers/object#customer_object-balance"><code>balance
-   * </code></a>.
+   * href="https://stripe.com/docs/billing/customer/balance">balances</a>.
    */
   public CustomerBalanceTransactionCollection balanceTransactions(
       CustomerBalanceTransactionsParams params, RequestOptions options) throws StripeException {

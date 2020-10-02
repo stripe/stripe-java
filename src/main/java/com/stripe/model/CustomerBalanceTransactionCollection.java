@@ -13,18 +13,16 @@ import java.util.Map;
 public class CustomerBalanceTransactionCollection
     extends StripeCollection<CustomerBalanceTransaction> {
   /**
-   * Retrieves a specific transaction that updated the customer’s <a
-   * href="https://stripe.com/docs/api/customers/object#customer_object-balance"><code>balance
-   * </code></a>.
+   * Retrieves a specific customer balance transaction that updated the customer’s <a
+   * href="https://stripe.com/docs/billing/customer/balance">balances</a>.
    */
   public CustomerBalanceTransaction retrieve(String id) throws StripeException {
     return retrieve(id, (Map<String, Object>) null, (RequestOptions) null);
   }
 
   /**
-   * Retrieves a specific transaction that updated the customer’s <a
-   * href="https://stripe.com/docs/api/customers/object#customer_object-balance"><code>balance
-   * </code></a>.
+   * Retrieves a specific customer balance transaction that updated the customer’s <a
+   * href="https://stripe.com/docs/billing/customer/balance">balances</a>.
    */
   public CustomerBalanceTransaction retrieve(String id, RequestOptions options)
       throws StripeException {
@@ -32,9 +30,8 @@ public class CustomerBalanceTransactionCollection
   }
 
   /**
-   * Retrieves a specific transaction that updated the customer’s <a
-   * href="https://stripe.com/docs/api/customers/object#customer_object-balance"><code>balance
-   * </code></a>.
+   * Retrieves a specific customer balance transaction that updated the customer’s <a
+   * href="https://stripe.com/docs/billing/customer/balance">balances</a>.
    */
   public CustomerBalanceTransaction retrieve(
       String id, Map<String, Object> params, RequestOptions options) throws StripeException {
@@ -48,9 +45,8 @@ public class CustomerBalanceTransactionCollection
   }
 
   /**
-   * Retrieves a specific transaction that updated the customer’s <a
-   * href="https://stripe.com/docs/api/customers/object#customer_object-balance"><code>balance
-   * </code></a>.
+   * Retrieves a specific customer balance transaction that updated the customer’s <a
+   * href="https://stripe.com/docs/billing/customer/balance">balances</a>.
    */
   public CustomerBalanceTransaction retrieve(
       String id, CustomerBalanceTransactionCollectionRetrieveParams params, RequestOptions options)
@@ -66,8 +62,7 @@ public class CustomerBalanceTransactionCollection
 
   /**
    * Returns a list of transactions that updated the customer’s <a
-   * href="https://stripe.com/docs/api/customers/object#customer_object-balance"><code>balance
-   * </code></a>.
+   * href="https://stripe.com/docs/billing/customer/balance">balances</a>.
    */
   public CustomerBalanceTransactionCollection list(Map<String, Object> params)
       throws StripeException {
@@ -76,8 +71,7 @@ public class CustomerBalanceTransactionCollection
 
   /**
    * Returns a list of transactions that updated the customer’s <a
-   * href="https://stripe.com/docs/api/customers/object#customer_object-balance"><code>balance
-   * </code></a>.
+   * href="https://stripe.com/docs/billing/customer/balance">balances</a>.
    */
   public CustomerBalanceTransactionCollection list(
       Map<String, Object> params, RequestOptions options) throws StripeException {
@@ -88,8 +82,7 @@ public class CustomerBalanceTransactionCollection
 
   /**
    * Returns a list of transactions that updated the customer’s <a
-   * href="https://stripe.com/docs/api/customers/object#customer_object-balance"><code>balance
-   * </code></a>.
+   * href="https://stripe.com/docs/billing/customer/balance">balances</a>.
    */
   public CustomerBalanceTransactionCollection list(
       CustomerBalanceTransactionCollectionListParams params) throws StripeException {
@@ -98,8 +91,7 @@ public class CustomerBalanceTransactionCollection
 
   /**
    * Returns a list of transactions that updated the customer’s <a
-   * href="https://stripe.com/docs/api/customers/object#customer_object-balance"><code>balance
-   * </code></a>.
+   * href="https://stripe.com/docs/billing/customer/balance">balances</a>.
    */
   public CustomerBalanceTransactionCollection list(
       CustomerBalanceTransactionCollectionListParams params, RequestOptions options)
@@ -110,18 +102,16 @@ public class CustomerBalanceTransactionCollection
   }
 
   /**
-   * Creates an immutable transaction that updates the customer’s <a
-   * href="https://stripe.com/docs/api/customers/object#customer_object-balance"><code>balance
-   * </code></a>.
+   * Creates an immutable transaction that updates the customer’s credit <a
+   * href="https://stripe.com/docs/billing/customer/balance">balance</a>.
    */
   public CustomerBalanceTransaction create(Map<String, Object> params) throws StripeException {
     return create(params, (RequestOptions) null);
   }
 
   /**
-   * Creates an immutable transaction that updates the customer’s <a
-   * href="https://stripe.com/docs/api/customers/object#customer_object-balance"><code>balance
-   * </code></a>.
+   * Creates an immutable transaction that updates the customer’s credit <a
+   * href="https://stripe.com/docs/billing/customer/balance">balance</a>.
    */
   public CustomerBalanceTransaction create(Map<String, Object> params, RequestOptions options)
       throws StripeException {
@@ -131,9 +121,8 @@ public class CustomerBalanceTransactionCollection
   }
 
   /**
-   * Creates an immutable transaction that updates the customer’s <a
-   * href="https://stripe.com/docs/api/customers/object#customer_object-balance"><code>balance
-   * </code></a>.
+   * Creates an immutable transaction that updates the customer’s credit <a
+   * href="https://stripe.com/docs/billing/customer/balance">balance</a>.
    */
   public CustomerBalanceTransaction create(CustomerBalanceTransactionCollectionCreateParams params)
       throws StripeException {
@@ -141,9 +130,8 @@ public class CustomerBalanceTransactionCollection
   }
 
   /**
-   * Creates an immutable transaction that updates the customer’s <a
-   * href="https://stripe.com/docs/api/customers/object#customer_object-balance"><code>balance
-   * </code></a>.
+   * Creates an immutable transaction that updates the customer’s credit <a
+   * href="https://stripe.com/docs/billing/customer/balance">balance</a>.
    */
   public CustomerBalanceTransaction create(
       CustomerBalanceTransactionCollectionCreateParams params, RequestOptions options)
