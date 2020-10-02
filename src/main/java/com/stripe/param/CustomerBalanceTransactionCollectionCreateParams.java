@@ -12,11 +12,7 @@ import lombok.Getter;
 
 @Getter
 public class CustomerBalanceTransactionCollectionCreateParams extends ApiRequestParams {
-  /**
-   * The integer amount in <strong>%s</strong> to apply to the customer's balance. Pass a negative
-   * amount to credit the customer's balance, and pass in a positive amount to debit the customer's
-   * balance.
-   */
+  /** The integer amount in <strong>%s</strong> to apply to the customer's credit balance. */
   @SerializedName("amount")
   Long amount;
 
@@ -100,11 +96,7 @@ public class CustomerBalanceTransactionCollectionCreateParams extends ApiRequest
           this.metadata);
     }
 
-    /**
-     * The integer amount in <strong>%s</strong> to apply to the customer's balance. Pass a negative
-     * amount to credit the customer's balance, and pass in a positive amount to debit the
-     * customer's balance.
-     */
+    /** The integer amount in <strong>%s</strong> to apply to the customer's credit balance. */
     public Builder setAmount(Long amount) {
       this.amount = amount;
       return this;

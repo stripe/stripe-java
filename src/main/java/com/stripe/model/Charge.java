@@ -939,20 +939,20 @@ public class Charge extends ApiResource implements MetadataStore<Charge>, Balanc
     String reason;
 
     /**
-     * Stripe's evaluation of the riskiness of the payment. Possible values for evaluated payments
-     * are {@code normal}, {@code elevated}, {@code highest}. For non-card payments, and card-based
-     * payments predating the public assignment of risk levels, this field will have the value
-     * {@code not_assessed}. In the event of an error in the evaluation, this field will have the
-     * value {@code unknown}.
+     * Stripe Radar's evaluation of the riskiness of the payment. Possible values for evaluated
+     * payments are {@code normal}, {@code elevated}, {@code highest}. For non-card payments, and
+     * card-based payments predating the public assignment of risk levels, this field will have the
+     * value {@code not_assessed}. In the event of an error in the evaluation, this field will have
+     * the value {@code unknown}. This field is only available with Radar.
      */
     @SerializedName("risk_level")
     String riskLevel;
 
     /**
-     * Stripe's evaluation of the riskiness of the payment. Possible values for evaluated payments
-     * are between 0 and 100. For non-card payments, card-based payments predating the public
-     * assignment of risk scores, or in the event of an error during evaluation, this field will not
-     * be present. This field is only available with Radar for Fraud Teams.
+     * Stripe Radar's evaluation of the riskiness of the payment. Possible values for evaluated
+     * payments are between 0 and 100. For non-card payments, card-based payments predating the
+     * public assignment of risk scores, or in the event of an error during evaluation, this field
+     * will not be present. This field is only available with Radar for Fraud Teams.
      */
     @SerializedName("risk_score")
     Long riskScore;

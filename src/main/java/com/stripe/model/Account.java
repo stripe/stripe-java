@@ -635,6 +635,15 @@ public class Account extends ApiResource implements MetadataStore<Account>, Paym
     String bacsDebitPayments;
 
     /**
+     * The status of the Bancontact payments capability of the account, or whether the account can
+     * directly process Bancontact charges.
+     *
+     * <p>One of {@code active}, {@code inactive}, or {@code pending}.
+     */
+    @SerializedName("bancontact_payments")
+    String bancontactPayments;
+
+    /**
      * The status of the card issuing capability of the account, or whether you can use Issuing to
      * distribute funds on cards
      *
@@ -662,6 +671,15 @@ public class Account extends ApiResource implements MetadataStore<Account>, Paym
     String cartesBancairesPayments;
 
     /**
+     * The status of the EPS payments capability of the account, or whether the account can directly
+     * process EPS charges.
+     *
+     * <p>One of {@code active}, {@code inactive}, or {@code pending}.
+     */
+    @SerializedName("eps_payments")
+    String epsPayments;
+
+    /**
      * The status of the FPX payments capability of the account, or whether the account can directly
      * process FPX charges.
      *
@@ -669,6 +687,24 @@ public class Account extends ApiResource implements MetadataStore<Account>, Paym
      */
     @SerializedName("fpx_payments")
     String fpxPayments;
+
+    /**
+     * The status of the giropay payments capability of the account, or whether the account can
+     * directly process giropay charges.
+     *
+     * <p>One of {@code active}, {@code inactive}, or {@code pending}.
+     */
+    @SerializedName("giropay_payments")
+    String giropayPayments;
+
+    /**
+     * The status of the iDEAL payments capability of the account, or whether the account can
+     * directly process iDEAL charges.
+     *
+     * <p>One of {@code active}, {@code inactive}, or {@code pending}.
+     */
+    @SerializedName("ideal_payments")
+    String idealPayments;
 
     /**
      * The status of the JCB payments capability of the account, or whether the account (Japan only)
@@ -695,6 +731,33 @@ public class Account extends ApiResource implements MetadataStore<Account>, Paym
      */
     @SerializedName("oxxo_payments")
     String oxxoPayments;
+
+    /**
+     * The status of the P24 payments capability of the account, or whether the account can directly
+     * process P24 charges.
+     *
+     * <p>One of {@code active}, {@code inactive}, or {@code pending}.
+     */
+    @SerializedName("p24_payments")
+    String p24Payments;
+
+    /**
+     * The status of the SEPA Direct Debits payments capability of the account, or whether the
+     * account can directly process SEPA Direct Debits charges.
+     *
+     * <p>One of {@code active}, {@code inactive}, or {@code pending}.
+     */
+    @SerializedName("sepa_debit_payments")
+    String sepaDebitPayments;
+
+    /**
+     * The status of the Sofort payments capability of the account, or whether the account can
+     * directly process Sofort charges.
+     *
+     * <p>One of {@code active}, {@code inactive}, or {@code pending}.
+     */
+    @SerializedName("sofort_payments")
+    String sofortPayments;
 
     /**
      * The status of the tax reporting 1099-K (US) capability of the account.

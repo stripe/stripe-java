@@ -163,8 +163,8 @@ public class CustomerBalanceTransaction extends ApiResource
   }
 
   /**
-   * Most customer balance transaction fields are immutable, but you may update its <code>
-   * description</code> and <code>metadata</code>.
+   * Most credit balance transaction fields are immutable, but you may update its <code>description
+   * </code> and <code>metadata</code>.
    */
   @Override
   public CustomerBalanceTransaction update(Map<String, Object> params) throws StripeException {
@@ -172,8 +172,8 @@ public class CustomerBalanceTransaction extends ApiResource
   }
 
   /**
-   * Most customer balance transaction fields are immutable, but you may update its <code>
-   * description</code> and <code>metadata</code>.
+   * Most credit balance transaction fields are immutable, but you may update its <code>description
+   * </code> and <code>metadata</code>.
    */
   @Override
   public CustomerBalanceTransaction update(Map<String, Object> params, RequestOptions options)
@@ -191,8 +191,8 @@ public class CustomerBalanceTransaction extends ApiResource
   }
 
   /**
-   * Most customer balance transaction fields are immutable, but you may update its <code>
-   * description</code> and <code>metadata</code>.
+   * Most credit balance transaction fields are immutable, but you may update its <code>description
+   * </code> and <code>metadata</code>.
    */
   public CustomerBalanceTransaction update(CustomerBalanceTransactionUpdateParams params)
       throws StripeException {
@@ -200,8 +200,8 @@ public class CustomerBalanceTransaction extends ApiResource
   }
 
   /**
-   * Most customer balance transaction fields are immutable, but you may update its <code>
-   * description</code> and <code>metadata</code>.
+   * Most credit balance transaction fields are immutable, but you may update its <code>description
+   * </code> and <code>metadata</code>.
    */
   public CustomerBalanceTransaction update(
       CustomerBalanceTransactionUpdateParams params, RequestOptions options)
