@@ -5953,8 +5953,7 @@ public class AccountCreateParams extends ApiRequestParams {
   @Getter
   public static class TosAcceptance {
     /**
-     * The Unix timestamp marking when the account representative accepted the Stripe Services
-     * Agreement.
+     * The Unix timestamp marking when the account representative accepted their service agreement.
      */
     @SerializedName("date")
     Long date;
@@ -5968,23 +5967,31 @@ public class AccountCreateParams extends ApiRequestParams {
     @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
     Map<String, Object> extraParams;
 
-    /**
-     * The IP address from which the account representative accepted the Stripe Services Agreement.
-     */
+    /** The IP address from which the account representative accepted their service agreement. */
     @SerializedName("ip")
     String ip;
 
+    /** The user's service agreement type. */
+    @SerializedName("service_agreement")
+    String serviceAgreement;
+
     /**
-     * The user agent of the browser from which the account representative accepted the Stripe
-     * Services Agreement.
+     * The user agent of the browser from which the account representative accepted their service
+     * agreement.
      */
     @SerializedName("user_agent")
     String userAgent;
 
-    private TosAcceptance(Long date, Map<String, Object> extraParams, String ip, String userAgent) {
+    private TosAcceptance(
+        Long date,
+        Map<String, Object> extraParams,
+        String ip,
+        String serviceAgreement,
+        String userAgent) {
       this.date = date;
       this.extraParams = extraParams;
       this.ip = ip;
+      this.serviceAgreement = serviceAgreement;
       this.userAgent = userAgent;
     }
 
@@ -5999,16 +6006,19 @@ public class AccountCreateParams extends ApiRequestParams {
 
       private String ip;
 
+      private String serviceAgreement;
+
       private String userAgent;
 
       /** Finalize and obtain parameter instance from this builder. */
       public TosAcceptance build() {
-        return new TosAcceptance(this.date, this.extraParams, this.ip, this.userAgent);
+        return new TosAcceptance(
+            this.date, this.extraParams, this.ip, this.serviceAgreement, this.userAgent);
       }
 
       /**
-       * The Unix timestamp marking when the account representative accepted the Stripe Services
-       * Agreement.
+       * The Unix timestamp marking when the account representative accepted their service
+       * agreement.
        */
       public Builder setDate(Long date) {
         this.date = date;
@@ -6041,18 +6051,21 @@ public class AccountCreateParams extends ApiRequestParams {
         return this;
       }
 
-      /**
-       * The IP address from which the account representative accepted the Stripe Services
-       * Agreement.
-       */
+      /** The IP address from which the account representative accepted their service agreement. */
       public Builder setIp(String ip) {
         this.ip = ip;
         return this;
       }
 
+      /** The user's service agreement type. */
+      public Builder setServiceAgreement(String serviceAgreement) {
+        this.serviceAgreement = serviceAgreement;
+        return this;
+      }
+
       /**
-       * The user agent of the browser from which the account representative accepted the Stripe
-       * Services Agreement.
+       * The user agent of the browser from which the account representative accepted their service
+       * agreement.
        */
       public Builder setUserAgent(String userAgent) {
         this.userAgent = userAgent;
