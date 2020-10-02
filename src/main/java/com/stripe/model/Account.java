@@ -1332,22 +1332,22 @@ public class Account extends ApiResource implements MetadataStore<Account>, Paym
   @EqualsAndHashCode(callSuper = false)
   public static class TosAcceptance extends StripeObject {
     /**
-     * The Unix timestamp marking when the Stripe Services Agreement was accepted by the account
-     * representative.
+     * The Unix timestamp marking when the account representative accepted their service agreement.
      */
     @SerializedName("date")
     Long date;
 
-    /**
-     * The IP address from which the Stripe Services Agreement was accepted by the account
-     * representative.
-     */
+    /** The IP address from which the account representative accepted their service agreement. */
     @SerializedName("ip")
     String ip;
 
+    /** The user's service agreement type. */
+    @SerializedName("service_agreement")
+    String serviceAgreement;
+
     /**
-     * The user agent of the browser from which the Stripe Services Agreement was accepted by the
-     * account representative.
+     * The user agent of the browser from which the account representative accepted their service
+     * agreement.
      */
     @SerializedName("user_agent")
     String userAgent;
