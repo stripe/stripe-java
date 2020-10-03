@@ -1,5 +1,9 @@
 # Changelog
 
+## 20.14.0 - 2020-10-02
+* [#1120](https://github.com/stripe/stripe-java/pull/1120) Add support for `TosAcceptance.ServiceAgreement` on `Account`
+* [#1119](https://github.com/stripe/stripe-java/pull/1119) Add support for new payments capabilities on `Account`
+
 ## 20.13.0 - 2020-09-29
 * [#1118](https://github.com/stripe/stripe-java/pull/1118) Add support for the `SetupAttempt` resource and List API
 
