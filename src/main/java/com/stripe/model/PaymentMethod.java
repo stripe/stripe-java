@@ -842,9 +842,67 @@ public class PaymentMethod extends ApiResource implements HasId, MetadataStore<P
     @SerializedName("fingerprint")
     String fingerprint;
 
+    /** Information about the object that generated this PaymentMethod. */
+    @SerializedName("generated_from")
+    GeneratedFrom generatedFrom;
+
     /** Last four characters of the IBAN. */
     @SerializedName("last4")
     String last4;
+
+    @Getter
+    @Setter
+    @EqualsAndHashCode(callSuper = false)
+    public static class GeneratedFrom extends StripeObject {
+      /** The ID of the Charge that generated this PaymentMethod, if any. */
+      @SerializedName("charge")
+      @Getter(lombok.AccessLevel.NONE)
+      @Setter(lombok.AccessLevel.NONE)
+      ExpandableField<Charge> charge;
+
+      /** The ID of the SetupAttempt that generated this PaymentMethod, if any. */
+      @SerializedName("setup_attempt")
+      @Getter(lombok.AccessLevel.NONE)
+      @Setter(lombok.AccessLevel.NONE)
+      ExpandableField<SetupAttempt> setupAttempt;
+
+      /** Get ID of expandable {@code charge} object. */
+      public String getCharge() {
+        return (this.charge != null) ? this.charge.getId() : null;
+      }
+
+      public void setCharge(String id) {
+        this.charge = ApiResource.setExpandableFieldId(id, this.charge);
+      }
+
+      /** Get expanded {@code charge}. */
+      public Charge getChargeObject() {
+        return (this.charge != null) ? this.charge.getExpanded() : null;
+      }
+
+      public void setChargeObject(Charge expandableObject) {
+        this.charge = new ExpandableField<Charge>(expandableObject.getId(), expandableObject);
+      }
+
+      /** Get ID of expandable {@code setupAttempt} object. */
+      public String getSetupAttempt() {
+        return (this.setupAttempt != null) ? this.setupAttempt.getId() : null;
+      }
+
+      public void setSetupAttempt(String id) {
+        this.setupAttempt = ApiResource.setExpandableFieldId(id, this.setupAttempt);
+      }
+
+      /** Get expanded {@code setupAttempt}. */
+      public SetupAttempt getSetupAttemptObject() {
+        return (this.setupAttempt != null) ? this.setupAttempt.getExpanded() : null;
+      }
+
+      public void setSetupAttemptObject(SetupAttempt expandableObject) {
+        this.setupAttempt =
+            new ExpandableField<SetupAttempt>(expandableObject.getId(), expandableObject);
+      }
+    }
   }
 
   @Getter
