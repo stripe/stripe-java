@@ -1,5 +1,8 @@
 # Changelog
 
+## 20.16.0 - 2020-10-09
+* [#1126](https://github.com/stripe/stripe-java/pull/1126) Add support for internal-only `description`, `iin`, and `issuer` for `card_present` and `interac_present` on `Charge.payment_method_details`.
+
 ## 20.15.0 - 2020-10-08
 * Add support for `generated_sepa_debit` and `generated_sepa_debit_mandate` on `Charge.payment_method_details.ideal`, `Charge.payment_method_details.bancontact` and `Charge.payment_method_details.sofort`
 * Add support for `generated_from` on `PaymentMethod.sepa_debit`
