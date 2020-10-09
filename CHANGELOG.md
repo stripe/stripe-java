@@ -1,5 +1,10 @@
 # Changelog
 
+## 20.15.0 - 2020-10-08
+* Add support for `generated_sepa_debit` and `generated_sepa_debit_mandate` on `Charge.payment_method_details.ideal`, `Charge.payment_method_details.bancontact` and `Charge.payment_method_details.sofort`
+* Add support for `generated_from` on `PaymentMethod.sepa_debit`
+* Add support for `ideal`, `bancontact` and `sofort` on `SetupAttempt.payment_method_details`
+
 ## 20.14.0 - 2020-10-02
 * [#1120](https://github.com/stripe/stripe-java/pull/1120) Add support for `TosAcceptance.ServiceAgreement` on `Account`
 * [#1119](https://github.com/stripe/stripe-java/pull/1119) Add support for new payments capabilities on `Account`
