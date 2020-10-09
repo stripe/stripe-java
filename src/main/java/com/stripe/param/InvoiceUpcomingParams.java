@@ -27,6 +27,11 @@ public class InvoiceUpcomingParams extends ApiRequestParams {
   @SerializedName("customer")
   String customer;
 
+  /**
+   * The coupons to redeem into discounts for the invoice preview. If not specified, inherits the
+   * discount from the customer or subscription. Pass an empty string to avoid inheriting any
+   * discounts.
+   */
   @SerializedName("discounts")
   Object discounts;
 
@@ -306,11 +311,21 @@ public class InvoiceUpcomingParams extends ApiRequestParams {
       return this;
     }
 
+    /**
+     * The coupons to redeem into discounts for the invoice preview. If not specified, inherits the
+     * discount from the customer or subscription. Pass an empty string to avoid inheriting any
+     * discounts.
+     */
     public Builder setDiscounts(EmptyParam discounts) {
       this.discounts = discounts;
       return this;
     }
 
+    /**
+     * The coupons to redeem into discounts for the invoice preview. If not specified, inherits the
+     * discount from the customer or subscription. Pass an empty string to avoid inheriting any
+     * discounts.
+     */
     public Builder setDiscounts(List<Discount> discounts) {
       this.discounts = discounts;
       return this;

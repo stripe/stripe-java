@@ -1656,6 +1656,13 @@ public class Charge extends ApiResource implements MetadataStore<Charge>, Balanc
       @SerializedName("country")
       String country;
 
+      /**
+       * Card description. (For internal use only and not typically available in standard API
+       * requests.)
+       */
+      @SerializedName("description")
+      String description;
+
       /** Authorization response cryptogram. */
       @SerializedName("emv_auth_data")
       String emvAuthData;
@@ -1691,6 +1698,20 @@ public class Charge extends ApiResource implements MetadataStore<Charge>, Balanc
        */
       @SerializedName("generated_card")
       String generatedCard;
+
+      /**
+       * Issuer identification number of the card. (For internal use only and not typically
+       * available in standard API requests.)
+       */
+      @SerializedName("iin")
+      String iin;
+
+      /**
+       * Issuer bank name of the card. (For internal use only and not typically available in
+       * standard API requests.)
+       */
+      @SerializedName("issuer")
+      String issuer;
 
       /** The last four digits of the card. */
       @SerializedName("last4")
@@ -1941,6 +1962,13 @@ public class Charge extends ApiResource implements MetadataStore<Charge>, Balanc
       @SerializedName("country")
       String country;
 
+      /**
+       * Card description. (For internal use only and not typically available in standard API
+       * requests.)
+       */
+      @SerializedName("description")
+      String description;
+
       /** Authorization response cryptogram. */
       @SerializedName("emv_auth_data")
       String emvAuthData;
@@ -1976,6 +2004,20 @@ public class Charge extends ApiResource implements MetadataStore<Charge>, Balanc
        */
       @SerializedName("generated_card")
       String generatedCard;
+
+      /**
+       * Issuer identification number of the card. (For internal use only and not typically
+       * available in standard API requests.)
+       */
+      @SerializedName("iin")
+      String iin;
+
+      /**
+       * Issuer bank name of the card. (For internal use only and not typically available in
+       * standard API requests.)
+       */
+      @SerializedName("issuer")
+      String issuer;
 
       /** The last four digits of the card. */
       @SerializedName("last4")
