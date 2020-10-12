@@ -125,7 +125,8 @@ public class Card extends ApiResource
   Boolean deleted;
 
   /**
-   * Card description. (For internal use only and not typically available in standard API requests.)
+   * Card description. (Only for internal use only and not typically available in standard API
+   * requests.)
    */
   @SerializedName("description")
   String description;
@@ -163,15 +164,15 @@ public class Card extends ApiResource
   String id;
 
   /**
-   * Issuer identification number of the card. (For internal use only and not typically available in
-   * standard API requests.)
+   * Issuer identification number of the card. (Only for internal use only and not typically
+   * available in standard API requests.)
    */
   @SerializedName("iin")
   String iin;
 
   /**
-   * Issuer bank name of the card. (For internal use only and not typically available in standard
-   * API requests.)
+   * Issuer bank name of the card. (Only for internal use only and not typically available in
+   * standard API requests.)
    */
   @SerializedName("issuer")
   String issuer;

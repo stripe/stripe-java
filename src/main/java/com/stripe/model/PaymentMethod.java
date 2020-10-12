@@ -517,7 +517,7 @@ public class PaymentMethod extends ApiResource implements HasId, MetadataStore<P
     String country;
 
     /**
-     * Card description. (For internal use only and not typically available in standard API
+     * Card description. (Only for internal use only and not typically available in standard API
      * requests.)
      */
     @SerializedName("description")
@@ -547,15 +547,15 @@ public class PaymentMethod extends ApiResource implements HasId, MetadataStore<P
     String funding;
 
     /**
-     * Issuer identification number of the card. (For internal use only and not typically available
-     * in standard API requests.)
+     * Issuer identification number of the card. (Only for internal use only and not typically
+     * available in standard API requests.)
      */
     @SerializedName("iin")
     String iin;
 
     /**
-     * Issuer bank name of the card. (For internal use only and not typically available in standard
-     * API requests.)
+     * Issuer bank name of the card. (Only for internal use only and not typically available in
+     * standard API requests.)
      */
     @SerializedName("issuer")
     String issuer;

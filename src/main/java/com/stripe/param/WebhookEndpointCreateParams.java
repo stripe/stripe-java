@@ -966,6 +966,9 @@ public class WebhookEndpointCreateParams extends ApiRequestParams {
     @SerializedName("setup_intent.created")
     SETUP_INTENT__CREATED("setup_intent.created"),
 
+    @SerializedName("setup_intent.requires_action")
+    SETUP_INTENT__REQUIRES_ACTION("setup_intent.requires_action"),
+
     @SerializedName("setup_intent.setup_failed")
     SETUP_INTENT__SETUP_FAILED("setup_intent.setup_failed"),
 

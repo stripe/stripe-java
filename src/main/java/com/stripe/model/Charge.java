@@ -1350,7 +1350,7 @@ public class Charge extends ApiResource implements MetadataStore<Charge>, Balanc
       String country;
 
       /**
-       * Card description. (For internal use only and not typically available in standard API
+       * Card description. (Only for internal use only and not typically available in standard API
        * requests.)
        */
       @SerializedName("description")
@@ -1381,7 +1381,7 @@ public class Charge extends ApiResource implements MetadataStore<Charge>, Balanc
       String funding;
 
       /**
-       * Issuer identification number of the card. (For internal use only and not typically
+       * Issuer identification number of the card. (Only for internal use only and not typically
        * available in standard API requests.)
        */
       @SerializedName("iin")
@@ -1397,7 +1397,7 @@ public class Charge extends ApiResource implements MetadataStore<Charge>, Balanc
       Installments installments;
 
       /**
-       * Issuer bank name of the card. (For internal use only and not typically available in
+       * Issuer bank name of the card. (Only for internal use only and not typically available in
        * standard API requests.)
        */
       @SerializedName("issuer")
@@ -1656,13 +1656,6 @@ public class Charge extends ApiResource implements MetadataStore<Charge>, Balanc
       @SerializedName("country")
       String country;
 
-      /**
-       * Card description. (For internal use only and not typically available in standard API
-       * requests.)
-       */
-      @SerializedName("description")
-      String description;
-
       /** Authorization response cryptogram. */
       @SerializedName("emv_auth_data")
       String emvAuthData;
@@ -1698,20 +1691,6 @@ public class Charge extends ApiResource implements MetadataStore<Charge>, Balanc
        */
       @SerializedName("generated_card")
       String generatedCard;
-
-      /**
-       * Issuer identification number of the card. (For internal use only and not typically
-       * available in standard API requests.)
-       */
-      @SerializedName("iin")
-      String iin;
-
-      /**
-       * Issuer bank name of the card. (For internal use only and not typically available in
-       * standard API requests.)
-       */
-      @SerializedName("issuer")
-      String issuer;
 
       /** The last four digits of the card. */
       @SerializedName("last4")
@@ -1962,13 +1941,6 @@ public class Charge extends ApiResource implements MetadataStore<Charge>, Balanc
       @SerializedName("country")
       String country;
 
-      /**
-       * Card description. (For internal use only and not typically available in standard API
-       * requests.)
-       */
-      @SerializedName("description")
-      String description;
-
       /** Authorization response cryptogram. */
       @SerializedName("emv_auth_data")
       String emvAuthData;
@@ -2004,20 +1976,6 @@ public class Charge extends ApiResource implements MetadataStore<Charge>, Balanc
        */
       @SerializedName("generated_card")
       String generatedCard;
-
-      /**
-       * Issuer identification number of the card. (For internal use only and not typically
-       * available in standard API requests.)
-       */
-      @SerializedName("iin")
-      String iin;
-
-      /**
-       * Issuer bank name of the card. (For internal use only and not typically available in
-       * standard API requests.)
-       */
-      @SerializedName("issuer")
-      String issuer;
 
       /** The last four digits of the card. */
       @SerializedName("last4")
