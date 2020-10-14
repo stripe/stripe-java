@@ -10,6 +10,7 @@ import com.stripe.param.PayoutCancelParams;
 import com.stripe.param.PayoutCreateParams;
 import com.stripe.param.PayoutListParams;
 import com.stripe.param.PayoutRetrieveParams;
+import com.stripe.param.PayoutReverseParams;
 import com.stripe.param.PayoutUpdateParams;
 import java.util.Map;
 import lombok.EqualsAndHashCode;
@@ -129,6 +130,18 @@ public class Payout extends ApiResource implements MetadataStore<Payout>, Balanc
   @SerializedName("object")
   String object;
 
+  /** If the payout reverses another, this is the ID of the original payout. */
+  @SerializedName("original_payout")
+  @Getter(lombok.AccessLevel.NONE)
+  @Setter(lombok.AccessLevel.NONE)
+  ExpandableField<Payout> originalPayout;
+
+  /** If the payout was reversed, this is the ID of the payout that reverses this payout. */
+  @SerializedName("reversed_by")
+  @Getter(lombok.AccessLevel.NONE)
+  @Setter(lombok.AccessLevel.NONE)
+  ExpandableField<Payout> reversedBy;
+
   /**
    * The source balance this payout came from. One of {@code card}, {@code fpx}, or {@code
    * bank_account}.
@@ -212,6 +225,42 @@ public class Payout extends ApiResource implements MetadataStore<Payout>, Balanc
   public void setFailureBalanceTransactionObject(BalanceTransaction expandableObject) {
     this.failureBalanceTransaction =
         new ExpandableField<BalanceTransaction>(expandableObject.getId(), expandableObject);
+  }
+
+  /** Get ID of expandable {@code originalPayout} object. */
+  public String getOriginalPayout() {
+    return (this.originalPayout != null) ? this.originalPayout.getId() : null;
+  }
+
+  public void setOriginalPayout(String id) {
+    this.originalPayout = ApiResource.setExpandableFieldId(id, this.originalPayout);
+  }
+
+  /** Get expanded {@code originalPayout}. */
+  public Payout getOriginalPayoutObject() {
+    return (this.originalPayout != null) ? this.originalPayout.getExpanded() : null;
+  }
+
+  public void setOriginalPayoutObject(Payout expandableObject) {
+    this.originalPayout = new ExpandableField<Payout>(expandableObject.getId(), expandableObject);
+  }
+
+  /** Get ID of expandable {@code reversedBy} object. */
+  public String getReversedBy() {
+    return (this.reversedBy != null) ? this.reversedBy.getId() : null;
+  }
+
+  public void setReversedBy(String id) {
+    this.reversedBy = ApiResource.setExpandableFieldId(id, this.reversedBy);
+  }
+
+  /** Get expanded {@code reversedBy}. */
+  public Payout getReversedByObject() {
+    return (this.reversedBy != null) ? this.reversedBy.getExpanded() : null;
+  }
+
+  public void setReversedByObject(Payout expandableObject) {
+    this.reversedBy = new ExpandableField<Payout>(expandableObject.getId(), expandableObject);
   }
 
   /**
@@ -471,6 +520,94 @@ public class Payout extends ApiResource implements MetadataStore<Payout>, Balanc
             "%s%s",
             Stripe.getApiBase(),
             String.format("/v1/payouts/%s/cancel", ApiResource.urlEncodeId(this.getId())));
+    return ApiResource.request(ApiResource.RequestMethod.POST, url, params, Payout.class, options);
+  }
+
+  /**
+   * Reverses a payout by debiting the destination bank account. Only payouts for connected accounts
+   * to US bank accounts may be reversed at this time. If the payout is in the <code>pending</code>
+   * status, <code>/v1/payouts/:id/cancel</code> should be used instead.
+   *
+   * <p>By requesting a reversal via <code>/v1/payouts/:id/reverse</code>, you confirm that the
+   * authorized signatory of the selected bank account has authorized the debit on the bank account
+   * and that no other authorization is required.
+   */
+  public Payout reverse() throws StripeException {
+    return reverse((Map<String, Object>) null, (RequestOptions) null);
+  }
+
+  /**
+   * Reverses a payout by debiting the destination bank account. Only payouts for connected accounts
+   * to US bank accounts may be reversed at this time. If the payout is in the <code>pending</code>
+   * status, <code>/v1/payouts/:id/cancel</code> should be used instead.
+   *
+   * <p>By requesting a reversal via <code>/v1/payouts/:id/reverse</code>, you confirm that the
+   * authorized signatory of the selected bank account has authorized the debit on the bank account
+   * and that no other authorization is required.
+   */
+  public Payout reverse(RequestOptions options) throws StripeException {
+    return reverse((Map<String, Object>) null, options);
+  }
+
+  /**
+   * Reverses a payout by debiting the destination bank account. Only payouts for connected accounts
+   * to US bank accounts may be reversed at this time. If the payout is in the <code>pending</code>
+   * status, <code>/v1/payouts/:id/cancel</code> should be used instead.
+   *
+   * <p>By requesting a reversal via <code>/v1/payouts/:id/reverse</code>, you confirm that the
+   * authorized signatory of the selected bank account has authorized the debit on the bank account
+   * and that no other authorization is required.
+   */
+  public Payout reverse(Map<String, Object> params) throws StripeException {
+    return reverse(params, (RequestOptions) null);
+  }
+
+  /**
+   * Reverses a payout by debiting the destination bank account. Only payouts for connected accounts
+   * to US bank accounts may be reversed at this time. If the payout is in the <code>pending</code>
+   * status, <code>/v1/payouts/:id/cancel</code> should be used instead.
+   *
+   * <p>By requesting a reversal via <code>/v1/payouts/:id/reverse</code>, you confirm that the
+   * authorized signatory of the selected bank account has authorized the debit on the bank account
+   * and that no other authorization is required.
+   */
+  public Payout reverse(Map<String, Object> params, RequestOptions options) throws StripeException {
+    String url =
+        String.format(
+            "%s%s",
+            Stripe.getApiBase(),
+            String.format("/v1/payouts/%s/reverse", ApiResource.urlEncodeId(this.getId())));
+    return ApiResource.request(ApiResource.RequestMethod.POST, url, params, Payout.class, options);
+  }
+
+  /**
+   * Reverses a payout by debiting the destination bank account. Only payouts for connected accounts
+   * to US bank accounts may be reversed at this time. If the payout is in the <code>pending</code>
+   * status, <code>/v1/payouts/:id/cancel</code> should be used instead.
+   *
+   * <p>By requesting a reversal via <code>/v1/payouts/:id/reverse</code>, you confirm that the
+   * authorized signatory of the selected bank account has authorized the debit on the bank account
+   * and that no other authorization is required.
+   */
+  public Payout reverse(PayoutReverseParams params) throws StripeException {
+    return reverse(params, (RequestOptions) null);
+  }
+
+  /**
+   * Reverses a payout by debiting the destination bank account. Only payouts for connected accounts
+   * to US bank accounts may be reversed at this time. If the payout is in the <code>pending</code>
+   * status, <code>/v1/payouts/:id/cancel</code> should be used instead.
+   *
+   * <p>By requesting a reversal via <code>/v1/payouts/:id/reverse</code>, you confirm that the
+   * authorized signatory of the selected bank account has authorized the debit on the bank account
+   * and that no other authorization is required.
+   */
+  public Payout reverse(PayoutReverseParams params, RequestOptions options) throws StripeException {
+    String url =
+        String.format(
+            "%s%s",
+            Stripe.getApiBase(),
+            String.format("/v1/payouts/%s/reverse", ApiResource.urlEncodeId(this.getId())));
     return ApiResource.request(ApiResource.RequestMethod.POST, url, params, Payout.class, options);
   }
 }

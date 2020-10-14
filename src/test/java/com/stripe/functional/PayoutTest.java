@@ -77,4 +77,15 @@ public class PayoutTest extends BaseStripeTest {
     verifyRequest(
         ApiResource.RequestMethod.POST, String.format("/v1/payouts/%s/cancel", resource.getId()));
   }
+
+  @Test
+  public void testReverse() throws StripeException {
+    final Payout resource = getPayoutFixture();
+
+    final Payout reversedPayout = resource.reverse();
+
+    assertNotNull(reversedPayout);
+    verifyRequest(
+        ApiResource.RequestMethod.POST, String.format("/v1/payouts/%s/reverse", resource.getId()));
+  }
 }
