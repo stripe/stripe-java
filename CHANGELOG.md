@@ -1,5 +1,8 @@
 # Changelog
 
+## 20.19.0 - 2020-10-14
+* [#1130](https://github.com/stripe/stripe-java/pull/1130) Add support for `discounts` to SessionCreateParams
+
 ## 20.18.0 - 2020-10-14
 * [#1129](https://github.com/stripe/stripe-java/pull/1129) Add support for the Payout Reverse API
 
