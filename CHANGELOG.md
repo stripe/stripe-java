@@ -1,5 +1,8 @@
 # Changelog
 
+## 20.18.0 - 2020-10-14
+* [#1129](https://github.com/stripe/stripe-java/pull/1129) Add support for the Payout Reverse API
+
 ## 20.17.0 - 2020-10-12
 * [#1128](https://github.com/stripe/stripe-java/pull/1128) Add support for `setup_intent.requires_action` on `Event`
 
