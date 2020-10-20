@@ -1,5 +1,8 @@
 # Changelog
 
+## 20.20.0 - 2020-10-20
+* [#1133](https://github.com/stripe/stripe-java/pull/1133) Add support for `jp_rn` and `ru_kpp` as a `type` on `TaxId`
+
 ## 20.19.0 - 2020-10-14
 * [#1130](https://github.com/stripe/stripe-java/pull/1130) Add support for `discounts` to SessionCreateParams
 
