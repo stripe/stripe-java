@@ -128,8 +128,9 @@ public class Session extends ApiResource implements HasId {
   Map<String, String> metadata;
 
   /**
-   * The mode of the Checkout Session, one of {@code payment}, {@code setup}, or {@code
-   * subscription}.
+   * The mode of the Checkout Session.
+   *
+   * <p>One of {@code payment}, {@code setup}, or {@code subscription}.
    */
   @SerializedName("mode")
   String mode;
