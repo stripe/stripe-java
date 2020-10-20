@@ -101,9 +101,8 @@ public class SessionCreateParams extends ApiRequestParams {
   Map<String, String> metadata;
 
   /**
-   * The mode of the Checkout Session, one of {@code payment}, {@code setup}, or {@code
-   * subscription}. Required when using prices or {@code setup} mode. Pass {@code subscription} if
-   * Checkout session includes at least one recurring item.
+   * The mode of the Checkout Session. Required when using prices or {@code setup} mode. Pass {@code
+   * subscription} if Checkout session includes at least one recurring item.
    */
   @SerializedName("mode")
   Mode mode;
@@ -471,9 +470,8 @@ public class SessionCreateParams extends ApiRequestParams {
     }
 
     /**
-     * The mode of the Checkout Session, one of {@code payment}, {@code setup}, or {@code
-     * subscription}. Required when using prices or {@code setup} mode. Pass {@code subscription} if
-     * Checkout session includes at least one recurring item.
+     * The mode of the Checkout Session. Required when using prices or {@code setup} mode. Pass
+     * {@code subscription} if Checkout session includes at least one recurring item.
      */
     public Builder setMode(Mode mode) {
       this.mode = mode;

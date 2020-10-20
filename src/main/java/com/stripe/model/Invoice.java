@@ -1320,10 +1320,11 @@ public class Invoice extends ApiResource implements HasId, MetadataStore<Invoice
     /**
      * The type of the tax ID, one of {@code eu_vat}, {@code br_cnpj}, {@code br_cpf}, {@code
      * nz_gst}, {@code au_abn}, {@code in_gst}, {@code no_vat}, {@code za_vat}, {@code ch_vat},
-     * {@code mx_rfc}, {@code sg_uen}, {@code ru_inn}, {@code ca_bn}, {@code hk_br}, {@code es_cif},
-     * {@code tw_vat}, {@code th_vat}, {@code jp_cn}, {@code li_uid}, {@code my_itn}, {@code
-     * us_ein}, {@code kr_brn}, {@code ca_qst}, {@code my_sst}, {@code sg_gst}, {@code ae_trn},
-     * {@code cl_tin}, {@code sa_vat}, {@code id_npwp}, {@code my_frp}, or {@code unknown}.
+     * {@code mx_rfc}, {@code sg_uen}, {@code ru_inn}, {@code ru_kpp}, {@code ca_bn}, {@code hk_br},
+     * {@code es_cif}, {@code tw_vat}, {@code th_vat}, {@code jp_cn}, {@code jp_rn}, {@code li_uid},
+     * {@code my_itn}, {@code us_ein}, {@code kr_brn}, {@code ca_qst}, {@code my_sst}, {@code
+     * sg_gst}, {@code ae_trn}, {@code cl_tin}, {@code sa_vat}, {@code id_npwp}, {@code my_frp}, or
+     * {@code unknown}.
      */
     @SerializedName("type")
     String type;
