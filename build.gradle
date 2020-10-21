@@ -14,7 +14,7 @@ plugins {
     id "maven"
     id "jacoco"
     id "io.franzbecker.gradle-lombok" version "3.3.0"
-    id "com.diffplug.gradle.spotless" version "3.28.1"
+    id "com.diffplug.spotless" version "5.7.0"
     id "net.ltgt.errorprone" version "1.1.1"
     id "com.github.kt3k.coveralls" version "2.10.1"
     id "biz.aQute.bnd.builder" version "5.0.1"
@@ -131,7 +131,7 @@ test {
 
 spotless {
   java {
-    googleJavaFormat("1.7")
+    googleJavaFormat("1.7") // 1.7 is the last version that supports Java 8
     removeUnusedImports()
   }
 }
