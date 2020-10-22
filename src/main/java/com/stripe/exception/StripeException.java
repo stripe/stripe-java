@@ -16,12 +16,12 @@ public abstract class StripeException extends Exception {
   private String requestId;
   private Integer statusCode;
 
-  public StripeException(String message, String requestId, String code, Integer statusCode) {
+  protected StripeException(String message, String requestId, String code, Integer statusCode) {
     this(message, requestId, code, statusCode, null);
   }
 
   /** Constructs a new Stripe exception with the specified details. */
-  public StripeException(
+  protected StripeException(
       String message, String requestId, String code, Integer statusCode, Throwable e) {
     super(message, e);
     this.code = code;
