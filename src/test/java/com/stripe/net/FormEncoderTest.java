@@ -12,13 +12,11 @@ import java.io.ByteArrayInputStream;
 import java.io.IOException;
 import java.math.BigDecimal;
 import java.nio.charset.StandardCharsets;
-import java.time.Instant;
 import java.util.ArrayDeque;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collection;
 import java.util.Collections;
-import java.util.Date;
 import java.util.Deque;
 import java.util.HashMap;
 import java.util.HashSet;
@@ -339,14 +337,6 @@ public class FormEncoderTest extends BaseStripeTest {
                 new TestCase(
                     Collections.singletonMap("big_decimal", new BigDecimal("1e100")),
                     "big_decimal=1E%2B100"));
-
-            // Date
-            add(new TestCase(Collections.singletonMap("date", (Date) null), "date="));
-            add(new TestCase(Collections.singletonMap("date", Date.from(Instant.EPOCH)), "date=0"));
-            add(
-                new TestCase(
-                    Collections.singletonMap("date", Date.from(Instant.ofEpochSecond(1234567890))),
-                    "date=1234567890"));
 
             // Enum
             add(new TestCase(Collections.singletonMap("enum", TestEnum.FOO), "enum=foo"));

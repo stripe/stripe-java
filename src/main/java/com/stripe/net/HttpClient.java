@@ -26,7 +26,7 @@ public abstract class HttpClient {
   boolean networkRetriesSleep = true;
 
   /** Initializes a new instance of the {@link HttpClient} class. */
-  public HttpClient() {}
+  protected HttpClient() {}
 
   /**
    * Sends the given request to Stripe's API.

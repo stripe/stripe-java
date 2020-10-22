@@ -10,7 +10,6 @@ import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collection;
-import java.util.Date;
 import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
@@ -173,9 +172,6 @@ public final class FormEncoder {
       Object[] array = getArrayForObject(value);
       Collection<?> collection = Arrays.stream(array).collect(Collectors.toList());
       flatParams = flattenParamsCollection(collection, keyPrefix);
-
-    } else if (value instanceof Date) {
-      flatParams = singleParam(keyPrefix, String.format("%d", ((Date) value).getTime() / 1000L));
 
     } else if (value.getClass().isEnum()) {
       flatParams = singleParam(keyPrefix, ApiResource.GSON.toJson(value).replaceAll("\"", ""));
