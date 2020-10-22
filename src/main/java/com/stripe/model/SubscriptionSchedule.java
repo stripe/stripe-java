@@ -484,6 +484,13 @@ public class SubscriptionSchedule extends ApiResource
     @SerializedName("quantity")
     Long quantity;
 
+    /**
+     * The tax rates which apply to the item. When set, the {@code default_tax_rates} do not apply
+     * to this item.
+     */
+    @SerializedName("tax_rates")
+    List<TaxRate> taxRates;
+
     /** Get ID of expandable {@code price} object. */
     public String getPrice() {
       return (this.price != null) ? this.price.getId() : null;
