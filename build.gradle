@@ -13,7 +13,7 @@ plugins {
     id "java"
     id "maven"
     id "jacoco"
-    id "io.franzbecker.gradle-lombok" version "3.3.0"
+    id "io.freefair.lombok" version "5.2.1"
     id "com.diffplug.spotless" version "5.7.0"
     id "net.ltgt.errorprone" version "1.1.1"
     id "com.github.kt3k.coveralls" version "2.10.1"
@@ -79,44 +79,15 @@ jar {
 }
 
 lombok {
-    version = "1.18.12"
-    sha256 = ""
+    version = "1.18.16"
+    config['lombok.addLombokGeneratedAnnotation'] = 'true'
+    config['lombok.getter.noIsPrefix'] = 'true'
 }
 
-import io.franzbecker.gradle.lombok.task.DelombokTask
-
-task delombok(type: DelombokTask, dependsOn: compileJava) {
-    ext.outputDir = file("$buildDir/delombok/main")
-    outputs.dir(outputDir)
-    sourceSets.main.java.srcDirs.each {
-        inputs.dir(it)
-        args(it, "-d", outputDir)
-    }
-    doFirst {
-        outputDir.deleteDir()
-    }
-}
-
-task delombokTest(type: DelombokTask, dependsOn: compileJava) {
-    ext.outputDir = file("$buildDir/delombok/test")
-    outputs.dir(outputDir)
-    sourceSets.test.java.srcDirs.each {
-        inputs.dir(it)
-        args(it, "-d", outputDir)
-    }
-    doFirst {
-        outputDir.deleteDir()
-    }
-}
-
-task delombokHelp(type: DelombokTask) {
-    args "--help"
-}
-
-javadoc {
-    dependsOn delombok
-    source = delombok.outputDir
-    failOnError = true
+delombok {
+    // empty format option, otherwise the default is to use pretty formatting which overrides
+    // options Lombok config options and does not add generated annotations.
+    format = [:]
 }
 
 apply from: "deploy.gradle"

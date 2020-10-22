@@ -104,24 +104,18 @@ afterEvaluate { project ->
         onlyIf { isReleaseBuild() && project.hasProperty("signing.gnupg.keyName") }
     }
 
-    task makeJavadocs(type: Javadoc, dependsOn: delombok) {
-        source = delombok.outputDir
-        classpath = configurations.compileClasspath + configurations.annotationProcessor
-        failOnError = true
-    }
-
-    task makeJavadocsJar(type: Jar, dependsOn: makeJavadocs) {
-        classifier = "javadoc"
-        from makeJavadocs.destinationDir
-    }
-
-    task sourcesJar(type: Jar, dependsOn: delombok) {
+    task sourcesJar(type: Jar) {
         classifier = "sources"
-        from delombok.outputDir
+        from delombok
+    }
+
+    task javadocJar(type: Jar, dependsOn: javadoc) {
+        classifier = "javadoc"
+        from javadoc.destinationDir
     }
 
     artifacts {
         archives sourcesJar
-        archives makeJavadocsJar
+        archives javadocJar
     }
 }
