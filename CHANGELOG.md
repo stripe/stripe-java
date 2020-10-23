@@ -1,5 +1,13 @@
 # Changelog
 
+## 20.21.0 - 2020-10-22
+* [#1141](https://github.com/stripe/stripe-java/pull/1141) Support passing `tax_rates` when creating invoice items through `Subscription` or `SubscriptionSchedule`
+* [#1134](https://github.com/stripe/stripe-java/pull/1134) Upgrade Gradle to 6.7
+* [#1138](https://github.com/stripe/stripe-java/pull/1138) Bump ErrorProne to latest version
+* [#1139](https://github.com/stripe/stripe-java/pull/1139) Upgrade Lombok plugin
+* [#1137](https://github.com/stripe/stripe-java/pull/1137) Bump Spotless plugin version
+* [#1135](https://github.com/stripe/stripe-java/pull/1135) Fix deprecation warning in test file
+
 ## 20.20.0 - 2020-10-20
 * [#1133](https://github.com/stripe/stripe-java/pull/1133) Add support for `jp_rn` and `ru_kpp` as a `type` on `TaxId`
 
