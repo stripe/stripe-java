@@ -817,7 +817,21 @@ public class PaymentMethod extends ApiResource implements HasId, MetadataStore<P
   @Getter
   @Setter
   @EqualsAndHashCode(callSuper = false)
-  public static class P24 extends StripeObject {}
+  public static class P24 extends StripeObject {
+    /**
+     * The customer's bank, if provided.
+     *
+     * <p>One of {@code alior_bank}, {@code bank_millennium}, {@code bank_nowy_bfg_sa}, {@code
+     * bank_pekao_sa}, {@code banki_spbdzielcze}, {@code blik}, {@code bnp_paribas}, {@code boz},
+     * {@code citi_handlowy}, {@code credit_agricole}, {@code envelobank}, {@code
+     * etransfer_pocztowy24}, {@code getin_bank}, {@code ideabank}, {@code ing}, {@code inteligo},
+     * {@code mbank_mtransfer}, {@code nest_przelew}, {@code noble_pay}, {@code pbac_z_ipko}, {@code
+     * plus_bank}, {@code santander_przelew24}, {@code tmobile_usbugi_bankowe}, {@code toyota_bank},
+     * or {@code volkswagen_bank}.
+     */
+    @SerializedName("bank")
+    String bank;
+  }
 
   @Getter
   @Setter

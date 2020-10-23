@@ -1748,6 +1748,10 @@ public class PaymentMethodCreateParams extends ApiRequestParams {
 
   @Getter
   public static class P24 {
+    /** The customer's bank. */
+    @SerializedName("bank")
+    Bank bank;
+
     /**
      * Map of extra parameters for custom features not available in this client library. The content
      * in this map is not serialized under this field's {@code @SerializedName} value. Instead, each
@@ -1757,7 +1761,8 @@ public class PaymentMethodCreateParams extends ApiRequestParams {
     @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
     Map<String, Object> extraParams;
 
-    private P24(Map<String, Object> extraParams) {
+    private P24(Bank bank, Map<String, Object> extraParams) {
+      this.bank = bank;
       this.extraParams = extraParams;
     }
 
@@ -1766,11 +1771,19 @@ public class PaymentMethodCreateParams extends ApiRequestParams {
     }
 
     public static class Builder {
+      private Bank bank;
+
       private Map<String, Object> extraParams;
 
       /** Finalize and obtain parameter instance from this builder. */
       public P24 build() {
-        return new P24(this.extraParams);
+        return new P24(this.bank, this.extraParams);
+      }
+
+      /** The customer's bank. */
+      public Builder setBank(Bank bank) {
+        this.bank = bank;
+        return this;
       }
 
       /**
@@ -1797,6 +1810,90 @@ public class PaymentMethodCreateParams extends ApiRequestParams {
         }
         this.extraParams.putAll(map);
         return this;
+      }
+    }
+
+    public enum Bank implements ApiRequestParams.EnumParam {
+      @SerializedName("alior_bank")
+      ALIOR_BANK("alior_bank"),
+
+      @SerializedName("bank_millennium")
+      BANK_MILLENNIUM("bank_millennium"),
+
+      @SerializedName("bank_nowy_bfg_sa")
+      BANK_NOWY_BFG_SA("bank_nowy_bfg_sa"),
+
+      @SerializedName("bank_pekao_sa")
+      BANK_PEKAO_SA("bank_pekao_sa"),
+
+      @SerializedName("banki_spbdzielcze")
+      BANKI_SPBDZIELCZE("banki_spbdzielcze"),
+
+      @SerializedName("blik")
+      BLIK("blik"),
+
+      @SerializedName("bnp_paribas")
+      BNP_PARIBAS("bnp_paribas"),
+
+      @SerializedName("boz")
+      BOZ("boz"),
+
+      @SerializedName("citi_handlowy")
+      CITI_HANDLOWY("citi_handlowy"),
+
+      @SerializedName("credit_agricole")
+      CREDIT_AGRICOLE("credit_agricole"),
+
+      @SerializedName("envelobank")
+      ENVELOBANK("envelobank"),
+
+      @SerializedName("etransfer_pocztowy24")
+      ETRANSFER_POCZTOWY24("etransfer_pocztowy24"),
+
+      @SerializedName("getin_bank")
+      GETIN_BANK("getin_bank"),
+
+      @SerializedName("ideabank")
+      IDEABANK("ideabank"),
+
+      @SerializedName("ing")
+      ING("ing"),
+
+      @SerializedName("inteligo")
+      INTELIGO("inteligo"),
+
+      @SerializedName("mbank_mtransfer")
+      MBANK_MTRANSFER("mbank_mtransfer"),
+
+      @SerializedName("nest_przelew")
+      NEST_PRZELEW("nest_przelew"),
+
+      @SerializedName("noble_pay")
+      NOBLE_PAY("noble_pay"),
+
+      @SerializedName("pbac_z_ipko")
+      PBAC_Z_IPKO("pbac_z_ipko"),
+
+      @SerializedName("plus_bank")
+      PLUS_BANK("plus_bank"),
+
+      @SerializedName("santander_przelew24")
+      SANTANDER_PRZELEW24("santander_przelew24"),
+
+      @SerializedName("tmobile_usbugi_bankowe")
+      TMOBILE_USBUGI_BANKOWE("tmobile_usbugi_bankowe"),
+
+      @SerializedName("toyota_bank")
+      TOYOTA_BANK("toyota_bank"),
+
+      @SerializedName("volkswagen_bank")
+      VOLKSWAGEN_BANK("volkswagen_bank");
+
+      @Getter(onMethod_ = {@Override})
+      private final String value;
+
+      Bank(String value) {
+        this.value = value;
       }
     }
   }
