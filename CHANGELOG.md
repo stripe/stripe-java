@@ -1,5 +1,8 @@
 # Changelog
 
+## 20.22.0 - 2020-10-23
+* [#1142](https://github.com/stripe/stripe-java/pull/1142) Add support for passing `p24[bank]` for P24 on `PaymentIntent` or `PaymentMethod`
+
 ## 20.21.0 - 2020-10-22
 * [#1141](https://github.com/stripe/stripe-java/pull/1141) Support passing `tax_rates` when creating invoice items through `Subscription` or `SubscriptionSchedule`
 * [#1134](https://github.com/stripe/stripe-java/pull/1134) Upgrade Gradle to 6.7
