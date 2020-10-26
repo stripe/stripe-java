@@ -35,6 +35,10 @@ public class TokenCreateParams extends ApiRequestParams {
   @SerializedName("customer")
   String customer;
 
+  /** The updated CVC value this token will represent. */
+  @SerializedName("cvc_update")
+  CvcUpdate cvcUpdate;
+
   /** Specifies which fields in the response should be expanded. */
   @SerializedName("expand")
   List<String> expand;
@@ -61,6 +65,7 @@ public class TokenCreateParams extends ApiRequestParams {
       BankAccount bankAccount,
       Object card,
       String customer,
+      CvcUpdate cvcUpdate,
       List<String> expand,
       Map<String, Object> extraParams,
       Person person,
@@ -69,6 +74,7 @@ public class TokenCreateParams extends ApiRequestParams {
     this.bankAccount = bankAccount;
     this.card = card;
     this.customer = customer;
+    this.cvcUpdate = cvcUpdate;
     this.expand = expand;
     this.extraParams = extraParams;
     this.person = person;
@@ -88,6 +94,8 @@ public class TokenCreateParams extends ApiRequestParams {
 
     private String customer;
 
+    private CvcUpdate cvcUpdate;
+
     private List<String> expand;
 
     private Map<String, Object> extraParams;
@@ -103,6 +111,7 @@ public class TokenCreateParams extends ApiRequestParams {
           this.bankAccount,
           this.card,
           this.customer,
+          this.cvcUpdate,
           this.expand,
           this.extraParams,
           this.person,
@@ -141,6 +150,12 @@ public class TokenCreateParams extends ApiRequestParams {
      */
     public Builder setCustomer(String customer) {
       this.customer = customer;
+      return this;
+    }
+
+    /** The updated CVC value this token will represent. */
+    public Builder setCvcUpdate(CvcUpdate cvcUpdate) {
+      this.cvcUpdate = cvcUpdate;
       return this;
     }
 
@@ -3179,6 +3194,74 @@ public class TokenCreateParams extends ApiRequestParams {
 
       public Builder setNumber(String number) {
         this.number = number;
+        return this;
+      }
+    }
+  }
+
+  @Getter
+  public static class CvcUpdate {
+    /** The CVC value, in string form. */
+    @SerializedName("cvc")
+    String cvc;
+
+    /**
+     * Map of extra parameters for custom features not available in this client library. The content
+     * in this map is not serialized under this field's {@code @SerializedName} value. Instead, each
+     * key/value pair is serialized as if the key is a root-level field (serialized) name in this
+     * param object. Effectively, this map is flattened to its parent instance.
+     */
+    @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
+    Map<String, Object> extraParams;
+
+    private CvcUpdate(String cvc, Map<String, Object> extraParams) {
+      this.cvc = cvc;
+      this.extraParams = extraParams;
+    }
+
+    public static Builder builder() {
+      return new Builder();
+    }
+
+    public static class Builder {
+      private String cvc;
+
+      private Map<String, Object> extraParams;
+
+      /** Finalize and obtain parameter instance from this builder. */
+      public CvcUpdate build() {
+        return new CvcUpdate(this.cvc, this.extraParams);
+      }
+
+      /** The CVC value, in string form. */
+      public Builder setCvc(String cvc) {
+        this.cvc = cvc;
+        return this;
+      }
+
+      /**
+       * Add a key/value pair to `extraParams` map. A map is initialized for the first `put/putAll`
+       * call, and subsequent calls add additional key/value pairs to the original map. See {@link
+       * TokenCreateParams.CvcUpdate#extraParams} for the field documentation.
+       */
+      public Builder putExtraParam(String key, Object value) {
+        if (this.extraParams == null) {
+          this.extraParams = new HashMap<>();
+        }
+        this.extraParams.put(key, value);
+        return this;
+      }
+
+      /**
+       * Add all map key/value pairs to `extraParams` map. A map is initialized for the first
+       * `put/putAll` call, and subsequent calls add additional key/value pairs to the original map.
+       * See {@link TokenCreateParams.CvcUpdate#extraParams} for the field documentation.
+       */
+      public Builder putAllExtraParam(Map<String, Object> map) {
+        if (this.extraParams == null) {
+          this.extraParams = new HashMap<>();
+        }
+        this.extraParams.putAll(map);
         return this;
       }
     }
