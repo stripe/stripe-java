@@ -1,5 +1,10 @@
 # Changelog
 
+## 20.23.0 - 2020-10-26
+* [#1143](https://github.com/stripe/stripe-java/pull/1143) Multiple API changes
+  * Add support for `payment_method_options[card][cvc_token]` on `PaymentIntent`
+  * Add support for `cvc_update[cvc]` on `Token` creation
+
 ## 20.22.0 - 2020-10-23
 * [#1142](https://github.com/stripe/stripe-java/pull/1142) Add support for passing `p24[bank]` for P24 on `PaymentIntent` or `PaymentMethod`
 
