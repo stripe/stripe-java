@@ -2982,6 +2982,14 @@ public class PaymentIntentUpdateParams extends ApiRequestParams {
     @Getter
     public static class Card {
       /**
+       * A single-use {@code cvc_update} Token that represents a card CVC value. When provided, the
+       * CVC value will be verified during the card payment attempt. This parameter can only be
+       * provided during confirmation.
+       */
+      @SerializedName("cvc_token")
+      Object cvcToken;
+
+      /**
        * Map of extra parameters for custom features not available in this client library. The
        * content in this map is not serialized under this field's {@code @SerializedName} value.
        * Instead, each key/value pair is serialized as if the key is a root-level field (serialized)
@@ -3029,11 +3037,13 @@ public class PaymentIntentUpdateParams extends ApiRequestParams {
       RequestThreeDSecure requestThreeDSecure;
 
       private Card(
+          Object cvcToken,
           Map<String, Object> extraParams,
           Installments installments,
           Boolean moto,
           Network network,
           RequestThreeDSecure requestThreeDSecure) {
+        this.cvcToken = cvcToken;
         this.extraParams = extraParams;
         this.installments = installments;
         this.moto = moto;
@@ -3046,6 +3056,8 @@ public class PaymentIntentUpdateParams extends ApiRequestParams {
       }
 
       public static class Builder {
+        private Object cvcToken;
+
         private Map<String, Object> extraParams;
 
         private Installments installments;
@@ -3059,11 +3071,32 @@ public class PaymentIntentUpdateParams extends ApiRequestParams {
         /** Finalize and obtain parameter instance from this builder. */
         public Card build() {
           return new Card(
+              this.cvcToken,
               this.extraParams,
               this.installments,
               this.moto,
               this.network,
               this.requestThreeDSecure);
+        }
+
+        /**
+         * A single-use {@code cvc_update} Token that represents a card CVC value. When provided,
+         * the CVC value will be verified during the card payment attempt. This parameter can only
+         * be provided during confirmation.
+         */
+        public Builder setCvcToken(String cvcToken) {
+          this.cvcToken = cvcToken;
+          return this;
+        }
+
+        /**
+         * A single-use {@code cvc_update} Token that represents a card CVC value. When provided,
+         * the CVC value will be verified during the card payment attempt. This parameter can only
+         * be provided during confirmation.
+         */
+        public Builder setCvcToken(EmptyParam cvcToken) {
+          this.cvcToken = cvcToken;
+          return this;
         }
 
         /**
