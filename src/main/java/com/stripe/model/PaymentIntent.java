@@ -1160,6 +1160,9 @@ public class PaymentIntent extends ApiResource implements HasId, MetadataStore<P
     @SerializedName("oxxo")
     Oxxo oxxo;
 
+    @SerializedName("p24")
+    P24 p24;
+
     @SerializedName("sofort")
     Sofort sofort;
 
@@ -1270,6 +1273,11 @@ public class PaymentIntent extends ApiResource implements HasId, MetadataStore<P
       @SerializedName("expires_after_days")
       Long expiresAfterDays;
     }
+
+    @Getter
+    @Setter
+    @EqualsAndHashCode(callSuper = false)
+    public static class P24 extends StripeObject {}
 
     @Getter
     @Setter
