@@ -1,5 +1,8 @@
 # Changelog
 
+## 20.24.0 - 2020-10-27
+* [#1144](https://github.com/stripe/stripe-java/pull/1144) Add  `payment_method_details[interac_present][preferred_locales]` on `Charge`
+
 ## 20.23.0 - 2020-10-26
 * [#1143](https://github.com/stripe/stripe-java/pull/1143) Multiple API changes
   * Add support for `payment_method_options[card][cvc_token]` on `PaymentIntent`
