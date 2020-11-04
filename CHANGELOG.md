@@ -1,5 +1,8 @@
 # Changelog
 
+## 20.25.0 - 2020-11-04
+* [#1147](https://github.com/stripe/stripe-java/pull/1147) Add support for `company[registration_number]` on `Account`
+
 ## 20.24.0 - 2020-10-27
 * [#1144](https://github.com/stripe/stripe-java/pull/1144) Add  `payment_method_details[interac_present][preferred_locales]` on `Charge`
 
