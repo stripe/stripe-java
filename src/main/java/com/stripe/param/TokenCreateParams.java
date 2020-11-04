@@ -417,6 +417,15 @@ public class TokenCreateParams extends ApiRequestParams {
       String phone;
 
       /**
+       * The identification number given to a company when it is registered or incorporated, if
+       * distinct from the identification number used for filing taxes. (Examples are the CIN for
+       * companies and LLP IN for partnerships in India, and the Company Registration Number in Hong
+       * Kong).
+       */
+      @SerializedName("registration_number")
+      String registrationNumber;
+
+      /**
        * The category identifying the legal structure of the company or legal entity. See <a
        * href="https://stripe.com/docs/connect/identity-verification#business-structure">Business
        * structure</a> for more details.
@@ -458,6 +467,7 @@ public class TokenCreateParams extends ApiRequestParams {
           String nameKanji,
           Boolean ownersProvided,
           String phone,
+          String registrationNumber,
           EnumParam structure,
           String taxId,
           String taxIdRegistrar,
@@ -474,6 +484,7 @@ public class TokenCreateParams extends ApiRequestParams {
         this.nameKanji = nameKanji;
         this.ownersProvided = ownersProvided;
         this.phone = phone;
+        this.registrationNumber = registrationNumber;
         this.structure = structure;
         this.taxId = taxId;
         this.taxIdRegistrar = taxIdRegistrar;
@@ -508,6 +519,8 @@ public class TokenCreateParams extends ApiRequestParams {
 
         private String phone;
 
+        private String registrationNumber;
+
         private EnumParam structure;
 
         private String taxId;
@@ -532,6 +545,7 @@ public class TokenCreateParams extends ApiRequestParams {
               this.nameKanji,
               this.ownersProvided,
               this.phone,
+              this.registrationNumber,
               this.structure,
               this.taxId,
               this.taxIdRegistrar,
@@ -640,6 +654,17 @@ public class TokenCreateParams extends ApiRequestParams {
         /** The company's phone number (used for verification). */
         public Builder setPhone(String phone) {
           this.phone = phone;
+          return this;
+        }
+
+        /**
+         * The identification number given to a company when it is registered or incorporated, if
+         * distinct from the identification number used for filing taxes. (Examples are the CIN for
+         * companies and LLP IN for partnerships in India, and the Company Registration Number in
+         * Hong Kong).
+         */
+        public Builder setRegistrationNumber(String registrationNumber) {
+          this.registrationNumber = registrationNumber;
           return this;
         }
 
