@@ -288,6 +288,13 @@ public class Invoice extends ApiResource implements HasId, MetadataStore<Invoice
   String invoicePdf;
 
   /**
+   * The error encountered during the previous attempt to finalize the invoice. This field is
+   * cleared when the invoice is successfully finalized.
+   */
+  @SerializedName("last_finalization_error")
+  StripeError lastFinalizationError;
+
+  /**
    * The individual line items that make up the invoice. {@code lines} is sorted as follows: invoice
    * items in reverse chronological order, followed by the subscription, if any.
    */

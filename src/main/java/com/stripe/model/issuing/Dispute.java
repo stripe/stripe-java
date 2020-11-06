@@ -5,9 +5,9 @@ import com.google.gson.annotations.SerializedName;
 import com.stripe.Stripe;
 import com.stripe.exception.StripeException;
 import com.stripe.model.BalanceTransaction;
+import com.stripe.model.BalanceTransactionSource;
 import com.stripe.model.ExpandableField;
 import com.stripe.model.File;
-import com.stripe.model.HasId;
 import com.stripe.model.MetadataStore;
 import com.stripe.model.StripeObject;
 import com.stripe.net.ApiResource;
@@ -26,7 +26,8 @@ import lombok.Setter;
 @Getter
 @Setter
 @EqualsAndHashCode(callSuper = false)
-public class Dispute extends ApiResource implements HasId, MetadataStore<Dispute> {
+public class Dispute extends ApiResource
+    implements MetadataStore<Dispute>, BalanceTransactionSource {
   /**
    * Disputed amount. Usually the amount of the {@code disputed_transaction}, but can differ
    * (usually because of currency fluctuation).

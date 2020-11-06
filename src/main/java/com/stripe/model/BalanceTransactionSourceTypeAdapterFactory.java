@@ -10,6 +10,7 @@ import com.google.gson.reflect.TypeToken;
 import com.google.gson.stream.JsonReader;
 import com.google.gson.stream.JsonWriter;
 import com.stripe.model.issuing.Authorization;
+import com.stripe.model.issuing.Dispute;
 import com.stripe.model.issuing.Transaction;
 import java.io.IOException;
 import lombok.Getter;
@@ -41,6 +42,8 @@ public class BalanceTransactionSourceTypeAdapterFactory implements TypeAdapterFa
         gson.getDelegateAdapter(this, TypeToken.get(FeeRefund.class));
     final TypeAdapter<Authorization> authorizationAdapter =
         gson.getDelegateAdapter(this, TypeToken.get(Authorization.class));
+    final TypeAdapter<Dispute> disputeAdapter =
+        gson.getDelegateAdapter(this, TypeToken.get(Dispute.class));
     final TypeAdapter<Transaction> transactionAdapter =
         gson.getDelegateAdapter(this, TypeToken.get(Transaction.class));
     final TypeAdapter<Payout> payoutAdapter =
@@ -84,6 +87,8 @@ public class BalanceTransactionSourceTypeAdapterFactory implements TypeAdapterFa
               objectResult = feeRefundAdapter.fromJsonTree(object);
             } else if ("issuing.authorization".equals(objectType)) {
               objectResult = authorizationAdapter.fromJsonTree(object);
+            } else if ("issuing.dispute".equals(objectType)) {
+              objectResult = disputeAdapter.fromJsonTree(object);
             } else if ("issuing.transaction".equals(objectType)) {
               objectResult = transactionAdapter.fromJsonTree(object);
             } else if ("payout".equals(objectType)) {
