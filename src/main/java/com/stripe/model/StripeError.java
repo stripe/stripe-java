@@ -80,6 +80,13 @@ public class StripeError extends StripeObject {
   PaymentMethod paymentMethod;
 
   /**
+   * If the error is specific to the type of payment method, the payment method type that had a
+   * problem. This field is only populated for invoice-related errors.
+   */
+  @SerializedName("payment_method_type")
+  String paymentMethodType;
+
+  /**
    * A SetupIntent guides you through the process of setting up and saving a customer's payment
    * credentials for future payments. For example, you could use a SetupIntent to set up and save
    * your customer's card without immediately collecting a payment. Later, you can use <a

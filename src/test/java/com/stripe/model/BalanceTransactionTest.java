@@ -86,6 +86,11 @@ public class BalanceTransactionTest extends BaseStripeTest {
         assertNotNull(btSource);
         assertEquals("issuing.transaction", btSource.getObject());
       } else if ("txn_110".equals(btId)) {
+        com.stripe.model.issuing.Dispute btSource =
+            (com.stripe.model.issuing.Dispute) bt.getSourceObject();
+        assertNotNull(btSource);
+        assertEquals("issuing.dispute", btSource.getObject());
+      } else if ("txn_111".equals(btId)) {
         BalanceTransactionSourceTypeAdapterFactory.UnknownSubType btSource =
             (BalanceTransactionSourceTypeAdapterFactory.UnknownSubType) bt.getSourceObject();
         assertNotNull(btSource);

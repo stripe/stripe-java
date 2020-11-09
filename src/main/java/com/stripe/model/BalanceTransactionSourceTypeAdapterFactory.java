@@ -9,8 +9,6 @@ import com.google.gson.TypeAdapterFactory;
 import com.google.gson.reflect.TypeToken;
 import com.google.gson.stream.JsonReader;
 import com.google.gson.stream.JsonWriter;
-import com.stripe.model.issuing.Authorization;
-import com.stripe.model.issuing.Transaction;
 import java.io.IOException;
 import lombok.Getter;
 
@@ -27,38 +25,42 @@ public class BalanceTransactionSourceTypeAdapterFactory implements TypeAdapterFa
     }
     final String discriminator = "object";
     final TypeAdapter<JsonElement> jsonElementAdapter = gson.getAdapter(JsonElement.class);
-    final TypeAdapter<BalanceTransactionSource> balanceTransactionSourceAdapter =
-        gson.getDelegateAdapter(this, TypeToken.get(BalanceTransactionSource.class));
-    final TypeAdapter<ApplicationFee> applicationFeeAdapter =
-        gson.getDelegateAdapter(this, TypeToken.get(ApplicationFee.class));
-    final TypeAdapter<Charge> chargeAdapter =
-        gson.getDelegateAdapter(this, TypeToken.get(Charge.class));
-    final TypeAdapter<ConnectCollectionTransfer> connectCollectionTransferAdapter =
-        gson.getDelegateAdapter(this, TypeToken.get(ConnectCollectionTransfer.class));
-    final TypeAdapter<Dispute> disputeAdapter =
-        gson.getDelegateAdapter(this, TypeToken.get(Dispute.class));
-    final TypeAdapter<FeeRefund> feeRefundAdapter =
-        gson.getDelegateAdapter(this, TypeToken.get(FeeRefund.class));
-    final TypeAdapter<Authorization> authorizationAdapter =
-        gson.getDelegateAdapter(this, TypeToken.get(Authorization.class));
-    final TypeAdapter<Transaction> transactionAdapter =
-        gson.getDelegateAdapter(this, TypeToken.get(Transaction.class));
-    final TypeAdapter<Payout> payoutAdapter =
-        gson.getDelegateAdapter(this, TypeToken.get(Payout.class));
-    final TypeAdapter<PlatformTaxFee> platformTaxFeeAdapter =
-        gson.getDelegateAdapter(this, TypeToken.get(PlatformTaxFee.class));
-    final TypeAdapter<Refund> refundAdapter =
-        gson.getDelegateAdapter(this, TypeToken.get(Refund.class));
-    final TypeAdapter<ReserveTransaction> reserveTransactionAdapter =
-        gson.getDelegateAdapter(this, TypeToken.get(ReserveTransaction.class));
-    final TypeAdapter<TaxDeductedAtSource> taxDeductedAtSourceAdapter =
-        gson.getDelegateAdapter(this, TypeToken.get(TaxDeductedAtSource.class));
-    final TypeAdapter<Topup> topupAdapter =
-        gson.getDelegateAdapter(this, TypeToken.get(Topup.class));
-    final TypeAdapter<Transfer> transferAdapter =
-        gson.getDelegateAdapter(this, TypeToken.get(Transfer.class));
-    final TypeAdapter<TransferReversal> transferReversalAdapter =
-        gson.getDelegateAdapter(this, TypeToken.get(TransferReversal.class));
+    final TypeAdapter<com.stripe.model.BalanceTransactionSource> balanceTransactionSourceAdapter =
+        gson.getDelegateAdapter(
+            this, TypeToken.get(com.stripe.model.BalanceTransactionSource.class));
+    final TypeAdapter<com.stripe.model.ApplicationFee> applicationFeeAdapter =
+        gson.getDelegateAdapter(this, TypeToken.get(com.stripe.model.ApplicationFee.class));
+    final TypeAdapter<com.stripe.model.Charge> chargeAdapter =
+        gson.getDelegateAdapter(this, TypeToken.get(com.stripe.model.Charge.class));
+    final TypeAdapter<com.stripe.model.ConnectCollectionTransfer> connectCollectionTransferAdapter =
+        gson.getDelegateAdapter(
+            this, TypeToken.get(com.stripe.model.ConnectCollectionTransfer.class));
+    final TypeAdapter<com.stripe.model.Dispute> disputeAdapter =
+        gson.getDelegateAdapter(this, TypeToken.get(com.stripe.model.Dispute.class));
+    final TypeAdapter<com.stripe.model.FeeRefund> feeRefundAdapter =
+        gson.getDelegateAdapter(this, TypeToken.get(com.stripe.model.FeeRefund.class));
+    final TypeAdapter<com.stripe.model.issuing.Authorization> issuingAuthorizationAdapter =
+        gson.getDelegateAdapter(this, TypeToken.get(com.stripe.model.issuing.Authorization.class));
+    final TypeAdapter<com.stripe.model.issuing.Dispute> issuingDisputeAdapter =
+        gson.getDelegateAdapter(this, TypeToken.get(com.stripe.model.issuing.Dispute.class));
+    final TypeAdapter<com.stripe.model.issuing.Transaction> issuingTransactionAdapter =
+        gson.getDelegateAdapter(this, TypeToken.get(com.stripe.model.issuing.Transaction.class));
+    final TypeAdapter<com.stripe.model.Payout> payoutAdapter =
+        gson.getDelegateAdapter(this, TypeToken.get(com.stripe.model.Payout.class));
+    final TypeAdapter<com.stripe.model.PlatformTaxFee> platformTaxFeeAdapter =
+        gson.getDelegateAdapter(this, TypeToken.get(com.stripe.model.PlatformTaxFee.class));
+    final TypeAdapter<com.stripe.model.Refund> refundAdapter =
+        gson.getDelegateAdapter(this, TypeToken.get(com.stripe.model.Refund.class));
+    final TypeAdapter<com.stripe.model.ReserveTransaction> reserveTransactionAdapter =
+        gson.getDelegateAdapter(this, TypeToken.get(com.stripe.model.ReserveTransaction.class));
+    final TypeAdapter<com.stripe.model.TaxDeductedAtSource> taxDeductedAtSourceAdapter =
+        gson.getDelegateAdapter(this, TypeToken.get(com.stripe.model.TaxDeductedAtSource.class));
+    final TypeAdapter<com.stripe.model.Topup> topupAdapter =
+        gson.getDelegateAdapter(this, TypeToken.get(com.stripe.model.Topup.class));
+    final TypeAdapter<com.stripe.model.Transfer> transferAdapter =
+        gson.getDelegateAdapter(this, TypeToken.get(com.stripe.model.Transfer.class));
+    final TypeAdapter<com.stripe.model.TransferReversal> transferReversalAdapter =
+        gson.getDelegateAdapter(this, TypeToken.get(com.stripe.model.TransferReversal.class));
 
     TypeAdapter<BalanceTransactionSource> resultCustomTypeAdapter =
         new TypeAdapter<BalanceTransactionSource>() {
@@ -83,9 +85,11 @@ public class BalanceTransactionSourceTypeAdapterFactory implements TypeAdapterFa
             } else if ("fee_refund".equals(objectType)) {
               objectResult = feeRefundAdapter.fromJsonTree(object);
             } else if ("issuing.authorization".equals(objectType)) {
-              objectResult = authorizationAdapter.fromJsonTree(object);
+              objectResult = issuingAuthorizationAdapter.fromJsonTree(object);
+            } else if ("issuing.dispute".equals(objectType)) {
+              objectResult = issuingDisputeAdapter.fromJsonTree(object);
             } else if ("issuing.transaction".equals(objectType)) {
-              objectResult = transactionAdapter.fromJsonTree(object);
+              objectResult = issuingTransactionAdapter.fromJsonTree(object);
             } else if ("payout".equals(objectType)) {
               objectResult = payoutAdapter.fromJsonTree(object);
             } else if ("platform_tax_fee".equals(objectType)) {

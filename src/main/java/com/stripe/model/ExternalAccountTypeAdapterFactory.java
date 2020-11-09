@@ -28,11 +28,12 @@ public class ExternalAccountTypeAdapterFactory implements TypeAdapterFactory {
     }
     final String discriminator = "object";
     final TypeAdapter<JsonElement> jsonElementAdapter = gson.getAdapter(JsonElement.class);
-    final TypeAdapter<ExternalAccount> externalAccountAdapter =
-        gson.getDelegateAdapter(this, TypeToken.get(ExternalAccount.class));
-    final TypeAdapter<BankAccount> bankAccountAdapter =
-        gson.getDelegateAdapter(this, TypeToken.get(BankAccount.class));
-    final TypeAdapter<Card> cardAdapter = gson.getDelegateAdapter(this, TypeToken.get(Card.class));
+    final TypeAdapter<com.stripe.model.ExternalAccount> externalAccountAdapter =
+        gson.getDelegateAdapter(this, TypeToken.get(com.stripe.model.ExternalAccount.class));
+    final TypeAdapter<com.stripe.model.BankAccount> bankAccountAdapter =
+        gson.getDelegateAdapter(this, TypeToken.get(com.stripe.model.BankAccount.class));
+    final TypeAdapter<com.stripe.model.Card> cardAdapter =
+        gson.getDelegateAdapter(this, TypeToken.get(com.stripe.model.Card.class));
 
     TypeAdapter<ExternalAccount> resultCustomTypeAdapter =
         new TypeAdapter<ExternalAccount>() {

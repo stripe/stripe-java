@@ -88,6 +88,14 @@
       "object": "balance_transaction",
       "source": {
         "id": "foo_123",
+        "object": "issuing.dispute"
+      }
+    },
+    {
+      "id": "txn_111",
+      "object": "balance_transaction",
+      "source": {
+        "id": "foo_123",
         "object": "foo_unknown_type"
       }
     }
