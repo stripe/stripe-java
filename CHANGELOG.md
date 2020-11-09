@@ -1,5 +1,12 @@
 # Changelog
 
+## 20.26.0 - 2020-11-09
+* [#1149](https://github.com/stripe/stripe-java/pull/1149) Add `invoice.finalization_error` as a `type` on `Event`
+* [#1148](https://github.com/stripe/stripe-java/pull/1148) Multiple API changes
+  * Add support for `last_finalization_error` on `Invoice`
+  * Add support for deserializing Issuing `Dispute` as a `source` on `BalanceTransaction`
+  * Add support for `payment_method_type` on `StripeError` used by other API resources
+
 ## 20.25.0 - 2020-11-04
 * [#1147](https://github.com/stripe/stripe-java/pull/1147) Add support for `company[registration_number]` on `Account`
 
