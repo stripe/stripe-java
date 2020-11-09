@@ -429,6 +429,9 @@ public class WebhookEndpointUpdateParams extends ApiRequestParams {
     @SerializedName("invoice.deleted")
     INVOICE__DELETED("invoice.deleted"),
 
+    @SerializedName("invoice.finalization_failed")
+    INVOICE__FINALIZATION_FAILED("invoice.finalization_failed"),
+
     @SerializedName("invoice.finalized")
     INVOICE__FINALIZED("invoice.finalized"),
 
