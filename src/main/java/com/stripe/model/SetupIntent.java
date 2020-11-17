@@ -711,6 +711,9 @@ public class SetupIntent extends ApiResource implements HasId, MetadataStore<Set
     @SerializedName("card")
     Card card;
 
+    @SerializedName("sepa_debit")
+    SepaDebit sepaDebit;
+
     @Getter
     @Setter
     @EqualsAndHashCode(callSuper = false)
@@ -731,5 +734,10 @@ public class SetupIntent extends ApiResource implements HasId, MetadataStore<Set
       @SerializedName("request_three_d_secure")
       String requestThreeDSecure;
     }
+
+    @Getter
+    @Setter
+    @EqualsAndHashCode(callSuper = false)
+    public static class SepaDebit extends StripeObject {}
   }
 }

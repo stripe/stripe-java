@@ -1350,8 +1350,8 @@ public class Charge extends ApiResource implements MetadataStore<Charge>, Balanc
       String country;
 
       /**
-       * Card description. (For internal use only and not typically available in standard API
-       * requests.)
+       * A high-level description of the type of cards issued in this range. (For internal use only
+       * and not typically available in standard API requests.)
        */
       @SerializedName("description")
       String description;
@@ -1397,7 +1397,7 @@ public class Charge extends ApiResource implements MetadataStore<Charge>, Balanc
       Installments installments;
 
       /**
-       * Issuer bank name of the card. (For internal use only and not typically available in
+       * The name of the card's issuing bank. (For internal use only and not typically available in
        * standard API requests.)
        */
       @SerializedName("issuer")
@@ -1657,8 +1657,8 @@ public class Charge extends ApiResource implements MetadataStore<Charge>, Balanc
       String country;
 
       /**
-       * Card description. (For internal use only and not typically available in standard API
-       * requests.)
+       * A high-level description of the type of cards issued in this range. (For internal use only
+       * and not typically available in standard API requests.)
        */
       @SerializedName("description")
       String description;
@@ -1707,7 +1707,7 @@ public class Charge extends ApiResource implements MetadataStore<Charge>, Balanc
       String iin;
 
       /**
-       * Issuer bank name of the card. (For internal use only and not typically available in
+       * The name of the card's issuing bank. (For internal use only and not typically available in
        * standard API requests.)
        */
       @SerializedName("issuer")
@@ -1963,8 +1963,8 @@ public class Charge extends ApiResource implements MetadataStore<Charge>, Balanc
       String country;
 
       /**
-       * Card description. (For internal use only and not typically available in standard API
-       * requests.)
+       * A high-level description of the type of cards issued in this range. (For internal use only
+       * and not typically available in standard API requests.)
        */
       @SerializedName("description")
       String description;
@@ -2013,7 +2013,7 @@ public class Charge extends ApiResource implements MetadataStore<Charge>, Balanc
       String iin;
 
       /**
-       * Issuer bank name of the card. (For internal use only and not typically available in
+       * The name of the card's issuing bank. (For internal use only and not typically available in
        * standard API requests.)
        */
       @SerializedName("issuer")

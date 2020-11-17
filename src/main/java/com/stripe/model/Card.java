@@ -125,7 +125,8 @@ public class Card extends ApiResource
   Boolean deleted;
 
   /**
-   * Card description. (For internal use only and not typically available in standard API requests.)
+   * A high-level description of the type of cards issued in this range. (For internal use only and
+   * not typically available in standard API requests.)
    */
   @SerializedName("description")
   String description;
@@ -170,8 +171,8 @@ public class Card extends ApiResource
   String iin;
 
   /**
-   * Issuer bank name of the card. (For internal use only and not typically available in standard
-   * API requests.)
+   * The name of the card's issuing bank. (For internal use only and not typically available in
+   * standard API requests.)
    */
   @SerializedName("issuer")
   String issuer;
