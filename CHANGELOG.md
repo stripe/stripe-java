@@ -1,5 +1,9 @@
 # Changelog
 
+## 7.63.0 - 2020-11-17
+* [#1152](https://github.com/stripe/stripe-java/pull/1152) Multiple API changes
+  * Add support for sepa_debit on SetupIntentCreateParams, SetupIntentUpdateParams, and SetupIntentConfirmParams.
+
 ## 20.26.0 - 2020-11-09
 * [#1149](https://github.com/stripe/stripe-java/pull/1149) Add `invoice.finalization_error` as a `type` on `Event`
 * [#1148](https://github.com/stripe/stripe-java/pull/1148) Multiple API changes
