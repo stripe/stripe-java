@@ -50,9 +50,11 @@ public class PaymentIntent extends ApiResource implements HasId, MetadataStore<P
   ExpandableField<Application> application;
 
   /**
-   * The amount of the application fee (if any) requested for the resulting payment. See the
+   * The amount of the application fee (if any) that will be requested to be applied to the payment
+   * and transferred to the application owner's Stripe account. The amount of the application fee
+   * collected will be capped at the total payment amount. For more information, see the
    * PaymentIntents <a href="https://stripe.com/docs/payments/connected-accounts">use case for
-   * connected accounts</a> for details.
+   * connected accounts</a>.
    */
   @SerializedName("application_fee_amount")
   Long applicationFeeAmount;
@@ -95,7 +97,8 @@ public class PaymentIntent extends ApiResource implements HasId, MetadataStore<P
    * stored, logged, embedded in URLs, or exposed to anyone other than the customer. Make sure that
    * you have TLS enabled on any page that includes the client secret.
    *
-   * <p>Refer to our docs to <a href="https://stripe.com/docs/payments/accept-a-payment">accept a
+   * <p>Refer to our docs to <a
+   * href="https://stripe.com/docs/payments/accept-a-payment?integration=elements">accept a
    * payment</a> and learn about how {@code client_secret} should be handled.
    */
   @SerializedName("client_secret")

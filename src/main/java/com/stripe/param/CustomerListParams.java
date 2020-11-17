@@ -15,7 +15,8 @@ public class CustomerListParams extends ApiRequestParams {
   Object created;
 
   /**
-   * A filter on the list based on the customer's {@code email} field. The value must be a string.
+   * A case-sensitive filter on the list based on the customer's {@code email} field. The value must
+   * be a string.
    */
   @SerializedName("email")
   String email;
@@ -117,7 +118,8 @@ public class CustomerListParams extends ApiRequestParams {
     }
 
     /**
-     * A filter on the list based on the customer's {@code email} field. The value must be a string.
+     * A case-sensitive filter on the list based on the customer's {@code email} field. The value
+     * must be a string.
      */
     public Builder setEmail(String email) {
       this.email = email;
