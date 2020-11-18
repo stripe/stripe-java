@@ -1,5 +1,8 @@
 # Changelog
 
+## 20.28.0 - 2020-11-18
+* [#1154](https://github.com/stripe/stripe-java/pull/1154) Add support for `grabpay` on `PaymentMethod`.
+
 ## 20.27.0 - 2020-11-17
 * [#1152](https://github.com/stripe/stripe-java/pull/1152) Multiple API changes
   * Add support for sepa_debit on SetupIntentCreateParams, SetupIntentUpdateParams, and SetupIntentConfirmParams.
