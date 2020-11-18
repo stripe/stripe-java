@@ -763,6 +763,13 @@ public class PaymentIntentUpdateParams extends ApiRequestParams {
     Giropay giropay;
 
     /**
+     * If this is a {@code grabpay} PaymentMethod, this hash contains details about the GrabPay
+     * payment method.
+     */
+    @SerializedName("grabpay")
+    Grabpay grabpay;
+
+    /**
      * If this is an {@code ideal} PaymentMethod, this hash contains details about the iDEAL payment
      * method.
      */
@@ -831,6 +838,7 @@ public class PaymentIntentUpdateParams extends ApiRequestParams {
         Map<String, Object> extraParams,
         Fpx fpx,
         Giropay giropay,
+        Grabpay grabpay,
         Ideal ideal,
         InteracPresent interacPresent,
         Map<String, String> metadata,
@@ -848,6 +856,7 @@ public class PaymentIntentUpdateParams extends ApiRequestParams {
       this.extraParams = extraParams;
       this.fpx = fpx;
       this.giropay = giropay;
+      this.grabpay = grabpay;
       this.ideal = ideal;
       this.interacPresent = interacPresent;
       this.metadata = metadata;
@@ -881,6 +890,8 @@ public class PaymentIntentUpdateParams extends ApiRequestParams {
 
       private Giropay giropay;
 
+      private Grabpay grabpay;
+
       private Ideal ideal;
 
       private InteracPresent interacPresent;
@@ -909,6 +920,7 @@ public class PaymentIntentUpdateParams extends ApiRequestParams {
             this.extraParams,
             this.fpx,
             this.giropay,
+            this.grabpay,
             this.ideal,
             this.interacPresent,
             this.metadata,
@@ -1015,6 +1027,15 @@ public class PaymentIntentUpdateParams extends ApiRequestParams {
        */
       public Builder setGiropay(Giropay giropay) {
         this.giropay = giropay;
+        return this;
+      }
+
+      /**
+       * If this is a {@code grabpay} PaymentMethod, this hash contains details about the GrabPay
+       * payment method.
+       */
+      public Builder setGrabpay(Grabpay grabpay) {
+        this.grabpay = grabpay;
         return this;
       }
 
@@ -2032,6 +2053,63 @@ public class PaymentIntentUpdateParams extends ApiRequestParams {
     }
 
     @Getter
+    public static class Grabpay {
+      /**
+       * Map of extra parameters for custom features not available in this client library. The
+       * content in this map is not serialized under this field's {@code @SerializedName} value.
+       * Instead, each key/value pair is serialized as if the key is a root-level field (serialized)
+       * name in this param object. Effectively, this map is flattened to its parent instance.
+       */
+      @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
+      Map<String, Object> extraParams;
+
+      private Grabpay(Map<String, Object> extraParams) {
+        this.extraParams = extraParams;
+      }
+
+      public static Builder builder() {
+        return new Builder();
+      }
+
+      public static class Builder {
+        private Map<String, Object> extraParams;
+
+        /** Finalize and obtain parameter instance from this builder. */
+        public Grabpay build() {
+          return new Grabpay(this.extraParams);
+        }
+
+        /**
+         * Add a key/value pair to `extraParams` map. A map is initialized for the first
+         * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
+         * map. See {@link PaymentIntentUpdateParams.PaymentMethodData.Grabpay#extraParams} for the
+         * field documentation.
+         */
+        public Builder putExtraParam(String key, Object value) {
+          if (this.extraParams == null) {
+            this.extraParams = new HashMap<>();
+          }
+          this.extraParams.put(key, value);
+          return this;
+        }
+
+        /**
+         * Add all map key/value pairs to `extraParams` map. A map is initialized for the first
+         * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
+         * map. See {@link PaymentIntentUpdateParams.PaymentMethodData.Grabpay#extraParams} for the
+         * field documentation.
+         */
+        public Builder putAllExtraParam(Map<String, Object> map) {
+          if (this.extraParams == null) {
+            this.extraParams = new HashMap<>();
+          }
+          this.extraParams.putAll(map);
+          return this;
+        }
+      }
+    }
+
+    @Getter
     public static class Ideal {
       /** The customer's bank. */
       @SerializedName("bank")
@@ -2608,6 +2686,9 @@ public class PaymentIntentUpdateParams extends ApiRequestParams {
 
       @SerializedName("giropay")
       GIROPAY("giropay"),
+
+      @SerializedName("grabpay")
+      GRABPAY("grabpay"),
 
       @SerializedName("ideal")
       IDEAL("ideal"),
