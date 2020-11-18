@@ -1,6 +1,6 @@
 # Changelog
 
-## 7.63.0 - 2020-11-17
+## 20.27.0 - 2020-11-17
 * [#1152](https://github.com/stripe/stripe-java/pull/1152) Multiple API changes
   * Add support for sepa_debit on SetupIntentCreateParams, SetupIntentUpdateParams, and SetupIntentConfirmParams.
 
@@ -41,9 +41,6 @@
 
 ## 20.18.0 - 2020-10-14
 * [#1129](https://github.com/stripe/stripe-java/pull/1129) Add support for the Payout Reverse API
-
-## 20.17.0 - 2020-10-12
-* [#1128](https://github.com/stripe/stripe-java/pull/1128) Add support for `setup_intent.requires_action` on `Event`
 
 ## 20.16.0 - 2020-10-09
 * [#1126](https://github.com/stripe/stripe-java/pull/1126) Add support for internal-only `description`, `iin`, and `issuer` for `card_present` and `interac_present` on `Charge.payment_method_details`.
@@ -933,6 +930,12 @@ Pull requests included in this release:
 
 ## 8.0.0 - 2019-03-19
 * [#662](https://github.com/stripe/stripe-java/pull/662) Major version release. Supports a pinned API version [2019-03-14](https://stripe.com/docs/upgrades#2019-03-14). Refer to our [migration guide for v8](https://github.com/stripe/stripe-java/wiki/Migration-guide-for-v8) for API upgrade guide and lists of backwards incompatible changes to watch out for.
+
+## 7.63.1 - 2020-17-11
+* Identical to 7.29.0
+
+## 7.63.0 - 2020-17-11
+* Published in error. Do not use. This is identical to 20.27.0.
 
 ## 7.29.0 - 2019-03-18
 * [#695](https://github.com/stripe/stripe-java/pull/695) Add support for `payment_intent` on `Charge`.
