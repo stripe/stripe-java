@@ -65,6 +65,9 @@ public class PaymentMethod extends ApiResource implements HasId, MetadataStore<P
   @SerializedName("giropay")
   Giropay giropay;
 
+  @SerializedName("grabpay")
+  Grabpay grabpay;
+
   /** Unique identifier for the object. */
   @Getter(onMethod_ = {@Override})
   @SerializedName("id")
@@ -117,8 +120,8 @@ public class PaymentMethod extends ApiResource implements HasId, MetadataStore<P
    * matching this value. It contains additional information specific to the PaymentMethod type.
    *
    * <p>One of {@code alipay}, {@code au_becs_debit}, {@code bacs_debit}, {@code bancontact}, {@code
-   * card}, {@code eps}, {@code fpx}, {@code giropay}, {@code ideal}, {@code oxxo}, {@code p24},
-   * {@code sepa_debit}, or {@code sofort}.
+   * card}, {@code eps}, {@code fpx}, {@code giropay}, {@code grabpay}, {@code ideal}, {@code oxxo},
+   * {@code p24}, {@code sepa_debit}, or {@code sofort}.
    */
   @SerializedName("type")
   String type;
@@ -780,6 +783,11 @@ public class PaymentMethod extends ApiResource implements HasId, MetadataStore<P
   @Setter
   @EqualsAndHashCode(callSuper = false)
   public static class Giropay extends StripeObject {}
+
+  @Getter
+  @Setter
+  @EqualsAndHashCode(callSuper = false)
+  public static class Grabpay extends StripeObject {}
 
   @Getter
   @Setter
