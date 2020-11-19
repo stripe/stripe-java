@@ -75,7 +75,7 @@ public class StripeExample {
         Stripe.apiKey = "sk_test_...";
 
         Map<String, Object> customerMap = new HashMap<String, Object>();
-        customerMap.put("description", "Example descriptipn");
+        customerMap.put("description", "Example description");
         customerMap.put("email", "test@example.com");
         customerMap.put("payment_method", "pm_card_visa"); // obtained via Stripe.js
 
