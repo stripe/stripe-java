@@ -738,6 +738,14 @@ public class SetupIntent extends ApiResource implements HasId, MetadataStore<Set
     @Getter
     @Setter
     @EqualsAndHashCode(callSuper = false)
-    public static class SepaDebit extends StripeObject {}
+    public static class SepaDebit extends StripeObject {
+      @SerializedName("mandate_options")
+      SepaDebitMandateOptions mandateOptions;
+    }
+
+    @Getter
+    @Setter
+    @EqualsAndHashCode(callSuper = false)
+    public static class SepaDebitMandateOptions extends StripeObject {}
   }
 }
