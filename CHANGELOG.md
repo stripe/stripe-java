@@ -1,5 +1,9 @@
 # Changelog
 
+## 20.29.0 - 2020-11-20
+* [#1157](https://github.com/stripe/stripe-java/pull/1157) Add support for `capabilities[grabpay_payments]` on `Account`
+* [#1156](https://github.com/stripe/stripe-java/pull/1156) Added support for `mandate_options` on `SetupIntent.payment_method_options.sepa_debit`
+
 ## 20.28.0 - 2020-11-18
 * [#1154](https://github.com/stripe/stripe-java/pull/1154) Add support for `grabpay` on `PaymentMethod`.
 
