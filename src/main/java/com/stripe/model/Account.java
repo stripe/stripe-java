@@ -698,6 +698,15 @@ public class Account extends ApiResource implements MetadataStore<Account>, Paym
     String giropayPayments;
 
     /**
+     * The status of the GrabPay payments capability of the account, or whether the account can
+     * directly process GrabPay charges.
+     *
+     * <p>One of {@code active}, {@code inactive}, or {@code pending}.
+     */
+    @SerializedName("grabpay_payments")
+    String grabpayPayments;
+
+    /**
      * The status of the iDEAL payments capability of the account, or whether the account can
      * directly process iDEAL charges.
      *
