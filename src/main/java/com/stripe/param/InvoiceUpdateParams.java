@@ -12,6 +12,10 @@ import lombok.Getter;
 
 @Getter
 public class InvoiceUpdateParams extends ApiRequestParams {
+  /** The account tax IDs associated with the invoice. Only editable when the invoice is a draft. */
+  @SerializedName("account_tax_ids")
+  Object accountTaxIds;
+
   /**
    * A fee in %s that will be applied to the invoice and transferred to the application owner's
    * Stripe account. The request must be made with an OAuth key or the Stripe-Account header in
@@ -140,6 +144,7 @@ public class InvoiceUpdateParams extends ApiRequestParams {
   Object transferData;
 
   private InvoiceUpdateParams(
+      Object accountTaxIds,
       Long applicationFeeAmount,
       Boolean autoAdvance,
       CollectionMethod collectionMethod,
@@ -157,6 +162,7 @@ public class InvoiceUpdateParams extends ApiRequestParams {
       Object metadata,
       Object statementDescriptor,
       Object transferData) {
+    this.accountTaxIds = accountTaxIds;
     this.applicationFeeAmount = applicationFeeAmount;
     this.autoAdvance = autoAdvance;
     this.collectionMethod = collectionMethod;
@@ -181,6 +187,8 @@ public class InvoiceUpdateParams extends ApiRequestParams {
   }
 
   public static class Builder {
+    private Object accountTaxIds;
+
     private Long applicationFeeAmount;
 
     private Boolean autoAdvance;
@@ -218,6 +226,7 @@ public class InvoiceUpdateParams extends ApiRequestParams {
     /** Finalize and obtain parameter instance from this builder. */
     public InvoiceUpdateParams build() {
       return new InvoiceUpdateParams(
+          this.accountTaxIds,
           this.applicationFeeAmount,
           this.autoAdvance,
           this.collectionMethod,
@@ -235,6 +244,50 @@ public class InvoiceUpdateParams extends ApiRequestParams {
           this.metadata,
           this.statementDescriptor,
           this.transferData);
+    }
+
+    /**
+     * Add an element to `accountTaxIds` list. A list is initialized for the first `add/addAll`
+     * call, and subsequent calls adds additional elements to the original list. See {@link
+     * InvoiceUpdateParams#accountTaxIds} for the field documentation.
+     */
+    @SuppressWarnings("unchecked")
+    public Builder addAccountTaxId(String element) {
+      if (this.accountTaxIds == null || this.accountTaxIds instanceof EmptyParam) {
+        this.accountTaxIds = new ArrayList<String>();
+      }
+      ((List<String>) this.accountTaxIds).add(element);
+      return this;
+    }
+
+    /**
+     * Add all elements to `accountTaxIds` list. A list is initialized for the first `add/addAll`
+     * call, and subsequent calls adds additional elements to the original list. See {@link
+     * InvoiceUpdateParams#accountTaxIds} for the field documentation.
+     */
+    @SuppressWarnings("unchecked")
+    public Builder addAllAccountTaxId(List<String> elements) {
+      if (this.accountTaxIds == null || this.accountTaxIds instanceof EmptyParam) {
+        this.accountTaxIds = new ArrayList<String>();
+      }
+      ((List<String>) this.accountTaxIds).addAll(elements);
+      return this;
+    }
+
+    /**
+     * The account tax IDs associated with the invoice. Only editable when the invoice is a draft.
+     */
+    public Builder setAccountTaxIds(EmptyParam accountTaxIds) {
+      this.accountTaxIds = accountTaxIds;
+      return this;
+    }
+
+    /**
+     * The account tax IDs associated with the invoice. Only editable when the invoice is a draft.
+     */
+    public Builder setAccountTaxIds(List<String> accountTaxIds) {
+      this.accountTaxIds = accountTaxIds;
+      return this;
     }
 
     /**
