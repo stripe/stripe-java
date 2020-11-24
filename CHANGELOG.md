@@ -1,5 +1,11 @@
 # Changelog
 
+## 20.30.0 - 2020-11-24
+* [#1159](https://github.com/stripe/stripe-java/pull/1159) Multiple API changes
+  * Add support for `account_tax_ids` on `Invoice`
+  * Add support for `payment_method_options[sepa_debit]` on `PaymentIntent`
+* [#1158](https://github.com/stripe/stripe-java/pull/1158) Better log the error causing the JSON parsing to fail on deserialization
+
 ## 20.29.0 - 2020-11-20
 * [#1157](https://github.com/stripe/stripe-java/pull/1157) Add support for `capabilities[grabpay_payments]` on `Account`
 * [#1156](https://github.com/stripe/stripe-java/pull/1156) Added support for `mandate_options` on `SetupIntent.payment_method_options.sepa_debit`
