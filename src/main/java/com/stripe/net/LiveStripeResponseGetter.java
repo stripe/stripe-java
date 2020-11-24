@@ -65,7 +65,7 @@ public class LiveStripeResponseGetter implements StripeResponseGetter {
     try {
       resource = ApiResource.GSON.fromJson(responseBody, clazz);
     } catch (JsonSyntaxException e) {
-      raiseMalformedJsonError(responseBody, responseCode, requestId);
+      raiseMalformedJsonError(responseBody, responseCode, requestId, e);
     }
 
     resource.setLastResponse(response);
@@ -96,7 +96,7 @@ public class LiveStripeResponseGetter implements StripeResponseGetter {
     try {
       resource = ApiResource.GSON.fromJson(responseBody, clazz);
     } catch (JsonSyntaxException e) {
-      raiseMalformedJsonError(responseBody, responseCode, requestId);
+      raiseMalformedJsonError(responseBody, responseCode, requestId, e);
     }
 
     if (resource instanceof StripeObject) {
@@ -112,15 +112,16 @@ public class LiveStripeResponseGetter implements StripeResponseGetter {
   }
 
   private static void raiseMalformedJsonError(
-      String responseBody, int responseCode, String requestId) throws ApiException {
+      String responseBody, int responseCode, String requestId, Throwable e) throws ApiException {
+    String details = e == null ? "none" : e.getMessage();
     throw new ApiException(
         String.format(
-            "Invalid response object from API: %s. (HTTP response code was %d)",
-            responseBody, responseCode),
+            "Invalid response object from API: %s. (HTTP response code was %d). Additional details: %s.",
+            responseBody, responseCode, details),
         requestId,
         null,
         responseCode,
-        null);
+        e);
   }
 
   private static void handleApiError(StripeResponse response) throws StripeException {
@@ -132,10 +133,10 @@ public class LiveStripeResponseGetter implements StripeResponseGetter {
           ApiResource.GSON.fromJson(response.body(), JsonObject.class).getAsJsonObject("error");
       error = ApiResource.GSON.fromJson(jsonObject, StripeError.class);
     } catch (JsonSyntaxException e) {
-      raiseMalformedJsonError(response.body(), response.code(), response.requestId());
+      raiseMalformedJsonError(response.body(), response.code(), response.requestId(), e);
     }
     if (error == null) {
-      raiseMalformedJsonError(response.body(), response.code(), response.requestId());
+      raiseMalformedJsonError(response.body(), response.code(), response.requestId(), null);
     }
 
     error.setLastResponse(response);
@@ -209,10 +210,10 @@ public class LiveStripeResponseGetter implements StripeResponseGetter {
     try {
       error = ApiResource.GSON.fromJson(response.body(), OAuthError.class);
     } catch (JsonSyntaxException e) {
-      raiseMalformedJsonError(response.body(), response.code(), response.requestId());
+      raiseMalformedJsonError(response.body(), response.code(), response.requestId(), e);
     }
     if (error == null) {
-      raiseMalformedJsonError(response.body(), response.code(), response.requestId());
+      raiseMalformedJsonError(response.body(), response.code(), response.requestId(), null);
     }
 
     error.setLastResponse(response);
