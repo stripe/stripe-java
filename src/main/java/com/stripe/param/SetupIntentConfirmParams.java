@@ -554,7 +554,7 @@ public class SetupIntentConfirmParams extends ApiRequestParams {
     Map<String, Object> extraParams;
 
     /**
-     * If this is a {@code sepa_debit} SetupIntent, this sub-hash contains details about the Sepa
+     * If this is a {@code sepa_debit} SetupIntent, this sub-hash contains details about the SEPA
      * Debit payment method options.
      */
     @SerializedName("sepa_debit")
@@ -616,7 +616,7 @@ public class SetupIntentConfirmParams extends ApiRequestParams {
       }
 
       /**
-       * If this is a {@code sepa_debit} SetupIntent, this sub-hash contains details about the Sepa
+       * If this is a {@code sepa_debit} SetupIntent, this sub-hash contains details about the SEPA
        * Debit payment method options.
        */
       public Builder setSepaDebit(SepaDebit sepaDebit) {

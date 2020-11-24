@@ -63,9 +63,14 @@ public class Customer extends ApiResource implements HasId, MetadataStore<Custom
   Boolean deleted;
 
   /**
-   * When the customer's latest invoice is billed by charging automatically, delinquent is true if
-   * the invoice's latest charge is failed. When the customer's latest invoice is billed by sending
-   * an invoice, delinquent is true if the invoice is not paid by its due date.
+   * When the customer's latest invoice is billed by charging automatically, {@code delinquent} is
+   * {@code true} if the invoice's latest charge failed. When the customer's latest invoice is
+   * billed by sending an invoice, {@code delinquent} is {@code true} if the invoice isn't paid by
+   * its due date.
+   *
+   * <p>If an invoice is marked uncollectible by <a
+   * href="https://stripe.com/docs/billing/automatic-collection">dunning</a>, {@code delinquent}
+   * doesn't get reset to {@code false}.
    */
   @SerializedName("delinquent")
   Boolean delinquent;

@@ -41,6 +41,10 @@ public class Invoice extends ApiResource implements HasId, MetadataStore<Invoice
   @SerializedName("account_name")
   String accountName;
 
+  /** The account tax IDs associated with the invoice. Only editable when the invoice is a draft. */
+  @SerializedName("account_tax_ids")
+  List<ExpandableField<TaxId>> accountTaxIds;
+
   /**
    * Final amount due at this time for this invoice. If the invoice's total is smaller than the
    * minimum charge amount, for example, or if there is account credit that can be applied to the
@@ -563,6 +567,46 @@ public class Invoice extends ApiResource implements HasId, MetadataStore<Invoice
   public void setSubscriptionObject(Subscription expandableObject) {
     this.subscription =
         new ExpandableField<Subscription>(expandableObject.getId(), expandableObject);
+  }
+
+  /** Get IDs of expandable {@code accountTaxIds} object list. */
+  public List<String> getAccountTaxIds() {
+    return (this.accountTaxIds != null)
+        ? this.accountTaxIds.stream().map(x -> x.getId()).collect(Collectors.toList())
+        : null;
+  }
+
+  public void setAccountTaxIds(List<String> ids) {
+    if (ids == null) {
+      this.accountTaxIds = null;
+      return;
+    }
+    if (this.accountTaxIds.stream().map(x -> x.getId()).collect(Collectors.toList()).equals(ids)) {
+      // noop if the ids are equal to what are already present
+      return;
+    }
+    this.accountTaxIds =
+        (ids != null)
+            ? ids.stream()
+                .map(id -> new ExpandableField<TaxId>(id, null))
+                .collect(Collectors.toList())
+            : null;
+  }
+
+  /** Get expanded {@code accountTaxIds}. */
+  public List<TaxId> getAccountTaxIdObjects() {
+    return (this.accountTaxIds != null)
+        ? this.accountTaxIds.stream().map(x -> x.getExpanded()).collect(Collectors.toList())
+        : null;
+  }
+
+  public void setAccountTaxIdObjects(List<TaxId> objs) {
+    this.accountTaxIds =
+        objs != null
+            ? objs.stream()
+                .map(x -> new ExpandableField<TaxId>(x.getId(), x))
+                .collect(Collectors.toList())
+            : null;
   }
 
   /** Get IDs of expandable {@code discounts} object list. */

@@ -1166,6 +1166,9 @@ public class PaymentIntent extends ApiResource implements HasId, MetadataStore<P
     @SerializedName("p24")
     P24 p24;
 
+    @SerializedName("sepa_debit")
+    SepaDebit sepaDebit;
+
     @SerializedName("sofort")
     Sofort sofort;
 
@@ -1281,6 +1284,19 @@ public class PaymentIntent extends ApiResource implements HasId, MetadataStore<P
     @Setter
     @EqualsAndHashCode(callSuper = false)
     public static class P24 extends StripeObject {}
+
+    @Getter
+    @Setter
+    @EqualsAndHashCode(callSuper = false)
+    public static class SepaDebit extends StripeObject {
+      @SerializedName("mandate_options")
+      SepaDebitMandateOptions mandateOptions;
+    }
+
+    @Getter
+    @Setter
+    @EqualsAndHashCode(callSuper = false)
+    public static class SepaDebitMandateOptions extends StripeObject {}
 
     @Getter
     @Setter
