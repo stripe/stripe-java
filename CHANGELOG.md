@@ -1,5 +1,8 @@
 # Changelog
 
+## 20.31.0 - 2020-12-03
+* [#1161](https://github.com/stripe/stripe-java/pull/1161) Add support for `documents` on `Account` create and update
+
 ## 20.30.0 - 2020-11-24
 * [#1159](https://github.com/stripe/stripe-java/pull/1159) Multiple API changes
   * Add support for `account_tax_ids` on `Invoice`
