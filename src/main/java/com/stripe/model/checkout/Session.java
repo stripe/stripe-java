@@ -59,7 +59,7 @@ public class Session extends ApiResource implements HasId {
 
   /**
    * A unique string to reference the Checkout Session. This can be a customer ID, a cart ID, or
-   * similar, and can be used to reconcile the session with your internal systems.
+   * similar, and can be used to reconcile the Session with your internal systems.
    */
   @SerializedName("client_reference_id")
   String clientReferenceId;
@@ -72,9 +72,9 @@ public class Session extends ApiResource implements HasId {
   String currency;
 
   /**
-   * The ID of the customer for this session. For Checkout Sessions in {@code payment} or {@code
+   * The ID of the customer for this Session. For Checkout Sessions in {@code payment} or {@code
    * subscription} mode, Checkout will create a new customer object based on information provided
-   * during the session unless an existing customer was provided when the session was created.
+   * during the payment flow unless an existing customer was provided when the Session was created.
    */
   @SerializedName("customer")
   @Getter(lombok.AccessLevel.NONE)
@@ -84,8 +84,8 @@ public class Session extends ApiResource implements HasId {
   /**
    * If provided, this value will be used when the Customer object is created. If not provided,
    * customers will be asked to enter their email address. Use this parameter to prefill customer
-   * data if you already have an email on file. To access information about the customer once a
-   * session is complete, use the {@code customer} attribute.
+   * data if you already have an email on file. To access information about the customer once the
+   * payment flow is complete, use the {@code customer} attribute.
    */
   @SerializedName("customer_email")
   String customerEmail;

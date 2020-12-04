@@ -39,7 +39,7 @@ public class SessionCreateParams extends ApiRequestParams {
    * prefill the email field on the Checkout page. If the customer changes their email on the
    * Checkout page, the Customer object will be updated with the new email. If blank for Checkout
    * Sessions in {@code payment} or {@code subscription} mode, Checkout will create a new customer
-   * object based on information provided during the session.
+   * object based on information provided during the payment flow.
    */
   @SerializedName("customer")
   String customer;
@@ -54,7 +54,7 @@ public class SessionCreateParams extends ApiRequestParams {
   String customerEmail;
 
   /**
-   * The coupon or promotion code to apply to this session. Currently, only up to one may be
+   * The coupon or promotion code to apply to this Session. Currently, only up to one may be
    * specified.
    */
   @SerializedName("discounts")
@@ -102,7 +102,7 @@ public class SessionCreateParams extends ApiRequestParams {
 
   /**
    * The mode of the Checkout Session. Required when using prices or {@code setup} mode. Pass {@code
-   * subscription} if Checkout session includes at least one recurring item.
+   * subscription} if the Checkout Session includes at least one recurring item.
    */
   @SerializedName("mode")
   Mode mode;
@@ -115,7 +115,7 @@ public class SessionCreateParams extends ApiRequestParams {
   PaymentIntentData paymentIntentData;
 
   /**
-   * A list of the types of payment methods (e.g., {@code card}) this Checkout session can accept.
+   * A list of the types of payment methods (e.g., {@code card}) this Checkout Session can accept.
    *
    * <p>Read more about the supported payment methods and their requirements in our <a
    * href="https://stripe.com/docs/payments/checkout/payment-methods">payment method details
@@ -312,7 +312,7 @@ public class SessionCreateParams extends ApiRequestParams {
      * prefill the email field on the Checkout page. If the customer changes their email on the
      * Checkout page, the Customer object will be updated with the new email. If blank for Checkout
      * Sessions in {@code payment} or {@code subscription} mode, Checkout will create a new customer
-     * object based on information provided during the session.
+     * object based on information provided during the payment flow.
      */
     public Builder setCustomer(String customer) {
       this.customer = customer;
@@ -471,7 +471,7 @@ public class SessionCreateParams extends ApiRequestParams {
 
     /**
      * The mode of the Checkout Session. Required when using prices or {@code setup} mode. Pass
-     * {@code subscription} if Checkout session includes at least one recurring item.
+     * {@code subscription} if the Checkout Session includes at least one recurring item.
      */
     public Builder setMode(Mode mode) {
       this.mode = mode;
@@ -565,7 +565,7 @@ public class SessionCreateParams extends ApiRequestParams {
 
   @Getter
   public static class Discount {
-    /** The ID of the coupon to apply to this session. */
+    /** The ID of the coupon to apply to this Session. */
     @SerializedName("coupon")
     String coupon;
 
@@ -578,7 +578,7 @@ public class SessionCreateParams extends ApiRequestParams {
     @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
     Map<String, Object> extraParams;
 
-    /** The ID of a promotion code to apply to this session. */
+    /** The ID of a promotion code to apply to this Session. */
     @SerializedName("promotion_code")
     String promotionCode;
 
@@ -604,7 +604,7 @@ public class SessionCreateParams extends ApiRequestParams {
         return new Discount(this.coupon, this.extraParams, this.promotionCode);
       }
 
-      /** The ID of the coupon to apply to this session. */
+      /** The ID of the coupon to apply to this Session. */
       public Builder setCoupon(String coupon) {
         this.coupon = coupon;
         return this;
@@ -636,7 +636,7 @@ public class SessionCreateParams extends ApiRequestParams {
         return this;
       }
 
-      /** The ID of a promotion code to apply to this session. */
+      /** The ID of a promotion code to apply to this Session. */
       public Builder setPromotionCode(String promotionCode) {
         this.promotionCode = promotionCode;
         return this;
