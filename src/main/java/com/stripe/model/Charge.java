@@ -1797,6 +1797,22 @@ public class Charge extends ApiResource implements MetadataStore<Charge>, Balanc
     @EqualsAndHashCode(callSuper = false)
     public static class Eps extends StripeObject {
       /**
+       * The customer's bank. Should be one of {@code arzte_und_apotheker_bank}, {@code
+       * austrian_anadi_bank_ag}, {@code bank_austria}, {@code bankhaus_carl_spangler}, {@code
+       * bankhaus_schelhammer_und_schattera_ag}, {@code bawag_psk_ag}, {@code bks_bank_ag}, {@code
+       * brull_kallmus_bank_ag}, {@code btv_vier_lander_bank}, {@code capital_bank_grawe_gruppe_ag},
+       * {@code dolomitenbank}, {@code easybank_ag}, {@code erste_bank_und_sparkassen}, {@code
+       * hypo_alpeadriabank_international_ag}, {@code hypo_noe_lb_fur_niederosterreich_u_wien},
+       * {@code hypo_oberosterreich_salzburg_steiermark}, {@code hypo_tirol_bank_ag}, {@code
+       * hypo_vorarlberg_bank_ag}, {@code hypo_bank_burgenland_aktiengesellschaft}, {@code
+       * marchfelder_bank}, {@code oberbank_ag}, {@code raiffeisen_bankengruppe_osterreich}, {@code
+       * schoellerbank_ag}, {@code sparda_bank_wien}, {@code volksbank_gruppe}, {@code
+       * volkskreditbank_ag}, or {@code vr_bank_braunau}.
+       */
+      @SerializedName("bank")
+      String bank;
+
+      /**
        * Owner's verified full name. Values are verified or provided by EPS directly (if supported)
        * at the time of authorization or settlement. They cannot be set or mutated. EPS rarely
        * provides this information so the attribute is usually empty.
@@ -2142,6 +2158,18 @@ public class Charge extends ApiResource implements MetadataStore<Charge>, Balanc
     @Setter
     @EqualsAndHashCode(callSuper = false)
     public static class P24 extends StripeObject {
+      /**
+       * The customer's bank. Can be one of {@code ing}, {@code citi_handlowy}, {@code
+       * tmobile_usbugi_bankowe}, {@code plus_bank}, {@code etransfer_pocztowy24}, {@code
+       * banki_spbdzielcze}, {@code bank_nowy_bfg_sa}, {@code getin_bank}, {@code blik}, {@code
+       * noble_pay}, {@code ideabank}, {@code envelobank}, {@code santander_przelew24}, {@code
+       * nest_przelew}, {@code mbank_mtransfer}, {@code inteligo}, {@code pbac_z_ipko}, {@code
+       * bnp_paribas}, {@code credit_agricole}, {@code toyota_bank}, {@code bank_pekao_sa}, {@code
+       * volkswagen_bank}, {@code bank_millennium}, {@code alior_bank}, or {@code boz}.
+       */
+      @SerializedName("bank")
+      String bank;
+
       /** Unique reference for this Przelewy24 payment. */
       @SerializedName("reference")
       String reference;

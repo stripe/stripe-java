@@ -1788,6 +1788,10 @@ public class PaymentIntentConfirmParams extends ApiRequestParams {
 
     @Getter
     public static class Eps {
+      /** The customer's bank. */
+      @SerializedName("bank")
+      Bank bank;
+
       /**
        * Map of extra parameters for custom features not available in this client library. The
        * content in this map is not serialized under this field's {@code @SerializedName} value.
@@ -1797,7 +1801,8 @@ public class PaymentIntentConfirmParams extends ApiRequestParams {
       @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
       Map<String, Object> extraParams;
 
-      private Eps(Map<String, Object> extraParams) {
+      private Eps(Bank bank, Map<String, Object> extraParams) {
+        this.bank = bank;
         this.extraParams = extraParams;
       }
 
@@ -1806,11 +1811,19 @@ public class PaymentIntentConfirmParams extends ApiRequestParams {
       }
 
       public static class Builder {
+        private Bank bank;
+
         private Map<String, Object> extraParams;
 
         /** Finalize and obtain parameter instance from this builder. */
         public Eps build() {
-          return new Eps(this.extraParams);
+          return new Eps(this.bank, this.extraParams);
+        }
+
+        /** The customer's bank. */
+        public Builder setBank(Bank bank) {
+          this.bank = bank;
+          return this;
         }
 
         /**
@@ -1839,6 +1852,96 @@ public class PaymentIntentConfirmParams extends ApiRequestParams {
           }
           this.extraParams.putAll(map);
           return this;
+        }
+      }
+
+      public enum Bank implements ApiRequestParams.EnumParam {
+        @SerializedName("arzte_und_apotheker_bank")
+        ARZTE_UND_APOTHEKER_BANK("arzte_und_apotheker_bank"),
+
+        @SerializedName("austrian_anadi_bank_ag")
+        AUSTRIAN_ANADI_BANK_AG("austrian_anadi_bank_ag"),
+
+        @SerializedName("bank_austria")
+        BANK_AUSTRIA("bank_austria"),
+
+        @SerializedName("bankhaus_carl_spangler")
+        BANKHAUS_CARL_SPANGLER("bankhaus_carl_spangler"),
+
+        @SerializedName("bankhaus_schelhammer_und_schattera_ag")
+        BANKHAUS_SCHELHAMMER_UND_SCHATTERA_AG("bankhaus_schelhammer_und_schattera_ag"),
+
+        @SerializedName("bawag_psk_ag")
+        BAWAG_PSK_AG("bawag_psk_ag"),
+
+        @SerializedName("bks_bank_ag")
+        BKS_BANK_AG("bks_bank_ag"),
+
+        @SerializedName("brull_kallmus_bank_ag")
+        BRULL_KALLMUS_BANK_AG("brull_kallmus_bank_ag"),
+
+        @SerializedName("btv_vier_lander_bank")
+        BTV_VIER_LANDER_BANK("btv_vier_lander_bank"),
+
+        @SerializedName("capital_bank_grawe_gruppe_ag")
+        CAPITAL_BANK_GRAWE_GRUPPE_AG("capital_bank_grawe_gruppe_ag"),
+
+        @SerializedName("dolomitenbank")
+        DOLOMITENBANK("dolomitenbank"),
+
+        @SerializedName("easybank_ag")
+        EASYBANK_AG("easybank_ag"),
+
+        @SerializedName("erste_bank_und_sparkassen")
+        ERSTE_BANK_UND_SPARKASSEN("erste_bank_und_sparkassen"),
+
+        @SerializedName("hypo_alpeadriabank_international_ag")
+        HYPO_ALPEADRIABANK_INTERNATIONAL_AG("hypo_alpeadriabank_international_ag"),
+
+        @SerializedName("hypo_bank_burgenland_aktiengesellschaft")
+        HYPO_BANK_BURGENLAND_AKTIENGESELLSCHAFT("hypo_bank_burgenland_aktiengesellschaft"),
+
+        @SerializedName("hypo_noe_lb_fur_niederosterreich_u_wien")
+        HYPO_NOE_LB_FUR_NIEDEROSTERREICH_U_WIEN("hypo_noe_lb_fur_niederosterreich_u_wien"),
+
+        @SerializedName("hypo_oberosterreich_salzburg_steiermark")
+        HYPO_OBEROSTERREICH_SALZBURG_STEIERMARK("hypo_oberosterreich_salzburg_steiermark"),
+
+        @SerializedName("hypo_tirol_bank_ag")
+        HYPO_TIROL_BANK_AG("hypo_tirol_bank_ag"),
+
+        @SerializedName("hypo_vorarlberg_bank_ag")
+        HYPO_VORARLBERG_BANK_AG("hypo_vorarlberg_bank_ag"),
+
+        @SerializedName("marchfelder_bank")
+        MARCHFELDER_BANK("marchfelder_bank"),
+
+        @SerializedName("oberbank_ag")
+        OBERBANK_AG("oberbank_ag"),
+
+        @SerializedName("raiffeisen_bankengruppe_osterreich")
+        RAIFFEISEN_BANKENGRUPPE_OSTERREICH("raiffeisen_bankengruppe_osterreich"),
+
+        @SerializedName("schoellerbank_ag")
+        SCHOELLERBANK_AG("schoellerbank_ag"),
+
+        @SerializedName("sparda_bank_wien")
+        SPARDA_BANK_WIEN("sparda_bank_wien"),
+
+        @SerializedName("volksbank_gruppe")
+        VOLKSBANK_GRUPPE("volksbank_gruppe"),
+
+        @SerializedName("volkskreditbank_ag")
+        VOLKSKREDITBANK_AG("volkskreditbank_ag"),
+
+        @SerializedName("vr_bank_braunau")
+        VR_BANK_BRAUNAU("vr_bank_braunau");
+
+        @Getter(onMethod_ = {@Override})
+        private final String value;
+
+        Bank(String value) {
+          this.value = value;
         }
       }
     }
@@ -3707,8 +3810,13 @@ public class PaymentIntentConfirmParams extends ApiRequestParams {
       @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
       Map<String, Object> extraParams;
 
-      private P24(Map<String, Object> extraParams) {
+      /** Confirm that the payer has accepted the P24 terms and conditions. */
+      @SerializedName("tos_shown_and_accepted")
+      Boolean tosShownAndAccepted;
+
+      private P24(Map<String, Object> extraParams, Boolean tosShownAndAccepted) {
         this.extraParams = extraParams;
+        this.tosShownAndAccepted = tosShownAndAccepted;
       }
 
       public static Builder builder() {
@@ -3718,9 +3826,11 @@ public class PaymentIntentConfirmParams extends ApiRequestParams {
       public static class Builder {
         private Map<String, Object> extraParams;
 
+        private Boolean tosShownAndAccepted;
+
         /** Finalize and obtain parameter instance from this builder. */
         public P24 build() {
-          return new P24(this.extraParams);
+          return new P24(this.extraParams, this.tosShownAndAccepted);
         }
 
         /**
@@ -3748,6 +3858,12 @@ public class PaymentIntentConfirmParams extends ApiRequestParams {
             this.extraParams = new HashMap<>();
           }
           this.extraParams.putAll(map);
+          return this;
+        }
+
+        /** Confirm that the payer has accepted the P24 terms and conditions. */
+        public Builder setTosShownAndAccepted(Boolean tosShownAndAccepted) {
+          this.tosShownAndAccepted = tosShownAndAccepted;
           return this;
         }
       }

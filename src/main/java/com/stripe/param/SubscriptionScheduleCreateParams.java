@@ -323,6 +323,17 @@ public class SubscriptionScheduleCreateParams extends ApiRequestParams {
   @Getter
   public static class DefaultSettings {
     /**
+     * A non-negative decimal between 0 and 100, with at most two decimal places. This represents
+     * the percentage of the subscription invoice subtotal that will be transferred to the
+     * application owner's Stripe account. The request must be made by a platform account on a
+     * connected account in order to set an application fee percentage. For more information, see
+     * the application fees <a
+     * href="https://stripe.com/docs/connect/subscriptions#collecting-fees-on-subscriptions">documentation</a>.
+     */
+    @SerializedName("application_fee_percent")
+    BigDecimal applicationFeePercent;
+
+    /**
      * Can be set to {@code phase_start} to set the anchor to the start of the phase or {@code
      * automatic} to automatically change it if needed. Cannot be set to {@code phase_start} if this
      * phase specifies a trial. For more information, see the billing cycle <a
@@ -377,6 +388,7 @@ public class SubscriptionScheduleCreateParams extends ApiRequestParams {
     Object transferData;
 
     private DefaultSettings(
+        BigDecimal applicationFeePercent,
         BillingCycleAnchor billingCycleAnchor,
         Object billingThresholds,
         CollectionMethod collectionMethod,
@@ -384,6 +396,7 @@ public class SubscriptionScheduleCreateParams extends ApiRequestParams {
         Map<String, Object> extraParams,
         InvoiceSettings invoiceSettings,
         Object transferData) {
+      this.applicationFeePercent = applicationFeePercent;
       this.billingCycleAnchor = billingCycleAnchor;
       this.billingThresholds = billingThresholds;
       this.collectionMethod = collectionMethod;
@@ -398,6 +411,8 @@ public class SubscriptionScheduleCreateParams extends ApiRequestParams {
     }
 
     public static class Builder {
+      private BigDecimal applicationFeePercent;
+
       private BillingCycleAnchor billingCycleAnchor;
 
       private Object billingThresholds;
@@ -415,6 +430,7 @@ public class SubscriptionScheduleCreateParams extends ApiRequestParams {
       /** Finalize and obtain parameter instance from this builder. */
       public DefaultSettings build() {
         return new DefaultSettings(
+            this.applicationFeePercent,
             this.billingCycleAnchor,
             this.billingThresholds,
             this.collectionMethod,
@@ -422,6 +438,19 @@ public class SubscriptionScheduleCreateParams extends ApiRequestParams {
             this.extraParams,
             this.invoiceSettings,
             this.transferData);
+      }
+
+      /**
+       * A non-negative decimal between 0 and 100, with at most two decimal places. This represents
+       * the percentage of the subscription invoice subtotal that will be transferred to the
+       * application owner's Stripe account. The request must be made by a platform account on a
+       * connected account in order to set an application fee percentage. For more information, see
+       * the application fees <a
+       * href="https://stripe.com/docs/connect/subscriptions#collecting-fees-on-subscriptions">documentation</a>.
+       */
+      public Builder setApplicationFeePercent(BigDecimal applicationFeePercent) {
+        this.applicationFeePercent = applicationFeePercent;
+        return this;
       }
 
       /**

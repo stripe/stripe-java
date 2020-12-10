@@ -20,6 +20,13 @@ public class PaymentMethodUpdateParams extends ApiRequestParams {
   AuBecsDebit auBecsDebit;
 
   /**
+   * This is a legacy parameter that will be removed in the future. It is a hash that does not
+   * accept any keys.
+   */
+  @SerializedName("bacs_debit")
+  BacsDebit bacsDebit;
+
+  /**
    * Billing information associated with the PaymentMethod that may be used or required by
    * particular types of payment methods.
    */
@@ -61,6 +68,7 @@ public class PaymentMethodUpdateParams extends ApiRequestParams {
 
   private PaymentMethodUpdateParams(
       AuBecsDebit auBecsDebit,
+      BacsDebit bacsDebit,
       BillingDetails billingDetails,
       Card card,
       List<String> expand,
@@ -68,6 +76,7 @@ public class PaymentMethodUpdateParams extends ApiRequestParams {
       Object metadata,
       SepaDebit sepaDebit) {
     this.auBecsDebit = auBecsDebit;
+    this.bacsDebit = bacsDebit;
     this.billingDetails = billingDetails;
     this.card = card;
     this.expand = expand;
@@ -82,6 +91,8 @@ public class PaymentMethodUpdateParams extends ApiRequestParams {
 
   public static class Builder {
     private AuBecsDebit auBecsDebit;
+
+    private BacsDebit bacsDebit;
 
     private BillingDetails billingDetails;
 
@@ -99,6 +110,7 @@ public class PaymentMethodUpdateParams extends ApiRequestParams {
     public PaymentMethodUpdateParams build() {
       return new PaymentMethodUpdateParams(
           this.auBecsDebit,
+          this.bacsDebit,
           this.billingDetails,
           this.card,
           this.expand,
@@ -113,6 +125,15 @@ public class PaymentMethodUpdateParams extends ApiRequestParams {
      */
     public Builder setAuBecsDebit(AuBecsDebit auBecsDebit) {
       this.auBecsDebit = auBecsDebit;
+      return this;
+    }
+
+    /**
+     * This is a legacy parameter that will be removed in the future. It is a hash that does not
+     * accept any keys.
+     */
+    public Builder setBacsDebit(BacsDebit bacsDebit) {
+      this.bacsDebit = bacsDebit;
       return this;
     }
 
@@ -287,6 +308,61 @@ public class PaymentMethodUpdateParams extends ApiRequestParams {
        * Add all map key/value pairs to `extraParams` map. A map is initialized for the first
        * `put/putAll` call, and subsequent calls add additional key/value pairs to the original map.
        * See {@link PaymentMethodUpdateParams.AuBecsDebit#extraParams} for the field documentation.
+       */
+      public Builder putAllExtraParam(Map<String, Object> map) {
+        if (this.extraParams == null) {
+          this.extraParams = new HashMap<>();
+        }
+        this.extraParams.putAll(map);
+        return this;
+      }
+    }
+  }
+
+  @Getter
+  public static class BacsDebit {
+    /**
+     * Map of extra parameters for custom features not available in this client library. The content
+     * in this map is not serialized under this field's {@code @SerializedName} value. Instead, each
+     * key/value pair is serialized as if the key is a root-level field (serialized) name in this
+     * param object. Effectively, this map is flattened to its parent instance.
+     */
+    @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
+    Map<String, Object> extraParams;
+
+    private BacsDebit(Map<String, Object> extraParams) {
+      this.extraParams = extraParams;
+    }
+
+    public static Builder builder() {
+      return new Builder();
+    }
+
+    public static class Builder {
+      private Map<String, Object> extraParams;
+
+      /** Finalize and obtain parameter instance from this builder. */
+      public BacsDebit build() {
+        return new BacsDebit(this.extraParams);
+      }
+
+      /**
+       * Add a key/value pair to `extraParams` map. A map is initialized for the first `put/putAll`
+       * call, and subsequent calls add additional key/value pairs to the original map. See {@link
+       * PaymentMethodUpdateParams.BacsDebit#extraParams} for the field documentation.
+       */
+      public Builder putExtraParam(String key, Object value) {
+        if (this.extraParams == null) {
+          this.extraParams = new HashMap<>();
+        }
+        this.extraParams.put(key, value);
+        return this;
+      }
+
+      /**
+       * Add all map key/value pairs to `extraParams` map. A map is initialized for the first
+       * `put/putAll` call, and subsequent calls add additional key/value pairs to the original map.
+       * See {@link PaymentMethodUpdateParams.BacsDebit#extraParams} for the field documentation.
        */
       public Builder putAllExtraParam(Map<String, Object> map) {
         if (this.extraParams == null) {
