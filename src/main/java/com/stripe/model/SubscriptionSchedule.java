@@ -528,6 +528,14 @@ public class SubscriptionSchedule extends ApiResource
   @EqualsAndHashCode(callSuper = false)
   public static class DefaultSettings extends StripeObject {
     /**
+     * A non-negative decimal between 0 and 100, with at most two decimal places. This represents
+     * the percentage of the subscription invoice subtotal that will be transferred to the
+     * application owner's Stripe account during this phase of the schedule.
+     */
+    @SerializedName("application_fee_percent")
+    BigDecimal applicationFeePercent;
+
+    /**
      * Possible values are {@code phase_start} or {@code automatic}. If {@code phase_start} then
      * billing cycle anchor of the subscription is set to the start of the phase when entering the
      * phase. If {@code automatic} then the billing cycle anchor is automatically modified as needed
