@@ -1,5 +1,11 @@
 # Changelog
 
+## 20.32.0 - 2020-12-10
+* [#1163](https://github.com/stripe/stripe-java/pull/1163) [codegen] Multiple API changes
+  * Added support for `bank` on `PaymentMethod`
+  * Added support for `tos_shown_and_accepted` to `payment_method_options[p24]` on `PaymentMethod`.
+
+
 ## 20.31.0 - 2020-12-03
 * [#1161](https://github.com/stripe/stripe-java/pull/1161) Add support for `documents` on `Account` create and update
 
