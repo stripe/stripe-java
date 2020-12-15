@@ -66,7 +66,7 @@ public final class OAuth {
     String url = Stripe.getConnectBase() + "/oauth/deauthorize";
     paramsCopy.put("client_id", getClientId(paramsCopy, options));
     return OAuth.stripeResponseGetter.oauthRequest(
-        ApiResource.RequestMethod.POST, url, params, DeauthorizedAccount.class, options);
+        ApiResource.RequestMethod.POST, url, paramsCopy, DeauthorizedAccount.class, options);
   }
 
   /**
