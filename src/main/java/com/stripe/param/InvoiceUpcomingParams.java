@@ -790,6 +790,10 @@ public class InvoiceUpcomingParams extends ApiRequestParams {
     @SerializedName("quantity")
     Long quantity;
 
+    /**
+     * The tax rates that apply to the item. When set, any {@code default_tax_rates} do not apply to
+     * this item.
+     */
     @SerializedName("tax_rates")
     Object taxRates;
 
@@ -1110,11 +1114,19 @@ public class InvoiceUpcomingParams extends ApiRequestParams {
         return this;
       }
 
+      /**
+       * The tax rates that apply to the item. When set, any {@code default_tax_rates} do not apply
+       * to this item.
+       */
       public Builder setTaxRates(EmptyParam taxRates) {
         this.taxRates = taxRates;
         return this;
       }
 
+      /**
+       * The tax rates that apply to the item. When set, any {@code default_tax_rates} do not apply
+       * to this item.
+       */
       public Builder setTaxRates(List<String> taxRates) {
         this.taxRates = taxRates;
         return this;
