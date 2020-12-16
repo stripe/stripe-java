@@ -1,5 +1,10 @@
 # Changelog
 
+## 20.33.0 - 2020-12-15
+* [#1165](https://github.com/stripe/stripe-java/pull/1165) API Updates
+  * Added support for card_present on SetupAttempt.payment_method_details
+* [#1162](https://github.com/stripe/stripe-java/pull/1162) Pass mutated copy of params into oauth request
+
 ## 20.32.0 - 2020-12-10
 * [#1163](https://github.com/stripe/stripe-java/pull/1163) [codegen] Multiple API changes
   * Added support for `bank` on `PaymentMethod`
