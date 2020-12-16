@@ -418,7 +418,11 @@ public class Card extends ApiResource implements HasId, MetadataStore<Card> {
     @SerializedName("blocked_categories")
     List<String> blockedCategories;
 
-    /** Limit spending with amount-based rules. */
+    /**
+     * Limit spending with amount-based rules that apply across any cards this card replaced (i.e.,
+     * its {@code replacement_for} card and <em>that</em> card's {@code replacement_for} card, up
+     * the chain).
+     */
     @SerializedName("spending_limits")
     List<Card.SpendingControls.SpendingLimit> spendingLimits;
 
