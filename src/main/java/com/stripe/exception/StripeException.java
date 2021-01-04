@@ -9,7 +9,8 @@ public abstract class StripeException extends Exception {
   private static final long serialVersionUID = 2L;
 
   /** The error resource returned by Stripe's API that caused the exception. */
-  // transient so the exception can be serialized, as StripeObject does not implement Serializable
+  // transient so the exception can be serialized, as StripeObject does not
+  // implement Serializable
   @Setter transient StripeError stripeError;
 
   private String code;
@@ -45,5 +46,14 @@ public abstract class StripeException extends Exception {
       additionalInfo += "; request-id: " + requestId;
     }
     return super.getMessage() + additionalInfo;
+  }
+
+  /**
+   * Returns a description of the user facing exception
+   *
+   * @return a string representation of the user facing exception.
+   */
+  public String getUserMessage() {
+    return super.getMessage();
   }
 }
