@@ -4143,6 +4143,32 @@ public class AccountUpdateParams extends ApiRequestParams {
     @SerializedName("bank_account_ownership_verification")
     BankAccountOwnershipVerification bankAccountOwnershipVerification;
 
+    /** One or more documents that demonstrate proof of a company's license to operate. */
+    @SerializedName("company_license")
+    CompanyLicense companyLicense;
+
+    /** One or more documents showing the company's Memorandum of Association. */
+    @SerializedName("company_memorandum_of_association")
+    CompanyMemorandumOfAssociation companyMemorandumOfAssociation;
+
+    /**
+     * (Certain countries only) One or more documents showing the ministerial decree legalizing the
+     * company's establishment.
+     */
+    @SerializedName("company_ministerial_decree")
+    CompanyMinisterialDecree companyMinisterialDecree;
+
+    /**
+     * One or more documents that demonstrate proof of a company's registration with the appropriate
+     * local authorities.
+     */
+    @SerializedName("company_registration_verification")
+    CompanyRegistrationVerification companyRegistrationVerification;
+
+    /** One or more documents that demonstrate proof of a company's tax ID. */
+    @SerializedName("company_tax_id_verification")
+    CompanyTaxIdVerification companyTaxIdVerification;
+
     /**
      * Map of extra parameters for custom features not available in this client library. The content
      * in this map is not serialized under this field's {@code @SerializedName} value. Instead, each
@@ -4154,8 +4180,18 @@ public class AccountUpdateParams extends ApiRequestParams {
 
     private Documents(
         BankAccountOwnershipVerification bankAccountOwnershipVerification,
+        CompanyLicense companyLicense,
+        CompanyMemorandumOfAssociation companyMemorandumOfAssociation,
+        CompanyMinisterialDecree companyMinisterialDecree,
+        CompanyRegistrationVerification companyRegistrationVerification,
+        CompanyTaxIdVerification companyTaxIdVerification,
         Map<String, Object> extraParams) {
       this.bankAccountOwnershipVerification = bankAccountOwnershipVerification;
+      this.companyLicense = companyLicense;
+      this.companyMemorandumOfAssociation = companyMemorandumOfAssociation;
+      this.companyMinisterialDecree = companyMinisterialDecree;
+      this.companyRegistrationVerification = companyRegistrationVerification;
+      this.companyTaxIdVerification = companyTaxIdVerification;
       this.extraParams = extraParams;
     }
 
@@ -4166,11 +4202,28 @@ public class AccountUpdateParams extends ApiRequestParams {
     public static class Builder {
       private BankAccountOwnershipVerification bankAccountOwnershipVerification;
 
+      private CompanyLicense companyLicense;
+
+      private CompanyMemorandumOfAssociation companyMemorandumOfAssociation;
+
+      private CompanyMinisterialDecree companyMinisterialDecree;
+
+      private CompanyRegistrationVerification companyRegistrationVerification;
+
+      private CompanyTaxIdVerification companyTaxIdVerification;
+
       private Map<String, Object> extraParams;
 
       /** Finalize and obtain parameter instance from this builder. */
       public Documents build() {
-        return new Documents(this.bankAccountOwnershipVerification, this.extraParams);
+        return new Documents(
+            this.bankAccountOwnershipVerification,
+            this.companyLicense,
+            this.companyMemorandumOfAssociation,
+            this.companyMinisterialDecree,
+            this.companyRegistrationVerification,
+            this.companyTaxIdVerification,
+            this.extraParams);
       }
 
       /**
@@ -4183,6 +4236,46 @@ public class AccountUpdateParams extends ApiRequestParams {
       public Builder setBankAccountOwnershipVerification(
           BankAccountOwnershipVerification bankAccountOwnershipVerification) {
         this.bankAccountOwnershipVerification = bankAccountOwnershipVerification;
+        return this;
+      }
+
+      /** One or more documents that demonstrate proof of a company's license to operate. */
+      public Builder setCompanyLicense(CompanyLicense companyLicense) {
+        this.companyLicense = companyLicense;
+        return this;
+      }
+
+      /** One or more documents showing the company's Memorandum of Association. */
+      public Builder setCompanyMemorandumOfAssociation(
+          CompanyMemorandumOfAssociation companyMemorandumOfAssociation) {
+        this.companyMemorandumOfAssociation = companyMemorandumOfAssociation;
+        return this;
+      }
+
+      /**
+       * (Certain countries only) One or more documents showing the ministerial decree legalizing
+       * the company's establishment.
+       */
+      public Builder setCompanyMinisterialDecree(
+          CompanyMinisterialDecree companyMinisterialDecree) {
+        this.companyMinisterialDecree = companyMinisterialDecree;
+        return this;
+      }
+
+      /**
+       * One or more documents that demonstrate proof of a company's registration with the
+       * appropriate local authorities.
+       */
+      public Builder setCompanyRegistrationVerification(
+          CompanyRegistrationVerification companyRegistrationVerification) {
+        this.companyRegistrationVerification = companyRegistrationVerification;
+        return this;
+      }
+
+      /** One or more documents that demonstrate proof of a company's tax ID. */
+      public Builder setCompanyTaxIdVerification(
+          CompanyTaxIdVerification companyTaxIdVerification) {
+        this.companyTaxIdVerification = companyTaxIdVerification;
         return this;
       }
 
@@ -4300,6 +4393,486 @@ public class AccountUpdateParams extends ApiRequestParams {
          * Add all elements to `files` list. A list is initialized for the first `add/addAll` call,
          * and subsequent calls adds additional elements to the original list. See {@link
          * AccountUpdateParams.Documents.BankAccountOwnershipVerification#files} for the field
+         * documentation.
+         */
+        public Builder addAllFile(List<String> elements) {
+          if (this.files == null) {
+            this.files = new ArrayList<>();
+          }
+          this.files.addAll(elements);
+          return this;
+        }
+      }
+    }
+
+    @Getter
+    public static class CompanyLicense {
+      /**
+       * Map of extra parameters for custom features not available in this client library. The
+       * content in this map is not serialized under this field's {@code @SerializedName} value.
+       * Instead, each key/value pair is serialized as if the key is a root-level field (serialized)
+       * name in this param object. Effectively, this map is flattened to its parent instance.
+       */
+      @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
+      Map<String, Object> extraParams;
+
+      /**
+       * One or more document ids returned by a <a
+       * href="https://stripe.com/docs/api#create_file">file upload</a> with a {@code purpose} value
+       * of {@code account_requirement}.
+       */
+      @SerializedName("files")
+      List<String> files;
+
+      private CompanyLicense(Map<String, Object> extraParams, List<String> files) {
+        this.extraParams = extraParams;
+        this.files = files;
+      }
+
+      public static Builder builder() {
+        return new Builder();
+      }
+
+      public static class Builder {
+        private Map<String, Object> extraParams;
+
+        private List<String> files;
+
+        /** Finalize and obtain parameter instance from this builder. */
+        public CompanyLicense build() {
+          return new CompanyLicense(this.extraParams, this.files);
+        }
+
+        /**
+         * Add a key/value pair to `extraParams` map. A map is initialized for the first
+         * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
+         * map. See {@link AccountUpdateParams.Documents.CompanyLicense#extraParams} for the field
+         * documentation.
+         */
+        public Builder putExtraParam(String key, Object value) {
+          if (this.extraParams == null) {
+            this.extraParams = new HashMap<>();
+          }
+          this.extraParams.put(key, value);
+          return this;
+        }
+
+        /**
+         * Add all map key/value pairs to `extraParams` map. A map is initialized for the first
+         * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
+         * map. See {@link AccountUpdateParams.Documents.CompanyLicense#extraParams} for the field
+         * documentation.
+         */
+        public Builder putAllExtraParam(Map<String, Object> map) {
+          if (this.extraParams == null) {
+            this.extraParams = new HashMap<>();
+          }
+          this.extraParams.putAll(map);
+          return this;
+        }
+
+        /**
+         * Add an element to `files` list. A list is initialized for the first `add/addAll` call,
+         * and subsequent calls adds additional elements to the original list. See {@link
+         * AccountUpdateParams.Documents.CompanyLicense#files} for the field documentation.
+         */
+        public Builder addFile(String element) {
+          if (this.files == null) {
+            this.files = new ArrayList<>();
+          }
+          this.files.add(element);
+          return this;
+        }
+
+        /**
+         * Add all elements to `files` list. A list is initialized for the first `add/addAll` call,
+         * and subsequent calls adds additional elements to the original list. See {@link
+         * AccountUpdateParams.Documents.CompanyLicense#files} for the field documentation.
+         */
+        public Builder addAllFile(List<String> elements) {
+          if (this.files == null) {
+            this.files = new ArrayList<>();
+          }
+          this.files.addAll(elements);
+          return this;
+        }
+      }
+    }
+
+    @Getter
+    public static class CompanyMemorandumOfAssociation {
+      /**
+       * Map of extra parameters for custom features not available in this client library. The
+       * content in this map is not serialized under this field's {@code @SerializedName} value.
+       * Instead, each key/value pair is serialized as if the key is a root-level field (serialized)
+       * name in this param object. Effectively, this map is flattened to its parent instance.
+       */
+      @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
+      Map<String, Object> extraParams;
+
+      /**
+       * One or more document ids returned by a <a
+       * href="https://stripe.com/docs/api#create_file">file upload</a> with a {@code purpose} value
+       * of {@code account_requirement}.
+       */
+      @SerializedName("files")
+      List<String> files;
+
+      private CompanyMemorandumOfAssociation(Map<String, Object> extraParams, List<String> files) {
+        this.extraParams = extraParams;
+        this.files = files;
+      }
+
+      public static Builder builder() {
+        return new Builder();
+      }
+
+      public static class Builder {
+        private Map<String, Object> extraParams;
+
+        private List<String> files;
+
+        /** Finalize and obtain parameter instance from this builder. */
+        public CompanyMemorandumOfAssociation build() {
+          return new CompanyMemorandumOfAssociation(this.extraParams, this.files);
+        }
+
+        /**
+         * Add a key/value pair to `extraParams` map. A map is initialized for the first
+         * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
+         * map. See {@link AccountUpdateParams.Documents.CompanyMemorandumOfAssociation#extraParams}
+         * for the field documentation.
+         */
+        public Builder putExtraParam(String key, Object value) {
+          if (this.extraParams == null) {
+            this.extraParams = new HashMap<>();
+          }
+          this.extraParams.put(key, value);
+          return this;
+        }
+
+        /**
+         * Add all map key/value pairs to `extraParams` map. A map is initialized for the first
+         * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
+         * map. See {@link AccountUpdateParams.Documents.CompanyMemorandumOfAssociation#extraParams}
+         * for the field documentation.
+         */
+        public Builder putAllExtraParam(Map<String, Object> map) {
+          if (this.extraParams == null) {
+            this.extraParams = new HashMap<>();
+          }
+          this.extraParams.putAll(map);
+          return this;
+        }
+
+        /**
+         * Add an element to `files` list. A list is initialized for the first `add/addAll` call,
+         * and subsequent calls adds additional elements to the original list. See {@link
+         * AccountUpdateParams.Documents.CompanyMemorandumOfAssociation#files} for the field
+         * documentation.
+         */
+        public Builder addFile(String element) {
+          if (this.files == null) {
+            this.files = new ArrayList<>();
+          }
+          this.files.add(element);
+          return this;
+        }
+
+        /**
+         * Add all elements to `files` list. A list is initialized for the first `add/addAll` call,
+         * and subsequent calls adds additional elements to the original list. See {@link
+         * AccountUpdateParams.Documents.CompanyMemorandumOfAssociation#files} for the field
+         * documentation.
+         */
+        public Builder addAllFile(List<String> elements) {
+          if (this.files == null) {
+            this.files = new ArrayList<>();
+          }
+          this.files.addAll(elements);
+          return this;
+        }
+      }
+    }
+
+    @Getter
+    public static class CompanyMinisterialDecree {
+      /**
+       * Map of extra parameters for custom features not available in this client library. The
+       * content in this map is not serialized under this field's {@code @SerializedName} value.
+       * Instead, each key/value pair is serialized as if the key is a root-level field (serialized)
+       * name in this param object. Effectively, this map is flattened to its parent instance.
+       */
+      @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
+      Map<String, Object> extraParams;
+
+      /**
+       * One or more document ids returned by a <a
+       * href="https://stripe.com/docs/api#create_file">file upload</a> with a {@code purpose} value
+       * of {@code account_requirement}.
+       */
+      @SerializedName("files")
+      List<String> files;
+
+      private CompanyMinisterialDecree(Map<String, Object> extraParams, List<String> files) {
+        this.extraParams = extraParams;
+        this.files = files;
+      }
+
+      public static Builder builder() {
+        return new Builder();
+      }
+
+      public static class Builder {
+        private Map<String, Object> extraParams;
+
+        private List<String> files;
+
+        /** Finalize and obtain parameter instance from this builder. */
+        public CompanyMinisterialDecree build() {
+          return new CompanyMinisterialDecree(this.extraParams, this.files);
+        }
+
+        /**
+         * Add a key/value pair to `extraParams` map. A map is initialized for the first
+         * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
+         * map. See {@link AccountUpdateParams.Documents.CompanyMinisterialDecree#extraParams} for
+         * the field documentation.
+         */
+        public Builder putExtraParam(String key, Object value) {
+          if (this.extraParams == null) {
+            this.extraParams = new HashMap<>();
+          }
+          this.extraParams.put(key, value);
+          return this;
+        }
+
+        /**
+         * Add all map key/value pairs to `extraParams` map. A map is initialized for the first
+         * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
+         * map. See {@link AccountUpdateParams.Documents.CompanyMinisterialDecree#extraParams} for
+         * the field documentation.
+         */
+        public Builder putAllExtraParam(Map<String, Object> map) {
+          if (this.extraParams == null) {
+            this.extraParams = new HashMap<>();
+          }
+          this.extraParams.putAll(map);
+          return this;
+        }
+
+        /**
+         * Add an element to `files` list. A list is initialized for the first `add/addAll` call,
+         * and subsequent calls adds additional elements to the original list. See {@link
+         * AccountUpdateParams.Documents.CompanyMinisterialDecree#files} for the field
+         * documentation.
+         */
+        public Builder addFile(String element) {
+          if (this.files == null) {
+            this.files = new ArrayList<>();
+          }
+          this.files.add(element);
+          return this;
+        }
+
+        /**
+         * Add all elements to `files` list. A list is initialized for the first `add/addAll` call,
+         * and subsequent calls adds additional elements to the original list. See {@link
+         * AccountUpdateParams.Documents.CompanyMinisterialDecree#files} for the field
+         * documentation.
+         */
+        public Builder addAllFile(List<String> elements) {
+          if (this.files == null) {
+            this.files = new ArrayList<>();
+          }
+          this.files.addAll(elements);
+          return this;
+        }
+      }
+    }
+
+    @Getter
+    public static class CompanyRegistrationVerification {
+      /**
+       * Map of extra parameters for custom features not available in this client library. The
+       * content in this map is not serialized under this field's {@code @SerializedName} value.
+       * Instead, each key/value pair is serialized as if the key is a root-level field (serialized)
+       * name in this param object. Effectively, this map is flattened to its parent instance.
+       */
+      @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
+      Map<String, Object> extraParams;
+
+      /**
+       * One or more document ids returned by a <a
+       * href="https://stripe.com/docs/api#create_file">file upload</a> with a {@code purpose} value
+       * of {@code account_requirement}.
+       */
+      @SerializedName("files")
+      List<String> files;
+
+      private CompanyRegistrationVerification(Map<String, Object> extraParams, List<String> files) {
+        this.extraParams = extraParams;
+        this.files = files;
+      }
+
+      public static Builder builder() {
+        return new Builder();
+      }
+
+      public static class Builder {
+        private Map<String, Object> extraParams;
+
+        private List<String> files;
+
+        /** Finalize and obtain parameter instance from this builder. */
+        public CompanyRegistrationVerification build() {
+          return new CompanyRegistrationVerification(this.extraParams, this.files);
+        }
+
+        /**
+         * Add a key/value pair to `extraParams` map. A map is initialized for the first
+         * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
+         * map. See {@link
+         * AccountUpdateParams.Documents.CompanyRegistrationVerification#extraParams} for the field
+         * documentation.
+         */
+        public Builder putExtraParam(String key, Object value) {
+          if (this.extraParams == null) {
+            this.extraParams = new HashMap<>();
+          }
+          this.extraParams.put(key, value);
+          return this;
+        }
+
+        /**
+         * Add all map key/value pairs to `extraParams` map. A map is initialized for the first
+         * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
+         * map. See {@link
+         * AccountUpdateParams.Documents.CompanyRegistrationVerification#extraParams} for the field
+         * documentation.
+         */
+        public Builder putAllExtraParam(Map<String, Object> map) {
+          if (this.extraParams == null) {
+            this.extraParams = new HashMap<>();
+          }
+          this.extraParams.putAll(map);
+          return this;
+        }
+
+        /**
+         * Add an element to `files` list. A list is initialized for the first `add/addAll` call,
+         * and subsequent calls adds additional elements to the original list. See {@link
+         * AccountUpdateParams.Documents.CompanyRegistrationVerification#files} for the field
+         * documentation.
+         */
+        public Builder addFile(String element) {
+          if (this.files == null) {
+            this.files = new ArrayList<>();
+          }
+          this.files.add(element);
+          return this;
+        }
+
+        /**
+         * Add all elements to `files` list. A list is initialized for the first `add/addAll` call,
+         * and subsequent calls adds additional elements to the original list. See {@link
+         * AccountUpdateParams.Documents.CompanyRegistrationVerification#files} for the field
+         * documentation.
+         */
+        public Builder addAllFile(List<String> elements) {
+          if (this.files == null) {
+            this.files = new ArrayList<>();
+          }
+          this.files.addAll(elements);
+          return this;
+        }
+      }
+    }
+
+    @Getter
+    public static class CompanyTaxIdVerification {
+      /**
+       * Map of extra parameters for custom features not available in this client library. The
+       * content in this map is not serialized under this field's {@code @SerializedName} value.
+       * Instead, each key/value pair is serialized as if the key is a root-level field (serialized)
+       * name in this param object. Effectively, this map is flattened to its parent instance.
+       */
+      @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
+      Map<String, Object> extraParams;
+
+      /**
+       * One or more document ids returned by a <a
+       * href="https://stripe.com/docs/api#create_file">file upload</a> with a {@code purpose} value
+       * of {@code account_requirement}.
+       */
+      @SerializedName("files")
+      List<String> files;
+
+      private CompanyTaxIdVerification(Map<String, Object> extraParams, List<String> files) {
+        this.extraParams = extraParams;
+        this.files = files;
+      }
+
+      public static Builder builder() {
+        return new Builder();
+      }
+
+      public static class Builder {
+        private Map<String, Object> extraParams;
+
+        private List<String> files;
+
+        /** Finalize and obtain parameter instance from this builder. */
+        public CompanyTaxIdVerification build() {
+          return new CompanyTaxIdVerification(this.extraParams, this.files);
+        }
+
+        /**
+         * Add a key/value pair to `extraParams` map. A map is initialized for the first
+         * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
+         * map. See {@link AccountUpdateParams.Documents.CompanyTaxIdVerification#extraParams} for
+         * the field documentation.
+         */
+        public Builder putExtraParam(String key, Object value) {
+          if (this.extraParams == null) {
+            this.extraParams = new HashMap<>();
+          }
+          this.extraParams.put(key, value);
+          return this;
+        }
+
+        /**
+         * Add all map key/value pairs to `extraParams` map. A map is initialized for the first
+         * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
+         * map. See {@link AccountUpdateParams.Documents.CompanyTaxIdVerification#extraParams} for
+         * the field documentation.
+         */
+        public Builder putAllExtraParam(Map<String, Object> map) {
+          if (this.extraParams == null) {
+            this.extraParams = new HashMap<>();
+          }
+          this.extraParams.putAll(map);
+          return this;
+        }
+
+        /**
+         * Add an element to `files` list. A list is initialized for the first `add/addAll` call,
+         * and subsequent calls adds additional elements to the original list. See {@link
+         * AccountUpdateParams.Documents.CompanyTaxIdVerification#files} for the field
+         * documentation.
+         */
+        public Builder addFile(String element) {
+          if (this.files == null) {
+            this.files = new ArrayList<>();
+          }
+          this.files.add(element);
+          return this;
+        }
+
+        /**
+         * Add all elements to `files` list. A list is initialized for the first `add/addAll` call,
+         * and subsequent calls adds additional elements to the original list. See {@link
+         * AccountUpdateParams.Documents.CompanyTaxIdVerification#files} for the field
          * documentation.
          */
         public Builder addAllFile(List<String> elements) {
