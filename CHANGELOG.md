@@ -1,5 +1,10 @@
 # Changelog
 
+## 20.34.0 - 2021-01-07
+* [#1169](https://github.com/stripe/stripe-java/pull/1169) API Updates
+  * Added support for `company_registration_verification`, `company_ministerial_decree`, `company_memorandum_of_association`, `company_license` and `company_tax_id_verification` on `AccountUpdateParams.documents` and `AccountCreateParams.documents`
+* [#1167](https://github.com/stripe/stripe-java/pull/1167) Adding getUserMessage() to exceptions
+
 ## 20.33.0 - 2020-12-15
 * [#1165](https://github.com/stripe/stripe-java/pull/1165) API Updates
   * Added support for card_present on SetupAttempt.payment_method_details
