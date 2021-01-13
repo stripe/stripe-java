@@ -54,6 +54,8 @@ file:
 Please see the [Java API docs][api-docs] for the most
 up-to-date documentation.
 
+See [video demonstrations][youtube-playlist] covering how to use the library.
+
 You can also refer to the [online Javadoc][javadoc].
 
 ## Usage
@@ -236,6 +238,7 @@ facilitate development.
 [spotless]: https://github.com/diffplug/spotless
 [stripe]: https://stripe.com
 [stripe-mock]: https://github.com/stripe/stripe-mock
+[youtube-playlist]: https://www.youtube.com/playlist?list=PLy1nL-pvL2M5TnSGVjEHTTMgdnnHi-KPg
 
 <!--
 # vim: set tw=79:
