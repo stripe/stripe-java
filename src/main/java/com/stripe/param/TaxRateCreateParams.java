@@ -21,6 +21,13 @@ public class TaxRateCreateParams extends ApiRequestParams {
   Boolean active;
 
   /**
+   * Two-letter country code (<a href="https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2">ISO 3166-1
+   * alpha-2</a>).
+   */
+  @SerializedName("country")
+  String country;
+
+  /**
    * An arbitrary string attached to the tax rate for your internal use only. It will not be visible
    * to your customers.
    */
@@ -68,8 +75,16 @@ public class TaxRateCreateParams extends ApiRequestParams {
   @SerializedName("percentage")
   BigDecimal percentage;
 
+  /**
+   * <a href="https://en.wikipedia.org/wiki/ISO_3166-2:US">ISO 3166-2 subdivision code</a>, without
+   * country prefix. For example, &quot;NY&quot; for New York, United States.
+   */
+  @SerializedName("state")
+  String state;
+
   private TaxRateCreateParams(
       Boolean active,
+      String country,
       String description,
       String displayName,
       List<String> expand,
@@ -77,8 +92,10 @@ public class TaxRateCreateParams extends ApiRequestParams {
       Boolean inclusive,
       String jurisdiction,
       Map<String, String> metadata,
-      BigDecimal percentage) {
+      BigDecimal percentage,
+      String state) {
     this.active = active;
+    this.country = country;
     this.description = description;
     this.displayName = displayName;
     this.expand = expand;
@@ -87,6 +104,7 @@ public class TaxRateCreateParams extends ApiRequestParams {
     this.jurisdiction = jurisdiction;
     this.metadata = metadata;
     this.percentage = percentage;
+    this.state = state;
   }
 
   public static Builder builder() {
@@ -95,6 +113,8 @@ public class TaxRateCreateParams extends ApiRequestParams {
 
   public static class Builder {
     private Boolean active;
+
+    private String country;
 
     private String description;
 
@@ -112,10 +132,13 @@ public class TaxRateCreateParams extends ApiRequestParams {
 
     private BigDecimal percentage;
 
+    private String state;
+
     /** Finalize and obtain parameter instance from this builder. */
     public TaxRateCreateParams build() {
       return new TaxRateCreateParams(
           this.active,
+          this.country,
           this.description,
           this.displayName,
           this.expand,
@@ -123,7 +146,8 @@ public class TaxRateCreateParams extends ApiRequestParams {
           this.inclusive,
           this.jurisdiction,
           this.metadata,
-          this.percentage);
+          this.percentage,
+          this.state);
     }
 
     /**
@@ -133,6 +157,15 @@ public class TaxRateCreateParams extends ApiRequestParams {
      */
     public Builder setActive(Boolean active) {
       this.active = active;
+      return this;
+    }
+
+    /**
+     * Two-letter country code (<a href="https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2">ISO
+     * 3166-1 alpha-2</a>).
+     */
+    public Builder setCountry(String country) {
+      this.country = country;
       return this;
     }
 
@@ -247,6 +280,15 @@ public class TaxRateCreateParams extends ApiRequestParams {
     /** This represents the tax rate percent out of 100. */
     public Builder setPercentage(BigDecimal percentage) {
       this.percentage = percentage;
+      return this;
+    }
+
+    /**
+     * <a href="https://en.wikipedia.org/wiki/ISO_3166-2:US">ISO 3166-2 subdivision code</a>,
+     * without country prefix. For example, &quot;NY&quot; for New York, United States.
+     */
+    public Builder setState(String state) {
+      this.state = state;
       return this;
     }
   }

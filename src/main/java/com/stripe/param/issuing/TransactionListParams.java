@@ -61,6 +61,12 @@ public class TransactionListParams extends ApiRequestParams {
   @SerializedName("starting_after")
   String startingAfter;
 
+  /**
+   * Only return transactions that have the given type. One of {@code capture} or {@code refund}.
+   */
+  @SerializedName("type")
+  Type type;
+
   private TransactionListParams(
       String card,
       String cardholder,
@@ -69,7 +75,8 @@ public class TransactionListParams extends ApiRequestParams {
       List<String> expand,
       Map<String, Object> extraParams,
       Long limit,
-      String startingAfter) {
+      String startingAfter,
+      Type type) {
     this.card = card;
     this.cardholder = cardholder;
     this.created = created;
@@ -78,6 +85,7 @@ public class TransactionListParams extends ApiRequestParams {
     this.extraParams = extraParams;
     this.limit = limit;
     this.startingAfter = startingAfter;
+    this.type = type;
   }
 
   public static Builder builder() {
@@ -101,6 +109,8 @@ public class TransactionListParams extends ApiRequestParams {
 
     private String startingAfter;
 
+    private Type type;
+
     /** Finalize and obtain parameter instance from this builder. */
     public TransactionListParams build() {
       return new TransactionListParams(
@@ -111,7 +121,8 @@ public class TransactionListParams extends ApiRequestParams {
           this.expand,
           this.extraParams,
           this.limit,
-          this.startingAfter);
+          this.startingAfter,
+          this.type);
     }
 
     /** Only return transactions that belong to the given card. */
@@ -220,6 +231,14 @@ public class TransactionListParams extends ApiRequestParams {
       this.startingAfter = startingAfter;
       return this;
     }
+
+    /**
+     * Only return transactions that have the given type. One of {@code capture} or {@code refund}.
+     */
+    public Builder setType(Type type) {
+      this.type = type;
+      return this;
+    }
   }
 
   @Getter
@@ -326,6 +345,21 @@ public class TransactionListParams extends ApiRequestParams {
         this.lte = lte;
         return this;
       }
+    }
+  }
+
+  public enum Type implements ApiRequestParams.EnumParam {
+    @SerializedName("capture")
+    CAPTURE("capture"),
+
+    @SerializedName("refund")
+    REFUND("refund");
+
+    @Getter(onMethod_ = {@Override})
+    private final String value;
+
+    Type(String value) {
+      this.value = value;
     }
   }
 }

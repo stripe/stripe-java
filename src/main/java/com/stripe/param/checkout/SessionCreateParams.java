@@ -671,6 +671,14 @@ public class SessionCreateParams extends ApiRequestParams {
     String description;
 
     /**
+     * The <a href="https://stripe.com/docs/api/tax_rates">tax rates</a> that will be applied to
+     * this line item depending on the customer's billing/shipping address. We currently support the
+     * following countries: US, GB, AU, and all countries in the EU.
+     */
+    @SerializedName("dynamic_tax_rates")
+    List<String> dynamicTaxRates;
+
+    /**
      * Map of extra parameters for custom features not available in this client library. The content
      * in this map is not serialized under this field's {@code @SerializedName} value. Instead, each
      * key/value pair is serialized as if the key is a root-level field (serialized) name in this
@@ -715,7 +723,7 @@ public class SessionCreateParams extends ApiRequestParams {
 
     /**
      * The <a href="https://stripe.com/docs/api/tax_rates">tax rates</a> which apply to this line
-     * item. This is only allowed in subscription mode.
+     * item.
      */
     @SerializedName("tax_rates")
     List<String> taxRates;
@@ -724,6 +732,7 @@ public class SessionCreateParams extends ApiRequestParams {
         Long amount,
         String currency,
         String description,
+        List<String> dynamicTaxRates,
         Map<String, Object> extraParams,
         List<String> images,
         String name,
@@ -734,6 +743,7 @@ public class SessionCreateParams extends ApiRequestParams {
       this.amount = amount;
       this.currency = currency;
       this.description = description;
+      this.dynamicTaxRates = dynamicTaxRates;
       this.extraParams = extraParams;
       this.images = images;
       this.name = name;
@@ -753,6 +763,8 @@ public class SessionCreateParams extends ApiRequestParams {
       private String currency;
 
       private String description;
+
+      private List<String> dynamicTaxRates;
 
       private Map<String, Object> extraParams;
 
@@ -774,6 +786,7 @@ public class SessionCreateParams extends ApiRequestParams {
             this.amount,
             this.currency,
             this.description,
+            this.dynamicTaxRates,
             this.extraParams,
             this.images,
             this.name,
@@ -810,6 +823,32 @@ public class SessionCreateParams extends ApiRequestParams {
        */
       public Builder setDescription(String description) {
         this.description = description;
+        return this;
+      }
+
+      /**
+       * Add an element to `dynamicTaxRates` list. A list is initialized for the first `add/addAll`
+       * call, and subsequent calls adds additional elements to the original list. See {@link
+       * SessionCreateParams.LineItem#dynamicTaxRates} for the field documentation.
+       */
+      public Builder addDynamicTaxRate(String element) {
+        if (this.dynamicTaxRates == null) {
+          this.dynamicTaxRates = new ArrayList<>();
+        }
+        this.dynamicTaxRates.add(element);
+        return this;
+      }
+
+      /**
+       * Add all elements to `dynamicTaxRates` list. A list is initialized for the first
+       * `add/addAll` call, and subsequent calls adds additional elements to the original list. See
+       * {@link SessionCreateParams.LineItem#dynamicTaxRates} for the field documentation.
+       */
+      public Builder addAllDynamicTaxRate(List<String> elements) {
+        if (this.dynamicTaxRates == null) {
+          this.dynamicTaxRates = new ArrayList<>();
+        }
+        this.dynamicTaxRates.addAll(elements);
         return this;
       }
 
@@ -1468,8 +1507,14 @@ public class SessionCreateParams extends ApiRequestParams {
      * Indicates that you intend to make future payments with the payment method collected by this
      * Checkout Session.
      *
+     * <p>When setting this to {@code on_session}, Checkout will show a notice to the customer that
+     * their payment details will be saved.
+     *
      * <p>When setting this to {@code off_session}, Checkout will show a notice to the customer that
      * their payment details will be saved and used for future payments.
+     *
+     * <p>For both values, Checkout will attach the payment method to either the provided Customer
+     * for the session, or a new Customer created by Checkout if one has not been provided.
      *
      * <p>When processing card payments, Checkout also uses {@code setup_future_usage} to
      * dynamically optimize your payment flow and comply with regional legislation and network
@@ -1695,8 +1740,14 @@ public class SessionCreateParams extends ApiRequestParams {
        * Indicates that you intend to make future payments with the payment method collected by this
        * Checkout Session.
        *
+       * <p>When setting this to {@code on_session}, Checkout will show a notice to the customer
+       * that their payment details will be saved.
+       *
        * <p>When setting this to {@code off_session}, Checkout will show a notice to the customer
        * that their payment details will be saved and used for future payments.
+       *
+       * <p>For both values, Checkout will attach the payment method to either the provided Customer
+       * for the session, or a new Customer created by Checkout if one has not been provided.
        *
        * <p>When processing card payments, Checkout also uses {@code setup_future_usage} to
        * dynamically optimize your payment flow and comply with regional legislation and network
