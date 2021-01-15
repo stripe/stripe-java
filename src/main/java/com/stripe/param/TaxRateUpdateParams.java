@@ -21,6 +21,13 @@ public class TaxRateUpdateParams extends ApiRequestParams {
   Boolean active;
 
   /**
+   * Two-letter country code (<a href="https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2">ISO 3166-1
+   * alpha-2</a>).
+   */
+  @SerializedName("country")
+  Object country;
+
+  /**
    * An arbitrary string attached to the tax rate for your internal use only. It will not be visible
    * to your customers.
    */
@@ -60,21 +67,32 @@ public class TaxRateUpdateParams extends ApiRequestParams {
   @SerializedName("metadata")
   Object metadata;
 
+  /**
+   * <a href="https://en.wikipedia.org/wiki/ISO_3166-2:US">ISO 3166-2 subdivision code</a>, without
+   * country prefix. For example, &quot;NY&quot; for New York, United States.
+   */
+  @SerializedName("state")
+  Object state;
+
   private TaxRateUpdateParams(
       Boolean active,
+      Object country,
       Object description,
       Object displayName,
       List<String> expand,
       Map<String, Object> extraParams,
       Object jurisdiction,
-      Object metadata) {
+      Object metadata,
+      Object state) {
     this.active = active;
+    this.country = country;
     this.description = description;
     this.displayName = displayName;
     this.expand = expand;
     this.extraParams = extraParams;
     this.jurisdiction = jurisdiction;
     this.metadata = metadata;
+    this.state = state;
   }
 
   public static Builder builder() {
@@ -83,6 +101,8 @@ public class TaxRateUpdateParams extends ApiRequestParams {
 
   public static class Builder {
     private Boolean active;
+
+    private Object country;
 
     private Object description;
 
@@ -96,16 +116,20 @@ public class TaxRateUpdateParams extends ApiRequestParams {
 
     private Object metadata;
 
+    private Object state;
+
     /** Finalize and obtain parameter instance from this builder. */
     public TaxRateUpdateParams build() {
       return new TaxRateUpdateParams(
           this.active,
+          this.country,
           this.description,
           this.displayName,
           this.expand,
           this.extraParams,
           this.jurisdiction,
-          this.metadata);
+          this.metadata,
+          this.state);
     }
 
     /**
@@ -115,6 +139,24 @@ public class TaxRateUpdateParams extends ApiRequestParams {
      */
     public Builder setActive(Boolean active) {
       this.active = active;
+      return this;
+    }
+
+    /**
+     * Two-letter country code (<a href="https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2">ISO
+     * 3166-1 alpha-2</a>).
+     */
+    public Builder setCountry(String country) {
+      this.country = country;
+      return this;
+    }
+
+    /**
+     * Two-letter country code (<a href="https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2">ISO
+     * 3166-1 alpha-2</a>).
+     */
+    public Builder setCountry(EmptyParam country) {
+      this.country = country;
       return this;
     }
 
@@ -265,6 +307,24 @@ public class TaxRateUpdateParams extends ApiRequestParams {
      */
     public Builder setMetadata(Map<String, String> metadata) {
       this.metadata = metadata;
+      return this;
+    }
+
+    /**
+     * <a href="https://en.wikipedia.org/wiki/ISO_3166-2:US">ISO 3166-2 subdivision code</a>,
+     * without country prefix. For example, &quot;NY&quot; for New York, United States.
+     */
+    public Builder setState(String state) {
+      this.state = state;
+      return this;
+    }
+
+    /**
+     * <a href="https://en.wikipedia.org/wiki/ISO_3166-2:US">ISO 3166-2 subdivision code</a>,
+     * without country prefix. For example, &quot;NY&quot; for New York, United States.
+     */
+    public Builder setState(EmptyParam state) {
+      this.state = state;
       return this;
     }
   }

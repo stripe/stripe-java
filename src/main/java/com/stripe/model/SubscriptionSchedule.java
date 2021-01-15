@@ -695,7 +695,7 @@ public class SubscriptionSchedule extends ApiResource
     @SerializedName("end_date")
     Long endDate;
 
-    /** The subscription schedule's default invoice settings. */
+    /** The invoice settings applicable during this phase. */
     @SerializedName("invoice_settings")
     InvoiceSettings invoiceSettings;
 
