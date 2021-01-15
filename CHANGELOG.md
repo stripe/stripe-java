@@ -1,19 +1,26 @@
 # Changelog
 
+## 20.35.0 - 2021-01-14
+* [#1171](https://github.com/stripe/stripe-java/pull/1171) API Updates
+  * Add support for `dynamic_tax_rates` on `SessionCreateParams.line_items[]`
+  * Add support for `customer_details` on `Checkout.Session`
+  * Add support for `type` on `TransactionListParams`
+  * Add support for `country` and `state` on `TaxRateUpdateParams`, `TaxRateCreateParams` and `TaxRate`
+
 ## 20.34.0 - 2021-01-07
 * [#1169](https://github.com/stripe/stripe-java/pull/1169) API Updates
-  * Added support for `company_registration_verification`, `company_ministerial_decree`, `company_memorandum_of_association`, `company_license` and `company_tax_id_verification` on `AccountUpdateParams.documents` and `AccountCreateParams.documents`
+  * Add support for `company_registration_verification`, `company_ministerial_decree`, `company_memorandum_of_association`, `company_license` and `company_tax_id_verification` on `AccountUpdateParams.documents` and `AccountCreateParams.documents`
 * [#1167](https://github.com/stripe/stripe-java/pull/1167) Adding getUserMessage() to exceptions
 
 ## 20.33.0 - 2020-12-15
 * [#1165](https://github.com/stripe/stripe-java/pull/1165) API Updates
-  * Added support for card_present on SetupAttempt.payment_method_details
+  * Add support for card_present on SetupAttempt.payment_method_details
 * [#1162](https://github.com/stripe/stripe-java/pull/1162) Pass mutated copy of params into oauth request
 
 ## 20.32.0 - 2020-12-10
 * [#1163](https://github.com/stripe/stripe-java/pull/1163) [codegen] Multiple API changes
-  * Added support for `bank` on `PaymentMethod`
-  * Added support for `tos_shown_and_accepted` to `payment_method_options[p24]` on `PaymentMethod`.
+  * Add support for `bank` on `PaymentMethod`
+  * Add support for `tos_shown_and_accepted` to `payment_method_options[p24]` on `PaymentMethod`.
 
 
 ## 20.31.0 - 2020-12-03
@@ -27,7 +34,7 @@
 
 ## 20.29.0 - 2020-11-20
 * [#1157](https://github.com/stripe/stripe-java/pull/1157) Add support for `capabilities[grabpay_payments]` on `Account`
-* [#1156](https://github.com/stripe/stripe-java/pull/1156) Added support for `mandate_options` on `SetupIntent.payment_method_options.sepa_debit`
+* [#1156](https://github.com/stripe/stripe-java/pull/1156) Add support for `mandate_options` on `SetupIntent.payment_method_options.sepa_debit`
 
 ## 20.28.0 - 2020-11-18
 * [#1154](https://github.com/stripe/stripe-java/pull/1154) Add support for `grabpay` on `PaymentMethod`.
