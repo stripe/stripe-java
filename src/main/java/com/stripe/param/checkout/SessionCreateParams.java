@@ -717,7 +717,10 @@ public class SessionCreateParams extends ApiRequestParams {
     @SerializedName("price_data")
     PriceData priceData;
 
-    /** The quantity of the line item being purchased. */
+    /**
+     * The quantity of the line item being purchased. Quantity should not be defined when {@code
+     * recurring.usage_type=metered}.
+     */
     @SerializedName("quantity")
     Long quantity;
 
@@ -932,7 +935,10 @@ public class SessionCreateParams extends ApiRequestParams {
         return this;
       }
 
-      /** The quantity of the line item being purchased. */
+      /**
+       * The quantity of the line item being purchased. Quantity should not be defined when {@code
+       * recurring.usage_type=metered}.
+       */
       public Builder setQuantity(Long quantity) {
         this.quantity = quantity;
         return this;
@@ -3470,7 +3476,10 @@ public class SessionCreateParams extends ApiRequestParams {
       @SerializedName("plan")
       String plan;
 
-      /** Quantity for this item. */
+      /**
+       * The quantity of the subscription item being purchased. Quantity should not be defined when
+       * {@code recurring.usage_type=metered}.
+       */
       @SerializedName("quantity")
       Long quantity;
 
@@ -3541,7 +3550,10 @@ public class SessionCreateParams extends ApiRequestParams {
           return this;
         }
 
-        /** Quantity for this item. */
+        /**
+         * The quantity of the subscription item being purchased. Quantity should not be defined
+         * when {@code recurring.usage_type=metered}.
+         */
         public Builder setQuantity(Long quantity) {
           this.quantity = quantity;
           return this;
