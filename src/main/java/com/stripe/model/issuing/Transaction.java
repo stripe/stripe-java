@@ -136,7 +136,7 @@ public class Transaction extends ApiResource
   /**
    * The nature of the transaction.
    *
-   * <p>One of {@code capture}, {@code dispute}, or {@code refund}.
+   * <p>One of {@code capture}, or {@code refund}.
    */
   @SerializedName("type")
   String type;
