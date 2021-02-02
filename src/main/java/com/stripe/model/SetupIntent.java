@@ -674,7 +674,8 @@ public class SetupIntent extends ApiResource implements HasId, MetadataStore<Set
     NextActionRedirectToUrl redirectToUrl;
 
     /**
-     * Type of the next action to perform, one of {@code redirect_to_url} or {@code use_stripe_sdk}.
+     * Type of the next action to perform, one of {@code redirect_to_url}, {@code use_stripe_sdk},
+     * {@code alipay_handle_redirect}, or {@code oxxo_display_details}.
      */
     @SerializedName("type")
     String type;

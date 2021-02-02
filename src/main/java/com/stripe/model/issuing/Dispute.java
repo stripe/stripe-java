@@ -29,8 +29,8 @@ import lombok.Setter;
 public class Dispute extends ApiResource
     implements MetadataStore<Dispute>, BalanceTransactionSource {
   /**
-   * Disputed amount. Usually the amount of the {@code disputed_transaction}, but can differ
-   * (usually because of currency fluctuation).
+   * Disputed amount. Usually the amount of the {@code transaction}, but can differ (usually because
+   * of currency fluctuation).
    */
   @SerializedName("amount")
   Long amount;
@@ -43,7 +43,7 @@ public class Dispute extends ApiResource
   @SerializedName("created")
   Long created;
 
-  /** The currency the {@code disputed_transaction} was made in. */
+  /** The currency the {@code transaction} was made in. */
   @SerializedName("currency")
   String currency;
 

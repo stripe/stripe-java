@@ -1067,7 +1067,8 @@ public class PaymentIntent extends ApiResource implements HasId, MetadataStore<P
     NextActionRedirectToUrl redirectToUrl;
 
     /**
-     * Type of the next action to perform, one of {@code redirect_to_url} or {@code use_stripe_sdk}.
+     * Type of the next action to perform, one of {@code redirect_to_url}, {@code use_stripe_sdk},
+     * {@code alipay_handle_redirect}, or {@code oxxo_display_details}.
      */
     @SerializedName("type")
     String type;
