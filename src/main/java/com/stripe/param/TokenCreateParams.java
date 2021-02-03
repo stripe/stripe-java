@@ -3376,6 +3376,14 @@ public class TokenCreateParams extends ApiRequestParams {
     @SerializedName("metadata")
     Object metadata;
 
+    /**
+     * The country where the person is a national. Two-letter country code (<a
+     * href="https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2">ISO 3166-1 alpha-2</a>), or
+     * &quot;XX&quot; if unavailable.
+     */
+    @SerializedName("nationality")
+    String nationality;
+
     /** The person's phone number. */
     @SerializedName("phone")
     String phone;
@@ -3417,6 +3425,7 @@ public class TokenCreateParams extends ApiRequestParams {
         String lastNameKanji,
         String maidenName,
         Object metadata,
+        String nationality,
         String phone,
         String politicalExposure,
         Relationship relationship,
@@ -3438,6 +3447,7 @@ public class TokenCreateParams extends ApiRequestParams {
       this.lastNameKanji = lastNameKanji;
       this.maidenName = maidenName;
       this.metadata = metadata;
+      this.nationality = nationality;
       this.phone = phone;
       this.politicalExposure = politicalExposure;
       this.relationship = relationship;
@@ -3482,6 +3492,8 @@ public class TokenCreateParams extends ApiRequestParams {
 
       private Object metadata;
 
+      private String nationality;
+
       private String phone;
 
       private String politicalExposure;
@@ -3511,6 +3523,7 @@ public class TokenCreateParams extends ApiRequestParams {
             this.lastNameKanji,
             this.maidenName,
             this.metadata,
+            this.nationality,
             this.phone,
             this.politicalExposure,
             this.relationship,
@@ -3689,6 +3702,16 @@ public class TokenCreateParams extends ApiRequestParams {
        */
       public Builder setMetadata(Map<String, String> metadata) {
         this.metadata = metadata;
+        return this;
+      }
+
+      /**
+       * The country where the person is a national. Two-letter country code (<a
+       * href="https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2">ISO 3166-1 alpha-2</a>), or
+       * &quot;XX&quot; if unavailable.
+       */
+      public Builder setNationality(String nationality) {
+        this.nationality = nationality;
         return this;
       }
 

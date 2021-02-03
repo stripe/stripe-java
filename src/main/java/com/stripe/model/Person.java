@@ -101,6 +101,10 @@ public class Person extends ApiResource implements HasId, MetadataStore<Person> 
   @SerializedName("metadata")
   Map<String, String> metadata;
 
+  /** The country where the person is a national. */
+  @SerializedName("nationality")
+  String nationality;
+
   /**
    * String representing the object's type. Objects of the same type share the same value.
    *
