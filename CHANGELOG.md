@@ -1,5 +1,11 @@
 # Changelog
 
+## 20.36.0 - 2021-02-03
+* [#1179](https://github.com/stripe/stripe-java/pull/1179) 
+  * Add support for `nationality` on `Person`, `PersonUpdateParams`, `PersonCreateParams` and `TokenCreateParams.person`
+  * Add `gb_vat` to `TaxId.type` enum
+* [#1173](https://github.com/stripe/stripe-java/pull/1173) Add link to YouTube from readme
+
 ## 20.35.0 - 2021-01-14
 * [#1171](https://github.com/stripe/stripe-java/pull/1171) API Updates
   * Add support for `dynamic_tax_rates` on `SessionCreateParams.line_items[]`
