@@ -3,9 +3,11 @@ package com.stripe.param;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertSame;
 
+import java.io.ByteArrayInputStream;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
+import java.nio.charset.StandardCharsets;
 import java.util.Map;
 import org.junit.jupiter.api.Test;
 
@@ -41,6 +43,23 @@ class FileCreateParamsTest {
     // file object is not deserialized/transformed into something other than
     // the value set in builder
     assertSame(fileInputStream, untypedParams.get("file"));
+    assertEquals(FileCreateParams.Purpose.BUSINESS_ICON.getValue(), untypedParams.get("purpose"));
+  }
+
+  @Test
+  public void testToMapWithByteArrayInputStream() throws FileNotFoundException {
+    java.io.ByteArrayInputStream byteArrayInputStream =
+        new ByteArrayInputStream("file contents".getBytes(StandardCharsets.UTF_8));
+    FileCreateParams fileCreateParams =
+        FileCreateParams.builder()
+            .setFile(byteArrayInputStream)
+            .setPurpose(FileCreateParams.Purpose.BUSINESS_ICON)
+            .build();
+
+    Map<String, Object> untypedParams = fileCreateParams.toMap();
+    // file object is not deserialized/transformed into something other than
+    // the value set in builder
+    assertSame(byteArrayInputStream, untypedParams.get("file"));
     assertEquals(FileCreateParams.Purpose.BUSINESS_ICON.getValue(), untypedParams.get("purpose"));
   }
 }
