@@ -55,8 +55,8 @@ public class PaymentIntentConfirmParams extends ApiRequestParams {
 
   /**
    * ID of the payment method (a PaymentMethod, Card, or <a
-   * href="https://stripe.com/docs/payments/payment-methods#compatibility">compatible Source</a>
-   * object) to attach to this PaymentIntent.
+   * href="https://stripe.com/docs/payments/payment-methods/transitioning#compatibility">compatible
+   * Source</a> object) to attach to this PaymentIntent.
    */
   @SerializedName("payment_method")
   String paymentMethod;
@@ -305,8 +305,8 @@ public class PaymentIntentConfirmParams extends ApiRequestParams {
 
     /**
      * ID of the payment method (a PaymentMethod, Card, or <a
-     * href="https://stripe.com/docs/payments/payment-methods#compatibility">compatible Source</a>
-     * object) to attach to this PaymentIntent.
+     * href="https://stripe.com/docs/payments/payment-methods/transitioning#compatibility">compatible
+     * Source</a> object) to attach to this PaymentIntent.
      */
     public Builder setPaymentMethod(String paymentMethod) {
       this.paymentMethod = paymentMethod;

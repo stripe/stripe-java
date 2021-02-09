@@ -360,6 +360,9 @@ public class Invoice extends ApiResource implements HasId, MetadataStore<Invoice
   @Setter(lombok.AccessLevel.NONE)
   ExpandableField<PaymentIntent> paymentIntent;
 
+  @SerializedName("payment_settings")
+  PaymentSettings paymentSettings;
+
   /** End of the usage period during which invoice items were added to this invoice. */
   @SerializedName("period_end")
   Long periodEnd;
@@ -1428,6 +1431,77 @@ public class Invoice extends ApiResource implements HasId, MetadataStore<Invoice
     public void setDiscountObject(Discount expandableObject) {
       this.discount = new ExpandableField<Discount>(expandableObject.getId(), expandableObject);
     }
+  }
+
+  @Getter
+  @Setter
+  @EqualsAndHashCode(callSuper = false)
+  public static class PaymentMethodOptions extends StripeObject {
+    /**
+     * If paying by {@code bancontact}, this sub-hash contains details about the Bancontact payment
+     * method options to pass to the invoice’s PaymentIntent.
+     */
+    @SerializedName("bancontact")
+    Bancontact bancontact;
+
+    /**
+     * If paying by {@code card}, this sub-hash contains details about the Card payment method
+     * options to pass to the invoice’s PaymentIntent.
+     */
+    @SerializedName("card")
+    Card card;
+
+    @Getter
+    @Setter
+    @EqualsAndHashCode(callSuper = false)
+    public static class Bancontact extends StripeObject {
+      /**
+       * Preferred language of the Bancontact authorization page that the customer is redirected to.
+       *
+       * <p>One of {@code de}, {@code en}, {@code fr}, or {@code nl}.
+       */
+      @SerializedName("preferred_language")
+      String preferredLanguage;
+    }
+
+    @Getter
+    @Setter
+    @EqualsAndHashCode(callSuper = false)
+    public static class Card extends StripeObject {
+      /**
+       * We strongly recommend that you rely on our SCA Engine to automatically prompt your
+       * customers for authentication based on risk level and <a
+       * href="https://stripe.com/docs/strong-customer-authentication">other requirements</a>.
+       * However, if you wish to request 3D Secure based on logic from your own fraud engine,
+       * provide this option. Read our guide on <a
+       * href="https://stripe.com/docs/payments/3d-secure#manual-three-ds">manually requesting 3D
+       * Secure</a> for more information on how this configuration interacts with Radar and our SCA
+       * Engine.
+       *
+       * <p>One of {@code any}, or {@code automatic}.
+       */
+      @SerializedName("request_three_d_secure")
+      String requestThreeDSecure;
+    }
+  }
+
+  @Getter
+  @Setter
+  @EqualsAndHashCode(callSuper = false)
+  public static class PaymentSettings extends StripeObject {
+    /** Payment-method-specific configuration to provide to the invoice’s PaymentIntent. */
+    @SerializedName("payment_method_options")
+    PaymentMethodOptions paymentMethodOptions;
+
+    /**
+     * The list of payment method types (e.g. card) to provide to the invoice’s PaymentIntent. If
+     * not set, Stripe attempts to automatically determine the types to use by looking at the
+     * invoice’s default payment method, the subscription’s default payment method, the customer’s
+     * default payment method, and your <a
+     * href="https://dashboard.stripe.com/settings/billing/invoice">invoice template settings</a>.
+     */
+    @SerializedName("payment_method_types")
+    List<String> paymentMethodTypes;
   }
 
   @Getter
