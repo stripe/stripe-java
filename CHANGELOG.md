@@ -1,5 +1,10 @@
 # Changelog
 
+## 20.37.0 - 2021-02-08
+* [#1182](https://github.com/stripe/stripe-java/pull/1182) API Updates
+  * Add support for `afterpay_clearpay_payments` on `Account.capabilities`
+  * Add support for `payment_settings` on `Invoice`
+
 ## 20.36.0 - 2021-02-03
 * [#1179](https://github.com/stripe/stripe-java/pull/1179) 
   * Add support for `nationality` on `Person`, `PersonUpdateParams`, `PersonCreateParams` and `TokenCreateParams.person`
