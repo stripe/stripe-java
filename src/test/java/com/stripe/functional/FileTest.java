@@ -12,9 +12,11 @@ import com.stripe.net.ApiResource;
 import com.stripe.net.RequestOptions;
 import com.stripe.param.FileCreateParams;
 import com.stripe.param.FileListParams;
+import java.io.ByteArrayInputStream;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
+import java.nio.charset.StandardCharsets;
 import java.util.HashMap;
 import java.util.Map;
 import org.junit.jupiter.api.Test;
@@ -73,10 +75,24 @@ public class FileTest extends BaseStripeTest {
   }
 
   @Test
-  public void testCreateWithStream() throws IOException, StripeException {
+  public void testCreateWithFileInputStream() throws IOException, StripeException {
     final Map<String, Object> params = new HashMap<>();
     params.put("purpose", "dispute_evidence");
     FileInputStream value = new FileInputStream(getClass().getResource("/test.png").getFile());
+    params.put("file", value);
+
+    final com.stripe.model.File file = com.stripe.model.File.create(params);
+
+    assertNotNull(file);
+    verifyRequest(ApiResource.RequestMethod.POST, "/v1/files", params, null);
+  }
+
+  @Test
+  public void testCreateWithByteArrayInputStream() throws IOException, StripeException {
+    final Map<String, Object> params = new HashMap<>();
+    params.put("purpose", "dispute_evidence");
+    ByteArrayInputStream value =
+        new ByteArrayInputStream("file contents".getBytes(StandardCharsets.UTF_8));
     params.put("file", value);
 
     final com.stripe.model.File file = com.stripe.model.File.create(params);

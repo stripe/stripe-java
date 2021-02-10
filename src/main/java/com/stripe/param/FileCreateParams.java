@@ -103,7 +103,7 @@ public class FileCreateParams extends ApiRequestParams {
      * A file to upload. The file should follow the specifications of RFC 2388 (which defines file
      * transfers for the `multipart/form-data` protocol).
      */
-    public Builder setFile(java.io.FileInputStream file) {
+    public Builder setFile(java.io.InputStream file) {
       this.file = file;
       return this;
     }
@@ -241,9 +241,8 @@ public class FileCreateParams extends ApiRequestParams {
 
   /**
    * Returns untyped parameters for file creation. Map value for {@code "file"} is the same instance
-   * of value set in {@link Builder#setFile(File)} or {@link
-   * Builder#setFile(java.io.FileInputStream)}; the file is not transformed or serialized at this
-   * level.
+   * of value set in {@link Builder#setFile(File)} or {@link Builder#setFile(java.io.InputStream)};
+   * the file is not transformed or serialized at this level.
    *
    * @return Untyped parameters containing file object set in the builder.
    */
