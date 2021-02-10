@@ -1,5 +1,8 @@
 # Changelog
 
+## 20.38.0 - 2021-02-10
+* [#1180](https://github.com/stripe/stripe-java/pull/1180) Accept all InputStreams for FileCreateParams.setFile
+
 ## 20.37.0 - 2021-02-08
 * [#1182](https://github.com/stripe/stripe-java/pull/1182) API Updates
   * Add support for `afterpay_clearpay_payments` on `Account.capabilities`
