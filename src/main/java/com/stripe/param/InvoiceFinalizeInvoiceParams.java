@@ -13,7 +13,7 @@ import lombok.Getter;
 public class InvoiceFinalizeInvoiceParams extends ApiRequestParams {
   /**
    * Controls whether Stripe will perform <a
-   * href="https://stripe.com/docs/billing/invoices/workflow/#auto_advance">automatic collection</a>
+   * href="https://stripe.com/docs/billing/invoices/overview#auto-advance">automatic collection</a>
    * of the invoice. When {@code false}, the invoice's state will not automatically advance without
    * an explicit action.
    */
@@ -58,7 +58,7 @@ public class InvoiceFinalizeInvoiceParams extends ApiRequestParams {
 
     /**
      * Controls whether Stripe will perform <a
-     * href="https://stripe.com/docs/billing/invoices/workflow/#auto_advance">automatic
+     * href="https://stripe.com/docs/billing/invoices/overview#auto-advance">automatic
      * collection</a> of the invoice. When {@code false}, the invoice's state will not automatically
      * advance without an explicit action.
      */
