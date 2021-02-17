@@ -698,6 +698,13 @@ public class PaymentIntentUpdateParams extends ApiRequestParams {
   @Getter
   public static class PaymentMethodData {
     /**
+     * If this is an {@code AfterpayClearpay} PaymentMethod, this hash contains details about the
+     * AfterpayClearpay payment method.
+     */
+    @SerializedName("afterpay_clearpay")
+    AfterpayClearpay afterpayClearpay;
+
+    /**
      * If this is an {@code Alipay} PaymentMethod, this hash contains details about the Alipay
      * payment method.
      */
@@ -829,6 +836,7 @@ public class PaymentIntentUpdateParams extends ApiRequestParams {
     Type type;
 
     private PaymentMethodData(
+        AfterpayClearpay afterpayClearpay,
         Alipay alipay,
         AuBecsDebit auBecsDebit,
         BacsDebit bacsDebit,
@@ -847,6 +855,7 @@ public class PaymentIntentUpdateParams extends ApiRequestParams {
         SepaDebit sepaDebit,
         Sofort sofort,
         Type type) {
+      this.afterpayClearpay = afterpayClearpay;
       this.alipay = alipay;
       this.auBecsDebit = auBecsDebit;
       this.bacsDebit = bacsDebit;
@@ -872,6 +881,8 @@ public class PaymentIntentUpdateParams extends ApiRequestParams {
     }
 
     public static class Builder {
+      private AfterpayClearpay afterpayClearpay;
+
       private Alipay alipay;
 
       private AuBecsDebit auBecsDebit;
@@ -911,6 +922,7 @@ public class PaymentIntentUpdateParams extends ApiRequestParams {
       /** Finalize and obtain parameter instance from this builder. */
       public PaymentMethodData build() {
         return new PaymentMethodData(
+            this.afterpayClearpay,
             this.alipay,
             this.auBecsDebit,
             this.bacsDebit,
@@ -929,6 +941,15 @@ public class PaymentIntentUpdateParams extends ApiRequestParams {
             this.sepaDebit,
             this.sofort,
             this.type);
+      }
+
+      /**
+       * If this is an {@code AfterpayClearpay} PaymentMethod, this hash contains details about the
+       * AfterpayClearpay payment method.
+       */
+      public Builder setAfterpayClearpay(AfterpayClearpay afterpayClearpay) {
+        this.afterpayClearpay = afterpayClearpay;
+        return this;
       }
 
       /**
@@ -1128,6 +1149,63 @@ public class PaymentIntentUpdateParams extends ApiRequestParams {
       public Builder setType(Type type) {
         this.type = type;
         return this;
+      }
+    }
+
+    @Getter
+    public static class AfterpayClearpay {
+      /**
+       * Map of extra parameters for custom features not available in this client library. The
+       * content in this map is not serialized under this field's {@code @SerializedName} value.
+       * Instead, each key/value pair is serialized as if the key is a root-level field (serialized)
+       * name in this param object. Effectively, this map is flattened to its parent instance.
+       */
+      @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
+      Map<String, Object> extraParams;
+
+      private AfterpayClearpay(Map<String, Object> extraParams) {
+        this.extraParams = extraParams;
+      }
+
+      public static Builder builder() {
+        return new Builder();
+      }
+
+      public static class Builder {
+        private Map<String, Object> extraParams;
+
+        /** Finalize and obtain parameter instance from this builder. */
+        public AfterpayClearpay build() {
+          return new AfterpayClearpay(this.extraParams);
+        }
+
+        /**
+         * Add a key/value pair to `extraParams` map. A map is initialized for the first
+         * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
+         * map. See {@link PaymentIntentUpdateParams.PaymentMethodData.AfterpayClearpay#extraParams}
+         * for the field documentation.
+         */
+        public Builder putExtraParam(String key, Object value) {
+          if (this.extraParams == null) {
+            this.extraParams = new HashMap<>();
+          }
+          this.extraParams.put(key, value);
+          return this;
+        }
+
+        /**
+         * Add all map key/value pairs to `extraParams` map. A map is initialized for the first
+         * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
+         * map. See {@link PaymentIntentUpdateParams.PaymentMethodData.AfterpayClearpay#extraParams}
+         * for the field documentation.
+         */
+        public Builder putAllExtraParam(Map<String, Object> map) {
+          if (this.extraParams == null) {
+            this.extraParams = new HashMap<>();
+          }
+          this.extraParams.putAll(map);
+          return this;
+        }
       }
     }
 
@@ -2769,6 +2847,9 @@ public class PaymentIntentUpdateParams extends ApiRequestParams {
     }
 
     public enum Type implements ApiRequestParams.EnumParam {
+      @SerializedName("afterpay_clearpay")
+      AFTERPAY_CLEARPAY("afterpay_clearpay"),
+
       @SerializedName("alipay")
       ALIPAY("alipay"),
 

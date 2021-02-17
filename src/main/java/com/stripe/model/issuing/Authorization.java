@@ -138,12 +138,11 @@ public class Authorization extends ApiResource
   PendingRequest pendingRequest;
 
   /**
-   * History of every time the authorization was approved/denied (whether approved/denied by you
-   * directly or by Stripe based on your {@code spending_controls}). If the merchant changes the
+   * History of every time {@code pending_request} was approved/denied, either by you directly or by
+   * Stripe (e.g. based on your {@code spending_controls}). If the merchant changes the
    * authorization by performing an <a
-   * href="https://stripe.com/docs/issuing/purchases/authorizations">incremental authorization or
-   * partial capture</a>, you can look at this field to see the previous states of the
-   * authorization.
+   * href="https://stripe.com/docs/issuing/purchases/authorizations">incremental authorization</a>,
+   * you can look at this field to see the previous requests for the authorization.
    */
   @SerializedName("request_history")
   List<Authorization.RequestHistory> requestHistory;
@@ -566,9 +565,10 @@ public class Authorization extends ApiResource
   @EqualsAndHashCode(callSuper = false)
   public static class RequestHistory extends StripeObject {
     /**
-     * The authorization amount in your card's currency and in the <a
-     * href="https://stripe.com/docs/currencies#zero-decimal">smallest currency unit</a>. Stripe
-     * held this amount from your account to fund the authorization if the request was approved.
+     * The {@code pending_request.amount} at the time of the request, presented in your card's
+     * currency and in the <a href="https://stripe.com/docs/currencies#zero-decimal">smallest
+     * currency unit</a>. Stripe held this amount from your account to fund the authorization if the
+     * request was approved.
      */
     @SerializedName("amount")
     Long amount;
@@ -598,8 +598,8 @@ public class Authorization extends ApiResource
     String currency;
 
     /**
-     * The amount that was authorized at the time of this request. This amount is in the {@code
-     * merchant_currency} and in the <a
+     * The {@code pending_request.merchant_amount} at the time of the request, presented in the
+     * {@code merchant_currency} and in the <a
      * href="https://stripe.com/docs/currencies#zero-decimal">smallest currency unit</a>.
      */
     @SerializedName("merchant_amount")

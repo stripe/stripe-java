@@ -202,6 +202,9 @@ public class PaymentMethodListParams extends ApiRequestParams {
   }
 
   public enum Type implements ApiRequestParams.EnumParam {
+    @SerializedName("afterpay_clearpay")
+    AFTERPAY_CLEARPAY("afterpay_clearpay"),
+
     @SerializedName("alipay")
     ALIPAY("alipay"),
 
