@@ -1,5 +1,12 @@
 # Changelog
 
+## 20.39.0 - 2021-02-16
+* [#1185](https://github.com/stripe/stripe-java/pull/1185) API Updates
+  * Add support for `afterpay_clearpay` on `PaymentMethod`, `PaymentIntent.payment_method_data`, and `Charge.payment_method_details`.
+  * Add support for `afterpay_clearpay` as a payment method type on `PaymentMethod.type`, `PaymentIntent.PaymentMethodData.type`, and `Checkout.SessionCreateParams.payment_method_types`.
+  * Add support for `adjustable_quantity` on `SessionCreateParams.LineItem`
+  * Add support for `bacs_debit`, `au_becs_debit` and `sepa_debit` on `SetupAttempt.payment_method_details`
+
 ## 20.38.0 - 2021-02-10
 * [#1180](https://github.com/stripe/stripe-java/pull/1180) Accept all InputStreams for FileCreateParams.setFile
 
