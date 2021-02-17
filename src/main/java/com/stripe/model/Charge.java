@@ -1011,6 +1011,9 @@ public class Charge extends ApiResource implements MetadataStore<Charge>, Balanc
     @SerializedName("acss_debit")
     AcssDebit acssDebit;
 
+    @SerializedName("afterpay_clearpay")
+    AfterpayClearpay afterpayClearpay;
+
     @SerializedName("alipay")
     Alipay alipay;
 
@@ -1175,6 +1178,11 @@ public class Charge extends ApiResource implements MetadataStore<Charge>, Balanc
       @SerializedName("transit_number")
       String transitNumber;
     }
+
+    @Getter
+    @Setter
+    @EqualsAndHashCode(callSuper = false)
+    public static class AfterpayClearpay extends StripeObject {}
 
     @Getter
     @Setter

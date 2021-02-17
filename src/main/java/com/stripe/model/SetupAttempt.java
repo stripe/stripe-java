@@ -224,6 +224,12 @@ public class SetupAttempt extends ApiResource implements HasId {
   @Setter
   @EqualsAndHashCode(callSuper = false)
   public static class PaymentMethodDetails extends StripeObject {
+    @SerializedName("au_becs_debit")
+    AuBecsDebit auBecsDebit;
+
+    @SerializedName("bacs_debit")
+    BacsDebit bacsDebit;
+
     @SerializedName("bancontact")
     Bancontact bancontact;
 
@@ -236,6 +242,9 @@ public class SetupAttempt extends ApiResource implements HasId {
     @SerializedName("ideal")
     Ideal ideal;
 
+    @SerializedName("sepa_debit")
+    SepaDebit sepaDebit;
+
     @SerializedName("sofort")
     Sofort sofort;
 
@@ -246,6 +255,16 @@ public class SetupAttempt extends ApiResource implements HasId {
      */
     @SerializedName("type")
     String type;
+
+    @Getter
+    @Setter
+    @EqualsAndHashCode(callSuper = false)
+    public static class AuBecsDebit extends StripeObject {}
+
+    @Getter
+    @Setter
+    @EqualsAndHashCode(callSuper = false)
+    public static class BacsDebit extends StripeObject {}
 
     @Getter
     @Setter
@@ -470,6 +489,11 @@ public class SetupAttempt extends ApiResource implements HasId {
             new ExpandableField<Mandate>(expandableObject.getId(), expandableObject);
       }
     }
+
+    @Getter
+    @Setter
+    @EqualsAndHashCode(callSuper = false)
+    public static class SepaDebit extends StripeObject {}
 
     @Getter
     @Setter

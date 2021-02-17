@@ -647,6 +647,13 @@ public class SessionCreateParams extends ApiRequestParams {
   @Getter
   public static class LineItem {
     /**
+     * When set, provides configuration for this item’s quantity to be adjusted by the customer
+     * during Checkout.
+     */
+    @SerializedName("adjustable_quantity")
+    AdjustableQuantity adjustableQuantity;
+
+    /**
      * The amount to be collected per unit of the line item. If specified, must also pass {@code
      * currency} and {@code name}.
      */
@@ -732,6 +739,7 @@ public class SessionCreateParams extends ApiRequestParams {
     List<String> taxRates;
 
     private LineItem(
+        AdjustableQuantity adjustableQuantity,
         Long amount,
         String currency,
         String description,
@@ -743,6 +751,7 @@ public class SessionCreateParams extends ApiRequestParams {
         PriceData priceData,
         Long quantity,
         List<String> taxRates) {
+      this.adjustableQuantity = adjustableQuantity;
       this.amount = amount;
       this.currency = currency;
       this.description = description;
@@ -761,6 +770,8 @@ public class SessionCreateParams extends ApiRequestParams {
     }
 
     public static class Builder {
+      private AdjustableQuantity adjustableQuantity;
+
       private Long amount;
 
       private String currency;
@@ -786,6 +797,7 @@ public class SessionCreateParams extends ApiRequestParams {
       /** Finalize and obtain parameter instance from this builder. */
       public LineItem build() {
         return new LineItem(
+            this.adjustableQuantity,
             this.amount,
             this.currency,
             this.description,
@@ -797,6 +809,15 @@ public class SessionCreateParams extends ApiRequestParams {
             this.priceData,
             this.quantity,
             this.taxRates);
+      }
+
+      /**
+       * When set, provides configuration for this item’s quantity to be adjusted by the customer
+       * during Checkout.
+       */
+      public Builder setAdjustableQuantity(AdjustableQuantity adjustableQuantity) {
+        this.adjustableQuantity = adjustableQuantity;
+        return this;
       }
 
       /**
@@ -968,6 +989,121 @@ public class SessionCreateParams extends ApiRequestParams {
         }
         this.taxRates.addAll(elements);
         return this;
+      }
+    }
+
+    @Getter
+    public static class AdjustableQuantity {
+      /**
+       * Set to true if the quantity can be adjusted to any non-negative integer. By default
+       * customers will be able to remove the line item by setting the quantity to 0.
+       */
+      @SerializedName("enabled")
+      Boolean enabled;
+
+      /**
+       * Map of extra parameters for custom features not available in this client library. The
+       * content in this map is not serialized under this field's {@code @SerializedName} value.
+       * Instead, each key/value pair is serialized as if the key is a root-level field (serialized)
+       * name in this param object. Effectively, this map is flattened to its parent instance.
+       */
+      @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
+      Map<String, Object> extraParams;
+
+      /**
+       * The maximum quantity the customer can purchase for the Checkout Session. By default this
+       * value is 99.
+       */
+      @SerializedName("maximum")
+      Long maximum;
+
+      /**
+       * The minimum quantity the customer must purchase for the Checkout Session. By default this
+       * value is 0.
+       */
+      @SerializedName("minimum")
+      Long minimum;
+
+      private AdjustableQuantity(
+          Boolean enabled, Map<String, Object> extraParams, Long maximum, Long minimum) {
+        this.enabled = enabled;
+        this.extraParams = extraParams;
+        this.maximum = maximum;
+        this.minimum = minimum;
+      }
+
+      public static Builder builder() {
+        return new Builder();
+      }
+
+      public static class Builder {
+        private Boolean enabled;
+
+        private Map<String, Object> extraParams;
+
+        private Long maximum;
+
+        private Long minimum;
+
+        /** Finalize and obtain parameter instance from this builder. */
+        public AdjustableQuantity build() {
+          return new AdjustableQuantity(this.enabled, this.extraParams, this.maximum, this.minimum);
+        }
+
+        /**
+         * Set to true if the quantity can be adjusted to any non-negative integer. By default
+         * customers will be able to remove the line item by setting the quantity to 0.
+         */
+        public Builder setEnabled(Boolean enabled) {
+          this.enabled = enabled;
+          return this;
+        }
+
+        /**
+         * Add a key/value pair to `extraParams` map. A map is initialized for the first
+         * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
+         * map. See {@link SessionCreateParams.LineItem.AdjustableQuantity#extraParams} for the
+         * field documentation.
+         */
+        public Builder putExtraParam(String key, Object value) {
+          if (this.extraParams == null) {
+            this.extraParams = new HashMap<>();
+          }
+          this.extraParams.put(key, value);
+          return this;
+        }
+
+        /**
+         * Add all map key/value pairs to `extraParams` map. A map is initialized for the first
+         * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
+         * map. See {@link SessionCreateParams.LineItem.AdjustableQuantity#extraParams} for the
+         * field documentation.
+         */
+        public Builder putAllExtraParam(Map<String, Object> map) {
+          if (this.extraParams == null) {
+            this.extraParams = new HashMap<>();
+          }
+          this.extraParams.putAll(map);
+          return this;
+        }
+
+        /**
+         * The maximum quantity the customer can purchase for the Checkout Session. By default this
+         * value is 99.
+         */
+        public Builder setMaximum(Long maximum) {
+          this.maximum = maximum;
+          return this;
+        }
+
+        /**
+         * The minimum quantity the customer must purchase for the Checkout Session. By default this
+         * value is 0.
+         */
+        public Builder setMinimum(Long minimum) {
+          this.minimum = minimum;
+          return this;
+        }
       }
     }
 
@@ -3739,6 +3875,9 @@ public class SessionCreateParams extends ApiRequestParams {
   }
 
   public enum PaymentMethodType implements ApiRequestParams.EnumParam {
+    @SerializedName("afterpay_clearpay")
+    AFTERPAY_CLEARPAY("afterpay_clearpay"),
+
     @SerializedName("alipay")
     ALIPAY("alipay"),
 
