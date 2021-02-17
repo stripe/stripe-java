@@ -344,6 +344,17 @@ public class Invoice extends ApiResource implements HasId, MetadataStore<Invoice
   String object;
 
   /**
+   * The account (if any) for which the funds of the invoice payment are intended. If set, the
+   * invoice will be presented with the branding and support information of the specified account.
+   * See the <a href="https://stripe.com/docs/billing/invoices/connect">Invoices with Connect</a>
+   * documentation for details.
+   */
+  @SerializedName("on_behalf_of")
+  @Getter(lombok.AccessLevel.NONE)
+  @Setter(lombok.AccessLevel.NONE)
+  ExpandableField<Account> onBehalfOf;
+
+  /**
    * Whether payment was successfully collected for this invoice. An invoice can be paid (most
    * commonly) with a charge or with credit from the customer's account balance.
    */
@@ -532,6 +543,24 @@ public class Invoice extends ApiResource implements HasId, MetadataStore<Invoice
   public void setDefaultSourceObject(PaymentSource expandableObject) {
     this.defaultSource =
         new ExpandableField<PaymentSource>(expandableObject.getId(), expandableObject);
+  }
+
+  /** Get ID of expandable {@code onBehalfOf} object. */
+  public String getOnBehalfOf() {
+    return (this.onBehalfOf != null) ? this.onBehalfOf.getId() : null;
+  }
+
+  public void setOnBehalfOf(String id) {
+    this.onBehalfOf = ApiResource.setExpandableFieldId(id, this.onBehalfOf);
+  }
+
+  /** Get expanded {@code onBehalfOf}. */
+  public Account getOnBehalfOfObject() {
+    return (this.onBehalfOf != null) ? this.onBehalfOf.getExpanded() : null;
+  }
+
+  public void setOnBehalfOfObject(Account expandableObject) {
+    this.onBehalfOf = new ExpandableField<Account>(expandableObject.getId(), expandableObject);
   }
 
   /** Get ID of expandable {@code paymentIntent} object. */

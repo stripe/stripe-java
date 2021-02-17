@@ -1873,6 +1873,9 @@ public class PaymentMethodCreateParams extends ApiRequestParams {
       @SerializedName("regiobank")
       REGIOBANK("regiobank"),
 
+      @SerializedName("revolut")
+      REVOLUT("revolut"),
+
       @SerializedName("sns_bank")
       SNS_BANK("sns_bank"),
 

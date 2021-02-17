@@ -126,6 +126,15 @@ public class InvoiceCreateParams extends ApiRequestParams {
   Object metadata;
 
   /**
+   * The account (if any) for which the funds of the invoice payment are intended. If set, the
+   * invoice will be presented with the branding and support information of the specified account.
+   * See the <a href="https://stripe.com/docs/billing/invoices/connect">Invoices with Connect</a>
+   * documentation for details.
+   */
+  @SerializedName("on_behalf_of")
+  String onBehalfOf;
+
+  /**
    * Configuration settings for the PaymentIntent that is generated when the invoice is finalized.
    */
   @SerializedName("payment_settings")
@@ -175,6 +184,7 @@ public class InvoiceCreateParams extends ApiRequestParams {
       Map<String, Object> extraParams,
       String footer,
       Object metadata,
+      String onBehalfOf,
       PaymentSettings paymentSettings,
       String statementDescriptor,
       String subscription,
@@ -196,6 +206,7 @@ public class InvoiceCreateParams extends ApiRequestParams {
     this.extraParams = extraParams;
     this.footer = footer;
     this.metadata = metadata;
+    this.onBehalfOf = onBehalfOf;
     this.paymentSettings = paymentSettings;
     this.statementDescriptor = statementDescriptor;
     this.subscription = subscription;
@@ -241,6 +252,8 @@ public class InvoiceCreateParams extends ApiRequestParams {
 
     private Object metadata;
 
+    private String onBehalfOf;
+
     private PaymentSettings paymentSettings;
 
     private String statementDescriptor;
@@ -269,6 +282,7 @@ public class InvoiceCreateParams extends ApiRequestParams {
           this.extraParams,
           this.footer,
           this.metadata,
+          this.onBehalfOf,
           this.paymentSettings,
           this.statementDescriptor,
           this.subscription,
@@ -622,6 +636,17 @@ public class InvoiceCreateParams extends ApiRequestParams {
      */
     public Builder setMetadata(Map<String, String> metadata) {
       this.metadata = metadata;
+      return this;
+    }
+
+    /**
+     * The account (if any) for which the funds of the invoice payment are intended. If set, the
+     * invoice will be presented with the branding and support information of the specified account.
+     * See the <a href="https://stripe.com/docs/billing/invoices/connect">Invoices with Connect</a>
+     * documentation for details.
+     */
+    public Builder setOnBehalfOf(String onBehalfOf) {
+      this.onBehalfOf = onBehalfOf;
       return this;
     }
 
