@@ -1,5 +1,11 @@
 # Changelog
 
+## 20.40.0 - 2021-02-17
+* [#1186](https://github.com/stripe/stripe-java/pull/1186) API Updates
+  * Added support for `on_behalf_of` to `Invoice`
+  * Added support `revolut` as an enum member on `PaymentMethodCreateParams.Ideal.Bank`, `PaymentIntentConfirmParams.Ideal.Bank`, `PaymentIntentUpdateParams.Ideal.Bank`, and `PaymentIntentCreateParams.Ideal.Bank`
+
+
 ## 20.39.0 - 2021-02-16
 * [#1185](https://github.com/stripe/stripe-java/pull/1185) API Updates
   * Add support for `afterpay_clearpay` on `PaymentMethod`, `PaymentIntent.payment_method_data`, and `Charge.payment_method_details`.
