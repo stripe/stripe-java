@@ -11,6 +11,14 @@ import lombok.Getter;
 
 @Getter
 public class SessionCreateParams extends ApiRequestParams {
+  /**
+   * The <a href="https://stripe.com/docs/api/customer_portal/configuration">configuration</a> to
+   * use for this session, describing its functionality and features. If not specified, the session
+   * uses the default configuration.
+   */
+  @SerializedName("configuration")
+  String configuration;
+
   /** The ID of an existing customer. */
   @SerializedName("customer")
   String customer;
@@ -29,17 +37,38 @@ public class SessionCreateParams extends ApiRequestParams {
   Map<String, Object> extraParams;
 
   /**
-   * The URL to which Stripe should send customers when they click on the link to return to your
-   * website. This field is required if a default return URL has not been configured for the portal.
+   * The {@code on_behalf_of} account to use for this session. When specified, only subscriptions
+   * and invoices with this {@code on_behalf_of} account appear in the portal. For more information,
+   * see the <a href="https://stripe.com/docs/connect/charges-transfers#on-behalf-of">docs</a>. Use
+   * the <a
+   * href="https://stripe.com/docs/api/accounts/object#account_object-settings-branding">Accounts
+   * API</a> to modify the {@code on_behalf_of} account's branding settings, which the portal
+   * displays.
+   */
+  @SerializedName("on_behalf_of")
+  String onBehalfOf;
+
+  /**
+   * The default URL to redirect customers to when they click on the portal's link to return to your
+   * website. This field is required if the configuration's <a
+   * href="https://stripe.com/docs/api/customer_portal/configuration#portal_configuration_object-default_return_url">{@code
+   * default_return_url}</a> is not set.
    */
   @SerializedName("return_url")
   String returnUrl;
 
   private SessionCreateParams(
-      String customer, List<String> expand, Map<String, Object> extraParams, String returnUrl) {
+      String configuration,
+      String customer,
+      List<String> expand,
+      Map<String, Object> extraParams,
+      String onBehalfOf,
+      String returnUrl) {
+    this.configuration = configuration;
     this.customer = customer;
     this.expand = expand;
     this.extraParams = extraParams;
+    this.onBehalfOf = onBehalfOf;
     this.returnUrl = returnUrl;
   }
 
@@ -48,17 +77,37 @@ public class SessionCreateParams extends ApiRequestParams {
   }
 
   public static class Builder {
+    private String configuration;
+
     private String customer;
 
     private List<String> expand;
 
     private Map<String, Object> extraParams;
 
+    private String onBehalfOf;
+
     private String returnUrl;
 
     /** Finalize and obtain parameter instance from this builder. */
     public SessionCreateParams build() {
-      return new SessionCreateParams(this.customer, this.expand, this.extraParams, this.returnUrl);
+      return new SessionCreateParams(
+          this.configuration,
+          this.customer,
+          this.expand,
+          this.extraParams,
+          this.onBehalfOf,
+          this.returnUrl);
+    }
+
+    /**
+     * The <a href="https://stripe.com/docs/api/customer_portal/configuration">configuration</a> to
+     * use for this session, describing its functionality and features. If not specified, the
+     * session uses the default configuration.
+     */
+    public Builder setConfiguration(String configuration) {
+      this.configuration = configuration;
+      return this;
     }
 
     /** The ID of an existing customer. */
@@ -120,9 +169,24 @@ public class SessionCreateParams extends ApiRequestParams {
     }
 
     /**
-     * The URL to which Stripe should send customers when they click on the link to return to your
-     * website. This field is required if a default return URL has not been configured for the
-     * portal.
+     * The {@code on_behalf_of} account to use for this session. When specified, only subscriptions
+     * and invoices with this {@code on_behalf_of} account appear in the portal. For more
+     * information, see the <a
+     * href="https://stripe.com/docs/connect/charges-transfers#on-behalf-of">docs</a>. Use the <a
+     * href="https://stripe.com/docs/api/accounts/object#account_object-settings-branding">Accounts
+     * API</a> to modify the {@code on_behalf_of} account's branding settings, which the portal
+     * displays.
+     */
+    public Builder setOnBehalfOf(String onBehalfOf) {
+      this.onBehalfOf = onBehalfOf;
+      return this;
+    }
+
+    /**
+     * The default URL to redirect customers to when they click on the portal's link to return to
+     * your website. This field is required if the configuration's <a
+     * href="https://stripe.com/docs/api/customer_portal/configuration#portal_configuration_object-default_return_url">{@code
+     * default_return_url}</a> is not set.
      */
     public Builder setReturnUrl(String returnUrl) {
       this.returnUrl = returnUrl;

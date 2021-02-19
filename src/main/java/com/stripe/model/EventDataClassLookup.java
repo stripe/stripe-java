@@ -85,6 +85,8 @@ final class EventDataClassLookup {
     classLookup.put("usage_record_summary", UsageRecordSummary.class);
     classLookup.put("webhook_endpoint", WebhookEndpoint.class);
 
+    classLookup.put(
+        "billing_portal.configuration", com.stripe.model.billingportal.Configuration.class);
     classLookup.put("billing_portal.session", com.stripe.model.billingportal.Session.class);
 
     classLookup.put("checkout.session", com.stripe.model.checkout.Session.class);
