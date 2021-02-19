@@ -131,13 +131,16 @@ public class Price extends ApiResource implements HasId, MetadataStore<Price> {
   @SerializedName("type")
   String type;
 
-  /** The unit amount in %s to be charged, represented as a whole integer if possible. */
+  /**
+   * The unit amount in %s to be charged, represented as a whole integer if possible. Only set if
+   * {@code billing_scheme=per_unit}.
+   */
   @SerializedName("unit_amount")
   Long unitAmount;
 
   /**
    * The unit amount in %s to be charged, represented as a decimal string with at most 12 decimal
-   * places.
+   * places. Only set if {@code billing_scheme=per_unit}.
    */
   @SerializedName("unit_amount_decimal")
   BigDecimal unitAmountDecimal;

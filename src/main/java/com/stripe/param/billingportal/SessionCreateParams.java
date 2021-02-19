@@ -50,9 +50,7 @@ public class SessionCreateParams extends ApiRequestParams {
 
   /**
    * The default URL to redirect customers to when they click on the portal's link to return to your
-   * website. This field is required if the configuration's <a
-   * href="https://stripe.com/docs/api/customer_portal/configuration#portal_configuration_object-default_return_url">{@code
-   * default_return_url}</a> is not set.
+   * website.
    */
   @SerializedName("return_url")
   String returnUrl;
@@ -184,9 +182,7 @@ public class SessionCreateParams extends ApiRequestParams {
 
     /**
      * The default URL to redirect customers to when they click on the portal's link to return to
-     * your website. This field is required if the configuration's <a
-     * href="https://stripe.com/docs/api/customer_portal/configuration#portal_configuration_object-default_return_url">{@code
-     * default_return_url}</a> is not set.
+     * your website.
      */
     public Builder setReturnUrl(String returnUrl) {
       this.returnUrl = returnUrl;

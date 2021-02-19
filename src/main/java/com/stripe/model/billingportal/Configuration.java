@@ -133,41 +133,37 @@ public class Configuration extends ApiResource implements HasId {
   }
 
   /** Updates a configuration that describes the functionality of the customer portal. */
-  public static Configuration update(String configuration, Map<String, Object> params)
-      throws StripeException {
-    return update(configuration, params, (RequestOptions) null);
+  public Configuration update(Map<String, Object> params) throws StripeException {
+    return update(params, (RequestOptions) null);
   }
 
   /** Updates a configuration that describes the functionality of the customer portal. */
-  public static Configuration update(
-      String configuration, Map<String, Object> params, RequestOptions options)
+  public Configuration update(Map<String, Object> params, RequestOptions options)
       throws StripeException {
     String url =
         String.format(
             "%s%s",
             Stripe.getApiBase(),
             String.format(
-                "/v1/billing_portal/configurations/%s", ApiResource.urlEncodeId(configuration)));
+                "/v1/billing_portal/configurations/%s", ApiResource.urlEncodeId(this.getId())));
     return ApiResource.request(
         ApiResource.RequestMethod.POST, url, params, Configuration.class, options);
   }
 
   /** Updates a configuration that describes the functionality of the customer portal. */
-  public static Configuration update(String configuration, ConfigurationUpdateParams params)
-      throws StripeException {
-    return update(configuration, params, (RequestOptions) null);
+  public Configuration update(ConfigurationUpdateParams params) throws StripeException {
+    return update(params, (RequestOptions) null);
   }
 
   /** Updates a configuration that describes the functionality of the customer portal. */
-  public static Configuration update(
-      String configuration, ConfigurationUpdateParams params, RequestOptions options)
+  public Configuration update(ConfigurationUpdateParams params, RequestOptions options)
       throws StripeException {
     String url =
         String.format(
             "%s%s",
             Stripe.getApiBase(),
             String.format(
-                "/v1/billing_portal/configurations/%s", ApiResource.urlEncodeId(configuration)));
+                "/v1/billing_portal/configurations/%s", ApiResource.urlEncodeId(this.getId())));
     return ApiResource.request(
         ApiResource.RequestMethod.POST, url, params, Configuration.class, options);
   }
@@ -338,6 +334,10 @@ public class Configuration extends ApiResource implements HasId {
       @Setter
       @EqualsAndHashCode(callSuper = false)
       public static class SubscriptionUpdateProduct extends StripeObject {
+        /** The list of price IDs which, when subscribed to, a subscription can be updated. */
+        @SerializedName("prices")
+        List<String> prices;
+
         /** The product ID. */
         @SerializedName("product")
         String product;
