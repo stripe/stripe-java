@@ -37,13 +37,16 @@ public class Plan extends ApiResource implements HasId, MetadataStore<Plan> {
   @SerializedName("aggregate_usage")
   String aggregateUsage;
 
-  /** The unit amount in %s to be charged, represented as a whole integer if possible. */
+  /**
+   * The unit amount in %s to be charged, represented as a whole integer if possible. Only set if
+   * {@code billing_scheme=per_unit}.
+   */
   @SerializedName("amount")
   Long amount;
 
   /**
    * The unit amount in %s to be charged, represented as a decimal string with at most 12 decimal
-   * places.
+   * places. Only set if {@code billing_scheme=per_unit}.
    */
   @SerializedName("amount_decimal")
   BigDecimal amountDecimal;

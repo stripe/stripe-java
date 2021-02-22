@@ -294,6 +294,12 @@ public class WebhookEndpointUpdateParams extends ApiRequestParams {
     @SerializedName("balance.available")
     BALANCE__AVAILABLE("balance.available"),
 
+    @SerializedName("billing_portal.configuration.created")
+    BILLING_PORTAL__CONFIGURATION__CREATED("billing_portal.configuration.created"),
+
+    @SerializedName("billing_portal.configuration.updated")
+    BILLING_PORTAL__CONFIGURATION__UPDATED("billing_portal.configuration.updated"),
+
     @SerializedName("capability.updated")
     CAPABILITY__UPDATED("capability.updated"),
 
