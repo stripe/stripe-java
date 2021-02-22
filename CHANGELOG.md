@@ -1,5 +1,9 @@
 # Changelog
 
+## 20.41.0 - 2021-02-22
+* [#1187](https://github.com/stripe/stripe-java/pull/1187) API Updates
+  * Add support for Billing Portal Configuration API
+
 ## 20.40.0 - 2021-02-17
 * [#1186](https://github.com/stripe/stripe-java/pull/1186) API Updates
   * Added support for `on_behalf_of` to `Invoice`
