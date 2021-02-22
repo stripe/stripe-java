@@ -16,7 +16,7 @@ import java.util.Map;
 import org.junit.jupiter.api.Test;
 
 public class ConfigurationTest extends BaseStripeTest {
-  public static final String SESSION_ID = "bps_123";
+  public static final String SESSION_ID = "bpc_123";
 
   private Configuration getConfigurationFixture() throws StripeException {
     final Configuration configuration = Configuration.retrieve(SESSION_ID);
