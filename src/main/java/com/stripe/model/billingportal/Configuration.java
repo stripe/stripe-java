@@ -319,7 +319,7 @@ public class Configuration extends ApiResource implements HasId {
 
       /** The list of products that support subscription updates. */
       @SerializedName("products")
-      List<Configuration.Features.SubscriptionUpdate.SubscriptionUpdateProduct> products;
+      List<Configuration.Features.SubscriptionUpdate.Product> products;
 
       /**
        * Determines how to handle prorations resulting from subscription updates. Valid values are
@@ -333,7 +333,7 @@ public class Configuration extends ApiResource implements HasId {
       @Getter
       @Setter
       @EqualsAndHashCode(callSuper = false)
-      public static class SubscriptionUpdateProduct extends StripeObject {
+      public static class Product extends StripeObject {
         /** The list of price IDs which, when subscribed to, a subscription can be updated. */
         @SerializedName("prices")
         List<String> prices;
