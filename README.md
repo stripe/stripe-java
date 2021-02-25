@@ -161,7 +161,9 @@ servers.
 
 We cannot guarantee that the IP address of the Stripe API will be static.
 Commonly, default JVM configurations can have their DNS cache TTL set to
-forever. If Stripe's IP address changes, your application's requests to Stripe will all fail until the JVM restarts. Therefore we recommend that you modify the JVM's [networkaddress.cache.ttl
+forever. If Stripe's IP address changes, your application's requests to
+Stripe will all fail until the JVM restarts. Therefore we recommend that
+you modify the JVM's [networkaddress.cache.ttl
 property](https://docs.oracle.com/javase/7/docs/technotes/guides/net/properties.html)
 to `60` seconds.
 
