@@ -101,15 +101,11 @@ public class Product extends ApiResource implements HasId, MetadataStore<Product
   @SerializedName("object")
   String object;
 
-  /**
-   * The dimensions of this product for shipping purposes. A SKU associated with this product can
-   * override this value by having its own {@code package_dimensions}. Only applicable to products
-   * of {@code type=good}.
-   */
+  /** The dimensions of this product for shipping purposes. */
   @SerializedName("package_dimensions")
   PackageDimensions packageDimensions;
 
-  /** Whether this product is a shipped good. Only applicable to products of {@code type=good}. */
+  /** Whether this product is shipped (i.e., physical goods). */
   @SerializedName("shippable")
   Boolean shippable;
 
@@ -142,10 +138,7 @@ public class Product extends ApiResource implements HasId, MetadataStore<Product
   @SerializedName("updated")
   Long updated;
 
-  /**
-   * A URL of a publicly-accessible webpage for this product. Only applicable to products of {@code
-   * type=good}.
-   */
+  /** A URL of a publicly-accessible webpage for this product. */
   @SerializedName("url")
   String url;
 

@@ -82,18 +82,11 @@ public class ProductCreateParams extends ApiRequestParams {
   @SerializedName("name")
   String name;
 
-  /**
-   * The dimensions of this product for shipping purposes. A SKU associated with this product can
-   * override this value by having its own {@code package_dimensions}. May only be set if
-   * type={@code good}.
-   */
+  /** The dimensions of this product for shipping purposes. */
   @SerializedName("package_dimensions")
   PackageDimensions packageDimensions;
 
-  /**
-   * Whether this product is shipped (i.e., physical goods). Defaults to {@code true}. May only be
-   * set if type={@code good}.
-   */
+  /** Whether this product is shipped (i.e., physical goods). */
   @SerializedName("shippable")
   Boolean shippable;
 
@@ -126,9 +119,7 @@ public class ProductCreateParams extends ApiRequestParams {
   @SerializedName("unit_label")
   String unitLabel;
 
-  /**
-   * A URL of a publicly-accessible webpage for this product. May only be set if type={@code good}.
-   */
+  /** A URL of a publicly-accessible webpage for this product. */
   @SerializedName("url")
   String url;
 
@@ -429,20 +420,13 @@ public class ProductCreateParams extends ApiRequestParams {
       return this;
     }
 
-    /**
-     * The dimensions of this product for shipping purposes. A SKU associated with this product can
-     * override this value by having its own {@code package_dimensions}. May only be set if
-     * type={@code good}.
-     */
+    /** The dimensions of this product for shipping purposes. */
     public Builder setPackageDimensions(PackageDimensions packageDimensions) {
       this.packageDimensions = packageDimensions;
       return this;
     }
 
-    /**
-     * Whether this product is shipped (i.e., physical goods). Defaults to {@code true}. May only be
-     * set if type={@code good}.
-     */
+    /** Whether this product is shipped (i.e., physical goods). */
     public Builder setShippable(Boolean shippable) {
       this.shippable = shippable;
       return this;
@@ -483,10 +467,7 @@ public class ProductCreateParams extends ApiRequestParams {
       return this;
     }
 
-    /**
-     * A URL of a publicly-accessible webpage for this product. May only be set if type={@code
-     * good}.
-     */
+    /** A URL of a publicly-accessible webpage for this product. */
     public Builder setUrl(String url) {
       this.url = url;
       return this;

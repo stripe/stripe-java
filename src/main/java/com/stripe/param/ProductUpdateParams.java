@@ -81,18 +81,11 @@ public class ProductUpdateParams extends ApiRequestParams {
   @SerializedName("name")
   Object name;
 
-  /**
-   * The dimensions of this product for shipping purposes. A SKU associated with this product can
-   * override this value by having its own {@code package_dimensions}. May only be set if {@code
-   * type=good}.
-   */
+  /** The dimensions of this product for shipping purposes. */
   @SerializedName("package_dimensions")
   Object packageDimensions;
 
-  /**
-   * Whether this product is shipped (i.e., physical goods). Defaults to {@code true}. May only be
-   * set if {@code type=good}.
-   */
+  /** Whether this product is shipped (i.e., physical goods). */
   @SerializedName("shippable")
   Boolean shippable;
 
@@ -117,9 +110,7 @@ public class ProductUpdateParams extends ApiRequestParams {
   @SerializedName("unit_label")
   Object unitLabel;
 
-  /**
-   * A URL of a publicly-accessible webpage for this product. May only be set if {@code type=good}.
-   */
+  /** A URL of a publicly-accessible webpage for this product. */
   @SerializedName("url")
   Object url;
 
@@ -495,30 +486,19 @@ public class ProductUpdateParams extends ApiRequestParams {
       return this;
     }
 
-    /**
-     * The dimensions of this product for shipping purposes. A SKU associated with this product can
-     * override this value by having its own {@code package_dimensions}. May only be set if {@code
-     * type=good}.
-     */
+    /** The dimensions of this product for shipping purposes. */
     public Builder setPackageDimensions(PackageDimensions packageDimensions) {
       this.packageDimensions = packageDimensions;
       return this;
     }
 
-    /**
-     * The dimensions of this product for shipping purposes. A SKU associated with this product can
-     * override this value by having its own {@code package_dimensions}. May only be set if {@code
-     * type=good}.
-     */
+    /** The dimensions of this product for shipping purposes. */
     public Builder setPackageDimensions(EmptyParam packageDimensions) {
       this.packageDimensions = packageDimensions;
       return this;
     }
 
-    /**
-     * Whether this product is shipped (i.e., physical goods). Defaults to {@code true}. May only be
-     * set if {@code type=good}.
-     */
+    /** Whether this product is shipped (i.e., physical goods). */
     public Builder setShippable(Boolean shippable) {
       this.shippable = shippable;
       return this;
@@ -574,19 +554,13 @@ public class ProductUpdateParams extends ApiRequestParams {
       return this;
     }
 
-    /**
-     * A URL of a publicly-accessible webpage for this product. May only be set if {@code
-     * type=good}.
-     */
+    /** A URL of a publicly-accessible webpage for this product. */
     public Builder setUrl(String url) {
       this.url = url;
       return this;
     }
 
-    /**
-     * A URL of a publicly-accessible webpage for this product. May only be set if {@code
-     * type=good}.
-     */
+    /** A URL of a publicly-accessible webpage for this product. */
     public Builder setUrl(EmptyParam url) {
       this.url = url;
       return this;

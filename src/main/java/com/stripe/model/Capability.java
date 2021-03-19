@@ -132,7 +132,17 @@ public class Capability extends ApiResource implements HasId {
     /**
      * If the capability is disabled, this string describes why. Possible values are {@code
      * requirement.fields_needed}, {@code pending.onboarding}, {@code pending.review}, {@code
-     * rejected_fraud}, or {@code rejected.other}.
+     * rejected_fraud}, {@code rejected.unsupported_business} or {@code rejected.other}.
+     *
+     * <p>{@code rejected.unsupported_business} means that the account's business is not supported
+     * by the capability. For example, payment methods may restrict the businesses they support in
+     * their terms of service:
+     *
+     * <p>- <a href="https://stripe.com/afterpay-clearpay/legal#restricted-businesses">Afterpay
+     * Clearpay's terms of service</a>
+     *
+     * <p>If you believe that the rejection is in error, please contact support@stripe.com for
+     * assistance.
      */
     @SerializedName("disabled_reason")
     String disabledReason;
