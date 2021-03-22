@@ -73,7 +73,10 @@ public class Account extends ApiResource implements MetadataStore<Account>, Paym
   @SerializedName("details_submitted")
   Boolean detailsSubmitted;
 
-  /** The primary user's email address. */
+  /**
+   * An email address associated with the account. You can treat this as metadata: it is not used
+   * for authentication or messaging account holders.
+   */
   @SerializedName("email")
   String email;
 

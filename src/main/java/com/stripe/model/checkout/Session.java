@@ -464,6 +464,10 @@ public class Session extends ApiResource implements HasId {
     @SerializedName("amount_discount")
     Long amountDiscount;
 
+    /** This is the sum of all the line item shipping amounts. */
+    @SerializedName("amount_shipping")
+    Long amountShipping;
+
     /** This is the sum of all the line item tax amounts. */
     @SerializedName("amount_tax")
     Long amountTax;

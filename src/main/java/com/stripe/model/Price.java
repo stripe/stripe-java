@@ -78,7 +78,7 @@ public class Price extends ApiResource implements HasId, MetadataStore<Price> {
   @SerializedName("metadata")
   Map<String, String> metadata;
 
-  /** A brief description of the plan, hidden from customers. */
+  /** A brief description of the price, hidden from customers. */
   @SerializedName("nickname")
   String nickname;
 

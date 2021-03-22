@@ -140,6 +140,10 @@ public class SessionCreateParams extends ApiRequestParams {
   @SerializedName("shipping_address_collection")
   ShippingAddressCollection shippingAddressCollection;
 
+  /** The shipping rate to apply to this Session. Currently, only up to one may be specified */
+  @SerializedName("shipping_rates")
+  List<String> shippingRates;
+
   /**
    * Describes the type of transaction being performed by Checkout in order to customize relevant
    * text on the page, such as the submit button. {@code submit_type} can only be specified on
@@ -182,6 +186,7 @@ public class SessionCreateParams extends ApiRequestParams {
       List<PaymentMethodType> paymentMethodTypes,
       SetupIntentData setupIntentData,
       ShippingAddressCollection shippingAddressCollection,
+      List<String> shippingRates,
       SubmitType submitType,
       SubscriptionData subscriptionData,
       String successUrl) {
@@ -202,6 +207,7 @@ public class SessionCreateParams extends ApiRequestParams {
     this.paymentMethodTypes = paymentMethodTypes;
     this.setupIntentData = setupIntentData;
     this.shippingAddressCollection = shippingAddressCollection;
+    this.shippingRates = shippingRates;
     this.submitType = submitType;
     this.subscriptionData = subscriptionData;
     this.successUrl = successUrl;
@@ -246,6 +252,8 @@ public class SessionCreateParams extends ApiRequestParams {
 
     private ShippingAddressCollection shippingAddressCollection;
 
+    private List<String> shippingRates;
+
     private SubmitType submitType;
 
     private SubscriptionData subscriptionData;
@@ -272,6 +280,7 @@ public class SessionCreateParams extends ApiRequestParams {
           this.paymentMethodTypes,
           this.setupIntentData,
           this.shippingAddressCollection,
+          this.shippingRates,
           this.submitType,
           this.subscriptionData,
           this.successUrl);
@@ -528,6 +537,32 @@ public class SessionCreateParams extends ApiRequestParams {
     public Builder setShippingAddressCollection(
         ShippingAddressCollection shippingAddressCollection) {
       this.shippingAddressCollection = shippingAddressCollection;
+      return this;
+    }
+
+    /**
+     * Add an element to `shippingRates` list. A list is initialized for the first `add/addAll`
+     * call, and subsequent calls adds additional elements to the original list. See {@link
+     * SessionCreateParams#shippingRates} for the field documentation.
+     */
+    public Builder addShippingRate(String element) {
+      if (this.shippingRates == null) {
+        this.shippingRates = new ArrayList<>();
+      }
+      this.shippingRates.add(element);
+      return this;
+    }
+
+    /**
+     * Add all elements to `shippingRates` list. A list is initialized for the first `add/addAll`
+     * call, and subsequent calls adds additional elements to the original list. See {@link
+     * SessionCreateParams#shippingRates} for the field documentation.
+     */
+    public Builder addAllShippingRate(List<String> elements) {
+      if (this.shippingRates == null) {
+        this.shippingRates = new ArrayList<>();
+      }
+      this.shippingRates.addAll(elements);
       return this;
     }
 
