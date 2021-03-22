@@ -1,13 +1,18 @@
 # Changelog
 
+## 20.42.0 - 2021-03-22
+* [#1189](https://github.com/stripe/stripe-java/pull/1189) API Updates
+  * Add support for `shipping_rates` on `Checkout.SessionCreateParams`
+  * Add support for `amount_shipping` on `Checkout.Session.total_details`
+
 ## 20.41.0 - 2021-02-22
 * [#1187](https://github.com/stripe/stripe-java/pull/1187) API Updates
   * Add support for Billing Portal Configuration API
 
 ## 20.40.0 - 2021-02-17
 * [#1186](https://github.com/stripe/stripe-java/pull/1186) API Updates
-  * Added support for `on_behalf_of` to `Invoice`
-  * Added support `revolut` as an enum member on `PaymentMethodCreateParams.Ideal.Bank`, `PaymentIntentConfirmParams.Ideal.Bank`, `PaymentIntentUpdateParams.Ideal.Bank`, and `PaymentIntentCreateParams.Ideal.Bank`
+  * Add support for `on_behalf_of` to `Invoice`
+  * Add support `revolut` as an enum member on `PaymentMethodCreateParams.Ideal.Bank`, `PaymentIntentConfirmParams.Ideal.Bank`, `PaymentIntentUpdateParams.Ideal.Bank`, and `PaymentIntentCreateParams.Ideal.Bank`
 
 
 ## 20.39.0 - 2021-02-16
