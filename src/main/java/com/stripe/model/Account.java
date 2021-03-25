@@ -1131,7 +1131,9 @@ public class Account extends ApiResource implements MetadataStore<Account>, Paym
        * verification_failed_document_match}, {@code verification_failed_id_number_match}, {@code
        * verification_failed_keyed_identity}, {@code verification_failed_keyed_match}, {@code
        * verification_failed_name_match}, {@code verification_failed_other}, {@code
-       * verification_failed_tax_id_match}, or {@code verification_failed_tax_id_not_issued}.
+       * verification_failed_tax_id_match}, {@code verification_failed_tax_id_not_issued}, {@code
+       * verification_missing_executives}, {@code verification_missing_owners}, or {@code
+       * verification_requires_additional_memorandum_of_associations}.
        */
       @SerializedName("code")
       String code;
