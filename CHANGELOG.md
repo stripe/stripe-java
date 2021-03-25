@@ -1,5 +1,10 @@
 # Changelog
 
+## 20.43.0 - 2021-03-25
+* [#1191](https://github.com/stripe/stripe-java/pull/1191) API Updates
+  * Add support for new locale `th` on `SessionCreateParams`.
+
+
 ## 20.42.0 - 2021-03-22
 * [#1189](https://github.com/stripe/stripe-java/pull/1189) API Updates
   * Add support for `shipping_rates` on `Checkout.SessionCreateParams`
