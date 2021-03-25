@@ -3871,6 +3871,9 @@ public class SessionCreateParams extends ApiRequestParams {
     @SerializedName("sv")
     SV("sv"),
 
+    @SerializedName("th")
+    TH("th"),
+
     @SerializedName("tr")
     TR("tr"),
 
