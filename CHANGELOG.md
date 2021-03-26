@@ -1,5 +1,9 @@
 # Changelog
 
+## 20.44.0 - 2021-03-26
+* [#1192](https://github.com/stripe/stripe-java/pull/1192) API Updates
+  * Add support for `card_issuing` on `AccountCreateParams.settings`, `AccountUpdateParams.settings` and `Account.settings`
+
 ## 20.43.0 - 2021-03-25
 * [#1191](https://github.com/stripe/stripe-java/pull/1191) API Updates
   * Add support for new locale `th` on `SessionCreateParams`.
