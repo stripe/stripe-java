@@ -1208,12 +1208,12 @@ public class Account extends ApiResource implements MetadataStore<Account>, Paym
     @EqualsAndHashCode(callSuper = false)
     public static class SettingsCardIssuing extends StripeObject {
       @SerializedName("tos_acceptance")
-      CardIssuingTermsOfService tosAcceptance;
+      TosAcceptance tosAcceptance;
 
       @Getter
       @Setter
       @EqualsAndHashCode(callSuper = false)
-      public static class CardIssuingTermsOfService extends StripeObject {
+      public static class TosAcceptance extends StripeObject {
         /**
          * The Unix timestamp marking when the account representative accepted the service
          * agreement.
