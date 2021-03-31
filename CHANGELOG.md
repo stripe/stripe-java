@@ -1,5 +1,9 @@
 # Changelog
 
+## 20.45.0 - 2021-03-31
+* [#1193](https://github.com/stripe/stripe-java/pull/1193) API Updates
+  * Add support for `transfer_data` on `Checkout.SessionCreateParams.subscription_data`
+
 ## 20.44.0 - 2021-03-26
 * [#1192](https://github.com/stripe/stripe-java/pull/1192) API Updates
   * Add support for `card_issuing` on `AccountCreateParams.settings`, `AccountUpdateParams.settings` and `Account.settings`
