@@ -75,11 +75,14 @@ public class SessionCreateParams extends ApiRequestParams {
 
   /**
    * A list of items the customer is purchasing. Use this parameter to pass one-time or recurring <a
-   * href="https://stripe.com/docs/api/prices">Prices</a>. One-time Prices in {@code subscription}
-   * mode will be on the initial invoice only.
+   * href="https://stripe.com/docs/api/prices">Prices</a>.
    *
-   * <p>There is a maximum of 100 line items, however it is recommended to consolidate line items if
-   * there are more than a few dozen.
+   * <p>For {@code payment} mode, there is a maximum of 100 line items, however it is recommended to
+   * consolidate line items if there are more than a few dozen.
+   *
+   * <p>For {@code subscription} mode, there is a maximum of 20 line items with recurring Prices and
+   * 20 line items with one-time Prices. Line items with one-time Prices in will be on the initial
+   * invoice only.
    */
   @SerializedName("line_items")
   List<LineItem> lineItems;
@@ -1681,8 +1684,9 @@ public class SessionCreateParams extends ApiRequestParams {
     String receiptEmail;
 
     /**
-     * Indicates that you intend to make future payments with the payment method collected by this
-     * Checkout Session.
+     * Indicates that you intend to <a
+     * href="https://stripe.com/docs/payments/payment-intents#future-usage">make future payments</a>
+     * with the payment method collected by this Checkout Session.
      *
      * <p>When setting this to {@code on_session}, Checkout will show a notice to the customer that
      * their payment details will be saved.
@@ -1914,8 +1918,9 @@ public class SessionCreateParams extends ApiRequestParams {
       }
 
       /**
-       * Indicates that you intend to make future payments with the payment method collected by this
-       * Checkout Session.
+       * Indicates that you intend to <a
+       * href="https://stripe.com/docs/payments/payment-intents#future-usage">make future
+       * payments</a> with the payment method collected by this Checkout Session.
        *
        * <p>When setting this to {@code on_session}, Checkout will show a notice to the customer
        * that their payment details will be saved.
@@ -3398,6 +3403,13 @@ public class SessionCreateParams extends ApiRequestParams {
     Map<String, String> metadata;
 
     /**
+     * If specified, the funds from the subscription's invoices will be transferred to the
+     * destination and the ID of the resulting transfers will be found on the resulting charges.
+     */
+    @SerializedName("transfer_data")
+    TransferData transferData;
+
+    /**
      * Unix timestamp representing the end of the trial period the customer will get before being
      * charged for the first time. Has to be at least 48 hours in the future.
      */
@@ -3426,6 +3438,7 @@ public class SessionCreateParams extends ApiRequestParams {
         Map<String, Object> extraParams,
         List<Item> items,
         Map<String, String> metadata,
+        TransferData transferData,
         Long trialEnd,
         Boolean trialFromPlan,
         Long trialPeriodDays) {
@@ -3435,6 +3448,7 @@ public class SessionCreateParams extends ApiRequestParams {
       this.extraParams = extraParams;
       this.items = items;
       this.metadata = metadata;
+      this.transferData = transferData;
       this.trialEnd = trialEnd;
       this.trialFromPlan = trialFromPlan;
       this.trialPeriodDays = trialPeriodDays;
@@ -3457,6 +3471,8 @@ public class SessionCreateParams extends ApiRequestParams {
 
       private Map<String, String> metadata;
 
+      private TransferData transferData;
+
       private Long trialEnd;
 
       private Boolean trialFromPlan;
@@ -3472,6 +3488,7 @@ public class SessionCreateParams extends ApiRequestParams {
             this.extraParams,
             this.items,
             this.metadata,
+            this.transferData,
             this.trialEnd,
             this.trialFromPlan,
             this.trialPeriodDays);
@@ -3600,6 +3617,15 @@ public class SessionCreateParams extends ApiRequestParams {
           this.metadata = new HashMap<>();
         }
         this.metadata.putAll(map);
+        return this;
+      }
+
+      /**
+       * If specified, the funds from the subscription's invoices will be transferred to the
+       * destination and the ID of the resulting transfers will be found on the resulting charges.
+       */
+      public Builder setTransferData(TransferData transferData) {
+        this.transferData = transferData;
         return this;
       }
 
@@ -3753,6 +3779,99 @@ public class SessionCreateParams extends ApiRequestParams {
             this.taxRates = new ArrayList<>();
           }
           this.taxRates.addAll(elements);
+          return this;
+        }
+      }
+    }
+
+    @Getter
+    public static class TransferData {
+      /**
+       * A non-negative decimal between 0 and 100, with at most two decimal places. This represents
+       * the percentage of the subscription invoice subtotal that will be transferred to the
+       * destination account. By default, the entire amount is transferred to the destination.
+       */
+      @SerializedName("amount_percent")
+      BigDecimal amountPercent;
+
+      /** ID of an existing, connected Stripe account. */
+      @SerializedName("destination")
+      String destination;
+
+      /**
+       * Map of extra parameters for custom features not available in this client library. The
+       * content in this map is not serialized under this field's {@code @SerializedName} value.
+       * Instead, each key/value pair is serialized as if the key is a root-level field (serialized)
+       * name in this param object. Effectively, this map is flattened to its parent instance.
+       */
+      @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
+      Map<String, Object> extraParams;
+
+      private TransferData(
+          BigDecimal amountPercent, String destination, Map<String, Object> extraParams) {
+        this.amountPercent = amountPercent;
+        this.destination = destination;
+        this.extraParams = extraParams;
+      }
+
+      public static Builder builder() {
+        return new Builder();
+      }
+
+      public static class Builder {
+        private BigDecimal amountPercent;
+
+        private String destination;
+
+        private Map<String, Object> extraParams;
+
+        /** Finalize and obtain parameter instance from this builder. */
+        public TransferData build() {
+          return new TransferData(this.amountPercent, this.destination, this.extraParams);
+        }
+
+        /**
+         * A non-negative decimal between 0 and 100, with at most two decimal places. This
+         * represents the percentage of the subscription invoice subtotal that will be transferred
+         * to the destination account. By default, the entire amount is transferred to the
+         * destination.
+         */
+        public Builder setAmountPercent(BigDecimal amountPercent) {
+          this.amountPercent = amountPercent;
+          return this;
+        }
+
+        /** ID of an existing, connected Stripe account. */
+        public Builder setDestination(String destination) {
+          this.destination = destination;
+          return this;
+        }
+
+        /**
+         * Add a key/value pair to `extraParams` map. A map is initialized for the first
+         * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
+         * map. See {@link SessionCreateParams.SubscriptionData.TransferData#extraParams} for the
+         * field documentation.
+         */
+        public Builder putExtraParam(String key, Object value) {
+          if (this.extraParams == null) {
+            this.extraParams = new HashMap<>();
+          }
+          this.extraParams.put(key, value);
+          return this;
+        }
+
+        /**
+         * Add all map key/value pairs to `extraParams` map. A map is initialized for the first
+         * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
+         * map. See {@link SessionCreateParams.SubscriptionData.TransferData#extraParams} for the
+         * field documentation.
+         */
+        public Builder putAllExtraParam(Map<String, Object> map) {
+          if (this.extraParams == null) {
+            this.extraParams = new HashMap<>();
+          }
+          this.extraParams.putAll(map);
           return this;
         }
       }

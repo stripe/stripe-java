@@ -72,7 +72,7 @@ public class ReportType extends ApiResource implements HasId {
   Long version;
 
   /**
-   * Retrieves the details of a Report Type. (Requires a <a
+   * Retrieves the details of a Report Type. (Certain report types require a <a
    * href="https://stripe.com/docs/keys#test-live-modes">live-mode API key</a>.)
    */
   public static ReportType retrieve(String reportType) throws StripeException {
@@ -80,7 +80,7 @@ public class ReportType extends ApiResource implements HasId {
   }
 
   /**
-   * Retrieves the details of a Report Type. (Requires a <a
+   * Retrieves the details of a Report Type. (Certain report types require a <a
    * href="https://stripe.com/docs/keys#test-live-modes">live-mode API key</a>.)
    */
   public static ReportType retrieve(String reportType, RequestOptions options)
@@ -89,7 +89,7 @@ public class ReportType extends ApiResource implements HasId {
   }
 
   /**
-   * Retrieves the details of a Report Type. (Requires a <a
+   * Retrieves the details of a Report Type. (Certain report types require a <a
    * href="https://stripe.com/docs/keys#test-live-modes">live-mode API key</a>.)
    */
   public static ReportType retrieve(
@@ -105,7 +105,7 @@ public class ReportType extends ApiResource implements HasId {
   }
 
   /**
-   * Retrieves the details of a Report Type. (Requires a <a
+   * Retrieves the details of a Report Type. (Certain report types require a <a
    * href="https://stripe.com/docs/keys#test-live-modes">live-mode API key</a>.)
    */
   public static ReportType retrieve(
@@ -120,36 +120,24 @@ public class ReportType extends ApiResource implements HasId {
         ApiResource.RequestMethod.GET, url, params, ReportType.class, options);
   }
 
-  /**
-   * Returns a full list of Report Types. (Requires a <a
-   * href="https://stripe.com/docs/keys#test-live-modes">live-mode API key</a>.)
-   */
+  /** Returns a full list of Report Types. */
   public static ReportTypeCollection list(Map<String, Object> params) throws StripeException {
     return list(params, (RequestOptions) null);
   }
 
-  /**
-   * Returns a full list of Report Types. (Requires a <a
-   * href="https://stripe.com/docs/keys#test-live-modes">live-mode API key</a>.)
-   */
+  /** Returns a full list of Report Types. */
   public static ReportTypeCollection list(Map<String, Object> params, RequestOptions options)
       throws StripeException {
     String url = String.format("%s%s", Stripe.getApiBase(), "/v1/reporting/report_types");
     return ApiResource.requestCollection(url, params, ReportTypeCollection.class, options);
   }
 
-  /**
-   * Returns a full list of Report Types. (Requires a <a
-   * href="https://stripe.com/docs/keys#test-live-modes">live-mode API key</a>.)
-   */
+  /** Returns a full list of Report Types. */
   public static ReportTypeCollection list(ReportTypeListParams params) throws StripeException {
     return list(params, (RequestOptions) null);
   }
 
-  /**
-   * Returns a full list of Report Types. (Requires a <a
-   * href="https://stripe.com/docs/keys#test-live-modes">live-mode API key</a>.)
-   */
+  /** Returns a full list of Report Types. */
   public static ReportTypeCollection list(ReportTypeListParams params, RequestOptions options)
       throws StripeException {
     String url = String.format("%s%s", Stripe.getApiBase(), "/v1/reporting/report_types");
