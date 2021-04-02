@@ -240,6 +240,9 @@ public class Configuration extends ApiResource implements HasId {
     @SerializedName("subscription_cancel")
     SubscriptionCancel subscriptionCancel;
 
+    @SerializedName("subscription_pause")
+    SubscriptionPause subscriptionPause;
+
     @SerializedName("subscription_update")
     SubscriptionUpdate subscriptionUpdate;
 
@@ -300,6 +303,15 @@ public class Configuration extends ApiResource implements HasId {
        */
       @SerializedName("proration_behavior")
       String prorationBehavior;
+    }
+
+    @Getter
+    @Setter
+    @EqualsAndHashCode(callSuper = false)
+    public static class SubscriptionPause extends StripeObject {
+      /** Whether the feature is enabled. */
+      @SerializedName("enabled")
+      Boolean enabled;
     }
 
     @Getter

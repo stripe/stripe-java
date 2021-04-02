@@ -294,6 +294,10 @@ public class ConfigurationCreateParams extends ApiRequestParams {
     @SerializedName("subscription_cancel")
     SubscriptionCancel subscriptionCancel;
 
+    /** Information about pausing subscriptions in the portal. */
+    @SerializedName("subscription_pause")
+    SubscriptionPause subscriptionPause;
+
     /** Information about updating subscriptions in the portal. */
     @SerializedName("subscription_update")
     SubscriptionUpdate subscriptionUpdate;
@@ -304,12 +308,14 @@ public class ConfigurationCreateParams extends ApiRequestParams {
         InvoiceHistory invoiceHistory,
         PaymentMethodUpdate paymentMethodUpdate,
         SubscriptionCancel subscriptionCancel,
+        SubscriptionPause subscriptionPause,
         SubscriptionUpdate subscriptionUpdate) {
       this.customerUpdate = customerUpdate;
       this.extraParams = extraParams;
       this.invoiceHistory = invoiceHistory;
       this.paymentMethodUpdate = paymentMethodUpdate;
       this.subscriptionCancel = subscriptionCancel;
+      this.subscriptionPause = subscriptionPause;
       this.subscriptionUpdate = subscriptionUpdate;
     }
 
@@ -328,6 +334,8 @@ public class ConfigurationCreateParams extends ApiRequestParams {
 
       private SubscriptionCancel subscriptionCancel;
 
+      private SubscriptionPause subscriptionPause;
+
       private SubscriptionUpdate subscriptionUpdate;
 
       /** Finalize and obtain parameter instance from this builder. */
@@ -338,6 +346,7 @@ public class ConfigurationCreateParams extends ApiRequestParams {
             this.invoiceHistory,
             this.paymentMethodUpdate,
             this.subscriptionCancel,
+            this.subscriptionPause,
             this.subscriptionUpdate);
       }
 
@@ -388,6 +397,12 @@ public class ConfigurationCreateParams extends ApiRequestParams {
       /** Information about canceling subscriptions in the portal. */
       public Builder setSubscriptionCancel(SubscriptionCancel subscriptionCancel) {
         this.subscriptionCancel = subscriptionCancel;
+        return this;
+      }
+
+      /** Information about pausing subscriptions in the portal. */
+      public Builder setSubscriptionPause(SubscriptionPause subscriptionPause) {
+        this.subscriptionPause = subscriptionPause;
         return this;
       }
 
@@ -836,6 +851,76 @@ public class ConfigurationCreateParams extends ApiRequestParams {
 
         ProrationBehavior(String value) {
           this.value = value;
+        }
+      }
+    }
+
+    @Getter
+    public static class SubscriptionPause {
+      /** Whether the feature is enabled. */
+      @SerializedName("enabled")
+      Boolean enabled;
+
+      /**
+       * Map of extra parameters for custom features not available in this client library. The
+       * content in this map is not serialized under this field's {@code @SerializedName} value.
+       * Instead, each key/value pair is serialized as if the key is a root-level field (serialized)
+       * name in this param object. Effectively, this map is flattened to its parent instance.
+       */
+      @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
+      Map<String, Object> extraParams;
+
+      private SubscriptionPause(Boolean enabled, Map<String, Object> extraParams) {
+        this.enabled = enabled;
+        this.extraParams = extraParams;
+      }
+
+      public static Builder builder() {
+        return new Builder();
+      }
+
+      public static class Builder {
+        private Boolean enabled;
+
+        private Map<String, Object> extraParams;
+
+        /** Finalize and obtain parameter instance from this builder. */
+        public SubscriptionPause build() {
+          return new SubscriptionPause(this.enabled, this.extraParams);
+        }
+
+        /** Whether the feature is enabled. */
+        public Builder setEnabled(Boolean enabled) {
+          this.enabled = enabled;
+          return this;
+        }
+
+        /**
+         * Add a key/value pair to `extraParams` map. A map is initialized for the first
+         * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
+         * map. See {@link ConfigurationCreateParams.Features.SubscriptionPause#extraParams} for the
+         * field documentation.
+         */
+        public Builder putExtraParam(String key, Object value) {
+          if (this.extraParams == null) {
+            this.extraParams = new HashMap<>();
+          }
+          this.extraParams.put(key, value);
+          return this;
+        }
+
+        /**
+         * Add all map key/value pairs to `extraParams` map. A map is initialized for the first
+         * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
+         * map. See {@link ConfigurationCreateParams.Features.SubscriptionPause#extraParams} for the
+         * field documentation.
+         */
+        public Builder putAllExtraParam(Map<String, Object> map) {
+          if (this.extraParams == null) {
+            this.extraParams = new HashMap<>();
+          }
+          this.extraParams.putAll(map);
+          return this;
         }
       }
     }
