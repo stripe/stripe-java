@@ -3,6 +3,7 @@ package com.stripe.param.checkout;
 
 import com.google.gson.annotations.SerializedName;
 import com.stripe.net.ApiRequestParams;
+import com.stripe.param.common.EmptyParam;
 import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -117,6 +118,10 @@ public class SessionCreateParams extends ApiRequestParams {
   @SerializedName("payment_intent_data")
   PaymentIntentData paymentIntentData;
 
+  /** Payment-method-specific configuration. */
+  @SerializedName("payment_method_options")
+  PaymentMethodOptions paymentMethodOptions;
+
   /**
    * A list of the types of payment methods (e.g., {@code card}) this Checkout Session can accept.
    *
@@ -186,6 +191,7 @@ public class SessionCreateParams extends ApiRequestParams {
       Map<String, String> metadata,
       Mode mode,
       PaymentIntentData paymentIntentData,
+      PaymentMethodOptions paymentMethodOptions,
       List<PaymentMethodType> paymentMethodTypes,
       SetupIntentData setupIntentData,
       ShippingAddressCollection shippingAddressCollection,
@@ -207,6 +213,7 @@ public class SessionCreateParams extends ApiRequestParams {
     this.metadata = metadata;
     this.mode = mode;
     this.paymentIntentData = paymentIntentData;
+    this.paymentMethodOptions = paymentMethodOptions;
     this.paymentMethodTypes = paymentMethodTypes;
     this.setupIntentData = setupIntentData;
     this.shippingAddressCollection = shippingAddressCollection;
@@ -249,6 +256,8 @@ public class SessionCreateParams extends ApiRequestParams {
 
     private PaymentIntentData paymentIntentData;
 
+    private PaymentMethodOptions paymentMethodOptions;
+
     private List<PaymentMethodType> paymentMethodTypes;
 
     private SetupIntentData setupIntentData;
@@ -280,6 +289,7 @@ public class SessionCreateParams extends ApiRequestParams {
           this.metadata,
           this.mode,
           this.paymentIntentData,
+          this.paymentMethodOptions,
           this.paymentMethodTypes,
           this.setupIntentData,
           this.shippingAddressCollection,
@@ -496,6 +506,12 @@ public class SessionCreateParams extends ApiRequestParams {
      */
     public Builder setPaymentIntentData(PaymentIntentData paymentIntentData) {
       this.paymentIntentData = paymentIntentData;
+      return this;
+    }
+
+    /** Payment-method-specific configuration. */
+    public Builder setPaymentMethodOptions(PaymentMethodOptions paymentMethodOptions) {
+      this.paymentMethodOptions = paymentMethodOptions;
       return this;
     }
 
@@ -2410,6 +2426,399 @@ public class SessionCreateParams extends ApiRequestParams {
   }
 
   @Getter
+  public static class PaymentMethodOptions {
+    /** contains details about the ACSS Debit payment method options. */
+    @SerializedName("acss_debit")
+    AcssDebit acssDebit;
+
+    /**
+     * Map of extra parameters for custom features not available in this client library. The content
+     * in this map is not serialized under this field's {@code @SerializedName} value. Instead, each
+     * key/value pair is serialized as if the key is a root-level field (serialized) name in this
+     * param object. Effectively, this map is flattened to its parent instance.
+     */
+    @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
+    Map<String, Object> extraParams;
+
+    private PaymentMethodOptions(AcssDebit acssDebit, Map<String, Object> extraParams) {
+      this.acssDebit = acssDebit;
+      this.extraParams = extraParams;
+    }
+
+    public static Builder builder() {
+      return new Builder();
+    }
+
+    public static class Builder {
+      private AcssDebit acssDebit;
+
+      private Map<String, Object> extraParams;
+
+      /** Finalize and obtain parameter instance from this builder. */
+      public PaymentMethodOptions build() {
+        return new PaymentMethodOptions(this.acssDebit, this.extraParams);
+      }
+
+      /** contains details about the ACSS Debit payment method options. */
+      public Builder setAcssDebit(AcssDebit acssDebit) {
+        this.acssDebit = acssDebit;
+        return this;
+      }
+
+      /**
+       * Add a key/value pair to `extraParams` map. A map is initialized for the first `put/putAll`
+       * call, and subsequent calls add additional key/value pairs to the original map. See {@link
+       * SessionCreateParams.PaymentMethodOptions#extraParams} for the field documentation.
+       */
+      public Builder putExtraParam(String key, Object value) {
+        if (this.extraParams == null) {
+          this.extraParams = new HashMap<>();
+        }
+        this.extraParams.put(key, value);
+        return this;
+      }
+
+      /**
+       * Add all map key/value pairs to `extraParams` map. A map is initialized for the first
+       * `put/putAll` call, and subsequent calls add additional key/value pairs to the original map.
+       * See {@link SessionCreateParams.PaymentMethodOptions#extraParams} for the field
+       * documentation.
+       */
+      public Builder putAllExtraParam(Map<String, Object> map) {
+        if (this.extraParams == null) {
+          this.extraParams = new HashMap<>();
+        }
+        this.extraParams.putAll(map);
+        return this;
+      }
+    }
+
+    @Getter
+    public static class AcssDebit {
+      /**
+       * Three-letter <a href="https://www.iso.org/iso-4217-currency-codes.html">ISO currency
+       * code</a>, in lowercase. Must be a <a href="https://stripe.com/docs/currencies">supported
+       * currency</a>.
+       */
+      @SerializedName("currency")
+      Currency currency;
+
+      /**
+       * Map of extra parameters for custom features not available in this client library. The
+       * content in this map is not serialized under this field's {@code @SerializedName} value.
+       * Instead, each key/value pair is serialized as if the key is a root-level field (serialized)
+       * name in this param object. Effectively, this map is flattened to its parent instance.
+       */
+      @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
+      Map<String, Object> extraParams;
+
+      /** Additional fields for Mandate creation. */
+      @SerializedName("mandate_options")
+      MandateOptions mandateOptions;
+
+      /** Verification method for the intent. */
+      @SerializedName("verification_method")
+      VerificationMethod verificationMethod;
+
+      private AcssDebit(
+          Currency currency,
+          Map<String, Object> extraParams,
+          MandateOptions mandateOptions,
+          VerificationMethod verificationMethod) {
+        this.currency = currency;
+        this.extraParams = extraParams;
+        this.mandateOptions = mandateOptions;
+        this.verificationMethod = verificationMethod;
+      }
+
+      public static Builder builder() {
+        return new Builder();
+      }
+
+      public static class Builder {
+        private Currency currency;
+
+        private Map<String, Object> extraParams;
+
+        private MandateOptions mandateOptions;
+
+        private VerificationMethod verificationMethod;
+
+        /** Finalize and obtain parameter instance from this builder. */
+        public AcssDebit build() {
+          return new AcssDebit(
+              this.currency, this.extraParams, this.mandateOptions, this.verificationMethod);
+        }
+
+        /**
+         * Three-letter <a href="https://www.iso.org/iso-4217-currency-codes.html">ISO currency
+         * code</a>, in lowercase. Must be a <a href="https://stripe.com/docs/currencies">supported
+         * currency</a>.
+         */
+        public Builder setCurrency(Currency currency) {
+          this.currency = currency;
+          return this;
+        }
+
+        /**
+         * Add a key/value pair to `extraParams` map. A map is initialized for the first
+         * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
+         * map. See {@link SessionCreateParams.PaymentMethodOptions.AcssDebit#extraParams} for the
+         * field documentation.
+         */
+        public Builder putExtraParam(String key, Object value) {
+          if (this.extraParams == null) {
+            this.extraParams = new HashMap<>();
+          }
+          this.extraParams.put(key, value);
+          return this;
+        }
+
+        /**
+         * Add all map key/value pairs to `extraParams` map. A map is initialized for the first
+         * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
+         * map. See {@link SessionCreateParams.PaymentMethodOptions.AcssDebit#extraParams} for the
+         * field documentation.
+         */
+        public Builder putAllExtraParam(Map<String, Object> map) {
+          if (this.extraParams == null) {
+            this.extraParams = new HashMap<>();
+          }
+          this.extraParams.putAll(map);
+          return this;
+        }
+
+        /** Additional fields for Mandate creation. */
+        public Builder setMandateOptions(MandateOptions mandateOptions) {
+          this.mandateOptions = mandateOptions;
+          return this;
+        }
+
+        /** Verification method for the intent. */
+        public Builder setVerificationMethod(VerificationMethod verificationMethod) {
+          this.verificationMethod = verificationMethod;
+          return this;
+        }
+      }
+
+      @Getter
+      public static class MandateOptions {
+        /**
+         * A URL for custom mandate text to render during confirmation step. The URL will be
+         * rendered with additional GET parameters {@code payment_intent} and {@code
+         * payment_intent_client_secret} when confirming a Payment Intent, or {@code setup_intent}
+         * and {@code setup_intent_client_secret} when confirming a Setup Intent.
+         */
+        @SerializedName("custom_mandate_url")
+        Object customMandateUrl;
+
+        /**
+         * Map of extra parameters for custom features not available in this client library. The
+         * content in this map is not serialized under this field's {@code @SerializedName} value.
+         * Instead, each key/value pair is serialized as if the key is a root-level field
+         * (serialized) name in this param object. Effectively, this map is flattened to its parent
+         * instance.
+         */
+        @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
+        Map<String, Object> extraParams;
+
+        /**
+         * Description of the mandate interval. Only required if 'payment_schedule' parameter is
+         * 'interval' or 'combined'.
+         */
+        @SerializedName("interval_description")
+        String intervalDescription;
+
+        /** Payment schedule for the mandate. */
+        @SerializedName("payment_schedule")
+        PaymentSchedule paymentSchedule;
+
+        /** Transaction type of the mandate. */
+        @SerializedName("transaction_type")
+        TransactionType transactionType;
+
+        private MandateOptions(
+            Object customMandateUrl,
+            Map<String, Object> extraParams,
+            String intervalDescription,
+            PaymentSchedule paymentSchedule,
+            TransactionType transactionType) {
+          this.customMandateUrl = customMandateUrl;
+          this.extraParams = extraParams;
+          this.intervalDescription = intervalDescription;
+          this.paymentSchedule = paymentSchedule;
+          this.transactionType = transactionType;
+        }
+
+        public static Builder builder() {
+          return new Builder();
+        }
+
+        public static class Builder {
+          private Object customMandateUrl;
+
+          private Map<String, Object> extraParams;
+
+          private String intervalDescription;
+
+          private PaymentSchedule paymentSchedule;
+
+          private TransactionType transactionType;
+
+          /** Finalize and obtain parameter instance from this builder. */
+          public MandateOptions build() {
+            return new MandateOptions(
+                this.customMandateUrl,
+                this.extraParams,
+                this.intervalDescription,
+                this.paymentSchedule,
+                this.transactionType);
+          }
+
+          /**
+           * A URL for custom mandate text to render during confirmation step. The URL will be
+           * rendered with additional GET parameters {@code payment_intent} and {@code
+           * payment_intent_client_secret} when confirming a Payment Intent, or {@code setup_intent}
+           * and {@code setup_intent_client_secret} when confirming a Setup Intent.
+           */
+          public Builder setCustomMandateUrl(String customMandateUrl) {
+            this.customMandateUrl = customMandateUrl;
+            return this;
+          }
+
+          /**
+           * A URL for custom mandate text to render during confirmation step. The URL will be
+           * rendered with additional GET parameters {@code payment_intent} and {@code
+           * payment_intent_client_secret} when confirming a Payment Intent, or {@code setup_intent}
+           * and {@code setup_intent_client_secret} when confirming a Setup Intent.
+           */
+          public Builder setCustomMandateUrl(EmptyParam customMandateUrl) {
+            this.customMandateUrl = customMandateUrl;
+            return this;
+          }
+
+          /**
+           * Add a key/value pair to `extraParams` map. A map is initialized for the first
+           * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
+           * map. See {@link
+           * SessionCreateParams.PaymentMethodOptions.AcssDebit.MandateOptions#extraParams} for the
+           * field documentation.
+           */
+          public Builder putExtraParam(String key, Object value) {
+            if (this.extraParams == null) {
+              this.extraParams = new HashMap<>();
+            }
+            this.extraParams.put(key, value);
+            return this;
+          }
+
+          /**
+           * Add all map key/value pairs to `extraParams` map. A map is initialized for the first
+           * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
+           * map. See {@link
+           * SessionCreateParams.PaymentMethodOptions.AcssDebit.MandateOptions#extraParams} for the
+           * field documentation.
+           */
+          public Builder putAllExtraParam(Map<String, Object> map) {
+            if (this.extraParams == null) {
+              this.extraParams = new HashMap<>();
+            }
+            this.extraParams.putAll(map);
+            return this;
+          }
+
+          /**
+           * Description of the mandate interval. Only required if 'payment_schedule' parameter is
+           * 'interval' or 'combined'.
+           */
+          public Builder setIntervalDescription(String intervalDescription) {
+            this.intervalDescription = intervalDescription;
+            return this;
+          }
+
+          /** Payment schedule for the mandate. */
+          public Builder setPaymentSchedule(PaymentSchedule paymentSchedule) {
+            this.paymentSchedule = paymentSchedule;
+            return this;
+          }
+
+          /** Transaction type of the mandate. */
+          public Builder setTransactionType(TransactionType transactionType) {
+            this.transactionType = transactionType;
+            return this;
+          }
+        }
+
+        public enum PaymentSchedule implements ApiRequestParams.EnumParam {
+          @SerializedName("combined")
+          COMBINED("combined"),
+
+          @SerializedName("interval")
+          INTERVAL("interval"),
+
+          @SerializedName("sporadic")
+          SPORADIC("sporadic");
+
+          @Getter(onMethod_ = {@Override})
+          private final String value;
+
+          PaymentSchedule(String value) {
+            this.value = value;
+          }
+        }
+
+        public enum TransactionType implements ApiRequestParams.EnumParam {
+          @SerializedName("business")
+          BUSINESS("business"),
+
+          @SerializedName("personal")
+          PERSONAL("personal");
+
+          @Getter(onMethod_ = {@Override})
+          private final String value;
+
+          TransactionType(String value) {
+            this.value = value;
+          }
+        }
+      }
+
+      public enum Currency implements ApiRequestParams.EnumParam {
+        @SerializedName("cad")
+        CAD("cad"),
+
+        @SerializedName("usd")
+        USD("usd");
+
+        @Getter(onMethod_ = {@Override})
+        private final String value;
+
+        Currency(String value) {
+          this.value = value;
+        }
+      }
+
+      public enum VerificationMethod implements ApiRequestParams.EnumParam {
+        @SerializedName("automatic")
+        AUTOMATIC("automatic"),
+
+        @SerializedName("instant")
+        INSTANT("instant"),
+
+        @SerializedName("microdeposits")
+        MICRODEPOSITS("microdeposits");
+
+        @Getter(onMethod_ = {@Override})
+        private final String value;
+
+        VerificationMethod(String value) {
+          this.value = value;
+        }
+      }
+    }
+  }
+
+  @Getter
   public static class SetupIntentData {
     /** An arbitrary string attached to the object. Often useful for displaying to users. */
     @SerializedName("description")
@@ -4032,6 +4441,9 @@ public class SessionCreateParams extends ApiRequestParams {
   }
 
   public enum PaymentMethodType implements ApiRequestParams.EnumParam {
+    @SerializedName("acss_debit")
+    ACSS_DEBIT("acss_debit"),
+
     @SerializedName("afterpay_clearpay")
     AFTERPAY_CLEARPAY("afterpay_clearpay"),
 

@@ -224,6 +224,9 @@ public class SetupAttempt extends ApiResource implements HasId {
   @Setter
   @EqualsAndHashCode(callSuper = false)
   public static class PaymentMethodDetails extends StripeObject {
+    @SerializedName("acss_debit")
+    AcssDebit acssDebit;
+
     @SerializedName("au_becs_debit")
     AuBecsDebit auBecsDebit;
 
@@ -255,6 +258,11 @@ public class SetupAttempt extends ApiResource implements HasId {
      */
     @SerializedName("type")
     String type;
+
+    @Getter
+    @Setter
+    @EqualsAndHashCode(callSuper = false)
+    public static class AcssDebit extends StripeObject {}
 
     @Getter
     @Setter

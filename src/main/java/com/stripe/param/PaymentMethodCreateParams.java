@@ -13,6 +13,13 @@ import lombok.Getter;
 @Getter
 public class PaymentMethodCreateParams extends ApiRequestParams {
   /**
+   * If this is an {@code acss_debit} PaymentMethod, this hash contains details about the ACSS Debit
+   * payment method.
+   */
+  @SerializedName("acss_debit")
+  AcssDebit acssDebit;
+
+  /**
    * If this is an {@code AfterpayClearpay} PaymentMethod, this hash contains details about the
    * AfterpayClearpay payment method.
    */
@@ -173,6 +180,7 @@ public class PaymentMethodCreateParams extends ApiRequestParams {
   Type type;
 
   private PaymentMethodCreateParams(
+      AcssDebit acssDebit,
       AfterpayClearpay afterpayClearpay,
       Alipay alipay,
       AuBecsDebit auBecsDebit,
@@ -196,6 +204,7 @@ public class PaymentMethodCreateParams extends ApiRequestParams {
       SepaDebit sepaDebit,
       Sofort sofort,
       Type type) {
+    this.acssDebit = acssDebit;
     this.afterpayClearpay = afterpayClearpay;
     this.alipay = alipay;
     this.auBecsDebit = auBecsDebit;
@@ -226,6 +235,8 @@ public class PaymentMethodCreateParams extends ApiRequestParams {
   }
 
   public static class Builder {
+    private AcssDebit acssDebit;
+
     private AfterpayClearpay afterpayClearpay;
 
     private Alipay alipay;
@@ -275,6 +286,7 @@ public class PaymentMethodCreateParams extends ApiRequestParams {
     /** Finalize and obtain parameter instance from this builder. */
     public PaymentMethodCreateParams build() {
       return new PaymentMethodCreateParams(
+          this.acssDebit,
           this.afterpayClearpay,
           this.alipay,
           this.auBecsDebit,
@@ -298,6 +310,15 @@ public class PaymentMethodCreateParams extends ApiRequestParams {
           this.sepaDebit,
           this.sofort,
           this.type);
+    }
+
+    /**
+     * If this is an {@code acss_debit} PaymentMethod, this hash contains details about the ACSS
+     * Debit payment method.
+     */
+    public Builder setAcssDebit(AcssDebit acssDebit) {
+      this.acssDebit = acssDebit;
+      return this;
     }
 
     /**
@@ -568,6 +589,105 @@ public class PaymentMethodCreateParams extends ApiRequestParams {
     public Builder setType(Type type) {
       this.type = type;
       return this;
+    }
+  }
+
+  @Getter
+  public static class AcssDebit {
+    /** Customer's bank account number. */
+    @SerializedName("account_number")
+    String accountNumber;
+
+    /**
+     * Map of extra parameters for custom features not available in this client library. The content
+     * in this map is not serialized under this field's {@code @SerializedName} value. Instead, each
+     * key/value pair is serialized as if the key is a root-level field (serialized) name in this
+     * param object. Effectively, this map is flattened to its parent instance.
+     */
+    @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
+    Map<String, Object> extraParams;
+
+    /** Institution number of the customer's bank. */
+    @SerializedName("institution_number")
+    String institutionNumber;
+
+    /** Transit number of the customer's bank. */
+    @SerializedName("transit_number")
+    String transitNumber;
+
+    private AcssDebit(
+        String accountNumber,
+        Map<String, Object> extraParams,
+        String institutionNumber,
+        String transitNumber) {
+      this.accountNumber = accountNumber;
+      this.extraParams = extraParams;
+      this.institutionNumber = institutionNumber;
+      this.transitNumber = transitNumber;
+    }
+
+    public static Builder builder() {
+      return new Builder();
+    }
+
+    public static class Builder {
+      private String accountNumber;
+
+      private Map<String, Object> extraParams;
+
+      private String institutionNumber;
+
+      private String transitNumber;
+
+      /** Finalize and obtain parameter instance from this builder. */
+      public AcssDebit build() {
+        return new AcssDebit(
+            this.accountNumber, this.extraParams, this.institutionNumber, this.transitNumber);
+      }
+
+      /** Customer's bank account number. */
+      public Builder setAccountNumber(String accountNumber) {
+        this.accountNumber = accountNumber;
+        return this;
+      }
+
+      /**
+       * Add a key/value pair to `extraParams` map. A map is initialized for the first `put/putAll`
+       * call, and subsequent calls add additional key/value pairs to the original map. See {@link
+       * PaymentMethodCreateParams.AcssDebit#extraParams} for the field documentation.
+       */
+      public Builder putExtraParam(String key, Object value) {
+        if (this.extraParams == null) {
+          this.extraParams = new HashMap<>();
+        }
+        this.extraParams.put(key, value);
+        return this;
+      }
+
+      /**
+       * Add all map key/value pairs to `extraParams` map. A map is initialized for the first
+       * `put/putAll` call, and subsequent calls add additional key/value pairs to the original map.
+       * See {@link PaymentMethodCreateParams.AcssDebit#extraParams} for the field documentation.
+       */
+      public Builder putAllExtraParam(Map<String, Object> map) {
+        if (this.extraParams == null) {
+          this.extraParams = new HashMap<>();
+        }
+        this.extraParams.putAll(map);
+        return this;
+      }
+
+      /** Institution number of the customer's bank. */
+      public Builder setInstitutionNumber(String institutionNumber) {
+        this.institutionNumber = institutionNumber;
+        return this;
+      }
+
+      /** Transit number of the customer's bank. */
+      public Builder setTransitNumber(String transitNumber) {
+        this.transitNumber = transitNumber;
+        return this;
+      }
     }
   }
 
@@ -2321,6 +2441,9 @@ public class PaymentMethodCreateParams extends ApiRequestParams {
   }
 
   public enum Type implements ApiRequestParams.EnumParam {
+    @SerializedName("acss_debit")
+    ACSS_DEBIT("acss_debit"),
+
     @SerializedName("afterpay_clearpay")
     AFTERPAY_CLEARPAY("afterpay_clearpay"),
 

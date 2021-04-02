@@ -687,6 +687,9 @@ public class SetupIntent extends ApiResource implements HasId, MetadataStore<Set
      */
     @SerializedName("use_stripe_sdk")
     Map<String, Object> useStripeSdk;
+
+    @SerializedName("verify_with_microdeposits")
+    PaymentIntent.NextActionVerifyWithMicrodeposits verifyWithMicrodeposits;
   }
 
   @Getter
@@ -709,11 +712,70 @@ public class SetupIntent extends ApiResource implements HasId, MetadataStore<Set
   @Setter
   @EqualsAndHashCode(callSuper = false)
   public static class PaymentMethodOptions extends StripeObject {
+    @SerializedName("acss_debit")
+    AcssDebit acssDebit;
+
     @SerializedName("card")
     Card card;
 
     @SerializedName("sepa_debit")
     SepaDebit sepaDebit;
+
+    @Getter
+    @Setter
+    @EqualsAndHashCode(callSuper = false)
+    public static class AcssDebit extends StripeObject {
+      /**
+       * Currency supported by the bank account
+       *
+       * <p>One of {@code cad}, or {@code usd}.
+       */
+      @SerializedName("currency")
+      String currency;
+
+      @SerializedName("mandate_options")
+      AcssDebitMandateOptions mandateOptions;
+
+      /**
+       * Bank account verification method.
+       *
+       * <p>One of {@code automatic}, {@code instant}, or {@code microdeposits}.
+       */
+      @SerializedName("verification_method")
+      String verificationMethod;
+    }
+
+    @Getter
+    @Setter
+    @EqualsAndHashCode(callSuper = false)
+    public static class AcssDebitMandateOptions extends StripeObject {
+      /** A URL for custom mandate text. */
+      @SerializedName("custom_mandate_url")
+      String customMandateUrl;
+
+      /**
+       * Description of the interval. Only required if 'payment_schedule' parmeter is 'interval' or
+       * 'combined'.
+       */
+      @SerializedName("interval_description")
+      String intervalDescription;
+
+      /**
+       * Payment schedule for the mandate.
+       *
+       * <p>One of {@code combined}, {@code interval}, or {@code sporadic}.
+       */
+      @SerializedName("payment_schedule")
+      String paymentSchedule;
+
+      /**
+       * Transaction type of the mandate.
+       *
+       * <p>One of {@code business}, or {@code personal}.
+       */
+      @SerializedName("transaction_type")
+      String transactionType;
+    }
 
     @Getter
     @Setter

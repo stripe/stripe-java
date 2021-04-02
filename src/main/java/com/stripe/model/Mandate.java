@@ -202,6 +202,9 @@ public class Mandate extends ApiResource implements HasId {
   @Setter
   @EqualsAndHashCode(callSuper = false)
   public static class PaymentMethodDetails extends StripeObject {
+    @SerializedName("acss_debit")
+    AcssDebit acssDebit;
+
     @SerializedName("au_becs_debit")
     AuBecsDebit auBecsDebit;
 
@@ -221,6 +224,34 @@ public class Mandate extends ApiResource implements HasId {
      */
     @SerializedName("type")
     String type;
+
+    @Getter
+    @Setter
+    @EqualsAndHashCode(callSuper = false)
+    public static class AcssDebit extends StripeObject {
+      /**
+       * Description of the interval. Only required if 'payment_schedule' parmeter is 'interval' or
+       * 'combined'.
+       */
+      @SerializedName("interval_description")
+      String intervalDescription;
+
+      /**
+       * Payment schedule for the mandate.
+       *
+       * <p>One of {@code combined}, {@code interval}, or {@code sporadic}.
+       */
+      @SerializedName("payment_schedule")
+      String paymentSchedule;
+
+      /**
+       * Transaction type of the mandate.
+       *
+       * <p>One of {@code business}, or {@code personal}.
+       */
+      @SerializedName("transaction_type")
+      String transactionType;
+    }
 
     @Getter
     @Setter

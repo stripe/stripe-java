@@ -4,6 +4,7 @@ package com.stripe.net;
 import com.google.gson.TypeAdapterFactory;
 import com.stripe.model.BalanceTransactionSourceTypeAdapterFactory;
 import com.stripe.model.ExternalAccountTypeAdapterFactory;
+import com.stripe.model.PaymentPagesCheckoutSessionCheckoutSessionResourcePaymentMethodOptionsTypeAdapterFactory;
 import com.stripe.model.PaymentSourceTypeAdapterFactory;
 import java.util.ArrayList;
 import java.util.List;
@@ -17,6 +18,8 @@ final class ApiResourceTypeAdapterFactoryProvider {
   static {
     factories.add(new BalanceTransactionSourceTypeAdapterFactory());
     factories.add(new ExternalAccountTypeAdapterFactory());
+    factories.add(
+        new PaymentPagesCheckoutSessionCheckoutSessionResourcePaymentMethodOptionsTypeAdapterFactory());
     factories.add(new PaymentSourceTypeAdapterFactory());
   }
 
