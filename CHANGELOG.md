@@ -1,5 +1,9 @@
 # Changelog
 
+## 20.46.0 - 2021-04-02
+* [#1194](https://github.com/stripe/stripe-java/pull/1194) API Updates
+  * Add support for `subscription_pause` on `BillingPortal.ConfigurationUpdateParams.features`, `BillingPortalCreateParams.features` and `BillingPortal.Configuration.features`
+
 ## 20.45.0 - 2021-03-31
 * [#1193](https://github.com/stripe/stripe-java/pull/1193) API Updates
   * Add support for `transfer_data` on `Checkout.SessionCreateParams.subscription_data`
