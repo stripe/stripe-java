@@ -689,7 +689,23 @@ public class SetupIntent extends ApiResource implements HasId, MetadataStore<Set
     Map<String, Object> useStripeSdk;
 
     @SerializedName("verify_with_microdeposits")
-    PaymentIntent.NextActionVerifyWithMicrodeposits verifyWithMicrodeposits;
+    VerifyWithMicrodeposits verifyWithMicrodeposits;
+
+    @Getter
+    @Setter
+    @EqualsAndHashCode(callSuper = false)
+    public static class VerifyWithMicrodeposits extends StripeObject {
+      /** The timestamp when the microdeposits are expected to land. */
+      @SerializedName("arrival_date")
+      Long arrivalDate;
+
+      /**
+       * The URL for the hosted verification page, which allows customers to verify their bank
+       * account.
+       */
+      @SerializedName("hosted_verification_url")
+      String hostedVerificationUrl;
+    }
   }
 
   @Getter
@@ -734,7 +750,7 @@ public class SetupIntent extends ApiResource implements HasId, MetadataStore<Set
       String currency;
 
       @SerializedName("mandate_options")
-      AcssDebitMandateOptions mandateOptions;
+      MandateOptions mandateOptions;
 
       /**
        * Bank account verification method.
@@ -748,7 +764,28 @@ public class SetupIntent extends ApiResource implements HasId, MetadataStore<Set
     @Getter
     @Setter
     @EqualsAndHashCode(callSuper = false)
-    public static class AcssDebitMandateOptions extends StripeObject {
+    public static class Card extends StripeObject {
+      /**
+       * We strongly recommend that you rely on our SCA Engine to automatically prompt your
+       * customers for authentication based on risk level and <a
+       * href="https://stripe.com/docs/strong-customer-authentication">other requirements</a>.
+       * However, if you wish to request 3D Secure based on logic from your own fraud engine,
+       * provide this option. Permitted values include: {@code automatic} or {@code any}. If not
+       * provided, defaults to {@code automatic}. Read our guide on <a
+       * href="https://stripe.com/docs/payments/3d-secure#manual-three-ds">manually requesting 3D
+       * Secure</a> for more information on how this configuration interacts with Radar and our SCA
+       * Engine.
+       *
+       * <p>One of {@code any}, {@code automatic}, or {@code challenge_only}.
+       */
+      @SerializedName("request_three_d_secure")
+      String requestThreeDSecure;
+    }
+
+    @Getter
+    @Setter
+    @EqualsAndHashCode(callSuper = false)
+    public static class MandateOptions extends StripeObject {
       /** A URL for custom mandate text. */
       @SerializedName("custom_mandate_url")
       String customMandateUrl;
@@ -780,27 +817,6 @@ public class SetupIntent extends ApiResource implements HasId, MetadataStore<Set
     @Getter
     @Setter
     @EqualsAndHashCode(callSuper = false)
-    public static class Card extends StripeObject {
-      /**
-       * We strongly recommend that you rely on our SCA Engine to automatically prompt your
-       * customers for authentication based on risk level and <a
-       * href="https://stripe.com/docs/strong-customer-authentication">other requirements</a>.
-       * However, if you wish to request 3D Secure based on logic from your own fraud engine,
-       * provide this option. Permitted values include: {@code automatic} or {@code any}. If not
-       * provided, defaults to {@code automatic}. Read our guide on <a
-       * href="https://stripe.com/docs/payments/3d-secure#manual-three-ds">manually requesting 3D
-       * Secure</a> for more information on how this configuration interacts with Radar and our SCA
-       * Engine.
-       *
-       * <p>One of {@code any}, {@code automatic}, or {@code challenge_only}.
-       */
-      @SerializedName("request_three_d_secure")
-      String requestThreeDSecure;
-    }
-
-    @Getter
-    @Setter
-    @EqualsAndHashCode(callSuper = false)
     public static class SepaDebit extends StripeObject {
       @SerializedName("mandate_options")
       SepaDebitMandateOptions mandateOptions;
@@ -810,5 +826,21 @@ public class SetupIntent extends ApiResource implements HasId, MetadataStore<Set
     @Setter
     @EqualsAndHashCode(callSuper = false)
     public static class SepaDebitMandateOptions extends StripeObject {}
+  }
+
+  @Getter
+  @Setter
+  @EqualsAndHashCode(callSuper = false)
+  public static class VerifyWithMicrodeposits extends StripeObject {
+    /** The timestamp when the microdeposits are expected to land. */
+    @SerializedName("arrival_date")
+    Long arrivalDate;
+
+    /**
+     * The URL for the hosted verification page, which allows customers to verify their bank
+     * account.
+     */
+    @SerializedName("hosted_verification_url")
+    String hostedVerificationUrl;
   }
 }

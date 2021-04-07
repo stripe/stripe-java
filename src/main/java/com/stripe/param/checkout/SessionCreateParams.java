@@ -36,11 +36,23 @@ public class SessionCreateParams extends ApiRequestParams {
   String clientReferenceId;
 
   /**
-   * ID of an existing customer, if one exists. The email stored on the customer will be used to
-   * prefill the email field on the Checkout page. If the customer changes their email on the
-   * Checkout page, the Customer object will be updated with the new email. If blank for Checkout
-   * Sessions in {@code payment} or {@code subscription} mode, Checkout will create a new customer
-   * object based on information provided during the payment flow.
+   * ID of an existing Customer, if one exists. In {@code payment} mode, the customer’s most recent
+   * card payment method will be used to prefill the email, name, card details, and billing address
+   * on the Checkout page. In {@code subscription} mode, the customer’s <a
+   * href="https://stripe.com/docs/api/customers/update#update_customer-invoice_settings-default_payment_method">default
+   * payment method</a> will be used if it’s a card, and otherwise the most recent card will be
+   * used. A valid billing address is required for Checkout to prefill the customer's card details.
+   *
+   * <p>If the customer changes their email on the Checkout page, the Customer object will be
+   * updated with the new email.
+   *
+   * <p>If blank for Checkout Sessions in {@code payment} or {@code subscription} mode, Checkout
+   * will create a new Customer object based on information provided during the payment flow.
+   *
+   * <p>You can set <a
+   * href="https://stripe.com/docs/api/checkout/sessions/create#create_checkout_session-payment_intent_data-setup_future_usage">{@code
+   * payment_intent_data.setup_future_usage}</a> to have Checkout automatically attach the payment
+   * method to the Customer you pass in for future reuse.
    */
   @SerializedName("customer")
   String customer;
@@ -330,11 +342,24 @@ public class SessionCreateParams extends ApiRequestParams {
     }
 
     /**
-     * ID of an existing customer, if one exists. The email stored on the customer will be used to
-     * prefill the email field on the Checkout page. If the customer changes their email on the
-     * Checkout page, the Customer object will be updated with the new email. If blank for Checkout
-     * Sessions in {@code payment} or {@code subscription} mode, Checkout will create a new customer
-     * object based on information provided during the payment flow.
+     * ID of an existing Customer, if one exists. In {@code payment} mode, the customer’s most
+     * recent card payment method will be used to prefill the email, name, card details, and billing
+     * address on the Checkout page. In {@code subscription} mode, the customer’s <a
+     * href="https://stripe.com/docs/api/customers/update#update_customer-invoice_settings-default_payment_method">default
+     * payment method</a> will be used if it’s a card, and otherwise the most recent card will be
+     * used. A valid billing address is required for Checkout to prefill the customer's card
+     * details.
+     *
+     * <p>If the customer changes their email on the Checkout page, the Customer object will be
+     * updated with the new email.
+     *
+     * <p>If blank for Checkout Sessions in {@code payment} or {@code subscription} mode, Checkout
+     * will create a new Customer object based on information provided during the payment flow.
+     *
+     * <p>You can set <a
+     * href="https://stripe.com/docs/api/checkout/sessions/create#create_checkout_session-payment_intent_data-setup_future_usage">{@code
+     * payment_intent_data.setup_future_usage}</a> to have Checkout automatically attach the payment
+     * method to the Customer you pass in for future reuse.
      */
     public Builder setCustomer(String customer) {
       this.customer = customer;

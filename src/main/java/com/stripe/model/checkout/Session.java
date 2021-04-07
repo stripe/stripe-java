@@ -10,7 +10,6 @@ import com.stripe.model.HasId;
 import com.stripe.model.LineItem;
 import com.stripe.model.LineItemCollection;
 import com.stripe.model.PaymentIntent;
-import com.stripe.model.PaymentPagesCheckoutSessionCheckoutSessionResourcePaymentMethodOptions;
 import com.stripe.model.SetupIntent;
 import com.stripe.model.ShippingDetails;
 import com.stripe.model.StripeObject;
@@ -160,7 +159,7 @@ public class Session extends ApiResource implements HasId {
    * CheckoutSession.
    */
   @SerializedName("payment_method_options")
-  PaymentPagesCheckoutSessionCheckoutSessionResourcePaymentMethodOptions paymentMethodOptions;
+  PaymentMethodOptions paymentMethodOptions;
 
   /**
    * A list of the types of payment methods (e.g. card) this Checkout Session is allowed to accept.
@@ -455,14 +454,7 @@ public class Session extends ApiResource implements HasId {
   @Getter
   @Setter
   @EqualsAndHashCode(callSuper = false)
-  public static class PaymentMethodOptionsForPayment extends StripeObject
-      implements PaymentPagesCheckoutSessionCheckoutSessionResourcePaymentMethodOptions {}
-
-  @Getter
-  @Setter
-  @EqualsAndHashCode(callSuper = false)
-  public static class PaymentMethodOptionsForSetup extends StripeObject
-      implements PaymentPagesCheckoutSessionCheckoutSessionResourcePaymentMethodOptions {}
+  public static class PaymentMethodOptions extends StripeObject {}
 
   @Getter
   @Setter

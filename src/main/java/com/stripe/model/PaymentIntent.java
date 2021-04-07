@@ -1082,7 +1082,23 @@ public class PaymentIntent extends ApiResource implements HasId, MetadataStore<P
     Map<String, Object> useStripeSdk;
 
     @SerializedName("verify_with_microdeposits")
-    NextActionVerifyWithMicrodeposits verifyWithMicrodeposits;
+    VerifyWithMicrodeposits verifyWithMicrodeposits;
+
+    @Getter
+    @Setter
+    @EqualsAndHashCode(callSuper = false)
+    public static class VerifyWithMicrodeposits extends StripeObject {
+      /** The timestamp when the microdeposits are expected to land. */
+      @SerializedName("arrival_date")
+      Long arrivalDate;
+
+      /**
+       * The URL for the hosted verification page, which allows customers to verify their bank
+       * account.
+       */
+      @SerializedName("hosted_verification_url")
+      String hostedVerificationUrl;
+    }
   }
 
   @Getter
@@ -1154,22 +1170,6 @@ public class PaymentIntent extends ApiResource implements HasId, MetadataStore<P
   @Getter
   @Setter
   @EqualsAndHashCode(callSuper = false)
-  public static class NextActionVerifyWithMicrodeposits extends StripeObject {
-    /** The timestamp when the microdeposits are expected to land. */
-    @SerializedName("arrival_date")
-    Long arrivalDate;
-
-    /**
-     * The URL for the hosted verification page, which allows customers to verify their bank
-     * account.
-     */
-    @SerializedName("hosted_verification_url")
-    String hostedVerificationUrl;
-  }
-
-  @Getter
-  @Setter
-  @EqualsAndHashCode(callSuper = false)
   public static class PaymentMethodOptions extends StripeObject {
     @SerializedName("acss_debit")
     AcssDebit acssDebit;
@@ -1200,7 +1200,7 @@ public class PaymentIntent extends ApiResource implements HasId, MetadataStore<P
     @EqualsAndHashCode(callSuper = false)
     public static class AcssDebit extends StripeObject {
       @SerializedName("mandate_options")
-      AcssDebitMandateOptions mandateOptions;
+      MandateOptions mandateOptions;
 
       /**
        * Bank account verification method.
@@ -1209,38 +1209,6 @@ public class PaymentIntent extends ApiResource implements HasId, MetadataStore<P
        */
       @SerializedName("verification_method")
       String verificationMethod;
-    }
-
-    @Getter
-    @Setter
-    @EqualsAndHashCode(callSuper = false)
-    public static class AcssDebitMandateOptions extends StripeObject {
-      /** A URL for custom mandate text. */
-      @SerializedName("custom_mandate_url")
-      String customMandateUrl;
-
-      /**
-       * Description of the interval. Only required if 'payment_schedule' parmeter is 'interval' or
-       * 'combined'.
-       */
-      @SerializedName("interval_description")
-      String intervalDescription;
-
-      /**
-       * Payment schedule for the mandate.
-       *
-       * <p>One of {@code combined}, {@code interval}, or {@code sporadic}.
-       */
-      @SerializedName("payment_schedule")
-      String paymentSchedule;
-
-      /**
-       * Transaction type of the mandate.
-       *
-       * <p>One of {@code business}, or {@code personal}.
-       */
-      @SerializedName("transaction_type")
-      String transactionType;
     }
 
     @Getter
@@ -1336,6 +1304,38 @@ public class PaymentIntent extends ApiResource implements HasId, MetadataStore<P
           String type;
         }
       }
+    }
+
+    @Getter
+    @Setter
+    @EqualsAndHashCode(callSuper = false)
+    public static class MandateOptions extends StripeObject {
+      /** A URL for custom mandate text. */
+      @SerializedName("custom_mandate_url")
+      String customMandateUrl;
+
+      /**
+       * Description of the interval. Only required if 'payment_schedule' parmeter is 'interval' or
+       * 'combined'.
+       */
+      @SerializedName("interval_description")
+      String intervalDescription;
+
+      /**
+       * Payment schedule for the mandate.
+       *
+       * <p>One of {@code combined}, {@code interval}, or {@code sporadic}.
+       */
+      @SerializedName("payment_schedule")
+      String paymentSchedule;
+
+      /**
+       * Transaction type of the mandate.
+       *
+       * <p>One of {@code business}, or {@code personal}.
+       */
+      @SerializedName("transaction_type")
+      String transactionType;
     }
 
     @Getter
