@@ -827,20 +827,4 @@ public class SetupIntent extends ApiResource implements HasId, MetadataStore<Set
     @EqualsAndHashCode(callSuper = false)
     public static class SepaDebitMandateOptions extends StripeObject {}
   }
-
-  @Getter
-  @Setter
-  @EqualsAndHashCode(callSuper = false)
-  public static class VerifyWithMicrodeposits extends StripeObject {
-    /** The timestamp when the microdeposits are expected to land. */
-    @SerializedName("arrival_date")
-    Long arrivalDate;
-
-    /**
-     * The URL for the hosted verification page, which allows customers to verify their bank
-     * account.
-     */
-    @SerializedName("hosted_verification_url")
-    String hostedVerificationUrl;
-  }
 }
