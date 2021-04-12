@@ -626,6 +626,15 @@ public class Account extends ApiResource implements MetadataStore<Account>, Paym
   @EqualsAndHashCode(callSuper = false)
   public static class Capabilities extends StripeObject {
     /**
+     * The status of the ACSS Direct Debits payments capability of the account, or whether the
+     * account can directly process ACSS Direct Debits charges.
+     *
+     * <p>One of {@code active}, {@code inactive}, or {@code pending}.
+     */
+    @SerializedName("acss_debit_payments")
+    String acssDebitPayments;
+
+    /**
      * The status of the Afterpay Clearpay capability of the account, or whether the account can
      * directly process Afterpay Clearpay charges.
      *

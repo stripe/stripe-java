@@ -22,6 +22,9 @@ import lombok.Setter;
 @Setter
 @EqualsAndHashCode(callSuper = false)
 public class PaymentMethod extends ApiResource implements HasId, MetadataStore<PaymentMethod> {
+  @SerializedName("acss_debit")
+  AcssDebit acssDebit;
+
   @SerializedName("afterpay_clearpay")
   AfterpayClearpay afterpayClearpay;
 
@@ -122,10 +125,10 @@ public class PaymentMethod extends ApiResource implements HasId, MetadataStore<P
    * The type of the PaymentMethod. An additional hash is included on the PaymentMethod with a name
    * matching this value. It contains additional information specific to the PaymentMethod type.
    *
-   * <p>One of {@code afterpay_clearpay}, {@code alipay}, {@code au_becs_debit}, {@code bacs_debit},
-   * {@code bancontact}, {@code card}, {@code card_present}, {@code eps}, {@code fpx}, {@code
-   * giropay}, {@code grabpay}, {@code ideal}, {@code interac_present}, {@code oxxo}, {@code p24},
-   * {@code sepa_debit}, or {@code sofort}.
+   * <p>One of {@code acss_debit}, {@code afterpay_clearpay}, {@code alipay}, {@code au_becs_debit},
+   * {@code bacs_debit}, {@code bancontact}, {@code card}, {@code card_present}, {@code eps}, {@code
+   * fpx}, {@code giropay}, {@code grabpay}, {@code ideal}, {@code interac_present}, {@code oxxo},
+   * {@code p24}, {@code sepa_debit}, or {@code sofort}.
    */
   @SerializedName("type")
   String type;
@@ -428,6 +431,34 @@ public class PaymentMethod extends ApiResource implements HasId, MetadataStore<P
             String.format("/v1/payment_methods/%s/detach", ApiResource.urlEncodeId(this.getId())));
     return ApiResource.request(
         ApiResource.RequestMethod.POST, url, params, PaymentMethod.class, options);
+  }
+
+  @Getter
+  @Setter
+  @EqualsAndHashCode(callSuper = false)
+  public static class AcssDebit extends StripeObject {
+    /** Name of the bank associated with the bank account. */
+    @SerializedName("bank_name")
+    String bankName;
+
+    /**
+     * Uniquely identifies this particular bank account. You can use this attribute to check whether
+     * two bank accounts are the same.
+     */
+    @SerializedName("fingerprint")
+    String fingerprint;
+
+    /** Institution number of the bank account. */
+    @SerializedName("institution_number")
+    String institutionNumber;
+
+    /** Last four digits of the bank account number. */
+    @SerializedName("last4")
+    String last4;
+
+    /** Transit number of the bank account. */
+    @SerializedName("transit_number")
+    String transitNumber;
   }
 
   @Getter
