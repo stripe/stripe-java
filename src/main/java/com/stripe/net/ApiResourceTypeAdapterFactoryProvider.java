@@ -18,6 +18,7 @@ final class ApiResourceTypeAdapterFactoryProvider {
     factories.add(new BalanceTransactionSourceTypeAdapterFactory());
     factories.add(new ExternalAccountTypeAdapterFactory());
     factories.add(new PaymentSourceTypeAdapterFactory());
+    factories.add(new ReflectionCheckingTypeAdapterFactory());
   }
 
   public static List<TypeAdapterFactory> getAll() {
