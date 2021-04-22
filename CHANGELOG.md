@@ -1,5 +1,8 @@
 # Changelog
 
+## 20.47.1 - 2021-04-22
+* [#1197](https://github.com/stripe/stripe-java/pull/1197) Fix GSON error in JDK16 (#1190) by marking RequestOptions transient
+
 ## 20.47.0 - 2021-04-12
 * [#1195](https://github.com/stripe/stripe-java/pull/1195) Add support for ACSS Debit
   * Add support for `acss_debit_payments` on `Account.capabilities`
