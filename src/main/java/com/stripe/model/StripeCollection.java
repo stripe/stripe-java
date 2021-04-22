@@ -50,7 +50,7 @@ public abstract class StripeCollection<T extends HasId> extends StripeObject
 
   @Getter(onMethod_ = {@Override})
   @Setter(onMethod = @__({@Override}))
-  private RequestOptions requestOptions;
+  private transient RequestOptions requestOptions;
 
   @Getter(onMethod_ = {@Override})
   @Setter(onMethod = @__({@Override}))
