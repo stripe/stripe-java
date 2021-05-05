@@ -1,5 +1,11 @@
 # Changelog
 
+## 20.48.0 - 2021-05-05
+* [#1201](https://github.com/stripe/stripe-java/pull/1201) API Updates
+  * Add support for `card_present` on `PaymentIntent.payment_method_options`
+  * Add support for `default_incomplete` as a `payment_behavior` on `SubscriptionItemCreateParams`, `SubscriptionUpdateParams`, and `SubscriptionCreateParams`.
+  * Add support for `single_member_llc` as a `structure` on `AccountCreateParams.company` and `AccountUpdateParams.company`.
+
 ## 20.47.1 - 2021-04-22
 * [#1197](https://github.com/stripe/stripe-java/pull/1197) Fix GSON error in JDK16 (#1190) by marking RequestOptions transient
 
