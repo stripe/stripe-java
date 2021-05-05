@@ -1,5 +1,9 @@
 # Changelog
 
+## 20.49.0 - 2021-05-05
+* [#1202](https://github.com/stripe/stripe-java/pull/1202) API Updates
+  * Add support for `payment_intent` on `EarlyFraudWarning`
+
 ## 20.48.0 - 2021-05-05
 * [#1201](https://github.com/stripe/stripe-java/pull/1201) API Updates
   * Add support for `card_present` on `PaymentIntent.payment_method_options`
