@@ -166,6 +166,16 @@ public class SubscriptionCreateParams extends ApiRequestParams {
    * href="https://stripe.com/docs/billing/migration/strong-customer-authentication">SCA Migration
    * Guide</a> for Billing to learn more. This is the default behavior.
    *
+   * <p>Use {@code default_incomplete} to create Subscriptions with {@code status=incomplete} when
+   * the first invoice requires payment, otherwise start as active. Subscriptions transition to
+   * {@code status=active} when successfully confirming the payment intent on the first invoice.
+   * This allows simpler management of scenarios where additional user actions are needed to pay a
+   * subscription’s invoice. Such as failed payments, <a
+   * href="https://stripe.com/docs/billing/migration/strong-customer-authentication">SCA
+   * regulation</a>, or collecting a mandate for a bank debit payment method. If the payment intent
+   * is not confirmed within 23 hours subscriptions transition to {@code status=expired_incomplete},
+   * which is a terminal state.
+   *
    * <p>Use {@code error_if_incomplete} if you want Stripe to return an HTTP 402 status code if a
    * subscription's first invoice cannot be paid. For example, if a payment method requires 3DS
    * authentication due to SCA regulation and further user action is needed, this parameter does not
@@ -735,6 +745,16 @@ public class SubscriptionCreateParams extends ApiRequestParams {
      * example, SCA regulation may require 3DS authentication to complete payment. See the <a
      * href="https://stripe.com/docs/billing/migration/strong-customer-authentication">SCA Migration
      * Guide</a> for Billing to learn more. This is the default behavior.
+     *
+     * <p>Use {@code default_incomplete} to create Subscriptions with {@code status=incomplete} when
+     * the first invoice requires payment, otherwise start as active. Subscriptions transition to
+     * {@code status=active} when successfully confirming the payment intent on the first invoice.
+     * This allows simpler management of scenarios where additional user actions are needed to pay a
+     * subscription’s invoice. Such as failed payments, <a
+     * href="https://stripe.com/docs/billing/migration/strong-customer-authentication">SCA
+     * regulation</a>, or collecting a mandate for a bank debit payment method. If the payment
+     * intent is not confirmed within 23 hours subscriptions transition to {@code
+     * status=expired_incomplete}, which is a terminal state.
      *
      * <p>Use {@code error_if_incomplete} if you want Stripe to return an HTTP 402 status code if a
      * subscription's first invoice cannot be paid. For example, if a payment method requires 3DS
@@ -2063,6 +2083,9 @@ public class SubscriptionCreateParams extends ApiRequestParams {
   public enum PaymentBehavior implements ApiRequestParams.EnumParam {
     @SerializedName("allow_incomplete")
     ALLOW_INCOMPLETE("allow_incomplete"),
+
+    @SerializedName("default_incomplete")
+    DEFAULT_INCOMPLETE("default_incomplete"),
 
     @SerializedName("error_if_incomplete")
     ERROR_IF_INCOMPLETE("error_if_incomplete"),

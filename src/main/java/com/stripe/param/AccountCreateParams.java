@@ -3992,6 +3992,9 @@ public class AccountCreateParams extends ApiRequestParams {
       @SerializedName("public_partnership")
       PUBLIC_PARTNERSHIP("public_partnership"),
 
+      @SerializedName("single_member_llc")
+      SINGLE_MEMBER_LLC("single_member_llc"),
+
       @SerializedName("sole_proprietorship")
       SOLE_PROPRIETORSHIP("sole_proprietorship"),
 
@@ -6378,7 +6381,7 @@ public class AccountCreateParams extends ApiRequestParams {
 
       /**
        * Details on the account's acceptance of the <a
-       * href="stripe.com/docs/issuing/connect/tos_acceptance">Stripe Issuing Terms and
+       * href="https://stripe.com/docs/issuing/connect/tos_acceptance">Stripe Issuing Terms and
        * Disclosures</a>.
        */
       @SerializedName("tos_acceptance")
@@ -6433,7 +6436,7 @@ public class AccountCreateParams extends ApiRequestParams {
 
         /**
          * Details on the account's acceptance of the <a
-         * href="stripe.com/docs/issuing/connect/tos_acceptance">Stripe Issuing Terms and
+         * href="https://stripe.com/docs/issuing/connect/tos_acceptance">Stripe Issuing Terms and
          * Disclosures</a>.
          */
         public Builder setTosAcceptance(TosAcceptance tosAcceptance) {

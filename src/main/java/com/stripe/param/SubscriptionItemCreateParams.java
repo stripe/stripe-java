@@ -50,6 +50,13 @@ public class SubscriptionItemCreateParams extends ApiRequestParams {
    * href="https://stripe.com/docs/billing/migration/strong-customer-authentication">SCA Migration
    * Guide</a> for Billing to learn more. This is the default behavior.
    *
+   * <p>Use {@code default_incomplete} to transition the subscription to {@code status=past_due}
+   * when payment is required and await explicit confirmation of the invoice's payment intent. This
+   * allows simpler management of scenarios where additional user actions are needed to pay a
+   * subscription’s invoice. Such as failed payments, <a
+   * href="https://stripe.com/docs/billing/migration/strong-customer-authentication">SCA
+   * regulation</a>, or collecting a mandate for a bank debit payment method.
+   *
    * <p>Use {@code pending_if_incomplete} to update the subscription using <a
    * href="https://stripe.com/docs/billing/subscriptions/pending-updates">pending updates</a>. When
    * you use {@code pending_if_incomplete} you can only pass the parameters <a
@@ -306,6 +313,13 @@ public class SubscriptionItemCreateParams extends ApiRequestParams {
      * require 3DS authentication to complete payment. See the <a
      * href="https://stripe.com/docs/billing/migration/strong-customer-authentication">SCA Migration
      * Guide</a> for Billing to learn more. This is the default behavior.
+     *
+     * <p>Use {@code default_incomplete} to transition the subscription to {@code status=past_due}
+     * when payment is required and await explicit confirmation of the invoice's payment intent.
+     * This allows simpler management of scenarios where additional user actions are needed to pay a
+     * subscription’s invoice. Such as failed payments, <a
+     * href="https://stripe.com/docs/billing/migration/strong-customer-authentication">SCA
+     * regulation</a>, or collecting a mandate for a bank debit payment method.
      *
      * <p>Use {@code pending_if_incomplete} to update the subscription using <a
      * href="https://stripe.com/docs/billing/subscriptions/pending-updates">pending updates</a>.
@@ -777,6 +791,9 @@ public class SubscriptionItemCreateParams extends ApiRequestParams {
   public enum PaymentBehavior implements ApiRequestParams.EnumParam {
     @SerializedName("allow_incomplete")
     ALLOW_INCOMPLETE("allow_incomplete"),
+
+    @SerializedName("default_incomplete")
+    DEFAULT_INCOMPLETE("default_incomplete"),
 
     @SerializedName("error_if_incomplete")
     ERROR_IF_INCOMPLETE("error_if_incomplete"),

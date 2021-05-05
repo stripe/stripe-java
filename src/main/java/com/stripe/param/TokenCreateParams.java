@@ -1433,6 +1433,9 @@ public class TokenCreateParams extends ApiRequestParams {
         @SerializedName("public_partnership")
         PUBLIC_PARTNERSHIP("public_partnership"),
 
+        @SerializedName("single_member_llc")
+        SINGLE_MEMBER_LLC("single_member_llc"),
+
         @SerializedName("sole_proprietorship")
         SOLE_PROPRIETORSHIP("sole_proprietorship"),
 

@@ -30,7 +30,8 @@ public class InvoiceUpcomingParams extends ApiRequestParams {
   /**
    * The coupons to redeem into discounts for the invoice preview. If not specified, inherits the
    * discount from the customer or subscription. Pass an empty string to avoid inheriting any
-   * discounts.
+   * discounts. To preview the upcoming invoice for a subscription that hasn't been created, use
+   * {@code coupon} instead.
    */
   @SerializedName("discounts")
   Object discounts;
@@ -314,7 +315,8 @@ public class InvoiceUpcomingParams extends ApiRequestParams {
     /**
      * The coupons to redeem into discounts for the invoice preview. If not specified, inherits the
      * discount from the customer or subscription. Pass an empty string to avoid inheriting any
-     * discounts.
+     * discounts. To preview the upcoming invoice for a subscription that hasn't been created, use
+     * {@code coupon} instead.
      */
     public Builder setDiscounts(EmptyParam discounts) {
       this.discounts = discounts;
@@ -324,7 +326,8 @@ public class InvoiceUpcomingParams extends ApiRequestParams {
     /**
      * The coupons to redeem into discounts for the invoice preview. If not specified, inherits the
      * discount from the customer or subscription. Pass an empty string to avoid inheriting any
-     * discounts.
+     * discounts. To preview the upcoming invoice for a subscription that hasn't been created, use
+     * {@code coupon} instead.
      */
     public Builder setDiscounts(List<Discount> discounts) {
       this.discounts = discounts;

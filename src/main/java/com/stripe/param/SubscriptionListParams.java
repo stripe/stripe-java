@@ -82,7 +82,8 @@ public class SubscriptionListParams extends ApiRequestParams {
    * all canceled subscriptions, including those belonging to deleted customers. Pass {@code ended}
    * to find subscriptions that are canceled and subscriptions that are expired due to <a
    * href="https://stripe.com/docs/billing/subscriptions/overview#subscription-statuses">incomplete
-   * payment</a>. Passing in a value of {@code all} will return subscriptions of all statuses.
+   * payment</a>. Passing in a value of {@code all} will return subscriptions of all statuses. If no
+   * value is supplied, all subscriptions that have not been canceled are returned.
    */
   @SerializedName("status")
   Status status;
@@ -311,7 +312,8 @@ public class SubscriptionListParams extends ApiRequestParams {
      * {@code ended} to find subscriptions that are canceled and subscriptions that are expired due
      * to <a
      * href="https://stripe.com/docs/billing/subscriptions/overview#subscription-statuses">incomplete
-     * payment</a>. Passing in a value of {@code all} will return subscriptions of all statuses.
+     * payment</a>. Passing in a value of {@code all} will return subscriptions of all statuses. If
+     * no value is supplied, all subscriptions that have not been canceled are returned.
      */
     public Builder setStatus(Status status) {
       this.status = status;
