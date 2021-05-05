@@ -45,6 +45,13 @@ public class EarlyFraudWarningListParams extends ApiRequestParams {
   Long limit;
 
   /**
+   * Only return early fraud warnings for charges that were created by the PaymentIntent specified
+   * by this PaymentIntent ID.
+   */
+  @SerializedName("payment_intent")
+  String paymentIntent;
+
+  /**
    * A cursor for use in pagination. {@code starting_after} is an object ID that defines your place
    * in the list. For instance, if you make a list request and receive 100 objects, ending with
    * {@code obj_foo}, your subsequent call can include {@code starting_after=obj_foo} in order to
@@ -59,12 +66,14 @@ public class EarlyFraudWarningListParams extends ApiRequestParams {
       List<String> expand,
       Map<String, Object> extraParams,
       Long limit,
+      String paymentIntent,
       String startingAfter) {
     this.charge = charge;
     this.endingBefore = endingBefore;
     this.expand = expand;
     this.extraParams = extraParams;
     this.limit = limit;
+    this.paymentIntent = paymentIntent;
     this.startingAfter = startingAfter;
   }
 
@@ -83,6 +92,8 @@ public class EarlyFraudWarningListParams extends ApiRequestParams {
 
     private Long limit;
 
+    private String paymentIntent;
+
     private String startingAfter;
 
     /** Finalize and obtain parameter instance from this builder. */
@@ -93,6 +104,7 @@ public class EarlyFraudWarningListParams extends ApiRequestParams {
           this.expand,
           this.extraParams,
           this.limit,
+          this.paymentIntent,
           this.startingAfter);
     }
 
@@ -171,6 +183,15 @@ public class EarlyFraudWarningListParams extends ApiRequestParams {
      */
     public Builder setLimit(Long limit) {
       this.limit = limit;
+      return this;
+    }
+
+    /**
+     * Only return early fraud warnings for charges that were created by the PaymentIntent specified
+     * by this PaymentIntent ID.
+     */
+    public Builder setPaymentIntent(String paymentIntent) {
+      this.paymentIntent = paymentIntent;
       return this;
     }
 

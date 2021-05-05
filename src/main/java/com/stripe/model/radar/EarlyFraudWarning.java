@@ -7,6 +7,7 @@ import com.stripe.exception.StripeException;
 import com.stripe.model.Charge;
 import com.stripe.model.ExpandableField;
 import com.stripe.model.HasId;
+import com.stripe.model.PaymentIntent;
 import com.stripe.net.ApiResource;
 import com.stripe.net.RequestOptions;
 import com.stripe.param.radar.EarlyFraudWarningListParams;
@@ -66,6 +67,12 @@ public class EarlyFraudWarning extends ApiResource implements HasId {
   @SerializedName("object")
   String object;
 
+  /** ID of the Payment Intent this early fraud warning is for, optionally expanded. */
+  @SerializedName("payment_intent")
+  @Getter(lombok.AccessLevel.NONE)
+  @Setter(lombok.AccessLevel.NONE)
+  ExpandableField<PaymentIntent> paymentIntent;
+
   /** Get ID of expandable {@code charge} object. */
   public String getCharge() {
     return (this.charge != null) ? this.charge.getId() : null;
@@ -82,6 +89,25 @@ public class EarlyFraudWarning extends ApiResource implements HasId {
 
   public void setChargeObject(Charge expandableObject) {
     this.charge = new ExpandableField<Charge>(expandableObject.getId(), expandableObject);
+  }
+
+  /** Get ID of expandable {@code paymentIntent} object. */
+  public String getPaymentIntent() {
+    return (this.paymentIntent != null) ? this.paymentIntent.getId() : null;
+  }
+
+  public void setPaymentIntent(String id) {
+    this.paymentIntent = ApiResource.setExpandableFieldId(id, this.paymentIntent);
+  }
+
+  /** Get expanded {@code paymentIntent}. */
+  public PaymentIntent getPaymentIntentObject() {
+    return (this.paymentIntent != null) ? this.paymentIntent.getExpanded() : null;
+  }
+
+  public void setPaymentIntentObject(PaymentIntent expandableObject) {
+    this.paymentIntent =
+        new ExpandableField<PaymentIntent>(expandableObject.getId(), expandableObject);
   }
 
   /** Returns a list of early fraud warnings. */
