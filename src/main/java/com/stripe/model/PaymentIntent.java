@@ -1183,6 +1183,9 @@ public class PaymentIntent extends ApiResource implements HasId, MetadataStore<P
     @SerializedName("card")
     Card card;
 
+    @SerializedName("card_present")
+    CardPresent cardPresent;
+
     @SerializedName("oxxo")
     Oxxo oxxo;
 
@@ -1275,8 +1278,8 @@ public class PaymentIntent extends ApiResource implements HasId, MetadataStore<P
       Installments installments;
 
       /**
-       * Selected network to process this PaymentIntent on. Depends on the available networks of the
-       * card attached to the PaymentIntent. Can be only set confirm-time.
+       * Selected network to process this payment intent on. Depends on the available networks of
+       * the card attached to the payment intent. Can be only set confirm-time.
        */
       @SerializedName("network")
       String network;
@@ -1337,6 +1340,11 @@ public class PaymentIntent extends ApiResource implements HasId, MetadataStore<P
         }
       }
     }
+
+    @Getter
+    @Setter
+    @EqualsAndHashCode(callSuper = false)
+    public static class CardPresent extends StripeObject {}
 
     @Getter
     @Setter

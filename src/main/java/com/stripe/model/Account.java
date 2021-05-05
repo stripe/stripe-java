@@ -892,8 +892,9 @@ public class Account extends ApiResource implements MetadataStore<Account>, Paym
      * incorporated_non_profit}, {@code limited_liability_partnership}, {@code multi_member_llc},
      * {@code private_company}, {@code private_corporation}, {@code private_partnership}, {@code
      * public_company}, {@code public_corporation}, {@code public_partnership}, {@code
-     * sole_proprietorship}, {@code tax_exempt_government_instrumentality}, {@code
-     * unincorporated_association}, or {@code unincorporated_non_profit}.
+     * single_member_llc}, {@code sole_proprietorship}, {@code
+     * tax_exempt_government_instrumentality}, {@code unincorporated_association}, or {@code
+     * unincorporated_non_profit}.
      */
     @SerializedName("structure")
     String structure;

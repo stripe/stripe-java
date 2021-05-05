@@ -1076,12 +1076,12 @@ public class Charge extends ApiResource implements MetadataStore<Charge>, Balanc
 
     /**
      * The type of transaction-specific details of the payment method used in the payment, one of
-     * {@code ach_credit_transfer}, {@code ach_debit}, {@code alipay}, {@code au_becs_debit}, {@code
-     * bancontact}, {@code card}, {@code card_present}, {@code eps}, {@code giropay}, {@code ideal},
-     * {@code klarna}, {@code multibanco}, {@code p24}, {@code sepa_debit}, {@code sofort}, {@code
-     * stripe_account}, or {@code wechat}. An additional hash is included on {@code
-     * payment_method_details} with a name matching this value. It contains information specific to
-     * the payment method.
+     * {@code ach_credit_transfer}, {@code ach_debit}, {@code acss_debit}, {@code alipay}, {@code
+     * au_becs_debit}, {@code bancontact}, {@code card}, {@code card_present}, {@code eps}, {@code
+     * giropay}, {@code ideal}, {@code klarna}, {@code multibanco}, {@code p24}, {@code sepa_debit},
+     * {@code sofort}, {@code stripe_account}, or {@code wechat}. An additional hash is included on
+     * {@code payment_method_details} with a name matching this value. It contains information
+     * specific to the payment method.
      */
     @SerializedName("type")
     String type;
