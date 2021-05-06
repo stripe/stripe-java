@@ -1174,6 +1174,9 @@ public class PaymentIntent extends ApiResource implements HasId, MetadataStore<P
     @SerializedName("acss_debit")
     AcssDebit acssDebit;
 
+    @SerializedName("afterpay_clearpay")
+    AfterpayClearpay afterpayClearpay;
+
     @SerializedName("alipay")
     Alipay alipay;
 
@@ -1244,6 +1247,20 @@ public class PaymentIntent extends ApiResource implements HasId, MetadataStore<P
         @SerializedName("transaction_type")
         String transactionType;
       }
+    }
+
+    @Getter
+    @Setter
+    @EqualsAndHashCode(callSuper = false)
+    public static class AfterpayClearpay extends StripeObject {
+      /**
+       * Order identifier shown to the customer in Afterpay’s online portal. We recommend using a
+       * value that helps you answer any questions a customer might have about the payment. The
+       * identifier is limited to 128 characters and may contain only letters, digits, underscores,
+       * backslashes and dashes.
+       */
+      @SerializedName("reference")
+      String reference;
     }
 
     @Getter
