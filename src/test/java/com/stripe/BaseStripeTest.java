@@ -117,6 +117,7 @@ public class BaseStripeTest {
     Stripe.overrideUploadBase("http://localhost:" + port);
     Stripe.apiKey = "sk_test_123";
     Stripe.clientId = "ca_123";
+    Stripe.enableTelemetry = false;
 
     networkSpy = Mockito.spy(new LiveStripeResponseGetter());
     ApiResource.setStripeResponseGetter(networkSpy);
