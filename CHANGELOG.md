@@ -1,5 +1,11 @@
 # Changelog
 
+## 20.50.0 - 2021-05-06
+* [#1204](https://github.com/stripe/stripe-java/pull/1204) API Updates
+  * Add support for `reference` on `Charge.payment_method_details.afterpay_clearpay`
+  * Add support for `afterpay_clearpay` on `PaymentIntent.payment_method_options`
+* [#1203](https://github.com/stripe/stripe-java/pull/1203) Fix flaky test: no telemetry by default in test suite
+
 ## 20.49.0 - 2021-05-05
 * [#1202](https://github.com/stripe/stripe-java/pull/1202) API Updates
   * Add support for `payment_intent` on `EarlyFraudWarning`
