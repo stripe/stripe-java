@@ -3054,6 +3054,13 @@ public class PaymentIntentUpdateParams extends ApiRequestParams {
     Object acssDebit;
 
     /**
+     * If this is a {@code afterpay_clearpay} PaymentMethod, this sub-hash contains details about
+     * the Afterpay Clearpay payment method options.
+     */
+    @SerializedName("afterpay_clearpay")
+    Object afterpayClearpay;
+
+    /**
      * If this is a {@code alipay} PaymentMethod, this sub-hash contains details about the Alipay
      * payment method options.
      */
@@ -3117,6 +3124,7 @@ public class PaymentIntentUpdateParams extends ApiRequestParams {
 
     private PaymentMethodOptions(
         Object acssDebit,
+        Object afterpayClearpay,
         Object alipay,
         Object bancontact,
         Object card,
@@ -3127,6 +3135,7 @@ public class PaymentIntentUpdateParams extends ApiRequestParams {
         Object sepaDebit,
         Object sofort) {
       this.acssDebit = acssDebit;
+      this.afterpayClearpay = afterpayClearpay;
       this.alipay = alipay;
       this.bancontact = bancontact;
       this.card = card;
@@ -3144,6 +3153,8 @@ public class PaymentIntentUpdateParams extends ApiRequestParams {
 
     public static class Builder {
       private Object acssDebit;
+
+      private Object afterpayClearpay;
 
       private Object alipay;
 
@@ -3167,6 +3178,7 @@ public class PaymentIntentUpdateParams extends ApiRequestParams {
       public PaymentMethodOptions build() {
         return new PaymentMethodOptions(
             this.acssDebit,
+            this.afterpayClearpay,
             this.alipay,
             this.bancontact,
             this.card,
@@ -3193,6 +3205,24 @@ public class PaymentIntentUpdateParams extends ApiRequestParams {
        */
       public Builder setAcssDebit(EmptyParam acssDebit) {
         this.acssDebit = acssDebit;
+        return this;
+      }
+
+      /**
+       * If this is a {@code afterpay_clearpay} PaymentMethod, this sub-hash contains details about
+       * the Afterpay Clearpay payment method options.
+       */
+      public Builder setAfterpayClearpay(AfterpayClearpay afterpayClearpay) {
+        this.afterpayClearpay = afterpayClearpay;
+        return this;
+      }
+
+      /**
+       * If this is a {@code afterpay_clearpay} PaymentMethod, this sub-hash contains details about
+       * the Afterpay Clearpay payment method options.
+       */
+      public Builder setAfterpayClearpay(EmptyParam afterpayClearpay) {
+        this.afterpayClearpay = afterpayClearpay;
         return this;
       }
 
@@ -3653,6 +3683,99 @@ public class PaymentIntentUpdateParams extends ApiRequestParams {
 
         VerificationMethod(String value) {
           this.value = value;
+        }
+      }
+    }
+
+    @Getter
+    public static class AfterpayClearpay {
+      /**
+       * Map of extra parameters for custom features not available in this client library. The
+       * content in this map is not serialized under this field's {@code @SerializedName} value.
+       * Instead, each key/value pair is serialized as if the key is a root-level field (serialized)
+       * name in this param object. Effectively, this map is flattened to its parent instance.
+       */
+      @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
+      Map<String, Object> extraParams;
+
+      /**
+       * Order identifier shown to the customer in Afterpay’s online portal. We recommend using a
+       * value that helps you answer any questions a customer might have about the payment. The
+       * identifier is limited to 128 characters and may contain only letters, digits, underscores,
+       * backslashes and dashes.
+       */
+      @SerializedName("reference")
+      Object reference;
+
+      private AfterpayClearpay(Map<String, Object> extraParams, Object reference) {
+        this.extraParams = extraParams;
+        this.reference = reference;
+      }
+
+      public static Builder builder() {
+        return new Builder();
+      }
+
+      public static class Builder {
+        private Map<String, Object> extraParams;
+
+        private Object reference;
+
+        /** Finalize and obtain parameter instance from this builder. */
+        public AfterpayClearpay build() {
+          return new AfterpayClearpay(this.extraParams, this.reference);
+        }
+
+        /**
+         * Add a key/value pair to `extraParams` map. A map is initialized for the first
+         * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
+         * map. See {@link
+         * PaymentIntentUpdateParams.PaymentMethodOptions.AfterpayClearpay#extraParams} for the
+         * field documentation.
+         */
+        public Builder putExtraParam(String key, Object value) {
+          if (this.extraParams == null) {
+            this.extraParams = new HashMap<>();
+          }
+          this.extraParams.put(key, value);
+          return this;
+        }
+
+        /**
+         * Add all map key/value pairs to `extraParams` map. A map is initialized for the first
+         * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
+         * map. See {@link
+         * PaymentIntentUpdateParams.PaymentMethodOptions.AfterpayClearpay#extraParams} for the
+         * field documentation.
+         */
+        public Builder putAllExtraParam(Map<String, Object> map) {
+          if (this.extraParams == null) {
+            this.extraParams = new HashMap<>();
+          }
+          this.extraParams.putAll(map);
+          return this;
+        }
+
+        /**
+         * Order identifier shown to the customer in Afterpay’s online portal. We recommend using a
+         * value that helps you answer any questions a customer might have about the payment. The
+         * identifier is limited to 128 characters and may contain only letters, digits,
+         * underscores, backslashes and dashes.
+         */
+        public Builder setReference(String reference) {
+          this.reference = reference;
+          return this;
+        }
+
+        /**
+         * Order identifier shown to the customer in Afterpay’s online portal. We recommend using a
+         * value that helps you answer any questions a customer might have about the payment. The
+         * identifier is limited to 128 characters and may contain only letters, digits,
+         * underscores, backslashes and dashes.
+         */
+        public Builder setReference(EmptyParam reference) {
+          this.reference = reference;
+          return this;
         }
       }
     }
