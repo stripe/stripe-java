@@ -91,6 +91,11 @@ final class EventDataClassLookup {
 
     classLookup.put("checkout.session", com.stripe.model.checkout.Session.class);
 
+    classLookup.put(
+        "identity.verification_report", com.stripe.model.identity.VerificationReport.class);
+    classLookup.put(
+        "identity.verification_session", com.stripe.model.identity.VerificationSession.class);
+
     classLookup.put("issuing.authorization", com.stripe.model.issuing.Authorization.class);
     classLookup.put("issuing.card", com.stripe.model.issuing.Card.class);
     classLookup.put("issuing.cardholder", com.stripe.model.issuing.Cardholder.class);
