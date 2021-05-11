@@ -514,7 +514,7 @@ public class AccountCreateParams extends ApiRequestParams {
 
     /** A publicly available website for handling support issues. */
     @SerializedName("support_url")
-    String supportUrl;
+    Object supportUrl;
 
     /** The business's publicly available website. */
     @SerializedName("url")
@@ -528,7 +528,7 @@ public class AccountCreateParams extends ApiRequestParams {
         SupportAddress supportAddress,
         String supportEmail,
         String supportPhone,
-        String supportUrl,
+        Object supportUrl,
         String url) {
       this.extraParams = extraParams;
       this.mcc = mcc;
@@ -560,7 +560,7 @@ public class AccountCreateParams extends ApiRequestParams {
 
       private String supportPhone;
 
-      private String supportUrl;
+      private Object supportUrl;
 
       private String url;
 
@@ -649,6 +649,12 @@ public class AccountCreateParams extends ApiRequestParams {
 
       /** A publicly available website for handling support issues. */
       public Builder setSupportUrl(String supportUrl) {
+        this.supportUrl = supportUrl;
+        return this;
+      }
+
+      /** A publicly available website for handling support issues. */
+      public Builder setSupportUrl(EmptyParam supportUrl) {
         this.supportUrl = supportUrl;
         return this;
       }
