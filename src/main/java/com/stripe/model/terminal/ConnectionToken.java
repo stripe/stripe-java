@@ -16,7 +16,12 @@ import lombok.Setter;
 @Setter
 @EqualsAndHashCode(callSuper = false)
 public class ConnectionToken extends ApiResource {
-  /** The id of the location that this connection token is scoped to. */
+  /**
+   * The id of the location that this connection token is scoped to. Note that location scoping only
+   * applies to internet-connected readers. For more details, see <a
+   * href="https://stripe.com/docs/terminal/readers/fleet-management#connection-tokens">the docs on
+   * scoping connection tokens</a>.
+   */
   @SerializedName("location")
   String location;
 

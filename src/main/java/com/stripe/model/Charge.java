@@ -1183,7 +1183,7 @@ public class Charge extends ApiResource implements MetadataStore<Charge>, Balanc
     @Setter
     @EqualsAndHashCode(callSuper = false)
     public static class AfterpayClearpay extends StripeObject {
-      /** Order identifier shown to the customer in Afterpay’s online portal. */
+      /** Order identifier shown to the merchant in Afterpay’s online portal. */
       @SerializedName("reference")
       String reference;
     }
