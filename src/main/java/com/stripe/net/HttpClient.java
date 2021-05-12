@@ -29,7 +29,7 @@ public abstract class HttpClient {
   protected HttpClient() {}
 
   /**
-   * Sends the given request to Stripe's API.
+   * Sends the given request to Stripe's API, buffering the response body into memory.
    *
    * @param request the request
    * @return the response
@@ -38,13 +38,24 @@ public abstract class HttpClient {
   public abstract StripeResponse request(StripeRequest request) throws StripeException;
 
   /**
-   * Sends the given request to Stripe's API, handling telemetry if not disabled.
+   * Sends the given request to Stripe's API, streaming the response body.
    *
    * @param request the request
    * @return the response
    * @throws StripeException If the request fails for any reason
    */
-  public StripeResponse requestWithTelemetry(StripeRequest request) throws StripeException {
+  public StripeResponseStream requestStream(StripeRequest request) throws StripeException {
+    throw new UnsupportedOperationException(
+        "streamingRequest is unimplemented for this HttpClient");
+  }
+
+  @FunctionalInterface
+  private interface RequestSendFunction<R> {
+    R apply(StripeRequest request) throws StripeException;
+  }
+
+  private <T extends StripeResponseInterface> T sendWithTelemetry(
+      StripeRequest request, RequestSendFunction<T> send) throws StripeException {
     Optional<String> telemetryHeaderValue = requestTelemetry.getHeaderValue(request.headers());
     if (telemetryHeaderValue.isPresent()) {
       request =
@@ -53,7 +64,7 @@ public abstract class HttpClient {
 
     Stopwatch stopwatch = Stopwatch.startNew();
 
-    StripeResponse response = this.request(request);
+    T response = send.apply(request);
 
     stopwatch.stop();
 
@@ -63,23 +74,40 @@ public abstract class HttpClient {
   }
 
   /**
-   * Sends the given request to Stripe's API, retrying the request in cases of intermittent
-   * problems.
+   * Sends the given request to Stripe's API, handling telemetry if not disabled.
    *
    * @param request the request
    * @return the response
    * @throws StripeException If the request fails for any reason
    */
-  public StripeResponse requestWithRetries(StripeRequest request) throws StripeException {
+  public StripeResponse requestWithTelemetry(StripeRequest request) throws StripeException {
+    return sendWithTelemetry(request, (r) -> this.request(r));
+  }
+
+  /**
+   * Sends the given request to Stripe's API, streaming the response, and handling telemetry if not
+   * disabled.
+   *
+   * @param request the request
+   * @return the response
+   * @throws StripeException If the request fails for any reason
+   */
+  public StripeResponseStream requestStreamWithTelemetry(StripeRequest request)
+      throws StripeException {
+    return sendWithTelemetry(request, (r) -> this.requestStream(r));
+  }
+
+  public <T extends StripeResponseInterface> T sendWithRetries(
+      StripeRequest request, RequestSendFunction<T> send) throws StripeException {
     ApiConnectionException requestException = null;
-    StripeResponse response = null;
+    T response = null;
     int retry = 0;
 
     while (true) {
       requestException = null;
 
       try {
-        response = this.requestWithTelemetry(request);
+        response = send.apply(request);
       } catch (ApiConnectionException e) {
         requestException = e;
       }
@@ -104,6 +132,31 @@ public abstract class HttpClient {
     response.numRetries(retry);
 
     return response;
+  }
+
+  /**
+   * Sends the given request to Stripe's API, retrying the request in cases of intermittent
+   * problems.
+   *
+   * @param request the request
+   * @return the response
+   * @throws StripeException If the request fails for any reason
+   */
+  public StripeResponse requestWithRetries(StripeRequest request) throws StripeException {
+    return sendWithRetries(request, (r) -> this.requestWithTelemetry(r));
+  }
+
+  /**
+   * Sends the given request to Stripe's API, streaming the response, retrying the request in cases
+   * of intermittent problems.
+   *
+   * @param request the request
+   * @return the response
+   * @throws StripeException If the request fails for any reason
+   */
+  public StripeResponseStream requestStreamWithRetries(StripeRequest request)
+      throws StripeException {
+    return sendWithRetries(request, (r) -> this.requestStreamWithTelemetry(r));
   }
 
   /**
@@ -165,8 +218,8 @@ public abstract class HttpClient {
     return str;
   }
 
-  private boolean shouldRetry(
-      int numRetries, StripeException exception, StripeRequest request, StripeResponse response) {
+  private <T extends StripeResponseInterface> boolean shouldRetry(
+      int numRetries, StripeException exception, StripeRequest request, T response) {
     // Do not retry if we are out of retries.
     if (numRetries >= request.options().getMaxNetworkRetries()) {
       return false;

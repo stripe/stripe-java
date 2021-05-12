@@ -2,6 +2,8 @@ package com.stripe.net;
 
 import com.google.gson.JsonObject;
 import com.google.gson.JsonSyntaxException;
+import com.stripe.Stripe;
+import com.stripe.exception.ApiConnectionException;
 import com.stripe.exception.ApiException;
 import com.stripe.exception.AuthenticationException;
 import com.stripe.exception.CardException;
@@ -20,6 +22,8 @@ import com.stripe.model.StripeError;
 import com.stripe.model.StripeObject;
 import com.stripe.model.StripeObjectInterface;
 import com.stripe.model.oauth.OAuthError;
+import java.io.IOException;
+import java.io.InputStream;
 import java.util.Map;
 
 public class LiveStripeResponseGetter implements StripeResponseGetter {
@@ -71,6 +75,38 @@ public class LiveStripeResponseGetter implements StripeResponseGetter {
     resource.setLastResponse(response);
 
     return resource;
+  }
+
+  @Override
+  public InputStream requestStream(
+      ApiResource.RequestMethod method,
+      String url,
+      Map<String, Object> params,
+      RequestOptions options)
+      throws StripeException {
+    StripeRequest request = new StripeRequest(method, url, params, options);
+    StripeResponseStream responseStream = httpClient.requestStreamWithRetries(request);
+
+    int responseCode = responseStream.code();
+
+    if (responseCode < 200 || responseCode >= 300) {
+      StripeResponse response;
+      try {
+        response = responseStream.unstream();
+      } catch (IOException e) {
+        throw new ApiConnectionException(
+            String.format(
+                "IOException during API request to Stripe (%s): %s "
+                    + "Please check your internet connection and try again. If this problem persists,"
+                    + "you should check Stripe's service status at https://twitter.com/stripestatus,"
+                    + " or let us know at support@stripe.com.",
+                Stripe.getApiBase(), e.getMessage()),
+            e);
+      }
+      handleApiError(response);
+    }
+
+    return responseStream.bodyStream();
   }
 
   @Override
