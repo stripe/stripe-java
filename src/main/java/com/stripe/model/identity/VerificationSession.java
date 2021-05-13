@@ -37,10 +37,6 @@ public class VerificationSession extends ApiResource
   @SerializedName("created")
   Long created;
 
-  /** Always true for a deleted object. */
-  @SerializedName("deleted")
-  Boolean deleted;
-
   /** Unique identifier for the object. */
   @Getter(onMethod_ = {@Override})
   @SerializedName("id")
