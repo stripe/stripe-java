@@ -35,7 +35,7 @@ import lombok.Setter;
 @Getter
 @Setter
 @EqualsAndHashCode(callSuper = false)
-public abstract class StripeCollection<T extends HasId> extends StripeObject
+public class StripeCollection<T extends HasId> extends StripeObject
     implements StripeCollectionInterface<T> {
   String object;
 
@@ -57,10 +57,12 @@ public abstract class StripeCollection<T extends HasId> extends StripeObject
   private Map<String, Object> requestParams;
 
   public Iterable<T> autoPagingIterable() {
+    checkRequestMethodsEnabled();
     return new PagingIterable<>(this);
   }
 
   public Iterable<T> autoPagingIterable(Map<String, Object> params) {
+    checkRequestMethodsEnabled();
     this.setRequestParams(params);
     return new PagingIterable<>(this);
   }
@@ -74,6 +76,7 @@ public abstract class StripeCollection<T extends HasId> extends StripeObject
    * @param options request options (will override the options from the initial list request)
    */
   public Iterable<T> autoPagingIterable(Map<String, Object> params, RequestOptions options) {
+  checkRequestMethodsEnabled();
     this.setRequestOptions(options);
     this.setRequestParams(params);
     return new PagingIterable<>(this);

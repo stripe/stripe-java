@@ -19,6 +19,7 @@ public class PaymentSourceCollection extends StripeCollection<PaymentSource> {
   /** List sources for a specified customer. */
   public PaymentSourceCollection list(Map<String, Object> params, RequestOptions options)
       throws StripeException {
+    checkRequestMethodsEnabled();
     String url = String.format("%s%s", Stripe.getApiBase(), this.getUrl());
     return ApiResource.requestCollection(url, params, PaymentSourceCollection.class, options);
   }
@@ -32,6 +33,7 @@ public class PaymentSourceCollection extends StripeCollection<PaymentSource> {
   /** List sources for a specified customer. */
   public PaymentSourceCollection list(
       PaymentSourceCollectionListParams params, RequestOptions options) throws StripeException {
+    checkRequestMethodsEnabled();
     String url = String.format("%s%s", Stripe.getApiBase(), this.getUrl());
     return ApiResource.requestCollection(url, params, PaymentSourceCollection.class, options);
   }
@@ -49,6 +51,7 @@ public class PaymentSourceCollection extends StripeCollection<PaymentSource> {
   /** Retrieve a specified source for a given customer. */
   public PaymentSource retrieve(String id, Map<String, Object> params, RequestOptions options)
       throws StripeException {
+    checkRequestMethodsEnabled();
     String url =
         String.format(
             "%s%s",
@@ -62,6 +65,7 @@ public class PaymentSourceCollection extends StripeCollection<PaymentSource> {
   public PaymentSource retrieve(
       String id, PaymentSourceCollectionRetrieveParams params, RequestOptions options)
       throws StripeException {
+    checkRequestMethodsEnabled();
     String url =
         String.format(
             "%s%s",
@@ -95,6 +99,7 @@ public class PaymentSourceCollection extends StripeCollection<PaymentSource> {
    */
   public PaymentSource create(Map<String, Object> params, RequestOptions options)
       throws StripeException {
+    checkRequestMethodsEnabled();
     String url = String.format("%s%s", Stripe.getApiBase(), this.getUrl());
     return ApiResource.request(
         ApiResource.RequestMethod.POST, url, params, PaymentSource.class, options);
@@ -124,6 +129,7 @@ public class PaymentSourceCollection extends StripeCollection<PaymentSource> {
    */
   public PaymentSource create(PaymentSourceCollectionCreateParams params, RequestOptions options)
       throws StripeException {
+    checkRequestMethodsEnabled();
     String url = String.format("%s%s", Stripe.getApiBase(), this.getUrl());
     return ApiResource.request(
         ApiResource.RequestMethod.POST, url, params, PaymentSource.class, options);

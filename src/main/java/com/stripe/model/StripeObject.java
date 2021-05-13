@@ -21,6 +21,18 @@ public abstract class StripeObject implements StripeObjectInterface {
 
   private transient JsonObject rawJsonObject;
 
+  private transient boolean enableRequestMethods = true;
+
+  public void disableRequestMethods() {
+    this.enableRequestMethods = false;
+  }
+
+  protected void checkRequestMethodsEnabled() {
+    if (!this.enableRequestMethods) {
+      throw new UnsupportedOperationException();
+    }
+  }
+
   @Override
   public String toString() {
     return String.format(

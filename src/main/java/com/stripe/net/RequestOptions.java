@@ -5,6 +5,7 @@ import java.net.PasswordAuthentication;
 import java.net.Proxy;
 import java.util.Map;
 import lombok.EqualsAndHashCode;
+import lombok.With;
 
 @EqualsAndHashCode(callSuper = false)
 public class RequestOptions {
@@ -27,6 +28,9 @@ public class RequestOptions {
   private final Proxy connectionProxy;
   private final PasswordAuthentication proxyCredential;
 
+  @With(onMethod = @__({@SuppressWarnings("ReferenceEquality")}))
+  private final String baseUrl;
+
   public static RequestOptions getDefault() {
     return new RequestOptions(
         Stripe.apiKey,
@@ -38,7 +42,8 @@ public class RequestOptions {
         Stripe.getReadTimeout(),
         Stripe.getMaxNetworkRetries(),
         Stripe.getConnectionProxy(),
-        Stripe.getProxyCredential());
+        Stripe.getProxyCredential(),
+        null);
   }
 
   private RequestOptions(
@@ -51,7 +56,8 @@ public class RequestOptions {
       int readTimeout,
       int maxNetworkRetries,
       Proxy connectionProxy,
-      PasswordAuthentication proxyCredential) {
+      PasswordAuthentication proxyCredential,
+      String baseUrl) {
     this.apiKey = apiKey;
     this.clientId = clientId;
     this.idempotencyKey = idempotencyKey;
@@ -62,6 +68,7 @@ public class RequestOptions {
     this.maxNetworkRetries = maxNetworkRetries;
     this.connectionProxy = connectionProxy;
     this.proxyCredential = proxyCredential;
+    this.baseUrl = baseUrl;
   }
 
   public String getApiKey() {
@@ -108,6 +115,10 @@ public class RequestOptions {
     return proxyCredential;
   }
 
+  public String getBaseUrl() {
+    return baseUrl;
+  }
+
   public static RequestOptionsBuilder builder() {
     return new RequestOptionsBuilder();
   }
@@ -132,6 +143,7 @@ public class RequestOptions {
     private int maxNetworkRetries;
     private Proxy connectionProxy;
     private PasswordAuthentication proxyCredential;
+    private String baseUrl;
 
     /**
      * Constructs a request options builder with the global parameters (API key and client ID) as
@@ -145,6 +157,7 @@ public class RequestOptions {
       this.maxNetworkRetries = Stripe.getMaxNetworkRetries();
       this.connectionProxy = Stripe.getConnectionProxy();
       this.proxyCredential = Stripe.getProxyCredential();
+      this.baseUrl = null;
     }
 
     public String getApiKey() {
@@ -292,6 +305,14 @@ public class RequestOptions {
       return setStripeVersionOverride(null);
     }
 
+    public String getBaseUrl() {
+      return this.baseUrl;
+    }
+
+    public void setBaseUrl(String baseUrl) {
+      this.baseUrl = baseUrl;
+    }
+
     /** Constructs a {@link RequestOptions} with the specified values. */
     public RequestOptions build() {
       return new RequestOptions(
@@ -304,7 +325,8 @@ public class RequestOptions {
           readTimeout,
           maxNetworkRetries,
           connectionProxy,
-          proxyCredential);
+          proxyCredential,
+          baseUrl);
     }
   }
 

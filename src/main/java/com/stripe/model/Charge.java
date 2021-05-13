@@ -721,6 +721,7 @@ public class Charge extends ApiResource implements MetadataStore<Charge>, Balanc
    */
   @Override
   public Charge update(Map<String, Object> params, RequestOptions options) throws StripeException {
+    checkRequestMethodsEnabled();
     String url =
         String.format(
             "%s%s",
@@ -742,6 +743,7 @@ public class Charge extends ApiResource implements MetadataStore<Charge>, Balanc
    * provided will be left unchanged.
    */
   public Charge update(ChargeUpdateParams params, RequestOptions options) throws StripeException {
+    checkRequestMethodsEnabled();
     String url =
         String.format(
             "%s%s",
@@ -760,6 +762,7 @@ public class Charge extends ApiResource implements MetadataStore<Charge>, Balanc
    * capturable.
    */
   public Charge capture() throws StripeException {
+    checkRequestMethodsEnabled();
     return capture((Map<String, Object>) null, (RequestOptions) null);
   }
 
@@ -799,6 +802,7 @@ public class Charge extends ApiResource implements MetadataStore<Charge>, Balanc
    * capturable.
    */
   public Charge capture(Map<String, Object> params, RequestOptions options) throws StripeException {
+    checkRequestMethodsEnabled();
     String url =
         String.format(
             "%s%s",
@@ -830,6 +834,7 @@ public class Charge extends ApiResource implements MetadataStore<Charge>, Balanc
    * capturable.
    */
   public Charge capture(ChargeCaptureParams params, RequestOptions options) throws StripeException {
+    checkRequestMethodsEnabled();
     String url =
         String.format(
             "%s%s",

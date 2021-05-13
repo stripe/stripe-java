@@ -1,12 +1,10 @@
 package com.stripe.net;
 
+import com.stripe.util.StringUtils;
 import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
-import java.io.UnsupportedEncodingException;
 import java.lang.reflect.Array;
-import java.net.URLEncoder;
-import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collection;
@@ -73,7 +71,7 @@ public final class FormEncoder {
     return String.join(
         "&",
         nameValueCollection.stream()
-            .map(kvp -> String.format("%s=%s", urlEncode(kvp.getKey()), urlEncode(kvp.getValue())))
+            .map(kvp -> String.format("%s=%s", StringUtils.urlEncode(kvp.getKey()), StringUtils.urlEncode(kvp.getValue())))
             .collect(Collectors.toList()));
   }
 
@@ -109,31 +107,6 @@ public final class FormEncoder {
    */
   public static List<KeyValuePair<String, Object>> flattenParams(Map<String, Object> params) {
     return flattenParamsValue(params, null);
-  }
-
-  /**
-   * URL-encodes a string.
-   *
-   * @param value The string to URL-encode.
-   * @return The URL-encoded string.
-   */
-  private static String urlEncode(String value) {
-    if (value == null) {
-      return null;
-    }
-
-    try {
-      // Don't use strict form encoding by changing the square bracket control
-      // characters back to their literals. This is fine by the server, and
-      // makes these parameter strings easier to read.
-      return URLEncoder.encode(value, StandardCharsets.UTF_8.name())
-          .replaceAll("%5B", "[")
-          .replaceAll("%5D", "]");
-    } catch (UnsupportedEncodingException e) {
-      // This can literally never happen, and lets us avoid having to catch
-      // UnsupportedEncodingException in callers.
-      throw new AssertionError("UTF-8 is unknown");
-    }
   }
 
   /**

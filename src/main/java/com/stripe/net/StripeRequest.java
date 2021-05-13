@@ -86,6 +86,42 @@ public class StripeRequest {
   }
 
   /**
+   * Initializes a new instance of the {@link StripeRequest} class.
+   *
+   * @param client the client to use for URL and parameters
+   * @param method the HTTP method
+   * @param url the URL of the request
+   * @param params the parameters of the request
+   * @param options the special modifiers of the request
+   * @throws StripeException if the request cannot be initialized for any reason
+   */
+  public StripeRequest(
+      StripeClient client,
+      ApiResource.RequestMethod method,
+      String url,
+      Map<String, Object> params,
+      RequestOptions options)
+      throws StripeException {
+    try {
+      this.params = (params != null) ? Collections.unmodifiableMap(params) : null;
+      this.options = (options != null) ? options : RequestOptions.getDefault();
+      this.method = method;
+      this.url = buildURL(client, method, url, params, options);
+      this.content = buildContent(method, params);
+      this.headers = buildHeaders(method, this.options);
+    } catch (IOException e) {
+      throw new ApiConnectionException(
+          String.format(
+              "IOException during API request to Stripe (%s): %s "
+                  + "Please check your internet connection and try again. If this problem persists,"
+                  + "you should check Stripe's service status at https://twitter.com/stripestatus,"
+                  + " or let us know at support@stripe.com.",
+              Stripe.getApiBase(), e.getMessage()),
+          e);
+    }
+  }
+
+  /**
    * Returns a new {@link StripeRequest} instance with an additional header.
    *
    * @param name the additional header's name
@@ -121,6 +157,29 @@ public class StripeRequest {
         } else {
           sb.append("?");
         }
+        sb.append(queryString);
+      }
+    }
+
+    return new URL(sb.toString());
+  }
+
+  private static URL buildURL(
+      StripeClient client,
+      ApiResource.RequestMethod method,
+      String path,
+      Map<String, Object> params,
+      RequestOptions options)
+      throws IOException {
+    StringBuilder sb = new StringBuilder();
+
+    sb.append(options.getBaseUrl() != null ? options.getBaseUrl() : client.getApiBase());
+    sb.append(path);
+
+    if ((method != ApiResource.RequestMethod.POST) && (params != null)) {
+      String queryString = FormEncoder.createQueryString(params);
+      if (queryString != null && !queryString.isEmpty()) {
+        sb.append("?");
         sb.append(queryString);
       }
     }

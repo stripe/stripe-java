@@ -2,6 +2,8 @@ package com.stripe.util;
 
 import static java.util.Objects.requireNonNull;
 
+import java.io.UnsupportedEncodingException;
+import java.net.URLEncoder;
 import java.nio.charset.StandardCharsets;
 import java.security.MessageDigest;
 import java.util.regex.Pattern;
@@ -47,4 +49,30 @@ public final class StringUtils {
         .replaceAll("([a-z0-9])([A-Z])", "$1_$2")
         .toLowerCase();
   }
+
+  /**
+   * URL-encodes a string.
+   *
+   * @param value The string to URL-encode.
+   * @return The URL-encoded string.
+   */
+  public static String urlEncode(String value) {
+    if (value == null) {
+      return null;
+    }
+
+    try {
+      // Don't use strict form encoding by changing the square bracket control
+      // characters back to their literals. This is fine by the server, and
+      // makes these parameter strings easier to read.
+      return URLEncoder.encode(value, StandardCharsets.UTF_8.name())
+          .replaceAll("%5B", "[")
+          .replaceAll("%5D", "]");
+    } catch (UnsupportedEncodingException e) {
+      // This can literally never happen, and lets us avoid having to catch
+      // UnsupportedEncodingException in callers.
+      throw new AssertionError("UTF-8 is unknown");
+    }
+  }
+
 }
