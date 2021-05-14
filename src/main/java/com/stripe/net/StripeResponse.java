@@ -1,38 +1,7 @@
 package com.stripe.net;
 
-import static java.util.Objects.requireNonNull;
-
-import java.time.Instant;
-import java.time.ZonedDateTime;
-import java.time.format.DateTimeFormatter;
-import java.util.Optional;
-import lombok.Getter;
-import lombok.Setter;
-import lombok.Value;
-import lombok.experimental.Accessors;
-import lombok.experimental.NonFinal;
-
 /** A response from Stripe's API, with body represented as a String. */
-@Value
-@Accessors(fluent = true)
-public class StripeResponse implements StripeResponseInterface {
-  /** The HTTP status code of the response. */
-  @Getter(onMethod_ = {@Override})
-  int code;
-
-  /** The HTTP headers of the response. */
-  @Getter(onMethod_ = {@Override})
-  HttpHeaders headers;
-
-  /** The body of the response. */
-  String body;
-
-  /** Number of times the request was retried. Used for internal tests only. */
-  @NonFinal
-  @Getter(onMethod_ = {@Override})
-  @Setter(onMethod_ = {@Override})
-  int numRetries;
-
+public class StripeResponse extends AbstractStripeResponse<String> {
   /**
    * Initializes a new instance of the {@link StripeResponse} class.
    *
@@ -42,45 +11,6 @@ public class StripeResponse implements StripeResponseInterface {
    * @throws NullPointerException if {@code headers} or {@code body} is {@code null}
    */
   public StripeResponse(int code, HttpHeaders headers, String body) {
-    requireNonNull(headers);
-    requireNonNull(body);
-
-    this.code = code;
-    this.headers = headers;
-    this.body = body;
-  }
-
-  /**
-   * Gets the date of the request, as returned by Stripe.
-   *
-   * @return the date of the request, as returned by Stripe
-   */
-  @Override
-  public Instant date() {
-    Optional<String> dateStr = this.headers.firstValue("Date");
-    if (!dateStr.isPresent()) {
-      return null;
-    }
-    return ZonedDateTime.parse(dateStr.get(), DateTimeFormatter.RFC_1123_DATE_TIME).toInstant();
-  }
-
-  /**
-   * Gets the idempotency key of the request, as returned by Stripe.
-   *
-   * @return the idempotency key of the request, as returned by Stripe
-   */
-  @Override
-  public String idempotencyKey() {
-    return this.headers.firstValue("Idempotency-Key").orElse(null);
-  }
-
-  /**
-   * Gets the ID of the request, as returned by Stripe.
-   *
-   * @return the ID of the request, as returned by Stripe
-   */
-  @Override
-  public String requestId() {
-    return this.headers.firstValue("Request-Id").orElse(null);
+    super(code, headers, body);
   }
 }

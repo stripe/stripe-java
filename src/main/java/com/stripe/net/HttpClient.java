@@ -45,8 +45,7 @@ public abstract class HttpClient {
    * @throws StripeException If the request fails for any reason
    */
   public StripeResponseStream requestStream(StripeRequest request) throws StripeException {
-    throw new UnsupportedOperationException(
-        "streamingRequest is unimplemented for this HttpClient");
+    throw new UnsupportedOperationException("requestStream is unimplemented for this HttpClient");
   }
 
   @FunctionalInterface
@@ -54,7 +53,7 @@ public abstract class HttpClient {
     R apply(StripeRequest request) throws StripeException;
   }
 
-  private <T extends StripeResponseInterface> T sendWithTelemetry(
+  private <T extends AbstractStripeResponse<?>> T sendWithTelemetry(
       StripeRequest request, RequestSendFunction<T> send) throws StripeException {
     Optional<String> telemetryHeaderValue = requestTelemetry.getHeaderValue(request.headers());
     if (telemetryHeaderValue.isPresent()) {
@@ -81,7 +80,7 @@ public abstract class HttpClient {
    * @throws StripeException If the request fails for any reason
    */
   public StripeResponse requestWithTelemetry(StripeRequest request) throws StripeException {
-    return sendWithTelemetry(request, (r) -> this.request(r));
+    return sendWithTelemetry(request, this::request);
   }
 
   /**
@@ -94,10 +93,10 @@ public abstract class HttpClient {
    */
   public StripeResponseStream requestStreamWithTelemetry(StripeRequest request)
       throws StripeException {
-    return sendWithTelemetry(request, (r) -> this.requestStream(r));
+    return sendWithTelemetry(request, this::requestStream);
   }
 
-  public <T extends StripeResponseInterface> T sendWithRetries(
+  public <T extends AbstractStripeResponse<?>> T sendWithRetries(
       StripeRequest request, RequestSendFunction<T> send) throws StripeException {
     ApiConnectionException requestException = null;
     T response = null;
@@ -218,7 +217,7 @@ public abstract class HttpClient {
     return str;
   }
 
-  private <T extends StripeResponseInterface> boolean shouldRetry(
+  private <T extends AbstractStripeResponse<?>> boolean shouldRetry(
       int numRetries, StripeException exception, StripeRequest request, T response) {
     // Do not retry if we are out of retries.
     if (numRetries >= request.options().getMaxNetworkRetries()) {

@@ -106,7 +106,7 @@ public class LiveStripeResponseGetter implements StripeResponseGetter {
       handleApiError(response);
     }
 
-    return responseStream.bodyStream();
+    return responseStream.body();
   }
 
   @Override

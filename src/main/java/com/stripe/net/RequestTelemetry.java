@@ -52,7 +52,7 @@ class RequestTelemetry {
    * @param response the Stripe response
    * @param duration the request duration
    */
-  public void maybeEnqueueMetrics(StripeResponseInterface response, Duration duration) {
+  public void maybeEnqueueMetrics(AbstractStripeResponse<?> response, Duration duration) {
     if (!Stripe.enableTelemetry) {
       return;
     }
