@@ -1058,57 +1058,56 @@ public class Account extends ApiResource implements MetadataStore<Account>, Paym
   @EqualsAndHashCode(callSuper = false)
   public static class Requirements extends StripeObject {
     /**
-     * The date the fields in {@code currently_due} must be collected by to keep payouts enabled for
-     * the account. These fields might block payouts sooner if the next threshold is reached before
-     * these fields are collected.
+     * Date by which the fields in {@code currently_due} must be collected to keep the account
+     * enabled. These fields may disable the account sooner if the next threshold is reached before
+     * they are collected.
      */
     @SerializedName("current_deadline")
     Long currentDeadline;
 
     /**
-     * The fields that need to be collected to keep the account enabled. If not collected by the
-     * {@code current_deadline}, these fields appear in {@code past_due} as well, and the account is
+     * Fields that need to be collected to keep the account enabled. If not collected by {@code
+     * current_deadline}, these fields appear in {@code past_due} as well, and the account is
      * disabled.
      */
     @SerializedName("currently_due")
     List<String> currentlyDue;
 
     /**
-     * If the account is disabled, this string describes why the account can’t create charges or
-     * receive payouts. Can be {@code requirements.past_due}, {@code
-     * requirements.pending_verification}, {@code rejected.fraud}, {@code
-     * rejected.terms_of_service}, {@code rejected.listed}, {@code rejected.other}, {@code listed},
-     * {@code under_review}, or {@code other}.
+     * If the account is disabled, this string describes why. Can be {@code requirements.past_due},
+     * {@code requirements.pending_verification}, {@code listed}, {@code platform_paused}, {@code
+     * rejected.fraud}, {@code rejected.listed}, {@code rejected.terms_of_service}, {@code
+     * rejected.other}, {@code under_review}, or {@code other}.
      */
     @SerializedName("disabled_reason")
     String disabledReason;
 
     /**
-     * The fields that are {@code currently_due} and need to be collected again because validation
-     * or verification failed for some reason.
+     * Fields that are {@code currently_due} and need to be collected again because validation or
+     * verification failed.
      */
     @SerializedName("errors")
     List<Account.Requirements.Errors> errors;
 
     /**
-     * The fields that need to be collected assuming all volume thresholds are reached. As they
-     * become required, these fields appear in {@code currently_due} as well, and the {@code
-     * current_deadline} is set.
+     * Fields that need to be collected assuming all volume thresholds are reached. As they become
+     * required, they appear in {@code currently_due} as well, and {@code current_deadline} becomes
+     * set.
      */
     @SerializedName("eventually_due")
     List<String> eventuallyDue;
 
     /**
-     * The fields that weren't collected by the {@code current_deadline}. These fields need to be
-     * collected to re-enable the account.
+     * Fields that weren't collected by {@code current_deadline}. These fields need to be collected
+     * to enable the account.
      */
     @SerializedName("past_due")
     List<String> pastDue;
 
     /**
-     * Fields that may become required depending on the results of verification or review. An empty
-     * array unless an asynchronous verification is pending. If verification fails, the fields in
-     * this array become required and move to {@code currently_due} or {@code past_due}.
+     * Fields that may become required depending on the results of verification or review. Will be
+     * an empty array unless an asynchronous verification is pending. If verification fails, these
+     * fields become required and move to {@code currently_due} or {@code past_due}.
      */
     @SerializedName("pending_verification")
     List<String> pendingVerification;

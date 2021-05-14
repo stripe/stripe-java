@@ -12,6 +12,7 @@ import com.stripe.param.SetupIntentCreateParams;
 import com.stripe.param.SetupIntentListParams;
 import com.stripe.param.SetupIntentRetrieveParams;
 import com.stripe.param.SetupIntentUpdateParams;
+import com.stripe.param.SetupIntentVerifyMicrodepositsParams;
 import java.util.List;
 import java.util.Map;
 import lombok.EqualsAndHashCode;
@@ -662,6 +663,45 @@ public class SetupIntent extends ApiResource implements HasId, MetadataStore<Set
             "%s%s",
             Stripe.getApiBase(),
             String.format("/v1/setup_intents/%s/cancel", ApiResource.urlEncodeId(this.getId())));
+    return ApiResource.request(
+        ApiResource.RequestMethod.POST, url, params, SetupIntent.class, options);
+  }
+
+  /** Verifies microdeposits on a SetupIntent object. */
+  public SetupIntent verifyMicrodeposits(Map<String, Object> params) throws StripeException {
+    return verifyMicrodeposits(params, (RequestOptions) null);
+  }
+
+  /** Verifies microdeposits on a SetupIntent object. */
+  public SetupIntent verifyMicrodeposits(Map<String, Object> params, RequestOptions options)
+      throws StripeException {
+    String url =
+        String.format(
+            "%s%s",
+            Stripe.getApiBase(),
+            String.format(
+                "/v1/setup_intents/%s/verify_microdeposits",
+                ApiResource.urlEncodeId(this.getId())));
+    return ApiResource.request(
+        ApiResource.RequestMethod.POST, url, params, SetupIntent.class, options);
+  }
+
+  /** Verifies microdeposits on a SetupIntent object. */
+  public SetupIntent verifyMicrodeposits(SetupIntentVerifyMicrodepositsParams params)
+      throws StripeException {
+    return verifyMicrodeposits(params, (RequestOptions) null);
+  }
+
+  /** Verifies microdeposits on a SetupIntent object. */
+  public SetupIntent verifyMicrodeposits(
+      SetupIntentVerifyMicrodepositsParams params, RequestOptions options) throws StripeException {
+    String url =
+        String.format(
+            "%s%s",
+            Stripe.getApiBase(),
+            String.format(
+                "/v1/setup_intents/%s/verify_microdeposits",
+                ApiResource.urlEncodeId(this.getId())));
     return ApiResource.request(
         ApiResource.RequestMethod.POST, url, params, SetupIntent.class, options);
   }
