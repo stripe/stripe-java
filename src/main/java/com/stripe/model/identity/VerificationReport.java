@@ -146,7 +146,7 @@ public class VerificationReport extends ApiResource implements HasId {
 
     /** Details on the verification error. Present when status is {@code unverified}. */
     @SerializedName("error")
-    Error error;
+    DocumentCheckError error;
 
     /** Expiration date of the document. */
     @SerializedName("expiration_date")
@@ -215,7 +215,7 @@ public class VerificationReport extends ApiResource implements HasId {
     @Getter
     @Setter
     @EqualsAndHashCode(callSuper = false)
-    public static class Error extends StripeObject {
+    public static class DocumentCheckError extends StripeObject {
       /**
        * A short machine-readable string giving the reason for the verification failure.
        *
@@ -278,7 +278,7 @@ public class VerificationReport extends ApiResource implements HasId {
 
     /** Details on the verification error. Present when status is {@code unverified}. */
     @SerializedName("error")
-    Error error;
+    IdNumberCheckError error;
 
     /** First name. */
     @SerializedName("first_name")
@@ -328,7 +328,7 @@ public class VerificationReport extends ApiResource implements HasId {
     @Getter
     @Setter
     @EqualsAndHashCode(callSuper = false)
-    public static class Error extends StripeObject {
+    public static class IdNumberCheckError extends StripeObject {
       /**
        * A short machine-readable string giving the reason for the verification failure.
        *
@@ -397,7 +397,7 @@ public class VerificationReport extends ApiResource implements HasId {
 
     /** Details on the verification error. Present when status is {@code unverified}. */
     @SerializedName("error")
-    Error error;
+    SelfieCheckError error;
 
     /**
      * ID of the <a href="https://stripe.com/docs/api/files">File</a> holding the image of the
@@ -417,7 +417,7 @@ public class VerificationReport extends ApiResource implements HasId {
     @Getter
     @Setter
     @EqualsAndHashCode(callSuper = false)
-    public static class Error extends StripeObject {
+    public static class SelfieCheckError extends StripeObject {
       /**
        * A short machine-readable string giving the reason for the verification failure.
        *

@@ -14,6 +14,7 @@ import com.stripe.net.RequestOptions;
 import com.stripe.param.identity.VerificationSessionCancelParams;
 import com.stripe.param.identity.VerificationSessionCreateParams;
 import com.stripe.param.identity.VerificationSessionListParams;
+import com.stripe.param.identity.VerificationSessionRedactParams;
 import com.stripe.param.identity.VerificationSessionRetrieveParams;
 import com.stripe.param.identity.VerificationSessionUpdateParams;
 import java.util.List;
@@ -336,6 +337,186 @@ public class VerificationSession extends ApiResource
             Stripe.getApiBase(),
             String.format(
                 "/v1/identity/verification_sessions/%s/cancel",
+                ApiResource.urlEncodeId(this.getId())));
+    return ApiResource.request(
+        ApiResource.RequestMethod.POST, url, params, VerificationSession.class, options);
+  }
+
+  /**
+   * Redact a VerificationSession to delete all collected information from Stripe. This will redact
+   * the VerificationSession and all objects related to it, including VerificationReports, Events,
+   * Files, request logs, etc. This redaction process may take up to four days. When the redaction
+   * process is in progress, the VerificationSession’s <code>redaction.status</code> field will be
+   * set to <code>processing</code>; when the process is finished, it will change to <code>redacted
+   * </code>.
+   *
+   * <p>Redaction is irreversible. Redacted objects are still accessible in the Stripe API, but all
+   * the fields that contain personal data will be replaced by the string <code>[redacted]</code> or
+   * a similar placeholder. The <code>metadata</code> field will also be erased. Redacted objects
+   * cannot be updated or used for any purpose.
+   *
+   * <p>If the VerificationSession is in the <code>processing</code> state, you must wait until it
+   * finishes before redacting it. Redacting a VerificationSession in <code>requires_action</code>
+   * state will automatically <a
+   * href="https://stripe.com/docs/api/verification_sessions/cancel">cancel</a> it.
+   *
+   * <p>An <a
+   * href="https://stripe.com/docs/api/events/types#event_types-identity.verification_session.redacted">
+   * <code>identity.verification_session.redacted</code></a> webhook will be sent when a
+   * VerificationSession is redacted.
+   */
+  public VerificationSession redact() throws StripeException {
+    return redact((Map<String, Object>) null, (RequestOptions) null);
+  }
+
+  /**
+   * Redact a VerificationSession to delete all collected information from Stripe. This will redact
+   * the VerificationSession and all objects related to it, including VerificationReports, Events,
+   * Files, request logs, etc. This redaction process may take up to four days. When the redaction
+   * process is in progress, the VerificationSession’s <code>redaction.status</code> field will be
+   * set to <code>processing</code>; when the process is finished, it will change to <code>redacted
+   * </code>.
+   *
+   * <p>Redaction is irreversible. Redacted objects are still accessible in the Stripe API, but all
+   * the fields that contain personal data will be replaced by the string <code>[redacted]</code> or
+   * a similar placeholder. The <code>metadata</code> field will also be erased. Redacted objects
+   * cannot be updated or used for any purpose.
+   *
+   * <p>If the VerificationSession is in the <code>processing</code> state, you must wait until it
+   * finishes before redacting it. Redacting a VerificationSession in <code>requires_action</code>
+   * state will automatically <a
+   * href="https://stripe.com/docs/api/verification_sessions/cancel">cancel</a> it.
+   *
+   * <p>An <a
+   * href="https://stripe.com/docs/api/events/types#event_types-identity.verification_session.redacted">
+   * <code>identity.verification_session.redacted</code></a> webhook will be sent when a
+   * VerificationSession is redacted.
+   */
+  public VerificationSession redact(RequestOptions options) throws StripeException {
+    return redact((Map<String, Object>) null, options);
+  }
+
+  /**
+   * Redact a VerificationSession to delete all collected information from Stripe. This will redact
+   * the VerificationSession and all objects related to it, including VerificationReports, Events,
+   * Files, request logs, etc. This redaction process may take up to four days. When the redaction
+   * process is in progress, the VerificationSession’s <code>redaction.status</code> field will be
+   * set to <code>processing</code>; when the process is finished, it will change to <code>redacted
+   * </code>.
+   *
+   * <p>Redaction is irreversible. Redacted objects are still accessible in the Stripe API, but all
+   * the fields that contain personal data will be replaced by the string <code>[redacted]</code> or
+   * a similar placeholder. The <code>metadata</code> field will also be erased. Redacted objects
+   * cannot be updated or used for any purpose.
+   *
+   * <p>If the VerificationSession is in the <code>processing</code> state, you must wait until it
+   * finishes before redacting it. Redacting a VerificationSession in <code>requires_action</code>
+   * state will automatically <a
+   * href="https://stripe.com/docs/api/verification_sessions/cancel">cancel</a> it.
+   *
+   * <p>An <a
+   * href="https://stripe.com/docs/api/events/types#event_types-identity.verification_session.redacted">
+   * <code>identity.verification_session.redacted</code></a> webhook will be sent when a
+   * VerificationSession is redacted.
+   */
+  public VerificationSession redact(Map<String, Object> params) throws StripeException {
+    return redact(params, (RequestOptions) null);
+  }
+
+  /**
+   * Redact a VerificationSession to delete all collected information from Stripe. This will redact
+   * the VerificationSession and all objects related to it, including VerificationReports, Events,
+   * Files, request logs, etc. This redaction process may take up to four days. When the redaction
+   * process is in progress, the VerificationSession’s <code>redaction.status</code> field will be
+   * set to <code>processing</code>; when the process is finished, it will change to <code>redacted
+   * </code>.
+   *
+   * <p>Redaction is irreversible. Redacted objects are still accessible in the Stripe API, but all
+   * the fields that contain personal data will be replaced by the string <code>[redacted]</code> or
+   * a similar placeholder. The <code>metadata</code> field will also be erased. Redacted objects
+   * cannot be updated or used for any purpose.
+   *
+   * <p>If the VerificationSession is in the <code>processing</code> state, you must wait until it
+   * finishes before redacting it. Redacting a VerificationSession in <code>requires_action</code>
+   * state will automatically <a
+   * href="https://stripe.com/docs/api/verification_sessions/cancel">cancel</a> it.
+   *
+   * <p>An <a
+   * href="https://stripe.com/docs/api/events/types#event_types-identity.verification_session.redacted">
+   * <code>identity.verification_session.redacted</code></a> webhook will be sent when a
+   * VerificationSession is redacted.
+   */
+  public VerificationSession redact(Map<String, Object> params, RequestOptions options)
+      throws StripeException {
+    String url =
+        String.format(
+            "%s%s",
+            Stripe.getApiBase(),
+            String.format(
+                "/v1/identity/verification_sessions/%s/redact",
+                ApiResource.urlEncodeId(this.getId())));
+    return ApiResource.request(
+        ApiResource.RequestMethod.POST, url, params, VerificationSession.class, options);
+  }
+
+  /**
+   * Redact a VerificationSession to delete all collected information from Stripe. This will redact
+   * the VerificationSession and all objects related to it, including VerificationReports, Events,
+   * Files, request logs, etc. This redaction process may take up to four days. When the redaction
+   * process is in progress, the VerificationSession’s <code>redaction.status</code> field will be
+   * set to <code>processing</code>; when the process is finished, it will change to <code>redacted
+   * </code>.
+   *
+   * <p>Redaction is irreversible. Redacted objects are still accessible in the Stripe API, but all
+   * the fields that contain personal data will be replaced by the string <code>[redacted]</code> or
+   * a similar placeholder. The <code>metadata</code> field will also be erased. Redacted objects
+   * cannot be updated or used for any purpose.
+   *
+   * <p>If the VerificationSession is in the <code>processing</code> state, you must wait until it
+   * finishes before redacting it. Redacting a VerificationSession in <code>requires_action</code>
+   * state will automatically <a
+   * href="https://stripe.com/docs/api/verification_sessions/cancel">cancel</a> it.
+   *
+   * <p>An <a
+   * href="https://stripe.com/docs/api/events/types#event_types-identity.verification_session.redacted">
+   * <code>identity.verification_session.redacted</code></a> webhook will be sent when a
+   * VerificationSession is redacted.
+   */
+  public VerificationSession redact(VerificationSessionRedactParams params) throws StripeException {
+    return redact(params, (RequestOptions) null);
+  }
+
+  /**
+   * Redact a VerificationSession to delete all collected information from Stripe. This will redact
+   * the VerificationSession and all objects related to it, including VerificationReports, Events,
+   * Files, request logs, etc. This redaction process may take up to four days. When the redaction
+   * process is in progress, the VerificationSession’s <code>redaction.status</code> field will be
+   * set to <code>processing</code>; when the process is finished, it will change to <code>redacted
+   * </code>.
+   *
+   * <p>Redaction is irreversible. Redacted objects are still accessible in the Stripe API, but all
+   * the fields that contain personal data will be replaced by the string <code>[redacted]</code> or
+   * a similar placeholder. The <code>metadata</code> field will also be erased. Redacted objects
+   * cannot be updated or used for any purpose.
+   *
+   * <p>If the VerificationSession is in the <code>processing</code> state, you must wait until it
+   * finishes before redacting it. Redacting a VerificationSession in <code>requires_action</code>
+   * state will automatically <a
+   * href="https://stripe.com/docs/api/verification_sessions/cancel">cancel</a> it.
+   *
+   * <p>An <a
+   * href="https://stripe.com/docs/api/events/types#event_types-identity.verification_session.redacted">
+   * <code>identity.verification_session.redacted</code></a> webhook will be sent when a
+   * VerificationSession is redacted.
+   */
+  public VerificationSession redact(VerificationSessionRedactParams params, RequestOptions options)
+      throws StripeException {
+    String url =
+        String.format(
+            "%s%s",
+            Stripe.getApiBase(),
+            String.format(
+                "/v1/identity/verification_sessions/%s/redact",
                 ApiResource.urlEncodeId(this.getId())));
     return ApiResource.request(
         ApiResource.RequestMethod.POST, url, params, VerificationSession.class, options);
