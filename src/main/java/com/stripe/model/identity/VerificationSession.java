@@ -4,6 +4,7 @@ package com.stripe.model.identity;
 import com.google.gson.annotations.SerializedName;
 import com.stripe.Stripe;
 import com.stripe.exception.StripeException;
+import com.stripe.model.Address;
 import com.stripe.model.ExpandableField;
 import com.stripe.model.HasId;
 import com.stripe.model.MetadataStore;
@@ -78,6 +79,13 @@ public class VerificationSession extends ApiResource
 
   @SerializedName("options")
   Options options;
+
+  /**
+   * Redaction status of this VerificationSession. If the VerificationSession is not redacted, this
+   * field will be null.
+   */
+  @SerializedName("redaction")
+  Redaction redaction;
 
   /**
    * Status of this VerificationSession. Read more about each <a
@@ -380,12 +388,11 @@ public class VerificationSession extends ApiResource
      * failure.
      *
      * <p>One of {@code abandoned}, {@code consent_declined}, {@code country_not_supported}, {@code
-     * device_not_supported}, {@code document_expired}, {@code document_manipulated}, {@code
-     * document_type_not_supported}, {@code document_unverified_other}, {@code
-     * id_number_insufficient_document_data}, {@code id_number_mismatch}, {@code
-     * id_number_unverified_other}, {@code selfie_document_missing_photo}, {@code
-     * selfie_face_mismatch}, {@code selfie_manipulated}, {@code selfie_unverified_other}, or {@code
-     * under_supported_age}.
+     * device_not_supported}, {@code document_expired}, {@code document_type_not_supported}, {@code
+     * document_unverified_other}, {@code id_number_insufficient_document_data}, {@code
+     * id_number_mismatch}, {@code id_number_unverified_other}, {@code
+     * selfie_document_missing_photo}, {@code selfie_face_mismatch}, {@code selfie_manipulated},
+     * {@code selfie_unverified_other}, or {@code under_supported_age}.
      */
     @SerializedName("code")
     String code;
@@ -438,6 +445,19 @@ public class VerificationSession extends ApiResource
   @Getter
   @Setter
   @EqualsAndHashCode(callSuper = false)
+  public static class Redaction extends StripeObject {
+    /**
+     * Indicates whether this object and its related objects have been redacted or not.
+     *
+     * <p>One of {@code processing}, or {@code redacted}.
+     */
+    @SerializedName("status")
+    String status;
+  }
+
+  @Getter
+  @Setter
+  @EqualsAndHashCode(callSuper = false)
   public static class VerifiedOutputs extends StripeObject {
     /** Verified address of the user. */
     @SerializedName("address")
@@ -445,7 +465,7 @@ public class VerificationSession extends ApiResource
 
     /** Verified date of birth of the user. */
     @SerializedName("dob")
-    Date dob;
+    DateOfBirth dob;
 
     /** Verified first name of the user. */
     @SerializedName("first_name")
@@ -470,39 +490,7 @@ public class VerificationSession extends ApiResource
     @Getter
     @Setter
     @EqualsAndHashCode(callSuper = false)
-    public static class Address extends StripeObject {
-      /** City, district, suburb, town, or village. */
-      @SerializedName("city")
-      String city;
-
-      /**
-       * Two-letter country code (<a href="https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2">ISO
-       * 3166-1 alpha-2</a>).
-       */
-      @SerializedName("country")
-      String country;
-
-      /** Address line 1 (e.g., street, PO Box, or company name). */
-      @SerializedName("line1")
-      String line1;
-
-      /** Address line 2 (e.g., apartment, suite, unit, or building). */
-      @SerializedName("line2")
-      String line2;
-
-      /** ZIP or postal code. */
-      @SerializedName("postal_code")
-      String postalCode;
-
-      /** State, county, province, or region. */
-      @SerializedName("state")
-      String state;
-    }
-
-    @Getter
-    @Setter
-    @EqualsAndHashCode(callSuper = false)
-    public static class Date extends StripeObject {
+    public static class DateOfBirth extends StripeObject {
       /** Numerical day between 1 and 31. */
       @SerializedName("day")
       Long day;

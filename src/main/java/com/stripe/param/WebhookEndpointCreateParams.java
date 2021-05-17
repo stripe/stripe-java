@@ -741,24 +741,6 @@ public class WebhookEndpointCreateParams extends ApiRequestParams {
     @SerializedName("file.created")
     FILE__CREATED("file.created"),
 
-    @SerializedName("identity.verification_session.canceled")
-    IDENTITY__VERIFICATION_SESSION__CANCELED("identity.verification_session.canceled"),
-
-    @SerializedName("identity.verification_session.created")
-    IDENTITY__VERIFICATION_SESSION__CREATED("identity.verification_session.created"),
-
-    @SerializedName("identity.verification_session.processing")
-    IDENTITY__VERIFICATION_SESSION__PROCESSING("identity.verification_session.processing"),
-
-    @SerializedName("identity.verification_session.redacted")
-    IDENTITY__VERIFICATION_SESSION__REDACTED("identity.verification_session.redacted"),
-
-    @SerializedName("identity.verification_session.requires_input")
-    IDENTITY__VERIFICATION_SESSION__REQUIRES_INPUT("identity.verification_session.requires_input"),
-
-    @SerializedName("identity.verification_session.verified")
-    IDENTITY__VERIFICATION_SESSION__VERIFIED("identity.verification_session.verified"),
-
     @SerializedName("invoice.created")
     INVOICE__CREATED("invoice.created"),
 

@@ -32,8 +32,8 @@ public class CouponCreateParams extends ApiRequestParams {
   String currency;
 
   /**
-   * Specifies how long the discount will be in effect. Can be {@code forever}, {@code once}, or
-   * {@code repeating}.
+   * Specifies how long the discount will be in effect if used on a subscription. Can be {@code
+   * forever}, {@code once}, or {@code repeating}. Defaults to {@code once}.
    */
   @SerializedName("duration")
   Duration duration;
@@ -207,8 +207,8 @@ public class CouponCreateParams extends ApiRequestParams {
     }
 
     /**
-     * Specifies how long the discount will be in effect. Can be {@code forever}, {@code once}, or
-     * {@code repeating}.
+     * Specifies how long the discount will be in effect if used on a subscription. Can be {@code
+     * forever}, {@code once}, or {@code repeating}. Defaults to {@code once}.
      */
     public Builder setDuration(Duration duration) {
       this.duration = duration;
