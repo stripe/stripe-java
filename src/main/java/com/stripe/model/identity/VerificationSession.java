@@ -168,7 +168,7 @@ public class VerificationSession extends ApiResource
    * redirecting your user to Stripe, ensure that you have just Created or Retrieved the
    * VerificationSession; never cache or store the <code>url</code>.
    */
-  public VerificationSession retrieve(String session) throws StripeException {
+  public static VerificationSession retrieve(String session) throws StripeException {
     return retrieve(session, (Map<String, Object>) null, (RequestOptions) null);
   }
 
@@ -179,7 +179,7 @@ public class VerificationSession extends ApiResource
    * redirecting your user to Stripe, ensure that you have just Created or Retrieved the
    * VerificationSession; never cache or store the <code>url</code>.
    */
-  public VerificationSession retrieve(String session, RequestOptions options)
+  public static VerificationSession retrieve(String session, RequestOptions options)
       throws StripeException {
     return retrieve(session, (Map<String, Object>) null, options);
   }
@@ -191,7 +191,7 @@ public class VerificationSession extends ApiResource
    * redirecting your user to Stripe, ensure that you have just Created or Retrieved the
    * VerificationSession; never cache or store the <code>url</code>.
    */
-  public VerificationSession retrieve(
+  public static VerificationSession retrieve(
       String session, Map<String, Object> params, RequestOptions options) throws StripeException {
     String url =
         String.format(
@@ -210,7 +210,7 @@ public class VerificationSession extends ApiResource
    * redirecting your user to Stripe, ensure that you have just Created or Retrieved the
    * VerificationSession; never cache or store the <code>url</code>.
    */
-  public VerificationSession retrieve(
+  public static VerificationSession retrieve(
       String session, VerificationSessionRetrieveParams params, RequestOptions options)
       throws StripeException {
     String url =
