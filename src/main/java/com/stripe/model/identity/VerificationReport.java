@@ -73,17 +73,18 @@ public class VerificationReport extends ApiResource implements HasId {
   String verificationSession;
 
   /** Retrieves an existing VerificationReport. */
-  public VerificationReport retrieve(String report) throws StripeException {
+  public static VerificationReport retrieve(String report) throws StripeException {
     return retrieve(report, (Map<String, Object>) null, (RequestOptions) null);
   }
 
   /** Retrieves an existing VerificationReport. */
-  public VerificationReport retrieve(String report, RequestOptions options) throws StripeException {
+  public static VerificationReport retrieve(String report, RequestOptions options)
+      throws StripeException {
     return retrieve(report, (Map<String, Object>) null, options);
   }
 
   /** Retrieves an existing VerificationReport. */
-  public VerificationReport retrieve(
+  public static VerificationReport retrieve(
       String report, Map<String, Object> params, RequestOptions options) throws StripeException {
     String url =
         String.format(
@@ -95,7 +96,7 @@ public class VerificationReport extends ApiResource implements HasId {
   }
 
   /** Retrieves an existing VerificationReport. */
-  public VerificationReport retrieve(
+  public static VerificationReport retrieve(
       String report, VerificationReportRetrieveParams params, RequestOptions options)
       throws StripeException {
     String url =
@@ -108,25 +109,26 @@ public class VerificationReport extends ApiResource implements HasId {
   }
 
   /** List all verification reports. */
-  public VerificationReportCollection list(Map<String, Object> params) throws StripeException {
+  public static VerificationReportCollection list(Map<String, Object> params)
+      throws StripeException {
     return list(params, (RequestOptions) null);
   }
 
   /** List all verification reports. */
-  public VerificationReportCollection list(Map<String, Object> params, RequestOptions options)
-      throws StripeException {
+  public static VerificationReportCollection list(
+      Map<String, Object> params, RequestOptions options) throws StripeException {
     String url = String.format("%s%s", Stripe.getApiBase(), "/v1/identity/verification_reports");
     return ApiResource.requestCollection(url, params, VerificationReportCollection.class, options);
   }
 
   /** List all verification reports. */
-  public VerificationReportCollection list(VerificationReportListParams params)
+  public static VerificationReportCollection list(VerificationReportListParams params)
       throws StripeException {
     return list(params, (RequestOptions) null);
   }
 
   /** List all verification reports. */
-  public VerificationReportCollection list(
+  public static VerificationReportCollection list(
       VerificationReportListParams params, RequestOptions options) throws StripeException {
     String url = String.format("%s%s", Stripe.getApiBase(), "/v1/identity/verification_reports");
     return ApiResource.requestCollection(url, params, VerificationReportCollection.class, options);

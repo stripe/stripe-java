@@ -1107,7 +1107,7 @@ public class Account extends ApiResource implements MetadataStore<Account>, Paym
     /**
      * Fields that may become required depending on the results of verification or review. Will be
      * an empty array unless an asynchronous verification is pending. If verification fails, these
-     * fields become required and move to {@code currently_due} or {@code past_due}.
+     * fields move to {@code eventually_due}, {@code currently_due}, or {@code past_due}.
      */
     @SerializedName("pending_verification")
     List<String> pendingVerification;

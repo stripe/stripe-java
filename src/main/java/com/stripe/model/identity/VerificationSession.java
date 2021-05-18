@@ -136,12 +136,12 @@ public class VerificationSession extends ApiResource
   }
 
   /** Create a new VerificationSession to begin the verification process. */
-  public VerificationSession create(Map<String, Object> params) throws StripeException {
+  public static VerificationSession create(Map<String, Object> params) throws StripeException {
     return create(params, (RequestOptions) null);
   }
 
   /** Create a new VerificationSession to begin the verification process. */
-  public VerificationSession create(Map<String, Object> params, RequestOptions options)
+  public static VerificationSession create(Map<String, Object> params, RequestOptions options)
       throws StripeException {
     String url = String.format("%s%s", Stripe.getApiBase(), "/v1/identity/verification_sessions");
     return ApiResource.request(
@@ -149,13 +149,14 @@ public class VerificationSession extends ApiResource
   }
 
   /** Create a new VerificationSession to begin the verification process. */
-  public VerificationSession create(VerificationSessionCreateParams params) throws StripeException {
+  public static VerificationSession create(VerificationSessionCreateParams params)
+      throws StripeException {
     return create(params, (RequestOptions) null);
   }
 
   /** Create a new VerificationSession to begin the verification process. */
-  public VerificationSession create(VerificationSessionCreateParams params, RequestOptions options)
-      throws StripeException {
+  public static VerificationSession create(
+      VerificationSessionCreateParams params, RequestOptions options) throws StripeException {
     String url = String.format("%s%s", Stripe.getApiBase(), "/v1/identity/verification_sessions");
     return ApiResource.request(
         ApiResource.RequestMethod.POST, url, params, VerificationSession.class, options);
@@ -228,7 +229,8 @@ public class VerificationSession extends ApiResource
    * VerificationSessions with that status. Can optionally specify a query filter on created
    * timestamp.
    */
-  public VerificationSessionCollection list(Map<String, Object> params) throws StripeException {
+  public static VerificationSessionCollection list(Map<String, Object> params)
+      throws StripeException {
     return list(params, (RequestOptions) null);
   }
 
@@ -237,8 +239,8 @@ public class VerificationSession extends ApiResource
    * VerificationSessions with that status. Can optionally specify a query filter on created
    * timestamp.
    */
-  public VerificationSessionCollection list(Map<String, Object> params, RequestOptions options)
-      throws StripeException {
+  public static VerificationSessionCollection list(
+      Map<String, Object> params, RequestOptions options) throws StripeException {
     String url = String.format("%s%s", Stripe.getApiBase(), "/v1/identity/verification_sessions");
     return ApiResource.requestCollection(url, params, VerificationSessionCollection.class, options);
   }
@@ -248,7 +250,7 @@ public class VerificationSession extends ApiResource
    * VerificationSessions with that status. Can optionally specify a query filter on created
    * timestamp.
    */
-  public VerificationSessionCollection list(VerificationSessionListParams params)
+  public static VerificationSessionCollection list(VerificationSessionListParams params)
       throws StripeException {
     return list(params, (RequestOptions) null);
   }
@@ -258,7 +260,7 @@ public class VerificationSession extends ApiResource
    * VerificationSessions with that status. Can optionally specify a query filter on created
    * timestamp.
    */
-  public VerificationSessionCollection list(
+  public static VerificationSessionCollection list(
       VerificationSessionListParams params, RequestOptions options) throws StripeException {
     String url = String.format("%s%s", Stripe.getApiBase(), "/v1/identity/verification_sessions");
     return ApiResource.requestCollection(url, params, VerificationSessionCollection.class, options);
