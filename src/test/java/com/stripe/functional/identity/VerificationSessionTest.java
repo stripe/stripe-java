@@ -52,10 +52,7 @@ public class VerificationSessionTest extends BaseStripeTest {
     final VerificationSession verificationSession = VerificationSession.create(params);
 
     assertNotNull(verificationSession);
-    verifyRequest(
-        ApiResource.RequestMethod.POST,
-        "/v1/identity/verification_sessions",
-        params);
+    verifyRequest(ApiResource.RequestMethod.POST, "/v1/identity/verification_sessions", params);
   }
 
   @Test
@@ -97,8 +94,6 @@ public class VerificationSessionTest extends BaseStripeTest {
 
     assertNotNull(verificationSessions);
     verifyRequest(
-        ApiResource.RequestMethod.GET,
-        String.format("/v1/identity/verification_sessions"),
-        params);
+        ApiResource.RequestMethod.GET, String.format("/v1/identity/verification_sessions"), params);
   }
 }
