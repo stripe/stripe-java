@@ -37,8 +37,6 @@ public class ProductTest extends BaseStripeTest {
     params.put("active", true);
     params.put("name", "Test Name");
     params.put("description", "This is a description");
-    params.put("caption", "This is a caption");
-    params.put("attributes", attributes);
     params.put("url", "http://example.com");
     params.put("shippable", true);
     params.put("package_dimensions", packageDimensions);
