@@ -339,31 +339,31 @@ public class Person extends ApiResource implements HasId, MetadataStore<Person> 
     List<String> currentlyDue;
 
     /**
-     * The fields that are {@code currently_due} and need to be collected again because validation
-     * or verification failed for some reason.
+     * Fields that are {@code currently_due} and need to be collected again because validation or
+     * verification failed.
      */
     @SerializedName("errors")
     List<Account.Requirements.Errors> errors;
 
     /**
-     * Fields that need to be collected assuming all volume thresholds are reached. As fields are
-     * needed, they are moved to {@code currently_due} and the account's {@code current_deadline} is
-     * set.
+     * Fields that need to be collected assuming all volume thresholds are reached. As they become
+     * required, they appear in {@code currently_due} as well, and the account's {@code
+     * current_deadline} becomes set.
      */
     @SerializedName("eventually_due")
     List<String> eventuallyDue;
 
     /**
      * Fields that weren't collected by the account's {@code current_deadline}. These fields need to
-     * be collected to enable payouts for the person's account.
+     * be collected to enable the person's account.
      */
     @SerializedName("past_due")
     List<String> pastDue;
 
     /**
-     * Fields that may become required depending on the results of verification or review. An empty
-     * array unless an asynchronous verification is pending. If verification fails, the fields in
-     * this array become required and move to {@code currently_due} or {@code past_due}.
+     * Fields that may become required depending on the results of verification or review. Will be
+     * an empty array unless an asynchronous verification is pending. If verification fails, these
+     * fields move to {@code eventually_due}, {@code currently_due}, or {@code past_due}.
      */
     @SerializedName("pending_verification")
     List<String> pendingVerification;
