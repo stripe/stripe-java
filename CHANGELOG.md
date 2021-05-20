@@ -1,5 +1,11 @@
 # Changelog
 
+## 20.51.0 - 2021-05-19
+* [#1211](https://github.com/stripe/stripe-java/pull/1211), [#1205](https://github.com/stripe/stripe-java/pull/1205) API Updates
+  * Add support for the `Identity.VerificationSession` and `Identity.VerificationReport` APIs.
+* [#1206](https://github.com/stripe/stripe-java/pull/1206) API Updates
+  * Add support for setting `AccountUpdateParams.business_profile.support_url` and `AccountCreateParams.support_url` to `EmptyParam`.
+
 ## 20.50.0 - 2021-05-06
 * [#1204](https://github.com/stripe/stripe-java/pull/1204) API Updates
   * Add support for `reference` on `Charge.payment_method_details.afterpay_clearpay`
