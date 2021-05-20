@@ -81,7 +81,10 @@ public class Session extends ApiResource implements HasId {
   @Setter(lombok.AccessLevel.NONE)
   ExpandableField<Customer> customer;
 
-  /** The customer details including the customer's tax exempt status and the customer's tax IDs. */
+  /**
+   * The customer details including the customer's tax exempt status and the customer's tax IDs.
+   * Only present on Sessions in {@code payment} or {@code subscription} mode.
+   */
   @SerializedName("customer_details")
   CustomerDetails customerDetails;
 
