@@ -3313,6 +3313,10 @@ public class TokenCreateParams extends ApiRequestParams {
     @SerializedName("dob")
     Object dob;
 
+    /** Documents that may be submitted to satisfy various informational requests. */
+    @SerializedName("documents")
+    Documents documents;
+
     /** The person's email address. */
     @SerializedName("email")
     String email;
@@ -3416,6 +3420,7 @@ public class TokenCreateParams extends ApiRequestParams {
         AddressKana addressKana,
         AddressKanji addressKanji,
         Object dob,
+        Documents documents,
         String email,
         Map<String, Object> extraParams,
         String firstName,
@@ -3438,6 +3443,7 @@ public class TokenCreateParams extends ApiRequestParams {
       this.addressKana = addressKana;
       this.addressKanji = addressKanji;
       this.dob = dob;
+      this.documents = documents;
       this.email = email;
       this.extraParams = extraParams;
       this.firstName = firstName;
@@ -3470,6 +3476,8 @@ public class TokenCreateParams extends ApiRequestParams {
       private AddressKanji addressKanji;
 
       private Object dob;
+
+      private Documents documents;
 
       private String email;
 
@@ -3514,6 +3522,7 @@ public class TokenCreateParams extends ApiRequestParams {
             this.addressKana,
             this.addressKanji,
             this.dob,
+            this.documents,
             this.email,
             this.extraParams,
             this.firstName,
@@ -3561,6 +3570,12 @@ public class TokenCreateParams extends ApiRequestParams {
       /** The person's date of birth. */
       public Builder setDob(EmptyParam dob) {
         this.dob = dob;
+        return this;
+      }
+
+      /** Documents that may be submitted to satisfy various informational requests. */
+      public Builder setDocuments(Documents documents) {
+        this.documents = documents;
         return this;
       }
 
@@ -4338,6 +4353,408 @@ public class TokenCreateParams extends ApiRequestParams {
         public Builder setYear(Long year) {
           this.year = year;
           return this;
+        }
+      }
+    }
+
+    @Getter
+    public static class Documents {
+      /**
+       * One or more documents that demonstrate proof that this person is authorized to represent
+       * the company.
+       */
+      @SerializedName("company_authorization")
+      CompanyAuthorization companyAuthorization;
+
+      /**
+       * Map of extra parameters for custom features not available in this client library. The
+       * content in this map is not serialized under this field's {@code @SerializedName} value.
+       * Instead, each key/value pair is serialized as if the key is a root-level field (serialized)
+       * name in this param object. Effectively, this map is flattened to its parent instance.
+       */
+      @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
+      Map<String, Object> extraParams;
+
+      /** One or more documents showing the person's passport page with photo and personal data. */
+      @SerializedName("passport")
+      Passport passport;
+
+      /**
+       * One or more documents showing the person's visa required for living in the country where
+       * they are residing.
+       */
+      @SerializedName("visa")
+      Visa visa;
+
+      private Documents(
+          CompanyAuthorization companyAuthorization,
+          Map<String, Object> extraParams,
+          Passport passport,
+          Visa visa) {
+        this.companyAuthorization = companyAuthorization;
+        this.extraParams = extraParams;
+        this.passport = passport;
+        this.visa = visa;
+      }
+
+      public static Builder builder() {
+        return new Builder();
+      }
+
+      public static class Builder {
+        private CompanyAuthorization companyAuthorization;
+
+        private Map<String, Object> extraParams;
+
+        private Passport passport;
+
+        private Visa visa;
+
+        /** Finalize and obtain parameter instance from this builder. */
+        public Documents build() {
+          return new Documents(
+              this.companyAuthorization, this.extraParams, this.passport, this.visa);
+        }
+
+        /**
+         * One or more documents that demonstrate proof that this person is authorized to represent
+         * the company.
+         */
+        public Builder setCompanyAuthorization(CompanyAuthorization companyAuthorization) {
+          this.companyAuthorization = companyAuthorization;
+          return this;
+        }
+
+        /**
+         * Add a key/value pair to `extraParams` map. A map is initialized for the first
+         * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
+         * map. See {@link TokenCreateParams.Person.Documents#extraParams} for the field
+         * documentation.
+         */
+        public Builder putExtraParam(String key, Object value) {
+          if (this.extraParams == null) {
+            this.extraParams = new HashMap<>();
+          }
+          this.extraParams.put(key, value);
+          return this;
+        }
+
+        /**
+         * Add all map key/value pairs to `extraParams` map. A map is initialized for the first
+         * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
+         * map. See {@link TokenCreateParams.Person.Documents#extraParams} for the field
+         * documentation.
+         */
+        public Builder putAllExtraParam(Map<String, Object> map) {
+          if (this.extraParams == null) {
+            this.extraParams = new HashMap<>();
+          }
+          this.extraParams.putAll(map);
+          return this;
+        }
+
+        /**
+         * One or more documents showing the person's passport page with photo and personal data.
+         */
+        public Builder setPassport(Passport passport) {
+          this.passport = passport;
+          return this;
+        }
+
+        /**
+         * One or more documents showing the person's visa required for living in the country where
+         * they are residing.
+         */
+        public Builder setVisa(Visa visa) {
+          this.visa = visa;
+          return this;
+        }
+      }
+
+      @Getter
+      public static class CompanyAuthorization {
+        /**
+         * Map of extra parameters for custom features not available in this client library. The
+         * content in this map is not serialized under this field's {@code @SerializedName} value.
+         * Instead, each key/value pair is serialized as if the key is a root-level field
+         * (serialized) name in this param object. Effectively, this map is flattened to its parent
+         * instance.
+         */
+        @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
+        Map<String, Object> extraParams;
+
+        /**
+         * One or more document ids returned by a <a
+         * href="https://stripe.com/docs/api#create_file">file upload</a> with a {@code purpose}
+         * value of {@code account_requirement}.
+         */
+        @SerializedName("files")
+        List<String> files;
+
+        private CompanyAuthorization(Map<String, Object> extraParams, List<String> files) {
+          this.extraParams = extraParams;
+          this.files = files;
+        }
+
+        public static Builder builder() {
+          return new Builder();
+        }
+
+        public static class Builder {
+          private Map<String, Object> extraParams;
+
+          private List<String> files;
+
+          /** Finalize and obtain parameter instance from this builder. */
+          public CompanyAuthorization build() {
+            return new CompanyAuthorization(this.extraParams, this.files);
+          }
+
+          /**
+           * Add a key/value pair to `extraParams` map. A map is initialized for the first
+           * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
+           * map. See {@link TokenCreateParams.Person.Documents.CompanyAuthorization#extraParams}
+           * for the field documentation.
+           */
+          public Builder putExtraParam(String key, Object value) {
+            if (this.extraParams == null) {
+              this.extraParams = new HashMap<>();
+            }
+            this.extraParams.put(key, value);
+            return this;
+          }
+
+          /**
+           * Add all map key/value pairs to `extraParams` map. A map is initialized for the first
+           * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
+           * map. See {@link TokenCreateParams.Person.Documents.CompanyAuthorization#extraParams}
+           * for the field documentation.
+           */
+          public Builder putAllExtraParam(Map<String, Object> map) {
+            if (this.extraParams == null) {
+              this.extraParams = new HashMap<>();
+            }
+            this.extraParams.putAll(map);
+            return this;
+          }
+
+          /**
+           * Add an element to `files` list. A list is initialized for the first `add/addAll` call,
+           * and subsequent calls adds additional elements to the original list. See {@link
+           * TokenCreateParams.Person.Documents.CompanyAuthorization#files} for the field
+           * documentation.
+           */
+          public Builder addFile(String element) {
+            if (this.files == null) {
+              this.files = new ArrayList<>();
+            }
+            this.files.add(element);
+            return this;
+          }
+
+          /**
+           * Add all elements to `files` list. A list is initialized for the first `add/addAll`
+           * call, and subsequent calls adds additional elements to the original list. See {@link
+           * TokenCreateParams.Person.Documents.CompanyAuthorization#files} for the field
+           * documentation.
+           */
+          public Builder addAllFile(List<String> elements) {
+            if (this.files == null) {
+              this.files = new ArrayList<>();
+            }
+            this.files.addAll(elements);
+            return this;
+          }
+        }
+      }
+
+      @Getter
+      public static class Passport {
+        /**
+         * Map of extra parameters for custom features not available in this client library. The
+         * content in this map is not serialized under this field's {@code @SerializedName} value.
+         * Instead, each key/value pair is serialized as if the key is a root-level field
+         * (serialized) name in this param object. Effectively, this map is flattened to its parent
+         * instance.
+         */
+        @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
+        Map<String, Object> extraParams;
+
+        /**
+         * One or more document ids returned by a <a
+         * href="https://stripe.com/docs/api#create_file">file upload</a> with a {@code purpose}
+         * value of {@code account_requirement}.
+         */
+        @SerializedName("files")
+        List<String> files;
+
+        private Passport(Map<String, Object> extraParams, List<String> files) {
+          this.extraParams = extraParams;
+          this.files = files;
+        }
+
+        public static Builder builder() {
+          return new Builder();
+        }
+
+        public static class Builder {
+          private Map<String, Object> extraParams;
+
+          private List<String> files;
+
+          /** Finalize and obtain parameter instance from this builder. */
+          public Passport build() {
+            return new Passport(this.extraParams, this.files);
+          }
+
+          /**
+           * Add a key/value pair to `extraParams` map. A map is initialized for the first
+           * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
+           * map. See {@link TokenCreateParams.Person.Documents.Passport#extraParams} for the field
+           * documentation.
+           */
+          public Builder putExtraParam(String key, Object value) {
+            if (this.extraParams == null) {
+              this.extraParams = new HashMap<>();
+            }
+            this.extraParams.put(key, value);
+            return this;
+          }
+
+          /**
+           * Add all map key/value pairs to `extraParams` map. A map is initialized for the first
+           * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
+           * map. See {@link TokenCreateParams.Person.Documents.Passport#extraParams} for the field
+           * documentation.
+           */
+          public Builder putAllExtraParam(Map<String, Object> map) {
+            if (this.extraParams == null) {
+              this.extraParams = new HashMap<>();
+            }
+            this.extraParams.putAll(map);
+            return this;
+          }
+
+          /**
+           * Add an element to `files` list. A list is initialized for the first `add/addAll` call,
+           * and subsequent calls adds additional elements to the original list. See {@link
+           * TokenCreateParams.Person.Documents.Passport#files} for the field documentation.
+           */
+          public Builder addFile(String element) {
+            if (this.files == null) {
+              this.files = new ArrayList<>();
+            }
+            this.files.add(element);
+            return this;
+          }
+
+          /**
+           * Add all elements to `files` list. A list is initialized for the first `add/addAll`
+           * call, and subsequent calls adds additional elements to the original list. See {@link
+           * TokenCreateParams.Person.Documents.Passport#files} for the field documentation.
+           */
+          public Builder addAllFile(List<String> elements) {
+            if (this.files == null) {
+              this.files = new ArrayList<>();
+            }
+            this.files.addAll(elements);
+            return this;
+          }
+        }
+      }
+
+      @Getter
+      public static class Visa {
+        /**
+         * Map of extra parameters for custom features not available in this client library. The
+         * content in this map is not serialized under this field's {@code @SerializedName} value.
+         * Instead, each key/value pair is serialized as if the key is a root-level field
+         * (serialized) name in this param object. Effectively, this map is flattened to its parent
+         * instance.
+         */
+        @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
+        Map<String, Object> extraParams;
+
+        /**
+         * One or more document ids returned by a <a
+         * href="https://stripe.com/docs/api#create_file">file upload</a> with a {@code purpose}
+         * value of {@code account_requirement}.
+         */
+        @SerializedName("files")
+        List<String> files;
+
+        private Visa(Map<String, Object> extraParams, List<String> files) {
+          this.extraParams = extraParams;
+          this.files = files;
+        }
+
+        public static Builder builder() {
+          return new Builder();
+        }
+
+        public static class Builder {
+          private Map<String, Object> extraParams;
+
+          private List<String> files;
+
+          /** Finalize and obtain parameter instance from this builder. */
+          public Visa build() {
+            return new Visa(this.extraParams, this.files);
+          }
+
+          /**
+           * Add a key/value pair to `extraParams` map. A map is initialized for the first
+           * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
+           * map. See {@link TokenCreateParams.Person.Documents.Visa#extraParams} for the field
+           * documentation.
+           */
+          public Builder putExtraParam(String key, Object value) {
+            if (this.extraParams == null) {
+              this.extraParams = new HashMap<>();
+            }
+            this.extraParams.put(key, value);
+            return this;
+          }
+
+          /**
+           * Add all map key/value pairs to `extraParams` map. A map is initialized for the first
+           * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
+           * map. See {@link TokenCreateParams.Person.Documents.Visa#extraParams} for the field
+           * documentation.
+           */
+          public Builder putAllExtraParam(Map<String, Object> map) {
+            if (this.extraParams == null) {
+              this.extraParams = new HashMap<>();
+            }
+            this.extraParams.putAll(map);
+            return this;
+          }
+
+          /**
+           * Add an element to `files` list. A list is initialized for the first `add/addAll` call,
+           * and subsequent calls adds additional elements to the original list. See {@link
+           * TokenCreateParams.Person.Documents.Visa#files} for the field documentation.
+           */
+          public Builder addFile(String element) {
+            if (this.files == null) {
+              this.files = new ArrayList<>();
+            }
+            this.files.add(element);
+            return this;
+          }
+
+          /**
+           * Add all elements to `files` list. A list is initialized for the first `add/addAll`
+           * call, and subsequent calls adds additional elements to the original list. See {@link
+           * TokenCreateParams.Person.Documents.Visa#files} for the field documentation.
+           */
+          public Builder addAllFile(List<String> elements) {
+            if (this.files == null) {
+              this.files = new ArrayList<>();
+            }
+            this.files.addAll(elements);
+            return this;
+          }
         }
       }
     }

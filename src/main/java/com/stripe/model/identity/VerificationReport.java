@@ -363,19 +363,35 @@ public class VerificationReport extends ApiResource implements HasId {
     @Setter
     @EqualsAndHashCode(callSuper = false)
     public static class Document extends StripeObject {
-      /** Restrict the list of allowed document type to these types. */
+      /**
+       * Array of strings of allowed identity document types. If the provided identity document
+       * isn’t one of the allowed types, the verification check will fail with a
+       * document_type_not_allowed error code.
+       */
       @SerializedName("allowed_types")
       List<String> allowedTypes;
 
-      /** Require that the user provide an id number which will be verified. */
+      /**
+       * Collect an ID number and perform an <a
+       * href="https://stripe.com/docs/identity/verification-checks?type=id-number">ID number
+       * check</a> with the document’s extracted name and date of birth.
+       */
       @SerializedName("require_id_number")
       Boolean requireIdNumber;
 
-      /** Require that the user capture documents live with their webcam or phone camera. */
+      /**
+       * Disable image uploads, identity document images have to be captured using the device’s
+       * camera.
+       */
       @SerializedName("require_live_capture")
       Boolean requireLiveCapture;
 
-      /** Require that the user provide a selfie to compare against the document photo. */
+      /**
+       * Capture a face image and perform a <a
+       * href="https://stripe.com/docs/identity/verification-checks?type=selfie">selfie check</a>
+       * comparing a photo ID and a picture of your user’s face. <a
+       * href="https://stripe.com/docs/identity/selfie">Learn more</a>.
+       */
       @SerializedName("require_matching_selfie")
       Boolean requireMatchingSelfie;
     }
