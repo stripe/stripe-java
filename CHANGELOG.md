@@ -1,5 +1,9 @@
 # Changelog
 
+## 20.52.0 - 2021-05-26
+* [#1212](https://github.com/stripe/stripe-java/pull/1212) API Updates
+  * Added support for `documents` on `PersonUpdateParams`, `PersonCollectionCreateParams` and `TokenCreateParams.person`
+
 ## 20.51.0 - 2021-05-19
 * [#1211](https://github.com/stripe/stripe-java/pull/1211), [#1205](https://github.com/stripe/stripe-java/pull/1205) API Updates
   * Add support for the `Identity.VerificationSession` and `Identity.VerificationReport` APIs.
