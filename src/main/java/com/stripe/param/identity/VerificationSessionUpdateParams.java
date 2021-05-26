@@ -34,11 +34,14 @@ public class VerificationSessionUpdateParams extends ApiRequestParams {
   @SerializedName("metadata")
   Map<String, String> metadata;
 
-  /** New configuration options. */
+  /** A set of options for the session’s verification checks. */
   @SerializedName("options")
   Options options;
 
-  /** New verification type. */
+  /**
+   * The type of <a href="https://stripe.com/docs/identity/verification-checks">verification
+   * check</a> to be performed.
+   */
   @SerializedName("type")
   Type type;
 
@@ -154,13 +157,16 @@ public class VerificationSessionUpdateParams extends ApiRequestParams {
       return this;
     }
 
-    /** New configuration options. */
+    /** A set of options for the session’s verification checks. */
     public Builder setOptions(Options options) {
       this.options = options;
       return this;
     }
 
-    /** New verification type. */
+    /**
+     * The type of <a href="https://stripe.com/docs/identity/verification-checks">verification
+     * check</a> to be performed.
+     */
     public Builder setType(Type type) {
       this.type = type;
       return this;
@@ -169,7 +175,10 @@ public class VerificationSessionUpdateParams extends ApiRequestParams {
 
   @Getter
   public static class Options {
-    /** Verification configuration options for the {@code document} record_type. */
+    /**
+     * Options that apply to the <a
+     * href="https://stripe.com/docs/identity/verification-checks?type=document">document check</a>.
+     */
     @SerializedName("document")
     Object document;
 
@@ -201,13 +210,21 @@ public class VerificationSessionUpdateParams extends ApiRequestParams {
         return new Options(this.document, this.extraParams);
       }
 
-      /** Verification configuration options for the {@code document} record_type. */
+      /**
+       * Options that apply to the <a
+       * href="https://stripe.com/docs/identity/verification-checks?type=document">document
+       * check</a>.
+       */
       public Builder setDocument(Document document) {
         this.document = document;
         return this;
       }
 
-      /** Verification configuration options for the {@code document} record_type. */
+      /**
+       * Options that apply to the <a
+       * href="https://stripe.com/docs/identity/verification-checks?type=document">document
+       * check</a>.
+       */
       public Builder setDocument(EmptyParam document) {
         this.document = document;
         return this;
@@ -243,7 +260,11 @@ public class VerificationSessionUpdateParams extends ApiRequestParams {
 
     @Getter
     public static class Document {
-      /** Restrict the list of allowed document type to these types. */
+      /**
+       * Array of strings of allowed identity document types. If the provided identity document
+       * isn’t one of the allowed types, the verification check will fail with a
+       * document_type_not_allowed error code.
+       */
       @SerializedName("allowed_types")
       List<AllowedType> allowedTypes;
 
@@ -256,15 +277,27 @@ public class VerificationSessionUpdateParams extends ApiRequestParams {
       @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
       Map<String, Object> extraParams;
 
-      /** Require that the user provide an id number which will be verified. */
+      /**
+       * Collect an ID number and perform an <a
+       * href="https://stripe.com/docs/identity/verification-checks?type=id-number">ID number
+       * check</a> with the document’s extracted name and date of birth.
+       */
       @SerializedName("require_id_number")
       Boolean requireIdNumber;
 
-      /** Require that the user capture documents live with their webcam or phone camera. */
+      /**
+       * Disable image uploads, identity document images have to be captured using the device’s
+       * camera.
+       */
       @SerializedName("require_live_capture")
       Boolean requireLiveCapture;
 
-      /** Require that the user provide a selfie to compare against the document photo. */
+      /**
+       * Capture a face image and perform a <a
+       * href="https://stripe.com/docs/identity/verification-checks?type=selfie">selfie check</a>
+       * comparing a photo ID and a picture of your user’s face. <a
+       * href="https://stripe.com/docs/identity/selfie">Learn more</a>.
+       */
       @SerializedName("require_matching_selfie")
       Boolean requireMatchingSelfie;
 
@@ -362,19 +395,31 @@ public class VerificationSessionUpdateParams extends ApiRequestParams {
           return this;
         }
 
-        /** Require that the user provide an id number which will be verified. */
+        /**
+         * Collect an ID number and perform an <a
+         * href="https://stripe.com/docs/identity/verification-checks?type=id-number">ID number
+         * check</a> with the document’s extracted name and date of birth.
+         */
         public Builder setRequireIdNumber(Boolean requireIdNumber) {
           this.requireIdNumber = requireIdNumber;
           return this;
         }
 
-        /** Require that the user capture documents live with their webcam or phone camera. */
+        /**
+         * Disable image uploads, identity document images have to be captured using the device’s
+         * camera.
+         */
         public Builder setRequireLiveCapture(Boolean requireLiveCapture) {
           this.requireLiveCapture = requireLiveCapture;
           return this;
         }
 
-        /** Require that the user provide a selfie to compare against the document photo. */
+        /**
+         * Capture a face image and perform a <a
+         * href="https://stripe.com/docs/identity/verification-checks?type=selfie">selfie check</a>
+         * comparing a photo ID and a picture of your user’s face. <a
+         * href="https://stripe.com/docs/identity/selfie">Learn more</a>.
+         */
         public Builder setRequireMatchingSelfie(Boolean requireMatchingSelfie) {
           this.requireMatchingSelfie = requireMatchingSelfie;
           return this;

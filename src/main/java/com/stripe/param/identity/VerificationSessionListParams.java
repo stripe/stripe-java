@@ -52,7 +52,11 @@ public class VerificationSessionListParams extends ApiRequestParams {
   @SerializedName("starting_after")
   String startingAfter;
 
-  /** Only return VerificationSessions with this status. */
+  /**
+   * Only return VerificationSessions with this status. <a
+   * href="https://stripe.com/docs/identity/how-sessions-work">Learn more about the lifecycle of
+   * sessions</a>.
+   */
   @SerializedName("status")
   Status status;
 
@@ -197,7 +201,11 @@ public class VerificationSessionListParams extends ApiRequestParams {
       return this;
     }
 
-    /** Only return VerificationSessions with this status. */
+    /**
+     * Only return VerificationSessions with this status. <a
+     * href="https://stripe.com/docs/identity/how-sessions-work">Learn more about the lifecycle of
+     * sessions</a>.
+     */
     public Builder setStatus(Status status) {
       this.status = status;
       return this;

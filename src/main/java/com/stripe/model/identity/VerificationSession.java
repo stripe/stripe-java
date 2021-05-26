@@ -29,8 +29,13 @@ import lombok.Setter;
 public class VerificationSession extends ApiResource
     implements HasId, MetadataStore<VerificationSession> {
   /**
-   * This string value can be passed to stripe.js to embed a verification flow directly into your
-   * app.
+   * The short-lived client secret used by Stripe.js to <a
+   * href="https://stripe.com/docs/js/identity/modal">show a verification modal</a> inside your app.
+   * This client secret expires after 24 hours and can only be used once. Don’t store it, log it,
+   * embed it in a URL, or expose it to anyone other than the user. Make sure that you have TLS
+   * enabled on any page that includes the client secret. Refer to our docs on <a
+   * href="https://stripe.com/docs/identity/verification-sessions#client-secret">passing the client
+   * secret to the frontend</a> to learn more.
    */
   @SerializedName("client_secret")
   String clientSecret;
@@ -44,11 +49,18 @@ public class VerificationSession extends ApiResource
   @SerializedName("id")
   String id;
 
-  /** Hash of details on the last error encountered in the verification process. */
+  /**
+   * If present, this property tells you the last error encountered when processing the
+   * verification.
+   */
   @SerializedName("last_error")
   LastError lastError;
 
-  /** Link to the most recent completed VerificationReport for this Session. */
+  /**
+   * ID of the most recent VerificationReport. <a
+   * href="https://stripe.com/docs/identity/verification-checks">Learn more about accessing detailed
+   * verification results.</a>
+   */
   @SerializedName("last_verification_report")
   @Getter(lombok.AccessLevel.NONE)
   @Setter(lombok.AccessLevel.NONE)
@@ -89,8 +101,9 @@ public class VerificationSession extends ApiResource
   Redaction redaction;
 
   /**
-   * Status of this VerificationSession. Read more about each <a
-   * href="https://stripe.com/docs/identity/how-sessions-work">VerificationSession status</a>.
+   * Status of this VerificationSession. <a
+   * href="https://stripe.com/docs/identity/how-sessions-work">Learn more about the lifecycle of
+   * sessions</a>.
    *
    * <p>One of {@code canceled}, {@code processing}, {@code requires_input}, or {@code verified}.
    */
@@ -98,7 +111,8 @@ public class VerificationSession extends ApiResource
   String status;
 
   /**
-   * Type of report requested.
+   * The type of <a href="https://stripe.com/docs/identity/verification-checks">verification
+   * check</a> to be performed.
    *
    * <p>One of {@code document}, or {@code id_number}.
    */
@@ -106,13 +120,16 @@ public class VerificationSession extends ApiResource
   String type;
 
   /**
-   * Link to the Stripe-hosted identity verification portal that you can send a user to for
-   * verification.
+   * The short-lived URL that you use to redirect a user to Stripe to submit their identity
+   * information. This URL expires after 24 hours and can only be used once. Don’t store it, log it,
+   * send it in emails or expose it to anyone other than the user. Refer to our docs on <a
+   * href="https://stripe.com/docs/identity/verify-identity-documents?platform=web&amp;type=redirect">verifying
+   * identity documents</a> to learn how to redirect users to Stripe.
    */
   @SerializedName("url")
   String url;
 
-  /** Hash of verified data about this person that results from a successful verification report. */
+  /** The user’s verified data. */
   @SerializedName("verified_outputs")
   VerifiedOutputs verifiedOutputs;
 
@@ -135,12 +152,34 @@ public class VerificationSession extends ApiResource
         new ExpandableField<VerificationReport>(expandableObject.getId(), expandableObject);
   }
 
-  /** Create a new VerificationSession to begin the verification process. */
+  /**
+   * Creates a VerificationSession object.
+   *
+   * <p>After the VerificationSession is created, display a verification modal using the session
+   * <code>client_secret</code> or send your users to the session’s <code>url</code>.
+   *
+   * <p>If your API key is in test mode, verification checks won’t actually process, though
+   * everything else will occur as if in live mode.
+   *
+   * <p>Related guide: <a href="https://stripe.com/docs/identity/verify-identity-documents">Verify
+   * your users’ identity documents</a>.
+   */
   public static VerificationSession create(Map<String, Object> params) throws StripeException {
     return create(params, (RequestOptions) null);
   }
 
-  /** Create a new VerificationSession to begin the verification process. */
+  /**
+   * Creates a VerificationSession object.
+   *
+   * <p>After the VerificationSession is created, display a verification modal using the session
+   * <code>client_secret</code> or send your users to the session’s <code>url</code>.
+   *
+   * <p>If your API key is in test mode, verification checks won’t actually process, though
+   * everything else will occur as if in live mode.
+   *
+   * <p>Related guide: <a href="https://stripe.com/docs/identity/verify-identity-documents">Verify
+   * your users’ identity documents</a>.
+   */
   public static VerificationSession create(Map<String, Object> params, RequestOptions options)
       throws StripeException {
     String url = String.format("%s%s", Stripe.getApiBase(), "/v1/identity/verification_sessions");
@@ -148,13 +187,35 @@ public class VerificationSession extends ApiResource
         ApiResource.RequestMethod.POST, url, params, VerificationSession.class, options);
   }
 
-  /** Create a new VerificationSession to begin the verification process. */
+  /**
+   * Creates a VerificationSession object.
+   *
+   * <p>After the VerificationSession is created, display a verification modal using the session
+   * <code>client_secret</code> or send your users to the session’s <code>url</code>.
+   *
+   * <p>If your API key is in test mode, verification checks won’t actually process, though
+   * everything else will occur as if in live mode.
+   *
+   * <p>Related guide: <a href="https://stripe.com/docs/identity/verify-identity-documents">Verify
+   * your users’ identity documents</a>.
+   */
   public static VerificationSession create(VerificationSessionCreateParams params)
       throws StripeException {
     return create(params, (RequestOptions) null);
   }
 
-  /** Create a new VerificationSession to begin the verification process. */
+  /**
+   * Creates a VerificationSession object.
+   *
+   * <p>After the VerificationSession is created, display a verification modal using the session
+   * <code>client_secret</code> or send your users to the session’s <code>url</code>.
+   *
+   * <p>If your API key is in test mode, verification checks won’t actually process, though
+   * everything else will occur as if in live mode.
+   *
+   * <p>Related guide: <a href="https://stripe.com/docs/identity/verify-identity-documents">Verify
+   * your users’ identity documents</a>.
+   */
   public static VerificationSession create(
       VerificationSessionCreateParams params, RequestOptions options) throws StripeException {
     String url = String.format("%s%s", Stripe.getApiBase(), "/v1/identity/verification_sessions");
@@ -163,22 +224,20 @@ public class VerificationSession extends ApiResource
   }
 
   /**
-   * Retrieves an existing VerificationSession. When the session <code>status</code> is <code>
-   * requires_input</code>, this method guarantees that the redirect <code>url</code> is fresh: if
-   * your user has previously visited this session, a new <code>url</code> will be returned. Before
-   * redirecting your user to Stripe, ensure that you have just Created or Retrieved the
-   * VerificationSession; never cache or store the <code>url</code>.
+   * Retrieves the details of a VerificationSession that was previously created.
+   *
+   * <p>When the session status is <code>requires_input</code>, you can use this method to retrieve
+   * a valid <code>client_secret</code> or <code>url</code> to allow re-submission.
    */
   public static VerificationSession retrieve(String session) throws StripeException {
     return retrieve(session, (Map<String, Object>) null, (RequestOptions) null);
   }
 
   /**
-   * Retrieves an existing VerificationSession. When the session <code>status</code> is <code>
-   * requires_input</code>, this method guarantees that the redirect <code>url</code> is fresh: if
-   * your user has previously visited this session, a new <code>url</code> will be returned. Before
-   * redirecting your user to Stripe, ensure that you have just Created or Retrieved the
-   * VerificationSession; never cache or store the <code>url</code>.
+   * Retrieves the details of a VerificationSession that was previously created.
+   *
+   * <p>When the session status is <code>requires_input</code>, you can use this method to retrieve
+   * a valid <code>client_secret</code> or <code>url</code> to allow re-submission.
    */
   public static VerificationSession retrieve(String session, RequestOptions options)
       throws StripeException {
@@ -186,11 +245,10 @@ public class VerificationSession extends ApiResource
   }
 
   /**
-   * Retrieves an existing VerificationSession. When the session <code>status</code> is <code>
-   * requires_input</code>, this method guarantees that the redirect <code>url</code> is fresh: if
-   * your user has previously visited this session, a new <code>url</code> will be returned. Before
-   * redirecting your user to Stripe, ensure that you have just Created or Retrieved the
-   * VerificationSession; never cache or store the <code>url</code>.
+   * Retrieves the details of a VerificationSession that was previously created.
+   *
+   * <p>When the session status is <code>requires_input</code>, you can use this method to retrieve
+   * a valid <code>client_secret</code> or <code>url</code> to allow re-submission.
    */
   public static VerificationSession retrieve(
       String session, Map<String, Object> params, RequestOptions options) throws StripeException {
@@ -205,11 +263,10 @@ public class VerificationSession extends ApiResource
   }
 
   /**
-   * Retrieves an existing VerificationSession. When the session <code>status</code> is <code>
-   * requires_input</code>, this method guarantees that the redirect <code>url</code> is fresh: if
-   * your user has previously visited this session, a new <code>url</code> will be returned. Before
-   * redirecting your user to Stripe, ensure that you have just Created or Retrieved the
-   * VerificationSession; never cache or store the <code>url</code>.
+   * Retrieves the details of a VerificationSession that was previously created.
+   *
+   * <p>When the session status is <code>requires_input</code>, you can use this method to retrieve
+   * a valid <code>client_secret</code> or <code>url</code> to allow re-submission.
    */
   public static VerificationSession retrieve(
       String session, VerificationSessionRetrieveParams params, RequestOptions options)
@@ -224,42 +281,26 @@ public class VerificationSession extends ApiResource
         ApiResource.RequestMethod.GET, url, params, VerificationSession.class, options);
   }
 
-  /**
-   * List all verification sessions. Can optionally provide a status to return only
-   * VerificationSessions with that status. Can optionally specify a query filter on created
-   * timestamp.
-   */
+  /** Returns a list of VerificationSessions. */
   public static VerificationSessionCollection list(Map<String, Object> params)
       throws StripeException {
     return list(params, (RequestOptions) null);
   }
 
-  /**
-   * List all verification sessions. Can optionally provide a status to return only
-   * VerificationSessions with that status. Can optionally specify a query filter on created
-   * timestamp.
-   */
+  /** Returns a list of VerificationSessions. */
   public static VerificationSessionCollection list(
       Map<String, Object> params, RequestOptions options) throws StripeException {
     String url = String.format("%s%s", Stripe.getApiBase(), "/v1/identity/verification_sessions");
     return ApiResource.requestCollection(url, params, VerificationSessionCollection.class, options);
   }
 
-  /**
-   * List all verification sessions. Can optionally provide a status to return only
-   * VerificationSessions with that status. Can optionally specify a query filter on created
-   * timestamp.
-   */
+  /** Returns a list of VerificationSessions. */
   public static VerificationSessionCollection list(VerificationSessionListParams params)
       throws StripeException {
     return list(params, (RequestOptions) null);
   }
 
-  /**
-   * List all verification sessions. Can optionally provide a status to return only
-   * VerificationSessions with that status. Can optionally specify a query filter on created
-   * timestamp.
-   */
+  /** Returns a list of VerificationSessions. */
   public static VerificationSessionCollection list(
       VerificationSessionListParams params, RequestOptions options) throws StripeException {
     String url = String.format("%s%s", Stripe.getApiBase(), "/v1/identity/verification_sessions");
@@ -267,40 +308,44 @@ public class VerificationSession extends ApiResource
   }
 
   /**
-   * Mark a VerificationSession as canceled.
+   * A VerificationSession object can be canceled when it is in <code>requires_input</code> <a
+   * href="https://stripe.com/docs/identity/how-sessions-work">status</a>.
    *
-   * <p>If the VerificationSession is in the <code>processing</code> state, you must wait until it
-   * finishes before cancelling it.
+   * <p>Once canceled, future submission attempts are disabled. This cannot be undone. <a
+   * href="https://stripe.com/docs/identity/verification-sessions#cancel">Learn more</a>.
    */
   public VerificationSession cancel() throws StripeException {
     return cancel((Map<String, Object>) null, (RequestOptions) null);
   }
 
   /**
-   * Mark a VerificationSession as canceled.
+   * A VerificationSession object can be canceled when it is in <code>requires_input</code> <a
+   * href="https://stripe.com/docs/identity/how-sessions-work">status</a>.
    *
-   * <p>If the VerificationSession is in the <code>processing</code> state, you must wait until it
-   * finishes before cancelling it.
+   * <p>Once canceled, future submission attempts are disabled. This cannot be undone. <a
+   * href="https://stripe.com/docs/identity/verification-sessions#cancel">Learn more</a>.
    */
   public VerificationSession cancel(RequestOptions options) throws StripeException {
     return cancel((Map<String, Object>) null, options);
   }
 
   /**
-   * Mark a VerificationSession as canceled.
+   * A VerificationSession object can be canceled when it is in <code>requires_input</code> <a
+   * href="https://stripe.com/docs/identity/how-sessions-work">status</a>.
    *
-   * <p>If the VerificationSession is in the <code>processing</code> state, you must wait until it
-   * finishes before cancelling it.
+   * <p>Once canceled, future submission attempts are disabled. This cannot be undone. <a
+   * href="https://stripe.com/docs/identity/verification-sessions#cancel">Learn more</a>.
    */
   public VerificationSession cancel(Map<String, Object> params) throws StripeException {
     return cancel(params, (RequestOptions) null);
   }
 
   /**
-   * Mark a VerificationSession as canceled.
+   * A VerificationSession object can be canceled when it is in <code>requires_input</code> <a
+   * href="https://stripe.com/docs/identity/how-sessions-work">status</a>.
    *
-   * <p>If the VerificationSession is in the <code>processing</code> state, you must wait until it
-   * finishes before cancelling it.
+   * <p>Once canceled, future submission attempts are disabled. This cannot be undone. <a
+   * href="https://stripe.com/docs/identity/verification-sessions#cancel">Learn more</a>.
    */
   public VerificationSession cancel(Map<String, Object> params, RequestOptions options)
       throws StripeException {
@@ -316,20 +361,22 @@ public class VerificationSession extends ApiResource
   }
 
   /**
-   * Mark a VerificationSession as canceled.
+   * A VerificationSession object can be canceled when it is in <code>requires_input</code> <a
+   * href="https://stripe.com/docs/identity/how-sessions-work">status</a>.
    *
-   * <p>If the VerificationSession is in the <code>processing</code> state, you must wait until it
-   * finishes before cancelling it.
+   * <p>Once canceled, future submission attempts are disabled. This cannot be undone. <a
+   * href="https://stripe.com/docs/identity/verification-sessions#cancel">Learn more</a>.
    */
   public VerificationSession cancel(VerificationSessionCancelParams params) throws StripeException {
     return cancel(params, (RequestOptions) null);
   }
 
   /**
-   * Mark a VerificationSession as canceled.
+   * A VerificationSession object can be canceled when it is in <code>requires_input</code> <a
+   * href="https://stripe.com/docs/identity/how-sessions-work">status</a>.
    *
-   * <p>If the VerificationSession is in the <code>processing</code> state, you must wait until it
-   * finishes before cancelling it.
+   * <p>Once canceled, future submission attempts are disabled. This cannot be undone. <a
+   * href="https://stripe.com/docs/identity/verification-sessions#cancel">Learn more</a>.
    */
   public VerificationSession cancel(VerificationSessionCancelParams params, RequestOptions options)
       throws StripeException {
@@ -345,108 +392,104 @@ public class VerificationSession extends ApiResource
   }
 
   /**
-   * Redact a VerificationSession to delete all collected information from Stripe. This will redact
+   * Redact a VerificationSession to remove all collected information from Stripe. This will redact
    * the VerificationSession and all objects related to it, including VerificationReports, Events,
-   * Files, request logs, etc. This redaction process may take up to four days. When the redaction
-   * process is in progress, the VerificationSession’s <code>redaction.status</code> field will be
-   * set to <code>processing</code>; when the process is finished, it will change to <code>redacted
-   * </code>.
+   * request logs, etc.
+   *
+   * <p>A VerificationSession object can be redacted when it is in <code>requires_input</code> or
+   * <code>verified</code> <a href="https://stripe.com/docs/identity/how-sessions-work">status</a>.
+   * Redacting a VerificationSession in <code>requires_action</code> state will automatically cancel
+   * it.
+   *
+   * <p>The redaction process may take up to four days. When the redaction process is in progress,
+   * the VerificationSession’s <code>redaction.status</code> field will be set to <code>processing
+   * </code>; when the process is finished, it will change to <code>redacted</code> and an <code>
+   * identity.verification_session.redacted</code> event will be emitted.
    *
    * <p>Redaction is irreversible. Redacted objects are still accessible in the Stripe API, but all
    * the fields that contain personal data will be replaced by the string <code>[redacted]</code> or
    * a similar placeholder. The <code>metadata</code> field will also be erased. Redacted objects
    * cannot be updated or used for any purpose.
    *
-   * <p>If the VerificationSession is in the <code>processing</code> state, you must wait until it
-   * finishes before redacting it. Redacting a VerificationSession in <code>requires_action</code>
-   * state will automatically <a
-   * href="https://stripe.com/docs/api/verification_sessions/cancel">cancel</a> it.
-   *
-   * <p>An <a
-   * href="https://stripe.com/docs/api/events/types#event_types-identity.verification_session.redacted">
-   * <code>identity.verification_session.redacted</code></a> webhook will be sent when a
-   * VerificationSession is redacted.
+   * <p><a href="https://stripe.com/docs/identity/verification-sessions#redact">Learn more</a>.
    */
   public VerificationSession redact() throws StripeException {
     return redact((Map<String, Object>) null, (RequestOptions) null);
   }
 
   /**
-   * Redact a VerificationSession to delete all collected information from Stripe. This will redact
+   * Redact a VerificationSession to remove all collected information from Stripe. This will redact
    * the VerificationSession and all objects related to it, including VerificationReports, Events,
-   * Files, request logs, etc. This redaction process may take up to four days. When the redaction
-   * process is in progress, the VerificationSession’s <code>redaction.status</code> field will be
-   * set to <code>processing</code>; when the process is finished, it will change to <code>redacted
-   * </code>.
+   * request logs, etc.
+   *
+   * <p>A VerificationSession object can be redacted when it is in <code>requires_input</code> or
+   * <code>verified</code> <a href="https://stripe.com/docs/identity/how-sessions-work">status</a>.
+   * Redacting a VerificationSession in <code>requires_action</code> state will automatically cancel
+   * it.
+   *
+   * <p>The redaction process may take up to four days. When the redaction process is in progress,
+   * the VerificationSession’s <code>redaction.status</code> field will be set to <code>processing
+   * </code>; when the process is finished, it will change to <code>redacted</code> and an <code>
+   * identity.verification_session.redacted</code> event will be emitted.
    *
    * <p>Redaction is irreversible. Redacted objects are still accessible in the Stripe API, but all
    * the fields that contain personal data will be replaced by the string <code>[redacted]</code> or
    * a similar placeholder. The <code>metadata</code> field will also be erased. Redacted objects
    * cannot be updated or used for any purpose.
    *
-   * <p>If the VerificationSession is in the <code>processing</code> state, you must wait until it
-   * finishes before redacting it. Redacting a VerificationSession in <code>requires_action</code>
-   * state will automatically <a
-   * href="https://stripe.com/docs/api/verification_sessions/cancel">cancel</a> it.
-   *
-   * <p>An <a
-   * href="https://stripe.com/docs/api/events/types#event_types-identity.verification_session.redacted">
-   * <code>identity.verification_session.redacted</code></a> webhook will be sent when a
-   * VerificationSession is redacted.
+   * <p><a href="https://stripe.com/docs/identity/verification-sessions#redact">Learn more</a>.
    */
   public VerificationSession redact(RequestOptions options) throws StripeException {
     return redact((Map<String, Object>) null, options);
   }
 
   /**
-   * Redact a VerificationSession to delete all collected information from Stripe. This will redact
+   * Redact a VerificationSession to remove all collected information from Stripe. This will redact
    * the VerificationSession and all objects related to it, including VerificationReports, Events,
-   * Files, request logs, etc. This redaction process may take up to four days. When the redaction
-   * process is in progress, the VerificationSession’s <code>redaction.status</code> field will be
-   * set to <code>processing</code>; when the process is finished, it will change to <code>redacted
-   * </code>.
+   * request logs, etc.
+   *
+   * <p>A VerificationSession object can be redacted when it is in <code>requires_input</code> or
+   * <code>verified</code> <a href="https://stripe.com/docs/identity/how-sessions-work">status</a>.
+   * Redacting a VerificationSession in <code>requires_action</code> state will automatically cancel
+   * it.
+   *
+   * <p>The redaction process may take up to four days. When the redaction process is in progress,
+   * the VerificationSession’s <code>redaction.status</code> field will be set to <code>processing
+   * </code>; when the process is finished, it will change to <code>redacted</code> and an <code>
+   * identity.verification_session.redacted</code> event will be emitted.
    *
    * <p>Redaction is irreversible. Redacted objects are still accessible in the Stripe API, but all
    * the fields that contain personal data will be replaced by the string <code>[redacted]</code> or
    * a similar placeholder. The <code>metadata</code> field will also be erased. Redacted objects
    * cannot be updated or used for any purpose.
    *
-   * <p>If the VerificationSession is in the <code>processing</code> state, you must wait until it
-   * finishes before redacting it. Redacting a VerificationSession in <code>requires_action</code>
-   * state will automatically <a
-   * href="https://stripe.com/docs/api/verification_sessions/cancel">cancel</a> it.
-   *
-   * <p>An <a
-   * href="https://stripe.com/docs/api/events/types#event_types-identity.verification_session.redacted">
-   * <code>identity.verification_session.redacted</code></a> webhook will be sent when a
-   * VerificationSession is redacted.
+   * <p><a href="https://stripe.com/docs/identity/verification-sessions#redact">Learn more</a>.
    */
   public VerificationSession redact(Map<String, Object> params) throws StripeException {
     return redact(params, (RequestOptions) null);
   }
 
   /**
-   * Redact a VerificationSession to delete all collected information from Stripe. This will redact
+   * Redact a VerificationSession to remove all collected information from Stripe. This will redact
    * the VerificationSession and all objects related to it, including VerificationReports, Events,
-   * Files, request logs, etc. This redaction process may take up to four days. When the redaction
-   * process is in progress, the VerificationSession’s <code>redaction.status</code> field will be
-   * set to <code>processing</code>; when the process is finished, it will change to <code>redacted
-   * </code>.
+   * request logs, etc.
+   *
+   * <p>A VerificationSession object can be redacted when it is in <code>requires_input</code> or
+   * <code>verified</code> <a href="https://stripe.com/docs/identity/how-sessions-work">status</a>.
+   * Redacting a VerificationSession in <code>requires_action</code> state will automatically cancel
+   * it.
+   *
+   * <p>The redaction process may take up to four days. When the redaction process is in progress,
+   * the VerificationSession’s <code>redaction.status</code> field will be set to <code>processing
+   * </code>; when the process is finished, it will change to <code>redacted</code> and an <code>
+   * identity.verification_session.redacted</code> event will be emitted.
    *
    * <p>Redaction is irreversible. Redacted objects are still accessible in the Stripe API, but all
    * the fields that contain personal data will be replaced by the string <code>[redacted]</code> or
    * a similar placeholder. The <code>metadata</code> field will also be erased. Redacted objects
    * cannot be updated or used for any purpose.
    *
-   * <p>If the VerificationSession is in the <code>processing</code> state, you must wait until it
-   * finishes before redacting it. Redacting a VerificationSession in <code>requires_action</code>
-   * state will automatically <a
-   * href="https://stripe.com/docs/api/verification_sessions/cancel">cancel</a> it.
-   *
-   * <p>An <a
-   * href="https://stripe.com/docs/api/events/types#event_types-identity.verification_session.redacted">
-   * <code>identity.verification_session.redacted</code></a> webhook will be sent when a
-   * VerificationSession is redacted.
+   * <p><a href="https://stripe.com/docs/identity/verification-sessions#redact">Learn more</a>.
    */
   public VerificationSession redact(Map<String, Object> params, RequestOptions options)
       throws StripeException {
@@ -462,54 +505,52 @@ public class VerificationSession extends ApiResource
   }
 
   /**
-   * Redact a VerificationSession to delete all collected information from Stripe. This will redact
+   * Redact a VerificationSession to remove all collected information from Stripe. This will redact
    * the VerificationSession and all objects related to it, including VerificationReports, Events,
-   * Files, request logs, etc. This redaction process may take up to four days. When the redaction
-   * process is in progress, the VerificationSession’s <code>redaction.status</code> field will be
-   * set to <code>processing</code>; when the process is finished, it will change to <code>redacted
-   * </code>.
+   * request logs, etc.
+   *
+   * <p>A VerificationSession object can be redacted when it is in <code>requires_input</code> or
+   * <code>verified</code> <a href="https://stripe.com/docs/identity/how-sessions-work">status</a>.
+   * Redacting a VerificationSession in <code>requires_action</code> state will automatically cancel
+   * it.
+   *
+   * <p>The redaction process may take up to four days. When the redaction process is in progress,
+   * the VerificationSession’s <code>redaction.status</code> field will be set to <code>processing
+   * </code>; when the process is finished, it will change to <code>redacted</code> and an <code>
+   * identity.verification_session.redacted</code> event will be emitted.
    *
    * <p>Redaction is irreversible. Redacted objects are still accessible in the Stripe API, but all
    * the fields that contain personal data will be replaced by the string <code>[redacted]</code> or
    * a similar placeholder. The <code>metadata</code> field will also be erased. Redacted objects
    * cannot be updated or used for any purpose.
    *
-   * <p>If the VerificationSession is in the <code>processing</code> state, you must wait until it
-   * finishes before redacting it. Redacting a VerificationSession in <code>requires_action</code>
-   * state will automatically <a
-   * href="https://stripe.com/docs/api/verification_sessions/cancel">cancel</a> it.
-   *
-   * <p>An <a
-   * href="https://stripe.com/docs/api/events/types#event_types-identity.verification_session.redacted">
-   * <code>identity.verification_session.redacted</code></a> webhook will be sent when a
-   * VerificationSession is redacted.
+   * <p><a href="https://stripe.com/docs/identity/verification-sessions#redact">Learn more</a>.
    */
   public VerificationSession redact(VerificationSessionRedactParams params) throws StripeException {
     return redact(params, (RequestOptions) null);
   }
 
   /**
-   * Redact a VerificationSession to delete all collected information from Stripe. This will redact
+   * Redact a VerificationSession to remove all collected information from Stripe. This will redact
    * the VerificationSession and all objects related to it, including VerificationReports, Events,
-   * Files, request logs, etc. This redaction process may take up to four days. When the redaction
-   * process is in progress, the VerificationSession’s <code>redaction.status</code> field will be
-   * set to <code>processing</code>; when the process is finished, it will change to <code>redacted
-   * </code>.
+   * request logs, etc.
+   *
+   * <p>A VerificationSession object can be redacted when it is in <code>requires_input</code> or
+   * <code>verified</code> <a href="https://stripe.com/docs/identity/how-sessions-work">status</a>.
+   * Redacting a VerificationSession in <code>requires_action</code> state will automatically cancel
+   * it.
+   *
+   * <p>The redaction process may take up to four days. When the redaction process is in progress,
+   * the VerificationSession’s <code>redaction.status</code> field will be set to <code>processing
+   * </code>; when the process is finished, it will change to <code>redacted</code> and an <code>
+   * identity.verification_session.redacted</code> event will be emitted.
    *
    * <p>Redaction is irreversible. Redacted objects are still accessible in the Stripe API, but all
    * the fields that contain personal data will be replaced by the string <code>[redacted]</code> or
    * a similar placeholder. The <code>metadata</code> field will also be erased. Redacted objects
    * cannot be updated or used for any purpose.
    *
-   * <p>If the VerificationSession is in the <code>processing</code> state, you must wait until it
-   * finishes before redacting it. Redacting a VerificationSession in <code>requires_action</code>
-   * state will automatically <a
-   * href="https://stripe.com/docs/api/verification_sessions/cancel">cancel</a> it.
-   *
-   * <p>An <a
-   * href="https://stripe.com/docs/api/events/types#event_types-identity.verification_session.redacted">
-   * <code>identity.verification_session.redacted</code></a> webhook will be sent when a
-   * VerificationSession is redacted.
+   * <p><a href="https://stripe.com/docs/identity/verification-sessions#redact">Learn more</a>.
    */
   public VerificationSession redact(VerificationSessionRedactParams params, RequestOptions options)
       throws StripeException {
@@ -524,13 +565,23 @@ public class VerificationSession extends ApiResource
         ApiResource.RequestMethod.POST, url, params, VerificationSession.class, options);
   }
 
-  /** Update properties on a VerificationSession. */
+  /**
+   * Updates a VerificationSession object.
+   *
+   * <p>When the session status is <code>requires_input</code>, you can use this method to update
+   * the verification check and options.
+   */
   @Override
   public VerificationSession update(Map<String, Object> params) throws StripeException {
     return update(params, (RequestOptions) null);
   }
 
-  /** Update properties on a VerificationSession. */
+  /**
+   * Updates a VerificationSession object.
+   *
+   * <p>When the session status is <code>requires_input</code>, you can use this method to update
+   * the verification check and options.
+   */
   @Override
   public VerificationSession update(Map<String, Object> params, RequestOptions options)
       throws StripeException {
@@ -544,12 +595,22 @@ public class VerificationSession extends ApiResource
         ApiResource.RequestMethod.POST, url, params, VerificationSession.class, options);
   }
 
-  /** Update properties on a VerificationSession. */
+  /**
+   * Updates a VerificationSession object.
+   *
+   * <p>When the session status is <code>requires_input</code>, you can use this method to update
+   * the verification check and options.
+   */
   public VerificationSession update(VerificationSessionUpdateParams params) throws StripeException {
     return update(params, (RequestOptions) null);
   }
 
-  /** Update properties on a VerificationSession. */
+  /**
+   * Updates a VerificationSession object.
+   *
+   * <p>When the session status is <code>requires_input</code>, you can use this method to update
+   * the verification check and options.
+   */
   public VerificationSession update(VerificationSessionUpdateParams params, RequestOptions options)
       throws StripeException {
     String url =
@@ -580,10 +641,7 @@ public class VerificationSession extends ApiResource
     @SerializedName("code")
     String code;
 
-    /**
-     * A human-readable message giving the reason for the failure. These messages can be shown to
-     * your users.
-     */
+    /** A message that explains the reason for verification or user-session failure. */
     @SerializedName("reason")
     String reason;
   }
@@ -602,19 +660,35 @@ public class VerificationSession extends ApiResource
     @Setter
     @EqualsAndHashCode(callSuper = false)
     public static class Document extends StripeObject {
-      /** Restrict the list of allowed document type to these types. */
+      /**
+       * Array of strings of allowed identity document types. If the provided identity document
+       * isn’t one of the allowed types, the verification check will fail with a
+       * document_type_not_allowed error code.
+       */
       @SerializedName("allowed_types")
       List<String> allowedTypes;
 
-      /** Require that the user provide an id number which will be verified. */
+      /**
+       * Collect an ID number and perform an <a
+       * href="https://stripe.com/docs/identity/verification-checks?type=id-number">ID number
+       * check</a> with the document’s extracted name and date of birth.
+       */
       @SerializedName("require_id_number")
       Boolean requireIdNumber;
 
-      /** Require that the user capture documents live with their webcam or phone camera. */
+      /**
+       * Disable image uploads, identity document images have to be captured using the device’s
+       * camera.
+       */
       @SerializedName("require_live_capture")
       Boolean requireLiveCapture;
 
-      /** Require that the user provide a selfie to compare against the document photo. */
+      /**
+       * Capture a face image and perform a <a
+       * href="https://stripe.com/docs/identity/verification-checks?type=selfie">selfie check</a>
+       * comparing a photo ID and a picture of your user’s face. <a
+       * href="https://stripe.com/docs/identity/selfie">Learn more</a>.
+       */
       @SerializedName("require_matching_selfie")
       Boolean requireMatchingSelfie;
     }
@@ -642,31 +716,31 @@ public class VerificationSession extends ApiResource
   @Setter
   @EqualsAndHashCode(callSuper = false)
   public static class VerifiedOutputs extends StripeObject {
-    /** Verified address of the user. */
+    /** The user's verified address. */
     @SerializedName("address")
     Address address;
 
-    /** Verified date of birth of the user. */
+    /** The user’s verified date of birth. */
     @SerializedName("dob")
     DateOfBirth dob;
 
-    /** Verified first name of the user. */
+    /** The user's verified first name. */
     @SerializedName("first_name")
     String firstName;
 
-    /** Verified national id number of the user. */
+    /** The user's verified id number. */
     @SerializedName("id_number")
     String idNumber;
 
     /**
-     * Country / type of verified national id number.
+     * The user's veriifed id number type.
      *
      * <p>One of {@code br_cpf}, {@code sg_nric}, or {@code us_ssn}.
      */
     @SerializedName("id_number_type")
     String idNumberType;
 
-    /** Verified last name of the user. */
+    /** The user's verified last name. */
     @SerializedName("last_name")
     String lastName;
 
