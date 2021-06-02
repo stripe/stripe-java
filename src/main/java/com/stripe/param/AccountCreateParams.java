@@ -3965,6 +3965,12 @@ public class AccountCreateParams extends ApiRequestParams {
     }
 
     public enum Structure implements ApiRequestParams.EnumParam {
+      @SerializedName("free_zone_establishment")
+      FREE_ZONE_ESTABLISHMENT("free_zone_establishment"),
+
+      @SerializedName("free_zone_llc")
+      FREE_ZONE_LLC("free_zone_llc"),
+
       @SerializedName("government_instrumentality")
       GOVERNMENT_INSTRUMENTALITY("government_instrumentality"),
 
@@ -3976,6 +3982,9 @@ public class AccountCreateParams extends ApiRequestParams {
 
       @SerializedName("limited_liability_partnership")
       LIMITED_LIABILITY_PARTNERSHIP("limited_liability_partnership"),
+
+      @SerializedName("llc")
+      LLC("llc"),
 
       @SerializedName("multi_member_llc")
       MULTI_MEMBER_LLC("multi_member_llc"),
@@ -4000,6 +4009,9 @@ public class AccountCreateParams extends ApiRequestParams {
 
       @SerializedName("single_member_llc")
       SINGLE_MEMBER_LLC("single_member_llc"),
+
+      @SerializedName("sole_establishment")
+      SOLE_ESTABLISHMENT("sole_establishment"),
 
       @SerializedName("sole_proprietorship")
       SOLE_PROPRIETORSHIP("sole_proprietorship"),

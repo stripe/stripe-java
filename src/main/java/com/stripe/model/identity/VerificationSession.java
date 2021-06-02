@@ -733,7 +733,7 @@ public class VerificationSession extends ApiResource
     String idNumber;
 
     /**
-     * The user's veriifed id number type.
+     * The user's verified id number type.
      *
      * <p>One of {@code br_cpf}, {@code sg_nric}, or {@code us_ssn}.
      */
