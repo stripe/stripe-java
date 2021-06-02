@@ -353,11 +353,10 @@ public class Account extends ApiResource implements MetadataStore<Account>, Paym
   }
 
   /**
-   * With <a href="https://stripe.com/docs/connect">Connect</a>, you can delete Custom or Express
-   * accounts you manage.
+   * With <a href="https://stripe.com/docs/connect">Connect</a>, you can delete accounts you manage.
    *
-   * <p>Accounts created using test-mode keys can be deleted at any time. Accounts created using
-   * live-mode keys can only be deleted once all balances are zero.
+   * <p>Accounts created using test-mode keys can be deleted at any time. Custom or Express accounts
+   * created using live-mode keys can only be deleted once all balances are zero.
    *
    * <p>If you want to delete your own account, use the <a
    * href="https://dashboard.stripe.com/account">account information tab in your account
@@ -368,11 +367,10 @@ public class Account extends ApiResource implements MetadataStore<Account>, Paym
   }
 
   /**
-   * With <a href="https://stripe.com/docs/connect">Connect</a>, you can delete Custom or Express
-   * accounts you manage.
+   * With <a href="https://stripe.com/docs/connect">Connect</a>, you can delete accounts you manage.
    *
-   * <p>Accounts created using test-mode keys can be deleted at any time. Accounts created using
-   * live-mode keys can only be deleted once all balances are zero.
+   * <p>Accounts created using test-mode keys can be deleted at any time. Custom or Express accounts
+   * created using live-mode keys can only be deleted once all balances are zero.
    *
    * <p>If you want to delete your own account, use the <a
    * href="https://dashboard.stripe.com/account">account information tab in your account
@@ -383,11 +381,10 @@ public class Account extends ApiResource implements MetadataStore<Account>, Paym
   }
 
   /**
-   * With <a href="https://stripe.com/docs/connect">Connect</a>, you can delete Custom or Express
-   * accounts you manage.
+   * With <a href="https://stripe.com/docs/connect">Connect</a>, you can delete accounts you manage.
    *
-   * <p>Accounts created using test-mode keys can be deleted at any time. Accounts created using
-   * live-mode keys can only be deleted once all balances are zero.
+   * <p>Accounts created using test-mode keys can be deleted at any time. Custom or Express accounts
+   * created using live-mode keys can only be deleted once all balances are zero.
    *
    * <p>If you want to delete your own account, use the <a
    * href="https://dashboard.stripe.com/account">account information tab in your account
@@ -398,11 +395,10 @@ public class Account extends ApiResource implements MetadataStore<Account>, Paym
   }
 
   /**
-   * With <a href="https://stripe.com/docs/connect">Connect</a>, you can delete Custom or Express
-   * accounts you manage.
+   * With <a href="https://stripe.com/docs/connect">Connect</a>, you can delete accounts you manage.
    *
-   * <p>Accounts created using test-mode keys can be deleted at any time. Accounts created using
-   * live-mode keys can only be deleted once all balances are zero.
+   * <p>Accounts created using test-mode keys can be deleted at any time. Custom or Express accounts
+   * created using live-mode keys can only be deleted once all balances are zero.
    *
    * <p>If you want to delete your own account, use the <a
    * href="https://dashboard.stripe.com/account">account information tab in your account
@@ -888,11 +884,12 @@ public class Account extends ApiResource implements MetadataStore<Account>, Paym
      * href="https://stripe.com/docs/connect/identity-verification#business-structure">Business
      * structure</a> for more details.
      *
-     * <p>One of {@code government_instrumentality}, {@code governmental_unit}, {@code
-     * incorporated_non_profit}, {@code limited_liability_partnership}, {@code multi_member_llc},
-     * {@code private_company}, {@code private_corporation}, {@code private_partnership}, {@code
+     * <p>One of {@code free_zone_establishment}, {@code free_zone_llc}, {@code
+     * government_instrumentality}, {@code governmental_unit}, {@code incorporated_non_profit},
+     * {@code limited_liability_partnership}, {@code llc}, {@code multi_member_llc}, {@code
+     * private_company}, {@code private_corporation}, {@code private_partnership}, {@code
      * public_company}, {@code public_corporation}, {@code public_partnership}, {@code
-     * single_member_llc}, {@code sole_proprietorship}, {@code
+     * single_member_llc}, {@code sole_establishment}, {@code sole_proprietorship}, {@code
      * tax_exempt_government_instrumentality}, {@code unincorporated_association}, or {@code
      * unincorporated_non_profit}.
      */
