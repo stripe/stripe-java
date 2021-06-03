@@ -105,6 +105,15 @@ public class TaxRate extends ApiResource implements HasId, MetadataStore<TaxRate
   String state;
 
   /**
+   * The high-level tax type, such as {@code vat} or {@code sales_tax}.
+   *
+   * <p>One of {@code gst}, {@code hst}, {@code pst}, {@code qst}, {@code sales_tax}, or {@code
+   * vat}.
+   */
+  @SerializedName("tax_type")
+  String taxType;
+
+  /**
    * Returns a list of your tax rates. Tax rates are returned sorted by creation date, with the most
    * recently created tax rates appearing first.
    */

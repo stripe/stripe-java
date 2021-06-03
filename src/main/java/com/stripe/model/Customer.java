@@ -153,6 +153,9 @@ public class Customer extends ApiResource implements HasId, MetadataStore<Custom
   @SerializedName("subscriptions")
   SubscriptionCollection subscriptions;
 
+  @SerializedName("tax")
+  Tax tax;
+
   /**
    * Describes the customer's tax exemption status. One of {@code none}, {@code exempt}, or {@code
    * reverse}. When set to {@code reverse}, invoice and receipt PDFs include the text
@@ -536,6 +539,51 @@ public class Customer extends ApiResource implements HasId, MetadataStore<Custom
     public void setDefaultPaymentMethodObject(PaymentMethod expandableObject) {
       this.defaultPaymentMethod =
           new ExpandableField<PaymentMethod>(expandableObject.getId(), expandableObject);
+    }
+  }
+
+  @Getter
+  @Setter
+  @EqualsAndHashCode(callSuper = false)
+  public static class Tax extends StripeObject {
+    /**
+     * Surfaces if automatic tax computation is possible given the current customer location
+     * information.
+     *
+     * <p>One of {@code failed}, {@code not_collecting}, {@code supported}, or {@code
+     * unrecognized_location}.
+     */
+    @SerializedName("automatic_tax")
+    String automaticTax;
+
+    /** A recent IP address of the customer used for tax reporting and tax location inference. */
+    @SerializedName("ip_address")
+    String ipAddress;
+
+    /** The customer's location as identified by Stripe Tax. */
+    @SerializedName("location")
+    Location location;
+
+    @Getter
+    @Setter
+    @EqualsAndHashCode(callSuper = false)
+    public static class Location extends StripeObject {
+      /** The customer's country as identified by Stripe Tax. */
+      @SerializedName("country")
+      String country;
+
+      /**
+       * The data source used to infer the customer's location.
+       *
+       * <p>One of {@code billing_address}, {@code ip_address}, {@code payment_method}, or {@code
+       * shipping_destination}.
+       */
+      @SerializedName("source")
+      String source;
+
+      /** The customer's state, county, province, or region as identified by Stripe Tax. */
+      @SerializedName("state")
+      String state;
     }
   }
 }

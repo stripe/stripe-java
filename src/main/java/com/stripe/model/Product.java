@@ -117,6 +117,12 @@ public class Product extends ApiResource implements HasId, MetadataStore<Product
   @SerializedName("statement_descriptor")
   String statementDescriptor;
 
+  /** A <a href="https://stripe.com/docs/tax/tax-codes">tax code</a> ID. */
+  @SerializedName("tax_code")
+  @Getter(lombok.AccessLevel.NONE)
+  @Setter(lombok.AccessLevel.NONE)
+  ExpandableField<TaxCode> taxCode;
+
   /**
    * The type of the product. The product is either of type {@code good}, which is eligible for use
    * with Orders and SKUs, or {@code service}, which is eligible for use with Subscriptions and
@@ -141,6 +147,24 @@ public class Product extends ApiResource implements HasId, MetadataStore<Product
   /** A URL of a publicly-accessible webpage for this product. */
   @SerializedName("url")
   String url;
+
+  /** Get ID of expandable {@code taxCode} object. */
+  public String getTaxCode() {
+    return (this.taxCode != null) ? this.taxCode.getId() : null;
+  }
+
+  public void setTaxCode(String id) {
+    this.taxCode = ApiResource.setExpandableFieldId(id, this.taxCode);
+  }
+
+  /** Get expanded {@code taxCode}. */
+  public TaxCode getTaxCodeObject() {
+    return (this.taxCode != null) ? this.taxCode.getExpanded() : null;
+  }
+
+  public void setTaxCodeObject(TaxCode expandableObject) {
+    this.taxCode = new ExpandableField<TaxCode>(expandableObject.getId(), expandableObject);
+  }
 
   /** Creates a new product object. */
   public static Product create(Map<String, Object> params) throws StripeException {

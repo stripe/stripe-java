@@ -74,6 +74,10 @@ public class TaxRateUpdateParams extends ApiRequestParams {
   @SerializedName("state")
   Object state;
 
+  /** The high-level tax type, such as {@code vat} or {@code sales_tax}. */
+  @SerializedName("tax_type")
+  TaxType taxType;
+
   private TaxRateUpdateParams(
       Boolean active,
       Object country,
@@ -83,7 +87,8 @@ public class TaxRateUpdateParams extends ApiRequestParams {
       Map<String, Object> extraParams,
       Object jurisdiction,
       Object metadata,
-      Object state) {
+      Object state,
+      TaxType taxType) {
     this.active = active;
     this.country = country;
     this.description = description;
@@ -93,6 +98,7 @@ public class TaxRateUpdateParams extends ApiRequestParams {
     this.jurisdiction = jurisdiction;
     this.metadata = metadata;
     this.state = state;
+    this.taxType = taxType;
   }
 
   public static Builder builder() {
@@ -118,6 +124,8 @@ public class TaxRateUpdateParams extends ApiRequestParams {
 
     private Object state;
 
+    private TaxType taxType;
+
     /** Finalize and obtain parameter instance from this builder. */
     public TaxRateUpdateParams build() {
       return new TaxRateUpdateParams(
@@ -129,7 +137,8 @@ public class TaxRateUpdateParams extends ApiRequestParams {
           this.extraParams,
           this.jurisdiction,
           this.metadata,
-          this.state);
+          this.state,
+          this.taxType);
     }
 
     /**
@@ -326,6 +335,39 @@ public class TaxRateUpdateParams extends ApiRequestParams {
     public Builder setState(EmptyParam state) {
       this.state = state;
       return this;
+    }
+
+    /** The high-level tax type, such as {@code vat} or {@code sales_tax}. */
+    public Builder setTaxType(TaxType taxType) {
+      this.taxType = taxType;
+      return this;
+    }
+  }
+
+  public enum TaxType implements ApiRequestParams.EnumParam {
+    @SerializedName("gst")
+    GST("gst"),
+
+    @SerializedName("hst")
+    HST("hst"),
+
+    @SerializedName("pst")
+    PST("pst"),
+
+    @SerializedName("qst")
+    QST("qst"),
+
+    @SerializedName("sales_tax")
+    SALES_TAX("sales_tax"),
+
+    @SerializedName("vat")
+    VAT("vat");
+
+    @Getter(onMethod_ = {@Override})
+    private final String value;
+
+    TaxType(String value) {
+      this.value = value;
     }
   }
 }

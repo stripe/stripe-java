@@ -109,6 +109,10 @@ public class CustomerCreateParams extends ApiRequestParams {
   @SerializedName("source")
   String source;
 
+  /** Tax details about the customer. */
+  @SerializedName("tax")
+  Tax tax;
+
   /** The customer's tax exemption. One of {@code none}, {@code exempt}, or {@code reverse}. */
   @SerializedName("tax_exempt")
   EnumParam taxExempt;
@@ -136,6 +140,7 @@ public class CustomerCreateParams extends ApiRequestParams {
       String promotionCode,
       Object shipping,
       String source,
+      Tax tax,
       EnumParam taxExempt,
       List<TaxIdData> taxIdData) {
     this.address = address;
@@ -156,6 +161,7 @@ public class CustomerCreateParams extends ApiRequestParams {
     this.promotionCode = promotionCode;
     this.shipping = shipping;
     this.source = source;
+    this.tax = tax;
     this.taxExempt = taxExempt;
     this.taxIdData = taxIdData;
   }
@@ -201,6 +207,8 @@ public class CustomerCreateParams extends ApiRequestParams {
 
     private String source;
 
+    private Tax tax;
+
     private EnumParam taxExempt;
 
     private List<TaxIdData> taxIdData;
@@ -226,6 +234,7 @@ public class CustomerCreateParams extends ApiRequestParams {
           this.promotionCode,
           this.shipping,
           this.source,
+          this.tax,
           this.taxExempt,
           this.taxIdData);
     }
@@ -465,6 +474,12 @@ public class CustomerCreateParams extends ApiRequestParams {
 
     public Builder setSource(String source) {
       this.source = source;
+      return this;
+    }
+
+    /** Tax details about the customer. */
+    public Builder setTax(Tax tax) {
+      this.tax = tax;
       return this;
     }
 
@@ -1137,6 +1152,95 @@ public class CustomerCreateParams extends ApiRequestParams {
           this.state = state;
           return this;
         }
+      }
+    }
+  }
+
+  @Getter
+  public static class Tax {
+    /**
+     * Map of extra parameters for custom features not available in this client library. The content
+     * in this map is not serialized under this field's {@code @SerializedName} value. Instead, each
+     * key/value pair is serialized as if the key is a root-level field (serialized) name in this
+     * param object. Effectively, this map is flattened to its parent instance.
+     */
+    @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
+    Map<String, Object> extraParams;
+
+    /**
+     * A recent IP address of the customer used for tax reporting and tax location inference. Stripe
+     * recommends updating the IP address when a new PaymentMethod is attached or the address field
+     * on the customer is updated. We recommend against updating this field more frequently since it
+     * could result in unexpected tax location/reporting outcomes.
+     */
+    @SerializedName("ip_address")
+    Object ipAddress;
+
+    private Tax(Map<String, Object> extraParams, Object ipAddress) {
+      this.extraParams = extraParams;
+      this.ipAddress = ipAddress;
+    }
+
+    public static Builder builder() {
+      return new Builder();
+    }
+
+    public static class Builder {
+      private Map<String, Object> extraParams;
+
+      private Object ipAddress;
+
+      /** Finalize and obtain parameter instance from this builder. */
+      public Tax build() {
+        return new Tax(this.extraParams, this.ipAddress);
+      }
+
+      /**
+       * Add a key/value pair to `extraParams` map. A map is initialized for the first `put/putAll`
+       * call, and subsequent calls add additional key/value pairs to the original map. See {@link
+       * CustomerCreateParams.Tax#extraParams} for the field documentation.
+       */
+      public Builder putExtraParam(String key, Object value) {
+        if (this.extraParams == null) {
+          this.extraParams = new HashMap<>();
+        }
+        this.extraParams.put(key, value);
+        return this;
+      }
+
+      /**
+       * Add all map key/value pairs to `extraParams` map. A map is initialized for the first
+       * `put/putAll` call, and subsequent calls add additional key/value pairs to the original map.
+       * See {@link CustomerCreateParams.Tax#extraParams} for the field documentation.
+       */
+      public Builder putAllExtraParam(Map<String, Object> map) {
+        if (this.extraParams == null) {
+          this.extraParams = new HashMap<>();
+        }
+        this.extraParams.putAll(map);
+        return this;
+      }
+
+      /**
+       * A recent IP address of the customer used for tax reporting and tax location inference.
+       * Stripe recommends updating the IP address when a new PaymentMethod is attached or the
+       * address field on the customer is updated. We recommend against updating this field more
+       * frequently since it could result in unexpected tax location/reporting outcomes.
+       */
+      public Builder setIpAddress(String ipAddress) {
+        this.ipAddress = ipAddress;
+        return this;
+      }
+
+      /**
+       * A recent IP address of the customer used for tax reporting and tax location inference.
+       * Stripe recommends updating the IP address when a new PaymentMethod is attached or the
+       * address field on the customer is updated. We recommend against updating this field more
+       * frequently since it could result in unexpected tax location/reporting outcomes.
+       */
+      public Builder setIpAddress(EmptyParam ipAddress) {
+        this.ipAddress = ipAddress;
+        return this;
       }
     }
   }

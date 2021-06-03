@@ -51,6 +51,14 @@ public class PriceUpdateParams extends ApiRequestParams {
   Object recurring;
 
   /**
+   * Specifies whether the price is considered inclusive of taxes or exclusive of taxes. One of
+   * {@code inclusive}, {@code exclusive}, or {@code unspecified}. Once specified as either {@code
+   * inclusive} or {@code exclusive}, it cannot be changed.
+   */
+  @SerializedName("tax_behavior")
+  TaxBehavior taxBehavior;
+
+  /**
    * If set to true, will atomically remove the lookup key from the existing price, and assign it to
    * this price.
    */
@@ -65,6 +73,7 @@ public class PriceUpdateParams extends ApiRequestParams {
       Object metadata,
       Object nickname,
       Object recurring,
+      TaxBehavior taxBehavior,
       Boolean transferLookupKey) {
     this.active = active;
     this.expand = expand;
@@ -73,6 +82,7 @@ public class PriceUpdateParams extends ApiRequestParams {
     this.metadata = metadata;
     this.nickname = nickname;
     this.recurring = recurring;
+    this.taxBehavior = taxBehavior;
     this.transferLookupKey = transferLookupKey;
   }
 
@@ -95,6 +105,8 @@ public class PriceUpdateParams extends ApiRequestParams {
 
     private Object recurring;
 
+    private TaxBehavior taxBehavior;
+
     private Boolean transferLookupKey;
 
     /** Finalize and obtain parameter instance from this builder. */
@@ -107,6 +119,7 @@ public class PriceUpdateParams extends ApiRequestParams {
           this.metadata,
           this.nickname,
           this.recurring,
+          this.taxBehavior,
           this.transferLookupKey);
     }
 
@@ -255,6 +268,16 @@ public class PriceUpdateParams extends ApiRequestParams {
     }
 
     /**
+     * Specifies whether the price is considered inclusive of taxes or exclusive of taxes. One of
+     * {@code inclusive}, {@code exclusive}, or {@code unspecified}. Once specified as either {@code
+     * inclusive} or {@code exclusive}, it cannot be changed.
+     */
+    public Builder setTaxBehavior(TaxBehavior taxBehavior) {
+      this.taxBehavior = taxBehavior;
+      return this;
+    }
+
+    /**
      * If set to true, will atomically remove the lookup key from the existing price, and assign it
      * to this price.
      */
@@ -337,6 +360,24 @@ public class PriceUpdateParams extends ApiRequestParams {
         this.trialPeriodDays = trialPeriodDays;
         return this;
       }
+    }
+  }
+
+  public enum TaxBehavior implements ApiRequestParams.EnumParam {
+    @SerializedName("exclusive")
+    EXCLUSIVE("exclusive"),
+
+    @SerializedName("inclusive")
+    INCLUSIVE("inclusive"),
+
+    @SerializedName("unspecified")
+    UNSPECIFIED("unspecified");
+
+    @Getter(onMethod_ = {@Override})
+    private final String value;
+
+    TaxBehavior(String value) {
+      this.value = value;
     }
   }
 }

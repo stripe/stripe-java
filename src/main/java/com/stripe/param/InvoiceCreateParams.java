@@ -34,6 +34,10 @@ public class InvoiceCreateParams extends ApiRequestParams {
   @SerializedName("auto_advance")
   Boolean autoAdvance;
 
+  /** Settings for automatic tax lookup for this invoice. */
+  @SerializedName("automatic_tax")
+  AutomaticTax automaticTax;
+
   /**
    * Either {@code charge_automatically}, or {@code send_invoice}. When charging automatically,
    * Stripe will attempt to pay this invoice using the default source attached to the customer. When
@@ -170,6 +174,7 @@ public class InvoiceCreateParams extends ApiRequestParams {
       Object accountTaxIds,
       Long applicationFeeAmount,
       Boolean autoAdvance,
+      AutomaticTax automaticTax,
       CollectionMethod collectionMethod,
       Object customFields,
       String customer,
@@ -192,6 +197,7 @@ public class InvoiceCreateParams extends ApiRequestParams {
     this.accountTaxIds = accountTaxIds;
     this.applicationFeeAmount = applicationFeeAmount;
     this.autoAdvance = autoAdvance;
+    this.automaticTax = automaticTax;
     this.collectionMethod = collectionMethod;
     this.customFields = customFields;
     this.customer = customer;
@@ -223,6 +229,8 @@ public class InvoiceCreateParams extends ApiRequestParams {
     private Long applicationFeeAmount;
 
     private Boolean autoAdvance;
+
+    private AutomaticTax automaticTax;
 
     private CollectionMethod collectionMethod;
 
@@ -268,6 +276,7 @@ public class InvoiceCreateParams extends ApiRequestParams {
           this.accountTaxIds,
           this.applicationFeeAmount,
           this.autoAdvance,
+          this.automaticTax,
           this.collectionMethod,
           this.customFields,
           this.customer,
@@ -352,6 +361,12 @@ public class InvoiceCreateParams extends ApiRequestParams {
      */
     public Builder setAutoAdvance(Boolean autoAdvance) {
       this.autoAdvance = autoAdvance;
+      return this;
+    }
+
+    /** Settings for automatic tax lookup for this invoice. */
+    public Builder setAutomaticTax(AutomaticTax automaticTax) {
+      this.automaticTax = automaticTax;
       return this;
     }
 
@@ -688,6 +703,74 @@ public class InvoiceCreateParams extends ApiRequestParams {
     public Builder setTransferData(TransferData transferData) {
       this.transferData = transferData;
       return this;
+    }
+  }
+
+  @Getter
+  public static class AutomaticTax {
+    /** Controls whether Stripe will automatically compute tax on this invoice. */
+    @SerializedName("enabled")
+    Boolean enabled;
+
+    /**
+     * Map of extra parameters for custom features not available in this client library. The content
+     * in this map is not serialized under this field's {@code @SerializedName} value. Instead, each
+     * key/value pair is serialized as if the key is a root-level field (serialized) name in this
+     * param object. Effectively, this map is flattened to its parent instance.
+     */
+    @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
+    Map<String, Object> extraParams;
+
+    private AutomaticTax(Boolean enabled, Map<String, Object> extraParams) {
+      this.enabled = enabled;
+      this.extraParams = extraParams;
+    }
+
+    public static Builder builder() {
+      return new Builder();
+    }
+
+    public static class Builder {
+      private Boolean enabled;
+
+      private Map<String, Object> extraParams;
+
+      /** Finalize and obtain parameter instance from this builder. */
+      public AutomaticTax build() {
+        return new AutomaticTax(this.enabled, this.extraParams);
+      }
+
+      /** Controls whether Stripe will automatically compute tax on this invoice. */
+      public Builder setEnabled(Boolean enabled) {
+        this.enabled = enabled;
+        return this;
+      }
+
+      /**
+       * Add a key/value pair to `extraParams` map. A map is initialized for the first `put/putAll`
+       * call, and subsequent calls add additional key/value pairs to the original map. See {@link
+       * InvoiceCreateParams.AutomaticTax#extraParams} for the field documentation.
+       */
+      public Builder putExtraParam(String key, Object value) {
+        if (this.extraParams == null) {
+          this.extraParams = new HashMap<>();
+        }
+        this.extraParams.put(key, value);
+        return this;
+      }
+
+      /**
+       * Add all map key/value pairs to `extraParams` map. A map is initialized for the first
+       * `put/putAll` call, and subsequent calls add additional key/value pairs to the original map.
+       * See {@link InvoiceCreateParams.AutomaticTax#extraParams} for the field documentation.
+       */
+      public Builder putAllExtraParam(Map<String, Object> map) {
+        if (this.extraParams == null) {
+          this.extraParams = new HashMap<>();
+        }
+        this.extraParams.putAll(map);
+        return this;
+      }
     }
   }
 

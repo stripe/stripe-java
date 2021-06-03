@@ -73,6 +73,7 @@ final class EventDataClassLookup {
     classLookup.put("subscription", Subscription.class);
     classLookup.put("subscription_item", SubscriptionItem.class);
     classLookup.put("subscription_schedule", SubscriptionSchedule.class);
+    classLookup.put("tax_code", TaxCode.class);
     classLookup.put("tax_deducted_at_source", TaxDeductedAtSource.class);
     classLookup.put("tax_id", TaxId.class);
     classLookup.put("tax_rate", TaxRate.class);

@@ -101,6 +101,14 @@ public class Price extends ApiResource implements HasId, MetadataStore<Price> {
   Recurring recurring;
 
   /**
+   * Specifies whether the price is considered inclusive of taxes or exclusive of taxes. One of
+   * {@code inclusive}, {@code exclusive}, or {@code unspecified}. Once specified as either {@code
+   * inclusive} or {@code exclusive}, it cannot be changed.
+   */
+  @SerializedName("tax_behavior")
+  String taxBehavior;
+
+  /**
    * Each element represents a pricing tier. This parameter requires {@code billing_scheme} to be
    * set to {@code tiered}. See also the documentation for {@code billing_scheme}.
    */

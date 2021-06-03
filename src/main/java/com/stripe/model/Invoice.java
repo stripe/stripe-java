@@ -97,6 +97,9 @@ public class Invoice extends ApiResource implements HasId, MetadataStore<Invoice
   @SerializedName("auto_advance")
   Boolean autoAdvance;
 
+  @SerializedName("automatic_tax")
+  AutomaticTax automaticTax;
+
   /**
    * Indicates the reason why the invoice was created. {@code subscription_cycle} indicates an
    * invoice created by a subscription advancing into a new period. {@code subscription_create}
@@ -1393,6 +1396,23 @@ public class Invoice extends ApiResource implements HasId, MetadataStore<Invoice
             Stripe.getApiBase(),
             String.format("/v1/invoices/%s/void", ApiResource.urlEncodeId(this.getId())));
     return ApiResource.request(ApiResource.RequestMethod.POST, url, params, Invoice.class, options);
+  }
+
+  @Getter
+  @Setter
+  @EqualsAndHashCode(callSuper = false)
+  public static class AutomaticTax extends StripeObject {
+    /** Whether Stripe automatically computes tax on this invoice. */
+    @SerializedName("enabled")
+    Boolean enabled;
+
+    /**
+     * The status of the most recent automated tax calculation for this invoice.
+     *
+     * <p>One of {@code complete}, {@code failed}, or {@code requires_location_inputs}.
+     */
+    @SerializedName("status")
+    String status;
   }
 
   @Getter

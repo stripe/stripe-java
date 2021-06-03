@@ -77,6 +77,14 @@ public class PriceCreateParams extends ApiRequestParams {
   Recurring recurring;
 
   /**
+   * Specifies whether the price is considered inclusive of taxes or exclusive of taxes. One of
+   * {@code inclusive}, {@code exclusive}, or {@code unspecified}. Once specified as either {@code
+   * inclusive} or {@code exclusive}, it cannot be changed.
+   */
+  @SerializedName("tax_behavior")
+  TaxBehavior taxBehavior;
+
+  /**
    * Each element represents a pricing tier. This parameter requires {@code billing_scheme} to be
    * set to {@code tiered}. See also the documentation for {@code billing_scheme}.
    */
@@ -128,6 +136,7 @@ public class PriceCreateParams extends ApiRequestParams {
       String product,
       ProductData productData,
       Recurring recurring,
+      TaxBehavior taxBehavior,
       List<Tier> tiers,
       TiersMode tiersMode,
       Boolean transferLookupKey,
@@ -145,6 +154,7 @@ public class PriceCreateParams extends ApiRequestParams {
     this.product = product;
     this.productData = productData;
     this.recurring = recurring;
+    this.taxBehavior = taxBehavior;
     this.tiers = tiers;
     this.tiersMode = tiersMode;
     this.transferLookupKey = transferLookupKey;
@@ -180,6 +190,8 @@ public class PriceCreateParams extends ApiRequestParams {
 
     private Recurring recurring;
 
+    private TaxBehavior taxBehavior;
+
     private List<Tier> tiers;
 
     private TiersMode tiersMode;
@@ -206,6 +218,7 @@ public class PriceCreateParams extends ApiRequestParams {
           this.product,
           this.productData,
           this.recurring,
+          this.taxBehavior,
           this.tiers,
           this.tiersMode,
           this.transferLookupKey,
@@ -352,6 +365,16 @@ public class PriceCreateParams extends ApiRequestParams {
     }
 
     /**
+     * Specifies whether the price is considered inclusive of taxes or exclusive of taxes. One of
+     * {@code inclusive}, {@code exclusive}, or {@code unspecified}. Once specified as either {@code
+     * inclusive} or {@code exclusive}, it cannot be changed.
+     */
+    public Builder setTaxBehavior(TaxBehavior taxBehavior) {
+      this.taxBehavior = taxBehavior;
+      return this;
+    }
+
+    /**
      * Add an element to `tiers` list. A list is initialized for the first `add/addAll` call, and
      * subsequent calls adds additional elements to the original list. See {@link
      * PriceCreateParams#tiers} for the field documentation.
@@ -471,6 +494,10 @@ public class PriceCreateParams extends ApiRequestParams {
     @SerializedName("statement_descriptor")
     String statementDescriptor;
 
+    /** A <a href="https://stripe.com/docs/tax/tax-codes">tax code</a> ID. */
+    @SerializedName("tax_code")
+    String taxCode;
+
     /**
      * A label that represents units of this product in Stripe and on customers’ receipts and
      * invoices. When set, this will be included in associated invoice line item descriptions.
@@ -485,6 +512,7 @@ public class PriceCreateParams extends ApiRequestParams {
         Map<String, String> metadata,
         String name,
         String statementDescriptor,
+        String taxCode,
         String unitLabel) {
       this.active = active;
       this.extraParams = extraParams;
@@ -492,6 +520,7 @@ public class PriceCreateParams extends ApiRequestParams {
       this.metadata = metadata;
       this.name = name;
       this.statementDescriptor = statementDescriptor;
+      this.taxCode = taxCode;
       this.unitLabel = unitLabel;
     }
 
@@ -512,6 +541,8 @@ public class PriceCreateParams extends ApiRequestParams {
 
       private String statementDescriptor;
 
+      private String taxCode;
+
       private String unitLabel;
 
       /** Finalize and obtain parameter instance from this builder. */
@@ -523,6 +554,7 @@ public class PriceCreateParams extends ApiRequestParams {
             this.metadata,
             this.name,
             this.statementDescriptor,
+            this.taxCode,
             this.unitLabel);
       }
 
@@ -613,6 +645,12 @@ public class PriceCreateParams extends ApiRequestParams {
        */
       public Builder setStatementDescriptor(String statementDescriptor) {
         this.statementDescriptor = statementDescriptor;
+        return this;
+      }
+
+      /** A <a href="https://stripe.com/docs/tax/tax-codes">tax code</a> ID. */
+      public Builder setTaxCode(String taxCode) {
+        this.taxCode = taxCode;
         return this;
       }
 
@@ -1143,6 +1181,24 @@ public class PriceCreateParams extends ApiRequestParams {
     private final String value;
 
     BillingScheme(String value) {
+      this.value = value;
+    }
+  }
+
+  public enum TaxBehavior implements ApiRequestParams.EnumParam {
+    @SerializedName("exclusive")
+    EXCLUSIVE("exclusive"),
+
+    @SerializedName("inclusive")
+    INCLUSIVE("inclusive"),
+
+    @SerializedName("unspecified")
+    UNSPECIFIED("unspecified");
+
+    @Getter(onMethod_ = {@Override})
+    private final String value;
+
+    TaxBehavior(String value) {
       this.value = value;
     }
   }

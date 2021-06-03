@@ -579,6 +579,10 @@ public class PlanCreateParams extends ApiRequestParams {
     @SerializedName("statement_descriptor")
     String statementDescriptor;
 
+    /** A <a href="https://stripe.com/docs/tax/tax-codes">tax code</a> ID. */
+    @SerializedName("tax_code")
+    String taxCode;
+
     /**
      * A label that represents units of this product in Stripe and on customers’ receipts and
      * invoices. When set, this will be included in associated invoice line item descriptions.
@@ -593,6 +597,7 @@ public class PlanCreateParams extends ApiRequestParams {
         Map<String, String> metadata,
         String name,
         String statementDescriptor,
+        String taxCode,
         String unitLabel) {
       this.active = active;
       this.extraParams = extraParams;
@@ -600,6 +605,7 @@ public class PlanCreateParams extends ApiRequestParams {
       this.metadata = metadata;
       this.name = name;
       this.statementDescriptor = statementDescriptor;
+      this.taxCode = taxCode;
       this.unitLabel = unitLabel;
     }
 
@@ -620,6 +626,8 @@ public class PlanCreateParams extends ApiRequestParams {
 
       private String statementDescriptor;
 
+      private String taxCode;
+
       private String unitLabel;
 
       /** Finalize and obtain parameter instance from this builder. */
@@ -631,6 +639,7 @@ public class PlanCreateParams extends ApiRequestParams {
             this.metadata,
             this.name,
             this.statementDescriptor,
+            this.taxCode,
             this.unitLabel);
       }
 
@@ -721,6 +730,12 @@ public class PlanCreateParams extends ApiRequestParams {
        */
       public Builder setStatementDescriptor(String statementDescriptor) {
         this.statementDescriptor = statementDescriptor;
+        return this;
+      }
+
+      /** A <a href="https://stripe.com/docs/tax/tax-codes">tax code</a> ID. */
+      public Builder setTaxCode(String taxCode) {
+        this.taxCode = taxCode;
         return this;
       }
 
