@@ -30,6 +30,9 @@ public class Subscription extends ApiResource implements HasId, MetadataStore<Su
   @SerializedName("application_fee_percent")
   BigDecimal applicationFeePercent;
 
+  @SerializedName("automatic_tax")
+  AutomaticTax automaticTax;
+
   /**
    * Determines the date of the first full invoice, and, for plans with {@code month} or {@code
    * year} intervals, the day of the month for subsequent invoices.
@@ -707,6 +710,15 @@ public class Subscription extends ApiResource implements HasId, MetadataStore<Su
             String.format("/v1/subscriptions/%s/discount", ApiResource.urlEncodeId(this.getId())));
     return ApiResource.request(
         ApiResource.RequestMethod.DELETE, url, params, Discount.class, options);
+  }
+
+  @Getter
+  @Setter
+  @EqualsAndHashCode(callSuper = false)
+  public static class AutomaticTax extends StripeObject {
+    /** Whether Stripe automatically computes tax on this subscription. */
+    @SerializedName("enabled")
+    Boolean enabled;
   }
 
   @Getter

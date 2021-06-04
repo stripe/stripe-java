@@ -42,6 +42,9 @@ public class Session extends ApiResource implements HasId {
   @SerializedName("amount_total")
   Long amountTotal;
 
+  @SerializedName("automatic_tax")
+  AutomaticTax automaticTax;
+
   /**
    * Describes whether Checkout should collect the customer's billing address.
    *
@@ -410,6 +413,23 @@ public class Session extends ApiResource implements HasId {
                 "/v1/checkout/sessions/%s/line_items", ApiResource.urlEncodeId(this.getId())));
 
     return ApiResource.requestCollection(url, params, LineItemCollection.class, options);
+  }
+
+  @Getter
+  @Setter
+  @EqualsAndHashCode(callSuper = false)
+  public static class AutomaticTax extends StripeObject {
+    /** Indicates whether automatic tax is enabled for the session. */
+    @SerializedName("enabled")
+    Boolean enabled;
+
+    /**
+     * The status of the most recent automated tax calculation for this session.
+     *
+     * <p>One of {@code complete}, {@code failed}, or {@code requires_location_inputs}.
+     */
+    @SerializedName("status")
+    String status;
   }
 
   @Getter

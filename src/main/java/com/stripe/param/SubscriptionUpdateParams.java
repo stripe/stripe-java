@@ -31,6 +31,10 @@ public class SubscriptionUpdateParams extends ApiRequestParams {
   @SerializedName("application_fee_percent")
   BigDecimal applicationFeePercent;
 
+  /** Automatic tax settings for this subscription. */
+  @SerializedName("automatic_tax")
+  AutomaticTax automaticTax;
+
   /**
    * Either {@code now} or {@code unchanged}. Setting the value to {@code now} resets the
    * subscription's billing cycle anchor to the current time. For more information, see the billing
@@ -252,6 +256,7 @@ public class SubscriptionUpdateParams extends ApiRequestParams {
   private SubscriptionUpdateParams(
       List<AddInvoiceItem> addInvoiceItems,
       BigDecimal applicationFeePercent,
+      AutomaticTax automaticTax,
       BillingCycleAnchor billingCycleAnchor,
       Object billingThresholds,
       Object cancelAt,
@@ -278,6 +283,7 @@ public class SubscriptionUpdateParams extends ApiRequestParams {
       Boolean trialFromPlan) {
     this.addInvoiceItems = addInvoiceItems;
     this.applicationFeePercent = applicationFeePercent;
+    this.automaticTax = automaticTax;
     this.billingCycleAnchor = billingCycleAnchor;
     this.billingThresholds = billingThresholds;
     this.cancelAt = cancelAt;
@@ -312,6 +318,8 @@ public class SubscriptionUpdateParams extends ApiRequestParams {
     private List<AddInvoiceItem> addInvoiceItems;
 
     private BigDecimal applicationFeePercent;
+
+    private AutomaticTax automaticTax;
 
     private BillingCycleAnchor billingCycleAnchor;
 
@@ -366,6 +374,7 @@ public class SubscriptionUpdateParams extends ApiRequestParams {
       return new SubscriptionUpdateParams(
           this.addInvoiceItems,
           this.applicationFeePercent,
+          this.automaticTax,
           this.billingCycleAnchor,
           this.billingThresholds,
           this.cancelAt,
@@ -428,6 +437,12 @@ public class SubscriptionUpdateParams extends ApiRequestParams {
      */
     public Builder setApplicationFeePercent(BigDecimal applicationFeePercent) {
       this.applicationFeePercent = applicationFeePercent;
+      return this;
+    }
+
+    /** Automatic tax settings for this subscription. */
+    public Builder setAutomaticTax(AutomaticTax automaticTax) {
+      this.automaticTax = automaticTax;
       return this;
     }
 
@@ -1126,6 +1141,14 @@ public class SubscriptionUpdateParams extends ApiRequestParams {
       @SerializedName("product")
       Object product;
 
+      /**
+       * Specifies whether the price is considered inclusive of taxes or exclusive of taxes. One of
+       * {@code inclusive}, {@code exclusive}, or {@code unspecified}. Once specified as either
+       * {@code inclusive} or {@code exclusive}, it cannot be changed.
+       */
+      @SerializedName("tax_behavior")
+      TaxBehavior taxBehavior;
+
       /** A positive integer in %s (or 0 for a free price) representing how much to charge. */
       @SerializedName("unit_amount")
       Long unitAmount;
@@ -1141,11 +1164,13 @@ public class SubscriptionUpdateParams extends ApiRequestParams {
           Object currency,
           Map<String, Object> extraParams,
           Object product,
+          TaxBehavior taxBehavior,
           Long unitAmount,
           Object unitAmountDecimal) {
         this.currency = currency;
         this.extraParams = extraParams;
         this.product = product;
+        this.taxBehavior = taxBehavior;
         this.unitAmount = unitAmount;
         this.unitAmountDecimal = unitAmountDecimal;
       }
@@ -1161,6 +1186,8 @@ public class SubscriptionUpdateParams extends ApiRequestParams {
 
         private Object product;
 
+        private TaxBehavior taxBehavior;
+
         private Long unitAmount;
 
         private Object unitAmountDecimal;
@@ -1171,6 +1198,7 @@ public class SubscriptionUpdateParams extends ApiRequestParams {
               this.currency,
               this.extraParams,
               this.product,
+              this.taxBehavior,
               this.unitAmount,
               this.unitAmountDecimal);
         }
@@ -1235,6 +1263,16 @@ public class SubscriptionUpdateParams extends ApiRequestParams {
           return this;
         }
 
+        /**
+         * Specifies whether the price is considered inclusive of taxes or exclusive of taxes. One
+         * of {@code inclusive}, {@code exclusive}, or {@code unspecified}. Once specified as either
+         * {@code inclusive} or {@code exclusive}, it cannot be changed.
+         */
+        public Builder setTaxBehavior(TaxBehavior taxBehavior) {
+          this.taxBehavior = taxBehavior;
+          return this;
+        }
+
         /** A positive integer in %s (or 0 for a free price) representing how much to charge. */
         public Builder setUnitAmount(Long unitAmount) {
           this.unitAmount = unitAmount;
@@ -1258,6 +1296,98 @@ public class SubscriptionUpdateParams extends ApiRequestParams {
           this.unitAmountDecimal = unitAmountDecimal;
           return this;
         }
+      }
+
+      public enum TaxBehavior implements ApiRequestParams.EnumParam {
+        @SerializedName("exclusive")
+        EXCLUSIVE("exclusive"),
+
+        @SerializedName("inclusive")
+        INCLUSIVE("inclusive"),
+
+        @SerializedName("unspecified")
+        UNSPECIFIED("unspecified");
+
+        @Getter(onMethod_ = {@Override})
+        private final String value;
+
+        TaxBehavior(String value) {
+          this.value = value;
+        }
+      }
+    }
+  }
+
+  @Getter
+  public static class AutomaticTax {
+    /**
+     * Enabled automatic tax calculation which will automatically compute tax rates on all invoices
+     * generated by the subscription.
+     */
+    @SerializedName("enabled")
+    Boolean enabled;
+
+    /**
+     * Map of extra parameters for custom features not available in this client library. The content
+     * in this map is not serialized under this field's {@code @SerializedName} value. Instead, each
+     * key/value pair is serialized as if the key is a root-level field (serialized) name in this
+     * param object. Effectively, this map is flattened to its parent instance.
+     */
+    @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
+    Map<String, Object> extraParams;
+
+    private AutomaticTax(Boolean enabled, Map<String, Object> extraParams) {
+      this.enabled = enabled;
+      this.extraParams = extraParams;
+    }
+
+    public static Builder builder() {
+      return new Builder();
+    }
+
+    public static class Builder {
+      private Boolean enabled;
+
+      private Map<String, Object> extraParams;
+
+      /** Finalize and obtain parameter instance from this builder. */
+      public AutomaticTax build() {
+        return new AutomaticTax(this.enabled, this.extraParams);
+      }
+
+      /**
+       * Enabled automatic tax calculation which will automatically compute tax rates on all
+       * invoices generated by the subscription.
+       */
+      public Builder setEnabled(Boolean enabled) {
+        this.enabled = enabled;
+        return this;
+      }
+
+      /**
+       * Add a key/value pair to `extraParams` map. A map is initialized for the first `put/putAll`
+       * call, and subsequent calls add additional key/value pairs to the original map. See {@link
+       * SubscriptionUpdateParams.AutomaticTax#extraParams} for the field documentation.
+       */
+      public Builder putExtraParam(String key, Object value) {
+        if (this.extraParams == null) {
+          this.extraParams = new HashMap<>();
+        }
+        this.extraParams.put(key, value);
+        return this;
+      }
+
+      /**
+       * Add all map key/value pairs to `extraParams` map. A map is initialized for the first
+       * `put/putAll` call, and subsequent calls add additional key/value pairs to the original map.
+       * See {@link SubscriptionUpdateParams.AutomaticTax#extraParams} for the field documentation.
+       */
+      public Builder putAllExtraParam(Map<String, Object> map) {
+        if (this.extraParams == null) {
+          this.extraParams = new HashMap<>();
+        }
+        this.extraParams.putAll(map);
+        return this;
       }
     }
   }
@@ -1805,6 +1935,14 @@ public class SubscriptionUpdateParams extends ApiRequestParams {
       @SerializedName("recurring")
       Recurring recurring;
 
+      /**
+       * Specifies whether the price is considered inclusive of taxes or exclusive of taxes. One of
+       * {@code inclusive}, {@code exclusive}, or {@code unspecified}. Once specified as either
+       * {@code inclusive} or {@code exclusive}, it cannot be changed.
+       */
+      @SerializedName("tax_behavior")
+      TaxBehavior taxBehavior;
+
       /** A positive integer in %s (or 0 for a free price) representing how much to charge. */
       @SerializedName("unit_amount")
       Long unitAmount;
@@ -1821,12 +1959,14 @@ public class SubscriptionUpdateParams extends ApiRequestParams {
           Map<String, Object> extraParams,
           Object product,
           Recurring recurring,
+          TaxBehavior taxBehavior,
           Long unitAmount,
           Object unitAmountDecimal) {
         this.currency = currency;
         this.extraParams = extraParams;
         this.product = product;
         this.recurring = recurring;
+        this.taxBehavior = taxBehavior;
         this.unitAmount = unitAmount;
         this.unitAmountDecimal = unitAmountDecimal;
       }
@@ -1844,6 +1984,8 @@ public class SubscriptionUpdateParams extends ApiRequestParams {
 
         private Recurring recurring;
 
+        private TaxBehavior taxBehavior;
+
         private Long unitAmount;
 
         private Object unitAmountDecimal;
@@ -1855,6 +1997,7 @@ public class SubscriptionUpdateParams extends ApiRequestParams {
               this.extraParams,
               this.product,
               this.recurring,
+              this.taxBehavior,
               this.unitAmount,
               this.unitAmountDecimal);
         }
@@ -1922,6 +2065,16 @@ public class SubscriptionUpdateParams extends ApiRequestParams {
         /** The recurring components of a price such as {@code interval} and {@code usage_type}. */
         public Builder setRecurring(Recurring recurring) {
           this.recurring = recurring;
+          return this;
+        }
+
+        /**
+         * Specifies whether the price is considered inclusive of taxes or exclusive of taxes. One
+         * of {@code inclusive}, {@code exclusive}, or {@code unspecified}. Once specified as either
+         * {@code inclusive} or {@code exclusive}, it cannot be changed.
+         */
+        public Builder setTaxBehavior(TaxBehavior taxBehavior) {
+          this.taxBehavior = taxBehavior;
           return this;
         }
 
@@ -2066,6 +2219,24 @@ public class SubscriptionUpdateParams extends ApiRequestParams {
           Interval(String value) {
             this.value = value;
           }
+        }
+      }
+
+      public enum TaxBehavior implements ApiRequestParams.EnumParam {
+        @SerializedName("exclusive")
+        EXCLUSIVE("exclusive"),
+
+        @SerializedName("inclusive")
+        INCLUSIVE("inclusive"),
+
+        @SerializedName("unspecified")
+        UNSPECIFIED("unspecified");
+
+        @Getter(onMethod_ = {@Override})
+        private final String value;
+
+        TaxBehavior(String value) {
+          this.value = value;
         }
       }
     }

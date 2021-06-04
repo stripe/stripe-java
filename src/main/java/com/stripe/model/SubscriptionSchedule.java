@@ -535,6 +535,9 @@ public class SubscriptionSchedule extends ApiResource
     @SerializedName("application_fee_percent")
     BigDecimal applicationFeePercent;
 
+    @SerializedName("automatic_tax")
+    AutomaticTax automaticTax;
+
     /**
      * Possible values are {@code phase_start} or {@code automatic}. If {@code phase_start} then
      * billing cycle anchor of the subscription is set to the start of the phase when entering the
@@ -604,6 +607,15 @@ public class SubscriptionSchedule extends ApiResource
       this.defaultPaymentMethod =
           new ExpandableField<PaymentMethod>(expandableObject.getId(), expandableObject);
     }
+
+    @Getter
+    @Setter
+    @EqualsAndHashCode(callSuper = false)
+    public static class AutomaticTax extends StripeObject {
+      /** Whether Stripe automatically computes tax on invoices created during this phase. */
+      @SerializedName("enabled")
+      Boolean enabled;
+    }
   }
 
   @Getter
@@ -637,6 +649,9 @@ public class SubscriptionSchedule extends ApiResource
      */
     @SerializedName("application_fee_percent")
     BigDecimal applicationFeePercent;
+
+    @SerializedName("automatic_tax")
+    AutomaticTax automaticTax;
 
     /**
      * Possible values are {@code phase_start} or {@code automatic}. If {@code phase_start} then
@@ -766,6 +781,15 @@ public class SubscriptionSchedule extends ApiResource
     public void setDefaultPaymentMethodObject(PaymentMethod expandableObject) {
       this.defaultPaymentMethod =
           new ExpandableField<PaymentMethod>(expandableObject.getId(), expandableObject);
+    }
+
+    @Getter
+    @Setter
+    @EqualsAndHashCode(callSuper = false)
+    public static class AutomaticTax extends StripeObject {
+      /** Whether Stripe automatically computes tax on invoices created during this phase. */
+      @SerializedName("enabled")
+      Boolean enabled;
     }
   }
 

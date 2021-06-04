@@ -17,6 +17,9 @@ public class SessionCreateParams extends ApiRequestParams {
   @SerializedName("allow_promotion_codes")
   Boolean allowPromotionCodes;
 
+  @SerializedName("automatic_tax")
+  AutomaticTax automaticTax;
+
   /** Specify whether Checkout should collect the customer's billing address. */
   @SerializedName("billing_address_collection")
   BillingAddressCollection billingAddressCollection;
@@ -65,6 +68,13 @@ public class SessionCreateParams extends ApiRequestParams {
    */
   @SerializedName("customer_email")
   String customerEmail;
+
+  /**
+   * Controls what fields on Customer can be updated by the Checkout Session. Can only be provided
+   * when {@code customer} is provided.
+   */
+  @SerializedName("customer_update")
+  CustomerUpdate customerUpdate;
 
   /**
    * The coupon or promotion code to apply to this Session. Currently, only up to one may be
@@ -190,11 +200,13 @@ public class SessionCreateParams extends ApiRequestParams {
 
   private SessionCreateParams(
       Boolean allowPromotionCodes,
+      AutomaticTax automaticTax,
       BillingAddressCollection billingAddressCollection,
       String cancelUrl,
       String clientReferenceId,
       String customer,
       String customerEmail,
+      CustomerUpdate customerUpdate,
       List<Discount> discounts,
       List<String> expand,
       Map<String, Object> extraParams,
@@ -212,11 +224,13 @@ public class SessionCreateParams extends ApiRequestParams {
       SubscriptionData subscriptionData,
       String successUrl) {
     this.allowPromotionCodes = allowPromotionCodes;
+    this.automaticTax = automaticTax;
     this.billingAddressCollection = billingAddressCollection;
     this.cancelUrl = cancelUrl;
     this.clientReferenceId = clientReferenceId;
     this.customer = customer;
     this.customerEmail = customerEmail;
+    this.customerUpdate = customerUpdate;
     this.discounts = discounts;
     this.expand = expand;
     this.extraParams = extraParams;
@@ -242,6 +256,8 @@ public class SessionCreateParams extends ApiRequestParams {
   public static class Builder {
     private Boolean allowPromotionCodes;
 
+    private AutomaticTax automaticTax;
+
     private BillingAddressCollection billingAddressCollection;
 
     private String cancelUrl;
@@ -251,6 +267,8 @@ public class SessionCreateParams extends ApiRequestParams {
     private String customer;
 
     private String customerEmail;
+
+    private CustomerUpdate customerUpdate;
 
     private List<Discount> discounts;
 
@@ -288,11 +306,13 @@ public class SessionCreateParams extends ApiRequestParams {
     public SessionCreateParams build() {
       return new SessionCreateParams(
           this.allowPromotionCodes,
+          this.automaticTax,
           this.billingAddressCollection,
           this.cancelUrl,
           this.clientReferenceId,
           this.customer,
           this.customerEmail,
+          this.customerUpdate,
           this.discounts,
           this.expand,
           this.extraParams,
@@ -314,6 +334,11 @@ public class SessionCreateParams extends ApiRequestParams {
     /** Enables user redeemable promotion codes. */
     public Builder setAllowPromotionCodes(Boolean allowPromotionCodes) {
       this.allowPromotionCodes = allowPromotionCodes;
+      return this;
+    }
+
+    public Builder setAutomaticTax(AutomaticTax automaticTax) {
+      this.automaticTax = automaticTax;
       return this;
     }
 
@@ -374,6 +399,15 @@ public class SessionCreateParams extends ApiRequestParams {
      */
     public Builder setCustomerEmail(String customerEmail) {
       this.customerEmail = customerEmail;
+      return this;
+    }
+
+    /**
+     * Controls what fields on Customer can be updated by the Checkout Session. Can only be provided
+     * when {@code customer} is provided.
+     */
+    public Builder setCustomerUpdate(CustomerUpdate customerUpdate) {
+      this.customerUpdate = customerUpdate;
       return this;
     }
 
@@ -639,6 +673,236 @@ public class SessionCreateParams extends ApiRequestParams {
     public Builder setSuccessUrl(String successUrl) {
       this.successUrl = successUrl;
       return this;
+    }
+  }
+
+  @Getter
+  public static class AutomaticTax {
+    /** Set to true to enable automatic taxes. */
+    @SerializedName("enabled")
+    Boolean enabled;
+
+    /**
+     * Map of extra parameters for custom features not available in this client library. The content
+     * in this map is not serialized under this field's {@code @SerializedName} value. Instead, each
+     * key/value pair is serialized as if the key is a root-level field (serialized) name in this
+     * param object. Effectively, this map is flattened to its parent instance.
+     */
+    @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
+    Map<String, Object> extraParams;
+
+    private AutomaticTax(Boolean enabled, Map<String, Object> extraParams) {
+      this.enabled = enabled;
+      this.extraParams = extraParams;
+    }
+
+    public static Builder builder() {
+      return new Builder();
+    }
+
+    public static class Builder {
+      private Boolean enabled;
+
+      private Map<String, Object> extraParams;
+
+      /** Finalize and obtain parameter instance from this builder. */
+      public AutomaticTax build() {
+        return new AutomaticTax(this.enabled, this.extraParams);
+      }
+
+      /** Set to true to enable automatic taxes. */
+      public Builder setEnabled(Boolean enabled) {
+        this.enabled = enabled;
+        return this;
+      }
+
+      /**
+       * Add a key/value pair to `extraParams` map. A map is initialized for the first `put/putAll`
+       * call, and subsequent calls add additional key/value pairs to the original map. See {@link
+       * SessionCreateParams.AutomaticTax#extraParams} for the field documentation.
+       */
+      public Builder putExtraParam(String key, Object value) {
+        if (this.extraParams == null) {
+          this.extraParams = new HashMap<>();
+        }
+        this.extraParams.put(key, value);
+        return this;
+      }
+
+      /**
+       * Add all map key/value pairs to `extraParams` map. A map is initialized for the first
+       * `put/putAll` call, and subsequent calls add additional key/value pairs to the original map.
+       * See {@link SessionCreateParams.AutomaticTax#extraParams} for the field documentation.
+       */
+      public Builder putAllExtraParam(Map<String, Object> map) {
+        if (this.extraParams == null) {
+          this.extraParams = new HashMap<>();
+        }
+        this.extraParams.putAll(map);
+        return this;
+      }
+    }
+  }
+
+  @Getter
+  public static class CustomerUpdate {
+    /**
+     * Describes whether Checkout saves the billing address onto {@code customer.address}. To always
+     * collect a full billing address, use {@code billing_address_collection}. Defaults to {@code
+     * never}.
+     */
+    @SerializedName("address")
+    Address address;
+
+    /**
+     * Map of extra parameters for custom features not available in this client library. The content
+     * in this map is not serialized under this field's {@code @SerializedName} value. Instead, each
+     * key/value pair is serialized as if the key is a root-level field (serialized) name in this
+     * param object. Effectively, this map is flattened to its parent instance.
+     */
+    @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
+    Map<String, Object> extraParams;
+
+    /**
+     * Describes whether Checkout saves the name onto {@code customer.name}. Defaults to {@code
+     * never}.
+     */
+    @SerializedName("name")
+    Name name;
+
+    /**
+     * Describes whether Checkout saves shipping information onto {@code customer.shipping}. To
+     * collect shipping information, use {@code shipping_address_collection}. Defaults to {@code
+     * never}.
+     */
+    @SerializedName("shipping")
+    Shipping shipping;
+
+    private CustomerUpdate(
+        Address address, Map<String, Object> extraParams, Name name, Shipping shipping) {
+      this.address = address;
+      this.extraParams = extraParams;
+      this.name = name;
+      this.shipping = shipping;
+    }
+
+    public static Builder builder() {
+      return new Builder();
+    }
+
+    public static class Builder {
+      private Address address;
+
+      private Map<String, Object> extraParams;
+
+      private Name name;
+
+      private Shipping shipping;
+
+      /** Finalize and obtain parameter instance from this builder. */
+      public CustomerUpdate build() {
+        return new CustomerUpdate(this.address, this.extraParams, this.name, this.shipping);
+      }
+
+      /**
+       * Describes whether Checkout saves the billing address onto {@code customer.address}. To
+       * always collect a full billing address, use {@code billing_address_collection}. Defaults to
+       * {@code never}.
+       */
+      public Builder setAddress(Address address) {
+        this.address = address;
+        return this;
+      }
+
+      /**
+       * Add a key/value pair to `extraParams` map. A map is initialized for the first `put/putAll`
+       * call, and subsequent calls add additional key/value pairs to the original map. See {@link
+       * SessionCreateParams.CustomerUpdate#extraParams} for the field documentation.
+       */
+      public Builder putExtraParam(String key, Object value) {
+        if (this.extraParams == null) {
+          this.extraParams = new HashMap<>();
+        }
+        this.extraParams.put(key, value);
+        return this;
+      }
+
+      /**
+       * Add all map key/value pairs to `extraParams` map. A map is initialized for the first
+       * `put/putAll` call, and subsequent calls add additional key/value pairs to the original map.
+       * See {@link SessionCreateParams.CustomerUpdate#extraParams} for the field documentation.
+       */
+      public Builder putAllExtraParam(Map<String, Object> map) {
+        if (this.extraParams == null) {
+          this.extraParams = new HashMap<>();
+        }
+        this.extraParams.putAll(map);
+        return this;
+      }
+
+      /**
+       * Describes whether Checkout saves the name onto {@code customer.name}. Defaults to {@code
+       * never}.
+       */
+      public Builder setName(Name name) {
+        this.name = name;
+        return this;
+      }
+
+      /**
+       * Describes whether Checkout saves shipping information onto {@code customer.shipping}. To
+       * collect shipping information, use {@code shipping_address_collection}. Defaults to {@code
+       * never}.
+       */
+      public Builder setShipping(Shipping shipping) {
+        this.shipping = shipping;
+        return this;
+      }
+    }
+
+    public enum Address implements ApiRequestParams.EnumParam {
+      @SerializedName("auto")
+      AUTO("auto"),
+
+      @SerializedName("never")
+      NEVER("never");
+
+      @Getter(onMethod_ = {@Override})
+      private final String value;
+
+      Address(String value) {
+        this.value = value;
+      }
+    }
+
+    public enum Name implements ApiRequestParams.EnumParam {
+      @SerializedName("auto")
+      AUTO("auto"),
+
+      @SerializedName("never")
+      NEVER("never");
+
+      @Getter(onMethod_ = {@Override})
+      private final String value;
+
+      Name(String value) {
+        this.value = value;
+      }
+    }
+
+    public enum Shipping implements ApiRequestParams.EnumParam {
+      @SerializedName("auto")
+      AUTO("auto"),
+
+      @SerializedName("never")
+      NEVER("never");
+
+      @Getter(onMethod_ = {@Override})
+      private final String value;
+
+      Shipping(String value) {
+        this.value = value;
+      }
     }
   }
 
@@ -1224,6 +1488,14 @@ public class SessionCreateParams extends ApiRequestParams {
       Recurring recurring;
 
       /**
+       * Specifies whether the price is considered inclusive of taxes or exclusive of taxes. One of
+       * {@code inclusive}, {@code exclusive}, or {@code unspecified}. Once specified as either
+       * {@code inclusive} or {@code exclusive}, it cannot be changed.
+       */
+      @SerializedName("tax_behavior")
+      TaxBehavior taxBehavior;
+
+      /**
        * A non-negative integer in %s representing how much to charge. One of {@code unit_amount} or
        * {@code unit_amount_decimal} is required.
        */
@@ -1243,6 +1515,7 @@ public class SessionCreateParams extends ApiRequestParams {
           String product,
           ProductData productData,
           Recurring recurring,
+          TaxBehavior taxBehavior,
           Long unitAmount,
           BigDecimal unitAmountDecimal) {
         this.currency = currency;
@@ -1250,6 +1523,7 @@ public class SessionCreateParams extends ApiRequestParams {
         this.product = product;
         this.productData = productData;
         this.recurring = recurring;
+        this.taxBehavior = taxBehavior;
         this.unitAmount = unitAmount;
         this.unitAmountDecimal = unitAmountDecimal;
       }
@@ -1269,6 +1543,8 @@ public class SessionCreateParams extends ApiRequestParams {
 
         private Recurring recurring;
 
+        private TaxBehavior taxBehavior;
+
         private Long unitAmount;
 
         private BigDecimal unitAmountDecimal;
@@ -1281,6 +1557,7 @@ public class SessionCreateParams extends ApiRequestParams {
               this.product,
               this.productData,
               this.recurring,
+              this.taxBehavior,
               this.unitAmount,
               this.unitAmountDecimal);
         }
@@ -1348,6 +1625,16 @@ public class SessionCreateParams extends ApiRequestParams {
         }
 
         /**
+         * Specifies whether the price is considered inclusive of taxes or exclusive of taxes. One
+         * of {@code inclusive}, {@code exclusive}, or {@code unspecified}. Once specified as either
+         * {@code inclusive} or {@code exclusive}, it cannot be changed.
+         */
+        public Builder setTaxBehavior(TaxBehavior taxBehavior) {
+          this.taxBehavior = taxBehavior;
+          return this;
+        }
+
+        /**
          * A non-negative integer in %s representing how much to charge. One of {@code unit_amount}
          * or {@code unit_amount_decimal} is required.
          */
@@ -1409,17 +1696,23 @@ public class SessionCreateParams extends ApiRequestParams {
         @SerializedName("name")
         String name;
 
+        /** A <a href="https://stripe.com/docs/tax/tax-codes">tax code</a> ID. */
+        @SerializedName("tax_code")
+        String taxCode;
+
         private ProductData(
             String description,
             Map<String, Object> extraParams,
             List<String> images,
             Map<String, String> metadata,
-            String name) {
+            String name,
+            String taxCode) {
           this.description = description;
           this.extraParams = extraParams;
           this.images = images;
           this.metadata = metadata;
           this.name = name;
+          this.taxCode = taxCode;
         }
 
         public static Builder builder() {
@@ -1437,10 +1730,17 @@ public class SessionCreateParams extends ApiRequestParams {
 
           private String name;
 
+          private String taxCode;
+
           /** Finalize and obtain parameter instance from this builder. */
           public ProductData build() {
             return new ProductData(
-                this.description, this.extraParams, this.images, this.metadata, this.name);
+                this.description,
+                this.extraParams,
+                this.images,
+                this.metadata,
+                this.name,
+                this.taxCode);
           }
 
           /**
@@ -1542,6 +1842,12 @@ public class SessionCreateParams extends ApiRequestParams {
            */
           public Builder setName(String name) {
             this.name = name;
+            return this;
+          }
+
+          /** A <a href="https://stripe.com/docs/tax/tax-codes">tax code</a> ID. */
+          public Builder setTaxCode(String taxCode) {
+            this.taxCode = taxCode;
             return this;
           }
         }
@@ -1663,6 +1969,24 @@ public class SessionCreateParams extends ApiRequestParams {
           Interval(String value) {
             this.value = value;
           }
+        }
+      }
+
+      public enum TaxBehavior implements ApiRequestParams.EnumParam {
+        @SerializedName("exclusive")
+        EXCLUSIVE("exclusive"),
+
+        @SerializedName("inclusive")
+        INCLUSIVE("inclusive"),
+
+        @SerializedName("unspecified")
+        UNSPECIFIED("unspecified");
+
+        @Getter(onMethod_ = {@Override})
+        private final String value;
+
+        TaxBehavior(String value) {
+          this.value = value;
         }
       }
     }

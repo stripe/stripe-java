@@ -3,6 +3,7 @@ package com.stripe.param;
 
 import com.google.gson.annotations.SerializedName;
 import com.stripe.net.ApiRequestParams;
+import com.stripe.net.ApiRequestParams.EnumParam;
 import com.stripe.param.common.EmptyParam;
 import java.math.BigDecimal;
 import java.util.ArrayList;
@@ -13,6 +14,10 @@ import lombok.Getter;
 
 @Getter
 public class InvoiceUpcomingParams extends ApiRequestParams {
+  /** Settings for automatic tax lookup for this invoice preview. */
+  @SerializedName("automatic_tax")
+  AutomaticTax automaticTax;
+
   /**
    * The code of the coupon to apply. If {@code subscription} or {@code subscription_items} is
    * provided, the invoice returned will preview updating or creating a subscription with that
@@ -26,6 +31,10 @@ public class InvoiceUpcomingParams extends ApiRequestParams {
   /** The identifier of the customer whose upcoming invoice you'd like to retrieve. */
   @SerializedName("customer")
   String customer;
+
+  /** Details about the customer you want to invoice. */
+  @SerializedName("customer_details")
+  CustomerDetails customerDetails;
 
   /**
    * The coupons to redeem into discounts for the invoice preview. If not specified, inherits the
@@ -159,8 +168,10 @@ public class InvoiceUpcomingParams extends ApiRequestParams {
   Boolean subscriptionTrialFromPlan;
 
   private InvoiceUpcomingParams(
+      AutomaticTax automaticTax,
       String coupon,
       String customer,
+      CustomerDetails customerDetails,
       Object discounts,
       List<String> expand,
       Map<String, Object> extraParams,
@@ -178,8 +189,10 @@ public class InvoiceUpcomingParams extends ApiRequestParams {
       Long subscriptionStartDate,
       Object subscriptionTrialEnd,
       Boolean subscriptionTrialFromPlan) {
+    this.automaticTax = automaticTax;
     this.coupon = coupon;
     this.customer = customer;
+    this.customerDetails = customerDetails;
     this.discounts = discounts;
     this.expand = expand;
     this.extraParams = extraParams;
@@ -204,9 +217,13 @@ public class InvoiceUpcomingParams extends ApiRequestParams {
   }
 
   public static class Builder {
+    private AutomaticTax automaticTax;
+
     private String coupon;
 
     private String customer;
+
+    private CustomerDetails customerDetails;
 
     private Object discounts;
 
@@ -245,8 +262,10 @@ public class InvoiceUpcomingParams extends ApiRequestParams {
     /** Finalize and obtain parameter instance from this builder. */
     public InvoiceUpcomingParams build() {
       return new InvoiceUpcomingParams(
+          this.automaticTax,
           this.coupon,
           this.customer,
+          this.customerDetails,
           this.discounts,
           this.expand,
           this.extraParams,
@@ -266,6 +285,12 @@ public class InvoiceUpcomingParams extends ApiRequestParams {
           this.subscriptionTrialFromPlan);
     }
 
+    /** Settings for automatic tax lookup for this invoice preview. */
+    public Builder setAutomaticTax(AutomaticTax automaticTax) {
+      this.automaticTax = automaticTax;
+      return this;
+    }
+
     /**
      * The code of the coupon to apply. If {@code subscription} or {@code subscription_items} is
      * provided, the invoice returned will preview updating or creating a subscription with that
@@ -281,6 +306,12 @@ public class InvoiceUpcomingParams extends ApiRequestParams {
     /** The identifier of the customer whose upcoming invoice you'd like to retrieve. */
     public Builder setCustomer(String customer) {
       this.customer = customer;
+      return this;
+    }
+
+    /** Details about the customer you want to invoice. */
+    public Builder setCustomerDetails(CustomerDetails customerDetails) {
+      this.customerDetails = customerDetails;
       return this;
     }
 
@@ -633,6 +664,963 @@ public class InvoiceUpcomingParams extends ApiRequestParams {
     public Builder setSubscriptionTrialFromPlan(Boolean subscriptionTrialFromPlan) {
       this.subscriptionTrialFromPlan = subscriptionTrialFromPlan;
       return this;
+    }
+  }
+
+  @Getter
+  public static class AutomaticTax {
+    /** Controls whether Stripe will automatically compute tax on this invoice. */
+    @SerializedName("enabled")
+    Boolean enabled;
+
+    /**
+     * Map of extra parameters for custom features not available in this client library. The content
+     * in this map is not serialized under this field's {@code @SerializedName} value. Instead, each
+     * key/value pair is serialized as if the key is a root-level field (serialized) name in this
+     * param object. Effectively, this map is flattened to its parent instance.
+     */
+    @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
+    Map<String, Object> extraParams;
+
+    private AutomaticTax(Boolean enabled, Map<String, Object> extraParams) {
+      this.enabled = enabled;
+      this.extraParams = extraParams;
+    }
+
+    public static Builder builder() {
+      return new Builder();
+    }
+
+    public static class Builder {
+      private Boolean enabled;
+
+      private Map<String, Object> extraParams;
+
+      /** Finalize and obtain parameter instance from this builder. */
+      public AutomaticTax build() {
+        return new AutomaticTax(this.enabled, this.extraParams);
+      }
+
+      /** Controls whether Stripe will automatically compute tax on this invoice. */
+      public Builder setEnabled(Boolean enabled) {
+        this.enabled = enabled;
+        return this;
+      }
+
+      /**
+       * Add a key/value pair to `extraParams` map. A map is initialized for the first `put/putAll`
+       * call, and subsequent calls add additional key/value pairs to the original map. See {@link
+       * InvoiceUpcomingParams.AutomaticTax#extraParams} for the field documentation.
+       */
+      public Builder putExtraParam(String key, Object value) {
+        if (this.extraParams == null) {
+          this.extraParams = new HashMap<>();
+        }
+        this.extraParams.put(key, value);
+        return this;
+      }
+
+      /**
+       * Add all map key/value pairs to `extraParams` map. A map is initialized for the first
+       * `put/putAll` call, and subsequent calls add additional key/value pairs to the original map.
+       * See {@link InvoiceUpcomingParams.AutomaticTax#extraParams} for the field documentation.
+       */
+      public Builder putAllExtraParam(Map<String, Object> map) {
+        if (this.extraParams == null) {
+          this.extraParams = new HashMap<>();
+        }
+        this.extraParams.putAll(map);
+        return this;
+      }
+    }
+  }
+
+  @Getter
+  public static class CustomerDetails {
+    /** The customer's address. */
+    @SerializedName("address")
+    Object address;
+
+    /**
+     * Map of extra parameters for custom features not available in this client library. The content
+     * in this map is not serialized under this field's {@code @SerializedName} value. Instead, each
+     * key/value pair is serialized as if the key is a root-level field (serialized) name in this
+     * param object. Effectively, this map is flattened to its parent instance.
+     */
+    @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
+    Map<String, Object> extraParams;
+
+    /** The customer's shipping information. Appears on invoices emailed to this customer. */
+    @SerializedName("shipping")
+    Object shipping;
+
+    /** Tax details about the customer. */
+    @SerializedName("tax")
+    Tax tax;
+
+    /** The customer's tax exemption. One of {@code none}, {@code exempt}, or {@code reverse}. */
+    @SerializedName("tax_exempt")
+    EnumParam taxExempt;
+
+    /** The customer's tax IDs. */
+    @SerializedName("tax_ids")
+    List<TaxId> taxIds;
+
+    private CustomerDetails(
+        Object address,
+        Map<String, Object> extraParams,
+        Object shipping,
+        Tax tax,
+        EnumParam taxExempt,
+        List<TaxId> taxIds) {
+      this.address = address;
+      this.extraParams = extraParams;
+      this.shipping = shipping;
+      this.tax = tax;
+      this.taxExempt = taxExempt;
+      this.taxIds = taxIds;
+    }
+
+    public static Builder builder() {
+      return new Builder();
+    }
+
+    public static class Builder {
+      private Object address;
+
+      private Map<String, Object> extraParams;
+
+      private Object shipping;
+
+      private Tax tax;
+
+      private EnumParam taxExempt;
+
+      private List<TaxId> taxIds;
+
+      /** Finalize and obtain parameter instance from this builder. */
+      public CustomerDetails build() {
+        return new CustomerDetails(
+            this.address, this.extraParams, this.shipping, this.tax, this.taxExempt, this.taxIds);
+      }
+
+      /** The customer's address. */
+      public Builder setAddress(Address address) {
+        this.address = address;
+        return this;
+      }
+
+      /** The customer's address. */
+      public Builder setAddress(EmptyParam address) {
+        this.address = address;
+        return this;
+      }
+
+      /**
+       * Add a key/value pair to `extraParams` map. A map is initialized for the first `put/putAll`
+       * call, and subsequent calls add additional key/value pairs to the original map. See {@link
+       * InvoiceUpcomingParams.CustomerDetails#extraParams} for the field documentation.
+       */
+      public Builder putExtraParam(String key, Object value) {
+        if (this.extraParams == null) {
+          this.extraParams = new HashMap<>();
+        }
+        this.extraParams.put(key, value);
+        return this;
+      }
+
+      /**
+       * Add all map key/value pairs to `extraParams` map. A map is initialized for the first
+       * `put/putAll` call, and subsequent calls add additional key/value pairs to the original map.
+       * See {@link InvoiceUpcomingParams.CustomerDetails#extraParams} for the field documentation.
+       */
+      public Builder putAllExtraParam(Map<String, Object> map) {
+        if (this.extraParams == null) {
+          this.extraParams = new HashMap<>();
+        }
+        this.extraParams.putAll(map);
+        return this;
+      }
+
+      /** The customer's shipping information. Appears on invoices emailed to this customer. */
+      public Builder setShipping(Shipping shipping) {
+        this.shipping = shipping;
+        return this;
+      }
+
+      /** The customer's shipping information. Appears on invoices emailed to this customer. */
+      public Builder setShipping(EmptyParam shipping) {
+        this.shipping = shipping;
+        return this;
+      }
+
+      /** Tax details about the customer. */
+      public Builder setTax(Tax tax) {
+        this.tax = tax;
+        return this;
+      }
+
+      /** The customer's tax exemption. One of {@code none}, {@code exempt}, or {@code reverse}. */
+      public Builder setTaxExempt(TaxExempt taxExempt) {
+        this.taxExempt = taxExempt;
+        return this;
+      }
+
+      /** The customer's tax exemption. One of {@code none}, {@code exempt}, or {@code reverse}. */
+      public Builder setTaxExempt(EmptyParam taxExempt) {
+        this.taxExempt = taxExempt;
+        return this;
+      }
+
+      /**
+       * Add an element to `taxIds` list. A list is initialized for the first `add/addAll` call, and
+       * subsequent calls adds additional elements to the original list. See {@link
+       * InvoiceUpcomingParams.CustomerDetails#taxIds} for the field documentation.
+       */
+      public Builder addTaxId(TaxId element) {
+        if (this.taxIds == null) {
+          this.taxIds = new ArrayList<>();
+        }
+        this.taxIds.add(element);
+        return this;
+      }
+
+      /**
+       * Add all elements to `taxIds` list. A list is initialized for the first `add/addAll` call,
+       * and subsequent calls adds additional elements to the original list. See {@link
+       * InvoiceUpcomingParams.CustomerDetails#taxIds} for the field documentation.
+       */
+      public Builder addAllTaxId(List<TaxId> elements) {
+        if (this.taxIds == null) {
+          this.taxIds = new ArrayList<>();
+        }
+        this.taxIds.addAll(elements);
+        return this;
+      }
+    }
+
+    @Getter
+    public static class Address {
+      /** City, district, suburb, town, or village. */
+      @SerializedName("city")
+      String city;
+
+      /**
+       * Two-letter country code (<a href="https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2">ISO
+       * 3166-1 alpha-2</a>).
+       */
+      @SerializedName("country")
+      String country;
+
+      /**
+       * Map of extra parameters for custom features not available in this client library. The
+       * content in this map is not serialized under this field's {@code @SerializedName} value.
+       * Instead, each key/value pair is serialized as if the key is a root-level field (serialized)
+       * name in this param object. Effectively, this map is flattened to its parent instance.
+       */
+      @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
+      Map<String, Object> extraParams;
+
+      /** Address line 1 (e.g., street, PO Box, or company name). */
+      @SerializedName("line1")
+      String line1;
+
+      /** Address line 2 (e.g., apartment, suite, unit, or building). */
+      @SerializedName("line2")
+      String line2;
+
+      /** ZIP or postal code. */
+      @SerializedName("postal_code")
+      String postalCode;
+
+      /** State, county, province, or region. */
+      @SerializedName("state")
+      String state;
+
+      private Address(
+          String city,
+          String country,
+          Map<String, Object> extraParams,
+          String line1,
+          String line2,
+          String postalCode,
+          String state) {
+        this.city = city;
+        this.country = country;
+        this.extraParams = extraParams;
+        this.line1 = line1;
+        this.line2 = line2;
+        this.postalCode = postalCode;
+        this.state = state;
+      }
+
+      public static Builder builder() {
+        return new Builder();
+      }
+
+      public static class Builder {
+        private String city;
+
+        private String country;
+
+        private Map<String, Object> extraParams;
+
+        private String line1;
+
+        private String line2;
+
+        private String postalCode;
+
+        private String state;
+
+        /** Finalize and obtain parameter instance from this builder. */
+        public Address build() {
+          return new Address(
+              this.city,
+              this.country,
+              this.extraParams,
+              this.line1,
+              this.line2,
+              this.postalCode,
+              this.state);
+        }
+
+        /** City, district, suburb, town, or village. */
+        public Builder setCity(String city) {
+          this.city = city;
+          return this;
+        }
+
+        /**
+         * Two-letter country code (<a href="https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2">ISO
+         * 3166-1 alpha-2</a>).
+         */
+        public Builder setCountry(String country) {
+          this.country = country;
+          return this;
+        }
+
+        /**
+         * Add a key/value pair to `extraParams` map. A map is initialized for the first
+         * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
+         * map. See {@link InvoiceUpcomingParams.CustomerDetails.Address#extraParams} for the field
+         * documentation.
+         */
+        public Builder putExtraParam(String key, Object value) {
+          if (this.extraParams == null) {
+            this.extraParams = new HashMap<>();
+          }
+          this.extraParams.put(key, value);
+          return this;
+        }
+
+        /**
+         * Add all map key/value pairs to `extraParams` map. A map is initialized for the first
+         * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
+         * map. See {@link InvoiceUpcomingParams.CustomerDetails.Address#extraParams} for the field
+         * documentation.
+         */
+        public Builder putAllExtraParam(Map<String, Object> map) {
+          if (this.extraParams == null) {
+            this.extraParams = new HashMap<>();
+          }
+          this.extraParams.putAll(map);
+          return this;
+        }
+
+        /** Address line 1 (e.g., street, PO Box, or company name). */
+        public Builder setLine1(String line1) {
+          this.line1 = line1;
+          return this;
+        }
+
+        /** Address line 2 (e.g., apartment, suite, unit, or building). */
+        public Builder setLine2(String line2) {
+          this.line2 = line2;
+          return this;
+        }
+
+        /** ZIP or postal code. */
+        public Builder setPostalCode(String postalCode) {
+          this.postalCode = postalCode;
+          return this;
+        }
+
+        /** State, county, province, or region. */
+        public Builder setState(String state) {
+          this.state = state;
+          return this;
+        }
+      }
+    }
+
+    @Getter
+    public static class Shipping {
+      /** Customer shipping address. */
+      @SerializedName("address")
+      Address address;
+
+      /**
+       * Map of extra parameters for custom features not available in this client library. The
+       * content in this map is not serialized under this field's {@code @SerializedName} value.
+       * Instead, each key/value pair is serialized as if the key is a root-level field (serialized)
+       * name in this param object. Effectively, this map is flattened to its parent instance.
+       */
+      @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
+      Map<String, Object> extraParams;
+
+      /** Customer name. */
+      @SerializedName("name")
+      String name;
+
+      /** Customer phone (including extension). */
+      @SerializedName("phone")
+      String phone;
+
+      private Shipping(
+          Address address, Map<String, Object> extraParams, String name, String phone) {
+        this.address = address;
+        this.extraParams = extraParams;
+        this.name = name;
+        this.phone = phone;
+      }
+
+      public static Builder builder() {
+        return new Builder();
+      }
+
+      public static class Builder {
+        private Address address;
+
+        private Map<String, Object> extraParams;
+
+        private String name;
+
+        private String phone;
+
+        /** Finalize and obtain parameter instance from this builder. */
+        public Shipping build() {
+          return new Shipping(this.address, this.extraParams, this.name, this.phone);
+        }
+
+        /** Customer shipping address. */
+        public Builder setAddress(Address address) {
+          this.address = address;
+          return this;
+        }
+
+        /**
+         * Add a key/value pair to `extraParams` map. A map is initialized for the first
+         * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
+         * map. See {@link InvoiceUpcomingParams.CustomerDetails.Shipping#extraParams} for the field
+         * documentation.
+         */
+        public Builder putExtraParam(String key, Object value) {
+          if (this.extraParams == null) {
+            this.extraParams = new HashMap<>();
+          }
+          this.extraParams.put(key, value);
+          return this;
+        }
+
+        /**
+         * Add all map key/value pairs to `extraParams` map. A map is initialized for the first
+         * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
+         * map. See {@link InvoiceUpcomingParams.CustomerDetails.Shipping#extraParams} for the field
+         * documentation.
+         */
+        public Builder putAllExtraParam(Map<String, Object> map) {
+          if (this.extraParams == null) {
+            this.extraParams = new HashMap<>();
+          }
+          this.extraParams.putAll(map);
+          return this;
+        }
+
+        /** Customer name. */
+        public Builder setName(String name) {
+          this.name = name;
+          return this;
+        }
+
+        /** Customer phone (including extension). */
+        public Builder setPhone(String phone) {
+          this.phone = phone;
+          return this;
+        }
+      }
+
+      @Getter
+      public static class Address {
+        /** City, district, suburb, town, or village. */
+        @SerializedName("city")
+        String city;
+
+        /**
+         * Two-letter country code (<a href="https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2">ISO
+         * 3166-1 alpha-2</a>).
+         */
+        @SerializedName("country")
+        String country;
+
+        /**
+         * Map of extra parameters for custom features not available in this client library. The
+         * content in this map is not serialized under this field's {@code @SerializedName} value.
+         * Instead, each key/value pair is serialized as if the key is a root-level field
+         * (serialized) name in this param object. Effectively, this map is flattened to its parent
+         * instance.
+         */
+        @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
+        Map<String, Object> extraParams;
+
+        /** Address line 1 (e.g., street, PO Box, or company name). */
+        @SerializedName("line1")
+        String line1;
+
+        /** Address line 2 (e.g., apartment, suite, unit, or building). */
+        @SerializedName("line2")
+        String line2;
+
+        /** ZIP or postal code. */
+        @SerializedName("postal_code")
+        String postalCode;
+
+        /** State, county, province, or region. */
+        @SerializedName("state")
+        String state;
+
+        private Address(
+            String city,
+            String country,
+            Map<String, Object> extraParams,
+            String line1,
+            String line2,
+            String postalCode,
+            String state) {
+          this.city = city;
+          this.country = country;
+          this.extraParams = extraParams;
+          this.line1 = line1;
+          this.line2 = line2;
+          this.postalCode = postalCode;
+          this.state = state;
+        }
+
+        public static Builder builder() {
+          return new Builder();
+        }
+
+        public static class Builder {
+          private String city;
+
+          private String country;
+
+          private Map<String, Object> extraParams;
+
+          private String line1;
+
+          private String line2;
+
+          private String postalCode;
+
+          private String state;
+
+          /** Finalize and obtain parameter instance from this builder. */
+          public Address build() {
+            return new Address(
+                this.city,
+                this.country,
+                this.extraParams,
+                this.line1,
+                this.line2,
+                this.postalCode,
+                this.state);
+          }
+
+          /** City, district, suburb, town, or village. */
+          public Builder setCity(String city) {
+            this.city = city;
+            return this;
+          }
+
+          /**
+           * Two-letter country code (<a href="https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2">ISO
+           * 3166-1 alpha-2</a>).
+           */
+          public Builder setCountry(String country) {
+            this.country = country;
+            return this;
+          }
+
+          /**
+           * Add a key/value pair to `extraParams` map. A map is initialized for the first
+           * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
+           * map. See {@link InvoiceUpcomingParams.CustomerDetails.Shipping.Address#extraParams} for
+           * the field documentation.
+           */
+          public Builder putExtraParam(String key, Object value) {
+            if (this.extraParams == null) {
+              this.extraParams = new HashMap<>();
+            }
+            this.extraParams.put(key, value);
+            return this;
+          }
+
+          /**
+           * Add all map key/value pairs to `extraParams` map. A map is initialized for the first
+           * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
+           * map. See {@link InvoiceUpcomingParams.CustomerDetails.Shipping.Address#extraParams} for
+           * the field documentation.
+           */
+          public Builder putAllExtraParam(Map<String, Object> map) {
+            if (this.extraParams == null) {
+              this.extraParams = new HashMap<>();
+            }
+            this.extraParams.putAll(map);
+            return this;
+          }
+
+          /** Address line 1 (e.g., street, PO Box, or company name). */
+          public Builder setLine1(String line1) {
+            this.line1 = line1;
+            return this;
+          }
+
+          /** Address line 2 (e.g., apartment, suite, unit, or building). */
+          public Builder setLine2(String line2) {
+            this.line2 = line2;
+            return this;
+          }
+
+          /** ZIP or postal code. */
+          public Builder setPostalCode(String postalCode) {
+            this.postalCode = postalCode;
+            return this;
+          }
+
+          /** State, county, province, or region. */
+          public Builder setState(String state) {
+            this.state = state;
+            return this;
+          }
+        }
+      }
+    }
+
+    @Getter
+    public static class Tax {
+      /**
+       * Map of extra parameters for custom features not available in this client library. The
+       * content in this map is not serialized under this field's {@code @SerializedName} value.
+       * Instead, each key/value pair is serialized as if the key is a root-level field (serialized)
+       * name in this param object. Effectively, this map is flattened to its parent instance.
+       */
+      @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
+      Map<String, Object> extraParams;
+
+      /**
+       * A recent IP address of the customer used for tax reporting and tax location inference.
+       * Stripe recommends updating the IP address when a new PaymentMethod is attached or the
+       * address field on the customer is updated. We recommend against updating this field more
+       * frequently since it could result in unexpected tax location/reporting outcomes.
+       */
+      @SerializedName("ip_address")
+      Object ipAddress;
+
+      private Tax(Map<String, Object> extraParams, Object ipAddress) {
+        this.extraParams = extraParams;
+        this.ipAddress = ipAddress;
+      }
+
+      public static Builder builder() {
+        return new Builder();
+      }
+
+      public static class Builder {
+        private Map<String, Object> extraParams;
+
+        private Object ipAddress;
+
+        /** Finalize and obtain parameter instance from this builder. */
+        public Tax build() {
+          return new Tax(this.extraParams, this.ipAddress);
+        }
+
+        /**
+         * Add a key/value pair to `extraParams` map. A map is initialized for the first
+         * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
+         * map. See {@link InvoiceUpcomingParams.CustomerDetails.Tax#extraParams} for the field
+         * documentation.
+         */
+        public Builder putExtraParam(String key, Object value) {
+          if (this.extraParams == null) {
+            this.extraParams = new HashMap<>();
+          }
+          this.extraParams.put(key, value);
+          return this;
+        }
+
+        /**
+         * Add all map key/value pairs to `extraParams` map. A map is initialized for the first
+         * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
+         * map. See {@link InvoiceUpcomingParams.CustomerDetails.Tax#extraParams} for the field
+         * documentation.
+         */
+        public Builder putAllExtraParam(Map<String, Object> map) {
+          if (this.extraParams == null) {
+            this.extraParams = new HashMap<>();
+          }
+          this.extraParams.putAll(map);
+          return this;
+        }
+
+        /**
+         * A recent IP address of the customer used for tax reporting and tax location inference.
+         * Stripe recommends updating the IP address when a new PaymentMethod is attached or the
+         * address field on the customer is updated. We recommend against updating this field more
+         * frequently since it could result in unexpected tax location/reporting outcomes.
+         */
+        public Builder setIpAddress(String ipAddress) {
+          this.ipAddress = ipAddress;
+          return this;
+        }
+
+        /**
+         * A recent IP address of the customer used for tax reporting and tax location inference.
+         * Stripe recommends updating the IP address when a new PaymentMethod is attached or the
+         * address field on the customer is updated. We recommend against updating this field more
+         * frequently since it could result in unexpected tax location/reporting outcomes.
+         */
+        public Builder setIpAddress(EmptyParam ipAddress) {
+          this.ipAddress = ipAddress;
+          return this;
+        }
+      }
+    }
+
+    @Getter
+    public static class TaxId {
+      /**
+       * Map of extra parameters for custom features not available in this client library. The
+       * content in this map is not serialized under this field's {@code @SerializedName} value.
+       * Instead, each key/value pair is serialized as if the key is a root-level field (serialized)
+       * name in this param object. Effectively, this map is flattened to its parent instance.
+       */
+      @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
+      Map<String, Object> extraParams;
+
+      /**
+       * Type of the tax ID, one of {@code ae_trn}, {@code au_abn}, {@code br_cnpj}, {@code br_cpf},
+       * {@code ca_bn}, {@code ca_qst}, {@code ch_vat}, {@code cl_tin}, {@code es_cif}, {@code
+       * eu_vat}, {@code gb_vat}, {@code hk_br}, {@code id_npwp}, {@code in_gst}, {@code jp_cn},
+       * {@code jp_rn}, {@code kr_brn}, {@code li_uid}, {@code mx_rfc}, {@code my_frp}, {@code
+       * my_itn}, {@code my_sst}, {@code no_vat}, {@code nz_gst}, {@code ru_inn}, {@code ru_kpp},
+       * {@code sa_vat}, {@code sg_gst}, {@code sg_uen}, {@code th_vat}, {@code tw_vat}, {@code
+       * us_ein}, or {@code za_vat}.
+       */
+      @SerializedName("type")
+      Type type;
+
+      /** Value of the tax ID. */
+      @SerializedName("value")
+      String value;
+
+      private TaxId(Map<String, Object> extraParams, Type type, String value) {
+        this.extraParams = extraParams;
+        this.type = type;
+        this.value = value;
+      }
+
+      public static Builder builder() {
+        return new Builder();
+      }
+
+      public static class Builder {
+        private Map<String, Object> extraParams;
+
+        private Type type;
+
+        private String value;
+
+        /** Finalize and obtain parameter instance from this builder. */
+        public TaxId build() {
+          return new TaxId(this.extraParams, this.type, this.value);
+        }
+
+        /**
+         * Add a key/value pair to `extraParams` map. A map is initialized for the first
+         * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
+         * map. See {@link InvoiceUpcomingParams.CustomerDetails.TaxId#extraParams} for the field
+         * documentation.
+         */
+        public Builder putExtraParam(String key, Object value) {
+          if (this.extraParams == null) {
+            this.extraParams = new HashMap<>();
+          }
+          this.extraParams.put(key, value);
+          return this;
+        }
+
+        /**
+         * Add all map key/value pairs to `extraParams` map. A map is initialized for the first
+         * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
+         * map. See {@link InvoiceUpcomingParams.CustomerDetails.TaxId#extraParams} for the field
+         * documentation.
+         */
+        public Builder putAllExtraParam(Map<String, Object> map) {
+          if (this.extraParams == null) {
+            this.extraParams = new HashMap<>();
+          }
+          this.extraParams.putAll(map);
+          return this;
+        }
+
+        /**
+         * Type of the tax ID, one of {@code ae_trn}, {@code au_abn}, {@code br_cnpj}, {@code
+         * br_cpf}, {@code ca_bn}, {@code ca_qst}, {@code ch_vat}, {@code cl_tin}, {@code es_cif},
+         * {@code eu_vat}, {@code gb_vat}, {@code hk_br}, {@code id_npwp}, {@code in_gst}, {@code
+         * jp_cn}, {@code jp_rn}, {@code kr_brn}, {@code li_uid}, {@code mx_rfc}, {@code my_frp},
+         * {@code my_itn}, {@code my_sst}, {@code no_vat}, {@code nz_gst}, {@code ru_inn}, {@code
+         * ru_kpp}, {@code sa_vat}, {@code sg_gst}, {@code sg_uen}, {@code th_vat}, {@code tw_vat},
+         * {@code us_ein}, or {@code za_vat}.
+         */
+        public Builder setType(Type type) {
+          this.type = type;
+          return this;
+        }
+
+        /** Value of the tax ID. */
+        public Builder setValue(String value) {
+          this.value = value;
+          return this;
+        }
+      }
+
+      public enum Type implements ApiRequestParams.EnumParam {
+        @SerializedName("ae_trn")
+        AE_TRN("ae_trn"),
+
+        @SerializedName("au_abn")
+        AU_ABN("au_abn"),
+
+        @SerializedName("br_cnpj")
+        BR_CNPJ("br_cnpj"),
+
+        @SerializedName("br_cpf")
+        BR_CPF("br_cpf"),
+
+        @SerializedName("ca_bn")
+        CA_BN("ca_bn"),
+
+        @SerializedName("ca_qst")
+        CA_QST("ca_qst"),
+
+        @SerializedName("ch_vat")
+        CH_VAT("ch_vat"),
+
+        @SerializedName("cl_tin")
+        CL_TIN("cl_tin"),
+
+        @SerializedName("es_cif")
+        ES_CIF("es_cif"),
+
+        @SerializedName("eu_vat")
+        EU_VAT("eu_vat"),
+
+        @SerializedName("gb_vat")
+        GB_VAT("gb_vat"),
+
+        @SerializedName("hk_br")
+        HK_BR("hk_br"),
+
+        @SerializedName("id_npwp")
+        ID_NPWP("id_npwp"),
+
+        @SerializedName("in_gst")
+        IN_GST("in_gst"),
+
+        @SerializedName("jp_cn")
+        JP_CN("jp_cn"),
+
+        @SerializedName("jp_rn")
+        JP_RN("jp_rn"),
+
+        @SerializedName("kr_brn")
+        KR_BRN("kr_brn"),
+
+        @SerializedName("li_uid")
+        LI_UID("li_uid"),
+
+        @SerializedName("mx_rfc")
+        MX_RFC("mx_rfc"),
+
+        @SerializedName("my_frp")
+        MY_FRP("my_frp"),
+
+        @SerializedName("my_itn")
+        MY_ITN("my_itn"),
+
+        @SerializedName("my_sst")
+        MY_SST("my_sst"),
+
+        @SerializedName("no_vat")
+        NO_VAT("no_vat"),
+
+        @SerializedName("nz_gst")
+        NZ_GST("nz_gst"),
+
+        @SerializedName("ru_inn")
+        RU_INN("ru_inn"),
+
+        @SerializedName("ru_kpp")
+        RU_KPP("ru_kpp"),
+
+        @SerializedName("sa_vat")
+        SA_VAT("sa_vat"),
+
+        @SerializedName("sg_gst")
+        SG_GST("sg_gst"),
+
+        @SerializedName("sg_uen")
+        SG_UEN("sg_uen"),
+
+        @SerializedName("th_vat")
+        TH_VAT("th_vat"),
+
+        @SerializedName("tw_vat")
+        TW_VAT("tw_vat"),
+
+        @SerializedName("us_ein")
+        US_EIN("us_ein"),
+
+        @SerializedName("za_vat")
+        ZA_VAT("za_vat");
+
+        @Getter(onMethod_ = {@Override})
+        private final String value;
+
+        Type(String value) {
+          this.value = value;
+        }
+      }
+    }
+
+    public enum TaxExempt implements ApiRequestParams.EnumParam {
+      @SerializedName("exempt")
+      EXEMPT("exempt"),
+
+      @SerializedName("none")
+      NONE("none"),
+
+      @SerializedName("reverse")
+      REVERSE("reverse");
+
+      @Getter(onMethod_ = {@Override})
+      private final String value;
+
+      TaxExempt(String value) {
+        this.value = value;
+      }
     }
   }
 
@@ -1344,6 +2332,14 @@ public class InvoiceUpcomingParams extends ApiRequestParams {
       @SerializedName("product")
       String product;
 
+      /**
+       * Specifies whether the price is considered inclusive of taxes or exclusive of taxes. One of
+       * {@code inclusive}, {@code exclusive}, or {@code unspecified}. Once specified as either
+       * {@code inclusive} or {@code exclusive}, it cannot be changed.
+       */
+      @SerializedName("tax_behavior")
+      TaxBehavior taxBehavior;
+
       /** A positive integer in %s (or 0 for a free price) representing how much to charge. */
       @SerializedName("unit_amount")
       Long unitAmount;
@@ -1359,11 +2355,13 @@ public class InvoiceUpcomingParams extends ApiRequestParams {
           String currency,
           Map<String, Object> extraParams,
           String product,
+          TaxBehavior taxBehavior,
           Long unitAmount,
           BigDecimal unitAmountDecimal) {
         this.currency = currency;
         this.extraParams = extraParams;
         this.product = product;
+        this.taxBehavior = taxBehavior;
         this.unitAmount = unitAmount;
         this.unitAmountDecimal = unitAmountDecimal;
       }
@@ -1379,6 +2377,8 @@ public class InvoiceUpcomingParams extends ApiRequestParams {
 
         private String product;
 
+        private TaxBehavior taxBehavior;
+
         private Long unitAmount;
 
         private BigDecimal unitAmountDecimal;
@@ -1389,6 +2389,7 @@ public class InvoiceUpcomingParams extends ApiRequestParams {
               this.currency,
               this.extraParams,
               this.product,
+              this.taxBehavior,
               this.unitAmount,
               this.unitAmountDecimal);
         }
@@ -1437,6 +2438,16 @@ public class InvoiceUpcomingParams extends ApiRequestParams {
           return this;
         }
 
+        /**
+         * Specifies whether the price is considered inclusive of taxes or exclusive of taxes. One
+         * of {@code inclusive}, {@code exclusive}, or {@code unspecified}. Once specified as either
+         * {@code inclusive} or {@code exclusive}, it cannot be changed.
+         */
+        public Builder setTaxBehavior(TaxBehavior taxBehavior) {
+          this.taxBehavior = taxBehavior;
+          return this;
+        }
+
         /** A positive integer in %s (or 0 for a free price) representing how much to charge. */
         public Builder setUnitAmount(Long unitAmount) {
           this.unitAmount = unitAmount;
@@ -1450,6 +2461,24 @@ public class InvoiceUpcomingParams extends ApiRequestParams {
         public Builder setUnitAmountDecimal(BigDecimal unitAmountDecimal) {
           this.unitAmountDecimal = unitAmountDecimal;
           return this;
+        }
+      }
+
+      public enum TaxBehavior implements ApiRequestParams.EnumParam {
+        @SerializedName("exclusive")
+        EXCLUSIVE("exclusive"),
+
+        @SerializedName("inclusive")
+        INCLUSIVE("inclusive"),
+
+        @SerializedName("unspecified")
+        UNSPECIFIED("unspecified");
+
+        @Getter(onMethod_ = {@Override})
+        private final String value;
+
+        TaxBehavior(String value) {
+          this.value = value;
         }
       }
     }
@@ -1888,6 +2917,14 @@ public class InvoiceUpcomingParams extends ApiRequestParams {
       @SerializedName("recurring")
       Recurring recurring;
 
+      /**
+       * Specifies whether the price is considered inclusive of taxes or exclusive of taxes. One of
+       * {@code inclusive}, {@code exclusive}, or {@code unspecified}. Once specified as either
+       * {@code inclusive} or {@code exclusive}, it cannot be changed.
+       */
+      @SerializedName("tax_behavior")
+      TaxBehavior taxBehavior;
+
       /** A positive integer in %s (or 0 for a free price) representing how much to charge. */
       @SerializedName("unit_amount")
       Long unitAmount;
@@ -1904,12 +2941,14 @@ public class InvoiceUpcomingParams extends ApiRequestParams {
           Map<String, Object> extraParams,
           String product,
           Recurring recurring,
+          TaxBehavior taxBehavior,
           Long unitAmount,
           BigDecimal unitAmountDecimal) {
         this.currency = currency;
         this.extraParams = extraParams;
         this.product = product;
         this.recurring = recurring;
+        this.taxBehavior = taxBehavior;
         this.unitAmount = unitAmount;
         this.unitAmountDecimal = unitAmountDecimal;
       }
@@ -1927,6 +2966,8 @@ public class InvoiceUpcomingParams extends ApiRequestParams {
 
         private Recurring recurring;
 
+        private TaxBehavior taxBehavior;
+
         private Long unitAmount;
 
         private BigDecimal unitAmountDecimal;
@@ -1938,6 +2979,7 @@ public class InvoiceUpcomingParams extends ApiRequestParams {
               this.extraParams,
               this.product,
               this.recurring,
+              this.taxBehavior,
               this.unitAmount,
               this.unitAmountDecimal);
         }
@@ -1989,6 +3031,16 @@ public class InvoiceUpcomingParams extends ApiRequestParams {
         /** The recurring components of a price such as {@code interval} and {@code usage_type}. */
         public Builder setRecurring(Recurring recurring) {
           this.recurring = recurring;
+          return this;
+        }
+
+        /**
+         * Specifies whether the price is considered inclusive of taxes or exclusive of taxes. One
+         * of {@code inclusive}, {@code exclusive}, or {@code unspecified}. Once specified as either
+         * {@code inclusive} or {@code exclusive}, it cannot be changed.
+         */
+        public Builder setTaxBehavior(TaxBehavior taxBehavior) {
+          this.taxBehavior = taxBehavior;
           return this;
         }
 
@@ -2124,6 +3176,24 @@ public class InvoiceUpcomingParams extends ApiRequestParams {
           Interval(String value) {
             this.value = value;
           }
+        }
+      }
+
+      public enum TaxBehavior implements ApiRequestParams.EnumParam {
+        @SerializedName("exclusive")
+        EXCLUSIVE("exclusive"),
+
+        @SerializedName("inclusive")
+        INCLUSIVE("inclusive"),
+
+        @SerializedName("unspecified")
+        UNSPECIFIED("unspecified");
+
+        @Getter(onMethod_ = {@Override})
+        private final String value;
+
+        TaxBehavior(String value) {
+          this.value = value;
         }
       }
     }

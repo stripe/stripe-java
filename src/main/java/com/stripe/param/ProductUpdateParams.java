@@ -102,6 +102,10 @@ public class ProductUpdateParams extends ApiRequestParams {
   @SerializedName("statement_descriptor")
   Object statementDescriptor;
 
+  /** A <a href="https://stripe.com/docs/tax/tax-codes">tax code</a> ID. */
+  @SerializedName("tax_code")
+  Object taxCode;
+
   /**
    * A label that represents units of this product in Stripe and on customers’ receipts and
    * invoices. When set, this will be included in associated invoice line item descriptions. May
@@ -128,6 +132,7 @@ public class ProductUpdateParams extends ApiRequestParams {
       Object packageDimensions,
       Boolean shippable,
       Object statementDescriptor,
+      Object taxCode,
       Object unitLabel,
       Object url) {
     this.active = active;
@@ -143,6 +148,7 @@ public class ProductUpdateParams extends ApiRequestParams {
     this.packageDimensions = packageDimensions;
     this.shippable = shippable;
     this.statementDescriptor = statementDescriptor;
+    this.taxCode = taxCode;
     this.unitLabel = unitLabel;
     this.url = url;
   }
@@ -178,6 +184,8 @@ public class ProductUpdateParams extends ApiRequestParams {
 
     private Object statementDescriptor;
 
+    private Object taxCode;
+
     private Object unitLabel;
 
     private Object url;
@@ -198,6 +206,7 @@ public class ProductUpdateParams extends ApiRequestParams {
           this.packageDimensions,
           this.shippable,
           this.statementDescriptor,
+          this.taxCode,
           this.unitLabel,
           this.url);
     }
@@ -531,6 +540,18 @@ public class ProductUpdateParams extends ApiRequestParams {
      */
     public Builder setStatementDescriptor(EmptyParam statementDescriptor) {
       this.statementDescriptor = statementDescriptor;
+      return this;
+    }
+
+    /** A <a href="https://stripe.com/docs/tax/tax-codes">tax code</a> ID. */
+    public Builder setTaxCode(String taxCode) {
+      this.taxCode = taxCode;
+      return this;
+    }
+
+    /** A <a href="https://stripe.com/docs/tax/tax-codes">tax code</a> ID. */
+    public Builder setTaxCode(EmptyParam taxCode) {
+      this.taxCode = taxCode;
       return this;
     }
 

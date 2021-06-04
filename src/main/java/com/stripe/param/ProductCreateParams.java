@@ -103,6 +103,10 @@ public class ProductCreateParams extends ApiRequestParams {
   @SerializedName("statement_descriptor")
   String statementDescriptor;
 
+  /** A <a href="https://stripe.com/docs/tax/tax-codes">tax code</a> ID. */
+  @SerializedName("tax_code")
+  String taxCode;
+
   /**
    * The type of the product. Defaults to {@code service} if not explicitly specified, enabling use
    * of this product with Subscriptions and Plans. Set this parameter to {@code good} to use this
@@ -138,6 +142,7 @@ public class ProductCreateParams extends ApiRequestParams {
       PackageDimensions packageDimensions,
       Boolean shippable,
       String statementDescriptor,
+      String taxCode,
       Type type,
       String unitLabel,
       String url) {
@@ -155,6 +160,7 @@ public class ProductCreateParams extends ApiRequestParams {
     this.packageDimensions = packageDimensions;
     this.shippable = shippable;
     this.statementDescriptor = statementDescriptor;
+    this.taxCode = taxCode;
     this.type = type;
     this.unitLabel = unitLabel;
     this.url = url;
@@ -193,6 +199,8 @@ public class ProductCreateParams extends ApiRequestParams {
 
     private String statementDescriptor;
 
+    private String taxCode;
+
     private Type type;
 
     private String unitLabel;
@@ -216,6 +224,7 @@ public class ProductCreateParams extends ApiRequestParams {
           this.packageDimensions,
           this.shippable,
           this.statementDescriptor,
+          this.taxCode,
           this.type,
           this.unitLabel,
           this.url);
@@ -444,6 +453,12 @@ public class ProductCreateParams extends ApiRequestParams {
      */
     public Builder setStatementDescriptor(String statementDescriptor) {
       this.statementDescriptor = statementDescriptor;
+      return this;
+    }
+
+    /** A <a href="https://stripe.com/docs/tax/tax-codes">tax code</a> ID. */
+    public Builder setTaxCode(String taxCode) {
+      this.taxCode = taxCode;
       return this;
     }
 

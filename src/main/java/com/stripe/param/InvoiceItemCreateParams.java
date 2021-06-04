@@ -699,6 +699,14 @@ public class InvoiceItemCreateParams extends ApiRequestParams {
     @SerializedName("product")
     String product;
 
+    /**
+     * Specifies whether the price is considered inclusive of taxes or exclusive of taxes. One of
+     * {@code inclusive}, {@code exclusive}, or {@code unspecified}. Once specified as either {@code
+     * inclusive} or {@code exclusive}, it cannot be changed.
+     */
+    @SerializedName("tax_behavior")
+    TaxBehavior taxBehavior;
+
     /** A positive integer in %s (or 0 for a free price) representing how much to charge. */
     @SerializedName("unit_amount")
     Long unitAmount;
@@ -714,11 +722,13 @@ public class InvoiceItemCreateParams extends ApiRequestParams {
         String currency,
         Map<String, Object> extraParams,
         String product,
+        TaxBehavior taxBehavior,
         Long unitAmount,
         BigDecimal unitAmountDecimal) {
       this.currency = currency;
       this.extraParams = extraParams;
       this.product = product;
+      this.taxBehavior = taxBehavior;
       this.unitAmount = unitAmount;
       this.unitAmountDecimal = unitAmountDecimal;
     }
@@ -734,6 +744,8 @@ public class InvoiceItemCreateParams extends ApiRequestParams {
 
       private String product;
 
+      private TaxBehavior taxBehavior;
+
       private Long unitAmount;
 
       private BigDecimal unitAmountDecimal;
@@ -741,7 +753,12 @@ public class InvoiceItemCreateParams extends ApiRequestParams {
       /** Finalize and obtain parameter instance from this builder. */
       public PriceData build() {
         return new PriceData(
-            this.currency, this.extraParams, this.product, this.unitAmount, this.unitAmountDecimal);
+            this.currency,
+            this.extraParams,
+            this.product,
+            this.taxBehavior,
+            this.unitAmount,
+            this.unitAmountDecimal);
       }
 
       /**
@@ -786,6 +803,16 @@ public class InvoiceItemCreateParams extends ApiRequestParams {
         return this;
       }
 
+      /**
+       * Specifies whether the price is considered inclusive of taxes or exclusive of taxes. One of
+       * {@code inclusive}, {@code exclusive}, or {@code unspecified}. Once specified as either
+       * {@code inclusive} or {@code exclusive}, it cannot be changed.
+       */
+      public Builder setTaxBehavior(TaxBehavior taxBehavior) {
+        this.taxBehavior = taxBehavior;
+        return this;
+      }
+
       /** A positive integer in %s (or 0 for a free price) representing how much to charge. */
       public Builder setUnitAmount(Long unitAmount) {
         this.unitAmount = unitAmount;
@@ -799,6 +826,24 @@ public class InvoiceItemCreateParams extends ApiRequestParams {
       public Builder setUnitAmountDecimal(BigDecimal unitAmountDecimal) {
         this.unitAmountDecimal = unitAmountDecimal;
         return this;
+      }
+    }
+
+    public enum TaxBehavior implements ApiRequestParams.EnumParam {
+      @SerializedName("exclusive")
+      EXCLUSIVE("exclusive"),
+
+      @SerializedName("inclusive")
+      INCLUSIVE("inclusive"),
+
+      @SerializedName("unspecified")
+      UNSPECIFIED("unspecified");
+
+      @Getter(onMethod_ = {@Override})
+      private final String value;
+
+      TaxBehavior(String value) {
+        this.value = value;
       }
     }
   }

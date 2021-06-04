@@ -551,6 +551,14 @@ public class SubscriptionItemCreateParams extends ApiRequestParams {
     @SerializedName("recurring")
     Recurring recurring;
 
+    /**
+     * Specifies whether the price is considered inclusive of taxes or exclusive of taxes. One of
+     * {@code inclusive}, {@code exclusive}, or {@code unspecified}. Once specified as either {@code
+     * inclusive} or {@code exclusive}, it cannot be changed.
+     */
+    @SerializedName("tax_behavior")
+    TaxBehavior taxBehavior;
+
     /** A positive integer in %s (or 0 for a free price) representing how much to charge. */
     @SerializedName("unit_amount")
     Long unitAmount;
@@ -567,12 +575,14 @@ public class SubscriptionItemCreateParams extends ApiRequestParams {
         Map<String, Object> extraParams,
         String product,
         Recurring recurring,
+        TaxBehavior taxBehavior,
         Long unitAmount,
         BigDecimal unitAmountDecimal) {
       this.currency = currency;
       this.extraParams = extraParams;
       this.product = product;
       this.recurring = recurring;
+      this.taxBehavior = taxBehavior;
       this.unitAmount = unitAmount;
       this.unitAmountDecimal = unitAmountDecimal;
     }
@@ -590,6 +600,8 @@ public class SubscriptionItemCreateParams extends ApiRequestParams {
 
       private Recurring recurring;
 
+      private TaxBehavior taxBehavior;
+
       private Long unitAmount;
 
       private BigDecimal unitAmountDecimal;
@@ -601,6 +613,7 @@ public class SubscriptionItemCreateParams extends ApiRequestParams {
             this.extraParams,
             this.product,
             this.recurring,
+            this.taxBehavior,
             this.unitAmount,
             this.unitAmountDecimal);
       }
@@ -650,6 +663,16 @@ public class SubscriptionItemCreateParams extends ApiRequestParams {
       /** The recurring components of a price such as {@code interval} and {@code usage_type}. */
       public Builder setRecurring(Recurring recurring) {
         this.recurring = recurring;
+        return this;
+      }
+
+      /**
+       * Specifies whether the price is considered inclusive of taxes or exclusive of taxes. One of
+       * {@code inclusive}, {@code exclusive}, or {@code unspecified}. Once specified as either
+       * {@code inclusive} or {@code exclusive}, it cannot be changed.
+       */
+      public Builder setTaxBehavior(TaxBehavior taxBehavior) {
+        this.taxBehavior = taxBehavior;
         return this;
       }
 
@@ -784,6 +807,24 @@ public class SubscriptionItemCreateParams extends ApiRequestParams {
         Interval(String value) {
           this.value = value;
         }
+      }
+    }
+
+    public enum TaxBehavior implements ApiRequestParams.EnumParam {
+      @SerializedName("exclusive")
+      EXCLUSIVE("exclusive"),
+
+      @SerializedName("inclusive")
+      INCLUSIVE("inclusive"),
+
+      @SerializedName("unspecified")
+      UNSPECIFIED("unspecified");
+
+      @Getter(onMethod_ = {@Override})
+      private final String value;
+
+      TaxBehavior(String value) {
+        this.value = value;
       }
     }
   }
