@@ -1,5 +1,9 @@
 # Changelog
 
+## 20.55.0 - 2021-06-04
+* [#1217](https://github.com/stripe/stripe-java/pull/1217) API Updates
+  * Added support for `controller` on `Account`
+
 ## 20.54.0 - 2021-06-04
 * [#1215](https://github.com/stripe/stripe-java/pull/1215) API Updates
   * Add support for new `TaxCode` API.
