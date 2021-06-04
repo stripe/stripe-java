@@ -46,6 +46,9 @@ public class Account extends ApiResource implements MetadataStore<Account>, Paym
   @SerializedName("company")
   Company company;
 
+  @SerializedName("controller")
+  Controller controller;
+
   /** The account's country. */
   @SerializedName("country")
   String country;
@@ -197,11 +200,11 @@ public class Account extends ApiResource implements MetadataStore<Account>, Paym
   }
 
   /**
-   * Updates a connected <a href="https://stripe.com/docs/connect/accounts">Express or Custom
-   * account</a> by setting the values of the parameters passed. Any parameters not provided are
-   * left unchanged. Most parameters can be changed only for Custom accounts. (These are marked
-   * <strong>Custom Only</strong> below.) Parameters marked <strong>Custom and Express</strong> are
-   * supported by both account types.
+   * Updates a <a href="https://stripe.com/docs/connect/accounts">connected account</a> by setting
+   * the values of the parameters passed. Any parameters not provided are left unchanged. Most
+   * parameters can be changed only for Custom accounts. (These are marked <strong>Custom
+   * Only</strong> below.) Parameters marked <strong>Custom and Express</strong> are not supported
+   * for Standard accounts.
    *
    * <p>To update your own account, use the <a
    * href="https://dashboard.stripe.com/account">Dashboard</a>. Refer to our <a
@@ -214,11 +217,11 @@ public class Account extends ApiResource implements MetadataStore<Account>, Paym
   }
 
   /**
-   * Updates a connected <a href="https://stripe.com/docs/connect/accounts">Express or Custom
-   * account</a> by setting the values of the parameters passed. Any parameters not provided are
-   * left unchanged. Most parameters can be changed only for Custom accounts. (These are marked
-   * <strong>Custom Only</strong> below.) Parameters marked <strong>Custom and Express</strong> are
-   * supported by both account types.
+   * Updates a <a href="https://stripe.com/docs/connect/accounts">connected account</a> by setting
+   * the values of the parameters passed. Any parameters not provided are left unchanged. Most
+   * parameters can be changed only for Custom accounts. (These are marked <strong>Custom
+   * Only</strong> below.) Parameters marked <strong>Custom and Express</strong> are not supported
+   * for Standard accounts.
    *
    * <p>To update your own account, use the <a
    * href="https://dashboard.stripe.com/account">Dashboard</a>. Refer to our <a
@@ -236,11 +239,11 @@ public class Account extends ApiResource implements MetadataStore<Account>, Paym
   }
 
   /**
-   * Updates a connected <a href="https://stripe.com/docs/connect/accounts">Express or Custom
-   * account</a> by setting the values of the parameters passed. Any parameters not provided are
-   * left unchanged. Most parameters can be changed only for Custom accounts. (These are marked
-   * <strong>Custom Only</strong> below.) Parameters marked <strong>Custom and Express</strong> are
-   * supported by both account types.
+   * Updates a <a href="https://stripe.com/docs/connect/accounts">connected account</a> by setting
+   * the values of the parameters passed. Any parameters not provided are left unchanged. Most
+   * parameters can be changed only for Custom accounts. (These are marked <strong>Custom
+   * Only</strong> below.) Parameters marked <strong>Custom and Express</strong> are not supported
+   * for Standard accounts.
    *
    * <p>To update your own account, use the <a
    * href="https://dashboard.stripe.com/account">Dashboard</a>. Refer to our <a
@@ -252,11 +255,11 @@ public class Account extends ApiResource implements MetadataStore<Account>, Paym
   }
 
   /**
-   * Updates a connected <a href="https://stripe.com/docs/connect/accounts">Express or Custom
-   * account</a> by setting the values of the parameters passed. Any parameters not provided are
-   * left unchanged. Most parameters can be changed only for Custom accounts. (These are marked
-   * <strong>Custom Only</strong> below.) Parameters marked <strong>Custom and Express</strong> are
-   * supported by both account types.
+   * Updates a <a href="https://stripe.com/docs/connect/accounts">connected account</a> by setting
+   * the values of the parameters passed. Any parameters not provided are left unchanged. Most
+   * parameters can be changed only for Custom accounts. (These are marked <strong>Custom
+   * Only</strong> below.) Parameters marked <strong>Custom and Express</strong> are not supported
+   * for Standard accounts.
    *
    * <p>To update your own account, use the <a
    * href="https://dashboard.stripe.com/account">Dashboard</a>. Refer to our <a
@@ -998,6 +1001,27 @@ public class Account extends ApiResource implements MetadataStore<Account>, Paym
         }
       }
     }
+  }
+
+  @Getter
+  @Setter
+  @EqualsAndHashCode(callSuper = false)
+  public static class Controller extends StripeObject {
+    /**
+     * {@code true} if the Connect application retrieving the resource controls the account and can
+     * therefore exercise <a
+     * href="https://stripe.com/docs/connect/platform-controls-for-standard-accounts">platform
+     * controls</a>. Otherwise, this field is null.
+     */
+    @SerializedName("is_controller")
+    Boolean isController;
+
+    /**
+     * The controller type. Can be {@code application}, if a Connect application controls the
+     * account, or {@code account}, if the account controls itself.
+     */
+    @SerializedName("type")
+    String type;
   }
 
   @Getter
