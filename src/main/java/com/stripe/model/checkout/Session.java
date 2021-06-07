@@ -220,6 +220,9 @@ public class Session extends ApiResource implements HasId {
   @SerializedName("success_url")
   String successUrl;
 
+  @SerializedName("tax_id_collection")
+  TaxIDCollection taxIdCollection;
+
   /** Tax and discount details for the computed total amount. */
   @SerializedName("total_details")
   TotalDetails totalDetails;
@@ -549,6 +552,15 @@ public class Session extends ApiResource implements HasId {
      */
     @SerializedName("allowed_countries")
     List<String> allowedCountries;
+  }
+
+  @Getter
+  @Setter
+  @EqualsAndHashCode(callSuper = false)
+  public static class TaxIDCollection extends StripeObject {
+    /** Indicates whether tax ID collection is enabled for the session. */
+    @SerializedName("enabled")
+    Boolean enabled;
   }
 
   @Getter

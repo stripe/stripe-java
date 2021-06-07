@@ -198,6 +198,9 @@ public class SessionCreateParams extends ApiRequestParams {
   @SerializedName("success_url")
   String successUrl;
 
+  @SerializedName("tax_id_collection")
+  TaxIdCollection taxIdCollection;
+
   private SessionCreateParams(
       Boolean allowPromotionCodes,
       AutomaticTax automaticTax,
@@ -222,7 +225,8 @@ public class SessionCreateParams extends ApiRequestParams {
       List<String> shippingRates,
       SubmitType submitType,
       SubscriptionData subscriptionData,
-      String successUrl) {
+      String successUrl,
+      TaxIdCollection taxIdCollection) {
     this.allowPromotionCodes = allowPromotionCodes;
     this.automaticTax = automaticTax;
     this.billingAddressCollection = billingAddressCollection;
@@ -247,6 +251,7 @@ public class SessionCreateParams extends ApiRequestParams {
     this.submitType = submitType;
     this.subscriptionData = subscriptionData;
     this.successUrl = successUrl;
+    this.taxIdCollection = taxIdCollection;
   }
 
   public static Builder builder() {
@@ -302,6 +307,8 @@ public class SessionCreateParams extends ApiRequestParams {
 
     private String successUrl;
 
+    private TaxIdCollection taxIdCollection;
+
     /** Finalize and obtain parameter instance from this builder. */
     public SessionCreateParams build() {
       return new SessionCreateParams(
@@ -328,7 +335,8 @@ public class SessionCreateParams extends ApiRequestParams {
           this.shippingRates,
           this.submitType,
           this.subscriptionData,
-          this.successUrl);
+          this.successUrl,
+          this.taxIdCollection);
     }
 
     /** Enables user redeemable promotion codes. */
@@ -672,6 +680,11 @@ public class SessionCreateParams extends ApiRequestParams {
      */
     public Builder setSuccessUrl(String successUrl) {
       this.successUrl = successUrl;
+      return this;
+    }
+
+    public Builder setTaxIdCollection(TaxIdCollection taxIdCollection) {
+      this.taxIdCollection = taxIdCollection;
       return this;
     }
   }
@@ -4632,6 +4645,74 @@ public class SessionCreateParams extends ApiRequestParams {
           this.extraParams.putAll(map);
           return this;
         }
+      }
+    }
+  }
+
+  @Getter
+  public static class TaxIdCollection {
+    /** Set to true to enable Tax ID collection. */
+    @SerializedName("enabled")
+    Boolean enabled;
+
+    /**
+     * Map of extra parameters for custom features not available in this client library. The content
+     * in this map is not serialized under this field's {@code @SerializedName} value. Instead, each
+     * key/value pair is serialized as if the key is a root-level field (serialized) name in this
+     * param object. Effectively, this map is flattened to its parent instance.
+     */
+    @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
+    Map<String, Object> extraParams;
+
+    private TaxIdCollection(Boolean enabled, Map<String, Object> extraParams) {
+      this.enabled = enabled;
+      this.extraParams = extraParams;
+    }
+
+    public static Builder builder() {
+      return new Builder();
+    }
+
+    public static class Builder {
+      private Boolean enabled;
+
+      private Map<String, Object> extraParams;
+
+      /** Finalize and obtain parameter instance from this builder. */
+      public TaxIdCollection build() {
+        return new TaxIdCollection(this.enabled, this.extraParams);
+      }
+
+      /** Set to true to enable Tax ID collection. */
+      public Builder setEnabled(Boolean enabled) {
+        this.enabled = enabled;
+        return this;
+      }
+
+      /**
+       * Add a key/value pair to `extraParams` map. A map is initialized for the first `put/putAll`
+       * call, and subsequent calls add additional key/value pairs to the original map. See {@link
+       * SessionCreateParams.TaxIdCollection#extraParams} for the field documentation.
+       */
+      public Builder putExtraParam(String key, Object value) {
+        if (this.extraParams == null) {
+          this.extraParams = new HashMap<>();
+        }
+        this.extraParams.put(key, value);
+        return this;
+      }
+
+      /**
+       * Add all map key/value pairs to `extraParams` map. A map is initialized for the first
+       * `put/putAll` call, and subsequent calls add additional key/value pairs to the original map.
+       * See {@link SessionCreateParams.TaxIdCollection#extraParams} for the field documentation.
+       */
+      public Builder putAllExtraParam(Map<String, Object> map) {
+        if (this.extraParams == null) {
+          this.extraParams = new HashMap<>();
+        }
+        this.extraParams.putAll(map);
+        return this;
       }
     }
   }
