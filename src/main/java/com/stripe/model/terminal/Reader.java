@@ -4,6 +4,7 @@ package com.stripe.model.terminal;
 import com.google.gson.annotations.SerializedName;
 import com.stripe.Stripe;
 import com.stripe.exception.StripeException;
+import com.stripe.model.ExpandableField;
 import com.stripe.model.HasId;
 import com.stripe.model.MetadataStore;
 import com.stripe.net.ApiResource;
@@ -55,7 +56,9 @@ public class Reader extends ApiResource implements HasId, MetadataStore<Reader> 
 
   /** The location identifier of the reader. */
   @SerializedName("location")
-  String location;
+  @Getter(lombok.AccessLevel.NONE)
+  @Setter(lombok.AccessLevel.NONE)
+  ExpandableField<Location> location;
 
   /**
    * Set of <a href="https://stripe.com/docs/api/metadata">key-value pairs</a> that you can attach
@@ -81,6 +84,24 @@ public class Reader extends ApiResource implements HasId, MetadataStore<Reader> 
   /** The networking status of the reader. */
   @SerializedName("status")
   String status;
+
+  /** Get ID of expandable {@code location} object. */
+  public String getLocation() {
+    return (this.location != null) ? this.location.getId() : null;
+  }
+
+  public void setLocation(String id) {
+    this.location = ApiResource.setExpandableFieldId(id, this.location);
+  }
+
+  /** Get expanded {@code location}. */
+  public Location getLocationObject() {
+    return (this.location != null) ? this.location.getExpanded() : null;
+  }
+
+  public void setLocationObject(Location expandableObject) {
+    this.location = new ExpandableField<Location>(expandableObject.getId(), expandableObject);
+  }
 
   /**
    * Updates a <code>Reader</code> object by setting the values of the parameters passed. Any
