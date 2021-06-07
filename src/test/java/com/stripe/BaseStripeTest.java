@@ -32,7 +32,6 @@ import org.mockito.ArgumentMatcher;
 import org.mockito.Mockito;
 
 public class BaseStripeTest {
-  // If changing this number, please also change it in `.travis.yml`.
   private static final String MOCK_MINIMUM_VERSION = "0.106.0";
 
   private static String port;
