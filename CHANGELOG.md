@@ -1,5 +1,10 @@
 # Changelog
 
+## 20.56.0 - 2021-06-07
+* [#1219](https://github.com/stripe/stripe-java/pull/1219) API Updates
+  * Added support for `TaxIdCollection` on `SessionCreateParams` and `Session.taxIdCollection`
+  * Update `Location` to be expandable on `Reader`
+
 ## 20.55.0 - 2021-06-04
 * [#1217](https://github.com/stripe/stripe-java/pull/1217) API Updates
   * Added support for `controller` on `Account`
