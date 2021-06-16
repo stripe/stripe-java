@@ -198,6 +198,7 @@ public class SessionCreateParams extends ApiRequestParams {
   @SerializedName("success_url")
   String successUrl;
 
+  /** Controls tax ID collection settings for the session. */
   @SerializedName("tax_id_collection")
   TaxIdCollection taxIdCollection;
 
@@ -683,6 +684,7 @@ public class SessionCreateParams extends ApiRequestParams {
       return this;
     }
 
+    /** Controls tax ID collection settings for the session. */
     public Builder setTaxIdCollection(TaxIdCollection taxIdCollection) {
       this.taxIdCollection = taxIdCollection;
       return this;
@@ -2860,7 +2862,7 @@ public class SessionCreateParams extends ApiRequestParams {
       /**
        * Three-letter <a href="https://www.iso.org/iso-4217-currency-codes.html">ISO currency
        * code</a>, in lowercase. Must be a <a href="https://stripe.com/docs/currencies">supported
-       * currency</a>.
+       * currency</a>. This is only accepted for Checkout Sessions in {@code setup} mode.
        */
       @SerializedName("currency")
       Currency currency;
@@ -2915,7 +2917,7 @@ public class SessionCreateParams extends ApiRequestParams {
         /**
          * Three-letter <a href="https://www.iso.org/iso-4217-currency-codes.html">ISO currency
          * code</a>, in lowercase. Must be a <a href="https://stripe.com/docs/currencies">supported
-         * currency</a>.
+         * currency</a>. This is only accepted for Checkout Sessions in {@code setup} mode.
          */
         public Builder setCurrency(Currency currency) {
           this.currency = currency;
