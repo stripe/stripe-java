@@ -75,7 +75,7 @@ public class SubscriptionUpdateParams extends ApiRequestParams {
   CollectionMethod collectionMethod;
 
   /**
-   * The code of the coupon to apply to this subscription. A coupon applied to a subscription will
+   * The ID of the coupon to apply to this subscription. A coupon applied to a subscription will
    * only affect invoices created for that particular subscription.
    */
   @SerializedName("coupon")
@@ -517,7 +517,7 @@ public class SubscriptionUpdateParams extends ApiRequestParams {
     }
 
     /**
-     * The code of the coupon to apply to this subscription. A coupon applied to a subscription will
+     * The ID of the coupon to apply to this subscription. A coupon applied to a subscription will
      * only affect invoices created for that particular subscription.
      */
     public Builder setCoupon(String coupon) {
@@ -526,7 +526,7 @@ public class SubscriptionUpdateParams extends ApiRequestParams {
     }
 
     /**
-     * The code of the coupon to apply to this subscription. A coupon applied to a subscription will
+     * The ID of the coupon to apply to this subscription. A coupon applied to a subscription will
      * only affect invoices created for that particular subscription.
      */
     public Builder setCoupon(EmptyParam coupon) {

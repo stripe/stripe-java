@@ -18,7 +18,7 @@ public class CardCreateParams extends ApiRequestParams {
   @SerializedName("cardholder")
   String cardholder;
 
-  /** The currency for the card. This currently must be {@code usd}. */
+  /** The currency for the card. */
   @SerializedName("currency")
   String currency;
 
@@ -151,7 +151,7 @@ public class CardCreateParams extends ApiRequestParams {
       return this;
     }
 
-    /** The currency for the card. This currently must be {@code usd}. */
+    /** The currency for the card. */
     public Builder setCurrency(String currency) {
       this.currency = currency;
       return this;

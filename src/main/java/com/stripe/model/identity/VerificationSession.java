@@ -58,8 +58,8 @@ public class VerificationSession extends ApiResource
 
   /**
    * ID of the most recent VerificationReport. <a
-   * href="https://stripe.com/docs/identity/verification-checks">Learn more about accessing detailed
-   * verification results.</a>
+   * href="https://stripe.com/docs/identity/verification-sessions#results">Learn more about
+   * accessing detailed verification results.</a>
    */
   @SerializedName("last_verification_report")
   @Getter(lombok.AccessLevel.NONE)

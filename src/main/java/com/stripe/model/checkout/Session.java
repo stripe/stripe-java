@@ -227,6 +227,10 @@ public class Session extends ApiResource implements HasId {
   @SerializedName("total_details")
   TotalDetails totalDetails;
 
+  /** The URL to the Checkout Session. */
+  @SerializedName("url")
+  String url;
+
   /** Get ID of expandable {@code customer} object. */
   public String getCustomer() {
     return (this.customer != null) ? this.customer.getId() : null;
