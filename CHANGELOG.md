@@ -1,5 +1,9 @@
 # Changelog
 
+## 20.57.0 - 2021-06-16
+* [#1221](https://github.com/stripe/stripe-java/pull/1221) API Updates
+  * Add support for `url` on Checkout `Session`
+
 ## 20.56.0 - 2021-06-07
 * [#1219](https://github.com/stripe/stripe-java/pull/1219) API Updates
   * Added support for `TaxIdCollection` on `SessionCreateParams` and `Session.taxIdCollection`
