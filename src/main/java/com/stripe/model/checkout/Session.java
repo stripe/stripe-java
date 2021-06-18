@@ -469,8 +469,9 @@ public class Session extends ApiResource implements HasId {
        * {@code ch_vat}, {@code mx_rfc}, {@code sg_uen}, {@code ru_inn}, {@code ru_kpp}, {@code
        * ca_bn}, {@code hk_br}, {@code es_cif}, {@code tw_vat}, {@code th_vat}, {@code jp_cn},
        * {@code jp_rn}, {@code li_uid}, {@code my_itn}, {@code us_ein}, {@code kr_brn}, {@code
-       * ca_qst}, {@code my_sst}, {@code sg_gst}, {@code ae_trn}, {@code cl_tin}, {@code sa_vat},
-       * {@code id_npwp}, {@code my_frp}, or {@code unknown}.
+       * ca_qst}, {@code ca_gst_hst}, {@code ca_pst_bc}, {@code ca_pst_mb}, {@code ca_pst_sk},
+       * {@code my_sst}, {@code sg_gst}, {@code ae_trn}, {@code cl_tin}, {@code sa_vat}, {@code
+       * id_npwp}, {@code my_frp}, or {@code unknown}.
        */
       @SerializedName("type")
       String type;
