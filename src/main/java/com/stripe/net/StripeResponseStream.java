@@ -10,7 +10,7 @@ public class StripeResponseStream extends AbstractStripeResponse<InputStream> {
    *
    * @param code the HTTP status code of the response
    * @param headers the HTTP headers of the response
-   * @param bodyStream streaming body response
+   * @param body streaming body response
    * @throws NullPointerException if {@code headers} or {@code body} is {@code null}
    */
   public StripeResponseStream(int code, HttpHeaders headers, InputStream body) {
