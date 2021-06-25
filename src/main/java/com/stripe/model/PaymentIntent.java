@@ -1060,6 +1060,9 @@ public class PaymentIntent extends ApiResource implements HasId, MetadataStore<P
     @SerializedName("alipay_handle_redirect")
     NextActionAlipayHandleRedirect alipayHandleRedirect;
 
+    @SerializedName("boleto_display_details")
+    NextActionDisplayBoletoDetails boletoDisplayDetails;
+
     @SerializedName("oxxo_display_details")
     NextActionOxxoDisplayDetails oxxoDisplayDetails;
 
@@ -1134,6 +1137,29 @@ public class PaymentIntent extends ApiResource implements HasId, MetadataStore<P
   @Getter
   @Setter
   @EqualsAndHashCode(callSuper = false)
+  public static class NextActionDisplayBoletoDetails extends StripeObject {
+    /** The timestamp after which the boleto expires. */
+    @SerializedName("expires_at")
+    Long expiresAt;
+
+    /**
+     * The URL to the hosted boleto voucher page, which allows customers to view the boleto voucher.
+     */
+    @SerializedName("hosted_voucher_url")
+    String hostedVoucherUrl;
+
+    /** The boleto number. */
+    @SerializedName("number")
+    String number;
+
+    /** The URL to the downloadable boleto voucher PDF. */
+    @SerializedName("pdf")
+    String pdf;
+  }
+
+  @Getter
+  @Setter
+  @EqualsAndHashCode(callSuper = false)
   public static class NextActionOxxoDisplayDetails extends StripeObject {
     /** The timestamp after which the OXXO voucher expires. */
     @SerializedName("expires_after")
@@ -1182,6 +1208,9 @@ public class PaymentIntent extends ApiResource implements HasId, MetadataStore<P
 
     @SerializedName("bancontact")
     Bancontact bancontact;
+
+    @SerializedName("boleto")
+    Boleto boleto;
 
     @SerializedName("card")
     Card card;
@@ -1279,6 +1308,19 @@ public class PaymentIntent extends ApiResource implements HasId, MetadataStore<P
        */
       @SerializedName("preferred_language")
       String preferredLanguage;
+    }
+
+    @Getter
+    @Setter
+    @EqualsAndHashCode(callSuper = false)
+    public static class Boleto extends StripeObject {
+      /**
+       * The number of calendar days before a Boleto voucher expires. For example, if you create a
+       * Boleto voucher on Monday and you set expires_after_days to 2, the Boleto voucher will
+       * expire on Wednesday at 23:59 America/Sao_Paulo time.
+       */
+      @SerializedName("expires_after_days")
+      Long expiresAfterDays;
     }
 
     @Getter
