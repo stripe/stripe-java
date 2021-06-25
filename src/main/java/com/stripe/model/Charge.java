@@ -1026,6 +1026,9 @@ public class Charge extends ApiResource implements MetadataStore<Charge>, Balanc
     @SerializedName("bancontact")
     Bancontact bancontact;
 
+    @SerializedName("boleto")
+    Boleto boleto;
+
     @SerializedName("card")
     Card card;
 
@@ -1340,6 +1343,15 @@ public class Charge extends ApiResource implements MetadataStore<Charge>, Balanc
         this.generatedSepaDebitMandate =
             new ExpandableField<Mandate>(expandableObject.getId(), expandableObject);
       }
+    }
+
+    @Getter
+    @Setter
+    @EqualsAndHashCode(callSuper = false)
+    public static class Boleto extends StripeObject {
+      /** Uniquely identifies this customer tax_id (CNPJ or CPF). */
+      @SerializedName("tax_id")
+      String taxId;
     }
 
     @Getter

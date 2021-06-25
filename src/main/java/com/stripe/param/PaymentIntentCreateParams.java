@@ -1216,6 +1216,13 @@ public class PaymentIntentCreateParams extends ApiRequestParams {
     BillingDetails billingDetails;
 
     /**
+     * If this is a {@code boleto} PaymentMethod, this hash contains details about the Boleto
+     * payment method.
+     */
+    @SerializedName("boleto")
+    Boleto boleto;
+
+    /**
      * If this is an {@code eps} PaymentMethod, this hash contains details about the EPS payment
      * method.
      */
@@ -1319,6 +1326,7 @@ public class PaymentIntentCreateParams extends ApiRequestParams {
         BacsDebit bacsDebit,
         Bancontact bancontact,
         BillingDetails billingDetails,
+        Boleto boleto,
         Eps eps,
         Map<String, Object> extraParams,
         Fpx fpx,
@@ -1339,6 +1347,7 @@ public class PaymentIntentCreateParams extends ApiRequestParams {
       this.bacsDebit = bacsDebit;
       this.bancontact = bancontact;
       this.billingDetails = billingDetails;
+      this.boleto = boleto;
       this.eps = eps;
       this.extraParams = extraParams;
       this.fpx = fpx;
@@ -1372,6 +1381,8 @@ public class PaymentIntentCreateParams extends ApiRequestParams {
       private Bancontact bancontact;
 
       private BillingDetails billingDetails;
+
+      private Boleto boleto;
 
       private Eps eps;
 
@@ -1409,6 +1420,7 @@ public class PaymentIntentCreateParams extends ApiRequestParams {
             this.bacsDebit,
             this.bancontact,
             this.billingDetails,
+            this.boleto,
             this.eps,
             this.extraParams,
             this.fpx,
@@ -1484,6 +1496,15 @@ public class PaymentIntentCreateParams extends ApiRequestParams {
        */
       public Builder setBillingDetails(BillingDetails billingDetails) {
         this.billingDetails = billingDetails;
+        return this;
+      }
+
+      /**
+       * If this is a {@code boleto} PaymentMethod, this hash contains details about the Boleto
+       * payment method.
+       */
+      public Builder setBoleto(Boleto boleto) {
+        this.boleto = boleto;
         return this;
       }
 
@@ -2355,6 +2376,76 @@ public class PaymentIntentCreateParams extends ApiRequestParams {
             this.state = state;
             return this;
           }
+        }
+      }
+    }
+
+    @Getter
+    public static class Boleto {
+      /**
+       * Map of extra parameters for custom features not available in this client library. The
+       * content in this map is not serialized under this field's {@code @SerializedName} value.
+       * Instead, each key/value pair is serialized as if the key is a root-level field (serialized)
+       * name in this param object. Effectively, this map is flattened to its parent instance.
+       */
+      @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
+      Map<String, Object> extraParams;
+
+      /** Uniquely identifies this customer tax_id (CNPJ or CPF). */
+      @SerializedName("tax_id")
+      String taxId;
+
+      private Boleto(Map<String, Object> extraParams, String taxId) {
+        this.extraParams = extraParams;
+        this.taxId = taxId;
+      }
+
+      public static Builder builder() {
+        return new Builder();
+      }
+
+      public static class Builder {
+        private Map<String, Object> extraParams;
+
+        private String taxId;
+
+        /** Finalize and obtain parameter instance from this builder. */
+        public Boleto build() {
+          return new Boleto(this.extraParams, this.taxId);
+        }
+
+        /**
+         * Add a key/value pair to `extraParams` map. A map is initialized for the first
+         * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
+         * map. See {@link PaymentIntentCreateParams.PaymentMethodData.Boleto#extraParams} for the
+         * field documentation.
+         */
+        public Builder putExtraParam(String key, Object value) {
+          if (this.extraParams == null) {
+            this.extraParams = new HashMap<>();
+          }
+          this.extraParams.put(key, value);
+          return this;
+        }
+
+        /**
+         * Add all map key/value pairs to `extraParams` map. A map is initialized for the first
+         * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
+         * map. See {@link PaymentIntentCreateParams.PaymentMethodData.Boleto#extraParams} for the
+         * field documentation.
+         */
+        public Builder putAllExtraParam(Map<String, Object> map) {
+          if (this.extraParams == null) {
+            this.extraParams = new HashMap<>();
+          }
+          this.extraParams.putAll(map);
+          return this;
+        }
+
+        /** Uniquely identifies this customer tax_id (CNPJ or CPF). */
+        public Builder setTaxId(String taxId) {
+          this.taxId = taxId;
+          return this;
         }
       }
     }
@@ -3372,6 +3463,9 @@ public class PaymentIntentCreateParams extends ApiRequestParams {
       @SerializedName("bancontact")
       BANCONTACT("bancontact"),
 
+      @SerializedName("boleto")
+      BOLETO("boleto"),
+
       @SerializedName("eps")
       EPS("eps"),
 
@@ -3438,6 +3532,13 @@ public class PaymentIntentCreateParams extends ApiRequestParams {
     @SerializedName("bancontact")
     Object bancontact;
 
+    /**
+     * If this is a {@code boleto} PaymentMethod, this sub-hash contains details about the Boleto
+     * payment method options.
+     */
+    @SerializedName("boleto")
+    Object boleto;
+
     /** Configuration for any card payments attempted on this PaymentIntent. */
     @SerializedName("card")
     Object card;
@@ -3491,6 +3592,7 @@ public class PaymentIntentCreateParams extends ApiRequestParams {
         Object afterpayClearpay,
         Object alipay,
         Object bancontact,
+        Object boleto,
         Object card,
         Object cardPresent,
         Map<String, Object> extraParams,
@@ -3502,6 +3604,7 @@ public class PaymentIntentCreateParams extends ApiRequestParams {
       this.afterpayClearpay = afterpayClearpay;
       this.alipay = alipay;
       this.bancontact = bancontact;
+      this.boleto = boleto;
       this.card = card;
       this.cardPresent = cardPresent;
       this.extraParams = extraParams;
@@ -3524,6 +3627,8 @@ public class PaymentIntentCreateParams extends ApiRequestParams {
 
       private Object bancontact;
 
+      private Object boleto;
+
       private Object card;
 
       private Object cardPresent;
@@ -3545,6 +3650,7 @@ public class PaymentIntentCreateParams extends ApiRequestParams {
             this.afterpayClearpay,
             this.alipay,
             this.bancontact,
+            this.boleto,
             this.card,
             this.cardPresent,
             this.extraParams,
@@ -3623,6 +3729,24 @@ public class PaymentIntentCreateParams extends ApiRequestParams {
        */
       public Builder setBancontact(EmptyParam bancontact) {
         this.bancontact = bancontact;
+        return this;
+      }
+
+      /**
+       * If this is a {@code boleto} PaymentMethod, this sub-hash contains details about the Boleto
+       * payment method options.
+       */
+      public Builder setBoleto(Boleto boleto) {
+        this.boleto = boleto;
+        return this;
+      }
+
+      /**
+       * If this is a {@code boleto} PaymentMethod, this sub-hash contains details about the Boleto
+       * payment method options.
+       */
+      public Builder setBoleto(EmptyParam boleto) {
+        this.boleto = boleto;
         return this;
       }
 
@@ -4273,6 +4397,84 @@ public class PaymentIntentCreateParams extends ApiRequestParams {
 
         PreferredLanguage(String value) {
           this.value = value;
+        }
+      }
+    }
+
+    @Getter
+    public static class Boleto {
+      /**
+       * The number of calendar days before a Boleto voucher expires. For example, if you create a
+       * Boleto voucher on Monday and you set expires_after_days to 2, the Boleto invoice will
+       * expire on Wednesday at 23:59 America/Sao_Paulo time.
+       */
+      @SerializedName("expires_after_days")
+      Long expiresAfterDays;
+
+      /**
+       * Map of extra parameters for custom features not available in this client library. The
+       * content in this map is not serialized under this field's {@code @SerializedName} value.
+       * Instead, each key/value pair is serialized as if the key is a root-level field (serialized)
+       * name in this param object. Effectively, this map is flattened to its parent instance.
+       */
+      @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
+      Map<String, Object> extraParams;
+
+      private Boleto(Long expiresAfterDays, Map<String, Object> extraParams) {
+        this.expiresAfterDays = expiresAfterDays;
+        this.extraParams = extraParams;
+      }
+
+      public static Builder builder() {
+        return new Builder();
+      }
+
+      public static class Builder {
+        private Long expiresAfterDays;
+
+        private Map<String, Object> extraParams;
+
+        /** Finalize and obtain parameter instance from this builder. */
+        public Boleto build() {
+          return new Boleto(this.expiresAfterDays, this.extraParams);
+        }
+
+        /**
+         * The number of calendar days before a Boleto voucher expires. For example, if you create a
+         * Boleto voucher on Monday and you set expires_after_days to 2, the Boleto invoice will
+         * expire on Wednesday at 23:59 America/Sao_Paulo time.
+         */
+        public Builder setExpiresAfterDays(Long expiresAfterDays) {
+          this.expiresAfterDays = expiresAfterDays;
+          return this;
+        }
+
+        /**
+         * Add a key/value pair to `extraParams` map. A map is initialized for the first
+         * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
+         * map. See {@link PaymentIntentCreateParams.PaymentMethodOptions.Boleto#extraParams} for
+         * the field documentation.
+         */
+        public Builder putExtraParam(String key, Object value) {
+          if (this.extraParams == null) {
+            this.extraParams = new HashMap<>();
+          }
+          this.extraParams.put(key, value);
+          return this;
+        }
+
+        /**
+         * Add all map key/value pairs to `extraParams` map. A map is initialized for the first
+         * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
+         * map. See {@link PaymentIntentCreateParams.PaymentMethodOptions.Boleto#extraParams} for
+         * the field documentation.
+         */
+        public Builder putAllExtraParam(Map<String, Object> map) {
+          if (this.extraParams == null) {
+            this.extraParams = new HashMap<>();
+          }
+          this.extraParams.putAll(map);
+          return this;
         }
       }
     }

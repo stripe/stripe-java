@@ -220,6 +220,9 @@ public class PaymentMethodListParams extends ApiRequestParams {
     @SerializedName("bancontact")
     BANCONTACT("bancontact"),
 
+    @SerializedName("boleto")
+    BOLETO("boleto"),
+
     @SerializedName("card")
     CARD("card"),
 
