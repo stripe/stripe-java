@@ -22,6 +22,7 @@ import com.stripe.model.StripeObjectInterface;
 import com.stripe.model.StripeRawJsonObject;
 import com.stripe.model.StripeRawJsonObjectDeserializer;
 import com.stripe.util.StringUtils;
+import java.io.InputStream;
 import java.io.UnsupportedEncodingException;
 import java.net.URLEncoder;
 import java.nio.charset.Charset;
@@ -177,6 +178,22 @@ public abstract class ApiResource extends StripeObject {
       RequestOptions options)
       throws StripeException {
     return ApiResource.stripeResponseGetter.request(method, url, params, clazz, options);
+  }
+
+  public static InputStream requestStream(
+      ApiResource.RequestMethod method, String url, ApiRequestParams params, RequestOptions options)
+      throws StripeException {
+    checkNullTypedParams(url, params);
+    return requestStream(method, url, params.toMap(), options);
+  }
+
+  public static InputStream requestStream(
+      ApiResource.RequestMethod method,
+      String url,
+      Map<String, Object> params,
+      RequestOptions options)
+      throws StripeException {
+    return ApiResource.stripeResponseGetter.requestStream(method, url, params, options);
   }
 
   public static <T extends StripeCollectionInterface<?>> T requestCollection(
