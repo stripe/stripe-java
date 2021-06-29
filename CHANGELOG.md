@@ -1,5 +1,11 @@
 # Changelog
 
+## 20.60.0 - 2021-06-29
+* [#1227](https://github.com/stripe/stripe-java/pull/1227) API Updates
+  * Added support for `boleto_payments` on `Account.capabilities`
+  * Added support for `boleto` and `oxxo` on `SessionCreateParams` and `Session`
+* [#1207](https://github.com/stripe/stripe-java/pull/1207) Streaming requests
+
 ## 20.59.0 - 2021-06-25
 * [#1225](https://github.com/stripe/stripe-java/pull/1225) API Updates
   * Added support for `boleto` on `PaymentMethodCreateParams`, `PaymentIntent.payment_method_options`, `PaymentIntentConfirmParams.payment_method_options`, `PaymentIntentConfirmParams.payment_method_data`, `PaymentIntentUpdateParams.payment_method_options`, `PaymentIntentUpdateParams.payment_method_data`, `PaymentIntentCreateParams.payment_method_options`, `PaymentIntentCreateParams.payment_method_data`, `Charge.payment_method_details` and `PaymentMethod`
