@@ -670,6 +670,15 @@ public class Account extends ApiResource implements MetadataStore<Account>, Paym
     String bancontactPayments;
 
     /**
+     * The status of the boleto payments capability of the account, or whether the account can
+     * directly process boleto charges.
+     *
+     * <p>One of {@code active}, {@code inactive}, or {@code pending}.
+     */
+    @SerializedName("boleto_payments")
+    String boletoPayments;
+
+    /**
      * The status of the card issuing capability of the account, or whether you can use Issuing to
      * distribute funds on cards
      *

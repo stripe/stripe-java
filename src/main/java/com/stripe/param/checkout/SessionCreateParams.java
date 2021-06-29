@@ -2795,6 +2795,10 @@ public class SessionCreateParams extends ApiRequestParams {
     @SerializedName("acss_debit")
     AcssDebit acssDebit;
 
+    /** contains details about the Boleto payment method options. */
+    @SerializedName("boleto")
+    Boleto boleto;
+
     /**
      * Map of extra parameters for custom features not available in this client library. The content
      * in this map is not serialized under this field's {@code @SerializedName} value. Instead, each
@@ -2804,9 +2808,16 @@ public class SessionCreateParams extends ApiRequestParams {
     @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
     Map<String, Object> extraParams;
 
-    private PaymentMethodOptions(AcssDebit acssDebit, Map<String, Object> extraParams) {
+    /** contains details about the OXXO payment method options. */
+    @SerializedName("oxxo")
+    Oxxo oxxo;
+
+    private PaymentMethodOptions(
+        AcssDebit acssDebit, Boleto boleto, Map<String, Object> extraParams, Oxxo oxxo) {
       this.acssDebit = acssDebit;
+      this.boleto = boleto;
       this.extraParams = extraParams;
+      this.oxxo = oxxo;
     }
 
     public static Builder builder() {
@@ -2816,16 +2827,26 @@ public class SessionCreateParams extends ApiRequestParams {
     public static class Builder {
       private AcssDebit acssDebit;
 
+      private Boleto boleto;
+
       private Map<String, Object> extraParams;
+
+      private Oxxo oxxo;
 
       /** Finalize and obtain parameter instance from this builder. */
       public PaymentMethodOptions build() {
-        return new PaymentMethodOptions(this.acssDebit, this.extraParams);
+        return new PaymentMethodOptions(this.acssDebit, this.boleto, this.extraParams, this.oxxo);
       }
 
       /** contains details about the ACSS Debit payment method options. */
       public Builder setAcssDebit(AcssDebit acssDebit) {
         this.acssDebit = acssDebit;
+        return this;
+      }
+
+      /** contains details about the Boleto payment method options. */
+      public Builder setBoleto(Boleto boleto) {
+        this.boleto = boleto;
         return this;
       }
 
@@ -2853,6 +2874,12 @@ public class SessionCreateParams extends ApiRequestParams {
           this.extraParams = new HashMap<>();
         }
         this.extraParams.putAll(map);
+        return this;
+      }
+
+      /** contains details about the OXXO payment method options. */
+      public Builder setOxxo(Oxxo oxxo) {
+        this.oxxo = oxxo;
         return this;
       }
     }
@@ -3177,6 +3204,162 @@ public class SessionCreateParams extends ApiRequestParams {
 
         VerificationMethod(String value) {
           this.value = value;
+        }
+      }
+    }
+
+    @Getter
+    public static class Boleto {
+      /**
+       * The number of calendar days before a Boleto voucher expires. For example, if you create a
+       * Boleto voucher on Monday and you set expires_after_days to 2, the Boleto invoice will
+       * expire on Wednesday at 23:59 America/Sao_Paulo time.
+       */
+      @SerializedName("expires_after_days")
+      Long expiresAfterDays;
+
+      /**
+       * Map of extra parameters for custom features not available in this client library. The
+       * content in this map is not serialized under this field's {@code @SerializedName} value.
+       * Instead, each key/value pair is serialized as if the key is a root-level field (serialized)
+       * name in this param object. Effectively, this map is flattened to its parent instance.
+       */
+      @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
+      Map<String, Object> extraParams;
+
+      private Boleto(Long expiresAfterDays, Map<String, Object> extraParams) {
+        this.expiresAfterDays = expiresAfterDays;
+        this.extraParams = extraParams;
+      }
+
+      public static Builder builder() {
+        return new Builder();
+      }
+
+      public static class Builder {
+        private Long expiresAfterDays;
+
+        private Map<String, Object> extraParams;
+
+        /** Finalize and obtain parameter instance from this builder. */
+        public Boleto build() {
+          return new Boleto(this.expiresAfterDays, this.extraParams);
+        }
+
+        /**
+         * The number of calendar days before a Boleto voucher expires. For example, if you create a
+         * Boleto voucher on Monday and you set expires_after_days to 2, the Boleto invoice will
+         * expire on Wednesday at 23:59 America/Sao_Paulo time.
+         */
+        public Builder setExpiresAfterDays(Long expiresAfterDays) {
+          this.expiresAfterDays = expiresAfterDays;
+          return this;
+        }
+
+        /**
+         * Add a key/value pair to `extraParams` map. A map is initialized for the first
+         * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
+         * map. See {@link SessionCreateParams.PaymentMethodOptions.Boleto#extraParams} for the
+         * field documentation.
+         */
+        public Builder putExtraParam(String key, Object value) {
+          if (this.extraParams == null) {
+            this.extraParams = new HashMap<>();
+          }
+          this.extraParams.put(key, value);
+          return this;
+        }
+
+        /**
+         * Add all map key/value pairs to `extraParams` map. A map is initialized for the first
+         * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
+         * map. See {@link SessionCreateParams.PaymentMethodOptions.Boleto#extraParams} for the
+         * field documentation.
+         */
+        public Builder putAllExtraParam(Map<String, Object> map) {
+          if (this.extraParams == null) {
+            this.extraParams = new HashMap<>();
+          }
+          this.extraParams.putAll(map);
+          return this;
+        }
+      }
+    }
+
+    @Getter
+    public static class Oxxo {
+      /**
+       * The number of calendar days before an OXXO voucher expires. For example, if you create an
+       * OXXO voucher on Monday and you set expires_after_days to 2, the OXXO invoice will expire on
+       * Wednesday at 23:59 America/Mexico_City time.
+       */
+      @SerializedName("expires_after_days")
+      Long expiresAfterDays;
+
+      /**
+       * Map of extra parameters for custom features not available in this client library. The
+       * content in this map is not serialized under this field's {@code @SerializedName} value.
+       * Instead, each key/value pair is serialized as if the key is a root-level field (serialized)
+       * name in this param object. Effectively, this map is flattened to its parent instance.
+       */
+      @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
+      Map<String, Object> extraParams;
+
+      private Oxxo(Long expiresAfterDays, Map<String, Object> extraParams) {
+        this.expiresAfterDays = expiresAfterDays;
+        this.extraParams = extraParams;
+      }
+
+      public static Builder builder() {
+        return new Builder();
+      }
+
+      public static class Builder {
+        private Long expiresAfterDays;
+
+        private Map<String, Object> extraParams;
+
+        /** Finalize and obtain parameter instance from this builder. */
+        public Oxxo build() {
+          return new Oxxo(this.expiresAfterDays, this.extraParams);
+        }
+
+        /**
+         * The number of calendar days before an OXXO voucher expires. For example, if you create an
+         * OXXO voucher on Monday and you set expires_after_days to 2, the OXXO invoice will expire
+         * on Wednesday at 23:59 America/Mexico_City time.
+         */
+        public Builder setExpiresAfterDays(Long expiresAfterDays) {
+          this.expiresAfterDays = expiresAfterDays;
+          return this;
+        }
+
+        /**
+         * Add a key/value pair to `extraParams` map. A map is initialized for the first
+         * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
+         * map. See {@link SessionCreateParams.PaymentMethodOptions.Oxxo#extraParams} for the field
+         * documentation.
+         */
+        public Builder putExtraParam(String key, Object value) {
+          if (this.extraParams == null) {
+            this.extraParams = new HashMap<>();
+          }
+          this.extraParams.put(key, value);
+          return this;
+        }
+
+        /**
+         * Add all map key/value pairs to `extraParams` map. A map is initialized for the first
+         * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
+         * map. See {@link SessionCreateParams.PaymentMethodOptions.Oxxo#extraParams} for the field
+         * documentation.
+         */
+        public Builder putAllExtraParam(Map<String, Object> map) {
+          if (this.extraParams == null) {
+            this.extraParams = new HashMap<>();
+          }
+          this.extraParams.putAll(map);
+          return this;
         }
       }
     }
@@ -4888,6 +5071,9 @@ public class SessionCreateParams extends ApiRequestParams {
     @SerializedName("bancontact")
     BANCONTACT("bancontact"),
 
+    @SerializedName("boleto")
+    BOLETO("boleto"),
+
     @SerializedName("card")
     CARD("card"),
 
@@ -4905,6 +5091,9 @@ public class SessionCreateParams extends ApiRequestParams {
 
     @SerializedName("ideal")
     IDEAL("ideal"),
+
+    @SerializedName("oxxo")
+    OXXO("oxxo"),
 
     @SerializedName("p24")
     P24("p24"),
