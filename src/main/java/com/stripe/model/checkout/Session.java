@@ -489,6 +489,12 @@ public class Session extends ApiResource implements HasId {
     @SerializedName("acss_debit")
     AcssDebit acssDebit;
 
+    @SerializedName("boleto")
+    PaymentIntent.PaymentMethodOptions.Boleto boleto;
+
+    @SerializedName("oxxo")
+    PaymentIntent.PaymentMethodOptions.Oxxo oxxo;
+
     @Getter
     @Setter
     @EqualsAndHashCode(callSuper = false)
