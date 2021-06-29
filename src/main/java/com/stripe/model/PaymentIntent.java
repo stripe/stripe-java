@@ -1230,6 +1230,9 @@ public class PaymentIntent extends ApiResource implements HasId, MetadataStore<P
     @SerializedName("sofort")
     Sofort sofort;
 
+    @SerializedName("wechat_pay")
+    WechatPay wechatPay;
+
     @Getter
     @Setter
     @EqualsAndHashCode(callSuper = false)
@@ -1448,6 +1451,23 @@ public class PaymentIntent extends ApiResource implements HasId, MetadataStore<P
        */
       @SerializedName("preferred_language")
       String preferredLanguage;
+    }
+
+    @Getter
+    @Setter
+    @EqualsAndHashCode(callSuper = false)
+    public static class WechatPay extends StripeObject {
+      /** The app ID registered with WeChat Pay. Only required when client is ios or android. */
+      @SerializedName("app_id")
+      String appId;
+
+      /**
+       * The client type that the end customer will pay from
+       *
+       * <p>One of {@code android}, {@code ios}, or {@code web}.
+       */
+      @SerializedName("client")
+      String client;
     }
   }
 

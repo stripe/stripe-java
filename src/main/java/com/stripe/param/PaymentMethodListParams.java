@@ -254,7 +254,10 @@ public class PaymentMethodListParams extends ApiRequestParams {
     SEPA_DEBIT("sepa_debit"),
 
     @SerializedName("sofort")
-    SOFORT("sofort");
+    SOFORT("sofort"),
+
+    @SerializedName("wechat_pay")
+    WECHAT_PAY("wechat_pay");
 
     @Getter(onMethod_ = {@Override})
     private final String value;
