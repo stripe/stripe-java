@@ -186,6 +186,13 @@ public class PaymentMethodCreateParams extends ApiRequestParams {
   @SerializedName("type")
   Type type;
 
+  /**
+   * If this is an {@code wechat_pay} PaymentMethod, this hash contains details about the wechat_pay
+   * payment method.
+   */
+  @SerializedName("wechat_pay")
+  WechatPay wechatPay;
+
   private PaymentMethodCreateParams(
       AcssDebit acssDebit,
       AfterpayClearpay afterpayClearpay,
@@ -211,7 +218,8 @@ public class PaymentMethodCreateParams extends ApiRequestParams {
       String paymentMethod,
       SepaDebit sepaDebit,
       Sofort sofort,
-      Type type) {
+      Type type,
+      WechatPay wechatPay) {
     this.acssDebit = acssDebit;
     this.afterpayClearpay = afterpayClearpay;
     this.alipay = alipay;
@@ -237,6 +245,7 @@ public class PaymentMethodCreateParams extends ApiRequestParams {
     this.sepaDebit = sepaDebit;
     this.sofort = sofort;
     this.type = type;
+    this.wechatPay = wechatPay;
   }
 
   public static Builder builder() {
@@ -294,6 +303,8 @@ public class PaymentMethodCreateParams extends ApiRequestParams {
 
     private Type type;
 
+    private WechatPay wechatPay;
+
     /** Finalize and obtain parameter instance from this builder. */
     public PaymentMethodCreateParams build() {
       return new PaymentMethodCreateParams(
@@ -321,7 +332,8 @@ public class PaymentMethodCreateParams extends ApiRequestParams {
           this.paymentMethod,
           this.sepaDebit,
           this.sofort,
-          this.type);
+          this.type,
+          this.wechatPay);
     }
 
     /**
@@ -609,6 +621,15 @@ public class PaymentMethodCreateParams extends ApiRequestParams {
      */
     public Builder setType(Type type) {
       this.type = type;
+      return this;
+    }
+
+    /**
+     * If this is an {@code wechat_pay} PaymentMethod, this hash contains details about the
+     * wechat_pay payment method.
+     */
+    public Builder setWechatPay(WechatPay wechatPay) {
+      this.wechatPay = wechatPay;
       return this;
     }
   }
@@ -2529,6 +2550,61 @@ public class PaymentMethodCreateParams extends ApiRequestParams {
     }
   }
 
+  @Getter
+  public static class WechatPay {
+    /**
+     * Map of extra parameters for custom features not available in this client library. The content
+     * in this map is not serialized under this field's {@code @SerializedName} value. Instead, each
+     * key/value pair is serialized as if the key is a root-level field (serialized) name in this
+     * param object. Effectively, this map is flattened to its parent instance.
+     */
+    @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
+    Map<String, Object> extraParams;
+
+    private WechatPay(Map<String, Object> extraParams) {
+      this.extraParams = extraParams;
+    }
+
+    public static Builder builder() {
+      return new Builder();
+    }
+
+    public static class Builder {
+      private Map<String, Object> extraParams;
+
+      /** Finalize and obtain parameter instance from this builder. */
+      public WechatPay build() {
+        return new WechatPay(this.extraParams);
+      }
+
+      /**
+       * Add a key/value pair to `extraParams` map. A map is initialized for the first `put/putAll`
+       * call, and subsequent calls add additional key/value pairs to the original map. See {@link
+       * PaymentMethodCreateParams.WechatPay#extraParams} for the field documentation.
+       */
+      public Builder putExtraParam(String key, Object value) {
+        if (this.extraParams == null) {
+          this.extraParams = new HashMap<>();
+        }
+        this.extraParams.put(key, value);
+        return this;
+      }
+
+      /**
+       * Add all map key/value pairs to `extraParams` map. A map is initialized for the first
+       * `put/putAll` call, and subsequent calls add additional key/value pairs to the original map.
+       * See {@link PaymentMethodCreateParams.WechatPay#extraParams} for the field documentation.
+       */
+      public Builder putAllExtraParam(Map<String, Object> map) {
+        if (this.extraParams == null) {
+          this.extraParams = new HashMap<>();
+        }
+        this.extraParams.putAll(map);
+        return this;
+      }
+    }
+  }
+
   public enum Type implements ApiRequestParams.EnumParam {
     @SerializedName("acss_debit")
     ACSS_DEBIT("acss_debit"),
@@ -2579,7 +2655,10 @@ public class PaymentMethodCreateParams extends ApiRequestParams {
     SEPA_DEBIT("sepa_debit"),
 
     @SerializedName("sofort")
-    SOFORT("sofort");
+    SOFORT("sofort"),
+
+    @SerializedName("wechat_pay")
+    WECHAT_PAY("wechat_pay");
 
     @Getter(onMethod_ = {@Override})
     private final String value;
