@@ -1088,13 +1088,13 @@ public class PaymentIntent extends ApiResource implements HasId, MetadataStore<P
     VerifyWithMicrodeposits verifyWithMicrodeposits;
 
     @SerializedName("wechat_pay_display_qr_code")
-    NextActionWechatPayDisplayQrCode wechatPayDisplayQrCode;
+    WechatPayDisplayQrCode wechatPayDisplayQrCode;
 
     @SerializedName("wechat_pay_redirect_to_android_app")
-    NextActionWechatPayRedirectToAndroidApp wechatPayRedirectToAndroidApp;
+    WechatPayRedirectToAndroidApp wechatPayRedirectToAndroidApp;
 
     @SerializedName("wechat_pay_redirect_to_ios_app")
-    NextActionWechatPayRedirectToIOSApp wechatPayRedirectToIosApp;
+    WechatPayRedirectToIosApp wechatPayRedirectToIosApp;
 
     @Getter
     @Setter
@@ -1200,71 +1200,6 @@ public class PaymentIntent extends ApiResource implements HasId, MetadataStore<P
     /** The URL you must redirect your customer to in order to authenticate the payment. */
     @SerializedName("url")
     String url;
-  }
-
-  @Getter
-  @Setter
-  @EqualsAndHashCode(callSuper = false)
-  public static class NextActionWechatPayDisplayQrCode extends StripeObject {
-    /** The data being used to generate QR code. */
-    @SerializedName("data")
-    String data;
-
-    /** The base64 image data for a pre-generated QR code. */
-    @SerializedName("image_data_url")
-    String imageDataUrl;
-  }
-
-  @Getter
-  @Setter
-  @EqualsAndHashCode(callSuper = false)
-  public static class NextActionWechatPayRedirectToAndroidApp extends StripeObject {
-    /** app_id is the APP ID registered on WeChat open platform. */
-    @SerializedName("app_id")
-    String appId;
-
-    /** nonce_str is a random string. */
-    @SerializedName("nonce_str")
-    String nonceStr;
-
-    /** an unique merchant ID assigned by Wechat Pay. */
-    @SerializedName("partner_id")
-    String partnerId;
-
-    /** an unique trading ID assigned by Wechat Pay. */
-    @SerializedName("prepay_id")
-    String prepayId;
-
-    /** A signature. */
-    @SerializedName("sign")
-    String sign;
-
-    /** Specifies the current time in epoch format. */
-    @SerializedName("timestamp")
-    String timestamp;
-
-    // package is a reserved word so we append an
-    // underscore to the private field and expose
-    // a custom getter and setter
-    @SerializedName("package")
-    String package_;
-
-    public String getPackage() {
-      return this.package_;
-    }
-
-    public void setPackage(String package_) {
-      this.package_ = package_;
-    }
-  }
-
-  @Getter
-  @Setter
-  @EqualsAndHashCode(callSuper = false)
-  public static class NextActionWechatPayRedirectToIOSApp extends StripeObject {
-    /** An universal link that redirect to Wechat Pay APP. */
-    @SerializedName("native_url")
-    String nativeUrl;
   }
 
   @Getter
@@ -1587,5 +1522,70 @@ public class PaymentIntent extends ApiResource implements HasId, MetadataStore<P
     public void setDestinationObject(Account expandableObject) {
       this.destination = new ExpandableField<Account>(expandableObject.getId(), expandableObject);
     }
+  }
+
+  @Getter
+  @Setter
+  @EqualsAndHashCode(callSuper = false)
+  public static class WechatPayDisplayQrCode extends StripeObject {
+    /** The data being used to generate QR code. */
+    @SerializedName("data")
+    String data;
+
+    /** The base64 image data for a pre-generated QR code. */
+    @SerializedName("image_data_url")
+    String imageDataUrl;
+  }
+
+  @Getter
+  @Setter
+  @EqualsAndHashCode(callSuper = false)
+  public static class WechatPayRedirectToAndroidApp extends StripeObject {
+    /** app_id is the APP ID registered on WeChat open platform. */
+    @SerializedName("app_id")
+    String appId;
+
+    /** nonce_str is a random string. */
+    @SerializedName("nonce_str")
+    String nonceStr;
+
+    /** an unique merchant ID assigned by Wechat Pay. */
+    @SerializedName("partner_id")
+    String partnerId;
+
+    /** an unique trading ID assigned by Wechat Pay. */
+    @SerializedName("prepay_id")
+    String prepayId;
+
+    /** A signature. */
+    @SerializedName("sign")
+    String sign;
+
+    /** Specifies the current time in epoch format. */
+    @SerializedName("timestamp")
+    String timestamp;
+
+    // package is a reserved word so we append an
+    // underscore to the private field and expose
+    // a custom getter and setter
+    @SerializedName("package")
+    String package_;
+
+    public String getPackage() {
+      return this.package_;
+    }
+
+    public void setPackage(String package_) {
+      this.package_ = package_;
+    }
+  }
+
+  @Getter
+  @Setter
+  @EqualsAndHashCode(callSuper = false)
+  public static class WechatPayRedirectToIosApp extends StripeObject {
+    /** An universal link that redirect to Wechat Pay APP. */
+    @SerializedName("native_url")
+    String nativeUrl;
   }
 }

@@ -490,10 +490,10 @@ public class Session extends ApiResource implements HasId {
     AcssDebit acssDebit;
 
     @SerializedName("boleto")
-    PaymentIntent.PaymentMethodOptions.Boleto boleto;
+    Boleto boleto;
 
     @SerializedName("oxxo")
-    PaymentIntent.PaymentMethodOptions.Oxxo oxxo;
+    Oxxo oxxo;
 
     @Getter
     @Setter
@@ -549,6 +549,32 @@ public class Session extends ApiResource implements HasId {
         @SerializedName("transaction_type")
         String transactionType;
       }
+    }
+
+    @Getter
+    @Setter
+    @EqualsAndHashCode(callSuper = false)
+    public static class Boleto extends StripeObject {
+      /**
+       * The number of calendar days before a Boleto voucher expires. For example, if you create a
+       * Boleto voucher on Monday and you set expires_after_days to 2, the Boleto voucher will
+       * expire on Wednesday at 23:59 America/Sao_Paulo time.
+       */
+      @SerializedName("expires_after_days")
+      Long expiresAfterDays;
+    }
+
+    @Getter
+    @Setter
+    @EqualsAndHashCode(callSuper = false)
+    public static class Oxxo extends StripeObject {
+      /**
+       * The number of calendar days before an OXXO invoice expires. For example, if you create an
+       * OXXO invoice on Monday and you set expires_after_days to 2, the OXXO invoice will expire on
+       * Wednesday at 23:59 America/Mexico_City time.
+       */
+      @SerializedName("expires_after_days")
+      Long expiresAfterDays;
     }
   }
 
