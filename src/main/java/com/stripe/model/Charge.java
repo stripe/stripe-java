@@ -1092,6 +1092,9 @@ public class Charge extends ApiResource implements MetadataStore<Charge>, Balanc
     @SerializedName("wechat")
     Wechat wechat;
 
+    @SerializedName("wechat_pay")
+    WechatPay wechatPay;
+
     @Getter
     @Setter
     @EqualsAndHashCode(callSuper = false)
@@ -2370,6 +2373,22 @@ public class Charge extends ApiResource implements MetadataStore<Charge>, Balanc
     @Setter
     @EqualsAndHashCode(callSuper = false)
     public static class Wechat extends StripeObject {}
+
+    @Getter
+    @Setter
+    @EqualsAndHashCode(callSuper = false)
+    public static class WechatPay extends StripeObject {
+      /**
+       * Uniquely identifies this particular WeChat Pay account. You can use this attribute to check
+       * whether two WeChat accounts are the same.
+       */
+      @SerializedName("fingerprint")
+      String fingerprint;
+
+      /** Transaction ID of this particular WeChat Pay transaction. */
+      @SerializedName("transaction_id")
+      String transactionId;
+    }
   }
 
   @Getter
