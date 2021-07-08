@@ -9,7 +9,7 @@ import com.stripe.net.RequestOptions;
 import com.stripe.param.QuoteAcceptParams;
 import com.stripe.param.QuoteCancelParams;
 import com.stripe.param.QuoteCreateParams;
-import com.stripe.param.QuoteFinalizeParams;
+import com.stripe.param.QuoteFinalizeQuoteParams;
 import com.stripe.param.QuoteListLineItemsParams;
 import com.stripe.param.QuoteListParams;
 import com.stripe.param.QuotePdfParams;
@@ -543,22 +543,23 @@ public class Quote extends ApiResource implements HasId, MetadataStore<Quote> {
   }
 
   /** Finalizes the quote. */
-  public Quote finalize() throws StripeException {
-    return finalize((Map<String, Object>) null, (RequestOptions) null);
+  public Quote finalizeQuote() throws StripeException {
+    return finalizeQuote((Map<String, Object>) null, (RequestOptions) null);
   }
 
   /** Finalizes the quote. */
-  public Quote finalize(RequestOptions options) throws StripeException {
-    return finalize((Map<String, Object>) null, options);
+  public Quote finalizeQuote(RequestOptions options) throws StripeException {
+    return finalizeQuote((Map<String, Object>) null, options);
   }
 
   /** Finalizes the quote. */
-  public Quote finalize(Map<String, Object> params) throws StripeException {
-    return finalize(params, (RequestOptions) null);
+  public Quote finalizeQuote(Map<String, Object> params) throws StripeException {
+    return finalizeQuote(params, (RequestOptions) null);
   }
 
   /** Finalizes the quote. */
-  public Quote finalize(Map<String, Object> params, RequestOptions options) throws StripeException {
+  public Quote finalizeQuote(Map<String, Object> params, RequestOptions options)
+      throws StripeException {
     String url =
         String.format(
             "%s%s",
@@ -568,12 +569,13 @@ public class Quote extends ApiResource implements HasId, MetadataStore<Quote> {
   }
 
   /** Finalizes the quote. */
-  public Quote finalize(QuoteFinalizeParams params) throws StripeException {
-    return finalize(params, (RequestOptions) null);
+  public Quote finalizeQuote(QuoteFinalizeQuoteParams params) throws StripeException {
+    return finalizeQuote(params, (RequestOptions) null);
   }
 
   /** Finalizes the quote. */
-  public Quote finalize(QuoteFinalizeParams params, RequestOptions options) throws StripeException {
+  public Quote finalizeQuote(QuoteFinalizeQuoteParams params, RequestOptions options)
+      throws StripeException {
     String url =
         String.format(
             "%s%s",
@@ -721,8 +723,7 @@ public class Quote extends ApiResource implements HasId, MetadataStore<Quote> {
             "%s%s",
             Stripe.getApiBase(),
             String.format("/v1/quotes/%s/pdf", ApiResource.urlEncodeId(this.getId())));
-    return ApiResource.requestStream(
-        ApiResource.RequestMethod.GET, url, params, InputStream.class, options);
+    return ApiResource.requestStream(ApiResource.RequestMethod.GET, url, params, options);
   }
 
   /** Download the PDF for a finalized quote. */
@@ -737,8 +738,7 @@ public class Quote extends ApiResource implements HasId, MetadataStore<Quote> {
             "%s%s",
             Stripe.getApiBase(),
             String.format("/v1/quotes/%s/pdf", ApiResource.urlEncodeId(this.getId())));
-    return ApiResource.requestStream(
-        ApiResource.RequestMethod.GET, url, params, InputStream.class, options);
+    return ApiResource.requestStream(ApiResource.RequestMethod.GET, url, params, options);
   }
 
   @Getter
