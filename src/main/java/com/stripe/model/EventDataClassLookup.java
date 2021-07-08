@@ -60,6 +60,7 @@ final class EventDataClassLookup {
     classLookup.put("price", Price.class);
     classLookup.put("product", Product.class);
     classLookup.put("promotion_code", PromotionCode.class);
+    classLookup.put("quote", Quote.class);
     classLookup.put("recipient", Recipient.class);
     classLookup.put("refund", Refund.class);
     classLookup.put("reserve_transaction", ReserveTransaction.class);

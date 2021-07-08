@@ -111,9 +111,9 @@ public class Invoice extends ApiResource implements HasId, MetadataStore<Invoice
    * invoice endpoint. {@code subscription_threshold} indicates an invoice created due to a billing
    * threshold being reached.
    *
-   * <p>One of {@code automatic_pending_invoice_item_invoice}, {@code manual}, {@code subscription},
-   * {@code subscription_create}, {@code subscription_cycle}, {@code subscription_threshold}, {@code
-   * subscription_update}, or {@code upcoming}.
+   * <p>One of {@code automatic_pending_invoice_item_invoice}, {@code manual}, {@code quote_accept},
+   * {@code subscription}, {@code subscription_create}, {@code subscription_cycle}, {@code
+   * subscription_threshold}, {@code subscription_update}, or {@code upcoming}.
    */
   @SerializedName("billing_reason")
   String billingReason;
@@ -393,6 +393,12 @@ public class Invoice extends ApiResource implements HasId, MetadataStore<Invoice
   @SerializedName("pre_payment_credit_notes_amount")
   Long prePaymentCreditNotesAmount;
 
+  /** The quote this invoice was generated from. */
+  @SerializedName("quote")
+  @Getter(lombok.AccessLevel.NONE)
+  @Setter(lombok.AccessLevel.NONE)
+  ExpandableField<Quote> quote;
+
   /** This is the transaction number that appears on email receipts sent for this invoice. */
   @SerializedName("receipt_number")
   String receiptNumber;
@@ -583,6 +589,24 @@ public class Invoice extends ApiResource implements HasId, MetadataStore<Invoice
   public void setPaymentIntentObject(PaymentIntent expandableObject) {
     this.paymentIntent =
         new ExpandableField<PaymentIntent>(expandableObject.getId(), expandableObject);
+  }
+
+  /** Get ID of expandable {@code quote} object. */
+  public String getQuote() {
+    return (this.quote != null) ? this.quote.getId() : null;
+  }
+
+  public void setQuote(String id) {
+    this.quote = ApiResource.setExpandableFieldId(id, this.quote);
+  }
+
+  /** Get expanded {@code quote}. */
+  public Quote getQuoteObject() {
+    return (this.quote != null) ? this.quote.getExpanded() : null;
+  }
+
+  public void setQuoteObject(Quote expandableObject) {
+    this.quote = new ExpandableField<Quote>(expandableObject.getId(), expandableObject);
   }
 
   /** Get ID of expandable {@code subscription} object. */
