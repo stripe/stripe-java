@@ -1,5 +1,10 @@
 # Changelog
 
+## 20.63.0 - 2021-07-09
+* [#1231](https://github.com/stripe/stripe-java/pull/1231) API Updates
+  * Add support for new resource `Quote`
+  * Add support for `quote` on `Invoice`
+
 ## 20.62.0 - 2021-06-30
 * [#1229](https://github.com/stripe/stripe-java/pull/1229) API Updates
   * Add support for new value `boleto` on enums `InvoiceCreateParams.payment_settings.payment_method_types[]`, and `InvoiceUpdateParams.payment_settings.payment_method_types[]`.
