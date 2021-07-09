@@ -8,9 +8,7 @@ import com.stripe.exception.StripeException;
 import com.stripe.model.Product;
 import com.stripe.model.ProductCollection;
 import com.stripe.net.ApiResource;
-import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 import org.junit.jupiter.api.Test;
 
@@ -25,9 +23,6 @@ public class ProductTest extends BaseStripeTest {
 
   @Test
   public void testCreate() throws StripeException {
-    final List<String> attributes = new ArrayList<>();
-    attributes.add("attr1");
-    attributes.add("attr2");
     final Map<String, Object> packageDimensions = new HashMap<>();
     packageDimensions.put("height", 2.234);
     packageDimensions.put("length", 5.10);

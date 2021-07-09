@@ -166,8 +166,8 @@ public class Authorization extends ApiResource
   VerificationData verificationData;
 
   /**
-   * What, if any, digital wallet was used for this authorization. One of {@code apple_pay}, {@code
-   * google_pay}, or {@code samsung_pay}.
+   * The digital wallet used for this authorization. One of {@code apple_pay}, {@code google_pay},
+   * or {@code samsung_pay}.
    */
   @SerializedName("wallet")
   String wallet;
