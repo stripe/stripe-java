@@ -1,18 +1,18 @@
 package com.stripe.functional;
 
-import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
+
 import com.stripe.BaseStripeTest;
 import com.stripe.exception.StripeException;
 import com.stripe.model.Quote;
 import com.stripe.model.QuoteCollection;
 import com.stripe.net.ApiResource;
-
+import com.stripe.util.StreamUtils;
 import java.io.InputStream;
 import java.util.HashMap;
 import java.util.Map;
 import org.junit.jupiter.api.Test;
-import com.stripe.util.StreamUtils;
 
 public class QuoteTest extends BaseStripeTest {
   public static final String QUOTE_ID = "qt_123";
@@ -88,8 +88,7 @@ public class QuoteTest extends BaseStripeTest {
 
     assertNotNull(acceptedQuote);
     verifyRequest(
-        ApiResource.RequestMethod.POST,
-        String.format("/v1/quotes/%s/accept", quote.getId()));
+        ApiResource.RequestMethod.POST, String.format("/v1/quotes/%s/accept", quote.getId()));
   }
 
   @Test
@@ -100,8 +99,7 @@ public class QuoteTest extends BaseStripeTest {
 
     assertNotNull(canceledQuote);
     verifyRequest(
-        ApiResource.RequestMethod.POST,
-        String.format("/v1/quotes/%s/cancel", quote.getId()));
+        ApiResource.RequestMethod.POST, String.format("/v1/quotes/%s/cancel", quote.getId()));
   }
 
   @Test
