@@ -1,5 +1,8 @@
 # Changelog
 
+## 20.63.1 - 2021-07-09
+* [#1233](https://github.com/stripe/stripe-java/pull/1233) Remove inappropriate list method from QuoteCollection
+
 ## 20.63.0 - 2021-07-09
 * [#1231](https://github.com/stripe/stripe-java/pull/1231) API Updates
   * Add support for new resource `Quote`
