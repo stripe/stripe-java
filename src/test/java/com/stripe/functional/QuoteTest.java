@@ -5,6 +5,7 @@ import static org.junit.jupiter.api.Assertions.assertNotNull;
 
 import com.stripe.BaseStripeTest;
 import com.stripe.exception.StripeException;
+import com.stripe.model.LineItemCollection;
 import com.stripe.model.Quote;
 import com.stripe.model.QuoteCollection;
 import com.stripe.net.ApiResource;
@@ -67,6 +68,30 @@ public class QuoteTest extends BaseStripeTest {
 
     assertNotNull(quotes);
     verifyRequest(ApiResource.RequestMethod.GET, String.format("/v1/quotes"));
+  }
+
+  @Test
+  public void testListLineItems() throws StripeException {
+
+    final Quote quote = getQuoteFixture();
+    final Map<String, Object> params = new HashMap<>();
+    params.put("limit", 1);
+    LineItemCollection lineItems = quote.listLineItems(params);
+
+    assertNotNull(lineItems);
+    verifyRequest(ApiResource.RequestMethod.GET, String.format("/v1/quotes/%s/line_items", QUOTE_ID));
+  }
+
+  @Test
+  public void testListComputedUpfrontLineItems() throws StripeException {
+
+    final Quote quote = getQuoteFixture();
+    final Map<String, Object> params = new HashMap<>();
+    params.put("limit", 1);
+    LineItemCollection lineItems = quote.listComputedUpfrontLineItems(params);
+
+    assertNotNull(lineItems);
+    verifyRequest(ApiResource.RequestMethod.GET, String.format("/v1/quotes/%s/computed_upfront_line_items", QUOTE_ID));
   }
 
   @Test
