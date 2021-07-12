@@ -79,7 +79,8 @@ public class QuoteTest extends BaseStripeTest {
     LineItemCollection lineItems = quote.listLineItems(params);
 
     assertNotNull(lineItems);
-    verifyRequest(ApiResource.RequestMethod.GET, String.format("/v1/quotes/%s/line_items", QUOTE_ID));
+    verifyRequest(
+        ApiResource.RequestMethod.GET, String.format("/v1/quotes/%s/line_items", QUOTE_ID));
   }
 
   @Test
@@ -91,7 +92,9 @@ public class QuoteTest extends BaseStripeTest {
     LineItemCollection lineItems = quote.listComputedUpfrontLineItems(params);
 
     assertNotNull(lineItems);
-    verifyRequest(ApiResource.RequestMethod.GET, String.format("/v1/quotes/%s/computed_upfront_line_items", QUOTE_ID));
+    verifyRequest(
+        ApiResource.RequestMethod.GET,
+        String.format("/v1/quotes/%s/computed_upfront_line_items", QUOTE_ID));
   }
 
   @Test
