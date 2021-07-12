@@ -10,6 +10,7 @@ import com.stripe.param.QuoteAcceptParams;
 import com.stripe.param.QuoteCancelParams;
 import com.stripe.param.QuoteCreateParams;
 import com.stripe.param.QuoteFinalizeQuoteParams;
+import com.stripe.param.QuoteListComputedUpfrontLineItemsParams;
 import com.stripe.param.QuoteListLineItemsParams;
 import com.stripe.param.QuoteListParams;
 import com.stripe.param.QuotePdfParams;
@@ -702,6 +703,70 @@ public class Quote extends ApiResource implements HasId, MetadataStore<Quote> {
             "%s%s",
             Stripe.getApiBase(),
             String.format("/v1/quotes/%s/line_items", ApiResource.urlEncodeId(this.getId())));
+    return ApiResource.requestCollection(url, params, LineItemCollection.class, options);
+  }
+
+  /**
+   * When retrieving a quote, there is an includable <strong>upfront.line_items</strong> property
+   * containing the first handful of those items. There is also a URL where you can retrieve the
+   * full (paginated) list of upfront line items.
+   */
+  public LineItemCollection listComputedUpfrontLineItems() throws StripeException {
+    return listComputedUpfrontLineItems((Map<String, Object>) null, (RequestOptions) null);
+  }
+
+  /**
+   * When retrieving a quote, there is an includable <strong>upfront.line_items</strong> property
+   * containing the first handful of those items. There is also a URL where you can retrieve the
+   * full (paginated) list of upfront line items.
+   */
+  public LineItemCollection listComputedUpfrontLineItems(Map<String, Object> params)
+      throws StripeException {
+    return listComputedUpfrontLineItems(params, (RequestOptions) null);
+  }
+
+  /**
+   * When retrieving a quote, there is an includable <strong>upfront.line_items</strong> property
+   * containing the first handful of those items. There is also a URL where you can retrieve the
+   * full (paginated) list of upfront line items.
+   */
+  public LineItemCollection listComputedUpfrontLineItems(
+      Map<String, Object> params, RequestOptions options) throws StripeException {
+    String url =
+        String.format(
+            "%s%s",
+            Stripe.getApiBase(),
+            String.format(
+                "/v1/quotes/%s/computed_upfront_line_items",
+                ApiResource.urlEncodeId(this.getId())));
+    return ApiResource.requestCollection(url, params, LineItemCollection.class, options);
+  }
+
+  /**
+   * When retrieving a quote, there is an includable <strong>upfront.line_items</strong> property
+   * containing the first handful of those items. There is also a URL where you can retrieve the
+   * full (paginated) list of upfront line items.
+   */
+  public LineItemCollection listComputedUpfrontLineItems(
+      QuoteListComputedUpfrontLineItemsParams params) throws StripeException {
+    return listComputedUpfrontLineItems(params, (RequestOptions) null);
+  }
+
+  /**
+   * When retrieving a quote, there is an includable <strong>upfront.line_items</strong> property
+   * containing the first handful of those items. There is also a URL where you can retrieve the
+   * full (paginated) list of upfront line items.
+   */
+  public LineItemCollection listComputedUpfrontLineItems(
+      QuoteListComputedUpfrontLineItemsParams params, RequestOptions options)
+      throws StripeException {
+    String url =
+        String.format(
+            "%s%s",
+            Stripe.getApiBase(),
+            String.format(
+                "/v1/quotes/%s/computed_upfront_line_items",
+                ApiResource.urlEncodeId(this.getId())));
     return ApiResource.requestCollection(url, params, LineItemCollection.class, options);
   }
 
