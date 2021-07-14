@@ -957,6 +957,18 @@ public class WebhookEndpointCreateParams extends ApiRequestParams {
     @SerializedName("promotion_code.updated")
     PROMOTION_CODE__UPDATED("promotion_code.updated"),
 
+    @SerializedName("quote.accepted")
+    QUOTE__ACCEPTED("quote.accepted"),
+
+    @SerializedName("quote.canceled")
+    QUOTE__CANCELED("quote.canceled"),
+
+    @SerializedName("quote.created")
+    QUOTE__CREATED("quote.created"),
+
+    @SerializedName("quote.finalized")
+    QUOTE__FINALIZED("quote.finalized"),
+
     @SerializedName("radar.early_fraud_warning.created")
     RADAR__EARLY_FRAUD_WARNING__CREATED("radar.early_fraud_warning.created"),
 
