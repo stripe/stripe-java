@@ -1,5 +1,11 @@
 # Changelog
 
+## 20.64.0 - 2021-07-14
+* [#1237](https://github.com/stripe/stripe-java/pull/1237) API Updates
+  * Add support for `quote.accepted`, `quote.canceled`, `quote.created`, and `quote.finalized` events.
+* [#1236](https://github.com/stripe/stripe-java/pull/1236) API Updates
+  * Add support for `list_computed_upfront_line_items` method on resource `Quote`
+
 ## 20.63.1 - 2021-07-09
 * [#1233](https://github.com/stripe/stripe-java/pull/1233) Remove inappropriate list method from QuoteCollection
 
