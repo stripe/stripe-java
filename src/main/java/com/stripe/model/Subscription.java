@@ -204,6 +204,10 @@ public class Subscription extends ApiResource implements HasId, MetadataStore<Su
   @SerializedName("pause_collection")
   PauseCollection pauseCollection;
 
+  /** Payment settings passed on to invoices created by the subscription. */
+  @SerializedName("payment_settings")
+  PaymentSettings paymentSettings;
+
   /**
    * Specifies an interval for how often to bill for any pending invoice items. It is analogous to
    * calling <a href="https://stripe.com/docs/api#create_invoice">Create an invoice</a> for the
@@ -753,6 +757,44 @@ public class Subscription extends ApiResource implements HasId, MetadataStore<Su
     /** The time after which the subscription will resume collecting payments. */
     @SerializedName("resumes_at")
     Long resumesAt;
+  }
+
+  @Getter
+  @Setter
+  @EqualsAndHashCode(callSuper = false)
+  public static class PaymentMethodOptions extends StripeObject {
+    /**
+     * This sub-hash contains details about the Bancontact payment method options to pass to
+     * invoices created by the subscription.
+     */
+    @SerializedName("bancontact")
+    Invoice.PaymentMethodOptions.Bancontact bancontact;
+
+    /**
+     * This sub-hash contains details about the Card payment method options to pass to invoices
+     * created by the subscription.
+     */
+    @SerializedName("card")
+    Invoice.PaymentMethodOptions.Card card;
+  }
+
+  @Getter
+  @Setter
+  @EqualsAndHashCode(callSuper = false)
+  public static class PaymentSettings extends StripeObject {
+    /** Payment-method-specific configuration to provide to invoices created by the subscription. */
+    @SerializedName("payment_method_options")
+    PaymentMethodOptions paymentMethodOptions;
+
+    /**
+     * The list of payment method types to provide to every invoice created by the subscription. If
+     * not set, Stripe attempts to automatically determine the types to use by looking at the
+     * invoice’s default payment method, the subscription’s default payment method, the customer’s
+     * default payment method, and your <a
+     * href="https://dashboard.stripe.com/settings/billing/invoice">invoice template settings</a>.
+     */
+    @SerializedName("payment_method_types")
+    List<String> paymentMethodTypes;
   }
 
   @Getter

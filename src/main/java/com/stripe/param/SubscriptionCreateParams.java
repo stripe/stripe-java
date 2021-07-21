@@ -193,6 +193,10 @@ public class SubscriptionCreateParams extends ApiRequestParams {
   @SerializedName("payment_behavior")
   PaymentBehavior paymentBehavior;
 
+  /** Payment settings to pass to invoices created by the subscription. */
+  @SerializedName("payment_settings")
+  PaymentSettings paymentSettings;
+
   /**
    * Specifies an interval for how often to bill for any pending invoice items. It is analogous to
    * calling <a href="https://stripe.com/docs/api#create_invoice">Create an invoice</a> for the
@@ -275,6 +279,7 @@ public class SubscriptionCreateParams extends ApiRequestParams {
       Object metadata,
       Boolean offSession,
       PaymentBehavior paymentBehavior,
+      PaymentSettings paymentSettings,
       Object pendingInvoiceItemInterval,
       String promotionCode,
       ProrationBehavior prorationBehavior,
@@ -303,6 +308,7 @@ public class SubscriptionCreateParams extends ApiRequestParams {
     this.metadata = metadata;
     this.offSession = offSession;
     this.paymentBehavior = paymentBehavior;
+    this.paymentSettings = paymentSettings;
     this.pendingInvoiceItemInterval = pendingInvoiceItemInterval;
     this.promotionCode = promotionCode;
     this.prorationBehavior = prorationBehavior;
@@ -359,6 +365,8 @@ public class SubscriptionCreateParams extends ApiRequestParams {
 
     private PaymentBehavior paymentBehavior;
 
+    private PaymentSettings paymentSettings;
+
     private Object pendingInvoiceItemInterval;
 
     private String promotionCode;
@@ -397,6 +405,7 @@ public class SubscriptionCreateParams extends ApiRequestParams {
           this.metadata,
           this.offSession,
           this.paymentBehavior,
+          this.paymentSettings,
           this.pendingInvoiceItemInterval,
           this.promotionCode,
           this.prorationBehavior,
@@ -783,6 +792,12 @@ public class SubscriptionCreateParams extends ApiRequestParams {
      */
     public Builder setPaymentBehavior(PaymentBehavior paymentBehavior) {
       this.paymentBehavior = paymentBehavior;
+      return this;
+    }
+
+    /** Payment settings to pass to invoices created by the subscription. */
+    public Builder setPaymentSettings(PaymentSettings paymentSettings) {
+      this.paymentSettings = paymentSettings;
       return this;
     }
 
@@ -2023,6 +2038,525 @@ public class SubscriptionCreateParams extends ApiRequestParams {
         TaxBehavior(String value) {
           this.value = value;
         }
+      }
+    }
+  }
+
+  @Getter
+  public static class PaymentSettings {
+    /**
+     * Map of extra parameters for custom features not available in this client library. The content
+     * in this map is not serialized under this field's {@code @SerializedName} value. Instead, each
+     * key/value pair is serialized as if the key is a root-level field (serialized) name in this
+     * param object. Effectively, this map is flattened to its parent instance.
+     */
+    @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
+    Map<String, Object> extraParams;
+
+    /** Payment-method-specific configuration to provide to invoices created by the subscription. */
+    @SerializedName("payment_method_options")
+    PaymentMethodOptions paymentMethodOptions;
+
+    /**
+     * The list of payment method types (e.g. card) to provide to the invoice’s PaymentIntent. If
+     * not set, Stripe attempts to automatically determine the types to use by looking at the
+     * invoice’s default payment method, the subscription’s default payment method, the customer’s
+     * default payment method, and your <a
+     * href="https://dashboard.stripe.com/settings/billing/invoice">invoice template settings</a>.
+     */
+    @SerializedName("payment_method_types")
+    Object paymentMethodTypes;
+
+    private PaymentSettings(
+        Map<String, Object> extraParams,
+        PaymentMethodOptions paymentMethodOptions,
+        Object paymentMethodTypes) {
+      this.extraParams = extraParams;
+      this.paymentMethodOptions = paymentMethodOptions;
+      this.paymentMethodTypes = paymentMethodTypes;
+    }
+
+    public static Builder builder() {
+      return new Builder();
+    }
+
+    public static class Builder {
+      private Map<String, Object> extraParams;
+
+      private PaymentMethodOptions paymentMethodOptions;
+
+      private Object paymentMethodTypes;
+
+      /** Finalize and obtain parameter instance from this builder. */
+      public PaymentSettings build() {
+        return new PaymentSettings(
+            this.extraParams, this.paymentMethodOptions, this.paymentMethodTypes);
+      }
+
+      /**
+       * Add a key/value pair to `extraParams` map. A map is initialized for the first `put/putAll`
+       * call, and subsequent calls add additional key/value pairs to the original map. See {@link
+       * SubscriptionCreateParams.PaymentSettings#extraParams} for the field documentation.
+       */
+      public Builder putExtraParam(String key, Object value) {
+        if (this.extraParams == null) {
+          this.extraParams = new HashMap<>();
+        }
+        this.extraParams.put(key, value);
+        return this;
+      }
+
+      /**
+       * Add all map key/value pairs to `extraParams` map. A map is initialized for the first
+       * `put/putAll` call, and subsequent calls add additional key/value pairs to the original map.
+       * See {@link SubscriptionCreateParams.PaymentSettings#extraParams} for the field
+       * documentation.
+       */
+      public Builder putAllExtraParam(Map<String, Object> map) {
+        if (this.extraParams == null) {
+          this.extraParams = new HashMap<>();
+        }
+        this.extraParams.putAll(map);
+        return this;
+      }
+
+      /**
+       * Payment-method-specific configuration to provide to invoices created by the subscription.
+       */
+      public Builder setPaymentMethodOptions(PaymentMethodOptions paymentMethodOptions) {
+        this.paymentMethodOptions = paymentMethodOptions;
+        return this;
+      }
+
+      /**
+       * Add an element to `paymentMethodTypes` list. A list is initialized for the first
+       * `add/addAll` call, and subsequent calls adds additional elements to the original list. See
+       * {@link SubscriptionCreateParams.PaymentSettings#paymentMethodTypes} for the field
+       * documentation.
+       */
+      @SuppressWarnings("unchecked")
+      public Builder addPaymentMethodType(PaymentMethodType element) {
+        if (this.paymentMethodTypes == null || this.paymentMethodTypes instanceof EmptyParam) {
+          this.paymentMethodTypes =
+              new ArrayList<SubscriptionCreateParams.PaymentSettings.PaymentMethodType>();
+        }
+        ((List<SubscriptionCreateParams.PaymentSettings.PaymentMethodType>) this.paymentMethodTypes)
+            .add(element);
+        return this;
+      }
+
+      /**
+       * Add all elements to `paymentMethodTypes` list. A list is initialized for the first
+       * `add/addAll` call, and subsequent calls adds additional elements to the original list. See
+       * {@link SubscriptionCreateParams.PaymentSettings#paymentMethodTypes} for the field
+       * documentation.
+       */
+      @SuppressWarnings("unchecked")
+      public Builder addAllPaymentMethodType(List<PaymentMethodType> elements) {
+        if (this.paymentMethodTypes == null || this.paymentMethodTypes instanceof EmptyParam) {
+          this.paymentMethodTypes =
+              new ArrayList<SubscriptionCreateParams.PaymentSettings.PaymentMethodType>();
+        }
+        ((List<SubscriptionCreateParams.PaymentSettings.PaymentMethodType>) this.paymentMethodTypes)
+            .addAll(elements);
+        return this;
+      }
+
+      /**
+       * The list of payment method types (e.g. card) to provide to the invoice’s PaymentIntent. If
+       * not set, Stripe attempts to automatically determine the types to use by looking at the
+       * invoice’s default payment method, the subscription’s default payment method, the customer’s
+       * default payment method, and your <a
+       * href="https://dashboard.stripe.com/settings/billing/invoice">invoice template settings</a>.
+       */
+      public Builder setPaymentMethodTypes(EmptyParam paymentMethodTypes) {
+        this.paymentMethodTypes = paymentMethodTypes;
+        return this;
+      }
+
+      /**
+       * The list of payment method types (e.g. card) to provide to the invoice’s PaymentIntent. If
+       * not set, Stripe attempts to automatically determine the types to use by looking at the
+       * invoice’s default payment method, the subscription’s default payment method, the customer’s
+       * default payment method, and your <a
+       * href="https://dashboard.stripe.com/settings/billing/invoice">invoice template settings</a>.
+       */
+      public Builder setPaymentMethodTypes(List<PaymentMethodType> paymentMethodTypes) {
+        this.paymentMethodTypes = paymentMethodTypes;
+        return this;
+      }
+    }
+
+    @Getter
+    public static class PaymentMethodOptions {
+      /**
+       * This sub-hash contains details about the Bancontact payment method options to pass to the
+       * invoice’s PaymentIntent.
+       */
+      @SerializedName("bancontact")
+      Object bancontact;
+
+      /**
+       * This sub-hash contains details about the Card payment method options to pass to the
+       * invoice’s PaymentIntent.
+       */
+      @SerializedName("card")
+      Object card;
+
+      /**
+       * Map of extra parameters for custom features not available in this client library. The
+       * content in this map is not serialized under this field's {@code @SerializedName} value.
+       * Instead, each key/value pair is serialized as if the key is a root-level field (serialized)
+       * name in this param object. Effectively, this map is flattened to its parent instance.
+       */
+      @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
+      Map<String, Object> extraParams;
+
+      private PaymentMethodOptions(
+          Object bancontact, Object card, Map<String, Object> extraParams) {
+        this.bancontact = bancontact;
+        this.card = card;
+        this.extraParams = extraParams;
+      }
+
+      public static Builder builder() {
+        return new Builder();
+      }
+
+      public static class Builder {
+        private Object bancontact;
+
+        private Object card;
+
+        private Map<String, Object> extraParams;
+
+        /** Finalize and obtain parameter instance from this builder. */
+        public PaymentMethodOptions build() {
+          return new PaymentMethodOptions(this.bancontact, this.card, this.extraParams);
+        }
+
+        /**
+         * This sub-hash contains details about the Bancontact payment method options to pass to the
+         * invoice’s PaymentIntent.
+         */
+        public Builder setBancontact(Bancontact bancontact) {
+          this.bancontact = bancontact;
+          return this;
+        }
+
+        /**
+         * This sub-hash contains details about the Bancontact payment method options to pass to the
+         * invoice’s PaymentIntent.
+         */
+        public Builder setBancontact(EmptyParam bancontact) {
+          this.bancontact = bancontact;
+          return this;
+        }
+
+        /**
+         * This sub-hash contains details about the Card payment method options to pass to the
+         * invoice’s PaymentIntent.
+         */
+        public Builder setCard(Card card) {
+          this.card = card;
+          return this;
+        }
+
+        /**
+         * This sub-hash contains details about the Card payment method options to pass to the
+         * invoice’s PaymentIntent.
+         */
+        public Builder setCard(EmptyParam card) {
+          this.card = card;
+          return this;
+        }
+
+        /**
+         * Add a key/value pair to `extraParams` map. A map is initialized for the first
+         * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
+         * map. See {@link
+         * SubscriptionCreateParams.PaymentSettings.PaymentMethodOptions#extraParams} for the field
+         * documentation.
+         */
+        public Builder putExtraParam(String key, Object value) {
+          if (this.extraParams == null) {
+            this.extraParams = new HashMap<>();
+          }
+          this.extraParams.put(key, value);
+          return this;
+        }
+
+        /**
+         * Add all map key/value pairs to `extraParams` map. A map is initialized for the first
+         * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
+         * map. See {@link
+         * SubscriptionCreateParams.PaymentSettings.PaymentMethodOptions#extraParams} for the field
+         * documentation.
+         */
+        public Builder putAllExtraParam(Map<String, Object> map) {
+          if (this.extraParams == null) {
+            this.extraParams = new HashMap<>();
+          }
+          this.extraParams.putAll(map);
+          return this;
+        }
+      }
+
+      @Getter
+      public static class Bancontact {
+        /**
+         * Map of extra parameters for custom features not available in this client library. The
+         * content in this map is not serialized under this field's {@code @SerializedName} value.
+         * Instead, each key/value pair is serialized as if the key is a root-level field
+         * (serialized) name in this param object. Effectively, this map is flattened to its parent
+         * instance.
+         */
+        @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
+        Map<String, Object> extraParams;
+
+        /**
+         * Preferred language of the Bancontact authorization page that the customer is redirected
+         * to.
+         */
+        @SerializedName("preferred_language")
+        PreferredLanguage preferredLanguage;
+
+        private Bancontact(Map<String, Object> extraParams, PreferredLanguage preferredLanguage) {
+          this.extraParams = extraParams;
+          this.preferredLanguage = preferredLanguage;
+        }
+
+        public static Builder builder() {
+          return new Builder();
+        }
+
+        public static class Builder {
+          private Map<String, Object> extraParams;
+
+          private PreferredLanguage preferredLanguage;
+
+          /** Finalize and obtain parameter instance from this builder. */
+          public Bancontact build() {
+            return new Bancontact(this.extraParams, this.preferredLanguage);
+          }
+
+          /**
+           * Add a key/value pair to `extraParams` map. A map is initialized for the first
+           * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
+           * map. See {@link
+           * SubscriptionCreateParams.PaymentSettings.PaymentMethodOptions.Bancontact#extraParams}
+           * for the field documentation.
+           */
+          public Builder putExtraParam(String key, Object value) {
+            if (this.extraParams == null) {
+              this.extraParams = new HashMap<>();
+            }
+            this.extraParams.put(key, value);
+            return this;
+          }
+
+          /**
+           * Add all map key/value pairs to `extraParams` map. A map is initialized for the first
+           * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
+           * map. See {@link
+           * SubscriptionCreateParams.PaymentSettings.PaymentMethodOptions.Bancontact#extraParams}
+           * for the field documentation.
+           */
+          public Builder putAllExtraParam(Map<String, Object> map) {
+            if (this.extraParams == null) {
+              this.extraParams = new HashMap<>();
+            }
+            this.extraParams.putAll(map);
+            return this;
+          }
+
+          /**
+           * Preferred language of the Bancontact authorization page that the customer is redirected
+           * to.
+           */
+          public Builder setPreferredLanguage(PreferredLanguage preferredLanguage) {
+            this.preferredLanguage = preferredLanguage;
+            return this;
+          }
+        }
+
+        public enum PreferredLanguage implements ApiRequestParams.EnumParam {
+          @SerializedName("de")
+          DE("de"),
+
+          @SerializedName("en")
+          EN("en"),
+
+          @SerializedName("fr")
+          FR("fr"),
+
+          @SerializedName("nl")
+          NL("nl");
+
+          @Getter(onMethod_ = {@Override})
+          private final String value;
+
+          PreferredLanguage(String value) {
+            this.value = value;
+          }
+        }
+      }
+
+      @Getter
+      public static class Card {
+        /**
+         * Map of extra parameters for custom features not available in this client library. The
+         * content in this map is not serialized under this field's {@code @SerializedName} value.
+         * Instead, each key/value pair is serialized as if the key is a root-level field
+         * (serialized) name in this param object. Effectively, this map is flattened to its parent
+         * instance.
+         */
+        @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
+        Map<String, Object> extraParams;
+
+        /**
+         * We strongly recommend that you rely on our SCA Engine to automatically prompt your
+         * customers for authentication based on risk level and <a
+         * href="https://stripe.com/docs/strong-customer-authentication">other requirements</a>.
+         * However, if you wish to request 3D Secure based on logic from your own fraud engine,
+         * provide this option. Read our guide on <a
+         * href="https://stripe.com/docs/payments/3d-secure#manual-three-ds">manually requesting 3D
+         * Secure</a> for more information on how this configuration interacts with Radar and our
+         * SCA Engine.
+         */
+        @SerializedName("request_three_d_secure")
+        RequestThreeDSecure requestThreeDSecure;
+
+        private Card(Map<String, Object> extraParams, RequestThreeDSecure requestThreeDSecure) {
+          this.extraParams = extraParams;
+          this.requestThreeDSecure = requestThreeDSecure;
+        }
+
+        public static Builder builder() {
+          return new Builder();
+        }
+
+        public static class Builder {
+          private Map<String, Object> extraParams;
+
+          private RequestThreeDSecure requestThreeDSecure;
+
+          /** Finalize and obtain parameter instance from this builder. */
+          public Card build() {
+            return new Card(this.extraParams, this.requestThreeDSecure);
+          }
+
+          /**
+           * Add a key/value pair to `extraParams` map. A map is initialized for the first
+           * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
+           * map. See {@link
+           * SubscriptionCreateParams.PaymentSettings.PaymentMethodOptions.Card#extraParams} for the
+           * field documentation.
+           */
+          public Builder putExtraParam(String key, Object value) {
+            if (this.extraParams == null) {
+              this.extraParams = new HashMap<>();
+            }
+            this.extraParams.put(key, value);
+            return this;
+          }
+
+          /**
+           * Add all map key/value pairs to `extraParams` map. A map is initialized for the first
+           * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
+           * map. See {@link
+           * SubscriptionCreateParams.PaymentSettings.PaymentMethodOptions.Card#extraParams} for the
+           * field documentation.
+           */
+          public Builder putAllExtraParam(Map<String, Object> map) {
+            if (this.extraParams == null) {
+              this.extraParams = new HashMap<>();
+            }
+            this.extraParams.putAll(map);
+            return this;
+          }
+
+          /**
+           * We strongly recommend that you rely on our SCA Engine to automatically prompt your
+           * customers for authentication based on risk level and <a
+           * href="https://stripe.com/docs/strong-customer-authentication">other requirements</a>.
+           * However, if you wish to request 3D Secure based on logic from your own fraud engine,
+           * provide this option. Read our guide on <a
+           * href="https://stripe.com/docs/payments/3d-secure#manual-three-ds">manually requesting
+           * 3D Secure</a> for more information on how this configuration interacts with Radar and
+           * our SCA Engine.
+           */
+          public Builder setRequestThreeDSecure(RequestThreeDSecure requestThreeDSecure) {
+            this.requestThreeDSecure = requestThreeDSecure;
+            return this;
+          }
+        }
+
+        public enum RequestThreeDSecure implements ApiRequestParams.EnumParam {
+          @SerializedName("any")
+          ANY("any"),
+
+          @SerializedName("automatic")
+          AUTOMATIC("automatic");
+
+          @Getter(onMethod_ = {@Override})
+          private final String value;
+
+          RequestThreeDSecure(String value) {
+            this.value = value;
+          }
+        }
+      }
+    }
+
+    public enum PaymentMethodType implements ApiRequestParams.EnumParam {
+      @SerializedName("ach_credit_transfer")
+      ACH_CREDIT_TRANSFER("ach_credit_transfer"),
+
+      @SerializedName("ach_debit")
+      ACH_DEBIT("ach_debit"),
+
+      @SerializedName("au_becs_debit")
+      AU_BECS_DEBIT("au_becs_debit"),
+
+      @SerializedName("bacs_debit")
+      BACS_DEBIT("bacs_debit"),
+
+      @SerializedName("bancontact")
+      BANCONTACT("bancontact"),
+
+      @SerializedName("boleto")
+      BOLETO("boleto"),
+
+      @SerializedName("card")
+      CARD("card"),
+
+      @SerializedName("fpx")
+      FPX("fpx"),
+
+      @SerializedName("giropay")
+      GIROPAY("giropay"),
+
+      @SerializedName("ideal")
+      IDEAL("ideal"),
+
+      @SerializedName("sepa_credit_transfer")
+      SEPA_CREDIT_TRANSFER("sepa_credit_transfer"),
+
+      @SerializedName("sepa_debit")
+      SEPA_DEBIT("sepa_debit"),
+
+      @SerializedName("sofort")
+      SOFORT("sofort"),
+
+      @SerializedName("wechat_pay")
+      WECHAT_PAY("wechat_pay");
+
+      @Getter(onMethod_ = {@Override})
+      private final String value;
+
+      PaymentMethodType(String value) {
+        this.value = value;
       }
     }
   }
