@@ -3283,6 +3283,13 @@ public class PaymentIntentUpdateParams extends ApiRequestParams {
     Map<String, Object> extraParams;
 
     /**
+     * If this is a {@code ideal} PaymentMethod, this sub-hash contains details about the Ideal
+     * payment method options.
+     */
+    @SerializedName("ideal")
+    Object ideal;
+
+    /**
      * If this is a {@code oxxo} PaymentMethod, this sub-hash contains details about the OXXO
      * payment method options.
      */
@@ -3326,6 +3333,7 @@ public class PaymentIntentUpdateParams extends ApiRequestParams {
         Object card,
         Object cardPresent,
         Map<String, Object> extraParams,
+        Object ideal,
         Object oxxo,
         Object p24,
         Object sepaDebit,
@@ -3339,6 +3347,7 @@ public class PaymentIntentUpdateParams extends ApiRequestParams {
       this.card = card;
       this.cardPresent = cardPresent;
       this.extraParams = extraParams;
+      this.ideal = ideal;
       this.oxxo = oxxo;
       this.p24 = p24;
       this.sepaDebit = sepaDebit;
@@ -3367,6 +3376,8 @@ public class PaymentIntentUpdateParams extends ApiRequestParams {
 
       private Map<String, Object> extraParams;
 
+      private Object ideal;
+
       private Object oxxo;
 
       private Object p24;
@@ -3388,6 +3399,7 @@ public class PaymentIntentUpdateParams extends ApiRequestParams {
             this.card,
             this.cardPresent,
             this.extraParams,
+            this.ideal,
             this.oxxo,
             this.p24,
             this.sepaDebit,
@@ -3539,6 +3551,24 @@ public class PaymentIntentUpdateParams extends ApiRequestParams {
           this.extraParams = new HashMap<>();
         }
         this.extraParams.putAll(map);
+        return this;
+      }
+
+      /**
+       * If this is a {@code ideal} PaymentMethod, this sub-hash contains details about the Ideal
+       * payment method options.
+       */
+      public Builder setIdeal(Ideal ideal) {
+        this.ideal = ideal;
+        return this;
+      }
+
+      /**
+       * If this is a {@code ideal} PaymentMethod, this sub-hash contains details about the Ideal
+       * payment method options.
+       */
+      public Builder setIdeal(EmptyParam ideal) {
+        this.ideal = ideal;
         return this;
       }
 
@@ -4792,6 +4822,63 @@ public class PaymentIntentUpdateParams extends ApiRequestParams {
          * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
          * map. See {@link PaymentIntentUpdateParams.PaymentMethodOptions.CardPresent#extraParams}
          * for the field documentation.
+         */
+        public Builder putAllExtraParam(Map<String, Object> map) {
+          if (this.extraParams == null) {
+            this.extraParams = new HashMap<>();
+          }
+          this.extraParams.putAll(map);
+          return this;
+        }
+      }
+    }
+
+    @Getter
+    public static class Ideal {
+      /**
+       * Map of extra parameters for custom features not available in this client library. The
+       * content in this map is not serialized under this field's {@code @SerializedName} value.
+       * Instead, each key/value pair is serialized as if the key is a root-level field (serialized)
+       * name in this param object. Effectively, this map is flattened to its parent instance.
+       */
+      @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
+      Map<String, Object> extraParams;
+
+      private Ideal(Map<String, Object> extraParams) {
+        this.extraParams = extraParams;
+      }
+
+      public static Builder builder() {
+        return new Builder();
+      }
+
+      public static class Builder {
+        private Map<String, Object> extraParams;
+
+        /** Finalize and obtain parameter instance from this builder. */
+        public Ideal build() {
+          return new Ideal(this.extraParams);
+        }
+
+        /**
+         * Add a key/value pair to `extraParams` map. A map is initialized for the first
+         * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
+         * map. See {@link PaymentIntentUpdateParams.PaymentMethodOptions.Ideal#extraParams} for the
+         * field documentation.
+         */
+        public Builder putExtraParam(String key, Object value) {
+          if (this.extraParams == null) {
+            this.extraParams = new HashMap<>();
+          }
+          this.extraParams.put(key, value);
+          return this;
+        }
+
+        /**
+         * Add all map key/value pairs to `extraParams` map. A map is initialized for the first
+         * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
+         * map. See {@link PaymentIntentUpdateParams.PaymentMethodOptions.Ideal#extraParams} for the
+         * field documentation.
          */
         public Builder putAllExtraParam(Map<String, Object> map) {
           if (this.extraParams == null) {

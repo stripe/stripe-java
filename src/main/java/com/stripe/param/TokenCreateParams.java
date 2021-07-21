@@ -1523,8 +1523,8 @@ public class TokenCreateParams extends ApiRequestParams {
        * The government-issued ID number of the individual, as appropriate for the representative’s
        * country. (Examples are a Social Security Number in the U.S., or a Social Insurance Number
        * in Canada). Instead of the number itself, you can also provide a <a
-       * href="https://stripe.com/docs/stripe.js#collecting-pii-data">PII token created with
-       * Stripe.js</a>.
+       * href="https://stripe.com/docs/js/tokens_sources/create_token?type=pii">PII token created
+       * with Stripe.js</a>.
        */
       @SerializedName("id_number")
       String idNumber;
@@ -1782,8 +1782,8 @@ public class TokenCreateParams extends ApiRequestParams {
          * The government-issued ID number of the individual, as appropriate for the
          * representative’s country. (Examples are a Social Security Number in the U.S., or a Social
          * Insurance Number in Canada). Instead of the number itself, you can also provide a <a
-         * href="https://stripe.com/docs/stripe.js#collecting-pii-data">PII token created with
-         * Stripe.js</a>.
+         * href="https://stripe.com/docs/js/tokens_sources/create_token?type=pii">PII token created
+         * with Stripe.js</a>.
          */
         public Builder setIdNumber(String idNumber) {
           this.idNumber = idNumber;
@@ -3364,8 +3364,9 @@ public class TokenCreateParams extends ApiRequestParams {
     /**
      * The person's ID number, as appropriate for their country. For example, a social security
      * number in the U.S., social insurance number in Canada, etc. Instead of the number itself, you
-     * can also provide a <a href="https://stripe.com/docs/stripe.js#collecting-pii-data">PII token
-     * provided by Stripe.js</a>.
+     * can also provide a <a
+     * href="https://stripe.com/docs/js/tokens_sources/create_token?type=pii">PII token provided by
+     * Stripe.js</a>.
      */
     @SerializedName("id_number")
     String idNumber;
@@ -3653,8 +3654,9 @@ public class TokenCreateParams extends ApiRequestParams {
       /**
        * The person's ID number, as appropriate for their country. For example, a social security
        * number in the U.S., social insurance number in Canada, etc. Instead of the number itself,
-       * you can also provide a <a href="https://stripe.com/docs/stripe.js#collecting-pii-data">PII
-       * token provided by Stripe.js</a>.
+       * you can also provide a <a
+       * href="https://stripe.com/docs/js/tokens_sources/create_token?type=pii">PII token provided
+       * by Stripe.js</a>.
        */
       public Builder setIdNumber(String idNumber) {
         this.idNumber = idNumber;

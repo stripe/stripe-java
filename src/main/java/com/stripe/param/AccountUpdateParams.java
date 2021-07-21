@@ -71,7 +71,7 @@ public class AccountUpdateParams extends ApiRequestParams {
    * A card or bank account to attach to the account for receiving <a
    * href="https://stripe.com/docs/connect/bank-debit-card-payouts">payouts</a> (you won’t be able
    * to use it for top-ups). You can provide either a token, like the ones returned by <a
-   * href="https://stripe.com/docs/stripe.js">Stripe.js</a>, or a dictionary, as documented in the
+   * href="https://stripe.com/docs/stripe-js">Stripe.js</a>, or a dictionary, as documented in the
    * {@code external_account} parameter for <a
    * href="https://stripe.com/docs/api#account_create_bank_account">bank account</a> creation.
    * &lt;br&gt;&lt;br&gt;By default, providing an external account sets it as the new default
@@ -343,7 +343,7 @@ public class AccountUpdateParams extends ApiRequestParams {
      * A card or bank account to attach to the account for receiving <a
      * href="https://stripe.com/docs/connect/bank-debit-card-payouts">payouts</a> (you won’t be able
      * to use it for top-ups). You can provide either a token, like the ones returned by <a
-     * href="https://stripe.com/docs/stripe.js">Stripe.js</a>, or a dictionary, as documented in the
+     * href="https://stripe.com/docs/stripe-js">Stripe.js</a>, or a dictionary, as documented in the
      * {@code external_account} parameter for <a
      * href="https://stripe.com/docs/api#account_create_bank_account">bank account</a> creation.
      * &lt;br&gt;&lt;br&gt;By default, providing an external account sets it as the new default
@@ -360,7 +360,7 @@ public class AccountUpdateParams extends ApiRequestParams {
      * A card or bank account to attach to the account for receiving <a
      * href="https://stripe.com/docs/connect/bank-debit-card-payouts">payouts</a> (you won’t be able
      * to use it for top-ups). You can provide either a token, like the ones returned by <a
-     * href="https://stripe.com/docs/stripe.js">Stripe.js</a>, or a dictionary, as documented in the
+     * href="https://stripe.com/docs/stripe-js">Stripe.js</a>, or a dictionary, as documented in the
      * {@code external_account} parameter for <a
      * href="https://stripe.com/docs/api#account_create_bank_account">bank account</a> creation.
      * &lt;br&gt;&lt;br&gt;By default, providing an external account sets it as the new default
@@ -5235,7 +5235,7 @@ public class AccountUpdateParams extends ApiRequestParams {
      * The government-issued ID number of the individual, as appropriate for the representative’s
      * country. (Examples are a Social Security Number in the U.S., or a Social Insurance Number in
      * Canada). Instead of the number itself, you can also provide a <a
-     * href="https://stripe.com/docs/stripe.js#collecting-pii-data">PII token created with
+     * href="https://stripe.com/docs/js/tokens_sources/create_token?type=pii">PII token created with
      * Stripe.js</a>.
      */
     @SerializedName("id_number")
@@ -5525,8 +5525,8 @@ public class AccountUpdateParams extends ApiRequestParams {
        * The government-issued ID number of the individual, as appropriate for the representative’s
        * country. (Examples are a Social Security Number in the U.S., or a Social Insurance Number
        * in Canada). Instead of the number itself, you can also provide a <a
-       * href="https://stripe.com/docs/stripe.js#collecting-pii-data">PII token created with
-       * Stripe.js</a>.
+       * href="https://stripe.com/docs/js/tokens_sources/create_token?type=pii">PII token created
+       * with Stripe.js</a>.
        */
       public Builder setIdNumber(String idNumber) {
         this.idNumber = idNumber;
@@ -5537,8 +5537,8 @@ public class AccountUpdateParams extends ApiRequestParams {
        * The government-issued ID number of the individual, as appropriate for the representative’s
        * country. (Examples are a Social Security Number in the U.S., or a Social Insurance Number
        * in Canada). Instead of the number itself, you can also provide a <a
-       * href="https://stripe.com/docs/stripe.js#collecting-pii-data">PII token created with
-       * Stripe.js</a>.
+       * href="https://stripe.com/docs/js/tokens_sources/create_token?type=pii">PII token created
+       * with Stripe.js</a>.
        */
       public Builder setIdNumber(EmptyParam idNumber) {
         this.idNumber = idNumber;
