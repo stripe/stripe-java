@@ -1,5 +1,11 @@
 # Changelog
 
+## 20.65.0 - 2021-07-20
+* [#1238](https://github.com/stripe/stripe-java/pull/1238) API Updates
+  * Add support for `wallet` on `Issuing.Transaction`
+  * Add support for `ideal` on `PaymentIntentCreateParams.payment_method_options`, `PaymentIntentUpdateParams.payment_method_options`, `PaymentIntentConfirmParams.payment_method_options`, and `PaymentIntent.payment_method_options`
+
+
 ## 20.64.0 - 2021-07-14
 * [#1237](https://github.com/stripe/stripe-java/pull/1237) API Updates
   * Add support for `quote.accepted`, `quote.canceled`, `quote.created`, and `quote.finalized` events.
