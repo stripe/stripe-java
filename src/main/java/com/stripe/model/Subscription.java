@@ -768,14 +768,47 @@ public class Subscription extends ApiResource implements HasId, MetadataStore<Su
      * invoices created by the subscription.
      */
     @SerializedName("bancontact")
-    Invoice.PaymentMethodOptions.Bancontact bancontact;
+    Bancontact bancontact;
 
     /**
      * This sub-hash contains details about the Card payment method options to pass to invoices
      * created by the subscription.
      */
     @SerializedName("card")
-    Invoice.PaymentMethodOptions.Card card;
+    Card card;
+
+    @Getter
+    @Setter
+    @EqualsAndHashCode(callSuper = false)
+    public static class Bancontact extends StripeObject {
+      /**
+       * Preferred language of the Bancontact authorization page that the customer is redirected to.
+       *
+       * <p>One of {@code de}, {@code en}, {@code fr}, or {@code nl}.
+       */
+      @SerializedName("preferred_language")
+      String preferredLanguage;
+    }
+
+    @Getter
+    @Setter
+    @EqualsAndHashCode(callSuper = false)
+    public static class Card extends StripeObject {
+      /**
+       * We strongly recommend that you rely on our SCA Engine to automatically prompt your
+       * customers for authentication based on risk level and <a
+       * href="https://stripe.com/docs/strong-customer-authentication">other requirements</a>.
+       * However, if you wish to request 3D Secure based on logic from your own fraud engine,
+       * provide this option. Read our guide on <a
+       * href="https://stripe.com/docs/payments/3d-secure#manual-three-ds">manually requesting 3D
+       * Secure</a> for more information on how this configuration interacts with Radar and our SCA
+       * Engine.
+       *
+       * <p>One of {@code any}, or {@code automatic}.
+       */
+      @SerializedName("request_three_d_secure")
+      String requestThreeDSecure;
+    }
   }
 
   @Getter
