@@ -1292,6 +1292,9 @@ public class PaymentIntent extends ApiResource implements HasId, MetadataStore<P
     @SerializedName("card_present")
     CardPresent cardPresent;
 
+    @SerializedName("ideal")
+    Ideal ideal;
+
     @SerializedName("oxxo")
     Oxxo oxxo;
 
@@ -1481,6 +1484,11 @@ public class PaymentIntent extends ApiResource implements HasId, MetadataStore<P
     @Setter
     @EqualsAndHashCode(callSuper = false)
     public static class CardPresent extends StripeObject {}
+
+    @Getter
+    @Setter
+    @EqualsAndHashCode(callSuper = false)
+    public static class Ideal extends StripeObject {}
 
     @Getter
     @Setter

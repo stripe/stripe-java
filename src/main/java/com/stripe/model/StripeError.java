@@ -126,9 +126,8 @@ public class StripeError extends StripeObject {
   PaymentSource source;
 
   /**
-   * The type of error returned. One of {@code api_connection_error}, {@code api_error}, {@code
-   * authentication_error}, {@code card_error}, {@code idempotency_error}, {@code
-   * invalid_request_error}, or {@code rate_limit_error}
+   * The type of error returned. One of {@code api_error}, {@code card_error}, {@code
+   * idempotency_error}, or {@code invalid_request_error}
    */
   @SerializedName("type")
   String type;

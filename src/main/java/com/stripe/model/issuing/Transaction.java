@@ -141,6 +141,13 @@ public class Transaction extends ApiResource
   @SerializedName("type")
   String type;
 
+  /**
+   * The digital wallet used for this transaction. One of {@code apple_pay}, {@code google_pay}, or
+   * {@code samsung_pay}.
+   */
+  @SerializedName("wallet")
+  String wallet;
+
   /** Get ID of expandable {@code authorization} object. */
   public String getAuthorization() {
     return (this.authorization != null) ? this.authorization.getId() : null;

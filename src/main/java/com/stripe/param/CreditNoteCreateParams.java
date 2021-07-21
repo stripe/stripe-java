@@ -318,8 +318,7 @@ public class CreditNoteCreateParams extends ApiRequestParams {
   @Getter
   public static class Line {
     /**
-     * The line item amount to credit. Only valid when {@code type} is {@code invoice_line_item} and
-     * the referenced invoice line item does not have a quantity, only an amount.
+     * The line item amount to credit. Only valid when {@code type} is {@code invoice_line_item}.
      */
     @SerializedName("amount")
     Long amount;
@@ -439,8 +438,7 @@ public class CreditNoteCreateParams extends ApiRequestParams {
       }
 
       /**
-       * The line item amount to credit. Only valid when {@code type} is {@code invoice_line_item}
-       * and the referenced invoice line item does not have a quantity, only an amount.
+       * The line item amount to credit. Only valid when {@code type} is {@code invoice_line_item}.
        */
       public Builder setAmount(Long amount) {
         this.amount = amount;
