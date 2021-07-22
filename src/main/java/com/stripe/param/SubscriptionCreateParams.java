@@ -177,7 +177,7 @@ public class SubscriptionCreateParams extends ApiRequestParams {
    * subscription’s invoice. Such as failed payments, <a
    * href="https://stripe.com/docs/billing/migration/strong-customer-authentication">SCA
    * regulation</a>, or collecting a mandate for a bank debit payment method. If the payment intent
-   * is not confirmed within 23 hours subscriptions transition to {@code status=expired_incomplete},
+   * is not confirmed within 23 hours subscriptions transition to {@code status=incomplete_expired},
    * which is a terminal state.
    *
    * <p>Use {@code error_if_incomplete} if you want Stripe to return an HTTP 402 status code if a
@@ -778,7 +778,7 @@ public class SubscriptionCreateParams extends ApiRequestParams {
      * href="https://stripe.com/docs/billing/migration/strong-customer-authentication">SCA
      * regulation</a>, or collecting a mandate for a bank debit payment method. If the payment
      * intent is not confirmed within 23 hours subscriptions transition to {@code
-     * status=expired_incomplete}, which is a terminal state.
+     * status=incomplete_expired}, which is a terminal state.
      *
      * <p>Use {@code error_if_incomplete} if you want Stripe to return an HTTP 402 status code if a
      * subscription's first invoice cannot be paid. For example, if a payment method requires 3DS
