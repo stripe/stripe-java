@@ -5079,6 +5079,9 @@ public class SessionCreateParams extends ApiRequestParams {
     @SerializedName("fr-CA")
     FR_CA("fr-CA"),
 
+    @SerializedName("hr")
+    HR("hr"),
+
     @SerializedName("hu")
     HU("hu"),
 
@@ -5090,6 +5093,9 @@ public class SessionCreateParams extends ApiRequestParams {
 
     @SerializedName("ja")
     JA("ja"),
+
+    @SerializedName("ko")
+    KO("ko"),
 
     @SerializedName("lt")
     LT("lt"),
@@ -5138,6 +5144,9 @@ public class SessionCreateParams extends ApiRequestParams {
 
     @SerializedName("tr")
     TR("tr"),
+
+    @SerializedName("vi")
+    VI("vi"),
 
     @SerializedName("zh")
     ZH("zh"),

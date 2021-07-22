@@ -122,10 +122,10 @@ public class Session extends ApiResource implements HasId {
    *
    * <p>One of {@code auto}, {@code bg}, {@code cs}, {@code da}, {@code de}, {@code el}, {@code en},
    * {@code en-GB}, {@code es}, {@code es-419}, {@code et}, {@code fi}, {@code fr}, {@code fr-CA},
-   * {@code hu}, {@code id}, {@code it}, {@code ja}, {@code lt}, {@code lv}, {@code ms}, {@code mt},
-   * {@code nb}, {@code nl}, {@code pl}, {@code pt}, {@code pt-BR}, {@code ro}, {@code ru}, {@code
-   * sk}, {@code sl}, {@code sv}, {@code th}, {@code tr}, {@code zh}, {@code zh-HK}, or {@code
-   * zh-TW}.
+   * {@code hr}, {@code hu}, {@code id}, {@code it}, {@code ja}, {@code ko}, {@code lt}, {@code lv},
+   * {@code ms}, {@code mt}, {@code nb}, {@code nl}, {@code pl}, {@code pt}, {@code pt-BR}, {@code
+   * ro}, {@code ru}, {@code sk}, {@code sl}, {@code sv}, {@code th}, {@code tr}, {@code vi}, {@code
+   * zh}, {@code zh-HK}, or {@code zh-TW}.
    */
   @SerializedName("locale")
   String locale;
