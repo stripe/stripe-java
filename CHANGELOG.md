@@ -1,5 +1,10 @@
 # Changelog
 
+## 20.66.0 - 2021-07-22
+* [#1239](https://github.com/stripe/stripe-java/pull/1239) API Updates
+  * Add support for new values `hr`, `ko`, and `vi` on enum `CheckoutSessionCreateParams.locale`
+  * Add support for `payment_settings` on `SubscriptionCreateParams`, `SubscriptionUpdateParams`, and `Subscription`
+
 ## 20.65.0 - 2021-07-20
 * [#1238](https://github.com/stripe/stripe-java/pull/1238) API Updates
   * Add support for `wallet` on `Issuing.Transaction`
