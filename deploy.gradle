@@ -6,7 +6,7 @@
  * https://raw.github.com/chrisbanes/gradle-mvn-push/master/gradle-mvn-push.gradle
  */
 
-apply plugin: "maven"
+apply plugin: "maven-publish"
 apply plugin: "signing"
 apply plugin: "io.codearte.nexus-staging"
 
@@ -42,7 +42,7 @@ afterEvaluate { project ->
     uploadArchives {
         repositories {
             mavenDeployer {
-                beforeDeployment { MavenDeployment deployment -> signing.signPom(deployment) }
+                beforeDeployment { deployment -> signing.signPom(deployment) }
 
                 pom.groupId = GROUP
                 pom.artifactId = POM_ARTIFACT_ID
