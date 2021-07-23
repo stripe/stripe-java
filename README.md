@@ -101,7 +101,7 @@ using [Stripe Connect][connect-auth], or if you want to pass the secret API
 key on each method.
 
 ```java
-RequestOptions requestOptions = new RequestOptionsBuilder()
+RequestOptions requestOptions = RequestOptions.builder()
     .setApiKey("sk_test_...")
     .setIdempotencyKey("a1b2c3...")
     .setStripeAccount("acct_...")
