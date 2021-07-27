@@ -485,6 +485,10 @@ public class Authorization extends ApiResource
     @SerializedName("category")
     String category;
 
+    /** The merchant category code for the seller’s business. */
+    @SerializedName("category_code")
+    String categoryCode;
+
     /** City where the seller is located. */
     @SerializedName("city")
     String city;

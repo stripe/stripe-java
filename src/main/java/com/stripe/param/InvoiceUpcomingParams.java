@@ -2547,7 +2547,10 @@ public class InvoiceUpcomingParams extends ApiRequestParams {
     @SerializedName("plan")
     String plan;
 
-    /** The ID of the price object. */
+    /**
+     * The ID of the price object. When changing a subscription item's price, {@code quantity} is
+     * set to 1 unless a {@code quantity} parameter is provided.
+     */
     @SerializedName("price")
     String price;
 
@@ -2763,7 +2766,10 @@ public class InvoiceUpcomingParams extends ApiRequestParams {
         return this;
       }
 
-      /** The ID of the price object. */
+      /**
+       * The ID of the price object. When changing a subscription item's price, {@code quantity} is
+       * set to 1 unless a {@code quantity} parameter is provided.
+       */
       public Builder setPrice(String price) {
         this.price = price;
         return this;
