@@ -81,7 +81,10 @@ public class SubscriptionItemUpdateParams extends ApiRequestParams {
   @SerializedName("plan")
   Object plan;
 
-  /** The ID of the price object. */
+  /**
+   * The ID of the price object. When changing a subscription item's price, {@code quantity} is set
+   * to 1 unless a {@code quantity} parameter is provided.
+   */
   @SerializedName("price")
   Object price;
 
@@ -381,13 +384,19 @@ public class SubscriptionItemUpdateParams extends ApiRequestParams {
       return this;
     }
 
-    /** The ID of the price object. */
+    /**
+     * The ID of the price object. When changing a subscription item's price, {@code quantity} is
+     * set to 1 unless a {@code quantity} parameter is provided.
+     */
     public Builder setPrice(String price) {
       this.price = price;
       return this;
     }
 
-    /** The ID of the price object. */
+    /**
+     * The ID of the price object. When changing a subscription item's price, {@code quantity} is
+     * set to 1 unless a {@code quantity} parameter is provided.
+     */
     public Builder setPrice(EmptyParam price) {
       this.price = price;
       return this;
