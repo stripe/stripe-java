@@ -24,6 +24,13 @@ public class ExternalAccountUpdateParams extends ApiRequestParams {
   @SerializedName("account_holder_type")
   EnumParam accountHolderType;
 
+  /**
+   * The bank account type. This can only be {@code checking} or {@code savings} in most countries.
+   * In Japan, this can only be {@code futsu} or {@code toza}.
+   */
+  @SerializedName("account_type")
+  AccountType accountType;
+
   /** City/District/Suburb/Town/Village. */
   @SerializedName("address_city")
   Object addressCity;
@@ -89,6 +96,7 @@ public class ExternalAccountUpdateParams extends ApiRequestParams {
   private ExternalAccountUpdateParams(
       Object accountHolderName,
       EnumParam accountHolderType,
+      AccountType accountType,
       Object addressCity,
       Object addressCountry,
       Object addressLine1,
@@ -104,6 +112,7 @@ public class ExternalAccountUpdateParams extends ApiRequestParams {
       Object name) {
     this.accountHolderName = accountHolderName;
     this.accountHolderType = accountHolderType;
+    this.accountType = accountType;
     this.addressCity = addressCity;
     this.addressCountry = addressCountry;
     this.addressLine1 = addressLine1;
@@ -127,6 +136,8 @@ public class ExternalAccountUpdateParams extends ApiRequestParams {
     private Object accountHolderName;
 
     private EnumParam accountHolderType;
+
+    private AccountType accountType;
 
     private Object addressCity;
 
@@ -159,6 +170,7 @@ public class ExternalAccountUpdateParams extends ApiRequestParams {
       return new ExternalAccountUpdateParams(
           this.accountHolderName,
           this.accountHolderType,
+          this.accountType,
           this.addressCity,
           this.addressCountry,
           this.addressLine1,
@@ -201,6 +213,15 @@ public class ExternalAccountUpdateParams extends ApiRequestParams {
      */
     public Builder setAccountHolderType(EmptyParam accountHolderType) {
       this.accountHolderType = accountHolderType;
+      return this;
+    }
+
+    /**
+     * The bank account type. This can only be {@code checking} or {@code savings} in most
+     * countries. In Japan, this can only be {@code futsu} or {@code toza}.
+     */
+    public Builder setAccountType(AccountType accountType) {
+      this.accountType = accountType;
       return this;
     }
 
@@ -432,6 +453,27 @@ public class ExternalAccountUpdateParams extends ApiRequestParams {
     private final String value;
 
     AccountHolderType(String value) {
+      this.value = value;
+    }
+  }
+
+  public enum AccountType implements ApiRequestParams.EnumParam {
+    @SerializedName("checking")
+    CHECKING("checking"),
+
+    @SerializedName("futsu")
+    FUTSU("futsu"),
+
+    @SerializedName("savings")
+    SAVINGS("savings"),
+
+    @SerializedName("toza")
+    TOZA("toza");
+
+    @Getter(onMethod_ = {@Override})
+    private final String value;
+
+    AccountType(String value) {
       this.value = value;
     }
   }

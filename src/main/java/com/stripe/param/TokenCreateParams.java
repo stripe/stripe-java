@@ -2856,6 +2856,13 @@ public class TokenCreateParams extends ApiRequestParams {
     @SerializedName("account_number")
     String accountNumber;
 
+    /**
+     * The bank account type. This can only be {@code checking} or {@code savings} in most
+     * countries. In Japan, this can only be {@code futsu} or {@code toza}.
+     */
+    @SerializedName("account_type")
+    AccountType accountType;
+
     /** The country in which the bank account is located. */
     @SerializedName("country")
     String country;
@@ -2889,6 +2896,7 @@ public class TokenCreateParams extends ApiRequestParams {
         String accountHolderName,
         AccountHolderType accountHolderType,
         String accountNumber,
+        AccountType accountType,
         String country,
         String currency,
         Map<String, Object> extraParams,
@@ -2896,6 +2904,7 @@ public class TokenCreateParams extends ApiRequestParams {
       this.accountHolderName = accountHolderName;
       this.accountHolderType = accountHolderType;
       this.accountNumber = accountNumber;
+      this.accountType = accountType;
       this.country = country;
       this.currency = currency;
       this.extraParams = extraParams;
@@ -2913,6 +2922,8 @@ public class TokenCreateParams extends ApiRequestParams {
 
       private String accountNumber;
 
+      private AccountType accountType;
+
       private String country;
 
       private String currency;
@@ -2927,6 +2938,7 @@ public class TokenCreateParams extends ApiRequestParams {
             this.accountHolderName,
             this.accountHolderType,
             this.accountNumber,
+            this.accountType,
             this.country,
             this.currency,
             this.extraParams,
@@ -2954,6 +2966,15 @@ public class TokenCreateParams extends ApiRequestParams {
       /** The account number for the bank account, in string form. Must be a checking account. */
       public Builder setAccountNumber(String accountNumber) {
         this.accountNumber = accountNumber;
+        return this;
+      }
+
+      /**
+       * The bank account type. This can only be {@code checking} or {@code savings} in most
+       * countries. In Japan, this can only be {@code futsu} or {@code toza}.
+       */
+      public Builder setAccountType(AccountType accountType) {
+        this.accountType = accountType;
         return this;
       }
 
@@ -3021,6 +3042,27 @@ public class TokenCreateParams extends ApiRequestParams {
       private final String value;
 
       AccountHolderType(String value) {
+        this.value = value;
+      }
+    }
+
+    public enum AccountType implements ApiRequestParams.EnumParam {
+      @SerializedName("checking")
+      CHECKING("checking"),
+
+      @SerializedName("futsu")
+      FUTSU("futsu"),
+
+      @SerializedName("savings")
+      SAVINGS("savings"),
+
+      @SerializedName("toza")
+      TOZA("toza");
+
+      @Getter(onMethod_ = {@Override})
+      private final String value;
+
+      AccountType(String value) {
         this.value = value;
       }
     }
