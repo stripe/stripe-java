@@ -1,5 +1,11 @@
 # Changelog
 
+## 20.67.0 - 2021-07-28
+* [#1242](https://github.com/stripe/stripe-java/pull/1242) API Updates
+  * Add support for `account_type` on `BankAccount`, `ExternalAccountUpdateParams`, and `TokenCreateParams.bank_account`
+* [#1241](https://github.com/stripe/stripe-java/pull/1241) API Updates
+  * Add support for `category_code` on `Issuing.Authorization.merchant_data` and `Issuing.Transaction.merchant_data`
+
 ## 20.66.0 - 2021-07-22
 * [#1239](https://github.com/stripe/stripe-java/pull/1239) API Updates
   * Add support for new values `hr`, `ko`, and `vi` on enum `CheckoutSessionCreateParams.locale`
