@@ -39,6 +39,13 @@ public class BankAccount extends ApiResource
   String accountHolderType;
 
   /**
+   * The bank account type. This can only be {@code checking} or {@code savings} in most countries.
+   * In Japan, this can only be {@code futsu} or {@code toza}.
+   */
+  @SerializedName("account_type")
+  String accountType;
+
+  /**
    * A set of available payout methods for this bank account. Only values from this set should be
    * passed as the {@code method} when creating a payout.
    */
