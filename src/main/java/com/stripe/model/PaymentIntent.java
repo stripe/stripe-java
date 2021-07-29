@@ -1334,8 +1334,8 @@ public class PaymentIntent extends ApiResource implements HasId, MetadataStore<P
         String customMandateUrl;
 
         /**
-         * Description of the interval. Only required if 'payment_schedule' parmeter is 'interval'
-         * or 'combined'.
+         * Description of the interval. Only required if the 'payment_schedule' parameter is
+         * 'interval' or 'combined'.
          */
         @SerializedName("interval_description")
         String intervalDescription;
