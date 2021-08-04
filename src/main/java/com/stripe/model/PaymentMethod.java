@@ -162,6 +162,12 @@ public class PaymentMethod extends ApiResource implements HasId, MetadataStore<P
    * Creates a PaymentMethod object. Read the <a
    * href="https://stripe.com/docs/stripe-js/reference#stripe-create-payment-method">Stripe.js
    * reference</a> to learn how to create PaymentMethods via Stripe.js.
+   *
+   * <p>Instead of creating a PaymentMethod directly, we recommend using the <a
+   * href="https://stripe.com/docs/payments/accept-a-payment">PaymentIntents</a> API to accept a
+   * payment immediately or the <a
+   * href="https://stripe.com/docs/payments/save-and-reuse">SetupIntent</a> API to collect payment
+   * method details ahead of a future payment.
    */
   public static PaymentMethod create(Map<String, Object> params) throws StripeException {
     return create(params, (RequestOptions) null);
@@ -171,6 +177,12 @@ public class PaymentMethod extends ApiResource implements HasId, MetadataStore<P
    * Creates a PaymentMethod object. Read the <a
    * href="https://stripe.com/docs/stripe-js/reference#stripe-create-payment-method">Stripe.js
    * reference</a> to learn how to create PaymentMethods via Stripe.js.
+   *
+   * <p>Instead of creating a PaymentMethod directly, we recommend using the <a
+   * href="https://stripe.com/docs/payments/accept-a-payment">PaymentIntents</a> API to accept a
+   * payment immediately or the <a
+   * href="https://stripe.com/docs/payments/save-and-reuse">SetupIntent</a> API to collect payment
+   * method details ahead of a future payment.
    */
   public static PaymentMethod create(Map<String, Object> params, RequestOptions options)
       throws StripeException {
@@ -183,6 +195,12 @@ public class PaymentMethod extends ApiResource implements HasId, MetadataStore<P
    * Creates a PaymentMethod object. Read the <a
    * href="https://stripe.com/docs/stripe-js/reference#stripe-create-payment-method">Stripe.js
    * reference</a> to learn how to create PaymentMethods via Stripe.js.
+   *
+   * <p>Instead of creating a PaymentMethod directly, we recommend using the <a
+   * href="https://stripe.com/docs/payments/accept-a-payment">PaymentIntents</a> API to accept a
+   * payment immediately or the <a
+   * href="https://stripe.com/docs/payments/save-and-reuse">SetupIntent</a> API to collect payment
+   * method details ahead of a future payment.
    */
   public static PaymentMethod create(PaymentMethodCreateParams params) throws StripeException {
     return create(params, (RequestOptions) null);
@@ -192,6 +210,12 @@ public class PaymentMethod extends ApiResource implements HasId, MetadataStore<P
    * Creates a PaymentMethod object. Read the <a
    * href="https://stripe.com/docs/stripe-js/reference#stripe-create-payment-method">Stripe.js
    * reference</a> to learn how to create PaymentMethods via Stripe.js.
+   *
+   * <p>Instead of creating a PaymentMethod directly, we recommend using the <a
+   * href="https://stripe.com/docs/payments/accept-a-payment">PaymentIntents</a> API to accept a
+   * payment immediately or the <a
+   * href="https://stripe.com/docs/payments/save-and-reuse">SetupIntent</a> API to collect payment
+   * method details ahead of a future payment.
    */
   public static PaymentMethod create(PaymentMethodCreateParams params, RequestOptions options)
       throws StripeException {

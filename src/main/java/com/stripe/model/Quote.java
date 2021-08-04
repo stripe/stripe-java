@@ -707,18 +707,20 @@ public class Quote extends ApiResource implements HasId, MetadataStore<Quote> {
   }
 
   /**
-   * When retrieving a quote, there is an includable <strong>upfront.line_items</strong> property
-   * containing the first handful of those items. There is also a URL where you can retrieve the
-   * full (paginated) list of upfront line items.
+   * When retrieving a quote, there is an includable <a
+   * href="https://stripe.com/docs/api/quotes/object#quote_object-computed-upfront-line_items"><strong>computed.upfront.line_items</strong></a>
+   * property containing the first handful of those items. There is also a URL where you can
+   * retrieve the full (paginated) list of upfront line items.
    */
   public LineItemCollection listComputedUpfrontLineItems() throws StripeException {
     return listComputedUpfrontLineItems((Map<String, Object>) null, (RequestOptions) null);
   }
 
   /**
-   * When retrieving a quote, there is an includable <strong>upfront.line_items</strong> property
-   * containing the first handful of those items. There is also a URL where you can retrieve the
-   * full (paginated) list of upfront line items.
+   * When retrieving a quote, there is an includable <a
+   * href="https://stripe.com/docs/api/quotes/object#quote_object-computed-upfront-line_items"><strong>computed.upfront.line_items</strong></a>
+   * property containing the first handful of those items. There is also a URL where you can
+   * retrieve the full (paginated) list of upfront line items.
    */
   public LineItemCollection listComputedUpfrontLineItems(Map<String, Object> params)
       throws StripeException {
@@ -726,9 +728,10 @@ public class Quote extends ApiResource implements HasId, MetadataStore<Quote> {
   }
 
   /**
-   * When retrieving a quote, there is an includable <strong>upfront.line_items</strong> property
-   * containing the first handful of those items. There is also a URL where you can retrieve the
-   * full (paginated) list of upfront line items.
+   * When retrieving a quote, there is an includable <a
+   * href="https://stripe.com/docs/api/quotes/object#quote_object-computed-upfront-line_items"><strong>computed.upfront.line_items</strong></a>
+   * property containing the first handful of those items. There is also a URL where you can
+   * retrieve the full (paginated) list of upfront line items.
    */
   public LineItemCollection listComputedUpfrontLineItems(
       Map<String, Object> params, RequestOptions options) throws StripeException {
@@ -743,9 +746,10 @@ public class Quote extends ApiResource implements HasId, MetadataStore<Quote> {
   }
 
   /**
-   * When retrieving a quote, there is an includable <strong>upfront.line_items</strong> property
-   * containing the first handful of those items. There is also a URL where you can retrieve the
-   * full (paginated) list of upfront line items.
+   * When retrieving a quote, there is an includable <a
+   * href="https://stripe.com/docs/api/quotes/object#quote_object-computed-upfront-line_items"><strong>computed.upfront.line_items</strong></a>
+   * property containing the first handful of those items. There is also a URL where you can
+   * retrieve the full (paginated) list of upfront line items.
    */
   public LineItemCollection listComputedUpfrontLineItems(
       QuoteListComputedUpfrontLineItemsParams params) throws StripeException {
@@ -753,9 +757,10 @@ public class Quote extends ApiResource implements HasId, MetadataStore<Quote> {
   }
 
   /**
-   * When retrieving a quote, there is an includable <strong>upfront.line_items</strong> property
-   * containing the first handful of those items. There is also a URL where you can retrieve the
-   * full (paginated) list of upfront line items.
+   * When retrieving a quote, there is an includable <a
+   * href="https://stripe.com/docs/api/quotes/object#quote_object-computed-upfront-line_items"><strong>computed.upfront.line_items</strong></a>
+   * property containing the first handful of those items. There is also a URL where you can
+   * retrieve the full (paginated) list of upfront line items.
    */
   public LineItemCollection listComputedUpfrontLineItems(
       QuoteListComputedUpfrontLineItemsParams params, RequestOptions options)

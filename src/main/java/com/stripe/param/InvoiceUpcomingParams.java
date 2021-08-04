@@ -32,7 +32,7 @@ public class InvoiceUpcomingParams extends ApiRequestParams {
   @SerializedName("customer")
   String customer;
 
-  /** Details about the customer you want to invoice. */
+  /** Details about the customer you want to invoice or overrides for an existing customer. */
   @SerializedName("customer_details")
   CustomerDetails customerDetails;
 
@@ -309,7 +309,7 @@ public class InvoiceUpcomingParams extends ApiRequestParams {
       return this;
     }
 
-    /** Details about the customer you want to invoice. */
+    /** Details about the customer you want to invoice or overrides for an existing customer. */
     public Builder setCustomerDetails(CustomerDetails customerDetails) {
       this.customerDetails = customerDetails;
       return this;
