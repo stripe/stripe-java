@@ -17,6 +17,10 @@ public class SessionCreateParams extends ApiRequestParams {
   @SerializedName("allow_promotion_codes")
   Boolean allowPromotionCodes;
 
+  /**
+   * Settings for automatic tax lookup for this session and resulting payments, invoices, and
+   * subscriptions.
+   */
   @SerializedName("automatic_tax")
   AutomaticTax automaticTax;
 
@@ -346,6 +350,10 @@ public class SessionCreateParams extends ApiRequestParams {
       return this;
     }
 
+    /**
+     * Settings for automatic tax lookup for this session and resulting payments, invoices, and
+     * subscriptions.
+     */
     public Builder setAutomaticTax(AutomaticTax automaticTax) {
       this.automaticTax = automaticTax;
       return this;

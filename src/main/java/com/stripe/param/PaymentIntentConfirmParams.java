@@ -5138,9 +5138,9 @@ public class PaymentIntentConfirmParams extends ApiRequestParams {
 
       /** Language shown to the payer on redirect. */
       @SerializedName("preferred_language")
-      PreferredLanguage preferredLanguage;
+      EnumParam preferredLanguage;
 
-      private Sofort(Map<String, Object> extraParams, PreferredLanguage preferredLanguage) {
+      private Sofort(Map<String, Object> extraParams, EnumParam preferredLanguage) {
         this.extraParams = extraParams;
         this.preferredLanguage = preferredLanguage;
       }
@@ -5152,7 +5152,7 @@ public class PaymentIntentConfirmParams extends ApiRequestParams {
       public static class Builder {
         private Map<String, Object> extraParams;
 
-        private PreferredLanguage preferredLanguage;
+        private EnumParam preferredLanguage;
 
         /** Finalize and obtain parameter instance from this builder. */
         public Sofort build() {
@@ -5189,6 +5189,12 @@ public class PaymentIntentConfirmParams extends ApiRequestParams {
 
         /** Language shown to the payer on redirect. */
         public Builder setPreferredLanguage(PreferredLanguage preferredLanguage) {
+          this.preferredLanguage = preferredLanguage;
+          return this;
+        }
+
+        /** Language shown to the payer on redirect. */
+        public Builder setPreferredLanguage(EmptyParam preferredLanguage) {
           this.preferredLanguage = preferredLanguage;
           return this;
         }
