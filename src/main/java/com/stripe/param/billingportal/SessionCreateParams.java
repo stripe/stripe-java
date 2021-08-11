@@ -38,6 +38,13 @@ public class SessionCreateParams extends ApiRequestParams {
   Map<String, Object> extraParams;
 
   /**
+   * The IETF language tag of the locale Customer Portal is displayed in. If blank or auto, the
+   * customer’s {@code preferred_locales} or browser’s locale is used.
+   */
+  @SerializedName("locale")
+  Locale locale;
+
+  /**
    * The {@code on_behalf_of} account to use for this session. When specified, only subscriptions
    * and invoices with this {@code on_behalf_of} account appear in the portal. For more information,
    * see the <a href="https://stripe.com/docs/connect/charges-transfers#on-behalf-of">docs</a>. Use
@@ -61,12 +68,14 @@ public class SessionCreateParams extends ApiRequestParams {
       String customer,
       List<String> expand,
       Map<String, Object> extraParams,
+      Locale locale,
       String onBehalfOf,
       String returnUrl) {
     this.configuration = configuration;
     this.customer = customer;
     this.expand = expand;
     this.extraParams = extraParams;
+    this.locale = locale;
     this.onBehalfOf = onBehalfOf;
     this.returnUrl = returnUrl;
   }
@@ -84,6 +93,8 @@ public class SessionCreateParams extends ApiRequestParams {
 
     private Map<String, Object> extraParams;
 
+    private Locale locale;
+
     private String onBehalfOf;
 
     private String returnUrl;
@@ -95,6 +106,7 @@ public class SessionCreateParams extends ApiRequestParams {
           this.customer,
           this.expand,
           this.extraParams,
+          this.locale,
           this.onBehalfOf,
           this.returnUrl);
     }
@@ -169,6 +181,15 @@ public class SessionCreateParams extends ApiRequestParams {
     }
 
     /**
+     * The IETF language tag of the locale Customer Portal is displayed in. If blank or auto, the
+     * customer’s {@code preferred_locales} or browser’s locale is used.
+     */
+    public Builder setLocale(Locale locale) {
+      this.locale = locale;
+      return this;
+    }
+
+    /**
      * The {@code on_behalf_of} account to use for this session. When specified, only subscriptions
      * and invoices with this {@code on_behalf_of} account appear in the portal. For more
      * information, see the <a
@@ -189,6 +210,156 @@ public class SessionCreateParams extends ApiRequestParams {
     public Builder setReturnUrl(String returnUrl) {
       this.returnUrl = returnUrl;
       return this;
+    }
+  }
+
+  public enum Locale implements ApiRequestParams.EnumParam {
+    @SerializedName("auto")
+    AUTO("auto"),
+
+    @SerializedName("bg")
+    BG("bg"),
+
+    @SerializedName("cs")
+    CS("cs"),
+
+    @SerializedName("da")
+    DA("da"),
+
+    @SerializedName("de")
+    DE("de"),
+
+    @SerializedName("el")
+    EL("el"),
+
+    @SerializedName("en")
+    EN("en"),
+
+    @SerializedName("en-AU")
+    EN_AU("en-AU"),
+
+    @SerializedName("en-CA")
+    EN_CA("en-CA"),
+
+    @SerializedName("en-GB")
+    EN_GB("en-GB"),
+
+    @SerializedName("en-IE")
+    EN_IE("en-IE"),
+
+    @SerializedName("en-IN")
+    EN_IN("en-IN"),
+
+    @SerializedName("en-NZ")
+    EN_NZ("en-NZ"),
+
+    @SerializedName("en-SG")
+    EN_SG("en-SG"),
+
+    @SerializedName("es")
+    ES("es"),
+
+    @SerializedName("es-419")
+    ES_419("es-419"),
+
+    @SerializedName("et")
+    ET("et"),
+
+    @SerializedName("fi")
+    FI("fi"),
+
+    @SerializedName("fil")
+    FIL("fil"),
+
+    @SerializedName("fr")
+    FR("fr"),
+
+    @SerializedName("fr-CA")
+    FR_CA("fr-CA"),
+
+    @SerializedName("hr")
+    HR("hr"),
+
+    @SerializedName("hu")
+    HU("hu"),
+
+    @SerializedName("id")
+    ID("id"),
+
+    @SerializedName("it")
+    IT("it"),
+
+    @SerializedName("ja")
+    JA("ja"),
+
+    @SerializedName("ko")
+    KO("ko"),
+
+    @SerializedName("lt")
+    LT("lt"),
+
+    @SerializedName("lv")
+    LV("lv"),
+
+    @SerializedName("ms")
+    MS("ms"),
+
+    @SerializedName("mt")
+    MT("mt"),
+
+    @SerializedName("nb")
+    NB("nb"),
+
+    @SerializedName("nl")
+    NL("nl"),
+
+    @SerializedName("pl")
+    PL("pl"),
+
+    @SerializedName("pt")
+    PT("pt"),
+
+    @SerializedName("pt-BR")
+    PT_BR("pt-BR"),
+
+    @SerializedName("ro")
+    RO("ro"),
+
+    @SerializedName("ru")
+    RU("ru"),
+
+    @SerializedName("sk")
+    SK("sk"),
+
+    @SerializedName("sl")
+    SL("sl"),
+
+    @SerializedName("sv")
+    SV("sv"),
+
+    @SerializedName("th")
+    TH("th"),
+
+    @SerializedName("tr")
+    TR("tr"),
+
+    @SerializedName("vi")
+    VI("vi"),
+
+    @SerializedName("zh")
+    ZH("zh"),
+
+    @SerializedName("zh-HK")
+    ZH_HK("zh-HK"),
+
+    @SerializedName("zh-TW")
+    ZH_TW("zh-TW");
+
+    @Getter(onMethod_ = {@Override})
+    private final String value;
+
+    Locale(String value) {
+      this.value = value;
     }
   }
 }
