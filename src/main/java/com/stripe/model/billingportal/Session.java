@@ -45,6 +45,21 @@ public class Session extends ApiResource implements HasId {
   Boolean livemode;
 
   /**
+   * The IETF language tag of the locale Customer Portal is displayed in. If blank or auto, the
+   * customer’s {@code preferred_locales} or browser’s locale is used.
+   *
+   * <p>One of {@code auto}, {@code bg}, {@code cs}, {@code da}, {@code de}, {@code el}, {@code en},
+   * {@code en-AU}, {@code en-CA}, {@code en-GB}, {@code en-IE}, {@code en-IN}, {@code en-NZ},
+   * {@code en-SG}, {@code es}, {@code es-419}, {@code et}, {@code fi}, {@code fil}, {@code fr},
+   * {@code fr-CA}, {@code hr}, {@code hu}, {@code id}, {@code it}, {@code ja}, {@code ko}, {@code
+   * lt}, {@code lv}, {@code ms}, {@code mt}, {@code nb}, {@code nl}, {@code pl}, {@code pt}, {@code
+   * pt-BR}, {@code ro}, {@code ru}, {@code sk}, {@code sl}, {@code sv}, {@code th}, {@code tr},
+   * {@code vi}, {@code zh}, {@code zh-HK}, or {@code zh-TW}.
+   */
+  @SerializedName("locale")
+  String locale;
+
+  /**
    * String representing the object's type. Objects of the same type share the same value.
    *
    * <p>Equal to {@code billing_portal.session}.
