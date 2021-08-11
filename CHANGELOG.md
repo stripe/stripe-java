@@ -1,5 +1,9 @@
 # Changelog
 
+## 20.69.0 - 2021-08-11
+* [#1248](https://github.com/stripe/stripe-java/pull/1248) API Updates
+  * Add support for `locale` on `BillingPortalSessionCreateParams` and `BillingPortal.Session`
+
 ## 20.68.0 - 2021-08-04
 * [#1246](https://github.com/stripe/stripe-java/pull/1246) API Updates
   * Change type of `PaymentIntentCreateParams.payment_method_options.sofort.preferred_language`, `PaymentIntentUpdateParams.payment_method_options.sofort.preferred_language`, and `PaymentIntentConfirmParams.payment_method_options.sofort.preferred_language` from `enum` to `emptyStringable(enum)`
