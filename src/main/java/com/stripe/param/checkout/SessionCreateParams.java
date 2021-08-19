@@ -5081,6 +5081,9 @@ public class SessionCreateParams extends ApiRequestParams {
     @SerializedName("fi")
     FI("fi"),
 
+    @SerializedName("fil")
+    FIL("fil"),
+
     @SerializedName("fr")
     FR("fr"),
 

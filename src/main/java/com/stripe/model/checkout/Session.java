@@ -121,11 +121,11 @@ public class Session extends ApiResource implements HasId {
    * browser's locale is used.
    *
    * <p>One of {@code auto}, {@code bg}, {@code cs}, {@code da}, {@code de}, {@code el}, {@code en},
-   * {@code en-GB}, {@code es}, {@code es-419}, {@code et}, {@code fi}, {@code fr}, {@code fr-CA},
-   * {@code hr}, {@code hu}, {@code id}, {@code it}, {@code ja}, {@code ko}, {@code lt}, {@code lv},
-   * {@code ms}, {@code mt}, {@code nb}, {@code nl}, {@code pl}, {@code pt}, {@code pt-BR}, {@code
-   * ro}, {@code ru}, {@code sk}, {@code sl}, {@code sv}, {@code th}, {@code tr}, {@code vi}, {@code
-   * zh}, {@code zh-HK}, or {@code zh-TW}.
+   * {@code en-GB}, {@code es}, {@code es-419}, {@code et}, {@code fi}, {@code fil}, {@code fr},
+   * {@code fr-CA}, {@code hr}, {@code hu}, {@code id}, {@code it}, {@code ja}, {@code ko}, {@code
+   * lt}, {@code lv}, {@code ms}, {@code mt}, {@code nb}, {@code nl}, {@code pl}, {@code pt}, {@code
+   * pt-BR}, {@code ro}, {@code ru}, {@code sk}, {@code sl}, {@code sv}, {@code th}, {@code tr},
+   * {@code vi}, {@code zh}, {@code zh-HK}, or {@code zh-TW}.
    */
   @SerializedName("locale")
   String locale;
@@ -465,13 +465,13 @@ public class Session extends ApiResource implements HasId {
     public static class TaxID extends StripeObject {
       /**
        * The type of the tax ID, one of {@code eu_vat}, {@code br_cnpj}, {@code br_cpf}, {@code
-       * gb_vat}, {@code nz_gst}, {@code au_abn}, {@code in_gst}, {@code no_vat}, {@code za_vat},
-       * {@code ch_vat}, {@code mx_rfc}, {@code sg_uen}, {@code ru_inn}, {@code ru_kpp}, {@code
-       * ca_bn}, {@code hk_br}, {@code es_cif}, {@code tw_vat}, {@code th_vat}, {@code jp_cn},
-       * {@code jp_rn}, {@code li_uid}, {@code my_itn}, {@code us_ein}, {@code kr_brn}, {@code
-       * ca_qst}, {@code ca_gst_hst}, {@code ca_pst_bc}, {@code ca_pst_mb}, {@code ca_pst_sk},
-       * {@code my_sst}, {@code sg_gst}, {@code ae_trn}, {@code cl_tin}, {@code sa_vat}, {@code
-       * id_npwp}, {@code my_frp}, {@code il_vat}, or {@code unknown}.
+       * gb_vat}, {@code nz_gst}, {@code au_abn}, {@code au_arn}, {@code in_gst}, {@code no_vat},
+       * {@code za_vat}, {@code ch_vat}, {@code mx_rfc}, {@code sg_uen}, {@code ru_inn}, {@code
+       * ru_kpp}, {@code ca_bn}, {@code hk_br}, {@code es_cif}, {@code tw_vat}, {@code th_vat},
+       * {@code jp_cn}, {@code jp_rn}, {@code li_uid}, {@code my_itn}, {@code us_ein}, {@code
+       * kr_brn}, {@code ca_qst}, {@code ca_gst_hst}, {@code ca_pst_bc}, {@code ca_pst_mb}, {@code
+       * ca_pst_sk}, {@code my_sst}, {@code sg_gst}, {@code ae_trn}, {@code cl_tin}, {@code sa_vat},
+       * {@code id_npwp}, {@code my_frp}, {@code il_vat}, or {@code unknown}.
        */
       @SerializedName("type")
       String type;

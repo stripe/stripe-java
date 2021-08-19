@@ -50,7 +50,11 @@ public class CardholderUpdateParams extends ApiRequestParams {
   @SerializedName("metadata")
   Map<String, String> metadata;
 
-  /** The cardholder's phone number. */
+  /**
+   * The cardholder's phone number. This is required for all cardholders who will be creating EU
+   * cards. See the <a href="https://stripe.com/docs/issuing/3d-secure">3D Secure documentation</a>
+   * for more details.
+   */
   @SerializedName("phone_number")
   Object phoneNumber;
 
@@ -237,13 +241,21 @@ public class CardholderUpdateParams extends ApiRequestParams {
       return this;
     }
 
-    /** The cardholder's phone number. */
+    /**
+     * The cardholder's phone number. This is required for all cardholders who will be creating EU
+     * cards. See the <a href="https://stripe.com/docs/issuing/3d-secure">3D Secure
+     * documentation</a> for more details.
+     */
     public Builder setPhoneNumber(String phoneNumber) {
       this.phoneNumber = phoneNumber;
       return this;
     }
 
-    /** The cardholder's phone number. */
+    /**
+     * The cardholder's phone number. This is required for all cardholders who will be creating EU
+     * cards. See the <a href="https://stripe.com/docs/issuing/3d-secure">3D Secure
+     * documentation</a> for more details.
+     */
     public Builder setPhoneNumber(EmptyParam phoneNumber) {
       this.phoneNumber = phoneNumber;
       return this;

@@ -78,7 +78,11 @@ public class Cardholder extends ApiResource implements HasId, MetadataStore<Card
   @SerializedName("object")
   String object;
 
-  /** The cardholder's phone number. */
+  /**
+   * The cardholder's phone number. This is required for all cardholders who will be creating EU
+   * cards. See the <a href="https://stripe.com/docs/issuing/3d-secure#when-is-3d-secure-applied">3D
+   * Secure documentation</a> for more details.
+   */
   @SerializedName("phone_number")
   String phoneNumber;
 
