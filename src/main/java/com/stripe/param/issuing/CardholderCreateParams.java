@@ -56,7 +56,9 @@ public class CardholderCreateParams extends ApiRequestParams {
   /**
    * The cardholder's phone number. This will be transformed to <a
    * href="https://en.wikipedia.org/wiki/E.164">E.164</a> if it is not provided in that format
-   * already.
+   * already. This is required for all cardholders who will be creating EU cards. See the <a
+   * href="https://stripe.com/docs/issuing/3d-secure#when-is-3d-secure-applied">3D Secure
+   * documentation</a> for more details.
    */
   @SerializedName("phone_number")
   String phoneNumber;
@@ -264,7 +266,9 @@ public class CardholderCreateParams extends ApiRequestParams {
     /**
      * The cardholder's phone number. This will be transformed to <a
      * href="https://en.wikipedia.org/wiki/E.164">E.164</a> if it is not provided in that format
-     * already.
+     * already. This is required for all cardholders who will be creating EU cards. See the <a
+     * href="https://stripe.com/docs/issuing/3d-secure#when-is-3d-secure-applied">3D Secure
+     * documentation</a> for more details.
      */
     public Builder setPhoneNumber(String phoneNumber) {
       this.phoneNumber = phoneNumber;
