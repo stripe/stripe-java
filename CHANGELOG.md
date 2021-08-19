@@ -1,5 +1,10 @@
 # Changelog
 
+## 20.70.0 - 2021-08-19
+* [#1249](https://github.com/stripe/stripe-java/pull/1249) API Updates
+  * Add support for new value `fil` on enum `CheckoutSessionCreateParams.locale`
+  * Add support for new value `au_arn` on enums `CustomerCreateParams.tax_id_data[].type`, `InvoiceUpcomingParams.customer_details.tax_ids[].type`, `InvoiceUpcomingLinesParams.customer_details.tax_ids[].type`, and `TaxIdCreateParams.type`
+
 ## 20.69.0 - 2021-08-11
 * [#1248](https://github.com/stripe/stripe-java/pull/1248) API Updates
   * Add support for `locale` on `BillingPortalSessionCreateParams` and `BillingPortal.Session`
