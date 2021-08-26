@@ -283,6 +283,9 @@ public class Configuration extends ApiResource implements HasId {
     @Setter
     @EqualsAndHashCode(callSuper = false)
     public static class SubscriptionCancel extends StripeObject {
+      @SerializedName("cancellation_reason")
+      CancellationReason cancellationReason;
+
       /** Whether the feature is enabled. */
       @SerializedName("enabled")
       Boolean enabled;
@@ -303,6 +306,19 @@ public class Configuration extends ApiResource implements HasId {
        */
       @SerializedName("proration_behavior")
       String prorationBehavior;
+
+      @Getter
+      @Setter
+      @EqualsAndHashCode(callSuper = false)
+      public static class CancellationReason extends StripeObject {
+        /** Whether the feature is enabled. */
+        @SerializedName("enabled")
+        Boolean enabled;
+
+        /** Which cancellation reasons will be given as options to the customer. */
+        @SerializedName("options")
+        List<String> options;
+      }
     }
 
     @Getter
