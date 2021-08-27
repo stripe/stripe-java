@@ -746,6 +746,13 @@ public class ConfigurationUpdateParams extends ApiRequestParams {
 
     @Getter
     public static class SubscriptionCancel {
+      /**
+       * Whether the cancellation reasons will be collected in the portal and which options are
+       * exposed to the customer.
+       */
+      @SerializedName("cancellation_reason")
+      CancellationReason cancellationReason;
+
       /** Whether the feature is enabled. */
       @SerializedName("enabled")
       Boolean enabled;
@@ -773,10 +780,12 @@ public class ConfigurationUpdateParams extends ApiRequestParams {
       ProrationBehavior prorationBehavior;
 
       private SubscriptionCancel(
+          CancellationReason cancellationReason,
           Boolean enabled,
           Map<String, Object> extraParams,
           Mode mode,
           ProrationBehavior prorationBehavior) {
+        this.cancellationReason = cancellationReason;
         this.enabled = enabled;
         this.extraParams = extraParams;
         this.mode = mode;
@@ -788,6 +797,8 @@ public class ConfigurationUpdateParams extends ApiRequestParams {
       }
 
       public static class Builder {
+        private CancellationReason cancellationReason;
+
         private Boolean enabled;
 
         private Map<String, Object> extraParams;
@@ -799,7 +810,20 @@ public class ConfigurationUpdateParams extends ApiRequestParams {
         /** Finalize and obtain parameter instance from this builder. */
         public SubscriptionCancel build() {
           return new SubscriptionCancel(
-              this.enabled, this.extraParams, this.mode, this.prorationBehavior);
+              this.cancellationReason,
+              this.enabled,
+              this.extraParams,
+              this.mode,
+              this.prorationBehavior);
+        }
+
+        /**
+         * Whether the cancellation reasons will be collected in the portal and which options are
+         * exposed to the customer.
+         */
+        public Builder setCancellationReason(CancellationReason cancellationReason) {
+          this.cancellationReason = cancellationReason;
+          return this;
         }
 
         /** Whether the feature is enabled. */
@@ -851,6 +875,172 @@ public class ConfigurationUpdateParams extends ApiRequestParams {
         public Builder setProrationBehavior(ProrationBehavior prorationBehavior) {
           this.prorationBehavior = prorationBehavior;
           return this;
+        }
+      }
+
+      @Getter
+      public static class CancellationReason {
+        /** Whether the feature is enabled. */
+        @SerializedName("enabled")
+        Boolean enabled;
+
+        /**
+         * Map of extra parameters for custom features not available in this client library. The
+         * content in this map is not serialized under this field's {@code @SerializedName} value.
+         * Instead, each key/value pair is serialized as if the key is a root-level field
+         * (serialized) name in this param object. Effectively, this map is flattened to its parent
+         * instance.
+         */
+        @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
+        Map<String, Object> extraParams;
+
+        /** Which cancellation reasons will be given as options to the customer. */
+        @SerializedName("options")
+        Object options;
+
+        private CancellationReason(
+            Boolean enabled, Map<String, Object> extraParams, Object options) {
+          this.enabled = enabled;
+          this.extraParams = extraParams;
+          this.options = options;
+        }
+
+        public static Builder builder() {
+          return new Builder();
+        }
+
+        public static class Builder {
+          private Boolean enabled;
+
+          private Map<String, Object> extraParams;
+
+          private Object options;
+
+          /** Finalize and obtain parameter instance from this builder. */
+          public CancellationReason build() {
+            return new CancellationReason(this.enabled, this.extraParams, this.options);
+          }
+
+          /** Whether the feature is enabled. */
+          public Builder setEnabled(Boolean enabled) {
+            this.enabled = enabled;
+            return this;
+          }
+
+          /**
+           * Add a key/value pair to `extraParams` map. A map is initialized for the first
+           * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
+           * map. See {@link
+           * ConfigurationUpdateParams.Features.SubscriptionCancel.CancellationReason#extraParams}
+           * for the field documentation.
+           */
+          public Builder putExtraParam(String key, Object value) {
+            if (this.extraParams == null) {
+              this.extraParams = new HashMap<>();
+            }
+            this.extraParams.put(key, value);
+            return this;
+          }
+
+          /**
+           * Add all map key/value pairs to `extraParams` map. A map is initialized for the first
+           * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
+           * map. See {@link
+           * ConfigurationUpdateParams.Features.SubscriptionCancel.CancellationReason#extraParams}
+           * for the field documentation.
+           */
+          public Builder putAllExtraParam(Map<String, Object> map) {
+            if (this.extraParams == null) {
+              this.extraParams = new HashMap<>();
+            }
+            this.extraParams.putAll(map);
+            return this;
+          }
+
+          /**
+           * Add an element to `options` list. A list is initialized for the first `add/addAll`
+           * call, and subsequent calls adds additional elements to the original list. See {@link
+           * ConfigurationUpdateParams.Features.SubscriptionCancel.CancellationReason#options} for
+           * the field documentation.
+           */
+          @SuppressWarnings("unchecked")
+          public Builder addOption(Option element) {
+            if (this.options == null || this.options instanceof EmptyParam) {
+              this.options =
+                  new ArrayList<
+                      ConfigurationUpdateParams.Features.SubscriptionCancel.CancellationReason
+                          .Option>();
+            }
+            ((List<ConfigurationUpdateParams.Features.SubscriptionCancel.CancellationReason.Option>)
+                    this.options)
+                .add(element);
+            return this;
+          }
+
+          /**
+           * Add all elements to `options` list. A list is initialized for the first `add/addAll`
+           * call, and subsequent calls adds additional elements to the original list. See {@link
+           * ConfigurationUpdateParams.Features.SubscriptionCancel.CancellationReason#options} for
+           * the field documentation.
+           */
+          @SuppressWarnings("unchecked")
+          public Builder addAllOption(List<Option> elements) {
+            if (this.options == null || this.options instanceof EmptyParam) {
+              this.options =
+                  new ArrayList<
+                      ConfigurationUpdateParams.Features.SubscriptionCancel.CancellationReason
+                          .Option>();
+            }
+            ((List<ConfigurationUpdateParams.Features.SubscriptionCancel.CancellationReason.Option>)
+                    this.options)
+                .addAll(elements);
+            return this;
+          }
+
+          /** Which cancellation reasons will be given as options to the customer. */
+          public Builder setOptions(EmptyParam options) {
+            this.options = options;
+            return this;
+          }
+
+          /** Which cancellation reasons will be given as options to the customer. */
+          public Builder setOptions(List<Option> options) {
+            this.options = options;
+            return this;
+          }
+        }
+
+        public enum Option implements ApiRequestParams.EnumParam {
+          @SerializedName("customer_service")
+          CUSTOMER_SERVICE("customer_service"),
+
+          @SerializedName("low_quality")
+          LOW_QUALITY("low_quality"),
+
+          @SerializedName("missing_features")
+          MISSING_FEATURES("missing_features"),
+
+          @SerializedName("other")
+          OTHER("other"),
+
+          @SerializedName("switched_service")
+          SWITCHED_SERVICE("switched_service"),
+
+          @SerializedName("too_complex")
+          TOO_COMPLEX("too_complex"),
+
+          @SerializedName("too_expensive")
+          TOO_EXPENSIVE("too_expensive"),
+
+          @SerializedName("unused")
+          UNUSED("unused");
+
+          @Getter(onMethod_ = {@Override})
+          private final String value;
+
+          Option(String value) {
+            this.value = value;
+          }
         }
       }
 
