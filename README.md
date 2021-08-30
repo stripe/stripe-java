@@ -37,7 +37,7 @@ Add this dependency to your project's POM:
 You'll need to manually install the following JARs:
 
 - The Stripe JAR from <https://github.com/stripe/stripe-java/releases/latest>
-- [Google Gson][gson] from <https://repo1.maven.org/maven2/com/google/code/gson/gson/2.8.5/gson-2.8.5.jar>.
+- [Google Gson][gson] from <https://repo1.maven.org/maven2/com/google/code/gson/gson/2.8.8/gson-2.8.8.jar>.
 
 ### [ProGuard][proguard]
 
