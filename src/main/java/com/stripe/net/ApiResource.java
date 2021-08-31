@@ -21,6 +21,7 @@ import com.stripe.model.StripeObject;
 import com.stripe.model.StripeObjectInterface;
 import com.stripe.model.StripeRawJsonObject;
 import com.stripe.model.StripeRawJsonObjectDeserializer;
+import com.stripe.model.StripeSearchResultInterface;
 import com.stripe.util.StringUtils;
 import java.io.InputStream;
 import java.io.UnsupportedEncodingException;
@@ -221,6 +222,35 @@ public abstract class ApiResource extends StripeObject {
     }
 
     return collection;
+  }
+
+  public static <T extends StripeSearchResultInterface<?>> T requestSearchResult(
+      String url, ApiRequestParams params, Class<T> clazz, RequestOptions options)
+      throws StripeException {
+    checkNullTypedParams(url, params);
+    return requestSearchResult(url, params.toMap(), clazz, options);
+  }
+
+  /**
+   * Similar to #request, but specific for use with searchResult types that come from the API
+   *
+   * <p>SearchResults, like collections need a little extra work because we need to plumb request
+   * options and params through so that we can iterate to the next page if necessary.
+   *
+   * <p>Please note, requestSearchResult is beta functionality and is subject to charge or removal
+   * at any time.
+   */
+  public static <T extends StripeSearchResultInterface<?>> T requestSearchResult(
+      String url, Map<String, Object> params, Class<T> clazz, RequestOptions options)
+      throws StripeException {
+    T searchResult = request(RequestMethod.GET, url, params, clazz, options);
+
+    if (searchResult != null) {
+      searchResult.setRequestOptions(options);
+      searchResult.setRequestParams(params);
+    }
+
+    return searchResult;
   }
 
   /**
