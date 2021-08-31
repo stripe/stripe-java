@@ -452,6 +452,37 @@ public class Session extends ApiResource implements HasId {
     /** When set, configuration used to recover the Checkout Session on expiry. */
     @SerializedName("recovery")
     Recovery recovery;
+
+    @Getter
+    @Setter
+    @EqualsAndHashCode(callSuper = false)
+    public static class Recovery extends StripeObject {
+      /**
+       * Enables user redeemable promotion codes on the recovered Checkout Sessions. Defaults to
+       * {@code false}
+       */
+      @SerializedName("allow_promotion_codes")
+      Boolean allowPromotionCodes;
+
+      /**
+       * If {@code true}, a recovery url will be generated to recover this Checkout Session if it
+       * expires before a transaction is completed. It will be attached to the Checkout Session
+       * object upon expiration.
+       */
+      @SerializedName("enabled")
+      Boolean enabled;
+
+      /** The timestamp at which the recovery URL will expire. */
+      @SerializedName("expires_at")
+      Long expiresAt;
+
+      /**
+       * URL that creates a new Checkout Session when clicked that is a copy of this expired
+       * Checkout Session.
+       */
+      @SerializedName("url")
+      String url;
+    }
   }
 
   @Getter
@@ -638,37 +669,6 @@ public class Session extends ApiResource implements HasId {
       @SerializedName("expires_after_days")
       Long expiresAfterDays;
     }
-  }
-
-  @Getter
-  @Setter
-  @EqualsAndHashCode(callSuper = false)
-  public static class Recovery extends StripeObject {
-    /**
-     * Enables user redeemable promotion codes on the recovered Checkout Sessions. Defaults to
-     * {@code false}
-     */
-    @SerializedName("allow_promotion_codes")
-    Boolean allowPromotionCodes;
-
-    /**
-     * If {@code true}, a recovery url will be generated to recover this Checkout Session if it
-     * expires before a transaction is completed. It will be attached to the Checkout Session object
-     * upon expiration.
-     */
-    @SerializedName("enabled")
-    Boolean enabled;
-
-    /** The timestamp at which the recovery URL will expire. */
-    @SerializedName("expires_at")
-    Long expiresAt;
-
-    /**
-     * URL that creates a new Checkout Session when clicked that is a copy of this expired Checkout
-     * Session.
-     */
-    @SerializedName("url")
-    String url;
   }
 
   @Getter
