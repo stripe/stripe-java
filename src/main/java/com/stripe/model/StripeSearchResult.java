@@ -7,7 +7,10 @@ import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.Setter;
 
-/** Provides a representation of a single page worth of data from a Stripe API search method. */
+/**
+ * Provides a representation of a single page worth of data from a Stripe API search method. Please
+ * note, StripeSearchResult is beta functionality and is subject to change or removal at any time.
+ */
 @Getter
 @Setter
 @EqualsAndHashCode(callSuper = false)

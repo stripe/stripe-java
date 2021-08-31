@@ -8,6 +8,7 @@ import java.util.Iterator;
 import java.util.Map;
 import java.util.NoSuchElementException;
 
+/** Please note SearchPagingIterator is in beta and is subject to change or removal at any time. */
 public class SearchPagingIterator<T> extends ApiResource implements Iterator<T> {
   private final String url;
 

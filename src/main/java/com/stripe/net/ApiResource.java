@@ -234,8 +234,11 @@ public abstract class ApiResource extends StripeObject {
   /**
    * Similar to #request, but specific for use with searchResult types that come from the API
    *
-   * <p>Collections need a little extra work because we need to plumb request options and params
-   * through so that we can iterate to the next page if necessary.
+   * <p>SearchResults, like collections need a little extra work because we need to plumb request
+   * options and params through so that we can iterate to the next page if necessary.
+   *
+   * <p>Please note, requestSearchResult is beta functionality and is subject to charge or removal
+   * at any time.
    */
   public static <T extends StripeSearchResultInterface<?>> T requestSearchResult(
       String url, Map<String, Object> params, Class<T> clazz, RequestOptions options)
