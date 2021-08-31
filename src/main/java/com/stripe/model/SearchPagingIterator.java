@@ -51,7 +51,8 @@ public class SearchPagingIterator<T> extends ApiResource implements Iterator<T> 
         // then put our new page start in
         params.put("next_page", this.nextPage);
 
-        this.currentSearchResult = list(params, currentSearchResult.getRequestOptions());
+        this.currentSearchResult = search(params, currentSearchResult.getRequestOptions());
+        this.nextPage = this.currentSearchResult.getNextPage();
 
         this.currentDataIterator = currentSearchResult.getData().iterator();
       } catch (final Exception e) {
@@ -73,7 +74,7 @@ public class SearchPagingIterator<T> extends ApiResource implements Iterator<T> 
   }
 
   @SuppressWarnings("unchecked")
-  private StripeSearchResultInterface<T> list(
+  private StripeSearchResultInterface<T> search(
       final Map<String, Object> params, final RequestOptions options) throws Exception {
     return ApiResource.requestSearchResult(url, params, collectionType, options);
   }
