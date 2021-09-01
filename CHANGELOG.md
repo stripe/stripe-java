@@ -1,5 +1,11 @@
 # Changelog
 
+## 20.72.0 - 2021-09-01
+* [#1254](https://github.com/stripe/stripe-java/pull/1254) API Updates
+  * Add support for `after_expiration`, `consent_collection`, and `expires_at` on `CheckoutSessionCreateParams` and `Checkout.Session`
+  * Add support for `consent` and `recovered_from` on `Checkout.Session`
+* [#1252](https://github.com/stripe/stripe-java/pull/1252) Add support for auto-paginatable `SearchResult` type
+
 ## 20.71.0 - 2021-08-27
 * [#1250](https://github.com/stripe/stripe-java/pull/1250) API Updates
   * Add support for `cancellation_reason` on `BillingPortalConfigurationCreateParams.features.subscription_cancel`, `BillingPortalConfigurationUpdateParams.features.subscription_cancel`, and `BillingPortal.Configuration.features.subscription_cancel`
