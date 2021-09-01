@@ -13,6 +13,10 @@ import lombok.Getter;
 
 @Getter
 public class SessionCreateParams extends ApiRequestParams {
+  /** Configure actions after a Checkout Session has expired. */
+  @SerializedName("after_expiration")
+  AfterExpiration afterExpiration;
+
   /** Enables user redeemable promotion codes. */
   @SerializedName("allow_promotion_codes")
   Boolean allowPromotionCodes;
@@ -41,6 +45,10 @@ public class SessionCreateParams extends ApiRequestParams {
    */
   @SerializedName("client_reference_id")
   String clientReferenceId;
+
+  /** Configure fields for the Checkout Session to gather active consent from customers. */
+  @SerializedName("consent_collection")
+  ConsentCollection consentCollection;
 
   /**
    * ID of an existing Customer, if one exists. In {@code payment} mode, the customer’s most recent
@@ -90,6 +98,13 @@ public class SessionCreateParams extends ApiRequestParams {
   /** Specifies which fields in the response should be expanded. */
   @SerializedName("expand")
   List<String> expand;
+
+  /**
+   * The Epoch time in seconds at which the Checkout Session will expire. It can be anywhere from 1
+   * to 24 hours after Checkout Session creation. By default, this value is 24 hours from creation.
+   */
+  @SerializedName("expires_at")
+  Long expiresAt;
 
   /**
    * Map of extra parameters for custom features not available in this client library. The content
@@ -207,16 +222,19 @@ public class SessionCreateParams extends ApiRequestParams {
   TaxIdCollection taxIdCollection;
 
   private SessionCreateParams(
+      AfterExpiration afterExpiration,
       Boolean allowPromotionCodes,
       AutomaticTax automaticTax,
       BillingAddressCollection billingAddressCollection,
       String cancelUrl,
       String clientReferenceId,
+      ConsentCollection consentCollection,
       String customer,
       String customerEmail,
       CustomerUpdate customerUpdate,
       List<Discount> discounts,
       List<String> expand,
+      Long expiresAt,
       Map<String, Object> extraParams,
       List<LineItem> lineItems,
       Locale locale,
@@ -232,16 +250,19 @@ public class SessionCreateParams extends ApiRequestParams {
       SubscriptionData subscriptionData,
       String successUrl,
       TaxIdCollection taxIdCollection) {
+    this.afterExpiration = afterExpiration;
     this.allowPromotionCodes = allowPromotionCodes;
     this.automaticTax = automaticTax;
     this.billingAddressCollection = billingAddressCollection;
     this.cancelUrl = cancelUrl;
     this.clientReferenceId = clientReferenceId;
+    this.consentCollection = consentCollection;
     this.customer = customer;
     this.customerEmail = customerEmail;
     this.customerUpdate = customerUpdate;
     this.discounts = discounts;
     this.expand = expand;
+    this.expiresAt = expiresAt;
     this.extraParams = extraParams;
     this.lineItems = lineItems;
     this.locale = locale;
@@ -264,6 +285,8 @@ public class SessionCreateParams extends ApiRequestParams {
   }
 
   public static class Builder {
+    private AfterExpiration afterExpiration;
+
     private Boolean allowPromotionCodes;
 
     private AutomaticTax automaticTax;
@@ -274,6 +297,8 @@ public class SessionCreateParams extends ApiRequestParams {
 
     private String clientReferenceId;
 
+    private ConsentCollection consentCollection;
+
     private String customer;
 
     private String customerEmail;
@@ -283,6 +308,8 @@ public class SessionCreateParams extends ApiRequestParams {
     private List<Discount> discounts;
 
     private List<String> expand;
+
+    private Long expiresAt;
 
     private Map<String, Object> extraParams;
 
@@ -317,16 +344,19 @@ public class SessionCreateParams extends ApiRequestParams {
     /** Finalize and obtain parameter instance from this builder. */
     public SessionCreateParams build() {
       return new SessionCreateParams(
+          this.afterExpiration,
           this.allowPromotionCodes,
           this.automaticTax,
           this.billingAddressCollection,
           this.cancelUrl,
           this.clientReferenceId,
+          this.consentCollection,
           this.customer,
           this.customerEmail,
           this.customerUpdate,
           this.discounts,
           this.expand,
+          this.expiresAt,
           this.extraParams,
           this.lineItems,
           this.locale,
@@ -342,6 +372,12 @@ public class SessionCreateParams extends ApiRequestParams {
           this.subscriptionData,
           this.successUrl,
           this.taxIdCollection);
+    }
+
+    /** Configure actions after a Checkout Session has expired. */
+    public Builder setAfterExpiration(AfterExpiration afterExpiration) {
+      this.afterExpiration = afterExpiration;
+      return this;
     }
 
     /** Enables user redeemable promotion codes. */
@@ -380,6 +416,12 @@ public class SessionCreateParams extends ApiRequestParams {
      */
     public Builder setClientReferenceId(String clientReferenceId) {
       this.clientReferenceId = clientReferenceId;
+      return this;
+    }
+
+    /** Configure fields for the Checkout Session to gather active consent from customers. */
+    public Builder setConsentCollection(ConsentCollection consentCollection) {
+      this.consentCollection = consentCollection;
       return this;
     }
 
@@ -477,6 +519,16 @@ public class SessionCreateParams extends ApiRequestParams {
         this.expand = new ArrayList<>();
       }
       this.expand.addAll(elements);
+      return this;
+    }
+
+    /**
+     * The Epoch time in seconds at which the Checkout Session will expire. It can be anywhere from
+     * 1 to 24 hours after Checkout Session creation. By default, this value is 24 hours from
+     * creation.
+     */
+    public Builder setExpiresAt(Long expiresAt) {
+      this.expiresAt = expiresAt;
       return this;
     }
 
@@ -700,6 +752,172 @@ public class SessionCreateParams extends ApiRequestParams {
   }
 
   @Getter
+  public static class AfterExpiration {
+    /**
+     * Map of extra parameters for custom features not available in this client library. The content
+     * in this map is not serialized under this field's {@code @SerializedName} value. Instead, each
+     * key/value pair is serialized as if the key is a root-level field (serialized) name in this
+     * param object. Effectively, this map is flattened to its parent instance.
+     */
+    @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
+    Map<String, Object> extraParams;
+
+    /** Configure a Checkout Session that can be used to recover an expired session. */
+    @SerializedName("recovery")
+    Recovery recovery;
+
+    private AfterExpiration(Map<String, Object> extraParams, Recovery recovery) {
+      this.extraParams = extraParams;
+      this.recovery = recovery;
+    }
+
+    public static Builder builder() {
+      return new Builder();
+    }
+
+    public static class Builder {
+      private Map<String, Object> extraParams;
+
+      private Recovery recovery;
+
+      /** Finalize and obtain parameter instance from this builder. */
+      public AfterExpiration build() {
+        return new AfterExpiration(this.extraParams, this.recovery);
+      }
+
+      /**
+       * Add a key/value pair to `extraParams` map. A map is initialized for the first `put/putAll`
+       * call, and subsequent calls add additional key/value pairs to the original map. See {@link
+       * SessionCreateParams.AfterExpiration#extraParams} for the field documentation.
+       */
+      public Builder putExtraParam(String key, Object value) {
+        if (this.extraParams == null) {
+          this.extraParams = new HashMap<>();
+        }
+        this.extraParams.put(key, value);
+        return this;
+      }
+
+      /**
+       * Add all map key/value pairs to `extraParams` map. A map is initialized for the first
+       * `put/putAll` call, and subsequent calls add additional key/value pairs to the original map.
+       * See {@link SessionCreateParams.AfterExpiration#extraParams} for the field documentation.
+       */
+      public Builder putAllExtraParam(Map<String, Object> map) {
+        if (this.extraParams == null) {
+          this.extraParams = new HashMap<>();
+        }
+        this.extraParams.putAll(map);
+        return this;
+      }
+
+      /** Configure a Checkout Session that can be used to recover an expired session. */
+      public Builder setRecovery(Recovery recovery) {
+        this.recovery = recovery;
+        return this;
+      }
+    }
+
+    @Getter
+    public static class Recovery {
+      /**
+       * Enables user redeemable promotion codes on the recovered Checkout Sessions. Defaults to
+       * {@code false}
+       */
+      @SerializedName("allow_promotion_codes")
+      Boolean allowPromotionCodes;
+
+      /**
+       * If {@code true}, a recovery url will be generated to recover this Checkout Session if it
+       * expires before a successful transaction is completed. It will be attached to the Checkout
+       * Session object upon expiration.
+       */
+      @SerializedName("enabled")
+      Boolean enabled;
+
+      /**
+       * Map of extra parameters for custom features not available in this client library. The
+       * content in this map is not serialized under this field's {@code @SerializedName} value.
+       * Instead, each key/value pair is serialized as if the key is a root-level field (serialized)
+       * name in this param object. Effectively, this map is flattened to its parent instance.
+       */
+      @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
+      Map<String, Object> extraParams;
+
+      private Recovery(
+          Boolean allowPromotionCodes, Boolean enabled, Map<String, Object> extraParams) {
+        this.allowPromotionCodes = allowPromotionCodes;
+        this.enabled = enabled;
+        this.extraParams = extraParams;
+      }
+
+      public static Builder builder() {
+        return new Builder();
+      }
+
+      public static class Builder {
+        private Boolean allowPromotionCodes;
+
+        private Boolean enabled;
+
+        private Map<String, Object> extraParams;
+
+        /** Finalize and obtain parameter instance from this builder. */
+        public Recovery build() {
+          return new Recovery(this.allowPromotionCodes, this.enabled, this.extraParams);
+        }
+
+        /**
+         * Enables user redeemable promotion codes on the recovered Checkout Sessions. Defaults to
+         * {@code false}
+         */
+        public Builder setAllowPromotionCodes(Boolean allowPromotionCodes) {
+          this.allowPromotionCodes = allowPromotionCodes;
+          return this;
+        }
+
+        /**
+         * If {@code true}, a recovery url will be generated to recover this Checkout Session if it
+         * expires before a successful transaction is completed. It will be attached to the Checkout
+         * Session object upon expiration.
+         */
+        public Builder setEnabled(Boolean enabled) {
+          this.enabled = enabled;
+          return this;
+        }
+
+        /**
+         * Add a key/value pair to `extraParams` map. A map is initialized for the first
+         * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
+         * map. See {@link SessionCreateParams.AfterExpiration.Recovery#extraParams} for the field
+         * documentation.
+         */
+        public Builder putExtraParam(String key, Object value) {
+          if (this.extraParams == null) {
+            this.extraParams = new HashMap<>();
+          }
+          this.extraParams.put(key, value);
+          return this;
+        }
+
+        /**
+         * Add all map key/value pairs to `extraParams` map. A map is initialized for the first
+         * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
+         * map. See {@link SessionCreateParams.AfterExpiration.Recovery#extraParams} for the field
+         * documentation.
+         */
+        public Builder putAllExtraParam(Map<String, Object> map) {
+          if (this.extraParams == null) {
+            this.extraParams = new HashMap<>();
+          }
+          this.extraParams.putAll(map);
+          return this;
+        }
+      }
+    }
+  }
+
+  @Getter
   public static class AutomaticTax {
     /** Set to true to enable automatic taxes. */
     @SerializedName("enabled")
@@ -763,6 +981,96 @@ public class SessionCreateParams extends ApiRequestParams {
         }
         this.extraParams.putAll(map);
         return this;
+      }
+    }
+  }
+
+  @Getter
+  public static class ConsentCollection {
+    /**
+     * Map of extra parameters for custom features not available in this client library. The content
+     * in this map is not serialized under this field's {@code @SerializedName} value. Instead, each
+     * key/value pair is serialized as if the key is a root-level field (serialized) name in this
+     * param object. Effectively, this map is flattened to its parent instance.
+     */
+    @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
+    Map<String, Object> extraParams;
+
+    /**
+     * If set to {@code auto}, enables the collection of customer consent for promotional
+     * communications. The Checkout Session will determine whether to display an option to opt into
+     * promotional communication from the merchant depending on the customer's locale. Only
+     * available to US merchants.
+     */
+    @SerializedName("promotions")
+    Promotions promotions;
+
+    private ConsentCollection(Map<String, Object> extraParams, Promotions promotions) {
+      this.extraParams = extraParams;
+      this.promotions = promotions;
+    }
+
+    public static Builder builder() {
+      return new Builder();
+    }
+
+    public static class Builder {
+      private Map<String, Object> extraParams;
+
+      private Promotions promotions;
+
+      /** Finalize and obtain parameter instance from this builder. */
+      public ConsentCollection build() {
+        return new ConsentCollection(this.extraParams, this.promotions);
+      }
+
+      /**
+       * Add a key/value pair to `extraParams` map. A map is initialized for the first `put/putAll`
+       * call, and subsequent calls add additional key/value pairs to the original map. See {@link
+       * SessionCreateParams.ConsentCollection#extraParams} for the field documentation.
+       */
+      public Builder putExtraParam(String key, Object value) {
+        if (this.extraParams == null) {
+          this.extraParams = new HashMap<>();
+        }
+        this.extraParams.put(key, value);
+        return this;
+      }
+
+      /**
+       * Add all map key/value pairs to `extraParams` map. A map is initialized for the first
+       * `put/putAll` call, and subsequent calls add additional key/value pairs to the original map.
+       * See {@link SessionCreateParams.ConsentCollection#extraParams} for the field documentation.
+       */
+      public Builder putAllExtraParam(Map<String, Object> map) {
+        if (this.extraParams == null) {
+          this.extraParams = new HashMap<>();
+        }
+        this.extraParams.putAll(map);
+        return this;
+      }
+
+      /**
+       * If set to {@code auto}, enables the collection of customer consent for promotional
+       * communications. The Checkout Session will determine whether to display an option to opt
+       * into promotional communication from the merchant depending on the customer's locale. Only
+       * available to US merchants.
+       */
+      public Builder setPromotions(Promotions promotions) {
+        this.promotions = promotions;
+        return this;
+      }
+    }
+
+    public enum Promotions implements ApiRequestParams.EnumParam {
+      @SerializedName("auto")
+      AUTO("auto");
+
+      @Getter(onMethod_ = {@Override})
+      private final String value;
+
+      Promotions(String value) {
+        this.value = value;
       }
     }
   }

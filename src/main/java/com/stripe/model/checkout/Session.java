@@ -30,6 +30,10 @@ import lombok.Setter;
 @Setter
 @EqualsAndHashCode(callSuper = false)
 public class Session extends ApiResource implements HasId {
+  /** When set, provides configuration for actions to take if this Checkout Session expires. */
+  @SerializedName("after_expiration")
+  AfterExpiration afterExpiration;
+
   /** Enables user redeemable promotion codes. */
   @SerializedName("allow_promotion_codes")
   Boolean allowPromotionCodes;
@@ -67,6 +71,17 @@ public class Session extends ApiResource implements HasId {
   @SerializedName("client_reference_id")
   String clientReferenceId;
 
+  /** Results of {@code consent_collection} for this session. */
+  @SerializedName("consent")
+  Consent consent;
+
+  /**
+   * When set, provides configuration for the Checkout Session to gather active consent from
+   * customers.
+   */
+  @SerializedName("consent_collection")
+  ConsentCollection consentCollection;
+
   /**
    * Three-letter <a href="https://www.iso.org/iso-4217-currency-codes.html">ISO currency code</a>,
    * in lowercase. Must be a <a href="https://stripe.com/docs/currencies">supported currency</a>.
@@ -99,6 +114,10 @@ public class Session extends ApiResource implements HasId {
    */
   @SerializedName("customer_email")
   String customerEmail;
+
+  /** The timestamp at which the Checkout Session will expire. */
+  @SerializedName("expires_at")
+  Long expiresAt;
 
   /** Unique identifier for the object. Used to pass to {@code redirectToCheckout} in Stripe.js. */
   @Getter(onMethod_ = {@Override})
@@ -179,6 +198,10 @@ public class Session extends ApiResource implements HasId {
    */
   @SerializedName("payment_status")
   String paymentStatus;
+
+  /** The ID of the original expired Checkout Session that triggered the recovery flow. */
+  @SerializedName("recovered_from")
+  String recoveredFrom;
 
   /** The ID of the SetupIntent for Checkout Sessions in {@code setup} mode. */
   @SerializedName("setup_intent")
@@ -425,6 +448,46 @@ public class Session extends ApiResource implements HasId {
   @Getter
   @Setter
   @EqualsAndHashCode(callSuper = false)
+  public static class AfterExpiration extends StripeObject {
+    /** When set, configuration used to recover the Checkout Session on expiry. */
+    @SerializedName("recovery")
+    Recovery recovery;
+
+    @Getter
+    @Setter
+    @EqualsAndHashCode(callSuper = false)
+    public static class Recovery extends StripeObject {
+      /**
+       * Enables user redeemable promotion codes on the recovered Checkout Sessions. Defaults to
+       * {@code false}
+       */
+      @SerializedName("allow_promotion_codes")
+      Boolean allowPromotionCodes;
+
+      /**
+       * If {@code true}, a recovery url will be generated to recover this Checkout Session if it
+       * expires before a transaction is completed. It will be attached to the Checkout Session
+       * object upon expiration.
+       */
+      @SerializedName("enabled")
+      Boolean enabled;
+
+      /** The timestamp at which the recovery URL will expire. */
+      @SerializedName("expires_at")
+      Long expiresAt;
+
+      /**
+       * URL that creates a new Checkout Session when clicked that is a copy of this expired
+       * Checkout Session.
+       */
+      @SerializedName("url")
+      String url;
+    }
+  }
+
+  @Getter
+  @Setter
+  @EqualsAndHashCode(callSuper = false)
   public static class AutomaticTax extends StripeObject {
     /** Indicates whether automatic tax is enabled for the session. */
     @SerializedName("enabled")
@@ -437,6 +500,36 @@ public class Session extends ApiResource implements HasId {
      */
     @SerializedName("status")
     String status;
+  }
+
+  @Getter
+  @Setter
+  @EqualsAndHashCode(callSuper = false)
+  public static class Consent extends StripeObject {
+    /**
+     * If {@code opt_in}, the customer consents to receiving promotional communications from the
+     * merchant about this Checkout Session.
+     *
+     * <p>One of {@code opt_in}, or {@code opt_out}.
+     */
+    @SerializedName("promotions")
+    String promotions;
+  }
+
+  @Getter
+  @Setter
+  @EqualsAndHashCode(callSuper = false)
+  public static class ConsentCollection extends StripeObject {
+    /**
+     * If set to {@code auto}, enables the collection of customer consent for promotional
+     * communications. The Checkout Session will determine whether to display an option to opt into
+     * promotional communication from the merchant depending on the customer's locale. Only
+     * available to US merchants.
+     *
+     * <p>Equal to {@code auto}.
+     */
+    @SerializedName("promotions")
+    String promotions;
   }
 
   @Getter
