@@ -30,7 +30,7 @@ public class CreditNoteLineItem extends StripeObject implements HasId {
 
   /** The amount of discount calculated per discount for this line item. */
   @SerializedName("discount_amounts")
-  List<DiscountAmount> discountAmounts;
+  List<CreditNoteLineItem.DiscountAmount> discountAmounts;
 
   /** Unique identifier for the object. */
   @Getter(onMethod_ = {@Override})

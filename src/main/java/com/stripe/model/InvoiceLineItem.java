@@ -31,7 +31,7 @@ public class InvoiceLineItem extends StripeObject implements HasId {
 
   /** The amount of discount calculated per discount for this line item. */
   @SerializedName("discount_amounts")
-  List<DiscountAmount> discountAmounts;
+  List<InvoiceLineItem.DiscountAmount> discountAmounts;
 
   /** If true, discounts will apply to this line item. Always false for prorations. */
   @SerializedName("discountable")

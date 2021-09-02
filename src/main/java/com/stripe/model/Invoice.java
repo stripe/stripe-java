@@ -457,7 +457,7 @@ public class Invoice extends ApiResource implements HasId, MetadataStore<Invoice
 
   /** The aggregate amounts calculated per discount across all line items. */
   @SerializedName("total_discount_amounts")
-  List<DiscountAmount> totalDiscountAmounts;
+  List<Invoice.DiscountAmount> totalDiscountAmounts;
 
   /** The aggregate amounts calculated per tax rate for all line items. */
   @SerializedName("total_tax_amounts")
