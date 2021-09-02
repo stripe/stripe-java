@@ -1096,7 +1096,7 @@ public class Account extends ApiResource implements MetadataStore<Account>, Paym
      * verification failed.
      */
     @SerializedName("errors")
-    List<Account.FutureRequirements.Error> errors;
+    List<Account.FutureRequirements.Errors> errors;
 
     /**
      * Fields that need to be collected assuming all volume thresholds are reached. As they become
@@ -1141,7 +1141,7 @@ public class Account extends ApiResource implements MetadataStore<Account>, Paym
     @Getter
     @Setter
     @EqualsAndHashCode(callSuper = false)
-    public static class Error extends StripeObject {
+    public static class Errors extends StripeObject {
       /**
        * The code for the type of error.
        *
@@ -1261,7 +1261,7 @@ public class Account extends ApiResource implements MetadataStore<Account>, Paym
      * verification failed.
      */
     @SerializedName("errors")
-    List<Account.Requirements.Error> errors;
+    List<Account.Requirements.Errors> errors;
 
     /**
      * Fields that need to be collected assuming all volume thresholds are reached. As they become
@@ -1305,7 +1305,7 @@ public class Account extends ApiResource implements MetadataStore<Account>, Paym
     @Getter
     @Setter
     @EqualsAndHashCode(callSuper = false)
-    public static class Error extends StripeObject {
+    public static class Errors extends StripeObject {
       /**
        * The code for the type of error.
        *

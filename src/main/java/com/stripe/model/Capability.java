@@ -154,7 +154,7 @@ public class Capability extends ApiResource implements HasId {
      * verification failed.
      */
     @SerializedName("errors")
-    List<Capability.FutureRequirements.Error> errors;
+    List<Capability.FutureRequirements.Errors> errors;
 
     /**
      * Fields that need to be collected assuming all volume thresholds are reached. As they become
@@ -199,7 +199,7 @@ public class Capability extends ApiResource implements HasId {
     @Getter
     @Setter
     @EqualsAndHashCode(callSuper = false)
-    public static class Error extends StripeObject {
+    public static class Errors extends StripeObject {
       /**
        * The code for the type of error.
        *
@@ -298,7 +298,7 @@ public class Capability extends ApiResource implements HasId {
      * verification failed.
      */
     @SerializedName("errors")
-    List<Capability.Requirements.Error> errors;
+    List<Capability.Requirements.Errors> errors;
 
     /**
      * Fields that need to be collected assuming all volume thresholds are reached. As they become
@@ -342,7 +342,7 @@ public class Capability extends ApiResource implements HasId {
     @Getter
     @Setter
     @EqualsAndHashCode(callSuper = false)
-    public static class Error extends StripeObject {
+    public static class Errors extends StripeObject {
       /**
        * The code for the type of error.
        *
