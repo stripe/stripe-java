@@ -281,7 +281,7 @@ public class Person extends ApiResource implements HasId, MetadataStore<Person> 
      * verification failed.
      */
     @SerializedName("errors")
-    List<Person.FutureRequirements.Errors> errors;
+    List<Person.FutureRequirements.Error> errors;
 
     /**
      * Fields that need to be collected assuming all volume thresholds are reached. As they become
@@ -327,7 +327,7 @@ public class Person extends ApiResource implements HasId, MetadataStore<Person> 
     @Getter
     @Setter
     @EqualsAndHashCode(callSuper = false)
-    public static class Errors extends StripeObject {
+    public static class Error extends StripeObject {
       /**
        * The code for the type of error.
        *
@@ -477,7 +477,7 @@ public class Person extends ApiResource implements HasId, MetadataStore<Person> 
      * verification failed.
      */
     @SerializedName("errors")
-    List<Person.Requirements.Errors> errors;
+    List<Person.Requirements.Error> errors;
 
     /**
      * Fields that need to be collected assuming all volume thresholds are reached. As they become
@@ -521,7 +521,7 @@ public class Person extends ApiResource implements HasId, MetadataStore<Person> 
     @Getter
     @Setter
     @EqualsAndHashCode(callSuper = false)
-    public static class Errors extends StripeObject {
+    public static class Error extends StripeObject {
       /**
        * The code for the type of error.
        *
