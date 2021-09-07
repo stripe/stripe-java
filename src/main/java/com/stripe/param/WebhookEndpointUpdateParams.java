@@ -351,6 +351,9 @@ public class WebhookEndpointUpdateParams extends ApiRequestParams {
     @SerializedName("checkout.session.completed")
     CHECKOUT__SESSION__COMPLETED("checkout.session.completed"),
 
+    @SerializedName("checkout.session.expired")
+    CHECKOUT__SESSION__EXPIRED("checkout.session.expired"),
+
     @SerializedName("coupon.created")
     COUPON__CREATED("coupon.created"),
 
