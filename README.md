@@ -2,7 +2,7 @@
 
 [![Maven Central](https://img.shields.io/maven-central/v/com.stripe/stripe-java)](https://mvnrepository.com/artifact/com.stripe/stripe-java)
 [![JavaDoc](http://img.shields.io/badge/javadoc-reference-blue.svg)](https://stripe.dev/stripe-java)
-[![Build Status](https://travis-ci.org/stripe/stripe-java.svg?branch=master)](https://travis-ci.org/stripe/stripe-java)
+[![Build Status](https://github.com/stripe/stripe-java/actions/workflows/ci.yml/badge.svg?branch=master)](https://github.com/stripe/stripe-java/actions?query=branch%3Amaster)
 
 The official [Stripe][stripe] Java client library.
 
@@ -37,7 +37,7 @@ Add this dependency to your project's POM:
 You'll need to manually install the following JARs:
 
 - The Stripe JAR from <https://github.com/stripe/stripe-java/releases/latest>
-- [Google Gson][gson] from <https://repo1.maven.org/maven2/com/google/code/gson/gson/2.8.5/gson-2.8.5.jar>.
+- [Google Gson][gson] from <https://repo1.maven.org/maven2/com/google/code/gson/gson/2.8.8/gson-2.8.8.jar>.
 
 ### [ProGuard][proguard]
 
