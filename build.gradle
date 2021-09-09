@@ -5,13 +5,14 @@ buildscript {
         //maven { url "https://oss.sonatype.org/content/repositories/snapshots/" }
     }
     dependencies {
-        classpath "io.codearte.gradle.nexus:gradle-nexus-staging-plugin:0.21.1"
+        classpath "io.codearte.gradle.nexus:gradle-nexus-staging-plugin:0.30.0"
     }
 }
 
 plugins {
     id "java"
-    id "maven"
+    id "maven-publish"
+    id "signing"
     id "jacoco"
     id "io.freefair.lombok" version "5.3.3.3" // 5.3 branch is the last branch compatible with Gradle 6
     id "com.diffplug.spotless" version "5.14.3"
