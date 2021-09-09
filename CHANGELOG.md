@@ -1,5 +1,8 @@
 # Changelog
 
+## 20.75.0 - 2021-09-09
+* [#1259](https://github.com/stripe/stripe-java/pull/1259) Add missing constant for `account_requirement` as a `purpose` on File create and List APIs
+
 ## 20.74.0 - 2021-09-07
 * [#1257](https://github.com/stripe/stripe-java/pull/1257) API Updates
   * Add support for new value `rst` on enums `TaxRateCreateParams.tax_type` and `TaxRateUpdateParams.tax_type`
