@@ -235,6 +235,9 @@ public class FileListParams extends ApiRequestParams {
   }
 
   public enum Purpose implements ApiRequestParams.EnumParam {
+    @SerializedName("account_requirement")
+    ACCOUNT_REQUIREMENT("account_requirement"),
+
     @SerializedName("additional_verification")
     ADDITIONAL_VERIFICATION("additional_verification"),
 
