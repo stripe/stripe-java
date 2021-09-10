@@ -14,8 +14,8 @@ plugins {
     id "maven-publish"
     id "signing"
     id "jacoco"
-    id "io.freefair.lombok" version "5.3.3.3" // 5.3 branch is the last branch compatible with Gradle 6
-    id "com.diffplug.spotless" version "5.14.3"
+    id "io.freefair.lombok" version "6.1.0"
+    id "com.diffplug.spotless" version "5.15.0"
     id "net.ltgt.errorprone" version "2.0.2"
     id "com.github.kt3k.coveralls" version "2.12.0"
     id "biz.aQute.bnd.builder" version "5.3.0"
@@ -86,8 +86,6 @@ jar {
 
 lombok {
     version = "1.18.20"
-    config['lombok.addLombokGeneratedAnnotation'] = 'true'
-    config['lombok.getter.noIsPrefix'] = 'true'
 }
 
 delombok {
@@ -107,16 +105,16 @@ test {
 }
 
 spotless {
-  java {
-    googleJavaFormat("1.7") // 1.7 is the last version that supports Java 8
-    removeUnusedImports()
-  }
+    java {
+        googleJavaFormat("1.7") // 1.7 is the last version that supports Java 8
+        removeUnusedImports()
+    }
 }
 
 jacocoTestReport {
     reports {
-        xml.enabled = true // coveralls plugin depends on xml format report
-        html.enabled = true
+        xml.required = true // coveralls plugin depends on xml format report
+        html.required = true
     }
 }
 
