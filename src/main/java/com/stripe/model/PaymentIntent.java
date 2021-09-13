@@ -12,6 +12,7 @@ import com.stripe.param.PaymentIntentConfirmParams;
 import com.stripe.param.PaymentIntentCreateParams;
 import com.stripe.param.PaymentIntentListParams;
 import com.stripe.param.PaymentIntentRetrieveParams;
+import com.stripe.param.PaymentIntentSearchParams;
 import com.stripe.param.PaymentIntentUpdateParams;
 import java.util.List;
 import java.util.Map;
@@ -1051,6 +1052,42 @@ public class PaymentIntent extends ApiResource implements HasId, MetadataStore<P
             String.format("/v1/payment_intents/%s/capture", ApiResource.urlEncodeId(this.getId())));
     return ApiResource.request(
         ApiResource.RequestMethod.POST, url, params, PaymentIntent.class, options);
+  }
+
+  /**
+   * Search for PaymentIntents you’ve previously created using Stripe’s <a
+   * href="https://stripe.com/docs/search-api#search-query-language">Search Query Language</a>.
+   */
+  public PaymentIntentSearchResult search(Map<String, Object> params) throws StripeException {
+    return search(params, (RequestOptions) null);
+  }
+
+  /**
+   * Search for PaymentIntents you’ve previously created using Stripe’s <a
+   * href="https://stripe.com/docs/search-api#search-query-language">Search Query Language</a>.
+   */
+  public PaymentIntentSearchResult search(Map<String, Object> params, RequestOptions options)
+      throws StripeException {
+    String url = String.format("%s%s", Stripe.getApiBase(), "/v1/search/payment_intents");
+    return ApiResource.requestSearchResult(url, params, PaymentIntentSearchResult.class, options);
+  }
+
+  /**
+   * Search for PaymentIntents you’ve previously created using Stripe’s <a
+   * href="https://stripe.com/docs/search-api#search-query-language">Search Query Language</a>.
+   */
+  public PaymentIntentSearchResult search(PaymentIntentSearchParams params) throws StripeException {
+    return search(params, (RequestOptions) null);
+  }
+
+  /**
+   * Search for PaymentIntents you’ve previously created using Stripe’s <a
+   * href="https://stripe.com/docs/search-api#search-query-language">Search Query Language</a>.
+   */
+  public PaymentIntentSearchResult search(PaymentIntentSearchParams params, RequestOptions options)
+      throws StripeException {
+    String url = String.format("%s%s", Stripe.getApiBase(), "/v1/search/payment_intents");
+    return ApiResource.requestSearchResult(url, params, PaymentIntentSearchResult.class, options);
   }
 
   @Getter

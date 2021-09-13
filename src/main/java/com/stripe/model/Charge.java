@@ -11,6 +11,7 @@ import com.stripe.param.ChargeCaptureParams;
 import com.stripe.param.ChargeCreateParams;
 import com.stripe.param.ChargeListParams;
 import com.stripe.param.ChargeRetrieveParams;
+import com.stripe.param.ChargeSearchParams;
 import com.stripe.param.ChargeUpdateParams;
 import java.util.List;
 import java.util.Map;
@@ -836,6 +837,42 @@ public class Charge extends ApiResource implements MetadataStore<Charge>, Balanc
             Stripe.getApiBase(),
             String.format("/v1/charges/%s/capture", ApiResource.urlEncodeId(this.getId())));
     return ApiResource.request(ApiResource.RequestMethod.POST, url, params, Charge.class, options);
+  }
+
+  /**
+   * Search for charges you’ve previously created using Stripe’s <a
+   * href="https://stripe.com/docs/search-api#search-query-language">Search Query Language</a>.
+   */
+  public static ChargeSearchResult search(Map<String, Object> params) throws StripeException {
+    return search(params, (RequestOptions) null);
+  }
+
+  /**
+   * Search for charges you’ve previously created using Stripe’s <a
+   * href="https://stripe.com/docs/search-api#search-query-language">Search Query Language</a>.
+   */
+  public static ChargeSearchResult search(Map<String, Object> params, RequestOptions options)
+      throws StripeException {
+    String url = String.format("%s%s", Stripe.getApiBase(), "/v1/search/charges");
+    return ApiResource.requestSearchResult(url, params, ChargeSearchResult.class, options);
+  }
+
+  /**
+   * Search for charges you’ve previously created using Stripe’s <a
+   * href="https://stripe.com/docs/search-api#search-query-language">Search Query Language</a>.
+   */
+  public static ChargeSearchResult search(ChargeSearchParams params) throws StripeException {
+    return search(params, (RequestOptions) null);
+  }
+
+  /**
+   * Search for charges you’ve previously created using Stripe’s <a
+   * href="https://stripe.com/docs/search-api#search-query-language">Search Query Language</a>.
+   */
+  public static ChargeSearchResult search(ChargeSearchParams params, RequestOptions options)
+      throws StripeException {
+    String url = String.format("%s%s", Stripe.getApiBase(), "/v1/search/charges");
+    return ApiResource.requestSearchResult(url, params, ChargeSearchResult.class, options);
   }
 
   @Getter
