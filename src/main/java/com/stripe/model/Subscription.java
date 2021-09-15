@@ -768,7 +768,7 @@ public class Subscription extends ApiResource implements HasId, MetadataStore<Su
      * to pass to invoices created by the subscription.
      */
     @SerializedName("acss_debit")
-    Invoice.PaymentMethodOptions.AcssDebit acssDebit;
+    AcssDebit acssDebit;
 
     /**
      * This sub-hash contains details about the Bancontact payment method options to pass to
@@ -783,6 +783,35 @@ public class Subscription extends ApiResource implements HasId, MetadataStore<Su
      */
     @SerializedName("card")
     Card card;
+
+    @Getter
+    @Setter
+    @EqualsAndHashCode(callSuper = false)
+    public static class AcssDebit extends StripeObject {
+      @SerializedName("mandate_options")
+      Invoice.PaymentMethodOptions.AcssDebit.AcssDebitMandateOptions mandateOptions;
+
+      /**
+       * Bank account verification method.
+       *
+       * <p>One of {@code automatic}, {@code instant}, or {@code microdeposits}.
+       */
+      @SerializedName("verification_method")
+      String verificationMethod;
+
+      @Getter
+      @Setter
+      @EqualsAndHashCode(callSuper = false)
+      public static class AcssDebitMandateOptions extends StripeObject {
+        /**
+         * Transaction type of the mandate.
+         *
+         * <p>One of {@code business}, or {@code personal}.
+         */
+        @SerializedName("transaction_type")
+        String transactionType;
+      }
+    }
 
     @Getter
     @Setter
