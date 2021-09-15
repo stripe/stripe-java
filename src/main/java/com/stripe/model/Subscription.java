@@ -789,7 +789,7 @@ public class Subscription extends ApiResource implements HasId, MetadataStore<Su
     @EqualsAndHashCode(callSuper = false)
     public static class AcssDebit extends StripeObject {
       @SerializedName("mandate_options")
-      AcssDebitMandateOptions mandateOptions;
+      MandateOptions mandateOptions;
 
       /**
        * Bank account verification method.
@@ -802,7 +802,7 @@ public class Subscription extends ApiResource implements HasId, MetadataStore<Su
       @Getter
       @Setter
       @EqualsAndHashCode(callSuper = false)
-      public static class AcssDebitMandateOptions extends StripeObject {
+      public static class MandateOptions extends StripeObject {
         /**
          * Transaction type of the mandate.
          *

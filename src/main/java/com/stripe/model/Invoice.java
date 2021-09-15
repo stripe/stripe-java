@@ -1537,7 +1537,7 @@ public class Invoice extends ApiResource implements HasId, MetadataStore<Invoice
     @EqualsAndHashCode(callSuper = false)
     public static class AcssDebit extends StripeObject {
       @SerializedName("mandate_options")
-      AcssDebitMandateOptions mandateOptions;
+      MandateOptions mandateOptions;
 
       /**
        * Bank account verification method.
@@ -1550,7 +1550,7 @@ public class Invoice extends ApiResource implements HasId, MetadataStore<Invoice
       @Getter
       @Setter
       @EqualsAndHashCode(callSuper = false)
-      public static class AcssDebitMandateOptions extends StripeObject {
+      public static class MandateOptions extends StripeObject {
         /**
          * Transaction type of the mandate.
          *
