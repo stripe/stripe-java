@@ -766,6 +766,10 @@ public class SetupIntentConfirmParams extends ApiRequestParams {
         @SerializedName("custom_mandate_url")
         Object customMandateUrl;
 
+        /** List of Stripe products where this mandate can be selected automatically. */
+        @SerializedName("default_for")
+        List<DefaultFor> defaultFor;
+
         /**
          * Map of extra parameters for custom features not available in this client library. The
          * content in this map is not serialized under this field's {@code @SerializedName} value.
@@ -793,11 +797,13 @@ public class SetupIntentConfirmParams extends ApiRequestParams {
 
         private MandateOptions(
             Object customMandateUrl,
+            List<DefaultFor> defaultFor,
             Map<String, Object> extraParams,
             String intervalDescription,
             PaymentSchedule paymentSchedule,
             TransactionType transactionType) {
           this.customMandateUrl = customMandateUrl;
+          this.defaultFor = defaultFor;
           this.extraParams = extraParams;
           this.intervalDescription = intervalDescription;
           this.paymentSchedule = paymentSchedule;
@@ -811,6 +817,8 @@ public class SetupIntentConfirmParams extends ApiRequestParams {
         public static class Builder {
           private Object customMandateUrl;
 
+          private List<DefaultFor> defaultFor;
+
           private Map<String, Object> extraParams;
 
           private String intervalDescription;
@@ -823,6 +831,7 @@ public class SetupIntentConfirmParams extends ApiRequestParams {
           public MandateOptions build() {
             return new MandateOptions(
                 this.customMandateUrl,
+                this.defaultFor,
                 this.extraParams,
                 this.intervalDescription,
                 this.paymentSchedule,
@@ -848,6 +857,34 @@ public class SetupIntentConfirmParams extends ApiRequestParams {
            */
           public Builder setCustomMandateUrl(EmptyParam customMandateUrl) {
             this.customMandateUrl = customMandateUrl;
+            return this;
+          }
+
+          /**
+           * Add an element to `defaultFor` list. A list is initialized for the first `add/addAll`
+           * call, and subsequent calls adds additional elements to the original list. See {@link
+           * SetupIntentConfirmParams.PaymentMethodOptions.AcssDebit.MandateOptions#defaultFor} for
+           * the field documentation.
+           */
+          public Builder addDefaultFor(DefaultFor element) {
+            if (this.defaultFor == null) {
+              this.defaultFor = new ArrayList<>();
+            }
+            this.defaultFor.add(element);
+            return this;
+          }
+
+          /**
+           * Add all elements to `defaultFor` list. A list is initialized for the first `add/addAll`
+           * call, and subsequent calls adds additional elements to the original list. See {@link
+           * SetupIntentConfirmParams.PaymentMethodOptions.AcssDebit.MandateOptions#defaultFor} for
+           * the field documentation.
+           */
+          public Builder addAllDefaultFor(List<DefaultFor> elements) {
+            if (this.defaultFor == null) {
+              this.defaultFor = new ArrayList<>();
+            }
+            this.defaultFor.addAll(elements);
             return this;
           }
 
@@ -900,6 +937,21 @@ public class SetupIntentConfirmParams extends ApiRequestParams {
           public Builder setTransactionType(TransactionType transactionType) {
             this.transactionType = transactionType;
             return this;
+          }
+        }
+
+        public enum DefaultFor implements ApiRequestParams.EnumParam {
+          @SerializedName("invoice")
+          INVOICE("invoice"),
+
+          @SerializedName("subscription")
+          SUBSCRIPTION("subscription");
+
+          @Getter(onMethod_ = {@Override})
+          private final String value;
+
+          DefaultFor(String value) {
+            this.value = value;
           }
         }
 

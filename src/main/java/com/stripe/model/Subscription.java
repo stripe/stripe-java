@@ -764,6 +764,13 @@ public class Subscription extends ApiResource implements HasId, MetadataStore<Su
   @EqualsAndHashCode(callSuper = false)
   public static class PaymentMethodOptions extends StripeObject {
     /**
+     * This sub-hash contains details about the Canadian pre-authorized debit payment method options
+     * to pass to invoices created by the subscription.
+     */
+    @SerializedName("acss_debit")
+    Invoice.PaymentMethodOptions.AcssDebit acssDebit;
+
+    /**
      * This sub-hash contains details about the Bancontact payment method options to pass to
      * invoices created by the subscription.
      */

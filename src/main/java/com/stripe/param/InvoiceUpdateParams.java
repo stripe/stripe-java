@@ -1161,6 +1161,13 @@ public class InvoiceUpdateParams extends ApiRequestParams {
     @Getter
     public static class PaymentMethodOptions {
       /**
+       * If paying by {@code acss_debit}, this sub-hash contains details about the Canadian
+       * pre-authorized debit payment method options to pass to the invoice’s PaymentIntent.
+       */
+      @SerializedName("acss_debit")
+      Object acssDebit;
+
+      /**
        * If paying by {@code bancontact}, this sub-hash contains details about the Bancontact
        * payment method options to pass to the invoice’s PaymentIntent.
        */
@@ -1184,7 +1191,8 @@ public class InvoiceUpdateParams extends ApiRequestParams {
       Map<String, Object> extraParams;
 
       private PaymentMethodOptions(
-          Object bancontact, Object card, Map<String, Object> extraParams) {
+          Object acssDebit, Object bancontact, Object card, Map<String, Object> extraParams) {
+        this.acssDebit = acssDebit;
         this.bancontact = bancontact;
         this.card = card;
         this.extraParams = extraParams;
@@ -1195,6 +1203,8 @@ public class InvoiceUpdateParams extends ApiRequestParams {
       }
 
       public static class Builder {
+        private Object acssDebit;
+
         private Object bancontact;
 
         private Object card;
@@ -1203,7 +1213,26 @@ public class InvoiceUpdateParams extends ApiRequestParams {
 
         /** Finalize and obtain parameter instance from this builder. */
         public PaymentMethodOptions build() {
-          return new PaymentMethodOptions(this.bancontact, this.card, this.extraParams);
+          return new PaymentMethodOptions(
+              this.acssDebit, this.bancontact, this.card, this.extraParams);
+        }
+
+        /**
+         * If paying by {@code acss_debit}, this sub-hash contains details about the Canadian
+         * pre-authorized debit payment method options to pass to the invoice’s PaymentIntent.
+         */
+        public Builder setAcssDebit(AcssDebit acssDebit) {
+          this.acssDebit = acssDebit;
+          return this;
+        }
+
+        /**
+         * If paying by {@code acss_debit}, this sub-hash contains details about the Canadian
+         * pre-authorized debit payment method options to pass to the invoice’s PaymentIntent.
+         */
+        public Builder setAcssDebit(EmptyParam acssDebit) {
+          this.acssDebit = acssDebit;
+          return this;
         }
 
         /**
@@ -1268,6 +1297,201 @@ public class InvoiceUpdateParams extends ApiRequestParams {
           }
           this.extraParams.putAll(map);
           return this;
+        }
+      }
+
+      @Getter
+      public static class AcssDebit {
+        /**
+         * Map of extra parameters for custom features not available in this client library. The
+         * content in this map is not serialized under this field's {@code @SerializedName} value.
+         * Instead, each key/value pair is serialized as if the key is a root-level field
+         * (serialized) name in this param object. Effectively, this map is flattened to its parent
+         * instance.
+         */
+        @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
+        Map<String, Object> extraParams;
+
+        /** Additional fields for Mandate creation. */
+        @SerializedName("mandate_options")
+        MandateOptions mandateOptions;
+
+        /** Verification method for the intent. */
+        @SerializedName("verification_method")
+        VerificationMethod verificationMethod;
+
+        private AcssDebit(
+            Map<String, Object> extraParams,
+            MandateOptions mandateOptions,
+            VerificationMethod verificationMethod) {
+          this.extraParams = extraParams;
+          this.mandateOptions = mandateOptions;
+          this.verificationMethod = verificationMethod;
+        }
+
+        public static Builder builder() {
+          return new Builder();
+        }
+
+        public static class Builder {
+          private Map<String, Object> extraParams;
+
+          private MandateOptions mandateOptions;
+
+          private VerificationMethod verificationMethod;
+
+          /** Finalize and obtain parameter instance from this builder. */
+          public AcssDebit build() {
+            return new AcssDebit(this.extraParams, this.mandateOptions, this.verificationMethod);
+          }
+
+          /**
+           * Add a key/value pair to `extraParams` map. A map is initialized for the first
+           * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
+           * map. See {@link
+           * InvoiceUpdateParams.PaymentSettings.PaymentMethodOptions.AcssDebit#extraParams} for the
+           * field documentation.
+           */
+          public Builder putExtraParam(String key, Object value) {
+            if (this.extraParams == null) {
+              this.extraParams = new HashMap<>();
+            }
+            this.extraParams.put(key, value);
+            return this;
+          }
+
+          /**
+           * Add all map key/value pairs to `extraParams` map. A map is initialized for the first
+           * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
+           * map. See {@link
+           * InvoiceUpdateParams.PaymentSettings.PaymentMethodOptions.AcssDebit#extraParams} for the
+           * field documentation.
+           */
+          public Builder putAllExtraParam(Map<String, Object> map) {
+            if (this.extraParams == null) {
+              this.extraParams = new HashMap<>();
+            }
+            this.extraParams.putAll(map);
+            return this;
+          }
+
+          /** Additional fields for Mandate creation. */
+          public Builder setMandateOptions(MandateOptions mandateOptions) {
+            this.mandateOptions = mandateOptions;
+            return this;
+          }
+
+          /** Verification method for the intent. */
+          public Builder setVerificationMethod(VerificationMethod verificationMethod) {
+            this.verificationMethod = verificationMethod;
+            return this;
+          }
+        }
+
+        @Getter
+        public static class MandateOptions {
+          /**
+           * Map of extra parameters for custom features not available in this client library. The
+           * content in this map is not serialized under this field's {@code @SerializedName} value.
+           * Instead, each key/value pair is serialized as if the key is a root-level field
+           * (serialized) name in this param object. Effectively, this map is flattened to its
+           * parent instance.
+           */
+          @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
+          Map<String, Object> extraParams;
+
+          /** Transaction type of the mandate. */
+          @SerializedName("transaction_type")
+          TransactionType transactionType;
+
+          private MandateOptions(Map<String, Object> extraParams, TransactionType transactionType) {
+            this.extraParams = extraParams;
+            this.transactionType = transactionType;
+          }
+
+          public static Builder builder() {
+            return new Builder();
+          }
+
+          public static class Builder {
+            private Map<String, Object> extraParams;
+
+            private TransactionType transactionType;
+
+            /** Finalize and obtain parameter instance from this builder. */
+            public MandateOptions build() {
+              return new MandateOptions(this.extraParams, this.transactionType);
+            }
+
+            /**
+             * Add a key/value pair to `extraParams` map. A map is initialized for the first
+             * `put/putAll` call, and subsequent calls add additional key/value pairs to the
+             * original map. See {@link
+             * InvoiceUpdateParams.PaymentSettings.PaymentMethodOptions.AcssDebit.MandateOptions#extraParams}
+             * for the field documentation.
+             */
+            public Builder putExtraParam(String key, Object value) {
+              if (this.extraParams == null) {
+                this.extraParams = new HashMap<>();
+              }
+              this.extraParams.put(key, value);
+              return this;
+            }
+
+            /**
+             * Add all map key/value pairs to `extraParams` map. A map is initialized for the first
+             * `put/putAll` call, and subsequent calls add additional key/value pairs to the
+             * original map. See {@link
+             * InvoiceUpdateParams.PaymentSettings.PaymentMethodOptions.AcssDebit.MandateOptions#extraParams}
+             * for the field documentation.
+             */
+            public Builder putAllExtraParam(Map<String, Object> map) {
+              if (this.extraParams == null) {
+                this.extraParams = new HashMap<>();
+              }
+              this.extraParams.putAll(map);
+              return this;
+            }
+
+            /** Transaction type of the mandate. */
+            public Builder setTransactionType(TransactionType transactionType) {
+              this.transactionType = transactionType;
+              return this;
+            }
+          }
+
+          public enum TransactionType implements ApiRequestParams.EnumParam {
+            @SerializedName("business")
+            BUSINESS("business"),
+
+            @SerializedName("personal")
+            PERSONAL("personal");
+
+            @Getter(onMethod_ = {@Override})
+            private final String value;
+
+            TransactionType(String value) {
+              this.value = value;
+            }
+          }
+        }
+
+        public enum VerificationMethod implements ApiRequestParams.EnumParam {
+          @SerializedName("automatic")
+          AUTOMATIC("automatic"),
+
+          @SerializedName("instant")
+          INSTANT("instant"),
+
+          @SerializedName("microdeposits")
+          MICRODEPOSITS("microdeposits");
+
+          @Getter(onMethod_ = {@Override})
+          private final String value;
+
+          VerificationMethod(String value) {
+            this.value = value;
+          }
         }
       }
 
@@ -1484,6 +1708,9 @@ public class InvoiceUpdateParams extends ApiRequestParams {
 
       @SerializedName("ach_debit")
       ACH_DEBIT("ach_debit"),
+
+      @SerializedName("acss_debit")
+      ACSS_DEBIT("acss_debit"),
 
       @SerializedName("au_becs_debit")
       AU_BECS_DEBIT("au_becs_debit"),

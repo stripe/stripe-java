@@ -1677,7 +1677,10 @@ public class Charge extends ApiResource implements MetadataStore<Charge>, Balanc
       /**
        * The cardholder name as read from the card, in <a
        * href="https://en.wikipedia.org/wiki/ISO/IEC_7813">ISO 7813</a> format. May include
-       * alphanumeric characters, special characters and first/last name separator ({@code /}).
+       * alphanumeric characters, special characters and first/last name separator ({@code /}). In
+       * some cases, the cardholder name may not be available depending on how the issuer has
+       * configured the card. Cardholder name is typically not available on swipe or contactless
+       * payments, such as those made with Apple Pay and Google Pay.
        */
       @SerializedName("cardholder_name")
       String cardholderName;
@@ -2012,7 +2015,10 @@ public class Charge extends ApiResource implements MetadataStore<Charge>, Balanc
       /**
        * The cardholder name as read from the card, in <a
        * href="https://en.wikipedia.org/wiki/ISO/IEC_7813">ISO 7813</a> format. May include
-       * alphanumeric characters, special characters and first/last name separator ({@code /}).
+       * alphanumeric characters, special characters and first/last name separator ({@code /}). In
+       * some cases, the cardholder name may not be available depending on how the issuer has
+       * configured the card. Cardholder name is typically not available on swipe or contactless
+       * payments, such as those made with Apple Pay and Google Pay.
        */
       @SerializedName("cardholder_name")
       String cardholderName;
