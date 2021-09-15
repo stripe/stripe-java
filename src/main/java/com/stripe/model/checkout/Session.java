@@ -625,6 +625,13 @@ public class Session extends ApiResource implements HasId {
         String customMandateUrl;
 
         /**
+         * List of Stripe products where this mandate can be selected automatically. Returned when
+         * the Session is in {@code setup} mode.
+         */
+        @SerializedName("default_for")
+        List<String> defaultFor;
+
+        /**
          * Description of the interval. Only required if the 'payment_schedule' parameter is
          * 'interval' or 'combined'.
          */
