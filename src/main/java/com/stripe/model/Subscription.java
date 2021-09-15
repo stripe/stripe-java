@@ -789,7 +789,7 @@ public class Subscription extends ApiResource implements HasId, MetadataStore<Su
     @EqualsAndHashCode(callSuper = false)
     public static class AcssDebit extends StripeObject {
       @SerializedName("mandate_options")
-      Invoice.PaymentMethodOptions.AcssDebit.AcssDebitMandateOptions mandateOptions;
+      AcssDebitMandateOptions mandateOptions;
 
       /**
        * Bank account verification method.
