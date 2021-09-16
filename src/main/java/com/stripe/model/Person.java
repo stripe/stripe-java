@@ -60,6 +60,10 @@ public class Person extends ApiResource implements HasId, MetadataStore<Person> 
   @SerializedName("first_name_kanji")
   String firstNameKanji;
 
+  /** A list of alternate names or aliases that the person is known by. */
+  @SerializedName("full_name_aliases")
+  List<String> fullNameAliases;
+
   /**
    * Information about the upcoming new requirements for this person, including what information
    * needs to be collected, and by when.
