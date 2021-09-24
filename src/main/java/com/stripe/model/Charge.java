@@ -1667,6 +1667,10 @@ public class Charge extends ApiResource implements MetadataStore<Charge>, Balanc
     @Setter
     @EqualsAndHashCode(callSuper = false)
     public static class CardPresent extends StripeObject {
+      /** The authorized amount. */
+      @SerializedName("amount_authorized")
+      Long amountAuthorized;
+
       /**
        * Card brand. Can be {@code amex}, {@code diners}, {@code discover}, {@code jcb}, {@code
        * mastercard}, {@code unionpay}, {@code visa}, or {@code unknown}.
@@ -1763,6 +1767,10 @@ public class Charge extends ApiResource implements MetadataStore<Charge>, Balanc
        */
       @SerializedName("network")
       String network;
+
+      /** Defines whether the authorized amount can be over-captured or not. */
+      @SerializedName("overcapture_supported")
+      Boolean overcaptureSupported;
 
       /**
        * How card details were read in this transaction.

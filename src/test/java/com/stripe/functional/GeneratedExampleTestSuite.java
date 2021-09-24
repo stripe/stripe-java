@@ -856,6 +856,17 @@ class GeneratedExampleTestSuite extends BaseStripeTest {
   }
 
   @Test
+  public void testCreditNoteLineItemList() throws StripeException {
+    CreditNote creditNote = CreditNote.retrieve("cn_xxxxxxxxxxxxx");
+    CreditNoteLineItemCollectionListParams params =
+        CreditNoteLineItemCollectionListParams.builder().setLimit(3L).build();
+    CreditNoteLineItemCollection creditNoteLineItems = creditNote.getLines().list(params);
+    assertNotNull(creditNoteLineItems);
+    verifyRequest(
+        ApiResource.RequestMethod.GET, "/v1/credit_notes/cn_xxxxxxxxxxxxx/lines", params.toMap());
+  }
+
+  @Test
   public void testCreditNotePreview2() throws StripeException {
     CreditNotePreviewParams params =
         CreditNotePreviewParams.builder()
@@ -888,6 +899,63 @@ class GeneratedExampleTestSuite extends BaseStripeTest {
     CreditNoteCollection creditNotes = CreditNote.list(params);
     assertNotNull(creditNotes);
     verifyRequest(ApiResource.RequestMethod.GET, "/v1/credit_notes", params.toMap());
+  }
+
+  @Test
+  public void testCustomerBalanceTransactionCreate() throws StripeException {
+    Customer customer = Customer.retrieve("cus_xxxxxxxxxxxxx");
+    CustomerBalanceTransactionCollectionCreateParams params =
+        CustomerBalanceTransactionCollectionCreateParams.builder()
+            .setAmount(-500L)
+            .setCurrency("usd")
+            .build();
+    CustomerBalanceTransaction customerBalanceTransaction =
+        customer.balanceTransactions().create(params);
+    assertNotNull(customerBalanceTransaction);
+    verifyRequest(
+        ApiResource.RequestMethod.POST,
+        "/v1/customers/cus_xxxxxxxxxxxxx/balance_transactions",
+        params.toMap());
+  }
+
+  @Test
+  public void testCustomerBalanceTransactionRetrieve() throws StripeException {
+    Customer customer = Customer.retrieve("cus_xxxxxxxxxxxxx");
+    CustomerBalanceTransaction customerBalanceTransaction =
+        customer.balanceTransactions().retrieve("cbtxn_xxxxxxxxxxxxx");
+    assertNotNull(customerBalanceTransaction);
+    verifyRequest(
+        ApiResource.RequestMethod.GET,
+        "/v1/customers/cus_xxxxxxxxxxxxx/balance_transactions/cbtxn_xxxxxxxxxxxxx");
+  }
+
+  @Test
+  public void testCustomerBalanceTransactionUpdate() throws StripeException {
+    Customer customer = Customer.retrieve("cus_xxxxxxxxxxxxx");
+    CustomerBalanceTransaction resource =
+        customer.balanceTransactions().retrieve("cbtxn_xxxxxxxxxxxxx");
+    CustomerBalanceTransactionUpdateParams params =
+        CustomerBalanceTransactionUpdateParams.builder().putMetadata("order_id", "6735").build();
+    CustomerBalanceTransaction customerBalanceTransaction = resource.update(params);
+    assertNotNull(customerBalanceTransaction);
+    verifyRequest(
+        ApiResource.RequestMethod.POST,
+        "/v1/customers/cus_xxxxxxxxxxxxx/balance_transactions/cbtxn_xxxxxxxxxxxxx",
+        params.toMap());
+  }
+
+  @Test
+  public void testCustomerBalanceTransactionList() throws StripeException {
+    Customer customer = Customer.retrieve("cus_xxxxxxxxxxxxx");
+    CustomerBalanceTransactionCollectionListParams params =
+        CustomerBalanceTransactionCollectionListParams.builder().setLimit(3L).build();
+    CustomerBalanceTransactionCollection customerBalanceTransactions =
+        customer.balanceTransactions().list(params);
+    assertNotNull(customerBalanceTransactions);
+    verifyRequest(
+        ApiResource.RequestMethod.GET,
+        "/v1/customers/cus_xxxxxxxxxxxxx/balance_transactions",
+        params.toMap());
   }
 
   @Test
@@ -1531,6 +1599,78 @@ class GeneratedExampleTestSuite extends BaseStripeTest {
   }
 
   @Test
+  public void testFeeRefundCreate() throws StripeException {
+    ApplicationFee applicationFee = ApplicationFee.retrieve("fee_xxxxxxxxxxxxx");
+    FeeRefundCollectionCreateParams params = FeeRefundCollectionCreateParams.builder().build();
+    FeeRefund feeRefund = applicationFee.getRefunds().create(params);
+    assertNotNull(feeRefund);
+    verifyRequest(
+        ApiResource.RequestMethod.POST,
+        "/v1/application_fees/fee_xxxxxxxxxxxxx/refunds",
+        params.toMap());
+  }
+
+  @Test
+  public void testFeeRefundRetrieve() throws StripeException {
+    ApplicationFee applicationFee = ApplicationFee.retrieve("fee_xxxxxxxxxxxxx");
+    FeeRefund feeRefund = applicationFee.getRefunds().retrieve("fr_xxxxxxxxxxxxx");
+    assertNotNull(feeRefund);
+    verifyRequest(
+        ApiResource.RequestMethod.GET,
+        "/v1/application_fees/fee_xxxxxxxxxxxxx/refunds/fr_xxxxxxxxxxxxx");
+  }
+
+  @Test
+  public void testFeeRefundUpdate() throws StripeException {
+    ApplicationFee applicationFee = ApplicationFee.retrieve("fee_xxxxxxxxxxxxx");
+    FeeRefund resource = applicationFee.getRefunds().retrieve("fr_xxxxxxxxxxxxx");
+    FeeRefundUpdateParams params =
+        FeeRefundUpdateParams.builder().putMetadata("order_id", "6735").build();
+    FeeRefund feeRefund = resource.update(params);
+    assertNotNull(feeRefund);
+    verifyRequest(
+        ApiResource.RequestMethod.POST,
+        "/v1/application_fees/fee_xxxxxxxxxxxxx/refunds/fr_xxxxxxxxxxxxx",
+        params.toMap());
+  }
+
+  @Test
+  public void testFeeRefundList() throws StripeException {
+    ApplicationFee applicationFee = ApplicationFee.retrieve("fee_xxxxxxxxxxxxx");
+    FeeRefundCollectionListParams params =
+        FeeRefundCollectionListParams.builder().setLimit(3L).build();
+    FeeRefundCollection feeRefunds = applicationFee.getRefunds().list(params);
+    assertNotNull(feeRefunds);
+    verifyRequest(
+        ApiResource.RequestMethod.GET,
+        "/v1/application_fees/fee_xxxxxxxxxxxxx/refunds",
+        params.toMap());
+  }
+
+  @Test
+  public void testCapabilityRetrieve() throws StripeException {
+    Account account = Account.retrieve("acct_xxxxxxxxxxxxx");
+    Capability capability = account.capabilities().retrieve("card_payments");
+    assertNotNull(capability);
+    verifyRequest(
+        ApiResource.RequestMethod.GET,
+        "/v1/accounts/acct_xxxxxxxxxxxxx/capabilities/card_payments");
+  }
+
+  @Test
+  public void testCapabilityUpdate() throws StripeException {
+    Account account = Account.retrieve("acct_xxxxxxxxxxxxx");
+    Capability resource = account.capabilities().retrieve("card_payments");
+    CapabilityUpdateParams params = CapabilityUpdateParams.builder().setRequested(true).build();
+    Capability capability = resource.update(params);
+    assertNotNull(capability);
+    verifyRequest(
+        ApiResource.RequestMethod.POST,
+        "/v1/accounts/acct_xxxxxxxxxxxxx/capabilities/card_payments",
+        params.toMap());
+  }
+
+  @Test
   public void testAccountCapabilities() throws StripeException {
     Account resource = Account.retrieve("acct_xxxxxxxxxxxxx");
     AccountCapabilitiesParams params = AccountCapabilitiesParams.builder().build();
@@ -1555,6 +1695,62 @@ class GeneratedExampleTestSuite extends BaseStripeTest {
     CountrySpec countrySpec = CountrySpec.retrieve("US");
     assertNotNull(countrySpec);
     verifyRequest(ApiResource.RequestMethod.GET, "/v1/country_specs/US");
+  }
+
+  @Test
+  public void testPersonCreate() throws StripeException {
+    Account account = Account.retrieve("acct_xxxxxxxxxxxxx");
+    PersonCollectionCreateParams params =
+        PersonCollectionCreateParams.builder().setFirstName("Jane").setLastName("Diaz").build();
+    Person person = account.persons().create(params);
+    assertNotNull(person);
+    verifyRequest(
+        ApiResource.RequestMethod.POST, "/v1/accounts/acct_xxxxxxxxxxxxx/persons", params.toMap());
+  }
+
+  @Test
+  public void testPersonRetrieve() throws StripeException {
+    Account account = Account.retrieve("acct_xxxxxxxxxxxxx");
+    Person person = account.persons().retrieve("person_xxxxxxxxxxxxx");
+    assertNotNull(person);
+    verifyRequest(
+        ApiResource.RequestMethod.GET,
+        "/v1/accounts/acct_xxxxxxxxxxxxx/persons/person_xxxxxxxxxxxxx");
+  }
+
+  @Test
+  public void testPersonUpdate() throws StripeException {
+    Account account = Account.retrieve("acct_xxxxxxxxxxxxx");
+    Person resource = account.persons().retrieve("person_xxxxxxxxxxxxx");
+    PersonUpdateParams params =
+        PersonUpdateParams.builder().putMetadata("order_id", "6735").build();
+    Person person = resource.update(params);
+    assertNotNull(person);
+    verifyRequest(
+        ApiResource.RequestMethod.POST,
+        "/v1/accounts/acct_xxxxxxxxxxxxx/persons/person_xxxxxxxxxxxxx",
+        params.toMap());
+  }
+
+  @Test
+  public void testPersonDelete() throws StripeException {
+    Account account = Account.retrieve("acct_xxxxxxxxxxxxx");
+    Person resource = account.persons().retrieve("person_xxxxxxxxxxxxx");
+    Person person = resource.delete();
+    assertNotNull(person);
+    verifyRequest(
+        ApiResource.RequestMethod.DELETE,
+        "/v1/accounts/acct_xxxxxxxxxxxxx/persons/person_xxxxxxxxxxxxx");
+  }
+
+  @Test
+  public void testPersonList() throws StripeException {
+    Account account = Account.retrieve("acct_xxxxxxxxxxxxx");
+    PersonCollectionListParams params = PersonCollectionListParams.builder().setLimit(3L).build();
+    PersonCollection persons = account.persons().list(params);
+    assertNotNull(persons);
+    verifyRequest(
+        ApiResource.RequestMethod.GET, "/v1/accounts/acct_xxxxxxxxxxxxx/persons", params.toMap());
   }
 
   @Test
@@ -1642,6 +1838,52 @@ class GeneratedExampleTestSuite extends BaseStripeTest {
     TransferCollection transfers = Transfer.list(params);
     assertNotNull(transfers);
     verifyRequest(ApiResource.RequestMethod.GET, "/v1/transfers", params.toMap());
+  }
+
+  @Test
+  public void testTransferReversalCreate() throws StripeException {
+    Transfer transfer = Transfer.retrieve("tr_xxxxxxxxxxxxx");
+    TransferReversalCollectionCreateParams params =
+        TransferReversalCollectionCreateParams.builder().setAmount(100L).build();
+    TransferReversal transferReversal = transfer.getReversals().create(params);
+    assertNotNull(transferReversal);
+    verifyRequest(
+        ApiResource.RequestMethod.POST, "/v1/transfers/tr_xxxxxxxxxxxxx/reversals", params.toMap());
+  }
+
+  @Test
+  public void testTransferReversalRetrieve() throws StripeException {
+    Transfer transfer = Transfer.retrieve("tr_xxxxxxxxxxxxx");
+    TransferReversal transferReversal = transfer.getReversals().retrieve("trr_xxxxxxxxxxxxx");
+    assertNotNull(transferReversal);
+    verifyRequest(
+        ApiResource.RequestMethod.GET,
+        "/v1/transfers/tr_xxxxxxxxxxxxx/reversals/trr_xxxxxxxxxxxxx");
+  }
+
+  @Test
+  public void testTransferReversalUpdate() throws StripeException {
+    Transfer transfer = Transfer.retrieve("tr_xxxxxxxxxxxxx");
+    TransferReversal resource = transfer.getReversals().retrieve("trr_xxxxxxxxxxxxx");
+    TransferReversalUpdateParams params =
+        TransferReversalUpdateParams.builder().putMetadata("order_id", "6735").build();
+    TransferReversal transferReversal = resource.update(params);
+    assertNotNull(transferReversal);
+    verifyRequest(
+        ApiResource.RequestMethod.POST,
+        "/v1/transfers/tr_xxxxxxxxxxxxx/reversals/trr_xxxxxxxxxxxxx",
+        params.toMap());
+  }
+
+  @Test
+  public void testTransferReversalList() throws StripeException {
+    Transfer transfer = Transfer.retrieve("tr_xxxxxxxxxxxxx");
+    TransferReversalCollectionListParams params =
+        TransferReversalCollectionListParams.builder().setLimit(3L).build();
+    TransferReversalCollection transferReversals = transfer.getReversals().list(params);
+    assertNotNull(transferReversals);
+    verifyRequest(
+        ApiResource.RequestMethod.GET, "/v1/transfers/tr_xxxxxxxxxxxxx/reversals", params.toMap());
   }
 
   @Test
