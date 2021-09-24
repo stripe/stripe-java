@@ -1,5 +1,12 @@
 # Changelog
 
+## 20.78.0 - 2021-09-24
+* [#1265](https://github.com/stripe/stripe-java/pull/1265) API Updates
+  * Add support for `amount_authorized` and `overcapture_supported` on `Charge.payment_method_details.card_present`
+
+* [#1261](https://github.com/stripe/stripe-java/pull/1261) Upgrade Gradle
+* [#1209](https://github.com/stripe/stripe-java/pull/1209) Fix typo in README.md
+
 ## 20.77.0 - 2021-09-16
 * [#1264](https://github.com/stripe/stripe-java/pull/1264) API Updates
   * Add support for `full_name_aliases` on `AccountUpdateParams.individual`, `AccountCreateParams.individual`, `PersonCreateParams`, `PersonUpdateParams`, `Person`, `TokenCreateParams.account.individual`, and `TokenCreateParams.person`
