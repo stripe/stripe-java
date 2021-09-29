@@ -11,6 +11,10 @@ import lombok.Getter;
 
 @Getter
 public class BalanceTransactionListParams extends ApiRequestParams {
+  /**
+   * This parameter is deprecated and we recommend listing by created and filtering in memory
+   * instead.
+   */
   @SerializedName("available_on")
   Object availableOn;
 
@@ -157,11 +161,19 @@ public class BalanceTransactionListParams extends ApiRequestParams {
           this.type);
     }
 
+    /**
+     * This parameter is deprecated and we recommend listing by created and filtering in memory
+     * instead.
+     */
     public Builder setAvailableOn(AvailableOn availableOn) {
       this.availableOn = availableOn;
       return this;
     }
 
+    /**
+     * This parameter is deprecated and we recommend listing by created and filtering in memory
+     * instead.
+     */
     public Builder setAvailableOn(Long availableOn) {
       this.availableOn = availableOn;
       return this;
