@@ -1,5 +1,9 @@
 # Changelog
 
+## 20.79.0 - 2021-09-29
+* [#1266](https://github.com/stripe/stripe-java/pull/1266) API Updates
+  * Add support for `klarna_payments` on `AccountUpdateParams.capabilities`, `AccountCreateParams.capabilities`, and `Account.capabilities`
+
 ## 20.78.0 - 2021-09-24
 * [#1265](https://github.com/stripe/stripe-java/pull/1265) API Updates
   * Add support for `amount_authorized` and `overcapture_supported` on `Charge.payment_method_details.card_present`
