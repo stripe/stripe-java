@@ -220,6 +220,9 @@ public class ReaderListParams extends ApiRequestParams {
     @SerializedName("bbpos_chipper2x")
     BBPOS_CHIPPER2X("bbpos_chipper2x"),
 
+    @SerializedName("bbpos_wisepos_e")
+    BBPOS_WISEPOS_E("bbpos_wisepos_e"),
+
     @SerializedName("verifone_P400")
     VERIFONE_P400("verifone_P400");
 
