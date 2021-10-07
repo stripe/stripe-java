@@ -1,5 +1,13 @@
 # Changelog
 
+## 20.80.0 - 2021-10-07
+* [#1268](https://github.com/stripe/stripe-java/pull/1268) API Updates
+  * Add support for `phone_number_collection` on `CheckoutSessionCreateParams` and `Checkout.Session`
+  * Add support for `phone` on `Checkout.Session.customer_details`
+  * Change `PaymentMethodListParams.customer` to be optional
+  * Add support for new value `customer_id` on enum `RadarValueListCreateParams.item_type`
+  * Add support for new value `bbpos_wisepos_e` on enum `TerminalReaderListParams.device_type`
+
 ## 20.79.0 - 2021-09-29
 * [#1266](https://github.com/stripe/stripe-java/pull/1266) API Updates
   * Add support for `klarna_payments` on `AccountUpdateParams.capabilities`, `AccountCreateParams.capabilities`, and `Account.capabilities`
