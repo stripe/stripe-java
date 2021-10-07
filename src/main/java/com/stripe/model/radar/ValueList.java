@@ -44,7 +44,8 @@ public class ValueList extends ApiResource implements HasId, MetadataStore<Value
 
   /**
    * The type of items in the value list. One of {@code card_fingerprint}, {@code card_bin}, {@code
-   * email}, {@code ip_address}, {@code country}, {@code string}, or {@code case_sensitive_string}.
+   * email}, {@code ip_address}, {@code country}, {@code string}, {@code case_sensitive_string}, or
+   * {@code customer_id}.
    */
   @SerializedName("item_type")
   String itemType;

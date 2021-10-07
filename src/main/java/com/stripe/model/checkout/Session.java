@@ -199,6 +199,9 @@ public class Session extends ApiResource implements HasId {
   @SerializedName("payment_status")
   String paymentStatus;
 
+  @SerializedName("phone_number_collection")
+  PhoneNumberCollection phoneNumberCollection;
+
   /** The ID of the original expired Checkout Session that triggered the recovery flow. */
   @SerializedName("recovered_from")
   String recoveredFrom;
@@ -545,6 +548,10 @@ public class Session extends ApiResource implements HasId {
     @SerializedName("email")
     String email;
 
+    /** The customer's phone number at the time of checkout. */
+    @SerializedName("phone")
+    String phone;
+
     /**
      * The customer’s tax exempt status at time of checkout.
      *
@@ -681,6 +688,15 @@ public class Session extends ApiResource implements HasId {
       @SerializedName("expires_after_days")
       Long expiresAfterDays;
     }
+  }
+
+  @Getter
+  @Setter
+  @EqualsAndHashCode(callSuper = false)
+  public static class PhoneNumberCollection extends StripeObject {
+    /** Indicates whether phone number collection is enabled for the session. */
+    @SerializedName("enabled")
+    Boolean enabled;
   }
 
   @Getter

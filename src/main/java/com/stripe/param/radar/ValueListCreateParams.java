@@ -30,8 +30,8 @@ public class ValueListCreateParams extends ApiRequestParams {
 
   /**
    * Type of the items in the value list. One of {@code card_fingerprint}, {@code card_bin}, {@code
-   * email}, {@code ip_address}, {@code country}, {@code string}, or {@code case_sensitive_string}.
-   * Use {@code string} if the item type is unknown or mixed.
+   * email}, {@code ip_address}, {@code country}, {@code string}, {@code case_sensitive_string}, or
+   * {@code customer_id}. Use {@code string} if the item type is unknown or mixed.
    */
   @SerializedName("item_type")
   ItemType itemType;
@@ -147,8 +147,9 @@ public class ValueListCreateParams extends ApiRequestParams {
 
     /**
      * Type of the items in the value list. One of {@code card_fingerprint}, {@code card_bin},
-     * {@code email}, {@code ip_address}, {@code country}, {@code string}, or {@code
-     * case_sensitive_string}. Use {@code string} if the item type is unknown or mixed.
+     * {@code email}, {@code ip_address}, {@code country}, {@code string}, {@code
+     * case_sensitive_string}, or {@code customer_id}. Use {@code string} if the item type is
+     * unknown or mixed.
      */
     public Builder setItemType(ItemType itemType) {
       this.itemType = itemType;
@@ -200,6 +201,9 @@ public class ValueListCreateParams extends ApiRequestParams {
 
     @SerializedName("country")
     COUNTRY("country"),
+
+    @SerializedName("customer_id")
+    CUSTOMER_ID("customer_id"),
 
     @SerializedName("email")
     EMAIL("email"),
