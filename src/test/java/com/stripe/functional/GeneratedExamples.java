@@ -2679,7 +2679,10 @@ class GeneratedExamples extends BaseStripeTest {
   @Test
   public void testCustomerListPaymentMethods() throws StripeException {
     Customer resource = Customer.retrieve("cus_xyz");
-    CustomerListPaymentMethodsParams params = CustomerListPaymentMethodsParams.builder().build();
+    CustomerListPaymentMethodsParams params =
+        CustomerListPaymentMethodsParams.builder()
+            .setType(CustomerListPaymentMethodsParams.Type.CARD)
+            .build();
     PaymentMethodCollection paymentMethods = resource.listPaymentMethods(params);
     assertNotNull(paymentMethods);
     verifyRequest(
