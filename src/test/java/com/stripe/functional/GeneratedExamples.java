@@ -2675,4 +2675,17 @@ class GeneratedExamples extends BaseStripeTest {
     assertNotNull(webhookEndpoint);
     verifyRequest(ApiResource.RequestMethod.DELETE, "/v1/webhook_endpoints/we_xxxxxxxxxxxxx");
   }
+
+  @Test
+  public void testCustomerListPaymentMethods() throws StripeException {
+    Customer resource = Customer.retrieve("cus_xyz");
+    CustomerListPaymentMethodsParams params =
+        CustomerListPaymentMethodsParams.builder()
+            .setType(CustomerListPaymentMethodsParams.Type.CARD)
+            .build();
+    PaymentMethodCollection paymentMethods = resource.listPaymentMethods(params);
+    assertNotNull(paymentMethods);
+    verifyRequest(
+        ApiResource.RequestMethod.GET, "/v1/customers/cus_xyz/payment_methods", params.toMap());
+  }
 }

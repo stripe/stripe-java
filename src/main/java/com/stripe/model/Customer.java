@@ -9,6 +9,7 @@ import com.stripe.net.RequestOptions;
 import com.stripe.param.CustomerBalanceTransactionsParams;
 import com.stripe.param.CustomerCreateParams;
 import com.stripe.param.CustomerListParams;
+import com.stripe.param.CustomerListPaymentMethodsParams;
 import com.stripe.param.CustomerRetrieveParams;
 import com.stripe.param.CustomerUpdateParams;
 import java.util.List;
@@ -419,6 +420,42 @@ public class Customer extends ApiResource implements HasId, MetadataStore<Custom
             String.format("/v1/customers/%s", ApiResource.urlEncodeId(this.getId())));
     return ApiResource.request(
         ApiResource.RequestMethod.DELETE, url, params, Customer.class, options);
+  }
+
+  /** Returns a list of PaymentMethods for a given Customer. */
+  public PaymentMethodCollection listPaymentMethods(Map<String, Object> params)
+      throws StripeException {
+    return listPaymentMethods(params, (RequestOptions) null);
+  }
+
+  /** Returns a list of PaymentMethods for a given Customer. */
+  public PaymentMethodCollection listPaymentMethods(
+      Map<String, Object> params, RequestOptions options) throws StripeException {
+    String url =
+        String.format(
+            "%s%s",
+            Stripe.getApiBase(),
+            String.format(
+                "/v1/customers/%s/payment_methods", ApiResource.urlEncodeId(this.getId())));
+    return ApiResource.requestCollection(url, params, PaymentMethodCollection.class, options);
+  }
+
+  /** Returns a list of PaymentMethods for a given Customer. */
+  public PaymentMethodCollection listPaymentMethods(CustomerListPaymentMethodsParams params)
+      throws StripeException {
+    return listPaymentMethods(params, (RequestOptions) null);
+  }
+
+  /** Returns a list of PaymentMethods for a given Customer. */
+  public PaymentMethodCollection listPaymentMethods(
+      CustomerListPaymentMethodsParams params, RequestOptions options) throws StripeException {
+    String url =
+        String.format(
+            "%s%s",
+            Stripe.getApiBase(),
+            String.format(
+                "/v1/customers/%s/payment_methods", ApiResource.urlEncodeId(this.getId())));
+    return ApiResource.requestCollection(url, params, PaymentMethodCollection.class, options);
   }
 
   /**
