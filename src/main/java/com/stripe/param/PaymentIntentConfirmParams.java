@@ -901,6 +901,13 @@ public class PaymentIntentConfirmParams extends ApiRequestParams {
     InteracPresent interacPresent;
 
     /**
+     * If this is a {@code klarna} PaymentMethod, this hash contains details about the Klarna
+     * payment method.
+     */
+    @SerializedName("klarna")
+    Klarna klarna;
+
+    /**
      * Set of <a href="https://stripe.com/docs/api/metadata">key-value pairs</a> that you can attach
      * to an object. This can be useful for storing additional information about the object in a
      * structured format. Individual keys can be unset by posting an empty value to them. All keys
@@ -968,6 +975,7 @@ public class PaymentIntentConfirmParams extends ApiRequestParams {
         Grabpay grabpay,
         Ideal ideal,
         InteracPresent interacPresent,
+        Klarna klarna,
         Map<String, String> metadata,
         Oxxo oxxo,
         P24 p24,
@@ -990,6 +998,7 @@ public class PaymentIntentConfirmParams extends ApiRequestParams {
       this.grabpay = grabpay;
       this.ideal = ideal;
       this.interacPresent = interacPresent;
+      this.klarna = klarna;
       this.metadata = metadata;
       this.oxxo = oxxo;
       this.p24 = p24;
@@ -1034,6 +1043,8 @@ public class PaymentIntentConfirmParams extends ApiRequestParams {
 
       private InteracPresent interacPresent;
 
+      private Klarna klarna;
+
       private Map<String, String> metadata;
 
       private Oxxo oxxo;
@@ -1066,6 +1077,7 @@ public class PaymentIntentConfirmParams extends ApiRequestParams {
             this.grabpay,
             this.ideal,
             this.interacPresent,
+            this.klarna,
             this.metadata,
             this.oxxo,
             this.p24,
@@ -1225,6 +1237,15 @@ public class PaymentIntentConfirmParams extends ApiRequestParams {
        */
       public Builder setInteracPresent(InteracPresent interacPresent) {
         this.interacPresent = interacPresent;
+        return this;
+      }
+
+      /**
+       * If this is a {@code klarna} PaymentMethod, this hash contains details about the Klarna
+       * payment method.
+       */
+      public Builder setKlarna(Klarna klarna) {
+        this.klarna = klarna;
         return this;
       }
 
@@ -2717,6 +2738,173 @@ public class PaymentIntentConfirmParams extends ApiRequestParams {
     }
 
     @Getter
+    public static class Klarna {
+      /** Customer's date of birth. */
+      @SerializedName("dob")
+      Dob dob;
+
+      /**
+       * Map of extra parameters for custom features not available in this client library. The
+       * content in this map is not serialized under this field's {@code @SerializedName} value.
+       * Instead, each key/value pair is serialized as if the key is a root-level field (serialized)
+       * name in this param object. Effectively, this map is flattened to its parent instance.
+       */
+      @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
+      Map<String, Object> extraParams;
+
+      private Klarna(Dob dob, Map<String, Object> extraParams) {
+        this.dob = dob;
+        this.extraParams = extraParams;
+      }
+
+      public static Builder builder() {
+        return new Builder();
+      }
+
+      public static class Builder {
+        private Dob dob;
+
+        private Map<String, Object> extraParams;
+
+        /** Finalize and obtain parameter instance from this builder. */
+        public Klarna build() {
+          return new Klarna(this.dob, this.extraParams);
+        }
+
+        /** Customer's date of birth. */
+        public Builder setDob(Dob dob) {
+          this.dob = dob;
+          return this;
+        }
+
+        /**
+         * Add a key/value pair to `extraParams` map. A map is initialized for the first
+         * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
+         * map. See {@link PaymentIntentConfirmParams.PaymentMethodData.Klarna#extraParams} for the
+         * field documentation.
+         */
+        public Builder putExtraParam(String key, Object value) {
+          if (this.extraParams == null) {
+            this.extraParams = new HashMap<>();
+          }
+          this.extraParams.put(key, value);
+          return this;
+        }
+
+        /**
+         * Add all map key/value pairs to `extraParams` map. A map is initialized for the first
+         * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
+         * map. See {@link PaymentIntentConfirmParams.PaymentMethodData.Klarna#extraParams} for the
+         * field documentation.
+         */
+        public Builder putAllExtraParam(Map<String, Object> map) {
+          if (this.extraParams == null) {
+            this.extraParams = new HashMap<>();
+          }
+          this.extraParams.putAll(map);
+          return this;
+        }
+      }
+
+      @Getter
+      public static class Dob {
+        /** The day of birth, between 1 and 31. */
+        @SerializedName("day")
+        Long day;
+
+        /**
+         * Map of extra parameters for custom features not available in this client library. The
+         * content in this map is not serialized under this field's {@code @SerializedName} value.
+         * Instead, each key/value pair is serialized as if the key is a root-level field
+         * (serialized) name in this param object. Effectively, this map is flattened to its parent
+         * instance.
+         */
+        @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
+        Map<String, Object> extraParams;
+
+        /** The month of birth, between 1 and 12. */
+        @SerializedName("month")
+        Long month;
+
+        /** The four-digit year of birth. */
+        @SerializedName("year")
+        Long year;
+
+        private Dob(Long day, Map<String, Object> extraParams, Long month, Long year) {
+          this.day = day;
+          this.extraParams = extraParams;
+          this.month = month;
+          this.year = year;
+        }
+
+        public static Builder builder() {
+          return new Builder();
+        }
+
+        public static class Builder {
+          private Long day;
+
+          private Map<String, Object> extraParams;
+
+          private Long month;
+
+          private Long year;
+
+          /** Finalize and obtain parameter instance from this builder. */
+          public Dob build() {
+            return new Dob(this.day, this.extraParams, this.month, this.year);
+          }
+
+          /** The day of birth, between 1 and 31. */
+          public Builder setDay(Long day) {
+            this.day = day;
+            return this;
+          }
+
+          /**
+           * Add a key/value pair to `extraParams` map. A map is initialized for the first
+           * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
+           * map. See {@link PaymentIntentConfirmParams.PaymentMethodData.Klarna.Dob#extraParams}
+           * for the field documentation.
+           */
+          public Builder putExtraParam(String key, Object value) {
+            if (this.extraParams == null) {
+              this.extraParams = new HashMap<>();
+            }
+            this.extraParams.put(key, value);
+            return this;
+          }
+
+          /**
+           * Add all map key/value pairs to `extraParams` map. A map is initialized for the first
+           * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
+           * map. See {@link PaymentIntentConfirmParams.PaymentMethodData.Klarna.Dob#extraParams}
+           * for the field documentation.
+           */
+          public Builder putAllExtraParam(Map<String, Object> map) {
+            if (this.extraParams == null) {
+              this.extraParams = new HashMap<>();
+            }
+            this.extraParams.putAll(map);
+            return this;
+          }
+
+          /** The month of birth, between 1 and 12. */
+          public Builder setMonth(Long month) {
+            this.month = month;
+            return this;
+          }
+
+          /** The four-digit year of birth. */
+          public Builder setYear(Long year) {
+            this.year = year;
+            return this;
+          }
+        }
+      }
+    }
+
+    @Getter
     public static class Oxxo {
       /**
        * Map of extra parameters for custom features not available in this client library. The
@@ -3188,6 +3376,9 @@ public class PaymentIntentConfirmParams extends ApiRequestParams {
       @SerializedName("ideal")
       IDEAL("ideal"),
 
+      @SerializedName("klarna")
+      KLARNA("klarna"),
+
       @SerializedName("oxxo")
       OXXO("oxxo"),
 
@@ -3277,6 +3468,13 @@ public class PaymentIntentConfirmParams extends ApiRequestParams {
     Object ideal;
 
     /**
+     * If this is a {@code klarna} PaymentMethod, this sub-hash contains details about the Klarna
+     * payment method options.
+     */
+    @SerializedName("klarna")
+    Object klarna;
+
+    /**
      * If this is a {@code oxxo} PaymentMethod, this sub-hash contains details about the OXXO
      * payment method options.
      */
@@ -3321,6 +3519,7 @@ public class PaymentIntentConfirmParams extends ApiRequestParams {
         Object cardPresent,
         Map<String, Object> extraParams,
         Object ideal,
+        Object klarna,
         Object oxxo,
         Object p24,
         Object sepaDebit,
@@ -3335,6 +3534,7 @@ public class PaymentIntentConfirmParams extends ApiRequestParams {
       this.cardPresent = cardPresent;
       this.extraParams = extraParams;
       this.ideal = ideal;
+      this.klarna = klarna;
       this.oxxo = oxxo;
       this.p24 = p24;
       this.sepaDebit = sepaDebit;
@@ -3365,6 +3565,8 @@ public class PaymentIntentConfirmParams extends ApiRequestParams {
 
       private Object ideal;
 
+      private Object klarna;
+
       private Object oxxo;
 
       private Object p24;
@@ -3387,6 +3589,7 @@ public class PaymentIntentConfirmParams extends ApiRequestParams {
             this.cardPresent,
             this.extraParams,
             this.ideal,
+            this.klarna,
             this.oxxo,
             this.p24,
             this.sepaDebit,
@@ -3556,6 +3759,24 @@ public class PaymentIntentConfirmParams extends ApiRequestParams {
        */
       public Builder setIdeal(EmptyParam ideal) {
         this.ideal = ideal;
+        return this;
+      }
+
+      /**
+       * If this is a {@code klarna} PaymentMethod, this sub-hash contains details about the Klarna
+       * payment method options.
+       */
+      public Builder setKlarna(Klarna klarna) {
+        this.klarna = klarna;
+        return this;
+      }
+
+      /**
+       * If this is a {@code klarna} PaymentMethod, this sub-hash contains details about the Klarna
+       * payment method options.
+       */
+      public Builder setKlarna(EmptyParam klarna) {
+        this.klarna = klarna;
         return this;
       }
 
@@ -4843,6 +5064,150 @@ public class PaymentIntentConfirmParams extends ApiRequestParams {
           }
           this.extraParams.putAll(map);
           return this;
+        }
+      }
+    }
+
+    @Getter
+    public static class Klarna {
+      /**
+       * Map of extra parameters for custom features not available in this client library. The
+       * content in this map is not serialized under this field's {@code @SerializedName} value.
+       * Instead, each key/value pair is serialized as if the key is a root-level field (serialized)
+       * name in this param object. Effectively, this map is flattened to its parent instance.
+       */
+      @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
+      Map<String, Object> extraParams;
+
+      /** Preferred language of the Klarna authorization page that the customer is redirected to. */
+      @SerializedName("preferred_locale")
+      PreferredLocale preferredLocale;
+
+      private Klarna(Map<String, Object> extraParams, PreferredLocale preferredLocale) {
+        this.extraParams = extraParams;
+        this.preferredLocale = preferredLocale;
+      }
+
+      public static Builder builder() {
+        return new Builder();
+      }
+
+      public static class Builder {
+        private Map<String, Object> extraParams;
+
+        private PreferredLocale preferredLocale;
+
+        /** Finalize and obtain parameter instance from this builder. */
+        public Klarna build() {
+          return new Klarna(this.extraParams, this.preferredLocale);
+        }
+
+        /**
+         * Add a key/value pair to `extraParams` map. A map is initialized for the first
+         * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
+         * map. See {@link PaymentIntentConfirmParams.PaymentMethodOptions.Klarna#extraParams} for
+         * the field documentation.
+         */
+        public Builder putExtraParam(String key, Object value) {
+          if (this.extraParams == null) {
+            this.extraParams = new HashMap<>();
+          }
+          this.extraParams.put(key, value);
+          return this;
+        }
+
+        /**
+         * Add all map key/value pairs to `extraParams` map. A map is initialized for the first
+         * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
+         * map. See {@link PaymentIntentConfirmParams.PaymentMethodOptions.Klarna#extraParams} for
+         * the field documentation.
+         */
+        public Builder putAllExtraParam(Map<String, Object> map) {
+          if (this.extraParams == null) {
+            this.extraParams = new HashMap<>();
+          }
+          this.extraParams.putAll(map);
+          return this;
+        }
+
+        /**
+         * Preferred language of the Klarna authorization page that the customer is redirected to.
+         */
+        public Builder setPreferredLocale(PreferredLocale preferredLocale) {
+          this.preferredLocale = preferredLocale;
+          return this;
+        }
+      }
+
+      public enum PreferredLocale implements ApiRequestParams.EnumParam {
+        @SerializedName("da-DK")
+        DA_DK("da-DK"),
+
+        @SerializedName("de-AT")
+        DE_AT("de-AT"),
+
+        @SerializedName("de-DE")
+        DE_DE("de-DE"),
+
+        @SerializedName("en-AT")
+        EN_AT("en-AT"),
+
+        @SerializedName("en-DE")
+        EN_DE("en-DE"),
+
+        @SerializedName("en-DK")
+        EN_DK("en-DK"),
+
+        @SerializedName("en-FI")
+        EN_FI("en-FI"),
+
+        @SerializedName("en-GB")
+        EN_GB("en-GB"),
+
+        @SerializedName("en-NL")
+        EN_NL("en-NL"),
+
+        @SerializedName("en-NO")
+        EN_NO("en-NO"),
+
+        @SerializedName("en-SE")
+        EN_SE("en-SE"),
+
+        @SerializedName("en-US")
+        EN_US("en-US"),
+
+        @SerializedName("es-ES")
+        ES_ES("es-ES"),
+
+        @SerializedName("fi-FI")
+        FI_FI("fi-FI"),
+
+        @SerializedName("fr-BE")
+        FR_BE("fr-BE"),
+
+        @SerializedName("it-IT")
+        IT_IT("it-IT"),
+
+        @SerializedName("nb-NO")
+        NB_NO("nb-NO"),
+
+        @SerializedName("nl-BE")
+        NL_BE("nl-BE"),
+
+        @SerializedName("nl-NL")
+        NL_NL("nl-NL"),
+
+        @SerializedName("sv-FI")
+        SV_FI("sv-FI"),
+
+        @SerializedName("sv-SE")
+        SV_SE("sv-SE");
+
+        @Getter(onMethod_ = {@Override})
+        private final String value;
+
+        PreferredLocale(String value) {
+          this.value = value;
         }
       }
     }

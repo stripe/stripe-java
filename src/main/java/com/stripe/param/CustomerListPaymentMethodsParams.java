@@ -229,6 +229,9 @@ public class CustomerListPaymentMethodsParams extends ApiRequestParams {
     @SerializedName("ideal")
     IDEAL("ideal"),
 
+    @SerializedName("klarna")
+    KLARNA("klarna"),
+
     @SerializedName("oxxo")
     OXXO("oxxo"),
 

@@ -58,7 +58,7 @@ public class AccountUpdateParams extends ApiRequestParams {
 
   /**
    * The email address of the account holder. This is only to make the account easier to identify to
-   * you. Stripe will never directly email Custom accounts.
+   * you. Stripe only emails Custom accounts with your consent.
    */
   @SerializedName("email")
   Object email;
@@ -297,7 +297,7 @@ public class AccountUpdateParams extends ApiRequestParams {
 
     /**
      * The email address of the account holder. This is only to make the account easier to identify
-     * to you. Stripe will never directly email Custom accounts.
+     * to you. Stripe only emails Custom accounts with your consent.
      */
     public Builder setEmail(String email) {
       this.email = email;
@@ -306,7 +306,7 @@ public class AccountUpdateParams extends ApiRequestParams {
 
     /**
      * The email address of the account holder. This is only to make the account easier to identify
-     * to you. Stripe will never directly email Custom accounts.
+     * to you. Stripe only emails Custom accounts with your consent.
      */
     public Builder setEmail(EmptyParam email) {
       this.email = email;
