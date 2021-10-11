@@ -1,5 +1,13 @@
 # Changelog
 
+## 20.82.0 - 2021-10-11
+* [#1271](https://github.com/stripe/stripe-java/pull/1271) API Updates
+  * Add support for `payment_method_category` and `preferred_locale` on `Charge.payment_method_details.klarna`
+  * Add support for new value `klarna` on enums `CustomerListPaymentMethodsParams.type` and `PaymentMethodListParams.type`
+  * Add support for `klarna` on `PaymentIntentCreateParams.payment_method_data`, `PaymentIntentCreateParams.payment_method_options`, `PaymentIntentUpdateParams.payment_method_data`, `PaymentIntentUpdateParams.payment_method_options`, `PaymentIntentConfirmParams.payment_method_data`, `PaymentIntentConfirmParams.payment_method_options`, `PaymentIntent.payment_method_options`, `PaymentMethodCreateParams`, and `PaymentMethod`
+  * Add support for new value `klarna` on enums `PaymentIntentCreateParams.payment_method_data.type`, `PaymentIntentUpdateParams.payment_method_data.type`, and `PaymentIntentConfirmParams.payment_method_data.type`
+  * Add support for new value `klarna` on enum `PaymentMethodCreateParams.type`
+
 ## 20.81.0 - 2021-10-11
 * [#1269](https://github.com/stripe/stripe-java/pull/1269) API Updates
   * Add support for `list_payment_methods` method on resource `Customer`
