@@ -2181,7 +2181,24 @@ public class Charge extends ApiResource implements MetadataStore<Charge>, Balanc
     @Getter
     @Setter
     @EqualsAndHashCode(callSuper = false)
-    public static class Klarna extends StripeObject {}
+    public static class Klarna extends StripeObject {
+      /**
+       * The Klarna payment method used for this transaction. Can be one of {@code pay_later},
+       * {@code pay_now}, {@code pay_with_financing}, or {@code pay_in_installments}
+       */
+      @SerializedName("payment_method_category")
+      String paymentMethodCategory;
+
+      /**
+       * Preferred language of the Klarna authorization page that the customer is redirected to. Can
+       * be one of {@code de-AT}, {@code en-AT}, {@code nl-BE}, {@code fr-BE}, {@code de-DE}, {@code
+       * en-DE}, {@code da-DK}, {@code en-DK}, {@code es-ES}, {@code fi-FI}, {@code sv-FI}, {@code
+       * en-FI}, {@code en-GB}, {@code it-IT}, {@code nl-NL}, {@code en-NL}, {@code nb-NO}, {@code
+       * en-NO}, {@code sv-SE}, {@code en-SE}, {@code en-US}, {@code fr-FR}, or {@code en-FR}
+       */
+      @SerializedName("preferred_locale")
+      String preferredLocale;
+    }
 
     @Getter
     @Setter
