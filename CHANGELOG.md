@@ -1,5 +1,9 @@
 # Changelog
 
+## 20.83.0 - 2021-10-14
+* [#1272](https://github.com/stripe/stripe-java/pull/1272) API Updates
+  * Add support for new value `klarna` on enum `CheckoutSessionCreateParams.payment_method_types[]`
+
 ## 20.82.0 - 2021-10-11
 * [#1271](https://github.com/stripe/stripe-java/pull/1271) API Updates
   * Add support for `payment_method_category` and `preferred_locale` on `Charge.payment_method_details.klarna`
