@@ -1489,12 +1489,11 @@ class GeneratedExamples extends BaseStripeTest {
   }
 
   @Test
-  public void testUsageRecordSummaryList() throws StripeException {
-    SubscriptionItem subscriptionItem = SubscriptionItem.retrieve("si_xxxxxxxxxxxxx");
-    UsageRecordSummaryCollectionListParams params =
-        UsageRecordSummaryCollectionListParams.builder().setLimit(3L).build();
-    UsageRecordSummaryCollection usageRecordSummaries =
-        subscriptionItem.getUsageRecordSummaries().list(params);
+  public void testSubscriptionItemUsageRecordSummaries() throws StripeException {
+    SubscriptionItem resource = SubscriptionItem.retrieve("si_xxxxxxxxxxxxx");
+    SubscriptionItemUsageRecordSummariesParams params =
+        SubscriptionItemUsageRecordSummariesParams.builder().setLimit(3L).build();
+    UsageRecordSummaryCollection usageRecordSummaries = resource.usageRecordSummaries(params);
     assertNotNull(usageRecordSummaries);
     verifyRequest(
         ApiResource.RequestMethod.GET,
@@ -1672,10 +1671,10 @@ class GeneratedExamples extends BaseStripeTest {
   }
 
   @Test
-  public void testCapabilityList() throws StripeException {
-    Account account = Account.retrieve("acct_xxxxxxxxxxxxx");
-    CapabilityCollectionListParams params = CapabilityCollectionListParams.builder().build();
-    CapabilityCollection capabilities = account.capabilities().list(params);
+  public void testAccountCapabilities() throws StripeException {
+    Account resource = Account.retrieve("acct_xxxxxxxxxxxxx");
+    AccountCapabilitiesParams params = AccountCapabilitiesParams.builder().build();
+    CapabilityCollection capabilities = resource.capabilities(params);
     assertNotNull(capabilities);
     verifyRequest(
         ApiResource.RequestMethod.GET,
