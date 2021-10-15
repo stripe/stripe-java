@@ -1,5 +1,10 @@
 # Changelog
 
+## 20.84.0 - 2021-10-15
+* [#1273](https://github.com/stripe/stripe-java/pull/1273) API Updates
+  * Change type of `UsageRecordCreateParams.timestamp` from `integer` to `literal('now') | integer`
+  * Change `UsageRecordCreateParams.timestamp` to be optional
+
 ## 20.83.0 - 2021-10-14
 * [#1272](https://github.com/stripe/stripe-java/pull/1272) API Updates
   * Add support for new value `klarna` on enum `CheckoutSessionCreateParams.payment_method_types[]`
