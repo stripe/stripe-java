@@ -1359,7 +1359,10 @@ public class Charge extends ApiResource implements MetadataStore<Charge>, Balanc
     @Setter
     @EqualsAndHashCode(callSuper = false)
     public static class Boleto extends StripeObject {
-      /** Uniquely identifies this customer tax_id (CNPJ or CPF). */
+      /**
+       * The tax ID of the customer (CPF for individuals consumers or CNPJ for businesses
+       * consumers).
+       */
       @SerializedName("tax_id")
       String taxId;
     }

@@ -704,11 +704,11 @@ public class Source extends ApiResource implements MetadataStore<Source>, Paymen
     @SerializedName("pos_entry_mode")
     String posEntryMode;
 
-    @SerializedName("read_method")
-    String readMethod;
-
     @SerializedName("reader")
     String reader;
+
+    @SerializedName("read_method")
+    String readMethod;
 
     @SerializedName("terminal_verification_results")
     String terminalVerificationResults;
@@ -819,6 +819,9 @@ public class Source extends ApiResource implements MetadataStore<Source>, Paymen
     @SerializedName("pay_later_redirect_url")
     String payLaterRedirectUrl;
 
+    @SerializedName("payment_method_categories")
+    String paymentMethodCategories;
+
     @SerializedName("pay_now_asset_urls_descriptive")
     String payNowAssetUrlsDescriptive;
 
@@ -842,9 +845,6 @@ public class Source extends ApiResource implements MetadataStore<Source>, Paymen
 
     @SerializedName("pay_over_time_redirect_url")
     String payOverTimeRedirectUrl;
-
-    @SerializedName("payment_method_categories")
-    String paymentMethodCategories;
 
     @SerializedName("purchase_country")
     String purchaseCountry;
