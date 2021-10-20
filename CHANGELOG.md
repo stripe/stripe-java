@@ -1,5 +1,10 @@
 # Changelog
 
+## 20.85.0 - 2021-10-20
+* [#1275](https://github.com/stripe/stripe-java/pull/1275) Reorder fields
+* [#1274](https://github.com/stripe/stripe-java/pull/1274) API Updates
+  * Add support for `buyer_id` on `Charge.payment_method_details.alipay`
+
 ## 20.84.0 - 2021-10-15
 * [#1273](https://github.com/stripe/stripe-java/pull/1273) API Updates
   * Change type of `UsageRecordCreateParams.timestamp` from `integer` to `literal('now') | integer`
