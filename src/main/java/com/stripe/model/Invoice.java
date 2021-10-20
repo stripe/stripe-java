@@ -145,10 +145,6 @@ public class Invoice extends ApiResource implements HasId, MetadataStore<Invoice
   @SerializedName("currency")
   String currency;
 
-  /** Custom fields displayed on the invoice. */
-  @SerializedName("custom_fields")
-  List<Invoice.CustomField> customFields;
-
   /** The ID of the customer who will be billed. */
   @SerializedName("customer")
   @Getter(lombok.AccessLevel.NONE)
@@ -206,6 +202,10 @@ public class Invoice extends ApiResource implements HasId, MetadataStore<Invoice
    */
   @SerializedName("customer_tax_ids")
   List<Invoice.CustomerTaxId> customerTaxIds;
+
+  /** Custom fields displayed on the invoice. */
+  @SerializedName("custom_fields")
+  List<Invoice.CustomField> customFields;
 
   /**
    * ID of the default payment method for the invoice. It must belong to the customer associated

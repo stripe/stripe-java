@@ -2062,7 +2062,9 @@ public class PaymentIntentConfirmParams extends ApiRequestParams {
       @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
       Map<String, Object> extraParams;
 
-      /** Uniquely identifies this customer tax_id (CNPJ or CPF). */
+      /**
+       * The tax ID of the customer (CPF for individual consumers or CNPJ for businesses consumers).
+       */
       @SerializedName("tax_id")
       String taxId;
 
@@ -2113,7 +2115,10 @@ public class PaymentIntentConfirmParams extends ApiRequestParams {
           return this;
         }
 
-        /** Uniquely identifies this customer tax_id (CNPJ or CPF). */
+        /**
+         * The tax ID of the customer (CPF for individual consumers or CNPJ for businesses
+         * consumers).
+         */
         public Builder setTaxId(String taxId) {
           this.taxId = taxId;
           return this;
