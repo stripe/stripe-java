@@ -300,25 +300,41 @@ public class PaymentMethod extends ApiResource implements HasId, MetadataStore<P
         ApiResource.RequestMethod.POST, url, params, PaymentMethod.class, options);
   }
 
-  /** Returns a list of PaymentMethods for a given Customer. */
+  /**
+   * Returns a list of PaymentMethods. For listing a customer’s payment methods, you should use <a
+   * href="https://stripe.com/docs/api/payment_methods/customer_list">List a Customer’s
+   * PaymentMethods</a>
+   */
   public static PaymentMethodCollection list(Map<String, Object> params) throws StripeException {
     return list(params, (RequestOptions) null);
   }
 
-  /** Returns a list of PaymentMethods for a given Customer. */
+  /**
+   * Returns a list of PaymentMethods. For listing a customer’s payment methods, you should use <a
+   * href="https://stripe.com/docs/api/payment_methods/customer_list">List a Customer’s
+   * PaymentMethods</a>
+   */
   public static PaymentMethodCollection list(Map<String, Object> params, RequestOptions options)
       throws StripeException {
     String url = String.format("%s%s", Stripe.getApiBase(), "/v1/payment_methods");
     return ApiResource.requestCollection(url, params, PaymentMethodCollection.class, options);
   }
 
-  /** Returns a list of PaymentMethods for a given Customer. */
+  /**
+   * Returns a list of PaymentMethods. For listing a customer’s payment methods, you should use <a
+   * href="https://stripe.com/docs/api/payment_methods/customer_list">List a Customer’s
+   * PaymentMethods</a>
+   */
   public static PaymentMethodCollection list(PaymentMethodListParams params)
       throws StripeException {
     return list(params, (RequestOptions) null);
   }
 
-  /** Returns a list of PaymentMethods for a given Customer. */
+  /**
+   * Returns a list of PaymentMethods. For listing a customer’s payment methods, you should use <a
+   * href="https://stripe.com/docs/api/payment_methods/customer_list">List a Customer’s
+   * PaymentMethods</a>
+   */
   public static PaymentMethodCollection list(PaymentMethodListParams params, RequestOptions options)
       throws StripeException {
     String url = String.format("%s%s", Stripe.getApiBase(), "/v1/payment_methods");

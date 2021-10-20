@@ -181,14 +181,6 @@ class GeneratedExamples extends BaseStripeTest {
   }
 
   @Test
-  public void testFileList() throws StripeException {
-    FileListParams params = FileListParams.builder().setLimit(3L).build();
-    FileCollection files = File.list(params);
-    assertNotNull(files);
-    verifyRequest(ApiResource.RequestMethod.GET, "/v1/files", params.toMap());
-  }
-
-  @Test
   public void testFileLinkCreate() throws StripeException {
     FileLinkCreateParams params =
         FileLinkCreateParams.builder().setFile("file_xxxxxxxxxxxxx").build();
@@ -1489,19 +1481,6 @@ class GeneratedExamples extends BaseStripeTest {
   }
 
   @Test
-  public void testSubscriptionItemUsageRecordSummaries() throws StripeException {
-    SubscriptionItem resource = SubscriptionItem.retrieve("si_xxxxxxxxxxxxx");
-    SubscriptionItemUsageRecordSummariesParams params =
-        SubscriptionItemUsageRecordSummariesParams.builder().setLimit(3L).build();
-    UsageRecordSummaryCollection usageRecordSummaries = resource.usageRecordSummaries(params);
-    assertNotNull(usageRecordSummaries);
-    verifyRequest(
-        ApiResource.RequestMethod.GET,
-        "/v1/subscription_items/si_xxxxxxxxxxxxx/usage_record_summaries",
-        params.toMap());
-  }
-
-  @Test
   public void testAccountCreate() throws StripeException {
     AccountCreateParams params =
         AccountCreateParams.builder()
@@ -1667,18 +1646,6 @@ class GeneratedExamples extends BaseStripeTest {
     verifyRequest(
         ApiResource.RequestMethod.POST,
         "/v1/accounts/acct_xxxxxxxxxxxxx/capabilities/card_payments",
-        params.toMap());
-  }
-
-  @Test
-  public void testAccountCapabilities() throws StripeException {
-    Account resource = Account.retrieve("acct_xxxxxxxxxxxxx");
-    AccountCapabilitiesParams params = AccountCapabilitiesParams.builder().build();
-    CapabilityCollection capabilities = resource.capabilities(params);
-    assertNotNull(capabilities);
-    verifyRequest(
-        ApiResource.RequestMethod.GET,
-        "/v1/accounts/acct_xxxxxxxxxxxxx/capabilities",
         params.toMap());
   }
 

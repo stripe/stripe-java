@@ -1202,6 +1202,13 @@ public class Charge extends ApiResource implements MetadataStore<Charge>, Balanc
        * Uniquely identifies this particular Alipay account. You can use this attribute to check
        * whether two Alipay accounts are the same.
        */
+      @SerializedName("buyer_id")
+      String buyerId;
+
+      /**
+       * Uniquely identifies this particular Alipay account. You can use this attribute to check
+       * whether two Alipay accounts are the same.
+       */
       @SerializedName("fingerprint")
       String fingerprint;
 
