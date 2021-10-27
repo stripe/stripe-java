@@ -9,6 +9,7 @@ import com.stripe.net.RequestOptions;
 import com.stripe.param.PriceCreateParams;
 import com.stripe.param.PriceListParams;
 import com.stripe.param.PriceRetrieveParams;
+import com.stripe.param.PriceSearchParams;
 import com.stripe.param.PriceUpdateParams;
 import java.math.BigDecimal;
 import java.util.List;
@@ -291,6 +292,42 @@ public class Price extends ApiResource implements HasId, MetadataStore<Price> {
             Stripe.getApiBase(),
             String.format("/v1/prices/%s", ApiResource.urlEncodeId(this.getId())));
     return ApiResource.request(ApiResource.RequestMethod.POST, url, params, Price.class, options);
+  }
+
+  /**
+   * Search for prices you’ve previously created using Stripe’s <a
+   * href="https://stripe.com/docs/search-api#search-query-language">Search Query Language</a>.
+   */
+  public static PriceSearchResult search(Map<String, Object> params) throws StripeException {
+    return search(params, (RequestOptions) null);
+  }
+
+  /**
+   * Search for prices you’ve previously created using Stripe’s <a
+   * href="https://stripe.com/docs/search-api#search-query-language">Search Query Language</a>.
+   */
+  public static PriceSearchResult search(Map<String, Object> params, RequestOptions options)
+      throws StripeException {
+    String url = String.format("%s%s", Stripe.getApiBase(), "/v1/search/prices");
+    return ApiResource.requestSearchResult(url, params, PriceSearchResult.class, options);
+  }
+
+  /**
+   * Search for prices you’ve previously created using Stripe’s <a
+   * href="https://stripe.com/docs/search-api#search-query-language">Search Query Language</a>.
+   */
+  public static PriceSearchResult search(PriceSearchParams params) throws StripeException {
+    return search(params, (RequestOptions) null);
+  }
+
+  /**
+   * Search for prices you’ve previously created using Stripe’s <a
+   * href="https://stripe.com/docs/search-api#search-query-language">Search Query Language</a>.
+   */
+  public static PriceSearchResult search(PriceSearchParams params, RequestOptions options)
+      throws StripeException {
+    String url = String.format("%s%s", Stripe.getApiBase(), "/v1/search/prices");
+    return ApiResource.requestSearchResult(url, params, PriceSearchResult.class, options);
   }
 
   @Getter

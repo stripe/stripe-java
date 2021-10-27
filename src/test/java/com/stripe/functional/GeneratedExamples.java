@@ -937,20 +937,6 @@ class GeneratedExamples extends BaseStripeTest {
   }
 
   @Test
-  public void testCustomerBalanceTransactionList() throws StripeException {
-    Customer customer = Customer.retrieve("cus_xxxxxxxxxxxxx");
-    CustomerBalanceTransactionCollectionListParams params =
-        CustomerBalanceTransactionCollectionListParams.builder().setLimit(3L).build();
-    CustomerBalanceTransactionCollection customerBalanceTransactions =
-        customer.balanceTransactions().list(params);
-    assertNotNull(customerBalanceTransactions);
-    verifyRequest(
-        ApiResource.RequestMethod.GET,
-        "/v1/customers/cus_xxxxxxxxxxxxx/balance_transactions",
-        params.toMap());
-  }
-
-  @Test
   public void testSessionCreate2() throws StripeException {
     com.stripe.param.billingportal.SessionCreateParams params =
         com.stripe.param.billingportal.SessionCreateParams.builder()
