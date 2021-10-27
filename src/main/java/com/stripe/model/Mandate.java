@@ -7,6 +7,7 @@ import com.stripe.exception.StripeException;
 import com.stripe.net.ApiResource;
 import com.stripe.net.RequestOptions;
 import com.stripe.param.MandateRetrieveParams;
+import java.util.List;
 import java.util.Map;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
@@ -229,6 +230,10 @@ public class Mandate extends ApiResource implements HasId {
     @Setter
     @EqualsAndHashCode(callSuper = false)
     public static class AcssDebit extends StripeObject {
+      /** List of Stripe products where this mandate can be selected automatically. */
+      @SerializedName("default_for")
+      List<String> defaultFor;
+
       /**
        * Description of the interval. Only required if the 'payment_schedule' parameter is
        * 'interval' or 'combined'.

@@ -768,6 +768,10 @@ public class SetupIntent extends ApiResource implements HasId, MetadataStore<Set
         @SerializedName("custom_mandate_url")
         String customMandateUrl;
 
+        /** List of Stripe products where this mandate can be selected automatically. */
+        @SerializedName("default_for")
+        List<String> defaultFor;
+
         /**
          * Description of the interval. Only required if the 'payment_schedule' parameter is
          * 'interval' or 'combined'.

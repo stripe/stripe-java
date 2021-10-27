@@ -62,6 +62,10 @@ public class PersonCollectionCreateParams extends ApiRequestParams {
   @SerializedName("first_name_kanji")
   String firstNameKanji;
 
+  /** A list of alternate names or aliases that the person is known by. */
+  @SerializedName("full_name_aliases")
+  List<String> fullNameAliases;
+
   /**
    * The person's gender (International regulations require either &quot;male&quot; or
    * &quot;female&quot;).
@@ -154,6 +158,7 @@ public class PersonCollectionCreateParams extends ApiRequestParams {
       String firstName,
       String firstNameKana,
       String firstNameKanji,
+      List<String> fullNameAliases,
       String gender,
       String idNumber,
       String lastName,
@@ -179,6 +184,7 @@ public class PersonCollectionCreateParams extends ApiRequestParams {
     this.firstName = firstName;
     this.firstNameKana = firstNameKana;
     this.firstNameKanji = firstNameKanji;
+    this.fullNameAliases = fullNameAliases;
     this.gender = gender;
     this.idNumber = idNumber;
     this.lastName = lastName;
@@ -222,6 +228,8 @@ public class PersonCollectionCreateParams extends ApiRequestParams {
 
     private String firstNameKanji;
 
+    private List<String> fullNameAliases;
+
     private String gender;
 
     private String idNumber;
@@ -264,6 +272,7 @@ public class PersonCollectionCreateParams extends ApiRequestParams {
           this.firstName,
           this.firstNameKana,
           this.firstNameKanji,
+          this.fullNameAliases,
           this.gender,
           this.idNumber,
           this.lastName,
@@ -389,6 +398,32 @@ public class PersonCollectionCreateParams extends ApiRequestParams {
     /** The Kanji variation of the person's first name (Japan only). */
     public Builder setFirstNameKanji(String firstNameKanji) {
       this.firstNameKanji = firstNameKanji;
+      return this;
+    }
+
+    /**
+     * Add an element to `fullNameAliases` list. A list is initialized for the first `add/addAll`
+     * call, and subsequent calls adds additional elements to the original list. See {@link
+     * PersonCollectionCreateParams#fullNameAliases} for the field documentation.
+     */
+    public Builder addFullNameAliase(String element) {
+      if (this.fullNameAliases == null) {
+        this.fullNameAliases = new ArrayList<>();
+      }
+      this.fullNameAliases.add(element);
+      return this;
+    }
+
+    /**
+     * Add all elements to `fullNameAliases` list. A list is initialized for the first `add/addAll`
+     * call, and subsequent calls adds additional elements to the original list. See {@link
+     * PersonCollectionCreateParams#fullNameAliases} for the field documentation.
+     */
+    public Builder addAllFullNameAliase(List<String> elements) {
+      if (this.fullNameAliases == null) {
+        this.fullNameAliases = new ArrayList<>();
+      }
+      this.fullNameAliases.addAll(elements);
       return this;
     }
 

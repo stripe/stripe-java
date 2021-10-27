@@ -10,11 +10,7 @@ import java.util.Map;
 import lombok.Getter;
 
 @Getter
-public class PaymentMethodListParams extends ApiRequestParams {
-  /** The ID of the customer whose PaymentMethods will be retrieved. */
-  @SerializedName("customer")
-  String customer;
-
+public class CustomerListPaymentMethodsParams extends ApiRequestParams {
   /**
    * A cursor for use in pagination. {@code ending_before} is an object ID that defines your place
    * in the list. For instance, if you make a list request and receive 100 objects, starting with
@@ -57,15 +53,13 @@ public class PaymentMethodListParams extends ApiRequestParams {
   @SerializedName("type")
   Type type;
 
-  private PaymentMethodListParams(
-      String customer,
+  private CustomerListPaymentMethodsParams(
       String endingBefore,
       List<String> expand,
       Map<String, Object> extraParams,
       Long limit,
       String startingAfter,
       Type type) {
-    this.customer = customer;
     this.endingBefore = endingBefore;
     this.expand = expand;
     this.extraParams = extraParams;
@@ -79,8 +73,6 @@ public class PaymentMethodListParams extends ApiRequestParams {
   }
 
   public static class Builder {
-    private String customer;
-
     private String endingBefore;
 
     private List<String> expand;
@@ -94,21 +86,14 @@ public class PaymentMethodListParams extends ApiRequestParams {
     private Type type;
 
     /** Finalize and obtain parameter instance from this builder. */
-    public PaymentMethodListParams build() {
-      return new PaymentMethodListParams(
-          this.customer,
+    public CustomerListPaymentMethodsParams build() {
+      return new CustomerListPaymentMethodsParams(
           this.endingBefore,
           this.expand,
           this.extraParams,
           this.limit,
           this.startingAfter,
           this.type);
-    }
-
-    /** The ID of the customer whose PaymentMethods will be retrieved. */
-    public Builder setCustomer(String customer) {
-      this.customer = customer;
-      return this;
     }
 
     /**
@@ -125,7 +110,7 @@ public class PaymentMethodListParams extends ApiRequestParams {
     /**
      * Add an element to `expand` list. A list is initialized for the first `add/addAll` call, and
      * subsequent calls adds additional elements to the original list. See {@link
-     * PaymentMethodListParams#expand} for the field documentation.
+     * CustomerListPaymentMethodsParams#expand} for the field documentation.
      */
     public Builder addExpand(String element) {
       if (this.expand == null) {
@@ -138,7 +123,7 @@ public class PaymentMethodListParams extends ApiRequestParams {
     /**
      * Add all elements to `expand` list. A list is initialized for the first `add/addAll` call, and
      * subsequent calls adds additional elements to the original list. See {@link
-     * PaymentMethodListParams#expand} for the field documentation.
+     * CustomerListPaymentMethodsParams#expand} for the field documentation.
      */
     public Builder addAllExpand(List<String> elements) {
       if (this.expand == null) {
@@ -151,7 +136,7 @@ public class PaymentMethodListParams extends ApiRequestParams {
     /**
      * Add a key/value pair to `extraParams` map. A map is initialized for the first `put/putAll`
      * call, and subsequent calls add additional key/value pairs to the original map. See {@link
-     * PaymentMethodListParams#extraParams} for the field documentation.
+     * CustomerListPaymentMethodsParams#extraParams} for the field documentation.
      */
     public Builder putExtraParam(String key, Object value) {
       if (this.extraParams == null) {
@@ -164,7 +149,7 @@ public class PaymentMethodListParams extends ApiRequestParams {
     /**
      * Add all map key/value pairs to `extraParams` map. A map is initialized for the first
      * `put/putAll` call, and subsequent calls add additional key/value pairs to the original map.
-     * See {@link PaymentMethodListParams#extraParams} for the field documentation.
+     * See {@link CustomerListPaymentMethodsParams#extraParams} for the field documentation.
      */
     public Builder putAllExtraParam(Map<String, Object> map) {
       if (this.extraParams == null) {
