@@ -13,6 +13,27 @@ We publish a separate [package](https://www.npmjs.com/package/stripe-search-beta
 This package adds support for the `search` method on the `Charge`, `Customer`,
 `Invoice`, `PaymentIntent`, and `Subscription` resources.
 
+## Installation
+
+### Maven users
+
+Add this dependency to your project's POM:
+
+```xml
+<dependency>
+  <groupId>com.stripe</groupId>
+  <artifactId>stripe-java-search-beta</artifactId>
+  <version>20.75.0</version>
+</dependency>
+```
+
+### Others
+
+You'll need to manually install the following JARs:
+
+- The Stripe JAR from <https://repo1.maven.org/maven2/com/stripe/stripe-java-search-beta/20.75.0/stripe-java-search-beta-20.75.0.jar>
+- [Google Gson][gson] from <https://repo1.maven.org/maven2/com/google/code/gson/gson/2.8.8/gson-2.8.8.jar>.
+
 ## Docs
 
 For more information about the search api, see the [docs
