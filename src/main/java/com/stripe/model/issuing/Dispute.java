@@ -426,6 +426,10 @@ public class Dispute extends ApiResource
       @SerializedName("product_type")
       String productType;
 
+      /** Date when the product was returned or attempted to be returned. */
+      @SerializedName("returned_at")
+      Long returnedAt;
+
       /**
        * Result of cardholder's attempt to return the product.
        *
@@ -433,10 +437,6 @@ public class Dispute extends ApiResource
        */
       @SerializedName("return_status")
       String returnStatus;
-
-      /** Date when the product was returned or attempted to be returned. */
-      @SerializedName("returned_at")
-      Long returnedAt;
 
       /** Get ID of expandable {@code additionalDocumentation} object. */
       public String getAdditionalDocumentation() {
@@ -654,6 +654,10 @@ public class Dispute extends ApiResource
       @SerializedName("return_description")
       String returnDescription;
 
+      /** Date when the product was returned or attempted to be returned. */
+      @SerializedName("returned_at")
+      Long returnedAt;
+
       /**
        * Result of cardholder's attempt to return the product.
        *
@@ -661,10 +665,6 @@ public class Dispute extends ApiResource
        */
       @SerializedName("return_status")
       String returnStatus;
-
-      /** Date when the product was returned or attempted to be returned. */
-      @SerializedName("returned_at")
-      Long returnedAt;
 
       /** Get ID of expandable {@code additionalDocumentation} object. */
       public String getAdditionalDocumentation() {

@@ -48,6 +48,13 @@ public class ReportType extends ApiResource implements HasId {
   @SerializedName("id")
   String id;
 
+  /**
+   * Has the value {@code true} if the object exists in live mode or the value {@code false} if the
+   * object exists in test mode.
+   */
+  @SerializedName("livemode")
+  Boolean livemode;
+
   /** Human-readable name of the Report Type. */
   @SerializedName("name")
   String name;

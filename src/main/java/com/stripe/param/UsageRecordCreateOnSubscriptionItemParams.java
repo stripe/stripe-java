@@ -40,17 +40,19 @@ public class UsageRecordCreateOnSubscriptionItemParams extends ApiRequestParams 
 
   /**
    * The timestamp for the usage event. This timestamp must be within the current billing period of
-   * the subscription of the provided {@code subscription_item}.
+   * the subscription of the provided {@code subscription_item}, and must not be in the future. When
+   * passing {@code "now"}, Stripe records usage for the current time. Default is {@code "now"} if a
+   * value is not provided.
    */
   @SerializedName("timestamp")
-  Long timestamp;
+  Object timestamp;
 
   private UsageRecordCreateOnSubscriptionItemParams(
       Action action,
       List<String> expand,
       Map<String, Object> extraParams,
       Long quantity,
-      Long timestamp) {
+      Object timestamp) {
     this.action = action;
     this.expand = expand;
     this.extraParams = extraParams;
@@ -71,7 +73,7 @@ public class UsageRecordCreateOnSubscriptionItemParams extends ApiRequestParams 
 
     private Long quantity;
 
-    private Long timestamp;
+    private Object timestamp;
 
     /** Finalize and obtain parameter instance from this builder. */
     public UsageRecordCreateOnSubscriptionItemParams build() {
@@ -152,7 +154,20 @@ public class UsageRecordCreateOnSubscriptionItemParams extends ApiRequestParams 
 
     /**
      * The timestamp for the usage event. This timestamp must be within the current billing period
-     * of the subscription of the provided {@code subscription_item}.
+     * of the subscription of the provided {@code subscription_item}, and must not be in the future.
+     * When passing {@code "now"}, Stripe records usage for the current time. Default is {@code
+     * "now"} if a value is not provided.
+     */
+    public Builder setTimestamp(Timestamp timestamp) {
+      this.timestamp = timestamp;
+      return this;
+    }
+
+    /**
+     * The timestamp for the usage event. This timestamp must be within the current billing period
+     * of the subscription of the provided {@code subscription_item}, and must not be in the future.
+     * When passing {@code "now"}, Stripe records usage for the current time. Default is {@code
+     * "now"} if a value is not provided.
      */
     public Builder setTimestamp(Long timestamp) {
       this.timestamp = timestamp;
@@ -171,6 +186,18 @@ public class UsageRecordCreateOnSubscriptionItemParams extends ApiRequestParams 
     private final String value;
 
     Action(String value) {
+      this.value = value;
+    }
+  }
+
+  public enum Timestamp implements ApiRequestParams.EnumParam {
+    @SerializedName("now")
+    NOW("now");
+
+    @Getter(onMethod_ = {@Override})
+    private final String value;
+
+    Timestamp(String value) {
       this.value = value;
     }
   }

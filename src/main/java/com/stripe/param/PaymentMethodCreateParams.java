@@ -139,6 +139,13 @@ public class PaymentMethodCreateParams extends ApiRequestParams {
   InteracPresent interacPresent;
 
   /**
+   * If this is a {@code klarna} PaymentMethod, this hash contains details about the Klarna payment
+   * method.
+   */
+  @SerializedName("klarna")
+  Klarna klarna;
+
+  /**
    * Set of <a href="https://stripe.com/docs/api/metadata">key-value pairs</a> that you can attach
    * to an object. This can be useful for storing additional information about the object in a
    * structured format. Individual keys can be unset by posting an empty value to them. All keys can
@@ -212,6 +219,7 @@ public class PaymentMethodCreateParams extends ApiRequestParams {
       Grabpay grabpay,
       Ideal ideal,
       InteracPresent interacPresent,
+      Klarna klarna,
       Map<String, String> metadata,
       Oxxo oxxo,
       P24 p24,
@@ -238,6 +246,7 @@ public class PaymentMethodCreateParams extends ApiRequestParams {
     this.grabpay = grabpay;
     this.ideal = ideal;
     this.interacPresent = interacPresent;
+    this.klarna = klarna;
     this.metadata = metadata;
     this.oxxo = oxxo;
     this.p24 = p24;
@@ -289,6 +298,8 @@ public class PaymentMethodCreateParams extends ApiRequestParams {
 
     private InteracPresent interacPresent;
 
+    private Klarna klarna;
+
     private Map<String, String> metadata;
 
     private Oxxo oxxo;
@@ -326,6 +337,7 @@ public class PaymentMethodCreateParams extends ApiRequestParams {
           this.grabpay,
           this.ideal,
           this.interacPresent,
+          this.klarna,
           this.metadata,
           this.oxxo,
           this.p24,
@@ -543,6 +555,15 @@ public class PaymentMethodCreateParams extends ApiRequestParams {
      */
     public Builder setInteracPresent(InteracPresent interacPresent) {
       this.interacPresent = interacPresent;
+      return this;
+    }
+
+    /**
+     * If this is a {@code klarna} PaymentMethod, this hash contains details about the Klarna
+     * payment method.
+     */
+    public Builder setKlarna(Klarna klarna) {
+      this.klarna = klarna;
       return this;
     }
 
@@ -1343,7 +1364,9 @@ public class PaymentMethodCreateParams extends ApiRequestParams {
     @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
     Map<String, Object> extraParams;
 
-    /** Uniquely identifies this customer tax_id (CNPJ or CPF). */
+    /**
+     * The tax ID of the customer (CPF for individual consumers or CNPJ for businesses consumers).
+     */
     @SerializedName("tax_id")
     String taxId;
 
@@ -1392,7 +1415,9 @@ public class PaymentMethodCreateParams extends ApiRequestParams {
         return this;
       }
 
-      /** Uniquely identifies this customer tax_id (CNPJ or CPF). */
+      /**
+       * The tax ID of the customer (CPF for individual consumers or CNPJ for businesses consumers).
+       */
       public Builder setTaxId(String taxId) {
         this.taxId = taxId;
         return this;
@@ -2181,6 +2206,170 @@ public class PaymentMethodCreateParams extends ApiRequestParams {
   }
 
   @Getter
+  public static class Klarna {
+    /** Customer's date of birth. */
+    @SerializedName("dob")
+    Dob dob;
+
+    /**
+     * Map of extra parameters for custom features not available in this client library. The content
+     * in this map is not serialized under this field's {@code @SerializedName} value. Instead, each
+     * key/value pair is serialized as if the key is a root-level field (serialized) name in this
+     * param object. Effectively, this map is flattened to its parent instance.
+     */
+    @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
+    Map<String, Object> extraParams;
+
+    private Klarna(Dob dob, Map<String, Object> extraParams) {
+      this.dob = dob;
+      this.extraParams = extraParams;
+    }
+
+    public static Builder builder() {
+      return new Builder();
+    }
+
+    public static class Builder {
+      private Dob dob;
+
+      private Map<String, Object> extraParams;
+
+      /** Finalize and obtain parameter instance from this builder. */
+      public Klarna build() {
+        return new Klarna(this.dob, this.extraParams);
+      }
+
+      /** Customer's date of birth. */
+      public Builder setDob(Dob dob) {
+        this.dob = dob;
+        return this;
+      }
+
+      /**
+       * Add a key/value pair to `extraParams` map. A map is initialized for the first `put/putAll`
+       * call, and subsequent calls add additional key/value pairs to the original map. See {@link
+       * PaymentMethodCreateParams.Klarna#extraParams} for the field documentation.
+       */
+      public Builder putExtraParam(String key, Object value) {
+        if (this.extraParams == null) {
+          this.extraParams = new HashMap<>();
+        }
+        this.extraParams.put(key, value);
+        return this;
+      }
+
+      /**
+       * Add all map key/value pairs to `extraParams` map. A map is initialized for the first
+       * `put/putAll` call, and subsequent calls add additional key/value pairs to the original map.
+       * See {@link PaymentMethodCreateParams.Klarna#extraParams} for the field documentation.
+       */
+      public Builder putAllExtraParam(Map<String, Object> map) {
+        if (this.extraParams == null) {
+          this.extraParams = new HashMap<>();
+        }
+        this.extraParams.putAll(map);
+        return this;
+      }
+    }
+
+    @Getter
+    public static class Dob {
+      /** The day of birth, between 1 and 31. */
+      @SerializedName("day")
+      Long day;
+
+      /**
+       * Map of extra parameters for custom features not available in this client library. The
+       * content in this map is not serialized under this field's {@code @SerializedName} value.
+       * Instead, each key/value pair is serialized as if the key is a root-level field (serialized)
+       * name in this param object. Effectively, this map is flattened to its parent instance.
+       */
+      @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
+      Map<String, Object> extraParams;
+
+      /** The month of birth, between 1 and 12. */
+      @SerializedName("month")
+      Long month;
+
+      /** The four-digit year of birth. */
+      @SerializedName("year")
+      Long year;
+
+      private Dob(Long day, Map<String, Object> extraParams, Long month, Long year) {
+        this.day = day;
+        this.extraParams = extraParams;
+        this.month = month;
+        this.year = year;
+      }
+
+      public static Builder builder() {
+        return new Builder();
+      }
+
+      public static class Builder {
+        private Long day;
+
+        private Map<String, Object> extraParams;
+
+        private Long month;
+
+        private Long year;
+
+        /** Finalize and obtain parameter instance from this builder. */
+        public Dob build() {
+          return new Dob(this.day, this.extraParams, this.month, this.year);
+        }
+
+        /** The day of birth, between 1 and 31. */
+        public Builder setDay(Long day) {
+          this.day = day;
+          return this;
+        }
+
+        /**
+         * Add a key/value pair to `extraParams` map. A map is initialized for the first
+         * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
+         * map. See {@link PaymentMethodCreateParams.Klarna.Dob#extraParams} for the field
+         * documentation.
+         */
+        public Builder putExtraParam(String key, Object value) {
+          if (this.extraParams == null) {
+            this.extraParams = new HashMap<>();
+          }
+          this.extraParams.put(key, value);
+          return this;
+        }
+
+        /**
+         * Add all map key/value pairs to `extraParams` map. A map is initialized for the first
+         * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
+         * map. See {@link PaymentMethodCreateParams.Klarna.Dob#extraParams} for the field
+         * documentation.
+         */
+        public Builder putAllExtraParam(Map<String, Object> map) {
+          if (this.extraParams == null) {
+            this.extraParams = new HashMap<>();
+          }
+          this.extraParams.putAll(map);
+          return this;
+        }
+
+        /** The month of birth, between 1 and 12. */
+        public Builder setMonth(Long month) {
+          this.month = month;
+          return this;
+        }
+
+        /** The four-digit year of birth. */
+        public Builder setYear(Long year) {
+          this.year = year;
+          return this;
+        }
+      }
+    }
+  }
+
+  @Getter
   public static class Oxxo {
     /**
      * Map of extra parameters for custom features not available in this client library. The content
@@ -2644,6 +2833,9 @@ public class PaymentMethodCreateParams extends ApiRequestParams {
 
     @SerializedName("ideal")
     IDEAL("ideal"),
+
+    @SerializedName("klarna")
+    KLARNA("klarna"),
 
     @SerializedName("oxxo")
     OXXO("oxxo"),

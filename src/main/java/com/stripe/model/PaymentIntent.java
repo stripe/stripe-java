@@ -1332,6 +1332,9 @@ public class PaymentIntent extends ApiResource implements HasId, MetadataStore<P
     @SerializedName("ideal")
     Ideal ideal;
 
+    @SerializedName("klarna")
+    Klarna klarna;
+
     @SerializedName("oxxo")
     Oxxo oxxo;
 
@@ -1526,6 +1529,15 @@ public class PaymentIntent extends ApiResource implements HasId, MetadataStore<P
     @Setter
     @EqualsAndHashCode(callSuper = false)
     public static class Ideal extends StripeObject {}
+
+    @Getter
+    @Setter
+    @EqualsAndHashCode(callSuper = false)
+    public static class Klarna extends StripeObject {
+      /** Preferred locale of the Klarna checkout page that the customer is redirected to. */
+      @SerializedName("preferred_locale")
+      String preferredLocale;
+    }
 
     @Getter
     @Setter

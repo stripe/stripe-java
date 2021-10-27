@@ -1239,6 +1239,13 @@ public class Charge extends ApiResource implements MetadataStore<Charge>, Balanc
        * Uniquely identifies this particular Alipay account. You can use this attribute to check
        * whether two Alipay accounts are the same.
        */
+      @SerializedName("buyer_id")
+      String buyerId;
+
+      /**
+       * Uniquely identifies this particular Alipay account. You can use this attribute to check
+       * whether two Alipay accounts are the same.
+       */
       @SerializedName("fingerprint")
       String fingerprint;
 
@@ -1389,7 +1396,10 @@ public class Charge extends ApiResource implements MetadataStore<Charge>, Balanc
     @Setter
     @EqualsAndHashCode(callSuper = false)
     public static class Boleto extends StripeObject {
-      /** Uniquely identifies this customer tax_id (CNPJ or CPF). */
+      /**
+       * The tax ID of the customer (CPF for individuals consumers or CNPJ for businesses
+       * consumers).
+       */
       @SerializedName("tax_id")
       String taxId;
     }
@@ -1704,6 +1714,10 @@ public class Charge extends ApiResource implements MetadataStore<Charge>, Balanc
     @Setter
     @EqualsAndHashCode(callSuper = false)
     public static class CardPresent extends StripeObject {
+      /** The authorized amount. */
+      @SerializedName("amount_authorized")
+      Long amountAuthorized;
+
       /**
        * Card brand. Can be {@code amex}, {@code diners}, {@code discover}, {@code jcb}, {@code
        * mastercard}, {@code unionpay}, {@code visa}, or {@code unknown}.
@@ -1714,7 +1728,10 @@ public class Charge extends ApiResource implements MetadataStore<Charge>, Balanc
       /**
        * The cardholder name as read from the card, in <a
        * href="https://en.wikipedia.org/wiki/ISO/IEC_7813">ISO 7813</a> format. May include
-       * alphanumeric characters, special characters and first/last name separator ({@code /}).
+       * alphanumeric characters, special characters and first/last name separator ({@code /}). In
+       * some cases, the cardholder name may not be available depending on how the issuer has
+       * configured the card. Cardholder name is typically not available on swipe or contactless
+       * payments, such as those made with Apple Pay and Google Pay.
        */
       @SerializedName("cardholder_name")
       String cardholderName;
@@ -1797,6 +1814,10 @@ public class Charge extends ApiResource implements MetadataStore<Charge>, Balanc
        */
       @SerializedName("network")
       String network;
+
+      /** Defines whether the authorized amount can be over-captured or not. */
+      @SerializedName("overcapture_supported")
+      Boolean overcaptureSupported;
 
       /**
        * How card details were read in this transaction.
@@ -2049,7 +2070,10 @@ public class Charge extends ApiResource implements MetadataStore<Charge>, Balanc
       /**
        * The cardholder name as read from the card, in <a
        * href="https://en.wikipedia.org/wiki/ISO/IEC_7813">ISO 7813</a> format. May include
-       * alphanumeric characters, special characters and first/last name separator ({@code /}).
+       * alphanumeric characters, special characters and first/last name separator ({@code /}). In
+       * some cases, the cardholder name may not be available depending on how the issuer has
+       * configured the card. Cardholder name is typically not available on swipe or contactless
+       * payments, such as those made with Apple Pay and Google Pay.
        */
       @SerializedName("cardholder_name")
       String cardholderName;
@@ -2204,7 +2228,24 @@ public class Charge extends ApiResource implements MetadataStore<Charge>, Balanc
     @Getter
     @Setter
     @EqualsAndHashCode(callSuper = false)
-    public static class Klarna extends StripeObject {}
+    public static class Klarna extends StripeObject {
+      /**
+       * The Klarna payment method used for this transaction. Can be one of {@code pay_later},
+       * {@code pay_now}, {@code pay_with_financing}, or {@code pay_in_installments}
+       */
+      @SerializedName("payment_method_category")
+      String paymentMethodCategory;
+
+      /**
+       * Preferred language of the Klarna authorization page that the customer is redirected to. Can
+       * be one of {@code de-AT}, {@code en-AT}, {@code nl-BE}, {@code fr-BE}, {@code de-DE}, {@code
+       * en-DE}, {@code da-DK}, {@code en-DK}, {@code es-ES}, {@code fi-FI}, {@code sv-FI}, {@code
+       * en-FI}, {@code en-GB}, {@code it-IT}, {@code nl-NL}, {@code en-NL}, {@code nb-NO}, {@code
+       * en-NO}, {@code sv-SE}, {@code en-SE}, {@code en-US}, {@code fr-FR}, or {@code en-FR}
+       */
+      @SerializedName("preferred_locale")
+      String preferredLocale;
+    }
 
     @Getter
     @Setter

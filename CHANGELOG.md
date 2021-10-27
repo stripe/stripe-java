@@ -1,5 +1,62 @@
 # Changelog
 
+## 20.85.0 - 2021-10-20
+* [#1275](https://github.com/stripe/stripe-java/pull/1275) Reorder fields
+* [#1274](https://github.com/stripe/stripe-java/pull/1274) API Updates
+  * Add support for `buyer_id` on `Charge.payment_method_details.alipay`
+
+## 20.84.0 - 2021-10-15
+* [#1273](https://github.com/stripe/stripe-java/pull/1273) API Updates
+  * Change type of `UsageRecordCreateParams.timestamp` from `integer` to `literal('now') | integer`
+  * Change `UsageRecordCreateParams.timestamp` to be optional
+
+## 20.83.0 - 2021-10-14
+* [#1272](https://github.com/stripe/stripe-java/pull/1272) API Updates
+  * Add support for new value `klarna` on enum `CheckoutSessionCreateParams.payment_method_types[]`
+
+## 20.82.0 - 2021-10-11
+* [#1271](https://github.com/stripe/stripe-java/pull/1271) API Updates
+  * Add support for `payment_method_category` and `preferred_locale` on `Charge.payment_method_details.klarna`
+  * Add support for new value `klarna` on enums `CustomerListPaymentMethodsParams.type` and `PaymentMethodListParams.type`
+  * Add support for `klarna` on `PaymentIntentCreateParams.payment_method_data`, `PaymentIntentCreateParams.payment_method_options`, `PaymentIntentUpdateParams.payment_method_data`, `PaymentIntentUpdateParams.payment_method_options`, `PaymentIntentConfirmParams.payment_method_data`, `PaymentIntentConfirmParams.payment_method_options`, `PaymentIntent.payment_method_options`, `PaymentMethodCreateParams`, and `PaymentMethod`
+  * Add support for new value `klarna` on enums `PaymentIntentCreateParams.payment_method_data.type`, `PaymentIntentUpdateParams.payment_method_data.type`, and `PaymentIntentConfirmParams.payment_method_data.type`
+  * Add support for new value `klarna` on enum `PaymentMethodCreateParams.type`
+
+## 20.81.0 - 2021-10-11
+* [#1269](https://github.com/stripe/stripe-java/pull/1269) API Updates
+  * Add support for `list_payment_methods` method on resource `Customer`
+
+## 20.80.0 - 2021-10-07
+* [#1268](https://github.com/stripe/stripe-java/pull/1268) API Updates
+  * Add support for `phone_number_collection` on `CheckoutSessionCreateParams` and `Checkout.Session`
+  * Add support for `phone` on `Checkout.Session.customer_details`
+  * Change `PaymentMethodListParams.customer` to be optional
+  * Add support for new value `customer_id` on enum `RadarValueListCreateParams.item_type`
+  * Add support for new value `bbpos_wisepos_e` on enum `TerminalReaderListParams.device_type`
+
+## 20.79.0 - 2021-09-29
+* [#1266](https://github.com/stripe/stripe-java/pull/1266) API Updates
+  * Add support for `klarna_payments` on `AccountUpdateParams.capabilities`, `AccountCreateParams.capabilities`, and `Account.capabilities`
+
+## 20.78.0 - 2021-09-24
+* [#1265](https://github.com/stripe/stripe-java/pull/1265) API Updates
+  * Add support for `amount_authorized` and `overcapture_supported` on `Charge.payment_method_details.card_present`
+
+* [#1261](https://github.com/stripe/stripe-java/pull/1261) Upgrade Gradle
+* [#1209](https://github.com/stripe/stripe-java/pull/1209) Fix typo in README.md
+
+## 20.77.0 - 2021-09-16
+* [#1264](https://github.com/stripe/stripe-java/pull/1264) API Updates
+  * Add support for `full_name_aliases` on `AccountUpdateParams.individual`, `AccountCreateParams.individual`, `PersonCreateParams`, `PersonUpdateParams`, `Person`, `TokenCreateParams.account.individual`, and `TokenCreateParams.person`
+
+## 20.76.0 - 2021-09-15
+* [#1263](https://github.com/stripe/stripe-java/pull/1263) API Updates
+  * Add support for `default_for` on `CheckoutSessionCreateParams.payment_method_options.acss_debit.mandate_options`, `Checkout.Session.payment_method_options.acss_debit.mandate_options`, `Mandate.payment_method_details.acss_debit`, `SetupIntentCreateParams.payment_method_options.acss_debit.mandate_options`, `SetupIntentUpdateParams.payment_method_options.acss_debit.mandate_options`, `SetupIntentConfirmParams.payment_method_options.acss_debit.mandate_options`, and `SetupIntent.payment_method_options.acss_debit.mandate_options`
+  * Add support for `acss_debit` on `InvoiceCreateParams.payment_settings.payment_method_options`, `InvoiceUpdateParams.payment_settings.payment_method_options`, `Invoice.payment_settings.payment_method_options`, `SubscriptionCreateParams.payment_settings.payment_method_options`, `SubscriptionUpdateParams.payment_settings.payment_method_options`, and `Subscription.payment_settings.payment_method_options`
+  * Add support for new value `acss_debit` on enums `InvoiceCreateParams.payment_settings.payment_method_types[]`, `InvoiceUpdateParams.payment_settings.payment_method_types[]`, `SubscriptionCreateParams.payment_settings.payment_method_types[]`, and `SubscriptionUpdateParams.payment_settings.payment_method_types[]`
+  * Add support for `livemode` on `Reporting.ReportType`
+
+
 ## 20.75.0 - 2021-09-09
 * [#1259](https://github.com/stripe/stripe-java/pull/1259) Add missing constant for `account_requirement` as a `purpose` on File create and List APIs
 

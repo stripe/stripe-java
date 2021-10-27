@@ -17,7 +17,7 @@ The official [Stripe][stripe] Java client library.
 Add this dependency to your project's build file:
 
 ```groovy
-implementation "com.stripe:stripe-java:20.75.0"
+implementation "com.stripe:stripe-java:20.85.0"
 ```
 
 ### Maven users
@@ -28,7 +28,7 @@ Add this dependency to your project's POM:
 <dependency>
   <groupId>com.stripe</groupId>
   <artifactId>stripe-java</artifactId>
-  <version>20.75.0</version>
+  <version>20.85.0</version>
 </dependency>
 ```
 
@@ -101,7 +101,7 @@ using [Stripe Connect][connect-auth], or if you want to pass the secret API
 key on each method.
 
 ```java
-RequestOptions requestOptions = new RequestOptionsBuilder()
+RequestOptions requestOptions = RequestOptions.builder()
     .setApiKey("sk_test_...")
     .setIdempotencyKey("a1b2c3...")
     .setStripeAccount("acct_...")

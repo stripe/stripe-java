@@ -177,6 +177,17 @@ public class SessionCreateParams extends ApiRequestParams {
   List<PaymentMethodType> paymentMethodTypes;
 
   /**
+   * Controls phone number collection settings for the session.
+   *
+   * <p>We recommend that you review your privacy policy and check with your legal contacts before
+   * using this feature. Learn more about <a
+   * href="https://stripe.com/docs/payments/checkout/phone-numbers">collecting phone numbers with
+   * Checkout</a>.
+   */
+  @SerializedName("phone_number_collection")
+  PhoneNumberCollection phoneNumberCollection;
+
+  /**
    * A subset of parameters to be passed to SetupIntent creation for Checkout Sessions in {@code
    * setup} mode.
    */
@@ -243,6 +254,7 @@ public class SessionCreateParams extends ApiRequestParams {
       PaymentIntentData paymentIntentData,
       PaymentMethodOptions paymentMethodOptions,
       List<PaymentMethodType> paymentMethodTypes,
+      PhoneNumberCollection phoneNumberCollection,
       SetupIntentData setupIntentData,
       ShippingAddressCollection shippingAddressCollection,
       List<String> shippingRates,
@@ -271,6 +283,7 @@ public class SessionCreateParams extends ApiRequestParams {
     this.paymentIntentData = paymentIntentData;
     this.paymentMethodOptions = paymentMethodOptions;
     this.paymentMethodTypes = paymentMethodTypes;
+    this.phoneNumberCollection = phoneNumberCollection;
     this.setupIntentData = setupIntentData;
     this.shippingAddressCollection = shippingAddressCollection;
     this.shippingRates = shippingRates;
@@ -327,6 +340,8 @@ public class SessionCreateParams extends ApiRequestParams {
 
     private List<PaymentMethodType> paymentMethodTypes;
 
+    private PhoneNumberCollection phoneNumberCollection;
+
     private SetupIntentData setupIntentData;
 
     private ShippingAddressCollection shippingAddressCollection;
@@ -365,6 +380,7 @@ public class SessionCreateParams extends ApiRequestParams {
           this.paymentIntentData,
           this.paymentMethodOptions,
           this.paymentMethodTypes,
+          this.phoneNumberCollection,
           this.setupIntentData,
           this.shippingAddressCollection,
           this.shippingRates,
@@ -670,6 +686,19 @@ public class SessionCreateParams extends ApiRequestParams {
     }
 
     /**
+     * Controls phone number collection settings for the session.
+     *
+     * <p>We recommend that you review your privacy policy and check with your legal contacts before
+     * using this feature. Learn more about <a
+     * href="https://stripe.com/docs/payments/checkout/phone-numbers">collecting phone numbers with
+     * Checkout</a>.
+     */
+    public Builder setPhoneNumberCollection(PhoneNumberCollection phoneNumberCollection) {
+      this.phoneNumberCollection = phoneNumberCollection;
+      return this;
+    }
+
+    /**
      * A subset of parameters to be passed to SetupIntent creation for Checkout Sessions in {@code
      * setup} mode.
      */
@@ -828,7 +857,7 @@ public class SessionCreateParams extends ApiRequestParams {
       Boolean allowPromotionCodes;
 
       /**
-       * If {@code true}, a recovery url will be generated to recover this Checkout Session if it
+       * If {@code true}, a recovery URL will be generated to recover this Checkout Session if it
        * expires before a successful transaction is completed. It will be attached to the Checkout
        * Session object upon expiration.
        */
@@ -877,7 +906,7 @@ public class SessionCreateParams extends ApiRequestParams {
         }
 
         /**
-         * If {@code true}, a recovery url will be generated to recover this Checkout Session if it
+         * If {@code true}, a recovery URL will be generated to recover this Checkout Session if it
          * expires before a successful transaction is completed. It will be attached to the Checkout
          * Session object upon expiration.
          */
@@ -3338,6 +3367,13 @@ public class SessionCreateParams extends ApiRequestParams {
         Object customMandateUrl;
 
         /**
+         * List of Stripe products where this mandate can be selected automatically. Only usable in
+         * {@code setup} mode.
+         */
+        @SerializedName("default_for")
+        List<DefaultFor> defaultFor;
+
+        /**
          * Map of extra parameters for custom features not available in this client library. The
          * content in this map is not serialized under this field's {@code @SerializedName} value.
          * Instead, each key/value pair is serialized as if the key is a root-level field
@@ -3364,11 +3400,13 @@ public class SessionCreateParams extends ApiRequestParams {
 
         private MandateOptions(
             Object customMandateUrl,
+            List<DefaultFor> defaultFor,
             Map<String, Object> extraParams,
             String intervalDescription,
             PaymentSchedule paymentSchedule,
             TransactionType transactionType) {
           this.customMandateUrl = customMandateUrl;
+          this.defaultFor = defaultFor;
           this.extraParams = extraParams;
           this.intervalDescription = intervalDescription;
           this.paymentSchedule = paymentSchedule;
@@ -3382,6 +3420,8 @@ public class SessionCreateParams extends ApiRequestParams {
         public static class Builder {
           private Object customMandateUrl;
 
+          private List<DefaultFor> defaultFor;
+
           private Map<String, Object> extraParams;
 
           private String intervalDescription;
@@ -3394,6 +3434,7 @@ public class SessionCreateParams extends ApiRequestParams {
           public MandateOptions build() {
             return new MandateOptions(
                 this.customMandateUrl,
+                this.defaultFor,
                 this.extraParams,
                 this.intervalDescription,
                 this.paymentSchedule,
@@ -3419,6 +3460,34 @@ public class SessionCreateParams extends ApiRequestParams {
            */
           public Builder setCustomMandateUrl(EmptyParam customMandateUrl) {
             this.customMandateUrl = customMandateUrl;
+            return this;
+          }
+
+          /**
+           * Add an element to `defaultFor` list. A list is initialized for the first `add/addAll`
+           * call, and subsequent calls adds additional elements to the original list. See {@link
+           * SessionCreateParams.PaymentMethodOptions.AcssDebit.MandateOptions#defaultFor} for the
+           * field documentation.
+           */
+          public Builder addDefaultFor(DefaultFor element) {
+            if (this.defaultFor == null) {
+              this.defaultFor = new ArrayList<>();
+            }
+            this.defaultFor.add(element);
+            return this;
+          }
+
+          /**
+           * Add all elements to `defaultFor` list. A list is initialized for the first `add/addAll`
+           * call, and subsequent calls adds additional elements to the original list. See {@link
+           * SessionCreateParams.PaymentMethodOptions.AcssDebit.MandateOptions#defaultFor} for the
+           * field documentation.
+           */
+          public Builder addAllDefaultFor(List<DefaultFor> elements) {
+            if (this.defaultFor == null) {
+              this.defaultFor = new ArrayList<>();
+            }
+            this.defaultFor.addAll(elements);
             return this;
           }
 
@@ -3471,6 +3540,21 @@ public class SessionCreateParams extends ApiRequestParams {
           public Builder setTransactionType(TransactionType transactionType) {
             this.transactionType = transactionType;
             return this;
+          }
+        }
+
+        public enum DefaultFor implements ApiRequestParams.EnumParam {
+          @SerializedName("invoice")
+          INVOICE("invoice"),
+
+          @SerializedName("subscription")
+          SUBSCRIPTION("subscription");
+
+          @Getter(onMethod_ = {@Override})
+          private final String value;
+
+          DefaultFor(String value) {
+            this.value = value;
           }
         }
 
@@ -3796,6 +3880,75 @@ public class SessionCreateParams extends ApiRequestParams {
         Client(String value) {
           this.value = value;
         }
+      }
+    }
+  }
+
+  @Getter
+  public static class PhoneNumberCollection {
+    /** Set to {@code true} to enable phone number collection. */
+    @SerializedName("enabled")
+    Boolean enabled;
+
+    /**
+     * Map of extra parameters for custom features not available in this client library. The content
+     * in this map is not serialized under this field's {@code @SerializedName} value. Instead, each
+     * key/value pair is serialized as if the key is a root-level field (serialized) name in this
+     * param object. Effectively, this map is flattened to its parent instance.
+     */
+    @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
+    Map<String, Object> extraParams;
+
+    private PhoneNumberCollection(Boolean enabled, Map<String, Object> extraParams) {
+      this.enabled = enabled;
+      this.extraParams = extraParams;
+    }
+
+    public static Builder builder() {
+      return new Builder();
+    }
+
+    public static class Builder {
+      private Boolean enabled;
+
+      private Map<String, Object> extraParams;
+
+      /** Finalize and obtain parameter instance from this builder. */
+      public PhoneNumberCollection build() {
+        return new PhoneNumberCollection(this.enabled, this.extraParams);
+      }
+
+      /** Set to {@code true} to enable phone number collection. */
+      public Builder setEnabled(Boolean enabled) {
+        this.enabled = enabled;
+        return this;
+      }
+
+      /**
+       * Add a key/value pair to `extraParams` map. A map is initialized for the first `put/putAll`
+       * call, and subsequent calls add additional key/value pairs to the original map. See {@link
+       * SessionCreateParams.PhoneNumberCollection#extraParams} for the field documentation.
+       */
+      public Builder putExtraParam(String key, Object value) {
+        if (this.extraParams == null) {
+          this.extraParams = new HashMap<>();
+        }
+        this.extraParams.put(key, value);
+        return this;
+      }
+
+      /**
+       * Add all map key/value pairs to `extraParams` map. A map is initialized for the first
+       * `put/putAll` call, and subsequent calls add additional key/value pairs to the original map.
+       * See {@link SessionCreateParams.PhoneNumberCollection#extraParams} for the field
+       * documentation.
+       */
+      public Builder putAllExtraParam(Map<String, Object> map) {
+        if (this.extraParams == null) {
+          this.extraParams = new HashMap<>();
+        }
+        this.extraParams.putAll(map);
+        return this;
       }
     }
   }
@@ -5538,6 +5691,9 @@ public class SessionCreateParams extends ApiRequestParams {
 
     @SerializedName("ideal")
     IDEAL("ideal"),
+
+    @SerializedName("klarna")
+    KLARNA("klarna"),
 
     @SerializedName("oxxo")
     OXXO("oxxo"),

@@ -802,6 +802,13 @@ public class Subscription extends ApiResource implements HasId, MetadataStore<Su
   @EqualsAndHashCode(callSuper = false)
   public static class PaymentMethodOptions extends StripeObject {
     /**
+     * This sub-hash contains details about the Canadian pre-authorized debit payment method options
+     * to pass to invoices created by the subscription.
+     */
+    @SerializedName("acss_debit")
+    AcssDebit acssDebit;
+
+    /**
      * This sub-hash contains details about the Bancontact payment method options to pass to
      * invoices created by the subscription.
      */
@@ -814,6 +821,35 @@ public class Subscription extends ApiResource implements HasId, MetadataStore<Su
      */
     @SerializedName("card")
     Card card;
+
+    @Getter
+    @Setter
+    @EqualsAndHashCode(callSuper = false)
+    public static class AcssDebit extends StripeObject {
+      @SerializedName("mandate_options")
+      MandateOptions mandateOptions;
+
+      /**
+       * Bank account verification method.
+       *
+       * <p>One of {@code automatic}, {@code instant}, or {@code microdeposits}.
+       */
+      @SerializedName("verification_method")
+      String verificationMethod;
+
+      @Getter
+      @Setter
+      @EqualsAndHashCode(callSuper = false)
+      public static class MandateOptions extends StripeObject {
+        /**
+         * Transaction type of the mandate.
+         *
+         * <p>One of {@code business}, or {@code personal}.
+         */
+        @SerializedName("transaction_type")
+        String transactionType;
+      }
+    }
 
     @Getter
     @Setter

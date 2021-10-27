@@ -67,7 +67,7 @@ public class AccountCreateParams extends ApiRequestParams {
 
   /**
    * The email address of the account holder. This is only to make the account easier to identify to
-   * you. Stripe will never directly email Custom accounts.
+   * you. Stripe only emails Custom accounts with your consent.
    */
   @SerializedName("email")
   String email;
@@ -309,7 +309,7 @@ public class AccountCreateParams extends ApiRequestParams {
 
     /**
      * The email address of the account holder. This is only to make the account easier to identify
-     * to you. Stripe will never directly email Custom accounts.
+     * to you. Stripe only emails Custom accounts with your consent.
      */
     public Builder setEmail(String email) {
       this.email = email;
@@ -893,6 +893,10 @@ public class AccountCreateParams extends ApiRequestParams {
     @SerializedName("jcb_payments")
     JcbPayments jcbPayments;
 
+    /** The klarna_payments capability. */
+    @SerializedName("klarna_payments")
+    KlarnaPayments klarnaPayments;
+
     /** The legacy_payments capability. */
     @SerializedName("legacy_payments")
     LegacyPayments legacyPayments;
@@ -942,6 +946,7 @@ public class AccountCreateParams extends ApiRequestParams {
         GrabpayPayments grabpayPayments,
         IdealPayments idealPayments,
         JcbPayments jcbPayments,
+        KlarnaPayments klarnaPayments,
         LegacyPayments legacyPayments,
         OxxoPayments oxxoPayments,
         P24Payments p24Payments,
@@ -966,6 +971,7 @@ public class AccountCreateParams extends ApiRequestParams {
       this.grabpayPayments = grabpayPayments;
       this.idealPayments = idealPayments;
       this.jcbPayments = jcbPayments;
+      this.klarnaPayments = klarnaPayments;
       this.legacyPayments = legacyPayments;
       this.oxxoPayments = oxxoPayments;
       this.p24Payments = p24Payments;
@@ -1013,6 +1019,8 @@ public class AccountCreateParams extends ApiRequestParams {
 
       private JcbPayments jcbPayments;
 
+      private KlarnaPayments klarnaPayments;
+
       private LegacyPayments legacyPayments;
 
       private OxxoPayments oxxoPayments;
@@ -1048,6 +1056,7 @@ public class AccountCreateParams extends ApiRequestParams {
             this.grabpayPayments,
             this.idealPayments,
             this.jcbPayments,
+            this.klarnaPayments,
             this.legacyPayments,
             this.oxxoPayments,
             this.p24Payments,
@@ -1172,6 +1181,12 @@ public class AccountCreateParams extends ApiRequestParams {
       /** The jcb_payments capability. */
       public Builder setJcbPayments(JcbPayments jcbPayments) {
         this.jcbPayments = jcbPayments;
+        return this;
+      }
+
+      /** The klarna_payments capability. */
+      public Builder setKlarnaPayments(KlarnaPayments klarnaPayments) {
+        this.klarnaPayments = klarnaPayments;
         return this;
       }
 
@@ -2373,6 +2388,84 @@ public class AccountCreateParams extends ApiRequestParams {
          * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
          * map. See {@link AccountCreateParams.Capabilities.JcbPayments#extraParams} for the field
          * documentation.
+         */
+        public Builder putAllExtraParam(Map<String, Object> map) {
+          if (this.extraParams == null) {
+            this.extraParams = new HashMap<>();
+          }
+          this.extraParams.putAll(map);
+          return this;
+        }
+
+        /**
+         * Passing true requests the capability for the account, if it is not already requested. A
+         * requested capability may not immediately become active. Any requirements to activate the
+         * capability are returned in the {@code requirements} arrays.
+         */
+        public Builder setRequested(Boolean requested) {
+          this.requested = requested;
+          return this;
+        }
+      }
+    }
+
+    @Getter
+    public static class KlarnaPayments {
+      /**
+       * Map of extra parameters for custom features not available in this client library. The
+       * content in this map is not serialized under this field's {@code @SerializedName} value.
+       * Instead, each key/value pair is serialized as if the key is a root-level field (serialized)
+       * name in this param object. Effectively, this map is flattened to its parent instance.
+       */
+      @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
+      Map<String, Object> extraParams;
+
+      /**
+       * Passing true requests the capability for the account, if it is not already requested. A
+       * requested capability may not immediately become active. Any requirements to activate the
+       * capability are returned in the {@code requirements} arrays.
+       */
+      @SerializedName("requested")
+      Boolean requested;
+
+      private KlarnaPayments(Map<String, Object> extraParams, Boolean requested) {
+        this.extraParams = extraParams;
+        this.requested = requested;
+      }
+
+      public static Builder builder() {
+        return new Builder();
+      }
+
+      public static class Builder {
+        private Map<String, Object> extraParams;
+
+        private Boolean requested;
+
+        /** Finalize and obtain parameter instance from this builder. */
+        public KlarnaPayments build() {
+          return new KlarnaPayments(this.extraParams, this.requested);
+        }
+
+        /**
+         * Add a key/value pair to `extraParams` map. A map is initialized for the first
+         * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
+         * map. See {@link AccountCreateParams.Capabilities.KlarnaPayments#extraParams} for the
+         * field documentation.
+         */
+        public Builder putExtraParam(String key, Object value) {
+          if (this.extraParams == null) {
+            this.extraParams = new HashMap<>();
+          }
+          this.extraParams.put(key, value);
+          return this;
+        }
+
+        /**
+         * Add all map key/value pairs to `extraParams` map. A map is initialized for the first
+         * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
+         * map. See {@link AccountCreateParams.Capabilities.KlarnaPayments#extraParams} for the
+         * field documentation.
          */
         public Builder putAllExtraParam(Map<String, Object> map) {
           if (this.extraParams == null) {
@@ -4925,6 +5018,10 @@ public class AccountCreateParams extends ApiRequestParams {
     @SerializedName("first_name_kanji")
     String firstNameKanji;
 
+    /** A list of alternate names or aliases that the individual is known by. */
+    @SerializedName("full_name_aliases")
+    List<String> fullNameAliases;
+
     /**
      * The individual's gender (International regulations require either &quot;male&quot; or
      * &quot;female&quot;).
@@ -4997,6 +5094,7 @@ public class AccountCreateParams extends ApiRequestParams {
         String firstName,
         String firstNameKana,
         String firstNameKanji,
+        List<String> fullNameAliases,
         String gender,
         String idNumber,
         String lastName,
@@ -5017,6 +5115,7 @@ public class AccountCreateParams extends ApiRequestParams {
       this.firstName = firstName;
       this.firstNameKana = firstNameKana;
       this.firstNameKanji = firstNameKanji;
+      this.fullNameAliases = fullNameAliases;
       this.gender = gender;
       this.idNumber = idNumber;
       this.lastName = lastName;
@@ -5053,6 +5152,8 @@ public class AccountCreateParams extends ApiRequestParams {
 
       private String firstNameKanji;
 
+      private List<String> fullNameAliases;
+
       private String gender;
 
       private String idNumber;
@@ -5087,6 +5188,7 @@ public class AccountCreateParams extends ApiRequestParams {
             this.firstName,
             this.firstNameKana,
             this.firstNameKanji,
+            this.fullNameAliases,
             this.gender,
             this.idNumber,
             this.lastName,
@@ -5177,6 +5279,32 @@ public class AccountCreateParams extends ApiRequestParams {
       /** The Kanji variation of the individual's first name (Japan only). */
       public Builder setFirstNameKanji(String firstNameKanji) {
         this.firstNameKanji = firstNameKanji;
+        return this;
+      }
+
+      /**
+       * Add an element to `fullNameAliases` list. A list is initialized for the first `add/addAll`
+       * call, and subsequent calls adds additional elements to the original list. See {@link
+       * AccountCreateParams.Individual#fullNameAliases} for the field documentation.
+       */
+      public Builder addFullNameAliase(String element) {
+        if (this.fullNameAliases == null) {
+          this.fullNameAliases = new ArrayList<>();
+        }
+        this.fullNameAliases.add(element);
+        return this;
+      }
+
+      /**
+       * Add all elements to `fullNameAliases` list. A list is initialized for the first
+       * `add/addAll` call, and subsequent calls adds additional elements to the original list. See
+       * {@link AccountCreateParams.Individual#fullNameAliases} for the field documentation.
+       */
+      public Builder addAllFullNameAliase(List<String> elements) {
+        if (this.fullNameAliases == null) {
+          this.fullNameAliases = new ArrayList<>();
+        }
+        this.fullNameAliases.addAll(elements);
         return this;
       }
 

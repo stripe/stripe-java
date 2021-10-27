@@ -763,6 +763,15 @@ public class Account extends ApiResource implements MetadataStore<Account>, Paym
     String jcbPayments;
 
     /**
+     * The status of the Klarna payments capability of the account, or whether the account can
+     * directly process Klarna charges.
+     *
+     * <p>One of {@code active}, {@code inactive}, or {@code pending}.
+     */
+    @SerializedName("klarna_payments")
+    String klarnaPayments;
+
+    /**
      * The status of the legacy payments capability of the account.
      *
      * <p>One of {@code active}, {@code inactive}, or {@code pending}.
@@ -1572,8 +1581,8 @@ public class Account extends ApiResource implements MetadataStore<Account>, Paym
     /**
      * A Boolean indicating if Stripe should try to reclaim negative balances from an attached bank
      * account. See our <a href="https://stripe.com/docs/connect/account-balances">Understanding
-     * Connect Account Balances</a> documentation for details. Default value is {@code true} for
-     * Express accounts and {@code false} for Custom accounts.
+     * Connect Account Balances</a> documentation for details. Default value is {@code false} for
+     * Custom accounts, otherwise {@code true}.
      */
     @SerializedName("debit_negative_balances")
     Boolean debitNegativeBalances;
