@@ -892,7 +892,7 @@ public class Account extends ApiResource implements MetadataStore<Account>, Paym
      * current and correct.
      */
     @SerializedName("ownership_declaration")
-    UBODeclaration ownershipDeclaration;
+    OwnershipDeclaration ownershipDeclaration;
 
     /**
      * Whether the company's owners have been provided. This Boolean will be {@code true} if you've
@@ -948,7 +948,7 @@ public class Account extends ApiResource implements MetadataStore<Account>, Paym
     @Getter
     @Setter
     @EqualsAndHashCode(callSuper = false)
-    public static class UBODeclaration extends StripeObject {
+    public static class OwnershipDeclaration extends StripeObject {
       /** The Unix timestamp marking when the beneficial owner attestation was made. */
       @SerializedName("date")
       Long date;
