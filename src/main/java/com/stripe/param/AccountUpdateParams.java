@@ -3260,6 +3260,13 @@ public class AccountUpdateParams extends ApiRequestParams {
     @SerializedName("owners_provided")
     Boolean ownersProvided;
 
+    /**
+     * This hash is used to attest that the beneficial owner information provided to Stripe is both
+     * current and correct.
+     */
+    @SerializedName("ownership_declaration")
+    OwnershipDeclaration ownershipDeclaration;
+
     /** The company's phone number (used for verification). */
     @SerializedName("phone")
     Object phone;
@@ -3314,6 +3321,7 @@ public class AccountUpdateParams extends ApiRequestParams {
         Object nameKana,
         Object nameKanji,
         Boolean ownersProvided,
+        OwnershipDeclaration ownershipDeclaration,
         Object phone,
         Object registrationNumber,
         EnumParam structure,
@@ -3331,6 +3339,7 @@ public class AccountUpdateParams extends ApiRequestParams {
       this.nameKana = nameKana;
       this.nameKanji = nameKanji;
       this.ownersProvided = ownersProvided;
+      this.ownershipDeclaration = ownershipDeclaration;
       this.phone = phone;
       this.registrationNumber = registrationNumber;
       this.structure = structure;
@@ -3365,6 +3374,8 @@ public class AccountUpdateParams extends ApiRequestParams {
 
       private Boolean ownersProvided;
 
+      private OwnershipDeclaration ownershipDeclaration;
+
       private Object phone;
 
       private Object registrationNumber;
@@ -3392,6 +3403,7 @@ public class AccountUpdateParams extends ApiRequestParams {
             this.nameKana,
             this.nameKanji,
             this.ownersProvided,
+            this.ownershipDeclaration,
             this.phone,
             this.registrationNumber,
             this.structure,
@@ -3511,6 +3523,15 @@ public class AccountUpdateParams extends ApiRequestParams {
        */
       public Builder setOwnersProvided(Boolean ownersProvided) {
         this.ownersProvided = ownersProvided;
+        return this;
+      }
+
+      /**
+       * This hash is used to attest that the beneficial owner information provided to Stripe is
+       * both current and correct.
+       */
+      public Builder setOwnershipDeclaration(OwnershipDeclaration ownershipDeclaration) {
+        this.ownershipDeclaration = ownershipDeclaration;
         return this;
       }
 
@@ -4248,6 +4269,115 @@ public class AccountUpdateParams extends ApiRequestParams {
     }
 
     @Getter
+    public static class OwnershipDeclaration {
+      /** The Unix timestamp marking when the beneficial owner attestation was made. */
+      @SerializedName("date")
+      Long date;
+
+      /**
+       * Map of extra parameters for custom features not available in this client library. The
+       * content in this map is not serialized under this field's {@code @SerializedName} value.
+       * Instead, each key/value pair is serialized as if the key is a root-level field (serialized)
+       * name in this param object. Effectively, this map is flattened to its parent instance.
+       */
+      @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
+      Map<String, Object> extraParams;
+
+      /** The IP address from which the beneficial owner attestation was made. */
+      @SerializedName("ip")
+      Object ip;
+
+      /** The user agent of the browser from which the beneficial owner attestation was made. */
+      @SerializedName("user_agent")
+      Object userAgent;
+
+      private OwnershipDeclaration(
+          Long date, Map<String, Object> extraParams, Object ip, Object userAgent) {
+        this.date = date;
+        this.extraParams = extraParams;
+        this.ip = ip;
+        this.userAgent = userAgent;
+      }
+
+      public static Builder builder() {
+        return new Builder();
+      }
+
+      public static class Builder {
+        private Long date;
+
+        private Map<String, Object> extraParams;
+
+        private Object ip;
+
+        private Object userAgent;
+
+        /** Finalize and obtain parameter instance from this builder. */
+        public OwnershipDeclaration build() {
+          return new OwnershipDeclaration(this.date, this.extraParams, this.ip, this.userAgent);
+        }
+
+        /** The Unix timestamp marking when the beneficial owner attestation was made. */
+        public Builder setDate(Long date) {
+          this.date = date;
+          return this;
+        }
+
+        /**
+         * Add a key/value pair to `extraParams` map. A map is initialized for the first
+         * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
+         * map. See {@link AccountUpdateParams.Company.OwnershipDeclaration#extraParams} for the
+         * field documentation.
+         */
+        public Builder putExtraParam(String key, Object value) {
+          if (this.extraParams == null) {
+            this.extraParams = new HashMap<>();
+          }
+          this.extraParams.put(key, value);
+          return this;
+        }
+
+        /**
+         * Add all map key/value pairs to `extraParams` map. A map is initialized for the first
+         * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
+         * map. See {@link AccountUpdateParams.Company.OwnershipDeclaration#extraParams} for the
+         * field documentation.
+         */
+        public Builder putAllExtraParam(Map<String, Object> map) {
+          if (this.extraParams == null) {
+            this.extraParams = new HashMap<>();
+          }
+          this.extraParams.putAll(map);
+          return this;
+        }
+
+        /** The IP address from which the beneficial owner attestation was made. */
+        public Builder setIp(String ip) {
+          this.ip = ip;
+          return this;
+        }
+
+        /** The IP address from which the beneficial owner attestation was made. */
+        public Builder setIp(EmptyParam ip) {
+          this.ip = ip;
+          return this;
+        }
+
+        /** The user agent of the browser from which the beneficial owner attestation was made. */
+        public Builder setUserAgent(String userAgent) {
+          this.userAgent = userAgent;
+          return this;
+        }
+
+        /** The user agent of the browser from which the beneficial owner attestation was made. */
+        public Builder setUserAgent(EmptyParam userAgent) {
+          this.userAgent = userAgent;
+          return this;
+        }
+      }
+    }
+
+    @Getter
     public static class Verification {
       /** A document verifying the business. */
       @SerializedName("document")
@@ -4566,6 +4696,13 @@ public class AccountUpdateParams extends ApiRequestParams {
     @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
     Map<String, Object> extraParams;
 
+    /**
+     * One or more documents showing the company’s proof of registration with the national business
+     * registry.
+     */
+    @SerializedName("proof_of_registration")
+    ProofOfRegistration proofOfRegistration;
+
     private Documents(
         BankAccountOwnershipVerification bankAccountOwnershipVerification,
         CompanyLicense companyLicense,
@@ -4573,7 +4710,8 @@ public class AccountUpdateParams extends ApiRequestParams {
         CompanyMinisterialDecree companyMinisterialDecree,
         CompanyRegistrationVerification companyRegistrationVerification,
         CompanyTaxIdVerification companyTaxIdVerification,
-        Map<String, Object> extraParams) {
+        Map<String, Object> extraParams,
+        ProofOfRegistration proofOfRegistration) {
       this.bankAccountOwnershipVerification = bankAccountOwnershipVerification;
       this.companyLicense = companyLicense;
       this.companyMemorandumOfAssociation = companyMemorandumOfAssociation;
@@ -4581,6 +4719,7 @@ public class AccountUpdateParams extends ApiRequestParams {
       this.companyRegistrationVerification = companyRegistrationVerification;
       this.companyTaxIdVerification = companyTaxIdVerification;
       this.extraParams = extraParams;
+      this.proofOfRegistration = proofOfRegistration;
     }
 
     public static Builder builder() {
@@ -4602,6 +4741,8 @@ public class AccountUpdateParams extends ApiRequestParams {
 
       private Map<String, Object> extraParams;
 
+      private ProofOfRegistration proofOfRegistration;
+
       /** Finalize and obtain parameter instance from this builder. */
       public Documents build() {
         return new Documents(
@@ -4611,7 +4752,8 @@ public class AccountUpdateParams extends ApiRequestParams {
             this.companyMinisterialDecree,
             this.companyRegistrationVerification,
             this.companyTaxIdVerification,
-            this.extraParams);
+            this.extraParams,
+            this.proofOfRegistration);
       }
 
       /**
@@ -4690,6 +4832,15 @@ public class AccountUpdateParams extends ApiRequestParams {
           this.extraParams = new HashMap<>();
         }
         this.extraParams.putAll(map);
+        return this;
+      }
+
+      /**
+       * One or more documents showing the company’s proof of registration with the national
+       * business registry.
+       */
+      public Builder setProofOfRegistration(ProofOfRegistration proofOfRegistration) {
+        this.proofOfRegistration = proofOfRegistration;
         return this;
       }
     }
@@ -5272,6 +5423,100 @@ public class AccountUpdateParams extends ApiRequestParams {
         }
       }
     }
+
+    @Getter
+    public static class ProofOfRegistration {
+      /**
+       * Map of extra parameters for custom features not available in this client library. The
+       * content in this map is not serialized under this field's {@code @SerializedName} value.
+       * Instead, each key/value pair is serialized as if the key is a root-level field (serialized)
+       * name in this param object. Effectively, this map is flattened to its parent instance.
+       */
+      @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
+      Map<String, Object> extraParams;
+
+      /**
+       * One or more document ids returned by a <a
+       * href="https://stripe.com/docs/api#create_file">file upload</a> with a {@code purpose} value
+       * of {@code account_requirement}.
+       */
+      @SerializedName("files")
+      List<String> files;
+
+      private ProofOfRegistration(Map<String, Object> extraParams, List<String> files) {
+        this.extraParams = extraParams;
+        this.files = files;
+      }
+
+      public static Builder builder() {
+        return new Builder();
+      }
+
+      public static class Builder {
+        private Map<String, Object> extraParams;
+
+        private List<String> files;
+
+        /** Finalize and obtain parameter instance from this builder. */
+        public ProofOfRegistration build() {
+          return new ProofOfRegistration(this.extraParams, this.files);
+        }
+
+        /**
+         * Add a key/value pair to `extraParams` map. A map is initialized for the first
+         * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
+         * map. See {@link AccountUpdateParams.Documents.ProofOfRegistration#extraParams} for the
+         * field documentation.
+         */
+        public Builder putExtraParam(String key, Object value) {
+          if (this.extraParams == null) {
+            this.extraParams = new HashMap<>();
+          }
+          this.extraParams.put(key, value);
+          return this;
+        }
+
+        /**
+         * Add all map key/value pairs to `extraParams` map. A map is initialized for the first
+         * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
+         * map. See {@link AccountUpdateParams.Documents.ProofOfRegistration#extraParams} for the
+         * field documentation.
+         */
+        public Builder putAllExtraParam(Map<String, Object> map) {
+          if (this.extraParams == null) {
+            this.extraParams = new HashMap<>();
+          }
+          this.extraParams.putAll(map);
+          return this;
+        }
+
+        /**
+         * Add an element to `files` list. A list is initialized for the first `add/addAll` call,
+         * and subsequent calls adds additional elements to the original list. See {@link
+         * AccountUpdateParams.Documents.ProofOfRegistration#files} for the field documentation.
+         */
+        public Builder addFile(String element) {
+          if (this.files == null) {
+            this.files = new ArrayList<>();
+          }
+          this.files.add(element);
+          return this;
+        }
+
+        /**
+         * Add all elements to `files` list. A list is initialized for the first `add/addAll` call,
+         * and subsequent calls adds additional elements to the original list. See {@link
+         * AccountUpdateParams.Documents.ProofOfRegistration#files} for the field documentation.
+         */
+        public Builder addAllFile(List<String> elements) {
+          if (this.files == null) {
+            this.files = new ArrayList<>();
+          }
+          this.files.addAll(elements);
+          return this;
+        }
+      }
+    }
   }
 
   @Getter
@@ -5319,7 +5564,7 @@ public class AccountUpdateParams extends ApiRequestParams {
 
     /** A list of alternate names or aliases that the individual is known by. */
     @SerializedName("full_name_aliases")
-    List<String> fullNameAliases;
+    Object fullNameAliases;
 
     /**
      * The individual's gender (International regulations require either &quot;male&quot; or
@@ -5393,7 +5638,7 @@ public class AccountUpdateParams extends ApiRequestParams {
         Object firstName,
         Object firstNameKana,
         Object firstNameKanji,
-        List<String> fullNameAliases,
+        Object fullNameAliases,
         Object gender,
         Object idNumber,
         Object lastName,
@@ -5451,7 +5696,7 @@ public class AccountUpdateParams extends ApiRequestParams {
 
       private Object firstNameKanji;
 
-      private List<String> fullNameAliases;
+      private Object fullNameAliases;
 
       private Object gender;
 
@@ -5610,11 +5855,12 @@ public class AccountUpdateParams extends ApiRequestParams {
        * call, and subsequent calls adds additional elements to the original list. See {@link
        * AccountUpdateParams.Individual#fullNameAliases} for the field documentation.
        */
+      @SuppressWarnings("unchecked")
       public Builder addFullNameAliase(String element) {
-        if (this.fullNameAliases == null) {
-          this.fullNameAliases = new ArrayList<>();
+        if (this.fullNameAliases == null || this.fullNameAliases instanceof EmptyParam) {
+          this.fullNameAliases = new ArrayList<String>();
         }
-        this.fullNameAliases.add(element);
+        ((List<String>) this.fullNameAliases).add(element);
         return this;
       }
 
@@ -5623,11 +5869,24 @@ public class AccountUpdateParams extends ApiRequestParams {
        * `add/addAll` call, and subsequent calls adds additional elements to the original list. See
        * {@link AccountUpdateParams.Individual#fullNameAliases} for the field documentation.
        */
+      @SuppressWarnings("unchecked")
       public Builder addAllFullNameAliase(List<String> elements) {
-        if (this.fullNameAliases == null) {
-          this.fullNameAliases = new ArrayList<>();
+        if (this.fullNameAliases == null || this.fullNameAliases instanceof EmptyParam) {
+          this.fullNameAliases = new ArrayList<String>();
         }
-        this.fullNameAliases.addAll(elements);
+        ((List<String>) this.fullNameAliases).addAll(elements);
+        return this;
+      }
+
+      /** A list of alternate names or aliases that the individual is known by. */
+      public Builder setFullNameAliases(EmptyParam fullNameAliases) {
+        this.fullNameAliases = fullNameAliases;
+        return this;
+      }
+
+      /** A list of alternate names or aliases that the individual is known by. */
+      public Builder setFullNameAliases(List<String> fullNameAliases) {
+        this.fullNameAliases = fullNameAliases;
         return this;
       }
 

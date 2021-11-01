@@ -888,6 +888,13 @@ public class Account extends ApiResource implements MetadataStore<Account>, Paym
     String nameKanji;
 
     /**
+     * This hash is used to attest that the beneficial owner information provided to Stripe is both
+     * current and correct.
+     */
+    @SerializedName("ownership_declaration")
+    OwnershipDeclaration ownershipDeclaration;
+
+    /**
      * Whether the company's owners have been provided. This Boolean will be {@code true} if you've
      * manually indicated that all owners are provided via <a
      * href="https://stripe.com/docs/api/accounts/update#update_account-company-owners_provided">the
@@ -937,6 +944,23 @@ public class Account extends ApiResource implements MetadataStore<Account>, Paym
     /** Information on the verification state of the company. */
     @SerializedName("verification")
     Verification verification;
+
+    @Getter
+    @Setter
+    @EqualsAndHashCode(callSuper = false)
+    public static class OwnershipDeclaration extends StripeObject {
+      /** The Unix timestamp marking when the beneficial owner attestation was made. */
+      @SerializedName("date")
+      Long date;
+
+      /** The IP address from which the beneficial owner attestation was made. */
+      @SerializedName("ip")
+      String ip;
+
+      /** The user-agent string from the browser where the beneficial owner attestation was made. */
+      @SerializedName("user_agent")
+      String userAgent;
+    }
 
     @Getter
     @Setter

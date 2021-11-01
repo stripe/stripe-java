@@ -248,6 +248,13 @@ public class TokenCreateParams extends ApiRequestParams {
     Individual individual;
 
     /**
+     * Whether the user described by the data in the token has been shown the Ownership Declaration
+     * and indicated that it is correct.
+     */
+    @SerializedName("ownership_declaration_shown_and_signed")
+    Boolean ownershipDeclarationShownAndSigned;
+
+    /**
      * Whether the user described by the data in the token has been shown <a
      * href="https://stripe.com/docs/connect/account-tokens#stripe-connected-account-agreement">the
      * Stripe Connected Account Agreement</a>. When creating an account token to create a new
@@ -261,11 +268,13 @@ public class TokenCreateParams extends ApiRequestParams {
         Company company,
         Map<String, Object> extraParams,
         Individual individual,
+        Boolean ownershipDeclarationShownAndSigned,
         Boolean tosShownAndAccepted) {
       this.businessType = businessType;
       this.company = company;
       this.extraParams = extraParams;
       this.individual = individual;
+      this.ownershipDeclarationShownAndSigned = ownershipDeclarationShownAndSigned;
       this.tosShownAndAccepted = tosShownAndAccepted;
     }
 
@@ -282,6 +291,8 @@ public class TokenCreateParams extends ApiRequestParams {
 
       private Individual individual;
 
+      private Boolean ownershipDeclarationShownAndSigned;
+
       private Boolean tosShownAndAccepted;
 
       /** Finalize and obtain parameter instance from this builder. */
@@ -291,6 +302,7 @@ public class TokenCreateParams extends ApiRequestParams {
             this.company,
             this.extraParams,
             this.individual,
+            this.ownershipDeclarationShownAndSigned,
             this.tosShownAndAccepted);
       }
 
@@ -335,6 +347,16 @@ public class TokenCreateParams extends ApiRequestParams {
       /** Information about the person represented by the account. */
       public Builder setIndividual(Individual individual) {
         this.individual = individual;
+        return this;
+      }
+
+      /**
+       * Whether the user described by the data in the token has been shown the Ownership
+       * Declaration and indicated that it is correct.
+       */
+      public Builder setOwnershipDeclarationShownAndSigned(
+          Boolean ownershipDeclarationShownAndSigned) {
+        this.ownershipDeclarationShownAndSigned = ownershipDeclarationShownAndSigned;
         return this;
       }
 
@@ -412,6 +434,13 @@ public class TokenCreateParams extends ApiRequestParams {
       @SerializedName("owners_provided")
       Boolean ownersProvided;
 
+      /**
+       * This hash is used to attest that the beneficial owner information provided to Stripe is
+       * both current and correct.
+       */
+      @SerializedName("ownership_declaration")
+      OwnershipDeclaration ownershipDeclaration;
+
       /** The company's phone number (used for verification). */
       @SerializedName("phone")
       String phone;
@@ -466,6 +495,7 @@ public class TokenCreateParams extends ApiRequestParams {
           String nameKana,
           String nameKanji,
           Boolean ownersProvided,
+          OwnershipDeclaration ownershipDeclaration,
           String phone,
           String registrationNumber,
           EnumParam structure,
@@ -483,6 +513,7 @@ public class TokenCreateParams extends ApiRequestParams {
         this.nameKana = nameKana;
         this.nameKanji = nameKanji;
         this.ownersProvided = ownersProvided;
+        this.ownershipDeclaration = ownershipDeclaration;
         this.phone = phone;
         this.registrationNumber = registrationNumber;
         this.structure = structure;
@@ -517,6 +548,8 @@ public class TokenCreateParams extends ApiRequestParams {
 
         private Boolean ownersProvided;
 
+        private OwnershipDeclaration ownershipDeclaration;
+
         private String phone;
 
         private String registrationNumber;
@@ -544,6 +577,7 @@ public class TokenCreateParams extends ApiRequestParams {
               this.nameKana,
               this.nameKanji,
               this.ownersProvided,
+              this.ownershipDeclaration,
               this.phone,
               this.registrationNumber,
               this.structure,
@@ -648,6 +682,15 @@ public class TokenCreateParams extends ApiRequestParams {
          */
         public Builder setOwnersProvided(Boolean ownersProvided) {
           this.ownersProvided = ownersProvided;
+          return this;
+        }
+
+        /**
+         * This hash is used to attest that the beneficial owner information provided to Stripe is
+         * both current and correct.
+         */
+        public Builder setOwnershipDeclaration(OwnershipDeclaration ownershipDeclaration) {
+          this.ownershipDeclaration = ownershipDeclaration;
           return this;
         }
 
@@ -1219,6 +1262,104 @@ public class TokenCreateParams extends ApiRequestParams {
       }
 
       @Getter
+      public static class OwnershipDeclaration {
+        /** The Unix timestamp marking when the beneficial owner attestation was made. */
+        @SerializedName("date")
+        Long date;
+
+        /**
+         * Map of extra parameters for custom features not available in this client library. The
+         * content in this map is not serialized under this field's {@code @SerializedName} value.
+         * Instead, each key/value pair is serialized as if the key is a root-level field
+         * (serialized) name in this param object. Effectively, this map is flattened to its parent
+         * instance.
+         */
+        @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
+        Map<String, Object> extraParams;
+
+        /** The IP address from which the beneficial owner attestation was made. */
+        @SerializedName("ip")
+        String ip;
+
+        /** The user agent of the browser from which the beneficial owner attestation was made. */
+        @SerializedName("user_agent")
+        String userAgent;
+
+        private OwnershipDeclaration(
+            Long date, Map<String, Object> extraParams, String ip, String userAgent) {
+          this.date = date;
+          this.extraParams = extraParams;
+          this.ip = ip;
+          this.userAgent = userAgent;
+        }
+
+        public static Builder builder() {
+          return new Builder();
+        }
+
+        public static class Builder {
+          private Long date;
+
+          private Map<String, Object> extraParams;
+
+          private String ip;
+
+          private String userAgent;
+
+          /** Finalize and obtain parameter instance from this builder. */
+          public OwnershipDeclaration build() {
+            return new OwnershipDeclaration(this.date, this.extraParams, this.ip, this.userAgent);
+          }
+
+          /** The Unix timestamp marking when the beneficial owner attestation was made. */
+          public Builder setDate(Long date) {
+            this.date = date;
+            return this;
+          }
+
+          /**
+           * Add a key/value pair to `extraParams` map. A map is initialized for the first
+           * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
+           * map. See {@link TokenCreateParams.Account.Company.OwnershipDeclaration#extraParams} for
+           * the field documentation.
+           */
+          public Builder putExtraParam(String key, Object value) {
+            if (this.extraParams == null) {
+              this.extraParams = new HashMap<>();
+            }
+            this.extraParams.put(key, value);
+            return this;
+          }
+
+          /**
+           * Add all map key/value pairs to `extraParams` map. A map is initialized for the first
+           * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
+           * map. See {@link TokenCreateParams.Account.Company.OwnershipDeclaration#extraParams} for
+           * the field documentation.
+           */
+          public Builder putAllExtraParam(Map<String, Object> map) {
+            if (this.extraParams == null) {
+              this.extraParams = new HashMap<>();
+            }
+            this.extraParams.putAll(map);
+            return this;
+          }
+
+          /** The IP address from which the beneficial owner attestation was made. */
+          public Builder setIp(String ip) {
+            this.ip = ip;
+            return this;
+          }
+
+          /** The user agent of the browser from which the beneficial owner attestation was made. */
+          public Builder setUserAgent(String userAgent) {
+            this.userAgent = userAgent;
+            return this;
+          }
+        }
+      }
+
+      @Getter
       public static class Verification {
         /** A document verifying the business. */
         @SerializedName("document")
@@ -1514,7 +1655,7 @@ public class TokenCreateParams extends ApiRequestParams {
 
       /** A list of alternate names or aliases that the individual is known by. */
       @SerializedName("full_name_aliases")
-      List<String> fullNameAliases;
+      Object fullNameAliases;
 
       /**
        * The individual's gender (International regulations require either &quot;male&quot; or
@@ -1588,7 +1729,7 @@ public class TokenCreateParams extends ApiRequestParams {
           String firstName,
           String firstNameKana,
           String firstNameKanji,
-          List<String> fullNameAliases,
+          Object fullNameAliases,
           String gender,
           String idNumber,
           String lastName,
@@ -1646,7 +1787,7 @@ public class TokenCreateParams extends ApiRequestParams {
 
         private String firstNameKanji;
 
-        private List<String> fullNameAliases;
+        private Object fullNameAliases;
 
         private String gender;
 
@@ -1784,11 +1925,12 @@ public class TokenCreateParams extends ApiRequestParams {
          * See {@link TokenCreateParams.Account.Individual#fullNameAliases} for the field
          * documentation.
          */
+        @SuppressWarnings("unchecked")
         public Builder addFullNameAliase(String element) {
-          if (this.fullNameAliases == null) {
-            this.fullNameAliases = new ArrayList<>();
+          if (this.fullNameAliases == null || this.fullNameAliases instanceof EmptyParam) {
+            this.fullNameAliases = new ArrayList<String>();
           }
-          this.fullNameAliases.add(element);
+          ((List<String>) this.fullNameAliases).add(element);
           return this;
         }
 
@@ -1798,11 +1940,24 @@ public class TokenCreateParams extends ApiRequestParams {
          * See {@link TokenCreateParams.Account.Individual#fullNameAliases} for the field
          * documentation.
          */
+        @SuppressWarnings("unchecked")
         public Builder addAllFullNameAliase(List<String> elements) {
-          if (this.fullNameAliases == null) {
-            this.fullNameAliases = new ArrayList<>();
+          if (this.fullNameAliases == null || this.fullNameAliases instanceof EmptyParam) {
+            this.fullNameAliases = new ArrayList<String>();
           }
-          this.fullNameAliases.addAll(elements);
+          ((List<String>) this.fullNameAliases).addAll(elements);
+          return this;
+        }
+
+        /** A list of alternate names or aliases that the individual is known by. */
+        public Builder setFullNameAliases(EmptyParam fullNameAliases) {
+          this.fullNameAliases = fullNameAliases;
+          return this;
+        }
+
+        /** A list of alternate names or aliases that the individual is known by. */
+        public Builder setFullNameAliases(List<String> fullNameAliases) {
+          this.fullNameAliases = fullNameAliases;
           return this;
         }
 
@@ -3435,7 +3590,7 @@ public class TokenCreateParams extends ApiRequestParams {
 
     /** A list of alternate names or aliases that the person is known by. */
     @SerializedName("full_name_aliases")
-    List<String> fullNameAliases;
+    Object fullNameAliases;
 
     /**
      * The person's gender (International regulations require either &quot;male&quot; or
@@ -3522,7 +3677,7 @@ public class TokenCreateParams extends ApiRequestParams {
         String firstName,
         String firstNameKana,
         String firstNameKanji,
-        List<String> fullNameAliases,
+        Object fullNameAliases,
         String gender,
         String idNumber,
         String lastName,
@@ -3587,7 +3742,7 @@ public class TokenCreateParams extends ApiRequestParams {
 
       private String firstNameKanji;
 
-      private List<String> fullNameAliases;
+      private Object fullNameAliases;
 
       private String gender;
 
@@ -3735,11 +3890,12 @@ public class TokenCreateParams extends ApiRequestParams {
        * call, and subsequent calls adds additional elements to the original list. See {@link
        * TokenCreateParams.Person#fullNameAliases} for the field documentation.
        */
+      @SuppressWarnings("unchecked")
       public Builder addFullNameAliase(String element) {
-        if (this.fullNameAliases == null) {
-          this.fullNameAliases = new ArrayList<>();
+        if (this.fullNameAliases == null || this.fullNameAliases instanceof EmptyParam) {
+          this.fullNameAliases = new ArrayList<String>();
         }
-        this.fullNameAliases.add(element);
+        ((List<String>) this.fullNameAliases).add(element);
         return this;
       }
 
@@ -3748,11 +3904,24 @@ public class TokenCreateParams extends ApiRequestParams {
        * `add/addAll` call, and subsequent calls adds additional elements to the original list. See
        * {@link TokenCreateParams.Person#fullNameAliases} for the field documentation.
        */
+      @SuppressWarnings("unchecked")
       public Builder addAllFullNameAliase(List<String> elements) {
-        if (this.fullNameAliases == null) {
-          this.fullNameAliases = new ArrayList<>();
+        if (this.fullNameAliases == null || this.fullNameAliases instanceof EmptyParam) {
+          this.fullNameAliases = new ArrayList<String>();
         }
-        this.fullNameAliases.addAll(elements);
+        ((List<String>) this.fullNameAliases).addAll(elements);
+        return this;
+      }
+
+      /** A list of alternate names or aliases that the person is known by. */
+      public Builder setFullNameAliases(EmptyParam fullNameAliases) {
+        this.fullNameAliases = fullNameAliases;
+        return this;
+      }
+
+      /** A list of alternate names or aliases that the person is known by. */
+      public Builder setFullNameAliases(List<String> fullNameAliases) {
+        this.fullNameAliases = fullNameAliases;
         return this;
       }
 

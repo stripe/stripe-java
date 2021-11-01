@@ -222,8 +222,9 @@ public class SessionCreateParams extends ApiRequestParams {
 
   /**
    * The URL to which Stripe should send customers when payment or setup is complete. If you’d like
-   * access to the Checkout Session for the successful payment, read more about it in the guide on
-   * <a href="https://stripe.com/docs/payments/checkout/fulfill-orders">fulfilling orders</a>.
+   * to use information from the successful Checkout Session on your page, read the guide on <a
+   * href="https://stripe.com/docs/payments/checkout/custom-success-page">customizing your success
+   * page</a>.
    */
   @SerializedName("success_url")
   String successUrl;
@@ -764,9 +765,9 @@ public class SessionCreateParams extends ApiRequestParams {
 
     /**
      * The URL to which Stripe should send customers when payment or setup is complete. If you’d
-     * like access to the Checkout Session for the successful payment, read more about it in the
-     * guide on <a href="https://stripe.com/docs/payments/checkout/fulfill-orders">fulfilling
-     * orders</a>.
+     * like to use information from the successful Checkout Session on your page, read the guide on
+     * <a href="https://stripe.com/docs/payments/checkout/custom-success-page">customizing your
+     * success page</a>.
      */
     public Builder setSuccessUrl(String successUrl) {
       this.successUrl = successUrl;
@@ -1715,7 +1716,7 @@ public class SessionCreateParams extends ApiRequestParams {
 
       /**
        * The maximum quantity the customer can purchase for the Checkout Session. By default this
-       * value is 99.
+       * value is 99. You can specify a value up to 999.
        */
       @SerializedName("maximum")
       Long maximum;
@@ -1792,7 +1793,7 @@ public class SessionCreateParams extends ApiRequestParams {
 
         /**
          * The maximum quantity the customer can purchase for the Checkout Session. By default this
-         * value is 99.
+         * value is 99. You can specify a value up to 999.
          */
         public Builder setMaximum(Long maximum) {
           this.maximum = maximum;

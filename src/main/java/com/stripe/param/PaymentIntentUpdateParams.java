@@ -5203,17 +5203,26 @@ public class PaymentIntentUpdateParams extends ApiRequestParams {
         @SerializedName("en-AT")
         EN_AT("en-AT"),
 
+        @SerializedName("en-BE")
+        EN_BE("en-BE"),
+
         @SerializedName("en-DE")
         EN_DE("en-DE"),
 
         @SerializedName("en-DK")
         EN_DK("en-DK"),
 
+        @SerializedName("en-ES")
+        EN_ES("en-ES"),
+
         @SerializedName("en-FI")
         EN_FI("en-FI"),
 
         @SerializedName("en-GB")
         EN_GB("en-GB"),
+
+        @SerializedName("en-IT")
+        EN_IT("en-IT"),
 
         @SerializedName("en-NL")
         EN_NL("en-NL"),
