@@ -64,7 +64,7 @@ public class PersonCollectionCreateParams extends ApiRequestParams {
 
   /** A list of alternate names or aliases that the person is known by. */
   @SerializedName("full_name_aliases")
-  List<String> fullNameAliases;
+  Object fullNameAliases;
 
   /**
    * The person's gender (International regulations require either &quot;male&quot; or
@@ -158,7 +158,7 @@ public class PersonCollectionCreateParams extends ApiRequestParams {
       String firstName,
       String firstNameKana,
       String firstNameKanji,
-      List<String> fullNameAliases,
+      Object fullNameAliases,
       String gender,
       String idNumber,
       String lastName,
@@ -228,7 +228,7 @@ public class PersonCollectionCreateParams extends ApiRequestParams {
 
     private String firstNameKanji;
 
-    private List<String> fullNameAliases;
+    private Object fullNameAliases;
 
     private String gender;
 
@@ -406,11 +406,12 @@ public class PersonCollectionCreateParams extends ApiRequestParams {
      * call, and subsequent calls adds additional elements to the original list. See {@link
      * PersonCollectionCreateParams#fullNameAliases} for the field documentation.
      */
+    @SuppressWarnings("unchecked")
     public Builder addFullNameAliase(String element) {
-      if (this.fullNameAliases == null) {
-        this.fullNameAliases = new ArrayList<>();
+      if (this.fullNameAliases == null || this.fullNameAliases instanceof EmptyParam) {
+        this.fullNameAliases = new ArrayList<String>();
       }
-      this.fullNameAliases.add(element);
+      ((List<String>) this.fullNameAliases).add(element);
       return this;
     }
 
@@ -419,11 +420,24 @@ public class PersonCollectionCreateParams extends ApiRequestParams {
      * call, and subsequent calls adds additional elements to the original list. See {@link
      * PersonCollectionCreateParams#fullNameAliases} for the field documentation.
      */
+    @SuppressWarnings("unchecked")
     public Builder addAllFullNameAliase(List<String> elements) {
-      if (this.fullNameAliases == null) {
-        this.fullNameAliases = new ArrayList<>();
+      if (this.fullNameAliases == null || this.fullNameAliases instanceof EmptyParam) {
+        this.fullNameAliases = new ArrayList<String>();
       }
-      this.fullNameAliases.addAll(elements);
+      ((List<String>) this.fullNameAliases).addAll(elements);
+      return this;
+    }
+
+    /** A list of alternate names or aliases that the person is known by. */
+    public Builder setFullNameAliases(EmptyParam fullNameAliases) {
+      this.fullNameAliases = fullNameAliases;
+      return this;
+    }
+
+    /** A list of alternate names or aliases that the person is known by. */
+    public Builder setFullNameAliases(List<String> fullNameAliases) {
+      this.fullNameAliases = fullNameAliases;
       return this;
     }
 

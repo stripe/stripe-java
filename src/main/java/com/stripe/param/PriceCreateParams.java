@@ -47,7 +47,10 @@ public class PriceCreateParams extends ApiRequestParams {
   @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
   Map<String, Object> extraParams;
 
-  /** A lookup key used to retrieve prices dynamically from a static string. */
+  /**
+   * A lookup key used to retrieve prices dynamically from a static string. This may be up to 200
+   * characters.
+   */
   @SerializedName("lookup_key")
   String lookupKey;
 
@@ -308,7 +311,10 @@ public class PriceCreateParams extends ApiRequestParams {
       return this;
     }
 
-    /** A lookup key used to retrieve prices dynamically from a static string. */
+    /**
+     * A lookup key used to retrieve prices dynamically from a static string. This may be up to 200
+     * characters.
+     */
     public Builder setLookupKey(String lookupKey) {
       this.lookupKey = lookupKey;
       return this;
