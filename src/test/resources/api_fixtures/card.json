@@ -22,5 +22,16 @@
   "metadata": {
   },
   "name": null,
-  "tokenization_method": null
+  "tokenization_method": null,
+  "wallets": {
+    "apple_pay": {
+      "eligible": true,
+      "ineligible_reason": null
+    },
+    "google_pay": {
+      "eligible": true,
+      "ineligible_reason": null
+    },
+    "primary_account_identifier": null
+  }
 }
