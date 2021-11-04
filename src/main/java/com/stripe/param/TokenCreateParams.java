@@ -248,13 +248,6 @@ public class TokenCreateParams extends ApiRequestParams {
     Individual individual;
 
     /**
-     * Whether the user described by the data in the token has been shown the Ownership Declaration
-     * and indicated that it is correct.
-     */
-    @SerializedName("ownership_declaration_shown_and_signed")
-    Boolean ownershipDeclarationShownAndSigned;
-
-    /**
      * Whether the user described by the data in the token has been shown <a
      * href="https://stripe.com/docs/connect/account-tokens#stripe-connected-account-agreement">the
      * Stripe Connected Account Agreement</a>. When creating an account token to create a new
@@ -268,13 +261,11 @@ public class TokenCreateParams extends ApiRequestParams {
         Company company,
         Map<String, Object> extraParams,
         Individual individual,
-        Boolean ownershipDeclarationShownAndSigned,
         Boolean tosShownAndAccepted) {
       this.businessType = businessType;
       this.company = company;
       this.extraParams = extraParams;
       this.individual = individual;
-      this.ownershipDeclarationShownAndSigned = ownershipDeclarationShownAndSigned;
       this.tosShownAndAccepted = tosShownAndAccepted;
     }
 
@@ -291,8 +282,6 @@ public class TokenCreateParams extends ApiRequestParams {
 
       private Individual individual;
 
-      private Boolean ownershipDeclarationShownAndSigned;
-
       private Boolean tosShownAndAccepted;
 
       /** Finalize and obtain parameter instance from this builder. */
@@ -302,7 +291,6 @@ public class TokenCreateParams extends ApiRequestParams {
             this.company,
             this.extraParams,
             this.individual,
-            this.ownershipDeclarationShownAndSigned,
             this.tosShownAndAccepted);
       }
 
@@ -347,16 +335,6 @@ public class TokenCreateParams extends ApiRequestParams {
       /** Information about the person represented by the account. */
       public Builder setIndividual(Individual individual) {
         this.individual = individual;
-        return this;
-      }
-
-      /**
-       * Whether the user described by the data in the token has been shown the Ownership
-       * Declaration and indicated that it is correct.
-       */
-      public Builder setOwnershipDeclarationShownAndSigned(
-          Boolean ownershipDeclarationShownAndSigned) {
-        this.ownershipDeclarationShownAndSigned = ownershipDeclarationShownAndSigned;
         return this;
       }
 
@@ -441,6 +419,13 @@ public class TokenCreateParams extends ApiRequestParams {
       @SerializedName("ownership_declaration")
       OwnershipDeclaration ownershipDeclaration;
 
+      /**
+       * Whether the user described by the data in the token has been shown the Ownership
+       * Declaration and indicated that it is correct.
+       */
+      @SerializedName("ownership_declaration_shown_and_signed")
+      Boolean ownershipDeclarationShownAndSigned;
+
       /** The company's phone number (used for verification). */
       @SerializedName("phone")
       String phone;
@@ -496,6 +481,7 @@ public class TokenCreateParams extends ApiRequestParams {
           String nameKanji,
           Boolean ownersProvided,
           OwnershipDeclaration ownershipDeclaration,
+          Boolean ownershipDeclarationShownAndSigned,
           String phone,
           String registrationNumber,
           EnumParam structure,
@@ -514,6 +500,7 @@ public class TokenCreateParams extends ApiRequestParams {
         this.nameKanji = nameKanji;
         this.ownersProvided = ownersProvided;
         this.ownershipDeclaration = ownershipDeclaration;
+        this.ownershipDeclarationShownAndSigned = ownershipDeclarationShownAndSigned;
         this.phone = phone;
         this.registrationNumber = registrationNumber;
         this.structure = structure;
@@ -550,6 +537,8 @@ public class TokenCreateParams extends ApiRequestParams {
 
         private OwnershipDeclaration ownershipDeclaration;
 
+        private Boolean ownershipDeclarationShownAndSigned;
+
         private String phone;
 
         private String registrationNumber;
@@ -578,6 +567,7 @@ public class TokenCreateParams extends ApiRequestParams {
               this.nameKanji,
               this.ownersProvided,
               this.ownershipDeclaration,
+              this.ownershipDeclarationShownAndSigned,
               this.phone,
               this.registrationNumber,
               this.structure,
@@ -691,6 +681,16 @@ public class TokenCreateParams extends ApiRequestParams {
          */
         public Builder setOwnershipDeclaration(OwnershipDeclaration ownershipDeclaration) {
           this.ownershipDeclaration = ownershipDeclaration;
+          return this;
+        }
+
+        /**
+         * Whether the user described by the data in the token has been shown the Ownership
+         * Declaration and indicated that it is correct.
+         */
+        public Builder setOwnershipDeclarationShownAndSigned(
+            Boolean ownershipDeclarationShownAndSigned) {
+          this.ownershipDeclarationShownAndSigned = ownershipDeclarationShownAndSigned;
           return this;
         }
 
