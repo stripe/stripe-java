@@ -80,8 +80,8 @@ public class AccountCreateParams extends ApiRequestParams {
    * A card or bank account to attach to the account for receiving <a
    * href="https://stripe.com/docs/connect/bank-debit-card-payouts">payouts</a> (you won’t be able
    * to use it for top-ups). You can provide either a token, like the ones returned by <a
-   * href="https://stripe.com/docs/stripe-js">Stripe.js</a>, or a dictionary, as documented in the
-   * {@code external_account} parameter for <a
+   * href="https://stripe.com/docs/js">Stripe.js</a>, or a dictionary, as documented in the {@code
+   * external_account} parameter for <a
    * href="https://stripe.com/docs/api#account_create_bank_account">bank account</a> creation.
    * &lt;br&gt;&lt;br&gt;By default, providing an external account sets it as the new default
    * external account for its currency, and deletes the old default if one exists. To add additional
@@ -346,8 +346,8 @@ public class AccountCreateParams extends ApiRequestParams {
      * A card or bank account to attach to the account for receiving <a
      * href="https://stripe.com/docs/connect/bank-debit-card-payouts">payouts</a> (you won’t be able
      * to use it for top-ups). You can provide either a token, like the ones returned by <a
-     * href="https://stripe.com/docs/stripe-js">Stripe.js</a>, or a dictionary, as documented in the
-     * {@code external_account} parameter for <a
+     * href="https://stripe.com/docs/js">Stripe.js</a>, or a dictionary, as documented in the {@code
+     * external_account} parameter for <a
      * href="https://stripe.com/docs/api#account_create_bank_account">bank account</a> creation.
      * &lt;br&gt;&lt;br&gt;By default, providing an external account sets it as the new default
      * external account for its currency, and deletes the old default if one exists. To add

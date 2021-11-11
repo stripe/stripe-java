@@ -252,7 +252,9 @@ public class SubscriptionUpdateParams extends ApiRequestParams {
   /**
    * Indicates if a plan's {@code trial_period_days} should be applied to the subscription. Setting
    * {@code trial_end} per subscription is preferred, and this defaults to {@code false}. Setting
-   * this flag to {@code true} together with {@code trial_end} is not allowed.
+   * this flag to {@code true} together with {@code trial_end} is not allowed. See <a
+   * href="docs/billing/subscriptions/trials">Using trial periods on subscriptions</a> to learn
+   * more.
    */
   @SerializedName("trial_from_plan")
   Boolean trialFromPlan;
@@ -957,7 +959,9 @@ public class SubscriptionUpdateParams extends ApiRequestParams {
     /**
      * Indicates if a plan's {@code trial_period_days} should be applied to the subscription.
      * Setting {@code trial_end} per subscription is preferred, and this defaults to {@code false}.
-     * Setting this flag to {@code true} together with {@code trial_end} is not allowed.
+     * Setting this flag to {@code true} together with {@code trial_end} is not allowed. See <a
+     * href="docs/billing/subscriptions/trials">Using trial periods on subscriptions</a> to learn
+     * more.
      */
     public Builder setTrialFromPlan(Boolean trialFromPlan) {
       this.trialFromPlan = trialFromPlan;

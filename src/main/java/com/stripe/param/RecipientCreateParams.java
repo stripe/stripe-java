@@ -14,8 +14,8 @@ import lombok.Getter;
 public class RecipientCreateParams extends ApiRequestParams {
   /**
    * A bank account to attach to the recipient. You can provide either a token, like the ones
-   * returned by <a href="https://stripe.com/docs/stripe-js">Stripe.js</a>, or a dictionary
-   * containing a user's bank account details, with the options described below.
+   * returned by <a href="https://stripe.com/docs/js">Stripe.js</a>, or a dictionary containing a
+   * user's bank account details, with the options described below.
    */
   @SerializedName("bank_account")
   String bankAccount;
@@ -23,9 +23,9 @@ public class RecipientCreateParams extends ApiRequestParams {
   /**
    * A U.S. Visa or MasterCard debit card (<em>not</em> prepaid) to attach to the recipient. If the
    * debit card is not valid, recipient creation will fail. You can provide either a token, like the
-   * ones returned by <a href="https://stripe.com/docs/stripe-js">Stripe.js</a>, or a dictionary
-   * containing a user's debit card details, with the options described below. Although not all
-   * information is required, the extra info helps prevent fraud.
+   * ones returned by <a href="https://stripe.com/docs/js">Stripe.js</a>, or a dictionary containing
+   * a user's debit card details, with the options described below. Although not all information is
+   * required, the extra info helps prevent fraud.
    */
   @SerializedName("card")
   String card;
@@ -150,8 +150,8 @@ public class RecipientCreateParams extends ApiRequestParams {
 
     /**
      * A bank account to attach to the recipient. You can provide either a token, like the ones
-     * returned by <a href="https://stripe.com/docs/stripe-js">Stripe.js</a>, or a dictionary
-     * containing a user's bank account details, with the options described below.
+     * returned by <a href="https://stripe.com/docs/js">Stripe.js</a>, or a dictionary containing a
+     * user's bank account details, with the options described below.
      */
     public Builder setBankAccount(String bankAccount) {
       this.bankAccount = bankAccount;
@@ -161,9 +161,9 @@ public class RecipientCreateParams extends ApiRequestParams {
     /**
      * A U.S. Visa or MasterCard debit card (<em>not</em> prepaid) to attach to the recipient. If
      * the debit card is not valid, recipient creation will fail. You can provide either a token,
-     * like the ones returned by <a href="https://stripe.com/docs/stripe-js">Stripe.js</a>, or a
-     * dictionary containing a user's debit card details, with the options described below. Although
-     * not all information is required, the extra info helps prevent fraud.
+     * like the ones returned by <a href="https://stripe.com/docs/js">Stripe.js</a>, or a dictionary
+     * containing a user's debit card details, with the options described below. Although not all
+     * information is required, the extra info helps prevent fraud.
      */
     public Builder setCard(String card) {
       this.card = card;

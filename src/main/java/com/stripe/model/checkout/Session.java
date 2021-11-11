@@ -17,6 +17,7 @@ import com.stripe.model.Subscription;
 import com.stripe.net.ApiResource;
 import com.stripe.net.RequestOptions;
 import com.stripe.param.checkout.SessionCreateParams;
+import com.stripe.param.checkout.SessionExpireParams;
 import com.stripe.param.checkout.SessionListLineItemsParams;
 import com.stripe.param.checkout.SessionListParams;
 import com.stripe.param.checkout.SessionRetrieveParams;
@@ -223,6 +224,12 @@ public class Session extends ApiResource implements HasId {
   ShippingAddressCollection shippingAddressCollection;
 
   /**
+   * The status of the Checkout Session, one of {@code open}, {@code complete}, or {@code expired}.
+   */
+  @SerializedName("status")
+  String status;
+
+  /**
    * Describes the type of transaction being performed by Checkout in order to customize relevant
    * text on the page, such as the submit button. {@code submit_type} can only be specified on
    * Checkout Sessions in {@code payment} mode, but not Checkout Sessions in {@code subscription} or
@@ -408,6 +415,78 @@ public class Session extends ApiResource implements HasId {
   public static Session create(SessionCreateParams params, RequestOptions options)
       throws StripeException {
     String url = String.format("%s%s", Stripe.getApiBase(), "/v1/checkout/sessions");
+    return ApiResource.request(ApiResource.RequestMethod.POST, url, params, Session.class, options);
+  }
+
+  /**
+   * A Session can be expired when it is in one of these statuses: <code>open</code>
+   *
+   * <p>After it expires, a customer can’t complete a Session and customers loading the Session see
+   * a message saying the Session is expired.
+   */
+  public Session expire() throws StripeException {
+    return expire((Map<String, Object>) null, (RequestOptions) null);
+  }
+
+  /**
+   * A Session can be expired when it is in one of these statuses: <code>open</code>
+   *
+   * <p>After it expires, a customer can’t complete a Session and customers loading the Session see
+   * a message saying the Session is expired.
+   */
+  public Session expire(RequestOptions options) throws StripeException {
+    return expire((Map<String, Object>) null, options);
+  }
+
+  /**
+   * A Session can be expired when it is in one of these statuses: <code>open</code>
+   *
+   * <p>After it expires, a customer can’t complete a Session and customers loading the Session see
+   * a message saying the Session is expired.
+   */
+  public Session expire(Map<String, Object> params) throws StripeException {
+    return expire(params, (RequestOptions) null);
+  }
+
+  /**
+   * A Session can be expired when it is in one of these statuses: <code>open</code>
+   *
+   * <p>After it expires, a customer can’t complete a Session and customers loading the Session see
+   * a message saying the Session is expired.
+   */
+  public Session expire(Map<String, Object> params, RequestOptions options) throws StripeException {
+    String url =
+        String.format(
+            "%s%s",
+            Stripe.getApiBase(),
+            String.format(
+                "/v1/checkout/sessions/%s/expire", ApiResource.urlEncodeId(this.getId())));
+    return ApiResource.request(ApiResource.RequestMethod.POST, url, params, Session.class, options);
+  }
+
+  /**
+   * A Session can be expired when it is in one of these statuses: <code>open</code>
+   *
+   * <p>After it expires, a customer can’t complete a Session and customers loading the Session see
+   * a message saying the Session is expired.
+   */
+  public Session expire(SessionExpireParams params) throws StripeException {
+    return expire(params, (RequestOptions) null);
+  }
+
+  /**
+   * A Session can be expired when it is in one of these statuses: <code>open</code>
+   *
+   * <p>After it expires, a customer can’t complete a Session and customers loading the Session see
+   * a message saying the Session is expired.
+   */
+  public Session expire(SessionExpireParams params, RequestOptions options) throws StripeException {
+    String url =
+        String.format(
+            "%s%s",
+            Stripe.getApiBase(),
+            String.format(
+                "/v1/checkout/sessions/%s/expire", ApiResource.urlEncodeId(this.getId())));
     return ApiResource.request(ApiResource.RequestMethod.POST, url, params, Session.class, options);
   }
 

@@ -2835,4 +2835,17 @@ class GeneratedExamples extends BaseStripeTest {
     verifyRequest(
         ApiResource.RequestMethod.GET, "/v1/customers/cus_xyz/payment_methods", params.toMap());
   }
+
+  @Test
+  public void testSessionExpire() throws StripeException {
+    com.stripe.model.checkout.Session resource =
+        com.stripe.model.checkout.Session.retrieve("sess_xyz");
+    com.stripe.param.checkout.SessionExpireParams params =
+        com.stripe.param.checkout.SessionExpireParams.builder().build();
+
+    com.stripe.model.checkout.Session session = resource.expire(params);
+    assertNotNull(session);
+    verifyRequest(
+        ApiResource.RequestMethod.POST, "/v1/checkout/sessions/sess_xyz/expire", params.toMap());
+  }
 }
