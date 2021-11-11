@@ -1,10 +1,14 @@
 # Changelog
 
+## 20.87.0 - 2021-11-11
+* [#1281](https://github.com/stripe/stripe-java/pull/1281) API Updates
+  * Add support for `expire` method on resource `Checkout.Session`
+  * Add support for `status` on `Checkout.Session`
+
 ## 20.86.1 - 2021-11-04
 * [#1279](https://github.com/stripe/stripe-java/pull/1279) API Updates
   * Remove support for `ownership_declaration_shown_and_signed` on `TokenCreateParams.account`. This API was unused.
   * Add support for `ownership_declaration_shown_and_signed` on `TokenCreateParams.account.company`
-  
 
 ## 20.86.0 - 2021-11-01
 * [#1278](https://github.com/stripe/stripe-java/pull/1278) API Updates
