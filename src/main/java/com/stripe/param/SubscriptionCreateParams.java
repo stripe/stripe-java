@@ -237,7 +237,9 @@ public class SubscriptionCreateParams extends ApiRequestParams {
    * charged for the first time. This will always overwrite any trials that might apply via a
    * subscribed plan. If set, trial_end will override the default trial period of the plan the
    * customer is being subscribed to. The special value {@code now} can be provided to end the
-   * customer's trial immediately. Can be at most two years from {@code billing_cycle_anchor}.
+   * customer's trial immediately. Can be at most two years from {@code billing_cycle_anchor}. See
+   * <a href="docs/billing/subscriptions/trials">Using trial periods on subscriptions</a> to learn
+   * more.
    */
   @SerializedName("trial_end")
   Object trialEnd;
@@ -245,14 +247,18 @@ public class SubscriptionCreateParams extends ApiRequestParams {
   /**
    * Indicates if a plan's {@code trial_period_days} should be applied to the subscription. Setting
    * {@code trial_end} per subscription is preferred, and this defaults to {@code false}. Setting
-   * this flag to {@code true} together with {@code trial_end} is not allowed.
+   * this flag to {@code true} together with {@code trial_end} is not allowed. See <a
+   * href="docs/billing/subscriptions/trials">Using trial periods on subscriptions</a> to learn
+   * more.
    */
   @SerializedName("trial_from_plan")
   Boolean trialFromPlan;
 
   /**
    * Integer representing the number of trial period days before the customer is charged for the
-   * first time. This will always overwrite any trials that might apply via a subscribed plan.
+   * first time. This will always overwrite any trials that might apply via a subscribed plan. See
+   * <a href="docs/billing/subscriptions/trials">Using trial periods on subscriptions</a> to learn
+   * more.
    */
   @SerializedName("trial_period_days")
   Long trialPeriodDays;
@@ -860,7 +866,9 @@ public class SubscriptionCreateParams extends ApiRequestParams {
      * charged for the first time. This will always overwrite any trials that might apply via a
      * subscribed plan. If set, trial_end will override the default trial period of the plan the
      * customer is being subscribed to. The special value {@code now} can be provided to end the
-     * customer's trial immediately. Can be at most two years from {@code billing_cycle_anchor}.
+     * customer's trial immediately. Can be at most two years from {@code billing_cycle_anchor}. See
+     * <a href="docs/billing/subscriptions/trials">Using trial periods on subscriptions</a> to learn
+     * more.
      */
     public Builder setTrialEnd(TrialEnd trialEnd) {
       this.trialEnd = trialEnd;
@@ -872,7 +880,9 @@ public class SubscriptionCreateParams extends ApiRequestParams {
      * charged for the first time. This will always overwrite any trials that might apply via a
      * subscribed plan. If set, trial_end will override the default trial period of the plan the
      * customer is being subscribed to. The special value {@code now} can be provided to end the
-     * customer's trial immediately. Can be at most two years from {@code billing_cycle_anchor}.
+     * customer's trial immediately. Can be at most two years from {@code billing_cycle_anchor}. See
+     * <a href="docs/billing/subscriptions/trials">Using trial periods on subscriptions</a> to learn
+     * more.
      */
     public Builder setTrialEnd(Long trialEnd) {
       this.trialEnd = trialEnd;
@@ -882,7 +892,9 @@ public class SubscriptionCreateParams extends ApiRequestParams {
     /**
      * Indicates if a plan's {@code trial_period_days} should be applied to the subscription.
      * Setting {@code trial_end} per subscription is preferred, and this defaults to {@code false}.
-     * Setting this flag to {@code true} together with {@code trial_end} is not allowed.
+     * Setting this flag to {@code true} together with {@code trial_end} is not allowed. See <a
+     * href="docs/billing/subscriptions/trials">Using trial periods on subscriptions</a> to learn
+     * more.
      */
     public Builder setTrialFromPlan(Boolean trialFromPlan) {
       this.trialFromPlan = trialFromPlan;
@@ -891,7 +903,9 @@ public class SubscriptionCreateParams extends ApiRequestParams {
 
     /**
      * Integer representing the number of trial period days before the customer is charged for the
-     * first time. This will always overwrite any trials that might apply via a subscribed plan.
+     * first time. This will always overwrite any trials that might apply via a subscribed plan. See
+     * <a href="docs/billing/subscriptions/trials">Using trial periods on subscriptions</a> to learn
+     * more.
      */
     public Builder setTrialPeriodDays(Long trialPeriodDays) {
       this.trialPeriodDays = trialPeriodDays;

@@ -58,8 +58,10 @@ public class SessionCreateParams extends ApiRequestParams {
    * payment method</a> will be used if it’s a card, and otherwise the most recent card will be
    * used. A valid billing address is required for Checkout to prefill the customer's card details.
    *
-   * <p>If the customer changes their email on the Checkout page, the Customer object will be
-   * updated with the new email.
+   * <p>If the Customer already has a valid <a
+   * href="https://stripe.com/docs/api/customers/object#customer_object-email">email</a> set, the
+   * email will be prefilled and not editable in Checkout. If the Customer does not have a valid
+   * {@code email}, Checkout will set the email entered during the session on the Customer.
    *
    * <p>If blank for Checkout Sessions in {@code payment} or {@code subscription} mode, Checkout
    * will create a new Customer object based on information provided during the payment flow.
@@ -451,8 +453,10 @@ public class SessionCreateParams extends ApiRequestParams {
      * used. A valid billing address is required for Checkout to prefill the customer's card
      * details.
      *
-     * <p>If the customer changes their email on the Checkout page, the Customer object will be
-     * updated with the new email.
+     * <p>If the Customer already has a valid <a
+     * href="https://stripe.com/docs/api/customers/object#customer_object-email">email</a> set, the
+     * email will be prefilled and not editable in Checkout. If the Customer does not have a valid
+     * {@code email}, Checkout will set the email entered during the session on the Customer.
      *
      * <p>If blank for Checkout Sessions in {@code payment} or {@code subscription} mode, Checkout
      * will create a new Customer object based on information provided during the payment flow.
