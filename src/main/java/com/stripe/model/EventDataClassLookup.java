@@ -67,6 +67,7 @@ final class EventDataClassLookup {
     classLookup.put("review", Review.class);
     classLookup.put("setup_attempt", SetupAttempt.class);
     classLookup.put("setup_intent", SetupIntent.class);
+    classLookup.put("shipping_rate", ShippingRate.class);
     classLookup.put("sku", Sku.class);
     classLookup.put("source", Source.class);
     classLookup.put("source_mandate_notification", SourceMandateNotification.class);

@@ -12,6 +12,7 @@ import com.stripe.model.LineItemCollection;
 import com.stripe.model.PaymentIntent;
 import com.stripe.model.SetupIntent;
 import com.stripe.model.ShippingDetails;
+import com.stripe.model.ShippingRate;
 import com.stripe.model.StripeObject;
 import com.stripe.model.Subscription;
 import com.stripe.net.ApiResource;
@@ -223,6 +224,16 @@ public class Session extends ApiResource implements HasId {
   @SerializedName("shipping_address_collection")
   ShippingAddressCollection shippingAddressCollection;
 
+  /** The shipping rate options applied to this Session. */
+  @SerializedName("shipping_options")
+  List<Session.ShippingOption> shippingOptions;
+
+  /** The ID of the ShippingRate for Checkout Sessions in {@code payment} mode. */
+  @SerializedName("shipping_rate")
+  @Getter(lombok.AccessLevel.NONE)
+  @Setter(lombok.AccessLevel.NONE)
+  ExpandableField<ShippingRate> shippingRate;
+
   /**
    * The status of the Checkout Session, one of {@code open}, {@code complete}, or {@code expired}.
    */
@@ -317,6 +328,25 @@ public class Session extends ApiResource implements HasId {
 
   public void setSetupIntentObject(SetupIntent expandableObject) {
     this.setupIntent = new ExpandableField<SetupIntent>(expandableObject.getId(), expandableObject);
+  }
+
+  /** Get ID of expandable {@code shippingRate} object. */
+  public String getShippingRate() {
+    return (this.shippingRate != null) ? this.shippingRate.getId() : null;
+  }
+
+  public void setShippingRate(String id) {
+    this.shippingRate = ApiResource.setExpandableFieldId(id, this.shippingRate);
+  }
+
+  /** Get expanded {@code shippingRate}. */
+  public ShippingRate getShippingRateObject() {
+    return (this.shippingRate != null) ? this.shippingRate.getExpanded() : null;
+  }
+
+  public void setShippingRateObject(ShippingRate expandableObject) {
+    this.shippingRate =
+        new ExpandableField<ShippingRate>(expandableObject.getId(), expandableObject);
   }
 
   /** Get ID of expandable {@code subscription} object. */
@@ -789,6 +819,40 @@ public class Session extends ApiResource implements HasId {
      */
     @SerializedName("allowed_countries")
     List<String> allowedCountries;
+  }
+
+  @Getter
+  @Setter
+  @EqualsAndHashCode(callSuper = false)
+  public static class ShippingOption extends StripeObject {
+    /** A non-negative integer in cents representing how much to charge. */
+    @SerializedName("shipping_amount")
+    Long shippingAmount;
+
+    /** The shipping rate. */
+    @SerializedName("shipping_rate")
+    @Getter(lombok.AccessLevel.NONE)
+    @Setter(lombok.AccessLevel.NONE)
+    ExpandableField<ShippingRate> shippingRate;
+
+    /** Get ID of expandable {@code shippingRate} object. */
+    public String getShippingRate() {
+      return (this.shippingRate != null) ? this.shippingRate.getId() : null;
+    }
+
+    public void setShippingRate(String id) {
+      this.shippingRate = ApiResource.setExpandableFieldId(id, this.shippingRate);
+    }
+
+    /** Get expanded {@code shippingRate}. */
+    public ShippingRate getShippingRateObject() {
+      return (this.shippingRate != null) ? this.shippingRate.getExpanded() : null;
+    }
+
+    public void setShippingRateObject(ShippingRate expandableObject) {
+      this.shippingRate =
+          new ExpandableField<ShippingRate>(expandableObject.getId(), expandableObject);
+    }
   }
 
   @Getter
