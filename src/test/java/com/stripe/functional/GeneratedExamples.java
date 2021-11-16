@@ -2848,4 +2848,79 @@ class GeneratedExamples extends BaseStripeTest {
     verifyRequest(
         ApiResource.RequestMethod.POST, "/v1/checkout/sessions/sess_xyz/expire", params.toMap());
   }
+
+  @Test
+  public void testShippingRateCreate() throws StripeException {
+    ShippingRateCreateParams params =
+        ShippingRateCreateParams.builder()
+            .setDisplayName("Sample Shipper")
+            .setFixedAmount(
+                ShippingRateCreateParams.FixedAmount.builder()
+                    .setCurrency("usd")
+                    .setAmount(400L)
+                    .build())
+            .setType(ShippingRateCreateParams.Type.FIXED_AMOUNT)
+            .build();
+
+    ShippingRate shippingRate = ShippingRate.create(params);
+    assertNotNull(shippingRate);
+    verifyRequest(ApiResource.RequestMethod.POST, "/v1/shipping_rates", params.toMap());
+  }
+
+  @Test
+  public void testShippingRateList() throws StripeException {
+    ShippingRateListParams params = ShippingRateListParams.builder().build();
+
+    ShippingRateCollection shippingRates = ShippingRate.list(params);
+    assertNotNull(shippingRates);
+    verifyRequest(ApiResource.RequestMethod.GET, "/v1/shipping_rates", params.toMap());
+  }
+
+  @Test
+  public void testSessionCreate3() throws StripeException {
+    com.stripe.param.checkout.SessionCreateParams params =
+        com.stripe.param.checkout.SessionCreateParams.builder()
+            .setSuccessUrl("https://example.com/success")
+            .setCancelUrl("https://example.com/cancel")
+            .setMode(com.stripe.param.checkout.SessionCreateParams.Mode.PAYMENT)
+            .addShippingOption(
+                com.stripe.param.checkout.SessionCreateParams.ShippingOption.builder()
+                    .setShippingRate("shr_standard")
+                    .build())
+            .addShippingOption(
+                com.stripe.param.checkout.SessionCreateParams.ShippingOption.builder()
+                    .setShippingRateData(
+                        com.stripe.param.checkout.SessionCreateParams.ShippingOption
+                            .ShippingRateData.builder()
+                            .setDisplayName("Standard")
+                            .setDeliveryEstimate(
+                                com.stripe.param.checkout.SessionCreateParams.ShippingOption
+                                    .ShippingRateData.DeliveryEstimate.builder()
+                                    .setMinimum(
+                                        com.stripe.param.checkout.SessionCreateParams.ShippingOption
+                                            .ShippingRateData.DeliveryEstimate.Minimum.builder()
+                                            .setUnit(
+                                                com.stripe.param.checkout.SessionCreateParams
+                                                    .ShippingOption.ShippingRateData
+                                                    .DeliveryEstimate.Minimum.Unit.DAY)
+                                            .setValue(5L)
+                                            .build())
+                                    .setMaximum(
+                                        com.stripe.param.checkout.SessionCreateParams.ShippingOption
+                                            .ShippingRateData.DeliveryEstimate.Maximum.builder()
+                                            .setUnit(
+                                                com.stripe.param.checkout.SessionCreateParams
+                                                    .ShippingOption.ShippingRateData
+                                                    .DeliveryEstimate.Maximum.Unit.DAY)
+                                            .setValue(7L)
+                                            .build())
+                                    .build())
+                            .build())
+                    .build())
+            .build();
+
+    com.stripe.model.checkout.Session session = com.stripe.model.checkout.Session.create(params);
+    assertNotNull(session);
+    verifyRequest(ApiResource.RequestMethod.POST, "/v1/checkout/sessions", params.toMap());
+  }
 }
