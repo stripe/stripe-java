@@ -755,7 +755,8 @@ public class Charge extends ApiResource implements MetadataStore<Charge>, Balanc
    * payment flow, where first you <a href="https://stripe.com/docs/api#create_charge">created a
    * charge</a> with the capture option set to false.
    *
-   * <p>Uncaptured payments expire exactly seven days after they are created. If they are not
+   * <p>Uncaptured payments expire a set number of days after they are created (<a
+   * href="https://stripe.com/docs/charges/placing-a-hold">7 by default</a>). If they are not
    * captured by that point in time, they will be marked as refunded and will no longer be
    * capturable.
    */
@@ -768,7 +769,8 @@ public class Charge extends ApiResource implements MetadataStore<Charge>, Balanc
    * payment flow, where first you <a href="https://stripe.com/docs/api#create_charge">created a
    * charge</a> with the capture option set to false.
    *
-   * <p>Uncaptured payments expire exactly seven days after they are created. If they are not
+   * <p>Uncaptured payments expire a set number of days after they are created (<a
+   * href="https://stripe.com/docs/charges/placing-a-hold">7 by default</a>). If they are not
    * captured by that point in time, they will be marked as refunded and will no longer be
    * capturable.
    */
@@ -781,7 +783,8 @@ public class Charge extends ApiResource implements MetadataStore<Charge>, Balanc
    * payment flow, where first you <a href="https://stripe.com/docs/api#create_charge">created a
    * charge</a> with the capture option set to false.
    *
-   * <p>Uncaptured payments expire exactly seven days after they are created. If they are not
+   * <p>Uncaptured payments expire a set number of days after they are created (<a
+   * href="https://stripe.com/docs/charges/placing-a-hold">7 by default</a>). If they are not
    * captured by that point in time, they will be marked as refunded and will no longer be
    * capturable.
    */
@@ -794,7 +797,8 @@ public class Charge extends ApiResource implements MetadataStore<Charge>, Balanc
    * payment flow, where first you <a href="https://stripe.com/docs/api#create_charge">created a
    * charge</a> with the capture option set to false.
    *
-   * <p>Uncaptured payments expire exactly seven days after they are created. If they are not
+   * <p>Uncaptured payments expire a set number of days after they are created (<a
+   * href="https://stripe.com/docs/charges/placing-a-hold">7 by default</a>). If they are not
    * captured by that point in time, they will be marked as refunded and will no longer be
    * capturable.
    */
@@ -812,7 +816,8 @@ public class Charge extends ApiResource implements MetadataStore<Charge>, Balanc
    * payment flow, where first you <a href="https://stripe.com/docs/api#create_charge">created a
    * charge</a> with the capture option set to false.
    *
-   * <p>Uncaptured payments expire exactly seven days after they are created. If they are not
+   * <p>Uncaptured payments expire a set number of days after they are created (<a
+   * href="https://stripe.com/docs/charges/placing-a-hold">7 by default</a>). If they are not
    * captured by that point in time, they will be marked as refunded and will no longer be
    * capturable.
    */
@@ -825,7 +830,8 @@ public class Charge extends ApiResource implements MetadataStore<Charge>, Balanc
    * payment flow, where first you <a href="https://stripe.com/docs/api#create_charge">created a
    * charge</a> with the capture option set to false.
    *
-   * <p>Uncaptured payments expire exactly seven days after they are created. If they are not
+   * <p>Uncaptured payments expire a set number of days after they are created (<a
+   * href="https://stripe.com/docs/charges/placing-a-hold">7 by default</a>). If they are not
    * captured by that point in time, they will be marked as refunded and will no longer be
    * capturable.
    */
@@ -1884,11 +1890,12 @@ public class Charge extends ApiResource implements MetadataStore<Charge>, Balanc
       String accountHolderType;
 
       /**
-       * The customer's bank. Can be one of {@code affin_bank}, {@code alliance_bank}, {@code
-       * ambank}, {@code bank_islam}, {@code bank_muamalat}, {@code bank_rakyat}, {@code bsn},
-       * {@code cimb}, {@code hong_leong_bank}, {@code hsbc}, {@code kfh}, {@code maybank2u}, {@code
-       * ocbc}, {@code public_bank}, {@code rhb}, {@code standard_chartered}, {@code uob}, {@code
-       * deutsche_bank}, {@code maybank2e}, or {@code pb_enterprise}.
+       * The customer's bank. Can be one of {@code affin_bank}, {@code agrobank}, {@code
+       * alliance_bank}, {@code ambank}, {@code bank_islam}, {@code bank_muamalat}, {@code
+       * bank_rakyat}, {@code bsn}, {@code cimb}, {@code hong_leong_bank}, {@code hsbc}, {@code
+       * kfh}, {@code maybank2u}, {@code ocbc}, {@code public_bank}, {@code rhb}, {@code
+       * standard_chartered}, {@code uob}, {@code deutsche_bank}, {@code maybank2e}, or {@code
+       * pb_enterprise}.
        */
       @SerializedName("bank")
       String bank;

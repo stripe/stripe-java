@@ -2759,6 +2759,9 @@ public class PaymentIntentCreateParams extends ApiRequestParams {
         @SerializedName("affin_bank")
         AFFIN_BANK("affin_bank"),
 
+        @SerializedName("agrobank")
+        AGROBANK("agrobank"),
+
         @SerializedName("alliance_bank")
         ALLIANCE_BANK("alliance_bank"),
 
