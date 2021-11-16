@@ -1,5 +1,11 @@
 # Changelog
 
+## 20.88.0 - 2021-11-16
+* [#1284](https://github.com/stripe/stripe-java/pull/1284) API Updates
+  * Add support for new resource `ShippingRate`
+  * Add support for `shipping_options` on `CheckoutSessionCreateParams` and `Checkout.Session`
+  * Add support for `shipping_rate` on `Checkout.Session`
+
 ## 20.87.0 - 2021-11-11
 * [#1281](https://github.com/stripe/stripe-java/pull/1281) API Updates
   * Add support for `expire` method on resource `Checkout.Session`
