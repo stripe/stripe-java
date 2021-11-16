@@ -206,9 +206,7 @@ public class SessionCreateParams extends ApiRequestParams {
   @SerializedName("shipping_options")
   List<ShippingOption> shippingOptions;
 
-  /**
-   * [To be deprecated] The shipping rate to apply to this Session. Only up to one may be specified.
-   */
+  /** [Deprecated] The shipping rate to apply to this Session. Only up to one may be specified. */
   @SerializedName("shipping_rates")
   List<String> shippingRates;
 
@@ -1399,16 +1397,17 @@ public class SessionCreateParams extends ApiRequestParams {
     AdjustableQuantity adjustableQuantity;
 
     /**
-     * The amount to be collected per unit of the line item. If specified, must also pass {@code
-     * currency} and {@code name}.
+     * [Deprecated] The amount to be collected per unit of the line item. If specified, must also
+     * pass {@code currency} and {@code name}.
      */
     @SerializedName("amount")
     Long amount;
 
     /**
-     * Three-letter <a href="https://www.iso.org/iso-4217-currency-codes.html">ISO currency
-     * code</a>, in lowercase. Must be a <a href="https://stripe.com/docs/currencies">supported
-     * currency</a>. Required if {@code amount} is passed.
+     * [Deprecated] Three-letter <a href="https://www.iso.org/iso-4217-currency-codes.html">ISO
+     * currency code</a>, in lowercase. Must be a <a
+     * href="https://stripe.com/docs/currencies">supported currency</a>. Required if {@code amount}
+     * is passed.
      */
     @SerializedName("currency")
     String currency;
@@ -1440,31 +1439,31 @@ public class SessionCreateParams extends ApiRequestParams {
     Map<String, Object> extraParams;
 
     /**
-     * A list of image URLs representing this line item. Each image can be up to 5 MB in size. If
-     * passing {@code price} or {@code price_data}, specify images on the associated product
-     * instead.
+     * [Deprecated] A list of image URLs representing this line item. Each image can be up to 5 MB
+     * in size. If passing {@code price} or {@code price_data}, specify images on the associated
+     * product instead.
      */
     @SerializedName("images")
     List<String> images;
 
     /**
-     * The name for the item to be displayed on the Checkout page. Required if {@code amount} is
-     * passed.
+     * [Deprecated] The name for the item to be displayed on the Checkout page. Required if {@code
+     * amount} is passed.
      */
     @SerializedName("name")
     String name;
 
     /**
      * The ID of the <a href="https://stripe.com/docs/api/prices">Price</a> or <a
-     * href="https://stripe.com/docs/api/plans">Plan</a> object. One of {@code price}, {@code
-     * price_data} or {@code amount} is required.
+     * href="https://stripe.com/docs/api/plans">Plan</a> object. One of {@code price} or {@code
+     * price_data} is required.
      */
     @SerializedName("price")
     String price;
 
     /**
      * Data used to generate a new <a href="https://stripe.com/docs/api/prices">Price</a> object
-     * inline. One of {@code price}, {@code price_data} or {@code amount} is required.
+     * inline. One of {@code price} or {@code price_data} is required.
      */
     @SerializedName("price_data")
     PriceData priceData;
@@ -1566,8 +1565,8 @@ public class SessionCreateParams extends ApiRequestParams {
       }
 
       /**
-       * The amount to be collected per unit of the line item. If specified, must also pass {@code
-       * currency} and {@code name}.
+       * [Deprecated] The amount to be collected per unit of the line item. If specified, must also
+       * pass {@code currency} and {@code name}.
        */
       public Builder setAmount(Long amount) {
         this.amount = amount;
@@ -1575,9 +1574,10 @@ public class SessionCreateParams extends ApiRequestParams {
       }
 
       /**
-       * Three-letter <a href="https://www.iso.org/iso-4217-currency-codes.html">ISO currency
-       * code</a>, in lowercase. Must be a <a href="https://stripe.com/docs/currencies">supported
-       * currency</a>. Required if {@code amount} is passed.
+       * [Deprecated] Three-letter <a href="https://www.iso.org/iso-4217-currency-codes.html">ISO
+       * currency code</a>, in lowercase. Must be a <a
+       * href="https://stripe.com/docs/currencies">supported currency</a>. Required if {@code
+       * amount} is passed.
        */
       public Builder setCurrency(String currency) {
         this.currency = currency;
@@ -1674,8 +1674,8 @@ public class SessionCreateParams extends ApiRequestParams {
       }
 
       /**
-       * The name for the item to be displayed on the Checkout page. Required if {@code amount} is
-       * passed.
+       * [Deprecated] The name for the item to be displayed on the Checkout page. Required if {@code
+       * amount} is passed.
        */
       public Builder setName(String name) {
         this.name = name;
@@ -1684,8 +1684,8 @@ public class SessionCreateParams extends ApiRequestParams {
 
       /**
        * The ID of the <a href="https://stripe.com/docs/api/prices">Price</a> or <a
-       * href="https://stripe.com/docs/api/plans">Plan</a> object. One of {@code price}, {@code
-       * price_data} or {@code amount} is required.
+       * href="https://stripe.com/docs/api/plans">Plan</a> object. One of {@code price} or {@code
+       * price_data} is required.
        */
       public Builder setPrice(String price) {
         this.price = price;
@@ -1694,7 +1694,7 @@ public class SessionCreateParams extends ApiRequestParams {
 
       /**
        * Data used to generate a new <a href="https://stripe.com/docs/api/prices">Price</a> object
-       * inline. One of {@code price}, {@code price_data} or {@code amount} is required.
+       * inline. One of {@code price} or {@code price_data} is required.
        */
       public Builder setPriceData(PriceData priceData) {
         this.priceData = priceData;

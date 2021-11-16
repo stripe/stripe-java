@@ -246,16 +246,33 @@ public class ShippingRate extends ApiResource implements HasId, MetadataStore<Sh
      * The upper bound of the estimated range. If empty, represents no upper bound i.e., infinite.
      */
     @SerializedName("maximum")
-    DeliveryEstimateBound maximum;
+    Maximum maximum;
 
     /** The lower bound of the estimated range. If empty, represents no lower bound. */
     @SerializedName("minimum")
-    DeliveryEstimateBound minimum;
+    Minimum minimum;
 
     @Getter
     @Setter
     @EqualsAndHashCode(callSuper = false)
-    public static class DeliveryEstimateBound extends StripeObject {
+    public static class Maximum extends StripeObject {
+      /**
+       * A unit of time.
+       *
+       * <p>One of {@code business_day}, {@code day}, {@code hour}, {@code month}, or {@code week}.
+       */
+      @SerializedName("unit")
+      String unit;
+
+      /** Must be greater than 0. */
+      @SerializedName("value")
+      Long value;
+    }
+
+    @Getter
+    @Setter
+    @EqualsAndHashCode(callSuper = false)
+    public static class Minimum extends StripeObject {
       /**
        * A unit of time.
        *
