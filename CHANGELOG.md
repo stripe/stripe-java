@@ -1,5 +1,10 @@
 # Changelog
 
+## 20.89.0 - 2021-11-17
+* [#1286](https://github.com/stripe/stripe-java/pull/1286) API Updates
+  * Add support for `automatic_payment_methods` on `PaymentIntentCreateParams` and `PaymentIntent`
+  
+
 ## 20.88.0 - 2021-11-16
 * [#1284](https://github.com/stripe/stripe-java/pull/1284) API Updates
   * Add support for new resource `ShippingRate`
