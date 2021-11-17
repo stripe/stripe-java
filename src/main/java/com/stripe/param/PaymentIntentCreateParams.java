@@ -35,6 +35,13 @@ public class PaymentIntentCreateParams extends ApiRequestParams {
   @SerializedName("application_fee_amount")
   Long applicationFeeAmount;
 
+  /**
+   * When enabled, this PaymentIntent will accept payment methods that you have enabled in the
+   * Dashboard and are compatible with this PaymentIntent's other parameters.
+   */
+  @SerializedName("automatic_payment_methods")
+  AutomaticPaymentMethods automaticPaymentMethods;
+
   /** Controls when the funds will be captured from the customer's account. */
   @SerializedName("capture_method")
   CaptureMethod captureMethod;
@@ -260,6 +267,7 @@ public class PaymentIntentCreateParams extends ApiRequestParams {
   private PaymentIntentCreateParams(
       Long amount,
       Long applicationFeeAmount,
+      AutomaticPaymentMethods automaticPaymentMethods,
       CaptureMethod captureMethod,
       Boolean confirm,
       ConfirmationMethod confirmationMethod,
@@ -289,6 +297,7 @@ public class PaymentIntentCreateParams extends ApiRequestParams {
       Boolean useStripeSdk) {
     this.amount = amount;
     this.applicationFeeAmount = applicationFeeAmount;
+    this.automaticPaymentMethods = automaticPaymentMethods;
     this.captureMethod = captureMethod;
     this.confirm = confirm;
     this.confirmationMethod = confirmationMethod;
@@ -326,6 +335,8 @@ public class PaymentIntentCreateParams extends ApiRequestParams {
     private Long amount;
 
     private Long applicationFeeAmount;
+
+    private AutomaticPaymentMethods automaticPaymentMethods;
 
     private CaptureMethod captureMethod;
 
@@ -386,6 +397,7 @@ public class PaymentIntentCreateParams extends ApiRequestParams {
       return new PaymentIntentCreateParams(
           this.amount,
           this.applicationFeeAmount,
+          this.automaticPaymentMethods,
           this.captureMethod,
           this.confirm,
           this.confirmationMethod,
@@ -438,6 +450,15 @@ public class PaymentIntentCreateParams extends ApiRequestParams {
      */
     public Builder setApplicationFeeAmount(Long applicationFeeAmount) {
       this.applicationFeeAmount = applicationFeeAmount;
+      return this;
+    }
+
+    /**
+     * When enabled, this PaymentIntent will accept payment methods that you have enabled in the
+     * Dashboard and are compatible with this PaymentIntent's other parameters.
+     */
+    public Builder setAutomaticPaymentMethods(AutomaticPaymentMethods automaticPaymentMethods) {
+      this.automaticPaymentMethods = automaticPaymentMethods;
       return this;
     }
 
@@ -800,6 +821,75 @@ public class PaymentIntentCreateParams extends ApiRequestParams {
     public Builder setUseStripeSdk(Boolean useStripeSdk) {
       this.useStripeSdk = useStripeSdk;
       return this;
+    }
+  }
+
+  @Getter
+  public static class AutomaticPaymentMethods {
+    /** Whether this feature is enabled. */
+    @SerializedName("enabled")
+    Boolean enabled;
+
+    /**
+     * Map of extra parameters for custom features not available in this client library. The content
+     * in this map is not serialized under this field's {@code @SerializedName} value. Instead, each
+     * key/value pair is serialized as if the key is a root-level field (serialized) name in this
+     * param object. Effectively, this map is flattened to its parent instance.
+     */
+    @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
+    Map<String, Object> extraParams;
+
+    private AutomaticPaymentMethods(Boolean enabled, Map<String, Object> extraParams) {
+      this.enabled = enabled;
+      this.extraParams = extraParams;
+    }
+
+    public static Builder builder() {
+      return new Builder();
+    }
+
+    public static class Builder {
+      private Boolean enabled;
+
+      private Map<String, Object> extraParams;
+
+      /** Finalize and obtain parameter instance from this builder. */
+      public AutomaticPaymentMethods build() {
+        return new AutomaticPaymentMethods(this.enabled, this.extraParams);
+      }
+
+      /** Whether this feature is enabled. */
+      public Builder setEnabled(Boolean enabled) {
+        this.enabled = enabled;
+        return this;
+      }
+
+      /**
+       * Add a key/value pair to `extraParams` map. A map is initialized for the first `put/putAll`
+       * call, and subsequent calls add additional key/value pairs to the original map. See {@link
+       * PaymentIntentCreateParams.AutomaticPaymentMethods#extraParams} for the field documentation.
+       */
+      public Builder putExtraParam(String key, Object value) {
+        if (this.extraParams == null) {
+          this.extraParams = new HashMap<>();
+        }
+        this.extraParams.put(key, value);
+        return this;
+      }
+
+      /**
+       * Add all map key/value pairs to `extraParams` map. A map is initialized for the first
+       * `put/putAll` call, and subsequent calls add additional key/value pairs to the original map.
+       * See {@link PaymentIntentCreateParams.AutomaticPaymentMethods#extraParams} for the field
+       * documentation.
+       */
+      public Builder putAllExtraParam(Map<String, Object> map) {
+        if (this.extraParams == null) {
+          this.extraParams = new HashMap<>();
+        }
+        this.extraParams.putAll(map);
+        return this;
+      }
     }
   }
 

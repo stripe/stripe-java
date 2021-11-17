@@ -60,6 +60,13 @@ public class PaymentIntent extends ApiResource implements HasId, MetadataStore<P
   Long applicationFeeAmount;
 
   /**
+   * Settings to configure compatible payment methods from the <a
+   * href="https://dashboard.stripe.com/settings/payment_methods">Stripe Dashboard.</a>
+   */
+  @SerializedName("automatic_payment_methods")
+  AutomaticPaymentMethodsPaymentIntent automaticPaymentMethods;
+
+  /**
    * Populated when {@code status} is {@code canceled}, this is the time at which the PaymentIntent
    * was canceled. Measured in seconds since the Unix epoch.
    */
@@ -1077,7 +1084,8 @@ public class PaymentIntent extends ApiResource implements HasId, MetadataStore<P
 
     /**
      * Type of the next action to perform, one of {@code redirect_to_url}, {@code use_stripe_sdk},
-     * {@code alipay_handle_redirect}, or {@code oxxo_display_details}.
+     * {@code alipay_handle_redirect}, {@code oxxo_display_details}, or {@code
+     * verify_with_microdeposits}.
      */
     @SerializedName("type")
     String type;
