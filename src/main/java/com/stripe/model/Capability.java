@@ -277,8 +277,11 @@ public class Capability extends ApiResource implements HasId {
     /**
      * If the capability is disabled, this string describes why. Can be {@code
      * requirements.past_due}, {@code requirements.pending_verification}, {@code listed}, {@code
-     * platform_paused}, {@code rejected.fraud}, {@code rejected.listed}, {@code
-     * rejected.terms_of_service}, {@code rejected.other}, {@code under_review}, or {@code other}.
+     * platform_paused}, {@code rejected.listed}, {@code rejected.terms_of_service}, {@code
+     * rejected.card_casher}, {@code rejected.auto_fraud_shutdown}, {@code rejected.fraud}, {@code
+     * rejected.dishonest_merchant}, {@code rejected.identity_fraud}, {@code
+     * rejected.platform_fraud}, {@code rejected.platform_terms_of_service}, {@code rejected.other},
+     * {@code under_review}, or {@code other}.
      *
      * <p>{@code rejected.unsupported_business} means that the account's business is not supported
      * by the capability. For example, payment methods may restrict the businesses they support in
