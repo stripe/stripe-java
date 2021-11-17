@@ -2923,4 +2923,21 @@ class GeneratedExamples extends BaseStripeTest {
     assertNotNull(session);
     verifyRequest(ApiResource.RequestMethod.POST, "/v1/checkout/sessions", params.toMap());
   }
+
+  @Test
+  public void testPaymentIntentCreate2() throws StripeException {
+    PaymentIntentCreateParams params =
+        PaymentIntentCreateParams.builder()
+            .setAmount(1099L)
+            .setCurrency("eur")
+            .setAutomaticPaymentMethods(
+                PaymentIntentCreateParams.AutomaticPaymentMethods.builder()
+                    .setEnabled(true)
+                    .build())
+            .build();
+
+    PaymentIntent paymentIntent = PaymentIntent.create(params);
+    assertNotNull(paymentIntent);
+    verifyRequest(ApiResource.RequestMethod.POST, "/v1/payment_intents", params.toMap());
+  }
 }
