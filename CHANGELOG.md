@@ -1,9 +1,15 @@
 # Changelog
 
+## 20.90.0 - 2021-11-19
+* [#1289](https://github.com/stripe/stripe-java/pull/1289) API Updates
+  * Add support for `wallets` on `Issuing.Card`
+* [#1288](https://github.com/stripe/stripe-java/pull/1288) API Updates
+  * Add support for `interac_present` on `PaymentIntentCreateParams.payment_method_options`, `PaymentIntentUpdateParams.payment_method_options`, `PaymentIntentConfirmParams.payment_method_options`, and `PaymentIntent.payment_method_options`
+  * Add support for new value `jct` on enums `TaxRateCreateParams.tax_type` and `TaxRateUpdateParams.tax_type`
+
 ## 20.89.0 - 2021-11-17
 * [#1286](https://github.com/stripe/stripe-java/pull/1286) API Updates
   * Add support for `automatic_payment_methods` on `PaymentIntentCreateParams` and `PaymentIntent`
-  
 
 ## 20.88.0 - 2021-11-16
 * [#1284](https://github.com/stripe/stripe-java/pull/1284) API Updates
