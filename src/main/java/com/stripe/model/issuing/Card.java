@@ -343,42 +343,6 @@ public class Card extends ApiResource implements HasId, MetadataStore<Card> {
   @Getter
   @Setter
   @EqualsAndHashCode(callSuper = false)
-  public static class ApplePay extends StripeObject {
-    /** Apple Pay Eligibility. */
-    @SerializedName("eligible")
-    Boolean eligible;
-
-    /**
-     * Reason the card is ineligible for Apple Pay
-     *
-     * <p>One of {@code missing_agreement}, {@code missing_cardholder_contact}, or {@code
-     * unsupported_region}.
-     */
-    @SerializedName("ineligible_reason")
-    String ineligibleReason;
-  }
-
-  @Getter
-  @Setter
-  @EqualsAndHashCode(callSuper = false)
-  public static class GooglePay extends StripeObject {
-    /** Google Pay Eligibility. */
-    @SerializedName("eligible")
-    Boolean eligible;
-
-    /**
-     * Reason the card is ineligible for Google Pay
-     *
-     * <p>One of {@code missing_agreement}, {@code missing_cardholder_contact}, or {@code
-     * unsupported_region}.
-     */
-    @SerializedName("ineligible_reason")
-    String ineligibleReason;
-  }
-
-  @Getter
-  @Setter
-  @EqualsAndHashCode(callSuper = false)
   public static class Shipping extends StripeObject {
     @SerializedName("address")
     Address address;
@@ -513,5 +477,41 @@ public class Card extends ApiResource implements HasId, MetadataStore<Card> {
     /** Unique identifier for a card used with digital wallets. */
     @SerializedName("primary_account_identifier")
     String primaryAccountIdentifier;
+
+    @Getter
+    @Setter
+    @EqualsAndHashCode(callSuper = false)
+    public static class ApplePay extends StripeObject {
+      /** Apple Pay Eligibility. */
+      @SerializedName("eligible")
+      Boolean eligible;
+
+      /**
+       * Reason the card is ineligible for Apple Pay
+       *
+       * <p>One of {@code missing_agreement}, {@code missing_cardholder_contact}, or {@code
+       * unsupported_region}.
+       */
+      @SerializedName("ineligible_reason")
+      String ineligibleReason;
+    }
+
+    @Getter
+    @Setter
+    @EqualsAndHashCode(callSuper = false)
+    public static class GooglePay extends StripeObject {
+      /** Google Pay Eligibility. */
+      @SerializedName("eligible")
+      Boolean eligible;
+
+      /**
+       * Reason the card is ineligible for Google Pay
+       *
+       * <p>One of {@code missing_agreement}, {@code missing_cardholder_contact}, or {@code
+       * unsupported_region}.
+       */
+      @SerializedName("ineligible_reason")
+      String ineligibleReason;
+    }
   }
 }
