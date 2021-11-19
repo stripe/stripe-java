@@ -315,6 +315,9 @@ public class TaxRateCreateParams extends ApiRequestParams {
     @SerializedName("hst")
     HST("hst"),
 
+    @SerializedName("jct")
+    JCT("jct"),
+
     @SerializedName("pst")
     PST("pst"),
 
