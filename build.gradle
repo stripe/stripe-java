@@ -124,6 +124,11 @@ coveralls {
 
 javadoc {
   doFirst {
+    // We should remove this once we start using module-info.java.
+    // Without that file, Javadoc will fall back to "undefined" as the module
+    // name resulting in broken search links. This option explicitly declares
+    // that we are not currently using modules and the module name should be
+    // omitted from Javadoc.
     options.addBooleanOption('-no-module-directories', true)
   }
 }
