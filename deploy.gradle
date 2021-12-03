@@ -10,12 +10,6 @@ apply plugin: "maven-publish"
 apply plugin: "signing"
 apply plugin: "io.codearte.nexus-staging"
 
-nexusStaging {
-    packageGroup = GROUP
-    numberOfRetries = 40
-    delayBetweenRetriesInMillis = 4000
-}
-
 def isReleaseBuild() {
     return VERSION_NAME.contains("SNAPSHOT") == false
 }
@@ -57,6 +51,14 @@ afterEvaluate { project ->
         required { isReleaseBuild() && gradle.taskGraph.hasTask("publish") }
         useGpgCmd()
         sign publishing.publications
+    }
+
+    nexusStaging {
+        packageGroup = GROUP
+        numberOfRetries = 40
+        delayBetweenRetriesInMillis = 4000
+        username = getRepositoryUsername()
+        password = getRepositoryPassword()
     }
 
     publishing {
