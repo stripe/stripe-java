@@ -31,6 +31,8 @@ jobs:
           - "13"
           - "14"
           - "15"
+          - "16"
+          - "17"
 
     steps:
       - uses: actions/checkout@master
@@ -40,6 +42,10 @@ jobs:
         with:
           java-version: ${{ matrix.java-version }}
           architecture: x64
+
+      - name: Tweak gradle.properties for Java 1.8
+        if: ${{ matrix.java-version == '1.8' }}
+        run: sed -e '/--add-exports/ s/^#*/#/' -i gradle.properties
 
       - name: Display version
         run: ./gradlew --version
