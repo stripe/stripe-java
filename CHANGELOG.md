@@ -1,5 +1,15 @@
 # Changelog
 
+## 20.91.0 - 2021-12-09
+* [#1294](https://github.com/stripe/stripe-java/pull/1294) API Updates
+  * Add support for new values `ge_vat` and `ua_vat` on enums `CustomerCreateParams.tax_id_data[].type`, `InvoiceUpcomingParams.customer_details.tax_ids[].type`, `InvoiceUpcomingLinesParams.customer_details.tax_ids[].type`, and `TaxIdCreateParams.type`
+  * Change type of `PaymentIntentCreateParams.payment_method_data.billing_details.email`, `PaymentIntentUpdateParams.payment_method_data.billing_details.email`, `PaymentIntentConfirmParams.payment_method_data.billing_details.email`, `PaymentMethodCreateParams.billing_details.email`, and `PaymentMethodUpdateParams.billing_details.email` from `string` to `emptyStringable(string)`
+  * Add support for `giropay` on `PaymentIntentCreateParams.payment_method_options`, `PaymentIntentUpdateParams.payment_method_options`, `PaymentIntentConfirmParams.payment_method_options`, and `PaymentIntent.payment_method_options`
+  * Add support for new value `en-IE` on enums `PaymentIntentCreateParams.payment_method_options.klarna.preferred_locale`, `PaymentIntentUpdateParams.payment_method_options.klarna.preferred_locale`, and `PaymentIntentConfirmParams.payment_method_options.klarna.preferred_locale`
+* [#1291](https://github.com/stripe/stripe-java/pull/1291) Test Java 16 and 17
+* [#1292](https://github.com/stripe/stripe-java/pull/1292) Pass credentials to nexusStaging rule.
+* [#1290](https://github.com/stripe/stripe-java/pull/1290) Update Javadoc task to not use module directories.
+
 ## 20.90.0 - 2021-11-19
 * [#1289](https://github.com/stripe/stripe-java/pull/1289) API Updates
   * Add support for `wallets` on `Issuing.Card`
