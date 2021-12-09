@@ -1,3 +1,3 @@
 package com.stripe.model;
 
-public interface PaymentSource extends StripeObjectInterface, HasId {}
+public interface PaymentSource extends StripeObjectInterface, HasId{}

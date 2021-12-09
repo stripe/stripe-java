@@ -3,6 +3,7 @@ package com.stripe.param;
 
 import com.google.gson.annotations.SerializedName;
 import com.stripe.net.ApiRequestParams;
+import com.stripe.net.ApiRequestParams.EnumParam;
 import com.stripe.param.common.EmptyParam;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -13,53 +14,50 @@ import lombok.Getter;
 @Getter
 public class WebhookEndpointCreateParams extends ApiRequestParams {
   /**
-   * Events sent to this endpoint will be generated with this Stripe Version instead of your
-   * account's default Stripe Version.
+   * Events sent to this endpoint will be generated with this Stripe Version instead of your account's default Stripe Version.
    */
   @SerializedName("api_version")
   ApiVersion apiVersion;
 
   /**
-   * Whether this endpoint should receive events from connected accounts ({@code true}), or from
-   * your account ({@code false}). Defaults to {@code false}.
+   * Whether this endpoint should receive events from connected accounts ({@code true}), or from your account ({@code false}). Defaults to {@code false}.
    */
   @SerializedName("connect")
   Boolean connect;
 
-  /** An optional description of what the webhook is used for. */
+  /**
+   * An optional description of what the webhook is used for.
+   */
   @SerializedName("description")
   String description;
 
   /**
-   * The list of events to enable for this endpoint. You may specify {@code ['*']} to enable all
-   * events, except those that require explicit selection.
+   * The list of events to enable for this endpoint. You may specify {@code ['*']} to enable all events, except those that require explicit selection.
    */
   @SerializedName("enabled_events")
   List<EnabledEvent> enabledEvents;
 
-  /** Specifies which fields in the response should be expanded. */
+  /**
+   * Specifies which fields in the response should be expanded.
+   */
   @SerializedName("expand")
   List<String> expand;
 
   /**
-   * Map of extra parameters for custom features not available in this client library. The content
-   * in this map is not serialized under this field's {@code @SerializedName} value. Instead, each
-   * key/value pair is serialized as if the key is a root-level field (serialized) name in this
-   * param object. Effectively, this map is flattened to its parent instance.
+   * Map of extra parameters for custom features not available in this client library. The content in this map is not serialized under this field's {@code @SerializedName} value. Instead, each key/value pair is serialized as if the key is a root-level field (serialized) name in this param object. Effectively, this map is flattened to its parent instance.
    */
   @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
   Map<String, Object> extraParams;
 
   /**
-   * Set of <a href="https://stripe.com/docs/api/metadata">key-value pairs</a> that you can attach
-   * to an object. This can be useful for storing additional information about the object in a
-   * structured format. Individual keys can be unset by posting an empty value to them. All keys can
-   * be unset by posting an empty value to {@code metadata}.
+   * Set of <a href="https://stripe.com/docs/api/metadata">key-value pairs</a> that you can attach to an object. This can be useful for storing additional information about the object in a structured format. Individual keys can be unset by posting an empty value to them. All keys can be unset by posting an empty value to {@code metadata}.
    */
   @SerializedName("metadata")
   Object metadata;
 
-  /** The URL of the webhook endpoint. */
+  /**
+   * The URL of the webhook endpoint.
+   */
   @SerializedName("url")
   String url;
 
@@ -81,11 +79,9 @@ public class WebhookEndpointCreateParams extends ApiRequestParams {
     this.metadata = metadata;
     this.url = url;
   }
-
   public static Builder builder() {
     return new Builder();
   }
-
   public static class Builder {
     private ApiVersion apiVersion;
 
@@ -103,22 +99,24 @@ public class WebhookEndpointCreateParams extends ApiRequestParams {
 
     private String url;
 
-    /** Finalize and obtain parameter instance from this builder. */
+    /**
+     * Finalize and obtain parameter instance from this builder.
+     */
     public WebhookEndpointCreateParams build() {
       return new WebhookEndpointCreateParams(
-          this.apiVersion,
-          this.connect,
-          this.description,
-          this.enabledEvents,
-          this.expand,
-          this.extraParams,
-          this.metadata,
-          this.url);
+        this.apiVersion,
+        this.connect,
+        this.description,
+        this.enabledEvents,
+        this.expand,
+        this.extraParams,
+        this.metadata,
+        this.url
+      );
     }
 
     /**
-     * Events sent to this endpoint will be generated with this Stripe Version instead of your
-     * account's default Stripe Version.
+     * Events sent to this endpoint will be generated with this Stripe Version instead of your account's default Stripe Version.
      */
     public Builder setApiVersion(ApiVersion apiVersion) {
       this.apiVersion = apiVersion;
@@ -126,24 +124,23 @@ public class WebhookEndpointCreateParams extends ApiRequestParams {
     }
 
     /**
-     * Whether this endpoint should receive events from connected accounts ({@code true}), or from
-     * your account ({@code false}). Defaults to {@code false}.
+     * Whether this endpoint should receive events from connected accounts ({@code true}), or from your account ({@code false}). Defaults to {@code false}.
      */
     public Builder setConnect(Boolean connect) {
       this.connect = connect;
       return this;
     }
 
-    /** An optional description of what the webhook is used for. */
+    /**
+     * An optional description of what the webhook is used for.
+     */
     public Builder setDescription(String description) {
       this.description = description;
       return this;
     }
 
     /**
-     * Add an element to `enabledEvents` list. A list is initialized for the first `add/addAll`
-     * call, and subsequent calls adds additional elements to the original list. See {@link
-     * WebhookEndpointCreateParams#enabledEvents} for the field documentation.
+     * Add an element to `enabledEvents` list. A list is initialized for the first `add/addAll` call, and subsequent calls adds additional elements to the original list. See {@link WebhookEndpointCreateParams#enabledEvents} for the field documentation.
      */
     public Builder addEnabledEvent(EnabledEvent element) {
       if (this.enabledEvents == null) {
@@ -154,9 +151,7 @@ public class WebhookEndpointCreateParams extends ApiRequestParams {
     }
 
     /**
-     * Add all elements to `enabledEvents` list. A list is initialized for the first `add/addAll`
-     * call, and subsequent calls adds additional elements to the original list. See {@link
-     * WebhookEndpointCreateParams#enabledEvents} for the field documentation.
+     * Add all elements to `enabledEvents` list. A list is initialized for the first `add/addAll` call, and subsequent calls adds additional elements to the original list. See {@link WebhookEndpointCreateParams#enabledEvents} for the field documentation.
      */
     public Builder addAllEnabledEvent(List<EnabledEvent> elements) {
       if (this.enabledEvents == null) {
@@ -167,9 +162,7 @@ public class WebhookEndpointCreateParams extends ApiRequestParams {
     }
 
     /**
-     * Add an element to `expand` list. A list is initialized for the first `add/addAll` call, and
-     * subsequent calls adds additional elements to the original list. See {@link
-     * WebhookEndpointCreateParams#expand} for the field documentation.
+     * Add an element to `expand` list. A list is initialized for the first `add/addAll` call, and subsequent calls adds additional elements to the original list. See {@link WebhookEndpointCreateParams#expand} for the field documentation.
      */
     public Builder addExpand(String element) {
       if (this.expand == null) {
@@ -180,9 +173,7 @@ public class WebhookEndpointCreateParams extends ApiRequestParams {
     }
 
     /**
-     * Add all elements to `expand` list. A list is initialized for the first `add/addAll` call, and
-     * subsequent calls adds additional elements to the original list. See {@link
-     * WebhookEndpointCreateParams#expand} for the field documentation.
+     * Add all elements to `expand` list. A list is initialized for the first `add/addAll` call, and subsequent calls adds additional elements to the original list. See {@link WebhookEndpointCreateParams#expand} for the field documentation.
      */
     public Builder addAllExpand(List<String> elements) {
       if (this.expand == null) {
@@ -193,9 +184,7 @@ public class WebhookEndpointCreateParams extends ApiRequestParams {
     }
 
     /**
-     * Add a key/value pair to `extraParams` map. A map is initialized for the first `put/putAll`
-     * call, and subsequent calls add additional key/value pairs to the original map. See {@link
-     * WebhookEndpointCreateParams#extraParams} for the field documentation.
+     * Add a key/value pair to `extraParams` map. A map is initialized for the first `put/putAll` call, and subsequent calls add additional key/value pairs to the original map. See {@link WebhookEndpointCreateParams#extraParams} for the field documentation.
      */
     public Builder putExtraParam(String key, Object value) {
       if (this.extraParams == null) {
@@ -206,9 +195,7 @@ public class WebhookEndpointCreateParams extends ApiRequestParams {
     }
 
     /**
-     * Add all map key/value pairs to `extraParams` map. A map is initialized for the first
-     * `put/putAll` call, and subsequent calls add additional key/value pairs to the original map.
-     * See {@link WebhookEndpointCreateParams#extraParams} for the field documentation.
+     * Add all map key/value pairs to `extraParams` map. A map is initialized for the first `put/putAll` call, and subsequent calls add additional key/value pairs to the original map. See {@link WebhookEndpointCreateParams#extraParams} for the field documentation.
      */
     public Builder putAllExtraParam(Map<String, Object> map) {
       if (this.extraParams == null) {
@@ -219,9 +206,7 @@ public class WebhookEndpointCreateParams extends ApiRequestParams {
     }
 
     /**
-     * Add a key/value pair to `metadata` map. A map is initialized for the first `put/putAll` call,
-     * and subsequent calls add additional key/value pairs to the original map. See {@link
-     * WebhookEndpointCreateParams#metadata} for the field documentation.
+     * Add a key/value pair to `metadata` map. A map is initialized for the first `put/putAll` call, and subsequent calls add additional key/value pairs to the original map. See {@link WebhookEndpointCreateParams#metadata} for the field documentation.
      */
     @SuppressWarnings("unchecked")
     public Builder putMetadata(String key, String value) {
@@ -233,9 +218,7 @@ public class WebhookEndpointCreateParams extends ApiRequestParams {
     }
 
     /**
-     * Add all map key/value pairs to `metadata` map. A map is initialized for the first
-     * `put/putAll` call, and subsequent calls add additional key/value pairs to the original map.
-     * See {@link WebhookEndpointCreateParams#metadata} for the field documentation.
+     * Add all map key/value pairs to `metadata` map. A map is initialized for the first `put/putAll` call, and subsequent calls add additional key/value pairs to the original map. See {@link WebhookEndpointCreateParams#metadata} for the field documentation.
      */
     @SuppressWarnings("unchecked")
     public Builder putAllMetadata(Map<String, String> map) {
@@ -247,10 +230,7 @@ public class WebhookEndpointCreateParams extends ApiRequestParams {
     }
 
     /**
-     * Set of <a href="https://stripe.com/docs/api/metadata">key-value pairs</a> that you can attach
-     * to an object. This can be useful for storing additional information about the object in a
-     * structured format. Individual keys can be unset by posting an empty value to them. All keys
-     * can be unset by posting an empty value to {@code metadata}.
+     * Set of <a href="https://stripe.com/docs/api/metadata">key-value pairs</a> that you can attach to an object. This can be useful for storing additional information about the object in a structured format. Individual keys can be unset by posting an empty value to them. All keys can be unset by posting an empty value to {@code metadata}.
      */
     public Builder setMetadata(EmptyParam metadata) {
       this.metadata = metadata;
@@ -258,23 +238,21 @@ public class WebhookEndpointCreateParams extends ApiRequestParams {
     }
 
     /**
-     * Set of <a href="https://stripe.com/docs/api/metadata">key-value pairs</a> that you can attach
-     * to an object. This can be useful for storing additional information about the object in a
-     * structured format. Individual keys can be unset by posting an empty value to them. All keys
-     * can be unset by posting an empty value to {@code metadata}.
+     * Set of <a href="https://stripe.com/docs/api/metadata">key-value pairs</a> that you can attach to an object. This can be useful for storing additional information about the object in a structured format. Individual keys can be unset by posting an empty value to them. All keys can be unset by posting an empty value to {@code metadata}.
      */
     public Builder setMetadata(Map<String, String> metadata) {
       this.metadata = metadata;
       return this;
     }
 
-    /** The URL of the webhook endpoint. */
+    /**
+     * The URL of the webhook endpoint.
+     */
     public Builder setUrl(String url) {
       this.url = url;
       return this;
     }
   }
-
   public enum ApiVersion implements ApiRequestParams.EnumParam {
     @SerializedName("2011-01-01")
     VERSION_2011_01_01("2011-01-01"),
@@ -563,15 +541,13 @@ public class WebhookEndpointCreateParams extends ApiRequestParams {
 
     @SerializedName("2020-08-27")
     VERSION_2020_08_27("2020-08-27");
-
     @Getter(onMethod_ = {@Override})
     private final String value;
-
     ApiVersion(String value) {
       this.value = value;
     }
-  }
 
+  }
   public enum EnabledEvent implements ApiRequestParams.EnumParam {
     @SerializedName("*")
     ALL("*"),
@@ -1106,12 +1082,11 @@ public class WebhookEndpointCreateParams extends ApiRequestParams {
 
     @SerializedName("transfer.updated")
     TRANSFER__UPDATED("transfer.updated");
-
     @Getter(onMethod_ = {@Override})
     private final String value;
-
     EnabledEvent(String value) {
       this.value = value;
     }
+
   }
 }

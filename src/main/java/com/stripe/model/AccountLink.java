@@ -16,11 +16,15 @@ import lombok.Setter;
 @Setter
 @EqualsAndHashCode(callSuper = false)
 public class AccountLink extends ApiResource {
-  /** Time at which the object was created. Measured in seconds since the Unix epoch. */
+  /**
+   * Time at which the object was created. Measured in seconds since the Unix epoch.
+   */
   @SerializedName("created")
   Long created;
 
-  /** The timestamp at which this account link will expire. */
+  /**
+   * The timestamp at which this account link will expire.
+   */
   @SerializedName("expires_at")
   Long expiresAt;
 
@@ -32,45 +36,55 @@ public class AccountLink extends ApiResource {
   @SerializedName("object")
   String object;
 
-  /** The URL for the account link. */
+  /**
+   * The URL for the account link.
+   */
   @SerializedName("url")
   String url;
 
   /**
-   * Creates an AccountLink object that includes a single-use Stripe URL that the platform can
-   * redirect their user to in order to take them through the Connect Onboarding flow.
+   * <p>Creates an AccountLink object that includes a single-use Stripe URL that the platform can redirect their user to in order to take them through the Connect Onboarding flow.</p>
    */
   public static AccountLink create(Map<String, Object> params) throws StripeException {
     return create(params, (RequestOptions) null);
   }
 
   /**
-   * Creates an AccountLink object that includes a single-use Stripe URL that the platform can
-   * redirect their user to in order to take them through the Connect Onboarding flow.
+   * <p>Creates an AccountLink object that includes a single-use Stripe URL that the platform can redirect their user to in order to take them through the Connect Onboarding flow.</p>
    */
-  public static AccountLink create(Map<String, Object> params, RequestOptions options)
-      throws StripeException {
+  public static AccountLink create(
+      Map<String, Object> params,
+      RequestOptions options) throws StripeException {
     String url = String.format("%s%s", Stripe.getApiBase(), "/v1/account_links");
     return ApiResource.request(
-        ApiResource.RequestMethod.POST, url, params, AccountLink.class, options);
+      ApiResource.RequestMethod.POST,
+      url,
+      params,
+      AccountLink.class,
+      options
+    );
   }
 
   /**
-   * Creates an AccountLink object that includes a single-use Stripe URL that the platform can
-   * redirect their user to in order to take them through the Connect Onboarding flow.
+   * <p>Creates an AccountLink object that includes a single-use Stripe URL that the platform can redirect their user to in order to take them through the Connect Onboarding flow.</p>
    */
   public static AccountLink create(AccountLinkCreateParams params) throws StripeException {
     return create(params, (RequestOptions) null);
   }
 
   /**
-   * Creates an AccountLink object that includes a single-use Stripe URL that the platform can
-   * redirect their user to in order to take them through the Connect Onboarding flow.
+   * <p>Creates an AccountLink object that includes a single-use Stripe URL that the platform can redirect their user to in order to take them through the Connect Onboarding flow.</p>
    */
-  public static AccountLink create(AccountLinkCreateParams params, RequestOptions options)
-      throws StripeException {
+  public static AccountLink create(
+      AccountLinkCreateParams params,
+      RequestOptions options) throws StripeException {
     String url = String.format("%s%s", Stripe.getApiBase(), "/v1/account_links");
     return ApiResource.request(
-        ApiResource.RequestMethod.POST, url, params, AccountLink.class, options);
+      ApiResource.RequestMethod.POST,
+      url,
+      params,
+      AccountLink.class,
+      options
+    );
   }
 }

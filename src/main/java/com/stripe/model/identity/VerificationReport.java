@@ -21,26 +21,33 @@ import lombok.Setter;
 @Setter
 @EqualsAndHashCode(callSuper = false)
 public class VerificationReport extends ApiResource implements HasId {
-  /** Time at which the object was created. Measured in seconds since the Unix epoch. */
+  /**
+   * Time at which the object was created. Measured in seconds since the Unix epoch.
+   */
   @SerializedName("created")
   Long created;
 
-  /** Result from a document check. */
+  /**
+   * Result from a document check.
+   */
   @SerializedName("document")
   Document document;
 
-  /** Unique identifier for the object. */
+  /**
+   * Unique identifier for the object.
+   */
   @Getter(onMethod_ = {@Override})
   @SerializedName("id")
   String id;
 
-  /** Result from an id_number check. */
+  /**
+   * Result from an id_number check.
+   */
   @SerializedName("id_number")
   IdNumber idNumber;
 
   /**
-   * Has the value {@code true} if the object exists in live mode or the value {@code false} if the
-   * object exists in test mode.
+   * Has the value {@code true} if the object exists in live mode or the value {@code false} if the object exists in test mode.
    */
   @SerializedName("livemode")
   Boolean livemode;
@@ -56,7 +63,9 @@ public class VerificationReport extends ApiResource implements HasId {
   @SerializedName("options")
   Options options;
 
-  /** Result from a selfie check. */
+  /**
+   * Result from a selfie check.
+   */
   @SerializedName("selfie")
   Selfie selfie;
 
@@ -68,68 +77,104 @@ public class VerificationReport extends ApiResource implements HasId {
   @SerializedName("type")
   String type;
 
-  /** ID of the VerificationSession that created this report. */
+  /**
+   * ID of the VerificationSession that created this report.
+   */
   @SerializedName("verification_session")
   String verificationSession;
 
-  /** Retrieves an existing VerificationReport. */
+  /**
+   * <p>Retrieves an existing VerificationReport.</p>
+   */
   public static VerificationReport retrieve(String report) throws StripeException {
     return retrieve(report, (Map<String, Object>) null, (RequestOptions) null);
   }
 
-  /** Retrieves an existing VerificationReport. */
-  public static VerificationReport retrieve(String report, RequestOptions options)
-      throws StripeException {
+  /**
+   * <p>Retrieves an existing VerificationReport.</p>
+   */
+  public static VerificationReport retrieve(
+      String report,
+      RequestOptions options) throws StripeException {
     return retrieve(report, (Map<String, Object>) null, options);
   }
 
-  /** Retrieves an existing VerificationReport. */
+  /**
+   * <p>Retrieves an existing VerificationReport.</p>
+   */
   public static VerificationReport retrieve(
-      String report, Map<String, Object> params, RequestOptions options) throws StripeException {
+      String report,
+      Map<String, Object> params,
+      RequestOptions options) throws StripeException {
     String url =
-        String.format(
-            "%s%s",
-            Stripe.getApiBase(),
-            String.format("/v1/identity/verification_reports/%s", ApiResource.urlEncodeId(report)));
+      String.format(
+        "%s%s",
+        Stripe.getApiBase(),
+        String.format("/v1/identity/verification_reports/%s", ApiResource.urlEncodeId(report))
+      );
     return ApiResource.request(
-        ApiResource.RequestMethod.GET, url, params, VerificationReport.class, options);
+      ApiResource.RequestMethod.GET,
+      url,
+      params,
+      VerificationReport.class,
+      options
+    );
   }
 
-  /** Retrieves an existing VerificationReport. */
+  /**
+   * <p>Retrieves an existing VerificationReport.</p>
+   */
   public static VerificationReport retrieve(
-      String report, VerificationReportRetrieveParams params, RequestOptions options)
-      throws StripeException {
+      String report,
+      VerificationReportRetrieveParams params,
+      RequestOptions options) throws StripeException {
     String url =
-        String.format(
-            "%s%s",
-            Stripe.getApiBase(),
-            String.format("/v1/identity/verification_reports/%s", ApiResource.urlEncodeId(report)));
+      String.format(
+        "%s%s",
+        Stripe.getApiBase(),
+        String.format("/v1/identity/verification_reports/%s", ApiResource.urlEncodeId(report))
+      );
     return ApiResource.request(
-        ApiResource.RequestMethod.GET, url, params, VerificationReport.class, options);
+      ApiResource.RequestMethod.GET,
+      url,
+      params,
+      VerificationReport.class,
+      options
+    );
   }
 
-  /** List all verification reports. */
-  public static VerificationReportCollection list(Map<String, Object> params)
-      throws StripeException {
+  /**
+   * <p>List all verification reports.</p>
+   */
+  public static VerificationReportCollection list(
+      Map<String, Object> params) throws StripeException {
     return list(params, (RequestOptions) null);
   }
 
-  /** List all verification reports. */
+  /**
+   * <p>List all verification reports.</p>
+   */
   public static VerificationReportCollection list(
-      Map<String, Object> params, RequestOptions options) throws StripeException {
+      Map<String, Object> params,
+      RequestOptions options) throws StripeException {
     String url = String.format("%s%s", Stripe.getApiBase(), "/v1/identity/verification_reports");
     return ApiResource.requestCollection(url, params, VerificationReportCollection.class, options);
   }
 
-  /** List all verification reports. */
-  public static VerificationReportCollection list(VerificationReportListParams params)
-      throws StripeException {
+  /**
+   * <p>List all verification reports.</p>
+   */
+  public static VerificationReportCollection list(
+      VerificationReportListParams params) throws StripeException {
     return list(params, (RequestOptions) null);
   }
 
-  /** List all verification reports. */
+  /**
+   * <p>List all verification reports.</p>
+   */
   public static VerificationReportCollection list(
-      VerificationReportListParams params, RequestOptions options) throws StripeException {
+      VerificationReportListParams params,
+      RequestOptions options) throws StripeException {
     String url = String.format("%s%s", Stripe.getApiBase(), "/v1/identity/verification_reports");
     return ApiResource.requestCollection(url, params, VerificationReportCollection.class, options);
   }
@@ -138,46 +183,63 @@ public class VerificationReport extends ApiResource implements HasId {
   @Setter
   @EqualsAndHashCode(callSuper = false)
   public static class Document extends StripeObject {
-    /** Address as it appears in the document. */
+    /**
+     * Address as it appears in the document.
+     */
     @SerializedName("address")
     Address address;
 
-    /** Date of birth as it appears in the document. */
+    /**
+     * Date of birth as it appears in the document.
+     */
     @SerializedName("dob")
     DateOfBirth dob;
 
-    /** Details on the verification error. Present when status is {@code unverified}. */
+    /**
+     * Details on the verification error. Present when status is {@code unverified}.
+     */
     @SerializedName("error")
     DocumentCheckError error;
 
-    /** Expiration date of the document. */
+    /**
+     * Expiration date of the document.
+     */
     @SerializedName("expiration_date")
     ExpirationDate expirationDate;
 
     /**
-     * Array of <a href="https://stripe.com/docs/api/files">File</a> ids containing images for this
-     * document.
+     * Array of <a href="https://stripe.com/docs/api/files">File</a> ids containing images for this document.
      */
     @SerializedName("files")
     List<String> files;
 
-    /** First name as it appears in the document. */
+    /**
+     * First name as it appears in the document.
+     */
     @SerializedName("first_name")
     String firstName;
 
-    /** Issued date of the document. */
+    /**
+     * Issued date of the document.
+     */
     @SerializedName("issued_date")
     IssuedDate issuedDate;
 
-    /** Issuing country of the document. */
+    /**
+     * Issuing country of the document.
+     */
     @SerializedName("issuing_country")
     String issuingCountry;
 
-    /** Last name as it appears in the document. */
+    /**
+     * Last name as it appears in the document.
+     */
     @SerializedName("last_name")
     String lastName;
 
-    /** Document ID number. */
+    /**
+     * Document ID number.
+     */
     @SerializedName("number")
     String number;
 
@@ -201,15 +263,21 @@ public class VerificationReport extends ApiResource implements HasId {
     @Setter
     @EqualsAndHashCode(callSuper = false)
     public static class DateOfBirth extends StripeObject {
-      /** Numerical day between 1 and 31. */
+      /**
+       * Numerical day between 1 and 31.
+       */
       @SerializedName("day")
       Long day;
 
-      /** Numerical month between 1 and 12. */
+      /**
+       * Numerical month between 1 and 12.
+       */
       @SerializedName("month")
       Long month;
 
-      /** The four-digit year. */
+      /**
+       * The four-digit year.
+       */
       @SerializedName("year")
       Long year;
     }
@@ -221,15 +289,13 @@ public class VerificationReport extends ApiResource implements HasId {
       /**
        * A short machine-readable string giving the reason for the verification failure.
        *
-       * <p>One of {@code document_expired}, {@code document_type_not_supported}, or {@code
-       * document_unverified_other}.
+       * <p>One of {@code document_expired}, {@code document_type_not_supported}, or {@code document_unverified_other}.
        */
       @SerializedName("code")
       String code;
 
       /**
-       * A human-readable message giving the reason for the failure. These messages can be shown to
-       * your users.
+       * A human-readable message giving the reason for the failure. These messages can be shown to your users.
        */
       @SerializedName("reason")
       String reason;
@@ -239,15 +305,21 @@ public class VerificationReport extends ApiResource implements HasId {
     @Setter
     @EqualsAndHashCode(callSuper = false)
     public static class ExpirationDate extends StripeObject {
-      /** Numerical day between 1 and 31. */
+      /**
+       * Numerical day between 1 and 31.
+       */
       @SerializedName("day")
       Long day;
 
-      /** Numerical month between 1 and 12. */
+      /**
+       * Numerical month between 1 and 12.
+       */
       @SerializedName("month")
       Long month;
 
-      /** The four-digit year. */
+      /**
+       * The four-digit year.
+       */
       @SerializedName("year")
       Long year;
     }
@@ -256,15 +328,21 @@ public class VerificationReport extends ApiResource implements HasId {
     @Setter
     @EqualsAndHashCode(callSuper = false)
     public static class IssuedDate extends StripeObject {
-      /** Numerical day between 1 and 31. */
+      /**
+       * Numerical day between 1 and 31.
+       */
       @SerializedName("day")
       Long day;
 
-      /** Numerical month between 1 and 12. */
+      /**
+       * Numerical month between 1 and 12.
+       */
       @SerializedName("month")
       Long month;
 
-      /** The four-digit year. */
+      /**
+       * The four-digit year.
+       */
       @SerializedName("year")
       Long year;
     }
@@ -274,19 +352,27 @@ public class VerificationReport extends ApiResource implements HasId {
   @Setter
   @EqualsAndHashCode(callSuper = false)
   public static class IdNumber extends StripeObject {
-    /** Date of birth. */
+    /**
+     * Date of birth.
+     */
     @SerializedName("dob")
     DateOfBirth dob;
 
-    /** Details on the verification error. Present when status is {@code unverified}. */
+    /**
+     * Details on the verification error. Present when status is {@code unverified}.
+     */
     @SerializedName("error")
     IdNumberCheckError error;
 
-    /** First name. */
+    /**
+     * First name.
+     */
     @SerializedName("first_name")
     String firstName;
 
-    /** ID number. */
+    /**
+     * ID number.
+     */
     @SerializedName("id_number")
     String idNumber;
 
@@ -298,7 +384,9 @@ public class VerificationReport extends ApiResource implements HasId {
     @SerializedName("id_number_type")
     String idNumberType;
 
-    /** Last name. */
+    /**
+     * Last name.
+     */
     @SerializedName("last_name")
     String lastName;
 
@@ -314,15 +402,21 @@ public class VerificationReport extends ApiResource implements HasId {
     @Setter
     @EqualsAndHashCode(callSuper = false)
     public static class DateOfBirth extends StripeObject {
-      /** Numerical day between 1 and 31. */
+      /**
+       * Numerical day between 1 and 31.
+       */
       @SerializedName("day")
       Long day;
 
-      /** Numerical month between 1 and 12. */
+      /**
+       * Numerical month between 1 and 12.
+       */
       @SerializedName("month")
       Long month;
 
-      /** The four-digit year. */
+      /**
+       * The four-digit year.
+       */
       @SerializedName("year")
       Long year;
     }
@@ -334,15 +428,13 @@ public class VerificationReport extends ApiResource implements HasId {
       /**
        * A short machine-readable string giving the reason for the verification failure.
        *
-       * <p>One of {@code id_number_insufficient_document_data}, {@code id_number_mismatch}, or
-       * {@code id_number_unverified_other}.
+       * <p>One of {@code id_number_insufficient_document_data}, {@code id_number_mismatch}, or {@code id_number_unverified_other}.
        */
       @SerializedName("code")
       String code;
 
       /**
-       * A human-readable message giving the reason for the failure. These messages can be shown to
-       * your users.
+       * A human-readable message giving the reason for the failure. These messages can be shown to your users.
        */
       @SerializedName("reason")
       String reason;
@@ -364,33 +456,25 @@ public class VerificationReport extends ApiResource implements HasId {
     @EqualsAndHashCode(callSuper = false)
     public static class Document extends StripeObject {
       /**
-       * Array of strings of allowed identity document types. If the provided identity document
-       * isn’t one of the allowed types, the verification check will fail with a
-       * document_type_not_allowed error code.
+       * Array of strings of allowed identity document types. If the provided identity document isn’t one of the allowed types, the verification check will fail with a document_type_not_allowed error code.
        */
       @SerializedName("allowed_types")
       List<String> allowedTypes;
 
       /**
-       * Collect an ID number and perform an <a
-       * href="https://stripe.com/docs/identity/verification-checks?type=id-number">ID number
-       * check</a> with the document’s extracted name and date of birth.
+       * Collect an ID number and perform an <a href="https://stripe.com/docs/identity/verification-checks?type=id-number">ID number check</a> with the document’s extracted name and date of birth.
        */
       @SerializedName("require_id_number")
       Boolean requireIdNumber;
 
       /**
-       * Disable image uploads, identity document images have to be captured using the device’s
-       * camera.
+       * Disable image uploads, identity document images have to be captured using the device’s camera.
        */
       @SerializedName("require_live_capture")
       Boolean requireLiveCapture;
 
       /**
-       * Capture a face image and perform a <a
-       * href="https://stripe.com/docs/identity/verification-checks?type=selfie">selfie check</a>
-       * comparing a photo ID and a picture of your user’s face. <a
-       * href="https://stripe.com/docs/identity/selfie">Learn more</a>.
+       * Capture a face image and perform a <a href="https://stripe.com/docs/identity/verification-checks?type=selfie">selfie check</a> comparing a photo ID and a picture of your user’s face. <a href="https://stripe.com/docs/identity/selfie">Learn more</a>.
        */
       @SerializedName("require_matching_selfie")
       Boolean requireMatchingSelfie;
@@ -407,19 +491,19 @@ public class VerificationReport extends ApiResource implements HasId {
   @EqualsAndHashCode(callSuper = false)
   public static class Selfie extends StripeObject {
     /**
-     * ID of the <a href="https://stripe.com/docs/api/files">File</a> holding the image of the
-     * identity document used in this check.
+     * ID of the <a href="https://stripe.com/docs/api/files">File</a> holding the image of the identity document used in this check.
      */
     @SerializedName("document")
     String document;
 
-    /** Details on the verification error. Present when status is {@code unverified}. */
+    /**
+     * Details on the verification error. Present when status is {@code unverified}.
+     */
     @SerializedName("error")
     SelfieCheckError error;
 
     /**
-     * ID of the <a href="https://stripe.com/docs/api/files">File</a> holding the image of the
-     * selfie used in this check.
+     * ID of the <a href="https://stripe.com/docs/api/files">File</a> holding the image of the selfie used in this check.
      */
     @SerializedName("selfie")
     String selfie;
@@ -439,15 +523,13 @@ public class VerificationReport extends ApiResource implements HasId {
       /**
        * A short machine-readable string giving the reason for the verification failure.
        *
-       * <p>One of {@code selfie_document_missing_photo}, {@code selfie_face_mismatch}, {@code
-       * selfie_manipulated}, or {@code selfie_unverified_other}.
+       * <p>One of {@code selfie_document_missing_photo}, {@code selfie_face_mismatch}, {@code selfie_manipulated}, or {@code selfie_unverified_other}.
        */
       @SerializedName("code")
       String code;
 
       /**
-       * A human-readable message giving the reason for the failure. These messages can be shown to
-       * your users.
+       * A human-readable message giving the reason for the failure. These messages can be shown to your users.
        */
       @SerializedName("reason")
       String reason;

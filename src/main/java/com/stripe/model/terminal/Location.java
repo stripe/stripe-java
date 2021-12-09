@@ -25,30 +25,33 @@ public class Location extends ApiResource implements HasId, MetadataStore<Locati
   @SerializedName("address")
   Address address;
 
-  /** Always true for a deleted object. */
+  /**
+   * Always true for a deleted object.
+   */
   @SerializedName("deleted")
   Boolean deleted;
 
-  /** The display name of the location. */
+  /**
+   * The display name of the location.
+   */
   @SerializedName("display_name")
   String displayName;
 
-  /** Unique identifier for the object. */
+  /**
+   * Unique identifier for the object.
+   */
   @Getter(onMethod_ = {@Override})
   @SerializedName("id")
   String id;
 
   /**
-   * Has the value {@code true} if the object exists in live mode or the value {@code false} if the
-   * object exists in test mode.
+   * Has the value {@code true} if the object exists in live mode or the value {@code false} if the object exists in test mode.
    */
   @SerializedName("livemode")
   Boolean livemode;
 
   /**
-   * Set of <a href="https://stripe.com/docs/api/metadata">key-value pairs</a> that you can attach
-   * to an object. This can be useful for storing additional information about the object in a
-   * structured format.
+   * Set of <a href="https://stripe.com/docs/api/metadata">key-value pairs</a> that you can attach to an object. This can be useful for storing additional information about the object in a structured format.
    */
   @Getter(onMethod_ = {@Override})
   @SerializedName("metadata")
@@ -62,84 +65,104 @@ public class Location extends ApiResource implements HasId, MetadataStore<Locati
   @SerializedName("object")
   String object;
 
-  /** Retrieves a <code>Location</code> object. */
+  /**
+   * <p>Retrieves a <code>Location</code> object.</p>
+   */
   public static Location retrieve(String location) throws StripeException {
     return retrieve(location, (Map<String, Object>) null, (RequestOptions) null);
   }
 
-  /** Retrieves a <code>Location</code> object. */
+  /**
+   * <p>Retrieves a <code>Location</code> object.</p>
+   */
   public static Location retrieve(String location, RequestOptions options) throws StripeException {
     return retrieve(location, (Map<String, Object>) null, options);
   }
 
-  /** Retrieves a <code>Location</code> object. */
+  /**
+   * <p>Retrieves a <code>Location</code> object.</p>
+   */
   public static Location retrieve(
-      String location, Map<String, Object> params, RequestOptions options) throws StripeException {
+      String location,
+      Map<String, Object> params,
+      RequestOptions options) throws StripeException {
     String url =
-        String.format(
-            "%s%s",
-            Stripe.getApiBase(),
-            String.format("/v1/terminal/locations/%s", ApiResource.urlEncodeId(location)));
-    return ApiResource.request(ApiResource.RequestMethod.GET, url, params, Location.class, options);
-  }
-
-  /** Retrieves a <code>Location</code> object. */
-  public static Location retrieve(
-      String location, LocationRetrieveParams params, RequestOptions options)
-      throws StripeException {
-    String url =
-        String.format(
-            "%s%s",
-            Stripe.getApiBase(),
-            String.format("/v1/terminal/locations/%s", ApiResource.urlEncodeId(location)));
+      String.format(
+        "%s%s",
+        Stripe.getApiBase(),
+        String.format("/v1/terminal/locations/%s", ApiResource.urlEncodeId(location))
+      );
     return ApiResource.request(ApiResource.RequestMethod.GET, url, params, Location.class, options);
   }
 
   /**
-   * Creates a new <code>Location</code> object. For further details, including which address fields
-   * are required in each country, see the <a
-   * href="https://stripe.com/docs/terminal/fleet/locations">Manage locations</a> guide.
+   * <p>Retrieves a <code>Location</code> object.</p>
+   */
+  public static Location retrieve(
+      String location,
+      LocationRetrieveParams params,
+      RequestOptions options) throws StripeException {
+    String url =
+      String.format(
+        "%s%s",
+        Stripe.getApiBase(),
+        String.format("/v1/terminal/locations/%s", ApiResource.urlEncodeId(location))
+      );
+    return ApiResource.request(ApiResource.RequestMethod.GET, url, params, Location.class, options);
+  }
+
+  /**
+   * <p>Creates a new <code>Location</code> object.
+   * For further details, including which address fields are required in each country, see the <a href="https://stripe.com/docs/terminal/fleet/locations">Manage locations</a> guide.</p>
    */
   public static Location create(Map<String, Object> params) throws StripeException {
     return create(params, (RequestOptions) null);
   }
 
   /**
-   * Creates a new <code>Location</code> object. For further details, including which address fields
-   * are required in each country, see the <a
-   * href="https://stripe.com/docs/terminal/fleet/locations">Manage locations</a> guide.
+   * <p>Creates a new <code>Location</code> object.
+   * For further details, including which address fields are required in each country, see the <a href="https://stripe.com/docs/terminal/fleet/locations">Manage locations</a> guide.</p>
    */
-  public static Location create(Map<String, Object> params, RequestOptions options)
-      throws StripeException {
+  public static Location create(
+      Map<String, Object> params,
+      RequestOptions options) throws StripeException {
     String url = String.format("%s%s", Stripe.getApiBase(), "/v1/terminal/locations");
     return ApiResource.request(
-        ApiResource.RequestMethod.POST, url, params, Location.class, options);
+      ApiResource.RequestMethod.POST,
+      url,
+      params,
+      Location.class,
+      options
+    );
   }
 
   /**
-   * Creates a new <code>Location</code> object. For further details, including which address fields
-   * are required in each country, see the <a
-   * href="https://stripe.com/docs/terminal/fleet/locations">Manage locations</a> guide.
+   * <p>Creates a new <code>Location</code> object.
+   * For further details, including which address fields are required in each country, see the <a href="https://stripe.com/docs/terminal/fleet/locations">Manage locations</a> guide.</p>
    */
   public static Location create(LocationCreateParams params) throws StripeException {
     return create(params, (RequestOptions) null);
   }
 
   /**
-   * Creates a new <code>Location</code> object. For further details, including which address fields
-   * are required in each country, see the <a
-   * href="https://stripe.com/docs/terminal/fleet/locations">Manage locations</a> guide.
+   * <p>Creates a new <code>Location</code> object.
+   * For further details, including which address fields are required in each country, see the <a href="https://stripe.com/docs/terminal/fleet/locations">Manage locations</a> guide.</p>
    */
-  public static Location create(LocationCreateParams params, RequestOptions options)
-      throws StripeException {
+  public static Location create(
+      LocationCreateParams params,
+      RequestOptions options) throws StripeException {
     String url = String.format("%s%s", Stripe.getApiBase(), "/v1/terminal/locations");
     return ApiResource.request(
-        ApiResource.RequestMethod.POST, url, params, Location.class, options);
+      ApiResource.RequestMethod.POST,
+      url,
+      params,
+      Location.class,
+      options
+    );
   }
 
   /**
-   * Updates a <code>Location</code> object by setting the values of the parameters passed. Any
-   * parameters not provided will be left unchanged.
+   * <p>Updates a <code>Location</code> object by setting the values of the parameters passed. Any parameters not provided will be left unchanged.</p>
    */
   @Override
   public Location update(Map<String, Object> params) throws StripeException {
@@ -147,92 +170,128 @@ public class Location extends ApiResource implements HasId, MetadataStore<Locati
   }
 
   /**
-   * Updates a <code>Location</code> object by setting the values of the parameters passed. Any
-   * parameters not provided will be left unchanged.
+   * <p>Updates a <code>Location</code> object by setting the values of the parameters passed. Any parameters not provided will be left unchanged.</p>
    */
   @Override
-  public Location update(Map<String, Object> params, RequestOptions options)
-      throws StripeException {
+  public Location update(
+      Map<String, Object> params,
+      RequestOptions options) throws StripeException {
     String url =
-        String.format(
-            "%s%s",
-            Stripe.getApiBase(),
-            String.format("/v1/terminal/locations/%s", ApiResource.urlEncodeId(this.getId())));
+      String.format(
+        "%s%s",
+        Stripe.getApiBase(),
+        String.format("/v1/terminal/locations/%s", ApiResource.urlEncodeId(this.getId()))
+      );
     return ApiResource.request(
-        ApiResource.RequestMethod.POST, url, params, Location.class, options);
+      ApiResource.RequestMethod.POST,
+      url,
+      params,
+      Location.class,
+      options
+    );
   }
 
   /**
-   * Updates a <code>Location</code> object by setting the values of the parameters passed. Any
-   * parameters not provided will be left unchanged.
+   * <p>Updates a <code>Location</code> object by setting the values of the parameters passed. Any parameters not provided will be left unchanged.</p>
    */
   public Location update(LocationUpdateParams params) throws StripeException {
     return update(params, (RequestOptions) null);
   }
 
   /**
-   * Updates a <code>Location</code> object by setting the values of the parameters passed. Any
-   * parameters not provided will be left unchanged.
+   * <p>Updates a <code>Location</code> object by setting the values of the parameters passed. Any parameters not provided will be left unchanged.</p>
    */
-  public Location update(LocationUpdateParams params, RequestOptions options)
-      throws StripeException {
+  public Location update(
+      LocationUpdateParams params,
+      RequestOptions options) throws StripeException {
     String url =
-        String.format(
-            "%s%s",
-            Stripe.getApiBase(),
-            String.format("/v1/terminal/locations/%s", ApiResource.urlEncodeId(this.getId())));
+      String.format(
+        "%s%s",
+        Stripe.getApiBase(),
+        String.format("/v1/terminal/locations/%s", ApiResource.urlEncodeId(this.getId()))
+      );
     return ApiResource.request(
-        ApiResource.RequestMethod.POST, url, params, Location.class, options);
+      ApiResource.RequestMethod.POST,
+      url,
+      params,
+      Location.class,
+      options
+    );
   }
 
-  /** Returns a list of <code>Location</code> objects. */
+  /**
+   * <p>Returns a list of <code>Location</code> objects.</p>
+   */
   public static LocationCollection list(Map<String, Object> params) throws StripeException {
     return list(params, (RequestOptions) null);
   }
 
-  /** Returns a list of <code>Location</code> objects. */
-  public static LocationCollection list(Map<String, Object> params, RequestOptions options)
-      throws StripeException {
+  /**
+   * <p>Returns a list of <code>Location</code> objects.</p>
+   */
+  public static LocationCollection list(
+      Map<String, Object> params,
+      RequestOptions options) throws StripeException {
     String url = String.format("%s%s", Stripe.getApiBase(), "/v1/terminal/locations");
     return ApiResource.requestCollection(url, params, LocationCollection.class, options);
   }
 
-  /** Returns a list of <code>Location</code> objects. */
+  /**
+   * <p>Returns a list of <code>Location</code> objects.</p>
+   */
   public static LocationCollection list(LocationListParams params) throws StripeException {
     return list(params, (RequestOptions) null);
   }
 
-  /** Returns a list of <code>Location</code> objects. */
-  public static LocationCollection list(LocationListParams params, RequestOptions options)
-      throws StripeException {
+  /**
+   * <p>Returns a list of <code>Location</code> objects.</p>
+   */
+  public static LocationCollection list(
+      LocationListParams params,
+      RequestOptions options) throws StripeException {
     String url = String.format("%s%s", Stripe.getApiBase(), "/v1/terminal/locations");
     return ApiResource.requestCollection(url, params, LocationCollection.class, options);
   }
 
-  /** Deletes a <code>Location</code> object. */
+  /**
+   * <p>Deletes a <code>Location</code> object.</p>
+   */
   public Location delete() throws StripeException {
     return delete((Map<String, Object>) null, (RequestOptions) null);
   }
 
-  /** Deletes a <code>Location</code> object. */
+  /**
+   * <p>Deletes a <code>Location</code> object.</p>
+   */
   public Location delete(RequestOptions options) throws StripeException {
     return delete((Map<String, Object>) null, options);
   }
 
-  /** Deletes a <code>Location</code> object. */
+  /**
+   * <p>Deletes a <code>Location</code> object.</p>
+   */
   public Location delete(Map<String, Object> params) throws StripeException {
     return delete(params, (RequestOptions) null);
   }
 
-  /** Deletes a <code>Location</code> object. */
-  public Location delete(Map<String, Object> params, RequestOptions options)
-      throws StripeException {
+  /**
+   * <p>Deletes a <code>Location</code> object.</p>
+   */
+  public Location delete(
+      Map<String, Object> params,
+      RequestOptions options) throws StripeException {
     String url =
-        String.format(
-            "%s%s",
-            Stripe.getApiBase(),
-            String.format("/v1/terminal/locations/%s", ApiResource.urlEncodeId(this.getId())));
+      String.format(
+        "%s%s",
+        Stripe.getApiBase(),
+        String.format("/v1/terminal/locations/%s", ApiResource.urlEncodeId(this.getId()))
+      );
     return ApiResource.request(
-        ApiResource.RequestMethod.DELETE, url, params, Location.class, options);
+      ApiResource.RequestMethod.DELETE,
+      url,
+      params,
+      Location.class,
+      options
+    );
   }
 }

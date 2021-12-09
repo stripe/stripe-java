@@ -13,46 +13,42 @@ import lombok.Getter;
 @Getter
 public class PromotionCodeUpdateParams extends ApiRequestParams {
   /**
-   * Whether the promotion code is currently active. A promotion code can only be reactivated when
-   * the coupon is still valid and the promotion code is otherwise redeemable.
+   * Whether the promotion code is currently active. A promotion code can only be reactivated when the coupon is still valid and the promotion code is otherwise redeemable.
    */
   @SerializedName("active")
   Boolean active;
 
-  /** Specifies which fields in the response should be expanded. */
+  /**
+   * Specifies which fields in the response should be expanded.
+   */
   @SerializedName("expand")
   List<String> expand;
 
   /**
-   * Map of extra parameters for custom features not available in this client library. The content
-   * in this map is not serialized under this field's {@code @SerializedName} value. Instead, each
-   * key/value pair is serialized as if the key is a root-level field (serialized) name in this
-   * param object. Effectively, this map is flattened to its parent instance.
+   * Map of extra parameters for custom features not available in this client library. The content in this map is not serialized under this field's {@code @SerializedName} value. Instead, each key/value pair is serialized as if the key is a root-level field (serialized) name in this param object. Effectively, this map is flattened to its parent instance.
    */
   @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
   Map<String, Object> extraParams;
 
   /**
-   * Set of <a href="https://stripe.com/docs/api/metadata">key-value pairs</a> that you can attach
-   * to an object. This can be useful for storing additional information about the object in a
-   * structured format. Individual keys can be unset by posting an empty value to them. All keys can
-   * be unset by posting an empty value to {@code metadata}.
+   * Set of <a href="https://stripe.com/docs/api/metadata">key-value pairs</a> that you can attach to an object. This can be useful for storing additional information about the object in a structured format. Individual keys can be unset by posting an empty value to them. All keys can be unset by posting an empty value to {@code metadata}.
    */
   @SerializedName("metadata")
   Object metadata;
 
   private PromotionCodeUpdateParams(
-      Boolean active, List<String> expand, Map<String, Object> extraParams, Object metadata) {
+      Boolean active,
+      List<String> expand,
+      Map<String, Object> extraParams,
+      Object metadata) {
     this.active = active;
     this.expand = expand;
     this.extraParams = extraParams;
     this.metadata = metadata;
   }
-
   public static Builder builder() {
     return new Builder();
   }
-
   public static class Builder {
     private Boolean active;
 
@@ -62,15 +58,20 @@ public class PromotionCodeUpdateParams extends ApiRequestParams {
 
     private Object metadata;
 
-    /** Finalize and obtain parameter instance from this builder. */
+    /**
+     * Finalize and obtain parameter instance from this builder.
+     */
     public PromotionCodeUpdateParams build() {
       return new PromotionCodeUpdateParams(
-          this.active, this.expand, this.extraParams, this.metadata);
+        this.active,
+        this.expand,
+        this.extraParams,
+        this.metadata
+      );
     }
 
     /**
-     * Whether the promotion code is currently active. A promotion code can only be reactivated when
-     * the coupon is still valid and the promotion code is otherwise redeemable.
+     * Whether the promotion code is currently active. A promotion code can only be reactivated when the coupon is still valid and the promotion code is otherwise redeemable.
      */
     public Builder setActive(Boolean active) {
       this.active = active;
@@ -78,9 +79,7 @@ public class PromotionCodeUpdateParams extends ApiRequestParams {
     }
 
     /**
-     * Add an element to `expand` list. A list is initialized for the first `add/addAll` call, and
-     * subsequent calls adds additional elements to the original list. See {@link
-     * PromotionCodeUpdateParams#expand} for the field documentation.
+     * Add an element to `expand` list. A list is initialized for the first `add/addAll` call, and subsequent calls adds additional elements to the original list. See {@link PromotionCodeUpdateParams#expand} for the field documentation.
      */
     public Builder addExpand(String element) {
       if (this.expand == null) {
@@ -91,9 +90,7 @@ public class PromotionCodeUpdateParams extends ApiRequestParams {
     }
 
     /**
-     * Add all elements to `expand` list. A list is initialized for the first `add/addAll` call, and
-     * subsequent calls adds additional elements to the original list. See {@link
-     * PromotionCodeUpdateParams#expand} for the field documentation.
+     * Add all elements to `expand` list. A list is initialized for the first `add/addAll` call, and subsequent calls adds additional elements to the original list. See {@link PromotionCodeUpdateParams#expand} for the field documentation.
      */
     public Builder addAllExpand(List<String> elements) {
       if (this.expand == null) {
@@ -104,9 +101,7 @@ public class PromotionCodeUpdateParams extends ApiRequestParams {
     }
 
     /**
-     * Add a key/value pair to `extraParams` map. A map is initialized for the first `put/putAll`
-     * call, and subsequent calls add additional key/value pairs to the original map. See {@link
-     * PromotionCodeUpdateParams#extraParams} for the field documentation.
+     * Add a key/value pair to `extraParams` map. A map is initialized for the first `put/putAll` call, and subsequent calls add additional key/value pairs to the original map. See {@link PromotionCodeUpdateParams#extraParams} for the field documentation.
      */
     public Builder putExtraParam(String key, Object value) {
       if (this.extraParams == null) {
@@ -117,9 +112,7 @@ public class PromotionCodeUpdateParams extends ApiRequestParams {
     }
 
     /**
-     * Add all map key/value pairs to `extraParams` map. A map is initialized for the first
-     * `put/putAll` call, and subsequent calls add additional key/value pairs to the original map.
-     * See {@link PromotionCodeUpdateParams#extraParams} for the field documentation.
+     * Add all map key/value pairs to `extraParams` map. A map is initialized for the first `put/putAll` call, and subsequent calls add additional key/value pairs to the original map. See {@link PromotionCodeUpdateParams#extraParams} for the field documentation.
      */
     public Builder putAllExtraParam(Map<String, Object> map) {
       if (this.extraParams == null) {
@@ -130,9 +123,7 @@ public class PromotionCodeUpdateParams extends ApiRequestParams {
     }
 
     /**
-     * Add a key/value pair to `metadata` map. A map is initialized for the first `put/putAll` call,
-     * and subsequent calls add additional key/value pairs to the original map. See {@link
-     * PromotionCodeUpdateParams#metadata} for the field documentation.
+     * Add a key/value pair to `metadata` map. A map is initialized for the first `put/putAll` call, and subsequent calls add additional key/value pairs to the original map. See {@link PromotionCodeUpdateParams#metadata} for the field documentation.
      */
     @SuppressWarnings("unchecked")
     public Builder putMetadata(String key, String value) {
@@ -144,9 +135,7 @@ public class PromotionCodeUpdateParams extends ApiRequestParams {
     }
 
     /**
-     * Add all map key/value pairs to `metadata` map. A map is initialized for the first
-     * `put/putAll` call, and subsequent calls add additional key/value pairs to the original map.
-     * See {@link PromotionCodeUpdateParams#metadata} for the field documentation.
+     * Add all map key/value pairs to `metadata` map. A map is initialized for the first `put/putAll` call, and subsequent calls add additional key/value pairs to the original map. See {@link PromotionCodeUpdateParams#metadata} for the field documentation.
      */
     @SuppressWarnings("unchecked")
     public Builder putAllMetadata(Map<String, String> map) {
@@ -158,10 +147,7 @@ public class PromotionCodeUpdateParams extends ApiRequestParams {
     }
 
     /**
-     * Set of <a href="https://stripe.com/docs/api/metadata">key-value pairs</a> that you can attach
-     * to an object. This can be useful for storing additional information about the object in a
-     * structured format. Individual keys can be unset by posting an empty value to them. All keys
-     * can be unset by posting an empty value to {@code metadata}.
+     * Set of <a href="https://stripe.com/docs/api/metadata">key-value pairs</a> that you can attach to an object. This can be useful for storing additional information about the object in a structured format. Individual keys can be unset by posting an empty value to them. All keys can be unset by posting an empty value to {@code metadata}.
      */
     public Builder setMetadata(EmptyParam metadata) {
       this.metadata = metadata;
@@ -169,10 +155,7 @@ public class PromotionCodeUpdateParams extends ApiRequestParams {
     }
 
     /**
-     * Set of <a href="https://stripe.com/docs/api/metadata">key-value pairs</a> that you can attach
-     * to an object. This can be useful for storing additional information about the object in a
-     * structured format. Individual keys can be unset by posting an empty value to them. All keys
-     * can be unset by posting an empty value to {@code metadata}.
+     * Set of <a href="https://stripe.com/docs/api/metadata">key-value pairs</a> that you can attach to an object. This can be useful for storing additional information about the object in a structured format. Individual keys can be unset by posting an empty value to them. All keys can be unset by posting an empty value to {@code metadata}.
      */
     public Builder setMetadata(Map<String, String> metadata) {
       this.metadata = metadata;
