@@ -287,8 +287,8 @@ public class Capability extends ApiResource implements HasId {
      * <p>- <a href="https://stripe.com/afterpay-clearpay/legal#restricted-businesses">Afterpay
      * Clearpay's terms of service</a>
      *
-     * <p>If you believe that the rejection is in error, please contact support@stripe.com for
-     * assistance.
+     * <p>If you believe that the rejection is in error, please contact support at
+     * https://support.stripe.com/contact/ for assistance.
      */
     @SerializedName("disabled_reason")
     String disabledReason;

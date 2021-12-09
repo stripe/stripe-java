@@ -95,12 +95,20 @@ public class Location extends ApiResource implements HasId, MetadataStore<Locati
     return ApiResource.request(ApiResource.RequestMethod.GET, url, params, Location.class, options);
   }
 
-  /** Creates a new <code>Location</code> object. */
+  /**
+   * Creates a new <code>Location</code> object. For further details, including which address fields
+   * are required in each country, see the <a
+   * href="https://stripe.com/docs/terminal/fleet/locations">Manage locations</a> guide.
+   */
   public static Location create(Map<String, Object> params) throws StripeException {
     return create(params, (RequestOptions) null);
   }
 
-  /** Creates a new <code>Location</code> object. */
+  /**
+   * Creates a new <code>Location</code> object. For further details, including which address fields
+   * are required in each country, see the <a
+   * href="https://stripe.com/docs/terminal/fleet/locations">Manage locations</a> guide.
+   */
   public static Location create(Map<String, Object> params, RequestOptions options)
       throws StripeException {
     String url = String.format("%s%s", Stripe.getApiBase(), "/v1/terminal/locations");
@@ -108,12 +116,20 @@ public class Location extends ApiResource implements HasId, MetadataStore<Locati
         ApiResource.RequestMethod.POST, url, params, Location.class, options);
   }
 
-  /** Creates a new <code>Location</code> object. */
+  /**
+   * Creates a new <code>Location</code> object. For further details, including which address fields
+   * are required in each country, see the <a
+   * href="https://stripe.com/docs/terminal/fleet/locations">Manage locations</a> guide.
+   */
   public static Location create(LocationCreateParams params) throws StripeException {
     return create(params, (RequestOptions) null);
   }
 
-  /** Creates a new <code>Location</code> object. */
+  /**
+   * Creates a new <code>Location</code> object. For further details, including which address fields
+   * are required in each country, see the <a
+   * href="https://stripe.com/docs/terminal/fleet/locations">Manage locations</a> guide.
+   */
   public static Location create(LocationCreateParams params, RequestOptions options)
       throws StripeException {
     String url = String.format("%s%s", Stripe.getApiBase(), "/v1/terminal/locations");
