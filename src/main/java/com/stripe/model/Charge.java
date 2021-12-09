@@ -2210,9 +2210,9 @@ public class Charge extends ApiResource implements MetadataStore<Charge>, Balanc
        * Preferred language of the Klarna authorization page that the customer is redirected to. Can
        * be one of {@code de-AT}, {@code en-AT}, {@code nl-BE}, {@code fr-BE}, {@code en-BE}, {@code
        * de-DE}, {@code en-DE}, {@code da-DK}, {@code en-DK}, {@code es-ES}, {@code en-ES}, {@code
-       * fi-FI}, {@code sv-FI}, {@code en-FI}, {@code en-GB}, {@code it-IT}, {@code en-IT}, {@code
-       * nl-NL}, {@code en-NL}, {@code nb-NO}, {@code en-NO}, {@code sv-SE}, {@code en-SE}, {@code
-       * en-US}, {@code fr-FR}, or {@code en-FR}
+       * fi-FI}, {@code sv-FI}, {@code en-FI}, {@code en-GB}, {@code en-IE}, {@code it-IT}, {@code
+       * en-IT}, {@code nl-NL}, {@code en-NL}, {@code nb-NO}, {@code en-NO}, {@code sv-SE}, {@code
+       * en-SE}, {@code en-US}, {@code fr-FR}, or {@code en-FR}
        */
       @SerializedName("preferred_locale")
       String preferredLocale;

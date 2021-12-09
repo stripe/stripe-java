@@ -1090,7 +1090,7 @@ public class PaymentMethodCreateParams extends ApiRequestParams {
 
     /** Email address. */
     @SerializedName("email")
-    String email;
+    Object email;
 
     /**
      * Map of extra parameters for custom features not available in this client library. The content
@@ -1110,7 +1110,7 @@ public class PaymentMethodCreateParams extends ApiRequestParams {
     String phone;
 
     private BillingDetails(
-        Object address, String email, Map<String, Object> extraParams, String name, String phone) {
+        Object address, Object email, Map<String, Object> extraParams, String name, String phone) {
       this.address = address;
       this.email = email;
       this.extraParams = extraParams;
@@ -1125,7 +1125,7 @@ public class PaymentMethodCreateParams extends ApiRequestParams {
     public static class Builder {
       private Object address;
 
-      private String email;
+      private Object email;
 
       private Map<String, Object> extraParams;
 
@@ -1153,6 +1153,12 @@ public class PaymentMethodCreateParams extends ApiRequestParams {
 
       /** Email address. */
       public Builder setEmail(String email) {
+        this.email = email;
+        return this;
+      }
+
+      /** Email address. */
+      public Builder setEmail(EmptyParam email) {
         this.email = email;
         return this;
       }

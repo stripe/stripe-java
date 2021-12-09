@@ -32,10 +32,7 @@ public class ReaderCreateParams extends ApiRequestParams {
   @SerializedName("label")
   String label;
 
-  /**
-   * The location to assign the reader to. If no location is specified, the reader will be assigned
-   * to the account's default location.
-   */
+  /** The location to assign the reader to. */
   @SerializedName("location")
   String location;
 
@@ -156,10 +153,7 @@ public class ReaderCreateParams extends ApiRequestParams {
       return this;
     }
 
-    /**
-     * The location to assign the reader to. If no location is specified, the reader will be
-     * assigned to the account's default location.
-     */
+    /** The location to assign the reader to. */
     public Builder setLocation(String location) {
       this.location = location;
       return this;

@@ -2242,7 +2242,7 @@ public class PaymentIntentCreateParams extends ApiRequestParams {
 
       /** Email address. */
       @SerializedName("email")
-      String email;
+      Object email;
 
       /**
        * Map of extra parameters for custom features not available in this client library. The
@@ -2263,7 +2263,7 @@ public class PaymentIntentCreateParams extends ApiRequestParams {
 
       private BillingDetails(
           Object address,
-          String email,
+          Object email,
           Map<String, Object> extraParams,
           String name,
           String phone) {
@@ -2281,7 +2281,7 @@ public class PaymentIntentCreateParams extends ApiRequestParams {
       public static class Builder {
         private Object address;
 
-        private String email;
+        private Object email;
 
         private Map<String, Object> extraParams;
 
@@ -2309,6 +2309,12 @@ public class PaymentIntentCreateParams extends ApiRequestParams {
 
         /** Email address. */
         public Builder setEmail(String email) {
+          this.email = email;
+          return this;
+        }
+
+        /** Email address. */
+        public Builder setEmail(EmptyParam email) {
           this.email = email;
           return this;
         }
@@ -3931,6 +3937,13 @@ public class PaymentIntentCreateParams extends ApiRequestParams {
     Map<String, Object> extraParams;
 
     /**
+     * If this is a {@code giropay} PaymentMethod, this sub-hash contains details about the Giropay
+     * payment method options.
+     */
+    @SerializedName("giropay")
+    Object giropay;
+
+    /**
      * If this is a {@code ideal} PaymentMethod, this sub-hash contains details about the Ideal
      * payment method options.
      */
@@ -3995,6 +4008,7 @@ public class PaymentIntentCreateParams extends ApiRequestParams {
         Object card,
         Object cardPresent,
         Map<String, Object> extraParams,
+        Object giropay,
         Object ideal,
         Object interacPresent,
         Object klarna,
@@ -4011,6 +4025,7 @@ public class PaymentIntentCreateParams extends ApiRequestParams {
       this.card = card;
       this.cardPresent = cardPresent;
       this.extraParams = extraParams;
+      this.giropay = giropay;
       this.ideal = ideal;
       this.interacPresent = interacPresent;
       this.klarna = klarna;
@@ -4042,6 +4057,8 @@ public class PaymentIntentCreateParams extends ApiRequestParams {
 
       private Map<String, Object> extraParams;
 
+      private Object giropay;
+
       private Object ideal;
 
       private Object interacPresent;
@@ -4069,6 +4086,7 @@ public class PaymentIntentCreateParams extends ApiRequestParams {
             this.card,
             this.cardPresent,
             this.extraParams,
+            this.giropay,
             this.ideal,
             this.interacPresent,
             this.klarna,
@@ -4223,6 +4241,24 @@ public class PaymentIntentCreateParams extends ApiRequestParams {
           this.extraParams = new HashMap<>();
         }
         this.extraParams.putAll(map);
+        return this;
+      }
+
+      /**
+       * If this is a {@code giropay} PaymentMethod, this sub-hash contains details about the
+       * Giropay payment method options.
+       */
+      public Builder setGiropay(Giropay giropay) {
+        this.giropay = giropay;
+        return this;
+      }
+
+      /**
+       * If this is a {@code giropay} PaymentMethod, this sub-hash contains details about the
+       * Giropay payment method options.
+       */
+      public Builder setGiropay(EmptyParam giropay) {
+        this.giropay = giropay;
         return this;
       }
 
@@ -5512,6 +5548,63 @@ public class PaymentIntentCreateParams extends ApiRequestParams {
     }
 
     @Getter
+    public static class Giropay {
+      /**
+       * Map of extra parameters for custom features not available in this client library. The
+       * content in this map is not serialized under this field's {@code @SerializedName} value.
+       * Instead, each key/value pair is serialized as if the key is a root-level field (serialized)
+       * name in this param object. Effectively, this map is flattened to its parent instance.
+       */
+      @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
+      Map<String, Object> extraParams;
+
+      private Giropay(Map<String, Object> extraParams) {
+        this.extraParams = extraParams;
+      }
+
+      public static Builder builder() {
+        return new Builder();
+      }
+
+      public static class Builder {
+        private Map<String, Object> extraParams;
+
+        /** Finalize and obtain parameter instance from this builder. */
+        public Giropay build() {
+          return new Giropay(this.extraParams);
+        }
+
+        /**
+         * Add a key/value pair to `extraParams` map. A map is initialized for the first
+         * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
+         * map. See {@link PaymentIntentCreateParams.PaymentMethodOptions.Giropay#extraParams} for
+         * the field documentation.
+         */
+        public Builder putExtraParam(String key, Object value) {
+          if (this.extraParams == null) {
+            this.extraParams = new HashMap<>();
+          }
+          this.extraParams.put(key, value);
+          return this;
+        }
+
+        /**
+         * Add all map key/value pairs to `extraParams` map. A map is initialized for the first
+         * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
+         * map. See {@link PaymentIntentCreateParams.PaymentMethodOptions.Giropay#extraParams} for
+         * the field documentation.
+         */
+        public Builder putAllExtraParam(Map<String, Object> map) {
+          if (this.extraParams == null) {
+            this.extraParams = new HashMap<>();
+          }
+          this.extraParams.putAll(map);
+          return this;
+        }
+      }
+    }
+
+    @Getter
     public static class Ideal {
       /**
        * Map of extra parameters for custom features not available in this client library. The
@@ -5728,6 +5821,9 @@ public class PaymentIntentCreateParams extends ApiRequestParams {
 
         @SerializedName("en-GB")
         EN_GB("en-GB"),
+
+        @SerializedName("en-IE")
+        EN_IE("en-IE"),
 
         @SerializedName("en-IT")
         EN_IT("en-IT"),
