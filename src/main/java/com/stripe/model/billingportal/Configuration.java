@@ -5,6 +5,7 @@ import com.google.gson.annotations.SerializedName;
 import com.stripe.Stripe;
 import com.stripe.exception.StripeException;
 import com.stripe.model.HasId;
+import com.stripe.model.MetadataStore;
 import com.stripe.model.StripeObject;
 import com.stripe.net.ApiResource;
 import com.stripe.net.RequestOptions;
@@ -21,7 +22,7 @@ import lombok.Setter;
 @Getter
 @Setter
 @EqualsAndHashCode(callSuper = false)
-public class Configuration extends ApiResource implements HasId {
+public class Configuration extends ApiResource implements HasId, MetadataStore<Configuration> {
   /** Whether the configuration is active and can be used to create portal sessions. */
   @SerializedName("active")
   Boolean active;
@@ -68,6 +69,15 @@ public class Configuration extends ApiResource implements HasId {
    */
   @SerializedName("livemode")
   Boolean livemode;
+
+  /**
+   * Set of <a href="https://stripe.com/docs/api/metadata">key-value pairs</a> that you can attach
+   * to an object. This can be useful for storing additional information about the object in a
+   * structured format.
+   */
+  @Getter(onMethod_ = {@Override})
+  @SerializedName("metadata")
+  Map<String, String> metadata;
 
   /**
    * String representing the object's type. Objects of the same type share the same value.
@@ -133,11 +143,13 @@ public class Configuration extends ApiResource implements HasId {
   }
 
   /** Updates a configuration that describes the functionality of the customer portal. */
+  @Override
   public Configuration update(Map<String, Object> params) throws StripeException {
     return update(params, (RequestOptions) null);
   }
 
   /** Updates a configuration that describes the functionality of the customer portal. */
+  @Override
   public Configuration update(Map<String, Object> params, RequestOptions options)
       throws StripeException {
     String url =

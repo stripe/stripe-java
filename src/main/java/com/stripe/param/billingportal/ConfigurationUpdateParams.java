@@ -46,19 +46,30 @@ public class ConfigurationUpdateParams extends ApiRequestParams {
   @SerializedName("features")
   Features features;
 
+  /**
+   * Set of <a href="https://stripe.com/docs/api/metadata">key-value pairs</a> that you can attach
+   * to an object. This can be useful for storing additional information about the object in a
+   * structured format. Individual keys can be unset by posting an empty value to them. All keys can
+   * be unset by posting an empty value to {@code metadata}.
+   */
+  @SerializedName("metadata")
+  Object metadata;
+
   private ConfigurationUpdateParams(
       Boolean active,
       BusinessProfile businessProfile,
       Object defaultReturnUrl,
       List<String> expand,
       Map<String, Object> extraParams,
-      Features features) {
+      Features features,
+      Object metadata) {
     this.active = active;
     this.businessProfile = businessProfile;
     this.defaultReturnUrl = defaultReturnUrl;
     this.expand = expand;
     this.extraParams = extraParams;
     this.features = features;
+    this.metadata = metadata;
   }
 
   public static Builder builder() {
@@ -78,6 +89,8 @@ public class ConfigurationUpdateParams extends ApiRequestParams {
 
     private Features features;
 
+    private Object metadata;
+
     /** Finalize and obtain parameter instance from this builder. */
     public ConfigurationUpdateParams build() {
       return new ConfigurationUpdateParams(
@@ -86,7 +99,8 @@ public class ConfigurationUpdateParams extends ApiRequestParams {
           this.defaultReturnUrl,
           this.expand,
           this.extraParams,
-          this.features);
+          this.features,
+          this.metadata);
     }
 
     /** Whether the configuration is active and can be used to create portal sessions. */
@@ -178,6 +192,56 @@ public class ConfigurationUpdateParams extends ApiRequestParams {
     /** Information about the features available in the portal. */
     public Builder setFeatures(Features features) {
       this.features = features;
+      return this;
+    }
+
+    /**
+     * Add a key/value pair to `metadata` map. A map is initialized for the first `put/putAll` call,
+     * and subsequent calls add additional key/value pairs to the original map. See {@link
+     * ConfigurationUpdateParams#metadata} for the field documentation.
+     */
+    @SuppressWarnings("unchecked")
+    public Builder putMetadata(String key, String value) {
+      if (this.metadata == null || this.metadata instanceof EmptyParam) {
+        this.metadata = new HashMap<String, String>();
+      }
+      ((Map<String, String>) this.metadata).put(key, value);
+      return this;
+    }
+
+    /**
+     * Add all map key/value pairs to `metadata` map. A map is initialized for the first
+     * `put/putAll` call, and subsequent calls add additional key/value pairs to the original map.
+     * See {@link ConfigurationUpdateParams#metadata} for the field documentation.
+     */
+    @SuppressWarnings("unchecked")
+    public Builder putAllMetadata(Map<String, String> map) {
+      if (this.metadata == null || this.metadata instanceof EmptyParam) {
+        this.metadata = new HashMap<String, String>();
+      }
+      ((Map<String, String>) this.metadata).putAll(map);
+      return this;
+    }
+
+    /**
+     * Set of <a href="https://stripe.com/docs/api/metadata">key-value pairs</a> that you can attach
+     * to an object. This can be useful for storing additional information about the object in a
+     * structured format. Individual keys can be unset by posting an empty value to them. All keys
+     * can be unset by posting an empty value to {@code metadata}.
+     */
+    public Builder setMetadata(EmptyParam metadata) {
+      this.metadata = metadata;
+      return this;
+    }
+
+    /**
+     * Set of <a href="https://stripe.com/docs/api/metadata">key-value pairs</a> that you can attach
+     * to an object. This can be useful for storing additional information about the object in a
+     * structured format. Individual keys can be unset by posting an empty value to them. All keys
+     * can be unset by posting an empty value to {@code metadata}.
+     */
+    public Builder setMetadata(Map<String, String> metadata) {
+      this.metadata = metadata;
       return this;
     }
   }
