@@ -12,49 +12,58 @@ import lombok.Getter;
 @Getter
 public class SkuListParams extends ApiRequestParams {
   /**
-   * Only return SKUs that are active or inactive (e.g., pass {@code false} to list all inactive products).
+   * Only return SKUs that are active or inactive (e.g., pass {@code false} to list all inactive
+   * products).
    */
   @SerializedName("active")
   Boolean active;
 
   /**
-   * Only return SKUs that have the specified key-value pairs in this partially constructed dictionary. Can be specified only if {@code product} is also supplied. For instance, if the associated product has attributes {@code ["color", "size"]}, passing in {@code attributes[color]=red} returns all the SKUs for this product that have {@code color} set to {@code red}.
+   * Only return SKUs that have the specified key-value pairs in this partially constructed
+   * dictionary. Can be specified only if {@code product} is also supplied. For instance, if the
+   * associated product has attributes {@code ["color", "size"]}, passing in {@code
+   * attributes[color]=red} returns all the SKUs for this product that have {@code color} set to
+   * {@code red}.
    */
   @SerializedName("attributes")
   Map<String, String> attributes;
 
   /**
-   * A cursor for use in pagination. {@code ending_before} is an object ID that defines your place in the list. For instance, if you make a list request and receive 100 objects, starting with {@code obj_bar}, your subsequent call can include {@code ending_before=obj_bar} in order to fetch the previous page of the list.
+   * A cursor for use in pagination. {@code ending_before} is an object ID that defines your place
+   * in the list. For instance, if you make a list request and receive 100 objects, starting with
+   * {@code obj_bar}, your subsequent call can include {@code ending_before=obj_bar} in order to
+   * fetch the previous page of the list.
    */
   @SerializedName("ending_before")
   String endingBefore;
 
-  /**
-   * Specifies which fields in the response should be expanded.
-   */
+  /** Specifies which fields in the response should be expanded. */
   @SerializedName("expand")
   List<String> expand;
 
   /**
-   * Map of extra parameters for custom features not available in this client library. The content in this map is not serialized under this field's {@code @SerializedName} value. Instead, each key/value pair is serialized as if the key is a root-level field (serialized) name in this param object. Effectively, this map is flattened to its parent instance.
+   * Map of extra parameters for custom features not available in this client library. The content
+   * in this map is not serialized under this field's {@code @SerializedName} value. Instead, each
+   * key/value pair is serialized as if the key is a root-level field (serialized) name in this
+   * param object. Effectively, this map is flattened to its parent instance.
    */
   @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
   Map<String, Object> extraParams;
 
-  /**
-   * Only return SKUs with the given IDs.
-   */
+  /** Only return SKUs with the given IDs. */
   @SerializedName("ids")
   List<String> ids;
 
   /**
-   * Only return SKUs that are either in stock or out of stock (e.g., pass {@code false} to list all SKUs that are out of stock). If no value is provided, all SKUs are returned.
+   * Only return SKUs that are either in stock or out of stock (e.g., pass {@code false} to list all
+   * SKUs that are out of stock). If no value is provided, all SKUs are returned.
    */
   @SerializedName("in_stock")
   Boolean inStock;
 
   /**
-   * A limit on the number of objects to be returned. Limit can range between 1 and 100, and the default is 10.
+   * A limit on the number of objects to be returned. Limit can range between 1 and 100, and the
+   * default is 10.
    */
   @SerializedName("limit")
   Long limit;
@@ -66,7 +75,10 @@ public class SkuListParams extends ApiRequestParams {
   String product;
 
   /**
-   * A cursor for use in pagination. {@code starting_after} is an object ID that defines your place in the list. For instance, if you make a list request and receive 100 objects, ending with {@code obj_foo}, your subsequent call can include {@code starting_after=obj_foo} in order to fetch the next page of the list.
+   * A cursor for use in pagination. {@code starting_after} is an object ID that defines your place
+   * in the list. For instance, if you make a list request and receive 100 objects, ending with
+   * {@code obj_foo}, your subsequent call can include {@code starting_after=obj_foo} in order to
+   * fetch the next page of the list.
    */
   @SerializedName("starting_after")
   String startingAfter;
@@ -93,9 +105,11 @@ public class SkuListParams extends ApiRequestParams {
     this.product = product;
     this.startingAfter = startingAfter;
   }
+
   public static Builder builder() {
     return new Builder();
   }
+
   public static class Builder {
     private Boolean active;
 
@@ -117,26 +131,24 @@ public class SkuListParams extends ApiRequestParams {
 
     private String startingAfter;
 
-    /**
-     * Finalize and obtain parameter instance from this builder.
-     */
+    /** Finalize and obtain parameter instance from this builder. */
     public SkuListParams build() {
       return new SkuListParams(
-        this.active,
-        this.attributes,
-        this.endingBefore,
-        this.expand,
-        this.extraParams,
-        this.ids,
-        this.inStock,
-        this.limit,
-        this.product,
-        this.startingAfter
-      );
+          this.active,
+          this.attributes,
+          this.endingBefore,
+          this.expand,
+          this.extraParams,
+          this.ids,
+          this.inStock,
+          this.limit,
+          this.product,
+          this.startingAfter);
     }
 
     /**
-     * Only return SKUs that are active or inactive (e.g., pass {@code false} to list all inactive products).
+     * Only return SKUs that are active or inactive (e.g., pass {@code false} to list all inactive
+     * products).
      */
     public Builder setActive(Boolean active) {
       this.active = active;
@@ -144,7 +156,9 @@ public class SkuListParams extends ApiRequestParams {
     }
 
     /**
-     * Add a key/value pair to `attributes` map. A map is initialized for the first `put/putAll` call, and subsequent calls add additional key/value pairs to the original map. See {@link SkuListParams#attributes} for the field documentation.
+     * Add a key/value pair to `attributes` map. A map is initialized for the first `put/putAll`
+     * call, and subsequent calls add additional key/value pairs to the original map. See {@link
+     * SkuListParams#attributes} for the field documentation.
      */
     public Builder putAttribute(String key, String value) {
       if (this.attributes == null) {
@@ -155,7 +169,9 @@ public class SkuListParams extends ApiRequestParams {
     }
 
     /**
-     * Add all map key/value pairs to `attributes` map. A map is initialized for the first `put/putAll` call, and subsequent calls add additional key/value pairs to the original map. See {@link SkuListParams#attributes} for the field documentation.
+     * Add all map key/value pairs to `attributes` map. A map is initialized for the first
+     * `put/putAll` call, and subsequent calls add additional key/value pairs to the original map.
+     * See {@link SkuListParams#attributes} for the field documentation.
      */
     public Builder putAllAttribute(Map<String, String> map) {
       if (this.attributes == null) {
@@ -166,7 +182,10 @@ public class SkuListParams extends ApiRequestParams {
     }
 
     /**
-     * A cursor for use in pagination. {@code ending_before} is an object ID that defines your place in the list. For instance, if you make a list request and receive 100 objects, starting with {@code obj_bar}, your subsequent call can include {@code ending_before=obj_bar} in order to fetch the previous page of the list.
+     * A cursor for use in pagination. {@code ending_before} is an object ID that defines your place
+     * in the list. For instance, if you make a list request and receive 100 objects, starting with
+     * {@code obj_bar}, your subsequent call can include {@code ending_before=obj_bar} in order to
+     * fetch the previous page of the list.
      */
     public Builder setEndingBefore(String endingBefore) {
       this.endingBefore = endingBefore;
@@ -174,7 +193,9 @@ public class SkuListParams extends ApiRequestParams {
     }
 
     /**
-     * Add an element to `expand` list. A list is initialized for the first `add/addAll` call, and subsequent calls adds additional elements to the original list. See {@link SkuListParams#expand} for the field documentation.
+     * Add an element to `expand` list. A list is initialized for the first `add/addAll` call, and
+     * subsequent calls adds additional elements to the original list. See {@link
+     * SkuListParams#expand} for the field documentation.
      */
     public Builder addExpand(String element) {
       if (this.expand == null) {
@@ -185,7 +206,9 @@ public class SkuListParams extends ApiRequestParams {
     }
 
     /**
-     * Add all elements to `expand` list. A list is initialized for the first `add/addAll` call, and subsequent calls adds additional elements to the original list. See {@link SkuListParams#expand} for the field documentation.
+     * Add all elements to `expand` list. A list is initialized for the first `add/addAll` call, and
+     * subsequent calls adds additional elements to the original list. See {@link
+     * SkuListParams#expand} for the field documentation.
      */
     public Builder addAllExpand(List<String> elements) {
       if (this.expand == null) {
@@ -196,7 +219,9 @@ public class SkuListParams extends ApiRequestParams {
     }
 
     /**
-     * Add a key/value pair to `extraParams` map. A map is initialized for the first `put/putAll` call, and subsequent calls add additional key/value pairs to the original map. See {@link SkuListParams#extraParams} for the field documentation.
+     * Add a key/value pair to `extraParams` map. A map is initialized for the first `put/putAll`
+     * call, and subsequent calls add additional key/value pairs to the original map. See {@link
+     * SkuListParams#extraParams} for the field documentation.
      */
     public Builder putExtraParam(String key, Object value) {
       if (this.extraParams == null) {
@@ -207,7 +232,9 @@ public class SkuListParams extends ApiRequestParams {
     }
 
     /**
-     * Add all map key/value pairs to `extraParams` map. A map is initialized for the first `put/putAll` call, and subsequent calls add additional key/value pairs to the original map. See {@link SkuListParams#extraParams} for the field documentation.
+     * Add all map key/value pairs to `extraParams` map. A map is initialized for the first
+     * `put/putAll` call, and subsequent calls add additional key/value pairs to the original map.
+     * See {@link SkuListParams#extraParams} for the field documentation.
      */
     public Builder putAllExtraParam(Map<String, Object> map) {
       if (this.extraParams == null) {
@@ -218,7 +245,9 @@ public class SkuListParams extends ApiRequestParams {
     }
 
     /**
-     * Add an element to `ids` list. A list is initialized for the first `add/addAll` call, and subsequent calls adds additional elements to the original list. See {@link SkuListParams#ids} for the field documentation.
+     * Add an element to `ids` list. A list is initialized for the first `add/addAll` call, and
+     * subsequent calls adds additional elements to the original list. See {@link SkuListParams#ids}
+     * for the field documentation.
      */
     public Builder addId(String element) {
       if (this.ids == null) {
@@ -229,7 +258,9 @@ public class SkuListParams extends ApiRequestParams {
     }
 
     /**
-     * Add all elements to `ids` list. A list is initialized for the first `add/addAll` call, and subsequent calls adds additional elements to the original list. See {@link SkuListParams#ids} for the field documentation.
+     * Add all elements to `ids` list. A list is initialized for the first `add/addAll` call, and
+     * subsequent calls adds additional elements to the original list. See {@link SkuListParams#ids}
+     * for the field documentation.
      */
     public Builder addAllId(List<String> elements) {
       if (this.ids == null) {
@@ -240,7 +271,8 @@ public class SkuListParams extends ApiRequestParams {
     }
 
     /**
-     * Only return SKUs that are either in stock or out of stock (e.g., pass {@code false} to list all SKUs that are out of stock). If no value is provided, all SKUs are returned.
+     * Only return SKUs that are either in stock or out of stock (e.g., pass {@code false} to list
+     * all SKUs that are out of stock). If no value is provided, all SKUs are returned.
      */
     public Builder setInStock(Boolean inStock) {
       this.inStock = inStock;
@@ -248,7 +280,8 @@ public class SkuListParams extends ApiRequestParams {
     }
 
     /**
-     * A limit on the number of objects to be returned. Limit can range between 1 and 100, and the default is 10.
+     * A limit on the number of objects to be returned. Limit can range between 1 and 100, and the
+     * default is 10.
      */
     public Builder setLimit(Long limit) {
       this.limit = limit;
@@ -264,7 +297,10 @@ public class SkuListParams extends ApiRequestParams {
     }
 
     /**
-     * A cursor for use in pagination. {@code starting_after} is an object ID that defines your place in the list. For instance, if you make a list request and receive 100 objects, ending with {@code obj_foo}, your subsequent call can include {@code starting_after=obj_foo} in order to fetch the next page of the list.
+     * A cursor for use in pagination. {@code starting_after} is an object ID that defines your
+     * place in the list. For instance, if you make a list request and receive 100 objects, ending
+     * with {@code obj_foo}, your subsequent call can include {@code starting_after=obj_foo} in
+     * order to fetch the next page of the list.
      */
     public Builder setStartingAfter(String startingAfter) {
       this.startingAfter = startingAfter;

@@ -10,9 +10,7 @@ import lombok.Setter;
 @Setter
 @EqualsAndHashCode(callSuper = false)
 public class AutomaticPaymentMethodsPaymentIntent extends StripeObject {
-  /**
-   * Automatically calculates compatible payment methods.
-   */
+  /** Automatically calculates compatible payment methods. */
   @SerializedName("enabled")
   Boolean enabled;
 }

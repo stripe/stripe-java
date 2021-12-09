@@ -10,9 +10,7 @@ import lombok.Setter;
 @Setter
 @EqualsAndHashCode(callSuper = false)
 public class TaxDeductedAtSource extends StripeObject implements BalanceTransactionSource {
-  /**
-   * Unique identifier for the object.
-   */
+  /** Unique identifier for the object. */
   @Getter(onMethod_ = {@Override})
   @SerializedName("id")
   String id;
@@ -26,20 +24,20 @@ public class TaxDeductedAtSource extends StripeObject implements BalanceTransact
   String object;
 
   /**
-   * The end of the invoicing period. This TDS applies to Stripe fees collected during this invoicing period.
+   * The end of the invoicing period. This TDS applies to Stripe fees collected during this
+   * invoicing period.
    */
   @SerializedName("period_end")
   Long periodEnd;
 
   /**
-   * The start of the invoicing period. This TDS applies to Stripe fees collected during this invoicing period.
+   * The start of the invoicing period. This TDS applies to Stripe fees collected during this
+   * invoicing period.
    */
   @SerializedName("period_start")
   Long periodStart;
 
-  /**
-   * The TAN that was supplied to Stripe when TDS was assessed.
-   */
+  /** The TAN that was supplied to Stripe when TDS was assessed. */
   @SerializedName("tax_deduction_account_number")
   String taxDeductionAccountNumber;
 }

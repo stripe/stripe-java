@@ -1,3 +1,3 @@
 package com.stripe.model;
 
-public interface BalanceTransactionSource extends StripeObjectInterface, HasId{}
+public interface BalanceTransactionSource extends StripeObjectInterface, HasId {}

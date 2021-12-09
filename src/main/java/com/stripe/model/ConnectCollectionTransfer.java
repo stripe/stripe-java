@@ -11,35 +11,31 @@ import lombok.Setter;
 @Setter
 @EqualsAndHashCode(callSuper = false)
 public class ConnectCollectionTransfer extends StripeObject implements BalanceTransactionSource {
-  /**
-   * Amount transferred, in %s.
-   */
+  /** Amount transferred, in %s. */
   @SerializedName("amount")
   Long amount;
 
   /**
-   * Three-letter <a href="https://www.iso.org/iso-4217-currency-codes.html">ISO currency code</a>, in lowercase. Must be a <a href="https://stripe.com/docs/currencies">supported currency</a>.
+   * Three-letter <a href="https://www.iso.org/iso-4217-currency-codes.html">ISO currency code</a>,
+   * in lowercase. Must be a <a href="https://stripe.com/docs/currencies">supported currency</a>.
    */
   @SerializedName("currency")
   String currency;
 
-  /**
-   * ID of the account that funds are being collected for.
-   */
+  /** ID of the account that funds are being collected for. */
   @SerializedName("destination")
   @Getter(lombok.AccessLevel.NONE)
   @Setter(lombok.AccessLevel.NONE)
   ExpandableField<Account> destination;
 
-  /**
-   * Unique identifier for the object.
-   */
+  /** Unique identifier for the object. */
   @Getter(onMethod_ = {@Override})
   @SerializedName("id")
   String id;
 
   /**
-   * Has the value {@code true} if the object exists in live mode or the value {@code false} if the object exists in test mode.
+   * Has the value {@code true} if the object exists in live mode or the value {@code false} if the
+   * object exists in test mode.
    */
   @SerializedName("livemode")
   Boolean livemode;
@@ -52,9 +48,7 @@ public class ConnectCollectionTransfer extends StripeObject implements BalanceTr
   @SerializedName("object")
   String object;
 
-  /**
-   * Get ID of expandable {@code destination} object.
-   */
+  /** Get ID of expandable {@code destination} object. */
   public String getDestination() {
     return (this.destination != null) ? this.destination.getId() : null;
   }
@@ -63,9 +57,7 @@ public class ConnectCollectionTransfer extends StripeObject implements BalanceTr
     this.destination = ApiResource.setExpandableFieldId(id, this.destination);
   }
 
-  /**
-   * Get expanded {@code destination}.
-   */
+  /** Get expanded {@code destination}. */
   public Account getDestinationObject() {
     return (this.destination != null) ? this.destination.getExpanded() : null;
   }

@@ -16,9 +16,7 @@ import lombok.Setter;
 @Setter
 @EqualsAndHashCode(callSuper = false)
 public class LoginLink extends ApiResource {
-  /**
-   * Time at which the object was created. Measured in seconds since the Unix epoch.
-   */
+  /** Time at which the object was created. Measured in seconds since the Unix epoch. */
   @SerializedName("created")
   Long created;
 
@@ -30,57 +28,44 @@ public class LoginLink extends ApiResource {
   @SerializedName("object")
   String object;
 
-  /**
-   * The URL for the login link.
-   */
+  /** The URL for the login link. */
   @SerializedName("url")
   String url;
 
   /**
-   * <p>Creates a single-use login link for an Express account to access their Stripe dashboard.</p>
+   * Creates a single-use login link for an Express account to access their Stripe dashboard.
    *
-   * <p><strong>You may only create login links for <a href="https://stripe.com/docs/connect/express-accounts">Express accounts</a> connected to your platform</strong>.</p>
+   * <p><strong>You may only create login links for <a
+   * href="https://stripe.com/docs/connect/express-accounts">Express accounts</a> connected to your
+   * platform</strong>.
    */
   public static LoginLink createOnAccount(
-      String account,
-      Map<String, Object> params,
-      RequestOptions options) throws StripeException {
+      String account, Map<String, Object> params, RequestOptions options) throws StripeException {
     String url =
-      String.format(
-        "%s%s",
-        Stripe.getApiBase(),
-        String.format("/v1/accounts/%s/login_links", ApiResource.urlEncodeId(account))
-      );
+        String.format(
+            "%s%s",
+            Stripe.getApiBase(),
+            String.format("/v1/accounts/%s/login_links", ApiResource.urlEncodeId(account)));
     return ApiResource.request(
-      ApiResource.RequestMethod.POST,
-      url,
-      params,
-      LoginLink.class,
-      options
-    );
+        ApiResource.RequestMethod.POST, url, params, LoginLink.class, options);
   }
 
   /**
-   * <p>Creates a single-use login link for an Express account to access their Stripe dashboard.</p>
+   * Creates a single-use login link for an Express account to access their Stripe dashboard.
    *
-   * <p><strong>You may only create login links for <a href="https://stripe.com/docs/connect/express-accounts">Express accounts</a> connected to your platform</strong>.</p>
+   * <p><strong>You may only create login links for <a
+   * href="https://stripe.com/docs/connect/express-accounts">Express accounts</a> connected to your
+   * platform</strong>.
    */
   public static LoginLink createOnAccount(
-      String account,
-      LoginLinkCreateOnAccountParams params,
-      RequestOptions options) throws StripeException {
+      String account, LoginLinkCreateOnAccountParams params, RequestOptions options)
+      throws StripeException {
     String url =
-      String.format(
-        "%s%s",
-        Stripe.getApiBase(),
-        String.format("/v1/accounts/%s/login_links", ApiResource.urlEncodeId(account))
-      );
+        String.format(
+            "%s%s",
+            Stripe.getApiBase(),
+            String.format("/v1/accounts/%s/login_links", ApiResource.urlEncodeId(account)));
     return ApiResource.request(
-      ApiResource.RequestMethod.POST,
-      url,
-      params,
-      LoginLink.class,
-      options
-    );
+        ApiResource.RequestMethod.POST, url, params, LoginLink.class, options);
   }
 }

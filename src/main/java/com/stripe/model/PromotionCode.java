@@ -20,64 +20,63 @@ import lombok.Setter;
 @EqualsAndHashCode(callSuper = false)
 public class PromotionCode extends ApiResource implements HasId, MetadataStore<PromotionCode> {
   /**
-   * Whether the promotion code is currently active. A promotion code is only active if the coupon is also valid.
+   * Whether the promotion code is currently active. A promotion code is only active if the coupon
+   * is also valid.
    */
   @SerializedName("active")
   Boolean active;
 
   /**
-   * The customer-facing code. Regardless of case, this code must be unique across all active promotion codes for each customer.
+   * The customer-facing code. Regardless of case, this code must be unique across all active
+   * promotion codes for each customer.
    */
   @SerializedName("code")
   String code;
 
   /**
-   * A coupon contains information about a percent-off or amount-off discount you might want to apply to a customer. Coupons may be applied to <a href="https://stripe.com/docs/api#invoices">invoices</a> or <a href="https://stripe.com/docs/api#create_order-coupon">orders</a>. Coupons do not work with conventional one-off <a href="https://stripe.com/docs/api#create_charge">charges</a>.
+   * A coupon contains information about a percent-off or amount-off discount you might want to
+   * apply to a customer. Coupons may be applied to <a
+   * href="https://stripe.com/docs/api#invoices">invoices</a> or <a
+   * href="https://stripe.com/docs/api#create_order-coupon">orders</a>. Coupons do not work with
+   * conventional one-off <a href="https://stripe.com/docs/api#create_charge">charges</a>.
    */
   @SerializedName("coupon")
   Coupon coupon;
 
-  /**
-   * Time at which the object was created. Measured in seconds since the Unix epoch.
-   */
+  /** Time at which the object was created. Measured in seconds since the Unix epoch. */
   @SerializedName("created")
   Long created;
 
-  /**
-   * The customer that this promotion code can be used by.
-   */
+  /** The customer that this promotion code can be used by. */
   @SerializedName("customer")
   @Getter(lombok.AccessLevel.NONE)
   @Setter(lombok.AccessLevel.NONE)
   ExpandableField<Customer> customer;
 
-  /**
-   * Date at which the promotion code can no longer be redeemed.
-   */
+  /** Date at which the promotion code can no longer be redeemed. */
   @SerializedName("expires_at")
   Long expiresAt;
 
-  /**
-   * Unique identifier for the object.
-   */
+  /** Unique identifier for the object. */
   @Getter(onMethod_ = {@Override})
   @SerializedName("id")
   String id;
 
   /**
-   * Has the value {@code true} if the object exists in live mode or the value {@code false} if the object exists in test mode.
+   * Has the value {@code true} if the object exists in live mode or the value {@code false} if the
+   * object exists in test mode.
    */
   @SerializedName("livemode")
   Boolean livemode;
 
-  /**
-   * Maximum number of times this promotion code can be redeemed.
-   */
+  /** Maximum number of times this promotion code can be redeemed. */
   @SerializedName("max_redemptions")
   Long maxRedemptions;
 
   /**
-   * Set of <a href="https://stripe.com/docs/api/metadata">key-value pairs</a> that you can attach to an object. This can be useful for storing additional information about the object in a structured format.
+   * Set of <a href="https://stripe.com/docs/api/metadata">key-value pairs</a> that you can attach
+   * to an object. This can be useful for storing additional information about the object in a
+   * structured format.
    */
   @Getter(onMethod_ = {@Override})
   @SerializedName("metadata")
@@ -94,15 +93,11 @@ public class PromotionCode extends ApiResource implements HasId, MetadataStore<P
   @SerializedName("restrictions")
   Restrictions restrictions;
 
-  /**
-   * Number of times this promotion code has been used.
-   */
+  /** Number of times this promotion code has been used. */
   @SerializedName("times_redeemed")
   Long timesRedeemed;
 
-  /**
-   * Get ID of expandable {@code customer} object.
-   */
+  /** Get ID of expandable {@code customer} object. */
   public String getCustomer() {
     return (this.customer != null) ? this.customer.getId() : null;
   }
@@ -111,9 +106,7 @@ public class PromotionCode extends ApiResource implements HasId, MetadataStore<P
     this.customer = ApiResource.setExpandableFieldId(id, this.customer);
   }
 
-  /**
-   * Get expanded {@code customer}.
-   */
+  /** Get expanded {@code customer}. */
   public Customer getCustomerObject() {
     return (this.customer != null) ? this.customer.getExpanded() : null;
   }
@@ -122,114 +115,84 @@ public class PromotionCode extends ApiResource implements HasId, MetadataStore<P
     this.customer = new ExpandableField<Customer>(expandableObject.getId(), expandableObject);
   }
 
-  /**
-   * <p>Retrieves the promotion code with the given ID.</p>
-   */
+  /** Retrieves the promotion code with the given ID. */
   public static PromotionCode retrieve(String promotionCode) throws StripeException {
     return retrieve(promotionCode, (Map<String, Object>) null, (RequestOptions) null);
   }
 
-  /**
-   * <p>Retrieves the promotion code with the given ID.</p>
-   */
-  public static PromotionCode retrieve(
-      String promotionCode,
-      RequestOptions options) throws StripeException {
+  /** Retrieves the promotion code with the given ID. */
+  public static PromotionCode retrieve(String promotionCode, RequestOptions options)
+      throws StripeException {
     return retrieve(promotionCode, (Map<String, Object>) null, options);
   }
 
-  /**
-   * <p>Retrieves the promotion code with the given ID.</p>
-   */
+  /** Retrieves the promotion code with the given ID. */
   public static PromotionCode retrieve(
-      String promotionCode,
-      Map<String, Object> params,
-      RequestOptions options) throws StripeException {
+      String promotionCode, Map<String, Object> params, RequestOptions options)
+      throws StripeException {
     String url =
-      String.format(
-        "%s%s",
-        Stripe.getApiBase(),
-        String.format("/v1/promotion_codes/%s", ApiResource.urlEncodeId(promotionCode))
-      );
+        String.format(
+            "%s%s",
+            Stripe.getApiBase(),
+            String.format("/v1/promotion_codes/%s", ApiResource.urlEncodeId(promotionCode)));
     return ApiResource.request(
-      ApiResource.RequestMethod.GET,
-      url,
-      params,
-      PromotionCode.class,
-      options
-    );
+        ApiResource.RequestMethod.GET, url, params, PromotionCode.class, options);
+  }
+
+  /** Retrieves the promotion code with the given ID. */
+  public static PromotionCode retrieve(
+      String promotionCode, PromotionCodeRetrieveParams params, RequestOptions options)
+      throws StripeException {
+    String url =
+        String.format(
+            "%s%s",
+            Stripe.getApiBase(),
+            String.format("/v1/promotion_codes/%s", ApiResource.urlEncodeId(promotionCode)));
+    return ApiResource.request(
+        ApiResource.RequestMethod.GET, url, params, PromotionCode.class, options);
   }
 
   /**
-   * <p>Retrieves the promotion code with the given ID.</p>
-   */
-  public static PromotionCode retrieve(
-      String promotionCode,
-      PromotionCodeRetrieveParams params,
-      RequestOptions options) throws StripeException {
-    String url =
-      String.format(
-        "%s%s",
-        Stripe.getApiBase(),
-        String.format("/v1/promotion_codes/%s", ApiResource.urlEncodeId(promotionCode))
-      );
-    return ApiResource.request(
-      ApiResource.RequestMethod.GET,
-      url,
-      params,
-      PromotionCode.class,
-      options
-    );
-  }
-
-  /**
-   * <p>A promotion code points to a coupon. You can optionally restrict the code to a specific customer, redemption limit, and expiration date.</p>
+   * A promotion code points to a coupon. You can optionally restrict the code to a specific
+   * customer, redemption limit, and expiration date.
    */
   public static PromotionCode create(Map<String, Object> params) throws StripeException {
     return create(params, (RequestOptions) null);
   }
 
   /**
-   * <p>A promotion code points to a coupon. You can optionally restrict the code to a specific customer, redemption limit, and expiration date.</p>
+   * A promotion code points to a coupon. You can optionally restrict the code to a specific
+   * customer, redemption limit, and expiration date.
    */
-  public static PromotionCode create(
-      Map<String, Object> params,
-      RequestOptions options) throws StripeException {
+  public static PromotionCode create(Map<String, Object> params, RequestOptions options)
+      throws StripeException {
     String url = String.format("%s%s", Stripe.getApiBase(), "/v1/promotion_codes");
     return ApiResource.request(
-      ApiResource.RequestMethod.POST,
-      url,
-      params,
-      PromotionCode.class,
-      options
-    );
+        ApiResource.RequestMethod.POST, url, params, PromotionCode.class, options);
   }
 
   /**
-   * <p>A promotion code points to a coupon. You can optionally restrict the code to a specific customer, redemption limit, and expiration date.</p>
+   * A promotion code points to a coupon. You can optionally restrict the code to a specific
+   * customer, redemption limit, and expiration date.
    */
   public static PromotionCode create(PromotionCodeCreateParams params) throws StripeException {
     return create(params, (RequestOptions) null);
   }
 
   /**
-   * <p>A promotion code points to a coupon. You can optionally restrict the code to a specific customer, redemption limit, and expiration date.</p>
+   * A promotion code points to a coupon. You can optionally restrict the code to a specific
+   * customer, redemption limit, and expiration date.
    */
-  public static PromotionCode create(
-      PromotionCodeCreateParams params,
-      RequestOptions options) throws StripeException {
+  public static PromotionCode create(PromotionCodeCreateParams params, RequestOptions options)
+      throws StripeException {
     String url = String.format("%s%s", Stripe.getApiBase(), "/v1/promotion_codes");
     return ApiResource.request(
-      ApiResource.RequestMethod.POST,
-      url,
-      params,
-      PromotionCode.class,
-      options
-    );
+        ApiResource.RequestMethod.POST, url, params, PromotionCode.class, options);
   }
 
   /**
-   * <p>Updates the specified promotion code by setting the values of the parameters passed. Most fields are, by design, not editable.</p>
+   * Updates the specified promotion code by setting the values of the parameters passed. Most
+   * fields are, by design, not editable.
    */
   @Override
   public PromotionCode update(Map<String, Object> params) throws StripeException {
@@ -237,86 +200,65 @@ public class PromotionCode extends ApiResource implements HasId, MetadataStore<P
   }
 
   /**
-   * <p>Updates the specified promotion code by setting the values of the parameters passed. Most fields are, by design, not editable.</p>
+   * Updates the specified promotion code by setting the values of the parameters passed. Most
+   * fields are, by design, not editable.
    */
   @Override
-  public PromotionCode update(
-      Map<String, Object> params,
-      RequestOptions options) throws StripeException {
+  public PromotionCode update(Map<String, Object> params, RequestOptions options)
+      throws StripeException {
     String url =
-      String.format(
-        "%s%s",
-        Stripe.getApiBase(),
-        String.format("/v1/promotion_codes/%s", ApiResource.urlEncodeId(this.getId()))
-      );
+        String.format(
+            "%s%s",
+            Stripe.getApiBase(),
+            String.format("/v1/promotion_codes/%s", ApiResource.urlEncodeId(this.getId())));
     return ApiResource.request(
-      ApiResource.RequestMethod.POST,
-      url,
-      params,
-      PromotionCode.class,
-      options
-    );
+        ApiResource.RequestMethod.POST, url, params, PromotionCode.class, options);
   }
 
   /**
-   * <p>Updates the specified promotion code by setting the values of the parameters passed. Most fields are, by design, not editable.</p>
+   * Updates the specified promotion code by setting the values of the parameters passed. Most
+   * fields are, by design, not editable.
    */
   public PromotionCode update(PromotionCodeUpdateParams params) throws StripeException {
     return update(params, (RequestOptions) null);
   }
 
   /**
-   * <p>Updates the specified promotion code by setting the values of the parameters passed. Most fields are, by design, not editable.</p>
+   * Updates the specified promotion code by setting the values of the parameters passed. Most
+   * fields are, by design, not editable.
    */
-  public PromotionCode update(
-      PromotionCodeUpdateParams params,
-      RequestOptions options) throws StripeException {
+  public PromotionCode update(PromotionCodeUpdateParams params, RequestOptions options)
+      throws StripeException {
     String url =
-      String.format(
-        "%s%s",
-        Stripe.getApiBase(),
-        String.format("/v1/promotion_codes/%s", ApiResource.urlEncodeId(this.getId()))
-      );
+        String.format(
+            "%s%s",
+            Stripe.getApiBase(),
+            String.format("/v1/promotion_codes/%s", ApiResource.urlEncodeId(this.getId())));
     return ApiResource.request(
-      ApiResource.RequestMethod.POST,
-      url,
-      params,
-      PromotionCode.class,
-      options
-    );
+        ApiResource.RequestMethod.POST, url, params, PromotionCode.class, options);
   }
 
-  /**
-   * <p>Returns a list of your promotion codes.</p>
-   */
+  /** Returns a list of your promotion codes. */
   public static PromotionCodeCollection list(Map<String, Object> params) throws StripeException {
     return list(params, (RequestOptions) null);
   }
 
-  /**
-   * <p>Returns a list of your promotion codes.</p>
-   */
-  public static PromotionCodeCollection list(
-      Map<String, Object> params,
-      RequestOptions options) throws StripeException {
+  /** Returns a list of your promotion codes. */
+  public static PromotionCodeCollection list(Map<String, Object> params, RequestOptions options)
+      throws StripeException {
     String url = String.format("%s%s", Stripe.getApiBase(), "/v1/promotion_codes");
     return ApiResource.requestCollection(url, params, PromotionCodeCollection.class, options);
   }
 
-  /**
-   * <p>Returns a list of your promotion codes.</p>
-   */
-  public static PromotionCodeCollection list(
-      PromotionCodeListParams params) throws StripeException {
+  /** Returns a list of your promotion codes. */
+  public static PromotionCodeCollection list(PromotionCodeListParams params)
+      throws StripeException {
     return list(params, (RequestOptions) null);
   }
 
-  /**
-   * <p>Returns a list of your promotion codes.</p>
-   */
-  public static PromotionCodeCollection list(
-      PromotionCodeListParams params,
-      RequestOptions options) throws StripeException {
+  /** Returns a list of your promotion codes. */
+  public static PromotionCodeCollection list(PromotionCodeListParams params, RequestOptions options)
+      throws StripeException {
     String url = String.format("%s%s", Stripe.getApiBase(), "/v1/promotion_codes");
     return ApiResource.requestCollection(url, params, PromotionCodeCollection.class, options);
   }
@@ -326,20 +268,20 @@ public class PromotionCode extends ApiResource implements HasId, MetadataStore<P
   @EqualsAndHashCode(callSuper = false)
   public static class Restrictions extends StripeObject {
     /**
-     * A Boolean indicating if the Promotion Code should only be redeemed for Customers without any successful payments or invoices.
+     * A Boolean indicating if the Promotion Code should only be redeemed for Customers without any
+     * successful payments or invoices.
      */
     @SerializedName("first_time_transaction")
     Boolean firstTimeTransaction;
 
     /**
-     * Minimum amount required to redeem this Promotion Code into a Coupon (e.g., a purchase must be $100 or more to work).
+     * Minimum amount required to redeem this Promotion Code into a Coupon (e.g., a purchase must be
+     * $100 or more to work).
      */
     @SerializedName("minimum_amount")
     Long minimumAmount;
 
-    /**
-     * Three-letter <a href="https://stripe.com/docs/currencies">ISO code</a> for minimum_amount
-     */
+    /** Three-letter <a href="https://stripe.com/docs/currencies">ISO code</a> for minimum_amount */
     @SerializedName("minimum_amount_currency")
     String minimumAmountCurrency;
   }

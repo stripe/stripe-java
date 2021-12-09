@@ -5,11 +5,12 @@ import java.util.HashMap;
 import java.util.Map;
 
 /**
- * Event data class look up used in {@link EventDataDeserializer}.
- * The key to look up is `object` string of the model.
+ * Event data class look up used in {@link EventDataDeserializer}. The key to look up is `object`
+ * string of the model.
  */
 final class EventDataClassLookup {
   private static final Map<String, Class<? extends StripeObject>> classLookup = new HashMap<>();
+
   static {
     classLookup.put("account", Account.class);
     classLookup.put("account_link", AccountLink.class);
@@ -88,21 +89,15 @@ final class EventDataClassLookup {
     classLookup.put("webhook_endpoint", WebhookEndpoint.class);
 
     classLookup.put(
-      "billing_portal.configuration",
-      com.stripe.model.billingportal.Configuration.class
-    );
+        "billing_portal.configuration", com.stripe.model.billingportal.Configuration.class);
     classLookup.put("billing_portal.session", com.stripe.model.billingportal.Session.class);
 
     classLookup.put("checkout.session", com.stripe.model.checkout.Session.class);
 
     classLookup.put(
-      "identity.verification_report",
-      com.stripe.model.identity.VerificationReport.class
-    );
+        "identity.verification_report", com.stripe.model.identity.VerificationReport.class);
     classLookup.put(
-      "identity.verification_session",
-      com.stripe.model.identity.VerificationSession.class
-    );
+        "identity.verification_session", com.stripe.model.identity.VerificationSession.class);
 
     classLookup.put("issuing.authorization", com.stripe.model.issuing.Authorization.class);
     classLookup.put("issuing.card", com.stripe.model.issuing.Card.class);
@@ -122,8 +117,8 @@ final class EventDataClassLookup {
     classLookup.put("terminal.connection_token", com.stripe.model.terminal.ConnectionToken.class);
     classLookup.put("terminal.location", com.stripe.model.terminal.Location.class);
     classLookup.put("terminal.reader", com.stripe.model.terminal.Reader.class);
-
   }
+
   public static Class<? extends StripeObject> findClass(String objectType) {
     return classLookup.get(objectType);
   }

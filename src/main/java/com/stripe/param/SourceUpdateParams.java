@@ -3,7 +3,6 @@ package com.stripe.param;
 
 import com.google.gson.annotations.SerializedName;
 import com.stripe.net.ApiRequestParams;
-import com.stripe.net.ApiRequestParams.EnumParam;
 import com.stripe.param.common.EmptyParam;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -13,44 +12,49 @@ import lombok.Getter;
 
 @Getter
 public class SourceUpdateParams extends ApiRequestParams {
-  /**
-   * Amount associated with the source.
-   */
+  /** Amount associated with the source. */
   @SerializedName("amount")
   Long amount;
 
-  /**
-   * Specifies which fields in the response should be expanded.
-   */
+  /** Specifies which fields in the response should be expanded. */
   @SerializedName("expand")
   List<String> expand;
 
   /**
-   * Map of extra parameters for custom features not available in this client library. The content in this map is not serialized under this field's {@code @SerializedName} value. Instead, each key/value pair is serialized as if the key is a root-level field (serialized) name in this param object. Effectively, this map is flattened to its parent instance.
+   * Map of extra parameters for custom features not available in this client library. The content
+   * in this map is not serialized under this field's {@code @SerializedName} value. Instead, each
+   * key/value pair is serialized as if the key is a root-level field (serialized) name in this
+   * param object. Effectively, this map is flattened to its parent instance.
    */
   @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
   Map<String, Object> extraParams;
 
   /**
-   * Information about a mandate possibility attached to a source object (generally for bank debits) as well as its acceptance status.
+   * Information about a mandate possibility attached to a source object (generally for bank debits)
+   * as well as its acceptance status.
    */
   @SerializedName("mandate")
   Mandate mandate;
 
   /**
-   * Set of <a href="https://stripe.com/docs/api/metadata">key-value pairs</a> that you can attach to an object. This can be useful for storing additional information about the object in a structured format. Individual keys can be unset by posting an empty value to them. All keys can be unset by posting an empty value to {@code metadata}.
+   * Set of <a href="https://stripe.com/docs/api/metadata">key-value pairs</a> that you can attach
+   * to an object. This can be useful for storing additional information about the object in a
+   * structured format. Individual keys can be unset by posting an empty value to them. All keys can
+   * be unset by posting an empty value to {@code metadata}.
    */
   @SerializedName("metadata")
   Object metadata;
 
   /**
-   * Information about the owner of the payment instrument that may be used or required by particular source types.
+   * Information about the owner of the payment instrument that may be used or required by
+   * particular source types.
    */
   @SerializedName("owner")
   Owner owner;
 
   /**
-   * Information about the items and shipping associated with the source. Required for transactional credit (for example Klarna) sources before you can charge it.
+   * Information about the items and shipping associated with the source. Required for transactional
+   * credit (for example Klarna) sources before you can charge it.
    */
   @SerializedName("source_order")
   SourceOrder sourceOrder;
@@ -71,9 +75,11 @@ public class SourceUpdateParams extends ApiRequestParams {
     this.owner = owner;
     this.sourceOrder = sourceOrder;
   }
+
   public static Builder builder() {
     return new Builder();
   }
+
   public static class Builder {
     private Long amount;
 
@@ -89,31 +95,28 @@ public class SourceUpdateParams extends ApiRequestParams {
 
     private SourceOrder sourceOrder;
 
-    /**
-     * Finalize and obtain parameter instance from this builder.
-     */
+    /** Finalize and obtain parameter instance from this builder. */
     public SourceUpdateParams build() {
       return new SourceUpdateParams(
-        this.amount,
-        this.expand,
-        this.extraParams,
-        this.mandate,
-        this.metadata,
-        this.owner,
-        this.sourceOrder
-      );
+          this.amount,
+          this.expand,
+          this.extraParams,
+          this.mandate,
+          this.metadata,
+          this.owner,
+          this.sourceOrder);
     }
 
-    /**
-     * Amount associated with the source.
-     */
+    /** Amount associated with the source. */
     public Builder setAmount(Long amount) {
       this.amount = amount;
       return this;
     }
 
     /**
-     * Add an element to `expand` list. A list is initialized for the first `add/addAll` call, and subsequent calls adds additional elements to the original list. See {@link SourceUpdateParams#expand} for the field documentation.
+     * Add an element to `expand` list. A list is initialized for the first `add/addAll` call, and
+     * subsequent calls adds additional elements to the original list. See {@link
+     * SourceUpdateParams#expand} for the field documentation.
      */
     public Builder addExpand(String element) {
       if (this.expand == null) {
@@ -124,7 +127,9 @@ public class SourceUpdateParams extends ApiRequestParams {
     }
 
     /**
-     * Add all elements to `expand` list. A list is initialized for the first `add/addAll` call, and subsequent calls adds additional elements to the original list. See {@link SourceUpdateParams#expand} for the field documentation.
+     * Add all elements to `expand` list. A list is initialized for the first `add/addAll` call, and
+     * subsequent calls adds additional elements to the original list. See {@link
+     * SourceUpdateParams#expand} for the field documentation.
      */
     public Builder addAllExpand(List<String> elements) {
       if (this.expand == null) {
@@ -135,7 +140,9 @@ public class SourceUpdateParams extends ApiRequestParams {
     }
 
     /**
-     * Add a key/value pair to `extraParams` map. A map is initialized for the first `put/putAll` call, and subsequent calls add additional key/value pairs to the original map. See {@link SourceUpdateParams#extraParams} for the field documentation.
+     * Add a key/value pair to `extraParams` map. A map is initialized for the first `put/putAll`
+     * call, and subsequent calls add additional key/value pairs to the original map. See {@link
+     * SourceUpdateParams#extraParams} for the field documentation.
      */
     public Builder putExtraParam(String key, Object value) {
       if (this.extraParams == null) {
@@ -146,7 +153,9 @@ public class SourceUpdateParams extends ApiRequestParams {
     }
 
     /**
-     * Add all map key/value pairs to `extraParams` map. A map is initialized for the first `put/putAll` call, and subsequent calls add additional key/value pairs to the original map. See {@link SourceUpdateParams#extraParams} for the field documentation.
+     * Add all map key/value pairs to `extraParams` map. A map is initialized for the first
+     * `put/putAll` call, and subsequent calls add additional key/value pairs to the original map.
+     * See {@link SourceUpdateParams#extraParams} for the field documentation.
      */
     public Builder putAllExtraParam(Map<String, Object> map) {
       if (this.extraParams == null) {
@@ -157,7 +166,8 @@ public class SourceUpdateParams extends ApiRequestParams {
     }
 
     /**
-     * Information about a mandate possibility attached to a source object (generally for bank debits) as well as its acceptance status.
+     * Information about a mandate possibility attached to a source object (generally for bank
+     * debits) as well as its acceptance status.
      */
     public Builder setMandate(Mandate mandate) {
       this.mandate = mandate;
@@ -165,7 +175,9 @@ public class SourceUpdateParams extends ApiRequestParams {
     }
 
     /**
-     * Add a key/value pair to `metadata` map. A map is initialized for the first `put/putAll` call, and subsequent calls add additional key/value pairs to the original map. See {@link SourceUpdateParams#metadata} for the field documentation.
+     * Add a key/value pair to `metadata` map. A map is initialized for the first `put/putAll` call,
+     * and subsequent calls add additional key/value pairs to the original map. See {@link
+     * SourceUpdateParams#metadata} for the field documentation.
      */
     @SuppressWarnings("unchecked")
     public Builder putMetadata(String key, String value) {
@@ -177,7 +189,9 @@ public class SourceUpdateParams extends ApiRequestParams {
     }
 
     /**
-     * Add all map key/value pairs to `metadata` map. A map is initialized for the first `put/putAll` call, and subsequent calls add additional key/value pairs to the original map. See {@link SourceUpdateParams#metadata} for the field documentation.
+     * Add all map key/value pairs to `metadata` map. A map is initialized for the first
+     * `put/putAll` call, and subsequent calls add additional key/value pairs to the original map.
+     * See {@link SourceUpdateParams#metadata} for the field documentation.
      */
     @SuppressWarnings("unchecked")
     public Builder putAllMetadata(Map<String, String> map) {
@@ -189,7 +203,10 @@ public class SourceUpdateParams extends ApiRequestParams {
     }
 
     /**
-     * Set of <a href="https://stripe.com/docs/api/metadata">key-value pairs</a> that you can attach to an object. This can be useful for storing additional information about the object in a structured format. Individual keys can be unset by posting an empty value to them. All keys can be unset by posting an empty value to {@code metadata}.
+     * Set of <a href="https://stripe.com/docs/api/metadata">key-value pairs</a> that you can attach
+     * to an object. This can be useful for storing additional information about the object in a
+     * structured format. Individual keys can be unset by posting an empty value to them. All keys
+     * can be unset by posting an empty value to {@code metadata}.
      */
     public Builder setMetadata(EmptyParam metadata) {
       this.metadata = metadata;
@@ -197,7 +214,10 @@ public class SourceUpdateParams extends ApiRequestParams {
     }
 
     /**
-     * Set of <a href="https://stripe.com/docs/api/metadata">key-value pairs</a> that you can attach to an object. This can be useful for storing additional information about the object in a structured format. Individual keys can be unset by posting an empty value to them. All keys can be unset by posting an empty value to {@code metadata}.
+     * Set of <a href="https://stripe.com/docs/api/metadata">key-value pairs</a> that you can attach
+     * to an object. This can be useful for storing additional information about the object in a
+     * structured format. Individual keys can be unset by posting an empty value to them. All keys
+     * can be unset by posting an empty value to {@code metadata}.
      */
     public Builder setMetadata(Map<String, String> metadata) {
       this.metadata = metadata;
@@ -205,7 +225,8 @@ public class SourceUpdateParams extends ApiRequestParams {
     }
 
     /**
-     * Information about the owner of the payment instrument that may be used or required by particular source types.
+     * Information about the owner of the payment instrument that may be used or required by
+     * particular source types.
      */
     public Builder setOwner(Owner owner) {
       this.owner = owner;
@@ -213,13 +234,15 @@ public class SourceUpdateParams extends ApiRequestParams {
     }
 
     /**
-     * Information about the items and shipping associated with the source. Required for transactional credit (for example Klarna) sources before you can charge it.
+     * Information about the items and shipping associated with the source. Required for
+     * transactional credit (for example Klarna) sources before you can charge it.
      */
     public Builder setSourceOrder(SourceOrder sourceOrder) {
       this.sourceOrder = sourceOrder;
       return this;
     }
   }
+
   @Getter
   public static class Mandate {
     /**
@@ -228,32 +251,38 @@ public class SourceUpdateParams extends ApiRequestParams {
     @SerializedName("acceptance")
     Acceptance acceptance;
 
-    /**
-     * The amount specified by the mandate. (Leave null for a mandate covering all amounts)
-     */
+    /** The amount specified by the mandate. (Leave null for a mandate covering all amounts) */
     @SerializedName("amount")
     Object amount;
 
-    /**
-     * The currency specified by the mandate. (Must match {@code currency} of the source)
-     */
+    /** The currency specified by the mandate. (Must match {@code currency} of the source) */
     @SerializedName("currency")
     Object currency;
 
     /**
-     * Map of extra parameters for custom features not available in this client library. The content in this map is not serialized under this field's {@code @SerializedName} value. Instead, each key/value pair is serialized as if the key is a root-level field (serialized) name in this param object. Effectively, this map is flattened to its parent instance.
+     * Map of extra parameters for custom features not available in this client library. The content
+     * in this map is not serialized under this field's {@code @SerializedName} value. Instead, each
+     * key/value pair is serialized as if the key is a root-level field (serialized) name in this
+     * param object. Effectively, this map is flattened to its parent instance.
      */
     @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
     Map<String, Object> extraParams;
 
     /**
-     * The interval of debits permitted by the mandate. Either {@code one_time} (just permitting a single debit), {@code scheduled} (with debits on an agreed schedule or for clearly-defined events), or {@code variable}(for debits with any frequency)
+     * The interval of debits permitted by the mandate. Either {@code one_time} (just permitting a
+     * single debit), {@code scheduled} (with debits on an agreed schedule or for clearly-defined
+     * events), or {@code variable}(for debits with any frequency)
      */
     @SerializedName("interval")
     Interval interval;
 
     /**
-     * The method Stripe should use to notify the customer of upcoming debit instructions and/or mandate confirmation as required by the underlying debit network. Either {@code email} (an email is sent directly to the customer), {@code manual} (a {@code source.mandate_notification} event is sent to your webhooks endpoint and you should handle the notification) or {@code none} (the underlying debit network does not require any notification).
+     * The method Stripe should use to notify the customer of upcoming debit instructions and/or
+     * mandate confirmation as required by the underlying debit network. Either {@code email} (an
+     * email is sent directly to the customer), {@code manual} (a {@code
+     * source.mandate_notification} event is sent to your webhooks endpoint and you should handle
+     * the notification) or {@code none} (the underlying debit network does not require any
+     * notification).
      */
     @SerializedName("notification_method")
     NotificationMethod notificationMethod;
@@ -272,9 +301,11 @@ public class SourceUpdateParams extends ApiRequestParams {
       this.interval = interval;
       this.notificationMethod = notificationMethod;
     }
+
     public static Builder builder() {
       return new Builder();
     }
+
     public static class Builder {
       private Acceptance acceptance;
 
@@ -288,62 +319,54 @@ public class SourceUpdateParams extends ApiRequestParams {
 
       private NotificationMethod notificationMethod;
 
-      /**
-       * Finalize and obtain parameter instance from this builder.
-       */
+      /** Finalize and obtain parameter instance from this builder. */
       public Mandate build() {
         return new Mandate(
-          this.acceptance,
-          this.amount,
-          this.currency,
-          this.extraParams,
-          this.interval,
-          this.notificationMethod
-        );
+            this.acceptance,
+            this.amount,
+            this.currency,
+            this.extraParams,
+            this.interval,
+            this.notificationMethod);
       }
 
       /**
-       * The parameters required to notify Stripe of a mandate acceptance or refusal by the customer.
+       * The parameters required to notify Stripe of a mandate acceptance or refusal by the
+       * customer.
        */
       public Builder setAcceptance(Acceptance acceptance) {
         this.acceptance = acceptance;
         return this;
       }
 
-      /**
-       * The amount specified by the mandate. (Leave null for a mandate covering all amounts)
-       */
+      /** The amount specified by the mandate. (Leave null for a mandate covering all amounts) */
       public Builder setAmount(Long amount) {
         this.amount = amount;
         return this;
       }
 
-      /**
-       * The amount specified by the mandate. (Leave null for a mandate covering all amounts)
-       */
+      /** The amount specified by the mandate. (Leave null for a mandate covering all amounts) */
       public Builder setAmount(EmptyParam amount) {
         this.amount = amount;
         return this;
       }
 
-      /**
-       * The currency specified by the mandate. (Must match {@code currency} of the source)
-       */
+      /** The currency specified by the mandate. (Must match {@code currency} of the source) */
       public Builder setCurrency(String currency) {
         this.currency = currency;
         return this;
       }
 
-      /**
-       * The currency specified by the mandate. (Must match {@code currency} of the source)
-       */
+      /** The currency specified by the mandate. (Must match {@code currency} of the source) */
       public Builder setCurrency(EmptyParam currency) {
         this.currency = currency;
         return this;
       }
 
       /**
-       * Add a key/value pair to `extraParams` map. A map is initialized for the first `put/putAll` call, and subsequent calls add additional key/value pairs to the original map. See {@link SourceUpdateParams.Mandate#extraParams} for the field documentation.
+       * Add a key/value pair to `extraParams` map. A map is initialized for the first `put/putAll`
+       * call, and subsequent calls add additional key/value pairs to the original map. See {@link
+       * SourceUpdateParams.Mandate#extraParams} for the field documentation.
        */
       public Builder putExtraParam(String key, Object value) {
         if (this.extraParams == null) {
@@ -354,7 +377,9 @@ public class SourceUpdateParams extends ApiRequestParams {
       }
 
       /**
-       * Add all map key/value pairs to `extraParams` map. A map is initialized for the first `put/putAll` call, and subsequent calls add additional key/value pairs to the original map. See {@link SourceUpdateParams.Mandate#extraParams} for the field documentation.
+       * Add all map key/value pairs to `extraParams` map. A map is initialized for the first
+       * `put/putAll` call, and subsequent calls add additional key/value pairs to the original map.
+       * See {@link SourceUpdateParams.Mandate#extraParams} for the field documentation.
        */
       public Builder putAllExtraParam(Map<String, Object> map) {
         if (this.extraParams == null) {
@@ -365,7 +390,9 @@ public class SourceUpdateParams extends ApiRequestParams {
       }
 
       /**
-       * The interval of debits permitted by the mandate. Either {@code one_time} (just permitting a single debit), {@code scheduled} (with debits on an agreed schedule or for clearly-defined events), or {@code variable}(for debits with any frequency)
+       * The interval of debits permitted by the mandate. Either {@code one_time} (just permitting a
+       * single debit), {@code scheduled} (with debits on an agreed schedule or for clearly-defined
+       * events), or {@code variable}(for debits with any frequency)
        */
       public Builder setInterval(Interval interval) {
         this.interval = interval;
@@ -373,13 +400,19 @@ public class SourceUpdateParams extends ApiRequestParams {
       }
 
       /**
-       * The method Stripe should use to notify the customer of upcoming debit instructions and/or mandate confirmation as required by the underlying debit network. Either {@code email} (an email is sent directly to the customer), {@code manual} (a {@code source.mandate_notification} event is sent to your webhooks endpoint and you should handle the notification) or {@code none} (the underlying debit network does not require any notification).
+       * The method Stripe should use to notify the customer of upcoming debit instructions and/or
+       * mandate confirmation as required by the underlying debit network. Either {@code email} (an
+       * email is sent directly to the customer), {@code manual} (a {@code
+       * source.mandate_notification} event is sent to your webhooks endpoint and you should handle
+       * the notification) or {@code none} (the underlying debit network does not require any
+       * notification).
        */
       public Builder setNotificationMethod(NotificationMethod notificationMethod) {
         this.notificationMethod = notificationMethod;
         return this;
       }
     }
+
     @Getter
     public static class Acceptance {
       /**
@@ -389,43 +422,49 @@ public class SourceUpdateParams extends ApiRequestParams {
       Long date;
 
       /**
-       * Map of extra parameters for custom features not available in this client library. The content in this map is not serialized under this field's {@code @SerializedName} value. Instead, each key/value pair is serialized as if the key is a root-level field (serialized) name in this param object. Effectively, this map is flattened to its parent instance.
+       * Map of extra parameters for custom features not available in this client library. The
+       * content in this map is not serialized under this field's {@code @SerializedName} value.
+       * Instead, each key/value pair is serialized as if the key is a root-level field (serialized)
+       * name in this param object. Effectively, this map is flattened to its parent instance.
        */
       @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
       Map<String, Object> extraParams;
 
-      /**
-       * The IP address from which the mandate was accepted or refused by the customer.
-       */
+      /** The IP address from which the mandate was accepted or refused by the customer. */
       @SerializedName("ip")
       Object ip;
 
       /**
-       * The parameters required to store a mandate accepted offline. Should only be set if {@code mandate[type]} is {@code offline}
+       * The parameters required to store a mandate accepted offline. Should only be set if {@code
+       * mandate[type]} is {@code offline}
        */
       @SerializedName("offline")
       Offline offline;
 
       /**
-       * The parameters required to store a mandate accepted online. Should only be set if {@code mandate[type]} is {@code online}
+       * The parameters required to store a mandate accepted online. Should only be set if {@code
+       * mandate[type]} is {@code online}
        */
       @SerializedName("online")
       Online online;
 
       /**
-       * The status of the mandate acceptance. Either {@code accepted} (the mandate was accepted) or {@code refused} (the mandate was refused).
+       * The status of the mandate acceptance. Either {@code accepted} (the mandate was accepted) or
+       * {@code refused} (the mandate was refused).
        */
       @SerializedName("status")
       Status status;
 
       /**
-       * The type of acceptance information included with the mandate. Either {@code online} or {@code offline}
+       * The type of acceptance information included with the mandate. Either {@code online} or
+       * {@code offline}
        */
       @SerializedName("type")
       Type type;
 
       /**
-       * The user agent of the browser from which the mandate was accepted or refused by the customer.
+       * The user agent of the browser from which the mandate was accepted or refused by the
+       * customer.
        */
       @SerializedName("user_agent")
       Object userAgent;
@@ -448,9 +487,11 @@ public class SourceUpdateParams extends ApiRequestParams {
         this.type = type;
         this.userAgent = userAgent;
       }
+
       public static Builder builder() {
         return new Builder();
       }
+
       public static class Builder {
         private Long date;
 
@@ -468,20 +509,17 @@ public class SourceUpdateParams extends ApiRequestParams {
 
         private Object userAgent;
 
-        /**
-         * Finalize and obtain parameter instance from this builder.
-         */
+        /** Finalize and obtain parameter instance from this builder. */
         public Acceptance build() {
           return new Acceptance(
-            this.date,
-            this.extraParams,
-            this.ip,
-            this.offline,
-            this.online,
-            this.status,
-            this.type,
-            this.userAgent
-          );
+              this.date,
+              this.extraParams,
+              this.ip,
+              this.offline,
+              this.online,
+              this.status,
+              this.type,
+              this.userAgent);
         }
 
         /**
@@ -493,7 +531,10 @@ public class SourceUpdateParams extends ApiRequestParams {
         }
 
         /**
-         * Add a key/value pair to `extraParams` map. A map is initialized for the first `put/putAll` call, and subsequent calls add additional key/value pairs to the original map. See {@link SourceUpdateParams.Mandate.Acceptance#extraParams} for the field documentation.
+         * Add a key/value pair to `extraParams` map. A map is initialized for the first
+         * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
+         * map. See {@link SourceUpdateParams.Mandate.Acceptance#extraParams} for the field
+         * documentation.
          */
         public Builder putExtraParam(String key, Object value) {
           if (this.extraParams == null) {
@@ -504,7 +545,10 @@ public class SourceUpdateParams extends ApiRequestParams {
         }
 
         /**
-         * Add all map key/value pairs to `extraParams` map. A map is initialized for the first `put/putAll` call, and subsequent calls add additional key/value pairs to the original map. See {@link SourceUpdateParams.Mandate.Acceptance#extraParams} for the field documentation.
+         * Add all map key/value pairs to `extraParams` map. A map is initialized for the first
+         * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
+         * map. See {@link SourceUpdateParams.Mandate.Acceptance#extraParams} for the field
+         * documentation.
          */
         public Builder putAllExtraParam(Map<String, Object> map) {
           if (this.extraParams == null) {
@@ -514,24 +558,21 @@ public class SourceUpdateParams extends ApiRequestParams {
           return this;
         }
 
-        /**
-         * The IP address from which the mandate was accepted or refused by the customer.
-         */
+        /** The IP address from which the mandate was accepted or refused by the customer. */
         public Builder setIp(String ip) {
           this.ip = ip;
           return this;
         }
 
-        /**
-         * The IP address from which the mandate was accepted or refused by the customer.
-         */
+        /** The IP address from which the mandate was accepted or refused by the customer. */
         public Builder setIp(EmptyParam ip) {
           this.ip = ip;
           return this;
         }
 
         /**
-         * The parameters required to store a mandate accepted offline. Should only be set if {@code mandate[type]} is {@code offline}
+         * The parameters required to store a mandate accepted offline. Should only be set if {@code
+         * mandate[type]} is {@code offline}
          */
         public Builder setOffline(Offline offline) {
           this.offline = offline;
@@ -539,7 +580,8 @@ public class SourceUpdateParams extends ApiRequestParams {
         }
 
         /**
-         * The parameters required to store a mandate accepted online. Should only be set if {@code mandate[type]} is {@code online}
+         * The parameters required to store a mandate accepted online. Should only be set if {@code
+         * mandate[type]} is {@code online}
          */
         public Builder setOnline(Online online) {
           this.online = online;
@@ -547,7 +589,8 @@ public class SourceUpdateParams extends ApiRequestParams {
         }
 
         /**
-         * The status of the mandate acceptance. Either {@code accepted} (the mandate was accepted) or {@code refused} (the mandate was refused).
+         * The status of the mandate acceptance. Either {@code accepted} (the mandate was accepted)
+         * or {@code refused} (the mandate was refused).
          */
         public Builder setStatus(Status status) {
           this.status = status;
@@ -555,7 +598,8 @@ public class SourceUpdateParams extends ApiRequestParams {
         }
 
         /**
-         * The type of acceptance information included with the mandate. Either {@code online} or {@code offline}
+         * The type of acceptance information included with the mandate. Either {@code online} or
+         * {@code offline}
          */
         public Builder setType(Type type) {
           this.type = type;
@@ -563,7 +607,8 @@ public class SourceUpdateParams extends ApiRequestParams {
         }
 
         /**
-         * The user agent of the browser from which the mandate was accepted or refused by the customer.
+         * The user agent of the browser from which the mandate was accepted or refused by the
+         * customer.
          */
         public Builder setUserAgent(String userAgent) {
           this.userAgent = userAgent;
@@ -571,23 +616,30 @@ public class SourceUpdateParams extends ApiRequestParams {
         }
 
         /**
-         * The user agent of the browser from which the mandate was accepted or refused by the customer.
+         * The user agent of the browser from which the mandate was accepted or refused by the
+         * customer.
          */
         public Builder setUserAgent(EmptyParam userAgent) {
           this.userAgent = userAgent;
           return this;
         }
       }
+
       @Getter
       public static class Offline {
         /**
-         * An email to contact you with if a copy of the mandate is requested, required if {@code type} is {@code offline}.
+         * An email to contact you with if a copy of the mandate is requested, required if {@code
+         * type} is {@code offline}.
          */
         @SerializedName("contact_email")
         Object contactEmail;
 
         /**
-         * Map of extra parameters for custom features not available in this client library. The content in this map is not serialized under this field's {@code @SerializedName} value. Instead, each key/value pair is serialized as if the key is a root-level field (serialized) name in this param object. Effectively, this map is flattened to its parent instance.
+         * Map of extra parameters for custom features not available in this client library. The
+         * content in this map is not serialized under this field's {@code @SerializedName} value.
+         * Instead, each key/value pair is serialized as if the key is a root-level field
+         * (serialized) name in this param object. Effectively, this map is flattened to its parent
+         * instance.
          */
         @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
         Map<String, Object> extraParams;
@@ -596,23 +648,24 @@ public class SourceUpdateParams extends ApiRequestParams {
           this.contactEmail = contactEmail;
           this.extraParams = extraParams;
         }
+
         public static Builder builder() {
           return new Builder();
         }
+
         public static class Builder {
           private Object contactEmail;
 
           private Map<String, Object> extraParams;
 
-          /**
-           * Finalize and obtain parameter instance from this builder.
-           */
+          /** Finalize and obtain parameter instance from this builder. */
           public Offline build() {
             return new Offline(this.contactEmail, this.extraParams);
           }
 
           /**
-           * An email to contact you with if a copy of the mandate is requested, required if {@code type} is {@code offline}.
+           * An email to contact you with if a copy of the mandate is requested, required if {@code
+           * type} is {@code offline}.
            */
           public Builder setContactEmail(String contactEmail) {
             this.contactEmail = contactEmail;
@@ -620,7 +673,8 @@ public class SourceUpdateParams extends ApiRequestParams {
           }
 
           /**
-           * An email to contact you with if a copy of the mandate is requested, required if {@code type} is {@code offline}.
+           * An email to contact you with if a copy of the mandate is requested, required if {@code
+           * type} is {@code offline}.
            */
           public Builder setContactEmail(EmptyParam contactEmail) {
             this.contactEmail = contactEmail;
@@ -628,7 +682,10 @@ public class SourceUpdateParams extends ApiRequestParams {
           }
 
           /**
-           * Add a key/value pair to `extraParams` map. A map is initialized for the first `put/putAll` call, and subsequent calls add additional key/value pairs to the original map. See {@link SourceUpdateParams.Mandate.Acceptance.Offline#extraParams} for the field documentation.
+           * Add a key/value pair to `extraParams` map. A map is initialized for the first
+           * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
+           * map. See {@link SourceUpdateParams.Mandate.Acceptance.Offline#extraParams} for the
+           * field documentation.
            */
           public Builder putExtraParam(String key, Object value) {
             if (this.extraParams == null) {
@@ -639,7 +696,10 @@ public class SourceUpdateParams extends ApiRequestParams {
           }
 
           /**
-           * Add all map key/value pairs to `extraParams` map. A map is initialized for the first `put/putAll` call, and subsequent calls add additional key/value pairs to the original map. See {@link SourceUpdateParams.Mandate.Acceptance.Offline#extraParams} for the field documentation.
+           * Add all map key/value pairs to `extraParams` map. A map is initialized for the first
+           * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
+           * map. See {@link SourceUpdateParams.Mandate.Acceptance.Offline#extraParams} for the
+           * field documentation.
            */
           public Builder putAllExtraParam(Map<String, Object> map) {
             if (this.extraParams == null) {
@@ -650,6 +710,7 @@ public class SourceUpdateParams extends ApiRequestParams {
           }
         }
       }
+
       @Getter
       public static class Online {
         /**
@@ -659,19 +720,22 @@ public class SourceUpdateParams extends ApiRequestParams {
         Long date;
 
         /**
-         * Map of extra parameters for custom features not available in this client library. The content in this map is not serialized under this field's {@code @SerializedName} value. Instead, each key/value pair is serialized as if the key is a root-level field (serialized) name in this param object. Effectively, this map is flattened to its parent instance.
+         * Map of extra parameters for custom features not available in this client library. The
+         * content in this map is not serialized under this field's {@code @SerializedName} value.
+         * Instead, each key/value pair is serialized as if the key is a root-level field
+         * (serialized) name in this param object. Effectively, this map is flattened to its parent
+         * instance.
          */
         @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
         Map<String, Object> extraParams;
 
-        /**
-         * The IP address from which the mandate was accepted or refused by the customer.
-         */
+        /** The IP address from which the mandate was accepted or refused by the customer. */
         @SerializedName("ip")
         Object ip;
 
         /**
-         * The user agent of the browser from which the mandate was accepted or refused by the customer.
+         * The user agent of the browser from which the mandate was accepted or refused by the
+         * customer.
          */
         @SerializedName("user_agent")
         Object userAgent;
@@ -682,9 +746,11 @@ public class SourceUpdateParams extends ApiRequestParams {
           this.ip = ip;
           this.userAgent = userAgent;
         }
+
         public static Builder builder() {
           return new Builder();
         }
+
         public static class Builder {
           private Long date;
 
@@ -694,15 +760,14 @@ public class SourceUpdateParams extends ApiRequestParams {
 
           private Object userAgent;
 
-          /**
-           * Finalize and obtain parameter instance from this builder.
-           */
+          /** Finalize and obtain parameter instance from this builder. */
           public Online build() {
             return new Online(this.date, this.extraParams, this.ip, this.userAgent);
           }
 
           /**
-           * The Unix timestamp (in seconds) when the mandate was accepted or refused by the customer.
+           * The Unix timestamp (in seconds) when the mandate was accepted or refused by the
+           * customer.
            */
           public Builder setDate(Long date) {
             this.date = date;
@@ -710,7 +775,10 @@ public class SourceUpdateParams extends ApiRequestParams {
           }
 
           /**
-           * Add a key/value pair to `extraParams` map. A map is initialized for the first `put/putAll` call, and subsequent calls add additional key/value pairs to the original map. See {@link SourceUpdateParams.Mandate.Acceptance.Online#extraParams} for the field documentation.
+           * Add a key/value pair to `extraParams` map. A map is initialized for the first
+           * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
+           * map. See {@link SourceUpdateParams.Mandate.Acceptance.Online#extraParams} for the field
+           * documentation.
            */
           public Builder putExtraParam(String key, Object value) {
             if (this.extraParams == null) {
@@ -721,7 +789,10 @@ public class SourceUpdateParams extends ApiRequestParams {
           }
 
           /**
-           * Add all map key/value pairs to `extraParams` map. A map is initialized for the first `put/putAll` call, and subsequent calls add additional key/value pairs to the original map. See {@link SourceUpdateParams.Mandate.Acceptance.Online#extraParams} for the field documentation.
+           * Add all map key/value pairs to `extraParams` map. A map is initialized for the first
+           * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
+           * map. See {@link SourceUpdateParams.Mandate.Acceptance.Online#extraParams} for the field
+           * documentation.
            */
           public Builder putAllExtraParam(Map<String, Object> map) {
             if (this.extraParams == null) {
@@ -731,24 +802,21 @@ public class SourceUpdateParams extends ApiRequestParams {
             return this;
           }
 
-          /**
-           * The IP address from which the mandate was accepted or refused by the customer.
-           */
+          /** The IP address from which the mandate was accepted or refused by the customer. */
           public Builder setIp(String ip) {
             this.ip = ip;
             return this;
           }
 
-          /**
-           * The IP address from which the mandate was accepted or refused by the customer.
-           */
+          /** The IP address from which the mandate was accepted or refused by the customer. */
           public Builder setIp(EmptyParam ip) {
             this.ip = ip;
             return this;
           }
 
           /**
-           * The user agent of the browser from which the mandate was accepted or refused by the customer.
+           * The user agent of the browser from which the mandate was accepted or refused by the
+           * customer.
            */
           public Builder setUserAgent(String userAgent) {
             this.userAgent = userAgent;
@@ -756,7 +824,8 @@ public class SourceUpdateParams extends ApiRequestParams {
           }
 
           /**
-           * The user agent of the browser from which the mandate was accepted or refused by the customer.
+           * The user agent of the browser from which the mandate was accepted or refused by the
+           * customer.
            */
           public Builder setUserAgent(EmptyParam userAgent) {
             this.userAgent = userAgent;
@@ -764,6 +833,7 @@ public class SourceUpdateParams extends ApiRequestParams {
           }
         }
       }
+
       public enum Status implements ApiRequestParams.EnumParam {
         @SerializedName("accepted")
         ACCEPTED("accepted"),
@@ -776,27 +846,31 @@ public class SourceUpdateParams extends ApiRequestParams {
 
         @SerializedName("revoked")
         REVOKED("revoked");
+
         @Getter(onMethod_ = {@Override})
         private final String value;
+
         Status(String value) {
           this.value = value;
         }
-
       }
+
       public enum Type implements ApiRequestParams.EnumParam {
         @SerializedName("offline")
         OFFLINE("offline"),
 
         @SerializedName("online")
         ONLINE("online");
+
         @Getter(onMethod_ = {@Override})
         private final String value;
+
         Type(String value) {
           this.value = value;
         }
-
       }
     }
+
     public enum Interval implements ApiRequestParams.EnumParam {
       @SerializedName("one_time")
       ONE_TIME("one_time"),
@@ -806,13 +880,15 @@ public class SourceUpdateParams extends ApiRequestParams {
 
       @SerializedName("variable")
       VARIABLE("variable");
+
       @Getter(onMethod_ = {@Override})
       private final String value;
+
       Interval(String value) {
         this.value = value;
       }
-
     }
+
     public enum NotificationMethod implements ApiRequestParams.EnumParam {
       @SerializedName("deprecated_none")
       DEPRECATED_NONE("deprecated_none"),
@@ -828,61 +904,56 @@ public class SourceUpdateParams extends ApiRequestParams {
 
       @SerializedName("stripe_email")
       STRIPE_EMAIL("stripe_email");
+
       @Getter(onMethod_ = {@Override})
       private final String value;
+
       NotificationMethod(String value) {
         this.value = value;
       }
-
     }
   }
+
   @Getter
   public static class Owner {
-    /**
-     * Owner's address.
-     */
+    /** Owner's address. */
     @SerializedName("address")
     Address address;
 
-    /**
-     * Owner's email address.
-     */
+    /** Owner's email address. */
     @SerializedName("email")
     Object email;
 
     /**
-     * Map of extra parameters for custom features not available in this client library. The content in this map is not serialized under this field's {@code @SerializedName} value. Instead, each key/value pair is serialized as if the key is a root-level field (serialized) name in this param object. Effectively, this map is flattened to its parent instance.
+     * Map of extra parameters for custom features not available in this client library. The content
+     * in this map is not serialized under this field's {@code @SerializedName} value. Instead, each
+     * key/value pair is serialized as if the key is a root-level field (serialized) name in this
+     * param object. Effectively, this map is flattened to its parent instance.
      */
     @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
     Map<String, Object> extraParams;
 
-    /**
-     * Owner's full name.
-     */
+    /** Owner's full name. */
     @SerializedName("name")
     Object name;
 
-    /**
-     * Owner's phone number.
-     */
+    /** Owner's phone number. */
     @SerializedName("phone")
     Object phone;
 
     private Owner(
-        Address address,
-        Object email,
-        Map<String, Object> extraParams,
-        Object name,
-        Object phone) {
+        Address address, Object email, Map<String, Object> extraParams, Object name, Object phone) {
       this.address = address;
       this.email = email;
       this.extraParams = extraParams;
       this.name = name;
       this.phone = phone;
     }
+
     public static Builder builder() {
       return new Builder();
     }
+
     public static class Builder {
       private Address address;
 
@@ -894,39 +965,33 @@ public class SourceUpdateParams extends ApiRequestParams {
 
       private Object phone;
 
-      /**
-       * Finalize and obtain parameter instance from this builder.
-       */
+      /** Finalize and obtain parameter instance from this builder. */
       public Owner build() {
         return new Owner(this.address, this.email, this.extraParams, this.name, this.phone);
       }
 
-      /**
-       * Owner's address.
-       */
+      /** Owner's address. */
       public Builder setAddress(Address address) {
         this.address = address;
         return this;
       }
 
-      /**
-       * Owner's email address.
-       */
+      /** Owner's email address. */
       public Builder setEmail(String email) {
         this.email = email;
         return this;
       }
 
-      /**
-       * Owner's email address.
-       */
+      /** Owner's email address. */
       public Builder setEmail(EmptyParam email) {
         this.email = email;
         return this;
       }
 
       /**
-       * Add a key/value pair to `extraParams` map. A map is initialized for the first `put/putAll` call, and subsequent calls add additional key/value pairs to the original map. See {@link SourceUpdateParams.Owner#extraParams} for the field documentation.
+       * Add a key/value pair to `extraParams` map. A map is initialized for the first `put/putAll`
+       * call, and subsequent calls add additional key/value pairs to the original map. See {@link
+       * SourceUpdateParams.Owner#extraParams} for the field documentation.
        */
       public Builder putExtraParam(String key, Object value) {
         if (this.extraParams == null) {
@@ -937,7 +1002,9 @@ public class SourceUpdateParams extends ApiRequestParams {
       }
 
       /**
-       * Add all map key/value pairs to `extraParams` map. A map is initialized for the first `put/putAll` call, and subsequent calls add additional key/value pairs to the original map. See {@link SourceUpdateParams.Owner#extraParams} for the field documentation.
+       * Add all map key/value pairs to `extraParams` map. A map is initialized for the first
+       * `put/putAll` call, and subsequent calls add additional key/value pairs to the original map.
+       * See {@link SourceUpdateParams.Owner#extraParams} for the field documentation.
        */
       public Builder putAllExtraParam(Map<String, Object> map) {
         if (this.extraParams == null) {
@@ -947,79 +1014,66 @@ public class SourceUpdateParams extends ApiRequestParams {
         return this;
       }
 
-      /**
-       * Owner's full name.
-       */
+      /** Owner's full name. */
       public Builder setName(String name) {
         this.name = name;
         return this;
       }
 
-      /**
-       * Owner's full name.
-       */
+      /** Owner's full name. */
       public Builder setName(EmptyParam name) {
         this.name = name;
         return this;
       }
 
-      /**
-       * Owner's phone number.
-       */
+      /** Owner's phone number. */
       public Builder setPhone(String phone) {
         this.phone = phone;
         return this;
       }
 
-      /**
-       * Owner's phone number.
-       */
+      /** Owner's phone number. */
       public Builder setPhone(EmptyParam phone) {
         this.phone = phone;
         return this;
       }
     }
+
     @Getter
     public static class Address {
-      /**
-       * City, district, suburb, town, or village.
-       */
+      /** City, district, suburb, town, or village. */
       @SerializedName("city")
       Object city;
 
       /**
-       * Two-letter country code (<a href="https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2">ISO 3166-1 alpha-2</a>).
+       * Two-letter country code (<a href="https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2">ISO
+       * 3166-1 alpha-2</a>).
        */
       @SerializedName("country")
       Object country;
 
       /**
-       * Map of extra parameters for custom features not available in this client library. The content in this map is not serialized under this field's {@code @SerializedName} value. Instead, each key/value pair is serialized as if the key is a root-level field (serialized) name in this param object. Effectively, this map is flattened to its parent instance.
+       * Map of extra parameters for custom features not available in this client library. The
+       * content in this map is not serialized under this field's {@code @SerializedName} value.
+       * Instead, each key/value pair is serialized as if the key is a root-level field (serialized)
+       * name in this param object. Effectively, this map is flattened to its parent instance.
        */
       @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
       Map<String, Object> extraParams;
 
-      /**
-       * Address line 1 (e.g., street, PO Box, or company name).
-       */
+      /** Address line 1 (e.g., street, PO Box, or company name). */
       @SerializedName("line1")
       Object line1;
 
-      /**
-       * Address line 2 (e.g., apartment, suite, unit, or building).
-       */
+      /** Address line 2 (e.g., apartment, suite, unit, or building). */
       @SerializedName("line2")
       Object line2;
 
-      /**
-       * ZIP or postal code.
-       */
+      /** ZIP or postal code. */
       @SerializedName("postal_code")
       Object postalCode;
 
-      /**
-       * State, county, province, or region.
-       */
+      /** State, county, province, or region. */
       @SerializedName("state")
       Object state;
 
@@ -1039,9 +1093,11 @@ public class SourceUpdateParams extends ApiRequestParams {
         this.postalCode = postalCode;
         this.state = state;
       }
+
       public static Builder builder() {
         return new Builder();
       }
+
       public static class Builder {
         private Object city;
 
@@ -1057,39 +1113,33 @@ public class SourceUpdateParams extends ApiRequestParams {
 
         private Object state;
 
-        /**
-         * Finalize and obtain parameter instance from this builder.
-         */
+        /** Finalize and obtain parameter instance from this builder. */
         public Address build() {
           return new Address(
-            this.city,
-            this.country,
-            this.extraParams,
-            this.line1,
-            this.line2,
-            this.postalCode,
-            this.state
-          );
+              this.city,
+              this.country,
+              this.extraParams,
+              this.line1,
+              this.line2,
+              this.postalCode,
+              this.state);
         }
 
-        /**
-         * City, district, suburb, town, or village.
-         */
+        /** City, district, suburb, town, or village. */
         public Builder setCity(String city) {
           this.city = city;
           return this;
         }
 
-        /**
-         * City, district, suburb, town, or village.
-         */
+        /** City, district, suburb, town, or village. */
         public Builder setCity(EmptyParam city) {
           this.city = city;
           return this;
         }
 
         /**
-         * Two-letter country code (<a href="https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2">ISO 3166-1 alpha-2</a>).
+         * Two-letter country code (<a href="https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2">ISO
+         * 3166-1 alpha-2</a>).
          */
         public Builder setCountry(String country) {
           this.country = country;
@@ -1097,7 +1147,8 @@ public class SourceUpdateParams extends ApiRequestParams {
         }
 
         /**
-         * Two-letter country code (<a href="https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2">ISO 3166-1 alpha-2</a>).
+         * Two-letter country code (<a href="https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2">ISO
+         * 3166-1 alpha-2</a>).
          */
         public Builder setCountry(EmptyParam country) {
           this.country = country;
@@ -1105,7 +1156,10 @@ public class SourceUpdateParams extends ApiRequestParams {
         }
 
         /**
-         * Add a key/value pair to `extraParams` map. A map is initialized for the first `put/putAll` call, and subsequent calls add additional key/value pairs to the original map. See {@link SourceUpdateParams.Owner.Address#extraParams} for the field documentation.
+         * Add a key/value pair to `extraParams` map. A map is initialized for the first
+         * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
+         * map. See {@link SourceUpdateParams.Owner.Address#extraParams} for the field
+         * documentation.
          */
         public Builder putExtraParam(String key, Object value) {
           if (this.extraParams == null) {
@@ -1116,7 +1170,10 @@ public class SourceUpdateParams extends ApiRequestParams {
         }
 
         /**
-         * Add all map key/value pairs to `extraParams` map. A map is initialized for the first `put/putAll` call, and subsequent calls add additional key/value pairs to the original map. See {@link SourceUpdateParams.Owner.Address#extraParams} for the field documentation.
+         * Add all map key/value pairs to `extraParams` map. A map is initialized for the first
+         * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
+         * map. See {@link SourceUpdateParams.Owner.Address#extraParams} for the field
+         * documentation.
          */
         public Builder putAllExtraParam(Map<String, Object> map) {
           if (this.extraParams == null) {
@@ -1126,65 +1183,49 @@ public class SourceUpdateParams extends ApiRequestParams {
           return this;
         }
 
-        /**
-         * Address line 1 (e.g., street, PO Box, or company name).
-         */
+        /** Address line 1 (e.g., street, PO Box, or company name). */
         public Builder setLine1(String line1) {
           this.line1 = line1;
           return this;
         }
 
-        /**
-         * Address line 1 (e.g., street, PO Box, or company name).
-         */
+        /** Address line 1 (e.g., street, PO Box, or company name). */
         public Builder setLine1(EmptyParam line1) {
           this.line1 = line1;
           return this;
         }
 
-        /**
-         * Address line 2 (e.g., apartment, suite, unit, or building).
-         */
+        /** Address line 2 (e.g., apartment, suite, unit, or building). */
         public Builder setLine2(String line2) {
           this.line2 = line2;
           return this;
         }
 
-        /**
-         * Address line 2 (e.g., apartment, suite, unit, or building).
-         */
+        /** Address line 2 (e.g., apartment, suite, unit, or building). */
         public Builder setLine2(EmptyParam line2) {
           this.line2 = line2;
           return this;
         }
 
-        /**
-         * ZIP or postal code.
-         */
+        /** ZIP or postal code. */
         public Builder setPostalCode(String postalCode) {
           this.postalCode = postalCode;
           return this;
         }
 
-        /**
-         * ZIP or postal code.
-         */
+        /** ZIP or postal code. */
         public Builder setPostalCode(EmptyParam postalCode) {
           this.postalCode = postalCode;
           return this;
         }
 
-        /**
-         * State, county, province, or region.
-         */
+        /** State, county, province, or region. */
         public Builder setState(String state) {
           this.state = state;
           return this;
         }
 
-        /**
-         * State, county, province, or region.
-         */
+        /** State, county, province, or region. */
         public Builder setState(EmptyParam state) {
           this.state = state;
           return this;
@@ -1192,22 +1233,25 @@ public class SourceUpdateParams extends ApiRequestParams {
       }
     }
   }
+
   @Getter
   public static class SourceOrder {
     /**
-     * Map of extra parameters for custom features not available in this client library. The content in this map is not serialized under this field's {@code @SerializedName} value. Instead, each key/value pair is serialized as if the key is a root-level field (serialized) name in this param object. Effectively, this map is flattened to its parent instance.
+     * Map of extra parameters for custom features not available in this client library. The content
+     * in this map is not serialized under this field's {@code @SerializedName} value. Instead, each
+     * key/value pair is serialized as if the key is a root-level field (serialized) name in this
+     * param object. Effectively, this map is flattened to its parent instance.
      */
     @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
     Map<String, Object> extraParams;
 
-    /**
-     * List of items constituting the order.
-     */
+    /** List of items constituting the order. */
     @SerializedName("items")
     List<Item> items;
 
     /**
-     * Shipping address for the order. Required if any of the SKUs are for products that have {@code shippable} set to true.
+     * Shipping address for the order. Required if any of the SKUs are for products that have {@code
+     * shippable} set to true.
      */
     @SerializedName("shipping")
     Shipping shipping;
@@ -1217,9 +1261,11 @@ public class SourceUpdateParams extends ApiRequestParams {
       this.items = items;
       this.shipping = shipping;
     }
+
     public static Builder builder() {
       return new Builder();
     }
+
     public static class Builder {
       private Map<String, Object> extraParams;
 
@@ -1227,15 +1273,15 @@ public class SourceUpdateParams extends ApiRequestParams {
 
       private Shipping shipping;
 
-      /**
-       * Finalize and obtain parameter instance from this builder.
-       */
+      /** Finalize and obtain parameter instance from this builder. */
       public SourceOrder build() {
         return new SourceOrder(this.extraParams, this.items, this.shipping);
       }
 
       /**
-       * Add a key/value pair to `extraParams` map. A map is initialized for the first `put/putAll` call, and subsequent calls add additional key/value pairs to the original map. See {@link SourceUpdateParams.SourceOrder#extraParams} for the field documentation.
+       * Add a key/value pair to `extraParams` map. A map is initialized for the first `put/putAll`
+       * call, and subsequent calls add additional key/value pairs to the original map. See {@link
+       * SourceUpdateParams.SourceOrder#extraParams} for the field documentation.
        */
       public Builder putExtraParam(String key, Object value) {
         if (this.extraParams == null) {
@@ -1246,7 +1292,9 @@ public class SourceUpdateParams extends ApiRequestParams {
       }
 
       /**
-       * Add all map key/value pairs to `extraParams` map. A map is initialized for the first `put/putAll` call, and subsequent calls add additional key/value pairs to the original map. See {@link SourceUpdateParams.SourceOrder#extraParams} for the field documentation.
+       * Add all map key/value pairs to `extraParams` map. A map is initialized for the first
+       * `put/putAll` call, and subsequent calls add additional key/value pairs to the original map.
+       * See {@link SourceUpdateParams.SourceOrder#extraParams} for the field documentation.
        */
       public Builder putAllExtraParam(Map<String, Object> map) {
         if (this.extraParams == null) {
@@ -1257,7 +1305,9 @@ public class SourceUpdateParams extends ApiRequestParams {
       }
 
       /**
-       * Add an element to `items` list. A list is initialized for the first `add/addAll` call, and subsequent calls adds additional elements to the original list. See {@link SourceUpdateParams.SourceOrder#items} for the field documentation.
+       * Add an element to `items` list. A list is initialized for the first `add/addAll` call, and
+       * subsequent calls adds additional elements to the original list. See {@link
+       * SourceUpdateParams.SourceOrder#items} for the field documentation.
        */
       public Builder addItem(Item element) {
         if (this.items == null) {
@@ -1268,7 +1318,9 @@ public class SourceUpdateParams extends ApiRequestParams {
       }
 
       /**
-       * Add all elements to `items` list. A list is initialized for the first `add/addAll` call, and subsequent calls adds additional elements to the original list. See {@link SourceUpdateParams.SourceOrder#items} for the field documentation.
+       * Add all elements to `items` list. A list is initialized for the first `add/addAll` call,
+       * and subsequent calls adds additional elements to the original list. See {@link
+       * SourceUpdateParams.SourceOrder#items} for the field documentation.
        */
       public Builder addAllItem(List<Item> elements) {
         if (this.items == null) {
@@ -1279,13 +1331,15 @@ public class SourceUpdateParams extends ApiRequestParams {
       }
 
       /**
-       * Shipping address for the order. Required if any of the SKUs are for products that have {@code shippable} set to true.
+       * Shipping address for the order. Required if any of the SKUs are for products that have
+       * {@code shippable} set to true.
        */
       public Builder setShipping(Shipping shipping) {
         this.shipping = shipping;
         return this;
       }
     }
+
     @Getter
     public static class Item {
       @SerializedName("amount")
@@ -1298,19 +1352,21 @@ public class SourceUpdateParams extends ApiRequestParams {
       Object description;
 
       /**
-       * Map of extra parameters for custom features not available in this client library. The content in this map is not serialized under this field's {@code @SerializedName} value. Instead, each key/value pair is serialized as if the key is a root-level field (serialized) name in this param object. Effectively, this map is flattened to its parent instance.
+       * Map of extra parameters for custom features not available in this client library. The
+       * content in this map is not serialized under this field's {@code @SerializedName} value.
+       * Instead, each key/value pair is serialized as if the key is a root-level field (serialized)
+       * name in this param object. Effectively, this map is flattened to its parent instance.
        */
       @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
       Map<String, Object> extraParams;
 
-      /**
-       * The ID of the SKU being ordered.
-       */
+      /** The ID of the SKU being ordered. */
       @SerializedName("parent")
       Object parent;
 
       /**
-       * The quantity of this order item. When type is {@code sku}, this is the number of instances of the SKU to be ordered.
+       * The quantity of this order item. When type is {@code sku}, this is the number of instances
+       * of the SKU to be ordered.
        */
       @SerializedName("quantity")
       Long quantity;
@@ -1334,9 +1390,11 @@ public class SourceUpdateParams extends ApiRequestParams {
         this.quantity = quantity;
         this.type = type;
       }
+
       public static Builder builder() {
         return new Builder();
       }
+
       public static class Builder {
         private Long amount;
 
@@ -1352,19 +1410,16 @@ public class SourceUpdateParams extends ApiRequestParams {
 
         private Type type;
 
-        /**
-         * Finalize and obtain parameter instance from this builder.
-         */
+        /** Finalize and obtain parameter instance from this builder. */
         public Item build() {
           return new Item(
-            this.amount,
-            this.currency,
-            this.description,
-            this.extraParams,
-            this.parent,
-            this.quantity,
-            this.type
-          );
+              this.amount,
+              this.currency,
+              this.description,
+              this.extraParams,
+              this.parent,
+              this.quantity,
+              this.type);
         }
 
         public Builder setAmount(Long amount) {
@@ -1393,7 +1448,10 @@ public class SourceUpdateParams extends ApiRequestParams {
         }
 
         /**
-         * Add a key/value pair to `extraParams` map. A map is initialized for the first `put/putAll` call, and subsequent calls add additional key/value pairs to the original map. See {@link SourceUpdateParams.SourceOrder.Item#extraParams} for the field documentation.
+         * Add a key/value pair to `extraParams` map. A map is initialized for the first
+         * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
+         * map. See {@link SourceUpdateParams.SourceOrder.Item#extraParams} for the field
+         * documentation.
          */
         public Builder putExtraParam(String key, Object value) {
           if (this.extraParams == null) {
@@ -1404,7 +1462,10 @@ public class SourceUpdateParams extends ApiRequestParams {
         }
 
         /**
-         * Add all map key/value pairs to `extraParams` map. A map is initialized for the first `put/putAll` call, and subsequent calls add additional key/value pairs to the original map. See {@link SourceUpdateParams.SourceOrder.Item#extraParams} for the field documentation.
+         * Add all map key/value pairs to `extraParams` map. A map is initialized for the first
+         * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
+         * map. See {@link SourceUpdateParams.SourceOrder.Item#extraParams} for the field
+         * documentation.
          */
         public Builder putAllExtraParam(Map<String, Object> map) {
           if (this.extraParams == null) {
@@ -1414,24 +1475,21 @@ public class SourceUpdateParams extends ApiRequestParams {
           return this;
         }
 
-        /**
-         * The ID of the SKU being ordered.
-         */
+        /** The ID of the SKU being ordered. */
         public Builder setParent(String parent) {
           this.parent = parent;
           return this;
         }
 
-        /**
-         * The ID of the SKU being ordered.
-         */
+        /** The ID of the SKU being ordered. */
         public Builder setParent(EmptyParam parent) {
           this.parent = parent;
           return this;
         }
 
         /**
-         * The quantity of this order item. When type is {@code sku}, this is the number of instances of the SKU to be ordered.
+         * The quantity of this order item. When type is {@code sku}, this is the number of
+         * instances of the SKU to be ordered.
          */
         public Builder setQuantity(Long quantity) {
           this.quantity = quantity;
@@ -1443,6 +1501,7 @@ public class SourceUpdateParams extends ApiRequestParams {
           return this;
         }
       }
+
       public enum Type implements ApiRequestParams.EnumParam {
         @SerializedName("discount")
         DISCOUNT("discount"),
@@ -1455,48 +1514,46 @@ public class SourceUpdateParams extends ApiRequestParams {
 
         @SerializedName("tax")
         TAX("tax");
+
         @Getter(onMethod_ = {@Override})
         private final String value;
+
         Type(String value) {
           this.value = value;
         }
-
       }
     }
+
     @Getter
     public static class Shipping {
-      /**
-       * Shipping address.
-       */
+      /** Shipping address. */
       @SerializedName("address")
       Address address;
 
-      /**
-       * The delivery service that shipped a physical product, such as Fedex, UPS, USPS, etc.
-       */
+      /** The delivery service that shipped a physical product, such as Fedex, UPS, USPS, etc. */
       @SerializedName("carrier")
       Object carrier;
 
       /**
-       * Map of extra parameters for custom features not available in this client library. The content in this map is not serialized under this field's {@code @SerializedName} value. Instead, each key/value pair is serialized as if the key is a root-level field (serialized) name in this param object. Effectively, this map is flattened to its parent instance.
+       * Map of extra parameters for custom features not available in this client library. The
+       * content in this map is not serialized under this field's {@code @SerializedName} value.
+       * Instead, each key/value pair is serialized as if the key is a root-level field (serialized)
+       * name in this param object. Effectively, this map is flattened to its parent instance.
        */
       @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
       Map<String, Object> extraParams;
 
-      /**
-       * Recipient name.
-       */
+      /** Recipient name. */
       @SerializedName("name")
       Object name;
 
-      /**
-       * Recipient phone (including extension).
-       */
+      /** Recipient phone (including extension). */
       @SerializedName("phone")
       Object phone;
 
       /**
-       * The tracking number for a physical product, obtained from the delivery service. If multiple tracking numbers were generated for this purchase, please separate them with commas.
+       * The tracking number for a physical product, obtained from the delivery service. If multiple
+       * tracking numbers were generated for this purchase, please separate them with commas.
        */
       @SerializedName("tracking_number")
       Object trackingNumber;
@@ -1515,9 +1572,11 @@ public class SourceUpdateParams extends ApiRequestParams {
         this.phone = phone;
         this.trackingNumber = trackingNumber;
       }
+
       public static Builder builder() {
         return new Builder();
       }
+
       public static class Builder {
         private Address address;
 
@@ -1531,46 +1590,40 @@ public class SourceUpdateParams extends ApiRequestParams {
 
         private Object trackingNumber;
 
-        /**
-         * Finalize and obtain parameter instance from this builder.
-         */
+        /** Finalize and obtain parameter instance from this builder. */
         public Shipping build() {
           return new Shipping(
-            this.address,
-            this.carrier,
-            this.extraParams,
-            this.name,
-            this.phone,
-            this.trackingNumber
-          );
+              this.address,
+              this.carrier,
+              this.extraParams,
+              this.name,
+              this.phone,
+              this.trackingNumber);
         }
 
-        /**
-         * Shipping address.
-         */
+        /** Shipping address. */
         public Builder setAddress(Address address) {
           this.address = address;
           return this;
         }
 
-        /**
-         * The delivery service that shipped a physical product, such as Fedex, UPS, USPS, etc.
-         */
+        /** The delivery service that shipped a physical product, such as Fedex, UPS, USPS, etc. */
         public Builder setCarrier(String carrier) {
           this.carrier = carrier;
           return this;
         }
 
-        /**
-         * The delivery service that shipped a physical product, such as Fedex, UPS, USPS, etc.
-         */
+        /** The delivery service that shipped a physical product, such as Fedex, UPS, USPS, etc. */
         public Builder setCarrier(EmptyParam carrier) {
           this.carrier = carrier;
           return this;
         }
 
         /**
-         * Add a key/value pair to `extraParams` map. A map is initialized for the first `put/putAll` call, and subsequent calls add additional key/value pairs to the original map. See {@link SourceUpdateParams.SourceOrder.Shipping#extraParams} for the field documentation.
+         * Add a key/value pair to `extraParams` map. A map is initialized for the first
+         * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
+         * map. See {@link SourceUpdateParams.SourceOrder.Shipping#extraParams} for the field
+         * documentation.
          */
         public Builder putExtraParam(String key, Object value) {
           if (this.extraParams == null) {
@@ -1581,7 +1634,10 @@ public class SourceUpdateParams extends ApiRequestParams {
         }
 
         /**
-         * Add all map key/value pairs to `extraParams` map. A map is initialized for the first `put/putAll` call, and subsequent calls add additional key/value pairs to the original map. See {@link SourceUpdateParams.SourceOrder.Shipping#extraParams} for the field documentation.
+         * Add all map key/value pairs to `extraParams` map. A map is initialized for the first
+         * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
+         * map. See {@link SourceUpdateParams.SourceOrder.Shipping#extraParams} for the field
+         * documentation.
          */
         public Builder putAllExtraParam(Map<String, Object> map) {
           if (this.extraParams == null) {
@@ -1591,40 +1647,34 @@ public class SourceUpdateParams extends ApiRequestParams {
           return this;
         }
 
-        /**
-         * Recipient name.
-         */
+        /** Recipient name. */
         public Builder setName(String name) {
           this.name = name;
           return this;
         }
 
-        /**
-         * Recipient name.
-         */
+        /** Recipient name. */
         public Builder setName(EmptyParam name) {
           this.name = name;
           return this;
         }
 
-        /**
-         * Recipient phone (including extension).
-         */
+        /** Recipient phone (including extension). */
         public Builder setPhone(String phone) {
           this.phone = phone;
           return this;
         }
 
-        /**
-         * Recipient phone (including extension).
-         */
+        /** Recipient phone (including extension). */
         public Builder setPhone(EmptyParam phone) {
           this.phone = phone;
           return this;
         }
 
         /**
-         * The tracking number for a physical product, obtained from the delivery service. If multiple tracking numbers were generated for this purchase, please separate them with commas.
+         * The tracking number for a physical product, obtained from the delivery service. If
+         * multiple tracking numbers were generated for this purchase, please separate them with
+         * commas.
          */
         public Builder setTrackingNumber(String trackingNumber) {
           this.trackingNumber = trackingNumber;
@@ -1632,54 +1682,52 @@ public class SourceUpdateParams extends ApiRequestParams {
         }
 
         /**
-         * The tracking number for a physical product, obtained from the delivery service. If multiple tracking numbers were generated for this purchase, please separate them with commas.
+         * The tracking number for a physical product, obtained from the delivery service. If
+         * multiple tracking numbers were generated for this purchase, please separate them with
+         * commas.
          */
         public Builder setTrackingNumber(EmptyParam trackingNumber) {
           this.trackingNumber = trackingNumber;
           return this;
         }
       }
+
       @Getter
       public static class Address {
-        /**
-         * City, district, suburb, town, or village.
-         */
+        /** City, district, suburb, town, or village. */
         @SerializedName("city")
         Object city;
 
         /**
-         * Two-letter country code (<a href="https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2">ISO 3166-1 alpha-2</a>).
+         * Two-letter country code (<a href="https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2">ISO
+         * 3166-1 alpha-2</a>).
          */
         @SerializedName("country")
         Object country;
 
         /**
-         * Map of extra parameters for custom features not available in this client library. The content in this map is not serialized under this field's {@code @SerializedName} value. Instead, each key/value pair is serialized as if the key is a root-level field (serialized) name in this param object. Effectively, this map is flattened to its parent instance.
+         * Map of extra parameters for custom features not available in this client library. The
+         * content in this map is not serialized under this field's {@code @SerializedName} value.
+         * Instead, each key/value pair is serialized as if the key is a root-level field
+         * (serialized) name in this param object. Effectively, this map is flattened to its parent
+         * instance.
          */
         @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
         Map<String, Object> extraParams;
 
-        /**
-         * Address line 1 (e.g., street, PO Box, or company name).
-         */
+        /** Address line 1 (e.g., street, PO Box, or company name). */
         @SerializedName("line1")
         Object line1;
 
-        /**
-         * Address line 2 (e.g., apartment, suite, unit, or building).
-         */
+        /** Address line 2 (e.g., apartment, suite, unit, or building). */
         @SerializedName("line2")
         Object line2;
 
-        /**
-         * ZIP or postal code.
-         */
+        /** ZIP or postal code. */
         @SerializedName("postal_code")
         Object postalCode;
 
-        /**
-         * State, county, province, or region.
-         */
+        /** State, county, province, or region. */
         @SerializedName("state")
         Object state;
 
@@ -1699,9 +1747,11 @@ public class SourceUpdateParams extends ApiRequestParams {
           this.postalCode = postalCode;
           this.state = state;
         }
+
         public static Builder builder() {
           return new Builder();
         }
+
         public static class Builder {
           private Object city;
 
@@ -1717,39 +1767,33 @@ public class SourceUpdateParams extends ApiRequestParams {
 
           private Object state;
 
-          /**
-           * Finalize and obtain parameter instance from this builder.
-           */
+          /** Finalize and obtain parameter instance from this builder. */
           public Address build() {
             return new Address(
-              this.city,
-              this.country,
-              this.extraParams,
-              this.line1,
-              this.line2,
-              this.postalCode,
-              this.state
-            );
+                this.city,
+                this.country,
+                this.extraParams,
+                this.line1,
+                this.line2,
+                this.postalCode,
+                this.state);
           }
 
-          /**
-           * City, district, suburb, town, or village.
-           */
+          /** City, district, suburb, town, or village. */
           public Builder setCity(String city) {
             this.city = city;
             return this;
           }
 
-          /**
-           * City, district, suburb, town, or village.
-           */
+          /** City, district, suburb, town, or village. */
           public Builder setCity(EmptyParam city) {
             this.city = city;
             return this;
           }
 
           /**
-           * Two-letter country code (<a href="https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2">ISO 3166-1 alpha-2</a>).
+           * Two-letter country code (<a href="https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2">ISO
+           * 3166-1 alpha-2</a>).
            */
           public Builder setCountry(String country) {
             this.country = country;
@@ -1757,7 +1801,8 @@ public class SourceUpdateParams extends ApiRequestParams {
           }
 
           /**
-           * Two-letter country code (<a href="https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2">ISO 3166-1 alpha-2</a>).
+           * Two-letter country code (<a href="https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2">ISO
+           * 3166-1 alpha-2</a>).
            */
           public Builder setCountry(EmptyParam country) {
             this.country = country;
@@ -1765,7 +1810,10 @@ public class SourceUpdateParams extends ApiRequestParams {
           }
 
           /**
-           * Add a key/value pair to `extraParams` map. A map is initialized for the first `put/putAll` call, and subsequent calls add additional key/value pairs to the original map. See {@link SourceUpdateParams.SourceOrder.Shipping.Address#extraParams} for the field documentation.
+           * Add a key/value pair to `extraParams` map. A map is initialized for the first
+           * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
+           * map. See {@link SourceUpdateParams.SourceOrder.Shipping.Address#extraParams} for the
+           * field documentation.
            */
           public Builder putExtraParam(String key, Object value) {
             if (this.extraParams == null) {
@@ -1776,7 +1824,10 @@ public class SourceUpdateParams extends ApiRequestParams {
           }
 
           /**
-           * Add all map key/value pairs to `extraParams` map. A map is initialized for the first `put/putAll` call, and subsequent calls add additional key/value pairs to the original map. See {@link SourceUpdateParams.SourceOrder.Shipping.Address#extraParams} for the field documentation.
+           * Add all map key/value pairs to `extraParams` map. A map is initialized for the first
+           * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
+           * map. See {@link SourceUpdateParams.SourceOrder.Shipping.Address#extraParams} for the
+           * field documentation.
            */
           public Builder putAllExtraParam(Map<String, Object> map) {
             if (this.extraParams == null) {
@@ -1786,65 +1837,49 @@ public class SourceUpdateParams extends ApiRequestParams {
             return this;
           }
 
-          /**
-           * Address line 1 (e.g., street, PO Box, or company name).
-           */
+          /** Address line 1 (e.g., street, PO Box, or company name). */
           public Builder setLine1(String line1) {
             this.line1 = line1;
             return this;
           }
 
-          /**
-           * Address line 1 (e.g., street, PO Box, or company name).
-           */
+          /** Address line 1 (e.g., street, PO Box, or company name). */
           public Builder setLine1(EmptyParam line1) {
             this.line1 = line1;
             return this;
           }
 
-          /**
-           * Address line 2 (e.g., apartment, suite, unit, or building).
-           */
+          /** Address line 2 (e.g., apartment, suite, unit, or building). */
           public Builder setLine2(String line2) {
             this.line2 = line2;
             return this;
           }
 
-          /**
-           * Address line 2 (e.g., apartment, suite, unit, or building).
-           */
+          /** Address line 2 (e.g., apartment, suite, unit, or building). */
           public Builder setLine2(EmptyParam line2) {
             this.line2 = line2;
             return this;
           }
 
-          /**
-           * ZIP or postal code.
-           */
+          /** ZIP or postal code. */
           public Builder setPostalCode(String postalCode) {
             this.postalCode = postalCode;
             return this;
           }
 
-          /**
-           * ZIP or postal code.
-           */
+          /** ZIP or postal code. */
           public Builder setPostalCode(EmptyParam postalCode) {
             this.postalCode = postalCode;
             return this;
           }
 
-          /**
-           * State, county, province, or region.
-           */
+          /** State, county, province, or region. */
           public Builder setState(String state) {
             this.state = state;
             return this;
           }
 
-          /**
-           * State, county, province, or region.
-           */
+          /** State, county, province, or region. */
           public Builder setState(EmptyParam state) {
             this.state = state;
             return this;

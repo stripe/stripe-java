@@ -9,37 +9,28 @@ import com.stripe.param.BitcoinTransactionCollectionListParams;
 import java.util.Map;
 
 public class BitcoinTransactionCollection extends StripeCollection<BitcoinTransaction> {
-  /**
-   * <p>List bitcoin transacitons for a given receiver.</p>
-   */
+  /** List bitcoin transacitons for a given receiver. */
   public BitcoinTransactionCollection list(Map<String, Object> params) throws StripeException {
     return list(params, (RequestOptions) null);
   }
 
-  /**
-   * <p>List bitcoin transacitons for a given receiver.</p>
-   */
-  public BitcoinTransactionCollection list(
-      Map<String, Object> params,
-      RequestOptions options) throws StripeException {
+  /** List bitcoin transacitons for a given receiver. */
+  public BitcoinTransactionCollection list(Map<String, Object> params, RequestOptions options)
+      throws StripeException {
     String url = String.format("%s%s", Stripe.getApiBase(), this.getUrl());
     return ApiResource.requestCollection(url, params, BitcoinTransactionCollection.class, options);
   }
 
-  /**
-   * <p>List bitcoin transacitons for a given receiver.</p>
-   */
-  public BitcoinTransactionCollection list(
-      BitcoinTransactionCollectionListParams params) throws StripeException {
+  /** List bitcoin transacitons for a given receiver. */
+  public BitcoinTransactionCollection list(BitcoinTransactionCollectionListParams params)
+      throws StripeException {
     return list(params, (RequestOptions) null);
   }
 
-  /**
-   * <p>List bitcoin transacitons for a given receiver.</p>
-   */
+  /** List bitcoin transacitons for a given receiver. */
   public BitcoinTransactionCollection list(
-      BitcoinTransactionCollectionListParams params,
-      RequestOptions options) throws StripeException {
+      BitcoinTransactionCollectionListParams params, RequestOptions options)
+      throws StripeException {
     String url = String.format("%s%s", Stripe.getApiBase(), this.getUrl());
     return ApiResource.requestCollection(url, params, BitcoinTransactionCollection.class, options);
   }

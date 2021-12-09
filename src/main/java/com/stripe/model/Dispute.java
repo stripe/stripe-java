@@ -19,37 +19,35 @@ import lombok.Setter;
 @Getter
 @Setter
 @EqualsAndHashCode(callSuper = false)
-public class Dispute
-  extends ApiResource
-  implements MetadataStore<Dispute>, BalanceTransactionSource {
+public class Dispute extends ApiResource
+    implements MetadataStore<Dispute>, BalanceTransactionSource {
   /**
-   * Disputed amount. Usually the amount of the charge, but can differ (usually because of currency fluctuation or because only part of the order is disputed).
+   * Disputed amount. Usually the amount of the charge, but can differ (usually because of currency
+   * fluctuation or because only part of the order is disputed).
    */
   @SerializedName("amount")
   Long amount;
 
   /**
-   * List of zero, one, or two balance transactions that show funds withdrawn and reinstated to your Stripe account as a result of this dispute.
+   * List of zero, one, or two balance transactions that show funds withdrawn and reinstated to your
+   * Stripe account as a result of this dispute.
    */
   @SerializedName("balance_transactions")
   List<BalanceTransaction> balanceTransactions;
 
-  /**
-   * ID of the charge that was disputed.
-   */
+  /** ID of the charge that was disputed. */
   @SerializedName("charge")
   @Getter(lombok.AccessLevel.NONE)
   @Setter(lombok.AccessLevel.NONE)
   ExpandableField<Charge> charge;
 
-  /**
-   * Time at which the object was created. Measured in seconds since the Unix epoch.
-   */
+  /** Time at which the object was created. Measured in seconds since the Unix epoch. */
   @SerializedName("created")
   Long created;
 
   /**
-   * Three-letter <a href="https://www.iso.org/iso-4217-currency-codes.html">ISO currency code</a>, in lowercase. Must be a <a href="https://stripe.com/docs/currencies">supported currency</a>.
+   * Three-letter <a href="https://www.iso.org/iso-4217-currency-codes.html">ISO currency code</a>,
+   * in lowercase. Must be a <a href="https://stripe.com/docs/currencies">supported currency</a>.
    */
   @SerializedName("currency")
   String currency;
@@ -60,35 +58,36 @@ public class Dispute
   @SerializedName("evidence_details")
   EvidenceDetails evidenceDetails;
 
-  /**
-   * Unique identifier for the object.
-   */
+  /** Unique identifier for the object. */
   @Getter(onMethod_ = {@Override})
   @SerializedName("id")
   String id;
 
   /**
-   * If true, it is still possible to refund the disputed payment. Once the payment has been fully refunded, no further funds will be withdrawn from your Stripe account as a result of this dispute.
+   * If true, it is still possible to refund the disputed payment. Once the payment has been fully
+   * refunded, no further funds will be withdrawn from your Stripe account as a result of this
+   * dispute.
    */
   @SerializedName("is_charge_refundable")
   Boolean isChargeRefundable;
 
   /**
-   * Has the value {@code true} if the object exists in live mode or the value {@code false} if the object exists in test mode.
+   * Has the value {@code true} if the object exists in live mode or the value {@code false} if the
+   * object exists in test mode.
    */
   @SerializedName("livemode")
   Boolean livemode;
 
   /**
-   * Set of <a href="https://stripe.com/docs/api/metadata">key-value pairs</a> that you can attach to an object. This can be useful for storing additional information about the object in a structured format.
+   * Set of <a href="https://stripe.com/docs/api/metadata">key-value pairs</a> that you can attach
+   * to an object. This can be useful for storing additional information about the object in a
+   * structured format.
    */
   @Getter(onMethod_ = {@Override})
   @SerializedName("metadata")
   Map<String, String> metadata;
 
-  /**
-   * Network-dependent reason code for the dispute.
-   */
+  /** Network-dependent reason code for the dispute. */
   @SerializedName("network_reason_code")
   String networkReasonCode;
 
@@ -100,31 +99,36 @@ public class Dispute
   @SerializedName("object")
   String object;
 
-  /**
-   * ID of the PaymentIntent that was disputed.
-   */
+  /** ID of the PaymentIntent that was disputed. */
   @SerializedName("payment_intent")
   @Getter(lombok.AccessLevel.NONE)
   @Setter(lombok.AccessLevel.NONE)
   ExpandableField<PaymentIntent> paymentIntent;
 
   /**
-   * Reason given by cardholder for dispute. Possible values are {@code bank_cannot_process}, {@code check_returned}, {@code credit_not_processed}, {@code customer_initiated}, {@code debit_not_authorized}, {@code duplicate}, {@code fraudulent}, {@code general}, {@code incorrect_account_details}, {@code insufficient_funds}, {@code product_not_received}, {@code product_unacceptable}, {@code subscription_canceled}, or {@code unrecognized}. Read more about <a href="https://stripe.com/docs/disputes/categories">dispute reasons</a>.
+   * Reason given by cardholder for dispute. Possible values are {@code bank_cannot_process}, {@code
+   * check_returned}, {@code credit_not_processed}, {@code customer_initiated}, {@code
+   * debit_not_authorized}, {@code duplicate}, {@code fraudulent}, {@code general}, {@code
+   * incorrect_account_details}, {@code insufficient_funds}, {@code product_not_received}, {@code
+   * product_unacceptable}, {@code subscription_canceled}, or {@code unrecognized}. Read more about
+   * <a href="https://stripe.com/docs/disputes/categories">dispute reasons</a>.
    */
   @SerializedName("reason")
   String reason;
 
   /**
-   * Current status of dispute. Possible values are {@code warning_needs_response}, {@code warning_under_review}, {@code warning_closed}, {@code needs_response}, {@code under_review}, {@code charge_refunded}, {@code won}, or {@code lost}.
+   * Current status of dispute. Possible values are {@code warning_needs_response}, {@code
+   * warning_under_review}, {@code warning_closed}, {@code needs_response}, {@code under_review},
+   * {@code charge_refunded}, {@code won}, or {@code lost}.
    *
-   * <p>One of {@code charge_refunded}, {@code lost}, {@code needs_response}, {@code under_review}, {@code warning_closed}, {@code warning_needs_response}, {@code warning_under_review}, or {@code won}.
+   * <p>One of {@code charge_refunded}, {@code lost}, {@code needs_response}, {@code under_review},
+   * {@code warning_closed}, {@code warning_needs_response}, {@code warning_under_review}, or {@code
+   * won}.
    */
   @SerializedName("status")
   String status;
 
-  /**
-   * Get ID of expandable {@code charge} object.
-   */
+  /** Get ID of expandable {@code charge} object. */
   public String getCharge() {
     return (this.charge != null) ? this.charge.getId() : null;
   }
@@ -133,9 +137,7 @@ public class Dispute
     this.charge = ApiResource.setExpandableFieldId(id, this.charge);
   }
 
-  /**
-   * Get expanded {@code charge}.
-   */
+  /** Get expanded {@code charge}. */
   public Charge getChargeObject() {
     return (this.charge != null) ? this.charge.getExpanded() : null;
   }
@@ -144,9 +146,7 @@ public class Dispute
     this.charge = new ExpandableField<Charge>(expandableObject.getId(), expandableObject);
   }
 
-  /**
-   * Get ID of expandable {@code paymentIntent} object.
-   */
+  /** Get ID of expandable {@code paymentIntent} object. */
   public String getPaymentIntent() {
     return (this.paymentIntent != null) ? this.paymentIntent.getId() : null;
   }
@@ -155,102 +155,81 @@ public class Dispute
     this.paymentIntent = ApiResource.setExpandableFieldId(id, this.paymentIntent);
   }
 
-  /**
-   * Get expanded {@code paymentIntent}.
-   */
+  /** Get expanded {@code paymentIntent}. */
   public PaymentIntent getPaymentIntentObject() {
     return (this.paymentIntent != null) ? this.paymentIntent.getExpanded() : null;
   }
 
   public void setPaymentIntentObject(PaymentIntent expandableObject) {
     this.paymentIntent =
-      new ExpandableField<PaymentIntent>(expandableObject.getId(), expandableObject);
+        new ExpandableField<PaymentIntent>(expandableObject.getId(), expandableObject);
   }
 
-  /**
-   * <p>Returns a list of your disputes.</p>
-   */
+  /** Returns a list of your disputes. */
   public static DisputeCollection list(Map<String, Object> params) throws StripeException {
     return list(params, (RequestOptions) null);
   }
 
-  /**
-   * <p>Returns a list of your disputes.</p>
-   */
-  public static DisputeCollection list(
-      Map<String, Object> params,
-      RequestOptions options) throws StripeException {
+  /** Returns a list of your disputes. */
+  public static DisputeCollection list(Map<String, Object> params, RequestOptions options)
+      throws StripeException {
     String url = String.format("%s%s", Stripe.getApiBase(), "/v1/disputes");
     return ApiResource.requestCollection(url, params, DisputeCollection.class, options);
   }
 
-  /**
-   * <p>Returns a list of your disputes.</p>
-   */
+  /** Returns a list of your disputes. */
   public static DisputeCollection list(DisputeListParams params) throws StripeException {
     return list(params, (RequestOptions) null);
   }
 
-  /**
-   * <p>Returns a list of your disputes.</p>
-   */
-  public static DisputeCollection list(
-      DisputeListParams params,
-      RequestOptions options) throws StripeException {
+  /** Returns a list of your disputes. */
+  public static DisputeCollection list(DisputeListParams params, RequestOptions options)
+      throws StripeException {
     String url = String.format("%s%s", Stripe.getApiBase(), "/v1/disputes");
     return ApiResource.requestCollection(url, params, DisputeCollection.class, options);
   }
 
-  /**
-   * <p>Retrieves the dispute with the given ID.</p>
-   */
+  /** Retrieves the dispute with the given ID. */
   public static Dispute retrieve(String dispute) throws StripeException {
     return retrieve(dispute, (Map<String, Object>) null, (RequestOptions) null);
   }
 
-  /**
-   * <p>Retrieves the dispute with the given ID.</p>
-   */
+  /** Retrieves the dispute with the given ID. */
   public static Dispute retrieve(String dispute, RequestOptions options) throws StripeException {
     return retrieve(dispute, (Map<String, Object>) null, options);
   }
 
-  /**
-   * <p>Retrieves the dispute with the given ID.</p>
-   */
-  public static Dispute retrieve(
-      String dispute,
-      Map<String, Object> params,
-      RequestOptions options) throws StripeException {
+  /** Retrieves the dispute with the given ID. */
+  public static Dispute retrieve(String dispute, Map<String, Object> params, RequestOptions options)
+      throws StripeException {
     String url =
-      String.format(
-        "%s%s",
-        Stripe.getApiBase(),
-        String.format("/v1/disputes/%s", ApiResource.urlEncodeId(dispute))
-      );
+        String.format(
+            "%s%s",
+            Stripe.getApiBase(),
+            String.format("/v1/disputes/%s", ApiResource.urlEncodeId(dispute)));
+    return ApiResource.request(ApiResource.RequestMethod.GET, url, params, Dispute.class, options);
+  }
+
+  /** Retrieves the dispute with the given ID. */
+  public static Dispute retrieve(
+      String dispute, DisputeRetrieveParams params, RequestOptions options) throws StripeException {
+    String url =
+        String.format(
+            "%s%s",
+            Stripe.getApiBase(),
+            String.format("/v1/disputes/%s", ApiResource.urlEncodeId(dispute)));
     return ApiResource.request(ApiResource.RequestMethod.GET, url, params, Dispute.class, options);
   }
 
   /**
-   * <p>Retrieves the dispute with the given ID.</p>
-   */
-  public static Dispute retrieve(
-      String dispute,
-      DisputeRetrieveParams params,
-      RequestOptions options) throws StripeException {
-    String url =
-      String.format(
-        "%s%s",
-        Stripe.getApiBase(),
-        String.format("/v1/disputes/%s", ApiResource.urlEncodeId(dispute))
-      );
-    return ApiResource.request(ApiResource.RequestMethod.GET, url, params, Dispute.class, options);
-  }
-
-  /**
-   * <p>When you get a dispute, contacting your customer is always the best first step. If that doesn’t work, you can submit evidence to help us resolve the dispute in your favor. You can do this in your <a href="https://dashboard.stripe.com/disputes">dashboard</a>, but if you prefer, you can use the API to submit evidence programmatically.</p>
+   * When you get a dispute, contacting your customer is always the best first step. If that doesn’t
+   * work, you can submit evidence to help us resolve the dispute in your favor. You can do this in
+   * your <a href="https://dashboard.stripe.com/disputes">dashboard</a>, but if you prefer, you can
+   * use the API to submit evidence programmatically.
    *
-   * <p>Depending on your dispute type, different evidence fields will give you a better chance of winning your dispute. To figure out which evidence fields to provide, see our <a href="https://stripe.com/docs/disputes/categories">guide to dispute types</a>.</p>
+   * <p>Depending on your dispute type, different evidence fields will give you a better chance of
+   * winning your dispute. To figure out which evidence fields to provide, see our <a
+   * href="https://stripe.com/docs/disputes/categories">guide to dispute types</a>.
    */
   @Override
   public Dispute update(Map<String, Object> params) throws StripeException {
@@ -258,108 +237,131 @@ public class Dispute
   }
 
   /**
-   * <p>When you get a dispute, contacting your customer is always the best first step. If that doesn’t work, you can submit evidence to help us resolve the dispute in your favor. You can do this in your <a href="https://dashboard.stripe.com/disputes">dashboard</a>, but if you prefer, you can use the API to submit evidence programmatically.</p>
+   * When you get a dispute, contacting your customer is always the best first step. If that doesn’t
+   * work, you can submit evidence to help us resolve the dispute in your favor. You can do this in
+   * your <a href="https://dashboard.stripe.com/disputes">dashboard</a>, but if you prefer, you can
+   * use the API to submit evidence programmatically.
    *
-   * <p>Depending on your dispute type, different evidence fields will give you a better chance of winning your dispute. To figure out which evidence fields to provide, see our <a href="https://stripe.com/docs/disputes/categories">guide to dispute types</a>.</p>
+   * <p>Depending on your dispute type, different evidence fields will give you a better chance of
+   * winning your dispute. To figure out which evidence fields to provide, see our <a
+   * href="https://stripe.com/docs/disputes/categories">guide to dispute types</a>.
    */
   @Override
   public Dispute update(Map<String, Object> params, RequestOptions options) throws StripeException {
     String url =
-      String.format(
-        "%s%s",
-        Stripe.getApiBase(),
-        String.format("/v1/disputes/%s", ApiResource.urlEncodeId(this.getId()))
-      );
+        String.format(
+            "%s%s",
+            Stripe.getApiBase(),
+            String.format("/v1/disputes/%s", ApiResource.urlEncodeId(this.getId())));
     return ApiResource.request(ApiResource.RequestMethod.POST, url, params, Dispute.class, options);
   }
 
   /**
-   * <p>When you get a dispute, contacting your customer is always the best first step. If that doesn’t work, you can submit evidence to help us resolve the dispute in your favor. You can do this in your <a href="https://dashboard.stripe.com/disputes">dashboard</a>, but if you prefer, you can use the API to submit evidence programmatically.</p>
+   * When you get a dispute, contacting your customer is always the best first step. If that doesn’t
+   * work, you can submit evidence to help us resolve the dispute in your favor. You can do this in
+   * your <a href="https://dashboard.stripe.com/disputes">dashboard</a>, but if you prefer, you can
+   * use the API to submit evidence programmatically.
    *
-   * <p>Depending on your dispute type, different evidence fields will give you a better chance of winning your dispute. To figure out which evidence fields to provide, see our <a href="https://stripe.com/docs/disputes/categories">guide to dispute types</a>.</p>
+   * <p>Depending on your dispute type, different evidence fields will give you a better chance of
+   * winning your dispute. To figure out which evidence fields to provide, see our <a
+   * href="https://stripe.com/docs/disputes/categories">guide to dispute types</a>.
    */
   public Dispute update(DisputeUpdateParams params) throws StripeException {
     return update(params, (RequestOptions) null);
   }
 
   /**
-   * <p>When you get a dispute, contacting your customer is always the best first step. If that doesn’t work, you can submit evidence to help us resolve the dispute in your favor. You can do this in your <a href="https://dashboard.stripe.com/disputes">dashboard</a>, but if you prefer, you can use the API to submit evidence programmatically.</p>
+   * When you get a dispute, contacting your customer is always the best first step. If that doesn’t
+   * work, you can submit evidence to help us resolve the dispute in your favor. You can do this in
+   * your <a href="https://dashboard.stripe.com/disputes">dashboard</a>, but if you prefer, you can
+   * use the API to submit evidence programmatically.
    *
-   * <p>Depending on your dispute type, different evidence fields will give you a better chance of winning your dispute. To figure out which evidence fields to provide, see our <a href="https://stripe.com/docs/disputes/categories">guide to dispute types</a>.</p>
+   * <p>Depending on your dispute type, different evidence fields will give you a better chance of
+   * winning your dispute. To figure out which evidence fields to provide, see our <a
+   * href="https://stripe.com/docs/disputes/categories">guide to dispute types</a>.
    */
   public Dispute update(DisputeUpdateParams params, RequestOptions options) throws StripeException {
     String url =
-      String.format(
-        "%s%s",
-        Stripe.getApiBase(),
-        String.format("/v1/disputes/%s", ApiResource.urlEncodeId(this.getId()))
-      );
+        String.format(
+            "%s%s",
+            Stripe.getApiBase(),
+            String.format("/v1/disputes/%s", ApiResource.urlEncodeId(this.getId())));
     return ApiResource.request(ApiResource.RequestMethod.POST, url, params, Dispute.class, options);
   }
 
   /**
-   * <p>Closing the dispute for a charge indicates that you do not have any evidence to submit and are essentially dismissing the dispute, acknowledging it as lost.</p>
+   * Closing the dispute for a charge indicates that you do not have any evidence to submit and are
+   * essentially dismissing the dispute, acknowledging it as lost.
    *
-   * <p>The status of the dispute will change from <code>needs_response</code> to <code>lost</code>. <em>Closing a dispute is irreversible</em>.</p>
+   * <p>The status of the dispute will change from <code>needs_response</code> to <code>lost</code>.
+   * <em>Closing a dispute is irreversible</em>.
    */
   public Dispute close() throws StripeException {
     return close((Map<String, Object>) null, (RequestOptions) null);
   }
 
   /**
-   * <p>Closing the dispute for a charge indicates that you do not have any evidence to submit and are essentially dismissing the dispute, acknowledging it as lost.</p>
+   * Closing the dispute for a charge indicates that you do not have any evidence to submit and are
+   * essentially dismissing the dispute, acknowledging it as lost.
    *
-   * <p>The status of the dispute will change from <code>needs_response</code> to <code>lost</code>. <em>Closing a dispute is irreversible</em>.</p>
+   * <p>The status of the dispute will change from <code>needs_response</code> to <code>lost</code>.
+   * <em>Closing a dispute is irreversible</em>.
    */
   public Dispute close(RequestOptions options) throws StripeException {
     return close((Map<String, Object>) null, options);
   }
 
   /**
-   * <p>Closing the dispute for a charge indicates that you do not have any evidence to submit and are essentially dismissing the dispute, acknowledging it as lost.</p>
+   * Closing the dispute for a charge indicates that you do not have any evidence to submit and are
+   * essentially dismissing the dispute, acknowledging it as lost.
    *
-   * <p>The status of the dispute will change from <code>needs_response</code> to <code>lost</code>. <em>Closing a dispute is irreversible</em>.</p>
+   * <p>The status of the dispute will change from <code>needs_response</code> to <code>lost</code>.
+   * <em>Closing a dispute is irreversible</em>.
    */
   public Dispute close(Map<String, Object> params) throws StripeException {
     return close(params, (RequestOptions) null);
   }
 
   /**
-   * <p>Closing the dispute for a charge indicates that you do not have any evidence to submit and are essentially dismissing the dispute, acknowledging it as lost.</p>
+   * Closing the dispute for a charge indicates that you do not have any evidence to submit and are
+   * essentially dismissing the dispute, acknowledging it as lost.
    *
-   * <p>The status of the dispute will change from <code>needs_response</code> to <code>lost</code>. <em>Closing a dispute is irreversible</em>.</p>
+   * <p>The status of the dispute will change from <code>needs_response</code> to <code>lost</code>.
+   * <em>Closing a dispute is irreversible</em>.
    */
   public Dispute close(Map<String, Object> params, RequestOptions options) throws StripeException {
     String url =
-      String.format(
-        "%s%s",
-        Stripe.getApiBase(),
-        String.format("/v1/disputes/%s/close", ApiResource.urlEncodeId(this.getId()))
-      );
+        String.format(
+            "%s%s",
+            Stripe.getApiBase(),
+            String.format("/v1/disputes/%s/close", ApiResource.urlEncodeId(this.getId())));
     return ApiResource.request(ApiResource.RequestMethod.POST, url, params, Dispute.class, options);
   }
 
   /**
-   * <p>Closing the dispute for a charge indicates that you do not have any evidence to submit and are essentially dismissing the dispute, acknowledging it as lost.</p>
+   * Closing the dispute for a charge indicates that you do not have any evidence to submit and are
+   * essentially dismissing the dispute, acknowledging it as lost.
    *
-   * <p>The status of the dispute will change from <code>needs_response</code> to <code>lost</code>. <em>Closing a dispute is irreversible</em>.</p>
+   * <p>The status of the dispute will change from <code>needs_response</code> to <code>lost</code>.
+   * <em>Closing a dispute is irreversible</em>.
    */
   public Dispute close(DisputeCloseParams params) throws StripeException {
     return close(params, (RequestOptions) null);
   }
 
   /**
-   * <p>Closing the dispute for a charge indicates that you do not have any evidence to submit and are essentially dismissing the dispute, acknowledging it as lost.</p>
+   * Closing the dispute for a charge indicates that you do not have any evidence to submit and are
+   * essentially dismissing the dispute, acknowledging it as lost.
    *
-   * <p>The status of the dispute will change from <code>needs_response</code> to <code>lost</code>. <em>Closing a dispute is irreversible</em>.</p>
+   * <p>The status of the dispute will change from <code>needs_response</code> to <code>lost</code>.
+   * <em>Closing a dispute is irreversible</em>.
    */
   public Dispute close(DisputeCloseParams params, RequestOptions options) throws StripeException {
     String url =
-      String.format(
-        "%s%s",
-        Stripe.getApiBase(),
-        String.format("/v1/disputes/%s/close", ApiResource.urlEncodeId(this.getId()))
-      );
+        String.format(
+            "%s%s",
+            Stripe.getApiBase(),
+            String.format("/v1/disputes/%s/close", ApiResource.urlEncodeId(this.getId())));
     return ApiResource.request(ApiResource.RequestMethod.POST, url, params, Dispute.class, options);
   }
 
@@ -368,19 +370,20 @@ public class Dispute
   @EqualsAndHashCode(callSuper = false)
   public static class Evidence extends StripeObject {
     /**
-     * Any server or activity logs showing proof that the customer accessed or downloaded the purchased digital product. This information should include IP addresses, corresponding timestamps, and any detailed recorded activity.
+     * Any server or activity logs showing proof that the customer accessed or downloaded the
+     * purchased digital product. This information should include IP addresses, corresponding
+     * timestamps, and any detailed recorded activity.
      */
     @SerializedName("access_activity_log")
     String accessActivityLog;
 
-    /**
-     * The billing address provided by the customer.
-     */
+    /** The billing address provided by the customer. */
     @SerializedName("billing_address")
     String billingAddress;
 
     /**
-     * (ID of a <a href="https://stripe.com/docs/guides/file-upload">file upload</a>) Your subscription cancellation policy, as shown to the customer.
+     * (ID of a <a href="https://stripe.com/docs/guides/file-upload">file upload</a>) Your
+     * subscription cancellation policy, as shown to the customer.
      */
     @SerializedName("cancellation_policy")
     @Getter(lombok.AccessLevel.NONE)
@@ -393,40 +396,36 @@ public class Dispute
     @SerializedName("cancellation_policy_disclosure")
     String cancellationPolicyDisclosure;
 
-    /**
-     * A justification for why the customer's subscription was not canceled.
-     */
+    /** A justification for why the customer's subscription was not canceled. */
     @SerializedName("cancellation_rebuttal")
     String cancellationRebuttal;
 
     /**
-     * (ID of a <a href="https://stripe.com/docs/guides/file-upload">file upload</a>) Any communication with the customer that you feel is relevant to your case. Examples include emails proving that the customer received the product or service, or demonstrating their use of or satisfaction with the product or service.
+     * (ID of a <a href="https://stripe.com/docs/guides/file-upload">file upload</a>) Any
+     * communication with the customer that you feel is relevant to your case. Examples include
+     * emails proving that the customer received the product or service, or demonstrating their use
+     * of or satisfaction with the product or service.
      */
     @SerializedName("customer_communication")
     @Getter(lombok.AccessLevel.NONE)
     @Setter(lombok.AccessLevel.NONE)
     ExpandableField<File> customerCommunication;
 
-    /**
-     * The email address of the customer.
-     */
+    /** The email address of the customer. */
     @SerializedName("customer_email_address")
     String customerEmailAddress;
 
-    /**
-     * The name of the customer.
-     */
+    /** The name of the customer. */
     @SerializedName("customer_name")
     String customerName;
 
-    /**
-     * The IP address that the customer used when making the purchase.
-     */
+    /** The IP address that the customer used when making the purchase. */
     @SerializedName("customer_purchase_ip")
     String customerPurchaseIp;
 
     /**
-     * (ID of a <a href="https://stripe.com/docs/guides/file-upload">file upload</a>) A relevant document or contract showing the customer's signature.
+     * (ID of a <a href="https://stripe.com/docs/guides/file-upload">file upload</a>) A relevant
+     * document or contract showing the customer's signature.
      */
     @SerializedName("customer_signature")
     @Getter(lombok.AccessLevel.NONE)
@@ -434,7 +433,10 @@ public class Dispute
     ExpandableField<File> customerSignature;
 
     /**
-     * (ID of a <a href="https://stripe.com/docs/guides/file-upload">file upload</a>) Documentation for the prior charge that can uniquely identify the charge, such as a receipt, shipping label, work order, etc. This document should be paired with a similar document from the disputed payment that proves the two payments are separate.
+     * (ID of a <a href="https://stripe.com/docs/guides/file-upload">file upload</a>) Documentation
+     * for the prior charge that can uniquely identify the charge, such as a receipt, shipping
+     * label, work order, etc. This document should be paired with a similar document from the
+     * disputed payment that proves the two payments are separate.
      */
     @SerializedName("duplicate_charge_documentation")
     @Getter(lombok.AccessLevel.NONE)
@@ -442,7 +444,8 @@ public class Dispute
     ExpandableField<File> duplicateChargeDocumentation;
 
     /**
-     * An explanation of the difference between the disputed charge versus the prior charge that appears to be a duplicate.
+     * An explanation of the difference between the disputed charge versus the prior charge that
+     * appears to be a duplicate.
      */
     @SerializedName("duplicate_charge_explanation")
     String duplicateChargeExplanation;
@@ -453,14 +456,13 @@ public class Dispute
     @SerializedName("duplicate_charge_id")
     String duplicateChargeId;
 
-    /**
-     * A description of the product or service that was sold.
-     */
+    /** A description of the product or service that was sold. */
     @SerializedName("product_description")
     String productDescription;
 
     /**
-     * (ID of a <a href="https://stripe.com/docs/guides/file-upload">file upload</a>) Any receipt or message sent to the customer notifying them of the charge.
+     * (ID of a <a href="https://stripe.com/docs/guides/file-upload">file upload</a>) Any receipt or
+     * message sent to the customer notifying them of the charge.
      */
     @SerializedName("receipt")
     @Getter(lombok.AccessLevel.NONE)
@@ -468,7 +470,8 @@ public class Dispute
     ExpandableField<File> receipt;
 
     /**
-     * (ID of a <a href="https://stripe.com/docs/guides/file-upload">file upload</a>) Your refund policy, as shown to the customer.
+     * (ID of a <a href="https://stripe.com/docs/guides/file-upload">file upload</a>) Your refund
+     * policy, as shown to the customer.
      */
     @SerializedName("refund_policy")
     @Getter(lombok.AccessLevel.NONE)
@@ -481,20 +484,21 @@ public class Dispute
     @SerializedName("refund_policy_disclosure")
     String refundPolicyDisclosure;
 
-    /**
-     * A justification for why the customer is not entitled to a refund.
-     */
+    /** A justification for why the customer is not entitled to a refund. */
     @SerializedName("refund_refusal_explanation")
     String refundRefusalExplanation;
 
     /**
-     * The date on which the customer received or began receiving the purchased service, in a clear human-readable format.
+     * The date on which the customer received or began receiving the purchased service, in a clear
+     * human-readable format.
      */
     @SerializedName("service_date")
     String serviceDate;
 
     /**
-     * (ID of a <a href="https://stripe.com/docs/guides/file-upload">file upload</a>) Documentation showing proof that a service was provided to the customer. This could include a copy of a signed contract, work order, or other form of written agreement.
+     * (ID of a <a href="https://stripe.com/docs/guides/file-upload">file upload</a>) Documentation
+     * showing proof that a service was provided to the customer. This could include a copy of a
+     * signed contract, work order, or other form of written agreement.
      */
     @SerializedName("service_documentation")
     @Getter(lombok.AccessLevel.NONE)
@@ -502,25 +506,31 @@ public class Dispute
     ExpandableField<File> serviceDocumentation;
 
     /**
-     * The address to which a physical product was shipped. You should try to include as complete address information as possible.
+     * The address to which a physical product was shipped. You should try to include as complete
+     * address information as possible.
      */
     @SerializedName("shipping_address")
     String shippingAddress;
 
     /**
-     * The delivery service that shipped a physical product, such as Fedex, UPS, USPS, etc. If multiple carriers were used for this purchase, please separate them with commas.
+     * The delivery service that shipped a physical product, such as Fedex, UPS, USPS, etc. If
+     * multiple carriers were used for this purchase, please separate them with commas.
      */
     @SerializedName("shipping_carrier")
     String shippingCarrier;
 
     /**
-     * The date on which a physical product began its route to the shipping address, in a clear human-readable format.
+     * The date on which a physical product began its route to the shipping address, in a clear
+     * human-readable format.
      */
     @SerializedName("shipping_date")
     String shippingDate;
 
     /**
-     * (ID of a <a href="https://stripe.com/docs/guides/file-upload">file upload</a>) Documentation showing proof that a product was shipped to the customer at the same address the customer provided to you. This could include a copy of the shipment receipt, shipping label, etc. It should show the customer's full shipping address, if possible.
+     * (ID of a <a href="https://stripe.com/docs/guides/file-upload">file upload</a>) Documentation
+     * showing proof that a product was shipped to the customer at the same address the customer
+     * provided to you. This could include a copy of the shipment receipt, shipping label, etc. It
+     * should show the customer's full shipping address, if possible.
      */
     @SerializedName("shipping_documentation")
     @Getter(lombok.AccessLevel.NONE)
@@ -528,28 +538,26 @@ public class Dispute
     ExpandableField<File> shippingDocumentation;
 
     /**
-     * The tracking number for a physical product, obtained from the delivery service. If multiple tracking numbers were generated for this purchase, please separate them with commas.
+     * The tracking number for a physical product, obtained from the delivery service. If multiple
+     * tracking numbers were generated for this purchase, please separate them with commas.
      */
     @SerializedName("shipping_tracking_number")
     String shippingTrackingNumber;
 
     /**
-     * (ID of a <a href="https://stripe.com/docs/guides/file-upload">file upload</a>) Any additional evidence or statements.
+     * (ID of a <a href="https://stripe.com/docs/guides/file-upload">file upload</a>) Any additional
+     * evidence or statements.
      */
     @SerializedName("uncategorized_file")
     @Getter(lombok.AccessLevel.NONE)
     @Setter(lombok.AccessLevel.NONE)
     ExpandableField<File> uncategorizedFile;
 
-    /**
-     * Any additional evidence or statements.
-     */
+    /** Any additional evidence or statements. */
     @SerializedName("uncategorized_text")
     String uncategorizedText;
 
-    /**
-     * Get ID of expandable {@code cancellationPolicy} object.
-     */
+    /** Get ID of expandable {@code cancellationPolicy} object. */
     public String getCancellationPolicy() {
       return (this.cancellationPolicy != null) ? this.cancellationPolicy.getId() : null;
     }
@@ -558,21 +566,17 @@ public class Dispute
       this.cancellationPolicy = ApiResource.setExpandableFieldId(id, this.cancellationPolicy);
     }
 
-    /**
-     * Get expanded {@code cancellationPolicy}.
-     */
+    /** Get expanded {@code cancellationPolicy}. */
     public File getCancellationPolicyObject() {
       return (this.cancellationPolicy != null) ? this.cancellationPolicy.getExpanded() : null;
     }
 
     public void setCancellationPolicyObject(File expandableObject) {
       this.cancellationPolicy =
-        new ExpandableField<File>(expandableObject.getId(), expandableObject);
+          new ExpandableField<File>(expandableObject.getId(), expandableObject);
     }
 
-    /**
-     * Get ID of expandable {@code customerCommunication} object.
-     */
+    /** Get ID of expandable {@code customerCommunication} object. */
     public String getCustomerCommunication() {
       return (this.customerCommunication != null) ? this.customerCommunication.getId() : null;
     }
@@ -581,21 +585,17 @@ public class Dispute
       this.customerCommunication = ApiResource.setExpandableFieldId(id, this.customerCommunication);
     }
 
-    /**
-     * Get expanded {@code customerCommunication}.
-     */
+    /** Get expanded {@code customerCommunication}. */
     public File getCustomerCommunicationObject() {
       return (this.customerCommunication != null) ? this.customerCommunication.getExpanded() : null;
     }
 
     public void setCustomerCommunicationObject(File expandableObject) {
       this.customerCommunication =
-        new ExpandableField<File>(expandableObject.getId(), expandableObject);
+          new ExpandableField<File>(expandableObject.getId(), expandableObject);
     }
 
-    /**
-     * Get ID of expandable {@code customerSignature} object.
-     */
+    /** Get ID of expandable {@code customerSignature} object. */
     public String getCustomerSignature() {
       return (this.customerSignature != null) ? this.customerSignature.getId() : null;
     }
@@ -604,45 +604,41 @@ public class Dispute
       this.customerSignature = ApiResource.setExpandableFieldId(id, this.customerSignature);
     }
 
-    /**
-     * Get expanded {@code customerSignature}.
-     */
+    /** Get expanded {@code customerSignature}. */
     public File getCustomerSignatureObject() {
       return (this.customerSignature != null) ? this.customerSignature.getExpanded() : null;
     }
 
     public void setCustomerSignatureObject(File expandableObject) {
       this.customerSignature =
-        new ExpandableField<File>(expandableObject.getId(), expandableObject);
+          new ExpandableField<File>(expandableObject.getId(), expandableObject);
     }
 
-    /**
-     * Get ID of expandable {@code duplicateChargeDocumentation} object.
-     */
+    /** Get ID of expandable {@code duplicateChargeDocumentation} object. */
     public String getDuplicateChargeDocumentation() {
-      return (this.duplicateChargeDocumentation != null) ? this.duplicateChargeDocumentation.getId() : null;
+      return (this.duplicateChargeDocumentation != null)
+          ? this.duplicateChargeDocumentation.getId()
+          : null;
     }
 
     public void setDuplicateChargeDocumentation(String id) {
       this.duplicateChargeDocumentation =
-        ApiResource.setExpandableFieldId(id, this.duplicateChargeDocumentation);
+          ApiResource.setExpandableFieldId(id, this.duplicateChargeDocumentation);
     }
 
-    /**
-     * Get expanded {@code duplicateChargeDocumentation}.
-     */
+    /** Get expanded {@code duplicateChargeDocumentation}. */
     public File getDuplicateChargeDocumentationObject() {
-      return (this.duplicateChargeDocumentation != null) ? this.duplicateChargeDocumentation.getExpanded() : null;
+      return (this.duplicateChargeDocumentation != null)
+          ? this.duplicateChargeDocumentation.getExpanded()
+          : null;
     }
 
     public void setDuplicateChargeDocumentationObject(File expandableObject) {
       this.duplicateChargeDocumentation =
-        new ExpandableField<File>(expandableObject.getId(), expandableObject);
+          new ExpandableField<File>(expandableObject.getId(), expandableObject);
     }
 
-    /**
-     * Get ID of expandable {@code receipt} object.
-     */
+    /** Get ID of expandable {@code receipt} object. */
     public String getReceipt() {
       return (this.receipt != null) ? this.receipt.getId() : null;
     }
@@ -651,9 +647,7 @@ public class Dispute
       this.receipt = ApiResource.setExpandableFieldId(id, this.receipt);
     }
 
-    /**
-     * Get expanded {@code receipt}.
-     */
+    /** Get expanded {@code receipt}. */
     public File getReceiptObject() {
       return (this.receipt != null) ? this.receipt.getExpanded() : null;
     }
@@ -662,9 +656,7 @@ public class Dispute
       this.receipt = new ExpandableField<File>(expandableObject.getId(), expandableObject);
     }
 
-    /**
-     * Get ID of expandable {@code refundPolicy} object.
-     */
+    /** Get ID of expandable {@code refundPolicy} object. */
     public String getRefundPolicy() {
       return (this.refundPolicy != null) ? this.refundPolicy.getId() : null;
     }
@@ -673,9 +665,7 @@ public class Dispute
       this.refundPolicy = ApiResource.setExpandableFieldId(id, this.refundPolicy);
     }
 
-    /**
-     * Get expanded {@code refundPolicy}.
-     */
+    /** Get expanded {@code refundPolicy}. */
     public File getRefundPolicyObject() {
       return (this.refundPolicy != null) ? this.refundPolicy.getExpanded() : null;
     }
@@ -684,9 +674,7 @@ public class Dispute
       this.refundPolicy = new ExpandableField<File>(expandableObject.getId(), expandableObject);
     }
 
-    /**
-     * Get ID of expandable {@code serviceDocumentation} object.
-     */
+    /** Get ID of expandable {@code serviceDocumentation} object. */
     public String getServiceDocumentation() {
       return (this.serviceDocumentation != null) ? this.serviceDocumentation.getId() : null;
     }
@@ -695,21 +683,17 @@ public class Dispute
       this.serviceDocumentation = ApiResource.setExpandableFieldId(id, this.serviceDocumentation);
     }
 
-    /**
-     * Get expanded {@code serviceDocumentation}.
-     */
+    /** Get expanded {@code serviceDocumentation}. */
     public File getServiceDocumentationObject() {
       return (this.serviceDocumentation != null) ? this.serviceDocumentation.getExpanded() : null;
     }
 
     public void setServiceDocumentationObject(File expandableObject) {
       this.serviceDocumentation =
-        new ExpandableField<File>(expandableObject.getId(), expandableObject);
+          new ExpandableField<File>(expandableObject.getId(), expandableObject);
     }
 
-    /**
-     * Get ID of expandable {@code shippingDocumentation} object.
-     */
+    /** Get ID of expandable {@code shippingDocumentation} object. */
     public String getShippingDocumentation() {
       return (this.shippingDocumentation != null) ? this.shippingDocumentation.getId() : null;
     }
@@ -718,21 +702,17 @@ public class Dispute
       this.shippingDocumentation = ApiResource.setExpandableFieldId(id, this.shippingDocumentation);
     }
 
-    /**
-     * Get expanded {@code shippingDocumentation}.
-     */
+    /** Get expanded {@code shippingDocumentation}. */
     public File getShippingDocumentationObject() {
       return (this.shippingDocumentation != null) ? this.shippingDocumentation.getExpanded() : null;
     }
 
     public void setShippingDocumentationObject(File expandableObject) {
       this.shippingDocumentation =
-        new ExpandableField<File>(expandableObject.getId(), expandableObject);
+          new ExpandableField<File>(expandableObject.getId(), expandableObject);
     }
 
-    /**
-     * Get ID of expandable {@code uncategorizedFile} object.
-     */
+    /** Get ID of expandable {@code uncategorizedFile} object. */
     public String getUncategorizedFile() {
       return (this.uncategorizedFile != null) ? this.uncategorizedFile.getId() : null;
     }
@@ -741,16 +721,14 @@ public class Dispute
       this.uncategorizedFile = ApiResource.setExpandableFieldId(id, this.uncategorizedFile);
     }
 
-    /**
-     * Get expanded {@code uncategorizedFile}.
-     */
+    /** Get expanded {@code uncategorizedFile}. */
     public File getUncategorizedFileObject() {
       return (this.uncategorizedFile != null) ? this.uncategorizedFile.getExpanded() : null;
     }
 
     public void setUncategorizedFileObject(File expandableObject) {
       this.uncategorizedFile =
-        new ExpandableField<File>(expandableObject.getId(), expandableObject);
+          new ExpandableField<File>(expandableObject.getId(), expandableObject);
     }
   }
 
@@ -759,25 +737,28 @@ public class Dispute
   @EqualsAndHashCode(callSuper = false)
   public static class EvidenceDetails extends StripeObject {
     /**
-     * Date by which evidence must be submitted in order to successfully challenge dispute. Will be null if the customer's bank or credit card company doesn't allow a response for this particular dispute.
+     * Date by which evidence must be submitted in order to successfully challenge dispute. Will be
+     * null if the customer's bank or credit card company doesn't allow a response for this
+     * particular dispute.
      */
     @SerializedName("due_by")
     Long dueBy;
 
-    /**
-     * Whether evidence has been staged for this dispute.
-     */
+    /** Whether evidence has been staged for this dispute. */
     @SerializedName("has_evidence")
     Boolean hasEvidence;
 
     /**
-     * Whether the last evidence submission was submitted past the due date. Defaults to {@code false} if no evidence submissions have occurred. If {@code true}, then delivery of the latest evidence is <em>not</em> guaranteed.
+     * Whether the last evidence submission was submitted past the due date. Defaults to {@code
+     * false} if no evidence submissions have occurred. If {@code true}, then delivery of the latest
+     * evidence is <em>not</em> guaranteed.
      */
     @SerializedName("past_due")
     Boolean pastDue;
 
     /**
-     * The number of times evidence has been submitted. Typically, you may only submit evidence once.
+     * The number of times evidence has been submitted. Typically, you may only submit evidence
+     * once.
      */
     @SerializedName("submission_count")
     Long submissionCount;

@@ -19,38 +19,36 @@ import lombok.Setter;
 @EqualsAndHashCode(callSuper = false)
 public class OrderReturn extends ApiResource implements HasId {
   /**
-   * A positive integer in the smallest currency unit (that is, 100 cents for $1.00, or 1 for ¥1, Japanese Yen being a zero-decimal currency) representing the total amount for the returned line item.
+   * A positive integer in the smallest currency unit (that is, 100 cents for $1.00, or 1 for ¥1,
+   * Japanese Yen being a zero-decimal currency) representing the total amount for the returned line
+   * item.
    */
   @SerializedName("amount")
   Long amount;
 
-  /**
-   * Time at which the object was created. Measured in seconds since the Unix epoch.
-   */
+  /** Time at which the object was created. Measured in seconds since the Unix epoch. */
   @SerializedName("created")
   Long created;
 
   /**
-   * Three-letter <a href="https://www.iso.org/iso-4217-currency-codes.html">ISO currency code</a>, in lowercase. Must be a <a href="https://stripe.com/docs/currencies">supported currency</a>.
+   * Three-letter <a href="https://www.iso.org/iso-4217-currency-codes.html">ISO currency code</a>,
+   * in lowercase. Must be a <a href="https://stripe.com/docs/currencies">supported currency</a>.
    */
   @SerializedName("currency")
   String currency;
 
-  /**
-   * Unique identifier for the object.
-   */
+  /** Unique identifier for the object. */
   @Getter(onMethod_ = {@Override})
   @SerializedName("id")
   String id;
 
-  /**
-   * The items included in this order return.
-   */
+  /** The items included in this order return. */
   @SerializedName("items")
   List<OrderItem> items;
 
   /**
-   * Has the value {@code true} if the object exists in live mode or the value {@code false} if the object exists in test mode.
+   * Has the value {@code true} if the object exists in live mode or the value {@code false} if the
+   * object exists in test mode.
    */
   @SerializedName("livemode")
   Boolean livemode;
@@ -63,25 +61,19 @@ public class OrderReturn extends ApiResource implements HasId {
   @SerializedName("object")
   String object;
 
-  /**
-   * The order that this return includes items from.
-   */
+  /** The order that this return includes items from. */
   @SerializedName("order")
   @Getter(lombok.AccessLevel.NONE)
   @Setter(lombok.AccessLevel.NONE)
   ExpandableField<Order> order;
 
-  /**
-   * The ID of the refund issued for this return.
-   */
+  /** The ID of the refund issued for this return. */
   @SerializedName("refund")
   @Getter(lombok.AccessLevel.NONE)
   @Setter(lombok.AccessLevel.NONE)
   ExpandableField<Refund> refund;
 
-  /**
-   * Get ID of expandable {@code order} object.
-   */
+  /** Get ID of expandable {@code order} object. */
   public String getOrder() {
     return (this.order != null) ? this.order.getId() : null;
   }
@@ -90,9 +82,7 @@ public class OrderReturn extends ApiResource implements HasId {
     this.order = ApiResource.setExpandableFieldId(id, this.order);
   }
 
-  /**
-   * Get expanded {@code order}.
-   */
+  /** Get expanded {@code order}. */
   public Order getOrderObject() {
     return (this.order != null) ? this.order.getExpanded() : null;
   }
@@ -101,9 +91,7 @@ public class OrderReturn extends ApiResource implements HasId {
     this.order = new ExpandableField<Order>(expandableObject.getId(), expandableObject);
   }
 
-  /**
-   * Get ID of expandable {@code refund} object.
-   */
+  /** Get ID of expandable {@code refund} object. */
   public String getRefund() {
     return (this.refund != null) ? this.refund.getId() : null;
   }
@@ -112,9 +100,7 @@ public class OrderReturn extends ApiResource implements HasId {
     this.refund = ApiResource.setExpandableFieldId(id, this.refund);
   }
 
-  /**
-   * Get expanded {@code refund}.
-   */
+  /** Get expanded {@code refund}. */
   public Refund getRefundObject() {
     return (this.refund != null) ? this.refund.getExpanded() : null;
   }
@@ -124,94 +110,88 @@ public class OrderReturn extends ApiResource implements HasId {
   }
 
   /**
-   * <p>Returns a list of your order returns. The returns are returned sorted by creation date, with the most recently created return appearing first.</p>
+   * Returns a list of your order returns. The returns are returned sorted by creation date, with
+   * the most recently created return appearing first.
    */
   public static OrderReturnCollection list(Map<String, Object> params) throws StripeException {
     return list(params, (RequestOptions) null);
   }
 
   /**
-   * <p>Returns a list of your order returns. The returns are returned sorted by creation date, with the most recently created return appearing first.</p>
+   * Returns a list of your order returns. The returns are returned sorted by creation date, with
+   * the most recently created return appearing first.
    */
-  public static OrderReturnCollection list(
-      Map<String, Object> params,
-      RequestOptions options) throws StripeException {
+  public static OrderReturnCollection list(Map<String, Object> params, RequestOptions options)
+      throws StripeException {
     String url = String.format("%s%s", Stripe.getApiBase(), "/v1/order_returns");
     return ApiResource.requestCollection(url, params, OrderReturnCollection.class, options);
   }
 
   /**
-   * <p>Returns a list of your order returns. The returns are returned sorted by creation date, with the most recently created return appearing first.</p>
+   * Returns a list of your order returns. The returns are returned sorted by creation date, with
+   * the most recently created return appearing first.
    */
   public static OrderReturnCollection list(OrderReturnListParams params) throws StripeException {
     return list(params, (RequestOptions) null);
   }
 
   /**
-   * <p>Returns a list of your order returns. The returns are returned sorted by creation date, with the most recently created return appearing first.</p>
+   * Returns a list of your order returns. The returns are returned sorted by creation date, with
+   * the most recently created return appearing first.
    */
-  public static OrderReturnCollection list(
-      OrderReturnListParams params,
-      RequestOptions options) throws StripeException {
+  public static OrderReturnCollection list(OrderReturnListParams params, RequestOptions options)
+      throws StripeException {
     String url = String.format("%s%s", Stripe.getApiBase(), "/v1/order_returns");
     return ApiResource.requestCollection(url, params, OrderReturnCollection.class, options);
   }
 
   /**
-   * <p>Retrieves the details of an existing order return. Supply the unique order ID from either an order return creation request or the order return list, and Stripe will return the corresponding order information.</p>
+   * Retrieves the details of an existing order return. Supply the unique order ID from either an
+   * order return creation request or the order return list, and Stripe will return the
+   * corresponding order information.
    */
   public static OrderReturn retrieve(String id) throws StripeException {
     return retrieve(id, (Map<String, Object>) null, (RequestOptions) null);
   }
 
   /**
-   * <p>Retrieves the details of an existing order return. Supply the unique order ID from either an order return creation request or the order return list, and Stripe will return the corresponding order information.</p>
+   * Retrieves the details of an existing order return. Supply the unique order ID from either an
+   * order return creation request or the order return list, and Stripe will return the
+   * corresponding order information.
    */
   public static OrderReturn retrieve(String id, RequestOptions options) throws StripeException {
     return retrieve(id, (Map<String, Object>) null, options);
   }
 
   /**
-   * <p>Retrieves the details of an existing order return. Supply the unique order ID from either an order return creation request or the order return list, and Stripe will return the corresponding order information.</p>
+   * Retrieves the details of an existing order return. Supply the unique order ID from either an
+   * order return creation request or the order return list, and Stripe will return the
+   * corresponding order information.
    */
-  public static OrderReturn retrieve(
-      String id,
-      Map<String, Object> params,
-      RequestOptions options) throws StripeException {
+  public static OrderReturn retrieve(String id, Map<String, Object> params, RequestOptions options)
+      throws StripeException {
     String url =
-      String.format(
-        "%s%s",
-        Stripe.getApiBase(),
-        String.format("/v1/order_returns/%s", ApiResource.urlEncodeId(id))
-      );
+        String.format(
+            "%s%s",
+            Stripe.getApiBase(),
+            String.format("/v1/order_returns/%s", ApiResource.urlEncodeId(id)));
     return ApiResource.request(
-      ApiResource.RequestMethod.GET,
-      url,
-      params,
-      OrderReturn.class,
-      options
-    );
+        ApiResource.RequestMethod.GET, url, params, OrderReturn.class, options);
   }
 
   /**
-   * <p>Retrieves the details of an existing order return. Supply the unique order ID from either an order return creation request or the order return list, and Stripe will return the corresponding order information.</p>
+   * Retrieves the details of an existing order return. Supply the unique order ID from either an
+   * order return creation request or the order return list, and Stripe will return the
+   * corresponding order information.
    */
   public static OrderReturn retrieve(
-      String id,
-      OrderReturnRetrieveParams params,
-      RequestOptions options) throws StripeException {
+      String id, OrderReturnRetrieveParams params, RequestOptions options) throws StripeException {
     String url =
-      String.format(
-        "%s%s",
-        Stripe.getApiBase(),
-        String.format("/v1/order_returns/%s", ApiResource.urlEncodeId(id))
-      );
+        String.format(
+            "%s%s",
+            Stripe.getApiBase(),
+            String.format("/v1/order_returns/%s", ApiResource.urlEncodeId(id)));
     return ApiResource.request(
-      ApiResource.RequestMethod.GET,
-      url,
-      params,
-      OrderReturn.class,
-      options
-    );
+        ApiResource.RequestMethod.GET, url, params, OrderReturn.class, options);
   }
 }
