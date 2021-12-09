@@ -1,5 +1,9 @@
 # Changelog
 
+## 20.92.0 - 2021-12-09
+* [#1295](https://github.com/stripe/stripe-java/pull/1295) API Updates
+  * Add support for `metadata` on `BillingPortalConfigurationCreateParams`, `BillingPortalConfigurationUpdateParams`, and `BillingPortal.Configuration`
+
 ## 20.91.0 - 2021-12-09
 * [#1294](https://github.com/stripe/stripe-java/pull/1294) API Updates
   * Add support for new values `ge_vat` and `ua_vat` on enums `CustomerCreateParams.tax_id_data[].type`, `InvoiceUpcomingParams.customer_details.tax_ids[].type`, `InvoiceUpcomingLinesParams.customer_details.tax_ids[].type`, and `TaxIdCreateParams.type`
