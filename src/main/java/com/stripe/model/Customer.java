@@ -250,26 +250,17 @@ public class Customer extends ApiResource implements HasId, MetadataStore<Custom
         ApiResource.RequestMethod.POST, url, params, Customer.class, options);
   }
 
-  /**
-   * Retrieves the details of an existing customer. You need only supply the unique customer
-   * identifier that was returned upon customer creation.
-   */
+  /** Retrieves a Customer object. */
   public static Customer retrieve(String customer) throws StripeException {
     return retrieve(customer, (Map<String, Object>) null, (RequestOptions) null);
   }
 
-  /**
-   * Retrieves the details of an existing customer. You need only supply the unique customer
-   * identifier that was returned upon customer creation.
-   */
+  /** Retrieves a Customer object. */
   public static Customer retrieve(String customer, RequestOptions options) throws StripeException {
     return retrieve(customer, (Map<String, Object>) null, options);
   }
 
-  /**
-   * Retrieves the details of an existing customer. You need only supply the unique customer
-   * identifier that was returned upon customer creation.
-   */
+  /** Retrieves a Customer object. */
   public static Customer retrieve(
       String customer, Map<String, Object> params, RequestOptions options) throws StripeException {
     String url =
@@ -280,10 +271,7 @@ public class Customer extends ApiResource implements HasId, MetadataStore<Custom
     return ApiResource.request(ApiResource.RequestMethod.GET, url, params, Customer.class, options);
   }
 
-  /**
-   * Retrieves the details of an existing customer. You need only supply the unique customer
-   * identifier that was returned upon customer creation.
-   */
+  /** Retrieves a Customer object. */
   public static Customer retrieve(
       String customer, CustomerRetrieveParams params, RequestOptions options)
       throws StripeException {

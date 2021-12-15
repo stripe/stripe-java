@@ -37,8 +37,8 @@ public class PromotionCode extends ApiResource implements HasId, MetadataStore<P
    * A coupon contains information about a percent-off or amount-off discount you might want to
    * apply to a customer. Coupons may be applied to <a
    * href="https://stripe.com/docs/api#invoices">invoices</a> or <a
-   * href="https://stripe.com/docs/api#create_order-coupon">orders</a>. Coupons do not work with
-   * conventional one-off <a href="https://stripe.com/docs/api#create_charge">charges</a>.
+   * href="https://stripe.com/docs/api#create_order_legacy-coupon">orders</a>. Coupons do not work
+   * with conventional one-off <a href="https://stripe.com/docs/api#create_charge">charges</a>.
    */
   @SerializedName("coupon")
   Coupon coupon;
@@ -115,18 +115,33 @@ public class PromotionCode extends ApiResource implements HasId, MetadataStore<P
     this.customer = new ExpandableField<Customer>(expandableObject.getId(), expandableObject);
   }
 
-  /** Retrieves the promotion code with the given ID. */
+  /**
+   * Retrieves the promotion code with the given ID. In order to retrieve a promotion code by the
+   * customer-facing <code>code</code> use <a
+   * href="https://stripe.com/docs/api/promotion_codes/list">list</a> with the desired <code>code
+   * </code>.
+   */
   public static PromotionCode retrieve(String promotionCode) throws StripeException {
     return retrieve(promotionCode, (Map<String, Object>) null, (RequestOptions) null);
   }
 
-  /** Retrieves the promotion code with the given ID. */
+  /**
+   * Retrieves the promotion code with the given ID. In order to retrieve a promotion code by the
+   * customer-facing <code>code</code> use <a
+   * href="https://stripe.com/docs/api/promotion_codes/list">list</a> with the desired <code>code
+   * </code>.
+   */
   public static PromotionCode retrieve(String promotionCode, RequestOptions options)
       throws StripeException {
     return retrieve(promotionCode, (Map<String, Object>) null, options);
   }
 
-  /** Retrieves the promotion code with the given ID. */
+  /**
+   * Retrieves the promotion code with the given ID. In order to retrieve a promotion code by the
+   * customer-facing <code>code</code> use <a
+   * href="https://stripe.com/docs/api/promotion_codes/list">list</a> with the desired <code>code
+   * </code>.
+   */
   public static PromotionCode retrieve(
       String promotionCode, Map<String, Object> params, RequestOptions options)
       throws StripeException {
@@ -139,7 +154,12 @@ public class PromotionCode extends ApiResource implements HasId, MetadataStore<P
         ApiResource.RequestMethod.GET, url, params, PromotionCode.class, options);
   }
 
-  /** Retrieves the promotion code with the given ID. */
+  /**
+   * Retrieves the promotion code with the given ID. In order to retrieve a promotion code by the
+   * customer-facing <code>code</code> use <a
+   * href="https://stripe.com/docs/api/promotion_codes/list">list</a> with the desired <code>code
+   * </code>.
+   */
   public static PromotionCode retrieve(
       String promotionCode, PromotionCodeRetrieveParams params, RequestOptions options)
       throws StripeException {
