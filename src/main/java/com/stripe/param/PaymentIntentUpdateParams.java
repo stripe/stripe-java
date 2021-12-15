@@ -4631,19 +4631,43 @@ public class PaymentIntentUpdateParams extends ApiRequestParams {
       @SerializedName("request_three_d_secure")
       RequestThreeDSecure requestThreeDSecure;
 
+      /**
+       * Indicates that you intend to make future payments with this PaymentIntent's payment method.
+       *
+       * <p>Providing this parameter will <a
+       * href="https://stripe.com/docs/payments/save-during-payment">attach the payment method</a>
+       * to the PaymentIntent's Customer, if present, after the PaymentIntent is confirmed and any
+       * required actions from the user are complete. If no Customer was provided, the payment
+       * method can still be <a
+       * href="https://stripe.com/docs/api/payment_methods/attach">attached</a> to a Customer after
+       * the transaction completes.
+       *
+       * <p>When processing card payments, Stripe also uses {@code setup_future_usage} to
+       * dynamically optimize your payment flow and comply with regional legislation and network
+       * rules, such as <a href="https://stripe.com/docs/strong-customer-authentication">SCA</a>.
+       *
+       * <p>If {@code setup_future_usage} is already set and you are performing a request using a
+       * publishable key, you may only update the value from {@code on_session} to {@code
+       * off_session}.
+       */
+      @SerializedName("setup_future_usage")
+      EnumParam setupFutureUsage;
+
       private Card(
           Object cvcToken,
           Map<String, Object> extraParams,
           Installments installments,
           Boolean moto,
           Network network,
-          RequestThreeDSecure requestThreeDSecure) {
+          RequestThreeDSecure requestThreeDSecure,
+          EnumParam setupFutureUsage) {
         this.cvcToken = cvcToken;
         this.extraParams = extraParams;
         this.installments = installments;
         this.moto = moto;
         this.network = network;
         this.requestThreeDSecure = requestThreeDSecure;
+        this.setupFutureUsage = setupFutureUsage;
       }
 
       public static Builder builder() {
@@ -4663,6 +4687,8 @@ public class PaymentIntentUpdateParams extends ApiRequestParams {
 
         private RequestThreeDSecure requestThreeDSecure;
 
+        private EnumParam setupFutureUsage;
+
         /** Finalize and obtain parameter instance from this builder. */
         public Card build() {
           return new Card(
@@ -4671,7 +4697,8 @@ public class PaymentIntentUpdateParams extends ApiRequestParams {
               this.installments,
               this.moto,
               this.network,
-              this.requestThreeDSecure);
+              this.requestThreeDSecure,
+              this.setupFutureUsage);
         }
 
         /**
@@ -4765,6 +4792,56 @@ public class PaymentIntentUpdateParams extends ApiRequestParams {
          */
         public Builder setRequestThreeDSecure(RequestThreeDSecure requestThreeDSecure) {
           this.requestThreeDSecure = requestThreeDSecure;
+          return this;
+        }
+
+        /**
+         * Indicates that you intend to make future payments with this PaymentIntent's payment
+         * method.
+         *
+         * <p>Providing this parameter will <a
+         * href="https://stripe.com/docs/payments/save-during-payment">attach the payment method</a>
+         * to the PaymentIntent's Customer, if present, after the PaymentIntent is confirmed and any
+         * required actions from the user are complete. If no Customer was provided, the payment
+         * method can still be <a
+         * href="https://stripe.com/docs/api/payment_methods/attach">attached</a> to a Customer
+         * after the transaction completes.
+         *
+         * <p>When processing card payments, Stripe also uses {@code setup_future_usage} to
+         * dynamically optimize your payment flow and comply with regional legislation and network
+         * rules, such as <a href="https://stripe.com/docs/strong-customer-authentication">SCA</a>.
+         *
+         * <p>If {@code setup_future_usage} is already set and you are performing a request using a
+         * publishable key, you may only update the value from {@code on_session} to {@code
+         * off_session}.
+         */
+        public Builder setSetupFutureUsage(SetupFutureUsage setupFutureUsage) {
+          this.setupFutureUsage = setupFutureUsage;
+          return this;
+        }
+
+        /**
+         * Indicates that you intend to make future payments with this PaymentIntent's payment
+         * method.
+         *
+         * <p>Providing this parameter will <a
+         * href="https://stripe.com/docs/payments/save-during-payment">attach the payment method</a>
+         * to the PaymentIntent's Customer, if present, after the PaymentIntent is confirmed and any
+         * required actions from the user are complete. If no Customer was provided, the payment
+         * method can still be <a
+         * href="https://stripe.com/docs/api/payment_methods/attach">attached</a> to a Customer
+         * after the transaction completes.
+         *
+         * <p>When processing card payments, Stripe also uses {@code setup_future_usage} to
+         * dynamically optimize your payment flow and comply with regional legislation and network
+         * rules, such as <a href="https://stripe.com/docs/strong-customer-authentication">SCA</a>.
+         *
+         * <p>If {@code setup_future_usage} is already set and you are performing a request using a
+         * publishable key, you may only update the value from {@code on_session} to {@code
+         * off_session}.
+         */
+        public Builder setSetupFutureUsage(EmptyParam setupFutureUsage) {
+          this.setupFutureUsage = setupFutureUsage;
           return this;
         }
       }
@@ -5063,6 +5140,24 @@ public class PaymentIntentUpdateParams extends ApiRequestParams {
         private final String value;
 
         RequestThreeDSecure(String value) {
+          this.value = value;
+        }
+      }
+
+      public enum SetupFutureUsage implements ApiRequestParams.EnumParam {
+        @SerializedName("none")
+        NONE("none"),
+
+        @SerializedName("off_session")
+        OFF_SESSION("off_session"),
+
+        @SerializedName("on_session")
+        ON_SESSION("on_session");
+
+        @Getter(onMethod_ = {@Override})
+        private final String value;
+
+        SetupFutureUsage(String value) {
           this.value = value;
         }
       }

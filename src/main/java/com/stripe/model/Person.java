@@ -420,9 +420,9 @@ public class Person extends ApiResource implements HasId, MetadataStore<Person> 
   @EqualsAndHashCode(callSuper = false)
   public static class Relationship extends StripeObject {
     /**
-     * Whether the person is a director of the account's legal entity. Currently only required for
-     * accounts in the EU. Directors are typically members of the governing board of the company, or
-     * responsible for ensuring the company meets its regulatory obligations.
+     * Whether the person is a director of the account's legal entity. Directors are typically
+     * members of the governing board of the company, or responsible for ensuring the company meets
+     * its regulatory obligations.
      */
     @SerializedName("director")
     Boolean director;
