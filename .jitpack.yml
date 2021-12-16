@@ -1,0 +1,4 @@
+jdk:
+ - openjdk11
+before_install:
+  - sed -e '/--add-exports/ s/^#*/#/' -i gradle.properties
