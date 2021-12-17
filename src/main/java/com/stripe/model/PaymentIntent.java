@@ -1073,11 +1073,6 @@ public class PaymentIntent extends ApiResource implements HasId, MetadataStore<P
   @Getter
   @Setter
   @EqualsAndHashCode(callSuper = false)
-  public static class CardProcessingResource extends StripeObject {}
-
-  @Getter
-  @Setter
-  @EqualsAndHashCode(callSuper = false)
   public static class NextAction extends StripeObject {
     @SerializedName("alipay_handle_redirect")
     NextActionAlipayHandleRedirect alipayHandleRedirect;
@@ -1629,11 +1624,16 @@ public class PaymentIntent extends ApiResource implements HasId, MetadataStore<P
   @EqualsAndHashCode(callSuper = false)
   public static class Processing extends StripeObject {
     @SerializedName("card")
-    CardProcessingResource card;
+    Card card;
 
     /** Type of the next action to perform, one of {@code card}. */
     @SerializedName("type")
     String type;
+
+    @Getter
+    @Setter
+    @EqualsAndHashCode(callSuper = false)
+    public static class Card extends StripeObject {}
   }
 
   @Getter
