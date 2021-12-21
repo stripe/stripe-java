@@ -218,6 +218,10 @@ public class PaymentIntent extends ApiResource implements HasId, MetadataStore<P
   @SerializedName("payment_method_types")
   List<String> paymentMethodTypes;
 
+  /** If present, this property tells you about the processing state of the payment. */
+  @SerializedName("processing")
+  Processing processing;
+
   /**
    * Email address that the receipt for the resulting payment will be sent to. If {@code
    * receipt_email} is specified for a payment in live mode, a receipt will be sent regardless of
@@ -1613,6 +1617,23 @@ public class PaymentIntent extends ApiResource implements HasId, MetadataStore<P
       @SerializedName("client")
       String client;
     }
+  }
+
+  @Getter
+  @Setter
+  @EqualsAndHashCode(callSuper = false)
+  public static class Processing extends StripeObject {
+    @SerializedName("card")
+    Card card;
+
+    /** Type of the next action to perform, one of {@code card}. */
+    @SerializedName("type")
+    String type;
+
+    @Getter
+    @Setter
+    @EqualsAndHashCode(callSuper = false)
+    public static class Card extends StripeObject {}
   }
 
   @Getter
