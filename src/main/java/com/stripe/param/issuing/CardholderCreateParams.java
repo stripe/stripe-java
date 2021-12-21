@@ -49,7 +49,10 @@ public class CardholderCreateParams extends ApiRequestParams {
   @SerializedName("metadata")
   Map<String, String> metadata;
 
-  /** The cardholder's name. This will be printed on cards issued to them. */
+  /**
+   * The cardholder's name. This will be printed on cards issued to them. The maximum length of this
+   * field is 24 characters.
+   */
   @SerializedName("name")
   String name;
 
@@ -257,7 +260,10 @@ public class CardholderCreateParams extends ApiRequestParams {
       return this;
     }
 
-    /** The cardholder's name. This will be printed on cards issued to them. */
+    /**
+     * The cardholder's name. This will be printed on cards issued to them. The maximum length of
+     * this field is 24 characters.
+     */
     public Builder setName(String name) {
       this.name = name;
       return this;

@@ -5914,6 +5914,9 @@ public class PaymentIntentCreateParams extends ApiRequestParams {
         @SerializedName("en-FI")
         EN_FI("en-FI"),
 
+        @SerializedName("en-FR")
+        EN_FR("en-FR"),
+
         @SerializedName("en-GB")
         EN_GB("en-GB"),
 
@@ -5938,11 +5941,17 @@ public class PaymentIntentCreateParams extends ApiRequestParams {
         @SerializedName("es-ES")
         ES_ES("es-ES"),
 
+        @SerializedName("es-US")
+        ES_US("es-US"),
+
         @SerializedName("fi-FI")
         FI_FI("fi-FI"),
 
         @SerializedName("fr-BE")
         FR_BE("fr-BE"),
+
+        @SerializedName("fr-FR")
+        FR_FR("fr-FR"),
 
         @SerializedName("it-IT")
         IT_IT("it-IT"),
