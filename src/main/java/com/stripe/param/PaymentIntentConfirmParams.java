@@ -3441,6 +3441,13 @@ public class PaymentIntentConfirmParams extends ApiRequestParams {
     Object alipay;
 
     /**
+     * If this is a {@code au_becs_debit} PaymentMethod, this sub-hash contains details about the AU
+     * BECS Direct Debit payment method options.
+     */
+    @SerializedName("au_becs_debit")
+    Object auBecsDebit;
+
+    /**
      * If this is a {@code bancontact} PaymentMethod, this sub-hash contains details about the
      * Bancontact payment method options.
      */
@@ -3541,6 +3548,7 @@ public class PaymentIntentConfirmParams extends ApiRequestParams {
         Object acssDebit,
         Object afterpayClearpay,
         Object alipay,
+        Object auBecsDebit,
         Object bancontact,
         Object boleto,
         Object card,
@@ -3558,6 +3566,7 @@ public class PaymentIntentConfirmParams extends ApiRequestParams {
       this.acssDebit = acssDebit;
       this.afterpayClearpay = afterpayClearpay;
       this.alipay = alipay;
+      this.auBecsDebit = auBecsDebit;
       this.bancontact = bancontact;
       this.boleto = boleto;
       this.card = card;
@@ -3584,6 +3593,8 @@ public class PaymentIntentConfirmParams extends ApiRequestParams {
       private Object afterpayClearpay;
 
       private Object alipay;
+
+      private Object auBecsDebit;
 
       private Object bancontact;
 
@@ -3619,6 +3630,7 @@ public class PaymentIntentConfirmParams extends ApiRequestParams {
             this.acssDebit,
             this.afterpayClearpay,
             this.alipay,
+            this.auBecsDebit,
             this.bancontact,
             this.boleto,
             this.card,
@@ -3686,6 +3698,24 @@ public class PaymentIntentConfirmParams extends ApiRequestParams {
        */
       public Builder setAlipay(EmptyParam alipay) {
         this.alipay = alipay;
+        return this;
+      }
+
+      /**
+       * If this is a {@code au_becs_debit} PaymentMethod, this sub-hash contains details about the
+       * AU BECS Direct Debit payment method options.
+       */
+      public Builder setAuBecsDebit(AuBecsDebit auBecsDebit) {
+        this.auBecsDebit = auBecsDebit;
+        return this;
+      }
+
+      /**
+       * If this is a {@code au_becs_debit} PaymentMethod, this sub-hash contains details about the
+       * AU BECS Direct Debit payment method options.
+       */
+      public Builder setAuBecsDebit(EmptyParam auBecsDebit) {
+        this.auBecsDebit = auBecsDebit;
         return this;
       }
 
@@ -4359,6 +4389,63 @@ public class PaymentIntentConfirmParams extends ApiRequestParams {
          * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
          * map. See {@link PaymentIntentConfirmParams.PaymentMethodOptions.Alipay#extraParams} for
          * the field documentation.
+         */
+        public Builder putAllExtraParam(Map<String, Object> map) {
+          if (this.extraParams == null) {
+            this.extraParams = new HashMap<>();
+          }
+          this.extraParams.putAll(map);
+          return this;
+        }
+      }
+    }
+
+    @Getter
+    public static class AuBecsDebit {
+      /**
+       * Map of extra parameters for custom features not available in this client library. The
+       * content in this map is not serialized under this field's {@code @SerializedName} value.
+       * Instead, each key/value pair is serialized as if the key is a root-level field (serialized)
+       * name in this param object. Effectively, this map is flattened to its parent instance.
+       */
+      @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
+      Map<String, Object> extraParams;
+
+      private AuBecsDebit(Map<String, Object> extraParams) {
+        this.extraParams = extraParams;
+      }
+
+      public static Builder builder() {
+        return new Builder();
+      }
+
+      public static class Builder {
+        private Map<String, Object> extraParams;
+
+        /** Finalize and obtain parameter instance from this builder. */
+        public AuBecsDebit build() {
+          return new AuBecsDebit(this.extraParams);
+        }
+
+        /**
+         * Add a key/value pair to `extraParams` map. A map is initialized for the first
+         * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
+         * map. See {@link PaymentIntentConfirmParams.PaymentMethodOptions.AuBecsDebit#extraParams}
+         * for the field documentation.
+         */
+        public Builder putExtraParam(String key, Object value) {
+          if (this.extraParams == null) {
+            this.extraParams = new HashMap<>();
+          }
+          this.extraParams.put(key, value);
+          return this;
+        }
+
+        /**
+         * Add all map key/value pairs to `extraParams` map. A map is initialized for the first
+         * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
+         * map. See {@link PaymentIntentConfirmParams.PaymentMethodOptions.AuBecsDebit#extraParams}
+         * for the field documentation.
          */
         public Builder putAllExtraParam(Map<String, Object> map) {
           if (this.extraParams == null) {
