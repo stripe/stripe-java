@@ -1626,7 +1626,10 @@ public class PaymentIntent extends ApiResource implements HasId, MetadataStore<P
     @SerializedName("card")
     Card card;
 
-    /** Type of the next action to perform, one of {@code card}. */
+    /**
+     * Type of the payment method for which payment is in {@code processing} state, one of {@code
+     * card}.
+     */
     @SerializedName("type")
     String type;
 
