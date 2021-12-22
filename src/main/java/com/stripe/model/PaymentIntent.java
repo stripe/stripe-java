@@ -1298,6 +1298,9 @@ public class PaymentIntent extends ApiResource implements HasId, MetadataStore<P
     @SerializedName("alipay")
     Alipay alipay;
 
+    @SerializedName("au_becs_debit")
+    AuBecsDebit auBecsDebit;
+
     @SerializedName("bancontact")
     Bancontact bancontact;
 
@@ -1403,6 +1406,11 @@ public class PaymentIntent extends ApiResource implements HasId, MetadataStore<P
     @Setter
     @EqualsAndHashCode(callSuper = false)
     public static class Alipay extends StripeObject {}
+
+    @Getter
+    @Setter
+    @EqualsAndHashCode(callSuper = false)
+    public static class AuBecsDebit extends StripeObject {}
 
     @Getter
     @Setter
