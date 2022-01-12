@@ -1386,7 +1386,7 @@ public class ConfigurationCreateParams extends ApiRequestParams {
         @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
         Map<String, Object> extraParams;
 
-        /** The list of prices IDs that a subscription can be updated to. */
+        /** The list of price IDs for the product that a subscription can be updated to. */
         @SerializedName("prices")
         List<String> prices;
 
