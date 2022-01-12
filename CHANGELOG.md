@@ -1,5 +1,13 @@
 # Changelog
 
+## 20.95.0 - 2022-01-12
+* [#1301](https://github.com/stripe/stripe-java/pull/1301) API Updates
+  * Add support for `customer_creation` on `CheckoutSessionCreateParams` and `Checkout.Session`
+  * Add support for `fpx` and `grabpay` on `PaymentIntentCreateParams.payment_method_options`, `PaymentIntentUpdateParams.payment_method_options`, `PaymentIntentConfirmParams.payment_method_options`, and `PaymentIntent.payment_method_options`
+  * Add support for `PaidOutOfBand` on `Invoice`
+* [#1300](https://github.com/stripe/stripe-java/pull/1300) API Updates
+  * Add support for `mandate_options` on `SubscriptionCreateParams.payment_settings.payment_method_options.card`, `SubscriptionUpdateParams.payment_settings.payment_method_options.card`, and `Subscription.payment_settings.payment_method_options.card`
+
 ## 20.94.0 - 2021-12-22
 * [#1299](https://github.com/stripe/stripe-java/pull/1299) API Updates
   * Add support for `au_becs_debit` on `PaymentIntentCreateParams.payment_method_options`, `PaymentIntentUpdateParams.payment_method_options`, `PaymentIntentConfirmParams.payment_method_options`, and `PaymentIntent.payment_method_options`
