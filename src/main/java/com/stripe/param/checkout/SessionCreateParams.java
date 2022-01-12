@@ -56,7 +56,8 @@ public class SessionCreateParams extends ApiRequestParams {
    * on the Checkout page. In {@code subscription} mode, the customer’s <a
    * href="https://stripe.com/docs/api/customers/update#update_customer-invoice_settings-default_payment_method">default
    * payment method</a> will be used if it’s a card, and otherwise the most recent card will be
-   * used. A valid billing address is required for Checkout to prefill the customer's card details.
+   * used. A valid billing address, billing name and billing email are required on the payment
+   * method for Checkout to prefill the customer's card details.
    *
    * <p>If the Customer already has a valid <a
    * href="https://stripe.com/docs/api/customers/object#customer_object-email">email</a> set, the
@@ -73,6 +74,23 @@ public class SessionCreateParams extends ApiRequestParams {
    */
   @SerializedName("customer")
   String customer;
+
+  /**
+   * Configure whether a Checkout Session creates a <a
+   * href="https://stripe.com/docs/api/customers">Customer</a> during Session confirmation.
+   *
+   * <p>When a Customer is not created, you can still retrieve email, address, and other customer
+   * data entered in Checkout with <a
+   * href="https://stripe.com/docs/api/checkout/sessions/object#checkout_session_object-customer_details">customer_details</a>.
+   *
+   * <p>Sessions that do not create Customers will instead create <a
+   * href="https://support.stripe.com/questions/guest-customer-faq">Guest Customers</a> in the
+   * Dashboard.
+   *
+   * <p>Can only be set in {@code payment} and {@code setup} mode.
+   */
+  @SerializedName("customer_creation")
+  CustomerCreation customerCreation;
 
   /**
    * If provided, this value will be used when the Customer object is created. If not provided,
@@ -248,6 +266,7 @@ public class SessionCreateParams extends ApiRequestParams {
       String clientReferenceId,
       ConsentCollection consentCollection,
       String customer,
+      CustomerCreation customerCreation,
       String customerEmail,
       CustomerUpdate customerUpdate,
       List<Discount> discounts,
@@ -278,6 +297,7 @@ public class SessionCreateParams extends ApiRequestParams {
     this.clientReferenceId = clientReferenceId;
     this.consentCollection = consentCollection;
     this.customer = customer;
+    this.customerCreation = customerCreation;
     this.customerEmail = customerEmail;
     this.customerUpdate = customerUpdate;
     this.discounts = discounts;
@@ -322,6 +342,8 @@ public class SessionCreateParams extends ApiRequestParams {
     private ConsentCollection consentCollection;
 
     private String customer;
+
+    private CustomerCreation customerCreation;
 
     private String customerEmail;
 
@@ -378,6 +400,7 @@ public class SessionCreateParams extends ApiRequestParams {
           this.clientReferenceId,
           this.consentCollection,
           this.customer,
+          this.customerCreation,
           this.customerEmail,
           this.customerUpdate,
           this.discounts,
@@ -459,8 +482,8 @@ public class SessionCreateParams extends ApiRequestParams {
      * address on the Checkout page. In {@code subscription} mode, the customer’s <a
      * href="https://stripe.com/docs/api/customers/update#update_customer-invoice_settings-default_payment_method">default
      * payment method</a> will be used if it’s a card, and otherwise the most recent card will be
-     * used. A valid billing address is required for Checkout to prefill the customer's card
-     * details.
+     * used. A valid billing address, billing name and billing email are required on the payment
+     * method for Checkout to prefill the customer's card details.
      *
      * <p>If the Customer already has a valid <a
      * href="https://stripe.com/docs/api/customers/object#customer_object-email">email</a> set, the
@@ -477,6 +500,25 @@ public class SessionCreateParams extends ApiRequestParams {
      */
     public Builder setCustomer(String customer) {
       this.customer = customer;
+      return this;
+    }
+
+    /**
+     * Configure whether a Checkout Session creates a <a
+     * href="https://stripe.com/docs/api/customers">Customer</a> during Session confirmation.
+     *
+     * <p>When a Customer is not created, you can still retrieve email, address, and other customer
+     * data entered in Checkout with <a
+     * href="https://stripe.com/docs/api/checkout/sessions/object#checkout_session_object-customer_details">customer_details</a>.
+     *
+     * <p>Sessions that do not create Customers will instead create <a
+     * href="https://support.stripe.com/questions/guest-customer-faq">Guest Customers</a> in the
+     * Dashboard.
+     *
+     * <p>Can only be set in {@code payment} and {@code setup} mode.
+     */
+    public Builder setCustomerCreation(CustomerCreation customerCreation) {
+      this.customerCreation = customerCreation;
       return this;
     }
 
@@ -2461,8 +2503,11 @@ public class SessionCreateParams extends ApiRequestParams {
      * <p>When setting this to {@code off_session}, Checkout will show a notice to the customer that
      * their payment details will be saved and used for future payments.
      *
-     * <p>For both values, Checkout will attach the payment method to either the provided Customer
-     * for the session, or a new Customer created by Checkout if one has not been provided.
+     * <p>If a Customer has been provided or Checkout creates a new Customer, Checkout will attach
+     * the payment method to the Customer.
+     *
+     * <p>If Checkout does not create a Customer, the payment method is not attached to a Customer.
+     * To reuse the payment method, you can retrieve it from the Checkout Session's PaymentIntent.
      *
      * <p>When processing card payments, Checkout also uses {@code setup_future_usage} to
      * dynamically optimize your payment flow and comply with regional legislation and network
@@ -2695,8 +2740,12 @@ public class SessionCreateParams extends ApiRequestParams {
        * <p>When setting this to {@code off_session}, Checkout will show a notice to the customer
        * that their payment details will be saved and used for future payments.
        *
-       * <p>For both values, Checkout will attach the payment method to either the provided Customer
-       * for the session, or a new Customer created by Checkout if one has not been provided.
+       * <p>If a Customer has been provided or Checkout creates a new Customer, Checkout will attach
+       * the payment method to the Customer.
+       *
+       * <p>If Checkout does not create a Customer, the payment method is not attached to a
+       * Customer. To reuse the payment method, you can retrieve it from the Checkout Session's
+       * PaymentIntent.
        *
        * <p>When processing card payments, Checkout also uses {@code setup_future_usage} to
        * dynamically optimize your payment flow and comply with regional legislation and network
@@ -6289,6 +6338,21 @@ public class SessionCreateParams extends ApiRequestParams {
     private final String value;
 
     BillingAddressCollection(String value) {
+      this.value = value;
+    }
+  }
+
+  public enum CustomerCreation implements ApiRequestParams.EnumParam {
+    @SerializedName("always")
+    ALWAYS("always"),
+
+    @SerializedName("if_required")
+    IF_REQUIRED("if_required");
+
+    @Getter(onMethod_ = {@Override})
+    private final String value;
+
+    CustomerCreation(String value) {
       this.value = value;
     }
   }

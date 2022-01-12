@@ -102,6 +102,14 @@ public class Session extends ApiResource implements HasId {
   ExpandableField<Customer> customer;
 
   /**
+   * Configure whether a Checkout Session creates a Customer when the Checkout Session completes.
+   *
+   * <p>One of {@code always}, or {@code if_required}.
+   */
+  @SerializedName("customer_creation")
+  String customerCreation;
+
+  /**
    * The customer details including the customer's tax exempt status and the customer's tax IDs.
    * Only present on Sessions in {@code payment} or {@code subscription} mode.
    */

@@ -3492,11 +3492,25 @@ public class PaymentIntentUpdateParams extends ApiRequestParams {
     Map<String, Object> extraParams;
 
     /**
+     * If this is a {@code fpx} PaymentMethod, this sub-hash contains details about the FPX payment
+     * method options.
+     */
+    @SerializedName("fpx")
+    Object fpx;
+
+    /**
      * If this is a {@code giropay} PaymentMethod, this sub-hash contains details about the Giropay
      * payment method options.
      */
     @SerializedName("giropay")
     Object giropay;
+
+    /**
+     * If this is a {@code grabpay} PaymentMethod, this sub-hash contains details about the Grabpay
+     * payment method options.
+     */
+    @SerializedName("grabpay")
+    Object grabpay;
 
     /**
      * If this is a {@code ideal} PaymentMethod, this sub-hash contains details about the Ideal
@@ -3564,7 +3578,9 @@ public class PaymentIntentUpdateParams extends ApiRequestParams {
         Object card,
         Object cardPresent,
         Map<String, Object> extraParams,
+        Object fpx,
         Object giropay,
+        Object grabpay,
         Object ideal,
         Object interacPresent,
         Object klarna,
@@ -3582,7 +3598,9 @@ public class PaymentIntentUpdateParams extends ApiRequestParams {
       this.card = card;
       this.cardPresent = cardPresent;
       this.extraParams = extraParams;
+      this.fpx = fpx;
       this.giropay = giropay;
+      this.grabpay = grabpay;
       this.ideal = ideal;
       this.interacPresent = interacPresent;
       this.klarna = klarna;
@@ -3616,7 +3634,11 @@ public class PaymentIntentUpdateParams extends ApiRequestParams {
 
       private Map<String, Object> extraParams;
 
+      private Object fpx;
+
       private Object giropay;
+
+      private Object grabpay;
 
       private Object ideal;
 
@@ -3646,7 +3668,9 @@ public class PaymentIntentUpdateParams extends ApiRequestParams {
             this.card,
             this.cardPresent,
             this.extraParams,
+            this.fpx,
             this.giropay,
+            this.grabpay,
             this.ideal,
             this.interacPresent,
             this.klarna,
@@ -3823,6 +3847,24 @@ public class PaymentIntentUpdateParams extends ApiRequestParams {
       }
 
       /**
+       * If this is a {@code fpx} PaymentMethod, this sub-hash contains details about the FPX
+       * payment method options.
+       */
+      public Builder setFpx(Fpx fpx) {
+        this.fpx = fpx;
+        return this;
+      }
+
+      /**
+       * If this is a {@code fpx} PaymentMethod, this sub-hash contains details about the FPX
+       * payment method options.
+       */
+      public Builder setFpx(EmptyParam fpx) {
+        this.fpx = fpx;
+        return this;
+      }
+
+      /**
        * If this is a {@code giropay} PaymentMethod, this sub-hash contains details about the
        * Giropay payment method options.
        */
@@ -3837,6 +3879,24 @@ public class PaymentIntentUpdateParams extends ApiRequestParams {
        */
       public Builder setGiropay(EmptyParam giropay) {
         this.giropay = giropay;
+        return this;
+      }
+
+      /**
+       * If this is a {@code grabpay} PaymentMethod, this sub-hash contains details about the
+       * Grabpay payment method options.
+       */
+      public Builder setGrabpay(Grabpay grabpay) {
+        this.grabpay = grabpay;
+        return this;
+      }
+
+      /**
+       * If this is a {@code grabpay} PaymentMethod, this sub-hash contains details about the
+       * Grabpay payment method options.
+       */
+      public Builder setGrabpay(EmptyParam grabpay) {
+        this.grabpay = grabpay;
         return this;
       }
 
@@ -5308,6 +5368,63 @@ public class PaymentIntentUpdateParams extends ApiRequestParams {
     }
 
     @Getter
+    public static class Fpx {
+      /**
+       * Map of extra parameters for custom features not available in this client library. The
+       * content in this map is not serialized under this field's {@code @SerializedName} value.
+       * Instead, each key/value pair is serialized as if the key is a root-level field (serialized)
+       * name in this param object. Effectively, this map is flattened to its parent instance.
+       */
+      @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
+      Map<String, Object> extraParams;
+
+      private Fpx(Map<String, Object> extraParams) {
+        this.extraParams = extraParams;
+      }
+
+      public static Builder builder() {
+        return new Builder();
+      }
+
+      public static class Builder {
+        private Map<String, Object> extraParams;
+
+        /** Finalize and obtain parameter instance from this builder. */
+        public Fpx build() {
+          return new Fpx(this.extraParams);
+        }
+
+        /**
+         * Add a key/value pair to `extraParams` map. A map is initialized for the first
+         * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
+         * map. See {@link PaymentIntentUpdateParams.PaymentMethodOptions.Fpx#extraParams} for the
+         * field documentation.
+         */
+        public Builder putExtraParam(String key, Object value) {
+          if (this.extraParams == null) {
+            this.extraParams = new HashMap<>();
+          }
+          this.extraParams.put(key, value);
+          return this;
+        }
+
+        /**
+         * Add all map key/value pairs to `extraParams` map. A map is initialized for the first
+         * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
+         * map. See {@link PaymentIntentUpdateParams.PaymentMethodOptions.Fpx#extraParams} for the
+         * field documentation.
+         */
+        public Builder putAllExtraParam(Map<String, Object> map) {
+          if (this.extraParams == null) {
+            this.extraParams = new HashMap<>();
+          }
+          this.extraParams.putAll(map);
+          return this;
+        }
+      }
+    }
+
+    @Getter
     public static class Giropay {
       /**
        * Map of extra parameters for custom features not available in this client library. The
@@ -5352,6 +5469,63 @@ public class PaymentIntentUpdateParams extends ApiRequestParams {
          * Add all map key/value pairs to `extraParams` map. A map is initialized for the first
          * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
          * map. See {@link PaymentIntentUpdateParams.PaymentMethodOptions.Giropay#extraParams} for
+         * the field documentation.
+         */
+        public Builder putAllExtraParam(Map<String, Object> map) {
+          if (this.extraParams == null) {
+            this.extraParams = new HashMap<>();
+          }
+          this.extraParams.putAll(map);
+          return this;
+        }
+      }
+    }
+
+    @Getter
+    public static class Grabpay {
+      /**
+       * Map of extra parameters for custom features not available in this client library. The
+       * content in this map is not serialized under this field's {@code @SerializedName} value.
+       * Instead, each key/value pair is serialized as if the key is a root-level field (serialized)
+       * name in this param object. Effectively, this map is flattened to its parent instance.
+       */
+      @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
+      Map<String, Object> extraParams;
+
+      private Grabpay(Map<String, Object> extraParams) {
+        this.extraParams = extraParams;
+      }
+
+      public static Builder builder() {
+        return new Builder();
+      }
+
+      public static class Builder {
+        private Map<String, Object> extraParams;
+
+        /** Finalize and obtain parameter instance from this builder. */
+        public Grabpay build() {
+          return new Grabpay(this.extraParams);
+        }
+
+        /**
+         * Add a key/value pair to `extraParams` map. A map is initialized for the first
+         * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
+         * map. See {@link PaymentIntentUpdateParams.PaymentMethodOptions.Grabpay#extraParams} for
+         * the field documentation.
+         */
+        public Builder putExtraParam(String key, Object value) {
+          if (this.extraParams == null) {
+            this.extraParams = new HashMap<>();
+          }
+          this.extraParams.put(key, value);
+          return this;
+        }
+
+        /**
+         * Add all map key/value pairs to `extraParams` map. A map is initialized for the first
+         * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
+         * map. See {@link PaymentIntentUpdateParams.PaymentMethodOptions.Grabpay#extraParams} for
          * the field documentation.
          */
         public Builder putAllExtraParam(Map<String, Object> map) {

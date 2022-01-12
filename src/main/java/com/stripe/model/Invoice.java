@@ -365,6 +365,13 @@ public class Invoice extends ApiResource implements HasId, MetadataStore<Invoice
   Boolean paid;
 
   /**
+   * Returns true if the invoice was manually marked paid, returns false if the invoice hasn't been
+   * paid yet or was paid on Stripe.
+   */
+  @SerializedName("paid_out_of_band")
+  Boolean paidOutOfBand;
+
+  /**
    * The PaymentIntent associated with this invoice. The PaymentIntent is generated when the invoice
    * is finalized, and can then be used to pay the invoice. Note that voiding an invoice will cancel
    * the PaymentIntent.

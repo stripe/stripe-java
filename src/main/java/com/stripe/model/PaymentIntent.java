@@ -1313,8 +1313,14 @@ public class PaymentIntent extends ApiResource implements HasId, MetadataStore<P
     @SerializedName("card_present")
     CardPresent cardPresent;
 
+    @SerializedName("fpx")
+    Fpx fpx;
+
     @SerializedName("giropay")
     Giropay giropay;
+
+    @SerializedName("grabpay")
+    Grabpay grabpay;
 
     @SerializedName("ideal")
     Ideal ideal;
@@ -1543,7 +1549,17 @@ public class PaymentIntent extends ApiResource implements HasId, MetadataStore<P
     @Getter
     @Setter
     @EqualsAndHashCode(callSuper = false)
+    public static class Fpx extends StripeObject {}
+
+    @Getter
+    @Setter
+    @EqualsAndHashCode(callSuper = false)
     public static class Giropay extends StripeObject {}
+
+    @Getter
+    @Setter
+    @EqualsAndHashCode(callSuper = false)
+    public static class Grabpay extends StripeObject {}
 
     @Getter
     @Setter
