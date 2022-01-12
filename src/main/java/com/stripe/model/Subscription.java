@@ -830,6 +830,9 @@ public class Subscription extends ApiResource implements HasId, MetadataStore<Su
     @Setter
     @EqualsAndHashCode(callSuper = false)
     public static class Card extends StripeObject {
+      @SerializedName("mandate_options")
+      MandateOptions mandateOptions;
+
       /**
        * We strongly recommend that you rely on our SCA Engine to automatically prompt your
        * customers for authentication based on risk level and <a
