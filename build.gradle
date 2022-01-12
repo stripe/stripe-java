@@ -3,10 +3,6 @@ buildscript {
         mavenCentral()
         //Add only for SNAPSHOT versions
         //maven { url "https://oss.sonatype.org/content/repositories/snapshots/" }
-        maven {
-          name = 'ajoberstar-backup'
-          url = 'https://ajoberstar.org/bintray-backup/'
-        }
     }
     dependencies {
         classpath "io.codearte.gradle.nexus:gradle-nexus-staging-plugin:0.30.0"
@@ -62,6 +58,10 @@ configurations.all {
 
 repositories {
      mavenCentral()
+     maven {
+       name = 'ajoberstar-backup'
+       url = 'https://ajoberstar.org/bintray-backup/'
+     }
 }
 
 dependencies {
