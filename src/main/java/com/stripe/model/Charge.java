@@ -314,7 +314,11 @@ public class Charge extends ApiResource implements MetadataStore<Charge>, Balanc
   @SerializedName("statement_descriptor_suffix")
   String statementDescriptorSuffix;
 
-  /** The status of the payment is either {@code succeeded}, {@code pending}, or {@code failed}. */
+  /**
+   * The status of the payment is either {@code succeeded}, {@code pending}, or {@code failed}.
+   *
+   * <p>One of {@code failed}, {@code pending}, or {@code succeeded}.
+   */
   @SerializedName("status")
   String status;
 
