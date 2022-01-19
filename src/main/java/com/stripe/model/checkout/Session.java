@@ -10,6 +10,7 @@ import com.stripe.model.HasId;
 import com.stripe.model.LineItem;
 import com.stripe.model.LineItemCollection;
 import com.stripe.model.PaymentIntent;
+import com.stripe.model.PaymentLink;
 import com.stripe.model.SetupIntent;
 import com.stripe.model.ShippingDetails;
 import com.stripe.model.ShippingRate;
@@ -189,6 +190,12 @@ public class Session extends ApiResource implements HasId {
   @Setter(lombok.AccessLevel.NONE)
   ExpandableField<PaymentIntent> paymentIntent;
 
+  /** The ID of the Payment Link that created this Session. */
+  @SerializedName("payment_link")
+  @Getter(lombok.AccessLevel.NONE)
+  @Setter(lombok.AccessLevel.NONE)
+  ExpandableField<PaymentLink> paymentLink;
+
   /**
    * Payment-method-specific configuration for the PaymentIntent or SetupIntent of this
    * CheckoutSession.
@@ -318,6 +325,24 @@ public class Session extends ApiResource implements HasId {
   public void setPaymentIntentObject(PaymentIntent expandableObject) {
     this.paymentIntent =
         new ExpandableField<PaymentIntent>(expandableObject.getId(), expandableObject);
+  }
+
+  /** Get ID of expandable {@code paymentLink} object. */
+  public String getPaymentLink() {
+    return (this.paymentLink != null) ? this.paymentLink.getId() : null;
+  }
+
+  public void setPaymentLink(String id) {
+    this.paymentLink = ApiResource.setExpandableFieldId(id, this.paymentLink);
+  }
+
+  /** Get expanded {@code paymentLink}. */
+  public PaymentLink getPaymentLinkObject() {
+    return (this.paymentLink != null) ? this.paymentLink.getExpanded() : null;
+  }
+
+  public void setPaymentLinkObject(PaymentLink expandableObject) {
+    this.paymentLink = new ExpandableField<PaymentLink>(expandableObject.getId(), expandableObject);
   }
 
   /** Get ID of expandable {@code setupIntent} object. */

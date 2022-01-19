@@ -2940,4 +2940,20 @@ class GeneratedExamples extends BaseStripeTest {
     assertNotNull(paymentIntent);
     verifyRequest(ApiResource.RequestMethod.POST, "/v1/payment_intents", params.toMap());
   }
+
+  @Test
+  public void testPaymentLinkCreate() throws StripeException {
+    PaymentLinkCreateParams params =
+        PaymentLinkCreateParams.builder()
+            .addLineItem(
+                PaymentLinkCreateParams.LineItem.builder()
+                    .setPrice("price_xxxxxxxxxxxxx")
+                    .setQuantity(1L)
+                    .build())
+            .build();
+
+    PaymentLink paymentLink = PaymentLink.create(params);
+    assertNotNull(paymentLink);
+    verifyRequest(ApiResource.RequestMethod.POST, "/v1/payment_links", params.toMap());
+  }
 }
