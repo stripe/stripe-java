@@ -1141,6 +1141,20 @@ public class PaymentIntent extends ApiResource implements HasId, MetadataStore<P
       /** The base64 image data for a pre-generated QR code. */
       @SerializedName("image_data_url")
       String imageDataUrl;
+
+      /**
+       * The image_url_png string used to render QR code, can be used as &lt;img src=&quot;…&quot;
+       * /&gt;.
+       */
+      @SerializedName("image_url_png")
+      String imageUrlPng;
+
+      /**
+       * The image_url_svg string used to render QR code, can be used as &lt;img src=&quot;…&quot;
+       * /&gt;.
+       */
+      @SerializedName("image_url_svg")
+      String imageUrlSvg;
     }
 
     @Getter
@@ -1301,6 +1315,9 @@ public class PaymentIntent extends ApiResource implements HasId, MetadataStore<P
     @SerializedName("au_becs_debit")
     AuBecsDebit auBecsDebit;
 
+    @SerializedName("bacs_debit")
+    BacsDebit bacsDebit;
+
     @SerializedName("bancontact")
     Bancontact bancontact;
 
@@ -1312,6 +1329,9 @@ public class PaymentIntent extends ApiResource implements HasId, MetadataStore<P
 
     @SerializedName("card_present")
     CardPresent cardPresent;
+
+    @SerializedName("eps")
+    Eps eps;
 
     @SerializedName("fpx")
     Fpx fpx;
@@ -1417,6 +1437,11 @@ public class PaymentIntent extends ApiResource implements HasId, MetadataStore<P
     @Setter
     @EqualsAndHashCode(callSuper = false)
     public static class AuBecsDebit extends StripeObject {}
+
+    @Getter
+    @Setter
+    @EqualsAndHashCode(callSuper = false)
+    public static class BacsDebit extends StripeObject {}
 
     @Getter
     @Setter
@@ -1545,6 +1570,11 @@ public class PaymentIntent extends ApiResource implements HasId, MetadataStore<P
     @Setter
     @EqualsAndHashCode(callSuper = false)
     public static class CardPresent extends StripeObject {}
+
+    @Getter
+    @Setter
+    @EqualsAndHashCode(callSuper = false)
+    public static class Eps extends StripeObject {}
 
     @Getter
     @Setter
