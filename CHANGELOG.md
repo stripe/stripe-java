@@ -1,5 +1,10 @@
 # Changelog
 
+## 20.96.0 - 2022-01-19
+* [#1302](https://github.com/stripe/stripe-java/pull/1302) API Updates
+  * Add support for `bacs_debit` and `eps` on `PaymentIntentCreateParams.payment_method_options`, `PaymentIntentUpdateParams.payment_method_options`, `PaymentIntentConfirmParams.payment_method_options`, and `PaymentIntent.payment_method_options`
+  * Add support for `image_url_png` and `image_url_svg` on `PaymentIntent.next_action.wechat_pay_display_qr_code`
+
 ## 20.95.0 - 2022-01-12
 * [#1301](https://github.com/stripe/stripe-java/pull/1301) API Updates
   * Add support for `customer_creation` on `CheckoutSessionCreateParams` and `Checkout.Session`
