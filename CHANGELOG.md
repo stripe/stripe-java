@@ -1,5 +1,10 @@
 # Changelog
 
+## 20.97.0 - 2022-01-20
+* [#1304](https://github.com/stripe/stripe-java/pull/1304) API Updates
+  * Add support for new resource `PaymentLink`
+  * Add support for `payment_link` on `Checkout.Session`
+
 ## 20.96.0 - 2022-01-19
 * [#1302](https://github.com/stripe/stripe-java/pull/1302) API Updates
   * Add support for `bacs_debit` and `eps` on `PaymentIntentCreateParams.payment_method_options`, `PaymentIntentUpdateParams.payment_method_options`, `PaymentIntentConfirmParams.payment_method_options`, and `PaymentIntent.payment_method_options`
