@@ -2956,4 +2956,22 @@ class GeneratedExamples extends BaseStripeTest {
     assertNotNull(paymentLink);
     verifyRequest(ApiResource.RequestMethod.POST, "/v1/payment_links", params.toMap());
   }
+
+  @Test
+  public void testPaymentLinkListLineItems() throws StripeException {
+    PaymentLink resource = PaymentLink.retrieve("pl_xyz");
+    PaymentLinkListLineItemsParams params = PaymentLinkListLineItemsParams.builder().build();
+
+    LineItemCollection lineItems = resource.listLineItems(params);
+    assertNotNull(lineItems);
+    verifyRequest(
+        ApiResource.RequestMethod.GET, "/v1/payment_links/pl_xyz/line_items", params.toMap());
+  }
+
+  @Test
+  public void testPaymentLinkRetrieve() throws StripeException {
+    PaymentLink paymentLink = PaymentLink.retrieve("pl_xyz");
+    assertNotNull(paymentLink);
+    verifyRequest(ApiResource.RequestMethod.GET, "/v1/payment_links/pl_xyz");
+  }
 }
