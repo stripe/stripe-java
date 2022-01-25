@@ -13,8 +13,8 @@ import lombok.Getter;
 @Getter
 public class PaymentLinkUpdateParams extends ApiRequestParams {
   /**
-   * Whether the payment link's {@code url} is active. If {@code false}, customers visiting the url
-   * will be redirected.
+   * Whether the payment link's {@code url} is active. If {@code false}, customers visiting the URL
+   * will be shown a page saying that the link has been deactivated.
    */
   @SerializedName("active")
   Boolean active;
@@ -60,15 +60,17 @@ public class PaymentLinkUpdateParams extends ApiRequestParams {
    * to an object. This can be useful for storing additional information about the object in a
    * structured format. Individual keys can be unset by posting an empty value to them. All keys can
    * be unset by posting an empty value to {@code metadata}. Metadata associated with this Payment
-   * Link will automatically be copied to Checkout Sessions created by this Payment Link.
+   * Link will automatically be copied to <a
+   * href="https://stripe.com/docs/api/checkout/sessions">checkout sessions</a> created by this
+   * payment link.
    */
   @SerializedName("metadata")
   Map<String, String> metadata;
 
   /**
-   * The list of payment method types (e.g., card) that customers can use. Only {@code card} is
-   * supported. Pass an empty string to enable automatic payment methods that use your <a
-   * href="https://dashboard.stripe.com/settings/payment_methods">payment methods settings</a>.
+   * The list of payment method types that customers can use. Only {@code card} is supported. Pass
+   * an empty string to enable automatic payment methods that use your <a
+   * href="https://dashboard.stripe.com/settings/payment_methods">payment method settings</a>.
    */
   @SerializedName("payment_method_types")
   Object paymentMethodTypes;
@@ -147,7 +149,7 @@ public class PaymentLinkUpdateParams extends ApiRequestParams {
 
     /**
      * Whether the payment link's {@code url} is active. If {@code false}, customers visiting the
-     * url will be redirected.
+     * URL will be shown a page saying that the link has been deactivated.
      */
     public Builder setActive(Boolean active) {
       this.active = active;
@@ -311,9 +313,9 @@ public class PaymentLinkUpdateParams extends ApiRequestParams {
     }
 
     /**
-     * The list of payment method types (e.g., card) that customers can use. Only {@code card} is
-     * supported. Pass an empty string to enable automatic payment methods that use your <a
-     * href="https://dashboard.stripe.com/settings/payment_methods">payment methods settings</a>.
+     * The list of payment method types that customers can use. Only {@code card} is supported. Pass
+     * an empty string to enable automatic payment methods that use your <a
+     * href="https://dashboard.stripe.com/settings/payment_methods">payment method settings</a>.
      */
     public Builder setPaymentMethodTypes(EmptyParam paymentMethodTypes) {
       this.paymentMethodTypes = paymentMethodTypes;
@@ -321,9 +323,9 @@ public class PaymentLinkUpdateParams extends ApiRequestParams {
     }
 
     /**
-     * The list of payment method types (e.g., card) that customers can use. Only {@code card} is
-     * supported. Pass an empty string to enable automatic payment methods that use your <a
-     * href="https://dashboard.stripe.com/settings/payment_methods">payment methods settings</a>.
+     * The list of payment method types that customers can use. Only {@code card} is supported. Pass
+     * an empty string to enable automatic payment methods that use your <a
+     * href="https://dashboard.stripe.com/settings/payment_methods">payment method settings</a>.
      */
     public Builder setPaymentMethodTypes(List<PaymentMethodType> paymentMethodTypes) {
       this.paymentMethodTypes = paymentMethodTypes;
@@ -722,7 +724,7 @@ public class PaymentLinkUpdateParams extends ApiRequestParams {
     @SerializedName("id")
     Object id;
 
-    /** The quantity of the line item being purchased. Only {@code 1} is supported. */
+    /** The quantity of the line item being purchased. */
     @SerializedName("quantity")
     Long quantity;
 
@@ -802,7 +804,7 @@ public class PaymentLinkUpdateParams extends ApiRequestParams {
         return this;
       }
 
-      /** The quantity of the line item being purchased. Only {@code 1} is supported. */
+      /** The quantity of the line item being purchased. */
       public Builder setQuantity(Long quantity) {
         this.quantity = quantity;
         return this;
@@ -833,7 +835,8 @@ public class PaymentLinkUpdateParams extends ApiRequestParams {
 
       /**
        * The minimum quantity the customer can purchase. By default this value is 0. You can specify
-       * a value up to 98.
+       * a value up to 98. If there is only one item in the cart then that item's quantity cannot go
+       * down to 0.
        */
       @SerializedName("minimum")
       Long minimum;
@@ -909,7 +912,8 @@ public class PaymentLinkUpdateParams extends ApiRequestParams {
 
         /**
          * The minimum quantity the customer can purchase. By default this value is 0. You can
-         * specify a value up to 98.
+         * specify a value up to 98. If there is only one item in the cart then that item's quantity
+         * cannot go down to 0.
          */
         public Builder setMinimum(Long minimum) {
           this.minimum = minimum;

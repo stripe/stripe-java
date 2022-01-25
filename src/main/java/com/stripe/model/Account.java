@@ -361,8 +361,9 @@ public class Account extends ApiResource implements MetadataStore<Account>, Paym
   /**
    * With <a href="https://stripe.com/docs/connect">Connect</a>, you can delete accounts you manage.
    *
-   * <p>Accounts created using test-mode keys can be deleted at any time. Custom or Express accounts
-   * created using live-mode keys can only be deleted once all balances are zero.
+   * <p>Accounts created using test-mode keys can be deleted at any time. Standard accounts created
+   * using live-mode keys cannot be deleted. Custom or Express accounts created using live-mode keys
+   * can only be deleted once all balances are zero.
    *
    * <p>If you want to delete your own account, use the <a
    * href="https://dashboard.stripe.com/account">account information tab in your account
@@ -375,8 +376,9 @@ public class Account extends ApiResource implements MetadataStore<Account>, Paym
   /**
    * With <a href="https://stripe.com/docs/connect">Connect</a>, you can delete accounts you manage.
    *
-   * <p>Accounts created using test-mode keys can be deleted at any time. Custom or Express accounts
-   * created using live-mode keys can only be deleted once all balances are zero.
+   * <p>Accounts created using test-mode keys can be deleted at any time. Standard accounts created
+   * using live-mode keys cannot be deleted. Custom or Express accounts created using live-mode keys
+   * can only be deleted once all balances are zero.
    *
    * <p>If you want to delete your own account, use the <a
    * href="https://dashboard.stripe.com/account">account information tab in your account
@@ -389,8 +391,9 @@ public class Account extends ApiResource implements MetadataStore<Account>, Paym
   /**
    * With <a href="https://stripe.com/docs/connect">Connect</a>, you can delete accounts you manage.
    *
-   * <p>Accounts created using test-mode keys can be deleted at any time. Custom or Express accounts
-   * created using live-mode keys can only be deleted once all balances are zero.
+   * <p>Accounts created using test-mode keys can be deleted at any time. Standard accounts created
+   * using live-mode keys cannot be deleted. Custom or Express accounts created using live-mode keys
+   * can only be deleted once all balances are zero.
    *
    * <p>If you want to delete your own account, use the <a
    * href="https://dashboard.stripe.com/account">account information tab in your account
@@ -403,8 +406,9 @@ public class Account extends ApiResource implements MetadataStore<Account>, Paym
   /**
    * With <a href="https://stripe.com/docs/connect">Connect</a>, you can delete accounts you manage.
    *
-   * <p>Accounts created using test-mode keys can be deleted at any time. Custom or Express accounts
-   * created using live-mode keys can only be deleted once all balances are zero.
+   * <p>Accounts created using test-mode keys can be deleted at any time. Standard accounts created
+   * using live-mode keys cannot be deleted. Custom or Express accounts created using live-mode keys
+   * can only be deleted once all balances are zero.
    *
    * <p>If you want to delete your own account, use the <a
    * href="https://dashboard.stripe.com/account">account information tab in your account

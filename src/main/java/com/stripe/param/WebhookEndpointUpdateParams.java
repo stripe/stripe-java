@@ -579,6 +579,12 @@ public class WebhookEndpointUpdateParams extends ApiRequestParams {
     @SerializedName("payment_intent.succeeded")
     PAYMENT_INTENT__SUCCEEDED("payment_intent.succeeded"),
 
+    @SerializedName("payment_link.created")
+    PAYMENT_LINK__CREATED("payment_link.created"),
+
+    @SerializedName("payment_link.updated")
+    PAYMENT_LINK__UPDATED("payment_link.updated"),
+
     @SerializedName("payment_method.attached")
     PAYMENT_METHOD__ATTACHED("payment_method.attached"),
 
