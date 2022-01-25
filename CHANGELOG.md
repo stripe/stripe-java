@@ -1,5 +1,12 @@
 # Changelog
 
+## 20.98.0 - 2022-01-25
+* [#1306](https://github.com/stripe/stripe-java/pull/1306) API Updates
+  * Add support for `phone_number_collection` on `PaymentLinkCreateParams` and `PaymentLink`
+  * Add support for new values `payment_link.created` and `payment_link.updated` on enums `WebhookEndpointCreateParams.enabled_events[]` and `WebhookEndpointUpdateParams.enabled_events[]`
+  * Add support for new value `is_vat` on enums `CustomerCreateParams.tax_id_data[].type`, `InvoiceUpcomingParams.customer_details.tax_ids[].type`, `InvoiceUpcomingLinesParams.customer_details.tax_ids[].type`, and `TaxIdCreateParams.type`
+  
+
 ## 20.97.0 - 2022-01-20
 * [#1304](https://github.com/stripe/stripe-java/pull/1304) API Updates
   * Add support for new resource `PaymentLink`
