@@ -70,7 +70,9 @@ public class PaymentLinkCreateParams extends ApiRequestParams {
    * to an object. This can be useful for storing additional information about the object in a
    * structured format. Individual keys can be unset by posting an empty value to them. All keys can
    * be unset by posting an empty value to {@code metadata}. Metadata associated with this Payment
-   * Link will automatically be copied to Checkout Sessions created by this Payment Link.
+   * Link will automatically be copied to <a
+   * href="https://stripe.com/docs/api/checkout/sessions">checkout sessions</a> created by this
+   * payment link.
    */
   @SerializedName("metadata")
   Map<String, String> metadata;
@@ -80,13 +82,22 @@ public class PaymentLinkCreateParams extends ApiRequestParams {
   String onBehalfOf;
 
   /**
-   * The list of payment method types (e.g., card) that customers can use. Only {@code card} is
-   * supported. If no value is passed, your <a
-   * href="https://dashboard.stripe.com/settings/payment_methods">payment methods settings</a> will
-   * be used.
+   * The list of payment method types that customers can use. Only {@code card} is supported. If no
+   * value is passed, Stripe will dynamically show relevant payment methods from your <a
+   * href="https://dashboard.stripe.com/settings/payment_methods">payment method settings</a> (20+
+   * payment methods <a
+   * href="https://stripe.com/docs/payments/payment-methods/integration-options#payment-method-product-support">supported</a>).
    */
   @SerializedName("payment_method_types")
   List<PaymentMethodType> paymentMethodTypes;
+
+  /**
+   * Controls phone number collection settings during checkout.
+   *
+   * <p>We recommend that you review your privacy policy and check with your legal contacts.
+   */
+  @SerializedName("phone_number_collection")
+  PhoneNumberCollection phoneNumberCollection;
 
   /** Configuration for collecting the customer's shipping address. */
   @SerializedName("shipping_address_collection")
@@ -119,6 +130,7 @@ public class PaymentLinkCreateParams extends ApiRequestParams {
       Map<String, String> metadata,
       String onBehalfOf,
       List<PaymentMethodType> paymentMethodTypes,
+      PhoneNumberCollection phoneNumberCollection,
       ShippingAddressCollection shippingAddressCollection,
       SubscriptionData subscriptionData,
       TransferData transferData) {
@@ -134,6 +146,7 @@ public class PaymentLinkCreateParams extends ApiRequestParams {
     this.metadata = metadata;
     this.onBehalfOf = onBehalfOf;
     this.paymentMethodTypes = paymentMethodTypes;
+    this.phoneNumberCollection = phoneNumberCollection;
     this.shippingAddressCollection = shippingAddressCollection;
     this.subscriptionData = subscriptionData;
     this.transferData = transferData;
@@ -168,6 +181,8 @@ public class PaymentLinkCreateParams extends ApiRequestParams {
 
     private List<PaymentMethodType> paymentMethodTypes;
 
+    private PhoneNumberCollection phoneNumberCollection;
+
     private ShippingAddressCollection shippingAddressCollection;
 
     private SubscriptionData subscriptionData;
@@ -189,6 +204,7 @@ public class PaymentLinkCreateParams extends ApiRequestParams {
           this.metadata,
           this.onBehalfOf,
           this.paymentMethodTypes,
+          this.phoneNumberCollection,
           this.shippingAddressCollection,
           this.subscriptionData,
           this.transferData);
@@ -372,6 +388,16 @@ public class PaymentLinkCreateParams extends ApiRequestParams {
         this.paymentMethodTypes = new ArrayList<>();
       }
       this.paymentMethodTypes.addAll(elements);
+      return this;
+    }
+
+    /**
+     * Controls phone number collection settings during checkout.
+     *
+     * <p>We recommend that you review your privacy policy and check with your legal contacts.
+     */
+    public Builder setPhoneNumberCollection(PhoneNumberCollection phoneNumberCollection) {
+      this.phoneNumberCollection = phoneNumberCollection;
       return this;
     }
 
@@ -765,7 +791,7 @@ public class PaymentLinkCreateParams extends ApiRequestParams {
     @SerializedName("price")
     String price;
 
-    /** The quantity of the line item being purchased. Only {@code 1} is supported. */
+    /** The quantity of the line item being purchased. */
     @SerializedName("quantity")
     Long quantity;
 
@@ -842,7 +868,7 @@ public class PaymentLinkCreateParams extends ApiRequestParams {
         return this;
       }
 
-      /** The quantity of the line item being purchased. Only {@code 1} is supported. */
+      /** The quantity of the line item being purchased. */
       public Builder setQuantity(Long quantity) {
         this.quantity = quantity;
         return this;
@@ -873,7 +899,8 @@ public class PaymentLinkCreateParams extends ApiRequestParams {
 
       /**
        * The minimum quantity the customer can purchase. By default this value is 0. You can specify
-       * a value up to 98.
+       * a value up to 98. If there is only one item in the cart then that item's quantity cannot go
+       * down to 0.
        */
       @SerializedName("minimum")
       Long minimum;
@@ -949,12 +976,82 @@ public class PaymentLinkCreateParams extends ApiRequestParams {
 
         /**
          * The minimum quantity the customer can purchase. By default this value is 0. You can
-         * specify a value up to 98.
+         * specify a value up to 98. If there is only one item in the cart then that item's quantity
+         * cannot go down to 0.
          */
         public Builder setMinimum(Long minimum) {
           this.minimum = minimum;
           return this;
         }
+      }
+    }
+  }
+
+  @Getter
+  public static class PhoneNumberCollection {
+    /** Set to {@code true} to enable phone number collection. */
+    @SerializedName("enabled")
+    Boolean enabled;
+
+    /**
+     * Map of extra parameters for custom features not available in this client library. The content
+     * in this map is not serialized under this field's {@code @SerializedName} value. Instead, each
+     * key/value pair is serialized as if the key is a root-level field (serialized) name in this
+     * param object. Effectively, this map is flattened to its parent instance.
+     */
+    @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
+    Map<String, Object> extraParams;
+
+    private PhoneNumberCollection(Boolean enabled, Map<String, Object> extraParams) {
+      this.enabled = enabled;
+      this.extraParams = extraParams;
+    }
+
+    public static Builder builder() {
+      return new Builder();
+    }
+
+    public static class Builder {
+      private Boolean enabled;
+
+      private Map<String, Object> extraParams;
+
+      /** Finalize and obtain parameter instance from this builder. */
+      public PhoneNumberCollection build() {
+        return new PhoneNumberCollection(this.enabled, this.extraParams);
+      }
+
+      /** Set to {@code true} to enable phone number collection. */
+      public Builder setEnabled(Boolean enabled) {
+        this.enabled = enabled;
+        return this;
+      }
+
+      /**
+       * Add a key/value pair to `extraParams` map. A map is initialized for the first `put/putAll`
+       * call, and subsequent calls add additional key/value pairs to the original map. See {@link
+       * PaymentLinkCreateParams.PhoneNumberCollection#extraParams} for the field documentation.
+       */
+      public Builder putExtraParam(String key, Object value) {
+        if (this.extraParams == null) {
+          this.extraParams = new HashMap<>();
+        }
+        this.extraParams.put(key, value);
+        return this;
+      }
+
+      /**
+       * Add all map key/value pairs to `extraParams` map. A map is initialized for the first
+       * `put/putAll` call, and subsequent calls add additional key/value pairs to the original map.
+       * See {@link PaymentLinkCreateParams.PhoneNumberCollection#extraParams} for the field
+       * documentation.
+       */
+      public Builder putAllExtraParam(Map<String, Object> map) {
+        if (this.extraParams == null) {
+          this.extraParams = new HashMap<>();
+        }
+        this.extraParams.putAll(map);
+        return this;
       }
     }
   }

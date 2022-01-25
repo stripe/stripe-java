@@ -1142,17 +1142,11 @@ public class PaymentIntent extends ApiResource implements HasId, MetadataStore<P
       @SerializedName("image_data_url")
       String imageDataUrl;
 
-      /**
-       * The image_url_png string used to render QR code, can be used as &lt;img src=&quot;…&quot;
-       * /&gt;.
-       */
+      /** The image_url_png string used to render QR code. */
       @SerializedName("image_url_png")
       String imageUrlPng;
 
-      /**
-       * The image_url_svg string used to render QR code, can be used as &lt;img src=&quot;…&quot;
-       * /&gt;.
-       */
+      /** The image_url_svg string used to render QR code. */
       @SerializedName("image_url_svg")
       String imageUrlSvg;
     }

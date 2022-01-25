@@ -23,8 +23,8 @@ import lombok.Setter;
 @EqualsAndHashCode(callSuper = false)
 public class PaymentLink extends ApiResource implements HasId, MetadataStore<PaymentLink> {
   /**
-   * Whether the payment link's {@code url} is active. If {@code false}, customers visiting the url
-   * will be redirected.
+   * Whether the payment link's {@code url} is active. If {@code false}, customers visiting the URL
+   * will be shown a page saying that the link has been deactivated.
    */
   @SerializedName("active")
   Boolean active;
@@ -105,12 +105,15 @@ public class PaymentLink extends ApiResource implements HasId, MetadataStore<Pay
   ExpandableField<Account> onBehalfOf;
 
   /**
-   * The list of payment method types that customers can use. When {@code null}, your <a
-   * href="https://dashboard.stripe.com/settings/payment_methods">payment methods settings</a> will
-   * be used.
+   * The list of payment method types that customers can use. When {@code null}, Stripe will
+   * dynamically show relevant payment methods you've enabled in your <a
+   * href="https://dashboard.stripe.com/settings/payment_methods">payment method settings</a>.
    */
   @SerializedName("payment_method_types")
   List<String> paymentMethodTypes;
+
+  @SerializedName("phone_number_collection")
+  PhoneNumberCollection phoneNumberCollection;
 
   /** Configuration for collecting the customer's shipping address. */
   @SerializedName("shipping_address_collection")
@@ -130,7 +133,7 @@ public class PaymentLink extends ApiResource implements HasId, MetadataStore<Pay
   @SerializedName("transfer_data")
   TransferData transferData;
 
-  /** The public url that can be shared with customers. */
+  /** The public URL that can be shared with customers. */
   @SerializedName("url")
   String url;
 
@@ -366,7 +369,7 @@ public class PaymentLink extends ApiResource implements HasId, MetadataStore<Pay
     @Setter
     @EqualsAndHashCode(callSuper = false)
     public static class Redirect extends StripeObject {
-      /** The {@code url} the customer will be redirected to after the purchase is complete. */
+      /** The URL the customer will be redirected to after the purchase is complete. */
       @SerializedName("url")
       String url;
     }
@@ -377,6 +380,15 @@ public class PaymentLink extends ApiResource implements HasId, MetadataStore<Pay
   @EqualsAndHashCode(callSuper = false)
   public static class AutomaticTax extends StripeObject {
     /** If {@code true}, tax will be calculated automatically using the customer's location. */
+    @SerializedName("enabled")
+    Boolean enabled;
+  }
+
+  @Getter
+  @Setter
+  @EqualsAndHashCode(callSuper = false)
+  public static class PhoneNumberCollection extends StripeObject {
+    /** If {@code true}, a phone number will be collected during checkout. */
     @SerializedName("enabled")
     Boolean enabled;
   }
@@ -399,8 +411,8 @@ public class PaymentLink extends ApiResource implements HasId, MetadataStore<Pay
   @EqualsAndHashCode(callSuper = false)
   public static class SubscriptionData extends StripeObject {
     /**
-     * When creating a subscription, the specified configuration data will be used. There must be at
-     * least one line item with a recurring price to use {@code subscription_data}.
+     * Integer representing the number of trial period days before the customer is charged for the
+     * first time.
      */
     @SerializedName("trial_period_days")
     Long trialPeriodDays;
