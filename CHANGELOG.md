@@ -1,5 +1,9 @@
 # Changelog
 
+## 20.99.0 - 2022-02-03
+* [#1307](https://github.com/stripe/stripe-java/pull/1307) API Updates
+  * Add support for new value `au_becs_debit` on enum `CheckoutSessionCreateParams.payment_method_types[]`
+
 ## 20.98.0 - 2022-01-25
 * [#1306](https://github.com/stripe/stripe-java/pull/1306) API Updates
   * Add support for `phone_number_collection` on `PaymentLinkCreateParams` and `PaymentLink`
