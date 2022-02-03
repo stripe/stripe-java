@@ -2441,11 +2441,9 @@ public class SessionCreateParams extends ApiRequestParams {
     /**
      * The amount of the application fee (if any) that will be requested to be applied to the
      * payment and transferred to the application owner's Stripe account. The amount of the
-     * application fee collected will be capped at the total payment amount. To use an application
-     * fee, the request must be made on behalf of another account, using the {@code Stripe-Account}
-     * header or an OAuth key. For more information, see the PaymentIntents <a
-     * href="https://stripe.com/docs/payments/connected-accounts">use case for connected
-     * accounts</a>.
+     * application fee collected will be capped at the total payment amount. For more information,
+     * see the PaymentIntents <a href="https://stripe.com/docs/payments/connected-accounts">use case
+     * for connected accounts</a>.
      */
     @SerializedName("application_fee_amount")
     Long applicationFeeAmount;
@@ -2634,11 +2632,9 @@ public class SessionCreateParams extends ApiRequestParams {
       /**
        * The amount of the application fee (if any) that will be requested to be applied to the
        * payment and transferred to the application owner's Stripe account. The amount of the
-       * application fee collected will be capped at the total payment amount. To use an application
-       * fee, the request must be made on behalf of another account, using the {@code
-       * Stripe-Account} header or an OAuth key. For more information, see the PaymentIntents <a
-       * href="https://stripe.com/docs/payments/connected-accounts">use case for connected
-       * accounts</a>.
+       * application fee collected will be capped at the total payment amount. For more information,
+       * see the PaymentIntents <a href="https://stripe.com/docs/payments/connected-accounts">use
+       * case for connected accounts</a>.
        */
       public Builder setApplicationFeeAmount(Long applicationFeeAmount) {
         this.applicationFeeAmount = applicationFeeAmount;
@@ -6516,6 +6512,9 @@ public class SessionCreateParams extends ApiRequestParams {
 
     @SerializedName("alipay")
     ALIPAY("alipay"),
+
+    @SerializedName("au_becs_debit")
+    AU_BECS_DEBIT("au_becs_debit"),
 
     @SerializedName("bacs_debit")
     BACS_DEBIT("bacs_debit"),
