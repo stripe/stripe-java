@@ -76,8 +76,8 @@ public class SubscriptionItem extends ApiResource
    *
    * <p>Related guides: <a
    * href="https://stripe.com/docs/billing/subscriptions/set-up-subscription">Set up a
-   * subscription</a> and more about <a href="https://stripe.com/docs/billing/prices-guide">products
-   * and prices</a>.
+   * subscription</a> and more about <a
+   * href="https://stripe.com/docs/products-prices/overview">products and prices</a>.
    */
   @SerializedName("plan")
   Plan plan;
@@ -96,8 +96,8 @@ public class SubscriptionItem extends ApiResource
    * <p>Related guides: <a
    * href="https://stripe.com/docs/billing/subscriptions/set-up-subscription">Set up a
    * subscription</a>, <a href="https://stripe.com/docs/billing/invoices/create">create an
-   * invoice</a>, and more about <a href="https://stripe.com/docs/billing/prices-guide">products and
-   * prices</a>.
+   * invoice</a>, and more about <a href="https://stripe.com/docs/products-prices/overview">products
+   * and prices</a>.
    */
   @SerializedName("price")
   Price price;

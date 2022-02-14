@@ -13,6 +13,7 @@ import com.stripe.param.PaymentIntentCreateParams;
 import com.stripe.param.PaymentIntentListParams;
 import com.stripe.param.PaymentIntentRetrieveParams;
 import com.stripe.param.PaymentIntentUpdateParams;
+import com.stripe.param.PaymentIntentVerifyMicrodepositsParams;
 import java.util.List;
 import java.util.Map;
 import lombok.EqualsAndHashCode;
@@ -1066,6 +1067,56 @@ public class PaymentIntent extends ApiResource implements HasId, MetadataStore<P
             "%s%s",
             Stripe.getApiBase(),
             String.format("/v1/payment_intents/%s/capture", ApiResource.urlEncodeId(this.getId())));
+    return ApiResource.request(
+        ApiResource.RequestMethod.POST, url, params, PaymentIntent.class, options);
+  }
+
+  /** Verifies microdeposits on a PaymentIntent object. */
+  public PaymentIntent verifyMicrodeposits() throws StripeException {
+    return verifyMicrodeposits((Map<String, Object>) null, (RequestOptions) null);
+  }
+
+  /** Verifies microdeposits on a PaymentIntent object. */
+  public PaymentIntent verifyMicrodeposits(RequestOptions options) throws StripeException {
+    return verifyMicrodeposits((Map<String, Object>) null, options);
+  }
+
+  /** Verifies microdeposits on a PaymentIntent object. */
+  public PaymentIntent verifyMicrodeposits(Map<String, Object> params) throws StripeException {
+    return verifyMicrodeposits(params, (RequestOptions) null);
+  }
+
+  /** Verifies microdeposits on a PaymentIntent object. */
+  public PaymentIntent verifyMicrodeposits(Map<String, Object> params, RequestOptions options)
+      throws StripeException {
+    String url =
+        String.format(
+            "%s%s",
+            Stripe.getApiBase(),
+            String.format(
+                "/v1/payment_intents/%s/verify_microdeposits",
+                ApiResource.urlEncodeId(this.getId())));
+    return ApiResource.request(
+        ApiResource.RequestMethod.POST, url, params, PaymentIntent.class, options);
+  }
+
+  /** Verifies microdeposits on a PaymentIntent object. */
+  public PaymentIntent verifyMicrodeposits(PaymentIntentVerifyMicrodepositsParams params)
+      throws StripeException {
+    return verifyMicrodeposits(params, (RequestOptions) null);
+  }
+
+  /** Verifies microdeposits on a PaymentIntent object. */
+  public PaymentIntent verifyMicrodeposits(
+      PaymentIntentVerifyMicrodepositsParams params, RequestOptions options)
+      throws StripeException {
+    String url =
+        String.format(
+            "%s%s",
+            Stripe.getApiBase(),
+            String.format(
+                "/v1/payment_intents/%s/verify_microdeposits",
+                ApiResource.urlEncodeId(this.getId())));
     return ApiResource.request(
         ApiResource.RequestMethod.POST, url, params, PaymentIntent.class, options);
   }

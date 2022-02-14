@@ -1733,6 +1733,9 @@ public class InvoiceUpdateParams extends ApiRequestParams {
       @SerializedName("giropay")
       GIROPAY("giropay"),
 
+      @SerializedName("grabpay")
+      GRABPAY("grabpay"),
+
       @SerializedName("ideal")
       IDEAL("ideal"),
 
