@@ -1,5 +1,14 @@
 # Changelog
 
+## 20.100.0 - 2022-02-16
+* [#1312](https://github.com/stripe/stripe-java/pull/1312) API Updates
+  * Add support for `verify_microdeposits` method on resources `PaymentIntent` and `SetupIntent`
+  * Add support for new value `grabpay` on enums `InvoiceCreateParams.payment_settings.payment_method_types[]`, `InvoiceUpdateParams.payment_settings.payment_method_types[]`, `SubscriptionCreateParams.payment_settings.payment_method_types[]`, and `SubscriptionUpdateParams.payment_settings.payment_method_types[]
+  `
+* [#1311](https://github.com/stripe/stripe-java/pull/1311) Pin grgit version to 4.1.1.
+* [#1310](https://github.com/stripe/stripe-java/pull/1310) API Updates
+  * Add support for `pin` on `IssuingCardUpdateParams`
+
 ## 20.99.0 - 2022-02-03
 * [#1307](https://github.com/stripe/stripe-java/pull/1307) API Updates
   * Add support for new value `au_becs_debit` on enum `CheckoutSessionCreateParams.payment_method_types[]`
