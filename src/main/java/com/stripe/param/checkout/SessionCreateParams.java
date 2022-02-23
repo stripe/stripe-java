@@ -1454,12 +1454,7 @@ public class SessionCreateParams extends ApiRequestParams {
     @SerializedName("currency")
     String currency;
 
-    /**
-     * The description for the line item, to be displayed on the Checkout page.
-     *
-     * <p>If using {@code price} or {@code price_data}, will default to the name of the associated
-     * product.
-     */
+    /** [Deprecated] The description for the line item, to be displayed on the Checkout page. */
     @SerializedName("description")
     String description;
 
@@ -1626,12 +1621,7 @@ public class SessionCreateParams extends ApiRequestParams {
         return this;
       }
 
-      /**
-       * The description for the line item, to be displayed on the Checkout page.
-       *
-       * <p>If using {@code price} or {@code price_data}, will default to the name of the associated
-       * product.
-       */
+      /** [Deprecated] The description for the line item, to be displayed on the Checkout page. */
       public Builder setDescription(String description) {
         this.description = description;
         return this;
@@ -3244,7 +3234,7 @@ public class SessionCreateParams extends ApiRequestParams {
     @SerializedName("oxxo")
     Oxxo oxxo;
 
-    /** contains details about the Wechat Pay payment method options. */
+    /** contains details about the WeChat Pay payment method options. */
     @SerializedName("wechat_pay")
     WechatPay wechatPay;
 
@@ -3327,7 +3317,7 @@ public class SessionCreateParams extends ApiRequestParams {
         return this;
       }
 
-      /** contains details about the Wechat Pay payment method options. */
+      /** contains details about the WeChat Pay payment method options. */
       public Builder setWechatPay(WechatPay wechatPay) {
         this.wechatPay = wechatPay;
         return this;
