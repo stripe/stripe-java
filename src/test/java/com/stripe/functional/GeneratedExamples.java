@@ -2974,4 +2974,32 @@ class GeneratedExamples extends BaseStripeTest {
     assertNotNull(paymentLink);
     verifyRequest(ApiResource.RequestMethod.GET, "/v1/payment_links/pl_xyz");
   }
+
+  @Test
+  public void testPaymentIntentVerifyMicrodeposits() throws StripeException {
+    PaymentIntent resource = PaymentIntent.retrieve("pi_xxxxxxxxxxxxx");
+    PaymentIntentVerifyMicrodepositsParams params =
+        PaymentIntentVerifyMicrodepositsParams.builder().build();
+
+    PaymentIntent paymentIntent = resource.verifyMicrodeposits(params);
+    assertNotNull(paymentIntent);
+    verifyRequest(
+        ApiResource.RequestMethod.POST,
+        "/v1/payment_intents/pi_xxxxxxxxxxxxx/verify_microdeposits",
+        params.toMap());
+  }
+
+  @Test
+  public void testSetupIntentVerifyMicrodeposits() throws StripeException {
+    SetupIntent resource = SetupIntent.retrieve("seti_xxxxxxxxxxxxx");
+    SetupIntentVerifyMicrodepositsParams params =
+        SetupIntentVerifyMicrodepositsParams.builder().build();
+
+    SetupIntent setupIntent = resource.verifyMicrodeposits(params);
+    assertNotNull(setupIntent);
+    verifyRequest(
+        ApiResource.RequestMethod.POST,
+        "/v1/setup_intents/seti_xxxxxxxxxxxxx/verify_microdeposits",
+        params.toMap());
+  }
 }
