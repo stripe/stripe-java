@@ -2234,20 +2234,7 @@ public class Charge extends ApiResource implements MetadataStore<Charge>, Balanc
        * payment was completed.
        */
       @SerializedName("store")
-      KonbiniStore store;
-    }
-
-    @Getter
-    @Setter
-    @EqualsAndHashCode(callSuper = false)
-    public static class KonbiniStore extends StripeObject {
-      /**
-       * The name of the convenience store chain where the payment was completed.
-       *
-       * <p>One of {@code familymart}, {@code lawson}, {@code ministop}, or {@code seicomart}.
-       */
-      @SerializedName("chain")
-      String chain;
+      Store store;
     }
 
     @Getter
@@ -2443,6 +2430,19 @@ public class Charge extends ApiResource implements MetadataStore<Charge>, Balanc
         this.generatedSepaDebitMandate =
             new ExpandableField<Mandate>(expandableObject.getId(), expandableObject);
       }
+    }
+
+    @Getter
+    @Setter
+    @EqualsAndHashCode(callSuper = false)
+    public static class Store extends StripeObject {
+      /**
+       * The name of the convenience store chain where the payment was completed.
+       *
+       * <p>One of {@code familymart}, {@code lawson}, {@code ministop}, or {@code seicomart}.
+       */
+      @SerializedName("chain")
+      String chain;
     }
 
     @Getter
