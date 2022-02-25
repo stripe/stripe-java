@@ -1540,6 +1540,13 @@ public class Invoice extends ApiResource implements HasId, MetadataStore<Invoice
     @SerializedName("card")
     Card card;
 
+    /**
+     * If paying by {@code konbini}, this sub-hash contains details about the Konbini payment method
+     * options to pass to the invoice’s PaymentIntent.
+     */
+    @SerializedName("konbini")
+    Konbini konbini;
+
     @Getter
     @Setter
     @EqualsAndHashCode(callSuper = false)
@@ -1601,6 +1608,11 @@ public class Invoice extends ApiResource implements HasId, MetadataStore<Invoice
       @SerializedName("request_three_d_secure")
       String requestThreeDSecure;
     }
+
+    @Getter
+    @Setter
+    @EqualsAndHashCode(callSuper = false)
+    public static class Konbini extends StripeObject {}
   }
 
   @Getter

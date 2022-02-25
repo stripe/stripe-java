@@ -1066,6 +1066,9 @@ public class Charge extends ApiResource implements MetadataStore<Charge>, Balanc
     @SerializedName("klarna")
     Klarna klarna;
 
+    @SerializedName("konbini")
+    Konbini konbini;
+
     @SerializedName("multibanco")
     Multibanco multibanco;
 
@@ -2220,6 +2223,31 @@ public class Charge extends ApiResource implements MetadataStore<Charge>, Balanc
        */
       @SerializedName("preferred_locale")
       String preferredLocale;
+    }
+
+    @Getter
+    @Setter
+    @EqualsAndHashCode(callSuper = false)
+    public static class Konbini extends StripeObject {
+      /**
+       * If the payment succeeded, this contains the details of the convenience store where the
+       * payment was completed.
+       */
+      @SerializedName("store")
+      KonbiniStore store;
+    }
+
+    @Getter
+    @Setter
+    @EqualsAndHashCode(callSuper = false)
+    public static class KonbiniStore extends StripeObject {
+      /**
+       * The name of the convenience store chain where the payment was completed.
+       *
+       * <p>One of {@code familymart}, {@code lawson}, {@code ministop}, or {@code seicomart}.
+       */
+      @SerializedName("chain")
+      String chain;
     }
 
     @Getter

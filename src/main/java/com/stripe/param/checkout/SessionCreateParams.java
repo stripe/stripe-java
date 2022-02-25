@@ -3230,6 +3230,10 @@ public class SessionCreateParams extends ApiRequestParams {
     @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
     Map<String, Object> extraParams;
 
+    /** contains details about the Konbini payment method options. */
+    @SerializedName("konbini")
+    Konbini konbini;
+
     /** contains details about the OXXO payment method options. */
     @SerializedName("oxxo")
     Oxxo oxxo;
@@ -3242,11 +3246,13 @@ public class SessionCreateParams extends ApiRequestParams {
         AcssDebit acssDebit,
         Boleto boleto,
         Map<String, Object> extraParams,
+        Konbini konbini,
         Oxxo oxxo,
         WechatPay wechatPay) {
       this.acssDebit = acssDebit;
       this.boleto = boleto;
       this.extraParams = extraParams;
+      this.konbini = konbini;
       this.oxxo = oxxo;
       this.wechatPay = wechatPay;
     }
@@ -3262,6 +3268,8 @@ public class SessionCreateParams extends ApiRequestParams {
 
       private Map<String, Object> extraParams;
 
+      private Konbini konbini;
+
       private Oxxo oxxo;
 
       private WechatPay wechatPay;
@@ -3269,7 +3277,7 @@ public class SessionCreateParams extends ApiRequestParams {
       /** Finalize and obtain parameter instance from this builder. */
       public PaymentMethodOptions build() {
         return new PaymentMethodOptions(
-            this.acssDebit, this.boleto, this.extraParams, this.oxxo, this.wechatPay);
+            this.acssDebit, this.boleto, this.extraParams, this.konbini, this.oxxo, this.wechatPay);
       }
 
       /** contains details about the ACSS Debit payment method options. */
@@ -3308,6 +3316,12 @@ public class SessionCreateParams extends ApiRequestParams {
           this.extraParams = new HashMap<>();
         }
         this.extraParams.putAll(map);
+        return this;
+      }
+
+      /** contains details about the Konbini payment method options. */
+      public Builder setKonbini(Konbini konbini) {
+        this.konbini = konbini;
         return this;
       }
 
@@ -3769,6 +3783,97 @@ public class SessionCreateParams extends ApiRequestParams {
          * Add all map key/value pairs to `extraParams` map. A map is initialized for the first
          * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
          * map. See {@link SessionCreateParams.PaymentMethodOptions.Boleto#extraParams} for the
+         * field documentation.
+         */
+        public Builder putAllExtraParam(Map<String, Object> map) {
+          if (this.extraParams == null) {
+            this.extraParams = new HashMap<>();
+          }
+          this.extraParams.putAll(map);
+          return this;
+        }
+      }
+    }
+
+    @Getter
+    public static class Konbini {
+      /**
+       * The number of calendar days (between 1 and 60) after which Konbini payment instructions
+       * will expire. For example, if a PaymentIntent is confirmed with Konbini and {@code
+       * expires_after_days} set to 2 on Monday JST, the instructions will expire on Wednesday
+       * 23:59:59 JST. Defaults to 3 days.
+       */
+      @SerializedName("expires_after_days")
+      Object expiresAfterDays;
+
+      /**
+       * Map of extra parameters for custom features not available in this client library. The
+       * content in this map is not serialized under this field's {@code @SerializedName} value.
+       * Instead, each key/value pair is serialized as if the key is a root-level field (serialized)
+       * name in this param object. Effectively, this map is flattened to its parent instance.
+       */
+      @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
+      Map<String, Object> extraParams;
+
+      private Konbini(Object expiresAfterDays, Map<String, Object> extraParams) {
+        this.expiresAfterDays = expiresAfterDays;
+        this.extraParams = extraParams;
+      }
+
+      public static Builder builder() {
+        return new Builder();
+      }
+
+      public static class Builder {
+        private Object expiresAfterDays;
+
+        private Map<String, Object> extraParams;
+
+        /** Finalize and obtain parameter instance from this builder. */
+        public Konbini build() {
+          return new Konbini(this.expiresAfterDays, this.extraParams);
+        }
+
+        /**
+         * The number of calendar days (between 1 and 60) after which Konbini payment instructions
+         * will expire. For example, if a PaymentIntent is confirmed with Konbini and {@code
+         * expires_after_days} set to 2 on Monday JST, the instructions will expire on Wednesday
+         * 23:59:59 JST. Defaults to 3 days.
+         */
+        public Builder setExpiresAfterDays(Long expiresAfterDays) {
+          this.expiresAfterDays = expiresAfterDays;
+          return this;
+        }
+
+        /**
+         * The number of calendar days (between 1 and 60) after which Konbini payment instructions
+         * will expire. For example, if a PaymentIntent is confirmed with Konbini and {@code
+         * expires_after_days} set to 2 on Monday JST, the instructions will expire on Wednesday
+         * 23:59:59 JST. Defaults to 3 days.
+         */
+        public Builder setExpiresAfterDays(EmptyParam expiresAfterDays) {
+          this.expiresAfterDays = expiresAfterDays;
+          return this;
+        }
+
+        /**
+         * Add a key/value pair to `extraParams` map. A map is initialized for the first
+         * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
+         * map. See {@link SessionCreateParams.PaymentMethodOptions.Konbini#extraParams} for the
+         * field documentation.
+         */
+        public Builder putExtraParam(String key, Object value) {
+          if (this.extraParams == null) {
+            this.extraParams = new HashMap<>();
+          }
+          this.extraParams.put(key, value);
+          return this;
+        }
+
+        /**
+         * Add all map key/value pairs to `extraParams` map. A map is initialized for the first
+         * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
+         * map. See {@link SessionCreateParams.PaymentMethodOptions.Konbini#extraParams} for the
          * field documentation.
          */
         public Builder putAllExtraParam(Map<String, Object> map) {
@@ -6535,6 +6640,9 @@ public class SessionCreateParams extends ApiRequestParams {
 
     @SerializedName("klarna")
     KLARNA("klarna"),
+
+    @SerializedName("konbini")
+    KONBINI("konbini"),
 
     @SerializedName("oxxo")
     OXXO("oxxo"),

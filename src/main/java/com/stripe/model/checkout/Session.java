@@ -740,6 +740,9 @@ public class Session extends ApiResource implements HasId {
     @SerializedName("boleto")
     Boleto boleto;
 
+    @SerializedName("konbini")
+    Konbini konbini;
+
     @SerializedName("oxxo")
     Oxxo oxxo;
 
@@ -837,6 +840,20 @@ public class Session extends ApiResource implements HasId {
        */
       @SerializedName("setup_future_usage")
       String setupFutureUsage;
+    }
+
+    @Getter
+    @Setter
+    @EqualsAndHashCode(callSuper = false)
+    public static class Konbini extends StripeObject {
+      /**
+       * The number of calendar days (between 1 and 60) after which Konbini payment instructions
+       * will expire. For example, if a PaymentIntent is confirmed with Konbini and {@code
+       * expires_after_days} set to 2 on Monday JST, the instructions will expire on Wednesday
+       * 23:59:59 JST.
+       */
+      @SerializedName("expires_after_days")
+      Long expiresAfterDays;
     }
 
     @Getter

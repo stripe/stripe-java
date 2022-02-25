@@ -812,6 +812,13 @@ public class PaymentIntentUpdateParams extends ApiRequestParams {
     Klarna klarna;
 
     /**
+     * If this is a {@code konbini} PaymentMethod, this hash contains details about the Konbini
+     * payment method.
+     */
+    @SerializedName("konbini")
+    Konbini konbini;
+
+    /**
      * Set of <a href="https://stripe.com/docs/api/metadata">key-value pairs</a> that you can attach
      * to an object. This can be useful for storing additional information about the object in a
      * structured format. Individual keys can be unset by posting an empty value to them. All keys
@@ -880,6 +887,7 @@ public class PaymentIntentUpdateParams extends ApiRequestParams {
         Ideal ideal,
         InteracPresent interacPresent,
         Klarna klarna,
+        Konbini konbini,
         Map<String, String> metadata,
         Oxxo oxxo,
         P24 p24,
@@ -903,6 +911,7 @@ public class PaymentIntentUpdateParams extends ApiRequestParams {
       this.ideal = ideal;
       this.interacPresent = interacPresent;
       this.klarna = klarna;
+      this.konbini = konbini;
       this.metadata = metadata;
       this.oxxo = oxxo;
       this.p24 = p24;
@@ -949,6 +958,8 @@ public class PaymentIntentUpdateParams extends ApiRequestParams {
 
       private Klarna klarna;
 
+      private Konbini konbini;
+
       private Map<String, String> metadata;
 
       private Oxxo oxxo;
@@ -982,6 +993,7 @@ public class PaymentIntentUpdateParams extends ApiRequestParams {
             this.ideal,
             this.interacPresent,
             this.klarna,
+            this.konbini,
             this.metadata,
             this.oxxo,
             this.p24,
@@ -1150,6 +1162,15 @@ public class PaymentIntentUpdateParams extends ApiRequestParams {
        */
       public Builder setKlarna(Klarna klarna) {
         this.klarna = klarna;
+        return this;
+      }
+
+      /**
+       * If this is a {@code konbini} PaymentMethod, this hash contains details about the Konbini
+       * payment method.
+       */
+      public Builder setKonbini(Konbini konbini) {
+        this.konbini = konbini;
         return this;
       }
 
@@ -2923,6 +2944,63 @@ public class PaymentIntentUpdateParams extends ApiRequestParams {
     }
 
     @Getter
+    public static class Konbini {
+      /**
+       * Map of extra parameters for custom features not available in this client library. The
+       * content in this map is not serialized under this field's {@code @SerializedName} value.
+       * Instead, each key/value pair is serialized as if the key is a root-level field (serialized)
+       * name in this param object. Effectively, this map is flattened to its parent instance.
+       */
+      @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
+      Map<String, Object> extraParams;
+
+      private Konbini(Map<String, Object> extraParams) {
+        this.extraParams = extraParams;
+      }
+
+      public static Builder builder() {
+        return new Builder();
+      }
+
+      public static class Builder {
+        private Map<String, Object> extraParams;
+
+        /** Finalize and obtain parameter instance from this builder. */
+        public Konbini build() {
+          return new Konbini(this.extraParams);
+        }
+
+        /**
+         * Add a key/value pair to `extraParams` map. A map is initialized for the first
+         * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
+         * map. See {@link PaymentIntentUpdateParams.PaymentMethodData.Konbini#extraParams} for the
+         * field documentation.
+         */
+        public Builder putExtraParam(String key, Object value) {
+          if (this.extraParams == null) {
+            this.extraParams = new HashMap<>();
+          }
+          this.extraParams.put(key, value);
+          return this;
+        }
+
+        /**
+         * Add all map key/value pairs to `extraParams` map. A map is initialized for the first
+         * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
+         * map. See {@link PaymentIntentUpdateParams.PaymentMethodData.Konbini#extraParams} for the
+         * field documentation.
+         */
+        public Builder putAllExtraParam(Map<String, Object> map) {
+          if (this.extraParams == null) {
+            this.extraParams = new HashMap<>();
+          }
+          this.extraParams.putAll(map);
+          return this;
+        }
+      }
+    }
+
+    @Getter
     public static class Oxxo {
       /**
        * Map of extra parameters for custom features not available in this client library. The
@@ -3403,6 +3481,9 @@ public class PaymentIntentUpdateParams extends ApiRequestParams {
       @SerializedName("klarna")
       KLARNA("klarna"),
 
+      @SerializedName("konbini")
+      KONBINI("konbini"),
+
       @SerializedName("oxxo")
       OXXO("oxxo"),
 
@@ -3548,6 +3629,13 @@ public class PaymentIntentUpdateParams extends ApiRequestParams {
     Object klarna;
 
     /**
+     * If this is a {@code konbini} PaymentMethod, this sub-hash contains details about the Konbini
+     * payment method options.
+     */
+    @SerializedName("konbini")
+    Object konbini;
+
+    /**
      * If this is a {@code oxxo} PaymentMethod, this sub-hash contains details about the OXXO
      * payment method options.
      */
@@ -3600,6 +3688,7 @@ public class PaymentIntentUpdateParams extends ApiRequestParams {
         Object ideal,
         Object interacPresent,
         Object klarna,
+        Object konbini,
         Object oxxo,
         Object p24,
         Object sepaDebit,
@@ -3622,6 +3711,7 @@ public class PaymentIntentUpdateParams extends ApiRequestParams {
       this.ideal = ideal;
       this.interacPresent = interacPresent;
       this.klarna = klarna;
+      this.konbini = konbini;
       this.oxxo = oxxo;
       this.p24 = p24;
       this.sepaDebit = sepaDebit;
@@ -3668,6 +3758,8 @@ public class PaymentIntentUpdateParams extends ApiRequestParams {
 
       private Object klarna;
 
+      private Object konbini;
+
       private Object oxxo;
 
       private Object p24;
@@ -3698,6 +3790,7 @@ public class PaymentIntentUpdateParams extends ApiRequestParams {
             this.ideal,
             this.interacPresent,
             this.klarna,
+            this.konbini,
             this.oxxo,
             this.p24,
             this.sepaDebit,
@@ -4011,6 +4104,24 @@ public class PaymentIntentUpdateParams extends ApiRequestParams {
        */
       public Builder setKlarna(EmptyParam klarna) {
         this.klarna = klarna;
+        return this;
+      }
+
+      /**
+       * If this is a {@code konbini} PaymentMethod, this sub-hash contains details about the
+       * Konbini payment method options.
+       */
+      public Builder setKonbini(Konbini konbini) {
+        this.konbini = konbini;
+        return this;
+      }
+
+      /**
+       * If this is a {@code konbini} PaymentMethod, this sub-hash contains details about the
+       * Konbini payment method options.
+       */
+      public Builder setKonbini(EmptyParam konbini) {
+        this.konbini = konbini;
         return this;
       }
 
@@ -7004,6 +7115,258 @@ public class PaymentIntentUpdateParams extends ApiRequestParams {
 
         PreferredLocale(String value) {
           this.value = value;
+        }
+      }
+
+      public enum SetupFutureUsage implements ApiRequestParams.EnumParam {
+        @SerializedName("none")
+        NONE("none");
+
+        @Getter(onMethod_ = {@Override})
+        private final String value;
+
+        SetupFutureUsage(String value) {
+          this.value = value;
+        }
+      }
+    }
+
+    @Getter
+    public static class Konbini {
+      /**
+       * An optional 10 to 11 digit numeric-only string determining the confirmation code at
+       * applicable convenience stores. Must not consist of only zeroes and could be rejected in
+       * case of insufficient uniqueness. We recommend to use the customer's phone number.
+       */
+      @SerializedName("confirmation_number")
+      Object confirmationNumber;
+
+      /**
+       * The number of calendar days (between 1 and 60) after which Konbini payment instructions
+       * will expire. For example, if a PaymentIntent is confirmed with Konbini and {@code
+       * expires_after_days} set to 2 on Monday JST, the instructions will expire on Wednesday
+       * 23:59:59 JST. Defaults to 3 days.
+       */
+      @SerializedName("expires_after_days")
+      Object expiresAfterDays;
+
+      /**
+       * The timestamp at which the Konbini payment instructions will expire. Only one of {@code
+       * expires_after_days} or {@code expires_at} may be set.
+       */
+      @SerializedName("expires_at")
+      Object expiresAt;
+
+      /**
+       * Map of extra parameters for custom features not available in this client library. The
+       * content in this map is not serialized under this field's {@code @SerializedName} value.
+       * Instead, each key/value pair is serialized as if the key is a root-level field (serialized)
+       * name in this param object. Effectively, this map is flattened to its parent instance.
+       */
+      @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
+      Map<String, Object> extraParams;
+
+      /**
+       * A product descriptor of up to 22 characters, which will appear to customers at the
+       * convenience store.
+       */
+      @SerializedName("product_description")
+      Object productDescription;
+
+      /**
+       * Indicates that you intend to make future payments with this PaymentIntent's payment method.
+       *
+       * <p>Providing this parameter will <a
+       * href="https://stripe.com/docs/payments/save-during-payment">attach the payment method</a>
+       * to the PaymentIntent's Customer, if present, after the PaymentIntent is confirmed and any
+       * required actions from the user are complete. If no Customer was provided, the payment
+       * method can still be <a
+       * href="https://stripe.com/docs/api/payment_methods/attach">attached</a> to a Customer after
+       * the transaction completes.
+       *
+       * <p>When processing card payments, Stripe also uses {@code setup_future_usage} to
+       * dynamically optimize your payment flow and comply with regional legislation and network
+       * rules, such as <a href="https://stripe.com/docs/strong-customer-authentication">SCA</a>.
+       *
+       * <p>If {@code setup_future_usage} is already set and you are performing a request using a
+       * publishable key, you may only update the value from {@code on_session} to {@code
+       * off_session}.
+       */
+      @SerializedName("setup_future_usage")
+      SetupFutureUsage setupFutureUsage;
+
+      private Konbini(
+          Object confirmationNumber,
+          Object expiresAfterDays,
+          Object expiresAt,
+          Map<String, Object> extraParams,
+          Object productDescription,
+          SetupFutureUsage setupFutureUsage) {
+        this.confirmationNumber = confirmationNumber;
+        this.expiresAfterDays = expiresAfterDays;
+        this.expiresAt = expiresAt;
+        this.extraParams = extraParams;
+        this.productDescription = productDescription;
+        this.setupFutureUsage = setupFutureUsage;
+      }
+
+      public static Builder builder() {
+        return new Builder();
+      }
+
+      public static class Builder {
+        private Object confirmationNumber;
+
+        private Object expiresAfterDays;
+
+        private Object expiresAt;
+
+        private Map<String, Object> extraParams;
+
+        private Object productDescription;
+
+        private SetupFutureUsage setupFutureUsage;
+
+        /** Finalize and obtain parameter instance from this builder. */
+        public Konbini build() {
+          return new Konbini(
+              this.confirmationNumber,
+              this.expiresAfterDays,
+              this.expiresAt,
+              this.extraParams,
+              this.productDescription,
+              this.setupFutureUsage);
+        }
+
+        /**
+         * An optional 10 to 11 digit numeric-only string determining the confirmation code at
+         * applicable convenience stores. Must not consist of only zeroes and could be rejected in
+         * case of insufficient uniqueness. We recommend to use the customer's phone number.
+         */
+        public Builder setConfirmationNumber(String confirmationNumber) {
+          this.confirmationNumber = confirmationNumber;
+          return this;
+        }
+
+        /**
+         * An optional 10 to 11 digit numeric-only string determining the confirmation code at
+         * applicable convenience stores. Must not consist of only zeroes and could be rejected in
+         * case of insufficient uniqueness. We recommend to use the customer's phone number.
+         */
+        public Builder setConfirmationNumber(EmptyParam confirmationNumber) {
+          this.confirmationNumber = confirmationNumber;
+          return this;
+        }
+
+        /**
+         * The number of calendar days (between 1 and 60) after which Konbini payment instructions
+         * will expire. For example, if a PaymentIntent is confirmed with Konbini and {@code
+         * expires_after_days} set to 2 on Monday JST, the instructions will expire on Wednesday
+         * 23:59:59 JST. Defaults to 3 days.
+         */
+        public Builder setExpiresAfterDays(Long expiresAfterDays) {
+          this.expiresAfterDays = expiresAfterDays;
+          return this;
+        }
+
+        /**
+         * The number of calendar days (between 1 and 60) after which Konbini payment instructions
+         * will expire. For example, if a PaymentIntent is confirmed with Konbini and {@code
+         * expires_after_days} set to 2 on Monday JST, the instructions will expire on Wednesday
+         * 23:59:59 JST. Defaults to 3 days.
+         */
+        public Builder setExpiresAfterDays(EmptyParam expiresAfterDays) {
+          this.expiresAfterDays = expiresAfterDays;
+          return this;
+        }
+
+        /**
+         * The timestamp at which the Konbini payment instructions will expire. Only one of {@code
+         * expires_after_days} or {@code expires_at} may be set.
+         */
+        public Builder setExpiresAt(Long expiresAt) {
+          this.expiresAt = expiresAt;
+          return this;
+        }
+
+        /**
+         * The timestamp at which the Konbini payment instructions will expire. Only one of {@code
+         * expires_after_days} or {@code expires_at} may be set.
+         */
+        public Builder setExpiresAt(EmptyParam expiresAt) {
+          this.expiresAt = expiresAt;
+          return this;
+        }
+
+        /**
+         * Add a key/value pair to `extraParams` map. A map is initialized for the first
+         * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
+         * map. See {@link PaymentIntentUpdateParams.PaymentMethodOptions.Konbini#extraParams} for
+         * the field documentation.
+         */
+        public Builder putExtraParam(String key, Object value) {
+          if (this.extraParams == null) {
+            this.extraParams = new HashMap<>();
+          }
+          this.extraParams.put(key, value);
+          return this;
+        }
+
+        /**
+         * Add all map key/value pairs to `extraParams` map. A map is initialized for the first
+         * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
+         * map. See {@link PaymentIntentUpdateParams.PaymentMethodOptions.Konbini#extraParams} for
+         * the field documentation.
+         */
+        public Builder putAllExtraParam(Map<String, Object> map) {
+          if (this.extraParams == null) {
+            this.extraParams = new HashMap<>();
+          }
+          this.extraParams.putAll(map);
+          return this;
+        }
+
+        /**
+         * A product descriptor of up to 22 characters, which will appear to customers at the
+         * convenience store.
+         */
+        public Builder setProductDescription(String productDescription) {
+          this.productDescription = productDescription;
+          return this;
+        }
+
+        /**
+         * A product descriptor of up to 22 characters, which will appear to customers at the
+         * convenience store.
+         */
+        public Builder setProductDescription(EmptyParam productDescription) {
+          this.productDescription = productDescription;
+          return this;
+        }
+
+        /**
+         * Indicates that you intend to make future payments with this PaymentIntent's payment
+         * method.
+         *
+         * <p>Providing this parameter will <a
+         * href="https://stripe.com/docs/payments/save-during-payment">attach the payment method</a>
+         * to the PaymentIntent's Customer, if present, after the PaymentIntent is confirmed and any
+         * required actions from the user are complete. If no Customer was provided, the payment
+         * method can still be <a
+         * href="https://stripe.com/docs/api/payment_methods/attach">attached</a> to a Customer
+         * after the transaction completes.
+         *
+         * <p>When processing card payments, Stripe also uses {@code setup_future_usage} to
+         * dynamically optimize your payment flow and comply with regional legislation and network
+         * rules, such as <a href="https://stripe.com/docs/strong-customer-authentication">SCA</a>.
+         *
+         * <p>If {@code setup_future_usage} is already set and you are performing a request using a
+         * publishable key, you may only update the value from {@code on_session} to {@code
+         * off_session}.
+         */
+        public Builder setSetupFutureUsage(SetupFutureUsage setupFutureUsage) {
+          this.setupFutureUsage = setupFutureUsage;
+          return this;
         }
       }
 

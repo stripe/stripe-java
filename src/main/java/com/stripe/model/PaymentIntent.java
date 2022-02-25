@@ -1131,6 +1131,9 @@ public class PaymentIntent extends ApiResource implements HasId, MetadataStore<P
     @SerializedName("boleto_display_details")
     NextActionDisplayBoletoDetails boletoDisplayDetails;
 
+    @SerializedName("konbini_display_details")
+    NextActionKonbiniDisplayDetails konbiniDisplayDetails;
+
     @SerializedName("oxxo_display_details")
     NextActionOxxoDisplayDetails oxxoDisplayDetails;
 
@@ -1311,6 +1314,59 @@ public class PaymentIntent extends ApiResource implements HasId, MetadataStore<P
   @Getter
   @Setter
   @EqualsAndHashCode(callSuper = false)
+  public static class NextActionKonbiniDisplayDetails extends StripeObject {
+    /** The timestamp at which the pending Konbini payment expires. */
+    @SerializedName("expires_at")
+    Long expiresAt;
+
+    /**
+     * The URL for the Konbini payment instructions page, which allows customers to view and print a
+     * Konbini voucher.
+     */
+    @SerializedName("hosted_voucher_url")
+    String hostedVoucherUrl;
+
+    @SerializedName("stores")
+    NextActionKonbiniDisplayDetailsStores stores;
+  }
+
+  @Getter
+  @Setter
+  @EqualsAndHashCode(callSuper = false)
+  public static class NextActionKonbiniDisplayDetailsStores extends StripeObject {
+    /** FamilyMart instruction details. */
+    @SerializedName("familymart")
+    NextActionKonbiniDisplayDetailsStoresStore familymart;
+
+    /** Lawson instruction details. */
+    @SerializedName("lawson")
+    NextActionKonbiniDisplayDetailsStoresStore lawson;
+
+    /** Ministop instruction details. */
+    @SerializedName("ministop")
+    NextActionKonbiniDisplayDetailsStoresStore ministop;
+
+    /** Seicomart instruction details. */
+    @SerializedName("seicomart")
+    NextActionKonbiniDisplayDetailsStoresStore seicomart;
+  }
+
+  @Getter
+  @Setter
+  @EqualsAndHashCode(callSuper = false)
+  public static class NextActionKonbiniDisplayDetailsStoresStore extends StripeObject {
+    /** The confirmation number. */
+    @SerializedName("confirmation_number")
+    String confirmationNumber;
+
+    /** The payment code. */
+    @SerializedName("payment_code")
+    String paymentCode;
+  }
+
+  @Getter
+  @Setter
+  @EqualsAndHashCode(callSuper = false)
   public static class NextActionOxxoDisplayDetails extends StripeObject {
     /** The timestamp after which the OXXO voucher expires. */
     @SerializedName("expires_after")
@@ -1395,6 +1451,9 @@ public class PaymentIntent extends ApiResource implements HasId, MetadataStore<P
 
     @SerializedName("klarna")
     Klarna klarna;
+
+    @SerializedName("konbini")
+    Konbini konbini;
 
     @SerializedName("oxxo")
     Oxxo oxxo;
@@ -1893,6 +1952,61 @@ public class PaymentIntent extends ApiResource implements HasId, MetadataStore<P
       /** Preferred locale of the Klarna checkout page that the customer is redirected to. */
       @SerializedName("preferred_locale")
       String preferredLocale;
+
+      /**
+       * Indicates that you intend to make future payments with this PaymentIntent's payment method.
+       *
+       * <p>Providing this parameter will <a
+       * href="https://stripe.com/docs/payments/save-during-payment">attach the payment method</a>
+       * to the PaymentIntent's Customer, if present, after the PaymentIntent is confirmed and any
+       * required actions from the user are complete. If no Customer was provided, the payment
+       * method can still be <a
+       * href="https://stripe.com/docs/api/payment_methods/attach">attached</a> to a Customer after
+       * the transaction completes.
+       *
+       * <p>When processing card payments, Stripe also uses {@code setup_future_usage} to
+       * dynamically optimize your payment flow and comply with regional legislation and network
+       * rules, such as <a href="https://stripe.com/docs/strong-customer-authentication">SCA</a>.
+       *
+       * <p>Equal to {@code none}.
+       */
+      @SerializedName("setup_future_usage")
+      String setupFutureUsage;
+    }
+
+    @Getter
+    @Setter
+    @EqualsAndHashCode(callSuper = false)
+    public static class Konbini extends StripeObject {
+      /**
+       * An optional 10 to 11 digit numeric-only string determining the confirmation code at
+       * applicable convenience stores.
+       */
+      @SerializedName("confirmation_number")
+      String confirmationNumber;
+
+      /**
+       * The number of calendar days (between 1 and 60) after which Konbini payment instructions
+       * will expire. For example, if a PaymentIntent is confirmed with Konbini and {@code
+       * expires_after_days} set to 2 on Monday JST, the instructions will expire on Wednesday
+       * 23:59:59 JST.
+       */
+      @SerializedName("expires_after_days")
+      Long expiresAfterDays;
+
+      /**
+       * The timestamp at which the Konbini payment instructions will expire. Only one of {@code
+       * expires_after_days} or {@code expires_at} may be set.
+       */
+      @SerializedName("expires_at")
+      Long expiresAt;
+
+      /**
+       * A product descriptor of up to 22 characters, which will appear to customers at the
+       * convenience store.
+       */
+      @SerializedName("product_description")
+      String productDescription;
 
       /**
        * Indicates that you intend to make future payments with this PaymentIntent's payment method.
