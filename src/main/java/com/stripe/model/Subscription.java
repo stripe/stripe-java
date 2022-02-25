@@ -829,7 +829,7 @@ public class Subscription extends ApiResource implements HasId, MetadataStore<Su
      * created by the subscription.
      */
     @SerializedName("konbini")
-    Invoice.PaymentMethodOptions.Konbini konbini;
+    Konbini konbini;
 
     @Getter
     @Setter
@@ -919,6 +919,11 @@ public class Subscription extends ApiResource implements HasId, MetadataStore<Su
         String description;
       }
     }
+
+    @Getter
+    @Setter
+    @EqualsAndHashCode(callSuper = false)
+    public static class Konbini extends StripeObject {}
   }
 
   @Getter

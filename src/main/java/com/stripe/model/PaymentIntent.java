@@ -1327,41 +1327,80 @@ public class PaymentIntent extends ApiResource implements HasId, MetadataStore<P
     String hostedVoucherUrl;
 
     @SerializedName("stores")
-    NextActionKonbiniDisplayDetailsStores stores;
-  }
+    Stores stores;
 
-  @Getter
-  @Setter
-  @EqualsAndHashCode(callSuper = false)
-  public static class NextActionKonbiniDisplayDetailsStores extends StripeObject {
-    /** FamilyMart instruction details. */
-    @SerializedName("familymart")
-    NextActionKonbiniDisplayDetailsStoresStore familymart;
+    @Getter
+    @Setter
+    @EqualsAndHashCode(callSuper = false)
+    public static class Stores extends StripeObject {
+      /** FamilyMart instruction details. */
+      @SerializedName("familymart")
+      Familymart familymart;
 
-    /** Lawson instruction details. */
-    @SerializedName("lawson")
-    NextActionKonbiniDisplayDetailsStoresStore lawson;
+      /** Lawson instruction details. */
+      @SerializedName("lawson")
+      Lawson lawson;
 
-    /** Ministop instruction details. */
-    @SerializedName("ministop")
-    NextActionKonbiniDisplayDetailsStoresStore ministop;
+      /** Ministop instruction details. */
+      @SerializedName("ministop")
+      Ministop ministop;
 
-    /** Seicomart instruction details. */
-    @SerializedName("seicomart")
-    NextActionKonbiniDisplayDetailsStoresStore seicomart;
-  }
+      /** Seicomart instruction details. */
+      @SerializedName("seicomart")
+      Seicomart seicomart;
 
-  @Getter
-  @Setter
-  @EqualsAndHashCode(callSuper = false)
-  public static class NextActionKonbiniDisplayDetailsStoresStore extends StripeObject {
-    /** The confirmation number. */
-    @SerializedName("confirmation_number")
-    String confirmationNumber;
+      @Getter
+      @Setter
+      @EqualsAndHashCode(callSuper = false)
+      public static class Familymart extends StripeObject {
+        /** The confirmation number. */
+        @SerializedName("confirmation_number")
+        String confirmationNumber;
 
-    /** The payment code. */
-    @SerializedName("payment_code")
-    String paymentCode;
+        /** The payment code. */
+        @SerializedName("payment_code")
+        String paymentCode;
+      }
+
+      @Getter
+      @Setter
+      @EqualsAndHashCode(callSuper = false)
+      public static class Lawson extends StripeObject {
+        /** The confirmation number. */
+        @SerializedName("confirmation_number")
+        String confirmationNumber;
+
+        /** The payment code. */
+        @SerializedName("payment_code")
+        String paymentCode;
+      }
+
+      @Getter
+      @Setter
+      @EqualsAndHashCode(callSuper = false)
+      public static class Ministop extends StripeObject {
+        /** The confirmation number. */
+        @SerializedName("confirmation_number")
+        String confirmationNumber;
+
+        /** The payment code. */
+        @SerializedName("payment_code")
+        String paymentCode;
+      }
+
+      @Getter
+      @Setter
+      @EqualsAndHashCode(callSuper = false)
+      public static class Seicomart extends StripeObject {
+        /** The confirmation number. */
+        @SerializedName("confirmation_number")
+        String confirmationNumber;
+
+        /** The payment code. */
+        @SerializedName("payment_code")
+        String paymentCode;
+      }
+    }
   }
 
   @Getter
