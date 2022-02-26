@@ -232,6 +232,9 @@ public class CustomerListPaymentMethodsParams extends ApiRequestParams {
     @SerializedName("klarna")
     KLARNA("klarna"),
 
+    @SerializedName("konbini")
+    KONBINI("konbini"),
+
     @SerializedName("oxxo")
     OXXO("oxxo"),
 

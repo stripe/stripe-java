@@ -776,6 +776,15 @@ public class Account extends ApiResource implements MetadataStore<Account>, Paym
     String klarnaPayments;
 
     /**
+     * The status of the konbini payments capability of the account, or whether the account can
+     * directly process konbini charges.
+     *
+     * <p>One of {@code active}, {@code inactive}, or {@code pending}.
+     */
+    @SerializedName("konbini_payments")
+    String konbiniPayments;
+
+    /**
      * The status of the legacy payments capability of the account.
      *
      * <p>One of {@code active}, {@code inactive}, or {@code pending}.

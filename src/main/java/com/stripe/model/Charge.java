@@ -1066,6 +1066,9 @@ public class Charge extends ApiResource implements MetadataStore<Charge>, Balanc
     @SerializedName("klarna")
     Klarna klarna;
 
+    @SerializedName("konbini")
+    Konbini konbini;
+
     @SerializedName("multibanco")
     Multibanco multibanco;
 
@@ -2225,6 +2228,18 @@ public class Charge extends ApiResource implements MetadataStore<Charge>, Balanc
     @Getter
     @Setter
     @EqualsAndHashCode(callSuper = false)
+    public static class Konbini extends StripeObject {
+      /**
+       * If the payment succeeded, this contains the details of the convenience store where the
+       * payment was completed.
+       */
+      @SerializedName("store")
+      Store store;
+    }
+
+    @Getter
+    @Setter
+    @EqualsAndHashCode(callSuper = false)
     public static class Multibanco extends StripeObject {
       /** Entity number associated with this Multibanco payment. */
       @SerializedName("entity")
@@ -2415,6 +2430,19 @@ public class Charge extends ApiResource implements MetadataStore<Charge>, Balanc
         this.generatedSepaDebitMandate =
             new ExpandableField<Mandate>(expandableObject.getId(), expandableObject);
       }
+    }
+
+    @Getter
+    @Setter
+    @EqualsAndHashCode(callSuper = false)
+    public static class Store extends StripeObject {
+      /**
+       * The name of the convenience store chain where the payment was completed.
+       *
+       * <p>One of {@code familymart}, {@code lawson}, {@code ministop}, or {@code seicomart}.
+       */
+      @SerializedName("chain")
+      String chain;
     }
 
     @Getter

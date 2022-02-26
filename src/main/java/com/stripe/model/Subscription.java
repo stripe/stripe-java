@@ -824,6 +824,13 @@ public class Subscription extends ApiResource implements HasId, MetadataStore<Su
     @SerializedName("card")
     Card card;
 
+    /**
+     * This sub-hash contains details about the Konbini payment method options to pass to invoices
+     * created by the subscription.
+     */
+    @SerializedName("konbini")
+    Konbini konbini;
+
     @Getter
     @Setter
     @EqualsAndHashCode(callSuper = false)
@@ -912,6 +919,11 @@ public class Subscription extends ApiResource implements HasId, MetadataStore<Su
         String description;
       }
     }
+
+    @Getter
+    @Setter
+    @EqualsAndHashCode(callSuper = false)
+    public static class Konbini extends StripeObject {}
   }
 
   @Getter
