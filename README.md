@@ -17,7 +17,7 @@ The official [Stripe][stripe] Java client library.
 Add this dependency to your project's build file:
 
 ```groovy
-implementation "com.stripe:stripe-java:20.101.0"
+implementation "com.stripe:stripe-java:20.102.0"
 ```
 
 ### Maven users
@@ -28,7 +28,7 @@ Add this dependency to your project's POM:
 <dependency>
   <groupId>com.stripe</groupId>
   <artifactId>stripe-java</artifactId>
-  <version>20.101.0</version>
+  <version>20.102.0</version>
 </dependency>
 ```
 
