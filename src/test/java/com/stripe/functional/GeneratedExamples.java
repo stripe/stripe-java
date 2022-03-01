@@ -3041,7 +3041,7 @@ class GeneratedExamples extends BaseStripeTest {
     com.stripe.model.testhelpers.TestClock resource =
         com.stripe.model.testhelpers.TestClock.retrieve("clock_xyz");
 
-    com.stripe.model.testhelpers.TestClock testClock = resource.delete();
+    com.stripe.model.testhelpers.TestClock testClock = resource.getTestHelpers().delete();
     assertNotNull(testClock);
     verifyRequest(ApiResource.RequestMethod.DELETE, "/v1/test_helpers/test_clocks/clock_xyz");
   }
@@ -3053,7 +3053,7 @@ class GeneratedExamples extends BaseStripeTest {
     com.stripe.param.testhelpers.TestClockAdvanceParams params =
         com.stripe.param.testhelpers.TestClockAdvanceParams.builder().setFrozenTime(142L).build();
 
-    com.stripe.model.testhelpers.TestClock testClock = resource.advance(params);
+    com.stripe.model.testhelpers.TestClock testClock = resource.getTestHelpers().advance(params);
     assertNotNull(testClock);
     verifyRequest(
         ApiResource.RequestMethod.POST,
