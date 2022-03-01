@@ -121,6 +121,10 @@ public class CustomerCreateParams extends ApiRequestParams {
   @SerializedName("tax_id_data")
   List<TaxIdData> taxIdData;
 
+  /** ID of the test clock to attach to the customer. */
+  @SerializedName("test_clock")
+  String testClock;
+
   private CustomerCreateParams(
       Object address,
       Long balance,
@@ -142,7 +146,8 @@ public class CustomerCreateParams extends ApiRequestParams {
       String source,
       Tax tax,
       EnumParam taxExempt,
-      List<TaxIdData> taxIdData) {
+      List<TaxIdData> taxIdData,
+      String testClock) {
     this.address = address;
     this.balance = balance;
     this.coupon = coupon;
@@ -164,6 +169,7 @@ public class CustomerCreateParams extends ApiRequestParams {
     this.tax = tax;
     this.taxExempt = taxExempt;
     this.taxIdData = taxIdData;
+    this.testClock = testClock;
   }
 
   public static Builder builder() {
@@ -213,6 +219,8 @@ public class CustomerCreateParams extends ApiRequestParams {
 
     private List<TaxIdData> taxIdData;
 
+    private String testClock;
+
     /** Finalize and obtain parameter instance from this builder. */
     public CustomerCreateParams build() {
       return new CustomerCreateParams(
@@ -236,7 +244,8 @@ public class CustomerCreateParams extends ApiRequestParams {
           this.source,
           this.tax,
           this.taxExempt,
-          this.taxIdData);
+          this.taxIdData,
+          this.testClock);
     }
 
     /** The customer's address. */
@@ -518,6 +527,12 @@ public class CustomerCreateParams extends ApiRequestParams {
         this.taxIdData = new ArrayList<>();
       }
       this.taxIdData.addAll(elements);
+      return this;
+    }
+
+    /** ID of the test clock to attach to the customer. */
+    public Builder setTestClock(String testClock) {
+      this.testClock = testClock;
       return this;
     }
   }

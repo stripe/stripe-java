@@ -3002,4 +3002,62 @@ class GeneratedExamples extends BaseStripeTest {
         "/v1/setup_intents/seti_xxxxxxxxxxxxx/verify_microdeposits",
         params.toMap());
   }
+
+  @Test
+  public void testTestClockCreate() throws StripeException {
+    com.stripe.param.testhelpers.TestClockCreateParams params =
+        com.stripe.param.testhelpers.TestClockCreateParams.builder()
+            .setFrozenTime(123L)
+            .setName("cogsworth")
+            .build();
+
+    com.stripe.model.testhelpers.TestClock testClock =
+        com.stripe.model.testhelpers.TestClock.create(params);
+    assertNotNull(testClock);
+    verifyRequest(ApiResource.RequestMethod.POST, "/v1/test_helpers/test_clocks", params.toMap());
+  }
+
+  @Test
+  public void testTestClockRetrieve() throws StripeException {
+    com.stripe.model.testhelpers.TestClock testClock =
+        com.stripe.model.testhelpers.TestClock.retrieve("clock_xyz");
+    assertNotNull(testClock);
+    verifyRequest(ApiResource.RequestMethod.GET, "/v1/test_helpers/test_clocks/clock_xyz");
+  }
+
+  @Test
+  public void testTestClockList() throws StripeException {
+    com.stripe.param.testhelpers.TestClockListParams params =
+        com.stripe.param.testhelpers.TestClockListParams.builder().build();
+
+    com.stripe.model.testhelpers.TestClockCollection testClocks =
+        com.stripe.model.testhelpers.TestClock.list(params);
+    assertNotNull(testClocks);
+    verifyRequest(ApiResource.RequestMethod.GET, "/v1/test_helpers/test_clocks", params.toMap());
+  }
+
+  @Test
+  public void testTestClockDelete() throws StripeException {
+    com.stripe.model.testhelpers.TestClock resource =
+        com.stripe.model.testhelpers.TestClock.retrieve("clock_xyz");
+
+    com.stripe.model.testhelpers.TestClock testClock = resource.delete();
+    assertNotNull(testClock);
+    verifyRequest(ApiResource.RequestMethod.DELETE, "/v1/test_helpers/test_clocks/clock_xyz");
+  }
+
+  @Test
+  public void testTestClockAdvance() throws StripeException {
+    com.stripe.model.testhelpers.TestClock resource =
+        com.stripe.model.testhelpers.TestClock.retrieve("clock_xyz");
+    com.stripe.param.testhelpers.TestClockAdvanceParams params =
+        com.stripe.param.testhelpers.TestClockAdvanceParams.builder().setFrozenTime(142L).build();
+
+    com.stripe.model.testhelpers.TestClock testClock = resource.advance(params);
+    assertNotNull(testClock);
+    verifyRequest(
+        ApiResource.RequestMethod.POST,
+        "/v1/test_helpers/test_clocks/clock_xyz/advance",
+        params.toMap());
+  }
 }

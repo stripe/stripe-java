@@ -145,6 +145,18 @@ public class InvoiceCreateParams extends ApiRequestParams {
   PaymentSettings paymentSettings;
 
   /**
+   * How to handle pending invoice items on invoice creation. One of {@code include}, {@code
+   * include_and_require}, or {@code exclude}. {@code include} will include any pending invoice
+   * items, and will create an empty draft invoice if no pending invoice items exist. {@code
+   * include_and_require} will include any pending invoice items, if no pending invoice items exist
+   * then the request will fail. {@code exclude} will always create an empty invoice draft
+   * regardless if there are pending invoice items or not. Defaults to {@code include_and_require}
+   * if the parameter is omitted.
+   */
+  @SerializedName("pending_invoice_items_behavior")
+  PendingInvoiceItemsBehavior pendingInvoiceItemsBehavior;
+
+  /**
    * Extra information about a charge for the customer's credit card statement. It must contain at
    * least one letter. If not specified and this invoice is part of a subscription, the default
    * {@code statement_descriptor} will be set to the first subscription item's product's {@code
@@ -191,6 +203,7 @@ public class InvoiceCreateParams extends ApiRequestParams {
       Object metadata,
       String onBehalfOf,
       PaymentSettings paymentSettings,
+      PendingInvoiceItemsBehavior pendingInvoiceItemsBehavior,
       String statementDescriptor,
       String subscription,
       TransferData transferData) {
@@ -214,6 +227,7 @@ public class InvoiceCreateParams extends ApiRequestParams {
     this.metadata = metadata;
     this.onBehalfOf = onBehalfOf;
     this.paymentSettings = paymentSettings;
+    this.pendingInvoiceItemsBehavior = pendingInvoiceItemsBehavior;
     this.statementDescriptor = statementDescriptor;
     this.subscription = subscription;
     this.transferData = transferData;
@@ -264,6 +278,8 @@ public class InvoiceCreateParams extends ApiRequestParams {
 
     private PaymentSettings paymentSettings;
 
+    private PendingInvoiceItemsBehavior pendingInvoiceItemsBehavior;
+
     private String statementDescriptor;
 
     private String subscription;
@@ -293,6 +309,7 @@ public class InvoiceCreateParams extends ApiRequestParams {
           this.metadata,
           this.onBehalfOf,
           this.paymentSettings,
+          this.pendingInvoiceItemsBehavior,
           this.statementDescriptor,
           this.subscription,
           this.transferData);
@@ -670,6 +687,21 @@ public class InvoiceCreateParams extends ApiRequestParams {
      */
     public Builder setPaymentSettings(PaymentSettings paymentSettings) {
       this.paymentSettings = paymentSettings;
+      return this;
+    }
+
+    /**
+     * How to handle pending invoice items on invoice creation. One of {@code include}, {@code
+     * include_and_require}, or {@code exclude}. {@code include} will include any pending invoice
+     * items, and will create an empty draft invoice if no pending invoice items exist. {@code
+     * include_and_require} will include any pending invoice items, if no pending invoice items
+     * exist then the request will fail. {@code exclude} will always create an empty invoice draft
+     * regardless if there are pending invoice items or not. Defaults to {@code include_and_require}
+     * if the parameter is omitted.
+     */
+    public Builder setPendingInvoiceItemsBehavior(
+        PendingInvoiceItemsBehavior pendingInvoiceItemsBehavior) {
+      this.pendingInvoiceItemsBehavior = pendingInvoiceItemsBehavior;
       return this;
     }
 
@@ -1871,6 +1903,24 @@ public class InvoiceCreateParams extends ApiRequestParams {
     private final String value;
 
     CollectionMethod(String value) {
+      this.value = value;
+    }
+  }
+
+  public enum PendingInvoiceItemsBehavior implements ApiRequestParams.EnumParam {
+    @SerializedName("exclude")
+    EXCLUDE("exclude"),
+
+    @SerializedName("include")
+    INCLUDE("include"),
+
+    @SerializedName("include_and_require")
+    INCLUDE_AND_REQUIRE("include_and_require");
+
+    @Getter(onMethod_ = {@Override})
+    private final String value;
+
+    PendingInvoiceItemsBehavior(String value) {
       this.value = value;
     }
   }
