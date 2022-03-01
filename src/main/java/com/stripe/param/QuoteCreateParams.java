@@ -147,6 +147,10 @@ public class QuoteCreateParams extends ApiRequestParams {
   @SerializedName("subscription_data")
   SubscriptionData subscriptionData;
 
+  /** ID of the test clock to attach to the quote. */
+  @SerializedName("test_clock")
+  String testClock;
+
   /** The data with which to automatically create a Transfer for each of the invoices. */
   @SerializedName("transfer_data")
   Object transferData;
@@ -171,6 +175,7 @@ public class QuoteCreateParams extends ApiRequestParams {
       Map<String, String> metadata,
       Object onBehalfOf,
       SubscriptionData subscriptionData,
+      String testClock,
       Object transferData) {
     this.applicationFeeAmount = applicationFeeAmount;
     this.applicationFeePercent = applicationFeePercent;
@@ -191,6 +196,7 @@ public class QuoteCreateParams extends ApiRequestParams {
     this.metadata = metadata;
     this.onBehalfOf = onBehalfOf;
     this.subscriptionData = subscriptionData;
+    this.testClock = testClock;
     this.transferData = transferData;
   }
 
@@ -237,6 +243,8 @@ public class QuoteCreateParams extends ApiRequestParams {
 
     private SubscriptionData subscriptionData;
 
+    private String testClock;
+
     private Object transferData;
 
     /** Finalize and obtain parameter instance from this builder. */
@@ -261,6 +269,7 @@ public class QuoteCreateParams extends ApiRequestParams {
           this.metadata,
           this.onBehalfOf,
           this.subscriptionData,
+          this.testClock,
           this.transferData);
     }
 
@@ -598,6 +607,12 @@ public class QuoteCreateParams extends ApiRequestParams {
      */
     public Builder setSubscriptionData(SubscriptionData subscriptionData) {
       this.subscriptionData = subscriptionData;
+      return this;
+    }
+
+    /** ID of the test clock to attach to the quote. */
+    public Builder setTestClock(String testClock) {
+      this.testClock = testClock;
       return this;
     }
 

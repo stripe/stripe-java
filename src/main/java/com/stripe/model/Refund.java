@@ -83,6 +83,9 @@ public class Refund extends ApiResource implements MetadataStore<Refund>, Balanc
   @SerializedName("metadata")
   Map<String, String> metadata;
 
+  @SerializedName("next_action")
+  NextAction nextAction;
+
   /**
    * String representing the object's type. Objects of the same type share the same value.
    *
@@ -399,5 +402,43 @@ public class Refund extends ApiResource implements MetadataStore<Refund>, Balanc
             Stripe.getApiBase(),
             String.format("/v1/refunds/%s", ApiResource.urlEncodeId(this.getId())));
     return ApiResource.request(ApiResource.RequestMethod.POST, url, params, Refund.class, options);
+  }
+
+  @Getter
+  @Setter
+  @EqualsAndHashCode(callSuper = false)
+  public static class NextAction extends StripeObject {
+    /** Contains the refund details. */
+    @SerializedName("display_details")
+    NextActionDisplayDetails displayDetails;
+
+    /** Type of the next action to perform. */
+    @SerializedName("type")
+    String type;
+  }
+
+  @Getter
+  @Setter
+  @EqualsAndHashCode(callSuper = false)
+  public static class NextActionDisplayDetails extends StripeObject {
+    @SerializedName("email_sent")
+    EmailSent emailSent;
+
+    /** The expiry timestamp. */
+    @SerializedName("expires_at")
+    Long expiresAt;
+
+    @Getter
+    @Setter
+    @EqualsAndHashCode(callSuper = false)
+    public static class EmailSent extends StripeObject {
+      /** The timestamp when the email was sent. */
+      @SerializedName("email_sent_at")
+      Long emailSentAt;
+
+      /** The recipient's email address. */
+      @SerializedName("email_sent_to")
+      String emailSentTo;
+    }
   }
 }

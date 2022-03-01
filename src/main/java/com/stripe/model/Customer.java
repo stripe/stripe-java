@@ -4,6 +4,7 @@ package com.stripe.model;
 import com.google.gson.annotations.SerializedName;
 import com.stripe.Stripe;
 import com.stripe.exception.StripeException;
+import com.stripe.model.testhelpers.TestClock;
 import com.stripe.net.ApiResource;
 import com.stripe.net.RequestOptions;
 import com.stripe.param.CustomerBalanceTransactionsParams;
@@ -169,6 +170,12 @@ public class Customer extends ApiResource implements HasId, MetadataStore<Custom
   @SerializedName("tax_ids")
   TaxIdCollection taxIds;
 
+  /** ID of the test clock this customer belongs to. */
+  @SerializedName("test_clock")
+  @Getter(lombok.AccessLevel.NONE)
+  @Setter(lombok.AccessLevel.NONE)
+  ExpandableField<TestClock> testClock;
+
   /** Get ID of expandable {@code defaultSource} object. */
   public String getDefaultSource() {
     return (this.defaultSource != null) ? this.defaultSource.getId() : null;
@@ -186,6 +193,24 @@ public class Customer extends ApiResource implements HasId, MetadataStore<Custom
   public void setDefaultSourceObject(PaymentSource expandableObject) {
     this.defaultSource =
         new ExpandableField<PaymentSource>(expandableObject.getId(), expandableObject);
+  }
+
+  /** Get ID of expandable {@code testClock} object. */
+  public String getTestClock() {
+    return (this.testClock != null) ? this.testClock.getId() : null;
+  }
+
+  public void setTestClock(String id) {
+    this.testClock = ApiResource.setExpandableFieldId(id, this.testClock);
+  }
+
+  /** Get expanded {@code testClock}. */
+  public TestClock getTestClockObject() {
+    return (this.testClock != null) ? this.testClock.getExpanded() : null;
+  }
+
+  public void setTestClockObject(TestClock expandableObject) {
+    this.testClock = new ExpandableField<TestClock>(expandableObject.getId(), expandableObject);
   }
 
   /**

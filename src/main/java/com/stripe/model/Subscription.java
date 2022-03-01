@@ -4,6 +4,7 @@ package com.stripe.model;
 import com.google.gson.annotations.SerializedName;
 import com.stripe.Stripe;
 import com.stripe.exception.StripeException;
+import com.stripe.model.testhelpers.TestClock;
 import com.stripe.net.ApiResource;
 import com.stripe.net.RequestOptions;
 import com.stripe.param.SubscriptionCancelParams;
@@ -281,6 +282,12 @@ public class Subscription extends ApiResource implements HasId, MetadataStore<Su
   @SerializedName("status")
   String status;
 
+  /** ID of the test clock this subscription belongs to. */
+  @SerializedName("test_clock")
+  @Getter(lombok.AccessLevel.NONE)
+  @Setter(lombok.AccessLevel.NONE)
+  ExpandableField<TestClock> testClock;
+
   /**
    * The account (if any) the subscription's payments will be attributed to for tax reporting, and
    * where funds from each payment will be transferred to for each of the subscription's invoices.
@@ -406,6 +413,24 @@ public class Subscription extends ApiResource implements HasId, MetadataStore<Su
   public void setScheduleObject(SubscriptionSchedule expandableObject) {
     this.schedule =
         new ExpandableField<SubscriptionSchedule>(expandableObject.getId(), expandableObject);
+  }
+
+  /** Get ID of expandable {@code testClock} object. */
+  public String getTestClock() {
+    return (this.testClock != null) ? this.testClock.getId() : null;
+  }
+
+  public void setTestClock(String id) {
+    this.testClock = ApiResource.setExpandableFieldId(id, this.testClock);
+  }
+
+  /** Get expanded {@code testClock}. */
+  public TestClock getTestClockObject() {
+    return (this.testClock != null) ? this.testClock.getExpanded() : null;
+  }
+
+  public void setTestClockObject(TestClock expandableObject) {
+    this.testClock = new ExpandableField<TestClock>(expandableObject.getId(), expandableObject);
   }
 
   /**
