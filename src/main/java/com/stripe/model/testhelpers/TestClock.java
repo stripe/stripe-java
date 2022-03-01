@@ -28,6 +28,10 @@ public class TestClock extends ApiResource implements HasId {
   @SerializedName("deleted")
   Boolean deleted;
 
+  /** Time at which this clock is scheduled to auto delete. */
+  @SerializedName("deletes_after")
+  Long deletesAfter;
+
   /** Time at which all objects belonging to this clock are frozen. */
   @SerializedName("frozen_time")
   Long frozenTime;
