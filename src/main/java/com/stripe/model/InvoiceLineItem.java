@@ -95,6 +95,10 @@ public class InvoiceLineItem extends StripeObject implements HasId {
   @SerializedName("proration")
   Boolean proration;
 
+  /** Additional details for proration line items. */
+  @SerializedName("proration_details")
+  ProrationDetails prorationDetails;
+
   /** The quantity of the subscription, if the line item is a subscription or a proration. */
   @SerializedName("quantity")
   Long quantity;
