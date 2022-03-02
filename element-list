@@ -11,6 +11,7 @@ com.stripe.model.radar
 com.stripe.model.reporting
 com.stripe.model.sigma
 com.stripe.model.terminal
+com.stripe.model.testhelpers
 com.stripe.net
 com.stripe.param
 com.stripe.param.billingportal
@@ -22,4 +23,5 @@ com.stripe.param.radar
 com.stripe.param.reporting
 com.stripe.param.sigma
 com.stripe.param.terminal
+com.stripe.param.testhelpers
 com.stripe.util
