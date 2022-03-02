@@ -1,5 +1,15 @@
 # Changelog
 
+## 20.103.0 - 2022-03-01
+* [#1319](https://github.com/stripe/stripe-java/pull/1319) API Updates
+  * Add support for `deletes_after` on `TestHelpers.TestClock`
+* [#1318](https://github.com/stripe/stripe-java/pull/1318) API Updates
+  * Add support for new resource `TestHelpers.TestClock`
+  * Add support for `test_clock` on `CustomerCreateParams`, `Customer`, `Invoice`, `InvoiceItem`, `QuoteCreateParams`, `Quote`, `Subscription`, and `SubscriptionSchedule`
+  * Add support for `pending_invoice_items_behavior` on `InvoiceCreateParams`
+  * Change type of `ProductUpdateParams.url` from `string` to `emptyStringable(string)`
+  * Add support for `next_action` on `Refund`
+
 ## 20.102.0 - 2022-02-25
 * [#1315](https://github.com/stripe/stripe-java/pull/1315) API Updates
   * Add support for `konbini_payments` on `AccountUpdateParams.capabilities`, `AccountCreateParams.capabilities`, and `Account.capabilities`
