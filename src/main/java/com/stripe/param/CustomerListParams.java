@@ -59,6 +59,13 @@ public class CustomerListParams extends ApiRequestParams {
   @SerializedName("starting_after")
   String startingAfter;
 
+  /**
+   * Provides a list of customers that are associated with the specified test clock. The response
+   * will not include customers with test clocks if this parameter is not set.
+   */
+  @SerializedName("test_clock")
+  String testClock;
+
   private CustomerListParams(
       Object created,
       String email,
@@ -66,7 +73,8 @@ public class CustomerListParams extends ApiRequestParams {
       List<String> expand,
       Map<String, Object> extraParams,
       Long limit,
-      String startingAfter) {
+      String startingAfter,
+      String testClock) {
     this.created = created;
     this.email = email;
     this.endingBefore = endingBefore;
@@ -74,6 +82,7 @@ public class CustomerListParams extends ApiRequestParams {
     this.extraParams = extraParams;
     this.limit = limit;
     this.startingAfter = startingAfter;
+    this.testClock = testClock;
   }
 
   public static Builder builder() {
@@ -95,6 +104,8 @@ public class CustomerListParams extends ApiRequestParams {
 
     private String startingAfter;
 
+    private String testClock;
+
     /** Finalize and obtain parameter instance from this builder. */
     public CustomerListParams build() {
       return new CustomerListParams(
@@ -104,7 +115,8 @@ public class CustomerListParams extends ApiRequestParams {
           this.expand,
           this.extraParams,
           this.limit,
-          this.startingAfter);
+          this.startingAfter,
+          this.testClock);
     }
 
     public Builder setCreated(Created created) {
@@ -206,6 +218,15 @@ public class CustomerListParams extends ApiRequestParams {
      */
     public Builder setStartingAfter(String startingAfter) {
       this.startingAfter = startingAfter;
+      return this;
+    }
+
+    /**
+     * Provides a list of customers that are associated with the specified test clock. The response
+     * will not include customers with test clocks if this parameter is not set.
+     */
+    public Builder setTestClock(String testClock) {
+      this.testClock = testClock;
       return this;
     }
   }

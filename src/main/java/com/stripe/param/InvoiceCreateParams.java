@@ -146,7 +146,7 @@ public class InvoiceCreateParams extends ApiRequestParams {
 
   /**
    * How to handle pending invoice items on invoice creation. One of {@code include}, {@code
-   * include_and_require}, or {@code exclude}. {@code include} will include any pending invoice
+   * exclude}, or {@code include_and_require}. {@code include} will include any pending invoice
    * items, and will create an empty draft invoice if no pending invoice items exist. {@code
    * include_and_require} will include any pending invoice items, if no pending invoice items exist
    * then the request will fail. {@code exclude} will always create an empty invoice draft
@@ -692,7 +692,7 @@ public class InvoiceCreateParams extends ApiRequestParams {
 
     /**
      * How to handle pending invoice items on invoice creation. One of {@code include}, {@code
-     * include_and_require}, or {@code exclude}. {@code include} will include any pending invoice
+     * exclude}, or {@code include_and_require}. {@code include} will include any pending invoice
      * items, and will create an empty draft invoice if no pending invoice items exist. {@code
      * include_and_require} will include any pending invoice items, if no pending invoice items
      * exist then the request will fail. {@code exclude} will always create an empty invoice draft

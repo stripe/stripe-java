@@ -1123,7 +1123,9 @@ public class QuoteCreateParams extends ApiRequestParams {
       @SerializedName("product")
       String product;
 
-      /** The recurring components of a price such as {@code interval} and {@code usage_type}. */
+      /**
+       * The recurring components of a price such as {@code interval} and {@code interval_count}.
+       */
       @SerializedName("recurring")
       Recurring recurring;
 
@@ -1238,7 +1240,9 @@ public class QuoteCreateParams extends ApiRequestParams {
           return this;
         }
 
-        /** The recurring components of a price such as {@code interval} and {@code usage_type}. */
+        /**
+         * The recurring components of a price such as {@code interval} and {@code interval_count}.
+         */
         public Builder setRecurring(Recurring recurring) {
           this.recurring = recurring;
           return this;
