@@ -1,5 +1,9 @@
 # Changelog
 
+## 20.105.0 - 2022-03-09
+* [#1323](https://github.com/stripe/stripe-java/pull/1323) API Updates
+  * Add support for `test_clock` on `CustomerListParams`
+
 ## 20.104.0 - 2022-03-02
 * [#1320](https://github.com/stripe/stripe-java/pull/1320) API Updates
   * Add support for new resources `CreditedItems` and `ProrationDetails`
