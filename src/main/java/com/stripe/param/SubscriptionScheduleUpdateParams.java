@@ -2462,7 +2462,9 @@ public class SubscriptionScheduleUpdateParams extends ApiRequestParams {
         @SerializedName("product")
         Object product;
 
-        /** The recurring components of a price such as {@code interval} and {@code usage_type}. */
+        /**
+         * The recurring components of a price such as {@code interval} and {@code interval_count}.
+         */
         @SerializedName("recurring")
         Recurring recurring;
 
@@ -2594,7 +2596,8 @@ public class SubscriptionScheduleUpdateParams extends ApiRequestParams {
           }
 
           /**
-           * The recurring components of a price such as {@code interval} and {@code usage_type}.
+           * The recurring components of a price such as {@code interval} and {@code
+           * interval_count}.
            */
           public Builder setRecurring(Recurring recurring) {
             this.recurring = recurring;

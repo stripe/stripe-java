@@ -442,22 +442,34 @@ public class PaymentMethod extends ApiResource implements HasId, MetadataStore<P
         ApiResource.RequestMethod.POST, url, params, PaymentMethod.class, options);
   }
 
-  /** Detaches a PaymentMethod object from a Customer. */
+  /**
+   * Detaches a PaymentMethod object from a Customer. After a PaymentMethod is detached, it can no
+   * longer be used for a payment or re-attached to a Customer.
+   */
   public PaymentMethod detach() throws StripeException {
     return detach((Map<String, Object>) null, (RequestOptions) null);
   }
 
-  /** Detaches a PaymentMethod object from a Customer. */
+  /**
+   * Detaches a PaymentMethod object from a Customer. After a PaymentMethod is detached, it can no
+   * longer be used for a payment or re-attached to a Customer.
+   */
   public PaymentMethod detach(RequestOptions options) throws StripeException {
     return detach((Map<String, Object>) null, options);
   }
 
-  /** Detaches a PaymentMethod object from a Customer. */
+  /**
+   * Detaches a PaymentMethod object from a Customer. After a PaymentMethod is detached, it can no
+   * longer be used for a payment or re-attached to a Customer.
+   */
   public PaymentMethod detach(Map<String, Object> params) throws StripeException {
     return detach(params, (RequestOptions) null);
   }
 
-  /** Detaches a PaymentMethod object from a Customer. */
+  /**
+   * Detaches a PaymentMethod object from a Customer. After a PaymentMethod is detached, it can no
+   * longer be used for a payment or re-attached to a Customer.
+   */
   public PaymentMethod detach(Map<String, Object> params, RequestOptions options)
       throws StripeException {
     String url =
@@ -469,12 +481,18 @@ public class PaymentMethod extends ApiResource implements HasId, MetadataStore<P
         ApiResource.RequestMethod.POST, url, params, PaymentMethod.class, options);
   }
 
-  /** Detaches a PaymentMethod object from a Customer. */
+  /**
+   * Detaches a PaymentMethod object from a Customer. After a PaymentMethod is detached, it can no
+   * longer be used for a payment or re-attached to a Customer.
+   */
   public PaymentMethod detach(PaymentMethodDetachParams params) throws StripeException {
     return detach(params, (RequestOptions) null);
   }
 
-  /** Detaches a PaymentMethod object from a Customer. */
+  /**
+   * Detaches a PaymentMethod object from a Customer. After a PaymentMethod is detached, it can no
+   * longer be used for a payment or re-attached to a Customer.
+   */
   public PaymentMethod detach(PaymentMethodDetachParams params, RequestOptions options)
       throws StripeException {
     String url =
