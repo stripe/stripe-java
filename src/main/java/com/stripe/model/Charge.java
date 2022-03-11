@@ -1463,6 +1463,10 @@ public class Charge extends ApiResource implements MetadataStore<Charge>, Balanc
       @SerializedName("last4")
       String last4;
 
+      /** ID of the mandate used to make this payment or created by it. */
+      @SerializedName("mandate")
+      String mandate;
+
       /** True if this payment was marked as MOTO and out of scope for SCA. */
       @SerializedName("moto")
       Boolean moto;
