@@ -2338,25 +2338,25 @@ public class PaymentIntent extends ApiResource implements HasId, MetadataStore<P
     @EqualsAndHashCode(callSuper = false)
     public static class Card extends StripeObject {
       @SerializedName("customer_notification")
-      ProcessingCustomerNotification customerNotification;
+      CustomerNotification customerNotification;
+
+      @Getter
+      @Setter
+      @EqualsAndHashCode(callSuper = false)
+      public static class CustomerNotification extends StripeObject {
+        /**
+         * Whether customer approval has been requested for this payment. For payments greater than
+         * INR 5000 or mandate amount, the customer must provide explicit approval of the payment
+         * with their bank.
+         */
+        @SerializedName("approval_requested")
+        Boolean approvalRequested;
+
+        /** If customer approval is required, they need to provide approval before this time. */
+        @SerializedName("completes_at")
+        Long completesAt;
+      }
     }
-  }
-
-  @Getter
-  @Setter
-  @EqualsAndHashCode(callSuper = false)
-  public static class ProcessingCustomerNotification extends StripeObject {
-    /**
-     * Whether customer approval has been requested for this payment. For payments greater than INR
-     * 5000 or mandate amount, the customer must provide explicit approval of the payment with their
-     * bank.
-     */
-    @SerializedName("approval_requested")
-    Boolean approvalRequested;
-
-    /** If customer approval is required, they need to provide approval before this time. */
-    @SerializedName("completes_at")
-    Long completesAt;
   }
 
   @Getter
