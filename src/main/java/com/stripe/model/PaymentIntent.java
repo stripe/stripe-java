@@ -1131,6 +1131,9 @@ public class PaymentIntent extends ApiResource implements HasId, MetadataStore<P
     @SerializedName("boleto_display_details")
     NextActionDisplayBoletoDetails boletoDisplayDetails;
 
+    @SerializedName("card_await_notification")
+    NextActionCardAwaitNotification cardAwaitNotification;
+
     @SerializedName("konbini_display_details")
     NextActionKonbiniDisplayDetails konbiniDisplayDetails;
 
@@ -1286,6 +1289,25 @@ public class PaymentIntent extends ApiResource implements HasId, MetadataStore<P
     /** The URL you must redirect your customer to in order to authenticate the payment. */
     @SerializedName("url")
     String url;
+  }
+
+  @Getter
+  @Setter
+  @EqualsAndHashCode(callSuper = false)
+  public static class NextActionCardAwaitNotification extends StripeObject {
+    /**
+     * The time that payment will be attempted. If customer approval is required, they need to
+     * provide approval before this time.
+     */
+    @SerializedName("charge_attempt_at")
+    Long chargeAttemptAt;
+
+    /**
+     * For payments greater than INR 5000, the customer must provide explicit approval of the
+     * payment with their bank. For payments of lower amount, no customer action is required.
+     */
+    @SerializedName("customer_approval_required")
+    Boolean customerApprovalRequired;
   }
 
   @Getter
@@ -1765,6 +1787,10 @@ public class PaymentIntent extends ApiResource implements HasId, MetadataStore<P
       @SerializedName("installments")
       Installments installments;
 
+      /** Configuration options for setting up an eMandate for cards issued in India. */
+      @SerializedName("mandate_options")
+      MandateOptions mandateOptions;
+
       /**
        * Selected network to process this payment intent on. Depends on the available networks of
        * the card attached to the payment intent. Can be only set confirm-time.
@@ -1846,6 +1872,68 @@ public class PaymentIntent extends ApiResource implements HasId, MetadataStore<P
           @SerializedName("type")
           String type;
         }
+      }
+
+      @Getter
+      @Setter
+      @EqualsAndHashCode(callSuper = false)
+      public static class MandateOptions extends StripeObject {
+        /** Amount to be charged for future payments. */
+        @SerializedName("amount")
+        Long amount;
+
+        /**
+         * One of {@code fixed} or {@code maximum}. If {@code fixed}, the {@code amount} param
+         * refers to the exact amount to be charged in future payments. If {@code maximum}, the
+         * amount charged can be up to the value passed for the {@code amount} param.
+         */
+        @SerializedName("amount_type")
+        String amountType;
+
+        /**
+         * A description of the mandate or subscription that is meant to be displayed to the
+         * customer.
+         */
+        @SerializedName("description")
+        String description;
+
+        /**
+         * End date of the mandate or subscription. If not provided, the mandate will be active
+         * until canceled. If provided, end date should be after start date.
+         */
+        @SerializedName("end_date")
+        Long endDate;
+
+        /**
+         * Specifies payment frequency. One of {@code day}, {@code week}, {@code month}, {@code
+         * year}, or {@code sporadic}.
+         */
+        @SerializedName("interval")
+        String interval;
+
+        /**
+         * The number of intervals between payments. For example, {@code interval=month} and {@code
+         * interval_count=3} indicates one payment every three months. Maximum of one year interval
+         * allowed (1 year, 12 months, or 52 weeks). This parameter is optional when {@code
+         * interval=sporadic}.
+         */
+        @SerializedName("interval_count")
+        Long intervalCount;
+
+        /** Unique identifier for the mandate or subscription. */
+        @SerializedName("reference")
+        String reference;
+
+        /**
+         * Start date of the mandate or subscription. Start date should not be lesser than
+         * yesterday.
+         */
+        @SerializedName("start_date")
+        Long startDate;
+
+        /** Specifies the type of mandates supported. Possible values are {@code india}. */
+        @SerializedName("supported_types")
+        List<String> supportedTypes;
       }
     }
 
@@ -2248,7 +2336,27 @@ public class PaymentIntent extends ApiResource implements HasId, MetadataStore<P
     @Getter
     @Setter
     @EqualsAndHashCode(callSuper = false)
-    public static class Card extends StripeObject {}
+    public static class Card extends StripeObject {
+      @SerializedName("customer_notification")
+      CustomerNotification customerNotification;
+
+      @Getter
+      @Setter
+      @EqualsAndHashCode(callSuper = false)
+      public static class CustomerNotification extends StripeObject {
+        /**
+         * Whether customer approval has been requested for this payment. For payments greater than
+         * INR 5000 or mandate amount, the customer must provide explicit approval of the payment
+         * with their bank.
+         */
+        @SerializedName("approval_requested")
+        Boolean approvalRequested;
+
+        /** If customer approval is required, they need to provide approval before this time. */
+        @SerializedName("completes_at")
+        Long completesAt;
+      }
+    }
   }
 
   @Getter

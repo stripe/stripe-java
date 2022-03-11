@@ -5571,6 +5571,10 @@ public class PaymentIntentConfirmParams extends ApiRequestParams {
       @SerializedName("installments")
       Installments installments;
 
+      /** Configuration options for setting up an eMandate for cards issued in India. */
+      @SerializedName("mandate_options")
+      MandateOptions mandateOptions;
+
       /**
        * When specified, this parameter indicates that a transaction will be marked as MOTO (Mail
        * Order Telephone Order) and thus out of scope for SCA. This parameter can only be provided
@@ -5626,6 +5630,7 @@ public class PaymentIntentConfirmParams extends ApiRequestParams {
           String cvcToken,
           Map<String, Object> extraParams,
           Installments installments,
+          MandateOptions mandateOptions,
           Boolean moto,
           Network network,
           RequestThreeDSecure requestThreeDSecure,
@@ -5633,6 +5638,7 @@ public class PaymentIntentConfirmParams extends ApiRequestParams {
         this.cvcToken = cvcToken;
         this.extraParams = extraParams;
         this.installments = installments;
+        this.mandateOptions = mandateOptions;
         this.moto = moto;
         this.network = network;
         this.requestThreeDSecure = requestThreeDSecure;
@@ -5650,6 +5656,8 @@ public class PaymentIntentConfirmParams extends ApiRequestParams {
 
         private Installments installments;
 
+        private MandateOptions mandateOptions;
+
         private Boolean moto;
 
         private Network network;
@@ -5664,6 +5672,7 @@ public class PaymentIntentConfirmParams extends ApiRequestParams {
               this.cvcToken,
               this.extraParams,
               this.installments,
+              this.mandateOptions,
               this.moto,
               this.network,
               this.requestThreeDSecure,
@@ -5716,6 +5725,12 @@ public class PaymentIntentConfirmParams extends ApiRequestParams {
          */
         public Builder setInstallments(Installments installments) {
           this.installments = installments;
+          return this;
+        }
+
+        /** Configuration options for setting up an eMandate for cards issued in India. */
+        public Builder setMandateOptions(MandateOptions mandateOptions) {
+          this.mandateOptions = mandateOptions;
           return this;
         }
 
@@ -6045,6 +6060,320 @@ public class PaymentIntentConfirmParams extends ApiRequestParams {
             Type(String value) {
               this.value = value;
             }
+          }
+        }
+      }
+
+      @Getter
+      public static class MandateOptions {
+        /** Amount to be charged for future payments. */
+        @SerializedName("amount")
+        Long amount;
+
+        /**
+         * One of {@code fixed} or {@code maximum}. If {@code fixed}, the {@code amount} param
+         * refers to the exact amount to be charged in future payments. If {@code maximum}, the
+         * amount charged can be up to the value passed for the {@code amount} param.
+         */
+        @SerializedName("amount_type")
+        AmountType amountType;
+
+        /**
+         * A description of the mandate or subscription that is meant to be displayed to the
+         * customer.
+         */
+        @SerializedName("description")
+        String description;
+
+        /**
+         * End date of the mandate or subscription. If not provided, the mandate will be active
+         * until canceled. If provided, end date should be after start date.
+         */
+        @SerializedName("end_date")
+        Long endDate;
+
+        /**
+         * Map of extra parameters for custom features not available in this client library. The
+         * content in this map is not serialized under this field's {@code @SerializedName} value.
+         * Instead, each key/value pair is serialized as if the key is a root-level field
+         * (serialized) name in this param object. Effectively, this map is flattened to its parent
+         * instance.
+         */
+        @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
+        Map<String, Object> extraParams;
+
+        /**
+         * Specifies payment frequency. One of {@code day}, {@code week}, {@code month}, {@code
+         * year}, or {@code sporadic}.
+         */
+        @SerializedName("interval")
+        Interval interval;
+
+        /**
+         * The number of intervals between payments. For example, {@code interval=month} and {@code
+         * interval_count=3} indicates one payment every three months. Maximum of one year interval
+         * allowed (1 year, 12 months, or 52 weeks). This parameter is optional when {@code
+         * interval=sporadic}.
+         */
+        @SerializedName("interval_count")
+        Long intervalCount;
+
+        /** Unique identifier for the mandate or subscription. */
+        @SerializedName("reference")
+        String reference;
+
+        /**
+         * Start date of the mandate or subscription. Start date should not be lesser than
+         * yesterday.
+         */
+        @SerializedName("start_date")
+        Long startDate;
+
+        /** Specifies the type of mandates supported. Possible values are {@code india}. */
+        @SerializedName("supported_types")
+        List<SupportedType> supportedTypes;
+
+        private MandateOptions(
+            Long amount,
+            AmountType amountType,
+            String description,
+            Long endDate,
+            Map<String, Object> extraParams,
+            Interval interval,
+            Long intervalCount,
+            String reference,
+            Long startDate,
+            List<SupportedType> supportedTypes) {
+          this.amount = amount;
+          this.amountType = amountType;
+          this.description = description;
+          this.endDate = endDate;
+          this.extraParams = extraParams;
+          this.interval = interval;
+          this.intervalCount = intervalCount;
+          this.reference = reference;
+          this.startDate = startDate;
+          this.supportedTypes = supportedTypes;
+        }
+
+        public static Builder builder() {
+          return new Builder();
+        }
+
+        public static class Builder {
+          private Long amount;
+
+          private AmountType amountType;
+
+          private String description;
+
+          private Long endDate;
+
+          private Map<String, Object> extraParams;
+
+          private Interval interval;
+
+          private Long intervalCount;
+
+          private String reference;
+
+          private Long startDate;
+
+          private List<SupportedType> supportedTypes;
+
+          /** Finalize and obtain parameter instance from this builder. */
+          public MandateOptions build() {
+            return new MandateOptions(
+                this.amount,
+                this.amountType,
+                this.description,
+                this.endDate,
+                this.extraParams,
+                this.interval,
+                this.intervalCount,
+                this.reference,
+                this.startDate,
+                this.supportedTypes);
+          }
+
+          /** Amount to be charged for future payments. */
+          public Builder setAmount(Long amount) {
+            this.amount = amount;
+            return this;
+          }
+
+          /**
+           * One of {@code fixed} or {@code maximum}. If {@code fixed}, the {@code amount} param
+           * refers to the exact amount to be charged in future payments. If {@code maximum}, the
+           * amount charged can be up to the value passed for the {@code amount} param.
+           */
+          public Builder setAmountType(AmountType amountType) {
+            this.amountType = amountType;
+            return this;
+          }
+
+          /**
+           * A description of the mandate or subscription that is meant to be displayed to the
+           * customer.
+           */
+          public Builder setDescription(String description) {
+            this.description = description;
+            return this;
+          }
+
+          /**
+           * End date of the mandate or subscription. If not provided, the mandate will be active
+           * until canceled. If provided, end date should be after start date.
+           */
+          public Builder setEndDate(Long endDate) {
+            this.endDate = endDate;
+            return this;
+          }
+
+          /**
+           * Add a key/value pair to `extraParams` map. A map is initialized for the first
+           * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
+           * map. See {@link
+           * PaymentIntentConfirmParams.PaymentMethodOptions.Card.MandateOptions#extraParams} for
+           * the field documentation.
+           */
+          public Builder putExtraParam(String key, Object value) {
+            if (this.extraParams == null) {
+              this.extraParams = new HashMap<>();
+            }
+            this.extraParams.put(key, value);
+            return this;
+          }
+
+          /**
+           * Add all map key/value pairs to `extraParams` map. A map is initialized for the first
+           * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
+           * map. See {@link
+           * PaymentIntentConfirmParams.PaymentMethodOptions.Card.MandateOptions#extraParams} for
+           * the field documentation.
+           */
+          public Builder putAllExtraParam(Map<String, Object> map) {
+            if (this.extraParams == null) {
+              this.extraParams = new HashMap<>();
+            }
+            this.extraParams.putAll(map);
+            return this;
+          }
+
+          /**
+           * Specifies payment frequency. One of {@code day}, {@code week}, {@code month}, {@code
+           * year}, or {@code sporadic}.
+           */
+          public Builder setInterval(Interval interval) {
+            this.interval = interval;
+            return this;
+          }
+
+          /**
+           * The number of intervals between payments. For example, {@code interval=month} and
+           * {@code interval_count=3} indicates one payment every three months. Maximum of one year
+           * interval allowed (1 year, 12 months, or 52 weeks). This parameter is optional when
+           * {@code interval=sporadic}.
+           */
+          public Builder setIntervalCount(Long intervalCount) {
+            this.intervalCount = intervalCount;
+            return this;
+          }
+
+          /** Unique identifier for the mandate or subscription. */
+          public Builder setReference(String reference) {
+            this.reference = reference;
+            return this;
+          }
+
+          /**
+           * Start date of the mandate or subscription. Start date should not be lesser than
+           * yesterday.
+           */
+          public Builder setStartDate(Long startDate) {
+            this.startDate = startDate;
+            return this;
+          }
+
+          /**
+           * Add an element to `supportedTypes` list. A list is initialized for the first
+           * `add/addAll` call, and subsequent calls adds additional elements to the original list.
+           * See {@link
+           * PaymentIntentConfirmParams.PaymentMethodOptions.Card.MandateOptions#supportedTypes} for
+           * the field documentation.
+           */
+          public Builder addSupportedType(SupportedType element) {
+            if (this.supportedTypes == null) {
+              this.supportedTypes = new ArrayList<>();
+            }
+            this.supportedTypes.add(element);
+            return this;
+          }
+
+          /**
+           * Add all elements to `supportedTypes` list. A list is initialized for the first
+           * `add/addAll` call, and subsequent calls adds additional elements to the original list.
+           * See {@link
+           * PaymentIntentConfirmParams.PaymentMethodOptions.Card.MandateOptions#supportedTypes} for
+           * the field documentation.
+           */
+          public Builder addAllSupportedType(List<SupportedType> elements) {
+            if (this.supportedTypes == null) {
+              this.supportedTypes = new ArrayList<>();
+            }
+            this.supportedTypes.addAll(elements);
+            return this;
+          }
+        }
+
+        public enum AmountType implements ApiRequestParams.EnumParam {
+          @SerializedName("fixed")
+          FIXED("fixed"),
+
+          @SerializedName("maximum")
+          MAXIMUM("maximum");
+
+          @Getter(onMethod_ = {@Override})
+          private final String value;
+
+          AmountType(String value) {
+            this.value = value;
+          }
+        }
+
+        public enum Interval implements ApiRequestParams.EnumParam {
+          @SerializedName("day")
+          DAY("day"),
+
+          @SerializedName("month")
+          MONTH("month"),
+
+          @SerializedName("sporadic")
+          SPORADIC("sporadic"),
+
+          @SerializedName("week")
+          WEEK("week"),
+
+          @SerializedName("year")
+          YEAR("year");
+
+          @Getter(onMethod_ = {@Override})
+          private final String value;
+
+          Interval(String value) {
+            this.value = value;
+          }
+        }
+
+        public enum SupportedType implements ApiRequestParams.EnumParam {
+          @SerializedName("india")
+          INDIA("india");
+
+          @Getter(onMethod_ = {@Override})
+          private final String value;
+
+          SupportedType(String value) {
+            this.value = value;
           }
         }
       }
