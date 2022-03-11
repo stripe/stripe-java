@@ -1,5 +1,14 @@
 # Changelog
 
+## 20.106.0 - 2022-03-11
+* [#1324](https://github.com/stripe/stripe-java/pull/1324) API Updates
+  * Add support for `mandate` on `Charge.payment_method_details.card`
+  * Add support for `mandate_options` on `PaymentIntentCreateParams.payment_method_options.card`, `PaymentIntentUpdateParams.payment_method_options.card`, `PaymentIntentConfirmParams.payment_method_options.card`, `PaymentIntent.payment_method_options.card`, `SetupIntentCreateParams.payment_method_options.card`, `SetupIntentUpdateParams.payment_method_options.card`, `SetupIntentConfirmParams.payment_method_options.card`, and `SetupIntent.payment_method_options.card`
+  * Add support for `card_await_notification` on `PaymentIntent.next_action`
+  * Add support for `customer_notification` on `PaymentIntent.processing.card`
+  * Change `PaymentLinkCreateParams.line_items` to be required
+* [#1321](https://github.com/stripe/stripe-java/pull/1321) Delete PaymentIntentTypeSpecificPaymentMethodOptionsClient.java
+
 ## 20.105.0 - 2022-03-09
 * [#1323](https://github.com/stripe/stripe-java/pull/1323) API Updates
   * Add support for `test_clock` on `CustomerListParams`
