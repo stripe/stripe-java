@@ -7,5 +7,6 @@
   ],
   "has_more": false,
   "object": "search_result",
+  "next_page": null,
   "url": "/v1/searchable_models"
 }
