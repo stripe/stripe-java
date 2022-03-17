@@ -1,31 +1,30 @@
 package com.stripe.model;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.mockito.Mockito.verifyNoMoreInteractions;
+
 import com.stripe.BaseStripeTest;
 import com.stripe.exception.StripeException;
 import com.stripe.net.ApiResource;
 import com.stripe.net.RequestOptions;
 import com.stripe.net.RequestOptions.RequestOptionsBuilder;
+import java.io.IOException;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mockito;
 import org.mockito.invocation.InvocationOnMock;
 import org.mockito.stubbing.Answer;
 
-import java.io.IOException;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.mockito.Mockito.verifyNoMoreInteractions;
-
 public class SearchPagingIteratorTest extends BaseStripeTest {
   private static class SearchableModel extends ApiResource implements HasId {
     String id;
 
-    public static SearchableModelCollection search(Map<String, Object> params, RequestOptions options)
-        throws StripeException {
+    public static SearchableModelCollection search(
+        Map<String, Object> params, RequestOptions options) throws StripeException {
       return requestSearchResult(
           classUrl(SearchableModel.class), params, SearchableModelCollection.class, options);
     }
@@ -59,7 +58,8 @@ public class SearchPagingIteratorTest extends BaseStripeTest {
                   throw new RuntimeException("Page out of bounds");
                 }
 
-                return ApiResource.GSON.fromJson(pages.get(count++), SearchableModelCollection.class);
+                return ApiResource.GSON.fromJson(
+                    pages.get(count++), SearchableModelCollection.class);
               }
             })
         .when(networkSpy)
