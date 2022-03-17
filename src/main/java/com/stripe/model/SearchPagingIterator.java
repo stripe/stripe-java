@@ -8,7 +8,6 @@ import java.util.Iterator;
 import java.util.Map;
 import java.util.NoSuchElementException;
 
-/** Please note SearchPagingIterator is in beta and is subject to change or removal at any time. */
 public class SearchPagingIterator<T> extends ApiResource implements Iterator<T> {
   private final String url;
 
@@ -50,7 +49,7 @@ public class SearchPagingIterator<T> extends ApiResource implements Iterator<T> 
         }
 
         // then put our new page start in
-        params.put("next_page", this.nextPage);
+        params.put("page", this.nextPage);
 
         this.currentSearchResult = search(params, currentSearchResult.getRequestOptions());
         this.nextPage = this.currentSearchResult.getNextPage();
