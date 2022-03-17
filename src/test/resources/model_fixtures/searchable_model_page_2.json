@@ -1,0 +1,11 @@
+{
+  "data": [
+    {
+      "id": "pm_127",
+      "object": "searchablemodel"
+    }
+  ],
+  "has_more": false,
+  "object": "search_result",
+  "url": "/v1/searchable_models"
+}
