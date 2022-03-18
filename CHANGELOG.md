@@ -1,5 +1,11 @@
 # Changelog
 
+## 20.107.0 - 2022-03-18
+* [#1327](https://github.com/stripe/stripe-java/pull/1327) API Updates
+  * Add support for `status` on `Card`
+* [#1322](https://github.com/stripe/stripe-java/pull/1322) Upgrade GSON dependency to 2.9.0
+* [#1326](https://github.com/stripe/stripe-java/pull/1326) Update SearchResult pagination to match new API shape. This is a breaking change but the object shape is not exposed in the API currently and is therefore not being used.
+
 ## 20.106.0 - 2022-03-11
 * [#1324](https://github.com/stripe/stripe-java/pull/1324) API Updates
   * Add support for `mandate` on `Charge.payment_method_details.card`
