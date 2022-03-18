@@ -884,6 +884,10 @@ public class PaymentIntent extends ApiResource implements HasId, MetadataStore<P
    * the PaymentIntent will fail with an error. For PaymentIntents with <code>
    * status=’requires_capture’</code>, the remaining <code>amount_capturable</code> will
    * automatically be refunded.
+   *
+   * <p>You cannot cancel the PaymentIntent for a Checkout Session. <a
+   * href="https://stripe.com/docs/api/checkout/sessions/expire">Expire the Checkout Session</a>
+   * instead
    */
   public PaymentIntent cancel() throws StripeException {
     return cancel((Map<String, Object>) null, (RequestOptions) null);
@@ -898,6 +902,10 @@ public class PaymentIntent extends ApiResource implements HasId, MetadataStore<P
    * the PaymentIntent will fail with an error. For PaymentIntents with <code>
    * status=’requires_capture’</code>, the remaining <code>amount_capturable</code> will
    * automatically be refunded.
+   *
+   * <p>You cannot cancel the PaymentIntent for a Checkout Session. <a
+   * href="https://stripe.com/docs/api/checkout/sessions/expire">Expire the Checkout Session</a>
+   * instead
    */
   public PaymentIntent cancel(RequestOptions options) throws StripeException {
     return cancel((Map<String, Object>) null, options);
@@ -912,6 +920,10 @@ public class PaymentIntent extends ApiResource implements HasId, MetadataStore<P
    * the PaymentIntent will fail with an error. For PaymentIntents with <code>
    * status=’requires_capture’</code>, the remaining <code>amount_capturable</code> will
    * automatically be refunded.
+   *
+   * <p>You cannot cancel the PaymentIntent for a Checkout Session. <a
+   * href="https://stripe.com/docs/api/checkout/sessions/expire">Expire the Checkout Session</a>
+   * instead
    */
   public PaymentIntent cancel(Map<String, Object> params) throws StripeException {
     return cancel(params, (RequestOptions) null);
@@ -926,6 +938,10 @@ public class PaymentIntent extends ApiResource implements HasId, MetadataStore<P
    * the PaymentIntent will fail with an error. For PaymentIntents with <code>
    * status=’requires_capture’</code>, the remaining <code>amount_capturable</code> will
    * automatically be refunded.
+   *
+   * <p>You cannot cancel the PaymentIntent for a Checkout Session. <a
+   * href="https://stripe.com/docs/api/checkout/sessions/expire">Expire the Checkout Session</a>
+   * instead
    */
   public PaymentIntent cancel(Map<String, Object> params, RequestOptions options)
       throws StripeException {
@@ -947,6 +963,10 @@ public class PaymentIntent extends ApiResource implements HasId, MetadataStore<P
    * the PaymentIntent will fail with an error. For PaymentIntents with <code>
    * status=’requires_capture’</code>, the remaining <code>amount_capturable</code> will
    * automatically be refunded.
+   *
+   * <p>You cannot cancel the PaymentIntent for a Checkout Session. <a
+   * href="https://stripe.com/docs/api/checkout/sessions/expire">Expire the Checkout Session</a>
+   * instead
    */
   public PaymentIntent cancel(PaymentIntentCancelParams params) throws StripeException {
     return cancel(params, (RequestOptions) null);
@@ -961,6 +981,10 @@ public class PaymentIntent extends ApiResource implements HasId, MetadataStore<P
    * the PaymentIntent will fail with an error. For PaymentIntents with <code>
    * status=’requires_capture’</code>, the remaining <code>amount_capturable</code> will
    * automatically be refunded.
+   *
+   * <p>You cannot cancel the PaymentIntent for a Checkout Session. <a
+   * href="https://stripe.com/docs/api/checkout/sessions/expire">Expire the Checkout Session</a>
+   * instead
    */
   public PaymentIntent cancel(PaymentIntentCancelParams params, RequestOptions options)
       throws StripeException {
@@ -1604,7 +1628,7 @@ public class PaymentIntent extends ApiResource implements HasId, MetadataStore<P
     @EqualsAndHashCode(callSuper = false)
     public static class AfterpayClearpay extends StripeObject {
       /**
-       * Order identifier shown to the merchant in Afterpay’s online portal. We recommend using a
+       * Order identifier shown to the customer in Afterpay’s online portal. We recommend using a
        * value that helps you answer any questions a customer might have about the payment. The
        * identifier is limited to 128 characters and may contain only letters, digits, underscores,
        * backslashes and dashes.
@@ -2338,25 +2362,25 @@ public class PaymentIntent extends ApiResource implements HasId, MetadataStore<P
     @EqualsAndHashCode(callSuper = false)
     public static class Card extends StripeObject {
       @SerializedName("customer_notification")
-      CustomerNotification customerNotification;
-
-      @Getter
-      @Setter
-      @EqualsAndHashCode(callSuper = false)
-      public static class CustomerNotification extends StripeObject {
-        /**
-         * Whether customer approval has been requested for this payment. For payments greater than
-         * INR 5000 or mandate amount, the customer must provide explicit approval of the payment
-         * with their bank.
-         */
-        @SerializedName("approval_requested")
-        Boolean approvalRequested;
-
-        /** If customer approval is required, they need to provide approval before this time. */
-        @SerializedName("completes_at")
-        Long completesAt;
-      }
+      ProcessingCustomerNotification customerNotification;
     }
+  }
+
+  @Getter
+  @Setter
+  @EqualsAndHashCode(callSuper = false)
+  public static class ProcessingCustomerNotification extends StripeObject {
+    /**
+     * Whether customer approval has been requested for this payment. For payments greater than INR
+     * 5000 or mandate amount, the customer must provide explicit approval of the payment with their
+     * bank.
+     */
+    @SerializedName("approval_requested")
+    Boolean approvalRequested;
+
+    /** If customer approval is required, they need to provide approval before this time. */
+    @SerializedName("completes_at")
+    Long completesAt;
   }
 
   @Getter

@@ -215,6 +215,14 @@ public class Card extends ApiResource
   ExpandableField<Recipient> recipient;
 
   /**
+   * For external accounts, possible values are {@code new} and {@code errored}. If a transfer
+   * fails, the status is set to {@code errored} and transfers are stopped until account details are
+   * updated.
+   */
+  @SerializedName("status")
+  String status;
+
+  /**
    * If the card number is tokenized, this is the method that was used. Can be {@code android_pay}
    * (includes Google Pay), {@code apple_pay}, {@code masterpass}, {@code visa_checkout}, or null.
    */
