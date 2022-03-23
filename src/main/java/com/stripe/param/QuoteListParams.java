@@ -57,6 +57,13 @@ public class QuoteListParams extends ApiRequestParams {
   @SerializedName("status")
   Status status;
 
+  /**
+   * Provides a list of quotes that are associated with the specified test clock. The response will
+   * not include quotes with test clocks if this and the customer parameter is not set.
+   */
+  @SerializedName("test_clock")
+  String testClock;
+
   private QuoteListParams(
       String customer,
       String endingBefore,
@@ -64,7 +71,8 @@ public class QuoteListParams extends ApiRequestParams {
       Map<String, Object> extraParams,
       Long limit,
       String startingAfter,
-      Status status) {
+      Status status,
+      String testClock) {
     this.customer = customer;
     this.endingBefore = endingBefore;
     this.expand = expand;
@@ -72,6 +80,7 @@ public class QuoteListParams extends ApiRequestParams {
     this.limit = limit;
     this.startingAfter = startingAfter;
     this.status = status;
+    this.testClock = testClock;
   }
 
   public static Builder builder() {
@@ -93,6 +102,8 @@ public class QuoteListParams extends ApiRequestParams {
 
     private Status status;
 
+    private String testClock;
+
     /** Finalize and obtain parameter instance from this builder. */
     public QuoteListParams build() {
       return new QuoteListParams(
@@ -102,7 +113,8 @@ public class QuoteListParams extends ApiRequestParams {
           this.extraParams,
           this.limit,
           this.startingAfter,
-          this.status);
+          this.status,
+          this.testClock);
     }
 
     /** The ID of the customer whose quotes will be retrieved. */
@@ -197,6 +209,15 @@ public class QuoteListParams extends ApiRequestParams {
     /** The status of the quote. */
     public Builder setStatus(Status status) {
       this.status = status;
+      return this;
+    }
+
+    /**
+     * Provides a list of quotes that are associated with the specified test clock. The response
+     * will not include quotes with test clocks if this and the customer parameter is not set.
+     */
+    public Builder setTestClock(String testClock) {
+      this.testClock = testClock;
       return this;
     }
   }

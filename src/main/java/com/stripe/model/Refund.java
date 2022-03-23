@@ -6,6 +6,7 @@ import com.stripe.Stripe;
 import com.stripe.exception.StripeException;
 import com.stripe.net.ApiResource;
 import com.stripe.net.RequestOptions;
+import com.stripe.param.RefundCancelParams;
 import com.stripe.param.RefundCreateParams;
 import com.stripe.param.RefundListParams;
 import com.stripe.param.RefundRetrieveParams;
@@ -401,6 +402,76 @@ public class Refund extends ApiResource implements MetadataStore<Refund>, Balanc
             "%s%s",
             Stripe.getApiBase(),
             String.format("/v1/refunds/%s", ApiResource.urlEncodeId(this.getId())));
+    return ApiResource.request(ApiResource.RequestMethod.POST, url, params, Refund.class, options);
+  }
+
+  /**
+   * Cancels a refund with a status of <code>requires_action</code>.
+   *
+   * <p>Refunds in other states cannot be canceled, and only refunds for payment methods that
+   * require customer action will enter the <code>requires_action</code> state.
+   */
+  public Refund cancel() throws StripeException {
+    return cancel((Map<String, Object>) null, (RequestOptions) null);
+  }
+
+  /**
+   * Cancels a refund with a status of <code>requires_action</code>.
+   *
+   * <p>Refunds in other states cannot be canceled, and only refunds for payment methods that
+   * require customer action will enter the <code>requires_action</code> state.
+   */
+  public Refund cancel(RequestOptions options) throws StripeException {
+    return cancel((Map<String, Object>) null, options);
+  }
+
+  /**
+   * Cancels a refund with a status of <code>requires_action</code>.
+   *
+   * <p>Refunds in other states cannot be canceled, and only refunds for payment methods that
+   * require customer action will enter the <code>requires_action</code> state.
+   */
+  public Refund cancel(Map<String, Object> params) throws StripeException {
+    return cancel(params, (RequestOptions) null);
+  }
+
+  /**
+   * Cancels a refund with a status of <code>requires_action</code>.
+   *
+   * <p>Refunds in other states cannot be canceled, and only refunds for payment methods that
+   * require customer action will enter the <code>requires_action</code> state.
+   */
+  public Refund cancel(Map<String, Object> params, RequestOptions options) throws StripeException {
+    String url =
+        String.format(
+            "%s%s",
+            Stripe.getApiBase(),
+            String.format("/v1/refunds/%s/cancel", ApiResource.urlEncodeId(this.getId())));
+    return ApiResource.request(ApiResource.RequestMethod.POST, url, params, Refund.class, options);
+  }
+
+  /**
+   * Cancels a refund with a status of <code>requires_action</code>.
+   *
+   * <p>Refunds in other states cannot be canceled, and only refunds for payment methods that
+   * require customer action will enter the <code>requires_action</code> state.
+   */
+  public Refund cancel(RefundCancelParams params) throws StripeException {
+    return cancel(params, (RequestOptions) null);
+  }
+
+  /**
+   * Cancels a refund with a status of <code>requires_action</code>.
+   *
+   * <p>Refunds in other states cannot be canceled, and only refunds for payment methods that
+   * require customer action will enter the <code>requires_action</code> state.
+   */
+  public Refund cancel(RefundCancelParams params, RequestOptions options) throws StripeException {
+    String url =
+        String.format(
+            "%s%s",
+            Stripe.getApiBase(),
+            String.format("/v1/refunds/%s/cancel", ApiResource.urlEncodeId(this.getId())));
     return ApiResource.request(ApiResource.RequestMethod.POST, url, params, Refund.class, options);
   }
 
