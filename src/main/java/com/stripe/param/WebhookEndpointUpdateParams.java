@@ -771,6 +771,21 @@ public class WebhookEndpointUpdateParams extends ApiRequestParams {
     @SerializedName("tax_rate.updated")
     TAX_RATE__UPDATED("tax_rate.updated"),
 
+    @SerializedName("test_helpers.test_clock.advancing")
+    TEST_HELPERS__TEST_CLOCK__ADVANCING("test_helpers.test_clock.advancing"),
+
+    @SerializedName("test_helpers.test_clock.created")
+    TEST_HELPERS__TEST_CLOCK__CREATED("test_helpers.test_clock.created"),
+
+    @SerializedName("test_helpers.test_clock.deleted")
+    TEST_HELPERS__TEST_CLOCK__DELETED("test_helpers.test_clock.deleted"),
+
+    @SerializedName("test_helpers.test_clock.internal_failure")
+    TEST_HELPERS__TEST_CLOCK__INTERNAL_FAILURE("test_helpers.test_clock.internal_failure"),
+
+    @SerializedName("test_helpers.test_clock.ready")
+    TEST_HELPERS__TEST_CLOCK__READY("test_helpers.test_clock.ready"),
+
     @SerializedName("topup.canceled")
     TOPUP__CANCELED("topup.canceled"),
 
