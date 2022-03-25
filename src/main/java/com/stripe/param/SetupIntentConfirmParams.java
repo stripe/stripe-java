@@ -568,12 +568,24 @@ public class SetupIntentConfirmParams extends ApiRequestParams {
     @SerializedName("sepa_debit")
     SepaDebit sepaDebit;
 
+    /**
+     * If this is a {@code us_bank_account} SetupIntent, this sub-hash contains details about the US
+     * bank account payment method options.
+     */
+    @SerializedName("us_bank_account")
+    UsBankAccount usBankAccount;
+
     private PaymentMethodOptions(
-        AcssDebit acssDebit, Card card, Map<String, Object> extraParams, SepaDebit sepaDebit) {
+        AcssDebit acssDebit,
+        Card card,
+        Map<String, Object> extraParams,
+        SepaDebit sepaDebit,
+        UsBankAccount usBankAccount) {
       this.acssDebit = acssDebit;
       this.card = card;
       this.extraParams = extraParams;
       this.sepaDebit = sepaDebit;
+      this.usBankAccount = usBankAccount;
     }
 
     public static Builder builder() {
@@ -589,10 +601,12 @@ public class SetupIntentConfirmParams extends ApiRequestParams {
 
       private SepaDebit sepaDebit;
 
+      private UsBankAccount usBankAccount;
+
       /** Finalize and obtain parameter instance from this builder. */
       public PaymentMethodOptions build() {
         return new PaymentMethodOptions(
-            this.acssDebit, this.card, this.extraParams, this.sepaDebit);
+            this.acssDebit, this.card, this.extraParams, this.sepaDebit, this.usBankAccount);
       }
 
       /**
@@ -643,6 +657,15 @@ public class SetupIntentConfirmParams extends ApiRequestParams {
        */
       public Builder setSepaDebit(SepaDebit sepaDebit) {
         this.sepaDebit = sepaDebit;
+        return this;
+      }
+
+      /**
+       * If this is a {@code us_bank_account} SetupIntent, this sub-hash contains details about the
+       * US bank account payment method options.
+       */
+      public Builder setUsBankAccount(UsBankAccount usBankAccount) {
+        this.usBankAccount = usBankAccount;
         return this;
       }
     }
@@ -1631,6 +1654,95 @@ public class SetupIntentConfirmParams extends ApiRequestParams {
             this.extraParams.putAll(map);
             return this;
           }
+        }
+      }
+    }
+
+    @Getter
+    public static class UsBankAccount {
+      /**
+       * Map of extra parameters for custom features not available in this client library. The
+       * content in this map is not serialized under this field's {@code @SerializedName} value.
+       * Instead, each key/value pair is serialized as if the key is a root-level field (serialized)
+       * name in this param object. Effectively, this map is flattened to its parent instance.
+       */
+      @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
+      Map<String, Object> extraParams;
+
+      /** Verification method for the intent. */
+      @SerializedName("verification_method")
+      VerificationMethod verificationMethod;
+
+      private UsBankAccount(
+          Map<String, Object> extraParams, VerificationMethod verificationMethod) {
+        this.extraParams = extraParams;
+        this.verificationMethod = verificationMethod;
+      }
+
+      public static Builder builder() {
+        return new Builder();
+      }
+
+      public static class Builder {
+        private Map<String, Object> extraParams;
+
+        private VerificationMethod verificationMethod;
+
+        /** Finalize and obtain parameter instance from this builder. */
+        public UsBankAccount build() {
+          return new UsBankAccount(this.extraParams, this.verificationMethod);
+        }
+
+        /**
+         * Add a key/value pair to `extraParams` map. A map is initialized for the first
+         * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
+         * map. See {@link SetupIntentConfirmParams.PaymentMethodOptions.UsBankAccount#extraParams}
+         * for the field documentation.
+         */
+        public Builder putExtraParam(String key, Object value) {
+          if (this.extraParams == null) {
+            this.extraParams = new HashMap<>();
+          }
+          this.extraParams.put(key, value);
+          return this;
+        }
+
+        /**
+         * Add all map key/value pairs to `extraParams` map. A map is initialized for the first
+         * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
+         * map. See {@link SetupIntentConfirmParams.PaymentMethodOptions.UsBankAccount#extraParams}
+         * for the field documentation.
+         */
+        public Builder putAllExtraParam(Map<String, Object> map) {
+          if (this.extraParams == null) {
+            this.extraParams = new HashMap<>();
+          }
+          this.extraParams.putAll(map);
+          return this;
+        }
+
+        /** Verification method for the intent. */
+        public Builder setVerificationMethod(VerificationMethod verificationMethod) {
+          this.verificationMethod = verificationMethod;
+          return this;
+        }
+      }
+
+      public enum VerificationMethod implements ApiRequestParams.EnumParam {
+        @SerializedName("automatic")
+        AUTOMATIC("automatic"),
+
+        @SerializedName("instant")
+        INSTANT("instant"),
+
+        @SerializedName("microdeposits")
+        MICRODEPOSITS("microdeposits");
+
+        @Getter(onMethod_ = {@Override})
+        private final String value;
+
+        VerificationMethod(String value) {
+          this.value = value;
         }
       }
     }

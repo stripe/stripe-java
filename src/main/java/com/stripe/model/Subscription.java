@@ -856,6 +856,13 @@ public class Subscription extends ApiResource implements HasId, MetadataStore<Su
     @SerializedName("konbini")
     Konbini konbini;
 
+    /**
+     * This sub-hash contains details about the ACH direct debit payment method options to pass to
+     * invoices created by the subscription.
+     */
+    @SerializedName("us_bank_account")
+    UsBankAccount usBankAccount;
+
     @Getter
     @Setter
     @EqualsAndHashCode(callSuper = false)
@@ -949,6 +956,19 @@ public class Subscription extends ApiResource implements HasId, MetadataStore<Su
     @Setter
     @EqualsAndHashCode(callSuper = false)
     public static class Konbini extends StripeObject {}
+
+    @Getter
+    @Setter
+    @EqualsAndHashCode(callSuper = false)
+    public static class UsBankAccount extends StripeObject {
+      /**
+       * Bank account verification method.
+       *
+       * <p>One of {@code automatic}, {@code instant}, or {@code microdeposits}.
+       */
+      @SerializedName("verification_method")
+      String verificationMethod;
+    }
   }
 
   @Getter

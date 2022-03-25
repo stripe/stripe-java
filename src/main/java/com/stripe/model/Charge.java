@@ -147,6 +147,15 @@ public class Charge extends ApiResource implements MetadataStore<Charge>, Balanc
   Boolean disputed;
 
   /**
+   * ID of the balance transaction that describes the reversal of the balance on your account due to
+   * payment failure.
+   */
+  @SerializedName("failure_balance_transaction")
+  @Getter(lombok.AccessLevel.NONE)
+  @Setter(lombok.AccessLevel.NONE)
+  ExpandableField<BalanceTransaction> failureBalanceTransaction;
+
+  /**
    * Error code explaining reason for charge failure if available (see <a
    * href="https://stripe.com/docs/api#errors">the errors section</a> for a list of codes).
    */
@@ -455,6 +464,28 @@ public class Charge extends ApiResource implements MetadataStore<Charge>, Balanc
 
   public void setDisputeObject(Dispute expandableObject) {
     this.dispute = new ExpandableField<Dispute>(expandableObject.getId(), expandableObject);
+  }
+
+  /** Get ID of expandable {@code failureBalanceTransaction} object. */
+  public String getFailureBalanceTransaction() {
+    return (this.failureBalanceTransaction != null) ? this.failureBalanceTransaction.getId() : null;
+  }
+
+  public void setFailureBalanceTransaction(String id) {
+    this.failureBalanceTransaction =
+        ApiResource.setExpandableFieldId(id, this.failureBalanceTransaction);
+  }
+
+  /** Get expanded {@code failureBalanceTransaction}. */
+  public BalanceTransaction getFailureBalanceTransactionObject() {
+    return (this.failureBalanceTransaction != null)
+        ? this.failureBalanceTransaction.getExpanded()
+        : null;
+  }
+
+  public void setFailureBalanceTransactionObject(BalanceTransaction expandableObject) {
+    this.failureBalanceTransaction =
+        new ExpandableField<BalanceTransaction>(expandableObject.getId(), expandableObject);
   }
 
   /** Get ID of expandable {@code invoice} object. */
@@ -1078,6 +1109,9 @@ public class Charge extends ApiResource implements MetadataStore<Charge>, Balanc
     @SerializedName("p24")
     P24 p24;
 
+    @SerializedName("paynow")
+    Paynow paynow;
+
     @SerializedName("sepa_credit_transfer")
     SepaCreditTransfer sepaCreditTransfer;
 
@@ -1101,6 +1135,9 @@ public class Charge extends ApiResource implements MetadataStore<Charge>, Balanc
      */
     @SerializedName("type")
     String type;
+
+    @SerializedName("us_bank_account")
+    UsBankAccount usBankAccount;
 
     @SerializedName("wechat")
     Wechat wechat;
@@ -2295,6 +2332,15 @@ public class Charge extends ApiResource implements MetadataStore<Charge>, Balanc
     @Getter
     @Setter
     @EqualsAndHashCode(callSuper = false)
+    public static class Paynow extends StripeObject {
+      /** Reference number associated with this PayNow payment. */
+      @SerializedName("reference")
+      String reference;
+    }
+
+    @Getter
+    @Setter
+    @EqualsAndHashCode(callSuper = false)
     public static class SepaCreditTransfer extends StripeObject {
       /** Name of the bank associated with the bank account. */
       @SerializedName("bank_name")
@@ -2453,6 +2499,46 @@ public class Charge extends ApiResource implements MetadataStore<Charge>, Balanc
     @Setter
     @EqualsAndHashCode(callSuper = false)
     public static class StripeAccount extends StripeObject {}
+
+    @Getter
+    @Setter
+    @EqualsAndHashCode(callSuper = false)
+    public static class UsBankAccount extends StripeObject {
+      /**
+       * Account holder type: individual or company.
+       *
+       * <p>One of {@code company}, or {@code individual}.
+       */
+      @SerializedName("account_holder_type")
+      String accountHolderType;
+
+      /**
+       * Account type: checkings or savings. Defaults to checking if omitted.
+       *
+       * <p>One of {@code checking}, or {@code savings}.
+       */
+      @SerializedName("account_type")
+      String accountType;
+
+      /** Name of the bank associated with the bank account. */
+      @SerializedName("bank_name")
+      String bankName;
+
+      /**
+       * Uniquely identifies this particular bank account. You can use this attribute to check
+       * whether two bank accounts are the same.
+       */
+      @SerializedName("fingerprint")
+      String fingerprint;
+
+      /** Last four digits of the bank account number. */
+      @SerializedName("last4")
+      String last4;
+
+      /** Routing number of the bank account. */
+      @SerializedName("routing_number")
+      String routingNumber;
+    }
 
     @Getter
     @Setter

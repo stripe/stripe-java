@@ -746,6 +746,9 @@ public class Session extends ApiResource implements HasId {
     @SerializedName("oxxo")
     Oxxo oxxo;
 
+    @SerializedName("us_bank_account")
+    UsBankAccount usBankAccount;
+
     @Getter
     @Setter
     @EqualsAndHashCode(callSuper = false)
@@ -887,6 +890,19 @@ public class Session extends ApiResource implements HasId {
        */
       @SerializedName("setup_future_usage")
       String setupFutureUsage;
+    }
+
+    @Getter
+    @Setter
+    @EqualsAndHashCode(callSuper = false)
+    public static class UsBankAccount extends StripeObject {
+      /**
+       * Bank account verification method.
+       *
+       * <p>One of {@code automatic}, or {@code instant}.
+       */
+      @SerializedName("verification_method")
+      String verificationMethod;
     }
   }
 

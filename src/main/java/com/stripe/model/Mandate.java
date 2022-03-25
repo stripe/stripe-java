@@ -226,6 +226,9 @@ public class Mandate extends ApiResource implements HasId {
     @SerializedName("type")
     String type;
 
+    @SerializedName("us_bank_account")
+    UsBankAccount usBankAccount;
+
     @Getter
     @Setter
     @EqualsAndHashCode(callSuper = false)
@@ -278,6 +281,11 @@ public class Mandate extends ApiResource implements HasId {
       @SerializedName("url")
       String url;
     }
+
+    @Getter
+    @Setter
+    @EqualsAndHashCode(callSuper = false)
+    public static class UsBankAccount extends StripeObject {}
   }
 
   @Getter

@@ -18,6 +18,10 @@ public class PaymentIntentVerifyMicrodepositsParams extends ApiRequestParams {
   @SerializedName("amounts")
   List<Long> amounts;
 
+  /** A six-character code starting with SM present in the microdeposit sent to the bank account. */
+  @SerializedName("descriptor_code")
+  String descriptorCode;
+
   /** Specifies which fields in the response should be expanded. */
   @SerializedName("expand")
   List<String> expand;
@@ -32,8 +36,12 @@ public class PaymentIntentVerifyMicrodepositsParams extends ApiRequestParams {
   Map<String, Object> extraParams;
 
   private PaymentIntentVerifyMicrodepositsParams(
-      List<Long> amounts, List<String> expand, Map<String, Object> extraParams) {
+      List<Long> amounts,
+      String descriptorCode,
+      List<String> expand,
+      Map<String, Object> extraParams) {
     this.amounts = amounts;
+    this.descriptorCode = descriptorCode;
     this.expand = expand;
     this.extraParams = extraParams;
   }
@@ -45,6 +53,8 @@ public class PaymentIntentVerifyMicrodepositsParams extends ApiRequestParams {
   public static class Builder {
     private List<Long> amounts;
 
+    private String descriptorCode;
+
     private List<String> expand;
 
     private Map<String, Object> extraParams;
@@ -52,7 +62,7 @@ public class PaymentIntentVerifyMicrodepositsParams extends ApiRequestParams {
     /** Finalize and obtain parameter instance from this builder. */
     public PaymentIntentVerifyMicrodepositsParams build() {
       return new PaymentIntentVerifyMicrodepositsParams(
-          this.amounts, this.expand, this.extraParams);
+          this.amounts, this.descriptorCode, this.expand, this.extraParams);
     }
 
     /**
@@ -78,6 +88,14 @@ public class PaymentIntentVerifyMicrodepositsParams extends ApiRequestParams {
         this.amounts = new ArrayList<>();
       }
       this.amounts.addAll(elements);
+      return this;
+    }
+
+    /**
+     * A six-character code starting with SM present in the microdeposit sent to the bank account.
+     */
+    public Builder setDescriptorCode(String descriptorCode) {
+      this.descriptorCode = descriptorCode;
       return this;
     }
 
