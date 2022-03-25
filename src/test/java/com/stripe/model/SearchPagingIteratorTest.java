@@ -93,6 +93,7 @@ public class SearchPagingIteratorTest extends BaseStripeTest {
       models.add(model);
     }
 
+    assertEquals(5, collection.getTotalCount());
     assertEquals(5, models.size());
     assertEquals("pm_123", models.get(0).getId());
     assertEquals("pm_124", models.get(1).getId());

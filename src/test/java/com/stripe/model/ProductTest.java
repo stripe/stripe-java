@@ -5,6 +5,7 @@ import static org.junit.jupiter.api.Assertions.assertNotNull;
 
 import com.stripe.BaseStripeTest;
 import com.stripe.net.ApiResource;
+import com.stripe.param.ChargeSearchParams;
 import org.junit.jupiter.api.Test;
 
 public class ProductTest extends BaseStripeTest {

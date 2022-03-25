@@ -19,6 +19,9 @@ public abstract class StripeSearchResult<T> extends StripeObject
   List<T> data;
 
   @Getter(onMethod_ = {@Override})
+  Integer totalCount;
+
+  @Getter(onMethod_ = {@Override})
   Boolean hasMore;
 
   @Getter(onMethod_ = {@Override})
