@@ -12,6 +12,7 @@ import com.stripe.param.CustomerCreateParams;
 import com.stripe.param.CustomerListParams;
 import com.stripe.param.CustomerListPaymentMethodsParams;
 import com.stripe.param.CustomerRetrieveParams;
+import com.stripe.param.CustomerSearchParams;
 import com.stripe.param.CustomerUpdateParams;
 import java.util.List;
 import java.util.Map;
@@ -211,6 +212,42 @@ public class Customer extends ApiResource implements HasId, MetadataStore<Custom
 
   public void setTestClockObject(TestClock expandableObject) {
     this.testClock = new ExpandableField<TestClock>(expandableObject.getId(), expandableObject);
+  }
+
+  /**
+   * Search for customers you’ve previously created using Stripe’s <a
+   * href="https://stripe.com/docs/search#search-query-language">Search Query Language</a>.
+   */
+  public static CustomerSearchResult search(Map<String, Object> params) throws StripeException {
+    return search(params, (RequestOptions) null);
+  }
+
+  /**
+   * Search for customers you’ve previously created using Stripe’s <a
+   * href="https://stripe.com/docs/search#search-query-language">Search Query Language</a>.
+   */
+  public static CustomerSearchResult search(Map<String, Object> params, RequestOptions options)
+      throws StripeException {
+    String url = String.format("%s%s", Stripe.getApiBase(), "/v1/customers/search");
+    return ApiResource.requestSearchResult(url, params, CustomerSearchResult.class, options);
+  }
+
+  /**
+   * Search for customers you’ve previously created using Stripe’s <a
+   * href="https://stripe.com/docs/search#search-query-language">Search Query Language</a>.
+   */
+  public static CustomerSearchResult search(CustomerSearchParams params) throws StripeException {
+    return search(params, (RequestOptions) null);
+  }
+
+  /**
+   * Search for customers you’ve previously created using Stripe’s <a
+   * href="https://stripe.com/docs/search#search-query-language">Search Query Language</a>.
+   */
+  public static CustomerSearchResult search(CustomerSearchParams params, RequestOptions options)
+      throws StripeException {
+    String url = String.format("%s%s", Stripe.getApiBase(), "/v1/customers/search");
+    return ApiResource.requestSearchResult(url, params, CustomerSearchResult.class, options);
   }
 
   /**
