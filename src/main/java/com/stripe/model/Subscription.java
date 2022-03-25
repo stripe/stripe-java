@@ -11,6 +11,7 @@ import com.stripe.param.SubscriptionCancelParams;
 import com.stripe.param.SubscriptionCreateParams;
 import com.stripe.param.SubscriptionListParams;
 import com.stripe.param.SubscriptionRetrieveParams;
+import com.stripe.param.SubscriptionSearchParams;
 import com.stripe.param.SubscriptionUpdateParams;
 import java.math.BigDecimal;
 import java.util.List;
@@ -431,6 +432,43 @@ public class Subscription extends ApiResource implements HasId, MetadataStore<Su
 
   public void setTestClockObject(TestClock expandableObject) {
     this.testClock = new ExpandableField<TestClock>(expandableObject.getId(), expandableObject);
+  }
+
+  /**
+   * Search for subscriptions you’ve previously created using Stripe’s <a
+   * href="https://stripe.com/docs/search#search-query-language">Search Query Language</a>.
+   */
+  public static SubscriptionSearchResult search(Map<String, Object> params) throws StripeException {
+    return search(params, (RequestOptions) null);
+  }
+
+  /**
+   * Search for subscriptions you’ve previously created using Stripe’s <a
+   * href="https://stripe.com/docs/search#search-query-language">Search Query Language</a>.
+   */
+  public static SubscriptionSearchResult search(Map<String, Object> params, RequestOptions options)
+      throws StripeException {
+    String url = String.format("%s%s", Stripe.getApiBase(), "/v1/subscriptions/search");
+    return ApiResource.requestSearchResult(url, params, SubscriptionSearchResult.class, options);
+  }
+
+  /**
+   * Search for subscriptions you’ve previously created using Stripe’s <a
+   * href="https://stripe.com/docs/search#search-query-language">Search Query Language</a>.
+   */
+  public static SubscriptionSearchResult search(SubscriptionSearchParams params)
+      throws StripeException {
+    return search(params, (RequestOptions) null);
+  }
+
+  /**
+   * Search for subscriptions you’ve previously created using Stripe’s <a
+   * href="https://stripe.com/docs/search#search-query-language">Search Query Language</a>.
+   */
+  public static SubscriptionSearchResult search(
+      SubscriptionSearchParams params, RequestOptions options) throws StripeException {
+    String url = String.format("%s%s", Stripe.getApiBase(), "/v1/subscriptions/search");
+    return ApiResource.requestSearchResult(url, params, SubscriptionSearchResult.class, options);
   }
 
   /**
