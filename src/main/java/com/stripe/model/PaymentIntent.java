@@ -1164,6 +1164,9 @@ public class PaymentIntent extends ApiResource implements HasId, MetadataStore<P
     @SerializedName("oxxo_display_details")
     NextActionOxxoDisplayDetails oxxoDisplayDetails;
 
+    @SerializedName("paynow_display_qr_code")
+    PaynowDisplayQrCode paynowDisplayQrCode;
+
     @SerializedName("redirect_to_url")
     NextActionRedirectToUrl redirectToUrl;
 
@@ -1198,6 +1201,26 @@ public class PaymentIntent extends ApiResource implements HasId, MetadataStore<P
     @Getter
     @Setter
     @EqualsAndHashCode(callSuper = false)
+    public static class PaynowDisplayQrCode extends StripeObject {
+      /**
+       * The raw data string used to generate QR code, it should be used together with QR code
+       * library.
+       */
+      @SerializedName("data")
+      String data;
+
+      /** The image_url_png string used to render QR code. */
+      @SerializedName("image_url_png")
+      String imageUrlPng;
+
+      /** The image_url_svg string used to render QR code. */
+      @SerializedName("image_url_svg")
+      String imageUrlSvg;
+    }
+
+    @Getter
+    @Setter
+    @EqualsAndHashCode(callSuper = false)
     public static class VerifyWithMicrodeposits extends StripeObject {
       /** The timestamp when the microdeposits are expected to land. */
       @SerializedName("arrival_date")
@@ -1209,6 +1232,15 @@ public class PaymentIntent extends ApiResource implements HasId, MetadataStore<P
        */
       @SerializedName("hosted_verification_url")
       String hostedVerificationUrl;
+
+      /**
+       * The type of the microdeposit sent to the customer. Used to distinguish between different
+       * verification methods.
+       *
+       * <p>One of {@code amounts}, or {@code descriptor_code}.
+       */
+      @SerializedName("microdeposit_type")
+      String microdepositType;
     }
 
     @Getter
@@ -1546,11 +1578,17 @@ public class PaymentIntent extends ApiResource implements HasId, MetadataStore<P
     @SerializedName("p24")
     P24 p24;
 
+    @SerializedName("paynow")
+    Paynow paynow;
+
     @SerializedName("sepa_debit")
     SepaDebit sepaDebit;
 
     @SerializedName("sofort")
     Sofort sofort;
+
+    @SerializedName("us_bank_account")
+    UsBankAccount usBankAccount;
 
     @SerializedName("wechat_pay")
     WechatPay wechatPay;
@@ -1627,6 +1665,14 @@ public class PaymentIntent extends ApiResource implements HasId, MetadataStore<P
     @Setter
     @EqualsAndHashCode(callSuper = false)
     public static class AfterpayClearpay extends StripeObject {
+      /**
+       * Controls when the funds will be captured from the customer's account.
+       *
+       * <p>Equal to {@code manual}.
+       */
+      @SerializedName("capture_method")
+      String captureMethod;
+
       /**
        * Order identifier shown to the customer in Afterpay’s online portal. We recommend using a
        * value that helps you answer any questions a customer might have about the payment. The
@@ -1802,6 +1848,14 @@ public class PaymentIntent extends ApiResource implements HasId, MetadataStore<P
     @Setter
     @EqualsAndHashCode(callSuper = false)
     public static class Card extends StripeObject {
+      /**
+       * Controls when the funds will be captured from the customer's account.
+       *
+       * <p>Equal to {@code manual}.
+       */
+      @SerializedName("capture_method")
+      String captureMethod;
+
       /**
        * Installment details for this payment (Mexico only).
        *
@@ -2100,6 +2154,14 @@ public class PaymentIntent extends ApiResource implements HasId, MetadataStore<P
     @Setter
     @EqualsAndHashCode(callSuper = false)
     public static class Klarna extends StripeObject {
+      /**
+       * Controls when the funds will be captured from the customer's account.
+       *
+       * <p>Equal to {@code manual}.
+       */
+      @SerializedName("capture_method")
+      String captureMethod;
+
       /** Preferred locale of the Klarna checkout page that the customer is redirected to. */
       @SerializedName("preferred_locale")
       String preferredLocale;
@@ -2241,6 +2303,31 @@ public class PaymentIntent extends ApiResource implements HasId, MetadataStore<P
     @Getter
     @Setter
     @EqualsAndHashCode(callSuper = false)
+    public static class Paynow extends StripeObject {
+      /**
+       * Indicates that you intend to make future payments with this PaymentIntent's payment method.
+       *
+       * <p>Providing this parameter will <a
+       * href="https://stripe.com/docs/payments/save-during-payment">attach the payment method</a>
+       * to the PaymentIntent's Customer, if present, after the PaymentIntent is confirmed and any
+       * required actions from the user are complete. If no Customer was provided, the payment
+       * method can still be <a
+       * href="https://stripe.com/docs/api/payment_methods/attach">attached</a> to a Customer after
+       * the transaction completes.
+       *
+       * <p>When processing card payments, Stripe also uses {@code setup_future_usage} to
+       * dynamically optimize your payment flow and comply with regional legislation and network
+       * rules, such as <a href="https://stripe.com/docs/strong-customer-authentication">SCA</a>.
+       *
+       * <p>Equal to {@code none}.
+       */
+      @SerializedName("setup_future_usage")
+      String setupFutureUsage;
+    }
+
+    @Getter
+    @Setter
+    @EqualsAndHashCode(callSuper = false)
     public static class SepaDebit extends StripeObject {
       @SerializedName("mandate_options")
       SepaDebitMandateOptions mandateOptions;
@@ -2303,6 +2390,39 @@ public class PaymentIntent extends ApiResource implements HasId, MetadataStore<P
        */
       @SerializedName("setup_future_usage")
       String setupFutureUsage;
+    }
+
+    @Getter
+    @Setter
+    @EqualsAndHashCode(callSuper = false)
+    public static class UsBankAccount extends StripeObject {
+      /**
+       * Indicates that you intend to make future payments with this PaymentIntent's payment method.
+       *
+       * <p>Providing this parameter will <a
+       * href="https://stripe.com/docs/payments/save-during-payment">attach the payment method</a>
+       * to the PaymentIntent's Customer, if present, after the PaymentIntent is confirmed and any
+       * required actions from the user are complete. If no Customer was provided, the payment
+       * method can still be <a
+       * href="https://stripe.com/docs/api/payment_methods/attach">attached</a> to a Customer after
+       * the transaction completes.
+       *
+       * <p>When processing card payments, Stripe also uses {@code setup_future_usage} to
+       * dynamically optimize your payment flow and comply with regional legislation and network
+       * rules, such as <a href="https://stripe.com/docs/strong-customer-authentication">SCA</a>.
+       *
+       * <p>One of {@code none}, {@code off_session}, or {@code on_session}.
+       */
+      @SerializedName("setup_future_usage")
+      String setupFutureUsage;
+
+      /**
+       * Bank account verification method.
+       *
+       * <p>One of {@code automatic}, {@code instant}, or {@code microdeposits}.
+       */
+      @SerializedName("verification_method")
+      String verificationMethod;
     }
 
     @Getter

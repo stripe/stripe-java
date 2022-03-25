@@ -88,6 +88,13 @@ public class SubscriptionListParams extends ApiRequestParams {
   @SerializedName("status")
   Status status;
 
+  /**
+   * Filter for subscriptions that are associated with the specified test clock. The response will
+   * not include subscriptions with test clocks if this and the customer parameter is not set.
+   */
+  @SerializedName("test_clock")
+  String testClock;
+
   private SubscriptionListParams(
       CollectionMethod collectionMethod,
       Object created,
@@ -101,7 +108,8 @@ public class SubscriptionListParams extends ApiRequestParams {
       String plan,
       String price,
       String startingAfter,
-      Status status) {
+      Status status,
+      String testClock) {
     this.collectionMethod = collectionMethod;
     this.created = created;
     this.currentPeriodEnd = currentPeriodEnd;
@@ -115,6 +123,7 @@ public class SubscriptionListParams extends ApiRequestParams {
     this.price = price;
     this.startingAfter = startingAfter;
     this.status = status;
+    this.testClock = testClock;
   }
 
   public static Builder builder() {
@@ -148,6 +157,8 @@ public class SubscriptionListParams extends ApiRequestParams {
 
     private Status status;
 
+    private String testClock;
+
     /** Finalize and obtain parameter instance from this builder. */
     public SubscriptionListParams build() {
       return new SubscriptionListParams(
@@ -163,7 +174,8 @@ public class SubscriptionListParams extends ApiRequestParams {
           this.plan,
           this.price,
           this.startingAfter,
-          this.status);
+          this.status,
+          this.testClock);
     }
 
     /**
@@ -317,6 +329,15 @@ public class SubscriptionListParams extends ApiRequestParams {
      */
     public Builder setStatus(Status status) {
       this.status = status;
+      return this;
+    }
+
+    /**
+     * Filter for subscriptions that are associated with the specified test clock. The response will
+     * not include subscriptions with test clocks if this and the customer parameter is not set.
+     */
+    public Builder setTestClock(String testClock) {
+      this.testClock = testClock;
       return this;
     }
   }

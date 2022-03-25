@@ -180,6 +180,13 @@ public class PaymentMethodCreateParams extends ApiRequestParams {
   String paymentMethod;
 
   /**
+   * If this is a {@code paynow} PaymentMethod, this hash contains details about the PayNow payment
+   * method.
+   */
+  @SerializedName("paynow")
+  Paynow paynow;
+
+  /**
    * If this is a {@code sepa_debit} PaymentMethod, this hash contains details about the SEPA debit
    * bank account.
    */
@@ -199,6 +206,13 @@ public class PaymentMethodCreateParams extends ApiRequestParams {
    */
   @SerializedName("type")
   Type type;
+
+  /**
+   * If this is an {@code us_bank_account} PaymentMethod, this hash contains details about the US
+   * bank account payment method.
+   */
+  @SerializedName("us_bank_account")
+  UsBankAccount usBankAccount;
 
   /**
    * If this is an {@code wechat_pay} PaymentMethod, this hash contains details about the wechat_pay
@@ -232,9 +246,11 @@ public class PaymentMethodCreateParams extends ApiRequestParams {
       Oxxo oxxo,
       P24 p24,
       String paymentMethod,
+      Paynow paynow,
       SepaDebit sepaDebit,
       Sofort sofort,
       Type type,
+      UsBankAccount usBankAccount,
       WechatPay wechatPay) {
     this.acssDebit = acssDebit;
     this.afterpayClearpay = afterpayClearpay;
@@ -260,9 +276,11 @@ public class PaymentMethodCreateParams extends ApiRequestParams {
     this.oxxo = oxxo;
     this.p24 = p24;
     this.paymentMethod = paymentMethod;
+    this.paynow = paynow;
     this.sepaDebit = sepaDebit;
     this.sofort = sofort;
     this.type = type;
+    this.usBankAccount = usBankAccount;
     this.wechatPay = wechatPay;
   }
 
@@ -319,11 +337,15 @@ public class PaymentMethodCreateParams extends ApiRequestParams {
 
     private String paymentMethod;
 
+    private Paynow paynow;
+
     private SepaDebit sepaDebit;
 
     private Sofort sofort;
 
     private Type type;
+
+    private UsBankAccount usBankAccount;
 
     private WechatPay wechatPay;
 
@@ -354,9 +376,11 @@ public class PaymentMethodCreateParams extends ApiRequestParams {
           this.oxxo,
           this.p24,
           this.paymentMethod,
+          this.paynow,
           this.sepaDebit,
           this.sofort,
           this.type,
+          this.usBankAccount,
           this.wechatPay);
     }
 
@@ -639,6 +663,15 @@ public class PaymentMethodCreateParams extends ApiRequestParams {
     }
 
     /**
+     * If this is a {@code paynow} PaymentMethod, this hash contains details about the PayNow
+     * payment method.
+     */
+    public Builder setPaynow(Paynow paynow) {
+      this.paynow = paynow;
+      return this;
+    }
+
+    /**
      * If this is a {@code sepa_debit} PaymentMethod, this hash contains details about the SEPA
      * debit bank account.
      */
@@ -663,6 +696,15 @@ public class PaymentMethodCreateParams extends ApiRequestParams {
      */
     public Builder setType(Type type) {
       this.type = type;
+      return this;
+    }
+
+    /**
+     * If this is an {@code us_bank_account} PaymentMethod, this hash contains details about the US
+     * bank account payment method.
+     */
+    public Builder setUsBankAccount(UsBankAccount usBankAccount) {
+      this.usBankAccount = usBankAccount;
       return this;
     }
 
@@ -2662,6 +2704,61 @@ public class PaymentMethodCreateParams extends ApiRequestParams {
   }
 
   @Getter
+  public static class Paynow {
+    /**
+     * Map of extra parameters for custom features not available in this client library. The content
+     * in this map is not serialized under this field's {@code @SerializedName} value. Instead, each
+     * key/value pair is serialized as if the key is a root-level field (serialized) name in this
+     * param object. Effectively, this map is flattened to its parent instance.
+     */
+    @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
+    Map<String, Object> extraParams;
+
+    private Paynow(Map<String, Object> extraParams) {
+      this.extraParams = extraParams;
+    }
+
+    public static Builder builder() {
+      return new Builder();
+    }
+
+    public static class Builder {
+      private Map<String, Object> extraParams;
+
+      /** Finalize and obtain parameter instance from this builder. */
+      public Paynow build() {
+        return new Paynow(this.extraParams);
+      }
+
+      /**
+       * Add a key/value pair to `extraParams` map. A map is initialized for the first `put/putAll`
+       * call, and subsequent calls add additional key/value pairs to the original map. See {@link
+       * PaymentMethodCreateParams.Paynow#extraParams} for the field documentation.
+       */
+      public Builder putExtraParam(String key, Object value) {
+        if (this.extraParams == null) {
+          this.extraParams = new HashMap<>();
+        }
+        this.extraParams.put(key, value);
+        return this;
+      }
+
+      /**
+       * Add all map key/value pairs to `extraParams` map. A map is initialized for the first
+       * `put/putAll` call, and subsequent calls add additional key/value pairs to the original map.
+       * See {@link PaymentMethodCreateParams.Paynow#extraParams} for the field documentation.
+       */
+      public Builder putAllExtraParam(Map<String, Object> map) {
+        if (this.extraParams == null) {
+          this.extraParams = new HashMap<>();
+        }
+        this.extraParams.putAll(map);
+        return this;
+      }
+    }
+  }
+
+  @Getter
   public static class SepaDebit {
     /**
      * Map of extra parameters for custom features not available in this client library. The content
@@ -2825,6 +2922,154 @@ public class PaymentMethodCreateParams extends ApiRequestParams {
   }
 
   @Getter
+  public static class UsBankAccount {
+    /** Account holder type: individual or company. */
+    @SerializedName("account_holder_type")
+    AccountHolderType accountHolderType;
+
+    /** Account number of the bank account. */
+    @SerializedName("account_number")
+    String accountNumber;
+
+    /** Account type: checkings or savings. Defaults to checking if omitted. */
+    @SerializedName("account_type")
+    AccountType accountType;
+
+    /**
+     * Map of extra parameters for custom features not available in this client library. The content
+     * in this map is not serialized under this field's {@code @SerializedName} value. Instead, each
+     * key/value pair is serialized as if the key is a root-level field (serialized) name in this
+     * param object. Effectively, this map is flattened to its parent instance.
+     */
+    @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
+    Map<String, Object> extraParams;
+
+    /** Routing number of the bank account. */
+    @SerializedName("routing_number")
+    String routingNumber;
+
+    private UsBankAccount(
+        AccountHolderType accountHolderType,
+        String accountNumber,
+        AccountType accountType,
+        Map<String, Object> extraParams,
+        String routingNumber) {
+      this.accountHolderType = accountHolderType;
+      this.accountNumber = accountNumber;
+      this.accountType = accountType;
+      this.extraParams = extraParams;
+      this.routingNumber = routingNumber;
+    }
+
+    public static Builder builder() {
+      return new Builder();
+    }
+
+    public static class Builder {
+      private AccountHolderType accountHolderType;
+
+      private String accountNumber;
+
+      private AccountType accountType;
+
+      private Map<String, Object> extraParams;
+
+      private String routingNumber;
+
+      /** Finalize and obtain parameter instance from this builder. */
+      public UsBankAccount build() {
+        return new UsBankAccount(
+            this.accountHolderType,
+            this.accountNumber,
+            this.accountType,
+            this.extraParams,
+            this.routingNumber);
+      }
+
+      /** Account holder type: individual or company. */
+      public Builder setAccountHolderType(AccountHolderType accountHolderType) {
+        this.accountHolderType = accountHolderType;
+        return this;
+      }
+
+      /** Account number of the bank account. */
+      public Builder setAccountNumber(String accountNumber) {
+        this.accountNumber = accountNumber;
+        return this;
+      }
+
+      /** Account type: checkings or savings. Defaults to checking if omitted. */
+      public Builder setAccountType(AccountType accountType) {
+        this.accountType = accountType;
+        return this;
+      }
+
+      /**
+       * Add a key/value pair to `extraParams` map. A map is initialized for the first `put/putAll`
+       * call, and subsequent calls add additional key/value pairs to the original map. See {@link
+       * PaymentMethodCreateParams.UsBankAccount#extraParams} for the field documentation.
+       */
+      public Builder putExtraParam(String key, Object value) {
+        if (this.extraParams == null) {
+          this.extraParams = new HashMap<>();
+        }
+        this.extraParams.put(key, value);
+        return this;
+      }
+
+      /**
+       * Add all map key/value pairs to `extraParams` map. A map is initialized for the first
+       * `put/putAll` call, and subsequent calls add additional key/value pairs to the original map.
+       * See {@link PaymentMethodCreateParams.UsBankAccount#extraParams} for the field
+       * documentation.
+       */
+      public Builder putAllExtraParam(Map<String, Object> map) {
+        if (this.extraParams == null) {
+          this.extraParams = new HashMap<>();
+        }
+        this.extraParams.putAll(map);
+        return this;
+      }
+
+      /** Routing number of the bank account. */
+      public Builder setRoutingNumber(String routingNumber) {
+        this.routingNumber = routingNumber;
+        return this;
+      }
+    }
+
+    public enum AccountHolderType implements ApiRequestParams.EnumParam {
+      @SerializedName("company")
+      COMPANY("company"),
+
+      @SerializedName("individual")
+      INDIVIDUAL("individual");
+
+      @Getter(onMethod_ = {@Override})
+      private final String value;
+
+      AccountHolderType(String value) {
+        this.value = value;
+      }
+    }
+
+    public enum AccountType implements ApiRequestParams.EnumParam {
+      @SerializedName("checking")
+      CHECKING("checking"),
+
+      @SerializedName("savings")
+      SAVINGS("savings");
+
+      @Getter(onMethod_ = {@Override})
+      private final String value;
+
+      AccountType(String value) {
+        this.value = value;
+      }
+    }
+  }
+
+  @Getter
   public static class WechatPay {
     /**
      * Map of extra parameters for custom features not available in this client library. The content
@@ -2931,11 +3176,17 @@ public class PaymentMethodCreateParams extends ApiRequestParams {
     @SerializedName("p24")
     P24("p24"),
 
+    @SerializedName("paynow")
+    PAYNOW("paynow"),
+
     @SerializedName("sepa_debit")
     SEPA_DEBIT("sepa_debit"),
 
     @SerializedName("sofort")
     SOFORT("sofort"),
+
+    @SerializedName("us_bank_account")
+    US_BANK_ACCOUNT("us_bank_account"),
 
     @SerializedName("wechat_pay")
     WECHAT_PAY("wechat_pay");

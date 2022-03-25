@@ -262,6 +262,9 @@ public class SetupAttempt extends ApiResource implements HasId {
     @SerializedName("type")
     String type;
 
+    @SerializedName("us_bank_account")
+    UsBankAccount usBankAccount;
+
     @Getter
     @Setter
     @EqualsAndHashCode(callSuper = false)
@@ -604,5 +607,10 @@ public class SetupAttempt extends ApiResource implements HasId {
             new ExpandableField<Mandate>(expandableObject.getId(), expandableObject);
       }
     }
+
+    @Getter
+    @Setter
+    @EqualsAndHashCode(callSuper = false)
+    public static class UsBankAccount extends StripeObject {}
   }
 }

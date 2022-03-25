@@ -756,6 +756,15 @@ public class SetupIntent extends ApiResource implements HasId, MetadataStore<Set
        */
       @SerializedName("hosted_verification_url")
       String hostedVerificationUrl;
+
+      /**
+       * The type of the microdeposit sent to the customer. Used to distinguish between different
+       * verification methods.
+       *
+       * <p>One of {@code amounts}, or {@code descriptor_code}.
+       */
+      @SerializedName("microdeposit_type")
+      String microdepositType;
     }
   }
 
@@ -787,6 +796,9 @@ public class SetupIntent extends ApiResource implements HasId, MetadataStore<Set
 
     @SerializedName("sepa_debit")
     SepaDebit sepaDebit;
+
+    @SerializedName("us_bank_account")
+    UsBankAccount usBankAccount;
 
     @Getter
     @Setter
@@ -955,5 +967,18 @@ public class SetupIntent extends ApiResource implements HasId, MetadataStore<Set
     @Setter
     @EqualsAndHashCode(callSuper = false)
     public static class SepaDebitMandateOptions extends StripeObject {}
+
+    @Getter
+    @Setter
+    @EqualsAndHashCode(callSuper = false)
+    public static class UsBankAccount extends StripeObject {
+      /**
+       * Bank account verification method.
+       *
+       * <p>One of {@code automatic}, {@code instant}, or {@code microdeposits}.
+       */
+      @SerializedName("verification_method")
+      String verificationMethod;
+    }
   }
 }

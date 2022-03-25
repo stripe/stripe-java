@@ -241,11 +241,17 @@ public class CustomerListPaymentMethodsParams extends ApiRequestParams {
     @SerializedName("p24")
     P24("p24"),
 
+    @SerializedName("paynow")
+    PAYNOW("paynow"),
+
     @SerializedName("sepa_debit")
     SEPA_DEBIT("sepa_debit"),
 
     @SerializedName("sofort")
     SOFORT("sofort"),
+
+    @SerializedName("us_bank_account")
+    US_BANK_ACCOUNT("us_bank_account"),
 
     @SerializedName("wechat_pay")
     WECHAT_PAY("wechat_pay");

@@ -1147,17 +1147,26 @@ public class InvoiceCreateParams extends ApiRequestParams {
       @SerializedName("konbini")
       Object konbini;
 
+      /**
+       * If paying by {@code us_bank_account}, this sub-hash contains details about the ACH direct
+       * debit payment method options to pass to the invoice’s PaymentIntent.
+       */
+      @SerializedName("us_bank_account")
+      Object usBankAccount;
+
       private PaymentMethodOptions(
           Object acssDebit,
           Object bancontact,
           Object card,
           Map<String, Object> extraParams,
-          Object konbini) {
+          Object konbini,
+          Object usBankAccount) {
         this.acssDebit = acssDebit;
         this.bancontact = bancontact;
         this.card = card;
         this.extraParams = extraParams;
         this.konbini = konbini;
+        this.usBankAccount = usBankAccount;
       }
 
       public static Builder builder() {
@@ -1175,10 +1184,17 @@ public class InvoiceCreateParams extends ApiRequestParams {
 
         private Object konbini;
 
+        private Object usBankAccount;
+
         /** Finalize and obtain parameter instance from this builder. */
         public PaymentMethodOptions build() {
           return new PaymentMethodOptions(
-              this.acssDebit, this.bancontact, this.card, this.extraParams, this.konbini);
+              this.acssDebit,
+              this.bancontact,
+              this.card,
+              this.extraParams,
+              this.konbini,
+              this.usBankAccount);
         }
 
         /**
@@ -1278,6 +1294,24 @@ public class InvoiceCreateParams extends ApiRequestParams {
          */
         public Builder setKonbini(EmptyParam konbini) {
           this.konbini = konbini;
+          return this;
+        }
+
+        /**
+         * If paying by {@code us_bank_account}, this sub-hash contains details about the ACH direct
+         * debit payment method options to pass to the invoice’s PaymentIntent.
+         */
+        public Builder setUsBankAccount(UsBankAccount usBankAccount) {
+          this.usBankAccount = usBankAccount;
+          return this;
+        }
+
+        /**
+         * If paying by {@code us_bank_account}, this sub-hash contains details about the ACH direct
+         * debit payment method options to pass to the invoice’s PaymentIntent.
+         */
+        public Builder setUsBankAccount(EmptyParam usBankAccount) {
+          this.usBankAccount = usBankAccount;
           return this;
         }
       }
@@ -1742,6 +1776,98 @@ public class InvoiceCreateParams extends ApiRequestParams {
           }
         }
       }
+
+      @Getter
+      public static class UsBankAccount {
+        /**
+         * Map of extra parameters for custom features not available in this client library. The
+         * content in this map is not serialized under this field's {@code @SerializedName} value.
+         * Instead, each key/value pair is serialized as if the key is a root-level field
+         * (serialized) name in this param object. Effectively, this map is flattened to its parent
+         * instance.
+         */
+        @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
+        Map<String, Object> extraParams;
+
+        /** Verification method for the intent. */
+        @SerializedName("verification_method")
+        VerificationMethod verificationMethod;
+
+        private UsBankAccount(
+            Map<String, Object> extraParams, VerificationMethod verificationMethod) {
+          this.extraParams = extraParams;
+          this.verificationMethod = verificationMethod;
+        }
+
+        public static Builder builder() {
+          return new Builder();
+        }
+
+        public static class Builder {
+          private Map<String, Object> extraParams;
+
+          private VerificationMethod verificationMethod;
+
+          /** Finalize and obtain parameter instance from this builder. */
+          public UsBankAccount build() {
+            return new UsBankAccount(this.extraParams, this.verificationMethod);
+          }
+
+          /**
+           * Add a key/value pair to `extraParams` map. A map is initialized for the first
+           * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
+           * map. See {@link
+           * InvoiceCreateParams.PaymentSettings.PaymentMethodOptions.UsBankAccount#extraParams} for
+           * the field documentation.
+           */
+          public Builder putExtraParam(String key, Object value) {
+            if (this.extraParams == null) {
+              this.extraParams = new HashMap<>();
+            }
+            this.extraParams.put(key, value);
+            return this;
+          }
+
+          /**
+           * Add all map key/value pairs to `extraParams` map. A map is initialized for the first
+           * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
+           * map. See {@link
+           * InvoiceCreateParams.PaymentSettings.PaymentMethodOptions.UsBankAccount#extraParams} for
+           * the field documentation.
+           */
+          public Builder putAllExtraParam(Map<String, Object> map) {
+            if (this.extraParams == null) {
+              this.extraParams = new HashMap<>();
+            }
+            this.extraParams.putAll(map);
+            return this;
+          }
+
+          /** Verification method for the intent. */
+          public Builder setVerificationMethod(VerificationMethod verificationMethod) {
+            this.verificationMethod = verificationMethod;
+            return this;
+          }
+        }
+
+        public enum VerificationMethod implements ApiRequestParams.EnumParam {
+          @SerializedName("automatic")
+          AUTOMATIC("automatic"),
+
+          @SerializedName("instant")
+          INSTANT("instant"),
+
+          @SerializedName("microdeposits")
+          MICRODEPOSITS("microdeposits");
+
+          @Getter(onMethod_ = {@Override})
+          private final String value;
+
+          VerificationMethod(String value) {
+            this.value = value;
+          }
+        }
+      }
     }
 
     public enum PaymentMethodType implements ApiRequestParams.EnumParam {
@@ -1784,6 +1910,9 @@ public class InvoiceCreateParams extends ApiRequestParams {
       @SerializedName("konbini")
       KONBINI("konbini"),
 
+      @SerializedName("paynow")
+      PAYNOW("paynow"),
+
       @SerializedName("sepa_credit_transfer")
       SEPA_CREDIT_TRANSFER("sepa_credit_transfer"),
 
@@ -1792,6 +1921,9 @@ public class InvoiceCreateParams extends ApiRequestParams {
 
       @SerializedName("sofort")
       SOFORT("sofort"),
+
+      @SerializedName("us_bank_account")
+      US_BANK_ACCOUNT("us_bank_account"),
 
       @SerializedName("wechat_pay")
       WECHAT_PAY("wechat_pay");

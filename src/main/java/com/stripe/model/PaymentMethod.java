@@ -124,6 +124,9 @@ public class PaymentMethod extends ApiResource implements HasId, MetadataStore<P
   @SerializedName("p24")
   P24 p24;
 
+  @SerializedName("paynow")
+  Paynow paynow;
+
   @SerializedName("sepa_debit")
   SepaDebit sepaDebit;
 
@@ -137,11 +140,14 @@ public class PaymentMethod extends ApiResource implements HasId, MetadataStore<P
    * <p>One of {@code acss_debit}, {@code afterpay_clearpay}, {@code alipay}, {@code au_becs_debit},
    * {@code bacs_debit}, {@code bancontact}, {@code boleto}, {@code card}, {@code card_present},
    * {@code eps}, {@code fpx}, {@code giropay}, {@code grabpay}, {@code ideal}, {@code
-   * interac_present}, {@code klarna}, {@code konbini}, {@code oxxo}, {@code p24}, {@code
-   * sepa_debit}, {@code sofort}, or {@code wechat_pay}.
+   * interac_present}, {@code klarna}, {@code konbini}, {@code oxxo}, {@code p24}, {@code paynow},
+   * {@code sepa_debit}, {@code sofort}, {@code us_bank_account}, or {@code wechat_pay}.
    */
   @SerializedName("type")
   String type;
+
+  @SerializedName("us_bank_account")
+  USBankAccount usBankAccount;
 
   @SerializedName("wechat_pay")
   WechatPay wechatPay;
@@ -1016,6 +1022,11 @@ public class PaymentMethod extends ApiResource implements HasId, MetadataStore<P
   @Getter
   @Setter
   @EqualsAndHashCode(callSuper = false)
+  public static class Paynow extends StripeObject {}
+
+  @Getter
+  @Setter
+  @EqualsAndHashCode(callSuper = false)
   public static class SepaDebit extends StripeObject {
     /** Bank code of bank associated with the bank account. */
     @SerializedName("bank_code")
@@ -1106,6 +1117,46 @@ public class PaymentMethod extends ApiResource implements HasId, MetadataStore<P
     /** Two-letter ISO code representing the country the bank account is located in. */
     @SerializedName("country")
     String country;
+  }
+
+  @Getter
+  @Setter
+  @EqualsAndHashCode(callSuper = false)
+  public static class USBankAccount extends StripeObject {
+    /**
+     * Account holder type: individual or company.
+     *
+     * <p>One of {@code company}, or {@code individual}.
+     */
+    @SerializedName("account_holder_type")
+    String accountHolderType;
+
+    /**
+     * Account type: checkings or savings. Defaults to checking if omitted.
+     *
+     * <p>One of {@code checking}, or {@code savings}.
+     */
+    @SerializedName("account_type")
+    String accountType;
+
+    /** The name of the bank. */
+    @SerializedName("bank_name")
+    String bankName;
+
+    /**
+     * Uniquely identifies this particular bank account. You can use this attribute to check whether
+     * two bank accounts are the same.
+     */
+    @SerializedName("fingerprint")
+    String fingerprint;
+
+    /** Last four digits of the bank account number. */
+    @SerializedName("last4")
+    String last4;
+
+    /** Routing number of the bank account. */
+    @SerializedName("routing_number")
+    String routingNumber;
   }
 
   @Getter

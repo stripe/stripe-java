@@ -53,7 +53,7 @@ public class Account extends ApiResource implements MetadataStore<Account>, Paym
   @SerializedName("country")
   String country;
 
-  /** Time at which the object was created. Measured in seconds since the Unix epoch. */
+  /** Time at which the account was connected. Measured in seconds since the Unix epoch. */
   @SerializedName("created")
   Long created;
 
@@ -811,6 +811,15 @@ public class Account extends ApiResource implements MetadataStore<Account>, Paym
     String p24Payments;
 
     /**
+     * The status of the paynow payments capability of the account, or whether the account can
+     * directly process paynow charges.
+     *
+     * <p>One of {@code active}, {@code inactive}, or {@code pending}.
+     */
+    @SerializedName("paynow_payments")
+    String paynowPayments;
+
+    /**
      * The status of the SEPA Direct Debits payments capability of the account, or whether the
      * account can directly process SEPA Direct Debits charges.
      *
@@ -852,6 +861,15 @@ public class Account extends ApiResource implements MetadataStore<Account>, Paym
      */
     @SerializedName("transfers")
     String transfers;
+
+    /**
+     * The status of the US bank account ACH payments capability of the account, or whether the
+     * account can directly process US bank account charges.
+     *
+     * <p>One of {@code active}, {@code inactive}, or {@code pending}.
+     */
+    @SerializedName("us_bank_account_ach_payments")
+    String usBankAccountAchPayments;
   }
 
   @Getter
