@@ -29,8 +29,12 @@ plugins {
     id "org.ajoberstar.git-publish" version "3.0.0"
 }
 
-sourceCompatibility = 1.8
-targetCompatibility = 1.8
+sourceCompatibility = JavaVersion.VERSION_1_8
+targetCompatibility = JavaVersion.VERSION_1_8
+JavaVersion compilerJavaVersionEnum = JavaVersion.current()
+if (compilerJavaVersionEnum < JavaVersion.VERSION_17) {
+    throw new GradleException("JDK 17 or above is required to build Stripe")
+}
 
 group = GROUP
 version = VERSION_NAME
@@ -57,7 +61,8 @@ tasks.withType(JavaCompile) {
 }
 
 compileJava {
-    options.compilerArgs << "-Werror"
+    options.release = project.targetCompatibility.majorVersion as Integer
+    options.compilerArgs << "-Werror";
 }
 
 configurations.all {
@@ -127,17 +132,6 @@ jacocoTestReport {
 
 coveralls {
     jacocoReportPath "build/reports/jacoco/test/jacocoTestReport.xml"
-}
-
-javadoc {
-  doFirst {
-    // We should remove this once we start using module-info.java.
-    // Without that file, Javadoc will fall back to "undefined" as the module
-    // name resulting in broken search links. This option explicitly declares
-    // that we are not currently using modules and the module name should be
-    // omitted from Javadoc.
-    options.addBooleanOption('-no-module-directories', true)
-  }
 }
 
 gitPublish {
