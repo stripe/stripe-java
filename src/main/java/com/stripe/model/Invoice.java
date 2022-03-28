@@ -13,6 +13,7 @@ import com.stripe.param.InvoiceListParams;
 import com.stripe.param.InvoiceMarkUncollectibleParams;
 import com.stripe.param.InvoicePayParams;
 import com.stripe.param.InvoiceRetrieveParams;
+import com.stripe.param.InvoiceSearchParams;
 import com.stripe.param.InvoiceSendInvoiceParams;
 import com.stripe.param.InvoiceUpcomingParams;
 import com.stripe.param.InvoiceUpdateParams;
@@ -738,6 +739,42 @@ public class Invoice extends ApiResource implements HasId, MetadataStore<Invoice
                 .map(x -> new ExpandableField<Discount>(x.getId(), x))
                 .collect(Collectors.toList())
             : null;
+  }
+
+  /**
+   * Search for invoices you’ve previously created using Stripe’s <a
+   * href="https://stripe.com/docs/search#search-query-language">Search Query Language</a>.
+   */
+  public static InvoiceSearchResult search(Map<String, Object> params) throws StripeException {
+    return search(params, (RequestOptions) null);
+  }
+
+  /**
+   * Search for invoices you’ve previously created using Stripe’s <a
+   * href="https://stripe.com/docs/search#search-query-language">Search Query Language</a>.
+   */
+  public static InvoiceSearchResult search(Map<String, Object> params, RequestOptions options)
+      throws StripeException {
+    String url = String.format("%s%s", Stripe.getApiBase(), "/v1/invoices/search");
+    return ApiResource.requestSearchResult(url, params, InvoiceSearchResult.class, options);
+  }
+
+  /**
+   * Search for invoices you’ve previously created using Stripe’s <a
+   * href="https://stripe.com/docs/search#search-query-language">Search Query Language</a>.
+   */
+  public static InvoiceSearchResult search(InvoiceSearchParams params) throws StripeException {
+    return search(params, (RequestOptions) null);
+  }
+
+  /**
+   * Search for invoices you’ve previously created using Stripe’s <a
+   * href="https://stripe.com/docs/search#search-query-language">Search Query Language</a>.
+   */
+  public static InvoiceSearchResult search(InvoiceSearchParams params, RequestOptions options)
+      throws StripeException {
+    String url = String.format("%s%s", Stripe.getApiBase(), "/v1/invoices/search");
+    return ApiResource.requestSearchResult(url, params, InvoiceSearchResult.class, options);
   }
 
   /**

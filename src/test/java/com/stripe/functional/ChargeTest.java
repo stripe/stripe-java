@@ -1,5 +1,6 @@
 package com.stripe.functional;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 
 import com.google.common.collect.ImmutableMap;
@@ -7,9 +8,11 @@ import com.stripe.BaseStripeTest;
 import com.stripe.exception.StripeException;
 import com.stripe.model.Charge;
 import com.stripe.model.ChargeCollection;
+import com.stripe.model.ChargeSearchResult;
 import com.stripe.net.ApiResource;
 import com.stripe.net.RequestOptions;
 import com.stripe.param.ChargeCreateParams;
+import com.stripe.param.ChargeSearchParams;
 import com.stripe.param.ChargeUpdateParams;
 import java.util.HashMap;
 import java.util.Map;
@@ -146,6 +149,14 @@ public class ChargeTest extends BaseStripeTest {
         ApiResource.RequestMethod.POST,
         String.format("/v1/charges/%s", charge.getId()),
         fraudDetailsUntypedParam("safe"));
+  }
+
+  @Test
+  public void testSearch() throws Exception {
+    ChargeSearchResult result =
+        Charge.search(ChargeSearchParams.builder().setQuery("currency:\"USD\"").build());
+    assertEquals(1, result.getData().size());
+    assertEquals(1, result.getTotalCount());
   }
 
   private ChargeUpdateParams fraudDetailsTypedParams(

@@ -9,6 +9,7 @@ import com.stripe.net.RequestOptions;
 import com.stripe.param.ProductCreateParams;
 import com.stripe.param.ProductListParams;
 import com.stripe.param.ProductRetrieveParams;
+import com.stripe.param.ProductSearchParams;
 import com.stripe.param.ProductUpdateParams;
 import java.util.List;
 import java.util.Map;
@@ -164,6 +165,42 @@ public class Product extends ApiResource implements HasId, MetadataStore<Product
 
   public void setTaxCodeObject(TaxCode expandableObject) {
     this.taxCode = new ExpandableField<TaxCode>(expandableObject.getId(), expandableObject);
+  }
+
+  /**
+   * Search for products you’ve previously created using Stripe’s <a
+   * href="https://stripe.com/docs/search#search-query-language">Search Query Language</a>.
+   */
+  public static ProductSearchResult search(Map<String, Object> params) throws StripeException {
+    return search(params, (RequestOptions) null);
+  }
+
+  /**
+   * Search for products you’ve previously created using Stripe’s <a
+   * href="https://stripe.com/docs/search#search-query-language">Search Query Language</a>.
+   */
+  public static ProductSearchResult search(Map<String, Object> params, RequestOptions options)
+      throws StripeException {
+    String url = String.format("%s%s", Stripe.getApiBase(), "/v1/products/search");
+    return ApiResource.requestSearchResult(url, params, ProductSearchResult.class, options);
+  }
+
+  /**
+   * Search for products you’ve previously created using Stripe’s <a
+   * href="https://stripe.com/docs/search#search-query-language">Search Query Language</a>.
+   */
+  public static ProductSearchResult search(ProductSearchParams params) throws StripeException {
+    return search(params, (RequestOptions) null);
+  }
+
+  /**
+   * Search for products you’ve previously created using Stripe’s <a
+   * href="https://stripe.com/docs/search#search-query-language">Search Query Language</a>.
+   */
+  public static ProductSearchResult search(ProductSearchParams params, RequestOptions options)
+      throws StripeException {
+    String url = String.format("%s%s", Stripe.getApiBase(), "/v1/products/search");
+    return ApiResource.requestSearchResult(url, params, ProductSearchResult.class, options);
   }
 
   /** Creates a new product object. */
