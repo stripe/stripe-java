@@ -31,11 +31,6 @@ plugins {
 
 sourceCompatibility = JavaVersion.VERSION_1_8
 targetCompatibility = JavaVersion.VERSION_1_8
-JavaVersion compilerJavaVersionEnum = JavaVersion.current()
-if (compilerJavaVersionEnum < JavaVersion.VERSION_17) {
-    throw new GradleException("JDK 17 or above is required to build Stripe")
-}
-
 group = GROUP
 version = VERSION_NAME
 
@@ -61,6 +56,11 @@ tasks.withType(JavaCompile) {
 }
 
 compileJava {
+    JavaVersion compilerJavaVersionEnum = JavaVersion.current()
+    if (compilerJavaVersionEnum < JavaVersion.VERSION_17) {
+        throw new GradleException("JDK 17 or above is required to build Stripe")
+    }
+
     options.release = project.targetCompatibility.majorVersion as Integer
     options.compilerArgs << "-Werror";
 }
