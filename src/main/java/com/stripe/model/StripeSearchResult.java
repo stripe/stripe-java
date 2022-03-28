@@ -18,8 +18,12 @@ public abstract class StripeSearchResult<T> extends StripeObject
   @Getter(onMethod_ = {@Override})
   List<T> data;
 
+  /**
+   * Get the total count of search records in the result. The value is present when `total_count` is
+   * added to the `expand` search parameter.
+   */
   @Getter(onMethod_ = {@Override})
-  Integer totalCount;
+  Long totalCount;
 
   @Getter(onMethod_ = {@Override})
   Boolean hasMore;
