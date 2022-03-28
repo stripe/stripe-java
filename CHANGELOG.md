@@ -1,5 +1,10 @@
 # Changelog
 
+## 20.110.0 - 2022-03-28
+* [#1330](https://github.com/stripe/stripe-java/pull/1330) API Updates
+  * Add support for Search API
+    * Add support for `search` method on resources `Charge`, `Customer`, `Invoice`, `PaymentIntent`, `Price`, `Product`, and `Subscription`
+
 ## 20.109.0 - 2022-03-25
 * [#1329](https://github.com/stripe/stripe-java/pull/1329) API Updates
   * Add support for PayNow and US Bank Accounts Debits payments
@@ -10,7 +15,7 @@
       * **Mandate** ([API ref](https://stripe.com/docs/api/mandates/object#mandate_object-payment_method_details))
           * Add support for `us_bank_account` on `Mandate.payment_method_details`
       * **Payment Intent** ([API ref](https://stripe.com/docs/api/payment_intents/object#payment_intent_object-payment_method_options))
-          * Add support for `paynow` and `us_bank_account` on `payment_method_options` on `PaymentIntent`, `PaymentIntentCreateParams`, `PaymentIntentUpdateParams`, and `PaymentIntentConfirmParams` 
+          * Add support for `paynow` and `us_bank_account` on `payment_method_options` on `PaymentIntent`, `PaymentIntentCreateParams`, `PaymentIntentUpdateParams`, and `PaymentIntentConfirmParams`
           * Add support for `paynow` and `us_bank_account` on `payment_method_data` on `PaymentIntentCreateParams`, `PaymentIntentUpdateParams`, and `PaymentIntentConfirmParams`
           * Add support for `paynow_display_qr_code` on `PaymentIntent.next_action`
           * Add support for new values `paynow` and `us_bank_account` on enums `payment_method_data.type` on `PaymentIntentCreateParams`, and `PaymentIntentUpdateParams`, and `PaymentIntentConfirmParams`
@@ -47,7 +52,7 @@
   * Add support for new values `bg_uic`, `hu_tin`, and `si_tin` on enums `CustomerCreateParams.tax_id_data[].type`, `InvoiceUpcomingLinesParams.customer_details.tax_ids[].type`, `InvoiceUpcomingParams.customer_details.tax_ids[].type`, and `TaxIdCreateParams.type`
   * Add support for `test_clock` on `QuoteListParams`
   * Add support for new values `test_helpers.test_clock.advancing`, `test_helpers.test_clock.created`, `test_helpers.test_clock.deleted`, `test_helpers.test_clock.internal_failure`, and `test_helpers.test_clock.ready` on enums `WebhookEndpointCreateParams.enabled_events[]` and `WebhookEndpointUpdateParams.enabled_events[]`
-  
+
 
 ## 20.107.0 - 2022-03-18
 * [#1327](https://github.com/stripe/stripe-java/pull/1327) API Updates
@@ -91,7 +96,7 @@
   * Add support for .payment_method_options.konbini on the Subscription API
   * Add support for .payment_method_options.konbini on the CheckoutSession API
   * Add support for `konbini_display_details` on `PaymentIntent.next_action`
-  
+
 
 ## 20.101.0 - 2022-02-23
 * [#1313](https://github.com/stripe/stripe-java/pull/1313) API Updates
@@ -117,7 +122,7 @@
   * Add support for `phone_number_collection` on `PaymentLinkCreateParams` and `PaymentLink`
   * Add support for new values `payment_link.created` and `payment_link.updated` on enums `WebhookEndpointCreateParams.enabled_events[]` and `WebhookEndpointUpdateParams.enabled_events[]`
   * Add support for new value `is_vat` on enums `CustomerCreateParams.tax_id_data[].type`, `InvoiceUpcomingParams.customer_details.tax_ids[].type`, `InvoiceUpcomingLinesParams.customer_details.tax_ids[].type`, and `TaxIdCreateParams.type`
-  
+
 
 ## 20.97.0 - 2022-01-20
 * [#1304](https://github.com/stripe/stripe-java/pull/1304) API Updates
@@ -140,11 +145,11 @@
 ## 20.94.0 - 2021-12-22
 * [#1299](https://github.com/stripe/stripe-java/pull/1299) API Updates
   * Add support for `au_becs_debit` on `PaymentIntentCreateParams.payment_method_options`, `PaymentIntentUpdateParams.payment_method_options`, `PaymentIntentConfirmParams.payment_method_options`, and `PaymentIntent.payment_method_options`
-  
+
 * [#1298](https://github.com/stripe/stripe-java/pull/1298) API Updates
   * Add support for new values `en-FR`, `es-US`, and `fr-FR` on enums `PaymentIntentCreateParams.payment_method_options.klarna.preferred_locale`, `PaymentIntentUpdateParams.payment_method_options.klarna.preferred_locale`, and `PaymentIntentConfirmParams.payment_method_options.klarna.preferred_locale`
   * Add support for `boleto` on `SetupAttempt.payment_method_details`
-  
+
 * [#1297](https://github.com/stripe/stripe-java/pull/1297) API Updates
   * Add support for `processing` on `PaymentIntent`
 
@@ -471,7 +476,7 @@
   * Add support for `payment_settings` on `Invoice`
 
 ## 20.36.0 - 2021-02-03
-* [#1179](https://github.com/stripe/stripe-java/pull/1179) 
+* [#1179](https://github.com/stripe/stripe-java/pull/1179)
   * Add support for `nationality` on `Person`, `PersonUpdateParams`, `PersonCreateParams` and `TokenCreateParams.person`
   * Add `gb_vat` to `TaxId.type` enum
 * [#1173](https://github.com/stripe/stripe-java/pull/1173) Add link to YouTube from readme
