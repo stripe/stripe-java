@@ -12,7 +12,8 @@ public class OAuthException extends StripeException {
 
   /** The error resource returned by Stripe's OAuth API that caused the exception. */
   @SuppressWarnings("serial")
-  @Setter OAuthError oauthError;
+  @Setter
+  OAuthError oauthError;
 
   public OAuthException(
       String code, String description, String requestId, Integer statusCode, Throwable e) {
