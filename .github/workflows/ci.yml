@@ -40,7 +40,7 @@ jobs:
       - name: Setup Java
         uses: actions/setup-java@v1
         with:
-          java-version: ${{ matrix.java-version }}
+          java-version: "17" # always use 17 for building
           architecture: x64
 
       - name: Tweak gradle.properties for Java 1.8
@@ -56,8 +56,17 @@ jobs:
       - name: Start stripe-mock
         run: docker run -d -p 12111-12112:12111-12112 stripe/stripe-mock && sleep 5
 
+      - name: Setup Test Java Runtime
+        id: setup-test-jre
+        uses: actions/setup-java@v1
+        with:
+          java-version: ${{ matrix.java-version }}
+          architecture: x64
+
       - name: Run test suite
         run: ./gradlew check
+        env:
+          JAVA_TEST_HOME: ${{ steps.setup-test-jre.outputs.path }}
 
       - name: Send code coverage report to coveralls.io
         run: ./gradlew jacocoTestReport coveralls

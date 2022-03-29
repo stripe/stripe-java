@@ -35,6 +35,13 @@ group = GROUP
 version = VERSION_NAME
 
 tasks.withType(JavaCompile) {
+    JavaVersion compilerJavaVersionEnum = JavaVersion.current()
+    if (compilerJavaVersionEnum < JavaVersion.VERSION_17) {
+        throw new GradleException("JDK 17 or above is required to build Stripe")
+    }
+
+    options.release = project.targetCompatibility.majorVersion as Integer
+
     options.compilerArgs << "-Xlint:all" << "-Xlint:-options" << "-Xlint:-processing"
     options.encoding = "UTF-8"
 
@@ -55,13 +62,20 @@ tasks.withType(JavaCompile) {
     }
 }
 
-compileJava {
-    JavaVersion compilerJavaVersionEnum = JavaVersion.current()
-    if (compilerJavaVersionEnum < JavaVersion.VERSION_17) {
-        throw new GradleException("JDK 17 or above is required to build Stripe")
+tasks.withType(Test) {
+    // Chec if JAVA_TEST_HOME environment variable is specified
+    String home = System.getenv("JAVA_TEST_HOME")
+    if (home && !home.allWhitespace) {
+        test.executable = "${home}/bin/java"
     }
+    // Github CI should always set JAVA_TEST_HOME
+    else if (System.getenv("GITHUB_ACTIONS"))
+    {
+        throw new GradleException("JAVA_TEST_HOME should be set when running in CI")
+    }
+}
 
-    options.release = project.targetCompatibility.majorVersion as Integer
+compileJava {
     options.compilerArgs << "-Werror";
 }
 
