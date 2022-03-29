@@ -1,5 +1,6 @@
 package com.stripe.functional;
 
+import static org.junit.Assert.assertNull;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 
@@ -152,8 +153,8 @@ public class ChargeTest extends BaseStripeTest {
   }
 
   @Test
-  public void testSearch() throws Exception {
-    throw new Exception(System.getProperty("java.version"));
+  public void testSearch() {
+    assertNull(System.getProperty("java.version"));
   }
 
   private ChargeUpdateParams fraudDetailsTypedParams(
