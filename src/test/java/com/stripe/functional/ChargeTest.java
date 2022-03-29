@@ -153,10 +153,7 @@ public class ChargeTest extends BaseStripeTest {
 
   @Test
   public void testSearch() throws Exception {
-    ChargeSearchResult result =
-        Charge.search(ChargeSearchParams.builder().setQuery("currency:\"USD\"").build());
-    assertEquals(1, result.getData().size());
-    assertEquals(1, result.getTotalCount());
+    throw new Exception(System.getProperty("java.version"));
   }
 
   private ChargeUpdateParams fraudDetailsTypedParams(

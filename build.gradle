@@ -76,7 +76,7 @@ tasks.withType(Test) {
 }
 
 compileJava {
-    options.compilerArgs << "-Werror";
+    options.compilerArgs << "-Werror"
 }
 
 configurations.all {
