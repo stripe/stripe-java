@@ -36,8 +36,8 @@ version = VERSION_NAME
 
 tasks.withType(JavaCompile) {
     JavaVersion compilerJavaVersionEnum = JavaVersion.current()
-    if (compilerJavaVersionEnum < JavaVersion.VERSION_17) {
-        throw new GradleException("JDK 17 or above is required to build Stripe")
+    if (compilerJavaVersionEnum != JavaVersion.VERSION_18) {
+        throw new GradleException("JDK 18 is required to build Stripe")
     }
 
     options.release = project.targetCompatibility.majorVersion as Integer

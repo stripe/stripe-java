@@ -19,6 +19,7 @@ public class CaseInsensitiveMap<V> extends AbstractMap<String, V>
     implements Map<String, V>, Cloneable, Serializable {
   private static final long serialVersionUID = 107333939521129358L;
 
+  @SuppressWarnings("serial")
   private Map<String, Entry<String, V>> store;
 
   /** Instantiates a new instance of the {@link CaseInsensitiveMap} class. */

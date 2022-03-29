@@ -21,7 +21,7 @@ jobs:
         id: setup-jre
         uses: actions/setup-java@v1
         with:
-          java-version: "17" # always use 17 for building
+          java-version: "18" # always use 18 for building
           architecture: x64
 
       - name: Set Test Java Runtime Environment variable
@@ -49,6 +49,7 @@ jobs:
           - "15"
           - "16"
           - "17"
+          - "18"
 
     steps:
       - uses: actions/checkout@master
@@ -66,7 +67,7 @@ jobs:
       - name: Setup Java
         uses: actions/setup-java@v1
         with:
-          java-version: "17" # always use 17 for building
+          java-version: "18" # always use 18 for building
           architecture: x64
 
       - name: Tweak gradle.properties for Java 1.8
