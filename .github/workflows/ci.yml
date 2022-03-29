@@ -37,6 +37,13 @@ jobs:
     steps:
       - uses: actions/checkout@master
 
+      - name: Setup Test Java Runtime
+        id: setup-test-jre
+        uses: actions/setup-java@v1
+        with:
+          java-version: ${{ matrix.java-version }}
+          architecture: x64
+
       - name: Setup Java
         uses: actions/setup-java@v1
         with:
@@ -55,13 +62,6 @@ jobs:
 
       - name: Start stripe-mock
         run: docker run -d -p 12111-12112:12111-12112 stripe/stripe-mock && sleep 5
-
-      - name: Setup Test Java Runtime
-        id: setup-test-jre
-        uses: actions/setup-java@v1
-        with:
-          java-version: ${{ matrix.java-version }}
-          architecture: x64
 
       - name: Run test suite
         run: ./gradlew check

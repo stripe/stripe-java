@@ -63,7 +63,7 @@ tasks.withType(JavaCompile) {
 }
 
 tasks.withType(Test) {
-    // Chec if JAVA_TEST_HOME environment variable is specified
+    // Check if JAVA_TEST_HOME environment variable is specified
     String home = System.getenv("JAVA_TEST_HOME")
     if (home && !home.allWhitespace) {
         test.executable = "${home}/bin/java"
