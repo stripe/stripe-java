@@ -44,6 +44,9 @@ jobs:
           java-version: ${{ matrix.java-version }}
           architecture: x64
 
+      - name: Set Test Java Runtime Environment variable
+        run: echo "JAVA_TEST_HOME=${{ steps.setup-test-jre.outputs.path }}" >> $GITHUB_ENV
+
       - name: Setup Java
         uses: actions/setup-java@v1
         with:
@@ -65,8 +68,6 @@ jobs:
 
       - name: Run test suite
         run: ./gradlew check
-        env:
-          JAVA_TEST_HOME: ${{ steps.setup-test-jre.outputs.path }}
 
       - name: Send code coverage report to coveralls.io
         run: ./gradlew jacocoTestReport coveralls
