@@ -74,7 +74,9 @@ jobs:
         run: sed -e '/--add-exports/ s/^#*/#/' -i gradle.properties
 
       - name: Display version
-        run: ./gradlew --version
+        run:
+          ./gradlew --version
+          echo "JAVA_TEST_HOME=$JAVA_TEST_HOME"
 
       - name: Build artifacts
         run: ./gradlew assemble
