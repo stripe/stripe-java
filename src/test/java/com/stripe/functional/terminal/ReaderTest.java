@@ -1,7 +1,6 @@
 package com.stripe.functional.terminal;
 
-import static org.junit.jupiter.api.Assertions.assertNotNull;
-import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.junit.jupiter.api.Assertions.*;
 
 import com.stripe.BaseStripeTest;
 import com.stripe.exception.StripeException;
@@ -73,5 +72,18 @@ public class ReaderTest extends BaseStripeTest {
     assertTrue(deletedReader.getDeleted());
     verifyRequest(
         ApiResource.RequestMethod.DELETE, String.format("/v1/terminal/readers/%s", reader.getId()));
+  }
+
+  @Test
+  public void testPresentPaymentMethod() throws StripeException {
+    final Reader reader = Reader.retrieve(READER_ID);
+
+    final Reader processedReader = reader.getTestHelpers().presentPaymentMethod();
+
+    assertNotNull(processedReader);
+    verifyRequest(
+        ApiResource.RequestMethod.POST,
+        String.format(
+            "/v1/test_helpers/terminal/readers/%s/present_payment_method", reader.getId()));
   }
 }

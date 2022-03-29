@@ -560,10 +560,7 @@ public class PlanCreateParams extends ApiRequestParams {
     @SerializedName("metadata")
     Map<String, String> metadata;
 
-    /**
-     * The product's name, meant to be displayable to the customer. Whenever this product is sold
-     * via a subscription, name will show up on associated invoice line item descriptions.
-     */
+    /** The product's name, meant to be displayable to the customer. */
     @SerializedName("name")
     String name;
 
@@ -710,10 +707,7 @@ public class PlanCreateParams extends ApiRequestParams {
         return this;
       }
 
-      /**
-       * The product's name, meant to be displayable to the customer. Whenever this product is sold
-       * via a subscription, name will show up on associated invoice line item descriptions.
-       */
+      /** The product's name, meant to be displayable to the customer. */
       public Builder setName(String name) {
         this.name = name;
         return this;

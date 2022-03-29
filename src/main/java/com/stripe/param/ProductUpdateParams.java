@@ -74,10 +74,7 @@ public class ProductUpdateParams extends ApiRequestParams {
   @SerializedName("metadata")
   Object metadata;
 
-  /**
-   * The product's name, meant to be displayable to the customer. Whenever this product is sold via
-   * a subscription, name will show up on associated invoice line item descriptions.
-   */
+  /** The product's name, meant to be displayable to the customer. */
   @SerializedName("name")
   Object name;
 
@@ -477,19 +474,13 @@ public class ProductUpdateParams extends ApiRequestParams {
       return this;
     }
 
-    /**
-     * The product's name, meant to be displayable to the customer. Whenever this product is sold
-     * via a subscription, name will show up on associated invoice line item descriptions.
-     */
+    /** The product's name, meant to be displayable to the customer. */
     public Builder setName(String name) {
       this.name = name;
       return this;
     }
 
-    /**
-     * The product's name, meant to be displayable to the customer. Whenever this product is sold
-     * via a subscription, name will show up on associated invoice line item descriptions.
-     */
+    /** The product's name, meant to be displayable to the customer. */
     public Builder setName(EmptyParam name) {
       this.name = name;
       return this;
