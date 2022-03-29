@@ -72,6 +72,18 @@ public class ReaderTest extends BaseStripeTest {
     assertNotNull(deletedReader);
     assertTrue(deletedReader.getDeleted());
     verifyRequest(
-        ApiResource.RequestMethod.DELETE, String.format("/v1/terminal/readers/%s", reader.getId()));
+      ApiResource.RequestMethod.DELETE, String.format("/v1/terminal/readers/%s", reader.getId()));
+  }
+
+  @Test
+  public void testPresentPaymentMethod() throws StripeException {
+    final Reader reader = Reader.retrieve(READER_ID);
+
+    final Reader deletedReader = reader.getTestHelpers().presentPaymentMethod();
+
+    assertNotNull(deletedReader);
+    assertTrue(deletedReader.getDeleted());
+    verifyRequest(
+      ApiResource.RequestMethod.DELETE, String.format("/v1/test_helpers/terminal/readers/%s/present_payment_method", reader.getId()));
   }
 }
