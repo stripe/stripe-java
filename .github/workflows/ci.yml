@@ -11,6 +11,16 @@ jobs:
     steps:
       - uses: actions/checkout@master
 
+      - name: Setup Java
+        id: setup-jre
+        uses: actions/setup-java@v1
+        with:
+          java-version: "17" # always use 17 for building
+          architecture: x64
+
+      - name: Set Test Java Runtime Environment variable
+        run: echo "JAVA_TEST_HOME=${{ steps.setup-jre.outputs.path }}" >> $GITHUB_ENV
+
       - name: Spotless
         run: ./gradlew spotlessCheck
 
@@ -67,7 +77,7 @@ jobs:
         run: docker run -d -p 12111-12112:12111-12112 stripe/stripe-mock && sleep 5
 
       - name: Run test suite
-        run: ./gradlew check
+        run: ./gradlew test
 
       - name: Send code coverage report to coveralls.io
         run: ./gradlew jacocoTestReport coveralls
