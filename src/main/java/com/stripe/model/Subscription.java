@@ -436,7 +436,11 @@ public class Subscription extends ApiResource implements HasId, MetadataStore<Su
 
   /**
    * Search for subscriptions you’ve previously created using Stripe’s <a
-   * href="https://stripe.com/docs/search#search-query-language">Search Query Language</a>.
+   * href="https://stripe.com/docs/search#search-query-language">Search Query Language</a>. Don’t
+   * use search in read-after-write flows where strict consistency is necessary. Under normal
+   * operating conditions, data is searchable in less than a minute. Occasionally, propagation of
+   * new or updated data can be up to an hour behind during outages. Search functionality is not
+   * available to merchants in India.
    */
   public static SubscriptionSearchResult search(Map<String, Object> params) throws StripeException {
     return search(params, (RequestOptions) null);
@@ -444,7 +448,11 @@ public class Subscription extends ApiResource implements HasId, MetadataStore<Su
 
   /**
    * Search for subscriptions you’ve previously created using Stripe’s <a
-   * href="https://stripe.com/docs/search#search-query-language">Search Query Language</a>.
+   * href="https://stripe.com/docs/search#search-query-language">Search Query Language</a>. Don’t
+   * use search in read-after-write flows where strict consistency is necessary. Under normal
+   * operating conditions, data is searchable in less than a minute. Occasionally, propagation of
+   * new or updated data can be up to an hour behind during outages. Search functionality is not
+   * available to merchants in India.
    */
   public static SubscriptionSearchResult search(Map<String, Object> params, RequestOptions options)
       throws StripeException {
@@ -454,7 +462,11 @@ public class Subscription extends ApiResource implements HasId, MetadataStore<Su
 
   /**
    * Search for subscriptions you’ve previously created using Stripe’s <a
-   * href="https://stripe.com/docs/search#search-query-language">Search Query Language</a>.
+   * href="https://stripe.com/docs/search#search-query-language">Search Query Language</a>. Don’t
+   * use search in read-after-write flows where strict consistency is necessary. Under normal
+   * operating conditions, data is searchable in less than a minute. Occasionally, propagation of
+   * new or updated data can be up to an hour behind during outages. Search functionality is not
+   * available to merchants in India.
    */
   public static SubscriptionSearchResult search(SubscriptionSearchParams params)
       throws StripeException {
@@ -463,7 +475,11 @@ public class Subscription extends ApiResource implements HasId, MetadataStore<Su
 
   /**
    * Search for subscriptions you’ve previously created using Stripe’s <a
-   * href="https://stripe.com/docs/search#search-query-language">Search Query Language</a>.
+   * href="https://stripe.com/docs/search#search-query-language">Search Query Language</a>. Don’t
+   * use search in read-after-write flows where strict consistency is necessary. Under normal
+   * operating conditions, data is searchable in less than a minute. Occasionally, propagation of
+   * new or updated data can be up to an hour behind during outages. Search functionality is not
+   * available to merchants in India.
    */
   public static SubscriptionSearchResult search(
       SubscriptionSearchParams params, RequestOptions options) throws StripeException {

@@ -177,7 +177,11 @@ public class Price extends ApiResource implements HasId, MetadataStore<Price> {
 
   /**
    * Search for prices you’ve previously created using Stripe’s <a
-   * href="https://stripe.com/docs/search#search-query-language">Search Query Language</a>.
+   * href="https://stripe.com/docs/search#search-query-language">Search Query Language</a>. Don’t
+   * use search in read-after-write flows where strict consistency is necessary. Under normal
+   * operating conditions, data is searchable in less than a minute. Occasionally, propagation of
+   * new or updated data can be up to an hour behind during outages. Search functionality is not
+   * available to merchants in India.
    */
   public static PriceSearchResult search(Map<String, Object> params) throws StripeException {
     return search(params, (RequestOptions) null);
@@ -185,7 +189,11 @@ public class Price extends ApiResource implements HasId, MetadataStore<Price> {
 
   /**
    * Search for prices you’ve previously created using Stripe’s <a
-   * href="https://stripe.com/docs/search#search-query-language">Search Query Language</a>.
+   * href="https://stripe.com/docs/search#search-query-language">Search Query Language</a>. Don’t
+   * use search in read-after-write flows where strict consistency is necessary. Under normal
+   * operating conditions, data is searchable in less than a minute. Occasionally, propagation of
+   * new or updated data can be up to an hour behind during outages. Search functionality is not
+   * available to merchants in India.
    */
   public static PriceSearchResult search(Map<String, Object> params, RequestOptions options)
       throws StripeException {
@@ -195,7 +203,11 @@ public class Price extends ApiResource implements HasId, MetadataStore<Price> {
 
   /**
    * Search for prices you’ve previously created using Stripe’s <a
-   * href="https://stripe.com/docs/search#search-query-language">Search Query Language</a>.
+   * href="https://stripe.com/docs/search#search-query-language">Search Query Language</a>. Don’t
+   * use search in read-after-write flows where strict consistency is necessary. Under normal
+   * operating conditions, data is searchable in less than a minute. Occasionally, propagation of
+   * new or updated data can be up to an hour behind during outages. Search functionality is not
+   * available to merchants in India.
    */
   public static PriceSearchResult search(PriceSearchParams params) throws StripeException {
     return search(params, (RequestOptions) null);
@@ -203,7 +215,11 @@ public class Price extends ApiResource implements HasId, MetadataStore<Price> {
 
   /**
    * Search for prices you’ve previously created using Stripe’s <a
-   * href="https://stripe.com/docs/search#search-query-language">Search Query Language</a>.
+   * href="https://stripe.com/docs/search#search-query-language">Search Query Language</a>. Don’t
+   * use search in read-after-write flows where strict consistency is necessary. Under normal
+   * operating conditions, data is searchable in less than a minute. Occasionally, propagation of
+   * new or updated data can be up to an hour behind during outages. Search functionality is not
+   * available to merchants in India.
    */
   public static PriceSearchResult search(PriceSearchParams params, RequestOptions options)
       throws StripeException {

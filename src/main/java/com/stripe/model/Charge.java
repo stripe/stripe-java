@@ -618,7 +618,11 @@ public class Charge extends ApiResource implements MetadataStore<Charge>, Balanc
 
   /**
    * Search for charges you’ve previously created using Stripe’s <a
-   * href="https://stripe.com/docs/search#search-query-language">Search Query Language</a>.
+   * href="https://stripe.com/docs/search#search-query-language">Search Query Language</a>. Don’t
+   * use search in read-after-write flows where strict consistency is necessary. Under normal
+   * operating conditions, data is searchable in less than a minute. Occasionally, propagation of
+   * new or updated data can be up to an hour behind during outages. Search functionality is not
+   * available to merchants in India.
    */
   public static ChargeSearchResult search(Map<String, Object> params) throws StripeException {
     return search(params, (RequestOptions) null);
@@ -626,7 +630,11 @@ public class Charge extends ApiResource implements MetadataStore<Charge>, Balanc
 
   /**
    * Search for charges you’ve previously created using Stripe’s <a
-   * href="https://stripe.com/docs/search#search-query-language">Search Query Language</a>.
+   * href="https://stripe.com/docs/search#search-query-language">Search Query Language</a>. Don’t
+   * use search in read-after-write flows where strict consistency is necessary. Under normal
+   * operating conditions, data is searchable in less than a minute. Occasionally, propagation of
+   * new or updated data can be up to an hour behind during outages. Search functionality is not
+   * available to merchants in India.
    */
   public static ChargeSearchResult search(Map<String, Object> params, RequestOptions options)
       throws StripeException {
@@ -636,7 +644,11 @@ public class Charge extends ApiResource implements MetadataStore<Charge>, Balanc
 
   /**
    * Search for charges you’ve previously created using Stripe’s <a
-   * href="https://stripe.com/docs/search#search-query-language">Search Query Language</a>.
+   * href="https://stripe.com/docs/search#search-query-language">Search Query Language</a>. Don’t
+   * use search in read-after-write flows where strict consistency is necessary. Under normal
+   * operating conditions, data is searchable in less than a minute. Occasionally, propagation of
+   * new or updated data can be up to an hour behind during outages. Search functionality is not
+   * available to merchants in India.
    */
   public static ChargeSearchResult search(ChargeSearchParams params) throws StripeException {
     return search(params, (RequestOptions) null);
@@ -644,7 +656,11 @@ public class Charge extends ApiResource implements MetadataStore<Charge>, Balanc
 
   /**
    * Search for charges you’ve previously created using Stripe’s <a
-   * href="https://stripe.com/docs/search#search-query-language">Search Query Language</a>.
+   * href="https://stripe.com/docs/search#search-query-language">Search Query Language</a>. Don’t
+   * use search in read-after-write flows where strict consistency is necessary. Under normal
+   * operating conditions, data is searchable in less than a minute. Occasionally, propagation of
+   * new or updated data can be up to an hour behind during outages. Search functionality is not
+   * available to merchants in India.
    */
   public static ChargeSearchResult search(ChargeSearchParams params, RequestOptions options)
       throws StripeException {

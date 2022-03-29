@@ -439,7 +439,11 @@ public class PaymentIntent extends ApiResource implements HasId, MetadataStore<P
 
   /**
    * Search for PaymentIntents you’ve previously created using Stripe’s <a
-   * href="https://stripe.com/docs/search#search-query-language">Search Query Language</a>.
+   * href="https://stripe.com/docs/search#search-query-language">Search Query Language</a>. Don’t
+   * use search in read-after-write flows where strict consistency is necessary. Under normal
+   * operating conditions, data is searchable in less than a minute. Occasionally, propagation of
+   * new or updated data can be up to an hour behind during outages. Search functionality is not
+   * available to merchants in India.
    */
   public static PaymentIntentSearchResult search(Map<String, Object> params)
       throws StripeException {
@@ -448,7 +452,11 @@ public class PaymentIntent extends ApiResource implements HasId, MetadataStore<P
 
   /**
    * Search for PaymentIntents you’ve previously created using Stripe’s <a
-   * href="https://stripe.com/docs/search#search-query-language">Search Query Language</a>.
+   * href="https://stripe.com/docs/search#search-query-language">Search Query Language</a>. Don’t
+   * use search in read-after-write flows where strict consistency is necessary. Under normal
+   * operating conditions, data is searchable in less than a minute. Occasionally, propagation of
+   * new or updated data can be up to an hour behind during outages. Search functionality is not
+   * available to merchants in India.
    */
   public static PaymentIntentSearchResult search(Map<String, Object> params, RequestOptions options)
       throws StripeException {
@@ -458,7 +466,11 @@ public class PaymentIntent extends ApiResource implements HasId, MetadataStore<P
 
   /**
    * Search for PaymentIntents you’ve previously created using Stripe’s <a
-   * href="https://stripe.com/docs/search#search-query-language">Search Query Language</a>.
+   * href="https://stripe.com/docs/search#search-query-language">Search Query Language</a>. Don’t
+   * use search in read-after-write flows where strict consistency is necessary. Under normal
+   * operating conditions, data is searchable in less than a minute. Occasionally, propagation of
+   * new or updated data can be up to an hour behind during outages. Search functionality is not
+   * available to merchants in India.
    */
   public static PaymentIntentSearchResult search(PaymentIntentSearchParams params)
       throws StripeException {
@@ -467,7 +479,11 @@ public class PaymentIntent extends ApiResource implements HasId, MetadataStore<P
 
   /**
    * Search for PaymentIntents you’ve previously created using Stripe’s <a
-   * href="https://stripe.com/docs/search#search-query-language">Search Query Language</a>.
+   * href="https://stripe.com/docs/search#search-query-language">Search Query Language</a>. Don’t
+   * use search in read-after-write flows where strict consistency is necessary. Under normal
+   * operating conditions, data is searchable in less than a minute. Occasionally, propagation of
+   * new or updated data can be up to an hour behind during outages. Search functionality is not
+   * available to merchants in India.
    */
   public static PaymentIntentSearchResult search(
       PaymentIntentSearchParams params, RequestOptions options) throws StripeException {

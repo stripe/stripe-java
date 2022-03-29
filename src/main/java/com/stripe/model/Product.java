@@ -87,10 +87,7 @@ public class Product extends ApiResource implements HasId, MetadataStore<Product
   @SerializedName("metadata")
   Map<String, String> metadata;
 
-  /**
-   * The product's name, meant to be displayable to the customer. Whenever this product is sold via
-   * a subscription, name will show up on associated invoice line item descriptions.
-   */
+  /** The product's name, meant to be displayable to the customer. */
   @SerializedName("name")
   String name;
 
@@ -169,7 +166,11 @@ public class Product extends ApiResource implements HasId, MetadataStore<Product
 
   /**
    * Search for products you’ve previously created using Stripe’s <a
-   * href="https://stripe.com/docs/search#search-query-language">Search Query Language</a>.
+   * href="https://stripe.com/docs/search#search-query-language">Search Query Language</a>. Don’t
+   * use search in read-after-write flows where strict consistency is necessary. Under normal
+   * operating conditions, data is searchable in less than a minute. Occasionally, propagation of
+   * new or updated data can be up to an hour behind during outages. Search functionality is not
+   * available to merchants in India.
    */
   public static ProductSearchResult search(Map<String, Object> params) throws StripeException {
     return search(params, (RequestOptions) null);
@@ -177,7 +178,11 @@ public class Product extends ApiResource implements HasId, MetadataStore<Product
 
   /**
    * Search for products you’ve previously created using Stripe’s <a
-   * href="https://stripe.com/docs/search#search-query-language">Search Query Language</a>.
+   * href="https://stripe.com/docs/search#search-query-language">Search Query Language</a>. Don’t
+   * use search in read-after-write flows where strict consistency is necessary. Under normal
+   * operating conditions, data is searchable in less than a minute. Occasionally, propagation of
+   * new or updated data can be up to an hour behind during outages. Search functionality is not
+   * available to merchants in India.
    */
   public static ProductSearchResult search(Map<String, Object> params, RequestOptions options)
       throws StripeException {
@@ -187,7 +192,11 @@ public class Product extends ApiResource implements HasId, MetadataStore<Product
 
   /**
    * Search for products you’ve previously created using Stripe’s <a
-   * href="https://stripe.com/docs/search#search-query-language">Search Query Language</a>.
+   * href="https://stripe.com/docs/search#search-query-language">Search Query Language</a>. Don’t
+   * use search in read-after-write flows where strict consistency is necessary. Under normal
+   * operating conditions, data is searchable in less than a minute. Occasionally, propagation of
+   * new or updated data can be up to an hour behind during outages. Search functionality is not
+   * available to merchants in India.
    */
   public static ProductSearchResult search(ProductSearchParams params) throws StripeException {
     return search(params, (RequestOptions) null);
@@ -195,7 +204,11 @@ public class Product extends ApiResource implements HasId, MetadataStore<Product
 
   /**
    * Search for products you’ve previously created using Stripe’s <a
-   * href="https://stripe.com/docs/search#search-query-language">Search Query Language</a>.
+   * href="https://stripe.com/docs/search#search-query-language">Search Query Language</a>. Don’t
+   * use search in read-after-write flows where strict consistency is necessary. Under normal
+   * operating conditions, data is searchable in less than a minute. Occasionally, propagation of
+   * new or updated data can be up to an hour behind during outages. Search functionality is not
+   * available to merchants in India.
    */
   public static ProductSearchResult search(ProductSearchParams params, RequestOptions options)
       throws StripeException {
