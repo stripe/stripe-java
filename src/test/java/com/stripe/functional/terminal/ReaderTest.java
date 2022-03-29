@@ -1,8 +1,5 @@
 package com.stripe.functional.terminal;
 
-import static org.junit.jupiter.api.Assertions.assertNotNull;
-import static org.junit.jupiter.api.Assertions.assertTrue;
-
 import com.stripe.BaseStripeTest;
 import com.stripe.exception.StripeException;
 import com.stripe.model.terminal.Reader;
@@ -11,6 +8,8 @@ import com.stripe.net.ApiResource;
 import java.util.HashMap;
 import java.util.Map;
 import org.junit.jupiter.api.Test;
+
+import static org.junit.jupiter.api.Assertions.*;
 
 public class ReaderTest extends BaseStripeTest {
   public static final String READER_ID = "rdr_123";
@@ -72,18 +71,19 @@ public class ReaderTest extends BaseStripeTest {
     assertNotNull(deletedReader);
     assertTrue(deletedReader.getDeleted());
     verifyRequest(
-      ApiResource.RequestMethod.DELETE, String.format("/v1/terminal/readers/%s", reader.getId()));
+        ApiResource.RequestMethod.DELETE, String.format("/v1/terminal/readers/%s", reader.getId()));
   }
 
   @Test
   public void testPresentPaymentMethod() throws StripeException {
     final Reader reader = Reader.retrieve(READER_ID);
 
-    final Reader deletedReader = reader.getTestHelpers().presentPaymentMethod();
+    final Reader processedReader = reader.getTestHelpers().presentPaymentMethod();
 
-    assertNotNull(deletedReader);
-    assertTrue(deletedReader.getDeleted());
+    assertNotNull(processedReader);
     verifyRequest(
-      ApiResource.RequestMethod.DELETE, String.format("/v1/test_helpers/terminal/readers/%s/present_payment_method", reader.getId()));
+        ApiResource.RequestMethod.POST,
+        String.format(
+            "/v1/test_helpers/terminal/readers/%s/present_payment_method", reader.getId()));
   }
 }
