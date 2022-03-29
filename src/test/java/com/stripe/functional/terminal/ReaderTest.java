@@ -1,5 +1,7 @@
 package com.stripe.functional.terminal;
 
+import static org.junit.jupiter.api.Assertions.*;
+
 import com.stripe.BaseStripeTest;
 import com.stripe.exception.StripeException;
 import com.stripe.model.terminal.Reader;
@@ -8,8 +10,6 @@ import com.stripe.net.ApiResource;
 import java.util.HashMap;
 import java.util.Map;
 import org.junit.jupiter.api.Test;
-
-import static org.junit.jupiter.api.Assertions.*;
 
 public class ReaderTest extends BaseStripeTest {
   public static final String READER_ID = "rdr_123";
