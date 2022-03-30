@@ -22,20 +22,26 @@ plugins {
     id "signing"
     id "jacoco"
     id "io.freefair.lombok" version "6.3.0"
-    id "com.diffplug.spotless" version "6.0.1"
+    id "com.diffplug.spotless" version "6.4.0"
     id "net.ltgt.errorprone" version "2.0.2"
     id "com.github.kt3k.coveralls" version "2.12.0"
     id "biz.aQute.bnd.builder" version "6.1.0"
     id "org.ajoberstar.git-publish" version "3.0.0"
 }
 
-sourceCompatibility = 1.8
-targetCompatibility = 1.8
-
+sourceCompatibility = JavaVersion.VERSION_1_8
+targetCompatibility = JavaVersion.VERSION_1_8
 group = GROUP
 version = VERSION_NAME
 
 tasks.withType(JavaCompile) {
+    JavaVersion compilerJavaVersionEnum = JavaVersion.current()
+    if (compilerJavaVersionEnum != JavaVersion.VERSION_18) {
+        throw new GradleException("JDK 18 is required to build Stripe")
+    }
+
+    options.release = project.targetCompatibility.majorVersion as Integer
+
     options.compilerArgs << "-Xlint:all" << "-Xlint:-options" << "-Xlint:-processing"
     options.encoding = "UTF-8"
 
@@ -53,6 +59,19 @@ tasks.withType(JavaCompile) {
       // com.stripe.param.AccountUpdateParams.Individual.Address] within this file.)
       // We should fix this by having autogen use the fully-qualified class to eliminate ambiguity.
       check("SameNameButDifferent", net.ltgt.gradle.errorprone.CheckSeverity.OFF)
+    }
+}
+
+tasks.withType(Test) {
+    // Check if JAVA_TEST_HOME environment variable is specified
+    String home = System.getenv("JAVA_TEST_HOME")
+    if (home && !home.allWhitespace) {
+        test.executable = "${home}/bin/java"
+    }
+    // Github CI should always set JAVA_TEST_HOME
+    else if (System.getenv("GITHUB_ACTIONS"))
+    {
+        throw new GradleException("JAVA_TEST_HOME should be set when running in CI")
     }
 }
 
@@ -127,17 +146,6 @@ jacocoTestReport {
 
 coveralls {
     jacocoReportPath "build/reports/jacoco/test/jacocoTestReport.xml"
-}
-
-javadoc {
-  doFirst {
-    // We should remove this once we start using module-info.java.
-    // Without that file, Javadoc will fall back to "undefined" as the module
-    // name resulting in broken search links. This option explicitly declares
-    // that we are not currently using modules and the module name should be
-    // omitted from Javadoc.
-    options.addBooleanOption('-no-module-directories', true)
-  }
 }
 
 gitPublish {

@@ -192,6 +192,10 @@ Stripe.enableTelemetry = false;
 
 ## Development
 
+JDK 18 is required to build the Stripe Java library. By default, tests use the same Java runtime as the build.
+To use a custom version of Java runtime for tests set the `JAVA_TEST_HOME` environment variable to runtime's
+home directory.
+
 The test suite depends on [stripe-mock], so make sure to fetch and run it from a
 background terminal ([stripe-mock's README][stripe-mock] also contains
 instructions for installing via Homebrew and other methods):
