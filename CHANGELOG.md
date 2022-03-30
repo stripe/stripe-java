@@ -1,4 +1,9 @@
-# Changelog
+II# Changelog
+
+## 20.111.0 - 2022-03-30
+* [#1332](https://github.com/stripe/stripe-java/pull/1332) API Updates
+  * Add support for `cancel_action`, `process_payment_intent`, `process_setup_intent`, and `set_reader_display` methods on resource `Terminal.Reader`
+  * Add support for `action` on `Terminal.Reader`
 
 ## 20.110.0 - 2022-03-28
 * [#1330](https://github.com/stripe/stripe-java/pull/1330) API Updates
