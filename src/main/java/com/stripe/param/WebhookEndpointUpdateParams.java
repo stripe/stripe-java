@@ -567,6 +567,9 @@ public class WebhookEndpointUpdateParams extends ApiRequestParams {
     @SerializedName("payment_intent.created")
     PAYMENT_INTENT__CREATED("payment_intent.created"),
 
+    @SerializedName("payment_intent.partially_funded")
+    PAYMENT_INTENT__PARTIALLY_FUNDED("payment_intent.partially_funded"),
+
     @SerializedName("payment_intent.payment_failed")
     PAYMENT_INTENT__PAYMENT_FAILED("payment_intent.payment_failed"),
 
@@ -770,6 +773,12 @@ public class WebhookEndpointUpdateParams extends ApiRequestParams {
 
     @SerializedName("tax_rate.updated")
     TAX_RATE__UPDATED("tax_rate.updated"),
+
+    @SerializedName("terminal.reader.action_failed")
+    TERMINAL__READER__ACTION_FAILED("terminal.reader.action_failed"),
+
+    @SerializedName("terminal.reader.action_succeeded")
+    TERMINAL__READER__ACTION_SUCCEEDED("terminal.reader.action_succeeded"),
 
     @SerializedName("test_helpers.test_clock.advancing")
     TEST_HELPERS__TEST_CLOCK__ADVANCING("test_helpers.test_clock.advancing"),

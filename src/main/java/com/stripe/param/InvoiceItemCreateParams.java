@@ -80,7 +80,10 @@ public class InvoiceItemCreateParams extends ApiRequestParams {
   @SerializedName("metadata")
   Object metadata;
 
-  /** The period associated with this invoice item. */
+  /**
+   * The period associated with this invoice item. When set to different values, the period will be
+   * rendered on the invoice.
+   */
   @SerializedName("period")
   Period period;
 
@@ -429,7 +432,10 @@ public class InvoiceItemCreateParams extends ApiRequestParams {
       return this;
     }
 
-    /** The period associated with this invoice item. */
+    /**
+     * The period associated with this invoice item. When set to different values, the period will
+     * be rendered on the invoice.
+     */
     public Builder setPeriod(Period period) {
       this.period = period;
       return this;

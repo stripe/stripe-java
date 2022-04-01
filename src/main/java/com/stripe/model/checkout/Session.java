@@ -4,6 +4,7 @@ package com.stripe.model.checkout;
 import com.google.gson.annotations.SerializedName;
 import com.stripe.Stripe;
 import com.stripe.exception.StripeException;
+import com.stripe.model.Address;
 import com.stripe.model.Customer;
 import com.stripe.model.ExpandableField;
 import com.stripe.model.HasId;
@@ -682,6 +683,13 @@ public class Session extends ApiResource implements HasId {
   @EqualsAndHashCode(callSuper = false)
   public static class CustomerDetails extends StripeObject {
     /**
+     * The customer's address at the time of checkout. Note: This property is populated only for
+     * sessions on or after March 30, 2022.
+     */
+    @SerializedName("address")
+    Address address;
+
+    /**
      * The email associated with the Customer, if one exists, on the Checkout Session at the time of
      * checkout or at time of session expiry. Otherwise, if the customer has consented to
      * promotional content, this value is the most recent valid email provided by the customer on
@@ -689,6 +697,13 @@ public class Session extends ApiResource implements HasId {
      */
     @SerializedName("email")
     String email;
+
+    /**
+     * The customer's name at the time of checkout. Note: This property is populated only for
+     * sessions on or after March 30, 2022.
+     */
+    @SerializedName("name")
+    String name;
 
     /** The customer's phone number at the time of checkout. */
     @SerializedName("phone")

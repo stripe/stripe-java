@@ -6959,8 +6959,17 @@ public class PaymentIntentUpdateParams extends ApiRequestParams {
       @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
       Map<String, Object> extraParams;
 
-      private CardPresent(Map<String, Object> extraParams) {
+      /**
+       * Request ability to capture this payment beyond the standard <a
+       * href="https://stripe.com/docs/terminal/features/extended-authorizations#authorization-validity">authorization
+       * validity window.</a>
+       */
+      @SerializedName("request_extended_authorization")
+      Boolean requestExtendedAuthorization;
+
+      private CardPresent(Map<String, Object> extraParams, Boolean requestExtendedAuthorization) {
         this.extraParams = extraParams;
+        this.requestExtendedAuthorization = requestExtendedAuthorization;
       }
 
       public static Builder builder() {
@@ -6970,9 +6979,11 @@ public class PaymentIntentUpdateParams extends ApiRequestParams {
       public static class Builder {
         private Map<String, Object> extraParams;
 
+        private Boolean requestExtendedAuthorization;
+
         /** Finalize and obtain parameter instance from this builder. */
         public CardPresent build() {
-          return new CardPresent(this.extraParams);
+          return new CardPresent(this.extraParams, this.requestExtendedAuthorization);
         }
 
         /**
@@ -7000,6 +7011,16 @@ public class PaymentIntentUpdateParams extends ApiRequestParams {
             this.extraParams = new HashMap<>();
           }
           this.extraParams.putAll(map);
+          return this;
+        }
+
+        /**
+         * Request ability to capture this payment beyond the standard <a
+         * href="https://stripe.com/docs/terminal/features/extended-authorizations#authorization-validity">authorization
+         * validity window.</a>
+         */
+        public Builder setRequestExtendedAuthorization(Boolean requestExtendedAuthorization) {
+          this.requestExtendedAuthorization = requestExtendedAuthorization;
           return this;
         }
       }

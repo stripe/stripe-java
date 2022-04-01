@@ -386,12 +386,12 @@ public class Reader extends ApiResource implements HasId, MetadataStore<Reader> 
     return ApiResource.request(ApiResource.RequestMethod.POST, url, params, Reader.class, options);
   }
 
-  /** Sets reader display. */
+  /** Sets reader display to show cart details. */
   public Reader setReaderDisplay(Map<String, Object> params) throws StripeException {
     return setReaderDisplay(params, (RequestOptions) null);
   }
 
-  /** Sets reader display. */
+  /** Sets reader display to show cart details. */
   public Reader setReaderDisplay(Map<String, Object> params, RequestOptions options)
       throws StripeException {
     String url =
@@ -404,12 +404,12 @@ public class Reader extends ApiResource implements HasId, MetadataStore<Reader> 
     return ApiResource.request(ApiResource.RequestMethod.POST, url, params, Reader.class, options);
   }
 
-  /** Sets reader display. */
+  /** Sets reader display to show cart details. */
   public Reader setReaderDisplay(ReaderSetReaderDisplayParams params) throws StripeException {
     return setReaderDisplay(params, (RequestOptions) null);
   }
 
-  /** Sets reader display. */
+  /** Sets reader display to show cart details. */
   public Reader setReaderDisplay(ReaderSetReaderDisplayParams params, RequestOptions options)
       throws StripeException {
     String url =
@@ -602,7 +602,7 @@ public class Reader extends ApiResource implements HasId, MetadataStore<Reader> 
   public class TestHelpers {
     /**
      * Presents a payment method on a simulated reader. Can be used to simulate accepting a payment,
-     * saving a card or refunding a transaction
+     * saving a card or refunding a transaction.
      */
     public Reader presentPaymentMethod() throws StripeException {
       return presentPaymentMethod((Map<String, Object>) null, (RequestOptions) null);
@@ -610,7 +610,7 @@ public class Reader extends ApiResource implements HasId, MetadataStore<Reader> 
 
     /**
      * Presents a payment method on a simulated reader. Can be used to simulate accepting a payment,
-     * saving a card or refunding a transaction
+     * saving a card or refunding a transaction.
      */
     public Reader presentPaymentMethod(RequestOptions options) throws StripeException {
       return presentPaymentMethod((Map<String, Object>) null, options);
@@ -618,7 +618,7 @@ public class Reader extends ApiResource implements HasId, MetadataStore<Reader> 
 
     /**
      * Presents a payment method on a simulated reader. Can be used to simulate accepting a payment,
-     * saving a card or refunding a transaction
+     * saving a card or refunding a transaction.
      */
     public Reader presentPaymentMethod(Map<String, Object> params) throws StripeException {
       return presentPaymentMethod(params, (RequestOptions) null);
@@ -626,7 +626,7 @@ public class Reader extends ApiResource implements HasId, MetadataStore<Reader> 
 
     /**
      * Presents a payment method on a simulated reader. Can be used to simulate accepting a payment,
-     * saving a card or refunding a transaction
+     * saving a card or refunding a transaction.
      */
     public Reader presentPaymentMethod(Map<String, Object> params, RequestOptions options)
         throws StripeException {
@@ -643,7 +643,7 @@ public class Reader extends ApiResource implements HasId, MetadataStore<Reader> 
 
     /**
      * Presents a payment method on a simulated reader. Can be used to simulate accepting a payment,
-     * saving a card or refunding a transaction
+     * saving a card or refunding a transaction.
      */
     public Reader presentPaymentMethod(ReaderPresentPaymentMethodParams params)
         throws StripeException {
@@ -652,7 +652,7 @@ public class Reader extends ApiResource implements HasId, MetadataStore<Reader> 
 
     /**
      * Presents a payment method on a simulated reader. Can be used to simulate accepting a payment,
-     * saving a card or refunding a transaction
+     * saving a card or refunding a transaction.
      */
     public Reader presentPaymentMethod(
         ReaderPresentPaymentMethodParams params, RequestOptions options) throws StripeException {
