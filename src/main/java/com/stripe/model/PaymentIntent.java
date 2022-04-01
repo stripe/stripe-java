@@ -2073,7 +2073,15 @@ public class PaymentIntent extends ApiResource implements HasId, MetadataStore<P
     @Getter
     @Setter
     @EqualsAndHashCode(callSuper = false)
-    public static class CardPresent extends StripeObject {}
+    public static class CardPresent extends StripeObject {
+      /**
+       * Request ability to capture this payment beyond the standard <a
+       * href="https://stripe.com/docs/terminal/features/extended-authorizations#authorization-validity">authorization
+       * validity window.</a>
+       */
+      @SerializedName("request_extended_authorization")
+      Boolean requestExtendedAuthorization;
+    }
 
     @Getter
     @Setter

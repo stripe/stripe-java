@@ -32,8 +32,9 @@ public class SubscriptionSearchParams extends ApiRequestParams {
   Long limit;
 
   /**
-   * A cursor for pagination across multiple pages of results. Do not include this parameter on the
-   * first call. Use the next_page value returned in a response to request subsequent results.
+   * A cursor for pagination across multiple pages of results. Don't include this parameter on the
+   * first call. Use the next_page value returned in a previous response to request subsequent
+   * results.
    */
   @SerializedName("page")
   String page;
@@ -139,8 +140,9 @@ public class SubscriptionSearchParams extends ApiRequestParams {
     }
 
     /**
-     * A cursor for pagination across multiple pages of results. Do not include this parameter on
-     * the first call. Use the next_page value returned in a response to request subsequent results.
+     * A cursor for pagination across multiple pages of results. Don't include this parameter on the
+     * first call. Use the next_page value returned in a previous response to request subsequent
+     * results.
      */
     public Builder setPage(String page) {
       this.page = page;

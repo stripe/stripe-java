@@ -677,6 +677,15 @@ public class Account extends ApiResource implements MetadataStore<Account>, Paym
     String bancontactPayments;
 
     /**
+     * The status of the customer_balance payments capability of the account, or whether the account
+     * can directly process customer_balance charges.
+     *
+     * <p>One of {@code active}, {@code inactive}, or {@code pending}.
+     */
+    @SerializedName("bank_transfer_payments")
+    String bankTransferPayments;
+
+    /**
      * The status of the boleto payments capability of the account, or whether the account can
      * directly process boleto charges.
      *

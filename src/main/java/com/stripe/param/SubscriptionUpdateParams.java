@@ -2549,6 +2549,13 @@ public class SubscriptionUpdateParams extends ApiRequestParams {
       Object card;
 
       /**
+       * This sub-hash contains details about the Bank transfer payment method options to pass to
+       * the invoice’s PaymentIntent.
+       */
+      @SerializedName("customer_balance")
+      Object customerBalance;
+
+      /**
        * Map of extra parameters for custom features not available in this client library. The
        * content in this map is not serialized under this field's {@code @SerializedName} value.
        * Instead, each key/value pair is serialized as if the key is a root-level field (serialized)
@@ -2575,12 +2582,14 @@ public class SubscriptionUpdateParams extends ApiRequestParams {
           Object acssDebit,
           Object bancontact,
           Object card,
+          Object customerBalance,
           Map<String, Object> extraParams,
           Object konbini,
           Object usBankAccount) {
         this.acssDebit = acssDebit;
         this.bancontact = bancontact;
         this.card = card;
+        this.customerBalance = customerBalance;
         this.extraParams = extraParams;
         this.konbini = konbini;
         this.usBankAccount = usBankAccount;
@@ -2597,6 +2606,8 @@ public class SubscriptionUpdateParams extends ApiRequestParams {
 
         private Object card;
 
+        private Object customerBalance;
+
         private Map<String, Object> extraParams;
 
         private Object konbini;
@@ -2609,6 +2620,7 @@ public class SubscriptionUpdateParams extends ApiRequestParams {
               this.acssDebit,
               this.bancontact,
               this.card,
+              this.customerBalance,
               this.extraParams,
               this.konbini,
               this.usBankAccount);
@@ -2665,6 +2677,24 @@ public class SubscriptionUpdateParams extends ApiRequestParams {
          */
         public Builder setCard(EmptyParam card) {
           this.card = card;
+          return this;
+        }
+
+        /**
+         * This sub-hash contains details about the Bank transfer payment method options to pass to
+         * the invoice’s PaymentIntent.
+         */
+        public Builder setCustomerBalance(CustomerBalance customerBalance) {
+          this.customerBalance = customerBalance;
+          return this;
+        }
+
+        /**
+         * This sub-hash contains details about the Bank transfer payment method options to pass to
+         * the invoice’s PaymentIntent.
+         */
+        public Builder setCustomerBalance(EmptyParam customerBalance) {
+          this.customerBalance = customerBalance;
           return this;
         }
 
@@ -3295,6 +3325,211 @@ public class SubscriptionUpdateParams extends ApiRequestParams {
       }
 
       @Getter
+      public static class CustomerBalance {
+        /**
+         * Configuration for the bank transfer funding type, if the {@code funding_type} is set to
+         * {@code bank_transfer}.
+         */
+        @SerializedName("bank_transfer")
+        BankTransfer bankTransfer;
+
+        /**
+         * Map of extra parameters for custom features not available in this client library. The
+         * content in this map is not serialized under this field's {@code @SerializedName} value.
+         * Instead, each key/value pair is serialized as if the key is a root-level field
+         * (serialized) name in this param object. Effectively, this map is flattened to its parent
+         * instance.
+         */
+        @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
+        Map<String, Object> extraParams;
+
+        /**
+         * The funding method type to be used when there are not enough funds in the customer
+         * balance. Permitted values include: {@code bank_transfer}.
+         */
+        @SerializedName("funding_type")
+        Object fundingType;
+
+        private CustomerBalance(
+            BankTransfer bankTransfer, Map<String, Object> extraParams, Object fundingType) {
+          this.bankTransfer = bankTransfer;
+          this.extraParams = extraParams;
+          this.fundingType = fundingType;
+        }
+
+        public static Builder builder() {
+          return new Builder();
+        }
+
+        public static class Builder {
+          private BankTransfer bankTransfer;
+
+          private Map<String, Object> extraParams;
+
+          private Object fundingType;
+
+          /** Finalize and obtain parameter instance from this builder. */
+          public CustomerBalance build() {
+            return new CustomerBalance(this.bankTransfer, this.extraParams, this.fundingType);
+          }
+
+          /**
+           * Configuration for the bank transfer funding type, if the {@code funding_type} is set to
+           * {@code bank_transfer}.
+           */
+          public Builder setBankTransfer(BankTransfer bankTransfer) {
+            this.bankTransfer = bankTransfer;
+            return this;
+          }
+
+          /**
+           * Add a key/value pair to `extraParams` map. A map is initialized for the first
+           * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
+           * map. See {@link
+           * SubscriptionUpdateParams.PaymentSettings.PaymentMethodOptions.CustomerBalance#extraParams}
+           * for the field documentation.
+           */
+          public Builder putExtraParam(String key, Object value) {
+            if (this.extraParams == null) {
+              this.extraParams = new HashMap<>();
+            }
+            this.extraParams.put(key, value);
+            return this;
+          }
+
+          /**
+           * Add all map key/value pairs to `extraParams` map. A map is initialized for the first
+           * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
+           * map. See {@link
+           * SubscriptionUpdateParams.PaymentSettings.PaymentMethodOptions.CustomerBalance#extraParams}
+           * for the field documentation.
+           */
+          public Builder putAllExtraParam(Map<String, Object> map) {
+            if (this.extraParams == null) {
+              this.extraParams = new HashMap<>();
+            }
+            this.extraParams.putAll(map);
+            return this;
+          }
+
+          /**
+           * The funding method type to be used when there are not enough funds in the customer
+           * balance. Permitted values include: {@code bank_transfer}.
+           */
+          public Builder setFundingType(String fundingType) {
+            this.fundingType = fundingType;
+            return this;
+          }
+
+          /**
+           * The funding method type to be used when there are not enough funds in the customer
+           * balance. Permitted values include: {@code bank_transfer}.
+           */
+          public Builder setFundingType(EmptyParam fundingType) {
+            this.fundingType = fundingType;
+            return this;
+          }
+        }
+
+        @Getter
+        public static class BankTransfer {
+          /**
+           * Map of extra parameters for custom features not available in this client library. The
+           * content in this map is not serialized under this field's {@code @SerializedName} value.
+           * Instead, each key/value pair is serialized as if the key is a root-level field
+           * (serialized) name in this param object. Effectively, this map is flattened to its
+           * parent instance.
+           */
+          @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
+          Map<String, Object> extraParams;
+
+          /**
+           * The bank transfer type that can be used for funding. Permitted values include: {@code
+           * us_bank_account}, {@code eu_bank_account}, {@code id_bank_account}, {@code
+           * gb_bank_account}, {@code jp_bank_account}, {@code mx_bank_account}, {@code
+           * eu_bank_transfer}, {@code gb_bank_transfer}, {@code id_bank_transfer}, {@code
+           * jp_bank_transfer}, {@code mx_bank_transfer}, or {@code us_bank_transfer}.
+           */
+          @SerializedName("type")
+          Object type;
+
+          private BankTransfer(Map<String, Object> extraParams, Object type) {
+            this.extraParams = extraParams;
+            this.type = type;
+          }
+
+          public static Builder builder() {
+            return new Builder();
+          }
+
+          public static class Builder {
+            private Map<String, Object> extraParams;
+
+            private Object type;
+
+            /** Finalize and obtain parameter instance from this builder. */
+            public BankTransfer build() {
+              return new BankTransfer(this.extraParams, this.type);
+            }
+
+            /**
+             * Add a key/value pair to `extraParams` map. A map is initialized for the first
+             * `put/putAll` call, and subsequent calls add additional key/value pairs to the
+             * original map. See {@link
+             * SubscriptionUpdateParams.PaymentSettings.PaymentMethodOptions.CustomerBalance.BankTransfer#extraParams}
+             * for the field documentation.
+             */
+            public Builder putExtraParam(String key, Object value) {
+              if (this.extraParams == null) {
+                this.extraParams = new HashMap<>();
+              }
+              this.extraParams.put(key, value);
+              return this;
+            }
+
+            /**
+             * Add all map key/value pairs to `extraParams` map. A map is initialized for the first
+             * `put/putAll` call, and subsequent calls add additional key/value pairs to the
+             * original map. See {@link
+             * SubscriptionUpdateParams.PaymentSettings.PaymentMethodOptions.CustomerBalance.BankTransfer#extraParams}
+             * for the field documentation.
+             */
+            public Builder putAllExtraParam(Map<String, Object> map) {
+              if (this.extraParams == null) {
+                this.extraParams = new HashMap<>();
+              }
+              this.extraParams.putAll(map);
+              return this;
+            }
+
+            /**
+             * The bank transfer type that can be used for funding. Permitted values include: {@code
+             * us_bank_account}, {@code eu_bank_account}, {@code id_bank_account}, {@code
+             * gb_bank_account}, {@code jp_bank_account}, {@code mx_bank_account}, {@code
+             * eu_bank_transfer}, {@code gb_bank_transfer}, {@code id_bank_transfer}, {@code
+             * jp_bank_transfer}, {@code mx_bank_transfer}, or {@code us_bank_transfer}.
+             */
+            public Builder setType(String type) {
+              this.type = type;
+              return this;
+            }
+
+            /**
+             * The bank transfer type that can be used for funding. Permitted values include: {@code
+             * us_bank_account}, {@code eu_bank_account}, {@code id_bank_account}, {@code
+             * gb_bank_account}, {@code jp_bank_account}, {@code mx_bank_account}, {@code
+             * eu_bank_transfer}, {@code gb_bank_transfer}, {@code id_bank_transfer}, {@code
+             * jp_bank_transfer}, {@code mx_bank_transfer}, or {@code us_bank_transfer}.
+             */
+            public Builder setType(EmptyParam type) {
+              this.type = type;
+              return this;
+            }
+          }
+        }
+      }
+
+      @Getter
       public static class Konbini {
         /**
          * Map of extra parameters for custom features not available in this client library. The
@@ -3471,6 +3706,9 @@ public class SubscriptionUpdateParams extends ApiRequestParams {
 
       @SerializedName("card")
       CARD("card"),
+
+      @SerializedName("customer_balance")
+      CUSTOMER_BALANCE("customer_balance"),
 
       @SerializedName("fpx")
       FPX("fpx"),

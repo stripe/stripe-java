@@ -1796,6 +1796,13 @@ public class Charge extends ApiResource implements MetadataStore<Charge>, Balanc
       String brand;
 
       /**
+       * When using manual capture, a future timestamp after which the charge will be automatically
+       * refunded if uncaptured.
+       */
+      @SerializedName("capture_before")
+      Long captureBefore;
+
+      /**
        * The cardholder name as read from the card, in <a
        * href="https://en.wikipedia.org/wiki/ISO/IEC_7813">ISO 7813</a> format. May include
        * alphanumeric characters, special characters and first/last name separator ({@code /}). In
