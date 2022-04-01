@@ -1018,7 +1018,7 @@ public class Subscription extends ApiResource implements HasId, MetadataStore<Su
     @EqualsAndHashCode(callSuper = false)
     public static class CustomerBalance extends StripeObject {
       @SerializedName("bank_transfer")
-      Invoice.PaymentMethodOptions.CustomerBalance.BankTransfer bankTransfer;
+      BankTransfer bankTransfer;
 
       /**
        * The funding method type to be used when there are not enough funds in the customer balance.
