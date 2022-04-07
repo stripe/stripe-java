@@ -303,6 +303,9 @@ public class WebhookEndpointUpdateParams extends ApiRequestParams {
     @SerializedName("capability.updated")
     CAPABILITY__UPDATED("capability.updated"),
 
+    @SerializedName("cash_balance.funds_available")
+    CASH_BALANCE__FUNDS_AVAILABLE("cash_balance.funds_available"),
+
     @SerializedName("charge.captured")
     CHARGE__CAPTURED("charge.captured"),
 

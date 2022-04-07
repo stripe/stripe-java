@@ -986,15 +986,15 @@ public class Quote extends ApiResource implements HasId, MetadataStore<Quote> {
   @Setter
   @EqualsAndHashCode(callSuper = false)
   public static class TotalDetails extends StripeObject {
-    /** This is the sum of all the line item discounts. */
+    /** This is the sum of all the discounts. */
     @SerializedName("amount_discount")
     Long amountDiscount;
 
-    /** This is the sum of all the line item shipping amounts. */
+    /** This is the sum of all the shipping amounts. */
     @SerializedName("amount_shipping")
     Long amountShipping;
 
-    /** This is the sum of all the line item tax amounts. */
+    /** This is the sum of all the tax amounts. */
     @SerializedName("amount_tax")
     Long amountTax;
 
@@ -1005,11 +1005,11 @@ public class Quote extends ApiResource implements HasId, MetadataStore<Quote> {
     @Setter
     @EqualsAndHashCode(callSuper = false)
     public static class Breakdown extends StripeObject {
-      /** The aggregated line item discounts. */
+      /** The aggregated discounts. */
       @SerializedName("discounts")
       List<LineItem.Discount> discounts;
 
-      /** The aggregated line item tax amounts by rate. */
+      /** The aggregated tax amounts by rate. */
       @SerializedName("taxes")
       List<LineItem.Tax> taxes;
     }
