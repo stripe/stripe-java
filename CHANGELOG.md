@@ -1,3 +1,10 @@
+# Changelog
+
+## 20.113.0 - 2022-04-08
+* [#1335](https://github.com/stripe/stripe-java/pull/1335) API Updates
+  * Add support for `apply_customer_balance` method on resource `PaymentIntent`
+  * Add support for new value `cash_balance.funds_available` on enums `WebhookEndpointCreateParams.enabled_events[]` and `WebhookEndpointUpdateParams.enabled_events[]`
+
 ## 20.112.0 - 2022-04-01
 * [#1333](https://github.com/stripe/stripe-java/pull/1333) API Updates
   * Add support for `bank_transfer_payments` on `Account.capabilities`, `AccountCreateParams.capabilities`, and `AccountUpdateParams.capabilities`
@@ -7,12 +14,9 @@
   * Add support for new value `customer_balance` on enums `InvoiceCreateParams.payment_settings.payment_method_types[]`, `InvoiceUpdateParams.payment_settings.payment_method_types[]`, `SubscriptionCreateParams.payment_settings.payment_method_types[]`, and `SubscriptionUpdateParams.payment_settings.payment_method_types[]`
   * Add support for `request_extended_authorization` on `PaymentIntent.payment_method_options.card_present`, `PaymentIntentConfirmParams.payment_method_options.card_present`, `PaymentIntentCreateParams.payment_method_options.card_present`, and `PaymentIntentUpdateParams.payment_method_options.card_present`
   * Add support for new values `payment_intent.partially_funded`, `terminal.reader.action_failed`, and `terminal.reader.action_succeeded` on enums `WebhookEndpointCreateParams.enabled_events[]` and `WebhookEndpointUpdateParams.enabled_events[]`
-  
-  
+    
 * [#1331](https://github.com/stripe/stripe-java/pull/1331) Pin JDK version and always build using Java 18
   * This only impacts development and it's not a breaking change for users. We still support Java 1.8 and later.
-
-II# Changelog
 
 ## 20.111.0 - 2022-03-30
 * [#1332](https://github.com/stripe/stripe-java/pull/1332) API Updates
