@@ -6,6 +6,7 @@ import com.stripe.Stripe;
 import com.stripe.exception.StripeException;
 import com.stripe.net.ApiResource;
 import com.stripe.net.RequestOptions;
+import com.stripe.param.PaymentIntentApplyCustomerBalanceParams;
 import com.stripe.param.PaymentIntentCancelParams;
 import com.stripe.param.PaymentIntentCaptureParams;
 import com.stripe.param.PaymentIntentConfirmParams;
@@ -1195,6 +1196,92 @@ public class PaymentIntent extends ApiResource implements HasId, MetadataStore<P
             Stripe.getApiBase(),
             String.format(
                 "/v1/payment_intents/%s/verify_microdeposits",
+                ApiResource.urlEncodeId(this.getId())));
+    return ApiResource.request(
+        ApiResource.RequestMethod.POST, url, params, PaymentIntent.class, options);
+  }
+
+  /**
+   * Manually reconcile the remaining amount for a customer_balance PaymentIntent.
+   *
+   * <p>This can be used when the cash balance for <a
+   * href="docs/payments/customer-balance/reconciliation#cash-manual-reconciliation">a customer in
+   * manual reconciliation mode</a> received funds.
+   */
+  public PaymentIntent applyCustomerBalance() throws StripeException {
+    return applyCustomerBalance((Map<String, Object>) null, (RequestOptions) null);
+  }
+
+  /**
+   * Manually reconcile the remaining amount for a customer_balance PaymentIntent.
+   *
+   * <p>This can be used when the cash balance for <a
+   * href="docs/payments/customer-balance/reconciliation#cash-manual-reconciliation">a customer in
+   * manual reconciliation mode</a> received funds.
+   */
+  public PaymentIntent applyCustomerBalance(RequestOptions options) throws StripeException {
+    return applyCustomerBalance((Map<String, Object>) null, options);
+  }
+
+  /**
+   * Manually reconcile the remaining amount for a customer_balance PaymentIntent.
+   *
+   * <p>This can be used when the cash balance for <a
+   * href="docs/payments/customer-balance/reconciliation#cash-manual-reconciliation">a customer in
+   * manual reconciliation mode</a> received funds.
+   */
+  public PaymentIntent applyCustomerBalance(Map<String, Object> params) throws StripeException {
+    return applyCustomerBalance(params, (RequestOptions) null);
+  }
+
+  /**
+   * Manually reconcile the remaining amount for a customer_balance PaymentIntent.
+   *
+   * <p>This can be used when the cash balance for <a
+   * href="docs/payments/customer-balance/reconciliation#cash-manual-reconciliation">a customer in
+   * manual reconciliation mode</a> received funds.
+   */
+  public PaymentIntent applyCustomerBalance(Map<String, Object> params, RequestOptions options)
+      throws StripeException {
+    String url =
+        String.format(
+            "%s%s",
+            Stripe.getApiBase(),
+            String.format(
+                "/v1/payment_intents/%s/apply_customer_balance",
+                ApiResource.urlEncodeId(this.getId())));
+    return ApiResource.request(
+        ApiResource.RequestMethod.POST, url, params, PaymentIntent.class, options);
+  }
+
+  /**
+   * Manually reconcile the remaining amount for a customer_balance PaymentIntent.
+   *
+   * <p>This can be used when the cash balance for <a
+   * href="docs/payments/customer-balance/reconciliation#cash-manual-reconciliation">a customer in
+   * manual reconciliation mode</a> received funds.
+   */
+  public PaymentIntent applyCustomerBalance(PaymentIntentApplyCustomerBalanceParams params)
+      throws StripeException {
+    return applyCustomerBalance(params, (RequestOptions) null);
+  }
+
+  /**
+   * Manually reconcile the remaining amount for a customer_balance PaymentIntent.
+   *
+   * <p>This can be used when the cash balance for <a
+   * href="docs/payments/customer-balance/reconciliation#cash-manual-reconciliation">a customer in
+   * manual reconciliation mode</a> received funds.
+   */
+  public PaymentIntent applyCustomerBalance(
+      PaymentIntentApplyCustomerBalanceParams params, RequestOptions options)
+      throws StripeException {
+    String url =
+        String.format(
+            "%s%s",
+            Stripe.getApiBase(),
+            String.format(
+                "/v1/payment_intents/%s/apply_customer_balance",
                 ApiResource.urlEncodeId(this.getId())));
     return ApiResource.request(
         ApiResource.RequestMethod.POST, url, params, PaymentIntent.class, options);

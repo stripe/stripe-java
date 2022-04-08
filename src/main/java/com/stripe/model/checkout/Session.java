@@ -287,7 +287,11 @@ public class Session extends ApiResource implements HasId {
   @SerializedName("total_details")
   TotalDetails totalDetails;
 
-  /** The URL to the Checkout Session. */
+  /**
+   * The URL to the Checkout Session. Redirect customers to this URL to take them to Checkout. If
+   * you’re using <a href="https://stripe.com/docs/payments/checkout/custom-domains">Custom
+   * Domains</a>, the URL will use your subdomain. Otherwise, it’ll use {@code checkout.stripe.com.}
+   */
   @SerializedName("url")
   String url;
 
@@ -990,15 +994,15 @@ public class Session extends ApiResource implements HasId {
   @Setter
   @EqualsAndHashCode(callSuper = false)
   public static class TotalDetails extends StripeObject {
-    /** This is the sum of all the line item discounts. */
+    /** This is the sum of all the discounts. */
     @SerializedName("amount_discount")
     Long amountDiscount;
 
-    /** This is the sum of all the line item shipping amounts. */
+    /** This is the sum of all the shipping amounts. */
     @SerializedName("amount_shipping")
     Long amountShipping;
 
-    /** This is the sum of all the line item tax amounts. */
+    /** This is the sum of all the tax amounts. */
     @SerializedName("amount_tax")
     Long amountTax;
 
@@ -1009,11 +1013,11 @@ public class Session extends ApiResource implements HasId {
     @Setter
     @EqualsAndHashCode(callSuper = false)
     public static class Breakdown extends StripeObject {
-      /** The aggregated line item discounts. */
+      /** The aggregated discounts. */
       @SerializedName("discounts")
       List<LineItem.Discount> discounts;
 
-      /** The aggregated line item tax amounts by rate. */
+      /** The aggregated tax amounts by rate. */
       @SerializedName("taxes")
       List<LineItem.Tax> taxes;
     }
