@@ -11,6 +11,7 @@ import com.stripe.param.PaymentIntentCancelParams;
 import com.stripe.param.PaymentIntentCaptureParams;
 import com.stripe.param.PaymentIntentConfirmParams;
 import com.stripe.param.PaymentIntentCreateParams;
+import com.stripe.param.PaymentIntentIncrementAuthorizationParams;
 import com.stripe.param.PaymentIntentListParams;
 import com.stripe.param.PaymentIntentRetrieveParams;
 import com.stripe.param.PaymentIntentSearchParams;
@@ -104,12 +105,12 @@ public class PaymentIntent extends ApiResource implements HasId, MetadataStore<P
    * key.
    *
    * <p>The client secret can be used to complete a payment from your frontend. It should not be
-   * stored, logged, embedded in URLs, or exposed to anyone other than the customer. Make sure that
-   * you have TLS enabled on any page that includes the client secret.
+   * stored, logged, or exposed to anyone other than the customer. Make sure that you have TLS
+   * enabled on any page that includes the client secret.
    *
    * <p>Refer to our docs to <a
-   * href="https://stripe.com/docs/payments/accept-a-payment?integration=elements">accept a
-   * payment</a> and learn about how {@code client_secret} should be handled.
+   * href="https://stripe.com/docs/payments/accept-a-payment?ui=elements">accept a payment</a> and
+   * learn about how {@code client_secret} should be handled.
    */
   @SerializedName("client_secret")
   String clientSecret;
@@ -1151,6 +1152,150 @@ public class PaymentIntent extends ApiResource implements HasId, MetadataStore<P
         ApiResource.RequestMethod.POST, url, params, PaymentIntent.class, options);
   }
 
+  /**
+   * Perform an incremental authorization on an eligible <a
+   * href="https://stripe.com/docs/api/payment_intents/object">PaymentIntent</a>. To be eligible,
+   * the PaymentIntent’s status must be <code>requires_capture</code> and <a
+   * href="https://stripe.com/docs/api/charges/object#charge_object-payment_method_details-card_present-incremental_authorization_supported">incremental_authorization_supported</a>
+   * must be <code>true</code>.
+   *
+   * <p>Incremental authorizations attempt to increase the authorized amount on your customer’s card
+   * to the new, higher <code>amount</code> provided. As with the initial authorization, incremental
+   * authorizations may be declined. A single PaymentIntent can call this endpoint multiple times to
+   * further increase the authorized amount.
+   *
+   * <p>If the incremental authorization succeeds, the PaymentIntent object is returned with the
+   * updated <a
+   * href="https://stripe.com/docs/api/payment_intents/object#payment_intent_object-amount">amount</a>.
+   * If the incremental authorization fails, a <a
+   * href="https://stripe.com/docs/error-codes#card-declined">card_declined</a> error is returned,
+   * and no fields on the PaymentIntent or Charge are updated. The PaymentIntent object remains
+   * capturable for the previously authorized amount.
+   *
+   * <p>Each PaymentIntent can have a maximum of 10 incremental authorization attempts, including
+   * declines. Once captured, a PaymentIntent can no longer be incremented.
+   *
+   * <p>Learn more about <a
+   * href="https://stripe.com/docs/terminal/features/incremental-authorizations">incremental
+   * authorizations</a>.
+   */
+  public PaymentIntent incrementAuthorization(Map<String, Object> params) throws StripeException {
+    return incrementAuthorization(params, (RequestOptions) null);
+  }
+
+  /**
+   * Perform an incremental authorization on an eligible <a
+   * href="https://stripe.com/docs/api/payment_intents/object">PaymentIntent</a>. To be eligible,
+   * the PaymentIntent’s status must be <code>requires_capture</code> and <a
+   * href="https://stripe.com/docs/api/charges/object#charge_object-payment_method_details-card_present-incremental_authorization_supported">incremental_authorization_supported</a>
+   * must be <code>true</code>.
+   *
+   * <p>Incremental authorizations attempt to increase the authorized amount on your customer’s card
+   * to the new, higher <code>amount</code> provided. As with the initial authorization, incremental
+   * authorizations may be declined. A single PaymentIntent can call this endpoint multiple times to
+   * further increase the authorized amount.
+   *
+   * <p>If the incremental authorization succeeds, the PaymentIntent object is returned with the
+   * updated <a
+   * href="https://stripe.com/docs/api/payment_intents/object#payment_intent_object-amount">amount</a>.
+   * If the incremental authorization fails, a <a
+   * href="https://stripe.com/docs/error-codes#card-declined">card_declined</a> error is returned,
+   * and no fields on the PaymentIntent or Charge are updated. The PaymentIntent object remains
+   * capturable for the previously authorized amount.
+   *
+   * <p>Each PaymentIntent can have a maximum of 10 incremental authorization attempts, including
+   * declines. Once captured, a PaymentIntent can no longer be incremented.
+   *
+   * <p>Learn more about <a
+   * href="https://stripe.com/docs/terminal/features/incremental-authorizations">incremental
+   * authorizations</a>.
+   */
+  public PaymentIntent incrementAuthorization(Map<String, Object> params, RequestOptions options)
+      throws StripeException {
+    String url =
+        String.format(
+            "%s%s",
+            Stripe.getApiBase(),
+            String.format(
+                "/v1/payment_intents/%s/increment_authorization",
+                ApiResource.urlEncodeId(this.getId())));
+    return ApiResource.request(
+        ApiResource.RequestMethod.POST, url, params, PaymentIntent.class, options);
+  }
+
+  /**
+   * Perform an incremental authorization on an eligible <a
+   * href="https://stripe.com/docs/api/payment_intents/object">PaymentIntent</a>. To be eligible,
+   * the PaymentIntent’s status must be <code>requires_capture</code> and <a
+   * href="https://stripe.com/docs/api/charges/object#charge_object-payment_method_details-card_present-incremental_authorization_supported">incremental_authorization_supported</a>
+   * must be <code>true</code>.
+   *
+   * <p>Incremental authorizations attempt to increase the authorized amount on your customer’s card
+   * to the new, higher <code>amount</code> provided. As with the initial authorization, incremental
+   * authorizations may be declined. A single PaymentIntent can call this endpoint multiple times to
+   * further increase the authorized amount.
+   *
+   * <p>If the incremental authorization succeeds, the PaymentIntent object is returned with the
+   * updated <a
+   * href="https://stripe.com/docs/api/payment_intents/object#payment_intent_object-amount">amount</a>.
+   * If the incremental authorization fails, a <a
+   * href="https://stripe.com/docs/error-codes#card-declined">card_declined</a> error is returned,
+   * and no fields on the PaymentIntent or Charge are updated. The PaymentIntent object remains
+   * capturable for the previously authorized amount.
+   *
+   * <p>Each PaymentIntent can have a maximum of 10 incremental authorization attempts, including
+   * declines. Once captured, a PaymentIntent can no longer be incremented.
+   *
+   * <p>Learn more about <a
+   * href="https://stripe.com/docs/terminal/features/incremental-authorizations">incremental
+   * authorizations</a>.
+   */
+  public PaymentIntent incrementAuthorization(PaymentIntentIncrementAuthorizationParams params)
+      throws StripeException {
+    return incrementAuthorization(params, (RequestOptions) null);
+  }
+
+  /**
+   * Perform an incremental authorization on an eligible <a
+   * href="https://stripe.com/docs/api/payment_intents/object">PaymentIntent</a>. To be eligible,
+   * the PaymentIntent’s status must be <code>requires_capture</code> and <a
+   * href="https://stripe.com/docs/api/charges/object#charge_object-payment_method_details-card_present-incremental_authorization_supported">incremental_authorization_supported</a>
+   * must be <code>true</code>.
+   *
+   * <p>Incremental authorizations attempt to increase the authorized amount on your customer’s card
+   * to the new, higher <code>amount</code> provided. As with the initial authorization, incremental
+   * authorizations may be declined. A single PaymentIntent can call this endpoint multiple times to
+   * further increase the authorized amount.
+   *
+   * <p>If the incremental authorization succeeds, the PaymentIntent object is returned with the
+   * updated <a
+   * href="https://stripe.com/docs/api/payment_intents/object#payment_intent_object-amount">amount</a>.
+   * If the incremental authorization fails, a <a
+   * href="https://stripe.com/docs/error-codes#card-declined">card_declined</a> error is returned,
+   * and no fields on the PaymentIntent or Charge are updated. The PaymentIntent object remains
+   * capturable for the previously authorized amount.
+   *
+   * <p>Each PaymentIntent can have a maximum of 10 incremental authorization attempts, including
+   * declines. Once captured, a PaymentIntent can no longer be incremented.
+   *
+   * <p>Learn more about <a
+   * href="https://stripe.com/docs/terminal/features/incremental-authorizations">incremental
+   * authorizations</a>.
+   */
+  public PaymentIntent incrementAuthorization(
+      PaymentIntentIncrementAuthorizationParams params, RequestOptions options)
+      throws StripeException {
+    String url =
+        String.format(
+            "%s%s",
+            Stripe.getApiBase(),
+            String.format(
+                "/v1/payment_intents/%s/increment_authorization",
+                ApiResource.urlEncodeId(this.getId())));
+    return ApiResource.request(
+        ApiResource.RequestMethod.POST, url, params, PaymentIntent.class, options);
+  }
+
   /** Verifies microdeposits on a PaymentIntent object. */
   public PaymentIntent verifyMicrodeposits() throws StripeException {
     return verifyMicrodeposits((Map<String, Object>) null, (RequestOptions) null);
@@ -2168,6 +2313,17 @@ public class PaymentIntent extends ApiResource implements HasId, MetadataStore<P
        */
       @SerializedName("request_extended_authorization")
       Boolean requestExtendedAuthorization;
+
+      /**
+       * Request ability to <a
+       * href="docs/terminal/features/incremental-authorizations">increment</a> this PaymentIntent
+       * if the combination of MCC and card brand is eligible. Check <a
+       * href="https://stripe.com/docs/api/charges/object#charge_object-payment_method_details-card_present-incremental_authorization_supported">incremental_authorization_supported</a>
+       * in the <a href="https://stripe.com/docs/api/payment_intents/confirm">Confirm</a> response
+       * to verify support.
+       */
+      @SerializedName("request_incremental_authorization_support")
+      Boolean requestIncrementalAuthorizationSupport;
     }
 
     @Getter

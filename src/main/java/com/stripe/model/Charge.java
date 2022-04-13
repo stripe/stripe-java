@@ -1874,6 +1874,15 @@ public class Charge extends ApiResource implements MetadataStore<Charge>, Balanc
       String iin;
 
       /**
+       * Whether this <a href="https://stripe.com/docs/api/payment_intents">PaymentIntent</a> is
+       * eligible for incremental authorizations. Request support using
+       * [request_incremental_authorization_support]
+       * /docs/api/payment_intents/create#create_payment_intent-payment_method_options-card_present-request_incremental_authorization_support.
+       */
+      @SerializedName("incremental_authorization_supported")
+      Boolean incrementalAuthorizationSupported;
+
+      /**
        * The name of the card's issuing bank. (For internal use only and not typically available in
        * standard API requests.)
        */

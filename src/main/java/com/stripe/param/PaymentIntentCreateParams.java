@@ -7362,9 +7362,24 @@ public class PaymentIntentCreateParams extends ApiRequestParams {
       @SerializedName("request_extended_authorization")
       Boolean requestExtendedAuthorization;
 
-      private CardPresent(Map<String, Object> extraParams, Boolean requestExtendedAuthorization) {
+      /**
+       * Request ability to <a
+       * href="docs/terminal/features/incremental-authorizations">increment</a> this PaymentIntent
+       * if the combination of MCC and card brand is eligible. Check <a
+       * href="https://stripe.com/docs/api/charges/object#charge_object-payment_method_details-card_present-incremental_authorization_supported">incremental_authorization_supported</a>
+       * in the <a href="https://stripe.com/docs/api/payment_intents/confirm">Confirm</a> response
+       * to verify support.
+       */
+      @SerializedName("request_incremental_authorization_support")
+      Boolean requestIncrementalAuthorizationSupport;
+
+      private CardPresent(
+          Map<String, Object> extraParams,
+          Boolean requestExtendedAuthorization,
+          Boolean requestIncrementalAuthorizationSupport) {
         this.extraParams = extraParams;
         this.requestExtendedAuthorization = requestExtendedAuthorization;
+        this.requestIncrementalAuthorizationSupport = requestIncrementalAuthorizationSupport;
       }
 
       public static Builder builder() {
@@ -7376,9 +7391,14 @@ public class PaymentIntentCreateParams extends ApiRequestParams {
 
         private Boolean requestExtendedAuthorization;
 
+        private Boolean requestIncrementalAuthorizationSupport;
+
         /** Finalize and obtain parameter instance from this builder. */
         public CardPresent build() {
-          return new CardPresent(this.extraParams, this.requestExtendedAuthorization);
+          return new CardPresent(
+              this.extraParams,
+              this.requestExtendedAuthorization,
+              this.requestIncrementalAuthorizationSupport);
         }
 
         /**
@@ -7416,6 +7436,20 @@ public class PaymentIntentCreateParams extends ApiRequestParams {
          */
         public Builder setRequestExtendedAuthorization(Boolean requestExtendedAuthorization) {
           this.requestExtendedAuthorization = requestExtendedAuthorization;
+          return this;
+        }
+
+        /**
+         * Request ability to <a
+         * href="docs/terminal/features/incremental-authorizations">increment</a> this PaymentIntent
+         * if the combination of MCC and card brand is eligible. Check <a
+         * href="https://stripe.com/docs/api/charges/object#charge_object-payment_method_details-card_present-incremental_authorization_supported">incremental_authorization_supported</a>
+         * in the <a href="https://stripe.com/docs/api/payment_intents/confirm">Confirm</a> response
+         * to verify support.
+         */
+        public Builder setRequestIncrementalAuthorizationSupport(
+            Boolean requestIncrementalAuthorizationSupport) {
+          this.requestIncrementalAuthorizationSupport = requestIncrementalAuthorizationSupport;
           return this;
         }
       }
