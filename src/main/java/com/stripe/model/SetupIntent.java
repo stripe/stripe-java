@@ -40,8 +40,8 @@ public class SetupIntent extends ApiResource implements HasId, MetadataStore<Set
    * The client secret of this SetupIntent. Used for client-side retrieval using a publishable key.
    *
    * <p>The client secret can be used to complete payment setup from your frontend. It should not be
-   * stored, logged, embedded in URLs, or exposed to anyone other than the customer. Make sure that
-   * you have TLS enabled on any page that includes the client secret.
+   * stored, logged, or exposed to anyone other than the customer. Make sure that you have TLS
+   * enabled on any page that includes the client secret.
    */
   @SerializedName("client_secret")
   String clientSecret;
