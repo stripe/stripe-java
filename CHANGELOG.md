@@ -1,5 +1,12 @@
 # Changelog
 
+## 20.114.0 - 2022-04-14
+* [#1338](https://github.com/stripe/stripe-java/pull/1338) Add support for putExtraParam on EphemeralKeyCreateParams
+* [#1336](https://github.com/stripe/stripe-java/pull/1336) API Updates
+  * Add support for `increment_authorization` method on resource `PaymentIntent`
+  * Add support for `incremental_authorization_supported` on `Charge.payment_method_details.card_present`
+  * Add support for `request_incremental_authorization_support` on `PaymentIntent.payment_method_options.card_present`, `PaymentIntentConfirmParams.payment_method_options.card_present`, `PaymentIntentCreateParams.payment_method_options.card_present`, and `PaymentIntentUpdateParams.payment_method_options.card_present`
+
 ## 20.113.0 - 2022-04-08
 * [#1335](https://github.com/stripe/stripe-java/pull/1335) API Updates
   * Add support for `apply_customer_balance` method on resource `PaymentIntent`
