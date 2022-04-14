@@ -30,8 +30,8 @@ jobs:
       - name: Spotless
         run: ./gradlew spotlessCheck
 
-  tests:
-    name: Tests
+  build:
+    name: Build and test
 
     runs-on: ubuntu-latest
 
@@ -80,7 +80,7 @@ jobs:
           echo "JAVA_TEST_HOME=$JAVA_TEST_HOME"
 
       - name: Build artifacts
-        run: ./gradlew assemble
+        run: ./gradlew assemble generatePomFileForMavenJavaPublication javadoc
 
       - name: Start stripe-mock
         run: docker run -d -p 12111-12112:12111-12112 stripe/stripe-mock && sleep 5
@@ -93,3 +93,18 @@ jobs:
         env:
           CI_NAME: github-actions
           COVERALLS_REPO_TOKEN: ${{ secrets.COVERALLS_REPO_TOKEN }}
+      - name: 'Upload Artifact'
+        uses: actions/upload-artifact@v2
+        with:
+          name: libs
+          path: build/libs
+      - name: 'Upload Artifact'
+        uses: actions/upload-artifact@v2
+        with:
+          name: maven
+          path: build/publications/mavenJava/
+      - name: 'Upload Artifact'
+        uses: actions/upload-artifact@v2
+        with:
+          name: javadoc
+          path: build/docs/javadoc
