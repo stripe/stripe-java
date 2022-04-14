@@ -13,6 +13,7 @@ import com.stripe.model.EphemeralKey;
 import com.stripe.net.ApiResource;
 import com.stripe.net.RequestOptions;
 import com.stripe.param.EphemeralKeyCreateParams;
+import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
 import org.junit.jupiter.api.Test;
@@ -67,6 +68,34 @@ public class EphemeralKeyTest extends BaseStripeTest {
         ImmutableMap.of(
             "customer", "cust_123",
             "issuing_card", "card_123"),
+        options);
+  }
+
+  @Test
+  public void testCreateWithTypedParamsAndExtraParam() throws IOException, StripeException {
+    EphemeralKeyCreateParams createParams =
+        EphemeralKeyCreateParams.builder()
+            .putExtraParam("my_secret_parameter", "my_secret_value")
+            .build();
+
+    final RequestOptions options =
+        RequestOptions.builder().setStripeVersionOverride(Stripe.API_VERSION).build();
+
+    // stripe-mock doesn't handle extra parameters so we stub the request
+    stubRequest(
+        ApiResource.RequestMethod.POST,
+        "/v1/ephemeral_keys",
+        createParams.toMap(),
+        EphemeralKey.class,
+        getResourceAsString("/api_fixtures/ephemeral_key.json"));
+
+    final EphemeralKey key = EphemeralKey.create(createParams, options);
+
+    assertNotNull(key);
+    verifyRequest(
+        ApiResource.RequestMethod.POST,
+        "/v1/ephemeral_keys",
+        ImmutableMap.of("my_secret_parameter", "my_secret_value"),
         options);
   }
 
