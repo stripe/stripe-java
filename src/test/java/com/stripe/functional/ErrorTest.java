@@ -50,7 +50,7 @@ public class ErrorTest extends BaseStripeTest {
             .setResponseCode(401)
             .setBody(getResourceAsString("/oauth_fixtures/error_invalid_client.json")));
 
-    Stripe.overrideApiBase(server.url("").toString());
+    Stripe.overrideConnectBase(server.url("").toString());
 
     try {
       OAuth.token(null, null);
