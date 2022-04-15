@@ -44,14 +44,13 @@ public class ErrorTest extends BaseStripeTest {
   @Test
   public void testOAuthError() throws StripeException, IOException, InterruptedException {
     String oldBase = Stripe.getConnectBase();
-    try
-    {
+    try {
       InvalidClientException exception = null;
       @Cleanup MockWebServer server = new MockWebServer();
       server.enqueue(
-        new MockResponse()
-          .setResponseCode(401)
-          .setBody(getResourceAsString("/oauth_fixtures/error_invalid_client.json")));
+          new MockResponse()
+              .setResponseCode(401)
+              .setBody(getResourceAsString("/oauth_fixtures/error_invalid_client.json")));
 
       Stripe.overrideConnectBase(server.url("").toString());
 
@@ -66,8 +65,7 @@ public class ErrorTest extends BaseStripeTest {
       assertNotNull(exception.getOauthError());
       assertEquals("invalid_client", exception.getOauthError().getError());
       assertNotNull(exception.getOauthError().getLastResponse());
-    }
-    finally {
+    } finally {
       Stripe.overrideConnectBase(oldBase);
     }
   }
