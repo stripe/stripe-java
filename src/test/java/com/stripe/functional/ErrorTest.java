@@ -43,25 +43,32 @@ public class ErrorTest extends BaseStripeTest {
 
   @Test
   public void testOAuthError() throws StripeException, IOException, InterruptedException {
-    InvalidClientException exception = null;
-    @Cleanup MockWebServer server = new MockWebServer();
-    server.enqueue(
+    String oldBase = Stripe.getConnectBase();
+    try
+    {
+      InvalidClientException exception = null;
+      @Cleanup MockWebServer server = new MockWebServer();
+      server.enqueue(
         new MockResponse()
-            .setResponseCode(401)
-            .setBody(getResourceAsString("/oauth_fixtures/error_invalid_client.json")));
+          .setResponseCode(401)
+          .setBody(getResourceAsString("/oauth_fixtures/error_invalid_client.json")));
 
-    Stripe.overrideConnectBase(server.url("").toString());
+      Stripe.overrideConnectBase(server.url("").toString());
 
-    try {
-      OAuth.token(null, null);
-    } catch (InvalidClientException e) {
-      exception = e;
+      try {
+        OAuth.token(null, null);
+      } catch (InvalidClientException e) {
+        exception = e;
+      }
+
+      assertNotNull(exception);
+      assertEquals(Integer.valueOf(401), exception.getStatusCode());
+      assertNotNull(exception.getOauthError());
+      assertEquals("invalid_client", exception.getOauthError().getError());
+      assertNotNull(exception.getOauthError().getLastResponse());
     }
-
-    assertNotNull(exception);
-    assertEquals(Integer.valueOf(401), exception.getStatusCode());
-    assertNotNull(exception.getOauthError());
-    assertEquals("invalid_client", exception.getOauthError().getError());
-    assertNotNull(exception.getOauthError().getLastResponse());
+    finally {
+      Stripe.overrideConnectBase(oldBase);
+    }
   }
 }
