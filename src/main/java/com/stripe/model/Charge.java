@@ -1129,6 +1129,9 @@ public class Charge extends ApiResource implements MetadataStore<Charge>, Balanc
     @SerializedName("card_present")
     CardPresent cardPresent;
 
+    @SerializedName("customer_balance")
+    CustomerBalance customerBalance;
+
     @SerializedName("eps")
     Eps eps;
 
@@ -1875,9 +1878,8 @@ public class Charge extends ApiResource implements MetadataStore<Charge>, Balanc
 
       /**
        * Whether this <a href="https://stripe.com/docs/api/payment_intents">PaymentIntent</a> is
-       * eligible for incremental authorizations. Request support using
-       * [request_incremental_authorization_support]
-       * /docs/api/payment_intents/create#create_payment_intent-payment_method_options-card_present-request_incremental_authorization_support.
+       * eligible for incremental authorizations. Request support using <a
+       * href="https://stripe.com/docs/api/payment_intents/create#create_payment_intent-payment_method_options-card_present-request_incremental_authorization_support">request_incremental_authorization_support</a>.
        */
       @SerializedName("incremental_authorization_supported")
       Boolean incrementalAuthorizationSupported;
@@ -1968,6 +1970,11 @@ public class Charge extends ApiResource implements MetadataStore<Charge>, Balanc
         String transactionStatusInformation;
       }
     }
+
+    @Getter
+    @Setter
+    @EqualsAndHashCode(callSuper = false)
+    public static class CustomerBalance extends StripeObject {}
 
     @Getter
     @Setter

@@ -43,6 +43,9 @@ public class PaymentIntent extends ApiResource implements HasId, MetadataStore<P
   @SerializedName("amount_capturable")
   Long amountCapturable;
 
+  @SerializedName("amount_details")
+  AmountDetails amountDetails;
+
   /** Amount that was collected by this PaymentIntent. */
   @SerializedName("amount_received")
   Long amountReceived;
@@ -1435,6 +1438,23 @@ public class PaymentIntent extends ApiResource implements HasId, MetadataStore<P
   @Getter
   @Setter
   @EqualsAndHashCode(callSuper = false)
+  public static class AmountDetails extends StripeObject {
+    @SerializedName("tip")
+    Tip tip;
+
+    @Getter
+    @Setter
+    @EqualsAndHashCode(callSuper = false)
+    public static class Tip extends StripeObject {
+      /** Portion of the amount that corresponds to a tip. */
+      @SerializedName("amount")
+      Long amount;
+    }
+  }
+
+  @Getter
+  @Setter
+  @EqualsAndHashCode(callSuper = false)
   public static class NextAction extends StripeObject {
     @SerializedName("alipay_handle_redirect")
     NextActionAlipayHandleRedirect alipayHandleRedirect;
@@ -1444,6 +1464,9 @@ public class PaymentIntent extends ApiResource implements HasId, MetadataStore<P
 
     @SerializedName("card_await_notification")
     NextActionCardAwaitNotification cardAwaitNotification;
+
+    @SerializedName("display_bank_transfer_instructions")
+    NextActionDisplayBankTransferInstructions displayBankTransferInstructions;
 
     @SerializedName("konbini_display_details")
     NextActionKonbiniDisplayDetails konbiniDisplayDetails;
@@ -1656,6 +1679,69 @@ public class PaymentIntent extends ApiResource implements HasId, MetadataStore<P
   @Getter
   @Setter
   @EqualsAndHashCode(callSuper = false)
+  public static class NextActionDisplayBankTransferInstructions extends StripeObject {
+    /** The remaining amount that needs to be transferred to complete the payment. */
+    @SerializedName("amount_remaining")
+    Long amountRemaining;
+
+    /**
+     * Three-letter <a href="https://www.iso.org/iso-4217-currency-codes.html">ISO currency
+     * code</a>, in lowercase. Must be a <a href="https://stripe.com/docs/currencies">supported
+     * currency</a>.
+     */
+    @SerializedName("currency")
+    String currency;
+
+    /** A list of financial addresses that can be used to fund the customer balance. */
+    @SerializedName("financial_addresses")
+    List<PaymentIntent.NextActionDisplayBankTransferInstructions.FinancialAddresses>
+        financialAddresses;
+
+    /**
+     * A string identifying this payment. Instruct your customer to include this code in the
+     * reference or memo field of their bank transfer.
+     */
+    @SerializedName("reference")
+    String reference;
+
+    /**
+     * Type of bank transfer
+     *
+     * <p>Equal to {@code jp_bank_transfer}.
+     */
+    @SerializedName("type")
+    String type;
+
+    @Getter
+    @Setter
+    @EqualsAndHashCode(callSuper = false)
+    public static class FinancialAddresses extends StripeObject {
+      /** The payment networks supported by this FinancialAddress. */
+      @SerializedName("supported_networks")
+      List<String> supportedNetworks;
+
+      /**
+       * The type of financial address
+       *
+       * <p>One of {@code iban}, or {@code zengin}.
+       */
+      @SerializedName("type")
+      String type;
+
+      /** Zengin Records contain Japan bank account details per the Zengin format. */
+      @SerializedName("zengin")
+      Zengin zengin;
+
+      @Getter
+      @Setter
+      @EqualsAndHashCode(callSuper = false)
+      public static class Zengin extends StripeObject {}
+    }
+  }
+
+  @Getter
+  @Setter
+  @EqualsAndHashCode(callSuper = false)
   public static class NextActionDisplayBoletoDetails extends StripeObject {
     /** The timestamp after which the boleto expires. */
     @SerializedName("expires_at")
@@ -1834,6 +1920,9 @@ public class PaymentIntent extends ApiResource implements HasId, MetadataStore<P
 
     @SerializedName("card_present")
     CardPresent cardPresent;
+
+    @SerializedName("customer_balance")
+    CustomerBalance customerBalance;
 
     @SerializedName("eps")
     Eps eps;
@@ -2101,6 +2190,35 @@ public class PaymentIntent extends ApiResource implements HasId, MetadataStore<P
     @Getter
     @Setter
     @EqualsAndHashCode(callSuper = false)
+    public static class BankTransfer extends StripeObject {
+      /**
+       * List of address types that should be returned in the financial_addresses response. If not
+       * specified, all valid types will be returned.
+       *
+       * <p>Permitted values include: {@code zengin}.
+       */
+      @SerializedName("requested_address_types")
+      List<String> requestedAddressTypes;
+
+      /**
+       * The bank transfer type that this PaymentIntent is allowed to use for funding. Permitted
+       * values include: {@code us_bank_account}, {@code eu_bank_account}, {@code id_bank_account},
+       * {@code gb_bank_account}, {@code jp_bank_account}, {@code mx_bank_account}, {@code
+       * eu_bank_transfer}, {@code gb_bank_transfer}, {@code id_bank_transfer}, {@code
+       * jp_bank_transfer}, {@code mx_bank_transfer}, or {@code us_bank_transfer}.
+       *
+       * <p>One of {@code eu_bank_account}, {@code eu_bank_transfer}, {@code gb_bank_account},
+       * {@code gb_bank_transfer}, {@code id_bank_account}, {@code id_bank_transfer}, {@code
+       * jp_bank_account}, {@code jp_bank_transfer}, {@code mx_bank_account}, {@code
+       * mx_bank_transfer}, {@code us_bank_account}, or {@code us_bank_transfer}.
+       */
+      @SerializedName("type")
+      String type;
+    }
+
+    @Getter
+    @Setter
+    @EqualsAndHashCode(callSuper = false)
     public static class Boleto extends StripeObject {
       /**
        * The number of calendar days before a Boleto voucher expires. For example, if you create a
@@ -2316,14 +2434,51 @@ public class PaymentIntent extends ApiResource implements HasId, MetadataStore<P
 
       /**
        * Request ability to <a
-       * href="docs/terminal/features/incremental-authorizations">increment</a> this PaymentIntent
-       * if the combination of MCC and card brand is eligible. Check <a
+       * href="https://stripe.com/docs/terminal/features/incremental-authorizations">increment</a>
+       * this PaymentIntent if the combination of MCC and card brand is eligible. Check <a
        * href="https://stripe.com/docs/api/charges/object#charge_object-payment_method_details-card_present-incremental_authorization_supported">incremental_authorization_supported</a>
        * in the <a href="https://stripe.com/docs/api/payment_intents/confirm">Confirm</a> response
        * to verify support.
        */
       @SerializedName("request_incremental_authorization_support")
       Boolean requestIncrementalAuthorizationSupport;
+    }
+
+    @Getter
+    @Setter
+    @EqualsAndHashCode(callSuper = false)
+    public static class CustomerBalance extends StripeObject {
+      @SerializedName("bank_transfer")
+      BankTransfer bankTransfer;
+
+      /**
+       * The funding method type to be used when there are not enough funds in the customer balance.
+       * Permitted values include: {@code bank_transfer}.
+       *
+       * <p>Equal to {@code bank_transfer}.
+       */
+      @SerializedName("funding_type")
+      String fundingType;
+
+      /**
+       * Indicates that you intend to make future payments with this PaymentIntent's payment method.
+       *
+       * <p>Providing this parameter will <a
+       * href="https://stripe.com/docs/payments/save-during-payment">attach the payment method</a>
+       * to the PaymentIntent's Customer, if present, after the PaymentIntent is confirmed and any
+       * required actions from the user are complete. If no Customer was provided, the payment
+       * method can still be <a
+       * href="https://stripe.com/docs/api/payment_methods/attach">attached</a> to a Customer after
+       * the transaction completes.
+       *
+       * <p>When processing card payments, Stripe also uses {@code setup_future_usage} to
+       * dynamically optimize your payment flow and comply with regional legislation and network
+       * rules, such as <a href="https://stripe.com/docs/strong-customer-authentication">SCA</a>.
+       *
+       * <p>Equal to {@code none}.
+       */
+      @SerializedName("setup_future_usage")
+      String setupFutureUsage;
     }
 
     @Getter

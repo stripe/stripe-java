@@ -16,6 +16,10 @@ public class LocationCreateParams extends ApiRequestParams {
   @SerializedName("address")
   Address address;
 
+  /** The ID of a configuration that will be used to customize all readers in this location. */
+  @SerializedName("configuration_overrides")
+  String configurationOverrides;
+
   /** A name for the location. */
   @SerializedName("display_name")
   String displayName;
@@ -44,11 +48,13 @@ public class LocationCreateParams extends ApiRequestParams {
 
   private LocationCreateParams(
       Address address,
+      String configurationOverrides,
       String displayName,
       List<String> expand,
       Map<String, Object> extraParams,
       Object metadata) {
     this.address = address;
+    this.configurationOverrides = configurationOverrides;
     this.displayName = displayName;
     this.expand = expand;
     this.extraParams = extraParams;
@@ -62,6 +68,8 @@ public class LocationCreateParams extends ApiRequestParams {
   public static class Builder {
     private Address address;
 
+    private String configurationOverrides;
+
     private String displayName;
 
     private List<String> expand;
@@ -73,12 +81,23 @@ public class LocationCreateParams extends ApiRequestParams {
     /** Finalize and obtain parameter instance from this builder. */
     public LocationCreateParams build() {
       return new LocationCreateParams(
-          this.address, this.displayName, this.expand, this.extraParams, this.metadata);
+          this.address,
+          this.configurationOverrides,
+          this.displayName,
+          this.expand,
+          this.extraParams,
+          this.metadata);
     }
 
     /** The full address of the location. */
     public Builder setAddress(Address address) {
       this.address = address;
+      return this;
+    }
+
+    /** The ID of a configuration that will be used to customize all readers in this location. */
+    public Builder setConfigurationOverrides(String configurationOverrides) {
+      this.configurationOverrides = configurationOverrides;
       return this;
     }
 
