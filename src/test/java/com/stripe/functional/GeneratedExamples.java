@@ -3078,8 +3078,8 @@ class GeneratedExamples extends BaseStripeTest {
             .setFundingType(CustomerCreateFundingInstructionsParams.FundingType.BANK_TRANSFER)
             .build();
 
-    Customer customer = resource.createFundingInstructions(params);
-    assertNotNull(customer);
+    FundingInstructions fundingInstructions = resource.createFundingInstructions(params);
+    assertNotNull(fundingInstructions);
     verifyRequest(
         ApiResource.RequestMethod.POST,
         "/v1/customers/cus_123/funding_instructions",
