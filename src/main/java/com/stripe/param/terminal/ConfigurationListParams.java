@@ -1,5 +1,5 @@
 // File generated from our OpenAPI spec
-package com.stripe.param;
+package com.stripe.param.terminal;
 
 import com.google.gson.annotations.SerializedName;
 import com.stripe.net.ApiRequestParams;
@@ -10,14 +10,7 @@ import java.util.Map;
 import lombok.Getter;
 
 @Getter
-public class PaymentMethodListParams extends ApiRequestParams {
-  /**
-   * The ID of the customer whose PaymentMethods will be retrieved. If not provided, the response
-   * list will be empty.
-   */
-  @SerializedName("customer")
-  String customer;
-
+public class ConfigurationListParams extends ApiRequestParams {
   /**
    * A cursor for use in pagination. {@code ending_before} is an object ID that defines your place
    * in the list. For instance, if you make a list request and receive 100 objects, starting with
@@ -40,6 +33,10 @@ public class PaymentMethodListParams extends ApiRequestParams {
   @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
   Map<String, Object> extraParams;
 
+  /** if present, only return the account default or non-default configurations. */
+  @SerializedName("is_account_default")
+  Boolean isAccountDefault;
+
   /**
    * A limit on the number of objects to be returned. Limit can range between 1 and 100, and the
    * default is 10.
@@ -56,25 +53,19 @@ public class PaymentMethodListParams extends ApiRequestParams {
   @SerializedName("starting_after")
   String startingAfter;
 
-  /** A required filter on the list, based on the object {@code type} field. */
-  @SerializedName("type")
-  Type type;
-
-  private PaymentMethodListParams(
-      String customer,
+  private ConfigurationListParams(
       String endingBefore,
       List<String> expand,
       Map<String, Object> extraParams,
+      Boolean isAccountDefault,
       Long limit,
-      String startingAfter,
-      Type type) {
-    this.customer = customer;
+      String startingAfter) {
     this.endingBefore = endingBefore;
     this.expand = expand;
     this.extraParams = extraParams;
+    this.isAccountDefault = isAccountDefault;
     this.limit = limit;
     this.startingAfter = startingAfter;
-    this.type = type;
   }
 
   public static Builder builder() {
@@ -82,39 +73,27 @@ public class PaymentMethodListParams extends ApiRequestParams {
   }
 
   public static class Builder {
-    private String customer;
-
     private String endingBefore;
 
     private List<String> expand;
 
     private Map<String, Object> extraParams;
 
+    private Boolean isAccountDefault;
+
     private Long limit;
 
     private String startingAfter;
 
-    private Type type;
-
     /** Finalize and obtain parameter instance from this builder. */
-    public PaymentMethodListParams build() {
-      return new PaymentMethodListParams(
-          this.customer,
+    public ConfigurationListParams build() {
+      return new ConfigurationListParams(
           this.endingBefore,
           this.expand,
           this.extraParams,
+          this.isAccountDefault,
           this.limit,
-          this.startingAfter,
-          this.type);
-    }
-
-    /**
-     * The ID of the customer whose PaymentMethods will be retrieved. If not provided, the response
-     * list will be empty.
-     */
-    public Builder setCustomer(String customer) {
-      this.customer = customer;
-      return this;
+          this.startingAfter);
     }
 
     /**
@@ -131,7 +110,7 @@ public class PaymentMethodListParams extends ApiRequestParams {
     /**
      * Add an element to `expand` list. A list is initialized for the first `add/addAll` call, and
      * subsequent calls adds additional elements to the original list. See {@link
-     * PaymentMethodListParams#expand} for the field documentation.
+     * ConfigurationListParams#expand} for the field documentation.
      */
     public Builder addExpand(String element) {
       if (this.expand == null) {
@@ -144,7 +123,7 @@ public class PaymentMethodListParams extends ApiRequestParams {
     /**
      * Add all elements to `expand` list. A list is initialized for the first `add/addAll` call, and
      * subsequent calls adds additional elements to the original list. See {@link
-     * PaymentMethodListParams#expand} for the field documentation.
+     * ConfigurationListParams#expand} for the field documentation.
      */
     public Builder addAllExpand(List<String> elements) {
       if (this.expand == null) {
@@ -157,7 +136,7 @@ public class PaymentMethodListParams extends ApiRequestParams {
     /**
      * Add a key/value pair to `extraParams` map. A map is initialized for the first `put/putAll`
      * call, and subsequent calls add additional key/value pairs to the original map. See {@link
-     * PaymentMethodListParams#extraParams} for the field documentation.
+     * ConfigurationListParams#extraParams} for the field documentation.
      */
     public Builder putExtraParam(String key, Object value) {
       if (this.extraParams == null) {
@@ -170,13 +149,19 @@ public class PaymentMethodListParams extends ApiRequestParams {
     /**
      * Add all map key/value pairs to `extraParams` map. A map is initialized for the first
      * `put/putAll` call, and subsequent calls add additional key/value pairs to the original map.
-     * See {@link PaymentMethodListParams#extraParams} for the field documentation.
+     * See {@link ConfigurationListParams#extraParams} for the field documentation.
      */
     public Builder putAllExtraParam(Map<String, Object> map) {
       if (this.extraParams == null) {
         this.extraParams = new HashMap<>();
       }
       this.extraParams.putAll(map);
+      return this;
+    }
+
+    /** if present, only return the account default or non-default configurations. */
+    public Builder setIsAccountDefault(Boolean isAccountDefault) {
+      this.isAccountDefault = isAccountDefault;
       return this;
     }
 
@@ -198,93 +183,6 @@ public class PaymentMethodListParams extends ApiRequestParams {
     public Builder setStartingAfter(String startingAfter) {
       this.startingAfter = startingAfter;
       return this;
-    }
-
-    /** A required filter on the list, based on the object {@code type} field. */
-    public Builder setType(Type type) {
-      this.type = type;
-      return this;
-    }
-  }
-
-  public enum Type implements ApiRequestParams.EnumParam {
-    @SerializedName("acss_debit")
-    ACSS_DEBIT("acss_debit"),
-
-    @SerializedName("afterpay_clearpay")
-    AFTERPAY_CLEARPAY("afterpay_clearpay"),
-
-    @SerializedName("alipay")
-    ALIPAY("alipay"),
-
-    @SerializedName("au_becs_debit")
-    AU_BECS_DEBIT("au_becs_debit"),
-
-    @SerializedName("bacs_debit")
-    BACS_DEBIT("bacs_debit"),
-
-    @SerializedName("bancontact")
-    BANCONTACT("bancontact"),
-
-    @SerializedName("boleto")
-    BOLETO("boleto"),
-
-    @SerializedName("card")
-    CARD("card"),
-
-    @SerializedName("card_present")
-    CARD_PRESENT("card_present"),
-
-    @SerializedName("customer_balance")
-    CUSTOMER_BALANCE("customer_balance"),
-
-    @SerializedName("eps")
-    EPS("eps"),
-
-    @SerializedName("fpx")
-    FPX("fpx"),
-
-    @SerializedName("giropay")
-    GIROPAY("giropay"),
-
-    @SerializedName("grabpay")
-    GRABPAY("grabpay"),
-
-    @SerializedName("ideal")
-    IDEAL("ideal"),
-
-    @SerializedName("klarna")
-    KLARNA("klarna"),
-
-    @SerializedName("konbini")
-    KONBINI("konbini"),
-
-    @SerializedName("oxxo")
-    OXXO("oxxo"),
-
-    @SerializedName("p24")
-    P24("p24"),
-
-    @SerializedName("paynow")
-    PAYNOW("paynow"),
-
-    @SerializedName("sepa_debit")
-    SEPA_DEBIT("sepa_debit"),
-
-    @SerializedName("sofort")
-    SOFORT("sofort"),
-
-    @SerializedName("us_bank_account")
-    US_BANK_ACCOUNT("us_bank_account"),
-
-    @SerializedName("wechat_pay")
-    WECHAT_PAY("wechat_pay");
-
-    @Getter(onMethod_ = {@Override})
-    private final String value;
-
-    Type(String value) {
-      this.value = value;
     }
   }
 }

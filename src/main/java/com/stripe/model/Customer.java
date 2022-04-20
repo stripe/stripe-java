@@ -8,6 +8,7 @@ import com.stripe.model.testhelpers.TestClock;
 import com.stripe.net.ApiResource;
 import com.stripe.net.RequestOptions;
 import com.stripe.param.CustomerBalanceTransactionsParams;
+import com.stripe.param.CustomerCreateFundingInstructionsParams;
 import com.stripe.param.CustomerCreateParams;
 import com.stripe.param.CustomerListParams;
 import com.stripe.param.CustomerListPaymentMethodsParams;
@@ -580,6 +581,65 @@ public class Customer extends ApiResource implements HasId, MetadataStore<Custom
                 "/v1/customers/%s/balance_transactions", ApiResource.urlEncodeId(this.getId())));
     return ApiResource.requestCollection(
         url, params, CustomerBalanceTransactionCollection.class, options);
+  }
+
+  /**
+   * Retrieve funding instructions for a customer cash balance. If funding instructions do not yet
+   * exist for the customer, new funding instructions will be created. If funding instructions have
+   * already been created for a given customer, the same funding instructions will be retrieved. In
+   * other words, we will return the same funding instructions each time.
+   */
+  public FundingInstructions createFundingInstructions(Map<String, Object> params)
+      throws StripeException {
+    return createFundingInstructions(params, (RequestOptions) null);
+  }
+
+  /**
+   * Retrieve funding instructions for a customer cash balance. If funding instructions do not yet
+   * exist for the customer, new funding instructions will be created. If funding instructions have
+   * already been created for a given customer, the same funding instructions will be retrieved. In
+   * other words, we will return the same funding instructions each time.
+   */
+  public FundingInstructions createFundingInstructions(
+      Map<String, Object> params, RequestOptions options) throws StripeException {
+    String url =
+        String.format(
+            "%s%s",
+            Stripe.getApiBase(),
+            String.format(
+                "/v1/customers/%s/funding_instructions", ApiResource.urlEncodeId(this.getId())));
+    return ApiResource.request(
+        ApiResource.RequestMethod.POST, url, params, FundingInstructions.class, options);
+  }
+
+  /**
+   * Retrieve funding instructions for a customer cash balance. If funding instructions do not yet
+   * exist for the customer, new funding instructions will be created. If funding instructions have
+   * already been created for a given customer, the same funding instructions will be retrieved. In
+   * other words, we will return the same funding instructions each time.
+   */
+  public FundingInstructions createFundingInstructions(
+      CustomerCreateFundingInstructionsParams params) throws StripeException {
+    return createFundingInstructions(params, (RequestOptions) null);
+  }
+
+  /**
+   * Retrieve funding instructions for a customer cash balance. If funding instructions do not yet
+   * exist for the customer, new funding instructions will be created. If funding instructions have
+   * already been created for a given customer, the same funding instructions will be retrieved. In
+   * other words, we will return the same funding instructions each time.
+   */
+  public FundingInstructions createFundingInstructions(
+      CustomerCreateFundingInstructionsParams params, RequestOptions options)
+      throws StripeException {
+    String url =
+        String.format(
+            "%s%s",
+            Stripe.getApiBase(),
+            String.format(
+                "/v1/customers/%s/funding_instructions", ApiResource.urlEncodeId(this.getId())));
+    return ApiResource.request(
+        ApiResource.RequestMethod.POST, url, params, FundingInstructions.class, options);
   }
 
   /** Removes the currently applied discount on a customer. */

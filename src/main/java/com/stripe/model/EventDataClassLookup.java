@@ -41,6 +41,7 @@ final class EventDataClassLookup {
     classLookup.put("fee_refund", FeeRefund.class);
     classLookup.put("file", File.class);
     classLookup.put("file_link", FileLink.class);
+    classLookup.put("funding_instructions", FundingInstructions.class);
     classLookup.put("invoice", Invoice.class);
     classLookup.put("invoiceitem", InvoiceItem.class);
     classLookup.put("issuer_fraud_record", IssuerFraudRecord.class);
@@ -115,6 +116,7 @@ final class EventDataClassLookup {
 
     classLookup.put("scheduled_query_run", com.stripe.model.sigma.ScheduledQueryRun.class);
 
+    classLookup.put("terminal.configuration", com.stripe.model.terminal.Configuration.class);
     classLookup.put("terminal.connection_token", com.stripe.model.terminal.ConnectionToken.class);
     classLookup.put("terminal.location", com.stripe.model.terminal.Location.class);
     classLookup.put("terminal.reader", com.stripe.model.terminal.Reader.class);

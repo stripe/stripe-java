@@ -3060,4 +3060,90 @@ class GeneratedExamples extends BaseStripeTest {
         "/v1/test_helpers/test_clocks/clock_xyz/advance",
         params.toMap());
   }
+
+  @Test
+  public void testCustomerCreateFundingInstructions() throws StripeException {
+    Customer resource = Customer.retrieve("cus_123");
+    CustomerCreateFundingInstructionsParams params =
+        CustomerCreateFundingInstructionsParams.builder()
+            .setBankTransfer(
+                CustomerCreateFundingInstructionsParams.BankTransfer.builder()
+                    .addRequestedAddressType(
+                        CustomerCreateFundingInstructionsParams.BankTransfer.RequestedAddressType
+                            .ZENGIN)
+                    .setType(
+                        CustomerCreateFundingInstructionsParams.BankTransfer.Type.JP_BANK_TRANSFER)
+                    .build())
+            .setCurrency("usd")
+            .setFundingType(CustomerCreateFundingInstructionsParams.FundingType.BANK_TRANSFER)
+            .build();
+
+    FundingInstructions fundingInstructions = resource.createFundingInstructions(params);
+    assertNotNull(fundingInstructions);
+    verifyRequest(
+        ApiResource.RequestMethod.POST,
+        "/v1/customers/cus_123/funding_instructions",
+        params.toMap());
+  }
+
+  @Test
+  public void testConfigurationList2() throws StripeException {
+    com.stripe.param.terminal.ConfigurationListParams params =
+        com.stripe.param.terminal.ConfigurationListParams.builder().build();
+
+    com.stripe.model.terminal.ConfigurationCollection configurations =
+        com.stripe.model.terminal.Configuration.list(params);
+    assertNotNull(configurations);
+    verifyRequest(ApiResource.RequestMethod.GET, "/v1/terminal/configurations", params.toMap());
+  }
+
+  @Test
+  public void testConfigurationRetrieve2() throws StripeException {
+    com.stripe.model.terminal.Configuration configuration =
+        com.stripe.model.terminal.Configuration.retrieve("uc_123");
+    assertNotNull(configuration);
+    verifyRequest(ApiResource.RequestMethod.GET, "/v1/terminal/configurations/uc_123");
+  }
+
+  @Test
+  public void testConfigurationCreate2() throws StripeException {
+    com.stripe.param.terminal.ConfigurationCreateParams params =
+        com.stripe.param.terminal.ConfigurationCreateParams.builder().build();
+
+    com.stripe.model.terminal.Configuration configuration =
+        com.stripe.model.terminal.Configuration.create(params);
+    assertNotNull(configuration);
+    verifyRequest(ApiResource.RequestMethod.POST, "/v1/terminal/configurations", params.toMap());
+  }
+
+  @Test
+  public void testConfigurationUpdate2() throws StripeException {
+    com.stripe.model.terminal.Configuration resource =
+        com.stripe.model.terminal.Configuration.retrieve("uc_123");
+    com.stripe.param.terminal.ConfigurationUpdateParams params =
+        com.stripe.param.terminal.ConfigurationUpdateParams.builder()
+            .setTipping(
+                com.stripe.param.terminal.ConfigurationUpdateParams.Tipping.builder()
+                    .setUsd(
+                        com.stripe.param.terminal.ConfigurationUpdateParams.Tipping.Usd.builder()
+                            .addFixedAmount(10L)
+                            .build())
+                    .build())
+            .build();
+
+    com.stripe.model.terminal.Configuration configuration = resource.update(params);
+    assertNotNull(configuration);
+    verifyRequest(
+        ApiResource.RequestMethod.POST, "/v1/terminal/configurations/uc_123", params.toMap());
+  }
+
+  @Test
+  public void testConfigurationDelete() throws StripeException {
+    com.stripe.model.terminal.Configuration resource =
+        com.stripe.model.terminal.Configuration.retrieve("uc_123");
+
+    com.stripe.model.terminal.Configuration configuration = resource.delete();
+    assertNotNull(configuration);
+    verifyRequest(ApiResource.RequestMethod.DELETE, "/v1/terminal/configurations/uc_123");
+  }
 }

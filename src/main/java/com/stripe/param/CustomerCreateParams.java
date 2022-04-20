@@ -25,6 +25,10 @@ public class CustomerCreateParams extends ApiRequestParams {
   @SerializedName("balance")
   Long balance;
 
+  /** Balance information and default balance settings for this customer. */
+  @SerializedName("cash_balance")
+  CashBalance cashBalance;
+
   @SerializedName("coupon")
   String coupon;
 
@@ -128,6 +132,7 @@ public class CustomerCreateParams extends ApiRequestParams {
   private CustomerCreateParams(
       Object address,
       Long balance,
+      CashBalance cashBalance,
       String coupon,
       String description,
       String email,
@@ -150,6 +155,7 @@ public class CustomerCreateParams extends ApiRequestParams {
       String testClock) {
     this.address = address;
     this.balance = balance;
+    this.cashBalance = cashBalance;
     this.coupon = coupon;
     this.description = description;
     this.email = email;
@@ -180,6 +186,8 @@ public class CustomerCreateParams extends ApiRequestParams {
     private Object address;
 
     private Long balance;
+
+    private CashBalance cashBalance;
 
     private String coupon;
 
@@ -226,6 +234,7 @@ public class CustomerCreateParams extends ApiRequestParams {
       return new CustomerCreateParams(
           this.address,
           this.balance,
+          this.cashBalance,
           this.coupon,
           this.description,
           this.email,
@@ -267,6 +276,12 @@ public class CustomerCreateParams extends ApiRequestParams {
      */
     public Builder setBalance(Long balance) {
       this.balance = balance;
+      return this;
+    }
+
+    /** Balance information and default balance settings for this customer. */
+    public Builder setCashBalance(CashBalance cashBalance) {
+      this.cashBalance = cashBalance;
       return this;
     }
 
@@ -686,6 +701,179 @@ public class CustomerCreateParams extends ApiRequestParams {
       public Builder setState(String state) {
         this.state = state;
         return this;
+      }
+    }
+  }
+
+  @Getter
+  public static class CashBalance {
+    /**
+     * Map of extra parameters for custom features not available in this client library. The content
+     * in this map is not serialized under this field's {@code @SerializedName} value. Instead, each
+     * key/value pair is serialized as if the key is a root-level field (serialized) name in this
+     * param object. Effectively, this map is flattened to its parent instance.
+     */
+    @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
+    Map<String, Object> extraParams;
+
+    /**
+     * Settings controlling the behavior of the customer's cash balance, such as reconciliation of
+     * funds received.
+     */
+    @SerializedName("settings")
+    Settings settings;
+
+    private CashBalance(Map<String, Object> extraParams, Settings settings) {
+      this.extraParams = extraParams;
+      this.settings = settings;
+    }
+
+    public static Builder builder() {
+      return new Builder();
+    }
+
+    public static class Builder {
+      private Map<String, Object> extraParams;
+
+      private Settings settings;
+
+      /** Finalize and obtain parameter instance from this builder. */
+      public CashBalance build() {
+        return new CashBalance(this.extraParams, this.settings);
+      }
+
+      /**
+       * Add a key/value pair to `extraParams` map. A map is initialized for the first `put/putAll`
+       * call, and subsequent calls add additional key/value pairs to the original map. See {@link
+       * CustomerCreateParams.CashBalance#extraParams} for the field documentation.
+       */
+      public Builder putExtraParam(String key, Object value) {
+        if (this.extraParams == null) {
+          this.extraParams = new HashMap<>();
+        }
+        this.extraParams.put(key, value);
+        return this;
+      }
+
+      /**
+       * Add all map key/value pairs to `extraParams` map. A map is initialized for the first
+       * `put/putAll` call, and subsequent calls add additional key/value pairs to the original map.
+       * See {@link CustomerCreateParams.CashBalance#extraParams} for the field documentation.
+       */
+      public Builder putAllExtraParam(Map<String, Object> map) {
+        if (this.extraParams == null) {
+          this.extraParams = new HashMap<>();
+        }
+        this.extraParams.putAll(map);
+        return this;
+      }
+
+      /**
+       * Settings controlling the behavior of the customer's cash balance, such as reconciliation of
+       * funds received.
+       */
+      public Builder setSettings(Settings settings) {
+        this.settings = settings;
+        return this;
+      }
+    }
+
+    @Getter
+    public static class Settings {
+      /**
+       * Map of extra parameters for custom features not available in this client library. The
+       * content in this map is not serialized under this field's {@code @SerializedName} value.
+       * Instead, each key/value pair is serialized as if the key is a root-level field (serialized)
+       * name in this param object. Effectively, this map is flattened to its parent instance.
+       */
+      @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
+      Map<String, Object> extraParams;
+
+      /**
+       * Method for using the customer balance to pay outstanding {@code customer_balance}
+       * PaymentIntents. If set to {@code automatic}, all available funds will automatically be used
+       * to pay any outstanding PaymentIntent. If set to {@code manual}, only customer balance funds
+       * from bank transfers with a reference code matching {@code
+       * payment_intent.next_action.display_bank_transfer_intructions.reference_code} will
+       * automatically be used to pay the corresponding outstanding PaymentIntent.
+       */
+      @SerializedName("reconciliation_mode")
+      ReconciliationMode reconciliationMode;
+
+      private Settings(Map<String, Object> extraParams, ReconciliationMode reconciliationMode) {
+        this.extraParams = extraParams;
+        this.reconciliationMode = reconciliationMode;
+      }
+
+      public static Builder builder() {
+        return new Builder();
+      }
+
+      public static class Builder {
+        private Map<String, Object> extraParams;
+
+        private ReconciliationMode reconciliationMode;
+
+        /** Finalize and obtain parameter instance from this builder. */
+        public Settings build() {
+          return new Settings(this.extraParams, this.reconciliationMode);
+        }
+
+        /**
+         * Add a key/value pair to `extraParams` map. A map is initialized for the first
+         * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
+         * map. See {@link CustomerCreateParams.CashBalance.Settings#extraParams} for the field
+         * documentation.
+         */
+        public Builder putExtraParam(String key, Object value) {
+          if (this.extraParams == null) {
+            this.extraParams = new HashMap<>();
+          }
+          this.extraParams.put(key, value);
+          return this;
+        }
+
+        /**
+         * Add all map key/value pairs to `extraParams` map. A map is initialized for the first
+         * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
+         * map. See {@link CustomerCreateParams.CashBalance.Settings#extraParams} for the field
+         * documentation.
+         */
+        public Builder putAllExtraParam(Map<String, Object> map) {
+          if (this.extraParams == null) {
+            this.extraParams = new HashMap<>();
+          }
+          this.extraParams.putAll(map);
+          return this;
+        }
+
+        /**
+         * Method for using the customer balance to pay outstanding {@code customer_balance}
+         * PaymentIntents. If set to {@code automatic}, all available funds will automatically be
+         * used to pay any outstanding PaymentIntent. If set to {@code manual}, only customer
+         * balance funds from bank transfers with a reference code matching {@code
+         * payment_intent.next_action.display_bank_transfer_intructions.reference_code} will
+         * automatically be used to pay the corresponding outstanding PaymentIntent.
+         */
+        public Builder setReconciliationMode(ReconciliationMode reconciliationMode) {
+          this.reconciliationMode = reconciliationMode;
+          return this;
+        }
+      }
+
+      public enum ReconciliationMode implements ApiRequestParams.EnumParam {
+        @SerializedName("automatic")
+        AUTOMATIC("automatic"),
+
+        @SerializedName("manual")
+        MANUAL("manual");
+
+        @Getter(onMethod_ = {@Override})
+        private final String value;
+
+        ReconciliationMode(String value) {
+          this.value = value;
+        }
       }
     }
   }
