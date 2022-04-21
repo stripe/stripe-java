@@ -81,8 +81,8 @@ public class ShippingRate extends ApiResource implements HasId, MetadataStore<Sh
   String taxBehavior;
 
   /**
-   * A <a href="https://stripe.com/docs/tax/tax-codes">tax code</a> ID. The Shipping tax code is
-   * {@code txcd_92010001}.
+   * A <a href="https://stripe.com/docs/tax/tax-categories">tax code</a> ID. The Shipping tax code
+   * is {@code txcd_92010001}.
    */
   @SerializedName("tax_code")
   @Getter(lombok.AccessLevel.NONE)

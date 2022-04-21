@@ -4,6 +4,8 @@ package com.stripe.model.billingportal;
 import com.google.gson.annotations.SerializedName;
 import com.stripe.Stripe;
 import com.stripe.exception.StripeException;
+import com.stripe.model.Application;
+import com.stripe.model.ExpandableField;
 import com.stripe.model.HasId;
 import com.stripe.model.MetadataStore;
 import com.stripe.model.StripeObject;
@@ -29,7 +31,9 @@ public class Configuration extends ApiResource implements HasId, MetadataStore<C
 
   /** ID of the Connect Application that created the configuration. */
   @SerializedName("application")
-  String application;
+  @Getter(lombok.AccessLevel.NONE)
+  @Setter(lombok.AccessLevel.NONE)
+  ExpandableField<Application> application;
 
   @SerializedName("business_profile")
   BusinessProfile businessProfile;
@@ -90,6 +94,24 @@ public class Configuration extends ApiResource implements HasId, MetadataStore<C
   /** Time at which the object was last updated. Measured in seconds since the Unix epoch. */
   @SerializedName("updated")
   Long updated;
+
+  /** Get ID of expandable {@code application} object. */
+  public String getApplication() {
+    return (this.application != null) ? this.application.getId() : null;
+  }
+
+  public void setApplication(String id) {
+    this.application = ApiResource.setExpandableFieldId(id, this.application);
+  }
+
+  /** Get expanded {@code application}. */
+  public Application getApplicationObject() {
+    return (this.application != null) ? this.application.getExpanded() : null;
+  }
+
+  public void setApplicationObject(Application expandableObject) {
+    this.application = new ExpandableField<Application>(expandableObject.getId(), expandableObject);
+  }
 
   /** Returns a list of configurations that describe the functionality of the customer portal. */
   public static ConfigurationCollection list(Map<String, Object> params) throws StripeException {

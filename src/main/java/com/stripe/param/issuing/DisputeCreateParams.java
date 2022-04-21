@@ -39,7 +39,10 @@ public class DisputeCreateParams extends ApiRequestParams {
   @SerializedName("metadata")
   Map<String, String> metadata;
 
-  /** The ID of the issuing transaction to create a dispute for. */
+  /**
+   * The ID of the issuing transaction to create a dispute for. For transaction on Treasury
+   * FinancialAccounts, use {@code treasury.received_debit}.
+   */
   @SerializedName("transaction")
   String transaction;
 
@@ -161,7 +164,10 @@ public class DisputeCreateParams extends ApiRequestParams {
       return this;
     }
 
-    /** The ID of the issuing transaction to create a dispute for. */
+    /**
+     * The ID of the issuing transaction to create a dispute for. For transaction on Treasury
+     * FinancialAccounts, use {@code treasury.received_debit}.
+     */
     public Builder setTransaction(String transaction) {
       this.transaction = transaction;
       return this;

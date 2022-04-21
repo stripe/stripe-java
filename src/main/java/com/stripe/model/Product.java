@@ -115,7 +115,7 @@ public class Product extends ApiResource implements HasId, MetadataStore<Product
   @SerializedName("statement_descriptor")
   String statementDescriptor;
 
-  /** A <a href="https://stripe.com/docs/tax/tax-codes">tax code</a> ID. */
+  /** A <a href="https://stripe.com/docs/tax/tax-categories">tax code</a> ID. */
   @SerializedName("tax_code")
   @Getter(lombok.AccessLevel.NONE)
   @Setter(lombok.AccessLevel.NONE)

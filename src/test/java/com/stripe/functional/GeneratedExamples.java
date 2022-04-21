@@ -3146,4 +3146,15 @@ class GeneratedExamples extends BaseStripeTest {
     assertNotNull(configuration);
     verifyRequest(ApiResource.RequestMethod.DELETE, "/v1/terminal/configurations/uc_123");
   }
+
+  @Test
+  public void testRefundExpire() throws StripeException {
+    Refund resource = Refund.retrieve("re_123");
+    RefundExpireParams params = RefundExpireParams.builder().build();
+
+    Refund refund = resource.getTestHelpers().expire(params);
+    assertNotNull(refund);
+    verifyRequest(
+        ApiResource.RequestMethod.POST, "/v1/test_helpers/refunds/re_123/expire", params.toMap());
+  }
 }
