@@ -673,7 +673,11 @@ public class Invoice extends ApiResource implements HasId, MetadataStore<Invoice
       this.accountTaxIds = null;
       return;
     }
-    if (this.accountTaxIds.stream().map(x -> x.getId()).collect(Collectors.toList()).equals(ids)) {
+    if (this.accountTaxIds != null
+        && this.accountTaxIds.stream()
+            .map(x -> x.getId())
+            .collect(Collectors.toList())
+            .equals(ids)) {
       // noop if the ids are equal to what are already present
       return;
     }
@@ -713,7 +717,8 @@ public class Invoice extends ApiResource implements HasId, MetadataStore<Invoice
       this.discounts = null;
       return;
     }
-    if (this.discounts.stream().map(x -> x.getId()).collect(Collectors.toList()).equals(ids)) {
+    if (this.discounts != null
+        && this.discounts.stream().map(x -> x.getId()).collect(Collectors.toList()).equals(ids)) {
       // noop if the ids are equal to what are already present
       return;
     }

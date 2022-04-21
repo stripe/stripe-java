@@ -351,10 +351,11 @@ public class Quote extends ApiResource implements HasId, MetadataStore<Quote> {
       this.defaultTaxRates = null;
       return;
     }
-    if (this.defaultTaxRates.stream()
-        .map(x -> x.getId())
-        .collect(Collectors.toList())
-        .equals(ids)) {
+    if (this.defaultTaxRates != null
+        && this.defaultTaxRates.stream()
+            .map(x -> x.getId())
+            .collect(Collectors.toList())
+            .equals(ids)) {
       // noop if the ids are equal to what are already present
       return;
     }
@@ -394,7 +395,8 @@ public class Quote extends ApiResource implements HasId, MetadataStore<Quote> {
       this.discounts = null;
       return;
     }
-    if (this.discounts.stream().map(x -> x.getId()).collect(Collectors.toList()).equals(ids)) {
+    if (this.discounts != null
+        && this.discounts.stream().map(x -> x.getId()).collect(Collectors.toList()).equals(ids)) {
       // noop if the ids are equal to what are already present
       return;
     }
