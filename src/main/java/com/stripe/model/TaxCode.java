@@ -39,16 +39,16 @@ public class TaxCode extends ApiResource implements HasId {
   String object;
 
   /**
-   * A list of <a href="https://stripe.com/docs/tax/tax-codes">all tax codes available</a> to add to
-   * Products in order to allow specific tax calculations.
+   * A list of <a href="https://stripe.com/docs/tax/tax-categories">all tax codes available</a> to
+   * add to Products in order to allow specific tax calculations.
    */
   public static TaxCodeCollection list(Map<String, Object> params) throws StripeException {
     return list(params, (RequestOptions) null);
   }
 
   /**
-   * A list of <a href="https://stripe.com/docs/tax/tax-codes">all tax codes available</a> to add to
-   * Products in order to allow specific tax calculations.
+   * A list of <a href="https://stripe.com/docs/tax/tax-categories">all tax codes available</a> to
+   * add to Products in order to allow specific tax calculations.
    */
   public static TaxCodeCollection list(Map<String, Object> params, RequestOptions options)
       throws StripeException {
@@ -57,16 +57,16 @@ public class TaxCode extends ApiResource implements HasId {
   }
 
   /**
-   * A list of <a href="https://stripe.com/docs/tax/tax-codes">all tax codes available</a> to add to
-   * Products in order to allow specific tax calculations.
+   * A list of <a href="https://stripe.com/docs/tax/tax-categories">all tax codes available</a> to
+   * add to Products in order to allow specific tax calculations.
    */
   public static TaxCodeCollection list(TaxCodeListParams params) throws StripeException {
     return list(params, (RequestOptions) null);
   }
 
   /**
-   * A list of <a href="https://stripe.com/docs/tax/tax-codes">all tax codes available</a> to add to
-   * Products in order to allow specific tax calculations.
+   * A list of <a href="https://stripe.com/docs/tax/tax-categories">all tax codes available</a> to
+   * add to Products in order to allow specific tax calculations.
    */
   public static TaxCodeCollection list(TaxCodeListParams params, RequestOptions options)
       throws StripeException {

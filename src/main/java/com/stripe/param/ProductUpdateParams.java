@@ -99,7 +99,7 @@ public class ProductUpdateParams extends ApiRequestParams {
   @SerializedName("statement_descriptor")
   Object statementDescriptor;
 
-  /** A <a href="https://stripe.com/docs/tax/tax-codes">tax code</a> ID. */
+  /** A <a href="https://stripe.com/docs/tax/tax-categories">tax code</a> ID. */
   @SerializedName("tax_code")
   Object taxCode;
 
@@ -534,13 +534,13 @@ public class ProductUpdateParams extends ApiRequestParams {
       return this;
     }
 
-    /** A <a href="https://stripe.com/docs/tax/tax-codes">tax code</a> ID. */
+    /** A <a href="https://stripe.com/docs/tax/tax-categories">tax code</a> ID. */
     public Builder setTaxCode(String taxCode) {
       this.taxCode = taxCode;
       return this;
     }
 
-    /** A <a href="https://stripe.com/docs/tax/tax-codes">tax code</a> ID. */
+    /** A <a href="https://stripe.com/docs/tax/tax-categories">tax code</a> ID. */
     public Builder setTaxCode(EmptyParam taxCode) {
       this.taxCode = taxCode;
       return this;

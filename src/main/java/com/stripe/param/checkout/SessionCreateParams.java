@@ -83,9 +83,10 @@ public class SessionCreateParams extends ApiRequestParams {
    * data entered in Checkout with <a
    * href="https://stripe.com/docs/api/checkout/sessions/object#checkout_session_object-customer_details">customer_details</a>.
    *
-   * <p>Sessions that do not create Customers will instead create <a
+   * <p>Sessions that don't create Customers instead create <a
    * href="https://support.stripe.com/questions/guest-customer-faq">Guest Customers</a> in the
-   * Dashboard.
+   * Dashboard. Promotion codes limited to first time customers will return invalid for these
+   * Sessions.
    *
    * <p>Can only be set in {@code payment} and {@code setup} mode.
    */
@@ -511,9 +512,10 @@ public class SessionCreateParams extends ApiRequestParams {
      * data entered in Checkout with <a
      * href="https://stripe.com/docs/api/checkout/sessions/object#checkout_session_object-customer_details">customer_details</a>.
      *
-     * <p>Sessions that do not create Customers will instead create <a
+     * <p>Sessions that don't create Customers instead create <a
      * href="https://support.stripe.com/questions/guest-customer-faq">Guest Customers</a> in the
-     * Dashboard.
+     * Dashboard. Promotion codes limited to first time customers will return invalid for these
+     * Sessions.
      *
      * <p>Can only be set in {@code payment} and {@code setup} mode.
      */
@@ -2131,7 +2133,7 @@ public class SessionCreateParams extends ApiRequestParams {
         @SerializedName("name")
         String name;
 
-        /** A <a href="https://stripe.com/docs/tax/tax-codes">tax code</a> ID. */
+        /** A <a href="https://stripe.com/docs/tax/tax-categories">tax code</a> ID. */
         @SerializedName("tax_code")
         String taxCode;
 
@@ -2276,7 +2278,7 @@ public class SessionCreateParams extends ApiRequestParams {
             return this;
           }
 
-          /** A <a href="https://stripe.com/docs/tax/tax-codes">tax code</a> ID. */
+          /** A <a href="https://stripe.com/docs/tax/tax-categories">tax code</a> ID. */
           public Builder setTaxCode(String taxCode) {
             this.taxCode = taxCode;
             return this;
@@ -5308,8 +5310,8 @@ public class SessionCreateParams extends ApiRequestParams {
       TaxBehavior taxBehavior;
 
       /**
-       * A <a href="https://stripe.com/docs/tax/tax-codes">tax code</a> ID. The Shipping tax code is
-       * {@code txcd_92010001}.
+       * A <a href="https://stripe.com/docs/tax/tax-categories">tax code</a> ID. The Shipping tax
+       * code is {@code txcd_92010001}.
        */
       @SerializedName("tax_code")
       String taxCode;
@@ -5467,8 +5469,8 @@ public class SessionCreateParams extends ApiRequestParams {
         }
 
         /**
-         * A <a href="https://stripe.com/docs/tax/tax-codes">tax code</a> ID. The Shipping tax code
-         * is {@code txcd_92010001}.
+         * A <a href="https://stripe.com/docs/tax/tax-categories">tax code</a> ID. The Shipping tax
+         * code is {@code txcd_92010001}.
          */
         public Builder setTaxCode(String taxCode) {
           this.taxCode = taxCode;

@@ -576,7 +576,7 @@ public class PlanCreateParams extends ApiRequestParams {
     @SerializedName("statement_descriptor")
     String statementDescriptor;
 
-    /** A <a href="https://stripe.com/docs/tax/tax-codes">tax code</a> ID. */
+    /** A <a href="https://stripe.com/docs/tax/tax-categories">tax code</a> ID. */
     @SerializedName("tax_code")
     String taxCode;
 
@@ -727,7 +727,7 @@ public class PlanCreateParams extends ApiRequestParams {
         return this;
       }
 
-      /** A <a href="https://stripe.com/docs/tax/tax-codes">tax code</a> ID. */
+      /** A <a href="https://stripe.com/docs/tax/tax-categories">tax code</a> ID. */
       public Builder setTaxCode(String taxCode) {
         this.taxCode = taxCode;
         return this;

@@ -62,8 +62,8 @@ public class ShippingRateCreateParams extends ApiRequestParams {
   TaxBehavior taxBehavior;
 
   /**
-   * A <a href="https://stripe.com/docs/tax/tax-codes">tax code</a> ID. The Shipping tax code is
-   * {@code txcd_92010001}.
+   * A <a href="https://stripe.com/docs/tax/tax-categories">tax code</a> ID. The Shipping tax code
+   * is {@code txcd_92010001}.
    */
   @SerializedName("tax_code")
   String taxCode;
@@ -247,8 +247,8 @@ public class ShippingRateCreateParams extends ApiRequestParams {
     }
 
     /**
-     * A <a href="https://stripe.com/docs/tax/tax-codes">tax code</a> ID. The Shipping tax code is
-     * {@code txcd_92010001}.
+     * A <a href="https://stripe.com/docs/tax/tax-categories">tax code</a> ID. The Shipping tax code
+     * is {@code txcd_92010001}.
      */
     public Builder setTaxCode(String taxCode) {
       this.taxCode = taxCode;
