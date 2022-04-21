@@ -1,5 +1,12 @@
 # Changelog
 
+## 20.116.0 - 2022-04-21
+* [#1345](https://github.com/stripe/stripe-java/pull/1345) API Updates
+  * Add support for `expire` test helper method on resource `Refund`
+  * Change type of `BillingPortal.Configuration.application` from `string` to `expandable($Application)`
+  * Change `IssuingDisputeCreateParams.transaction` to be optional
+* [#1342](https://github.com/stripe/stripe-java/pull/1342) Add null checks before streaming expandable IDs in setters.
+
 ## 20.115.0 - 2022-04-20
 * [#1339](https://github.com/stripe/stripe-java/pull/1339) API Updates
   * Add support for new resources `FundingInstructions` and `Terminal.Configuration`
