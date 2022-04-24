@@ -6,7 +6,7 @@ Issuing Settlement and Card Design features in their public SDK.
 To build locally, run:
 
 ```
-gradle build -x test
+./gradlew build -x test -x spotlessCheck
 ```
 
 Skip tests because they don't work without a Stripe test server that we don't have access to.
@@ -63,6 +63,21 @@ If the command above does not work, and you are in a detached state, use the fol
 ```
 git checkout master
 git checkout --track origin/step
+```
+
+If there's a message about diverged branches.
+```
+git checkout step
+warning: refname 'step' is ambiguous.
+Switched to branch 'step'
+Your branch and 'origin/step' have diverged,
+and have 15 and 308 different commits each, respectively.
+  (use "git pull" to merge the remote branch into yours)
+```
+Then reset the branch.
+```
+git reset --hard origin/step
+HEAD is now at f44c911a35 Support Card.wallets
 ```
 
 ## Backup `step` branch
