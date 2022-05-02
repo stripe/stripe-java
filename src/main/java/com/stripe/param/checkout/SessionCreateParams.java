@@ -3895,7 +3895,7 @@ public class SessionCreateParams extends ApiRequestParams {
        * 23:59:59 JST. Defaults to 3 days.
        */
       @SerializedName("expires_after_days")
-      Long expiresAfterDays;
+      Object expiresAfterDays;
 
       /**
        * Map of extra parameters for custom features not available in this client library. The
@@ -3906,7 +3906,7 @@ public class SessionCreateParams extends ApiRequestParams {
       @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
       Map<String, Object> extraParams;
 
-      private Konbini(Long expiresAfterDays, Map<String, Object> extraParams) {
+      private Konbini(Object expiresAfterDays, Map<String, Object> extraParams) {
         this.expiresAfterDays = expiresAfterDays;
         this.extraParams = extraParams;
       }
@@ -3916,7 +3916,7 @@ public class SessionCreateParams extends ApiRequestParams {
       }
 
       public static class Builder {
-        private Long expiresAfterDays;
+        private Object expiresAfterDays;
 
         private Map<String, Object> extraParams;
 
@@ -3932,6 +3932,17 @@ public class SessionCreateParams extends ApiRequestParams {
          * 23:59:59 JST. Defaults to 3 days.
          */
         public Builder setExpiresAfterDays(Long expiresAfterDays) {
+          this.expiresAfterDays = expiresAfterDays;
+          return this;
+        }
+
+        /**
+         * The number of calendar days (between 1 and 60) after which Konbini payment instructions
+         * will expire. For example, if a PaymentIntent is confirmed with Konbini and {@code
+         * expires_after_days} set to 2 on Monday JST, the instructions will expire on Wednesday
+         * 23:59:59 JST. Defaults to 3 days.
+         */
+        public Builder setExpiresAfterDays(EmptyParam expiresAfterDays) {
           this.expiresAfterDays = expiresAfterDays;
           return this;
         }
