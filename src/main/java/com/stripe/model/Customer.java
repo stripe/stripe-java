@@ -39,6 +39,15 @@ public class Customer extends ApiResource implements HasId, MetadataStore<Custom
   @SerializedName("balance")
   Long balance;
 
+  /**
+   * The current funds being held by Stripe on behalf of the customer. These funds can be applied
+   * towards payment intents with source &quot;cash_balance&quot;.The settings[reconciliation_mode]
+   * field describes whether these funds are applied to such payment intents manually or
+   * automatically.
+   */
+  @SerializedName("cash_balance")
+  CashBalance cashBalance;
+
   /** Time at which the object was created. Measured in seconds since the Unix epoch. */
   @SerializedName("created")
   Long created;

@@ -10,6 +10,10 @@ import lombok.Setter;
 @Setter
 @EqualsAndHashCode(callSuper = false)
 public class Application extends StripeObject implements HasId {
+  /** Always true for a deleted object. */
+  @SerializedName("deleted")
+  Boolean deleted;
+
   /** Unique identifier for the object. */
   @Getter(onMethod_ = {@Override})
   @SerializedName("id")

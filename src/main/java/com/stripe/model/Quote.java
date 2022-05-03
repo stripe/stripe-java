@@ -38,6 +38,12 @@ public class Quote extends ApiResource implements HasId, MetadataStore<Quote> {
   @SerializedName("amount_total")
   Long amountTotal;
 
+  /** ID of the Connect Application that created the quote. */
+  @SerializedName("application")
+  @Getter(lombok.AccessLevel.NONE)
+  @Setter(lombok.AccessLevel.NONE)
+  ExpandableField<Application> application;
+
   /**
    * The amount of the application fee (if any) that will be requested to be applied to the payment
    * and transferred to the application owner's Stripe account. Only applicable if there are no line
@@ -228,6 +234,24 @@ public class Quote extends ApiResource implements HasId, MetadataStore<Quote> {
    */
   @SerializedName("transfer_data")
   TransferData transferData;
+
+  /** Get ID of expandable {@code application} object. */
+  public String getApplication() {
+    return (this.application != null) ? this.application.getId() : null;
+  }
+
+  public void setApplication(String id) {
+    this.application = ApiResource.setExpandableFieldId(id, this.application);
+  }
+
+  /** Get expanded {@code application}. */
+  public Application getApplicationObject() {
+    return (this.application != null) ? this.application.getExpanded() : null;
+  }
+
+  public void setApplicationObject(Application expandableObject) {
+    this.application = new ExpandableField<Application>(expandableObject.getId(), expandableObject);
+  }
 
   /** Get ID of expandable {@code customer} object. */
   public String getCustomer() {

@@ -28,12 +28,12 @@ public class TaxIdCollectionCreateParams extends ApiRequestParams {
    * Type of the tax ID, one of {@code ae_trn}, {@code au_abn}, {@code au_arn}, {@code bg_uic},
    * {@code br_cnpj}, {@code br_cpf}, {@code ca_bn}, {@code ca_gst_hst}, {@code ca_pst_bc}, {@code
    * ca_pst_mb}, {@code ca_pst_sk}, {@code ca_qst}, {@code ch_vat}, {@code cl_tin}, {@code es_cif},
-   * {@code eu_vat}, {@code gb_vat}, {@code ge_vat}, {@code hk_br}, {@code hu_tin}, {@code id_npwp},
-   * {@code il_vat}, {@code in_gst}, {@code is_vat}, {@code jp_cn}, {@code jp_rn}, {@code kr_brn},
-   * {@code li_uid}, {@code mx_rfc}, {@code my_frp}, {@code my_itn}, {@code my_sst}, {@code no_vat},
-   * {@code nz_gst}, {@code ru_inn}, {@code ru_kpp}, {@code sa_vat}, {@code sg_gst}, {@code sg_uen},
-   * {@code si_tin}, {@code th_vat}, {@code tw_vat}, {@code ua_vat}, {@code us_ein}, or {@code
-   * za_vat}.
+   * {@code eu_oss_vat}, {@code eu_vat}, {@code gb_vat}, {@code ge_vat}, {@code hk_br}, {@code
+   * hu_tin}, {@code id_npwp}, {@code il_vat}, {@code in_gst}, {@code is_vat}, {@code jp_cn}, {@code
+   * jp_rn}, {@code kr_brn}, {@code li_uid}, {@code mx_rfc}, {@code my_frp}, {@code my_itn}, {@code
+   * my_sst}, {@code no_vat}, {@code nz_gst}, {@code ru_inn}, {@code ru_kpp}, {@code sa_vat}, {@code
+   * sg_gst}, {@code sg_uen}, {@code si_tin}, {@code th_vat}, {@code tw_vat}, {@code ua_vat}, {@code
+   * us_ein}, or {@code za_vat}.
    */
   @SerializedName("type")
   Type type;
@@ -124,12 +124,12 @@ public class TaxIdCollectionCreateParams extends ApiRequestParams {
      * Type of the tax ID, one of {@code ae_trn}, {@code au_abn}, {@code au_arn}, {@code bg_uic},
      * {@code br_cnpj}, {@code br_cpf}, {@code ca_bn}, {@code ca_gst_hst}, {@code ca_pst_bc}, {@code
      * ca_pst_mb}, {@code ca_pst_sk}, {@code ca_qst}, {@code ch_vat}, {@code cl_tin}, {@code
-     * es_cif}, {@code eu_vat}, {@code gb_vat}, {@code ge_vat}, {@code hk_br}, {@code hu_tin},
-     * {@code id_npwp}, {@code il_vat}, {@code in_gst}, {@code is_vat}, {@code jp_cn}, {@code
-     * jp_rn}, {@code kr_brn}, {@code li_uid}, {@code mx_rfc}, {@code my_frp}, {@code my_itn},
-     * {@code my_sst}, {@code no_vat}, {@code nz_gst}, {@code ru_inn}, {@code ru_kpp}, {@code
-     * sa_vat}, {@code sg_gst}, {@code sg_uen}, {@code si_tin}, {@code th_vat}, {@code tw_vat},
-     * {@code ua_vat}, {@code us_ein}, or {@code za_vat}.
+     * es_cif}, {@code eu_oss_vat}, {@code eu_vat}, {@code gb_vat}, {@code ge_vat}, {@code hk_br},
+     * {@code hu_tin}, {@code id_npwp}, {@code il_vat}, {@code in_gst}, {@code is_vat}, {@code
+     * jp_cn}, {@code jp_rn}, {@code kr_brn}, {@code li_uid}, {@code mx_rfc}, {@code my_frp}, {@code
+     * my_itn}, {@code my_sst}, {@code no_vat}, {@code nz_gst}, {@code ru_inn}, {@code ru_kpp},
+     * {@code sa_vat}, {@code sg_gst}, {@code sg_uen}, {@code si_tin}, {@code th_vat}, {@code
+     * tw_vat}, {@code ua_vat}, {@code us_ein}, or {@code za_vat}.
      */
     public Builder setType(Type type) {
       this.type = type;
@@ -188,6 +188,9 @@ public class TaxIdCollectionCreateParams extends ApiRequestParams {
 
     @SerializedName("es_cif")
     ES_CIF("es_cif"),
+
+    @SerializedName("eu_oss_vat")
+    EU_OSS_VAT("eu_oss_vat"),
 
     @SerializedName("eu_vat")
     EU_VAT("eu_vat"),
