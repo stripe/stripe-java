@@ -138,6 +138,9 @@ public class Person extends ApiResource implements HasId, MetadataStore<Person> 
   @SerializedName("political_exposure")
   String politicalExposure;
 
+  @SerializedName("registered_address")
+  Address registeredAddress;
+
   @SerializedName("relationship")
   Relationship relationship;
 

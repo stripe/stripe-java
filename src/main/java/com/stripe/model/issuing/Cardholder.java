@@ -435,7 +435,10 @@ public class Cardholder extends ApiResource implements HasId, MetadataStore<Card
     @Setter
     @EqualsAndHashCode(callSuper = false)
     public static class SpendingLimit extends StripeObject {
-      /** Maximum amount allowed to spend per interval. */
+      /**
+       * Maximum amount allowed to spend per interval. This amount is in the card's currency and in
+       * the <a href="https://stripe.com/docs/currencies#zero-decimal">smallest currency unit</a>.
+       */
       @SerializedName("amount")
       Long amount;
 
