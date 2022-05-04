@@ -5682,6 +5682,10 @@ public class AccountCreateParams extends ApiRequestParams {
     @SerializedName("political_exposure")
     PoliticalExposure politicalExposure;
 
+    /** The individual's registered address. */
+    @SerializedName("registered_address")
+    RegisteredAddress registeredAddress;
+
     /** The last four digits of the individual's Social Security Number (U.S. only). */
     @SerializedName("ssn_last_4")
     String ssnLast4;
@@ -5710,6 +5714,7 @@ public class AccountCreateParams extends ApiRequestParams {
         Object metadata,
         String phone,
         PoliticalExposure politicalExposure,
+        RegisteredAddress registeredAddress,
         String ssnLast4,
         Verification verification) {
       this.address = address;
@@ -5731,6 +5736,7 @@ public class AccountCreateParams extends ApiRequestParams {
       this.metadata = metadata;
       this.phone = phone;
       this.politicalExposure = politicalExposure;
+      this.registeredAddress = registeredAddress;
       this.ssnLast4 = ssnLast4;
       this.verification = verification;
     }
@@ -5778,6 +5784,8 @@ public class AccountCreateParams extends ApiRequestParams {
 
       private PoliticalExposure politicalExposure;
 
+      private RegisteredAddress registeredAddress;
+
       private String ssnLast4;
 
       private Verification verification;
@@ -5804,6 +5812,7 @@ public class AccountCreateParams extends ApiRequestParams {
             this.metadata,
             this.phone,
             this.politicalExposure,
+            this.registeredAddress,
             this.ssnLast4,
             this.verification);
       }
@@ -6036,6 +6045,12 @@ public class AccountCreateParams extends ApiRequestParams {
        */
       public Builder setPoliticalExposure(PoliticalExposure politicalExposure) {
         this.politicalExposure = politicalExposure;
+        return this;
+      }
+
+      /** The individual's registered address. */
+      public Builder setRegisteredAddress(RegisteredAddress registeredAddress) {
+        this.registeredAddress = registeredAddress;
         return this;
       }
 
@@ -6638,6 +6653,161 @@ public class AccountCreateParams extends ApiRequestParams {
         /** The four-digit year of birth. */
         public Builder setYear(Long year) {
           this.year = year;
+          return this;
+        }
+      }
+    }
+
+    @Getter
+    public static class RegisteredAddress {
+      /** City, district, suburb, town, or village. */
+      @SerializedName("city")
+      String city;
+
+      /**
+       * Two-letter country code (<a href="https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2">ISO
+       * 3166-1 alpha-2</a>).
+       */
+      @SerializedName("country")
+      String country;
+
+      /**
+       * Map of extra parameters for custom features not available in this client library. The
+       * content in this map is not serialized under this field's {@code @SerializedName} value.
+       * Instead, each key/value pair is serialized as if the key is a root-level field (serialized)
+       * name in this param object. Effectively, this map is flattened to its parent instance.
+       */
+      @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
+      Map<String, Object> extraParams;
+
+      /** Address line 1 (e.g., street, PO Box, or company name). */
+      @SerializedName("line1")
+      String line1;
+
+      /** Address line 2 (e.g., apartment, suite, unit, or building). */
+      @SerializedName("line2")
+      String line2;
+
+      /** ZIP or postal code. */
+      @SerializedName("postal_code")
+      String postalCode;
+
+      /** State, county, province, or region. */
+      @SerializedName("state")
+      String state;
+
+      private RegisteredAddress(
+          String city,
+          String country,
+          Map<String, Object> extraParams,
+          String line1,
+          String line2,
+          String postalCode,
+          String state) {
+        this.city = city;
+        this.country = country;
+        this.extraParams = extraParams;
+        this.line1 = line1;
+        this.line2 = line2;
+        this.postalCode = postalCode;
+        this.state = state;
+      }
+
+      public static Builder builder() {
+        return new Builder();
+      }
+
+      public static class Builder {
+        private String city;
+
+        private String country;
+
+        private Map<String, Object> extraParams;
+
+        private String line1;
+
+        private String line2;
+
+        private String postalCode;
+
+        private String state;
+
+        /** Finalize and obtain parameter instance from this builder. */
+        public RegisteredAddress build() {
+          return new RegisteredAddress(
+              this.city,
+              this.country,
+              this.extraParams,
+              this.line1,
+              this.line2,
+              this.postalCode,
+              this.state);
+        }
+
+        /** City, district, suburb, town, or village. */
+        public Builder setCity(String city) {
+          this.city = city;
+          return this;
+        }
+
+        /**
+         * Two-letter country code (<a href="https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2">ISO
+         * 3166-1 alpha-2</a>).
+         */
+        public Builder setCountry(String country) {
+          this.country = country;
+          return this;
+        }
+
+        /**
+         * Add a key/value pair to `extraParams` map. A map is initialized for the first
+         * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
+         * map. See {@link AccountCreateParams.Individual.RegisteredAddress#extraParams} for the
+         * field documentation.
+         */
+        public Builder putExtraParam(String key, Object value) {
+          if (this.extraParams == null) {
+            this.extraParams = new HashMap<>();
+          }
+          this.extraParams.put(key, value);
+          return this;
+        }
+
+        /**
+         * Add all map key/value pairs to `extraParams` map. A map is initialized for the first
+         * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
+         * map. See {@link AccountCreateParams.Individual.RegisteredAddress#extraParams} for the
+         * field documentation.
+         */
+        public Builder putAllExtraParam(Map<String, Object> map) {
+          if (this.extraParams == null) {
+            this.extraParams = new HashMap<>();
+          }
+          this.extraParams.putAll(map);
+          return this;
+        }
+
+        /** Address line 1 (e.g., street, PO Box, or company name). */
+        public Builder setLine1(String line1) {
+          this.line1 = line1;
+          return this;
+        }
+
+        /** Address line 2 (e.g., apartment, suite, unit, or building). */
+        public Builder setLine2(String line2) {
+          this.line2 = line2;
+          return this;
+        }
+
+        /** ZIP or postal code. */
+        public Builder setPostalCode(String postalCode) {
+          this.postalCode = postalCode;
+          return this;
+        }
+
+        /** State, county, province, or region. */
+        public Builder setState(String state) {
+          this.state = state;
           return this;
         }
       }
