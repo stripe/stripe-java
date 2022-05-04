@@ -2,6 +2,7 @@
 package com.stripe.model.financialconnections;
 
 import com.google.gson.annotations.SerializedName;
+import com.stripe.model.HasId;
 import com.stripe.model.StripeObject;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
@@ -10,10 +11,14 @@ import lombok.Setter;
 @Getter
 @Setter
 @EqualsAndHashCode(callSuper = false)
-public class AccountOwner extends StripeObject {
+public class AccountOwner extends StripeObject implements HasId {
   /** The email address of the owner. */
   @SerializedName("email")
   String email;
+
+  @Getter(onMethod_ = {@Override})
+  @SerializedName("id")
+  String id;
 
   /** The full name of the owner. */
   @SerializedName("name")
