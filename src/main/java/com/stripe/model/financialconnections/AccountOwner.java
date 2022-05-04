@@ -19,6 +19,9 @@ public class AccountOwner extends StripeObject {
   @SerializedName("name")
   String name;
 
+  @SerializedName("object")
+  String object;
+
   /** The ownership object that this owner belongs to. */
   @SerializedName("ownership")
   String ownership;

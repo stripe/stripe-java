@@ -4,7 +4,6 @@ package com.stripe.model.financialconnections;
 import com.google.gson.annotations.SerializedName;
 import com.stripe.Stripe;
 import com.stripe.exception.StripeException;
-import com.stripe.model.Account;
 import com.stripe.model.Customer;
 import com.stripe.model.ExpandableField;
 import com.stripe.model.HasId;
@@ -87,7 +86,7 @@ public class Account extends ApiResource implements HasId {
   @SerializedName("ownership")
   @Getter(lombok.AccessLevel.NONE)
   @Setter(lombok.AccessLevel.NONE)
-  ExpandableField<Account.Ownership> ownership;
+  ExpandableField<AccountOwnership> ownership;
 
   /** The state of the most recent attempt to refresh the account owners. */
   @SerializedName("ownership_refresh")
@@ -137,13 +136,13 @@ public class Account extends ApiResource implements HasId {
   }
 
   /** Get expanded {@code ownership}. */
-  public Account.Ownership getOwnershipObject() {
+  public AccountOwnership getOwnershipObject() {
     return (this.ownership != null) ? this.ownership.getExpanded() : null;
   }
 
-  public void setOwnershipObject(Account.Ownership expandableObject) {
+  public void setOwnershipObject(AccountOwnership expandableObject) {
     this.ownership =
-        new ExpandableField<Account.Ownership>(expandableObject.getId(), expandableObject);
+        new ExpandableField<AccountOwnership>(expandableObject.getId(), expandableObject);
   }
 
   /** Retrieves the details of an Financial Connections <code>Account</code>. */
@@ -431,32 +430,6 @@ public class Account extends ApiResource implements HasId {
      */
     @SerializedName("status")
     String status;
-  }
-
-  @Getter
-  @Setter
-  @EqualsAndHashCode(callSuper = false)
-  public static class Ownership extends StripeObject implements HasId {
-    /** Time at which the object was created. Measured in seconds since the Unix epoch. */
-    @SerializedName("created")
-    Long created;
-
-    /** Unique identifier for the object. */
-    @Getter(onMethod_ = {@Override})
-    @SerializedName("id")
-    String id;
-
-    /**
-     * String representing the object's type. Objects of the same type share the same value.
-     *
-     * <p>Equal to {@code financial_connections.account_ownership}.
-     */
-    @SerializedName("object")
-    String object;
-
-    /** A paginated list of owners for this account. */
-    @SerializedName("owners")
-    AccountOwnerCollection owners;
   }
 
   @Getter
