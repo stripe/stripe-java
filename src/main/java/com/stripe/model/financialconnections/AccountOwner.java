@@ -16,6 +16,7 @@ public class AccountOwner extends StripeObject implements HasId {
   @SerializedName("email")
   String email;
 
+  /** Unique identifier for the object. */
   @Getter(onMethod_ = {@Override})
   @SerializedName("id")
   String id;
@@ -24,6 +25,11 @@ public class AccountOwner extends StripeObject implements HasId {
   @SerializedName("name")
   String name;
 
+  /**
+   * String representing the object's type. Objects of the same type share the same value.
+   *
+   * <p>Equal to {@code financial_connections.account_owner}.
+   */
   @SerializedName("object")
   String object;
 
