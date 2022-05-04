@@ -3547,6 +3547,10 @@ public class SetupIntentCreateParams extends ApiRequestParams {
       @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
       Map<String, Object> extraParams;
 
+      /** The ID of a Financial Connections Account to use as a payment method. */
+      @SerializedName("financial_connections_account")
+      String financialConnectionsAccount;
+
       /** Routing number of the bank account. */
       @SerializedName("routing_number")
       String routingNumber;
@@ -3556,11 +3560,13 @@ public class SetupIntentCreateParams extends ApiRequestParams {
           String accountNumber,
           AccountType accountType,
           Map<String, Object> extraParams,
+          String financialConnectionsAccount,
           String routingNumber) {
         this.accountHolderType = accountHolderType;
         this.accountNumber = accountNumber;
         this.accountType = accountType;
         this.extraParams = extraParams;
+        this.financialConnectionsAccount = financialConnectionsAccount;
         this.routingNumber = routingNumber;
       }
 
@@ -3577,6 +3583,8 @@ public class SetupIntentCreateParams extends ApiRequestParams {
 
         private Map<String, Object> extraParams;
 
+        private String financialConnectionsAccount;
+
         private String routingNumber;
 
         /** Finalize and obtain parameter instance from this builder. */
@@ -3586,6 +3594,7 @@ public class SetupIntentCreateParams extends ApiRequestParams {
               this.accountNumber,
               this.accountType,
               this.extraParams,
+              this.financialConnectionsAccount,
               this.routingNumber);
         }
 
@@ -3632,6 +3641,12 @@ public class SetupIntentCreateParams extends ApiRequestParams {
             this.extraParams = new HashMap<>();
           }
           this.extraParams.putAll(map);
+          return this;
+        }
+
+        /** The ID of a Financial Connections Account to use as a payment method. */
+        public Builder setFinancialConnectionsAccount(String financialConnectionsAccount) {
+          this.financialConnectionsAccount = financialConnectionsAccount;
           return this;
         }
 
@@ -4936,13 +4951,20 @@ public class SetupIntentCreateParams extends ApiRequestParams {
       @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
       Map<String, Object> extraParams;
 
+      /** Additional fields for Financial Connections Session creation. */
+      @SerializedName("financial_connections")
+      FinancialConnections financialConnections;
+
       /** Verification method for the intent. */
       @SerializedName("verification_method")
       VerificationMethod verificationMethod;
 
       private UsBankAccount(
-          Map<String, Object> extraParams, VerificationMethod verificationMethod) {
+          Map<String, Object> extraParams,
+          FinancialConnections financialConnections,
+          VerificationMethod verificationMethod) {
         this.extraParams = extraParams;
+        this.financialConnections = financialConnections;
         this.verificationMethod = verificationMethod;
       }
 
@@ -4953,11 +4975,14 @@ public class SetupIntentCreateParams extends ApiRequestParams {
       public static class Builder {
         private Map<String, Object> extraParams;
 
+        private FinancialConnections financialConnections;
+
         private VerificationMethod verificationMethod;
 
         /** Finalize and obtain parameter instance from this builder. */
         public UsBankAccount build() {
-          return new UsBankAccount(this.extraParams, this.verificationMethod);
+          return new UsBankAccount(
+              this.extraParams, this.financialConnections, this.verificationMethod);
         }
 
         /**
@@ -4988,10 +5013,157 @@ public class SetupIntentCreateParams extends ApiRequestParams {
           return this;
         }
 
+        /** Additional fields for Financial Connections Session creation. */
+        public Builder setFinancialConnections(FinancialConnections financialConnections) {
+          this.financialConnections = financialConnections;
+          return this;
+        }
+
         /** Verification method for the intent. */
         public Builder setVerificationMethod(VerificationMethod verificationMethod) {
           this.verificationMethod = verificationMethod;
           return this;
+        }
+      }
+
+      @Getter
+      public static class FinancialConnections {
+        /**
+         * Map of extra parameters for custom features not available in this client library. The
+         * content in this map is not serialized under this field's {@code @SerializedName} value.
+         * Instead, each key/value pair is serialized as if the key is a root-level field
+         * (serialized) name in this param object. Effectively, this map is flattened to its parent
+         * instance.
+         */
+        @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
+        Map<String, Object> extraParams;
+
+        /**
+         * The list of permissions to request. If this parameter is passed, the {@code
+         * payment_method} permission must be included. Valid permissions include: {@code balances},
+         * {@code payment_method}, and {@code transactions}.
+         */
+        @SerializedName("permissions")
+        List<Permission> permissions;
+
+        /**
+         * For webview integrations only. Upon completing OAuth login in the native browser, the
+         * user will be redirected to this URL to return to your app.
+         */
+        @SerializedName("return_url")
+        String returnUrl;
+
+        private FinancialConnections(
+            Map<String, Object> extraParams, List<Permission> permissions, String returnUrl) {
+          this.extraParams = extraParams;
+          this.permissions = permissions;
+          this.returnUrl = returnUrl;
+        }
+
+        public static Builder builder() {
+          return new Builder();
+        }
+
+        public static class Builder {
+          private Map<String, Object> extraParams;
+
+          private List<Permission> permissions;
+
+          private String returnUrl;
+
+          /** Finalize and obtain parameter instance from this builder. */
+          public FinancialConnections build() {
+            return new FinancialConnections(this.extraParams, this.permissions, this.returnUrl);
+          }
+
+          /**
+           * Add a key/value pair to `extraParams` map. A map is initialized for the first
+           * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
+           * map. See {@link
+           * SetupIntentCreateParams.PaymentMethodOptions.UsBankAccount.FinancialConnections#extraParams}
+           * for the field documentation.
+           */
+          public Builder putExtraParam(String key, Object value) {
+            if (this.extraParams == null) {
+              this.extraParams = new HashMap<>();
+            }
+            this.extraParams.put(key, value);
+            return this;
+          }
+
+          /**
+           * Add all map key/value pairs to `extraParams` map. A map is initialized for the first
+           * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
+           * map. See {@link
+           * SetupIntentCreateParams.PaymentMethodOptions.UsBankAccount.FinancialConnections#extraParams}
+           * for the field documentation.
+           */
+          public Builder putAllExtraParam(Map<String, Object> map) {
+            if (this.extraParams == null) {
+              this.extraParams = new HashMap<>();
+            }
+            this.extraParams.putAll(map);
+            return this;
+          }
+
+          /**
+           * Add an element to `permissions` list. A list is initialized for the first `add/addAll`
+           * call, and subsequent calls adds additional elements to the original list. See {@link
+           * SetupIntentCreateParams.PaymentMethodOptions.UsBankAccount.FinancialConnections#permissions}
+           * for the field documentation.
+           */
+          public Builder addPermission(Permission element) {
+            if (this.permissions == null) {
+              this.permissions = new ArrayList<>();
+            }
+            this.permissions.add(element);
+            return this;
+          }
+
+          /**
+           * Add all elements to `permissions` list. A list is initialized for the first
+           * `add/addAll` call, and subsequent calls adds additional elements to the original list.
+           * See {@link
+           * SetupIntentCreateParams.PaymentMethodOptions.UsBankAccount.FinancialConnections#permissions}
+           * for the field documentation.
+           */
+          public Builder addAllPermission(List<Permission> elements) {
+            if (this.permissions == null) {
+              this.permissions = new ArrayList<>();
+            }
+            this.permissions.addAll(elements);
+            return this;
+          }
+
+          /**
+           * For webview integrations only. Upon completing OAuth login in the native browser, the
+           * user will be redirected to this URL to return to your app.
+           */
+          public Builder setReturnUrl(String returnUrl) {
+            this.returnUrl = returnUrl;
+            return this;
+          }
+        }
+
+        public enum Permission implements ApiRequestParams.EnumParam {
+          @SerializedName("balances")
+          BALANCES("balances"),
+
+          @SerializedName("ownership")
+          OWNERSHIP("ownership"),
+
+          @SerializedName("payment_method")
+          PAYMENT_METHOD("payment_method"),
+
+          @SerializedName("transactions")
+          TRANSACTIONS("transactions");
+
+          @Getter(onMethod_ = {@Override})
+          private final String value;
+
+          Permission(String value) {
+            this.value = value;
+          }
         }
       }
 

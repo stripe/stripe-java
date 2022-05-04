@@ -1152,6 +1152,10 @@ public class PaymentMethod extends ApiResource implements HasId, MetadataStore<P
     @SerializedName("bank_name")
     String bankName;
 
+    /** The ID of the Financial Connections Account used to create the payment method. */
+    @SerializedName("financial_connections_account")
+    String financialConnectionsAccount;
+
     /**
      * Uniquely identifies this particular bank account. You can use this attribute to check whether
      * two bank accounts are the same.

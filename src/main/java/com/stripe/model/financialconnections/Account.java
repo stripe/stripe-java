@@ -1,0 +1,481 @@
+// File generated from our OpenAPI spec
+package com.stripe.model.financialconnections;
+
+import com.google.gson.annotations.SerializedName;
+import com.stripe.Stripe;
+import com.stripe.exception.StripeException;
+import com.stripe.model.Account;
+import com.stripe.model.Customer;
+import com.stripe.model.ExpandableField;
+import com.stripe.model.HasId;
+import com.stripe.model.StripeObject;
+import com.stripe.net.ApiResource;
+import com.stripe.net.RequestOptions;
+import com.stripe.param.financialconnections.AccountDisconnectParams;
+import com.stripe.param.financialconnections.AccountRefreshParams;
+import com.stripe.param.financialconnections.AccountRetrieveParams;
+import java.util.List;
+import java.util.Map;
+import lombok.EqualsAndHashCode;
+import lombok.Getter;
+import lombok.Setter;
+
+@Getter
+@Setter
+@EqualsAndHashCode(callSuper = false)
+public class Account extends ApiResource implements HasId {
+  /** The account holder that this account belongs to. */
+  @SerializedName("account_holder")
+  AccountHolder accountHolder;
+
+  /** The most recent information about the account's balance. */
+  @SerializedName("balance")
+  Balance balance;
+
+  /** The state of the most recent attempt to refresh the account balance. */
+  @SerializedName("balance_refresh")
+  BalanceRefresh balanceRefresh;
+
+  /**
+   * The type of the account. Account category is further divided in {@code subcategory}.
+   *
+   * <p>One of {@code cash}, {@code credit}, {@code investment}, or {@code other}.
+   */
+  @SerializedName("category")
+  String category;
+
+  /** Time at which the object was created. Measured in seconds since the Unix epoch. */
+  @SerializedName("created")
+  Long created;
+
+  /**
+   * A human-readable name that has been assigned to this account, either by the account holder or
+   * by the institution.
+   */
+  @SerializedName("display_name")
+  String displayName;
+
+  /** Unique identifier for the object. */
+  @Getter(onMethod_ = {@Override})
+  @SerializedName("id")
+  String id;
+
+  /** The name of the institution that holds this account. */
+  @SerializedName("institution_name")
+  String institutionName;
+
+  /** The last 4 digits of the account number. If present, this will be 4 numeric characters. */
+  @SerializedName("last4")
+  String last4;
+
+  /**
+   * Has the value {@code true} if the object exists in live mode or the value {@code false} if the
+   * object exists in test mode.
+   */
+  @SerializedName("livemode")
+  Boolean livemode;
+
+  /**
+   * String representing the object's type. Objects of the same type share the same value.
+   *
+   * <p>Equal to {@code financial_connections.account}.
+   */
+  @SerializedName("object")
+  String object;
+
+  /** The most recent information about the account's owners. */
+  @SerializedName("ownership")
+  @Getter(lombok.AccessLevel.NONE)
+  @Setter(lombok.AccessLevel.NONE)
+  ExpandableField<Account.Ownership> ownership;
+
+  /** The state of the most recent attempt to refresh the account owners. */
+  @SerializedName("ownership_refresh")
+  OwnershipRefresh ownershipRefresh;
+
+  /** The list of permissions granted by this account. */
+  @SerializedName("permissions")
+  List<String> permissions;
+
+  /**
+   * The status of the link to the account.
+   *
+   * <p>One of {@code active}, {@code disconnected}, or {@code inactive}.
+   */
+  @SerializedName("status")
+  String status;
+
+  /**
+   * If {@code category} is {@code cash}, one of:
+   *
+   * <p>- {@code checking} - {@code savings} - {@code other}
+   *
+   * <p>If {@code category} is {@code credit}, one of:
+   *
+   * <p>- {@code mortgage} - {@code line_of_credit} - {@code credit_card} - {@code other}
+   *
+   * <p>If {@code category} is {@code investment} or {@code other}, this will be {@code other}.
+   */
+  @SerializedName("subcategory")
+  String subcategory;
+
+  /**
+   * The <a
+   * href="https://stripe.com/docs/api/payment_methods/object#payment_method_object-type">PaymentMethod
+   * type</a>(s) that can be created from this account.
+   */
+  @SerializedName("supported_payment_method_types")
+  List<String> supportedPaymentMethodTypes;
+
+  /** Get ID of expandable {@code ownership} object. */
+  public String getOwnership() {
+    return (this.ownership != null) ? this.ownership.getId() : null;
+  }
+
+  public void setOwnership(String id) {
+    this.ownership = ApiResource.setExpandableFieldId(id, this.ownership);
+  }
+
+  /** Get expanded {@code ownership}. */
+  public Account.Ownership getOwnershipObject() {
+    return (this.ownership != null) ? this.ownership.getExpanded() : null;
+  }
+
+  public void setOwnershipObject(Account.Ownership expandableObject) {
+    this.ownership =
+        new ExpandableField<Account.Ownership>(expandableObject.getId(), expandableObject);
+  }
+
+  /** Retrieves the details of an Financial Connections <code>Account</code>. */
+  public static com.stripe.model.financialconnections.Account retrieve(String account)
+      throws StripeException {
+    return retrieve(account, (Map<String, Object>) null, (RequestOptions) null);
+  }
+
+  /** Retrieves the details of an Financial Connections <code>Account</code>. */
+  public static com.stripe.model.financialconnections.Account retrieve(
+      String account, RequestOptions options) throws StripeException {
+    return retrieve(account, (Map<String, Object>) null, options);
+  }
+
+  /** Retrieves the details of an Financial Connections <code>Account</code>. */
+  public static com.stripe.model.financialconnections.Account retrieve(
+      String account, Map<String, Object> params, RequestOptions options) throws StripeException {
+    String url =
+        String.format(
+            "%s%s",
+            Stripe.getApiBase(),
+            String.format(
+                "/v1/financial_connections/accounts/%s", ApiResource.urlEncodeId(account)));
+    return ApiResource.request(
+        ApiResource.RequestMethod.GET,
+        url,
+        params,
+        com.stripe.model.financialconnections.Account.class,
+        options);
+  }
+
+  /** Retrieves the details of an Financial Connections <code>Account</code>. */
+  public static com.stripe.model.financialconnections.Account retrieve(
+      String account, AccountRetrieveParams params, RequestOptions options) throws StripeException {
+    String url =
+        String.format(
+            "%s%s",
+            Stripe.getApiBase(),
+            String.format(
+                "/v1/financial_connections/accounts/%s", ApiResource.urlEncodeId(account)));
+    return ApiResource.request(
+        ApiResource.RequestMethod.GET,
+        url,
+        params,
+        com.stripe.model.financialconnections.Account.class,
+        options);
+  }
+
+  /** Refreshes the data associated with a Financial Connections <code>Account</code>. */
+  public static com.stripe.model.financialconnections.Account refresh(
+      String account, Map<String, Object> params, RequestOptions options) throws StripeException {
+    String url =
+        String.format(
+            "%s%s",
+            Stripe.getApiBase(),
+            String.format(
+                "/v1/financial_connections/accounts/%s/refresh", ApiResource.urlEncodeId(account)));
+    return ApiResource.request(
+        ApiResource.RequestMethod.POST,
+        url,
+        params,
+        com.stripe.model.financialconnections.Account.class,
+        options);
+  }
+
+  /** Refreshes the data associated with a Financial Connections <code>Account</code>. */
+  public static com.stripe.model.financialconnections.Account refresh(
+      String account, AccountRefreshParams params, RequestOptions options) throws StripeException {
+    String url =
+        String.format(
+            "%s%s",
+            Stripe.getApiBase(),
+            String.format(
+                "/v1/financial_connections/accounts/%s/refresh", ApiResource.urlEncodeId(account)));
+    return ApiResource.request(
+        ApiResource.RequestMethod.POST,
+        url,
+        params,
+        com.stripe.model.financialconnections.Account.class,
+        options);
+  }
+
+  /**
+   * Disables your access to a Financial Connections <code>Account</code>. You will no longer be
+   * able to access data associated with the account (e.g. balances, transactions).
+   */
+  public static com.stripe.model.financialconnections.Account disconnect(
+      String account, Map<String, Object> params, RequestOptions options) throws StripeException {
+    String url =
+        String.format(
+            "%s%s",
+            Stripe.getApiBase(),
+            String.format(
+                "/v1/financial_connections/accounts/%s/disconnect",
+                ApiResource.urlEncodeId(account)));
+    return ApiResource.request(
+        ApiResource.RequestMethod.POST,
+        url,
+        params,
+        com.stripe.model.financialconnections.Account.class,
+        options);
+  }
+
+  /**
+   * Disables your access to a Financial Connections <code>Account</code>. You will no longer be
+   * able to access data associated with the account (e.g. balances, transactions).
+   */
+  public static com.stripe.model.financialconnections.Account disconnect(
+      String account, AccountDisconnectParams params, RequestOptions options)
+      throws StripeException {
+    String url =
+        String.format(
+            "%s%s",
+            Stripe.getApiBase(),
+            String.format(
+                "/v1/financial_connections/accounts/%s/disconnect",
+                ApiResource.urlEncodeId(account)));
+    return ApiResource.request(
+        ApiResource.RequestMethod.POST,
+        url,
+        params,
+        com.stripe.model.financialconnections.Account.class,
+        options);
+  }
+
+  @Getter
+  @Setter
+  @EqualsAndHashCode(callSuper = false)
+  public static class AccountHolder extends StripeObject {
+    /**
+     * The ID of the Stripe account this account belongs to. Should only be present if {@code
+     * account_holder.type} is {@code account}.
+     */
+    @SerializedName("account")
+    @Getter(lombok.AccessLevel.NONE)
+    @Setter(lombok.AccessLevel.NONE)
+    ExpandableField<com.stripe.model.Account> account;
+
+    /**
+     * ID of the Stripe customer this account belongs to. Present if and only if {@code
+     * account_holder.type} is {@code customer}.
+     */
+    @SerializedName("customer")
+    @Getter(lombok.AccessLevel.NONE)
+    @Setter(lombok.AccessLevel.NONE)
+    ExpandableField<Customer> customer;
+
+    /**
+     * Type of account holder that this account belongs to.
+     *
+     * <p>One of {@code account}, or {@code customer}.
+     */
+    @SerializedName("type")
+    String type;
+
+    /** Get ID of expandable {@code account} object. */
+    public String getAccount() {
+      return (this.account != null) ? this.account.getId() : null;
+    }
+
+    public void setAccount(String id) {
+      this.account = ApiResource.setExpandableFieldId(id, this.account);
+    }
+
+    /** Get expanded {@code account}. */
+    public com.stripe.model.Account getAccountObject() {
+      return (this.account != null) ? this.account.getExpanded() : null;
+    }
+
+    public void setAccountObject(com.stripe.model.Account expandableObject) {
+      this.account =
+          new ExpandableField<com.stripe.model.Account>(expandableObject.getId(), expandableObject);
+    }
+
+    /** Get ID of expandable {@code customer} object. */
+    public String getCustomer() {
+      return (this.customer != null) ? this.customer.getId() : null;
+    }
+
+    public void setCustomer(String id) {
+      this.customer = ApiResource.setExpandableFieldId(id, this.customer);
+    }
+
+    /** Get expanded {@code customer}. */
+    public Customer getCustomerObject() {
+      return (this.customer != null) ? this.customer.getExpanded() : null;
+    }
+
+    public void setCustomerObject(Customer expandableObject) {
+      this.customer = new ExpandableField<Customer>(expandableObject.getId(), expandableObject);
+    }
+  }
+
+  @Getter
+  @Setter
+  @EqualsAndHashCode(callSuper = false)
+  public static class Balance extends StripeObject {
+    /**
+     * The time that the external institution calculated this balance. Measured in seconds since the
+     * Unix epoch.
+     */
+    @SerializedName("as_of")
+    Long asOf;
+
+    @SerializedName("cash")
+    CashBalance cash;
+
+    @SerializedName("credit")
+    CreditBalance credit;
+
+    /**
+     * The balances owed to (or by) the account holder.
+     *
+     * <p>Each key is a three-letter <a href="https://www.iso.org/iso-4217-currency-codes.html">ISO
+     * currency code</a>, in lowercase.
+     *
+     * <p>Each value is a integer amount. A positive amount indicates money owed to the account
+     * holder. A negative amount indicates money owed by the account holder.
+     */
+    @SerializedName("current")
+    Map<String, Long> current;
+
+    /**
+     * The {@code type} of the balance. An additional hash is included on the balance with a name
+     * matching this value.
+     *
+     * <p>One of {@code cash}, or {@code credit}.
+     */
+    @SerializedName("type")
+    String type;
+
+    @Getter
+    @Setter
+    @EqualsAndHashCode(callSuper = false)
+    public static class CashBalance extends StripeObject {
+      /**
+       * The funds available to the account holder. Typically this is the current balance less any
+       * holds.
+       *
+       * <p>Each key is a three-letter <a
+       * href="https://www.iso.org/iso-4217-currency-codes.html">ISO currency code</a>, in
+       * lowercase.
+       *
+       * <p>Each value is a integer amount. A positive amount indicates money owed to the account
+       * holder. A negative amount indicates money owed by the account holder.
+       */
+      @SerializedName("available")
+      Map<String, Long> available;
+    }
+
+    @Getter
+    @Setter
+    @EqualsAndHashCode(callSuper = false)
+    public static class CreditBalance extends StripeObject {
+      /**
+       * The credit that has been used by the account holder.
+       *
+       * <p>Each key is a three-letter <a
+       * href="https://www.iso.org/iso-4217-currency-codes.html">ISO currency code</a>, in
+       * lowercase.
+       *
+       * <p>Each value is a integer amount. A positive amount indicates money owed to the account
+       * holder. A negative amount indicates money owed by the account holder.
+       */
+      @SerializedName("used")
+      Map<String, Long> used;
+    }
+  }
+
+  @Getter
+  @Setter
+  @EqualsAndHashCode(callSuper = false)
+  public static class BalanceRefresh extends StripeObject {
+    /**
+     * The time at which the last refresh attempt was initiated. Measured in seconds since the Unix
+     * epoch.
+     */
+    @SerializedName("last_attempted_at")
+    Long lastAttemptedAt;
+
+    /**
+     * The status of the last refresh attempt.
+     *
+     * <p>One of {@code failed}, {@code pending}, or {@code succeeded}.
+     */
+    @SerializedName("status")
+    String status;
+  }
+
+  @Getter
+  @Setter
+  @EqualsAndHashCode(callSuper = false)
+  public static class Ownership extends StripeObject implements HasId {
+    /** Time at which the object was created. Measured in seconds since the Unix epoch. */
+    @SerializedName("created")
+    Long created;
+
+    /** Unique identifier for the object. */
+    @Getter(onMethod_ = {@Override})
+    @SerializedName("id")
+    String id;
+
+    /**
+     * String representing the object's type. Objects of the same type share the same value.
+     *
+     * <p>Equal to {@code financial_connections.account_ownership}.
+     */
+    @SerializedName("object")
+    String object;
+
+    /** A paginated list of owners for this account. */
+    @SerializedName("owners")
+    AccountOwnerCollection owners;
+  }
+
+  @Getter
+  @Setter
+  @EqualsAndHashCode(callSuper = false)
+  public static class OwnershipRefresh extends StripeObject {
+    /**
+     * The time at which the last refresh attempt was initiated. Measured in seconds since the Unix
+     * epoch.
+     */
+    @SerializedName("last_attempted_at")
+    Long lastAttemptedAt;
+
+    /**
+     * The status of the last refresh attempt.
+     *
+     * <p>One of {@code failed}, {@code pending}, or {@code succeeded}.
+     */
+    @SerializedName("status")
+    String status;
+  }
+}
