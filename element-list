@@ -4,6 +4,7 @@ com.stripe.exception.oauth
 com.stripe.model
 com.stripe.model.billingportal
 com.stripe.model.checkout
+com.stripe.model.financialconnections
 com.stripe.model.identity
 com.stripe.model.issuing
 com.stripe.model.oauth
@@ -17,6 +18,7 @@ com.stripe.param
 com.stripe.param.billingportal
 com.stripe.param.checkout
 com.stripe.param.common
+com.stripe.param.financialconnections
 com.stripe.param.identity
 com.stripe.param.issuing
 com.stripe.param.radar
