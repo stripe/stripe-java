@@ -3021,6 +3021,10 @@ public class PaymentMethodCreateParams extends ApiRequestParams {
     @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
     Map<String, Object> extraParams;
 
+    /** The ID of a Financial Connections Account to use as a payment method. */
+    @SerializedName("financial_connections_account")
+    String financialConnectionsAccount;
+
     /** Routing number of the bank account. */
     @SerializedName("routing_number")
     String routingNumber;
@@ -3030,11 +3034,13 @@ public class PaymentMethodCreateParams extends ApiRequestParams {
         String accountNumber,
         AccountType accountType,
         Map<String, Object> extraParams,
+        String financialConnectionsAccount,
         String routingNumber) {
       this.accountHolderType = accountHolderType;
       this.accountNumber = accountNumber;
       this.accountType = accountType;
       this.extraParams = extraParams;
+      this.financialConnectionsAccount = financialConnectionsAccount;
       this.routingNumber = routingNumber;
     }
 
@@ -3051,6 +3057,8 @@ public class PaymentMethodCreateParams extends ApiRequestParams {
 
       private Map<String, Object> extraParams;
 
+      private String financialConnectionsAccount;
+
       private String routingNumber;
 
       /** Finalize and obtain parameter instance from this builder. */
@@ -3060,6 +3068,7 @@ public class PaymentMethodCreateParams extends ApiRequestParams {
             this.accountNumber,
             this.accountType,
             this.extraParams,
+            this.financialConnectionsAccount,
             this.routingNumber);
       }
 
@@ -3105,6 +3114,12 @@ public class PaymentMethodCreateParams extends ApiRequestParams {
           this.extraParams = new HashMap<>();
         }
         this.extraParams.putAll(map);
+        return this;
+      }
+
+      /** The ID of a Financial Connections Account to use as a payment method. */
+      public Builder setFinancialConnectionsAccount(String financialConnectionsAccount) {
+        this.financialConnectionsAccount = financialConnectionsAccount;
         return this;
       }
 
