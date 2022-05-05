@@ -76,6 +76,10 @@ public class Refund extends ApiResource implements MetadataStore<Refund>, Balanc
   @SerializedName("id")
   String id;
 
+  /** Email to which refund instructions, if required, are sent to. */
+  @SerializedName("instructions_email")
+  String instructionsEmail;
+
   /**
    * Set of <a href="https://stripe.com/docs/api/metadata">key-value pairs</a> that you can attach
    * to an object. This can be useful for storing additional information about the object in a
