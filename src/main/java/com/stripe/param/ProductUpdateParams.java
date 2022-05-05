@@ -41,6 +41,13 @@ public class ProductUpdateParams extends ApiRequestParams {
   List<String> deactivateOn;
 
   /**
+   * The ID of the <a href="https://stripe.com/docs/api/prices">Price</a> object that is the default
+   * price for this product.
+   */
+  @SerializedName("default_price")
+  Object defaultPrice;
+
+  /**
    * The product's description, meant to be displayable to the customer. Use this field to
    * optionally store a long form explanation of the product being sold for your own rendering
    * purposes.
@@ -120,6 +127,7 @@ public class ProductUpdateParams extends ApiRequestParams {
       Object attributes,
       Object caption,
       List<String> deactivateOn,
+      Object defaultPrice,
       Object description,
       List<String> expand,
       Map<String, Object> extraParams,
@@ -136,6 +144,7 @@ public class ProductUpdateParams extends ApiRequestParams {
     this.attributes = attributes;
     this.caption = caption;
     this.deactivateOn = deactivateOn;
+    this.defaultPrice = defaultPrice;
     this.description = description;
     this.expand = expand;
     this.extraParams = extraParams;
@@ -162,6 +171,8 @@ public class ProductUpdateParams extends ApiRequestParams {
     private Object caption;
 
     private List<String> deactivateOn;
+
+    private Object defaultPrice;
 
     private Object description;
 
@@ -194,6 +205,7 @@ public class ProductUpdateParams extends ApiRequestParams {
           this.attributes,
           this.caption,
           this.deactivateOn,
+          this.defaultPrice,
           this.description,
           this.expand,
           this.extraParams,
@@ -305,6 +317,24 @@ public class ProductUpdateParams extends ApiRequestParams {
         this.deactivateOn = new ArrayList<>();
       }
       this.deactivateOn.addAll(elements);
+      return this;
+    }
+
+    /**
+     * The ID of the <a href="https://stripe.com/docs/api/prices">Price</a> object that is the
+     * default price for this product.
+     */
+    public Builder setDefaultPrice(String defaultPrice) {
+      this.defaultPrice = defaultPrice;
+      return this;
+    }
+
+    /**
+     * The ID of the <a href="https://stripe.com/docs/api/prices">Price</a> object that is the
+     * default price for this product.
+     */
+    public Builder setDefaultPrice(EmptyParam defaultPrice) {
+      this.defaultPrice = defaultPrice;
       return this;
     }
 

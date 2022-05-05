@@ -31,6 +31,9 @@ public class RefundCreateParams extends ApiRequestParams {
   @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
   Map<String, Object> extraParams;
 
+  @SerializedName("instructions_email")
+  String instructionsEmail;
+
   /**
    * Set of <a href="https://stripe.com/docs/api/metadata">key-value pairs</a> that you can attach
    * to an object. This can be useful for storing additional information about the object in a
@@ -57,6 +60,7 @@ public class RefundCreateParams extends ApiRequestParams {
       String charge,
       List<String> expand,
       Map<String, Object> extraParams,
+      String instructionsEmail,
       Object metadata,
       String paymentIntent,
       Reason reason,
@@ -66,6 +70,7 @@ public class RefundCreateParams extends ApiRequestParams {
     this.charge = charge;
     this.expand = expand;
     this.extraParams = extraParams;
+    this.instructionsEmail = instructionsEmail;
     this.metadata = metadata;
     this.paymentIntent = paymentIntent;
     this.reason = reason;
@@ -86,6 +91,8 @@ public class RefundCreateParams extends ApiRequestParams {
 
     private Map<String, Object> extraParams;
 
+    private String instructionsEmail;
+
     private Object metadata;
 
     private String paymentIntent;
@@ -103,6 +110,7 @@ public class RefundCreateParams extends ApiRequestParams {
           this.charge,
           this.expand,
           this.extraParams,
+          this.instructionsEmail,
           this.metadata,
           this.paymentIntent,
           this.reason,
@@ -169,6 +177,11 @@ public class RefundCreateParams extends ApiRequestParams {
         this.extraParams = new HashMap<>();
       }
       this.extraParams.putAll(map);
+      return this;
+    }
+
+    public Builder setInstructionsEmail(String instructionsEmail) {
+      this.instructionsEmail = instructionsEmail;
       return this;
     }
 

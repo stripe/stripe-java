@@ -50,6 +50,15 @@ public class Product extends ApiResource implements HasId, MetadataStore<Product
   @SerializedName("deactivate_on")
   List<String> deactivateOn;
 
+  /**
+   * The ID of the <a href="https://stripe.com/docs/api/prices">Price</a> object that is the default
+   * price for this product.
+   */
+  @SerializedName("default_price")
+  @Getter(lombok.AccessLevel.NONE)
+  @Setter(lombok.AccessLevel.NONE)
+  ExpandableField<Price> defaultPrice;
+
   /** Always true for a deleted object. */
   @SerializedName("deleted")
   Boolean deleted;
@@ -145,6 +154,24 @@ public class Product extends ApiResource implements HasId, MetadataStore<Product
   /** A URL of a publicly-accessible webpage for this product. */
   @SerializedName("url")
   String url;
+
+  /** Get ID of expandable {@code defaultPrice} object. */
+  public String getDefaultPrice() {
+    return (this.defaultPrice != null) ? this.defaultPrice.getId() : null;
+  }
+
+  public void setDefaultPrice(String id) {
+    this.defaultPrice = ApiResource.setExpandableFieldId(id, this.defaultPrice);
+  }
+
+  /** Get expanded {@code defaultPrice}. */
+  public Price getDefaultPriceObject() {
+    return (this.defaultPrice != null) ? this.defaultPrice.getExpanded() : null;
+  }
+
+  public void setDefaultPriceObject(Price expandableObject) {
+    this.defaultPrice = new ExpandableField<Price>(expandableObject.getId(), expandableObject);
+  }
 
   /** Get ID of expandable {@code taxCode} object. */
   public String getTaxCode() {
