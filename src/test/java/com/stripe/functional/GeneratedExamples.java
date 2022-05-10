@@ -3092,7 +3092,7 @@ class GeneratedExamples extends BaseStripeTest {
             .addFeature(com.stripe.param.financialconnections.AccountRefreshParams.Feature.BALANCE)
             .build();
 
-    com.stripe.model.financialconnections.Account account = resource.refresh(params);
+    com.stripe.model.financialconnections.Account account = resource.refreshAccount(params);
     assertNotNull(account);
     verifyRequest(
         ApiResource.RequestMethod.POST,
