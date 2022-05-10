@@ -3085,15 +3085,15 @@ class GeneratedExamples extends BaseStripeTest {
 
   @Test
   public void testAccountRefresh() throws StripeException {
-    com.stripe.model.financialconnections.Account.retrieve("fca_xyz");
     com.stripe.param.financialconnections.AccountRefreshParams params =
         com.stripe.param.financialconnections.AccountRefreshParams.builder()
             .addFeature(com.stripe.param.financialconnections.AccountRefreshParams.Feature.BALANCE)
             .build();
 
+    com.stripe.net.RequestOptions opts = com.stripe.net.RequestOptions.builder().build();
     com.stripe.model.financialconnections.Account account =
         com.stripe.model.financialconnections.Account.refresh(
-            "acct_xyz", params, com.stripe.net.RequestOptions.builder().build());
+            "fca_xyz", params, opts);
     assertNotNull(account);
     verifyRequest(
         ApiResource.RequestMethod.POST,
@@ -3103,13 +3103,13 @@ class GeneratedExamples extends BaseStripeTest {
 
   @Test
   public void testAccountDisconnect() throws StripeException {
-    com.stripe.model.financialconnections.Account.retrieve("fca_xyz");
     com.stripe.param.financialconnections.AccountDisconnectParams params =
         com.stripe.param.financialconnections.AccountDisconnectParams.builder().build();
 
+    com.stripe.net.RequestOptions opts = com.stripe.net.RequestOptions.builder().build();
     com.stripe.model.financialconnections.Account account =
         com.stripe.model.financialconnections.Account.disconnect(
-            "acct_xyz", params, com.stripe.net.RequestOptions.builder().build());
+            "fca_xyz", params, opts);
     assertNotNull(account);
     verifyRequest(
         ApiResource.RequestMethod.POST,
