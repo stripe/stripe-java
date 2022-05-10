@@ -3092,8 +3092,7 @@ class GeneratedExamples extends BaseStripeTest {
 
     com.stripe.net.RequestOptions opts = com.stripe.net.RequestOptions.builder().build();
     com.stripe.model.financialconnections.Account account =
-        com.stripe.model.financialconnections.Account.refresh(
-            "fca_xyz", params, opts);
+        com.stripe.model.financialconnections.Account.refresh("fca_xyz", params, opts);
     assertNotNull(account);
     verifyRequest(
         ApiResource.RequestMethod.POST,
@@ -3108,8 +3107,7 @@ class GeneratedExamples extends BaseStripeTest {
 
     com.stripe.net.RequestOptions opts = com.stripe.net.RequestOptions.builder().build();
     com.stripe.model.financialconnections.Account account =
-        com.stripe.model.financialconnections.Account.disconnect(
-            "fca_xyz", params, opts);
+        com.stripe.model.financialconnections.Account.disconnect("fca_xyz", params, opts);
     assertNotNull(account);
     verifyRequest(
         ApiResource.RequestMethod.POST,
