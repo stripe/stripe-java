@@ -152,6 +152,13 @@ public class Subscription extends ApiResource implements HasId, MetadataStore<Su
   List<TaxRate> defaultTaxRates;
 
   /**
+   * The subscription's description, meant to be displayable to the customer. Use this field to
+   * optionally store an explanation of the subscription for rendering in Stripe surfaces.
+   */
+  @SerializedName("description")
+  String description;
+
+  /**
    * Describes the current discount applied to this subscription, if there is one. When billing, a
    * discount applied to a subscription overrides a discount applied on a customer-wide basis.
    */

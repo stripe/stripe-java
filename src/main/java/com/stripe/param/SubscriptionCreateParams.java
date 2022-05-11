@@ -132,6 +132,13 @@ public class SubscriptionCreateParams extends ApiRequestParams {
   @SerializedName("default_tax_rates")
   Object defaultTaxRates;
 
+  /**
+   * The subscription's description, meant to be displayable to the customer. Use this field to
+   * optionally store an explanation of the subscription for rendering in Stripe surfaces.
+   */
+  @SerializedName("description")
+  String description;
+
   /** Specifies which fields in the response should be expanded. */
   @SerializedName("expand")
   List<String> expand;
@@ -279,6 +286,7 @@ public class SubscriptionCreateParams extends ApiRequestParams {
       String defaultPaymentMethod,
       String defaultSource,
       Object defaultTaxRates,
+      String description,
       List<String> expand,
       Map<String, Object> extraParams,
       List<Item> items,
@@ -308,6 +316,7 @@ public class SubscriptionCreateParams extends ApiRequestParams {
     this.defaultPaymentMethod = defaultPaymentMethod;
     this.defaultSource = defaultSource;
     this.defaultTaxRates = defaultTaxRates;
+    this.description = description;
     this.expand = expand;
     this.extraParams = extraParams;
     this.items = items;
@@ -359,6 +368,8 @@ public class SubscriptionCreateParams extends ApiRequestParams {
 
     private Object defaultTaxRates;
 
+    private String description;
+
     private List<String> expand;
 
     private Map<String, Object> extraParams;
@@ -405,6 +416,7 @@ public class SubscriptionCreateParams extends ApiRequestParams {
           this.defaultPaymentMethod,
           this.defaultSource,
           this.defaultTaxRates,
+          this.description,
           this.expand,
           this.extraParams,
           this.items,
@@ -631,6 +643,15 @@ public class SubscriptionCreateParams extends ApiRequestParams {
      */
     public Builder setDefaultTaxRates(List<String> defaultTaxRates) {
       this.defaultTaxRates = defaultTaxRates;
+      return this;
+    }
+
+    /**
+     * The subscription's description, meant to be displayable to the customer. Use this field to
+     * optionally store an explanation of the subscription for rendering in Stripe surfaces.
+     */
+    public Builder setDescription(String description) {
+      this.description = description;
       return this;
     }
 

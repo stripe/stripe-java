@@ -771,6 +771,15 @@ public class SubscriptionSchedule extends ApiResource
     List<SubscriptionSchedule.PhaseItem> items;
 
     /**
+     * Set of <a href="https://stripe.com/docs/api/metadata">key-value pairs</a> that you can attach
+     * to a phase. Metadata on a schedule's phase will update the underlying subscription's {@code
+     * metadata} when the phase is entered. Updating the underlying subscription's {@code metadata}
+     * directly will not affect the current phase's {@code metadata}.
+     */
+    @SerializedName("metadata")
+    Map<String, String> metadata;
+
+    /**
      * If the subscription schedule will prorate when transitioning to this phase. Possible values
      * are {@code create_prorations} and {@code none}.
      *
