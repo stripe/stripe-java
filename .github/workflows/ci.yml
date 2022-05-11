@@ -99,6 +99,7 @@ jobs:
     needs: [build, test]
     runs-on: ubuntu-latest
     steps:
+      - uses: actions/checkout@master
       - name: Setup Java
         id: setup-jre
         uses: actions/setup-java@v1
@@ -106,13 +107,13 @@ jobs:
           java-version: "18" # always use 18 for building
           architecture: x64
 
-      - name: Configure GPG Key
-        run: |
-          set -ex
-          echo $GPG_SIGNING_PRIVKEY | base64 --decode | gpg --import --batch --yes --pinentry-mode loopback --passphrase "$GPG_SIGNING_PASSPHRASE"
-        env:
-          GPG_SIGNING_PRIVKEY: ${{ secrets.GPG_SIGNING_PRIVKEY }}
-          GPG_SIGNING_PASSPHRASE: ${{ secrets.GPG_SIGNING_PASSPHRASE }}
+      # - name: Configure GPG Key
+      #   run: |
+      #     set -ex
+      #     echo $GPG_SIGNING_PRIVKEY | base64 --decode | gpg --import --batch --yes --pinentry-mode loopback --passphrase "$GPG_SIGNING_PASSPHRASE"
+      #   env:
+      #     GPG_SIGNING_PRIVKEY: ${{ secrets.GPG_SIGNING_PRIVKEY }}
+      #     GPG_SIGNING_PASSPHRASE: ${{ secrets.GPG_SIGNING_PASSPHRASE }}
 
       - name: Publish package
         run: |
@@ -128,6 +129,7 @@ jobs:
     needs: [build, test]
     runs-on: ubuntu-latest
     steps:
+      - uses: actions/checkout@master
       - name: Setup Java
         id: setup-jre
         uses: actions/setup-java@v1
