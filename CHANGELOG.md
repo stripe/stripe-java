@@ -1,5 +1,16 @@
 # Changelog
 
+## 20.120.0 - 2022-05-11
+* [#1351](https://github.com/stripe/stripe-java/pull/1351) API Updates
+  * Add support for `description` on `CheckoutSessionCreateParams.subscription_data`, `SubscriptionCreateParams`, `SubscriptionUpdateParams`, and `Subscription`
+  * Add support for `consent_collection`, `payment_intent_data`, `shipping_options`, `submit_type`, and `tax_id_collection` on `PaymentLinkCreateParams` and `PaymentLink`
+  * Add support for `customer_creation` on `PaymentLinkCreateParams`, `PaymentLinkUpdateParams`, and `PaymentLink`
+  * Add support for `metadata` on `SubscriptionSchedule.phases[]`, `SubscriptionScheduleCreateParams.phases[]`, and `SubscriptionScheduleUpdateParams.phases[]`
+  * Add support for new value `billing_portal.session.created` on enums `WebhookEndpointCreateParams.enabled_events[]` and `WebhookEndpointUpdateParams.enabled_events[]`
+* [#1350](https://github.com/stripe/stripe-java/pull/1350) API Updates
+  * Add support for `amount_discount`, `amount_tax`, and `product` on `LineItem`
+  
+
 ## 20.119.0 - 2022-05-05
 * [#1349](https://github.com/stripe/stripe-java/pull/1349) API Updates
   * Add support for `default_price_data` on `ProductCreateParams`
