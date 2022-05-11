@@ -128,14 +128,15 @@ jobs:
     needs: [build, test]
     runs-on: ubuntu-latest
     steps:
-    - name: Download all workflow run artifacts
-      uses: actions/download-artifact@v2
-      with:
-        name: libs
-        path: libs
+      - name: Setup Java
+        id: setup-jre
+        uses: actions/setup-java@v1
+        with:
+          java-version: "18" # always use 18 for building
+          architecture: x64
 
-    - name: Download all workflow run artifacts
-      uses: actions/download-artifact@v2
-      with:
-        name: maven
-        path: maven
+      - name: Publish Javadoc
+        run: |
+          ./gradlew gitPublishPush
+#        env:
+#          #GRGIT_USER: ${{ secrets.GITHUB_TOKEN }}
