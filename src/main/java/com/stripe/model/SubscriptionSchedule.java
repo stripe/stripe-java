@@ -25,6 +25,12 @@ import lombok.Setter;
 @EqualsAndHashCode(callSuper = false)
 public class SubscriptionSchedule extends ApiResource
     implements HasId, MetadataStore<SubscriptionSchedule> {
+  /** ID of the Connect Application that created the schedule. */
+  @SerializedName("application")
+  @Getter(lombok.AccessLevel.NONE)
+  @Setter(lombok.AccessLevel.NONE)
+  ExpandableField<Application> application;
+
   /**
    * Time at which the subscription schedule was canceled. Measured in seconds since the Unix epoch.
    */
@@ -133,6 +139,24 @@ public class SubscriptionSchedule extends ApiResource
   @Getter(lombok.AccessLevel.NONE)
   @Setter(lombok.AccessLevel.NONE)
   ExpandableField<TestClock> testClock;
+
+  /** Get ID of expandable {@code application} object. */
+  public String getApplication() {
+    return (this.application != null) ? this.application.getId() : null;
+  }
+
+  public void setApplication(String id) {
+    this.application = ApiResource.setExpandableFieldId(id, this.application);
+  }
+
+  /** Get expanded {@code application}. */
+  public Application getApplicationObject() {
+    return (this.application != null) ? this.application.getExpanded() : null;
+  }
+
+  public void setApplicationObject(Application expandableObject) {
+    this.application = new ExpandableField<Application>(expandableObject.getId(), expandableObject);
+  }
 
   /** Get ID of expandable {@code customer} object. */
   public String getCustomer() {
@@ -745,6 +769,15 @@ public class SubscriptionSchedule extends ApiResource
      */
     @SerializedName("items")
     List<SubscriptionSchedule.PhaseItem> items;
+
+    /**
+     * Set of <a href="https://stripe.com/docs/api/metadata">key-value pairs</a> that you can attach
+     * to a phase. Metadata on a schedule's phase will update the underlying subscription's {@code
+     * metadata} when the phase is entered. Updating the underlying subscription's {@code metadata}
+     * directly will not affect the current phase's {@code metadata}.
+     */
+    @SerializedName("metadata")
+    Map<String, String> metadata;
 
     /**
      * If the subscription schedule will prorate when transitioning to this phase. Possible values

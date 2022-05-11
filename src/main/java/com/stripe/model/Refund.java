@@ -8,6 +8,7 @@ import com.stripe.net.ApiResource;
 import com.stripe.net.RequestOptions;
 import com.stripe.param.RefundCancelParams;
 import com.stripe.param.RefundCreateParams;
+import com.stripe.param.RefundExpireParams;
 import com.stripe.param.RefundListParams;
 import com.stripe.param.RefundRetrieveParams;
 import com.stripe.param.RefundUpdateParams;
@@ -75,6 +76,10 @@ public class Refund extends ApiResource implements MetadataStore<Refund>, Balanc
   @SerializedName("id")
   String id;
 
+  /** Email to which refund instructions, if required, are sent to. */
+  @SerializedName("instructions_email")
+  String instructionsEmail;
+
   /**
    * Set of <a href="https://stripe.com/docs/api/metadata">key-value pairs</a> that you can attach
    * to an object. This can be useful for storing additional information about the object in a
@@ -126,8 +131,8 @@ public class Refund extends ApiResource implements MetadataStore<Refund>, Balanc
 
   /**
    * Status of the refund. For credit card refunds, this can be {@code pending}, {@code succeeded},
-   * or {@code failed}. For other types of refunds, it can be {@code pending}, {@code succeeded},
-   * {@code failed}, or {@code canceled}. Refer to our <a
+   * or {@code failed}. For other types of refunds, it can be {@code pending}, {@code
+   * requires_action}, {@code succeeded}, {@code failed}, or {@code canceled}. Refer to our <a
    * href="https://stripe.com/docs/refunds#failed-refunds">refunds</a> documentation for more
    * details.
    */
@@ -510,6 +515,59 @@ public class Refund extends ApiResource implements MetadataStore<Refund>, Balanc
       /** The recipient's email address. */
       @SerializedName("email_sent_to")
       String emailSentTo;
+    }
+  }
+
+  public TestHelpers getTestHelpers() {
+    return new TestHelpers();
+  }
+
+  public class TestHelpers {
+    /** Expire a refund with a status of <code>requires_action</code>. */
+    public Refund expire() throws StripeException {
+      return expire((Map<String, Object>) null, (RequestOptions) null);
+    }
+
+    /** Expire a refund with a status of <code>requires_action</code>. */
+    public Refund expire(RequestOptions options) throws StripeException {
+      return expire((Map<String, Object>) null, options);
+    }
+
+    /** Expire a refund with a status of <code>requires_action</code>. */
+    public Refund expire(Map<String, Object> params) throws StripeException {
+      return expire(params, (RequestOptions) null);
+    }
+
+    /** Expire a refund with a status of <code>requires_action</code>. */
+    public Refund expire(Map<String, Object> params, RequestOptions options)
+        throws StripeException {
+      String url =
+          String.format(
+              "%s%s",
+              Stripe.getApiBase(),
+              String.format(
+                  "/v1/test_helpers/refunds/%s/expire",
+                  ApiResource.urlEncodeId(Refund.this.getId())));
+      return ApiResource.request(
+          ApiResource.RequestMethod.POST, url, params, Refund.class, options);
+    }
+
+    /** Expire a refund with a status of <code>requires_action</code>. */
+    public Refund expire(RefundExpireParams params) throws StripeException {
+      return expire(params, (RequestOptions) null);
+    }
+
+    /** Expire a refund with a status of <code>requires_action</code>. */
+    public Refund expire(RefundExpireParams params, RequestOptions options) throws StripeException {
+      String url =
+          String.format(
+              "%s%s",
+              Stripe.getApiBase(),
+              String.format(
+                  "/v1/test_helpers/refunds/%s/expire",
+                  ApiResource.urlEncodeId(Refund.this.getId())));
+      return ApiResource.request(
+          ApiResource.RequestMethod.POST, url, params, Refund.class, options);
     }
   }
 }

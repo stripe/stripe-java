@@ -83,9 +83,10 @@ public class SessionCreateParams extends ApiRequestParams {
    * data entered in Checkout with <a
    * href="https://stripe.com/docs/api/checkout/sessions/object#checkout_session_object-customer_details">customer_details</a>.
    *
-   * <p>Sessions that do not create Customers will instead create <a
+   * <p>Sessions that don't create Customers instead create <a
    * href="https://support.stripe.com/questions/guest-customer-faq">Guest Customers</a> in the
-   * Dashboard.
+   * Dashboard. Promotion codes limited to first time customers will return invalid for these
+   * Sessions.
    *
    * <p>Can only be set in {@code payment} and {@code setup} mode.
    */
@@ -511,9 +512,10 @@ public class SessionCreateParams extends ApiRequestParams {
      * data entered in Checkout with <a
      * href="https://stripe.com/docs/api/checkout/sessions/object#checkout_session_object-customer_details">customer_details</a>.
      *
-     * <p>Sessions that do not create Customers will instead create <a
+     * <p>Sessions that don't create Customers instead create <a
      * href="https://support.stripe.com/questions/guest-customer-faq">Guest Customers</a> in the
-     * Dashboard.
+     * Dashboard. Promotion codes limited to first time customers will return invalid for these
+     * Sessions.
      *
      * <p>Can only be set in {@code payment} and {@code setup} mode.
      */
@@ -2131,7 +2133,7 @@ public class SessionCreateParams extends ApiRequestParams {
         @SerializedName("name")
         String name;
 
-        /** A <a href="https://stripe.com/docs/tax/tax-codes">tax code</a> ID. */
+        /** A <a href="https://stripe.com/docs/tax/tax-categories">tax code</a> ID. */
         @SerializedName("tax_code")
         String taxCode;
 
@@ -2276,7 +2278,7 @@ public class SessionCreateParams extends ApiRequestParams {
             return this;
           }
 
-          /** A <a href="https://stripe.com/docs/tax/tax-codes">tax code</a> ID. */
+          /** A <a href="https://stripe.com/docs/tax/tax-categories">tax code</a> ID. */
           public Builder setTaxCode(String taxCode) {
             this.taxCode = taxCode;
             return this;
@@ -3214,6 +3216,10 @@ public class SessionCreateParams extends ApiRequestParams {
     @SerializedName("acss_debit")
     AcssDebit acssDebit;
 
+    /** contains details about the Alipay payment method options. */
+    @SerializedName("alipay")
+    Alipay alipay;
+
     /** contains details about the Boleto payment method options. */
     @SerializedName("boleto")
     Boleto boleto;
@@ -3245,6 +3251,7 @@ public class SessionCreateParams extends ApiRequestParams {
 
     private PaymentMethodOptions(
         AcssDebit acssDebit,
+        Alipay alipay,
         Boleto boleto,
         Map<String, Object> extraParams,
         Konbini konbini,
@@ -3252,6 +3259,7 @@ public class SessionCreateParams extends ApiRequestParams {
         UsBankAccount usBankAccount,
         WechatPay wechatPay) {
       this.acssDebit = acssDebit;
+      this.alipay = alipay;
       this.boleto = boleto;
       this.extraParams = extraParams;
       this.konbini = konbini;
@@ -3266,6 +3274,8 @@ public class SessionCreateParams extends ApiRequestParams {
 
     public static class Builder {
       private AcssDebit acssDebit;
+
+      private Alipay alipay;
 
       private Boleto boleto;
 
@@ -3283,6 +3293,7 @@ public class SessionCreateParams extends ApiRequestParams {
       public PaymentMethodOptions build() {
         return new PaymentMethodOptions(
             this.acssDebit,
+            this.alipay,
             this.boleto,
             this.extraParams,
             this.konbini,
@@ -3294,6 +3305,12 @@ public class SessionCreateParams extends ApiRequestParams {
       /** contains details about the ACSS Debit payment method options. */
       public Builder setAcssDebit(AcssDebit acssDebit) {
         this.acssDebit = acssDebit;
+        return this;
+      }
+
+      /** contains details about the Alipay payment method options. */
+      public Builder setAlipay(Alipay alipay) {
+        this.alipay = alipay;
         return this;
       }
 
@@ -3735,6 +3752,63 @@ public class SessionCreateParams extends ApiRequestParams {
     }
 
     @Getter
+    public static class Alipay {
+      /**
+       * Map of extra parameters for custom features not available in this client library. The
+       * content in this map is not serialized under this field's {@code @SerializedName} value.
+       * Instead, each key/value pair is serialized as if the key is a root-level field (serialized)
+       * name in this param object. Effectively, this map is flattened to its parent instance.
+       */
+      @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
+      Map<String, Object> extraParams;
+
+      private Alipay(Map<String, Object> extraParams) {
+        this.extraParams = extraParams;
+      }
+
+      public static Builder builder() {
+        return new Builder();
+      }
+
+      public static class Builder {
+        private Map<String, Object> extraParams;
+
+        /** Finalize and obtain parameter instance from this builder. */
+        public Alipay build() {
+          return new Alipay(this.extraParams);
+        }
+
+        /**
+         * Add a key/value pair to `extraParams` map. A map is initialized for the first
+         * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
+         * map. See {@link SessionCreateParams.PaymentMethodOptions.Alipay#extraParams} for the
+         * field documentation.
+         */
+        public Builder putExtraParam(String key, Object value) {
+          if (this.extraParams == null) {
+            this.extraParams = new HashMap<>();
+          }
+          this.extraParams.put(key, value);
+          return this;
+        }
+
+        /**
+         * Add all map key/value pairs to `extraParams` map. A map is initialized for the first
+         * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
+         * map. See {@link SessionCreateParams.PaymentMethodOptions.Alipay#extraParams} for the
+         * field documentation.
+         */
+        public Builder putAllExtraParam(Map<String, Object> map) {
+          if (this.extraParams == null) {
+            this.extraParams = new HashMap<>();
+          }
+          this.extraParams.putAll(map);
+          return this;
+        }
+      }
+    }
+
+    @Getter
     public static class Boleto {
       /**
        * The number of calendar days before a Boleto voucher expires. For example, if you create a
@@ -3992,13 +4066,20 @@ public class SessionCreateParams extends ApiRequestParams {
       @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
       Map<String, Object> extraParams;
 
+      /** Additional fields for Financial Connections Session creation. */
+      @SerializedName("financial_connections")
+      FinancialConnections financialConnections;
+
       /** Verification method for the intent. */
       @SerializedName("verification_method")
       VerificationMethod verificationMethod;
 
       private UsBankAccount(
-          Map<String, Object> extraParams, VerificationMethod verificationMethod) {
+          Map<String, Object> extraParams,
+          FinancialConnections financialConnections,
+          VerificationMethod verificationMethod) {
         this.extraParams = extraParams;
+        this.financialConnections = financialConnections;
         this.verificationMethod = verificationMethod;
       }
 
@@ -4009,11 +4090,14 @@ public class SessionCreateParams extends ApiRequestParams {
       public static class Builder {
         private Map<String, Object> extraParams;
 
+        private FinancialConnections financialConnections;
+
         private VerificationMethod verificationMethod;
 
         /** Finalize and obtain parameter instance from this builder. */
         public UsBankAccount build() {
-          return new UsBankAccount(this.extraParams, this.verificationMethod);
+          return new UsBankAccount(
+              this.extraParams, this.financialConnections, this.verificationMethod);
         }
 
         /**
@@ -4044,10 +4128,138 @@ public class SessionCreateParams extends ApiRequestParams {
           return this;
         }
 
+        /** Additional fields for Financial Connections Session creation. */
+        public Builder setFinancialConnections(FinancialConnections financialConnections) {
+          this.financialConnections = financialConnections;
+          return this;
+        }
+
         /** Verification method for the intent. */
         public Builder setVerificationMethod(VerificationMethod verificationMethod) {
           this.verificationMethod = verificationMethod;
           return this;
+        }
+      }
+
+      @Getter
+      public static class FinancialConnections {
+        /**
+         * Map of extra parameters for custom features not available in this client library. The
+         * content in this map is not serialized under this field's {@code @SerializedName} value.
+         * Instead, each key/value pair is serialized as if the key is a root-level field
+         * (serialized) name in this param object. Effectively, this map is flattened to its parent
+         * instance.
+         */
+        @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
+        Map<String, Object> extraParams;
+
+        /**
+         * The list of permissions to request. If this parameter is passed, the {@code
+         * payment_method} permission must be included. Valid permissions include: {@code balances},
+         * {@code payment_method}, and {@code transactions}.
+         */
+        @SerializedName("permissions")
+        List<Permission> permissions;
+
+        private FinancialConnections(
+            Map<String, Object> extraParams, List<Permission> permissions) {
+          this.extraParams = extraParams;
+          this.permissions = permissions;
+        }
+
+        public static Builder builder() {
+          return new Builder();
+        }
+
+        public static class Builder {
+          private Map<String, Object> extraParams;
+
+          private List<Permission> permissions;
+
+          /** Finalize and obtain parameter instance from this builder. */
+          public FinancialConnections build() {
+            return new FinancialConnections(this.extraParams, this.permissions);
+          }
+
+          /**
+           * Add a key/value pair to `extraParams` map. A map is initialized for the first
+           * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
+           * map. See {@link
+           * SessionCreateParams.PaymentMethodOptions.UsBankAccount.FinancialConnections#extraParams}
+           * for the field documentation.
+           */
+          public Builder putExtraParam(String key, Object value) {
+            if (this.extraParams == null) {
+              this.extraParams = new HashMap<>();
+            }
+            this.extraParams.put(key, value);
+            return this;
+          }
+
+          /**
+           * Add all map key/value pairs to `extraParams` map. A map is initialized for the first
+           * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
+           * map. See {@link
+           * SessionCreateParams.PaymentMethodOptions.UsBankAccount.FinancialConnections#extraParams}
+           * for the field documentation.
+           */
+          public Builder putAllExtraParam(Map<String, Object> map) {
+            if (this.extraParams == null) {
+              this.extraParams = new HashMap<>();
+            }
+            this.extraParams.putAll(map);
+            return this;
+          }
+
+          /**
+           * Add an element to `permissions` list. A list is initialized for the first `add/addAll`
+           * call, and subsequent calls adds additional elements to the original list. See {@link
+           * SessionCreateParams.PaymentMethodOptions.UsBankAccount.FinancialConnections#permissions}
+           * for the field documentation.
+           */
+          public Builder addPermission(Permission element) {
+            if (this.permissions == null) {
+              this.permissions = new ArrayList<>();
+            }
+            this.permissions.add(element);
+            return this;
+          }
+
+          /**
+           * Add all elements to `permissions` list. A list is initialized for the first
+           * `add/addAll` call, and subsequent calls adds additional elements to the original list.
+           * See {@link
+           * SessionCreateParams.PaymentMethodOptions.UsBankAccount.FinancialConnections#permissions}
+           * for the field documentation.
+           */
+          public Builder addAllPermission(List<Permission> elements) {
+            if (this.permissions == null) {
+              this.permissions = new ArrayList<>();
+            }
+            this.permissions.addAll(elements);
+            return this;
+          }
+        }
+
+        public enum Permission implements ApiRequestParams.EnumParam {
+          @SerializedName("balances")
+          BALANCES("balances"),
+
+          @SerializedName("ownership")
+          OWNERSHIP("ownership"),
+
+          @SerializedName("payment_method")
+          PAYMENT_METHOD("payment_method"),
+
+          @SerializedName("transactions")
+          TRANSACTIONS("transactions");
+
+          @Getter(onMethod_ = {@Override})
+          private final String value;
+
+          Permission(String value) {
+            this.value = value;
+          }
         }
       }
 
@@ -5308,8 +5520,8 @@ public class SessionCreateParams extends ApiRequestParams {
       TaxBehavior taxBehavior;
 
       /**
-       * A <a href="https://stripe.com/docs/tax/tax-codes">tax code</a> ID. The Shipping tax code is
-       * {@code txcd_92010001}.
+       * A <a href="https://stripe.com/docs/tax/tax-categories">tax code</a> ID. The Shipping tax
+       * code is {@code txcd_92010001}.
        */
       @SerializedName("tax_code")
       String taxCode;
@@ -5467,8 +5679,8 @@ public class SessionCreateParams extends ApiRequestParams {
         }
 
         /**
-         * A <a href="https://stripe.com/docs/tax/tax-codes">tax code</a> ID. The Shipping tax code
-         * is {@code txcd_92010001}.
+         * A <a href="https://stripe.com/docs/tax/tax-categories">tax code</a> ID. The Shipping tax
+         * code is {@code txcd_92010001}.
          */
         public Builder setTaxCode(String taxCode) {
           this.taxCode = taxCode;
@@ -5953,6 +6165,13 @@ public class SessionCreateParams extends ApiRequestParams {
     List<String> defaultTaxRates;
 
     /**
+     * The subscription's description, meant to be displayable to the customer. Use this field to
+     * optionally store an explanation of the subscription for rendering in Stripe hosted surfaces.
+     */
+    @SerializedName("description")
+    String description;
+
+    /**
      * Map of extra parameters for custom features not available in this client library. The content
      * in this map is not serialized under this field's {@code @SerializedName} value. Instead, each
      * key/value pair is serialized as if the key is a root-level field (serialized) name in this
@@ -6010,6 +6229,7 @@ public class SessionCreateParams extends ApiRequestParams {
         BigDecimal applicationFeePercent,
         String coupon,
         List<String> defaultTaxRates,
+        String description,
         Map<String, Object> extraParams,
         List<Item> items,
         Map<String, String> metadata,
@@ -6020,6 +6240,7 @@ public class SessionCreateParams extends ApiRequestParams {
       this.applicationFeePercent = applicationFeePercent;
       this.coupon = coupon;
       this.defaultTaxRates = defaultTaxRates;
+      this.description = description;
       this.extraParams = extraParams;
       this.items = items;
       this.metadata = metadata;
@@ -6039,6 +6260,8 @@ public class SessionCreateParams extends ApiRequestParams {
       private String coupon;
 
       private List<String> defaultTaxRates;
+
+      private String description;
 
       private Map<String, Object> extraParams;
 
@@ -6060,6 +6283,7 @@ public class SessionCreateParams extends ApiRequestParams {
             this.applicationFeePercent,
             this.coupon,
             this.defaultTaxRates,
+            this.description,
             this.extraParams,
             this.items,
             this.metadata,
@@ -6114,6 +6338,16 @@ public class SessionCreateParams extends ApiRequestParams {
           this.defaultTaxRates = new ArrayList<>();
         }
         this.defaultTaxRates.addAll(elements);
+        return this;
+      }
+
+      /**
+       * The subscription's description, meant to be displayable to the customer. Use this field to
+       * optionally store an explanation of the subscription for rendering in Stripe hosted
+       * surfaces.
+       */
+      public Builder setDescription(String description) {
+        this.description = description;
         return this;
       }
 

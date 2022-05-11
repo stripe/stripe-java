@@ -38,6 +38,12 @@ public class Quote extends ApiResource implements HasId, MetadataStore<Quote> {
   @SerializedName("amount_total")
   Long amountTotal;
 
+  /** ID of the Connect Application that created the quote. */
+  @SerializedName("application")
+  @Getter(lombok.AccessLevel.NONE)
+  @Setter(lombok.AccessLevel.NONE)
+  ExpandableField<Application> application;
+
   /**
    * The amount of the application fee (if any) that will be requested to be applied to the payment
    * and transferred to the application owner's Stripe account. Only applicable if there are no line
@@ -229,6 +235,24 @@ public class Quote extends ApiResource implements HasId, MetadataStore<Quote> {
   @SerializedName("transfer_data")
   TransferData transferData;
 
+  /** Get ID of expandable {@code application} object. */
+  public String getApplication() {
+    return (this.application != null) ? this.application.getId() : null;
+  }
+
+  public void setApplication(String id) {
+    this.application = ApiResource.setExpandableFieldId(id, this.application);
+  }
+
+  /** Get expanded {@code application}. */
+  public Application getApplicationObject() {
+    return (this.application != null) ? this.application.getExpanded() : null;
+  }
+
+  public void setApplicationObject(Application expandableObject) {
+    this.application = new ExpandableField<Application>(expandableObject.getId(), expandableObject);
+  }
+
   /** Get ID of expandable {@code customer} object. */
   public String getCustomer() {
     return (this.customer != null) ? this.customer.getId() : null;
@@ -351,10 +375,11 @@ public class Quote extends ApiResource implements HasId, MetadataStore<Quote> {
       this.defaultTaxRates = null;
       return;
     }
-    if (this.defaultTaxRates.stream()
-        .map(x -> x.getId())
-        .collect(Collectors.toList())
-        .equals(ids)) {
+    if (this.defaultTaxRates != null
+        && this.defaultTaxRates.stream()
+            .map(x -> x.getId())
+            .collect(Collectors.toList())
+            .equals(ids)) {
       // noop if the ids are equal to what are already present
       return;
     }
@@ -394,7 +419,8 @@ public class Quote extends ApiResource implements HasId, MetadataStore<Quote> {
       this.discounts = null;
       return;
     }
-    if (this.discounts.stream().map(x -> x.getId()).collect(Collectors.toList()).equals(ids)) {
+    if (this.discounts != null
+        && this.discounts.stream().map(x -> x.getId()).collect(Collectors.toList()).equals(ids)) {
       // noop if the ids are equal to what are already present
       return;
     }
@@ -986,15 +1012,15 @@ public class Quote extends ApiResource implements HasId, MetadataStore<Quote> {
   @Setter
   @EqualsAndHashCode(callSuper = false)
   public static class TotalDetails extends StripeObject {
-    /** This is the sum of all the line item discounts. */
+    /** This is the sum of all the discounts. */
     @SerializedName("amount_discount")
     Long amountDiscount;
 
-    /** This is the sum of all the line item shipping amounts. */
+    /** This is the sum of all the shipping amounts. */
     @SerializedName("amount_shipping")
     Long amountShipping;
 
-    /** This is the sum of all the line item tax amounts. */
+    /** This is the sum of all the tax amounts. */
     @SerializedName("amount_tax")
     Long amountTax;
 
@@ -1005,11 +1031,11 @@ public class Quote extends ApiResource implements HasId, MetadataStore<Quote> {
     @Setter
     @EqualsAndHashCode(callSuper = false)
     public static class Breakdown extends StripeObject {
-      /** The aggregated line item discounts. */
+      /** The aggregated discounts. */
       @SerializedName("discounts")
       List<LineItem.Discount> discounts;
 
-      /** The aggregated line item tax amounts by rate. */
+      /** The aggregated tax amounts by rate. */
       @SerializedName("taxes")
       List<LineItem.Tax> taxes;
     }

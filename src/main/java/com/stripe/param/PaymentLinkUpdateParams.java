@@ -35,6 +35,14 @@ public class PaymentLinkUpdateParams extends ApiRequestParams {
   @SerializedName("billing_address_collection")
   BillingAddressCollection billingAddressCollection;
 
+  /**
+   * Configures whether <a href="https://stripe.com/docs/api/checkout/sessions">checkout
+   * sessions</a> created by this payment link create a <a
+   * href="https://stripe.com/docs/api/customers">Customer</a>.
+   */
+  @SerializedName("customer_creation")
+  CustomerCreation customerCreation;
+
   /** Specifies which fields in the response should be expanded. */
   @SerializedName("expand")
   List<String> expand;
@@ -85,6 +93,7 @@ public class PaymentLinkUpdateParams extends ApiRequestParams {
       Boolean allowPromotionCodes,
       AutomaticTax automaticTax,
       BillingAddressCollection billingAddressCollection,
+      CustomerCreation customerCreation,
       List<String> expand,
       Map<String, Object> extraParams,
       List<LineItem> lineItems,
@@ -96,6 +105,7 @@ public class PaymentLinkUpdateParams extends ApiRequestParams {
     this.allowPromotionCodes = allowPromotionCodes;
     this.automaticTax = automaticTax;
     this.billingAddressCollection = billingAddressCollection;
+    this.customerCreation = customerCreation;
     this.expand = expand;
     this.extraParams = extraParams;
     this.lineItems = lineItems;
@@ -119,6 +129,8 @@ public class PaymentLinkUpdateParams extends ApiRequestParams {
 
     private BillingAddressCollection billingAddressCollection;
 
+    private CustomerCreation customerCreation;
+
     private List<String> expand;
 
     private Map<String, Object> extraParams;
@@ -139,6 +151,7 @@ public class PaymentLinkUpdateParams extends ApiRequestParams {
           this.allowPromotionCodes,
           this.automaticTax,
           this.billingAddressCollection,
+          this.customerCreation,
           this.expand,
           this.extraParams,
           this.lineItems,
@@ -177,6 +190,16 @@ public class PaymentLinkUpdateParams extends ApiRequestParams {
     /** Configuration for collecting the customer's billing address. */
     public Builder setBillingAddressCollection(BillingAddressCollection billingAddressCollection) {
       this.billingAddressCollection = billingAddressCollection;
+      return this;
+    }
+
+    /**
+     * Configures whether <a href="https://stripe.com/docs/api/checkout/sessions">checkout
+     * sessions</a> created by this payment link create a <a
+     * href="https://stripe.com/docs/api/customers">Customer</a>.
+     */
+    public Builder setCustomerCreation(CustomerCreation customerCreation) {
+      this.customerCreation = customerCreation;
       return this;
     }
 
@@ -1750,6 +1773,21 @@ public class PaymentLinkUpdateParams extends ApiRequestParams {
     private final String value;
 
     BillingAddressCollection(String value) {
+      this.value = value;
+    }
+  }
+
+  public enum CustomerCreation implements ApiRequestParams.EnumParam {
+    @SerializedName("always")
+    ALWAYS("always"),
+
+    @SerializedName("if_required")
+    IF_REQUIRED("if_required");
+
+    @Getter(onMethod_ = {@Override})
+    private final String value;
+
+    CustomerCreation(String value) {
       this.value = value;
     }
   }

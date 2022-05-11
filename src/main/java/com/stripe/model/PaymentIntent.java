@@ -6,10 +6,12 @@ import com.stripe.Stripe;
 import com.stripe.exception.StripeException;
 import com.stripe.net.ApiResource;
 import com.stripe.net.RequestOptions;
+import com.stripe.param.PaymentIntentApplyCustomerBalanceParams;
 import com.stripe.param.PaymentIntentCancelParams;
 import com.stripe.param.PaymentIntentCaptureParams;
 import com.stripe.param.PaymentIntentConfirmParams;
 import com.stripe.param.PaymentIntentCreateParams;
+import com.stripe.param.PaymentIntentIncrementAuthorizationParams;
 import com.stripe.param.PaymentIntentListParams;
 import com.stripe.param.PaymentIntentRetrieveParams;
 import com.stripe.param.PaymentIntentSearchParams;
@@ -40,6 +42,9 @@ public class PaymentIntent extends ApiResource implements HasId, MetadataStore<P
   /** Amount that can be captured from this PaymentIntent. */
   @SerializedName("amount_capturable")
   Long amountCapturable;
+
+  @SerializedName("amount_details")
+  AmountDetails amountDetails;
 
   /** Amount that was collected by this PaymentIntent. */
   @SerializedName("amount_received")
@@ -103,12 +108,12 @@ public class PaymentIntent extends ApiResource implements HasId, MetadataStore<P
    * key.
    *
    * <p>The client secret can be used to complete a payment from your frontend. It should not be
-   * stored, logged, embedded in URLs, or exposed to anyone other than the customer. Make sure that
-   * you have TLS enabled on any page that includes the client secret.
+   * stored, logged, or exposed to anyone other than the customer. Make sure that you have TLS
+   * enabled on any page that includes the client secret.
    *
    * <p>Refer to our docs to <a
-   * href="https://stripe.com/docs/payments/accept-a-payment?integration=elements">accept a
-   * payment</a> and learn about how {@code client_secret} should be handled.
+   * href="https://stripe.com/docs/payments/accept-a-payment?ui=elements">accept a payment</a> and
+   * learn about how {@code client_secret} should be handled.
    */
   @SerializedName("client_secret")
   String clientSecret;
@@ -1150,6 +1155,150 @@ public class PaymentIntent extends ApiResource implements HasId, MetadataStore<P
         ApiResource.RequestMethod.POST, url, params, PaymentIntent.class, options);
   }
 
+  /**
+   * Perform an incremental authorization on an eligible <a
+   * href="https://stripe.com/docs/api/payment_intents/object">PaymentIntent</a>. To be eligible,
+   * the PaymentIntent’s status must be <code>requires_capture</code> and <a
+   * href="https://stripe.com/docs/api/charges/object#charge_object-payment_method_details-card_present-incremental_authorization_supported">incremental_authorization_supported</a>
+   * must be <code>true</code>.
+   *
+   * <p>Incremental authorizations attempt to increase the authorized amount on your customer’s card
+   * to the new, higher <code>amount</code> provided. As with the initial authorization, incremental
+   * authorizations may be declined. A single PaymentIntent can call this endpoint multiple times to
+   * further increase the authorized amount.
+   *
+   * <p>If the incremental authorization succeeds, the PaymentIntent object is returned with the
+   * updated <a
+   * href="https://stripe.com/docs/api/payment_intents/object#payment_intent_object-amount">amount</a>.
+   * If the incremental authorization fails, a <a
+   * href="https://stripe.com/docs/error-codes#card-declined">card_declined</a> error is returned,
+   * and no fields on the PaymentIntent or Charge are updated. The PaymentIntent object remains
+   * capturable for the previously authorized amount.
+   *
+   * <p>Each PaymentIntent can have a maximum of 10 incremental authorization attempts, including
+   * declines. Once captured, a PaymentIntent can no longer be incremented.
+   *
+   * <p>Learn more about <a
+   * href="https://stripe.com/docs/terminal/features/incremental-authorizations">incremental
+   * authorizations</a>.
+   */
+  public PaymentIntent incrementAuthorization(Map<String, Object> params) throws StripeException {
+    return incrementAuthorization(params, (RequestOptions) null);
+  }
+
+  /**
+   * Perform an incremental authorization on an eligible <a
+   * href="https://stripe.com/docs/api/payment_intents/object">PaymentIntent</a>. To be eligible,
+   * the PaymentIntent’s status must be <code>requires_capture</code> and <a
+   * href="https://stripe.com/docs/api/charges/object#charge_object-payment_method_details-card_present-incremental_authorization_supported">incremental_authorization_supported</a>
+   * must be <code>true</code>.
+   *
+   * <p>Incremental authorizations attempt to increase the authorized amount on your customer’s card
+   * to the new, higher <code>amount</code> provided. As with the initial authorization, incremental
+   * authorizations may be declined. A single PaymentIntent can call this endpoint multiple times to
+   * further increase the authorized amount.
+   *
+   * <p>If the incremental authorization succeeds, the PaymentIntent object is returned with the
+   * updated <a
+   * href="https://stripe.com/docs/api/payment_intents/object#payment_intent_object-amount">amount</a>.
+   * If the incremental authorization fails, a <a
+   * href="https://stripe.com/docs/error-codes#card-declined">card_declined</a> error is returned,
+   * and no fields on the PaymentIntent or Charge are updated. The PaymentIntent object remains
+   * capturable for the previously authorized amount.
+   *
+   * <p>Each PaymentIntent can have a maximum of 10 incremental authorization attempts, including
+   * declines. Once captured, a PaymentIntent can no longer be incremented.
+   *
+   * <p>Learn more about <a
+   * href="https://stripe.com/docs/terminal/features/incremental-authorizations">incremental
+   * authorizations</a>.
+   */
+  public PaymentIntent incrementAuthorization(Map<String, Object> params, RequestOptions options)
+      throws StripeException {
+    String url =
+        String.format(
+            "%s%s",
+            Stripe.getApiBase(),
+            String.format(
+                "/v1/payment_intents/%s/increment_authorization",
+                ApiResource.urlEncodeId(this.getId())));
+    return ApiResource.request(
+        ApiResource.RequestMethod.POST, url, params, PaymentIntent.class, options);
+  }
+
+  /**
+   * Perform an incremental authorization on an eligible <a
+   * href="https://stripe.com/docs/api/payment_intents/object">PaymentIntent</a>. To be eligible,
+   * the PaymentIntent’s status must be <code>requires_capture</code> and <a
+   * href="https://stripe.com/docs/api/charges/object#charge_object-payment_method_details-card_present-incremental_authorization_supported">incremental_authorization_supported</a>
+   * must be <code>true</code>.
+   *
+   * <p>Incremental authorizations attempt to increase the authorized amount on your customer’s card
+   * to the new, higher <code>amount</code> provided. As with the initial authorization, incremental
+   * authorizations may be declined. A single PaymentIntent can call this endpoint multiple times to
+   * further increase the authorized amount.
+   *
+   * <p>If the incremental authorization succeeds, the PaymentIntent object is returned with the
+   * updated <a
+   * href="https://stripe.com/docs/api/payment_intents/object#payment_intent_object-amount">amount</a>.
+   * If the incremental authorization fails, a <a
+   * href="https://stripe.com/docs/error-codes#card-declined">card_declined</a> error is returned,
+   * and no fields on the PaymentIntent or Charge are updated. The PaymentIntent object remains
+   * capturable for the previously authorized amount.
+   *
+   * <p>Each PaymentIntent can have a maximum of 10 incremental authorization attempts, including
+   * declines. Once captured, a PaymentIntent can no longer be incremented.
+   *
+   * <p>Learn more about <a
+   * href="https://stripe.com/docs/terminal/features/incremental-authorizations">incremental
+   * authorizations</a>.
+   */
+  public PaymentIntent incrementAuthorization(PaymentIntentIncrementAuthorizationParams params)
+      throws StripeException {
+    return incrementAuthorization(params, (RequestOptions) null);
+  }
+
+  /**
+   * Perform an incremental authorization on an eligible <a
+   * href="https://stripe.com/docs/api/payment_intents/object">PaymentIntent</a>. To be eligible,
+   * the PaymentIntent’s status must be <code>requires_capture</code> and <a
+   * href="https://stripe.com/docs/api/charges/object#charge_object-payment_method_details-card_present-incremental_authorization_supported">incremental_authorization_supported</a>
+   * must be <code>true</code>.
+   *
+   * <p>Incremental authorizations attempt to increase the authorized amount on your customer’s card
+   * to the new, higher <code>amount</code> provided. As with the initial authorization, incremental
+   * authorizations may be declined. A single PaymentIntent can call this endpoint multiple times to
+   * further increase the authorized amount.
+   *
+   * <p>If the incremental authorization succeeds, the PaymentIntent object is returned with the
+   * updated <a
+   * href="https://stripe.com/docs/api/payment_intents/object#payment_intent_object-amount">amount</a>.
+   * If the incremental authorization fails, a <a
+   * href="https://stripe.com/docs/error-codes#card-declined">card_declined</a> error is returned,
+   * and no fields on the PaymentIntent or Charge are updated. The PaymentIntent object remains
+   * capturable for the previously authorized amount.
+   *
+   * <p>Each PaymentIntent can have a maximum of 10 incremental authorization attempts, including
+   * declines. Once captured, a PaymentIntent can no longer be incremented.
+   *
+   * <p>Learn more about <a
+   * href="https://stripe.com/docs/terminal/features/incremental-authorizations">incremental
+   * authorizations</a>.
+   */
+  public PaymentIntent incrementAuthorization(
+      PaymentIntentIncrementAuthorizationParams params, RequestOptions options)
+      throws StripeException {
+    String url =
+        String.format(
+            "%s%s",
+            Stripe.getApiBase(),
+            String.format(
+                "/v1/payment_intents/%s/increment_authorization",
+                ApiResource.urlEncodeId(this.getId())));
+    return ApiResource.request(
+        ApiResource.RequestMethod.POST, url, params, PaymentIntent.class, options);
+  }
+
   /** Verifies microdeposits on a PaymentIntent object. */
   public PaymentIntent verifyMicrodeposits() throws StripeException {
     return verifyMicrodeposits((Map<String, Object>) null, (RequestOptions) null);
@@ -1200,6 +1349,109 @@ public class PaymentIntent extends ApiResource implements HasId, MetadataStore<P
         ApiResource.RequestMethod.POST, url, params, PaymentIntent.class, options);
   }
 
+  /**
+   * Manually reconcile the remaining amount for a customer_balance PaymentIntent.
+   *
+   * <p>This can be used when the cash balance for <a
+   * href="docs/payments/customer-balance/reconciliation#cash-manual-reconciliation">a customer in
+   * manual reconciliation mode</a> received funds.
+   */
+  public PaymentIntent applyCustomerBalance() throws StripeException {
+    return applyCustomerBalance((Map<String, Object>) null, (RequestOptions) null);
+  }
+
+  /**
+   * Manually reconcile the remaining amount for a customer_balance PaymentIntent.
+   *
+   * <p>This can be used when the cash balance for <a
+   * href="docs/payments/customer-balance/reconciliation#cash-manual-reconciliation">a customer in
+   * manual reconciliation mode</a> received funds.
+   */
+  public PaymentIntent applyCustomerBalance(RequestOptions options) throws StripeException {
+    return applyCustomerBalance((Map<String, Object>) null, options);
+  }
+
+  /**
+   * Manually reconcile the remaining amount for a customer_balance PaymentIntent.
+   *
+   * <p>This can be used when the cash balance for <a
+   * href="docs/payments/customer-balance/reconciliation#cash-manual-reconciliation">a customer in
+   * manual reconciliation mode</a> received funds.
+   */
+  public PaymentIntent applyCustomerBalance(Map<String, Object> params) throws StripeException {
+    return applyCustomerBalance(params, (RequestOptions) null);
+  }
+
+  /**
+   * Manually reconcile the remaining amount for a customer_balance PaymentIntent.
+   *
+   * <p>This can be used when the cash balance for <a
+   * href="docs/payments/customer-balance/reconciliation#cash-manual-reconciliation">a customer in
+   * manual reconciliation mode</a> received funds.
+   */
+  public PaymentIntent applyCustomerBalance(Map<String, Object> params, RequestOptions options)
+      throws StripeException {
+    String url =
+        String.format(
+            "%s%s",
+            Stripe.getApiBase(),
+            String.format(
+                "/v1/payment_intents/%s/apply_customer_balance",
+                ApiResource.urlEncodeId(this.getId())));
+    return ApiResource.request(
+        ApiResource.RequestMethod.POST, url, params, PaymentIntent.class, options);
+  }
+
+  /**
+   * Manually reconcile the remaining amount for a customer_balance PaymentIntent.
+   *
+   * <p>This can be used when the cash balance for <a
+   * href="docs/payments/customer-balance/reconciliation#cash-manual-reconciliation">a customer in
+   * manual reconciliation mode</a> received funds.
+   */
+  public PaymentIntent applyCustomerBalance(PaymentIntentApplyCustomerBalanceParams params)
+      throws StripeException {
+    return applyCustomerBalance(params, (RequestOptions) null);
+  }
+
+  /**
+   * Manually reconcile the remaining amount for a customer_balance PaymentIntent.
+   *
+   * <p>This can be used when the cash balance for <a
+   * href="docs/payments/customer-balance/reconciliation#cash-manual-reconciliation">a customer in
+   * manual reconciliation mode</a> received funds.
+   */
+  public PaymentIntent applyCustomerBalance(
+      PaymentIntentApplyCustomerBalanceParams params, RequestOptions options)
+      throws StripeException {
+    String url =
+        String.format(
+            "%s%s",
+            Stripe.getApiBase(),
+            String.format(
+                "/v1/payment_intents/%s/apply_customer_balance",
+                ApiResource.urlEncodeId(this.getId())));
+    return ApiResource.request(
+        ApiResource.RequestMethod.POST, url, params, PaymentIntent.class, options);
+  }
+
+  @Getter
+  @Setter
+  @EqualsAndHashCode(callSuper = false)
+  public static class AmountDetails extends StripeObject {
+    @SerializedName("tip")
+    Tip tip;
+
+    @Getter
+    @Setter
+    @EqualsAndHashCode(callSuper = false)
+    public static class Tip extends StripeObject {
+      /** Portion of the amount that corresponds to a tip. */
+      @SerializedName("amount")
+      Long amount;
+    }
+  }
+
   @Getter
   @Setter
   @EqualsAndHashCode(callSuper = false)
@@ -1212,6 +1464,9 @@ public class PaymentIntent extends ApiResource implements HasId, MetadataStore<P
 
     @SerializedName("card_await_notification")
     NextActionCardAwaitNotification cardAwaitNotification;
+
+    @SerializedName("display_bank_transfer_instructions")
+    NextActionDisplayBankTransferInstructions displayBankTransferInstructions;
 
     @SerializedName("konbini_display_details")
     NextActionKonbiniDisplayDetails konbiniDisplayDetails;
@@ -1424,6 +1679,69 @@ public class PaymentIntent extends ApiResource implements HasId, MetadataStore<P
   @Getter
   @Setter
   @EqualsAndHashCode(callSuper = false)
+  public static class NextActionDisplayBankTransferInstructions extends StripeObject {
+    /** The remaining amount that needs to be transferred to complete the payment. */
+    @SerializedName("amount_remaining")
+    Long amountRemaining;
+
+    /**
+     * Three-letter <a href="https://www.iso.org/iso-4217-currency-codes.html">ISO currency
+     * code</a>, in lowercase. Must be a <a href="https://stripe.com/docs/currencies">supported
+     * currency</a>.
+     */
+    @SerializedName("currency")
+    String currency;
+
+    /** A list of financial addresses that can be used to fund the customer balance. */
+    @SerializedName("financial_addresses")
+    List<PaymentIntent.NextActionDisplayBankTransferInstructions.FinancialAddresses>
+        financialAddresses;
+
+    /**
+     * A string identifying this payment. Instruct your customer to include this code in the
+     * reference or memo field of their bank transfer.
+     */
+    @SerializedName("reference")
+    String reference;
+
+    /**
+     * Type of bank transfer
+     *
+     * <p>Equal to {@code jp_bank_transfer}.
+     */
+    @SerializedName("type")
+    String type;
+
+    @Getter
+    @Setter
+    @EqualsAndHashCode(callSuper = false)
+    public static class FinancialAddresses extends StripeObject {
+      /** The payment networks supported by this FinancialAddress. */
+      @SerializedName("supported_networks")
+      List<String> supportedNetworks;
+
+      /**
+       * The type of financial address
+       *
+       * <p>One of {@code iban}, or {@code zengin}.
+       */
+      @SerializedName("type")
+      String type;
+
+      /** Zengin Records contain Japan bank account details per the Zengin format. */
+      @SerializedName("zengin")
+      Zengin zengin;
+
+      @Getter
+      @Setter
+      @EqualsAndHashCode(callSuper = false)
+      public static class Zengin extends StripeObject {}
+    }
+  }
+
+  @Getter
+  @Setter
+  @EqualsAndHashCode(callSuper = false)
   public static class NextActionDisplayBoletoDetails extends StripeObject {
     /** The timestamp after which the boleto expires. */
     @SerializedName("expires_at")
@@ -1602,6 +1920,9 @@ public class PaymentIntent extends ApiResource implements HasId, MetadataStore<P
 
     @SerializedName("card_present")
     CardPresent cardPresent;
+
+    @SerializedName("customer_balance")
+    CustomerBalance customerBalance;
 
     @SerializedName("eps")
     Eps eps;
@@ -1869,6 +2190,35 @@ public class PaymentIntent extends ApiResource implements HasId, MetadataStore<P
     @Getter
     @Setter
     @EqualsAndHashCode(callSuper = false)
+    public static class BankTransfer extends StripeObject {
+      /**
+       * List of address types that should be returned in the financial_addresses response. If not
+       * specified, all valid types will be returned.
+       *
+       * <p>Permitted values include: {@code zengin}.
+       */
+      @SerializedName("requested_address_types")
+      List<String> requestedAddressTypes;
+
+      /**
+       * The bank transfer type that this PaymentIntent is allowed to use for funding. Permitted
+       * values include: {@code us_bank_account}, {@code eu_bank_account}, {@code id_bank_account},
+       * {@code gb_bank_account}, {@code jp_bank_account}, {@code mx_bank_account}, {@code
+       * eu_bank_transfer}, {@code gb_bank_transfer}, {@code id_bank_transfer}, {@code
+       * jp_bank_transfer}, {@code mx_bank_transfer}, or {@code us_bank_transfer}.
+       *
+       * <p>One of {@code eu_bank_account}, {@code eu_bank_transfer}, {@code gb_bank_account},
+       * {@code gb_bank_transfer}, {@code id_bank_account}, {@code id_bank_transfer}, {@code
+       * jp_bank_account}, {@code jp_bank_transfer}, {@code mx_bank_account}, {@code
+       * mx_bank_transfer}, {@code us_bank_account}, or {@code us_bank_transfer}.
+       */
+      @SerializedName("type")
+      String type;
+    }
+
+    @Getter
+    @Setter
+    @EqualsAndHashCode(callSuper = false)
     public static class Boleto extends StripeObject {
       /**
        * The number of calendar days before a Boleto voucher expires. For example, if you create a
@@ -2081,6 +2431,54 @@ public class PaymentIntent extends ApiResource implements HasId, MetadataStore<P
        */
       @SerializedName("request_extended_authorization")
       Boolean requestExtendedAuthorization;
+
+      /**
+       * Request ability to <a
+       * href="https://stripe.com/docs/terminal/features/incremental-authorizations">increment</a>
+       * this PaymentIntent if the combination of MCC and card brand is eligible. Check <a
+       * href="https://stripe.com/docs/api/charges/object#charge_object-payment_method_details-card_present-incremental_authorization_supported">incremental_authorization_supported</a>
+       * in the <a href="https://stripe.com/docs/api/payment_intents/confirm">Confirm</a> response
+       * to verify support.
+       */
+      @SerializedName("request_incremental_authorization_support")
+      Boolean requestIncrementalAuthorizationSupport;
+    }
+
+    @Getter
+    @Setter
+    @EqualsAndHashCode(callSuper = false)
+    public static class CustomerBalance extends StripeObject {
+      @SerializedName("bank_transfer")
+      BankTransfer bankTransfer;
+
+      /**
+       * The funding method type to be used when there are not enough funds in the customer balance.
+       * Permitted values include: {@code bank_transfer}.
+       *
+       * <p>Equal to {@code bank_transfer}.
+       */
+      @SerializedName("funding_type")
+      String fundingType;
+
+      /**
+       * Indicates that you intend to make future payments with this PaymentIntent's payment method.
+       *
+       * <p>Providing this parameter will <a
+       * href="https://stripe.com/docs/payments/save-during-payment">attach the payment method</a>
+       * to the PaymentIntent's Customer, if present, after the PaymentIntent is confirmed and any
+       * required actions from the user are complete. If no Customer was provided, the payment
+       * method can still be <a
+       * href="https://stripe.com/docs/api/payment_methods/attach">attached</a> to a Customer after
+       * the transaction completes.
+       *
+       * <p>When processing card payments, Stripe also uses {@code setup_future_usage} to
+       * dynamically optimize your payment flow and comply with regional legislation and network
+       * rules, such as <a href="https://stripe.com/docs/strong-customer-authentication">SCA</a>.
+       *
+       * <p>Equal to {@code none}.
+       */
+      @SerializedName("setup_future_usage")
+      String setupFutureUsage;
     }
 
     @Getter
@@ -2459,6 +2857,9 @@ public class PaymentIntent extends ApiResource implements HasId, MetadataStore<P
     @Setter
     @EqualsAndHashCode(callSuper = false)
     public static class UsBankAccount extends StripeObject {
+      @SerializedName("financial_connections")
+      FinancialConnections financialConnections;
+
       /**
        * Indicates that you intend to make future payments with this PaymentIntent's payment method.
        *
@@ -2486,6 +2887,25 @@ public class PaymentIntent extends ApiResource implements HasId, MetadataStore<P
        */
       @SerializedName("verification_method")
       String verificationMethod;
+
+      @Getter
+      @Setter
+      @EqualsAndHashCode(callSuper = false)
+      public static class FinancialConnections extends StripeObject {
+        /**
+         * The list of permissions to request. The {@code payment_method} permission must be
+         * included.
+         */
+        @SerializedName("permissions")
+        List<String> permissions;
+
+        /**
+         * For webview integrations only. Upon completing OAuth login in the native browser, the
+         * user will be redirected to this URL to return to your app.
+         */
+        @SerializedName("return_url")
+        String returnUrl;
+      }
     }
 
     @Getter

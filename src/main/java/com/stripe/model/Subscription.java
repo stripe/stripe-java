@@ -24,6 +24,12 @@ import lombok.Setter;
 @Setter
 @EqualsAndHashCode(callSuper = false)
 public class Subscription extends ApiResource implements HasId, MetadataStore<Subscription> {
+  /** ID of the Connect Application that created the subscription. */
+  @SerializedName("application")
+  @Getter(lombok.AccessLevel.NONE)
+  @Setter(lombok.AccessLevel.NONE)
+  ExpandableField<Application> application;
+
   /**
    * A non-negative decimal between 0 and 100, with at most two decimal places. This represents the
    * percentage of the subscription invoice subtotal that will be transferred to the application
@@ -144,6 +150,13 @@ public class Subscription extends ApiResource implements HasId, MetadataStore<Su
    */
   @SerializedName("default_tax_rates")
   List<TaxRate> defaultTaxRates;
+
+  /**
+   * The subscription's description, meant to be displayable to the customer. Use this field to
+   * optionally store an explanation of the subscription for rendering in Stripe surfaces.
+   */
+  @SerializedName("description")
+  String description;
 
   /**
    * Describes the current discount applied to this subscription, if there is one. When billing, a
@@ -303,6 +316,24 @@ public class Subscription extends ApiResource implements HasId, MetadataStore<Su
   /** If the subscription has a trial, the beginning of that trial. */
   @SerializedName("trial_start")
   Long trialStart;
+
+  /** Get ID of expandable {@code application} object. */
+  public String getApplication() {
+    return (this.application != null) ? this.application.getId() : null;
+  }
+
+  public void setApplication(String id) {
+    this.application = ApiResource.setExpandableFieldId(id, this.application);
+  }
+
+  /** Get expanded {@code application}. */
+  public Application getApplicationObject() {
+    return (this.application != null) ? this.application.getExpanded() : null;
+  }
+
+  public void setApplicationObject(Application expandableObject) {
+    this.application = new ExpandableField<Application>(expandableObject.getId(), expandableObject);
+  }
 
   /** Get ID of expandable {@code customer} object. */
   public String getCustomer() {
@@ -1054,6 +1085,9 @@ public class Subscription extends ApiResource implements HasId, MetadataStore<Su
     @Setter
     @EqualsAndHashCode(callSuper = false)
     public static class UsBankAccount extends StripeObject {
+      @SerializedName("financial_connections")
+      FinancialConnections financialConnections;
+
       /**
        * Bank account verification method.
        *
@@ -1061,6 +1095,18 @@ public class Subscription extends ApiResource implements HasId, MetadataStore<Su
        */
       @SerializedName("verification_method")
       String verificationMethod;
+
+      @Getter
+      @Setter
+      @EqualsAndHashCode(callSuper = false)
+      public static class FinancialConnections extends StripeObject {
+        /**
+         * The list of permissions to request. The {@code payment_method} permission must be
+         * included.
+         */
+        @SerializedName("permissions")
+        List<String> permissions;
+      }
     }
   }
 

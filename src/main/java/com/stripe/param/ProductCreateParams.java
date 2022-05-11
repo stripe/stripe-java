@@ -35,6 +35,13 @@ public class ProductCreateParams extends ApiRequestParams {
   List<String> deactivateOn;
 
   /**
+   * Data used to generate a new <a href="https://stripe.com/docs/api/prices">Price</a> object. This
+   * Price will be set as the default price for this product.
+   */
+  @SerializedName("default_price_data")
+  DefaultPriceData defaultPriceData;
+
+  /**
    * The product's description, meant to be displayable to the customer. Use this field to
    * optionally store a long form explanation of the product being sold for your own rendering
    * purposes.
@@ -100,7 +107,7 @@ public class ProductCreateParams extends ApiRequestParams {
   @SerializedName("statement_descriptor")
   String statementDescriptor;
 
-  /** A <a href="https://stripe.com/docs/tax/tax-codes">tax code</a> ID. */
+  /** A <a href="https://stripe.com/docs/tax/tax-categories">tax code</a> ID. */
   @SerializedName("tax_code")
   String taxCode;
 
@@ -129,6 +136,7 @@ public class ProductCreateParams extends ApiRequestParams {
       List<String> attributes,
       String caption,
       List<String> deactivateOn,
+      DefaultPriceData defaultPriceData,
       String description,
       List<String> expand,
       Map<String, Object> extraParams,
@@ -147,6 +155,7 @@ public class ProductCreateParams extends ApiRequestParams {
     this.attributes = attributes;
     this.caption = caption;
     this.deactivateOn = deactivateOn;
+    this.defaultPriceData = defaultPriceData;
     this.description = description;
     this.expand = expand;
     this.extraParams = extraParams;
@@ -175,6 +184,8 @@ public class ProductCreateParams extends ApiRequestParams {
     private String caption;
 
     private List<String> deactivateOn;
+
+    private DefaultPriceData defaultPriceData;
 
     private String description;
 
@@ -211,6 +222,7 @@ public class ProductCreateParams extends ApiRequestParams {
           this.attributes,
           this.caption,
           this.deactivateOn,
+          this.defaultPriceData,
           this.description,
           this.expand,
           this.extraParams,
@@ -291,6 +303,15 @@ public class ProductCreateParams extends ApiRequestParams {
         this.deactivateOn = new ArrayList<>();
       }
       this.deactivateOn.addAll(elements);
+      return this;
+    }
+
+    /**
+     * Data used to generate a new <a href="https://stripe.com/docs/api/prices">Price</a> object.
+     * This Price will be set as the default price for this product.
+     */
+    public Builder setDefaultPriceData(DefaultPriceData defaultPriceData) {
+      this.defaultPriceData = defaultPriceData;
       return this;
     }
 
@@ -450,7 +471,7 @@ public class ProductCreateParams extends ApiRequestParams {
       return this;
     }
 
-    /** A <a href="https://stripe.com/docs/tax/tax-codes">tax code</a> ID. */
+    /** A <a href="https://stripe.com/docs/tax/tax-categories">tax code</a> ID. */
     public Builder setTaxCode(String taxCode) {
       this.taxCode = taxCode;
       return this;
@@ -480,6 +501,304 @@ public class ProductCreateParams extends ApiRequestParams {
     public Builder setUrl(String url) {
       this.url = url;
       return this;
+    }
+  }
+
+  @Getter
+  public static class DefaultPriceData {
+    /**
+     * Three-letter <a href="https://www.iso.org/iso-4217-currency-codes.html">ISO currency
+     * code</a>, in lowercase. Must be a <a href="https://stripe.com/docs/currencies">supported
+     * currency</a>.
+     */
+    @SerializedName("currency")
+    String currency;
+
+    /**
+     * Map of extra parameters for custom features not available in this client library. The content
+     * in this map is not serialized under this field's {@code @SerializedName} value. Instead, each
+     * key/value pair is serialized as if the key is a root-level field (serialized) name in this
+     * param object. Effectively, this map is flattened to its parent instance.
+     */
+    @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
+    Map<String, Object> extraParams;
+
+    /** The recurring components of a price such as {@code interval} and {@code interval_count}. */
+    @SerializedName("recurring")
+    Recurring recurring;
+
+    /**
+     * Specifies whether the price is considered inclusive of taxes or exclusive of taxes. One of
+     * {@code inclusive}, {@code exclusive}, or {@code unspecified}. Once specified as either {@code
+     * inclusive} or {@code exclusive}, it cannot be changed.
+     */
+    @SerializedName("tax_behavior")
+    TaxBehavior taxBehavior;
+
+    /**
+     * A positive integer in %s (or 0 for a free price) representing how much to charge. One of
+     * {@code unit_amount} or {@code unit_amount_decimal} is required.
+     */
+    @SerializedName("unit_amount")
+    Long unitAmount;
+
+    /**
+     * Same as {@code unit_amount}, but accepts a decimal value in %s with at most 12 decimal
+     * places. Only one of {@code unit_amount} and {@code unit_amount_decimal} can be set.
+     */
+    @SerializedName("unit_amount_decimal")
+    BigDecimal unitAmountDecimal;
+
+    private DefaultPriceData(
+        String currency,
+        Map<String, Object> extraParams,
+        Recurring recurring,
+        TaxBehavior taxBehavior,
+        Long unitAmount,
+        BigDecimal unitAmountDecimal) {
+      this.currency = currency;
+      this.extraParams = extraParams;
+      this.recurring = recurring;
+      this.taxBehavior = taxBehavior;
+      this.unitAmount = unitAmount;
+      this.unitAmountDecimal = unitAmountDecimal;
+    }
+
+    public static Builder builder() {
+      return new Builder();
+    }
+
+    public static class Builder {
+      private String currency;
+
+      private Map<String, Object> extraParams;
+
+      private Recurring recurring;
+
+      private TaxBehavior taxBehavior;
+
+      private Long unitAmount;
+
+      private BigDecimal unitAmountDecimal;
+
+      /** Finalize and obtain parameter instance from this builder. */
+      public DefaultPriceData build() {
+        return new DefaultPriceData(
+            this.currency,
+            this.extraParams,
+            this.recurring,
+            this.taxBehavior,
+            this.unitAmount,
+            this.unitAmountDecimal);
+      }
+
+      /**
+       * Three-letter <a href="https://www.iso.org/iso-4217-currency-codes.html">ISO currency
+       * code</a>, in lowercase. Must be a <a href="https://stripe.com/docs/currencies">supported
+       * currency</a>.
+       */
+      public Builder setCurrency(String currency) {
+        this.currency = currency;
+        return this;
+      }
+
+      /**
+       * Add a key/value pair to `extraParams` map. A map is initialized for the first `put/putAll`
+       * call, and subsequent calls add additional key/value pairs to the original map. See {@link
+       * ProductCreateParams.DefaultPriceData#extraParams} for the field documentation.
+       */
+      public Builder putExtraParam(String key, Object value) {
+        if (this.extraParams == null) {
+          this.extraParams = new HashMap<>();
+        }
+        this.extraParams.put(key, value);
+        return this;
+      }
+
+      /**
+       * Add all map key/value pairs to `extraParams` map. A map is initialized for the first
+       * `put/putAll` call, and subsequent calls add additional key/value pairs to the original map.
+       * See {@link ProductCreateParams.DefaultPriceData#extraParams} for the field documentation.
+       */
+      public Builder putAllExtraParam(Map<String, Object> map) {
+        if (this.extraParams == null) {
+          this.extraParams = new HashMap<>();
+        }
+        this.extraParams.putAll(map);
+        return this;
+      }
+
+      /**
+       * The recurring components of a price such as {@code interval} and {@code interval_count}.
+       */
+      public Builder setRecurring(Recurring recurring) {
+        this.recurring = recurring;
+        return this;
+      }
+
+      /**
+       * Specifies whether the price is considered inclusive of taxes or exclusive of taxes. One of
+       * {@code inclusive}, {@code exclusive}, or {@code unspecified}. Once specified as either
+       * {@code inclusive} or {@code exclusive}, it cannot be changed.
+       */
+      public Builder setTaxBehavior(TaxBehavior taxBehavior) {
+        this.taxBehavior = taxBehavior;
+        return this;
+      }
+
+      /**
+       * A positive integer in %s (or 0 for a free price) representing how much to charge. One of
+       * {@code unit_amount} or {@code unit_amount_decimal} is required.
+       */
+      public Builder setUnitAmount(Long unitAmount) {
+        this.unitAmount = unitAmount;
+        return this;
+      }
+
+      /**
+       * Same as {@code unit_amount}, but accepts a decimal value in %s with at most 12 decimal
+       * places. Only one of {@code unit_amount} and {@code unit_amount_decimal} can be set.
+       */
+      public Builder setUnitAmountDecimal(BigDecimal unitAmountDecimal) {
+        this.unitAmountDecimal = unitAmountDecimal;
+        return this;
+      }
+    }
+
+    @Getter
+    public static class Recurring {
+      /**
+       * Map of extra parameters for custom features not available in this client library. The
+       * content in this map is not serialized under this field's {@code @SerializedName} value.
+       * Instead, each key/value pair is serialized as if the key is a root-level field (serialized)
+       * name in this param object. Effectively, this map is flattened to its parent instance.
+       */
+      @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
+      Map<String, Object> extraParams;
+
+      /**
+       * Specifies billing frequency. Either {@code day}, {@code week}, {@code month} or {@code
+       * year}.
+       */
+      @SerializedName("interval")
+      Interval interval;
+
+      /**
+       * The number of intervals between subscription billings. For example, {@code interval=month}
+       * and {@code interval_count=3} bills every 3 months. Maximum of one year interval allowed (1
+       * year, 12 months, or 52 weeks).
+       */
+      @SerializedName("interval_count")
+      Long intervalCount;
+
+      private Recurring(Map<String, Object> extraParams, Interval interval, Long intervalCount) {
+        this.extraParams = extraParams;
+        this.interval = interval;
+        this.intervalCount = intervalCount;
+      }
+
+      public static Builder builder() {
+        return new Builder();
+      }
+
+      public static class Builder {
+        private Map<String, Object> extraParams;
+
+        private Interval interval;
+
+        private Long intervalCount;
+
+        /** Finalize and obtain parameter instance from this builder. */
+        public Recurring build() {
+          return new Recurring(this.extraParams, this.interval, this.intervalCount);
+        }
+
+        /**
+         * Add a key/value pair to `extraParams` map. A map is initialized for the first
+         * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
+         * map. See {@link ProductCreateParams.DefaultPriceData.Recurring#extraParams} for the field
+         * documentation.
+         */
+        public Builder putExtraParam(String key, Object value) {
+          if (this.extraParams == null) {
+            this.extraParams = new HashMap<>();
+          }
+          this.extraParams.put(key, value);
+          return this;
+        }
+
+        /**
+         * Add all map key/value pairs to `extraParams` map. A map is initialized for the first
+         * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
+         * map. See {@link ProductCreateParams.DefaultPriceData.Recurring#extraParams} for the field
+         * documentation.
+         */
+        public Builder putAllExtraParam(Map<String, Object> map) {
+          if (this.extraParams == null) {
+            this.extraParams = new HashMap<>();
+          }
+          this.extraParams.putAll(map);
+          return this;
+        }
+
+        /**
+         * Specifies billing frequency. Either {@code day}, {@code week}, {@code month} or {@code
+         * year}.
+         */
+        public Builder setInterval(Interval interval) {
+          this.interval = interval;
+          return this;
+        }
+
+        /**
+         * The number of intervals between subscription billings. For example, {@code
+         * interval=month} and {@code interval_count=3} bills every 3 months. Maximum of one year
+         * interval allowed (1 year, 12 months, or 52 weeks).
+         */
+        public Builder setIntervalCount(Long intervalCount) {
+          this.intervalCount = intervalCount;
+          return this;
+        }
+      }
+
+      public enum Interval implements ApiRequestParams.EnumParam {
+        @SerializedName("day")
+        DAY("day"),
+
+        @SerializedName("month")
+        MONTH("month"),
+
+        @SerializedName("week")
+        WEEK("week"),
+
+        @SerializedName("year")
+        YEAR("year");
+
+        @Getter(onMethod_ = {@Override})
+        private final String value;
+
+        Interval(String value) {
+          this.value = value;
+        }
+      }
+    }
+
+    public enum TaxBehavior implements ApiRequestParams.EnumParam {
+      @SerializedName("exclusive")
+      EXCLUSIVE("exclusive"),
+
+      @SerializedName("inclusive")
+      INCLUSIVE("inclusive"),
+
+      @SerializedName("unspecified")
+      UNSPECIFIED("unspecified");
+
+      @Getter(onMethod_ = {@Override})
+      private final String value;
+
+      TaxBehavior(String value) {
+        this.value = value;
+      }
     }
   }
 

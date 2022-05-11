@@ -25,6 +25,7 @@ final class EventDataClassLookup {
     classLookup.put("bitcoin_transaction", BitcoinTransaction.class);
     classLookup.put("capability", Capability.class);
     classLookup.put("card", Card.class);
+    classLookup.put("cash_balance", CashBalance.class);
     classLookup.put("charge", Charge.class);
     classLookup.put("connect_collection_transfer", ConnectCollectionTransfer.class);
     classLookup.put("country_spec", CountrySpec.class);
@@ -41,6 +42,7 @@ final class EventDataClassLookup {
     classLookup.put("fee_refund", FeeRefund.class);
     classLookup.put("file", File.class);
     classLookup.put("file_link", FileLink.class);
+    classLookup.put("funding_instructions", FundingInstructions.class);
     classLookup.put("invoice", Invoice.class);
     classLookup.put("invoiceitem", InvoiceItem.class);
     classLookup.put("issuer_fraud_record", IssuerFraudRecord.class);
@@ -49,8 +51,6 @@ final class EventDataClassLookup {
     classLookup.put("login_link", LoginLink.class);
     classLookup.put("mandate", Mandate.class);
     classLookup.put("order", Order.class);
-    classLookup.put("order_item", OrderItem.class);
-    classLookup.put("order_return", OrderReturn.class);
     classLookup.put("payment_intent", PaymentIntent.class);
     classLookup.put("payment_link", PaymentLink.class);
     classLookup.put("payment_method", PaymentMethod.class);
@@ -88,12 +88,25 @@ final class EventDataClassLookup {
     classLookup.put("usage_record", UsageRecord.class);
     classLookup.put("usage_record_summary", UsageRecordSummary.class);
     classLookup.put("webhook_endpoint", WebhookEndpoint.class);
+    classLookup.put("order_item", OrderItem.class);
+    classLookup.put("order_return", OrderReturn.class);
 
     classLookup.put(
         "billing_portal.configuration", com.stripe.model.billingportal.Configuration.class);
     classLookup.put("billing_portal.session", com.stripe.model.billingportal.Session.class);
 
     classLookup.put("checkout.session", com.stripe.model.checkout.Session.class);
+
+    classLookup.put(
+        "financial_connections.account", com.stripe.model.financialconnections.Account.class);
+    classLookup.put(
+        "financial_connections.account_owner",
+        com.stripe.model.financialconnections.AccountOwner.class);
+    classLookup.put(
+        "financial_connections.account_ownership",
+        com.stripe.model.financialconnections.AccountOwnership.class);
+    classLookup.put(
+        "financial_connections.session", com.stripe.model.financialconnections.Session.class);
 
     classLookup.put(
         "identity.verification_report", com.stripe.model.identity.VerificationReport.class);
@@ -115,6 +128,7 @@ final class EventDataClassLookup {
 
     classLookup.put("scheduled_query_run", com.stripe.model.sigma.ScheduledQueryRun.class);
 
+    classLookup.put("terminal.configuration", com.stripe.model.terminal.Configuration.class);
     classLookup.put("terminal.connection_token", com.stripe.model.terminal.ConnectionToken.class);
     classLookup.put("terminal.location", com.stripe.model.terminal.Location.class);
     classLookup.put("terminal.reader", com.stripe.model.terminal.Reader.class);

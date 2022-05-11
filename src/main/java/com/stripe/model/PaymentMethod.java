@@ -65,6 +65,9 @@ public class PaymentMethod extends ApiResource implements HasId, MetadataStore<P
   @Setter(lombok.AccessLevel.NONE)
   ExpandableField<Customer> customer;
 
+  @SerializedName("customer_balance")
+  CustomerBalance customerBalance;
+
   @SerializedName("eps")
   Eps eps;
 
@@ -139,9 +142,10 @@ public class PaymentMethod extends ApiResource implements HasId, MetadataStore<P
    *
    * <p>One of {@code acss_debit}, {@code afterpay_clearpay}, {@code alipay}, {@code au_becs_debit},
    * {@code bacs_debit}, {@code bancontact}, {@code boleto}, {@code card}, {@code card_present},
-   * {@code eps}, {@code fpx}, {@code giropay}, {@code grabpay}, {@code ideal}, {@code
-   * interac_present}, {@code klarna}, {@code konbini}, {@code oxxo}, {@code p24}, {@code paynow},
-   * {@code sepa_debit}, {@code sofort}, {@code us_bank_account}, or {@code wechat_pay}.
+   * {@code customer_balance}, {@code eps}, {@code fpx}, {@code giropay}, {@code grabpay}, {@code
+   * ideal}, {@code interac_present}, {@code klarna}, {@code konbini}, {@code oxxo}, {@code p24},
+   * {@code paynow}, {@code sepa_debit}, {@code sofort}, {@code us_bank_account}, or {@code
+   * wechat_pay}.
    */
   @SerializedName("type")
   String type;
@@ -887,6 +891,11 @@ public class PaymentMethod extends ApiResource implements HasId, MetadataStore<P
   @Getter
   @Setter
   @EqualsAndHashCode(callSuper = false)
+  public static class CustomerBalance extends StripeObject {}
+
+  @Getter
+  @Setter
+  @EqualsAndHashCode(callSuper = false)
   public static class Eps extends StripeObject {
     /**
      * The customer's bank. Should be one of {@code arzte_und_apotheker_bank}, {@code
@@ -1142,6 +1151,10 @@ public class PaymentMethod extends ApiResource implements HasId, MetadataStore<P
     /** The name of the bank. */
     @SerializedName("bank_name")
     String bankName;
+
+    /** The ID of the Financial Connections Account used to create the payment method. */
+    @SerializedName("financial_connections_account")
+    String financialConnectionsAccount;
 
     /**
      * Uniquely identifies this particular bank account. You can use this attribute to check whether

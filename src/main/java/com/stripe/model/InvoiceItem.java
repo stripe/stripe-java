@@ -245,7 +245,8 @@ public class InvoiceItem extends ApiResource implements HasId, MetadataStore<Inv
       this.discounts = null;
       return;
     }
-    if (this.discounts.stream().map(x -> x.getId()).collect(Collectors.toList()).equals(ids)) {
+    if (this.discounts != null
+        && this.discounts.stream().map(x -> x.getId()).collect(Collectors.toList()).equals(ids)) {
       // noop if the ids are equal to what are already present
       return;
     }

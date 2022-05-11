@@ -219,12 +219,6 @@ public class Charge extends ApiResource implements MetadataStore<Charge>, Balanc
   @Setter(lombok.AccessLevel.NONE)
   ExpandableField<Account> onBehalfOf;
 
-  /** ID of the order this charge is for if one exists. */
-  @SerializedName("order")
-  @Getter(lombok.AccessLevel.NONE)
-  @Setter(lombok.AccessLevel.NONE)
-  ExpandableField<Order> order;
-
   /**
    * Details about whether the payment was accepted, and why. See <a
    * href="https://stripe.com/docs/declines">understanding declines</a> for details.
@@ -356,6 +350,12 @@ public class Charge extends ApiResource implements MetadataStore<Charge>, Balanc
    */
   @SerializedName("transfer_group")
   String transferGroup;
+
+  /** Deprecated */
+  @SerializedName("order")
+  @Getter(lombok.AccessLevel.NONE)
+  @Setter(lombok.AccessLevel.NONE)
+  ExpandableField<Order> order;
 
   /** Get ID of expandable {@code application} object. */
   public String getApplication() {
@@ -525,24 +525,6 @@ public class Charge extends ApiResource implements MetadataStore<Charge>, Balanc
     this.onBehalfOf = new ExpandableField<Account>(expandableObject.getId(), expandableObject);
   }
 
-  /** Get ID of expandable {@code order} object. */
-  public String getOrder() {
-    return (this.order != null) ? this.order.getId() : null;
-  }
-
-  public void setOrder(String id) {
-    this.order = ApiResource.setExpandableFieldId(id, this.order);
-  }
-
-  /** Get expanded {@code order}. */
-  public Order getOrderObject() {
-    return (this.order != null) ? this.order.getExpanded() : null;
-  }
-
-  public void setOrderObject(Order expandableObject) {
-    this.order = new ExpandableField<Order>(expandableObject.getId(), expandableObject);
-  }
-
   /** Get ID of expandable {@code paymentIntent} object. */
   public String getPaymentIntent() {
     return (this.paymentIntent != null) ? this.paymentIntent.getId() : null;
@@ -614,6 +596,24 @@ public class Charge extends ApiResource implements MetadataStore<Charge>, Balanc
 
   public void setTransferObject(Transfer expandableObject) {
     this.transfer = new ExpandableField<Transfer>(expandableObject.getId(), expandableObject);
+  }
+
+  /** Get ID of expandable {@code order} object. */
+  public String getOrder() {
+    return (this.order != null) ? this.order.getId() : null;
+  }
+
+  public void setOrder(String id) {
+    this.order = ApiResource.setExpandableFieldId(id, this.order);
+  }
+
+  /** Get expanded {@code order}. */
+  public Order getOrderObject() {
+    return (this.order != null) ? this.order.getExpanded() : null;
+  }
+
+  public void setOrderObject(Order expandableObject) {
+    this.order = new ExpandableField<Order>(expandableObject.getId(), expandableObject);
   }
 
   /**
@@ -1128,6 +1128,9 @@ public class Charge extends ApiResource implements MetadataStore<Charge>, Balanc
 
     @SerializedName("card_present")
     CardPresent cardPresent;
+
+    @SerializedName("customer_balance")
+    CustomerBalance customerBalance;
 
     @SerializedName("eps")
     Eps eps;
@@ -1874,6 +1877,14 @@ public class Charge extends ApiResource implements MetadataStore<Charge>, Balanc
       String iin;
 
       /**
+       * Whether this <a href="https://stripe.com/docs/api/payment_intents">PaymentIntent</a> is
+       * eligible for incremental authorizations. Request support using <a
+       * href="https://stripe.com/docs/api/payment_intents/create#create_payment_intent-payment_method_options-card_present-request_incremental_authorization_support">request_incremental_authorization_support</a>.
+       */
+      @SerializedName("incremental_authorization_supported")
+      Boolean incrementalAuthorizationSupported;
+
+      /**
        * The name of the card's issuing bank. (For internal use only and not typically available in
        * standard API requests.)
        */
@@ -1959,6 +1970,11 @@ public class Charge extends ApiResource implements MetadataStore<Charge>, Balanc
         String transactionStatusInformation;
       }
     }
+
+    @Getter
+    @Setter
+    @EqualsAndHashCode(callSuper = false)
+    public static class CustomerBalance extends StripeObject {}
 
     @Getter
     @Setter

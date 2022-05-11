@@ -84,6 +84,13 @@ public class PaymentMethodCreateParams extends ApiRequestParams {
   String customer;
 
   /**
+   * If this is a {@code customer_balance} PaymentMethod, this hash contains details about the
+   * CustomerBalance payment method.
+   */
+  @SerializedName("customer_balance")
+  CustomerBalance customerBalance;
+
+  /**
    * If this is an {@code eps} PaymentMethod, this hash contains details about the EPS payment
    * method.
    */
@@ -232,6 +239,7 @@ public class PaymentMethodCreateParams extends ApiRequestParams {
       Boleto boleto,
       Object card,
       String customer,
+      CustomerBalance customerBalance,
       Eps eps,
       List<String> expand,
       Map<String, Object> extraParams,
@@ -262,6 +270,7 @@ public class PaymentMethodCreateParams extends ApiRequestParams {
     this.boleto = boleto;
     this.card = card;
     this.customer = customer;
+    this.customerBalance = customerBalance;
     this.eps = eps;
     this.expand = expand;
     this.extraParams = extraParams;
@@ -308,6 +317,8 @@ public class PaymentMethodCreateParams extends ApiRequestParams {
     private Object card;
 
     private String customer;
+
+    private CustomerBalance customerBalance;
 
     private Eps eps;
 
@@ -362,6 +373,7 @@ public class PaymentMethodCreateParams extends ApiRequestParams {
           this.boleto,
           this.card,
           this.customer,
+          this.customerBalance,
           this.eps,
           this.expand,
           this.extraParams,
@@ -485,6 +497,15 @@ public class PaymentMethodCreateParams extends ApiRequestParams {
     /** The {@code Customer} to whom the original PaymentMethod is attached. */
     public Builder setCustomer(String customer) {
       this.customer = customer;
+      return this;
+    }
+
+    /**
+     * If this is a {@code customer_balance} PaymentMethod, this hash contains details about the
+     * CustomerBalance payment method.
+     */
+    public Builder setCustomerBalance(CustomerBalance customerBalance) {
+      this.customerBalance = customerBalance;
       return this;
     }
 
@@ -1664,6 +1685,62 @@ public class PaymentMethodCreateParams extends ApiRequestParams {
 
       public Builder setToken(String token) {
         this.token = token;
+        return this;
+      }
+    }
+  }
+
+  @Getter
+  public static class CustomerBalance {
+    /**
+     * Map of extra parameters for custom features not available in this client library. The content
+     * in this map is not serialized under this field's {@code @SerializedName} value. Instead, each
+     * key/value pair is serialized as if the key is a root-level field (serialized) name in this
+     * param object. Effectively, this map is flattened to its parent instance.
+     */
+    @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
+    Map<String, Object> extraParams;
+
+    private CustomerBalance(Map<String, Object> extraParams) {
+      this.extraParams = extraParams;
+    }
+
+    public static Builder builder() {
+      return new Builder();
+    }
+
+    public static class Builder {
+      private Map<String, Object> extraParams;
+
+      /** Finalize and obtain parameter instance from this builder. */
+      public CustomerBalance build() {
+        return new CustomerBalance(this.extraParams);
+      }
+
+      /**
+       * Add a key/value pair to `extraParams` map. A map is initialized for the first `put/putAll`
+       * call, and subsequent calls add additional key/value pairs to the original map. See {@link
+       * PaymentMethodCreateParams.CustomerBalance#extraParams} for the field documentation.
+       */
+      public Builder putExtraParam(String key, Object value) {
+        if (this.extraParams == null) {
+          this.extraParams = new HashMap<>();
+        }
+        this.extraParams.put(key, value);
+        return this;
+      }
+
+      /**
+       * Add all map key/value pairs to `extraParams` map. A map is initialized for the first
+       * `put/putAll` call, and subsequent calls add additional key/value pairs to the original map.
+       * See {@link PaymentMethodCreateParams.CustomerBalance#extraParams} for the field
+       * documentation.
+       */
+      public Builder putAllExtraParam(Map<String, Object> map) {
+        if (this.extraParams == null) {
+          this.extraParams = new HashMap<>();
+        }
+        this.extraParams.putAll(map);
         return this;
       }
     }
@@ -2944,6 +3021,10 @@ public class PaymentMethodCreateParams extends ApiRequestParams {
     @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
     Map<String, Object> extraParams;
 
+    /** The ID of a Financial Connections Account to use as a payment method. */
+    @SerializedName("financial_connections_account")
+    String financialConnectionsAccount;
+
     /** Routing number of the bank account. */
     @SerializedName("routing_number")
     String routingNumber;
@@ -2953,11 +3034,13 @@ public class PaymentMethodCreateParams extends ApiRequestParams {
         String accountNumber,
         AccountType accountType,
         Map<String, Object> extraParams,
+        String financialConnectionsAccount,
         String routingNumber) {
       this.accountHolderType = accountHolderType;
       this.accountNumber = accountNumber;
       this.accountType = accountType;
       this.extraParams = extraParams;
+      this.financialConnectionsAccount = financialConnectionsAccount;
       this.routingNumber = routingNumber;
     }
 
@@ -2974,6 +3057,8 @@ public class PaymentMethodCreateParams extends ApiRequestParams {
 
       private Map<String, Object> extraParams;
 
+      private String financialConnectionsAccount;
+
       private String routingNumber;
 
       /** Finalize and obtain parameter instance from this builder. */
@@ -2983,6 +3068,7 @@ public class PaymentMethodCreateParams extends ApiRequestParams {
             this.accountNumber,
             this.accountType,
             this.extraParams,
+            this.financialConnectionsAccount,
             this.routingNumber);
       }
 
@@ -3028,6 +3114,12 @@ public class PaymentMethodCreateParams extends ApiRequestParams {
           this.extraParams = new HashMap<>();
         }
         this.extraParams.putAll(map);
+        return this;
+      }
+
+      /** The ID of a Financial Connections Account to use as a payment method. */
+      public Builder setFinancialConnectionsAccount(String financialConnectionsAccount) {
+        this.financialConnectionsAccount = financialConnectionsAccount;
         return this;
       }
 
@@ -3148,6 +3240,9 @@ public class PaymentMethodCreateParams extends ApiRequestParams {
 
     @SerializedName("card")
     CARD("card"),
+
+    @SerializedName("customer_balance")
+    CUSTOMER_BALANCE("customer_balance"),
 
     @SerializedName("eps")
     EPS("eps"),

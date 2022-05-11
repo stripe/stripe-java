@@ -287,7 +287,11 @@ public class Session extends ApiResource implements HasId {
   @SerializedName("total_details")
   TotalDetails totalDetails;
 
-  /** The URL to the Checkout Session. */
+  /**
+   * The URL to the Checkout Session. Redirect customers to this URL to take them to Checkout. If
+   * you’re using <a href="https://stripe.com/docs/payments/checkout/custom-domains">Custom
+   * Domains</a>, the URL will use your subdomain. Otherwise, it’ll use {@code checkout.stripe.com.}
+   */
   @SerializedName("url")
   String url;
 
@@ -727,14 +731,15 @@ public class Session extends ApiResource implements HasId {
     public static class TaxID extends StripeObject {
       /**
        * The type of the tax ID, one of {@code eu_vat}, {@code br_cnpj}, {@code br_cpf}, {@code
-       * gb_vat}, {@code nz_gst}, {@code au_abn}, {@code au_arn}, {@code in_gst}, {@code no_vat},
-       * {@code za_vat}, {@code ch_vat}, {@code mx_rfc}, {@code sg_uen}, {@code ru_inn}, {@code
-       * ru_kpp}, {@code ca_bn}, {@code hk_br}, {@code es_cif}, {@code tw_vat}, {@code th_vat},
-       * {@code jp_cn}, {@code jp_rn}, {@code li_uid}, {@code my_itn}, {@code us_ein}, {@code
-       * kr_brn}, {@code ca_qst}, {@code ca_gst_hst}, {@code ca_pst_bc}, {@code ca_pst_mb}, {@code
-       * ca_pst_sk}, {@code my_sst}, {@code sg_gst}, {@code ae_trn}, {@code cl_tin}, {@code sa_vat},
-       * {@code id_npwp}, {@code my_frp}, {@code il_vat}, {@code ge_vat}, {@code ua_vat}, {@code
-       * is_vat}, {@code bg_uic}, {@code hu_tin}, {@code si_tin}, or {@code unknown}.
+       * eu_oss_vat}, {@code gb_vat}, {@code nz_gst}, {@code au_abn}, {@code au_arn}, {@code
+       * in_gst}, {@code no_vat}, {@code za_vat}, {@code ch_vat}, {@code mx_rfc}, {@code sg_uen},
+       * {@code ru_inn}, {@code ru_kpp}, {@code ca_bn}, {@code hk_br}, {@code es_cif}, {@code
+       * tw_vat}, {@code th_vat}, {@code jp_cn}, {@code jp_rn}, {@code li_uid}, {@code my_itn},
+       * {@code us_ein}, {@code kr_brn}, {@code ca_qst}, {@code ca_gst_hst}, {@code ca_pst_bc},
+       * {@code ca_pst_mb}, {@code ca_pst_sk}, {@code my_sst}, {@code sg_gst}, {@code ae_trn},
+       * {@code cl_tin}, {@code sa_vat}, {@code id_npwp}, {@code my_frp}, {@code il_vat}, {@code
+       * ge_vat}, {@code ua_vat}, {@code is_vat}, {@code bg_uic}, {@code hu_tin}, {@code si_tin}, or
+       * {@code unknown}.
        */
       @SerializedName("type")
       String type;
@@ -751,6 +756,9 @@ public class Session extends ApiResource implements HasId {
   public static class PaymentMethodOptions extends StripeObject {
     @SerializedName("acss_debit")
     AcssDebit acssDebit;
+
+    @SerializedName("alipay")
+    Alipay alipay;
 
     @SerializedName("boleto")
     Boleto boleto;
@@ -826,6 +834,11 @@ public class Session extends ApiResource implements HasId {
         String transactionType;
       }
     }
+
+    @Getter
+    @Setter
+    @EqualsAndHashCode(callSuper = false)
+    public static class Alipay extends StripeObject {}
 
     @Getter
     @Setter
@@ -911,6 +924,9 @@ public class Session extends ApiResource implements HasId {
     @Setter
     @EqualsAndHashCode(callSuper = false)
     public static class UsBankAccount extends StripeObject {
+      @SerializedName("financial_connections")
+      FinancialConnections financialConnections;
+
       /**
        * Bank account verification method.
        *
@@ -918,6 +934,25 @@ public class Session extends ApiResource implements HasId {
        */
       @SerializedName("verification_method")
       String verificationMethod;
+
+      @Getter
+      @Setter
+      @EqualsAndHashCode(callSuper = false)
+      public static class FinancialConnections extends StripeObject {
+        /**
+         * The list of permissions to request. The {@code payment_method} permission must be
+         * included.
+         */
+        @SerializedName("permissions")
+        List<String> permissions;
+
+        /**
+         * For webview integrations only. Upon completing OAuth login in the native browser, the
+         * user will be redirected to this URL to return to your app.
+         */
+        @SerializedName("return_url")
+        String returnUrl;
+      }
     }
   }
 
@@ -990,15 +1025,15 @@ public class Session extends ApiResource implements HasId {
   @Setter
   @EqualsAndHashCode(callSuper = false)
   public static class TotalDetails extends StripeObject {
-    /** This is the sum of all the line item discounts. */
+    /** This is the sum of all the discounts. */
     @SerializedName("amount_discount")
     Long amountDiscount;
 
-    /** This is the sum of all the line item shipping amounts. */
+    /** This is the sum of all the shipping amounts. */
     @SerializedName("amount_shipping")
     Long amountShipping;
 
-    /** This is the sum of all the line item tax amounts. */
+    /** This is the sum of all the tax amounts. */
     @SerializedName("amount_tax")
     Long amountTax;
 
@@ -1009,11 +1044,11 @@ public class Session extends ApiResource implements HasId {
     @Setter
     @EqualsAndHashCode(callSuper = false)
     public static class Breakdown extends StripeObject {
-      /** The aggregated line item discounts. */
+      /** The aggregated discounts. */
       @SerializedName("discounts")
       List<LineItem.Discount> discounts;
 
-      /** The aggregated line item tax amounts by rate. */
+      /** The aggregated tax amounts by rate. */
       @SerializedName("taxes")
       List<LineItem.Tax> taxes;
     }

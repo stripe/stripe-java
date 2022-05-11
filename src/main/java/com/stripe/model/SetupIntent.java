@@ -40,8 +40,8 @@ public class SetupIntent extends ApiResource implements HasId, MetadataStore<Set
    * The client secret of this SetupIntent. Used for client-side retrieval using a publishable key.
    *
    * <p>The client secret can be used to complete payment setup from your frontend. It should not be
-   * stored, logged, embedded in URLs, or exposed to anyone other than the customer. Make sure that
-   * you have TLS enabled on any page that includes the client secret.
+   * stored, logged, or exposed to anyone other than the customer. Make sure that you have TLS
+   * enabled on any page that includes the client secret.
    */
   @SerializedName("client_secret")
   String clientSecret;
@@ -972,6 +972,9 @@ public class SetupIntent extends ApiResource implements HasId, MetadataStore<Set
     @Setter
     @EqualsAndHashCode(callSuper = false)
     public static class UsBankAccount extends StripeObject {
+      @SerializedName("financial_connections")
+      FinancialConnections financialConnections;
+
       /**
        * Bank account verification method.
        *
@@ -979,6 +982,25 @@ public class SetupIntent extends ApiResource implements HasId, MetadataStore<Set
        */
       @SerializedName("verification_method")
       String verificationMethod;
+
+      @Getter
+      @Setter
+      @EqualsAndHashCode(callSuper = false)
+      public static class FinancialConnections extends StripeObject {
+        /**
+         * The list of permissions to request. The {@code payment_method} permission must be
+         * included.
+         */
+        @SerializedName("permissions")
+        List<String> permissions;
+
+        /**
+         * For webview integrations only. Upon completing OAuth login in the native browser, the
+         * user will be redirected to this URL to return to your app.
+         */
+        @SerializedName("return_url")
+        String returnUrl;
+      }
     }
   }
 }

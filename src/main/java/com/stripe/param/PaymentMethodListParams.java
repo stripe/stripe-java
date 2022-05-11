@@ -235,6 +235,9 @@ public class PaymentMethodListParams extends ApiRequestParams {
     @SerializedName("card_present")
     CARD_PRESENT("card_present"),
 
+    @SerializedName("customer_balance")
+    CUSTOMER_BALANCE("customer_balance"),
+
     @SerializedName("eps")
     EPS("eps"),
 

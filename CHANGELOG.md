@@ -1,3 +1,74 @@
+# Changelog
+
+## 20.120.0 - 2022-05-11
+* [#1351](https://github.com/stripe/stripe-java/pull/1351) API Updates
+  * Add support for `description` on `CheckoutSessionCreateParams.subscription_data`, `SubscriptionCreateParams`, `SubscriptionUpdateParams`, and `Subscription`
+  * Add support for `consent_collection`, `payment_intent_data`, `shipping_options`, `submit_type`, and `tax_id_collection` on `PaymentLinkCreateParams` and `PaymentLink`
+  * Add support for `customer_creation` on `PaymentLinkCreateParams`, `PaymentLinkUpdateParams`, and `PaymentLink`
+  * Add support for `metadata` on `SubscriptionSchedule.phases[]`, `SubscriptionScheduleCreateParams.phases[]`, and `SubscriptionScheduleUpdateParams.phases[]`
+  * Add support for new value `billing_portal.session.created` on enums `WebhookEndpointCreateParams.enabled_events[]` and `WebhookEndpointUpdateParams.enabled_events[]`
+* [#1350](https://github.com/stripe/stripe-java/pull/1350) API Updates
+  * Add support for `amount_discount`, `amount_tax`, and `product` on `LineItem`
+  
+
+## 20.119.0 - 2022-05-05
+* [#1349](https://github.com/stripe/stripe-java/pull/1349) API Updates
+  * Add support for `default_price_data` on `ProductCreateParams`
+  * Add support for `default_price` on `ProductUpdateParams` and `Product`
+  * Add support for `instructions_email` on `RefundCreateParams` and `Refund`
+  
+
+## 20.118.0 - 2022-05-05
+* [#1348](https://github.com/stripe/stripe-java/pull/1348) API Updates
+  * Add support for new resources `FinancialConnections.AccountOwner`, `FinancialConnections.AccountOwnership`, `FinancialConnections.Account`, and `FinancialConnections.Session`
+  * Add support for `financial_connections` on `Checkout.Session.payment_method_options.us_bank_account`, `CheckoutSessionCreateParams.payment_method_options.us_bank_account`, `Invoice.payment_settings.payment_method_options.us_bank_account`, `InvoiceCreateParams.payment_settings.payment_method_options.us_bank_account`, `InvoiceUpdateParams.payment_settings.payment_method_options.us_bank_account`, `PaymentIntent.payment_method_options.us_bank_account`, `PaymentIntentConfirmParams.payment_method_options.us_bank_account`, `PaymentIntentCreateParams.payment_method_options.us_bank_account`, `PaymentIntentUpdateParams.payment_method_options.us_bank_account`, `SetupIntent.payment_method_options.us_bank_account`, `SetupIntentConfirmParams.payment_method_options.us_bank_account`, `SetupIntentCreateParams.payment_method_options.us_bank_account`, `SetupIntentUpdateParams.payment_method_options.us_bank_account`, `Subscription.payment_settings.payment_method_options.us_bank_account`, `SubscriptionCreateParams.payment_settings.payment_method_options.us_bank_account`, and `SubscriptionUpdateParams.payment_settings.payment_method_options.us_bank_account`
+  * Add support for `financial_connections_account` on `PaymentIntentConfirmParams.payment_method_data.us_bank_account`, `PaymentIntentCreateParams.payment_method_data.us_bank_account`, `PaymentIntentUpdateParams.payment_method_data.us_bank_account`, `PaymentMethod.us_bank_account`, `PaymentMethodCreateParams.us_bank_account`, `SetupIntentConfirmParams.payment_method_data.us_bank_account`, `SetupIntentCreateParams.payment_method_data.us_bank_account`, and `SetupIntentUpdateParams.payment_method_data.us_bank_account`
+  
+* [#1347](https://github.com/stripe/stripe-java/pull/1347) API Updates
+  * Add support for `registered_address` on `AccountCreateParams.individual`, `AccountUpdateParams.individual`, `PersonCreateParams`, `PersonUpdateParams`, `Person`, `TokenCreateParams.account.individual`, and `TokenCreateParams.person`
+  * Add support for `payment_method_data` on `SetupIntentConfirmParams`, `SetupIntentCreateParams`, and `SetupIntentUpdateParams`
+
+## 20.117.0 - 2022-05-03
+* [#1346](https://github.com/stripe/stripe-java/pull/1346) API Updates
+  * Add support for new resource `CashBalance`
+  * Change type of `BillingPortal.Configuration.application` from `$Application` to `deletable($Application)`
+  * Add support for `alipay` on `Checkout.Session.payment_method_options` and `CheckoutSessionCreateParams.payment_method_options`
+  * Add support for new value `eu_oss_vat` on enums `CustomerCreateParams.tax_id_data[].type`, `InvoiceUpcomingLinesParams.customer_details.tax_ids[].type`, `InvoiceUpcomingParams.customer_details.tax_ids[].type`, and `TaxIdCreateParams.type`
+  * Add support for `cash_balance` on `Customer`
+  * Add support for `application` on `Invoice`, `Quote`, `SubscriptionSchedule`, and `Subscription`
+  
+
+## 20.116.0 - 2022-04-21
+* [#1345](https://github.com/stripe/stripe-java/pull/1345) API Updates
+  * Add support for `expire` test helper method on resource `Refund`
+  * Change type of `BillingPortal.Configuration.application` from `string` to `expandable($Application)`
+  * Change `IssuingDisputeCreateParams.transaction` to be optional
+* [#1342](https://github.com/stripe/stripe-java/pull/1342) Add null checks before streaming expandable IDs in setters.
+
+## 20.115.0 - 2022-04-20
+* [#1339](https://github.com/stripe/stripe-java/pull/1339) API Updates
+  * Add support for new resources `FundingInstructions` and `Terminal.Configuration`
+  * Add support for `create_funding_instructions` method on resource `Customer`
+  * Add support for `customer_balance` on `Charge.payment_method_details`, `PaymentIntent.payment_method_options`, `PaymentIntent<Method>Params.payment_method_data`, `PaymentIntent<Method>Params.payment_method_options`, `PaymentMethodCreateParams`, and `PaymentMethod`
+  * Add support for `cash_balance` on `CustomerCreateParams` and `CustomerUpdateParams`
+  * Add support for new value `customer_balance` on enums `CustomerListPaymentMethodsParams.type`, `PaymentMethodListParams.type`, `PaymentIntentConfirmParams.payment_method_data.type`, `PaymentIntentCreateParams.payment_method_data.type`, and `PaymentIntentUpdateParams.payment_method_data.type`
+  * Add support for `amount_details` on `PaymentIntent`
+  * Add support for `display_bank_transfer_instructions` on `PaymentIntent.next_action`
+  * Add support for new value `customer_balance` on enum `PaymentMethodCreateParams.type`
+  * Add support for `configuration_overrides` on `Terminal.Location`, `TerminalLocationCreateParams`, and `TerminalLocationUpdateParams`
+
+## 20.114.0 - 2022-04-14
+* [#1338](https://github.com/stripe/stripe-java/pull/1338) Add support for putExtraParam on EphemeralKeyCreateParams
+* [#1336](https://github.com/stripe/stripe-java/pull/1336) API Updates
+  * Add support for `increment_authorization` method on resource `PaymentIntent`
+  * Add support for `incremental_authorization_supported` on `Charge.payment_method_details.card_present`
+  * Add support for `request_incremental_authorization_support` on `PaymentIntent.payment_method_options.card_present`, `PaymentIntentConfirmParams.payment_method_options.card_present`, `PaymentIntentCreateParams.payment_method_options.card_present`, and `PaymentIntentUpdateParams.payment_method_options.card_present`
+
+## 20.113.0 - 2022-04-08
+* [#1335](https://github.com/stripe/stripe-java/pull/1335) API Updates
+  * Add support for `apply_customer_balance` method on resource `PaymentIntent`
+  * Add support for new value `cash_balance.funds_available` on enums `WebhookEndpointCreateParams.enabled_events[]` and `WebhookEndpointUpdateParams.enabled_events[]`
+
 ## 20.112.0 - 2022-04-01
 * [#1333](https://github.com/stripe/stripe-java/pull/1333) API Updates
   * Add support for `bank_transfer_payments` on `Account.capabilities`, `AccountCreateParams.capabilities`, and `AccountUpdateParams.capabilities`
@@ -7,12 +78,9 @@
   * Add support for new value `customer_balance` on enums `InvoiceCreateParams.payment_settings.payment_method_types[]`, `InvoiceUpdateParams.payment_settings.payment_method_types[]`, `SubscriptionCreateParams.payment_settings.payment_method_types[]`, and `SubscriptionUpdateParams.payment_settings.payment_method_types[]`
   * Add support for `request_extended_authorization` on `PaymentIntent.payment_method_options.card_present`, `PaymentIntentConfirmParams.payment_method_options.card_present`, `PaymentIntentCreateParams.payment_method_options.card_present`, and `PaymentIntentUpdateParams.payment_method_options.card_present`
   * Add support for new values `payment_intent.partially_funded`, `terminal.reader.action_failed`, and `terminal.reader.action_succeeded` on enums `WebhookEndpointCreateParams.enabled_events[]` and `WebhookEndpointUpdateParams.enabled_events[]`
-  
-  
+    
 * [#1331](https://github.com/stripe/stripe-java/pull/1331) Pin JDK version and always build using Java 18
   * This only impacts development and it's not a breaking change for users. We still support Java 1.8 and later.
-
-II# Changelog
 
 ## 20.111.0 - 2022-03-30
 * [#1332](https://github.com/stripe/stripe-java/pull/1332) API Updates

@@ -612,8 +612,14 @@ public class WebhookEndpointCreateParams extends ApiRequestParams {
     @SerializedName("billing_portal.configuration.updated")
     BILLING_PORTAL__CONFIGURATION__UPDATED("billing_portal.configuration.updated"),
 
+    @SerializedName("billing_portal.session.created")
+    BILLING_PORTAL__SESSION__CREATED("billing_portal.session.created"),
+
     @SerializedName("capability.updated")
     CAPABILITY__UPDATED("capability.updated"),
+
+    @SerializedName("cash_balance.funds_available")
+    CASH_BALANCE__FUNDS_AVAILABLE("cash_balance.funds_available"),
 
     @SerializedName("charge.captured")
     CHARGE__CAPTURED("charge.captured"),

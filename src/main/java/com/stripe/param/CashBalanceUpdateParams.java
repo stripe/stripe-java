@@ -1,0 +1,207 @@
+// File generated from our OpenAPI spec
+package com.stripe.param;
+
+import com.google.gson.annotations.SerializedName;
+import com.stripe.net.ApiRequestParams;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+import lombok.Getter;
+
+@Getter
+public class CashBalanceUpdateParams extends ApiRequestParams {
+  /** Specifies which fields in the response should be expanded. */
+  @SerializedName("expand")
+  List<String> expand;
+
+  /**
+   * Map of extra parameters for custom features not available in this client library. The content
+   * in this map is not serialized under this field's {@code @SerializedName} value. Instead, each
+   * key/value pair is serialized as if the key is a root-level field (serialized) name in this
+   * param object. Effectively, this map is flattened to its parent instance.
+   */
+  @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
+  Map<String, Object> extraParams;
+
+  @SerializedName("settings")
+  Settings settings;
+
+  private CashBalanceUpdateParams(
+      List<String> expand, Map<String, Object> extraParams, Settings settings) {
+    this.expand = expand;
+    this.extraParams = extraParams;
+    this.settings = settings;
+  }
+
+  public static Builder builder() {
+    return new Builder();
+  }
+
+  public static class Builder {
+    private List<String> expand;
+
+    private Map<String, Object> extraParams;
+
+    private Settings settings;
+
+    /** Finalize and obtain parameter instance from this builder. */
+    public CashBalanceUpdateParams build() {
+      return new CashBalanceUpdateParams(this.expand, this.extraParams, this.settings);
+    }
+
+    /**
+     * Add an element to `expand` list. A list is initialized for the first `add/addAll` call, and
+     * subsequent calls adds additional elements to the original list. See {@link
+     * CashBalanceUpdateParams#expand} for the field documentation.
+     */
+    public Builder addExpand(String element) {
+      if (this.expand == null) {
+        this.expand = new ArrayList<>();
+      }
+      this.expand.add(element);
+      return this;
+    }
+
+    /**
+     * Add all elements to `expand` list. A list is initialized for the first `add/addAll` call, and
+     * subsequent calls adds additional elements to the original list. See {@link
+     * CashBalanceUpdateParams#expand} for the field documentation.
+     */
+    public Builder addAllExpand(List<String> elements) {
+      if (this.expand == null) {
+        this.expand = new ArrayList<>();
+      }
+      this.expand.addAll(elements);
+      return this;
+    }
+
+    /**
+     * Add a key/value pair to `extraParams` map. A map is initialized for the first `put/putAll`
+     * call, and subsequent calls add additional key/value pairs to the original map. See {@link
+     * CashBalanceUpdateParams#extraParams} for the field documentation.
+     */
+    public Builder putExtraParam(String key, Object value) {
+      if (this.extraParams == null) {
+        this.extraParams = new HashMap<>();
+      }
+      this.extraParams.put(key, value);
+      return this;
+    }
+
+    /**
+     * Add all map key/value pairs to `extraParams` map. A map is initialized for the first
+     * `put/putAll` call, and subsequent calls add additional key/value pairs to the original map.
+     * See {@link CashBalanceUpdateParams#extraParams} for the field documentation.
+     */
+    public Builder putAllExtraParam(Map<String, Object> map) {
+      if (this.extraParams == null) {
+        this.extraParams = new HashMap<>();
+      }
+      this.extraParams.putAll(map);
+      return this;
+    }
+
+    public Builder setSettings(Settings settings) {
+      this.settings = settings;
+      return this;
+    }
+  }
+
+  @Getter
+  public static class Settings {
+    /**
+     * Map of extra parameters for custom features not available in this client library. The content
+     * in this map is not serialized under this field's {@code @SerializedName} value. Instead, each
+     * key/value pair is serialized as if the key is a root-level field (serialized) name in this
+     * param object. Effectively, this map is flattened to its parent instance.
+     */
+    @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
+    Map<String, Object> extraParams;
+
+    /**
+     * Method for using the customer balance to pay outstanding {@code customer_balance}
+     * PaymentIntents. If set to {@code automatic}, all available funds will automatically be used
+     * to pay any outstanding PaymentIntent. If set to {@code manual}, only customer balance funds
+     * from bank transfers with a reference code matching {@code
+     * payment_intent.next_action.display_bank_transfer_intructions.reference_code} will
+     * automatically be used to pay the corresponding outstanding PaymentIntent.
+     */
+    @SerializedName("reconciliation_mode")
+    ReconciliationMode reconciliationMode;
+
+    private Settings(Map<String, Object> extraParams, ReconciliationMode reconciliationMode) {
+      this.extraParams = extraParams;
+      this.reconciliationMode = reconciliationMode;
+    }
+
+    public static Builder builder() {
+      return new Builder();
+    }
+
+    public static class Builder {
+      private Map<String, Object> extraParams;
+
+      private ReconciliationMode reconciliationMode;
+
+      /** Finalize and obtain parameter instance from this builder. */
+      public Settings build() {
+        return new Settings(this.extraParams, this.reconciliationMode);
+      }
+
+      /**
+       * Add a key/value pair to `extraParams` map. A map is initialized for the first `put/putAll`
+       * call, and subsequent calls add additional key/value pairs to the original map. See {@link
+       * CashBalanceUpdateParams.Settings#extraParams} for the field documentation.
+       */
+      public Builder putExtraParam(String key, Object value) {
+        if (this.extraParams == null) {
+          this.extraParams = new HashMap<>();
+        }
+        this.extraParams.put(key, value);
+        return this;
+      }
+
+      /**
+       * Add all map key/value pairs to `extraParams` map. A map is initialized for the first
+       * `put/putAll` call, and subsequent calls add additional key/value pairs to the original map.
+       * See {@link CashBalanceUpdateParams.Settings#extraParams} for the field documentation.
+       */
+      public Builder putAllExtraParam(Map<String, Object> map) {
+        if (this.extraParams == null) {
+          this.extraParams = new HashMap<>();
+        }
+        this.extraParams.putAll(map);
+        return this;
+      }
+
+      /**
+       * Method for using the customer balance to pay outstanding {@code customer_balance}
+       * PaymentIntents. If set to {@code automatic}, all available funds will automatically be used
+       * to pay any outstanding PaymentIntent. If set to {@code manual}, only customer balance funds
+       * from bank transfers with a reference code matching {@code
+       * payment_intent.next_action.display_bank_transfer_intructions.reference_code} will
+       * automatically be used to pay the corresponding outstanding PaymentIntent.
+       */
+      public Builder setReconciliationMode(ReconciliationMode reconciliationMode) {
+        this.reconciliationMode = reconciliationMode;
+        return this;
+      }
+    }
+
+    public enum ReconciliationMode implements ApiRequestParams.EnumParam {
+      @SerializedName("automatic")
+      AUTOMATIC("automatic"),
+
+      @SerializedName("manual")
+      MANUAL("manual");
+
+      @Getter(onMethod_ = {@Override})
+      private final String value;
+
+      ReconciliationMode(String value) {
+        this.value = value;
+      }
+    }
+  }
+}

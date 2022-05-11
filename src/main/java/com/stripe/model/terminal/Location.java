@@ -25,6 +25,10 @@ public class Location extends ApiResource implements HasId, MetadataStore<Locati
   @SerializedName("address")
   Address address;
 
+  /** The ID of a configuration that will be used to customize all readers in this location. */
+  @SerializedName("configuration_overrides")
+  String configurationOverrides;
+
   /** Always true for a deleted object. */
   @SerializedName("deleted")
   Boolean deleted;

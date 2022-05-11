@@ -66,6 +66,12 @@ public class Invoice extends ApiResource implements HasId, MetadataStore<Invoice
   @SerializedName("amount_remaining")
   Long amountRemaining;
 
+  /** ID of the Connect Application that created the invoice. */
+  @SerializedName("application")
+  @Getter(lombok.AccessLevel.NONE)
+  @Setter(lombok.AccessLevel.NONE)
+  ExpandableField<Application> application;
+
   /**
    * The fee in %s that will be applied to the invoice and transferred to the application owner's
    * Stripe account when the invoice is paid.
@@ -495,6 +501,24 @@ public class Invoice extends ApiResource implements HasId, MetadataStore<Invoice
   @SerializedName("webhooks_delivered_at")
   Long webhooksDeliveredAt;
 
+  /** Get ID of expandable {@code application} object. */
+  public String getApplication() {
+    return (this.application != null) ? this.application.getId() : null;
+  }
+
+  public void setApplication(String id) {
+    this.application = ApiResource.setExpandableFieldId(id, this.application);
+  }
+
+  /** Get expanded {@code application}. */
+  public Application getApplicationObject() {
+    return (this.application != null) ? this.application.getExpanded() : null;
+  }
+
+  public void setApplicationObject(Application expandableObject) {
+    this.application = new ExpandableField<Application>(expandableObject.getId(), expandableObject);
+  }
+
   /** Get ID of expandable {@code charge} object. */
   public String getCharge() {
     return (this.charge != null) ? this.charge.getId() : null;
@@ -673,7 +697,11 @@ public class Invoice extends ApiResource implements HasId, MetadataStore<Invoice
       this.accountTaxIds = null;
       return;
     }
-    if (this.accountTaxIds.stream().map(x -> x.getId()).collect(Collectors.toList()).equals(ids)) {
+    if (this.accountTaxIds != null
+        && this.accountTaxIds.stream()
+            .map(x -> x.getId())
+            .collect(Collectors.toList())
+            .equals(ids)) {
       // noop if the ids are equal to what are already present
       return;
     }
@@ -713,7 +741,8 @@ public class Invoice extends ApiResource implements HasId, MetadataStore<Invoice
       this.discounts = null;
       return;
     }
-    if (this.discounts.stream().map(x -> x.getId()).collect(Collectors.toList()).equals(ids)) {
+    if (this.discounts != null
+        && this.discounts.stream().map(x -> x.getId()).collect(Collectors.toList()).equals(ids)) {
       // noop if the ids are equal to what are already present
       return;
     }
@@ -1543,14 +1572,14 @@ public class Invoice extends ApiResource implements HasId, MetadataStore<Invoice
   public static class CustomerTaxId extends StripeObject {
     /**
      * The type of the tax ID, one of {@code eu_vat}, {@code br_cnpj}, {@code br_cpf}, {@code
-     * gb_vat}, {@code nz_gst}, {@code au_abn}, {@code au_arn}, {@code in_gst}, {@code no_vat},
-     * {@code za_vat}, {@code ch_vat}, {@code mx_rfc}, {@code sg_uen}, {@code ru_inn}, {@code
-     * ru_kpp}, {@code ca_bn}, {@code hk_br}, {@code es_cif}, {@code tw_vat}, {@code th_vat}, {@code
-     * jp_cn}, {@code jp_rn}, {@code li_uid}, {@code my_itn}, {@code us_ein}, {@code kr_brn}, {@code
-     * ca_qst}, {@code ca_gst_hst}, {@code ca_pst_bc}, {@code ca_pst_mb}, {@code ca_pst_sk}, {@code
-     * my_sst}, {@code sg_gst}, {@code ae_trn}, {@code cl_tin}, {@code sa_vat}, {@code id_npwp},
-     * {@code my_frp}, {@code il_vat}, {@code ge_vat}, {@code ua_vat}, {@code is_vat}, {@code
-     * bg_uic}, {@code hu_tin}, {@code si_tin}, or {@code unknown}.
+     * eu_oss_vat}, {@code gb_vat}, {@code nz_gst}, {@code au_abn}, {@code au_arn}, {@code in_gst},
+     * {@code no_vat}, {@code za_vat}, {@code ch_vat}, {@code mx_rfc}, {@code sg_uen}, {@code
+     * ru_inn}, {@code ru_kpp}, {@code ca_bn}, {@code hk_br}, {@code es_cif}, {@code tw_vat}, {@code
+     * th_vat}, {@code jp_cn}, {@code jp_rn}, {@code li_uid}, {@code my_itn}, {@code us_ein}, {@code
+     * kr_brn}, {@code ca_qst}, {@code ca_gst_hst}, {@code ca_pst_bc}, {@code ca_pst_mb}, {@code
+     * ca_pst_sk}, {@code my_sst}, {@code sg_gst}, {@code ae_trn}, {@code cl_tin}, {@code sa_vat},
+     * {@code id_npwp}, {@code my_frp}, {@code il_vat}, {@code ge_vat}, {@code ua_vat}, {@code
+     * is_vat}, {@code bg_uic}, {@code hu_tin}, {@code si_tin}, or {@code unknown}.
      */
     @SerializedName("type")
     String type;
@@ -1742,6 +1771,9 @@ public class Invoice extends ApiResource implements HasId, MetadataStore<Invoice
     @Setter
     @EqualsAndHashCode(callSuper = false)
     public static class UsBankAccount extends StripeObject {
+      @SerializedName("financial_connections")
+      FinancialConnections financialConnections;
+
       /**
        * Bank account verification method.
        *
@@ -1749,6 +1781,18 @@ public class Invoice extends ApiResource implements HasId, MetadataStore<Invoice
        */
       @SerializedName("verification_method")
       String verificationMethod;
+
+      @Getter
+      @Setter
+      @EqualsAndHashCode(callSuper = false)
+      public static class FinancialConnections extends StripeObject {
+        /**
+         * The list of permissions to request. The {@code payment_method} permission must be
+         * included.
+         */
+        @SerializedName("permissions")
+        List<String> permissions;
+      }
     }
   }
 
