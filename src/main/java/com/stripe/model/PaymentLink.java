@@ -61,6 +61,18 @@ public class PaymentLink extends ApiResource implements HasId, MetadataStore<Pay
   @SerializedName("billing_address_collection")
   String billingAddressCollection;
 
+  /** When set, provides configuration to gather active consent from customers. */
+  @SerializedName("consent_collection")
+  ConsentCollection consentCollection;
+
+  /**
+   * Configuration for Customer creation during checkout.
+   *
+   * <p>One of {@code always}, or {@code if_required}.
+   */
+  @SerializedName("customer_creation")
+  String customerCreation;
+
   /** Unique identifier for the object. */
   @Getter(onMethod_ = {@Override})
   @SerializedName("id")
@@ -104,6 +116,10 @@ public class PaymentLink extends ApiResource implements HasId, MetadataStore<Pay
   @Setter(lombok.AccessLevel.NONE)
   ExpandableField<Account> onBehalfOf;
 
+  /** Indicates the parameters to be passed to PaymentIntent creation during checkout. */
+  @SerializedName("payment_intent_data")
+  PaymentIntentData paymentIntentData;
+
   /**
    * The list of payment method types that customers can use. When {@code null}, Stripe will
    * dynamically show relevant payment methods you've enabled in your <a
@@ -119,12 +135,28 @@ public class PaymentLink extends ApiResource implements HasId, MetadataStore<Pay
   @SerializedName("shipping_address_collection")
   ShippingAddressCollection shippingAddressCollection;
 
+  /** The shipping rate options applied to the session. */
+  @SerializedName("shipping_options")
+  List<PaymentLink.ShippingOption> shippingOptions;
+
+  /**
+   * Indicates the type of transaction being performed which customizes relevant text on the page,
+   * such as the submit button.
+   *
+   * <p>One of {@code auto}, {@code book}, {@code donate}, or {@code pay}.
+   */
+  @SerializedName("submit_type")
+  String submitType;
+
   /**
    * When creating a subscription, the specified configuration data will be used. There must be at
    * least one line item with a recurring price to use {@code subscription_data}.
    */
   @SerializedName("subscription_data")
   SubscriptionData subscriptionData;
+
+  @SerializedName("tax_id_collection")
+  TaxIdCollection taxIdCollection;
 
   /**
    * The account (if any) the payments will be attributed to for tax reporting, and where funds from
@@ -387,6 +419,42 @@ public class PaymentLink extends ApiResource implements HasId, MetadataStore<Pay
   @Getter
   @Setter
   @EqualsAndHashCode(callSuper = false)
+  public static class ConsentCollection extends StripeObject {
+    /**
+     * If set to {@code auto}, enables the collection of customer consent for promotional
+     * communications.
+     *
+     * <p>Equal to {@code auto}.
+     */
+    @SerializedName("promotions")
+    String promotions;
+  }
+
+  @Getter
+  @Setter
+  @EqualsAndHashCode(callSuper = false)
+  public static class PaymentIntentData extends StripeObject {
+    /**
+     * Indicates when the funds will be captured from the customer's account.
+     *
+     * <p>One of {@code automatic}, or {@code manual}.
+     */
+    @SerializedName("capture_method")
+    String captureMethod;
+
+    /**
+     * Indicates that you intend to make future payments with the payment method collected during
+     * checkout.
+     *
+     * <p>One of {@code off_session}, or {@code on_session}.
+     */
+    @SerializedName("setup_future_usage")
+    String setupFutureUsage;
+  }
+
+  @Getter
+  @Setter
+  @EqualsAndHashCode(callSuper = false)
   public static class PhoneNumberCollection extends StripeObject {
     /** If {@code true}, a phone number will be collected during checkout. */
     @SerializedName("enabled")
@@ -409,6 +477,40 @@ public class PaymentLink extends ApiResource implements HasId, MetadataStore<Pay
   @Getter
   @Setter
   @EqualsAndHashCode(callSuper = false)
+  public static class ShippingOption extends StripeObject {
+    /** A non-negative integer in cents representing how much to charge. */
+    @SerializedName("shipping_amount")
+    Long shippingAmount;
+
+    /** The ID of the Shipping Rate to use for this shipping option. */
+    @SerializedName("shipping_rate")
+    @Getter(lombok.AccessLevel.NONE)
+    @Setter(lombok.AccessLevel.NONE)
+    ExpandableField<ShippingRate> shippingRate;
+
+    /** Get ID of expandable {@code shippingRate} object. */
+    public String getShippingRate() {
+      return (this.shippingRate != null) ? this.shippingRate.getId() : null;
+    }
+
+    public void setShippingRate(String id) {
+      this.shippingRate = ApiResource.setExpandableFieldId(id, this.shippingRate);
+    }
+
+    /** Get expanded {@code shippingRate}. */
+    public ShippingRate getShippingRateObject() {
+      return (this.shippingRate != null) ? this.shippingRate.getExpanded() : null;
+    }
+
+    public void setShippingRateObject(ShippingRate expandableObject) {
+      this.shippingRate =
+          new ExpandableField<ShippingRate>(expandableObject.getId(), expandableObject);
+    }
+  }
+
+  @Getter
+  @Setter
+  @EqualsAndHashCode(callSuper = false)
   public static class SubscriptionData extends StripeObject {
     /**
      * Integer representing the number of trial period days before the customer is charged for the
@@ -416,6 +518,15 @@ public class PaymentLink extends ApiResource implements HasId, MetadataStore<Pay
      */
     @SerializedName("trial_period_days")
     Long trialPeriodDays;
+  }
+
+  @Getter
+  @Setter
+  @EqualsAndHashCode(callSuper = false)
+  public static class TaxIdCollection extends StripeObject {
+    /** Indicates whether tax ID collection is enabled for the session. */
+    @SerializedName("enabled")
+    Boolean enabled;
   }
 
   @Getter

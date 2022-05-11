@@ -1060,6 +1060,18 @@ public class SubscriptionScheduleCreateParams extends ApiRequestParams {
     Long iterations;
 
     /**
+     * Set of <a href="https://stripe.com/docs/api/metadata">key-value pairs</a> that you can attach
+     * to a phase. Metadata on a schedule's phase will update the underlying subscription's {@code
+     * metadata} when the phase is entered, adding new keys and replacing existing keys in the
+     * subscription's {@code metadata}. Individual keys in the subscription's {@code metadata} can
+     * be unset by posting an empty value to them in the phase's {@code metadata}. To unset all keys
+     * in the subscription's {@code metadata}, update the subscription directly or unset every key
+     * individually from the phase's {@code metadata}.
+     */
+    @SerializedName("metadata")
+    Map<String, String> metadata;
+
+    /**
      * If a subscription schedule will create prorations when transitioning to this phase. Possible
      * values are {@code create_prorations} or {@code none}, and the default value is {@code
      * create_prorations}. See <a
@@ -1104,6 +1116,7 @@ public class SubscriptionScheduleCreateParams extends ApiRequestParams {
         InvoiceSettings invoiceSettings,
         List<Item> items,
         Long iterations,
+        Map<String, String> metadata,
         ProrationBehavior prorationBehavior,
         TransferData transferData,
         Boolean trial,
@@ -1122,6 +1135,7 @@ public class SubscriptionScheduleCreateParams extends ApiRequestParams {
       this.invoiceSettings = invoiceSettings;
       this.items = items;
       this.iterations = iterations;
+      this.metadata = metadata;
       this.prorationBehavior = prorationBehavior;
       this.transferData = transferData;
       this.trial = trial;
@@ -1161,6 +1175,8 @@ public class SubscriptionScheduleCreateParams extends ApiRequestParams {
 
       private Long iterations;
 
+      private Map<String, String> metadata;
+
       private ProrationBehavior prorationBehavior;
 
       private TransferData transferData;
@@ -1186,6 +1202,7 @@ public class SubscriptionScheduleCreateParams extends ApiRequestParams {
             this.invoiceSettings,
             this.items,
             this.iterations,
+            this.metadata,
             this.prorationBehavior,
             this.transferData,
             this.trial,
@@ -1423,6 +1440,32 @@ public class SubscriptionScheduleCreateParams extends ApiRequestParams {
        */
       public Builder setIterations(Long iterations) {
         this.iterations = iterations;
+        return this;
+      }
+
+      /**
+       * Add a key/value pair to `metadata` map. A map is initialized for the first `put/putAll`
+       * call, and subsequent calls add additional key/value pairs to the original map. See {@link
+       * SubscriptionScheduleCreateParams.Phase#metadata} for the field documentation.
+       */
+      public Builder putMetadata(String key, String value) {
+        if (this.metadata == null) {
+          this.metadata = new HashMap<>();
+        }
+        this.metadata.put(key, value);
+        return this;
+      }
+
+      /**
+       * Add all map key/value pairs to `metadata` map. A map is initialized for the first
+       * `put/putAll` call, and subsequent calls add additional key/value pairs to the original map.
+       * See {@link SubscriptionScheduleCreateParams.Phase#metadata} for the field documentation.
+       */
+      public Builder putAllMetadata(Map<String, String> map) {
+        if (this.metadata == null) {
+          this.metadata = new HashMap<>();
+        }
+        this.metadata.putAll(map);
         return this;
       }
 

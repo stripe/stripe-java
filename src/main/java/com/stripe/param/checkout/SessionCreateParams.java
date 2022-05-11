@@ -6165,6 +6165,13 @@ public class SessionCreateParams extends ApiRequestParams {
     List<String> defaultTaxRates;
 
     /**
+     * The subscription's description, meant to be displayable to the customer. Use this field to
+     * optionally store an explanation of the subscription for rendering in Stripe hosted surfaces.
+     */
+    @SerializedName("description")
+    String description;
+
+    /**
      * Map of extra parameters for custom features not available in this client library. The content
      * in this map is not serialized under this field's {@code @SerializedName} value. Instead, each
      * key/value pair is serialized as if the key is a root-level field (serialized) name in this
@@ -6222,6 +6229,7 @@ public class SessionCreateParams extends ApiRequestParams {
         BigDecimal applicationFeePercent,
         String coupon,
         List<String> defaultTaxRates,
+        String description,
         Map<String, Object> extraParams,
         List<Item> items,
         Map<String, String> metadata,
@@ -6232,6 +6240,7 @@ public class SessionCreateParams extends ApiRequestParams {
       this.applicationFeePercent = applicationFeePercent;
       this.coupon = coupon;
       this.defaultTaxRates = defaultTaxRates;
+      this.description = description;
       this.extraParams = extraParams;
       this.items = items;
       this.metadata = metadata;
@@ -6251,6 +6260,8 @@ public class SessionCreateParams extends ApiRequestParams {
       private String coupon;
 
       private List<String> defaultTaxRates;
+
+      private String description;
 
       private Map<String, Object> extraParams;
 
@@ -6272,6 +6283,7 @@ public class SessionCreateParams extends ApiRequestParams {
             this.applicationFeePercent,
             this.coupon,
             this.defaultTaxRates,
+            this.description,
             this.extraParams,
             this.items,
             this.metadata,
@@ -6326,6 +6338,16 @@ public class SessionCreateParams extends ApiRequestParams {
           this.defaultTaxRates = new ArrayList<>();
         }
         this.defaultTaxRates.addAll(elements);
+        return this;
+      }
+
+      /**
+       * The subscription's description, meant to be displayable to the customer. Use this field to
+       * optionally store an explanation of the subscription for rendering in Stripe hosted
+       * surfaces.
+       */
+      public Builder setDescription(String description) {
+        this.description = description;
         return this;
       }
 
