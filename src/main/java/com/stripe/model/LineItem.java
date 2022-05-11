@@ -2,6 +2,7 @@
 package com.stripe.model;
 
 import com.google.gson.annotations.SerializedName;
+import com.stripe.net.ApiResource;
 import java.util.List;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
@@ -11,9 +12,17 @@ import lombok.Setter;
 @Setter
 @EqualsAndHashCode(callSuper = false)
 public class LineItem extends StripeObject implements HasId {
+  /** Total discount amount applied. If no discounts were applied, defaults to 0. */
+  @SerializedName("amount_discount")
+  Long amountDiscount;
+
   /** Total before any discounts or taxes are applied. */
   @SerializedName("amount_subtotal")
   Long amountSubtotal;
+
+  /** Total tax amount applied. If no tax was applied, defaults to 0. */
+  @SerializedName("amount_tax")
+  Long amountTax;
 
   /** Total after discounts and taxes. */
   @SerializedName("amount_total")
@@ -58,6 +67,16 @@ public class LineItem extends StripeObject implements HasId {
   @SerializedName("price")
   Price price;
 
+  /**
+   * The ID of the product for this line item.
+   *
+   * <p>This will always be the same as {@code price.product}.
+   */
+  @SerializedName("product")
+  @Getter(lombok.AccessLevel.NONE)
+  @Setter(lombok.AccessLevel.NONE)
+  ExpandableField<Product> product;
+
   /** The quantity of products being purchased. */
   @SerializedName("quantity")
   Long quantity;
@@ -65,6 +84,24 @@ public class LineItem extends StripeObject implements HasId {
   /** The taxes applied to the line item. */
   @SerializedName("taxes")
   List<LineItem.Tax> taxes;
+
+  /** Get ID of expandable {@code product} object. */
+  public String getProduct() {
+    return (this.product != null) ? this.product.getId() : null;
+  }
+
+  public void setProduct(String id) {
+    this.product = ApiResource.setExpandableFieldId(id, this.product);
+  }
+
+  /** Get expanded {@code product}. */
+  public Product getProductObject() {
+    return (this.product != null) ? this.product.getExpanded() : null;
+  }
+
+  public void setProductObject(Product expandableObject) {
+    this.product = new ExpandableField<Product>(expandableObject.getId(), expandableObject);
+  }
 
   @Getter
   @Setter
