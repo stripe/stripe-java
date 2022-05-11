@@ -106,6 +106,8 @@ jobs:
         with:
           java-version: "18" # always use 18 for building
           architecture: x64
+      - name: Set Test Java Runtime Environment variable
+        run: echo "JAVA_TEST_HOME=${{ steps.setup-jre.outputs.path }}" >> $GITHUB_ENV
 
       # - name: Configure GPG Key
       #   run: |
@@ -136,6 +138,8 @@ jobs:
         with:
           java-version: "18" # always use 18 for building
           architecture: x64
+      - name: Set Test Java Runtime Environment variable
+        run: echo "JAVA_TEST_HOME=${{ steps.setup-jre.outputs.path }}" >> $GITHUB_ENV
 
       - name: Publish Javadoc
         run: |
