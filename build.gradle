@@ -6,13 +6,6 @@ buildscript {
     }
     dependencies {
         classpath "io.codearte.gradle.nexus:gradle-nexus-staging-plugin:0.30.0"
-
-        // Explicitly pin grgit to 4.1.1. This is a dependencdy of git-publish,
-        // but git-publish pins to grgit-core:latest. Unfortunately grgit 5+
-        // no longer support Java 8, but we still support Java 8.
-        classpath ("org.ajoberstar.grgit:grgit-core:4.1.1") {
-            force = true
-        }
     }
 }
 
