@@ -3,7 +3,9 @@ name: CI
 on:
   workflow_dispatch: {}
   push:
-    branches: [master, pakrym/release-pipeline]
+    branches: [master]
+    tags:
+      - v[0-9]+.[0-9]+.[0-9]+*
   pull_request:
     branches: [master]
 
@@ -96,7 +98,7 @@ jobs:
   publish:
     if: >-
         ((github.event_name == 'workflow_dispatch') || (github.event_name == 'push')) &&
-        (github.ref == 'refs/heads/pakrym/release-pipeline' || startsWith(github.ref, 'refs/tags/v')) &&
+        startsWith(github.ref, 'refs/tags/v') &&
         endsWith(github.actor, '-stripe')
     needs: [build, test]
     runs-on: ubuntu-latest
@@ -131,7 +133,7 @@ jobs:
   publish-docs:
     if: >-
       ((github.event_name == 'workflow_dispatch') || (github.event_name == 'push')) &&
-      (github.ref == 'refs/heads/pakrym/release-pipeline' || startsWith(github.ref, 'refs/tags/v')) &&
+      startsWith(github.ref, 'refs/tags/v') &&
       endsWith(github.actor, '-stripe')
     needs: [build, test]
     runs-on: ubuntu-latest
