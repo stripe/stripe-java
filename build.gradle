@@ -19,7 +19,7 @@ plugins {
     id "net.ltgt.errorprone" version "2.0.2"
     id "com.github.kt3k.coveralls" version "2.12.0"
     id "biz.aQute.bnd.builder" version "6.1.0"
-    id "org.ajoberstar.git-publish" version "3.0.0"
+    id "org.ajoberstar.git-publish" version "4.1.0"
 }
 
 sourceCompatibility = JavaVersion.VERSION_1_8
