@@ -6,13 +6,6 @@ buildscript {
     }
     dependencies {
         classpath "io.codearte.gradle.nexus:gradle-nexus-staging-plugin:0.30.0"
-
-        // Explicitly pin grgit to 4.1.1. This is a dependencdy of git-publish,
-        // but git-publish pins to grgit-core:latest. Unfortunately grgit 5+
-        // no longer support Java 8, but we still support Java 8.
-        classpath ("org.ajoberstar.grgit:grgit-core:4.1.1") {
-            force = true
-        }
     }
 }
 
@@ -26,7 +19,7 @@ plugins {
     id "net.ltgt.errorprone" version "2.0.2"
     id "com.github.kt3k.coveralls" version "2.12.0"
     id "biz.aQute.bnd.builder" version "6.1.0"
-    id "org.ajoberstar.git-publish" version "3.0.0"
+    id "org.ajoberstar.git-publish" version "3.0.1"
 }
 
 sourceCompatibility = JavaVersion.VERSION_1_8
@@ -149,7 +142,7 @@ coveralls {
 }
 
 gitPublish {
-    repoUri = 'git@github.com:stripe/stripe-java.git'
+    repoUri = 'https://github.com/stripe/stripe-java.git'
     branch = 'gh-pages'
     sign = false // disable commit signing
 
