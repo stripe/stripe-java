@@ -6,6 +6,7 @@ import com.stripe.Stripe;
 import com.stripe.exception.StripeException;
 import com.stripe.model.ExpandableField;
 import com.stripe.model.HasId;
+import com.stripe.model.StripeObject;
 import com.stripe.net.ApiResource;
 import com.stripe.net.RequestOptions;
 import com.stripe.param.treasury.CreditReversalCreateParams;
@@ -91,7 +92,7 @@ public class CreditReversal extends ApiResource implements HasId {
   String status;
 
   @SerializedName("status_transitions")
-  ReceivedCredit.StatusTransitions statusTransitions;
+  StatusTransitions statusTransitions;
 
   /** The Transaction associated with this object. */
   @SerializedName("transaction")
@@ -217,5 +218,14 @@ public class CreditReversal extends ApiResource implements HasId {
     String url = String.format("%s%s", Stripe.getApiBase(), "/v1/treasury/credit_reversals");
     return ApiResource.request(
         ApiResource.RequestMethod.POST, url, params, CreditReversal.class, options);
+  }
+
+  @Getter
+  @Setter
+  @EqualsAndHashCode(callSuper = false)
+  public static class StatusTransitions extends StripeObject {
+    /** Timestamp describing when the CreditReversal changed status to {@code posted}. */
+    @SerializedName("posted_at")
+    Long postedAt;
   }
 }

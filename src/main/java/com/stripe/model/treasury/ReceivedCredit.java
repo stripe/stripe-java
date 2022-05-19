@@ -4,6 +4,7 @@ package com.stripe.model.treasury;
 import com.google.gson.annotations.SerializedName;
 import com.stripe.Stripe;
 import com.stripe.exception.StripeException;
+import com.stripe.model.Address;
 import com.stripe.model.ExpandableField;
 import com.stripe.model.HasId;
 import com.stripe.model.Payout;
@@ -197,6 +198,97 @@ public class ReceivedCredit extends ApiResource implements HasId {
   @Getter
   @Setter
   @EqualsAndHashCode(callSuper = false)
+  public static class InitiatingPaymentMethodDetails extends StripeObject {
+    /**
+     * Set when {@code type} is {@code balance}.
+     *
+     * <p>Equal to {@code payments}.
+     */
+    @SerializedName("balance")
+    String balance;
+
+    @SerializedName("billing_details")
+    BillingDetails billingDetails;
+
+    @SerializedName("financial_account")
+    FinancialAccount financialAccount;
+
+    /**
+     * Set when {@code type} is {@code issuing_card}. This is an <a
+     * href="https://stripe.com/docs/api#issuing_cards">Issuing Card</a> ID.
+     */
+    @SerializedName("issuing_card")
+    String issuingCard;
+
+    /**
+     * Polymorphic type matching the originating money movement's source. This can be an external
+     * account, a Stripe balance, or a FinancialAccount.
+     *
+     * <p>One of {@code balance}, {@code financial_account}, {@code issuing_card}, {@code stripe},
+     * or {@code us_bank_account}.
+     */
+    @SerializedName("type")
+    String type;
+
+    @SerializedName("us_bank_account")
+    UsBankAccount usBankAccount;
+
+    @Getter
+    @Setter
+    @EqualsAndHashCode(callSuper = false)
+    public static class BillingDetails extends StripeObject {
+      @SerializedName("address")
+      Address address;
+
+      /** Email address. */
+      @SerializedName("email")
+      String email;
+
+      /** Full name. */
+      @SerializedName("name")
+      String name;
+    }
+
+    @Getter
+    @Setter
+    @EqualsAndHashCode(callSuper = false)
+    public static class FinancialAccount extends StripeObject implements HasId {
+      /** The FinancialAccount ID. */
+      @Getter(onMethod_ = {@Override})
+      @SerializedName("id")
+      String id;
+
+      /**
+       * The rails the ReceivedCredit was sent over. A FinancialAccount can only send funds over
+       * {@code stripe}.
+       *
+       * <p>Equal to {@code stripe}.
+       */
+      @SerializedName("network")
+      String network;
+    }
+
+    @Getter
+    @Setter
+    @EqualsAndHashCode(callSuper = false)
+    public static class UsBankAccount extends StripeObject {
+      /** Bank name. */
+      @SerializedName("bank_name")
+      String bankName;
+
+      /** The last four digits of the bank account number. */
+      @SerializedName("last4")
+      String last4;
+
+      /** The routing number for the bank account. */
+      @SerializedName("routing_number")
+      String routingNumber;
+    }
+  }
+
+  @Getter
+  @Setter
+  @EqualsAndHashCode(callSuper = false)
   public static class LinkedFlows extends StripeObject {
     /** The CreditReversal created as a result of this ReceivedCredit being reversed. */
     @SerializedName("credit_reversal")
@@ -226,7 +318,7 @@ public class ReceivedCredit extends ApiResource implements HasId {
 
     /** The expandable object of the source flow. */
     @SerializedName("source_flow_details")
-    SourceFlowsDetails sourceFlowDetails;
+    SourceFlowDetails sourceFlowDetails;
 
     /**
      * The type of flow that originated the ReceivedCredit (for example, {@code outbound_payment}).
@@ -237,7 +329,7 @@ public class ReceivedCredit extends ApiResource implements HasId {
     @Getter
     @Setter
     @EqualsAndHashCode(callSuper = false)
-    public static class SourceFlowsDetails extends StripeObject {
+    public static class SourceFlowDetails extends StripeObject {
       /**
        * You can reverse some <a
        * href="https://stripe.com/docs/api#received_credits">ReceivedCredits</a> depending on their

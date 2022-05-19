@@ -6,6 +6,7 @@ import com.stripe.Stripe;
 import com.stripe.exception.StripeException;
 import com.stripe.model.ExpandableField;
 import com.stripe.model.HasId;
+import com.stripe.model.StripeObject;
 import com.stripe.net.ApiResource;
 import com.stripe.net.RequestOptions;
 import com.stripe.param.treasury.TransactionEntryListParams;
@@ -21,7 +22,7 @@ import lombok.Setter;
 public class TransactionEntry extends ApiResource implements HasId {
   /** Change to a FinancialAccount's balance. */
   @SerializedName("balance_impact")
-  Transaction.BalanceImpact balanceImpact;
+  BalanceImpact balanceImpact;
 
   /** Time at which the object was created. Measured in seconds since the Unix epoch. */
   @SerializedName("created")
@@ -178,5 +179,28 @@ public class TransactionEntry extends ApiResource implements HasId {
       TransactionEntryListParams params, RequestOptions options) throws StripeException {
     String url = String.format("%s%s", Stripe.getApiBase(), "/v1/treasury/transaction_entries");
     return ApiResource.requestCollection(url, params, TransactionEntryCollection.class, options);
+  }
+
+  @Getter
+  @Setter
+  @EqualsAndHashCode(callSuper = false)
+  public static class BalanceImpact extends StripeObject {
+    /** The change made to funds the user can spend right now. */
+    @SerializedName("cash")
+    Long cash;
+
+    /**
+     * The change made to funds that are not spendable yet, but will become available at a later
+     * time.
+     */
+    @SerializedName("inbound_pending")
+    Long inboundPending;
+
+    /**
+     * The change made to funds in the account, but not spendable because they are being held for
+     * pending outbound flows.
+     */
+    @SerializedName("outbound_pending")
+    Long outboundPending;
   }
 }

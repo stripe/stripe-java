@@ -4,6 +4,7 @@ package com.stripe.model.treasury;
 import com.google.gson.annotations.SerializedName;
 import com.stripe.Stripe;
 import com.stripe.exception.StripeException;
+import com.stripe.model.Address;
 import com.stripe.model.ExpandableField;
 import com.stripe.model.HasId;
 import com.stripe.model.StripeObject;
@@ -192,6 +193,97 @@ public class ReceivedDebit extends ApiResource implements HasId {
             String.format("/v1/treasury/received_debits/%s", ApiResource.urlEncodeId(id)));
     return ApiResource.request(
         ApiResource.RequestMethod.GET, url, params, ReceivedDebit.class, options);
+  }
+
+  @Getter
+  @Setter
+  @EqualsAndHashCode(callSuper = false)
+  public static class InitiatingPaymentMethodDetails extends StripeObject {
+    /**
+     * Set when {@code type} is {@code balance}.
+     *
+     * <p>Equal to {@code payments}.
+     */
+    @SerializedName("balance")
+    String balance;
+
+    @SerializedName("billing_details")
+    BillingDetails billingDetails;
+
+    @SerializedName("financial_account")
+    FinancialAccount financialAccount;
+
+    /**
+     * Set when {@code type} is {@code issuing_card}. This is an <a
+     * href="https://stripe.com/docs/api#issuing_cards">Issuing Card</a> ID.
+     */
+    @SerializedName("issuing_card")
+    String issuingCard;
+
+    /**
+     * Polymorphic type matching the originating money movement's source. This can be an external
+     * account, a Stripe balance, or a FinancialAccount.
+     *
+     * <p>One of {@code balance}, {@code financial_account}, {@code issuing_card}, {@code stripe},
+     * or {@code us_bank_account}.
+     */
+    @SerializedName("type")
+    String type;
+
+    @SerializedName("us_bank_account")
+    ReceivedCredit.InitiatingPaymentMethodDetails.UsBankAccount usBankAccount;
+
+    @Getter
+    @Setter
+    @EqualsAndHashCode(callSuper = false)
+    public static class BillingDetails extends StripeObject {
+      @SerializedName("address")
+      Address address;
+
+      /** Email address. */
+      @SerializedName("email")
+      String email;
+
+      /** Full name. */
+      @SerializedName("name")
+      String name;
+    }
+
+    @Getter
+    @Setter
+    @EqualsAndHashCode(callSuper = false)
+    public static class FinancialAccount extends StripeObject implements HasId {
+      /** The FinancialAccount ID. */
+      @Getter(onMethod_ = {@Override})
+      @SerializedName("id")
+      String id;
+
+      /**
+       * The rails the ReceivedCredit was sent over. A FinancialAccount can only send funds over
+       * {@code stripe}.
+       *
+       * <p>Equal to {@code stripe}.
+       */
+      @SerializedName("network")
+      String network;
+    }
+
+    @Getter
+    @Setter
+    @EqualsAndHashCode(callSuper = false)
+    public static class UsBankAccount extends StripeObject {
+      /** Bank name. */
+      @SerializedName("bank_name")
+      String bankName;
+
+      /** The last four digits of the bank account number. */
+      @SerializedName("last4")
+      String last4;
+
+      /** The routing number for the bank account. */
+      @SerializedName("routing_number")
+      String routingNumber;
+    }
   }
 
   @Getter

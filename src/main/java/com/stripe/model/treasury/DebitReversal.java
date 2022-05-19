@@ -96,7 +96,7 @@ public class DebitReversal extends ApiResource implements HasId {
   String status;
 
   @SerializedName("status_transitions")
-  ReceivedDebit.StatusTransitions statusTransitions;
+  StatusTransitions statusTransitions;
 
   /** The Transaction associated with this object. */
   @SerializedName("transaction")
@@ -219,5 +219,14 @@ public class DebitReversal extends ApiResource implements HasId {
     /** Set if there is an Issuing dispute associated with the DebitReversal. */
     @SerializedName("issuing_dispute")
     String issuingDispute;
+  }
+
+  @Getter
+  @Setter
+  @EqualsAndHashCode(callSuper = false)
+  public static class StatusTransitions extends StripeObject {
+    /** Timestamp describing when the DebitReversal changed status to {@code completed}. */
+    @SerializedName("completed_at")
+    Long completedAt;
   }
 }

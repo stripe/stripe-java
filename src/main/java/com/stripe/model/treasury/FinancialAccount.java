@@ -55,7 +55,7 @@ public class FinancialAccount extends ApiResource
 
   /** The set of credentials that resolve to a FinancialAccount. */
   @SerializedName("financial_addresses")
-  List<FinancialAccount.FinancialAddresses> financialAddresses;
+  List<FinancialAccount.FinancialAddress> financialAddresses;
 
   /** Unique identifier for the object. */
   @Getter(onMethod_ = {@Override})
@@ -92,7 +92,7 @@ public class FinancialAccount extends ApiResource
 
   /** The set of functionalities that the platform can restrict on the FinancialAccount. */
   @SerializedName("platform_restrictions")
-  FinancialAccountFeatures.PlatformRestriction platformRestrictions;
+  PlatformRestrictions platformRestrictions;
 
   /** The array of paths to restricted Features in the Features hash. */
   @SerializedName("restricted_features")
@@ -376,10 +376,10 @@ public class FinancialAccount extends ApiResource
   @Getter
   @Setter
   @EqualsAndHashCode(callSuper = false)
-  public static class FinancialAddresses extends StripeObject {
+  public static class FinancialAddress extends StripeObject {
     /** ABA Records contain U.S. bank account details per the ABA format. */
     @SerializedName("aba")
-    ABARecord aba;
+    Aba aba;
 
     /** The list of networks that the address supports. */
     @SerializedName("supported_networks")
@@ -396,7 +396,7 @@ public class FinancialAccount extends ApiResource
     @Getter
     @Setter
     @EqualsAndHashCode(callSuper = false)
-    public static class ABARecord extends StripeObject {
+    public static class Aba extends StripeObject {
       /** The name of the person or business that owns the bank account. */
       @SerializedName("account_holder_name")
       String accountHolderName;
@@ -422,15 +422,36 @@ public class FinancialAccount extends ApiResource
   @Getter
   @Setter
   @EqualsAndHashCode(callSuper = false)
+  public static class PlatformRestrictions extends StripeObject {
+    /**
+     * Restricts all inbound money movement.
+     *
+     * <p>One of {@code restricted}, or {@code unrestricted}.
+     */
+    @SerializedName("inbound_flows")
+    String inboundFlows;
+
+    /**
+     * Restricts all outbound money movement.
+     *
+     * <p>One of {@code restricted}, or {@code unrestricted}.
+     */
+    @SerializedName("outbound_flows")
+    String outboundFlows;
+  }
+
+  @Getter
+  @Setter
+  @EqualsAndHashCode(callSuper = false)
   public static class StatusDetails extends StripeObject {
     /** Details related to the closure of this FinancialAccount. */
     @SerializedName("closed")
-    ClosedStatusDetails closed;
+    Closed closed;
 
     @Getter
     @Setter
     @EqualsAndHashCode(callSuper = false)
-    public static class ClosedStatusDetails extends StripeObject {
+    public static class Closed extends StripeObject {
       /** The array that contains reasons for a FinancialAccount closure. */
       @SerializedName("reasons")
       List<String> reasons;
