@@ -449,6 +449,155 @@ class GeneratedExamples extends BaseStripeTest {
   }
 
   @Test
+  public void testInboundTransferFail() throws StripeException {
+    com.stripe.model.treasury.InboundTransfer resource =
+        com.stripe.model.treasury.InboundTransfer.retrieve("ibt_123");
+    com.stripe.param.treasury.InboundTransferFailParams params =
+        com.stripe.param.treasury.InboundTransferFailParams.builder()
+            .setFailureDetails(
+                com.stripe.param.treasury.InboundTransferFailParams.FailureDetails.builder()
+                    .setCode(
+                        com.stripe.param.treasury.InboundTransferFailParams.FailureDetails.Code
+                            .ACCOUNT_CLOSED)
+                    .build())
+            .build();
+
+    com.stripe.model.treasury.InboundTransfer inboundTransfer =
+        resource.getTestHelpers().fail(params);
+    assertNotNull(inboundTransfer);
+    verifyRequest(
+        ApiResource.RequestMethod.POST,
+        "/v1/test_helpers/treasury/inbound_transfers/ibt_123/fail",
+        params.toMap());
+  }
+
+  @Test
+  public void testInboundTransferReturnInboundTransfer() throws StripeException {
+    com.stripe.model.treasury.InboundTransfer resource =
+        com.stripe.model.treasury.InboundTransfer.retrieve("ibt_123");
+    com.stripe.param.treasury.InboundTransferReturnInboundTransferParams params =
+        com.stripe.param.treasury.InboundTransferReturnInboundTransferParams.builder().build();
+
+    com.stripe.model.treasury.InboundTransfer inboundTransfer =
+        resource.getTestHelpers().returnInboundTransfer(params);
+    assertNotNull(inboundTransfer);
+    verifyRequest(
+        ApiResource.RequestMethod.POST,
+        "/v1/test_helpers/treasury/inbound_transfers/ibt_123/return",
+        params.toMap());
+  }
+
+  @Test
+  public void testInboundTransferSucceed() throws StripeException {
+    com.stripe.model.treasury.InboundTransfer resource =
+        com.stripe.model.treasury.InboundTransfer.retrieve("ibt_123");
+    com.stripe.param.treasury.InboundTransferSucceedParams params =
+        com.stripe.param.treasury.InboundTransferSucceedParams.builder().build();
+
+    com.stripe.model.treasury.InboundTransfer inboundTransfer =
+        resource.getTestHelpers().succeed(params);
+    assertNotNull(inboundTransfer);
+    verifyRequest(
+        ApiResource.RequestMethod.POST,
+        "/v1/test_helpers/treasury/inbound_transfers/ibt_123/succeed",
+        params.toMap());
+  }
+
+  @Test
+  public void testOutboundTransferPost() throws StripeException {
+    com.stripe.model.treasury.OutboundTransfer resource =
+        com.stripe.model.treasury.OutboundTransfer.retrieve("obt_123");
+    com.stripe.param.treasury.OutboundTransferPostParams params =
+        com.stripe.param.treasury.OutboundTransferPostParams.builder().build();
+
+    com.stripe.model.treasury.OutboundTransfer outboundTransfer =
+        resource.getTestHelpers().post(params);
+    assertNotNull(outboundTransfer);
+    verifyRequest(
+        ApiResource.RequestMethod.POST,
+        "/v1/test_helpers/treasury/outbound_transfers/obt_123/post",
+        params.toMap());
+  }
+
+  @Test
+  public void testOutboundTransferFail() throws StripeException {
+    com.stripe.model.treasury.OutboundTransfer resource =
+        com.stripe.model.treasury.OutboundTransfer.retrieve("obt_123");
+    com.stripe.param.treasury.OutboundTransferFailParams params =
+        com.stripe.param.treasury.OutboundTransferFailParams.builder().build();
+
+    com.stripe.model.treasury.OutboundTransfer outboundTransfer =
+        resource.getTestHelpers().fail(params);
+    assertNotNull(outboundTransfer);
+    verifyRequest(
+        ApiResource.RequestMethod.POST,
+        "/v1/test_helpers/treasury/outbound_transfers/obt_123/fail",
+        params.toMap());
+  }
+
+  @Test
+  public void testOutboundTransferReturnOutboundTransfer() throws StripeException {
+    com.stripe.model.treasury.OutboundTransfer resource =
+        com.stripe.model.treasury.OutboundTransfer.retrieve("obt_123");
+    com.stripe.param.treasury.OutboundTransferReturnOutboundTransferParams params =
+        com.stripe.param.treasury.OutboundTransferReturnOutboundTransferParams.builder()
+            .setReturnedDetails(
+                com.stripe.param.treasury.OutboundTransferReturnOutboundTransferParams
+                    .ReturnedDetails.builder()
+                    .setCode(
+                        com.stripe.param.treasury.OutboundTransferReturnOutboundTransferParams
+                            .ReturnedDetails.Code.ACCOUNT_CLOSED)
+                    .build())
+            .build();
+
+    com.stripe.model.treasury.OutboundTransfer outboundTransfer =
+        resource.getTestHelpers().returnOutboundTransfer(params);
+    assertNotNull(outboundTransfer);
+    verifyRequest(
+        ApiResource.RequestMethod.POST,
+        "/v1/test_helpers/treasury/outbound_transfers/obt_123/return",
+        params.toMap());
+  }
+
+  @Test
+  public void testReceivedCreditCreate() throws StripeException {
+    com.stripe.param.treasury.ReceivedCreditCreateParams params =
+        com.stripe.param.treasury.ReceivedCreditCreateParams.builder()
+            .setFinancialAccount("fa_123")
+            .setNetwork(com.stripe.param.treasury.ReceivedCreditCreateParams.Network.ACH)
+            .setAmount(1234L)
+            .setCurrency("usd")
+            .build();
+
+    com.stripe.model.treasury.ReceivedCredit receivedCredit =
+        com.stripe.model.treasury.ReceivedCredit.create(params);
+    assertNotNull(receivedCredit);
+    verifyRequest(
+        ApiResource.RequestMethod.POST,
+        "/v1/test_helpers/treasury/received_credits",
+        params.toMap());
+  }
+
+  @Test
+  public void testReceivedDebitCreate() throws StripeException {
+    com.stripe.param.treasury.ReceivedDebitCreateParams params =
+        com.stripe.param.treasury.ReceivedDebitCreateParams.builder()
+            .setFinancialAccount("fa_123")
+            .setNetwork(com.stripe.param.treasury.ReceivedDebitCreateParams.Network.ACH)
+            .setAmount(1234L)
+            .setCurrency("usd")
+            .build();
+
+    com.stripe.model.treasury.ReceivedDebit receivedDebit =
+        com.stripe.model.treasury.ReceivedDebit.create(params);
+    assertNotNull(receivedDebit);
+    verifyRequest(
+        ApiResource.RequestMethod.POST,
+        "/v1/test_helpers/treasury/received_debits",
+        params.toMap());
+  }
+
+  @Test
   public void testCustomerList() throws StripeException {
     CustomerListParams params = CustomerListParams.builder().setLimit(3L).build();
 
