@@ -560,44 +560,6 @@ class GeneratedExamples extends BaseStripeTest {
   }
 
   @Test
-  public void testReceivedCreditCreate() throws StripeException {
-    com.stripe.param.treasury.ReceivedCreditCreateParams params =
-        com.stripe.param.treasury.ReceivedCreditCreateParams.builder()
-            .setFinancialAccount("fa_123")
-            .setNetwork(com.stripe.param.treasury.ReceivedCreditCreateParams.Network.ACH)
-            .setAmount(1234L)
-            .setCurrency("usd")
-            .build();
-
-    com.stripe.model.treasury.ReceivedCredit receivedCredit =
-        com.stripe.model.treasury.ReceivedCredit.create(params);
-    assertNotNull(receivedCredit);
-    verifyRequest(
-        ApiResource.RequestMethod.POST,
-        "/v1/test_helpers/treasury/received_credits",
-        params.toMap());
-  }
-
-  @Test
-  public void testReceivedDebitCreate() throws StripeException {
-    com.stripe.param.treasury.ReceivedDebitCreateParams params =
-        com.stripe.param.treasury.ReceivedDebitCreateParams.builder()
-            .setFinancialAccount("fa_123")
-            .setNetwork(com.stripe.param.treasury.ReceivedDebitCreateParams.Network.ACH)
-            .setAmount(1234L)
-            .setCurrency("usd")
-            .build();
-
-    com.stripe.model.treasury.ReceivedDebit receivedDebit =
-        com.stripe.model.treasury.ReceivedDebit.create(params);
-    assertNotNull(receivedDebit);
-    verifyRequest(
-        ApiResource.RequestMethod.POST,
-        "/v1/test_helpers/treasury/received_debits",
-        params.toMap());
-  }
-
-  @Test
   public void testCustomerList() throws StripeException {
     CustomerListParams params = CustomerListParams.builder().setLimit(3L).build();
 

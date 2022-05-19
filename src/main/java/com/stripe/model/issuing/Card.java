@@ -77,6 +77,10 @@ public class Card extends ApiResource implements HasId, MetadataStore<Card> {
   @SerializedName("exp_year")
   Long expYear;
 
+  /** The financial account this card is attached to. */
+  @SerializedName("financial_account")
+  String financialAccount;
+
   /** Unique identifier for the object. */
   @Getter(onMethod_ = {@Override})
   @SerializedName("id")

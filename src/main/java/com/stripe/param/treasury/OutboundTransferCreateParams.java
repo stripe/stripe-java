@@ -61,7 +61,11 @@ public class OutboundTransferCreateParams extends ApiRequestParams {
   @SerializedName("metadata")
   Map<String, String> metadata;
 
-  /** Statement descriptor to be shown on the receiving end of an OutboundTransfer. */
+  /**
+   * Statement descriptor to be shown on the receiving end of an OutboundTransfer. Maximum 10
+   * characters for {@code ach} transfers or 140 characters for {@code wire} transfers. The default
+   * value is {@code transfer}.
+   */
   @SerializedName("statement_descriptor")
   String statementDescriptor;
 
@@ -247,7 +251,11 @@ public class OutboundTransferCreateParams extends ApiRequestParams {
       return this;
     }
 
-    /** Statement descriptor to be shown on the receiving end of an OutboundTransfer. */
+    /**
+     * Statement descriptor to be shown on the receiving end of an OutboundTransfer. Maximum 10
+     * characters for {@code ach} transfers or 140 characters for {@code wire} transfers. The
+     * default value is {@code transfer}.
+     */
     public Builder setStatementDescriptor(String statementDescriptor) {
       this.statementDescriptor = statementDescriptor;
       return this;

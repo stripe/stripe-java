@@ -829,7 +829,98 @@ public class WebhookEndpointUpdateParams extends ApiRequestParams {
     TRANSFER__REVERSED("transfer.reversed"),
 
     @SerializedName("transfer.updated")
-    TRANSFER__UPDATED("transfer.updated");
+    TRANSFER__UPDATED("transfer.updated"),
+
+    @SerializedName("treasury.credit_reversal.created")
+    TREASURY__CREDIT_REVERSAL__CREATED("treasury.credit_reversal.created"),
+
+    @SerializedName("treasury.credit_reversal.posted")
+    TREASURY__CREDIT_REVERSAL__POSTED("treasury.credit_reversal.posted"),
+
+    @SerializedName("treasury.debit_reversal.completed")
+    TREASURY__DEBIT_REVERSAL__COMPLETED("treasury.debit_reversal.completed"),
+
+    @SerializedName("treasury.debit_reversal.created")
+    TREASURY__DEBIT_REVERSAL__CREATED("treasury.debit_reversal.created"),
+
+    @SerializedName("treasury.debit_reversal.initial_credit_granted")
+    TREASURY__DEBIT_REVERSAL__INITIAL_CREDIT_GRANTED(
+        "treasury.debit_reversal.initial_credit_granted"),
+
+    @SerializedName("treasury.financial_account.closed")
+    TREASURY__FINANCIAL_ACCOUNT__CLOSED("treasury.financial_account.closed"),
+
+    @SerializedName("treasury.financial_account.created")
+    TREASURY__FINANCIAL_ACCOUNT__CREATED("treasury.financial_account.created"),
+
+    @SerializedName("treasury.financial_account.features_status_updated")
+    TREASURY__FINANCIAL_ACCOUNT__FEATURES_STATUS_UPDATED(
+        "treasury.financial_account.features_status_updated"),
+
+    @SerializedName("treasury.inbound_transfer.canceled")
+    TREASURY__INBOUND_TRANSFER__CANCELED("treasury.inbound_transfer.canceled"),
+
+    @SerializedName("treasury.inbound_transfer.created")
+    TREASURY__INBOUND_TRANSFER__CREATED("treasury.inbound_transfer.created"),
+
+    @SerializedName("treasury.inbound_transfer.failed")
+    TREASURY__INBOUND_TRANSFER__FAILED("treasury.inbound_transfer.failed"),
+
+    @SerializedName("treasury.inbound_transfer.succeeded")
+    TREASURY__INBOUND_TRANSFER__SUCCEEDED("treasury.inbound_transfer.succeeded"),
+
+    @SerializedName("treasury.outbound_payment.canceled")
+    TREASURY__OUTBOUND_PAYMENT__CANCELED("treasury.outbound_payment.canceled"),
+
+    @SerializedName("treasury.outbound_payment.created")
+    TREASURY__OUTBOUND_PAYMENT__CREATED("treasury.outbound_payment.created"),
+
+    @SerializedName("treasury.outbound_payment.expected_arrival_date_updated")
+    TREASURY__OUTBOUND_PAYMENT__EXPECTED_ARRIVAL_DATE_UPDATED(
+        "treasury.outbound_payment.expected_arrival_date_updated"),
+
+    @SerializedName("treasury.outbound_payment.failed")
+    TREASURY__OUTBOUND_PAYMENT__FAILED("treasury.outbound_payment.failed"),
+
+    @SerializedName("treasury.outbound_payment.posted")
+    TREASURY__OUTBOUND_PAYMENT__POSTED("treasury.outbound_payment.posted"),
+
+    @SerializedName("treasury.outbound_payment.returned")
+    TREASURY__OUTBOUND_PAYMENT__RETURNED("treasury.outbound_payment.returned"),
+
+    @SerializedName("treasury.outbound_transfer.canceled")
+    TREASURY__OUTBOUND_TRANSFER__CANCELED("treasury.outbound_transfer.canceled"),
+
+    @SerializedName("treasury.outbound_transfer.created")
+    TREASURY__OUTBOUND_TRANSFER__CREATED("treasury.outbound_transfer.created"),
+
+    @SerializedName("treasury.outbound_transfer.expected_arrival_date_updated")
+    TREASURY__OUTBOUND_TRANSFER__EXPECTED_ARRIVAL_DATE_UPDATED(
+        "treasury.outbound_transfer.expected_arrival_date_updated"),
+
+    @SerializedName("treasury.outbound_transfer.failed")
+    TREASURY__OUTBOUND_TRANSFER__FAILED("treasury.outbound_transfer.failed"),
+
+    @SerializedName("treasury.outbound_transfer.posted")
+    TREASURY__OUTBOUND_TRANSFER__POSTED("treasury.outbound_transfer.posted"),
+
+    @SerializedName("treasury.outbound_transfer.returned")
+    TREASURY__OUTBOUND_TRANSFER__RETURNED("treasury.outbound_transfer.returned"),
+
+    @SerializedName("treasury.received_credit.created")
+    TREASURY__RECEIVED_CREDIT__CREATED("treasury.received_credit.created"),
+
+    @SerializedName("treasury.received_credit.failed")
+    TREASURY__RECEIVED_CREDIT__FAILED("treasury.received_credit.failed"),
+
+    @SerializedName("treasury.received_credit.reversed")
+    TREASURY__RECEIVED_CREDIT__REVERSED("treasury.received_credit.reversed"),
+
+    @SerializedName("treasury.received_credit.succeeded")
+    TREASURY__RECEIVED_CREDIT__SUCCEEDED("treasury.received_credit.succeeded"),
+
+    @SerializedName("treasury.received_debit.created")
+    TREASURY__RECEIVED_DEBIT__CREATED("treasury.received_debit.created");
 
     @Getter(onMethod_ = {@Override})
     private final String value;

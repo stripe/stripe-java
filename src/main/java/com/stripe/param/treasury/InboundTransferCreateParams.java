@@ -56,10 +56,7 @@ public class InboundTransferCreateParams extends ApiRequestParams {
   @SerializedName("origin_payment_method")
   String originPaymentMethod;
 
-  /**
-   * The complete description that appears on your customers' statements. Must contain at least one
-   * letter, maximum 10 characters.
-   */
+  /** The complete description that appears on your customers' statements. Maximum 10 characters. */
   @SerializedName("statement_descriptor")
   String statementDescriptor;
 
@@ -234,8 +231,7 @@ public class InboundTransferCreateParams extends ApiRequestParams {
     }
 
     /**
-     * The complete description that appears on your customers' statements. Must contain at least
-     * one letter, maximum 10 characters.
+     * The complete description that appears on your customers' statements. Maximum 10 characters.
      */
     public Builder setStatementDescriptor(String statementDescriptor) {
       this.statementDescriptor = statementDescriptor;

@@ -84,7 +84,9 @@ public class OutboundPaymentCreateParams extends ApiRequestParams {
 
   /**
    * The description that appears on the receiving end for this OutboundPayment (for example, bank
-   * statement for external bank transfer).
+   * statement for external bank transfer). Maximum 10 characters for {@code ach} payments, 140
+   * characters for {@code wire} payments, or 500 characters for {@code stripe} network transfers.
+   * The default value is {@code payment}.
    */
   @SerializedName("statement_descriptor")
   String statementDescriptor;
@@ -316,7 +318,9 @@ public class OutboundPaymentCreateParams extends ApiRequestParams {
 
     /**
      * The description that appears on the receiving end for this OutboundPayment (for example, bank
-     * statement for external bank transfer).
+     * statement for external bank transfer). Maximum 10 characters for {@code ach} payments, 140
+     * characters for {@code wire} payments, or 500 characters for {@code stripe} network transfers.
+     * The default value is {@code payment}.
      */
     public Builder setStatementDescriptor(String statementDescriptor) {
       this.statementDescriptor = statementDescriptor;
