@@ -162,6 +162,14 @@ public class Authorization extends ApiResource
   @SerializedName("transactions")
   List<Transaction> transactions;
 
+  /**
+   * <a href="https://stripe.com/docs/api/treasury">Treasury</a> details related to this
+   * authorization if it was created on a <a
+   * href="https://stripe.com/docs/api/treasury/financial_accounts">FinancialAccount</a>.
+   */
+  @SerializedName("treasury")
+  Treasury treasury;
+
   @SerializedName("verification_data")
   VerificationData verificationData;
 
@@ -629,6 +637,34 @@ public class Authorization extends ApiResource
      */
     @SerializedName("reason")
     String reason;
+  }
+
+  @Getter
+  @Setter
+  @EqualsAndHashCode(callSuper = false)
+  public static class Treasury extends StripeObject {
+    /**
+     * The array of <a
+     * href="https://stripe.com/docs/api/treasury/received_credits">ReceivedCredits</a> associated
+     * with this authorization
+     */
+    @SerializedName("received_credits")
+    List<String> receivedCredits;
+
+    /**
+     * The array of <a
+     * href="https://stripe.com/docs/api/treasury/received_debits">ReceivedDebits</a> associated
+     * with this authorization
+     */
+    @SerializedName("received_debits")
+    List<String> receivedDebits;
+
+    /**
+     * The Treasury <a href="https://stripe.com/docs/api/treasury/transactions">Transaction</a>
+     * associated with this authorization
+     */
+    @SerializedName("transaction")
+    String transaction;
   }
 
   @Getter

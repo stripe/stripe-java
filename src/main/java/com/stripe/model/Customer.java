@@ -13,6 +13,7 @@ import com.stripe.param.CustomerCreateParams;
 import com.stripe.param.CustomerListParams;
 import com.stripe.param.CustomerListPaymentMethodsParams;
 import com.stripe.param.CustomerRetrieveParams;
+import com.stripe.param.CustomerRetrievePaymentMethodParams;
 import com.stripe.param.CustomerSearchParams;
 import com.stripe.param.CustomerUpdateParams;
 import java.util.List;
@@ -532,6 +533,35 @@ public class Customer extends ApiResource implements HasId, MetadataStore<Custom
             String.format(
                 "/v1/customers/%s/payment_methods", ApiResource.urlEncodeId(this.getId())));
     return ApiResource.requestCollection(url, params, PaymentMethodCollection.class, options);
+  }
+
+  /** Retrieves a PaymentMethod object. */
+  public PaymentMethod retrievePaymentMethod(
+      String customer, Map<String, Object> params, RequestOptions options) throws StripeException {
+    String url =
+        String.format(
+            "%s%s",
+            Stripe.getApiBase(),
+            String.format(
+                "/v1/customers/%s/payment_methods/%s",
+                ApiResource.urlEncodeId(customer), ApiResource.urlEncodeId(this.getId())));
+    return ApiResource.request(
+        ApiResource.RequestMethod.GET, url, params, PaymentMethod.class, options);
+  }
+
+  /** Retrieves a PaymentMethod object. */
+  public PaymentMethod retrievePaymentMethod(
+      String customer, CustomerRetrievePaymentMethodParams params, RequestOptions options)
+      throws StripeException {
+    String url =
+        String.format(
+            "%s%s",
+            Stripe.getApiBase(),
+            String.format(
+                "/v1/customers/%s/payment_methods/%s",
+                ApiResource.urlEncodeId(customer), ApiResource.urlEncodeId(this.getId())));
+    return ApiResource.request(
+        ApiResource.RequestMethod.GET, url, params, PaymentMethod.class, options);
   }
 
   /**

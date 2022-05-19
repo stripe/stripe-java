@@ -31,7 +31,10 @@ public class SubscriptionUpdateParams extends ApiRequestParams {
   @SerializedName("application_fee_percent")
   BigDecimal applicationFeePercent;
 
-  /** Automatic tax settings for this subscription. */
+  /**
+   * Automatic tax settings for this subscription. We recommend you only include this parameter when
+   * the existing value is being changed.
+   */
   @SerializedName("automatic_tax")
   AutomaticTax automaticTax;
 
@@ -463,7 +466,10 @@ public class SubscriptionUpdateParams extends ApiRequestParams {
       return this;
     }
 
-    /** Automatic tax settings for this subscription. */
+    /**
+     * Automatic tax settings for this subscription. We recommend you only include this parameter
+     * when the existing value is being changed.
+     */
     public Builder setAutomaticTax(AutomaticTax automaticTax) {
       this.automaticTax = automaticTax;
       return this;
@@ -2435,13 +2441,22 @@ public class SubscriptionUpdateParams extends ApiRequestParams {
     @SerializedName("payment_method_types")
     Object paymentMethodTypes;
 
+    /**
+     * Either {@code off}, or {@code on_subscription}. With {@code on_subscription} Stripe updates
+     * {@code subscription.default_payment_method} when a subscription payment succeeds.
+     */
+    @SerializedName("save_default_payment_method")
+    SaveDefaultPaymentMethod saveDefaultPaymentMethod;
+
     private PaymentSettings(
         Map<String, Object> extraParams,
         PaymentMethodOptions paymentMethodOptions,
-        Object paymentMethodTypes) {
+        Object paymentMethodTypes,
+        SaveDefaultPaymentMethod saveDefaultPaymentMethod) {
       this.extraParams = extraParams;
       this.paymentMethodOptions = paymentMethodOptions;
       this.paymentMethodTypes = paymentMethodTypes;
+      this.saveDefaultPaymentMethod = saveDefaultPaymentMethod;
     }
 
     public static Builder builder() {
@@ -2455,10 +2470,15 @@ public class SubscriptionUpdateParams extends ApiRequestParams {
 
       private Object paymentMethodTypes;
 
+      private SaveDefaultPaymentMethod saveDefaultPaymentMethod;
+
       /** Finalize and obtain parameter instance from this builder. */
       public PaymentSettings build() {
         return new PaymentSettings(
-            this.extraParams, this.paymentMethodOptions, this.paymentMethodTypes);
+            this.extraParams,
+            this.paymentMethodOptions,
+            this.paymentMethodTypes,
+            this.saveDefaultPaymentMethod);
       }
 
       /**
@@ -2551,6 +2571,16 @@ public class SubscriptionUpdateParams extends ApiRequestParams {
        */
       public Builder setPaymentMethodTypes(List<PaymentMethodType> paymentMethodTypes) {
         this.paymentMethodTypes = paymentMethodTypes;
+        return this;
+      }
+
+      /**
+       * Either {@code off}, or {@code on_subscription}. With {@code on_subscription} Stripe updates
+       * {@code subscription.default_payment_method} when a subscription payment succeeds.
+       */
+      public Builder setSaveDefaultPaymentMethod(
+          SaveDefaultPaymentMethod saveDefaultPaymentMethod) {
+        this.saveDefaultPaymentMethod = saveDefaultPaymentMethod;
         return this;
       }
     }
@@ -3916,6 +3946,21 @@ public class SubscriptionUpdateParams extends ApiRequestParams {
       private final String value;
 
       PaymentMethodType(String value) {
+        this.value = value;
+      }
+    }
+
+    public enum SaveDefaultPaymentMethod implements ApiRequestParams.EnumParam {
+      @SerializedName("off")
+      OFF("off"),
+
+      @SerializedName("on_subscription")
+      ON_SUBSCRIPTION("on_subscription");
+
+      @Getter(onMethod_ = {@Override})
+      private final String value;
+
+      SaveDefaultPaymentMethod(String value) {
         this.value = value;
       }
     }

@@ -134,6 +134,20 @@ final class EventDataClassLookup {
     classLookup.put("terminal.reader", com.stripe.model.terminal.Reader.class);
 
     classLookup.put("test_helpers.test_clock", com.stripe.model.testhelpers.TestClock.class);
+
+    classLookup.put("treasury.credit_reversal", com.stripe.model.treasury.CreditReversal.class);
+    classLookup.put("treasury.debit_reversal", com.stripe.model.treasury.DebitReversal.class);
+    classLookup.put("treasury.financial_account", com.stripe.model.treasury.FinancialAccount.class);
+    classLookup.put(
+        "treasury.financial_account_features",
+        com.stripe.model.treasury.FinancialAccountFeatures.class);
+    classLookup.put("treasury.inbound_transfer", com.stripe.model.treasury.InboundTransfer.class);
+    classLookup.put("treasury.outbound_payment", com.stripe.model.treasury.OutboundPayment.class);
+    classLookup.put("treasury.outbound_transfer", com.stripe.model.treasury.OutboundTransfer.class);
+    classLookup.put("treasury.received_credit", com.stripe.model.treasury.ReceivedCredit.class);
+    classLookup.put("treasury.received_debit", com.stripe.model.treasury.ReceivedDebit.class);
+    classLookup.put("treasury.transaction", com.stripe.model.treasury.Transaction.class);
+    classLookup.put("treasury.transaction_entry", com.stripe.model.treasury.TransactionEntry.class);
   }
 
   public static Class<? extends StripeObject> findClass(String objectType) {

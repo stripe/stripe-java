@@ -46,17 +46,23 @@ public class DisputeCreateParams extends ApiRequestParams {
   @SerializedName("transaction")
   String transaction;
 
+  /** Params for disputes related to Treasury FinancialAccounts. */
+  @SerializedName("treasury")
+  Treasury treasury;
+
   private DisputeCreateParams(
       Evidence evidence,
       List<String> expand,
       Map<String, Object> extraParams,
       Map<String, String> metadata,
-      String transaction) {
+      String transaction,
+      Treasury treasury) {
     this.evidence = evidence;
     this.expand = expand;
     this.extraParams = extraParams;
     this.metadata = metadata;
     this.transaction = transaction;
+    this.treasury = treasury;
   }
 
   public static Builder builder() {
@@ -74,10 +80,17 @@ public class DisputeCreateParams extends ApiRequestParams {
 
     private String transaction;
 
+    private Treasury treasury;
+
     /** Finalize and obtain parameter instance from this builder. */
     public DisputeCreateParams build() {
       return new DisputeCreateParams(
-          this.evidence, this.expand, this.extraParams, this.metadata, this.transaction);
+          this.evidence,
+          this.expand,
+          this.extraParams,
+          this.metadata,
+          this.transaction,
+          this.treasury);
     }
 
     /** Evidence provided for the dispute. */
@@ -170,6 +183,12 @@ public class DisputeCreateParams extends ApiRequestParams {
      */
     public Builder setTransaction(String transaction) {
       this.transaction = transaction;
+      return this;
+    }
+
+    /** Params for disputes related to Treasury FinancialAccounts. */
+    public Builder setTreasury(Treasury treasury) {
+      this.treasury = treasury;
       return this;
     }
   }
@@ -1719,6 +1738,74 @@ public class DisputeCreateParams extends ApiRequestParams {
 
       Reason(String value) {
         this.value = value;
+      }
+    }
+  }
+
+  @Getter
+  public static class Treasury {
+    /**
+     * Map of extra parameters for custom features not available in this client library. The content
+     * in this map is not serialized under this field's {@code @SerializedName} value. Instead, each
+     * key/value pair is serialized as if the key is a root-level field (serialized) name in this
+     * param object. Effectively, this map is flattened to its parent instance.
+     */
+    @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
+    Map<String, Object> extraParams;
+
+    /** The ID of the ReceivedDebit to initiate an Issuings dispute for. */
+    @SerializedName("received_debit")
+    String receivedDebit;
+
+    private Treasury(Map<String, Object> extraParams, String receivedDebit) {
+      this.extraParams = extraParams;
+      this.receivedDebit = receivedDebit;
+    }
+
+    public static Builder builder() {
+      return new Builder();
+    }
+
+    public static class Builder {
+      private Map<String, Object> extraParams;
+
+      private String receivedDebit;
+
+      /** Finalize and obtain parameter instance from this builder. */
+      public Treasury build() {
+        return new Treasury(this.extraParams, this.receivedDebit);
+      }
+
+      /**
+       * Add a key/value pair to `extraParams` map. A map is initialized for the first `put/putAll`
+       * call, and subsequent calls add additional key/value pairs to the original map. See {@link
+       * DisputeCreateParams.Treasury#extraParams} for the field documentation.
+       */
+      public Builder putExtraParam(String key, Object value) {
+        if (this.extraParams == null) {
+          this.extraParams = new HashMap<>();
+        }
+        this.extraParams.put(key, value);
+        return this;
+      }
+
+      /**
+       * Add all map key/value pairs to `extraParams` map. A map is initialized for the first
+       * `put/putAll` call, and subsequent calls add additional key/value pairs to the original map.
+       * See {@link DisputeCreateParams.Treasury#extraParams} for the field documentation.
+       */
+      public Builder putAllExtraParam(Map<String, Object> map) {
+        if (this.extraParams == null) {
+          this.extraParams = new HashMap<>();
+        }
+        this.extraParams.putAll(map);
+        return this;
+      }
+
+      /** The ID of the ReceivedDebit to initiate an Issuings dispute for. */
+      public Builder setReceivedDebit(String receivedDebit) {
+        this.receivedDebit = receivedDebit;
+        return this;
       }
     }
   }

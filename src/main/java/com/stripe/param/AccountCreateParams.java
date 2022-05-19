@@ -48,7 +48,10 @@ public class AccountCreateParams extends ApiRequestParams {
    * The country in which the account holder resides, or in which the business is legally
    * established. This should be an ISO 3166-1 alpha-2 country code. For example, if you are in the
    * United States and the business for which you're creating an account is legally represented in
-   * Canada, you would use {@code CA} as the country for the account being created.
+   * Canada, you would use {@code CA} as the country for the account being created. Available
+   * countries include <a href="https://stripe.com/global">Stripe's global markets</a> as well as
+   * countries where <a href="https://stripe.com/docs/connect/cross-border-payouts">cross-border
+   * payouts</a> are supported.
    */
   @SerializedName("country")
   String country;
@@ -285,6 +288,10 @@ public class AccountCreateParams extends ApiRequestParams {
      * established. This should be an ISO 3166-1 alpha-2 country code. For example, if you are in
      * the United States and the business for which you're creating an account is legally
      * represented in Canada, you would use {@code CA} as the country for the account being created.
+     * Available countries include <a href="https://stripe.com/global">Stripe's global markets</a>
+     * as well as countries where <a
+     * href="https://stripe.com/docs/connect/cross-border-payouts">cross-border payouts</a> are
+     * supported.
      */
     public Builder setCountry(String country) {
       this.country = country;
@@ -5649,11 +5656,11 @@ public class AccountCreateParams extends ApiRequestParams {
     @SerializedName("last_name")
     String lastName;
 
-    /** The Kana varation of the individual's last name (Japan only). */
+    /** The Kana variation of the individual's last name (Japan only). */
     @SerializedName("last_name_kana")
     String lastNameKana;
 
-    /** The Kanji varation of the individual's last name (Japan only). */
+    /** The Kanji variation of the individual's last name (Japan only). */
     @SerializedName("last_name_kanji")
     String lastNameKanji;
 
@@ -5964,13 +5971,13 @@ public class AccountCreateParams extends ApiRequestParams {
         return this;
       }
 
-      /** The Kana varation of the individual's last name (Japan only). */
+      /** The Kana variation of the individual's last name (Japan only). */
       public Builder setLastNameKana(String lastNameKana) {
         this.lastNameKana = lastNameKana;
         return this;
       }
 
-      /** The Kanji varation of the individual's last name (Japan only). */
+      /** The Kanji variation of the individual's last name (Japan only). */
       public Builder setLastNameKanji(String lastNameKanji) {
         this.lastNameKanji = lastNameKanji;
         return this;

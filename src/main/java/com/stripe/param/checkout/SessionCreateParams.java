@@ -187,6 +187,9 @@ public class SessionCreateParams extends ApiRequestParams {
   /**
    * A list of the types of payment methods (e.g., {@code card}) this Checkout Session can accept.
    *
+   * <p>Do not include this attribute if you prefer to manage your payment methods from the <a
+   * href="https://dashboard.stripe.com/settings/payment_methods">Stripe Dashboard</a>.
+   *
    * <p>Read more about the supported payment methods and their requirements in our <a
    * href="https://stripe.com/docs/payments/checkout/payment-methods">payment method details
    * guide</a>.

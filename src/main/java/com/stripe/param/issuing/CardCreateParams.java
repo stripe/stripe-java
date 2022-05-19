@@ -35,6 +35,9 @@ public class CardCreateParams extends ApiRequestParams {
   @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
   Map<String, Object> extraParams;
 
+  @SerializedName("financial_account")
+  String financialAccount;
+
   /**
    * Set of <a href="https://stripe.com/docs/api/metadata">key-value pairs</a> that you can attach
    * to an object. This can be useful for storing additional information about the object in a
@@ -79,6 +82,7 @@ public class CardCreateParams extends ApiRequestParams {
       String currency,
       List<String> expand,
       Map<String, Object> extraParams,
+      String financialAccount,
       Map<String, String> metadata,
       String replacementFor,
       ReplacementReason replacementReason,
@@ -90,6 +94,7 @@ public class CardCreateParams extends ApiRequestParams {
     this.currency = currency;
     this.expand = expand;
     this.extraParams = extraParams;
+    this.financialAccount = financialAccount;
     this.metadata = metadata;
     this.replacementFor = replacementFor;
     this.replacementReason = replacementReason;
@@ -112,6 +117,8 @@ public class CardCreateParams extends ApiRequestParams {
 
     private Map<String, Object> extraParams;
 
+    private String financialAccount;
+
     private Map<String, String> metadata;
 
     private String replacementFor;
@@ -133,6 +140,7 @@ public class CardCreateParams extends ApiRequestParams {
           this.currency,
           this.expand,
           this.extraParams,
+          this.financialAccount,
           this.metadata,
           this.replacementFor,
           this.replacementReason,
@@ -206,6 +214,11 @@ public class CardCreateParams extends ApiRequestParams {
         this.extraParams = new HashMap<>();
       }
       this.extraParams.putAll(map);
+      return this;
+    }
+
+    public Builder setFinancialAccount(String financialAccount) {
+      this.financialAccount = financialAccount;
       return this;
     }
 

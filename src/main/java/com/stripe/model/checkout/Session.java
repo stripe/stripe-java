@@ -757,17 +757,47 @@ public class Session extends ApiResource implements HasId {
     @SerializedName("acss_debit")
     AcssDebit acssDebit;
 
+    @SerializedName("afterpay_clearpay")
+    AfterpayClearpay afterpayClearpay;
+
     @SerializedName("alipay")
     Alipay alipay;
 
+    @SerializedName("au_becs_debit")
+    AuBecsDebit auBecsDebit;
+
+    @SerializedName("bacs_debit")
+    BacsDebit bacsDebit;
+
     @SerializedName("boleto")
     Boleto boleto;
+
+    @SerializedName("eps")
+    Eps eps;
+
+    @SerializedName("fpx")
+    Fpx fpx;
+
+    @SerializedName("giropay")
+    Giropay giropay;
+
+    @SerializedName("grabpay")
+    GrabPay grabpay;
+
+    @SerializedName("klarna")
+    Klarna klarna;
 
     @SerializedName("konbini")
     Konbini konbini;
 
     @SerializedName("oxxo")
     Oxxo oxxo;
+
+    @SerializedName("paynow")
+    Paynow paynow;
+
+    @SerializedName("sepa_debit")
+    SepaDebit sepaDebit;
 
     @SerializedName("us_bank_account")
     UsBankAccount usBankAccount;
@@ -838,7 +868,22 @@ public class Session extends ApiResource implements HasId {
     @Getter
     @Setter
     @EqualsAndHashCode(callSuper = false)
+    public static class AfterpayClearpay extends StripeObject {}
+
+    @Getter
+    @Setter
+    @EqualsAndHashCode(callSuper = false)
     public static class Alipay extends StripeObject {}
+
+    @Getter
+    @Setter
+    @EqualsAndHashCode(callSuper = false)
+    public static class AuBecsDebit extends StripeObject {}
+
+    @Getter
+    @Setter
+    @EqualsAndHashCode(callSuper = false)
+    public static class BacsDebit extends StripeObject {}
 
     @Getter
     @Setter
@@ -872,6 +917,31 @@ public class Session extends ApiResource implements HasId {
       @SerializedName("setup_future_usage")
       String setupFutureUsage;
     }
+
+    @Getter
+    @Setter
+    @EqualsAndHashCode(callSuper = false)
+    public static class Eps extends StripeObject {}
+
+    @Getter
+    @Setter
+    @EqualsAndHashCode(callSuper = false)
+    public static class Fpx extends StripeObject {}
+
+    @Getter
+    @Setter
+    @EqualsAndHashCode(callSuper = false)
+    public static class Giropay extends StripeObject {}
+
+    @Getter
+    @Setter
+    @EqualsAndHashCode(callSuper = false)
+    public static class GrabPay extends StripeObject {}
+
+    @Getter
+    @Setter
+    @EqualsAndHashCode(callSuper = false)
+    public static class Klarna extends StripeObject {}
 
     @Getter
     @Setter
@@ -919,6 +989,16 @@ public class Session extends ApiResource implements HasId {
       @SerializedName("setup_future_usage")
       String setupFutureUsage;
     }
+
+    @Getter
+    @Setter
+    @EqualsAndHashCode(callSuper = false)
+    public static class Paynow extends StripeObject {}
+
+    @Getter
+    @Setter
+    @EqualsAndHashCode(callSuper = false)
+    public static class SepaDebit extends StripeObject {}
 
     @Getter
     @Setter
