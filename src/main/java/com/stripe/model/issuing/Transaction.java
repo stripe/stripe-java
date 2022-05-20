@@ -134,6 +134,13 @@ public class Transaction extends ApiResource
   PurchaseDetails purchaseDetails;
 
   /**
+   * <a href="https://stripe.com/docs/api/treasury">Treasury</a> details related to this transaction
+   * if it was created on a [FinancialAccount](/docs/api/treasury/financial_accounts
+   */
+  @SerializedName("treasury")
+  Treasury treasury;
+
+  /**
    * The nature of the transaction.
    *
    * <p>One of {@code capture}, or {@code refund}.
@@ -511,5 +518,26 @@ public class Transaction extends ApiResource
       @SerializedName("unit_cost")
       Long unitCost;
     }
+  }
+
+  @Getter
+  @Setter
+  @EqualsAndHashCode(callSuper = false)
+  public static class Treasury extends StripeObject {
+    /**
+     * The Treasury <a
+     * href="https://stripe.com/docs/api/treasury/received_debits">ReceivedCredit</a> representing
+     * this Issuing transaction if it is a refund
+     */
+    @SerializedName("received_credit")
+    String receivedCredit;
+
+    /**
+     * The Treasury <a
+     * href="https://stripe.com/docs/api/treasury/received_credits">ReceivedDebit</a> representing
+     * this Issuing transaction if it is a capture
+     */
+    @SerializedName("received_debit")
+    String receivedDebit;
   }
 }

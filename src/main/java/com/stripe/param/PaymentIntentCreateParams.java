@@ -182,7 +182,9 @@ public class PaymentIntentCreateParams extends ApiRequestParams {
 
   /**
    * The list of payment method types (e.g. card) that this PaymentIntent is allowed to use. If this
-   * is not provided, defaults to [&quot;card&quot;].
+   * is not provided, defaults to [&quot;card&quot;]. Use automatic_payment_methods to manage
+   * payment methods from the <a href="https://dashboard.stripe.com/settings/payment_methods">Stripe
+   * Dashboard</a>.
    */
   @SerializedName("payment_method_types")
   List<String> paymentMethodTypes;
@@ -9952,6 +9954,10 @@ public class PaymentIntentCreateParams extends ApiRequestParams {
       @SerializedName("financial_connections")
       FinancialConnections financialConnections;
 
+      /** Additional fields for network related functions. */
+      @SerializedName("networks")
+      Networks networks;
+
       /**
        * Indicates that you intend to make future payments with this PaymentIntent's payment method.
        *
@@ -9981,10 +9987,12 @@ public class PaymentIntentCreateParams extends ApiRequestParams {
       private UsBankAccount(
           Map<String, Object> extraParams,
           FinancialConnections financialConnections,
+          Networks networks,
           EnumParam setupFutureUsage,
           VerificationMethod verificationMethod) {
         this.extraParams = extraParams;
         this.financialConnections = financialConnections;
+        this.networks = networks;
         this.setupFutureUsage = setupFutureUsage;
         this.verificationMethod = verificationMethod;
       }
@@ -9998,6 +10006,8 @@ public class PaymentIntentCreateParams extends ApiRequestParams {
 
         private FinancialConnections financialConnections;
 
+        private Networks networks;
+
         private EnumParam setupFutureUsage;
 
         private VerificationMethod verificationMethod;
@@ -10007,6 +10017,7 @@ public class PaymentIntentCreateParams extends ApiRequestParams {
           return new UsBankAccount(
               this.extraParams,
               this.financialConnections,
+              this.networks,
               this.setupFutureUsage,
               this.verificationMethod);
         }
@@ -10042,6 +10053,12 @@ public class PaymentIntentCreateParams extends ApiRequestParams {
         /** Additional fields for Financial Connections Session creation. */
         public Builder setFinancialConnections(FinancialConnections financialConnections) {
           this.financialConnections = financialConnections;
+          return this;
+        }
+
+        /** Additional fields for network related functions. */
+        public Builder setNetworks(Networks networks) {
+          this.networks = networks;
           return this;
         }
 
@@ -10238,6 +10255,116 @@ public class PaymentIntentCreateParams extends ApiRequestParams {
           private final String value;
 
           Permission(String value) {
+            this.value = value;
+          }
+        }
+      }
+
+      @Getter
+      public static class Networks {
+        /**
+         * Map of extra parameters for custom features not available in this client library. The
+         * content in this map is not serialized under this field's {@code @SerializedName} value.
+         * Instead, each key/value pair is serialized as if the key is a root-level field
+         * (serialized) name in this param object. Effectively, this map is flattened to its parent
+         * instance.
+         */
+        @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
+        Map<String, Object> extraParams;
+
+        /** Triggers validations to run across the selected networks. */
+        @SerializedName("requested")
+        List<Requested> requested;
+
+        private Networks(Map<String, Object> extraParams, List<Requested> requested) {
+          this.extraParams = extraParams;
+          this.requested = requested;
+        }
+
+        public static Builder builder() {
+          return new Builder();
+        }
+
+        public static class Builder {
+          private Map<String, Object> extraParams;
+
+          private List<Requested> requested;
+
+          /** Finalize and obtain parameter instance from this builder. */
+          public Networks build() {
+            return new Networks(this.extraParams, this.requested);
+          }
+
+          /**
+           * Add a key/value pair to `extraParams` map. A map is initialized for the first
+           * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
+           * map. See {@link
+           * PaymentIntentCreateParams.PaymentMethodOptions.UsBankAccount.Networks#extraParams} for
+           * the field documentation.
+           */
+          public Builder putExtraParam(String key, Object value) {
+            if (this.extraParams == null) {
+              this.extraParams = new HashMap<>();
+            }
+            this.extraParams.put(key, value);
+            return this;
+          }
+
+          /**
+           * Add all map key/value pairs to `extraParams` map. A map is initialized for the first
+           * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
+           * map. See {@link
+           * PaymentIntentCreateParams.PaymentMethodOptions.UsBankAccount.Networks#extraParams} for
+           * the field documentation.
+           */
+          public Builder putAllExtraParam(Map<String, Object> map) {
+            if (this.extraParams == null) {
+              this.extraParams = new HashMap<>();
+            }
+            this.extraParams.putAll(map);
+            return this;
+          }
+
+          /**
+           * Add an element to `requested` list. A list is initialized for the first `add/addAll`
+           * call, and subsequent calls adds additional elements to the original list. See {@link
+           * PaymentIntentCreateParams.PaymentMethodOptions.UsBankAccount.Networks#requested} for
+           * the field documentation.
+           */
+          public Builder addRequested(Requested element) {
+            if (this.requested == null) {
+              this.requested = new ArrayList<>();
+            }
+            this.requested.add(element);
+            return this;
+          }
+
+          /**
+           * Add all elements to `requested` list. A list is initialized for the first `add/addAll`
+           * call, and subsequent calls adds additional elements to the original list. See {@link
+           * PaymentIntentCreateParams.PaymentMethodOptions.UsBankAccount.Networks#requested} for
+           * the field documentation.
+           */
+          public Builder addAllRequested(List<Requested> elements) {
+            if (this.requested == null) {
+              this.requested = new ArrayList<>();
+            }
+            this.requested.addAll(elements);
+            return this;
+          }
+        }
+
+        public enum Requested implements ApiRequestParams.EnumParam {
+          @SerializedName("ach")
+          ACH("ach"),
+
+          @SerializedName("us_domestic_wire")
+          US_DOMESTIC_WIRE("us_domestic_wire");
+
+          @Getter(onMethod_ = {@Override})
+          private final String value;
+
+          Requested(String value) {
             this.value = value;
           }
         }

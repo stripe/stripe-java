@@ -83,7 +83,7 @@ public class StandardizationTest {
         // Skip `public static Foo retrieve(String id) {...` helper methods
         if (String.class.equals(finalParamType)
             && parameters.size() == 1
-            && "retrieve".equals(method.getName())) {
+            && method.getName().startsWith("retrieve")) {
           continue;
         }
 

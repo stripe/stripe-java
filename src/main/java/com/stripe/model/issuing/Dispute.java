@@ -94,6 +94,13 @@ public class Dispute extends ApiResource
   @Setter(lombok.AccessLevel.NONE)
   ExpandableField<Transaction> transaction;
 
+  /**
+   * <a href="https://stripe.com/docs/api/treasury">Treasury</a> details related to this dispute if
+   * it was created on a [FinancialAccount](/docs/api/treasury/financial_accounts
+   */
+  @SerializedName("treasury")
+  Treasury treasury;
+
   /** Get ID of expandable {@code transaction} object. */
   public String getTransaction() {
     return (this.transaction != null) ? this.transaction.getId() : null;
@@ -848,5 +855,24 @@ public class Dispute extends ApiResource
             new ExpandableField<File>(expandableObject.getId(), expandableObject);
       }
     }
+  }
+
+  @Getter
+  @Setter
+  @EqualsAndHashCode(callSuper = false)
+  public static class Treasury extends StripeObject {
+    /**
+     * The Treasury <a href="https://stripe.com/docs/api/treasury/debit_reversals">DebitReversal</a>
+     * representing this Issuing dispute
+     */
+    @SerializedName("debit_reversal")
+    String debitReversal;
+
+    /**
+     * The Treasury <a href="https://stripe.com/docs/api/treasury/received_debits">ReceivedDebit</a>
+     * that is being disputed.
+     */
+    @SerializedName("received_debit")
+    String receivedDebit;
   }
 }

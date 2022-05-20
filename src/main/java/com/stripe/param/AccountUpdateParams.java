@@ -5960,11 +5960,11 @@ public class AccountUpdateParams extends ApiRequestParams {
     @SerializedName("last_name")
     Object lastName;
 
-    /** The Kana varation of the individual's last name (Japan only). */
+    /** The Kana variation of the individual's last name (Japan only). */
     @SerializedName("last_name_kana")
     Object lastNameKana;
 
-    /** The Kanji varation of the individual's last name (Japan only). */
+    /** The Kanji variation of the individual's last name (Japan only). */
     @SerializedName("last_name_kanji")
     Object lastNameKanji;
 
@@ -6326,25 +6326,25 @@ public class AccountUpdateParams extends ApiRequestParams {
         return this;
       }
 
-      /** The Kana varation of the individual's last name (Japan only). */
+      /** The Kana variation of the individual's last name (Japan only). */
       public Builder setLastNameKana(String lastNameKana) {
         this.lastNameKana = lastNameKana;
         return this;
       }
 
-      /** The Kana varation of the individual's last name (Japan only). */
+      /** The Kana variation of the individual's last name (Japan only). */
       public Builder setLastNameKana(EmptyParam lastNameKana) {
         this.lastNameKana = lastNameKana;
         return this;
       }
 
-      /** The Kanji varation of the individual's last name (Japan only). */
+      /** The Kanji variation of the individual's last name (Japan only). */
       public Builder setLastNameKanji(String lastNameKanji) {
         this.lastNameKanji = lastNameKanji;
         return this;
       }
 
-      /** The Kanji varation of the individual's last name (Japan only). */
+      /** The Kanji variation of the individual's last name (Japan only). */
       public Builder setLastNameKanji(EmptyParam lastNameKanji) {
         this.lastNameKanji = lastNameKanji;
         return this;

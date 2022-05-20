@@ -757,17 +757,47 @@ public class Session extends ApiResource implements HasId {
     @SerializedName("acss_debit")
     AcssDebit acssDebit;
 
+    @SerializedName("afterpay_clearpay")
+    AfterpayClearpay afterpayClearpay;
+
     @SerializedName("alipay")
     Alipay alipay;
 
+    @SerializedName("au_becs_debit")
+    AuBecsDebit auBecsDebit;
+
+    @SerializedName("bacs_debit")
+    BacsDebit bacsDebit;
+
     @SerializedName("boleto")
     Boleto boleto;
+
+    @SerializedName("eps")
+    Eps eps;
+
+    @SerializedName("fpx")
+    Fpx fpx;
+
+    @SerializedName("giropay")
+    Giropay giropay;
+
+    @SerializedName("grabpay")
+    GrabPay grabpay;
+
+    @SerializedName("klarna")
+    Klarna klarna;
 
     @SerializedName("konbini")
     Konbini konbini;
 
     @SerializedName("oxxo")
     Oxxo oxxo;
+
+    @SerializedName("paynow")
+    Paynow paynow;
+
+    @SerializedName("sepa_debit")
+    SepaDebit sepaDebit;
 
     @SerializedName("us_bank_account")
     UsBankAccount usBankAccount;
@@ -838,7 +868,22 @@ public class Session extends ApiResource implements HasId {
     @Getter
     @Setter
     @EqualsAndHashCode(callSuper = false)
+    public static class AfterpayClearpay extends StripeObject {}
+
+    @Getter
+    @Setter
+    @EqualsAndHashCode(callSuper = false)
     public static class Alipay extends StripeObject {}
+
+    @Getter
+    @Setter
+    @EqualsAndHashCode(callSuper = false)
+    public static class AuBecsDebit extends StripeObject {}
+
+    @Getter
+    @Setter
+    @EqualsAndHashCode(callSuper = false)
+    public static class BacsDebit extends StripeObject {}
 
     @Getter
     @Setter
@@ -852,26 +897,35 @@ public class Session extends ApiResource implements HasId {
       @SerializedName("expires_after_days")
       Long expiresAfterDays;
 
-      /**
-       * Indicates that you intend to make future payments with this PaymentIntent's payment method.
-       *
-       * <p>Providing this parameter will <a
-       * href="https://stripe.com/docs/payments/save-during-payment">attach the payment method</a>
-       * to the PaymentIntent's Customer, if present, after the PaymentIntent is confirmed and any
-       * required actions from the user are complete. If no Customer was provided, the payment
-       * method can still be <a
-       * href="https://stripe.com/docs/api/payment_methods/attach">attached</a> to a Customer after
-       * the transaction completes.
-       *
-       * <p>When processing card payments, Stripe also uses {@code setup_future_usage} to
-       * dynamically optimize your payment flow and comply with regional legislation and network
-       * rules, such as <a href="https://stripe.com/docs/strong-customer-authentication">SCA</a>.
-       *
-       * <p>One of {@code none}, {@code off_session}, or {@code on_session}.
-       */
+      /** Deprecated. Do not use. */
       @SerializedName("setup_future_usage")
       String setupFutureUsage;
     }
+
+    @Getter
+    @Setter
+    @EqualsAndHashCode(callSuper = false)
+    public static class Eps extends StripeObject {}
+
+    @Getter
+    @Setter
+    @EqualsAndHashCode(callSuper = false)
+    public static class Fpx extends StripeObject {}
+
+    @Getter
+    @Setter
+    @EqualsAndHashCode(callSuper = false)
+    public static class Giropay extends StripeObject {}
+
+    @Getter
+    @Setter
+    @EqualsAndHashCode(callSuper = false)
+    public static class GrabPay extends StripeObject {}
+
+    @Getter
+    @Setter
+    @EqualsAndHashCode(callSuper = false)
+    public static class Klarna extends StripeObject {}
 
     @Getter
     @Setter
@@ -899,26 +953,20 @@ public class Session extends ApiResource implements HasId {
       @SerializedName("expires_after_days")
       Long expiresAfterDays;
 
-      /**
-       * Indicates that you intend to make future payments with this PaymentIntent's payment method.
-       *
-       * <p>Providing this parameter will <a
-       * href="https://stripe.com/docs/payments/save-during-payment">attach the payment method</a>
-       * to the PaymentIntent's Customer, if present, after the PaymentIntent is confirmed and any
-       * required actions from the user are complete. If no Customer was provided, the payment
-       * method can still be <a
-       * href="https://stripe.com/docs/api/payment_methods/attach">attached</a> to a Customer after
-       * the transaction completes.
-       *
-       * <p>When processing card payments, Stripe also uses {@code setup_future_usage} to
-       * dynamically optimize your payment flow and comply with regional legislation and network
-       * rules, such as <a href="https://stripe.com/docs/strong-customer-authentication">SCA</a>.
-       *
-       * <p>Equal to {@code none}.
-       */
+      /** Deprecated. Do not use. */
       @SerializedName("setup_future_usage")
       String setupFutureUsage;
     }
+
+    @Getter
+    @Setter
+    @EqualsAndHashCode(callSuper = false)
+    public static class Paynow extends StripeObject {}
+
+    @Getter
+    @Setter
+    @EqualsAndHashCode(callSuper = false)
+    public static class SepaDebit extends StripeObject {}
 
     @Getter
     @Setter
