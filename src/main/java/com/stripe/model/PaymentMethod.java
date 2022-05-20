@@ -1169,7 +1169,7 @@ public class PaymentMethod extends ApiResource implements HasId, MetadataStore<P
 
     /** Contains information about US bank account networks that can be used. */
     @SerializedName("networks")
-    USBankAccountNetworks networks;
+    Networks networks;
 
     /** Routing number of the bank account. */
     @SerializedName("routing_number")
@@ -1178,7 +1178,7 @@ public class PaymentMethod extends ApiResource implements HasId, MetadataStore<P
     @Getter
     @Setter
     @EqualsAndHashCode(callSuper = false)
-    public static class USBankAccountNetworks extends StripeObject {
+    public static class Networks extends StripeObject {
       /** The preferred network. */
       @SerializedName("preferred")
       String preferred;
