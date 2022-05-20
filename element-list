@@ -13,6 +13,7 @@ com.stripe.model.reporting
 com.stripe.model.sigma
 com.stripe.model.terminal
 com.stripe.model.testhelpers
+com.stripe.model.treasury
 com.stripe.net
 com.stripe.param
 com.stripe.param.billingportal
@@ -26,4 +27,5 @@ com.stripe.param.reporting
 com.stripe.param.sigma
 com.stripe.param.terminal
 com.stripe.param.testhelpers
+com.stripe.param.treasury
 com.stripe.util
