@@ -150,6 +150,7 @@ jobs:
 
       - name: Publish Javadoc
         run: |
-          ./gradlew gitPublishPush --stacktrace --info -Dorg.ajoberstar.grgit.auth.username=$GRGIT_USER
+          ./gradlew gitPublishPush --stacktrace --info
         env:
-          GRGIT_USER: ${{ secrets.GITHUB_TOKEN }}
+          GRGIT_USER: ${{ github.actor }}
+          GRGIT_PASS: ${{ secrets.GITHUB_TOKEN }}
