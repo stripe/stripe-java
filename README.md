@@ -28,7 +28,7 @@ Add this dependency to your project's POM:
 <dependency>
   <groupId>com.stripe</groupId>
   <artifactId>stripe-java</artifactId>
-  <version>20.122.0</version>
+  <version>20.123.0</version>
 </dependency>
 ```
 

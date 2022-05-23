@@ -1,5 +1,9 @@
 # Changelog
 
+## 20.123.0 - 2022-05-23
+* [#1360](https://github.com/stripe/stripe-java/pull/1360) API Updates
+  * Add support for `treasury` on `Account.capabilities`, `AccountCreateParams.capabilities`, and `AccountUpdateParams.capabilities`
+
 ## 20.122.0 - 2022-05-23
 * [#1359](https://github.com/stripe/stripe-java/pull/1359) API Updates
   * Add support for new resource `Apps.Secret`
