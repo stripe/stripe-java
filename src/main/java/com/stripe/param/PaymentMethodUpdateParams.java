@@ -23,6 +23,13 @@ public class PaymentMethodUpdateParams extends ApiRequestParams {
    * This is a legacy parameter that will be removed in the future. It is a hash that does not
    * accept any keys.
    */
+  @SerializedName("affirm")
+  Affirm affirm;
+
+  /**
+   * This is a legacy parameter that will be removed in the future. It is a hash that does not
+   * accept any keys.
+   */
   @SerializedName("au_becs_debit")
   AuBecsDebit auBecsDebit;
 
@@ -58,6 +65,13 @@ public class PaymentMethodUpdateParams extends ApiRequestParams {
   Map<String, Object> extraParams;
 
   /**
+   * If this is an {@code Link} PaymentMethod, this hash contains details about the Link payment
+   * method.
+   */
+  @SerializedName("link")
+  Link link;
+
+  /**
    * Set of <a href="https://stripe.com/docs/api/metadata">key-value pairs</a> that you can attach
    * to an object. This can be useful for storing additional information about the object in a
    * structured format. Individual keys can be unset by posting an empty value to them. All keys can
@@ -82,22 +96,26 @@ public class PaymentMethodUpdateParams extends ApiRequestParams {
 
   private PaymentMethodUpdateParams(
       AcssDebit acssDebit,
+      Affirm affirm,
       AuBecsDebit auBecsDebit,
       BacsDebit bacsDebit,
       BillingDetails billingDetails,
       Card card,
       List<String> expand,
       Map<String, Object> extraParams,
+      Link link,
       Object metadata,
       SepaDebit sepaDebit,
       UsBankAccount usBankAccount) {
     this.acssDebit = acssDebit;
+    this.affirm = affirm;
     this.auBecsDebit = auBecsDebit;
     this.bacsDebit = bacsDebit;
     this.billingDetails = billingDetails;
     this.card = card;
     this.expand = expand;
     this.extraParams = extraParams;
+    this.link = link;
     this.metadata = metadata;
     this.sepaDebit = sepaDebit;
     this.usBankAccount = usBankAccount;
@@ -109,6 +127,8 @@ public class PaymentMethodUpdateParams extends ApiRequestParams {
 
   public static class Builder {
     private AcssDebit acssDebit;
+
+    private Affirm affirm;
 
     private AuBecsDebit auBecsDebit;
 
@@ -122,6 +142,8 @@ public class PaymentMethodUpdateParams extends ApiRequestParams {
 
     private Map<String, Object> extraParams;
 
+    private Link link;
+
     private Object metadata;
 
     private SepaDebit sepaDebit;
@@ -132,12 +154,14 @@ public class PaymentMethodUpdateParams extends ApiRequestParams {
     public PaymentMethodUpdateParams build() {
       return new PaymentMethodUpdateParams(
           this.acssDebit,
+          this.affirm,
           this.auBecsDebit,
           this.bacsDebit,
           this.billingDetails,
           this.card,
           this.expand,
           this.extraParams,
+          this.link,
           this.metadata,
           this.sepaDebit,
           this.usBankAccount);
@@ -149,6 +173,15 @@ public class PaymentMethodUpdateParams extends ApiRequestParams {
      */
     public Builder setAcssDebit(AcssDebit acssDebit) {
       this.acssDebit = acssDebit;
+      return this;
+    }
+
+    /**
+     * This is a legacy parameter that will be removed in the future. It is a hash that does not
+     * accept any keys.
+     */
+    public Builder setAffirm(Affirm affirm) {
+      this.affirm = affirm;
       return this;
     }
 
@@ -234,6 +267,15 @@ public class PaymentMethodUpdateParams extends ApiRequestParams {
         this.extraParams = new HashMap<>();
       }
       this.extraParams.putAll(map);
+      return this;
+    }
+
+    /**
+     * If this is an {@code Link} PaymentMethod, this hash contains details about the Link payment
+     * method.
+     */
+    public Builder setLink(Link link) {
+      this.link = link;
       return this;
     }
 
@@ -350,6 +392,61 @@ public class PaymentMethodUpdateParams extends ApiRequestParams {
        * Add all map key/value pairs to `extraParams` map. A map is initialized for the first
        * `put/putAll` call, and subsequent calls add additional key/value pairs to the original map.
        * See {@link PaymentMethodUpdateParams.AcssDebit#extraParams} for the field documentation.
+       */
+      public Builder putAllExtraParam(Map<String, Object> map) {
+        if (this.extraParams == null) {
+          this.extraParams = new HashMap<>();
+        }
+        this.extraParams.putAll(map);
+        return this;
+      }
+    }
+  }
+
+  @Getter
+  public static class Affirm {
+    /**
+     * Map of extra parameters for custom features not available in this client library. The content
+     * in this map is not serialized under this field's {@code @SerializedName} value. Instead, each
+     * key/value pair is serialized as if the key is a root-level field (serialized) name in this
+     * param object. Effectively, this map is flattened to its parent instance.
+     */
+    @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
+    Map<String, Object> extraParams;
+
+    private Affirm(Map<String, Object> extraParams) {
+      this.extraParams = extraParams;
+    }
+
+    public static Builder builder() {
+      return new Builder();
+    }
+
+    public static class Builder {
+      private Map<String, Object> extraParams;
+
+      /** Finalize and obtain parameter instance from this builder. */
+      public Affirm build() {
+        return new Affirm(this.extraParams);
+      }
+
+      /**
+       * Add a key/value pair to `extraParams` map. A map is initialized for the first `put/putAll`
+       * call, and subsequent calls add additional key/value pairs to the original map. See {@link
+       * PaymentMethodUpdateParams.Affirm#extraParams} for the field documentation.
+       */
+      public Builder putExtraParam(String key, Object value) {
+        if (this.extraParams == null) {
+          this.extraParams = new HashMap<>();
+        }
+        this.extraParams.put(key, value);
+        return this;
+      }
+
+      /**
+       * Add all map key/value pairs to `extraParams` map. A map is initialized for the first
+       * `put/putAll` call, and subsequent calls add additional key/value pairs to the original map.
+       * See {@link PaymentMethodUpdateParams.Affirm#extraParams} for the field documentation.
        */
       public Builder putAllExtraParam(Map<String, Object> map) {
         if (this.extraParams == null) {
@@ -869,6 +966,61 @@ public class PaymentMethodUpdateParams extends ApiRequestParams {
        * Add all map key/value pairs to `extraParams` map. A map is initialized for the first
        * `put/putAll` call, and subsequent calls add additional key/value pairs to the original map.
        * See {@link PaymentMethodUpdateParams.Card#extraParams} for the field documentation.
+       */
+      public Builder putAllExtraParam(Map<String, Object> map) {
+        if (this.extraParams == null) {
+          this.extraParams = new HashMap<>();
+        }
+        this.extraParams.putAll(map);
+        return this;
+      }
+    }
+  }
+
+  @Getter
+  public static class Link {
+    /**
+     * Map of extra parameters for custom features not available in this client library. The content
+     * in this map is not serialized under this field's {@code @SerializedName} value. Instead, each
+     * key/value pair is serialized as if the key is a root-level field (serialized) name in this
+     * param object. Effectively, this map is flattened to its parent instance.
+     */
+    @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
+    Map<String, Object> extraParams;
+
+    private Link(Map<String, Object> extraParams) {
+      this.extraParams = extraParams;
+    }
+
+    public static Builder builder() {
+      return new Builder();
+    }
+
+    public static class Builder {
+      private Map<String, Object> extraParams;
+
+      /** Finalize and obtain parameter instance from this builder. */
+      public Link build() {
+        return new Link(this.extraParams);
+      }
+
+      /**
+       * Add a key/value pair to `extraParams` map. A map is initialized for the first `put/putAll`
+       * call, and subsequent calls add additional key/value pairs to the original map. See {@link
+       * PaymentMethodUpdateParams.Link#extraParams} for the field documentation.
+       */
+      public Builder putExtraParam(String key, Object value) {
+        if (this.extraParams == null) {
+          this.extraParams = new HashMap<>();
+        }
+        this.extraParams.put(key, value);
+        return this;
+      }
+
+      /**
+       * Add all map key/value pairs to `extraParams` map. A map is initialized for the first
+       * `put/putAll` call, and subsequent calls add additional key/value pairs to the original map.
+       * See {@link PaymentMethodUpdateParams.Link#extraParams} for the field documentation.
        */
       public Builder putAllExtraParam(Map<String, Object> map) {
         if (this.extraParams == null) {

@@ -572,6 +572,13 @@ public class SetupIntentConfirmParams extends ApiRequestParams {
     AcssDebit acssDebit;
 
     /**
+     * If this is an {@code affirm} PaymentMethod, this hash contains details about the Affirm
+     * payment method.
+     */
+    @SerializedName("affirm")
+    Affirm affirm;
+
+    /**
      * If this is an {@code AfterpayClearpay} PaymentMethod, this hash contains details about the
      * AfterpayClearpay payment method.
      */
@@ -693,6 +700,13 @@ public class SetupIntentConfirmParams extends ApiRequestParams {
     Konbini konbini;
 
     /**
+     * If this is an {@code Link} PaymentMethod, this hash contains details about the Link payment
+     * method.
+     */
+    @SerializedName("link")
+    Link link;
+
+    /**
      * Set of <a href="https://stripe.com/docs/api/metadata">key-value pairs</a> that you can attach
      * to an object. This can be useful for storing additional information about the object in a
      * structured format. Individual keys can be unset by posting an empty value to them. All keys
@@ -760,6 +774,7 @@ public class SetupIntentConfirmParams extends ApiRequestParams {
 
     private PaymentMethodData(
         AcssDebit acssDebit,
+        Affirm affirm,
         AfterpayClearpay afterpayClearpay,
         Alipay alipay,
         AuBecsDebit auBecsDebit,
@@ -777,6 +792,7 @@ public class SetupIntentConfirmParams extends ApiRequestParams {
         InteracPresent interacPresent,
         Klarna klarna,
         Konbini konbini,
+        Link link,
         Map<String, String> metadata,
         Oxxo oxxo,
         P24 p24,
@@ -787,6 +803,7 @@ public class SetupIntentConfirmParams extends ApiRequestParams {
         UsBankAccount usBankAccount,
         WechatPay wechatPay) {
       this.acssDebit = acssDebit;
+      this.affirm = affirm;
       this.afterpayClearpay = afterpayClearpay;
       this.alipay = alipay;
       this.auBecsDebit = auBecsDebit;
@@ -804,6 +821,7 @@ public class SetupIntentConfirmParams extends ApiRequestParams {
       this.interacPresent = interacPresent;
       this.klarna = klarna;
       this.konbini = konbini;
+      this.link = link;
       this.metadata = metadata;
       this.oxxo = oxxo;
       this.p24 = p24;
@@ -821,6 +839,8 @@ public class SetupIntentConfirmParams extends ApiRequestParams {
 
     public static class Builder {
       private AcssDebit acssDebit;
+
+      private Affirm affirm;
 
       private AfterpayClearpay afterpayClearpay;
 
@@ -856,6 +876,8 @@ public class SetupIntentConfirmParams extends ApiRequestParams {
 
       private Konbini konbini;
 
+      private Link link;
+
       private Map<String, String> metadata;
 
       private Oxxo oxxo;
@@ -878,6 +900,7 @@ public class SetupIntentConfirmParams extends ApiRequestParams {
       public PaymentMethodData build() {
         return new PaymentMethodData(
             this.acssDebit,
+            this.affirm,
             this.afterpayClearpay,
             this.alipay,
             this.auBecsDebit,
@@ -895,6 +918,7 @@ public class SetupIntentConfirmParams extends ApiRequestParams {
             this.interacPresent,
             this.klarna,
             this.konbini,
+            this.link,
             this.metadata,
             this.oxxo,
             this.p24,
@@ -912,6 +936,15 @@ public class SetupIntentConfirmParams extends ApiRequestParams {
        */
       public Builder setAcssDebit(AcssDebit acssDebit) {
         this.acssDebit = acssDebit;
+        return this;
+      }
+
+      /**
+       * If this is an {@code affirm} PaymentMethod, this hash contains details about the Affirm
+       * payment method.
+       */
+      public Builder setAffirm(Affirm affirm) {
+        this.affirm = affirm;
         return this;
       }
 
@@ -1083,6 +1116,15 @@ public class SetupIntentConfirmParams extends ApiRequestParams {
        */
       public Builder setKonbini(Konbini konbini) {
         this.konbini = konbini;
+        return this;
+      }
+
+      /**
+       * If this is an {@code Link} PaymentMethod, this hash contains details about the Link payment
+       * method.
+       */
+      public Builder setLink(Link link) {
+        this.link = link;
         return this;
       }
 
@@ -1283,6 +1325,63 @@ public class SetupIntentConfirmParams extends ApiRequestParams {
         /** Transit number of the customer's bank. */
         public Builder setTransitNumber(String transitNumber) {
           this.transitNumber = transitNumber;
+          return this;
+        }
+      }
+    }
+
+    @Getter
+    public static class Affirm {
+      /**
+       * Map of extra parameters for custom features not available in this client library. The
+       * content in this map is not serialized under this field's {@code @SerializedName} value.
+       * Instead, each key/value pair is serialized as if the key is a root-level field (serialized)
+       * name in this param object. Effectively, this map is flattened to its parent instance.
+       */
+      @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
+      Map<String, Object> extraParams;
+
+      private Affirm(Map<String, Object> extraParams) {
+        this.extraParams = extraParams;
+      }
+
+      public static Builder builder() {
+        return new Builder();
+      }
+
+      public static class Builder {
+        private Map<String, Object> extraParams;
+
+        /** Finalize and obtain parameter instance from this builder. */
+        public Affirm build() {
+          return new Affirm(this.extraParams);
+        }
+
+        /**
+         * Add a key/value pair to `extraParams` map. A map is initialized for the first
+         * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
+         * map. See {@link SetupIntentConfirmParams.PaymentMethodData.Affirm#extraParams} for the
+         * field documentation.
+         */
+        public Builder putExtraParam(String key, Object value) {
+          if (this.extraParams == null) {
+            this.extraParams = new HashMap<>();
+          }
+          this.extraParams.put(key, value);
+          return this;
+        }
+
+        /**
+         * Add all map key/value pairs to `extraParams` map. A map is initialized for the first
+         * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
+         * map. See {@link SetupIntentConfirmParams.PaymentMethodData.Affirm#extraParams} for the
+         * field documentation.
+         */
+        public Builder putAllExtraParam(Map<String, Object> map) {
+          if (this.extraParams == null) {
+            this.extraParams = new HashMap<>();
+          }
+          this.extraParams.putAll(map);
           return this;
         }
       }
@@ -2886,6 +2985,63 @@ public class SetupIntentConfirmParams extends ApiRequestParams {
     }
 
     @Getter
+    public static class Link {
+      /**
+       * Map of extra parameters for custom features not available in this client library. The
+       * content in this map is not serialized under this field's {@code @SerializedName} value.
+       * Instead, each key/value pair is serialized as if the key is a root-level field (serialized)
+       * name in this param object. Effectively, this map is flattened to its parent instance.
+       */
+      @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
+      Map<String, Object> extraParams;
+
+      private Link(Map<String, Object> extraParams) {
+        this.extraParams = extraParams;
+      }
+
+      public static Builder builder() {
+        return new Builder();
+      }
+
+      public static class Builder {
+        private Map<String, Object> extraParams;
+
+        /** Finalize and obtain parameter instance from this builder. */
+        public Link build() {
+          return new Link(this.extraParams);
+        }
+
+        /**
+         * Add a key/value pair to `extraParams` map. A map is initialized for the first
+         * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
+         * map. See {@link SetupIntentConfirmParams.PaymentMethodData.Link#extraParams} for the
+         * field documentation.
+         */
+        public Builder putExtraParam(String key, Object value) {
+          if (this.extraParams == null) {
+            this.extraParams = new HashMap<>();
+          }
+          this.extraParams.put(key, value);
+          return this;
+        }
+
+        /**
+         * Add all map key/value pairs to `extraParams` map. A map is initialized for the first
+         * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
+         * map. See {@link SetupIntentConfirmParams.PaymentMethodData.Link#extraParams} for the
+         * field documentation.
+         */
+        public Builder putAllExtraParam(Map<String, Object> map) {
+          if (this.extraParams == null) {
+            this.extraParams = new HashMap<>();
+          }
+          this.extraParams.putAll(map);
+          return this;
+        }
+      }
+    }
+
+    @Getter
     public static class Oxxo {
       /**
        * Map of extra parameters for custom features not available in this client library. The
@@ -3545,6 +3701,9 @@ public class SetupIntentConfirmParams extends ApiRequestParams {
       @SerializedName("acss_debit")
       ACSS_DEBIT("acss_debit"),
 
+      @SerializedName("affirm")
+      AFFIRM("affirm"),
+
       @SerializedName("afterpay_clearpay")
       AFTERPAY_CLEARPAY("afterpay_clearpay"),
 
@@ -3586,6 +3745,9 @@ public class SetupIntentConfirmParams extends ApiRequestParams {
 
       @SerializedName("konbini")
       KONBINI("konbini"),
+
+      @SerializedName("link")
+      LINK("link"),
 
       @SerializedName("oxxo")
       OXXO("oxxo"),
@@ -3640,6 +3802,13 @@ public class SetupIntentConfirmParams extends ApiRequestParams {
     Map<String, Object> extraParams;
 
     /**
+     * If this is a {@code link} PaymentMethod, this sub-hash contains details about the Link
+     * payment method options.
+     */
+    @SerializedName("link")
+    Link link;
+
+    /**
      * If this is a {@code sepa_debit} SetupIntent, this sub-hash contains details about the SEPA
      * Debit payment method options.
      */
@@ -3657,11 +3826,13 @@ public class SetupIntentConfirmParams extends ApiRequestParams {
         AcssDebit acssDebit,
         Card card,
         Map<String, Object> extraParams,
+        Link link,
         SepaDebit sepaDebit,
         UsBankAccount usBankAccount) {
       this.acssDebit = acssDebit;
       this.card = card;
       this.extraParams = extraParams;
+      this.link = link;
       this.sepaDebit = sepaDebit;
       this.usBankAccount = usBankAccount;
     }
@@ -3677,6 +3848,8 @@ public class SetupIntentConfirmParams extends ApiRequestParams {
 
       private Map<String, Object> extraParams;
 
+      private Link link;
+
       private SepaDebit sepaDebit;
 
       private UsBankAccount usBankAccount;
@@ -3684,7 +3857,12 @@ public class SetupIntentConfirmParams extends ApiRequestParams {
       /** Finalize and obtain parameter instance from this builder. */
       public PaymentMethodOptions build() {
         return new PaymentMethodOptions(
-            this.acssDebit, this.card, this.extraParams, this.sepaDebit, this.usBankAccount);
+            this.acssDebit,
+            this.card,
+            this.extraParams,
+            this.link,
+            this.sepaDebit,
+            this.usBankAccount);
       }
 
       /**
@@ -3726,6 +3904,15 @@ public class SetupIntentConfirmParams extends ApiRequestParams {
           this.extraParams = new HashMap<>();
         }
         this.extraParams.putAll(map);
+        return this;
+      }
+
+      /**
+       * If this is a {@code link} PaymentMethod, this sub-hash contains details about the Link
+       * payment method options.
+       */
+      public Builder setLink(Link link) {
+        this.link = link;
         return this;
       }
 
@@ -4602,6 +4789,76 @@ public class SetupIntentConfirmParams extends ApiRequestParams {
 
         RequestThreeDSecure(String value) {
           this.value = value;
+        }
+      }
+    }
+
+    @Getter
+    public static class Link {
+      /**
+       * Map of extra parameters for custom features not available in this client library. The
+       * content in this map is not serialized under this field's {@code @SerializedName} value.
+       * Instead, each key/value pair is serialized as if the key is a root-level field (serialized)
+       * name in this param object. Effectively, this map is flattened to its parent instance.
+       */
+      @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
+      Map<String, Object> extraParams;
+
+      /** Token used for persistent Link logins. */
+      @SerializedName("persistent_token")
+      String persistentToken;
+
+      private Link(Map<String, Object> extraParams, String persistentToken) {
+        this.extraParams = extraParams;
+        this.persistentToken = persistentToken;
+      }
+
+      public static Builder builder() {
+        return new Builder();
+      }
+
+      public static class Builder {
+        private Map<String, Object> extraParams;
+
+        private String persistentToken;
+
+        /** Finalize and obtain parameter instance from this builder. */
+        public Link build() {
+          return new Link(this.extraParams, this.persistentToken);
+        }
+
+        /**
+         * Add a key/value pair to `extraParams` map. A map is initialized for the first
+         * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
+         * map. See {@link SetupIntentConfirmParams.PaymentMethodOptions.Link#extraParams} for the
+         * field documentation.
+         */
+        public Builder putExtraParam(String key, Object value) {
+          if (this.extraParams == null) {
+            this.extraParams = new HashMap<>();
+          }
+          this.extraParams.put(key, value);
+          return this;
+        }
+
+        /**
+         * Add all map key/value pairs to `extraParams` map. A map is initialized for the first
+         * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
+         * map. See {@link SetupIntentConfirmParams.PaymentMethodOptions.Link#extraParams} for the
+         * field documentation.
+         */
+        public Builder putAllExtraParam(Map<String, Object> map) {
+          if (this.extraParams == null) {
+            this.extraParams = new HashMap<>();
+          }
+          this.extraParams.putAll(map);
+          return this;
+        }
+
+        /** Token used for persistent Link logins. */
+        public Builder setPersistentToken(String persistentToken) {
+          this.persistentToken = persistentToken;
+          return this;
         }
       }
     }

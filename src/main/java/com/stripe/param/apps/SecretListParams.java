@@ -1,5 +1,5 @@
 // File generated from our OpenAPI spec
-package com.stripe.param;
+package com.stripe.param.apps;
 
 import com.google.gson.annotations.SerializedName;
 import com.stripe.net.ApiRequestParams;
@@ -10,7 +10,7 @@ import java.util.Map;
 import lombok.Getter;
 
 @Getter
-public class CustomerListPaymentMethodsParams extends ApiRequestParams {
+public class SecretListParams extends ApiRequestParams {
   /**
    * A cursor for use in pagination. {@code ending_before} is an object ID that defines your place
    * in the list. For instance, if you make a list request and receive 100 objects, starting with
@@ -41,6 +41,13 @@ public class CustomerListPaymentMethodsParams extends ApiRequestParams {
   Long limit;
 
   /**
+   * Specifies the scoping of the secret. Requests originating from UI extensions can only access
+   * account-scoped secrets or secrets scoped to their own user.
+   */
+  @SerializedName("scope")
+  Scope scope;
+
+  /**
    * A cursor for use in pagination. {@code starting_after} is an object ID that defines your place
    * in the list. For instance, if you make a list request and receive 100 objects, ending with
    * {@code obj_foo}, your subsequent call can include {@code starting_after=obj_foo} in order to
@@ -49,23 +56,19 @@ public class CustomerListPaymentMethodsParams extends ApiRequestParams {
   @SerializedName("starting_after")
   String startingAfter;
 
-  /** A required filter on the list, based on the object {@code type} field. */
-  @SerializedName("type")
-  Type type;
-
-  private CustomerListPaymentMethodsParams(
+  private SecretListParams(
       String endingBefore,
       List<String> expand,
       Map<String, Object> extraParams,
       Long limit,
-      String startingAfter,
-      Type type) {
+      Scope scope,
+      String startingAfter) {
     this.endingBefore = endingBefore;
     this.expand = expand;
     this.extraParams = extraParams;
     this.limit = limit;
+    this.scope = scope;
     this.startingAfter = startingAfter;
-    this.type = type;
   }
 
   public static Builder builder() {
@@ -81,19 +84,19 @@ public class CustomerListPaymentMethodsParams extends ApiRequestParams {
 
     private Long limit;
 
+    private Scope scope;
+
     private String startingAfter;
 
-    private Type type;
-
     /** Finalize and obtain parameter instance from this builder. */
-    public CustomerListPaymentMethodsParams build() {
-      return new CustomerListPaymentMethodsParams(
+    public SecretListParams build() {
+      return new SecretListParams(
           this.endingBefore,
           this.expand,
           this.extraParams,
           this.limit,
-          this.startingAfter,
-          this.type);
+          this.scope,
+          this.startingAfter);
     }
 
     /**
@@ -110,7 +113,7 @@ public class CustomerListPaymentMethodsParams extends ApiRequestParams {
     /**
      * Add an element to `expand` list. A list is initialized for the first `add/addAll` call, and
      * subsequent calls adds additional elements to the original list. See {@link
-     * CustomerListPaymentMethodsParams#expand} for the field documentation.
+     * SecretListParams#expand} for the field documentation.
      */
     public Builder addExpand(String element) {
       if (this.expand == null) {
@@ -123,7 +126,7 @@ public class CustomerListPaymentMethodsParams extends ApiRequestParams {
     /**
      * Add all elements to `expand` list. A list is initialized for the first `add/addAll` call, and
      * subsequent calls adds additional elements to the original list. See {@link
-     * CustomerListPaymentMethodsParams#expand} for the field documentation.
+     * SecretListParams#expand} for the field documentation.
      */
     public Builder addAllExpand(List<String> elements) {
       if (this.expand == null) {
@@ -136,7 +139,7 @@ public class CustomerListPaymentMethodsParams extends ApiRequestParams {
     /**
      * Add a key/value pair to `extraParams` map. A map is initialized for the first `put/putAll`
      * call, and subsequent calls add additional key/value pairs to the original map. See {@link
-     * CustomerListPaymentMethodsParams#extraParams} for the field documentation.
+     * SecretListParams#extraParams} for the field documentation.
      */
     public Builder putExtraParam(String key, Object value) {
       if (this.extraParams == null) {
@@ -149,7 +152,7 @@ public class CustomerListPaymentMethodsParams extends ApiRequestParams {
     /**
      * Add all map key/value pairs to `extraParams` map. A map is initialized for the first
      * `put/putAll` call, and subsequent calls add additional key/value pairs to the original map.
-     * See {@link CustomerListPaymentMethodsParams#extraParams} for the field documentation.
+     * See {@link SecretListParams#extraParams} for the field documentation.
      */
     public Builder putAllExtraParam(Map<String, Object> map) {
       if (this.extraParams == null) {
@@ -169,6 +172,15 @@ public class CustomerListPaymentMethodsParams extends ApiRequestParams {
     }
 
     /**
+     * Specifies the scoping of the secret. Requests originating from UI extensions can only access
+     * account-scoped secrets or secrets scoped to their own user.
+     */
+    public Builder setScope(Scope scope) {
+      this.scope = scope;
+      return this;
+    }
+
+    /**
      * A cursor for use in pagination. {@code starting_after} is an object ID that defines your
      * place in the list. For instance, if you make a list request and receive 100 objects, ending
      * with {@code obj_foo}, your subsequent call can include {@code starting_after=obj_foo} in
@@ -178,98 +190,107 @@ public class CustomerListPaymentMethodsParams extends ApiRequestParams {
       this.startingAfter = startingAfter;
       return this;
     }
-
-    /** A required filter on the list, based on the object {@code type} field. */
-    public Builder setType(Type type) {
-      this.type = type;
-      return this;
-    }
   }
 
-  public enum Type implements ApiRequestParams.EnumParam {
-    @SerializedName("acss_debit")
-    ACSS_DEBIT("acss_debit"),
+  @Getter
+  public static class Scope {
+    /**
+     * Map of extra parameters for custom features not available in this client library. The content
+     * in this map is not serialized under this field's {@code @SerializedName} value. Instead, each
+     * key/value pair is serialized as if the key is a root-level field (serialized) name in this
+     * param object. Effectively, this map is flattened to its parent instance.
+     */
+    @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
+    Map<String, Object> extraParams;
 
-    @SerializedName("affirm")
-    AFFIRM("affirm"),
+    /** The secret scope type. */
+    @SerializedName("type")
+    Type type;
 
-    @SerializedName("afterpay_clearpay")
-    AFTERPAY_CLEARPAY("afterpay_clearpay"),
+    /**
+     * The user ID. This field is required if {@code type} is set to {@code user}, and should not be
+     * provided if {@code type} is set to {@code account}.
+     */
+    @SerializedName("user")
+    String user;
 
-    @SerializedName("alipay")
-    ALIPAY("alipay"),
+    private Scope(Map<String, Object> extraParams, Type type, String user) {
+      this.extraParams = extraParams;
+      this.type = type;
+      this.user = user;
+    }
 
-    @SerializedName("au_becs_debit")
-    AU_BECS_DEBIT("au_becs_debit"),
+    public static Builder builder() {
+      return new Builder();
+    }
 
-    @SerializedName("bacs_debit")
-    BACS_DEBIT("bacs_debit"),
+    public static class Builder {
+      private Map<String, Object> extraParams;
 
-    @SerializedName("bancontact")
-    BANCONTACT("bancontact"),
+      private Type type;
 
-    @SerializedName("boleto")
-    BOLETO("boleto"),
+      private String user;
 
-    @SerializedName("card")
-    CARD("card"),
+      /** Finalize and obtain parameter instance from this builder. */
+      public Scope build() {
+        return new Scope(this.extraParams, this.type, this.user);
+      }
 
-    @SerializedName("card_present")
-    CARD_PRESENT("card_present"),
+      /**
+       * Add a key/value pair to `extraParams` map. A map is initialized for the first `put/putAll`
+       * call, and subsequent calls add additional key/value pairs to the original map. See {@link
+       * SecretListParams.Scope#extraParams} for the field documentation.
+       */
+      public Builder putExtraParam(String key, Object value) {
+        if (this.extraParams == null) {
+          this.extraParams = new HashMap<>();
+        }
+        this.extraParams.put(key, value);
+        return this;
+      }
 
-    @SerializedName("customer_balance")
-    CUSTOMER_BALANCE("customer_balance"),
+      /**
+       * Add all map key/value pairs to `extraParams` map. A map is initialized for the first
+       * `put/putAll` call, and subsequent calls add additional key/value pairs to the original map.
+       * See {@link SecretListParams.Scope#extraParams} for the field documentation.
+       */
+      public Builder putAllExtraParam(Map<String, Object> map) {
+        if (this.extraParams == null) {
+          this.extraParams = new HashMap<>();
+        }
+        this.extraParams.putAll(map);
+        return this;
+      }
 
-    @SerializedName("eps")
-    EPS("eps"),
+      /** The secret scope type. */
+      public Builder setType(Type type) {
+        this.type = type;
+        return this;
+      }
 
-    @SerializedName("fpx")
-    FPX("fpx"),
+      /**
+       * The user ID. This field is required if {@code type} is set to {@code user}, and should not
+       * be provided if {@code type} is set to {@code account}.
+       */
+      public Builder setUser(String user) {
+        this.user = user;
+        return this;
+      }
+    }
 
-    @SerializedName("giropay")
-    GIROPAY("giropay"),
+    public enum Type implements ApiRequestParams.EnumParam {
+      @SerializedName("account")
+      ACCOUNT("account"),
 
-    @SerializedName("grabpay")
-    GRABPAY("grabpay"),
+      @SerializedName("user")
+      USER("user");
 
-    @SerializedName("ideal")
-    IDEAL("ideal"),
+      @Getter(onMethod_ = {@Override})
+      private final String value;
 
-    @SerializedName("klarna")
-    KLARNA("klarna"),
-
-    @SerializedName("konbini")
-    KONBINI("konbini"),
-
-    @SerializedName("link")
-    LINK("link"),
-
-    @SerializedName("oxxo")
-    OXXO("oxxo"),
-
-    @SerializedName("p24")
-    P24("p24"),
-
-    @SerializedName("paynow")
-    PAYNOW("paynow"),
-
-    @SerializedName("sepa_debit")
-    SEPA_DEBIT("sepa_debit"),
-
-    @SerializedName("sofort")
-    SOFORT("sofort"),
-
-    @SerializedName("us_bank_account")
-    US_BANK_ACCOUNT("us_bank_account"),
-
-    @SerializedName("wechat_pay")
-    WECHAT_PAY("wechat_pay");
-
-    @Getter(onMethod_ = {@Override})
-    private final String value;
-
-    Type(String value) {
-      this.value = value;
+      Type(String value) {
+        this.value = value;
+      }
     }
   }
 }

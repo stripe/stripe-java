@@ -211,6 +211,9 @@ public class PaymentMethodListParams extends ApiRequestParams {
     @SerializedName("acss_debit")
     ACSS_DEBIT("acss_debit"),
 
+    @SerializedName("affirm")
+    AFFIRM("affirm"),
+
     @SerializedName("afterpay_clearpay")
     AFTERPAY_CLEARPAY("afterpay_clearpay"),
 
@@ -258,6 +261,9 @@ public class PaymentMethodListParams extends ApiRequestParams {
 
     @SerializedName("konbini")
     KONBINI("konbini"),
+
+    @SerializedName("link")
+    LINK("link"),
 
     @SerializedName("oxxo")
     OXXO("oxxo"),

@@ -815,6 +815,9 @@ public class SetupIntent extends ApiResource implements HasId, MetadataStore<Set
     @SerializedName("card")
     Card card;
 
+    @SerializedName("link")
+    Link link;
+
     @SerializedName("sepa_debit")
     SepaDebit sepaDebit;
 
@@ -974,6 +977,15 @@ public class SetupIntent extends ApiResource implements HasId, MetadataStore<Set
         @SerializedName("supported_types")
         List<String> supportedTypes;
       }
+    }
+
+    @Getter
+    @Setter
+    @EqualsAndHashCode(callSuper = false)
+    public static class Link extends StripeObject {
+      /** Token used for persistent Link logins. */
+      @SerializedName("persistent_token")
+      String persistentToken;
     }
 
     @Getter
