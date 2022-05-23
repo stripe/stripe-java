@@ -2,6 +2,7 @@ com.stripe
 com.stripe.exception
 com.stripe.exception.oauth
 com.stripe.model
+com.stripe.model.apps
 com.stripe.model.billingportal
 com.stripe.model.checkout
 com.stripe.model.financialconnections
@@ -16,6 +17,7 @@ com.stripe.model.testhelpers
 com.stripe.model.treasury
 com.stripe.net
 com.stripe.param
+com.stripe.param.apps
 com.stripe.param.billingportal
 com.stripe.param.checkout
 com.stripe.param.common
