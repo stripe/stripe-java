@@ -1105,6 +1105,9 @@ public class Charge extends ApiResource implements MetadataStore<Charge>, Balanc
     @SerializedName("acss_debit")
     AcssDebit acssDebit;
 
+    @SerializedName("affirm")
+    Affirm affirm;
+
     @SerializedName("afterpay_clearpay")
     AfterpayClearpay afterpayClearpay;
 
@@ -1155,6 +1158,9 @@ public class Charge extends ApiResource implements MetadataStore<Charge>, Balanc
 
     @SerializedName("konbini")
     Konbini konbini;
+
+    @SerializedName("link")
+    Link link;
 
     @SerializedName("multibanco")
     Multibanco multibanco;
@@ -1290,6 +1296,11 @@ public class Charge extends ApiResource implements MetadataStore<Charge>, Balanc
       @SerializedName("transit_number")
       String transitNumber;
     }
+
+    @Getter
+    @Setter
+    @EqualsAndHashCode(callSuper = false)
+    public static class Affirm extends StripeObject {}
 
     @Getter
     @Setter
@@ -2353,6 +2364,11 @@ public class Charge extends ApiResource implements MetadataStore<Charge>, Balanc
       @SerializedName("store")
       Store store;
     }
+
+    @Getter
+    @Setter
+    @EqualsAndHashCode(callSuper = false)
+    public static class Link extends StripeObject {}
 
     @Getter
     @Setter

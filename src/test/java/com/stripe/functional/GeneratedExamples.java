@@ -560,6 +560,55 @@ class GeneratedExamples extends BaseStripeTest {
   }
 
   @Test
+  public void testSecretCreate() throws StripeException {
+    com.stripe.param.apps.SecretCreateParams params =
+        com.stripe.param.apps.SecretCreateParams.builder()
+            .setName("sec_123")
+            .setPayload("very secret string")
+            .setScope(
+                com.stripe.param.apps.SecretCreateParams.Scope.builder()
+                    .setType(com.stripe.param.apps.SecretCreateParams.Scope.Type.ACCOUNT)
+                    .build())
+            .build();
+
+    com.stripe.model.apps.Secret secret = com.stripe.model.apps.Secret.create(params);
+    assertNotNull(secret);
+    verifyRequest(ApiResource.RequestMethod.POST, "/v1/apps/secrets", params.toMap());
+  }
+
+  @Test
+  public void testSecretFind() throws StripeException {
+    com.stripe.param.apps.SecretFindParams params =
+        com.stripe.param.apps.SecretFindParams.builder()
+            .setName("sec_123")
+            .setScope(
+                com.stripe.param.apps.SecretFindParams.Scope.builder()
+                    .setType(com.stripe.param.apps.SecretFindParams.Scope.Type.ACCOUNT)
+                    .build())
+            .build();
+
+    com.stripe.model.apps.Secret secret = com.stripe.model.apps.Secret.find(params);
+    assertNotNull(secret);
+    verifyRequest(ApiResource.RequestMethod.GET, "/v1/apps/secrets/find", params.toMap());
+  }
+
+  @Test
+  public void testSecretDeleteWhere() throws StripeException {
+    com.stripe.param.apps.SecretDeleteWhereParams params =
+        com.stripe.param.apps.SecretDeleteWhereParams.builder()
+            .setName("sec_123")
+            .setScope(
+                com.stripe.param.apps.SecretDeleteWhereParams.Scope.builder()
+                    .setType(com.stripe.param.apps.SecretDeleteWhereParams.Scope.Type.ACCOUNT)
+                    .build())
+            .build();
+
+    com.stripe.model.apps.Secret secret = com.stripe.model.apps.Secret.deleteWhere(params);
+    assertNotNull(secret);
+    verifyRequest(ApiResource.RequestMethod.POST, "/v1/apps/secrets/delete", params.toMap());
+  }
+
+  @Test
   public void testCustomerList() throws StripeException {
     CustomerListParams params = CustomerListParams.builder().setLimit(3L).build();
 

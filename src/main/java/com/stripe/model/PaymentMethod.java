@@ -25,6 +25,9 @@ public class PaymentMethod extends ApiResource implements HasId, MetadataStore<P
   @SerializedName("acss_debit")
   AcssDebit acssDebit;
 
+  @SerializedName("affirm")
+  Affirm affirm;
+
   @SerializedName("afterpay_clearpay")
   AfterpayClearpay afterpayClearpay;
 
@@ -97,6 +100,9 @@ public class PaymentMethod extends ApiResource implements HasId, MetadataStore<P
   @SerializedName("konbini")
   Konbini konbini;
 
+  @SerializedName("link")
+  Link link;
+
   /**
    * Has the value {@code true} if the object exists in live mode or the value {@code false} if the
    * object exists in test mode.
@@ -140,12 +146,12 @@ public class PaymentMethod extends ApiResource implements HasId, MetadataStore<P
    * The type of the PaymentMethod. An additional hash is included on the PaymentMethod with a name
    * matching this value. It contains additional information specific to the PaymentMethod type.
    *
-   * <p>One of {@code acss_debit}, {@code afterpay_clearpay}, {@code alipay}, {@code au_becs_debit},
-   * {@code bacs_debit}, {@code bancontact}, {@code boleto}, {@code card}, {@code card_present},
-   * {@code customer_balance}, {@code eps}, {@code fpx}, {@code giropay}, {@code grabpay}, {@code
-   * ideal}, {@code interac_present}, {@code klarna}, {@code konbini}, {@code oxxo}, {@code p24},
-   * {@code paynow}, {@code sepa_debit}, {@code sofort}, {@code us_bank_account}, or {@code
-   * wechat_pay}.
+   * <p>One of {@code acss_debit}, {@code affirm}, {@code afterpay_clearpay}, {@code alipay}, {@code
+   * au_becs_debit}, {@code bacs_debit}, {@code bancontact}, {@code boleto}, {@code card}, {@code
+   * card_present}, {@code customer_balance}, {@code eps}, {@code fpx}, {@code giropay}, {@code
+   * grabpay}, {@code ideal}, {@code interac_present}, {@code klarna}, {@code konbini}, {@code
+   * link}, {@code oxxo}, {@code p24}, {@code paynow}, {@code sepa_debit}, {@code sofort}, {@code
+   * us_bank_account}, or {@code wechat_pay}.
    */
   @SerializedName("type")
   String type;
@@ -541,6 +547,11 @@ public class PaymentMethod extends ApiResource implements HasId, MetadataStore<P
     @SerializedName("transit_number")
     String transitNumber;
   }
+
+  @Getter
+  @Setter
+  @EqualsAndHashCode(callSuper = false)
+  public static class Affirm extends StripeObject {}
 
   @Getter
   @Setter
@@ -1003,6 +1014,19 @@ public class PaymentMethod extends ApiResource implements HasId, MetadataStore<P
   @Setter
   @EqualsAndHashCode(callSuper = false)
   public static class Konbini extends StripeObject {}
+
+  @Getter
+  @Setter
+  @EqualsAndHashCode(callSuper = false)
+  public static class Link extends StripeObject {
+    /** Account owner's email address. */
+    @SerializedName("email")
+    String email;
+
+    /** Token used for persistent Link logins. */
+    @SerializedName("persistent_token")
+    String persistentToken;
+  }
 
   @Getter
   @Setter

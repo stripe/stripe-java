@@ -2337,6 +2337,9 @@ public class InvoiceUpdateParams extends ApiRequestParams {
       @SerializedName("konbini")
       KONBINI("konbini"),
 
+      @SerializedName("link")
+      LINK("link"),
+
       @SerializedName("paynow")
       PAYNOW("paynow"),
 

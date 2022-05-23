@@ -248,6 +248,9 @@ public class SetupAttempt extends ApiResource implements HasId {
     @SerializedName("ideal")
     Ideal ideal;
 
+    @SerializedName("link")
+    Link link;
+
     @SerializedName("sepa_debit")
     SepaDebit sepaDebit;
 
@@ -509,6 +512,11 @@ public class SetupAttempt extends ApiResource implements HasId {
             new ExpandableField<Mandate>(expandableObject.getId(), expandableObject);
       }
     }
+
+    @Getter
+    @Setter
+    @EqualsAndHashCode(callSuper = false)
+    public static class Link extends StripeObject {}
 
     @Getter
     @Setter

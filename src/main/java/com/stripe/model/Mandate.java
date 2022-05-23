@@ -215,6 +215,9 @@ public class Mandate extends ApiResource implements HasId {
     @SerializedName("card")
     Card card;
 
+    @SerializedName("link")
+    Link link;
+
     @SerializedName("sepa_debit")
     SepaDebit sepaDebit;
 
@@ -265,6 +268,11 @@ public class Mandate extends ApiResource implements HasId {
     @Setter
     @EqualsAndHashCode(callSuper = false)
     public static class Card extends StripeObject {}
+
+    @Getter
+    @Setter
+    @EqualsAndHashCode(callSuper = false)
+    public static class Link extends StripeObject {}
 
     @Getter
     @Setter
