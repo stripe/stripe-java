@@ -179,50 +179,21 @@ public class LiveStripeResponseGetter implements StripeResponseGetter {
 
     String errorType = error.getType();
     if ("invalid_request_error".equals(errorType)) {
-      exception = new InvalidRequestException(
-        error.getMessage(),
-        error.getParam(),
-        response.requestId(),
-        error.getCode(),
-        response.code(),
-        null);
-    } else if ("idempotency_error".equals(errorType)) {
       exception =
-        new IdempotencyException(
-          error.getMessage(), response.requestId(), error.getCode(), response.code());
-    } else if ("card_error".equals(errorType)) {
-      exception =
-        new CardException(
-          error.getMessage(),
-          response.requestId(),
-          error.getCode(),
-          error.getParam(),
-          error.getDeclineCode(),
-          error.getCharge(),
-          response.code(),
-          null);
-    }
-    else {
-      switch (response.code()) {
-        case 400:
-        case 404:
-          exception =
-            new InvalidRequestException(
+          new InvalidRequestException(
               error.getMessage(),
               error.getParam(),
               response.requestId(),
               error.getCode(),
               response.code(),
               null);
-          break;
-        case 401:
-          exception =
-            new AuthenticationException(
+    } else if ("idempotency_error".equals(errorType)) {
+      exception =
+          new IdempotencyException(
               error.getMessage(), response.requestId(), error.getCode(), response.code());
-          break;
-        case 402:
-          exception =
-            new CardException(
+    } else if ("card_error".equals(errorType)) {
+      exception =
+          new CardException(
               error.getMessage(),
               response.requestId(),
               error.getCode(),
@@ -231,30 +202,58 @@ public class LiveStripeResponseGetter implements StripeResponseGetter {
               error.getCharge(),
               response.code(),
               null);
+    } else {
+      switch (response.code()) {
+        case 400:
+        case 404:
+          exception =
+              new InvalidRequestException(
+                  error.getMessage(),
+                  error.getParam(),
+                  response.requestId(),
+                  error.getCode(),
+                  response.code(),
+                  null);
+          break;
+        case 401:
+          exception =
+              new AuthenticationException(
+                  error.getMessage(), response.requestId(), error.getCode(), response.code());
+          break;
+        case 402:
+          exception =
+              new CardException(
+                  error.getMessage(),
+                  response.requestId(),
+                  error.getCode(),
+                  error.getParam(),
+                  error.getDeclineCode(),
+                  error.getCharge(),
+                  response.code(),
+                  null);
           break;
         case 403:
           exception =
-            new PermissionException(
-              error.getMessage(), response.requestId(), error.getCode(), response.code());
+              new PermissionException(
+                  error.getMessage(), response.requestId(), error.getCode(), response.code());
           break;
         case 429:
           exception =
-            new RateLimitException(
-              error.getMessage(),
-              error.getParam(),
-              response.requestId(),
-              error.getCode(),
-              response.code(),
-              null);
+              new RateLimitException(
+                  error.getMessage(),
+                  error.getParam(),
+                  response.requestId(),
+                  error.getCode(),
+                  response.code(),
+                  null);
           break;
         default:
           exception =
-            new ApiException(
-              error.getMessage(), response.requestId(), error.getCode(), response.code(), null);
+              new ApiException(
+                  error.getMessage(), response.requestId(), error.getCode(), response.code(), null);
           break;
       }
     }
-
 
     exception.setStripeError(error);
 
