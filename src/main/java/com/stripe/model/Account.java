@@ -641,6 +641,15 @@ public class Account extends ApiResource implements MetadataStore<Account>, Paym
     String acssDebitPayments;
 
     /**
+     * The status of the Affirm capability of the account, or whether the account can directly
+     * process Affirm charges.
+     *
+     * <p>One of {@code active}, {@code inactive}, or {@code pending}.
+     */
+    @SerializedName("affirm_payments")
+    String affirmPayments;
+
+    /**
      * The status of the Afterpay Clearpay capability of the account, or whether the account can
      * directly process Afterpay Clearpay charges.
      *
@@ -800,6 +809,15 @@ public class Account extends ApiResource implements MetadataStore<Account>, Paym
      */
     @SerializedName("legacy_payments")
     String legacyPayments;
+
+    /**
+     * The status of the link_payments capability of the account, or whether the account can
+     * directly process Link charges.
+     *
+     * <p>One of {@code active}, {@code inactive}, or {@code pending}.
+     */
+    @SerializedName("link_payments")
+    String linkPayments;
 
     /**
      * The status of the OXXO payments capability of the account, or whether the account can

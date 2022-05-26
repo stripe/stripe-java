@@ -835,6 +835,10 @@ public class AccountCreateParams extends ApiRequestParams {
     @SerializedName("acss_debit_payments")
     AcssDebitPayments acssDebitPayments;
 
+    /** The affirm_payments capability. */
+    @SerializedName("affirm_payments")
+    AffirmPayments affirmPayments;
+
     /** The afterpay_clearpay_payments capability. */
     @SerializedName("afterpay_clearpay_payments")
     AfterpayClearpayPayments afterpayClearpayPayments;
@@ -916,6 +920,10 @@ public class AccountCreateParams extends ApiRequestParams {
     @SerializedName("legacy_payments")
     LegacyPayments legacyPayments;
 
+    /** The link_payments capability. */
+    @SerializedName("link_payments")
+    LinkPayments linkPayments;
+
     /** The oxxo_payments capability. */
     @SerializedName("oxxo_payments")
     OxxoPayments oxxoPayments;
@@ -958,6 +966,7 @@ public class AccountCreateParams extends ApiRequestParams {
 
     private Capabilities(
         AcssDebitPayments acssDebitPayments,
+        AffirmPayments affirmPayments,
         AfterpayClearpayPayments afterpayClearpayPayments,
         AuBecsDebitPayments auBecsDebitPayments,
         BacsDebitPayments bacsDebitPayments,
@@ -977,6 +986,7 @@ public class AccountCreateParams extends ApiRequestParams {
         KlarnaPayments klarnaPayments,
         KonbiniPayments konbiniPayments,
         LegacyPayments legacyPayments,
+        LinkPayments linkPayments,
         OxxoPayments oxxoPayments,
         P24Payments p24Payments,
         PaynowPayments paynowPayments,
@@ -988,6 +998,7 @@ public class AccountCreateParams extends ApiRequestParams {
         Treasury treasury,
         UsBankAccountAchPayments usBankAccountAchPayments) {
       this.acssDebitPayments = acssDebitPayments;
+      this.affirmPayments = affirmPayments;
       this.afterpayClearpayPayments = afterpayClearpayPayments;
       this.auBecsDebitPayments = auBecsDebitPayments;
       this.bacsDebitPayments = bacsDebitPayments;
@@ -1007,6 +1018,7 @@ public class AccountCreateParams extends ApiRequestParams {
       this.klarnaPayments = klarnaPayments;
       this.konbiniPayments = konbiniPayments;
       this.legacyPayments = legacyPayments;
+      this.linkPayments = linkPayments;
       this.oxxoPayments = oxxoPayments;
       this.p24Payments = p24Payments;
       this.paynowPayments = paynowPayments;
@@ -1025,6 +1037,8 @@ public class AccountCreateParams extends ApiRequestParams {
 
     public static class Builder {
       private AcssDebitPayments acssDebitPayments;
+
+      private AffirmPayments affirmPayments;
 
       private AfterpayClearpayPayments afterpayClearpayPayments;
 
@@ -1064,6 +1078,8 @@ public class AccountCreateParams extends ApiRequestParams {
 
       private LegacyPayments legacyPayments;
 
+      private LinkPayments linkPayments;
+
       private OxxoPayments oxxoPayments;
 
       private P24Payments p24Payments;
@@ -1088,6 +1104,7 @@ public class AccountCreateParams extends ApiRequestParams {
       public Capabilities build() {
         return new Capabilities(
             this.acssDebitPayments,
+            this.affirmPayments,
             this.afterpayClearpayPayments,
             this.auBecsDebitPayments,
             this.bacsDebitPayments,
@@ -1107,6 +1124,7 @@ public class AccountCreateParams extends ApiRequestParams {
             this.klarnaPayments,
             this.konbiniPayments,
             this.legacyPayments,
+            this.linkPayments,
             this.oxxoPayments,
             this.p24Payments,
             this.paynowPayments,
@@ -1122,6 +1140,12 @@ public class AccountCreateParams extends ApiRequestParams {
       /** The acss_debit_payments capability. */
       public Builder setAcssDebitPayments(AcssDebitPayments acssDebitPayments) {
         this.acssDebitPayments = acssDebitPayments;
+        return this;
+      }
+
+      /** The affirm_payments capability. */
+      public Builder setAffirmPayments(AffirmPayments affirmPayments) {
+        this.affirmPayments = affirmPayments;
         return this;
       }
 
@@ -1260,6 +1284,12 @@ public class AccountCreateParams extends ApiRequestParams {
         return this;
       }
 
+      /** The link_payments capability. */
+      public Builder setLinkPayments(LinkPayments linkPayments) {
+        this.linkPayments = linkPayments;
+        return this;
+      }
+
       /** The oxxo_payments capability. */
       public Builder setOxxoPayments(OxxoPayments oxxoPayments) {
         this.oxxoPayments = oxxoPayments;
@@ -1378,6 +1408,84 @@ public class AccountCreateParams extends ApiRequestParams {
          * Add all map key/value pairs to `extraParams` map. A map is initialized for the first
          * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
          * map. See {@link AccountCreateParams.Capabilities.AcssDebitPayments#extraParams} for the
+         * field documentation.
+         */
+        public Builder putAllExtraParam(Map<String, Object> map) {
+          if (this.extraParams == null) {
+            this.extraParams = new HashMap<>();
+          }
+          this.extraParams.putAll(map);
+          return this;
+        }
+
+        /**
+         * Passing true requests the capability for the account, if it is not already requested. A
+         * requested capability may not immediately become active. Any requirements to activate the
+         * capability are returned in the {@code requirements} arrays.
+         */
+        public Builder setRequested(Boolean requested) {
+          this.requested = requested;
+          return this;
+        }
+      }
+    }
+
+    @Getter
+    public static class AffirmPayments {
+      /**
+       * Map of extra parameters for custom features not available in this client library. The
+       * content in this map is not serialized under this field's {@code @SerializedName} value.
+       * Instead, each key/value pair is serialized as if the key is a root-level field (serialized)
+       * name in this param object. Effectively, this map is flattened to its parent instance.
+       */
+      @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
+      Map<String, Object> extraParams;
+
+      /**
+       * Passing true requests the capability for the account, if it is not already requested. A
+       * requested capability may not immediately become active. Any requirements to activate the
+       * capability are returned in the {@code requirements} arrays.
+       */
+      @SerializedName("requested")
+      Boolean requested;
+
+      private AffirmPayments(Map<String, Object> extraParams, Boolean requested) {
+        this.extraParams = extraParams;
+        this.requested = requested;
+      }
+
+      public static Builder builder() {
+        return new Builder();
+      }
+
+      public static class Builder {
+        private Map<String, Object> extraParams;
+
+        private Boolean requested;
+
+        /** Finalize and obtain parameter instance from this builder. */
+        public AffirmPayments build() {
+          return new AffirmPayments(this.extraParams, this.requested);
+        }
+
+        /**
+         * Add a key/value pair to `extraParams` map. A map is initialized for the first
+         * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
+         * map. See {@link AccountCreateParams.Capabilities.AffirmPayments#extraParams} for the
+         * field documentation.
+         */
+        public Builder putExtraParam(String key, Object value) {
+          if (this.extraParams == null) {
+            this.extraParams = new HashMap<>();
+          }
+          this.extraParams.put(key, value);
+          return this;
+        }
+
+        /**
+         * Add all map key/value pairs to `extraParams` map. A map is initialized for the first
+         * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
+         * map. See {@link AccountCreateParams.Capabilities.AffirmPayments#extraParams} for the
          * field documentation.
          */
         public Builder putAllExtraParam(Map<String, Object> map) {
@@ -2783,6 +2891,84 @@ public class AccountCreateParams extends ApiRequestParams {
          * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
          * map. See {@link AccountCreateParams.Capabilities.LegacyPayments#extraParams} for the
          * field documentation.
+         */
+        public Builder putAllExtraParam(Map<String, Object> map) {
+          if (this.extraParams == null) {
+            this.extraParams = new HashMap<>();
+          }
+          this.extraParams.putAll(map);
+          return this;
+        }
+
+        /**
+         * Passing true requests the capability for the account, if it is not already requested. A
+         * requested capability may not immediately become active. Any requirements to activate the
+         * capability are returned in the {@code requirements} arrays.
+         */
+        public Builder setRequested(Boolean requested) {
+          this.requested = requested;
+          return this;
+        }
+      }
+    }
+
+    @Getter
+    public static class LinkPayments {
+      /**
+       * Map of extra parameters for custom features not available in this client library. The
+       * content in this map is not serialized under this field's {@code @SerializedName} value.
+       * Instead, each key/value pair is serialized as if the key is a root-level field (serialized)
+       * name in this param object. Effectively, this map is flattened to its parent instance.
+       */
+      @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
+      Map<String, Object> extraParams;
+
+      /**
+       * Passing true requests the capability for the account, if it is not already requested. A
+       * requested capability may not immediately become active. Any requirements to activate the
+       * capability are returned in the {@code requirements} arrays.
+       */
+      @SerializedName("requested")
+      Boolean requested;
+
+      private LinkPayments(Map<String, Object> extraParams, Boolean requested) {
+        this.extraParams = extraParams;
+        this.requested = requested;
+      }
+
+      public static Builder builder() {
+        return new Builder();
+      }
+
+      public static class Builder {
+        private Map<String, Object> extraParams;
+
+        private Boolean requested;
+
+        /** Finalize and obtain parameter instance from this builder. */
+        public LinkPayments build() {
+          return new LinkPayments(this.extraParams, this.requested);
+        }
+
+        /**
+         * Add a key/value pair to `extraParams` map. A map is initialized for the first
+         * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
+         * map. See {@link AccountCreateParams.Capabilities.LinkPayments#extraParams} for the field
+         * documentation.
+         */
+        public Builder putExtraParam(String key, Object value) {
+          if (this.extraParams == null) {
+            this.extraParams = new HashMap<>();
+          }
+          this.extraParams.put(key, value);
+          return this;
+        }
+
+        /**
+         * Add all map key/value pairs to `extraParams` map. A map is initialized for the first
+         * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
+         * map. See {@link AccountCreateParams.Capabilities.LinkPayments#extraParams} for the field
+         * documentation.
          */
         public Builder putAllExtraParam(Map<String, Object> map) {
           if (this.extraParams == null) {
@@ -5745,6 +5931,17 @@ public class AccountCreateParams extends ApiRequestParams {
     @SerializedName("id_number")
     String idNumber;
 
+    /**
+     * The government-issued secondary ID number of the individual, as appropriate for the
+     * representative's country, will be used for enhanced verification checks. In Thailand, this
+     * would be the laser code found on the back of an ID card. Instead of the number itself, you
+     * can also provide a <a
+     * href="https://stripe.com/docs/js/tokens_sources/create_token?type=pii">PII token created with
+     * Stripe.js</a>.
+     */
+    @SerializedName("id_number_secondary")
+    String idNumberSecondary;
+
     /** The individual's last name. */
     @SerializedName("last_name")
     String lastName;
@@ -5807,6 +6004,7 @@ public class AccountCreateParams extends ApiRequestParams {
         Object fullNameAliases,
         String gender,
         String idNumber,
+        String idNumberSecondary,
         String lastName,
         String lastNameKana,
         String lastNameKanji,
@@ -5829,6 +6027,7 @@ public class AccountCreateParams extends ApiRequestParams {
       this.fullNameAliases = fullNameAliases;
       this.gender = gender;
       this.idNumber = idNumber;
+      this.idNumberSecondary = idNumberSecondary;
       this.lastName = lastName;
       this.lastNameKana = lastNameKana;
       this.lastNameKanji = lastNameKanji;
@@ -5870,6 +6069,8 @@ public class AccountCreateParams extends ApiRequestParams {
 
       private String idNumber;
 
+      private String idNumberSecondary;
+
       private String lastName;
 
       private String lastNameKana;
@@ -5905,6 +6106,7 @@ public class AccountCreateParams extends ApiRequestParams {
             this.fullNameAliases,
             this.gender,
             this.idNumber,
+            this.idNumberSecondary,
             this.lastName,
             this.lastNameKana,
             this.lastNameKanji,
@@ -6055,6 +6257,19 @@ public class AccountCreateParams extends ApiRequestParams {
        */
       public Builder setIdNumber(String idNumber) {
         this.idNumber = idNumber;
+        return this;
+      }
+
+      /**
+       * The government-issued secondary ID number of the individual, as appropriate for the
+       * representative's country, will be used for enhanced verification checks. In Thailand, this
+       * would be the laser code found on the back of an ID card. Instead of the number itself, you
+       * can also provide a <a
+       * href="https://stripe.com/docs/js/tokens_sources/create_token?type=pii">PII token created
+       * with Stripe.js</a>.
+       */
+      public Builder setIdNumberSecondary(String idNumberSecondary) {
+        this.idNumberSecondary = idNumberSecondary;
         return this;
       }
 

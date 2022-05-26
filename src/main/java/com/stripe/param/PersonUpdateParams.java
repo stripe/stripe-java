@@ -82,6 +82,16 @@ public class PersonUpdateParams extends ApiRequestParams {
   @SerializedName("id_number")
   Object idNumber;
 
+  /**
+   * The person's secondary ID number, as appropriate for their country, will be used for enhanced
+   * verification checks. In Thailand, this would be the laser code found on the back of an ID card.
+   * Instead of the number itself, you can also provide a <a
+   * href="https://stripe.com/docs/js/tokens_sources/create_token?type=pii">PII token provided by
+   * Stripe.js</a>.
+   */
+  @SerializedName("id_number_secondary")
+  Object idNumberSecondary;
+
   /** The person's last name. */
   @SerializedName("last_name")
   Object lastName;
@@ -165,6 +175,7 @@ public class PersonUpdateParams extends ApiRequestParams {
       Object fullNameAliases,
       Object gender,
       Object idNumber,
+      Object idNumberSecondary,
       Object lastName,
       Object lastNameKana,
       Object lastNameKanji,
@@ -192,6 +203,7 @@ public class PersonUpdateParams extends ApiRequestParams {
     this.fullNameAliases = fullNameAliases;
     this.gender = gender;
     this.idNumber = idNumber;
+    this.idNumberSecondary = idNumberSecondary;
     this.lastName = lastName;
     this.lastNameKana = lastNameKana;
     this.lastNameKanji = lastNameKanji;
@@ -240,6 +252,8 @@ public class PersonUpdateParams extends ApiRequestParams {
 
     private Object idNumber;
 
+    private Object idNumberSecondary;
+
     private Object lastName;
 
     private Object lastNameKana;
@@ -283,6 +297,7 @@ public class PersonUpdateParams extends ApiRequestParams {
           this.fullNameAliases,
           this.gender,
           this.idNumber,
+          this.idNumberSecondary,
           this.lastName,
           this.lastNameKana,
           this.lastNameKanji,
@@ -513,6 +528,30 @@ public class PersonUpdateParams extends ApiRequestParams {
      */
     public Builder setIdNumber(EmptyParam idNumber) {
       this.idNumber = idNumber;
+      return this;
+    }
+
+    /**
+     * The person's secondary ID number, as appropriate for their country, will be used for enhanced
+     * verification checks. In Thailand, this would be the laser code found on the back of an ID
+     * card. Instead of the number itself, you can also provide a <a
+     * href="https://stripe.com/docs/js/tokens_sources/create_token?type=pii">PII token provided by
+     * Stripe.js</a>.
+     */
+    public Builder setIdNumberSecondary(String idNumberSecondary) {
+      this.idNumberSecondary = idNumberSecondary;
+      return this;
+    }
+
+    /**
+     * The person's secondary ID number, as appropriate for their country, will be used for enhanced
+     * verification checks. In Thailand, this would be the laser code found on the back of an ID
+     * card. Instead of the number itself, you can also provide a <a
+     * href="https://stripe.com/docs/js/tokens_sources/create_token?type=pii">PII token provided by
+     * Stripe.js</a>.
+     */
+    public Builder setIdNumberSecondary(EmptyParam idNumberSecondary) {
+      this.idNumberSecondary = idNumberSecondary;
       return this;
     }
 

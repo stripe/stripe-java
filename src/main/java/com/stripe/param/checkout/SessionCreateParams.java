@@ -6942,6 +6942,9 @@ public class SessionCreateParams extends ApiRequestParams {
     @SerializedName("acss_debit")
     ACSS_DEBIT("acss_debit"),
 
+    @SerializedName("affirm")
+    AFFIRM("affirm"),
+
     @SerializedName("afterpay_clearpay")
     AFTERPAY_CLEARPAY("afterpay_clearpay"),
 

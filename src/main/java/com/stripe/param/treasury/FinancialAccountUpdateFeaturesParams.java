@@ -12,6 +12,13 @@ import lombok.Getter;
 @Getter
 public class FinancialAccountUpdateFeaturesParams extends ApiRequestParams {
   /**
+   * Encodes the FinancialAccount's ability to be used with the Issuing product, including attaching
+   * cards to and drawing funds from the FinancialAccount.
+   */
+  @SerializedName("card_issuing")
+  CardIssuing cardIssuing;
+
+  /**
    * Represents whether this FinancialAccount is eligible for deposit insurance. Various factors
    * determine the insurance amount.
    */
@@ -64,6 +71,7 @@ public class FinancialAccountUpdateFeaturesParams extends ApiRequestParams {
   OutboundTransfers outboundTransfers;
 
   private FinancialAccountUpdateFeaturesParams(
+      CardIssuing cardIssuing,
       DepositInsurance depositInsurance,
       List<String> expand,
       Map<String, Object> extraParams,
@@ -72,6 +80,7 @@ public class FinancialAccountUpdateFeaturesParams extends ApiRequestParams {
       IntraStripeFlows intraStripeFlows,
       OutboundPayments outboundPayments,
       OutboundTransfers outboundTransfers) {
+    this.cardIssuing = cardIssuing;
     this.depositInsurance = depositInsurance;
     this.expand = expand;
     this.extraParams = extraParams;
@@ -87,6 +96,8 @@ public class FinancialAccountUpdateFeaturesParams extends ApiRequestParams {
   }
 
   public static class Builder {
+    private CardIssuing cardIssuing;
+
     private DepositInsurance depositInsurance;
 
     private List<String> expand;
@@ -106,6 +117,7 @@ public class FinancialAccountUpdateFeaturesParams extends ApiRequestParams {
     /** Finalize and obtain parameter instance from this builder. */
     public FinancialAccountUpdateFeaturesParams build() {
       return new FinancialAccountUpdateFeaturesParams(
+          this.cardIssuing,
           this.depositInsurance,
           this.expand,
           this.extraParams,
@@ -114,6 +126,15 @@ public class FinancialAccountUpdateFeaturesParams extends ApiRequestParams {
           this.intraStripeFlows,
           this.outboundPayments,
           this.outboundTransfers);
+    }
+
+    /**
+     * Encodes the FinancialAccount's ability to be used with the Issuing product, including
+     * attaching cards to and drawing funds from the FinancialAccount.
+     */
+    public Builder setCardIssuing(CardIssuing cardIssuing) {
+      this.cardIssuing = cardIssuing;
+      return this;
     }
 
     /**
@@ -217,6 +238,75 @@ public class FinancialAccountUpdateFeaturesParams extends ApiRequestParams {
     public Builder setOutboundTransfers(OutboundTransfers outboundTransfers) {
       this.outboundTransfers = outboundTransfers;
       return this;
+    }
+  }
+
+  @Getter
+  public static class CardIssuing {
+    /**
+     * Map of extra parameters for custom features not available in this client library. The content
+     * in this map is not serialized under this field's {@code @SerializedName} value. Instead, each
+     * key/value pair is serialized as if the key is a root-level field (serialized) name in this
+     * param object. Effectively, this map is flattened to its parent instance.
+     */
+    @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
+    Map<String, Object> extraParams;
+
+    /** Whether the FinancialAccount should have the Feature. */
+    @SerializedName("requested")
+    Boolean requested;
+
+    private CardIssuing(Map<String, Object> extraParams, Boolean requested) {
+      this.extraParams = extraParams;
+      this.requested = requested;
+    }
+
+    public static Builder builder() {
+      return new Builder();
+    }
+
+    public static class Builder {
+      private Map<String, Object> extraParams;
+
+      private Boolean requested;
+
+      /** Finalize and obtain parameter instance from this builder. */
+      public CardIssuing build() {
+        return new CardIssuing(this.extraParams, this.requested);
+      }
+
+      /**
+       * Add a key/value pair to `extraParams` map. A map is initialized for the first `put/putAll`
+       * call, and subsequent calls add additional key/value pairs to the original map. See {@link
+       * FinancialAccountUpdateFeaturesParams.CardIssuing#extraParams} for the field documentation.
+       */
+      public Builder putExtraParam(String key, Object value) {
+        if (this.extraParams == null) {
+          this.extraParams = new HashMap<>();
+        }
+        this.extraParams.put(key, value);
+        return this;
+      }
+
+      /**
+       * Add all map key/value pairs to `extraParams` map. A map is initialized for the first
+       * `put/putAll` call, and subsequent calls add additional key/value pairs to the original map.
+       * See {@link FinancialAccountUpdateFeaturesParams.CardIssuing#extraParams} for the field
+       * documentation.
+       */
+      public Builder putAllExtraParam(Map<String, Object> map) {
+        if (this.extraParams == null) {
+          this.extraParams = new HashMap<>();
+        }
+        this.extraParams.putAll(map);
+        return this;
+      }
+
+      /** Whether the FinancialAccount should have the Feature. */
+      public Builder setRequested(Boolean requested) {
+        this.requested = requested;
+        return this;
+      }
     }
   }
 
