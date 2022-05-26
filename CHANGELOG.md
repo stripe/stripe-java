@@ -1,5 +1,18 @@
 # Changelog
 
+## 20.124.0 - 2022-05-26
+* [#1363](https://github.com/stripe/stripe-java/pull/1363) API Updates
+  * Add support for `affirm_payments` and `link_payments` on `Account.capabilities`, `AccountCreateParams.capabilities`, and `AccountUpdateParams.capabilities`
+  * Add support for `id_number_secondary` on `AccountCreateParams.individual`, `AccountUpdateParams.individual`, `PersonCreateParams`, `PersonUpdateParams`, `TokenCreateParams.account.individual`, and `TokenCreateParams.person`
+  * Add support for new value `affirm` on enum `CheckoutSessionCreateParams.payment_method_types[]`
+  * Add support for `hosted_instructions_url` on `PaymentIntent.next_action.display_bank_transfer_instructions`
+  * Add support for `id_number_secondary_provided` on `Person`
+  * Add support for `card_issuing` on `TreasuryFinancialAccountCreateParams.features`, `TreasuryFinancialAccountUpdateFeaturesParams`, and `TreasuryFinancialAccountUpdateParams.features`
+  
+* [#1361](https://github.com/stripe/stripe-java/pull/1361) Fix version update script and the version in README.md
+* [#1360](https://github.com/stripe/stripe-java/pull/1360) API Updates
+  * Add support for `treasury` on `Account.capabilities`, `AccountCreateParams.capabilities`, and `AccountUpdateParams.capabilities`
+
 ## 20.123.0 - 2022-05-23
 * [#1360](https://github.com/stripe/stripe-java/pull/1360) API Updates
   * Add support for `treasury` on `Account.capabilities`, `AccountCreateParams.capabilities`, and `AccountUpdateParams.capabilities`
