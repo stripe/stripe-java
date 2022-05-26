@@ -87,6 +87,10 @@ public class Person extends ApiResource implements HasId, MetadataStore<Person> 
   @SerializedName("id_number_provided")
   Boolean idNumberProvided;
 
+  /** Whether the person's {@code id_number_secondary} was provided. */
+  @SerializedName("id_number_secondary_provided")
+  Boolean idNumberSecondaryProvided;
+
   /** The person's last name. */
   @SerializedName("last_name")
   String lastName;

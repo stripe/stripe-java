@@ -1697,6 +1697,10 @@ public class PaymentIntent extends ApiResource implements HasId, MetadataStore<P
     List<PaymentIntent.NextActionDisplayBankTransferInstructions.FinancialAddresses>
         financialAddresses;
 
+    /** A link to a hosted page that guides your customer through completing the transfer. */
+    @SerializedName("hosted_instructions_url")
+    String hostedInstructionsUrl;
+
     /**
      * A string identifying this payment. Instruct your customer to include this code in the
      * reference or memo field of their bank transfer.

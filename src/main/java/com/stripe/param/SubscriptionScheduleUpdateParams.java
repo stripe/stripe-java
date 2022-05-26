@@ -58,9 +58,8 @@ public class SubscriptionScheduleUpdateParams extends ApiRequestParams {
   List<Phase> phases;
 
   /**
-   * If the update changes the current phase, indicates if the changes should be prorated. Possible
-   * values are {@code create_prorations} or {@code none}, and the default value is {@code
-   * create_prorations}.
+   * If the update changes the current phase, indicates whether the changes should be prorated. The
+   * default value is {@code create_prorations}.
    */
   @SerializedName("proration_behavior")
   ProrationBehavior prorationBehavior;
@@ -259,9 +258,8 @@ public class SubscriptionScheduleUpdateParams extends ApiRequestParams {
     }
 
     /**
-     * If the update changes the current phase, indicates if the changes should be prorated.
-     * Possible values are {@code create_prorations} or {@code none}, and the default value is
-     * {@code create_prorations}.
+     * If the update changes the current phase, indicates whether the changes should be prorated.
+     * The default value is {@code create_prorations}.
      */
     public Builder setProrationBehavior(ProrationBehavior prorationBehavior) {
       this.prorationBehavior = prorationBehavior;
@@ -1037,10 +1035,9 @@ public class SubscriptionScheduleUpdateParams extends ApiRequestParams {
     Map<String, String> metadata;
 
     /**
-     * If a subscription schedule will create prorations when transitioning to this phase. Possible
-     * values are {@code create_prorations} or {@code none}, and the default value is {@code
-     * create_prorations}. See <a
-     * href="https://stripe.com/docs/billing/subscriptions/prorations">Prorations</a>.
+     * Whether the subscription schedule will create <a
+     * href="https://stripe.com/docs/billing/subscriptions/prorations">prorations</a> when
+     * transitioning to this phase. The default value is {@code create_prorations}.
      */
     @SerializedName("proration_behavior")
     ProrationBehavior prorationBehavior;
@@ -1472,10 +1469,9 @@ public class SubscriptionScheduleUpdateParams extends ApiRequestParams {
       }
 
       /**
-       * If a subscription schedule will create prorations when transitioning to this phase.
-       * Possible values are {@code create_prorations} or {@code none}, and the default value is
-       * {@code create_prorations}. See <a
-       * href="https://stripe.com/docs/billing/subscriptions/prorations">Prorations</a>.
+       * Whether the subscription schedule will create <a
+       * href="https://stripe.com/docs/billing/subscriptions/prorations">prorations</a> when
+       * transitioning to this phase. The default value is {@code create_prorations}.
        */
       public Builder setProrationBehavior(ProrationBehavior prorationBehavior) {
         this.prorationBehavior = prorationBehavior;
