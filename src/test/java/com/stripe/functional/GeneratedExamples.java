@@ -609,6 +609,34 @@ class GeneratedExamples extends BaseStripeTest {
   }
 
   @Test
+  public void testCashBalanceRetrieve() throws StripeException {
+    Customer customer = Customer.retrieve("cus_123");
+
+    CashBalance cashBalance = customer.getCashBalance().retrieve();
+    assertNotNull(cashBalance);
+    verifyRequest(ApiResource.RequestMethod.GET, "/v1/customers/cus_123/cash_balance");
+  }
+
+  @Test
+  public void testCashBalanceUpdate() throws StripeException {
+    Customer customer = Customer.retrieve("cus_123");
+    CashBalance resource = customer.getCashBalance().retrieve();
+    CashBalanceUpdateParams params =
+        CashBalanceUpdateParams.builder()
+            .setSettings(
+                CashBalanceUpdateParams.Settings.builder()
+                    .setReconciliationMode(
+                        CashBalanceUpdateParams.Settings.ReconciliationMode.MANUAL)
+                    .build())
+            .build();
+
+    CashBalance cashBalance = resource.update(params);
+    assertNotNull(cashBalance);
+    verifyRequest(
+        ApiResource.RequestMethod.POST, "/v1/customers/cus_123/cash_balance", params.toMap());
+  }
+
+  @Test
   public void testCustomerList() throws StripeException {
     CustomerListParams params = CustomerListParams.builder().setLimit(3L).build();
 
