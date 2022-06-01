@@ -136,6 +136,13 @@ public class PaymentMethod extends ApiResource implements HasId, MetadataStore<P
   @SerializedName("paynow")
   Paynow paynow;
 
+  /**
+   * Options to configure Radar. See <a href="https://stripe.com/docs/radar/radar-session">Radar
+   * Session</a> for more information.
+   */
+  @SerializedName("radar_options")
+  RadarOptions radarOptions;
+
   @SerializedName("sepa_debit")
   SepaDebit sepaDebit;
 
@@ -1056,6 +1063,19 @@ public class PaymentMethod extends ApiResource implements HasId, MetadataStore<P
   @Setter
   @EqualsAndHashCode(callSuper = false)
   public static class Paynow extends StripeObject {}
+
+  @Getter
+  @Setter
+  @EqualsAndHashCode(callSuper = false)
+  public static class RadarOptions extends StripeObject {
+    /**
+     * A <a href="https://stripe.com/docs/radar/radar-session">Radar Session</a> is a snapshot of
+     * the browser metadata and device details that help Radar make more accurate predictions on
+     * your payments.
+     */
+    @SerializedName("session")
+    String session;
+  }
 
   @Getter
   @Setter

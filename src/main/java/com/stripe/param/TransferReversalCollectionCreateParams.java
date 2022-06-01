@@ -13,9 +13,10 @@ import lombok.Getter;
 @Getter
 public class TransferReversalCollectionCreateParams extends ApiRequestParams {
   /**
-   * A positive integer in %s representing how much of this transfer to reverse. Can only reverse up
-   * to the unreversed amount remaining of the transfer. Partial transfer reversals are only allowed
-   * for transfers to Stripe Accounts. Defaults to the entire transfer amount.
+   * A positive integer in cents (or local equivalent) representing how much of this transfer to
+   * reverse. Can only reverse up to the unreversed amount remaining of the transfer. Partial
+   * transfer reversals are only allowed for transfers to Stripe Accounts. Defaults to the entire
+   * transfer amount.
    */
   @SerializedName("amount")
   Long amount;
@@ -102,9 +103,10 @@ public class TransferReversalCollectionCreateParams extends ApiRequestParams {
     }
 
     /**
-     * A positive integer in %s representing how much of this transfer to reverse. Can only reverse
-     * up to the unreversed amount remaining of the transfer. Partial transfer reversals are only
-     * allowed for transfers to Stripe Accounts. Defaults to the entire transfer amount.
+     * A positive integer in cents (or local equivalent) representing how much of this transfer to
+     * reverse. Can only reverse up to the unreversed amount remaining of the transfer. Partial
+     * transfer reversals are only allowed for transfers to Stripe Accounts. Defaults to the entire
+     * transfer amount.
      */
     public Builder setAmount(Long amount) {
       this.amount = amount;

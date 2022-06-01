@@ -12,8 +12,8 @@ import lombok.Getter;
 @Getter
 public class FeeRefundCollectionCreateParams extends ApiRequestParams {
   /**
-   * A positive integer, in <em>%s</em>, representing how much of this fee to refund. Can refund
-   * only up to the remaining unrefunded amount of the fee.
+   * A positive integer, in <em>cents (or local equivalent)</em>, representing how much of this fee
+   * to refund. Can refund only up to the remaining unrefunded amount of the fee.
    */
   @SerializedName("amount")
   Long amount;
@@ -71,8 +71,8 @@ public class FeeRefundCollectionCreateParams extends ApiRequestParams {
     }
 
     /**
-     * A positive integer, in <em>%s</em>, representing how much of this fee to refund. Can refund
-     * only up to the remaining unrefunded amount of the fee.
+     * A positive integer, in <em>cents (or local equivalent)</em>, representing how much of this
+     * fee to refund. Can refund only up to the remaining unrefunded amount of the fee.
      */
     public Builder setAmount(Long amount) {
       this.amount = amount;

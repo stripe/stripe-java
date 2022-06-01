@@ -226,6 +226,9 @@ public class ReaderListParams extends ApiRequestParams {
     @SerializedName("bbpos_wisepos_e")
     BBPOS_WISEPOS_E("bbpos_wisepos_e"),
 
+    @SerializedName("simulated_wisepos_e")
+    SIMULATED_WISEPOS_E("simulated_wisepos_e"),
+
     @SerializedName("stripe_m2")
     STRIPE_M2("stripe_m2"),
 

@@ -505,6 +505,13 @@ public class SetupIntentUpdateParams extends ApiRequestParams {
     Paynow paynow;
 
     /**
+     * Options to configure Radar. See <a href="https://stripe.com/docs/radar/radar-session">Radar
+     * Session</a> for more information.
+     */
+    @SerializedName("radar_options")
+    RadarOptions radarOptions;
+
+    /**
      * If this is a {@code sepa_debit} PaymentMethod, this hash contains details about the SEPA
      * debit bank account.
      */
@@ -565,6 +572,7 @@ public class SetupIntentUpdateParams extends ApiRequestParams {
         Oxxo oxxo,
         P24 p24,
         Paynow paynow,
+        RadarOptions radarOptions,
         SepaDebit sepaDebit,
         Sofort sofort,
         Type type,
@@ -594,6 +602,7 @@ public class SetupIntentUpdateParams extends ApiRequestParams {
       this.oxxo = oxxo;
       this.p24 = p24;
       this.paynow = paynow;
+      this.radarOptions = radarOptions;
       this.sepaDebit = sepaDebit;
       this.sofort = sofort;
       this.type = type;
@@ -654,6 +663,8 @@ public class SetupIntentUpdateParams extends ApiRequestParams {
 
       private Paynow paynow;
 
+      private RadarOptions radarOptions;
+
       private SepaDebit sepaDebit;
 
       private Sofort sofort;
@@ -691,6 +702,7 @@ public class SetupIntentUpdateParams extends ApiRequestParams {
             this.oxxo,
             this.p24,
             this.paynow,
+            this.radarOptions,
             this.sepaDebit,
             this.sofort,
             this.type,
@@ -946,6 +958,15 @@ public class SetupIntentUpdateParams extends ApiRequestParams {
        */
       public Builder setPaynow(Paynow paynow) {
         this.paynow = paynow;
+        return this;
+      }
+
+      /**
+       * Options to configure Radar. See <a href="https://stripe.com/docs/radar/radar-session">Radar
+       * Session</a> for more information.
+       */
+      public Builder setRadarOptions(RadarOptions radarOptions) {
+        this.radarOptions = radarOptions;
         return this;
       }
 
@@ -3173,6 +3194,94 @@ public class SetupIntentUpdateParams extends ApiRequestParams {
             this.extraParams = new HashMap<>();
           }
           this.extraParams.putAll(map);
+          return this;
+        }
+      }
+    }
+
+    @Getter
+    public static class RadarOptions {
+      /**
+       * Map of extra parameters for custom features not available in this client library. The
+       * content in this map is not serialized under this field's {@code @SerializedName} value.
+       * Instead, each key/value pair is serialized as if the key is a root-level field (serialized)
+       * name in this param object. Effectively, this map is flattened to its parent instance.
+       */
+      @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
+      Map<String, Object> extraParams;
+
+      /**
+       * A <a href="https://stripe.com/docs/radar/radar-session">Radar Session</a> is a snapshot of
+       * the browser metadata and device details that help Radar make more accurate predictions on
+       * your payments.
+       */
+      @SerializedName("session")
+      Object session;
+
+      private RadarOptions(Map<String, Object> extraParams, Object session) {
+        this.extraParams = extraParams;
+        this.session = session;
+      }
+
+      public static Builder builder() {
+        return new Builder();
+      }
+
+      public static class Builder {
+        private Map<String, Object> extraParams;
+
+        private Object session;
+
+        /** Finalize and obtain parameter instance from this builder. */
+        public RadarOptions build() {
+          return new RadarOptions(this.extraParams, this.session);
+        }
+
+        /**
+         * Add a key/value pair to `extraParams` map. A map is initialized for the first
+         * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
+         * map. See {@link SetupIntentUpdateParams.PaymentMethodData.RadarOptions#extraParams} for
+         * the field documentation.
+         */
+        public Builder putExtraParam(String key, Object value) {
+          if (this.extraParams == null) {
+            this.extraParams = new HashMap<>();
+          }
+          this.extraParams.put(key, value);
+          return this;
+        }
+
+        /**
+         * Add all map key/value pairs to `extraParams` map. A map is initialized for the first
+         * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
+         * map. See {@link SetupIntentUpdateParams.PaymentMethodData.RadarOptions#extraParams} for
+         * the field documentation.
+         */
+        public Builder putAllExtraParam(Map<String, Object> map) {
+          if (this.extraParams == null) {
+            this.extraParams = new HashMap<>();
+          }
+          this.extraParams.putAll(map);
+          return this;
+        }
+
+        /**
+         * A <a href="https://stripe.com/docs/radar/radar-session">Radar Session</a> is a snapshot
+         * of the browser metadata and device details that help Radar make more accurate predictions
+         * on your payments.
+         */
+        public Builder setSession(String session) {
+          this.session = session;
+          return this;
+        }
+
+        /**
+         * A <a href="https://stripe.com/docs/radar/radar-session">Radar Session</a> is a snapshot
+         * of the browser metadata and device details that help Radar make more accurate predictions
+         * on your payments.
+         */
+        public Builder setSession(EmptyParam session) {
+          this.session = session;
           return this;
         }
       }

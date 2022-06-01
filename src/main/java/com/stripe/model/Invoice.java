@@ -1752,10 +1752,7 @@ public class Invoice extends ApiResource implements HasId, MetadataStore<Invoice
       public static class BankTransfer extends StripeObject {
         /**
          * The bank transfer type that can be used for funding. Permitted values include: {@code
-         * us_bank_account}, {@code eu_bank_account}, {@code id_bank_account}, {@code
-         * gb_bank_account}, {@code jp_bank_account}, {@code mx_bank_account}, {@code
-         * eu_bank_transfer}, {@code gb_bank_transfer}, {@code id_bank_transfer}, {@code
-         * jp_bank_transfer}, {@code mx_bank_transfer}, or {@code us_bank_transfer}.
+         * jp_bank_transfer}.
          */
         @SerializedName("type")
         String type;

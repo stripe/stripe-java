@@ -28,8 +28,8 @@ public class PlanCreateParams extends ApiRequestParams {
   AggregateUsage aggregateUsage;
 
   /**
-   * A positive integer in %s (or 0 for a free plan) representing how much to charge on a recurring
-   * basis.
+   * A positive integer in cents (or local equivalent) (or 0 for a free plan) representing how much
+   * to charge on a recurring basis.
    */
   @SerializedName("amount")
   Long amount;
@@ -276,8 +276,8 @@ public class PlanCreateParams extends ApiRequestParams {
     }
 
     /**
-     * A positive integer in %s (or 0 for a free plan) representing how much to charge on a
-     * recurring basis.
+     * A positive integer in cents (or local equivalent) (or 0 for a free plan) representing how
+     * much to charge on a recurring basis.
      */
     public Builder setAmount(Long amount) {
       this.amount = amount;
@@ -774,8 +774,9 @@ public class PlanCreateParams extends ApiRequestParams {
     Long unitAmount;
 
     /**
-     * Same as {@code unit_amount}, but accepts a decimal value in %s with at most 12 decimal
-     * places. Only one of {@code unit_amount} and {@code unit_amount_decimal} can be set.
+     * Same as {@code unit_amount}, but accepts a decimal value in cents (or local equivalent) with
+     * at most 12 decimal places. Only one of {@code unit_amount} and {@code unit_amount_decimal}
+     * can be set.
      */
     @SerializedName("unit_amount_decimal")
     BigDecimal unitAmountDecimal;
@@ -881,8 +882,9 @@ public class PlanCreateParams extends ApiRequestParams {
       }
 
       /**
-       * Same as {@code unit_amount}, but accepts a decimal value in %s with at most 12 decimal
-       * places. Only one of {@code unit_amount} and {@code unit_amount_decimal} can be set.
+       * Same as {@code unit_amount}, but accepts a decimal value in cents (or local equivalent)
+       * with at most 12 decimal places. Only one of {@code unit_amount} and {@code
+       * unit_amount_decimal} can be set.
        */
       public Builder setUnitAmountDecimal(BigDecimal unitAmountDecimal) {
         this.unitAmountDecimal = unitAmountDecimal;
