@@ -87,7 +87,35 @@ public class FundingInstructions extends StripeObject {
       @Getter
       @Setter
       @EqualsAndHashCode(callSuper = false)
-      public static class Zengin extends StripeObject {}
+      public static class Zengin extends StripeObject {
+        /** The account holder name. */
+        @SerializedName("account_holder_name")
+        String accountHolderName;
+
+        /** The account number. */
+        @SerializedName("account_number")
+        String accountNumber;
+
+        /** The bank account type. In Japan, this can only be {@code futsu} or {@code toza}. */
+        @SerializedName("account_type")
+        String accountType;
+
+        /** The bank code of the account. */
+        @SerializedName("bank_code")
+        String bankCode;
+
+        /** The bank name of the account. */
+        @SerializedName("bank_name")
+        String bankName;
+
+        /** The branch code of the account. */
+        @SerializedName("branch_code")
+        String branchCode;
+
+        /** The branch name of the account. */
+        @SerializedName("branch_name")
+        String branchName;
+      }
     }
   }
 }

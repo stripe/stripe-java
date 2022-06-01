@@ -244,6 +244,13 @@ public class Charge extends ApiResource implements MetadataStore<Charge>, Balanc
   @SerializedName("payment_method_details")
   PaymentMethodDetails paymentMethodDetails;
 
+  /**
+   * Options to configure Radar. See <a href="https://stripe.com/docs/radar/radar-session">Radar
+   * Session</a> for more information.
+   */
+  @SerializedName("radar_options")
+  RadarOptions radarOptions;
+
   /** This is the email address that the receipt for this charge was sent to. */
   @SerializedName("receipt_email")
   String receiptEmail;
@@ -2347,7 +2354,8 @@ public class Charge extends ApiResource implements MetadataStore<Charge>, Balanc
        * de-DE}, {@code en-DE}, {@code da-DK}, {@code en-DK}, {@code es-ES}, {@code en-ES}, {@code
        * fi-FI}, {@code sv-FI}, {@code en-FI}, {@code en-GB}, {@code en-IE}, {@code it-IT}, {@code
        * en-IT}, {@code nl-NL}, {@code en-NL}, {@code nb-NO}, {@code en-NO}, {@code sv-SE}, {@code
-       * en-SE}, {@code en-US}, {@code es-US}, {@code fr-FR}, or {@code en-FR}
+       * en-SE}, {@code en-US}, {@code es-US}, {@code fr-FR}, {@code en-FR}, {@code en-AU}, or
+       * {@code en-NZ}
        */
       @SerializedName("preferred_locale")
       String preferredLocale;
@@ -2652,6 +2660,19 @@ public class Charge extends ApiResource implements MetadataStore<Charge>, Balanc
       @SerializedName("transaction_id")
       String transactionId;
     }
+  }
+
+  @Getter
+  @Setter
+  @EqualsAndHashCode(callSuper = false)
+  public static class RadarOptions extends StripeObject {
+    /**
+     * A <a href="https://stripe.com/docs/radar/radar-session">Radar Session</a> is a snapshot of
+     * the browser metadata and device details that help Radar make more accurate predictions on
+     * your payments.
+     */
+    @SerializedName("session")
+    String session;
   }
 
   @Getter

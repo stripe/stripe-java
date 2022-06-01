@@ -1133,13 +1133,17 @@ public class SubscriptionCreateParams extends ApiRequestParams {
       @SerializedName("tax_behavior")
       TaxBehavior taxBehavior;
 
-      /** A positive integer in %s (or 0 for a free price) representing how much to charge. */
+      /**
+       * A positive integer in cents (or local equivalent) (or 0 for a free price) representing how
+       * much to charge.
+       */
       @SerializedName("unit_amount")
       Long unitAmount;
 
       /**
-       * Same as {@code unit_amount}, but accepts a decimal value in %s with at most 12 decimal
-       * places. Only one of {@code unit_amount} and {@code unit_amount_decimal} can be set.
+       * Same as {@code unit_amount}, but accepts a decimal value in cents (or local equivalent)
+       * with at most 12 decimal places. Only one of {@code unit_amount} and {@code
+       * unit_amount_decimal} can be set.
        */
       @SerializedName("unit_amount_decimal")
       BigDecimal unitAmountDecimal;
@@ -1241,15 +1245,19 @@ public class SubscriptionCreateParams extends ApiRequestParams {
           return this;
         }
 
-        /** A positive integer in %s (or 0 for a free price) representing how much to charge. */
+        /**
+         * A positive integer in cents (or local equivalent) (or 0 for a free price) representing
+         * how much to charge.
+         */
         public Builder setUnitAmount(Long unitAmount) {
           this.unitAmount = unitAmount;
           return this;
         }
 
         /**
-         * Same as {@code unit_amount}, but accepts a decimal value in %s with at most 12 decimal
-         * places. Only one of {@code unit_amount} and {@code unit_amount_decimal} can be set.
+         * Same as {@code unit_amount}, but accepts a decimal value in cents (or local equivalent)
+         * with at most 12 decimal places. Only one of {@code unit_amount} and {@code
+         * unit_amount_decimal} can be set.
          */
         public Builder setUnitAmountDecimal(BigDecimal unitAmountDecimal) {
           this.unitAmountDecimal = unitAmountDecimal;
@@ -1811,13 +1819,17 @@ public class SubscriptionCreateParams extends ApiRequestParams {
       @SerializedName("tax_behavior")
       TaxBehavior taxBehavior;
 
-      /** A positive integer in %s (or 0 for a free price) representing how much to charge. */
+      /**
+       * A positive integer in cents (or local equivalent) (or 0 for a free price) representing how
+       * much to charge.
+       */
       @SerializedName("unit_amount")
       Long unitAmount;
 
       /**
-       * Same as {@code unit_amount}, but accepts a decimal value in %s with at most 12 decimal
-       * places. Only one of {@code unit_amount} and {@code unit_amount_decimal} can be set.
+       * Same as {@code unit_amount}, but accepts a decimal value in cents (or local equivalent)
+       * with at most 12 decimal places. Only one of {@code unit_amount} and {@code
+       * unit_amount_decimal} can be set.
        */
       @SerializedName("unit_amount_decimal")
       BigDecimal unitAmountDecimal;
@@ -1932,15 +1944,19 @@ public class SubscriptionCreateParams extends ApiRequestParams {
           return this;
         }
 
-        /** A positive integer in %s (or 0 for a free price) representing how much to charge. */
+        /**
+         * A positive integer in cents (or local equivalent) (or 0 for a free price) representing
+         * how much to charge.
+         */
         public Builder setUnitAmount(Long unitAmount) {
           this.unitAmount = unitAmount;
           return this;
         }
 
         /**
-         * Same as {@code unit_amount}, but accepts a decimal value in %s with at most 12 decimal
-         * places. Only one of {@code unit_amount} and {@code unit_amount_decimal} can be set.
+         * Same as {@code unit_amount}, but accepts a decimal value in cents (or local equivalent)
+         * with at most 12 decimal places. Only one of {@code unit_amount} and {@code
+         * unit_amount_decimal} can be set.
          */
         public Builder setUnitAmountDecimal(BigDecimal unitAmountDecimal) {
           this.unitAmountDecimal = unitAmountDecimal;
@@ -3158,10 +3174,7 @@ public class SubscriptionCreateParams extends ApiRequestParams {
 
           /**
            * The bank transfer type that can be used for funding. Permitted values include: {@code
-           * us_bank_account}, {@code eu_bank_account}, {@code id_bank_account}, {@code
-           * gb_bank_account}, {@code jp_bank_account}, {@code mx_bank_account}, {@code
-           * eu_bank_transfer}, {@code gb_bank_transfer}, {@code id_bank_transfer}, {@code
-           * jp_bank_transfer}, {@code mx_bank_transfer}, or {@code us_bank_transfer}.
+           * jp_bank_transfer}.
            */
           @SerializedName("type")
           String type;
@@ -3217,10 +3230,7 @@ public class SubscriptionCreateParams extends ApiRequestParams {
 
             /**
              * The bank transfer type that can be used for funding. Permitted values include: {@code
-             * us_bank_account}, {@code eu_bank_account}, {@code id_bank_account}, {@code
-             * gb_bank_account}, {@code jp_bank_account}, {@code mx_bank_account}, {@code
-             * eu_bank_transfer}, {@code gb_bank_transfer}, {@code id_bank_transfer}, {@code
-             * jp_bank_transfer}, {@code mx_bank_transfer}, or {@code us_bank_transfer}.
+             * jp_bank_transfer}.
              */
             public Builder setType(String type) {
               this.type = type;

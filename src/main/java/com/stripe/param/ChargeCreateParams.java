@@ -28,9 +28,10 @@ public class ChargeCreateParams extends ApiRequestParams {
   Long applicationFee;
 
   /**
-   * A fee in %s that will be applied to the charge and transferred to the application owner's
-   * Stripe account. The request must be made with an OAuth key or the {@code Stripe-Account} header
-   * in order to take an application fee. For more information, see the application fees <a
+   * A fee in cents (or local equivalent) that will be applied to the charge and transferred to the
+   * application owner's Stripe account. The request must be made with an OAuth key or the {@code
+   * Stripe-Account} header in order to take an application fee. For more information, see the
+   * application fees <a
    * href="https://stripe.com/docs/connect/direct-charges#collecting-fees">documentation</a>.
    */
   @SerializedName("application_fee_amount")
@@ -100,6 +101,13 @@ public class ChargeCreateParams extends ApiRequestParams {
    */
   @SerializedName("on_behalf_of")
   String onBehalfOf;
+
+  /**
+   * Options to configure Radar. See <a href="https://stripe.com/docs/radar/radar-session">Radar
+   * Session</a> for more information.
+   */
+  @SerializedName("radar_options")
+  RadarOptions radarOptions;
 
   /**
    * The email address to which this charge's <a
@@ -178,6 +186,7 @@ public class ChargeCreateParams extends ApiRequestParams {
       Map<String, Object> extraParams,
       Object metadata,
       String onBehalfOf,
+      RadarOptions radarOptions,
       String receiptEmail,
       Shipping shipping,
       String source,
@@ -197,6 +206,7 @@ public class ChargeCreateParams extends ApiRequestParams {
     this.extraParams = extraParams;
     this.metadata = metadata;
     this.onBehalfOf = onBehalfOf;
+    this.radarOptions = radarOptions;
     this.receiptEmail = receiptEmail;
     this.shipping = shipping;
     this.source = source;
@@ -235,6 +245,8 @@ public class ChargeCreateParams extends ApiRequestParams {
 
     private String onBehalfOf;
 
+    private RadarOptions radarOptions;
+
     private String receiptEmail;
 
     private Shipping shipping;
@@ -264,6 +276,7 @@ public class ChargeCreateParams extends ApiRequestParams {
           this.extraParams,
           this.metadata,
           this.onBehalfOf,
+          this.radarOptions,
           this.receiptEmail,
           this.shipping,
           this.source,
@@ -293,9 +306,10 @@ public class ChargeCreateParams extends ApiRequestParams {
     }
 
     /**
-     * A fee in %s that will be applied to the charge and transferred to the application owner's
-     * Stripe account. The request must be made with an OAuth key or the {@code Stripe-Account}
-     * header in order to take an application fee. For more information, see the application fees <a
+     * A fee in cents (or local equivalent) that will be applied to the charge and transferred to
+     * the application owner's Stripe account. The request must be made with an OAuth key or the
+     * {@code Stripe-Account} header in order to take an application fee. For more information, see
+     * the application fees <a
      * href="https://stripe.com/docs/connect/direct-charges#collecting-fees">documentation</a>.
      */
     public Builder setApplicationFeeAmount(Long applicationFeeAmount) {
@@ -458,6 +472,15 @@ public class ChargeCreateParams extends ApiRequestParams {
      */
     public Builder setOnBehalfOf(String onBehalfOf) {
       this.onBehalfOf = onBehalfOf;
+      return this;
+    }
+
+    /**
+     * Options to configure Radar. See <a href="https://stripe.com/docs/radar/radar-session">Radar
+     * Session</a> for more information.
+     */
+    public Builder setRadarOptions(RadarOptions radarOptions) {
+      this.radarOptions = radarOptions;
       return this;
     }
 
@@ -625,6 +648,82 @@ public class ChargeCreateParams extends ApiRequestParams {
           this.extraParams = new HashMap<>();
         }
         this.extraParams.putAll(map);
+        return this;
+      }
+    }
+  }
+
+  @Getter
+  public static class RadarOptions {
+    /**
+     * Map of extra parameters for custom features not available in this client library. The content
+     * in this map is not serialized under this field's {@code @SerializedName} value. Instead, each
+     * key/value pair is serialized as if the key is a root-level field (serialized) name in this
+     * param object. Effectively, this map is flattened to its parent instance.
+     */
+    @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
+    Map<String, Object> extraParams;
+
+    /**
+     * A <a href="https://stripe.com/docs/radar/radar-session">Radar Session</a> is a snapshot of
+     * the browser metadata and device details that help Radar make more accurate predictions on
+     * your payments.
+     */
+    @SerializedName("session")
+    String session;
+
+    private RadarOptions(Map<String, Object> extraParams, String session) {
+      this.extraParams = extraParams;
+      this.session = session;
+    }
+
+    public static Builder builder() {
+      return new Builder();
+    }
+
+    public static class Builder {
+      private Map<String, Object> extraParams;
+
+      private String session;
+
+      /** Finalize and obtain parameter instance from this builder. */
+      public RadarOptions build() {
+        return new RadarOptions(this.extraParams, this.session);
+      }
+
+      /**
+       * Add a key/value pair to `extraParams` map. A map is initialized for the first `put/putAll`
+       * call, and subsequent calls add additional key/value pairs to the original map. See {@link
+       * ChargeCreateParams.RadarOptions#extraParams} for the field documentation.
+       */
+      public Builder putExtraParam(String key, Object value) {
+        if (this.extraParams == null) {
+          this.extraParams = new HashMap<>();
+        }
+        this.extraParams.put(key, value);
+        return this;
+      }
+
+      /**
+       * Add all map key/value pairs to `extraParams` map. A map is initialized for the first
+       * `put/putAll` call, and subsequent calls add additional key/value pairs to the original map.
+       * See {@link ChargeCreateParams.RadarOptions#extraParams} for the field documentation.
+       */
+      public Builder putAllExtraParam(Map<String, Object> map) {
+        if (this.extraParams == null) {
+          this.extraParams = new HashMap<>();
+        }
+        this.extraParams.putAll(map);
+        return this;
+      }
+
+      /**
+       * A <a href="https://stripe.com/docs/radar/radar-session">Radar Session</a> is a snapshot of
+       * the browser metadata and device details that help Radar make more accurate predictions on
+       * your payments.
+       */
+      public Builder setSession(String session) {
+        this.session = session;
         return this;
       }
     }

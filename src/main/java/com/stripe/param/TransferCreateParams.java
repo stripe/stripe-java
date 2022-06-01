@@ -11,7 +11,7 @@ import lombok.Getter;
 
 @Getter
 public class TransferCreateParams extends ApiRequestParams {
-  /** A positive integer in %s representing how much to transfer. */
+  /** A positive integer in cents (or local equivalent) representing how much to transfer. */
   @SerializedName("amount")
   Long amount;
 
@@ -141,7 +141,7 @@ public class TransferCreateParams extends ApiRequestParams {
           this.transferGroup);
     }
 
-    /** A positive integer in %s representing how much to transfer. */
+    /** A positive integer in cents (or local equivalent) representing how much to transfer. */
     public Builder setAmount(Long amount) {
       this.amount = amount;
       return this;
