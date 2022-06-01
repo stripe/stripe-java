@@ -10,6 +10,7 @@ import com.stripe.model.HasId;
 import com.stripe.model.StripeObject;
 import com.stripe.net.ApiResource;
 import com.stripe.net.RequestOptions;
+import com.stripe.param.treasury.ReceivedDebitCreateParams;
 import com.stripe.param.treasury.ReceivedDebitListParams;
 import com.stripe.param.treasury.ReceivedDebitRetrieveParams;
 import java.util.Map;
@@ -315,5 +316,49 @@ public class ReceivedDebit extends ApiResource implements HasId {
     /** Timestamp describing when the DebitReversal changed status to {@code completed}. */
     @SerializedName("completed_at")
     Long completedAt;
+  }
+
+  public static class TestHelpers {
+    private TestHelpers() {}
+
+    /**
+     * Use this endpoint to simulate a test mode ReceivedDebit initiated by a third party. In live
+     * mode, you can’t directly create ReceivedDebits initiated by third parties.
+     */
+    public static ReceivedDebit create(Map<String, Object> params) throws StripeException {
+      return create(params, (RequestOptions) null);
+    }
+
+    /**
+     * Use this endpoint to simulate a test mode ReceivedDebit initiated by a third party. In live
+     * mode, you can’t directly create ReceivedDebits initiated by third parties.
+     */
+    public static ReceivedDebit create(Map<String, Object> params, RequestOptions options)
+        throws StripeException {
+      String url =
+          String.format("%s%s", Stripe.getApiBase(), "/v1/test_helpers/treasury/received_debits");
+      return ApiResource.request(
+          ApiResource.RequestMethod.POST, url, params, ReceivedDebit.class, options);
+    }
+
+    /**
+     * Use this endpoint to simulate a test mode ReceivedDebit initiated by a third party. In live
+     * mode, you can’t directly create ReceivedDebits initiated by third parties.
+     */
+    public static ReceivedDebit create(ReceivedDebitCreateParams params) throws StripeException {
+      return create(params, (RequestOptions) null);
+    }
+
+    /**
+     * Use this endpoint to simulate a test mode ReceivedDebit initiated by a third party. In live
+     * mode, you can’t directly create ReceivedDebits initiated by third parties.
+     */
+    public static ReceivedDebit create(ReceivedDebitCreateParams params, RequestOptions options)
+        throws StripeException {
+      String url =
+          String.format("%s%s", Stripe.getApiBase(), "/v1/test_helpers/treasury/received_debits");
+      return ApiResource.request(
+          ApiResource.RequestMethod.POST, url, params, ReceivedDebit.class, options);
+    }
   }
 }

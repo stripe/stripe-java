@@ -494,10 +494,20 @@ public class OutboundPayment extends ApiResource implements HasId {
   }
 
   public TestHelpers getTestHelpers() {
-    return new TestHelpers();
+    return new TestHelpers(this);
   }
 
   public class TestHelpers {
+    private final OutboundPayment resource;
+
+    public TestHelpers() {
+      this.resource = OutboundPayment.this;
+    }
+
+    private TestHelpers(OutboundPayment resource) {
+      this.resource = resource;
+    }
+
     /**
      * Transitions a test mode created OutboundPayment to the <code>failed</code> status. The
      * OutboundPayment must already be in the <code>processing</code> state.
@@ -534,7 +544,7 @@ public class OutboundPayment extends ApiResource implements HasId {
               Stripe.getApiBase(),
               String.format(
                   "/v1/test_helpers/treasury/outbound_payments/%s/fail",
-                  ApiResource.urlEncodeId(OutboundPayment.this.getId())));
+                  ApiResource.urlEncodeId(this.resource.getId())));
       return ApiResource.request(
           ApiResource.RequestMethod.POST, url, params, OutboundPayment.class, options);
     }
@@ -559,7 +569,7 @@ public class OutboundPayment extends ApiResource implements HasId {
               Stripe.getApiBase(),
               String.format(
                   "/v1/test_helpers/treasury/outbound_payments/%s/fail",
-                  ApiResource.urlEncodeId(OutboundPayment.this.getId())));
+                  ApiResource.urlEncodeId(this.resource.getId())));
       return ApiResource.request(
           ApiResource.RequestMethod.POST, url, params, OutboundPayment.class, options);
     }
@@ -600,7 +610,7 @@ public class OutboundPayment extends ApiResource implements HasId {
               Stripe.getApiBase(),
               String.format(
                   "/v1/test_helpers/treasury/outbound_payments/%s/post",
-                  ApiResource.urlEncodeId(OutboundPayment.this.getId())));
+                  ApiResource.urlEncodeId(this.resource.getId())));
       return ApiResource.request(
           ApiResource.RequestMethod.POST, url, params, OutboundPayment.class, options);
     }
@@ -625,7 +635,7 @@ public class OutboundPayment extends ApiResource implements HasId {
               Stripe.getApiBase(),
               String.format(
                   "/v1/test_helpers/treasury/outbound_payments/%s/post",
-                  ApiResource.urlEncodeId(OutboundPayment.this.getId())));
+                  ApiResource.urlEncodeId(this.resource.getId())));
       return ApiResource.request(
           ApiResource.RequestMethod.POST, url, params, OutboundPayment.class, options);
     }
@@ -667,7 +677,7 @@ public class OutboundPayment extends ApiResource implements HasId {
               Stripe.getApiBase(),
               String.format(
                   "/v1/test_helpers/treasury/outbound_payments/%s/return",
-                  ApiResource.urlEncodeId(OutboundPayment.this.getId())));
+                  ApiResource.urlEncodeId(this.resource.getId())));
       return ApiResource.request(
           ApiResource.RequestMethod.POST, url, params, OutboundPayment.class, options);
     }
@@ -694,7 +704,7 @@ public class OutboundPayment extends ApiResource implements HasId {
               Stripe.getApiBase(),
               String.format(
                   "/v1/test_helpers/treasury/outbound_payments/%s/return",
-                  ApiResource.urlEncodeId(OutboundPayment.this.getId())));
+                  ApiResource.urlEncodeId(this.resource.getId())));
       return ApiResource.request(
           ApiResource.RequestMethod.POST, url, params, OutboundPayment.class, options);
     }

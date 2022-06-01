@@ -417,10 +417,20 @@ public class InboundTransfer extends ApiResource implements HasId {
   }
 
   public TestHelpers getTestHelpers() {
-    return new TestHelpers();
+    return new TestHelpers(this);
   }
 
   public class TestHelpers {
+    private final InboundTransfer resource;
+
+    public TestHelpers() {
+      this.resource = InboundTransfer.this;
+    }
+
+    private TestHelpers(InboundTransfer resource) {
+      this.resource = resource;
+    }
+
     /**
      * Transitions a test mode created InboundTransfer to the <code>succeeded</code> status. The
      * InboundTransfer must already be in the <code>processing</code> state.
@@ -457,7 +467,7 @@ public class InboundTransfer extends ApiResource implements HasId {
               Stripe.getApiBase(),
               String.format(
                   "/v1/test_helpers/treasury/inbound_transfers/%s/succeed",
-                  ApiResource.urlEncodeId(InboundTransfer.this.getId())));
+                  ApiResource.urlEncodeId(this.resource.getId())));
       return ApiResource.request(
           ApiResource.RequestMethod.POST, url, params, InboundTransfer.class, options);
     }
@@ -482,7 +492,7 @@ public class InboundTransfer extends ApiResource implements HasId {
               Stripe.getApiBase(),
               String.format(
                   "/v1/test_helpers/treasury/inbound_transfers/%s/succeed",
-                  ApiResource.urlEncodeId(InboundTransfer.this.getId())));
+                  ApiResource.urlEncodeId(this.resource.getId())));
       return ApiResource.request(
           ApiResource.RequestMethod.POST, url, params, InboundTransfer.class, options);
     }
@@ -523,7 +533,7 @@ public class InboundTransfer extends ApiResource implements HasId {
               Stripe.getApiBase(),
               String.format(
                   "/v1/test_helpers/treasury/inbound_transfers/%s/fail",
-                  ApiResource.urlEncodeId(InboundTransfer.this.getId())));
+                  ApiResource.urlEncodeId(this.resource.getId())));
       return ApiResource.request(
           ApiResource.RequestMethod.POST, url, params, InboundTransfer.class, options);
     }
@@ -548,7 +558,7 @@ public class InboundTransfer extends ApiResource implements HasId {
               Stripe.getApiBase(),
               String.format(
                   "/v1/test_helpers/treasury/inbound_transfers/%s/fail",
-                  ApiResource.urlEncodeId(InboundTransfer.this.getId())));
+                  ApiResource.urlEncodeId(this.resource.getId())));
       return ApiResource.request(
           ApiResource.RequestMethod.POST, url, params, InboundTransfer.class, options);
     }
@@ -590,7 +600,7 @@ public class InboundTransfer extends ApiResource implements HasId {
               Stripe.getApiBase(),
               String.format(
                   "/v1/test_helpers/treasury/inbound_transfers/%s/return",
-                  ApiResource.urlEncodeId(InboundTransfer.this.getId())));
+                  ApiResource.urlEncodeId(this.resource.getId())));
       return ApiResource.request(
           ApiResource.RequestMethod.POST, url, params, InboundTransfer.class, options);
     }
@@ -617,7 +627,7 @@ public class InboundTransfer extends ApiResource implements HasId {
               Stripe.getApiBase(),
               String.format(
                   "/v1/test_helpers/treasury/inbound_transfers/%s/return",
-                  ApiResource.urlEncodeId(InboundTransfer.this.getId())));
+                  ApiResource.urlEncodeId(this.resource.getId())));
       return ApiResource.request(
           ApiResource.RequestMethod.POST, url, params, InboundTransfer.class, options);
     }
