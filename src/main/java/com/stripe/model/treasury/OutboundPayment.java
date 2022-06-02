@@ -500,6 +500,7 @@ public class OutboundPayment extends ApiResource implements HasId {
   public class TestHelpers {
     private final OutboundPayment resource;
 
+    @Deprecated
     public TestHelpers() {
       this.resource = OutboundPayment.this;
     }

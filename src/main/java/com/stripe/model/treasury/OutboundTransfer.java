@@ -451,6 +451,7 @@ public class OutboundTransfer extends ApiResource implements HasId {
   public class TestHelpers {
     private final OutboundTransfer resource;
 
+    @Deprecated
     public TestHelpers() {
       this.resource = OutboundTransfer.this;
     }

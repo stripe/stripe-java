@@ -602,6 +602,7 @@ public class Reader extends ApiResource implements HasId, MetadataStore<Reader> 
   public class TestHelpers {
     private final Reader resource;
 
+    @Deprecated
     public TestHelpers() {
       this.resource = Reader.this;
     }

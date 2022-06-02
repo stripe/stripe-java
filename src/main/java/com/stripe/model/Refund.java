@@ -525,6 +525,7 @@ public class Refund extends ApiResource implements MetadataStore<Refund>, Balanc
   public class TestHelpers {
     private final Refund resource;
 
+    @Deprecated
     public TestHelpers() {
       this.resource = Refund.this;
     }
