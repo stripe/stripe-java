@@ -893,6 +893,13 @@ public class SetupIntent extends ApiResource implements HasId, MetadataStore<Set
       MandateOptions mandateOptions;
 
       /**
+       * Selected network to process this SetupIntent on. Depends on the available networks of the
+       * card attached to the setup intent. Can be only set confirm-time.
+       */
+      @SerializedName("network")
+      String network;
+
+      /**
        * We strongly recommend that you rely on our SCA Engine to automatically prompt your
        * customers for authentication based on risk level and <a
        * href="https://stripe.com/docs/strong-customer-authentication">other requirements</a>.

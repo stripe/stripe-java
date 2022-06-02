@@ -1756,7 +1756,7 @@ public class InvoiceUpcomingParams extends ApiRequestParams {
 
   @Getter
   public static class InvoiceItem {
-    /** The integer amount in %s of previewed invoice item. */
+    /** The integer amount in cents (or local equivalent) of previewed invoice item. */
     @SerializedName("amount")
     Long amount;
 
@@ -1841,16 +1841,17 @@ public class InvoiceUpcomingParams extends ApiRequestParams {
     Object taxRates;
 
     /**
-     * The integer unit amount in %s of the charge to be applied to the upcoming invoice. This
-     * unit_amount will be multiplied by the quantity to get the full amount. If you want to apply a
-     * credit to the customer's account, pass a negative unit_amount.
+     * The integer unit amount in cents (or local equivalent) of the charge to be applied to the
+     * upcoming invoice. This unit_amount will be multiplied by the quantity to get the full amount.
+     * If you want to apply a credit to the customer's account, pass a negative unit_amount.
      */
     @SerializedName("unit_amount")
     Long unitAmount;
 
     /**
-     * Same as {@code unit_amount}, but accepts a decimal value in %s with at most 12 decimal
-     * places. Only one of {@code unit_amount} and {@code unit_amount_decimal} can be set.
+     * Same as {@code unit_amount}, but accepts a decimal value in cents (or local equivalent) with
+     * at most 12 decimal places. Only one of {@code unit_amount} and {@code unit_amount_decimal}
+     * can be set.
      */
     @SerializedName("unit_amount_decimal")
     BigDecimal unitAmountDecimal;
@@ -1943,7 +1944,7 @@ public class InvoiceUpcomingParams extends ApiRequestParams {
             this.unitAmountDecimal);
       }
 
-      /** The integer amount in %s of previewed invoice item. */
+      /** The integer amount in cents (or local equivalent) of previewed invoice item. */
       public Builder setAmount(Long amount) {
         this.amount = amount;
         return this;
@@ -2179,9 +2180,10 @@ public class InvoiceUpcomingParams extends ApiRequestParams {
       }
 
       /**
-       * The integer unit amount in %s of the charge to be applied to the upcoming invoice. This
-       * unit_amount will be multiplied by the quantity to get the full amount. If you want to apply
-       * a credit to the customer's account, pass a negative unit_amount.
+       * The integer unit amount in cents (or local equivalent) of the charge to be applied to the
+       * upcoming invoice. This unit_amount will be multiplied by the quantity to get the full
+       * amount. If you want to apply a credit to the customer's account, pass a negative
+       * unit_amount.
        */
       public Builder setUnitAmount(Long unitAmount) {
         this.unitAmount = unitAmount;
@@ -2189,8 +2191,9 @@ public class InvoiceUpcomingParams extends ApiRequestParams {
       }
 
       /**
-       * Same as {@code unit_amount}, but accepts a decimal value in %s with at most 12 decimal
-       * places. Only one of {@code unit_amount} and {@code unit_amount_decimal} can be set.
+       * Same as {@code unit_amount}, but accepts a decimal value in cents (or local equivalent)
+       * with at most 12 decimal places. Only one of {@code unit_amount} and {@code
+       * unit_amount_decimal} can be set.
        */
       public Builder setUnitAmountDecimal(BigDecimal unitAmountDecimal) {
         this.unitAmountDecimal = unitAmountDecimal;
@@ -2395,13 +2398,17 @@ public class InvoiceUpcomingParams extends ApiRequestParams {
       @SerializedName("tax_behavior")
       TaxBehavior taxBehavior;
 
-      /** A positive integer in %s (or 0 for a free price) representing how much to charge. */
+      /**
+       * A positive integer in cents (or local equivalent) (or 0 for a free price) representing how
+       * much to charge.
+       */
       @SerializedName("unit_amount")
       Long unitAmount;
 
       /**
-       * Same as {@code unit_amount}, but accepts a decimal value in %s with at most 12 decimal
-       * places. Only one of {@code unit_amount} and {@code unit_amount_decimal} can be set.
+       * Same as {@code unit_amount}, but accepts a decimal value in cents (or local equivalent)
+       * with at most 12 decimal places. Only one of {@code unit_amount} and {@code
+       * unit_amount_decimal} can be set.
        */
       @SerializedName("unit_amount_decimal")
       BigDecimal unitAmountDecimal;
@@ -2503,15 +2510,19 @@ public class InvoiceUpcomingParams extends ApiRequestParams {
           return this;
         }
 
-        /** A positive integer in %s (or 0 for a free price) representing how much to charge. */
+        /**
+         * A positive integer in cents (or local equivalent) (or 0 for a free price) representing
+         * how much to charge.
+         */
         public Builder setUnitAmount(Long unitAmount) {
           this.unitAmount = unitAmount;
           return this;
         }
 
         /**
-         * Same as {@code unit_amount}, but accepts a decimal value in %s with at most 12 decimal
-         * places. Only one of {@code unit_amount} and {@code unit_amount_decimal} can be set.
+         * Same as {@code unit_amount}, but accepts a decimal value in cents (or local equivalent)
+         * with at most 12 decimal places. Only one of {@code unit_amount} and {@code
+         * unit_amount_decimal} can be set.
          */
         public Builder setUnitAmountDecimal(BigDecimal unitAmountDecimal) {
           this.unitAmountDecimal = unitAmountDecimal;
@@ -2988,13 +2999,17 @@ public class InvoiceUpcomingParams extends ApiRequestParams {
       @SerializedName("tax_behavior")
       TaxBehavior taxBehavior;
 
-      /** A positive integer in %s (or 0 for a free price) representing how much to charge. */
+      /**
+       * A positive integer in cents (or local equivalent) (or 0 for a free price) representing how
+       * much to charge.
+       */
       @SerializedName("unit_amount")
       Long unitAmount;
 
       /**
-       * Same as {@code unit_amount}, but accepts a decimal value in %s with at most 12 decimal
-       * places. Only one of {@code unit_amount} and {@code unit_amount_decimal} can be set.
+       * Same as {@code unit_amount}, but accepts a decimal value in cents (or local equivalent)
+       * with at most 12 decimal places. Only one of {@code unit_amount} and {@code
+       * unit_amount_decimal} can be set.
        */
       @SerializedName("unit_amount_decimal")
       BigDecimal unitAmountDecimal;
@@ -3109,15 +3124,19 @@ public class InvoiceUpcomingParams extends ApiRequestParams {
           return this;
         }
 
-        /** A positive integer in %s (or 0 for a free price) representing how much to charge. */
+        /**
+         * A positive integer in cents (or local equivalent) (or 0 for a free price) representing
+         * how much to charge.
+         */
         public Builder setUnitAmount(Long unitAmount) {
           this.unitAmount = unitAmount;
           return this;
         }
 
         /**
-         * Same as {@code unit_amount}, but accepts a decimal value in %s with at most 12 decimal
-         * places. Only one of {@code unit_amount} and {@code unit_amount_decimal} can be set.
+         * Same as {@code unit_amount}, but accepts a decimal value in cents (or local equivalent)
+         * with at most 12 decimal places. Only one of {@code unit_amount} and {@code
+         * unit_amount_decimal} can be set.
          */
         public Builder setUnitAmountDecimal(BigDecimal unitAmountDecimal) {
           this.unitAmountDecimal = unitAmountDecimal;

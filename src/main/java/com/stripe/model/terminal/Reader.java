@@ -45,7 +45,7 @@ public class Reader extends ApiResource implements HasId, MetadataStore<Reader> 
 
   /**
    * Type of reader, one of {@code bbpos_wisepad3}, {@code stripe_m2}, {@code bbpos_chipper2x},
-   * {@code bbpos_wisepos_e}, or {@code verifone_P400}.
+   * {@code bbpos_wisepos_e}, {@code verifone_P400}, or {@code simulated_wisepos_e}.
    */
   @SerializedName("device_type")
   String deviceType;
@@ -596,10 +596,21 @@ public class Reader extends ApiResource implements HasId, MetadataStore<Reader> 
   }
 
   public TestHelpers getTestHelpers() {
-    return new TestHelpers();
+    return new TestHelpers(this);
   }
 
   public class TestHelpers {
+    private final Reader resource;
+
+    @Deprecated
+    public TestHelpers() {
+      this.resource = Reader.this;
+    }
+
+    private TestHelpers(Reader resource) {
+      this.resource = resource;
+    }
+
     /**
      * Presents a payment method on a simulated reader. Can be used to simulate accepting a payment,
      * saving a card or refunding a transaction.
@@ -636,7 +647,7 @@ public class Reader extends ApiResource implements HasId, MetadataStore<Reader> 
               Stripe.getApiBase(),
               String.format(
                   "/v1/test_helpers/terminal/readers/%s/present_payment_method",
-                  ApiResource.urlEncodeId(Reader.this.getId())));
+                  ApiResource.urlEncodeId(this.resource.getId())));
       return ApiResource.request(
           ApiResource.RequestMethod.POST, url, params, Reader.class, options);
     }
@@ -662,7 +673,7 @@ public class Reader extends ApiResource implements HasId, MetadataStore<Reader> 
               Stripe.getApiBase(),
               String.format(
                   "/v1/test_helpers/terminal/readers/%s/present_payment_method",
-                  ApiResource.urlEncodeId(Reader.this.getId())));
+                  ApiResource.urlEncodeId(this.resource.getId())));
       return ApiResource.request(
           ApiResource.RequestMethod.POST, url, params, Reader.class, options);
     }

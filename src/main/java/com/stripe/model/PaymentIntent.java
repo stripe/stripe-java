@@ -1739,7 +1739,35 @@ public class PaymentIntent extends ApiResource implements HasId, MetadataStore<P
       @Getter
       @Setter
       @EqualsAndHashCode(callSuper = false)
-      public static class Zengin extends StripeObject {}
+      public static class Zengin extends StripeObject {
+        /** The account holder name. */
+        @SerializedName("account_holder_name")
+        String accountHolderName;
+
+        /** The account number. */
+        @SerializedName("account_number")
+        String accountNumber;
+
+        /** The bank account type. In Japan, this can only be {@code futsu} or {@code toza}. */
+        @SerializedName("account_type")
+        String accountType;
+
+        /** The bank code of the account. */
+        @SerializedName("bank_code")
+        String bankCode;
+
+        /** The bank name of the account. */
+        @SerializedName("bank_name")
+        String bankName;
+
+        /** The branch code of the account. */
+        @SerializedName("branch_code")
+        String branchCode;
+
+        /** The branch name of the account. */
+        @SerializedName("branch_name")
+        String branchName;
+      }
     }
   }
 
@@ -2244,16 +2272,10 @@ public class PaymentIntent extends ApiResource implements HasId, MetadataStore<P
       List<String> requestedAddressTypes;
 
       /**
-       * The bank transfer type that this PaymentIntent is allowed to use for funding. Permitted
-       * values include: {@code us_bank_account}, {@code eu_bank_account}, {@code id_bank_account},
-       * {@code gb_bank_account}, {@code jp_bank_account}, {@code mx_bank_account}, {@code
-       * eu_bank_transfer}, {@code gb_bank_transfer}, {@code id_bank_transfer}, {@code
-       * jp_bank_transfer}, {@code mx_bank_transfer}, or {@code us_bank_transfer}.
+       * The bank transfer type that this PaymentIntent is allowed to use for funding Permitted
+       * values include: {@code jp_bank_transfer}.
        *
-       * <p>One of {@code eu_bank_account}, {@code eu_bank_transfer}, {@code gb_bank_account},
-       * {@code gb_bank_transfer}, {@code id_bank_account}, {@code id_bank_transfer}, {@code
-       * jp_bank_account}, {@code jp_bank_transfer}, {@code mx_bank_account}, {@code
-       * mx_bank_transfer}, {@code us_bank_account}, or {@code us_bank_transfer}.
+       * <p>Equal to {@code jp_bank_transfer}.
        */
       @SerializedName("type")
       String type;

@@ -11,6 +11,7 @@ import com.stripe.model.Payout;
 import com.stripe.model.StripeObject;
 import com.stripe.net.ApiResource;
 import com.stripe.net.RequestOptions;
+import com.stripe.param.treasury.ReceivedCreditCreateParams;
 import com.stripe.param.treasury.ReceivedCreditListParams;
 import com.stripe.param.treasury.ReceivedCreditRetrieveParams;
 import java.util.Map;
@@ -382,5 +383,49 @@ public class ReceivedCredit extends ApiResource implements HasId {
     /** Timestamp describing when the CreditReversal changed status to {@code posted}. */
     @SerializedName("posted_at")
     Long postedAt;
+  }
+
+  public static class TestHelpers {
+    private TestHelpers() {}
+
+    /**
+     * Use this endpoint to simulate a test mode ReceivedCredit initiated by a third party. In live
+     * mode, you can’t directly create ReceivedCredits initiated by third parties.
+     */
+    public static ReceivedCredit create(Map<String, Object> params) throws StripeException {
+      return create(params, (RequestOptions) null);
+    }
+
+    /**
+     * Use this endpoint to simulate a test mode ReceivedCredit initiated by a third party. In live
+     * mode, you can’t directly create ReceivedCredits initiated by third parties.
+     */
+    public static ReceivedCredit create(Map<String, Object> params, RequestOptions options)
+        throws StripeException {
+      String url =
+          String.format("%s%s", Stripe.getApiBase(), "/v1/test_helpers/treasury/received_credits");
+      return ApiResource.request(
+          ApiResource.RequestMethod.POST, url, params, ReceivedCredit.class, options);
+    }
+
+    /**
+     * Use this endpoint to simulate a test mode ReceivedCredit initiated by a third party. In live
+     * mode, you can’t directly create ReceivedCredits initiated by third parties.
+     */
+    public static ReceivedCredit create(ReceivedCreditCreateParams params) throws StripeException {
+      return create(params, (RequestOptions) null);
+    }
+
+    /**
+     * Use this endpoint to simulate a test mode ReceivedCredit initiated by a third party. In live
+     * mode, you can’t directly create ReceivedCredits initiated by third parties.
+     */
+    public static ReceivedCredit create(ReceivedCreditCreateParams params, RequestOptions options)
+        throws StripeException {
+      String url =
+          String.format("%s%s", Stripe.getApiBase(), "/v1/test_helpers/treasury/received_credits");
+      return ApiResource.request(
+          ApiResource.RequestMethod.POST, url, params, ReceivedCredit.class, options);
+    }
   }
 }

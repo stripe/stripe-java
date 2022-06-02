@@ -519,10 +519,21 @@ public class Refund extends ApiResource implements MetadataStore<Refund>, Balanc
   }
 
   public TestHelpers getTestHelpers() {
-    return new TestHelpers();
+    return new TestHelpers(this);
   }
 
   public class TestHelpers {
+    private final Refund resource;
+
+    @Deprecated
+    public TestHelpers() {
+      this.resource = Refund.this;
+    }
+
+    private TestHelpers(Refund resource) {
+      this.resource = resource;
+    }
+
     /** Expire a refund with a status of <code>requires_action</code>. */
     public Refund expire() throws StripeException {
       return expire((Map<String, Object>) null, (RequestOptions) null);
@@ -547,7 +558,7 @@ public class Refund extends ApiResource implements MetadataStore<Refund>, Balanc
               Stripe.getApiBase(),
               String.format(
                   "/v1/test_helpers/refunds/%s/expire",
-                  ApiResource.urlEncodeId(Refund.this.getId())));
+                  ApiResource.urlEncodeId(this.resource.getId())));
       return ApiResource.request(
           ApiResource.RequestMethod.POST, url, params, Refund.class, options);
     }
@@ -565,7 +576,7 @@ public class Refund extends ApiResource implements MetadataStore<Refund>, Balanc
               Stripe.getApiBase(),
               String.format(
                   "/v1/test_helpers/refunds/%s/expire",
-                  ApiResource.urlEncodeId(Refund.this.getId())));
+                  ApiResource.urlEncodeId(this.resource.getId())));
       return ApiResource.request(
           ApiResource.RequestMethod.POST, url, params, Refund.class, options);
     }

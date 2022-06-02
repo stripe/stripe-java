@@ -17,9 +17,10 @@ public class InvoiceCreateParams extends ApiRequestParams {
   Object accountTaxIds;
 
   /**
-   * A fee in %s that will be applied to the invoice and transferred to the application owner's
-   * Stripe account. The request must be made with an OAuth key or the Stripe-Account header in
-   * order to take an application fee. For more information, see the application fees <a
+   * A fee in cents (or local equivalent) that will be applied to the invoice and transferred to the
+   * application owner's Stripe account. The request must be made with an OAuth key or the
+   * Stripe-Account header in order to take an application fee. For more information, see the
+   * application fees <a
    * href="https://stripe.com/docs/billing/invoices/connect#collecting-fees">documentation</a>.
    */
   @SerializedName("application_fee_amount")
@@ -360,9 +361,10 @@ public class InvoiceCreateParams extends ApiRequestParams {
     }
 
     /**
-     * A fee in %s that will be applied to the invoice and transferred to the application owner's
-     * Stripe account. The request must be made with an OAuth key or the Stripe-Account header in
-     * order to take an application fee. For more information, see the application fees <a
+     * A fee in cents (or local equivalent) that will be applied to the invoice and transferred to
+     * the application owner's Stripe account. The request must be made with an OAuth key or the
+     * Stripe-Account header in order to take an application fee. For more information, see the
+     * application fees <a
      * href="https://stripe.com/docs/billing/invoices/connect#collecting-fees">documentation</a>.
      */
     public Builder setApplicationFeeAmount(Long applicationFeeAmount) {
@@ -1859,10 +1861,7 @@ public class InvoiceCreateParams extends ApiRequestParams {
 
           /**
            * The bank transfer type that can be used for funding. Permitted values include: {@code
-           * us_bank_account}, {@code eu_bank_account}, {@code id_bank_account}, {@code
-           * gb_bank_account}, {@code jp_bank_account}, {@code mx_bank_account}, {@code
-           * eu_bank_transfer}, {@code gb_bank_transfer}, {@code id_bank_transfer}, {@code
-           * jp_bank_transfer}, {@code mx_bank_transfer}, or {@code us_bank_transfer}.
+           * jp_bank_transfer}.
            */
           @SerializedName("type")
           String type;
@@ -1918,10 +1917,7 @@ public class InvoiceCreateParams extends ApiRequestParams {
 
             /**
              * The bank transfer type that can be used for funding. Permitted values include: {@code
-             * us_bank_account}, {@code eu_bank_account}, {@code id_bank_account}, {@code
-             * gb_bank_account}, {@code jp_bank_account}, {@code mx_bank_account}, {@code
-             * eu_bank_transfer}, {@code gb_bank_transfer}, {@code id_bank_transfer}, {@code
-             * jp_bank_transfer}, {@code mx_bank_transfer}, or {@code us_bank_transfer}.
+             * jp_bank_transfer}.
              */
             public Builder setType(String type) {
               this.type = type;
