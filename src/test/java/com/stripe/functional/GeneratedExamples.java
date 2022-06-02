@@ -648,17 +648,14 @@ class GeneratedExamples extends BaseStripeTest {
 
   @Test
   public void testCashBalanceRetrieve() throws StripeException {
-    Customer customer = Customer.retrieve("cus_123");
-
-    CashBalance cashBalance = customer.getCashBalance().retrieve();
+    CashBalance cashBalance = CashBalance.retrieve("cus_123");
     assertNotNull(cashBalance);
     verifyRequest(ApiResource.RequestMethod.GET, "/v1/customers/cus_123/cash_balance");
   }
 
   @Test
   public void testCashBalanceUpdate() throws StripeException {
-    Customer customer = Customer.retrieve("cus_123");
-    CashBalance resource = customer.getCashBalance().retrieve();
+    CashBalance resource = CashBalance.retrieve("cus_123");
     CashBalanceUpdateParams params =
         CashBalanceUpdateParams.builder()
             .setSettings(
