@@ -1,5 +1,11 @@
 # Changelog
 
+## 20.126.0 - 2022-06-02
+* [#1367](https://github.com/stripe/stripe-java/pull/1367) API Updates
+  * Add support for `create` test helper on `ReceivedCredit`.
+  * Add support for `create` test helper on `ReceivedDebit`.
+  * Deprecates the ability to directly create instances of inner `TestHelper` classes.
+
 ## 20.125.0 - 2022-06-01
 * [#1366](https://github.com/stripe/stripe-java/pull/1366) API Updates
   * Add support for `radar_options` on `ChargeCreateParams`, `Charge`, `PaymentIntentConfirmParams.payment_method_data`, `PaymentIntentConfirmParams`, `PaymentIntentCreateParams.payment_method_data`, `PaymentIntentCreateParams`, `PaymentIntentUpdateParams.payment_method_data`, `PaymentMethodCreateParams`, `PaymentMethod`, `SetupIntentConfirmParams.payment_method_data`, `SetupIntentCreateParams.payment_method_data`, and `SetupIntentUpdateParams.payment_method_data`
