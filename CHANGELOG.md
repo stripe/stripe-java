@@ -1,5 +1,13 @@
 # Changelog
 
+## 20.127.0 - 2022-06-08
+* [#1369](https://github.com/stripe/stripe-java/pull/1369) API Updates
+  * Add support for `affirm`, `bancontact`, `card`, `ideal`, `p24`, and `sofort` on `Checkout.Session.payment_method_options` and `CheckoutSessionCreateParams.payment_method_options`
+  * Add support for `afterpay_clearpay`, `au_becs_debit`, `bacs_debit`, `eps`, `fpx`, `giropay`, `grabpay`, `klarna`, `paynow`, and `sepa_debit` on `CheckoutSessionCreateParams.payment_method_options`
+  * Add support for `setup_future_usage` on `Checkout.Session.payment_method_options.acss_debit`, `Checkout.Session.payment_method_options.afterpay_clearpay`, `Checkout.Session.payment_method_options.alipay`, `Checkout.Session.payment_method_options.au_becs_debit`, `Checkout.Session.payment_method_options.bacs_debit`, `Checkout.Session.payment_method_options.boleto`, `Checkout.Session.payment_method_options.eps`, `Checkout.Session.payment_method_options.fpx`, `Checkout.Session.payment_method_options.giropay`, `Checkout.Session.payment_method_options.grabpay`, `Checkout.Session.payment_method_options.klarna`, `Checkout.Session.payment_method_options.konbini`, `Checkout.Session.payment_method_options.oxxo`, `Checkout.Session.payment_method_options.paynow`, `Checkout.Session.payment_method_options.sepa_debit`, `Checkout.Session.payment_method_options.us_bank_account`, `CheckoutSessionCreateParams.payment_method_options.acss_debit`, `CheckoutSessionCreateParams.payment_method_options.alipay`, `CheckoutSessionCreateParams.payment_method_options.boleto`, `CheckoutSessionCreateParams.payment_method_options.konbini`, `CheckoutSessionCreateParams.payment_method_options.oxxo`, `CheckoutSessionCreateParams.payment_method_options.us_bank_account`, and `CheckoutSessionCreateParams.payment_method_options.wechat_pay`
+  * Add support for `attach_to_self` on `SetupAttempt`, `SetupIntentCreateParams`, `SetupIntentListParams`, and `SetupIntentUpdateParams`
+  * Add support for `flow_directions` on `SetupAttempt`, `SetupIntentCreateParams`, and `SetupIntentUpdateParams`
+
 ## 20.126.0 - 2022-06-02
 * [#1367](https://github.com/stripe/stripe-java/pull/1367) API Updates
   * Add support for `create` test helper on `ReceivedCredit`.
@@ -23,7 +31,7 @@
   * Add support for `hosted_instructions_url` on `PaymentIntent.next_action.display_bank_transfer_instructions`
   * Add support for `id_number_secondary_provided` on `Person`
   * Add support for `card_issuing` on `TreasuryFinancialAccountCreateParams.features`, `TreasuryFinancialAccountUpdateFeaturesParams`, and `TreasuryFinancialAccountUpdateParams.features`
-  
+
 * [#1361](https://github.com/stripe/stripe-java/pull/1361) Fix version update script and the version in README.md
 * [#1360](https://github.com/stripe/stripe-java/pull/1360) API Updates
   * Add support for `treasury` on `Account.capabilities`, `AccountCreateParams.capabilities`, and `AccountUpdateParams.capabilities`
