@@ -62,7 +62,7 @@ public class Invoice extends ApiResource implements HasId, MetadataStore<Invoice
   @SerializedName("amount_paid")
   Long amountPaid;
 
-  /** The amount remaining, in %s, that is due. */
+  /** The difference between amount_due and amount_paid, in %s. */
   @SerializedName("amount_remaining")
   Long amountRemaining;
 

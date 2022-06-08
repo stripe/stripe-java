@@ -13,6 +13,16 @@ import lombok.Getter;
 @Getter
 public class SetupIntentUpdateParams extends ApiRequestParams {
   /**
+   * If present, the SetupIntent's payment method will be attached to the in-context Stripe Account.
+   *
+   * <p>It can only be used for this Stripe Account’s own money movement flows like InboundTransfer
+   * and OutboundTransfers. It cannot be set to true when setting up a PaymentMethod for a Customer,
+   * and defaults to false when attaching a PaymentMethod to a Customer.
+   */
+  @SerializedName("attach_to_self")
+  Boolean attachToSelf;
+
+  /**
    * ID of the Customer this SetupIntent belongs to, if one exists.
    *
    * <p>If present, the SetupIntent's payment method will be attached to the Customer on successful
@@ -37,6 +47,17 @@ public class SetupIntentUpdateParams extends ApiRequestParams {
    */
   @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
   Map<String, Object> extraParams;
+
+  /**
+   * Indicates the directions of money movement for which this payment method is intended to be
+   * used.
+   *
+   * <p>Include {@code inbound} if you intend to use the payment method as the origin to pull funds
+   * from. Include {@code outbound} if you intend to use the payment method as the destination to
+   * send funds to. You can include both if you intend to use the payment method for both purposes.
+   */
+  @SerializedName("flow_directions")
+  List<FlowDirection> flowDirections;
 
   /**
    * Set of <a href="https://stripe.com/docs/api/metadata">key-value pairs</a> that you can attach
@@ -74,19 +95,23 @@ public class SetupIntentUpdateParams extends ApiRequestParams {
   List<String> paymentMethodTypes;
 
   private SetupIntentUpdateParams(
+      Boolean attachToSelf,
       Object customer,
       Object description,
       List<String> expand,
       Map<String, Object> extraParams,
+      List<FlowDirection> flowDirections,
       Object metadata,
       Object paymentMethod,
       PaymentMethodData paymentMethodData,
       PaymentMethodOptions paymentMethodOptions,
       List<String> paymentMethodTypes) {
+    this.attachToSelf = attachToSelf;
     this.customer = customer;
     this.description = description;
     this.expand = expand;
     this.extraParams = extraParams;
+    this.flowDirections = flowDirections;
     this.metadata = metadata;
     this.paymentMethod = paymentMethod;
     this.paymentMethodData = paymentMethodData;
@@ -99,6 +124,8 @@ public class SetupIntentUpdateParams extends ApiRequestParams {
   }
 
   public static class Builder {
+    private Boolean attachToSelf;
+
     private Object customer;
 
     private Object description;
@@ -106,6 +133,8 @@ public class SetupIntentUpdateParams extends ApiRequestParams {
     private List<String> expand;
 
     private Map<String, Object> extraParams;
+
+    private List<FlowDirection> flowDirections;
 
     private Object metadata;
 
@@ -120,15 +149,31 @@ public class SetupIntentUpdateParams extends ApiRequestParams {
     /** Finalize and obtain parameter instance from this builder. */
     public SetupIntentUpdateParams build() {
       return new SetupIntentUpdateParams(
+          this.attachToSelf,
           this.customer,
           this.description,
           this.expand,
           this.extraParams,
+          this.flowDirections,
           this.metadata,
           this.paymentMethod,
           this.paymentMethodData,
           this.paymentMethodOptions,
           this.paymentMethodTypes);
+    }
+
+    /**
+     * If present, the SetupIntent's payment method will be attached to the in-context Stripe
+     * Account.
+     *
+     * <p>It can only be used for this Stripe Account’s own money movement flows like
+     * InboundTransfer and OutboundTransfers. It cannot be set to true when setting up a
+     * PaymentMethod for a Customer, and defaults to false when attaching a PaymentMethod to a
+     * Customer.
+     */
+    public Builder setAttachToSelf(Boolean attachToSelf) {
+      this.attachToSelf = attachToSelf;
+      return this;
     }
 
     /**
@@ -216,6 +261,32 @@ public class SetupIntentUpdateParams extends ApiRequestParams {
         this.extraParams = new HashMap<>();
       }
       this.extraParams.putAll(map);
+      return this;
+    }
+
+    /**
+     * Add an element to `flowDirections` list. A list is initialized for the first `add/addAll`
+     * call, and subsequent calls adds additional elements to the original list. See {@link
+     * SetupIntentUpdateParams#flowDirections} for the field documentation.
+     */
+    public Builder addFlowDirection(FlowDirection element) {
+      if (this.flowDirections == null) {
+        this.flowDirections = new ArrayList<>();
+      }
+      this.flowDirections.add(element);
+      return this;
+    }
+
+    /**
+     * Add all elements to `flowDirections` list. A list is initialized for the first `add/addAll`
+     * call, and subsequent calls adds additional elements to the original list. See {@link
+     * SetupIntentUpdateParams#flowDirections} for the field documentation.
+     */
+    public Builder addAllFlowDirection(List<FlowDirection> elements) {
+      if (this.flowDirections == null) {
+        this.flowDirections = new ArrayList<>();
+      }
+      this.flowDirections.addAll(elements);
       return this;
     }
 
@@ -5151,7 +5222,7 @@ public class SetupIntentUpdateParams extends ApiRequestParams {
         /**
          * The list of permissions to request. If this parameter is passed, the {@code
          * payment_method} permission must be included. Valid permissions include: {@code balances},
-         * {@code payment_method}, and {@code transactions}.
+         * {@code ownership}, {@code payment_method}, and {@code transactions}.
          */
         @SerializedName("permissions")
         List<Permission> permissions;
@@ -5413,6 +5484,21 @@ public class SetupIntentUpdateParams extends ApiRequestParams {
           this.value = value;
         }
       }
+    }
+  }
+
+  public enum FlowDirection implements ApiRequestParams.EnumParam {
+    @SerializedName("inbound")
+    INBOUND("inbound"),
+
+    @SerializedName("outbound")
+    OUTBOUND("outbound");
+
+    @Getter(onMethod_ = {@Override})
+    private final String value;
+
+    FlowDirection(String value) {
+      this.value = value;
     }
   }
 }

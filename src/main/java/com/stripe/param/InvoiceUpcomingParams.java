@@ -123,16 +123,7 @@ public class InvoiceUpcomingParams extends ApiRequestParams {
    * Determines how to handle <a
    * href="https://stripe.com/docs/subscriptions/billing-cycle#prorations">prorations</a> when the
    * billing cycle changes (e.g., when switching plans, resetting {@code billing_cycle_anchor=now},
-   * or starting a trial), or if an item's {@code quantity} changes. Valid values are {@code
-   * create_prorations}, {@code none}, or {@code always_invoice}.
-   *
-   * <p>Passing {@code create_prorations} will cause proration invoice items to be created when
-   * applicable. These proration items will only be invoiced immediately under <a
-   * href="https://stripe.com/docs/subscriptions/upgrading-downgrading#immediate-payment">certain
-   * conditions</a>. In order to always invoice immediately for prorations, pass {@code
-   * always_invoice}.
-   *
-   * <p>Prorations can be disabled by passing {@code none}.
+   * or starting a trial), or if an item's {@code quantity} changes.
    */
   @SerializedName("subscription_proration_behavior")
   SubscriptionProrationBehavior subscriptionProrationBehavior;
@@ -606,15 +597,6 @@ public class InvoiceUpcomingParams extends ApiRequestParams {
      * href="https://stripe.com/docs/subscriptions/billing-cycle#prorations">prorations</a> when the
      * billing cycle changes (e.g., when switching plans, resetting {@code
      * billing_cycle_anchor=now}, or starting a trial), or if an item's {@code quantity} changes.
-     * Valid values are {@code create_prorations}, {@code none}, or {@code always_invoice}.
-     *
-     * <p>Passing {@code create_prorations} will cause proration invoice items to be created when
-     * applicable. These proration items will only be invoiced immediately under <a
-     * href="https://stripe.com/docs/subscriptions/upgrading-downgrading#immediate-payment">certain
-     * conditions</a>. In order to always invoice immediately for prorations, pass {@code
-     * always_invoice}.
-     *
-     * <p>Prorations can be disabled by passing {@code none}.
      */
     public Builder setSubscriptionProrationBehavior(
         SubscriptionProrationBehavior subscriptionProrationBehavior) {

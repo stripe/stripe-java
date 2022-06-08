@@ -43,7 +43,7 @@ public class Subscription extends ApiResource implements HasId, MetadataStore<Su
 
   /**
    * Determines the date of the first full invoice, and, for plans with {@code month} or {@code
-   * year} intervals, the day of the month for subsequent invoices.
+   * year} intervals, the day of the month for subsequent invoices. The timestamp is in UTC format.
    */
   @SerializedName("billing_cycle_anchor")
   Long billingCycleAnchor;
@@ -1163,7 +1163,8 @@ public class Subscription extends ApiResource implements HasId, MetadataStore<Su
   public static class PendingUpdate extends StripeObject {
     /**
      * If the update is applied, determines the date of the first full invoice, and, for plans with
-     * {@code month} or {@code year} intervals, the day of the month for subsequent invoices.
+     * {@code month} or {@code year} intervals, the day of the month for subsequent invoices. The
+     * timestamp is in UTC format.
      */
     @SerializedName("billing_cycle_anchor")
     Long billingCycleAnchor;

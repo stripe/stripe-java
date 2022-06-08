@@ -7,6 +7,7 @@ import com.stripe.exception.StripeException;
 import com.stripe.net.ApiResource;
 import com.stripe.net.RequestOptions;
 import com.stripe.param.SetupAttemptListParams;
+import java.util.List;
 import java.util.Map;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
@@ -26,6 +27,16 @@ public class SetupAttempt extends ApiResource implements HasId {
   @Setter(lombok.AccessLevel.NONE)
   ExpandableField<Application> application;
 
+  /**
+   * If present, the SetupIntent's payment method will be attached to the in-context Stripe Account.
+   *
+   * <p>It can only be used for this Stripe Account’s own money movement flows like InboundTransfer
+   * and OutboundTransfers. It cannot be set to true when setting up a PaymentMethod for a Customer,
+   * and defaults to false when attaching a PaymentMethod to a Customer.
+   */
+  @SerializedName("attach_to_self")
+  Boolean attachToSelf;
+
   /** Time at which the object was created. Measured in seconds since the Unix epoch. */
   @SerializedName("created")
   Long created;
@@ -39,6 +50,17 @@ public class SetupAttempt extends ApiResource implements HasId {
   @Getter(lombok.AccessLevel.NONE)
   @Setter(lombok.AccessLevel.NONE)
   ExpandableField<Customer> customer;
+
+  /**
+   * Indicates the directions of money movement for which this payment method is intended to be
+   * used.
+   *
+   * <p>Include {@code inbound} if you intend to use the payment method as the origin to pull funds
+   * from. Include {@code outbound} if you intend to use the payment method as the destination to
+   * send funds to. You can include both if you intend to use the payment method for both purposes.
+   */
+  @SerializedName("flow_directions")
+  List<String> flowDirections;
 
   /** Unique identifier for the object. */
   @Getter(onMethod_ = {@Override})

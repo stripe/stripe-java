@@ -12,6 +12,16 @@ import lombok.Getter;
 @Getter
 public class SetupIntentListParams extends ApiRequestParams {
   /**
+   * If present, the SetupIntent's payment method will be attached to the in-context Stripe Account.
+   *
+   * <p>It can only be used for this Stripe Account’s own money movement flows like InboundTransfer
+   * and OutboundTransfers. It cannot be set to true when setting up a PaymentMethod for a Customer,
+   * and defaults to false when attaching a PaymentMethod to a Customer.
+   */
+  @SerializedName("attach_to_self")
+  Boolean attachToSelf;
+
+  /**
    * A filter on the list, based on the object {@code created} field. The value can be a string with
    * an integer Unix timestamp, or it can be a dictionary with a number of different query options.
    */
@@ -65,6 +75,7 @@ public class SetupIntentListParams extends ApiRequestParams {
   String startingAfter;
 
   private SetupIntentListParams(
+      Boolean attachToSelf,
       Object created,
       String customer,
       String endingBefore,
@@ -73,6 +84,7 @@ public class SetupIntentListParams extends ApiRequestParams {
       Long limit,
       String paymentMethod,
       String startingAfter) {
+    this.attachToSelf = attachToSelf;
     this.created = created;
     this.customer = customer;
     this.endingBefore = endingBefore;
@@ -88,6 +100,8 @@ public class SetupIntentListParams extends ApiRequestParams {
   }
 
   public static class Builder {
+    private Boolean attachToSelf;
+
     private Object created;
 
     private String customer;
@@ -107,6 +121,7 @@ public class SetupIntentListParams extends ApiRequestParams {
     /** Finalize and obtain parameter instance from this builder. */
     public SetupIntentListParams build() {
       return new SetupIntentListParams(
+          this.attachToSelf,
           this.created,
           this.customer,
           this.endingBefore,
@@ -115,6 +130,20 @@ public class SetupIntentListParams extends ApiRequestParams {
           this.limit,
           this.paymentMethod,
           this.startingAfter);
+    }
+
+    /**
+     * If present, the SetupIntent's payment method will be attached to the in-context Stripe
+     * Account.
+     *
+     * <p>It can only be used for this Stripe Account’s own money movement flows like
+     * InboundTransfer and OutboundTransfers. It cannot be set to true when setting up a
+     * PaymentMethod for a Customer, and defaults to false when attaching a PaymentMethod to a
+     * Customer.
+     */
+    public Builder setAttachToSelf(Boolean attachToSelf) {
+      this.attachToSelf = attachToSelf;
+      return this;
     }
 
     /**
