@@ -10871,7 +10871,7 @@ public class PaymentIntentCreateParams extends ApiRequestParams {
         /**
          * The list of permissions to request. If this parameter is passed, the {@code
          * payment_method} permission must be included. Valid permissions include: {@code balances},
-         * {@code payment_method}, and {@code transactions}.
+         * {@code ownership}, {@code payment_method}, and {@code transactions}.
          */
         @SerializedName("permissions")
         List<Permission> permissions;

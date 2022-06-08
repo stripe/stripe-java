@@ -50,7 +50,7 @@ public class SubscriptionCreateParams extends ApiRequestParams {
    * A future timestamp to anchor the subscription's <a
    * href="https://stripe.com/docs/subscriptions/billing-cycle">billing cycle</a>. This is used to
    * determine the date of the first full invoice, and, for plans with {@code month} or {@code year}
-   * intervals, the day of the month for subsequent invoices.
+   * intervals, the day of the month for subsequent invoices. The timestamp is in UTC format.
    */
   @SerializedName("billing_cycle_anchor")
   Long billingCycleAnchor;
@@ -225,12 +225,8 @@ public class SubscriptionCreateParams extends ApiRequestParams {
   /**
    * Determines how to handle <a
    * href="https://stripe.com/docs/subscriptions/billing-cycle#prorations">prorations</a> resulting
-   * from the {@code billing_cycle_anchor}. Valid values are {@code create_prorations} or {@code
-   * none}.
-   *
-   * <p>Passing {@code create_prorations} will cause proration invoice items to be created when
-   * applicable. Prorations can be disabled by passing {@code none}. If no value is passed, the
-   * default is {@code create_prorations}.
+   * from the {@code billing_cycle_anchor}. If no value is passed, the default is {@code
+   * create_prorations}.
    */
   @SerializedName("proration_behavior")
   ProrationBehavior prorationBehavior;
@@ -498,7 +494,8 @@ public class SubscriptionCreateParams extends ApiRequestParams {
      * A future timestamp to anchor the subscription's <a
      * href="https://stripe.com/docs/subscriptions/billing-cycle">billing cycle</a>. This is used to
      * determine the date of the first full invoice, and, for plans with {@code month} or {@code
-     * year} intervals, the day of the month for subsequent invoices.
+     * year} intervals, the day of the month for subsequent invoices. The timestamp is in UTC
+     * format.
      */
     public Builder setBillingCycleAnchor(Long billingCycleAnchor) {
       this.billingCycleAnchor = billingCycleAnchor;
@@ -867,12 +864,8 @@ public class SubscriptionCreateParams extends ApiRequestParams {
     /**
      * Determines how to handle <a
      * href="https://stripe.com/docs/subscriptions/billing-cycle#prorations">prorations</a>
-     * resulting from the {@code billing_cycle_anchor}. Valid values are {@code create_prorations}
-     * or {@code none}.
-     *
-     * <p>Passing {@code create_prorations} will cause proration invoice items to be created when
-     * applicable. Prorations can be disabled by passing {@code none}. If no value is passed, the
-     * default is {@code create_prorations}.
+     * resulting from the {@code billing_cycle_anchor}. If no value is passed, the default is {@code
+     * create_prorations}.
      */
     public Builder setProrationBehavior(ProrationBehavior prorationBehavior) {
       this.prorationBehavior = prorationBehavior;
@@ -3404,7 +3397,7 @@ public class SubscriptionCreateParams extends ApiRequestParams {
           /**
            * The list of permissions to request. If this parameter is passed, the {@code
            * payment_method} permission must be included. Valid permissions include: {@code
-           * balances}, {@code payment_method}, and {@code transactions}.
+           * balances}, {@code ownership}, {@code payment_method}, and {@code transactions}.
            */
           @SerializedName("permissions")
           List<Permission> permissions;

@@ -40,8 +40,9 @@ public class SubscriptionUpdateParams extends ApiRequestParams {
 
   /**
    * Either {@code now} or {@code unchanged}. Setting the value to {@code now} resets the
-   * subscription's billing cycle anchor to the current time. For more information, see the billing
-   * cycle <a href="https://stripe.com/docs/billing/subscriptions/billing-cycle">documentation</a>.
+   * subscription's billing cycle anchor to the current time (in UTC). For more information, see the
+   * billing cycle <a
+   * href="https://stripe.com/docs/billing/subscriptions/billing-cycle">documentation</a>.
    */
   @SerializedName("billing_cycle_anchor")
   BillingCycleAnchor billingCycleAnchor;
@@ -217,16 +218,7 @@ public class SubscriptionUpdateParams extends ApiRequestParams {
    * Determines how to handle <a
    * href="https://stripe.com/docs/subscriptions/billing-cycle#prorations">prorations</a> when the
    * billing cycle changes (e.g., when switching plans, resetting {@code billing_cycle_anchor=now},
-   * or starting a trial), or if an item's {@code quantity} changes. Valid values are {@code
-   * create_prorations}, {@code none}, or {@code always_invoice}.
-   *
-   * <p>Passing {@code create_prorations} will cause proration invoice items to be created when
-   * applicable. These proration items will only be invoiced immediately under <a
-   * href="https://stripe.com/docs/subscriptions/upgrading-downgrading#immediate-payment">certain
-   * conditions</a>. In order to always invoice immediately for prorations, pass {@code
-   * always_invoice}.
-   *
-   * <p>Prorations can be disabled by passing {@code none}.
+   * or starting a trial), or if an item's {@code quantity} changes.
    */
   @SerializedName("proration_behavior")
   ProrationBehavior prorationBehavior;
@@ -477,8 +469,8 @@ public class SubscriptionUpdateParams extends ApiRequestParams {
 
     /**
      * Either {@code now} or {@code unchanged}. Setting the value to {@code now} resets the
-     * subscription's billing cycle anchor to the current time. For more information, see the
-     * billing cycle <a
+     * subscription's billing cycle anchor to the current time (in UTC). For more information, see
+     * the billing cycle <a
      * href="https://stripe.com/docs/billing/subscriptions/billing-cycle">documentation</a>.
      */
     public Builder setBillingCycleAnchor(BillingCycleAnchor billingCycleAnchor) {
@@ -921,15 +913,6 @@ public class SubscriptionUpdateParams extends ApiRequestParams {
      * href="https://stripe.com/docs/subscriptions/billing-cycle#prorations">prorations</a> when the
      * billing cycle changes (e.g., when switching plans, resetting {@code
      * billing_cycle_anchor=now}, or starting a trial), or if an item's {@code quantity} changes.
-     * Valid values are {@code create_prorations}, {@code none}, or {@code always_invoice}.
-     *
-     * <p>Passing {@code create_prorations} will cause proration invoice items to be created when
-     * applicable. These proration items will only be invoiced immediately under <a
-     * href="https://stripe.com/docs/subscriptions/upgrading-downgrading#immediate-payment">certain
-     * conditions</a>. In order to always invoice immediately for prorations, pass {@code
-     * always_invoice}.
-     *
-     * <p>Prorations can be disabled by passing {@code none}.
      */
     public Builder setProrationBehavior(ProrationBehavior prorationBehavior) {
       this.prorationBehavior = prorationBehavior;
@@ -3762,7 +3745,7 @@ public class SubscriptionUpdateParams extends ApiRequestParams {
           /**
            * The list of permissions to request. If this parameter is passed, the {@code
            * payment_method} permission must be included. Valid permissions include: {@code
-           * balances}, {@code payment_method}, and {@code transactions}.
+           * balances}, {@code ownership}, {@code payment_method}, and {@code transactions}.
            */
           @SerializedName("permissions")
           List<Permission> permissions;
