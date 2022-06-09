@@ -535,7 +535,7 @@ public class Customer extends ApiResource implements HasId, MetadataStore<Custom
     return ApiResource.requestCollection(url, params, PaymentMethodCollection.class, options);
   }
 
-  /** Retrieves a PaymentMethod object. */
+  /** Retrieves a PaymentMethod object for a given Customer. */
   public PaymentMethod retrievePaymentMethod(
       String customer, Map<String, Object> params, RequestOptions options) throws StripeException {
     String url =
@@ -549,7 +549,7 @@ public class Customer extends ApiResource implements HasId, MetadataStore<Custom
         ApiResource.RequestMethod.GET, url, params, PaymentMethod.class, options);
   }
 
-  /** Retrieves a PaymentMethod object. */
+  /** Retrieves a PaymentMethod object for a given Customer. */
   public PaymentMethod retrievePaymentMethod(
       String customer, CustomerRetrievePaymentMethodParams params, RequestOptions options)
       throws StripeException {

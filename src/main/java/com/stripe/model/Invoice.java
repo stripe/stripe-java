@@ -1750,12 +1750,30 @@ public class Invoice extends ApiResource implements HasId, MetadataStore<Invoice
       @Setter
       @EqualsAndHashCode(callSuper = false)
       public static class BankTransfer extends StripeObject {
+        @SerializedName("eu_bank_transfer")
+        EuBankTransfer euBankTransfer;
+
         /**
          * The bank transfer type that can be used for funding. Permitted values include: {@code
-         * jp_bank_transfer}.
+         * eu_bank_transfer}, {@code gb_bank_transfer}, {@code jp_bank_transfer}, or {@code
+         * mx_bank_transfer}.
          */
         @SerializedName("type")
         String type;
+
+        @Getter
+        @Setter
+        @EqualsAndHashCode(callSuper = false)
+        public static class EuBankTransfer extends StripeObject {
+          /**
+           * The desired country code of the bank account information. Permitted values include:
+           * {@code DE}, {@code ES}, {@code FR}, {@code IE}, or {@code NL}.
+           *
+           * <p>One of {@code DE}, {@code ES}, {@code FR}, {@code IE}, or {@code NL}.
+           */
+          @SerializedName("country")
+          String country;
+        }
       }
     }
 

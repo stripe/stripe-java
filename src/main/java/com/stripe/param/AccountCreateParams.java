@@ -7480,19 +7480,25 @@ public class AccountCreateParams extends ApiRequestParams {
     @SerializedName("payouts")
     Payouts payouts;
 
+    /** Settings specific to the account's Treasury FinancialAccounts. */
+    @SerializedName("treasury")
+    Treasury treasury;
+
     private Settings(
         Branding branding,
         CardIssuing cardIssuing,
         CardPayments cardPayments,
         Map<String, Object> extraParams,
         Payments payments,
-        Payouts payouts) {
+        Payouts payouts,
+        Treasury treasury) {
       this.branding = branding;
       this.cardIssuing = cardIssuing;
       this.cardPayments = cardPayments;
       this.extraParams = extraParams;
       this.payments = payments;
       this.payouts = payouts;
+      this.treasury = treasury;
     }
 
     public static Builder builder() {
@@ -7512,6 +7518,8 @@ public class AccountCreateParams extends ApiRequestParams {
 
       private Payouts payouts;
 
+      private Treasury treasury;
+
       /** Finalize and obtain parameter instance from this builder. */
       public Settings build() {
         return new Settings(
@@ -7520,7 +7528,8 @@ public class AccountCreateParams extends ApiRequestParams {
             this.cardPayments,
             this.extraParams,
             this.payments,
-            this.payouts);
+            this.payouts,
+            this.treasury);
       }
 
       /**
@@ -7579,6 +7588,12 @@ public class AccountCreateParams extends ApiRequestParams {
       /** Settings specific to the account's payouts. */
       public Builder setPayouts(Payouts payouts) {
         this.payouts = payouts;
+        return this;
+      }
+
+      /** Settings specific to the account's Treasury FinancialAccounts. */
+      public Builder setTreasury(Treasury treasury) {
+        this.treasury = treasury;
         return this;
       }
     }
@@ -8575,6 +8590,188 @@ public class AccountCreateParams extends ApiRequestParams {
 
           WeeklyAnchor(String value) {
             this.value = value;
+          }
+        }
+      }
+    }
+
+    @Getter
+    public static class Treasury {
+      /**
+       * Map of extra parameters for custom features not available in this client library. The
+       * content in this map is not serialized under this field's {@code @SerializedName} value.
+       * Instead, each key/value pair is serialized as if the key is a root-level field (serialized)
+       * name in this param object. Effectively, this map is flattened to its parent instance.
+       */
+      @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
+      Map<String, Object> extraParams;
+
+      /** Details on the account's acceptance of the Stripe Treasury Services Agreement. */
+      @SerializedName("tos_acceptance")
+      TosAcceptance tosAcceptance;
+
+      private Treasury(Map<String, Object> extraParams, TosAcceptance tosAcceptance) {
+        this.extraParams = extraParams;
+        this.tosAcceptance = tosAcceptance;
+      }
+
+      public static Builder builder() {
+        return new Builder();
+      }
+
+      public static class Builder {
+        private Map<String, Object> extraParams;
+
+        private TosAcceptance tosAcceptance;
+
+        /** Finalize and obtain parameter instance from this builder. */
+        public Treasury build() {
+          return new Treasury(this.extraParams, this.tosAcceptance);
+        }
+
+        /**
+         * Add a key/value pair to `extraParams` map. A map is initialized for the first
+         * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
+         * map. See {@link AccountCreateParams.Settings.Treasury#extraParams} for the field
+         * documentation.
+         */
+        public Builder putExtraParam(String key, Object value) {
+          if (this.extraParams == null) {
+            this.extraParams = new HashMap<>();
+          }
+          this.extraParams.put(key, value);
+          return this;
+        }
+
+        /**
+         * Add all map key/value pairs to `extraParams` map. A map is initialized for the first
+         * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
+         * map. See {@link AccountCreateParams.Settings.Treasury#extraParams} for the field
+         * documentation.
+         */
+        public Builder putAllExtraParam(Map<String, Object> map) {
+          if (this.extraParams == null) {
+            this.extraParams = new HashMap<>();
+          }
+          this.extraParams.putAll(map);
+          return this;
+        }
+
+        /** Details on the account's acceptance of the Stripe Treasury Services Agreement. */
+        public Builder setTosAcceptance(TosAcceptance tosAcceptance) {
+          this.tosAcceptance = tosAcceptance;
+          return this;
+        }
+      }
+
+      @Getter
+      public static class TosAcceptance {
+        /**
+         * The Unix timestamp marking when the account representative accepted the service
+         * agreement.
+         */
+        @SerializedName("date")
+        Long date;
+
+        /**
+         * Map of extra parameters for custom features not available in this client library. The
+         * content in this map is not serialized under this field's {@code @SerializedName} value.
+         * Instead, each key/value pair is serialized as if the key is a root-level field
+         * (serialized) name in this param object. Effectively, this map is flattened to its parent
+         * instance.
+         */
+        @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
+        Map<String, Object> extraParams;
+
+        /** The IP address from which the account representative accepted the service agreement. */
+        @SerializedName("ip")
+        String ip;
+
+        /**
+         * The user agent of the browser from which the account representative accepted the service
+         * agreement.
+         */
+        @SerializedName("user_agent")
+        String userAgent;
+
+        private TosAcceptance(
+            Long date, Map<String, Object> extraParams, String ip, String userAgent) {
+          this.date = date;
+          this.extraParams = extraParams;
+          this.ip = ip;
+          this.userAgent = userAgent;
+        }
+
+        public static Builder builder() {
+          return new Builder();
+        }
+
+        public static class Builder {
+          private Long date;
+
+          private Map<String, Object> extraParams;
+
+          private String ip;
+
+          private String userAgent;
+
+          /** Finalize and obtain parameter instance from this builder. */
+          public TosAcceptance build() {
+            return new TosAcceptance(this.date, this.extraParams, this.ip, this.userAgent);
+          }
+
+          /**
+           * The Unix timestamp marking when the account representative accepted the service
+           * agreement.
+           */
+          public Builder setDate(Long date) {
+            this.date = date;
+            return this;
+          }
+
+          /**
+           * Add a key/value pair to `extraParams` map. A map is initialized for the first
+           * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
+           * map. See {@link AccountCreateParams.Settings.Treasury.TosAcceptance#extraParams} for
+           * the field documentation.
+           */
+          public Builder putExtraParam(String key, Object value) {
+            if (this.extraParams == null) {
+              this.extraParams = new HashMap<>();
+            }
+            this.extraParams.put(key, value);
+            return this;
+          }
+
+          /**
+           * Add all map key/value pairs to `extraParams` map. A map is initialized for the first
+           * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
+           * map. See {@link AccountCreateParams.Settings.Treasury.TosAcceptance#extraParams} for
+           * the field documentation.
+           */
+          public Builder putAllExtraParam(Map<String, Object> map) {
+            if (this.extraParams == null) {
+              this.extraParams = new HashMap<>();
+            }
+            this.extraParams.putAll(map);
+            return this;
+          }
+
+          /**
+           * The IP address from which the account representative accepted the service agreement.
+           */
+          public Builder setIp(String ip) {
+            this.ip = ip;
+            return this;
+          }
+
+          /**
+           * The user agent of the browser from which the account representative accepted the
+           * service agreement.
+           */
+          public Builder setUserAgent(String userAgent) {
+            this.userAgent = userAgent;
+            return this;
           }
         }
       }

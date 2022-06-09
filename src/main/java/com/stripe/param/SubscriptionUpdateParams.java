@@ -3494,6 +3494,10 @@ public class SubscriptionUpdateParams extends ApiRequestParams {
 
         @Getter
         public static class BankTransfer {
+          /** Configuration for eu_bank_transfer funding type. */
+          @SerializedName("eu_bank_transfer")
+          EuBankTransfer euBankTransfer;
+
           /**
            * Map of extra parameters for custom features not available in this client library. The
            * content in this map is not serialized under this field's {@code @SerializedName} value.
@@ -3506,12 +3510,15 @@ public class SubscriptionUpdateParams extends ApiRequestParams {
 
           /**
            * The bank transfer type that can be used for funding. Permitted values include: {@code
-           * jp_bank_transfer}.
+           * eu_bank_transfer}, {@code gb_bank_transfer}, {@code jp_bank_transfer}, or {@code
+           * mx_bank_transfer}.
            */
           @SerializedName("type")
           Object type;
 
-          private BankTransfer(Map<String, Object> extraParams, Object type) {
+          private BankTransfer(
+              EuBankTransfer euBankTransfer, Map<String, Object> extraParams, Object type) {
+            this.euBankTransfer = euBankTransfer;
             this.extraParams = extraParams;
             this.type = type;
           }
@@ -3521,13 +3528,21 @@ public class SubscriptionUpdateParams extends ApiRequestParams {
           }
 
           public static class Builder {
+            private EuBankTransfer euBankTransfer;
+
             private Map<String, Object> extraParams;
 
             private Object type;
 
             /** Finalize and obtain parameter instance from this builder. */
             public BankTransfer build() {
-              return new BankTransfer(this.extraParams, this.type);
+              return new BankTransfer(this.euBankTransfer, this.extraParams, this.type);
+            }
+
+            /** Configuration for eu_bank_transfer funding type. */
+            public Builder setEuBankTransfer(EuBankTransfer euBankTransfer) {
+              this.euBankTransfer = euBankTransfer;
+              return this;
             }
 
             /**
@@ -3562,7 +3577,8 @@ public class SubscriptionUpdateParams extends ApiRequestParams {
 
             /**
              * The bank transfer type that can be used for funding. Permitted values include: {@code
-             * jp_bank_transfer}.
+             * eu_bank_transfer}, {@code gb_bank_transfer}, {@code jp_bank_transfer}, or {@code
+             * mx_bank_transfer}.
              */
             public Builder setType(String type) {
               this.type = type;
@@ -3571,11 +3587,100 @@ public class SubscriptionUpdateParams extends ApiRequestParams {
 
             /**
              * The bank transfer type that can be used for funding. Permitted values include: {@code
-             * jp_bank_transfer}.
+             * eu_bank_transfer}, {@code gb_bank_transfer}, {@code jp_bank_transfer}, or {@code
+             * mx_bank_transfer}.
              */
             public Builder setType(EmptyParam type) {
               this.type = type;
               return this;
+            }
+          }
+
+          @Getter
+          public static class EuBankTransfer {
+            /**
+             * The desired country code of the bank account information. Permitted values include:
+             * {@code DE}, {@code ES}, {@code FR}, {@code IE}, or {@code NL}.
+             */
+            @SerializedName("country")
+            Object country;
+
+            /**
+             * Map of extra parameters for custom features not available in this client library. The
+             * content in this map is not serialized under this field's {@code @SerializedName}
+             * value. Instead, each key/value pair is serialized as if the key is a root-level field
+             * (serialized) name in this param object. Effectively, this map is flattened to its
+             * parent instance.
+             */
+            @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
+            Map<String, Object> extraParams;
+
+            private EuBankTransfer(Object country, Map<String, Object> extraParams) {
+              this.country = country;
+              this.extraParams = extraParams;
+            }
+
+            public static Builder builder() {
+              return new Builder();
+            }
+
+            public static class Builder {
+              private Object country;
+
+              private Map<String, Object> extraParams;
+
+              /** Finalize and obtain parameter instance from this builder. */
+              public EuBankTransfer build() {
+                return new EuBankTransfer(this.country, this.extraParams);
+              }
+
+              /**
+               * The desired country code of the bank account information. Permitted values include:
+               * {@code DE}, {@code ES}, {@code FR}, {@code IE}, or {@code NL}.
+               */
+              public Builder setCountry(String country) {
+                this.country = country;
+                return this;
+              }
+
+              /**
+               * The desired country code of the bank account information. Permitted values include:
+               * {@code DE}, {@code ES}, {@code FR}, {@code IE}, or {@code NL}.
+               */
+              public Builder setCountry(EmptyParam country) {
+                this.country = country;
+                return this;
+              }
+
+              /**
+               * Add a key/value pair to `extraParams` map. A map is initialized for the first
+               * `put/putAll` call, and subsequent calls add additional key/value pairs to the
+               * original map. See {@link
+               * SubscriptionUpdateParams.PaymentSettings.PaymentMethodOptions.CustomerBalance.BankTransfer.EuBankTransfer#extraParams}
+               * for the field documentation.
+               */
+              public Builder putExtraParam(String key, Object value) {
+                if (this.extraParams == null) {
+                  this.extraParams = new HashMap<>();
+                }
+                this.extraParams.put(key, value);
+                return this;
+              }
+
+              /**
+               * Add all map key/value pairs to `extraParams` map. A map is initialized for the
+               * first `put/putAll` call, and subsequent calls add additional key/value pairs to the
+               * original map. See {@link
+               * SubscriptionUpdateParams.PaymentSettings.PaymentMethodOptions.CustomerBalance.BankTransfer.EuBankTransfer#extraParams}
+               * for the field documentation.
+               */
+              public Builder putAllExtraParam(Map<String, Object> map) {
+                if (this.extraParams == null) {
+                  this.extraParams = new HashMap<>();
+                }
+                this.extraParams.putAll(map);
+                return this;
+              }
             }
           }
         }
