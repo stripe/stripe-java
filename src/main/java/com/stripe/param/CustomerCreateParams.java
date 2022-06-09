@@ -909,15 +909,21 @@ public class CustomerCreateParams extends ApiRequestParams {
     @SerializedName("footer")
     String footer;
 
+    /** Default options for invoice PDF rendering for this customer. */
+    @SerializedName("rendering_options")
+    RenderingOptions renderingOptions;
+
     private InvoiceSettings(
         Object customFields,
         String defaultPaymentMethod,
         Map<String, Object> extraParams,
-        String footer) {
+        String footer,
+        RenderingOptions renderingOptions) {
       this.customFields = customFields;
       this.defaultPaymentMethod = defaultPaymentMethod;
       this.extraParams = extraParams;
       this.footer = footer;
+      this.renderingOptions = renderingOptions;
     }
 
     public static Builder builder() {
@@ -933,10 +939,16 @@ public class CustomerCreateParams extends ApiRequestParams {
 
       private String footer;
 
+      private RenderingOptions renderingOptions;
+
       /** Finalize and obtain parameter instance from this builder. */
       public InvoiceSettings build() {
         return new InvoiceSettings(
-            this.customFields, this.defaultPaymentMethod, this.extraParams, this.footer);
+            this.customFields,
+            this.defaultPaymentMethod,
+            this.extraParams,
+            this.footer,
+            this.renderingOptions);
       }
 
       /**
@@ -1026,6 +1038,12 @@ public class CustomerCreateParams extends ApiRequestParams {
         this.footer = footer;
         return this;
       }
+
+      /** Default options for invoice PDF rendering for this customer. */
+      public Builder setRenderingOptions(RenderingOptions renderingOptions) {
+        this.renderingOptions = renderingOptions;
+        return this;
+      }
     }
 
     @Getter
@@ -1107,6 +1125,101 @@ public class CustomerCreateParams extends ApiRequestParams {
         public Builder setValue(String value) {
           this.value = value;
           return this;
+        }
+      }
+    }
+
+    @Getter
+    public static class RenderingOptions {
+      /** How line-item prices and amounts will be displayed with respect to tax on invoice PDFs. */
+      @SerializedName("amount_tax_display")
+      EnumParam amountTaxDisplay;
+
+      /**
+       * Map of extra parameters for custom features not available in this client library. The
+       * content in this map is not serialized under this field's {@code @SerializedName} value.
+       * Instead, each key/value pair is serialized as if the key is a root-level field (serialized)
+       * name in this param object. Effectively, this map is flattened to its parent instance.
+       */
+      @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
+      Map<String, Object> extraParams;
+
+      private RenderingOptions(EnumParam amountTaxDisplay, Map<String, Object> extraParams) {
+        this.amountTaxDisplay = amountTaxDisplay;
+        this.extraParams = extraParams;
+      }
+
+      public static Builder builder() {
+        return new Builder();
+      }
+
+      public static class Builder {
+        private EnumParam amountTaxDisplay;
+
+        private Map<String, Object> extraParams;
+
+        /** Finalize and obtain parameter instance from this builder. */
+        public RenderingOptions build() {
+          return new RenderingOptions(this.amountTaxDisplay, this.extraParams);
+        }
+
+        /**
+         * How line-item prices and amounts will be displayed with respect to tax on invoice PDFs.
+         */
+        public Builder setAmountTaxDisplay(AmountTaxDisplay amountTaxDisplay) {
+          this.amountTaxDisplay = amountTaxDisplay;
+          return this;
+        }
+
+        /**
+         * How line-item prices and amounts will be displayed with respect to tax on invoice PDFs.
+         */
+        public Builder setAmountTaxDisplay(EmptyParam amountTaxDisplay) {
+          this.amountTaxDisplay = amountTaxDisplay;
+          return this;
+        }
+
+        /**
+         * Add a key/value pair to `extraParams` map. A map is initialized for the first
+         * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
+         * map. See {@link CustomerCreateParams.InvoiceSettings.RenderingOptions#extraParams} for
+         * the field documentation.
+         */
+        public Builder putExtraParam(String key, Object value) {
+          if (this.extraParams == null) {
+            this.extraParams = new HashMap<>();
+          }
+          this.extraParams.put(key, value);
+          return this;
+        }
+
+        /**
+         * Add all map key/value pairs to `extraParams` map. A map is initialized for the first
+         * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
+         * map. See {@link CustomerCreateParams.InvoiceSettings.RenderingOptions#extraParams} for
+         * the field documentation.
+         */
+        public Builder putAllExtraParam(Map<String, Object> map) {
+          if (this.extraParams == null) {
+            this.extraParams = new HashMap<>();
+          }
+          this.extraParams.putAll(map);
+          return this;
+        }
+      }
+
+      public enum AmountTaxDisplay implements ApiRequestParams.EnumParam {
+        @SerializedName("exclude_tax")
+        EXCLUDE_TAX("exclude_tax"),
+
+        @SerializedName("include_inclusive_tax")
+        INCLUDE_INCLUSIVE_TAX("include_inclusive_tax");
+
+        @Getter(onMethod_ = {@Override})
+        private final String value;
+
+        AmountTaxDisplay(String value) {
+          this.value = value;
         }
       }
     }

@@ -253,18 +253,33 @@ public class PaymentMethod extends ApiResource implements HasId, MetadataStore<P
         ApiResource.RequestMethod.POST, url, params, PaymentMethod.class, options);
   }
 
-  /** Retrieves a PaymentMethod object. */
+  /**
+   * Retrieves a PaymentMethod object attached to the StripeAccount. To retrieve a payment method
+   * attached to a Customer, you should use <a
+   * href="https://stripe.com/docs/api/payment_methods/customer">Retrieve a Customer’s
+   * PaymentMethods</a>
+   */
   public static PaymentMethod retrieve(String paymentMethod) throws StripeException {
     return retrieve(paymentMethod, (Map<String, Object>) null, (RequestOptions) null);
   }
 
-  /** Retrieves a PaymentMethod object. */
+  /**
+   * Retrieves a PaymentMethod object attached to the StripeAccount. To retrieve a payment method
+   * attached to a Customer, you should use <a
+   * href="https://stripe.com/docs/api/payment_methods/customer">Retrieve a Customer’s
+   * PaymentMethods</a>
+   */
   public static PaymentMethod retrieve(String paymentMethod, RequestOptions options)
       throws StripeException {
     return retrieve(paymentMethod, (Map<String, Object>) null, options);
   }
 
-  /** Retrieves a PaymentMethod object. */
+  /**
+   * Retrieves a PaymentMethod object attached to the StripeAccount. To retrieve a payment method
+   * attached to a Customer, you should use <a
+   * href="https://stripe.com/docs/api/payment_methods/customer">Retrieve a Customer’s
+   * PaymentMethods</a>
+   */
   public static PaymentMethod retrieve(
       String paymentMethod, Map<String, Object> params, RequestOptions options)
       throws StripeException {
@@ -277,7 +292,12 @@ public class PaymentMethod extends ApiResource implements HasId, MetadataStore<P
         ApiResource.RequestMethod.GET, url, params, PaymentMethod.class, options);
   }
 
-  /** Retrieves a PaymentMethod object. */
+  /**
+   * Retrieves a PaymentMethod object attached to the StripeAccount. To retrieve a payment method
+   * attached to a Customer, you should use <a
+   * href="https://stripe.com/docs/api/payment_methods/customer">Retrieve a Customer’s
+   * PaymentMethods</a>
+   */
   public static PaymentMethod retrieve(
       String paymentMethod, PaymentMethodRetrieveParams params, RequestOptions options)
       throws StripeException {
@@ -327,7 +347,8 @@ public class PaymentMethod extends ApiResource implements HasId, MetadataStore<P
   }
 
   /**
-   * Returns a list of PaymentMethods. For listing a customer’s payment methods, you should use <a
+   * Returns a list of PaymentMethods attached to the StripeAccount. For listing a customer’s
+   * payment methods, you should use <a
    * href="https://stripe.com/docs/api/payment_methods/customer_list">List a Customer’s
    * PaymentMethods</a>
    */
@@ -336,7 +357,8 @@ public class PaymentMethod extends ApiResource implements HasId, MetadataStore<P
   }
 
   /**
-   * Returns a list of PaymentMethods. For listing a customer’s payment methods, you should use <a
+   * Returns a list of PaymentMethods attached to the StripeAccount. For listing a customer’s
+   * payment methods, you should use <a
    * href="https://stripe.com/docs/api/payment_methods/customer_list">List a Customer’s
    * PaymentMethods</a>
    */
@@ -347,7 +369,8 @@ public class PaymentMethod extends ApiResource implements HasId, MetadataStore<P
   }
 
   /**
-   * Returns a list of PaymentMethods. For listing a customer’s payment methods, you should use <a
+   * Returns a list of PaymentMethods attached to the StripeAccount. For listing a customer’s
+   * payment methods, you should use <a
    * href="https://stripe.com/docs/api/payment_methods/customer_list">List a Customer’s
    * PaymentMethods</a>
    */
@@ -357,7 +380,8 @@ public class PaymentMethod extends ApiResource implements HasId, MetadataStore<P
   }
 
   /**
-   * Returns a list of PaymentMethods. For listing a customer’s payment methods, you should use <a
+   * Returns a list of PaymentMethods attached to the StripeAccount. For listing a customer’s
+   * payment methods, you should use <a
    * href="https://stripe.com/docs/api/payment_methods/customer_list">List a Customer’s
    * PaymentMethods</a>
    */

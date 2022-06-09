@@ -1480,6 +1480,9 @@ public class Account extends ApiResource implements MetadataStore<Account>, Paym
     @SerializedName("sepa_debit_payments")
     SepaDebitPayments sepaDebitPayments;
 
+    @SerializedName("treasury")
+    SettingsTreasury treasury;
+
     @Getter
     @Setter
     @EqualsAndHashCode(callSuper = false)
@@ -1505,6 +1508,37 @@ public class Account extends ApiResource implements MetadataStore<Account>, Paym
     @Setter
     @EqualsAndHashCode(callSuper = false)
     public static class SettingsCardIssuing extends StripeObject {
+      @SerializedName("tos_acceptance")
+      TosAcceptance tosAcceptance;
+
+      @Getter
+      @Setter
+      @EqualsAndHashCode(callSuper = false)
+      public static class TosAcceptance extends StripeObject {
+        /**
+         * The Unix timestamp marking when the account representative accepted the service
+         * agreement.
+         */
+        @SerializedName("date")
+        Long date;
+
+        /** The IP address from which the account representative accepted the service agreement. */
+        @SerializedName("ip")
+        String ip;
+
+        /**
+         * The user agent of the browser from which the account representative accepted the service
+         * agreement.
+         */
+        @SerializedName("user_agent")
+        String userAgent;
+      }
+    }
+
+    @Getter
+    @Setter
+    @EqualsAndHashCode(callSuper = false)
+    public static class SettingsTreasury extends StripeObject {
       @SerializedName("tos_acceptance")
       TosAcceptance tosAcceptance;
 

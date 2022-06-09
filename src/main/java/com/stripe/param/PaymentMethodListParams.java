@@ -11,10 +11,7 @@ import lombok.Getter;
 
 @Getter
 public class PaymentMethodListParams extends ApiRequestParams {
-  /**
-   * The ID of the customer whose PaymentMethods will be retrieved. If not provided, the response
-   * list will be empty.
-   */
+  /** The ID of the customer whose PaymentMethods will be retrieved. */
   @SerializedName("customer")
   String customer;
 
@@ -108,10 +105,7 @@ public class PaymentMethodListParams extends ApiRequestParams {
           this.type);
     }
 
-    /**
-     * The ID of the customer whose PaymentMethods will be retrieved. If not provided, the response
-     * list will be empty.
-     */
+    /** The ID of the customer whose PaymentMethods will be retrieved. */
     public Builder setCustomer(String customer) {
       this.customer = customer;
       return this;

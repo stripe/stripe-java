@@ -1711,7 +1711,8 @@ public class PaymentIntent extends ApiResource implements HasId, MetadataStore<P
     /**
      * Type of bank transfer
      *
-     * <p>Equal to {@code jp_bank_transfer}.
+     * <p>One of {@code eu_bank_transfer}, {@code gb_bank_transfer}, {@code jp_bank_transfer}, or
+     * {@code mx_bank_transfer}.
      */
     @SerializedName("type")
     String type;
@@ -1720,6 +1721,18 @@ public class PaymentIntent extends ApiResource implements HasId, MetadataStore<P
     @Setter
     @EqualsAndHashCode(callSuper = false)
     public static class FinancialAddresses extends StripeObject {
+      /** Iban Records contain E.U. bank account details per the SEPA format. */
+      @SerializedName("iban")
+      Iban iban;
+
+      /** Sort Code Records contain U.K. bank account details per the sort code format. */
+      @SerializedName("sort_code")
+      SortCode sortCode;
+
+      /** SPEI Records contain Mexico bank account details per the SPEI format. */
+      @SerializedName("spei")
+      Spei spei;
+
       /** The payment networks supported by this FinancialAddress. */
       @SerializedName("supported_networks")
       List<String> supportedNetworks;
@@ -1727,7 +1740,7 @@ public class PaymentIntent extends ApiResource implements HasId, MetadataStore<P
       /**
        * The type of financial address
        *
-       * <p>One of {@code iban}, or {@code zengin}.
+       * <p>One of {@code iban}, {@code sort_code}, {@code spei}, or {@code zengin}.
        */
       @SerializedName("type")
       String type;
@@ -1735,6 +1748,64 @@ public class PaymentIntent extends ApiResource implements HasId, MetadataStore<P
       /** Zengin Records contain Japan bank account details per the Zengin format. */
       @SerializedName("zengin")
       Zengin zengin;
+
+      @Getter
+      @Setter
+      @EqualsAndHashCode(callSuper = false)
+      public static class Iban extends StripeObject {
+        /** The name of the person or business that owns the bank account. */
+        @SerializedName("account_holder_name")
+        String accountHolderName;
+
+        /** The BIC/SWIFT code of the account. */
+        @SerializedName("bic")
+        String bic;
+
+        /**
+         * Two-letter country code (<a href="https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2">ISO
+         * 3166-1 alpha-2</a>).
+         */
+        @SerializedName("country")
+        String country;
+
+        /** The IBAN of the account. */
+        @SerializedName("iban")
+        String iban;
+      }
+
+      @Getter
+      @Setter
+      @EqualsAndHashCode(callSuper = false)
+      public static class SortCode extends StripeObject {
+        /** The name of the person or business that owns the bank account. */
+        @SerializedName("account_holder_name")
+        String accountHolderName;
+
+        /** The account number. */
+        @SerializedName("account_number")
+        String accountNumber;
+
+        /** The six-digit sort code. */
+        @SerializedName("sort_code")
+        String sortCode;
+      }
+
+      @Getter
+      @Setter
+      @EqualsAndHashCode(callSuper = false)
+      public static class Spei extends StripeObject {
+        /** The three-digit bank code. */
+        @SerializedName("bank_code")
+        String bankCode;
+
+        /** The short banking institution name. */
+        @SerializedName("bank_name")
+        String bankName;
+
+        /** The CLABE number. */
+        @SerializedName("clabe")
+        String clabe;
+      }
 
       @Getter
       @Setter
@@ -2262,23 +2333,43 @@ public class PaymentIntent extends ApiResource implements HasId, MetadataStore<P
     @Setter
     @EqualsAndHashCode(callSuper = false)
     public static class BankTransfer extends StripeObject {
+      @SerializedName("eu_bank_transfer")
+      EuBankTransfer euBankTransfer;
+
       /**
        * List of address types that should be returned in the financial_addresses response. If not
        * specified, all valid types will be returned.
        *
-       * <p>Permitted values include: {@code zengin}.
+       * <p>Permitted values include: {@code sort_code}, {@code zengin}, {@code iban}, or {@code
+       * spei}.
        */
       @SerializedName("requested_address_types")
       List<String> requestedAddressTypes;
 
       /**
        * The bank transfer type that this PaymentIntent is allowed to use for funding Permitted
-       * values include: {@code jp_bank_transfer}.
+       * values include: {@code eu_bank_transfer}, {@code gb_bank_transfer}, {@code
+       * jp_bank_transfer}, or {@code mx_bank_transfer}.
        *
-       * <p>Equal to {@code jp_bank_transfer}.
+       * <p>One of {@code eu_bank_transfer}, {@code gb_bank_transfer}, {@code jp_bank_transfer}, or
+       * {@code mx_bank_transfer}.
        */
       @SerializedName("type")
       String type;
+
+      @Getter
+      @Setter
+      @EqualsAndHashCode(callSuper = false)
+      public static class EuBankTransfer extends StripeObject {
+        /**
+         * The desired country code of the bank account information. Permitted values include:
+         * {@code DE}, {@code ES}, {@code FR}, {@code IE}, or {@code NL}.
+         *
+         * <p>One of {@code DE}, {@code ES}, {@code FR}, {@code IE}, or {@code NL}.
+         */
+        @SerializedName("country")
+        String country;
+      }
     }
 
     @Getter

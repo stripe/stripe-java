@@ -68,6 +68,18 @@ public class FundingInstructions extends StripeObject {
     @Setter
     @EqualsAndHashCode(callSuper = false)
     public static class FinancialAddresses extends StripeObject {
+      /** Iban Records contain E.U. bank account details per the SEPA format. */
+      @SerializedName("iban")
+      Iban iban;
+
+      /** Sort Code Records contain U.K. bank account details per the sort code format. */
+      @SerializedName("sort_code")
+      SortCode sortCode;
+
+      /** SPEI Records contain Mexico bank account details per the SPEI format. */
+      @SerializedName("spei")
+      Spei spei;
+
       /** The payment networks supported by this FinancialAddress. */
       @SerializedName("supported_networks")
       List<String> supportedNetworks;
@@ -75,7 +87,7 @@ public class FundingInstructions extends StripeObject {
       /**
        * The type of financial address
        *
-       * <p>One of {@code iban}, or {@code zengin}.
+       * <p>One of {@code iban}, {@code sort_code}, {@code spei}, or {@code zengin}.
        */
       @SerializedName("type")
       String type;
@@ -83,6 +95,64 @@ public class FundingInstructions extends StripeObject {
       /** Zengin Records contain Japan bank account details per the Zengin format. */
       @SerializedName("zengin")
       Zengin zengin;
+
+      @Getter
+      @Setter
+      @EqualsAndHashCode(callSuper = false)
+      public static class Iban extends StripeObject {
+        /** The name of the person or business that owns the bank account. */
+        @SerializedName("account_holder_name")
+        String accountHolderName;
+
+        /** The BIC/SWIFT code of the account. */
+        @SerializedName("bic")
+        String bic;
+
+        /**
+         * Two-letter country code (<a href="https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2">ISO
+         * 3166-1 alpha-2</a>).
+         */
+        @SerializedName("country")
+        String country;
+
+        /** The IBAN of the account. */
+        @SerializedName("iban")
+        String iban;
+      }
+
+      @Getter
+      @Setter
+      @EqualsAndHashCode(callSuper = false)
+      public static class SortCode extends StripeObject {
+        /** The name of the person or business that owns the bank account. */
+        @SerializedName("account_holder_name")
+        String accountHolderName;
+
+        /** The account number. */
+        @SerializedName("account_number")
+        String accountNumber;
+
+        /** The six-digit sort code. */
+        @SerializedName("sort_code")
+        String sortCode;
+      }
+
+      @Getter
+      @Setter
+      @EqualsAndHashCode(callSuper = false)
+      public static class Spei extends StripeObject {
+        /** The three-digit bank code. */
+        @SerializedName("bank_code")
+        String bankCode;
+
+        /** The short banking institution name. */
+        @SerializedName("bank_name")
+        String bankName;
+
+        /** The CLABE number. */
+        @SerializedName("clabe")
+        String clabe;
+      }
 
       @Getter
       @Setter
