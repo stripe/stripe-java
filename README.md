@@ -167,6 +167,38 @@ you modify the JVM's [networkaddress.cache.ttl
 property](https://docs.oracle.com/en/java/javase/11/docs/api/java.base/java/net/doc-files/net-properties.html)
 to `60` seconds.
 
+### How to use Unsupported Types
+
+Stripe Java is a typed library and we support all public properties or parameters.
+
+We do have `beta` and private properties that require different approaches to access with this library.
+
+#### Parameters
+
+To pass unsupported parameters to Stripe using a typed library like `stripe-java` you need to use the `putExtraParam` method, as shown below:
+
+```java
+ChargeCreateParams params =
+  ChargeCreateParams.builder()
+    .setAmount(1000L)
+    .setCurrency("usd")
+    .setSource("tok_visa")
+    .putExtraParam("radar_options[session]", "<radar_session_id>")
+    .build();
+
+Charge charge = charge.Create(params);
+```
+
+#### Properties
+
+To retrieve unsupported properties from Stripe using Java you can use an option in the `stripe-java` library to return the raw JSON object and return the parameter as a native type. An example of this is shown below:
+
+```java
+final Subscription subscription = Subscription.retrieve("sub_1234");
+String id = subscription.getRawJsonObject().getAsJsonPrimitive("id").getAsString()
+Long created = subscription.getRawJsonObject().getAsJsonPrimitive("created").getAsLong()
+```
+
 ### Writing a plugin
 
 If you're writing a plugin that uses the library, we'd appreciate it if you
