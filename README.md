@@ -70,19 +70,23 @@ import com.stripe.Stripe;
 import com.stripe.exception.StripeException;
 import com.stripe.model.Customer;
 import com.stripe.net.RequestOptions;
+import com.stripe.param.CustomerCreateParams;
 
 public class StripeExample {
 
     public static void main(String[] args) {
         Stripe.apiKey = "sk_test_...";
-
-        Map<String, Object> customerMap = new HashMap<String, Object>();
-        customerMap.put("description", "Example description");
-        customerMap.put("email", "test@example.com");
-        customerMap.put("payment_method", "pm_card_visa"); // obtained via Stripe.js
+        
+        CustomerCreateParams params =
+            CustomerCreateParams
+                .builder()
+                .setDescription("Example description")
+                .setEmail("test@example.com")
+                .setPaymentMethod("pm_card_visa")  // obtained via Stripe.js
+                .build();
 
         try {
-            Customer customer = Customer.create(customerMap);
+            Customer customer = Customer.create(params);
             System.out.println(customer);
         } catch (StripeException e) {
             e.printStackTrace();
