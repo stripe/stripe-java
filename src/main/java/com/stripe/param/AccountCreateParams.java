@@ -7944,11 +7944,37 @@ public class AccountCreateParams extends ApiRequestParams {
       @SerializedName("statement_descriptor_prefix")
       String statementDescriptorPrefix;
 
+      /**
+       * The Kana variation of the default text that appears on credit card statements when a charge
+       * is made (Japan only). This field prefixes any dynamic {@code
+       * statement_descriptor_suffix_kana} specified on the charge. {@code
+       * statement_descriptor_prefix_kana} is useful for maximizing descriptor space for the dynamic
+       * portion.
+       */
+      @SerializedName("statement_descriptor_prefix_kana")
+      Object statementDescriptorPrefixKana;
+
+      /**
+       * The Kanji variation of the default text that appears on credit card statements when a
+       * charge is made (Japan only). This field prefixes any dynamic {@code
+       * statement_descriptor_suffix_kanji} specified on the charge. {@code
+       * statement_descriptor_prefix_kanji} is useful for maximizing descriptor space for the
+       * dynamic portion.
+       */
+      @SerializedName("statement_descriptor_prefix_kanji")
+      Object statementDescriptorPrefixKanji;
+
       private CardPayments(
-          DeclineOn declineOn, Map<String, Object> extraParams, String statementDescriptorPrefix) {
+          DeclineOn declineOn,
+          Map<String, Object> extraParams,
+          String statementDescriptorPrefix,
+          Object statementDescriptorPrefixKana,
+          Object statementDescriptorPrefixKanji) {
         this.declineOn = declineOn;
         this.extraParams = extraParams;
         this.statementDescriptorPrefix = statementDescriptorPrefix;
+        this.statementDescriptorPrefixKana = statementDescriptorPrefixKana;
+        this.statementDescriptorPrefixKanji = statementDescriptorPrefixKanji;
       }
 
       public static Builder builder() {
@@ -7962,9 +7988,18 @@ public class AccountCreateParams extends ApiRequestParams {
 
         private String statementDescriptorPrefix;
 
+        private Object statementDescriptorPrefixKana;
+
+        private Object statementDescriptorPrefixKanji;
+
         /** Finalize and obtain parameter instance from this builder. */
         public CardPayments build() {
-          return new CardPayments(this.declineOn, this.extraParams, this.statementDescriptorPrefix);
+          return new CardPayments(
+              this.declineOn,
+              this.extraParams,
+              this.statementDescriptorPrefix,
+              this.statementDescriptorPrefixKana,
+              this.statementDescriptorPrefixKanji);
         }
 
         /**
@@ -8012,6 +8047,55 @@ public class AccountCreateParams extends ApiRequestParams {
          */
         public Builder setStatementDescriptorPrefix(String statementDescriptorPrefix) {
           this.statementDescriptorPrefix = statementDescriptorPrefix;
+          return this;
+        }
+
+        /**
+         * The Kana variation of the default text that appears on credit card statements when a
+         * charge is made (Japan only). This field prefixes any dynamic {@code
+         * statement_descriptor_suffix_kana} specified on the charge. {@code
+         * statement_descriptor_prefix_kana} is useful for maximizing descriptor space for the
+         * dynamic portion.
+         */
+        public Builder setStatementDescriptorPrefixKana(String statementDescriptorPrefixKana) {
+          this.statementDescriptorPrefixKana = statementDescriptorPrefixKana;
+          return this;
+        }
+
+        /**
+         * The Kana variation of the default text that appears on credit card statements when a
+         * charge is made (Japan only). This field prefixes any dynamic {@code
+         * statement_descriptor_suffix_kana} specified on the charge. {@code
+         * statement_descriptor_prefix_kana} is useful for maximizing descriptor space for the
+         * dynamic portion.
+         */
+        public Builder setStatementDescriptorPrefixKana(EmptyParam statementDescriptorPrefixKana) {
+          this.statementDescriptorPrefixKana = statementDescriptorPrefixKana;
+          return this;
+        }
+
+        /**
+         * The Kanji variation of the default text that appears on credit card statements when a
+         * charge is made (Japan only). This field prefixes any dynamic {@code
+         * statement_descriptor_suffix_kanji} specified on the charge. {@code
+         * statement_descriptor_prefix_kanji} is useful for maximizing descriptor space for the
+         * dynamic portion.
+         */
+        public Builder setStatementDescriptorPrefixKanji(String statementDescriptorPrefixKanji) {
+          this.statementDescriptorPrefixKanji = statementDescriptorPrefixKanji;
+          return this;
+        }
+
+        /**
+         * The Kanji variation of the default text that appears on credit card statements when a
+         * charge is made (Japan only). This field prefixes any dynamic {@code
+         * statement_descriptor_suffix_kanji} specified on the charge. {@code
+         * statement_descriptor_prefix_kanji} is useful for maximizing descriptor space for the
+         * dynamic portion.
+         */
+        public Builder setStatementDescriptorPrefixKanji(
+            EmptyParam statementDescriptorPrefixKanji) {
+          this.statementDescriptorPrefixKanji = statementDescriptorPrefixKanji;
           return this;
         }
       }

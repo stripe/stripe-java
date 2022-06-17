@@ -1650,6 +1650,26 @@ public class Account extends ApiResource implements MetadataStore<Account>, Paym
      */
     @SerializedName("statement_descriptor_prefix")
     String statementDescriptorPrefix;
+
+    /**
+     * The Kana variation of the default text that appears on credit card statements when a charge
+     * is made (Japan only). This field prefixes any dynamic {@code
+     * statement_descriptor_suffix_kana} specified on the charge. {@code
+     * statement_descriptor_prefix_kana} is useful for maximizing descriptor space for the dynamic
+     * portion.
+     */
+    @SerializedName("statement_descriptor_prefix_kana")
+    String statementDescriptorPrefixKana;
+
+    /**
+     * The Kanji variation of the default text that appears on credit card statements when a charge
+     * is made (Japan only). This field prefixes any dynamic {@code
+     * statement_descriptor_suffix_kanji} specified on the charge. {@code
+     * statement_descriptor_prefix_kanji} is useful for maximizing descriptor space for the dynamic
+     * portion.
+     */
+    @SerializedName("statement_descriptor_prefix_kanji")
+    String statementDescriptorPrefixKanji;
   }
 
   @Getter
@@ -1696,6 +1716,26 @@ public class Account extends ApiResource implements MetadataStore<Account>, Paym
      */
     @SerializedName("statement_descriptor_kanji")
     String statementDescriptorKanji;
+
+    /**
+     * The Kana variation of the default text that appears on credit card statements when a charge
+     * is made (Japan only). This field prefixes any dynamic {@code
+     * statement_descriptor_suffix_kana} specified on the charge. {@code
+     * statement_descriptor_prefix_kana} is useful for maximizing descriptor space for the dynamic
+     * portion.
+     */
+    @SerializedName("statement_descriptor_prefix_kana")
+    String statementDescriptorPrefixKana;
+
+    /**
+     * The Kanji variation of the default text that appears on credit card statements when a charge
+     * is made (Japan only). This field prefixes any dynamic {@code
+     * statement_descriptor_suffix_kanji} specified on the charge. {@code
+     * statement_descriptor_prefix_kanji} is useful for maximizing descriptor space for the dynamic
+     * portion.
+     */
+    @SerializedName("statement_descriptor_prefix_kanji")
+    String statementDescriptorPrefixKanji;
   }
 
   @Getter

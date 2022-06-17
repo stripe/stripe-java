@@ -37,8 +37,9 @@ public class DebitReversal extends ApiResource implements HasId {
   String financialAccount;
 
   /**
-   * A hosted transaction receipt URL that is provided when money movement is considered regulated
-   * under Stripe's money transmission licenses.
+   * A <a href="https://stripe.com/docs/treasury/moving-money/regulatory-receipts">hosted
+   * transaction receipt</a> URL that is provided when money movement is considered regulated under
+   * Stripe's money transmission licenses.
    */
   @SerializedName("hosted_regulatory_receipt_url")
   String hostedRegulatoryReceiptUrl;

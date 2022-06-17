@@ -724,6 +724,10 @@ public class Customer extends ApiResource implements HasId, MetadataStore<Custom
     @SerializedName("footer")
     String footer;
 
+    /** Default options for invoice PDF rendering for this customer. */
+    @SerializedName("rendering_options")
+    Invoice.RenderingOptions renderingOptions;
+
     /** Get ID of expandable {@code defaultPaymentMethod} object. */
     public String getDefaultPaymentMethod() {
       return (this.defaultPaymentMethod != null) ? this.defaultPaymentMethod.getId() : null;

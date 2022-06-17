@@ -1038,14 +1038,14 @@ public class CustomerUpdateParams extends ApiRequestParams {
 
     /** Default options for invoice PDF rendering for this customer. */
     @SerializedName("rendering_options")
-    RenderingOptions renderingOptions;
+    Object renderingOptions;
 
     private InvoiceSettings(
         Object customFields,
         Object defaultPaymentMethod,
         Map<String, Object> extraParams,
         Object footer,
-        RenderingOptions renderingOptions) {
+        Object renderingOptions) {
       this.customFields = customFields;
       this.defaultPaymentMethod = defaultPaymentMethod;
       this.extraParams = extraParams;
@@ -1066,7 +1066,7 @@ public class CustomerUpdateParams extends ApiRequestParams {
 
       private Object footer;
 
-      private RenderingOptions renderingOptions;
+      private Object renderingOptions;
 
       /** Finalize and obtain parameter instance from this builder. */
       public InvoiceSettings build() {
@@ -1186,6 +1186,12 @@ public class CustomerUpdateParams extends ApiRequestParams {
         this.renderingOptions = renderingOptions;
         return this;
       }
+
+      /** Default options for invoice PDF rendering for this customer. */
+      public Builder setRenderingOptions(EmptyParam renderingOptions) {
+        this.renderingOptions = renderingOptions;
+        return this;
+      }
     }
 
     @Getter
@@ -1285,7 +1291,12 @@ public class CustomerUpdateParams extends ApiRequestParams {
 
     @Getter
     public static class RenderingOptions {
-      /** How line-item prices and amounts will be displayed with respect to tax on invoice PDFs. */
+      /**
+       * How line-item prices and amounts will be displayed with respect to tax on invoice PDFs. One
+       * of {@code exclude_tax} or {@code include_inclusive_tax}. {@code include_inclusive_tax} will
+       * include inclusive tax (and exclude exclusive tax) in invoice PDF amounts. {@code
+       * exclude_tax} will exclude all tax (inclusive and exclusive alike) from invoice PDF amounts.
+       */
       @SerializedName("amount_tax_display")
       EnumParam amountTaxDisplay;
 
@@ -1319,6 +1330,10 @@ public class CustomerUpdateParams extends ApiRequestParams {
 
         /**
          * How line-item prices and amounts will be displayed with respect to tax on invoice PDFs.
+         * One of {@code exclude_tax} or {@code include_inclusive_tax}. {@code
+         * include_inclusive_tax} will include inclusive tax (and exclude exclusive tax) in invoice
+         * PDF amounts. {@code exclude_tax} will exclude all tax (inclusive and exclusive alike)
+         * from invoice PDF amounts.
          */
         public Builder setAmountTaxDisplay(AmountTaxDisplay amountTaxDisplay) {
           this.amountTaxDisplay = amountTaxDisplay;
@@ -1327,6 +1342,10 @@ public class CustomerUpdateParams extends ApiRequestParams {
 
         /**
          * How line-item prices and amounts will be displayed with respect to tax on invoice PDFs.
+         * One of {@code exclude_tax} or {@code include_inclusive_tax}. {@code
+         * include_inclusive_tax} will include inclusive tax (and exclude exclusive tax) in invoice
+         * PDF amounts. {@code exclude_tax} will exclude all tax (inclusive and exclusive alike)
+         * from invoice PDF amounts.
          */
         public Builder setAmountTaxDisplay(EmptyParam amountTaxDisplay) {
           this.amountTaxDisplay = amountTaxDisplay;
