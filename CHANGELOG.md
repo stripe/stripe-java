@@ -1,5 +1,9 @@
 # Changelog
 
+## 20.129.0-beta.1 - 2022-06-17
+* [#1374](https://github.com/stripe/stripe-java/pull/1374) API Updates for beta branch
+  - Add support for NetworkDetails properties on resource ReceivedCredits/ReceivedDebits
+
 ## 20.128.0 - 2022-06-09
 * [#1370](https://github.com/stripe/stripe-java/pull/1370) API Updates
   * Add support for `treasury` on `Account.settings`, `AccountCreateParams.settings`, and `AccountUpdateParams.settings`
