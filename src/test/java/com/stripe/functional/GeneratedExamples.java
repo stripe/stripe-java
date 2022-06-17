@@ -647,6 +647,21 @@ class GeneratedExamples extends BaseStripeTest {
   }
 
   @Test
+  public void testCustomerFundCashBalance() throws StripeException {
+    Customer resource = Customer.retrieve("cus_123");
+    CustomerFundCashBalanceParams params =
+        CustomerFundCashBalanceParams.builder().setAmount(30L).setCurrency("eur").build();
+
+    CustomerBalanceTransaction customerBalanceTransaction =
+        resource.getTestHelpers().fundCashBalance(params);
+    assertNotNull(customerBalanceTransaction);
+    verifyRequest(
+        ApiResource.RequestMethod.POST,
+        "/v1/test_helpers/customers/cus_123/fund_cash_balance",
+        params.toMap());
+  }
+
+  @Test
   public void testCustomerList() throws StripeException {
     CustomerListParams params = CustomerListParams.builder().setLimit(3L).build();
 

@@ -2473,6 +2473,26 @@ public class PaymentIntent extends ApiResource implements HasId, MetadataStore<P
       @SerializedName("setup_future_usage")
       String setupFutureUsage;
 
+      /**
+       * Provides information about a card payment that customers see on their statements.
+       * Concatenated with the Kana prefix (shortened Kana descriptor) or Kana statement descriptor
+       * that’s set on the account to form the complete statement descriptor. Maximum 22 characters.
+       * On card statements, the <em>concatenation</em> of both prefix and suffix (including
+       * separators) will appear truncated to 22 characters.
+       */
+      @SerializedName("statement_descriptor_suffix_kana")
+      String statementDescriptorSuffixKana;
+
+      /**
+       * Provides information about a card payment that customers see on their statements.
+       * Concatenated with the Kanji prefix (shortened Kanji descriptor) or Kanji statement
+       * descriptor that’s set on the account to form the complete statement descriptor. Maximum 17
+       * characters. On card statements, the <em>concatenation</em> of both prefix and suffix
+       * (including separators) will appear truncated to 17 characters.
+       */
+      @SerializedName("statement_descriptor_suffix_kanji")
+      String statementDescriptorSuffixKanji;
+
       @Getter
       @Setter
       @EqualsAndHashCode(callSuper = false)
