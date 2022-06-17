@@ -4903,9 +4903,35 @@ public class SessionCreateParams extends ApiRequestParams {
       @SerializedName("setup_future_usage")
       SetupFutureUsage setupFutureUsage;
 
-      private Card(Map<String, Object> extraParams, SetupFutureUsage setupFutureUsage) {
+      /**
+       * Provides information about a card payment that customers see on their statements.
+       * Concatenated with the Kana prefix (shortened Kana descriptor) or Kana statement descriptor
+       * that’s set on the account to form the complete statement descriptor. Maximum 22 characters.
+       * On card statements, the <em>concatenation</em> of both prefix and suffix (including
+       * separators) will appear truncated to 22 characters.
+       */
+      @SerializedName("statement_descriptor_suffix_kana")
+      String statementDescriptorSuffixKana;
+
+      /**
+       * Provides information about a card payment that customers see on their statements.
+       * Concatenated with the Kanji prefix (shortened Kanji descriptor) or Kanji statement
+       * descriptor that’s set on the account to form the complete statement descriptor. Maximum 17
+       * characters. On card statements, the <em>concatenation</em> of both prefix and suffix
+       * (including separators) will appear truncated to 17 characters.
+       */
+      @SerializedName("statement_descriptor_suffix_kanji")
+      String statementDescriptorSuffixKanji;
+
+      private Card(
+          Map<String, Object> extraParams,
+          SetupFutureUsage setupFutureUsage,
+          String statementDescriptorSuffixKana,
+          String statementDescriptorSuffixKanji) {
         this.extraParams = extraParams;
         this.setupFutureUsage = setupFutureUsage;
+        this.statementDescriptorSuffixKana = statementDescriptorSuffixKana;
+        this.statementDescriptorSuffixKanji = statementDescriptorSuffixKanji;
       }
 
       public static Builder builder() {
@@ -4917,9 +4943,17 @@ public class SessionCreateParams extends ApiRequestParams {
 
         private SetupFutureUsage setupFutureUsage;
 
+        private String statementDescriptorSuffixKana;
+
+        private String statementDescriptorSuffixKanji;
+
         /** Finalize and obtain parameter instance from this builder. */
         public Card build() {
-          return new Card(this.extraParams, this.setupFutureUsage);
+          return new Card(
+              this.extraParams,
+              this.setupFutureUsage,
+              this.statementDescriptorSuffixKana,
+              this.statementDescriptorSuffixKanji);
         }
 
         /**
@@ -4968,6 +5002,30 @@ public class SessionCreateParams extends ApiRequestParams {
          */
         public Builder setSetupFutureUsage(SetupFutureUsage setupFutureUsage) {
           this.setupFutureUsage = setupFutureUsage;
+          return this;
+        }
+
+        /**
+         * Provides information about a card payment that customers see on their statements.
+         * Concatenated with the Kana prefix (shortened Kana descriptor) or Kana statement
+         * descriptor that’s set on the account to form the complete statement descriptor. Maximum
+         * 22 characters. On card statements, the <em>concatenation</em> of both prefix and suffix
+         * (including separators) will appear truncated to 22 characters.
+         */
+        public Builder setStatementDescriptorSuffixKana(String statementDescriptorSuffixKana) {
+          this.statementDescriptorSuffixKana = statementDescriptorSuffixKana;
+          return this;
+        }
+
+        /**
+         * Provides information about a card payment that customers see on their statements.
+         * Concatenated with the Kanji prefix (shortened Kanji descriptor) or Kanji statement
+         * descriptor that’s set on the account to form the complete statement descriptor. Maximum
+         * 17 characters. On card statements, the <em>concatenation</em> of both prefix and suffix
+         * (including separators) will appear truncated to 17 characters.
+         */
+        public Builder setStatementDescriptorSuffixKanji(String statementDescriptorSuffixKanji) {
+          this.statementDescriptorSuffixKanji = statementDescriptorSuffixKanji;
           return this;
         }
       }

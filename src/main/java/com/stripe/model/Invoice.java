@@ -418,6 +418,10 @@ public class Invoice extends ApiResource implements HasId, MetadataStore<Invoice
   @SerializedName("receipt_number")
   String receiptNumber;
 
+  /** Options for invoice PDF rendering. */
+  @SerializedName("rendering_options")
+  RenderingOptions renderingOptions;
+
   /**
    * Starting customer balance before the invoice is finalized. If the invoice has not been
    * finalized yet, this will be the current customer balance.
@@ -454,7 +458,7 @@ public class Invoice extends ApiResource implements HasId, MetadataStore<Invoice
 
   /**
    * Total of all subscriptions, invoice items, and prorations on the invoice before any invoice
-   * level discount or tax is applied. Item discounts are already incorporated
+   * level discount or exclusive tax is applied. Item discounts are already incorporated
    */
   @SerializedName("subtotal")
   Long subtotal;
@@ -1750,12 +1754,30 @@ public class Invoice extends ApiResource implements HasId, MetadataStore<Invoice
       @Setter
       @EqualsAndHashCode(callSuper = false)
       public static class BankTransfer extends StripeObject {
+        @SerializedName("eu_bank_transfer")
+        EuBankTransfer euBankTransfer;
+
         /**
          * The bank transfer type that can be used for funding. Permitted values include: {@code
-         * jp_bank_transfer}.
+         * eu_bank_transfer}, {@code gb_bank_transfer}, {@code jp_bank_transfer}, or {@code
+         * mx_bank_transfer}.
          */
         @SerializedName("type")
         String type;
+
+        @Getter
+        @Setter
+        @EqualsAndHashCode(callSuper = false)
+        public static class EuBankTransfer extends StripeObject {
+          /**
+           * The desired country code of the bank account information. Permitted values include:
+           * {@code DE}, {@code ES}, {@code FR}, {@code IE}, or {@code NL}.
+           *
+           * <p>One of {@code DE}, {@code ES}, {@code FR}, {@code IE}, or {@code NL}.
+           */
+          @SerializedName("country")
+          String country;
+        }
       }
     }
 
@@ -1810,6 +1832,15 @@ public class Invoice extends ApiResource implements HasId, MetadataStore<Invoice
      */
     @SerializedName("payment_method_types")
     List<String> paymentMethodTypes;
+  }
+
+  @Getter
+  @Setter
+  @EqualsAndHashCode(callSuper = false)
+  public static class RenderingOptions extends StripeObject {
+    /** How line-item prices and amounts will be displayed with respect to tax on invoice PDFs. */
+    @SerializedName("amount_tax_display")
+    String amountTaxDisplay;
   }
 
   @Getter

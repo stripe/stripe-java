@@ -10,6 +10,7 @@ import com.stripe.net.RequestOptions;
 import com.stripe.param.CustomerBalanceTransactionsParams;
 import com.stripe.param.CustomerCreateFundingInstructionsParams;
 import com.stripe.param.CustomerCreateParams;
+import com.stripe.param.CustomerFundCashBalanceParams;
 import com.stripe.param.CustomerListParams;
 import com.stripe.param.CustomerListPaymentMethodsParams;
 import com.stripe.param.CustomerRetrieveParams;
@@ -535,7 +536,7 @@ public class Customer extends ApiResource implements HasId, MetadataStore<Custom
     return ApiResource.requestCollection(url, params, PaymentMethodCollection.class, options);
   }
 
-  /** Retrieves a PaymentMethod object. */
+  /** Retrieves a PaymentMethod object for a given Customer. */
   public PaymentMethod retrievePaymentMethod(
       String customer, Map<String, Object> params, RequestOptions options) throws StripeException {
     String url =
@@ -549,7 +550,7 @@ public class Customer extends ApiResource implements HasId, MetadataStore<Custom
         ApiResource.RequestMethod.GET, url, params, PaymentMethod.class, options);
   }
 
-  /** Retrieves a PaymentMethod object. */
+  /** Retrieves a PaymentMethod object for a given Customer. */
   public PaymentMethod retrievePaymentMethod(
       String customer, CustomerRetrievePaymentMethodParams params, RequestOptions options)
       throws StripeException {
@@ -724,6 +725,10 @@ public class Customer extends ApiResource implements HasId, MetadataStore<Custom
     @SerializedName("footer")
     String footer;
 
+    /** Default options for invoice PDF rendering for this customer. */
+    @SerializedName("rendering_options")
+    Invoice.RenderingOptions renderingOptions;
+
     /** Get ID of expandable {@code defaultPaymentMethod} object. */
     public String getDefaultPaymentMethod() {
       return (this.defaultPaymentMethod != null) ? this.defaultPaymentMethod.getId() : null;
@@ -786,6 +791,58 @@ public class Customer extends ApiResource implements HasId, MetadataStore<Custom
       /** The customer's state, county, province, or region as identified by Stripe Tax. */
       @SerializedName("state")
       String state;
+    }
+  }
+
+  public TestHelpers getTestHelpers() {
+    return new TestHelpers(this);
+  }
+
+  public static class TestHelpers {
+    private final Customer resource;
+
+    private TestHelpers(Customer resource) {
+      this.resource = resource;
+    }
+
+    /** Create an incoming testmode bank transfer. */
+    public CustomerBalanceTransaction fundCashBalance(Map<String, Object> params)
+        throws StripeException {
+      return fundCashBalance(params, (RequestOptions) null);
+    }
+
+    /** Create an incoming testmode bank transfer. */
+    public CustomerBalanceTransaction fundCashBalance(
+        Map<String, Object> params, RequestOptions options) throws StripeException {
+      String url =
+          String.format(
+              "%s%s",
+              Stripe.getApiBase(),
+              String.format(
+                  "/v1/test_helpers/customers/%s/fund_cash_balance",
+                  ApiResource.urlEncodeId(this.resource.getId())));
+      return ApiResource.request(
+          ApiResource.RequestMethod.POST, url, params, CustomerBalanceTransaction.class, options);
+    }
+
+    /** Create an incoming testmode bank transfer. */
+    public CustomerBalanceTransaction fundCashBalance(CustomerFundCashBalanceParams params)
+        throws StripeException {
+      return fundCashBalance(params, (RequestOptions) null);
+    }
+
+    /** Create an incoming testmode bank transfer. */
+    public CustomerBalanceTransaction fundCashBalance(
+        CustomerFundCashBalanceParams params, RequestOptions options) throws StripeException {
+      String url =
+          String.format(
+              "%s%s",
+              Stripe.getApiBase(),
+              String.format(
+                  "/v1/test_helpers/customers/%s/fund_cash_balance",
+                  ApiResource.urlEncodeId(this.resource.getId())));
+      return ApiResource.request(
+          ApiResource.RequestMethod.POST, url, params, CustomerBalanceTransaction.class, options);
     }
   }
 }

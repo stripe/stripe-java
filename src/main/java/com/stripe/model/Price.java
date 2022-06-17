@@ -50,6 +50,13 @@ public class Price extends ApiResource implements HasId, MetadataStore<Price> {
   @SerializedName("currency")
   String currency;
 
+  /**
+   * When set, provides configuration for the amount to be adjusted by the customer during Checkout
+   * Sessions and Payment Links.
+   */
+  @SerializedName("custom_unit_amount")
+  CustomUnitAmount customUnitAmount;
+
   /** Always true for a deleted object. */
   @SerializedName("deleted")
   Boolean deleted;
@@ -347,6 +354,26 @@ public class Price extends ApiResource implements HasId, MetadataStore<Price> {
             Stripe.getApiBase(),
             String.format("/v1/prices/%s", ApiResource.urlEncodeId(this.getId())));
     return ApiResource.request(ApiResource.RequestMethod.POST, url, params, Price.class, options);
+  }
+
+  @Getter
+  @Setter
+  @EqualsAndHashCode(callSuper = false)
+  public static class CustomUnitAmount extends StripeObject {
+    /** The maximum unit amount the customer can specify for this item. */
+    @SerializedName("maximum")
+    Long maximum;
+
+    /**
+     * The minimum unit amount the customer can specify for this item. Must be at least the minimum
+     * charge amount.
+     */
+    @SerializedName("minimum")
+    Long minimum;
+
+    /** The starting unit amount which can be updated by the customer. */
+    @SerializedName("preset")
+    Long preset;
   }
 
   @Getter

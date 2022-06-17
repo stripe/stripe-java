@@ -1,5 +1,27 @@
 # Changelog
 
+## 20.129.0 - 2022-06-17
+* [#1375](https://github.com/stripe/stripe-java/pull/1375) API Updates
+  * Add support for `fund_cash_balance` test helper method on resource `Customer`
+  * Add support for `statement_descriptor_prefix_kana` and `statement_descriptor_prefix_kanji` on `Account.settings.card_payments`, `Account.settings.payments`, `AccountCreateParams.settings.card_payments`, and `AccountUpdateParams.settings.card_payments`
+  * Add support for `statement_descriptor_suffix_kana` and `statement_descriptor_suffix_kanji` on `Checkout.Session.payment_method_options.card`, `CheckoutSessionCreateParams.payment_method_options.card`, `PaymentIntent.payment_method_options.card`, `PaymentIntentConfirmParams.payment_method_options.card`, `PaymentIntentCreateParams.payment_method_options.card`, and `PaymentIntentUpdateParams.payment_method_options.card`
+  * Add support for `total_excluding_tax` on `CreditNote`
+  * Change type of `CustomerCreateParams.invoice_settings.rendering_options` and `CustomerUpdateParams.invoice_settings.rendering_options` from `rendering_options_param` to `emptyStringable(rendering_options_param)`
+  * Add support for `rendering_options` on `Customer.invoice_settings` and `Invoice`
+* [#1373](https://github.com/stripe/stripe-java/pull/1373) Trigger workflows on beta branches
+* [#1372](https://github.com/stripe/stripe-java/pull/1372) Update readme example to use typed params.
+
+## 20.128.0 - 2022-06-09
+* [#1370](https://github.com/stripe/stripe-java/pull/1370) API Updates
+  * Add support for `treasury` on `Account.settings`, `AccountCreateParams.settings`, and `AccountUpdateParams.settings`
+  * Add support for `rendering_options` on `CustomerCreateParams.invoice_settings` and `CustomerUpdateParams.invoice_settings`
+  * Add support for `eu_bank_transfer` on `CustomerCreateFundingInstructionsParams.bank_transfer`, `Invoice.payment_settings.payment_method_options.customer_balance.bank_transfer`, `InvoiceCreateParams.payment_settings.payment_method_options.customer_balance.bank_transfer`, `InvoiceUpdateParams.payment_settings.payment_method_options.customer_balance.bank_transfer`, `Order.payment.settings.payment_method_options.customer_balance.bank_transfer`, `OrderCreateParams.payment.settings.payment_method_options.customer_balance.bank_transfer`, `OrderUpdateParams.payment.settings.payment_method_options.customer_balance.bank_transfer`, `PaymentIntent.payment_method_options.customer_balance.bank_transfer`, `PaymentIntentConfirmParams.payment_method_options.customer_balance.bank_transfer`, `PaymentIntentCreateParams.payment_method_options.customer_balance.bank_transfer`, `PaymentIntentUpdateParams.payment_method_options.customer_balance.bank_transfer`, `Subscription.payment_settings.payment_method_options.customer_balance.bank_transfer`, `SubscriptionCreateParams.payment_settings.payment_method_options.customer_balance.bank_transfer`, and `SubscriptionUpdateParams.payment_settings.payment_method_options.customer_balance.bank_transfer`
+  * Change type of `CustomerCreateFundingInstructionsParams.bank_transfer.requested_address_types[]` from `literal('zengin')` to `enum('iban'|'sort_code'|'spei'|'zengin')`
+  * Change type of `CustomerCreateFundingInstructionsParams.bank_transfer.type`, `Order.payment.settings.payment_method_options.customer_balance.bank_transfer.type`, `OrderCreateParams.payment.settings.payment_method_options.customer_balance.bank_transfer.type`, `OrderUpdateParams.payment.settings.payment_method_options.customer_balance.bank_transfer.type`, `PaymentIntent.next_action.display_bank_transfer_instructions.type`, `PaymentIntent.payment_method_options.customer_balance.bank_transfer.type`, `PaymentIntentConfirmParams.payment_method_options.customer_balance.bank_transfer.type`, `PaymentIntentCreateParams.payment_method_options.customer_balance.bank_transfer.type`, and `PaymentIntentUpdateParams.payment_method_options.customer_balance.bank_transfer.type` from `literal('jp_bank_transfer')` to `enum('eu_bank_transfer'|'gb_bank_transfer'|'jp_bank_transfer'|'mx_bank_transfer')`
+  * Add support for `iban`, `sort_code`, and `spei` on `FundingInstructions.bank_transfer.financial_addresses[]` and `PaymentIntent.next_action.display_bank_transfer_instructions.financial_addresses[]`
+  * Change type of `Order.payment.settings.payment_method_options.customer_balance.bank_transfer.requested_address_types[]`, `OrderCreateParams.payment.settings.payment_method_options.customer_balance.bank_transfer.requested_address_types[]`, `OrderUpdateParams.payment.settings.payment_method_options.customer_balance.bank_transfer.requested_address_types[]`, `PaymentIntent.payment_method_options.customer_balance.bank_transfer.requested_address_types[]`, `PaymentIntentConfirmParams.payment_method_options.customer_balance.bank_transfer.requested_address_types[]`, `PaymentIntentCreateParams.payment_method_options.customer_balance.bank_transfer.requested_address_types[]`, and `PaymentIntentUpdateParams.payment_method_options.customer_balance.bank_transfer.requested_address_types[]` from `literal('zengin')` to `enum`
+  * Add support for `custom_unit_amount` on `PriceCreateParams` and `Price`
+
 ## 20.127.0 - 2022-06-08
 * [#1369](https://github.com/stripe/stripe-java/pull/1369) API Updates
   * Add support for `affirm`, `bancontact`, `card`, `ideal`, `p24`, and `sofort` on `Checkout.Session.payment_method_options` and `CheckoutSessionCreateParams.payment_method_options`

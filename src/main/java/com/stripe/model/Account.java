@@ -1480,6 +1480,9 @@ public class Account extends ApiResource implements MetadataStore<Account>, Paym
     @SerializedName("sepa_debit_payments")
     SepaDebitPayments sepaDebitPayments;
 
+    @SerializedName("treasury")
+    SettingsTreasury treasury;
+
     @Getter
     @Setter
     @EqualsAndHashCode(callSuper = false)
@@ -1505,6 +1508,37 @@ public class Account extends ApiResource implements MetadataStore<Account>, Paym
     @Setter
     @EqualsAndHashCode(callSuper = false)
     public static class SettingsCardIssuing extends StripeObject {
+      @SerializedName("tos_acceptance")
+      TosAcceptance tosAcceptance;
+
+      @Getter
+      @Setter
+      @EqualsAndHashCode(callSuper = false)
+      public static class TosAcceptance extends StripeObject {
+        /**
+         * The Unix timestamp marking when the account representative accepted the service
+         * agreement.
+         */
+        @SerializedName("date")
+        Long date;
+
+        /** The IP address from which the account representative accepted the service agreement. */
+        @SerializedName("ip")
+        String ip;
+
+        /**
+         * The user agent of the browser from which the account representative accepted the service
+         * agreement.
+         */
+        @SerializedName("user_agent")
+        String userAgent;
+      }
+    }
+
+    @Getter
+    @Setter
+    @EqualsAndHashCode(callSuper = false)
+    public static class SettingsTreasury extends StripeObject {
       @SerializedName("tos_acceptance")
       TosAcceptance tosAcceptance;
 
@@ -1616,6 +1650,26 @@ public class Account extends ApiResource implements MetadataStore<Account>, Paym
      */
     @SerializedName("statement_descriptor_prefix")
     String statementDescriptorPrefix;
+
+    /**
+     * The Kana variation of the default text that appears on credit card statements when a charge
+     * is made (Japan only). This field prefixes any dynamic {@code
+     * statement_descriptor_suffix_kana} specified on the charge. {@code
+     * statement_descriptor_prefix_kana} is useful for maximizing descriptor space for the dynamic
+     * portion.
+     */
+    @SerializedName("statement_descriptor_prefix_kana")
+    String statementDescriptorPrefixKana;
+
+    /**
+     * The Kanji variation of the default text that appears on credit card statements when a charge
+     * is made (Japan only). This field prefixes any dynamic {@code
+     * statement_descriptor_suffix_kanji} specified on the charge. {@code
+     * statement_descriptor_prefix_kanji} is useful for maximizing descriptor space for the dynamic
+     * portion.
+     */
+    @SerializedName("statement_descriptor_prefix_kanji")
+    String statementDescriptorPrefixKanji;
   }
 
   @Getter
@@ -1662,6 +1716,26 @@ public class Account extends ApiResource implements MetadataStore<Account>, Paym
      */
     @SerializedName("statement_descriptor_kanji")
     String statementDescriptorKanji;
+
+    /**
+     * The Kana variation of the default text that appears on credit card statements when a charge
+     * is made (Japan only). This field prefixes any dynamic {@code
+     * statement_descriptor_suffix_kana} specified on the charge. {@code
+     * statement_descriptor_prefix_kana} is useful for maximizing descriptor space for the dynamic
+     * portion.
+     */
+    @SerializedName("statement_descriptor_prefix_kana")
+    String statementDescriptorPrefixKana;
+
+    /**
+     * The Kanji variation of the default text that appears on credit card statements when a charge
+     * is made (Japan only). This field prefixes any dynamic {@code
+     * statement_descriptor_suffix_kanji} specified on the charge. {@code
+     * statement_descriptor_prefix_kanji} is useful for maximizing descriptor space for the dynamic
+     * portion.
+     */
+    @SerializedName("statement_descriptor_prefix_kanji")
+    String statementDescriptorPrefixKanji;
   }
 
   @Getter

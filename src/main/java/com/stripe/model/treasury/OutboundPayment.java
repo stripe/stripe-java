@@ -45,7 +45,10 @@ public class OutboundPayment extends ApiResource implements HasId {
   @SerializedName("currency")
   String currency;
 
-  /** ID of the customer to whom an OutboundPayment is sent. */
+  /**
+   * ID of the <a href="https://stripe.com/docs/api/customers">customer</a> to whom an
+   * OutboundPayment is sent.
+   */
   @SerializedName("customer")
   String customer;
 
@@ -77,8 +80,9 @@ public class OutboundPayment extends ApiResource implements HasId {
   String financialAccount;
 
   /**
-   * A hosted transaction receipt URL that is provided when money movement is considered regulated
-   * under Stripe's money transmission licenses.
+   * A <a href="https://stripe.com/docs/treasury/moving-money/regulatory-receipts">hosted
+   * transaction receipt</a> URL that is provided when money movement is considered regulated under
+   * Stripe's money transmission licenses.
    */
   @SerializedName("hosted_regulatory_receipt_url")
   String hostedRegulatoryReceiptUrl;
