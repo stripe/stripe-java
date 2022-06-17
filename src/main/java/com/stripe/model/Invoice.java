@@ -418,6 +418,10 @@ public class Invoice extends ApiResource implements HasId, MetadataStore<Invoice
   @SerializedName("receipt_number")
   String receiptNumber;
 
+  /** Options for invoice PDF rendering. */
+  @SerializedName("rendering_options")
+  RenderingOptions renderingOptions;
+
   /**
    * Starting customer balance before the invoice is finalized. If the invoice has not been
    * finalized yet, this will be the current customer balance.
@@ -454,7 +458,7 @@ public class Invoice extends ApiResource implements HasId, MetadataStore<Invoice
 
   /**
    * Total of all subscriptions, invoice items, and prorations on the invoice before any invoice
-   * level discount or tax is applied. Item discounts are already incorporated
+   * level discount or exclusive tax is applied. Item discounts are already incorporated
    */
   @SerializedName("subtotal")
   Long subtotal;
@@ -1828,6 +1832,15 @@ public class Invoice extends ApiResource implements HasId, MetadataStore<Invoice
      */
     @SerializedName("payment_method_types")
     List<String> paymentMethodTypes;
+  }
+
+  @Getter
+  @Setter
+  @EqualsAndHashCode(callSuper = false)
+  public static class RenderingOptions extends StripeObject {
+    /** How line-item prices and amounts will be displayed with respect to tax on invoice PDFs. */
+    @SerializedName("amount_tax_display")
+    String amountTaxDisplay;
   }
 
   @Getter

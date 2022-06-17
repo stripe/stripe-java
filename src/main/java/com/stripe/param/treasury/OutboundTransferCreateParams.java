@@ -61,6 +61,10 @@ public class OutboundTransferCreateParams extends ApiRequestParams {
   @SerializedName("metadata")
   Map<String, String> metadata;
 
+  /** Details about the network used for the OutboundTransfer. */
+  @SerializedName("network_details")
+  NetworkDetails networkDetails;
+
   /**
    * Statement descriptor to be shown on the receiving end of an OutboundTransfer. Maximum 10
    * characters for {@code ach} transfers or 140 characters for {@code wire} transfers. The default
@@ -79,6 +83,7 @@ public class OutboundTransferCreateParams extends ApiRequestParams {
       Map<String, Object> extraParams,
       String financialAccount,
       Map<String, String> metadata,
+      NetworkDetails networkDetails,
       String statementDescriptor) {
     this.amount = amount;
     this.currency = currency;
@@ -89,6 +94,7 @@ public class OutboundTransferCreateParams extends ApiRequestParams {
     this.extraParams = extraParams;
     this.financialAccount = financialAccount;
     this.metadata = metadata;
+    this.networkDetails = networkDetails;
     this.statementDescriptor = statementDescriptor;
   }
 
@@ -115,6 +121,8 @@ public class OutboundTransferCreateParams extends ApiRequestParams {
 
     private Map<String, String> metadata;
 
+    private NetworkDetails networkDetails;
+
     private String statementDescriptor;
 
     /** Finalize and obtain parameter instance from this builder. */
@@ -129,6 +137,7 @@ public class OutboundTransferCreateParams extends ApiRequestParams {
           this.extraParams,
           this.financialAccount,
           this.metadata,
+          this.networkDetails,
           this.statementDescriptor);
     }
 
@@ -248,6 +257,12 @@ public class OutboundTransferCreateParams extends ApiRequestParams {
         this.metadata = new HashMap<>();
       }
       this.metadata.putAll(map);
+      return this;
+    }
+
+    /** Details about the network used for the OutboundTransfer. */
+    public Builder setNetworkDetails(NetworkDetails networkDetails) {
+      this.networkDetails = networkDetails;
       return this;
     }
 
@@ -421,6 +436,170 @@ public class OutboundTransferCreateParams extends ApiRequestParams {
         Network(String value) {
           this.value = value;
         }
+      }
+    }
+  }
+
+  @Getter
+  public static class NetworkDetails {
+    /** Optional fields for {@code ach}. */
+    @SerializedName("ach")
+    Ach ach;
+
+    /**
+     * Map of extra parameters for custom features not available in this client library. The content
+     * in this map is not serialized under this field's {@code @SerializedName} value. Instead, each
+     * key/value pair is serialized as if the key is a root-level field (serialized) name in this
+     * param object. Effectively, this map is flattened to its parent instance.
+     */
+    @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
+    Map<String, Object> extraParams;
+
+    /** The type of flow that originated the OutboundTransfer. */
+    @SerializedName("type")
+    Type type;
+
+    private NetworkDetails(Ach ach, Map<String, Object> extraParams, Type type) {
+      this.ach = ach;
+      this.extraParams = extraParams;
+      this.type = type;
+    }
+
+    public static Builder builder() {
+      return new Builder();
+    }
+
+    public static class Builder {
+      private Ach ach;
+
+      private Map<String, Object> extraParams;
+
+      private Type type;
+
+      /** Finalize and obtain parameter instance from this builder. */
+      public NetworkDetails build() {
+        return new NetworkDetails(this.ach, this.extraParams, this.type);
+      }
+
+      /** Optional fields for {@code ach}. */
+      public Builder setAch(Ach ach) {
+        this.ach = ach;
+        return this;
+      }
+
+      /**
+       * Add a key/value pair to `extraParams` map. A map is initialized for the first `put/putAll`
+       * call, and subsequent calls add additional key/value pairs to the original map. See {@link
+       * OutboundTransferCreateParams.NetworkDetails#extraParams} for the field documentation.
+       */
+      public Builder putExtraParam(String key, Object value) {
+        if (this.extraParams == null) {
+          this.extraParams = new HashMap<>();
+        }
+        this.extraParams.put(key, value);
+        return this;
+      }
+
+      /**
+       * Add all map key/value pairs to `extraParams` map. A map is initialized for the first
+       * `put/putAll` call, and subsequent calls add additional key/value pairs to the original map.
+       * See {@link OutboundTransferCreateParams.NetworkDetails#extraParams} for the field
+       * documentation.
+       */
+      public Builder putAllExtraParam(Map<String, Object> map) {
+        if (this.extraParams == null) {
+          this.extraParams = new HashMap<>();
+        }
+        this.extraParams.putAll(map);
+        return this;
+      }
+
+      /** The type of flow that originated the OutboundTransfer. */
+      public Builder setType(Type type) {
+        this.type = type;
+        return this;
+      }
+    }
+
+    @Getter
+    public static class Ach {
+      /** Addenda record data associated with this OutboundTransfer. */
+      @SerializedName("addenda")
+      String addenda;
+
+      /**
+       * Map of extra parameters for custom features not available in this client library. The
+       * content in this map is not serialized under this field's {@code @SerializedName} value.
+       * Instead, each key/value pair is serialized as if the key is a root-level field (serialized)
+       * name in this param object. Effectively, this map is flattened to its parent instance.
+       */
+      @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
+      Map<String, Object> extraParams;
+
+      private Ach(String addenda, Map<String, Object> extraParams) {
+        this.addenda = addenda;
+        this.extraParams = extraParams;
+      }
+
+      public static Builder builder() {
+        return new Builder();
+      }
+
+      public static class Builder {
+        private String addenda;
+
+        private Map<String, Object> extraParams;
+
+        /** Finalize and obtain parameter instance from this builder. */
+        public Ach build() {
+          return new Ach(this.addenda, this.extraParams);
+        }
+
+        /** Addenda record data associated with this OutboundTransfer. */
+        public Builder setAddenda(String addenda) {
+          this.addenda = addenda;
+          return this;
+        }
+
+        /**
+         * Add a key/value pair to `extraParams` map. A map is initialized for the first
+         * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
+         * map. See {@link OutboundTransferCreateParams.NetworkDetails.Ach#extraParams} for the
+         * field documentation.
+         */
+        public Builder putExtraParam(String key, Object value) {
+          if (this.extraParams == null) {
+            this.extraParams = new HashMap<>();
+          }
+          this.extraParams.put(key, value);
+          return this;
+        }
+
+        /**
+         * Add all map key/value pairs to `extraParams` map. A map is initialized for the first
+         * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
+         * map. See {@link OutboundTransferCreateParams.NetworkDetails.Ach#extraParams} for the
+         * field documentation.
+         */
+        public Builder putAllExtraParam(Map<String, Object> map) {
+          if (this.extraParams == null) {
+            this.extraParams = new HashMap<>();
+          }
+          this.extraParams.putAll(map);
+          return this;
+        }
+      }
+    }
+
+    public enum Type implements ApiRequestParams.EnumParam {
+      @SerializedName("ach")
+      ACH("ach");
+
+      @Getter(onMethod_ = {@Override})
+      private final String value;
+
+      Type(String value) {
+        this.value = value;
       }
     }
   }

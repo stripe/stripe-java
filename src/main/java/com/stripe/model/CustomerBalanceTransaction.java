@@ -6,6 +6,7 @@ import com.stripe.Stripe;
 import com.stripe.exception.StripeException;
 import com.stripe.net.ApiResource;
 import com.stripe.net.RequestOptions;
+import com.stripe.param.CustomerBalanceTransactionFundCashBalanceParams;
 import com.stripe.param.CustomerBalanceTransactionUpdateParams;
 import java.util.Map;
 import lombok.EqualsAndHashCode;
@@ -216,5 +217,41 @@ public class CustomerBalanceTransaction extends ApiResource
                 ApiResource.urlEncodeId(this.getId())));
     return ApiResource.request(
         ApiResource.RequestMethod.POST, url, params, CustomerBalanceTransaction.class, options);
+  }
+
+  public static class TestHelpers {
+    private TestHelpers() {}
+
+    /** Create an incoming testmode bank transfer. */
+    public static CustomerBalanceTransaction fundCashBalance(
+        String customer, Map<String, Object> params, RequestOptions options)
+        throws StripeException {
+      String url =
+          String.format(
+              "%s%s",
+              Stripe.getApiBase(),
+              String.format(
+                  "/v1/test_helpers/customers/%s/fund_cash_balance",
+                  ApiResource.urlEncodeId(customer)));
+      return ApiResource.request(
+          ApiResource.RequestMethod.POST, url, params, CustomerBalanceTransaction.class, options);
+    }
+
+    /** Create an incoming testmode bank transfer. */
+    public static CustomerBalanceTransaction fundCashBalance(
+        String customer,
+        CustomerBalanceTransactionFundCashBalanceParams params,
+        RequestOptions options)
+        throws StripeException {
+      String url =
+          String.format(
+              "%s%s",
+              Stripe.getApiBase(),
+              String.format(
+                  "/v1/test_helpers/customers/%s/fund_cash_balance",
+                  ApiResource.urlEncodeId(customer)));
+      return ApiResource.request(
+          ApiResource.RequestMethod.POST, url, params, CustomerBalanceTransaction.class, options);
+    }
   }
 }

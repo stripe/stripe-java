@@ -136,8 +136,8 @@ public class CreditNote extends ApiResource implements HasId, MetadataStore<Cred
   String status;
 
   /**
-   * The integer amount in %s representing the amount of the credit note, excluding tax and invoice
-   * level discounts.
+   * The integer amount in %s representing the amount of the credit note, excluding exclusive tax
+   * and invoice level discounts.
    */
   @SerializedName("subtotal")
   Long subtotal;
@@ -152,6 +152,13 @@ public class CreditNote extends ApiResource implements HasId, MetadataStore<Cred
    */
   @SerializedName("total")
   Long total;
+
+  /**
+   * The integer amount in %s representing the total amount of the credit note, excluding tax, but
+   * including discounts.
+   */
+  @SerializedName("total_excluding_tax")
+  Long totalExcludingTax;
 
   /**
    * Type of this credit note, one of {@code pre_payment} or {@code post_payment}. A {@code
