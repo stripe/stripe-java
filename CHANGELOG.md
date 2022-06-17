@@ -1,5 +1,16 @@
 # Changelog
 
+## 20.129.0 - 2022-06-17
+* [#1375](https://github.com/stripe/stripe-java/pull/1375) API Updates
+  * Add support for `fund_cash_balance` test helper method on resource `Customer`
+  * Add support for `statement_descriptor_prefix_kana` and `statement_descriptor_prefix_kanji` on `Account.settings.card_payments`, `Account.settings.payments`, `AccountCreateParams.settings.card_payments`, and `AccountUpdateParams.settings.card_payments`
+  * Add support for `statement_descriptor_suffix_kana` and `statement_descriptor_suffix_kanji` on `Checkout.Session.payment_method_options.card`, `CheckoutSessionCreateParams.payment_method_options.card`, `PaymentIntent.payment_method_options.card`, `PaymentIntentConfirmParams.payment_method_options.card`, `PaymentIntentCreateParams.payment_method_options.card`, and `PaymentIntentUpdateParams.payment_method_options.card`
+  * Add support for `total_excluding_tax` on `CreditNote`
+  * Change type of `CustomerCreateParams.invoice_settings.rendering_options` and `CustomerUpdateParams.invoice_settings.rendering_options` from `rendering_options_param` to `emptyStringable(rendering_options_param)`
+  * Add support for `rendering_options` on `Customer.invoice_settings` and `Invoice`
+* [#1373](https://github.com/stripe/stripe-java/pull/1373) Trigger workflows on beta branches
+* [#1372](https://github.com/stripe/stripe-java/pull/1372) Update readme example to use typed params.
+
 ## 20.128.0 - 2022-06-09
 * [#1370](https://github.com/stripe/stripe-java/pull/1370) API Updates
   * Add support for `treasury` on `Account.settings`, `AccountCreateParams.settings`, and `AccountUpdateParams.settings`
