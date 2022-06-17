@@ -167,36 +167,48 @@ you modify the JVM's [networkaddress.cache.ttl
 property](https://docs.oracle.com/en/java/javase/11/docs/api/java.base/java/net/doc-files/net-properties.html)
 to `60` seconds.
 
-### How to use Unsupported Types
+### How to use undocumented parameters and properties
 
-Stripe Java is a typed library and we support all public properties or parameters.
+stripe-java is a typed library and it supports all public properties or parameters.
 
-We do have `beta` and private properties that require different approaches to access with this library.
+Stripe sometimes has beta which introduces new properties or parameters that are not immediately public. The library does not support these properties or parameters until they are public but there is still an approach that allows you to use them.
 
 #### Parameters
 
-To pass unsupported parameters to Stripe using a typed library like `stripe-java` you need to use the `putExtraParam` method, as shown below:
+To pass undocumented parameters to Stripe using stripe-java you need to use the `putExtraParam()` method, as shown below:
 
 ```java
-ChargeCreateParams params =
-  ChargeCreateParams.builder()
-    .setAmount(1000L)
-    .setCurrency("usd")
-    .setSource("tok_visa")
-    .putExtraParam("radar_options[session]", "<radar_session_id>")
+CustomerCreateParams params =
+  CustomerCreateParams.builder()
+    .setEmail("jenny.rosen@example.com")
+    .putExtraParam("secret_feature_enabled", "true")
+    .putExtraParam("secret_parameter[primary]", "primary value")
+    .putExtraParam("secret_parameter[secondary]", "secondary value")
     .build();
 
-Charge charge = charge.Create(params);
+Customer customer = customer.Create(params);
 ```
 
 #### Properties
 
-To retrieve unsupported properties from Stripe using Java you can use an option in the `stripe-java` library to return the raw JSON object and return the parameter as a native type. An example of this is shown below:
+To retrieve undocumented properties from Stripe using Java you can use an option in the library to return the raw JSON object and return the property as a native type. An example of this is shown below:
 
 ```java
-final Subscription subscription = Subscription.retrieve("sub_1234");
-String id = subscription.getRawJsonObject().getAsJsonPrimitive("id").getAsString()
-Long created = subscription.getRawJsonObject().getAsJsonPrimitive("created").getAsLong()
+final Customer customer = Customer.retrieve("cus_1234");
+Boolean featureEnabled =
+  customer.getRawJsonObject()
+    .getAsJsonPrimitive("secret_feature_enabled")
+    .getAsBoolean();
+String primaryValue =
+  customer.getRawJsonObject()
+    .getAsJsonObject("secret_parameter")
+    .getAsJsonPrimitive("primary")
+    .getAsString();
+String secondaryValue =
+  customer.getRawJsonObject()
+    .getAsJsonObject("secret_parameter")
+    .getAsJsonPrimitive("secondary")
+    .getAsString();
 ```
 
 ### Writing a plugin
