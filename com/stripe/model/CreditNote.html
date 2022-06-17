@@ -322,8 +322,8 @@ implements <a href="HasId.html" title="interface in com.stripe.model">HasId</a>,
 <div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="https://docs.oracle.com/en/java/javase/18/docs/api/java.base/java/lang/Long.html" title="class or interface in java.lang" class="external-link">Long</a></code></div>
 <div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#getSubtotal()" class="member-name-link">getSubtotal</a>()</code></div>
 <div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
-<div class="block">The integer amount in %s representing the amount of the credit note, excluding tax and invoice
- level discounts.</div>
+<div class="block">The integer amount in %s representing the amount of the credit note, excluding exclusive tax
+ and invoice level discounts.</div>
 </div>
 <div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="https://docs.oracle.com/en/java/javase/18/docs/api/java.base/java/util/List.html" title="class or interface in java.util" class="external-link">List</a>&lt;<a href="CreditNote.TaxAmount.html" title="class in com.stripe.model">CreditNote.TaxAmount</a>&gt;</code></div>
 <div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#getTaxAmounts()" class="member-name-link">getTaxAmounts</a>()</code></div>
@@ -336,213 +336,225 @@ implements <a href="HasId.html" title="interface in com.stripe.model">HasId</a>,
 <div class="block">The integer amount in %s representing the total amount of the credit note, including tax and
  all discount.</div>
 </div>
-<div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="https://docs.oracle.com/en/java/javase/18/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a></code></div>
-<div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#getType()" class="member-name-link">getType</a>()</code></div>
+<div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="https://docs.oracle.com/en/java/javase/18/docs/api/java.base/java/lang/Long.html" title="class or interface in java.lang" class="external-link">Long</a></code></div>
+<div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#getTotalExcludingTax()" class="member-name-link">getTotalExcludingTax</a>()</code></div>
 <div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
+<div class="block">The integer amount in %s representing the total amount of the credit note, excluding tax, but
+ including discounts.</div>
+</div>
+<div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="https://docs.oracle.com/en/java/javase/18/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a></code></div>
+<div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#getType()" class="member-name-link">getType</a>()</code></div>
+<div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
 <div class="block">Type of this credit note, one of <code>pre_payment</code> or <code>post_payment</code>.</div>
 </div>
-<div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="https://docs.oracle.com/en/java/javase/18/docs/api/java.base/java/lang/Long.html" title="class or interface in java.lang" class="external-link">Long</a></code></div>
-<div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#getVoidedAt()" class="member-name-link">getVoidedAt</a>()</code></div>
-<div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
+<div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="https://docs.oracle.com/en/java/javase/18/docs/api/java.base/java/lang/Long.html" title="class or interface in java.lang" class="external-link">Long</a></code></div>
+<div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#getVoidedAt()" class="member-name-link">getVoidedAt</a>()</code></div>
+<div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
 <div class="block">The time that the credit note was voided.</div>
 </div>
-<div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>int</code></div>
-<div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#hashCode()" class="member-name-link">hashCode</a>()</code></div>
-<div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">&nbsp;</div>
-<div class="col-first even-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4"><code>static <a href="CreditNoteCollection.html" title="class in com.stripe.model">CreditNoteCollection</a></code></div>
-<div class="col-second even-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4"><code><a href="#list(com.stripe.param.CreditNoteListParams)" class="member-name-link">list</a><wbr>(<a href="../param/CreditNoteListParams.html" title="class in com.stripe.param">CreditNoteListParams</a>&nbsp;params)</code></div>
-<div class="col-last even-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4">
-<div class="block">Returns a list of credit notes.</div>
-</div>
+<div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>int</code></div>
+<div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#hashCode()" class="member-name-link">hashCode</a>()</code></div>
+<div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">&nbsp;</div>
 <div class="col-first odd-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4"><code>static <a href="CreditNoteCollection.html" title="class in com.stripe.model">CreditNoteCollection</a></code></div>
-<div class="col-second odd-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4"><code><a href="#list(com.stripe.param.CreditNoteListParams,com.stripe.net.RequestOptions)" class="member-name-link">list</a><wbr>(<a href="../param/CreditNoteListParams.html" title="class in com.stripe.param">CreditNoteListParams</a>&nbsp;params,
- <a href="../net/RequestOptions.html" title="class in com.stripe.net">RequestOptions</a>&nbsp;options)</code></div>
+<div class="col-second odd-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4"><code><a href="#list(com.stripe.param.CreditNoteListParams)" class="member-name-link">list</a><wbr>(<a href="../param/CreditNoteListParams.html" title="class in com.stripe.param">CreditNoteListParams</a>&nbsp;params)</code></div>
 <div class="col-last odd-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4">
 <div class="block">Returns a list of credit notes.</div>
 </div>
 <div class="col-first even-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4"><code>static <a href="CreditNoteCollection.html" title="class in com.stripe.model">CreditNoteCollection</a></code></div>
-<div class="col-second even-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4"><code><a href="#list(java.util.Map)" class="member-name-link">list</a><wbr>(<a href="https://docs.oracle.com/en/java/javase/18/docs/api/java.base/java/util/Map.html" title="class or interface in java.util" class="external-link">Map</a>&lt;<a href="https://docs.oracle.com/en/java/javase/18/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>,<wbr><a href="https://docs.oracle.com/en/java/javase/18/docs/api/java.base/java/lang/Object.html" title="class or interface in java.lang" class="external-link">Object</a>&gt;&nbsp;params)</code></div>
+<div class="col-second even-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4"><code><a href="#list(com.stripe.param.CreditNoteListParams,com.stripe.net.RequestOptions)" class="member-name-link">list</a><wbr>(<a href="../param/CreditNoteListParams.html" title="class in com.stripe.param">CreditNoteListParams</a>&nbsp;params,
+ <a href="../net/RequestOptions.html" title="class in com.stripe.net">RequestOptions</a>&nbsp;options)</code></div>
 <div class="col-last even-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4">
 <div class="block">Returns a list of credit notes.</div>
 </div>
 <div class="col-first odd-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4"><code>static <a href="CreditNoteCollection.html" title="class in com.stripe.model">CreditNoteCollection</a></code></div>
-<div class="col-second odd-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4"><code><a href="#list(java.util.Map,com.stripe.net.RequestOptions)" class="member-name-link">list</a><wbr>(<a href="https://docs.oracle.com/en/java/javase/18/docs/api/java.base/java/util/Map.html" title="class or interface in java.util" class="external-link">Map</a>&lt;<a href="https://docs.oracle.com/en/java/javase/18/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>,<wbr><a href="https://docs.oracle.com/en/java/javase/18/docs/api/java.base/java/lang/Object.html" title="class or interface in java.lang" class="external-link">Object</a>&gt;&nbsp;params,
- <a href="../net/RequestOptions.html" title="class in com.stripe.net">RequestOptions</a>&nbsp;options)</code></div>
+<div class="col-second odd-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4"><code><a href="#list(java.util.Map)" class="member-name-link">list</a><wbr>(<a href="https://docs.oracle.com/en/java/javase/18/docs/api/java.base/java/util/Map.html" title="class or interface in java.util" class="external-link">Map</a>&lt;<a href="https://docs.oracle.com/en/java/javase/18/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>,<wbr><a href="https://docs.oracle.com/en/java/javase/18/docs/api/java.base/java/lang/Object.html" title="class or interface in java.lang" class="external-link">Object</a>&gt;&nbsp;params)</code></div>
 <div class="col-last odd-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4">
 <div class="block">Returns a list of credit notes.</div>
 </div>
-<div class="col-first even-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4"><code>static <a href="CreditNote.html" title="class in com.stripe.model">CreditNote</a></code></div>
-<div class="col-second even-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4"><code><a href="#preview(com.stripe.param.CreditNotePreviewParams)" class="member-name-link">preview</a><wbr>(<a href="../param/CreditNotePreviewParams.html" title="class in com.stripe.param">CreditNotePreviewParams</a>&nbsp;params)</code></div>
+<div class="col-first even-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4"><code>static <a href="CreditNoteCollection.html" title="class in com.stripe.model">CreditNoteCollection</a></code></div>
+<div class="col-second even-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4"><code><a href="#list(java.util.Map,com.stripe.net.RequestOptions)" class="member-name-link">list</a><wbr>(<a href="https://docs.oracle.com/en/java/javase/18/docs/api/java.base/java/util/Map.html" title="class or interface in java.util" class="external-link">Map</a>&lt;<a href="https://docs.oracle.com/en/java/javase/18/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>,<wbr><a href="https://docs.oracle.com/en/java/javase/18/docs/api/java.base/java/lang/Object.html" title="class or interface in java.lang" class="external-link">Object</a>&gt;&nbsp;params,
+ <a href="../net/RequestOptions.html" title="class in com.stripe.net">RequestOptions</a>&nbsp;options)</code></div>
 <div class="col-last even-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4">
-<div class="block">Get a preview of a credit note without creating it.</div>
+<div class="block">Returns a list of credit notes.</div>
 </div>
 <div class="col-first odd-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4"><code>static <a href="CreditNote.html" title="class in com.stripe.model">CreditNote</a></code></div>
-<div class="col-second odd-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4"><code><a href="#preview(com.stripe.param.CreditNotePreviewParams,com.stripe.net.RequestOptions)" class="member-name-link">preview</a><wbr>(<a href="../param/CreditNotePreviewParams.html" title="class in com.stripe.param">CreditNotePreviewParams</a>&nbsp;params,
- <a href="../net/RequestOptions.html" title="class in com.stripe.net">RequestOptions</a>&nbsp;options)</code></div>
+<div class="col-second odd-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4"><code><a href="#preview(com.stripe.param.CreditNotePreviewParams)" class="member-name-link">preview</a><wbr>(<a href="../param/CreditNotePreviewParams.html" title="class in com.stripe.param">CreditNotePreviewParams</a>&nbsp;params)</code></div>
 <div class="col-last odd-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4">
 <div class="block">Get a preview of a credit note without creating it.</div>
 </div>
 <div class="col-first even-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4"><code>static <a href="CreditNote.html" title="class in com.stripe.model">CreditNote</a></code></div>
-<div class="col-second even-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4"><code><a href="#preview(java.util.Map)" class="member-name-link">preview</a><wbr>(<a href="https://docs.oracle.com/en/java/javase/18/docs/api/java.base/java/util/Map.html" title="class or interface in java.util" class="external-link">Map</a>&lt;<a href="https://docs.oracle.com/en/java/javase/18/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>,<wbr><a href="https://docs.oracle.com/en/java/javase/18/docs/api/java.base/java/lang/Object.html" title="class or interface in java.lang" class="external-link">Object</a>&gt;&nbsp;params)</code></div>
+<div class="col-second even-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4"><code><a href="#preview(com.stripe.param.CreditNotePreviewParams,com.stripe.net.RequestOptions)" class="member-name-link">preview</a><wbr>(<a href="../param/CreditNotePreviewParams.html" title="class in com.stripe.param">CreditNotePreviewParams</a>&nbsp;params,
+ <a href="../net/RequestOptions.html" title="class in com.stripe.net">RequestOptions</a>&nbsp;options)</code></div>
 <div class="col-last even-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4">
 <div class="block">Get a preview of a credit note without creating it.</div>
 </div>
 <div class="col-first odd-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4"><code>static <a href="CreditNote.html" title="class in com.stripe.model">CreditNote</a></code></div>
-<div class="col-second odd-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4"><code><a href="#preview(java.util.Map,com.stripe.net.RequestOptions)" class="member-name-link">preview</a><wbr>(<a href="https://docs.oracle.com/en/java/javase/18/docs/api/java.base/java/util/Map.html" title="class or interface in java.util" class="external-link">Map</a>&lt;<a href="https://docs.oracle.com/en/java/javase/18/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>,<wbr><a href="https://docs.oracle.com/en/java/javase/18/docs/api/java.base/java/lang/Object.html" title="class or interface in java.lang" class="external-link">Object</a>&gt;&nbsp;params,
- <a href="../net/RequestOptions.html" title="class in com.stripe.net">RequestOptions</a>&nbsp;options)</code></div>
+<div class="col-second odd-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4"><code><a href="#preview(java.util.Map)" class="member-name-link">preview</a><wbr>(<a href="https://docs.oracle.com/en/java/javase/18/docs/api/java.base/java/util/Map.html" title="class or interface in java.util" class="external-link">Map</a>&lt;<a href="https://docs.oracle.com/en/java/javase/18/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>,<wbr><a href="https://docs.oracle.com/en/java/javase/18/docs/api/java.base/java/lang/Object.html" title="class or interface in java.lang" class="external-link">Object</a>&gt;&nbsp;params)</code></div>
 <div class="col-last odd-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4">
 <div class="block">Get a preview of a credit note without creating it.</div>
 </div>
 <div class="col-first even-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4"><code>static <a href="CreditNote.html" title="class in com.stripe.model">CreditNote</a></code></div>
-<div class="col-second even-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4"><code><a href="#retrieve(java.lang.String)" class="member-name-link">retrieve</a><wbr>(<a href="https://docs.oracle.com/en/java/javase/18/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;id)</code></div>
+<div class="col-second even-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4"><code><a href="#preview(java.util.Map,com.stripe.net.RequestOptions)" class="member-name-link">preview</a><wbr>(<a href="https://docs.oracle.com/en/java/javase/18/docs/api/java.base/java/util/Map.html" title="class or interface in java.util" class="external-link">Map</a>&lt;<a href="https://docs.oracle.com/en/java/javase/18/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>,<wbr><a href="https://docs.oracle.com/en/java/javase/18/docs/api/java.base/java/lang/Object.html" title="class or interface in java.lang" class="external-link">Object</a>&gt;&nbsp;params,
+ <a href="../net/RequestOptions.html" title="class in com.stripe.net">RequestOptions</a>&nbsp;options)</code></div>
+<div class="col-last even-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4">
+<div class="block">Get a preview of a credit note without creating it.</div>
+</div>
+<div class="col-first odd-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4"><code>static <a href="CreditNote.html" title="class in com.stripe.model">CreditNote</a></code></div>
+<div class="col-second odd-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4"><code><a href="#retrieve(java.lang.String)" class="member-name-link">retrieve</a><wbr>(<a href="https://docs.oracle.com/en/java/javase/18/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;id)</code></div>
+<div class="col-last odd-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4">
+<div class="block">Retrieves the credit note object with the given identifier.</div>
+</div>
+<div class="col-first even-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4"><code>static <a href="CreditNote.html" title="class in com.stripe.model">CreditNote</a></code></div>
+<div class="col-second even-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4"><code><a href="#retrieve(java.lang.String,com.stripe.net.RequestOptions)" class="member-name-link">retrieve</a><wbr>(<a href="https://docs.oracle.com/en/java/javase/18/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;id,
+ <a href="../net/RequestOptions.html" title="class in com.stripe.net">RequestOptions</a>&nbsp;options)</code></div>
 <div class="col-last even-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4">
 <div class="block">Retrieves the credit note object with the given identifier.</div>
 </div>
 <div class="col-first odd-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4"><code>static <a href="CreditNote.html" title="class in com.stripe.model">CreditNote</a></code></div>
-<div class="col-second odd-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4"><code><a href="#retrieve(java.lang.String,com.stripe.net.RequestOptions)" class="member-name-link">retrieve</a><wbr>(<a href="https://docs.oracle.com/en/java/javase/18/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;id,
- <a href="../net/RequestOptions.html" title="class in com.stripe.net">RequestOptions</a>&nbsp;options)</code></div>
-<div class="col-last odd-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4">
-<div class="block">Retrieves the credit note object with the given identifier.</div>
-</div>
-<div class="col-first even-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4"><code>static <a href="CreditNote.html" title="class in com.stripe.model">CreditNote</a></code></div>
-<div class="col-second even-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4"><code><a href="#retrieve(java.lang.String,com.stripe.param.CreditNoteRetrieveParams,com.stripe.net.RequestOptions)" class="member-name-link">retrieve</a><wbr>(<a href="https://docs.oracle.com/en/java/javase/18/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;id,
+<div class="col-second odd-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4"><code><a href="#retrieve(java.lang.String,com.stripe.param.CreditNoteRetrieveParams,com.stripe.net.RequestOptions)" class="member-name-link">retrieve</a><wbr>(<a href="https://docs.oracle.com/en/java/javase/18/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;id,
  <a href="../param/CreditNoteRetrieveParams.html" title="class in com.stripe.param">CreditNoteRetrieveParams</a>&nbsp;params,
  <a href="../net/RequestOptions.html" title="class in com.stripe.net">RequestOptions</a>&nbsp;options)</code></div>
-<div class="col-last even-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4">
-<div class="block">Retrieves the credit note object with the given identifier.</div>
-</div>
-<div class="col-first odd-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4"><code>static <a href="CreditNote.html" title="class in com.stripe.model">CreditNote</a></code></div>
-<div class="col-second odd-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4"><code><a href="#retrieve(java.lang.String,java.util.Map,com.stripe.net.RequestOptions)" class="member-name-link">retrieve</a><wbr>(<a href="https://docs.oracle.com/en/java/javase/18/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;id,
- <a href="https://docs.oracle.com/en/java/javase/18/docs/api/java.base/java/util/Map.html" title="class or interface in java.util" class="external-link">Map</a>&lt;<a href="https://docs.oracle.com/en/java/javase/18/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>,<wbr><a href="https://docs.oracle.com/en/java/javase/18/docs/api/java.base/java/lang/Object.html" title="class or interface in java.lang" class="external-link">Object</a>&gt;&nbsp;params,
- <a href="../net/RequestOptions.html" title="class in com.stripe.net">RequestOptions</a>&nbsp;options)</code></div>
 <div class="col-last odd-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4">
 <div class="block">Retrieves the credit note object with the given identifier.</div>
 </div>
-<div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>void</code></div>
-<div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#setAmount(java.lang.Long)" class="member-name-link">setAmount</a><wbr>(<a href="https://docs.oracle.com/en/java/javase/18/docs/api/java.base/java/lang/Long.html" title="class or interface in java.lang" class="external-link">Long</a>&nbsp;amount)</code></div>
-<div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
-<div class="block">The integer amount in %s representing the total amount of the credit note, including tax.</div>
+<div class="col-first even-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4"><code>static <a href="CreditNote.html" title="class in com.stripe.model">CreditNote</a></code></div>
+<div class="col-second even-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4"><code><a href="#retrieve(java.lang.String,java.util.Map,com.stripe.net.RequestOptions)" class="member-name-link">retrieve</a><wbr>(<a href="https://docs.oracle.com/en/java/javase/18/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;id,
+ <a href="https://docs.oracle.com/en/java/javase/18/docs/api/java.base/java/util/Map.html" title="class or interface in java.util" class="external-link">Map</a>&lt;<a href="https://docs.oracle.com/en/java/javase/18/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>,<wbr><a href="https://docs.oracle.com/en/java/javase/18/docs/api/java.base/java/lang/Object.html" title="class or interface in java.lang" class="external-link">Object</a>&gt;&nbsp;params,
+ <a href="../net/RequestOptions.html" title="class in com.stripe.net">RequestOptions</a>&nbsp;options)</code></div>
+<div class="col-last even-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4">
+<div class="block">Retrieves the credit note object with the given identifier.</div>
 </div>
 <div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>void</code></div>
-<div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#setCreated(java.lang.Long)" class="member-name-link">setCreated</a><wbr>(<a href="https://docs.oracle.com/en/java/javase/18/docs/api/java.base/java/lang/Long.html" title="class or interface in java.lang" class="external-link">Long</a>&nbsp;created)</code></div>
+<div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#setAmount(java.lang.Long)" class="member-name-link">setAmount</a><wbr>(<a href="https://docs.oracle.com/en/java/javase/18/docs/api/java.base/java/lang/Long.html" title="class or interface in java.lang" class="external-link">Long</a>&nbsp;amount)</code></div>
 <div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
-<div class="block">Time at which the object was created.</div>
+<div class="block">The integer amount in %s representing the total amount of the credit note, including tax.</div>
 </div>
 <div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>void</code></div>
-<div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#setCurrency(java.lang.String)" class="member-name-link">setCurrency</a><wbr>(<a href="https://docs.oracle.com/en/java/javase/18/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;currency)</code></div>
+<div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#setCreated(java.lang.Long)" class="member-name-link">setCreated</a><wbr>(<a href="https://docs.oracle.com/en/java/javase/18/docs/api/java.base/java/lang/Long.html" title="class or interface in java.lang" class="external-link">Long</a>&nbsp;created)</code></div>
 <div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
+<div class="block">Time at which the object was created.</div>
+</div>
+<div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>void</code></div>
+<div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#setCurrency(java.lang.String)" class="member-name-link">setCurrency</a><wbr>(<a href="https://docs.oracle.com/en/java/javase/18/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;currency)</code></div>
+<div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
 <div class="block">Three-letter <a href="https://www.iso.org/iso-4217-currency-codes.html">ISO currency code</a>,
  in lowercase.</div>
 </div>
-<div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>void</code></div>
-<div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#setCustomer(java.lang.String)" class="member-name-link">setCustomer</a><wbr>(<a href="https://docs.oracle.com/en/java/javase/18/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;id)</code></div>
-<div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">&nbsp;</div>
 <div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>void</code></div>
-<div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#setCustomerBalanceTransaction(java.lang.String)" class="member-name-link">setCustomerBalanceTransaction</a><wbr>(<a href="https://docs.oracle.com/en/java/javase/18/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;id)</code></div>
+<div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#setCustomer(java.lang.String)" class="member-name-link">setCustomer</a><wbr>(<a href="https://docs.oracle.com/en/java/javase/18/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;id)</code></div>
 <div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">&nbsp;</div>
 <div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>void</code></div>
-<div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#setCustomerBalanceTransactionObject(com.stripe.model.CustomerBalanceTransaction)" class="member-name-link">setCustomerBalanceTransactionObject</a><wbr>(<a href="CustomerBalanceTransaction.html" title="class in com.stripe.model">CustomerBalanceTransaction</a>&nbsp;expandableObject)</code></div>
+<div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#setCustomerBalanceTransaction(java.lang.String)" class="member-name-link">setCustomerBalanceTransaction</a><wbr>(<a href="https://docs.oracle.com/en/java/javase/18/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;id)</code></div>
 <div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">&nbsp;</div>
 <div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>void</code></div>
-<div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#setCustomerObject(com.stripe.model.Customer)" class="member-name-link">setCustomerObject</a><wbr>(<a href="Customer.html" title="class in com.stripe.model">Customer</a>&nbsp;expandableObject)</code></div>
+<div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#setCustomerBalanceTransactionObject(com.stripe.model.CustomerBalanceTransaction)" class="member-name-link">setCustomerBalanceTransactionObject</a><wbr>(<a href="CustomerBalanceTransaction.html" title="class in com.stripe.model">CustomerBalanceTransaction</a>&nbsp;expandableObject)</code></div>
 <div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">&nbsp;</div>
 <div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>void</code></div>
-<div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#setDiscountAmount(java.lang.Long)" class="member-name-link">setDiscountAmount</a><wbr>(<a href="https://docs.oracle.com/en/java/javase/18/docs/api/java.base/java/lang/Long.html" title="class or interface in java.lang" class="external-link">Long</a>&nbsp;discountAmount)</code></div>
-<div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
+<div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#setCustomerObject(com.stripe.model.Customer)" class="member-name-link">setCustomerObject</a><wbr>(<a href="Customer.html" title="class in com.stripe.model">Customer</a>&nbsp;expandableObject)</code></div>
+<div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">&nbsp;</div>
+<div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>void</code></div>
+<div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#setDiscountAmount(java.lang.Long)" class="member-name-link">setDiscountAmount</a><wbr>(<a href="https://docs.oracle.com/en/java/javase/18/docs/api/java.base/java/lang/Long.html" title="class or interface in java.lang" class="external-link">Long</a>&nbsp;discountAmount)</code></div>
+<div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
 <div class="block">The integer amount in %s representing the total amount of discount that was credited.</div>
 </div>
-<div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>void</code></div>
-<div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#setDiscountAmounts(java.util.List)" class="member-name-link">setDiscountAmounts</a><wbr>(<a href="https://docs.oracle.com/en/java/javase/18/docs/api/java.base/java/util/List.html" title="class or interface in java.util" class="external-link">List</a>&lt;<a href="CreditNote.DiscountAmount.html" title="class in com.stripe.model">CreditNote.DiscountAmount</a>&gt;&nbsp;discountAmounts)</code></div>
-<div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
+<div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>void</code></div>
+<div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#setDiscountAmounts(java.util.List)" class="member-name-link">setDiscountAmounts</a><wbr>(<a href="https://docs.oracle.com/en/java/javase/18/docs/api/java.base/java/util/List.html" title="class or interface in java.util" class="external-link">List</a>&lt;<a href="CreditNote.DiscountAmount.html" title="class in com.stripe.model">CreditNote.DiscountAmount</a>&gt;&nbsp;discountAmounts)</code></div>
+<div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
 <div class="block">The aggregate amounts calculated per discount for all line items.</div>
 </div>
-<div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>void</code></div>
-<div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#setId(java.lang.String)" class="member-name-link">setId</a><wbr>(<a href="https://docs.oracle.com/en/java/javase/18/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;id)</code></div>
-<div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
+<div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>void</code></div>
+<div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#setId(java.lang.String)" class="member-name-link">setId</a><wbr>(<a href="https://docs.oracle.com/en/java/javase/18/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;id)</code></div>
+<div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
 <div class="block">Unique identifier for the object.</div>
 </div>
-<div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>void</code></div>
-<div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#setInvoice(java.lang.String)" class="member-name-link">setInvoice</a><wbr>(<a href="https://docs.oracle.com/en/java/javase/18/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;id)</code></div>
-<div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">&nbsp;</div>
 <div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>void</code></div>
-<div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#setInvoiceObject(com.stripe.model.Invoice)" class="member-name-link">setInvoiceObject</a><wbr>(<a href="Invoice.html" title="class in com.stripe.model">Invoice</a>&nbsp;expandableObject)</code></div>
+<div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#setInvoice(java.lang.String)" class="member-name-link">setInvoice</a><wbr>(<a href="https://docs.oracle.com/en/java/javase/18/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;id)</code></div>
 <div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">&nbsp;</div>
 <div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>void</code></div>
-<div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#setLines(com.stripe.model.CreditNoteLineItemCollection)" class="member-name-link">setLines</a><wbr>(<a href="CreditNoteLineItemCollection.html" title="class in com.stripe.model">CreditNoteLineItemCollection</a>&nbsp;lines)</code></div>
-<div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
+<div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#setInvoiceObject(com.stripe.model.Invoice)" class="member-name-link">setInvoiceObject</a><wbr>(<a href="Invoice.html" title="class in com.stripe.model">Invoice</a>&nbsp;expandableObject)</code></div>
+<div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">&nbsp;</div>
+<div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>void</code></div>
+<div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#setLines(com.stripe.model.CreditNoteLineItemCollection)" class="member-name-link">setLines</a><wbr>(<a href="CreditNoteLineItemCollection.html" title="class in com.stripe.model">CreditNoteLineItemCollection</a>&nbsp;lines)</code></div>
+<div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
 <div class="block">Line items that make up the credit note.</div>
 </div>
-<div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>void</code></div>
-<div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#setLivemode(java.lang.Boolean)" class="member-name-link">setLivemode</a><wbr>(<a href="https://docs.oracle.com/en/java/javase/18/docs/api/java.base/java/lang/Boolean.html" title="class or interface in java.lang" class="external-link">Boolean</a>&nbsp;livemode)</code></div>
-<div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
+<div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>void</code></div>
+<div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#setLivemode(java.lang.Boolean)" class="member-name-link">setLivemode</a><wbr>(<a href="https://docs.oracle.com/en/java/javase/18/docs/api/java.base/java/lang/Boolean.html" title="class or interface in java.lang" class="external-link">Boolean</a>&nbsp;livemode)</code></div>
+<div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
 <div class="block">Has the value <code>true</code> if the object exists in live mode or the value <code>false</code> if the
  object exists in test mode.</div>
 </div>
-<div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>void</code></div>
-<div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#setMemo(java.lang.String)" class="member-name-link">setMemo</a><wbr>(<a href="https://docs.oracle.com/en/java/javase/18/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;memo)</code></div>
-<div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
+<div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>void</code></div>
+<div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#setMemo(java.lang.String)" class="member-name-link">setMemo</a><wbr>(<a href="https://docs.oracle.com/en/java/javase/18/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;memo)</code></div>
+<div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
 <div class="block">Customer-facing text that appears on the credit note PDF.</div>
 </div>
-<div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>void</code></div>
-<div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#setMetadata(java.util.Map)" class="member-name-link">setMetadata</a><wbr>(<a href="https://docs.oracle.com/en/java/javase/18/docs/api/java.base/java/util/Map.html" title="class or interface in java.util" class="external-link">Map</a>&lt;<a href="https://docs.oracle.com/en/java/javase/18/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>,<wbr><a href="https://docs.oracle.com/en/java/javase/18/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&gt;&nbsp;metadata)</code></div>
-<div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
+<div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>void</code></div>
+<div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#setMetadata(java.util.Map)" class="member-name-link">setMetadata</a><wbr>(<a href="https://docs.oracle.com/en/java/javase/18/docs/api/java.base/java/util/Map.html" title="class or interface in java.util" class="external-link">Map</a>&lt;<a href="https://docs.oracle.com/en/java/javase/18/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>,<wbr><a href="https://docs.oracle.com/en/java/javase/18/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&gt;&nbsp;metadata)</code></div>
+<div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
 <div class="block">Set of <a href="https://stripe.com/docs/api/metadata">key-value pairs</a> that you can attach
  to an object.</div>
 </div>
-<div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>void</code></div>
-<div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#setNumber(java.lang.String)" class="member-name-link">setNumber</a><wbr>(<a href="https://docs.oracle.com/en/java/javase/18/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;number)</code></div>
-<div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
+<div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>void</code></div>
+<div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#setNumber(java.lang.String)" class="member-name-link">setNumber</a><wbr>(<a href="https://docs.oracle.com/en/java/javase/18/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;number)</code></div>
+<div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
 <div class="block">A unique number that identifies this particular credit note and appears on the PDF of the
  credit note and its associated invoice.</div>
 </div>
-<div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>void</code></div>
-<div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#setObject(java.lang.String)" class="member-name-link">setObject</a><wbr>(<a href="https://docs.oracle.com/en/java/javase/18/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;object)</code></div>
-<div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
+<div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>void</code></div>
+<div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#setObject(java.lang.String)" class="member-name-link">setObject</a><wbr>(<a href="https://docs.oracle.com/en/java/javase/18/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;object)</code></div>
+<div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
 <div class="block">String representing the object's type.</div>
 </div>
-<div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>void</code></div>
-<div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#setOutOfBandAmount(java.lang.Long)" class="member-name-link">setOutOfBandAmount</a><wbr>(<a href="https://docs.oracle.com/en/java/javase/18/docs/api/java.base/java/lang/Long.html" title="class or interface in java.lang" class="external-link">Long</a>&nbsp;outOfBandAmount)</code></div>
-<div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
+<div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>void</code></div>
+<div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#setOutOfBandAmount(java.lang.Long)" class="member-name-link">setOutOfBandAmount</a><wbr>(<a href="https://docs.oracle.com/en/java/javase/18/docs/api/java.base/java/lang/Long.html" title="class or interface in java.lang" class="external-link">Long</a>&nbsp;outOfBandAmount)</code></div>
+<div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
 <div class="block">Amount that was credited outside of Stripe.</div>
 </div>
-<div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>void</code></div>
-<div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#setPdf(java.lang.String)" class="member-name-link">setPdf</a><wbr>(<a href="https://docs.oracle.com/en/java/javase/18/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;pdf)</code></div>
-<div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
+<div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>void</code></div>
+<div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#setPdf(java.lang.String)" class="member-name-link">setPdf</a><wbr>(<a href="https://docs.oracle.com/en/java/javase/18/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;pdf)</code></div>
+<div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
 <div class="block">The link to download the PDF of the credit note.</div>
 </div>
-<div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>void</code></div>
-<div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#setReason(java.lang.String)" class="member-name-link">setReason</a><wbr>(<a href="https://docs.oracle.com/en/java/javase/18/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;reason)</code></div>
-<div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
+<div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>void</code></div>
+<div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#setReason(java.lang.String)" class="member-name-link">setReason</a><wbr>(<a href="https://docs.oracle.com/en/java/javase/18/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;reason)</code></div>
+<div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
 <div class="block">Reason for issuing this credit note, one of <code>duplicate</code>, <code>fraudulent</code>, <code>
  order_change</code>, or <code>product_unsatisfactory</code>.</div>
 </div>
-<div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>void</code></div>
-<div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#setRefund(java.lang.String)" class="member-name-link">setRefund</a><wbr>(<a href="https://docs.oracle.com/en/java/javase/18/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;id)</code></div>
-<div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">&nbsp;</div>
 <div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>void</code></div>
-<div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#setRefundObject(com.stripe.model.Refund)" class="member-name-link">setRefundObject</a><wbr>(<a href="Refund.html" title="class in com.stripe.model">Refund</a>&nbsp;expandableObject)</code></div>
+<div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#setRefund(java.lang.String)" class="member-name-link">setRefund</a><wbr>(<a href="https://docs.oracle.com/en/java/javase/18/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;id)</code></div>
 <div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">&nbsp;</div>
 <div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>void</code></div>
-<div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#setStatus(java.lang.String)" class="member-name-link">setStatus</a><wbr>(<a href="https://docs.oracle.com/en/java/javase/18/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;status)</code></div>
-<div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
+<div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#setRefundObject(com.stripe.model.Refund)" class="member-name-link">setRefundObject</a><wbr>(<a href="Refund.html" title="class in com.stripe.model">Refund</a>&nbsp;expandableObject)</code></div>
+<div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">&nbsp;</div>
+<div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>void</code></div>
+<div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#setStatus(java.lang.String)" class="member-name-link">setStatus</a><wbr>(<a href="https://docs.oracle.com/en/java/javase/18/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;status)</code></div>
+<div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
 <div class="block">Status of this credit note, one of <code>issued</code> or <code>void</code>.</div>
 </div>
-<div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>void</code></div>
-<div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#setSubtotal(java.lang.Long)" class="member-name-link">setSubtotal</a><wbr>(<a href="https://docs.oracle.com/en/java/javase/18/docs/api/java.base/java/lang/Long.html" title="class or interface in java.lang" class="external-link">Long</a>&nbsp;subtotal)</code></div>
-<div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
-<div class="block">The integer amount in %s representing the amount of the credit note, excluding tax and invoice
- level discounts.</div>
-</div>
 <div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>void</code></div>
-<div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#setTaxAmounts(java.util.List)" class="member-name-link">setTaxAmounts</a><wbr>(<a href="https://docs.oracle.com/en/java/javase/18/docs/api/java.base/java/util/List.html" title="class or interface in java.util" class="external-link">List</a>&lt;<a href="CreditNote.TaxAmount.html" title="class in com.stripe.model">CreditNote.TaxAmount</a>&gt;&nbsp;taxAmounts)</code></div>
+<div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#setSubtotal(java.lang.Long)" class="member-name-link">setSubtotal</a><wbr>(<a href="https://docs.oracle.com/en/java/javase/18/docs/api/java.base/java/lang/Long.html" title="class or interface in java.lang" class="external-link">Long</a>&nbsp;subtotal)</code></div>
 <div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
+<div class="block">The integer amount in %s representing the amount of the credit note, excluding exclusive tax
+ and invoice level discounts.</div>
+</div>
+<div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>void</code></div>
+<div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#setTaxAmounts(java.util.List)" class="member-name-link">setTaxAmounts</a><wbr>(<a href="https://docs.oracle.com/en/java/javase/18/docs/api/java.base/java/util/List.html" title="class or interface in java.util" class="external-link">List</a>&lt;<a href="CreditNote.TaxAmount.html" title="class in com.stripe.model">CreditNote.TaxAmount</a>&gt;&nbsp;taxAmounts)</code></div>
+<div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
 <div class="block">The aggregate amounts calculated per tax rate for all line items.</div>
 </div>
-<div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>void</code></div>
-<div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#setTotal(java.lang.Long)" class="member-name-link">setTotal</a><wbr>(<a href="https://docs.oracle.com/en/java/javase/18/docs/api/java.base/java/lang/Long.html" title="class or interface in java.lang" class="external-link">Long</a>&nbsp;total)</code></div>
-<div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
+<div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>void</code></div>
+<div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#setTotal(java.lang.Long)" class="member-name-link">setTotal</a><wbr>(<a href="https://docs.oracle.com/en/java/javase/18/docs/api/java.base/java/lang/Long.html" title="class or interface in java.lang" class="external-link">Long</a>&nbsp;total)</code></div>
+<div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
 <div class="block">The integer amount in %s representing the total amount of the credit note, including tax and
  all discount.</div>
+</div>
+<div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>void</code></div>
+<div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#setTotalExcludingTax(java.lang.Long)" class="member-name-link">setTotalExcludingTax</a><wbr>(<a href="https://docs.oracle.com/en/java/javase/18/docs/api/java.base/java/lang/Long.html" title="class or interface in java.lang" class="external-link">Long</a>&nbsp;totalExcludingTax)</code></div>
+<div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
+<div class="block">The integer amount in %s representing the total amount of the credit note, excluding tax, but
+ including discounts.</div>
 </div>
 <div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>void</code></div>
 <div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#setType(java.lang.String)" class="member-name-link">setType</a><wbr>(<a href="https://docs.oracle.com/en/java/javase/18/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;type)</code></div>
@@ -1268,8 +1280,8 @@ implements <a href="HasId.html" title="interface in com.stripe.model">HasId</a>,
 <section class="detail" id="getSubtotal()">
 <h3>getSubtotal</h3>
 <div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type"><a href="https://docs.oracle.com/en/java/javase/18/docs/api/java.base/java/lang/Long.html" title="class or interface in java.lang" class="external-link">Long</a></span>&nbsp;<span class="element-name">getSubtotal</span>()</div>
-<div class="block">The integer amount in %s representing the amount of the credit note, excluding tax and invoice
- level discounts.</div>
+<div class="block">The integer amount in %s representing the amount of the credit note, excluding exclusive tax
+ and invoice level discounts.</div>
 </section>
 </li>
 <li>
@@ -1285,6 +1297,14 @@ implements <a href="HasId.html" title="interface in com.stripe.model">HasId</a>,
 <div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type"><a href="https://docs.oracle.com/en/java/javase/18/docs/api/java.base/java/lang/Long.html" title="class or interface in java.lang" class="external-link">Long</a></span>&nbsp;<span class="element-name">getTotal</span>()</div>
 <div class="block">The integer amount in %s representing the total amount of the credit note, including tax and
  all discount.</div>
+</section>
+</li>
+<li>
+<section class="detail" id="getTotalExcludingTax()">
+<h3>getTotalExcludingTax</h3>
+<div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type"><a href="https://docs.oracle.com/en/java/javase/18/docs/api/java.base/java/lang/Long.html" title="class or interface in java.lang" class="external-link">Long</a></span>&nbsp;<span class="element-name">getTotalExcludingTax</span>()</div>
+<div class="block">The integer amount in %s representing the total amount of the credit note, excluding tax, but
+ including discounts.</div>
 </section>
 </li>
 <li>
@@ -1427,8 +1447,8 @@ implements <a href="HasId.html" title="interface in com.stripe.model">HasId</a>,
 <section class="detail" id="setSubtotal(java.lang.Long)">
 <h3>setSubtotal</h3>
 <div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type">void</span>&nbsp;<span class="element-name">setSubtotal</span><wbr><span class="parameters">(<a href="https://docs.oracle.com/en/java/javase/18/docs/api/java.base/java/lang/Long.html" title="class or interface in java.lang" class="external-link">Long</a>&nbsp;subtotal)</span></div>
-<div class="block">The integer amount in %s representing the amount of the credit note, excluding tax and invoice
- level discounts.</div>
+<div class="block">The integer amount in %s representing the amount of the credit note, excluding exclusive tax
+ and invoice level discounts.</div>
 </section>
 </li>
 <li>
@@ -1444,6 +1464,14 @@ implements <a href="HasId.html" title="interface in com.stripe.model">HasId</a>,
 <div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type">void</span>&nbsp;<span class="element-name">setTotal</span><wbr><span class="parameters">(<a href="https://docs.oracle.com/en/java/javase/18/docs/api/java.base/java/lang/Long.html" title="class or interface in java.lang" class="external-link">Long</a>&nbsp;total)</span></div>
 <div class="block">The integer amount in %s representing the total amount of the credit note, including tax and
  all discount.</div>
+</section>
+</li>
+<li>
+<section class="detail" id="setTotalExcludingTax(java.lang.Long)">
+<h3>setTotalExcludingTax</h3>
+<div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type">void</span>&nbsp;<span class="element-name">setTotalExcludingTax</span><wbr><span class="parameters">(<a href="https://docs.oracle.com/en/java/javase/18/docs/api/java.base/java/lang/Long.html" title="class or interface in java.lang" class="external-link">Long</a>&nbsp;totalExcludingTax)</span></div>
+<div class="block">The integer amount in %s representing the total amount of the credit note, excluding tax, but
+ including discounts.</div>
 </section>
 </li>
 <li>

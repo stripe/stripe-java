@@ -146,6 +146,16 @@ loadScripts(document, 'script');</script>
 <div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
 <div class="block">Indicates that you intend to make future payments with this PaymentIntent's payment method.</div>
 </div>
+<div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="https://docs.oracle.com/en/java/javase/18/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a></code></div>
+<div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#getStatementDescriptorSuffixKana()" class="member-name-link">getStatementDescriptorSuffixKana</a>()</code></div>
+<div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
+<div class="block">Provides information about a card payment that customers see on their statements.</div>
+</div>
+<div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="https://docs.oracle.com/en/java/javase/18/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a></code></div>
+<div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#getStatementDescriptorSuffixKanji()" class="member-name-link">getStatementDescriptorSuffixKanji</a>()</code></div>
+<div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
+<div class="block">Provides information about a card payment that customers see on their statements.</div>
+</div>
 </div>
 </div>
 </div>
@@ -194,6 +204,28 @@ loadScripts(document, 'script');</script>
  <p>When processing card payments, Stripe also uses <code>setup_future_usage</code> to
  dynamically optimize your payment flow and comply with regional legislation and network
  rules, such as <a href="https://stripe.com/docs/strong-customer-authentication">SCA</a>.</div>
+</section>
+</li>
+<li>
+<section class="detail" id="getStatementDescriptorSuffixKana()">
+<h3>getStatementDescriptorSuffixKana</h3>
+<div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type"><a href="https://docs.oracle.com/en/java/javase/18/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a></span>&nbsp;<span class="element-name">getStatementDescriptorSuffixKana</span>()</div>
+<div class="block">Provides information about a card payment that customers see on their statements.
+ Concatenated with the Kana prefix (shortened Kana descriptor) or Kana statement descriptor
+ that’s set on the account to form the complete statement descriptor. Maximum 22 characters.
+ On card statements, the <em>concatenation</em> of both prefix and suffix (including
+ separators) will appear truncated to 22 characters.</div>
+</section>
+</li>
+<li>
+<section class="detail" id="getStatementDescriptorSuffixKanji()">
+<h3>getStatementDescriptorSuffixKanji</h3>
+<div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type"><a href="https://docs.oracle.com/en/java/javase/18/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a></span>&nbsp;<span class="element-name">getStatementDescriptorSuffixKanji</span>()</div>
+<div class="block">Provides information about a card payment that customers see on their statements.
+ Concatenated with the Kanji prefix (shortened Kanji descriptor) or Kanji statement
+ descriptor that’s set on the account to form the complete statement descriptor. Maximum 17
+ characters. On card statements, the <em>concatenation</em> of both prefix and suffix
+ (including separators) will appear truncated to 17 characters.</div>
 </section>
 </li>
 </ul>
