@@ -6656,6 +6656,26 @@ public class PaymentIntentConfirmParams extends ApiRequestParams {
       @SerializedName("setup_future_usage")
       EnumParam setupFutureUsage;
 
+      /**
+       * Provides information about a card payment that customers see on their statements.
+       * Concatenated with the Kana prefix (shortened Kana descriptor) or Kana statement descriptor
+       * that’s set on the account to form the complete statement descriptor. Maximum 22 characters.
+       * On card statements, the <em>concatenation</em> of both prefix and suffix (including
+       * separators) will appear truncated to 22 characters.
+       */
+      @SerializedName("statement_descriptor_suffix_kana")
+      Object statementDescriptorSuffixKana;
+
+      /**
+       * Provides information about a card payment that customers see on their statements.
+       * Concatenated with the Kanji prefix (shortened Kanji descriptor) or Kanji statement
+       * descriptor that’s set on the account to form the complete statement descriptor. Maximum 17
+       * characters. On card statements, the <em>concatenation</em> of both prefix and suffix
+       * (including separators) will appear truncated to 17 characters.
+       */
+      @SerializedName("statement_descriptor_suffix_kanji")
+      Object statementDescriptorSuffixKanji;
+
       private Card(
           EnumParam captureMethod,
           String cvcToken,
@@ -6665,7 +6685,9 @@ public class PaymentIntentConfirmParams extends ApiRequestParams {
           Boolean moto,
           Network network,
           RequestThreeDSecure requestThreeDSecure,
-          EnumParam setupFutureUsage) {
+          EnumParam setupFutureUsage,
+          Object statementDescriptorSuffixKana,
+          Object statementDescriptorSuffixKanji) {
         this.captureMethod = captureMethod;
         this.cvcToken = cvcToken;
         this.extraParams = extraParams;
@@ -6675,6 +6697,8 @@ public class PaymentIntentConfirmParams extends ApiRequestParams {
         this.network = network;
         this.requestThreeDSecure = requestThreeDSecure;
         this.setupFutureUsage = setupFutureUsage;
+        this.statementDescriptorSuffixKana = statementDescriptorSuffixKana;
+        this.statementDescriptorSuffixKanji = statementDescriptorSuffixKanji;
       }
 
       public static Builder builder() {
@@ -6700,6 +6724,10 @@ public class PaymentIntentConfirmParams extends ApiRequestParams {
 
         private EnumParam setupFutureUsage;
 
+        private Object statementDescriptorSuffixKana;
+
+        private Object statementDescriptorSuffixKanji;
+
         /** Finalize and obtain parameter instance from this builder. */
         public Card build() {
           return new Card(
@@ -6711,7 +6739,9 @@ public class PaymentIntentConfirmParams extends ApiRequestParams {
               this.moto,
               this.network,
               this.requestThreeDSecure,
-              this.setupFutureUsage);
+              this.setupFutureUsage,
+              this.statementDescriptorSuffixKana,
+              this.statementDescriptorSuffixKanji);
         }
 
         /**
@@ -6879,6 +6909,55 @@ public class PaymentIntentConfirmParams extends ApiRequestParams {
          */
         public Builder setSetupFutureUsage(EmptyParam setupFutureUsage) {
           this.setupFutureUsage = setupFutureUsage;
+          return this;
+        }
+
+        /**
+         * Provides information about a card payment that customers see on their statements.
+         * Concatenated with the Kana prefix (shortened Kana descriptor) or Kana statement
+         * descriptor that’s set on the account to form the complete statement descriptor. Maximum
+         * 22 characters. On card statements, the <em>concatenation</em> of both prefix and suffix
+         * (including separators) will appear truncated to 22 characters.
+         */
+        public Builder setStatementDescriptorSuffixKana(String statementDescriptorSuffixKana) {
+          this.statementDescriptorSuffixKana = statementDescriptorSuffixKana;
+          return this;
+        }
+
+        /**
+         * Provides information about a card payment that customers see on their statements.
+         * Concatenated with the Kana prefix (shortened Kana descriptor) or Kana statement
+         * descriptor that’s set on the account to form the complete statement descriptor. Maximum
+         * 22 characters. On card statements, the <em>concatenation</em> of both prefix and suffix
+         * (including separators) will appear truncated to 22 characters.
+         */
+        public Builder setStatementDescriptorSuffixKana(EmptyParam statementDescriptorSuffixKana) {
+          this.statementDescriptorSuffixKana = statementDescriptorSuffixKana;
+          return this;
+        }
+
+        /**
+         * Provides information about a card payment that customers see on their statements.
+         * Concatenated with the Kanji prefix (shortened Kanji descriptor) or Kanji statement
+         * descriptor that’s set on the account to form the complete statement descriptor. Maximum
+         * 17 characters. On card statements, the <em>concatenation</em> of both prefix and suffix
+         * (including separators) will appear truncated to 17 characters.
+         */
+        public Builder setStatementDescriptorSuffixKanji(String statementDescriptorSuffixKanji) {
+          this.statementDescriptorSuffixKanji = statementDescriptorSuffixKanji;
+          return this;
+        }
+
+        /**
+         * Provides information about a card payment that customers see on their statements.
+         * Concatenated with the Kanji prefix (shortened Kanji descriptor) or Kanji statement
+         * descriptor that’s set on the account to form the complete statement descriptor. Maximum
+         * 17 characters. On card statements, the <em>concatenation</em> of both prefix and suffix
+         * (including separators) will appear truncated to 17 characters.
+         */
+        public Builder setStatementDescriptorSuffixKanji(
+            EmptyParam statementDescriptorSuffixKanji) {
+          this.statementDescriptorSuffixKanji = statementDescriptorSuffixKanji;
           return this;
         }
       }
