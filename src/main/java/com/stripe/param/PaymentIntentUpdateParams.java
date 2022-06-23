@@ -35,6 +35,10 @@ public class PaymentIntentUpdateParams extends ApiRequestParams {
   @SerializedName("application_fee_amount")
   Object applicationFeeAmount;
 
+  /** Controls when the funds will be captured from the customer's account. */
+  @SerializedName("capture_method")
+  CaptureMethod captureMethod;
+
   /**
    * Three-letter <a href="https://www.iso.org/iso-4217-currency-codes.html">ISO currency code</a>,
    * in lowercase. Must be a <a href="https://stripe.com/docs/currencies">supported currency</a>.
@@ -177,6 +181,7 @@ public class PaymentIntentUpdateParams extends ApiRequestParams {
   private PaymentIntentUpdateParams(
       Long amount,
       Object applicationFeeAmount,
+      CaptureMethod captureMethod,
       Object currency,
       Object customer,
       Object description,
@@ -196,6 +201,7 @@ public class PaymentIntentUpdateParams extends ApiRequestParams {
       Object transferGroup) {
     this.amount = amount;
     this.applicationFeeAmount = applicationFeeAmount;
+    this.captureMethod = captureMethod;
     this.currency = currency;
     this.customer = customer;
     this.description = description;
@@ -223,6 +229,8 @@ public class PaymentIntentUpdateParams extends ApiRequestParams {
     private Long amount;
 
     private Object applicationFeeAmount;
+
+    private CaptureMethod captureMethod;
 
     private Object currency;
 
@@ -263,6 +271,7 @@ public class PaymentIntentUpdateParams extends ApiRequestParams {
       return new PaymentIntentUpdateParams(
           this.amount,
           this.applicationFeeAmount,
+          this.captureMethod,
           this.currency,
           this.customer,
           this.description,
@@ -317,6 +326,12 @@ public class PaymentIntentUpdateParams extends ApiRequestParams {
      */
     public Builder setApplicationFeeAmount(EmptyParam applicationFeeAmount) {
       this.applicationFeeAmount = applicationFeeAmount;
+      return this;
+    }
+
+    /** Controls when the funds will be captured from the customer's account. */
+    public Builder setCaptureMethod(CaptureMethod captureMethod) {
+      this.captureMethod = captureMethod;
       return this;
     }
 
@@ -11812,6 +11827,21 @@ public class PaymentIntentUpdateParams extends ApiRequestParams {
         this.extraParams.putAll(map);
         return this;
       }
+    }
+  }
+
+  public enum CaptureMethod implements ApiRequestParams.EnumParam {
+    @SerializedName("automatic")
+    AUTOMATIC("automatic"),
+
+    @SerializedName("manual")
+    MANUAL("manual");
+
+    @Getter(onMethod_ = {@Override})
+    private final String value;
+
+    CaptureMethod(String value) {
+      this.value = value;
     }
   }
 
