@@ -3,6 +3,7 @@ package com.stripe.param;
 
 import com.google.gson.annotations.SerializedName;
 import com.stripe.net.ApiRequestParams;
+import com.stripe.net.ApiRequestParams.EnumParam;
 import com.stripe.param.common.EmptyParam;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -146,6 +147,10 @@ public class InvoiceUpdateParams extends ApiRequestParams {
   @SerializedName("payment_settings")
   PaymentSettings paymentSettings;
 
+  /** Options for invoice PDF rendering. */
+  @SerializedName("rendering_options")
+  Object renderingOptions;
+
   /**
    * Extra information about a charge for the customer's credit card statement. It must contain at
    * least one letter. If not specified and this invoice is part of a subscription, the default
@@ -183,6 +188,7 @@ public class InvoiceUpdateParams extends ApiRequestParams {
       Object metadata,
       Object onBehalfOf,
       PaymentSettings paymentSettings,
+      Object renderingOptions,
       Object statementDescriptor,
       Object transferData) {
     this.accountTaxIds = accountTaxIds;
@@ -204,6 +210,7 @@ public class InvoiceUpdateParams extends ApiRequestParams {
     this.metadata = metadata;
     this.onBehalfOf = onBehalfOf;
     this.paymentSettings = paymentSettings;
+    this.renderingOptions = renderingOptions;
     this.statementDescriptor = statementDescriptor;
     this.transferData = transferData;
   }
@@ -251,6 +258,8 @@ public class InvoiceUpdateParams extends ApiRequestParams {
 
     private PaymentSettings paymentSettings;
 
+    private Object renderingOptions;
+
     private Object statementDescriptor;
 
     private Object transferData;
@@ -277,6 +286,7 @@ public class InvoiceUpdateParams extends ApiRequestParams {
           this.metadata,
           this.onBehalfOf,
           this.paymentSettings,
+          this.renderingOptions,
           this.statementDescriptor,
           this.transferData);
     }
@@ -720,6 +730,18 @@ public class InvoiceUpdateParams extends ApiRequestParams {
      */
     public Builder setPaymentSettings(PaymentSettings paymentSettings) {
       this.paymentSettings = paymentSettings;
+      return this;
+    }
+
+    /** Options for invoice PDF rendering. */
+    public Builder setRenderingOptions(RenderingOptions renderingOptions) {
+      this.renderingOptions = renderingOptions;
+      return this;
+    }
+
+    /** Options for invoice PDF rendering. */
+    public Builder setRenderingOptions(EmptyParam renderingOptions) {
+      this.renderingOptions = renderingOptions;
       return this;
     }
 
@@ -2441,6 +2463,9 @@ public class InvoiceUpdateParams extends ApiRequestParams {
       @SerializedName("paynow")
       PAYNOW("paynow"),
 
+      @SerializedName("promptpay")
+      PROMPTPAY("promptpay"),
+
       @SerializedName("sepa_credit_transfer")
       SEPA_CREDIT_TRANSFER("sepa_credit_transfer"),
 
@@ -2460,6 +2485,110 @@ public class InvoiceUpdateParams extends ApiRequestParams {
       private final String value;
 
       PaymentMethodType(String value) {
+        this.value = value;
+      }
+    }
+  }
+
+  @Getter
+  public static class RenderingOptions {
+    /**
+     * How line-item prices and amounts will be displayed with respect to tax on invoice PDFs. One
+     * of {@code exclude_tax} or {@code include_inclusive_tax}. {@code include_inclusive_tax} will
+     * include inclusive tax (and exclude exclusive tax) in invoice PDF amounts. {@code exclude_tax}
+     * will exclude all tax (inclusive and exclusive alike) from invoice PDF amounts.
+     */
+    @SerializedName("amount_tax_display")
+    EnumParam amountTaxDisplay;
+
+    /**
+     * Map of extra parameters for custom features not available in this client library. The content
+     * in this map is not serialized under this field's {@code @SerializedName} value. Instead, each
+     * key/value pair is serialized as if the key is a root-level field (serialized) name in this
+     * param object. Effectively, this map is flattened to its parent instance.
+     */
+    @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
+    Map<String, Object> extraParams;
+
+    private RenderingOptions(EnumParam amountTaxDisplay, Map<String, Object> extraParams) {
+      this.amountTaxDisplay = amountTaxDisplay;
+      this.extraParams = extraParams;
+    }
+
+    public static Builder builder() {
+      return new Builder();
+    }
+
+    public static class Builder {
+      private EnumParam amountTaxDisplay;
+
+      private Map<String, Object> extraParams;
+
+      /** Finalize and obtain parameter instance from this builder. */
+      public RenderingOptions build() {
+        return new RenderingOptions(this.amountTaxDisplay, this.extraParams);
+      }
+
+      /**
+       * How line-item prices and amounts will be displayed with respect to tax on invoice PDFs. One
+       * of {@code exclude_tax} or {@code include_inclusive_tax}. {@code include_inclusive_tax} will
+       * include inclusive tax (and exclude exclusive tax) in invoice PDF amounts. {@code
+       * exclude_tax} will exclude all tax (inclusive and exclusive alike) from invoice PDF amounts.
+       */
+      public Builder setAmountTaxDisplay(AmountTaxDisplay amountTaxDisplay) {
+        this.amountTaxDisplay = amountTaxDisplay;
+        return this;
+      }
+
+      /**
+       * How line-item prices and amounts will be displayed with respect to tax on invoice PDFs. One
+       * of {@code exclude_tax} or {@code include_inclusive_tax}. {@code include_inclusive_tax} will
+       * include inclusive tax (and exclude exclusive tax) in invoice PDF amounts. {@code
+       * exclude_tax} will exclude all tax (inclusive and exclusive alike) from invoice PDF amounts.
+       */
+      public Builder setAmountTaxDisplay(EmptyParam amountTaxDisplay) {
+        this.amountTaxDisplay = amountTaxDisplay;
+        return this;
+      }
+
+      /**
+       * Add a key/value pair to `extraParams` map. A map is initialized for the first `put/putAll`
+       * call, and subsequent calls add additional key/value pairs to the original map. See {@link
+       * InvoiceUpdateParams.RenderingOptions#extraParams} for the field documentation.
+       */
+      public Builder putExtraParam(String key, Object value) {
+        if (this.extraParams == null) {
+          this.extraParams = new HashMap<>();
+        }
+        this.extraParams.put(key, value);
+        return this;
+      }
+
+      /**
+       * Add all map key/value pairs to `extraParams` map. A map is initialized for the first
+       * `put/putAll` call, and subsequent calls add additional key/value pairs to the original map.
+       * See {@link InvoiceUpdateParams.RenderingOptions#extraParams} for the field documentation.
+       */
+      public Builder putAllExtraParam(Map<String, Object> map) {
+        if (this.extraParams == null) {
+          this.extraParams = new HashMap<>();
+        }
+        this.extraParams.putAll(map);
+        return this;
+      }
+    }
+
+    public enum AmountTaxDisplay implements ApiRequestParams.EnumParam {
+      @SerializedName("exclude_tax")
+      EXCLUDE_TAX("exclude_tax"),
+
+      @SerializedName("include_inclusive_tax")
+      INCLUDE_INCLUSIVE_TAX("include_inclusive_tax");
+
+      @Getter(onMethod_ = {@Override})
+      private final String value;
+
+      AmountTaxDisplay(String value) {
         this.value = value;
       }
     }

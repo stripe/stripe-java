@@ -89,6 +89,10 @@ public class ReceivedDebit extends ApiResource implements HasId {
   @SerializedName("object")
   String object;
 
+  /** Details describing when a ReceivedDebit might be reversed. */
+  @SerializedName("reversal_details")
+  ReversalDetails reversalDetails;
+
   /**
    * Status of the ReceivedDebit. ReceivedDebits are created with a status of either {@code
    * succeeded} (approved) or {@code failed} (declined). The failure reason can be found under the
@@ -290,6 +294,10 @@ public class ReceivedDebit extends ApiResource implements HasId {
   @Setter
   @EqualsAndHashCode(callSuper = false)
   public static class LinkedFlows extends StripeObject {
+    /** The DebitReversal created as a result of this ReceivedDebit being reversed. */
+    @SerializedName("debit_reversal")
+    String debitReversal;
+
     /** Set if the ReceivedDebit is associated with an InboundTransfer's return of funds. */
     @SerializedName("inbound_transfer")
     String inboundTransfer;
@@ -307,6 +315,24 @@ public class ReceivedDebit extends ApiResource implements HasId {
      */
     @SerializedName("issuing_transaction")
     String issuingTransaction;
+  }
+
+  @Getter
+  @Setter
+  @EqualsAndHashCode(callSuper = false)
+  public static class ReversalDetails extends StripeObject {
+    /** Time before which a ReceivedDebit can be reversed. */
+    @SerializedName("deadline")
+    Long deadline;
+
+    /**
+     * Set if a ReceivedDebit can't be reversed.
+     *
+     * <p>One of {@code already_reversed}, {@code deadline_passed}, {@code network_restricted},
+     * {@code other}, or {@code source_flow_restricted}.
+     */
+    @SerializedName("restricted_reason")
+    String restrictedReason;
   }
 
   @Getter

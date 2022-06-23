@@ -9537,6 +9537,9 @@ public class SessionCreateParams extends ApiRequestParams {
     @SerializedName("paynow")
     PAYNOW("paynow"),
 
+    @SerializedName("promptpay")
+    PROMPTPAY("promptpay"),
+
     @SerializedName("sepa_debit")
     SEPA_DEBIT("sepa_debit"),
 

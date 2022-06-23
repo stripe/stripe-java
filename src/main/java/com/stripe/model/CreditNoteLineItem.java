@@ -20,6 +20,13 @@ public class CreditNoteLineItem extends StripeObject implements HasId {
   @SerializedName("amount")
   Long amount;
 
+  /**
+   * The integer amount in %s representing the amount being credited for this line item, excluding
+   * all tax and discounts.
+   */
+  @SerializedName("amount_excluding_tax")
+  Long amountExcludingTax;
+
   /** Description of the item being credited. */
   @SerializedName("description")
   String description;
@@ -84,6 +91,13 @@ public class CreditNoteLineItem extends StripeObject implements HasId {
   /** Same as {@code unit_amount}, but contains a decimal value with at most 12 decimal places. */
   @SerializedName("unit_amount_decimal")
   BigDecimal unitAmountDecimal;
+
+  /**
+   * The amount in %s representing the unit amount being credited for this line item, excluding all
+   * tax and discounts.
+   */
+  @SerializedName("unit_amount_excluding_tax")
+  BigDecimal unitAmountExcludingTax;
 
   @Getter
   @Setter

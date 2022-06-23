@@ -208,6 +208,13 @@ public class PaymentMethodCreateParams extends ApiRequestParams {
   Paynow paynow;
 
   /**
+   * If this is a {@code promptpay} PaymentMethod, this hash contains details about the PromptPay
+   * payment method.
+   */
+  @SerializedName("promptpay")
+  Promptpay promptpay;
+
+  /**
    * Options to configure Radar. See <a href="https://stripe.com/docs/radar/radar-session">Radar
    * Session</a> for more information.
    */
@@ -278,6 +285,7 @@ public class PaymentMethodCreateParams extends ApiRequestParams {
       P24 p24,
       String paymentMethod,
       Paynow paynow,
+      Promptpay promptpay,
       RadarOptions radarOptions,
       SepaDebit sepaDebit,
       Sofort sofort,
@@ -312,6 +320,7 @@ public class PaymentMethodCreateParams extends ApiRequestParams {
     this.p24 = p24;
     this.paymentMethod = paymentMethod;
     this.paynow = paynow;
+    this.promptpay = promptpay;
     this.radarOptions = radarOptions;
     this.sepaDebit = sepaDebit;
     this.sofort = sofort;
@@ -381,6 +390,8 @@ public class PaymentMethodCreateParams extends ApiRequestParams {
 
     private Paynow paynow;
 
+    private Promptpay promptpay;
+
     private RadarOptions radarOptions;
 
     private SepaDebit sepaDebit;
@@ -424,6 +435,7 @@ public class PaymentMethodCreateParams extends ApiRequestParams {
           this.p24,
           this.paymentMethod,
           this.paynow,
+          this.promptpay,
           this.radarOptions,
           this.sepaDebit,
           this.sofort,
@@ -743,6 +755,15 @@ public class PaymentMethodCreateParams extends ApiRequestParams {
      */
     public Builder setPaynow(Paynow paynow) {
       this.paynow = paynow;
+      return this;
+    }
+
+    /**
+     * If this is a {@code promptpay} PaymentMethod, this hash contains details about the PromptPay
+     * payment method.
+     */
+    public Builder setPromptpay(Promptpay promptpay) {
+      this.promptpay = promptpay;
       return this;
     }
 
@@ -3009,6 +3030,61 @@ public class PaymentMethodCreateParams extends ApiRequestParams {
   }
 
   @Getter
+  public static class Promptpay {
+    /**
+     * Map of extra parameters for custom features not available in this client library. The content
+     * in this map is not serialized under this field's {@code @SerializedName} value. Instead, each
+     * key/value pair is serialized as if the key is a root-level field (serialized) name in this
+     * param object. Effectively, this map is flattened to its parent instance.
+     */
+    @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
+    Map<String, Object> extraParams;
+
+    private Promptpay(Map<String, Object> extraParams) {
+      this.extraParams = extraParams;
+    }
+
+    public static Builder builder() {
+      return new Builder();
+    }
+
+    public static class Builder {
+      private Map<String, Object> extraParams;
+
+      /** Finalize and obtain parameter instance from this builder. */
+      public Promptpay build() {
+        return new Promptpay(this.extraParams);
+      }
+
+      /**
+       * Add a key/value pair to `extraParams` map. A map is initialized for the first `put/putAll`
+       * call, and subsequent calls add additional key/value pairs to the original map. See {@link
+       * PaymentMethodCreateParams.Promptpay#extraParams} for the field documentation.
+       */
+      public Builder putExtraParam(String key, Object value) {
+        if (this.extraParams == null) {
+          this.extraParams = new HashMap<>();
+        }
+        this.extraParams.put(key, value);
+        return this;
+      }
+
+      /**
+       * Add all map key/value pairs to `extraParams` map. A map is initialized for the first
+       * `put/putAll` call, and subsequent calls add additional key/value pairs to the original map.
+       * See {@link PaymentMethodCreateParams.Promptpay#extraParams} for the field documentation.
+       */
+      public Builder putAllExtraParam(Map<String, Object> map) {
+        if (this.extraParams == null) {
+          this.extraParams = new HashMap<>();
+        }
+        this.extraParams.putAll(map);
+        return this;
+      }
+    }
+  }
+
+  @Getter
   public static class RadarOptions {
     /**
      * Map of extra parameters for custom features not available in this client library. The content
@@ -3528,6 +3604,9 @@ public class PaymentMethodCreateParams extends ApiRequestParams {
 
     @SerializedName("paynow")
     PAYNOW("paynow"),
+
+    @SerializedName("promptpay")
+    PROMPTPAY("promptpay"),
 
     @SerializedName("sepa_debit")
     SEPA_DEBIT("sepa_debit"),

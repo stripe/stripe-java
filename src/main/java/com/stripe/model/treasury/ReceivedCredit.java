@@ -89,6 +89,10 @@ public class ReceivedCredit extends ApiResource implements HasId {
   @SerializedName("object")
   String object;
 
+  /** Details describing when a ReceivedCredit may be reversed. */
+  @SerializedName("reversal_details")
+  ReversalDetails reversalDetails;
+
   /**
    * Status of the ReceivedCredit. ReceivedCredits are created either {@code succeeded} (approved)
    * or {@code failed} (declined). If a ReceivedCredit is declined, the failure reason can be found
@@ -374,6 +378,24 @@ public class ReceivedCredit extends ApiResource implements HasId {
       @SerializedName("type")
       String type;
     }
+  }
+
+  @Getter
+  @Setter
+  @EqualsAndHashCode(callSuper = false)
+  public static class ReversalDetails extends StripeObject {
+    /** Time before which a ReceivedCredit can be reversed. */
+    @SerializedName("deadline")
+    Long deadline;
+
+    /**
+     * Set if a ReceivedCredit cannot be reversed.
+     *
+     * <p>One of {@code already_reversed}, {@code deadline_passed}, {@code network_restricted},
+     * {@code other}, or {@code source_flow_restricted}.
+     */
+    @SerializedName("restricted_reason")
+    String restrictedReason;
   }
 
   @Getter

@@ -101,8 +101,8 @@ public class PaymentLinkCreateParams extends ApiRequestParams {
   PaymentIntentData paymentIntentData;
 
   /**
-   * The list of payment method types that customers can use. Only {@code card} is supported. If no
-   * value is passed, Stripe will dynamically show relevant payment methods from your <a
+   * The list of payment method types that customers can use. If no value is passed, Stripe will
+   * dynamically show relevant payment methods from your <a
    * href="https://dashboard.stripe.com/settings/payment_methods">payment method settings</a> (20+
    * payment methods <a
    * href="https://stripe.com/docs/payments/payment-methods/integration-options#payment-method-product-support">supported</a>).
