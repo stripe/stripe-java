@@ -3,6 +3,7 @@ package com.stripe.model;
 
 import com.google.gson.annotations.SerializedName;
 import com.stripe.net.ApiResource;
+import java.math.BigDecimal;
 import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
@@ -17,6 +18,13 @@ public class InvoiceLineItem extends StripeObject implements HasId {
   /** The amount, in %s. */
   @SerializedName("amount")
   Long amount;
+
+  /**
+   * The integer amount in %s representing the amount for this line item, excluding all tax and
+   * discounts.
+   */
+  @SerializedName("amount_excluding_tax")
+  Long amountExcludingTax;
 
   /**
    * Three-letter <a href="https://www.iso.org/iso-4217-currency-codes.html">ISO currency code</a>,
@@ -130,6 +138,13 @@ public class InvoiceLineItem extends StripeObject implements HasId {
    */
   @SerializedName("type")
   String type;
+
+  /**
+   * The amount in %s representing the unit amount for this line item, excluding all tax and
+   * discounts.
+   */
+  @SerializedName("unit_amount_excluding_tax")
+  BigDecimal unitAmountExcludingTax;
 
   /** Get IDs of expandable {@code discounts} object list. */
   public List<String> getDiscounts() {
