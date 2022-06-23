@@ -13,6 +13,10 @@ import lombok.Getter;
 
 @Getter
 public class PaymentIntentConfirmParams extends ApiRequestParams {
+  /** Controls when the funds will be captured from the customer's account. */
+  @SerializedName("capture_method")
+  CaptureMethod captureMethod;
+
   /**
    * Set to {@code true} to fail the payment attempt if the PaymentIntent transitions into {@code
    * requires_action}. This parameter is intended for simpler integrations that do not handle
@@ -130,6 +134,7 @@ public class PaymentIntentConfirmParams extends ApiRequestParams {
   Boolean useStripeSdk;
 
   private PaymentIntentConfirmParams(
+      CaptureMethod captureMethod,
       Boolean errorOnRequiresAction,
       List<String> expand,
       Map<String, Object> extraParams,
@@ -145,6 +150,7 @@ public class PaymentIntentConfirmParams extends ApiRequestParams {
       EnumParam setupFutureUsage,
       Object shipping,
       Boolean useStripeSdk) {
+    this.captureMethod = captureMethod;
     this.errorOnRequiresAction = errorOnRequiresAction;
     this.expand = expand;
     this.extraParams = extraParams;
@@ -167,6 +173,8 @@ public class PaymentIntentConfirmParams extends ApiRequestParams {
   }
 
   public static class Builder {
+    private CaptureMethod captureMethod;
+
     private Boolean errorOnRequiresAction;
 
     private List<String> expand;
@@ -200,6 +208,7 @@ public class PaymentIntentConfirmParams extends ApiRequestParams {
     /** Finalize and obtain parameter instance from this builder. */
     public PaymentIntentConfirmParams build() {
       return new PaymentIntentConfirmParams(
+          this.captureMethod,
           this.errorOnRequiresAction,
           this.expand,
           this.extraParams,
@@ -215,6 +224,12 @@ public class PaymentIntentConfirmParams extends ApiRequestParams {
           this.setupFutureUsage,
           this.shipping,
           this.useStripeSdk);
+    }
+
+    /** Controls when the funds will be captured from the customer's account. */
+    public Builder setCaptureMethod(CaptureMethod captureMethod) {
+      this.captureMethod = captureMethod;
+      return this;
     }
 
     /**
@@ -11642,6 +11657,21 @@ public class PaymentIntentConfirmParams extends ApiRequestParams {
           return this;
         }
       }
+    }
+  }
+
+  public enum CaptureMethod implements ApiRequestParams.EnumParam {
+    @SerializedName("automatic")
+    AUTOMATIC("automatic"),
+
+    @SerializedName("manual")
+    MANUAL("manual");
+
+    @Getter(onMethod_ = {@Override})
+    private final String value;
+
+    CaptureMethod(String value) {
+      this.value = value;
     }
   }
 
