@@ -3,6 +3,7 @@ package com.stripe.param.treasury;
 
 import com.google.gson.annotations.SerializedName;
 import com.stripe.net.ApiRequestParams;
+import com.stripe.net.ApiRequestParams.EnumParam;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -11,34 +12,35 @@ import lombok.Getter;
 
 @Getter
 public class InboundTransferFailParams extends ApiRequestParams {
-  /** Specifies which fields in the response should be expanded. */
+  /**
+   * Specifies which fields in the response should be expanded.
+   */
   @SerializedName("expand")
   List<String> expand;
 
   /**
-   * Map of extra parameters for custom features not available in this client library. The content
-   * in this map is not serialized under this field's {@code @SerializedName} value. Instead, each
-   * key/value pair is serialized as if the key is a root-level field (serialized) name in this
-   * param object. Effectively, this map is flattened to its parent instance.
+   * Map of extra parameters for custom features not available in this client library. The content in this map is not serialized under this field's {@code @SerializedName} value. Instead, each key/value pair is serialized as if the key is a root-level field (serialized) name in this param object. Effectively, this map is flattened to its parent instance.
    */
   @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
   Map<String, Object> extraParams;
 
-  /** Details about a failed InboundTransfer. */
+  /**
+   * Details about a failed InboundTransfer.
+   */
   @SerializedName("failure_details")
   FailureDetails failureDetails;
 
   private InboundTransferFailParams(
-      List<String> expand, Map<String, Object> extraParams, FailureDetails failureDetails) {
+      List<String> expand,
+      Map<String, Object> extraParams,
+      FailureDetails failureDetails) {
     this.expand = expand;
     this.extraParams = extraParams;
     this.failureDetails = failureDetails;
   }
-
   public static Builder builder() {
     return new Builder();
   }
-
   public static class Builder {
     private List<String> expand;
 
@@ -46,15 +48,15 @@ public class InboundTransferFailParams extends ApiRequestParams {
 
     private FailureDetails failureDetails;
 
-    /** Finalize and obtain parameter instance from this builder. */
+    /**
+     * Finalize and obtain parameter instance from this builder.
+     */
     public InboundTransferFailParams build() {
       return new InboundTransferFailParams(this.expand, this.extraParams, this.failureDetails);
     }
 
     /**
-     * Add an element to `expand` list. A list is initialized for the first `add/addAll` call, and
-     * subsequent calls adds additional elements to the original list. See {@link
-     * InboundTransferFailParams#expand} for the field documentation.
+     * Add an element to `expand` list. A list is initialized for the first `add/addAll` call, and subsequent calls adds additional elements to the original list. See {@link InboundTransferFailParams#expand} for the field documentation.
      */
     public Builder addExpand(String element) {
       if (this.expand == null) {
@@ -65,9 +67,7 @@ public class InboundTransferFailParams extends ApiRequestParams {
     }
 
     /**
-     * Add all elements to `expand` list. A list is initialized for the first `add/addAll` call, and
-     * subsequent calls adds additional elements to the original list. See {@link
-     * InboundTransferFailParams#expand} for the field documentation.
+     * Add all elements to `expand` list. A list is initialized for the first `add/addAll` call, and subsequent calls adds additional elements to the original list. See {@link InboundTransferFailParams#expand} for the field documentation.
      */
     public Builder addAllExpand(List<String> elements) {
       if (this.expand == null) {
@@ -78,9 +78,7 @@ public class InboundTransferFailParams extends ApiRequestParams {
     }
 
     /**
-     * Add a key/value pair to `extraParams` map. A map is initialized for the first `put/putAll`
-     * call, and subsequent calls add additional key/value pairs to the original map. See {@link
-     * InboundTransferFailParams#extraParams} for the field documentation.
+     * Add a key/value pair to `extraParams` map. A map is initialized for the first `put/putAll` call, and subsequent calls add additional key/value pairs to the original map. See {@link InboundTransferFailParams#extraParams} for the field documentation.
      */
     public Builder putExtraParam(String key, Object value) {
       if (this.extraParams == null) {
@@ -91,9 +89,7 @@ public class InboundTransferFailParams extends ApiRequestParams {
     }
 
     /**
-     * Add all map key/value pairs to `extraParams` map. A map is initialized for the first
-     * `put/putAll` call, and subsequent calls add additional key/value pairs to the original map.
-     * See {@link InboundTransferFailParams#extraParams} for the field documentation.
+     * Add all map key/value pairs to `extraParams` map. A map is initialized for the first `put/putAll` call, and subsequent calls add additional key/value pairs to the original map. See {@link InboundTransferFailParams#extraParams} for the field documentation.
      */
     public Builder putAllExtraParam(Map<String, Object> map) {
       if (this.extraParams == null) {
@@ -103,24 +99,24 @@ public class InboundTransferFailParams extends ApiRequestParams {
       return this;
     }
 
-    /** Details about a failed InboundTransfer. */
+    /**
+     * Details about a failed InboundTransfer.
+     */
     public Builder setFailureDetails(FailureDetails failureDetails) {
       this.failureDetails = failureDetails;
       return this;
     }
   }
-
   @Getter
   public static class FailureDetails {
-    /** Reason for the failure. */
+    /**
+     * Reason for the failure.
+     */
     @SerializedName("code")
     Code code;
 
     /**
-     * Map of extra parameters for custom features not available in this client library. The content
-     * in this map is not serialized under this field's {@code @SerializedName} value. Instead, each
-     * key/value pair is serialized as if the key is a root-level field (serialized) name in this
-     * param object. Effectively, this map is flattened to its parent instance.
+     * Map of extra parameters for custom features not available in this client library. The content in this map is not serialized under this field's {@code @SerializedName} value. Instead, each key/value pair is serialized as if the key is a root-level field (serialized) name in this param object. Effectively, this map is flattened to its parent instance.
      */
     @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
     Map<String, Object> extraParams;
@@ -129,31 +125,31 @@ public class InboundTransferFailParams extends ApiRequestParams {
       this.code = code;
       this.extraParams = extraParams;
     }
-
     public static Builder builder() {
       return new Builder();
     }
-
     public static class Builder {
       private Code code;
 
       private Map<String, Object> extraParams;
 
-      /** Finalize and obtain parameter instance from this builder. */
+      /**
+       * Finalize and obtain parameter instance from this builder.
+       */
       public FailureDetails build() {
         return new FailureDetails(this.code, this.extraParams);
       }
 
-      /** Reason for the failure. */
+      /**
+       * Reason for the failure.
+       */
       public Builder setCode(Code code) {
         this.code = code;
         return this;
       }
 
       /**
-       * Add a key/value pair to `extraParams` map. A map is initialized for the first `put/putAll`
-       * call, and subsequent calls add additional key/value pairs to the original map. See {@link
-       * InboundTransferFailParams.FailureDetails#extraParams} for the field documentation.
+       * Add a key/value pair to `extraParams` map. A map is initialized for the first `put/putAll` call, and subsequent calls add additional key/value pairs to the original map. See {@link InboundTransferFailParams.FailureDetails#extraParams} for the field documentation.
        */
       public Builder putExtraParam(String key, Object value) {
         if (this.extraParams == null) {
@@ -164,10 +160,7 @@ public class InboundTransferFailParams extends ApiRequestParams {
       }
 
       /**
-       * Add all map key/value pairs to `extraParams` map. A map is initialized for the first
-       * `put/putAll` call, and subsequent calls add additional key/value pairs to the original map.
-       * See {@link InboundTransferFailParams.FailureDetails#extraParams} for the field
-       * documentation.
+       * Add all map key/value pairs to `extraParams` map. A map is initialized for the first `put/putAll` call, and subsequent calls add additional key/value pairs to the original map. See {@link InboundTransferFailParams.FailureDetails#extraParams} for the field documentation.
        */
       public Builder putAllExtraParam(Map<String, Object> map) {
         if (this.extraParams == null) {
@@ -177,7 +170,6 @@ public class InboundTransferFailParams extends ApiRequestParams {
         return this;
       }
     }
-
     public enum Code implements ApiRequestParams.EnumParam {
       @SerializedName("account_closed")
       ACCOUNT_CLOSED("account_closed"),
@@ -217,10 +209,8 @@ public class InboundTransferFailParams extends ApiRequestParams {
 
       @SerializedName("other")
       OTHER("other");
-
       @Getter(onMethod_ = {@Override})
       private final String value;
-
       Code(String value) {
         this.value = value;
       }

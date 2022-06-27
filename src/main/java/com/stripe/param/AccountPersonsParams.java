@@ -12,46 +12,37 @@ import lombok.Getter;
 @Getter
 public class AccountPersonsParams extends ApiRequestParams {
   /**
-   * A cursor for use in pagination. {@code ending_before} is an object ID that defines your place
-   * in the list. For instance, if you make a list request and receive 100 objects, starting with
-   * {@code obj_bar}, your subsequent call can include {@code ending_before=obj_bar} in order to
-   * fetch the previous page of the list.
+   * A cursor for use in pagination. {@code ending_before} is an object ID that defines your place in the list. For instance, if you make a list request and receive 100 objects, starting with {@code obj_bar}, your subsequent call can include {@code ending_before=obj_bar} in order to fetch the previous page of the list.
    */
   @SerializedName("ending_before")
   String endingBefore;
 
-  /** Specifies which fields in the response should be expanded. */
+  /**
+   * Specifies which fields in the response should be expanded.
+   */
   @SerializedName("expand")
   List<String> expand;
 
   /**
-   * Map of extra parameters for custom features not available in this client library. The content
-   * in this map is not serialized under this field's {@code @SerializedName} value. Instead, each
-   * key/value pair is serialized as if the key is a root-level field (serialized) name in this
-   * param object. Effectively, this map is flattened to its parent instance.
+   * Map of extra parameters for custom features not available in this client library. The content in this map is not serialized under this field's {@code @SerializedName} value. Instead, each key/value pair is serialized as if the key is a root-level field (serialized) name in this param object. Effectively, this map is flattened to its parent instance.
    */
   @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
   Map<String, Object> extraParams;
 
   /**
-   * A limit on the number of objects to be returned. Limit can range between 1 and 100, and the
-   * default is 10.
+   * A limit on the number of objects to be returned. Limit can range between 1 and 100, and the default is 10.
    */
   @SerializedName("limit")
   Long limit;
 
   /**
-   * Filters on the list of people returned based on the person's relationship to the account's
-   * company.
+   * Filters on the list of people returned based on the person's relationship to the account's company.
    */
   @SerializedName("relationship")
   Relationship relationship;
 
   /**
-   * A cursor for use in pagination. {@code starting_after} is an object ID that defines your place
-   * in the list. For instance, if you make a list request and receive 100 objects, ending with
-   * {@code obj_foo}, your subsequent call can include {@code starting_after=obj_foo} in order to
-   * fetch the next page of the list.
+   * A cursor for use in pagination. {@code starting_after} is an object ID that defines your place in the list. For instance, if you make a list request and receive 100 objects, ending with {@code obj_foo}, your subsequent call can include {@code starting_after=obj_foo} in order to fetch the next page of the list.
    */
   @SerializedName("starting_after")
   String startingAfter;
@@ -70,11 +61,9 @@ public class AccountPersonsParams extends ApiRequestParams {
     this.relationship = relationship;
     this.startingAfter = startingAfter;
   }
-
   public static Builder builder() {
     return new Builder();
   }
-
   public static class Builder {
     private String endingBefore;
 
@@ -88,22 +77,22 @@ public class AccountPersonsParams extends ApiRequestParams {
 
     private String startingAfter;
 
-    /** Finalize and obtain parameter instance from this builder. */
+    /**
+     * Finalize and obtain parameter instance from this builder.
+     */
     public AccountPersonsParams build() {
       return new AccountPersonsParams(
-          this.endingBefore,
-          this.expand,
-          this.extraParams,
-          this.limit,
-          this.relationship,
-          this.startingAfter);
+        this.endingBefore,
+        this.expand,
+        this.extraParams,
+        this.limit,
+        this.relationship,
+        this.startingAfter
+      );
     }
 
     /**
-     * A cursor for use in pagination. {@code ending_before} is an object ID that defines your place
-     * in the list. For instance, if you make a list request and receive 100 objects, starting with
-     * {@code obj_bar}, your subsequent call can include {@code ending_before=obj_bar} in order to
-     * fetch the previous page of the list.
+     * A cursor for use in pagination. {@code ending_before} is an object ID that defines your place in the list. For instance, if you make a list request and receive 100 objects, starting with {@code obj_bar}, your subsequent call can include {@code ending_before=obj_bar} in order to fetch the previous page of the list.
      */
     public Builder setEndingBefore(String endingBefore) {
       this.endingBefore = endingBefore;
@@ -111,9 +100,7 @@ public class AccountPersonsParams extends ApiRequestParams {
     }
 
     /**
-     * Add an element to `expand` list. A list is initialized for the first `add/addAll` call, and
-     * subsequent calls adds additional elements to the original list. See {@link
-     * AccountPersonsParams#expand} for the field documentation.
+     * Add an element to `expand` list. A list is initialized for the first `add/addAll` call, and subsequent calls adds additional elements to the original list. See {@link AccountPersonsParams#expand} for the field documentation.
      */
     public Builder addExpand(String element) {
       if (this.expand == null) {
@@ -124,9 +111,7 @@ public class AccountPersonsParams extends ApiRequestParams {
     }
 
     /**
-     * Add all elements to `expand` list. A list is initialized for the first `add/addAll` call, and
-     * subsequent calls adds additional elements to the original list. See {@link
-     * AccountPersonsParams#expand} for the field documentation.
+     * Add all elements to `expand` list. A list is initialized for the first `add/addAll` call, and subsequent calls adds additional elements to the original list. See {@link AccountPersonsParams#expand} for the field documentation.
      */
     public Builder addAllExpand(List<String> elements) {
       if (this.expand == null) {
@@ -137,9 +122,7 @@ public class AccountPersonsParams extends ApiRequestParams {
     }
 
     /**
-     * Add a key/value pair to `extraParams` map. A map is initialized for the first `put/putAll`
-     * call, and subsequent calls add additional key/value pairs to the original map. See {@link
-     * AccountPersonsParams#extraParams} for the field documentation.
+     * Add a key/value pair to `extraParams` map. A map is initialized for the first `put/putAll` call, and subsequent calls add additional key/value pairs to the original map. See {@link AccountPersonsParams#extraParams} for the field documentation.
      */
     public Builder putExtraParam(String key, Object value) {
       if (this.extraParams == null) {
@@ -150,9 +133,7 @@ public class AccountPersonsParams extends ApiRequestParams {
     }
 
     /**
-     * Add all map key/value pairs to `extraParams` map. A map is initialized for the first
-     * `put/putAll` call, and subsequent calls add additional key/value pairs to the original map.
-     * See {@link AccountPersonsParams#extraParams} for the field documentation.
+     * Add all map key/value pairs to `extraParams` map. A map is initialized for the first `put/putAll` call, and subsequent calls add additional key/value pairs to the original map. See {@link AccountPersonsParams#extraParams} for the field documentation.
      */
     public Builder putAllExtraParam(Map<String, Object> map) {
       if (this.extraParams == null) {
@@ -163,8 +144,7 @@ public class AccountPersonsParams extends ApiRequestParams {
     }
 
     /**
-     * A limit on the number of objects to be returned. Limit can range between 1 and 100, and the
-     * default is 10.
+     * A limit on the number of objects to be returned. Limit can range between 1 and 100, and the default is 10.
      */
     public Builder setLimit(Long limit) {
       this.limit = limit;
@@ -172,8 +152,7 @@ public class AccountPersonsParams extends ApiRequestParams {
     }
 
     /**
-     * Filters on the list of people returned based on the person's relationship to the account's
-     * company.
+     * Filters on the list of people returned based on the person's relationship to the account's company.
      */
     public Builder setRelationship(Relationship relationship) {
       this.relationship = relationship;
@@ -181,52 +160,41 @@ public class AccountPersonsParams extends ApiRequestParams {
     }
 
     /**
-     * A cursor for use in pagination. {@code starting_after} is an object ID that defines your
-     * place in the list. For instance, if you make a list request and receive 100 objects, ending
-     * with {@code obj_foo}, your subsequent call can include {@code starting_after=obj_foo} in
-     * order to fetch the next page of the list.
+     * A cursor for use in pagination. {@code starting_after} is an object ID that defines your place in the list. For instance, if you make a list request and receive 100 objects, ending with {@code obj_foo}, your subsequent call can include {@code starting_after=obj_foo} in order to fetch the next page of the list.
      */
     public Builder setStartingAfter(String startingAfter) {
       this.startingAfter = startingAfter;
       return this;
     }
   }
-
   @Getter
   public static class Relationship {
     /**
-     * A filter on the list of people returned based on whether these people are directors of the
-     * account's company.
+     * A filter on the list of people returned based on whether these people are directors of the account's company.
      */
     @SerializedName("director")
     Boolean director;
 
     /**
-     * A filter on the list of people returned based on whether these people are executives of the
-     * account's company.
+     * A filter on the list of people returned based on whether these people are executives of the account's company.
      */
     @SerializedName("executive")
     Boolean executive;
 
     /**
-     * Map of extra parameters for custom features not available in this client library. The content
-     * in this map is not serialized under this field's {@code @SerializedName} value. Instead, each
-     * key/value pair is serialized as if the key is a root-level field (serialized) name in this
-     * param object. Effectively, this map is flattened to its parent instance.
+     * Map of extra parameters for custom features not available in this client library. The content in this map is not serialized under this field's {@code @SerializedName} value. Instead, each key/value pair is serialized as if the key is a root-level field (serialized) name in this param object. Effectively, this map is flattened to its parent instance.
      */
     @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
     Map<String, Object> extraParams;
 
     /**
-     * A filter on the list of people returned based on whether these people are owners of the
-     * account's company.
+     * A filter on the list of people returned based on whether these people are owners of the account's company.
      */
     @SerializedName("owner")
     Boolean owner;
 
     /**
-     * A filter on the list of people returned based on whether these people are the representative
-     * of the account's company.
+     * A filter on the list of people returned based on whether these people are the representative of the account's company.
      */
     @SerializedName("representative")
     Boolean representative;
@@ -243,11 +211,9 @@ public class AccountPersonsParams extends ApiRequestParams {
       this.owner = owner;
       this.representative = representative;
     }
-
     public static Builder builder() {
       return new Builder();
     }
-
     public static class Builder {
       private Boolean director;
 
@@ -259,15 +225,21 @@ public class AccountPersonsParams extends ApiRequestParams {
 
       private Boolean representative;
 
-      /** Finalize and obtain parameter instance from this builder. */
+      /**
+       * Finalize and obtain parameter instance from this builder.
+       */
       public Relationship build() {
         return new Relationship(
-            this.director, this.executive, this.extraParams, this.owner, this.representative);
+          this.director,
+          this.executive,
+          this.extraParams,
+          this.owner,
+          this.representative
+        );
       }
 
       /**
-       * A filter on the list of people returned based on whether these people are directors of the
-       * account's company.
+       * A filter on the list of people returned based on whether these people are directors of the account's company.
        */
       public Builder setDirector(Boolean director) {
         this.director = director;
@@ -275,8 +247,7 @@ public class AccountPersonsParams extends ApiRequestParams {
       }
 
       /**
-       * A filter on the list of people returned based on whether these people are executives of the
-       * account's company.
+       * A filter on the list of people returned based on whether these people are executives of the account's company.
        */
       public Builder setExecutive(Boolean executive) {
         this.executive = executive;
@@ -284,9 +255,7 @@ public class AccountPersonsParams extends ApiRequestParams {
       }
 
       /**
-       * Add a key/value pair to `extraParams` map. A map is initialized for the first `put/putAll`
-       * call, and subsequent calls add additional key/value pairs to the original map. See {@link
-       * AccountPersonsParams.Relationship#extraParams} for the field documentation.
+       * Add a key/value pair to `extraParams` map. A map is initialized for the first `put/putAll` call, and subsequent calls add additional key/value pairs to the original map. See {@link AccountPersonsParams.Relationship#extraParams} for the field documentation.
        */
       public Builder putExtraParam(String key, Object value) {
         if (this.extraParams == null) {
@@ -297,9 +266,7 @@ public class AccountPersonsParams extends ApiRequestParams {
       }
 
       /**
-       * Add all map key/value pairs to `extraParams` map. A map is initialized for the first
-       * `put/putAll` call, and subsequent calls add additional key/value pairs to the original map.
-       * See {@link AccountPersonsParams.Relationship#extraParams} for the field documentation.
+       * Add all map key/value pairs to `extraParams` map. A map is initialized for the first `put/putAll` call, and subsequent calls add additional key/value pairs to the original map. See {@link AccountPersonsParams.Relationship#extraParams} for the field documentation.
        */
       public Builder putAllExtraParam(Map<String, Object> map) {
         if (this.extraParams == null) {
@@ -310,8 +277,7 @@ public class AccountPersonsParams extends ApiRequestParams {
       }
 
       /**
-       * A filter on the list of people returned based on whether these people are owners of the
-       * account's company.
+       * A filter on the list of people returned based on whether these people are owners of the account's company.
        */
       public Builder setOwner(Boolean owner) {
         this.owner = owner;
@@ -319,8 +285,7 @@ public class AccountPersonsParams extends ApiRequestParams {
       }
 
       /**
-       * A filter on the list of people returned based on whether these people are the
-       * representative of the account's company.
+       * A filter on the list of people returned based on whether these people are the representative of the account's company.
        */
       public Builder setRepresentative(Boolean representative) {
         this.representative = representative;

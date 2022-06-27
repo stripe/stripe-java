@@ -12,23 +12,33 @@ import lombok.Setter;
 @Setter
 @EqualsAndHashCode(callSuper = false)
 public class FinancialAccountFeatures extends StripeObject {
-  /** Toggle settings for enabling/disabling a feature. */
+  /**
+   * Toggle settings for enabling/disabling a feature.
+   */
   @SerializedName("card_issuing")
   CardIssuing cardIssuing;
 
-  /** Toggle settings for enabling/disabling a feature. */
+  /**
+   * Toggle settings for enabling/disabling a feature.
+   */
   @SerializedName("deposit_insurance")
   DepositInsurance depositInsurance;
 
-  /** Settings related to Financial Addresses features on a Financial Account. */
+  /**
+   * Settings related to Financial Addresses features on a Financial Account.
+   */
   @SerializedName("financial_addresses")
   FinancialAddresses financialAddresses;
 
-  /** InboundTransfers contains inbound transfers features for a FinancialAccount. */
+  /**
+   * InboundTransfers contains inbound transfers features for a FinancialAccount.
+   */
   @SerializedName("inbound_transfers")
   InboundTransfers inboundTransfers;
 
-  /** Toggle settings for enabling/disabling a feature. */
+  /**
+   * Toggle settings for enabling/disabling a feature.
+   */
   @SerializedName("intra_stripe_flows")
   IntraStripeFlows intraStripeFlows;
 
@@ -40,11 +50,15 @@ public class FinancialAccountFeatures extends StripeObject {
   @SerializedName("object")
   String object;
 
-  /** Settings related to Outbound Payments features on a Financial Account. */
+  /**
+   * Settings related to Outbound Payments features on a Financial Account.
+   */
   @SerializedName("outbound_payments")
   OutboundPayments outboundPayments;
 
-  /** OutboundTransfers contains outbound transfers features for a FinancialAccount. */
+  /**
+   * OutboundTransfers contains outbound transfers features for a FinancialAccount.
+   */
   @SerializedName("outbound_transfers")
   OutboundTransfers outboundTransfers;
 
@@ -52,7 +66,9 @@ public class FinancialAccountFeatures extends StripeObject {
   @Setter
   @EqualsAndHashCode(callSuper = false)
   public static class CardIssuing extends StripeObject {
-    /** Whether the FinancialAccount should have the Feature. */
+    /**
+     * Whether the FinancialAccount should have the Feature.
+     */
     @SerializedName("requested")
     Boolean requested;
 
@@ -64,7 +80,9 @@ public class FinancialAccountFeatures extends StripeObject {
     @SerializedName("status")
     String status;
 
-    /** Additional details; includes at least one entry when the status is not {@code active}. */
+    /**
+     * Additional details; includes at least one entry when the status is not {@code active}.
+     */
     @SerializedName("status_details")
     List<FinancialAccountFeatures.CardIssuing.StatusDetails> statusDetails;
 
@@ -75,10 +93,7 @@ public class FinancialAccountFeatures extends StripeObject {
       /**
        * Represents the reason why the status is {@code pending} or {@code restricted}.
        *
-       * <p>One of {@code activating}, {@code capability_not_requested}, {@code
-       * financial_account_closed}, {@code rejected_other}, {@code rejected_unsupported_business},
-       * {@code requirements_past_due}, {@code requirements_pending_verification}, {@code
-       * restricted_by_platform}, or {@code restricted_other}.
+       * <p>One of {@code activating}, {@code capability_not_requested}, {@code financial_account_closed}, {@code rejected_other}, {@code rejected_unsupported_business}, {@code requirements_past_due}, {@code requirements_pending_verification}, {@code restricted_by_platform}, or {@code restricted_other}.
        */
       @SerializedName("code")
       String code;
@@ -86,8 +101,7 @@ public class FinancialAccountFeatures extends StripeObject {
       /**
        * Represents what the user should do, if anything, to activate the Feature.
        *
-       * <p>One of {@code contact_stripe}, {@code provide_information}, or {@code
-       * remove_restriction}.
+       * <p>One of {@code contact_stripe}, {@code provide_information}, or {@code remove_restriction}.
        */
       @SerializedName("resolution")
       String resolution;
@@ -106,7 +120,9 @@ public class FinancialAccountFeatures extends StripeObject {
   @Setter
   @EqualsAndHashCode(callSuper = false)
   public static class DepositInsurance extends StripeObject {
-    /** Whether the FinancialAccount should have the Feature. */
+    /**
+     * Whether the FinancialAccount should have the Feature.
+     */
     @SerializedName("requested")
     Boolean requested;
 
@@ -118,7 +134,9 @@ public class FinancialAccountFeatures extends StripeObject {
     @SerializedName("status")
     String status;
 
-    /** Additional details; includes at least one entry when the status is not {@code active}. */
+    /**
+     * Additional details; includes at least one entry when the status is not {@code active}.
+     */
     @SerializedName("status_details")
     List<FinancialAccountFeatures.DepositInsurance.StatusDetails> statusDetails;
 
@@ -129,10 +147,7 @@ public class FinancialAccountFeatures extends StripeObject {
       /**
        * Represents the reason why the status is {@code pending} or {@code restricted}.
        *
-       * <p>One of {@code activating}, {@code capability_not_requested}, {@code
-       * financial_account_closed}, {@code rejected_other}, {@code rejected_unsupported_business},
-       * {@code requirements_past_due}, {@code requirements_pending_verification}, {@code
-       * restricted_by_platform}, or {@code restricted_other}.
+       * <p>One of {@code activating}, {@code capability_not_requested}, {@code financial_account_closed}, {@code rejected_other}, {@code rejected_unsupported_business}, {@code requirements_past_due}, {@code requirements_pending_verification}, {@code restricted_by_platform}, or {@code restricted_other}.
        */
       @SerializedName("code")
       String code;
@@ -140,8 +155,7 @@ public class FinancialAccountFeatures extends StripeObject {
       /**
        * Represents what the user should do, if anything, to activate the Feature.
        *
-       * <p>One of {@code contact_stripe}, {@code provide_information}, or {@code
-       * remove_restriction}.
+       * <p>One of {@code contact_stripe}, {@code provide_information}, or {@code remove_restriction}.
        */
       @SerializedName("resolution")
       String resolution;
@@ -160,7 +174,9 @@ public class FinancialAccountFeatures extends StripeObject {
   @Setter
   @EqualsAndHashCode(callSuper = false)
   public static class FinancialAddresses extends StripeObject {
-    /** Toggle settings for enabling/disabling a feature. */
+    /**
+     * Toggle settings for enabling/disabling a feature.
+     */
     @SerializedName("aba")
     Aba aba;
 
@@ -168,7 +184,9 @@ public class FinancialAccountFeatures extends StripeObject {
     @Setter
     @EqualsAndHashCode(callSuper = false)
     public static class Aba extends StripeObject {
-      /** Whether the FinancialAccount should have the Feature. */
+      /**
+       * Whether the FinancialAccount should have the Feature.
+       */
       @SerializedName("requested")
       Boolean requested;
 
@@ -180,7 +198,9 @@ public class FinancialAccountFeatures extends StripeObject {
       @SerializedName("status")
       String status;
 
-      /** Additional details; includes at least one entry when the status is not {@code active}. */
+      /**
+       * Additional details; includes at least one entry when the status is not {@code active}.
+       */
       @SerializedName("status_details")
       List<FinancialAccountFeatures.FinancialAddresses.Aba.StatusDetails> statusDetails;
 
@@ -191,10 +211,7 @@ public class FinancialAccountFeatures extends StripeObject {
         /**
          * Represents the reason why the status is {@code pending} or {@code restricted}.
          *
-         * <p>One of {@code activating}, {@code capability_not_requested}, {@code
-         * financial_account_closed}, {@code rejected_other}, {@code rejected_unsupported_business},
-         * {@code requirements_past_due}, {@code requirements_pending_verification}, {@code
-         * restricted_by_platform}, or {@code restricted_other}.
+         * <p>One of {@code activating}, {@code capability_not_requested}, {@code financial_account_closed}, {@code rejected_other}, {@code rejected_unsupported_business}, {@code requirements_past_due}, {@code requirements_pending_verification}, {@code restricted_by_platform}, or {@code restricted_other}.
          */
         @SerializedName("code")
         String code;
@@ -202,8 +219,7 @@ public class FinancialAccountFeatures extends StripeObject {
         /**
          * Represents what the user should do, if anything, to activate the Feature.
          *
-         * <p>One of {@code contact_stripe}, {@code provide_information}, or {@code
-         * remove_restriction}.
+         * <p>One of {@code contact_stripe}, {@code provide_information}, or {@code remove_restriction}.
          */
         @SerializedName("resolution")
         String resolution;
@@ -223,7 +239,9 @@ public class FinancialAccountFeatures extends StripeObject {
   @Setter
   @EqualsAndHashCode(callSuper = false)
   public static class InboundTransfers extends StripeObject {
-    /** Toggle settings for enabling/disabling a feature. */
+    /**
+     * Toggle settings for enabling/disabling a feature.
+     */
     @SerializedName("ach")
     Ach ach;
 
@@ -231,7 +249,9 @@ public class FinancialAccountFeatures extends StripeObject {
     @Setter
     @EqualsAndHashCode(callSuper = false)
     public static class Ach extends StripeObject {
-      /** Whether the FinancialAccount should have the Feature. */
+      /**
+       * Whether the FinancialAccount should have the Feature.
+       */
       @SerializedName("requested")
       Boolean requested;
 
@@ -243,7 +263,9 @@ public class FinancialAccountFeatures extends StripeObject {
       @SerializedName("status")
       String status;
 
-      /** Additional details; includes at least one entry when the status is not {@code active}. */
+      /**
+       * Additional details; includes at least one entry when the status is not {@code active}.
+       */
       @SerializedName("status_details")
       List<FinancialAccountFeatures.InboundTransfers.Ach.StatusDetails> statusDetails;
 
@@ -254,10 +276,7 @@ public class FinancialAccountFeatures extends StripeObject {
         /**
          * Represents the reason why the status is {@code pending} or {@code restricted}.
          *
-         * <p>One of {@code activating}, {@code capability_not_requested}, {@code
-         * financial_account_closed}, {@code rejected_other}, {@code rejected_unsupported_business},
-         * {@code requirements_past_due}, {@code requirements_pending_verification}, {@code
-         * restricted_by_platform}, or {@code restricted_other}.
+         * <p>One of {@code activating}, {@code capability_not_requested}, {@code financial_account_closed}, {@code rejected_other}, {@code rejected_unsupported_business}, {@code requirements_past_due}, {@code requirements_pending_verification}, {@code restricted_by_platform}, or {@code restricted_other}.
          */
         @SerializedName("code")
         String code;
@@ -265,8 +284,7 @@ public class FinancialAccountFeatures extends StripeObject {
         /**
          * Represents what the user should do, if anything, to activate the Feature.
          *
-         * <p>One of {@code contact_stripe}, {@code provide_information}, or {@code
-         * remove_restriction}.
+         * <p>One of {@code contact_stripe}, {@code provide_information}, or {@code remove_restriction}.
          */
         @SerializedName("resolution")
         String resolution;
@@ -286,7 +304,9 @@ public class FinancialAccountFeatures extends StripeObject {
   @Setter
   @EqualsAndHashCode(callSuper = false)
   public static class IntraStripeFlows extends StripeObject {
-    /** Whether the FinancialAccount should have the Feature. */
+    /**
+     * Whether the FinancialAccount should have the Feature.
+     */
     @SerializedName("requested")
     Boolean requested;
 
@@ -298,7 +318,9 @@ public class FinancialAccountFeatures extends StripeObject {
     @SerializedName("status")
     String status;
 
-    /** Additional details; includes at least one entry when the status is not {@code active}. */
+    /**
+     * Additional details; includes at least one entry when the status is not {@code active}.
+     */
     @SerializedName("status_details")
     List<FinancialAccountFeatures.IntraStripeFlows.StatusDetails> statusDetails;
 
@@ -309,10 +331,7 @@ public class FinancialAccountFeatures extends StripeObject {
       /**
        * Represents the reason why the status is {@code pending} or {@code restricted}.
        *
-       * <p>One of {@code activating}, {@code capability_not_requested}, {@code
-       * financial_account_closed}, {@code rejected_other}, {@code rejected_unsupported_business},
-       * {@code requirements_past_due}, {@code requirements_pending_verification}, {@code
-       * restricted_by_platform}, or {@code restricted_other}.
+       * <p>One of {@code activating}, {@code capability_not_requested}, {@code financial_account_closed}, {@code rejected_other}, {@code rejected_unsupported_business}, {@code requirements_past_due}, {@code requirements_pending_verification}, {@code restricted_by_platform}, or {@code restricted_other}.
        */
       @SerializedName("code")
       String code;
@@ -320,8 +339,7 @@ public class FinancialAccountFeatures extends StripeObject {
       /**
        * Represents what the user should do, if anything, to activate the Feature.
        *
-       * <p>One of {@code contact_stripe}, {@code provide_information}, or {@code
-       * remove_restriction}.
+       * <p>One of {@code contact_stripe}, {@code provide_information}, or {@code remove_restriction}.
        */
       @SerializedName("resolution")
       String resolution;
@@ -340,11 +358,15 @@ public class FinancialAccountFeatures extends StripeObject {
   @Setter
   @EqualsAndHashCode(callSuper = false)
   public static class OutboundPayments extends StripeObject {
-    /** Toggle settings for enabling/disabling a feature. */
+    /**
+     * Toggle settings for enabling/disabling a feature.
+     */
     @SerializedName("ach")
     Ach ach;
 
-    /** Toggle settings for enabling/disabling a feature. */
+    /**
+     * Toggle settings for enabling/disabling a feature.
+     */
     @SerializedName("us_domestic_wire")
     UsDomesticWire usDomesticWire;
 
@@ -352,7 +374,9 @@ public class FinancialAccountFeatures extends StripeObject {
     @Setter
     @EqualsAndHashCode(callSuper = false)
     public static class Ach extends StripeObject {
-      /** Whether the FinancialAccount should have the Feature. */
+      /**
+       * Whether the FinancialAccount should have the Feature.
+       */
       @SerializedName("requested")
       Boolean requested;
 
@@ -364,7 +388,9 @@ public class FinancialAccountFeatures extends StripeObject {
       @SerializedName("status")
       String status;
 
-      /** Additional details; includes at least one entry when the status is not {@code active}. */
+      /**
+       * Additional details; includes at least one entry when the status is not {@code active}.
+       */
       @SerializedName("status_details")
       List<FinancialAccountFeatures.OutboundPayments.Ach.StatusDetails> statusDetails;
 
@@ -375,10 +401,7 @@ public class FinancialAccountFeatures extends StripeObject {
         /**
          * Represents the reason why the status is {@code pending} or {@code restricted}.
          *
-         * <p>One of {@code activating}, {@code capability_not_requested}, {@code
-         * financial_account_closed}, {@code rejected_other}, {@code rejected_unsupported_business},
-         * {@code requirements_past_due}, {@code requirements_pending_verification}, {@code
-         * restricted_by_platform}, or {@code restricted_other}.
+         * <p>One of {@code activating}, {@code capability_not_requested}, {@code financial_account_closed}, {@code rejected_other}, {@code rejected_unsupported_business}, {@code requirements_past_due}, {@code requirements_pending_verification}, {@code restricted_by_platform}, or {@code restricted_other}.
          */
         @SerializedName("code")
         String code;
@@ -386,8 +409,7 @@ public class FinancialAccountFeatures extends StripeObject {
         /**
          * Represents what the user should do, if anything, to activate the Feature.
          *
-         * <p>One of {@code contact_stripe}, {@code provide_information}, or {@code
-         * remove_restriction}.
+         * <p>One of {@code contact_stripe}, {@code provide_information}, or {@code remove_restriction}.
          */
         @SerializedName("resolution")
         String resolution;
@@ -406,7 +428,9 @@ public class FinancialAccountFeatures extends StripeObject {
     @Setter
     @EqualsAndHashCode(callSuper = false)
     public static class UsDomesticWire extends StripeObject {
-      /** Whether the FinancialAccount should have the Feature. */
+      /**
+       * Whether the FinancialAccount should have the Feature.
+       */
       @SerializedName("requested")
       Boolean requested;
 
@@ -418,7 +442,9 @@ public class FinancialAccountFeatures extends StripeObject {
       @SerializedName("status")
       String status;
 
-      /** Additional details; includes at least one entry when the status is not {@code active}. */
+      /**
+       * Additional details; includes at least one entry when the status is not {@code active}.
+       */
       @SerializedName("status_details")
       List<FinancialAccountFeatures.OutboundPayments.UsDomesticWire.StatusDetails> statusDetails;
 
@@ -429,10 +455,7 @@ public class FinancialAccountFeatures extends StripeObject {
         /**
          * Represents the reason why the status is {@code pending} or {@code restricted}.
          *
-         * <p>One of {@code activating}, {@code capability_not_requested}, {@code
-         * financial_account_closed}, {@code rejected_other}, {@code rejected_unsupported_business},
-         * {@code requirements_past_due}, {@code requirements_pending_verification}, {@code
-         * restricted_by_platform}, or {@code restricted_other}.
+         * <p>One of {@code activating}, {@code capability_not_requested}, {@code financial_account_closed}, {@code rejected_other}, {@code rejected_unsupported_business}, {@code requirements_past_due}, {@code requirements_pending_verification}, {@code restricted_by_platform}, or {@code restricted_other}.
          */
         @SerializedName("code")
         String code;
@@ -440,8 +463,7 @@ public class FinancialAccountFeatures extends StripeObject {
         /**
          * Represents what the user should do, if anything, to activate the Feature.
          *
-         * <p>One of {@code contact_stripe}, {@code provide_information}, or {@code
-         * remove_restriction}.
+         * <p>One of {@code contact_stripe}, {@code provide_information}, or {@code remove_restriction}.
          */
         @SerializedName("resolution")
         String resolution;
@@ -461,11 +483,15 @@ public class FinancialAccountFeatures extends StripeObject {
   @Setter
   @EqualsAndHashCode(callSuper = false)
   public static class OutboundTransfers extends StripeObject {
-    /** Toggle settings for enabling/disabling a feature. */
+    /**
+     * Toggle settings for enabling/disabling a feature.
+     */
     @SerializedName("ach")
     Ach ach;
 
-    /** Toggle settings for enabling/disabling a feature. */
+    /**
+     * Toggle settings for enabling/disabling a feature.
+     */
     @SerializedName("us_domestic_wire")
     UsDomesticWire usDomesticWire;
 
@@ -473,7 +499,9 @@ public class FinancialAccountFeatures extends StripeObject {
     @Setter
     @EqualsAndHashCode(callSuper = false)
     public static class Ach extends StripeObject {
-      /** Whether the FinancialAccount should have the Feature. */
+      /**
+       * Whether the FinancialAccount should have the Feature.
+       */
       @SerializedName("requested")
       Boolean requested;
 
@@ -485,7 +513,9 @@ public class FinancialAccountFeatures extends StripeObject {
       @SerializedName("status")
       String status;
 
-      /** Additional details; includes at least one entry when the status is not {@code active}. */
+      /**
+       * Additional details; includes at least one entry when the status is not {@code active}.
+       */
       @SerializedName("status_details")
       List<FinancialAccountFeatures.OutboundTransfers.Ach.StatusDetails> statusDetails;
 
@@ -496,10 +526,7 @@ public class FinancialAccountFeatures extends StripeObject {
         /**
          * Represents the reason why the status is {@code pending} or {@code restricted}.
          *
-         * <p>One of {@code activating}, {@code capability_not_requested}, {@code
-         * financial_account_closed}, {@code rejected_other}, {@code rejected_unsupported_business},
-         * {@code requirements_past_due}, {@code requirements_pending_verification}, {@code
-         * restricted_by_platform}, or {@code restricted_other}.
+         * <p>One of {@code activating}, {@code capability_not_requested}, {@code financial_account_closed}, {@code rejected_other}, {@code rejected_unsupported_business}, {@code requirements_past_due}, {@code requirements_pending_verification}, {@code restricted_by_platform}, or {@code restricted_other}.
          */
         @SerializedName("code")
         String code;
@@ -507,8 +534,7 @@ public class FinancialAccountFeatures extends StripeObject {
         /**
          * Represents what the user should do, if anything, to activate the Feature.
          *
-         * <p>One of {@code contact_stripe}, {@code provide_information}, or {@code
-         * remove_restriction}.
+         * <p>One of {@code contact_stripe}, {@code provide_information}, or {@code remove_restriction}.
          */
         @SerializedName("resolution")
         String resolution;
@@ -527,7 +553,9 @@ public class FinancialAccountFeatures extends StripeObject {
     @Setter
     @EqualsAndHashCode(callSuper = false)
     public static class UsDomesticWire extends StripeObject {
-      /** Whether the FinancialAccount should have the Feature. */
+      /**
+       * Whether the FinancialAccount should have the Feature.
+       */
       @SerializedName("requested")
       Boolean requested;
 
@@ -539,7 +567,9 @@ public class FinancialAccountFeatures extends StripeObject {
       @SerializedName("status")
       String status;
 
-      /** Additional details; includes at least one entry when the status is not {@code active}. */
+      /**
+       * Additional details; includes at least one entry when the status is not {@code active}.
+       */
       @SerializedName("status_details")
       List<FinancialAccountFeatures.OutboundTransfers.UsDomesticWire.StatusDetails> statusDetails;
 
@@ -550,10 +580,7 @@ public class FinancialAccountFeatures extends StripeObject {
         /**
          * Represents the reason why the status is {@code pending} or {@code restricted}.
          *
-         * <p>One of {@code activating}, {@code capability_not_requested}, {@code
-         * financial_account_closed}, {@code rejected_other}, {@code rejected_unsupported_business},
-         * {@code requirements_past_due}, {@code requirements_pending_verification}, {@code
-         * restricted_by_platform}, or {@code restricted_other}.
+         * <p>One of {@code activating}, {@code capability_not_requested}, {@code financial_account_closed}, {@code rejected_other}, {@code rejected_unsupported_business}, {@code requirements_past_due}, {@code requirements_pending_verification}, {@code restricted_by_platform}, or {@code restricted_other}.
          */
         @SerializedName("code")
         String code;
@@ -561,8 +588,7 @@ public class FinancialAccountFeatures extends StripeObject {
         /**
          * Represents what the user should do, if anything, to activate the Feature.
          *
-         * <p>One of {@code contact_stripe}, {@code provide_information}, or {@code
-         * remove_restriction}.
+         * <p>One of {@code contact_stripe}, {@code provide_information}, or {@code remove_restriction}.
          */
         @SerializedName("resolution")
         String resolution;

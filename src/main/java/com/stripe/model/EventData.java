@@ -14,8 +14,7 @@ import lombok.Setter;
 @EqualsAndHashCode(callSuper = false)
 public class EventData extends StripeObject {
   /**
-   * Object containing the names of the attributes that have changed, and their previous values
-   * (sent along only with *.updated events).
+   * Object containing the names of the attributes that have changed, and their previous values (sent along only with *.updated events).
    */
   @SerializedName("previous_attributes")
   Map<String, Object> previousAttributes;

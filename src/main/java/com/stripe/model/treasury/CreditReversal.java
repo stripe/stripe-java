@@ -21,45 +21,45 @@ import lombok.Setter;
 @Setter
 @EqualsAndHashCode(callSuper = false)
 public class CreditReversal extends ApiResource implements HasId {
-  /** Amount (in cents) transferred. */
+  /**
+   * Amount (in cents) transferred.
+   */
   @SerializedName("amount")
   Long amount;
 
   /**
-   * Three-letter <a href="https://www.iso.org/iso-4217-currency-codes.html">ISO currency code</a>,
-   * in lowercase. Must be a <a href="https://stripe.com/docs/currencies">supported currency</a>.
+   * Three-letter <a href="https://www.iso.org/iso-4217-currency-codes.html">ISO currency code</a>, in lowercase. Must be a <a href="https://stripe.com/docs/currencies">supported currency</a>.
    */
   @SerializedName("currency")
   String currency;
 
-  /** The FinancialAccount to reverse funds from. */
+  /**
+   * The FinancialAccount to reverse funds from.
+   */
   @SerializedName("financial_account")
   String financialAccount;
 
   /**
-   * A <a href="https://stripe.com/docs/treasury/moving-money/regulatory-receipts">hosted
-   * transaction receipt</a> URL that is provided when money movement is considered regulated under
-   * Stripe's money transmission licenses.
+   * A <a href="https://stripe.com/docs/treasury/moving-money/regulatory-receipts">hosted transaction receipt</a> URL that is provided when money movement is considered regulated under Stripe's money transmission licenses.
    */
   @SerializedName("hosted_regulatory_receipt_url")
   String hostedRegulatoryReceiptUrl;
 
-  /** Unique identifier for the object. */
+  /**
+   * Unique identifier for the object.
+   */
   @Getter(onMethod_ = {@Override})
   @SerializedName("id")
   String id;
 
   /**
-   * Has the value {@code true} if the object exists in live mode or the value {@code false} if the
-   * object exists in test mode.
+   * Has the value {@code true} if the object exists in live mode or the value {@code false} if the object exists in test mode.
    */
   @SerializedName("livemode")
   Boolean livemode;
 
   /**
-   * Set of <a href="https://stripe.com/docs/api/metadata">key-value pairs</a> that you can attach
-   * to an object. This can be useful for storing additional information about the object in a
-   * structured format.
+   * Set of <a href="https://stripe.com/docs/api/metadata">key-value pairs</a> that you can attach to an object. This can be useful for storing additional information about the object in a structured format.
    */
   @SerializedName("metadata")
   Map<String, String> metadata;
@@ -80,7 +80,9 @@ public class CreditReversal extends ApiResource implements HasId {
   @SerializedName("object")
   String object;
 
-  /** The ReceivedCredit being reversed. */
+  /**
+   * The ReceivedCredit being reversed.
+   */
   @SerializedName("received_credit")
   String receivedCredit;
 
@@ -95,13 +97,17 @@ public class CreditReversal extends ApiResource implements HasId {
   @SerializedName("status_transitions")
   StatusTransitions statusTransitions;
 
-  /** The Transaction associated with this object. */
+  /**
+   * The Transaction associated with this object.
+   */
   @SerializedName("transaction")
   @Getter(lombok.AccessLevel.NONE)
   @Setter(lombok.AccessLevel.NONE)
   ExpandableField<Transaction> transaction;
 
-  /** Get ID of expandable {@code transaction} object. */
+  /**
+   * Get ID of expandable {@code transaction} object.
+   */
   public String getTransaction() {
     return (this.transaction != null) ? this.transaction.getId() : null;
   }
@@ -110,7 +116,9 @@ public class CreditReversal extends ApiResource implements HasId {
     this.transaction = ApiResource.setExpandableFieldId(id, this.transaction);
   }
 
-  /** Get expanded {@code transaction}. */
+  /**
+   * Get expanded {@code transaction}.
+   */
   public Transaction getTransactionObject() {
     return (this.transaction != null) ? this.transaction.getExpanded() : null;
   }
@@ -119,113 +127,154 @@ public class CreditReversal extends ApiResource implements HasId {
     this.transaction = new ExpandableField<Transaction>(expandableObject.getId(), expandableObject);
   }
 
-  /** Returns a list of CreditReversals. */
+  /**
+   * <p>Returns a list of CreditReversals.</p>
+   */
   public static CreditReversalCollection list(Map<String, Object> params) throws StripeException {
     return list(params, (RequestOptions) null);
   }
 
-  /** Returns a list of CreditReversals. */
-  public static CreditReversalCollection list(Map<String, Object> params, RequestOptions options)
-      throws StripeException {
-    String url = String.format("%s%s", Stripe.getApiBase(), "/v1/treasury/credit_reversals");
-    return ApiResource.requestCollection(url, params, CreditReversalCollection.class, options);
-  }
-
-  /** Returns a list of CreditReversals. */
-  public static CreditReversalCollection list(CreditReversalListParams params)
-      throws StripeException {
-    return list(params, (RequestOptions) null);
-  }
-
-  /** Returns a list of CreditReversals. */
+  /**
+   * <p>Returns a list of CreditReversals.</p>
+   */
   public static CreditReversalCollection list(
-      CreditReversalListParams params, RequestOptions options) throws StripeException {
+      Map<String, Object> params,
+      RequestOptions options) throws StripeException {
     String url = String.format("%s%s", Stripe.getApiBase(), "/v1/treasury/credit_reversals");
     return ApiResource.requestCollection(url, params, CreditReversalCollection.class, options);
   }
 
   /**
-   * Retrieves the details of an existing CreditReversal by passing the unique CreditReversal ID
-   * from either the CreditReversal creation request or CreditReversal list.
+   * <p>Returns a list of CreditReversals.</p>
+   */
+  public static CreditReversalCollection list(
+      CreditReversalListParams params) throws StripeException {
+    return list(params, (RequestOptions) null);
+  }
+
+  /**
+   * <p>Returns a list of CreditReversals.</p>
+   */
+  public static CreditReversalCollection list(
+      CreditReversalListParams params,
+      RequestOptions options) throws StripeException {
+    String url = String.format("%s%s", Stripe.getApiBase(), "/v1/treasury/credit_reversals");
+    return ApiResource.requestCollection(url, params, CreditReversalCollection.class, options);
+  }
+
+  /**
+   * <p>Retrieves the details of an existing CreditReversal by passing the unique CreditReversal ID from either the CreditReversal creation request or CreditReversal list.</p>
    */
   public static CreditReversal retrieve(String creditReversal) throws StripeException {
     return retrieve(creditReversal, (Map<String, Object>) null, (RequestOptions) null);
   }
 
   /**
-   * Retrieves the details of an existing CreditReversal by passing the unique CreditReversal ID
-   * from either the CreditReversal creation request or CreditReversal list.
+   * <p>Retrieves the details of an existing CreditReversal by passing the unique CreditReversal ID from either the CreditReversal creation request or CreditReversal list.</p>
    */
-  public static CreditReversal retrieve(String creditReversal, RequestOptions options)
-      throws StripeException {
+  public static CreditReversal retrieve(
+      String creditReversal,
+      RequestOptions options) throws StripeException {
     return retrieve(creditReversal, (Map<String, Object>) null, options);
   }
 
   /**
-   * Retrieves the details of an existing CreditReversal by passing the unique CreditReversal ID
-   * from either the CreditReversal creation request or CreditReversal list.
+   * <p>Retrieves the details of an existing CreditReversal by passing the unique CreditReversal ID from either the CreditReversal creation request or CreditReversal list.</p>
    */
   public static CreditReversal retrieve(
-      String creditReversal, Map<String, Object> params, RequestOptions options)
-      throws StripeException {
+      String creditReversal,
+      Map<String, Object> params,
+      RequestOptions options) throws StripeException {
     String url =
-        String.format(
-            "%s%s",
-            Stripe.getApiBase(),
-            String.format(
-                "/v1/treasury/credit_reversals/%s", ApiResource.urlEncodeId(creditReversal)));
+      String.format(
+        "%s%s",
+        Stripe.getApiBase(),
+        String.format("/v1/treasury/credit_reversals/%s", ApiResource.urlEncodeId(creditReversal))
+      );
     return ApiResource.request(
-        ApiResource.RequestMethod.GET, url, params, CreditReversal.class, options);
+      ApiResource.RequestMethod.GET,
+      url,
+      params,
+      CreditReversal.class,
+      options
+    );
   }
 
   /**
-   * Retrieves the details of an existing CreditReversal by passing the unique CreditReversal ID
-   * from either the CreditReversal creation request or CreditReversal list.
+   * <p>Retrieves the details of an existing CreditReversal by passing the unique CreditReversal ID from either the CreditReversal creation request or CreditReversal list.</p>
    */
   public static CreditReversal retrieve(
-      String creditReversal, CreditReversalRetrieveParams params, RequestOptions options)
-      throws StripeException {
+      String creditReversal,
+      CreditReversalRetrieveParams params,
+      RequestOptions options) throws StripeException {
     String url =
-        String.format(
-            "%s%s",
-            Stripe.getApiBase(),
-            String.format(
-                "/v1/treasury/credit_reversals/%s", ApiResource.urlEncodeId(creditReversal)));
+      String.format(
+        "%s%s",
+        Stripe.getApiBase(),
+        String.format("/v1/treasury/credit_reversals/%s", ApiResource.urlEncodeId(creditReversal))
+      );
     return ApiResource.request(
-        ApiResource.RequestMethod.GET, url, params, CreditReversal.class, options);
+      ApiResource.RequestMethod.GET,
+      url,
+      params,
+      CreditReversal.class,
+      options
+    );
   }
 
-  /** Reverses a ReceivedCredit and creates a CreditReversal object. */
+  /**
+   * <p>Reverses a ReceivedCredit and creates a CreditReversal object.</p>
+   */
   public static CreditReversal create(Map<String, Object> params) throws StripeException {
     return create(params, (RequestOptions) null);
   }
 
-  /** Reverses a ReceivedCredit and creates a CreditReversal object. */
-  public static CreditReversal create(Map<String, Object> params, RequestOptions options)
-      throws StripeException {
+  /**
+   * <p>Reverses a ReceivedCredit and creates a CreditReversal object.</p>
+   */
+  public static CreditReversal create(
+      Map<String, Object> params,
+      RequestOptions options) throws StripeException {
     String url = String.format("%s%s", Stripe.getApiBase(), "/v1/treasury/credit_reversals");
     return ApiResource.request(
-        ApiResource.RequestMethod.POST, url, params, CreditReversal.class, options);
+      ApiResource.RequestMethod.POST,
+      url,
+      params,
+      CreditReversal.class,
+      options
+    );
   }
 
-  /** Reverses a ReceivedCredit and creates a CreditReversal object. */
+  /**
+   * <p>Reverses a ReceivedCredit and creates a CreditReversal object.</p>
+   */
   public static CreditReversal create(CreditReversalCreateParams params) throws StripeException {
     return create(params, (RequestOptions) null);
   }
 
-  /** Reverses a ReceivedCredit and creates a CreditReversal object. */
-  public static CreditReversal create(CreditReversalCreateParams params, RequestOptions options)
-      throws StripeException {
+  /**
+   * <p>Reverses a ReceivedCredit and creates a CreditReversal object.</p>
+   */
+  public static CreditReversal create(
+      CreditReversalCreateParams params,
+      RequestOptions options) throws StripeException {
     String url = String.format("%s%s", Stripe.getApiBase(), "/v1/treasury/credit_reversals");
     return ApiResource.request(
-        ApiResource.RequestMethod.POST, url, params, CreditReversal.class, options);
+      ApiResource.RequestMethod.POST,
+      url,
+      params,
+      CreditReversal.class,
+      options
+    );
   }
 
   @Getter
   @Setter
   @EqualsAndHashCode(callSuper = false)
   public static class StatusTransitions extends StripeObject {
-    /** Timestamp describing when the CreditReversal changed status to {@code posted}. */
+    /**
+     * Timestamp describing when the CreditReversal changed status to {@code posted}.
+     */
     @SerializedName("posted_at")
     Long postedAt;
   }

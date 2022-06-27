@@ -3,6 +3,7 @@ package com.stripe.param;
 
 import com.google.gson.annotations.SerializedName;
 import com.stripe.net.ApiRequestParams;
+import com.stripe.net.ApiRequestParams.EnumParam;
 import com.stripe.param.common.EmptyParam;
 import java.math.BigDecimal;
 import java.util.ArrayList;
@@ -14,99 +15,85 @@ import lombok.Getter;
 @Getter
 public class InvoiceItemUpdateParams extends ApiRequestParams {
   /**
-   * The integer amount in cents (or local equivalent) of the charge to be applied to the upcoming
-   * invoice. If you want to apply a credit to the customer's account, pass a negative amount.
+   * The integer amount in cents (or local equivalent) of the charge to be applied to the upcoming invoice. If you want to apply a credit to the customer's account, pass a negative amount.
    */
   @SerializedName("amount")
   Long amount;
 
   /**
-   * An arbitrary string which you can attach to the invoice item. The description is displayed in
-   * the invoice for easy tracking.
+   * An arbitrary string which you can attach to the invoice item. The description is displayed in the invoice for easy tracking.
    */
   @SerializedName("description")
   Object description;
 
   /**
-   * Controls whether discounts apply to this invoice item. Defaults to false for prorations or
-   * negative invoice items, and true for all other invoice items. Cannot be set to true for
-   * prorations.
+   * Controls whether discounts apply to this invoice item. Defaults to false for prorations or negative invoice items, and true for all other invoice items. Cannot be set to true for prorations.
    */
   @SerializedName("discountable")
   Boolean discountable;
 
   /**
-   * The coupons &amp; existing discounts which apply to the invoice item or invoice line item. Item
-   * discounts are applied before invoice discounts. Pass an empty string to remove
-   * previously-defined discounts.
+   * The coupons &amp; existing discounts which apply to the invoice item or invoice line item. Item discounts are applied before invoice discounts. Pass an empty string to remove previously-defined discounts.
    */
   @SerializedName("discounts")
   Object discounts;
 
-  /** Specifies which fields in the response should be expanded. */
+  /**
+   * Specifies which fields in the response should be expanded.
+   */
   @SerializedName("expand")
   List<String> expand;
 
   /**
-   * Map of extra parameters for custom features not available in this client library. The content
-   * in this map is not serialized under this field's {@code @SerializedName} value. Instead, each
-   * key/value pair is serialized as if the key is a root-level field (serialized) name in this
-   * param object. Effectively, this map is flattened to its parent instance.
+   * Map of extra parameters for custom features not available in this client library. The content in this map is not serialized under this field's {@code @SerializedName} value. Instead, each key/value pair is serialized as if the key is a root-level field (serialized) name in this param object. Effectively, this map is flattened to its parent instance.
    */
   @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
   Map<String, Object> extraParams;
 
   /**
-   * Set of <a href="https://stripe.com/docs/api/metadata">key-value pairs</a> that you can attach
-   * to an object. This can be useful for storing additional information about the object in a
-   * structured format. Individual keys can be unset by posting an empty value to them. All keys can
-   * be unset by posting an empty value to {@code metadata}.
+   * Set of <a href="https://stripe.com/docs/api/metadata">key-value pairs</a> that you can attach to an object. This can be useful for storing additional information about the object in a structured format. Individual keys can be unset by posting an empty value to them. All keys can be unset by posting an empty value to {@code metadata}.
    */
   @SerializedName("metadata")
   Object metadata;
 
   /**
-   * The period associated with this invoice item. When set to different values, the period will be
-   * rendered on the invoice.
+   * The period associated with this invoice item. When set to different values, the period will be rendered on the invoice.
    */
   @SerializedName("period")
   Period period;
 
-  /** The ID of the price object. */
+  /**
+   * The ID of the price object.
+   */
   @SerializedName("price")
   Object price;
 
   /**
-   * Data used to generate a new <a href="https://stripe.com/docs/api/prices">Price</a> object
-   * inline.
+   * Data used to generate a new <a href="https://stripe.com/docs/api/prices">Price</a> object inline.
    */
   @SerializedName("price_data")
   PriceData priceData;
 
-  /** Non-negative integer. The quantity of units for the invoice item. */
+  /**
+   * Non-negative integer. The quantity of units for the invoice item.
+   */
   @SerializedName("quantity")
   Long quantity;
 
   /**
-   * The tax rates which apply to the invoice item. When set, the {@code default_tax_rates} on the
-   * invoice do not apply to this invoice item. Pass an empty string to remove previously-defined
-   * tax rates.
+   * The tax rates which apply to the invoice item. When set, the {@code default_tax_rates} on the invoice do not apply to this invoice item. Pass an empty string to remove previously-defined tax rates.
    */
   @SerializedName("tax_rates")
   Object taxRates;
 
   /**
-   * The integer unit amount in cents (or local equivalent) of the charge to be applied to the
-   * upcoming invoice. This unit_amount will be multiplied by the quantity to get the full amount.
-   * If you want to apply a credit to the customer's account, pass a negative unit_amount.
+   * The integer unit amount in cents (or local equivalent) of the charge to be applied to the upcoming invoice. This unit_amount will be multiplied by the quantity to get the full amount. If you want to apply a credit to the customer's account, pass a negative unit_amount.
    */
   @SerializedName("unit_amount")
   Long unitAmount;
 
   /**
-   * Same as {@code unit_amount}, but accepts a decimal value in cents (or local equivalent) with at
-   * most 12 decimal places. Only one of {@code unit_amount} and {@code unit_amount_decimal} can be
-   * set.
+   * Same as {@code unit_amount}, but accepts a decimal value in cents (or local equivalent) with at most 12 decimal places. Only one of {@code unit_amount} and {@code unit_amount_decimal} can be set.
    */
   @SerializedName("unit_amount_decimal")
   Object unitAmountDecimal;
@@ -141,11 +128,9 @@ public class InvoiceItemUpdateParams extends ApiRequestParams {
     this.unitAmount = unitAmount;
     this.unitAmountDecimal = unitAmountDecimal;
   }
-
   public static Builder builder() {
     return new Builder();
   }
-
   public static class Builder {
     private Long amount;
 
@@ -175,28 +160,30 @@ public class InvoiceItemUpdateParams extends ApiRequestParams {
 
     private Object unitAmountDecimal;
 
-    /** Finalize and obtain parameter instance from this builder. */
+    /**
+     * Finalize and obtain parameter instance from this builder.
+     */
     public InvoiceItemUpdateParams build() {
       return new InvoiceItemUpdateParams(
-          this.amount,
-          this.description,
-          this.discountable,
-          this.discounts,
-          this.expand,
-          this.extraParams,
-          this.metadata,
-          this.period,
-          this.price,
-          this.priceData,
-          this.quantity,
-          this.taxRates,
-          this.unitAmount,
-          this.unitAmountDecimal);
+        this.amount,
+        this.description,
+        this.discountable,
+        this.discounts,
+        this.expand,
+        this.extraParams,
+        this.metadata,
+        this.period,
+        this.price,
+        this.priceData,
+        this.quantity,
+        this.taxRates,
+        this.unitAmount,
+        this.unitAmountDecimal
+      );
     }
 
     /**
-     * The integer amount in cents (or local equivalent) of the charge to be applied to the upcoming
-     * invoice. If you want to apply a credit to the customer's account, pass a negative amount.
+     * The integer amount in cents (or local equivalent) of the charge to be applied to the upcoming invoice. If you want to apply a credit to the customer's account, pass a negative amount.
      */
     public Builder setAmount(Long amount) {
       this.amount = amount;
@@ -204,8 +191,7 @@ public class InvoiceItemUpdateParams extends ApiRequestParams {
     }
 
     /**
-     * An arbitrary string which you can attach to the invoice item. The description is displayed in
-     * the invoice for easy tracking.
+     * An arbitrary string which you can attach to the invoice item. The description is displayed in the invoice for easy tracking.
      */
     public Builder setDescription(String description) {
       this.description = description;
@@ -213,8 +199,7 @@ public class InvoiceItemUpdateParams extends ApiRequestParams {
     }
 
     /**
-     * An arbitrary string which you can attach to the invoice item. The description is displayed in
-     * the invoice for easy tracking.
+     * An arbitrary string which you can attach to the invoice item. The description is displayed in the invoice for easy tracking.
      */
     public Builder setDescription(EmptyParam description) {
       this.description = description;
@@ -222,9 +207,7 @@ public class InvoiceItemUpdateParams extends ApiRequestParams {
     }
 
     /**
-     * Controls whether discounts apply to this invoice item. Defaults to false for prorations or
-     * negative invoice items, and true for all other invoice items. Cannot be set to true for
-     * prorations.
+     * Controls whether discounts apply to this invoice item. Defaults to false for prorations or negative invoice items, and true for all other invoice items. Cannot be set to true for prorations.
      */
     public Builder setDiscountable(Boolean discountable) {
       this.discountable = discountable;
@@ -232,9 +215,7 @@ public class InvoiceItemUpdateParams extends ApiRequestParams {
     }
 
     /**
-     * Add an element to `discounts` list. A list is initialized for the first `add/addAll` call,
-     * and subsequent calls adds additional elements to the original list. See {@link
-     * InvoiceItemUpdateParams#discounts} for the field documentation.
+     * Add an element to `discounts` list. A list is initialized for the first `add/addAll` call, and subsequent calls adds additional elements to the original list. See {@link InvoiceItemUpdateParams#discounts} for the field documentation.
      */
     @SuppressWarnings("unchecked")
     public Builder addDiscount(Discount element) {
@@ -246,9 +227,7 @@ public class InvoiceItemUpdateParams extends ApiRequestParams {
     }
 
     /**
-     * Add all elements to `discounts` list. A list is initialized for the first `add/addAll` call,
-     * and subsequent calls adds additional elements to the original list. See {@link
-     * InvoiceItemUpdateParams#discounts} for the field documentation.
+     * Add all elements to `discounts` list. A list is initialized for the first `add/addAll` call, and subsequent calls adds additional elements to the original list. See {@link InvoiceItemUpdateParams#discounts} for the field documentation.
      */
     @SuppressWarnings("unchecked")
     public Builder addAllDiscount(List<Discount> elements) {
@@ -260,9 +239,7 @@ public class InvoiceItemUpdateParams extends ApiRequestParams {
     }
 
     /**
-     * The coupons &amp; existing discounts which apply to the invoice item or invoice line item.
-     * Item discounts are applied before invoice discounts. Pass an empty string to remove
-     * previously-defined discounts.
+     * The coupons &amp; existing discounts which apply to the invoice item or invoice line item. Item discounts are applied before invoice discounts. Pass an empty string to remove previously-defined discounts.
      */
     public Builder setDiscounts(EmptyParam discounts) {
       this.discounts = discounts;
@@ -270,9 +247,7 @@ public class InvoiceItemUpdateParams extends ApiRequestParams {
     }
 
     /**
-     * The coupons &amp; existing discounts which apply to the invoice item or invoice line item.
-     * Item discounts are applied before invoice discounts. Pass an empty string to remove
-     * previously-defined discounts.
+     * The coupons &amp; existing discounts which apply to the invoice item or invoice line item. Item discounts are applied before invoice discounts. Pass an empty string to remove previously-defined discounts.
      */
     public Builder setDiscounts(List<Discount> discounts) {
       this.discounts = discounts;
@@ -280,9 +255,7 @@ public class InvoiceItemUpdateParams extends ApiRequestParams {
     }
 
     /**
-     * Add an element to `expand` list. A list is initialized for the first `add/addAll` call, and
-     * subsequent calls adds additional elements to the original list. See {@link
-     * InvoiceItemUpdateParams#expand} for the field documentation.
+     * Add an element to `expand` list. A list is initialized for the first `add/addAll` call, and subsequent calls adds additional elements to the original list. See {@link InvoiceItemUpdateParams#expand} for the field documentation.
      */
     public Builder addExpand(String element) {
       if (this.expand == null) {
@@ -293,9 +266,7 @@ public class InvoiceItemUpdateParams extends ApiRequestParams {
     }
 
     /**
-     * Add all elements to `expand` list. A list is initialized for the first `add/addAll` call, and
-     * subsequent calls adds additional elements to the original list. See {@link
-     * InvoiceItemUpdateParams#expand} for the field documentation.
+     * Add all elements to `expand` list. A list is initialized for the first `add/addAll` call, and subsequent calls adds additional elements to the original list. See {@link InvoiceItemUpdateParams#expand} for the field documentation.
      */
     public Builder addAllExpand(List<String> elements) {
       if (this.expand == null) {
@@ -306,9 +277,7 @@ public class InvoiceItemUpdateParams extends ApiRequestParams {
     }
 
     /**
-     * Add a key/value pair to `extraParams` map. A map is initialized for the first `put/putAll`
-     * call, and subsequent calls add additional key/value pairs to the original map. See {@link
-     * InvoiceItemUpdateParams#extraParams} for the field documentation.
+     * Add a key/value pair to `extraParams` map. A map is initialized for the first `put/putAll` call, and subsequent calls add additional key/value pairs to the original map. See {@link InvoiceItemUpdateParams#extraParams} for the field documentation.
      */
     public Builder putExtraParam(String key, Object value) {
       if (this.extraParams == null) {
@@ -319,9 +288,7 @@ public class InvoiceItemUpdateParams extends ApiRequestParams {
     }
 
     /**
-     * Add all map key/value pairs to `extraParams` map. A map is initialized for the first
-     * `put/putAll` call, and subsequent calls add additional key/value pairs to the original map.
-     * See {@link InvoiceItemUpdateParams#extraParams} for the field documentation.
+     * Add all map key/value pairs to `extraParams` map. A map is initialized for the first `put/putAll` call, and subsequent calls add additional key/value pairs to the original map. See {@link InvoiceItemUpdateParams#extraParams} for the field documentation.
      */
     public Builder putAllExtraParam(Map<String, Object> map) {
       if (this.extraParams == null) {
@@ -332,9 +299,7 @@ public class InvoiceItemUpdateParams extends ApiRequestParams {
     }
 
     /**
-     * Add a key/value pair to `metadata` map. A map is initialized for the first `put/putAll` call,
-     * and subsequent calls add additional key/value pairs to the original map. See {@link
-     * InvoiceItemUpdateParams#metadata} for the field documentation.
+     * Add a key/value pair to `metadata` map. A map is initialized for the first `put/putAll` call, and subsequent calls add additional key/value pairs to the original map. See {@link InvoiceItemUpdateParams#metadata} for the field documentation.
      */
     @SuppressWarnings("unchecked")
     public Builder putMetadata(String key, String value) {
@@ -346,9 +311,7 @@ public class InvoiceItemUpdateParams extends ApiRequestParams {
     }
 
     /**
-     * Add all map key/value pairs to `metadata` map. A map is initialized for the first
-     * `put/putAll` call, and subsequent calls add additional key/value pairs to the original map.
-     * See {@link InvoiceItemUpdateParams#metadata} for the field documentation.
+     * Add all map key/value pairs to `metadata` map. A map is initialized for the first `put/putAll` call, and subsequent calls add additional key/value pairs to the original map. See {@link InvoiceItemUpdateParams#metadata} for the field documentation.
      */
     @SuppressWarnings("unchecked")
     public Builder putAllMetadata(Map<String, String> map) {
@@ -360,10 +323,7 @@ public class InvoiceItemUpdateParams extends ApiRequestParams {
     }
 
     /**
-     * Set of <a href="https://stripe.com/docs/api/metadata">key-value pairs</a> that you can attach
-     * to an object. This can be useful for storing additional information about the object in a
-     * structured format. Individual keys can be unset by posting an empty value to them. All keys
-     * can be unset by posting an empty value to {@code metadata}.
+     * Set of <a href="https://stripe.com/docs/api/metadata">key-value pairs</a> that you can attach to an object. This can be useful for storing additional information about the object in a structured format. Individual keys can be unset by posting an empty value to them. All keys can be unset by posting an empty value to {@code metadata}.
      */
     public Builder setMetadata(EmptyParam metadata) {
       this.metadata = metadata;
@@ -371,10 +331,7 @@ public class InvoiceItemUpdateParams extends ApiRequestParams {
     }
 
     /**
-     * Set of <a href="https://stripe.com/docs/api/metadata">key-value pairs</a> that you can attach
-     * to an object. This can be useful for storing additional information about the object in a
-     * structured format. Individual keys can be unset by posting an empty value to them. All keys
-     * can be unset by posting an empty value to {@code metadata}.
+     * Set of <a href="https://stripe.com/docs/api/metadata">key-value pairs</a> that you can attach to an object. This can be useful for storing additional information about the object in a structured format. Individual keys can be unset by posting an empty value to them. All keys can be unset by posting an empty value to {@code metadata}.
      */
     public Builder setMetadata(Map<String, String> metadata) {
       this.metadata = metadata;
@@ -382,45 +339,47 @@ public class InvoiceItemUpdateParams extends ApiRequestParams {
     }
 
     /**
-     * The period associated with this invoice item. When set to different values, the period will
-     * be rendered on the invoice.
+     * The period associated with this invoice item. When set to different values, the period will be rendered on the invoice.
      */
     public Builder setPeriod(Period period) {
       this.period = period;
       return this;
     }
 
-    /** The ID of the price object. */
+    /**
+     * The ID of the price object.
+     */
     public Builder setPrice(String price) {
       this.price = price;
       return this;
     }
 
-    /** The ID of the price object. */
+    /**
+     * The ID of the price object.
+     */
     public Builder setPrice(EmptyParam price) {
       this.price = price;
       return this;
     }
 
     /**
-     * Data used to generate a new <a href="https://stripe.com/docs/api/prices">Price</a> object
-     * inline.
+     * Data used to generate a new <a href="https://stripe.com/docs/api/prices">Price</a> object inline.
      */
     public Builder setPriceData(PriceData priceData) {
       this.priceData = priceData;
       return this;
     }
 
-    /** Non-negative integer. The quantity of units for the invoice item. */
+    /**
+     * Non-negative integer. The quantity of units for the invoice item.
+     */
     public Builder setQuantity(Long quantity) {
       this.quantity = quantity;
       return this;
     }
 
     /**
-     * Add an element to `taxRates` list. A list is initialized for the first `add/addAll` call, and
-     * subsequent calls adds additional elements to the original list. See {@link
-     * InvoiceItemUpdateParams#taxRates} for the field documentation.
+     * Add an element to `taxRates` list. A list is initialized for the first `add/addAll` call, and subsequent calls adds additional elements to the original list. See {@link InvoiceItemUpdateParams#taxRates} for the field documentation.
      */
     @SuppressWarnings("unchecked")
     public Builder addTaxRate(String element) {
@@ -432,9 +391,7 @@ public class InvoiceItemUpdateParams extends ApiRequestParams {
     }
 
     /**
-     * Add all elements to `taxRates` list. A list is initialized for the first `add/addAll` call,
-     * and subsequent calls adds additional elements to the original list. See {@link
-     * InvoiceItemUpdateParams#taxRates} for the field documentation.
+     * Add all elements to `taxRates` list. A list is initialized for the first `add/addAll` call, and subsequent calls adds additional elements to the original list. See {@link InvoiceItemUpdateParams#taxRates} for the field documentation.
      */
     @SuppressWarnings("unchecked")
     public Builder addAllTaxRate(List<String> elements) {
@@ -446,9 +403,7 @@ public class InvoiceItemUpdateParams extends ApiRequestParams {
     }
 
     /**
-     * The tax rates which apply to the invoice item. When set, the {@code default_tax_rates} on the
-     * invoice do not apply to this invoice item. Pass an empty string to remove previously-defined
-     * tax rates.
+     * The tax rates which apply to the invoice item. When set, the {@code default_tax_rates} on the invoice do not apply to this invoice item. Pass an empty string to remove previously-defined tax rates.
      */
     public Builder setTaxRates(EmptyParam taxRates) {
       this.taxRates = taxRates;
@@ -456,9 +411,7 @@ public class InvoiceItemUpdateParams extends ApiRequestParams {
     }
 
     /**
-     * The tax rates which apply to the invoice item. When set, the {@code default_tax_rates} on the
-     * invoice do not apply to this invoice item. Pass an empty string to remove previously-defined
-     * tax rates.
+     * The tax rates which apply to the invoice item. When set, the {@code default_tax_rates} on the invoice do not apply to this invoice item. Pass an empty string to remove previously-defined tax rates.
      */
     public Builder setTaxRates(List<String> taxRates) {
       this.taxRates = taxRates;
@@ -466,9 +419,7 @@ public class InvoiceItemUpdateParams extends ApiRequestParams {
     }
 
     /**
-     * The integer unit amount in cents (or local equivalent) of the charge to be applied to the
-     * upcoming invoice. This unit_amount will be multiplied by the quantity to get the full amount.
-     * If you want to apply a credit to the customer's account, pass a negative unit_amount.
+     * The integer unit amount in cents (or local equivalent) of the charge to be applied to the upcoming invoice. This unit_amount will be multiplied by the quantity to get the full amount. If you want to apply a credit to the customer's account, pass a negative unit_amount.
      */
     public Builder setUnitAmount(Long unitAmount) {
       this.unitAmount = unitAmount;
@@ -476,9 +427,7 @@ public class InvoiceItemUpdateParams extends ApiRequestParams {
     }
 
     /**
-     * Same as {@code unit_amount}, but accepts a decimal value in cents (or local equivalent) with
-     * at most 12 decimal places. Only one of {@code unit_amount} and {@code unit_amount_decimal}
-     * can be set.
+     * Same as {@code unit_amount}, but accepts a decimal value in cents (or local equivalent) with at most 12 decimal places. Only one of {@code unit_amount} and {@code unit_amount_decimal} can be set.
      */
     public Builder setUnitAmountDecimal(BigDecimal unitAmountDecimal) {
       this.unitAmountDecimal = unitAmountDecimal;
@@ -486,31 +435,29 @@ public class InvoiceItemUpdateParams extends ApiRequestParams {
     }
 
     /**
-     * Same as {@code unit_amount}, but accepts a decimal value in cents (or local equivalent) with
-     * at most 12 decimal places. Only one of {@code unit_amount} and {@code unit_amount_decimal}
-     * can be set.
+     * Same as {@code unit_amount}, but accepts a decimal value in cents (or local equivalent) with at most 12 decimal places. Only one of {@code unit_amount} and {@code unit_amount_decimal} can be set.
      */
     public Builder setUnitAmountDecimal(EmptyParam unitAmountDecimal) {
       this.unitAmountDecimal = unitAmountDecimal;
       return this;
     }
   }
-
   @Getter
   public static class Discount {
-    /** ID of the coupon to create a new discount for. */
+    /**
+     * ID of the coupon to create a new discount for.
+     */
     @SerializedName("coupon")
     Object coupon;
 
-    /** ID of an existing discount on the object (or one of its ancestors) to reuse. */
+    /**
+     * ID of an existing discount on the object (or one of its ancestors) to reuse.
+     */
     @SerializedName("discount")
     Object discount;
 
     /**
-     * Map of extra parameters for custom features not available in this client library. The content
-     * in this map is not serialized under this field's {@code @SerializedName} value. Instead, each
-     * key/value pair is serialized as if the key is a root-level field (serialized) name in this
-     * param object. Effectively, this map is flattened to its parent instance.
+     * Map of extra parameters for custom features not available in this client library. The content in this map is not serialized under this field's {@code @SerializedName} value. Instead, each key/value pair is serialized as if the key is a root-level field (serialized) name in this param object. Effectively, this map is flattened to its parent instance.
      */
     @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
     Map<String, Object> extraParams;
@@ -520,11 +467,9 @@ public class InvoiceItemUpdateParams extends ApiRequestParams {
       this.discount = discount;
       this.extraParams = extraParams;
     }
-
     public static Builder builder() {
       return new Builder();
     }
-
     public static class Builder {
       private Object coupon;
 
@@ -532,39 +477,47 @@ public class InvoiceItemUpdateParams extends ApiRequestParams {
 
       private Map<String, Object> extraParams;
 
-      /** Finalize and obtain parameter instance from this builder. */
+      /**
+       * Finalize and obtain parameter instance from this builder.
+       */
       public Discount build() {
         return new Discount(this.coupon, this.discount, this.extraParams);
       }
 
-      /** ID of the coupon to create a new discount for. */
+      /**
+       * ID of the coupon to create a new discount for.
+       */
       public Builder setCoupon(String coupon) {
         this.coupon = coupon;
         return this;
       }
 
-      /** ID of the coupon to create a new discount for. */
+      /**
+       * ID of the coupon to create a new discount for.
+       */
       public Builder setCoupon(EmptyParam coupon) {
         this.coupon = coupon;
         return this;
       }
 
-      /** ID of an existing discount on the object (or one of its ancestors) to reuse. */
+      /**
+       * ID of an existing discount on the object (or one of its ancestors) to reuse.
+       */
       public Builder setDiscount(String discount) {
         this.discount = discount;
         return this;
       }
 
-      /** ID of an existing discount on the object (or one of its ancestors) to reuse. */
+      /**
+       * ID of an existing discount on the object (or one of its ancestors) to reuse.
+       */
       public Builder setDiscount(EmptyParam discount) {
         this.discount = discount;
         return this;
       }
 
       /**
-       * Add a key/value pair to `extraParams` map. A map is initialized for the first `put/putAll`
-       * call, and subsequent calls add additional key/value pairs to the original map. See {@link
-       * InvoiceItemUpdateParams.Discount#extraParams} for the field documentation.
+       * Add a key/value pair to `extraParams` map. A map is initialized for the first `put/putAll` call, and subsequent calls add additional key/value pairs to the original map. See {@link InvoiceItemUpdateParams.Discount#extraParams} for the field documentation.
        */
       public Builder putExtraParam(String key, Object value) {
         if (this.extraParams == null) {
@@ -575,9 +528,7 @@ public class InvoiceItemUpdateParams extends ApiRequestParams {
       }
 
       /**
-       * Add all map key/value pairs to `extraParams` map. A map is initialized for the first
-       * `put/putAll` call, and subsequent calls add additional key/value pairs to the original map.
-       * See {@link InvoiceItemUpdateParams.Discount#extraParams} for the field documentation.
+       * Add all map key/value pairs to `extraParams` map. A map is initialized for the first `put/putAll` call, and subsequent calls add additional key/value pairs to the original map. See {@link InvoiceItemUpdateParams.Discount#extraParams} for the field documentation.
        */
       public Builder putAllExtraParam(Map<String, Object> map) {
         if (this.extraParams == null) {
@@ -588,23 +539,23 @@ public class InvoiceItemUpdateParams extends ApiRequestParams {
       }
     }
   }
-
   @Getter
   public static class Period {
-    /** The end of the period, which must be greater than or equal to the start. */
+    /**
+     * The end of the period, which must be greater than or equal to the start.
+     */
     @SerializedName("end")
     Long end;
 
     /**
-     * Map of extra parameters for custom features not available in this client library. The content
-     * in this map is not serialized under this field's {@code @SerializedName} value. Instead, each
-     * key/value pair is serialized as if the key is a root-level field (serialized) name in this
-     * param object. Effectively, this map is flattened to its parent instance.
+     * Map of extra parameters for custom features not available in this client library. The content in this map is not serialized under this field's {@code @SerializedName} value. Instead, each key/value pair is serialized as if the key is a root-level field (serialized) name in this param object. Effectively, this map is flattened to its parent instance.
      */
     @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
     Map<String, Object> extraParams;
 
-    /** The start of the period. */
+    /**
+     * The start of the period.
+     */
     @SerializedName("start")
     Long start;
 
@@ -613,11 +564,9 @@ public class InvoiceItemUpdateParams extends ApiRequestParams {
       this.extraParams = extraParams;
       this.start = start;
     }
-
     public static Builder builder() {
       return new Builder();
     }
-
     public static class Builder {
       private Long end;
 
@@ -625,21 +574,23 @@ public class InvoiceItemUpdateParams extends ApiRequestParams {
 
       private Long start;
 
-      /** Finalize and obtain parameter instance from this builder. */
+      /**
+       * Finalize and obtain parameter instance from this builder.
+       */
       public Period build() {
         return new Period(this.end, this.extraParams, this.start);
       }
 
-      /** The end of the period, which must be greater than or equal to the start. */
+      /**
+       * The end of the period, which must be greater than or equal to the start.
+       */
       public Builder setEnd(Long end) {
         this.end = end;
         return this;
       }
 
       /**
-       * Add a key/value pair to `extraParams` map. A map is initialized for the first `put/putAll`
-       * call, and subsequent calls add additional key/value pairs to the original map. See {@link
-       * InvoiceItemUpdateParams.Period#extraParams} for the field documentation.
+       * Add a key/value pair to `extraParams` map. A map is initialized for the first `put/putAll` call, and subsequent calls add additional key/value pairs to the original map. See {@link InvoiceItemUpdateParams.Period#extraParams} for the field documentation.
        */
       public Builder putExtraParam(String key, Object value) {
         if (this.extraParams == null) {
@@ -650,9 +601,7 @@ public class InvoiceItemUpdateParams extends ApiRequestParams {
       }
 
       /**
-       * Add all map key/value pairs to `extraParams` map. A map is initialized for the first
-       * `put/putAll` call, and subsequent calls add additional key/value pairs to the original map.
-       * See {@link InvoiceItemUpdateParams.Period#extraParams} for the field documentation.
+       * Add all map key/value pairs to `extraParams` map. A map is initialized for the first `put/putAll` call, and subsequent calls add additional key/value pairs to the original map. See {@link InvoiceItemUpdateParams.Period#extraParams} for the field documentation.
        */
       public Builder putAllExtraParam(Map<String, Object> map) {
         if (this.extraParams == null) {
@@ -662,56 +611,49 @@ public class InvoiceItemUpdateParams extends ApiRequestParams {
         return this;
       }
 
-      /** The start of the period. */
+      /**
+       * The start of the period.
+       */
       public Builder setStart(Long start) {
         this.start = start;
         return this;
       }
     }
   }
-
   @Getter
   public static class PriceData {
     /**
-     * Three-letter <a href="https://www.iso.org/iso-4217-currency-codes.html">ISO currency
-     * code</a>, in lowercase. Must be a <a href="https://stripe.com/docs/currencies">supported
-     * currency</a>.
+     * Three-letter <a href="https://www.iso.org/iso-4217-currency-codes.html">ISO currency code</a>, in lowercase. Must be a <a href="https://stripe.com/docs/currencies">supported currency</a>.
      */
     @SerializedName("currency")
     Object currency;
 
     /**
-     * Map of extra parameters for custom features not available in this client library. The content
-     * in this map is not serialized under this field's {@code @SerializedName} value. Instead, each
-     * key/value pair is serialized as if the key is a root-level field (serialized) name in this
-     * param object. Effectively, this map is flattened to its parent instance.
+     * Map of extra parameters for custom features not available in this client library. The content in this map is not serialized under this field's {@code @SerializedName} value. Instead, each key/value pair is serialized as if the key is a root-level field (serialized) name in this param object. Effectively, this map is flattened to its parent instance.
      */
     @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
     Map<String, Object> extraParams;
 
-    /** The ID of the product that this price will belong to. */
+    /**
+     * The ID of the product that this price will belong to.
+     */
     @SerializedName("product")
     Object product;
 
     /**
-     * Specifies whether the price is considered inclusive of taxes or exclusive of taxes. One of
-     * {@code inclusive}, {@code exclusive}, or {@code unspecified}. Once specified as either {@code
-     * inclusive} or {@code exclusive}, it cannot be changed.
+     * Specifies whether the price is considered inclusive of taxes or exclusive of taxes. One of {@code inclusive}, {@code exclusive}, or {@code unspecified}. Once specified as either {@code inclusive} or {@code exclusive}, it cannot be changed.
      */
     @SerializedName("tax_behavior")
     TaxBehavior taxBehavior;
 
     /**
-     * A positive integer in cents (or local equivalent) (or 0 for a free price) representing how
-     * much to charge.
+     * A positive integer in cents (or local equivalent) (or 0 for a free price) representing how much to charge.
      */
     @SerializedName("unit_amount")
     Long unitAmount;
 
     /**
-     * Same as {@code unit_amount}, but accepts a decimal value in cents (or local equivalent) with
-     * at most 12 decimal places. Only one of {@code unit_amount} and {@code unit_amount_decimal}
-     * can be set.
+     * Same as {@code unit_amount}, but accepts a decimal value in cents (or local equivalent) with at most 12 decimal places. Only one of {@code unit_amount} and {@code unit_amount_decimal} can be set.
      */
     @SerializedName("unit_amount_decimal")
     Object unitAmountDecimal;
@@ -730,11 +672,9 @@ public class InvoiceItemUpdateParams extends ApiRequestParams {
       this.unitAmount = unitAmount;
       this.unitAmountDecimal = unitAmountDecimal;
     }
-
     public static Builder builder() {
       return new Builder();
     }
-
     public static class Builder {
       private Object currency;
 
@@ -748,21 +688,22 @@ public class InvoiceItemUpdateParams extends ApiRequestParams {
 
       private Object unitAmountDecimal;
 
-      /** Finalize and obtain parameter instance from this builder. */
+      /**
+       * Finalize and obtain parameter instance from this builder.
+       */
       public PriceData build() {
         return new PriceData(
-            this.currency,
-            this.extraParams,
-            this.product,
-            this.taxBehavior,
-            this.unitAmount,
-            this.unitAmountDecimal);
+          this.currency,
+          this.extraParams,
+          this.product,
+          this.taxBehavior,
+          this.unitAmount,
+          this.unitAmountDecimal
+        );
       }
 
       /**
-       * Three-letter <a href="https://www.iso.org/iso-4217-currency-codes.html">ISO currency
-       * code</a>, in lowercase. Must be a <a href="https://stripe.com/docs/currencies">supported
-       * currency</a>.
+       * Three-letter <a href="https://www.iso.org/iso-4217-currency-codes.html">ISO currency code</a>, in lowercase. Must be a <a href="https://stripe.com/docs/currencies">supported currency</a>.
        */
       public Builder setCurrency(String currency) {
         this.currency = currency;
@@ -770,9 +711,7 @@ public class InvoiceItemUpdateParams extends ApiRequestParams {
       }
 
       /**
-       * Three-letter <a href="https://www.iso.org/iso-4217-currency-codes.html">ISO currency
-       * code</a>, in lowercase. Must be a <a href="https://stripe.com/docs/currencies">supported
-       * currency</a>.
+       * Three-letter <a href="https://www.iso.org/iso-4217-currency-codes.html">ISO currency code</a>, in lowercase. Must be a <a href="https://stripe.com/docs/currencies">supported currency</a>.
        */
       public Builder setCurrency(EmptyParam currency) {
         this.currency = currency;
@@ -780,9 +719,7 @@ public class InvoiceItemUpdateParams extends ApiRequestParams {
       }
 
       /**
-       * Add a key/value pair to `extraParams` map. A map is initialized for the first `put/putAll`
-       * call, and subsequent calls add additional key/value pairs to the original map. See {@link
-       * InvoiceItemUpdateParams.PriceData#extraParams} for the field documentation.
+       * Add a key/value pair to `extraParams` map. A map is initialized for the first `put/putAll` call, and subsequent calls add additional key/value pairs to the original map. See {@link InvoiceItemUpdateParams.PriceData#extraParams} for the field documentation.
        */
       public Builder putExtraParam(String key, Object value) {
         if (this.extraParams == null) {
@@ -793,9 +730,7 @@ public class InvoiceItemUpdateParams extends ApiRequestParams {
       }
 
       /**
-       * Add all map key/value pairs to `extraParams` map. A map is initialized for the first
-       * `put/putAll` call, and subsequent calls add additional key/value pairs to the original map.
-       * See {@link InvoiceItemUpdateParams.PriceData#extraParams} for the field documentation.
+       * Add all map key/value pairs to `extraParams` map. A map is initialized for the first `put/putAll` call, and subsequent calls add additional key/value pairs to the original map. See {@link InvoiceItemUpdateParams.PriceData#extraParams} for the field documentation.
        */
       public Builder putAllExtraParam(Map<String, Object> map) {
         if (this.extraParams == null) {
@@ -805,22 +740,24 @@ public class InvoiceItemUpdateParams extends ApiRequestParams {
         return this;
       }
 
-      /** The ID of the product that this price will belong to. */
+      /**
+       * The ID of the product that this price will belong to.
+       */
       public Builder setProduct(String product) {
         this.product = product;
         return this;
       }
 
-      /** The ID of the product that this price will belong to. */
+      /**
+       * The ID of the product that this price will belong to.
+       */
       public Builder setProduct(EmptyParam product) {
         this.product = product;
         return this;
       }
 
       /**
-       * Specifies whether the price is considered inclusive of taxes or exclusive of taxes. One of
-       * {@code inclusive}, {@code exclusive}, or {@code unspecified}. Once specified as either
-       * {@code inclusive} or {@code exclusive}, it cannot be changed.
+       * Specifies whether the price is considered inclusive of taxes or exclusive of taxes. One of {@code inclusive}, {@code exclusive}, or {@code unspecified}. Once specified as either {@code inclusive} or {@code exclusive}, it cannot be changed.
        */
       public Builder setTaxBehavior(TaxBehavior taxBehavior) {
         this.taxBehavior = taxBehavior;
@@ -828,8 +765,7 @@ public class InvoiceItemUpdateParams extends ApiRequestParams {
       }
 
       /**
-       * A positive integer in cents (or local equivalent) (or 0 for a free price) representing how
-       * much to charge.
+       * A positive integer in cents (or local equivalent) (or 0 for a free price) representing how much to charge.
        */
       public Builder setUnitAmount(Long unitAmount) {
         this.unitAmount = unitAmount;
@@ -837,9 +773,7 @@ public class InvoiceItemUpdateParams extends ApiRequestParams {
       }
 
       /**
-       * Same as {@code unit_amount}, but accepts a decimal value in cents (or local equivalent)
-       * with at most 12 decimal places. Only one of {@code unit_amount} and {@code
-       * unit_amount_decimal} can be set.
+       * Same as {@code unit_amount}, but accepts a decimal value in cents (or local equivalent) with at most 12 decimal places. Only one of {@code unit_amount} and {@code unit_amount_decimal} can be set.
        */
       public Builder setUnitAmountDecimal(BigDecimal unitAmountDecimal) {
         this.unitAmountDecimal = unitAmountDecimal;
@@ -847,16 +781,13 @@ public class InvoiceItemUpdateParams extends ApiRequestParams {
       }
 
       /**
-       * Same as {@code unit_amount}, but accepts a decimal value in cents (or local equivalent)
-       * with at most 12 decimal places. Only one of {@code unit_amount} and {@code
-       * unit_amount_decimal} can be set.
+       * Same as {@code unit_amount}, but accepts a decimal value in cents (or local equivalent) with at most 12 decimal places. Only one of {@code unit_amount} and {@code unit_amount_decimal} can be set.
        */
       public Builder setUnitAmountDecimal(EmptyParam unitAmountDecimal) {
         this.unitAmountDecimal = unitAmountDecimal;
         return this;
       }
     }
-
     public enum TaxBehavior implements ApiRequestParams.EnumParam {
       @SerializedName("exclusive")
       EXCLUSIVE("exclusive"),
@@ -866,10 +797,8 @@ public class InvoiceItemUpdateParams extends ApiRequestParams {
 
       @SerializedName("unspecified")
       UNSPECIFIED("unspecified");
-
       @Getter(onMethod_ = {@Override})
       private final String value;
-
       TaxBehavior(String value) {
         this.value = value;
       }

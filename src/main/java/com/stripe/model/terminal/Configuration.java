@@ -27,22 +27,27 @@ public class Configuration extends ApiResource implements HasId {
   @SerializedName("bbpos_wisepos_e")
   BbposWiseposE bbposWiseposE;
 
-  /** Always true for a deleted object. */
+  /**
+   * Always true for a deleted object.
+   */
   @SerializedName("deleted")
   Boolean deleted;
 
-  /** Unique identifier for the object. */
+  /**
+   * Unique identifier for the object.
+   */
   @Getter(onMethod_ = {@Override})
   @SerializedName("id")
   String id;
 
-  /** Whether this Configuration is the default for your account. */
+  /**
+   * Whether this Configuration is the default for your account.
+   */
   @SerializedName("is_account_default")
   Boolean isAccountDefault;
 
   /**
-   * Has the value {@code true} if the object exists in live mode or the value {@code false} if the
-   * object exists in test mode.
+   * Has the value {@code true} if the object exists in live mode or the value {@code false} if the object exists in test mode.
    */
   @SerializedName("livemode")
   Boolean livemode;
@@ -61,168 +66,260 @@ public class Configuration extends ApiResource implements HasId {
   @SerializedName("verifone_p400")
   VerifoneP400 verifoneP400;
 
-  /** Creates a new <code>Configuration</code> object. */
+  /**
+   * <p>Creates a new <code>Configuration</code> object.</p>
+   */
   public static Configuration create(Map<String, Object> params) throws StripeException {
     return create(params, (RequestOptions) null);
   }
 
-  /** Creates a new <code>Configuration</code> object. */
-  public static Configuration create(Map<String, Object> params, RequestOptions options)
-      throws StripeException {
+  /**
+   * <p>Creates a new <code>Configuration</code> object.</p>
+   */
+  public static Configuration create(
+      Map<String, Object> params,
+      RequestOptions options) throws StripeException {
     String url = String.format("%s%s", Stripe.getApiBase(), "/v1/terminal/configurations");
     return ApiResource.request(
-        ApiResource.RequestMethod.POST, url, params, Configuration.class, options);
+      ApiResource.RequestMethod.POST,
+      url,
+      params,
+      Configuration.class,
+      options
+    );
   }
 
-  /** Creates a new <code>Configuration</code> object. */
+  /**
+   * <p>Creates a new <code>Configuration</code> object.</p>
+   */
   public static Configuration create(ConfigurationCreateParams params) throws StripeException {
     return create(params, (RequestOptions) null);
   }
 
-  /** Creates a new <code>Configuration</code> object. */
-  public static Configuration create(ConfigurationCreateParams params, RequestOptions options)
-      throws StripeException {
+  /**
+   * <p>Creates a new <code>Configuration</code> object.</p>
+   */
+  public static Configuration create(
+      ConfigurationCreateParams params,
+      RequestOptions options) throws StripeException {
     String url = String.format("%s%s", Stripe.getApiBase(), "/v1/terminal/configurations");
     return ApiResource.request(
-        ApiResource.RequestMethod.POST, url, params, Configuration.class, options);
+      ApiResource.RequestMethod.POST,
+      url,
+      params,
+      Configuration.class,
+      options
+    );
   }
 
-  /** Returns a list of <code>Configuration</code> objects. */
+  /**
+   * <p>Returns a list of <code>Configuration</code> objects.</p>
+   */
   public static ConfigurationCollection list(Map<String, Object> params) throws StripeException {
     return list(params, (RequestOptions) null);
   }
 
-  /** Returns a list of <code>Configuration</code> objects. */
-  public static ConfigurationCollection list(Map<String, Object> params, RequestOptions options)
-      throws StripeException {
+  /**
+   * <p>Returns a list of <code>Configuration</code> objects.</p>
+   */
+  public static ConfigurationCollection list(
+      Map<String, Object> params,
+      RequestOptions options) throws StripeException {
     String url = String.format("%s%s", Stripe.getApiBase(), "/v1/terminal/configurations");
     return ApiResource.requestCollection(url, params, ConfigurationCollection.class, options);
   }
 
-  /** Returns a list of <code>Configuration</code> objects. */
-  public static ConfigurationCollection list(ConfigurationListParams params)
-      throws StripeException {
+  /**
+   * <p>Returns a list of <code>Configuration</code> objects.</p>
+   */
+  public static ConfigurationCollection list(
+      ConfigurationListParams params) throws StripeException {
     return list(params, (RequestOptions) null);
   }
 
-  /** Returns a list of <code>Configuration</code> objects. */
-  public static ConfigurationCollection list(ConfigurationListParams params, RequestOptions options)
-      throws StripeException {
+  /**
+   * <p>Returns a list of <code>Configuration</code> objects.</p>
+   */
+  public static ConfigurationCollection list(
+      ConfigurationListParams params,
+      RequestOptions options) throws StripeException {
     String url = String.format("%s%s", Stripe.getApiBase(), "/v1/terminal/configurations");
     return ApiResource.requestCollection(url, params, ConfigurationCollection.class, options);
   }
 
-  /** Retrieves a <code>Configuration</code> object. */
+  /**
+   * <p>Retrieves a <code>Configuration</code> object.</p>
+   */
   public static Configuration retrieve(String configuration) throws StripeException {
     return retrieve(configuration, (Map<String, Object>) null, (RequestOptions) null);
   }
 
-  /** Retrieves a <code>Configuration</code> object. */
-  public static Configuration retrieve(String configuration, RequestOptions options)
-      throws StripeException {
+  /**
+   * <p>Retrieves a <code>Configuration</code> object.</p>
+   */
+  public static Configuration retrieve(
+      String configuration,
+      RequestOptions options) throws StripeException {
     return retrieve(configuration, (Map<String, Object>) null, options);
   }
 
-  /** Retrieves a <code>Configuration</code> object. */
+  /**
+   * <p>Retrieves a <code>Configuration</code> object.</p>
+   */
   public static Configuration retrieve(
-      String configuration, Map<String, Object> params, RequestOptions options)
-      throws StripeException {
+      String configuration,
+      Map<String, Object> params,
+      RequestOptions options) throws StripeException {
     String url =
-        String.format(
-            "%s%s",
-            Stripe.getApiBase(),
-            String.format(
-                "/v1/terminal/configurations/%s", ApiResource.urlEncodeId(configuration)));
+      String.format(
+        "%s%s",
+        Stripe.getApiBase(),
+        String.format("/v1/terminal/configurations/%s", ApiResource.urlEncodeId(configuration))
+      );
     return ApiResource.request(
-        ApiResource.RequestMethod.GET, url, params, Configuration.class, options);
+      ApiResource.RequestMethod.GET,
+      url,
+      params,
+      Configuration.class,
+      options
+    );
   }
 
-  /** Retrieves a <code>Configuration</code> object. */
+  /**
+   * <p>Retrieves a <code>Configuration</code> object.</p>
+   */
   public static Configuration retrieve(
-      String configuration, ConfigurationRetrieveParams params, RequestOptions options)
-      throws StripeException {
+      String configuration,
+      ConfigurationRetrieveParams params,
+      RequestOptions options) throws StripeException {
     String url =
-        String.format(
-            "%s%s",
-            Stripe.getApiBase(),
-            String.format(
-                "/v1/terminal/configurations/%s", ApiResource.urlEncodeId(configuration)));
+      String.format(
+        "%s%s",
+        Stripe.getApiBase(),
+        String.format("/v1/terminal/configurations/%s", ApiResource.urlEncodeId(configuration))
+      );
     return ApiResource.request(
-        ApiResource.RequestMethod.GET, url, params, Configuration.class, options);
+      ApiResource.RequestMethod.GET,
+      url,
+      params,
+      Configuration.class,
+      options
+    );
   }
 
-  /** Updates a new <code>Configuration</code> object. */
+  /**
+   * <p>Updates a new <code>Configuration</code> object.</p>
+   */
   public Configuration update(Map<String, Object> params) throws StripeException {
     return update(params, (RequestOptions) null);
   }
 
-  /** Updates a new <code>Configuration</code> object. */
-  public Configuration update(Map<String, Object> params, RequestOptions options)
-      throws StripeException {
+  /**
+   * <p>Updates a new <code>Configuration</code> object.</p>
+   */
+  public Configuration update(
+      Map<String, Object> params,
+      RequestOptions options) throws StripeException {
     String url =
-        String.format(
-            "%s%s",
-            Stripe.getApiBase(),
-            String.format("/v1/terminal/configurations/%s", ApiResource.urlEncodeId(this.getId())));
+      String.format(
+        "%s%s",
+        Stripe.getApiBase(),
+        String.format("/v1/terminal/configurations/%s", ApiResource.urlEncodeId(this.getId()))
+      );
     return ApiResource.request(
-        ApiResource.RequestMethod.POST, url, params, Configuration.class, options);
+      ApiResource.RequestMethod.POST,
+      url,
+      params,
+      Configuration.class,
+      options
+    );
   }
 
-  /** Updates a new <code>Configuration</code> object. */
+  /**
+   * <p>Updates a new <code>Configuration</code> object.</p>
+   */
   public Configuration update(ConfigurationUpdateParams params) throws StripeException {
     return update(params, (RequestOptions) null);
   }
 
-  /** Updates a new <code>Configuration</code> object. */
-  public Configuration update(ConfigurationUpdateParams params, RequestOptions options)
-      throws StripeException {
+  /**
+   * <p>Updates a new <code>Configuration</code> object.</p>
+   */
+  public Configuration update(
+      ConfigurationUpdateParams params,
+      RequestOptions options) throws StripeException {
     String url =
-        String.format(
-            "%s%s",
-            Stripe.getApiBase(),
-            String.format("/v1/terminal/configurations/%s", ApiResource.urlEncodeId(this.getId())));
+      String.format(
+        "%s%s",
+        Stripe.getApiBase(),
+        String.format("/v1/terminal/configurations/%s", ApiResource.urlEncodeId(this.getId()))
+      );
     return ApiResource.request(
-        ApiResource.RequestMethod.POST, url, params, Configuration.class, options);
+      ApiResource.RequestMethod.POST,
+      url,
+      params,
+      Configuration.class,
+      options
+    );
   }
 
-  /** Deletes a <code>Configuration</code> object. */
+  /**
+   * <p>Deletes a <code>Configuration</code> object.</p>
+   */
   public Configuration delete() throws StripeException {
     return delete((Map<String, Object>) null, (RequestOptions) null);
   }
 
-  /** Deletes a <code>Configuration</code> object. */
+  /**
+   * <p>Deletes a <code>Configuration</code> object.</p>
+   */
   public Configuration delete(RequestOptions options) throws StripeException {
     return delete((Map<String, Object>) null, options);
   }
 
-  /** Deletes a <code>Configuration</code> object. */
+  /**
+   * <p>Deletes a <code>Configuration</code> object.</p>
+   */
   public Configuration delete(Map<String, Object> params) throws StripeException {
     return delete(params, (RequestOptions) null);
   }
 
-  /** Deletes a <code>Configuration</code> object. */
-  public Configuration delete(Map<String, Object> params, RequestOptions options)
-      throws StripeException {
+  /**
+   * <p>Deletes a <code>Configuration</code> object.</p>
+   */
+  public Configuration delete(
+      Map<String, Object> params,
+      RequestOptions options) throws StripeException {
     String url =
-        String.format(
-            "%s%s",
-            Stripe.getApiBase(),
-            String.format("/v1/terminal/configurations/%s", ApiResource.urlEncodeId(this.getId())));
+      String.format(
+        "%s%s",
+        Stripe.getApiBase(),
+        String.format("/v1/terminal/configurations/%s", ApiResource.urlEncodeId(this.getId()))
+      );
     return ApiResource.request(
-        ApiResource.RequestMethod.DELETE, url, params, Configuration.class, options);
+      ApiResource.RequestMethod.DELETE,
+      url,
+      params,
+      Configuration.class,
+      options
+    );
   }
 
   @Getter
   @Setter
   @EqualsAndHashCode(callSuper = false)
   public static class BbposWiseposE extends StripeObject {
-    /** A File ID representing an image you would like displayed on the reader. */
+    /**
+     * A File ID representing an image you would like displayed on the reader.
+     */
     @SerializedName("splashscreen")
     @Getter(lombok.AccessLevel.NONE)
     @Setter(lombok.AccessLevel.NONE)
     ExpandableField<File> splashscreen;
 
-    /** Get ID of expandable {@code splashscreen} object. */
+    /**
+     * Get ID of expandable {@code splashscreen} object.
+     */
     public String getSplashscreen() {
       return (this.splashscreen != null) ? this.splashscreen.getId() : null;
     }
@@ -231,7 +328,9 @@ public class Configuration extends ApiResource implements HasId {
       this.splashscreen = ApiResource.setExpandableFieldId(id, this.splashscreen);
     }
 
-    /** Get expanded {@code splashscreen}. */
+    /**
+     * Get expanded {@code splashscreen}.
+     */
     public File getSplashscreenObject() {
       return (this.splashscreen != null) ? this.splashscreen.getExpanded() : null;
     }
@@ -291,17 +390,20 @@ public class Configuration extends ApiResource implements HasId {
     @Setter
     @EqualsAndHashCode(callSuper = false)
     public static class Aud extends StripeObject {
-      /** Fixed amounts displayed when collecting a tip. */
+      /**
+       * Fixed amounts displayed when collecting a tip.
+       */
       @SerializedName("fixed_amounts")
       List<Long> fixedAmounts;
 
-      /** Percentages displayed when collecting a tip. */
+      /**
+       * Percentages displayed when collecting a tip.
+       */
       @SerializedName("percentages")
       List<Long> percentages;
 
       /**
-       * Below this amount, fixed amounts will be displayed; above it, percentages will be
-       * displayed.
+       * Below this amount, fixed amounts will be displayed; above it, percentages will be displayed.
        */
       @SerializedName("smart_tip_threshold")
       Long smartTipThreshold;
@@ -311,17 +413,20 @@ public class Configuration extends ApiResource implements HasId {
     @Setter
     @EqualsAndHashCode(callSuper = false)
     public static class Cad extends StripeObject {
-      /** Fixed amounts displayed when collecting a tip. */
+      /**
+       * Fixed amounts displayed when collecting a tip.
+       */
       @SerializedName("fixed_amounts")
       List<Long> fixedAmounts;
 
-      /** Percentages displayed when collecting a tip. */
+      /**
+       * Percentages displayed when collecting a tip.
+       */
       @SerializedName("percentages")
       List<Long> percentages;
 
       /**
-       * Below this amount, fixed amounts will be displayed; above it, percentages will be
-       * displayed.
+       * Below this amount, fixed amounts will be displayed; above it, percentages will be displayed.
        */
       @SerializedName("smart_tip_threshold")
       Long smartTipThreshold;
@@ -331,17 +436,20 @@ public class Configuration extends ApiResource implements HasId {
     @Setter
     @EqualsAndHashCode(callSuper = false)
     public static class Chf extends StripeObject {
-      /** Fixed amounts displayed when collecting a tip. */
+      /**
+       * Fixed amounts displayed when collecting a tip.
+       */
       @SerializedName("fixed_amounts")
       List<Long> fixedAmounts;
 
-      /** Percentages displayed when collecting a tip. */
+      /**
+       * Percentages displayed when collecting a tip.
+       */
       @SerializedName("percentages")
       List<Long> percentages;
 
       /**
-       * Below this amount, fixed amounts will be displayed; above it, percentages will be
-       * displayed.
+       * Below this amount, fixed amounts will be displayed; above it, percentages will be displayed.
        */
       @SerializedName("smart_tip_threshold")
       Long smartTipThreshold;
@@ -351,17 +459,20 @@ public class Configuration extends ApiResource implements HasId {
     @Setter
     @EqualsAndHashCode(callSuper = false)
     public static class Czk extends StripeObject {
-      /** Fixed amounts displayed when collecting a tip. */
+      /**
+       * Fixed amounts displayed when collecting a tip.
+       */
       @SerializedName("fixed_amounts")
       List<Long> fixedAmounts;
 
-      /** Percentages displayed when collecting a tip. */
+      /**
+       * Percentages displayed when collecting a tip.
+       */
       @SerializedName("percentages")
       List<Long> percentages;
 
       /**
-       * Below this amount, fixed amounts will be displayed; above it, percentages will be
-       * displayed.
+       * Below this amount, fixed amounts will be displayed; above it, percentages will be displayed.
        */
       @SerializedName("smart_tip_threshold")
       Long smartTipThreshold;
@@ -371,17 +482,20 @@ public class Configuration extends ApiResource implements HasId {
     @Setter
     @EqualsAndHashCode(callSuper = false)
     public static class Dkk extends StripeObject {
-      /** Fixed amounts displayed when collecting a tip. */
+      /**
+       * Fixed amounts displayed when collecting a tip.
+       */
       @SerializedName("fixed_amounts")
       List<Long> fixedAmounts;
 
-      /** Percentages displayed when collecting a tip. */
+      /**
+       * Percentages displayed when collecting a tip.
+       */
       @SerializedName("percentages")
       List<Long> percentages;
 
       /**
-       * Below this amount, fixed amounts will be displayed; above it, percentages will be
-       * displayed.
+       * Below this amount, fixed amounts will be displayed; above it, percentages will be displayed.
        */
       @SerializedName("smart_tip_threshold")
       Long smartTipThreshold;
@@ -391,17 +505,20 @@ public class Configuration extends ApiResource implements HasId {
     @Setter
     @EqualsAndHashCode(callSuper = false)
     public static class Eur extends StripeObject {
-      /** Fixed amounts displayed when collecting a tip. */
+      /**
+       * Fixed amounts displayed when collecting a tip.
+       */
       @SerializedName("fixed_amounts")
       List<Long> fixedAmounts;
 
-      /** Percentages displayed when collecting a tip. */
+      /**
+       * Percentages displayed when collecting a tip.
+       */
       @SerializedName("percentages")
       List<Long> percentages;
 
       /**
-       * Below this amount, fixed amounts will be displayed; above it, percentages will be
-       * displayed.
+       * Below this amount, fixed amounts will be displayed; above it, percentages will be displayed.
        */
       @SerializedName("smart_tip_threshold")
       Long smartTipThreshold;
@@ -411,17 +528,20 @@ public class Configuration extends ApiResource implements HasId {
     @Setter
     @EqualsAndHashCode(callSuper = false)
     public static class Gbp extends StripeObject {
-      /** Fixed amounts displayed when collecting a tip. */
+      /**
+       * Fixed amounts displayed when collecting a tip.
+       */
       @SerializedName("fixed_amounts")
       List<Long> fixedAmounts;
 
-      /** Percentages displayed when collecting a tip. */
+      /**
+       * Percentages displayed when collecting a tip.
+       */
       @SerializedName("percentages")
       List<Long> percentages;
 
       /**
-       * Below this amount, fixed amounts will be displayed; above it, percentages will be
-       * displayed.
+       * Below this amount, fixed amounts will be displayed; above it, percentages will be displayed.
        */
       @SerializedName("smart_tip_threshold")
       Long smartTipThreshold;
@@ -431,17 +551,20 @@ public class Configuration extends ApiResource implements HasId {
     @Setter
     @EqualsAndHashCode(callSuper = false)
     public static class Hkd extends StripeObject {
-      /** Fixed amounts displayed when collecting a tip. */
+      /**
+       * Fixed amounts displayed when collecting a tip.
+       */
       @SerializedName("fixed_amounts")
       List<Long> fixedAmounts;
 
-      /** Percentages displayed when collecting a tip. */
+      /**
+       * Percentages displayed when collecting a tip.
+       */
       @SerializedName("percentages")
       List<Long> percentages;
 
       /**
-       * Below this amount, fixed amounts will be displayed; above it, percentages will be
-       * displayed.
+       * Below this amount, fixed amounts will be displayed; above it, percentages will be displayed.
        */
       @SerializedName("smart_tip_threshold")
       Long smartTipThreshold;
@@ -451,17 +574,20 @@ public class Configuration extends ApiResource implements HasId {
     @Setter
     @EqualsAndHashCode(callSuper = false)
     public static class Myr extends StripeObject {
-      /** Fixed amounts displayed when collecting a tip. */
+      /**
+       * Fixed amounts displayed when collecting a tip.
+       */
       @SerializedName("fixed_amounts")
       List<Long> fixedAmounts;
 
-      /** Percentages displayed when collecting a tip. */
+      /**
+       * Percentages displayed when collecting a tip.
+       */
       @SerializedName("percentages")
       List<Long> percentages;
 
       /**
-       * Below this amount, fixed amounts will be displayed; above it, percentages will be
-       * displayed.
+       * Below this amount, fixed amounts will be displayed; above it, percentages will be displayed.
        */
       @SerializedName("smart_tip_threshold")
       Long smartTipThreshold;
@@ -471,17 +597,20 @@ public class Configuration extends ApiResource implements HasId {
     @Setter
     @EqualsAndHashCode(callSuper = false)
     public static class Nok extends StripeObject {
-      /** Fixed amounts displayed when collecting a tip. */
+      /**
+       * Fixed amounts displayed when collecting a tip.
+       */
       @SerializedName("fixed_amounts")
       List<Long> fixedAmounts;
 
-      /** Percentages displayed when collecting a tip. */
+      /**
+       * Percentages displayed when collecting a tip.
+       */
       @SerializedName("percentages")
       List<Long> percentages;
 
       /**
-       * Below this amount, fixed amounts will be displayed; above it, percentages will be
-       * displayed.
+       * Below this amount, fixed amounts will be displayed; above it, percentages will be displayed.
        */
       @SerializedName("smart_tip_threshold")
       Long smartTipThreshold;
@@ -491,17 +620,20 @@ public class Configuration extends ApiResource implements HasId {
     @Setter
     @EqualsAndHashCode(callSuper = false)
     public static class Nzd extends StripeObject {
-      /** Fixed amounts displayed when collecting a tip. */
+      /**
+       * Fixed amounts displayed when collecting a tip.
+       */
       @SerializedName("fixed_amounts")
       List<Long> fixedAmounts;
 
-      /** Percentages displayed when collecting a tip. */
+      /**
+       * Percentages displayed when collecting a tip.
+       */
       @SerializedName("percentages")
       List<Long> percentages;
 
       /**
-       * Below this amount, fixed amounts will be displayed; above it, percentages will be
-       * displayed.
+       * Below this amount, fixed amounts will be displayed; above it, percentages will be displayed.
        */
       @SerializedName("smart_tip_threshold")
       Long smartTipThreshold;
@@ -511,17 +643,20 @@ public class Configuration extends ApiResource implements HasId {
     @Setter
     @EqualsAndHashCode(callSuper = false)
     public static class Sek extends StripeObject {
-      /** Fixed amounts displayed when collecting a tip. */
+      /**
+       * Fixed amounts displayed when collecting a tip.
+       */
       @SerializedName("fixed_amounts")
       List<Long> fixedAmounts;
 
-      /** Percentages displayed when collecting a tip. */
+      /**
+       * Percentages displayed when collecting a tip.
+       */
       @SerializedName("percentages")
       List<Long> percentages;
 
       /**
-       * Below this amount, fixed amounts will be displayed; above it, percentages will be
-       * displayed.
+       * Below this amount, fixed amounts will be displayed; above it, percentages will be displayed.
        */
       @SerializedName("smart_tip_threshold")
       Long smartTipThreshold;
@@ -531,17 +666,20 @@ public class Configuration extends ApiResource implements HasId {
     @Setter
     @EqualsAndHashCode(callSuper = false)
     public static class Sgd extends StripeObject {
-      /** Fixed amounts displayed when collecting a tip. */
+      /**
+       * Fixed amounts displayed when collecting a tip.
+       */
       @SerializedName("fixed_amounts")
       List<Long> fixedAmounts;
 
-      /** Percentages displayed when collecting a tip. */
+      /**
+       * Percentages displayed when collecting a tip.
+       */
       @SerializedName("percentages")
       List<Long> percentages;
 
       /**
-       * Below this amount, fixed amounts will be displayed; above it, percentages will be
-       * displayed.
+       * Below this amount, fixed amounts will be displayed; above it, percentages will be displayed.
        */
       @SerializedName("smart_tip_threshold")
       Long smartTipThreshold;
@@ -551,17 +689,20 @@ public class Configuration extends ApiResource implements HasId {
     @Setter
     @EqualsAndHashCode(callSuper = false)
     public static class Usd extends StripeObject {
-      /** Fixed amounts displayed when collecting a tip. */
+      /**
+       * Fixed amounts displayed when collecting a tip.
+       */
       @SerializedName("fixed_amounts")
       List<Long> fixedAmounts;
 
-      /** Percentages displayed when collecting a tip. */
+      /**
+       * Percentages displayed when collecting a tip.
+       */
       @SerializedName("percentages")
       List<Long> percentages;
 
       /**
-       * Below this amount, fixed amounts will be displayed; above it, percentages will be
-       * displayed.
+       * Below this amount, fixed amounts will be displayed; above it, percentages will be displayed.
        */
       @SerializedName("smart_tip_threshold")
       Long smartTipThreshold;
@@ -572,13 +713,17 @@ public class Configuration extends ApiResource implements HasId {
   @Setter
   @EqualsAndHashCode(callSuper = false)
   public static class VerifoneP400 extends StripeObject {
-    /** A File ID representing an image you would like displayed on the reader. */
+    /**
+     * A File ID representing an image you would like displayed on the reader.
+     */
     @SerializedName("splashscreen")
     @Getter(lombok.AccessLevel.NONE)
     @Setter(lombok.AccessLevel.NONE)
     ExpandableField<File> splashscreen;
 
-    /** Get ID of expandable {@code splashscreen} object. */
+    /**
+     * Get ID of expandable {@code splashscreen} object.
+     */
     public String getSplashscreen() {
       return (this.splashscreen != null) ? this.splashscreen.getId() : null;
     }
@@ -587,7 +732,9 @@ public class Configuration extends ApiResource implements HasId {
       this.splashscreen = ApiResource.setExpandableFieldId(id, this.splashscreen);
     }
 
-    /** Get expanded {@code splashscreen}. */
+    /**
+     * Get expanded {@code splashscreen}.
+     */
     public File getSplashscreenObject() {
       return (this.splashscreen != null) ? this.splashscreen.getExpanded() : null;
     }

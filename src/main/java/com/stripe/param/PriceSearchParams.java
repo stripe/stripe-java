@@ -11,56 +11,51 @@ import lombok.Getter;
 
 @Getter
 public class PriceSearchParams extends ApiRequestParams {
-  /** Specifies which fields in the response should be expanded. */
+  /**
+   * Specifies which fields in the response should be expanded.
+   */
   @SerializedName("expand")
   List<String> expand;
 
   /**
-   * Map of extra parameters for custom features not available in this client library. The content
-   * in this map is not serialized under this field's {@code @SerializedName} value. Instead, each
-   * key/value pair is serialized as if the key is a root-level field (serialized) name in this
-   * param object. Effectively, this map is flattened to its parent instance.
+   * Map of extra parameters for custom features not available in this client library. The content in this map is not serialized under this field's {@code @SerializedName} value. Instead, each key/value pair is serialized as if the key is a root-level field (serialized) name in this param object. Effectively, this map is flattened to its parent instance.
    */
   @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
   Map<String, Object> extraParams;
 
   /**
-   * A limit on the number of objects to be returned. Limit can range between 1 and 100, and the
-   * default is 10.
+   * A limit on the number of objects to be returned. Limit can range between 1 and 100, and the default is 10.
    */
   @SerializedName("limit")
   Long limit;
 
   /**
-   * A cursor for pagination across multiple pages of results. Don't include this parameter on the
-   * first call. Use the next_page value returned in a previous response to request subsequent
-   * results.
+   * A cursor for pagination across multiple pages of results. Don't include this parameter on the first call. Use the next_page value returned in a previous response to request subsequent results.
    */
   @SerializedName("page")
   String page;
 
   /**
-   * The search query string. See <a
-   * href="https://stripe.com/docs/search#search-query-language">search query language</a> and the
-   * list of supported <a href="https://stripe.com/docs/search#query-fields-for-prices">query fields
-   * for prices</a>.
+   * The search query string. See <a href="https://stripe.com/docs/search#search-query-language">search query language</a> and the list of supported <a href="https://stripe.com/docs/search#query-fields-for-prices">query fields for prices</a>.
    */
   @SerializedName("query")
   String query;
 
   private PriceSearchParams(
-      List<String> expand, Map<String, Object> extraParams, Long limit, String page, String query) {
+      List<String> expand,
+      Map<String, Object> extraParams,
+      Long limit,
+      String page,
+      String query) {
     this.expand = expand;
     this.extraParams = extraParams;
     this.limit = limit;
     this.page = page;
     this.query = query;
   }
-
   public static Builder builder() {
     return new Builder();
   }
-
   public static class Builder {
     private List<String> expand;
 
@@ -72,16 +67,21 @@ public class PriceSearchParams extends ApiRequestParams {
 
     private String query;
 
-    /** Finalize and obtain parameter instance from this builder. */
+    /**
+     * Finalize and obtain parameter instance from this builder.
+     */
     public PriceSearchParams build() {
       return new PriceSearchParams(
-          this.expand, this.extraParams, this.limit, this.page, this.query);
+        this.expand,
+        this.extraParams,
+        this.limit,
+        this.page,
+        this.query
+      );
     }
 
     /**
-     * Add an element to `expand` list. A list is initialized for the first `add/addAll` call, and
-     * subsequent calls adds additional elements to the original list. See {@link
-     * PriceSearchParams#expand} for the field documentation.
+     * Add an element to `expand` list. A list is initialized for the first `add/addAll` call, and subsequent calls adds additional elements to the original list. See {@link PriceSearchParams#expand} for the field documentation.
      */
     public Builder addExpand(String element) {
       if (this.expand == null) {
@@ -92,9 +92,7 @@ public class PriceSearchParams extends ApiRequestParams {
     }
 
     /**
-     * Add all elements to `expand` list. A list is initialized for the first `add/addAll` call, and
-     * subsequent calls adds additional elements to the original list. See {@link
-     * PriceSearchParams#expand} for the field documentation.
+     * Add all elements to `expand` list. A list is initialized for the first `add/addAll` call, and subsequent calls adds additional elements to the original list. See {@link PriceSearchParams#expand} for the field documentation.
      */
     public Builder addAllExpand(List<String> elements) {
       if (this.expand == null) {
@@ -105,9 +103,7 @@ public class PriceSearchParams extends ApiRequestParams {
     }
 
     /**
-     * Add a key/value pair to `extraParams` map. A map is initialized for the first `put/putAll`
-     * call, and subsequent calls add additional key/value pairs to the original map. See {@link
-     * PriceSearchParams#extraParams} for the field documentation.
+     * Add a key/value pair to `extraParams` map. A map is initialized for the first `put/putAll` call, and subsequent calls add additional key/value pairs to the original map. See {@link PriceSearchParams#extraParams} for the field documentation.
      */
     public Builder putExtraParam(String key, Object value) {
       if (this.extraParams == null) {
@@ -118,9 +114,7 @@ public class PriceSearchParams extends ApiRequestParams {
     }
 
     /**
-     * Add all map key/value pairs to `extraParams` map. A map is initialized for the first
-     * `put/putAll` call, and subsequent calls add additional key/value pairs to the original map.
-     * See {@link PriceSearchParams#extraParams} for the field documentation.
+     * Add all map key/value pairs to `extraParams` map. A map is initialized for the first `put/putAll` call, and subsequent calls add additional key/value pairs to the original map. See {@link PriceSearchParams#extraParams} for the field documentation.
      */
     public Builder putAllExtraParam(Map<String, Object> map) {
       if (this.extraParams == null) {
@@ -131,8 +125,7 @@ public class PriceSearchParams extends ApiRequestParams {
     }
 
     /**
-     * A limit on the number of objects to be returned. Limit can range between 1 and 100, and the
-     * default is 10.
+     * A limit on the number of objects to be returned. Limit can range between 1 and 100, and the default is 10.
      */
     public Builder setLimit(Long limit) {
       this.limit = limit;
@@ -140,9 +133,7 @@ public class PriceSearchParams extends ApiRequestParams {
     }
 
     /**
-     * A cursor for pagination across multiple pages of results. Don't include this parameter on the
-     * first call. Use the next_page value returned in a previous response to request subsequent
-     * results.
+     * A cursor for pagination across multiple pages of results. Don't include this parameter on the first call. Use the next_page value returned in a previous response to request subsequent results.
      */
     public Builder setPage(String page) {
       this.page = page;
@@ -150,10 +141,7 @@ public class PriceSearchParams extends ApiRequestParams {
     }
 
     /**
-     * The search query string. See <a
-     * href="https://stripe.com/docs/search#search-query-language">search query language</a> and the
-     * list of supported <a href="https://stripe.com/docs/search#query-fields-for-prices">query
-     * fields for prices</a>.
+     * The search query string. See <a href="https://stripe.com/docs/search#search-query-language">search query language</a> and the list of supported <a href="https://stripe.com/docs/search#query-fields-for-prices">query fields for prices</a>.
      */
     public Builder setQuery(String query) {
       this.query = query;

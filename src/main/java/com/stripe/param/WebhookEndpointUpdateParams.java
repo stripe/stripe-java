@@ -3,6 +3,7 @@ package com.stripe.param;
 
 import com.google.gson.annotations.SerializedName;
 import com.stripe.net.ApiRequestParams;
+import com.stripe.net.ApiRequestParams.EnumParam;
 import com.stripe.param.common.EmptyParam;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -12,44 +13,45 @@ import lombok.Getter;
 
 @Getter
 public class WebhookEndpointUpdateParams extends ApiRequestParams {
-  /** An optional description of what the webhook is used for. */
+  /**
+   * An optional description of what the webhook is used for.
+   */
   @SerializedName("description")
   Object description;
 
-  /** Disable the webhook endpoint if set to true. */
+  /**
+   * Disable the webhook endpoint if set to true.
+   */
   @SerializedName("disabled")
   Boolean disabled;
 
   /**
-   * The list of events to enable for this endpoint. You may specify {@code ['*']} to enable all
-   * events, except those that require explicit selection.
+   * The list of events to enable for this endpoint. You may specify {@code ['*']} to enable all events, except those that require explicit selection.
    */
   @SerializedName("enabled_events")
   List<EnabledEvent> enabledEvents;
 
-  /** Specifies which fields in the response should be expanded. */
+  /**
+   * Specifies which fields in the response should be expanded.
+   */
   @SerializedName("expand")
   List<String> expand;
 
   /**
-   * Map of extra parameters for custom features not available in this client library. The content
-   * in this map is not serialized under this field's {@code @SerializedName} value. Instead, each
-   * key/value pair is serialized as if the key is a root-level field (serialized) name in this
-   * param object. Effectively, this map is flattened to its parent instance.
+   * Map of extra parameters for custom features not available in this client library. The content in this map is not serialized under this field's {@code @SerializedName} value. Instead, each key/value pair is serialized as if the key is a root-level field (serialized) name in this param object. Effectively, this map is flattened to its parent instance.
    */
   @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
   Map<String, Object> extraParams;
 
   /**
-   * Set of <a href="https://stripe.com/docs/api/metadata">key-value pairs</a> that you can attach
-   * to an object. This can be useful for storing additional information about the object in a
-   * structured format. Individual keys can be unset by posting an empty value to them. All keys can
-   * be unset by posting an empty value to {@code metadata}.
+   * Set of <a href="https://stripe.com/docs/api/metadata">key-value pairs</a> that you can attach to an object. This can be useful for storing additional information about the object in a structured format. Individual keys can be unset by posting an empty value to them. All keys can be unset by posting an empty value to {@code metadata}.
    */
   @SerializedName("metadata")
   Object metadata;
 
-  /** The URL of the webhook endpoint. */
+  /**
+   * The URL of the webhook endpoint.
+   */
   @SerializedName("url")
   Object url;
 
@@ -69,11 +71,9 @@ public class WebhookEndpointUpdateParams extends ApiRequestParams {
     this.metadata = metadata;
     this.url = url;
   }
-
   public static Builder builder() {
     return new Builder();
   }
-
   public static class Builder {
     private Object description;
 
@@ -89,40 +89,47 @@ public class WebhookEndpointUpdateParams extends ApiRequestParams {
 
     private Object url;
 
-    /** Finalize and obtain parameter instance from this builder. */
+    /**
+     * Finalize and obtain parameter instance from this builder.
+     */
     public WebhookEndpointUpdateParams build() {
       return new WebhookEndpointUpdateParams(
-          this.description,
-          this.disabled,
-          this.enabledEvents,
-          this.expand,
-          this.extraParams,
-          this.metadata,
-          this.url);
+        this.description,
+        this.disabled,
+        this.enabledEvents,
+        this.expand,
+        this.extraParams,
+        this.metadata,
+        this.url
+      );
     }
 
-    /** An optional description of what the webhook is used for. */
+    /**
+     * An optional description of what the webhook is used for.
+     */
     public Builder setDescription(String description) {
       this.description = description;
       return this;
     }
 
-    /** An optional description of what the webhook is used for. */
+    /**
+     * An optional description of what the webhook is used for.
+     */
     public Builder setDescription(EmptyParam description) {
       this.description = description;
       return this;
     }
 
-    /** Disable the webhook endpoint if set to true. */
+    /**
+     * Disable the webhook endpoint if set to true.
+     */
     public Builder setDisabled(Boolean disabled) {
       this.disabled = disabled;
       return this;
     }
 
     /**
-     * Add an element to `enabledEvents` list. A list is initialized for the first `add/addAll`
-     * call, and subsequent calls adds additional elements to the original list. See {@link
-     * WebhookEndpointUpdateParams#enabledEvents} for the field documentation.
+     * Add an element to `enabledEvents` list. A list is initialized for the first `add/addAll` call, and subsequent calls adds additional elements to the original list. See {@link WebhookEndpointUpdateParams#enabledEvents} for the field documentation.
      */
     public Builder addEnabledEvent(EnabledEvent element) {
       if (this.enabledEvents == null) {
@@ -133,9 +140,7 @@ public class WebhookEndpointUpdateParams extends ApiRequestParams {
     }
 
     /**
-     * Add all elements to `enabledEvents` list. A list is initialized for the first `add/addAll`
-     * call, and subsequent calls adds additional elements to the original list. See {@link
-     * WebhookEndpointUpdateParams#enabledEvents} for the field documentation.
+     * Add all elements to `enabledEvents` list. A list is initialized for the first `add/addAll` call, and subsequent calls adds additional elements to the original list. See {@link WebhookEndpointUpdateParams#enabledEvents} for the field documentation.
      */
     public Builder addAllEnabledEvent(List<EnabledEvent> elements) {
       if (this.enabledEvents == null) {
@@ -146,9 +151,7 @@ public class WebhookEndpointUpdateParams extends ApiRequestParams {
     }
 
     /**
-     * Add an element to `expand` list. A list is initialized for the first `add/addAll` call, and
-     * subsequent calls adds additional elements to the original list. See {@link
-     * WebhookEndpointUpdateParams#expand} for the field documentation.
+     * Add an element to `expand` list. A list is initialized for the first `add/addAll` call, and subsequent calls adds additional elements to the original list. See {@link WebhookEndpointUpdateParams#expand} for the field documentation.
      */
     public Builder addExpand(String element) {
       if (this.expand == null) {
@@ -159,9 +162,7 @@ public class WebhookEndpointUpdateParams extends ApiRequestParams {
     }
 
     /**
-     * Add all elements to `expand` list. A list is initialized for the first `add/addAll` call, and
-     * subsequent calls adds additional elements to the original list. See {@link
-     * WebhookEndpointUpdateParams#expand} for the field documentation.
+     * Add all elements to `expand` list. A list is initialized for the first `add/addAll` call, and subsequent calls adds additional elements to the original list. See {@link WebhookEndpointUpdateParams#expand} for the field documentation.
      */
     public Builder addAllExpand(List<String> elements) {
       if (this.expand == null) {
@@ -172,9 +173,7 @@ public class WebhookEndpointUpdateParams extends ApiRequestParams {
     }
 
     /**
-     * Add a key/value pair to `extraParams` map. A map is initialized for the first `put/putAll`
-     * call, and subsequent calls add additional key/value pairs to the original map. See {@link
-     * WebhookEndpointUpdateParams#extraParams} for the field documentation.
+     * Add a key/value pair to `extraParams` map. A map is initialized for the first `put/putAll` call, and subsequent calls add additional key/value pairs to the original map. See {@link WebhookEndpointUpdateParams#extraParams} for the field documentation.
      */
     public Builder putExtraParam(String key, Object value) {
       if (this.extraParams == null) {
@@ -185,9 +184,7 @@ public class WebhookEndpointUpdateParams extends ApiRequestParams {
     }
 
     /**
-     * Add all map key/value pairs to `extraParams` map. A map is initialized for the first
-     * `put/putAll` call, and subsequent calls add additional key/value pairs to the original map.
-     * See {@link WebhookEndpointUpdateParams#extraParams} for the field documentation.
+     * Add all map key/value pairs to `extraParams` map. A map is initialized for the first `put/putAll` call, and subsequent calls add additional key/value pairs to the original map. See {@link WebhookEndpointUpdateParams#extraParams} for the field documentation.
      */
     public Builder putAllExtraParam(Map<String, Object> map) {
       if (this.extraParams == null) {
@@ -198,9 +195,7 @@ public class WebhookEndpointUpdateParams extends ApiRequestParams {
     }
 
     /**
-     * Add a key/value pair to `metadata` map. A map is initialized for the first `put/putAll` call,
-     * and subsequent calls add additional key/value pairs to the original map. See {@link
-     * WebhookEndpointUpdateParams#metadata} for the field documentation.
+     * Add a key/value pair to `metadata` map. A map is initialized for the first `put/putAll` call, and subsequent calls add additional key/value pairs to the original map. See {@link WebhookEndpointUpdateParams#metadata} for the field documentation.
      */
     @SuppressWarnings("unchecked")
     public Builder putMetadata(String key, String value) {
@@ -212,9 +207,7 @@ public class WebhookEndpointUpdateParams extends ApiRequestParams {
     }
 
     /**
-     * Add all map key/value pairs to `metadata` map. A map is initialized for the first
-     * `put/putAll` call, and subsequent calls add additional key/value pairs to the original map.
-     * See {@link WebhookEndpointUpdateParams#metadata} for the field documentation.
+     * Add all map key/value pairs to `metadata` map. A map is initialized for the first `put/putAll` call, and subsequent calls add additional key/value pairs to the original map. See {@link WebhookEndpointUpdateParams#metadata} for the field documentation.
      */
     @SuppressWarnings("unchecked")
     public Builder putAllMetadata(Map<String, String> map) {
@@ -226,10 +219,7 @@ public class WebhookEndpointUpdateParams extends ApiRequestParams {
     }
 
     /**
-     * Set of <a href="https://stripe.com/docs/api/metadata">key-value pairs</a> that you can attach
-     * to an object. This can be useful for storing additional information about the object in a
-     * structured format. Individual keys can be unset by posting an empty value to them. All keys
-     * can be unset by posting an empty value to {@code metadata}.
+     * Set of <a href="https://stripe.com/docs/api/metadata">key-value pairs</a> that you can attach to an object. This can be useful for storing additional information about the object in a structured format. Individual keys can be unset by posting an empty value to them. All keys can be unset by posting an empty value to {@code metadata}.
      */
     public Builder setMetadata(EmptyParam metadata) {
       this.metadata = metadata;
@@ -237,29 +227,29 @@ public class WebhookEndpointUpdateParams extends ApiRequestParams {
     }
 
     /**
-     * Set of <a href="https://stripe.com/docs/api/metadata">key-value pairs</a> that you can attach
-     * to an object. This can be useful for storing additional information about the object in a
-     * structured format. Individual keys can be unset by posting an empty value to them. All keys
-     * can be unset by posting an empty value to {@code metadata}.
+     * Set of <a href="https://stripe.com/docs/api/metadata">key-value pairs</a> that you can attach to an object. This can be useful for storing additional information about the object in a structured format. Individual keys can be unset by posting an empty value to them. All keys can be unset by posting an empty value to {@code metadata}.
      */
     public Builder setMetadata(Map<String, String> metadata) {
       this.metadata = metadata;
       return this;
     }
 
-    /** The URL of the webhook endpoint. */
+    /**
+     * The URL of the webhook endpoint.
+     */
     public Builder setUrl(String url) {
       this.url = url;
       return this;
     }
 
-    /** The URL of the webhook endpoint. */
+    /**
+     * The URL of the webhook endpoint.
+     */
     public Builder setUrl(EmptyParam url) {
       this.url = url;
       return this;
     }
   }
-
   public enum EnabledEvent implements ApiRequestParams.EnumParam {
     @SerializedName("*")
     ALL("*"),
@@ -844,8 +834,7 @@ public class WebhookEndpointUpdateParams extends ApiRequestParams {
     TREASURY__DEBIT_REVERSAL__CREATED("treasury.debit_reversal.created"),
 
     @SerializedName("treasury.debit_reversal.initial_credit_granted")
-    TREASURY__DEBIT_REVERSAL__INITIAL_CREDIT_GRANTED(
-        "treasury.debit_reversal.initial_credit_granted"),
+    TREASURY__DEBIT_REVERSAL__INITIAL_CREDIT_GRANTED("treasury.debit_reversal.initial_credit_granted"),
 
     @SerializedName("treasury.financial_account.closed")
     TREASURY__FINANCIAL_ACCOUNT__CLOSED("treasury.financial_account.closed"),
@@ -854,8 +843,7 @@ public class WebhookEndpointUpdateParams extends ApiRequestParams {
     TREASURY__FINANCIAL_ACCOUNT__CREATED("treasury.financial_account.created"),
 
     @SerializedName("treasury.financial_account.features_status_updated")
-    TREASURY__FINANCIAL_ACCOUNT__FEATURES_STATUS_UPDATED(
-        "treasury.financial_account.features_status_updated"),
+    TREASURY__FINANCIAL_ACCOUNT__FEATURES_STATUS_UPDATED("treasury.financial_account.features_status_updated"),
 
     @SerializedName("treasury.inbound_transfer.canceled")
     TREASURY__INBOUND_TRANSFER__CANCELED("treasury.inbound_transfer.canceled"),
@@ -876,8 +864,7 @@ public class WebhookEndpointUpdateParams extends ApiRequestParams {
     TREASURY__OUTBOUND_PAYMENT__CREATED("treasury.outbound_payment.created"),
 
     @SerializedName("treasury.outbound_payment.expected_arrival_date_updated")
-    TREASURY__OUTBOUND_PAYMENT__EXPECTED_ARRIVAL_DATE_UPDATED(
-        "treasury.outbound_payment.expected_arrival_date_updated"),
+    TREASURY__OUTBOUND_PAYMENT__EXPECTED_ARRIVAL_DATE_UPDATED("treasury.outbound_payment.expected_arrival_date_updated"),
 
     @SerializedName("treasury.outbound_payment.failed")
     TREASURY__OUTBOUND_PAYMENT__FAILED("treasury.outbound_payment.failed"),
@@ -895,8 +882,7 @@ public class WebhookEndpointUpdateParams extends ApiRequestParams {
     TREASURY__OUTBOUND_TRANSFER__CREATED("treasury.outbound_transfer.created"),
 
     @SerializedName("treasury.outbound_transfer.expected_arrival_date_updated")
-    TREASURY__OUTBOUND_TRANSFER__EXPECTED_ARRIVAL_DATE_UPDATED(
-        "treasury.outbound_transfer.expected_arrival_date_updated"),
+    TREASURY__OUTBOUND_TRANSFER__EXPECTED_ARRIVAL_DATE_UPDATED("treasury.outbound_transfer.expected_arrival_date_updated"),
 
     @SerializedName("treasury.outbound_transfer.failed")
     TREASURY__OUTBOUND_TRANSFER__FAILED("treasury.outbound_transfer.failed"),
@@ -913,18 +899,16 @@ public class WebhookEndpointUpdateParams extends ApiRequestParams {
     @SerializedName("treasury.received_credit.failed")
     TREASURY__RECEIVED_CREDIT__FAILED("treasury.received_credit.failed"),
 
-    @SerializedName("treasury.received_credit.reversed")
-    TREASURY__RECEIVED_CREDIT__REVERSED("treasury.received_credit.reversed"),
-
     @SerializedName("treasury.received_credit.succeeded")
     TREASURY__RECEIVED_CREDIT__SUCCEEDED("treasury.received_credit.succeeded"),
 
     @SerializedName("treasury.received_debit.created")
-    TREASURY__RECEIVED_DEBIT__CREATED("treasury.received_debit.created");
+    TREASURY__RECEIVED_DEBIT__CREATED("treasury.received_debit.created"),
 
+    @SerializedName("treasury.received_credit.reversed")
+    TREASURY__RECEIVED_CREDIT__REVERSED("treasury.received_credit.reversed");
     @Getter(onMethod_ = {@Override})
     private final String value;
-
     EnabledEvent(String value) {
       this.value = value;
     }

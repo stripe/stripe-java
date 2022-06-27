@@ -11,24 +11,27 @@ import lombok.Getter;
 
 @Getter
 public class ReaderProcessPaymentIntentParams extends ApiRequestParams {
-  /** Specifies which fields in the response should be expanded. */
+  /**
+   * Specifies which fields in the response should be expanded.
+   */
   @SerializedName("expand")
   List<String> expand;
 
   /**
-   * Map of extra parameters for custom features not available in this client library. The content
-   * in this map is not serialized under this field's {@code @SerializedName} value. Instead, each
-   * key/value pair is serialized as if the key is a root-level field (serialized) name in this
-   * param object. Effectively, this map is flattened to its parent instance.
+   * Map of extra parameters for custom features not available in this client library. The content in this map is not serialized under this field's {@code @SerializedName} value. Instead, each key/value pair is serialized as if the key is a root-level field (serialized) name in this param object. Effectively, this map is flattened to its parent instance.
    */
   @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
   Map<String, Object> extraParams;
 
-  /** PaymentIntent ID. */
+  /**
+   * PaymentIntent ID.
+   */
   @SerializedName("payment_intent")
   String paymentIntent;
 
-  /** Configuration overrides. */
+  /**
+   * Configuration overrides.
+   */
   @SerializedName("process_config")
   ProcessConfig processConfig;
 
@@ -42,11 +45,9 @@ public class ReaderProcessPaymentIntentParams extends ApiRequestParams {
     this.paymentIntent = paymentIntent;
     this.processConfig = processConfig;
   }
-
   public static Builder builder() {
     return new Builder();
   }
-
   public static class Builder {
     private List<String> expand;
 
@@ -56,16 +57,20 @@ public class ReaderProcessPaymentIntentParams extends ApiRequestParams {
 
     private ProcessConfig processConfig;
 
-    /** Finalize and obtain parameter instance from this builder. */
+    /**
+     * Finalize and obtain parameter instance from this builder.
+     */
     public ReaderProcessPaymentIntentParams build() {
       return new ReaderProcessPaymentIntentParams(
-          this.expand, this.extraParams, this.paymentIntent, this.processConfig);
+        this.expand,
+        this.extraParams,
+        this.paymentIntent,
+        this.processConfig
+      );
     }
 
     /**
-     * Add an element to `expand` list. A list is initialized for the first `add/addAll` call, and
-     * subsequent calls adds additional elements to the original list. See {@link
-     * ReaderProcessPaymentIntentParams#expand} for the field documentation.
+     * Add an element to `expand` list. A list is initialized for the first `add/addAll` call, and subsequent calls adds additional elements to the original list. See {@link ReaderProcessPaymentIntentParams#expand} for the field documentation.
      */
     public Builder addExpand(String element) {
       if (this.expand == null) {
@@ -76,9 +81,7 @@ public class ReaderProcessPaymentIntentParams extends ApiRequestParams {
     }
 
     /**
-     * Add all elements to `expand` list. A list is initialized for the first `add/addAll` call, and
-     * subsequent calls adds additional elements to the original list. See {@link
-     * ReaderProcessPaymentIntentParams#expand} for the field documentation.
+     * Add all elements to `expand` list. A list is initialized for the first `add/addAll` call, and subsequent calls adds additional elements to the original list. See {@link ReaderProcessPaymentIntentParams#expand} for the field documentation.
      */
     public Builder addAllExpand(List<String> elements) {
       if (this.expand == null) {
@@ -89,9 +92,7 @@ public class ReaderProcessPaymentIntentParams extends ApiRequestParams {
     }
 
     /**
-     * Add a key/value pair to `extraParams` map. A map is initialized for the first `put/putAll`
-     * call, and subsequent calls add additional key/value pairs to the original map. See {@link
-     * ReaderProcessPaymentIntentParams#extraParams} for the field documentation.
+     * Add a key/value pair to `extraParams` map. A map is initialized for the first `put/putAll` call, and subsequent calls add additional key/value pairs to the original map. See {@link ReaderProcessPaymentIntentParams#extraParams} for the field documentation.
      */
     public Builder putExtraParam(String key, Object value) {
       if (this.extraParams == null) {
@@ -102,9 +103,7 @@ public class ReaderProcessPaymentIntentParams extends ApiRequestParams {
     }
 
     /**
-     * Add all map key/value pairs to `extraParams` map. A map is initialized for the first
-     * `put/putAll` call, and subsequent calls add additional key/value pairs to the original map.
-     * See {@link ReaderProcessPaymentIntentParams#extraParams} for the field documentation.
+     * Add all map key/value pairs to `extraParams` map. A map is initialized for the first `put/putAll` call, and subsequent calls add additional key/value pairs to the original map. See {@link ReaderProcessPaymentIntentParams#extraParams} for the field documentation.
      */
     public Builder putAllExtraParam(Map<String, Object> map) {
       if (this.extraParams == null) {
@@ -114,31 +113,33 @@ public class ReaderProcessPaymentIntentParams extends ApiRequestParams {
       return this;
     }
 
-    /** PaymentIntent ID. */
+    /**
+     * PaymentIntent ID.
+     */
     public Builder setPaymentIntent(String paymentIntent) {
       this.paymentIntent = paymentIntent;
       return this;
     }
 
-    /** Configuration overrides. */
+    /**
+     * Configuration overrides.
+     */
     public Builder setProcessConfig(ProcessConfig processConfig) {
       this.processConfig = processConfig;
       return this;
     }
   }
-
   @Getter
   public static class ProcessConfig {
     /**
-     * Map of extra parameters for custom features not available in this client library. The content
-     * in this map is not serialized under this field's {@code @SerializedName} value. Instead, each
-     * key/value pair is serialized as if the key is a root-level field (serialized) name in this
-     * param object. Effectively, this map is flattened to its parent instance.
+     * Map of extra parameters for custom features not available in this client library. The content in this map is not serialized under this field's {@code @SerializedName} value. Instead, each key/value pair is serialized as if the key is a root-level field (serialized) name in this param object. Effectively, this map is flattened to its parent instance.
      */
     @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
     Map<String, Object> extraParams;
 
-    /** Override showing a tipping selection screen on this transaction. */
+    /**
+     * Override showing a tipping selection screen on this transaction.
+     */
     @SerializedName("skip_tipping")
     Boolean skipTipping;
 
@@ -146,25 +147,23 @@ public class ReaderProcessPaymentIntentParams extends ApiRequestParams {
       this.extraParams = extraParams;
       this.skipTipping = skipTipping;
     }
-
     public static Builder builder() {
       return new Builder();
     }
-
     public static class Builder {
       private Map<String, Object> extraParams;
 
       private Boolean skipTipping;
 
-      /** Finalize and obtain parameter instance from this builder. */
+      /**
+       * Finalize and obtain parameter instance from this builder.
+       */
       public ProcessConfig build() {
         return new ProcessConfig(this.extraParams, this.skipTipping);
       }
 
       /**
-       * Add a key/value pair to `extraParams` map. A map is initialized for the first `put/putAll`
-       * call, and subsequent calls add additional key/value pairs to the original map. See {@link
-       * ReaderProcessPaymentIntentParams.ProcessConfig#extraParams} for the field documentation.
+       * Add a key/value pair to `extraParams` map. A map is initialized for the first `put/putAll` call, and subsequent calls add additional key/value pairs to the original map. See {@link ReaderProcessPaymentIntentParams.ProcessConfig#extraParams} for the field documentation.
        */
       public Builder putExtraParam(String key, Object value) {
         if (this.extraParams == null) {
@@ -175,10 +174,7 @@ public class ReaderProcessPaymentIntentParams extends ApiRequestParams {
       }
 
       /**
-       * Add all map key/value pairs to `extraParams` map. A map is initialized for the first
-       * `put/putAll` call, and subsequent calls add additional key/value pairs to the original map.
-       * See {@link ReaderProcessPaymentIntentParams.ProcessConfig#extraParams} for the field
-       * documentation.
+       * Add all map key/value pairs to `extraParams` map. A map is initialized for the first `put/putAll` call, and subsequent calls add additional key/value pairs to the original map. See {@link ReaderProcessPaymentIntentParams.ProcessConfig#extraParams} for the field documentation.
        */
       public Builder putAllExtraParam(Map<String, Object> map) {
         if (this.extraParams == null) {
@@ -188,7 +184,9 @@ public class ReaderProcessPaymentIntentParams extends ApiRequestParams {
         return this;
       }
 
-      /** Override showing a tipping selection screen on this transaction. */
+      /**
+       * Override showing a tipping selection screen on this transaction.
+       */
       public Builder setSkipTipping(Boolean skipTipping) {
         this.skipTipping = skipTipping;
         return this;

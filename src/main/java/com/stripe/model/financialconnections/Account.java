@@ -4,6 +4,7 @@ package com.stripe.model.financialconnections;
 import com.google.gson.annotations.SerializedName;
 import com.stripe.Stripe;
 import com.stripe.exception.StripeException;
+import com.stripe.model.Account;
 import com.stripe.model.Customer;
 import com.stripe.model.ExpandableField;
 import com.stripe.model.HasId;
@@ -25,15 +26,21 @@ import lombok.Setter;
 @Setter
 @EqualsAndHashCode(callSuper = false)
 public class Account extends ApiResource implements HasId {
-  /** The account holder that this account belongs to. */
+  /**
+   * The account holder that this account belongs to.
+   */
   @SerializedName("account_holder")
   AccountHolder accountHolder;
 
-  /** The most recent information about the account's balance. */
+  /**
+   * The most recent information about the account's balance.
+   */
   @SerializedName("balance")
   Balance balance;
 
-  /** The state of the most recent attempt to refresh the account balance. */
+  /**
+   * The state of the most recent attempt to refresh the account balance.
+   */
   @SerializedName("balance_refresh")
   BalanceRefresh balanceRefresh;
 
@@ -45,33 +52,39 @@ public class Account extends ApiResource implements HasId {
   @SerializedName("category")
   String category;
 
-  /** Time at which the object was created. Measured in seconds since the Unix epoch. */
+  /**
+   * Time at which the object was created. Measured in seconds since the Unix epoch.
+   */
   @SerializedName("created")
   Long created;
 
   /**
-   * A human-readable name that has been assigned to this account, either by the account holder or
-   * by the institution.
+   * A human-readable name that has been assigned to this account, either by the account holder or by the institution.
    */
   @SerializedName("display_name")
   String displayName;
 
-  /** Unique identifier for the object. */
+  /**
+   * Unique identifier for the object.
+   */
   @Getter(onMethod_ = {@Override})
   @SerializedName("id")
   String id;
 
-  /** The name of the institution that holds this account. */
+  /**
+   * The name of the institution that holds this account.
+   */
   @SerializedName("institution_name")
   String institutionName;
 
-  /** The last 4 digits of the account number. If present, this will be 4 numeric characters. */
+  /**
+   * The last 4 digits of the account number. If present, this will be 4 numeric characters.
+   */
   @SerializedName("last4")
   String last4;
 
   /**
-   * Has the value {@code true} if the object exists in live mode or the value {@code false} if the
-   * object exists in test mode.
+   * Has the value {@code true} if the object exists in live mode or the value {@code false} if the object exists in test mode.
    */
   @SerializedName("livemode")
   Boolean livemode;
@@ -84,17 +97,23 @@ public class Account extends ApiResource implements HasId {
   @SerializedName("object")
   String object;
 
-  /** The most recent information about the account's owners. */
+  /**
+   * The most recent information about the account's owners.
+   */
   @SerializedName("ownership")
   @Getter(lombok.AccessLevel.NONE)
   @Setter(lombok.AccessLevel.NONE)
   ExpandableField<AccountOwnership> ownership;
 
-  /** The state of the most recent attempt to refresh the account owners. */
+  /**
+   * The state of the most recent attempt to refresh the account owners.
+   */
   @SerializedName("ownership_refresh")
   OwnershipRefresh ownershipRefresh;
 
-  /** The list of permissions granted by this account. */
+  /**
+   * The list of permissions granted by this account.
+   */
   @SerializedName("permissions")
   List<String> permissions;
 
@@ -121,14 +140,14 @@ public class Account extends ApiResource implements HasId {
   String subcategory;
 
   /**
-   * The <a
-   * href="https://stripe.com/docs/api/payment_methods/object#payment_method_object-type">PaymentMethod
-   * type</a>(s) that can be created from this account.
+   * The <a href="https://stripe.com/docs/api/payment_methods/object#payment_method_object-type">PaymentMethod type</a>(s) that can be created from this account.
    */
   @SerializedName("supported_payment_method_types")
   List<String> supportedPaymentMethodTypes;
 
-  /** Get ID of expandable {@code ownership} object. */
+  /**
+   * Get ID of expandable {@code ownership} object.
+   */
   public String getOwnership() {
     return (this.ownership != null) ? this.ownership.getId() : null;
   }
@@ -137,322 +156,404 @@ public class Account extends ApiResource implements HasId {
     this.ownership = ApiResource.setExpandableFieldId(id, this.ownership);
   }
 
-  /** Get expanded {@code ownership}. */
+  /**
+   * Get expanded {@code ownership}.
+   */
   public AccountOwnership getOwnershipObject() {
     return (this.ownership != null) ? this.ownership.getExpanded() : null;
   }
 
   public void setOwnershipObject(AccountOwnership expandableObject) {
     this.ownership =
-        new ExpandableField<AccountOwnership>(expandableObject.getId(), expandableObject);
+      new ExpandableField<AccountOwnership>(expandableObject.getId(), expandableObject);
   }
 
-  /** Returns a list of Financial Connections <code>Account</code> objects. */
+  /**
+   * <p>Returns a list of Financial Connections <code>Account</code> objects.</p>
+   */
   public static AccountCollection list(Map<String, Object> params) throws StripeException {
     return list(params, (RequestOptions) null);
   }
 
-  /** Returns a list of Financial Connections <code>Account</code> objects. */
-  public static AccountCollection list(Map<String, Object> params, RequestOptions options)
-      throws StripeException {
+  /**
+   * <p>Returns a list of Financial Connections <code>Account</code> objects.</p>
+   */
+  public static AccountCollection list(
+      Map<String, Object> params,
+      RequestOptions options) throws StripeException {
     String url = String.format("%s%s", Stripe.getApiBase(), "/v1/financial_connections/accounts");
     return ApiResource.requestCollection(url, params, AccountCollection.class, options);
   }
 
-  /** Returns a list of Financial Connections <code>Account</code> objects. */
+  /**
+   * <p>Returns a list of Financial Connections <code>Account</code> objects.</p>
+   */
   public static AccountCollection list(AccountListParams params) throws StripeException {
     return list(params, (RequestOptions) null);
   }
 
-  /** Returns a list of Financial Connections <code>Account</code> objects. */
-  public static AccountCollection list(AccountListParams params, RequestOptions options)
-      throws StripeException {
+  /**
+   * <p>Returns a list of Financial Connections <code>Account</code> objects.</p>
+   */
+  public static AccountCollection list(
+      AccountListParams params,
+      RequestOptions options) throws StripeException {
     String url = String.format("%s%s", Stripe.getApiBase(), "/v1/financial_connections/accounts");
     return ApiResource.requestCollection(url, params, AccountCollection.class, options);
   }
 
-  /** Retrieves the details of an Financial Connections <code>Account</code>. */
-  public static com.stripe.model.financialconnections.Account retrieve(String account)
-      throws StripeException {
+  /**
+   * <p>Retrieves the details of an Financial Connections <code>Account</code>.</p>
+   */
+  public static com.stripe.model.financialconnections.Account retrieve(
+      String account) throws StripeException {
     return retrieve(account, (Map<String, Object>) null, (RequestOptions) null);
   }
 
-  /** Retrieves the details of an Financial Connections <code>Account</code>. */
+  /**
+   * <p>Retrieves the details of an Financial Connections <code>Account</code>.</p>
+   */
   public static com.stripe.model.financialconnections.Account retrieve(
-      String account, RequestOptions options) throws StripeException {
+      String account,
+      RequestOptions options) throws StripeException {
     return retrieve(account, (Map<String, Object>) null, options);
   }
 
-  /** Retrieves the details of an Financial Connections <code>Account</code>. */
+  /**
+   * <p>Retrieves the details of an Financial Connections <code>Account</code>.</p>
+   */
   public static com.stripe.model.financialconnections.Account retrieve(
-      String account, Map<String, Object> params, RequestOptions options) throws StripeException {
+      String account,
+      Map<String, Object> params,
+      RequestOptions options) throws StripeException {
     String url =
-        String.format(
-            "%s%s",
-            Stripe.getApiBase(),
-            String.format(
-                "/v1/financial_connections/accounts/%s", ApiResource.urlEncodeId(account)));
+      String.format(
+        "%s%s",
+        Stripe.getApiBase(),
+        String.format("/v1/financial_connections/accounts/%s", ApiResource.urlEncodeId(account))
+      );
     return ApiResource.request(
-        ApiResource.RequestMethod.GET,
-        url,
-        params,
-        com.stripe.model.financialconnections.Account.class,
-        options);
+      ApiResource.RequestMethod.GET,
+      url,
+      params,
+      com.stripe.model.financialconnections.Account.class,
+      options
+    );
   }
 
-  /** Retrieves the details of an Financial Connections <code>Account</code>. */
+  /**
+   * <p>Retrieves the details of an Financial Connections <code>Account</code>.</p>
+   */
   public static com.stripe.model.financialconnections.Account retrieve(
-      String account, AccountRetrieveParams params, RequestOptions options) throws StripeException {
+      String account,
+      AccountRetrieveParams params,
+      RequestOptions options) throws StripeException {
     String url =
-        String.format(
-            "%s%s",
-            Stripe.getApiBase(),
-            String.format(
-                "/v1/financial_connections/accounts/%s", ApiResource.urlEncodeId(account)));
+      String.format(
+        "%s%s",
+        Stripe.getApiBase(),
+        String.format("/v1/financial_connections/accounts/%s", ApiResource.urlEncodeId(account))
+      );
     return ApiResource.request(
-        ApiResource.RequestMethod.GET,
-        url,
-        params,
-        com.stripe.model.financialconnections.Account.class,
-        options);
+      ApiResource.RequestMethod.GET,
+      url,
+      params,
+      com.stripe.model.financialconnections.Account.class,
+      options
+    );
   }
 
-  /** Lists all owners for a given <code>Account</code>. */
+  /**
+   * <p>Lists all owners for a given <code>Account</code>.</p>
+   */
   public AccountOwnerCollection listOwners(Map<String, Object> params) throws StripeException {
     return listOwners(params, (RequestOptions) null);
   }
 
-  /** Lists all owners for a given <code>Account</code>. */
-  public AccountOwnerCollection listOwners(Map<String, Object> params, RequestOptions options)
-      throws StripeException {
+  /**
+   * <p>Lists all owners for a given <code>Account</code>.</p>
+   */
+  public AccountOwnerCollection listOwners(
+      Map<String, Object> params,
+      RequestOptions options) throws StripeException {
     String url =
+      String.format(
+        "%s%s",
+        Stripe.getApiBase(),
         String.format(
-            "%s%s",
-            Stripe.getApiBase(),
-            String.format(
-                "/v1/financial_connections/accounts/%s/owners",
-                ApiResource.urlEncodeId(this.getId())));
+          "/v1/financial_connections/accounts/%s/owners",
+          ApiResource.urlEncodeId(this.getId())
+        )
+      );
     return ApiResource.requestCollection(url, params, AccountOwnerCollection.class, options);
   }
 
-  /** Lists all owners for a given <code>Account</code>. */
+  /**
+   * <p>Lists all owners for a given <code>Account</code>.</p>
+   */
   public AccountOwnerCollection listOwners(AccountListOwnersParams params) throws StripeException {
     return listOwners(params, (RequestOptions) null);
   }
 
-  /** Lists all owners for a given <code>Account</code>. */
-  public AccountOwnerCollection listOwners(AccountListOwnersParams params, RequestOptions options)
-      throws StripeException {
+  /**
+   * <p>Lists all owners for a given <code>Account</code>.</p>
+   */
+  public AccountOwnerCollection listOwners(
+      AccountListOwnersParams params,
+      RequestOptions options) throws StripeException {
     String url =
+      String.format(
+        "%s%s",
+        Stripe.getApiBase(),
         String.format(
-            "%s%s",
-            Stripe.getApiBase(),
-            String.format(
-                "/v1/financial_connections/accounts/%s/owners",
-                ApiResource.urlEncodeId(this.getId())));
+          "/v1/financial_connections/accounts/%s/owners",
+          ApiResource.urlEncodeId(this.getId())
+        )
+      );
     return ApiResource.requestCollection(url, params, AccountOwnerCollection.class, options);
   }
 
-  /** Refreshes the data associated with a Financial Connections <code>Account</code>. */
-  public com.stripe.model.financialconnections.Account refresh(Map<String, Object> params)
-      throws StripeException {
-    return refresh(params, (RequestOptions) null);
-  }
-
-  /** Refreshes the data associated with a Financial Connections <code>Account</code>. */
+  /**
+   * <p>Refreshes the data associated with a Financial Connections <code>Account</code>.</p>
+   */
   public com.stripe.model.financialconnections.Account refresh(
-      Map<String, Object> params, RequestOptions options) throws StripeException {
-    String url =
-        String.format(
-            "%s%s",
-            Stripe.getApiBase(),
-            String.format(
-                "/v1/financial_connections/accounts/%s/refresh",
-                ApiResource.urlEncodeId(this.getId())));
-    return ApiResource.request(
-        ApiResource.RequestMethod.POST,
-        url,
-        params,
-        com.stripe.model.financialconnections.Account.class,
-        options);
-  }
-
-  /** Refreshes the data associated with a Financial Connections <code>Account</code>. */
-  public com.stripe.model.financialconnections.Account refresh(AccountRefreshParams params)
-      throws StripeException {
+      Map<String, Object> params) throws StripeException {
     return refresh(params, (RequestOptions) null);
-  }
-
-  /** Refreshes the data associated with a Financial Connections <code>Account</code>. */
-  public com.stripe.model.financialconnections.Account refresh(
-      AccountRefreshParams params, RequestOptions options) throws StripeException {
-    String url =
-        String.format(
-            "%s%s",
-            Stripe.getApiBase(),
-            String.format(
-                "/v1/financial_connections/accounts/%s/refresh",
-                ApiResource.urlEncodeId(this.getId())));
-    return ApiResource.request(
-        ApiResource.RequestMethod.POST,
-        url,
-        params,
-        com.stripe.model.financialconnections.Account.class,
-        options);
-  }
-
-  /** Refreshes the data associated with a Financial Connections <code>Account</code>. */
-  public static com.stripe.model.financialconnections.Account refresh(
-      String account, Map<String, Object> params, RequestOptions options) throws StripeException {
-    String url =
-        String.format(
-            "%s%s",
-            Stripe.getApiBase(),
-            String.format(
-                "/v1/financial_connections/accounts/%s/refresh", ApiResource.urlEncodeId(account)));
-    return ApiResource.request(
-        ApiResource.RequestMethod.POST,
-        url,
-        params,
-        com.stripe.model.financialconnections.Account.class,
-        options);
-  }
-
-  /** Refreshes the data associated with a Financial Connections <code>Account</code>. */
-  public static com.stripe.model.financialconnections.Account refresh(
-      String account, AccountRefreshParams params, RequestOptions options) throws StripeException {
-    String url =
-        String.format(
-            "%s%s",
-            Stripe.getApiBase(),
-            String.format(
-                "/v1/financial_connections/accounts/%s/refresh", ApiResource.urlEncodeId(account)));
-    return ApiResource.request(
-        ApiResource.RequestMethod.POST,
-        url,
-        params,
-        com.stripe.model.financialconnections.Account.class,
-        options);
   }
 
   /**
-   * Disables your access to a Financial Connections <code>Account</code>. You will no longer be
-   * able to access data associated with the account (e.g. balances, transactions).
+   * <p>Refreshes the data associated with a Financial Connections <code>Account</code>.</p>
+   */
+  public com.stripe.model.financialconnections.Account refresh(
+      Map<String, Object> params,
+      RequestOptions options) throws StripeException {
+    String url =
+      String.format(
+        "%s%s",
+        Stripe.getApiBase(),
+        String.format(
+          "/v1/financial_connections/accounts/%s/refresh",
+          ApiResource.urlEncodeId(this.getId())
+        )
+      );
+    return ApiResource.request(
+      ApiResource.RequestMethod.POST,
+      url,
+      params,
+      com.stripe.model.financialconnections.Account.class,
+      options
+    );
+  }
+
+  /**
+   * <p>Refreshes the data associated with a Financial Connections <code>Account</code>.</p>
+   */
+  public com.stripe.model.financialconnections.Account refresh(
+      AccountRefreshParams params) throws StripeException {
+    return refresh(params, (RequestOptions) null);
+  }
+
+  /**
+   * <p>Refreshes the data associated with a Financial Connections <code>Account</code>.</p>
+   */
+  public com.stripe.model.financialconnections.Account refresh(
+      AccountRefreshParams params,
+      RequestOptions options) throws StripeException {
+    String url =
+      String.format(
+        "%s%s",
+        Stripe.getApiBase(),
+        String.format(
+          "/v1/financial_connections/accounts/%s/refresh",
+          ApiResource.urlEncodeId(this.getId())
+        )
+      );
+    return ApiResource.request(
+      ApiResource.RequestMethod.POST,
+      url,
+      params,
+      com.stripe.model.financialconnections.Account.class,
+      options
+    );
+  }
+
+  /**
+   * <p>Refreshes the data associated with a Financial Connections <code>Account</code>.</p>
+   */
+  public static com.stripe.model.financialconnections.Account refresh(
+      String account,
+      Map<String, Object> params,
+      RequestOptions options) throws StripeException {
+    String url =
+      String.format(
+        "%s%s",
+        Stripe.getApiBase(),
+        String.format(
+          "/v1/financial_connections/accounts/%s/refresh",
+          ApiResource.urlEncodeId(account)
+        )
+      );
+    return ApiResource.request(
+      ApiResource.RequestMethod.POST,
+      url,
+      params,
+      com.stripe.model.financialconnections.Account.class,
+      options
+    );
+  }
+
+  /**
+   * <p>Refreshes the data associated with a Financial Connections <code>Account</code>.</p>
+   */
+  public static com.stripe.model.financialconnections.Account refresh(
+      String account,
+      AccountRefreshParams params,
+      RequestOptions options) throws StripeException {
+    String url =
+      String.format(
+        "%s%s",
+        Stripe.getApiBase(),
+        String.format(
+          "/v1/financial_connections/accounts/%s/refresh",
+          ApiResource.urlEncodeId(account)
+        )
+      );
+    return ApiResource.request(
+      ApiResource.RequestMethod.POST,
+      url,
+      params,
+      com.stripe.model.financialconnections.Account.class,
+      options
+    );
+  }
+
+  /**
+   * <p>Disables your access to a Financial Connections <code>Account</code>. You will no longer be able to access data associated with the account (e.g. balances, transactions).</p>
    */
   public com.stripe.model.financialconnections.Account disconnect() throws StripeException {
     return disconnect((Map<String, Object>) null, (RequestOptions) null);
   }
 
   /**
-   * Disables your access to a Financial Connections <code>Account</code>. You will no longer be
-   * able to access data associated with the account (e.g. balances, transactions).
+   * <p>Disables your access to a Financial Connections <code>Account</code>. You will no longer be able to access data associated with the account (e.g. balances, transactions).</p>
    */
-  public com.stripe.model.financialconnections.Account disconnect(RequestOptions options)
-      throws StripeException {
+  public com.stripe.model.financialconnections.Account disconnect(
+      RequestOptions options) throws StripeException {
     return disconnect((Map<String, Object>) null, options);
   }
 
   /**
-   * Disables your access to a Financial Connections <code>Account</code>. You will no longer be
-   * able to access data associated with the account (e.g. balances, transactions).
+   * <p>Disables your access to a Financial Connections <code>Account</code>. You will no longer be able to access data associated with the account (e.g. balances, transactions).</p>
    */
-  public com.stripe.model.financialconnections.Account disconnect(Map<String, Object> params)
-      throws StripeException {
+  public com.stripe.model.financialconnections.Account disconnect(
+      Map<String, Object> params) throws StripeException {
     return disconnect(params, (RequestOptions) null);
   }
 
   /**
-   * Disables your access to a Financial Connections <code>Account</code>. You will no longer be
-   * able to access data associated with the account (e.g. balances, transactions).
+   * <p>Disables your access to a Financial Connections <code>Account</code>. You will no longer be able to access data associated with the account (e.g. balances, transactions).</p>
    */
   public com.stripe.model.financialconnections.Account disconnect(
-      Map<String, Object> params, RequestOptions options) throws StripeException {
+      Map<String, Object> params,
+      RequestOptions options) throws StripeException {
     String url =
+      String.format(
+        "%s%s",
+        Stripe.getApiBase(),
         String.format(
-            "%s%s",
-            Stripe.getApiBase(),
-            String.format(
-                "/v1/financial_connections/accounts/%s/disconnect",
-                ApiResource.urlEncodeId(this.getId())));
+          "/v1/financial_connections/accounts/%s/disconnect",
+          ApiResource.urlEncodeId(this.getId())
+        )
+      );
     return ApiResource.request(
-        ApiResource.RequestMethod.POST,
-        url,
-        params,
-        com.stripe.model.financialconnections.Account.class,
-        options);
+      ApiResource.RequestMethod.POST,
+      url,
+      params,
+      com.stripe.model.financialconnections.Account.class,
+      options
+    );
   }
 
   /**
-   * Disables your access to a Financial Connections <code>Account</code>. You will no longer be
-   * able to access data associated with the account (e.g. balances, transactions).
+   * <p>Disables your access to a Financial Connections <code>Account</code>. You will no longer be able to access data associated with the account (e.g. balances, transactions).</p>
    */
-  public com.stripe.model.financialconnections.Account disconnect(AccountDisconnectParams params)
-      throws StripeException {
+  public com.stripe.model.financialconnections.Account disconnect(
+      AccountDisconnectParams params) throws StripeException {
     return disconnect(params, (RequestOptions) null);
   }
 
   /**
-   * Disables your access to a Financial Connections <code>Account</code>. You will no longer be
-   * able to access data associated with the account (e.g. balances, transactions).
+   * <p>Disables your access to a Financial Connections <code>Account</code>. You will no longer be able to access data associated with the account (e.g. balances, transactions).</p>
    */
   public com.stripe.model.financialconnections.Account disconnect(
-      AccountDisconnectParams params, RequestOptions options) throws StripeException {
+      AccountDisconnectParams params,
+      RequestOptions options) throws StripeException {
     String url =
+      String.format(
+        "%s%s",
+        Stripe.getApiBase(),
         String.format(
-            "%s%s",
-            Stripe.getApiBase(),
-            String.format(
-                "/v1/financial_connections/accounts/%s/disconnect",
-                ApiResource.urlEncodeId(this.getId())));
+          "/v1/financial_connections/accounts/%s/disconnect",
+          ApiResource.urlEncodeId(this.getId())
+        )
+      );
     return ApiResource.request(
-        ApiResource.RequestMethod.POST,
-        url,
-        params,
-        com.stripe.model.financialconnections.Account.class,
-        options);
+      ApiResource.RequestMethod.POST,
+      url,
+      params,
+      com.stripe.model.financialconnections.Account.class,
+      options
+    );
   }
 
   /**
-   * Disables your access to a Financial Connections <code>Account</code>. You will no longer be
-   * able to access data associated with the account (e.g. balances, transactions).
+   * <p>Disables your access to a Financial Connections <code>Account</code>. You will no longer be able to access data associated with the account (e.g. balances, transactions).</p>
    */
   public static com.stripe.model.financialconnections.Account disconnect(
-      String account, Map<String, Object> params, RequestOptions options) throws StripeException {
+      String account,
+      Map<String, Object> params,
+      RequestOptions options) throws StripeException {
     String url =
+      String.format(
+        "%s%s",
+        Stripe.getApiBase(),
         String.format(
-            "%s%s",
-            Stripe.getApiBase(),
-            String.format(
-                "/v1/financial_connections/accounts/%s/disconnect",
-                ApiResource.urlEncodeId(account)));
+          "/v1/financial_connections/accounts/%s/disconnect",
+          ApiResource.urlEncodeId(account)
+        )
+      );
     return ApiResource.request(
-        ApiResource.RequestMethod.POST,
-        url,
-        params,
-        com.stripe.model.financialconnections.Account.class,
-        options);
+      ApiResource.RequestMethod.POST,
+      url,
+      params,
+      com.stripe.model.financialconnections.Account.class,
+      options
+    );
   }
 
   /**
-   * Disables your access to a Financial Connections <code>Account</code>. You will no longer be
-   * able to access data associated with the account (e.g. balances, transactions).
+   * <p>Disables your access to a Financial Connections <code>Account</code>. You will no longer be able to access data associated with the account (e.g. balances, transactions).</p>
    */
   public static com.stripe.model.financialconnections.Account disconnect(
-      String account, AccountDisconnectParams params, RequestOptions options)
-      throws StripeException {
+      String account,
+      AccountDisconnectParams params,
+      RequestOptions options) throws StripeException {
     String url =
+      String.format(
+        "%s%s",
+        Stripe.getApiBase(),
         String.format(
-            "%s%s",
-            Stripe.getApiBase(),
-            String.format(
-                "/v1/financial_connections/accounts/%s/disconnect",
-                ApiResource.urlEncodeId(account)));
+          "/v1/financial_connections/accounts/%s/disconnect",
+          ApiResource.urlEncodeId(account)
+        )
+      );
     return ApiResource.request(
-        ApiResource.RequestMethod.POST,
-        url,
-        params,
-        com.stripe.model.financialconnections.Account.class,
-        options);
+      ApiResource.RequestMethod.POST,
+      url,
+      params,
+      com.stripe.model.financialconnections.Account.class,
+      options
+    );
   }
 
   @Getter
@@ -460,8 +561,7 @@ public class Account extends ApiResource implements HasId {
   @EqualsAndHashCode(callSuper = false)
   public static class AccountHolder extends StripeObject {
     /**
-     * The ID of the Stripe account this account belongs to. Should only be present if {@code
-     * account_holder.type} is {@code account}.
+     * The ID of the Stripe account this account belongs to. Should only be present if {@code account_holder.type} is {@code account}.
      */
     @SerializedName("account")
     @Getter(lombok.AccessLevel.NONE)
@@ -469,8 +569,7 @@ public class Account extends ApiResource implements HasId {
     ExpandableField<com.stripe.model.Account> account;
 
     /**
-     * ID of the Stripe customer this account belongs to. Present if and only if {@code
-     * account_holder.type} is {@code customer}.
+     * ID of the Stripe customer this account belongs to. Present if and only if {@code account_holder.type} is {@code customer}.
      */
     @SerializedName("customer")
     @Getter(lombok.AccessLevel.NONE)
@@ -485,7 +584,9 @@ public class Account extends ApiResource implements HasId {
     @SerializedName("type")
     String type;
 
-    /** Get ID of expandable {@code account} object. */
+    /**
+     * Get ID of expandable {@code account} object.
+     */
     public String getAccount() {
       return (this.account != null) ? this.account.getId() : null;
     }
@@ -494,17 +595,21 @@ public class Account extends ApiResource implements HasId {
       this.account = ApiResource.setExpandableFieldId(id, this.account);
     }
 
-    /** Get expanded {@code account}. */
+    /**
+     * Get expanded {@code account}.
+     */
     public com.stripe.model.Account getAccountObject() {
       return (this.account != null) ? this.account.getExpanded() : null;
     }
 
     public void setAccountObject(com.stripe.model.Account expandableObject) {
       this.account =
-          new ExpandableField<com.stripe.model.Account>(expandableObject.getId(), expandableObject);
+        new ExpandableField<com.stripe.model.Account>(expandableObject.getId(), expandableObject);
     }
 
-    /** Get ID of expandable {@code customer} object. */
+    /**
+     * Get ID of expandable {@code customer} object.
+     */
     public String getCustomer() {
       return (this.customer != null) ? this.customer.getId() : null;
     }
@@ -513,7 +618,9 @@ public class Account extends ApiResource implements HasId {
       this.customer = ApiResource.setExpandableFieldId(id, this.customer);
     }
 
-    /** Get expanded {@code customer}. */
+    /**
+     * Get expanded {@code customer}.
+     */
     public Customer getCustomerObject() {
       return (this.customer != null) ? this.customer.getExpanded() : null;
     }
@@ -528,8 +635,7 @@ public class Account extends ApiResource implements HasId {
   @EqualsAndHashCode(callSuper = false)
   public static class Balance extends StripeObject {
     /**
-     * The time that the external institution calculated this balance. Measured in seconds since the
-     * Unix epoch.
+     * The time that the external institution calculated this balance. Measured in seconds since the Unix epoch.
      */
     @SerializedName("as_of")
     Long asOf;
@@ -543,18 +649,15 @@ public class Account extends ApiResource implements HasId {
     /**
      * The balances owed to (or by) the account holder.
      *
-     * <p>Each key is a three-letter <a href="https://www.iso.org/iso-4217-currency-codes.html">ISO
-     * currency code</a>, in lowercase.
+     * <p>Each key is a three-letter <a href="https://www.iso.org/iso-4217-currency-codes.html">ISO currency code</a>, in lowercase.
      *
-     * <p>Each value is a integer amount. A positive amount indicates money owed to the account
-     * holder. A negative amount indicates money owed by the account holder.
+     * <p>Each value is a integer amount. A positive amount indicates money owed to the account holder. A negative amount indicates money owed by the account holder.
      */
     @SerializedName("current")
     Map<String, Long> current;
 
     /**
-     * The {@code type} of the balance. An additional hash is included on the balance with a name
-     * matching this value.
+     * The {@code type} of the balance. An additional hash is included on the balance with a name matching this value.
      *
      * <p>One of {@code cash}, or {@code credit}.
      */
@@ -566,15 +669,11 @@ public class Account extends ApiResource implements HasId {
     @EqualsAndHashCode(callSuper = false)
     public static class CashBalance extends StripeObject {
       /**
-       * The funds available to the account holder. Typically this is the current balance less any
-       * holds.
+       * The funds available to the account holder. Typically this is the current balance less any holds.
        *
-       * <p>Each key is a three-letter <a
-       * href="https://www.iso.org/iso-4217-currency-codes.html">ISO currency code</a>, in
-       * lowercase.
+       * <p>Each key is a three-letter <a href="https://www.iso.org/iso-4217-currency-codes.html">ISO currency code</a>, in lowercase.
        *
-       * <p>Each value is a integer amount. A positive amount indicates money owed to the account
-       * holder. A negative amount indicates money owed by the account holder.
+       * <p>Each value is a integer amount. A positive amount indicates money owed to the account holder. A negative amount indicates money owed by the account holder.
        */
       @SerializedName("available")
       Map<String, Long> available;
@@ -587,12 +686,9 @@ public class Account extends ApiResource implements HasId {
       /**
        * The credit that has been used by the account holder.
        *
-       * <p>Each key is a three-letter <a
-       * href="https://www.iso.org/iso-4217-currency-codes.html">ISO currency code</a>, in
-       * lowercase.
+       * <p>Each key is a three-letter <a href="https://www.iso.org/iso-4217-currency-codes.html">ISO currency code</a>, in lowercase.
        *
-       * <p>Each value is a integer amount. A positive amount indicates money owed to the account
-       * holder. A negative amount indicates money owed by the account holder.
+       * <p>Each value is a integer amount. A positive amount indicates money owed to the account holder. A negative amount indicates money owed by the account holder.
        */
       @SerializedName("used")
       Map<String, Long> used;
@@ -604,8 +700,7 @@ public class Account extends ApiResource implements HasId {
   @EqualsAndHashCode(callSuper = false)
   public static class BalanceRefresh extends StripeObject {
     /**
-     * The time at which the last refresh attempt was initiated. Measured in seconds since the Unix
-     * epoch.
+     * The time at which the last refresh attempt was initiated. Measured in seconds since the Unix epoch.
      */
     @SerializedName("last_attempted_at")
     Long lastAttemptedAt;
@@ -624,8 +719,7 @@ public class Account extends ApiResource implements HasId {
   @EqualsAndHashCode(callSuper = false)
   public static class OwnershipRefresh extends StripeObject {
     /**
-     * The time at which the last refresh attempt was initiated. Measured in seconds since the Unix
-     * epoch.
+     * The time at which the last refresh attempt was initiated. Measured in seconds since the Unix epoch.
      */
     @SerializedName("last_attempted_at")
     Long lastAttemptedAt;

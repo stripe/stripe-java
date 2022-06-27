@@ -2,5 +2,6 @@
 package com.stripe.model.financialconnections;
 
 import com.stripe.model.StripeCollection;
+import com.stripe.net.ApiResource;
 
 public class AccountCollection extends StripeCollection<Account> {}

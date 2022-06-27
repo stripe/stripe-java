@@ -26,68 +26,78 @@ import lombok.Setter;
 @Setter
 @EqualsAndHashCode(callSuper = false)
 public class OutboundTransfer extends ApiResource implements HasId {
-  /** Amount (in cents) transferred. */
+  /**
+   * Amount (in cents) transferred.
+   */
   @SerializedName("amount")
   Long amount;
 
-  /** Returns {@code true} if the object can be canceled, and {@code false} otherwise. */
+  /**
+   * Returns {@code true} if the object can be canceled, and {@code false} otherwise.
+   */
   @SerializedName("cancelable")
   Boolean cancelable;
 
-  /** Time at which the object was created. Measured in seconds since the Unix epoch. */
+  /**
+   * Time at which the object was created. Measured in seconds since the Unix epoch.
+   */
   @SerializedName("created")
   Long created;
 
   /**
-   * Three-letter <a href="https://www.iso.org/iso-4217-currency-codes.html">ISO currency code</a>,
-   * in lowercase. Must be a <a href="https://stripe.com/docs/currencies">supported currency</a>.
+   * Three-letter <a href="https://www.iso.org/iso-4217-currency-codes.html">ISO currency code</a>, in lowercase. Must be a <a href="https://stripe.com/docs/currencies">supported currency</a>.
    */
   @SerializedName("currency")
   String currency;
 
-  /** An arbitrary string attached to the object. Often useful for displaying to users. */
+  /**
+   * An arbitrary string attached to the object. Often useful for displaying to users.
+   */
   @SerializedName("description")
   String description;
 
-  /** The PaymentMethod used as the payment instrument for an OutboundTransfer. */
+  /**
+   * The PaymentMethod used as the payment instrument for an OutboundTransfer.
+   */
   @SerializedName("destination_payment_method")
   String destinationPaymentMethod;
 
   @SerializedName("destination_payment_method_details")
   DestinationPaymentMethodDetails destinationPaymentMethodDetails;
 
-  /** The date when funds are expected to arrive in the destination account. */
+  /**
+   * The date when funds are expected to arrive in the destination account.
+   */
   @SerializedName("expected_arrival_date")
   Long expectedArrivalDate;
 
-  /** The FinancialAccount that funds were pulled from. */
+  /**
+   * The FinancialAccount that funds were pulled from.
+   */
   @SerializedName("financial_account")
   String financialAccount;
 
   /**
-   * A <a href="https://stripe.com/docs/treasury/moving-money/regulatory-receipts">hosted
-   * transaction receipt</a> URL that is provided when money movement is considered regulated under
-   * Stripe's money transmission licenses.
+   * A <a href="https://stripe.com/docs/treasury/moving-money/regulatory-receipts">hosted transaction receipt</a> URL that is provided when money movement is considered regulated under Stripe's money transmission licenses.
    */
   @SerializedName("hosted_regulatory_receipt_url")
   String hostedRegulatoryReceiptUrl;
 
-  /** Unique identifier for the object. */
+  /**
+   * Unique identifier for the object.
+   */
   @Getter(onMethod_ = {@Override})
   @SerializedName("id")
   String id;
 
   /**
-   * Has the value {@code true} if the object exists in live mode or the value {@code false} if the
-   * object exists in test mode.
+   * Has the value {@code true} if the object exists in live mode or the value {@code false} if the object exists in test mode.
    */
   @SerializedName("livemode")
   Boolean livemode;
 
   /**
-   * Set of <a href="https://stripe.com/docs/api/metadata">key-value pairs</a> that you can attach
-   * to an object. This can be useful for storing additional information about the object in a
-   * structured format.
+   * Set of <a href="https://stripe.com/docs/api/metadata">key-value pairs</a> that you can attach to an object. This can be useful for storing additional information about the object in a structured format.
    */
   @SerializedName("metadata")
   Map<String, String> metadata;
@@ -100,24 +110,22 @@ public class OutboundTransfer extends ApiResource implements HasId {
   @SerializedName("object")
   String object;
 
-  /** Details about a returned OutboundTransfer. Only set when the status is {@code returned}. */
+  /**
+   * Details about a returned OutboundTransfer. Only set when the status is {@code returned}.
+   */
   @SerializedName("returned_details")
   ReturnedDetails returnedDetails;
 
-  /** Information about the OutboundTransfer to be sent to the recipient account. */
+  /**
+   * Information about the OutboundTransfer to be sent to the recipient account.
+   */
   @SerializedName("statement_descriptor")
   String statementDescriptor;
 
   /**
-   * Current status of the OutboundTransfer: {@code processing}, {@code failed}, {@code canceled},
-   * {@code posted}, {@code returned}. An OutboundTransfer is {@code processing} if it has been
-   * created and is pending. The status changes to {@code posted} once the OutboundTransfer has been
-   * &quot;confirmed&quot; and funds have left the account, or to {@code failed} or {@code
-   * canceled}. If an OutboundTransfer fails to arrive at its destination, its status will change to
-   * {@code returned}.
+   * Current status of the OutboundTransfer: {@code processing}, {@code failed}, {@code canceled}, {@code posted}, {@code returned}. An OutboundTransfer is {@code processing} if it has been created and is pending. The status changes to {@code posted} once the OutboundTransfer has been &quot;confirmed&quot; and funds have left the account, or to {@code failed} or {@code canceled}. If an OutboundTransfer fails to arrive at its destination, its status will change to {@code returned}.
    *
-   * <p>One of {@code canceled}, {@code failed}, {@code posted}, {@code processing}, or {@code
-   * returned}.
+   * <p>One of {@code canceled}, {@code failed}, {@code posted}, {@code processing}, or {@code returned}.
    */
   @SerializedName("status")
   String status;
@@ -125,13 +133,17 @@ public class OutboundTransfer extends ApiResource implements HasId {
   @SerializedName("status_transitions")
   StatusTransitions statusTransitions;
 
-  /** The Transaction associated with this object. */
+  /**
+   * The Transaction associated with this object.
+   */
   @SerializedName("transaction")
   @Getter(lombok.AccessLevel.NONE)
   @Setter(lombok.AccessLevel.NONE)
   ExpandableField<Transaction> transaction;
 
-  /** Get ID of expandable {@code transaction} object. */
+  /**
+   * Get ID of expandable {@code transaction} object.
+   */
   public String getTransaction() {
     return (this.transaction != null) ? this.transaction.getId() : null;
   }
@@ -140,7 +152,9 @@ public class OutboundTransfer extends ApiResource implements HasId {
     this.transaction = ApiResource.setExpandableFieldId(id, this.transaction);
   }
 
-  /** Get expanded {@code transaction}. */
+  /**
+   * Get expanded {@code transaction}.
+   */
   public Transaction getTransactionObject() {
     return (this.transaction != null) ? this.transaction.getExpanded() : null;
   }
@@ -149,155 +163,228 @@ public class OutboundTransfer extends ApiResource implements HasId {
     this.transaction = new ExpandableField<Transaction>(expandableObject.getId(), expandableObject);
   }
 
-  /** Creates an OutboundTransfer. */
+  /**
+   * <p>Creates an OutboundTransfer.</p>
+   */
   public static OutboundTransfer create(Map<String, Object> params) throws StripeException {
     return create(params, (RequestOptions) null);
   }
 
-  /** Creates an OutboundTransfer. */
-  public static OutboundTransfer create(Map<String, Object> params, RequestOptions options)
-      throws StripeException {
+  /**
+   * <p>Creates an OutboundTransfer.</p>
+   */
+  public static OutboundTransfer create(
+      Map<String, Object> params,
+      RequestOptions options) throws StripeException {
     String url = String.format("%s%s", Stripe.getApiBase(), "/v1/treasury/outbound_transfers");
     return ApiResource.request(
-        ApiResource.RequestMethod.POST, url, params, OutboundTransfer.class, options);
-  }
-
-  /** Creates an OutboundTransfer. */
-  public static OutboundTransfer create(OutboundTransferCreateParams params)
-      throws StripeException {
-    return create(params, (RequestOptions) null);
-  }
-
-  /** Creates an OutboundTransfer. */
-  public static OutboundTransfer create(OutboundTransferCreateParams params, RequestOptions options)
-      throws StripeException {
-    String url = String.format("%s%s", Stripe.getApiBase(), "/v1/treasury/outbound_transfers");
-    return ApiResource.request(
-        ApiResource.RequestMethod.POST, url, params, OutboundTransfer.class, options);
+      ApiResource.RequestMethod.POST,
+      url,
+      params,
+      OutboundTransfer.class,
+      options
+    );
   }
 
   /**
-   * Retrieves the details of an existing OutboundTransfer by passing the unique OutboundTransfer ID
-   * from either the OutboundTransfer creation request or OutboundTransfer list.
+   * <p>Creates an OutboundTransfer.</p>
+   */
+  public static OutboundTransfer create(
+      OutboundTransferCreateParams params) throws StripeException {
+    return create(params, (RequestOptions) null);
+  }
+
+  /**
+   * <p>Creates an OutboundTransfer.</p>
+   */
+  public static OutboundTransfer create(
+      OutboundTransferCreateParams params,
+      RequestOptions options) throws StripeException {
+    String url = String.format("%s%s", Stripe.getApiBase(), "/v1/treasury/outbound_transfers");
+    return ApiResource.request(
+      ApiResource.RequestMethod.POST,
+      url,
+      params,
+      OutboundTransfer.class,
+      options
+    );
+  }
+
+  /**
+   * <p>Retrieves the details of an existing OutboundTransfer by passing the unique OutboundTransfer ID from either the OutboundTransfer creation request or OutboundTransfer list.</p>
    */
   public static OutboundTransfer retrieve(String outboundTransfer) throws StripeException {
     return retrieve(outboundTransfer, (Map<String, Object>) null, (RequestOptions) null);
   }
 
   /**
-   * Retrieves the details of an existing OutboundTransfer by passing the unique OutboundTransfer ID
-   * from either the OutboundTransfer creation request or OutboundTransfer list.
+   * <p>Retrieves the details of an existing OutboundTransfer by passing the unique OutboundTransfer ID from either the OutboundTransfer creation request or OutboundTransfer list.</p>
    */
-  public static OutboundTransfer retrieve(String outboundTransfer, RequestOptions options)
-      throws StripeException {
+  public static OutboundTransfer retrieve(
+      String outboundTransfer,
+      RequestOptions options) throws StripeException {
     return retrieve(outboundTransfer, (Map<String, Object>) null, options);
   }
 
   /**
-   * Retrieves the details of an existing OutboundTransfer by passing the unique OutboundTransfer ID
-   * from either the OutboundTransfer creation request or OutboundTransfer list.
+   * <p>Retrieves the details of an existing OutboundTransfer by passing the unique OutboundTransfer ID from either the OutboundTransfer creation request or OutboundTransfer list.</p>
    */
   public static OutboundTransfer retrieve(
-      String outboundTransfer, Map<String, Object> params, RequestOptions options)
-      throws StripeException {
+      String outboundTransfer,
+      Map<String, Object> params,
+      RequestOptions options) throws StripeException {
     String url =
+      String.format(
+        "%s%s",
+        Stripe.getApiBase(),
         String.format(
-            "%s%s",
-            Stripe.getApiBase(),
-            String.format(
-                "/v1/treasury/outbound_transfers/%s", ApiResource.urlEncodeId(outboundTransfer)));
+          "/v1/treasury/outbound_transfers/%s",
+          ApiResource.urlEncodeId(outboundTransfer)
+        )
+      );
     return ApiResource.request(
-        ApiResource.RequestMethod.GET, url, params, OutboundTransfer.class, options);
+      ApiResource.RequestMethod.GET,
+      url,
+      params,
+      OutboundTransfer.class,
+      options
+    );
   }
 
   /**
-   * Retrieves the details of an existing OutboundTransfer by passing the unique OutboundTransfer ID
-   * from either the OutboundTransfer creation request or OutboundTransfer list.
+   * <p>Retrieves the details of an existing OutboundTransfer by passing the unique OutboundTransfer ID from either the OutboundTransfer creation request or OutboundTransfer list.</p>
    */
   public static OutboundTransfer retrieve(
-      String outboundTransfer, OutboundTransferRetrieveParams params, RequestOptions options)
-      throws StripeException {
+      String outboundTransfer,
+      OutboundTransferRetrieveParams params,
+      RequestOptions options) throws StripeException {
     String url =
+      String.format(
+        "%s%s",
+        Stripe.getApiBase(),
         String.format(
-            "%s%s",
-            Stripe.getApiBase(),
-            String.format(
-                "/v1/treasury/outbound_transfers/%s", ApiResource.urlEncodeId(outboundTransfer)));
+          "/v1/treasury/outbound_transfers/%s",
+          ApiResource.urlEncodeId(outboundTransfer)
+        )
+      );
     return ApiResource.request(
-        ApiResource.RequestMethod.GET, url, params, OutboundTransfer.class, options);
+      ApiResource.RequestMethod.GET,
+      url,
+      params,
+      OutboundTransfer.class,
+      options
+    );
   }
 
-  /** Returns a list of OutboundTransfers sent from the specified FinancialAccount. */
+  /**
+   * <p>Returns a list of OutboundTransfers sent from the specified FinancialAccount.</p>
+   */
   public static OutboundTransferCollection list(Map<String, Object> params) throws StripeException {
     return list(params, (RequestOptions) null);
   }
 
-  /** Returns a list of OutboundTransfers sent from the specified FinancialAccount. */
-  public static OutboundTransferCollection list(Map<String, Object> params, RequestOptions options)
-      throws StripeException {
+  /**
+   * <p>Returns a list of OutboundTransfers sent from the specified FinancialAccount.</p>
+   */
+  public static OutboundTransferCollection list(
+      Map<String, Object> params,
+      RequestOptions options) throws StripeException {
     String url = String.format("%s%s", Stripe.getApiBase(), "/v1/treasury/outbound_transfers");
     return ApiResource.requestCollection(url, params, OutboundTransferCollection.class, options);
   }
 
-  /** Returns a list of OutboundTransfers sent from the specified FinancialAccount. */
-  public static OutboundTransferCollection list(OutboundTransferListParams params)
-      throws StripeException {
+  /**
+   * <p>Returns a list of OutboundTransfers sent from the specified FinancialAccount.</p>
+   */
+  public static OutboundTransferCollection list(
+      OutboundTransferListParams params) throws StripeException {
     return list(params, (RequestOptions) null);
   }
 
-  /** Returns a list of OutboundTransfers sent from the specified FinancialAccount. */
+  /**
+   * <p>Returns a list of OutboundTransfers sent from the specified FinancialAccount.</p>
+   */
   public static OutboundTransferCollection list(
-      OutboundTransferListParams params, RequestOptions options) throws StripeException {
+      OutboundTransferListParams params,
+      RequestOptions options) throws StripeException {
     String url = String.format("%s%s", Stripe.getApiBase(), "/v1/treasury/outbound_transfers");
     return ApiResource.requestCollection(url, params, OutboundTransferCollection.class, options);
   }
 
-  /** An OutboundTransfer can be canceled if the funds have not yet been paid out. */
+  /**
+   * <p>An OutboundTransfer can be canceled if the funds have not yet been paid out.</p>
+   */
   public OutboundTransfer cancel() throws StripeException {
     return cancel((Map<String, Object>) null, (RequestOptions) null);
   }
 
-  /** An OutboundTransfer can be canceled if the funds have not yet been paid out. */
+  /**
+   * <p>An OutboundTransfer can be canceled if the funds have not yet been paid out.</p>
+   */
   public OutboundTransfer cancel(RequestOptions options) throws StripeException {
     return cancel((Map<String, Object>) null, options);
   }
 
-  /** An OutboundTransfer can be canceled if the funds have not yet been paid out. */
+  /**
+   * <p>An OutboundTransfer can be canceled if the funds have not yet been paid out.</p>
+   */
   public OutboundTransfer cancel(Map<String, Object> params) throws StripeException {
     return cancel(params, (RequestOptions) null);
   }
 
-  /** An OutboundTransfer can be canceled if the funds have not yet been paid out. */
-  public OutboundTransfer cancel(Map<String, Object> params, RequestOptions options)
-      throws StripeException {
+  /**
+   * <p>An OutboundTransfer can be canceled if the funds have not yet been paid out.</p>
+   */
+  public OutboundTransfer cancel(
+      Map<String, Object> params,
+      RequestOptions options) throws StripeException {
     String url =
+      String.format(
+        "%s%s",
+        Stripe.getApiBase(),
         String.format(
-            "%s%s",
-            Stripe.getApiBase(),
-            String.format(
-                "/v1/treasury/outbound_transfers/%s/cancel",
-                ApiResource.urlEncodeId(this.getId())));
+          "/v1/treasury/outbound_transfers/%s/cancel",
+          ApiResource.urlEncodeId(this.getId())
+        )
+      );
     return ApiResource.request(
-        ApiResource.RequestMethod.POST, url, params, OutboundTransfer.class, options);
+      ApiResource.RequestMethod.POST,
+      url,
+      params,
+      OutboundTransfer.class,
+      options
+    );
   }
 
-  /** An OutboundTransfer can be canceled if the funds have not yet been paid out. */
+  /**
+   * <p>An OutboundTransfer can be canceled if the funds have not yet been paid out.</p>
+   */
   public OutboundTransfer cancel(OutboundTransferCancelParams params) throws StripeException {
     return cancel(params, (RequestOptions) null);
   }
 
-  /** An OutboundTransfer can be canceled if the funds have not yet been paid out. */
-  public OutboundTransfer cancel(OutboundTransferCancelParams params, RequestOptions options)
-      throws StripeException {
+  /**
+   * <p>An OutboundTransfer can be canceled if the funds have not yet been paid out.</p>
+   */
+  public OutboundTransfer cancel(
+      OutboundTransferCancelParams params,
+      RequestOptions options) throws StripeException {
     String url =
+      String.format(
+        "%s%s",
+        Stripe.getApiBase(),
         String.format(
-            "%s%s",
-            Stripe.getApiBase(),
-            String.format(
-                "/v1/treasury/outbound_transfers/%s/cancel",
-                ApiResource.urlEncodeId(this.getId())));
+          "/v1/treasury/outbound_transfers/%s/cancel",
+          ApiResource.urlEncodeId(this.getId())
+        )
+      );
     return ApiResource.request(
-        ApiResource.RequestMethod.POST, url, params, OutboundTransfer.class, options);
+      ApiResource.RequestMethod.POST,
+      url,
+      params,
+      OutboundTransfer.class,
+      options
+    );
   }
 
   @Getter
@@ -325,11 +412,15 @@ public class OutboundTransfer extends ApiResource implements HasId {
       @SerializedName("address")
       Address address;
 
-      /** Email address. */
+      /**
+       * Email address.
+       */
       @SerializedName("email")
       String email;
 
-      /** Full name. */
+      /**
+       * Full name.
+       */
       @SerializedName("name")
       String name;
     }
@@ -354,18 +445,21 @@ public class OutboundTransfer extends ApiResource implements HasId {
       @SerializedName("account_type")
       String accountType;
 
-      /** Name of the bank associated with the bank account. */
+      /**
+       * Name of the bank associated with the bank account.
+       */
       @SerializedName("bank_name")
       String bankName;
 
       /**
-       * Uniquely identifies this particular bank account. You can use this attribute to check
-       * whether two bank accounts are the same.
+       * Uniquely identifies this particular bank account. You can use this attribute to check whether two bank accounts are the same.
        */
       @SerializedName("fingerprint")
       String fingerprint;
 
-      /** Last four digits of the bank account number. */
+      /**
+       * Last four digits of the bank account number.
+       */
       @SerializedName("last4")
       String last4;
 
@@ -377,7 +471,9 @@ public class OutboundTransfer extends ApiResource implements HasId {
       @SerializedName("network")
       String network;
 
-      /** Routing number of the bank account. */
+      /**
+       * Routing number of the bank account.
+       */
       @SerializedName("routing_number")
       String routingNumber;
     }
@@ -390,21 +486,22 @@ public class OutboundTransfer extends ApiResource implements HasId {
     /**
      * Reason for the return.
      *
-     * <p>One of {@code account_closed}, {@code account_frozen}, {@code bank_account_restricted},
-     * {@code bank_ownership_changed}, {@code declined}, {@code incorrect_account_holder_name},
-     * {@code invalid_account_number}, {@code invalid_currency}, {@code no_account}, or {@code
-     * other}.
+     * <p>One of {@code account_closed}, {@code account_frozen}, {@code bank_account_restricted}, {@code bank_ownership_changed}, {@code declined}, {@code incorrect_account_holder_name}, {@code invalid_account_number}, {@code invalid_currency}, {@code no_account}, or {@code other}.
      */
     @SerializedName("code")
     String code;
 
-    /** The Transaction associated with this object. */
+    /**
+     * The Transaction associated with this object.
+     */
     @SerializedName("transaction")
     @Getter(lombok.AccessLevel.NONE)
     @Setter(lombok.AccessLevel.NONE)
     ExpandableField<Transaction> transaction;
 
-    /** Get ID of expandable {@code transaction} object. */
+    /**
+     * Get ID of expandable {@code transaction} object.
+     */
     public String getTransaction() {
       return (this.transaction != null) ? this.transaction.getId() : null;
     }
@@ -413,14 +510,16 @@ public class OutboundTransfer extends ApiResource implements HasId {
       this.transaction = ApiResource.setExpandableFieldId(id, this.transaction);
     }
 
-    /** Get expanded {@code transaction}. */
+    /**
+     * Get expanded {@code transaction}.
+     */
     public Transaction getTransactionObject() {
       return (this.transaction != null) ? this.transaction.getExpanded() : null;
     }
 
     public void setTransactionObject(Transaction expandableObject) {
       this.transaction =
-          new ExpandableField<Transaction>(expandableObject.getId(), expandableObject);
+        new ExpandableField<Transaction>(expandableObject.getId(), expandableObject);
     }
   }
 
@@ -428,19 +527,27 @@ public class OutboundTransfer extends ApiResource implements HasId {
   @Setter
   @EqualsAndHashCode(callSuper = false)
   public static class StatusTransitions extends StripeObject {
-    /** Timestamp describing when an OutboundTransfer changed status to {@code canceled}. */
+    /**
+     * Timestamp describing when an OutboundTransfer changed status to {@code canceled}.
+     */
     @SerializedName("canceled_at")
     Long canceledAt;
 
-    /** Timestamp describing when an OutboundTransfer changed status to {@code failed}. */
+    /**
+     * Timestamp describing when an OutboundTransfer changed status to {@code failed}.
+     */
     @SerializedName("failed_at")
     Long failedAt;
 
-    /** Timestamp describing when an OutboundTransfer changed status to {@code posted}. */
+    /**
+     * Timestamp describing when an OutboundTransfer changed status to {@code posted}.
+     */
     @SerializedName("posted_at")
     Long postedAt;
 
-    /** Timestamp describing when an OutboundTransfer changed status to {@code returned}. */
+    /**
+     * Timestamp describing when an OutboundTransfer changed status to {@code returned}.
+     */
     @SerializedName("returned_at")
     Long returnedAt;
   }
@@ -462,182 +569,205 @@ public class OutboundTransfer extends ApiResource implements HasId {
     }
 
     /**
-     * Transitions a test mode created OutboundTransfer to the <code>failed</code> status. The
-     * OutboundTransfer must already be in the <code>processing</code> state.
+     * <p>Transitions a test mode created OutboundTransfer to the <code>failed</code> status. The OutboundTransfer must already be in the <code>processing</code> state.</p>
      */
     public OutboundTransfer fail() throws StripeException {
       return fail((Map<String, Object>) null, (RequestOptions) null);
     }
 
     /**
-     * Transitions a test mode created OutboundTransfer to the <code>failed</code> status. The
-     * OutboundTransfer must already be in the <code>processing</code> state.
+     * <p>Transitions a test mode created OutboundTransfer to the <code>failed</code> status. The OutboundTransfer must already be in the <code>processing</code> state.</p>
      */
     public OutboundTransfer fail(RequestOptions options) throws StripeException {
       return fail((Map<String, Object>) null, options);
     }
 
     /**
-     * Transitions a test mode created OutboundTransfer to the <code>failed</code> status. The
-     * OutboundTransfer must already be in the <code>processing</code> state.
+     * <p>Transitions a test mode created OutboundTransfer to the <code>failed</code> status. The OutboundTransfer must already be in the <code>processing</code> state.</p>
      */
     public OutboundTransfer fail(Map<String, Object> params) throws StripeException {
       return fail(params, (RequestOptions) null);
     }
 
     /**
-     * Transitions a test mode created OutboundTransfer to the <code>failed</code> status. The
-     * OutboundTransfer must already be in the <code>processing</code> state.
+     * <p>Transitions a test mode created OutboundTransfer to the <code>failed</code> status. The OutboundTransfer must already be in the <code>processing</code> state.</p>
      */
-    public OutboundTransfer fail(Map<String, Object> params, RequestOptions options)
-        throws StripeException {
+    public OutboundTransfer fail(
+        Map<String, Object> params,
+        RequestOptions options) throws StripeException {
       String url =
+        String.format(
+          "%s%s",
+          Stripe.getApiBase(),
           String.format(
-              "%s%s",
-              Stripe.getApiBase(),
-              String.format(
-                  "/v1/test_helpers/treasury/outbound_transfers/%s/fail",
-                  ApiResource.urlEncodeId(this.resource.getId())));
+            "/v1/test_helpers/treasury/outbound_transfers/%s/fail",
+            ApiResource.urlEncodeId(this.resource.getId())
+          )
+        );
       return ApiResource.request(
-          ApiResource.RequestMethod.POST, url, params, OutboundTransfer.class, options);
+        ApiResource.RequestMethod.POST,
+        url,
+        params,
+        OutboundTransfer.class,
+        options
+      );
     }
 
     /**
-     * Transitions a test mode created OutboundTransfer to the <code>failed</code> status. The
-     * OutboundTransfer must already be in the <code>processing</code> state.
+     * <p>Transitions a test mode created OutboundTransfer to the <code>failed</code> status. The OutboundTransfer must already be in the <code>processing</code> state.</p>
      */
     public OutboundTransfer fail(OutboundTransferFailParams params) throws StripeException {
       return fail(params, (RequestOptions) null);
     }
 
     /**
-     * Transitions a test mode created OutboundTransfer to the <code>failed</code> status. The
-     * OutboundTransfer must already be in the <code>processing</code> state.
+     * <p>Transitions a test mode created OutboundTransfer to the <code>failed</code> status. The OutboundTransfer must already be in the <code>processing</code> state.</p>
      */
-    public OutboundTransfer fail(OutboundTransferFailParams params, RequestOptions options)
-        throws StripeException {
+    public OutboundTransfer fail(
+        OutboundTransferFailParams params,
+        RequestOptions options) throws StripeException {
       String url =
+        String.format(
+          "%s%s",
+          Stripe.getApiBase(),
           String.format(
-              "%s%s",
-              Stripe.getApiBase(),
-              String.format(
-                  "/v1/test_helpers/treasury/outbound_transfers/%s/fail",
-                  ApiResource.urlEncodeId(this.resource.getId())));
+            "/v1/test_helpers/treasury/outbound_transfers/%s/fail",
+            ApiResource.urlEncodeId(this.resource.getId())
+          )
+        );
       return ApiResource.request(
-          ApiResource.RequestMethod.POST, url, params, OutboundTransfer.class, options);
+        ApiResource.RequestMethod.POST,
+        url,
+        params,
+        OutboundTransfer.class,
+        options
+      );
     }
 
     /**
-     * Transitions a test mode created OutboundTransfer to the <code>posted</code> status. The
-     * OutboundTransfer must already be in the <code>processing</code> state.
+     * <p>Transitions a test mode created OutboundTransfer to the <code>posted</code> status. The OutboundTransfer must already be in the <code>processing</code> state.</p>
      */
     public OutboundTransfer post() throws StripeException {
       return post((Map<String, Object>) null, (RequestOptions) null);
     }
 
     /**
-     * Transitions a test mode created OutboundTransfer to the <code>posted</code> status. The
-     * OutboundTransfer must already be in the <code>processing</code> state.
+     * <p>Transitions a test mode created OutboundTransfer to the <code>posted</code> status. The OutboundTransfer must already be in the <code>processing</code> state.</p>
      */
     public OutboundTransfer post(RequestOptions options) throws StripeException {
       return post((Map<String, Object>) null, options);
     }
 
     /**
-     * Transitions a test mode created OutboundTransfer to the <code>posted</code> status. The
-     * OutboundTransfer must already be in the <code>processing</code> state.
+     * <p>Transitions a test mode created OutboundTransfer to the <code>posted</code> status. The OutboundTransfer must already be in the <code>processing</code> state.</p>
      */
     public OutboundTransfer post(Map<String, Object> params) throws StripeException {
       return post(params, (RequestOptions) null);
     }
 
     /**
-     * Transitions a test mode created OutboundTransfer to the <code>posted</code> status. The
-     * OutboundTransfer must already be in the <code>processing</code> state.
+     * <p>Transitions a test mode created OutboundTransfer to the <code>posted</code> status. The OutboundTransfer must already be in the <code>processing</code> state.</p>
      */
-    public OutboundTransfer post(Map<String, Object> params, RequestOptions options)
-        throws StripeException {
+    public OutboundTransfer post(
+        Map<String, Object> params,
+        RequestOptions options) throws StripeException {
       String url =
+        String.format(
+          "%s%s",
+          Stripe.getApiBase(),
           String.format(
-              "%s%s",
-              Stripe.getApiBase(),
-              String.format(
-                  "/v1/test_helpers/treasury/outbound_transfers/%s/post",
-                  ApiResource.urlEncodeId(this.resource.getId())));
+            "/v1/test_helpers/treasury/outbound_transfers/%s/post",
+            ApiResource.urlEncodeId(this.resource.getId())
+          )
+        );
       return ApiResource.request(
-          ApiResource.RequestMethod.POST, url, params, OutboundTransfer.class, options);
+        ApiResource.RequestMethod.POST,
+        url,
+        params,
+        OutboundTransfer.class,
+        options
+      );
     }
 
     /**
-     * Transitions a test mode created OutboundTransfer to the <code>posted</code> status. The
-     * OutboundTransfer must already be in the <code>processing</code> state.
+     * <p>Transitions a test mode created OutboundTransfer to the <code>posted</code> status. The OutboundTransfer must already be in the <code>processing</code> state.</p>
      */
     public OutboundTransfer post(OutboundTransferPostParams params) throws StripeException {
       return post(params, (RequestOptions) null);
     }
 
     /**
-     * Transitions a test mode created OutboundTransfer to the <code>posted</code> status. The
-     * OutboundTransfer must already be in the <code>processing</code> state.
+     * <p>Transitions a test mode created OutboundTransfer to the <code>posted</code> status. The OutboundTransfer must already be in the <code>processing</code> state.</p>
      */
-    public OutboundTransfer post(OutboundTransferPostParams params, RequestOptions options)
-        throws StripeException {
+    public OutboundTransfer post(
+        OutboundTransferPostParams params,
+        RequestOptions options) throws StripeException {
       String url =
+        String.format(
+          "%s%s",
+          Stripe.getApiBase(),
           String.format(
-              "%s%s",
-              Stripe.getApiBase(),
-              String.format(
-                  "/v1/test_helpers/treasury/outbound_transfers/%s/post",
-                  ApiResource.urlEncodeId(this.resource.getId())));
+            "/v1/test_helpers/treasury/outbound_transfers/%s/post",
+            ApiResource.urlEncodeId(this.resource.getId())
+          )
+        );
       return ApiResource.request(
-          ApiResource.RequestMethod.POST, url, params, OutboundTransfer.class, options);
+        ApiResource.RequestMethod.POST,
+        url,
+        params,
+        OutboundTransfer.class,
+        options
+      );
     }
 
     /**
-     * Transitions a test mode created OutboundTransfer to the <code>returned</code> status. The
-     * OutboundTransfer must already be in the <code>processing</code> state.
+     * <p>Transitions a test mode created OutboundTransfer to the <code>returned</code> status. The OutboundTransfer must already be in the <code>processing</code> state.</p>
      */
     public OutboundTransfer returnOutboundTransfer() throws StripeException {
       return returnOutboundTransfer((Map<String, Object>) null, (RequestOptions) null);
     }
 
     /**
-     * Transitions a test mode created OutboundTransfer to the <code>returned</code> status. The
-     * OutboundTransfer must already be in the <code>processing</code> state.
+     * <p>Transitions a test mode created OutboundTransfer to the <code>returned</code> status. The OutboundTransfer must already be in the <code>processing</code> state.</p>
      */
     public OutboundTransfer returnOutboundTransfer(RequestOptions options) throws StripeException {
       return returnOutboundTransfer((Map<String, Object>) null, options);
     }
 
     /**
-     * Transitions a test mode created OutboundTransfer to the <code>returned</code> status. The
-     * OutboundTransfer must already be in the <code>processing</code> state.
+     * <p>Transitions a test mode created OutboundTransfer to the <code>returned</code> status. The OutboundTransfer must already be in the <code>processing</code> state.</p>
      */
-    public OutboundTransfer returnOutboundTransfer(Map<String, Object> params)
-        throws StripeException {
+    public OutboundTransfer returnOutboundTransfer(
+        Map<String, Object> params) throws StripeException {
       return returnOutboundTransfer(params, (RequestOptions) null);
     }
 
     /**
-     * Transitions a test mode created OutboundTransfer to the <code>returned</code> status. The
-     * OutboundTransfer must already be in the <code>processing</code> state.
+     * <p>Transitions a test mode created OutboundTransfer to the <code>returned</code> status. The OutboundTransfer must already be in the <code>processing</code> state.</p>
      */
     public OutboundTransfer returnOutboundTransfer(
-        Map<String, Object> params, RequestOptions options) throws StripeException {
+        Map<String, Object> params,
+        RequestOptions options) throws StripeException {
       String url =
+        String.format(
+          "%s%s",
+          Stripe.getApiBase(),
           String.format(
-              "%s%s",
-              Stripe.getApiBase(),
-              String.format(
-                  "/v1/test_helpers/treasury/outbound_transfers/%s/return",
-                  ApiResource.urlEncodeId(this.resource.getId())));
+            "/v1/test_helpers/treasury/outbound_transfers/%s/return",
+            ApiResource.urlEncodeId(this.resource.getId())
+          )
+        );
       return ApiResource.request(
-          ApiResource.RequestMethod.POST, url, params, OutboundTransfer.class, options);
+        ApiResource.RequestMethod.POST,
+        url,
+        params,
+        OutboundTransfer.class,
+        options
+      );
     }
 
     /**
-     * Transitions a test mode created OutboundTransfer to the <code>returned</code> status. The
-     * OutboundTransfer must already be in the <code>processing</code> state.
+     * <p>Transitions a test mode created OutboundTransfer to the <code>returned</code> status. The OutboundTransfer must already be in the <code>processing</code> state.</p>
      */
     public OutboundTransfer returnOutboundTransfer(
         OutboundTransferReturnOutboundTransferParams params) throws StripeException {
@@ -645,21 +775,27 @@ public class OutboundTransfer extends ApiResource implements HasId {
     }
 
     /**
-     * Transitions a test mode created OutboundTransfer to the <code>returned</code> status. The
-     * OutboundTransfer must already be in the <code>processing</code> state.
+     * <p>Transitions a test mode created OutboundTransfer to the <code>returned</code> status. The OutboundTransfer must already be in the <code>processing</code> state.</p>
      */
     public OutboundTransfer returnOutboundTransfer(
-        OutboundTransferReturnOutboundTransferParams params, RequestOptions options)
-        throws StripeException {
+        OutboundTransferReturnOutboundTransferParams params,
+        RequestOptions options) throws StripeException {
       String url =
+        String.format(
+          "%s%s",
+          Stripe.getApiBase(),
           String.format(
-              "%s%s",
-              Stripe.getApiBase(),
-              String.format(
-                  "/v1/test_helpers/treasury/outbound_transfers/%s/return",
-                  ApiResource.urlEncodeId(this.resource.getId())));
+            "/v1/test_helpers/treasury/outbound_transfers/%s/return",
+            ApiResource.urlEncodeId(this.resource.getId())
+          )
+        );
       return ApiResource.request(
-          ApiResource.RequestMethod.POST, url, params, OutboundTransfer.class, options);
+        ApiResource.RequestMethod.POST,
+        url,
+        params,
+        OutboundTransfer.class,
+        options
+      );
     }
   }
 }

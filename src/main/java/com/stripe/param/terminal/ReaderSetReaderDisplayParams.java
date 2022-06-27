@@ -3,6 +3,7 @@ package com.stripe.param.terminal;
 
 import com.google.gson.annotations.SerializedName;
 import com.stripe.net.ApiRequestParams;
+import com.stripe.net.ApiRequestParams.EnumParam;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -11,39 +12,43 @@ import lombok.Getter;
 
 @Getter
 public class ReaderSetReaderDisplayParams extends ApiRequestParams {
-  /** Cart. */
+  /**
+   * Cart.
+   */
   @SerializedName("cart")
   Cart cart;
 
-  /** Specifies which fields in the response should be expanded. */
+  /**
+   * Specifies which fields in the response should be expanded.
+   */
   @SerializedName("expand")
   List<String> expand;
 
   /**
-   * Map of extra parameters for custom features not available in this client library. The content
-   * in this map is not serialized under this field's {@code @SerializedName} value. Instead, each
-   * key/value pair is serialized as if the key is a root-level field (serialized) name in this
-   * param object. Effectively, this map is flattened to its parent instance.
+   * Map of extra parameters for custom features not available in this client library. The content in this map is not serialized under this field's {@code @SerializedName} value. Instead, each key/value pair is serialized as if the key is a root-level field (serialized) name in this param object. Effectively, this map is flattened to its parent instance.
    */
   @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
   Map<String, Object> extraParams;
 
-  /** Type. */
+  /**
+   * Type.
+   */
   @SerializedName("type")
   Type type;
 
   private ReaderSetReaderDisplayParams(
-      Cart cart, List<String> expand, Map<String, Object> extraParams, Type type) {
+      Cart cart,
+      List<String> expand,
+      Map<String, Object> extraParams,
+      Type type) {
     this.cart = cart;
     this.expand = expand;
     this.extraParams = extraParams;
     this.type = type;
   }
-
   public static Builder builder() {
     return new Builder();
   }
-
   public static class Builder {
     private Cart cart;
 
@@ -53,21 +58,23 @@ public class ReaderSetReaderDisplayParams extends ApiRequestParams {
 
     private Type type;
 
-    /** Finalize and obtain parameter instance from this builder. */
+    /**
+     * Finalize and obtain parameter instance from this builder.
+     */
     public ReaderSetReaderDisplayParams build() {
       return new ReaderSetReaderDisplayParams(this.cart, this.expand, this.extraParams, this.type);
     }
 
-    /** Cart. */
+    /**
+     * Cart.
+     */
     public Builder setCart(Cart cart) {
       this.cart = cart;
       return this;
     }
 
     /**
-     * Add an element to `expand` list. A list is initialized for the first `add/addAll` call, and
-     * subsequent calls adds additional elements to the original list. See {@link
-     * ReaderSetReaderDisplayParams#expand} for the field documentation.
+     * Add an element to `expand` list. A list is initialized for the first `add/addAll` call, and subsequent calls adds additional elements to the original list. See {@link ReaderSetReaderDisplayParams#expand} for the field documentation.
      */
     public Builder addExpand(String element) {
       if (this.expand == null) {
@@ -78,9 +85,7 @@ public class ReaderSetReaderDisplayParams extends ApiRequestParams {
     }
 
     /**
-     * Add all elements to `expand` list. A list is initialized for the first `add/addAll` call, and
-     * subsequent calls adds additional elements to the original list. See {@link
-     * ReaderSetReaderDisplayParams#expand} for the field documentation.
+     * Add all elements to `expand` list. A list is initialized for the first `add/addAll` call, and subsequent calls adds additional elements to the original list. See {@link ReaderSetReaderDisplayParams#expand} for the field documentation.
      */
     public Builder addAllExpand(List<String> elements) {
       if (this.expand == null) {
@@ -91,9 +96,7 @@ public class ReaderSetReaderDisplayParams extends ApiRequestParams {
     }
 
     /**
-     * Add a key/value pair to `extraParams` map. A map is initialized for the first `put/putAll`
-     * call, and subsequent calls add additional key/value pairs to the original map. See {@link
-     * ReaderSetReaderDisplayParams#extraParams} for the field documentation.
+     * Add a key/value pair to `extraParams` map. A map is initialized for the first `put/putAll` call, and subsequent calls add additional key/value pairs to the original map. See {@link ReaderSetReaderDisplayParams#extraParams} for the field documentation.
      */
     public Builder putExtraParam(String key, Object value) {
       if (this.extraParams == null) {
@@ -104,9 +107,7 @@ public class ReaderSetReaderDisplayParams extends ApiRequestParams {
     }
 
     /**
-     * Add all map key/value pairs to `extraParams` map. A map is initialized for the first
-     * `put/putAll` call, and subsequent calls add additional key/value pairs to the original map.
-     * See {@link ReaderSetReaderDisplayParams#extraParams} for the field documentation.
+     * Add all map key/value pairs to `extraParams` map. A map is initialized for the first `put/putAll` call, and subsequent calls add additional key/value pairs to the original map. See {@link ReaderSetReaderDisplayParams#extraParams} for the field documentation.
      */
     public Builder putAllExtraParam(Map<String, Object> map) {
       if (this.extraParams == null) {
@@ -116,41 +117,43 @@ public class ReaderSetReaderDisplayParams extends ApiRequestParams {
       return this;
     }
 
-    /** Type. */
+    /**
+     * Type.
+     */
     public Builder setType(Type type) {
       this.type = type;
       return this;
     }
   }
-
   @Getter
   public static class Cart {
     /**
-     * Three-letter <a href="https://www.iso.org/iso-4217-currency-codes.html">ISO currency
-     * code</a>, in lowercase. Must be a <a href="https://stripe.com/docs/currencies">supported
-     * currency</a>.
+     * Three-letter <a href="https://www.iso.org/iso-4217-currency-codes.html">ISO currency code</a>, in lowercase. Must be a <a href="https://stripe.com/docs/currencies">supported currency</a>.
      */
     @SerializedName("currency")
     String currency;
 
     /**
-     * Map of extra parameters for custom features not available in this client library. The content
-     * in this map is not serialized under this field's {@code @SerializedName} value. Instead, each
-     * key/value pair is serialized as if the key is a root-level field (serialized) name in this
-     * param object. Effectively, this map is flattened to its parent instance.
+     * Map of extra parameters for custom features not available in this client library. The content in this map is not serialized under this field's {@code @SerializedName} value. Instead, each key/value pair is serialized as if the key is a root-level field (serialized) name in this param object. Effectively, this map is flattened to its parent instance.
      */
     @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
     Map<String, Object> extraParams;
 
-    /** Array of line items that were purchased. */
+    /**
+     * Array of line items that were purchased.
+     */
     @SerializedName("line_items")
     List<LineItem> lineItems;
 
-    /** The amount of tax in cents. */
+    /**
+     * The amount of tax in cents.
+     */
     @SerializedName("tax")
     Long tax;
 
-    /** Total balance of cart due in cents. */
+    /**
+     * Total balance of cart due in cents.
+     */
     @SerializedName("total")
     Long total;
 
@@ -166,11 +169,9 @@ public class ReaderSetReaderDisplayParams extends ApiRequestParams {
       this.tax = tax;
       this.total = total;
     }
-
     public static Builder builder() {
       return new Builder();
     }
-
     public static class Builder {
       private String currency;
 
@@ -182,15 +183,15 @@ public class ReaderSetReaderDisplayParams extends ApiRequestParams {
 
       private Long total;
 
-      /** Finalize and obtain parameter instance from this builder. */
+      /**
+       * Finalize and obtain parameter instance from this builder.
+       */
       public Cart build() {
         return new Cart(this.currency, this.extraParams, this.lineItems, this.tax, this.total);
       }
 
       /**
-       * Three-letter <a href="https://www.iso.org/iso-4217-currency-codes.html">ISO currency
-       * code</a>, in lowercase. Must be a <a href="https://stripe.com/docs/currencies">supported
-       * currency</a>.
+       * Three-letter <a href="https://www.iso.org/iso-4217-currency-codes.html">ISO currency code</a>, in lowercase. Must be a <a href="https://stripe.com/docs/currencies">supported currency</a>.
        */
       public Builder setCurrency(String currency) {
         this.currency = currency;
@@ -198,9 +199,7 @@ public class ReaderSetReaderDisplayParams extends ApiRequestParams {
       }
 
       /**
-       * Add a key/value pair to `extraParams` map. A map is initialized for the first `put/putAll`
-       * call, and subsequent calls add additional key/value pairs to the original map. See {@link
-       * ReaderSetReaderDisplayParams.Cart#extraParams} for the field documentation.
+       * Add a key/value pair to `extraParams` map. A map is initialized for the first `put/putAll` call, and subsequent calls add additional key/value pairs to the original map. See {@link ReaderSetReaderDisplayParams.Cart#extraParams} for the field documentation.
        */
       public Builder putExtraParam(String key, Object value) {
         if (this.extraParams == null) {
@@ -211,9 +210,7 @@ public class ReaderSetReaderDisplayParams extends ApiRequestParams {
       }
 
       /**
-       * Add all map key/value pairs to `extraParams` map. A map is initialized for the first
-       * `put/putAll` call, and subsequent calls add additional key/value pairs to the original map.
-       * See {@link ReaderSetReaderDisplayParams.Cart#extraParams} for the field documentation.
+       * Add all map key/value pairs to `extraParams` map. A map is initialized for the first `put/putAll` call, and subsequent calls add additional key/value pairs to the original map. See {@link ReaderSetReaderDisplayParams.Cart#extraParams} for the field documentation.
        */
       public Builder putAllExtraParam(Map<String, Object> map) {
         if (this.extraParams == null) {
@@ -224,9 +221,7 @@ public class ReaderSetReaderDisplayParams extends ApiRequestParams {
       }
 
       /**
-       * Add an element to `lineItems` list. A list is initialized for the first `add/addAll` call,
-       * and subsequent calls adds additional elements to the original list. See {@link
-       * ReaderSetReaderDisplayParams.Cart#lineItems} for the field documentation.
+       * Add an element to `lineItems` list. A list is initialized for the first `add/addAll` call, and subsequent calls adds additional elements to the original list. See {@link ReaderSetReaderDisplayParams.Cart#lineItems} for the field documentation.
        */
       public Builder addLineItem(LineItem element) {
         if (this.lineItems == null) {
@@ -237,9 +232,7 @@ public class ReaderSetReaderDisplayParams extends ApiRequestParams {
       }
 
       /**
-       * Add all elements to `lineItems` list. A list is initialized for the first `add/addAll`
-       * call, and subsequent calls adds additional elements to the original list. See {@link
-       * ReaderSetReaderDisplayParams.Cart#lineItems} for the field documentation.
+       * Add all elements to `lineItems` list. A list is initialized for the first `add/addAll` call, and subsequent calls adds additional elements to the original list. See {@link ReaderSetReaderDisplayParams.Cart#lineItems} for the field documentation.
        */
       public Builder addAllLineItem(List<LineItem> elements) {
         if (this.lineItems == null) {
@@ -249,54 +242,61 @@ public class ReaderSetReaderDisplayParams extends ApiRequestParams {
         return this;
       }
 
-      /** The amount of tax in cents. */
+      /**
+       * The amount of tax in cents.
+       */
       public Builder setTax(Long tax) {
         this.tax = tax;
         return this;
       }
 
-      /** Total balance of cart due in cents. */
+      /**
+       * Total balance of cart due in cents.
+       */
       public Builder setTotal(Long total) {
         this.total = total;
         return this;
       }
     }
-
     @Getter
     public static class LineItem {
-      /** The price of the item in cents. */
+      /**
+       * The price of the item in cents.
+       */
       @SerializedName("amount")
       Long amount;
 
-      /** The description or name of the item. */
+      /**
+       * The description or name of the item.
+       */
       @SerializedName("description")
       String description;
 
       /**
-       * Map of extra parameters for custom features not available in this client library. The
-       * content in this map is not serialized under this field's {@code @SerializedName} value.
-       * Instead, each key/value pair is serialized as if the key is a root-level field (serialized)
-       * name in this param object. Effectively, this map is flattened to its parent instance.
+       * Map of extra parameters for custom features not available in this client library. The content in this map is not serialized under this field's {@code @SerializedName} value. Instead, each key/value pair is serialized as if the key is a root-level field (serialized) name in this param object. Effectively, this map is flattened to its parent instance.
        */
       @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
       Map<String, Object> extraParams;
 
-      /** The quantity of the line item being purchased. */
+      /**
+       * The quantity of the line item being purchased.
+       */
       @SerializedName("quantity")
       Long quantity;
 
       private LineItem(
-          Long amount, String description, Map<String, Object> extraParams, Long quantity) {
+          Long amount,
+          String description,
+          Map<String, Object> extraParams,
+          Long quantity) {
         this.amount = amount;
         this.description = description;
         this.extraParams = extraParams;
         this.quantity = quantity;
       }
-
       public static Builder builder() {
         return new Builder();
       }
-
       public static class Builder {
         private Long amount;
 
@@ -306,28 +306,31 @@ public class ReaderSetReaderDisplayParams extends ApiRequestParams {
 
         private Long quantity;
 
-        /** Finalize and obtain parameter instance from this builder. */
+        /**
+         * Finalize and obtain parameter instance from this builder.
+         */
         public LineItem build() {
           return new LineItem(this.amount, this.description, this.extraParams, this.quantity);
         }
 
-        /** The price of the item in cents. */
+        /**
+         * The price of the item in cents.
+         */
         public Builder setAmount(Long amount) {
           this.amount = amount;
           return this;
         }
 
-        /** The description or name of the item. */
+        /**
+         * The description or name of the item.
+         */
         public Builder setDescription(String description) {
           this.description = description;
           return this;
         }
 
         /**
-         * Add a key/value pair to `extraParams` map. A map is initialized for the first
-         * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
-         * map. See {@link ReaderSetReaderDisplayParams.Cart.LineItem#extraParams} for the field
-         * documentation.
+         * Add a key/value pair to `extraParams` map. A map is initialized for the first `put/putAll` call, and subsequent calls add additional key/value pairs to the original map. See {@link ReaderSetReaderDisplayParams.Cart.LineItem#extraParams} for the field documentation.
          */
         public Builder putExtraParam(String key, Object value) {
           if (this.extraParams == null) {
@@ -338,10 +341,7 @@ public class ReaderSetReaderDisplayParams extends ApiRequestParams {
         }
 
         /**
-         * Add all map key/value pairs to `extraParams` map. A map is initialized for the first
-         * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
-         * map. See {@link ReaderSetReaderDisplayParams.Cart.LineItem#extraParams} for the field
-         * documentation.
+         * Add all map key/value pairs to `extraParams` map. A map is initialized for the first `put/putAll` call, and subsequent calls add additional key/value pairs to the original map. See {@link ReaderSetReaderDisplayParams.Cart.LineItem#extraParams} for the field documentation.
          */
         public Builder putAllExtraParam(Map<String, Object> map) {
           if (this.extraParams == null) {
@@ -351,7 +351,9 @@ public class ReaderSetReaderDisplayParams extends ApiRequestParams {
           return this;
         }
 
-        /** The quantity of the line item being purchased. */
+        /**
+         * The quantity of the line item being purchased.
+         */
         public Builder setQuantity(Long quantity) {
           this.quantity = quantity;
           return this;
@@ -359,14 +361,11 @@ public class ReaderSetReaderDisplayParams extends ApiRequestParams {
       }
     }
   }
-
   public enum Type implements ApiRequestParams.EnumParam {
     @SerializedName("cart")
     CART("cart");
-
     @Getter(onMethod_ = {@Override})
     private final String value;
-
     Type(String value) {
       this.value = value;
     }

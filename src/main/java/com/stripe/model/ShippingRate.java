@@ -19,24 +19,26 @@ import lombok.Setter;
 @Setter
 @EqualsAndHashCode(callSuper = false)
 public class ShippingRate extends ApiResource implements HasId, MetadataStore<ShippingRate> {
-  /** Whether the shipping rate can be used for new purchases. Defaults to {@code true}. */
+  /**
+   * Whether the shipping rate can be used for new purchases. Defaults to {@code true}.
+   */
   @SerializedName("active")
   Boolean active;
 
-  /** Time at which the object was created. Measured in seconds since the Unix epoch. */
+  /**
+   * Time at which the object was created. Measured in seconds since the Unix epoch.
+   */
   @SerializedName("created")
   Long created;
 
   /**
-   * The estimated range for how long shipping will take, meant to be displayable to the customer.
-   * This will appear on CheckoutSessions.
+   * The estimated range for how long shipping will take, meant to be displayable to the customer. This will appear on CheckoutSessions.
    */
   @SerializedName("delivery_estimate")
   DeliveryEstimate deliveryEstimate;
 
   /**
-   * The name of the shipping rate, meant to be displayable to the customer. This will appear on
-   * CheckoutSessions.
+   * The name of the shipping rate, meant to be displayable to the customer. This will appear on CheckoutSessions.
    */
   @SerializedName("display_name")
   String displayName;
@@ -44,22 +46,21 @@ public class ShippingRate extends ApiResource implements HasId, MetadataStore<Sh
   @SerializedName("fixed_amount")
   FixedAmount fixedAmount;
 
-  /** Unique identifier for the object. */
+  /**
+   * Unique identifier for the object.
+   */
   @Getter(onMethod_ = {@Override})
   @SerializedName("id")
   String id;
 
   /**
-   * Has the value {@code true} if the object exists in live mode or the value {@code false} if the
-   * object exists in test mode.
+   * Has the value {@code true} if the object exists in live mode or the value {@code false} if the object exists in test mode.
    */
   @SerializedName("livemode")
   Boolean livemode;
 
   /**
-   * Set of <a href="https://stripe.com/docs/api/metadata">key-value pairs</a> that you can attach
-   * to an object. This can be useful for storing additional information about the object in a
-   * structured format.
+   * Set of <a href="https://stripe.com/docs/api/metadata">key-value pairs</a> that you can attach to an object. This can be useful for storing additional information about the object in a structured format.
    */
   @Getter(onMethod_ = {@Override})
   @SerializedName("metadata")
@@ -74,15 +75,13 @@ public class ShippingRate extends ApiResource implements HasId, MetadataStore<Sh
   String object;
 
   /**
-   * Specifies whether the rate is considered inclusive of taxes or exclusive of taxes. One of
-   * {@code inclusive}, {@code exclusive}, or {@code unspecified}.
+   * Specifies whether the rate is considered inclusive of taxes or exclusive of taxes. One of {@code inclusive}, {@code exclusive}, or {@code unspecified}.
    */
   @SerializedName("tax_behavior")
   String taxBehavior;
 
   /**
-   * A <a href="https://stripe.com/docs/tax/tax-categories">tax code</a> ID. The Shipping tax code
-   * is {@code txcd_92010001}.
+   * A <a href="https://stripe.com/docs/tax/tax-categories">tax code</a> ID. The Shipping tax code is {@code txcd_92010001}.
    */
   @SerializedName("tax_code")
   @Getter(lombok.AccessLevel.NONE)
@@ -97,7 +96,9 @@ public class ShippingRate extends ApiResource implements HasId, MetadataStore<Sh
   @SerializedName("type")
   String type;
 
-  /** Get ID of expandable {@code taxCode} object. */
+  /**
+   * Get ID of expandable {@code taxCode} object.
+   */
   public String getTaxCode() {
     return (this.taxCode != null) ? this.taxCode.getId() : null;
   }
@@ -106,7 +107,9 @@ public class ShippingRate extends ApiResource implements HasId, MetadataStore<Sh
     this.taxCode = ApiResource.setExpandableFieldId(id, this.taxCode);
   }
 
-  /** Get expanded {@code taxCode}. */
+  /**
+   * Get expanded {@code taxCode}.
+   */
   public TaxCode getTaxCodeObject() {
     return (this.taxCode != null) ? this.taxCode.getExpanded() : null;
   }
@@ -115,127 +118,656 @@ public class ShippingRate extends ApiResource implements HasId, MetadataStore<Sh
     this.taxCode = new ExpandableField<TaxCode>(expandableObject.getId(), expandableObject);
   }
 
-  /** Returns a list of your shipping rates. */
+  /**
+   * <p>Returns a list of your shipping rates.</p>
+   */
   public static ShippingRateCollection list(Map<String, Object> params) throws StripeException {
     return list(params, (RequestOptions) null);
   }
 
-  /** Returns a list of your shipping rates. */
-  public static ShippingRateCollection list(Map<String, Object> params, RequestOptions options)
-      throws StripeException {
+  /**
+   * <p>Returns a list of your shipping rates.</p>
+   */
+  public static ShippingRateCollection list(
+      Map<String, Object> params,
+      RequestOptions options) throws StripeException {
     String url = String.format("%s%s", Stripe.getApiBase(), "/v1/shipping_rates");
     return ApiResource.requestCollection(url, params, ShippingRateCollection.class, options);
   }
 
-  /** Returns a list of your shipping rates. */
+  /**
+   * <p>Returns a list of your shipping rates.</p>
+   */
   public static ShippingRateCollection list(ShippingRateListParams params) throws StripeException {
     return list(params, (RequestOptions) null);
   }
 
-  /** Returns a list of your shipping rates. */
-  public static ShippingRateCollection list(ShippingRateListParams params, RequestOptions options)
-      throws StripeException {
+  /**
+   * <p>Returns a list of your shipping rates.</p>
+   */
+  public static ShippingRateCollection list(
+      ShippingRateListParams params,
+      RequestOptions options) throws StripeException {
     String url = String.format("%s%s", Stripe.getApiBase(), "/v1/shipping_rates");
     return ApiResource.requestCollection(url, params, ShippingRateCollection.class, options);
   }
 
-  /** Returns the shipping rate object with the given ID. */
+  /**
+   * <p>Returns the shipping rate object with the given ID.</p>
+   */
   public static ShippingRate retrieve(String shippingRateToken) throws StripeException {
     return retrieve(shippingRateToken, (Map<String, Object>) null, (RequestOptions) null);
   }
 
-  /** Returns the shipping rate object with the given ID. */
-  public static ShippingRate retrieve(String shippingRateToken, RequestOptions options)
-      throws StripeException {
+  /**
+   * <p>Returns the shipping rate object with the given ID.</p>
+   */
+  public static ShippingRate retrieve(
+      String shippingRateToken,
+      RequestOptions options) throws StripeException {
     return retrieve(shippingRateToken, (Map<String, Object>) null, options);
   }
 
-  /** Returns the shipping rate object with the given ID. */
+  /**
+   * <p>Returns the shipping rate object with the given ID.</p>
+   */
   public static ShippingRate retrieve(
-      String shippingRateToken, Map<String, Object> params, RequestOptions options)
-      throws StripeException {
+      String shippingRateToken,
+      Map<String, Object> params,
+      RequestOptions options) throws StripeException {
     String url =
-        String.format(
-            "%s%s",
-            Stripe.getApiBase(),
-            String.format("/v1/shipping_rates/%s", ApiResource.urlEncodeId(shippingRateToken)));
+      String.format(
+        "%s%s",
+        Stripe.getApiBase(),
+        String.format("/v1/shipping_rates/%s", ApiResource.urlEncodeId(shippingRateToken))
+      );
     return ApiResource.request(
-        ApiResource.RequestMethod.GET, url, params, ShippingRate.class, options);
+      ApiResource.RequestMethod.GET,
+      url,
+      params,
+      ShippingRate.class,
+      options
+    );
   }
 
-  /** Returns the shipping rate object with the given ID. */
+  /**
+   * <p>Returns the shipping rate object with the given ID.</p>
+   */
   public static ShippingRate retrieve(
-      String shippingRateToken, ShippingRateRetrieveParams params, RequestOptions options)
-      throws StripeException {
+      String shippingRateToken,
+      ShippingRateRetrieveParams params,
+      RequestOptions options) throws StripeException {
     String url =
-        String.format(
-            "%s%s",
-            Stripe.getApiBase(),
-            String.format("/v1/shipping_rates/%s", ApiResource.urlEncodeId(shippingRateToken)));
+      String.format(
+        "%s%s",
+        Stripe.getApiBase(),
+        String.format("/v1/shipping_rates/%s", ApiResource.urlEncodeId(shippingRateToken))
+      );
     return ApiResource.request(
-        ApiResource.RequestMethod.GET, url, params, ShippingRate.class, options);
+      ApiResource.RequestMethod.GET,
+      url,
+      params,
+      ShippingRate.class,
+      options
+    );
   }
 
-  /** Creates a new shipping rate object. */
+  /**
+   * <p>Creates a new shipping rate object.</p>
+   */
   public static ShippingRate create(Map<String, Object> params) throws StripeException {
     return create(params, (RequestOptions) null);
   }
 
-  /** Creates a new shipping rate object. */
-  public static ShippingRate create(Map<String, Object> params, RequestOptions options)
-      throws StripeException {
+  /**
+   * <p>Creates a new shipping rate object.</p>
+   */
+  public static ShippingRate create(
+      Map<String, Object> params,
+      RequestOptions options) throws StripeException {
     String url = String.format("%s%s", Stripe.getApiBase(), "/v1/shipping_rates");
     return ApiResource.request(
-        ApiResource.RequestMethod.POST, url, params, ShippingRate.class, options);
+      ApiResource.RequestMethod.POST,
+      url,
+      params,
+      ShippingRate.class,
+      options
+    );
   }
 
-  /** Creates a new shipping rate object. */
+  /**
+   * <p>Creates a new shipping rate object.</p>
+   */
   public static ShippingRate create(ShippingRateCreateParams params) throws StripeException {
     return create(params, (RequestOptions) null);
   }
 
-  /** Creates a new shipping rate object. */
-  public static ShippingRate create(ShippingRateCreateParams params, RequestOptions options)
-      throws StripeException {
+  /**
+   * <p>Creates a new shipping rate object.</p>
+   */
+  public static ShippingRate create(
+      ShippingRateCreateParams params,
+      RequestOptions options) throws StripeException {
     String url = String.format("%s%s", Stripe.getApiBase(), "/v1/shipping_rates");
     return ApiResource.request(
-        ApiResource.RequestMethod.POST, url, params, ShippingRate.class, options);
+      ApiResource.RequestMethod.POST,
+      url,
+      params,
+      ShippingRate.class,
+      options
+    );
   }
 
-  /** Updates an existing shipping rate object. */
+  /**
+   * <p>Updates an existing shipping rate object.</p>
+   */
   @Override
   public ShippingRate update(Map<String, Object> params) throws StripeException {
     return update(params, (RequestOptions) null);
   }
 
-  /** Updates an existing shipping rate object. */
+  /**
+   * <p>Updates an existing shipping rate object.</p>
+   */
   @Override
-  public ShippingRate update(Map<String, Object> params, RequestOptions options)
-      throws StripeException {
+  public ShippingRate update(
+      Map<String, Object> params,
+      RequestOptions options) throws StripeException {
     String url =
-        String.format(
-            "%s%s",
-            Stripe.getApiBase(),
-            String.format("/v1/shipping_rates/%s", ApiResource.urlEncodeId(this.getId())));
+      String.format(
+        "%s%s",
+        Stripe.getApiBase(),
+        String.format("/v1/shipping_rates/%s", ApiResource.urlEncodeId(this.getId()))
+      );
     return ApiResource.request(
-        ApiResource.RequestMethod.POST, url, params, ShippingRate.class, options);
+      ApiResource.RequestMethod.POST,
+      url,
+      params,
+      ShippingRate.class,
+      options
+    );
   }
 
-  /** Updates an existing shipping rate object. */
+  /**
+   * <p>Updates an existing shipping rate object.</p>
+   */
   public ShippingRate update(ShippingRateUpdateParams params) throws StripeException {
     return update(params, (RequestOptions) null);
   }
 
-  /** Updates an existing shipping rate object. */
-  public ShippingRate update(ShippingRateUpdateParams params, RequestOptions options)
-      throws StripeException {
+  /**
+   * <p>Updates an existing shipping rate object.</p>
+   */
+  public ShippingRate update(
+      ShippingRateUpdateParams params,
+      RequestOptions options) throws StripeException {
     String url =
-        String.format(
-            "%s%s",
-            Stripe.getApiBase(),
-            String.format("/v1/shipping_rates/%s", ApiResource.urlEncodeId(this.getId())));
+      String.format(
+        "%s%s",
+        Stripe.getApiBase(),
+        String.format("/v1/shipping_rates/%s", ApiResource.urlEncodeId(this.getId()))
+      );
     return ApiResource.request(
-        ApiResource.RequestMethod.POST, url, params, ShippingRate.class, options);
+      ApiResource.RequestMethod.POST,
+      url,
+      params,
+      ShippingRate.class,
+      options
+    );
+  }
+
+  @Getter
+  @Setter
+  @EqualsAndHashCode(callSuper = false)
+  public static class CurrencyOptions extends StripeObject {
+    @SerializedName("aed")
+    CurrencyOption aed;
+
+    @SerializedName("afn")
+    CurrencyOption afn;
+
+    @SerializedName("all")
+    CurrencyOption all;
+
+    @SerializedName("amd")
+    CurrencyOption amd;
+
+    @SerializedName("ang")
+    CurrencyOption ang;
+
+    @SerializedName("aoa")
+    CurrencyOption aoa;
+
+    @SerializedName("ars")
+    CurrencyOption ars;
+
+    @SerializedName("aud")
+    CurrencyOption aud;
+
+    @SerializedName("awg")
+    CurrencyOption awg;
+
+    @SerializedName("azn")
+    CurrencyOption azn;
+
+    @SerializedName("bam")
+    CurrencyOption bam;
+
+    @SerializedName("bbd")
+    CurrencyOption bbd;
+
+    @SerializedName("bdt")
+    CurrencyOption bdt;
+
+    @SerializedName("bgn")
+    CurrencyOption bgn;
+
+    @SerializedName("bhd")
+    CurrencyOption bhd;
+
+    @SerializedName("bif")
+    CurrencyOption bif;
+
+    @SerializedName("bmd")
+    CurrencyOption bmd;
+
+    @SerializedName("bnd")
+    CurrencyOption bnd;
+
+    @SerializedName("bob")
+    CurrencyOption bob;
+
+    @SerializedName("brl")
+    CurrencyOption brl;
+
+    @SerializedName("bsd")
+    CurrencyOption bsd;
+
+    @SerializedName("btn")
+    CurrencyOption btn;
+
+    @SerializedName("bwp")
+    CurrencyOption bwp;
+
+    @SerializedName("byn")
+    CurrencyOption byn;
+
+    @SerializedName("bzd")
+    CurrencyOption bzd;
+
+    @SerializedName("cad")
+    CurrencyOption cad;
+
+    @SerializedName("cdf")
+    CurrencyOption cdf;
+
+    @SerializedName("chf")
+    CurrencyOption chf;
+
+    @SerializedName("clp")
+    CurrencyOption clp;
+
+    @SerializedName("cny")
+    CurrencyOption cny;
+
+    @SerializedName("cop")
+    CurrencyOption cop;
+
+    @SerializedName("crc")
+    CurrencyOption crc;
+
+    @SerializedName("cve")
+    CurrencyOption cve;
+
+    @SerializedName("czk")
+    CurrencyOption czk;
+
+    @SerializedName("djf")
+    CurrencyOption djf;
+
+    @SerializedName("dkk")
+    CurrencyOption dkk;
+
+    @SerializedName("dop")
+    CurrencyOption dop;
+
+    @SerializedName("dzd")
+    CurrencyOption dzd;
+
+    @SerializedName("egp")
+    CurrencyOption egp;
+
+    @SerializedName("etb")
+    CurrencyOption etb;
+
+    @SerializedName("eur")
+    CurrencyOption eur;
+
+    @SerializedName("fjd")
+    CurrencyOption fjd;
+
+    @SerializedName("fkp")
+    CurrencyOption fkp;
+
+    @SerializedName("gbp")
+    CurrencyOption gbp;
+
+    @SerializedName("gel")
+    CurrencyOption gel;
+
+    @SerializedName("ghs")
+    CurrencyOption ghs;
+
+    @SerializedName("gip")
+    CurrencyOption gip;
+
+    @SerializedName("gmd")
+    CurrencyOption gmd;
+
+    @SerializedName("gnf")
+    CurrencyOption gnf;
+
+    @SerializedName("gtq")
+    CurrencyOption gtq;
+
+    @SerializedName("gyd")
+    CurrencyOption gyd;
+
+    @SerializedName("hkd")
+    CurrencyOption hkd;
+
+    @SerializedName("hnl")
+    CurrencyOption hnl;
+
+    @SerializedName("hrk")
+    CurrencyOption hrk;
+
+    @SerializedName("htg")
+    CurrencyOption htg;
+
+    @SerializedName("huf")
+    CurrencyOption huf;
+
+    @SerializedName("idr")
+    CurrencyOption idr;
+
+    @SerializedName("ils")
+    CurrencyOption ils;
+
+    @SerializedName("inr")
+    CurrencyOption inr;
+
+    @SerializedName("isk")
+    CurrencyOption isk;
+
+    @SerializedName("jmd")
+    CurrencyOption jmd;
+
+    @SerializedName("jod")
+    CurrencyOption jod;
+
+    @SerializedName("jpy")
+    CurrencyOption jpy;
+
+    @SerializedName("kes")
+    CurrencyOption kes;
+
+    @SerializedName("kgs")
+    CurrencyOption kgs;
+
+    @SerializedName("khr")
+    CurrencyOption khr;
+
+    @SerializedName("kmf")
+    CurrencyOption kmf;
+
+    @SerializedName("krw")
+    CurrencyOption krw;
+
+    @SerializedName("kwd")
+    CurrencyOption kwd;
+
+    @SerializedName("kyd")
+    CurrencyOption kyd;
+
+    @SerializedName("kzt")
+    CurrencyOption kzt;
+
+    @SerializedName("lak")
+    CurrencyOption lak;
+
+    @SerializedName("lbp")
+    CurrencyOption lbp;
+
+    @SerializedName("lkr")
+    CurrencyOption lkr;
+
+    @SerializedName("lrd")
+    CurrencyOption lrd;
+
+    @SerializedName("lsl")
+    CurrencyOption lsl;
+
+    @SerializedName("mad")
+    CurrencyOption mad;
+
+    @SerializedName("mdl")
+    CurrencyOption mdl;
+
+    @SerializedName("mga")
+    CurrencyOption mga;
+
+    @SerializedName("mkd")
+    CurrencyOption mkd;
+
+    @SerializedName("mmk")
+    CurrencyOption mmk;
+
+    @SerializedName("mnt")
+    CurrencyOption mnt;
+
+    @SerializedName("mop")
+    CurrencyOption mop;
+
+    @SerializedName("mro")
+    CurrencyOption mro;
+
+    @SerializedName("mur")
+    CurrencyOption mur;
+
+    @SerializedName("mvr")
+    CurrencyOption mvr;
+
+    @SerializedName("mwk")
+    CurrencyOption mwk;
+
+    @SerializedName("mxn")
+    CurrencyOption mxn;
+
+    @SerializedName("myr")
+    CurrencyOption myr;
+
+    @SerializedName("mzn")
+    CurrencyOption mzn;
+
+    @SerializedName("nad")
+    CurrencyOption nad;
+
+    @SerializedName("ngn")
+    CurrencyOption ngn;
+
+    @SerializedName("nio")
+    CurrencyOption nio;
+
+    @SerializedName("nok")
+    CurrencyOption nok;
+
+    @SerializedName("npr")
+    CurrencyOption npr;
+
+    @SerializedName("nzd")
+    CurrencyOption nzd;
+
+    @SerializedName("omr")
+    CurrencyOption omr;
+
+    @SerializedName("pab")
+    CurrencyOption pab;
+
+    @SerializedName("pen")
+    CurrencyOption pen;
+
+    @SerializedName("pgk")
+    CurrencyOption pgk;
+
+    @SerializedName("php")
+    CurrencyOption php;
+
+    @SerializedName("pkr")
+    CurrencyOption pkr;
+
+    @SerializedName("pln")
+    CurrencyOption pln;
+
+    @SerializedName("pyg")
+    CurrencyOption pyg;
+
+    @SerializedName("qar")
+    CurrencyOption qar;
+
+    @SerializedName("ron")
+    CurrencyOption ron;
+
+    @SerializedName("rsd")
+    CurrencyOption rsd;
+
+    @SerializedName("rub")
+    CurrencyOption rub;
+
+    @SerializedName("rwf")
+    CurrencyOption rwf;
+
+    @SerializedName("sar")
+    CurrencyOption sar;
+
+    @SerializedName("sbd")
+    CurrencyOption sbd;
+
+    @SerializedName("scr")
+    CurrencyOption scr;
+
+    @SerializedName("sek")
+    CurrencyOption sek;
+
+    @SerializedName("sgd")
+    CurrencyOption sgd;
+
+    @SerializedName("shp")
+    CurrencyOption shp;
+
+    @SerializedName("sll")
+    CurrencyOption sll;
+
+    @SerializedName("sos")
+    CurrencyOption sos;
+
+    @SerializedName("srd")
+    CurrencyOption srd;
+
+    @SerializedName("std")
+    CurrencyOption std;
+
+    @SerializedName("szl")
+    CurrencyOption szl;
+
+    @SerializedName("thb")
+    CurrencyOption thb;
+
+    @SerializedName("tjs")
+    CurrencyOption tjs;
+
+    @SerializedName("tnd")
+    CurrencyOption tnd;
+
+    @SerializedName("top")
+    CurrencyOption top;
+
+    @SerializedName("try")
+    CurrencyOption try;
+
+    @SerializedName("ttd")
+    CurrencyOption ttd;
+
+    @SerializedName("twd")
+    CurrencyOption twd;
+
+    @SerializedName("tzs")
+    CurrencyOption tzs;
+
+    @SerializedName("uah")
+    CurrencyOption uah;
+
+    @SerializedName("ugx")
+    CurrencyOption ugx;
+
+    @SerializedName("usd")
+    CurrencyOption usd;
+
+    @SerializedName("usdc")
+    CurrencyOption usdc;
+
+    @SerializedName("uyu")
+    CurrencyOption uyu;
+
+    @SerializedName("uzs")
+    CurrencyOption uzs;
+
+    @SerializedName("vnd")
+    CurrencyOption vnd;
+
+    @SerializedName("vuv")
+    CurrencyOption vuv;
+
+    @SerializedName("wst")
+    CurrencyOption wst;
+
+    @SerializedName("xaf")
+    CurrencyOption xaf;
+
+    @SerializedName("xcd")
+    CurrencyOption xcd;
+
+    @SerializedName("xof")
+    CurrencyOption xof;
+
+    @SerializedName("xpf")
+    CurrencyOption xpf;
+
+    @SerializedName("yer")
+    CurrencyOption yer;
+
+    @SerializedName("zar")
+    CurrencyOption zar;
+
+    @SerializedName("zmw")
+    CurrencyOption zmw;
+
+    @Getter
+    @Setter
+    @EqualsAndHashCode(callSuper = false)
+    public static class CurrencyOption extends StripeObject {
+      /**
+       * A non-negative integer in cents representing how much to charge.
+       */
+      @SerializedName("amount")
+      Long amount;
+
+      /**
+       * Specifies whether the rate is considered inclusive of taxes or exclusive of taxes. One of {@code inclusive}, {@code exclusive}, or {@code unspecified}.
+       */
+      @SerializedName("tax_behavior")
+      String taxBehavior;
+    }
   }
 
   @Getter
@@ -248,7 +780,9 @@ public class ShippingRate extends ApiResource implements HasId, MetadataStore<Sh
     @SerializedName("maximum")
     Maximum maximum;
 
-    /** The lower bound of the estimated range. If empty, represents no lower bound. */
+    /**
+     * The lower bound of the estimated range. If empty, represents no lower bound.
+     */
     @SerializedName("minimum")
     Minimum minimum;
 
@@ -264,7 +798,9 @@ public class ShippingRate extends ApiResource implements HasId, MetadataStore<Sh
       @SerializedName("unit")
       String unit;
 
-      /** Must be greater than 0. */
+      /**
+       * Must be greater than 0.
+       */
       @SerializedName("value")
       Long value;
     }
@@ -281,7 +817,9 @@ public class ShippingRate extends ApiResource implements HasId, MetadataStore<Sh
       @SerializedName("unit")
       String unit;
 
-      /** Must be greater than 0. */
+      /**
+       * Must be greater than 0.
+       */
       @SerializedName("value")
       Long value;
     }
@@ -291,16 +829,19 @@ public class ShippingRate extends ApiResource implements HasId, MetadataStore<Sh
   @Setter
   @EqualsAndHashCode(callSuper = false)
   public static class FixedAmount extends StripeObject {
-    /** A non-negative integer in cents representing how much to charge. */
+    /**
+     * A non-negative integer in cents representing how much to charge.
+     */
     @SerializedName("amount")
     Long amount;
 
     /**
-     * Three-letter <a href="https://www.iso.org/iso-4217-currency-codes.html">ISO currency
-     * code</a>, in lowercase. Must be a <a href="https://stripe.com/docs/currencies">supported
-     * currency</a>.
+     * Three-letter <a href="https://www.iso.org/iso-4217-currency-codes.html">ISO currency code</a>, in lowercase. Must be a <a href="https://stripe.com/docs/currencies">supported currency</a>.
      */
     @SerializedName("currency")
     String currency;
+
+    @SerializedName("currency_options")
+    CurrencyOptions currencyOptions;
   }
 }

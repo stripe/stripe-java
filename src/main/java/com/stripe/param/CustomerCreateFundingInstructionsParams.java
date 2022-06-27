@@ -3,6 +3,7 @@ package com.stripe.param;
 
 import com.google.gson.annotations.SerializedName;
 import com.stripe.net.ApiRequestParams;
+import com.stripe.net.ApiRequestParams.EnumParam;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -11,31 +12,33 @@ import lombok.Getter;
 
 @Getter
 public class CustomerCreateFundingInstructionsParams extends ApiRequestParams {
-  /** Additional parameters for {@code bank_transfer} funding types. */
+  /**
+   * Additional parameters for {@code bank_transfer} funding types.
+   */
   @SerializedName("bank_transfer")
   BankTransfer bankTransfer;
 
   /**
-   * Three-letter <a href="https://www.iso.org/iso-4217-currency-codes.html">ISO currency code</a>,
-   * in lowercase. Must be a <a href="https://stripe.com/docs/currencies">supported currency</a>.
+   * Three-letter <a href="https://www.iso.org/iso-4217-currency-codes.html">ISO currency code</a>, in lowercase. Must be a <a href="https://stripe.com/docs/currencies">supported currency</a>.
    */
   @SerializedName("currency")
   String currency;
 
-  /** Specifies which fields in the response should be expanded. */
+  /**
+   * Specifies which fields in the response should be expanded.
+   */
   @SerializedName("expand")
   List<String> expand;
 
   /**
-   * Map of extra parameters for custom features not available in this client library. The content
-   * in this map is not serialized under this field's {@code @SerializedName} value. Instead, each
-   * key/value pair is serialized as if the key is a root-level field (serialized) name in this
-   * param object. Effectively, this map is flattened to its parent instance.
+   * Map of extra parameters for custom features not available in this client library. The content in this map is not serialized under this field's {@code @SerializedName} value. Instead, each key/value pair is serialized as if the key is a root-level field (serialized) name in this param object. Effectively, this map is flattened to its parent instance.
    */
   @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
   Map<String, Object> extraParams;
 
-  /** The {@code funding_type} to get the instructions for. */
+  /**
+   * The {@code funding_type} to get the instructions for.
+   */
   @SerializedName("funding_type")
   FundingType fundingType;
 
@@ -51,11 +54,9 @@ public class CustomerCreateFundingInstructionsParams extends ApiRequestParams {
     this.extraParams = extraParams;
     this.fundingType = fundingType;
   }
-
   public static Builder builder() {
     return new Builder();
   }
-
   public static class Builder {
     private BankTransfer bankTransfer;
 
@@ -67,22 +68,29 @@ public class CustomerCreateFundingInstructionsParams extends ApiRequestParams {
 
     private FundingType fundingType;
 
-    /** Finalize and obtain parameter instance from this builder. */
+    /**
+     * Finalize and obtain parameter instance from this builder.
+     */
     public CustomerCreateFundingInstructionsParams build() {
       return new CustomerCreateFundingInstructionsParams(
-          this.bankTransfer, this.currency, this.expand, this.extraParams, this.fundingType);
+        this.bankTransfer,
+        this.currency,
+        this.expand,
+        this.extraParams,
+        this.fundingType
+      );
     }
 
-    /** Additional parameters for {@code bank_transfer} funding types. */
+    /**
+     * Additional parameters for {@code bank_transfer} funding types.
+     */
     public Builder setBankTransfer(BankTransfer bankTransfer) {
       this.bankTransfer = bankTransfer;
       return this;
     }
 
     /**
-     * Three-letter <a href="https://www.iso.org/iso-4217-currency-codes.html">ISO currency
-     * code</a>, in lowercase. Must be a <a href="https://stripe.com/docs/currencies">supported
-     * currency</a>.
+     * Three-letter <a href="https://www.iso.org/iso-4217-currency-codes.html">ISO currency code</a>, in lowercase. Must be a <a href="https://stripe.com/docs/currencies">supported currency</a>.
      */
     public Builder setCurrency(String currency) {
       this.currency = currency;
@@ -90,9 +98,7 @@ public class CustomerCreateFundingInstructionsParams extends ApiRequestParams {
     }
 
     /**
-     * Add an element to `expand` list. A list is initialized for the first `add/addAll` call, and
-     * subsequent calls adds additional elements to the original list. See {@link
-     * CustomerCreateFundingInstructionsParams#expand} for the field documentation.
+     * Add an element to `expand` list. A list is initialized for the first `add/addAll` call, and subsequent calls adds additional elements to the original list. See {@link CustomerCreateFundingInstructionsParams#expand} for the field documentation.
      */
     public Builder addExpand(String element) {
       if (this.expand == null) {
@@ -103,9 +109,7 @@ public class CustomerCreateFundingInstructionsParams extends ApiRequestParams {
     }
 
     /**
-     * Add all elements to `expand` list. A list is initialized for the first `add/addAll` call, and
-     * subsequent calls adds additional elements to the original list. See {@link
-     * CustomerCreateFundingInstructionsParams#expand} for the field documentation.
+     * Add all elements to `expand` list. A list is initialized for the first `add/addAll` call, and subsequent calls adds additional elements to the original list. See {@link CustomerCreateFundingInstructionsParams#expand} for the field documentation.
      */
     public Builder addAllExpand(List<String> elements) {
       if (this.expand == null) {
@@ -116,9 +120,7 @@ public class CustomerCreateFundingInstructionsParams extends ApiRequestParams {
     }
 
     /**
-     * Add a key/value pair to `extraParams` map. A map is initialized for the first `put/putAll`
-     * call, and subsequent calls add additional key/value pairs to the original map. See {@link
-     * CustomerCreateFundingInstructionsParams#extraParams} for the field documentation.
+     * Add a key/value pair to `extraParams` map. A map is initialized for the first `put/putAll` call, and subsequent calls add additional key/value pairs to the original map. See {@link CustomerCreateFundingInstructionsParams#extraParams} for the field documentation.
      */
     public Builder putExtraParam(String key, Object value) {
       if (this.extraParams == null) {
@@ -129,9 +131,7 @@ public class CustomerCreateFundingInstructionsParams extends ApiRequestParams {
     }
 
     /**
-     * Add all map key/value pairs to `extraParams` map. A map is initialized for the first
-     * `put/putAll` call, and subsequent calls add additional key/value pairs to the original map.
-     * See {@link CustomerCreateFundingInstructionsParams#extraParams} for the field documentation.
+     * Add all map key/value pairs to `extraParams` map. A map is initialized for the first `put/putAll` call, and subsequent calls add additional key/value pairs to the original map. See {@link CustomerCreateFundingInstructionsParams#extraParams} for the field documentation.
      */
     public Builder putAllExtraParam(Map<String, Object> map) {
       if (this.extraParams == null) {
@@ -141,39 +141,39 @@ public class CustomerCreateFundingInstructionsParams extends ApiRequestParams {
       return this;
     }
 
-    /** The {@code funding_type} to get the instructions for. */
+    /**
+     * The {@code funding_type} to get the instructions for.
+     */
     public Builder setFundingType(FundingType fundingType) {
       this.fundingType = fundingType;
       return this;
     }
   }
-
   @Getter
   public static class BankTransfer {
-    /** Configuration for eu_bank_transfer funding type. */
+    /**
+     * Configuration for eu_bank_transfer funding type.
+     */
     @SerializedName("eu_bank_transfer")
     EuBankTransfer euBankTransfer;
 
     /**
-     * Map of extra parameters for custom features not available in this client library. The content
-     * in this map is not serialized under this field's {@code @SerializedName} value. Instead, each
-     * key/value pair is serialized as if the key is a root-level field (serialized) name in this
-     * param object. Effectively, this map is flattened to its parent instance.
+     * Map of extra parameters for custom features not available in this client library. The content in this map is not serialized under this field's {@code @SerializedName} value. Instead, each key/value pair is serialized as if the key is a root-level field (serialized) name in this param object. Effectively, this map is flattened to its parent instance.
      */
     @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
     Map<String, Object> extraParams;
 
     /**
-     * List of address types that should be returned in the financial_addresses response. If not
-     * specified, all valid types will be returned.
+     * List of address types that should be returned in the financial_addresses response. If not specified, all valid types will be returned.
      *
-     * <p>Permitted values include: {@code sort_code}, {@code zengin}, {@code iban}, or {@code
-     * spei}.
+     * <p>Permitted values include: {@code sort_code}, {@code zengin}, {@code iban}, or {@code spei}.
      */
     @SerializedName("requested_address_types")
     List<RequestedAddressType> requestedAddressTypes;
 
-    /** The type of the {@code bank_transfer}. */
+    /**
+     * The type of the {@code bank_transfer}.
+     */
     @SerializedName("type")
     Type type;
 
@@ -187,11 +187,9 @@ public class CustomerCreateFundingInstructionsParams extends ApiRequestParams {
       this.requestedAddressTypes = requestedAddressTypes;
       this.type = type;
     }
-
     public static Builder builder() {
       return new Builder();
     }
-
     public static class Builder {
       private EuBankTransfer euBankTransfer;
 
@@ -201,23 +199,28 @@ public class CustomerCreateFundingInstructionsParams extends ApiRequestParams {
 
       private Type type;
 
-      /** Finalize and obtain parameter instance from this builder. */
+      /**
+       * Finalize and obtain parameter instance from this builder.
+       */
       public BankTransfer build() {
         return new BankTransfer(
-            this.euBankTransfer, this.extraParams, this.requestedAddressTypes, this.type);
+          this.euBankTransfer,
+          this.extraParams,
+          this.requestedAddressTypes,
+          this.type
+        );
       }
 
-      /** Configuration for eu_bank_transfer funding type. */
+      /**
+       * Configuration for eu_bank_transfer funding type.
+       */
       public Builder setEuBankTransfer(EuBankTransfer euBankTransfer) {
         this.euBankTransfer = euBankTransfer;
         return this;
       }
 
       /**
-       * Add a key/value pair to `extraParams` map. A map is initialized for the first `put/putAll`
-       * call, and subsequent calls add additional key/value pairs to the original map. See {@link
-       * CustomerCreateFundingInstructionsParams.BankTransfer#extraParams} for the field
-       * documentation.
+       * Add a key/value pair to `extraParams` map. A map is initialized for the first `put/putAll` call, and subsequent calls add additional key/value pairs to the original map. See {@link CustomerCreateFundingInstructionsParams.BankTransfer#extraParams} for the field documentation.
        */
       public Builder putExtraParam(String key, Object value) {
         if (this.extraParams == null) {
@@ -228,10 +231,7 @@ public class CustomerCreateFundingInstructionsParams extends ApiRequestParams {
       }
 
       /**
-       * Add all map key/value pairs to `extraParams` map. A map is initialized for the first
-       * `put/putAll` call, and subsequent calls add additional key/value pairs to the original map.
-       * See {@link CustomerCreateFundingInstructionsParams.BankTransfer#extraParams} for the field
-       * documentation.
+       * Add all map key/value pairs to `extraParams` map. A map is initialized for the first `put/putAll` call, and subsequent calls add additional key/value pairs to the original map. See {@link CustomerCreateFundingInstructionsParams.BankTransfer#extraParams} for the field documentation.
        */
       public Builder putAllExtraParam(Map<String, Object> map) {
         if (this.extraParams == null) {
@@ -242,10 +242,7 @@ public class CustomerCreateFundingInstructionsParams extends ApiRequestParams {
       }
 
       /**
-       * Add an element to `requestedAddressTypes` list. A list is initialized for the first
-       * `add/addAll` call, and subsequent calls adds additional elements to the original list. See
-       * {@link CustomerCreateFundingInstructionsParams.BankTransfer#requestedAddressTypes} for the
-       * field documentation.
+       * Add an element to `requestedAddressTypes` list. A list is initialized for the first `add/addAll` call, and subsequent calls adds additional elements to the original list. See {@link CustomerCreateFundingInstructionsParams.BankTransfer#requestedAddressTypes} for the field documentation.
        */
       public Builder addRequestedAddressType(RequestedAddressType element) {
         if (this.requestedAddressTypes == null) {
@@ -256,10 +253,7 @@ public class CustomerCreateFundingInstructionsParams extends ApiRequestParams {
       }
 
       /**
-       * Add all elements to `requestedAddressTypes` list. A list is initialized for the first
-       * `add/addAll` call, and subsequent calls adds additional elements to the original list. See
-       * {@link CustomerCreateFundingInstructionsParams.BankTransfer#requestedAddressTypes} for the
-       * field documentation.
+       * Add all elements to `requestedAddressTypes` list. A list is initialized for the first `add/addAll` call, and subsequent calls adds additional elements to the original list. See {@link CustomerCreateFundingInstructionsParams.BankTransfer#requestedAddressTypes} for the field documentation.
        */
       public Builder addAllRequestedAddressType(List<RequestedAddressType> elements) {
         if (this.requestedAddressTypes == null) {
@@ -269,27 +263,24 @@ public class CustomerCreateFundingInstructionsParams extends ApiRequestParams {
         return this;
       }
 
-      /** The type of the {@code bank_transfer}. */
+      /**
+       * The type of the {@code bank_transfer}.
+       */
       public Builder setType(Type type) {
         this.type = type;
         return this;
       }
     }
-
     @Getter
     public static class EuBankTransfer {
       /**
-       * The desired country code of the bank account information. Permitted values include: {@code
-       * DE}, {@code ES}, {@code FR}, {@code IE}, or {@code NL}.
+       * The desired country code of the bank account information. Permitted values include: {@code DE}, {@code ES}, {@code FR}, {@code IE}, or {@code NL}.
        */
       @SerializedName("country")
       String country;
 
       /**
-       * Map of extra parameters for custom features not available in this client library. The
-       * content in this map is not serialized under this field's {@code @SerializedName} value.
-       * Instead, each key/value pair is serialized as if the key is a root-level field (serialized)
-       * name in this param object. Effectively, this map is flattened to its parent instance.
+       * Map of extra parameters for custom features not available in this client library. The content in this map is not serialized under this field's {@code @SerializedName} value. Instead, each key/value pair is serialized as if the key is a root-level field (serialized) name in this param object. Effectively, this map is flattened to its parent instance.
        */
       @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
       Map<String, Object> extraParams;
@@ -298,24 +289,23 @@ public class CustomerCreateFundingInstructionsParams extends ApiRequestParams {
         this.country = country;
         this.extraParams = extraParams;
       }
-
       public static Builder builder() {
         return new Builder();
       }
-
       public static class Builder {
         private String country;
 
         private Map<String, Object> extraParams;
 
-        /** Finalize and obtain parameter instance from this builder. */
+        /**
+         * Finalize and obtain parameter instance from this builder.
+         */
         public EuBankTransfer build() {
           return new EuBankTransfer(this.country, this.extraParams);
         }
 
         /**
-         * The desired country code of the bank account information. Permitted values include:
-         * {@code DE}, {@code ES}, {@code FR}, {@code IE}, or {@code NL}.
+         * The desired country code of the bank account information. Permitted values include: {@code DE}, {@code ES}, {@code FR}, {@code IE}, or {@code NL}.
          */
         public Builder setCountry(String country) {
           this.country = country;
@@ -323,11 +313,7 @@ public class CustomerCreateFundingInstructionsParams extends ApiRequestParams {
         }
 
         /**
-         * Add a key/value pair to `extraParams` map. A map is initialized for the first
-         * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
-         * map. See {@link
-         * CustomerCreateFundingInstructionsParams.BankTransfer.EuBankTransfer#extraParams} for the
-         * field documentation.
+         * Add a key/value pair to `extraParams` map. A map is initialized for the first `put/putAll` call, and subsequent calls add additional key/value pairs to the original map. See {@link CustomerCreateFundingInstructionsParams.BankTransfer.EuBankTransfer#extraParams} for the field documentation.
          */
         public Builder putExtraParam(String key, Object value) {
           if (this.extraParams == null) {
@@ -338,11 +324,7 @@ public class CustomerCreateFundingInstructionsParams extends ApiRequestParams {
         }
 
         /**
-         * Add all map key/value pairs to `extraParams` map. A map is initialized for the first
-         * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
-         * map. See {@link
-         * CustomerCreateFundingInstructionsParams.BankTransfer.EuBankTransfer#extraParams} for the
-         * field documentation.
+         * Add all map key/value pairs to `extraParams` map. A map is initialized for the first `put/putAll` call, and subsequent calls add additional key/value pairs to the original map. See {@link CustomerCreateFundingInstructionsParams.BankTransfer.EuBankTransfer#extraParams} for the field documentation.
          */
         public Builder putAllExtraParam(Map<String, Object> map) {
           if (this.extraParams == null) {
@@ -353,7 +335,6 @@ public class CustomerCreateFundingInstructionsParams extends ApiRequestParams {
         }
       }
     }
-
     public enum RequestedAddressType implements ApiRequestParams.EnumParam {
       @SerializedName("iban")
       IBAN("iban"),
@@ -366,15 +347,12 @@ public class CustomerCreateFundingInstructionsParams extends ApiRequestParams {
 
       @SerializedName("zengin")
       ZENGIN("zengin");
-
       @Getter(onMethod_ = {@Override})
       private final String value;
-
       RequestedAddressType(String value) {
         this.value = value;
       }
     }
-
     public enum Type implements ApiRequestParams.EnumParam {
       @SerializedName("eu_bank_transfer")
       EU_BANK_TRANSFER("eu_bank_transfer"),
@@ -387,23 +365,18 @@ public class CustomerCreateFundingInstructionsParams extends ApiRequestParams {
 
       @SerializedName("mx_bank_transfer")
       MX_BANK_TRANSFER("mx_bank_transfer");
-
       @Getter(onMethod_ = {@Override})
       private final String value;
-
       Type(String value) {
         this.value = value;
       }
     }
   }
-
   public enum FundingType implements ApiRequestParams.EnumParam {
     @SerializedName("bank_transfer")
     BANK_TRANSFER("bank_transfer");
-
     @Getter(onMethod_ = {@Override})
     private final String value;
-
     FundingType(String value) {
       this.value = value;
     }

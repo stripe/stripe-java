@@ -23,39 +23,53 @@ import lombok.Setter;
 @Setter
 @EqualsAndHashCode(callSuper = false)
 public class ReceivedCredit extends ApiResource implements HasId {
-  /** Amount (in cents) transferred. */
+  /**
+   * Amount (in cents) transferred.
+   */
   @SerializedName("amount")
   Long amount;
 
-  /** Time at which the object was created. Measured in seconds since the Unix epoch. */
+  /**
+   * Time at which the object was created. Measured in seconds since the Unix epoch.
+   */
   @SerializedName("created")
   Long created;
 
   /**
-   * Three-letter <a href="https://www.iso.org/iso-4217-currency-codes.html">ISO currency code</a>,
-   * in lowercase. Must be a <a href="https://stripe.com/docs/currencies">supported currency</a>.
+   * Three-letter <a href="https://www.iso.org/iso-4217-currency-codes.html">ISO currency code</a>, in lowercase. Must be a <a href="https://stripe.com/docs/currencies">supported currency</a>.
    */
   @SerializedName("currency")
   String currency;
 
-  /** An arbitrary string attached to the object. Often useful for displaying to users. */
+  /**
+   * An arbitrary string attached to the object. Often useful for displaying to users.
+   */
   @SerializedName("description")
   String description;
 
   /**
-   * Reason for the failure. A ReceivedCredit might fail because the receiving FinancialAccount is
-   * closed or frozen.
+   * Reason for the failure. A ReceivedCredit might fail because the receiving FinancialAccount is closed or frozen.
    *
    * <p>One of {@code account_closed}, {@code account_frozen}, or {@code other}.
    */
   @SerializedName("failure_code")
   String failureCode;
 
-  /** The FinancialAccount that received the funds. */
+  /**
+   * The FinancialAccount that received the funds.
+   */
   @SerializedName("financial_account")
   String financialAccount;
 
-  /** Unique identifier for the object. */
+  /**
+   * A <a href="https://stripe.com/docs/treasury/moving-money/regulatory-receipts">hosted transaction receipt</a> URL that is provided when money movement is considered regulated under Stripe's money transmission licenses.
+   */
+  @SerializedName("hosted_regulatory_receipt_url")
+  String hostedRegulatoryReceiptUrl;
+
+  /**
+   * Unique identifier for the object.
+   */
   @Getter(onMethod_ = {@Override})
   @SerializedName("id")
   String id;
@@ -67,8 +81,7 @@ public class ReceivedCredit extends ApiResource implements HasId {
   LinkedFlows linkedFlows;
 
   /**
-   * Has the value {@code true} if the object exists in live mode or the value {@code false} if the
-   * object exists in test mode.
+   * Has the value {@code true} if the object exists in live mode or the value {@code false} if the object exists in test mode.
    */
   @SerializedName("livemode")
   Boolean livemode;
@@ -89,27 +102,31 @@ public class ReceivedCredit extends ApiResource implements HasId {
   @SerializedName("object")
   String object;
 
-  /** Details describing when a ReceivedCredit may be reversed. */
+  /**
+   * Details describing when a ReceivedCredit may be reversed.
+   */
   @SerializedName("reversal_details")
   ReversalDetails reversalDetails;
 
   /**
-   * Status of the ReceivedCredit. ReceivedCredits are created either {@code succeeded} (approved)
-   * or {@code failed} (declined). If a ReceivedCredit is declined, the failure reason can be found
-   * in the {@code failure_code} field.
+   * Status of the ReceivedCredit. ReceivedCredits are created either {@code succeeded} (approved) or {@code failed} (declined). If a ReceivedCredit is declined, the failure reason can be found in the {@code failure_code} field.
    *
    * <p>One of {@code failed}, or {@code succeeded}.
    */
   @SerializedName("status")
   String status;
 
-  /** The Transaction associated with this object. */
+  /**
+   * The Transaction associated with this object.
+   */
   @SerializedName("transaction")
   @Getter(lombok.AccessLevel.NONE)
   @Setter(lombok.AccessLevel.NONE)
   ExpandableField<Transaction> transaction;
 
-  /** Get ID of expandable {@code transaction} object. */
+  /**
+   * Get ID of expandable {@code transaction} object.
+   */
   public String getTransaction() {
     return (this.transaction != null) ? this.transaction.getId() : null;
   }
@@ -118,7 +135,9 @@ public class ReceivedCredit extends ApiResource implements HasId {
     this.transaction = ApiResource.setExpandableFieldId(id, this.transaction);
   }
 
-  /** Get expanded {@code transaction}. */
+  /**
+   * Get expanded {@code transaction}.
+   */
   public Transaction getTransactionObject() {
     return (this.transaction != null) ? this.transaction.getExpanded() : null;
   }
@@ -127,76 +146,97 @@ public class ReceivedCredit extends ApiResource implements HasId {
     this.transaction = new ExpandableField<Transaction>(expandableObject.getId(), expandableObject);
   }
 
-  /** Returns a list of ReceivedCredits. */
+  /**
+   * <p>Returns a list of ReceivedCredits.</p>
+   */
   public static ReceivedCreditCollection list(Map<String, Object> params) throws StripeException {
     return list(params, (RequestOptions) null);
   }
 
-  /** Returns a list of ReceivedCredits. */
-  public static ReceivedCreditCollection list(Map<String, Object> params, RequestOptions options)
-      throws StripeException {
-    String url = String.format("%s%s", Stripe.getApiBase(), "/v1/treasury/received_credits");
-    return ApiResource.requestCollection(url, params, ReceivedCreditCollection.class, options);
-  }
-
-  /** Returns a list of ReceivedCredits. */
-  public static ReceivedCreditCollection list(ReceivedCreditListParams params)
-      throws StripeException {
-    return list(params, (RequestOptions) null);
-  }
-
-  /** Returns a list of ReceivedCredits. */
+  /**
+   * <p>Returns a list of ReceivedCredits.</p>
+   */
   public static ReceivedCreditCollection list(
-      ReceivedCreditListParams params, RequestOptions options) throws StripeException {
+      Map<String, Object> params,
+      RequestOptions options) throws StripeException {
     String url = String.format("%s%s", Stripe.getApiBase(), "/v1/treasury/received_credits");
     return ApiResource.requestCollection(url, params, ReceivedCreditCollection.class, options);
   }
 
   /**
-   * Retrieves the details of an existing ReceivedCredit by passing the unique ReceivedCredit ID
-   * from the ReceivedCredit list.
+   * <p>Returns a list of ReceivedCredits.</p>
+   */
+  public static ReceivedCreditCollection list(
+      ReceivedCreditListParams params) throws StripeException {
+    return list(params, (RequestOptions) null);
+  }
+
+  /**
+   * <p>Returns a list of ReceivedCredits.</p>
+   */
+  public static ReceivedCreditCollection list(
+      ReceivedCreditListParams params,
+      RequestOptions options) throws StripeException {
+    String url = String.format("%s%s", Stripe.getApiBase(), "/v1/treasury/received_credits");
+    return ApiResource.requestCollection(url, params, ReceivedCreditCollection.class, options);
+  }
+
+  /**
+   * <p>Retrieves the details of an existing ReceivedCredit by passing the unique ReceivedCredit ID from the ReceivedCredit list.</p>
    */
   public static ReceivedCredit retrieve(String id) throws StripeException {
     return retrieve(id, (Map<String, Object>) null, (RequestOptions) null);
   }
 
   /**
-   * Retrieves the details of an existing ReceivedCredit by passing the unique ReceivedCredit ID
-   * from the ReceivedCredit list.
+   * <p>Retrieves the details of an existing ReceivedCredit by passing the unique ReceivedCredit ID from the ReceivedCredit list.</p>
    */
   public static ReceivedCredit retrieve(String id, RequestOptions options) throws StripeException {
     return retrieve(id, (Map<String, Object>) null, options);
   }
 
   /**
-   * Retrieves the details of an existing ReceivedCredit by passing the unique ReceivedCredit ID
-   * from the ReceivedCredit list.
+   * <p>Retrieves the details of an existing ReceivedCredit by passing the unique ReceivedCredit ID from the ReceivedCredit list.</p>
    */
   public static ReceivedCredit retrieve(
-      String id, Map<String, Object> params, RequestOptions options) throws StripeException {
+      String id,
+      Map<String, Object> params,
+      RequestOptions options) throws StripeException {
     String url =
-        String.format(
-            "%s%s",
-            Stripe.getApiBase(),
-            String.format("/v1/treasury/received_credits/%s", ApiResource.urlEncodeId(id)));
+      String.format(
+        "%s%s",
+        Stripe.getApiBase(),
+        String.format("/v1/treasury/received_credits/%s", ApiResource.urlEncodeId(id))
+      );
     return ApiResource.request(
-        ApiResource.RequestMethod.GET, url, params, ReceivedCredit.class, options);
+      ApiResource.RequestMethod.GET,
+      url,
+      params,
+      ReceivedCredit.class,
+      options
+    );
   }
 
   /**
-   * Retrieves the details of an existing ReceivedCredit by passing the unique ReceivedCredit ID
-   * from the ReceivedCredit list.
+   * <p>Retrieves the details of an existing ReceivedCredit by passing the unique ReceivedCredit ID from the ReceivedCredit list.</p>
    */
   public static ReceivedCredit retrieve(
-      String id, ReceivedCreditRetrieveParams params, RequestOptions options)
-      throws StripeException {
+      String id,
+      ReceivedCreditRetrieveParams params,
+      RequestOptions options) throws StripeException {
     String url =
-        String.format(
-            "%s%s",
-            Stripe.getApiBase(),
-            String.format("/v1/treasury/received_credits/%s", ApiResource.urlEncodeId(id)));
+      String.format(
+        "%s%s",
+        Stripe.getApiBase(),
+        String.format("/v1/treasury/received_credits/%s", ApiResource.urlEncodeId(id))
+      );
     return ApiResource.request(
-        ApiResource.RequestMethod.GET, url, params, ReceivedCredit.class, options);
+      ApiResource.RequestMethod.GET,
+      url,
+      params,
+      ReceivedCredit.class,
+      options
+    );
   }
 
   @Getter
@@ -218,18 +258,15 @@ public class ReceivedCredit extends ApiResource implements HasId {
     FinancialAccount financialAccount;
 
     /**
-     * Set when {@code type} is {@code issuing_card}. This is an <a
-     * href="https://stripe.com/docs/api#issuing_cards">Issuing Card</a> ID.
+     * Set when {@code type} is {@code issuing_card}. This is an <a href="https://stripe.com/docs/api#issuing_cards">Issuing Card</a> ID.
      */
     @SerializedName("issuing_card")
     String issuingCard;
 
     /**
-     * Polymorphic type matching the originating money movement's source. This can be an external
-     * account, a Stripe balance, or a FinancialAccount.
+     * Polymorphic type matching the originating money movement's source. This can be an external account, a Stripe balance, or a FinancialAccount.
      *
-     * <p>One of {@code balance}, {@code financial_account}, {@code issuing_card}, {@code stripe},
-     * or {@code us_bank_account}.
+     * <p>One of {@code balance}, {@code financial_account}, {@code issuing_card}, {@code stripe}, or {@code us_bank_account}.
      */
     @SerializedName("type")
     String type;
@@ -244,11 +281,15 @@ public class ReceivedCredit extends ApiResource implements HasId {
       @SerializedName("address")
       Address address;
 
-      /** Email address. */
+      /**
+       * Email address.
+       */
       @SerializedName("email")
       String email;
 
-      /** Full name. */
+      /**
+       * Full name.
+       */
       @SerializedName("name")
       String name;
     }
@@ -257,14 +298,15 @@ public class ReceivedCredit extends ApiResource implements HasId {
     @Setter
     @EqualsAndHashCode(callSuper = false)
     public static class FinancialAccount extends StripeObject implements HasId {
-      /** The FinancialAccount ID. */
+      /**
+       * The FinancialAccount ID.
+       */
       @Getter(onMethod_ = {@Override})
       @SerializedName("id")
       String id;
 
       /**
-       * The rails the ReceivedCredit was sent over. A FinancialAccount can only send funds over
-       * {@code stripe}.
+       * The rails the ReceivedCredit was sent over. A FinancialAccount can only send funds over {@code stripe}.
        *
        * <p>Equal to {@code stripe}.
        */
@@ -276,15 +318,21 @@ public class ReceivedCredit extends ApiResource implements HasId {
     @Setter
     @EqualsAndHashCode(callSuper = false)
     public static class UsBankAccount extends StripeObject {
-      /** Bank name. */
+      /**
+       * Bank name.
+       */
       @SerializedName("bank_name")
       String bankName;
 
-      /** The last four digits of the bank account number. */
+      /**
+       * The last four digits of the bank account number.
+       */
       @SerializedName("last4")
       String last4;
 
-      /** The routing number for the bank account. */
+      /**
+       * The routing number for the bank account.
+       */
       @SerializedName("routing_number")
       String routingNumber;
     }
@@ -294,33 +342,33 @@ public class ReceivedCredit extends ApiResource implements HasId {
   @Setter
   @EqualsAndHashCode(callSuper = false)
   public static class LinkedFlows extends StripeObject {
-    /** The CreditReversal created as a result of this ReceivedCredit being reversed. */
+    /**
+     * The CreditReversal created as a result of this ReceivedCredit being reversed.
+     */
     @SerializedName("credit_reversal")
     String creditReversal;
 
     /**
-     * Set if the ReceivedCredit was created due to an <a
-     * href="https://stripe.com/docs/api#issuing_authorizations">Issuing Authorization</a> object.
+     * Set if the ReceivedCredit was created due to an <a href="https://stripe.com/docs/api#issuing_authorizations">Issuing Authorization</a> object.
      */
     @SerializedName("issuing_authorization")
     String issuingAuthorization;
 
     /**
-     * Set if the ReceivedCredit is also viewable as an <a
-     * href="https://stripe.com/docs/api#issuing_transactions">Issuing transaction</a> object.
+     * Set if the ReceivedCredit is also viewable as an <a href="https://stripe.com/docs/api#issuing_transactions">Issuing transaction</a> object.
      */
     @SerializedName("issuing_transaction")
     String issuingTransaction;
 
     /**
-     * ID of the source flow. Set if {@code network} is {@code stripe} and the source flow is
-     * visible to the merchant. Examples of source flows include OutboundPayments, payouts, or
-     * CreditReversals.
+     * ID of the source flow. Set if {@code network} is {@code stripe} and the source flow is visible to the merchant. Examples of source flows include OutboundPayments, payouts, or CreditReversals.
      */
     @SerializedName("source_flow")
     String sourceFlow;
 
-    /** The expandable object of the source flow. */
+    /**
+     * The expandable object of the source flow.
+     */
     @SerializedName("source_flow_details")
     SourceFlowDetails sourceFlowDetails;
 
@@ -335,34 +383,21 @@ public class ReceivedCredit extends ApiResource implements HasId {
     @EqualsAndHashCode(callSuper = false)
     public static class SourceFlowDetails extends StripeObject {
       /**
-       * You can reverse some <a
-       * href="https://stripe.com/docs/api#received_credits">ReceivedCredits</a> depending on their
-       * network and source flow. Reversing a ReceivedCredit leads to the creation of a new object
-       * known as a CreditReversal.
+       * You can reverse some <a href="https://stripe.com/docs/api#received_credits">ReceivedCredits</a> depending on their network and source flow. Reversing a ReceivedCredit leads to the creation of a new object known as a CreditReversal.
        */
       @SerializedName("credit_reversal")
       CreditReversal creditReversal;
 
       /**
-       * Use OutboundPayments to send funds to another party's external bank account or <a
-       * href="https://stripe.com/docs/api#financial_accounts">FinancialAccount</a>. To send money
-       * to an account belonging to the same user, use an <a
-       * href="https://stripe.com/docs/api#outbound_transfers">OutboundTransfer</a>.
+       * Use OutboundPayments to send funds to another party's external bank account or <a href="https://stripe.com/docs/api#financial_accounts">FinancialAccount</a>. To send money to an account belonging to the same user, use an <a href="https://stripe.com/docs/api#outbound_transfers">OutboundTransfer</a>.
        *
-       * <p>Simulate OutboundPayment state changes with the {@code
-       * /v1/test_helpers/treasury/outbound_payments} endpoints. These methods can only be called on
-       * test mode objects.
+       * <p>Simulate OutboundPayment state changes with the {@code /v1/test_helpers/treasury/outbound_payments} endpoints. These methods can only be called on test mode objects.
        */
       @SerializedName("outbound_payment")
       OutboundPayment outboundPayment;
 
       /**
-       * A {@code Payout} object is created when you receive funds from Stripe, or when you initiate
-       * a payout to either a bank account or debit card of a <a
-       * href="https://stripe.com/docs/connect/bank-debit-card-payouts">connected Stripe
-       * account</a>. You can retrieve individual payouts, as well as list all payouts. Payouts are
-       * made on <a href="https://stripe.com/docs/connect/manage-payout-schedule">varying
-       * schedules</a>, depending on your country and industry.
+       * A {@code Payout} object is created when you receive funds from Stripe, or when you initiate a payout to either a bank account or debit card of a <a href="https://stripe.com/docs/connect/bank-debit-card-payouts">connected Stripe account</a>. You can retrieve individual payouts, as well as list all payouts. Payouts are made on <a href="https://stripe.com/docs/connect/manage-payout-schedule">varying schedules</a>, depending on your country and industry.
        *
        * <p>Related guide: <a href="https://stripe.com/docs/payouts">Receiving Payouts</a>.
        */
@@ -372,8 +407,7 @@ public class ReceivedCredit extends ApiResource implements HasId {
       /**
        * The type of the source flow that originated the ReceivedCredit.
        *
-       * <p>One of {@code credit_reversal}, {@code other}, {@code outbound_payment}, or {@code
-       * payout}.
+       * <p>One of {@code credit_reversal}, {@code other}, {@code outbound_payment}, or {@code payout}.
        */
       @SerializedName("type")
       String type;
@@ -384,15 +418,16 @@ public class ReceivedCredit extends ApiResource implements HasId {
   @Setter
   @EqualsAndHashCode(callSuper = false)
   public static class ReversalDetails extends StripeObject {
-    /** Time before which a ReceivedCredit can be reversed. */
+    /**
+     * Time before which a ReceivedCredit can be reversed.
+     */
     @SerializedName("deadline")
     Long deadline;
 
     /**
      * Set if a ReceivedCredit cannot be reversed.
      *
-     * <p>One of {@code already_reversed}, {@code deadline_passed}, {@code network_restricted},
-     * {@code other}, or {@code source_flow_restricted}.
+     * <p>One of {@code already_reversed}, {@code deadline_passed}, {@code network_restricted}, {@code other}, or {@code source_flow_restricted}.
      */
     @SerializedName("restricted_reason")
     String restrictedReason;
@@ -402,7 +437,9 @@ public class ReceivedCredit extends ApiResource implements HasId {
   @Setter
   @EqualsAndHashCode(callSuper = false)
   public static class StatusTransitions extends StripeObject {
-    /** Timestamp describing when the CreditReversal changed status to {@code posted}. */
+    /**
+     * Timestamp describing when the CreditReversal changed status to {@code posted}.
+     */
     @SerializedName("posted_at")
     Long postedAt;
   }
@@ -411,43 +448,51 @@ public class ReceivedCredit extends ApiResource implements HasId {
     private TestHelpers() {}
 
     /**
-     * Use this endpoint to simulate a test mode ReceivedCredit initiated by a third party. In live
-     * mode, you can’t directly create ReceivedCredits initiated by third parties.
+     * <p>Use this endpoint to simulate a test mode ReceivedCredit initiated by a third party. In live mode, you can’t directly create ReceivedCredits initiated by third parties.</p>
      */
     public static ReceivedCredit create(Map<String, Object> params) throws StripeException {
       return create(params, (RequestOptions) null);
     }
 
     /**
-     * Use this endpoint to simulate a test mode ReceivedCredit initiated by a third party. In live
-     * mode, you can’t directly create ReceivedCredits initiated by third parties.
+     * <p>Use this endpoint to simulate a test mode ReceivedCredit initiated by a third party. In live mode, you can’t directly create ReceivedCredits initiated by third parties.</p>
      */
-    public static ReceivedCredit create(Map<String, Object> params, RequestOptions options)
-        throws StripeException {
+    public static ReceivedCredit create(
+        Map<String, Object> params,
+        RequestOptions options) throws StripeException {
       String url =
-          String.format("%s%s", Stripe.getApiBase(), "/v1/test_helpers/treasury/received_credits");
+        String.format("%s%s", Stripe.getApiBase(), "/v1/test_helpers/treasury/received_credits");
       return ApiResource.request(
-          ApiResource.RequestMethod.POST, url, params, ReceivedCredit.class, options);
+        ApiResource.RequestMethod.POST,
+        url,
+        params,
+        ReceivedCredit.class,
+        options
+      );
     }
 
     /**
-     * Use this endpoint to simulate a test mode ReceivedCredit initiated by a third party. In live
-     * mode, you can’t directly create ReceivedCredits initiated by third parties.
+     * <p>Use this endpoint to simulate a test mode ReceivedCredit initiated by a third party. In live mode, you can’t directly create ReceivedCredits initiated by third parties.</p>
      */
     public static ReceivedCredit create(ReceivedCreditCreateParams params) throws StripeException {
       return create(params, (RequestOptions) null);
     }
 
     /**
-     * Use this endpoint to simulate a test mode ReceivedCredit initiated by a third party. In live
-     * mode, you can’t directly create ReceivedCredits initiated by third parties.
+     * <p>Use this endpoint to simulate a test mode ReceivedCredit initiated by a third party. In live mode, you can’t directly create ReceivedCredits initiated by third parties.</p>
      */
-    public static ReceivedCredit create(ReceivedCreditCreateParams params, RequestOptions options)
-        throws StripeException {
+    public static ReceivedCredit create(
+        ReceivedCreditCreateParams params,
+        RequestOptions options) throws StripeException {
       String url =
-          String.format("%s%s", Stripe.getApiBase(), "/v1/test_helpers/treasury/received_credits");
+        String.format("%s%s", Stripe.getApiBase(), "/v1/test_helpers/treasury/received_credits");
       return ApiResource.request(
-          ApiResource.RequestMethod.POST, url, params, ReceivedCredit.class, options);
+        ApiResource.RequestMethod.POST,
+        url,
+        params,
+        ReceivedCredit.class,
+        options
+      );
     }
   }
 }

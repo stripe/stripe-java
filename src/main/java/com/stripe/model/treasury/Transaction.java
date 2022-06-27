@@ -19,66 +19,77 @@ import lombok.Setter;
 @Setter
 @EqualsAndHashCode(callSuper = false)
 public class Transaction extends ApiResource implements HasId {
-  /** Amount (in cents) transferred. */
+  /**
+   * Amount (in cents) transferred.
+   */
   @SerializedName("amount")
   Long amount;
 
-  /** Change to a FinancialAccount's balance. */
+  /**
+   * Change to a FinancialAccount's balance.
+   */
   @SerializedName("balance_impact")
   BalanceImpact balanceImpact;
 
-  /** Time at which the object was created. Measured in seconds since the Unix epoch. */
+  /**
+   * Time at which the object was created. Measured in seconds since the Unix epoch.
+   */
   @SerializedName("created")
   Long created;
 
   /**
-   * Three-letter <a href="https://www.iso.org/iso-4217-currency-codes.html">ISO currency code</a>,
-   * in lowercase. Must be a <a href="https://stripe.com/docs/currencies">supported currency</a>.
+   * Three-letter <a href="https://www.iso.org/iso-4217-currency-codes.html">ISO currency code</a>, in lowercase. Must be a <a href="https://stripe.com/docs/currencies">supported currency</a>.
    */
   @SerializedName("currency")
   String currency;
 
-  /** An arbitrary string attached to the object. Often useful for displaying to users. */
+  /**
+   * An arbitrary string attached to the object. Often useful for displaying to users.
+   */
   @SerializedName("description")
   String description;
 
   /**
-   * A list of TransactionEntries that are part of this Transaction. This cannot be expanded in any
-   * list endpoints.
+   * A list of TransactionEntries that are part of this Transaction. This cannot be expanded in any list endpoints.
    */
   @SerializedName("entries")
   TransactionEntryCollection entries;
 
-  /** The FinancialAccount associated with this object. */
+  /**
+   * The FinancialAccount associated with this object.
+   */
   @SerializedName("financial_account")
   String financialAccount;
 
-  /** ID of the flow that created the Transaction. */
+  /**
+   * ID of the flow that created the Transaction.
+   */
   @SerializedName("flow")
   String flow;
 
-  /** Details of the flow that created the Transaction. */
+  /**
+   * Details of the flow that created the Transaction.
+   */
   @SerializedName("flow_details")
   FlowDetails flowDetails;
 
   /**
    * Type of the flow that created the Transaction.
    *
-   * <p>One of {@code credit_reversal}, {@code debit_reversal}, {@code inbound_transfer}, {@code
-   * issuing_authorization}, {@code other}, {@code outbound_payment}, {@code outbound_transfer},
-   * {@code received_credit}, or {@code received_debit}.
+   * <p>One of {@code credit_reversal}, {@code debit_reversal}, {@code inbound_transfer}, {@code issuing_authorization}, {@code other}, {@code outbound_payment}, {@code outbound_transfer}, {@code received_credit}, or {@code received_debit}.
    */
   @SerializedName("flow_type")
   String flowType;
 
-  /** Unique identifier for the object. */
+  /**
+   * Unique identifier for the object.
+   */
   @Getter(onMethod_ = {@Override})
   @SerializedName("id")
   String id;
 
   /**
-   * Has the value {@code true} if the object exists in live mode or the value {@code false} if the
-   * object exists in test mode.
+   * Has the value {@code true} if the object exists in live mode or the value {@code false} if the object exists in test mode.
    */
   @SerializedName("livemode")
   Boolean livemode;
@@ -102,60 +113,94 @@ public class Transaction extends ApiResource implements HasId {
   @SerializedName("status_transitions")
   StatusTransitions statusTransitions;
 
-  /** Retrieves the details of an existing Transaction. */
+  /**
+   * <p>Retrieves the details of an existing Transaction.</p>
+   */
   public static Transaction retrieve(String id) throws StripeException {
     return retrieve(id, (Map<String, Object>) null, (RequestOptions) null);
   }
 
-  /** Retrieves the details of an existing Transaction. */
+  /**
+   * <p>Retrieves the details of an existing Transaction.</p>
+   */
   public static Transaction retrieve(String id, RequestOptions options) throws StripeException {
     return retrieve(id, (Map<String, Object>) null, options);
   }
 
-  /** Retrieves the details of an existing Transaction. */
-  public static Transaction retrieve(String id, Map<String, Object> params, RequestOptions options)
-      throws StripeException {
-    String url =
-        String.format(
-            "%s%s",
-            Stripe.getApiBase(),
-            String.format("/v1/treasury/transactions/%s", ApiResource.urlEncodeId(id)));
-    return ApiResource.request(
-        ApiResource.RequestMethod.GET, url, params, Transaction.class, options);
-  }
-
-  /** Retrieves the details of an existing Transaction. */
+  /**
+   * <p>Retrieves the details of an existing Transaction.</p>
+   */
   public static Transaction retrieve(
-      String id, TransactionRetrieveParams params, RequestOptions options) throws StripeException {
+      String id,
+      Map<String, Object> params,
+      RequestOptions options) throws StripeException {
     String url =
-        String.format(
-            "%s%s",
-            Stripe.getApiBase(),
-            String.format("/v1/treasury/transactions/%s", ApiResource.urlEncodeId(id)));
+      String.format(
+        "%s%s",
+        Stripe.getApiBase(),
+        String.format("/v1/treasury/transactions/%s", ApiResource.urlEncodeId(id))
+      );
     return ApiResource.request(
-        ApiResource.RequestMethod.GET, url, params, Transaction.class, options);
+      ApiResource.RequestMethod.GET,
+      url,
+      params,
+      Transaction.class,
+      options
+    );
   }
 
-  /** Retrieves a list of Transaction objects. */
+  /**
+   * <p>Retrieves the details of an existing Transaction.</p>
+   */
+  public static Transaction retrieve(
+      String id,
+      TransactionRetrieveParams params,
+      RequestOptions options) throws StripeException {
+    String url =
+      String.format(
+        "%s%s",
+        Stripe.getApiBase(),
+        String.format("/v1/treasury/transactions/%s", ApiResource.urlEncodeId(id))
+      );
+    return ApiResource.request(
+      ApiResource.RequestMethod.GET,
+      url,
+      params,
+      Transaction.class,
+      options
+    );
+  }
+
+  /**
+   * <p>Retrieves a list of Transaction objects.</p>
+   */
   public static TransactionCollection list(Map<String, Object> params) throws StripeException {
     return list(params, (RequestOptions) null);
   }
 
-  /** Retrieves a list of Transaction objects. */
-  public static TransactionCollection list(Map<String, Object> params, RequestOptions options)
-      throws StripeException {
+  /**
+   * <p>Retrieves a list of Transaction objects.</p>
+   */
+  public static TransactionCollection list(
+      Map<String, Object> params,
+      RequestOptions options) throws StripeException {
     String url = String.format("%s%s", Stripe.getApiBase(), "/v1/treasury/transactions");
     return ApiResource.requestCollection(url, params, TransactionCollection.class, options);
   }
 
-  /** Retrieves a list of Transaction objects. */
+  /**
+   * <p>Retrieves a list of Transaction objects.</p>
+   */
   public static TransactionCollection list(TransactionListParams params) throws StripeException {
     return list(params, (RequestOptions) null);
   }
 
-  /** Retrieves a list of Transaction objects. */
-  public static TransactionCollection list(TransactionListParams params, RequestOptions options)
-      throws StripeException {
+  /**
+   * <p>Retrieves a list of Transaction objects.</p>
+   */
+  public static TransactionCollection list(
+      TransactionListParams params,
+      RequestOptions options) throws StripeException {
     String url = String.format("%s%s", Stripe.getApiBase(), "/v1/treasury/transactions");
     return ApiResource.requestCollection(url, params, TransactionCollection.class, options);
   }
@@ -164,20 +209,20 @@ public class Transaction extends ApiResource implements HasId {
   @Setter
   @EqualsAndHashCode(callSuper = false)
   public static class BalanceImpact extends StripeObject {
-    /** The change made to funds the user can spend right now. */
+    /**
+     * The change made to funds the user can spend right now.
+     */
     @SerializedName("cash")
     Long cash;
 
     /**
-     * The change made to funds that are not spendable yet, but will become available at a later
-     * time.
+     * The change made to funds that are not spendable yet, but will become available at a later time.
      */
     @SerializedName("inbound_pending")
     Long inboundPending;
 
     /**
-     * The change made to funds in the account, but not spendable because they are being held for
-     * pending outbound flows.
+     * The change made to funds in the account, but not spendable because they are being held for pending outbound flows.
      */
     @SerializedName("outbound_pending")
     Long outboundPending;
@@ -187,11 +232,15 @@ public class Transaction extends ApiResource implements HasId {
   @Setter
   @EqualsAndHashCode(callSuper = false)
   public static class StatusTransitions extends StripeObject {
-    /** Timestamp describing when the Transaction changed status to {@code posted}. */
+    /**
+     * Timestamp describing when the Transaction changed status to {@code posted}.
+     */
     @SerializedName("posted_at")
     Long postedAt;
 
-    /** Timestamp describing when the Transaction changed status to {@code void}. */
+    /**
+     * Timestamp describing when the Transaction changed status to {@code void}.
+     */
     @SerializedName("void_at")
     Long voidAt;
   }

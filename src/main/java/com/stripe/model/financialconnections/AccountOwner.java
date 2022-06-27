@@ -12,16 +12,22 @@ import lombok.Setter;
 @Setter
 @EqualsAndHashCode(callSuper = false)
 public class AccountOwner extends StripeObject implements HasId {
-  /** The email address of the owner. */
+  /**
+   * The email address of the owner.
+   */
   @SerializedName("email")
   String email;
 
-  /** Unique identifier for the object. */
+  /**
+   * Unique identifier for the object.
+   */
   @Getter(onMethod_ = {@Override})
   @SerializedName("id")
   String id;
 
-  /** The full name of the owner. */
+  /**
+   * The full name of the owner.
+   */
   @SerializedName("name")
   String name;
 
@@ -33,19 +39,27 @@ public class AccountOwner extends StripeObject implements HasId {
   @SerializedName("object")
   String object;
 
-  /** The ownership object that this owner belongs to. */
+  /**
+   * The ownership object that this owner belongs to.
+   */
   @SerializedName("ownership")
   String ownership;
 
-  /** The raw phone number of the owner. */
+  /**
+   * The raw phone number of the owner.
+   */
   @SerializedName("phone")
   String phone;
 
-  /** The raw physical address of the owner. */
+  /**
+   * The raw physical address of the owner.
+   */
   @SerializedName("raw_address")
   String rawAddress;
 
-  /** The timestamp of the refresh that updated this owner. */
+  /**
+   * The timestamp of the refresh that updated this owner.
+   */
   @SerializedName("refreshed_at")
   Long refreshedAt;
 }

@@ -11,78 +11,92 @@ import com.stripe.param.CustomerBalanceTransactionCollectionRetrieveParams;
 import java.util.Map;
 
 public class CustomerBalanceTransactionCollection
-    extends StripeCollection<CustomerBalanceTransaction> {
+  extends StripeCollection<CustomerBalanceTransaction> {
   /**
-   * Retrieves a specific customer balance transaction that updated the customer’s <a
-   * href="https://stripe.com/docs/billing/customer/balance">balances</a>.
+   * <p>Retrieves a specific customer balance transaction that updated the customer’s <a href="https://stripe.com/docs/billing/customer/balance">balances</a>.</p>
    */
   public CustomerBalanceTransaction retrieve(String id) throws StripeException {
     return retrieve(id, (Map<String, Object>) null, (RequestOptions) null);
   }
 
   /**
-   * Retrieves a specific customer balance transaction that updated the customer’s <a
-   * href="https://stripe.com/docs/billing/customer/balance">balances</a>.
+   * <p>Retrieves a specific customer balance transaction that updated the customer’s <a href="https://stripe.com/docs/billing/customer/balance">balances</a>.</p>
    */
-  public CustomerBalanceTransaction retrieve(String id, RequestOptions options)
-      throws StripeException {
+  public CustomerBalanceTransaction retrieve(
+      String id,
+      RequestOptions options) throws StripeException {
     return retrieve(id, (Map<String, Object>) null, options);
   }
 
   /**
-   * Retrieves a specific customer balance transaction that updated the customer’s <a
-   * href="https://stripe.com/docs/billing/customer/balance">balances</a>.
+   * <p>Retrieves a specific customer balance transaction that updated the customer’s <a href="https://stripe.com/docs/billing/customer/balance">balances</a>.</p>
    */
   public CustomerBalanceTransaction retrieve(
-      String id, Map<String, Object> params, RequestOptions options) throws StripeException {
+      String id,
+      Map<String, Object> params,
+      RequestOptions options) throws StripeException {
     String url =
-        String.format(
-            "%s%s",
-            Stripe.getApiBase(),
-            String.format("%s/%s", this.getUrl(), ApiResource.urlEncodeId(id)));
+      String.format(
+        "%s%s",
+        Stripe.getApiBase(),
+        String.format("%s/%s", this.getUrl(), ApiResource.urlEncodeId(id))
+      );
     return ApiResource.request(
-        ApiResource.RequestMethod.GET, url, params, CustomerBalanceTransaction.class, options);
+      ApiResource.RequestMethod.GET,
+      url,
+      params,
+      CustomerBalanceTransaction.class,
+      options
+    );
   }
 
   /**
-   * Retrieves a specific customer balance transaction that updated the customer’s <a
-   * href="https://stripe.com/docs/billing/customer/balance">balances</a>.
+   * <p>Retrieves a specific customer balance transaction that updated the customer’s <a href="https://stripe.com/docs/billing/customer/balance">balances</a>.</p>
    */
   public CustomerBalanceTransaction retrieve(
-      String id, CustomerBalanceTransactionCollectionRetrieveParams params, RequestOptions options)
-      throws StripeException {
+      String id,
+      CustomerBalanceTransactionCollectionRetrieveParams params,
+      RequestOptions options) throws StripeException {
     String url =
-        String.format(
-            "%s%s",
-            Stripe.getApiBase(),
-            String.format("%s/%s", this.getUrl(), ApiResource.urlEncodeId(id)));
+      String.format(
+        "%s%s",
+        Stripe.getApiBase(),
+        String.format("%s/%s", this.getUrl(), ApiResource.urlEncodeId(id))
+      );
     return ApiResource.request(
-        ApiResource.RequestMethod.GET, url, params, CustomerBalanceTransaction.class, options);
+      ApiResource.RequestMethod.GET,
+      url,
+      params,
+      CustomerBalanceTransaction.class,
+      options
+    );
   }
 
   /**
-   * Returns a list of transactions that updated the customer’s <a
-   * href="https://stripe.com/docs/billing/customer/balance">balances</a>.
+   * <p>Returns a list of transactions that updated the customer’s <a href="https://stripe.com/docs/billing/customer/balance">balances</a>.</p>
    */
-  public CustomerBalanceTransactionCollection list(Map<String, Object> params)
-      throws StripeException {
+  public CustomerBalanceTransactionCollection list(
+      Map<String, Object> params) throws StripeException {
     return list(params, (RequestOptions) null);
   }
 
   /**
-   * Returns a list of transactions that updated the customer’s <a
-   * href="https://stripe.com/docs/billing/customer/balance">balances</a>.
+   * <p>Returns a list of transactions that updated the customer’s <a href="https://stripe.com/docs/billing/customer/balance">balances</a>.</p>
    */
   public CustomerBalanceTransactionCollection list(
-      Map<String, Object> params, RequestOptions options) throws StripeException {
+      Map<String, Object> params,
+      RequestOptions options) throws StripeException {
     String url = String.format("%s%s", Stripe.getApiBase(), this.getUrl());
     return ApiResource.requestCollection(
-        url, params, CustomerBalanceTransactionCollection.class, options);
+      url,
+      params,
+      CustomerBalanceTransactionCollection.class,
+      options
+    );
   }
 
   /**
-   * Returns a list of transactions that updated the customer’s <a
-   * href="https://stripe.com/docs/billing/customer/balance">balances</a>.
+   * <p>Returns a list of transactions that updated the customer’s <a href="https://stripe.com/docs/billing/customer/balance">balances</a>.</p>
    */
   public CustomerBalanceTransactionCollection list(
       CustomerBalanceTransactionCollectionListParams params) throws StripeException {
@@ -90,54 +104,64 @@ public class CustomerBalanceTransactionCollection
   }
 
   /**
-   * Returns a list of transactions that updated the customer’s <a
-   * href="https://stripe.com/docs/billing/customer/balance">balances</a>.
+   * <p>Returns a list of transactions that updated the customer’s <a href="https://stripe.com/docs/billing/customer/balance">balances</a>.</p>
    */
   public CustomerBalanceTransactionCollection list(
-      CustomerBalanceTransactionCollectionListParams params, RequestOptions options)
-      throws StripeException {
+      CustomerBalanceTransactionCollectionListParams params,
+      RequestOptions options) throws StripeException {
     String url = String.format("%s%s", Stripe.getApiBase(), this.getUrl());
     return ApiResource.requestCollection(
-        url, params, CustomerBalanceTransactionCollection.class, options);
+      url,
+      params,
+      CustomerBalanceTransactionCollection.class,
+      options
+    );
   }
 
   /**
-   * Creates an immutable transaction that updates the customer’s credit <a
-   * href="https://stripe.com/docs/billing/customer/balance">balance</a>.
+   * <p>Creates an immutable transaction that updates the customer’s credit <a href="https://stripe.com/docs/billing/customer/balance">balance</a>.</p>
    */
   public CustomerBalanceTransaction create(Map<String, Object> params) throws StripeException {
     return create(params, (RequestOptions) null);
   }
 
   /**
-   * Creates an immutable transaction that updates the customer’s credit <a
-   * href="https://stripe.com/docs/billing/customer/balance">balance</a>.
+   * <p>Creates an immutable transaction that updates the customer’s credit <a href="https://stripe.com/docs/billing/customer/balance">balance</a>.</p>
    */
-  public CustomerBalanceTransaction create(Map<String, Object> params, RequestOptions options)
-      throws StripeException {
+  public CustomerBalanceTransaction create(
+      Map<String, Object> params,
+      RequestOptions options) throws StripeException {
     String url = String.format("%s%s", Stripe.getApiBase(), this.getUrl());
     return ApiResource.request(
-        ApiResource.RequestMethod.POST, url, params, CustomerBalanceTransaction.class, options);
+      ApiResource.RequestMethod.POST,
+      url,
+      params,
+      CustomerBalanceTransaction.class,
+      options
+    );
   }
 
   /**
-   * Creates an immutable transaction that updates the customer’s credit <a
-   * href="https://stripe.com/docs/billing/customer/balance">balance</a>.
+   * <p>Creates an immutable transaction that updates the customer’s credit <a href="https://stripe.com/docs/billing/customer/balance">balance</a>.</p>
    */
-  public CustomerBalanceTransaction create(CustomerBalanceTransactionCollectionCreateParams params)
-      throws StripeException {
+  public CustomerBalanceTransaction create(
+      CustomerBalanceTransactionCollectionCreateParams params) throws StripeException {
     return create(params, (RequestOptions) null);
   }
 
   /**
-   * Creates an immutable transaction that updates the customer’s credit <a
-   * href="https://stripe.com/docs/billing/customer/balance">balance</a>.
+   * <p>Creates an immutable transaction that updates the customer’s credit <a href="https://stripe.com/docs/billing/customer/balance">balance</a>.</p>
    */
   public CustomerBalanceTransaction create(
-      CustomerBalanceTransactionCollectionCreateParams params, RequestOptions options)
-      throws StripeException {
+      CustomerBalanceTransactionCollectionCreateParams params,
+      RequestOptions options) throws StripeException {
     String url = String.format("%s%s", Stripe.getApiBase(), this.getUrl());
     return ApiResource.request(
-        ApiResource.RequestMethod.POST, url, params, CustomerBalanceTransaction.class, options);
+      ApiResource.RequestMethod.POST,
+      url,
+      params,
+      CustomerBalanceTransaction.class,
+      options
+    );
   }
 }

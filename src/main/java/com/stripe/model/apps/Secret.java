@@ -21,27 +21,34 @@ import lombok.Setter;
 @Setter
 @EqualsAndHashCode(callSuper = false)
 public class Secret extends ApiResource implements HasId {
-  /** Time at which the object was created. Measured in seconds since the Unix epoch. */
+  /**
+   * Time at which the object was created. Measured in seconds since the Unix epoch.
+   */
   @SerializedName("created")
   Long created;
 
-  /** If true, indicates that this secret has been deleted. */
+  /**
+   * If true, indicates that this secret has been deleted.
+   */
   @SerializedName("deleted")
   Boolean deleted;
 
-  /** Unique identifier for the object. */
+  /**
+   * Unique identifier for the object.
+   */
   @Getter(onMethod_ = {@Override})
   @SerializedName("id")
   String id;
 
   /**
-   * Has the value {@code true} if the object exists in live mode or the value {@code false} if the
-   * object exists in test mode.
+   * Has the value {@code true} if the object exists in live mode or the value {@code false} if the object exists in test mode.
    */
   @SerializedName("livemode")
   Boolean livemode;
 
-  /** A name for the secret that's unique within the scope. */
+  /**
+   * A name for the secret that's unique within the scope.
+   */
   @SerializedName("name")
   String name;
 
@@ -53,105 +60,147 @@ public class Secret extends ApiResource implements HasId {
   @SerializedName("object")
   String object;
 
-  /** The plaintext secret value to be stored. */
+  /**
+   * The plaintext secret value to be stored.
+   */
   @SerializedName("payload")
   String payload;
 
   @SerializedName("scope")
   Scope scope;
 
-  /** Finds a secret in the secret store by name and scope. */
+  /**
+   * <p>Finds a secret in the secret store by name and scope.</p>
+   */
   public static Secret find(Map<String, Object> params) throws StripeException {
     return find(params, (RequestOptions) null);
   }
 
-  /** Finds a secret in the secret store by name and scope. */
-  public static Secret find(Map<String, Object> params, RequestOptions options)
-      throws StripeException {
+  /**
+   * <p>Finds a secret in the secret store by name and scope.</p>
+   */
+  public static Secret find(
+      Map<String, Object> params,
+      RequestOptions options) throws StripeException {
     String url = String.format("%s%s", Stripe.getApiBase(), "/v1/apps/secrets/find");
     return ApiResource.request(ApiResource.RequestMethod.GET, url, params, Secret.class, options);
   }
 
-  /** Finds a secret in the secret store by name and scope. */
+  /**
+   * <p>Finds a secret in the secret store by name and scope.</p>
+   */
   public static Secret find(SecretFindParams params) throws StripeException {
     return find(params, (RequestOptions) null);
   }
 
-  /** Finds a secret in the secret store by name and scope. */
-  public static Secret find(SecretFindParams params, RequestOptions options)
-      throws StripeException {
+  /**
+   * <p>Finds a secret in the secret store by name and scope.</p>
+   */
+  public static Secret find(
+      SecretFindParams params,
+      RequestOptions options) throws StripeException {
     String url = String.format("%s%s", Stripe.getApiBase(), "/v1/apps/secrets/find");
     return ApiResource.request(ApiResource.RequestMethod.GET, url, params, Secret.class, options);
   }
 
-  /** Create or replace a secret in the secret store. */
+  /**
+   * <p>Create or replace a secret in the secret store.</p>
+   */
   public static Secret create(Map<String, Object> params) throws StripeException {
     return create(params, (RequestOptions) null);
   }
 
-  /** Create or replace a secret in the secret store. */
-  public static Secret create(Map<String, Object> params, RequestOptions options)
-      throws StripeException {
+  /**
+   * <p>Create or replace a secret in the secret store.</p>
+   */
+  public static Secret create(
+      Map<String, Object> params,
+      RequestOptions options) throws StripeException {
     String url = String.format("%s%s", Stripe.getApiBase(), "/v1/apps/secrets");
     return ApiResource.request(ApiResource.RequestMethod.POST, url, params, Secret.class, options);
   }
 
-  /** Create or replace a secret in the secret store. */
+  /**
+   * <p>Create or replace a secret in the secret store.</p>
+   */
   public static Secret create(SecretCreateParams params) throws StripeException {
     return create(params, (RequestOptions) null);
   }
 
-  /** Create or replace a secret in the secret store. */
-  public static Secret create(SecretCreateParams params, RequestOptions options)
-      throws StripeException {
+  /**
+   * <p>Create or replace a secret in the secret store.</p>
+   */
+  public static Secret create(
+      SecretCreateParams params,
+      RequestOptions options) throws StripeException {
     String url = String.format("%s%s", Stripe.getApiBase(), "/v1/apps/secrets");
     return ApiResource.request(ApiResource.RequestMethod.POST, url, params, Secret.class, options);
   }
 
-  /** Deletes a secret from the secret store by name and scope. */
+  /**
+   * <p>Deletes a secret from the secret store by name and scope.</p>
+   */
   public static Secret deleteWhere(Map<String, Object> params) throws StripeException {
     return deleteWhere(params, (RequestOptions) null);
   }
 
-  /** Deletes a secret from the secret store by name and scope. */
-  public static Secret deleteWhere(Map<String, Object> params, RequestOptions options)
-      throws StripeException {
+  /**
+   * <p>Deletes a secret from the secret store by name and scope.</p>
+   */
+  public static Secret deleteWhere(
+      Map<String, Object> params,
+      RequestOptions options) throws StripeException {
     String url = String.format("%s%s", Stripe.getApiBase(), "/v1/apps/secrets/delete");
     return ApiResource.request(ApiResource.RequestMethod.POST, url, params, Secret.class, options);
   }
 
-  /** Deletes a secret from the secret store by name and scope. */
+  /**
+   * <p>Deletes a secret from the secret store by name and scope.</p>
+   */
   public static Secret deleteWhere(SecretDeleteWhereParams params) throws StripeException {
     return deleteWhere(params, (RequestOptions) null);
   }
 
-  /** Deletes a secret from the secret store by name and scope. */
-  public static Secret deleteWhere(SecretDeleteWhereParams params, RequestOptions options)
-      throws StripeException {
+  /**
+   * <p>Deletes a secret from the secret store by name and scope.</p>
+   */
+  public static Secret deleteWhere(
+      SecretDeleteWhereParams params,
+      RequestOptions options) throws StripeException {
     String url = String.format("%s%s", Stripe.getApiBase(), "/v1/apps/secrets/delete");
     return ApiResource.request(ApiResource.RequestMethod.POST, url, params, Secret.class, options);
   }
 
-  /** List all secrets stored on the given scope. */
+  /**
+   * <p>List all secrets stored on the given scope.</p>
+   */
   public static SecretCollection list(Map<String, Object> params) throws StripeException {
     return list(params, (RequestOptions) null);
   }
 
-  /** List all secrets stored on the given scope. */
-  public static SecretCollection list(Map<String, Object> params, RequestOptions options)
-      throws StripeException {
+  /**
+   * <p>List all secrets stored on the given scope.</p>
+   */
+  public static SecretCollection list(
+      Map<String, Object> params,
+      RequestOptions options) throws StripeException {
     String url = String.format("%s%s", Stripe.getApiBase(), "/v1/apps/secrets");
     return ApiResource.requestCollection(url, params, SecretCollection.class, options);
   }
 
-  /** List all secrets stored on the given scope. */
+  /**
+   * <p>List all secrets stored on the given scope.</p>
+   */
   public static SecretCollection list(SecretListParams params) throws StripeException {
     return list(params, (RequestOptions) null);
   }
 
-  /** List all secrets stored on the given scope. */
-  public static SecretCollection list(SecretListParams params, RequestOptions options)
-      throws StripeException {
+  /**
+   * <p>List all secrets stored on the given scope.</p>
+   */
+  public static SecretCollection list(
+      SecretListParams params,
+      RequestOptions options) throws StripeException {
     String url = String.format("%s%s", Stripe.getApiBase(), "/v1/apps/secrets");
     return ApiResource.requestCollection(url, params, SecretCollection.class, options);
   }
@@ -168,7 +217,9 @@ public class Secret extends ApiResource implements HasId {
     @SerializedName("type")
     String type;
 
-    /** The user ID, if type is set to &quot;user&quot;. */
+    /**
+     * The user ID, if type is set to &quot;user&quot;.
+     */
     @SerializedName("user")
     String user;
   }

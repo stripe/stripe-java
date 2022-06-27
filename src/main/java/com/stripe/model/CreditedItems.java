@@ -11,11 +11,15 @@ import lombok.Setter;
 @Setter
 @EqualsAndHashCode(callSuper = false)
 public class CreditedItems extends StripeObject {
-  /** Invoice containing the credited invoice line items. */
+  /**
+   * Invoice containing the credited invoice line items.
+   */
   @SerializedName("invoice")
   String invoice;
 
-  /** Credited invoice line items. */
+  /**
+   * Credited invoice line items.
+   */
   @SerializedName("invoice_line_items")
   List<String> invoiceLineItems;
 }

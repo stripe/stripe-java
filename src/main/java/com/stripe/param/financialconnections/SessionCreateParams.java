@@ -3,6 +3,7 @@ package com.stripe.param.financialconnections;
 
 import com.google.gson.annotations.SerializedName;
 import com.stripe.net.ApiRequestParams;
+import com.stripe.net.ApiRequestParams.EnumParam;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -11,39 +12,40 @@ import lombok.Getter;
 
 @Getter
 public class SessionCreateParams extends ApiRequestParams {
-  /** The account holder to link accounts for. */
+  /**
+   * The account holder to link accounts for.
+   */
   @SerializedName("account_holder")
   AccountHolder accountHolder;
 
-  /** Specifies which fields in the response should be expanded. */
+  /**
+   * Specifies which fields in the response should be expanded.
+   */
   @SerializedName("expand")
   List<String> expand;
 
   /**
-   * Map of extra parameters for custom features not available in this client library. The content
-   * in this map is not serialized under this field's {@code @SerializedName} value. Instead, each
-   * key/value pair is serialized as if the key is a root-level field (serialized) name in this
-   * param object. Effectively, this map is flattened to its parent instance.
+   * Map of extra parameters for custom features not available in this client library. The content in this map is not serialized under this field's {@code @SerializedName} value. Instead, each key/value pair is serialized as if the key is a root-level field (serialized) name in this param object. Effectively, this map is flattened to its parent instance.
    */
   @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
   Map<String, Object> extraParams;
 
-  /** Filters to restrict the kinds of accounts to collect. */
+  /**
+   * Filters to restrict the kinds of accounts to collect.
+   */
   @SerializedName("filters")
   Filters filters;
 
   /**
    * List of data features that you would like to request access to.
    *
-   * <p>Possible values are {@code balances}, {@code transactions}, {@code ownership}, and {@code
-   * payment_method}.
+   * <p>Possible values are {@code balances}, {@code transactions}, {@code ownership}, and {@code payment_method}.
    */
   @SerializedName("permissions")
   List<Permission> permissions;
 
   /**
-   * For webview integrations only. Upon completing OAuth login in the native browser, the user will
-   * be redirected to this URL to return to your app.
+   * For webview integrations only. Upon completing OAuth login in the native browser, the user will be redirected to this URL to return to your app.
    */
   @SerializedName("return_url")
   String returnUrl;
@@ -62,11 +64,9 @@ public class SessionCreateParams extends ApiRequestParams {
     this.permissions = permissions;
     this.returnUrl = returnUrl;
   }
-
   public static Builder builder() {
     return new Builder();
   }
-
   public static class Builder {
     private AccountHolder accountHolder;
 
@@ -80,27 +80,30 @@ public class SessionCreateParams extends ApiRequestParams {
 
     private String returnUrl;
 
-    /** Finalize and obtain parameter instance from this builder. */
+    /**
+     * Finalize and obtain parameter instance from this builder.
+     */
     public SessionCreateParams build() {
       return new SessionCreateParams(
-          this.accountHolder,
-          this.expand,
-          this.extraParams,
-          this.filters,
-          this.permissions,
-          this.returnUrl);
+        this.accountHolder,
+        this.expand,
+        this.extraParams,
+        this.filters,
+        this.permissions,
+        this.returnUrl
+      );
     }
 
-    /** The account holder to link accounts for. */
+    /**
+     * The account holder to link accounts for.
+     */
     public Builder setAccountHolder(AccountHolder accountHolder) {
       this.accountHolder = accountHolder;
       return this;
     }
 
     /**
-     * Add an element to `expand` list. A list is initialized for the first `add/addAll` call, and
-     * subsequent calls adds additional elements to the original list. See {@link
-     * SessionCreateParams#expand} for the field documentation.
+     * Add an element to `expand` list. A list is initialized for the first `add/addAll` call, and subsequent calls adds additional elements to the original list. See {@link SessionCreateParams#expand} for the field documentation.
      */
     public Builder addExpand(String element) {
       if (this.expand == null) {
@@ -111,9 +114,7 @@ public class SessionCreateParams extends ApiRequestParams {
     }
 
     /**
-     * Add all elements to `expand` list. A list is initialized for the first `add/addAll` call, and
-     * subsequent calls adds additional elements to the original list. See {@link
-     * SessionCreateParams#expand} for the field documentation.
+     * Add all elements to `expand` list. A list is initialized for the first `add/addAll` call, and subsequent calls adds additional elements to the original list. See {@link SessionCreateParams#expand} for the field documentation.
      */
     public Builder addAllExpand(List<String> elements) {
       if (this.expand == null) {
@@ -124,9 +125,7 @@ public class SessionCreateParams extends ApiRequestParams {
     }
 
     /**
-     * Add a key/value pair to `extraParams` map. A map is initialized for the first `put/putAll`
-     * call, and subsequent calls add additional key/value pairs to the original map. See {@link
-     * SessionCreateParams#extraParams} for the field documentation.
+     * Add a key/value pair to `extraParams` map. A map is initialized for the first `put/putAll` call, and subsequent calls add additional key/value pairs to the original map. See {@link SessionCreateParams#extraParams} for the field documentation.
      */
     public Builder putExtraParam(String key, Object value) {
       if (this.extraParams == null) {
@@ -137,9 +136,7 @@ public class SessionCreateParams extends ApiRequestParams {
     }
 
     /**
-     * Add all map key/value pairs to `extraParams` map. A map is initialized for the first
-     * `put/putAll` call, and subsequent calls add additional key/value pairs to the original map.
-     * See {@link SessionCreateParams#extraParams} for the field documentation.
+     * Add all map key/value pairs to `extraParams` map. A map is initialized for the first `put/putAll` call, and subsequent calls add additional key/value pairs to the original map. See {@link SessionCreateParams#extraParams} for the field documentation.
      */
     public Builder putAllExtraParam(Map<String, Object> map) {
       if (this.extraParams == null) {
@@ -149,16 +146,16 @@ public class SessionCreateParams extends ApiRequestParams {
       return this;
     }
 
-    /** Filters to restrict the kinds of accounts to collect. */
+    /**
+     * Filters to restrict the kinds of accounts to collect.
+     */
     public Builder setFilters(Filters filters) {
       this.filters = filters;
       return this;
     }
 
     /**
-     * Add an element to `permissions` list. A list is initialized for the first `add/addAll` call,
-     * and subsequent calls adds additional elements to the original list. See {@link
-     * SessionCreateParams#permissions} for the field documentation.
+     * Add an element to `permissions` list. A list is initialized for the first `add/addAll` call, and subsequent calls adds additional elements to the original list. See {@link SessionCreateParams#permissions} for the field documentation.
      */
     public Builder addPermission(Permission element) {
       if (this.permissions == null) {
@@ -169,9 +166,7 @@ public class SessionCreateParams extends ApiRequestParams {
     }
 
     /**
-     * Add all elements to `permissions` list. A list is initialized for the first `add/addAll`
-     * call, and subsequent calls adds additional elements to the original list. See {@link
-     * SessionCreateParams#permissions} for the field documentation.
+     * Add all elements to `permissions` list. A list is initialized for the first `add/addAll` call, and subsequent calls adds additional elements to the original list. See {@link SessionCreateParams#permissions} for the field documentation.
      */
     public Builder addAllPermission(List<Permission> elements) {
       if (this.permissions == null) {
@@ -182,56 +177,52 @@ public class SessionCreateParams extends ApiRequestParams {
     }
 
     /**
-     * For webview integrations only. Upon completing OAuth login in the native browser, the user
-     * will be redirected to this URL to return to your app.
+     * For webview integrations only. Upon completing OAuth login in the native browser, the user will be redirected to this URL to return to your app.
      */
     public Builder setReturnUrl(String returnUrl) {
       this.returnUrl = returnUrl;
       return this;
     }
   }
-
   @Getter
   public static class AccountHolder {
     /**
-     * The ID of the Stripe account whose accounts will be retrieved. Should only be present if
-     * {@code type} is {@code account}.
+     * The ID of the Stripe account whose accounts will be retrieved. Should only be present if {@code type} is {@code account}.
      */
     @SerializedName("account")
     String account;
 
     /**
-     * The ID of the Stripe customer whose accounts will be retrieved. Should only be present if
-     * {@code type} is {@code customer}.
+     * The ID of the Stripe customer whose accounts will be retrieved. Should only be present if {@code type} is {@code customer}.
      */
     @SerializedName("customer")
     String customer;
 
     /**
-     * Map of extra parameters for custom features not available in this client library. The content
-     * in this map is not serialized under this field's {@code @SerializedName} value. Instead, each
-     * key/value pair is serialized as if the key is a root-level field (serialized) name in this
-     * param object. Effectively, this map is flattened to its parent instance.
+     * Map of extra parameters for custom features not available in this client library. The content in this map is not serialized under this field's {@code @SerializedName} value. Instead, each key/value pair is serialized as if the key is a root-level field (serialized) name in this param object. Effectively, this map is flattened to its parent instance.
      */
     @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
     Map<String, Object> extraParams;
 
-    /** Type of account holder to collect accounts for. */
+    /**
+     * Type of account holder to collect accounts for.
+     */
     @SerializedName("type")
     Type type;
 
     private AccountHolder(
-        String account, String customer, Map<String, Object> extraParams, Type type) {
+        String account,
+        String customer,
+        Map<String, Object> extraParams,
+        Type type) {
       this.account = account;
       this.customer = customer;
       this.extraParams = extraParams;
       this.type = type;
     }
-
     public static Builder builder() {
       return new Builder();
     }
-
     public static class Builder {
       private String account;
 
@@ -241,14 +232,15 @@ public class SessionCreateParams extends ApiRequestParams {
 
       private Type type;
 
-      /** Finalize and obtain parameter instance from this builder. */
+      /**
+       * Finalize and obtain parameter instance from this builder.
+       */
       public AccountHolder build() {
         return new AccountHolder(this.account, this.customer, this.extraParams, this.type);
       }
 
       /**
-       * The ID of the Stripe account whose accounts will be retrieved. Should only be present if
-       * {@code type} is {@code account}.
+       * The ID of the Stripe account whose accounts will be retrieved. Should only be present if {@code type} is {@code account}.
        */
       public Builder setAccount(String account) {
         this.account = account;
@@ -256,8 +248,7 @@ public class SessionCreateParams extends ApiRequestParams {
       }
 
       /**
-       * The ID of the Stripe customer whose accounts will be retrieved. Should only be present if
-       * {@code type} is {@code customer}.
+       * The ID of the Stripe customer whose accounts will be retrieved. Should only be present if {@code type} is {@code customer}.
        */
       public Builder setCustomer(String customer) {
         this.customer = customer;
@@ -265,9 +256,7 @@ public class SessionCreateParams extends ApiRequestParams {
       }
 
       /**
-       * Add a key/value pair to `extraParams` map. A map is initialized for the first `put/putAll`
-       * call, and subsequent calls add additional key/value pairs to the original map. See {@link
-       * SessionCreateParams.AccountHolder#extraParams} for the field documentation.
+       * Add a key/value pair to `extraParams` map. A map is initialized for the first `put/putAll` call, and subsequent calls add additional key/value pairs to the original map. See {@link SessionCreateParams.AccountHolder#extraParams} for the field documentation.
        */
       public Builder putExtraParam(String key, Object value) {
         if (this.extraParams == null) {
@@ -278,9 +267,7 @@ public class SessionCreateParams extends ApiRequestParams {
       }
 
       /**
-       * Add all map key/value pairs to `extraParams` map. A map is initialized for the first
-       * `put/putAll` call, and subsequent calls add additional key/value pairs to the original map.
-       * See {@link SessionCreateParams.AccountHolder#extraParams} for the field documentation.
+       * Add all map key/value pairs to `extraParams` map. A map is initialized for the first `put/putAll` call, and subsequent calls add additional key/value pairs to the original map. See {@link SessionCreateParams.AccountHolder#extraParams} for the field documentation.
        */
       public Builder putAllExtraParam(Map<String, Object> map) {
         if (this.extraParams == null) {
@@ -290,40 +277,37 @@ public class SessionCreateParams extends ApiRequestParams {
         return this;
       }
 
-      /** Type of account holder to collect accounts for. */
+      /**
+       * Type of account holder to collect accounts for.
+       */
       public Builder setType(Type type) {
         this.type = type;
         return this;
       }
     }
-
     public enum Type implements ApiRequestParams.EnumParam {
       @SerializedName("account")
       ACCOUNT("account"),
 
       @SerializedName("customer")
       CUSTOMER("customer");
-
       @Getter(onMethod_ = {@Override})
       private final String value;
-
       Type(String value) {
         this.value = value;
       }
     }
   }
-
   @Getter
   public static class Filters {
-    /** List of countries from which to collect accounts. */
+    /**
+     * List of countries from which to collect accounts.
+     */
     @SerializedName("countries")
     List<String> countries;
 
     /**
-     * Map of extra parameters for custom features not available in this client library. The content
-     * in this map is not serialized under this field's {@code @SerializedName} value. Instead, each
-     * key/value pair is serialized as if the key is a root-level field (serialized) name in this
-     * param object. Effectively, this map is flattened to its parent instance.
+     * Map of extra parameters for custom features not available in this client library. The content in this map is not serialized under this field's {@code @SerializedName} value. Instead, each key/value pair is serialized as if the key is a root-level field (serialized) name in this param object. Effectively, this map is flattened to its parent instance.
      */
     @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
     Map<String, Object> extraParams;
@@ -332,25 +316,23 @@ public class SessionCreateParams extends ApiRequestParams {
       this.countries = countries;
       this.extraParams = extraParams;
     }
-
     public static Builder builder() {
       return new Builder();
     }
-
     public static class Builder {
       private List<String> countries;
 
       private Map<String, Object> extraParams;
 
-      /** Finalize and obtain parameter instance from this builder. */
+      /**
+       * Finalize and obtain parameter instance from this builder.
+       */
       public Filters build() {
         return new Filters(this.countries, this.extraParams);
       }
 
       /**
-       * Add an element to `countries` list. A list is initialized for the first `add/addAll` call,
-       * and subsequent calls adds additional elements to the original list. See {@link
-       * SessionCreateParams.Filters#countries} for the field documentation.
+       * Add an element to `countries` list. A list is initialized for the first `add/addAll` call, and subsequent calls adds additional elements to the original list. See {@link SessionCreateParams.Filters#countries} for the field documentation.
        */
       public Builder addCountry(String element) {
         if (this.countries == null) {
@@ -361,9 +343,7 @@ public class SessionCreateParams extends ApiRequestParams {
       }
 
       /**
-       * Add all elements to `countries` list. A list is initialized for the first `add/addAll`
-       * call, and subsequent calls adds additional elements to the original list. See {@link
-       * SessionCreateParams.Filters#countries} for the field documentation.
+       * Add all elements to `countries` list. A list is initialized for the first `add/addAll` call, and subsequent calls adds additional elements to the original list. See {@link SessionCreateParams.Filters#countries} for the field documentation.
        */
       public Builder addAllCountry(List<String> elements) {
         if (this.countries == null) {
@@ -374,9 +354,7 @@ public class SessionCreateParams extends ApiRequestParams {
       }
 
       /**
-       * Add a key/value pair to `extraParams` map. A map is initialized for the first `put/putAll`
-       * call, and subsequent calls add additional key/value pairs to the original map. See {@link
-       * SessionCreateParams.Filters#extraParams} for the field documentation.
+       * Add a key/value pair to `extraParams` map. A map is initialized for the first `put/putAll` call, and subsequent calls add additional key/value pairs to the original map. See {@link SessionCreateParams.Filters#extraParams} for the field documentation.
        */
       public Builder putExtraParam(String key, Object value) {
         if (this.extraParams == null) {
@@ -387,9 +365,7 @@ public class SessionCreateParams extends ApiRequestParams {
       }
 
       /**
-       * Add all map key/value pairs to `extraParams` map. A map is initialized for the first
-       * `put/putAll` call, and subsequent calls add additional key/value pairs to the original map.
-       * See {@link SessionCreateParams.Filters#extraParams} for the field documentation.
+       * Add all map key/value pairs to `extraParams` map. A map is initialized for the first `put/putAll` call, and subsequent calls add additional key/value pairs to the original map. See {@link SessionCreateParams.Filters#extraParams} for the field documentation.
        */
       public Builder putAllExtraParam(Map<String, Object> map) {
         if (this.extraParams == null) {
@@ -400,7 +376,6 @@ public class SessionCreateParams extends ApiRequestParams {
       }
     }
   }
-
   public enum Permission implements ApiRequestParams.EnumParam {
     @SerializedName("balances")
     BALANCES("balances"),
@@ -413,10 +388,8 @@ public class SessionCreateParams extends ApiRequestParams {
 
     @SerializedName("transactions")
     TRANSACTIONS("transactions");
-
     @Getter(onMethod_ = {@Override})
     private final String value;
-
     Permission(String value) {
       this.value = value;
     }

@@ -23,29 +23,36 @@ import lombok.Setter;
 @Setter
 @EqualsAndHashCode(callSuper = false)
 public class Session extends ApiResource implements HasId {
-  /** The account holder for whom accounts are collected in this session. */
+  /**
+   * The account holder for whom accounts are collected in this session.
+   */
   @SerializedName("account_holder")
   AccountHolder accountHolder;
 
-  /** The accounts that were collected as part of this Session. */
+  /**
+   * The accounts that were collected as part of this Session.
+   */
   @SerializedName("accounts")
   AccountCollection accounts;
 
-  /** A value that will be passed to the client to launch the authentication flow. */
+  /**
+   * A value that will be passed to the client to launch the authentication flow.
+   */
   @SerializedName("client_secret")
   String clientSecret;
 
   @SerializedName("filters")
   Filters filters;
 
-  /** Unique identifier for the object. */
+  /**
+   * Unique identifier for the object.
+   */
   @Getter(onMethod_ = {@Override})
   @SerializedName("id")
   String id;
 
   /**
-   * Has the value {@code true} if the object exists in live mode or the value {@code false} if the
-   * object exists in test mode.
+   * Has the value {@code true} if the object exists in live mode or the value {@code false} if the object exists in test mode.
    */
   @SerializedName("livemode")
   Boolean livemode;
@@ -58,84 +65,95 @@ public class Session extends ApiResource implements HasId {
   @SerializedName("object")
   String object;
 
-  /** Permissions requested for accounts collected during this session. */
+  /**
+   * Permissions requested for accounts collected during this session.
+   */
   @SerializedName("permissions")
   List<String> permissions;
 
   /**
-   * For webview integrations only. Upon completing OAuth login in the native browser, the user will
-   * be redirected to this URL to return to your app.
+   * For webview integrations only. Upon completing OAuth login in the native browser, the user will be redirected to this URL to return to your app.
    */
   @SerializedName("return_url")
   String returnUrl;
 
   /**
-   * To launch the Financial Connections authorization flow, create a <code>Session</code>. The
-   * session’s <code>client_secret</code> can be used to launch the flow using Stripe.js.
+   * <p>To launch the Financial Connections authorization flow, create a <code>Session</code>. The session’s <code>client_secret</code> can be used to launch the flow using Stripe.js.</p>
    */
   public static Session create(Map<String, Object> params) throws StripeException {
     return create(params, (RequestOptions) null);
   }
 
   /**
-   * To launch the Financial Connections authorization flow, create a <code>Session</code>. The
-   * session’s <code>client_secret</code> can be used to launch the flow using Stripe.js.
+   * <p>To launch the Financial Connections authorization flow, create a <code>Session</code>. The session’s <code>client_secret</code> can be used to launch the flow using Stripe.js.</p>
    */
-  public static Session create(Map<String, Object> params, RequestOptions options)
-      throws StripeException {
+  public static Session create(
+      Map<String, Object> params,
+      RequestOptions options) throws StripeException {
     String url = String.format("%s%s", Stripe.getApiBase(), "/v1/financial_connections/sessions");
     return ApiResource.request(ApiResource.RequestMethod.POST, url, params, Session.class, options);
   }
 
   /**
-   * To launch the Financial Connections authorization flow, create a <code>Session</code>. The
-   * session’s <code>client_secret</code> can be used to launch the flow using Stripe.js.
+   * <p>To launch the Financial Connections authorization flow, create a <code>Session</code>. The session’s <code>client_secret</code> can be used to launch the flow using Stripe.js.</p>
    */
   public static Session create(SessionCreateParams params) throws StripeException {
     return create(params, (RequestOptions) null);
   }
 
   /**
-   * To launch the Financial Connections authorization flow, create a <code>Session</code>. The
-   * session’s <code>client_secret</code> can be used to launch the flow using Stripe.js.
+   * <p>To launch the Financial Connections authorization flow, create a <code>Session</code>. The session’s <code>client_secret</code> can be used to launch the flow using Stripe.js.</p>
    */
-  public static Session create(SessionCreateParams params, RequestOptions options)
-      throws StripeException {
+  public static Session create(
+      SessionCreateParams params,
+      RequestOptions options) throws StripeException {
     String url = String.format("%s%s", Stripe.getApiBase(), "/v1/financial_connections/sessions");
     return ApiResource.request(ApiResource.RequestMethod.POST, url, params, Session.class, options);
   }
 
-  /** Retrieves the details of a Financial Connections <code>Session</code>. */
+  /**
+   * <p>Retrieves the details of a Financial Connections <code>Session</code>.</p>
+   */
   public static Session retrieve(String session) throws StripeException {
     return retrieve(session, (Map<String, Object>) null, (RequestOptions) null);
   }
 
-  /** Retrieves the details of a Financial Connections <code>Session</code>. */
+  /**
+   * <p>Retrieves the details of a Financial Connections <code>Session</code>.</p>
+   */
   public static Session retrieve(String session, RequestOptions options) throws StripeException {
     return retrieve(session, (Map<String, Object>) null, options);
   }
 
-  /** Retrieves the details of a Financial Connections <code>Session</code>. */
-  public static Session retrieve(String session, Map<String, Object> params, RequestOptions options)
-      throws StripeException {
+  /**
+   * <p>Retrieves the details of a Financial Connections <code>Session</code>.</p>
+   */
+  public static Session retrieve(
+      String session,
+      Map<String, Object> params,
+      RequestOptions options) throws StripeException {
     String url =
-        String.format(
-            "%s%s",
-            Stripe.getApiBase(),
-            String.format(
-                "/v1/financial_connections/sessions/%s", ApiResource.urlEncodeId(session)));
+      String.format(
+        "%s%s",
+        Stripe.getApiBase(),
+        String.format("/v1/financial_connections/sessions/%s", ApiResource.urlEncodeId(session))
+      );
     return ApiResource.request(ApiResource.RequestMethod.GET, url, params, Session.class, options);
   }
 
-  /** Retrieves the details of a Financial Connections <code>Session</code>. */
+  /**
+   * <p>Retrieves the details of a Financial Connections <code>Session</code>.</p>
+   */
   public static Session retrieve(
-      String session, SessionRetrieveParams params, RequestOptions options) throws StripeException {
+      String session,
+      SessionRetrieveParams params,
+      RequestOptions options) throws StripeException {
     String url =
-        String.format(
-            "%s%s",
-            Stripe.getApiBase(),
-            String.format(
-                "/v1/financial_connections/sessions/%s", ApiResource.urlEncodeId(session)));
+      String.format(
+        "%s%s",
+        Stripe.getApiBase(),
+        String.format("/v1/financial_connections/sessions/%s", ApiResource.urlEncodeId(session))
+      );
     return ApiResource.request(ApiResource.RequestMethod.GET, url, params, Session.class, options);
   }
 
@@ -144,8 +162,7 @@ public class Session extends ApiResource implements HasId {
   @EqualsAndHashCode(callSuper = false)
   public static class AccountHolder extends StripeObject {
     /**
-     * The ID of the Stripe account this account belongs to. Should only be present if {@code
-     * account_holder.type} is {@code account}.
+     * The ID of the Stripe account this account belongs to. Should only be present if {@code account_holder.type} is {@code account}.
      */
     @SerializedName("account")
     @Getter(lombok.AccessLevel.NONE)
@@ -153,8 +170,7 @@ public class Session extends ApiResource implements HasId {
     ExpandableField<Account> account;
 
     /**
-     * ID of the Stripe customer this account belongs to. Present if and only if {@code
-     * account_holder.type} is {@code customer}.
+     * ID of the Stripe customer this account belongs to. Present if and only if {@code account_holder.type} is {@code customer}.
      */
     @SerializedName("customer")
     @Getter(lombok.AccessLevel.NONE)
@@ -169,7 +185,9 @@ public class Session extends ApiResource implements HasId {
     @SerializedName("type")
     String type;
 
-    /** Get ID of expandable {@code account} object. */
+    /**
+     * Get ID of expandable {@code account} object.
+     */
     public String getAccount() {
       return (this.account != null) ? this.account.getId() : null;
     }
@@ -178,7 +196,9 @@ public class Session extends ApiResource implements HasId {
       this.account = ApiResource.setExpandableFieldId(id, this.account);
     }
 
-    /** Get expanded {@code account}. */
+    /**
+     * Get expanded {@code account}.
+     */
     public Account getAccountObject() {
       return (this.account != null) ? this.account.getExpanded() : null;
     }
@@ -187,7 +207,9 @@ public class Session extends ApiResource implements HasId {
       this.account = new ExpandableField<Account>(expandableObject.getId(), expandableObject);
     }
 
-    /** Get ID of expandable {@code customer} object. */
+    /**
+     * Get ID of expandable {@code customer} object.
+     */
     public String getCustomer() {
       return (this.customer != null) ? this.customer.getId() : null;
     }
@@ -196,7 +218,9 @@ public class Session extends ApiResource implements HasId {
       this.customer = ApiResource.setExpandableFieldId(id, this.customer);
     }
 
-    /** Get expanded {@code customer}. */
+    /**
+     * Get expanded {@code customer}.
+     */
     public Customer getCustomerObject() {
       return (this.customer != null) ? this.customer.getExpanded() : null;
     }
@@ -210,7 +234,9 @@ public class Session extends ApiResource implements HasId {
   @Setter
   @EqualsAndHashCode(callSuper = false)
   public static class Filters extends StripeObject {
-    /** List of countries from which to filter accounts. */
+    /**
+     * List of countries from which to filter accounts.
+     */
     @SerializedName("countries")
     List<String> countries;
   }

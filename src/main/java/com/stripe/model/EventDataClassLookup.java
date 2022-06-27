@@ -5,12 +5,11 @@ import java.util.HashMap;
 import java.util.Map;
 
 /**
- * Event data class look up used in {@link EventDataDeserializer}. The key to look up is `object`
- * string of the model.
+ * Event data class look up used in {@link EventDataDeserializer}.
+ * The key to look up is `object` string of the model.
  */
 final class EventDataClassLookup {
   private static final Map<String, Class<? extends StripeObject>> classLookup = new HashMap<>();
-
   static {
     classLookup.put("account", Account.class);
     classLookup.put("account_link", AccountLink.class);
@@ -94,26 +93,38 @@ final class EventDataClassLookup {
     classLookup.put("apps.secret", com.stripe.model.apps.Secret.class);
 
     classLookup.put(
-        "billing_portal.configuration", com.stripe.model.billingportal.Configuration.class);
+      "billing_portal.configuration",
+      com.stripe.model.billingportal.Configuration.class
+    );
     classLookup.put("billing_portal.session", com.stripe.model.billingportal.Session.class);
 
     classLookup.put("checkout.session", com.stripe.model.checkout.Session.class);
 
     classLookup.put(
-        "financial_connections.account", com.stripe.model.financialconnections.Account.class);
+      "financial_connections.account",
+      com.stripe.model.financialconnections.Account.class
+    );
     classLookup.put(
-        "financial_connections.account_owner",
-        com.stripe.model.financialconnections.AccountOwner.class);
+      "financial_connections.account_owner",
+      com.stripe.model.financialconnections.AccountOwner.class
+    );
     classLookup.put(
-        "financial_connections.account_ownership",
-        com.stripe.model.financialconnections.AccountOwnership.class);
+      "financial_connections.account_ownership",
+      com.stripe.model.financialconnections.AccountOwnership.class
+    );
     classLookup.put(
-        "financial_connections.session", com.stripe.model.financialconnections.Session.class);
+      "financial_connections.session",
+      com.stripe.model.financialconnections.Session.class
+    );
 
     classLookup.put(
-        "identity.verification_report", com.stripe.model.identity.VerificationReport.class);
+      "identity.verification_report",
+      com.stripe.model.identity.VerificationReport.class
+    );
     classLookup.put(
-        "identity.verification_session", com.stripe.model.identity.VerificationSession.class);
+      "identity.verification_session",
+      com.stripe.model.identity.VerificationSession.class
+    );
 
     classLookup.put("issuing.authorization", com.stripe.model.issuing.Authorization.class);
     classLookup.put("issuing.card", com.stripe.model.issuing.Card.class);
@@ -141,8 +152,9 @@ final class EventDataClassLookup {
     classLookup.put("treasury.debit_reversal", com.stripe.model.treasury.DebitReversal.class);
     classLookup.put("treasury.financial_account", com.stripe.model.treasury.FinancialAccount.class);
     classLookup.put(
-        "treasury.financial_account_features",
-        com.stripe.model.treasury.FinancialAccountFeatures.class);
+      "treasury.financial_account_features",
+      com.stripe.model.treasury.FinancialAccountFeatures.class
+    );
     classLookup.put("treasury.inbound_transfer", com.stripe.model.treasury.InboundTransfer.class);
     classLookup.put("treasury.outbound_payment", com.stripe.model.treasury.OutboundPayment.class);
     classLookup.put("treasury.outbound_transfer", com.stripe.model.treasury.OutboundTransfer.class);
@@ -151,7 +163,6 @@ final class EventDataClassLookup {
     classLookup.put("treasury.transaction", com.stripe.model.treasury.Transaction.class);
     classLookup.put("treasury.transaction_entry", com.stripe.model.treasury.TransactionEntry.class);
   }
-
   public static Class<? extends StripeObject> findClass(String objectType) {
     return classLookup.get(objectType);
   }

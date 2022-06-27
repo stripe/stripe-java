@@ -3,6 +3,7 @@ package com.stripe.param;
 
 import com.google.gson.annotations.SerializedName;
 import com.stripe.net.ApiRequestParams;
+import com.stripe.net.ApiRequestParams.EnumParam;
 import com.stripe.param.common.EmptyParam;
 import java.math.BigDecimal;
 import java.util.ArrayList;
@@ -13,69 +14,56 @@ import lombok.Getter;
 
 @Getter
 public class PlanCreateParams extends ApiRequestParams {
-  /** Whether the plan is currently available for new subscriptions. Defaults to {@code true}. */
+  /**
+   * Whether the plan is currently available for new subscriptions. Defaults to {@code true}.
+   */
   @SerializedName("active")
   Boolean active;
 
   /**
-   * Specifies a usage aggregation strategy for plans of {@code usage_type=metered}. Allowed values
-   * are {@code sum} for summing up all usage during a period, {@code last_during_period} for using
-   * the last usage record reported within a period, {@code last_ever} for using the last usage
-   * record ever (across period bounds) or {@code max} which uses the usage record with the maximum
-   * reported usage during a period. Defaults to {@code sum}.
+   * Specifies a usage aggregation strategy for plans of {@code usage_type=metered}. Allowed values are {@code sum} for summing up all usage during a period, {@code last_during_period} for using the last usage record reported within a period, {@code last_ever} for using the last usage record ever (across period bounds) or {@code max} which uses the usage record with the maximum reported usage during a period. Defaults to {@code sum}.
    */
   @SerializedName("aggregate_usage")
   AggregateUsage aggregateUsage;
 
   /**
-   * A positive integer in cents (or local equivalent) (or 0 for a free plan) representing how much
-   * to charge on a recurring basis.
+   * A positive integer in cents (or local equivalent) (or 0 for a free plan) representing how much to charge on a recurring basis.
    */
   @SerializedName("amount")
   Long amount;
 
   /**
-   * Same as {@code amount}, but accepts a decimal value with at most 12 decimal places. Only one of
-   * {@code amount} and {@code amount_decimal} can be set.
+   * Same as {@code amount}, but accepts a decimal value with at most 12 decimal places. Only one of {@code amount} and {@code amount_decimal} can be set.
    */
   @SerializedName("amount_decimal")
   BigDecimal amountDecimal;
 
   /**
-   * Describes how to compute the price per period. Either {@code per_unit} or {@code tiered}.
-   * {@code per_unit} indicates that the fixed amount (specified in {@code amount}) will be charged
-   * per unit in {@code quantity} (for plans with {@code usage_type=licensed}), or per unit of total
-   * usage (for plans with {@code usage_type=metered}). {@code tiered} indicates that the unit
-   * pricing will be computed using a tiering strategy as defined using the {@code tiers} and {@code
-   * tiers_mode} attributes.
+   * Describes how to compute the price per period. Either {@code per_unit} or {@code tiered}. {@code per_unit} indicates that the fixed amount (specified in {@code amount}) will be charged per unit in {@code quantity} (for plans with {@code usage_type=licensed}), or per unit of total usage (for plans with {@code usage_type=metered}). {@code tiered} indicates that the unit pricing will be computed using a tiering strategy as defined using the {@code tiers} and {@code tiers_mode} attributes.
    */
   @SerializedName("billing_scheme")
   BillingScheme billingScheme;
 
   /**
-   * Three-letter <a href="https://www.iso.org/iso-4217-currency-codes.html">ISO currency code</a>,
-   * in lowercase. Must be a <a href="https://stripe.com/docs/currencies">supported currency</a>.
+   * Three-letter <a href="https://www.iso.org/iso-4217-currency-codes.html">ISO currency code</a>, in lowercase. Must be a <a href="https://stripe.com/docs/currencies">supported currency</a>.
    */
   @SerializedName("currency")
   String currency;
 
-  /** Specifies which fields in the response should be expanded. */
+  /**
+   * Specifies which fields in the response should be expanded.
+   */
   @SerializedName("expand")
   List<String> expand;
 
   /**
-   * Map of extra parameters for custom features not available in this client library. The content
-   * in this map is not serialized under this field's {@code @SerializedName} value. Instead, each
-   * key/value pair is serialized as if the key is a root-level field (serialized) name in this
-   * param object. Effectively, this map is flattened to its parent instance.
+   * Map of extra parameters for custom features not available in this client library. The content in this map is not serialized under this field's {@code @SerializedName} value. Instead, each key/value pair is serialized as if the key is a root-level field (serialized) name in this param object. Effectively, this map is flattened to its parent instance.
    */
   @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
   Map<String, Object> extraParams;
 
   /**
-   * An identifier randomly generated by Stripe. Used to identify this plan when subscribing a
-   * customer. You can optionally override this ID, but the ID must be unique across all plans in
-   * your Stripe account. You can, however, use the same plan ID in both live and test modes.
+   * An identifier randomly generated by Stripe. Used to identify this plan when subscribing a customer. You can optionally override this ID, but the ID must be unique across all plans in your Stripe account. You can, however, use the same plan ID in both live and test modes.
    */
   @SerializedName("id")
   String id;
@@ -87,23 +75,20 @@ public class PlanCreateParams extends ApiRequestParams {
   Interval interval;
 
   /**
-   * The number of intervals between subscription billings. For example, {@code interval=month} and
-   * {@code interval_count=3} bills every 3 months. Maximum of one year interval allowed (1 year, 12
-   * months, or 52 weeks).
+   * The number of intervals between subscription billings. For example, {@code interval=month} and {@code interval_count=3} bills every 3 months. Maximum of one year interval allowed (1 year, 12 months, or 52 weeks).
    */
   @SerializedName("interval_count")
   Long intervalCount;
 
   /**
-   * Set of <a href="https://stripe.com/docs/api/metadata">key-value pairs</a> that you can attach
-   * to an object. This can be useful for storing additional information about the object in a
-   * structured format. Individual keys can be unset by posting an empty value to them. All keys can
-   * be unset by posting an empty value to {@code metadata}.
+   * Set of <a href="https://stripe.com/docs/api/metadata">key-value pairs</a> that you can attach to an object. This can be useful for storing additional information about the object in a structured format. Individual keys can be unset by posting an empty value to them. All keys can be unset by posting an empty value to {@code metadata}.
    */
   @SerializedName("metadata")
   Object metadata;
 
-  /** A brief description of the plan, hidden from customers. */
+  /**
+   * A brief description of the plan, hidden from customers.
+   */
   @SerializedName("nickname")
   String nickname;
 
@@ -111,40 +96,31 @@ public class PlanCreateParams extends ApiRequestParams {
   Object product;
 
   /**
-   * Each element represents a pricing tier. This parameter requires {@code billing_scheme} to be
-   * set to {@code tiered}. See also the documentation for {@code billing_scheme}.
+   * Each element represents a pricing tier. This parameter requires {@code billing_scheme} to be set to {@code tiered}. See also the documentation for {@code billing_scheme}.
    */
   @SerializedName("tiers")
   List<Tier> tiers;
 
   /**
-   * Defines if the tiering price should be {@code graduated} or {@code volume} based. In {@code
-   * volume}-based tiering, the maximum quantity within a period determines the per unit price, in
-   * {@code graduated} tiering pricing can successively change as the quantity grows.
+   * Defines if the tiering price should be {@code graduated} or {@code volume} based. In {@code volume}-based tiering, the maximum quantity within a period determines the per unit price, in {@code graduated} tiering pricing can successively change as the quantity grows.
    */
   @SerializedName("tiers_mode")
   TiersMode tiersMode;
 
   /**
-   * Apply a transformation to the reported usage or set quantity before computing the billed price.
-   * Cannot be combined with {@code tiers}.
+   * Apply a transformation to the reported usage or set quantity before computing the billed price. Cannot be combined with {@code tiers}.
    */
   @SerializedName("transform_usage")
   TransformUsage transformUsage;
 
   /**
-   * Default number of trial days when subscribing a customer to this plan using <a
-   * href="https://stripe.com/docs/api#create_subscription-trial_from_plan">{@code
-   * trial_from_plan=true}</a>.
+   * Default number of trial days when subscribing a customer to this plan using <a href="https://stripe.com/docs/api#create_subscription-trial_from_plan">{@code trial_from_plan=true}</a>.
    */
   @SerializedName("trial_period_days")
   Long trialPeriodDays;
 
   /**
-   * Configures how the quantity per period should be determined. Can be either {@code metered} or
-   * {@code licensed}. {@code licensed} automatically bills the {@code quantity} set when adding it
-   * to a subscription. {@code metered} aggregates the total usage based on usage records. Defaults
-   * to {@code licensed}.
+   * Configures how the quantity per period should be determined. Can be either {@code metered} or {@code licensed}. {@code licensed} automatically bills the {@code quantity} set when adding it to a subscription. {@code metered} aggregates the total usage based on usage records. Defaults to {@code licensed}.
    */
   @SerializedName("usage_type")
   UsageType usageType;
@@ -189,11 +165,9 @@ public class PlanCreateParams extends ApiRequestParams {
     this.trialPeriodDays = trialPeriodDays;
     this.usageType = usageType;
   }
-
   public static Builder builder() {
     return new Builder();
   }
-
   public static class Builder {
     private Boolean active;
 
@@ -233,42 +207,43 @@ public class PlanCreateParams extends ApiRequestParams {
 
     private UsageType usageType;
 
-    /** Finalize and obtain parameter instance from this builder. */
+    /**
+     * Finalize and obtain parameter instance from this builder.
+     */
     public PlanCreateParams build() {
       return new PlanCreateParams(
-          this.active,
-          this.aggregateUsage,
-          this.amount,
-          this.amountDecimal,
-          this.billingScheme,
-          this.currency,
-          this.expand,
-          this.extraParams,
-          this.id,
-          this.interval,
-          this.intervalCount,
-          this.metadata,
-          this.nickname,
-          this.product,
-          this.tiers,
-          this.tiersMode,
-          this.transformUsage,
-          this.trialPeriodDays,
-          this.usageType);
+        this.active,
+        this.aggregateUsage,
+        this.amount,
+        this.amountDecimal,
+        this.billingScheme,
+        this.currency,
+        this.expand,
+        this.extraParams,
+        this.id,
+        this.interval,
+        this.intervalCount,
+        this.metadata,
+        this.nickname,
+        this.product,
+        this.tiers,
+        this.tiersMode,
+        this.transformUsage,
+        this.trialPeriodDays,
+        this.usageType
+      );
     }
 
-    /** Whether the plan is currently available for new subscriptions. Defaults to {@code true}. */
+    /**
+     * Whether the plan is currently available for new subscriptions. Defaults to {@code true}.
+     */
     public Builder setActive(Boolean active) {
       this.active = active;
       return this;
     }
 
     /**
-     * Specifies a usage aggregation strategy for plans of {@code usage_type=metered}. Allowed
-     * values are {@code sum} for summing up all usage during a period, {@code last_during_period}
-     * for using the last usage record reported within a period, {@code last_ever} for using the
-     * last usage record ever (across period bounds) or {@code max} which uses the usage record with
-     * the maximum reported usage during a period. Defaults to {@code sum}.
+     * Specifies a usage aggregation strategy for plans of {@code usage_type=metered}. Allowed values are {@code sum} for summing up all usage during a period, {@code last_during_period} for using the last usage record reported within a period, {@code last_ever} for using the last usage record ever (across period bounds) or {@code max} which uses the usage record with the maximum reported usage during a period. Defaults to {@code sum}.
      */
     public Builder setAggregateUsage(AggregateUsage aggregateUsage) {
       this.aggregateUsage = aggregateUsage;
@@ -276,8 +251,7 @@ public class PlanCreateParams extends ApiRequestParams {
     }
 
     /**
-     * A positive integer in cents (or local equivalent) (or 0 for a free plan) representing how
-     * much to charge on a recurring basis.
+     * A positive integer in cents (or local equivalent) (or 0 for a free plan) representing how much to charge on a recurring basis.
      */
     public Builder setAmount(Long amount) {
       this.amount = amount;
@@ -285,8 +259,7 @@ public class PlanCreateParams extends ApiRequestParams {
     }
 
     /**
-     * Same as {@code amount}, but accepts a decimal value with at most 12 decimal places. Only one
-     * of {@code amount} and {@code amount_decimal} can be set.
+     * Same as {@code amount}, but accepts a decimal value with at most 12 decimal places. Only one of {@code amount} and {@code amount_decimal} can be set.
      */
     public Builder setAmountDecimal(BigDecimal amountDecimal) {
       this.amountDecimal = amountDecimal;
@@ -294,12 +267,7 @@ public class PlanCreateParams extends ApiRequestParams {
     }
 
     /**
-     * Describes how to compute the price per period. Either {@code per_unit} or {@code tiered}.
-     * {@code per_unit} indicates that the fixed amount (specified in {@code amount}) will be
-     * charged per unit in {@code quantity} (for plans with {@code usage_type=licensed}), or per
-     * unit of total usage (for plans with {@code usage_type=metered}). {@code tiered} indicates
-     * that the unit pricing will be computed using a tiering strategy as defined using the {@code
-     * tiers} and {@code tiers_mode} attributes.
+     * Describes how to compute the price per period. Either {@code per_unit} or {@code tiered}. {@code per_unit} indicates that the fixed amount (specified in {@code amount}) will be charged per unit in {@code quantity} (for plans with {@code usage_type=licensed}), or per unit of total usage (for plans with {@code usage_type=metered}). {@code tiered} indicates that the unit pricing will be computed using a tiering strategy as defined using the {@code tiers} and {@code tiers_mode} attributes.
      */
     public Builder setBillingScheme(BillingScheme billingScheme) {
       this.billingScheme = billingScheme;
@@ -307,9 +275,7 @@ public class PlanCreateParams extends ApiRequestParams {
     }
 
     /**
-     * Three-letter <a href="https://www.iso.org/iso-4217-currency-codes.html">ISO currency
-     * code</a>, in lowercase. Must be a <a href="https://stripe.com/docs/currencies">supported
-     * currency</a>.
+     * Three-letter <a href="https://www.iso.org/iso-4217-currency-codes.html">ISO currency code</a>, in lowercase. Must be a <a href="https://stripe.com/docs/currencies">supported currency</a>.
      */
     public Builder setCurrency(String currency) {
       this.currency = currency;
@@ -317,9 +283,7 @@ public class PlanCreateParams extends ApiRequestParams {
     }
 
     /**
-     * Add an element to `expand` list. A list is initialized for the first `add/addAll` call, and
-     * subsequent calls adds additional elements to the original list. See {@link
-     * PlanCreateParams#expand} for the field documentation.
+     * Add an element to `expand` list. A list is initialized for the first `add/addAll` call, and subsequent calls adds additional elements to the original list. See {@link PlanCreateParams#expand} for the field documentation.
      */
     public Builder addExpand(String element) {
       if (this.expand == null) {
@@ -330,9 +294,7 @@ public class PlanCreateParams extends ApiRequestParams {
     }
 
     /**
-     * Add all elements to `expand` list. A list is initialized for the first `add/addAll` call, and
-     * subsequent calls adds additional elements to the original list. See {@link
-     * PlanCreateParams#expand} for the field documentation.
+     * Add all elements to `expand` list. A list is initialized for the first `add/addAll` call, and subsequent calls adds additional elements to the original list. See {@link PlanCreateParams#expand} for the field documentation.
      */
     public Builder addAllExpand(List<String> elements) {
       if (this.expand == null) {
@@ -343,9 +305,7 @@ public class PlanCreateParams extends ApiRequestParams {
     }
 
     /**
-     * Add a key/value pair to `extraParams` map. A map is initialized for the first `put/putAll`
-     * call, and subsequent calls add additional key/value pairs to the original map. See {@link
-     * PlanCreateParams#extraParams} for the field documentation.
+     * Add a key/value pair to `extraParams` map. A map is initialized for the first `put/putAll` call, and subsequent calls add additional key/value pairs to the original map. See {@link PlanCreateParams#extraParams} for the field documentation.
      */
     public Builder putExtraParam(String key, Object value) {
       if (this.extraParams == null) {
@@ -356,9 +316,7 @@ public class PlanCreateParams extends ApiRequestParams {
     }
 
     /**
-     * Add all map key/value pairs to `extraParams` map. A map is initialized for the first
-     * `put/putAll` call, and subsequent calls add additional key/value pairs to the original map.
-     * See {@link PlanCreateParams#extraParams} for the field documentation.
+     * Add all map key/value pairs to `extraParams` map. A map is initialized for the first `put/putAll` call, and subsequent calls add additional key/value pairs to the original map. See {@link PlanCreateParams#extraParams} for the field documentation.
      */
     public Builder putAllExtraParam(Map<String, Object> map) {
       if (this.extraParams == null) {
@@ -369,9 +327,7 @@ public class PlanCreateParams extends ApiRequestParams {
     }
 
     /**
-     * An identifier randomly generated by Stripe. Used to identify this plan when subscribing a
-     * customer. You can optionally override this ID, but the ID must be unique across all plans in
-     * your Stripe account. You can, however, use the same plan ID in both live and test modes.
+     * An identifier randomly generated by Stripe. Used to identify this plan when subscribing a customer. You can optionally override this ID, but the ID must be unique across all plans in your Stripe account. You can, however, use the same plan ID in both live and test modes.
      */
     public Builder setId(String id) {
       this.id = id;
@@ -387,9 +343,7 @@ public class PlanCreateParams extends ApiRequestParams {
     }
 
     /**
-     * The number of intervals between subscription billings. For example, {@code interval=month}
-     * and {@code interval_count=3} bills every 3 months. Maximum of one year interval allowed (1
-     * year, 12 months, or 52 weeks).
+     * The number of intervals between subscription billings. For example, {@code interval=month} and {@code interval_count=3} bills every 3 months. Maximum of one year interval allowed (1 year, 12 months, or 52 weeks).
      */
     public Builder setIntervalCount(Long intervalCount) {
       this.intervalCount = intervalCount;
@@ -397,9 +351,7 @@ public class PlanCreateParams extends ApiRequestParams {
     }
 
     /**
-     * Add a key/value pair to `metadata` map. A map is initialized for the first `put/putAll` call,
-     * and subsequent calls add additional key/value pairs to the original map. See {@link
-     * PlanCreateParams#metadata} for the field documentation.
+     * Add a key/value pair to `metadata` map. A map is initialized for the first `put/putAll` call, and subsequent calls add additional key/value pairs to the original map. See {@link PlanCreateParams#metadata} for the field documentation.
      */
     @SuppressWarnings("unchecked")
     public Builder putMetadata(String key, String value) {
@@ -411,9 +363,7 @@ public class PlanCreateParams extends ApiRequestParams {
     }
 
     /**
-     * Add all map key/value pairs to `metadata` map. A map is initialized for the first
-     * `put/putAll` call, and subsequent calls add additional key/value pairs to the original map.
-     * See {@link PlanCreateParams#metadata} for the field documentation.
+     * Add all map key/value pairs to `metadata` map. A map is initialized for the first `put/putAll` call, and subsequent calls add additional key/value pairs to the original map. See {@link PlanCreateParams#metadata} for the field documentation.
      */
     @SuppressWarnings("unchecked")
     public Builder putAllMetadata(Map<String, String> map) {
@@ -425,10 +375,7 @@ public class PlanCreateParams extends ApiRequestParams {
     }
 
     /**
-     * Set of <a href="https://stripe.com/docs/api/metadata">key-value pairs</a> that you can attach
-     * to an object. This can be useful for storing additional information about the object in a
-     * structured format. Individual keys can be unset by posting an empty value to them. All keys
-     * can be unset by posting an empty value to {@code metadata}.
+     * Set of <a href="https://stripe.com/docs/api/metadata">key-value pairs</a> that you can attach to an object. This can be useful for storing additional information about the object in a structured format. Individual keys can be unset by posting an empty value to them. All keys can be unset by posting an empty value to {@code metadata}.
      */
     public Builder setMetadata(EmptyParam metadata) {
       this.metadata = metadata;
@@ -436,17 +383,16 @@ public class PlanCreateParams extends ApiRequestParams {
     }
 
     /**
-     * Set of <a href="https://stripe.com/docs/api/metadata">key-value pairs</a> that you can attach
-     * to an object. This can be useful for storing additional information about the object in a
-     * structured format. Individual keys can be unset by posting an empty value to them. All keys
-     * can be unset by posting an empty value to {@code metadata}.
+     * Set of <a href="https://stripe.com/docs/api/metadata">key-value pairs</a> that you can attach to an object. This can be useful for storing additional information about the object in a structured format. Individual keys can be unset by posting an empty value to them. All keys can be unset by posting an empty value to {@code metadata}.
      */
     public Builder setMetadata(Map<String, String> metadata) {
       this.metadata = metadata;
       return this;
     }
 
-    /** A brief description of the plan, hidden from customers. */
+    /**
+     * A brief description of the plan, hidden from customers.
+     */
     public Builder setNickname(String nickname) {
       this.nickname = nickname;
       return this;
@@ -463,9 +409,7 @@ public class PlanCreateParams extends ApiRequestParams {
     }
 
     /**
-     * Add an element to `tiers` list. A list is initialized for the first `add/addAll` call, and
-     * subsequent calls adds additional elements to the original list. See {@link
-     * PlanCreateParams#tiers} for the field documentation.
+     * Add an element to `tiers` list. A list is initialized for the first `add/addAll` call, and subsequent calls adds additional elements to the original list. See {@link PlanCreateParams#tiers} for the field documentation.
      */
     public Builder addTier(Tier element) {
       if (this.tiers == null) {
@@ -476,9 +420,7 @@ public class PlanCreateParams extends ApiRequestParams {
     }
 
     /**
-     * Add all elements to `tiers` list. A list is initialized for the first `add/addAll` call, and
-     * subsequent calls adds additional elements to the original list. See {@link
-     * PlanCreateParams#tiers} for the field documentation.
+     * Add all elements to `tiers` list. A list is initialized for the first `add/addAll` call, and subsequent calls adds additional elements to the original list. See {@link PlanCreateParams#tiers} for the field documentation.
      */
     public Builder addAllTier(List<Tier> elements) {
       if (this.tiers == null) {
@@ -489,9 +431,7 @@ public class PlanCreateParams extends ApiRequestParams {
     }
 
     /**
-     * Defines if the tiering price should be {@code graduated} or {@code volume} based. In {@code
-     * volume}-based tiering, the maximum quantity within a period determines the per unit price, in
-     * {@code graduated} tiering pricing can successively change as the quantity grows.
+     * Defines if the tiering price should be {@code graduated} or {@code volume} based. In {@code volume}-based tiering, the maximum quantity within a period determines the per unit price, in {@code graduated} tiering pricing can successively change as the quantity grows.
      */
     public Builder setTiersMode(TiersMode tiersMode) {
       this.tiersMode = tiersMode;
@@ -499,8 +439,7 @@ public class PlanCreateParams extends ApiRequestParams {
     }
 
     /**
-     * Apply a transformation to the reported usage or set quantity before computing the billed
-     * price. Cannot be combined with {@code tiers}.
+     * Apply a transformation to the reported usage or set quantity before computing the billed price. Cannot be combined with {@code tiers}.
      */
     public Builder setTransformUsage(TransformUsage transformUsage) {
       this.transformUsage = transformUsage;
@@ -508,9 +447,7 @@ public class PlanCreateParams extends ApiRequestParams {
     }
 
     /**
-     * Default number of trial days when subscribing a customer to this plan using <a
-     * href="https://stripe.com/docs/api#create_subscription-trial_from_plan">{@code
-     * trial_from_plan=true}</a>.
+     * Default number of trial days when subscribing a customer to this plan using <a href="https://stripe.com/docs/api#create_subscription-trial_from_plan">{@code trial_from_plan=true}</a>.
      */
     public Builder setTrialPeriodDays(Long trialPeriodDays) {
       this.trialPeriodDays = trialPeriodDays;
@@ -518,71 +455,61 @@ public class PlanCreateParams extends ApiRequestParams {
     }
 
     /**
-     * Configures how the quantity per period should be determined. Can be either {@code metered} or
-     * {@code licensed}. {@code licensed} automatically bills the {@code quantity} set when adding
-     * it to a subscription. {@code metered} aggregates the total usage based on usage records.
-     * Defaults to {@code licensed}.
+     * Configures how the quantity per period should be determined. Can be either {@code metered} or {@code licensed}. {@code licensed} automatically bills the {@code quantity} set when adding it to a subscription. {@code metered} aggregates the total usage based on usage records. Defaults to {@code licensed}.
      */
     public Builder setUsageType(UsageType usageType) {
       this.usageType = usageType;
       return this;
     }
   }
-
   @Getter
   public static class Product {
-    /** Whether the product is currently available for purchase. Defaults to {@code true}. */
+    /**
+     * Whether the product is currently available for purchase. Defaults to {@code true}.
+     */
     @SerializedName("active")
     Boolean active;
 
     /**
-     * Map of extra parameters for custom features not available in this client library. The content
-     * in this map is not serialized under this field's {@code @SerializedName} value. Instead, each
-     * key/value pair is serialized as if the key is a root-level field (serialized) name in this
-     * param object. Effectively, this map is flattened to its parent instance.
+     * Map of extra parameters for custom features not available in this client library. The content in this map is not serialized under this field's {@code @SerializedName} value. Instead, each key/value pair is serialized as if the key is a root-level field (serialized) name in this param object. Effectively, this map is flattened to its parent instance.
      */
     @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
     Map<String, Object> extraParams;
 
     /**
-     * The identifier for the product. Must be unique. If not provided, an identifier will be
-     * randomly generated.
+     * The identifier for the product. Must be unique. If not provided, an identifier will be randomly generated.
      */
     @SerializedName("id")
     String id;
 
     /**
-     * Set of <a href="https://stripe.com/docs/api/metadata">key-value pairs</a> that you can attach
-     * to an object. This can be useful for storing additional information about the object in a
-     * structured format. Individual keys can be unset by posting an empty value to them. All keys
-     * can be unset by posting an empty value to {@code metadata}.
+     * Set of <a href="https://stripe.com/docs/api/metadata">key-value pairs</a> that you can attach to an object. This can be useful for storing additional information about the object in a structured format. Individual keys can be unset by posting an empty value to them. All keys can be unset by posting an empty value to {@code metadata}.
      */
     @SerializedName("metadata")
     Map<String, String> metadata;
 
-    /** The product's name, meant to be displayable to the customer. */
+    /**
+     * The product's name, meant to be displayable to the customer.
+     */
     @SerializedName("name")
     String name;
 
     /**
-     * An arbitrary string to be displayed on your customer's credit card or bank statement. While
-     * most banks display this information consistently, some may display it incorrectly or not at
-     * all.
+     * An arbitrary string to be displayed on your customer's credit card or bank statement. While most banks display this information consistently, some may display it incorrectly or not at all.
      *
-     * <p>This may be up to 22 characters. The statement description may not include {@code <},
-     * {@code >}, {@code \}, {@code "}, {@code '} characters, and will appear on your customer's
-     * statement in capital letters. Non-ASCII characters are automatically stripped.
+     * <p>This may be up to 22 characters. The statement description may not include {@code <}, {@code >}, {@code \}, {@code "}, {@code '} characters, and will appear on your customer's statement in capital letters. Non-ASCII characters are automatically stripped.
      */
     @SerializedName("statement_descriptor")
     String statementDescriptor;
 
-    /** A <a href="https://stripe.com/docs/tax/tax-categories">tax code</a> ID. */
+    /**
+     * A <a href="https://stripe.com/docs/tax/tax-categories">tax code</a> ID.
+     */
     @SerializedName("tax_code")
     String taxCode;
 
     /**
-     * A label that represents units of this product in Stripe and on customers’ receipts and
-     * invoices. When set, this will be included in associated invoice line item descriptions.
+     * A label that represents units of this product in Stripe and on customers’ receipts and invoices. When set, this will be included in associated invoice line item descriptions.
      */
     @SerializedName("unit_label")
     String unitLabel;
@@ -605,11 +532,9 @@ public class PlanCreateParams extends ApiRequestParams {
       this.taxCode = taxCode;
       this.unitLabel = unitLabel;
     }
-
     public static Builder builder() {
       return new Builder();
     }
-
     public static class Builder {
       private Boolean active;
 
@@ -627,29 +552,32 @@ public class PlanCreateParams extends ApiRequestParams {
 
       private String unitLabel;
 
-      /** Finalize and obtain parameter instance from this builder. */
+      /**
+       * Finalize and obtain parameter instance from this builder.
+       */
       public Product build() {
         return new Product(
-            this.active,
-            this.extraParams,
-            this.id,
-            this.metadata,
-            this.name,
-            this.statementDescriptor,
-            this.taxCode,
-            this.unitLabel);
+          this.active,
+          this.extraParams,
+          this.id,
+          this.metadata,
+          this.name,
+          this.statementDescriptor,
+          this.taxCode,
+          this.unitLabel
+        );
       }
 
-      /** Whether the product is currently available for purchase. Defaults to {@code true}. */
+      /**
+       * Whether the product is currently available for purchase. Defaults to {@code true}.
+       */
       public Builder setActive(Boolean active) {
         this.active = active;
         return this;
       }
 
       /**
-       * Add a key/value pair to `extraParams` map. A map is initialized for the first `put/putAll`
-       * call, and subsequent calls add additional key/value pairs to the original map. See {@link
-       * PlanCreateParams.Product#extraParams} for the field documentation.
+       * Add a key/value pair to `extraParams` map. A map is initialized for the first `put/putAll` call, and subsequent calls add additional key/value pairs to the original map. See {@link PlanCreateParams.Product#extraParams} for the field documentation.
        */
       public Builder putExtraParam(String key, Object value) {
         if (this.extraParams == null) {
@@ -660,9 +588,7 @@ public class PlanCreateParams extends ApiRequestParams {
       }
 
       /**
-       * Add all map key/value pairs to `extraParams` map. A map is initialized for the first
-       * `put/putAll` call, and subsequent calls add additional key/value pairs to the original map.
-       * See {@link PlanCreateParams.Product#extraParams} for the field documentation.
+       * Add all map key/value pairs to `extraParams` map. A map is initialized for the first `put/putAll` call, and subsequent calls add additional key/value pairs to the original map. See {@link PlanCreateParams.Product#extraParams} for the field documentation.
        */
       public Builder putAllExtraParam(Map<String, Object> map) {
         if (this.extraParams == null) {
@@ -673,8 +599,7 @@ public class PlanCreateParams extends ApiRequestParams {
       }
 
       /**
-       * The identifier for the product. Must be unique. If not provided, an identifier will be
-       * randomly generated.
+       * The identifier for the product. Must be unique. If not provided, an identifier will be randomly generated.
        */
       public Builder setId(String id) {
         this.id = id;
@@ -682,9 +607,7 @@ public class PlanCreateParams extends ApiRequestParams {
       }
 
       /**
-       * Add a key/value pair to `metadata` map. A map is initialized for the first `put/putAll`
-       * call, and subsequent calls add additional key/value pairs to the original map. See {@link
-       * PlanCreateParams.Product#metadata} for the field documentation.
+       * Add a key/value pair to `metadata` map. A map is initialized for the first `put/putAll` call, and subsequent calls add additional key/value pairs to the original map. See {@link PlanCreateParams.Product#metadata} for the field documentation.
        */
       public Builder putMetadata(String key, String value) {
         if (this.metadata == null) {
@@ -695,9 +618,7 @@ public class PlanCreateParams extends ApiRequestParams {
       }
 
       /**
-       * Add all map key/value pairs to `metadata` map. A map is initialized for the first
-       * `put/putAll` call, and subsequent calls add additional key/value pairs to the original map.
-       * See {@link PlanCreateParams.Product#metadata} for the field documentation.
+       * Add all map key/value pairs to `metadata` map. A map is initialized for the first `put/putAll` call, and subsequent calls add additional key/value pairs to the original map. See {@link PlanCreateParams.Product#metadata} for the field documentation.
        */
       public Builder putAllMetadata(Map<String, String> map) {
         if (this.metadata == null) {
@@ -707,35 +628,34 @@ public class PlanCreateParams extends ApiRequestParams {
         return this;
       }
 
-      /** The product's name, meant to be displayable to the customer. */
+      /**
+       * The product's name, meant to be displayable to the customer.
+       */
       public Builder setName(String name) {
         this.name = name;
         return this;
       }
 
       /**
-       * An arbitrary string to be displayed on your customer's credit card or bank statement. While
-       * most banks display this information consistently, some may display it incorrectly or not at
-       * all.
+       * An arbitrary string to be displayed on your customer's credit card or bank statement. While most banks display this information consistently, some may display it incorrectly or not at all.
        *
-       * <p>This may be up to 22 characters. The statement description may not include {@code <},
-       * {@code >}, {@code \}, {@code "}, {@code '} characters, and will appear on your customer's
-       * statement in capital letters. Non-ASCII characters are automatically stripped.
+       * <p>This may be up to 22 characters. The statement description may not include {@code <}, {@code >}, {@code \}, {@code "}, {@code '} characters, and will appear on your customer's statement in capital letters. Non-ASCII characters are automatically stripped.
        */
       public Builder setStatementDescriptor(String statementDescriptor) {
         this.statementDescriptor = statementDescriptor;
         return this;
       }
 
-      /** A <a href="https://stripe.com/docs/tax/tax-categories">tax code</a> ID. */
+      /**
+       * A <a href="https://stripe.com/docs/tax/tax-categories">tax code</a> ID.
+       */
       public Builder setTaxCode(String taxCode) {
         this.taxCode = taxCode;
         return this;
       }
 
       /**
-       * A label that represents units of this product in Stripe and on customers’ receipts and
-       * invoices. When set, this will be included in associated invoice line item descriptions.
+       * A label that represents units of this product in Stripe and on customers’ receipts and invoices. When set, this will be included in associated invoice line item descriptions.
        */
       public Builder setUnitLabel(String unitLabel) {
         this.unitLabel = unitLabel;
@@ -743,14 +663,10 @@ public class PlanCreateParams extends ApiRequestParams {
       }
     }
   }
-
   @Getter
   public static class Tier {
     /**
-     * Map of extra parameters for custom features not available in this client library. The content
-     * in this map is not serialized under this field's {@code @SerializedName} value. Instead, each
-     * key/value pair is serialized as if the key is a root-level field (serialized) name in this
-     * param object. Effectively, this map is flattened to its parent instance.
+     * Map of extra parameters for custom features not available in this client library. The content in this map is not serialized under this field's {@code @SerializedName} value. Instead, each key/value pair is serialized as if the key is a root-level field (serialized) name in this param object. Effectively, this map is flattened to its parent instance.
      */
     @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
     Map<String, Object> extraParams;
@@ -762,28 +678,25 @@ public class PlanCreateParams extends ApiRequestParams {
     Long flatAmount;
 
     /**
-     * Same as {@code flat_amount}, but accepts a decimal value representing an integer in the minor
-     * units of the currency. Only one of {@code flat_amount} and {@code flat_amount_decimal} can be
-     * set.
+     * Same as {@code flat_amount}, but accepts a decimal value representing an integer in the minor units of the currency. Only one of {@code flat_amount} and {@code flat_amount_decimal} can be set.
      */
     @SerializedName("flat_amount_decimal")
     BigDecimal flatAmountDecimal;
 
-    /** The per unit billing amount for each individual unit for which this tier applies. */
+    /**
+     * The per unit billing amount for each individual unit for which this tier applies.
+     */
     @SerializedName("unit_amount")
     Long unitAmount;
 
     /**
-     * Same as {@code unit_amount}, but accepts a decimal value in cents (or local equivalent) with
-     * at most 12 decimal places. Only one of {@code unit_amount} and {@code unit_amount_decimal}
-     * can be set.
+     * Same as {@code unit_amount}, but accepts a decimal value in cents (or local equivalent) with at most 12 decimal places. Only one of {@code unit_amount} and {@code unit_amount_decimal} can be set.
      */
     @SerializedName("unit_amount_decimal")
     BigDecimal unitAmountDecimal;
 
     /**
-     * Specifies the upper bound of this tier. The lower bound of a tier is the upper bound of the
-     * previous tier adding one. Use {@code inf} to define a fallback tier.
+     * Specifies the upper bound of this tier. The lower bound of a tier is the upper bound of the previous tier adding one. Use {@code inf} to define a fallback tier.
      */
     @SerializedName("up_to")
     Object upTo;
@@ -802,11 +715,9 @@ public class PlanCreateParams extends ApiRequestParams {
       this.unitAmountDecimal = unitAmountDecimal;
       this.upTo = upTo;
     }
-
     public static Builder builder() {
       return new Builder();
     }
-
     public static class Builder {
       private Map<String, Object> extraParams;
 
@@ -820,21 +731,22 @@ public class PlanCreateParams extends ApiRequestParams {
 
       private Object upTo;
 
-      /** Finalize and obtain parameter instance from this builder. */
+      /**
+       * Finalize and obtain parameter instance from this builder.
+       */
       public Tier build() {
         return new Tier(
-            this.extraParams,
-            this.flatAmount,
-            this.flatAmountDecimal,
-            this.unitAmount,
-            this.unitAmountDecimal,
-            this.upTo);
+          this.extraParams,
+          this.flatAmount,
+          this.flatAmountDecimal,
+          this.unitAmount,
+          this.unitAmountDecimal,
+          this.upTo
+        );
       }
 
       /**
-       * Add a key/value pair to `extraParams` map. A map is initialized for the first `put/putAll`
-       * call, and subsequent calls add additional key/value pairs to the original map. See {@link
-       * PlanCreateParams.Tier#extraParams} for the field documentation.
+       * Add a key/value pair to `extraParams` map. A map is initialized for the first `put/putAll` call, and subsequent calls add additional key/value pairs to the original map. See {@link PlanCreateParams.Tier#extraParams} for the field documentation.
        */
       public Builder putExtraParam(String key, Object value) {
         if (this.extraParams == null) {
@@ -845,9 +757,7 @@ public class PlanCreateParams extends ApiRequestParams {
       }
 
       /**
-       * Add all map key/value pairs to `extraParams` map. A map is initialized for the first
-       * `put/putAll` call, and subsequent calls add additional key/value pairs to the original map.
-       * See {@link PlanCreateParams.Tier#extraParams} for the field documentation.
+       * Add all map key/value pairs to `extraParams` map. A map is initialized for the first `put/putAll` call, and subsequent calls add additional key/value pairs to the original map. See {@link PlanCreateParams.Tier#extraParams} for the field documentation.
        */
       public Builder putAllExtraParam(Map<String, Object> map) {
         if (this.extraParams == null) {
@@ -866,25 +776,23 @@ public class PlanCreateParams extends ApiRequestParams {
       }
 
       /**
-       * Same as {@code flat_amount}, but accepts a decimal value representing an integer in the
-       * minor units of the currency. Only one of {@code flat_amount} and {@code
-       * flat_amount_decimal} can be set.
+       * Same as {@code flat_amount}, but accepts a decimal value representing an integer in the minor units of the currency. Only one of {@code flat_amount} and {@code flat_amount_decimal} can be set.
        */
       public Builder setFlatAmountDecimal(BigDecimal flatAmountDecimal) {
         this.flatAmountDecimal = flatAmountDecimal;
         return this;
       }
 
-      /** The per unit billing amount for each individual unit for which this tier applies. */
+      /**
+       * The per unit billing amount for each individual unit for which this tier applies.
+       */
       public Builder setUnitAmount(Long unitAmount) {
         this.unitAmount = unitAmount;
         return this;
       }
 
       /**
-       * Same as {@code unit_amount}, but accepts a decimal value in cents (or local equivalent)
-       * with at most 12 decimal places. Only one of {@code unit_amount} and {@code
-       * unit_amount_decimal} can be set.
+       * Same as {@code unit_amount}, but accepts a decimal value in cents (or local equivalent) with at most 12 decimal places. Only one of {@code unit_amount} and {@code unit_amount_decimal} can be set.
        */
       public Builder setUnitAmountDecimal(BigDecimal unitAmountDecimal) {
         this.unitAmountDecimal = unitAmountDecimal;
@@ -892,8 +800,7 @@ public class PlanCreateParams extends ApiRequestParams {
       }
 
       /**
-       * Specifies the upper bound of this tier. The lower bound of a tier is the upper bound of the
-       * previous tier adding one. Use {@code inf} to define a fallback tier.
+       * Specifies the upper bound of this tier. The lower bound of a tier is the upper bound of the previous tier adding one. Use {@code inf} to define a fallback tier.
        */
       public Builder setUpTo(UpTo upTo) {
         this.upTo = upTo;
@@ -901,44 +808,40 @@ public class PlanCreateParams extends ApiRequestParams {
       }
 
       /**
-       * Specifies the upper bound of this tier. The lower bound of a tier is the upper bound of the
-       * previous tier adding one. Use {@code inf} to define a fallback tier.
+       * Specifies the upper bound of this tier. The lower bound of a tier is the upper bound of the previous tier adding one. Use {@code inf} to define a fallback tier.
        */
       public Builder setUpTo(Long upTo) {
         this.upTo = upTo;
         return this;
       }
     }
-
     public enum UpTo implements ApiRequestParams.EnumParam {
       @SerializedName("inf")
       INF("inf");
-
       @Getter(onMethod_ = {@Override})
       private final String value;
-
       UpTo(String value) {
         this.value = value;
       }
     }
   }
-
   @Getter
   public static class TransformUsage {
-    /** Divide usage by this number. */
+    /**
+     * Divide usage by this number.
+     */
     @SerializedName("divide_by")
     Long divideBy;
 
     /**
-     * Map of extra parameters for custom features not available in this client library. The content
-     * in this map is not serialized under this field's {@code @SerializedName} value. Instead, each
-     * key/value pair is serialized as if the key is a root-level field (serialized) name in this
-     * param object. Effectively, this map is flattened to its parent instance.
+     * Map of extra parameters for custom features not available in this client library. The content in this map is not serialized under this field's {@code @SerializedName} value. Instead, each key/value pair is serialized as if the key is a root-level field (serialized) name in this param object. Effectively, this map is flattened to its parent instance.
      */
     @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
     Map<String, Object> extraParams;
 
-    /** After division, either round the result {@code up} or {@code down}. */
+    /**
+     * After division, either round the result {@code up} or {@code down}.
+     */
     @SerializedName("round")
     Round round;
 
@@ -947,11 +850,9 @@ public class PlanCreateParams extends ApiRequestParams {
       this.extraParams = extraParams;
       this.round = round;
     }
-
     public static Builder builder() {
       return new Builder();
     }
-
     public static class Builder {
       private Long divideBy;
 
@@ -959,21 +860,23 @@ public class PlanCreateParams extends ApiRequestParams {
 
       private Round round;
 
-      /** Finalize and obtain parameter instance from this builder. */
+      /**
+       * Finalize and obtain parameter instance from this builder.
+       */
       public TransformUsage build() {
         return new TransformUsage(this.divideBy, this.extraParams, this.round);
       }
 
-      /** Divide usage by this number. */
+      /**
+       * Divide usage by this number.
+       */
       public Builder setDivideBy(Long divideBy) {
         this.divideBy = divideBy;
         return this;
       }
 
       /**
-       * Add a key/value pair to `extraParams` map. A map is initialized for the first `put/putAll`
-       * call, and subsequent calls add additional key/value pairs to the original map. See {@link
-       * PlanCreateParams.TransformUsage#extraParams} for the field documentation.
+       * Add a key/value pair to `extraParams` map. A map is initialized for the first `put/putAll` call, and subsequent calls add additional key/value pairs to the original map. See {@link PlanCreateParams.TransformUsage#extraParams} for the field documentation.
        */
       public Builder putExtraParam(String key, Object value) {
         if (this.extraParams == null) {
@@ -984,9 +887,7 @@ public class PlanCreateParams extends ApiRequestParams {
       }
 
       /**
-       * Add all map key/value pairs to `extraParams` map. A map is initialized for the first
-       * `put/putAll` call, and subsequent calls add additional key/value pairs to the original map.
-       * See {@link PlanCreateParams.TransformUsage#extraParams} for the field documentation.
+       * Add all map key/value pairs to `extraParams` map. A map is initialized for the first `put/putAll` call, and subsequent calls add additional key/value pairs to the original map. See {@link PlanCreateParams.TransformUsage#extraParams} for the field documentation.
        */
       public Builder putAllExtraParam(Map<String, Object> map) {
         if (this.extraParams == null) {
@@ -996,29 +897,27 @@ public class PlanCreateParams extends ApiRequestParams {
         return this;
       }
 
-      /** After division, either round the result {@code up} or {@code down}. */
+      /**
+       * After division, either round the result {@code up} or {@code down}.
+       */
       public Builder setRound(Round round) {
         this.round = round;
         return this;
       }
     }
-
     public enum Round implements ApiRequestParams.EnumParam {
       @SerializedName("down")
       DOWN("down"),
 
       @SerializedName("up")
       UP("up");
-
       @Getter(onMethod_ = {@Override})
       private final String value;
-
       Round(String value) {
         this.value = value;
       }
     }
   }
-
   public enum AggregateUsage implements ApiRequestParams.EnumParam {
     @SerializedName("last_during_period")
     LAST_DURING_PERIOD("last_during_period"),
@@ -1031,30 +930,24 @@ public class PlanCreateParams extends ApiRequestParams {
 
     @SerializedName("sum")
     SUM("sum");
-
     @Getter(onMethod_ = {@Override})
     private final String value;
-
     AggregateUsage(String value) {
       this.value = value;
     }
   }
-
   public enum BillingScheme implements ApiRequestParams.EnumParam {
     @SerializedName("per_unit")
     PER_UNIT("per_unit"),
 
     @SerializedName("tiered")
     TIERED("tiered");
-
     @Getter(onMethod_ = {@Override})
     private final String value;
-
     BillingScheme(String value) {
       this.value = value;
     }
   }
-
   public enum Interval implements ApiRequestParams.EnumParam {
     @SerializedName("day")
     DAY("day"),
@@ -1067,40 +960,32 @@ public class PlanCreateParams extends ApiRequestParams {
 
     @SerializedName("year")
     YEAR("year");
-
     @Getter(onMethod_ = {@Override})
     private final String value;
-
     Interval(String value) {
       this.value = value;
     }
   }
-
   public enum TiersMode implements ApiRequestParams.EnumParam {
     @SerializedName("graduated")
     GRADUATED("graduated"),
 
     @SerializedName("volume")
     VOLUME("volume");
-
     @Getter(onMethod_ = {@Override})
     private final String value;
-
     TiersMode(String value) {
       this.value = value;
     }
   }
-
   public enum UsageType implements ApiRequestParams.EnumParam {
     @SerializedName("licensed")
     LICENSED("licensed"),
 
     @SerializedName("metered")
     METERED("metered");
-
     @Getter(onMethod_ = {@Override})
     private final String value;
-
     UsageType(String value) {
       this.value = value;
     }

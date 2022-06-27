@@ -12,20 +12,28 @@ import lombok.Setter;
 @Setter
 @EqualsAndHashCode(callSuper = false)
 public class Rule extends StripeObject implements HasId {
-  /** The action taken on the payment. */
+  /**
+   * The action taken on the payment.
+   */
   @SerializedName("action")
   String action;
 
-  /** Always true for a deleted object. */
+  /**
+   * Always true for a deleted object.
+   */
   @SerializedName("deleted")
   Boolean deleted;
 
-  /** Unique identifier for the object. */
+  /**
+   * Unique identifier for the object.
+   */
   @Getter(onMethod_ = {@Override})
   @SerializedName("id")
   String id;
 
-  /** The predicate to evaluate the payment against. */
+  /**
+   * The predicate to evaluate the payment against.
+   */
   @SerializedName("predicate")
   String predicate;
 }

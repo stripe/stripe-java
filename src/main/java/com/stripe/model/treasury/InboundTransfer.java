@@ -26,46 +26,57 @@ import lombok.Setter;
 @Setter
 @EqualsAndHashCode(callSuper = false)
 public class InboundTransfer extends ApiResource implements HasId {
-  /** Amount (in cents) transferred. */
+  /**
+   * Amount (in cents) transferred.
+   */
   @SerializedName("amount")
   Long amount;
 
-  /** Returns {@code true} if the InboundTransfer is able to be canceled. */
+  /**
+   * Returns {@code true} if the InboundTransfer is able to be canceled.
+   */
   @SerializedName("cancelable")
   Boolean cancelable;
 
-  /** Time at which the object was created. Measured in seconds since the Unix epoch. */
+  /**
+   * Time at which the object was created. Measured in seconds since the Unix epoch.
+   */
   @SerializedName("created")
   Long created;
 
   /**
-   * Three-letter <a href="https://www.iso.org/iso-4217-currency-codes.html">ISO currency code</a>,
-   * in lowercase. Must be a <a href="https://stripe.com/docs/currencies">supported currency</a>.
+   * Three-letter <a href="https://www.iso.org/iso-4217-currency-codes.html">ISO currency code</a>, in lowercase. Must be a <a href="https://stripe.com/docs/currencies">supported currency</a>.
    */
   @SerializedName("currency")
   String currency;
 
-  /** An arbitrary string attached to the object. Often useful for displaying to users. */
+  /**
+   * An arbitrary string attached to the object. Often useful for displaying to users.
+   */
   @SerializedName("description")
   String description;
 
-  /** Details about this InboundTransfer's failure. Only set when status is {@code failed}. */
+  /**
+   * Details about this InboundTransfer's failure. Only set when status is {@code failed}.
+   */
   @SerializedName("failure_details")
   FailureDetails failureDetails;
 
-  /** The FinancialAccount that received the funds. */
+  /**
+   * The FinancialAccount that received the funds.
+   */
   @SerializedName("financial_account")
   String financialAccount;
 
   /**
-   * A <a href="https://stripe.com/docs/treasury/moving-money/regulatory-receipts">hosted
-   * transaction receipt</a> URL that is provided when money movement is considered regulated under
-   * Stripe's money transmission licenses.
+   * A <a href="https://stripe.com/docs/treasury/moving-money/regulatory-receipts">hosted transaction receipt</a> URL that is provided when money movement is considered regulated under Stripe's money transmission licenses.
    */
   @SerializedName("hosted_regulatory_receipt_url")
   String hostedRegulatoryReceiptUrl;
 
-  /** Unique identifier for the object. */
+  /**
+   * Unique identifier for the object.
+   */
   @Getter(onMethod_ = {@Override})
   @SerializedName("id")
   String id;
@@ -74,16 +85,13 @@ public class InboundTransfer extends ApiResource implements HasId {
   LinkedFlows linkedFlows;
 
   /**
-   * Has the value {@code true} if the object exists in live mode or the value {@code false} if the
-   * object exists in test mode.
+   * Has the value {@code true} if the object exists in live mode or the value {@code false} if the object exists in test mode.
    */
   @SerializedName("livemode")
   Boolean livemode;
 
   /**
-   * Set of <a href="https://stripe.com/docs/api/metadata">key-value pairs</a> that you can attach
-   * to an object. This can be useful for storing additional information about the object in a
-   * structured format.
+   * Set of <a href="https://stripe.com/docs/api/metadata">key-value pairs</a> that you can attach to an object. This can be useful for storing additional information about the object in a structured format.
    */
   @SerializedName("metadata")
   Map<String, String> metadata;
@@ -96,33 +104,32 @@ public class InboundTransfer extends ApiResource implements HasId {
   @SerializedName("object")
   String object;
 
-  /** The origin payment method to be debited for an InboundTransfer. */
+  /**
+   * The origin payment method to be debited for an InboundTransfer.
+   */
   @SerializedName("origin_payment_method")
   String originPaymentMethod;
 
-  /** Details about the PaymentMethod for an InboundTransfer. */
+  /**
+   * Details about the PaymentMethod for an InboundTransfer.
+   */
   @SerializedName("origin_payment_method_details")
   OriginPaymentMethodDetails originPaymentMethodDetails;
 
   /**
-   * Returns {@code true} if the funds for an InboundTransfer were returned after the
-   * InboundTransfer went to the {@code succeeded} state.
+   * Returns {@code true} if the funds for an InboundTransfer were returned after the InboundTransfer went to the {@code succeeded} state.
    */
   @SerializedName("returned")
   Boolean returned;
 
   /**
-   * Statement descriptor shown when funds are debited from the source. Not all payment networks
-   * support {@code statement_descriptor}.
+   * Statement descriptor shown when funds are debited from the source. Not all payment networks support {@code statement_descriptor}.
    */
   @SerializedName("statement_descriptor")
   String statementDescriptor;
 
   /**
-   * Status of the InboundTransfer: {@code processing}, {@code succeeded}, {@code failed}, and
-   * {@code canceled}. An InboundTransfer is {@code processing} if it is created and pending. The
-   * status changes to {@code succeeded} once the funds have been &quot;confirmed&quot; and a {@code
-   * transaction} is created and posted. The status changes to {@code failed} if the transfer fails.
+   * Status of the InboundTransfer: {@code processing}, {@code succeeded}, {@code failed}, and {@code canceled}. An InboundTransfer is {@code processing} if it is created and pending. The status changes to {@code succeeded} once the funds have been &quot;confirmed&quot; and a {@code transaction} is created and posted. The status changes to {@code failed} if the transfer fails.
    *
    * <p>One of {@code canceled}, {@code failed}, {@code processing}, or {@code succeeded}.
    */
@@ -132,13 +139,17 @@ public class InboundTransfer extends ApiResource implements HasId {
   @SerializedName("status_transitions")
   StatusTransitions statusTransitions;
 
-  /** The Transaction associated with this object. */
+  /**
+   * The Transaction associated with this object.
+   */
   @SerializedName("transaction")
   @Getter(lombok.AccessLevel.NONE)
   @Setter(lombok.AccessLevel.NONE)
   ExpandableField<Transaction> transaction;
 
-  /** Get ID of expandable {@code transaction} object. */
+  /**
+   * Get ID of expandable {@code transaction} object.
+   */
   public String getTransaction() {
     return (this.transaction != null) ? this.transaction.getId() : null;
   }
@@ -147,7 +158,9 @@ public class InboundTransfer extends ApiResource implements HasId {
     this.transaction = ApiResource.setExpandableFieldId(id, this.transaction);
   }
 
-  /** Get expanded {@code transaction}. */
+  /**
+   * Get expanded {@code transaction}.
+   */
   public Transaction getTransactionObject() {
     return (this.transaction != null) ? this.transaction.getExpanded() : null;
   }
@@ -156,134 +169,217 @@ public class InboundTransfer extends ApiResource implements HasId {
     this.transaction = new ExpandableField<Transaction>(expandableObject.getId(), expandableObject);
   }
 
-  /** Cancels an InboundTransfer. */
+  /**
+   * <p>Cancels an InboundTransfer.</p>
+   */
   public InboundTransfer cancel() throws StripeException {
     return cancel((Map<String, Object>) null, (RequestOptions) null);
   }
 
-  /** Cancels an InboundTransfer. */
+  /**
+   * <p>Cancels an InboundTransfer.</p>
+   */
   public InboundTransfer cancel(RequestOptions options) throws StripeException {
     return cancel((Map<String, Object>) null, options);
   }
 
-  /** Cancels an InboundTransfer. */
+  /**
+   * <p>Cancels an InboundTransfer.</p>
+   */
   public InboundTransfer cancel(Map<String, Object> params) throws StripeException {
     return cancel(params, (RequestOptions) null);
   }
 
-  /** Cancels an InboundTransfer. */
-  public InboundTransfer cancel(Map<String, Object> params, RequestOptions options)
-      throws StripeException {
+  /**
+   * <p>Cancels an InboundTransfer.</p>
+   */
+  public InboundTransfer cancel(
+      Map<String, Object> params,
+      RequestOptions options) throws StripeException {
     String url =
+      String.format(
+        "%s%s",
+        Stripe.getApiBase(),
         String.format(
-            "%s%s",
-            Stripe.getApiBase(),
-            String.format(
-                "/v1/treasury/inbound_transfers/%s/cancel", ApiResource.urlEncodeId(this.getId())));
+          "/v1/treasury/inbound_transfers/%s/cancel",
+          ApiResource.urlEncodeId(this.getId())
+        )
+      );
     return ApiResource.request(
-        ApiResource.RequestMethod.POST, url, params, InboundTransfer.class, options);
+      ApiResource.RequestMethod.POST,
+      url,
+      params,
+      InboundTransfer.class,
+      options
+    );
   }
 
-  /** Cancels an InboundTransfer. */
+  /**
+   * <p>Cancels an InboundTransfer.</p>
+   */
   public InboundTransfer cancel(InboundTransferCancelParams params) throws StripeException {
     return cancel(params, (RequestOptions) null);
   }
 
-  /** Cancels an InboundTransfer. */
-  public InboundTransfer cancel(InboundTransferCancelParams params, RequestOptions options)
-      throws StripeException {
+  /**
+   * <p>Cancels an InboundTransfer.</p>
+   */
+  public InboundTransfer cancel(
+      InboundTransferCancelParams params,
+      RequestOptions options) throws StripeException {
     String url =
+      String.format(
+        "%s%s",
+        Stripe.getApiBase(),
         String.format(
-            "%s%s",
-            Stripe.getApiBase(),
-            String.format(
-                "/v1/treasury/inbound_transfers/%s/cancel", ApiResource.urlEncodeId(this.getId())));
+          "/v1/treasury/inbound_transfers/%s/cancel",
+          ApiResource.urlEncodeId(this.getId())
+        )
+      );
     return ApiResource.request(
-        ApiResource.RequestMethod.POST, url, params, InboundTransfer.class, options);
+      ApiResource.RequestMethod.POST,
+      url,
+      params,
+      InboundTransfer.class,
+      options
+    );
   }
 
-  /** Creates an InboundTransfer. */
+  /**
+   * <p>Creates an InboundTransfer.</p>
+   */
   public static InboundTransfer create(Map<String, Object> params) throws StripeException {
     return create(params, (RequestOptions) null);
   }
 
-  /** Creates an InboundTransfer. */
-  public static InboundTransfer create(Map<String, Object> params, RequestOptions options)
-      throws StripeException {
+  /**
+   * <p>Creates an InboundTransfer.</p>
+   */
+  public static InboundTransfer create(
+      Map<String, Object> params,
+      RequestOptions options) throws StripeException {
     String url = String.format("%s%s", Stripe.getApiBase(), "/v1/treasury/inbound_transfers");
     return ApiResource.request(
-        ApiResource.RequestMethod.POST, url, params, InboundTransfer.class, options);
+      ApiResource.RequestMethod.POST,
+      url,
+      params,
+      InboundTransfer.class,
+      options
+    );
   }
 
-  /** Creates an InboundTransfer. */
+  /**
+   * <p>Creates an InboundTransfer.</p>
+   */
   public static InboundTransfer create(InboundTransferCreateParams params) throws StripeException {
     return create(params, (RequestOptions) null);
   }
 
-  /** Creates an InboundTransfer. */
-  public static InboundTransfer create(InboundTransferCreateParams params, RequestOptions options)
-      throws StripeException {
+  /**
+   * <p>Creates an InboundTransfer.</p>
+   */
+  public static InboundTransfer create(
+      InboundTransferCreateParams params,
+      RequestOptions options) throws StripeException {
     String url = String.format("%s%s", Stripe.getApiBase(), "/v1/treasury/inbound_transfers");
     return ApiResource.request(
-        ApiResource.RequestMethod.POST, url, params, InboundTransfer.class, options);
+      ApiResource.RequestMethod.POST,
+      url,
+      params,
+      InboundTransfer.class,
+      options
+    );
   }
 
-  /** Retrieves the details of an existing InboundTransfer. */
+  /**
+   * <p>Retrieves the details of an existing InboundTransfer.</p>
+   */
   public static InboundTransfer retrieve(String id) throws StripeException {
     return retrieve(id, (Map<String, Object>) null, (RequestOptions) null);
   }
 
-  /** Retrieves the details of an existing InboundTransfer. */
+  /**
+   * <p>Retrieves the details of an existing InboundTransfer.</p>
+   */
   public static InboundTransfer retrieve(String id, RequestOptions options) throws StripeException {
     return retrieve(id, (Map<String, Object>) null, options);
   }
 
-  /** Retrieves the details of an existing InboundTransfer. */
+  /**
+   * <p>Retrieves the details of an existing InboundTransfer.</p>
+   */
   public static InboundTransfer retrieve(
-      String id, Map<String, Object> params, RequestOptions options) throws StripeException {
+      String id,
+      Map<String, Object> params,
+      RequestOptions options) throws StripeException {
     String url =
-        String.format(
-            "%s%s",
-            Stripe.getApiBase(),
-            String.format("/v1/treasury/inbound_transfers/%s", ApiResource.urlEncodeId(id)));
+      String.format(
+        "%s%s",
+        Stripe.getApiBase(),
+        String.format("/v1/treasury/inbound_transfers/%s", ApiResource.urlEncodeId(id))
+      );
     return ApiResource.request(
-        ApiResource.RequestMethod.GET, url, params, InboundTransfer.class, options);
+      ApiResource.RequestMethod.GET,
+      url,
+      params,
+      InboundTransfer.class,
+      options
+    );
   }
 
-  /** Retrieves the details of an existing InboundTransfer. */
+  /**
+   * <p>Retrieves the details of an existing InboundTransfer.</p>
+   */
   public static InboundTransfer retrieve(
-      String id, InboundTransferRetrieveParams params, RequestOptions options)
-      throws StripeException {
+      String id,
+      InboundTransferRetrieveParams params,
+      RequestOptions options) throws StripeException {
     String url =
-        String.format(
-            "%s%s",
-            Stripe.getApiBase(),
-            String.format("/v1/treasury/inbound_transfers/%s", ApiResource.urlEncodeId(id)));
+      String.format(
+        "%s%s",
+        Stripe.getApiBase(),
+        String.format("/v1/treasury/inbound_transfers/%s", ApiResource.urlEncodeId(id))
+      );
     return ApiResource.request(
-        ApiResource.RequestMethod.GET, url, params, InboundTransfer.class, options);
+      ApiResource.RequestMethod.GET,
+      url,
+      params,
+      InboundTransfer.class,
+      options
+    );
   }
 
-  /** Returns a list of InboundTransfers sent from the specified FinancialAccount. */
+  /**
+   * <p>Returns a list of InboundTransfers sent from the specified FinancialAccount.</p>
+   */
   public static InboundTransferCollection list(Map<String, Object> params) throws StripeException {
     return list(params, (RequestOptions) null);
   }
 
-  /** Returns a list of InboundTransfers sent from the specified FinancialAccount. */
-  public static InboundTransferCollection list(Map<String, Object> params, RequestOptions options)
-      throws StripeException {
+  /**
+   * <p>Returns a list of InboundTransfers sent from the specified FinancialAccount.</p>
+   */
+  public static InboundTransferCollection list(
+      Map<String, Object> params,
+      RequestOptions options) throws StripeException {
     String url = String.format("%s%s", Stripe.getApiBase(), "/v1/treasury/inbound_transfers");
     return ApiResource.requestCollection(url, params, InboundTransferCollection.class, options);
   }
 
-  /** Returns a list of InboundTransfers sent from the specified FinancialAccount. */
-  public static InboundTransferCollection list(InboundTransferListParams params)
-      throws StripeException {
+  /**
+   * <p>Returns a list of InboundTransfers sent from the specified FinancialAccount.</p>
+   */
+  public static InboundTransferCollection list(
+      InboundTransferListParams params) throws StripeException {
     return list(params, (RequestOptions) null);
   }
 
-  /** Returns a list of InboundTransfers sent from the specified FinancialAccount. */
+  /**
+   * <p>Returns a list of InboundTransfers sent from the specified FinancialAccount.</p>
+   */
   public static InboundTransferCollection list(
-      InboundTransferListParams params, RequestOptions options) throws StripeException {
+      InboundTransferListParams params,
+      RequestOptions options) throws StripeException {
     String url = String.format("%s%s", Stripe.getApiBase(), "/v1/treasury/inbound_transfers");
     return ApiResource.requestCollection(url, params, InboundTransferCollection.class, options);
   }
@@ -295,11 +391,7 @@ public class InboundTransfer extends ApiResource implements HasId {
     /**
      * Reason for the failure.
      *
-     * <p>One of {@code account_closed}, {@code account_frozen}, {@code bank_account_restricted},
-     * {@code bank_ownership_changed}, {@code debit_not_authorized}, {@code
-     * incorrect_account_holder_address}, {@code incorrect_account_holder_name}, {@code
-     * incorrect_account_holder_tax_id}, {@code insufficient_funds}, {@code invalid_account_number},
-     * {@code invalid_currency}, {@code no_account}, or {@code other}.
+     * <p>One of {@code account_closed}, {@code account_frozen}, {@code bank_account_restricted}, {@code bank_ownership_changed}, {@code debit_not_authorized}, {@code incorrect_account_holder_address}, {@code incorrect_account_holder_name}, {@code incorrect_account_holder_tax_id}, {@code insufficient_funds}, {@code invalid_account_number}, {@code invalid_currency}, {@code no_account}, or {@code other}.
      */
     @SerializedName("code")
     String code;
@@ -310,8 +402,7 @@ public class InboundTransfer extends ApiResource implements HasId {
   @EqualsAndHashCode(callSuper = false)
   public static class LinkedFlows extends StripeObject {
     /**
-     * If funds for this flow were returned after the flow went to the {@code succeeded} state, this
-     * field contains a reference to the ReceivedDebit return.
+     * If funds for this flow were returned after the flow went to the {@code succeeded} state, this field contains a reference to the ReceivedDebit return.
      */
     @SerializedName("received_debit")
     String receivedDebit;
@@ -342,11 +433,15 @@ public class InboundTransfer extends ApiResource implements HasId {
       @SerializedName("address")
       Address address;
 
-      /** Email address. */
+      /**
+       * Email address.
+       */
       @SerializedName("email")
       String email;
 
-      /** Full name. */
+      /**
+       * Full name.
+       */
       @SerializedName("name")
       String name;
     }
@@ -371,18 +466,21 @@ public class InboundTransfer extends ApiResource implements HasId {
       @SerializedName("account_type")
       String accountType;
 
-      /** Name of the bank associated with the bank account. */
+      /**
+       * Name of the bank associated with the bank account.
+       */
       @SerializedName("bank_name")
       String bankName;
 
       /**
-       * Uniquely identifies this particular bank account. You can use this attribute to check
-       * whether two bank accounts are the same.
+       * Uniquely identifies this particular bank account. You can use this attribute to check whether two bank accounts are the same.
        */
       @SerializedName("fingerprint")
       String fingerprint;
 
-      /** Last four digits of the bank account number. */
+      /**
+       * Last four digits of the bank account number.
+       */
       @SerializedName("last4")
       String last4;
 
@@ -394,7 +492,9 @@ public class InboundTransfer extends ApiResource implements HasId {
       @SerializedName("network")
       String network;
 
-      /** Routing number of the bank account. */
+      /**
+       * Routing number of the bank account.
+       */
       @SerializedName("routing_number")
       String routingNumber;
     }
@@ -404,15 +504,21 @@ public class InboundTransfer extends ApiResource implements HasId {
   @Setter
   @EqualsAndHashCode(callSuper = false)
   public static class StatusTransitions extends StripeObject {
-    /** Timestamp describing when an InboundTransfer changed status to {@code canceled}. */
+    /**
+     * Timestamp describing when an InboundTransfer changed status to {@code canceled}.
+     */
     @SerializedName("canceled_at")
     Long canceledAt;
 
-    /** Timestamp describing when an InboundTransfer changed status to {@code failed}. */
+    /**
+     * Timestamp describing when an InboundTransfer changed status to {@code failed}.
+     */
     @SerializedName("failed_at")
     Long failedAt;
 
-    /** Timestamp describing when an InboundTransfer changed status to {@code succeeded}. */
+    /**
+     * Timestamp describing when an InboundTransfer changed status to {@code succeeded}.
+     */
     @SerializedName("succeeded_at")
     Long succeededAt;
   }
@@ -434,204 +540,233 @@ public class InboundTransfer extends ApiResource implements HasId {
     }
 
     /**
-     * Transitions a test mode created InboundTransfer to the <code>succeeded</code> status. The
-     * InboundTransfer must already be in the <code>processing</code> state.
+     * <p>Transitions a test mode created InboundTransfer to the <code>succeeded</code> status. The InboundTransfer must already be in the <code>processing</code> state.</p>
      */
     public InboundTransfer succeed() throws StripeException {
       return succeed((Map<String, Object>) null, (RequestOptions) null);
     }
 
     /**
-     * Transitions a test mode created InboundTransfer to the <code>succeeded</code> status. The
-     * InboundTransfer must already be in the <code>processing</code> state.
+     * <p>Transitions a test mode created InboundTransfer to the <code>succeeded</code> status. The InboundTransfer must already be in the <code>processing</code> state.</p>
      */
     public InboundTransfer succeed(RequestOptions options) throws StripeException {
       return succeed((Map<String, Object>) null, options);
     }
 
     /**
-     * Transitions a test mode created InboundTransfer to the <code>succeeded</code> status. The
-     * InboundTransfer must already be in the <code>processing</code> state.
+     * <p>Transitions a test mode created InboundTransfer to the <code>succeeded</code> status. The InboundTransfer must already be in the <code>processing</code> state.</p>
      */
     public InboundTransfer succeed(Map<String, Object> params) throws StripeException {
       return succeed(params, (RequestOptions) null);
     }
 
     /**
-     * Transitions a test mode created InboundTransfer to the <code>succeeded</code> status. The
-     * InboundTransfer must already be in the <code>processing</code> state.
+     * <p>Transitions a test mode created InboundTransfer to the <code>succeeded</code> status. The InboundTransfer must already be in the <code>processing</code> state.</p>
      */
-    public InboundTransfer succeed(Map<String, Object> params, RequestOptions options)
-        throws StripeException {
+    public InboundTransfer succeed(
+        Map<String, Object> params,
+        RequestOptions options) throws StripeException {
       String url =
+        String.format(
+          "%s%s",
+          Stripe.getApiBase(),
           String.format(
-              "%s%s",
-              Stripe.getApiBase(),
-              String.format(
-                  "/v1/test_helpers/treasury/inbound_transfers/%s/succeed",
-                  ApiResource.urlEncodeId(this.resource.getId())));
+            "/v1/test_helpers/treasury/inbound_transfers/%s/succeed",
+            ApiResource.urlEncodeId(this.resource.getId())
+          )
+        );
       return ApiResource.request(
-          ApiResource.RequestMethod.POST, url, params, InboundTransfer.class, options);
+        ApiResource.RequestMethod.POST,
+        url,
+        params,
+        InboundTransfer.class,
+        options
+      );
     }
 
     /**
-     * Transitions a test mode created InboundTransfer to the <code>succeeded</code> status. The
-     * InboundTransfer must already be in the <code>processing</code> state.
+     * <p>Transitions a test mode created InboundTransfer to the <code>succeeded</code> status. The InboundTransfer must already be in the <code>processing</code> state.</p>
      */
     public InboundTransfer succeed(InboundTransferSucceedParams params) throws StripeException {
       return succeed(params, (RequestOptions) null);
     }
 
     /**
-     * Transitions a test mode created InboundTransfer to the <code>succeeded</code> status. The
-     * InboundTransfer must already be in the <code>processing</code> state.
+     * <p>Transitions a test mode created InboundTransfer to the <code>succeeded</code> status. The InboundTransfer must already be in the <code>processing</code> state.</p>
      */
-    public InboundTransfer succeed(InboundTransferSucceedParams params, RequestOptions options)
-        throws StripeException {
+    public InboundTransfer succeed(
+        InboundTransferSucceedParams params,
+        RequestOptions options) throws StripeException {
       String url =
+        String.format(
+          "%s%s",
+          Stripe.getApiBase(),
           String.format(
-              "%s%s",
-              Stripe.getApiBase(),
-              String.format(
-                  "/v1/test_helpers/treasury/inbound_transfers/%s/succeed",
-                  ApiResource.urlEncodeId(this.resource.getId())));
+            "/v1/test_helpers/treasury/inbound_transfers/%s/succeed",
+            ApiResource.urlEncodeId(this.resource.getId())
+          )
+        );
       return ApiResource.request(
-          ApiResource.RequestMethod.POST, url, params, InboundTransfer.class, options);
+        ApiResource.RequestMethod.POST,
+        url,
+        params,
+        InboundTransfer.class,
+        options
+      );
     }
 
     /**
-     * Transitions a test mode created InboundTransfer to the <code>failed</code> status. The
-     * InboundTransfer must already be in the <code>processing</code> state.
+     * <p>Transitions a test mode created InboundTransfer to the <code>failed</code> status. The InboundTransfer must already be in the <code>processing</code> state.</p>
      */
     public InboundTransfer fail() throws StripeException {
       return fail((Map<String, Object>) null, (RequestOptions) null);
     }
 
     /**
-     * Transitions a test mode created InboundTransfer to the <code>failed</code> status. The
-     * InboundTransfer must already be in the <code>processing</code> state.
+     * <p>Transitions a test mode created InboundTransfer to the <code>failed</code> status. The InboundTransfer must already be in the <code>processing</code> state.</p>
      */
     public InboundTransfer fail(RequestOptions options) throws StripeException {
       return fail((Map<String, Object>) null, options);
     }
 
     /**
-     * Transitions a test mode created InboundTransfer to the <code>failed</code> status. The
-     * InboundTransfer must already be in the <code>processing</code> state.
+     * <p>Transitions a test mode created InboundTransfer to the <code>failed</code> status. The InboundTransfer must already be in the <code>processing</code> state.</p>
      */
     public InboundTransfer fail(Map<String, Object> params) throws StripeException {
       return fail(params, (RequestOptions) null);
     }
 
     /**
-     * Transitions a test mode created InboundTransfer to the <code>failed</code> status. The
-     * InboundTransfer must already be in the <code>processing</code> state.
+     * <p>Transitions a test mode created InboundTransfer to the <code>failed</code> status. The InboundTransfer must already be in the <code>processing</code> state.</p>
      */
-    public InboundTransfer fail(Map<String, Object> params, RequestOptions options)
-        throws StripeException {
+    public InboundTransfer fail(
+        Map<String, Object> params,
+        RequestOptions options) throws StripeException {
       String url =
+        String.format(
+          "%s%s",
+          Stripe.getApiBase(),
           String.format(
-              "%s%s",
-              Stripe.getApiBase(),
-              String.format(
-                  "/v1/test_helpers/treasury/inbound_transfers/%s/fail",
-                  ApiResource.urlEncodeId(this.resource.getId())));
+            "/v1/test_helpers/treasury/inbound_transfers/%s/fail",
+            ApiResource.urlEncodeId(this.resource.getId())
+          )
+        );
       return ApiResource.request(
-          ApiResource.RequestMethod.POST, url, params, InboundTransfer.class, options);
+        ApiResource.RequestMethod.POST,
+        url,
+        params,
+        InboundTransfer.class,
+        options
+      );
     }
 
     /**
-     * Transitions a test mode created InboundTransfer to the <code>failed</code> status. The
-     * InboundTransfer must already be in the <code>processing</code> state.
+     * <p>Transitions a test mode created InboundTransfer to the <code>failed</code> status. The InboundTransfer must already be in the <code>processing</code> state.</p>
      */
     public InboundTransfer fail(InboundTransferFailParams params) throws StripeException {
       return fail(params, (RequestOptions) null);
     }
 
     /**
-     * Transitions a test mode created InboundTransfer to the <code>failed</code> status. The
-     * InboundTransfer must already be in the <code>processing</code> state.
+     * <p>Transitions a test mode created InboundTransfer to the <code>failed</code> status. The InboundTransfer must already be in the <code>processing</code> state.</p>
      */
-    public InboundTransfer fail(InboundTransferFailParams params, RequestOptions options)
-        throws StripeException {
+    public InboundTransfer fail(
+        InboundTransferFailParams params,
+        RequestOptions options) throws StripeException {
       String url =
+        String.format(
+          "%s%s",
+          Stripe.getApiBase(),
           String.format(
-              "%s%s",
-              Stripe.getApiBase(),
-              String.format(
-                  "/v1/test_helpers/treasury/inbound_transfers/%s/fail",
-                  ApiResource.urlEncodeId(this.resource.getId())));
+            "/v1/test_helpers/treasury/inbound_transfers/%s/fail",
+            ApiResource.urlEncodeId(this.resource.getId())
+          )
+        );
       return ApiResource.request(
-          ApiResource.RequestMethod.POST, url, params, InboundTransfer.class, options);
+        ApiResource.RequestMethod.POST,
+        url,
+        params,
+        InboundTransfer.class,
+        options
+      );
     }
 
     /**
-     * Marks the test mode InboundTransfer object as returned and links the InboundTransfer to a
-     * ReceivedDebit. The InboundTransfer must already be in the <code>succeeded</code> state.
+     * <p>Marks the test mode InboundTransfer object as returned and links the InboundTransfer to a ReceivedDebit. The InboundTransfer must already be in the <code>succeeded</code> state.</p>
      */
     public InboundTransfer returnInboundTransfer() throws StripeException {
       return returnInboundTransfer((Map<String, Object>) null, (RequestOptions) null);
     }
 
     /**
-     * Marks the test mode InboundTransfer object as returned and links the InboundTransfer to a
-     * ReceivedDebit. The InboundTransfer must already be in the <code>succeeded</code> state.
+     * <p>Marks the test mode InboundTransfer object as returned and links the InboundTransfer to a ReceivedDebit. The InboundTransfer must already be in the <code>succeeded</code> state.</p>
      */
     public InboundTransfer returnInboundTransfer(RequestOptions options) throws StripeException {
       return returnInboundTransfer((Map<String, Object>) null, options);
     }
 
     /**
-     * Marks the test mode InboundTransfer object as returned and links the InboundTransfer to a
-     * ReceivedDebit. The InboundTransfer must already be in the <code>succeeded</code> state.
-     */
-    public InboundTransfer returnInboundTransfer(Map<String, Object> params)
-        throws StripeException {
-      return returnInboundTransfer(params, (RequestOptions) null);
-    }
-
-    /**
-     * Marks the test mode InboundTransfer object as returned and links the InboundTransfer to a
-     * ReceivedDebit. The InboundTransfer must already be in the <code>succeeded</code> state.
-     */
-    public InboundTransfer returnInboundTransfer(Map<String, Object> params, RequestOptions options)
-        throws StripeException {
-      String url =
-          String.format(
-              "%s%s",
-              Stripe.getApiBase(),
-              String.format(
-                  "/v1/test_helpers/treasury/inbound_transfers/%s/return",
-                  ApiResource.urlEncodeId(this.resource.getId())));
-      return ApiResource.request(
-          ApiResource.RequestMethod.POST, url, params, InboundTransfer.class, options);
-    }
-
-    /**
-     * Marks the test mode InboundTransfer object as returned and links the InboundTransfer to a
-     * ReceivedDebit. The InboundTransfer must already be in the <code>succeeded</code> state.
-     */
-    public InboundTransfer returnInboundTransfer(InboundTransferReturnInboundTransferParams params)
-        throws StripeException {
-      return returnInboundTransfer(params, (RequestOptions) null);
-    }
-
-    /**
-     * Marks the test mode InboundTransfer object as returned and links the InboundTransfer to a
-     * ReceivedDebit. The InboundTransfer must already be in the <code>succeeded</code> state.
+     * <p>Marks the test mode InboundTransfer object as returned and links the InboundTransfer to a ReceivedDebit. The InboundTransfer must already be in the <code>succeeded</code> state.</p>
      */
     public InboundTransfer returnInboundTransfer(
-        InboundTransferReturnInboundTransferParams params, RequestOptions options)
-        throws StripeException {
+        Map<String, Object> params) throws StripeException {
+      return returnInboundTransfer(params, (RequestOptions) null);
+    }
+
+    /**
+     * <p>Marks the test mode InboundTransfer object as returned and links the InboundTransfer to a ReceivedDebit. The InboundTransfer must already be in the <code>succeeded</code> state.</p>
+     */
+    public InboundTransfer returnInboundTransfer(
+        Map<String, Object> params,
+        RequestOptions options) throws StripeException {
       String url =
+        String.format(
+          "%s%s",
+          Stripe.getApiBase(),
           String.format(
-              "%s%s",
-              Stripe.getApiBase(),
-              String.format(
-                  "/v1/test_helpers/treasury/inbound_transfers/%s/return",
-                  ApiResource.urlEncodeId(this.resource.getId())));
+            "/v1/test_helpers/treasury/inbound_transfers/%s/return",
+            ApiResource.urlEncodeId(this.resource.getId())
+          )
+        );
       return ApiResource.request(
-          ApiResource.RequestMethod.POST, url, params, InboundTransfer.class, options);
+        ApiResource.RequestMethod.POST,
+        url,
+        params,
+        InboundTransfer.class,
+        options
+      );
+    }
+
+    /**
+     * <p>Marks the test mode InboundTransfer object as returned and links the InboundTransfer to a ReceivedDebit. The InboundTransfer must already be in the <code>succeeded</code> state.</p>
+     */
+    public InboundTransfer returnInboundTransfer(
+        InboundTransferReturnInboundTransferParams params) throws StripeException {
+      return returnInboundTransfer(params, (RequestOptions) null);
+    }
+
+    /**
+     * <p>Marks the test mode InboundTransfer object as returned and links the InboundTransfer to a ReceivedDebit. The InboundTransfer must already be in the <code>succeeded</code> state.</p>
+     */
+    public InboundTransfer returnInboundTransfer(
+        InboundTransferReturnInboundTransferParams params,
+        RequestOptions options) throws StripeException {
+      String url =
+        String.format(
+          "%s%s",
+          Stripe.getApiBase(),
+          String.format(
+            "/v1/test_helpers/treasury/inbound_transfers/%s/return",
+            ApiResource.urlEncodeId(this.resource.getId())
+          )
+        );
+      return ApiResource.request(
+        ApiResource.RequestMethod.POST,
+        url,
+        params,
+        InboundTransfer.class,
+        options
+      );
     }
   }
 }

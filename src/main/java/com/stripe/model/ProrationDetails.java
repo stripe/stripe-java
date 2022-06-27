@@ -11,8 +11,7 @@ import lombok.Setter;
 @EqualsAndHashCode(callSuper = false)
 public class ProrationDetails extends StripeObject {
   /**
-   * For a credit proration {@code line_item}, the original debit line_items to which the credit
-   * proration applies.
+   * For a credit proration {@code line_item}, the original debit line_items to which the credit proration applies.
    */
   @SerializedName("credited_items")
   CreditedItems creditedItems;

@@ -3,6 +3,7 @@ package com.stripe.param.treasury;
 
 import com.google.gson.annotations.SerializedName;
 import com.stripe.net.ApiRequestParams;
+import com.stripe.net.ApiRequestParams.EnumParam;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -11,34 +12,35 @@ import lombok.Getter;
 
 @Getter
 public class OutboundPaymentReturnOutboundPaymentParams extends ApiRequestParams {
-  /** Specifies which fields in the response should be expanded. */
+  /**
+   * Specifies which fields in the response should be expanded.
+   */
   @SerializedName("expand")
   List<String> expand;
 
   /**
-   * Map of extra parameters for custom features not available in this client library. The content
-   * in this map is not serialized under this field's {@code @SerializedName} value. Instead, each
-   * key/value pair is serialized as if the key is a root-level field (serialized) name in this
-   * param object. Effectively, this map is flattened to its parent instance.
+   * Map of extra parameters for custom features not available in this client library. The content in this map is not serialized under this field's {@code @SerializedName} value. Instead, each key/value pair is serialized as if the key is a root-level field (serialized) name in this param object. Effectively, this map is flattened to its parent instance.
    */
   @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
   Map<String, Object> extraParams;
 
-  /** Optional hash to set the the return code. */
+  /**
+   * Optional hash to set the the return code.
+   */
   @SerializedName("returned_details")
   ReturnedDetails returnedDetails;
 
   private OutboundPaymentReturnOutboundPaymentParams(
-      List<String> expand, Map<String, Object> extraParams, ReturnedDetails returnedDetails) {
+      List<String> expand,
+      Map<String, Object> extraParams,
+      ReturnedDetails returnedDetails) {
     this.expand = expand;
     this.extraParams = extraParams;
     this.returnedDetails = returnedDetails;
   }
-
   public static Builder builder() {
     return new Builder();
   }
-
   public static class Builder {
     private List<String> expand;
 
@@ -46,16 +48,19 @@ public class OutboundPaymentReturnOutboundPaymentParams extends ApiRequestParams
 
     private ReturnedDetails returnedDetails;
 
-    /** Finalize and obtain parameter instance from this builder. */
+    /**
+     * Finalize and obtain parameter instance from this builder.
+     */
     public OutboundPaymentReturnOutboundPaymentParams build() {
       return new OutboundPaymentReturnOutboundPaymentParams(
-          this.expand, this.extraParams, this.returnedDetails);
+        this.expand,
+        this.extraParams,
+        this.returnedDetails
+      );
     }
 
     /**
-     * Add an element to `expand` list. A list is initialized for the first `add/addAll` call, and
-     * subsequent calls adds additional elements to the original list. See {@link
-     * OutboundPaymentReturnOutboundPaymentParams#expand} for the field documentation.
+     * Add an element to `expand` list. A list is initialized for the first `add/addAll` call, and subsequent calls adds additional elements to the original list. See {@link OutboundPaymentReturnOutboundPaymentParams#expand} for the field documentation.
      */
     public Builder addExpand(String element) {
       if (this.expand == null) {
@@ -66,9 +71,7 @@ public class OutboundPaymentReturnOutboundPaymentParams extends ApiRequestParams
     }
 
     /**
-     * Add all elements to `expand` list. A list is initialized for the first `add/addAll` call, and
-     * subsequent calls adds additional elements to the original list. See {@link
-     * OutboundPaymentReturnOutboundPaymentParams#expand} for the field documentation.
+     * Add all elements to `expand` list. A list is initialized for the first `add/addAll` call, and subsequent calls adds additional elements to the original list. See {@link OutboundPaymentReturnOutboundPaymentParams#expand} for the field documentation.
      */
     public Builder addAllExpand(List<String> elements) {
       if (this.expand == null) {
@@ -79,9 +82,7 @@ public class OutboundPaymentReturnOutboundPaymentParams extends ApiRequestParams
     }
 
     /**
-     * Add a key/value pair to `extraParams` map. A map is initialized for the first `put/putAll`
-     * call, and subsequent calls add additional key/value pairs to the original map. See {@link
-     * OutboundPaymentReturnOutboundPaymentParams#extraParams} for the field documentation.
+     * Add a key/value pair to `extraParams` map. A map is initialized for the first `put/putAll` call, and subsequent calls add additional key/value pairs to the original map. See {@link OutboundPaymentReturnOutboundPaymentParams#extraParams} for the field documentation.
      */
     public Builder putExtraParam(String key, Object value) {
       if (this.extraParams == null) {
@@ -92,10 +93,7 @@ public class OutboundPaymentReturnOutboundPaymentParams extends ApiRequestParams
     }
 
     /**
-     * Add all map key/value pairs to `extraParams` map. A map is initialized for the first
-     * `put/putAll` call, and subsequent calls add additional key/value pairs to the original map.
-     * See {@link OutboundPaymentReturnOutboundPaymentParams#extraParams} for the field
-     * documentation.
+     * Add all map key/value pairs to `extraParams` map. A map is initialized for the first `put/putAll` call, and subsequent calls add additional key/value pairs to the original map. See {@link OutboundPaymentReturnOutboundPaymentParams#extraParams} for the field documentation.
      */
     public Builder putAllExtraParam(Map<String, Object> map) {
       if (this.extraParams == null) {
@@ -105,24 +103,24 @@ public class OutboundPaymentReturnOutboundPaymentParams extends ApiRequestParams
       return this;
     }
 
-    /** Optional hash to set the the return code. */
+    /**
+     * Optional hash to set the the return code.
+     */
     public Builder setReturnedDetails(ReturnedDetails returnedDetails) {
       this.returnedDetails = returnedDetails;
       return this;
     }
   }
-
   @Getter
   public static class ReturnedDetails {
-    /** The return code to be set on the OutboundPayment object. */
+    /**
+     * The return code to be set on the OutboundPayment object.
+     */
     @SerializedName("code")
     Code code;
 
     /**
-     * Map of extra parameters for custom features not available in this client library. The content
-     * in this map is not serialized under this field's {@code @SerializedName} value. Instead, each
-     * key/value pair is serialized as if the key is a root-level field (serialized) name in this
-     * param object. Effectively, this map is flattened to its parent instance.
+     * Map of extra parameters for custom features not available in this client library. The content in this map is not serialized under this field's {@code @SerializedName} value. Instead, each key/value pair is serialized as if the key is a root-level field (serialized) name in this param object. Effectively, this map is flattened to its parent instance.
      */
     @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
     Map<String, Object> extraParams;
@@ -131,32 +129,31 @@ public class OutboundPaymentReturnOutboundPaymentParams extends ApiRequestParams
       this.code = code;
       this.extraParams = extraParams;
     }
-
     public static Builder builder() {
       return new Builder();
     }
-
     public static class Builder {
       private Code code;
 
       private Map<String, Object> extraParams;
 
-      /** Finalize and obtain parameter instance from this builder. */
+      /**
+       * Finalize and obtain parameter instance from this builder.
+       */
       public ReturnedDetails build() {
         return new ReturnedDetails(this.code, this.extraParams);
       }
 
-      /** The return code to be set on the OutboundPayment object. */
+      /**
+       * The return code to be set on the OutboundPayment object.
+       */
       public Builder setCode(Code code) {
         this.code = code;
         return this;
       }
 
       /**
-       * Add a key/value pair to `extraParams` map. A map is initialized for the first `put/putAll`
-       * call, and subsequent calls add additional key/value pairs to the original map. See {@link
-       * OutboundPaymentReturnOutboundPaymentParams.ReturnedDetails#extraParams} for the field
-       * documentation.
+       * Add a key/value pair to `extraParams` map. A map is initialized for the first `put/putAll` call, and subsequent calls add additional key/value pairs to the original map. See {@link OutboundPaymentReturnOutboundPaymentParams.ReturnedDetails#extraParams} for the field documentation.
        */
       public Builder putExtraParam(String key, Object value) {
         if (this.extraParams == null) {
@@ -167,10 +164,7 @@ public class OutboundPaymentReturnOutboundPaymentParams extends ApiRequestParams
       }
 
       /**
-       * Add all map key/value pairs to `extraParams` map. A map is initialized for the first
-       * `put/putAll` call, and subsequent calls add additional key/value pairs to the original map.
-       * See {@link OutboundPaymentReturnOutboundPaymentParams.ReturnedDetails#extraParams} for the
-       * field documentation.
+       * Add all map key/value pairs to `extraParams` map. A map is initialized for the first `put/putAll` call, and subsequent calls add additional key/value pairs to the original map. See {@link OutboundPaymentReturnOutboundPaymentParams.ReturnedDetails#extraParams} for the field documentation.
        */
       public Builder putAllExtraParam(Map<String, Object> map) {
         if (this.extraParams == null) {
@@ -180,7 +174,6 @@ public class OutboundPaymentReturnOutboundPaymentParams extends ApiRequestParams
         return this;
       }
     }
-
     public enum Code implements ApiRequestParams.EnumParam {
       @SerializedName("account_closed")
       ACCOUNT_CLOSED("account_closed"),
@@ -211,10 +204,8 @@ public class OutboundPaymentReturnOutboundPaymentParams extends ApiRequestParams
 
       @SerializedName("other")
       OTHER("other");
-
       @Getter(onMethod_ = {@Override})
       private final String value;
-
       Code(String value) {
         this.value = value;
       }

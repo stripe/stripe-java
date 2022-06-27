@@ -19,19 +19,19 @@ import lombok.Setter;
 @EqualsAndHashCode(callSuper = false)
 public class CashBalance extends ApiResource {
   /**
-   * A hash of all cash balances available to this customer. You cannot delete a customer with any
-   * cash balances, even if the balance is 0.
+   * A hash of all cash balances available to this customer. You cannot delete a customer with any cash balances, even if the balance is 0.
    */
   @SerializedName("available")
   Map<String, Long> available;
 
-  /** The ID of the customer whose cash balance this object represents. */
+  /**
+   * The ID of the customer whose cash balance this object represents.
+   */
   @SerializedName("customer")
   String customer;
 
   /**
-   * Has the value {@code true} if the object exists in live mode or the value {@code false} if the
-   * object exists in test mode.
+   * Has the value {@code true} if the object exists in live mode or the value {@code false} if the object exists in test mode.
    */
   @SerializedName("livemode")
   Boolean livemode;
@@ -47,111 +47,178 @@ public class CashBalance extends ApiResource {
   @SerializedName("settings")
   BalanceSettings settings;
 
-  /** Retrieves a customer’s cash balance. */
+  /**
+   * <p>Retrieves a customer’s cash balance.</p>
+   */
   public static CashBalance retrieveCashBalance(String customer) throws StripeException {
     return retrieveCashBalance(customer, (Map<String, Object>) null, (RequestOptions) null);
   }
 
-  /** Retrieves a customer’s cash balance. */
-  public static CashBalance retrieveCashBalance(String customer, RequestOptions options)
-      throws StripeException {
+  /**
+   * <p>Retrieves a customer’s cash balance.</p>
+   */
+  public static CashBalance retrieveCashBalance(
+      String customer,
+      RequestOptions options) throws StripeException {
     return retrieveCashBalance(customer, (Map<String, Object>) null, options);
   }
 
-  /** Retrieves a customer’s cash balance. */
+  /**
+   * <p>Retrieves a customer’s cash balance.</p>
+   */
   public static CashBalance retrieveCashBalance(
-      String customer, Map<String, Object> params, RequestOptions options) throws StripeException {
+      String customer,
+      Map<String, Object> params,
+      RequestOptions options) throws StripeException {
     String url =
-        String.format(
-            "%s%s",
-            Stripe.getApiBase(),
-            String.format("/v1/customers/%s/cash_balance", ApiResource.urlEncodeId(customer)));
+      String.format(
+        "%s%s",
+        Stripe.getApiBase(),
+        String.format("/v1/customers/%s/cash_balance", ApiResource.urlEncodeId(customer))
+      );
     return ApiResource.request(
-        ApiResource.RequestMethod.GET, url, params, CashBalance.class, options);
+      ApiResource.RequestMethod.GET,
+      url,
+      params,
+      CashBalance.class,
+      options
+    );
   }
 
-  /** Retrieves a customer’s cash balance. */
+  /**
+   * <p>Retrieves a customer’s cash balance.</p>
+   */
   public static CashBalance retrieveCashBalance(
-      String customer, CashBalanceRetrieveCashBalanceParams params, RequestOptions options)
-      throws StripeException {
+      String customer,
+      CashBalanceRetrieveCashBalanceParams params,
+      RequestOptions options) throws StripeException {
     String url =
-        String.format(
-            "%s%s",
-            Stripe.getApiBase(),
-            String.format("/v1/customers/%s/cash_balance", ApiResource.urlEncodeId(customer)));
+      String.format(
+        "%s%s",
+        Stripe.getApiBase(),
+        String.format("/v1/customers/%s/cash_balance", ApiResource.urlEncodeId(customer))
+      );
     return ApiResource.request(
-        ApiResource.RequestMethod.GET, url, params, CashBalance.class, options);
+      ApiResource.RequestMethod.GET,
+      url,
+      params,
+      CashBalance.class,
+      options
+    );
   }
 
-  /** Retrieves a customer’s cash balance. */
+  /**
+   * <p>Retrieves a customer’s cash balance.</p>
+   */
   public CashBalance retrieve(String customer) throws StripeException {
     return retrieve(customer, (Map<String, Object>) null, (RequestOptions) null);
   }
 
-  /** Retrieves a customer’s cash balance. */
+  /**
+   * <p>Retrieves a customer’s cash balance.</p>
+   */
   public CashBalance retrieve(String customer, RequestOptions options) throws StripeException {
     return retrieve(customer, (Map<String, Object>) null, options);
   }
 
-  /** Retrieves a customer’s cash balance. */
-  public CashBalance retrieve(String customer, Map<String, Object> params, RequestOptions options)
-      throws StripeException {
-    String url =
-        String.format(
-            "%s%s",
-            Stripe.getApiBase(),
-            String.format("/v1/customers/%s/cash_balance", ApiResource.urlEncodeId(customer)));
-    return ApiResource.request(
-        ApiResource.RequestMethod.GET, url, params, CashBalance.class, options);
-  }
-
-  /** Retrieves a customer’s cash balance. */
+  /**
+   * <p>Retrieves a customer’s cash balance.</p>
+   */
   public CashBalance retrieve(
-      String customer, CashBalanceRetrieveParams params, RequestOptions options)
-      throws StripeException {
+      String customer,
+      Map<String, Object> params,
+      RequestOptions options) throws StripeException {
     String url =
-        String.format(
-            "%s%s",
-            Stripe.getApiBase(),
-            String.format("/v1/customers/%s/cash_balance", ApiResource.urlEncodeId(customer)));
+      String.format(
+        "%s%s",
+        Stripe.getApiBase(),
+        String.format("/v1/customers/%s/cash_balance", ApiResource.urlEncodeId(customer))
+      );
     return ApiResource.request(
-        ApiResource.RequestMethod.GET, url, params, CashBalance.class, options);
+      ApiResource.RequestMethod.GET,
+      url,
+      params,
+      CashBalance.class,
+      options
+    );
   }
 
-  /** Updates a customer’s cash balance. */
+  /**
+   * <p>Retrieves a customer’s cash balance.</p>
+   */
+  public CashBalance retrieve(
+      String customer,
+      CashBalanceRetrieveParams params,
+      RequestOptions options) throws StripeException {
+    String url =
+      String.format(
+        "%s%s",
+        Stripe.getApiBase(),
+        String.format("/v1/customers/%s/cash_balance", ApiResource.urlEncodeId(customer))
+      );
+    return ApiResource.request(
+      ApiResource.RequestMethod.GET,
+      url,
+      params,
+      CashBalance.class,
+      options
+    );
+  }
+
+  /**
+   * <p>Updates a customer’s cash balance.</p>
+   */
   public CashBalance update(Map<String, Object> params) throws StripeException {
     return update(params, (RequestOptions) null);
   }
 
-  /** Updates a customer’s cash balance. */
-  public CashBalance update(Map<String, Object> params, RequestOptions options)
-      throws StripeException {
+  /**
+   * <p>Updates a customer’s cash balance.</p>
+   */
+  public CashBalance update(
+      Map<String, Object> params,
+      RequestOptions options) throws StripeException {
     String url =
-        String.format(
-            "%s%s",
-            Stripe.getApiBase(),
-            String.format(
-                "/v1/customers/%s/cash_balance", ApiResource.urlEncodeId(this.getCustomer())));
+      String.format(
+        "%s%s",
+        Stripe.getApiBase(),
+        String.format("/v1/customers/%s/cash_balance", ApiResource.urlEncodeId(this.getCustomer()))
+      );
     return ApiResource.request(
-        ApiResource.RequestMethod.POST, url, params, CashBalance.class, options);
+      ApiResource.RequestMethod.POST,
+      url,
+      params,
+      CashBalance.class,
+      options
+    );
   }
 
-  /** Updates a customer’s cash balance. */
+  /**
+   * <p>Updates a customer’s cash balance.</p>
+   */
   public CashBalance update(CashBalanceUpdateParams params) throws StripeException {
     return update(params, (RequestOptions) null);
   }
 
-  /** Updates a customer’s cash balance. */
-  public CashBalance update(CashBalanceUpdateParams params, RequestOptions options)
-      throws StripeException {
+  /**
+   * <p>Updates a customer’s cash balance.</p>
+   */
+  public CashBalance update(
+      CashBalanceUpdateParams params,
+      RequestOptions options) throws StripeException {
     String url =
-        String.format(
-            "%s%s",
-            Stripe.getApiBase(),
-            String.format(
-                "/v1/customers/%s/cash_balance", ApiResource.urlEncodeId(this.getCustomer())));
+      String.format(
+        "%s%s",
+        Stripe.getApiBase(),
+        String.format("/v1/customers/%s/cash_balance", ApiResource.urlEncodeId(this.getCustomer()))
+      );
     return ApiResource.request(
-        ApiResource.RequestMethod.POST, url, params, CashBalance.class, options);
+      ApiResource.RequestMethod.POST,
+      url,
+      params,
+      CashBalance.class,
+      options
+    );
   }
 
   @Getter

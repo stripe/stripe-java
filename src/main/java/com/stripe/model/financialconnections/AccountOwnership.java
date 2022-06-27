@@ -12,11 +12,15 @@ import lombok.Setter;
 @Setter
 @EqualsAndHashCode(callSuper = false)
 public class AccountOwnership extends StripeObject implements HasId {
-  /** Time at which the object was created. Measured in seconds since the Unix epoch. */
+  /**
+   * Time at which the object was created. Measured in seconds since the Unix epoch.
+   */
   @SerializedName("created")
   Long created;
 
-  /** Unique identifier for the object. */
+  /**
+   * Unique identifier for the object.
+   */
   @Getter(onMethod_ = {@Override})
   @SerializedName("id")
   String id;
@@ -29,7 +33,9 @@ public class AccountOwnership extends StripeObject implements HasId {
   @SerializedName("object")
   String object;
 
-  /** A paginated list of owners for this account. */
+  /**
+   * A paginated list of owners for this account.
+   */
   @SerializedName("owners")
   AccountOwnerCollection owners;
 }

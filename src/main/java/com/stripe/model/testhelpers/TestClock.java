@@ -20,35 +20,46 @@ import lombok.Setter;
 @Setter
 @EqualsAndHashCode(callSuper = false)
 public class TestClock extends ApiResource implements HasId {
-  /** Time at which the object was created. Measured in seconds since the Unix epoch. */
+  /**
+   * Time at which the object was created. Measured in seconds since the Unix epoch.
+   */
   @SerializedName("created")
   Long created;
 
-  /** Always true for a deleted object. */
+  /**
+   * Always true for a deleted object.
+   */
   @SerializedName("deleted")
   Boolean deleted;
 
-  /** Time at which this clock is scheduled to auto delete. */
+  /**
+   * Time at which this clock is scheduled to auto delete.
+   */
   @SerializedName("deletes_after")
   Long deletesAfter;
 
-  /** Time at which all objects belonging to this clock are frozen. */
+  /**
+   * Time at which all objects belonging to this clock are frozen.
+   */
   @SerializedName("frozen_time")
   Long frozenTime;
 
-  /** Unique identifier for the object. */
+  /**
+   * Unique identifier for the object.
+   */
   @Getter(onMethod_ = {@Override})
   @SerializedName("id")
   String id;
 
   /**
-   * Has the value {@code true} if the object exists in live mode or the value {@code false} if the
-   * object exists in test mode.
+   * Has the value {@code true} if the object exists in live mode or the value {@code false} if the object exists in test mode.
    */
   @SerializedName("livemode")
   Boolean livemode;
 
-  /** The custom name supplied at creation. */
+  /**
+   * The custom name supplied at creation.
+   */
   @SerializedName("name")
   String name;
 
@@ -68,164 +79,246 @@ public class TestClock extends ApiResource implements HasId {
   @SerializedName("status")
   String status;
 
-  /** Retrieves a test clock. */
+  /**
+   * <p>Retrieves a test clock.</p>
+   */
   public static TestClock retrieve(String testClock) throws StripeException {
     return retrieve(testClock, (Map<String, Object>) null, (RequestOptions) null);
   }
 
-  /** Retrieves a test clock. */
-  public static TestClock retrieve(String testClock, RequestOptions options)
-      throws StripeException {
+  /**
+   * <p>Retrieves a test clock.</p>
+   */
+  public static TestClock retrieve(
+      String testClock,
+      RequestOptions options) throws StripeException {
     return retrieve(testClock, (Map<String, Object>) null, options);
   }
 
-  /** Retrieves a test clock. */
+  /**
+   * <p>Retrieves a test clock.</p>
+   */
   public static TestClock retrieve(
-      String testClock, Map<String, Object> params, RequestOptions options) throws StripeException {
+      String testClock,
+      Map<String, Object> params,
+      RequestOptions options) throws StripeException {
     String url =
-        String.format(
-            "%s%s",
-            Stripe.getApiBase(),
-            String.format("/v1/test_helpers/test_clocks/%s", ApiResource.urlEncodeId(testClock)));
+      String.format(
+        "%s%s",
+        Stripe.getApiBase(),
+        String.format("/v1/test_helpers/test_clocks/%s", ApiResource.urlEncodeId(testClock))
+      );
     return ApiResource.request(
-        ApiResource.RequestMethod.GET, url, params, TestClock.class, options);
+      ApiResource.RequestMethod.GET,
+      url,
+      params,
+      TestClock.class,
+      options
+    );
   }
 
-  /** Retrieves a test clock. */
+  /**
+   * <p>Retrieves a test clock.</p>
+   */
   public static TestClock retrieve(
-      String testClock, TestClockRetrieveParams params, RequestOptions options)
-      throws StripeException {
+      String testClock,
+      TestClockRetrieveParams params,
+      RequestOptions options) throws StripeException {
     String url =
-        String.format(
-            "%s%s",
-            Stripe.getApiBase(),
-            String.format("/v1/test_helpers/test_clocks/%s", ApiResource.urlEncodeId(testClock)));
+      String.format(
+        "%s%s",
+        Stripe.getApiBase(),
+        String.format("/v1/test_helpers/test_clocks/%s", ApiResource.urlEncodeId(testClock))
+      );
     return ApiResource.request(
-        ApiResource.RequestMethod.GET, url, params, TestClock.class, options);
+      ApiResource.RequestMethod.GET,
+      url,
+      params,
+      TestClock.class,
+      options
+    );
   }
 
-  /** Creates a new test clock that can be attached to new customers and quotes. */
+  /**
+   * <p>Creates a new test clock that can be attached to new customers and quotes.</p>
+   */
   public static TestClock create(Map<String, Object> params) throws StripeException {
     return create(params, (RequestOptions) null);
   }
 
-  /** Creates a new test clock that can be attached to new customers and quotes. */
-  public static TestClock create(Map<String, Object> params, RequestOptions options)
-      throws StripeException {
+  /**
+   * <p>Creates a new test clock that can be attached to new customers and quotes.</p>
+   */
+  public static TestClock create(
+      Map<String, Object> params,
+      RequestOptions options) throws StripeException {
     String url = String.format("%s%s", Stripe.getApiBase(), "/v1/test_helpers/test_clocks");
     return ApiResource.request(
-        ApiResource.RequestMethod.POST, url, params, TestClock.class, options);
+      ApiResource.RequestMethod.POST,
+      url,
+      params,
+      TestClock.class,
+      options
+    );
   }
 
-  /** Creates a new test clock that can be attached to new customers and quotes. */
+  /**
+   * <p>Creates a new test clock that can be attached to new customers and quotes.</p>
+   */
   public static TestClock create(TestClockCreateParams params) throws StripeException {
     return create(params, (RequestOptions) null);
   }
 
-  /** Creates a new test clock that can be attached to new customers and quotes. */
-  public static TestClock create(TestClockCreateParams params, RequestOptions options)
-      throws StripeException {
+  /**
+   * <p>Creates a new test clock that can be attached to new customers and quotes.</p>
+   */
+  public static TestClock create(
+      TestClockCreateParams params,
+      RequestOptions options) throws StripeException {
     String url = String.format("%s%s", Stripe.getApiBase(), "/v1/test_helpers/test_clocks");
     return ApiResource.request(
-        ApiResource.RequestMethod.POST, url, params, TestClock.class, options);
+      ApiResource.RequestMethod.POST,
+      url,
+      params,
+      TestClock.class,
+      options
+    );
   }
 
-  /** Deletes a test clock. */
+  /**
+   * <p>Deletes a test clock.</p>
+   */
   public TestClock delete() throws StripeException {
     return delete((Map<String, Object>) null, (RequestOptions) null);
   }
 
-  /** Deletes a test clock. */
+  /**
+   * <p>Deletes a test clock.</p>
+   */
   public TestClock delete(RequestOptions options) throws StripeException {
     return delete((Map<String, Object>) null, options);
   }
 
-  /** Deletes a test clock. */
+  /**
+   * <p>Deletes a test clock.</p>
+   */
   public TestClock delete(Map<String, Object> params) throws StripeException {
     return delete(params, (RequestOptions) null);
   }
 
-  /** Deletes a test clock. */
-  public TestClock delete(Map<String, Object> params, RequestOptions options)
-      throws StripeException {
+  /**
+   * <p>Deletes a test clock.</p>
+   */
+  public TestClock delete(
+      Map<String, Object> params,
+      RequestOptions options) throws StripeException {
     String url =
-        String.format(
-            "%s%s",
-            Stripe.getApiBase(),
-            String.format(
-                "/v1/test_helpers/test_clocks/%s", ApiResource.urlEncodeId(this.getId())));
+      String.format(
+        "%s%s",
+        Stripe.getApiBase(),
+        String.format("/v1/test_helpers/test_clocks/%s", ApiResource.urlEncodeId(this.getId()))
+      );
     return ApiResource.request(
-        ApiResource.RequestMethod.DELETE, url, params, TestClock.class, options);
+      ApiResource.RequestMethod.DELETE,
+      url,
+      params,
+      TestClock.class,
+      options
+    );
   }
 
   /**
-   * Starts advancing a test clock to a specified time in the future. Advancement is done when
-   * status changes to <code>Ready</code>.
+   * <p>Starts advancing a test clock to a specified time in the future. Advancement is done when status changes to <code>Ready</code>.</p>
    */
   public TestClock advance(Map<String, Object> params) throws StripeException {
     return advance(params, (RequestOptions) null);
   }
 
   /**
-   * Starts advancing a test clock to a specified time in the future. Advancement is done when
-   * status changes to <code>Ready</code>.
+   * <p>Starts advancing a test clock to a specified time in the future. Advancement is done when status changes to <code>Ready</code>.</p>
    */
-  public TestClock advance(Map<String, Object> params, RequestOptions options)
-      throws StripeException {
+  public TestClock advance(
+      Map<String, Object> params,
+      RequestOptions options) throws StripeException {
     String url =
+      String.format(
+        "%s%s",
+        Stripe.getApiBase(),
         String.format(
-            "%s%s",
-            Stripe.getApiBase(),
-            String.format(
-                "/v1/test_helpers/test_clocks/%s/advance", ApiResource.urlEncodeId(this.getId())));
+          "/v1/test_helpers/test_clocks/%s/advance",
+          ApiResource.urlEncodeId(this.getId())
+        )
+      );
     return ApiResource.request(
-        ApiResource.RequestMethod.POST, url, params, TestClock.class, options);
+      ApiResource.RequestMethod.POST,
+      url,
+      params,
+      TestClock.class,
+      options
+    );
   }
 
   /**
-   * Starts advancing a test clock to a specified time in the future. Advancement is done when
-   * status changes to <code>Ready</code>.
+   * <p>Starts advancing a test clock to a specified time in the future. Advancement is done when status changes to <code>Ready</code>.</p>
    */
   public TestClock advance(TestClockAdvanceParams params) throws StripeException {
     return advance(params, (RequestOptions) null);
   }
 
   /**
-   * Starts advancing a test clock to a specified time in the future. Advancement is done when
-   * status changes to <code>Ready</code>.
+   * <p>Starts advancing a test clock to a specified time in the future. Advancement is done when status changes to <code>Ready</code>.</p>
    */
-  public TestClock advance(TestClockAdvanceParams params, RequestOptions options)
-      throws StripeException {
+  public TestClock advance(
+      TestClockAdvanceParams params,
+      RequestOptions options) throws StripeException {
     String url =
+      String.format(
+        "%s%s",
+        Stripe.getApiBase(),
         String.format(
-            "%s%s",
-            Stripe.getApiBase(),
-            String.format(
-                "/v1/test_helpers/test_clocks/%s/advance", ApiResource.urlEncodeId(this.getId())));
+          "/v1/test_helpers/test_clocks/%s/advance",
+          ApiResource.urlEncodeId(this.getId())
+        )
+      );
     return ApiResource.request(
-        ApiResource.RequestMethod.POST, url, params, TestClock.class, options);
+      ApiResource.RequestMethod.POST,
+      url,
+      params,
+      TestClock.class,
+      options
+    );
   }
 
-  /** Returns a list of your test clocks. */
+  /**
+   * <p>Returns a list of your test clocks.</p>
+   */
   public static TestClockCollection list(Map<String, Object> params) throws StripeException {
     return list(params, (RequestOptions) null);
   }
 
-  /** Returns a list of your test clocks. */
-  public static TestClockCollection list(Map<String, Object> params, RequestOptions options)
-      throws StripeException {
+  /**
+   * <p>Returns a list of your test clocks.</p>
+   */
+  public static TestClockCollection list(
+      Map<String, Object> params,
+      RequestOptions options) throws StripeException {
     String url = String.format("%s%s", Stripe.getApiBase(), "/v1/test_helpers/test_clocks");
     return ApiResource.requestCollection(url, params, TestClockCollection.class, options);
   }
 
-  /** Returns a list of your test clocks. */
+  /**
+   * <p>Returns a list of your test clocks.</p>
+   */
   public static TestClockCollection list(TestClockListParams params) throws StripeException {
     return list(params, (RequestOptions) null);
   }
 
-  /** Returns a list of your test clocks. */
-  public static TestClockCollection list(TestClockListParams params, RequestOptions options)
-      throws StripeException {
+  /**
+   * <p>Returns a list of your test clocks.</p>
+   */
+  public static TestClockCollection list(
+      TestClockListParams params,
+      RequestOptions options) throws StripeException {
     String url = String.format("%s%s", Stripe.getApiBase(), "/v1/test_helpers/test_clocks");
     return ApiResource.requestCollection(url, params, TestClockCollection.class, options);
   }
