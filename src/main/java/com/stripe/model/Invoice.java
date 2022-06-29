@@ -1558,7 +1558,12 @@ public class Invoice extends ApiResource implements HasId, MetadataStore<Invoice
   @Setter
   @EqualsAndHashCode(callSuper = false)
   public static class AutomaticTax extends StripeObject {
-    /** Whether Stripe automatically computes tax on this invoice. */
+    /**
+     * Whether Stripe automatically computes tax on this invoice. Note that incompatible invoice
+     * items (invoice items with manually specified <a
+     * href="https://stripe.com/docs/api/tax_rates">tax rates</a>, negative amounts, or {@code
+     * tax_behavior=unspecified}) cannot be added to automatic tax invoices.
+     */
     @SerializedName("enabled")
     Boolean enabled;
 
