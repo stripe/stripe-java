@@ -696,6 +696,72 @@ class GeneratedExamples extends BaseStripeTest {
   }
 
   @Test
+  public void testSetupAttemptList() throws StripeException {
+    SetupAttemptListParams params =
+        SetupAttemptListParams.builder().setLimit(3L).setSetupIntent("si_xyz").build();
+
+    SetupAttemptCollection setupAttempts = SetupAttempt.list(params);
+    assertNotNull(setupAttempts);
+    verifyRequest(ApiResource.RequestMethod.GET, "/v1/setup_attempts", params.toMap());
+  }
+
+  @Test
+  public void testCardDeliverCard() throws StripeException {
+    com.stripe.model.issuing.Card resource = com.stripe.model.issuing.Card.retrieve("card_123");
+    com.stripe.param.issuing.CardDeliverCardParams params =
+        com.stripe.param.issuing.CardDeliverCardParams.builder().build();
+
+    com.stripe.model.issuing.Card card = resource.getTestHelpers().deliverCard(params);
+    assertNotNull(card);
+    verifyRequest(
+        ApiResource.RequestMethod.POST,
+        "/v1/test_helpers/issuing/cards/card_123/shipping/deliver",
+        params.toMap());
+  }
+
+  @Test
+  public void testCardFailCard() throws StripeException {
+    com.stripe.model.issuing.Card resource = com.stripe.model.issuing.Card.retrieve("card_123");
+    com.stripe.param.issuing.CardFailCardParams params =
+        com.stripe.param.issuing.CardFailCardParams.builder().build();
+
+    com.stripe.model.issuing.Card card = resource.getTestHelpers().failCard(params);
+    assertNotNull(card);
+    verifyRequest(
+        ApiResource.RequestMethod.POST,
+        "/v1/test_helpers/issuing/cards/card_123/shipping/fail",
+        params.toMap());
+  }
+
+  @Test
+  public void testCardReturnCard() throws StripeException {
+    com.stripe.model.issuing.Card resource = com.stripe.model.issuing.Card.retrieve("card_123");
+    com.stripe.param.issuing.CardReturnCardParams params =
+        com.stripe.param.issuing.CardReturnCardParams.builder().build();
+
+    com.stripe.model.issuing.Card card = resource.getTestHelpers().returnCard(params);
+    assertNotNull(card);
+    verifyRequest(
+        ApiResource.RequestMethod.POST,
+        "/v1/test_helpers/issuing/cards/card_123/shipping/return",
+        params.toMap());
+  }
+
+  @Test
+  public void testCardShipCard() throws StripeException {
+    com.stripe.model.issuing.Card resource = com.stripe.model.issuing.Card.retrieve("card_123");
+    com.stripe.param.issuing.CardShipCardParams params =
+        com.stripe.param.issuing.CardShipCardParams.builder().build();
+
+    com.stripe.model.issuing.Card card = resource.getTestHelpers().shipCard(params);
+    assertNotNull(card);
+    verifyRequest(
+        ApiResource.RequestMethod.POST,
+        "/v1/test_helpers/issuing/cards/card_123/shipping/ship",
+        params.toMap());
+  }
+
+  @Test
   public void testAccountLinkCreate() throws StripeException {
     AccountLinkCreateParams params =
         AccountLinkCreateParams.builder()
@@ -2984,15 +3050,6 @@ class GeneratedExamples extends BaseStripeTest {
     assertNotNull(review);
     verifyRequest(
         ApiResource.RequestMethod.POST, "/v1/reviews/prv_xxxxxxxxxxxxx/approve", params.toMap());
-  }
-
-  @Test
-  public void testSetupAttemptList() throws StripeException {
-    SetupAttemptListParams params = SetupAttemptListParams.builder().setLimit(3L).build();
-
-    SetupAttemptCollection setupAttempts = SetupAttempt.list(params);
-    assertNotNull(setupAttempts);
-    verifyRequest(ApiResource.RequestMethod.GET, "/v1/setup_attempts", params.toMap());
   }
 
   @Test
