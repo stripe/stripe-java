@@ -94,6 +94,11 @@ public class SessionListLineItemsParams extends ApiRequestParams {
       return this;
     }
 
+    /**
+     * Add an element to `expand` list. A list is initialized for the first `add/addAll` call, and
+     * subsequent calls adds additional elements to the original list. See {@link
+     * SessionListLineItemsParams#expand} for the field documentation.
+     */
     public Builder addExpand(String element) {
       if (this.expand == null) {
         this.expand = new ArrayList<>();
@@ -102,6 +107,11 @@ public class SessionListLineItemsParams extends ApiRequestParams {
       return this;
     }
 
+    /**
+     * Add all elements to `expand` list. A list is initialized for the first `add/addAll` call, and
+     * subsequent calls adds additional elements to the original list. See {@link
+     * SessionListLineItemsParams#expand} for the field documentation.
+     */
     public Builder addAllExpand(List<String> elements) {
       if (this.expand == null) {
         this.expand = new ArrayList<>();
@@ -110,6 +120,11 @@ public class SessionListLineItemsParams extends ApiRequestParams {
       return this;
     }
 
+    /**
+     * Add a key/value pair to `extraParams` map. A map is initialized for the first `put/putAll`
+     * call, and subsequent calls add additional key/value pairs to the original map. See {@link
+     * SessionListLineItemsParams#extraParams} for the field documentation.
+     */
     public Builder putExtraParam(String key, Object value) {
       if (this.extraParams == null) {
         this.extraParams = new HashMap<>();
@@ -118,6 +133,11 @@ public class SessionListLineItemsParams extends ApiRequestParams {
       return this;
     }
 
+    /**
+     * Add all map key/value pairs to `extraParams` map. A map is initialized for the first
+     * `put/putAll` call, and subsequent calls add additional key/value pairs to the original map.
+     * See {@link SessionListLineItemsParams#extraParams} for the field documentation.
+     */
     public Builder putAllExtraParam(Map<String, Object> map) {
       if (this.extraParams == null) {
         this.extraParams = new HashMap<>();

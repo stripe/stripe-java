@@ -55,6 +55,14 @@ public class ReceivedCredit extends ApiResource implements HasId {
   @SerializedName("financial_account")
   String financialAccount;
 
+  /**
+   * A <a href="https://stripe.com/docs/treasury/moving-money/regulatory-receipts">hosted
+   * transaction receipt</a> URL that is provided when money movement is considered regulated under
+   * Stripe's money transmission licenses.
+   */
+  @SerializedName("hosted_regulatory_receipt_url")
+  String hostedRegulatoryReceiptUrl;
+
   /** Unique identifier for the object. */
   @Getter(onMethod_ = {@Override})
   @SerializedName("id")
@@ -314,7 +322,7 @@ public class ReceivedCredit extends ApiResource implements HasId {
 
     /**
      * ID of the source flow. Set if {@code network} is {@code stripe} and the source flow is
-     * visible to the merchant. Examples of source flows include OutboundPayments, payouts, or
+     * visible to the user. Examples of source flows include OutboundPayments, payouts, or
      * CreditReversals.
      */
     @SerializedName("source_flow")

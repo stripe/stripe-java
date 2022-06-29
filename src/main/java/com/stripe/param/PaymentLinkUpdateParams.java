@@ -1793,8 +1793,74 @@ public class PaymentLinkUpdateParams extends ApiRequestParams {
   }
 
   public enum PaymentMethodType implements ApiRequestParams.EnumParam {
+    @SerializedName("affirm")
+    AFFIRM("affirm"),
+
+    @SerializedName("afterpay_clearpay")
+    AFTERPAY_CLEARPAY("afterpay_clearpay"),
+
+    @SerializedName("alipay")
+    ALIPAY("alipay"),
+
+    @SerializedName("au_becs_debit")
+    AU_BECS_DEBIT("au_becs_debit"),
+
+    @SerializedName("bacs_debit")
+    BACS_DEBIT("bacs_debit"),
+
+    @SerializedName("bancontact")
+    BANCONTACT("bancontact"),
+
+    @SerializedName("boleto")
+    BOLETO("boleto"),
+
     @SerializedName("card")
-    CARD("card");
+    CARD("card"),
+
+    @SerializedName("eps")
+    EPS("eps"),
+
+    @SerializedName("fpx")
+    FPX("fpx"),
+
+    @SerializedName("giropay")
+    GIROPAY("giropay"),
+
+    @SerializedName("grabpay")
+    GRABPAY("grabpay"),
+
+    @SerializedName("ideal")
+    IDEAL("ideal"),
+
+    @SerializedName("klarna")
+    KLARNA("klarna"),
+
+    @SerializedName("konbini")
+    KONBINI("konbini"),
+
+    @SerializedName("oxxo")
+    OXXO("oxxo"),
+
+    @SerializedName("p24")
+    P24("p24"),
+
+    @SerializedName("paynow")
+    PAYNOW("paynow"),
+
+    @SerializedName("promptpay")
+    PROMPTPAY("promptpay"),
+
+    @SerializedName("sepa_debit")
+    SEPA_DEBIT("sepa_debit"),
+
+    @SerializedName("sofort")
+    SOFORT("sofort"),
+
+    @SerializedName("us_bank_account")
+    US_BANK_ACCOUNT("us_bank_account"),
+
+    @SerializedName("wechat_pay")
+    WECHAT_PAY("wechat_pay");
 
     @Getter(onMethod_ = {@Override})
     private final String value;

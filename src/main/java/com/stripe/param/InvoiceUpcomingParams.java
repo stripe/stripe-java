@@ -656,7 +656,12 @@ public class InvoiceUpcomingParams extends ApiRequestParams {
 
   @Getter
   public static class AutomaticTax {
-    /** Controls whether Stripe will automatically compute tax on this invoice. */
+    /**
+     * Whether Stripe automatically computes tax on this invoice. Note that incompatible invoice
+     * items (invoice items with manually specified <a
+     * href="https://stripe.com/docs/api/tax_rates">tax rates</a>, negative amounts, or {@code
+     * tax_behavior=unspecified}) cannot be added to automatic tax invoices.
+     */
     @SerializedName("enabled")
     Boolean enabled;
 
@@ -688,7 +693,12 @@ public class InvoiceUpcomingParams extends ApiRequestParams {
         return new AutomaticTax(this.enabled, this.extraParams);
       }
 
-      /** Controls whether Stripe will automatically compute tax on this invoice. */
+      /**
+       * Whether Stripe automatically computes tax on this invoice. Note that incompatible invoice
+       * items (invoice items with manually specified <a
+       * href="https://stripe.com/docs/api/tax_rates">tax rates</a>, negative amounts, or {@code
+       * tax_behavior=unspecified}) cannot be added to automatic tax invoices.
+       */
       public Builder setEnabled(Boolean enabled) {
         this.enabled = enabled;
         return this;
