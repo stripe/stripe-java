@@ -55,6 +55,14 @@ public class ReceivedCredit extends ApiResource implements HasId {
   @SerializedName("financial_account")
   String financialAccount;
 
+  /**
+   * A <a href="https://stripe.com/docs/treasury/moving-money/regulatory-receipts">hosted
+   * transaction receipt</a> URL that is provided when money movement is considered regulated under
+   * Stripe's money transmission licenses.
+   */
+  @SerializedName("hosted_regulatory_receipt_url")
+  String hostedRegulatoryReceiptUrl;
+
   /** Unique identifier for the object. */
   @Getter(onMethod_ = {@Override})
   @SerializedName("id")
@@ -80,6 +88,10 @@ public class ReceivedCredit extends ApiResource implements HasId {
    */
   @SerializedName("network")
   String network;
+
+  /** Details specific to the money movement rails. */
+  @SerializedName("network_details")
+  NetworkDetails networkDetails;
 
   /**
    * String representing the object's type. Objects of the same type share the same value.
@@ -314,7 +326,7 @@ public class ReceivedCredit extends ApiResource implements HasId {
 
     /**
      * ID of the source flow. Set if {@code network} is {@code stripe} and the source flow is
-     * visible to the merchant. Examples of source flows include OutboundPayments, payouts, or
+     * visible to the user. Examples of source flows include OutboundPayments, payouts, or
      * CreditReversals.
      */
     @SerializedName("source_flow")
@@ -377,6 +389,32 @@ public class ReceivedCredit extends ApiResource implements HasId {
        */
       @SerializedName("type")
       String type;
+    }
+  }
+
+  @Getter
+  @Setter
+  @EqualsAndHashCode(callSuper = false)
+  public static class NetworkDetails extends StripeObject {
+    /** Details about an ACH transaction. */
+    @SerializedName("ach")
+    Ach ach;
+
+    /**
+     * The type of flow that originated the ReceivedCredit.
+     *
+     * <p>Equal to {@code ach}.
+     */
+    @SerializedName("type")
+    String type;
+
+    @Getter
+    @Setter
+    @EqualsAndHashCode(callSuper = false)
+    public static class Ach extends StripeObject {
+      /** ACH Addenda record. */
+      @SerializedName("addenda")
+      String addenda;
     }
   }
 
