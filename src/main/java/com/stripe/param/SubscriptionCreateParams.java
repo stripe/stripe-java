@@ -3669,6 +3669,9 @@ public class SubscriptionCreateParams extends ApiRequestParams {
       @SerializedName("paynow")
       PAYNOW("paynow"),
 
+      @SerializedName("promptpay")
+      PROMPTPAY("promptpay"),
+
       @SerializedName("sepa_credit_transfer")
       SEPA_CREDIT_TRANSFER("sepa_credit_transfer"),
 

@@ -55,6 +55,14 @@ public class ReceivedCredit extends ApiResource implements HasId {
   @SerializedName("financial_account")
   String financialAccount;
 
+  /**
+   * A <a href="https://stripe.com/docs/treasury/moving-money/regulatory-receipts">hosted
+   * transaction receipt</a> URL that is provided when money movement is considered regulated under
+   * Stripe's money transmission licenses.
+   */
+  @SerializedName("hosted_regulatory_receipt_url")
+  String hostedRegulatoryReceiptUrl;
+
   /** Unique identifier for the object. */
   @Getter(onMethod_ = {@Override})
   @SerializedName("id")
@@ -92,6 +100,10 @@ public class ReceivedCredit extends ApiResource implements HasId {
    */
   @SerializedName("object")
   String object;
+
+  /** Details describing when a ReceivedCredit may be reversed. */
+  @SerializedName("reversal_details")
+  ReversalDetails reversalDetails;
 
   /**
    * Status of the ReceivedCredit. ReceivedCredits are created either {@code succeeded} (approved)
@@ -314,7 +326,7 @@ public class ReceivedCredit extends ApiResource implements HasId {
 
     /**
      * ID of the source flow. Set if {@code network} is {@code stripe} and the source flow is
-     * visible to the merchant. Examples of source flows include OutboundPayments, payouts, or
+     * visible to the user. Examples of source flows include OutboundPayments, payouts, or
      * CreditReversals.
      */
     @SerializedName("source_flow")
@@ -404,6 +416,24 @@ public class ReceivedCredit extends ApiResource implements HasId {
       @SerializedName("addenda")
       String addenda;
     }
+  }
+
+  @Getter
+  @Setter
+  @EqualsAndHashCode(callSuper = false)
+  public static class ReversalDetails extends StripeObject {
+    /** Time before which a ReceivedCredit can be reversed. */
+    @SerializedName("deadline")
+    Long deadline;
+
+    /**
+     * Set if a ReceivedCredit cannot be reversed.
+     *
+     * <p>One of {@code already_reversed}, {@code deadline_passed}, {@code network_restricted},
+     * {@code other}, or {@code source_flow_restricted}.
+     */
+    @SerializedName("restricted_reason")
+    String restrictedReason;
   }
 
   @Getter

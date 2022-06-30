@@ -136,6 +136,9 @@ public class PaymentMethod extends ApiResource implements HasId, MetadataStore<P
   @SerializedName("paynow")
   Paynow paynow;
 
+  @SerializedName("promptpay")
+  Promptpay promptpay;
+
   /**
    * Options to configure Radar. See <a href="https://stripe.com/docs/radar/radar-session">Radar
    * Session</a> for more information.
@@ -157,8 +160,8 @@ public class PaymentMethod extends ApiResource implements HasId, MetadataStore<P
    * au_becs_debit}, {@code bacs_debit}, {@code bancontact}, {@code boleto}, {@code card}, {@code
    * card_present}, {@code customer_balance}, {@code eps}, {@code fpx}, {@code giropay}, {@code
    * grabpay}, {@code ideal}, {@code interac_present}, {@code klarna}, {@code konbini}, {@code
-   * link}, {@code oxxo}, {@code p24}, {@code paynow}, {@code sepa_debit}, {@code sofort}, {@code
-   * us_bank_account}, or {@code wechat_pay}.
+   * link}, {@code oxxo}, {@code p24}, {@code paynow}, {@code promptpay}, {@code sepa_debit}, {@code
+   * sofort}, {@code us_bank_account}, or {@code wechat_pay}.
    */
   @SerializedName("type")
   String type;
@@ -1087,6 +1090,11 @@ public class PaymentMethod extends ApiResource implements HasId, MetadataStore<P
   @Setter
   @EqualsAndHashCode(callSuper = false)
   public static class Paynow extends StripeObject {}
+
+  @Getter
+  @Setter
+  @EqualsAndHashCode(callSuper = false)
+  public static class Promptpay extends StripeObject {}
 
   @Getter
   @Setter

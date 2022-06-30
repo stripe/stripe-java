@@ -1225,14 +1225,14 @@ public class WebhookEndpointCreateParams extends ApiRequestParams {
     @SerializedName("treasury.received_credit.failed")
     TREASURY__RECEIVED_CREDIT__FAILED("treasury.received_credit.failed"),
 
-    @SerializedName("treasury.received_credit.reversed")
-    TREASURY__RECEIVED_CREDIT__REVERSED("treasury.received_credit.reversed"),
-
     @SerializedName("treasury.received_credit.succeeded")
     TREASURY__RECEIVED_CREDIT__SUCCEEDED("treasury.received_credit.succeeded"),
 
     @SerializedName("treasury.received_debit.created")
-    TREASURY__RECEIVED_DEBIT__CREATED("treasury.received_debit.created");
+    TREASURY__RECEIVED_DEBIT__CREATED("treasury.received_debit.created"),
+
+    @SerializedName("treasury.received_credit.reversed")
+    TREASURY__RECEIVED_CREDIT__REVERSED("treasury.received_credit.reversed");
 
     @Getter(onMethod_ = {@Override})
     private final String value;

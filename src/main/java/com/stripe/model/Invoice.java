@@ -463,6 +463,13 @@ public class Invoice extends ApiResource implements HasId, MetadataStore<Invoice
   @SerializedName("subtotal")
   Long subtotal;
 
+  /**
+   * The integer amount in %s representing the subtotal of the invoice before any invoice level
+   * discount or tax is applied. Item discounts are already incorporated
+   */
+  @SerializedName("subtotal_excluding_tax")
+  Long subtotalExcludingTax;
+
   /** The amount of tax on this invoice. This is the sum of all the tax amounts on this invoice. */
   @SerializedName("tax")
   Long tax;
@@ -483,6 +490,13 @@ public class Invoice extends ApiResource implements HasId, MetadataStore<Invoice
   /** The aggregate amounts calculated per discount across all line items. */
   @SerializedName("total_discount_amounts")
   List<DiscountAmount> totalDiscountAmounts;
+
+  /**
+   * The integer amount in %s representing the total amount of the invoice including all discounts
+   * but excluding all tax.
+   */
+  @SerializedName("total_excluding_tax")
+  Long totalExcludingTax;
 
   /** The aggregate amounts calculated per tax rate for all line items. */
   @SerializedName("total_tax_amounts")
@@ -1544,7 +1558,12 @@ public class Invoice extends ApiResource implements HasId, MetadataStore<Invoice
   @Setter
   @EqualsAndHashCode(callSuper = false)
   public static class AutomaticTax extends StripeObject {
-    /** Whether Stripe automatically computes tax on this invoice. */
+    /**
+     * Whether Stripe automatically computes tax on this invoice. Note that incompatible invoice
+     * items (invoice items with manually specified <a
+     * href="https://stripe.com/docs/api/tax_rates">tax rates</a>, negative amounts, or {@code
+     * tax_behavior=unspecified}) cannot be added to automatic tax invoices.
+     */
     @SerializedName("enabled")
     Boolean enabled;
 

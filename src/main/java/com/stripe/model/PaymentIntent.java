@@ -1477,6 +1477,9 @@ public class PaymentIntent extends ApiResource implements HasId, MetadataStore<P
     @SerializedName("paynow_display_qr_code")
     PaynowDisplayQrCode paynowDisplayQrCode;
 
+    @SerializedName("promptpay_display_qr_code")
+    PromptpayDisplayQrCode promptpayDisplayQrCode;
+
     @SerializedName("redirect_to_url")
     NextActionRedirectToUrl redirectToUrl;
 
@@ -1524,6 +1527,39 @@ public class PaymentIntent extends ApiResource implements HasId, MetadataStore<P
       String imageUrlPng;
 
       /** The image_url_svg string used to render QR code. */
+      @SerializedName("image_url_svg")
+      String imageUrlSvg;
+    }
+
+    @Getter
+    @Setter
+    @EqualsAndHashCode(callSuper = false)
+    public static class PromptpayDisplayQrCode extends StripeObject {
+      /**
+       * The raw data string used to generate QR code, it should be used together with QR code
+       * library.
+       */
+      @SerializedName("data")
+      String data;
+
+      /**
+       * The URL to the hosted PromptPay instructions page, which allows customers to view the
+       * PromptPay QR code.
+       */
+      @SerializedName("hosted_instructions_url")
+      String hostedInstructionsUrl;
+
+      /**
+       * The image_url_png string used to render QR code, can be used as &lt;img src=&quot;…&quot;
+       * /&gt;.
+       */
+      @SerializedName("image_url_png")
+      String imageUrlPng;
+
+      /**
+       * The image_url_svg string used to render QR code, can be used as &lt;img src=&quot;…&quot;
+       * /&gt;.
+       */
       @SerializedName("image_url_svg")
       String imageUrlSvg;
     }
@@ -2065,6 +2101,9 @@ public class PaymentIntent extends ApiResource implements HasId, MetadataStore<P
 
     @SerializedName("paynow")
     Paynow paynow;
+
+    @SerializedName("promptpay")
+    Promptpay promptpay;
 
     @SerializedName("sepa_debit")
     SepaDebit sepaDebit;
@@ -2978,6 +3017,31 @@ public class PaymentIntent extends ApiResource implements HasId, MetadataStore<P
     @Setter
     @EqualsAndHashCode(callSuper = false)
     public static class Paynow extends StripeObject {
+      /**
+       * Indicates that you intend to make future payments with this PaymentIntent's payment method.
+       *
+       * <p>Providing this parameter will <a
+       * href="https://stripe.com/docs/payments/save-during-payment">attach the payment method</a>
+       * to the PaymentIntent's Customer, if present, after the PaymentIntent is confirmed and any
+       * required actions from the user are complete. If no Customer was provided, the payment
+       * method can still be <a
+       * href="https://stripe.com/docs/api/payment_methods/attach">attached</a> to a Customer after
+       * the transaction completes.
+       *
+       * <p>When processing card payments, Stripe also uses {@code setup_future_usage} to
+       * dynamically optimize your payment flow and comply with regional legislation and network
+       * rules, such as <a href="https://stripe.com/docs/strong-customer-authentication">SCA</a>.
+       *
+       * <p>Equal to {@code none}.
+       */
+      @SerializedName("setup_future_usage")
+      String setupFutureUsage;
+    }
+
+    @Getter
+    @Setter
+    @EqualsAndHashCode(callSuper = false)
+    public static class Promptpay extends StripeObject {
       /**
        * Indicates that you intend to make future payments with this PaymentIntent's payment method.
        *
