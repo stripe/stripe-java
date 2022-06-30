@@ -171,6 +171,50 @@ you modify the JVM's [networkaddress.cache.ttl
 property](https://docs.oracle.com/en/java/javase/11/docs/api/java.base/java/net/doc-files/net-properties.html)
 to `60` seconds.
 
+### How to use undocumented parameters and properties
+
+stripe-java is a typed library and it supports all public properties or parameters.
+
+Stripe sometimes has beta which introduces new properties or parameters that are not immediately public. The library does not support these properties or parameters until they are public but there is still an approach that allows you to use them.
+
+#### Parameters
+
+To pass undocumented parameters to Stripe using stripe-java you need to use the `putExtraParam()` method, as shown below:
+
+```java
+CustomerCreateParams params =
+  CustomerCreateParams.builder()
+    .setEmail("jenny.rosen@example.com")
+    .putExtraParam("secret_feature_enabled", "true")
+    .putExtraParam("secret_parameter[primary]", "primary value")
+    .putExtraParam("secret_parameter[secondary]", "secondary value")
+    .build();
+
+Customer customer = customer.Create(params);
+```
+
+#### Properties
+
+To retrieve undocumented properties from Stripe using Java you can use an option in the library to return the raw JSON object and return the property as a native type. An example of this is shown below:
+
+```java
+final Customer customer = Customer.retrieve("cus_1234");
+Boolean featureEnabled =
+  customer.getRawJsonObject()
+    .getAsJsonPrimitive("secret_feature_enabled")
+    .getAsBoolean();
+String primaryValue =
+  customer.getRawJsonObject()
+    .getAsJsonObject("secret_parameter")
+    .getAsJsonPrimitive("primary")
+    .getAsString();
+String secondaryValue =
+  customer.getRawJsonObject()
+    .getAsJsonObject("secret_parameter")
+    .getAsJsonPrimitive("secondary")
+    .getAsString();
+```
+
 ### Writing a plugin
 
 If you're writing a plugin that uses the library, we'd appreciate it if you

@@ -142,6 +142,13 @@ public class CreditNote extends ApiResource implements HasId, MetadataStore<Cred
   @SerializedName("subtotal")
   Long subtotal;
 
+  /**
+   * The integer amount in %s representing the amount of the credit note, excluding all tax and
+   * invoice level discounts.
+   */
+  @SerializedName("subtotal_excluding_tax")
+  Long subtotalExcludingTax;
+
   /** The aggregate amounts calculated per tax rate for all line items. */
   @SerializedName("tax_amounts")
   List<CreditNote.TaxAmount> taxAmounts;

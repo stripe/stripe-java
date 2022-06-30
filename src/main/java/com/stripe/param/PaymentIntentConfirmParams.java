@@ -13,6 +13,10 @@ import lombok.Getter;
 
 @Getter
 public class PaymentIntentConfirmParams extends ApiRequestParams {
+  /** Controls when the funds will be captured from the customer's account. */
+  @SerializedName("capture_method")
+  CaptureMethod captureMethod;
+
   /**
    * Set to {@code true} to fail the payment attempt if the PaymentIntent transitions into {@code
    * requires_action}. This parameter is intended for simpler integrations that do not handle
@@ -130,6 +134,7 @@ public class PaymentIntentConfirmParams extends ApiRequestParams {
   Boolean useStripeSdk;
 
   private PaymentIntentConfirmParams(
+      CaptureMethod captureMethod,
       Boolean errorOnRequiresAction,
       List<String> expand,
       Map<String, Object> extraParams,
@@ -145,6 +150,7 @@ public class PaymentIntentConfirmParams extends ApiRequestParams {
       EnumParam setupFutureUsage,
       Object shipping,
       Boolean useStripeSdk) {
+    this.captureMethod = captureMethod;
     this.errorOnRequiresAction = errorOnRequiresAction;
     this.expand = expand;
     this.extraParams = extraParams;
@@ -167,6 +173,8 @@ public class PaymentIntentConfirmParams extends ApiRequestParams {
   }
 
   public static class Builder {
+    private CaptureMethod captureMethod;
+
     private Boolean errorOnRequiresAction;
 
     private List<String> expand;
@@ -200,6 +208,7 @@ public class PaymentIntentConfirmParams extends ApiRequestParams {
     /** Finalize and obtain parameter instance from this builder. */
     public PaymentIntentConfirmParams build() {
       return new PaymentIntentConfirmParams(
+          this.captureMethod,
           this.errorOnRequiresAction,
           this.expand,
           this.extraParams,
@@ -215,6 +224,12 @@ public class PaymentIntentConfirmParams extends ApiRequestParams {
           this.setupFutureUsage,
           this.shipping,
           this.useStripeSdk);
+    }
+
+    /** Controls when the funds will be captured from the customer's account. */
+    public Builder setCaptureMethod(CaptureMethod captureMethod) {
+      this.captureMethod = captureMethod;
+      return this;
     }
 
     /**
@@ -987,6 +1002,13 @@ public class PaymentIntentConfirmParams extends ApiRequestParams {
     Paynow paynow;
 
     /**
+     * If this is a {@code promptpay} PaymentMethod, this hash contains details about the PromptPay
+     * payment method.
+     */
+    @SerializedName("promptpay")
+    Promptpay promptpay;
+
+    /**
      * Options to configure Radar. See <a href="https://stripe.com/docs/radar/radar-session">Radar
      * Session</a> for more information.
      */
@@ -1054,6 +1076,7 @@ public class PaymentIntentConfirmParams extends ApiRequestParams {
         Oxxo oxxo,
         P24 p24,
         Paynow paynow,
+        Promptpay promptpay,
         RadarOptions radarOptions,
         SepaDebit sepaDebit,
         Sofort sofort,
@@ -1084,6 +1107,7 @@ public class PaymentIntentConfirmParams extends ApiRequestParams {
       this.oxxo = oxxo;
       this.p24 = p24;
       this.paynow = paynow;
+      this.promptpay = promptpay;
       this.radarOptions = radarOptions;
       this.sepaDebit = sepaDebit;
       this.sofort = sofort;
@@ -1145,6 +1169,8 @@ public class PaymentIntentConfirmParams extends ApiRequestParams {
 
       private Paynow paynow;
 
+      private Promptpay promptpay;
+
       private RadarOptions radarOptions;
 
       private SepaDebit sepaDebit;
@@ -1184,6 +1210,7 @@ public class PaymentIntentConfirmParams extends ApiRequestParams {
             this.oxxo,
             this.p24,
             this.paynow,
+            this.promptpay,
             this.radarOptions,
             this.sepaDebit,
             this.sofort,
@@ -1441,6 +1468,15 @@ public class PaymentIntentConfirmParams extends ApiRequestParams {
        */
       public Builder setPaynow(Paynow paynow) {
         this.paynow = paynow;
+        return this;
+      }
+
+      /**
+       * If this is a {@code promptpay} PaymentMethod, this hash contains details about the
+       * PromptPay payment method.
+       */
+      public Builder setPromptpay(Promptpay promptpay) {
+        this.promptpay = promptpay;
         return this;
       }
 
@@ -3583,6 +3619,63 @@ public class PaymentIntentConfirmParams extends ApiRequestParams {
     }
 
     @Getter
+    public static class Promptpay {
+      /**
+       * Map of extra parameters for custom features not available in this client library. The
+       * content in this map is not serialized under this field's {@code @SerializedName} value.
+       * Instead, each key/value pair is serialized as if the key is a root-level field (serialized)
+       * name in this param object. Effectively, this map is flattened to its parent instance.
+       */
+      @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
+      Map<String, Object> extraParams;
+
+      private Promptpay(Map<String, Object> extraParams) {
+        this.extraParams = extraParams;
+      }
+
+      public static Builder builder() {
+        return new Builder();
+      }
+
+      public static class Builder {
+        private Map<String, Object> extraParams;
+
+        /** Finalize and obtain parameter instance from this builder. */
+        public Promptpay build() {
+          return new Promptpay(this.extraParams);
+        }
+
+        /**
+         * Add a key/value pair to `extraParams` map. A map is initialized for the first
+         * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
+         * map. See {@link PaymentIntentConfirmParams.PaymentMethodData.Promptpay#extraParams} for
+         * the field documentation.
+         */
+        public Builder putExtraParam(String key, Object value) {
+          if (this.extraParams == null) {
+            this.extraParams = new HashMap<>();
+          }
+          this.extraParams.put(key, value);
+          return this;
+        }
+
+        /**
+         * Add all map key/value pairs to `extraParams` map. A map is initialized for the first
+         * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
+         * map. See {@link PaymentIntentConfirmParams.PaymentMethodData.Promptpay#extraParams} for
+         * the field documentation.
+         */
+        public Builder putAllExtraParam(Map<String, Object> map) {
+          if (this.extraParams == null) {
+            this.extraParams = new HashMap<>();
+          }
+          this.extraParams.putAll(map);
+          return this;
+        }
+      }
+    }
+
+    @Getter
     public static class RadarOptions {
       /**
        * Map of extra parameters for custom features not available in this client library. The
@@ -4109,6 +4202,9 @@ public class PaymentIntentConfirmParams extends ApiRequestParams {
       @SerializedName("paynow")
       PAYNOW("paynow"),
 
+      @SerializedName("promptpay")
+      PROMPTPAY("promptpay"),
+
       @SerializedName("sepa_debit")
       SEPA_DEBIT("sepa_debit"),
 
@@ -4300,6 +4396,13 @@ public class PaymentIntentConfirmParams extends ApiRequestParams {
     Object paynow;
 
     /**
+     * If this is a {@code promptpay} PaymentMethod, this sub-hash contains details about the
+     * PromptPay payment method options.
+     */
+    @SerializedName("promptpay")
+    Object promptpay;
+
+    /**
      * If this is a {@code sepa_debit} PaymentIntent, this sub-hash contains details about the SEPA
      * Debit payment method options.
      */
@@ -4352,6 +4455,7 @@ public class PaymentIntentConfirmParams extends ApiRequestParams {
         Object oxxo,
         Object p24,
         Object paynow,
+        Object promptpay,
         Object sepaDebit,
         Object sofort,
         Object usBankAccount,
@@ -4380,6 +4484,7 @@ public class PaymentIntentConfirmParams extends ApiRequestParams {
       this.oxxo = oxxo;
       this.p24 = p24;
       this.paynow = paynow;
+      this.promptpay = promptpay;
       this.sepaDebit = sepaDebit;
       this.sofort = sofort;
       this.usBankAccount = usBankAccount;
@@ -4439,6 +4544,8 @@ public class PaymentIntentConfirmParams extends ApiRequestParams {
 
       private Object paynow;
 
+      private Object promptpay;
+
       private Object sepaDebit;
 
       private Object sofort;
@@ -4474,6 +4581,7 @@ public class PaymentIntentConfirmParams extends ApiRequestParams {
             this.oxxo,
             this.p24,
             this.paynow,
+            this.promptpay,
             this.sepaDebit,
             this.sofort,
             this.usBankAccount,
@@ -4912,6 +5020,24 @@ public class PaymentIntentConfirmParams extends ApiRequestParams {
        */
       public Builder setPaynow(EmptyParam paynow) {
         this.paynow = paynow;
+        return this;
+      }
+
+      /**
+       * If this is a {@code promptpay} PaymentMethod, this sub-hash contains details about the
+       * PromptPay payment method options.
+       */
+      public Builder setPromptpay(Promptpay promptpay) {
+        this.promptpay = promptpay;
+        return this;
+      }
+
+      /**
+       * If this is a {@code promptpay} PaymentMethod, this sub-hash contains details about the
+       * PromptPay payment method options.
+       */
+      public Builder setPromptpay(EmptyParam promptpay) {
+        this.promptpay = promptpay;
         return this;
       }
 
@@ -9983,6 +10109,125 @@ public class PaymentIntentConfirmParams extends ApiRequestParams {
     }
 
     @Getter
+    public static class Promptpay {
+      /**
+       * Map of extra parameters for custom features not available in this client library. The
+       * content in this map is not serialized under this field's {@code @SerializedName} value.
+       * Instead, each key/value pair is serialized as if the key is a root-level field (serialized)
+       * name in this param object. Effectively, this map is flattened to its parent instance.
+       */
+      @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
+      Map<String, Object> extraParams;
+
+      /**
+       * Indicates that you intend to make future payments with this PaymentIntent's payment method.
+       *
+       * <p>Providing this parameter will <a
+       * href="https://stripe.com/docs/payments/save-during-payment">attach the payment method</a>
+       * to the PaymentIntent's Customer, if present, after the PaymentIntent is confirmed and any
+       * required actions from the user are complete. If no Customer was provided, the payment
+       * method can still be <a
+       * href="https://stripe.com/docs/api/payment_methods/attach">attached</a> to a Customer after
+       * the transaction completes.
+       *
+       * <p>When processing card payments, Stripe also uses {@code setup_future_usage} to
+       * dynamically optimize your payment flow and comply with regional legislation and network
+       * rules, such as <a href="https://stripe.com/docs/strong-customer-authentication">SCA</a>.
+       *
+       * <p>If {@code setup_future_usage} is already set and you are performing a request using a
+       * publishable key, you may only update the value from {@code on_session} to {@code
+       * off_session}.
+       */
+      @SerializedName("setup_future_usage")
+      SetupFutureUsage setupFutureUsage;
+
+      private Promptpay(Map<String, Object> extraParams, SetupFutureUsage setupFutureUsage) {
+        this.extraParams = extraParams;
+        this.setupFutureUsage = setupFutureUsage;
+      }
+
+      public static Builder builder() {
+        return new Builder();
+      }
+
+      public static class Builder {
+        private Map<String, Object> extraParams;
+
+        private SetupFutureUsage setupFutureUsage;
+
+        /** Finalize and obtain parameter instance from this builder. */
+        public Promptpay build() {
+          return new Promptpay(this.extraParams, this.setupFutureUsage);
+        }
+
+        /**
+         * Add a key/value pair to `extraParams` map. A map is initialized for the first
+         * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
+         * map. See {@link PaymentIntentConfirmParams.PaymentMethodOptions.Promptpay#extraParams}
+         * for the field documentation.
+         */
+        public Builder putExtraParam(String key, Object value) {
+          if (this.extraParams == null) {
+            this.extraParams = new HashMap<>();
+          }
+          this.extraParams.put(key, value);
+          return this;
+        }
+
+        /**
+         * Add all map key/value pairs to `extraParams` map. A map is initialized for the first
+         * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
+         * map. See {@link PaymentIntentConfirmParams.PaymentMethodOptions.Promptpay#extraParams}
+         * for the field documentation.
+         */
+        public Builder putAllExtraParam(Map<String, Object> map) {
+          if (this.extraParams == null) {
+            this.extraParams = new HashMap<>();
+          }
+          this.extraParams.putAll(map);
+          return this;
+        }
+
+        /**
+         * Indicates that you intend to make future payments with this PaymentIntent's payment
+         * method.
+         *
+         * <p>Providing this parameter will <a
+         * href="https://stripe.com/docs/payments/save-during-payment">attach the payment method</a>
+         * to the PaymentIntent's Customer, if present, after the PaymentIntent is confirmed and any
+         * required actions from the user are complete. If no Customer was provided, the payment
+         * method can still be <a
+         * href="https://stripe.com/docs/api/payment_methods/attach">attached</a> to a Customer
+         * after the transaction completes.
+         *
+         * <p>When processing card payments, Stripe also uses {@code setup_future_usage} to
+         * dynamically optimize your payment flow and comply with regional legislation and network
+         * rules, such as <a href="https://stripe.com/docs/strong-customer-authentication">SCA</a>.
+         *
+         * <p>If {@code setup_future_usage} is already set and you are performing a request using a
+         * publishable key, you may only update the value from {@code on_session} to {@code
+         * off_session}.
+         */
+        public Builder setSetupFutureUsage(SetupFutureUsage setupFutureUsage) {
+          this.setupFutureUsage = setupFutureUsage;
+          return this;
+        }
+      }
+
+      public enum SetupFutureUsage implements ApiRequestParams.EnumParam {
+        @SerializedName("none")
+        NONE("none");
+
+        @Getter(onMethod_ = {@Override})
+        private final String value;
+
+        SetupFutureUsage(String value) {
+          this.value = value;
+        }
+      }
+    }
+
+    @Getter
     public static class SepaDebit {
       /**
        * Map of extra parameters for custom features not available in this client library. The
@@ -11412,6 +11657,21 @@ public class PaymentIntentConfirmParams extends ApiRequestParams {
           return this;
         }
       }
+    }
+  }
+
+  public enum CaptureMethod implements ApiRequestParams.EnumParam {
+    @SerializedName("automatic")
+    AUTOMATIC("automatic"),
+
+    @SerializedName("manual")
+    MANUAL("manual");
+
+    @Getter(onMethod_ = {@Override})
+    private final String value;
+
+    CaptureMethod(String value) {
+      this.value = value;
     }
   }
 

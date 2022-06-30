@@ -113,7 +113,7 @@ public class Session extends ApiResource implements HasId {
 
   /**
    * The customer details including the customer's tax exempt status and the customer's tax IDs.
-   * Only present on Sessions in {@code payment} or {@code subscription} mode.
+   * Only the customer's email is present on Sessions in {@code setup} mode.
    */
   @SerializedName("customer_details")
   CustomerDetails customerDetails;
@@ -558,12 +558,29 @@ public class Session extends ApiResource implements HasId {
     return ApiResource.request(ApiResource.RequestMethod.POST, url, params, Session.class, options);
   }
 
-  /** Returns a list of Line Items */
+  /**
+   * When retrieving a Checkout Session, there is an includable <strong>line_items</strong> property
+   * containing the first handful of those items. There is also a URL where you can retrieve the
+   * full (paginated) list of line items.
+   */
+  public LineItemCollection listLineItems() throws StripeException {
+    return listLineItems((Map<String, Object>) null, (RequestOptions) null);
+  }
+
+  /**
+   * When retrieving a Checkout Session, there is an includable <strong>line_items</strong> property
+   * containing the first handful of those items. There is also a URL where you can retrieve the
+   * full (paginated) list of line items.
+   */
   public LineItemCollection listLineItems(Map<String, Object> params) throws StripeException {
     return listLineItems(params, (RequestOptions) null);
   }
 
-  /** Returns a list of Line Items */
+  /**
+   * When retrieving a Checkout Session, there is an includable <strong>line_items</strong> property
+   * containing the first handful of those items. There is also a URL where you can retrieve the
+   * full (paginated) list of line items.
+   */
   public LineItemCollection listLineItems(Map<String, Object> params, RequestOptions options)
       throws StripeException {
     String url =
@@ -572,17 +589,24 @@ public class Session extends ApiResource implements HasId {
             Stripe.getApiBase(),
             String.format(
                 "/v1/checkout/sessions/%s/line_items", ApiResource.urlEncodeId(this.getId())));
-
     return ApiResource.requestCollection(url, params, LineItemCollection.class, options);
   }
 
-  /** Returns a list of Line Items */
+  /**
+   * When retrieving a Checkout Session, there is an includable <strong>line_items</strong> property
+   * containing the first handful of those items. There is also a URL where you can retrieve the
+   * full (paginated) list of line items.
+   */
   public LineItemCollection listLineItems(SessionListLineItemsParams params)
       throws StripeException {
     return listLineItems(params, (RequestOptions) null);
   }
 
-  /** Returns a list of Line Items */
+  /**
+   * When retrieving a Checkout Session, there is an includable <strong>line_items</strong> property
+   * containing the first handful of those items. There is also a URL where you can retrieve the
+   * full (paginated) list of line items.
+   */
   public LineItemCollection listLineItems(SessionListLineItemsParams params, RequestOptions options)
       throws StripeException {
     String url =
@@ -591,7 +615,6 @@ public class Session extends ApiResource implements HasId {
             Stripe.getApiBase(),
             String.format(
                 "/v1/checkout/sessions/%s/line_items", ApiResource.urlEncodeId(this.getId())));
-
     return ApiResource.requestCollection(url, params, LineItemCollection.class, options);
   }
 
