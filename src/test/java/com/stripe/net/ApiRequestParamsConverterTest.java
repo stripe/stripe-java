@@ -267,8 +267,8 @@ public class ApiRequestParamsConverterTest {
     Map<String, Object> untypedParams = toMap(params);
     Map<String, Object> metadata = (Map<String, Object>) untypedParams.get("object_map");
     assertEquals(metadata.size(), 2);
-    Map<String, Object> objFoo = (Map<String, Object>)metadata.get("foo");
-    Map<String, Object> objBar = (Map<String, Object>)metadata.get("bar");
+    Map<String, Object> objFoo = (Map<String, Object>) metadata.get("foo");
+    Map<String, Object> objBar = (Map<String, Object>) metadata.get("bar");
     assertEquals(objFoo.size(), 3);
     assertEquals(objBar.size(), 3);
 
