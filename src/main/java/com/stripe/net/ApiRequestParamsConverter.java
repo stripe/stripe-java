@@ -88,15 +88,12 @@ class ApiRequestParamsConverter {
   }
 
   private static class NullValuesInMapsTypeAdapterFactory implements TypeAdapterFactory {
-    TypeAdapter<?> getValueAdapter(Gson gson, TypeToken<?> type)
-    {
+    TypeAdapter<?> getValueAdapter(Gson gson, TypeToken<?> type) {
       Type valueType;
       if (type.getType() instanceof ParameterizedType) {
         ParameterizedType mapParameterizedType = (ParameterizedType) type.getType();
         valueType = mapParameterizedType.getActualTypeArguments()[1];
-      }
-      else
-      {
+      } else {
         valueType = Object.class;
       }
 
@@ -118,16 +115,15 @@ class ApiRequestParamsConverter {
     }
   }
 
-  private static class MapAdapter<V> extends TypeAdapter<Map<String, V>>
-  {
+  private static class MapAdapter<V> extends TypeAdapter<Map<String, V>> {
     private TypeAdapter<V> valueTypeAdapter;
     private TypeAdapter<Map<String, V>> mapTypeAdapter;
 
-    public MapAdapter(TypeAdapter<V> valueTypeAdapter, TypeAdapter<Map<String, V>> mapTypeAdapter)
-    {
+    public MapAdapter(TypeAdapter<V> valueTypeAdapter, TypeAdapter<Map<String, V>> mapTypeAdapter) {
       this.valueTypeAdapter = valueTypeAdapter;
       this.mapTypeAdapter = mapTypeAdapter;
     }
+
     @Override
     public void write(JsonWriter out, Map<String, V> value) throws IOException {
       if (value == null) {
@@ -139,18 +135,15 @@ class ApiRequestParamsConverter {
       for (Map.Entry<String, V> entry : value.entrySet()) {
         out.name(entry.getKey());
         V entryValue = entry.getValue();
-        if (entryValue == null)
-        {
+        if (entryValue == null) {
           boolean oldSerializeNullsValue = out.getSerializeNulls();
           try {
             out.setSerializeNulls(true);
             out.nullValue();
-          }
-          finally {
+          } finally {
             out.setSerializeNulls(oldSerializeNullsValue);
           }
-        }
-        else {
+        } else {
           valueTypeAdapter.write(out, entryValue);
         }
       }
@@ -158,7 +151,7 @@ class ApiRequestParamsConverter {
     }
 
     @Override
-    public Map<String,V> read(JsonReader in) throws IOException {
+    public Map<String, V> read(JsonReader in) throws IOException {
       return mapTypeAdapter.read(in);
     }
   }
