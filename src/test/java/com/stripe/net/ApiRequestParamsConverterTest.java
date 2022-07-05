@@ -100,6 +100,9 @@ public class ApiRequestParamsConverterTest {
 
     @SerializedName("feature_map")
     Map<String, Long> featureMap;
+
+    @SerializedName("object_map")
+    Map<String, ModelHasExtraParams> objectMap;
   }
 
   private static class ModelHasExtraParamsWithWrongSerializedName extends ApiRequestParams {
@@ -251,6 +254,31 @@ public class ApiRequestParamsConverterTest {
     assertEquals(featureMap.size(), 2);
     assertEquals(featureMap.get("fooLong"), 123L);
     assertEquals(featureMap.get("barLong"), null);
+  }
+
+  @Test
+  @SuppressWarnings("unchecked")
+  public void testObjectMaps() {
+    HasMetadataParams params = new HasMetadataParams();
+    params.objectMap = new HashMap<>();
+    params.objectMap.put("foo", new ModelHasExtraParams(ParamCode.ENUM_FOO));
+    params.objectMap.put("bar", new ModelHasExtraParams(ParamCode.ENUM_BAR));
+
+    Map<String, Object> untypedParams = toMap(params);
+    Map<String, Object> metadata = (Map<String, Object>) untypedParams.get("object_map");
+    assertEquals(metadata.size(), 2);
+    Map<String, Object> objFoo = (Map<String, Object>)metadata.get("foo");
+    Map<String, Object> objBar = (Map<String, Object>)metadata.get("bar");
+    assertEquals(objFoo.size(), 3);
+    assertEquals(objBar.size(), 3);
+
+    assertEquals(objFoo.get("enum_value"), "enum_foo");
+    assertEquals(objFoo.get("string_value"), "foo");
+    assertEquals(objFoo.get("hello"), "world");
+
+    assertEquals(objBar.get("enum_value"), "enum_bar");
+    assertEquals(objBar.get("string_value"), "foo");
+    assertEquals(objBar.get("hello"), "world");
   }
 
   private Map<String, Object> toMap(ApiRequestParams params) {

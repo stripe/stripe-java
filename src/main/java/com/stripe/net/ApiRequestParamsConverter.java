@@ -13,6 +13,8 @@ import com.google.gson.stream.JsonWriter;
 import com.stripe.Stripe;
 import com.stripe.param.common.EmptyParam;
 import java.io.IOException;
+import java.lang.reflect.ParameterizedType;
+import java.lang.reflect.Type;
 import java.util.Map;
 
 /**
@@ -86,34 +88,78 @@ class ApiRequestParamsConverter {
   }
 
   private static class NullValuesInMapsTypeAdapterFactory implements TypeAdapterFactory {
+    TypeAdapter<?> getValueAdapter(Gson gson, TypeToken<?> type)
+    {
+      Type valueType;
+      if (type.getType() instanceof ParameterizedType) {
+        ParameterizedType mapParameterizedType = (ParameterizedType) type.getType();
+        valueType = mapParameterizedType.getActualTypeArguments()[1];
+      }
+      else
+      {
+        valueType = Object.class;
+      }
+
+      return gson.getAdapter(TypeToken.get(valueType));
+    }
+
     @Override
     public <T> TypeAdapter<T> create(Gson gson, TypeToken<T> type) {
       if (!Map.class.isAssignableFrom(type.getRawType())) {
         return null;
       }
 
+      final TypeAdapter<?> valueAdapter = getValueAdapter(gson, type);
       final TypeAdapter<T> delegate = gson.getDelegateAdapter(this, type);
-      final TypeAdapter<T> typeAdapter =
-          new TypeAdapter<T>() {
-            @Override
-            public void write(JsonWriter out, T value) throws IOException {
-              final boolean previousSetting = out.getSerializeNulls();
-
-              try {
-                out.setSerializeNulls(true);
-                delegate.write(out, value);
-              } finally {
-                out.setSerializeNulls(previousSetting);
-              }
-            }
-
-            @Override
-            public T read(JsonReader in) throws IOException {
-              return delegate.read(in);
-            }
-          };
+      @SuppressWarnings({"unchecked", "rawtypes"})
+      final TypeAdapter<T> typeAdapter = new MapAdapter(valueAdapter, delegate);
 
       return typeAdapter.nullSafe();
+    }
+  }
+
+  private static class MapAdapter<V> extends TypeAdapter<Map<String, V>>
+  {
+    private TypeAdapter<V> valueTypeAdapter;
+    private TypeAdapter<Map<String, V>> mapTypeAdapter;
+
+    public MapAdapter(TypeAdapter<V> valueTypeAdapter, TypeAdapter<Map<String, V>> mapTypeAdapter)
+    {
+      this.valueTypeAdapter = valueTypeAdapter;
+      this.mapTypeAdapter = mapTypeAdapter;
+    }
+    @Override
+    public void write(JsonWriter out, Map<String, V> value) throws IOException {
+      if (value == null) {
+        out.nullValue();
+        return;
+      }
+
+      out.beginObject();
+      for (Map.Entry<String, V> entry : value.entrySet()) {
+        out.name(entry.getKey());
+        V entryValue = entry.getValue();
+        if (entryValue == null)
+        {
+          boolean oldSerializeNullsValue = out.getSerializeNulls();
+          try {
+            out.setSerializeNulls(true);
+            out.nullValue();
+          }
+          finally {
+            out.setSerializeNulls(oldSerializeNullsValue);
+          }
+        }
+        else {
+          valueTypeAdapter.write(out, entryValue);
+        }
+      }
+      out.endObject();
+    }
+
+    @Override
+    public Map<String,V> read(JsonReader in) throws IOException {
+      return mapTypeAdapter.read(in);
     }
   }
 
