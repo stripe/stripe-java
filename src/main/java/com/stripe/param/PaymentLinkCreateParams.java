@@ -132,7 +132,9 @@ public class PaymentLinkCreateParams extends ApiRequestParams {
 
   /**
    * Describes the type of transaction being performed in order to customize relevant text on the
-   * page, such as the submit button.
+   * page, such as the submit button. Changing this value will also affect the hostname in the <a
+   * href="https://stripe.com/docs/api/payment_links/payment_links/object#url">url</a> property
+   * (example: {@code donate.stripe.com}).
    */
   @SerializedName("submit_type")
   SubmitType submitType;
@@ -529,7 +531,9 @@ public class PaymentLinkCreateParams extends ApiRequestParams {
 
     /**
      * Describes the type of transaction being performed in order to customize relevant text on the
-     * page, such as the submit button.
+     * page, such as the submit button. Changing this value will also affect the hostname in the <a
+     * href="https://stripe.com/docs/api/payment_links/payment_links/object#url">url</a> property
+     * (example: {@code donate.stripe.com}).
      */
     public Builder setSubmitType(SubmitType submitType) {
       this.submitType = submitType;

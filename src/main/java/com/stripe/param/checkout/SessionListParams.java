@@ -11,6 +11,10 @@ import lombok.Getter;
 
 @Getter
 public class SessionListParams extends ApiRequestParams {
+  /** Only return the Checkout Sessions for the Customer specified. */
+  @SerializedName("customer")
+  String customer;
+
   /**
    * A cursor for use in pagination. {@code ending_before} is an object ID that defines your place
    * in the list. For instance, if you make a list request and receive 100 objects, starting with
@@ -58,6 +62,7 @@ public class SessionListParams extends ApiRequestParams {
   String subscription;
 
   private SessionListParams(
+      String customer,
       String endingBefore,
       List<String> expand,
       Map<String, Object> extraParams,
@@ -65,6 +70,7 @@ public class SessionListParams extends ApiRequestParams {
       String paymentIntent,
       String startingAfter,
       String subscription) {
+    this.customer = customer;
     this.endingBefore = endingBefore;
     this.expand = expand;
     this.extraParams = extraParams;
@@ -79,6 +85,8 @@ public class SessionListParams extends ApiRequestParams {
   }
 
   public static class Builder {
+    private String customer;
+
     private String endingBefore;
 
     private List<String> expand;
@@ -96,6 +104,7 @@ public class SessionListParams extends ApiRequestParams {
     /** Finalize and obtain parameter instance from this builder. */
     public SessionListParams build() {
       return new SessionListParams(
+          this.customer,
           this.endingBefore,
           this.expand,
           this.extraParams,
@@ -103,6 +112,12 @@ public class SessionListParams extends ApiRequestParams {
           this.paymentIntent,
           this.startingAfter,
           this.subscription);
+    }
+
+    /** Only return the Checkout Sessions for the Customer specified. */
+    public Builder setCustomer(String customer) {
+      this.customer = customer;
+      return this;
     }
 
     /**
