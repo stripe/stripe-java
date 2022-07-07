@@ -41,12 +41,21 @@ public class PromotionCodeUpdateParams extends ApiRequestParams {
   @SerializedName("metadata")
   Object metadata;
 
+  /** Settings that restrict the redemption of the promotion code. */
+  @SerializedName("restrictions")
+  Restrictions restrictions;
+
   private PromotionCodeUpdateParams(
-      Boolean active, List<String> expand, Map<String, Object> extraParams, Object metadata) {
+      Boolean active,
+      List<String> expand,
+      Map<String, Object> extraParams,
+      Object metadata,
+      Restrictions restrictions) {
     this.active = active;
     this.expand = expand;
     this.extraParams = extraParams;
     this.metadata = metadata;
+    this.restrictions = restrictions;
   }
 
   public static Builder builder() {
@@ -62,10 +71,12 @@ public class PromotionCodeUpdateParams extends ApiRequestParams {
 
     private Object metadata;
 
+    private Restrictions restrictions;
+
     /** Finalize and obtain parameter instance from this builder. */
     public PromotionCodeUpdateParams build() {
       return new PromotionCodeUpdateParams(
-          this.active, this.expand, this.extraParams, this.metadata);
+          this.active, this.expand, this.extraParams, this.metadata, this.restrictions);
     }
 
     /**
@@ -177,6 +188,183 @@ public class PromotionCodeUpdateParams extends ApiRequestParams {
     public Builder setMetadata(Map<String, String> metadata) {
       this.metadata = metadata;
       return this;
+    }
+
+    /** Settings that restrict the redemption of the promotion code. */
+    public Builder setRestrictions(Restrictions restrictions) {
+      this.restrictions = restrictions;
+      return this;
+    }
+  }
+
+  @Getter
+  public static class Restrictions {
+    /**
+     * Promotion codes defined in each available currency option. Each key must be a three-letter <a
+     * href="https://www.iso.org/iso-4217-currency-codes.html">ISO currency code</a> and a <a
+     * href="https://stripe.com/docs/currencies">supported currency</a>.
+     */
+    @SerializedName("currency_options")
+    Map<String, CurrencyOption> currencyOptions;
+
+    /**
+     * Map of extra parameters for custom features not available in this client library. The content
+     * in this map is not serialized under this field's {@code @SerializedName} value. Instead, each
+     * key/value pair is serialized as if the key is a root-level field (serialized) name in this
+     * param object. Effectively, this map is flattened to its parent instance.
+     */
+    @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
+    Map<String, Object> extraParams;
+
+    private Restrictions(
+        Map<String, CurrencyOption> currencyOptions, Map<String, Object> extraParams) {
+      this.currencyOptions = currencyOptions;
+      this.extraParams = extraParams;
+    }
+
+    public static Builder builder() {
+      return new Builder();
+    }
+
+    public static class Builder {
+      private Map<String, CurrencyOption> currencyOptions;
+
+      private Map<String, Object> extraParams;
+
+      /** Finalize and obtain parameter instance from this builder. */
+      public Restrictions build() {
+        return new Restrictions(this.currencyOptions, this.extraParams);
+      }
+
+      /**
+       * Add a key/value pair to `currencyOptions` map. A map is initialized for the first
+       * `put/putAll` call, and subsequent calls add additional key/value pairs to the original map.
+       * See {@link PromotionCodeUpdateParams.Restrictions#currencyOptions} for the field
+       * documentation.
+       */
+      public Builder putCurrencyOption(String key, CurrencyOption value) {
+        if (this.currencyOptions == null) {
+          this.currencyOptions = new HashMap<>();
+        }
+        this.currencyOptions.put(key, value);
+        return this;
+      }
+
+      /**
+       * Add all map key/value pairs to `currencyOptions` map. A map is initialized for the first
+       * `put/putAll` call, and subsequent calls add additional key/value pairs to the original map.
+       * See {@link PromotionCodeUpdateParams.Restrictions#currencyOptions} for the field
+       * documentation.
+       */
+      public Builder putAllCurrencyOption(Map<String, CurrencyOption> map) {
+        if (this.currencyOptions == null) {
+          this.currencyOptions = new HashMap<>();
+        }
+        this.currencyOptions.putAll(map);
+        return this;
+      }
+
+      /**
+       * Add a key/value pair to `extraParams` map. A map is initialized for the first `put/putAll`
+       * call, and subsequent calls add additional key/value pairs to the original map. See {@link
+       * PromotionCodeUpdateParams.Restrictions#extraParams} for the field documentation.
+       */
+      public Builder putExtraParam(String key, Object value) {
+        if (this.extraParams == null) {
+          this.extraParams = new HashMap<>();
+        }
+        this.extraParams.put(key, value);
+        return this;
+      }
+
+      /**
+       * Add all map key/value pairs to `extraParams` map. A map is initialized for the first
+       * `put/putAll` call, and subsequent calls add additional key/value pairs to the original map.
+       * See {@link PromotionCodeUpdateParams.Restrictions#extraParams} for the field documentation.
+       */
+      public Builder putAllExtraParam(Map<String, Object> map) {
+        if (this.extraParams == null) {
+          this.extraParams = new HashMap<>();
+        }
+        this.extraParams.putAll(map);
+        return this;
+      }
+    }
+
+    @Getter
+    public static class CurrencyOption {
+      /**
+       * Map of extra parameters for custom features not available in this client library. The
+       * content in this map is not serialized under this field's {@code @SerializedName} value.
+       * Instead, each key/value pair is serialized as if the key is a root-level field (serialized)
+       * name in this param object. Effectively, this map is flattened to its parent instance.
+       */
+      @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
+      Map<String, Object> extraParams;
+
+      /**
+       * Minimum amount required to redeem this Promotion Code into a Coupon (e.g., a purchase must
+       * be $100 or more to work).
+       */
+      @SerializedName("minimum_amount")
+      Long minimumAmount;
+
+      private CurrencyOption(Map<String, Object> extraParams, Long minimumAmount) {
+        this.extraParams = extraParams;
+        this.minimumAmount = minimumAmount;
+      }
+
+      public static Builder builder() {
+        return new Builder();
+      }
+
+      public static class Builder {
+        private Map<String, Object> extraParams;
+
+        private Long minimumAmount;
+
+        /** Finalize and obtain parameter instance from this builder. */
+        public CurrencyOption build() {
+          return new CurrencyOption(this.extraParams, this.minimumAmount);
+        }
+
+        /**
+         * Add a key/value pair to `extraParams` map. A map is initialized for the first
+         * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
+         * map. See {@link PromotionCodeUpdateParams.Restrictions.CurrencyOption#extraParams} for
+         * the field documentation.
+         */
+        public Builder putExtraParam(String key, Object value) {
+          if (this.extraParams == null) {
+            this.extraParams = new HashMap<>();
+          }
+          this.extraParams.put(key, value);
+          return this;
+        }
+
+        /**
+         * Add all map key/value pairs to `extraParams` map. A map is initialized for the first
+         * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
+         * map. See {@link PromotionCodeUpdateParams.Restrictions.CurrencyOption#extraParams} for
+         * the field documentation.
+         */
+        public Builder putAllExtraParam(Map<String, Object> map) {
+          if (this.extraParams == null) {
+            this.extraParams = new HashMap<>();
+          }
+          this.extraParams.putAll(map);
+          return this;
+        }
+
+        /**
+         * Minimum amount required to redeem this Promotion Code into a Coupon (e.g., a purchase
+         * must be $100 or more to work).
+         */
+        public Builder setMinimumAmount(Long minimumAmount) {
+          this.minimumAmount = minimumAmount;
+          return this;
+        }
+      }
     }
   }
 }

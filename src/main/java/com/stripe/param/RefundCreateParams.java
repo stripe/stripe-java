@@ -12,11 +12,23 @@ import lombok.Getter;
 
 @Getter
 public class RefundCreateParams extends ApiRequestParams {
+  /** A positive integer representing how much to refund. */
   @SerializedName("amount")
   Long amount;
 
   @SerializedName("charge")
   String charge;
+
+  /**
+   * Three-letter <a href="https://www.iso.org/iso-4217-currency-codes.html">ISO currency code</a>,
+   * in lowercase. Must be a <a href="https://stripe.com/docs/currencies">supported currency</a>.
+   */
+  @SerializedName("currency")
+  String currency;
+
+  /** Customer whose customer balance to refund from. */
+  @SerializedName("customer")
+  String customer;
 
   /** Specifies which fields in the response should be expanded. */
   @SerializedName("expand")
@@ -31,6 +43,7 @@ public class RefundCreateParams extends ApiRequestParams {
   @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
   Map<String, Object> extraParams;
 
+  /** Address to send refund email, use customer email if not specified. */
   @SerializedName("instructions_email")
   String instructionsEmail;
 
@@ -42,6 +55,10 @@ public class RefundCreateParams extends ApiRequestParams {
    */
   @SerializedName("metadata")
   Object metadata;
+
+  /** Origin of the refund. */
+  @SerializedName("origin")
+  Origin origin;
 
   @SerializedName("payment_intent")
   String paymentIntent;
@@ -58,20 +75,26 @@ public class RefundCreateParams extends ApiRequestParams {
   private RefundCreateParams(
       Long amount,
       String charge,
+      String currency,
+      String customer,
       List<String> expand,
       Map<String, Object> extraParams,
       String instructionsEmail,
       Object metadata,
+      Origin origin,
       String paymentIntent,
       Reason reason,
       Boolean refundApplicationFee,
       Boolean reverseTransfer) {
     this.amount = amount;
     this.charge = charge;
+    this.currency = currency;
+    this.customer = customer;
     this.expand = expand;
     this.extraParams = extraParams;
     this.instructionsEmail = instructionsEmail;
     this.metadata = metadata;
+    this.origin = origin;
     this.paymentIntent = paymentIntent;
     this.reason = reason;
     this.refundApplicationFee = refundApplicationFee;
@@ -87,6 +110,10 @@ public class RefundCreateParams extends ApiRequestParams {
 
     private String charge;
 
+    private String currency;
+
+    private String customer;
+
     private List<String> expand;
 
     private Map<String, Object> extraParams;
@@ -94,6 +121,8 @@ public class RefundCreateParams extends ApiRequestParams {
     private String instructionsEmail;
 
     private Object metadata;
+
+    private Origin origin;
 
     private String paymentIntent;
 
@@ -108,16 +137,20 @@ public class RefundCreateParams extends ApiRequestParams {
       return new RefundCreateParams(
           this.amount,
           this.charge,
+          this.currency,
+          this.customer,
           this.expand,
           this.extraParams,
           this.instructionsEmail,
           this.metadata,
+          this.origin,
           this.paymentIntent,
           this.reason,
           this.refundApplicationFee,
           this.reverseTransfer);
     }
 
+    /** A positive integer representing how much to refund. */
     public Builder setAmount(Long amount) {
       this.amount = amount;
       return this;
@@ -125,6 +158,22 @@ public class RefundCreateParams extends ApiRequestParams {
 
     public Builder setCharge(String charge) {
       this.charge = charge;
+      return this;
+    }
+
+    /**
+     * Three-letter <a href="https://www.iso.org/iso-4217-currency-codes.html">ISO currency
+     * code</a>, in lowercase. Must be a <a href="https://stripe.com/docs/currencies">supported
+     * currency</a>.
+     */
+    public Builder setCurrency(String currency) {
+      this.currency = currency;
+      return this;
+    }
+
+    /** Customer whose customer balance to refund from. */
+    public Builder setCustomer(String customer) {
+      this.customer = customer;
       return this;
     }
 
@@ -180,6 +229,7 @@ public class RefundCreateParams extends ApiRequestParams {
       return this;
     }
 
+    /** Address to send refund email, use customer email if not specified. */
     public Builder setInstructionsEmail(String instructionsEmail) {
       this.instructionsEmail = instructionsEmail;
       return this;
@@ -235,6 +285,12 @@ public class RefundCreateParams extends ApiRequestParams {
       return this;
     }
 
+    /** Origin of the refund. */
+    public Builder setOrigin(Origin origin) {
+      this.origin = origin;
+      return this;
+    }
+
     public Builder setPaymentIntent(String paymentIntent) {
       this.paymentIntent = paymentIntent;
       return this;
@@ -253,6 +309,18 @@ public class RefundCreateParams extends ApiRequestParams {
     public Builder setReverseTransfer(Boolean reverseTransfer) {
       this.reverseTransfer = reverseTransfer;
       return this;
+    }
+  }
+
+  public enum Origin implements ApiRequestParams.EnumParam {
+    @SerializedName("customer_balance")
+    CUSTOMER_BALANCE("customer_balance");
+
+    @Getter(onMethod_ = {@Override})
+    private final String value;
+
+    Origin(String value) {
+      this.value = value;
     }
   }
 

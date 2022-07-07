@@ -792,12 +792,10 @@ public class CustomerCreateParams extends ApiRequestParams {
       Map<String, Object> extraParams;
 
       /**
-       * Method for using the customer balance to pay outstanding {@code customer_balance}
-       * PaymentIntents. If set to {@code automatic}, all available funds will automatically be used
-       * to pay any outstanding PaymentIntent. If set to {@code manual}, only customer balance funds
-       * from bank transfers with a reference code matching {@code
-       * payment_intent.next_action.display_bank_transfer_intructions.reference_code} will
-       * automatically be used to pay the corresponding outstanding PaymentIntent.
+       * Controls how funds transferred by the customer are applied to payment intents and invoices.
+       * Valid options are {@code automatic} or {@code manual}. For more information about these
+       * reconciliation modes, see <a
+       * href="https://stripe.com/docs/payments/customer-balance/reconciliation">Reconciliation</a>.
        */
       @SerializedName("reconciliation_mode")
       ReconciliationMode reconciliationMode;
@@ -850,12 +848,10 @@ public class CustomerCreateParams extends ApiRequestParams {
         }
 
         /**
-         * Method for using the customer balance to pay outstanding {@code customer_balance}
-         * PaymentIntents. If set to {@code automatic}, all available funds will automatically be
-         * used to pay any outstanding PaymentIntent. If set to {@code manual}, only customer
-         * balance funds from bank transfers with a reference code matching {@code
-         * payment_intent.next_action.display_bank_transfer_intructions.reference_code} will
-         * automatically be used to pay the corresponding outstanding PaymentIntent.
+         * Controls how funds transferred by the customer are applied to payment intents and
+         * invoices. Valid options are {@code automatic} or {@code manual}. For more information
+         * about these reconciliation modes, see <a
+         * href="https://stripe.com/docs/payments/customer-balance/reconciliation">Reconciliation</a>.
          */
         public Builder setReconciliationMode(ReconciliationMode reconciliationMode) {
           this.reconciliationMode = reconciliationMode;

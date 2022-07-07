@@ -1005,6 +1005,14 @@ public class SubscriptionScheduleCreateParams extends ApiRequestParams {
     String coupon;
 
     /**
+     * Three-letter <a href="https://www.iso.org/iso-4217-currency-codes.html">ISO currency
+     * code</a>, in lowercase. Must be a <a href="https://stripe.com/docs/currencies">supported
+     * currency</a>.
+     */
+    @SerializedName("currency")
+    String currency;
+
+    /**
      * ID of the default payment method for the subscription schedule. It must belong to the
      * customer associated with the subscription schedule. If not set, invoices will use the default
      * payment method in the customer's invoice settings.
@@ -1108,6 +1116,7 @@ public class SubscriptionScheduleCreateParams extends ApiRequestParams {
         Object billingThresholds,
         CollectionMethod collectionMethod,
         String coupon,
+        String currency,
         String defaultPaymentMethod,
         Object defaultTaxRates,
         Long endDate,
@@ -1127,6 +1136,7 @@ public class SubscriptionScheduleCreateParams extends ApiRequestParams {
       this.billingThresholds = billingThresholds;
       this.collectionMethod = collectionMethod;
       this.coupon = coupon;
+      this.currency = currency;
       this.defaultPaymentMethod = defaultPaymentMethod;
       this.defaultTaxRates = defaultTaxRates;
       this.endDate = endDate;
@@ -1159,6 +1169,8 @@ public class SubscriptionScheduleCreateParams extends ApiRequestParams {
       private CollectionMethod collectionMethod;
 
       private String coupon;
+
+      private String currency;
 
       private String defaultPaymentMethod;
 
@@ -1194,6 +1206,7 @@ public class SubscriptionScheduleCreateParams extends ApiRequestParams {
             this.billingThresholds,
             this.collectionMethod,
             this.coupon,
+            this.currency,
             this.defaultPaymentMethod,
             this.defaultTaxRates,
             this.endDate,
@@ -1297,6 +1310,16 @@ public class SubscriptionScheduleCreateParams extends ApiRequestParams {
       /** The identifier of the coupon to apply to this phase of the subscription schedule. */
       public Builder setCoupon(String coupon) {
         this.coupon = coupon;
+        return this;
+      }
+
+      /**
+       * Three-letter <a href="https://www.iso.org/iso-4217-currency-codes.html">ISO currency
+       * code</a>, in lowercase. Must be a <a href="https://stripe.com/docs/currencies">supported
+       * currency</a>.
+       */
+      public Builder setCurrency(String currency) {
+        this.currency = currency;
         return this;
       }
 

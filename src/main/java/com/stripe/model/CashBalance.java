@@ -20,7 +20,8 @@ import lombok.Setter;
 public class CashBalance extends ApiResource {
   /**
    * A hash of all cash balances available to this customer. You cannot delete a customer with any
-   * cash balances, even if the balance is 0.
+   * cash balances, even if the balance is 0. Amounts are represented in the <a
+   * href="https://stripe.com/docs/currencies#zero-decimal">smallest currency unit</a>.
    */
   @SerializedName("available")
   Map<String, Long> available;
@@ -118,12 +119,12 @@ public class CashBalance extends ApiResource {
         ApiResource.RequestMethod.GET, url, params, CashBalance.class, options);
   }
 
-  /** Updates a customer’s cash balance. */
+  /** Changes the settings on a customer’s cash balance. */
   public CashBalance update(Map<String, Object> params) throws StripeException {
     return update(params, (RequestOptions) null);
   }
 
-  /** Updates a customer’s cash balance. */
+  /** Changes the settings on a customer’s cash balance. */
   public CashBalance update(Map<String, Object> params, RequestOptions options)
       throws StripeException {
     String url =
@@ -136,12 +137,12 @@ public class CashBalance extends ApiResource {
         ApiResource.RequestMethod.POST, url, params, CashBalance.class, options);
   }
 
-  /** Updates a customer’s cash balance. */
+  /** Changes the settings on a customer’s cash balance. */
   public CashBalance update(CashBalanceUpdateParams params) throws StripeException {
     return update(params, (RequestOptions) null);
   }
 
-  /** Updates a customer’s cash balance. */
+  /** Changes the settings on a customer’s cash balance. */
   public CashBalance update(CashBalanceUpdateParams params, RequestOptions options)
       throws StripeException {
     String url =

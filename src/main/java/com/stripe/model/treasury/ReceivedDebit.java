@@ -380,6 +380,24 @@ public class ReceivedDebit extends ApiResource implements HasId {
   @Getter
   @Setter
   @EqualsAndHashCode(callSuper = false)
+  public static class ReversalDetails extends StripeObject {
+    /** Time before which a ReceivedDebit can be reversed. */
+    @SerializedName("deadline")
+    Long deadline;
+
+    /**
+     * Set if a ReceivedDebit can't be reversed.
+     *
+     * <p>One of {@code already_reversed}, {@code deadline_passed}, {@code network_restricted},
+     * {@code other}, or {@code source_flow_restricted}.
+     */
+    @SerializedName("restricted_reason")
+    String restrictedReason;
+  }
+
+  @Getter
+  @Setter
+  @EqualsAndHashCode(callSuper = false)
   public static class StatusTransitions extends StripeObject {
     /** Timestamp describing when the DebitReversal changed status to {@code completed}. */
     @SerializedName("completed_at")
