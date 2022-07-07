@@ -93,6 +93,13 @@ public class SubscriptionCreateParams extends ApiRequestParams {
   @SerializedName("coupon")
   String coupon;
 
+  /**
+   * Three-letter <a href="https://www.iso.org/iso-4217-currency-codes.html">ISO currency code</a>,
+   * in lowercase. Must be a <a href="https://stripe.com/docs/currencies">supported currency</a>.
+   */
+  @SerializedName("currency")
+  String currency;
+
   /** The identifier of the customer to subscribe. */
   @SerializedName("customer")
   String customer;
@@ -280,6 +287,7 @@ public class SubscriptionCreateParams extends ApiRequestParams {
       Boolean cancelAtPeriodEnd,
       CollectionMethod collectionMethod,
       String coupon,
+      String currency,
       String customer,
       Long daysUntilDue,
       String defaultPaymentMethod,
@@ -310,6 +318,7 @@ public class SubscriptionCreateParams extends ApiRequestParams {
     this.cancelAtPeriodEnd = cancelAtPeriodEnd;
     this.collectionMethod = collectionMethod;
     this.coupon = coupon;
+    this.currency = currency;
     this.customer = customer;
     this.daysUntilDue = daysUntilDue;
     this.defaultPaymentMethod = defaultPaymentMethod;
@@ -356,6 +365,8 @@ public class SubscriptionCreateParams extends ApiRequestParams {
     private CollectionMethod collectionMethod;
 
     private String coupon;
+
+    private String currency;
 
     private String customer;
 
@@ -410,6 +421,7 @@ public class SubscriptionCreateParams extends ApiRequestParams {
           this.cancelAtPeriodEnd,
           this.collectionMethod,
           this.coupon,
+          this.currency,
           this.customer,
           this.daysUntilDue,
           this.defaultPaymentMethod,
@@ -556,6 +568,16 @@ public class SubscriptionCreateParams extends ApiRequestParams {
      */
     public Builder setCoupon(String coupon) {
       this.coupon = coupon;
+      return this;
+    }
+
+    /**
+     * Three-letter <a href="https://www.iso.org/iso-4217-currency-codes.html">ISO currency
+     * code</a>, in lowercase. Must be a <a href="https://stripe.com/docs/currencies">supported
+     * currency</a>.
+     */
+    public Builder setCurrency(String currency) {
+      this.currency = currency;
       return this;
     }
 

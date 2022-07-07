@@ -515,6 +515,14 @@ public class ProductCreateParams extends ApiRequestParams {
     String currency;
 
     /**
+     * Prices defined in each available currency option. Each key must be a three-letter <a
+     * href="https://www.iso.org/iso-4217-currency-codes.html">ISO currency code</a> and a <a
+     * href="https://stripe.com/docs/currencies">supported currency</a>.
+     */
+    @SerializedName("currency_options")
+    Map<String, CurrencyOption> currencyOptions;
+
+    /**
      * Map of extra parameters for custom features not available in this client library. The content
      * in this map is not serialized under this field's {@code @SerializedName} value. Instead, each
      * key/value pair is serialized as if the key is a root-level field (serialized) name in this
@@ -552,12 +560,14 @@ public class ProductCreateParams extends ApiRequestParams {
 
     private DefaultPriceData(
         String currency,
+        Map<String, CurrencyOption> currencyOptions,
         Map<String, Object> extraParams,
         Recurring recurring,
         TaxBehavior taxBehavior,
         Long unitAmount,
         BigDecimal unitAmountDecimal) {
       this.currency = currency;
+      this.currencyOptions = currencyOptions;
       this.extraParams = extraParams;
       this.recurring = recurring;
       this.taxBehavior = taxBehavior;
@@ -571,6 +581,8 @@ public class ProductCreateParams extends ApiRequestParams {
 
     public static class Builder {
       private String currency;
+
+      private Map<String, CurrencyOption> currencyOptions;
 
       private Map<String, Object> extraParams;
 
@@ -586,6 +598,7 @@ public class ProductCreateParams extends ApiRequestParams {
       public DefaultPriceData build() {
         return new DefaultPriceData(
             this.currency,
+            this.currencyOptions,
             this.extraParams,
             this.recurring,
             this.taxBehavior,
@@ -600,6 +613,34 @@ public class ProductCreateParams extends ApiRequestParams {
        */
       public Builder setCurrency(String currency) {
         this.currency = currency;
+        return this;
+      }
+
+      /**
+       * Add a key/value pair to `currencyOptions` map. A map is initialized for the first
+       * `put/putAll` call, and subsequent calls add additional key/value pairs to the original map.
+       * See {@link ProductCreateParams.DefaultPriceData#currencyOptions} for the field
+       * documentation.
+       */
+      public Builder putCurrencyOption(String key, CurrencyOption value) {
+        if (this.currencyOptions == null) {
+          this.currencyOptions = new HashMap<>();
+        }
+        this.currencyOptions.put(key, value);
+        return this;
+      }
+
+      /**
+       * Add all map key/value pairs to `currencyOptions` map. A map is initialized for the first
+       * `put/putAll` call, and subsequent calls add additional key/value pairs to the original map.
+       * See {@link ProductCreateParams.DefaultPriceData#currencyOptions} for the field
+       * documentation.
+       */
+      public Builder putAllCurrencyOption(Map<String, CurrencyOption> map) {
+        if (this.currencyOptions == null) {
+          this.currencyOptions = new HashMap<>();
+        }
+        this.currencyOptions.putAll(map);
         return this;
       }
 
@@ -664,6 +705,523 @@ public class ProductCreateParams extends ApiRequestParams {
       public Builder setUnitAmountDecimal(BigDecimal unitAmountDecimal) {
         this.unitAmountDecimal = unitAmountDecimal;
         return this;
+      }
+    }
+
+    @Getter
+    public static class CurrencyOption {
+      /**
+       * When set, provides configuration for the amount to be adjusted by the customer during
+       * Checkout Sessions and Payment Links.
+       */
+      @SerializedName("custom_unit_amount")
+      CustomUnitAmount customUnitAmount;
+
+      /**
+       * Map of extra parameters for custom features not available in this client library. The
+       * content in this map is not serialized under this field's {@code @SerializedName} value.
+       * Instead, each key/value pair is serialized as if the key is a root-level field (serialized)
+       * name in this param object. Effectively, this map is flattened to its parent instance.
+       */
+      @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
+      Map<String, Object> extraParams;
+
+      /**
+       * Specifies whether the price is considered inclusive of taxes or exclusive of taxes. One of
+       * {@code inclusive}, {@code exclusive}, or {@code unspecified}. Once specified as either
+       * {@code inclusive} or {@code exclusive}, it cannot be changed.
+       */
+      @SerializedName("tax_behavior")
+      TaxBehavior taxBehavior;
+
+      /**
+       * Each element represents a pricing tier. This parameter requires {@code billing_scheme} to
+       * be set to {@code tiered}. See also the documentation for {@code billing_scheme}.
+       */
+      @SerializedName("tiers")
+      List<Tier> tiers;
+
+      /**
+       * A positive integer in cents (or local equivalent) (or 0 for a free price) representing how
+       * much to charge.
+       */
+      @SerializedName("unit_amount")
+      Long unitAmount;
+
+      /**
+       * Same as {@code unit_amount}, but accepts a decimal value in cents (or local equivalent)
+       * with at most 12 decimal places. Only one of {@code unit_amount} and {@code
+       * unit_amount_decimal} can be set.
+       */
+      @SerializedName("unit_amount_decimal")
+      BigDecimal unitAmountDecimal;
+
+      private CurrencyOption(
+          CustomUnitAmount customUnitAmount,
+          Map<String, Object> extraParams,
+          TaxBehavior taxBehavior,
+          List<Tier> tiers,
+          Long unitAmount,
+          BigDecimal unitAmountDecimal) {
+        this.customUnitAmount = customUnitAmount;
+        this.extraParams = extraParams;
+        this.taxBehavior = taxBehavior;
+        this.tiers = tiers;
+        this.unitAmount = unitAmount;
+        this.unitAmountDecimal = unitAmountDecimal;
+      }
+
+      public static Builder builder() {
+        return new Builder();
+      }
+
+      public static class Builder {
+        private CustomUnitAmount customUnitAmount;
+
+        private Map<String, Object> extraParams;
+
+        private TaxBehavior taxBehavior;
+
+        private List<Tier> tiers;
+
+        private Long unitAmount;
+
+        private BigDecimal unitAmountDecimal;
+
+        /** Finalize and obtain parameter instance from this builder. */
+        public CurrencyOption build() {
+          return new CurrencyOption(
+              this.customUnitAmount,
+              this.extraParams,
+              this.taxBehavior,
+              this.tiers,
+              this.unitAmount,
+              this.unitAmountDecimal);
+        }
+
+        /**
+         * When set, provides configuration for the amount to be adjusted by the customer during
+         * Checkout Sessions and Payment Links.
+         */
+        public Builder setCustomUnitAmount(CustomUnitAmount customUnitAmount) {
+          this.customUnitAmount = customUnitAmount;
+          return this;
+        }
+
+        /**
+         * Add a key/value pair to `extraParams` map. A map is initialized for the first
+         * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
+         * map. See {@link ProductCreateParams.DefaultPriceData.CurrencyOption#extraParams} for the
+         * field documentation.
+         */
+        public Builder putExtraParam(String key, Object value) {
+          if (this.extraParams == null) {
+            this.extraParams = new HashMap<>();
+          }
+          this.extraParams.put(key, value);
+          return this;
+        }
+
+        /**
+         * Add all map key/value pairs to `extraParams` map. A map is initialized for the first
+         * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
+         * map. See {@link ProductCreateParams.DefaultPriceData.CurrencyOption#extraParams} for the
+         * field documentation.
+         */
+        public Builder putAllExtraParam(Map<String, Object> map) {
+          if (this.extraParams == null) {
+            this.extraParams = new HashMap<>();
+          }
+          this.extraParams.putAll(map);
+          return this;
+        }
+
+        /**
+         * Specifies whether the price is considered inclusive of taxes or exclusive of taxes. One
+         * of {@code inclusive}, {@code exclusive}, or {@code unspecified}. Once specified as either
+         * {@code inclusive} or {@code exclusive}, it cannot be changed.
+         */
+        public Builder setTaxBehavior(TaxBehavior taxBehavior) {
+          this.taxBehavior = taxBehavior;
+          return this;
+        }
+
+        /**
+         * Add an element to `tiers` list. A list is initialized for the first `add/addAll` call,
+         * and subsequent calls adds additional elements to the original list. See {@link
+         * ProductCreateParams.DefaultPriceData.CurrencyOption#tiers} for the field documentation.
+         */
+        public Builder addTier(Tier element) {
+          if (this.tiers == null) {
+            this.tiers = new ArrayList<>();
+          }
+          this.tiers.add(element);
+          return this;
+        }
+
+        /**
+         * Add all elements to `tiers` list. A list is initialized for the first `add/addAll` call,
+         * and subsequent calls adds additional elements to the original list. See {@link
+         * ProductCreateParams.DefaultPriceData.CurrencyOption#tiers} for the field documentation.
+         */
+        public Builder addAllTier(List<Tier> elements) {
+          if (this.tiers == null) {
+            this.tiers = new ArrayList<>();
+          }
+          this.tiers.addAll(elements);
+          return this;
+        }
+
+        /**
+         * A positive integer in cents (or local equivalent) (or 0 for a free price) representing
+         * how much to charge.
+         */
+        public Builder setUnitAmount(Long unitAmount) {
+          this.unitAmount = unitAmount;
+          return this;
+        }
+
+        /**
+         * Same as {@code unit_amount}, but accepts a decimal value in cents (or local equivalent)
+         * with at most 12 decimal places. Only one of {@code unit_amount} and {@code
+         * unit_amount_decimal} can be set.
+         */
+        public Builder setUnitAmountDecimal(BigDecimal unitAmountDecimal) {
+          this.unitAmountDecimal = unitAmountDecimal;
+          return this;
+        }
+      }
+
+      @Getter
+      public static class CustomUnitAmount {
+        /**
+         * Pass in {@code true} to enable {@code custom_unit_amount}, otherwise omit {@code
+         * custom_unit_amount}.
+         */
+        @SerializedName("enabled")
+        Boolean enabled;
+
+        /**
+         * Map of extra parameters for custom features not available in this client library. The
+         * content in this map is not serialized under this field's {@code @SerializedName} value.
+         * Instead, each key/value pair is serialized as if the key is a root-level field
+         * (serialized) name in this param object. Effectively, this map is flattened to its parent
+         * instance.
+         */
+        @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
+        Map<String, Object> extraParams;
+
+        /** The maximum unit amount the customer can specify for this item. */
+        @SerializedName("maximum")
+        Long maximum;
+
+        /**
+         * The minimum unit amount the customer can specify for this item. Must be at least the
+         * minimum charge amount.
+         */
+        @SerializedName("minimum")
+        Long minimum;
+
+        /** The starting unit amount which can be updated by the customer. */
+        @SerializedName("preset")
+        Long preset;
+
+        private CustomUnitAmount(
+            Boolean enabled,
+            Map<String, Object> extraParams,
+            Long maximum,
+            Long minimum,
+            Long preset) {
+          this.enabled = enabled;
+          this.extraParams = extraParams;
+          this.maximum = maximum;
+          this.minimum = minimum;
+          this.preset = preset;
+        }
+
+        public static Builder builder() {
+          return new Builder();
+        }
+
+        public static class Builder {
+          private Boolean enabled;
+
+          private Map<String, Object> extraParams;
+
+          private Long maximum;
+
+          private Long minimum;
+
+          private Long preset;
+
+          /** Finalize and obtain parameter instance from this builder. */
+          public CustomUnitAmount build() {
+            return new CustomUnitAmount(
+                this.enabled, this.extraParams, this.maximum, this.minimum, this.preset);
+          }
+
+          /**
+           * Pass in {@code true} to enable {@code custom_unit_amount}, otherwise omit {@code
+           * custom_unit_amount}.
+           */
+          public Builder setEnabled(Boolean enabled) {
+            this.enabled = enabled;
+            return this;
+          }
+
+          /**
+           * Add a key/value pair to `extraParams` map. A map is initialized for the first
+           * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
+           * map. See {@link
+           * ProductCreateParams.DefaultPriceData.CurrencyOption.CustomUnitAmount#extraParams} for
+           * the field documentation.
+           */
+          public Builder putExtraParam(String key, Object value) {
+            if (this.extraParams == null) {
+              this.extraParams = new HashMap<>();
+            }
+            this.extraParams.put(key, value);
+            return this;
+          }
+
+          /**
+           * Add all map key/value pairs to `extraParams` map. A map is initialized for the first
+           * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
+           * map. See {@link
+           * ProductCreateParams.DefaultPriceData.CurrencyOption.CustomUnitAmount#extraParams} for
+           * the field documentation.
+           */
+          public Builder putAllExtraParam(Map<String, Object> map) {
+            if (this.extraParams == null) {
+              this.extraParams = new HashMap<>();
+            }
+            this.extraParams.putAll(map);
+            return this;
+          }
+
+          /** The maximum unit amount the customer can specify for this item. */
+          public Builder setMaximum(Long maximum) {
+            this.maximum = maximum;
+            return this;
+          }
+
+          /**
+           * The minimum unit amount the customer can specify for this item. Must be at least the
+           * minimum charge amount.
+           */
+          public Builder setMinimum(Long minimum) {
+            this.minimum = minimum;
+            return this;
+          }
+
+          /** The starting unit amount which can be updated by the customer. */
+          public Builder setPreset(Long preset) {
+            this.preset = preset;
+            return this;
+          }
+        }
+      }
+
+      @Getter
+      public static class Tier {
+        /**
+         * Map of extra parameters for custom features not available in this client library. The
+         * content in this map is not serialized under this field's {@code @SerializedName} value.
+         * Instead, each key/value pair is serialized as if the key is a root-level field
+         * (serialized) name in this param object. Effectively, this map is flattened to its parent
+         * instance.
+         */
+        @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
+        Map<String, Object> extraParams;
+
+        /**
+         * The flat billing amount for an entire tier, regardless of the number of units in the
+         * tier.
+         */
+        @SerializedName("flat_amount")
+        Long flatAmount;
+
+        /**
+         * Same as {@code flat_amount}, but accepts a decimal value representing an integer in the
+         * minor units of the currency. Only one of {@code flat_amount} and {@code
+         * flat_amount_decimal} can be set.
+         */
+        @SerializedName("flat_amount_decimal")
+        BigDecimal flatAmountDecimal;
+
+        /** The per unit billing amount for each individual unit for which this tier applies. */
+        @SerializedName("unit_amount")
+        Long unitAmount;
+
+        /**
+         * Same as {@code unit_amount}, but accepts a decimal value in cents (or local equivalent)
+         * with at most 12 decimal places. Only one of {@code unit_amount} and {@code
+         * unit_amount_decimal} can be set.
+         */
+        @SerializedName("unit_amount_decimal")
+        BigDecimal unitAmountDecimal;
+
+        /**
+         * Specifies the upper bound of this tier. The lower bound of a tier is the upper bound of
+         * the previous tier adding one. Use {@code inf} to define a fallback tier.
+         */
+        @SerializedName("up_to")
+        Object upTo;
+
+        private Tier(
+            Map<String, Object> extraParams,
+            Long flatAmount,
+            BigDecimal flatAmountDecimal,
+            Long unitAmount,
+            BigDecimal unitAmountDecimal,
+            Object upTo) {
+          this.extraParams = extraParams;
+          this.flatAmount = flatAmount;
+          this.flatAmountDecimal = flatAmountDecimal;
+          this.unitAmount = unitAmount;
+          this.unitAmountDecimal = unitAmountDecimal;
+          this.upTo = upTo;
+        }
+
+        public static Builder builder() {
+          return new Builder();
+        }
+
+        public static class Builder {
+          private Map<String, Object> extraParams;
+
+          private Long flatAmount;
+
+          private BigDecimal flatAmountDecimal;
+
+          private Long unitAmount;
+
+          private BigDecimal unitAmountDecimal;
+
+          private Object upTo;
+
+          /** Finalize and obtain parameter instance from this builder. */
+          public Tier build() {
+            return new Tier(
+                this.extraParams,
+                this.flatAmount,
+                this.flatAmountDecimal,
+                this.unitAmount,
+                this.unitAmountDecimal,
+                this.upTo);
+          }
+
+          /**
+           * Add a key/value pair to `extraParams` map. A map is initialized for the first
+           * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
+           * map. See {@link ProductCreateParams.DefaultPriceData.CurrencyOption.Tier#extraParams}
+           * for the field documentation.
+           */
+          public Builder putExtraParam(String key, Object value) {
+            if (this.extraParams == null) {
+              this.extraParams = new HashMap<>();
+            }
+            this.extraParams.put(key, value);
+            return this;
+          }
+
+          /**
+           * Add all map key/value pairs to `extraParams` map. A map is initialized for the first
+           * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
+           * map. See {@link ProductCreateParams.DefaultPriceData.CurrencyOption.Tier#extraParams}
+           * for the field documentation.
+           */
+          public Builder putAllExtraParam(Map<String, Object> map) {
+            if (this.extraParams == null) {
+              this.extraParams = new HashMap<>();
+            }
+            this.extraParams.putAll(map);
+            return this;
+          }
+
+          /**
+           * The flat billing amount for an entire tier, regardless of the number of units in the
+           * tier.
+           */
+          public Builder setFlatAmount(Long flatAmount) {
+            this.flatAmount = flatAmount;
+            return this;
+          }
+
+          /**
+           * Same as {@code flat_amount}, but accepts a decimal value representing an integer in the
+           * minor units of the currency. Only one of {@code flat_amount} and {@code
+           * flat_amount_decimal} can be set.
+           */
+          public Builder setFlatAmountDecimal(BigDecimal flatAmountDecimal) {
+            this.flatAmountDecimal = flatAmountDecimal;
+            return this;
+          }
+
+          /** The per unit billing amount for each individual unit for which this tier applies. */
+          public Builder setUnitAmount(Long unitAmount) {
+            this.unitAmount = unitAmount;
+            return this;
+          }
+
+          /**
+           * Same as {@code unit_amount}, but accepts a decimal value in cents (or local equivalent)
+           * with at most 12 decimal places. Only one of {@code unit_amount} and {@code
+           * unit_amount_decimal} can be set.
+           */
+          public Builder setUnitAmountDecimal(BigDecimal unitAmountDecimal) {
+            this.unitAmountDecimal = unitAmountDecimal;
+            return this;
+          }
+
+          /**
+           * Specifies the upper bound of this tier. The lower bound of a tier is the upper bound of
+           * the previous tier adding one. Use {@code inf} to define a fallback tier.
+           */
+          public Builder setUpTo(UpTo upTo) {
+            this.upTo = upTo;
+            return this;
+          }
+
+          /**
+           * Specifies the upper bound of this tier. The lower bound of a tier is the upper bound of
+           * the previous tier adding one. Use {@code inf} to define a fallback tier.
+           */
+          public Builder setUpTo(Long upTo) {
+            this.upTo = upTo;
+            return this;
+          }
+        }
+
+        public enum UpTo implements ApiRequestParams.EnumParam {
+          @SerializedName("inf")
+          INF("inf");
+
+          @Getter(onMethod_ = {@Override})
+          private final String value;
+
+          UpTo(String value) {
+            this.value = value;
+          }
+        }
+      }
+
+      public enum TaxBehavior implements ApiRequestParams.EnumParam {
+        @SerializedName("exclusive")
+        EXCLUSIVE("exclusive"),
+
+        @SerializedName("inclusive")
+        INCLUSIVE("inclusive"),
+
+        @SerializedName("unspecified")
+        UNSPECIFIED("unspecified");
+
+        @Getter(onMethod_ = {@Override})
+        private final String value;
+
+        TaxBehavior(String value) {
+          this.value = value;
+        }
       }
     }
 

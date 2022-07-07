@@ -32,6 +32,15 @@ public class CouponCreateParams extends ApiRequestParams {
   String currency;
 
   /**
+   * Coupons defined in each available currency option (only supported if {@code amount_off} is
+   * passed). Each key must be a three-letter <a
+   * href="https://www.iso.org/iso-4217-currency-codes.html">ISO currency code</a> and a <a
+   * href="https://stripe.com/docs/currencies">supported currency</a>.
+   */
+  @SerializedName("currency_options")
+  Map<String, CurrencyOption> currencyOptions;
+
+  /**
    * Specifies how long the discount will be in effect if used on a subscription. Can be {@code
    * forever}, {@code once}, or {@code repeating}. Defaults to {@code once}.
    */
@@ -108,6 +117,7 @@ public class CouponCreateParams extends ApiRequestParams {
       Long amountOff,
       AppliesTo appliesTo,
       String currency,
+      Map<String, CurrencyOption> currencyOptions,
       Duration duration,
       Long durationInMonths,
       List<String> expand,
@@ -121,6 +131,7 @@ public class CouponCreateParams extends ApiRequestParams {
     this.amountOff = amountOff;
     this.appliesTo = appliesTo;
     this.currency = currency;
+    this.currencyOptions = currencyOptions;
     this.duration = duration;
     this.durationInMonths = durationInMonths;
     this.expand = expand;
@@ -143,6 +154,8 @@ public class CouponCreateParams extends ApiRequestParams {
     private AppliesTo appliesTo;
 
     private String currency;
+
+    private Map<String, CurrencyOption> currencyOptions;
 
     private Duration duration;
 
@@ -170,6 +183,7 @@ public class CouponCreateParams extends ApiRequestParams {
           this.amountOff,
           this.appliesTo,
           this.currency,
+          this.currencyOptions,
           this.duration,
           this.durationInMonths,
           this.expand,
@@ -203,6 +217,32 @@ public class CouponCreateParams extends ApiRequestParams {
      */
     public Builder setCurrency(String currency) {
       this.currency = currency;
+      return this;
+    }
+
+    /**
+     * Add a key/value pair to `currencyOptions` map. A map is initialized for the first
+     * `put/putAll` call, and subsequent calls add additional key/value pairs to the original map.
+     * See {@link CouponCreateParams#currencyOptions} for the field documentation.
+     */
+    public Builder putCurrencyOption(String key, CurrencyOption value) {
+      if (this.currencyOptions == null) {
+        this.currencyOptions = new HashMap<>();
+      }
+      this.currencyOptions.put(key, value);
+      return this;
+    }
+
+    /**
+     * Add all map key/value pairs to `currencyOptions` map. A map is initialized for the first
+     * `put/putAll` call, and subsequent calls add additional key/value pairs to the original map.
+     * See {@link CouponCreateParams#currencyOptions} for the field documentation.
+     */
+    public Builder putAllCurrencyOption(Map<String, CurrencyOption> map) {
+      if (this.currencyOptions == null) {
+        this.currencyOptions = new HashMap<>();
+      }
+      this.currencyOptions.putAll(map);
       return this;
     }
 
@@ -457,6 +497,74 @@ public class CouponCreateParams extends ApiRequestParams {
           this.products = new ArrayList<>();
         }
         this.products.addAll(elements);
+        return this;
+      }
+    }
+  }
+
+  @Getter
+  public static class CurrencyOption {
+    /** A positive integer representing the amount to subtract from an invoice total. */
+    @SerializedName("amount_off")
+    Long amountOff;
+
+    /**
+     * Map of extra parameters for custom features not available in this client library. The content
+     * in this map is not serialized under this field's {@code @SerializedName} value. Instead, each
+     * key/value pair is serialized as if the key is a root-level field (serialized) name in this
+     * param object. Effectively, this map is flattened to its parent instance.
+     */
+    @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
+    Map<String, Object> extraParams;
+
+    private CurrencyOption(Long amountOff, Map<String, Object> extraParams) {
+      this.amountOff = amountOff;
+      this.extraParams = extraParams;
+    }
+
+    public static Builder builder() {
+      return new Builder();
+    }
+
+    public static class Builder {
+      private Long amountOff;
+
+      private Map<String, Object> extraParams;
+
+      /** Finalize and obtain parameter instance from this builder. */
+      public CurrencyOption build() {
+        return new CurrencyOption(this.amountOff, this.extraParams);
+      }
+
+      /** A positive integer representing the amount to subtract from an invoice total. */
+      public Builder setAmountOff(Long amountOff) {
+        this.amountOff = amountOff;
+        return this;
+      }
+
+      /**
+       * Add a key/value pair to `extraParams` map. A map is initialized for the first `put/putAll`
+       * call, and subsequent calls add additional key/value pairs to the original map. See {@link
+       * CouponCreateParams.CurrencyOption#extraParams} for the field documentation.
+       */
+      public Builder putExtraParam(String key, Object value) {
+        if (this.extraParams == null) {
+          this.extraParams = new HashMap<>();
+        }
+        this.extraParams.put(key, value);
+        return this;
+      }
+
+      /**
+       * Add all map key/value pairs to `extraParams` map. A map is initialized for the first
+       * `put/putAll` call, and subsequent calls add additional key/value pairs to the original map.
+       * See {@link CouponCreateParams.CurrencyOption#extraParams} for the field documentation.
+       */
+      public Builder putAllExtraParam(Map<String, Object> map) {
+        if (this.extraParams == null) {
+          this.extraParams = new HashMap<>();
+        }
+        this.extraParams.putAll(map);
         return this;
       }
     }

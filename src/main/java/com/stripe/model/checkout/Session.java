@@ -710,41 +710,41 @@ public class Session extends ApiResource implements HasId {
   @EqualsAndHashCode(callSuper = false)
   public static class CustomerDetails extends StripeObject {
     /**
-     * The customer's address at the time of checkout. Note: This property is populated only for
-     * sessions on or after March 30, 2022.
+     * The customer's address after a completed Checkout Session. Note: This property is populated
+     * only for sessions on or after March 30, 2022.
      */
     @SerializedName("address")
     Address address;
 
     /**
-     * The email associated with the Customer, if one exists, on the Checkout Session at the time of
-     * checkout or at time of session expiry. Otherwise, if the customer has consented to
-     * promotional content, this value is the most recent valid email provided by the customer on
-     * the Checkout form.
+     * The email associated with the Customer, if one exists, on the Checkout Session after a
+     * completed Checkout Session or at time of session expiry. Otherwise, if the customer has
+     * consented to promotional content, this value is the most recent valid email provided by the
+     * customer on the Checkout form.
      */
     @SerializedName("email")
     String email;
 
     /**
-     * The customer's name at the time of checkout. Note: This property is populated only for
-     * sessions on or after March 30, 2022.
+     * The customer's name after a completed Checkout Session. Note: This property is populated only
+     * for sessions on or after March 30, 2022.
      */
     @SerializedName("name")
     String name;
 
-    /** The customer's phone number at the time of checkout. */
+    /** The customer's phone number after a completed Checkout Session. */
     @SerializedName("phone")
     String phone;
 
     /**
-     * The customer’s tax exempt status at time of checkout.
+     * The customer’s tax exempt status after a completed Checkout Session.
      *
      * <p>One of {@code exempt}, {@code none}, or {@code reverse}.
      */
     @SerializedName("tax_exempt")
     String taxExempt;
 
-    /** The customer’s tax IDs at time of checkout. */
+    /** The customer’s tax IDs after a completed Checkout Session. */
     @SerializedName("tax_ids")
     List<Session.CustomerDetails.TaxID> taxIds;
 

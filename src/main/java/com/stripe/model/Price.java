@@ -51,6 +51,14 @@ public class Price extends ApiResource implements HasId, MetadataStore<Price> {
   String currency;
 
   /**
+   * Prices defined in each available currency option. Each key must be a three-letter <a
+   * href="https://www.iso.org/iso-4217-currency-codes.html">ISO currency code</a> and a <a
+   * href="https://stripe.com/docs/currencies">supported currency</a>.
+   */
+  @SerializedName("currency_options")
+  Map<String, Price.CurrencyOption> currencyOptions;
+
+  /**
    * When set, provides configuration for the amount to be adjusted by the customer during Checkout
    * Sessions and Payment Links.
    */
@@ -354,6 +362,47 @@ public class Price extends ApiResource implements HasId, MetadataStore<Price> {
             Stripe.getApiBase(),
             String.format("/v1/prices/%s", ApiResource.urlEncodeId(this.getId())));
     return ApiResource.request(ApiResource.RequestMethod.POST, url, params, Price.class, options);
+  }
+
+  @Getter
+  @Setter
+  @EqualsAndHashCode(callSuper = false)
+  public static class CurrencyOption extends StripeObject {
+    /**
+     * When set, provides configuration for the amount to be adjusted by the customer during
+     * Checkout Sessions and Payment Links.
+     */
+    @SerializedName("custom_unit_amount")
+    CustomUnitAmount customUnitAmount;
+
+    /**
+     * Specifies whether the price is considered inclusive of taxes or exclusive of taxes. One of
+     * {@code inclusive}, {@code exclusive}, or {@code unspecified}. Once specified as either {@code
+     * inclusive} or {@code exclusive}, it cannot be changed.
+     */
+    @SerializedName("tax_behavior")
+    String taxBehavior;
+
+    /**
+     * Each element represents a pricing tier. This parameter requires {@code billing_scheme} to be
+     * set to {@code tiered}. See also the documentation for {@code billing_scheme}.
+     */
+    @SerializedName("tiers")
+    List<Price.Tier> tiers;
+
+    /**
+     * The unit amount in %s to be charged, represented as a whole integer if possible. Only set if
+     * {@code billing_scheme=per_unit}.
+     */
+    @SerializedName("unit_amount")
+    Long unitAmount;
+
+    /**
+     * The unit amount in %s to be charged, represented as a decimal string with at most 12 decimal
+     * places. Only set if {@code billing_scheme=per_unit}.
+     */
+    @SerializedName("unit_amount_decimal")
+    BigDecimal unitAmountDecimal;
   }
 
   @Getter
