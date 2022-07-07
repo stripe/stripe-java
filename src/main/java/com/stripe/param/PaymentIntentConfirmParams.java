@@ -13,6 +13,16 @@ import lombok.Getter;
 
 @Getter
 public class PaymentIntentConfirmParams extends ApiRequestParams {
+  /**
+   * The amount of the application fee (if any) that will be requested to be applied to the payment
+   * and transferred to the application owner's Stripe account. The amount of the application fee
+   * collected will be capped at the total payment amount. For more information, see the
+   * PaymentIntents <a href="https://stripe.com/docs/payments/connected-accounts">use case for
+   * connected accounts</a>.
+   */
+  @SerializedName("application_fee_amount")
+  Object applicationFeeAmount;
+
   /** Controls when the funds will be captured from the customer's account. */
   @SerializedName("capture_method")
   CaptureMethod captureMethod;
@@ -134,6 +144,7 @@ public class PaymentIntentConfirmParams extends ApiRequestParams {
   Boolean useStripeSdk;
 
   private PaymentIntentConfirmParams(
+      Object applicationFeeAmount,
       CaptureMethod captureMethod,
       Boolean errorOnRequiresAction,
       List<String> expand,
@@ -150,6 +161,7 @@ public class PaymentIntentConfirmParams extends ApiRequestParams {
       EnumParam setupFutureUsage,
       Object shipping,
       Boolean useStripeSdk) {
+    this.applicationFeeAmount = applicationFeeAmount;
     this.captureMethod = captureMethod;
     this.errorOnRequiresAction = errorOnRequiresAction;
     this.expand = expand;
@@ -173,6 +185,8 @@ public class PaymentIntentConfirmParams extends ApiRequestParams {
   }
 
   public static class Builder {
+    private Object applicationFeeAmount;
+
     private CaptureMethod captureMethod;
 
     private Boolean errorOnRequiresAction;
@@ -208,6 +222,7 @@ public class PaymentIntentConfirmParams extends ApiRequestParams {
     /** Finalize and obtain parameter instance from this builder. */
     public PaymentIntentConfirmParams build() {
       return new PaymentIntentConfirmParams(
+          this.applicationFeeAmount,
           this.captureMethod,
           this.errorOnRequiresAction,
           this.expand,
@@ -224,6 +239,30 @@ public class PaymentIntentConfirmParams extends ApiRequestParams {
           this.setupFutureUsage,
           this.shipping,
           this.useStripeSdk);
+    }
+
+    /**
+     * The amount of the application fee (if any) that will be requested to be applied to the
+     * payment and transferred to the application owner's Stripe account. The amount of the
+     * application fee collected will be capped at the total payment amount. For more information,
+     * see the PaymentIntents <a href="https://stripe.com/docs/payments/connected-accounts">use case
+     * for connected accounts</a>.
+     */
+    public Builder setApplicationFeeAmount(Long applicationFeeAmount) {
+      this.applicationFeeAmount = applicationFeeAmount;
+      return this;
+    }
+
+    /**
+     * The amount of the application fee (if any) that will be requested to be applied to the
+     * payment and transferred to the application owner's Stripe account. The amount of the
+     * application fee collected will be capped at the total payment amount. For more information,
+     * see the PaymentIntents <a href="https://stripe.com/docs/payments/connected-accounts">use case
+     * for connected accounts</a>.
+     */
+    public Builder setApplicationFeeAmount(EmptyParam applicationFeeAmount) {
+      this.applicationFeeAmount = applicationFeeAmount;
+      return this;
     }
 
     /** Controls when the funds will be captured from the customer's account. */

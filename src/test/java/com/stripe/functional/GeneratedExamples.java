@@ -278,6 +278,16 @@ class GeneratedExamples extends BaseStripeTest {
   }
 
   @Test
+  public void testInvoiceUpcoming() throws StripeException {
+    InvoiceUpcomingParams params =
+        InvoiceUpcomingParams.builder().setCustomer("cus_9utnxg47pWjV1e").build();
+
+    Invoice invoice = Invoice.upcoming(params);
+    assertNotNull(invoice);
+    verifyRequest(ApiResource.RequestMethod.GET, "/v1/invoices/upcoming", params.toMap());
+  }
+
+  @Test
   public void testPaymentIntentCreate() throws StripeException {
     PaymentIntentCreateParams params =
         PaymentIntentCreateParams.builder()
@@ -340,6 +350,28 @@ class GeneratedExamples extends BaseStripeTest {
     assertNotNull(lineItems);
     verifyRequest(
         ApiResource.RequestMethod.GET, "/v1/payment_links/pl_xyz/line_items", params.toMap());
+  }
+
+  @Test
+  public void testPriceCreate() throws StripeException {
+    PriceCreateParams params =
+        PriceCreateParams.builder()
+            .setUnitAmount(2000L)
+            .setCurrency("usd")
+            .putCurrencyOption(
+                "uah", PriceCreateParams.CurrencyOption.builder().setUnitAmount(5000L).build())
+            .putCurrencyOption(
+                "eur", PriceCreateParams.CurrencyOption.builder().setUnitAmount(1800L).build())
+            .setRecurring(
+                PriceCreateParams.Recurring.builder()
+                    .setInterval(PriceCreateParams.Recurring.Interval.MONTH)
+                    .build())
+            .setProduct("prod_xxxxxxxxxxxxx")
+            .build();
+
+    Price price = Price.create(params);
+    assertNotNull(price);
+    verifyRequest(ApiResource.RequestMethod.POST, "/v1/prices", params.toMap());
   }
 
   @Test
@@ -2579,7 +2611,7 @@ class GeneratedExamples extends BaseStripeTest {
   }
 
   @Test
-  public void testPriceCreate() throws StripeException {
+  public void testPriceCreate2() throws StripeException {
     PriceCreateParams params =
         PriceCreateParams.builder()
             .setUnitAmount(2000L)

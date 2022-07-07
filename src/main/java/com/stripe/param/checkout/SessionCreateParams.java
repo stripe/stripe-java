@@ -51,6 +51,13 @@ public class SessionCreateParams extends ApiRequestParams {
   ConsentCollection consentCollection;
 
   /**
+   * Three-letter <a href="https://www.iso.org/iso-4217-currency-codes.html">ISO currency code</a>,
+   * in lowercase. Must be a <a href="https://stripe.com/docs/currencies">supported currency</a>.
+   */
+  @SerializedName("currency")
+  String currency;
+
+  /**
    * ID of an existing Customer, if one exists. In {@code payment} mode, the customer’s most recent
    * card payment method will be used to prefill the email, name, card details, and billing address
    * on the Checkout page. In {@code subscription} mode, the customer’s <a
@@ -269,6 +276,7 @@ public class SessionCreateParams extends ApiRequestParams {
       String cancelUrl,
       String clientReferenceId,
       ConsentCollection consentCollection,
+      String currency,
       String customer,
       CustomerCreation customerCreation,
       String customerEmail,
@@ -300,6 +308,7 @@ public class SessionCreateParams extends ApiRequestParams {
     this.cancelUrl = cancelUrl;
     this.clientReferenceId = clientReferenceId;
     this.consentCollection = consentCollection;
+    this.currency = currency;
     this.customer = customer;
     this.customerCreation = customerCreation;
     this.customerEmail = customerEmail;
@@ -344,6 +353,8 @@ public class SessionCreateParams extends ApiRequestParams {
     private String clientReferenceId;
 
     private ConsentCollection consentCollection;
+
+    private String currency;
 
     private String customer;
 
@@ -403,6 +414,7 @@ public class SessionCreateParams extends ApiRequestParams {
           this.cancelUrl,
           this.clientReferenceId,
           this.consentCollection,
+          this.currency,
           this.customer,
           this.customerCreation,
           this.customerEmail,
@@ -477,6 +489,16 @@ public class SessionCreateParams extends ApiRequestParams {
     /** Configure fields for the Checkout Session to gather active consent from customers. */
     public Builder setConsentCollection(ConsentCollection consentCollection) {
       this.consentCollection = consentCollection;
+      return this;
+    }
+
+    /**
+     * Three-letter <a href="https://www.iso.org/iso-4217-currency-codes.html">ISO currency
+     * code</a>, in lowercase. Must be a <a href="https://stripe.com/docs/currencies">supported
+     * currency</a>.
+     */
+    public Builder setCurrency(String currency) {
+      this.currency = currency;
       return this;
     }
 
@@ -8569,6 +8591,14 @@ public class SessionCreateParams extends ApiRequestParams {
         String currency;
 
         /**
+         * Shipping rates defined in each available currency option. Each key must be a three-letter
+         * <a href="https://www.iso.org/iso-4217-currency-codes.html">ISO currency code</a> and a <a
+         * href="https://stripe.com/docs/currencies">supported currency</a>.
+         */
+        @SerializedName("currency_options")
+        Map<String, CurrencyOption> currencyOptions;
+
+        /**
          * Map of extra parameters for custom features not available in this client library. The
          * content in this map is not serialized under this field's {@code @SerializedName} value.
          * Instead, each key/value pair is serialized as if the key is a root-level field
@@ -8578,9 +8608,14 @@ public class SessionCreateParams extends ApiRequestParams {
         @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
         Map<String, Object> extraParams;
 
-        private FixedAmount(Long amount, String currency, Map<String, Object> extraParams) {
+        private FixedAmount(
+            Long amount,
+            String currency,
+            Map<String, CurrencyOption> currencyOptions,
+            Map<String, Object> extraParams) {
           this.amount = amount;
           this.currency = currency;
+          this.currencyOptions = currencyOptions;
           this.extraParams = extraParams;
         }
 
@@ -8593,11 +8628,14 @@ public class SessionCreateParams extends ApiRequestParams {
 
           private String currency;
 
+          private Map<String, CurrencyOption> currencyOptions;
+
           private Map<String, Object> extraParams;
 
           /** Finalize and obtain parameter instance from this builder. */
           public FixedAmount build() {
-            return new FixedAmount(this.amount, this.currency, this.extraParams);
+            return new FixedAmount(
+                this.amount, this.currency, this.currencyOptions, this.extraParams);
           }
 
           /** A non-negative integer in cents representing how much to charge. */
@@ -8613,6 +8651,36 @@ public class SessionCreateParams extends ApiRequestParams {
            */
           public Builder setCurrency(String currency) {
             this.currency = currency;
+            return this;
+          }
+
+          /**
+           * Add a key/value pair to `currencyOptions` map. A map is initialized for the first
+           * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
+           * map. See {@link
+           * SessionCreateParams.ShippingOption.ShippingRateData.FixedAmount#currencyOptions} for
+           * the field documentation.
+           */
+          public Builder putCurrencyOption(String key, CurrencyOption value) {
+            if (this.currencyOptions == null) {
+              this.currencyOptions = new HashMap<>();
+            }
+            this.currencyOptions.put(key, value);
+            return this;
+          }
+
+          /**
+           * Add all map key/value pairs to `currencyOptions` map. A map is initialized for the
+           * first `put/putAll` call, and subsequent calls add additional key/value pairs to the
+           * original map. See {@link
+           * SessionCreateParams.ShippingOption.ShippingRateData.FixedAmount#currencyOptions} for
+           * the field documentation.
+           */
+          public Builder putAllCurrencyOption(Map<String, CurrencyOption> map) {
+            if (this.currencyOptions == null) {
+              this.currencyOptions = new HashMap<>();
+            }
+            this.currencyOptions.putAll(map);
             return this;
           }
 
@@ -8644,6 +8712,117 @@ public class SessionCreateParams extends ApiRequestParams {
             }
             this.extraParams.putAll(map);
             return this;
+          }
+        }
+
+        @Getter
+        public static class CurrencyOption {
+          /** A non-negative integer in cents representing how much to charge. */
+          @SerializedName("amount")
+          Long amount;
+
+          /**
+           * Map of extra parameters for custom features not available in this client library. The
+           * content in this map is not serialized under this field's {@code @SerializedName} value.
+           * Instead, each key/value pair is serialized as if the key is a root-level field
+           * (serialized) name in this param object. Effectively, this map is flattened to its
+           * parent instance.
+           */
+          @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
+          Map<String, Object> extraParams;
+
+          /**
+           * Specifies whether the rate is considered inclusive of taxes or exclusive of taxes. One
+           * of {@code inclusive}, {@code exclusive}, or {@code unspecified}.
+           */
+          @SerializedName("tax_behavior")
+          TaxBehavior taxBehavior;
+
+          private CurrencyOption(
+              Long amount, Map<String, Object> extraParams, TaxBehavior taxBehavior) {
+            this.amount = amount;
+            this.extraParams = extraParams;
+            this.taxBehavior = taxBehavior;
+          }
+
+          public static Builder builder() {
+            return new Builder();
+          }
+
+          public static class Builder {
+            private Long amount;
+
+            private Map<String, Object> extraParams;
+
+            private TaxBehavior taxBehavior;
+
+            /** Finalize and obtain parameter instance from this builder. */
+            public CurrencyOption build() {
+              return new CurrencyOption(this.amount, this.extraParams, this.taxBehavior);
+            }
+
+            /** A non-negative integer in cents representing how much to charge. */
+            public Builder setAmount(Long amount) {
+              this.amount = amount;
+              return this;
+            }
+
+            /**
+             * Add a key/value pair to `extraParams` map. A map is initialized for the first
+             * `put/putAll` call, and subsequent calls add additional key/value pairs to the
+             * original map. See {@link
+             * SessionCreateParams.ShippingOption.ShippingRateData.FixedAmount.CurrencyOption#extraParams}
+             * for the field documentation.
+             */
+            public Builder putExtraParam(String key, Object value) {
+              if (this.extraParams == null) {
+                this.extraParams = new HashMap<>();
+              }
+              this.extraParams.put(key, value);
+              return this;
+            }
+
+            /**
+             * Add all map key/value pairs to `extraParams` map. A map is initialized for the first
+             * `put/putAll` call, and subsequent calls add additional key/value pairs to the
+             * original map. See {@link
+             * SessionCreateParams.ShippingOption.ShippingRateData.FixedAmount.CurrencyOption#extraParams}
+             * for the field documentation.
+             */
+            public Builder putAllExtraParam(Map<String, Object> map) {
+              if (this.extraParams == null) {
+                this.extraParams = new HashMap<>();
+              }
+              this.extraParams.putAll(map);
+              return this;
+            }
+
+            /**
+             * Specifies whether the rate is considered inclusive of taxes or exclusive of taxes.
+             * One of {@code inclusive}, {@code exclusive}, or {@code unspecified}.
+             */
+            public Builder setTaxBehavior(TaxBehavior taxBehavior) {
+              this.taxBehavior = taxBehavior;
+              return this;
+            }
+          }
+
+          public enum TaxBehavior implements ApiRequestParams.EnumParam {
+            @SerializedName("exclusive")
+            EXCLUSIVE("exclusive"),
+
+            @SerializedName("inclusive")
+            INCLUSIVE("inclusive"),
+
+            @SerializedName("unspecified")
+            UNSPECIFIED("unspecified");
+
+            @Getter(onMethod_ = {@Override})
+            private final String value;
+
+            TaxBehavior(String value) {
+              this.value = value;
+            }
           }
         }
       }

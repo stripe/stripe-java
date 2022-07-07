@@ -241,6 +241,22 @@ public class ShippingRate extends ApiResource implements HasId, MetadataStore<Sh
   @Getter
   @Setter
   @EqualsAndHashCode(callSuper = false)
+  public static class CurrencyOption extends StripeObject {
+    /** A non-negative integer in cents representing how much to charge. */
+    @SerializedName("amount")
+    Long amount;
+
+    /**
+     * Specifies whether the rate is considered inclusive of taxes or exclusive of taxes. One of
+     * {@code inclusive}, {@code exclusive}, or {@code unspecified}.
+     */
+    @SerializedName("tax_behavior")
+    String taxBehavior;
+  }
+
+  @Getter
+  @Setter
+  @EqualsAndHashCode(callSuper = false)
   public static class DeliveryEstimate extends StripeObject {
     /**
      * The upper bound of the estimated range. If empty, represents no upper bound i.e., infinite.
@@ -302,5 +318,13 @@ public class ShippingRate extends ApiResource implements HasId, MetadataStore<Sh
      */
     @SerializedName("currency")
     String currency;
+
+    /**
+     * Shipping rates defined in each available currency option. Each key must be a three-letter <a
+     * href="https://www.iso.org/iso-4217-currency-codes.html">ISO currency code</a> and a <a
+     * href="https://stripe.com/docs/currencies">supported currency</a>.
+     */
+    @SerializedName("currency_options")
+    Map<String, ShippingRate.CurrencyOption> currencyOptions;
   }
 }
