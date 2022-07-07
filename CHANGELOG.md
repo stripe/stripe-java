@@ -1,5 +1,10 @@
 # Changelog
 
+## 20.133.0-beta.1 - 2022-07-07
+* [#1389](https://github.com/stripe/stripe-java/pull/1389) API Updates for beta branch
+  - Include `server_side_confirmation_beta=v1` beta
+  - Add `secretKeyConfirmation` to `PaymentIntent`
+
 ## 20.132.0 - 2022-07-07
 * [#1388](https://github.com/stripe/stripe-java/pull/1388) API Updates
   * Add support for `currency` on `CheckoutSessionCreateParams`, `InvoiceUpcomingLinesParams`, `InvoiceUpcomingParams`, `PaymentLinkCreateParams`, `SubscriptionCreateParams`, `SubscriptionSchedule.phases[]`, `SubscriptionScheduleCreateParams.phases[]`, `SubscriptionScheduleUpdateParams.phases[]`, and `Subscription`
