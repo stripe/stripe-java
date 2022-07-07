@@ -43,6 +43,14 @@ public class Coupon extends ApiResource implements HasId, MetadataStore<Coupon> 
   @SerializedName("currency")
   String currency;
 
+  /**
+   * Coupons defined in each available currency option. Each key must be a three-letter <a
+   * href="https://www.iso.org/iso-4217-currency-codes.html">ISO currency code</a> and a <a
+   * href="https://stripe.com/docs/currencies">supported currency</a>.
+   */
+  @SerializedName("currency_options")
+  Map<String, Coupon.CurrencyOption> currencyOptions;
+
   /** Always true for a deleted object. */
   @SerializedName("deleted")
   Boolean deleted;
@@ -342,5 +350,17 @@ public class Coupon extends ApiResource implements HasId, MetadataStore<Coupon> 
     /** A list of product IDs this coupon applies to. */
     @SerializedName("products")
     List<String> products;
+  }
+
+  @Getter
+  @Setter
+  @EqualsAndHashCode(callSuper = false)
+  public static class CurrencyOption extends StripeObject {
+    /**
+     * Amount (in the {@code currency} specified) that will be taken off the subtotal of any
+     * invoices for this customer.
+     */
+    @SerializedName("amount_off")
+    Long amountOff;
   }
 }

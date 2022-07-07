@@ -28,6 +28,12 @@ public class InvoiceUpcomingParams extends ApiRequestParams {
   @SerializedName("coupon")
   String coupon;
 
+  /**
+   * The currency to preview this invoice in. Defaults to that of {@code customer} if not specified.
+   */
+  @SerializedName("currency")
+  String currency;
+
   /** The identifier of the customer whose upcoming invoice you'd like to retrieve. */
   @SerializedName("customer")
   String customer;
@@ -163,6 +169,7 @@ public class InvoiceUpcomingParams extends ApiRequestParams {
   private InvoiceUpcomingParams(
       AutomaticTax automaticTax,
       String coupon,
+      String currency,
       String customer,
       CustomerDetails customerDetails,
       Object discounts,
@@ -184,6 +191,7 @@ public class InvoiceUpcomingParams extends ApiRequestParams {
       Boolean subscriptionTrialFromPlan) {
     this.automaticTax = automaticTax;
     this.coupon = coupon;
+    this.currency = currency;
     this.customer = customer;
     this.customerDetails = customerDetails;
     this.discounts = discounts;
@@ -213,6 +221,8 @@ public class InvoiceUpcomingParams extends ApiRequestParams {
     private AutomaticTax automaticTax;
 
     private String coupon;
+
+    private String currency;
 
     private String customer;
 
@@ -257,6 +267,7 @@ public class InvoiceUpcomingParams extends ApiRequestParams {
       return new InvoiceUpcomingParams(
           this.automaticTax,
           this.coupon,
+          this.currency,
           this.customer,
           this.customerDetails,
           this.discounts,
@@ -293,6 +304,15 @@ public class InvoiceUpcomingParams extends ApiRequestParams {
      */
     public Builder setCoupon(String coupon) {
       this.coupon = coupon;
+      return this;
+    }
+
+    /**
+     * The currency to preview this invoice in. Defaults to that of {@code customer} if not
+     * specified.
+     */
+    public Builder setCurrency(String currency) {
+      this.currency = currency;
       return this;
     }
 

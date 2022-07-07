@@ -289,7 +289,27 @@ public class PromotionCode extends ApiResource implements HasId, MetadataStore<P
   @Getter
   @Setter
   @EqualsAndHashCode(callSuper = false)
+  public static class CurrencyOption extends StripeObject {
+    /**
+     * Minimum amount required to redeem this Promotion Code into a Coupon (e.g., a purchase must be
+     * $100 or more to work).
+     */
+    @SerializedName("minimum_amount")
+    Long minimumAmount;
+  }
+
+  @Getter
+  @Setter
+  @EqualsAndHashCode(callSuper = false)
   public static class Restrictions extends StripeObject {
+    /**
+     * Promotion code restrictions defined in each available currency option. Each key must be a
+     * three-letter <a href="https://www.iso.org/iso-4217-currency-codes.html">ISO currency code</a>
+     * and a <a href="https://stripe.com/docs/currencies">supported currency</a>.
+     */
+    @SerializedName("currency_options")
+    Map<String, PromotionCode.CurrencyOption> currencyOptions;
+
     /**
      * A Boolean indicating if the Promotion Code should only be redeemed for Customers without any
      * successful payments or invoices.

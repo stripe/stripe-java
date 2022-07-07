@@ -50,6 +50,14 @@ public class PaymentLinkCreateParams extends ApiRequestParams {
   ConsentCollection consentCollection;
 
   /**
+   * Three-letter <a href="https://www.iso.org/iso-4217-currency-codes.html">ISO currency code</a>,
+   * in lowercase. Must be a <a href="https://stripe.com/docs/currencies">supported currency</a> and
+   * supported by each line item's price.
+   */
+  @SerializedName("currency")
+  String currency;
+
+  /**
    * Configures whether <a href="https://stripe.com/docs/api/checkout/sessions">checkout
    * sessions</a> created by this payment link create a <a
    * href="https://stripe.com/docs/api/customers">Customer</a>.
@@ -165,6 +173,7 @@ public class PaymentLinkCreateParams extends ApiRequestParams {
       AutomaticTax automaticTax,
       BillingAddressCollection billingAddressCollection,
       ConsentCollection consentCollection,
+      String currency,
       CustomerCreation customerCreation,
       List<String> expand,
       Map<String, Object> extraParams,
@@ -187,6 +196,7 @@ public class PaymentLinkCreateParams extends ApiRequestParams {
     this.automaticTax = automaticTax;
     this.billingAddressCollection = billingAddressCollection;
     this.consentCollection = consentCollection;
+    this.currency = currency;
     this.customerCreation = customerCreation;
     this.expand = expand;
     this.extraParams = extraParams;
@@ -222,6 +232,8 @@ public class PaymentLinkCreateParams extends ApiRequestParams {
     private BillingAddressCollection billingAddressCollection;
 
     private ConsentCollection consentCollection;
+
+    private String currency;
 
     private CustomerCreation customerCreation;
 
@@ -263,6 +275,7 @@ public class PaymentLinkCreateParams extends ApiRequestParams {
           this.automaticTax,
           this.billingAddressCollection,
           this.consentCollection,
+          this.currency,
           this.customerCreation,
           this.expand,
           this.extraParams,
@@ -328,6 +341,16 @@ public class PaymentLinkCreateParams extends ApiRequestParams {
     /** Configure fields to gather active consent from customers. */
     public Builder setConsentCollection(ConsentCollection consentCollection) {
       this.consentCollection = consentCollection;
+      return this;
+    }
+
+    /**
+     * Three-letter <a href="https://www.iso.org/iso-4217-currency-codes.html">ISO currency
+     * code</a>, in lowercase. Must be a <a href="https://stripe.com/docs/currencies">supported
+     * currency</a> and supported by each line item's price.
+     */
+    public Builder setCurrency(String currency) {
+      this.currency = currency;
       return this;
     }
 

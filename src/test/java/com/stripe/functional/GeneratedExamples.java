@@ -353,6 +353,28 @@ class GeneratedExamples extends BaseStripeTest {
   }
 
   @Test
+  public void testPriceCreate() throws StripeException {
+    PriceCreateParams params =
+        PriceCreateParams.builder()
+            .setUnitAmount(2000L)
+            .setCurrency("usd")
+            .putCurrencyOption(
+                "uah", PriceCreateParams.CurrencyOption.builder().setUnitAmount(5000L).build())
+            .putCurrencyOption(
+                "eur", PriceCreateParams.CurrencyOption.builder().setUnitAmount(1800L).build())
+            .setRecurring(
+                PriceCreateParams.Recurring.builder()
+                    .setInterval(PriceCreateParams.Recurring.Interval.MONTH)
+                    .build())
+            .setProduct("prod_xxxxxxxxxxxxx")
+            .build();
+
+    Price price = Price.create(params);
+    assertNotNull(price);
+    verifyRequest(ApiResource.RequestMethod.POST, "/v1/prices", params.toMap());
+  }
+
+  @Test
   public void testSetupAttemptList() throws StripeException {
     SetupAttemptListParams params =
         SetupAttemptListParams.builder().setLimit(3L).setSetupIntent("si_xyz").build();
@@ -2589,7 +2611,7 @@ class GeneratedExamples extends BaseStripeTest {
   }
 
   @Test
-  public void testPriceCreate() throws StripeException {
+  public void testPriceCreate2() throws StripeException {
     PriceCreateParams params =
         PriceCreateParams.builder()
             .setUnitAmount(2000L)
