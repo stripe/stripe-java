@@ -215,6 +215,13 @@ public class PaymentIntentCreateParams extends ApiRequestParams {
   String returnUrl;
 
   /**
+   * Indicates whether confirmation for this PaymentIntent using a secret key is {@code required} or
+   * {@code optional}.
+   */
+  @SerializedName("secret_key_confirmation")
+  SecretKeyConfirmation secretKeyConfirmation;
+
+  /**
    * Indicates that you intend to make future payments with this PaymentIntent's payment method.
    *
    * <p>Providing this parameter will <a
@@ -298,6 +305,7 @@ public class PaymentIntentCreateParams extends ApiRequestParams {
       RadarOptions radarOptions,
       String receiptEmail,
       String returnUrl,
+      SecretKeyConfirmation secretKeyConfirmation,
       SetupFutureUsage setupFutureUsage,
       Shipping shipping,
       String statementDescriptor,
@@ -329,6 +337,7 @@ public class PaymentIntentCreateParams extends ApiRequestParams {
     this.radarOptions = radarOptions;
     this.receiptEmail = receiptEmail;
     this.returnUrl = returnUrl;
+    this.secretKeyConfirmation = secretKeyConfirmation;
     this.setupFutureUsage = setupFutureUsage;
     this.shipping = shipping;
     this.statementDescriptor = statementDescriptor;
@@ -391,6 +400,8 @@ public class PaymentIntentCreateParams extends ApiRequestParams {
 
     private String returnUrl;
 
+    private SecretKeyConfirmation secretKeyConfirmation;
+
     private SetupFutureUsage setupFutureUsage;
 
     private Shipping shipping;
@@ -432,6 +443,7 @@ public class PaymentIntentCreateParams extends ApiRequestParams {
           this.radarOptions,
           this.receiptEmail,
           this.returnUrl,
+          this.secretKeyConfirmation,
           this.setupFutureUsage,
           this.shipping,
           this.statementDescriptor,
@@ -768,6 +780,15 @@ public class PaymentIntentCreateParams extends ApiRequestParams {
      */
     public Builder setReturnUrl(String returnUrl) {
       this.returnUrl = returnUrl;
+      return this;
+    }
+
+    /**
+     * Indicates whether confirmation for this PaymentIntent using a secret key is {@code required}
+     * or {@code optional}.
+     */
+    public Builder setSecretKeyConfirmation(SecretKeyConfirmation secretKeyConfirmation) {
+      this.secretKeyConfirmation = secretKeyConfirmation;
       return this;
     }
 
@@ -12253,6 +12274,21 @@ public class PaymentIntentCreateParams extends ApiRequestParams {
     private final String value;
 
     OffSession(String value) {
+      this.value = value;
+    }
+  }
+
+  public enum SecretKeyConfirmation implements ApiRequestParams.EnumParam {
+    @SerializedName("optional")
+    OPTIONAL("optional"),
+
+    @SerializedName("required")
+    REQUIRED("required");
+
+    @Getter(onMethod_ = {@Override})
+    private final String value;
+
+    SecretKeyConfirmation(String value) {
       this.value = value;
     }
   }

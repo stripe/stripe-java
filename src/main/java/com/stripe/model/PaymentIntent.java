@@ -244,6 +244,15 @@ public class PaymentIntent extends ApiResource implements HasId, MetadataStore<P
   ExpandableField<Review> review;
 
   /**
+   * Indicates whether confirmation for this PaymentIntent using a secret key is {@code required} or
+   * {@code optional}.
+   *
+   * <p>One of {@code optional}, or {@code required}.
+   */
+  @SerializedName("secret_key_confirmation")
+  String secretKeyConfirmation;
+
+  /**
    * Indicates that you intend to make future payments with this PaymentIntent's payment method.
    *
    * <p>Providing this parameter will <a

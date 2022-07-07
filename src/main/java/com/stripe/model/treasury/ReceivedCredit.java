@@ -89,6 +89,10 @@ public class ReceivedCredit extends ApiResource implements HasId {
   @SerializedName("network")
   String network;
 
+  /** Details specific to the money movement rails. */
+  @SerializedName("network_details")
+  NetworkDetails networkDetails;
+
   /**
    * String representing the object's type. Objects of the same type share the same value.
    *
@@ -385,6 +389,32 @@ public class ReceivedCredit extends ApiResource implements HasId {
        */
       @SerializedName("type")
       String type;
+    }
+  }
+
+  @Getter
+  @Setter
+  @EqualsAndHashCode(callSuper = false)
+  public static class NetworkDetails extends StripeObject {
+    /** Details about an ACH transaction. */
+    @SerializedName("ach")
+    Ach ach;
+
+    /**
+     * The type of flow that originated the ReceivedCredit.
+     *
+     * <p>Equal to {@code ach}.
+     */
+    @SerializedName("type")
+    String type;
+
+    @Getter
+    @Setter
+    @EqualsAndHashCode(callSuper = false)
+    public static class Ach extends StripeObject {
+      /** ACH Addenda record. */
+      @SerializedName("addenda")
+      String addenda;
     }
   }
 
