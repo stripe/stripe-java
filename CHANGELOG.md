@@ -1,5 +1,9 @@
 # Changelog
 
+## 20.133.0 - 2022-07-12
+* [#1390](https://github.com/stripe/stripe-java/pull/1390) API Updates
+  * Add support for `customer_details` on `CheckoutSessionListParams`
+
 ## 20.132.0 - 2022-07-07
 * [#1388](https://github.com/stripe/stripe-java/pull/1388) API Updates
   * Add support for `currency` on `CheckoutSessionCreateParams`, `InvoiceUpcomingLinesParams`, `InvoiceUpcomingParams`, `PaymentLinkCreateParams`, `SubscriptionCreateParams`, `SubscriptionSchedule.phases[]`, `SubscriptionScheduleCreateParams.phases[]`, `SubscriptionScheduleUpdateParams.phases[]`, and `Subscription`
