@@ -11,7 +11,7 @@ import lombok.Getter;
 
 @Getter
 public class ReaderPresentPaymentMethodParams extends ApiRequestParams {
-  /** Simulated card present data. */
+  /** Simulated data for the card_present payment method. */
   @SerializedName("card_present")
   CardPresent cardPresent;
 
@@ -59,7 +59,7 @@ public class ReaderPresentPaymentMethodParams extends ApiRequestParams {
           this.cardPresent, this.expand, this.extraParams, this.type);
     }
 
-    /** Simulated card present data. */
+    /** Simulated data for the card_present payment method. */
     public Builder setCardPresent(CardPresent cardPresent) {
       this.cardPresent = cardPresent;
       return this;
