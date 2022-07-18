@@ -258,6 +258,9 @@ public class SetupAttempt extends ApiResource implements HasId {
     @SerializedName("bancontact")
     Bancontact bancontact;
 
+    @SerializedName("blik")
+    Blik blik;
+
     @SerializedName("boleto")
     Boleto boleto;
 
@@ -397,6 +400,11 @@ public class SetupAttempt extends ApiResource implements HasId {
             new ExpandableField<Mandate>(expandableObject.getId(), expandableObject);
       }
     }
+
+    @Getter
+    @Setter
+    @EqualsAndHashCode(callSuper = false)
+    public static class Blik extends StripeObject {}
 
     @Getter
     @Setter

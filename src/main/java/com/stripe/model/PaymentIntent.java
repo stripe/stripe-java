@@ -1705,7 +1705,7 @@ public class PaymentIntent extends ApiResource implements HasId, MetadataStore<P
     Long chargeAttemptAt;
 
     /**
-     * For payments greater than INR 5000, the customer must provide explicit approval of the
+     * For payments greater than INR 15000, the customer must provide explicit approval of the
      * payment with their bank. For payments of lower amount, no customer action is required.
      */
     @SerializedName("customer_approval_required")
@@ -2053,6 +2053,9 @@ public class PaymentIntent extends ApiResource implements HasId, MetadataStore<P
 
     @SerializedName("bancontact")
     Bancontact bancontact;
+
+    @SerializedName("blik")
+    Blik blik;
 
     @SerializedName("boleto")
     Boleto boleto;
@@ -2409,6 +2412,36 @@ public class PaymentIntent extends ApiResource implements HasId, MetadataStore<P
         @SerializedName("country")
         String country;
       }
+    }
+
+    @Getter
+    @Setter
+    @EqualsAndHashCode(callSuper = false)
+    public static class Blik extends StripeObject {}
+
+    @Getter
+    @Setter
+    @EqualsAndHashCode(callSuper = false)
+    public static class BlikMandateOptionsOffSessionDetails extends StripeObject {
+      /** Amount of each recurring payment. */
+      @SerializedName("amount")
+      Long amount;
+
+      /** Currency of each recurring payment. */
+      @SerializedName("currency")
+      String currency;
+
+      /**
+       * Frequency interval of each recurring payment.
+       *
+       * <p>One of {@code day}, {@code month}, {@code week}, or {@code year}.
+       */
+      @SerializedName("interval")
+      String interval;
+
+      /** Frequency indicator of each recurring payment. */
+      @SerializedName("interval_count")
+      Long intervalCount;
     }
 
     @Getter
@@ -3250,7 +3283,7 @@ public class PaymentIntent extends ApiResource implements HasId, MetadataStore<P
       public static class CustomerNotification extends StripeObject {
         /**
          * Whether customer approval has been requested for this payment. For payments greater than
-         * INR 5000 or mandate amount, the customer must provide explicit approval of the payment
+         * INR 15000 or mandate amount, the customer must provide explicit approval of the payment
          * with their bank.
          */
         @SerializedName("approval_requested")
