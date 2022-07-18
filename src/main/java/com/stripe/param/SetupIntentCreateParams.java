@@ -897,6 +897,13 @@ public class SetupIntentCreateParams extends ApiRequestParams {
     BillingDetails billingDetails;
 
     /**
+     * If this is a {@code blik} PaymentMethod, this hash contains details about the BLIK payment
+     * method.
+     */
+    @SerializedName("blik")
+    Blik blik;
+
+    /**
      * If this is a {@code boleto} PaymentMethod, this hash contains details about the Boleto
      * payment method.
      */
@@ -1071,6 +1078,7 @@ public class SetupIntentCreateParams extends ApiRequestParams {
         BacsDebit bacsDebit,
         Bancontact bancontact,
         BillingDetails billingDetails,
+        Blik blik,
         Boleto boleto,
         CustomerBalance customerBalance,
         Eps eps,
@@ -1102,6 +1110,7 @@ public class SetupIntentCreateParams extends ApiRequestParams {
       this.bacsDebit = bacsDebit;
       this.bancontact = bancontact;
       this.billingDetails = billingDetails;
+      this.blik = blik;
       this.boleto = boleto;
       this.customerBalance = customerBalance;
       this.eps = eps;
@@ -1147,6 +1156,8 @@ public class SetupIntentCreateParams extends ApiRequestParams {
       private Bancontact bancontact;
 
       private BillingDetails billingDetails;
+
+      private Blik blik;
 
       private Boleto boleto;
 
@@ -1205,6 +1216,7 @@ public class SetupIntentCreateParams extends ApiRequestParams {
             this.bacsDebit,
             this.bancontact,
             this.billingDetails,
+            this.blik,
             this.boleto,
             this.customerBalance,
             this.eps,
@@ -1299,6 +1311,15 @@ public class SetupIntentCreateParams extends ApiRequestParams {
        */
       public Builder setBillingDetails(BillingDetails billingDetails) {
         this.billingDetails = billingDetails;
+        return this;
+      }
+
+      /**
+       * If this is a {@code blik} PaymentMethod, this hash contains details about the BLIK payment
+       * method.
+       */
+      public Builder setBlik(Blik blik) {
+        this.blik = blik;
         return this;
       }
 
@@ -2322,6 +2343,63 @@ public class SetupIntentCreateParams extends ApiRequestParams {
             this.state = state;
             return this;
           }
+        }
+      }
+    }
+
+    @Getter
+    public static class Blik {
+      /**
+       * Map of extra parameters for custom features not available in this client library. The
+       * content in this map is not serialized under this field's {@code @SerializedName} value.
+       * Instead, each key/value pair is serialized as if the key is a root-level field (serialized)
+       * name in this param object. Effectively, this map is flattened to its parent instance.
+       */
+      @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
+      Map<String, Object> extraParams;
+
+      private Blik(Map<String, Object> extraParams) {
+        this.extraParams = extraParams;
+      }
+
+      public static Builder builder() {
+        return new Builder();
+      }
+
+      public static class Builder {
+        private Map<String, Object> extraParams;
+
+        /** Finalize and obtain parameter instance from this builder. */
+        public Blik build() {
+          return new Blik(this.extraParams);
+        }
+
+        /**
+         * Add a key/value pair to `extraParams` map. A map is initialized for the first
+         * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
+         * map. See {@link SetupIntentCreateParams.PaymentMethodData.Blik#extraParams} for the field
+         * documentation.
+         */
+        public Builder putExtraParam(String key, Object value) {
+          if (this.extraParams == null) {
+            this.extraParams = new HashMap<>();
+          }
+          this.extraParams.put(key, value);
+          return this;
+        }
+
+        /**
+         * Add all map key/value pairs to `extraParams` map. A map is initialized for the first
+         * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
+         * map. See {@link SetupIntentCreateParams.PaymentMethodData.Blik#extraParams} for the field
+         * documentation.
+         */
+        public Builder putAllExtraParam(Map<String, Object> map) {
+          if (this.extraParams == null) {
+            this.extraParams = new HashMap<>();
+          }
+          this.extraParams.putAll(map);
+          return this;
         }
       }
     }
@@ -4171,6 +4249,9 @@ public class SetupIntentCreateParams extends ApiRequestParams {
       @SerializedName("bancontact")
       BANCONTACT("bancontact"),
 
+      @SerializedName("blik")
+      BLIK("blik"),
+
       @SerializedName("boleto")
       BOLETO("boleto"),
 
@@ -4243,6 +4324,13 @@ public class SetupIntentCreateParams extends ApiRequestParams {
     @SerializedName("acss_debit")
     AcssDebit acssDebit;
 
+    /**
+     * If this is a {@code blik} PaymentMethod, this hash contains details about the BLIK payment
+     * method.
+     */
+    @SerializedName("blik")
+    Blik blik;
+
     /** Configuration for any card setup attempted on this SetupIntent. */
     @SerializedName("card")
     Card card;
@@ -4279,12 +4367,14 @@ public class SetupIntentCreateParams extends ApiRequestParams {
 
     private PaymentMethodOptions(
         AcssDebit acssDebit,
+        Blik blik,
         Card card,
         Map<String, Object> extraParams,
         Link link,
         SepaDebit sepaDebit,
         UsBankAccount usBankAccount) {
       this.acssDebit = acssDebit;
+      this.blik = blik;
       this.card = card;
       this.extraParams = extraParams;
       this.link = link;
@@ -4298,6 +4388,8 @@ public class SetupIntentCreateParams extends ApiRequestParams {
 
     public static class Builder {
       private AcssDebit acssDebit;
+
+      private Blik blik;
 
       private Card card;
 
@@ -4313,6 +4405,7 @@ public class SetupIntentCreateParams extends ApiRequestParams {
       public PaymentMethodOptions build() {
         return new PaymentMethodOptions(
             this.acssDebit,
+            this.blik,
             this.card,
             this.extraParams,
             this.link,
@@ -4326,6 +4419,15 @@ public class SetupIntentCreateParams extends ApiRequestParams {
        */
       public Builder setAcssDebit(AcssDebit acssDebit) {
         this.acssDebit = acssDebit;
+        return this;
+      }
+
+      /**
+       * If this is a {@code blik} PaymentMethod, this hash contains details about the BLIK payment
+       * method.
+       */
+      public Builder setBlik(Blik blik) {
+        this.blik = blik;
         return this;
       }
 
@@ -4762,6 +4864,82 @@ public class SetupIntentCreateParams extends ApiRequestParams {
 
         VerificationMethod(String value) {
           this.value = value;
+        }
+      }
+    }
+
+    @Getter
+    public static class Blik {
+      /**
+       * The 6-digit BLIK code that a customer has generated using their banking application. Can
+       * only be set on confirmation.
+       */
+      @SerializedName("code")
+      String code;
+
+      /**
+       * Map of extra parameters for custom features not available in this client library. The
+       * content in this map is not serialized under this field's {@code @SerializedName} value.
+       * Instead, each key/value pair is serialized as if the key is a root-level field (serialized)
+       * name in this param object. Effectively, this map is flattened to its parent instance.
+       */
+      @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
+      Map<String, Object> extraParams;
+
+      private Blik(String code, Map<String, Object> extraParams) {
+        this.code = code;
+        this.extraParams = extraParams;
+      }
+
+      public static Builder builder() {
+        return new Builder();
+      }
+
+      public static class Builder {
+        private String code;
+
+        private Map<String, Object> extraParams;
+
+        /** Finalize and obtain parameter instance from this builder. */
+        public Blik build() {
+          return new Blik(this.code, this.extraParams);
+        }
+
+        /**
+         * The 6-digit BLIK code that a customer has generated using their banking application. Can
+         * only be set on confirmation.
+         */
+        public Builder setCode(String code) {
+          this.code = code;
+          return this;
+        }
+
+        /**
+         * Add a key/value pair to `extraParams` map. A map is initialized for the first
+         * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
+         * map. See {@link SetupIntentCreateParams.PaymentMethodOptions.Blik#extraParams} for the
+         * field documentation.
+         */
+        public Builder putExtraParam(String key, Object value) {
+          if (this.extraParams == null) {
+            this.extraParams = new HashMap<>();
+          }
+          this.extraParams.put(key, value);
+          return this;
+        }
+
+        /**
+         * Add all map key/value pairs to `extraParams` map. A map is initialized for the first
+         * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
+         * map. See {@link SetupIntentCreateParams.PaymentMethodOptions.Blik#extraParams} for the
+         * field documentation.
+         */
+        public Builder putAllExtraParam(Map<String, Object> map) {
+          if (this.extraParams == null) {
+            this.extraParams = new HashMap<>();
+          }
+          this.extraParams.putAll(map);
+          return this;
         }
       }
     }

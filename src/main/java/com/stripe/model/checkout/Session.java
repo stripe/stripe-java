@@ -699,7 +699,7 @@ public class Session extends ApiResource implements HasId {
      * promotional communication from the merchant depending on the customer's locale. Only
      * available to US merchants.
      *
-     * <p>Equal to {@code auto}.
+     * <p>One of {@code auto}, or {@code none}.
      */
     @SerializedName("promotions")
     String promotions;

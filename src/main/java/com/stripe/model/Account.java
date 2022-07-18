@@ -695,6 +695,15 @@ public class Account extends ApiResource implements MetadataStore<Account>, Paym
     String bankTransferPayments;
 
     /**
+     * The status of the blik payments capability of the account, or whether the account can
+     * directly process blik charges.
+     *
+     * <p>One of {@code active}, {@code inactive}, or {@code pending}.
+     */
+    @SerializedName("blik_payments")
+    String blikPayments;
+
+    /**
      * The status of the boleto payments capability of the account, or whether the account can
      * directly process boleto charges.
      *
