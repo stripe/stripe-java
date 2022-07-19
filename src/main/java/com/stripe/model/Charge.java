@@ -1130,6 +1130,9 @@ public class Charge extends ApiResource implements MetadataStore<Charge>, Balanc
     @SerializedName("bancontact")
     Bancontact bancontact;
 
+    @SerializedName("blik")
+    Blik blik;
+
     @SerializedName("boleto")
     Boleto boleto;
 
@@ -1481,6 +1484,11 @@ public class Charge extends ApiResource implements MetadataStore<Charge>, Balanc
             new ExpandableField<Mandate>(expandableObject.getId(), expandableObject);
       }
     }
+
+    @Getter
+    @Setter
+    @EqualsAndHashCode(callSuper = false)
+    public static class Blik extends StripeObject {}
 
     @Getter
     @Setter

@@ -1202,7 +1202,10 @@ public class SessionCreateParams extends ApiRequestParams {
 
     public enum Promotions implements ApiRequestParams.EnumParam {
       @SerializedName("auto")
-      AUTO("auto");
+      AUTO("auto"),
+
+      @SerializedName("none")
+      NONE("none");
 
       @Getter(onMethod_ = {@Override})
       private final String value;
@@ -9679,6 +9682,9 @@ public class SessionCreateParams extends ApiRequestParams {
 
     @SerializedName("bancontact")
     BANCONTACT("bancontact"),
+
+    @SerializedName("blik")
+    BLIK("blik"),
 
     @SerializedName("boleto")
     BOLETO("boleto"),
