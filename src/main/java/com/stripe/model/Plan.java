@@ -362,6 +362,27 @@ public class Plan extends ApiResource implements HasId, MetadataStore<Plan> {
   @Getter
   @Setter
   @EqualsAndHashCode(callSuper = false)
+  public static class MigrateTo extends StripeObject {
+    /**
+     * The behavior controlling at what point in the subscription lifecycle to migrate the price
+     *
+     * <p>Equal to {@code at_cycle_end}.
+     */
+    @SerializedName("behavior")
+    String behavior;
+
+    /** The unix timestamp after at which subscriptions will start to migrate to the new price. */
+    @SerializedName("effective_after")
+    Long effectiveAfter;
+
+    /** The id of the price being migrated to. */
+    @SerializedName("price")
+    String price;
+  }
+
+  @Getter
+  @Setter
+  @EqualsAndHashCode(callSuper = false)
   public static class Tier extends StripeObject {
     /** Price for the entire tier. */
     @SerializedName("flat_amount")

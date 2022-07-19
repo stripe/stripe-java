@@ -812,6 +812,9 @@ public class SetupIntent extends ApiResource implements HasId, MetadataStore<Set
     @SerializedName("acss_debit")
     AcssDebit acssDebit;
 
+    @SerializedName("blik")
+    Blik blik;
+
     @SerializedName("card")
     Card card;
 
@@ -882,6 +885,34 @@ public class SetupIntent extends ApiResource implements HasId, MetadataStore<Set
         @SerializedName("transaction_type")
         String transactionType;
       }
+    }
+
+    @Getter
+    @Setter
+    @EqualsAndHashCode(callSuper = false)
+    public static class Blik extends StripeObject {
+      @SerializedName("mandate_options")
+      BlikMandateOptions mandateOptions;
+    }
+
+    @Getter
+    @Setter
+    @EqualsAndHashCode(callSuper = false)
+    public static class BlikMandateOptions extends StripeObject {
+      /** Date at which the mandate expires. */
+      @SerializedName("expires_after")
+      Long expiresAfter;
+
+      @SerializedName("off_session")
+      PaymentIntent.PaymentMethodOptions.BlikMandateOptionsOffSessionDetails offSession;
+
+      /**
+       * Type of the mandate.
+       *
+       * <p>One of {@code off_session}, or {@code on_session}.
+       */
+      @SerializedName("type")
+      String type;
     }
 
     @Getter

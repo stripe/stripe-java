@@ -7,6 +7,7 @@ import com.stripe.exception.StripeException;
 import com.stripe.model.testhelpers.TestClock;
 import com.stripe.net.ApiResource;
 import com.stripe.net.RequestOptions;
+import com.stripe.param.SubscriptionScheduleAmendParams;
 import com.stripe.param.SubscriptionScheduleCancelParams;
 import com.stripe.param.SubscriptionScheduleCreateParams;
 import com.stripe.param.SubscriptionScheduleListParams;
@@ -30,6 +31,18 @@ public class SubscriptionSchedule extends ApiResource
   @Getter(lombok.AccessLevel.NONE)
   @Setter(lombok.AccessLevel.NONE)
   ExpandableField<Application> application;
+
+  /**
+   * Configures when the subscription schedule generates prorations for phase transitions. Possible
+   * values are {@code prorate_on_next_phase} or {@code prorate_up_front} with the default being
+   * {@code prorate_on_next_phase}. {@code prorate_on_next_phase} will apply phase changes and
+   * generate prorations at transition time.{@code prorate_up_front} will bill for all phases within
+   * the current billing cycle up front.
+   *
+   * <p>One of {@code prorate_on_next_phase}, or {@code prorate_up_front}.
+   */
+  @SerializedName("billing_behavior")
+  String billingBehavior;
 
   /**
    * Time at which the subscription schedule was canceled. Measured in seconds since the Unix epoch.
@@ -105,6 +118,10 @@ public class SubscriptionSchedule extends ApiResource
   /** Configuration for the subscription schedule's phases. */
   @SerializedName("phases")
   List<SubscriptionSchedule.Phase> phases;
+
+  /** Time period and invoice for a Subscription billed in advance. */
+  @SerializedName("prebilling")
+  SubscriptionPrebillingData prebilling;
 
   /**
    * Time at which the subscription schedule was released. Measured in seconds since the Unix epoch.
@@ -365,6 +382,42 @@ public class SubscriptionSchedule extends ApiResource
         ApiResource.RequestMethod.POST, url, params, SubscriptionSchedule.class, options);
   }
 
+  /** Amends an existing subscription schedule. */
+  public SubscriptionSchedule amend(Map<String, Object> params) throws StripeException {
+    return amend(params, (RequestOptions) null);
+  }
+
+  /** Amends an existing subscription schedule. */
+  public SubscriptionSchedule amend(Map<String, Object> params, RequestOptions options)
+      throws StripeException {
+    String url =
+        String.format(
+            "%s%s",
+            Stripe.getApiBase(),
+            String.format(
+                "/v1/subscription_schedules/%s/amend", ApiResource.urlEncodeId(this.getId())));
+    return ApiResource.request(
+        ApiResource.RequestMethod.POST, url, params, SubscriptionSchedule.class, options);
+  }
+
+  /** Amends an existing subscription schedule. */
+  public SubscriptionSchedule amend(SubscriptionScheduleAmendParams params) throws StripeException {
+    return amend(params, (RequestOptions) null);
+  }
+
+  /** Amends an existing subscription schedule. */
+  public SubscriptionSchedule amend(SubscriptionScheduleAmendParams params, RequestOptions options)
+      throws StripeException {
+    String url =
+        String.format(
+            "%s%s",
+            Stripe.getApiBase(),
+            String.format(
+                "/v1/subscription_schedules/%s/amend", ApiResource.urlEncodeId(this.getId())));
+    return ApiResource.request(
+        ApiResource.RequestMethod.POST, url, params, SubscriptionSchedule.class, options);
+  }
+
   /**
    * Cancels a subscription schedule and its associated subscription immediately (if the
    * subscription schedule has an active subscription). A subscription schedule can only be canceled
@@ -523,6 +576,10 @@ public class SubscriptionSchedule extends ApiResource
   @Setter
   @EqualsAndHashCode(callSuper = false)
   public static class AddInvoiceItem extends StripeObject {
+    /** The stackable discounts that will be applied to the item. */
+    @SerializedName("discounts")
+    List<StackableDiscount> discounts;
+
     /** ID of the price used to generate the invoice item. */
     @SerializedName("price")
     @Getter(lombok.AccessLevel.NONE)
@@ -685,8 +742,8 @@ public class SubscriptionSchedule extends ApiResource
   @EqualsAndHashCode(callSuper = false)
   public static class Phase extends StripeObject {
     /**
-     * A list of prices and quantities that will generate invoice items appended to the first
-     * invoice for this phase.
+     * A list of prices and quantities that will generate invoice items appended to the next invoice
+     * for this phase.
      */
     @SerializedName("add_invoice_items")
     List<SubscriptionSchedule.AddInvoiceItem> addInvoiceItems;
@@ -762,6 +819,13 @@ public class SubscriptionSchedule extends ApiResource
      */
     @SerializedName("default_tax_rates")
     List<TaxRate> defaultTaxRates;
+
+    /**
+     * The stackable discounts that will be applied to the subscription on this phase. Subscription
+     * item discounts are applied before subscription discounts.
+     */
+    @SerializedName("discounts")
+    List<StackableDiscount> discounts;
 
     /** The end of this phase of the subscription schedule. */
     @SerializedName("end_date")
@@ -869,6 +933,13 @@ public class SubscriptionSchedule extends ApiResource
      */
     @SerializedName("billing_thresholds")
     SubscriptionItem.BillingThresholds billingThresholds;
+
+    /**
+     * The discounts applied to the subscription item. Subscription item discounts are applied
+     * before subscription discounts. Use {@code expand[]=discounts} to expand each discount.
+     */
+    @SerializedName("discounts")
+    List<StackableDiscount> discounts;
 
     /** ID of the plan to which the customer should be subscribed. */
     @SerializedName("plan")

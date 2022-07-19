@@ -46,6 +46,9 @@ public class PaymentMethod extends ApiResource implements HasId, MetadataStore<P
   @SerializedName("billing_details")
   BillingDetails billingDetails;
 
+  @SerializedName("blik")
+  Blik blik;
+
   @SerializedName("boleto")
   Boleto boleto;
 
@@ -157,11 +160,11 @@ public class PaymentMethod extends ApiResource implements HasId, MetadataStore<P
    * matching this value. It contains additional information specific to the PaymentMethod type.
    *
    * <p>One of {@code acss_debit}, {@code affirm}, {@code afterpay_clearpay}, {@code alipay}, {@code
-   * au_becs_debit}, {@code bacs_debit}, {@code bancontact}, {@code boleto}, {@code card}, {@code
-   * card_present}, {@code customer_balance}, {@code eps}, {@code fpx}, {@code giropay}, {@code
-   * grabpay}, {@code ideal}, {@code interac_present}, {@code klarna}, {@code konbini}, {@code
-   * link}, {@code oxxo}, {@code p24}, {@code paynow}, {@code promptpay}, {@code sepa_debit}, {@code
-   * sofort}, {@code us_bank_account}, or {@code wechat_pay}.
+   * au_becs_debit}, {@code bacs_debit}, {@code bancontact}, {@code blik}, {@code boleto}, {@code
+   * card}, {@code card_present}, {@code customer_balance}, {@code eps}, {@code fpx}, {@code
+   * giropay}, {@code grabpay}, {@code ideal}, {@code interac_present}, {@code klarna}, {@code
+   * konbini}, {@code link}, {@code oxxo}, {@code p24}, {@code paynow}, {@code promptpay}, {@code
+   * sepa_debit}, {@code sofort}, {@code us_bank_account}, or {@code wechat_pay}.
    */
   @SerializedName("type")
   String type;
@@ -662,6 +665,11 @@ public class PaymentMethod extends ApiResource implements HasId, MetadataStore<P
     @SerializedName("phone")
     String phone;
   }
+
+  @Getter
+  @Setter
+  @EqualsAndHashCode(callSuper = false)
+  public static class Blik extends StripeObject {}
 
   @Getter
   @Setter

@@ -47,6 +47,13 @@ public class PaymentMethodUpdateParams extends ApiRequestParams {
   @SerializedName("billing_details")
   BillingDetails billingDetails;
 
+  /**
+   * This is a legacy parameter that will be removed in the future. It is a hash that does not
+   * accept any keys.
+   */
+  @SerializedName("blik")
+  Blik blik;
+
   /** If this is a {@code card} PaymentMethod, this hash contains the user's card details. */
   @SerializedName("card")
   Card card;
@@ -100,6 +107,7 @@ public class PaymentMethodUpdateParams extends ApiRequestParams {
       AuBecsDebit auBecsDebit,
       BacsDebit bacsDebit,
       BillingDetails billingDetails,
+      Blik blik,
       Card card,
       List<String> expand,
       Map<String, Object> extraParams,
@@ -112,6 +120,7 @@ public class PaymentMethodUpdateParams extends ApiRequestParams {
     this.auBecsDebit = auBecsDebit;
     this.bacsDebit = bacsDebit;
     this.billingDetails = billingDetails;
+    this.blik = blik;
     this.card = card;
     this.expand = expand;
     this.extraParams = extraParams;
@@ -136,6 +145,8 @@ public class PaymentMethodUpdateParams extends ApiRequestParams {
 
     private BillingDetails billingDetails;
 
+    private Blik blik;
+
     private Card card;
 
     private List<String> expand;
@@ -158,6 +169,7 @@ public class PaymentMethodUpdateParams extends ApiRequestParams {
           this.auBecsDebit,
           this.bacsDebit,
           this.billingDetails,
+          this.blik,
           this.card,
           this.expand,
           this.extraParams,
@@ -209,6 +221,15 @@ public class PaymentMethodUpdateParams extends ApiRequestParams {
      */
     public Builder setBillingDetails(BillingDetails billingDetails) {
       this.billingDetails = billingDetails;
+      return this;
+    }
+
+    /**
+     * This is a legacy parameter that will be removed in the future. It is a hash that does not
+     * accept any keys.
+     */
+    public Builder setBlik(Blik blik) {
+      this.blik = blik;
       return this;
     }
 
@@ -892,6 +913,61 @@ public class PaymentMethodUpdateParams extends ApiRequestParams {
           this.state = state;
           return this;
         }
+      }
+    }
+  }
+
+  @Getter
+  public static class Blik {
+    /**
+     * Map of extra parameters for custom features not available in this client library. The content
+     * in this map is not serialized under this field's {@code @SerializedName} value. Instead, each
+     * key/value pair is serialized as if the key is a root-level field (serialized) name in this
+     * param object. Effectively, this map is flattened to its parent instance.
+     */
+    @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
+    Map<String, Object> extraParams;
+
+    private Blik(Map<String, Object> extraParams) {
+      this.extraParams = extraParams;
+    }
+
+    public static Builder builder() {
+      return new Builder();
+    }
+
+    public static class Builder {
+      private Map<String, Object> extraParams;
+
+      /** Finalize and obtain parameter instance from this builder. */
+      public Blik build() {
+        return new Blik(this.extraParams);
+      }
+
+      /**
+       * Add a key/value pair to `extraParams` map. A map is initialized for the first `put/putAll`
+       * call, and subsequent calls add additional key/value pairs to the original map. See {@link
+       * PaymentMethodUpdateParams.Blik#extraParams} for the field documentation.
+       */
+      public Builder putExtraParam(String key, Object value) {
+        if (this.extraParams == null) {
+          this.extraParams = new HashMap<>();
+        }
+        this.extraParams.put(key, value);
+        return this;
+      }
+
+      /**
+       * Add all map key/value pairs to `extraParams` map. A map is initialized for the first
+       * `put/putAll` call, and subsequent calls add additional key/value pairs to the original map.
+       * See {@link PaymentMethodUpdateParams.Blik#extraParams} for the field documentation.
+       */
+      public Builder putAllExtraParam(Map<String, Object> map) {
+        if (this.extraParams == null) {
+          this.extraParams = new HashMap<>();
+        }
+        this.extraParams.putAll(map);
+        return this;
       }
     }
   }

@@ -97,6 +97,10 @@ public class Price extends ApiResource implements HasId, MetadataStore<Price> {
   @SerializedName("metadata")
   Map<String, String> metadata;
 
+  /** Subscriptions using this price will be migrated to use the new referenced price. */
+  @SerializedName("migrate_to")
+  Plan.MigrateTo migrateTo;
+
   /** A brief description of the price, hidden from customers. */
   @SerializedName("nickname")
   String nickname;

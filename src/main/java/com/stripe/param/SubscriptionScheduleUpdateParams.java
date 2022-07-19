@@ -13,6 +13,16 @@ import lombok.Getter;
 
 @Getter
 public class SubscriptionScheduleUpdateParams extends ApiRequestParams {
+  /**
+   * Configures when the subscription schedule generates prorations for phase transitions. Possible
+   * values are {@code prorate_on_next_phase} or {@code prorate_up_front} with the default being
+   * {@code prorate_on_next_phase}. {@code prorate_on_next_phase} will apply phase changes and
+   * generate prorations at transition time.{@code prorate_up_front} will bill for all phases within
+   * the current billing cycle up front.
+   */
+  @SerializedName("billing_behavior")
+  BillingBehavior billingBehavior;
+
   /** Object representing the subscription schedule's default settings. */
   @SerializedName("default_settings")
   DefaultSettings defaultSettings;
@@ -57,6 +67,10 @@ public class SubscriptionScheduleUpdateParams extends ApiRequestParams {
   @SerializedName("phases")
   List<Phase> phases;
 
+  /** If specified, the invoicing for the given billing cycle iterations will be processed now. */
+  @SerializedName("prebilling")
+  Prebilling prebilling;
+
   /**
    * If the update changes the current phase, indicates whether the changes should be prorated. The
    * default value is {@code create_prorations}.
@@ -65,19 +79,23 @@ public class SubscriptionScheduleUpdateParams extends ApiRequestParams {
   ProrationBehavior prorationBehavior;
 
   private SubscriptionScheduleUpdateParams(
+      BillingBehavior billingBehavior,
       DefaultSettings defaultSettings,
       EndBehavior endBehavior,
       List<String> expand,
       Map<String, Object> extraParams,
       Object metadata,
       List<Phase> phases,
+      Prebilling prebilling,
       ProrationBehavior prorationBehavior) {
+    this.billingBehavior = billingBehavior;
     this.defaultSettings = defaultSettings;
     this.endBehavior = endBehavior;
     this.expand = expand;
     this.extraParams = extraParams;
     this.metadata = metadata;
     this.phases = phases;
+    this.prebilling = prebilling;
     this.prorationBehavior = prorationBehavior;
   }
 
@@ -86,6 +104,8 @@ public class SubscriptionScheduleUpdateParams extends ApiRequestParams {
   }
 
   public static class Builder {
+    private BillingBehavior billingBehavior;
+
     private DefaultSettings defaultSettings;
 
     private EndBehavior endBehavior;
@@ -98,18 +118,34 @@ public class SubscriptionScheduleUpdateParams extends ApiRequestParams {
 
     private List<Phase> phases;
 
+    private Prebilling prebilling;
+
     private ProrationBehavior prorationBehavior;
 
     /** Finalize and obtain parameter instance from this builder. */
     public SubscriptionScheduleUpdateParams build() {
       return new SubscriptionScheduleUpdateParams(
+          this.billingBehavior,
           this.defaultSettings,
           this.endBehavior,
           this.expand,
           this.extraParams,
           this.metadata,
           this.phases,
+          this.prebilling,
           this.prorationBehavior);
+    }
+
+    /**
+     * Configures when the subscription schedule generates prorations for phase transitions.
+     * Possible values are {@code prorate_on_next_phase} or {@code prorate_up_front} with the
+     * default being {@code prorate_on_next_phase}. {@code prorate_on_next_phase} will apply phase
+     * changes and generate prorations at transition time.{@code prorate_up_front} will bill for all
+     * phases within the current billing cycle up front.
+     */
+    public Builder setBillingBehavior(BillingBehavior billingBehavior) {
+      this.billingBehavior = billingBehavior;
+      return this;
     }
 
     /** Object representing the subscription schedule's default settings. */
@@ -254,6 +290,12 @@ public class SubscriptionScheduleUpdateParams extends ApiRequestParams {
         this.phases = new ArrayList<>();
       }
       this.phases.addAll(elements);
+      return this;
+    }
+
+    /** If specified, the invoicing for the given billing cycle iterations will be processed now. */
+    public Builder setPrebilling(Prebilling prebilling) {
+      this.prebilling = prebilling;
       return this;
     }
 
@@ -916,8 +958,8 @@ public class SubscriptionScheduleUpdateParams extends ApiRequestParams {
   @Getter
   public static class Phase {
     /**
-     * A list of prices and quantities that will generate invoice items appended to the next
-     * invoice. You may pass up to 20 items.
+     * A list of prices and quantities that will generate invoice items appended to the next invoice
+     * for this phase. You may pass up to 20 items.
      */
     @SerializedName("add_invoice_items")
     List<AddInvoiceItem> addInvoiceItems;
@@ -993,6 +1035,14 @@ public class SubscriptionScheduleUpdateParams extends ApiRequestParams {
      */
     @SerializedName("default_tax_rates")
     Object defaultTaxRates;
+
+    /**
+     * The coupons to redeem into discounts for the schedule phase. If not specified, inherits the
+     * discount from the subscription's customer. Pass an empty string to avoid inheriting any
+     * discounts.
+     */
+    @SerializedName("discounts")
+    Object discounts;
 
     /**
      * The date at which this phase of the subscription schedule ends. If set, {@code iterations}
@@ -1089,6 +1139,7 @@ public class SubscriptionScheduleUpdateParams extends ApiRequestParams {
         Object currency,
         Object defaultPaymentMethod,
         Object defaultTaxRates,
+        Object discounts,
         Object endDate,
         Map<String, Object> extraParams,
         InvoiceSettings invoiceSettings,
@@ -1110,6 +1161,7 @@ public class SubscriptionScheduleUpdateParams extends ApiRequestParams {
       this.currency = currency;
       this.defaultPaymentMethod = defaultPaymentMethod;
       this.defaultTaxRates = defaultTaxRates;
+      this.discounts = discounts;
       this.endDate = endDate;
       this.extraParams = extraParams;
       this.invoiceSettings = invoiceSettings;
@@ -1148,6 +1200,8 @@ public class SubscriptionScheduleUpdateParams extends ApiRequestParams {
 
       private Object defaultTaxRates;
 
+      private Object discounts;
+
       private Object endDate;
 
       private Map<String, Object> extraParams;
@@ -1183,6 +1237,7 @@ public class SubscriptionScheduleUpdateParams extends ApiRequestParams {
             this.currency,
             this.defaultPaymentMethod,
             this.defaultTaxRates,
+            this.discounts,
             this.endDate,
             this.extraParams,
             this.invoiceSettings,
@@ -1389,6 +1444,54 @@ public class SubscriptionScheduleUpdateParams extends ApiRequestParams {
       }
 
       /**
+       * Add an element to `discounts` list. A list is initialized for the first `add/addAll` call,
+       * and subsequent calls adds additional elements to the original list. See {@link
+       * SubscriptionScheduleUpdateParams.Phase#discounts} for the field documentation.
+       */
+      @SuppressWarnings("unchecked")
+      public Builder addDiscount(Discount element) {
+        if (this.discounts == null || this.discounts instanceof EmptyParam) {
+          this.discounts = new ArrayList<SubscriptionScheduleUpdateParams.Phase.Discount>();
+        }
+        ((List<SubscriptionScheduleUpdateParams.Phase.Discount>) this.discounts).add(element);
+        return this;
+      }
+
+      /**
+       * Add all elements to `discounts` list. A list is initialized for the first `add/addAll`
+       * call, and subsequent calls adds additional elements to the original list. See {@link
+       * SubscriptionScheduleUpdateParams.Phase#discounts} for the field documentation.
+       */
+      @SuppressWarnings("unchecked")
+      public Builder addAllDiscount(List<Discount> elements) {
+        if (this.discounts == null || this.discounts instanceof EmptyParam) {
+          this.discounts = new ArrayList<SubscriptionScheduleUpdateParams.Phase.Discount>();
+        }
+        ((List<SubscriptionScheduleUpdateParams.Phase.Discount>) this.discounts).addAll(elements);
+        return this;
+      }
+
+      /**
+       * The coupons to redeem into discounts for the schedule phase. If not specified, inherits the
+       * discount from the subscription's customer. Pass an empty string to avoid inheriting any
+       * discounts.
+       */
+      public Builder setDiscounts(EmptyParam discounts) {
+        this.discounts = discounts;
+        return this;
+      }
+
+      /**
+       * The coupons to redeem into discounts for the schedule phase. If not specified, inherits the
+       * discount from the subscription's customer. Pass an empty string to avoid inheriting any
+       * discounts.
+       */
+      public Builder setDiscounts(List<Discount> discounts) {
+        this.discounts = discounts;
+        return this;
+      }
+
+      /**
        * The date at which this phase of the subscription schedule ends. If set, {@code iterations}
        * must not be set.
        */
@@ -1568,6 +1671,10 @@ public class SubscriptionScheduleUpdateParams extends ApiRequestParams {
 
     @Getter
     public static class AddInvoiceItem {
+      /** The coupons to redeem into discounts for the item. */
+      @SerializedName("discounts")
+      List<Discount> discounts;
+
       /**
        * Map of extra parameters for custom features not available in this client library. The
        * content in this map is not serialized under this field's {@code @SerializedName} value.
@@ -1600,11 +1707,13 @@ public class SubscriptionScheduleUpdateParams extends ApiRequestParams {
       Object taxRates;
 
       private AddInvoiceItem(
+          List<Discount> discounts,
           Map<String, Object> extraParams,
           Object price,
           PriceData priceData,
           Long quantity,
           Object taxRates) {
+        this.discounts = discounts;
         this.extraParams = extraParams;
         this.price = price;
         this.priceData = priceData;
@@ -1617,6 +1726,8 @@ public class SubscriptionScheduleUpdateParams extends ApiRequestParams {
       }
 
       public static class Builder {
+        private List<Discount> discounts;
+
         private Map<String, Object> extraParams;
 
         private Object price;
@@ -1630,7 +1741,40 @@ public class SubscriptionScheduleUpdateParams extends ApiRequestParams {
         /** Finalize and obtain parameter instance from this builder. */
         public AddInvoiceItem build() {
           return new AddInvoiceItem(
-              this.extraParams, this.price, this.priceData, this.quantity, this.taxRates);
+              this.discounts,
+              this.extraParams,
+              this.price,
+              this.priceData,
+              this.quantity,
+              this.taxRates);
+        }
+
+        /**
+         * Add an element to `discounts` list. A list is initialized for the first `add/addAll`
+         * call, and subsequent calls adds additional elements to the original list. See {@link
+         * SubscriptionScheduleUpdateParams.Phase.AddInvoiceItem#discounts} for the field
+         * documentation.
+         */
+        public Builder addDiscount(Discount element) {
+          if (this.discounts == null) {
+            this.discounts = new ArrayList<>();
+          }
+          this.discounts.add(element);
+          return this;
+        }
+
+        /**
+         * Add all elements to `discounts` list. A list is initialized for the first `add/addAll`
+         * call, and subsequent calls adds additional elements to the original list. See {@link
+         * SubscriptionScheduleUpdateParams.Phase.AddInvoiceItem#discounts} for the field
+         * documentation.
+         */
+        public Builder addAllDiscount(List<Discount> elements) {
+          if (this.discounts == null) {
+            this.discounts = new ArrayList<>();
+          }
+          this.discounts.addAll(elements);
+          return this;
         }
 
         /**
@@ -1734,6 +1878,104 @@ public class SubscriptionScheduleUpdateParams extends ApiRequestParams {
         public Builder setTaxRates(List<String> taxRates) {
           this.taxRates = taxRates;
           return this;
+        }
+      }
+
+      @Getter
+      public static class Discount {
+        /** ID of the coupon to create a new discount for. */
+        @SerializedName("coupon")
+        Object coupon;
+
+        /** ID of an existing discount on the object (or one of its ancestors) to reuse. */
+        @SerializedName("discount")
+        Object discount;
+
+        /**
+         * Map of extra parameters for custom features not available in this client library. The
+         * content in this map is not serialized under this field's {@code @SerializedName} value.
+         * Instead, each key/value pair is serialized as if the key is a root-level field
+         * (serialized) name in this param object. Effectively, this map is flattened to its parent
+         * instance.
+         */
+        @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
+        Map<String, Object> extraParams;
+
+        private Discount(Object coupon, Object discount, Map<String, Object> extraParams) {
+          this.coupon = coupon;
+          this.discount = discount;
+          this.extraParams = extraParams;
+        }
+
+        public static Builder builder() {
+          return new Builder();
+        }
+
+        public static class Builder {
+          private Object coupon;
+
+          private Object discount;
+
+          private Map<String, Object> extraParams;
+
+          /** Finalize and obtain parameter instance from this builder. */
+          public Discount build() {
+            return new Discount(this.coupon, this.discount, this.extraParams);
+          }
+
+          /** ID of the coupon to create a new discount for. */
+          public Builder setCoupon(String coupon) {
+            this.coupon = coupon;
+            return this;
+          }
+
+          /** ID of the coupon to create a new discount for. */
+          public Builder setCoupon(EmptyParam coupon) {
+            this.coupon = coupon;
+            return this;
+          }
+
+          /** ID of an existing discount on the object (or one of its ancestors) to reuse. */
+          public Builder setDiscount(String discount) {
+            this.discount = discount;
+            return this;
+          }
+
+          /** ID of an existing discount on the object (or one of its ancestors) to reuse. */
+          public Builder setDiscount(EmptyParam discount) {
+            this.discount = discount;
+            return this;
+          }
+
+          /**
+           * Add a key/value pair to `extraParams` map. A map is initialized for the first
+           * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
+           * map. See {@link
+           * SubscriptionScheduleUpdateParams.Phase.AddInvoiceItem.Discount#extraParams} for the
+           * field documentation.
+           */
+          public Builder putExtraParam(String key, Object value) {
+            if (this.extraParams == null) {
+              this.extraParams = new HashMap<>();
+            }
+            this.extraParams.put(key, value);
+            return this;
+          }
+
+          /**
+           * Add all map key/value pairs to `extraParams` map. A map is initialized for the first
+           * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
+           * map. See {@link
+           * SubscriptionScheduleUpdateParams.Phase.AddInvoiceItem.Discount#extraParams} for the
+           * field documentation.
+           */
+          public Builder putAllExtraParam(Map<String, Object> map) {
+            if (this.extraParams == null) {
+              this.extraParams = new HashMap<>();
+            }
+            this.extraParams.putAll(map);
+            return this;
+          }
         }
       }
 
@@ -2119,6 +2361,101 @@ public class SubscriptionScheduleUpdateParams extends ApiRequestParams {
     }
 
     @Getter
+    public static class Discount {
+      /** ID of the coupon to create a new discount for. */
+      @SerializedName("coupon")
+      Object coupon;
+
+      /** ID of an existing discount on the object (or one of its ancestors) to reuse. */
+      @SerializedName("discount")
+      Object discount;
+
+      /**
+       * Map of extra parameters for custom features not available in this client library. The
+       * content in this map is not serialized under this field's {@code @SerializedName} value.
+       * Instead, each key/value pair is serialized as if the key is a root-level field (serialized)
+       * name in this param object. Effectively, this map is flattened to its parent instance.
+       */
+      @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
+      Map<String, Object> extraParams;
+
+      private Discount(Object coupon, Object discount, Map<String, Object> extraParams) {
+        this.coupon = coupon;
+        this.discount = discount;
+        this.extraParams = extraParams;
+      }
+
+      public static Builder builder() {
+        return new Builder();
+      }
+
+      public static class Builder {
+        private Object coupon;
+
+        private Object discount;
+
+        private Map<String, Object> extraParams;
+
+        /** Finalize and obtain parameter instance from this builder. */
+        public Discount build() {
+          return new Discount(this.coupon, this.discount, this.extraParams);
+        }
+
+        /** ID of the coupon to create a new discount for. */
+        public Builder setCoupon(String coupon) {
+          this.coupon = coupon;
+          return this;
+        }
+
+        /** ID of the coupon to create a new discount for. */
+        public Builder setCoupon(EmptyParam coupon) {
+          this.coupon = coupon;
+          return this;
+        }
+
+        /** ID of an existing discount on the object (or one of its ancestors) to reuse. */
+        public Builder setDiscount(String discount) {
+          this.discount = discount;
+          return this;
+        }
+
+        /** ID of an existing discount on the object (or one of its ancestors) to reuse. */
+        public Builder setDiscount(EmptyParam discount) {
+          this.discount = discount;
+          return this;
+        }
+
+        /**
+         * Add a key/value pair to `extraParams` map. A map is initialized for the first
+         * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
+         * map. See {@link SubscriptionScheduleUpdateParams.Phase.Discount#extraParams} for the
+         * field documentation.
+         */
+        public Builder putExtraParam(String key, Object value) {
+          if (this.extraParams == null) {
+            this.extraParams = new HashMap<>();
+          }
+          this.extraParams.put(key, value);
+          return this;
+        }
+
+        /**
+         * Add all map key/value pairs to `extraParams` map. A map is initialized for the first
+         * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
+         * map. See {@link SubscriptionScheduleUpdateParams.Phase.Discount#extraParams} for the
+         * field documentation.
+         */
+        public Builder putAllExtraParam(Map<String, Object> map) {
+          if (this.extraParams == null) {
+            this.extraParams = new HashMap<>();
+          }
+          this.extraParams.putAll(map);
+          return this;
+        }
+      }
+    }
+
+    @Getter
     public static class InvoiceSettings {
       /**
        * Number of days within which a customer must pay invoices generated by this subscription
@@ -2206,6 +2543,10 @@ public class SubscriptionScheduleUpdateParams extends ApiRequestParams {
       @SerializedName("billing_thresholds")
       Object billingThresholds;
 
+      /** The coupons to redeem into discounts for the subscription item. */
+      @SerializedName("discounts")
+      Object discounts;
+
       /**
        * Map of extra parameters for custom features not available in this client library. The
        * content in this map is not serialized under this field's {@code @SerializedName} value.
@@ -2251,6 +2592,7 @@ public class SubscriptionScheduleUpdateParams extends ApiRequestParams {
 
       private Item(
           Object billingThresholds,
+          Object discounts,
           Map<String, Object> extraParams,
           Object plan,
           Object price,
@@ -2258,6 +2600,7 @@ public class SubscriptionScheduleUpdateParams extends ApiRequestParams {
           Long quantity,
           Object taxRates) {
         this.billingThresholds = billingThresholds;
+        this.discounts = discounts;
         this.extraParams = extraParams;
         this.plan = plan;
         this.price = price;
@@ -2272,6 +2615,8 @@ public class SubscriptionScheduleUpdateParams extends ApiRequestParams {
 
       public static class Builder {
         private Object billingThresholds;
+
+        private Object discounts;
 
         private Map<String, Object> extraParams;
 
@@ -2289,6 +2634,7 @@ public class SubscriptionScheduleUpdateParams extends ApiRequestParams {
         public Item build() {
           return new Item(
               this.billingThresholds,
+              this.discounts,
               this.extraParams,
               this.plan,
               this.price,
@@ -2314,6 +2660,48 @@ public class SubscriptionScheduleUpdateParams extends ApiRequestParams {
          */
         public Builder setBillingThresholds(EmptyParam billingThresholds) {
           this.billingThresholds = billingThresholds;
+          return this;
+        }
+
+        /**
+         * Add an element to `discounts` list. A list is initialized for the first `add/addAll`
+         * call, and subsequent calls adds additional elements to the original list. See {@link
+         * SubscriptionScheduleUpdateParams.Phase.Item#discounts} for the field documentation.
+         */
+        @SuppressWarnings("unchecked")
+        public Builder addDiscount(Discount element) {
+          if (this.discounts == null || this.discounts instanceof EmptyParam) {
+            this.discounts = new ArrayList<SubscriptionScheduleUpdateParams.Phase.Item.Discount>();
+          }
+          ((List<SubscriptionScheduleUpdateParams.Phase.Item.Discount>) this.discounts)
+              .add(element);
+          return this;
+        }
+
+        /**
+         * Add all elements to `discounts` list. A list is initialized for the first `add/addAll`
+         * call, and subsequent calls adds additional elements to the original list. See {@link
+         * SubscriptionScheduleUpdateParams.Phase.Item#discounts} for the field documentation.
+         */
+        @SuppressWarnings("unchecked")
+        public Builder addAllDiscount(List<Discount> elements) {
+          if (this.discounts == null || this.discounts instanceof EmptyParam) {
+            this.discounts = new ArrayList<SubscriptionScheduleUpdateParams.Phase.Item.Discount>();
+          }
+          ((List<SubscriptionScheduleUpdateParams.Phase.Item.Discount>) this.discounts)
+              .addAll(elements);
+          return this;
+        }
+
+        /** The coupons to redeem into discounts for the subscription item. */
+        public Builder setDiscounts(EmptyParam discounts) {
+          this.discounts = discounts;
+          return this;
+        }
+
+        /** The coupons to redeem into discounts for the subscription item. */
+        public Builder setDiscounts(List<Discount> discounts) {
+          this.discounts = discounts;
           return this;
         }
 
@@ -2514,6 +2902,102 @@ public class SubscriptionScheduleUpdateParams extends ApiRequestParams {
           /** Usage threshold that triggers the subscription to advance to a new billing period. */
           public Builder setUsageGte(Long usageGte) {
             this.usageGte = usageGte;
+            return this;
+          }
+        }
+      }
+
+      @Getter
+      public static class Discount {
+        /** ID of the coupon to create a new discount for. */
+        @SerializedName("coupon")
+        Object coupon;
+
+        /** ID of an existing discount on the object (or one of its ancestors) to reuse. */
+        @SerializedName("discount")
+        Object discount;
+
+        /**
+         * Map of extra parameters for custom features not available in this client library. The
+         * content in this map is not serialized under this field's {@code @SerializedName} value.
+         * Instead, each key/value pair is serialized as if the key is a root-level field
+         * (serialized) name in this param object. Effectively, this map is flattened to its parent
+         * instance.
+         */
+        @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
+        Map<String, Object> extraParams;
+
+        private Discount(Object coupon, Object discount, Map<String, Object> extraParams) {
+          this.coupon = coupon;
+          this.discount = discount;
+          this.extraParams = extraParams;
+        }
+
+        public static Builder builder() {
+          return new Builder();
+        }
+
+        public static class Builder {
+          private Object coupon;
+
+          private Object discount;
+
+          private Map<String, Object> extraParams;
+
+          /** Finalize and obtain parameter instance from this builder. */
+          public Discount build() {
+            return new Discount(this.coupon, this.discount, this.extraParams);
+          }
+
+          /** ID of the coupon to create a new discount for. */
+          public Builder setCoupon(String coupon) {
+            this.coupon = coupon;
+            return this;
+          }
+
+          /** ID of the coupon to create a new discount for. */
+          public Builder setCoupon(EmptyParam coupon) {
+            this.coupon = coupon;
+            return this;
+          }
+
+          /** ID of an existing discount on the object (or one of its ancestors) to reuse. */
+          public Builder setDiscount(String discount) {
+            this.discount = discount;
+            return this;
+          }
+
+          /** ID of an existing discount on the object (or one of its ancestors) to reuse. */
+          public Builder setDiscount(EmptyParam discount) {
+            this.discount = discount;
+            return this;
+          }
+
+          /**
+           * Add a key/value pair to `extraParams` map. A map is initialized for the first
+           * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
+           * map. See {@link SubscriptionScheduleUpdateParams.Phase.Item.Discount#extraParams} for
+           * the field documentation.
+           */
+          public Builder putExtraParam(String key, Object value) {
+            if (this.extraParams == null) {
+              this.extraParams = new HashMap<>();
+            }
+            this.extraParams.put(key, value);
+            return this;
+          }
+
+          /**
+           * Add all map key/value pairs to `extraParams` map. A map is initialized for the first
+           * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
+           * map. See {@link SubscriptionScheduleUpdateParams.Phase.Item.Discount#extraParams} for
+           * the field documentation.
+           */
+          public Builder putAllExtraParam(Map<String, Object> map) {
+            if (this.extraParams == null) {
+              this.extraParams = new HashMap<>();
+            }
+            this.extraParams.putAll(map);
             return this;
           }
         }
@@ -3052,6 +3536,90 @@ public class SubscriptionScheduleUpdateParams extends ApiRequestParams {
       TrialEnd(String value) {
         this.value = value;
       }
+    }
+  }
+
+  @Getter
+  public static class Prebilling {
+    /**
+     * Map of extra parameters for custom features not available in this client library. The content
+     * in this map is not serialized under this field's {@code @SerializedName} value. Instead, each
+     * key/value pair is serialized as if the key is a root-level field (serialized) name in this
+     * param object. Effectively, this map is flattened to its parent instance.
+     */
+    @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
+    Map<String, Object> extraParams;
+
+    /** This is used to determine the number of billing cycles to prebill. */
+    @SerializedName("iterations")
+    Long iterations;
+
+    private Prebilling(Map<String, Object> extraParams, Long iterations) {
+      this.extraParams = extraParams;
+      this.iterations = iterations;
+    }
+
+    public static Builder builder() {
+      return new Builder();
+    }
+
+    public static class Builder {
+      private Map<String, Object> extraParams;
+
+      private Long iterations;
+
+      /** Finalize and obtain parameter instance from this builder. */
+      public Prebilling build() {
+        return new Prebilling(this.extraParams, this.iterations);
+      }
+
+      /**
+       * Add a key/value pair to `extraParams` map. A map is initialized for the first `put/putAll`
+       * call, and subsequent calls add additional key/value pairs to the original map. See {@link
+       * SubscriptionScheduleUpdateParams.Prebilling#extraParams} for the field documentation.
+       */
+      public Builder putExtraParam(String key, Object value) {
+        if (this.extraParams == null) {
+          this.extraParams = new HashMap<>();
+        }
+        this.extraParams.put(key, value);
+        return this;
+      }
+
+      /**
+       * Add all map key/value pairs to `extraParams` map. A map is initialized for the first
+       * `put/putAll` call, and subsequent calls add additional key/value pairs to the original map.
+       * See {@link SubscriptionScheduleUpdateParams.Prebilling#extraParams} for the field
+       * documentation.
+       */
+      public Builder putAllExtraParam(Map<String, Object> map) {
+        if (this.extraParams == null) {
+          this.extraParams = new HashMap<>();
+        }
+        this.extraParams.putAll(map);
+        return this;
+      }
+
+      /** This is used to determine the number of billing cycles to prebill. */
+      public Builder setIterations(Long iterations) {
+        this.iterations = iterations;
+        return this;
+      }
+    }
+  }
+
+  public enum BillingBehavior implements ApiRequestParams.EnumParam {
+    @SerializedName("prorate_on_next_phase")
+    PRORATE_ON_NEXT_PHASE("prorate_on_next_phase"),
+
+    @SerializedName("prorate_up_front")
+    PRORATE_UP_FRONT("prorate_up_front");
+
+    @Getter(onMethod_ = {@Override})
+    private final String value;
+
+    BillingBehavior(String value) {
+      this.value = value;
     }
   }
 

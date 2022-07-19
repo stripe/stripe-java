@@ -15,6 +15,10 @@ public class SessionListParams extends ApiRequestParams {
   @SerializedName("customer")
   String customer;
 
+  /** Only return the Checkout Sessions for the Customer details specified. */
+  @SerializedName("customer_details")
+  CustomerDetails customerDetails;
+
   /**
    * A cursor for use in pagination. {@code ending_before} is an object ID that defines your place
    * in the list. For instance, if you make a list request and receive 100 objects, starting with
@@ -63,6 +67,7 @@ public class SessionListParams extends ApiRequestParams {
 
   private SessionListParams(
       String customer,
+      CustomerDetails customerDetails,
       String endingBefore,
       List<String> expand,
       Map<String, Object> extraParams,
@@ -71,6 +76,7 @@ public class SessionListParams extends ApiRequestParams {
       String startingAfter,
       String subscription) {
     this.customer = customer;
+    this.customerDetails = customerDetails;
     this.endingBefore = endingBefore;
     this.expand = expand;
     this.extraParams = extraParams;
@@ -86,6 +92,8 @@ public class SessionListParams extends ApiRequestParams {
 
   public static class Builder {
     private String customer;
+
+    private CustomerDetails customerDetails;
 
     private String endingBefore;
 
@@ -105,6 +113,7 @@ public class SessionListParams extends ApiRequestParams {
     public SessionListParams build() {
       return new SessionListParams(
           this.customer,
+          this.customerDetails,
           this.endingBefore,
           this.expand,
           this.extraParams,
@@ -117,6 +126,12 @@ public class SessionListParams extends ApiRequestParams {
     /** Only return the Checkout Sessions for the Customer specified. */
     public Builder setCustomer(String customer) {
       this.customer = customer;
+      return this;
+    }
+
+    /** Only return the Checkout Sessions for the Customer details specified. */
+    public Builder setCustomerDetails(CustomerDetails customerDetails) {
+      this.customerDetails = customerDetails;
       return this;
     }
 
@@ -213,6 +228,74 @@ public class SessionListParams extends ApiRequestParams {
     public Builder setSubscription(String subscription) {
       this.subscription = subscription;
       return this;
+    }
+  }
+
+  @Getter
+  public static class CustomerDetails {
+    /** Customer's email address. */
+    @SerializedName("email")
+    String email;
+
+    /**
+     * Map of extra parameters for custom features not available in this client library. The content
+     * in this map is not serialized under this field's {@code @SerializedName} value. Instead, each
+     * key/value pair is serialized as if the key is a root-level field (serialized) name in this
+     * param object. Effectively, this map is flattened to its parent instance.
+     */
+    @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
+    Map<String, Object> extraParams;
+
+    private CustomerDetails(String email, Map<String, Object> extraParams) {
+      this.email = email;
+      this.extraParams = extraParams;
+    }
+
+    public static Builder builder() {
+      return new Builder();
+    }
+
+    public static class Builder {
+      private String email;
+
+      private Map<String, Object> extraParams;
+
+      /** Finalize and obtain parameter instance from this builder. */
+      public CustomerDetails build() {
+        return new CustomerDetails(this.email, this.extraParams);
+      }
+
+      /** Customer's email address. */
+      public Builder setEmail(String email) {
+        this.email = email;
+        return this;
+      }
+
+      /**
+       * Add a key/value pair to `extraParams` map. A map is initialized for the first `put/putAll`
+       * call, and subsequent calls add additional key/value pairs to the original map. See {@link
+       * SessionListParams.CustomerDetails#extraParams} for the field documentation.
+       */
+      public Builder putExtraParam(String key, Object value) {
+        if (this.extraParams == null) {
+          this.extraParams = new HashMap<>();
+        }
+        this.extraParams.put(key, value);
+        return this;
+      }
+
+      /**
+       * Add all map key/value pairs to `extraParams` map. A map is initialized for the first
+       * `put/putAll` call, and subsequent calls add additional key/value pairs to the original map.
+       * See {@link SessionListParams.CustomerDetails#extraParams} for the field documentation.
+       */
+      public Builder putAllExtraParam(Map<String, Object> map) {
+        if (this.extraParams == null) {
+          this.extraParams = new HashMap<>();
+        }
+        this.extraParams.putAll(map);
+        return this;
+      }
     }
   }
 }
