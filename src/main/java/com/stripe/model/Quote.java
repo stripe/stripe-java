@@ -943,6 +943,193 @@ public class Quote extends ApiResource implements HasId, MetadataStore<Quote> {
   @Getter
   @Setter
   @EqualsAndHashCode(callSuper = false)
+  public static class QuotePhaseConfiguration extends StripeObject implements HasId {
+    /** Total before any discounts or taxes are applied. */
+    @SerializedName("amount_subtotal")
+    Long amountSubtotal;
+
+    /** Total after discounts and taxes are applied. */
+    @SerializedName("amount_total")
+    Long amountTotal;
+
+    /**
+     * If set to {@code new}, the billing_cycle_anchor of the subscription is set to the start of
+     * the phase when entering the phase. If unset, then the billing cycle anchor is automatically
+     * modified as needed when entering the phase. For more information, see the billing cycle <a
+     * href="https://stripe.com/docs/billing/subscriptions/billing-cycle">documentation</a>.
+     *
+     * <p>Equal to {@code reset}.
+     */
+    @SerializedName("billing_cycle_anchor")
+    String billingCycleAnchor;
+
+    /**
+     * Either {@code charge_automatically}, or {@code send_invoice}. When charging automatically,
+     * Stripe will attempt to pay the underlying subscription at the end of each billing cycle using
+     * the default source attached to the customer. When sending an invoice, Stripe will email your
+     * customer an invoice with payment instructions.
+     *
+     * <p>One of {@code charge_automatically}, or {@code send_invoice}.
+     */
+    @SerializedName("collection_method")
+    String collectionMethod;
+
+    /** The default tax rates to apply to the subscription during this phase of the quote. */
+    @SerializedName("default_tax_rates")
+    List<ExpandableField<TaxRate>> defaultTaxRates;
+
+    /**
+     * The stackable discounts that will be applied to the subscription on this phase. Subscription
+     * item discounts are applied before subscription discounts.
+     */
+    @SerializedName("discounts")
+    List<ExpandableField<Discount>> discounts;
+
+    /** The end of this phase of the quote. */
+    @SerializedName("end_date")
+    Long endDate;
+
+    /** Unique identifier for the object. */
+    @Getter(onMethod_ = {@Override})
+    @SerializedName("id")
+    String id;
+
+    /** The invoice settings applicable during this phase. */
+    @SerializedName("invoice_settings")
+    SubscriptionSchedule.InvoiceSettings invoiceSettings;
+
+    /**
+     * Integer representing the multiplier applied to the price interval. For example, {@code
+     * iterations=2} applied to a price with {@code interval=month} and {@code interval_count=3}
+     * results in a phase of duration {@code 2 * 3 months = 6 months}.
+     */
+    @SerializedName("iterations")
+    Long iterations;
+
+    /** A list of items the customer is being quoted for. */
+    @SerializedName("line_items")
+    LineItemCollection lineItems;
+
+    /**
+     * String representing the object's type. Objects of the same type share the same value.
+     *
+     * <p>Equal to {@code quote_phase}.
+     */
+    @SerializedName("object")
+    String object;
+
+    /**
+     * If the quote will prorate when transitioning to this phase. Possible values are {@code
+     * create_prorations} and {@code none}.
+     *
+     * <p>One of {@code always_invoice}, {@code create_prorations}, or {@code none}.
+     */
+    @SerializedName("proration_behavior")
+    String prorationBehavior;
+
+    @SerializedName("total_details")
+    TotalDetails totalDetails;
+
+    /**
+     * If set to true the entire phase is counted as a trial and the customer will not be charged
+     * for any recurring fees.
+     */
+    @SerializedName("trial")
+    Boolean trial;
+
+    /** When the trial ends within the phase. */
+    @SerializedName("trial_end")
+    Long trialEnd;
+
+    /** Get IDs of expandable {@code defaultTaxRates} object list. */
+    public List<String> getDefaultTaxRates() {
+      return (this.defaultTaxRates != null)
+          ? this.defaultTaxRates.stream().map(x -> x.getId()).collect(Collectors.toList())
+          : null;
+    }
+
+    public void setDefaultTaxRates(List<String> ids) {
+      if (ids == null) {
+        this.defaultTaxRates = null;
+        return;
+      }
+      if (this.defaultTaxRates != null
+          && this.defaultTaxRates.stream()
+              .map(x -> x.getId())
+              .collect(Collectors.toList())
+              .equals(ids)) {
+        // noop if the ids are equal to what are already present
+        return;
+      }
+      this.defaultTaxRates =
+          (ids != null)
+              ? ids.stream()
+                  .map(id -> new ExpandableField<TaxRate>(id, null))
+                  .collect(Collectors.toList())
+              : null;
+    }
+
+    /** Get expanded {@code defaultTaxRates}. */
+    public List<TaxRate> getDefaultTaxRateObjects() {
+      return (this.defaultTaxRates != null)
+          ? this.defaultTaxRates.stream().map(x -> x.getExpanded()).collect(Collectors.toList())
+          : null;
+    }
+
+    public void setDefaultTaxRateObjects(List<TaxRate> objs) {
+      this.defaultTaxRates =
+          objs != null
+              ? objs.stream()
+                  .map(x -> new ExpandableField<TaxRate>(x.getId(), x))
+                  .collect(Collectors.toList())
+              : null;
+    }
+
+    /** Get IDs of expandable {@code discounts} object list. */
+    public List<String> getDiscounts() {
+      return (this.discounts != null)
+          ? this.discounts.stream().map(x -> x.getId()).collect(Collectors.toList())
+          : null;
+    }
+
+    public void setDiscounts(List<String> ids) {
+      if (ids == null) {
+        this.discounts = null;
+        return;
+      }
+      if (this.discounts != null
+          && this.discounts.stream().map(x -> x.getId()).collect(Collectors.toList()).equals(ids)) {
+        // noop if the ids are equal to what are already present
+        return;
+      }
+      this.discounts =
+          (ids != null)
+              ? ids.stream()
+                  .map(id -> new ExpandableField<Discount>(id, null))
+                  .collect(Collectors.toList())
+              : null;
+    }
+
+    /** Get expanded {@code discounts}. */
+    public List<Discount> getDiscountObjects() {
+      return (this.discounts != null)
+          ? this.discounts.stream().map(x -> x.getExpanded()).collect(Collectors.toList())
+          : null;
+    }
+
+    public void setDiscountObjects(List<Discount> objs) {
+      this.discounts =
+          objs != null
+              ? objs.stream()
+                  .map(x -> new ExpandableField<Discount>(x.getId(), x))
+                  .collect(Collectors.toList())
+              : null;
+    }
+  }
+
+  @Getter
+  @Setter
+  @EqualsAndHashCode(callSuper = false)
   public static class Recurring extends StripeObject {
     /** Total before any discounts or taxes are applied. */
     @SerializedName("amount_subtotal")
@@ -993,6 +1180,26 @@ public class Quote extends ApiResource implements HasId, MetadataStore<Quote> {
   @EqualsAndHashCode(callSuper = false)
   public static class SubscriptionData extends StripeObject {
     /**
+     * Configures when the subscription schedule generates prorations for phase transitions.
+     * Possible values are {@code prorate_on_next_phase} or {@code prorate_up_front} with the
+     * default being {@code prorate_on_next_phase}. {@code prorate_on_next_phase} will apply phase
+     * changes and generate prorations at transition time.{@code prorate_up_front} will bill for all
+     * phases within the current billing cycle up front.
+     *
+     * <p>One of {@code prorate_on_next_phase}, or {@code prorate_up_front}.
+     */
+    @SerializedName("billing_behavior")
+    String billingBehavior;
+
+    /**
+     * Whether the subscription will always start a new billing period when the quote is accepted.
+     *
+     * <p>Equal to {@code reset}.
+     */
+    @SerializedName("billing_cycle_anchor")
+    String billingCycleAnchor;
+
+    /**
      * When creating a new subscription, the date of which the subscription schedule will start
      * after the quote is accepted. This date is ignored if it is in the past when the quote is
      * accepted. Measured in seconds since the Unix epoch.
@@ -1001,11 +1208,95 @@ public class Quote extends ApiResource implements HasId, MetadataStore<Quote> {
     Long effectiveDate;
 
     /**
+     * Behavior of the subscription schedule and underlying subscription when it ends. Possible
+     * values are {@code release} and {@code cancel}.
+     *
+     * <p>One of {@code cancel}, or {@code release}.
+     */
+    @SerializedName("end_behavior")
+    String endBehavior;
+
+    /** The id of the subscription schedule that will be updated when the quote is accepted. */
+    @SerializedName("from_schedule")
+    @Getter(lombok.AccessLevel.NONE)
+    @Setter(lombok.AccessLevel.NONE)
+    ExpandableField<SubscriptionSchedule> fromSchedule;
+
+    /** The id of the subscription that will be updated when the quote is accepted. */
+    @SerializedName("from_subscription")
+    @Getter(lombok.AccessLevel.NONE)
+    @Setter(lombok.AccessLevel.NONE)
+    ExpandableField<Subscription> fromSubscription;
+
+    /**
+     * If specified, the invoicing for the given billing cycle iterations will be processed when the
+     * quote is accepted. Cannot be used with {@code effective_date}.
+     */
+    @SerializedName("prebilling")
+    Prebilling prebilling;
+
+    /**
+     * Determines how to handle <a
+     * href="https://stripe.com/docs/subscriptions/billing-cycle#prorations">prorations</a> when the
+     * quote is accepted.
+     *
+     * <p>One of {@code always_invoice}, {@code create_prorations}, or {@code none}.
+     */
+    @SerializedName("proration_behavior")
+    String prorationBehavior;
+
+    /**
      * Integer representing the number of trial period days before the customer is charged for the
      * first time.
      */
     @SerializedName("trial_period_days")
     Long trialPeriodDays;
+
+    /** Get ID of expandable {@code fromSchedule} object. */
+    public String getFromSchedule() {
+      return (this.fromSchedule != null) ? this.fromSchedule.getId() : null;
+    }
+
+    public void setFromSchedule(String id) {
+      this.fromSchedule = ApiResource.setExpandableFieldId(id, this.fromSchedule);
+    }
+
+    /** Get expanded {@code fromSchedule}. */
+    public SubscriptionSchedule getFromScheduleObject() {
+      return (this.fromSchedule != null) ? this.fromSchedule.getExpanded() : null;
+    }
+
+    public void setFromScheduleObject(SubscriptionSchedule expandableObject) {
+      this.fromSchedule =
+          new ExpandableField<SubscriptionSchedule>(expandableObject.getId(), expandableObject);
+    }
+
+    /** Get ID of expandable {@code fromSubscription} object. */
+    public String getFromSubscription() {
+      return (this.fromSubscription != null) ? this.fromSubscription.getId() : null;
+    }
+
+    public void setFromSubscription(String id) {
+      this.fromSubscription = ApiResource.setExpandableFieldId(id, this.fromSubscription);
+    }
+
+    /** Get expanded {@code fromSubscription}. */
+    public Subscription getFromSubscriptionObject() {
+      return (this.fromSubscription != null) ? this.fromSubscription.getExpanded() : null;
+    }
+
+    public void setFromSubscriptionObject(Subscription expandableObject) {
+      this.fromSubscription =
+          new ExpandableField<Subscription>(expandableObject.getId(), expandableObject);
+    }
+
+    @Getter
+    @Setter
+    @EqualsAndHashCode(callSuper = false)
+    public static class Prebilling extends StripeObject {
+      @SerializedName("iterations")
+      Long iterations;
+    }
   }
 
   @Getter

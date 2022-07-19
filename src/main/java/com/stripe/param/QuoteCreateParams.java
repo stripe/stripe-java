@@ -3,6 +3,7 @@ package com.stripe.param;
 
 import com.google.gson.annotations.SerializedName;
 import com.stripe.net.ApiRequestParams;
+import com.stripe.net.ApiRequestParams.EnumParam;
 import com.stripe.param.common.EmptyParam;
 import java.math.BigDecimal;
 import java.util.ArrayList;
@@ -138,6 +139,13 @@ public class QuoteCreateParams extends ApiRequestParams {
   Object onBehalfOf;
 
   /**
+   * List representing phases of the Quote. Each phase can be customized to have different
+   * durations, prices, and coupons.
+   */
+  @SerializedName("phases")
+  List<Phase> phases;
+
+  /**
    * When creating a subscription or subscription schedule, the specified configuration data will be
    * used. There must be at least one line item with a recurring price for a subscription or
    * subscription schedule to be created. A subscription schedule is created if {@code
@@ -174,6 +182,7 @@ public class QuoteCreateParams extends ApiRequestParams {
       List<LineItem> lineItems,
       Map<String, String> metadata,
       Object onBehalfOf,
+      List<Phase> phases,
       SubscriptionData subscriptionData,
       String testClock,
       Object transferData) {
@@ -195,6 +204,7 @@ public class QuoteCreateParams extends ApiRequestParams {
     this.lineItems = lineItems;
     this.metadata = metadata;
     this.onBehalfOf = onBehalfOf;
+    this.phases = phases;
     this.subscriptionData = subscriptionData;
     this.testClock = testClock;
     this.transferData = transferData;
@@ -241,6 +251,8 @@ public class QuoteCreateParams extends ApiRequestParams {
 
     private Object onBehalfOf;
 
+    private List<Phase> phases;
+
     private SubscriptionData subscriptionData;
 
     private String testClock;
@@ -268,6 +280,7 @@ public class QuoteCreateParams extends ApiRequestParams {
           this.lineItems,
           this.metadata,
           this.onBehalfOf,
+          this.phases,
           this.subscriptionData,
           this.testClock,
           this.transferData);
@@ -595,6 +608,32 @@ public class QuoteCreateParams extends ApiRequestParams {
     /** The account on behalf of which to charge. */
     public Builder setOnBehalfOf(EmptyParam onBehalfOf) {
       this.onBehalfOf = onBehalfOf;
+      return this;
+    }
+
+    /**
+     * Add an element to `phases` list. A list is initialized for the first `add/addAll` call, and
+     * subsequent calls adds additional elements to the original list. See {@link
+     * QuoteCreateParams#phases} for the field documentation.
+     */
+    public Builder addPhase(Phase element) {
+      if (this.phases == null) {
+        this.phases = new ArrayList<>();
+      }
+      this.phases.add(element);
+      return this;
+    }
+
+    /**
+     * Add all elements to `phases` list. A list is initialized for the first `add/addAll` call, and
+     * subsequent calls adds additional elements to the original list. See {@link
+     * QuoteCreateParams#phases} for the field documentation.
+     */
+    public Builder addAllPhase(List<Phase> elements) {
+      if (this.phases == null) {
+        this.phases = new ArrayList<>();
+      }
+      this.phases.addAll(elements);
       return this;
     }
 
@@ -941,6 +980,10 @@ public class QuoteCreateParams extends ApiRequestParams {
 
   @Getter
   public static class LineItem {
+    /** The discounts applied to this line item. */
+    @SerializedName("discounts")
+    Object discounts;
+
     /**
      * Map of extra parameters for custom features not available in this client library. The content
      * in this map is not serialized under this field's {@code @SerializedName} value. Instead, each
@@ -973,11 +1016,13 @@ public class QuoteCreateParams extends ApiRequestParams {
     Object taxRates;
 
     private LineItem(
+        Object discounts,
         Map<String, Object> extraParams,
         String price,
         PriceData priceData,
         Long quantity,
         Object taxRates) {
+      this.discounts = discounts;
       this.extraParams = extraParams;
       this.price = price;
       this.priceData = priceData;
@@ -990,6 +1035,8 @@ public class QuoteCreateParams extends ApiRequestParams {
     }
 
     public static class Builder {
+      private Object discounts;
+
       private Map<String, Object> extraParams;
 
       private String price;
@@ -1003,7 +1050,52 @@ public class QuoteCreateParams extends ApiRequestParams {
       /** Finalize and obtain parameter instance from this builder. */
       public LineItem build() {
         return new LineItem(
-            this.extraParams, this.price, this.priceData, this.quantity, this.taxRates);
+            this.discounts,
+            this.extraParams,
+            this.price,
+            this.priceData,
+            this.quantity,
+            this.taxRates);
+      }
+
+      /**
+       * Add an element to `discounts` list. A list is initialized for the first `add/addAll` call,
+       * and subsequent calls adds additional elements to the original list. See {@link
+       * QuoteCreateParams.LineItem#discounts} for the field documentation.
+       */
+      @SuppressWarnings("unchecked")
+      public Builder addDiscount(Discount element) {
+        if (this.discounts == null || this.discounts instanceof EmptyParam) {
+          this.discounts = new ArrayList<QuoteCreateParams.LineItem.Discount>();
+        }
+        ((List<QuoteCreateParams.LineItem.Discount>) this.discounts).add(element);
+        return this;
+      }
+
+      /**
+       * Add all elements to `discounts` list. A list is initialized for the first `add/addAll`
+       * call, and subsequent calls adds additional elements to the original list. See {@link
+       * QuoteCreateParams.LineItem#discounts} for the field documentation.
+       */
+      @SuppressWarnings("unchecked")
+      public Builder addAllDiscount(List<Discount> elements) {
+        if (this.discounts == null || this.discounts instanceof EmptyParam) {
+          this.discounts = new ArrayList<QuoteCreateParams.LineItem.Discount>();
+        }
+        ((List<QuoteCreateParams.LineItem.Discount>) this.discounts).addAll(elements);
+        return this;
+      }
+
+      /** The discounts applied to this line item. */
+      public Builder setDiscounts(EmptyParam discounts) {
+        this.discounts = discounts;
+        return this;
+      }
+
+      /** The discounts applied to this line item. */
+      public Builder setDiscounts(List<Discount> discounts) {
+        this.discounts = discounts;
+        return this;
       }
 
       /**
@@ -1097,6 +1189,89 @@ public class QuoteCreateParams extends ApiRequestParams {
       public Builder setTaxRates(List<String> taxRates) {
         this.taxRates = taxRates;
         return this;
+      }
+    }
+
+    @Getter
+    public static class Discount {
+      /** ID of the coupon to create a new discount for. */
+      @SerializedName("coupon")
+      String coupon;
+
+      /** ID of an existing discount on the object (or one of its ancestors) to reuse. */
+      @SerializedName("discount")
+      String discount;
+
+      /**
+       * Map of extra parameters for custom features not available in this client library. The
+       * content in this map is not serialized under this field's {@code @SerializedName} value.
+       * Instead, each key/value pair is serialized as if the key is a root-level field (serialized)
+       * name in this param object. Effectively, this map is flattened to its parent instance.
+       */
+      @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
+      Map<String, Object> extraParams;
+
+      private Discount(String coupon, String discount, Map<String, Object> extraParams) {
+        this.coupon = coupon;
+        this.discount = discount;
+        this.extraParams = extraParams;
+      }
+
+      public static Builder builder() {
+        return new Builder();
+      }
+
+      public static class Builder {
+        private String coupon;
+
+        private String discount;
+
+        private Map<String, Object> extraParams;
+
+        /** Finalize and obtain parameter instance from this builder. */
+        public Discount build() {
+          return new Discount(this.coupon, this.discount, this.extraParams);
+        }
+
+        /** ID of the coupon to create a new discount for. */
+        public Builder setCoupon(String coupon) {
+          this.coupon = coupon;
+          return this;
+        }
+
+        /** ID of an existing discount on the object (or one of its ancestors) to reuse. */
+        public Builder setDiscount(String discount) {
+          this.discount = discount;
+          return this;
+        }
+
+        /**
+         * Add a key/value pair to `extraParams` map. A map is initialized for the first
+         * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
+         * map. See {@link QuoteCreateParams.LineItem.Discount#extraParams} for the field
+         * documentation.
+         */
+        public Builder putExtraParam(String key, Object value) {
+          if (this.extraParams == null) {
+            this.extraParams = new HashMap<>();
+          }
+          this.extraParams.put(key, value);
+          return this;
+        }
+
+        /**
+         * Add all map key/value pairs to `extraParams` map. A map is initialized for the first
+         * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
+         * map. See {@link QuoteCreateParams.LineItem.Discount#extraParams} for the field
+         * documentation.
+         */
+        public Builder putAllExtraParam(Map<String, Object> map) {
+          if (this.extraParams == null) {
+            this.extraParams = new HashMap<>();
+          }
+          this.extraParams.putAll(map);
+          return this;
+        }
       }
     }
 
@@ -1422,7 +1597,1252 @@ public class QuoteCreateParams extends ApiRequestParams {
   }
 
   @Getter
+  public static class Phase {
+    /**
+     * When specified as {@code reset}, the subscription will always start a new billing period when
+     * the quote is accepted.
+     */
+    @SerializedName("billing_cycle_anchor")
+    BillingCycleAnchor billingCycleAnchor;
+
+    /**
+     * Either {@code charge_automatically}, or {@code send_invoice}. When charging automatically,
+     * Stripe will attempt to pay the underlying subscription at the end of each billing cycle using
+     * the default source attached to the customer. When sending an invoice, Stripe will email your
+     * customer an invoice with payment instructions. Defaults to {@code charge_automatically} on
+     * creation.
+     */
+    @SerializedName("collection_method")
+    CollectionMethod collectionMethod;
+
+    /**
+     * A list of <a href="https://stripe.com/docs/api/tax_rates">Tax Rate</a> ids. These Tax Rates
+     * will set the Subscription's <a
+     * href="https://stripe.com/docs/api/subscriptions/create#create_subscription-default_tax_rates">{@code
+     * default_tax_rates}</a>, which means they will be the Invoice's <a
+     * href="https://stripe.com/docs/api/invoices/create#create_invoice-default_tax_rates">{@code
+     * default_tax_rates}</a> for any Invoices issued by the Subscription during this Phase.
+     */
+    @SerializedName("default_tax_rates")
+    Object defaultTaxRates;
+
+    /**
+     * The coupons to redeem into discounts for the schedule phase. If not specified, inherits the
+     * discount from the subscription's customer. Pass an empty string to avoid inheriting any
+     * discounts.
+     */
+    @SerializedName("discounts")
+    Object discounts;
+
+    /**
+     * The date at which this phase of the quote ends. If set, {@code iterations} must not be set.
+     */
+    @SerializedName("end_date")
+    Long endDate;
+
+    /**
+     * Map of extra parameters for custom features not available in this client library. The content
+     * in this map is not serialized under this field's {@code @SerializedName} value. Instead, each
+     * key/value pair is serialized as if the key is a root-level field (serialized) name in this
+     * param object. Effectively, this map is flattened to its parent instance.
+     */
+    @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
+    Map<String, Object> extraParams;
+
+    /** All invoices will be billed using the specified settings. */
+    @SerializedName("invoice_settings")
+    InvoiceSettings invoiceSettings;
+
+    /**
+     * Integer representing the multiplier applied to the price interval. For example, {@code
+     * iterations=2} applied to a price with {@code interval=month} and {@code interval_count=3}
+     * results in a phase of duration {@code 2 * 3 months = 6 months}. If set, {@code end_date} must
+     * not be set.
+     */
+    @SerializedName("iterations")
+    Long iterations;
+
+    /**
+     * A list of line items the customer is being quoted for within this phase. Each line item
+     * includes information about the product, the quantity, and the resulting cost.
+     */
+    @SerializedName("line_items")
+    List<LineItem> lineItems;
+
+    /**
+     * If the update changes the current phase, indicates whether the changes should be prorated.
+     * The default value is {@code create_prorations}.
+     */
+    @SerializedName("proration_behavior")
+    ProrationBehavior prorationBehavior;
+
+    /**
+     * If set to true the entire phase is counted as a trial and the customer will not be charged
+     * for any fees.
+     */
+    @SerializedName("trial")
+    Boolean trial;
+
+    /**
+     * Sets the phase to trialing from the start date to this date. Must be before the phase end
+     * date, can not be combined with {@code trial}.
+     */
+    @SerializedName("trial_end")
+    Long trialEnd;
+
+    private Phase(
+        BillingCycleAnchor billingCycleAnchor,
+        CollectionMethod collectionMethod,
+        Object defaultTaxRates,
+        Object discounts,
+        Long endDate,
+        Map<String, Object> extraParams,
+        InvoiceSettings invoiceSettings,
+        Long iterations,
+        List<LineItem> lineItems,
+        ProrationBehavior prorationBehavior,
+        Boolean trial,
+        Long trialEnd) {
+      this.billingCycleAnchor = billingCycleAnchor;
+      this.collectionMethod = collectionMethod;
+      this.defaultTaxRates = defaultTaxRates;
+      this.discounts = discounts;
+      this.endDate = endDate;
+      this.extraParams = extraParams;
+      this.invoiceSettings = invoiceSettings;
+      this.iterations = iterations;
+      this.lineItems = lineItems;
+      this.prorationBehavior = prorationBehavior;
+      this.trial = trial;
+      this.trialEnd = trialEnd;
+    }
+
+    public static Builder builder() {
+      return new Builder();
+    }
+
+    public static class Builder {
+      private BillingCycleAnchor billingCycleAnchor;
+
+      private CollectionMethod collectionMethod;
+
+      private Object defaultTaxRates;
+
+      private Object discounts;
+
+      private Long endDate;
+
+      private Map<String, Object> extraParams;
+
+      private InvoiceSettings invoiceSettings;
+
+      private Long iterations;
+
+      private List<LineItem> lineItems;
+
+      private ProrationBehavior prorationBehavior;
+
+      private Boolean trial;
+
+      private Long trialEnd;
+
+      /** Finalize and obtain parameter instance from this builder. */
+      public Phase build() {
+        return new Phase(
+            this.billingCycleAnchor,
+            this.collectionMethod,
+            this.defaultTaxRates,
+            this.discounts,
+            this.endDate,
+            this.extraParams,
+            this.invoiceSettings,
+            this.iterations,
+            this.lineItems,
+            this.prorationBehavior,
+            this.trial,
+            this.trialEnd);
+      }
+
+      /**
+       * When specified as {@code reset}, the subscription will always start a new billing period
+       * when the quote is accepted.
+       */
+      public Builder setBillingCycleAnchor(BillingCycleAnchor billingCycleAnchor) {
+        this.billingCycleAnchor = billingCycleAnchor;
+        return this;
+      }
+
+      /**
+       * Either {@code charge_automatically}, or {@code send_invoice}. When charging automatically,
+       * Stripe will attempt to pay the underlying subscription at the end of each billing cycle
+       * using the default source attached to the customer. When sending an invoice, Stripe will
+       * email your customer an invoice with payment instructions. Defaults to {@code
+       * charge_automatically} on creation.
+       */
+      public Builder setCollectionMethod(CollectionMethod collectionMethod) {
+        this.collectionMethod = collectionMethod;
+        return this;
+      }
+
+      /**
+       * Add an element to `defaultTaxRates` list. A list is initialized for the first `add/addAll`
+       * call, and subsequent calls adds additional elements to the original list. See {@link
+       * QuoteCreateParams.Phase#defaultTaxRates} for the field documentation.
+       */
+      @SuppressWarnings("unchecked")
+      public Builder addDefaultTaxRate(String element) {
+        if (this.defaultTaxRates == null || this.defaultTaxRates instanceof EmptyParam) {
+          this.defaultTaxRates = new ArrayList<String>();
+        }
+        ((List<String>) this.defaultTaxRates).add(element);
+        return this;
+      }
+
+      /**
+       * Add all elements to `defaultTaxRates` list. A list is initialized for the first
+       * `add/addAll` call, and subsequent calls adds additional elements to the original list. See
+       * {@link QuoteCreateParams.Phase#defaultTaxRates} for the field documentation.
+       */
+      @SuppressWarnings("unchecked")
+      public Builder addAllDefaultTaxRate(List<String> elements) {
+        if (this.defaultTaxRates == null || this.defaultTaxRates instanceof EmptyParam) {
+          this.defaultTaxRates = new ArrayList<String>();
+        }
+        ((List<String>) this.defaultTaxRates).addAll(elements);
+        return this;
+      }
+
+      /**
+       * A list of <a href="https://stripe.com/docs/api/tax_rates">Tax Rate</a> ids. These Tax Rates
+       * will set the Subscription's <a
+       * href="https://stripe.com/docs/api/subscriptions/create#create_subscription-default_tax_rates">{@code
+       * default_tax_rates}</a>, which means they will be the Invoice's <a
+       * href="https://stripe.com/docs/api/invoices/create#create_invoice-default_tax_rates">{@code
+       * default_tax_rates}</a> for any Invoices issued by the Subscription during this Phase.
+       */
+      public Builder setDefaultTaxRates(EmptyParam defaultTaxRates) {
+        this.defaultTaxRates = defaultTaxRates;
+        return this;
+      }
+
+      /**
+       * A list of <a href="https://stripe.com/docs/api/tax_rates">Tax Rate</a> ids. These Tax Rates
+       * will set the Subscription's <a
+       * href="https://stripe.com/docs/api/subscriptions/create#create_subscription-default_tax_rates">{@code
+       * default_tax_rates}</a>, which means they will be the Invoice's <a
+       * href="https://stripe.com/docs/api/invoices/create#create_invoice-default_tax_rates">{@code
+       * default_tax_rates}</a> for any Invoices issued by the Subscription during this Phase.
+       */
+      public Builder setDefaultTaxRates(List<String> defaultTaxRates) {
+        this.defaultTaxRates = defaultTaxRates;
+        return this;
+      }
+
+      /**
+       * Add an element to `discounts` list. A list is initialized for the first `add/addAll` call,
+       * and subsequent calls adds additional elements to the original list. See {@link
+       * QuoteCreateParams.Phase#discounts} for the field documentation.
+       */
+      @SuppressWarnings("unchecked")
+      public Builder addDiscount(Discount element) {
+        if (this.discounts == null || this.discounts instanceof EmptyParam) {
+          this.discounts = new ArrayList<QuoteCreateParams.Phase.Discount>();
+        }
+        ((List<QuoteCreateParams.Phase.Discount>) this.discounts).add(element);
+        return this;
+      }
+
+      /**
+       * Add all elements to `discounts` list. A list is initialized for the first `add/addAll`
+       * call, and subsequent calls adds additional elements to the original list. See {@link
+       * QuoteCreateParams.Phase#discounts} for the field documentation.
+       */
+      @SuppressWarnings("unchecked")
+      public Builder addAllDiscount(List<Discount> elements) {
+        if (this.discounts == null || this.discounts instanceof EmptyParam) {
+          this.discounts = new ArrayList<QuoteCreateParams.Phase.Discount>();
+        }
+        ((List<QuoteCreateParams.Phase.Discount>) this.discounts).addAll(elements);
+        return this;
+      }
+
+      /**
+       * The coupons to redeem into discounts for the schedule phase. If not specified, inherits the
+       * discount from the subscription's customer. Pass an empty string to avoid inheriting any
+       * discounts.
+       */
+      public Builder setDiscounts(EmptyParam discounts) {
+        this.discounts = discounts;
+        return this;
+      }
+
+      /**
+       * The coupons to redeem into discounts for the schedule phase. If not specified, inherits the
+       * discount from the subscription's customer. Pass an empty string to avoid inheriting any
+       * discounts.
+       */
+      public Builder setDiscounts(List<Discount> discounts) {
+        this.discounts = discounts;
+        return this;
+      }
+
+      /**
+       * The date at which this phase of the quote ends. If set, {@code iterations} must not be set.
+       */
+      public Builder setEndDate(Long endDate) {
+        this.endDate = endDate;
+        return this;
+      }
+
+      /**
+       * Add a key/value pair to `extraParams` map. A map is initialized for the first `put/putAll`
+       * call, and subsequent calls add additional key/value pairs to the original map. See {@link
+       * QuoteCreateParams.Phase#extraParams} for the field documentation.
+       */
+      public Builder putExtraParam(String key, Object value) {
+        if (this.extraParams == null) {
+          this.extraParams = new HashMap<>();
+        }
+        this.extraParams.put(key, value);
+        return this;
+      }
+
+      /**
+       * Add all map key/value pairs to `extraParams` map. A map is initialized for the first
+       * `put/putAll` call, and subsequent calls add additional key/value pairs to the original map.
+       * See {@link QuoteCreateParams.Phase#extraParams} for the field documentation.
+       */
+      public Builder putAllExtraParam(Map<String, Object> map) {
+        if (this.extraParams == null) {
+          this.extraParams = new HashMap<>();
+        }
+        this.extraParams.putAll(map);
+        return this;
+      }
+
+      /** All invoices will be billed using the specified settings. */
+      public Builder setInvoiceSettings(InvoiceSettings invoiceSettings) {
+        this.invoiceSettings = invoiceSettings;
+        return this;
+      }
+
+      /**
+       * Integer representing the multiplier applied to the price interval. For example, {@code
+       * iterations=2} applied to a price with {@code interval=month} and {@code interval_count=3}
+       * results in a phase of duration {@code 2 * 3 months = 6 months}. If set, {@code end_date}
+       * must not be set.
+       */
+      public Builder setIterations(Long iterations) {
+        this.iterations = iterations;
+        return this;
+      }
+
+      /**
+       * Add an element to `lineItems` list. A list is initialized for the first `add/addAll` call,
+       * and subsequent calls adds additional elements to the original list. See {@link
+       * QuoteCreateParams.Phase#lineItems} for the field documentation.
+       */
+      public Builder addLineItem(LineItem element) {
+        if (this.lineItems == null) {
+          this.lineItems = new ArrayList<>();
+        }
+        this.lineItems.add(element);
+        return this;
+      }
+
+      /**
+       * Add all elements to `lineItems` list. A list is initialized for the first `add/addAll`
+       * call, and subsequent calls adds additional elements to the original list. See {@link
+       * QuoteCreateParams.Phase#lineItems} for the field documentation.
+       */
+      public Builder addAllLineItem(List<LineItem> elements) {
+        if (this.lineItems == null) {
+          this.lineItems = new ArrayList<>();
+        }
+        this.lineItems.addAll(elements);
+        return this;
+      }
+
+      /**
+       * If the update changes the current phase, indicates whether the changes should be prorated.
+       * The default value is {@code create_prorations}.
+       */
+      public Builder setProrationBehavior(ProrationBehavior prorationBehavior) {
+        this.prorationBehavior = prorationBehavior;
+        return this;
+      }
+
+      /**
+       * If set to true the entire phase is counted as a trial and the customer will not be charged
+       * for any fees.
+       */
+      public Builder setTrial(Boolean trial) {
+        this.trial = trial;
+        return this;
+      }
+
+      /**
+       * Sets the phase to trialing from the start date to this date. Must be before the phase end
+       * date, can not be combined with {@code trial}.
+       */
+      public Builder setTrialEnd(Long trialEnd) {
+        this.trialEnd = trialEnd;
+        return this;
+      }
+    }
+
+    @Getter
+    public static class Discount {
+      /** ID of the coupon to create a new discount for. */
+      @SerializedName("coupon")
+      String coupon;
+
+      /** ID of an existing discount on the object (or one of its ancestors) to reuse. */
+      @SerializedName("discount")
+      String discount;
+
+      /**
+       * Map of extra parameters for custom features not available in this client library. The
+       * content in this map is not serialized under this field's {@code @SerializedName} value.
+       * Instead, each key/value pair is serialized as if the key is a root-level field (serialized)
+       * name in this param object. Effectively, this map is flattened to its parent instance.
+       */
+      @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
+      Map<String, Object> extraParams;
+
+      private Discount(String coupon, String discount, Map<String, Object> extraParams) {
+        this.coupon = coupon;
+        this.discount = discount;
+        this.extraParams = extraParams;
+      }
+
+      public static Builder builder() {
+        return new Builder();
+      }
+
+      public static class Builder {
+        private String coupon;
+
+        private String discount;
+
+        private Map<String, Object> extraParams;
+
+        /** Finalize and obtain parameter instance from this builder. */
+        public Discount build() {
+          return new Discount(this.coupon, this.discount, this.extraParams);
+        }
+
+        /** ID of the coupon to create a new discount for. */
+        public Builder setCoupon(String coupon) {
+          this.coupon = coupon;
+          return this;
+        }
+
+        /** ID of an existing discount on the object (or one of its ancestors) to reuse. */
+        public Builder setDiscount(String discount) {
+          this.discount = discount;
+          return this;
+        }
+
+        /**
+         * Add a key/value pair to `extraParams` map. A map is initialized for the first
+         * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
+         * map. See {@link QuoteCreateParams.Phase.Discount#extraParams} for the field
+         * documentation.
+         */
+        public Builder putExtraParam(String key, Object value) {
+          if (this.extraParams == null) {
+            this.extraParams = new HashMap<>();
+          }
+          this.extraParams.put(key, value);
+          return this;
+        }
+
+        /**
+         * Add all map key/value pairs to `extraParams` map. A map is initialized for the first
+         * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
+         * map. See {@link QuoteCreateParams.Phase.Discount#extraParams} for the field
+         * documentation.
+         */
+        public Builder putAllExtraParam(Map<String, Object> map) {
+          if (this.extraParams == null) {
+            this.extraParams = new HashMap<>();
+          }
+          this.extraParams.putAll(map);
+          return this;
+        }
+      }
+    }
+
+    @Getter
+    public static class InvoiceSettings {
+      /**
+       * Number of days within which a customer must pay invoices generated by this subscription
+       * schedule. This value will be {@code null} for subscription schedules where {@code
+       * billing=charge_automatically}.
+       */
+      @SerializedName("days_until_due")
+      Long daysUntilDue;
+
+      /**
+       * Map of extra parameters for custom features not available in this client library. The
+       * content in this map is not serialized under this field's {@code @SerializedName} value.
+       * Instead, each key/value pair is serialized as if the key is a root-level field (serialized)
+       * name in this param object. Effectively, this map is flattened to its parent instance.
+       */
+      @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
+      Map<String, Object> extraParams;
+
+      private InvoiceSettings(Long daysUntilDue, Map<String, Object> extraParams) {
+        this.daysUntilDue = daysUntilDue;
+        this.extraParams = extraParams;
+      }
+
+      public static Builder builder() {
+        return new Builder();
+      }
+
+      public static class Builder {
+        private Long daysUntilDue;
+
+        private Map<String, Object> extraParams;
+
+        /** Finalize and obtain parameter instance from this builder. */
+        public InvoiceSettings build() {
+          return new InvoiceSettings(this.daysUntilDue, this.extraParams);
+        }
+
+        /**
+         * Number of days within which a customer must pay invoices generated by this subscription
+         * schedule. This value will be {@code null} for subscription schedules where {@code
+         * billing=charge_automatically}.
+         */
+        public Builder setDaysUntilDue(Long daysUntilDue) {
+          this.daysUntilDue = daysUntilDue;
+          return this;
+        }
+
+        /**
+         * Add a key/value pair to `extraParams` map. A map is initialized for the first
+         * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
+         * map. See {@link QuoteCreateParams.Phase.InvoiceSettings#extraParams} for the field
+         * documentation.
+         */
+        public Builder putExtraParam(String key, Object value) {
+          if (this.extraParams == null) {
+            this.extraParams = new HashMap<>();
+          }
+          this.extraParams.put(key, value);
+          return this;
+        }
+
+        /**
+         * Add all map key/value pairs to `extraParams` map. A map is initialized for the first
+         * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
+         * map. See {@link QuoteCreateParams.Phase.InvoiceSettings#extraParams} for the field
+         * documentation.
+         */
+        public Builder putAllExtraParam(Map<String, Object> map) {
+          if (this.extraParams == null) {
+            this.extraParams = new HashMap<>();
+          }
+          this.extraParams.putAll(map);
+          return this;
+        }
+      }
+    }
+
+    @Getter
+    public static class LineItem {
+      /** The discounts applied to this line item. */
+      @SerializedName("discounts")
+      Object discounts;
+
+      /**
+       * Map of extra parameters for custom features not available in this client library. The
+       * content in this map is not serialized under this field's {@code @SerializedName} value.
+       * Instead, each key/value pair is serialized as if the key is a root-level field (serialized)
+       * name in this param object. Effectively, this map is flattened to its parent instance.
+       */
+      @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
+      Map<String, Object> extraParams;
+
+      /** The ID of the price object. One of {@code price} or {@code price_data} is required. */
+      @SerializedName("price")
+      String price;
+
+      /**
+       * Data used to generate a new <a href="https://stripe.com/docs/api/prices">Price</a> object
+       * inline. One of {@code price} or {@code price_data} is required.
+       */
+      @SerializedName("price_data")
+      PriceData priceData;
+
+      /** The quantity of the line item. */
+      @SerializedName("quantity")
+      Long quantity;
+
+      /**
+       * The tax rates which apply to the line item. When set, the {@code default_tax_rates} on the
+       * quote do not apply to this line item.
+       */
+      @SerializedName("tax_rates")
+      Object taxRates;
+
+      private LineItem(
+          Object discounts,
+          Map<String, Object> extraParams,
+          String price,
+          PriceData priceData,
+          Long quantity,
+          Object taxRates) {
+        this.discounts = discounts;
+        this.extraParams = extraParams;
+        this.price = price;
+        this.priceData = priceData;
+        this.quantity = quantity;
+        this.taxRates = taxRates;
+      }
+
+      public static Builder builder() {
+        return new Builder();
+      }
+
+      public static class Builder {
+        private Object discounts;
+
+        private Map<String, Object> extraParams;
+
+        private String price;
+
+        private PriceData priceData;
+
+        private Long quantity;
+
+        private Object taxRates;
+
+        /** Finalize and obtain parameter instance from this builder. */
+        public LineItem build() {
+          return new LineItem(
+              this.discounts,
+              this.extraParams,
+              this.price,
+              this.priceData,
+              this.quantity,
+              this.taxRates);
+        }
+
+        /**
+         * Add an element to `discounts` list. A list is initialized for the first `add/addAll`
+         * call, and subsequent calls adds additional elements to the original list. See {@link
+         * QuoteCreateParams.Phase.LineItem#discounts} for the field documentation.
+         */
+        @SuppressWarnings("unchecked")
+        public Builder addDiscount(Discount element) {
+          if (this.discounts == null || this.discounts instanceof EmptyParam) {
+            this.discounts = new ArrayList<QuoteCreateParams.Phase.LineItem.Discount>();
+          }
+          ((List<QuoteCreateParams.Phase.LineItem.Discount>) this.discounts).add(element);
+          return this;
+        }
+
+        /**
+         * Add all elements to `discounts` list. A list is initialized for the first `add/addAll`
+         * call, and subsequent calls adds additional elements to the original list. See {@link
+         * QuoteCreateParams.Phase.LineItem#discounts} for the field documentation.
+         */
+        @SuppressWarnings("unchecked")
+        public Builder addAllDiscount(List<Discount> elements) {
+          if (this.discounts == null || this.discounts instanceof EmptyParam) {
+            this.discounts = new ArrayList<QuoteCreateParams.Phase.LineItem.Discount>();
+          }
+          ((List<QuoteCreateParams.Phase.LineItem.Discount>) this.discounts).addAll(elements);
+          return this;
+        }
+
+        /** The discounts applied to this line item. */
+        public Builder setDiscounts(EmptyParam discounts) {
+          this.discounts = discounts;
+          return this;
+        }
+
+        /** The discounts applied to this line item. */
+        public Builder setDiscounts(List<Discount> discounts) {
+          this.discounts = discounts;
+          return this;
+        }
+
+        /**
+         * Add a key/value pair to `extraParams` map. A map is initialized for the first
+         * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
+         * map. See {@link QuoteCreateParams.Phase.LineItem#extraParams} for the field
+         * documentation.
+         */
+        public Builder putExtraParam(String key, Object value) {
+          if (this.extraParams == null) {
+            this.extraParams = new HashMap<>();
+          }
+          this.extraParams.put(key, value);
+          return this;
+        }
+
+        /**
+         * Add all map key/value pairs to `extraParams` map. A map is initialized for the first
+         * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
+         * map. See {@link QuoteCreateParams.Phase.LineItem#extraParams} for the field
+         * documentation.
+         */
+        public Builder putAllExtraParam(Map<String, Object> map) {
+          if (this.extraParams == null) {
+            this.extraParams = new HashMap<>();
+          }
+          this.extraParams.putAll(map);
+          return this;
+        }
+
+        /** The ID of the price object. One of {@code price} or {@code price_data} is required. */
+        public Builder setPrice(String price) {
+          this.price = price;
+          return this;
+        }
+
+        /**
+         * Data used to generate a new <a href="https://stripe.com/docs/api/prices">Price</a> object
+         * inline. One of {@code price} or {@code price_data} is required.
+         */
+        public Builder setPriceData(PriceData priceData) {
+          this.priceData = priceData;
+          return this;
+        }
+
+        /** The quantity of the line item. */
+        public Builder setQuantity(Long quantity) {
+          this.quantity = quantity;
+          return this;
+        }
+
+        /**
+         * Add an element to `taxRates` list. A list is initialized for the first `add/addAll` call,
+         * and subsequent calls adds additional elements to the original list. See {@link
+         * QuoteCreateParams.Phase.LineItem#taxRates} for the field documentation.
+         */
+        @SuppressWarnings("unchecked")
+        public Builder addTaxRate(String element) {
+          if (this.taxRates == null || this.taxRates instanceof EmptyParam) {
+            this.taxRates = new ArrayList<String>();
+          }
+          ((List<String>) this.taxRates).add(element);
+          return this;
+        }
+
+        /**
+         * Add all elements to `taxRates` list. A list is initialized for the first `add/addAll`
+         * call, and subsequent calls adds additional elements to the original list. See {@link
+         * QuoteCreateParams.Phase.LineItem#taxRates} for the field documentation.
+         */
+        @SuppressWarnings("unchecked")
+        public Builder addAllTaxRate(List<String> elements) {
+          if (this.taxRates == null || this.taxRates instanceof EmptyParam) {
+            this.taxRates = new ArrayList<String>();
+          }
+          ((List<String>) this.taxRates).addAll(elements);
+          return this;
+        }
+
+        /**
+         * The tax rates which apply to the line item. When set, the {@code default_tax_rates} on
+         * the quote do not apply to this line item.
+         */
+        public Builder setTaxRates(EmptyParam taxRates) {
+          this.taxRates = taxRates;
+          return this;
+        }
+
+        /**
+         * The tax rates which apply to the line item. When set, the {@code default_tax_rates} on
+         * the quote do not apply to this line item.
+         */
+        public Builder setTaxRates(List<String> taxRates) {
+          this.taxRates = taxRates;
+          return this;
+        }
+      }
+
+      @Getter
+      public static class Discount {
+        /** ID of the coupon to create a new discount for. */
+        @SerializedName("coupon")
+        String coupon;
+
+        /** ID of an existing discount on the object (or one of its ancestors) to reuse. */
+        @SerializedName("discount")
+        String discount;
+
+        /**
+         * Map of extra parameters for custom features not available in this client library. The
+         * content in this map is not serialized under this field's {@code @SerializedName} value.
+         * Instead, each key/value pair is serialized as if the key is a root-level field
+         * (serialized) name in this param object. Effectively, this map is flattened to its parent
+         * instance.
+         */
+        @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
+        Map<String, Object> extraParams;
+
+        private Discount(String coupon, String discount, Map<String, Object> extraParams) {
+          this.coupon = coupon;
+          this.discount = discount;
+          this.extraParams = extraParams;
+        }
+
+        public static Builder builder() {
+          return new Builder();
+        }
+
+        public static class Builder {
+          private String coupon;
+
+          private String discount;
+
+          private Map<String, Object> extraParams;
+
+          /** Finalize and obtain parameter instance from this builder. */
+          public Discount build() {
+            return new Discount(this.coupon, this.discount, this.extraParams);
+          }
+
+          /** ID of the coupon to create a new discount for. */
+          public Builder setCoupon(String coupon) {
+            this.coupon = coupon;
+            return this;
+          }
+
+          /** ID of an existing discount on the object (or one of its ancestors) to reuse. */
+          public Builder setDiscount(String discount) {
+            this.discount = discount;
+            return this;
+          }
+
+          /**
+           * Add a key/value pair to `extraParams` map. A map is initialized for the first
+           * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
+           * map. See {@link QuoteCreateParams.Phase.LineItem.Discount#extraParams} for the field
+           * documentation.
+           */
+          public Builder putExtraParam(String key, Object value) {
+            if (this.extraParams == null) {
+              this.extraParams = new HashMap<>();
+            }
+            this.extraParams.put(key, value);
+            return this;
+          }
+
+          /**
+           * Add all map key/value pairs to `extraParams` map. A map is initialized for the first
+           * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
+           * map. See {@link QuoteCreateParams.Phase.LineItem.Discount#extraParams} for the field
+           * documentation.
+           */
+          public Builder putAllExtraParam(Map<String, Object> map) {
+            if (this.extraParams == null) {
+              this.extraParams = new HashMap<>();
+            }
+            this.extraParams.putAll(map);
+            return this;
+          }
+        }
+      }
+
+      @Getter
+      public static class PriceData {
+        /**
+         * Three-letter <a href="https://www.iso.org/iso-4217-currency-codes.html">ISO currency
+         * code</a>, in lowercase. Must be a <a href="https://stripe.com/docs/currencies">supported
+         * currency</a>.
+         */
+        @SerializedName("currency")
+        String currency;
+
+        /**
+         * Map of extra parameters for custom features not available in this client library. The
+         * content in this map is not serialized under this field's {@code @SerializedName} value.
+         * Instead, each key/value pair is serialized as if the key is a root-level field
+         * (serialized) name in this param object. Effectively, this map is flattened to its parent
+         * instance.
+         */
+        @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
+        Map<String, Object> extraParams;
+
+        /** The ID of the product that this price will belong to. */
+        @SerializedName("product")
+        String product;
+
+        /**
+         * The recurring components of a price such as {@code interval} and {@code interval_count}.
+         */
+        @SerializedName("recurring")
+        Recurring recurring;
+
+        /**
+         * Specifies whether the price is considered inclusive of taxes or exclusive of taxes. One
+         * of {@code inclusive}, {@code exclusive}, or {@code unspecified}. Once specified as either
+         * {@code inclusive} or {@code exclusive}, it cannot be changed.
+         */
+        @SerializedName("tax_behavior")
+        TaxBehavior taxBehavior;
+
+        /**
+         * A positive integer in cents (or local equivalent) (or 0 for a free price) representing
+         * how much to charge.
+         */
+        @SerializedName("unit_amount")
+        Long unitAmount;
+
+        /**
+         * Same as {@code unit_amount}, but accepts a decimal value in cents (or local equivalent)
+         * with at most 12 decimal places. Only one of {@code unit_amount} and {@code
+         * unit_amount_decimal} can be set.
+         */
+        @SerializedName("unit_amount_decimal")
+        BigDecimal unitAmountDecimal;
+
+        private PriceData(
+            String currency,
+            Map<String, Object> extraParams,
+            String product,
+            Recurring recurring,
+            TaxBehavior taxBehavior,
+            Long unitAmount,
+            BigDecimal unitAmountDecimal) {
+          this.currency = currency;
+          this.extraParams = extraParams;
+          this.product = product;
+          this.recurring = recurring;
+          this.taxBehavior = taxBehavior;
+          this.unitAmount = unitAmount;
+          this.unitAmountDecimal = unitAmountDecimal;
+        }
+
+        public static Builder builder() {
+          return new Builder();
+        }
+
+        public static class Builder {
+          private String currency;
+
+          private Map<String, Object> extraParams;
+
+          private String product;
+
+          private Recurring recurring;
+
+          private TaxBehavior taxBehavior;
+
+          private Long unitAmount;
+
+          private BigDecimal unitAmountDecimal;
+
+          /** Finalize and obtain parameter instance from this builder. */
+          public PriceData build() {
+            return new PriceData(
+                this.currency,
+                this.extraParams,
+                this.product,
+                this.recurring,
+                this.taxBehavior,
+                this.unitAmount,
+                this.unitAmountDecimal);
+          }
+
+          /**
+           * Three-letter <a href="https://www.iso.org/iso-4217-currency-codes.html">ISO currency
+           * code</a>, in lowercase. Must be a <a
+           * href="https://stripe.com/docs/currencies">supported currency</a>.
+           */
+          public Builder setCurrency(String currency) {
+            this.currency = currency;
+            return this;
+          }
+
+          /**
+           * Add a key/value pair to `extraParams` map. A map is initialized for the first
+           * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
+           * map. See {@link QuoteCreateParams.Phase.LineItem.PriceData#extraParams} for the field
+           * documentation.
+           */
+          public Builder putExtraParam(String key, Object value) {
+            if (this.extraParams == null) {
+              this.extraParams = new HashMap<>();
+            }
+            this.extraParams.put(key, value);
+            return this;
+          }
+
+          /**
+           * Add all map key/value pairs to `extraParams` map. A map is initialized for the first
+           * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
+           * map. See {@link QuoteCreateParams.Phase.LineItem.PriceData#extraParams} for the field
+           * documentation.
+           */
+          public Builder putAllExtraParam(Map<String, Object> map) {
+            if (this.extraParams == null) {
+              this.extraParams = new HashMap<>();
+            }
+            this.extraParams.putAll(map);
+            return this;
+          }
+
+          /** The ID of the product that this price will belong to. */
+          public Builder setProduct(String product) {
+            this.product = product;
+            return this;
+          }
+
+          /**
+           * The recurring components of a price such as {@code interval} and {@code
+           * interval_count}.
+           */
+          public Builder setRecurring(Recurring recurring) {
+            this.recurring = recurring;
+            return this;
+          }
+
+          /**
+           * Specifies whether the price is considered inclusive of taxes or exclusive of taxes. One
+           * of {@code inclusive}, {@code exclusive}, or {@code unspecified}. Once specified as
+           * either {@code inclusive} or {@code exclusive}, it cannot be changed.
+           */
+          public Builder setTaxBehavior(TaxBehavior taxBehavior) {
+            this.taxBehavior = taxBehavior;
+            return this;
+          }
+
+          /**
+           * A positive integer in cents (or local equivalent) (or 0 for a free price) representing
+           * how much to charge.
+           */
+          public Builder setUnitAmount(Long unitAmount) {
+            this.unitAmount = unitAmount;
+            return this;
+          }
+
+          /**
+           * Same as {@code unit_amount}, but accepts a decimal value in cents (or local equivalent)
+           * with at most 12 decimal places. Only one of {@code unit_amount} and {@code
+           * unit_amount_decimal} can be set.
+           */
+          public Builder setUnitAmountDecimal(BigDecimal unitAmountDecimal) {
+            this.unitAmountDecimal = unitAmountDecimal;
+            return this;
+          }
+        }
+
+        @Getter
+        public static class Recurring {
+          /**
+           * Map of extra parameters for custom features not available in this client library. The
+           * content in this map is not serialized under this field's {@code @SerializedName} value.
+           * Instead, each key/value pair is serialized as if the key is a root-level field
+           * (serialized) name in this param object. Effectively, this map is flattened to its
+           * parent instance.
+           */
+          @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
+          Map<String, Object> extraParams;
+
+          /**
+           * Specifies billing frequency. Either {@code day}, {@code week}, {@code month} or {@code
+           * year}.
+           */
+          @SerializedName("interval")
+          Interval interval;
+
+          /**
+           * The number of intervals between subscription billings. For example, {@code
+           * interval=month} and {@code interval_count=3} bills every 3 months. Maximum of one year
+           * interval allowed (1 year, 12 months, or 52 weeks).
+           */
+          @SerializedName("interval_count")
+          Long intervalCount;
+
+          private Recurring(
+              Map<String, Object> extraParams, Interval interval, Long intervalCount) {
+            this.extraParams = extraParams;
+            this.interval = interval;
+            this.intervalCount = intervalCount;
+          }
+
+          public static Builder builder() {
+            return new Builder();
+          }
+
+          public static class Builder {
+            private Map<String, Object> extraParams;
+
+            private Interval interval;
+
+            private Long intervalCount;
+
+            /** Finalize and obtain parameter instance from this builder. */
+            public Recurring build() {
+              return new Recurring(this.extraParams, this.interval, this.intervalCount);
+            }
+
+            /**
+             * Add a key/value pair to `extraParams` map. A map is initialized for the first
+             * `put/putAll` call, and subsequent calls add additional key/value pairs to the
+             * original map. See {@link
+             * QuoteCreateParams.Phase.LineItem.PriceData.Recurring#extraParams} for the field
+             * documentation.
+             */
+            public Builder putExtraParam(String key, Object value) {
+              if (this.extraParams == null) {
+                this.extraParams = new HashMap<>();
+              }
+              this.extraParams.put(key, value);
+              return this;
+            }
+
+            /**
+             * Add all map key/value pairs to `extraParams` map. A map is initialized for the first
+             * `put/putAll` call, and subsequent calls add additional key/value pairs to the
+             * original map. See {@link
+             * QuoteCreateParams.Phase.LineItem.PriceData.Recurring#extraParams} for the field
+             * documentation.
+             */
+            public Builder putAllExtraParam(Map<String, Object> map) {
+              if (this.extraParams == null) {
+                this.extraParams = new HashMap<>();
+              }
+              this.extraParams.putAll(map);
+              return this;
+            }
+
+            /**
+             * Specifies billing frequency. Either {@code day}, {@code week}, {@code month} or
+             * {@code year}.
+             */
+            public Builder setInterval(Interval interval) {
+              this.interval = interval;
+              return this;
+            }
+
+            /**
+             * The number of intervals between subscription billings. For example, {@code
+             * interval=month} and {@code interval_count=3} bills every 3 months. Maximum of one
+             * year interval allowed (1 year, 12 months, or 52 weeks).
+             */
+            public Builder setIntervalCount(Long intervalCount) {
+              this.intervalCount = intervalCount;
+              return this;
+            }
+          }
+
+          public enum Interval implements ApiRequestParams.EnumParam {
+            @SerializedName("day")
+            DAY("day"),
+
+            @SerializedName("month")
+            MONTH("month"),
+
+            @SerializedName("week")
+            WEEK("week"),
+
+            @SerializedName("year")
+            YEAR("year");
+
+            @Getter(onMethod_ = {@Override})
+            private final String value;
+
+            Interval(String value) {
+              this.value = value;
+            }
+          }
+        }
+
+        public enum TaxBehavior implements ApiRequestParams.EnumParam {
+          @SerializedName("exclusive")
+          EXCLUSIVE("exclusive"),
+
+          @SerializedName("inclusive")
+          INCLUSIVE("inclusive"),
+
+          @SerializedName("unspecified")
+          UNSPECIFIED("unspecified");
+
+          @Getter(onMethod_ = {@Override})
+          private final String value;
+
+          TaxBehavior(String value) {
+            this.value = value;
+          }
+        }
+      }
+    }
+
+    public enum BillingCycleAnchor implements ApiRequestParams.EnumParam {
+      @SerializedName("reset")
+      RESET("reset");
+
+      @Getter(onMethod_ = {@Override})
+      private final String value;
+
+      BillingCycleAnchor(String value) {
+        this.value = value;
+      }
+    }
+
+    public enum CollectionMethod implements ApiRequestParams.EnumParam {
+      @SerializedName("charge_automatically")
+      CHARGE_AUTOMATICALLY("charge_automatically"),
+
+      @SerializedName("send_invoice")
+      SEND_INVOICE("send_invoice");
+
+      @Getter(onMethod_ = {@Override})
+      private final String value;
+
+      CollectionMethod(String value) {
+        this.value = value;
+      }
+    }
+
+    public enum ProrationBehavior implements ApiRequestParams.EnumParam {
+      @SerializedName("always_invoice")
+      ALWAYS_INVOICE("always_invoice"),
+
+      @SerializedName("create_prorations")
+      CREATE_PRORATIONS("create_prorations"),
+
+      @SerializedName("none")
+      NONE("none");
+
+      @Getter(onMethod_ = {@Override})
+      private final String value;
+
+      ProrationBehavior(String value) {
+        this.value = value;
+      }
+    }
+  }
+
+  @Getter
   public static class SubscriptionData {
+    /**
+     * Configures when the subscription schedule generates prorations for phase transitions.
+     * Possible values are {@code prorate_on_next_phase} or {@code prorate_up_front} with the
+     * default being {@code prorate_on_next_phase}. {@code prorate_on_next_phase} will apply phase
+     * changes and generate prorations at transition time.{@code prorate_up_front} will bill for all
+     * phases within the current billing cycle up front.
+     */
+    @SerializedName("billing_behavior")
+    BillingBehavior billingBehavior;
+
+    /**
+     * When specified as {@code reset}, the subscription will always start a new billing period when
+     * the quote is accepted.
+     */
+    @SerializedName("billing_cycle_anchor")
+    EnumParam billingCycleAnchor;
+
     /**
      * When creating a new subscription, the date of which the subscription schedule will start
      * after the quote is accepted. When updating a subscription, the date of which the subscription
@@ -1434,6 +2854,15 @@ public class QuoteCreateParams extends ApiRequestParams {
     Object effectiveDate;
 
     /**
+     * Configures how the subscription schedule behaves when it ends. Possible values are {@code
+     * release} or {@code cancel} with the default being {@code release}. {@code release} will end
+     * the subscription schedule and keep the underlying subscription running.{@code cancel} will
+     * end the subscription schedule and cancel the underlying subscription.
+     */
+    @SerializedName("end_behavior")
+    EndBehavior endBehavior;
+
+    /**
      * Map of extra parameters for custom features not available in this client library. The content
      * in this map is not serialized under this field's {@code @SerializedName} value. Instead, each
      * key/value pair is serialized as if the key is a root-level field (serialized) name in this
@@ -1443,6 +2872,47 @@ public class QuoteCreateParams extends ApiRequestParams {
     Map<String, Object> extraParams;
 
     /**
+     * The id of a subscription schedule the quote will update. The quote will inherit the state of
+     * the subscription schedule, such as {@code phases}. Cannot be combined with other parameters.
+     */
+    @SerializedName("from_schedule")
+    String fromSchedule;
+
+    /**
+     * The id of a subscription that the quote will update. By default, the quote will contain the
+     * state of the subscription (such as line items, collection method and billing thresholds)
+     * unless overridden.
+     */
+    @SerializedName("from_subscription")
+    String fromSubscription;
+
+    /**
+     * If specified, the invoicing for the given billing cycle iterations will be processed when the
+     * quote is accepted. Cannot be used with {@code effective_date}.
+     */
+    @SerializedName("prebilling")
+    Object prebilling;
+
+    /**
+     * Determines how to handle <a
+     * href="https://stripe.com/docs/subscriptions/billing-cycle#prorations">prorations</a>. When
+     * creating a subscription, valid values are {@code create_prorations} or {@code none}.
+     *
+     * <p>When updating a subscription, valid values are {@code create_prorations}, {@code none}, or
+     * {@code always_invoice}.
+     *
+     * <p>Passing {@code create_prorations} will cause proration invoice items to be created when
+     * applicable. These proration items will only be invoiced immediately under <a
+     * href="https://stripe.com/docs/subscriptions/upgrading-downgrading#immediate-payment">certain
+     * conditions</a>. In order to always invoice immediately for prorations, pass {@code
+     * always_invoice}.
+     *
+     * <p>Prorations can be disabled by passing {@code none}.
+     */
+    @SerializedName("proration_behavior")
+    ProrationBehavior prorationBehavior;
+
+    /**
      * Integer representing the number of trial period days before the customer is charged for the
      * first time.
      */
@@ -1450,9 +2920,25 @@ public class QuoteCreateParams extends ApiRequestParams {
     Object trialPeriodDays;
 
     private SubscriptionData(
-        Object effectiveDate, Map<String, Object> extraParams, Object trialPeriodDays) {
+        BillingBehavior billingBehavior,
+        EnumParam billingCycleAnchor,
+        Object effectiveDate,
+        EndBehavior endBehavior,
+        Map<String, Object> extraParams,
+        String fromSchedule,
+        String fromSubscription,
+        Object prebilling,
+        ProrationBehavior prorationBehavior,
+        Object trialPeriodDays) {
+      this.billingBehavior = billingBehavior;
+      this.billingCycleAnchor = billingCycleAnchor;
       this.effectiveDate = effectiveDate;
+      this.endBehavior = endBehavior;
       this.extraParams = extraParams;
+      this.fromSchedule = fromSchedule;
+      this.fromSubscription = fromSubscription;
+      this.prebilling = prebilling;
+      this.prorationBehavior = prorationBehavior;
       this.trialPeriodDays = trialPeriodDays;
     }
 
@@ -1461,15 +2947,69 @@ public class QuoteCreateParams extends ApiRequestParams {
     }
 
     public static class Builder {
+      private BillingBehavior billingBehavior;
+
+      private EnumParam billingCycleAnchor;
+
       private Object effectiveDate;
 
+      private EndBehavior endBehavior;
+
       private Map<String, Object> extraParams;
+
+      private String fromSchedule;
+
+      private String fromSubscription;
+
+      private Object prebilling;
+
+      private ProrationBehavior prorationBehavior;
 
       private Object trialPeriodDays;
 
       /** Finalize and obtain parameter instance from this builder. */
       public SubscriptionData build() {
-        return new SubscriptionData(this.effectiveDate, this.extraParams, this.trialPeriodDays);
+        return new SubscriptionData(
+            this.billingBehavior,
+            this.billingCycleAnchor,
+            this.effectiveDate,
+            this.endBehavior,
+            this.extraParams,
+            this.fromSchedule,
+            this.fromSubscription,
+            this.prebilling,
+            this.prorationBehavior,
+            this.trialPeriodDays);
+      }
+
+      /**
+       * Configures when the subscription schedule generates prorations for phase transitions.
+       * Possible values are {@code prorate_on_next_phase} or {@code prorate_up_front} with the
+       * default being {@code prorate_on_next_phase}. {@code prorate_on_next_phase} will apply phase
+       * changes and generate prorations at transition time.{@code prorate_up_front} will bill for
+       * all phases within the current billing cycle up front.
+       */
+      public Builder setBillingBehavior(BillingBehavior billingBehavior) {
+        this.billingBehavior = billingBehavior;
+        return this;
+      }
+
+      /**
+       * When specified as {@code reset}, the subscription will always start a new billing period
+       * when the quote is accepted.
+       */
+      public Builder setBillingCycleAnchor(BillingCycleAnchor billingCycleAnchor) {
+        this.billingCycleAnchor = billingCycleAnchor;
+        return this;
+      }
+
+      /**
+       * When specified as {@code reset}, the subscription will always start a new billing period
+       * when the quote is accepted.
+       */
+      public Builder setBillingCycleAnchor(EmptyParam billingCycleAnchor) {
+        this.billingCycleAnchor = billingCycleAnchor;
+        return this;
       }
 
       /**
@@ -1512,6 +3052,17 @@ public class QuoteCreateParams extends ApiRequestParams {
       }
 
       /**
+       * Configures how the subscription schedule behaves when it ends. Possible values are {@code
+       * release} or {@code cancel} with the default being {@code release}. {@code release} will end
+       * the subscription schedule and keep the underlying subscription running.{@code cancel} will
+       * end the subscription schedule and cancel the underlying subscription.
+       */
+      public Builder setEndBehavior(EndBehavior endBehavior) {
+        this.endBehavior = endBehavior;
+        return this;
+      }
+
+      /**
        * Add a key/value pair to `extraParams` map. A map is initialized for the first `put/putAll`
        * call, and subsequent calls add additional key/value pairs to the original map. See {@link
        * QuoteCreateParams.SubscriptionData#extraParams} for the field documentation.
@@ -1538,6 +3089,65 @@ public class QuoteCreateParams extends ApiRequestParams {
       }
 
       /**
+       * The id of a subscription schedule the quote will update. The quote will inherit the state
+       * of the subscription schedule, such as {@code phases}. Cannot be combined with other
+       * parameters.
+       */
+      public Builder setFromSchedule(String fromSchedule) {
+        this.fromSchedule = fromSchedule;
+        return this;
+      }
+
+      /**
+       * The id of a subscription that the quote will update. By default, the quote will contain the
+       * state of the subscription (such as line items, collection method and billing thresholds)
+       * unless overridden.
+       */
+      public Builder setFromSubscription(String fromSubscription) {
+        this.fromSubscription = fromSubscription;
+        return this;
+      }
+
+      /**
+       * If specified, the invoicing for the given billing cycle iterations will be processed when
+       * the quote is accepted. Cannot be used with {@code effective_date}.
+       */
+      public Builder setPrebilling(Prebilling prebilling) {
+        this.prebilling = prebilling;
+        return this;
+      }
+
+      /**
+       * If specified, the invoicing for the given billing cycle iterations will be processed when
+       * the quote is accepted. Cannot be used with {@code effective_date}.
+       */
+      public Builder setPrebilling(EmptyParam prebilling) {
+        this.prebilling = prebilling;
+        return this;
+      }
+
+      /**
+       * Determines how to handle <a
+       * href="https://stripe.com/docs/subscriptions/billing-cycle#prorations">prorations</a>. When
+       * creating a subscription, valid values are {@code create_prorations} or {@code none}.
+       *
+       * <p>When updating a subscription, valid values are {@code create_prorations}, {@code none},
+       * or {@code always_invoice}.
+       *
+       * <p>Passing {@code create_prorations} will cause proration invoice items to be created when
+       * applicable. These proration items will only be invoiced immediately under <a
+       * href="https://stripe.com/docs/subscriptions/upgrading-downgrading#immediate-payment">certain
+       * conditions</a>. In order to always invoice immediately for prorations, pass {@code
+       * always_invoice}.
+       *
+       * <p>Prorations can be disabled by passing {@code none}.
+       */
+      public Builder setProrationBehavior(ProrationBehavior prorationBehavior) {
+        this.prorationBehavior = prorationBehavior;
+        return this;
+      }
+
+      /**
        * Integer representing the number of trial period days before the customer is charged for the
        * first time.
        */
@@ -1556,6 +3166,103 @@ public class QuoteCreateParams extends ApiRequestParams {
       }
     }
 
+    @Getter
+    public static class Prebilling {
+      /**
+       * Map of extra parameters for custom features not available in this client library. The
+       * content in this map is not serialized under this field's {@code @SerializedName} value.
+       * Instead, each key/value pair is serialized as if the key is a root-level field (serialized)
+       * name in this param object. Effectively, this map is flattened to its parent instance.
+       */
+      @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
+      Map<String, Object> extraParams;
+
+      /** This is used to determine the number of billing cycles to prebill. */
+      @SerializedName("iterations")
+      Long iterations;
+
+      private Prebilling(Map<String, Object> extraParams, Long iterations) {
+        this.extraParams = extraParams;
+        this.iterations = iterations;
+      }
+
+      public static Builder builder() {
+        return new Builder();
+      }
+
+      public static class Builder {
+        private Map<String, Object> extraParams;
+
+        private Long iterations;
+
+        /** Finalize and obtain parameter instance from this builder. */
+        public Prebilling build() {
+          return new Prebilling(this.extraParams, this.iterations);
+        }
+
+        /**
+         * Add a key/value pair to `extraParams` map. A map is initialized for the first
+         * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
+         * map. See {@link QuoteCreateParams.SubscriptionData.Prebilling#extraParams} for the field
+         * documentation.
+         */
+        public Builder putExtraParam(String key, Object value) {
+          if (this.extraParams == null) {
+            this.extraParams = new HashMap<>();
+          }
+          this.extraParams.put(key, value);
+          return this;
+        }
+
+        /**
+         * Add all map key/value pairs to `extraParams` map. A map is initialized for the first
+         * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
+         * map. See {@link QuoteCreateParams.SubscriptionData.Prebilling#extraParams} for the field
+         * documentation.
+         */
+        public Builder putAllExtraParam(Map<String, Object> map) {
+          if (this.extraParams == null) {
+            this.extraParams = new HashMap<>();
+          }
+          this.extraParams.putAll(map);
+          return this;
+        }
+
+        /** This is used to determine the number of billing cycles to prebill. */
+        public Builder setIterations(Long iterations) {
+          this.iterations = iterations;
+          return this;
+        }
+      }
+    }
+
+    public enum BillingBehavior implements ApiRequestParams.EnumParam {
+      @SerializedName("prorate_on_next_phase")
+      PRORATE_ON_NEXT_PHASE("prorate_on_next_phase"),
+
+      @SerializedName("prorate_up_front")
+      PRORATE_UP_FRONT("prorate_up_front");
+
+      @Getter(onMethod_ = {@Override})
+      private final String value;
+
+      BillingBehavior(String value) {
+        this.value = value;
+      }
+    }
+
+    public enum BillingCycleAnchor implements ApiRequestParams.EnumParam {
+      @SerializedName("reset")
+      RESET("reset");
+
+      @Getter(onMethod_ = {@Override})
+      private final String value;
+
+      BillingCycleAnchor(String value) {
+        this.value = value;
+      }
+    }
+
     public enum EffectiveDate implements ApiRequestParams.EnumParam {
       @SerializedName("current_period_end")
       CURRENT_PERIOD_END("current_period_end");
@@ -1564,6 +3271,39 @@ public class QuoteCreateParams extends ApiRequestParams {
       private final String value;
 
       EffectiveDate(String value) {
+        this.value = value;
+      }
+    }
+
+    public enum EndBehavior implements ApiRequestParams.EnumParam {
+      @SerializedName("cancel")
+      CANCEL("cancel"),
+
+      @SerializedName("release")
+      RELEASE("release");
+
+      @Getter(onMethod_ = {@Override})
+      private final String value;
+
+      EndBehavior(String value) {
+        this.value = value;
+      }
+    }
+
+    public enum ProrationBehavior implements ApiRequestParams.EnumParam {
+      @SerializedName("always_invoice")
+      ALWAYS_INVOICE("always_invoice"),
+
+      @SerializedName("create_prorations")
+      CREATE_PRORATIONS("create_prorations"),
+
+      @SerializedName("none")
+      NONE("none");
+
+      @Getter(onMethod_ = {@Override})
+      private final String value;
+
+      ProrationBehavior(String value) {
         this.value = value;
       }
     }

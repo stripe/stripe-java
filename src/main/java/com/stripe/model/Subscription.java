@@ -16,6 +16,7 @@ import com.stripe.param.SubscriptionUpdateParams;
 import java.math.BigDecimal;
 import java.util.List;
 import java.util.Map;
+import java.util.stream.Collectors;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.Setter;
@@ -172,6 +173,13 @@ public class Subscription extends ApiResource implements HasId, MetadataStore<Su
   @SerializedName("discount")
   Discount discount;
 
+  /**
+   * The discounts applied to the subscription. Subscription item discounts are applied before
+   * subscription discounts. Use {@code expand[]=discounts} to expand each discount.
+   */
+  @SerializedName("discounts")
+  List<ExpandableField<Discount>> discounts;
+
   /** If the subscription has ended, the date the subscription ended. */
   @SerializedName("ended_at")
   Long endedAt;
@@ -258,6 +266,10 @@ public class Subscription extends ApiResource implements HasId, MetadataStore<Su
    */
   @SerializedName("pending_update")
   PendingUpdate pendingUpdate;
+
+  /** Time period and invoice for a Subscription billed in advance. */
+  @SerializedName("prebilling")
+  SubscriptionPrebillingData prebilling;
 
   /** The schedule attached to the subscription. */
   @SerializedName("schedule")
@@ -470,6 +482,47 @@ public class Subscription extends ApiResource implements HasId, MetadataStore<Su
 
   public void setTestClockObject(TestClock expandableObject) {
     this.testClock = new ExpandableField<TestClock>(expandableObject.getId(), expandableObject);
+  }
+
+  /** Get IDs of expandable {@code discounts} object list. */
+  public List<String> getDiscounts() {
+    return (this.discounts != null)
+        ? this.discounts.stream().map(x -> x.getId()).collect(Collectors.toList())
+        : null;
+  }
+
+  public void setDiscounts(List<String> ids) {
+    if (ids == null) {
+      this.discounts = null;
+      return;
+    }
+    if (this.discounts != null
+        && this.discounts.stream().map(x -> x.getId()).collect(Collectors.toList()).equals(ids)) {
+      // noop if the ids are equal to what are already present
+      return;
+    }
+    this.discounts =
+        (ids != null)
+            ? ids.stream()
+                .map(id -> new ExpandableField<Discount>(id, null))
+                .collect(Collectors.toList())
+            : null;
+  }
+
+  /** Get expanded {@code discounts}. */
+  public List<Discount> getDiscountObjects() {
+    return (this.discounts != null)
+        ? this.discounts.stream().map(x -> x.getExpanded()).collect(Collectors.toList())
+        : null;
+  }
+
+  public void setDiscountObjects(List<Discount> objs) {
+    this.discounts =
+        objs != null
+            ? objs.stream()
+                .map(x -> new ExpandableField<Discount>(x.getId(), x))
+                .collect(Collectors.toList())
+            : null;
   }
 
   /**
@@ -1200,6 +1253,10 @@ public class Subscription extends ApiResource implements HasId, MetadataStore<Su
      */
     @SerializedName("expires_at")
     Long expiresAt;
+
+    /** The number of iterations of prebilling to apply. */
+    @SerializedName("prebilling_iterations")
+    Long prebillingIterations;
 
     /**
      * List of subscription items, each with an attached plan, that will be set if the update is

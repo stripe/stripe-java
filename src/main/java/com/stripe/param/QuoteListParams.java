@@ -37,6 +37,10 @@ public class QuoteListParams extends ApiRequestParams {
   @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
   Map<String, Object> extraParams;
 
+  /** The subscription which the quote updates. */
+  @SerializedName("from_subscription")
+  String fromSubscription;
+
   /**
    * A limit on the number of objects to be returned. Limit can range between 1 and 100, and the
    * default is 10.
@@ -69,6 +73,7 @@ public class QuoteListParams extends ApiRequestParams {
       String endingBefore,
       List<String> expand,
       Map<String, Object> extraParams,
+      String fromSubscription,
       Long limit,
       String startingAfter,
       Status status,
@@ -77,6 +82,7 @@ public class QuoteListParams extends ApiRequestParams {
     this.endingBefore = endingBefore;
     this.expand = expand;
     this.extraParams = extraParams;
+    this.fromSubscription = fromSubscription;
     this.limit = limit;
     this.startingAfter = startingAfter;
     this.status = status;
@@ -96,6 +102,8 @@ public class QuoteListParams extends ApiRequestParams {
 
     private Map<String, Object> extraParams;
 
+    private String fromSubscription;
+
     private Long limit;
 
     private String startingAfter;
@@ -111,6 +119,7 @@ public class QuoteListParams extends ApiRequestParams {
           this.endingBefore,
           this.expand,
           this.extraParams,
+          this.fromSubscription,
           this.limit,
           this.startingAfter,
           this.status,
@@ -183,6 +192,12 @@ public class QuoteListParams extends ApiRequestParams {
         this.extraParams = new HashMap<>();
       }
       this.extraParams.putAll(map);
+      return this;
+    }
+
+    /** The subscription which the quote updates. */
+    public Builder setFromSubscription(String fromSubscription) {
+      this.fromSubscription = fromSubscription;
       return this;
     }
 
