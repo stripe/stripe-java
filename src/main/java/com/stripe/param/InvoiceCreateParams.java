@@ -49,6 +49,12 @@ public class InvoiceCreateParams extends ApiRequestParams {
   @SerializedName("collection_method")
   CollectionMethod collectionMethod;
 
+  /**
+   * The currency to create this invoice in. Defaults to that of {@code customer} if not specified.
+   */
+  @SerializedName("currency")
+  String currency;
+
   /** A list of up to 4 custom fields to be displayed on the invoice. */
   @SerializedName("custom_fields")
   Object customFields;
@@ -194,6 +200,7 @@ public class InvoiceCreateParams extends ApiRequestParams {
       Boolean autoAdvance,
       AutomaticTax automaticTax,
       CollectionMethod collectionMethod,
+      String currency,
       Object customFields,
       String customer,
       Long daysUntilDue,
@@ -219,6 +226,7 @@ public class InvoiceCreateParams extends ApiRequestParams {
     this.autoAdvance = autoAdvance;
     this.automaticTax = automaticTax;
     this.collectionMethod = collectionMethod;
+    this.currency = currency;
     this.customFields = customFields;
     this.customer = customer;
     this.daysUntilDue = daysUntilDue;
@@ -255,6 +263,8 @@ public class InvoiceCreateParams extends ApiRequestParams {
     private AutomaticTax automaticTax;
 
     private CollectionMethod collectionMethod;
+
+    private String currency;
 
     private Object customFields;
 
@@ -304,6 +314,7 @@ public class InvoiceCreateParams extends ApiRequestParams {
           this.autoAdvance,
           this.automaticTax,
           this.collectionMethod,
+          this.currency,
           this.customFields,
           this.customer,
           this.daysUntilDue,
@@ -407,6 +418,15 @@ public class InvoiceCreateParams extends ApiRequestParams {
      */
     public Builder setCollectionMethod(CollectionMethod collectionMethod) {
       this.collectionMethod = collectionMethod;
+      return this;
+    }
+
+    /**
+     * The currency to create this invoice in. Defaults to that of {@code customer} if not
+     * specified.
+     */
+    public Builder setCurrency(String currency) {
+      this.currency = currency;
       return this;
     }
 
