@@ -127,6 +127,10 @@ public class SubscriptionItemCreateParams extends ApiRequestParams {
   @SerializedName("tax_rates")
   Object taxRates;
 
+  /** Define options to configure the trial on the subscription. */
+  @SerializedName("trial")
+  Trial trial;
+
   private SubscriptionItemCreateParams(
       Object billingThresholds,
       Object discounts,
@@ -141,7 +145,8 @@ public class SubscriptionItemCreateParams extends ApiRequestParams {
       Long prorationDate,
       Long quantity,
       String subscription,
-      Object taxRates) {
+      Object taxRates,
+      Trial trial) {
     this.billingThresholds = billingThresholds;
     this.discounts = discounts;
     this.expand = expand;
@@ -156,6 +161,7 @@ public class SubscriptionItemCreateParams extends ApiRequestParams {
     this.quantity = quantity;
     this.subscription = subscription;
     this.taxRates = taxRates;
+    this.trial = trial;
   }
 
   public static Builder builder() {
@@ -191,6 +197,8 @@ public class SubscriptionItemCreateParams extends ApiRequestParams {
 
     private Object taxRates;
 
+    private Trial trial;
+
     /** Finalize and obtain parameter instance from this builder. */
     public SubscriptionItemCreateParams build() {
       return new SubscriptionItemCreateParams(
@@ -207,7 +215,8 @@ public class SubscriptionItemCreateParams extends ApiRequestParams {
           this.prorationDate,
           this.quantity,
           this.subscription,
-          this.taxRates);
+          this.taxRates,
+          this.trial);
     }
 
     /**
@@ -482,6 +491,12 @@ public class SubscriptionItemCreateParams extends ApiRequestParams {
      */
     public Builder setTaxRates(List<String> taxRates) {
       this.taxRates = taxRates;
+      return this;
+    }
+
+    /** Define options to configure the trial on the subscription. */
+    public Builder setTrial(Trial trial) {
+      this.trial = trial;
       return this;
     }
   }
@@ -946,6 +961,324 @@ public class SubscriptionItemCreateParams extends ApiRequestParams {
       private final String value;
 
       TaxBehavior(String value) {
+        this.value = value;
+      }
+    }
+  }
+
+  @Getter
+  public static class Trial {
+    /**
+     * Map of extra parameters for custom features not available in this client library. The content
+     * in this map is not serialized under this field's {@code @SerializedName} value. Instead, each
+     * key/value pair is serialized as if the key is a root-level field (serialized) name in this
+     * param object. Effectively, this map is flattened to its parent instance.
+     */
+    @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
+    Map<String, Object> extraParams;
+
+    @SerializedName("free")
+    Free free;
+
+    @SerializedName("none")
+    None none;
+
+    /**
+     * Details of a different price, quantity, or both, to bill your customer for during a paid
+     * trial.
+     */
+    @SerializedName("paid")
+    Paid paid;
+
+    @SerializedName("type")
+    Type type;
+
+    private Trial(Map<String, Object> extraParams, Free free, None none, Paid paid, Type type) {
+      this.extraParams = extraParams;
+      this.free = free;
+      this.none = none;
+      this.paid = paid;
+      this.type = type;
+    }
+
+    public static Builder builder() {
+      return new Builder();
+    }
+
+    public static class Builder {
+      private Map<String, Object> extraParams;
+
+      private Free free;
+
+      private None none;
+
+      private Paid paid;
+
+      private Type type;
+
+      /** Finalize and obtain parameter instance from this builder. */
+      public Trial build() {
+        return new Trial(this.extraParams, this.free, this.none, this.paid, this.type);
+      }
+
+      /**
+       * Add a key/value pair to `extraParams` map. A map is initialized for the first `put/putAll`
+       * call, and subsequent calls add additional key/value pairs to the original map. See {@link
+       * SubscriptionItemCreateParams.Trial#extraParams} for the field documentation.
+       */
+      public Builder putExtraParam(String key, Object value) {
+        if (this.extraParams == null) {
+          this.extraParams = new HashMap<>();
+        }
+        this.extraParams.put(key, value);
+        return this;
+      }
+
+      /**
+       * Add all map key/value pairs to `extraParams` map. A map is initialized for the first
+       * `put/putAll` call, and subsequent calls add additional key/value pairs to the original map.
+       * See {@link SubscriptionItemCreateParams.Trial#extraParams} for the field documentation.
+       */
+      public Builder putAllExtraParam(Map<String, Object> map) {
+        if (this.extraParams == null) {
+          this.extraParams = new HashMap<>();
+        }
+        this.extraParams.putAll(map);
+        return this;
+      }
+
+      public Builder setFree(Free free) {
+        this.free = free;
+        return this;
+      }
+
+      public Builder setNone(None none) {
+        this.none = none;
+        return this;
+      }
+
+      /**
+       * Details of a different price, quantity, or both, to bill your customer for during a paid
+       * trial.
+       */
+      public Builder setPaid(Paid paid) {
+        this.paid = paid;
+        return this;
+      }
+
+      public Builder setType(Type type) {
+        this.type = type;
+        return this;
+      }
+    }
+
+    @Getter
+    public static class Free {
+      /**
+       * Map of extra parameters for custom features not available in this client library. The
+       * content in this map is not serialized under this field's {@code @SerializedName} value.
+       * Instead, each key/value pair is serialized as if the key is a root-level field (serialized)
+       * name in this param object. Effectively, this map is flattened to its parent instance.
+       */
+      @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
+      Map<String, Object> extraParams;
+
+      private Free(Map<String, Object> extraParams) {
+        this.extraParams = extraParams;
+      }
+
+      public static Builder builder() {
+        return new Builder();
+      }
+
+      public static class Builder {
+        private Map<String, Object> extraParams;
+
+        /** Finalize and obtain parameter instance from this builder. */
+        public Free build() {
+          return new Free(this.extraParams);
+        }
+
+        /**
+         * Add a key/value pair to `extraParams` map. A map is initialized for the first
+         * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
+         * map. See {@link SubscriptionItemCreateParams.Trial.Free#extraParams} for the field
+         * documentation.
+         */
+        public Builder putExtraParam(String key, Object value) {
+          if (this.extraParams == null) {
+            this.extraParams = new HashMap<>();
+          }
+          this.extraParams.put(key, value);
+          return this;
+        }
+
+        /**
+         * Add all map key/value pairs to `extraParams` map. A map is initialized for the first
+         * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
+         * map. See {@link SubscriptionItemCreateParams.Trial.Free#extraParams} for the field
+         * documentation.
+         */
+        public Builder putAllExtraParam(Map<String, Object> map) {
+          if (this.extraParams == null) {
+            this.extraParams = new HashMap<>();
+          }
+          this.extraParams.putAll(map);
+          return this;
+        }
+      }
+    }
+
+    @Getter
+    public static class None {
+      /**
+       * Map of extra parameters for custom features not available in this client library. The
+       * content in this map is not serialized under this field's {@code @SerializedName} value.
+       * Instead, each key/value pair is serialized as if the key is a root-level field (serialized)
+       * name in this param object. Effectively, this map is flattened to its parent instance.
+       */
+      @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
+      Map<String, Object> extraParams;
+
+      private None(Map<String, Object> extraParams) {
+        this.extraParams = extraParams;
+      }
+
+      public static Builder builder() {
+        return new Builder();
+      }
+
+      public static class Builder {
+        private Map<String, Object> extraParams;
+
+        /** Finalize and obtain parameter instance from this builder. */
+        public None build() {
+          return new None(this.extraParams);
+        }
+
+        /**
+         * Add a key/value pair to `extraParams` map. A map is initialized for the first
+         * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
+         * map. See {@link SubscriptionItemCreateParams.Trial.None#extraParams} for the field
+         * documentation.
+         */
+        public Builder putExtraParam(String key, Object value) {
+          if (this.extraParams == null) {
+            this.extraParams = new HashMap<>();
+          }
+          this.extraParams.put(key, value);
+          return this;
+        }
+
+        /**
+         * Add all map key/value pairs to `extraParams` map. A map is initialized for the first
+         * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
+         * map. See {@link SubscriptionItemCreateParams.Trial.None#extraParams} for the field
+         * documentation.
+         */
+        public Builder putAllExtraParam(Map<String, Object> map) {
+          if (this.extraParams == null) {
+            this.extraParams = new HashMap<>();
+          }
+          this.extraParams.putAll(map);
+          return this;
+        }
+      }
+    }
+
+    @Getter
+    public static class Paid {
+      /**
+       * Map of extra parameters for custom features not available in this client library. The
+       * content in this map is not serialized under this field's {@code @SerializedName} value.
+       * Instead, each key/value pair is serialized as if the key is a root-level field (serialized)
+       * name in this param object. Effectively, this map is flattened to its parent instance.
+       */
+      @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
+      Map<String, Object> extraParams;
+
+      @SerializedName("price")
+      String price;
+
+      @SerializedName("quantity")
+      Long quantity;
+
+      private Paid(Map<String, Object> extraParams, String price, Long quantity) {
+        this.extraParams = extraParams;
+        this.price = price;
+        this.quantity = quantity;
+      }
+
+      public static Builder builder() {
+        return new Builder();
+      }
+
+      public static class Builder {
+        private Map<String, Object> extraParams;
+
+        private String price;
+
+        private Long quantity;
+
+        /** Finalize and obtain parameter instance from this builder. */
+        public Paid build() {
+          return new Paid(this.extraParams, this.price, this.quantity);
+        }
+
+        /**
+         * Add a key/value pair to `extraParams` map. A map is initialized for the first
+         * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
+         * map. See {@link SubscriptionItemCreateParams.Trial.Paid#extraParams} for the field
+         * documentation.
+         */
+        public Builder putExtraParam(String key, Object value) {
+          if (this.extraParams == null) {
+            this.extraParams = new HashMap<>();
+          }
+          this.extraParams.put(key, value);
+          return this;
+        }
+
+        /**
+         * Add all map key/value pairs to `extraParams` map. A map is initialized for the first
+         * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
+         * map. See {@link SubscriptionItemCreateParams.Trial.Paid#extraParams} for the field
+         * documentation.
+         */
+        public Builder putAllExtraParam(Map<String, Object> map) {
+          if (this.extraParams == null) {
+            this.extraParams = new HashMap<>();
+          }
+          this.extraParams.putAll(map);
+          return this;
+        }
+
+        public Builder setPrice(String price) {
+          this.price = price;
+          return this;
+        }
+
+        public Builder setQuantity(Long quantity) {
+          this.quantity = quantity;
+          return this;
+        }
+      }
+    }
+
+    public enum Type implements ApiRequestParams.EnumParam {
+      @SerializedName("free")
+      FREE("free"),
+
+      @SerializedName("none")
+      NONE("none"),
+
+      @SerializedName("paid")
+      PAID("paid");
+
+      @Getter(onMethod_ = {@Override})
+      private final String value;
+
+      Type(String value) {
         this.value = value;
       }
     }
