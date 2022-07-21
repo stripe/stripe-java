@@ -49,6 +49,12 @@ public class InvoiceCreateParams extends ApiRequestParams {
   @SerializedName("collection_method")
   CollectionMethod collectionMethod;
 
+  /**
+   * The currency to create this invoice in. Defaults to that of {@code customer} if not specified.
+   */
+  @SerializedName("currency")
+  String currency;
+
   /** A list of up to 4 custom fields to be displayed on the invoice. */
   @SerializedName("custom_fields")
   Object customFields;
@@ -194,6 +200,7 @@ public class InvoiceCreateParams extends ApiRequestParams {
       Boolean autoAdvance,
       AutomaticTax automaticTax,
       CollectionMethod collectionMethod,
+      String currency,
       Object customFields,
       String customer,
       Long daysUntilDue,
@@ -219,6 +226,7 @@ public class InvoiceCreateParams extends ApiRequestParams {
     this.autoAdvance = autoAdvance;
     this.automaticTax = automaticTax;
     this.collectionMethod = collectionMethod;
+    this.currency = currency;
     this.customFields = customFields;
     this.customer = customer;
     this.daysUntilDue = daysUntilDue;
@@ -255,6 +263,8 @@ public class InvoiceCreateParams extends ApiRequestParams {
     private AutomaticTax automaticTax;
 
     private CollectionMethod collectionMethod;
+
+    private String currency;
 
     private Object customFields;
 
@@ -304,6 +314,7 @@ public class InvoiceCreateParams extends ApiRequestParams {
           this.autoAdvance,
           this.automaticTax,
           this.collectionMethod,
+          this.currency,
           this.customFields,
           this.customer,
           this.daysUntilDue,
@@ -407,6 +418,15 @@ public class InvoiceCreateParams extends ApiRequestParams {
      */
     public Builder setCollectionMethod(CollectionMethod collectionMethod) {
       this.collectionMethod = collectionMethod;
+      return this;
+    }
+
+    /**
+     * The currency to create this invoice in. Defaults to that of {@code customer} if not
+     * specified.
+     */
+    public Builder setCurrency(String currency) {
+      this.currency = currency;
       return this;
     }
 
@@ -1005,6 +1025,13 @@ public class InvoiceCreateParams extends ApiRequestParams {
   @Getter
   public static class PaymentSettings {
     /**
+     * ID of the mandate to be used for this invoice. It must correspond to the payment method used
+     * to pay the invoice, including the invoice's default_payment_method or default_source, if set.
+     */
+    @SerializedName("default_mandate")
+    String defaultMandate;
+
+    /**
      * Map of extra parameters for custom features not available in this client library. The content
      * in this map is not serialized under this field's {@code @SerializedName} value. Instead, each
      * key/value pair is serialized as if the key is a root-level field (serialized) name in this
@@ -1028,9 +1055,11 @@ public class InvoiceCreateParams extends ApiRequestParams {
     Object paymentMethodTypes;
 
     private PaymentSettings(
+        String defaultMandate,
         Map<String, Object> extraParams,
         PaymentMethodOptions paymentMethodOptions,
         Object paymentMethodTypes) {
+      this.defaultMandate = defaultMandate;
       this.extraParams = extraParams;
       this.paymentMethodOptions = paymentMethodOptions;
       this.paymentMethodTypes = paymentMethodTypes;
@@ -1041,6 +1070,8 @@ public class InvoiceCreateParams extends ApiRequestParams {
     }
 
     public static class Builder {
+      private String defaultMandate;
+
       private Map<String, Object> extraParams;
 
       private PaymentMethodOptions paymentMethodOptions;
@@ -1050,7 +1081,20 @@ public class InvoiceCreateParams extends ApiRequestParams {
       /** Finalize and obtain parameter instance from this builder. */
       public PaymentSettings build() {
         return new PaymentSettings(
-            this.extraParams, this.paymentMethodOptions, this.paymentMethodTypes);
+            this.defaultMandate,
+            this.extraParams,
+            this.paymentMethodOptions,
+            this.paymentMethodTypes);
+      }
+
+      /**
+       * ID of the mandate to be used for this invoice. It must correspond to the payment method
+       * used to pay the invoice, including the invoice's default_payment_method or default_source,
+       * if set.
+       */
+      public Builder setDefaultMandate(String defaultMandate) {
+        this.defaultMandate = defaultMandate;
+        return this;
       }
 
       /**

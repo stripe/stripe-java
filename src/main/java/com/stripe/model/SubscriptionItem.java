@@ -128,6 +128,10 @@ public class SubscriptionItem extends ApiResource
   @SerializedName("tax_rates")
   List<TaxRate> taxRates;
 
+  /** Current trial configuration on this item. */
+  @SerializedName("trial")
+  Trial trial;
+
   /** Get IDs of expandable {@code discounts} object list. */
   public List<String> getDiscounts() {
     return (this.discounts != null)
@@ -451,5 +455,41 @@ public class SubscriptionItem extends ApiResource
     /** Usage threshold that triggers the subscription to create an invoice. */
     @SerializedName("usage_gte")
     Long usageGte;
+  }
+
+  @Getter
+  @Setter
+  @EqualsAndHashCode(callSuper = false)
+  public static class Trial extends StripeObject implements HasId {
+    /** Unique identifier for the object. */
+    @Getter(onMethod_ = {@Override})
+    @SerializedName("id")
+    String id;
+
+    /**
+     * Details of a different price, quantity, or both, to bill your customer for during a paid
+     * trial.
+     */
+    @SerializedName("paid")
+    Paid paid;
+
+    @SerializedName("type")
+    String type;
+
+    @Getter
+    @Setter
+    @EqualsAndHashCode(callSuper = false)
+    public static class Paid extends StripeObject implements HasId {
+      @Getter(onMethod_ = {@Override})
+      @SerializedName("id")
+      String id;
+
+      /** The ID of the price object. */
+      @SerializedName("price")
+      String price;
+
+      @SerializedName("quantity")
+      Long quantity;
+    }
   }
 }

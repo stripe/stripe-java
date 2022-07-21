@@ -1055,6 +1055,13 @@ public class InvoiceUpdateParams extends ApiRequestParams {
   @Getter
   public static class PaymentSettings {
     /**
+     * ID of the mandate to be used for this invoice. It must correspond to the payment method used
+     * to pay the invoice, including the invoice's default_payment_method or default_source, if set.
+     */
+    @SerializedName("default_mandate")
+    Object defaultMandate;
+
+    /**
      * Map of extra parameters for custom features not available in this client library. The content
      * in this map is not serialized under this field's {@code @SerializedName} value. Instead, each
      * key/value pair is serialized as if the key is a root-level field (serialized) name in this
@@ -1078,9 +1085,11 @@ public class InvoiceUpdateParams extends ApiRequestParams {
     Object paymentMethodTypes;
 
     private PaymentSettings(
+        Object defaultMandate,
         Map<String, Object> extraParams,
         PaymentMethodOptions paymentMethodOptions,
         Object paymentMethodTypes) {
+      this.defaultMandate = defaultMandate;
       this.extraParams = extraParams;
       this.paymentMethodOptions = paymentMethodOptions;
       this.paymentMethodTypes = paymentMethodTypes;
@@ -1091,6 +1100,8 @@ public class InvoiceUpdateParams extends ApiRequestParams {
     }
 
     public static class Builder {
+      private Object defaultMandate;
+
       private Map<String, Object> extraParams;
 
       private PaymentMethodOptions paymentMethodOptions;
@@ -1100,7 +1111,30 @@ public class InvoiceUpdateParams extends ApiRequestParams {
       /** Finalize and obtain parameter instance from this builder. */
       public PaymentSettings build() {
         return new PaymentSettings(
-            this.extraParams, this.paymentMethodOptions, this.paymentMethodTypes);
+            this.defaultMandate,
+            this.extraParams,
+            this.paymentMethodOptions,
+            this.paymentMethodTypes);
+      }
+
+      /**
+       * ID of the mandate to be used for this invoice. It must correspond to the payment method
+       * used to pay the invoice, including the invoice's default_payment_method or default_source,
+       * if set.
+       */
+      public Builder setDefaultMandate(String defaultMandate) {
+        this.defaultMandate = defaultMandate;
+        return this;
+      }
+
+      /**
+       * ID of the mandate to be used for this invoice. It must correspond to the payment method
+       * used to pay the invoice, including the invoice's default_payment_method or default_source,
+       * if set.
+       */
+      public Builder setDefaultMandate(EmptyParam defaultMandate) {
+        this.defaultMandate = defaultMandate;
+        return this;
       }
 
       /**

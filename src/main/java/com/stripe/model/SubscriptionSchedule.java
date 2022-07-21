@@ -872,6 +872,14 @@ public class SubscriptionSchedule extends ApiResource
     @SerializedName("transfer_data")
     Subscription.TransferData transferData;
 
+    /**
+     * Specify behavior of the trial when crossing schedule phase boundaries
+     *
+     * <p>One of {@code continue}, or {@code none}.
+     */
+    @SerializedName("trial_continuation")
+    String trialContinuation;
+
     /** When the trial ends within the phase. */
     @SerializedName("trial_end")
     Long trialEnd;
@@ -941,6 +949,14 @@ public class SubscriptionSchedule extends ApiResource
     @SerializedName("discounts")
     List<StackableDiscount> discounts;
 
+    /**
+     * Set of <a href="https://stripe.com/docs/api/metadata">key-value pairs</a> that you can attach
+     * to an item. Metadata on this item will update the underlying subscription item's {@code
+     * metadata} when the phase is entered.
+     */
+    @SerializedName("metadata")
+    Map<String, String> metadata;
+
     /** ID of the plan to which the customer should be subscribed. */
     @SerializedName("plan")
     @Getter(lombok.AccessLevel.NONE)
@@ -963,6 +979,10 @@ public class SubscriptionSchedule extends ApiResource
      */
     @SerializedName("tax_rates")
     List<TaxRate> taxRates;
+
+    /** Current trial configuration on this item. */
+    @SerializedName("trial")
+    Trial trial;
 
     /** Get ID of expandable {@code plan} object. */
     public String getPlan() {
@@ -998,6 +1018,42 @@ public class SubscriptionSchedule extends ApiResource
 
     public void setPriceObject(Price expandableObject) {
       this.price = new ExpandableField<Price>(expandableObject.getId(), expandableObject);
+    }
+
+    @Getter
+    @Setter
+    @EqualsAndHashCode(callSuper = false)
+    public static class Trial extends StripeObject implements HasId {
+      /** Unique identifier for the object. */
+      @Getter(onMethod_ = {@Override})
+      @SerializedName("id")
+      String id;
+
+      /**
+       * Details of a different price, quantity, or both, to bill your customer for during a paid
+       * trial.
+       */
+      @SerializedName("paid")
+      Paid paid;
+
+      @SerializedName("type")
+      String type;
+
+      @Getter
+      @Setter
+      @EqualsAndHashCode(callSuper = false)
+      public static class Paid extends StripeObject implements HasId {
+        @Getter(onMethod_ = {@Override})
+        @SerializedName("id")
+        String id;
+
+        /** The ID of the price object. */
+        @SerializedName("price")
+        String price;
+
+        @SerializedName("quantity")
+        Long quantity;
+      }
     }
   }
 }
