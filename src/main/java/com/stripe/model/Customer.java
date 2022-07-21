@@ -62,6 +62,13 @@ public class Customer extends ApiResource implements HasId, MetadataStore<Custom
   String currency;
 
   /**
+   * The default three-letter <a href="https://stripe.com/docs/currencies">ISO code for the
+   * currency</a> that the customer will be charged in for billing purposes.
+   */
+  @SerializedName("default_currency")
+  String defaultCurrency;
+
+  /**
    * ID of the default payment source for the customer.
    *
    * <p>If you are using payment methods created via the PaymentMethods API, see the <a
@@ -106,6 +113,17 @@ public class Customer extends ApiResource implements HasId, MetadataStore<Custom
   @Getter(onMethod_ = {@Override})
   @SerializedName("id")
   String id;
+
+  /**
+   * The current multi-currency balances, if any, being stored on the customer.If positive in a
+   * currency, the customer has a credit to apply to their next invoice denominated in that
+   * currency.If negative, the customer has an amount owed that will be added to their next invoice
+   * denominated in that currency. These balances do not refer to any unpaid invoices.They solely
+   * track amounts that have yet to be successfully applied to any invoice. A balance in a
+   * particular currency is only applied to any invoice as an invoice in that currency is finalized.
+   */
+  @SerializedName("invoice_credit_balance")
+  Map<String, Long> invoiceCreditBalance;
 
   /** The prefix for the customer used to generate unique invoice numbers. */
   @SerializedName("invoice_prefix")

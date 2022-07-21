@@ -2149,9 +2149,6 @@ public class SubscriptionScheduleAmendParams extends ApiRequestParams {
             @SerializedName("free")
             FREE("free"),
 
-            @SerializedName("none")
-            NONE("none"),
-
             @SerializedName("paid")
             PAID("paid");
 
@@ -2845,9 +2842,6 @@ public class SubscriptionScheduleAmendParams extends ApiRequestParams {
           public enum Type implements ApiRequestParams.EnumParam {
             @SerializedName("free")
             FREE("free"),
-
-            @SerializedName("none")
-            NONE("none"),
 
             @SerializedName("paid")
             PAID("paid");
