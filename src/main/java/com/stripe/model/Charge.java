@@ -358,12 +358,6 @@ public class Charge extends ApiResource implements MetadataStore<Charge>, Balanc
   @SerializedName("transfer_group")
   String transferGroup;
 
-  /** Deprecated */
-  @SerializedName("order")
-  @Getter(lombok.AccessLevel.NONE)
-  @Setter(lombok.AccessLevel.NONE)
-  ExpandableField<Order> order;
-
   /** Get ID of expandable {@code application} object. */
   public String getApplication() {
     return (this.application != null) ? this.application.getId() : null;
@@ -603,24 +597,6 @@ public class Charge extends ApiResource implements MetadataStore<Charge>, Balanc
 
   public void setTransferObject(Transfer expandableObject) {
     this.transfer = new ExpandableField<Transfer>(expandableObject.getId(), expandableObject);
-  }
-
-  /** Get ID of expandable {@code order} object. */
-  public String getOrder() {
-    return (this.order != null) ? this.order.getId() : null;
-  }
-
-  public void setOrder(String id) {
-    this.order = ApiResource.setExpandableFieldId(id, this.order);
-  }
-
-  /** Get expanded {@code order}. */
-  public Order getOrderObject() {
-    return (this.order != null) ? this.order.getExpanded() : null;
-  }
-
-  public void setOrderObject(Order expandableObject) {
-    this.order = new ExpandableField<Order>(expandableObject.getId(), expandableObject);
   }
 
   /**

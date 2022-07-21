@@ -50,7 +50,6 @@ final class EventDataClassLookup {
     classLookup.put("line_item", InvoiceLineItem.class);
     classLookup.put("login_link", LoginLink.class);
     classLookup.put("mandate", Mandate.class);
-    classLookup.put("order", Order.class);
     classLookup.put("payment_intent", PaymentIntent.class);
     classLookup.put("payment_link", PaymentLink.class);
     classLookup.put("payment_method", PaymentMethod.class);
@@ -88,8 +87,6 @@ final class EventDataClassLookup {
     classLookup.put("usage_record", UsageRecord.class);
     classLookup.put("usage_record_summary", UsageRecordSummary.class);
     classLookup.put("webhook_endpoint", WebhookEndpoint.class);
-    classLookup.put("order_item", OrderItem.class);
-    classLookup.put("order_return", OrderReturn.class);
 
     classLookup.put("apps.secret", com.stripe.model.apps.Secret.class);
 
