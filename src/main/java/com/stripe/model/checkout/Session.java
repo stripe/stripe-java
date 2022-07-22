@@ -1113,6 +1113,9 @@ public class Session extends ApiResource implements HasId {
     @Setter
     @EqualsAndHashCode(callSuper = false)
     public static class Card extends StripeObject {
+      @SerializedName("installments")
+      InstallmentsOptions installments;
+
       /**
        * Indicates that you intend to make future payments with this PaymentIntent's payment method.
        *
@@ -1152,6 +1155,15 @@ public class Session extends ApiResource implements HasId {
        */
       @SerializedName("statement_descriptor_suffix_kanji")
       String statementDescriptorSuffixKanji;
+
+      @Getter
+      @Setter
+      @EqualsAndHashCode(callSuper = false)
+      public static class InstallmentsOptions extends StripeObject {
+        /** Indicates if installments are enabled. */
+        @SerializedName("enabled")
+        Boolean enabled;
+      }
     }
 
     @Getter
