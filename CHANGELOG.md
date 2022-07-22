@@ -1,5 +1,20 @@
 # Changelog
 
+## 20.135.0-beta.1 - 2022-07-22
+* [#1400](https://github.com/stripe/stripe-java/pull/1400) API Updates for beta branch
+  - Updated stable APIs to the latest version
+* [#1398](https://github.com/stripe/stripe-java/pull/1398) API Updates for beta branch
+  - Updated stable APIs to the latest version
+  - Add `QuotePhase` resource
+* [#1394](https://github.com/stripe/stripe-java/pull/1394) API Updates for beta branch
+  - Updated stable APIs to the latest version
+  - Add `Price.MigrateTo` property
+  - Add `SubscriptionSchedule.Amend` method.
+  - Add `Discount.SubscriptionItem` property.
+  - Add `Quote.SubscriptionData.BillingBehavior`, `BillingCycleAnchor`, `EndBehavior`, `FromSchedule`, `FromSubscription`, `Prebilling`, `ProrationBehavior` properties.
+  - Add `Phases` parameter to `Quote.Create`
+  - Add `Subscription.Discounts`, `Prebilling` properties.
+
 ## 20.134.0 - 2022-07-18
 * [#1391](https://github.com/stripe/stripe-java/pull/1391) API Updates
   * Add support for `blik_payments` on `Account.capabilities`, `AccountCreateParams.capabilities`, and `AccountUpdateParams.capabilities`
