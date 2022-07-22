@@ -1737,6 +1737,9 @@ public class Invoice extends ApiResource implements HasId, MetadataStore<Invoice
     @Setter
     @EqualsAndHashCode(callSuper = false)
     public static class Card extends StripeObject {
+      @SerializedName("installments")
+      Installments installments;
+
       /**
        * We strongly recommend that you rely on our SCA Engine to automatically prompt your
        * customers for authentication based on risk level and <a
@@ -1751,6 +1754,15 @@ public class Invoice extends ApiResource implements HasId, MetadataStore<Invoice
        */
       @SerializedName("request_three_d_secure")
       String requestThreeDSecure;
+
+      @Getter
+      @Setter
+      @EqualsAndHashCode(callSuper = false)
+      public static class Installments extends StripeObject {
+        /** Whether Installments are enabled for this Invoice. */
+        @SerializedName("enabled")
+        Boolean enabled;
+      }
     }
 
     @Getter
