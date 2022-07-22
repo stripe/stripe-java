@@ -60,22 +60,14 @@ public abstract class StripeCollection<T extends HasId> extends StripeObject
 
   public Iterable<T> autoPagingIterable() {
     if (Stripe.apiKey == null) {
-      throw new AuthenticationException(
-          "No API key provided.",
-          null,
-          null,
-          0);
+      throw new AuthenticationException("No API key provided.", null, null, 0);
     }
     return new PagingIterable<>(this);
   }
 
   public Iterable<T> autoPagingIterable(Map<String, Object> params) {
     if (Stripe.apiKey == null) {
-      throw new AuthenticationException(
-          "No API key provided.",
-          null,
-          null,
-          0);
+      throw new AuthenticationException("No API key provided.", null, null, 0);
     }
 
     this.setRequestParams(params);
@@ -93,11 +85,7 @@ public abstract class StripeCollection<T extends HasId> extends StripeObject
   public Iterable<T> autoPagingIterable(Map<String, Object> params, RequestOptions options) {
     String apiKey = options.getApiKey();
     if (apiKey == null) {
-      throw new AuthenticationException(
-          "No API key provided.",
-          null,
-          null,
-          0);
+      throw new AuthenticationException("No API key provided.", null, null, 0);
     }
     this.setRequestOptions(options);
     this.setRequestParams(params);
