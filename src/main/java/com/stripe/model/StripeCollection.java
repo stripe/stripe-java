@@ -58,14 +58,14 @@ public abstract class StripeCollection<T extends HasId> extends StripeObject
   @Setter(onMethod = @__({@Override}))
   private Map<String, Object> requestParams;
 
-  public Iterable<T> autoPagingIterable() {
+  public Iterable<T> autoPagingIterable() throws AuthenticationException {
     if (Stripe.apiKey == null) {
       throw new AuthenticationException("No API key provided.", null, null, 0);
     }
     return new PagingIterable<>(this);
   }
 
-  public Iterable<T> autoPagingIterable(Map<String, Object> params) {
+  public Iterable<T> autoPagingIterable(Map<String, Object> params) throws AuthenticationException {
     if (Stripe.apiKey == null) {
       throw new AuthenticationException("No API key provided.", null, null, 0);
     }
@@ -82,7 +82,8 @@ public abstract class StripeCollection<T extends HasId> extends StripeObject
    * @param params request parameters (will override the parameters from the initial list request)
    * @param options request options (will override the options from the initial list request)
    */
-  public Iterable<T> autoPagingIterable(Map<String, Object> params, RequestOptions options) {
+  public Iterable<T> autoPagingIterable(Map<String, Object> params, RequestOptions options)
+      throws AuthenticationException {
     String apiKey = options.getApiKey();
     if (apiKey == null) {
       throw new AuthenticationException("No API key provided.", null, null, 0);
