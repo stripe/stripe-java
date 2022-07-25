@@ -26,7 +26,7 @@ public class AccountUpdateParams extends ApiRequestParams {
 
   /** The business type. */
   @SerializedName("business_type")
-  Object businessType;
+  BusinessType businessType;
 
   /**
    * Each key of the dictionary represents a capability, and each capability maps to its settings
@@ -122,7 +122,7 @@ public class AccountUpdateParams extends ApiRequestParams {
   private AccountUpdateParams(
       Object accountToken,
       BusinessProfile businessProfile,
-      Object businessType,
+      BusinessType businessType,
       Capabilities capabilities,
       Company company,
       Object defaultCurrency,
@@ -161,7 +161,7 @@ public class AccountUpdateParams extends ApiRequestParams {
 
     private BusinessProfile businessProfile;
 
-    private Object businessType;
+    private BusinessType businessType;
 
     private Capabilities capabilities;
 
@@ -233,18 +233,6 @@ public class AccountUpdateParams extends ApiRequestParams {
 
     /** The business type. */
     public Builder setBusinessType(BusinessType businessType) {
-      this.businessType = businessType;
-      return this;
-    }
-
-    /** The business type. */
-    public Builder setBusinessType(String businessType) {
-      this.businessType = businessType;
-      return this;
-    }
-
-    /** The business type. */
-    public Builder setBusinessType(EmptyParam businessType) {
       this.businessType = businessType;
       return this;
     }

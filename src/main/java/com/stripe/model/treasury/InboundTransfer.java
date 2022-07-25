@@ -421,13 +421,8 @@ public class InboundTransfer extends ApiResource implements HasId {
     return new TestHelpers(this);
   }
 
-  public class TestHelpers {
+  public static class TestHelpers {
     private final InboundTransfer resource;
-
-    @Deprecated
-    public TestHelpers() {
-      this.resource = InboundTransfer.this;
-    }
 
     private TestHelpers(InboundTransfer resource) {
       this.resource = resource;

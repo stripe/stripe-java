@@ -1694,7 +1694,7 @@ public class PaymentIntent extends ApiResource implements HasId, MetadataStore<P
 
     /** A list of financial addresses that can be used to fund the customer balance. */
     @SerializedName("financial_addresses")
-    List<PaymentIntent.NextActionDisplayBankTransferInstructions.FinancialAddresses>
+    List<PaymentIntent.NextActionDisplayBankTransferInstructions.FinancialAddress>
         financialAddresses;
 
     /** A link to a hosted page that guides your customer through completing the transfer. */
@@ -1720,7 +1720,7 @@ public class PaymentIntent extends ApiResource implements HasId, MetadataStore<P
     @Getter
     @Setter
     @EqualsAndHashCode(callSuper = false)
-    public static class FinancialAddresses extends StripeObject {
+    public static class FinancialAddress extends StripeObject {
       /** Iban Records contain E.U. bank account details per the SEPA format. */
       @SerializedName("iban")
       Iban iban;
