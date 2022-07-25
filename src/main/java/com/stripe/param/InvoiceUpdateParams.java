@@ -1055,6 +1055,13 @@ public class InvoiceUpdateParams extends ApiRequestParams {
   @Getter
   public static class PaymentSettings {
     /**
+     * ID of the mandate to be used for this invoice. It must correspond to the payment method used
+     * to pay the invoice, including the invoice's default_payment_method or default_source, if set.
+     */
+    @SerializedName("default_mandate")
+    Object defaultMandate;
+
+    /**
      * Map of extra parameters for custom features not available in this client library. The content
      * in this map is not serialized under this field's {@code @SerializedName} value. Instead, each
      * key/value pair is serialized as if the key is a root-level field (serialized) name in this
@@ -1078,9 +1085,11 @@ public class InvoiceUpdateParams extends ApiRequestParams {
     Object paymentMethodTypes;
 
     private PaymentSettings(
+        Object defaultMandate,
         Map<String, Object> extraParams,
         PaymentMethodOptions paymentMethodOptions,
         Object paymentMethodTypes) {
+      this.defaultMandate = defaultMandate;
       this.extraParams = extraParams;
       this.paymentMethodOptions = paymentMethodOptions;
       this.paymentMethodTypes = paymentMethodTypes;
@@ -1091,6 +1100,8 @@ public class InvoiceUpdateParams extends ApiRequestParams {
     }
 
     public static class Builder {
+      private Object defaultMandate;
+
       private Map<String, Object> extraParams;
 
       private PaymentMethodOptions paymentMethodOptions;
@@ -1100,7 +1111,30 @@ public class InvoiceUpdateParams extends ApiRequestParams {
       /** Finalize and obtain parameter instance from this builder. */
       public PaymentSettings build() {
         return new PaymentSettings(
-            this.extraParams, this.paymentMethodOptions, this.paymentMethodTypes);
+            this.defaultMandate,
+            this.extraParams,
+            this.paymentMethodOptions,
+            this.paymentMethodTypes);
+      }
+
+      /**
+       * ID of the mandate to be used for this invoice. It must correspond to the payment method
+       * used to pay the invoice, including the invoice's default_payment_method or default_source,
+       * if set.
+       */
+      public Builder setDefaultMandate(String defaultMandate) {
+        this.defaultMandate = defaultMandate;
+        return this;
+      }
+
+      /**
+       * ID of the mandate to be used for this invoice. It must correspond to the payment method
+       * used to pay the invoice, including the invoice's default_payment_method or default_source,
+       * if set.
+       */
+      public Builder setDefaultMandate(EmptyParam defaultMandate) {
+        this.defaultMandate = defaultMandate;
+        return this;
       }
 
       /**
@@ -1738,6 +1772,15 @@ public class InvoiceUpdateParams extends ApiRequestParams {
         Map<String, Object> extraParams;
 
         /**
+         * Installment configuration for payments attempted on this invoice (Mexico Only).
+         *
+         * <p>For more information, see the <a
+         * href="https://stripe.com/docs/payments/installments">installments integration guide</a>.
+         */
+        @SerializedName("installments")
+        Installments installments;
+
+        /**
          * We strongly recommend that you rely on our SCA Engine to automatically prompt your
          * customers for authentication based on risk level and <a
          * href="https://stripe.com/docs/strong-customer-authentication">other requirements</a>.
@@ -1750,8 +1793,12 @@ public class InvoiceUpdateParams extends ApiRequestParams {
         @SerializedName("request_three_d_secure")
         RequestThreeDSecure requestThreeDSecure;
 
-        private Card(Map<String, Object> extraParams, RequestThreeDSecure requestThreeDSecure) {
+        private Card(
+            Map<String, Object> extraParams,
+            Installments installments,
+            RequestThreeDSecure requestThreeDSecure) {
           this.extraParams = extraParams;
+          this.installments = installments;
           this.requestThreeDSecure = requestThreeDSecure;
         }
 
@@ -1762,11 +1809,13 @@ public class InvoiceUpdateParams extends ApiRequestParams {
         public static class Builder {
           private Map<String, Object> extraParams;
 
+          private Installments installments;
+
           private RequestThreeDSecure requestThreeDSecure;
 
           /** Finalize and obtain parameter instance from this builder. */
           public Card build() {
-            return new Card(this.extraParams, this.requestThreeDSecure);
+            return new Card(this.extraParams, this.installments, this.requestThreeDSecure);
           }
 
           /**
@@ -1800,6 +1849,18 @@ public class InvoiceUpdateParams extends ApiRequestParams {
           }
 
           /**
+           * Installment configuration for payments attempted on this invoice (Mexico Only).
+           *
+           * <p>For more information, see the <a
+           * href="https://stripe.com/docs/payments/installments">installments integration
+           * guide</a>.
+           */
+          public Builder setInstallments(Installments installments) {
+            this.installments = installments;
+            return this;
+          }
+
+          /**
            * We strongly recommend that you rely on our SCA Engine to automatically prompt your
            * customers for authentication based on risk level and <a
            * href="https://stripe.com/docs/strong-customer-authentication">other requirements</a>.
@@ -1812,6 +1873,240 @@ public class InvoiceUpdateParams extends ApiRequestParams {
           public Builder setRequestThreeDSecure(RequestThreeDSecure requestThreeDSecure) {
             this.requestThreeDSecure = requestThreeDSecure;
             return this;
+          }
+        }
+
+        @Getter
+        public static class Installments {
+          /**
+           * Setting to true enables installments for this invoice. Setting to false will prevent
+           * any selected plan from applying to a payment.
+           */
+          @SerializedName("enabled")
+          Boolean enabled;
+
+          /**
+           * Map of extra parameters for custom features not available in this client library. The
+           * content in this map is not serialized under this field's {@code @SerializedName} value.
+           * Instead, each key/value pair is serialized as if the key is a root-level field
+           * (serialized) name in this param object. Effectively, this map is flattened to its
+           * parent instance.
+           */
+          @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
+          Map<String, Object> extraParams;
+
+          /** The selected installment plan to use for this invoice. */
+          @SerializedName("plan")
+          Object plan;
+
+          private Installments(Boolean enabled, Map<String, Object> extraParams, Object plan) {
+            this.enabled = enabled;
+            this.extraParams = extraParams;
+            this.plan = plan;
+          }
+
+          public static Builder builder() {
+            return new Builder();
+          }
+
+          public static class Builder {
+            private Boolean enabled;
+
+            private Map<String, Object> extraParams;
+
+            private Object plan;
+
+            /** Finalize and obtain parameter instance from this builder. */
+            public Installments build() {
+              return new Installments(this.enabled, this.extraParams, this.plan);
+            }
+
+            /**
+             * Setting to true enables installments for this invoice. Setting to false will prevent
+             * any selected plan from applying to a payment.
+             */
+            public Builder setEnabled(Boolean enabled) {
+              this.enabled = enabled;
+              return this;
+            }
+
+            /**
+             * Add a key/value pair to `extraParams` map. A map is initialized for the first
+             * `put/putAll` call, and subsequent calls add additional key/value pairs to the
+             * original map. See {@link
+             * InvoiceUpdateParams.PaymentSettings.PaymentMethodOptions.Card.Installments#extraParams}
+             * for the field documentation.
+             */
+            public Builder putExtraParam(String key, Object value) {
+              if (this.extraParams == null) {
+                this.extraParams = new HashMap<>();
+              }
+              this.extraParams.put(key, value);
+              return this;
+            }
+
+            /**
+             * Add all map key/value pairs to `extraParams` map. A map is initialized for the first
+             * `put/putAll` call, and subsequent calls add additional key/value pairs to the
+             * original map. See {@link
+             * InvoiceUpdateParams.PaymentSettings.PaymentMethodOptions.Card.Installments#extraParams}
+             * for the field documentation.
+             */
+            public Builder putAllExtraParam(Map<String, Object> map) {
+              if (this.extraParams == null) {
+                this.extraParams = new HashMap<>();
+              }
+              this.extraParams.putAll(map);
+              return this;
+            }
+
+            /** The selected installment plan to use for this invoice. */
+            public Builder setPlan(Plan plan) {
+              this.plan = plan;
+              return this;
+            }
+
+            /** The selected installment plan to use for this invoice. */
+            public Builder setPlan(EmptyParam plan) {
+              this.plan = plan;
+              return this;
+            }
+          }
+
+          @Getter
+          public static class Plan {
+            /**
+             * For {@code fixed_count} installment plans, this is the number of installment payments
+             * your customer will make to their credit card.
+             */
+            @SerializedName("count")
+            Long count;
+
+            /**
+             * Map of extra parameters for custom features not available in this client library. The
+             * content in this map is not serialized under this field's {@code @SerializedName}
+             * value. Instead, each key/value pair is serialized as if the key is a root-level field
+             * (serialized) name in this param object. Effectively, this map is flattened to its
+             * parent instance.
+             */
+            @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
+            Map<String, Object> extraParams;
+
+            /**
+             * For {@code fixed_count} installment plans, this is the interval between installment
+             * payments your customer will make to their credit card. One of {@code month}.
+             */
+            @SerializedName("interval")
+            Interval interval;
+
+            /** Type of installment plan, one of {@code fixed_count}. */
+            @SerializedName("type")
+            Type type;
+
+            private Plan(
+                Long count, Map<String, Object> extraParams, Interval interval, Type type) {
+              this.count = count;
+              this.extraParams = extraParams;
+              this.interval = interval;
+              this.type = type;
+            }
+
+            public static Builder builder() {
+              return new Builder();
+            }
+
+            public static class Builder {
+              private Long count;
+
+              private Map<String, Object> extraParams;
+
+              private Interval interval;
+
+              private Type type;
+
+              /** Finalize and obtain parameter instance from this builder. */
+              public Plan build() {
+                return new Plan(this.count, this.extraParams, this.interval, this.type);
+              }
+
+              /**
+               * For {@code fixed_count} installment plans, this is the number of installment
+               * payments your customer will make to their credit card.
+               */
+              public Builder setCount(Long count) {
+                this.count = count;
+                return this;
+              }
+
+              /**
+               * Add a key/value pair to `extraParams` map. A map is initialized for the first
+               * `put/putAll` call, and subsequent calls add additional key/value pairs to the
+               * original map. See {@link
+               * InvoiceUpdateParams.PaymentSettings.PaymentMethodOptions.Card.Installments.Plan#extraParams}
+               * for the field documentation.
+               */
+              public Builder putExtraParam(String key, Object value) {
+                if (this.extraParams == null) {
+                  this.extraParams = new HashMap<>();
+                }
+                this.extraParams.put(key, value);
+                return this;
+              }
+
+              /**
+               * Add all map key/value pairs to `extraParams` map. A map is initialized for the
+               * first `put/putAll` call, and subsequent calls add additional key/value pairs to the
+               * original map. See {@link
+               * InvoiceUpdateParams.PaymentSettings.PaymentMethodOptions.Card.Installments.Plan#extraParams}
+               * for the field documentation.
+               */
+              public Builder putAllExtraParam(Map<String, Object> map) {
+                if (this.extraParams == null) {
+                  this.extraParams = new HashMap<>();
+                }
+                this.extraParams.putAll(map);
+                return this;
+              }
+
+              /**
+               * For {@code fixed_count} installment plans, this is the interval between installment
+               * payments your customer will make to their credit card. One of {@code month}.
+               */
+              public Builder setInterval(Interval interval) {
+                this.interval = interval;
+                return this;
+              }
+
+              /** Type of installment plan, one of {@code fixed_count}. */
+              public Builder setType(Type type) {
+                this.type = type;
+                return this;
+              }
+            }
+
+            public enum Interval implements ApiRequestParams.EnumParam {
+              @SerializedName("month")
+              MONTH("month");
+
+              @Getter(onMethod_ = {@Override})
+              private final String value;
+
+              Interval(String value) {
+                this.value = value;
+              }
+            }
+
+            public enum Type implements ApiRequestParams.EnumParam {
+              @SerializedName("fixed_count")
+              FIXED_COUNT("fixed_count");
+
+              @Getter(onMethod_ = {@Override})
+              private final String value;
+
+              Type(String value) {
+                this.value = value;
+              }
+            }
           }
         }
 

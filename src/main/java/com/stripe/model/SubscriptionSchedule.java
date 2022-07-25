@@ -685,8 +685,8 @@ public class SubscriptionSchedule extends ApiResource
   @EqualsAndHashCode(callSuper = false)
   public static class Phase extends StripeObject {
     /**
-     * A list of prices and quantities that will generate invoice items appended to the first
-     * invoice for this phase.
+     * A list of prices and quantities that will generate invoice items appended to the next invoice
+     * for this phase.
      */
     @SerializedName("add_invoice_items")
     List<SubscriptionSchedule.AddInvoiceItem> addInvoiceItems;
