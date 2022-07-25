@@ -14,7 +14,7 @@ import lombok.Getter;
 @Getter
 public class SubscriptionCreateParams extends ApiRequestParams {
   /**
-   * A list of prices and quantities that will generate invoice items appended to the first invoice
+   * A list of prices and quantities that will generate invoice items appended to the next invoice
    * for this subscription. You may pass up to 20 items.
    */
   @SerializedName("add_invoice_items")

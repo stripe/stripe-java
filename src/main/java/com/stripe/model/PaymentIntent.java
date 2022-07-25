@@ -1349,46 +1349,22 @@ public class PaymentIntent extends ApiResource implements HasId, MetadataStore<P
         ApiResource.RequestMethod.POST, url, params, PaymentIntent.class, options);
   }
 
-  /**
-   * Manually reconcile the remaining amount for a customer_balance PaymentIntent.
-   *
-   * <p>This can be used when the cash balance for <a
-   * href="docs/payments/customer-balance/reconciliation#cash-manual-reconciliation">a customer in
-   * manual reconciliation mode</a> received funds.
-   */
+  /** Manually reconcile the remaining amount for a customer_balance PaymentIntent. */
   public PaymentIntent applyCustomerBalance() throws StripeException {
     return applyCustomerBalance((Map<String, Object>) null, (RequestOptions) null);
   }
 
-  /**
-   * Manually reconcile the remaining amount for a customer_balance PaymentIntent.
-   *
-   * <p>This can be used when the cash balance for <a
-   * href="docs/payments/customer-balance/reconciliation#cash-manual-reconciliation">a customer in
-   * manual reconciliation mode</a> received funds.
-   */
+  /** Manually reconcile the remaining amount for a customer_balance PaymentIntent. */
   public PaymentIntent applyCustomerBalance(RequestOptions options) throws StripeException {
     return applyCustomerBalance((Map<String, Object>) null, options);
   }
 
-  /**
-   * Manually reconcile the remaining amount for a customer_balance PaymentIntent.
-   *
-   * <p>This can be used when the cash balance for <a
-   * href="docs/payments/customer-balance/reconciliation#cash-manual-reconciliation">a customer in
-   * manual reconciliation mode</a> received funds.
-   */
+  /** Manually reconcile the remaining amount for a customer_balance PaymentIntent. */
   public PaymentIntent applyCustomerBalance(Map<String, Object> params) throws StripeException {
     return applyCustomerBalance(params, (RequestOptions) null);
   }
 
-  /**
-   * Manually reconcile the remaining amount for a customer_balance PaymentIntent.
-   *
-   * <p>This can be used when the cash balance for <a
-   * href="docs/payments/customer-balance/reconciliation#cash-manual-reconciliation">a customer in
-   * manual reconciliation mode</a> received funds.
-   */
+  /** Manually reconcile the remaining amount for a customer_balance PaymentIntent. */
   public PaymentIntent applyCustomerBalance(Map<String, Object> params, RequestOptions options)
       throws StripeException {
     String url =
@@ -1402,25 +1378,13 @@ public class PaymentIntent extends ApiResource implements HasId, MetadataStore<P
         ApiResource.RequestMethod.POST, url, params, PaymentIntent.class, options);
   }
 
-  /**
-   * Manually reconcile the remaining amount for a customer_balance PaymentIntent.
-   *
-   * <p>This can be used when the cash balance for <a
-   * href="docs/payments/customer-balance/reconciliation#cash-manual-reconciliation">a customer in
-   * manual reconciliation mode</a> received funds.
-   */
+  /** Manually reconcile the remaining amount for a customer_balance PaymentIntent. */
   public PaymentIntent applyCustomerBalance(PaymentIntentApplyCustomerBalanceParams params)
       throws StripeException {
     return applyCustomerBalance(params, (RequestOptions) null);
   }
 
-  /**
-   * Manually reconcile the remaining amount for a customer_balance PaymentIntent.
-   *
-   * <p>This can be used when the cash balance for <a
-   * href="docs/payments/customer-balance/reconciliation#cash-manual-reconciliation">a customer in
-   * manual reconciliation mode</a> received funds.
-   */
+  /** Manually reconcile the remaining amount for a customer_balance PaymentIntent. */
   public PaymentIntent applyCustomerBalance(
       PaymentIntentApplyCustomerBalanceParams params, RequestOptions options)
       throws StripeException {

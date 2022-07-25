@@ -128,8 +128,9 @@ public class SessionCreateParams extends ApiRequestParams {
   List<String> expand;
 
   /**
-   * The Epoch time in seconds at which the Checkout Session will expire. It can be anywhere from 1
-   * to 24 hours after Checkout Session creation. By default, this value is 24 hours from creation.
+   * The Epoch time in seconds at which the Checkout Session will expire. It can be anywhere from 30
+   * minutes to 24 hours after Checkout Session creation. By default, this value is 24 hours from
+   * creation.
    */
   @SerializedName("expires_at")
   Long expiresAt;
@@ -623,8 +624,8 @@ public class SessionCreateParams extends ApiRequestParams {
 
     /**
      * The Epoch time in seconds at which the Checkout Session will expire. It can be anywhere from
-     * 1 to 24 hours after Checkout Session creation. By default, this value is 24 hours from
-     * creation.
+     * 30 minutes to 24 hours after Checkout Session creation. By default, this value is 24 hours
+     * from creation.
      */
     public Builder setExpiresAt(Long expiresAt) {
       this.expiresAt = expiresAt;
@@ -4910,6 +4911,10 @@ public class SessionCreateParams extends ApiRequestParams {
       @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
       Map<String, Object> extraParams;
 
+      /** Installment options for card payments. */
+      @SerializedName("installments")
+      Installments installments;
+
       /**
        * Indicates that you intend to make future payments with this PaymentIntent's payment method.
        *
@@ -4950,10 +4955,12 @@ public class SessionCreateParams extends ApiRequestParams {
 
       private Card(
           Map<String, Object> extraParams,
+          Installments installments,
           SetupFutureUsage setupFutureUsage,
           String statementDescriptorSuffixKana,
           String statementDescriptorSuffixKanji) {
         this.extraParams = extraParams;
+        this.installments = installments;
         this.setupFutureUsage = setupFutureUsage;
         this.statementDescriptorSuffixKana = statementDescriptorSuffixKana;
         this.statementDescriptorSuffixKanji = statementDescriptorSuffixKanji;
@@ -4966,6 +4973,8 @@ public class SessionCreateParams extends ApiRequestParams {
       public static class Builder {
         private Map<String, Object> extraParams;
 
+        private Installments installments;
+
         private SetupFutureUsage setupFutureUsage;
 
         private String statementDescriptorSuffixKana;
@@ -4976,6 +4985,7 @@ public class SessionCreateParams extends ApiRequestParams {
         public Card build() {
           return new Card(
               this.extraParams,
+              this.installments,
               this.setupFutureUsage,
               this.statementDescriptorSuffixKana,
               this.statementDescriptorSuffixKanji);
@@ -5006,6 +5016,12 @@ public class SessionCreateParams extends ApiRequestParams {
             this.extraParams = new HashMap<>();
           }
           this.extraParams.putAll(map);
+          return this;
+        }
+
+        /** Installment options for card payments. */
+        public Builder setInstallments(Installments installments) {
+          this.installments = installments;
           return this;
         }
 
@@ -5052,6 +5068,248 @@ public class SessionCreateParams extends ApiRequestParams {
         public Builder setStatementDescriptorSuffixKanji(String statementDescriptorSuffixKanji) {
           this.statementDescriptorSuffixKanji = statementDescriptorSuffixKanji;
           return this;
+        }
+      }
+
+      @Getter
+      public static class Installments {
+        /**
+         * Setting to true enables installments for this PaymentIntent. This will cause the response
+         * to contain a list of available installment plans. Setting to false will prevent any
+         * selected plan from applying to a charge.
+         */
+        @SerializedName("enabled")
+        Boolean enabled;
+
+        /**
+         * Map of extra parameters for custom features not available in this client library. The
+         * content in this map is not serialized under this field's {@code @SerializedName} value.
+         * Instead, each key/value pair is serialized as if the key is a root-level field
+         * (serialized) name in this param object. Effectively, this map is flattened to its parent
+         * instance.
+         */
+        @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
+        Map<String, Object> extraParams;
+
+        /**
+         * The selected installment plan to use for this payment attempt. This parameter can only be
+         * provided during confirmation.
+         */
+        @SerializedName("plan")
+        Object plan;
+
+        private Installments(Boolean enabled, Map<String, Object> extraParams, Object plan) {
+          this.enabled = enabled;
+          this.extraParams = extraParams;
+          this.plan = plan;
+        }
+
+        public static Builder builder() {
+          return new Builder();
+        }
+
+        public static class Builder {
+          private Boolean enabled;
+
+          private Map<String, Object> extraParams;
+
+          private Object plan;
+
+          /** Finalize and obtain parameter instance from this builder. */
+          public Installments build() {
+            return new Installments(this.enabled, this.extraParams, this.plan);
+          }
+
+          /**
+           * Setting to true enables installments for this PaymentIntent. This will cause the
+           * response to contain a list of available installment plans. Setting to false will
+           * prevent any selected plan from applying to a charge.
+           */
+          public Builder setEnabled(Boolean enabled) {
+            this.enabled = enabled;
+            return this;
+          }
+
+          /**
+           * Add a key/value pair to `extraParams` map. A map is initialized for the first
+           * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
+           * map. See {@link SessionCreateParams.PaymentMethodOptions.Card.Installments#extraParams}
+           * for the field documentation.
+           */
+          public Builder putExtraParam(String key, Object value) {
+            if (this.extraParams == null) {
+              this.extraParams = new HashMap<>();
+            }
+            this.extraParams.put(key, value);
+            return this;
+          }
+
+          /**
+           * Add all map key/value pairs to `extraParams` map. A map is initialized for the first
+           * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
+           * map. See {@link SessionCreateParams.PaymentMethodOptions.Card.Installments#extraParams}
+           * for the field documentation.
+           */
+          public Builder putAllExtraParam(Map<String, Object> map) {
+            if (this.extraParams == null) {
+              this.extraParams = new HashMap<>();
+            }
+            this.extraParams.putAll(map);
+            return this;
+          }
+
+          /**
+           * The selected installment plan to use for this payment attempt. This parameter can only
+           * be provided during confirmation.
+           */
+          public Builder setPlan(Plan plan) {
+            this.plan = plan;
+            return this;
+          }
+
+          /**
+           * The selected installment plan to use for this payment attempt. This parameter can only
+           * be provided during confirmation.
+           */
+          public Builder setPlan(EmptyParam plan) {
+            this.plan = plan;
+            return this;
+          }
+        }
+
+        @Getter
+        public static class Plan {
+          /**
+           * For {@code fixed_count} installment plans, this is the number of installment payments
+           * your customer will make to their credit card.
+           */
+          @SerializedName("count")
+          Long count;
+
+          /**
+           * Map of extra parameters for custom features not available in this client library. The
+           * content in this map is not serialized under this field's {@code @SerializedName} value.
+           * Instead, each key/value pair is serialized as if the key is a root-level field
+           * (serialized) name in this param object. Effectively, this map is flattened to its
+           * parent instance.
+           */
+          @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
+          Map<String, Object> extraParams;
+
+          /**
+           * For {@code fixed_count} installment plans, this is the interval between installment
+           * payments your customer will make to their credit card. One of {@code month}.
+           */
+          @SerializedName("interval")
+          Interval interval;
+
+          /** Type of installment plan, one of {@code fixed_count}. */
+          @SerializedName("type")
+          Type type;
+
+          private Plan(Long count, Map<String, Object> extraParams, Interval interval, Type type) {
+            this.count = count;
+            this.extraParams = extraParams;
+            this.interval = interval;
+            this.type = type;
+          }
+
+          public static Builder builder() {
+            return new Builder();
+          }
+
+          public static class Builder {
+            private Long count;
+
+            private Map<String, Object> extraParams;
+
+            private Interval interval;
+
+            private Type type;
+
+            /** Finalize and obtain parameter instance from this builder. */
+            public Plan build() {
+              return new Plan(this.count, this.extraParams, this.interval, this.type);
+            }
+
+            /**
+             * For {@code fixed_count} installment plans, this is the number of installment payments
+             * your customer will make to their credit card.
+             */
+            public Builder setCount(Long count) {
+              this.count = count;
+              return this;
+            }
+
+            /**
+             * Add a key/value pair to `extraParams` map. A map is initialized for the first
+             * `put/putAll` call, and subsequent calls add additional key/value pairs to the
+             * original map. See {@link
+             * SessionCreateParams.PaymentMethodOptions.Card.Installments.Plan#extraParams} for the
+             * field documentation.
+             */
+            public Builder putExtraParam(String key, Object value) {
+              if (this.extraParams == null) {
+                this.extraParams = new HashMap<>();
+              }
+              this.extraParams.put(key, value);
+              return this;
+            }
+
+            /**
+             * Add all map key/value pairs to `extraParams` map. A map is initialized for the first
+             * `put/putAll` call, and subsequent calls add additional key/value pairs to the
+             * original map. See {@link
+             * SessionCreateParams.PaymentMethodOptions.Card.Installments.Plan#extraParams} for the
+             * field documentation.
+             */
+            public Builder putAllExtraParam(Map<String, Object> map) {
+              if (this.extraParams == null) {
+                this.extraParams = new HashMap<>();
+              }
+              this.extraParams.putAll(map);
+              return this;
+            }
+
+            /**
+             * For {@code fixed_count} installment plans, this is the interval between installment
+             * payments your customer will make to their credit card. One of {@code month}.
+             */
+            public Builder setInterval(Interval interval) {
+              this.interval = interval;
+              return this;
+            }
+
+            /** Type of installment plan, one of {@code fixed_count}. */
+            public Builder setType(Type type) {
+              this.type = type;
+              return this;
+            }
+          }
+
+          public enum Interval implements ApiRequestParams.EnumParam {
+            @SerializedName("month")
+            MONTH("month");
+
+            @Getter(onMethod_ = {@Override})
+            private final String value;
+
+            Interval(String value) {
+              this.value = value;
+            }
+          }
+
+          public enum Type implements ApiRequestParams.EnumParam {
+            @SerializedName("fixed_count")
+            FIXED_COUNT("fixed_count");
+
+            @Getter(onMethod_ = {@Override})
+            private final String value;
+
+            Type(String value) {
+              this.value = value;
+            }
+          }
         }
       }
 

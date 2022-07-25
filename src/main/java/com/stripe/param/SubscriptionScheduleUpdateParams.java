@@ -916,8 +916,8 @@ public class SubscriptionScheduleUpdateParams extends ApiRequestParams {
   @Getter
   public static class Phase {
     /**
-     * A list of prices and quantities that will generate invoice items appended to the next
-     * invoice. You may pass up to 20 items.
+     * A list of prices and quantities that will generate invoice items appended to the next invoice
+     * for this phase. You may pass up to 20 items.
      */
     @SerializedName("add_invoice_items")
     List<AddInvoiceItem> addInvoiceItems;

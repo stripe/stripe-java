@@ -1737,6 +1737,9 @@ public class Invoice extends ApiResource implements HasId, MetadataStore<Invoice
     @Setter
     @EqualsAndHashCode(callSuper = false)
     public static class Card extends StripeObject {
+      @SerializedName("installments")
+      Installments installments;
+
       /**
        * We strongly recommend that you rely on our SCA Engine to automatically prompt your
        * customers for authentication based on risk level and <a
@@ -1751,6 +1754,15 @@ public class Invoice extends ApiResource implements HasId, MetadataStore<Invoice
        */
       @SerializedName("request_three_d_secure")
       String requestThreeDSecure;
+
+      @Getter
+      @Setter
+      @EqualsAndHashCode(callSuper = false)
+      public static class Installments extends StripeObject {
+        /** Whether Installments are enabled for this Invoice. */
+        @SerializedName("enabled")
+        Boolean enabled;
+      }
     }
 
     @Getter
@@ -1838,6 +1850,13 @@ public class Invoice extends ApiResource implements HasId, MetadataStore<Invoice
   @Setter
   @EqualsAndHashCode(callSuper = false)
   public static class PaymentSettings extends StripeObject {
+    /**
+     * ID of the mandate to be used for this invoice. It must correspond to the payment method used
+     * to pay the invoice, including the invoice's default_payment_method or default_source, if set.
+     */
+    @SerializedName("default_mandate")
+    String defaultMandate;
+
     /** Payment-method-specific configuration to provide to the invoice’s PaymentIntent. */
     @SerializedName("payment_method_options")
     PaymentMethodOptions paymentMethodOptions;
