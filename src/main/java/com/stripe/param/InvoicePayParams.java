@@ -39,6 +39,14 @@ public class InvoicePayParams extends ApiRequestParams {
   Boolean forgive;
 
   /**
+   * ID of the mandate to be used for this invoice. It must correspond to the payment method used to
+   * pay the invoice, including the payment_method param or the invoice's default_payment_method or
+   * default_source, if set.
+   */
+  @SerializedName("mandate")
+  String mandate;
+
+  /**
    * Indicates if a customer is on or off-session while an invoice payment is attempted. Defaults to
    * {@code true} (off-session).
    */
@@ -70,6 +78,7 @@ public class InvoicePayParams extends ApiRequestParams {
       List<String> expand,
       Map<String, Object> extraParams,
       Boolean forgive,
+      String mandate,
       Boolean offSession,
       Boolean paidOutOfBand,
       String paymentMethod,
@@ -77,6 +86,7 @@ public class InvoicePayParams extends ApiRequestParams {
     this.expand = expand;
     this.extraParams = extraParams;
     this.forgive = forgive;
+    this.mandate = mandate;
     this.offSession = offSession;
     this.paidOutOfBand = paidOutOfBand;
     this.paymentMethod = paymentMethod;
@@ -94,6 +104,8 @@ public class InvoicePayParams extends ApiRequestParams {
 
     private Boolean forgive;
 
+    private String mandate;
+
     private Boolean offSession;
 
     private Boolean paidOutOfBand;
@@ -108,6 +120,7 @@ public class InvoicePayParams extends ApiRequestParams {
           this.expand,
           this.extraParams,
           this.forgive,
+          this.mandate,
           this.offSession,
           this.paidOutOfBand,
           this.paymentMethod,
@@ -179,6 +192,16 @@ public class InvoicePayParams extends ApiRequestParams {
      */
     public Builder setForgive(Boolean forgive) {
       this.forgive = forgive;
+      return this;
+    }
+
+    /**
+     * ID of the mandate to be used for this invoice. It must correspond to the payment method used
+     * to pay the invoice, including the payment_method param or the invoice's
+     * default_payment_method or default_source, if set.
+     */
+    public Builder setMandate(String mandate) {
+      this.mandate = mandate;
       return this;
     }
 
