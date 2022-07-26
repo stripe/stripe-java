@@ -14,15 +14,12 @@ final class EventDataClassLookup {
   static {
     classLookup.put("account", Account.class);
     classLookup.put("account_link", AccountLink.class);
-    classLookup.put("alipay_account", AlipayAccount.class);
     classLookup.put("apple_pay_domain", ApplePayDomain.class);
     classLookup.put("application", Application.class);
     classLookup.put("application_fee", ApplicationFee.class);
     classLookup.put("balance", Balance.class);
     classLookup.put("balance_transaction", BalanceTransaction.class);
     classLookup.put("bank_account", BankAccount.class);
-    classLookup.put("bitcoin_receiver", BitcoinReceiver.class);
-    classLookup.put("bitcoin_transaction", BitcoinTransaction.class);
     classLookup.put("capability", Capability.class);
     classLookup.put("card", Card.class);
     classLookup.put("cash_balance", CashBalance.class);
@@ -60,7 +57,6 @@ final class EventDataClassLookup {
     classLookup.put("product", Product.class);
     classLookup.put("promotion_code", PromotionCode.class);
     classLookup.put("quote", Quote.class);
-    classLookup.put("recipient", Recipient.class);
     classLookup.put("refund", Refund.class);
     classLookup.put("reserve_transaction", ReserveTransaction.class);
     classLookup.put("review", Review.class);

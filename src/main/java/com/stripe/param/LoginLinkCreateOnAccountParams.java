@@ -24,15 +24,9 @@ public class LoginLinkCreateOnAccountParams extends ApiRequestParams {
   @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
   Map<String, Object> extraParams;
 
-  /** Where to redirect the user after they log out of their dashboard. */
-  @SerializedName("redirect_url")
-  String redirectUrl;
-
-  private LoginLinkCreateOnAccountParams(
-      List<String> expand, Map<String, Object> extraParams, String redirectUrl) {
+  private LoginLinkCreateOnAccountParams(List<String> expand, Map<String, Object> extraParams) {
     this.expand = expand;
     this.extraParams = extraParams;
-    this.redirectUrl = redirectUrl;
   }
 
   public static Builder builder() {
@@ -44,11 +38,9 @@ public class LoginLinkCreateOnAccountParams extends ApiRequestParams {
 
     private Map<String, Object> extraParams;
 
-    private String redirectUrl;
-
     /** Finalize and obtain parameter instance from this builder. */
     public LoginLinkCreateOnAccountParams build() {
-      return new LoginLinkCreateOnAccountParams(this.expand, this.extraParams, this.redirectUrl);
+      return new LoginLinkCreateOnAccountParams(this.expand, this.extraParams);
     }
 
     /**
@@ -100,12 +92,6 @@ public class LoginLinkCreateOnAccountParams extends ApiRequestParams {
         this.extraParams = new HashMap<>();
       }
       this.extraParams.putAll(map);
-      return this;
-    }
-
-    /** Where to redirect the user after they log out of their dashboard. */
-    public Builder setRedirectUrl(String redirectUrl) {
-      this.redirectUrl = redirectUrl;
       return this;
     }
   }

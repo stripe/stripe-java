@@ -206,15 +206,6 @@ public class Card extends ApiResource
   String object;
 
   /**
-   * The recipient that this card belongs to. This attribute will not be in the card object if the
-   * card belongs to a customer or account instead.
-   */
-  @SerializedName("recipient")
-  @Getter(lombok.AccessLevel.NONE)
-  @Setter(lombok.AccessLevel.NONE)
-  ExpandableField<Recipient> recipient;
-
-  /**
    * For external accounts, possible values are {@code new} and {@code errored}. If a transfer
    * fails, the status is set to {@code errored} and transfers are stopped until account details are
    * updated.
@@ -263,24 +254,6 @@ public class Card extends ApiResource
 
   public void setCustomerObject(Customer expandableObject) {
     this.customer = new ExpandableField<Customer>(expandableObject.getId(), expandableObject);
-  }
-
-  /** Get ID of expandable {@code recipient} object. */
-  public String getRecipient() {
-    return (this.recipient != null) ? this.recipient.getId() : null;
-  }
-
-  public void setRecipient(String id) {
-    this.recipient = ApiResource.setExpandableFieldId(id, this.recipient);
-  }
-
-  /** Get expanded {@code recipient}. */
-  public Recipient getRecipientObject() {
-    return (this.recipient != null) ? this.recipient.getExpanded() : null;
-  }
-
-  public void setRecipientObject(Recipient expandableObject) {
-    this.recipient = new ExpandableField<Recipient>(expandableObject.getId(), expandableObject);
   }
 
   /**

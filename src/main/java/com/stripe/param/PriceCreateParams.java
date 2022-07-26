@@ -133,8 +133,7 @@ public class PriceCreateParams extends ApiRequestParams {
 
   /**
    * A positive integer in cents (or local equivalent) (or 0 for a free price) representing how much
-   * to charge. One of {@code unit_amount} or {@code custom_unit_amount} is required, unless {@code
-   * billing_scheme=tiered}.
+   * to charge.
    */
   @SerializedName("unit_amount")
   Long unitAmount;
@@ -501,8 +500,7 @@ public class PriceCreateParams extends ApiRequestParams {
 
     /**
      * A positive integer in cents (or local equivalent) (or 0 for a free price) representing how
-     * much to charge. One of {@code unit_amount} or {@code custom_unit_amount} is required, unless
-     * {@code billing_scheme=tiered}.
+     * much to charge.
      */
     public Builder setUnitAmount(Long unitAmount) {
       this.unitAmount = unitAmount;
