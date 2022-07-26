@@ -139,19 +139,6 @@ class GeneratedExamples extends BaseStripeTest {
   }
 
   @Test
-  public void testSessionListLineItems() throws StripeException {
-    com.stripe.model.checkout.Session resource =
-        com.stripe.model.checkout.Session.retrieve("sess_xyz");
-    com.stripe.param.checkout.SessionListLineItemsParams params =
-        com.stripe.param.checkout.SessionListLineItemsParams.builder().build();
-
-    com.stripe.model.checkout.LineItemCollection lineItems = resource.listLineItems(params);
-    assertNotNull(lineItems);
-    verifyRequest(
-        ApiResource.RequestMethod.GET, "/v1/checkout/sessions/sess_xyz/line_items", params.toMap());
-  }
-
-  @Test
   public void testCustomerCreateFundingInstructions() throws StripeException {
     Customer resource = Customer.retrieve("cus_123");
     CustomerCreateFundingInstructionsParams params =
