@@ -8,11 +8,6 @@ package com.stripe.exception;
 public class ApiKeyMissingException extends RuntimeException {
   private static final long serialVersionUID = 1L;
 
-  /** Initializes a new instance of the {@link ApiKeyMissingException}. */
-  public ApiKeyMissingException() {
-    super();
-  }
-
   /** Initializes a new instance of the {@link ApiKeyMissingException} with a message. */
   public ApiKeyMissingException(String message) {
     super(message);
