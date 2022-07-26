@@ -47,7 +47,7 @@ public abstract class StripeSearchResult<T> extends StripeObject
   public Iterable<T> autoPagingIterable() {
     if (Stripe.apiKey == null) {
       throw new ApiKeyMissingException(
-          "API key is not set for autoPagingIterable. You can set the API key globally using Stripe.ApiKey, or through RequestOptions in with autoPagingIterable(params, options).");
+          "API key is not set for autoPagingIterable. You can set the API key globally using Stripe.ApiKey, or through RequestOptions with autoPagingIterable(params, options).");
     }
     return new SearchPagingIterable<>(this);
   }
@@ -55,7 +55,7 @@ public abstract class StripeSearchResult<T> extends StripeObject
   public Iterable<T> autoPagingIterable(Map<String, Object> params) {
     if (Stripe.apiKey == null) {
       throw new ApiKeyMissingException(
-          "API key is not set for autoPagingIterable. You can set the API key globally using Stripe.ApiKey, or through RequestOptions in with autoPagingIterable(params, options).");
+          "API key is not set for autoPagingIterable. You can set the API key globally using Stripe.ApiKey, or through RequestOptions with autoPagingIterable(params, options).");
     }
     this.setRequestParams(params);
     return new SearchPagingIterable<>(this);
@@ -73,7 +73,7 @@ public abstract class StripeSearchResult<T> extends StripeObject
     String apiKey = options.getApiKey();
     if (Stripe.apiKey == null && apiKey == null) {
       throw new ApiKeyMissingException(
-          "API key is not set for autoPagingIterable. You can set the API key globally using Stripe.ApiKey, or through RequestOptions in with autoPagingIterable(params, options).");
+          "API key is not set for autoPagingIterable. You can set the API key globally using Stripe.ApiKey, or through RequestOptions with autoPagingIterable(params, options).");
     }
     this.setRequestOptions(options);
     this.setRequestParams(params);
