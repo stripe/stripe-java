@@ -29,8 +29,9 @@ import lombok.Setter;
 public class Dispute extends ApiResource
     implements MetadataStore<Dispute>, BalanceTransactionSource {
   /**
-   * Disputed amount. Usually the amount of the {@code transaction}, but can differ (usually because
-   * of currency fluctuation).
+   * Disputed amount in the card's currency and in the <a
+   * href="https://stripe.com/docs/currencies#zero-decimal">smallest currency unit</a>. Usually the
+   * amount of the {@code transaction}, but can differ (usually because of currency fluctuation).
    */
   @SerializedName("amount")
   Long amount;

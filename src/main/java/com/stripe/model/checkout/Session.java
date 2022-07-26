@@ -804,6 +804,9 @@ public class Session extends ApiResource implements HasId {
     @SerializedName("card")
     Card card;
 
+    @SerializedName("customer_balance")
+    CustomerBalance customerBalance;
+
     @SerializedName("eps")
     Eps eps;
 
@@ -1079,6 +1082,49 @@ public class Session extends ApiResource implements HasId {
     @Getter
     @Setter
     @EqualsAndHashCode(callSuper = false)
+    public static class BankTransfer extends StripeObject {
+      @SerializedName("eu_bank_transfer")
+      EuBankTransfer euBankTransfer;
+
+      /**
+       * List of address types that should be returned in the financial_addresses response. If not
+       * specified, all valid types will be returned.
+       *
+       * <p>Permitted values include: {@code sort_code}, {@code zengin}, {@code iban}, or {@code
+       * spei}.
+       */
+      @SerializedName("requested_address_types")
+      List<String> requestedAddressTypes;
+
+      /**
+       * The bank transfer type that this PaymentIntent is allowed to use for funding Permitted
+       * values include: {@code eu_bank_transfer}, {@code gb_bank_transfer}, {@code
+       * jp_bank_transfer}, or {@code mx_bank_transfer}.
+       *
+       * <p>One of {@code eu_bank_transfer}, {@code gb_bank_transfer}, {@code jp_bank_transfer}, or
+       * {@code mx_bank_transfer}.
+       */
+      @SerializedName("type")
+      String type;
+
+      @Getter
+      @Setter
+      @EqualsAndHashCode(callSuper = false)
+      public static class EuBankTransfer extends StripeObject {
+        /**
+         * The desired country code of the bank account information. Permitted values include:
+         * {@code DE}, {@code ES}, {@code FR}, {@code IE}, or {@code NL}.
+         *
+         * <p>One of {@code DE}, {@code ES}, {@code FR}, {@code IE}, or {@code NL}.
+         */
+        @SerializedName("country")
+        String country;
+      }
+    }
+
+    @Getter
+    @Setter
+    @EqualsAndHashCode(callSuper = false)
     public static class Boleto extends StripeObject {
       /**
        * The number of calendar days before a Boleto voucher expires. For example, if you create a
@@ -1164,6 +1210,43 @@ public class Session extends ApiResource implements HasId {
         @SerializedName("enabled")
         Boolean enabled;
       }
+    }
+
+    @Getter
+    @Setter
+    @EqualsAndHashCode(callSuper = false)
+    public static class CustomerBalance extends StripeObject {
+      @SerializedName("bank_transfer")
+      BankTransfer bankTransfer;
+
+      /**
+       * The funding method type to be used when there are not enough funds in the customer balance.
+       * Permitted values include: {@code bank_transfer}.
+       *
+       * <p>Equal to {@code bank_transfer}.
+       */
+      @SerializedName("funding_type")
+      String fundingType;
+
+      /**
+       * Indicates that you intend to make future payments with this PaymentIntent's payment method.
+       *
+       * <p>Providing this parameter will <a
+       * href="https://stripe.com/docs/payments/save-during-payment">attach the payment method</a>
+       * to the PaymentIntent's Customer, if present, after the PaymentIntent is confirmed and any
+       * required actions from the user are complete. If no Customer was provided, the payment
+       * method can still be <a
+       * href="https://stripe.com/docs/api/payment_methods/attach">attached</a> to a Customer after
+       * the transaction completes.
+       *
+       * <p>When processing card payments, Stripe also uses {@code setup_future_usage} to
+       * dynamically optimize your payment flow and comply with regional legislation and network
+       * rules, such as <a href="https://stripe.com/docs/strong-customer-authentication">SCA</a>.
+       *
+       * <p>Equal to {@code none}.
+       */
+      @SerializedName("setup_future_usage")
+      String setupFutureUsage;
     }
 
     @Getter
