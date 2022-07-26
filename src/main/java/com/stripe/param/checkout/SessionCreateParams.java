@@ -3279,6 +3279,10 @@ public class SessionCreateParams extends ApiRequestParams {
     @SerializedName("card")
     Card card;
 
+    /** contains details about the Customer Balance payment method options. */
+    @SerializedName("customer_balance")
+    CustomerBalance customerBalance;
+
     /** contains details about the EPS payment method options. */
     @SerializedName("eps")
     Eps eps;
@@ -3354,6 +3358,7 @@ public class SessionCreateParams extends ApiRequestParams {
         Bancontact bancontact,
         Boleto boleto,
         Card card,
+        CustomerBalance customerBalance,
         Eps eps,
         Map<String, Object> extraParams,
         Fpx fpx,
@@ -3378,6 +3383,7 @@ public class SessionCreateParams extends ApiRequestParams {
       this.bancontact = bancontact;
       this.boleto = boleto;
       this.card = card;
+      this.customerBalance = customerBalance;
       this.eps = eps;
       this.extraParams = extraParams;
       this.fpx = fpx;
@@ -3417,6 +3423,8 @@ public class SessionCreateParams extends ApiRequestParams {
       private Boleto boleto;
 
       private Card card;
+
+      private CustomerBalance customerBalance;
 
       private Eps eps;
 
@@ -3460,6 +3468,7 @@ public class SessionCreateParams extends ApiRequestParams {
             this.bancontact,
             this.boleto,
             this.card,
+            this.customerBalance,
             this.eps,
             this.extraParams,
             this.fpx,
@@ -3528,6 +3537,12 @@ public class SessionCreateParams extends ApiRequestParams {
       /** contains details about the Card payment method options. */
       public Builder setCard(Card card) {
         this.card = card;
+        return this;
+      }
+
+      /** contains details about the Customer Balance payment method options. */
+      public Builder setCustomerBalance(CustomerBalance customerBalance) {
+        this.customerBalance = customerBalance;
         return this;
       }
 
@@ -5319,6 +5334,442 @@ public class SessionCreateParams extends ApiRequestParams {
 
         @SerializedName("on_session")
         ON_SESSION("on_session");
+
+        @Getter(onMethod_ = {@Override})
+        private final String value;
+
+        SetupFutureUsage(String value) {
+          this.value = value;
+        }
+      }
+    }
+
+    @Getter
+    public static class CustomerBalance {
+      /**
+       * Configuration for the bank transfer funding type, if the {@code funding_type} is set to
+       * {@code bank_transfer}.
+       */
+      @SerializedName("bank_transfer")
+      BankTransfer bankTransfer;
+
+      /**
+       * Map of extra parameters for custom features not available in this client library. The
+       * content in this map is not serialized under this field's {@code @SerializedName} value.
+       * Instead, each key/value pair is serialized as if the key is a root-level field (serialized)
+       * name in this param object. Effectively, this map is flattened to its parent instance.
+       */
+      @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
+      Map<String, Object> extraParams;
+
+      /**
+       * The funding method type to be used when there are not enough funds in the customer balance.
+       * Permitted values include: {@code bank_transfer}.
+       */
+      @SerializedName("funding_type")
+      FundingType fundingType;
+
+      /**
+       * Indicates that you intend to make future payments with this PaymentIntent's payment method.
+       *
+       * <p>Providing this parameter will <a
+       * href="https://stripe.com/docs/payments/save-during-payment">attach the payment method</a>
+       * to the PaymentIntent's Customer, if present, after the PaymentIntent is confirmed and any
+       * required actions from the user are complete. If no Customer was provided, the payment
+       * method can still be <a
+       * href="https://stripe.com/docs/api/payment_methods/attach">attached</a> to a Customer after
+       * the transaction completes.
+       *
+       * <p>When processing card payments, Stripe also uses {@code setup_future_usage} to
+       * dynamically optimize your payment flow and comply with regional legislation and network
+       * rules, such as <a href="https://stripe.com/docs/strong-customer-authentication">SCA</a>.
+       */
+      @SerializedName("setup_future_usage")
+      SetupFutureUsage setupFutureUsage;
+
+      private CustomerBalance(
+          BankTransfer bankTransfer,
+          Map<String, Object> extraParams,
+          FundingType fundingType,
+          SetupFutureUsage setupFutureUsage) {
+        this.bankTransfer = bankTransfer;
+        this.extraParams = extraParams;
+        this.fundingType = fundingType;
+        this.setupFutureUsage = setupFutureUsage;
+      }
+
+      public static Builder builder() {
+        return new Builder();
+      }
+
+      public static class Builder {
+        private BankTransfer bankTransfer;
+
+        private Map<String, Object> extraParams;
+
+        private FundingType fundingType;
+
+        private SetupFutureUsage setupFutureUsage;
+
+        /** Finalize and obtain parameter instance from this builder. */
+        public CustomerBalance build() {
+          return new CustomerBalance(
+              this.bankTransfer, this.extraParams, this.fundingType, this.setupFutureUsage);
+        }
+
+        /**
+         * Configuration for the bank transfer funding type, if the {@code funding_type} is set to
+         * {@code bank_transfer}.
+         */
+        public Builder setBankTransfer(BankTransfer bankTransfer) {
+          this.bankTransfer = bankTransfer;
+          return this;
+        }
+
+        /**
+         * Add a key/value pair to `extraParams` map. A map is initialized for the first
+         * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
+         * map. See {@link SessionCreateParams.PaymentMethodOptions.CustomerBalance#extraParams} for
+         * the field documentation.
+         */
+        public Builder putExtraParam(String key, Object value) {
+          if (this.extraParams == null) {
+            this.extraParams = new HashMap<>();
+          }
+          this.extraParams.put(key, value);
+          return this;
+        }
+
+        /**
+         * Add all map key/value pairs to `extraParams` map. A map is initialized for the first
+         * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
+         * map. See {@link SessionCreateParams.PaymentMethodOptions.CustomerBalance#extraParams} for
+         * the field documentation.
+         */
+        public Builder putAllExtraParam(Map<String, Object> map) {
+          if (this.extraParams == null) {
+            this.extraParams = new HashMap<>();
+          }
+          this.extraParams.putAll(map);
+          return this;
+        }
+
+        /**
+         * The funding method type to be used when there are not enough funds in the customer
+         * balance. Permitted values include: {@code bank_transfer}.
+         */
+        public Builder setFundingType(FundingType fundingType) {
+          this.fundingType = fundingType;
+          return this;
+        }
+
+        /**
+         * Indicates that you intend to make future payments with this PaymentIntent's payment
+         * method.
+         *
+         * <p>Providing this parameter will <a
+         * href="https://stripe.com/docs/payments/save-during-payment">attach the payment method</a>
+         * to the PaymentIntent's Customer, if present, after the PaymentIntent is confirmed and any
+         * required actions from the user are complete. If no Customer was provided, the payment
+         * method can still be <a
+         * href="https://stripe.com/docs/api/payment_methods/attach">attached</a> to a Customer
+         * after the transaction completes.
+         *
+         * <p>When processing card payments, Stripe also uses {@code setup_future_usage} to
+         * dynamically optimize your payment flow and comply with regional legislation and network
+         * rules, such as <a href="https://stripe.com/docs/strong-customer-authentication">SCA</a>.
+         */
+        public Builder setSetupFutureUsage(SetupFutureUsage setupFutureUsage) {
+          this.setupFutureUsage = setupFutureUsage;
+          return this;
+        }
+      }
+
+      @Getter
+      public static class BankTransfer {
+        @SerializedName("eu_bank_transfer")
+        EuBankTransfer euBankTransfer;
+
+        /**
+         * Map of extra parameters for custom features not available in this client library. The
+         * content in this map is not serialized under this field's {@code @SerializedName} value.
+         * Instead, each key/value pair is serialized as if the key is a root-level field
+         * (serialized) name in this param object. Effectively, this map is flattened to its parent
+         * instance.
+         */
+        @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
+        Map<String, Object> extraParams;
+
+        /**
+         * List of address types that should be returned in the financial_addresses response. If not
+         * specified, all valid types will be returned.
+         *
+         * <p>Permitted values include: {@code sort_code}, {@code zengin}, {@code iban}, or {@code
+         * spei}.
+         */
+        @SerializedName("requested_address_types")
+        List<RequestedAddressType> requestedAddressTypes;
+
+        /**
+         * The list of bank transfer types that this PaymentIntent is allowed to use for funding.
+         * Permitted values include: {@code us_bank_account}, {@code eu_bank_account}, {@code
+         * id_bank_account}, {@code gb_bank_account}, {@code jp_bank_account}, {@code
+         * mx_bank_account}, {@code eu_bank_transfer}, {@code gb_bank_transfer}, {@code
+         * id_bank_transfer}, {@code jp_bank_transfer}, {@code mx_bank_transfer}, or {@code
+         * us_bank_transfer}.
+         */
+        @SerializedName("type")
+        Type type;
+
+        private BankTransfer(
+            EuBankTransfer euBankTransfer,
+            Map<String, Object> extraParams,
+            List<RequestedAddressType> requestedAddressTypes,
+            Type type) {
+          this.euBankTransfer = euBankTransfer;
+          this.extraParams = extraParams;
+          this.requestedAddressTypes = requestedAddressTypes;
+          this.type = type;
+        }
+
+        public static Builder builder() {
+          return new Builder();
+        }
+
+        public static class Builder {
+          private EuBankTransfer euBankTransfer;
+
+          private Map<String, Object> extraParams;
+
+          private List<RequestedAddressType> requestedAddressTypes;
+
+          private Type type;
+
+          /** Finalize and obtain parameter instance from this builder. */
+          public BankTransfer build() {
+            return new BankTransfer(
+                this.euBankTransfer, this.extraParams, this.requestedAddressTypes, this.type);
+          }
+
+          public Builder setEuBankTransfer(EuBankTransfer euBankTransfer) {
+            this.euBankTransfer = euBankTransfer;
+            return this;
+          }
+
+          /**
+           * Add a key/value pair to `extraParams` map. A map is initialized for the first
+           * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
+           * map. See {@link
+           * SessionCreateParams.PaymentMethodOptions.CustomerBalance.BankTransfer#extraParams} for
+           * the field documentation.
+           */
+          public Builder putExtraParam(String key, Object value) {
+            if (this.extraParams == null) {
+              this.extraParams = new HashMap<>();
+            }
+            this.extraParams.put(key, value);
+            return this;
+          }
+
+          /**
+           * Add all map key/value pairs to `extraParams` map. A map is initialized for the first
+           * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
+           * map. See {@link
+           * SessionCreateParams.PaymentMethodOptions.CustomerBalance.BankTransfer#extraParams} for
+           * the field documentation.
+           */
+          public Builder putAllExtraParam(Map<String, Object> map) {
+            if (this.extraParams == null) {
+              this.extraParams = new HashMap<>();
+            }
+            this.extraParams.putAll(map);
+            return this;
+          }
+
+          /**
+           * Add an element to `requestedAddressTypes` list. A list is initialized for the first
+           * `add/addAll` call, and subsequent calls adds additional elements to the original list.
+           * See {@link
+           * SessionCreateParams.PaymentMethodOptions.CustomerBalance.BankTransfer#requestedAddressTypes}
+           * for the field documentation.
+           */
+          public Builder addRequestedAddressType(RequestedAddressType element) {
+            if (this.requestedAddressTypes == null) {
+              this.requestedAddressTypes = new ArrayList<>();
+            }
+            this.requestedAddressTypes.add(element);
+            return this;
+          }
+
+          /**
+           * Add all elements to `requestedAddressTypes` list. A list is initialized for the first
+           * `add/addAll` call, and subsequent calls adds additional elements to the original list.
+           * See {@link
+           * SessionCreateParams.PaymentMethodOptions.CustomerBalance.BankTransfer#requestedAddressTypes}
+           * for the field documentation.
+           */
+          public Builder addAllRequestedAddressType(List<RequestedAddressType> elements) {
+            if (this.requestedAddressTypes == null) {
+              this.requestedAddressTypes = new ArrayList<>();
+            }
+            this.requestedAddressTypes.addAll(elements);
+            return this;
+          }
+
+          /**
+           * The list of bank transfer types that this PaymentIntent is allowed to use for funding.
+           * Permitted values include: {@code us_bank_account}, {@code eu_bank_account}, {@code
+           * id_bank_account}, {@code gb_bank_account}, {@code jp_bank_account}, {@code
+           * mx_bank_account}, {@code eu_bank_transfer}, {@code gb_bank_transfer}, {@code
+           * id_bank_transfer}, {@code jp_bank_transfer}, {@code mx_bank_transfer}, or {@code
+           * us_bank_transfer}.
+           */
+          public Builder setType(Type type) {
+            this.type = type;
+            return this;
+          }
+        }
+
+        @Getter
+        public static class EuBankTransfer {
+          /**
+           * The desired country code of the bank account information. Permitted values include:
+           * {@code DE}, {@code ES}, {@code FR}, {@code IE}, or {@code NL}.
+           */
+          @SerializedName("country")
+          String country;
+
+          /**
+           * Map of extra parameters for custom features not available in this client library. The
+           * content in this map is not serialized under this field's {@code @SerializedName} value.
+           * Instead, each key/value pair is serialized as if the key is a root-level field
+           * (serialized) name in this param object. Effectively, this map is flattened to its
+           * parent instance.
+           */
+          @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
+          Map<String, Object> extraParams;
+
+          private EuBankTransfer(String country, Map<String, Object> extraParams) {
+            this.country = country;
+            this.extraParams = extraParams;
+          }
+
+          public static Builder builder() {
+            return new Builder();
+          }
+
+          public static class Builder {
+            private String country;
+
+            private Map<String, Object> extraParams;
+
+            /** Finalize and obtain parameter instance from this builder. */
+            public EuBankTransfer build() {
+              return new EuBankTransfer(this.country, this.extraParams);
+            }
+
+            /**
+             * The desired country code of the bank account information. Permitted values include:
+             * {@code DE}, {@code ES}, {@code FR}, {@code IE}, or {@code NL}.
+             */
+            public Builder setCountry(String country) {
+              this.country = country;
+              return this;
+            }
+
+            /**
+             * Add a key/value pair to `extraParams` map. A map is initialized for the first
+             * `put/putAll` call, and subsequent calls add additional key/value pairs to the
+             * original map. See {@link
+             * SessionCreateParams.PaymentMethodOptions.CustomerBalance.BankTransfer.EuBankTransfer#extraParams}
+             * for the field documentation.
+             */
+            public Builder putExtraParam(String key, Object value) {
+              if (this.extraParams == null) {
+                this.extraParams = new HashMap<>();
+              }
+              this.extraParams.put(key, value);
+              return this;
+            }
+
+            /**
+             * Add all map key/value pairs to `extraParams` map. A map is initialized for the first
+             * `put/putAll` call, and subsequent calls add additional key/value pairs to the
+             * original map. See {@link
+             * SessionCreateParams.PaymentMethodOptions.CustomerBalance.BankTransfer.EuBankTransfer#extraParams}
+             * for the field documentation.
+             */
+            public Builder putAllExtraParam(Map<String, Object> map) {
+              if (this.extraParams == null) {
+                this.extraParams = new HashMap<>();
+              }
+              this.extraParams.putAll(map);
+              return this;
+            }
+          }
+        }
+
+        public enum RequestedAddressType implements ApiRequestParams.EnumParam {
+          @SerializedName("iban")
+          IBAN("iban"),
+
+          @SerializedName("sepa")
+          SEPA("sepa"),
+
+          @SerializedName("sort_code")
+          SORT_CODE("sort_code"),
+
+          @SerializedName("spei")
+          SPEI("spei"),
+
+          @SerializedName("zengin")
+          ZENGIN("zengin");
+
+          @Getter(onMethod_ = {@Override})
+          private final String value;
+
+          RequestedAddressType(String value) {
+            this.value = value;
+          }
+        }
+
+        public enum Type implements ApiRequestParams.EnumParam {
+          @SerializedName("eu_bank_transfer")
+          EU_BANK_TRANSFER("eu_bank_transfer"),
+
+          @SerializedName("gb_bank_transfer")
+          GB_BANK_TRANSFER("gb_bank_transfer"),
+
+          @SerializedName("jp_bank_transfer")
+          JP_BANK_TRANSFER("jp_bank_transfer"),
+
+          @SerializedName("mx_bank_transfer")
+          MX_BANK_TRANSFER("mx_bank_transfer");
+
+          @Getter(onMethod_ = {@Override})
+          private final String value;
+
+          Type(String value) {
+            this.value = value;
+          }
+        }
+      }
+
+      public enum FundingType implements ApiRequestParams.EnumParam {
+        @SerializedName("bank_transfer")
+        BANK_TRANSFER("bank_transfer");
+
+        @Getter(onMethod_ = {@Override})
+        private final String value;
+
+        FundingType(String value) {
+          this.value = value;
+        }
+      }
+
+      public enum SetupFutureUsage implements ApiRequestParams.EnumParam {
+        @SerializedName("none")
+        NONE("none");
 
         @Getter(onMethod_ = {@Override})
         private final String value;
@@ -9949,6 +10400,9 @@ public class SessionCreateParams extends ApiRequestParams {
 
     @SerializedName("card")
     CARD("card"),
+
+    @SerializedName("customer_balance")
+    CUSTOMER_BALANCE("customer_balance"),
 
     @SerializedName("eps")
     EPS("eps"),
