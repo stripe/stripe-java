@@ -880,9 +880,6 @@ public class WebhookEndpointCreateParams extends ApiRequestParams {
     @SerializedName("order.created")
     ORDER__CREATED("order.created"),
 
-    @SerializedName("order.payment_failed")
-    ORDER__PAYMENT_FAILED("order.payment_failed"),
-
     @SerializedName("payment_intent.amount_capturable_updated")
     PAYMENT_INTENT__AMOUNT_CAPTURABLE_UPDATED("payment_intent.amount_capturable_updated"),
 

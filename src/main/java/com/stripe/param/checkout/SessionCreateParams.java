@@ -5487,6 +5487,7 @@ public class SessionCreateParams extends ApiRequestParams {
 
       @Getter
       public static class BankTransfer {
+        /** Configuration for eu_bank_transfer funding type. */
         @SerializedName("eu_bank_transfer")
         EuBankTransfer euBankTransfer;
 
@@ -5551,6 +5552,7 @@ public class SessionCreateParams extends ApiRequestParams {
                 this.euBankTransfer, this.extraParams, this.requestedAddressTypes, this.type);
           }
 
+          /** Configuration for eu_bank_transfer funding type. */
           public Builder setEuBankTransfer(EuBankTransfer euBankTransfer) {
             this.euBankTransfer = euBankTransfer;
             return this;

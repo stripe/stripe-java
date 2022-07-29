@@ -37,15 +37,20 @@ public class PaymentSourceCollectionCreateParams extends ApiRequestParams {
   @SerializedName("source")
   String source;
 
+  @SerializedName("validate")
+  Boolean validate;
+
   private PaymentSourceCollectionCreateParams(
       List<String> expand,
       Map<String, Object> extraParams,
       Map<String, String> metadata,
-      String source) {
+      String source,
+      Boolean validate) {
     this.expand = expand;
     this.extraParams = extraParams;
     this.metadata = metadata;
     this.source = source;
+    this.validate = validate;
   }
 
   public static Builder builder() {
@@ -61,10 +66,12 @@ public class PaymentSourceCollectionCreateParams extends ApiRequestParams {
 
     private String source;
 
+    private Boolean validate;
+
     /** Finalize and obtain parameter instance from this builder. */
     public PaymentSourceCollectionCreateParams build() {
       return new PaymentSourceCollectionCreateParams(
-          this.expand, this.extraParams, this.metadata, this.source);
+          this.expand, this.extraParams, this.metadata, this.source, this.validate);
     }
 
     /**
@@ -148,6 +155,11 @@ public class PaymentSourceCollectionCreateParams extends ApiRequestParams {
     /** Please refer to full <a href="https://stripe.com/docs/api">documentation</a> instead. */
     public Builder setSource(String source) {
       this.source = source;
+      return this;
+    }
+
+    public Builder setValidate(Boolean validate) {
+      this.validate = validate;
       return this;
     }
   }

@@ -74,7 +74,6 @@ final class EventDataClassLookup {
     classLookup.put("tax_deducted_at_source", TaxDeductedAtSource.class);
     classLookup.put("tax_id", TaxId.class);
     classLookup.put("tax_rate", TaxRate.class);
-    classLookup.put("three_d_secure", ThreeDSecure.class);
     classLookup.put("token", Token.class);
     classLookup.put("topup", Topup.class);
     classLookup.put("transfer", Transfer.class);
