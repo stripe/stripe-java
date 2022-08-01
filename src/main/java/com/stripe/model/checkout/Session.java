@@ -487,6 +487,66 @@ public class Session extends ApiResource implements HasId {
   }
 
   /**
+   * When retrieving a Checkout Session, there is an includable <strong>line_items</strong> property
+   * containing the first handful of those items. There is also a URL where you can retrieve the
+   * full (paginated) list of line items.
+   */
+  public LineItemCollection listLineItems() throws StripeException {
+    return listLineItems((Map<String, Object>) null, (RequestOptions) null);
+  }
+
+  /**
+   * When retrieving a Checkout Session, there is an includable <strong>line_items</strong> property
+   * containing the first handful of those items. There is also a URL where you can retrieve the
+   * full (paginated) list of line items.
+   */
+  public LineItemCollection listLineItems(Map<String, Object> params) throws StripeException {
+    return listLineItems(params, (RequestOptions) null);
+  }
+
+  /**
+   * When retrieving a Checkout Session, there is an includable <strong>line_items</strong> property
+   * containing the first handful of those items. There is also a URL where you can retrieve the
+   * full (paginated) list of line items.
+   */
+  public LineItemCollection listLineItems(Map<String, Object> params, RequestOptions options)
+      throws StripeException {
+    String url =
+        String.format(
+            "%s%s",
+            Stripe.getApiBase(),
+            String.format(
+                "/v1/checkout/sessions/%s/line_items", ApiResource.urlEncodeId(this.getId())));
+    return ApiResource.requestCollection(url, params, LineItemCollection.class, options);
+  }
+
+  /**
+   * When retrieving a Checkout Session, there is an includable <strong>line_items</strong> property
+   * containing the first handful of those items. There is also a URL where you can retrieve the
+   * full (paginated) list of line items.
+   */
+  public LineItemCollection listLineItems(SessionListLineItemsParams params)
+      throws StripeException {
+    return listLineItems(params, (RequestOptions) null);
+  }
+
+  /**
+   * When retrieving a Checkout Session, there is an includable <strong>line_items</strong> property
+   * containing the first handful of those items. There is also a URL where you can retrieve the
+   * full (paginated) list of line items.
+   */
+  public LineItemCollection listLineItems(SessionListLineItemsParams params, RequestOptions options)
+      throws StripeException {
+    String url =
+        String.format(
+            "%s%s",
+            Stripe.getApiBase(),
+            String.format(
+                "/v1/checkout/sessions/%s/line_items", ApiResource.urlEncodeId(this.getId())));
+    return ApiResource.requestCollection(url, params, LineItemCollection.class, options);
+  }
+
+  /**
    * A Session can be expired when it is in one of these statuses: <code>open</code>
    *
    * <p>After it expires, a customer can’t complete a Session and customers loading the Session see
@@ -556,66 +616,6 @@ public class Session extends ApiResource implements HasId {
             String.format(
                 "/v1/checkout/sessions/%s/expire", ApiResource.urlEncodeId(this.getId())));
     return ApiResource.request(ApiResource.RequestMethod.POST, url, params, Session.class, options);
-  }
-
-  /**
-   * When retrieving a Checkout Session, there is an includable <strong>line_items</strong> property
-   * containing the first handful of those items. There is also a URL where you can retrieve the
-   * full (paginated) list of line items.
-   */
-  public LineItemCollection listLineItems() throws StripeException {
-    return listLineItems((Map<String, Object>) null, (RequestOptions) null);
-  }
-
-  /**
-   * When retrieving a Checkout Session, there is an includable <strong>line_items</strong> property
-   * containing the first handful of those items. There is also a URL where you can retrieve the
-   * full (paginated) list of line items.
-   */
-  public LineItemCollection listLineItems(Map<String, Object> params) throws StripeException {
-    return listLineItems(params, (RequestOptions) null);
-  }
-
-  /**
-   * When retrieving a Checkout Session, there is an includable <strong>line_items</strong> property
-   * containing the first handful of those items. There is also a URL where you can retrieve the
-   * full (paginated) list of line items.
-   */
-  public LineItemCollection listLineItems(Map<String, Object> params, RequestOptions options)
-      throws StripeException {
-    String url =
-        String.format(
-            "%s%s",
-            Stripe.getApiBase(),
-            String.format(
-                "/v1/checkout/sessions/%s/line_items", ApiResource.urlEncodeId(this.getId())));
-    return ApiResource.requestCollection(url, params, LineItemCollection.class, options);
-  }
-
-  /**
-   * When retrieving a Checkout Session, there is an includable <strong>line_items</strong> property
-   * containing the first handful of those items. There is also a URL where you can retrieve the
-   * full (paginated) list of line items.
-   */
-  public LineItemCollection listLineItems(SessionListLineItemsParams params)
-      throws StripeException {
-    return listLineItems(params, (RequestOptions) null);
-  }
-
-  /**
-   * When retrieving a Checkout Session, there is an includable <strong>line_items</strong> property
-   * containing the first handful of those items. There is also a URL where you can retrieve the
-   * full (paginated) list of line items.
-   */
-  public LineItemCollection listLineItems(SessionListLineItemsParams params, RequestOptions options)
-      throws StripeException {
-    String url =
-        String.format(
-            "%s%s",
-            Stripe.getApiBase(),
-            String.format(
-                "/v1/checkout/sessions/%s/line_items", ApiResource.urlEncodeId(this.getId())));
-    return ApiResource.requestCollection(url, params, LineItemCollection.class, options);
   }
 
   @Getter

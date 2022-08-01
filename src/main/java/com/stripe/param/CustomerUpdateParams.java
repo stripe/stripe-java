@@ -133,15 +133,8 @@ public class CustomerUpdateParams extends ApiRequestParams {
   @SerializedName("tax_exempt")
   EnumParam taxExempt;
 
-  /**
-   * Unix timestamp representing the end of the trial period the customer will get before being
-   * charged for the first time. This will always overwrite any trials that might apply via a
-   * subscribed plan. If set, trial_end will override the default trial period of the plan the
-   * customer is being subscribed to. The special value {@code now} can be provided to end the
-   * customer's trial immediately. Can be at most two years from {@code billing_cycle_anchor}.
-   */
-  @SerializedName("trial_end")
-  Object trialEnd;
+  @SerializedName("validate")
+  Boolean validate;
 
   private CustomerUpdateParams(
       Object address,
@@ -165,7 +158,7 @@ public class CustomerUpdateParams extends ApiRequestParams {
       Object source,
       Tax tax,
       EnumParam taxExempt,
-      Object trialEnd) {
+      Boolean validate) {
     this.address = address;
     this.balance = balance;
     this.cashBalance = cashBalance;
@@ -187,7 +180,7 @@ public class CustomerUpdateParams extends ApiRequestParams {
     this.source = source;
     this.tax = tax;
     this.taxExempt = taxExempt;
-    this.trialEnd = trialEnd;
+    this.validate = validate;
   }
 
   public static Builder builder() {
@@ -237,7 +230,7 @@ public class CustomerUpdateParams extends ApiRequestParams {
 
     private EnumParam taxExempt;
 
-    private Object trialEnd;
+    private Boolean validate;
 
     /** Finalize and obtain parameter instance from this builder. */
     public CustomerUpdateParams build() {
@@ -263,7 +256,7 @@ public class CustomerUpdateParams extends ApiRequestParams {
           this.source,
           this.tax,
           this.taxExempt,
-          this.trialEnd);
+          this.validate);
     }
 
     /** The customer's address. */
@@ -617,27 +610,8 @@ public class CustomerUpdateParams extends ApiRequestParams {
       return this;
     }
 
-    /**
-     * Unix timestamp representing the end of the trial period the customer will get before being
-     * charged for the first time. This will always overwrite any trials that might apply via a
-     * subscribed plan. If set, trial_end will override the default trial period of the plan the
-     * customer is being subscribed to. The special value {@code now} can be provided to end the
-     * customer's trial immediately. Can be at most two years from {@code billing_cycle_anchor}.
-     */
-    public Builder setTrialEnd(TrialEnd trialEnd) {
-      this.trialEnd = trialEnd;
-      return this;
-    }
-
-    /**
-     * Unix timestamp representing the end of the trial period the customer will get before being
-     * charged for the first time. This will always overwrite any trials that might apply via a
-     * subscribed plan. If set, trial_end will override the default trial period of the plan the
-     * customer is being subscribed to. The special value {@code now} can be provided to end the
-     * customer's trial immediately. Can be at most two years from {@code billing_cycle_anchor}.
-     */
-    public Builder setTrialEnd(Long trialEnd) {
-      this.trialEnd = trialEnd;
+    public Builder setValidate(Boolean validate) {
+      this.validate = validate;
       return this;
     }
   }
@@ -1797,18 +1771,6 @@ public class CustomerUpdateParams extends ApiRequestParams {
     private final String value;
 
     TaxExempt(String value) {
-      this.value = value;
-    }
-  }
-
-  public enum TrialEnd implements ApiRequestParams.EnumParam {
-    @SerializedName("now")
-    NOW("now");
-
-    @Getter(onMethod_ = {@Override})
-    private final String value;
-
-    TrialEnd(String value) {
       this.value = value;
     }
   }
