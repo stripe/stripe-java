@@ -130,6 +130,9 @@ public class CustomerCreateParams extends ApiRequestParams {
   @SerializedName("test_clock")
   String testClock;
 
+  @SerializedName("validate")
+  Boolean validate;
+
   private CustomerCreateParams(
       Object address,
       Long balance,
@@ -153,7 +156,8 @@ public class CustomerCreateParams extends ApiRequestParams {
       Tax tax,
       EnumParam taxExempt,
       List<TaxIdData> taxIdData,
-      String testClock) {
+      String testClock,
+      Boolean validate) {
     this.address = address;
     this.balance = balance;
     this.cashBalance = cashBalance;
@@ -177,6 +181,7 @@ public class CustomerCreateParams extends ApiRequestParams {
     this.taxExempt = taxExempt;
     this.taxIdData = taxIdData;
     this.testClock = testClock;
+    this.validate = validate;
   }
 
   public static Builder builder() {
@@ -230,6 +235,8 @@ public class CustomerCreateParams extends ApiRequestParams {
 
     private String testClock;
 
+    private Boolean validate;
+
     /** Finalize and obtain parameter instance from this builder. */
     public CustomerCreateParams build() {
       return new CustomerCreateParams(
@@ -255,7 +262,8 @@ public class CustomerCreateParams extends ApiRequestParams {
           this.tax,
           this.taxExempt,
           this.taxIdData,
-          this.testClock);
+          this.testClock,
+          this.validate);
     }
 
     /** The customer's address. */
@@ -550,6 +558,11 @@ public class CustomerCreateParams extends ApiRequestParams {
     /** ID of the test clock to attach to the customer. */
     public Builder setTestClock(String testClock) {
       this.testClock = testClock;
+      return this;
+    }
+
+    public Builder setValidate(Boolean validate) {
+      this.validate = validate;
       return this;
     }
   }

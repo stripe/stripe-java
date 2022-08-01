@@ -568,18 +568,6 @@ public class WebhookEndpointUpdateParams extends ApiRequestParams {
     @SerializedName("order.created")
     ORDER__CREATED("order.created"),
 
-    @SerializedName("order.payment_failed")
-    ORDER__PAYMENT_FAILED("order.payment_failed"),
-
-    @SerializedName("order.payment_succeeded")
-    ORDER__PAYMENT_SUCCEEDED("order.payment_succeeded"),
-
-    @SerializedName("order.updated")
-    ORDER__UPDATED("order.updated"),
-
-    @SerializedName("order_return.created")
-    ORDER_RETURN__CREATED("order_return.created"),
-
     @SerializedName("payment_intent.amount_capturable_updated")
     PAYMENT_INTENT__AMOUNT_CAPTURABLE_UPDATED("payment_intent.amount_capturable_updated"),
 
@@ -835,12 +823,6 @@ public class WebhookEndpointUpdateParams extends ApiRequestParams {
     @SerializedName("transfer.created")
     TRANSFER__CREATED("transfer.created"),
 
-    @SerializedName("transfer.failed")
-    TRANSFER__FAILED("transfer.failed"),
-
-    @SerializedName("transfer.paid")
-    TRANSFER__PAID("transfer.paid"),
-
     @SerializedName("transfer.reversed")
     TRANSFER__REVERSED("transfer.reversed"),
 
@@ -933,10 +915,7 @@ public class WebhookEndpointUpdateParams extends ApiRequestParams {
     TREASURY__RECEIVED_CREDIT__SUCCEEDED("treasury.received_credit.succeeded"),
 
     @SerializedName("treasury.received_debit.created")
-    TREASURY__RECEIVED_DEBIT__CREATED("treasury.received_debit.created"),
-
-    @SerializedName("treasury.received_credit.reversed")
-    TREASURY__RECEIVED_CREDIT__REVERSED("treasury.received_credit.reversed");
+    TREASURY__RECEIVED_DEBIT__CREATED("treasury.received_debit.created");
 
     @Getter(onMethod_ = {@Override})
     private final String value;

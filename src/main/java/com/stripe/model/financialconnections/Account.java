@@ -301,40 +301,6 @@ public class Account extends ApiResource implements HasId {
         options);
   }
 
-  /** Refreshes the data associated with a Financial Connections <code>Account</code>. */
-  public static com.stripe.model.financialconnections.Account refresh(
-      String account, Map<String, Object> params, RequestOptions options) throws StripeException {
-    String url =
-        String.format(
-            "%s%s",
-            Stripe.getApiBase(),
-            String.format(
-                "/v1/financial_connections/accounts/%s/refresh", ApiResource.urlEncodeId(account)));
-    return ApiResource.request(
-        ApiResource.RequestMethod.POST,
-        url,
-        params,
-        com.stripe.model.financialconnections.Account.class,
-        options);
-  }
-
-  /** Refreshes the data associated with a Financial Connections <code>Account</code>. */
-  public static com.stripe.model.financialconnections.Account refresh(
-      String account, AccountRefreshParams params, RequestOptions options) throws StripeException {
-    String url =
-        String.format(
-            "%s%s",
-            Stripe.getApiBase(),
-            String.format(
-                "/v1/financial_connections/accounts/%s/refresh", ApiResource.urlEncodeId(account)));
-    return ApiResource.request(
-        ApiResource.RequestMethod.POST,
-        url,
-        params,
-        com.stripe.model.financialconnections.Account.class,
-        options);
-  }
-
   /**
    * Disables your access to a Financial Connections <code>Account</code>. You will no longer be
    * able to access data associated with the account (e.g. balances, transactions).
@@ -404,49 +370,6 @@ public class Account extends ApiResource implements HasId {
             String.format(
                 "/v1/financial_connections/accounts/%s/disconnect",
                 ApiResource.urlEncodeId(this.getId())));
-    return ApiResource.request(
-        ApiResource.RequestMethod.POST,
-        url,
-        params,
-        com.stripe.model.financialconnections.Account.class,
-        options);
-  }
-
-  /**
-   * Disables your access to a Financial Connections <code>Account</code>. You will no longer be
-   * able to access data associated with the account (e.g. balances, transactions).
-   */
-  public static com.stripe.model.financialconnections.Account disconnect(
-      String account, Map<String, Object> params, RequestOptions options) throws StripeException {
-    String url =
-        String.format(
-            "%s%s",
-            Stripe.getApiBase(),
-            String.format(
-                "/v1/financial_connections/accounts/%s/disconnect",
-                ApiResource.urlEncodeId(account)));
-    return ApiResource.request(
-        ApiResource.RequestMethod.POST,
-        url,
-        params,
-        com.stripe.model.financialconnections.Account.class,
-        options);
-  }
-
-  /**
-   * Disables your access to a Financial Connections <code>Account</code>. You will no longer be
-   * able to access data associated with the account (e.g. balances, transactions).
-   */
-  public static com.stripe.model.financialconnections.Account disconnect(
-      String account, AccountDisconnectParams params, RequestOptions options)
-      throws StripeException {
-    String url =
-        String.format(
-            "%s%s",
-            Stripe.getApiBase(),
-            String.format(
-                "/v1/financial_connections/accounts/%s/disconnect",
-                ApiResource.urlEncodeId(account)));
     return ApiResource.request(
         ApiResource.RequestMethod.POST,
         url,
