@@ -629,11 +629,17 @@ public class CardholderUpdateParams extends ApiRequestParams {
     @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
     Map<String, Object> extraParams;
 
-    /** The first name of this cardholder. */
+    /**
+     * The first name of this cardholder. This field cannot contain any special characters or
+     * numbers.
+     */
     @SerializedName("first_name")
     Object firstName;
 
-    /** The last name of this cardholder. */
+    /**
+     * The last name of this cardholder. This field cannot contain any special characters or
+     * numbers.
+     */
     @SerializedName("last_name")
     Object lastName;
 
@@ -707,25 +713,37 @@ public class CardholderUpdateParams extends ApiRequestParams {
         return this;
       }
 
-      /** The first name of this cardholder. */
+      /**
+       * The first name of this cardholder. This field cannot contain any special characters or
+       * numbers.
+       */
       public Builder setFirstName(String firstName) {
         this.firstName = firstName;
         return this;
       }
 
-      /** The first name of this cardholder. */
+      /**
+       * The first name of this cardholder. This field cannot contain any special characters or
+       * numbers.
+       */
       public Builder setFirstName(EmptyParam firstName) {
         this.firstName = firstName;
         return this;
       }
 
-      /** The last name of this cardholder. */
+      /**
+       * The last name of this cardholder. This field cannot contain any special characters or
+       * numbers.
+       */
       public Builder setLastName(String lastName) {
         this.lastName = lastName;
         return this;
       }
 
-      /** The last name of this cardholder. */
+      /**
+       * The last name of this cardholder. This field cannot contain any special characters or
+       * numbers.
+       */
       public Builder setLastName(EmptyParam lastName) {
         this.lastName = lastName;
         return this;

@@ -230,25 +230,23 @@ public class Session extends ApiResource implements HasId {
   @Setter(lombok.AccessLevel.NONE)
   ExpandableField<SetupIntent> setupIntent;
 
-  /** Shipping information for this Checkout Session. */
-  @SerializedName("shipping")
-  ShippingDetails shipping;
-
   /**
    * When set, provides configuration for Checkout to collect a shipping address from a customer.
    */
   @SerializedName("shipping_address_collection")
   ShippingAddressCollection shippingAddressCollection;
 
+  /** The details of the customer cost of shipping, including the customer chosen ShippingRate. */
+  @SerializedName("shipping_cost")
+  ShippingCost shippingCost;
+
+  /** Shipping information for this Checkout Session. */
+  @SerializedName("shipping_details")
+  ShippingDetails shippingDetails;
+
   /** The shipping rate options applied to this Session. */
   @SerializedName("shipping_options")
   List<Session.ShippingOption> shippingOptions;
-
-  /** The ID of the ShippingRate for Checkout Sessions in {@code payment} mode. */
-  @SerializedName("shipping_rate")
-  @Getter(lombok.AccessLevel.NONE)
-  @Setter(lombok.AccessLevel.NONE)
-  ExpandableField<ShippingRate> shippingRate;
 
   /**
    * The status of the Checkout Session, one of {@code open}, {@code complete}, or {@code expired}.
@@ -366,25 +364,6 @@ public class Session extends ApiResource implements HasId {
 
   public void setSetupIntentObject(SetupIntent expandableObject) {
     this.setupIntent = new ExpandableField<SetupIntent>(expandableObject.getId(), expandableObject);
-  }
-
-  /** Get ID of expandable {@code shippingRate} object. */
-  public String getShippingRate() {
-    return (this.shippingRate != null) ? this.shippingRate.getId() : null;
-  }
-
-  public void setShippingRate(String id) {
-    this.shippingRate = ApiResource.setExpandableFieldId(id, this.shippingRate);
-  }
-
-  /** Get expanded {@code shippingRate}. */
-  public ShippingRate getShippingRateObject() {
-    return (this.shippingRate != null) ? this.shippingRate.getExpanded() : null;
-  }
-
-  public void setShippingRateObject(ShippingRate expandableObject) {
-    this.shippingRate =
-        new ExpandableField<ShippingRate>(expandableObject.getId(), expandableObject);
   }
 
   /** Get ID of expandable {@code subscription} object. */
@@ -1642,6 +1621,52 @@ public class Session extends ApiResource implements HasId {
      */
     @SerializedName("allowed_countries")
     List<String> allowedCountries;
+  }
+
+  @Getter
+  @Setter
+  @EqualsAndHashCode(callSuper = false)
+  public static class ShippingCost extends StripeObject {
+    /** Total shipping cost before any discounts or taxes are applied. */
+    @SerializedName("amount_subtotal")
+    Long amountSubtotal;
+
+    /** Total tax amount applied due to shipping costs. If no tax was applied, defaults to 0. */
+    @SerializedName("amount_tax")
+    Long amountTax;
+
+    /** Total shipping cost after discounts and taxes are applied. */
+    @SerializedName("amount_total")
+    Long amountTotal;
+
+    /** The ID of the ShippingRate for this order. */
+    @SerializedName("shipping_rate")
+    @Getter(lombok.AccessLevel.NONE)
+    @Setter(lombok.AccessLevel.NONE)
+    ExpandableField<ShippingRate> shippingRate;
+
+    /** The taxes applied to the shipping rate. */
+    @SerializedName("taxes")
+    List<LineItem.Tax> taxes;
+
+    /** Get ID of expandable {@code shippingRate} object. */
+    public String getShippingRate() {
+      return (this.shippingRate != null) ? this.shippingRate.getId() : null;
+    }
+
+    public void setShippingRate(String id) {
+      this.shippingRate = ApiResource.setExpandableFieldId(id, this.shippingRate);
+    }
+
+    /** Get expanded {@code shippingRate}. */
+    public ShippingRate getShippingRateObject() {
+      return (this.shippingRate != null) ? this.shippingRate.getExpanded() : null;
+    }
+
+    public void setShippingRateObject(ShippingRate expandableObject) {
+      this.shippingRate =
+          new ExpandableField<ShippingRate>(expandableObject.getId(), expandableObject);
+    }
   }
 
   @Getter

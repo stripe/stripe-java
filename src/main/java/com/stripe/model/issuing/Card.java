@@ -36,7 +36,7 @@ public class Card extends ApiResource implements HasId, MetadataStore<Card> {
   /**
    * The reason why the card was canceled.
    *
-   * <p>One of {@code lost}, or {@code stolen}.
+   * <p>One of {@code design_rejected}, {@code lost}, or {@code stolen}.
    */
   @SerializedName("cancellation_reason")
   String cancellationReason;

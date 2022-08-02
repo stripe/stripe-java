@@ -62,13 +62,6 @@ public class Customer extends ApiResource implements HasId, MetadataStore<Custom
   String currency;
 
   /**
-   * The default three-letter <a href="https://stripe.com/docs/currencies">ISO code for the
-   * currency</a> that the customer will be charged in for billing purposes.
-   */
-  @SerializedName("default_currency")
-  String defaultCurrency;
-
-  /**
    * ID of the default payment source for the customer.
    *
    * <p>If you are using payment methods created via the PaymentMethods API, see the <a
