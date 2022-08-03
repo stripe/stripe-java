@@ -29,12 +29,8 @@ public class PaymentSourceTypeAdapterFactory implements TypeAdapterFactory {
         gson.getDelegateAdapter(this, TypeToken.get(com.stripe.model.PaymentSource.class));
     final TypeAdapter<com.stripe.model.Account> accountAdapter =
         gson.getDelegateAdapter(this, TypeToken.get(com.stripe.model.Account.class));
-    final TypeAdapter<com.stripe.model.AlipayAccount> alipayAccountAdapter =
-        gson.getDelegateAdapter(this, TypeToken.get(com.stripe.model.AlipayAccount.class));
     final TypeAdapter<com.stripe.model.BankAccount> bankAccountAdapter =
         gson.getDelegateAdapter(this, TypeToken.get(com.stripe.model.BankAccount.class));
-    final TypeAdapter<com.stripe.model.BitcoinReceiver> bitcoinReceiverAdapter =
-        gson.getDelegateAdapter(this, TypeToken.get(com.stripe.model.BitcoinReceiver.class));
     final TypeAdapter<com.stripe.model.Card> cardAdapter =
         gson.getDelegateAdapter(this, TypeToken.get(com.stripe.model.Card.class));
     final TypeAdapter<com.stripe.model.Source> sourceAdapter =
@@ -54,12 +50,8 @@ public class PaymentSourceTypeAdapterFactory implements TypeAdapterFactory {
             String objectType = object.getAsJsonPrimitive(discriminator).getAsString();
             if ("account".equals(objectType)) {
               objectResult = accountAdapter.fromJsonTree(object);
-            } else if ("alipay_account".equals(objectType)) {
-              objectResult = alipayAccountAdapter.fromJsonTree(object);
             } else if ("bank_account".equals(objectType)) {
               objectResult = bankAccountAdapter.fromJsonTree(object);
-            } else if ("bitcoin_receiver".equals(objectType)) {
-              objectResult = bitcoinReceiverAdapter.fromJsonTree(object);
             } else if ("card".equals(objectType)) {
               objectResult = cardAdapter.fromJsonTree(object);
             } else if ("source".equals(objectType)) {

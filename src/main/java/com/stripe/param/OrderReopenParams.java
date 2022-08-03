@@ -10,7 +10,7 @@ import java.util.Map;
 import lombok.Getter;
 
 @Getter
-public class BitcoinReceiverRetrieveParams extends ApiRequestParams {
+public class OrderReopenParams extends ApiRequestParams {
   /** Specifies which fields in the response should be expanded. */
   @SerializedName("expand")
   List<String> expand;
@@ -24,7 +24,7 @@ public class BitcoinReceiverRetrieveParams extends ApiRequestParams {
   @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
   Map<String, Object> extraParams;
 
-  private BitcoinReceiverRetrieveParams(List<String> expand, Map<String, Object> extraParams) {
+  private OrderReopenParams(List<String> expand, Map<String, Object> extraParams) {
     this.expand = expand;
     this.extraParams = extraParams;
   }
@@ -39,14 +39,14 @@ public class BitcoinReceiverRetrieveParams extends ApiRequestParams {
     private Map<String, Object> extraParams;
 
     /** Finalize and obtain parameter instance from this builder. */
-    public BitcoinReceiverRetrieveParams build() {
-      return new BitcoinReceiverRetrieveParams(this.expand, this.extraParams);
+    public OrderReopenParams build() {
+      return new OrderReopenParams(this.expand, this.extraParams);
     }
 
     /**
      * Add an element to `expand` list. A list is initialized for the first `add/addAll` call, and
      * subsequent calls adds additional elements to the original list. See {@link
-     * BitcoinReceiverRetrieveParams#expand} for the field documentation.
+     * OrderReopenParams#expand} for the field documentation.
      */
     public Builder addExpand(String element) {
       if (this.expand == null) {
@@ -59,7 +59,7 @@ public class BitcoinReceiverRetrieveParams extends ApiRequestParams {
     /**
      * Add all elements to `expand` list. A list is initialized for the first `add/addAll` call, and
      * subsequent calls adds additional elements to the original list. See {@link
-     * BitcoinReceiverRetrieveParams#expand} for the field documentation.
+     * OrderReopenParams#expand} for the field documentation.
      */
     public Builder addAllExpand(List<String> elements) {
       if (this.expand == null) {
@@ -72,7 +72,7 @@ public class BitcoinReceiverRetrieveParams extends ApiRequestParams {
     /**
      * Add a key/value pair to `extraParams` map. A map is initialized for the first `put/putAll`
      * call, and subsequent calls add additional key/value pairs to the original map. See {@link
-     * BitcoinReceiverRetrieveParams#extraParams} for the field documentation.
+     * OrderReopenParams#extraParams} for the field documentation.
      */
     public Builder putExtraParam(String key, Object value) {
       if (this.extraParams == null) {
@@ -85,7 +85,7 @@ public class BitcoinReceiverRetrieveParams extends ApiRequestParams {
     /**
      * Add all map key/value pairs to `extraParams` map. A map is initialized for the first
      * `put/putAll` call, and subsequent calls add additional key/value pairs to the original map.
-     * See {@link BitcoinReceiverRetrieveParams#extraParams} for the field documentation.
+     * See {@link OrderReopenParams#extraParams} for the field documentation.
      */
     public Builder putAllExtraParam(Map<String, Object> map) {
       if (this.extraParams == null) {

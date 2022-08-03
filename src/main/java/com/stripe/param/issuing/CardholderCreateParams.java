@@ -51,7 +51,7 @@ public class CardholderCreateParams extends ApiRequestParams {
 
   /**
    * The cardholder's name. This will be printed on cards issued to them. The maximum length of this
-   * field is 24 characters.
+   * field is 24 characters. This field cannot contain any special characters or numbers.
    */
   @SerializedName("name")
   String name;
@@ -262,7 +262,7 @@ public class CardholderCreateParams extends ApiRequestParams {
 
     /**
      * The cardholder's name. This will be printed on cards issued to them. The maximum length of
-     * this field is 24 characters.
+     * this field is 24 characters. This field cannot contain any special characters or numbers.
      */
     public Builder setName(String name) {
       this.name = name;
@@ -613,11 +613,17 @@ public class CardholderCreateParams extends ApiRequestParams {
     @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
     Map<String, Object> extraParams;
 
-    /** The first name of this cardholder. */
+    /**
+     * The first name of this cardholder. This field cannot contain any special characters or
+     * numbers.
+     */
     @SerializedName("first_name")
     String firstName;
 
-    /** The last name of this cardholder. */
+    /**
+     * The last name of this cardholder. This field cannot contain any special characters or
+     * numbers.
+     */
     @SerializedName("last_name")
     String lastName;
 
@@ -691,13 +697,19 @@ public class CardholderCreateParams extends ApiRequestParams {
         return this;
       }
 
-      /** The first name of this cardholder. */
+      /**
+       * The first name of this cardholder. This field cannot contain any special characters or
+       * numbers.
+       */
       public Builder setFirstName(String firstName) {
         this.firstName = firstName;
         return this;
       }
 
-      /** The last name of this cardholder. */
+      /**
+       * The last name of this cardholder. This field cannot contain any special characters or
+       * numbers.
+       */
       public Builder setLastName(String lastName) {
         this.lastName = lastName;
         return this;

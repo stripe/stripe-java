@@ -54,7 +54,7 @@ public class FundingInstructions extends StripeObject {
 
     /** A list of financial addresses that can be used to fund a particular balance. */
     @SerializedName("financial_addresses")
-    List<FundingInstructions.BankTransfer.FinancialAddresses> financialAddresses;
+    List<FundingInstructions.BankTransfer.FinancialAddress> financialAddresses;
 
     /**
      * The bank_transfer type
@@ -67,7 +67,7 @@ public class FundingInstructions extends StripeObject {
     @Getter
     @Setter
     @EqualsAndHashCode(callSuper = false)
-    public static class FinancialAddresses extends StripeObject {
+    public static class FinancialAddress extends StripeObject {
       /** Iban Records contain E.U. bank account details per the SEPA format. */
       @SerializedName("iban")
       Iban iban;

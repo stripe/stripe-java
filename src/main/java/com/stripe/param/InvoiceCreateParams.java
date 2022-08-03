@@ -153,12 +153,10 @@ public class InvoiceCreateParams extends ApiRequestParams {
   PaymentSettings paymentSettings;
 
   /**
-   * How to handle pending invoice items on invoice creation. One of {@code include}, {@code
-   * exclude}, or {@code include_and_require}. {@code include} will include any pending invoice
-   * items, and will create an empty draft invoice if no pending invoice items exist. {@code
-   * include_and_require} will include any pending invoice items, if no pending invoice items exist
-   * then the request will fail. {@code exclude} will always create an empty invoice draft
-   * regardless if there are pending invoice items or not. Defaults to {@code include_and_require}
+   * How to handle pending invoice items on invoice creation. One of {@code include} or {@code
+   * exclude}. {@code include} will include any pending invoice items, and will create an empty
+   * draft invoice if no pending invoice items exist. {@code exclude} will always create an empty
+   * invoice draft regardless if there are pending invoice items or not. Defaults to {@code exclude}
    * if the parameter is omitted.
    */
   @SerializedName("pending_invoice_items_behavior")
@@ -178,11 +176,10 @@ public class InvoiceCreateParams extends ApiRequestParams {
   String statementDescriptor;
 
   /**
-   * The ID of the subscription to invoice, if any. If not set, the created invoice will include all
-   * pending invoice items for the customer. If set, the created invoice will only include pending
-   * invoice items for that subscription and pending invoice items not associated with any
-   * subscription. The subscription's billing cycle and regular subscription events won't be
-   * affected.
+   * The ID of the subscription to invoice, if any. If set, the created invoice will only include
+   * pending invoice items for that subscription and pending invoice items not associated with any
+   * subscription if {@code pending_invoice_items_behavior} is {@code include}. The subscription's
+   * billing cycle and regular subscription events won't be affected.
    */
   @SerializedName("subscription")
   String subscription;
@@ -723,13 +720,11 @@ public class InvoiceCreateParams extends ApiRequestParams {
     }
 
     /**
-     * How to handle pending invoice items on invoice creation. One of {@code include}, {@code
-     * exclude}, or {@code include_and_require}. {@code include} will include any pending invoice
-     * items, and will create an empty draft invoice if no pending invoice items exist. {@code
-     * include_and_require} will include any pending invoice items, if no pending invoice items
-     * exist then the request will fail. {@code exclude} will always create an empty invoice draft
-     * regardless if there are pending invoice items or not. Defaults to {@code include_and_require}
-     * if the parameter is omitted.
+     * How to handle pending invoice items on invoice creation. One of {@code include} or {@code
+     * exclude}. {@code include} will include any pending invoice items, and will create an empty
+     * draft invoice if no pending invoice items exist. {@code exclude} will always create an empty
+     * invoice draft regardless if there are pending invoice items or not. Defaults to {@code
+     * exclude} if the parameter is omitted.
      */
     public Builder setPendingInvoiceItemsBehavior(
         PendingInvoiceItemsBehavior pendingInvoiceItemsBehavior) {
@@ -761,11 +756,10 @@ public class InvoiceCreateParams extends ApiRequestParams {
     }
 
     /**
-     * The ID of the subscription to invoice, if any. If not set, the created invoice will include
-     * all pending invoice items for the customer. If set, the created invoice will only include
+     * The ID of the subscription to invoice, if any. If set, the created invoice will only include
      * pending invoice items for that subscription and pending invoice items not associated with any
-     * subscription. The subscription's billing cycle and regular subscription events won't be
-     * affected.
+     * subscription if {@code pending_invoice_items_behavior} is {@code include}. The subscription's
+     * billing cycle and regular subscription events won't be affected.
      */
     public Builder setSubscription(String subscription) {
       this.subscription = subscription;

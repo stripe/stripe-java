@@ -10,17 +10,10 @@ import java.util.Map;
 import lombok.Getter;
 
 @Getter
-public class QuoteFinalizeParams extends ApiRequestParams {
+public class OrderCancelParams extends ApiRequestParams {
   /** Specifies which fields in the response should be expanded. */
   @SerializedName("expand")
   List<String> expand;
-
-  /**
-   * A future timestamp on which the quote will be canceled if in {@code open} or {@code draft}
-   * status. Measured in seconds since the Unix epoch.
-   */
-  @SerializedName("expires_at")
-  Long expiresAt;
 
   /**
    * Map of extra parameters for custom features not available in this client library. The content
@@ -31,10 +24,8 @@ public class QuoteFinalizeParams extends ApiRequestParams {
   @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
   Map<String, Object> extraParams;
 
-  private QuoteFinalizeParams(
-      List<String> expand, Long expiresAt, Map<String, Object> extraParams) {
+  private OrderCancelParams(List<String> expand, Map<String, Object> extraParams) {
     this.expand = expand;
-    this.expiresAt = expiresAt;
     this.extraParams = extraParams;
   }
 
@@ -45,19 +36,17 @@ public class QuoteFinalizeParams extends ApiRequestParams {
   public static class Builder {
     private List<String> expand;
 
-    private Long expiresAt;
-
     private Map<String, Object> extraParams;
 
     /** Finalize and obtain parameter instance from this builder. */
-    public QuoteFinalizeParams build() {
-      return new QuoteFinalizeParams(this.expand, this.expiresAt, this.extraParams);
+    public OrderCancelParams build() {
+      return new OrderCancelParams(this.expand, this.extraParams);
     }
 
     /**
      * Add an element to `expand` list. A list is initialized for the first `add/addAll` call, and
      * subsequent calls adds additional elements to the original list. See {@link
-     * QuoteFinalizeParams#expand} for the field documentation.
+     * OrderCancelParams#expand} for the field documentation.
      */
     public Builder addExpand(String element) {
       if (this.expand == null) {
@@ -70,7 +59,7 @@ public class QuoteFinalizeParams extends ApiRequestParams {
     /**
      * Add all elements to `expand` list. A list is initialized for the first `add/addAll` call, and
      * subsequent calls adds additional elements to the original list. See {@link
-     * QuoteFinalizeParams#expand} for the field documentation.
+     * OrderCancelParams#expand} for the field documentation.
      */
     public Builder addAllExpand(List<String> elements) {
       if (this.expand == null) {
@@ -81,18 +70,9 @@ public class QuoteFinalizeParams extends ApiRequestParams {
     }
 
     /**
-     * A future timestamp on which the quote will be canceled if in {@code open} or {@code draft}
-     * status. Measured in seconds since the Unix epoch.
-     */
-    public Builder setExpiresAt(Long expiresAt) {
-      this.expiresAt = expiresAt;
-      return this;
-    }
-
-    /**
      * Add a key/value pair to `extraParams` map. A map is initialized for the first `put/putAll`
      * call, and subsequent calls add additional key/value pairs to the original map. See {@link
-     * QuoteFinalizeParams#extraParams} for the field documentation.
+     * OrderCancelParams#extraParams} for the field documentation.
      */
     public Builder putExtraParam(String key, Object value) {
       if (this.extraParams == null) {
@@ -105,7 +85,7 @@ public class QuoteFinalizeParams extends ApiRequestParams {
     /**
      * Add all map key/value pairs to `extraParams` map. A map is initialized for the first
      * `put/putAll` call, and subsequent calls add additional key/value pairs to the original map.
-     * See {@link QuoteFinalizeParams#extraParams} for the field documentation.
+     * See {@link OrderCancelParams#extraParams} for the field documentation.
      */
     public Builder putAllExtraParam(Map<String, Object> map) {
       if (this.extraParams == null) {
