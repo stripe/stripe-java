@@ -1,5 +1,10 @@
 # Changelog
 
+## 21.1.0-beta.1 - 2022-08-03
+* [#1410](https://github.com/stripe/stripe-java/pull/1410) API Updates for beta branch
+  - Updated stable APIs to the latest version
+  - Added the `Order` resource support
+
 ## 21.0.0 - 2022-08-02
 
 This release includes breaking changes resulting from:
