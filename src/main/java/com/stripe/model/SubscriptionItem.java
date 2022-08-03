@@ -460,36 +460,8 @@ public class SubscriptionItem extends ApiResource
   @Getter
   @Setter
   @EqualsAndHashCode(callSuper = false)
-  public static class Trial extends StripeObject implements HasId {
-    /** Unique identifier for the object. */
-    @Getter(onMethod_ = {@Override})
-    @SerializedName("id")
-    String id;
-
-    /**
-     * Details of a different price, quantity, or both, to bill your customer for during a paid
-     * trial.
-     */
-    @SerializedName("paid")
-    Paid paid;
-
+  public static class Trial extends StripeObject {
     @SerializedName("type")
     String type;
-
-    @Getter
-    @Setter
-    @EqualsAndHashCode(callSuper = false)
-    public static class Paid extends StripeObject implements HasId {
-      @Getter(onMethod_ = {@Override})
-      @SerializedName("id")
-      String id;
-
-      /** The ID of the price object. */
-      @SerializedName("price")
-      String price;
-
-      @SerializedName("quantity")
-      Long quantity;
-    }
   }
 }

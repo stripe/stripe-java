@@ -103,7 +103,7 @@ public class QuotePhase extends ApiResource implements HasId {
   String prorationBehavior;
 
   @SerializedName("total_details")
-  Quote.TotalDetails totalDetails;
+  TotalDetails totalDetails;
 
   /**
    * If set to true the entire phase is counted as a trial and the customer will not be charged for
@@ -307,5 +307,60 @@ public class QuotePhase extends ApiResource implements HasId {
      */
     @SerializedName("days_until_due")
     Long daysUntilDue;
+  }
+
+  @Getter
+  @Setter
+  @EqualsAndHashCode(callSuper = false)
+  public static class TotalDetails extends StripeObject {
+    /** This is the sum of all the discounts. */
+    @SerializedName("amount_discount")
+    Long amountDiscount;
+
+    /** This is the sum of all the shipping amounts. */
+    @SerializedName("amount_shipping")
+    Long amountShipping;
+
+    /** This is the sum of all the tax amounts. */
+    @SerializedName("amount_tax")
+    Long amountTax;
+
+    @SerializedName("breakdown")
+    Breakdown breakdown;
+
+    @Getter
+    @Setter
+    @EqualsAndHashCode(callSuper = false)
+    public static class Breakdown extends StripeObject {
+      /** The aggregated discounts. */
+      @SerializedName("discounts")
+      List<LineItem.Discount> discounts;
+
+      /** The aggregated tax amounts by rate. */
+      @SerializedName("taxes")
+      List<QuotePhase.TotalDetails.Breakdown.Tax> taxes;
+
+      @Getter
+      @Setter
+      @EqualsAndHashCode(callSuper = false)
+      public static class Tax extends StripeObject {
+        /** Amount of tax applied for this rate. */
+        @SerializedName("amount")
+        Long amount;
+
+        /**
+         * Tax rates can be applied to <a
+         * href="https://stripe.com/docs/billing/invoices/tax-rates">invoices</a>, <a
+         * href="https://stripe.com/docs/billing/subscriptions/taxes">subscriptions</a> and <a
+         * href="https://stripe.com/docs/payments/checkout/set-up-a-subscription#tax-rates">Checkout
+         * Sessions</a> to collect tax.
+         *
+         * <p>Related guide: <a href="https://stripe.com/docs/billing/taxes/tax-rates">Tax
+         * Rates</a>.
+         */
+        @SerializedName("rate")
+        TaxRate rate;
+      }
+    }
   }
 }

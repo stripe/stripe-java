@@ -14,15 +14,12 @@ final class EventDataClassLookup {
   static {
     classLookup.put("account", Account.class);
     classLookup.put("account_link", AccountLink.class);
-    classLookup.put("alipay_account", AlipayAccount.class);
     classLookup.put("apple_pay_domain", ApplePayDomain.class);
     classLookup.put("application", Application.class);
     classLookup.put("application_fee", ApplicationFee.class);
     classLookup.put("balance", Balance.class);
     classLookup.put("balance_transaction", BalanceTransaction.class);
     classLookup.put("bank_account", BankAccount.class);
-    classLookup.put("bitcoin_receiver", BitcoinReceiver.class);
-    classLookup.put("bitcoin_transaction", BitcoinTransaction.class);
     classLookup.put("capability", Capability.class);
     classLookup.put("card", Card.class);
     classLookup.put("cash_balance", CashBalance.class);
@@ -45,12 +42,10 @@ final class EventDataClassLookup {
     classLookup.put("funding_instructions", FundingInstructions.class);
     classLookup.put("invoice", Invoice.class);
     classLookup.put("invoiceitem", InvoiceItem.class);
-    classLookup.put("issuer_fraud_record", IssuerFraudRecord.class);
     classLookup.put("item", LineItem.class);
     classLookup.put("line_item", InvoiceLineItem.class);
     classLookup.put("login_link", LoginLink.class);
     classLookup.put("mandate", Mandate.class);
-    classLookup.put("order", Order.class);
     classLookup.put("payment_intent", PaymentIntent.class);
     classLookup.put("payment_link", PaymentLink.class);
     classLookup.put("payment_method", PaymentMethod.class);
@@ -63,7 +58,6 @@ final class EventDataClassLookup {
     classLookup.put("promotion_code", PromotionCode.class);
     classLookup.put("quote", Quote.class);
     classLookup.put("quote_phase", QuotePhase.class);
-    classLookup.put("recipient", Recipient.class);
     classLookup.put("refund", Refund.class);
     classLookup.put("reserve_transaction", ReserveTransaction.class);
     classLookup.put("review", Review.class);
@@ -81,7 +75,6 @@ final class EventDataClassLookup {
     classLookup.put("tax_deducted_at_source", TaxDeductedAtSource.class);
     classLookup.put("tax_id", TaxId.class);
     classLookup.put("tax_rate", TaxRate.class);
-    classLookup.put("three_d_secure", ThreeDSecure.class);
     classLookup.put("token", Token.class);
     classLookup.put("topup", Topup.class);
     classLookup.put("transfer", Transfer.class);
@@ -89,8 +82,6 @@ final class EventDataClassLookup {
     classLookup.put("usage_record", UsageRecord.class);
     classLookup.put("usage_record_summary", UsageRecordSummary.class);
     classLookup.put("webhook_endpoint", WebhookEndpoint.class);
-    classLookup.put("order_item", OrderItem.class);
-    classLookup.put("order_return", OrderReturn.class);
 
     classLookup.put("apps.secret", com.stripe.model.apps.Secret.class);
 

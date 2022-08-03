@@ -99,7 +99,7 @@ public class Price extends ApiResource implements HasId, MetadataStore<Price> {
 
   /** Subscriptions using this price will be migrated to use the new referenced price. */
   @SerializedName("migrate_to")
-  Plan.MigrateTo migrateTo;
+  MigrateTo migrateTo;
 
   /** A brief description of the price, hidden from customers. */
   @SerializedName("nickname")
@@ -427,6 +427,27 @@ public class Price extends ApiResource implements HasId, MetadataStore<Price> {
     /** The starting unit amount which can be updated by the customer. */
     @SerializedName("preset")
     Long preset;
+  }
+
+  @Getter
+  @Setter
+  @EqualsAndHashCode(callSuper = false)
+  public static class MigrateTo extends StripeObject {
+    /**
+     * The behavior controlling at what point in the subscription lifecycle to migrate the price
+     *
+     * <p>Equal to {@code at_cycle_end}.
+     */
+    @SerializedName("behavior")
+    String behavior;
+
+    /** The unix timestamp after at which subscriptions will start to migrate to the new price. */
+    @SerializedName("effective_after")
+    Long effectiveAfter;
+
+    /** The id of the price being migrated to. */
+    @SerializedName("price")
+    String price;
   }
 
   @Getter
