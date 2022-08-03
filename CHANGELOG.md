@@ -1,5 +1,32 @@
 # Changelog
 
+## 21.0.0 - 2022-08-02
+
+This release includes breaking changes resulting from:
+
+* Moving to use the new API version "2022-08-01". To learn more about these changes to Stripe products, see https://stripe.com/docs/upgrades#2022-08-01
+* Cleaning up the SDK to remove deprecated/unused APIs and rename classes/methods/properties to sync with product APIs. Read more detailed description at https://github.com/stripe/stripe-java/wiki/Migration-guide-for-v21.
+
+"⚠️" symbol highlights breaking changes.
+
+* [#1409](https://github.com/stripe/stripe-java/pull/1409) API Updates
+* [#1407](https://github.com/stripe/stripe-java/pull/1407) Next major release changes
+
+## 20.136.0 - 2022-07-26
+* [#1406](https://github.com/stripe/stripe-java/pull/1406) API Updates
+  * Add support for `customer_balance` on `Checkout.Session.payment_method_options` and `CheckoutSessionCreateParams.payment_method_options`
+  * Add support for new value `customer_balance` on enum `CheckoutSessionCreateParams.payment_method_types[]`
+  * Add support for new values `en-CA` and `fr-CA` on enums `OrderCreateParams.payment.settings.payment_method_options.klarna.preferred_locale`, `OrderUpdateParams.payment.settings.payment_method_options.klarna.preferred_locale`, `PaymentIntentConfirmParams.payment_method_options.klarna.preferred_locale`, `PaymentIntentCreateParams.payment_method_options.klarna.preferred_locale`, and `PaymentIntentUpdateParams.payment_method_options.klarna.preferred_locale`
+* [#1405](https://github.com/stripe/stripe-java/pull/1405) chore: Update gson version in README.
+
+## 20.135.0 - 2022-07-25
+* [#1402](https://github.com/stripe/stripe-java/pull/1402) API Updates
+  * Add support for `installments` on `Checkout.Session.payment_method_options.card`, `CheckoutSessionCreateParams.payment_method_options.card`, `Invoice.payment_settings.payment_method_options.card`, `InvoiceCreateParams.payment_settings.payment_method_options.card`, and `InvoiceUpdateParams.payment_settings.payment_method_options.card`
+  * Add support for `default_currency` and `invoice_credit_balance` on `Customer`
+  * Add support for `currency` on `InvoiceCreateParams`
+  * Add support for `default_mandate` on `Invoice.payment_settings`, `InvoiceCreateParams.payment_settings`, and `InvoiceUpdateParams.payment_settings`
+  * Add support for `mandate` on `InvoicePayParams`
+
 ## 20.135.0-beta.1 - 2022-07-22
 * [#1400](https://github.com/stripe/stripe-java/pull/1400) API Updates for beta branch
   - Updated stable APIs to the latest version

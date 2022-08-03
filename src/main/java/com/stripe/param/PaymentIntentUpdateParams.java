@@ -9723,6 +9723,9 @@ public class PaymentIntentUpdateParams extends ApiRequestParams {
         @SerializedName("en-BE")
         EN_BE("en-BE"),
 
+        @SerializedName("en-CA")
+        EN_CA("en-CA"),
+
         @SerializedName("en-DE")
         EN_DE("en-DE"),
 
@@ -9773,6 +9776,9 @@ public class PaymentIntentUpdateParams extends ApiRequestParams {
 
         @SerializedName("fr-BE")
         FR_BE("fr-BE"),
+
+        @SerializedName("fr-CA")
+        FR_CA("fr-CA"),
 
         @SerializedName("fr-FR")
         FR_FR("fr-FR"),

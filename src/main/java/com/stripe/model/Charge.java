@@ -358,12 +358,6 @@ public class Charge extends ApiResource implements MetadataStore<Charge>, Balanc
   @SerializedName("transfer_group")
   String transferGroup;
 
-  /** Deprecated */
-  @SerializedName("order")
-  @Getter(lombok.AccessLevel.NONE)
-  @Setter(lombok.AccessLevel.NONE)
-  ExpandableField<Order> order;
-
   /** Get ID of expandable {@code application} object. */
   public String getApplication() {
     return (this.application != null) ? this.application.getId() : null;
@@ -603,24 +597,6 @@ public class Charge extends ApiResource implements MetadataStore<Charge>, Balanc
 
   public void setTransferObject(Transfer expandableObject) {
     this.transfer = new ExpandableField<Transfer>(expandableObject.getId(), expandableObject);
-  }
-
-  /** Get ID of expandable {@code order} object. */
-  public String getOrder() {
-    return (this.order != null) ? this.order.getId() : null;
-  }
-
-  public void setOrder(String id) {
-    this.order = ApiResource.setExpandableFieldId(id, this.order);
-  }
-
-  /** Get expanded {@code order}. */
-  public Order getOrderObject() {
-    return (this.order != null) ? this.order.getExpanded() : null;
-  }
-
-  public void setOrderObject(Order expandableObject) {
-    this.order = new ExpandableField<Order>(expandableObject.getId(), expandableObject);
   }
 
   /**
@@ -1659,8 +1635,8 @@ public class Charge extends ApiResource implements MetadataStore<Charge>, Balanc
         /**
          * Indicates the outcome of 3D Secure authentication.
          *
-         * <p>One of {@code attempt_acknowledged}, {@code authenticated}, {@code failed}, {@code
-         * not_supported}, or {@code processing_error}.
+         * <p>One of {@code attempt_acknowledged}, {@code authenticated}, {@code exempted}, {@code
+         * failed}, {@code not_supported}, or {@code processing_error}.
          */
         @SerializedName("result")
         String result;
@@ -2365,8 +2341,8 @@ public class Charge extends ApiResource implements MetadataStore<Charge>, Balanc
        * de-DE}, {@code en-DE}, {@code da-DK}, {@code en-DK}, {@code es-ES}, {@code en-ES}, {@code
        * fi-FI}, {@code sv-FI}, {@code en-FI}, {@code en-GB}, {@code en-IE}, {@code it-IT}, {@code
        * en-IT}, {@code nl-NL}, {@code en-NL}, {@code nb-NO}, {@code en-NO}, {@code sv-SE}, {@code
-       * en-SE}, {@code en-US}, {@code es-US}, {@code fr-FR}, {@code en-FR}, {@code en-AU}, or
-       * {@code en-NZ}
+       * en-SE}, {@code en-US}, {@code es-US}, {@code fr-FR}, {@code en-FR}, {@code en-AU}, {@code
+       * en-NZ}, {@code en-CA}, or {@code fr-CA}
        */
       @SerializedName("preferred_locale")
       String preferredLocale;

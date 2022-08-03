@@ -28,4 +28,17 @@ public class SessionTest extends BaseStripeTest {
         String.format("/v1/checkout/sessions/cs_123/line_items"),
         params.toMap());
   }
+
+  @Test
+  public void testSessionListLineItems() throws StripeException {
+    com.stripe.model.checkout.Session resource =
+        com.stripe.model.checkout.Session.retrieve("sess_xyz");
+    com.stripe.param.checkout.SessionListLineItemsParams params =
+        com.stripe.param.checkout.SessionListLineItemsParams.builder().build();
+
+    com.stripe.model.LineItemCollection lineItems = resource.listLineItems(params);
+    assertNotNull(lineItems);
+    verifyRequest(
+        ApiResource.RequestMethod.GET, "/v1/checkout/sessions/sess_xyz/line_items", params.toMap());
+  }
 }

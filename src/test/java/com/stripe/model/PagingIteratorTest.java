@@ -1,9 +1,12 @@
 package com.stripe.model;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.mockito.Mockito.verifyNoMoreInteractions;
 
 import com.stripe.BaseStripeTest;
+import com.stripe.Stripe;
+import com.stripe.exception.ApiKeyMissingException;
 import com.stripe.exception.StripeException;
 import com.stripe.net.ApiResource;
 import com.stripe.net.RequestOptions;
@@ -147,5 +150,22 @@ public class PagingIteratorTest extends BaseStripeTest {
     verifyRequest(ApiResource.RequestMethod.GET, "/v1/pageable_models", page1Params, options);
     verifyRequest(ApiResource.RequestMethod.GET, "/v1/pageable_models", page2Params, options);
     verifyNoMoreInteractions(networkSpy);
+  }
+
+  @Test
+  void testAutoPaginationWithoutApiKey() throws StripeException {
+    // set some arbitrary parameters so that we can verify that they're
+    // used for requests on ALL pages
+    final Map<String, Object> page0Params = new HashMap<>();
+    page0Params.put("foo", "bar");
+
+    final PageableModelCollection collection = PageableModel.list(page0Params, null);
+
+    Stripe.apiKey = null;
+    assertThrows(
+        ApiKeyMissingException.class,
+        () -> {
+          collection.autoPagingIterable();
+        });
   }
 }

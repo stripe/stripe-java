@@ -403,10 +403,11 @@ public class PaymentMethod extends ApiResource implements HasId, MetadataStore<P
    * <p>To attach a new PaymentMethod to a customer for future payments, we recommend you use a <a
    * href="https://stripe.com/docs/api/setup_intents">SetupIntent</a> or a PaymentIntent with <a
    * href="https://stripe.com/docs/api/payment_intents/create#create_payment_intent-setup_future_usage">setup_future_usage</a>.
-   * These approaches will perform any necessary steps to ensure that the PaymentMethod can be used
-   * in a future payment. Using the <code>/v1/payment_methods/:id/attach</code> endpoint does not
-   * ensure that future payments can be made with the attached PaymentMethod. See <a
-   * href="https://stripe.com/docs/payments/payment-intents#future-usage">Optimizing cards for
+   * These approaches will perform any necessary steps to set up the PaymentMethod for future
+   * payments. Using the <code>/v1/payment_methods/:id/attach</code> endpoint without first using a
+   * SetupIntent or PaymentIntent with <code>setup_future_usage</code> does not optimize the
+   * PaymentMethod for future use, which makes later declines and payment friction more likely. See
+   * <a href="https://stripe.com/docs/payments/payment-intents#future-usage">Optimizing cards for
    * future payments</a> for more information about setting up future payments.
    *
    * <p>To use this PaymentMethod as the default for invoice or subscription payments, set <a
@@ -424,10 +425,11 @@ public class PaymentMethod extends ApiResource implements HasId, MetadataStore<P
    * <p>To attach a new PaymentMethod to a customer for future payments, we recommend you use a <a
    * href="https://stripe.com/docs/api/setup_intents">SetupIntent</a> or a PaymentIntent with <a
    * href="https://stripe.com/docs/api/payment_intents/create#create_payment_intent-setup_future_usage">setup_future_usage</a>.
-   * These approaches will perform any necessary steps to ensure that the PaymentMethod can be used
-   * in a future payment. Using the <code>/v1/payment_methods/:id/attach</code> endpoint does not
-   * ensure that future payments can be made with the attached PaymentMethod. See <a
-   * href="https://stripe.com/docs/payments/payment-intents#future-usage">Optimizing cards for
+   * These approaches will perform any necessary steps to set up the PaymentMethod for future
+   * payments. Using the <code>/v1/payment_methods/:id/attach</code> endpoint without first using a
+   * SetupIntent or PaymentIntent with <code>setup_future_usage</code> does not optimize the
+   * PaymentMethod for future use, which makes later declines and payment friction more likely. See
+   * <a href="https://stripe.com/docs/payments/payment-intents#future-usage">Optimizing cards for
    * future payments</a> for more information about setting up future payments.
    *
    * <p>To use this PaymentMethod as the default for invoice or subscription payments, set <a
@@ -452,10 +454,11 @@ public class PaymentMethod extends ApiResource implements HasId, MetadataStore<P
    * <p>To attach a new PaymentMethod to a customer for future payments, we recommend you use a <a
    * href="https://stripe.com/docs/api/setup_intents">SetupIntent</a> or a PaymentIntent with <a
    * href="https://stripe.com/docs/api/payment_intents/create#create_payment_intent-setup_future_usage">setup_future_usage</a>.
-   * These approaches will perform any necessary steps to ensure that the PaymentMethod can be used
-   * in a future payment. Using the <code>/v1/payment_methods/:id/attach</code> endpoint does not
-   * ensure that future payments can be made with the attached PaymentMethod. See <a
-   * href="https://stripe.com/docs/payments/payment-intents#future-usage">Optimizing cards for
+   * These approaches will perform any necessary steps to set up the PaymentMethod for future
+   * payments. Using the <code>/v1/payment_methods/:id/attach</code> endpoint without first using a
+   * SetupIntent or PaymentIntent with <code>setup_future_usage</code> does not optimize the
+   * PaymentMethod for future use, which makes later declines and payment friction more likely. See
+   * <a href="https://stripe.com/docs/payments/payment-intents#future-usage">Optimizing cards for
    * future payments</a> for more information about setting up future payments.
    *
    * <p>To use this PaymentMethod as the default for invoice or subscription payments, set <a
@@ -473,10 +476,11 @@ public class PaymentMethod extends ApiResource implements HasId, MetadataStore<P
    * <p>To attach a new PaymentMethod to a customer for future payments, we recommend you use a <a
    * href="https://stripe.com/docs/api/setup_intents">SetupIntent</a> or a PaymentIntent with <a
    * href="https://stripe.com/docs/api/payment_intents/create#create_payment_intent-setup_future_usage">setup_future_usage</a>.
-   * These approaches will perform any necessary steps to ensure that the PaymentMethod can be used
-   * in a future payment. Using the <code>/v1/payment_methods/:id/attach</code> endpoint does not
-   * ensure that future payments can be made with the attached PaymentMethod. See <a
-   * href="https://stripe.com/docs/payments/payment-intents#future-usage">Optimizing cards for
+   * These approaches will perform any necessary steps to set up the PaymentMethod for future
+   * payments. Using the <code>/v1/payment_methods/:id/attach</code> endpoint without first using a
+   * SetupIntent or PaymentIntent with <code>setup_future_usage</code> does not optimize the
+   * PaymentMethod for future use, which makes later declines and payment friction more likely. See
+   * <a href="https://stripe.com/docs/payments/payment-intents#future-usage">Optimizing cards for
    * future payments</a> for more information about setting up future payments.
    *
    * <p>To use this PaymentMethod as the default for invoice or subscription payments, set <a

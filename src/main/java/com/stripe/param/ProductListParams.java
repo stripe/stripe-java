@@ -44,7 +44,11 @@ public class ProductListParams extends ApiRequestParams {
   @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
   Map<String, Object> extraParams;
 
-  /** Only return products with the given IDs. */
+  /**
+   * Only return products with the given IDs. Cannot be used with <a
+   * href="https://stripe.com/docs/api#list_products-starting_after">starting_after</a> or <a
+   * href="https://stripe.com/docs/api#list_products-ending_before">ending_before</a>.
+   */
   @SerializedName("ids")
   List<String> ids;
 
