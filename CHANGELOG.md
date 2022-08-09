@@ -1,5 +1,11 @@
 # Changelog
 
+## 21.1.0 - 2022-08-09
+* [#1413](https://github.com/stripe/stripe-java/pull/1413) API Updates
+  * Add support for `process_config` on `Terminal.Reader.action.process_payment_intent`
+* [#1412](https://github.com/stripe/stripe-java/pull/1412) API Updates
+  * Add support for `expires_at` on `Apps.Secret` and `AppsSecretCreateParams`
+
 ## 21.0.0 - 2022-08-02
 
 This release includes breaking changes resulting from:
