@@ -109,6 +109,20 @@ public class PaymentLinkCreateParams extends ApiRequestParams {
   PaymentIntentData paymentIntentData;
 
   /**
+   * Specify whether Checkout should collect a payment method. When set to {@code if_required},
+   * Checkout will not collect a payment method when the total due for the session is 0.This may
+   * occur if the Checkout Session includes a free trial or a discount.
+   *
+   * <p>Can only be set in {@code subscription} mode.
+   *
+   * <p>If you'd like information on how to collect a payment method outside of Checkout, read the
+   * guide on <a href="https://stripe.com/docs/payments/checkout/free-trials">configuring
+   * subscriptions with a free trial</a>.
+   */
+  @SerializedName("payment_method_collection")
+  PaymentMethodCollection paymentMethodCollection;
+
+  /**
    * The list of payment method types that customers can use. If no value is passed, Stripe will
    * dynamically show relevant payment methods from your <a
    * href="https://dashboard.stripe.com/settings/payment_methods">payment method settings</a> (20+
@@ -181,6 +195,7 @@ public class PaymentLinkCreateParams extends ApiRequestParams {
       Map<String, String> metadata,
       String onBehalfOf,
       PaymentIntentData paymentIntentData,
+      PaymentMethodCollection paymentMethodCollection,
       List<PaymentMethodType> paymentMethodTypes,
       PhoneNumberCollection phoneNumberCollection,
       ShippingAddressCollection shippingAddressCollection,
@@ -204,6 +219,7 @@ public class PaymentLinkCreateParams extends ApiRequestParams {
     this.metadata = metadata;
     this.onBehalfOf = onBehalfOf;
     this.paymentIntentData = paymentIntentData;
+    this.paymentMethodCollection = paymentMethodCollection;
     this.paymentMethodTypes = paymentMethodTypes;
     this.phoneNumberCollection = phoneNumberCollection;
     this.shippingAddressCollection = shippingAddressCollection;
@@ -249,6 +265,8 @@ public class PaymentLinkCreateParams extends ApiRequestParams {
 
     private PaymentIntentData paymentIntentData;
 
+    private PaymentMethodCollection paymentMethodCollection;
+
     private List<PaymentMethodType> paymentMethodTypes;
 
     private PhoneNumberCollection phoneNumberCollection;
@@ -283,6 +301,7 @@ public class PaymentLinkCreateParams extends ApiRequestParams {
           this.metadata,
           this.onBehalfOf,
           this.paymentIntentData,
+          this.paymentMethodCollection,
           this.paymentMethodTypes,
           this.phoneNumberCollection,
           this.shippingAddressCollection,
@@ -480,6 +499,22 @@ public class PaymentLinkCreateParams extends ApiRequestParams {
      */
     public Builder setPaymentIntentData(PaymentIntentData paymentIntentData) {
       this.paymentIntentData = paymentIntentData;
+      return this;
+    }
+
+    /**
+     * Specify whether Checkout should collect a payment method. When set to {@code if_required},
+     * Checkout will not collect a payment method when the total due for the session is 0.This may
+     * occur if the Checkout Session includes a free trial or a discount.
+     *
+     * <p>Can only be set in {@code subscription} mode.
+     *
+     * <p>If you'd like information on how to collect a payment method outside of Checkout, read the
+     * guide on <a href="https://stripe.com/docs/payments/checkout/free-trials">configuring
+     * subscriptions with a free trial</a>.
+     */
+    public Builder setPaymentMethodCollection(PaymentMethodCollection paymentMethodCollection) {
+      this.paymentMethodCollection = paymentMethodCollection;
       return this;
     }
 
@@ -2611,6 +2646,21 @@ public class PaymentLinkCreateParams extends ApiRequestParams {
     private final String value;
 
     CustomerCreation(String value) {
+      this.value = value;
+    }
+  }
+
+  public enum PaymentMethodCollection implements ApiRequestParams.EnumParam {
+    @SerializedName("always")
+    ALWAYS("always"),
+
+    @SerializedName("if_required")
+    IF_REQUIRED("if_required");
+
+    @Getter(onMethod_ = {@Override})
+    private final String value;
+
+    PaymentMethodCollection(String value) {
       this.value = value;
     }
   }
