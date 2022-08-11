@@ -1,9 +1,14 @@
 # Changelog
 
+## 21.3.0-beta.1 - 2022-08-11
+* [#1417](https://github.com/stripe/stripe-java/pull/1417) API Updates for beta branch
+  - Updated stable APIs to the latest version
+  - Add `refundPayment` method to Terminal resource
+
 ## 21.2.0 - 2022-08-11
 * [#1416](https://github.com/stripe/stripe-java/pull/1416) API Updates
   * Add support for `payment_method_collection` on `Checkout.Session`, `CheckoutSessionCreateParams`, `PaymentLinkCreateParams`, `PaymentLinkUpdateParams`, and `PaymentLink`
-  
+
 * [#1414](https://github.com/stripe/stripe-java/pull/1414) Stop publishing javadoc for beta Java SDKs
 
 ## 21.1.0 - 2022-08-09
