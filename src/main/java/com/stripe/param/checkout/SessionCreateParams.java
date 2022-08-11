@@ -188,6 +188,21 @@ public class SessionCreateParams extends ApiRequestParams {
   @SerializedName("payment_intent_data")
   PaymentIntentData paymentIntentData;
 
+  /**
+   * Specify whether Checkout should collect a payment method. When set to {@code if_required},
+   * Checkout will not collect a payment method when the total due for the session is 0. This may
+   * occur if the Checkout Session includes a free trial or a discount.
+   *
+   * <p>Can only be set in {@code subscription} mode.
+   *
+   * <p>If you'd like information on how to collect a payment method outside of Checkout, read the
+   * guide on configuring <a
+   * href="https://stripe.com/docs/payments/checkout/free-trials">subscriptions with a free
+   * trial</a>.
+   */
+  @SerializedName("payment_method_collection")
+  PaymentMethodCollection paymentMethodCollection;
+
   /** Payment-method-specific configuration. */
   @SerializedName("payment_method_options")
   PaymentMethodOptions paymentMethodOptions;
@@ -291,6 +306,7 @@ public class SessionCreateParams extends ApiRequestParams {
       Map<String, String> metadata,
       Mode mode,
       PaymentIntentData paymentIntentData,
+      PaymentMethodCollection paymentMethodCollection,
       PaymentMethodOptions paymentMethodOptions,
       List<PaymentMethodType> paymentMethodTypes,
       PhoneNumberCollection phoneNumberCollection,
@@ -323,6 +339,7 @@ public class SessionCreateParams extends ApiRequestParams {
     this.metadata = metadata;
     this.mode = mode;
     this.paymentIntentData = paymentIntentData;
+    this.paymentMethodCollection = paymentMethodCollection;
     this.paymentMethodOptions = paymentMethodOptions;
     this.paymentMethodTypes = paymentMethodTypes;
     this.phoneNumberCollection = phoneNumberCollection;
@@ -383,6 +400,8 @@ public class SessionCreateParams extends ApiRequestParams {
 
     private PaymentIntentData paymentIntentData;
 
+    private PaymentMethodCollection paymentMethodCollection;
+
     private PaymentMethodOptions paymentMethodOptions;
 
     private List<PaymentMethodType> paymentMethodTypes;
@@ -429,6 +448,7 @@ public class SessionCreateParams extends ApiRequestParams {
           this.metadata,
           this.mode,
           this.paymentIntentData,
+          this.paymentMethodCollection,
           this.paymentMethodOptions,
           this.paymentMethodTypes,
           this.phoneNumberCollection,
@@ -734,6 +754,23 @@ public class SessionCreateParams extends ApiRequestParams {
      */
     public Builder setPaymentIntentData(PaymentIntentData paymentIntentData) {
       this.paymentIntentData = paymentIntentData;
+      return this;
+    }
+
+    /**
+     * Specify whether Checkout should collect a payment method. When set to {@code if_required},
+     * Checkout will not collect a payment method when the total due for the session is 0. This may
+     * occur if the Checkout Session includes a free trial or a discount.
+     *
+     * <p>Can only be set in {@code subscription} mode.
+     *
+     * <p>If you'd like information on how to collect a payment method outside of Checkout, read the
+     * guide on configuring <a
+     * href="https://stripe.com/docs/payments/checkout/free-trials">subscriptions with a free
+     * trial</a>.
+     */
+    public Builder setPaymentMethodCollection(PaymentMethodCollection paymentMethodCollection) {
+      this.paymentMethodCollection = paymentMethodCollection;
       return this;
     }
 
@@ -10357,6 +10394,21 @@ public class SessionCreateParams extends ApiRequestParams {
     private final String value;
 
     Mode(String value) {
+      this.value = value;
+    }
+  }
+
+  public enum PaymentMethodCollection implements ApiRequestParams.EnumParam {
+    @SerializedName("always")
+    ALWAYS("always"),
+
+    @SerializedName("if_required")
+    IF_REQUIRED("if_required");
+
+    @Getter(onMethod_ = {@Override})
+    private final String value;
+
+    PaymentMethodCollection(String value) {
       this.value = value;
     }
   }

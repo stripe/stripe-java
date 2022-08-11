@@ -76,6 +76,20 @@ public class PaymentLinkUpdateParams extends ApiRequestParams {
   Map<String, String> metadata;
 
   /**
+   * Specify whether Checkout should collect a payment method. When set to {@code if_required},
+   * Checkout will not collect a payment method when the total due for the session is 0.This may
+   * occur if the Checkout Session includes a free trial or a discount.
+   *
+   * <p>Can only be set in {@code subscription} mode.
+   *
+   * <p>If you'd like information on how to collect a payment method outside of Checkout, read the
+   * guide on <a href="https://stripe.com/docs/payments/checkout/free-trials">configuring
+   * subscriptions with a free trial</a>.
+   */
+  @SerializedName("payment_method_collection")
+  PaymentMethodCollection paymentMethodCollection;
+
+  /**
    * The list of payment method types that customers can use. Pass an empty string to enable
    * automatic payment methods that use your <a
    * href="https://dashboard.stripe.com/settings/payment_methods">payment method settings</a>.
@@ -98,6 +112,7 @@ public class PaymentLinkUpdateParams extends ApiRequestParams {
       Map<String, Object> extraParams,
       List<LineItem> lineItems,
       Map<String, String> metadata,
+      PaymentMethodCollection paymentMethodCollection,
       Object paymentMethodTypes,
       Object shippingAddressCollection) {
     this.active = active;
@@ -110,6 +125,7 @@ public class PaymentLinkUpdateParams extends ApiRequestParams {
     this.extraParams = extraParams;
     this.lineItems = lineItems;
     this.metadata = metadata;
+    this.paymentMethodCollection = paymentMethodCollection;
     this.paymentMethodTypes = paymentMethodTypes;
     this.shippingAddressCollection = shippingAddressCollection;
   }
@@ -139,6 +155,8 @@ public class PaymentLinkUpdateParams extends ApiRequestParams {
 
     private Map<String, String> metadata;
 
+    private PaymentMethodCollection paymentMethodCollection;
+
     private Object paymentMethodTypes;
 
     private Object shippingAddressCollection;
@@ -156,6 +174,7 @@ public class PaymentLinkUpdateParams extends ApiRequestParams {
           this.extraParams,
           this.lineItems,
           this.metadata,
+          this.paymentMethodCollection,
           this.paymentMethodTypes,
           this.shippingAddressCollection);
     }
@@ -304,6 +323,22 @@ public class PaymentLinkUpdateParams extends ApiRequestParams {
         this.metadata = new HashMap<>();
       }
       this.metadata.putAll(map);
+      return this;
+    }
+
+    /**
+     * Specify whether Checkout should collect a payment method. When set to {@code if_required},
+     * Checkout will not collect a payment method when the total due for the session is 0.This may
+     * occur if the Checkout Session includes a free trial or a discount.
+     *
+     * <p>Can only be set in {@code subscription} mode.
+     *
+     * <p>If you'd like information on how to collect a payment method outside of Checkout, read the
+     * guide on <a href="https://stripe.com/docs/payments/checkout/free-trials">configuring
+     * subscriptions with a free trial</a>.
+     */
+    public Builder setPaymentMethodCollection(PaymentMethodCollection paymentMethodCollection) {
+      this.paymentMethodCollection = paymentMethodCollection;
       return this;
     }
 
@@ -1788,6 +1823,21 @@ public class PaymentLinkUpdateParams extends ApiRequestParams {
     private final String value;
 
     CustomerCreation(String value) {
+      this.value = value;
+    }
+  }
+
+  public enum PaymentMethodCollection implements ApiRequestParams.EnumParam {
+    @SerializedName("always")
+    ALWAYS("always"),
+
+    @SerializedName("if_required")
+    IF_REQUIRED("if_required");
+
+    @Getter(onMethod_ = {@Override})
+    private final String value;
+
+    PaymentMethodCollection(String value) {
       this.value = value;
     }
   }

@@ -198,6 +198,14 @@ public class Session extends ApiResource implements HasId {
   ExpandableField<PaymentLink> paymentLink;
 
   /**
+   * Configure whether a Checkout Session should collect a payment method.
+   *
+   * <p>One of {@code always}, or {@code if_required}.
+   */
+  @SerializedName("payment_method_collection")
+  String paymentMethodCollection;
+
+  /**
    * Payment-method-specific configuration for the PaymentIntent or SetupIntent of this
    * CheckoutSession.
    */

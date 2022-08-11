@@ -121,6 +121,14 @@ public class PaymentLink extends ApiResource implements HasId, MetadataStore<Pay
   PaymentIntentData paymentIntentData;
 
   /**
+   * Configuration for collecting a payment method during checkout.
+   *
+   * <p>One of {@code always}, or {@code if_required}.
+   */
+  @SerializedName("payment_method_collection")
+  String paymentMethodCollection;
+
+  /**
    * The list of payment method types that customers can use. When {@code null}, Stripe will
    * dynamically show relevant payment methods you've enabled in your <a
    * href="https://dashboard.stripe.com/settings/payment_methods">payment method settings</a>.
