@@ -4,10 +4,12 @@ package com.stripe.model.terminal;
 import com.google.gson.annotations.SerializedName;
 import com.stripe.Stripe;
 import com.stripe.exception.StripeException;
+import com.stripe.model.Charge;
 import com.stripe.model.ExpandableField;
 import com.stripe.model.HasId;
 import com.stripe.model.MetadataStore;
 import com.stripe.model.PaymentIntent;
+import com.stripe.model.Refund;
 import com.stripe.model.SetupIntent;
 import com.stripe.model.StripeObject;
 import com.stripe.net.ApiResource;
@@ -18,6 +20,7 @@ import com.stripe.param.terminal.ReaderListParams;
 import com.stripe.param.terminal.ReaderPresentPaymentMethodParams;
 import com.stripe.param.terminal.ReaderProcessPaymentIntentParams;
 import com.stripe.param.terminal.ReaderProcessSetupIntentParams;
+import com.stripe.param.terminal.ReaderRefundPaymentParams;
 import com.stripe.param.terminal.ReaderRetrieveParams;
 import com.stripe.param.terminal.ReaderSetReaderDisplayParams;
 import com.stripe.param.terminal.ReaderUpdateParams;
@@ -422,6 +425,50 @@ public class Reader extends ApiResource implements HasId, MetadataStore<Reader> 
     return ApiResource.request(ApiResource.RequestMethod.POST, url, params, Reader.class, options);
   }
 
+  /** Initiates a refund on a Reader. */
+  public Reader refundPayment() throws StripeException {
+    return refundPayment((Map<String, Object>) null, (RequestOptions) null);
+  }
+
+  /** Initiates a refund on a Reader. */
+  public Reader refundPayment(RequestOptions options) throws StripeException {
+    return refundPayment((Map<String, Object>) null, options);
+  }
+
+  /** Initiates a refund on a Reader. */
+  public Reader refundPayment(Map<String, Object> params) throws StripeException {
+    return refundPayment(params, (RequestOptions) null);
+  }
+
+  /** Initiates a refund on a Reader. */
+  public Reader refundPayment(Map<String, Object> params, RequestOptions options)
+      throws StripeException {
+    String url =
+        String.format(
+            "%s%s",
+            Stripe.getApiBase(),
+            String.format(
+                "/v1/terminal/readers/%s/refund_payment", ApiResource.urlEncodeId(this.getId())));
+    return ApiResource.request(ApiResource.RequestMethod.POST, url, params, Reader.class, options);
+  }
+
+  /** Initiates a refund on a Reader. */
+  public Reader refundPayment(ReaderRefundPaymentParams params) throws StripeException {
+    return refundPayment(params, (RequestOptions) null);
+  }
+
+  /** Initiates a refund on a Reader. */
+  public Reader refundPayment(ReaderRefundPaymentParams params, RequestOptions options)
+      throws StripeException {
+    String url =
+        String.format(
+            "%s%s",
+            Stripe.getApiBase(),
+            String.format(
+                "/v1/terminal/readers/%s/refund_payment", ApiResource.urlEncodeId(this.getId())));
+    return ApiResource.request(ApiResource.RequestMethod.POST, url, params, Reader.class, options);
+  }
+
   @Getter
   @Setter
   @EqualsAndHashCode(callSuper = false)
@@ -442,6 +489,10 @@ public class Reader extends ApiResource implements HasId, MetadataStore<Reader> 
     @SerializedName("process_setup_intent")
     ProcessSetupIntentAction processSetupIntent;
 
+    /** Represents a reader action to refund a payment. */
+    @SerializedName("refund_payment")
+    RefundPaymentAction refundPayment;
+
     /** Represents a reader action to set the reader display. */
     @SerializedName("set_reader_display")
     SetReaderDisplayAction setReaderDisplay;
@@ -457,8 +508,8 @@ public class Reader extends ApiResource implements HasId, MetadataStore<Reader> 
     /**
      * Type of action performed by the reader.
      *
-     * <p>One of {@code process_payment_intent}, {@code process_setup_intent}, or {@code
-     * set_reader_display}.
+     * <p>One of {@code process_payment_intent}, {@code process_setup_intent}, {@code
+     * refund_payment}, or {@code set_reader_display}.
      */
     @SerializedName("type")
     String type;
@@ -536,6 +587,115 @@ public class Reader extends ApiResource implements HasId, MetadataStore<Reader> 
       public void setSetupIntentObject(SetupIntent expandableObject) {
         this.setupIntent =
             new ExpandableField<SetupIntent>(expandableObject.getId(), expandableObject);
+      }
+    }
+
+    @Getter
+    @Setter
+    @EqualsAndHashCode(callSuper = false)
+    public static class RefundPaymentAction extends StripeObject {
+      /** The amount being refunded. */
+      @SerializedName("amount")
+      Long amount;
+
+      /** Charge that is being refunded. */
+      @SerializedName("charge")
+      @Getter(lombok.AccessLevel.NONE)
+      @Setter(lombok.AccessLevel.NONE)
+      ExpandableField<Charge> charge;
+
+      /** Payment intent that is being refunded. */
+      @SerializedName("payment_intent")
+      @Getter(lombok.AccessLevel.NONE)
+      @Setter(lombok.AccessLevel.NONE)
+      ExpandableField<PaymentIntent> paymentIntent;
+
+      /**
+       * The reason for the refund.
+       *
+       * <p>One of {@code duplicate}, {@code fraudulent}, or {@code requested_by_customer}.
+       */
+      @SerializedName("reason")
+      String reason;
+
+      /** Unique identifier for the refund object. */
+      @SerializedName("refund")
+      @Getter(lombok.AccessLevel.NONE)
+      @Setter(lombok.AccessLevel.NONE)
+      ExpandableField<Refund> refund;
+
+      /**
+       * Boolean indicating whether the application fee should be refunded when refunding this
+       * charge. If a full charge refund is given, the full application fee will be refunded.
+       * Otherwise, the application fee will be refunded in an amount proportional to the amount of
+       * the charge refunded. An application fee can be refunded only by the application that
+       * created the charge.
+       */
+      @SerializedName("refund_application_fee")
+      Boolean refundApplicationFee;
+
+      /**
+       * Boolean indicating whether the transfer should be reversed when refunding this charge. The
+       * transfer will be reversed proportionally to the amount being refunded (either the entire or
+       * partial amount). A transfer can be reversed only by the application that created the
+       * charge.
+       */
+      @SerializedName("reverse_transfer")
+      Boolean reverseTransfer;
+
+      /** Get ID of expandable {@code charge} object. */
+      public String getCharge() {
+        return (this.charge != null) ? this.charge.getId() : null;
+      }
+
+      public void setCharge(String id) {
+        this.charge = ApiResource.setExpandableFieldId(id, this.charge);
+      }
+
+      /** Get expanded {@code charge}. */
+      public Charge getChargeObject() {
+        return (this.charge != null) ? this.charge.getExpanded() : null;
+      }
+
+      public void setChargeObject(Charge expandableObject) {
+        this.charge = new ExpandableField<Charge>(expandableObject.getId(), expandableObject);
+      }
+
+      /** Get ID of expandable {@code paymentIntent} object. */
+      public String getPaymentIntent() {
+        return (this.paymentIntent != null) ? this.paymentIntent.getId() : null;
+      }
+
+      public void setPaymentIntent(String id) {
+        this.paymentIntent = ApiResource.setExpandableFieldId(id, this.paymentIntent);
+      }
+
+      /** Get expanded {@code paymentIntent}. */
+      public PaymentIntent getPaymentIntentObject() {
+        return (this.paymentIntent != null) ? this.paymentIntent.getExpanded() : null;
+      }
+
+      public void setPaymentIntentObject(PaymentIntent expandableObject) {
+        this.paymentIntent =
+            new ExpandableField<PaymentIntent>(expandableObject.getId(), expandableObject);
+      }
+
+      /** Get ID of expandable {@code refund} object. */
+      public String getRefund() {
+        return (this.refund != null) ? this.refund.getId() : null;
+      }
+
+      public void setRefund(String id) {
+        this.refund = ApiResource.setExpandableFieldId(id, this.refund);
+      }
+
+      /** Get expanded {@code refund}. */
+      public Refund getRefundObject() {
+        return (this.refund != null) ? this.refund.getExpanded() : null;
+      }
+
+      public void setRefundObject(Refund expandableObject) {
+        this.refund = new ExpandableField<Refund>(expandableObject.getId(), expandableObject);
       }
     }
 

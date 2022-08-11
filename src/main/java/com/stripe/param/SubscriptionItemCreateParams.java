@@ -127,7 +127,7 @@ public class SubscriptionItemCreateParams extends ApiRequestParams {
   @SerializedName("tax_rates")
   Object taxRates;
 
-  /** Define options to configure the trial on the subscription. */
+  /** Options that configure the trial on the subscription item. */
   @SerializedName("trial")
   Trial trial;
 
@@ -494,7 +494,7 @@ public class SubscriptionItemCreateParams extends ApiRequestParams {
       return this;
     }
 
-    /** Define options to configure the trial on the subscription. */
+    /** Options that configure the trial on the subscription item. */
     public Builder setTrial(Trial trial) {
       this.trial = trial;
       return this;
@@ -977,6 +977,7 @@ public class SubscriptionItemCreateParams extends ApiRequestParams {
     @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
     Map<String, Object> extraParams;
 
+    /** Determines the type of trial for this item. */
     @SerializedName("type")
     Type type;
 
@@ -1025,6 +1026,7 @@ public class SubscriptionItemCreateParams extends ApiRequestParams {
         return this;
       }
 
+      /** Determines the type of trial for this item. */
       public Builder setType(Type type) {
         this.type = type;
         return this;

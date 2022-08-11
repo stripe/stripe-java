@@ -980,7 +980,7 @@ public class SubscriptionSchedule extends ApiResource
     @SerializedName("tax_rates")
     List<TaxRate> taxRates;
 
-    /** Current trial configuration on this item. */
+    /** Options that configure the trial on the subscription item. */
     @SerializedName("trial")
     Trial trial;
 
