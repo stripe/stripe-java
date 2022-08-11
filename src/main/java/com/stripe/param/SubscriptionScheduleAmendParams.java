@@ -1120,6 +1120,7 @@ public class SubscriptionScheduleAmendParams extends ApiRequestParams {
       @SerializedName("set")
       Set set;
 
+      /** Determines the type of discount action. */
       @SerializedName("type")
       Type type;
 
@@ -1198,6 +1199,7 @@ public class SubscriptionScheduleAmendParams extends ApiRequestParams {
           return this;
         }
 
+        /** Determines the type of discount action. */
         public Builder setType(Type type) {
           this.type = type;
           return this;
@@ -1530,6 +1532,7 @@ public class SubscriptionScheduleAmendParams extends ApiRequestParams {
       @SerializedName("set")
       Set set;
 
+      /** Determines the type of item action. */
       @SerializedName("type")
       Type type;
 
@@ -1616,6 +1619,7 @@ public class SubscriptionScheduleAmendParams extends ApiRequestParams {
           return this;
         }
 
+        /** Determines the type of item action. */
         public Builder setType(Type type) {
           this.type = type;
           return this;
@@ -1665,7 +1669,7 @@ public class SubscriptionScheduleAmendParams extends ApiRequestParams {
         @SerializedName("tax_rates")
         List<String> taxRates;
 
-        /** Current trial configuration on this item. */
+        /** Options that configure the trial on the subscription item. */
         @SerializedName("trial")
         Trial trial;
 
@@ -1841,7 +1845,7 @@ public class SubscriptionScheduleAmendParams extends ApiRequestParams {
             return this;
           }
 
-          /** Current trial configuration on this item. */
+          /** Options that configure the trial on the subscription item. */
           public Builder setTrial(Trial trial) {
             this.trial = trial;
             return this;
@@ -1946,6 +1950,7 @@ public class SubscriptionScheduleAmendParams extends ApiRequestParams {
           @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
           Map<String, Object> extraParams;
 
+          /** Determines the type of trial for this item. */
           @SerializedName("type")
           Type type;
 
@@ -1998,6 +2003,7 @@ public class SubscriptionScheduleAmendParams extends ApiRequestParams {
               return this;
             }
 
+            /** Determines the type of trial for this item. */
             public Builder setType(Type type) {
               this.type = type;
               return this;
@@ -2440,6 +2446,7 @@ public class SubscriptionScheduleAmendParams extends ApiRequestParams {
           @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
           Map<String, Object> extraParams;
 
+          /** Determines the type of trial for this item. */
           @SerializedName("type")
           Type type;
 
@@ -2492,6 +2499,7 @@ public class SubscriptionScheduleAmendParams extends ApiRequestParams {
               return this;
             }
 
+            /** Determines the type of trial for this item. */
             public Builder setType(Type type) {
               this.type = type;
               return this;

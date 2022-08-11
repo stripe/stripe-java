@@ -15,6 +15,10 @@ public class SecretCreateParams extends ApiRequestParams {
   @SerializedName("expand")
   List<String> expand;
 
+  /** The Unix timestamp for the expiry time of the secret, after which the secret deletes. */
+  @SerializedName("expires_at")
+  Long expiresAt;
+
   /**
    * Map of extra parameters for custom features not available in this client library. The content
    * in this map is not serialized under this field's {@code @SerializedName} value. Instead, each
@@ -41,11 +45,13 @@ public class SecretCreateParams extends ApiRequestParams {
 
   private SecretCreateParams(
       List<String> expand,
+      Long expiresAt,
       Map<String, Object> extraParams,
       String name,
       String payload,
       Scope scope) {
     this.expand = expand;
+    this.expiresAt = expiresAt;
     this.extraParams = extraParams;
     this.name = name;
     this.payload = payload;
@@ -59,6 +65,8 @@ public class SecretCreateParams extends ApiRequestParams {
   public static class Builder {
     private List<String> expand;
 
+    private Long expiresAt;
+
     private Map<String, Object> extraParams;
 
     private String name;
@@ -70,7 +78,7 @@ public class SecretCreateParams extends ApiRequestParams {
     /** Finalize and obtain parameter instance from this builder. */
     public SecretCreateParams build() {
       return new SecretCreateParams(
-          this.expand, this.extraParams, this.name, this.payload, this.scope);
+          this.expand, this.expiresAt, this.extraParams, this.name, this.payload, this.scope);
     }
 
     /**
@@ -96,6 +104,12 @@ public class SecretCreateParams extends ApiRequestParams {
         this.expand = new ArrayList<>();
       }
       this.expand.addAll(elements);
+      return this;
+    }
+
+    /** The Unix timestamp for the expiry time of the secret, after which the secret deletes. */
+    public Builder setExpiresAt(Long expiresAt) {
+      this.expiresAt = expiresAt;
       return this;
     }
 

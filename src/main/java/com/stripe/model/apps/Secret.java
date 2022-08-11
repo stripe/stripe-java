@@ -29,6 +29,10 @@ public class Secret extends ApiResource implements HasId {
   @SerializedName("deleted")
   Boolean deleted;
 
+  /** The Unix timestamp for the expiry time of the secret, after which the secret deletes. */
+  @SerializedName("expires_at")
+  Long expiresAt;
+
   /** Unique identifier for the object. */
   @Getter(onMethod_ = {@Override})
   @SerializedName("id")

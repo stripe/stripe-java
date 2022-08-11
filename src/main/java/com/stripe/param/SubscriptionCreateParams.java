@@ -2551,6 +2551,7 @@ public class SubscriptionCreateParams extends ApiRequestParams {
       @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
       Map<String, Object> extraParams;
 
+      /** Determines the type of trial for this item. */
       @SerializedName("type")
       Type type;
 
@@ -2601,6 +2602,7 @@ public class SubscriptionCreateParams extends ApiRequestParams {
           return this;
         }
 
+        /** Determines the type of trial for this item. */
         public Builder setType(Type type) {
           this.type = type;
           return this;

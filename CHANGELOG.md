@@ -1,5 +1,17 @@
 # Changelog
 
+## 21.2.0 - 2022-08-11
+* [#1416](https://github.com/stripe/stripe-java/pull/1416) API Updates
+  * Add support for `payment_method_collection` on `Checkout.Session`, `CheckoutSessionCreateParams`, `PaymentLinkCreateParams`, `PaymentLinkUpdateParams`, and `PaymentLink`
+  
+* [#1414](https://github.com/stripe/stripe-java/pull/1414) Stop publishing javadoc for beta Java SDKs
+
+## 21.1.0 - 2022-08-09
+* [#1413](https://github.com/stripe/stripe-java/pull/1413) API Updates
+  * Add support for `process_config` on `Terminal.Reader.action.process_payment_intent`
+* [#1412](https://github.com/stripe/stripe-java/pull/1412) API Updates
+  * Add support for `expires_at` on `Apps.Secret` and `AppsSecretCreateParams`
+
 ## 21.1.0-beta.1 - 2022-08-03
 * [#1410](https://github.com/stripe/stripe-java/pull/1410) API Updates for beta branch
   - Updated stable APIs to the latest version
