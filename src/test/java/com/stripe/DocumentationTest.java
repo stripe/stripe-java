@@ -91,7 +91,8 @@ public class DocumentationTest {
         new BufferedReader(
             new InputStreamReader(new FileInputStream(readmeFile), StandardCharsets.UTF_8))) {
       final int expectedMentionsOfVersion = 3;
-      // Currently three places mention the Stripe version: the latest Maven JAR hyperlink, the sample pom, and gradle files.
+      // Currently three places mention the Stripe version: the latest Maven JAR hyperlink, the
+      // sample pom, and gradle files.
       final List<String> mentioningLines = new ArrayList<String>();
       String line;
 
