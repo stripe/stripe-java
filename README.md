@@ -6,6 +6,10 @@
 
 The official [Stripe][stripe] Java client library.
 
+## Support
+
+New features and bug fixes are released on the latest major version of the Stripe Java client library. If you are on an older major version, we recommend that you upgrade to the latest in order to use the new features and bug fixes including those for security vulnerabilities. Older major versions of the package will continue to be available for use, but will not be receiving any updates.
+
 ## Installation
 
 ### Requirements
