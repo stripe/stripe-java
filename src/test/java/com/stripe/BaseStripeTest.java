@@ -42,6 +42,7 @@ public class BaseStripeTest {
   private String origApiKey;
   private String origClientId;
   private String origUploadBase;
+  private String origStripeVersion;
 
   static {
     // To only stop stripe-mock process after all the test classes.
@@ -111,6 +112,7 @@ public class BaseStripeTest {
     this.origUploadBase = Stripe.getUploadBase();
     this.origApiKey = Stripe.apiKey;
     this.origClientId = Stripe.clientId;
+    this.origStripeVersion = Stripe.stripeVersion;
 
     Stripe.overrideApiBase("http://localhost:" + port);
     Stripe.overrideUploadBase("http://localhost:" + port);
@@ -135,6 +137,7 @@ public class BaseStripeTest {
     Stripe.overrideUploadBase(this.origUploadBase);
     Stripe.apiKey = this.origApiKey;
     Stripe.clientId = this.origClientId;
+    Stripe.stripeVersion = this.origStripeVersion;
   }
 
   /**

@@ -13,11 +13,11 @@ import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
 import com.google.gson.JsonPrimitive;
 import com.stripe.BaseStripeTest;
+import com.stripe.Stripe;
 import com.stripe.exception.EventDataObjectDeserializationException;
 import com.stripe.net.ApiResource;
 import java.io.IOException;
 import org.junit.jupiter.api.Test;
-import org.mockito.Mockito;
 
 public class EventDataObjectDeserializerTest extends BaseStripeTest {
   private static final String OLD_EVENT_VERSION = "2013-08-15";
@@ -48,8 +48,9 @@ public class EventDataObjectDeserializerTest extends BaseStripeTest {
     assertNotNull(event.getId());
 
     assertEquals(CURRENT_EVENT_VERSION, event.getApiVersion());
-    EventDataObjectDeserializer deserializer =
-        stubIntegrationApiVersion(event.getDataObjectDeserializer(), CURRENT_EVENT_VERSION);
+
+    Stripe.stripeVersion = CURRENT_EVENT_VERSION;
+    EventDataObjectDeserializer deserializer = event.getDataObjectDeserializer();
 
     assertTrue(deserializer.getObject().isPresent());
     verifyDeserializedStripeObject(deserializer.getObject().get());
@@ -64,8 +65,9 @@ public class EventDataObjectDeserializerTest extends BaseStripeTest {
     assertNotNull(event.getId());
 
     assertNotEquals(NO_MATCH_VERSION, event.getApiVersion());
-    EventDataObjectDeserializer deserializer =
-        stubIntegrationApiVersion(event.getDataObjectDeserializer(), NO_MATCH_VERSION);
+
+    Stripe.stripeVersion = NO_MATCH_VERSION;
+    EventDataObjectDeserializer deserializer = event.getDataObjectDeserializer();
 
     assertFalse(deserializer.getObject().isPresent());
 
@@ -82,8 +84,8 @@ public class EventDataObjectDeserializerTest extends BaseStripeTest {
     final String data = getCurrentEventStringFixture();
     final Event event = ApiResource.GSON.fromJson(data, Event.class);
 
-    EventDataObjectDeserializer deserializer =
-        stubIntegrationApiVersion(event.getDataObjectDeserializer(), NO_MATCH_VERSION);
+    Stripe.stripeVersion = NO_MATCH_VERSION;
+    EventDataObjectDeserializer deserializer = event.getDataObjectDeserializer();
 
     assertFalse(deserializer.getObject().isPresent());
 
@@ -99,8 +101,9 @@ public class EventDataObjectDeserializerTest extends BaseStripeTest {
     final Event event = ApiResource.GSON.fromJson(data, Event.class);
 
     assertEquals(OLD_EVENT_VERSION, event.getApiVersion());
-    EventDataObjectDeserializer deserializer =
-        stubIntegrationApiVersion(event.getDataObjectDeserializer(), OLD_EVENT_VERSION);
+
+    Stripe.stripeVersion = OLD_EVENT_VERSION;
+    EventDataObjectDeserializer deserializer = event.getDataObjectDeserializer();
 
     assertFalse(deserializer.getObject().isPresent());
 
@@ -127,8 +130,9 @@ public class EventDataObjectDeserializerTest extends BaseStripeTest {
     final Event event = ApiResource.GSON.fromJson(data, Event.class);
 
     assertEquals(OLD_EVENT_VERSION, event.getApiVersion());
-    EventDataObjectDeserializer deserializer =
-        stubIntegrationApiVersion(event.getDataObjectDeserializer(), NO_MATCH_VERSION);
+
+    Stripe.stripeVersion = NO_MATCH_VERSION;
+    EventDataObjectDeserializer deserializer = event.getDataObjectDeserializer();
 
     assertFalse(deserializer.getObject().isPresent());
 
@@ -142,12 +146,39 @@ public class EventDataObjectDeserializerTest extends BaseStripeTest {
   }
 
   @Test
+  public void testIgnoresBetaHeadersWhenDeterminingMatch() throws Exception {
+    final String data = getCurrentEventStringFixture();
+    final Event event = ApiResource.GSON.fromJson(data, Event.class);
+
+    assertEquals(CURRENT_EVENT_VERSION, event.getApiVersion());
+
+    Stripe.stripeVersion = CURRENT_EVENT_VERSION + "; some_beta=v1; some_beta=v2";
+    EventDataObjectDeserializer deserializer = event.getDataObjectDeserializer();
+
+    assertTrue(deserializer.getObject().isPresent());
+    verifyDeserializedStripeObject(deserializer.getObject().get());
+  }
+
+  @Test
+  public void testApiVersionMismatchReportedEvenWhenBetaHeadersPresent() throws Exception {
+    final String data = getCurrentEventStringFixture();
+    final Event event = ApiResource.GSON.fromJson(data, Event.class);
+
+    assertEquals(CURRENT_EVENT_VERSION, event.getApiVersion());
+
+    Stripe.stripeVersion = OLD_EVENT_VERSION + "; some_beta=v1; some_beta=v2";
+    EventDataObjectDeserializer deserializer = event.getDataObjectDeserializer();
+
+    assertFalse(deserializer.getObject().isPresent());
+  }
+
+  @Test
   public void testDeserializeUnsafeWith() throws Exception {
     final String data = getOldEventStringFixture();
     final Event event = ApiResource.GSON.fromJson(data, Event.class);
 
-    final EventDataObjectDeserializer deserializer =
-        stubIntegrationApiVersion(event.getDataObjectDeserializer(), NO_MATCH_VERSION);
+    Stripe.stripeVersion = NO_MATCH_VERSION;
+    EventDataObjectDeserializer deserializer = event.getDataObjectDeserializer();
 
     assertFalse(deserializer.getObject().isPresent());
 
@@ -181,12 +212,5 @@ public class EventDataObjectDeserializerTest extends BaseStripeTest {
     String rawJson = deserializer.getRawJson();
     assertNotNull(rawJson);
     assertEquals(event.getData().object.toString(), rawJson);
-  }
-
-  private EventDataObjectDeserializer stubIntegrationApiVersion(
-      EventDataObjectDeserializer data, String stripeVersion) {
-    EventDataObjectDeserializer dataSpy = Mockito.spy(data);
-    Mockito.doReturn(stripeVersion).when(dataSpy).getIntegrationApiVersion();
-    return dataSpy;
   }
 }

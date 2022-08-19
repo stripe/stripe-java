@@ -121,6 +121,20 @@ public class StripeRequestTest extends BaseStripeTest {
   }
 
   @Test
+  public void testUsesGlobalStripeVersion() throws StripeException {
+
+    String originalVersion = Stripe.stripeVersion;
+    StripeRequest request =
+        new StripeRequest(ApiResource.RequestMethod.GET, "http://example.com/get", null, null);
+    assertEquals(originalVersion, request.headers().firstValue("Stripe-Version").get());
+
+    Stripe.stripeVersion = "2022-08-19";
+    request =
+        new StripeRequest(ApiResource.RequestMethod.GET, "http://example.com/get", null, null);
+    assertEquals("2022-08-19", request.headers().firstValue("Stripe-Version").get());
+  }
+
+  @Test
   public void testCtorThrowsOnNullApiKey() throws StripeException {
     String origApiKey = Stripe.apiKey;
 

@@ -155,9 +155,9 @@ public class EventDataObjectDeserializer {
                     + "consider transforming the raw JSON data object to be compatible with this "
                     + "current model class schemas using `deserializeUnsafeWith`. "
                     + "Original error message: %s",
-                getIntegrationApiVersion(),
+                Stripe.stripeVersion,
                 this.apiVersion,
-                getIntegrationApiVersion(),
+                Stripe.stripeVersion,
                 e.getMessage());
       } else {
         errorMessage =
@@ -185,13 +185,14 @@ public class EventDataObjectDeserializer {
         transformer.transform(rawJsonObject.deepCopy(), apiVersion, eventType));
   }
 
+  @SuppressWarnings("StringSplitter")
   private boolean apiVersionMatch() {
-    return getIntegrationApiVersion().equals(this.apiVersion);
-  }
+    // Test that only the actual API version component of the version strings match. The integration
+    // API version might have beta headers that are not present in the event payload.
+    String integrationApiVersionStableComponent = Stripe.stripeVersion.split(";")[0];
+    String payloadApiVersionStableComponent = this.apiVersion.split(";")[0];
 
-  /** Internal method to allow for testing with different Stripe version. */
-  String getIntegrationApiVersion() {
-    return Stripe.API_VERSION;
+    return integrationApiVersionStableComponent.equals(payloadApiVersionStableComponent);
   }
 
   /**
