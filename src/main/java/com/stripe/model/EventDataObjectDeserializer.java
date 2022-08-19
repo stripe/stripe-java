@@ -4,6 +4,7 @@ import com.google.gson.JsonObject;
 import com.google.gson.JsonParseException;
 import com.stripe.Stripe;
 import com.stripe.exception.EventDataObjectDeserializationException;
+import com.stripe.util.StringUtils;
 import java.util.Map;
 import java.util.Optional;
 import lombok.EqualsAndHashCode;
@@ -184,12 +185,10 @@ public class EventDataObjectDeserializer {
 
   @SuppressWarnings("StringSplitter")
   private boolean apiVersionMatch() {
-    // Test that only the actual API version component of the version strings match. The integration
-    // API version might have beta headers that are not present in the event payload.
-    String integrationApiVersionStableComponent = Stripe.stripeVersion.split(";")[0];
-    String payloadApiVersionStableComponent = this.apiVersion.split(";")[0];
-
-    return integrationApiVersionStableComponent.equals(payloadApiVersionStableComponent);
+    // Trim the locally configured API version to not include beta headers, since the payload won't
+    // have any.
+    String localApiVersion = StringUtils.trimApiVersion(Stripe.stripeVersion);
+    return localApiVersion.equals(this.apiVersion);
   }
 
   /**
