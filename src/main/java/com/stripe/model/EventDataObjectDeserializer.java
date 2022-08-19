@@ -4,6 +4,7 @@ import com.google.gson.JsonObject;
 import com.google.gson.JsonParseException;
 import com.stripe.Stripe;
 import com.stripe.exception.EventDataObjectDeserializationException;
+import com.stripe.util.StringUtils;
 import java.util.Map;
 import java.util.Optional;
 import lombok.EqualsAndHashCode;
@@ -155,10 +156,7 @@ public class EventDataObjectDeserializer {
                     + "consider transforming the raw JSON data object to be compatible with this "
                     + "current model class schemas using `deserializeUnsafeWith`. "
                     + "Original error message: %s",
-                getIntegrationApiVersion(),
-                this.apiVersion,
-                getIntegrationApiVersion(),
-                e.getMessage());
+                Stripe.stripeVersion, this.apiVersion, Stripe.stripeVersion, e.getMessage());
       } else {
         errorMessage =
             String.format(
@@ -186,12 +184,10 @@ public class EventDataObjectDeserializer {
   }
 
   private boolean apiVersionMatch() {
-    return getIntegrationApiVersion().equals(this.apiVersion);
-  }
-
-  /** Internal method to allow for testing with different Stripe version. */
-  String getIntegrationApiVersion() {
-    return Stripe.API_VERSION;
+    // Trim the locally configured API version to not include beta headers, since the payload won't
+    // have any.
+    String localApiVersion = StringUtils.trimApiVersion(Stripe.stripeVersion);
+    return localApiVersion.equals(this.apiVersion);
   }
 
   /**

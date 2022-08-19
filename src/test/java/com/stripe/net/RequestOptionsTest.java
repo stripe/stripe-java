@@ -3,16 +3,19 @@ package com.stripe.net;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNull;
 
+import com.stripe.BaseStripeTest;
 import com.stripe.Stripe;
 import java.net.InetSocketAddress;
 import java.net.PasswordAuthentication;
 import java.net.Proxy;
 import org.junit.jupiter.api.Test;
 
-public class RequestOptionsTest {
+public class RequestOptionsTest extends BaseStripeTest {
 
   @Test
   public void testPersistentValuesInToBuilder() {
+    Stripe.clientId = "other value";
+
     RequestOptions opts =
         RequestOptions.builder()
             .setApiKey("sk_foo")
@@ -34,13 +37,31 @@ public class RequestOptionsTest {
     assertEquals("sk_foo", optsRebuilt.getApiKey());
     assertEquals("acct_bar", optsRebuilt.getStripeAccount());
 
-    assertNull(optsRebuilt.getClientId());
     assertNull(optsRebuilt.getIdempotencyKey());
     assertNull(optsRebuilt.getStripeVersionOverride());
+    assertEquals("other value", optsRebuilt.getClientId());
     assertEquals(Stripe.DEFAULT_CONNECT_TIMEOUT, optsRebuilt.getConnectTimeout());
     assertEquals(Stripe.DEFAULT_READ_TIMEOUT, optsRebuilt.getReadTimeout());
     assertEquals(Stripe.getConnectionProxy(), optsRebuilt.getConnectionProxy());
     assertEquals(Stripe.getProxyCredential(), optsRebuilt.getProxyCredential());
+  }
+
+  @Test
+  public void testUsesGlobalStripeVersionWithDefault() {
+    String originalVersion = Stripe.stripeVersion;
+    assertEquals(originalVersion, RequestOptions.getDefault().getStripeVersion());
+
+    Stripe.stripeVersion = "2022-08-19";
+    assertEquals("2022-08-19", RequestOptions.getDefault().getStripeVersion());
+  }
+
+  @Test
+  public void testUsesGlobalStripeVersionWithBuilder() {
+    String originalVersion = Stripe.stripeVersion;
+    assertEquals(originalVersion, RequestOptions.builder().build().getStripeVersion());
+
+    Stripe.stripeVersion = "2022-08-19";
+    assertEquals("2022-08-19", RequestOptions.builder().build().getStripeVersion());
   }
 
   @Test

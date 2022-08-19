@@ -107,4 +107,15 @@ public class StringUtilsTest {
       assertEquals(testCase.getWant(), StringUtils.toSnakeCase(testCase.getData()));
     }
   }
+
+  @Test
+  public void testTrimApiVersionNoBeta() {
+    assertEquals("2022-08-19", StringUtils.trimApiVersion("2022-08-19"));
+  }
+
+  @Test
+  public void testTrimApiVersionWithBetaHeaders() {
+    assertEquals(
+        "2022-08-19", StringUtils.trimApiVersion("2022-08-19; some_beta=v2; some_other_beta=v1"));
+  }
 }

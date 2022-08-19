@@ -20,6 +20,15 @@ public abstract class Stripe {
   public static volatile boolean enableTelemetry = true;
   public static volatile String partnerId;
 
+  /**
+   * Stripe API version which is sent by default on requests. This can be updated to include beta
+   * headers.
+   *
+   * <p>Pointing to different API versions than {@code API_VERSION} can lead to deserialziation
+   * errors and should be avoided.
+   */
+  public static volatile String stripeVersion = API_VERSION;
+
   // Note that URLConnection reserves the value of 0 to mean "infinite
   // timeout", so we use -1 here to represent an unset value which should
   // fall back to a default.
