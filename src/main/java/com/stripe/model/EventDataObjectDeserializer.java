@@ -183,7 +183,6 @@ public class EventDataObjectDeserializer {
         transformer.transform(rawJsonObject.deepCopy(), apiVersion, eventType));
   }
 
-  @SuppressWarnings("StringSplitter")
   private boolean apiVersionMatch() {
     // Trim the locally configured API version to not include beta headers, since the payload won't
     // have any.

@@ -2,7 +2,6 @@ package com.stripe.functional;
 
 import static junit.framework.TestCase.assertTrue;
 import static org.junit.Assert.assertFalse;
-import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 
 import com.google.common.collect.ImmutableMap;
@@ -15,7 +14,6 @@ import com.stripe.model.StripeObject;
 import com.stripe.net.ApiResource;
 import com.stripe.param.EventListParams;
 import com.stripe.util.StringUtils;
-
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Optional;
