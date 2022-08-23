@@ -8,6 +8,11 @@ import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.Setter;
 
+/**
+ * Encodes whether a FinancialAccount has access to a particular Feature, with a {@code status} enum
+ * and associated {@code status_details}. Stripe or the platform can control Features via the
+ * requested field.
+ */
 @Getter
 @Setter
 @EqualsAndHashCode(callSuper = false)
@@ -48,6 +53,7 @@ public class FinancialAccountFeatures extends StripeObject {
   @SerializedName("outbound_transfers")
   OutboundTransfers outboundTransfers;
 
+  /** Toggle settings for enabling/disabling a feature. */
   @Getter
   @Setter
   @EqualsAndHashCode(callSuper = false)
@@ -68,6 +74,7 @@ public class FinancialAccountFeatures extends StripeObject {
     @SerializedName("status_details")
     List<FinancialAccountFeatures.CardIssuing.StatusDetails> statusDetails;
 
+    /** Additional details on the FinancialAccount Features information. */
     @Getter
     @Setter
     @EqualsAndHashCode(callSuper = false)
@@ -102,6 +109,7 @@ public class FinancialAccountFeatures extends StripeObject {
     }
   }
 
+  /** Toggle settings for enabling/disabling a feature. */
   @Getter
   @Setter
   @EqualsAndHashCode(callSuper = false)
@@ -122,6 +130,7 @@ public class FinancialAccountFeatures extends StripeObject {
     @SerializedName("status_details")
     List<FinancialAccountFeatures.DepositInsurance.StatusDetails> statusDetails;
 
+    /** Additional details on the FinancialAccount Features information. */
     @Getter
     @Setter
     @EqualsAndHashCode(callSuper = false)
@@ -156,6 +165,7 @@ public class FinancialAccountFeatures extends StripeObject {
     }
   }
 
+  /** Settings related to Financial Addresses features on a Financial Account. */
   @Getter
   @Setter
   @EqualsAndHashCode(callSuper = false)
@@ -164,6 +174,7 @@ public class FinancialAccountFeatures extends StripeObject {
     @SerializedName("aba")
     Aba aba;
 
+    /** Toggle settings for enabling/disabling a feature. */
     @Getter
     @Setter
     @EqualsAndHashCode(callSuper = false)
@@ -184,6 +195,7 @@ public class FinancialAccountFeatures extends StripeObject {
       @SerializedName("status_details")
       List<FinancialAccountFeatures.FinancialAddresses.Aba.StatusDetails> statusDetails;
 
+      /** Additional details on the FinancialAccount Features information. */
       @Getter
       @Setter
       @EqualsAndHashCode(callSuper = false)
@@ -219,6 +231,7 @@ public class FinancialAccountFeatures extends StripeObject {
     }
   }
 
+  /** InboundTransfers contains inbound transfers features for a FinancialAccount. */
   @Getter
   @Setter
   @EqualsAndHashCode(callSuper = false)
@@ -227,6 +240,7 @@ public class FinancialAccountFeatures extends StripeObject {
     @SerializedName("ach")
     Ach ach;
 
+    /** Toggle settings for enabling/disabling a feature. */
     @Getter
     @Setter
     @EqualsAndHashCode(callSuper = false)
@@ -247,6 +261,7 @@ public class FinancialAccountFeatures extends StripeObject {
       @SerializedName("status_details")
       List<FinancialAccountFeatures.InboundTransfers.Ach.StatusDetails> statusDetails;
 
+      /** Additional details on the FinancialAccount Features information. */
       @Getter
       @Setter
       @EqualsAndHashCode(callSuper = false)
@@ -282,6 +297,7 @@ public class FinancialAccountFeatures extends StripeObject {
     }
   }
 
+  /** Toggle settings for enabling/disabling a feature. */
   @Getter
   @Setter
   @EqualsAndHashCode(callSuper = false)
@@ -302,6 +318,7 @@ public class FinancialAccountFeatures extends StripeObject {
     @SerializedName("status_details")
     List<FinancialAccountFeatures.IntraStripeFlows.StatusDetails> statusDetails;
 
+    /** Additional details on the FinancialAccount Features information. */
     @Getter
     @Setter
     @EqualsAndHashCode(callSuper = false)
@@ -336,6 +353,7 @@ public class FinancialAccountFeatures extends StripeObject {
     }
   }
 
+  /** Settings related to Outbound Payments features on a Financial Account. */
   @Getter
   @Setter
   @EqualsAndHashCode(callSuper = false)
@@ -348,6 +366,7 @@ public class FinancialAccountFeatures extends StripeObject {
     @SerializedName("us_domestic_wire")
     UsDomesticWire usDomesticWire;
 
+    /** Toggle settings for enabling/disabling a feature. */
     @Getter
     @Setter
     @EqualsAndHashCode(callSuper = false)
@@ -368,6 +387,7 @@ public class FinancialAccountFeatures extends StripeObject {
       @SerializedName("status_details")
       List<FinancialAccountFeatures.OutboundPayments.Ach.StatusDetails> statusDetails;
 
+      /** Additional details on the FinancialAccount Features information. */
       @Getter
       @Setter
       @EqualsAndHashCode(callSuper = false)
@@ -402,6 +422,7 @@ public class FinancialAccountFeatures extends StripeObject {
       }
     }
 
+    /** Toggle settings for enabling/disabling a feature. */
     @Getter
     @Setter
     @EqualsAndHashCode(callSuper = false)
@@ -422,6 +443,7 @@ public class FinancialAccountFeatures extends StripeObject {
       @SerializedName("status_details")
       List<FinancialAccountFeatures.OutboundPayments.UsDomesticWire.StatusDetails> statusDetails;
 
+      /** Additional details on the FinancialAccount Features information. */
       @Getter
       @Setter
       @EqualsAndHashCode(callSuper = false)
@@ -457,6 +479,7 @@ public class FinancialAccountFeatures extends StripeObject {
     }
   }
 
+  /** OutboundTransfers contains outbound transfers features for a FinancialAccount. */
   @Getter
   @Setter
   @EqualsAndHashCode(callSuper = false)
@@ -469,6 +492,7 @@ public class FinancialAccountFeatures extends StripeObject {
     @SerializedName("us_domestic_wire")
     UsDomesticWire usDomesticWire;
 
+    /** Toggle settings for enabling/disabling a feature. */
     @Getter
     @Setter
     @EqualsAndHashCode(callSuper = false)
@@ -489,6 +513,7 @@ public class FinancialAccountFeatures extends StripeObject {
       @SerializedName("status_details")
       List<FinancialAccountFeatures.OutboundTransfers.Ach.StatusDetails> statusDetails;
 
+      /** Additional details on the FinancialAccount Features information. */
       @Getter
       @Setter
       @EqualsAndHashCode(callSuper = false)
@@ -523,6 +548,7 @@ public class FinancialAccountFeatures extends StripeObject {
       }
     }
 
+    /** Toggle settings for enabling/disabling a feature. */
     @Getter
     @Setter
     @EqualsAndHashCode(callSuper = false)
@@ -543,6 +569,7 @@ public class FinancialAccountFeatures extends StripeObject {
       @SerializedName("status_details")
       List<FinancialAccountFeatures.OutboundTransfers.UsDomesticWire.StatusDetails> statusDetails;
 
+      /** Additional details on the FinancialAccount Features information. */
       @Getter
       @Setter
       @EqualsAndHashCode(callSuper = false)
@@ -578,6 +605,7 @@ public class FinancialAccountFeatures extends StripeObject {
     }
   }
 
+  /** Restrictions that a Connect Platform has placed on this FinancialAccount. */
   @Getter
   @Setter
   @EqualsAndHashCode(callSuper = false)

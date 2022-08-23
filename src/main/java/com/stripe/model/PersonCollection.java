@@ -11,6 +11,29 @@ import com.stripe.param.PersonCollectionRetrieveParams;
 import java.util.Map;
 
 public class PersonCollection extends StripeCollection<Person> {
+  /** Creates a new person. */
+  public Person create(Map<String, Object> params) throws StripeException {
+    return create(params, (RequestOptions) null);
+  }
+
+  /** Creates a new person. */
+  public Person create(Map<String, Object> params, RequestOptions options) throws StripeException {
+    String url = String.format("%s%s", Stripe.getApiBase(), this.getUrl());
+    return ApiResource.request(ApiResource.RequestMethod.POST, url, params, Person.class, options);
+  }
+
+  /** Creates a new person. */
+  public Person create(PersonCollectionCreateParams params) throws StripeException {
+    return create(params, (RequestOptions) null);
+  }
+
+  /** Creates a new person. */
+  public Person create(PersonCollectionCreateParams params, RequestOptions options)
+      throws StripeException {
+    String url = String.format("%s%s", Stripe.getApiBase(), this.getUrl());
+    return ApiResource.request(ApiResource.RequestMethod.POST, url, params, Person.class, options);
+  }
+
   /**
    * Returns a list of people associated with the account’s legal entity. The people are returned
    * sorted by creation date, with the most recent people appearing first.
@@ -77,28 +100,5 @@ public class PersonCollection extends StripeCollection<Person> {
             Stripe.getApiBase(),
             String.format("%s/%s", this.getUrl(), ApiResource.urlEncodeId(id)));
     return ApiResource.request(ApiResource.RequestMethod.GET, url, params, Person.class, options);
-  }
-
-  /** Creates a new person. */
-  public Person create(Map<String, Object> params) throws StripeException {
-    return create(params, (RequestOptions) null);
-  }
-
-  /** Creates a new person. */
-  public Person create(Map<String, Object> params, RequestOptions options) throws StripeException {
-    String url = String.format("%s%s", Stripe.getApiBase(), this.getUrl());
-    return ApiResource.request(ApiResource.RequestMethod.POST, url, params, Person.class, options);
-  }
-
-  /** Creates a new person. */
-  public Person create(PersonCollectionCreateParams params) throws StripeException {
-    return create(params, (RequestOptions) null);
-  }
-
-  /** Creates a new person. */
-  public Person create(PersonCollectionCreateParams params, RequestOptions options)
-      throws StripeException {
-    String url = String.format("%s%s", Stripe.getApiBase(), this.getUrl());
-    return ApiResource.request(ApiResource.RequestMethod.POST, url, params, Person.class, options);
   }
 }

@@ -16,6 +16,12 @@ import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.Setter;
 
+/**
+ * If you have <a href="https://stripe.com/docs/sigma/scheduled-queries">scheduled a Sigma
+ * query</a>, you'll receive a {@code sigma.scheduled_query_run.created} webhook each time the query
+ * runs. The webhook contains a {@code ScheduledQueryRun} object, which you can use to retrieve the
+ * query results.
+ */
 @Getter
 @Setter
 @EqualsAndHashCode(callSuper = false)

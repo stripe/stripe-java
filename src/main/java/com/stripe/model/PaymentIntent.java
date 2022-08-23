@@ -23,6 +23,20 @@ import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.Setter;
 
+/**
+ * A PaymentIntent guides you through the process of collecting a payment from your customer. We
+ * recommend that you create exactly one PaymentIntent for each order or customer session in your
+ * system. You can reference the PaymentIntent later to see the history of payment attempts for a
+ * particular session.
+ *
+ * <p>A PaymentIntent transitions through <a
+ * href="https://stripe.com/docs/payments/intents#intent-statuses">multiple statuses</a> throughout
+ * its lifetime as it interfaces with Stripe.js to perform authentication flows and ultimately
+ * creates at most one successful charge.
+ *
+ * <p>Related guide: <a href="https://stripe.com/docs/payments/payment-intents">Payment Intents
+ * API</a>.
+ */
 @Getter
 @Setter
 @EqualsAndHashCode(callSuper = false)
@@ -442,495 +456,52 @@ public class PaymentIntent extends ApiResource implements HasId, MetadataStore<P
     this.source = new ExpandableField<PaymentSource>(expandableObject.getId(), expandableObject);
   }
 
-  /**
-   * Search for PaymentIntents you’ve previously created using Stripe’s <a
-   * href="https://stripe.com/docs/search#search-query-language">Search Query Language</a>. Don’t
-   * use search in read-after-write flows where strict consistency is necessary. Under normal
-   * operating conditions, data is searchable in less than a minute. Occasionally, propagation of
-   * new or updated data can be up to an hour behind during outages. Search functionality is not
-   * available to merchants in India.
-   */
-  public static PaymentIntentSearchResult search(Map<String, Object> params)
+  /** Manually reconcile the remaining amount for a customer_balance PaymentIntent. */
+  public PaymentIntent applyCustomerBalance() throws StripeException {
+    return applyCustomerBalance((Map<String, Object>) null, (RequestOptions) null);
+  }
+
+  /** Manually reconcile the remaining amount for a customer_balance PaymentIntent. */
+  public PaymentIntent applyCustomerBalance(RequestOptions options) throws StripeException {
+    return applyCustomerBalance((Map<String, Object>) null, options);
+  }
+
+  /** Manually reconcile the remaining amount for a customer_balance PaymentIntent. */
+  public PaymentIntent applyCustomerBalance(Map<String, Object> params) throws StripeException {
+    return applyCustomerBalance(params, (RequestOptions) null);
+  }
+
+  /** Manually reconcile the remaining amount for a customer_balance PaymentIntent. */
+  public PaymentIntent applyCustomerBalance(Map<String, Object> params, RequestOptions options)
       throws StripeException {
-    return search(params, (RequestOptions) null);
-  }
-
-  /**
-   * Search for PaymentIntents you’ve previously created using Stripe’s <a
-   * href="https://stripe.com/docs/search#search-query-language">Search Query Language</a>. Don’t
-   * use search in read-after-write flows where strict consistency is necessary. Under normal
-   * operating conditions, data is searchable in less than a minute. Occasionally, propagation of
-   * new or updated data can be up to an hour behind during outages. Search functionality is not
-   * available to merchants in India.
-   */
-  public static PaymentIntentSearchResult search(Map<String, Object> params, RequestOptions options)
-      throws StripeException {
-    String url = String.format("%s%s", Stripe.getApiBase(), "/v1/payment_intents/search");
-    return ApiResource.requestSearchResult(url, params, PaymentIntentSearchResult.class, options);
-  }
-
-  /**
-   * Search for PaymentIntents you’ve previously created using Stripe’s <a
-   * href="https://stripe.com/docs/search#search-query-language">Search Query Language</a>. Don’t
-   * use search in read-after-write flows where strict consistency is necessary. Under normal
-   * operating conditions, data is searchable in less than a minute. Occasionally, propagation of
-   * new or updated data can be up to an hour behind during outages. Search functionality is not
-   * available to merchants in India.
-   */
-  public static PaymentIntentSearchResult search(PaymentIntentSearchParams params)
-      throws StripeException {
-    return search(params, (RequestOptions) null);
-  }
-
-  /**
-   * Search for PaymentIntents you’ve previously created using Stripe’s <a
-   * href="https://stripe.com/docs/search#search-query-language">Search Query Language</a>. Don’t
-   * use search in read-after-write flows where strict consistency is necessary. Under normal
-   * operating conditions, data is searchable in less than a minute. Occasionally, propagation of
-   * new or updated data can be up to an hour behind during outages. Search functionality is not
-   * available to merchants in India.
-   */
-  public static PaymentIntentSearchResult search(
-      PaymentIntentSearchParams params, RequestOptions options) throws StripeException {
-    String url = String.format("%s%s", Stripe.getApiBase(), "/v1/payment_intents/search");
-    return ApiResource.requestSearchResult(url, params, PaymentIntentSearchResult.class, options);
-  }
-
-  /**
-   * Creates a PaymentIntent object.
-   *
-   * <p>After the PaymentIntent is created, attach a payment method and <a
-   * href="https://stripe.com/docs/api/payment_intents/confirm">confirm</a> to continue the payment.
-   * You can read more about the different payment flows available via the Payment Intents API <a
-   * href="https://stripe.com/docs/payments/payment-intents">here</a>.
-   *
-   * <p>When <code>confirm=true</code> is used during creation, it is equivalent to creating and
-   * confirming the PaymentIntent in the same call. You may use any parameters available in the <a
-   * href="https://stripe.com/docs/api/payment_intents/confirm">confirm API</a> when <code>
-   * confirm=true</code> is supplied.
-   */
-  public static PaymentIntent create(Map<String, Object> params) throws StripeException {
-    return create(params, (RequestOptions) null);
-  }
-
-  /**
-   * Creates a PaymentIntent object.
-   *
-   * <p>After the PaymentIntent is created, attach a payment method and <a
-   * href="https://stripe.com/docs/api/payment_intents/confirm">confirm</a> to continue the payment.
-   * You can read more about the different payment flows available via the Payment Intents API <a
-   * href="https://stripe.com/docs/payments/payment-intents">here</a>.
-   *
-   * <p>When <code>confirm=true</code> is used during creation, it is equivalent to creating and
-   * confirming the PaymentIntent in the same call. You may use any parameters available in the <a
-   * href="https://stripe.com/docs/api/payment_intents/confirm">confirm API</a> when <code>
-   * confirm=true</code> is supplied.
-   */
-  public static PaymentIntent create(Map<String, Object> params, RequestOptions options)
-      throws StripeException {
-    String url = String.format("%s%s", Stripe.getApiBase(), "/v1/payment_intents");
+    String url =
+        String.format(
+            "%s%s",
+            Stripe.getApiBase(),
+            String.format(
+                "/v1/payment_intents/%s/apply_customer_balance",
+                ApiResource.urlEncodeId(this.getId())));
     return ApiResource.request(
         ApiResource.RequestMethod.POST, url, params, PaymentIntent.class, options);
   }
 
-  /**
-   * Creates a PaymentIntent object.
-   *
-   * <p>After the PaymentIntent is created, attach a payment method and <a
-   * href="https://stripe.com/docs/api/payment_intents/confirm">confirm</a> to continue the payment.
-   * You can read more about the different payment flows available via the Payment Intents API <a
-   * href="https://stripe.com/docs/payments/payment-intents">here</a>.
-   *
-   * <p>When <code>confirm=true</code> is used during creation, it is equivalent to creating and
-   * confirming the PaymentIntent in the same call. You may use any parameters available in the <a
-   * href="https://stripe.com/docs/api/payment_intents/confirm">confirm API</a> when <code>
-   * confirm=true</code> is supplied.
-   */
-  public static PaymentIntent create(PaymentIntentCreateParams params) throws StripeException {
-    return create(params, (RequestOptions) null);
-  }
-
-  /**
-   * Creates a PaymentIntent object.
-   *
-   * <p>After the PaymentIntent is created, attach a payment method and <a
-   * href="https://stripe.com/docs/api/payment_intents/confirm">confirm</a> to continue the payment.
-   * You can read more about the different payment flows available via the Payment Intents API <a
-   * href="https://stripe.com/docs/payments/payment-intents">here</a>.
-   *
-   * <p>When <code>confirm=true</code> is used during creation, it is equivalent to creating and
-   * confirming the PaymentIntent in the same call. You may use any parameters available in the <a
-   * href="https://stripe.com/docs/api/payment_intents/confirm">confirm API</a> when <code>
-   * confirm=true</code> is supplied.
-   */
-  public static PaymentIntent create(PaymentIntentCreateParams params, RequestOptions options)
+  /** Manually reconcile the remaining amount for a customer_balance PaymentIntent. */
+  public PaymentIntent applyCustomerBalance(PaymentIntentApplyCustomerBalanceParams params)
       throws StripeException {
-    String url = String.format("%s%s", Stripe.getApiBase(), "/v1/payment_intents");
-    return ApiResource.request(
-        ApiResource.RequestMethod.POST, url, params, PaymentIntent.class, options);
+    return applyCustomerBalance(params, (RequestOptions) null);
   }
 
-  /** Returns a list of PaymentIntents. */
-  public static PaymentIntentCollection list(Map<String, Object> params) throws StripeException {
-    return list(params, (RequestOptions) null);
-  }
-
-  /** Returns a list of PaymentIntents. */
-  public static PaymentIntentCollection list(Map<String, Object> params, RequestOptions options)
-      throws StripeException {
-    String url = String.format("%s%s", Stripe.getApiBase(), "/v1/payment_intents");
-    return ApiResource.requestCollection(url, params, PaymentIntentCollection.class, options);
-  }
-
-  /** Returns a list of PaymentIntents. */
-  public static PaymentIntentCollection list(PaymentIntentListParams params)
-      throws StripeException {
-    return list(params, (RequestOptions) null);
-  }
-
-  /** Returns a list of PaymentIntents. */
-  public static PaymentIntentCollection list(PaymentIntentListParams params, RequestOptions options)
-      throws StripeException {
-    String url = String.format("%s%s", Stripe.getApiBase(), "/v1/payment_intents");
-    return ApiResource.requestCollection(url, params, PaymentIntentCollection.class, options);
-  }
-
-  /**
-   * Retrieves the details of a PaymentIntent that has previously been created.
-   *
-   * <p>Client-side retrieval using a publishable key is allowed when the <code>client_secret</code>
-   * is provided in the query string.
-   *
-   * <p>When retrieved with a publishable key, only a subset of properties will be returned. Please
-   * refer to the <a href="https://stripe.com/docs/api#payment_intent_object">payment intent</a>
-   * object reference for more details.
-   */
-  public static PaymentIntent retrieve(String intent) throws StripeException {
-    return retrieve(intent, (Map<String, Object>) null, (RequestOptions) null);
-  }
-
-  /**
-   * Retrieves the details of a PaymentIntent that has previously been created.
-   *
-   * <p>Client-side retrieval using a publishable key is allowed when the <code>client_secret</code>
-   * is provided in the query string.
-   *
-   * <p>When retrieved with a publishable key, only a subset of properties will be returned. Please
-   * refer to the <a href="https://stripe.com/docs/api#payment_intent_object">payment intent</a>
-   * object reference for more details.
-   */
-  public static PaymentIntent retrieve(String intent, RequestOptions options)
-      throws StripeException {
-    return retrieve(intent, (Map<String, Object>) null, options);
-  }
-
-  /**
-   * Retrieves the details of a PaymentIntent that has previously been created.
-   *
-   * <p>Client-side retrieval using a publishable key is allowed when the <code>client_secret</code>
-   * is provided in the query string.
-   *
-   * <p>When retrieved with a publishable key, only a subset of properties will be returned. Please
-   * refer to the <a href="https://stripe.com/docs/api#payment_intent_object">payment intent</a>
-   * object reference for more details.
-   */
-  public static PaymentIntent retrieve(
-      String intent, Map<String, Object> params, RequestOptions options) throws StripeException {
-    String url =
-        String.format(
-            "%s%s",
-            Stripe.getApiBase(),
-            String.format("/v1/payment_intents/%s", ApiResource.urlEncodeId(intent)));
-    return ApiResource.request(
-        ApiResource.RequestMethod.GET, url, params, PaymentIntent.class, options);
-  }
-
-  /**
-   * Retrieves the details of a PaymentIntent that has previously been created.
-   *
-   * <p>Client-side retrieval using a publishable key is allowed when the <code>client_secret</code>
-   * is provided in the query string.
-   *
-   * <p>When retrieved with a publishable key, only a subset of properties will be returned. Please
-   * refer to the <a href="https://stripe.com/docs/api#payment_intent_object">payment intent</a>
-   * object reference for more details.
-   */
-  public static PaymentIntent retrieve(
-      String intent, PaymentIntentRetrieveParams params, RequestOptions options)
+  /** Manually reconcile the remaining amount for a customer_balance PaymentIntent. */
+  public PaymentIntent applyCustomerBalance(
+      PaymentIntentApplyCustomerBalanceParams params, RequestOptions options)
       throws StripeException {
     String url =
         String.format(
             "%s%s",
             Stripe.getApiBase(),
-            String.format("/v1/payment_intents/%s", ApiResource.urlEncodeId(intent)));
-    return ApiResource.request(
-        ApiResource.RequestMethod.GET, url, params, PaymentIntent.class, options);
-  }
-
-  /**
-   * Updates properties on a PaymentIntent object without confirming.
-   *
-   * <p>Depending on which properties you update, you may need to confirm the PaymentIntent again.
-   * For example, updating the <code>payment_method</code> will always require you to confirm the
-   * PaymentIntent again. If you prefer to update and confirm at the same time, we recommend
-   * updating properties via the <a
-   * href="https://stripe.com/docs/api/payment_intents/confirm">confirm API</a> instead.
-   */
-  @Override
-  public PaymentIntent update(Map<String, Object> params) throws StripeException {
-    return update(params, (RequestOptions) null);
-  }
-
-  /**
-   * Updates properties on a PaymentIntent object without confirming.
-   *
-   * <p>Depending on which properties you update, you may need to confirm the PaymentIntent again.
-   * For example, updating the <code>payment_method</code> will always require you to confirm the
-   * PaymentIntent again. If you prefer to update and confirm at the same time, we recommend
-   * updating properties via the <a
-   * href="https://stripe.com/docs/api/payment_intents/confirm">confirm API</a> instead.
-   */
-  @Override
-  public PaymentIntent update(Map<String, Object> params, RequestOptions options)
-      throws StripeException {
-    String url =
-        String.format(
-            "%s%s",
-            Stripe.getApiBase(),
-            String.format("/v1/payment_intents/%s", ApiResource.urlEncodeId(this.getId())));
-    return ApiResource.request(
-        ApiResource.RequestMethod.POST, url, params, PaymentIntent.class, options);
-  }
-
-  /**
-   * Updates properties on a PaymentIntent object without confirming.
-   *
-   * <p>Depending on which properties you update, you may need to confirm the PaymentIntent again.
-   * For example, updating the <code>payment_method</code> will always require you to confirm the
-   * PaymentIntent again. If you prefer to update and confirm at the same time, we recommend
-   * updating properties via the <a
-   * href="https://stripe.com/docs/api/payment_intents/confirm">confirm API</a> instead.
-   */
-  public PaymentIntent update(PaymentIntentUpdateParams params) throws StripeException {
-    return update(params, (RequestOptions) null);
-  }
-
-  /**
-   * Updates properties on a PaymentIntent object without confirming.
-   *
-   * <p>Depending on which properties you update, you may need to confirm the PaymentIntent again.
-   * For example, updating the <code>payment_method</code> will always require you to confirm the
-   * PaymentIntent again. If you prefer to update and confirm at the same time, we recommend
-   * updating properties via the <a
-   * href="https://stripe.com/docs/api/payment_intents/confirm">confirm API</a> instead.
-   */
-  public PaymentIntent update(PaymentIntentUpdateParams params, RequestOptions options)
-      throws StripeException {
-    String url =
-        String.format(
-            "%s%s",
-            Stripe.getApiBase(),
-            String.format("/v1/payment_intents/%s", ApiResource.urlEncodeId(this.getId())));
-    return ApiResource.request(
-        ApiResource.RequestMethod.POST, url, params, PaymentIntent.class, options);
-  }
-
-  /**
-   * Confirm that your customer intends to pay with current or provided payment method. Upon
-   * confirmation, the PaymentIntent will attempt to initiate a payment.
-   *
-   * <p>If the selected payment method requires additional authentication steps, the PaymentIntent
-   * will transition to the <code>requires_action</code> status and suggest additional actions via
-   * <code>next_action</code>. If payment fails, the PaymentIntent will transition to the <code>
-   * requires_payment_method</code> status. If payment succeeds, the PaymentIntent will transition
-   * to the <code>succeeded</code> status (or <code>requires_capture</code>, if <code>capture_method
-   * </code> is set to <code>manual</code>).
-   *
-   * <p>If the <code>confirmation_method</code> is <code>automatic</code>, payment may be attempted
-   * using our <a
-   * href="https://stripe.com/docs/stripe-js/reference#stripe-handle-card-payment">client SDKs</a>
-   * and the PaymentIntent’s <a
-   * href="https://stripe.com/docs/api#payment_intent_object-client_secret">client_secret</a>. After
-   * <code>next_action</code>s are handled by the client, no additional confirmation is required to
-   * complete the payment.
-   *
-   * <p>If the <code>confirmation_method</code> is <code>manual</code>, all payment attempts must be
-   * initiated using a secret key. If any actions are required for the payment, the PaymentIntent
-   * will return to the <code>requires_confirmation</code> state after those actions are completed.
-   * Your server needs to then explicitly re-confirm the PaymentIntent to initiate the next payment
-   * attempt. Read the <a
-   * href="https://stripe.com/docs/payments/payment-intents/web-manual">expanded documentation</a>
-   * to learn more about manual confirmation.
-   */
-  public PaymentIntent confirm() throws StripeException {
-    return confirm((Map<String, Object>) null, (RequestOptions) null);
-  }
-
-  /**
-   * Confirm that your customer intends to pay with current or provided payment method. Upon
-   * confirmation, the PaymentIntent will attempt to initiate a payment.
-   *
-   * <p>If the selected payment method requires additional authentication steps, the PaymentIntent
-   * will transition to the <code>requires_action</code> status and suggest additional actions via
-   * <code>next_action</code>. If payment fails, the PaymentIntent will transition to the <code>
-   * requires_payment_method</code> status. If payment succeeds, the PaymentIntent will transition
-   * to the <code>succeeded</code> status (or <code>requires_capture</code>, if <code>capture_method
-   * </code> is set to <code>manual</code>).
-   *
-   * <p>If the <code>confirmation_method</code> is <code>automatic</code>, payment may be attempted
-   * using our <a
-   * href="https://stripe.com/docs/stripe-js/reference#stripe-handle-card-payment">client SDKs</a>
-   * and the PaymentIntent’s <a
-   * href="https://stripe.com/docs/api#payment_intent_object-client_secret">client_secret</a>. After
-   * <code>next_action</code>s are handled by the client, no additional confirmation is required to
-   * complete the payment.
-   *
-   * <p>If the <code>confirmation_method</code> is <code>manual</code>, all payment attempts must be
-   * initiated using a secret key. If any actions are required for the payment, the PaymentIntent
-   * will return to the <code>requires_confirmation</code> state after those actions are completed.
-   * Your server needs to then explicitly re-confirm the PaymentIntent to initiate the next payment
-   * attempt. Read the <a
-   * href="https://stripe.com/docs/payments/payment-intents/web-manual">expanded documentation</a>
-   * to learn more about manual confirmation.
-   */
-  public PaymentIntent confirm(RequestOptions options) throws StripeException {
-    return confirm((Map<String, Object>) null, options);
-  }
-
-  /**
-   * Confirm that your customer intends to pay with current or provided payment method. Upon
-   * confirmation, the PaymentIntent will attempt to initiate a payment.
-   *
-   * <p>If the selected payment method requires additional authentication steps, the PaymentIntent
-   * will transition to the <code>requires_action</code> status and suggest additional actions via
-   * <code>next_action</code>. If payment fails, the PaymentIntent will transition to the <code>
-   * requires_payment_method</code> status. If payment succeeds, the PaymentIntent will transition
-   * to the <code>succeeded</code> status (or <code>requires_capture</code>, if <code>capture_method
-   * </code> is set to <code>manual</code>).
-   *
-   * <p>If the <code>confirmation_method</code> is <code>automatic</code>, payment may be attempted
-   * using our <a
-   * href="https://stripe.com/docs/stripe-js/reference#stripe-handle-card-payment">client SDKs</a>
-   * and the PaymentIntent’s <a
-   * href="https://stripe.com/docs/api#payment_intent_object-client_secret">client_secret</a>. After
-   * <code>next_action</code>s are handled by the client, no additional confirmation is required to
-   * complete the payment.
-   *
-   * <p>If the <code>confirmation_method</code> is <code>manual</code>, all payment attempts must be
-   * initiated using a secret key. If any actions are required for the payment, the PaymentIntent
-   * will return to the <code>requires_confirmation</code> state after those actions are completed.
-   * Your server needs to then explicitly re-confirm the PaymentIntent to initiate the next payment
-   * attempt. Read the <a
-   * href="https://stripe.com/docs/payments/payment-intents/web-manual">expanded documentation</a>
-   * to learn more about manual confirmation.
-   */
-  public PaymentIntent confirm(Map<String, Object> params) throws StripeException {
-    return confirm(params, (RequestOptions) null);
-  }
-
-  /**
-   * Confirm that your customer intends to pay with current or provided payment method. Upon
-   * confirmation, the PaymentIntent will attempt to initiate a payment.
-   *
-   * <p>If the selected payment method requires additional authentication steps, the PaymentIntent
-   * will transition to the <code>requires_action</code> status and suggest additional actions via
-   * <code>next_action</code>. If payment fails, the PaymentIntent will transition to the <code>
-   * requires_payment_method</code> status. If payment succeeds, the PaymentIntent will transition
-   * to the <code>succeeded</code> status (or <code>requires_capture</code>, if <code>capture_method
-   * </code> is set to <code>manual</code>).
-   *
-   * <p>If the <code>confirmation_method</code> is <code>automatic</code>, payment may be attempted
-   * using our <a
-   * href="https://stripe.com/docs/stripe-js/reference#stripe-handle-card-payment">client SDKs</a>
-   * and the PaymentIntent’s <a
-   * href="https://stripe.com/docs/api#payment_intent_object-client_secret">client_secret</a>. After
-   * <code>next_action</code>s are handled by the client, no additional confirmation is required to
-   * complete the payment.
-   *
-   * <p>If the <code>confirmation_method</code> is <code>manual</code>, all payment attempts must be
-   * initiated using a secret key. If any actions are required for the payment, the PaymentIntent
-   * will return to the <code>requires_confirmation</code> state after those actions are completed.
-   * Your server needs to then explicitly re-confirm the PaymentIntent to initiate the next payment
-   * attempt. Read the <a
-   * href="https://stripe.com/docs/payments/payment-intents/web-manual">expanded documentation</a>
-   * to learn more about manual confirmation.
-   */
-  public PaymentIntent confirm(Map<String, Object> params, RequestOptions options)
-      throws StripeException {
-    String url =
-        String.format(
-            "%s%s",
-            Stripe.getApiBase(),
-            String.format("/v1/payment_intents/%s/confirm", ApiResource.urlEncodeId(this.getId())));
-    return ApiResource.request(
-        ApiResource.RequestMethod.POST, url, params, PaymentIntent.class, options);
-  }
-
-  /**
-   * Confirm that your customer intends to pay with current or provided payment method. Upon
-   * confirmation, the PaymentIntent will attempt to initiate a payment.
-   *
-   * <p>If the selected payment method requires additional authentication steps, the PaymentIntent
-   * will transition to the <code>requires_action</code> status and suggest additional actions via
-   * <code>next_action</code>. If payment fails, the PaymentIntent will transition to the <code>
-   * requires_payment_method</code> status. If payment succeeds, the PaymentIntent will transition
-   * to the <code>succeeded</code> status (or <code>requires_capture</code>, if <code>capture_method
-   * </code> is set to <code>manual</code>).
-   *
-   * <p>If the <code>confirmation_method</code> is <code>automatic</code>, payment may be attempted
-   * using our <a
-   * href="https://stripe.com/docs/stripe-js/reference#stripe-handle-card-payment">client SDKs</a>
-   * and the PaymentIntent’s <a
-   * href="https://stripe.com/docs/api#payment_intent_object-client_secret">client_secret</a>. After
-   * <code>next_action</code>s are handled by the client, no additional confirmation is required to
-   * complete the payment.
-   *
-   * <p>If the <code>confirmation_method</code> is <code>manual</code>, all payment attempts must be
-   * initiated using a secret key. If any actions are required for the payment, the PaymentIntent
-   * will return to the <code>requires_confirmation</code> state after those actions are completed.
-   * Your server needs to then explicitly re-confirm the PaymentIntent to initiate the next payment
-   * attempt. Read the <a
-   * href="https://stripe.com/docs/payments/payment-intents/web-manual">expanded documentation</a>
-   * to learn more about manual confirmation.
-   */
-  public PaymentIntent confirm(PaymentIntentConfirmParams params) throws StripeException {
-    return confirm(params, (RequestOptions) null);
-  }
-
-  /**
-   * Confirm that your customer intends to pay with current or provided payment method. Upon
-   * confirmation, the PaymentIntent will attempt to initiate a payment.
-   *
-   * <p>If the selected payment method requires additional authentication steps, the PaymentIntent
-   * will transition to the <code>requires_action</code> status and suggest additional actions via
-   * <code>next_action</code>. If payment fails, the PaymentIntent will transition to the <code>
-   * requires_payment_method</code> status. If payment succeeds, the PaymentIntent will transition
-   * to the <code>succeeded</code> status (or <code>requires_capture</code>, if <code>capture_method
-   * </code> is set to <code>manual</code>).
-   *
-   * <p>If the <code>confirmation_method</code> is <code>automatic</code>, payment may be attempted
-   * using our <a
-   * href="https://stripe.com/docs/stripe-js/reference#stripe-handle-card-payment">client SDKs</a>
-   * and the PaymentIntent’s <a
-   * href="https://stripe.com/docs/api#payment_intent_object-client_secret">client_secret</a>. After
-   * <code>next_action</code>s are handled by the client, no additional confirmation is required to
-   * complete the payment.
-   *
-   * <p>If the <code>confirmation_method</code> is <code>manual</code>, all payment attempts must be
-   * initiated using a secret key. If any actions are required for the payment, the PaymentIntent
-   * will return to the <code>requires_confirmation</code> state after those actions are completed.
-   * Your server needs to then explicitly re-confirm the PaymentIntent to initiate the next payment
-   * attempt. Read the <a
-   * href="https://stripe.com/docs/payments/payment-intents/web-manual">expanded documentation</a>
-   * to learn more about manual confirmation.
-   */
-  public PaymentIntent confirm(PaymentIntentConfirmParams params, RequestOptions options)
-      throws StripeException {
-    String url =
-        String.format(
-            "%s%s",
-            Stripe.getApiBase(),
-            String.format("/v1/payment_intents/%s/confirm", ApiResource.urlEncodeId(this.getId())));
+            String.format(
+                "/v1/payment_intents/%s/apply_customer_balance",
+                ApiResource.urlEncodeId(this.getId())));
     return ApiResource.request(
         ApiResource.RequestMethod.POST, url, params, PaymentIntent.class, options);
   }
@@ -1156,6 +727,280 @@ public class PaymentIntent extends ApiResource implements HasId, MetadataStore<P
   }
 
   /**
+   * Confirm that your customer intends to pay with current or provided payment method. Upon
+   * confirmation, the PaymentIntent will attempt to initiate a payment.
+   *
+   * <p>If the selected payment method requires additional authentication steps, the PaymentIntent
+   * will transition to the <code>requires_action</code> status and suggest additional actions via
+   * <code>next_action</code>. If payment fails, the PaymentIntent will transition to the <code>
+   * requires_payment_method</code> status. If payment succeeds, the PaymentIntent will transition
+   * to the <code>succeeded</code> status (or <code>requires_capture</code>, if <code>capture_method
+   * </code> is set to <code>manual</code>).
+   *
+   * <p>If the <code>confirmation_method</code> is <code>automatic</code>, payment may be attempted
+   * using our <a
+   * href="https://stripe.com/docs/stripe-js/reference#stripe-handle-card-payment">client SDKs</a>
+   * and the PaymentIntent’s <a
+   * href="https://stripe.com/docs/api#payment_intent_object-client_secret">client_secret</a>. After
+   * <code>next_action</code>s are handled by the client, no additional confirmation is required to
+   * complete the payment.
+   *
+   * <p>If the <code>confirmation_method</code> is <code>manual</code>, all payment attempts must be
+   * initiated using a secret key. If any actions are required for the payment, the PaymentIntent
+   * will return to the <code>requires_confirmation</code> state after those actions are completed.
+   * Your server needs to then explicitly re-confirm the PaymentIntent to initiate the next payment
+   * attempt. Read the <a
+   * href="https://stripe.com/docs/payments/payment-intents/web-manual">expanded documentation</a>
+   * to learn more about manual confirmation.
+   */
+  public PaymentIntent confirm() throws StripeException {
+    return confirm((Map<String, Object>) null, (RequestOptions) null);
+  }
+
+  /**
+   * Confirm that your customer intends to pay with current or provided payment method. Upon
+   * confirmation, the PaymentIntent will attempt to initiate a payment.
+   *
+   * <p>If the selected payment method requires additional authentication steps, the PaymentIntent
+   * will transition to the <code>requires_action</code> status and suggest additional actions via
+   * <code>next_action</code>. If payment fails, the PaymentIntent will transition to the <code>
+   * requires_payment_method</code> status. If payment succeeds, the PaymentIntent will transition
+   * to the <code>succeeded</code> status (or <code>requires_capture</code>, if <code>capture_method
+   * </code> is set to <code>manual</code>).
+   *
+   * <p>If the <code>confirmation_method</code> is <code>automatic</code>, payment may be attempted
+   * using our <a
+   * href="https://stripe.com/docs/stripe-js/reference#stripe-handle-card-payment">client SDKs</a>
+   * and the PaymentIntent’s <a
+   * href="https://stripe.com/docs/api#payment_intent_object-client_secret">client_secret</a>. After
+   * <code>next_action</code>s are handled by the client, no additional confirmation is required to
+   * complete the payment.
+   *
+   * <p>If the <code>confirmation_method</code> is <code>manual</code>, all payment attempts must be
+   * initiated using a secret key. If any actions are required for the payment, the PaymentIntent
+   * will return to the <code>requires_confirmation</code> state after those actions are completed.
+   * Your server needs to then explicitly re-confirm the PaymentIntent to initiate the next payment
+   * attempt. Read the <a
+   * href="https://stripe.com/docs/payments/payment-intents/web-manual">expanded documentation</a>
+   * to learn more about manual confirmation.
+   */
+  public PaymentIntent confirm(RequestOptions options) throws StripeException {
+    return confirm((Map<String, Object>) null, options);
+  }
+
+  /**
+   * Confirm that your customer intends to pay with current or provided payment method. Upon
+   * confirmation, the PaymentIntent will attempt to initiate a payment.
+   *
+   * <p>If the selected payment method requires additional authentication steps, the PaymentIntent
+   * will transition to the <code>requires_action</code> status and suggest additional actions via
+   * <code>next_action</code>. If payment fails, the PaymentIntent will transition to the <code>
+   * requires_payment_method</code> status. If payment succeeds, the PaymentIntent will transition
+   * to the <code>succeeded</code> status (or <code>requires_capture</code>, if <code>capture_method
+   * </code> is set to <code>manual</code>).
+   *
+   * <p>If the <code>confirmation_method</code> is <code>automatic</code>, payment may be attempted
+   * using our <a
+   * href="https://stripe.com/docs/stripe-js/reference#stripe-handle-card-payment">client SDKs</a>
+   * and the PaymentIntent’s <a
+   * href="https://stripe.com/docs/api#payment_intent_object-client_secret">client_secret</a>. After
+   * <code>next_action</code>s are handled by the client, no additional confirmation is required to
+   * complete the payment.
+   *
+   * <p>If the <code>confirmation_method</code> is <code>manual</code>, all payment attempts must be
+   * initiated using a secret key. If any actions are required for the payment, the PaymentIntent
+   * will return to the <code>requires_confirmation</code> state after those actions are completed.
+   * Your server needs to then explicitly re-confirm the PaymentIntent to initiate the next payment
+   * attempt. Read the <a
+   * href="https://stripe.com/docs/payments/payment-intents/web-manual">expanded documentation</a>
+   * to learn more about manual confirmation.
+   */
+  public PaymentIntent confirm(Map<String, Object> params) throws StripeException {
+    return confirm(params, (RequestOptions) null);
+  }
+
+  /**
+   * Confirm that your customer intends to pay with current or provided payment method. Upon
+   * confirmation, the PaymentIntent will attempt to initiate a payment.
+   *
+   * <p>If the selected payment method requires additional authentication steps, the PaymentIntent
+   * will transition to the <code>requires_action</code> status and suggest additional actions via
+   * <code>next_action</code>. If payment fails, the PaymentIntent will transition to the <code>
+   * requires_payment_method</code> status. If payment succeeds, the PaymentIntent will transition
+   * to the <code>succeeded</code> status (or <code>requires_capture</code>, if <code>capture_method
+   * </code> is set to <code>manual</code>).
+   *
+   * <p>If the <code>confirmation_method</code> is <code>automatic</code>, payment may be attempted
+   * using our <a
+   * href="https://stripe.com/docs/stripe-js/reference#stripe-handle-card-payment">client SDKs</a>
+   * and the PaymentIntent’s <a
+   * href="https://stripe.com/docs/api#payment_intent_object-client_secret">client_secret</a>. After
+   * <code>next_action</code>s are handled by the client, no additional confirmation is required to
+   * complete the payment.
+   *
+   * <p>If the <code>confirmation_method</code> is <code>manual</code>, all payment attempts must be
+   * initiated using a secret key. If any actions are required for the payment, the PaymentIntent
+   * will return to the <code>requires_confirmation</code> state after those actions are completed.
+   * Your server needs to then explicitly re-confirm the PaymentIntent to initiate the next payment
+   * attempt. Read the <a
+   * href="https://stripe.com/docs/payments/payment-intents/web-manual">expanded documentation</a>
+   * to learn more about manual confirmation.
+   */
+  public PaymentIntent confirm(Map<String, Object> params, RequestOptions options)
+      throws StripeException {
+    String url =
+        String.format(
+            "%s%s",
+            Stripe.getApiBase(),
+            String.format("/v1/payment_intents/%s/confirm", ApiResource.urlEncodeId(this.getId())));
+    return ApiResource.request(
+        ApiResource.RequestMethod.POST, url, params, PaymentIntent.class, options);
+  }
+
+  /**
+   * Confirm that your customer intends to pay with current or provided payment method. Upon
+   * confirmation, the PaymentIntent will attempt to initiate a payment.
+   *
+   * <p>If the selected payment method requires additional authentication steps, the PaymentIntent
+   * will transition to the <code>requires_action</code> status and suggest additional actions via
+   * <code>next_action</code>. If payment fails, the PaymentIntent will transition to the <code>
+   * requires_payment_method</code> status. If payment succeeds, the PaymentIntent will transition
+   * to the <code>succeeded</code> status (or <code>requires_capture</code>, if <code>capture_method
+   * </code> is set to <code>manual</code>).
+   *
+   * <p>If the <code>confirmation_method</code> is <code>automatic</code>, payment may be attempted
+   * using our <a
+   * href="https://stripe.com/docs/stripe-js/reference#stripe-handle-card-payment">client SDKs</a>
+   * and the PaymentIntent’s <a
+   * href="https://stripe.com/docs/api#payment_intent_object-client_secret">client_secret</a>. After
+   * <code>next_action</code>s are handled by the client, no additional confirmation is required to
+   * complete the payment.
+   *
+   * <p>If the <code>confirmation_method</code> is <code>manual</code>, all payment attempts must be
+   * initiated using a secret key. If any actions are required for the payment, the PaymentIntent
+   * will return to the <code>requires_confirmation</code> state after those actions are completed.
+   * Your server needs to then explicitly re-confirm the PaymentIntent to initiate the next payment
+   * attempt. Read the <a
+   * href="https://stripe.com/docs/payments/payment-intents/web-manual">expanded documentation</a>
+   * to learn more about manual confirmation.
+   */
+  public PaymentIntent confirm(PaymentIntentConfirmParams params) throws StripeException {
+    return confirm(params, (RequestOptions) null);
+  }
+
+  /**
+   * Confirm that your customer intends to pay with current or provided payment method. Upon
+   * confirmation, the PaymentIntent will attempt to initiate a payment.
+   *
+   * <p>If the selected payment method requires additional authentication steps, the PaymentIntent
+   * will transition to the <code>requires_action</code> status and suggest additional actions via
+   * <code>next_action</code>. If payment fails, the PaymentIntent will transition to the <code>
+   * requires_payment_method</code> status. If payment succeeds, the PaymentIntent will transition
+   * to the <code>succeeded</code> status (or <code>requires_capture</code>, if <code>capture_method
+   * </code> is set to <code>manual</code>).
+   *
+   * <p>If the <code>confirmation_method</code> is <code>automatic</code>, payment may be attempted
+   * using our <a
+   * href="https://stripe.com/docs/stripe-js/reference#stripe-handle-card-payment">client SDKs</a>
+   * and the PaymentIntent’s <a
+   * href="https://stripe.com/docs/api#payment_intent_object-client_secret">client_secret</a>. After
+   * <code>next_action</code>s are handled by the client, no additional confirmation is required to
+   * complete the payment.
+   *
+   * <p>If the <code>confirmation_method</code> is <code>manual</code>, all payment attempts must be
+   * initiated using a secret key. If any actions are required for the payment, the PaymentIntent
+   * will return to the <code>requires_confirmation</code> state after those actions are completed.
+   * Your server needs to then explicitly re-confirm the PaymentIntent to initiate the next payment
+   * attempt. Read the <a
+   * href="https://stripe.com/docs/payments/payment-intents/web-manual">expanded documentation</a>
+   * to learn more about manual confirmation.
+   */
+  public PaymentIntent confirm(PaymentIntentConfirmParams params, RequestOptions options)
+      throws StripeException {
+    String url =
+        String.format(
+            "%s%s",
+            Stripe.getApiBase(),
+            String.format("/v1/payment_intents/%s/confirm", ApiResource.urlEncodeId(this.getId())));
+    return ApiResource.request(
+        ApiResource.RequestMethod.POST, url, params, PaymentIntent.class, options);
+  }
+
+  /**
+   * Creates a PaymentIntent object.
+   *
+   * <p>After the PaymentIntent is created, attach a payment method and <a
+   * href="https://stripe.com/docs/api/payment_intents/confirm">confirm</a> to continue the payment.
+   * You can read more about the different payment flows available via the Payment Intents API <a
+   * href="https://stripe.com/docs/payments/payment-intents">here</a>.
+   *
+   * <p>When <code>confirm=true</code> is used during creation, it is equivalent to creating and
+   * confirming the PaymentIntent in the same call. You may use any parameters available in the <a
+   * href="https://stripe.com/docs/api/payment_intents/confirm">confirm API</a> when <code>
+   * confirm=true</code> is supplied.
+   */
+  public static PaymentIntent create(Map<String, Object> params) throws StripeException {
+    return create(params, (RequestOptions) null);
+  }
+
+  /**
+   * Creates a PaymentIntent object.
+   *
+   * <p>After the PaymentIntent is created, attach a payment method and <a
+   * href="https://stripe.com/docs/api/payment_intents/confirm">confirm</a> to continue the payment.
+   * You can read more about the different payment flows available via the Payment Intents API <a
+   * href="https://stripe.com/docs/payments/payment-intents">here</a>.
+   *
+   * <p>When <code>confirm=true</code> is used during creation, it is equivalent to creating and
+   * confirming the PaymentIntent in the same call. You may use any parameters available in the <a
+   * href="https://stripe.com/docs/api/payment_intents/confirm">confirm API</a> when <code>
+   * confirm=true</code> is supplied.
+   */
+  public static PaymentIntent create(Map<String, Object> params, RequestOptions options)
+      throws StripeException {
+    String url = String.format("%s%s", Stripe.getApiBase(), "/v1/payment_intents");
+    return ApiResource.request(
+        ApiResource.RequestMethod.POST, url, params, PaymentIntent.class, options);
+  }
+
+  /**
+   * Creates a PaymentIntent object.
+   *
+   * <p>After the PaymentIntent is created, attach a payment method and <a
+   * href="https://stripe.com/docs/api/payment_intents/confirm">confirm</a> to continue the payment.
+   * You can read more about the different payment flows available via the Payment Intents API <a
+   * href="https://stripe.com/docs/payments/payment-intents">here</a>.
+   *
+   * <p>When <code>confirm=true</code> is used during creation, it is equivalent to creating and
+   * confirming the PaymentIntent in the same call. You may use any parameters available in the <a
+   * href="https://stripe.com/docs/api/payment_intents/confirm">confirm API</a> when <code>
+   * confirm=true</code> is supplied.
+   */
+  public static PaymentIntent create(PaymentIntentCreateParams params) throws StripeException {
+    return create(params, (RequestOptions) null);
+  }
+
+  /**
+   * Creates a PaymentIntent object.
+   *
+   * <p>After the PaymentIntent is created, attach a payment method and <a
+   * href="https://stripe.com/docs/api/payment_intents/confirm">confirm</a> to continue the payment.
+   * You can read more about the different payment flows available via the Payment Intents API <a
+   * href="https://stripe.com/docs/payments/payment-intents">here</a>.
+   *
+   * <p>When <code>confirm=true</code> is used during creation, it is equivalent to creating and
+   * confirming the PaymentIntent in the same call. You may use any parameters available in the <a
+   * href="https://stripe.com/docs/api/payment_intents/confirm">confirm API</a> when <code>
+   * confirm=true</code> is supplied.
+   */
+  public static PaymentIntent create(PaymentIntentCreateParams params, RequestOptions options)
+      throws StripeException {
+    String url = String.format("%s%s", Stripe.getApiBase(), "/v1/payment_intents");
+    return ApiResource.request(
+        ApiResource.RequestMethod.POST, url, params, PaymentIntent.class, options);
+  }
+
+  /**
    * Perform an incremental authorization on an eligible <a
    * href="https://stripe.com/docs/api/payment_intents/object">PaymentIntent</a>. To be eligible,
    * the PaymentIntent’s status must be <code>requires_capture</code> and <a
@@ -1299,6 +1144,225 @@ public class PaymentIntent extends ApiResource implements HasId, MetadataStore<P
         ApiResource.RequestMethod.POST, url, params, PaymentIntent.class, options);
   }
 
+  /** Returns a list of PaymentIntents. */
+  public static PaymentIntentCollection list(Map<String, Object> params) throws StripeException {
+    return list(params, (RequestOptions) null);
+  }
+
+  /** Returns a list of PaymentIntents. */
+  public static PaymentIntentCollection list(Map<String, Object> params, RequestOptions options)
+      throws StripeException {
+    String url = String.format("%s%s", Stripe.getApiBase(), "/v1/payment_intents");
+    return ApiResource.requestCollection(url, params, PaymentIntentCollection.class, options);
+  }
+
+  /** Returns a list of PaymentIntents. */
+  public static PaymentIntentCollection list(PaymentIntentListParams params)
+      throws StripeException {
+    return list(params, (RequestOptions) null);
+  }
+
+  /** Returns a list of PaymentIntents. */
+  public static PaymentIntentCollection list(PaymentIntentListParams params, RequestOptions options)
+      throws StripeException {
+    String url = String.format("%s%s", Stripe.getApiBase(), "/v1/payment_intents");
+    return ApiResource.requestCollection(url, params, PaymentIntentCollection.class, options);
+  }
+
+  /**
+   * Retrieves the details of a PaymentIntent that has previously been created.
+   *
+   * <p>Client-side retrieval using a publishable key is allowed when the <code>client_secret</code>
+   * is provided in the query string.
+   *
+   * <p>When retrieved with a publishable key, only a subset of properties will be returned. Please
+   * refer to the <a href="https://stripe.com/docs/api#payment_intent_object">payment intent</a>
+   * object reference for more details.
+   */
+  public static PaymentIntent retrieve(String intent) throws StripeException {
+    return retrieve(intent, (Map<String, Object>) null, (RequestOptions) null);
+  }
+
+  /**
+   * Retrieves the details of a PaymentIntent that has previously been created.
+   *
+   * <p>Client-side retrieval using a publishable key is allowed when the <code>client_secret</code>
+   * is provided in the query string.
+   *
+   * <p>When retrieved with a publishable key, only a subset of properties will be returned. Please
+   * refer to the <a href="https://stripe.com/docs/api#payment_intent_object">payment intent</a>
+   * object reference for more details.
+   */
+  public static PaymentIntent retrieve(String intent, RequestOptions options)
+      throws StripeException {
+    return retrieve(intent, (Map<String, Object>) null, options);
+  }
+
+  /**
+   * Retrieves the details of a PaymentIntent that has previously been created.
+   *
+   * <p>Client-side retrieval using a publishable key is allowed when the <code>client_secret</code>
+   * is provided in the query string.
+   *
+   * <p>When retrieved with a publishable key, only a subset of properties will be returned. Please
+   * refer to the <a href="https://stripe.com/docs/api#payment_intent_object">payment intent</a>
+   * object reference for more details.
+   */
+  public static PaymentIntent retrieve(
+      String intent, Map<String, Object> params, RequestOptions options) throws StripeException {
+    String url =
+        String.format(
+            "%s%s",
+            Stripe.getApiBase(),
+            String.format("/v1/payment_intents/%s", ApiResource.urlEncodeId(intent)));
+    return ApiResource.request(
+        ApiResource.RequestMethod.GET, url, params, PaymentIntent.class, options);
+  }
+
+  /**
+   * Retrieves the details of a PaymentIntent that has previously been created.
+   *
+   * <p>Client-side retrieval using a publishable key is allowed when the <code>client_secret</code>
+   * is provided in the query string.
+   *
+   * <p>When retrieved with a publishable key, only a subset of properties will be returned. Please
+   * refer to the <a href="https://stripe.com/docs/api#payment_intent_object">payment intent</a>
+   * object reference for more details.
+   */
+  public static PaymentIntent retrieve(
+      String intent, PaymentIntentRetrieveParams params, RequestOptions options)
+      throws StripeException {
+    String url =
+        String.format(
+            "%s%s",
+            Stripe.getApiBase(),
+            String.format("/v1/payment_intents/%s", ApiResource.urlEncodeId(intent)));
+    return ApiResource.request(
+        ApiResource.RequestMethod.GET, url, params, PaymentIntent.class, options);
+  }
+
+  /**
+   * Search for PaymentIntents you’ve previously created using Stripe’s <a
+   * href="https://stripe.com/docs/search#search-query-language">Search Query Language</a>. Don’t
+   * use search in read-after-write flows where strict consistency is necessary. Under normal
+   * operating conditions, data is searchable in less than a minute. Occasionally, propagation of
+   * new or updated data can be up to an hour behind during outages. Search functionality is not
+   * available to merchants in India.
+   */
+  public static PaymentIntentSearchResult search(Map<String, Object> params)
+      throws StripeException {
+    return search(params, (RequestOptions) null);
+  }
+
+  /**
+   * Search for PaymentIntents you’ve previously created using Stripe’s <a
+   * href="https://stripe.com/docs/search#search-query-language">Search Query Language</a>. Don’t
+   * use search in read-after-write flows where strict consistency is necessary. Under normal
+   * operating conditions, data is searchable in less than a minute. Occasionally, propagation of
+   * new or updated data can be up to an hour behind during outages. Search functionality is not
+   * available to merchants in India.
+   */
+  public static PaymentIntentSearchResult search(Map<String, Object> params, RequestOptions options)
+      throws StripeException {
+    String url = String.format("%s%s", Stripe.getApiBase(), "/v1/payment_intents/search");
+    return ApiResource.requestSearchResult(url, params, PaymentIntentSearchResult.class, options);
+  }
+
+  /**
+   * Search for PaymentIntents you’ve previously created using Stripe’s <a
+   * href="https://stripe.com/docs/search#search-query-language">Search Query Language</a>. Don’t
+   * use search in read-after-write flows where strict consistency is necessary. Under normal
+   * operating conditions, data is searchable in less than a minute. Occasionally, propagation of
+   * new or updated data can be up to an hour behind during outages. Search functionality is not
+   * available to merchants in India.
+   */
+  public static PaymentIntentSearchResult search(PaymentIntentSearchParams params)
+      throws StripeException {
+    return search(params, (RequestOptions) null);
+  }
+
+  /**
+   * Search for PaymentIntents you’ve previously created using Stripe’s <a
+   * href="https://stripe.com/docs/search#search-query-language">Search Query Language</a>. Don’t
+   * use search in read-after-write flows where strict consistency is necessary. Under normal
+   * operating conditions, data is searchable in less than a minute. Occasionally, propagation of
+   * new or updated data can be up to an hour behind during outages. Search functionality is not
+   * available to merchants in India.
+   */
+  public static PaymentIntentSearchResult search(
+      PaymentIntentSearchParams params, RequestOptions options) throws StripeException {
+    String url = String.format("%s%s", Stripe.getApiBase(), "/v1/payment_intents/search");
+    return ApiResource.requestSearchResult(url, params, PaymentIntentSearchResult.class, options);
+  }
+
+  /**
+   * Updates properties on a PaymentIntent object without confirming.
+   *
+   * <p>Depending on which properties you update, you may need to confirm the PaymentIntent again.
+   * For example, updating the <code>payment_method</code> will always require you to confirm the
+   * PaymentIntent again. If you prefer to update and confirm at the same time, we recommend
+   * updating properties via the <a
+   * href="https://stripe.com/docs/api/payment_intents/confirm">confirm API</a> instead.
+   */
+  @Override
+  public PaymentIntent update(Map<String, Object> params) throws StripeException {
+    return update(params, (RequestOptions) null);
+  }
+
+  /**
+   * Updates properties on a PaymentIntent object without confirming.
+   *
+   * <p>Depending on which properties you update, you may need to confirm the PaymentIntent again.
+   * For example, updating the <code>payment_method</code> will always require you to confirm the
+   * PaymentIntent again. If you prefer to update and confirm at the same time, we recommend
+   * updating properties via the <a
+   * href="https://stripe.com/docs/api/payment_intents/confirm">confirm API</a> instead.
+   */
+  @Override
+  public PaymentIntent update(Map<String, Object> params, RequestOptions options)
+      throws StripeException {
+    String url =
+        String.format(
+            "%s%s",
+            Stripe.getApiBase(),
+            String.format("/v1/payment_intents/%s", ApiResource.urlEncodeId(this.getId())));
+    return ApiResource.request(
+        ApiResource.RequestMethod.POST, url, params, PaymentIntent.class, options);
+  }
+
+  /**
+   * Updates properties on a PaymentIntent object without confirming.
+   *
+   * <p>Depending on which properties you update, you may need to confirm the PaymentIntent again.
+   * For example, updating the <code>payment_method</code> will always require you to confirm the
+   * PaymentIntent again. If you prefer to update and confirm at the same time, we recommend
+   * updating properties via the <a
+   * href="https://stripe.com/docs/api/payment_intents/confirm">confirm API</a> instead.
+   */
+  public PaymentIntent update(PaymentIntentUpdateParams params) throws StripeException {
+    return update(params, (RequestOptions) null);
+  }
+
+  /**
+   * Updates properties on a PaymentIntent object without confirming.
+   *
+   * <p>Depending on which properties you update, you may need to confirm the PaymentIntent again.
+   * For example, updating the <code>payment_method</code> will always require you to confirm the
+   * PaymentIntent again. If you prefer to update and confirm at the same time, we recommend
+   * updating properties via the <a
+   * href="https://stripe.com/docs/api/payment_intents/confirm">confirm API</a> instead.
+   */
+  public PaymentIntent update(PaymentIntentUpdateParams params, RequestOptions options)
+      throws StripeException {
+    String url =
+        String.format(
+            "%s%s",
+            Stripe.getApiBase(),
+            String.format("/v1/payment_intents/%s", ApiResource.urlEncodeId(this.getId())));
+    return ApiResource.request(
+        ApiResource.RequestMethod.POST, url, params, PaymentIntent.class, options);
+  }
+
   /** Verifies microdeposits on a PaymentIntent object. */
   public PaymentIntent verifyMicrodeposits() throws StripeException {
     return verifyMicrodeposits((Map<String, Object>) null, (RequestOptions) null);
@@ -1344,56 +1408,6 @@ public class PaymentIntent extends ApiResource implements HasId, MetadataStore<P
             Stripe.getApiBase(),
             String.format(
                 "/v1/payment_intents/%s/verify_microdeposits",
-                ApiResource.urlEncodeId(this.getId())));
-    return ApiResource.request(
-        ApiResource.RequestMethod.POST, url, params, PaymentIntent.class, options);
-  }
-
-  /** Manually reconcile the remaining amount for a customer_balance PaymentIntent. */
-  public PaymentIntent applyCustomerBalance() throws StripeException {
-    return applyCustomerBalance((Map<String, Object>) null, (RequestOptions) null);
-  }
-
-  /** Manually reconcile the remaining amount for a customer_balance PaymentIntent. */
-  public PaymentIntent applyCustomerBalance(RequestOptions options) throws StripeException {
-    return applyCustomerBalance((Map<String, Object>) null, options);
-  }
-
-  /** Manually reconcile the remaining amount for a customer_balance PaymentIntent. */
-  public PaymentIntent applyCustomerBalance(Map<String, Object> params) throws StripeException {
-    return applyCustomerBalance(params, (RequestOptions) null);
-  }
-
-  /** Manually reconcile the remaining amount for a customer_balance PaymentIntent. */
-  public PaymentIntent applyCustomerBalance(Map<String, Object> params, RequestOptions options)
-      throws StripeException {
-    String url =
-        String.format(
-            "%s%s",
-            Stripe.getApiBase(),
-            String.format(
-                "/v1/payment_intents/%s/apply_customer_balance",
-                ApiResource.urlEncodeId(this.getId())));
-    return ApiResource.request(
-        ApiResource.RequestMethod.POST, url, params, PaymentIntent.class, options);
-  }
-
-  /** Manually reconcile the remaining amount for a customer_balance PaymentIntent. */
-  public PaymentIntent applyCustomerBalance(PaymentIntentApplyCustomerBalanceParams params)
-      throws StripeException {
-    return applyCustomerBalance(params, (RequestOptions) null);
-  }
-
-  /** Manually reconcile the remaining amount for a customer_balance PaymentIntent. */
-  public PaymentIntent applyCustomerBalance(
-      PaymentIntentApplyCustomerBalanceParams params, RequestOptions options)
-      throws StripeException {
-    String url =
-        String.format(
-            "%s%s",
-            Stripe.getApiBase(),
-            String.format(
-                "/v1/payment_intents/%s/apply_customer_balance",
                 ApiResource.urlEncodeId(this.getId())));
     return ApiResource.request(
         ApiResource.RequestMethod.POST, url, params, PaymentIntent.class, options);
@@ -1717,6 +1731,7 @@ public class PaymentIntent extends ApiResource implements HasId, MetadataStore<P
     @SerializedName("type")
     String type;
 
+    /** FinancialAddresses contain identifying information that resolves to a FinancialAccount. */
     @Getter
     @Setter
     @EqualsAndHashCode(callSuper = false)
@@ -1749,6 +1764,7 @@ public class PaymentIntent extends ApiResource implements HasId, MetadataStore<P
       @SerializedName("zengin")
       Zengin zengin;
 
+      /** Iban Records contain E.U. bank account details per the SEPA format. */
       @Getter
       @Setter
       @EqualsAndHashCode(callSuper = false)
@@ -1773,6 +1789,7 @@ public class PaymentIntent extends ApiResource implements HasId, MetadataStore<P
         String iban;
       }
 
+      /** Sort Code Records contain U.K. bank account details per the sort code format. */
       @Getter
       @Setter
       @EqualsAndHashCode(callSuper = false)
@@ -1790,6 +1807,7 @@ public class PaymentIntent extends ApiResource implements HasId, MetadataStore<P
         String sortCode;
       }
 
+      /** SPEI Records contain Mexico bank account details per the SPEI format. */
       @Getter
       @Setter
       @EqualsAndHashCode(callSuper = false)
@@ -1807,6 +1825,7 @@ public class PaymentIntent extends ApiResource implements HasId, MetadataStore<P
         String clabe;
       }
 
+      /** Zengin Records contain Japan bank account details per the Zengin format. */
       @Getter
       @Setter
       @EqualsAndHashCode(callSuper = false)

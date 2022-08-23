@@ -15,6 +15,11 @@ import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.Setter;
 
+/**
+ * To share the contents of a {@code File} object with non-Stripe users, you can create a {@code
+ * FileLink}. {@code FileLink}s contain a URL that can be used to retrieve the contents of the file
+ * without authentication.
+ */
 @Getter
 @Setter
 @EqualsAndHashCode(callSuper = false)
@@ -88,6 +93,56 @@ public class FileLink extends ApiResource implements HasId, MetadataStore<FileLi
     this.file = new ExpandableField<File>(expandableObject.getId(), expandableObject);
   }
 
+  /** Creates a new file link object. */
+  public static FileLink create(Map<String, Object> params) throws StripeException {
+    return create(params, (RequestOptions) null);
+  }
+
+  /** Creates a new file link object. */
+  public static FileLink create(Map<String, Object> params, RequestOptions options)
+      throws StripeException {
+    String url = String.format("%s%s", Stripe.getApiBase(), "/v1/file_links");
+    return ApiResource.request(
+        ApiResource.RequestMethod.POST, url, params, FileLink.class, options);
+  }
+
+  /** Creates a new file link object. */
+  public static FileLink create(FileLinkCreateParams params) throws StripeException {
+    return create(params, (RequestOptions) null);
+  }
+
+  /** Creates a new file link object. */
+  public static FileLink create(FileLinkCreateParams params, RequestOptions options)
+      throws StripeException {
+    String url = String.format("%s%s", Stripe.getApiBase(), "/v1/file_links");
+    return ApiResource.request(
+        ApiResource.RequestMethod.POST, url, params, FileLink.class, options);
+  }
+
+  /** Returns a list of file links. */
+  public static FileLinkCollection list(Map<String, Object> params) throws StripeException {
+    return list(params, (RequestOptions) null);
+  }
+
+  /** Returns a list of file links. */
+  public static FileLinkCollection list(Map<String, Object> params, RequestOptions options)
+      throws StripeException {
+    String url = String.format("%s%s", Stripe.getApiBase(), "/v1/file_links");
+    return ApiResource.requestCollection(url, params, FileLinkCollection.class, options);
+  }
+
+  /** Returns a list of file links. */
+  public static FileLinkCollection list(FileLinkListParams params) throws StripeException {
+    return list(params, (RequestOptions) null);
+  }
+
+  /** Returns a list of file links. */
+  public static FileLinkCollection list(FileLinkListParams params, RequestOptions options)
+      throws StripeException {
+    String url = String.format("%s%s", Stripe.getApiBase(), "/v1/file_links");
+    return ApiResource.requestCollection(url, params, FileLinkCollection.class, options);
+  }
+
   /** Retrieves the file link with the given ID. */
   public static FileLink retrieve(String link) throws StripeException {
     return retrieve(link, (Map<String, Object>) null, (RequestOptions) null);
@@ -116,32 +171,6 @@ public class FileLink extends ApiResource implements HasId, MetadataStore<FileLi
             "%s%s",
             Stripe.getApiBase(), String.format("/v1/file_links/%s", ApiResource.urlEncodeId(link)));
     return ApiResource.request(ApiResource.RequestMethod.GET, url, params, FileLink.class, options);
-  }
-
-  /** Creates a new file link object. */
-  public static FileLink create(Map<String, Object> params) throws StripeException {
-    return create(params, (RequestOptions) null);
-  }
-
-  /** Creates a new file link object. */
-  public static FileLink create(Map<String, Object> params, RequestOptions options)
-      throws StripeException {
-    String url = String.format("%s%s", Stripe.getApiBase(), "/v1/file_links");
-    return ApiResource.request(
-        ApiResource.RequestMethod.POST, url, params, FileLink.class, options);
-  }
-
-  /** Creates a new file link object. */
-  public static FileLink create(FileLinkCreateParams params) throws StripeException {
-    return create(params, (RequestOptions) null);
-  }
-
-  /** Creates a new file link object. */
-  public static FileLink create(FileLinkCreateParams params, RequestOptions options)
-      throws StripeException {
-    String url = String.format("%s%s", Stripe.getApiBase(), "/v1/file_links");
-    return ApiResource.request(
-        ApiResource.RequestMethod.POST, url, params, FileLink.class, options);
   }
 
   /** Updates an existing file link object. Expired links can no longer be updated. */
@@ -178,29 +207,5 @@ public class FileLink extends ApiResource implements HasId, MetadataStore<FileLi
             String.format("/v1/file_links/%s", ApiResource.urlEncodeId(this.getId())));
     return ApiResource.request(
         ApiResource.RequestMethod.POST, url, params, FileLink.class, options);
-  }
-
-  /** Returns a list of file links. */
-  public static FileLinkCollection list(Map<String, Object> params) throws StripeException {
-    return list(params, (RequestOptions) null);
-  }
-
-  /** Returns a list of file links. */
-  public static FileLinkCollection list(Map<String, Object> params, RequestOptions options)
-      throws StripeException {
-    String url = String.format("%s%s", Stripe.getApiBase(), "/v1/file_links");
-    return ApiResource.requestCollection(url, params, FileLinkCollection.class, options);
-  }
-
-  /** Returns a list of file links. */
-  public static FileLinkCollection list(FileLinkListParams params) throws StripeException {
-    return list(params, (RequestOptions) null);
-  }
-
-  /** Returns a list of file links. */
-  public static FileLinkCollection list(FileLinkListParams params, RequestOptions options)
-      throws StripeException {
-    String url = String.format("%s%s", Stripe.getApiBase(), "/v1/file_links");
-    return ApiResource.requestCollection(url, params, FileLinkCollection.class, options);
   }
 }

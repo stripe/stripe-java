@@ -15,6 +15,11 @@ import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.Setter;
 
+/**
+ * Shipping rates describe the price of shipping presented to your customers and can be applied to
+ * <a href="https://stripe.com/docs/payments/checkout/shipping">Checkout Sessions</a> and <a
+ * href="https://stripe.com/docs/orders/shipping">Orders</a> to collect shipping costs.
+ */
 @Getter
 @Setter
 @EqualsAndHashCode(callSuper = false)
@@ -115,6 +120,32 @@ public class ShippingRate extends ApiResource implements HasId, MetadataStore<Sh
     this.taxCode = new ExpandableField<TaxCode>(expandableObject.getId(), expandableObject);
   }
 
+  /** Creates a new shipping rate object. */
+  public static ShippingRate create(Map<String, Object> params) throws StripeException {
+    return create(params, (RequestOptions) null);
+  }
+
+  /** Creates a new shipping rate object. */
+  public static ShippingRate create(Map<String, Object> params, RequestOptions options)
+      throws StripeException {
+    String url = String.format("%s%s", Stripe.getApiBase(), "/v1/shipping_rates");
+    return ApiResource.request(
+        ApiResource.RequestMethod.POST, url, params, ShippingRate.class, options);
+  }
+
+  /** Creates a new shipping rate object. */
+  public static ShippingRate create(ShippingRateCreateParams params) throws StripeException {
+    return create(params, (RequestOptions) null);
+  }
+
+  /** Creates a new shipping rate object. */
+  public static ShippingRate create(ShippingRateCreateParams params, RequestOptions options)
+      throws StripeException {
+    String url = String.format("%s%s", Stripe.getApiBase(), "/v1/shipping_rates");
+    return ApiResource.request(
+        ApiResource.RequestMethod.POST, url, params, ShippingRate.class, options);
+  }
+
   /** Returns a list of your shipping rates. */
   public static ShippingRateCollection list(Map<String, Object> params) throws StripeException {
     return list(params, (RequestOptions) null);
@@ -174,32 +205,6 @@ public class ShippingRate extends ApiResource implements HasId, MetadataStore<Sh
             String.format("/v1/shipping_rates/%s", ApiResource.urlEncodeId(shippingRateToken)));
     return ApiResource.request(
         ApiResource.RequestMethod.GET, url, params, ShippingRate.class, options);
-  }
-
-  /** Creates a new shipping rate object. */
-  public static ShippingRate create(Map<String, Object> params) throws StripeException {
-    return create(params, (RequestOptions) null);
-  }
-
-  /** Creates a new shipping rate object. */
-  public static ShippingRate create(Map<String, Object> params, RequestOptions options)
-      throws StripeException {
-    String url = String.format("%s%s", Stripe.getApiBase(), "/v1/shipping_rates");
-    return ApiResource.request(
-        ApiResource.RequestMethod.POST, url, params, ShippingRate.class, options);
-  }
-
-  /** Creates a new shipping rate object. */
-  public static ShippingRate create(ShippingRateCreateParams params) throws StripeException {
-    return create(params, (RequestOptions) null);
-  }
-
-  /** Creates a new shipping rate object. */
-  public static ShippingRate create(ShippingRateCreateParams params, RequestOptions options)
-      throws StripeException {
-    String url = String.format("%s%s", Stripe.getApiBase(), "/v1/shipping_rates");
-    return ApiResource.request(
-        ApiResource.RequestMethod.POST, url, params, ShippingRate.class, options);
   }
 
   /** Updates an existing shipping rate object. */

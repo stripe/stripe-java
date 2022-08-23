@@ -19,6 +19,10 @@ import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.Setter;
 
+/**
+ * A Financial Connections Session is the secure way to programmatically launch the client-side
+ * Stripe.js modal that lets your users link their accounts.
+ */
 @Getter
 @Setter
 @EqualsAndHashCode(callSuper = false)

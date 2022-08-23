@@ -18,6 +18,10 @@ import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.Setter;
 
+/**
+ * Subscription items allow you to create customer subscriptions with more than one plan, making it
+ * easy to represent complex billing relationships.
+ */
 @Getter
 @Setter
 @EqualsAndHashCode(callSuper = false)
@@ -120,67 +124,6 @@ public class SubscriptionItem extends ApiResource
   @SerializedName("tax_rates")
   List<TaxRate> taxRates;
 
-  /** Returns a list of your subscription items for a given subscription. */
-  public static SubscriptionItemCollection list(Map<String, Object> params) throws StripeException {
-    return list(params, (RequestOptions) null);
-  }
-
-  /** Returns a list of your subscription items for a given subscription. */
-  public static SubscriptionItemCollection list(Map<String, Object> params, RequestOptions options)
-      throws StripeException {
-    String url = String.format("%s%s", Stripe.getApiBase(), "/v1/subscription_items");
-    return ApiResource.requestCollection(url, params, SubscriptionItemCollection.class, options);
-  }
-
-  /** Returns a list of your subscription items for a given subscription. */
-  public static SubscriptionItemCollection list(SubscriptionItemListParams params)
-      throws StripeException {
-    return list(params, (RequestOptions) null);
-  }
-
-  /** Returns a list of your subscription items for a given subscription. */
-  public static SubscriptionItemCollection list(
-      SubscriptionItemListParams params, RequestOptions options) throws StripeException {
-    String url = String.format("%s%s", Stripe.getApiBase(), "/v1/subscription_items");
-    return ApiResource.requestCollection(url, params, SubscriptionItemCollection.class, options);
-  }
-
-  /** Retrieves the subscription item with the given ID. */
-  public static SubscriptionItem retrieve(String item) throws StripeException {
-    return retrieve(item, (Map<String, Object>) null, (RequestOptions) null);
-  }
-
-  /** Retrieves the subscription item with the given ID. */
-  public static SubscriptionItem retrieve(String item, RequestOptions options)
-      throws StripeException {
-    return retrieve(item, (Map<String, Object>) null, options);
-  }
-
-  /** Retrieves the subscription item with the given ID. */
-  public static SubscriptionItem retrieve(
-      String item, Map<String, Object> params, RequestOptions options) throws StripeException {
-    String url =
-        String.format(
-            "%s%s",
-            Stripe.getApiBase(),
-            String.format("/v1/subscription_items/%s", ApiResource.urlEncodeId(item)));
-    return ApiResource.request(
-        ApiResource.RequestMethod.GET, url, params, SubscriptionItem.class, options);
-  }
-
-  /** Retrieves the subscription item with the given ID. */
-  public static SubscriptionItem retrieve(
-      String item, SubscriptionItemRetrieveParams params, RequestOptions options)
-      throws StripeException {
-    String url =
-        String.format(
-            "%s%s",
-            Stripe.getApiBase(),
-            String.format("/v1/subscription_items/%s", ApiResource.urlEncodeId(item)));
-    return ApiResource.request(
-        ApiResource.RequestMethod.GET, url, params, SubscriptionItem.class, options);
-  }
-
   /** Adds a new item to an existing subscription. No existing items will be changed or replaced. */
   public static SubscriptionItem create(Map<String, Object> params) throws StripeException {
     return create(params, (RequestOptions) null);
@@ -204,42 +147,6 @@ public class SubscriptionItem extends ApiResource
   public static SubscriptionItem create(SubscriptionItemCreateParams params, RequestOptions options)
       throws StripeException {
     String url = String.format("%s%s", Stripe.getApiBase(), "/v1/subscription_items");
-    return ApiResource.request(
-        ApiResource.RequestMethod.POST, url, params, SubscriptionItem.class, options);
-  }
-
-  /** Updates the plan or quantity of an item on a current subscription. */
-  @Override
-  public SubscriptionItem update(Map<String, Object> params) throws StripeException {
-    return update(params, (RequestOptions) null);
-  }
-
-  /** Updates the plan or quantity of an item on a current subscription. */
-  @Override
-  public SubscriptionItem update(Map<String, Object> params, RequestOptions options)
-      throws StripeException {
-    String url =
-        String.format(
-            "%s%s",
-            Stripe.getApiBase(),
-            String.format("/v1/subscription_items/%s", ApiResource.urlEncodeId(this.getId())));
-    return ApiResource.request(
-        ApiResource.RequestMethod.POST, url, params, SubscriptionItem.class, options);
-  }
-
-  /** Updates the plan or quantity of an item on a current subscription. */
-  public SubscriptionItem update(SubscriptionItemUpdateParams params) throws StripeException {
-    return update(params, (RequestOptions) null);
-  }
-
-  /** Updates the plan or quantity of an item on a current subscription. */
-  public SubscriptionItem update(SubscriptionItemUpdateParams params, RequestOptions options)
-      throws StripeException {
-    String url =
-        String.format(
-            "%s%s",
-            Stripe.getApiBase(),
-            String.format("/v1/subscription_items/%s", ApiResource.urlEncodeId(this.getId())));
     return ApiResource.request(
         ApiResource.RequestMethod.POST, url, params, SubscriptionItem.class, options);
   }
@@ -304,6 +211,103 @@ public class SubscriptionItem extends ApiResource
             String.format("/v1/subscription_items/%s", ApiResource.urlEncodeId(this.getId())));
     return ApiResource.request(
         ApiResource.RequestMethod.DELETE, url, params, SubscriptionItem.class, options);
+  }
+
+  /** Returns a list of your subscription items for a given subscription. */
+  public static SubscriptionItemCollection list(Map<String, Object> params) throws StripeException {
+    return list(params, (RequestOptions) null);
+  }
+
+  /** Returns a list of your subscription items for a given subscription. */
+  public static SubscriptionItemCollection list(Map<String, Object> params, RequestOptions options)
+      throws StripeException {
+    String url = String.format("%s%s", Stripe.getApiBase(), "/v1/subscription_items");
+    return ApiResource.requestCollection(url, params, SubscriptionItemCollection.class, options);
+  }
+
+  /** Returns a list of your subscription items for a given subscription. */
+  public static SubscriptionItemCollection list(SubscriptionItemListParams params)
+      throws StripeException {
+    return list(params, (RequestOptions) null);
+  }
+
+  /** Returns a list of your subscription items for a given subscription. */
+  public static SubscriptionItemCollection list(
+      SubscriptionItemListParams params, RequestOptions options) throws StripeException {
+    String url = String.format("%s%s", Stripe.getApiBase(), "/v1/subscription_items");
+    return ApiResource.requestCollection(url, params, SubscriptionItemCollection.class, options);
+  }
+
+  /** Retrieves the subscription item with the given ID. */
+  public static SubscriptionItem retrieve(String item) throws StripeException {
+    return retrieve(item, (Map<String, Object>) null, (RequestOptions) null);
+  }
+
+  /** Retrieves the subscription item with the given ID. */
+  public static SubscriptionItem retrieve(String item, RequestOptions options)
+      throws StripeException {
+    return retrieve(item, (Map<String, Object>) null, options);
+  }
+
+  /** Retrieves the subscription item with the given ID. */
+  public static SubscriptionItem retrieve(
+      String item, Map<String, Object> params, RequestOptions options) throws StripeException {
+    String url =
+        String.format(
+            "%s%s",
+            Stripe.getApiBase(),
+            String.format("/v1/subscription_items/%s", ApiResource.urlEncodeId(item)));
+    return ApiResource.request(
+        ApiResource.RequestMethod.GET, url, params, SubscriptionItem.class, options);
+  }
+
+  /** Retrieves the subscription item with the given ID. */
+  public static SubscriptionItem retrieve(
+      String item, SubscriptionItemRetrieveParams params, RequestOptions options)
+      throws StripeException {
+    String url =
+        String.format(
+            "%s%s",
+            Stripe.getApiBase(),
+            String.format("/v1/subscription_items/%s", ApiResource.urlEncodeId(item)));
+    return ApiResource.request(
+        ApiResource.RequestMethod.GET, url, params, SubscriptionItem.class, options);
+  }
+
+  /** Updates the plan or quantity of an item on a current subscription. */
+  @Override
+  public SubscriptionItem update(Map<String, Object> params) throws StripeException {
+    return update(params, (RequestOptions) null);
+  }
+
+  /** Updates the plan or quantity of an item on a current subscription. */
+  @Override
+  public SubscriptionItem update(Map<String, Object> params, RequestOptions options)
+      throws StripeException {
+    String url =
+        String.format(
+            "%s%s",
+            Stripe.getApiBase(),
+            String.format("/v1/subscription_items/%s", ApiResource.urlEncodeId(this.getId())));
+    return ApiResource.request(
+        ApiResource.RequestMethod.POST, url, params, SubscriptionItem.class, options);
+  }
+
+  /** Updates the plan or quantity of an item on a current subscription. */
+  public SubscriptionItem update(SubscriptionItemUpdateParams params) throws StripeException {
+    return update(params, (RequestOptions) null);
+  }
+
+  /** Updates the plan or quantity of an item on a current subscription. */
+  public SubscriptionItem update(SubscriptionItemUpdateParams params, RequestOptions options)
+      throws StripeException {
+    String url =
+        String.format(
+            "%s%s",
+            Stripe.getApiBase(),
+            String.format("/v1/subscription_items/%s", ApiResource.urlEncodeId(this.getId())));
+    return ApiResource.request(
+        ApiResource.RequestMethod.POST, url, params, SubscriptionItem.class, options);
   }
 
   /**

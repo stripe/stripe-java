@@ -18,6 +18,17 @@ import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.Setter;
 
+/**
+ * The Report Run object represents an instance of a report type generated with specific run
+ * parameters. Once the object is created, Stripe begins processing the report. When the report has
+ * finished running, it will give you a reference to a file where you can retrieve your results. For
+ * an overview, see <a href="https://stripe.com/docs/reporting/statements/api">API Access to
+ * Reports</a>.
+ *
+ * <p>Note that certain report types can only be run based on your live-mode data (not test-mode
+ * data), and will error when queried without a <a
+ * href="https://stripe.com/docs/keys#test-live-modes">live-mode API key</a>.
+ */
 @Getter
 @Setter
 @EqualsAndHashCode(callSuper = false)
@@ -86,42 +97,6 @@ public class ReportRun extends ApiResource implements HasId {
   @SerializedName("succeeded_at")
   Long succeededAt;
 
-  /** Retrieves the details of an existing Report Run. */
-  public static ReportRun retrieve(String reportRun) throws StripeException {
-    return retrieve(reportRun, (Map<String, Object>) null, (RequestOptions) null);
-  }
-
-  /** Retrieves the details of an existing Report Run. */
-  public static ReportRun retrieve(String reportRun, RequestOptions options)
-      throws StripeException {
-    return retrieve(reportRun, (Map<String, Object>) null, options);
-  }
-
-  /** Retrieves the details of an existing Report Run. */
-  public static ReportRun retrieve(
-      String reportRun, Map<String, Object> params, RequestOptions options) throws StripeException {
-    String url =
-        String.format(
-            "%s%s",
-            Stripe.getApiBase(),
-            String.format("/v1/reporting/report_runs/%s", ApiResource.urlEncodeId(reportRun)));
-    return ApiResource.request(
-        ApiResource.RequestMethod.GET, url, params, ReportRun.class, options);
-  }
-
-  /** Retrieves the details of an existing Report Run. */
-  public static ReportRun retrieve(
-      String reportRun, ReportRunRetrieveParams params, RequestOptions options)
-      throws StripeException {
-    String url =
-        String.format(
-            "%s%s",
-            Stripe.getApiBase(),
-            String.format("/v1/reporting/report_runs/%s", ApiResource.urlEncodeId(reportRun)));
-    return ApiResource.request(
-        ApiResource.RequestMethod.GET, url, params, ReportRun.class, options);
-  }
-
   /**
    * Creates a new object and begin running the report. (Certain report types require a <a
    * href="https://stripe.com/docs/keys#test-live-modes">live-mode API key</a>.)
@@ -182,6 +157,42 @@ public class ReportRun extends ApiResource implements HasId {
       throws StripeException {
     String url = String.format("%s%s", Stripe.getApiBase(), "/v1/reporting/report_runs");
     return ApiResource.requestCollection(url, params, ReportRunCollection.class, options);
+  }
+
+  /** Retrieves the details of an existing Report Run. */
+  public static ReportRun retrieve(String reportRun) throws StripeException {
+    return retrieve(reportRun, (Map<String, Object>) null, (RequestOptions) null);
+  }
+
+  /** Retrieves the details of an existing Report Run. */
+  public static ReportRun retrieve(String reportRun, RequestOptions options)
+      throws StripeException {
+    return retrieve(reportRun, (Map<String, Object>) null, options);
+  }
+
+  /** Retrieves the details of an existing Report Run. */
+  public static ReportRun retrieve(
+      String reportRun, Map<String, Object> params, RequestOptions options) throws StripeException {
+    String url =
+        String.format(
+            "%s%s",
+            Stripe.getApiBase(),
+            String.format("/v1/reporting/report_runs/%s", ApiResource.urlEncodeId(reportRun)));
+    return ApiResource.request(
+        ApiResource.RequestMethod.GET, url, params, ReportRun.class, options);
+  }
+
+  /** Retrieves the details of an existing Report Run. */
+  public static ReportRun retrieve(
+      String reportRun, ReportRunRetrieveParams params, RequestOptions options)
+      throws StripeException {
+    String url =
+        String.format(
+            "%s%s",
+            Stripe.getApiBase(),
+            String.format("/v1/reporting/report_runs/%s", ApiResource.urlEncodeId(reportRun)));
+    return ApiResource.request(
+        ApiResource.RequestMethod.GET, url, params, ReportRun.class, options);
   }
 
   @Getter

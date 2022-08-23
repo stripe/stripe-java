@@ -18,6 +18,19 @@ import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.Setter;
 
+/**
+ * A payment link is a shareable URL that will take your customers to a hosted payment page. A
+ * payment link can be shared and used multiple times.
+ *
+ * <p>When a customer opens a payment link it will open a new <a
+ * href="https://stripe.com/docs/api/checkout/sessions">checkout session</a> to render the payment
+ * page. You can use <a
+ * href="https://stripe.com/docs/api/events/types#event_types-checkout.session.completed">checkout
+ * session events</a> to track payments through payment links.
+ *
+ * <p>Related guide: <a href="https://stripe.com/docs/payments/payment-links/api">Payment Links
+ * API</a>
+ */
 @Getter
 @Setter
 @EqualsAndHashCode(callSuper = false)
@@ -64,6 +77,13 @@ public class PaymentLink extends ApiResource implements HasId, MetadataStore<Pay
   /** When set, provides configuration to gather active consent from customers. */
   @SerializedName("consent_collection")
   ConsentCollection consentCollection;
+
+  /**
+   * Three-letter <a href="https://www.iso.org/iso-4217-currency-codes.html">ISO currency code</a>,
+   * in lowercase. Must be a <a href="https://stripe.com/docs/currencies">supported currency</a>.
+   */
+  @SerializedName("currency")
+  String currency;
 
   /**
    * Configuration for Customer creation during checkout.
@@ -195,6 +215,32 @@ public class PaymentLink extends ApiResource implements HasId, MetadataStore<Pay
     this.onBehalfOf = new ExpandableField<Account>(expandableObject.getId(), expandableObject);
   }
 
+  /** Creates a payment link. */
+  public static PaymentLink create(Map<String, Object> params) throws StripeException {
+    return create(params, (RequestOptions) null);
+  }
+
+  /** Creates a payment link. */
+  public static PaymentLink create(Map<String, Object> params, RequestOptions options)
+      throws StripeException {
+    String url = String.format("%s%s", Stripe.getApiBase(), "/v1/payment_links");
+    return ApiResource.request(
+        ApiResource.RequestMethod.POST, url, params, PaymentLink.class, options);
+  }
+
+  /** Creates a payment link. */
+  public static PaymentLink create(PaymentLinkCreateParams params) throws StripeException {
+    return create(params, (RequestOptions) null);
+  }
+
+  /** Creates a payment link. */
+  public static PaymentLink create(PaymentLinkCreateParams params, RequestOptions options)
+      throws StripeException {
+    String url = String.format("%s%s", Stripe.getApiBase(), "/v1/payment_links");
+    return ApiResource.request(
+        ApiResource.RequestMethod.POST, url, params, PaymentLink.class, options);
+  }
+
   /** Returns a list of your payment links. */
   public static PaymentLinkCollection list(Map<String, Object> params) throws StripeException {
     return list(params, (RequestOptions) null);
@@ -217,43 +263,6 @@ public class PaymentLink extends ApiResource implements HasId, MetadataStore<Pay
       throws StripeException {
     String url = String.format("%s%s", Stripe.getApiBase(), "/v1/payment_links");
     return ApiResource.requestCollection(url, params, PaymentLinkCollection.class, options);
-  }
-
-  /** Retrieve a payment link. */
-  public static PaymentLink retrieve(String paymentLink) throws StripeException {
-    return retrieve(paymentLink, (Map<String, Object>) null, (RequestOptions) null);
-  }
-
-  /** Retrieve a payment link. */
-  public static PaymentLink retrieve(String paymentLink, RequestOptions options)
-      throws StripeException {
-    return retrieve(paymentLink, (Map<String, Object>) null, options);
-  }
-
-  /** Retrieve a payment link. */
-  public static PaymentLink retrieve(
-      String paymentLink, Map<String, Object> params, RequestOptions options)
-      throws StripeException {
-    String url =
-        String.format(
-            "%s%s",
-            Stripe.getApiBase(),
-            String.format("/v1/payment_links/%s", ApiResource.urlEncodeId(paymentLink)));
-    return ApiResource.request(
-        ApiResource.RequestMethod.GET, url, params, PaymentLink.class, options);
-  }
-
-  /** Retrieve a payment link. */
-  public static PaymentLink retrieve(
-      String paymentLink, PaymentLinkRetrieveParams params, RequestOptions options)
-      throws StripeException {
-    String url =
-        String.format(
-            "%s%s",
-            Stripe.getApiBase(),
-            String.format("/v1/payment_links/%s", ApiResource.urlEncodeId(paymentLink)));
-    return ApiResource.request(
-        ApiResource.RequestMethod.GET, url, params, PaymentLink.class, options);
   }
 
   /**
@@ -316,30 +325,41 @@ public class PaymentLink extends ApiResource implements HasId, MetadataStore<Pay
     return ApiResource.requestCollection(url, params, LineItemCollection.class, options);
   }
 
-  /** Creates a payment link. */
-  public static PaymentLink create(Map<String, Object> params) throws StripeException {
-    return create(params, (RequestOptions) null);
+  /** Retrieve a payment link. */
+  public static PaymentLink retrieve(String paymentLink) throws StripeException {
+    return retrieve(paymentLink, (Map<String, Object>) null, (RequestOptions) null);
   }
 
-  /** Creates a payment link. */
-  public static PaymentLink create(Map<String, Object> params, RequestOptions options)
+  /** Retrieve a payment link. */
+  public static PaymentLink retrieve(String paymentLink, RequestOptions options)
       throws StripeException {
-    String url = String.format("%s%s", Stripe.getApiBase(), "/v1/payment_links");
-    return ApiResource.request(
-        ApiResource.RequestMethod.POST, url, params, PaymentLink.class, options);
+    return retrieve(paymentLink, (Map<String, Object>) null, options);
   }
 
-  /** Creates a payment link. */
-  public static PaymentLink create(PaymentLinkCreateParams params) throws StripeException {
-    return create(params, (RequestOptions) null);
-  }
-
-  /** Creates a payment link. */
-  public static PaymentLink create(PaymentLinkCreateParams params, RequestOptions options)
+  /** Retrieve a payment link. */
+  public static PaymentLink retrieve(
+      String paymentLink, Map<String, Object> params, RequestOptions options)
       throws StripeException {
-    String url = String.format("%s%s", Stripe.getApiBase(), "/v1/payment_links");
+    String url =
+        String.format(
+            "%s%s",
+            Stripe.getApiBase(),
+            String.format("/v1/payment_links/%s", ApiResource.urlEncodeId(paymentLink)));
     return ApiResource.request(
-        ApiResource.RequestMethod.POST, url, params, PaymentLink.class, options);
+        ApiResource.RequestMethod.GET, url, params, PaymentLink.class, options);
+  }
+
+  /** Retrieve a payment link. */
+  public static PaymentLink retrieve(
+      String paymentLink, PaymentLinkRetrieveParams params, RequestOptions options)
+      throws StripeException {
+    String url =
+        String.format(
+            "%s%s",
+            Stripe.getApiBase(),
+            String.format("/v1/payment_links/%s", ApiResource.urlEncodeId(paymentLink)));
+    return ApiResource.request(
+        ApiResource.RequestMethod.GET, url, params, PaymentLink.class, options);
   }
 
   /** Updates a payment link. */

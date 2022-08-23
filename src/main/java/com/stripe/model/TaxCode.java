@@ -13,6 +13,10 @@ import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.Setter;
 
+/**
+ * <a href="https://stripe.com/docs/tax/tax-categories">Tax codes</a> classify goods and services
+ * for tax purposes.
+ */
 @Getter
 @Setter
 @EqualsAndHashCode(callSuper = false)

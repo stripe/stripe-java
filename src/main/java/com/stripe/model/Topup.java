@@ -16,6 +16,13 @@ import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.Setter;
 
+/**
+ * To top up your Stripe balance, you create a top-up object. You can retrieve individual top-ups,
+ * as well as list all top-ups. Top-ups are identified by a unique, random ID.
+ *
+ * <p>Related guide: <a href="https://stripe.com/docs/connect/top-ups">Topping Up your Platform
+ * Account</a>.
+ */
 @Getter
 @Setter
 @EqualsAndHashCode(callSuper = false)
@@ -96,12 +103,9 @@ public class Topup extends ApiResource implements MetadataStore<Topup>, BalanceT
   String object;
 
   /**
-   * {@code Source} objects allow you to accept a variety of payment methods. They represent a
-   * customer's payment instrument, and can be used with the Stripe API just like a {@code Card}
-   * object: once chargeable, they can be charged, or can be attached to customers.
-   *
-   * <p>Related guides: <a href="https://stripe.com/docs/sources">Sources API</a> and <a
-   * href="https://stripe.com/docs/sources/customers">Sources &amp; Customers</a>.
+   * For most Stripe users, the source of every top-up is a bank account. This hash is then the <a
+   * href="https://stripe.com/docs/api#source_object">source object</a> describing that bank
+   * account.
    */
   @SerializedName("source")
   Source source;
@@ -144,6 +148,46 @@ public class Topup extends ApiResource implements MetadataStore<Topup>, BalanceT
   public void setBalanceTransactionObject(BalanceTransaction expandableObject) {
     this.balanceTransaction =
         new ExpandableField<BalanceTransaction>(expandableObject.getId(), expandableObject);
+  }
+
+  /** Cancels a top-up. Only pending top-ups can be canceled. */
+  public Topup cancel() throws StripeException {
+    return cancel((Map<String, Object>) null, (RequestOptions) null);
+  }
+
+  /** Cancels a top-up. Only pending top-ups can be canceled. */
+  public Topup cancel(RequestOptions options) throws StripeException {
+    return cancel((Map<String, Object>) null, options);
+  }
+
+  /** Cancels a top-up. Only pending top-ups can be canceled. */
+  public Topup cancel(Map<String, Object> params) throws StripeException {
+    return cancel(params, (RequestOptions) null);
+  }
+
+  /** Cancels a top-up. Only pending top-ups can be canceled. */
+  public Topup cancel(Map<String, Object> params, RequestOptions options) throws StripeException {
+    String url =
+        String.format(
+            "%s%s",
+            Stripe.getApiBase(),
+            String.format("/v1/topups/%s/cancel", ApiResource.urlEncodeId(this.getId())));
+    return ApiResource.request(ApiResource.RequestMethod.POST, url, params, Topup.class, options);
+  }
+
+  /** Cancels a top-up. Only pending top-ups can be canceled. */
+  public Topup cancel(TopupCancelParams params) throws StripeException {
+    return cancel(params, (RequestOptions) null);
+  }
+
+  /** Cancels a top-up. Only pending top-ups can be canceled. */
+  public Topup cancel(TopupCancelParams params, RequestOptions options) throws StripeException {
+    String url =
+        String.format(
+            "%s%s",
+            Stripe.getApiBase(),
+            String.format("/v1/topups/%s/cancel", ApiResource.urlEncodeId(this.getId())));
+    return ApiResource.request(ApiResource.RequestMethod.POST, url, params, Topup.class, options);
   }
 
   /** Top up the balance of an account. */
@@ -269,46 +313,6 @@ public class Topup extends ApiResource implements MetadataStore<Topup>, BalanceT
             "%s%s",
             Stripe.getApiBase(),
             String.format("/v1/topups/%s", ApiResource.urlEncodeId(this.getId())));
-    return ApiResource.request(ApiResource.RequestMethod.POST, url, params, Topup.class, options);
-  }
-
-  /** Cancels a top-up. Only pending top-ups can be canceled. */
-  public Topup cancel() throws StripeException {
-    return cancel((Map<String, Object>) null, (RequestOptions) null);
-  }
-
-  /** Cancels a top-up. Only pending top-ups can be canceled. */
-  public Topup cancel(RequestOptions options) throws StripeException {
-    return cancel((Map<String, Object>) null, options);
-  }
-
-  /** Cancels a top-up. Only pending top-ups can be canceled. */
-  public Topup cancel(Map<String, Object> params) throws StripeException {
-    return cancel(params, (RequestOptions) null);
-  }
-
-  /** Cancels a top-up. Only pending top-ups can be canceled. */
-  public Topup cancel(Map<String, Object> params, RequestOptions options) throws StripeException {
-    String url =
-        String.format(
-            "%s%s",
-            Stripe.getApiBase(),
-            String.format("/v1/topups/%s/cancel", ApiResource.urlEncodeId(this.getId())));
-    return ApiResource.request(ApiResource.RequestMethod.POST, url, params, Topup.class, options);
-  }
-
-  /** Cancels a top-up. Only pending top-ups can be canceled. */
-  public Topup cancel(TopupCancelParams params) throws StripeException {
-    return cancel(params, (RequestOptions) null);
-  }
-
-  /** Cancels a top-up. Only pending top-ups can be canceled. */
-  public Topup cancel(TopupCancelParams params, RequestOptions options) throws StripeException {
-    String url =
-        String.format(
-            "%s%s",
-            Stripe.getApiBase(),
-            String.format("/v1/topups/%s/cancel", ApiResource.urlEncodeId(this.getId())));
     return ApiResource.request(ApiResource.RequestMethod.POST, url, params, Topup.class, options);
   }
 }

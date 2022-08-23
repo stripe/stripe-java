@@ -13,6 +13,30 @@ import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.Setter;
 
+/**
+ * Tokenization is the process Stripe uses to collect sensitive card or bank account details, or
+ * personally identifiable information (PII), directly from your customers in a secure manner. A
+ * token representing this information is returned to your server to use. You should use our <a
+ * href="https://stripe.com/docs/payments">recommended payments integrations</a> to perform this
+ * process client-side. This ensures that no sensitive card data touches your server, and allows
+ * your integration to operate in a PCI-compliant way.
+ *
+ * <p>If you cannot use client-side tokenization, you can also create tokens using the API with
+ * either your publishable or secret API key. Keep in mind that if your integration uses this
+ * method, you are responsible for any PCI compliance that may be required, and you must keep your
+ * secret API key safe. Unlike with client-side tokenization, your customer's information is not
+ * sent directly to Stripe, so we cannot determine how it is handled or stored.
+ *
+ * <p>Tokens cannot be stored or used more than once. To store card or bank account information for
+ * later use, you can create <a href="https://stripe.com/docs/api#customers">Customer</a> objects or
+ * <a href="https://stripe.com/docs/api#external_accounts">Custom accounts</a>. Note that <a
+ * href="https://stripe.com/docs/radar">Radar</a>, our integrated solution for automatic fraud
+ * protection, performs best with integrations that use client-side tokenization.
+ *
+ * <p>Related guide: <a
+ * href="https://stripe.com/docs/payments/accept-a-payment-charges#web-create-token">Accept a
+ * payment</a>
+ */
 @Getter
 @Setter
 @EqualsAndHashCode(callSuper = false)
@@ -77,36 +101,6 @@ public class Token extends ApiResource implements HasId {
   @SerializedName("used")
   Boolean used;
 
-  /** Retrieves the token with the given ID. */
-  public static Token retrieve(String token) throws StripeException {
-    return retrieve(token, (Map<String, Object>) null, (RequestOptions) null);
-  }
-
-  /** Retrieves the token with the given ID. */
-  public static Token retrieve(String token, RequestOptions options) throws StripeException {
-    return retrieve(token, (Map<String, Object>) null, options);
-  }
-
-  /** Retrieves the token with the given ID. */
-  public static Token retrieve(String token, Map<String, Object> params, RequestOptions options)
-      throws StripeException {
-    String url =
-        String.format(
-            "%s%s",
-            Stripe.getApiBase(), String.format("/v1/tokens/%s", ApiResource.urlEncodeId(token)));
-    return ApiResource.request(ApiResource.RequestMethod.GET, url, params, Token.class, options);
-  }
-
-  /** Retrieves the token with the given ID. */
-  public static Token retrieve(String token, TokenRetrieveParams params, RequestOptions options)
-      throws StripeException {
-    String url =
-        String.format(
-            "%s%s",
-            Stripe.getApiBase(), String.format("/v1/tokens/%s", ApiResource.urlEncodeId(token)));
-    return ApiResource.request(ApiResource.RequestMethod.GET, url, params, Token.class, options);
-  }
-
   /**
    * Creates a single-use token that represents a bank account’s details. This token can be used
    * with any API method in place of a bank account dictionary. This token can be used only once, by
@@ -145,5 +139,35 @@ public class Token extends ApiResource implements HasId {
       throws StripeException {
     String url = String.format("%s%s", Stripe.getApiBase(), "/v1/tokens");
     return ApiResource.request(ApiResource.RequestMethod.POST, url, params, Token.class, options);
+  }
+
+  /** Retrieves the token with the given ID. */
+  public static Token retrieve(String token) throws StripeException {
+    return retrieve(token, (Map<String, Object>) null, (RequestOptions) null);
+  }
+
+  /** Retrieves the token with the given ID. */
+  public static Token retrieve(String token, RequestOptions options) throws StripeException {
+    return retrieve(token, (Map<String, Object>) null, options);
+  }
+
+  /** Retrieves the token with the given ID. */
+  public static Token retrieve(String token, Map<String, Object> params, RequestOptions options)
+      throws StripeException {
+    String url =
+        String.format(
+            "%s%s",
+            Stripe.getApiBase(), String.format("/v1/tokens/%s", ApiResource.urlEncodeId(token)));
+    return ApiResource.request(ApiResource.RequestMethod.GET, url, params, Token.class, options);
+  }
+
+  /** Retrieves the token with the given ID. */
+  public static Token retrieve(String token, TokenRetrieveParams params, RequestOptions options)
+      throws StripeException {
+    String url =
+        String.format(
+            "%s%s",
+            Stripe.getApiBase(), String.format("/v1/tokens/%s", ApiResource.urlEncodeId(token)));
+    return ApiResource.request(ApiResource.RequestMethod.GET, url, params, Token.class, options);
   }
 }

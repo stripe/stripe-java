@@ -13,6 +13,11 @@ import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.Setter;
 
+/**
+ * A customer's {@code Cash balance} represents real funds. Customers can add funds to their cash
+ * balance by sending a bank transfer. These funds can be used for payment and can eventually be
+ * paid out to your bank account.
+ */
 @Getter
 @Setter
 @EqualsAndHashCode(callSuper = false)

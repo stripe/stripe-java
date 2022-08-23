@@ -7,6 +7,15 @@ import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.Setter;
 
+/**
+ * A discount represents the actual application of a <a
+ * href="https://stripe.com/docs/api#coupons">coupon</a> or <a
+ * href="https://stripe.com/docs/api#promotion_codes">promotion code</a>. It contains information
+ * about when the discount began, when it will end, and what it is applied to.
+ *
+ * <p>Related guide: <a href="https://stripe.com/docs/billing/subscriptions/discounts">Applying
+ * Discounts to Subscriptions</a>.
+ */
 @Getter
 @Setter
 @EqualsAndHashCode(callSuper = false)

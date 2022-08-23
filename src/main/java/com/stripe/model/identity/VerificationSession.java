@@ -23,6 +23,20 @@ import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.Setter;
 
+/**
+ * A VerificationSession guides you through the process of collecting and verifying the identities
+ * of your users. It contains details about the type of verification, such as what <a
+ * href="https://stripe.com/docs/identity/verification-checks">verification check</a> to perform.
+ * Only create one VerificationSession for each verification in your system.
+ *
+ * <p>A VerificationSession transitions through <a
+ * href="https://stripe.com/docs/identity/how-sessions-work">multiple statuses</a> throughout its
+ * lifetime as it progresses through the verification flow. The VerificationSession contains the
+ * user's verified data after verification checks are complete.
+ *
+ * <p>Related guide: <a href="https://stripe.com/docs/identity/verification-sessions">The
+ * Verification Sessions API</a>
+ */
 @Getter
 @Setter
 @EqualsAndHashCode(callSuper = false)
@@ -153,161 +167,6 @@ public class VerificationSession extends ApiResource
   }
 
   /**
-   * Creates a VerificationSession object.
-   *
-   * <p>After the VerificationSession is created, display a verification modal using the session
-   * <code>client_secret</code> or send your users to the session’s <code>url</code>.
-   *
-   * <p>If your API key is in test mode, verification checks won’t actually process, though
-   * everything else will occur as if in live mode.
-   *
-   * <p>Related guide: <a href="https://stripe.com/docs/identity/verify-identity-documents">Verify
-   * your users’ identity documents</a>.
-   */
-  public static VerificationSession create(Map<String, Object> params) throws StripeException {
-    return create(params, (RequestOptions) null);
-  }
-
-  /**
-   * Creates a VerificationSession object.
-   *
-   * <p>After the VerificationSession is created, display a verification modal using the session
-   * <code>client_secret</code> or send your users to the session’s <code>url</code>.
-   *
-   * <p>If your API key is in test mode, verification checks won’t actually process, though
-   * everything else will occur as if in live mode.
-   *
-   * <p>Related guide: <a href="https://stripe.com/docs/identity/verify-identity-documents">Verify
-   * your users’ identity documents</a>.
-   */
-  public static VerificationSession create(Map<String, Object> params, RequestOptions options)
-      throws StripeException {
-    String url = String.format("%s%s", Stripe.getApiBase(), "/v1/identity/verification_sessions");
-    return ApiResource.request(
-        ApiResource.RequestMethod.POST, url, params, VerificationSession.class, options);
-  }
-
-  /**
-   * Creates a VerificationSession object.
-   *
-   * <p>After the VerificationSession is created, display a verification modal using the session
-   * <code>client_secret</code> or send your users to the session’s <code>url</code>.
-   *
-   * <p>If your API key is in test mode, verification checks won’t actually process, though
-   * everything else will occur as if in live mode.
-   *
-   * <p>Related guide: <a href="https://stripe.com/docs/identity/verify-identity-documents">Verify
-   * your users’ identity documents</a>.
-   */
-  public static VerificationSession create(VerificationSessionCreateParams params)
-      throws StripeException {
-    return create(params, (RequestOptions) null);
-  }
-
-  /**
-   * Creates a VerificationSession object.
-   *
-   * <p>After the VerificationSession is created, display a verification modal using the session
-   * <code>client_secret</code> or send your users to the session’s <code>url</code>.
-   *
-   * <p>If your API key is in test mode, verification checks won’t actually process, though
-   * everything else will occur as if in live mode.
-   *
-   * <p>Related guide: <a href="https://stripe.com/docs/identity/verify-identity-documents">Verify
-   * your users’ identity documents</a>.
-   */
-  public static VerificationSession create(
-      VerificationSessionCreateParams params, RequestOptions options) throws StripeException {
-    String url = String.format("%s%s", Stripe.getApiBase(), "/v1/identity/verification_sessions");
-    return ApiResource.request(
-        ApiResource.RequestMethod.POST, url, params, VerificationSession.class, options);
-  }
-
-  /**
-   * Retrieves the details of a VerificationSession that was previously created.
-   *
-   * <p>When the session status is <code>requires_input</code>, you can use this method to retrieve
-   * a valid <code>client_secret</code> or <code>url</code> to allow re-submission.
-   */
-  public static VerificationSession retrieve(String session) throws StripeException {
-    return retrieve(session, (Map<String, Object>) null, (RequestOptions) null);
-  }
-
-  /**
-   * Retrieves the details of a VerificationSession that was previously created.
-   *
-   * <p>When the session status is <code>requires_input</code>, you can use this method to retrieve
-   * a valid <code>client_secret</code> or <code>url</code> to allow re-submission.
-   */
-  public static VerificationSession retrieve(String session, RequestOptions options)
-      throws StripeException {
-    return retrieve(session, (Map<String, Object>) null, options);
-  }
-
-  /**
-   * Retrieves the details of a VerificationSession that was previously created.
-   *
-   * <p>When the session status is <code>requires_input</code>, you can use this method to retrieve
-   * a valid <code>client_secret</code> or <code>url</code> to allow re-submission.
-   */
-  public static VerificationSession retrieve(
-      String session, Map<String, Object> params, RequestOptions options) throws StripeException {
-    String url =
-        String.format(
-            "%s%s",
-            Stripe.getApiBase(),
-            String.format(
-                "/v1/identity/verification_sessions/%s", ApiResource.urlEncodeId(session)));
-    return ApiResource.request(
-        ApiResource.RequestMethod.GET, url, params, VerificationSession.class, options);
-  }
-
-  /**
-   * Retrieves the details of a VerificationSession that was previously created.
-   *
-   * <p>When the session status is <code>requires_input</code>, you can use this method to retrieve
-   * a valid <code>client_secret</code> or <code>url</code> to allow re-submission.
-   */
-  public static VerificationSession retrieve(
-      String session, VerificationSessionRetrieveParams params, RequestOptions options)
-      throws StripeException {
-    String url =
-        String.format(
-            "%s%s",
-            Stripe.getApiBase(),
-            String.format(
-                "/v1/identity/verification_sessions/%s", ApiResource.urlEncodeId(session)));
-    return ApiResource.request(
-        ApiResource.RequestMethod.GET, url, params, VerificationSession.class, options);
-  }
-
-  /** Returns a list of VerificationSessions. */
-  public static VerificationSessionCollection list(Map<String, Object> params)
-      throws StripeException {
-    return list(params, (RequestOptions) null);
-  }
-
-  /** Returns a list of VerificationSessions. */
-  public static VerificationSessionCollection list(
-      Map<String, Object> params, RequestOptions options) throws StripeException {
-    String url = String.format("%s%s", Stripe.getApiBase(), "/v1/identity/verification_sessions");
-    return ApiResource.requestCollection(url, params, VerificationSessionCollection.class, options);
-  }
-
-  /** Returns a list of VerificationSessions. */
-  public static VerificationSessionCollection list(VerificationSessionListParams params)
-      throws StripeException {
-    return list(params, (RequestOptions) null);
-  }
-
-  /** Returns a list of VerificationSessions. */
-  public static VerificationSessionCollection list(
-      VerificationSessionListParams params, RequestOptions options) throws StripeException {
-    String url = String.format("%s%s", Stripe.getApiBase(), "/v1/identity/verification_sessions");
-    return ApiResource.requestCollection(url, params, VerificationSessionCollection.class, options);
-  }
-
-  /**
    * A VerificationSession object can be canceled when it is in <code>requires_input</code> <a
    * href="https://stripe.com/docs/identity/how-sessions-work">status</a>.
    *
@@ -389,6 +248,103 @@ public class VerificationSession extends ApiResource
                 ApiResource.urlEncodeId(this.getId())));
     return ApiResource.request(
         ApiResource.RequestMethod.POST, url, params, VerificationSession.class, options);
+  }
+
+  /**
+   * Creates a VerificationSession object.
+   *
+   * <p>After the VerificationSession is created, display a verification modal using the session
+   * <code>client_secret</code> or send your users to the session’s <code>url</code>.
+   *
+   * <p>If your API key is in test mode, verification checks won’t actually process, though
+   * everything else will occur as if in live mode.
+   *
+   * <p>Related guide: <a href="https://stripe.com/docs/identity/verify-identity-documents">Verify
+   * your users’ identity documents</a>.
+   */
+  public static VerificationSession create(Map<String, Object> params) throws StripeException {
+    return create(params, (RequestOptions) null);
+  }
+
+  /**
+   * Creates a VerificationSession object.
+   *
+   * <p>After the VerificationSession is created, display a verification modal using the session
+   * <code>client_secret</code> or send your users to the session’s <code>url</code>.
+   *
+   * <p>If your API key is in test mode, verification checks won’t actually process, though
+   * everything else will occur as if in live mode.
+   *
+   * <p>Related guide: <a href="https://stripe.com/docs/identity/verify-identity-documents">Verify
+   * your users’ identity documents</a>.
+   */
+  public static VerificationSession create(Map<String, Object> params, RequestOptions options)
+      throws StripeException {
+    String url = String.format("%s%s", Stripe.getApiBase(), "/v1/identity/verification_sessions");
+    return ApiResource.request(
+        ApiResource.RequestMethod.POST, url, params, VerificationSession.class, options);
+  }
+
+  /**
+   * Creates a VerificationSession object.
+   *
+   * <p>After the VerificationSession is created, display a verification modal using the session
+   * <code>client_secret</code> or send your users to the session’s <code>url</code>.
+   *
+   * <p>If your API key is in test mode, verification checks won’t actually process, though
+   * everything else will occur as if in live mode.
+   *
+   * <p>Related guide: <a href="https://stripe.com/docs/identity/verify-identity-documents">Verify
+   * your users’ identity documents</a>.
+   */
+  public static VerificationSession create(VerificationSessionCreateParams params)
+      throws StripeException {
+    return create(params, (RequestOptions) null);
+  }
+
+  /**
+   * Creates a VerificationSession object.
+   *
+   * <p>After the VerificationSession is created, display a verification modal using the session
+   * <code>client_secret</code> or send your users to the session’s <code>url</code>.
+   *
+   * <p>If your API key is in test mode, verification checks won’t actually process, though
+   * everything else will occur as if in live mode.
+   *
+   * <p>Related guide: <a href="https://stripe.com/docs/identity/verify-identity-documents">Verify
+   * your users’ identity documents</a>.
+   */
+  public static VerificationSession create(
+      VerificationSessionCreateParams params, RequestOptions options) throws StripeException {
+    String url = String.format("%s%s", Stripe.getApiBase(), "/v1/identity/verification_sessions");
+    return ApiResource.request(
+        ApiResource.RequestMethod.POST, url, params, VerificationSession.class, options);
+  }
+
+  /** Returns a list of VerificationSessions. */
+  public static VerificationSessionCollection list(Map<String, Object> params)
+      throws StripeException {
+    return list(params, (RequestOptions) null);
+  }
+
+  /** Returns a list of VerificationSessions. */
+  public static VerificationSessionCollection list(
+      Map<String, Object> params, RequestOptions options) throws StripeException {
+    String url = String.format("%s%s", Stripe.getApiBase(), "/v1/identity/verification_sessions");
+    return ApiResource.requestCollection(url, params, VerificationSessionCollection.class, options);
+  }
+
+  /** Returns a list of VerificationSessions. */
+  public static VerificationSessionCollection list(VerificationSessionListParams params)
+      throws StripeException {
+    return list(params, (RequestOptions) null);
+  }
+
+  /** Returns a list of VerificationSessions. */
+  public static VerificationSessionCollection list(
+      VerificationSessionListParams params, RequestOptions options) throws StripeException {
+    String url = String.format("%s%s", Stripe.getApiBase(), "/v1/identity/verification_sessions");
+    return ApiResource.requestCollection(url, params, VerificationSessionCollection.class, options);
   }
 
   /**
@@ -566,6 +522,64 @@ public class VerificationSession extends ApiResource
   }
 
   /**
+   * Retrieves the details of a VerificationSession that was previously created.
+   *
+   * <p>When the session status is <code>requires_input</code>, you can use this method to retrieve
+   * a valid <code>client_secret</code> or <code>url</code> to allow re-submission.
+   */
+  public static VerificationSession retrieve(String session) throws StripeException {
+    return retrieve(session, (Map<String, Object>) null, (RequestOptions) null);
+  }
+
+  /**
+   * Retrieves the details of a VerificationSession that was previously created.
+   *
+   * <p>When the session status is <code>requires_input</code>, you can use this method to retrieve
+   * a valid <code>client_secret</code> or <code>url</code> to allow re-submission.
+   */
+  public static VerificationSession retrieve(String session, RequestOptions options)
+      throws StripeException {
+    return retrieve(session, (Map<String, Object>) null, options);
+  }
+
+  /**
+   * Retrieves the details of a VerificationSession that was previously created.
+   *
+   * <p>When the session status is <code>requires_input</code>, you can use this method to retrieve
+   * a valid <code>client_secret</code> or <code>url</code> to allow re-submission.
+   */
+  public static VerificationSession retrieve(
+      String session, Map<String, Object> params, RequestOptions options) throws StripeException {
+    String url =
+        String.format(
+            "%s%s",
+            Stripe.getApiBase(),
+            String.format(
+                "/v1/identity/verification_sessions/%s", ApiResource.urlEncodeId(session)));
+    return ApiResource.request(
+        ApiResource.RequestMethod.GET, url, params, VerificationSession.class, options);
+  }
+
+  /**
+   * Retrieves the details of a VerificationSession that was previously created.
+   *
+   * <p>When the session status is <code>requires_input</code>, you can use this method to retrieve
+   * a valid <code>client_secret</code> or <code>url</code> to allow re-submission.
+   */
+  public static VerificationSession retrieve(
+      String session, VerificationSessionRetrieveParams params, RequestOptions options)
+      throws StripeException {
+    String url =
+        String.format(
+            "%s%s",
+            Stripe.getApiBase(),
+            String.format(
+                "/v1/identity/verification_sessions/%s", ApiResource.urlEncodeId(session)));
+    return ApiResource.request(
+        ApiResource.RequestMethod.GET, url, params, VerificationSession.class, options);
+  }
+
+  /**
    * Updates a VerificationSession object.
    *
    * <p>When the session status is <code>requires_input</code>, you can use this method to update
@@ -623,6 +637,7 @@ public class VerificationSession extends ApiResource
         ApiResource.RequestMethod.POST, url, params, VerificationSession.class, options);
   }
 
+  /** Shows last VerificationSession error. */
   @Getter
   @Setter
   @EqualsAndHashCode(callSuper = false)
@@ -744,6 +759,7 @@ public class VerificationSession extends ApiResource
     @SerializedName("last_name")
     String lastName;
 
+    /** Point in Time. */
     @Getter
     @Setter
     @EqualsAndHashCode(callSuper = false)

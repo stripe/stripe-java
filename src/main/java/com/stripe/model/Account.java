@@ -19,6 +19,13 @@ import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.Setter;
 
+/**
+ * This is an object representing a Stripe account. You can retrieve it to see properties on the
+ * account like its current e-mail address or if the account is enabled yet to make live charges.
+ *
+ * <p>Some properties, marked below, are available only to platforms that want to <a
+ * href="https://stripe.com/docs/connect/accounts">create and manage Express or Custom accounts</a>.
+ */
 @Getter
 @Setter
 @EqualsAndHashCode(callSuper = false)
@@ -145,6 +152,311 @@ public class Account extends ApiResource implements MetadataStore<Account>, Paym
   /** The Stripe account type. Can be {@code standard}, {@code express}, or {@code custom}. */
   @SerializedName("type")
   String type;
+
+  /**
+   * Returns a list of capabilities associated with the account. The capabilities are returned
+   * sorted by creation date, with the most recent capability appearing first.
+   */
+  public CapabilityCollection capabilities() throws StripeException {
+    return capabilities((Map<String, Object>) null, (RequestOptions) null);
+  }
+
+  /**
+   * Returns a list of capabilities associated with the account. The capabilities are returned
+   * sorted by creation date, with the most recent capability appearing first.
+   */
+  public CapabilityCollection capabilities(Map<String, Object> params) throws StripeException {
+    return capabilities(params, (RequestOptions) null);
+  }
+
+  /**
+   * Returns a list of capabilities associated with the account. The capabilities are returned
+   * sorted by creation date, with the most recent capability appearing first.
+   */
+  public CapabilityCollection capabilities(Map<String, Object> params, RequestOptions options)
+      throws StripeException {
+    String url =
+        String.format(
+            "%s%s",
+            Stripe.getApiBase(),
+            String.format("/v1/accounts/%s/capabilities", ApiResource.urlEncodeId(this.getId())));
+    return ApiResource.requestCollection(url, params, CapabilityCollection.class, options);
+  }
+
+  /**
+   * Returns a list of capabilities associated with the account. The capabilities are returned
+   * sorted by creation date, with the most recent capability appearing first.
+   */
+  public CapabilityCollection capabilities(AccountCapabilitiesParams params)
+      throws StripeException {
+    return capabilities(params, (RequestOptions) null);
+  }
+
+  /**
+   * Returns a list of capabilities associated with the account. The capabilities are returned
+   * sorted by creation date, with the most recent capability appearing first.
+   */
+  public CapabilityCollection capabilities(AccountCapabilitiesParams params, RequestOptions options)
+      throws StripeException {
+    String url =
+        String.format(
+            "%s%s",
+            Stripe.getApiBase(),
+            String.format("/v1/accounts/%s/capabilities", ApiResource.urlEncodeId(this.getId())));
+    return ApiResource.requestCollection(url, params, CapabilityCollection.class, options);
+  }
+
+  /**
+   * With <a href="https://stripe.com/docs/connect">Connect</a>, you can create Stripe accounts for
+   * your users. To do this, you’ll first need to <a
+   * href="https://dashboard.stripe.com/account/applications/settings">register your platform</a>.
+   */
+  public static Account create(Map<String, Object> params) throws StripeException {
+    return create(params, (RequestOptions) null);
+  }
+
+  /**
+   * With <a href="https://stripe.com/docs/connect">Connect</a>, you can create Stripe accounts for
+   * your users. To do this, you’ll first need to <a
+   * href="https://dashboard.stripe.com/account/applications/settings">register your platform</a>.
+   */
+  public static Account create(Map<String, Object> params, RequestOptions options)
+      throws StripeException {
+    String url = String.format("%s%s", Stripe.getApiBase(), "/v1/accounts");
+    return ApiResource.request(ApiResource.RequestMethod.POST, url, params, Account.class, options);
+  }
+
+  /**
+   * With <a href="https://stripe.com/docs/connect">Connect</a>, you can create Stripe accounts for
+   * your users. To do this, you’ll first need to <a
+   * href="https://dashboard.stripe.com/account/applications/settings">register your platform</a>.
+   */
+  public static Account create(AccountCreateParams params) throws StripeException {
+    return create(params, (RequestOptions) null);
+  }
+
+  /**
+   * With <a href="https://stripe.com/docs/connect">Connect</a>, you can create Stripe accounts for
+   * your users. To do this, you’ll first need to <a
+   * href="https://dashboard.stripe.com/account/applications/settings">register your platform</a>.
+   */
+  public static Account create(AccountCreateParams params, RequestOptions options)
+      throws StripeException {
+    String url = String.format("%s%s", Stripe.getApiBase(), "/v1/accounts");
+    return ApiResource.request(ApiResource.RequestMethod.POST, url, params, Account.class, options);
+  }
+
+  /**
+   * With <a href="https://stripe.com/docs/connect">Connect</a>, you can delete accounts you manage.
+   *
+   * <p>Accounts created using test-mode keys can be deleted at any time. Standard accounts created
+   * using live-mode keys cannot be deleted. Custom or Express accounts created using live-mode keys
+   * can only be deleted once all balances are zero.
+   *
+   * <p>If you want to delete your own account, use the <a
+   * href="https://dashboard.stripe.com/account">account information tab in your account
+   * settings</a> instead.
+   */
+  public Account delete() throws StripeException {
+    return delete((Map<String, Object>) null, (RequestOptions) null);
+  }
+
+  /**
+   * With <a href="https://stripe.com/docs/connect">Connect</a>, you can delete accounts you manage.
+   *
+   * <p>Accounts created using test-mode keys can be deleted at any time. Standard accounts created
+   * using live-mode keys cannot be deleted. Custom or Express accounts created using live-mode keys
+   * can only be deleted once all balances are zero.
+   *
+   * <p>If you want to delete your own account, use the <a
+   * href="https://dashboard.stripe.com/account">account information tab in your account
+   * settings</a> instead.
+   */
+  public Account delete(RequestOptions options) throws StripeException {
+    return delete((Map<String, Object>) null, options);
+  }
+
+  /**
+   * With <a href="https://stripe.com/docs/connect">Connect</a>, you can delete accounts you manage.
+   *
+   * <p>Accounts created using test-mode keys can be deleted at any time. Standard accounts created
+   * using live-mode keys cannot be deleted. Custom or Express accounts created using live-mode keys
+   * can only be deleted once all balances are zero.
+   *
+   * <p>If you want to delete your own account, use the <a
+   * href="https://dashboard.stripe.com/account">account information tab in your account
+   * settings</a> instead.
+   */
+  public Account delete(Map<String, Object> params) throws StripeException {
+    return delete(params, (RequestOptions) null);
+  }
+
+  /**
+   * With <a href="https://stripe.com/docs/connect">Connect</a>, you can delete accounts you manage.
+   *
+   * <p>Accounts created using test-mode keys can be deleted at any time. Standard accounts created
+   * using live-mode keys cannot be deleted. Custom or Express accounts created using live-mode keys
+   * can only be deleted once all balances are zero.
+   *
+   * <p>If you want to delete your own account, use the <a
+   * href="https://dashboard.stripe.com/account">account information tab in your account
+   * settings</a> instead.
+   */
+  public Account delete(Map<String, Object> params, RequestOptions options) throws StripeException {
+    String url =
+        String.format(
+            "%s%s",
+            Stripe.getApiBase(),
+            String.format("/v1/accounts/%s", ApiResource.urlEncodeId(this.getId())));
+    return ApiResource.request(
+        ApiResource.RequestMethod.DELETE, url, params, Account.class, options);
+  }
+
+  /**
+   * Returns a list of accounts connected to your platform via <a
+   * href="https://stripe.com/docs/connect">Connect</a>. If you’re not a platform, the list is
+   * empty.
+   */
+  public static AccountCollection list(Map<String, Object> params) throws StripeException {
+    return list(params, (RequestOptions) null);
+  }
+
+  /**
+   * Returns a list of accounts connected to your platform via <a
+   * href="https://stripe.com/docs/connect">Connect</a>. If you’re not a platform, the list is
+   * empty.
+   */
+  public static AccountCollection list(Map<String, Object> params, RequestOptions options)
+      throws StripeException {
+    String url = String.format("%s%s", Stripe.getApiBase(), "/v1/accounts");
+    return ApiResource.requestCollection(url, params, AccountCollection.class, options);
+  }
+
+  /**
+   * Returns a list of accounts connected to your platform via <a
+   * href="https://stripe.com/docs/connect">Connect</a>. If you’re not a platform, the list is
+   * empty.
+   */
+  public static AccountCollection list(AccountListParams params) throws StripeException {
+    return list(params, (RequestOptions) null);
+  }
+
+  /**
+   * Returns a list of accounts connected to your platform via <a
+   * href="https://stripe.com/docs/connect">Connect</a>. If you’re not a platform, the list is
+   * empty.
+   */
+  public static AccountCollection list(AccountListParams params, RequestOptions options)
+      throws StripeException {
+    String url = String.format("%s%s", Stripe.getApiBase(), "/v1/accounts");
+    return ApiResource.requestCollection(url, params, AccountCollection.class, options);
+  }
+
+  /**
+   * Returns a list of people associated with the account’s legal entity. The people are returned
+   * sorted by creation date, with the most recent people appearing first.
+   */
+  public PersonCollection persons() throws StripeException {
+    return persons((Map<String, Object>) null, (RequestOptions) null);
+  }
+
+  /**
+   * Returns a list of people associated with the account’s legal entity. The people are returned
+   * sorted by creation date, with the most recent people appearing first.
+   */
+  public PersonCollection persons(Map<String, Object> params) throws StripeException {
+    return persons(params, (RequestOptions) null);
+  }
+
+  /**
+   * Returns a list of people associated with the account’s legal entity. The people are returned
+   * sorted by creation date, with the most recent people appearing first.
+   */
+  public PersonCollection persons(Map<String, Object> params, RequestOptions options)
+      throws StripeException {
+    String url =
+        String.format(
+            "%s%s",
+            Stripe.getApiBase(),
+            String.format("/v1/accounts/%s/persons", ApiResource.urlEncodeId(this.getId())));
+    return ApiResource.requestCollection(url, params, PersonCollection.class, options);
+  }
+
+  /**
+   * Returns a list of people associated with the account’s legal entity. The people are returned
+   * sorted by creation date, with the most recent people appearing first.
+   */
+  public PersonCollection persons(AccountPersonsParams params) throws StripeException {
+    return persons(params, (RequestOptions) null);
+  }
+
+  /**
+   * Returns a list of people associated with the account’s legal entity. The people are returned
+   * sorted by creation date, with the most recent people appearing first.
+   */
+  public PersonCollection persons(AccountPersonsParams params, RequestOptions options)
+      throws StripeException {
+    String url =
+        String.format(
+            "%s%s",
+            Stripe.getApiBase(),
+            String.format("/v1/accounts/%s/persons", ApiResource.urlEncodeId(this.getId())));
+    return ApiResource.requestCollection(url, params, PersonCollection.class, options);
+  }
+
+  /**
+   * With <a href="https://stripe.com/docs/connect">Connect</a>, you may flag accounts as
+   * suspicious.
+   *
+   * <p>Test-mode Custom and Express accounts can be rejected at any time. Accounts created using
+   * live-mode keys may only be rejected once all balances are zero.
+   */
+  public Account reject(Map<String, Object> params) throws StripeException {
+    return reject(params, (RequestOptions) null);
+  }
+
+  /**
+   * With <a href="https://stripe.com/docs/connect">Connect</a>, you may flag accounts as
+   * suspicious.
+   *
+   * <p>Test-mode Custom and Express accounts can be rejected at any time. Accounts created using
+   * live-mode keys may only be rejected once all balances are zero.
+   */
+  public Account reject(Map<String, Object> params, RequestOptions options) throws StripeException {
+    String url =
+        String.format(
+            "%s%s",
+            Stripe.getApiBase(),
+            String.format("/v1/accounts/%s/reject", ApiResource.urlEncodeId(this.getId())));
+    return ApiResource.request(ApiResource.RequestMethod.POST, url, params, Account.class, options);
+  }
+
+  /**
+   * With <a href="https://stripe.com/docs/connect">Connect</a>, you may flag accounts as
+   * suspicious.
+   *
+   * <p>Test-mode Custom and Express accounts can be rejected at any time. Accounts created using
+   * live-mode keys may only be rejected once all balances are zero.
+   */
+  public Account reject(AccountRejectParams params) throws StripeException {
+    return reject(params, (RequestOptions) null);
+  }
+
+  /**
+   * With <a href="https://stripe.com/docs/connect">Connect</a>, you may flag accounts as
+   * suspicious.
+   *
+   * <p>Test-mode Custom and Express accounts can be rejected at any time. Accounts created using
+   * live-mode keys may only be rejected once all balances are zero.
+   */
+  public Account reject(AccountRejectParams params, RequestOptions options) throws StripeException {
+    String url =
+        String.format(
+            "%s%s",
+            Stripe.getApiBase(),
+            String.format("/v1/accounts/%s/reject", ApiResource.urlEncodeId(this.getId())));
+    return ApiResource.request(ApiResource.RequestMethod.POST, url, params, Account.class, options);
+  }
 
   /** Retrieves the details of an account. */
   public static Account retrieve() throws StripeException {
@@ -276,311 +588,6 @@ public class Account extends ApiResource implements MetadataStore<Account>, Paym
             Stripe.getApiBase(),
             String.format("/v1/accounts/%s", ApiResource.urlEncodeId(this.getId())));
     return ApiResource.request(ApiResource.RequestMethod.POST, url, params, Account.class, options);
-  }
-
-  /**
-   * Returns a list of accounts connected to your platform via <a
-   * href="https://stripe.com/docs/connect">Connect</a>. If you’re not a platform, the list is
-   * empty.
-   */
-  public static AccountCollection list(Map<String, Object> params) throws StripeException {
-    return list(params, (RequestOptions) null);
-  }
-
-  /**
-   * Returns a list of accounts connected to your platform via <a
-   * href="https://stripe.com/docs/connect">Connect</a>. If you’re not a platform, the list is
-   * empty.
-   */
-  public static AccountCollection list(Map<String, Object> params, RequestOptions options)
-      throws StripeException {
-    String url = String.format("%s%s", Stripe.getApiBase(), "/v1/accounts");
-    return ApiResource.requestCollection(url, params, AccountCollection.class, options);
-  }
-
-  /**
-   * Returns a list of accounts connected to your platform via <a
-   * href="https://stripe.com/docs/connect">Connect</a>. If you’re not a platform, the list is
-   * empty.
-   */
-  public static AccountCollection list(AccountListParams params) throws StripeException {
-    return list(params, (RequestOptions) null);
-  }
-
-  /**
-   * Returns a list of accounts connected to your platform via <a
-   * href="https://stripe.com/docs/connect">Connect</a>. If you’re not a platform, the list is
-   * empty.
-   */
-  public static AccountCollection list(AccountListParams params, RequestOptions options)
-      throws StripeException {
-    String url = String.format("%s%s", Stripe.getApiBase(), "/v1/accounts");
-    return ApiResource.requestCollection(url, params, AccountCollection.class, options);
-  }
-
-  /**
-   * With <a href="https://stripe.com/docs/connect">Connect</a>, you can create Stripe accounts for
-   * your users. To do this, you’ll first need to <a
-   * href="https://dashboard.stripe.com/account/applications/settings">register your platform</a>.
-   */
-  public static Account create(Map<String, Object> params) throws StripeException {
-    return create(params, (RequestOptions) null);
-  }
-
-  /**
-   * With <a href="https://stripe.com/docs/connect">Connect</a>, you can create Stripe accounts for
-   * your users. To do this, you’ll first need to <a
-   * href="https://dashboard.stripe.com/account/applications/settings">register your platform</a>.
-   */
-  public static Account create(Map<String, Object> params, RequestOptions options)
-      throws StripeException {
-    String url = String.format("%s%s", Stripe.getApiBase(), "/v1/accounts");
-    return ApiResource.request(ApiResource.RequestMethod.POST, url, params, Account.class, options);
-  }
-
-  /**
-   * With <a href="https://stripe.com/docs/connect">Connect</a>, you can create Stripe accounts for
-   * your users. To do this, you’ll first need to <a
-   * href="https://dashboard.stripe.com/account/applications/settings">register your platform</a>.
-   */
-  public static Account create(AccountCreateParams params) throws StripeException {
-    return create(params, (RequestOptions) null);
-  }
-
-  /**
-   * With <a href="https://stripe.com/docs/connect">Connect</a>, you can create Stripe accounts for
-   * your users. To do this, you’ll first need to <a
-   * href="https://dashboard.stripe.com/account/applications/settings">register your platform</a>.
-   */
-  public static Account create(AccountCreateParams params, RequestOptions options)
-      throws StripeException {
-    String url = String.format("%s%s", Stripe.getApiBase(), "/v1/accounts");
-    return ApiResource.request(ApiResource.RequestMethod.POST, url, params, Account.class, options);
-  }
-
-  /**
-   * With <a href="https://stripe.com/docs/connect">Connect</a>, you can delete accounts you manage.
-   *
-   * <p>Accounts created using test-mode keys can be deleted at any time. Standard accounts created
-   * using live-mode keys cannot be deleted. Custom or Express accounts created using live-mode keys
-   * can only be deleted once all balances are zero.
-   *
-   * <p>If you want to delete your own account, use the <a
-   * href="https://dashboard.stripe.com/account">account information tab in your account
-   * settings</a> instead.
-   */
-  public Account delete() throws StripeException {
-    return delete((Map<String, Object>) null, (RequestOptions) null);
-  }
-
-  /**
-   * With <a href="https://stripe.com/docs/connect">Connect</a>, you can delete accounts you manage.
-   *
-   * <p>Accounts created using test-mode keys can be deleted at any time. Standard accounts created
-   * using live-mode keys cannot be deleted. Custom or Express accounts created using live-mode keys
-   * can only be deleted once all balances are zero.
-   *
-   * <p>If you want to delete your own account, use the <a
-   * href="https://dashboard.stripe.com/account">account information tab in your account
-   * settings</a> instead.
-   */
-  public Account delete(RequestOptions options) throws StripeException {
-    return delete((Map<String, Object>) null, options);
-  }
-
-  /**
-   * With <a href="https://stripe.com/docs/connect">Connect</a>, you can delete accounts you manage.
-   *
-   * <p>Accounts created using test-mode keys can be deleted at any time. Standard accounts created
-   * using live-mode keys cannot be deleted. Custom or Express accounts created using live-mode keys
-   * can only be deleted once all balances are zero.
-   *
-   * <p>If you want to delete your own account, use the <a
-   * href="https://dashboard.stripe.com/account">account information tab in your account
-   * settings</a> instead.
-   */
-  public Account delete(Map<String, Object> params) throws StripeException {
-    return delete(params, (RequestOptions) null);
-  }
-
-  /**
-   * With <a href="https://stripe.com/docs/connect">Connect</a>, you can delete accounts you manage.
-   *
-   * <p>Accounts created using test-mode keys can be deleted at any time. Standard accounts created
-   * using live-mode keys cannot be deleted. Custom or Express accounts created using live-mode keys
-   * can only be deleted once all balances are zero.
-   *
-   * <p>If you want to delete your own account, use the <a
-   * href="https://dashboard.stripe.com/account">account information tab in your account
-   * settings</a> instead.
-   */
-  public Account delete(Map<String, Object> params, RequestOptions options) throws StripeException {
-    String url =
-        String.format(
-            "%s%s",
-            Stripe.getApiBase(),
-            String.format("/v1/accounts/%s", ApiResource.urlEncodeId(this.getId())));
-    return ApiResource.request(
-        ApiResource.RequestMethod.DELETE, url, params, Account.class, options);
-  }
-
-  /**
-   * With <a href="https://stripe.com/docs/connect">Connect</a>, you may flag accounts as
-   * suspicious.
-   *
-   * <p>Test-mode Custom and Express accounts can be rejected at any time. Accounts created using
-   * live-mode keys may only be rejected once all balances are zero.
-   */
-  public Account reject(Map<String, Object> params) throws StripeException {
-    return reject(params, (RequestOptions) null);
-  }
-
-  /**
-   * With <a href="https://stripe.com/docs/connect">Connect</a>, you may flag accounts as
-   * suspicious.
-   *
-   * <p>Test-mode Custom and Express accounts can be rejected at any time. Accounts created using
-   * live-mode keys may only be rejected once all balances are zero.
-   */
-  public Account reject(Map<String, Object> params, RequestOptions options) throws StripeException {
-    String url =
-        String.format(
-            "%s%s",
-            Stripe.getApiBase(),
-            String.format("/v1/accounts/%s/reject", ApiResource.urlEncodeId(this.getId())));
-    return ApiResource.request(ApiResource.RequestMethod.POST, url, params, Account.class, options);
-  }
-
-  /**
-   * With <a href="https://stripe.com/docs/connect">Connect</a>, you may flag accounts as
-   * suspicious.
-   *
-   * <p>Test-mode Custom and Express accounts can be rejected at any time. Accounts created using
-   * live-mode keys may only be rejected once all balances are zero.
-   */
-  public Account reject(AccountRejectParams params) throws StripeException {
-    return reject(params, (RequestOptions) null);
-  }
-
-  /**
-   * With <a href="https://stripe.com/docs/connect">Connect</a>, you may flag accounts as
-   * suspicious.
-   *
-   * <p>Test-mode Custom and Express accounts can be rejected at any time. Accounts created using
-   * live-mode keys may only be rejected once all balances are zero.
-   */
-  public Account reject(AccountRejectParams params, RequestOptions options) throws StripeException {
-    String url =
-        String.format(
-            "%s%s",
-            Stripe.getApiBase(),
-            String.format("/v1/accounts/%s/reject", ApiResource.urlEncodeId(this.getId())));
-    return ApiResource.request(ApiResource.RequestMethod.POST, url, params, Account.class, options);
-  }
-
-  /**
-   * Returns a list of people associated with the account’s legal entity. The people are returned
-   * sorted by creation date, with the most recent people appearing first.
-   */
-  public PersonCollection persons() throws StripeException {
-    return persons((Map<String, Object>) null, (RequestOptions) null);
-  }
-
-  /**
-   * Returns a list of people associated with the account’s legal entity. The people are returned
-   * sorted by creation date, with the most recent people appearing first.
-   */
-  public PersonCollection persons(Map<String, Object> params) throws StripeException {
-    return persons(params, (RequestOptions) null);
-  }
-
-  /**
-   * Returns a list of people associated with the account’s legal entity. The people are returned
-   * sorted by creation date, with the most recent people appearing first.
-   */
-  public PersonCollection persons(Map<String, Object> params, RequestOptions options)
-      throws StripeException {
-    String url =
-        String.format(
-            "%s%s",
-            Stripe.getApiBase(),
-            String.format("/v1/accounts/%s/persons", ApiResource.urlEncodeId(this.getId())));
-    return ApiResource.requestCollection(url, params, PersonCollection.class, options);
-  }
-
-  /**
-   * Returns a list of people associated with the account’s legal entity. The people are returned
-   * sorted by creation date, with the most recent people appearing first.
-   */
-  public PersonCollection persons(AccountPersonsParams params) throws StripeException {
-    return persons(params, (RequestOptions) null);
-  }
-
-  /**
-   * Returns a list of people associated with the account’s legal entity. The people are returned
-   * sorted by creation date, with the most recent people appearing first.
-   */
-  public PersonCollection persons(AccountPersonsParams params, RequestOptions options)
-      throws StripeException {
-    String url =
-        String.format(
-            "%s%s",
-            Stripe.getApiBase(),
-            String.format("/v1/accounts/%s/persons", ApiResource.urlEncodeId(this.getId())));
-    return ApiResource.requestCollection(url, params, PersonCollection.class, options);
-  }
-
-  /**
-   * Returns a list of capabilities associated with the account. The capabilities are returned
-   * sorted by creation date, with the most recent capability appearing first.
-   */
-  public CapabilityCollection capabilities() throws StripeException {
-    return capabilities((Map<String, Object>) null, (RequestOptions) null);
-  }
-
-  /**
-   * Returns a list of capabilities associated with the account. The capabilities are returned
-   * sorted by creation date, with the most recent capability appearing first.
-   */
-  public CapabilityCollection capabilities(Map<String, Object> params) throws StripeException {
-    return capabilities(params, (RequestOptions) null);
-  }
-
-  /**
-   * Returns a list of capabilities associated with the account. The capabilities are returned
-   * sorted by creation date, with the most recent capability appearing first.
-   */
-  public CapabilityCollection capabilities(Map<String, Object> params, RequestOptions options)
-      throws StripeException {
-    String url =
-        String.format(
-            "%s%s",
-            Stripe.getApiBase(),
-            String.format("/v1/accounts/%s/capabilities", ApiResource.urlEncodeId(this.getId())));
-    return ApiResource.requestCollection(url, params, CapabilityCollection.class, options);
-  }
-
-  /**
-   * Returns a list of capabilities associated with the account. The capabilities are returned
-   * sorted by creation date, with the most recent capability appearing first.
-   */
-  public CapabilityCollection capabilities(AccountCapabilitiesParams params)
-      throws StripeException {
-    return capabilities(params, (RequestOptions) null);
-  }
-
-  /**
-   * Returns a list of capabilities associated with the account. The capabilities are returned
-   * sorted by creation date, with the most recent capability appearing first.
-   */
-  public CapabilityCollection capabilities(AccountCapabilitiesParams params, RequestOptions options)
-      throws StripeException {
-    String url =
-        String.format(
-            "%s%s",
-            Stripe.getApiBase(),
-            String.format("/v1/accounts/%s/capabilities", ApiResource.urlEncodeId(this.getId())));
-    return ApiResource.requestCollection(url, params, CapabilityCollection.class, options);
   }
 
   @Getter
@@ -972,13 +979,6 @@ public class Account extends ApiResource implements MetadataStore<Account>, Paym
     String nameKanji;
 
     /**
-     * This hash is used to attest that the beneficial owner information provided to Stripe is both
-     * current and correct.
-     */
-    @SerializedName("ownership_declaration")
-    OwnershipDeclaration ownershipDeclaration;
-
-    /**
      * Whether the company's owners have been provided. This Boolean will be {@code true} if you've
      * manually indicated that all owners are provided via <a
      * href="https://stripe.com/docs/api/accounts/update#update_account-company-owners_provided">the
@@ -989,6 +989,13 @@ public class Account extends ApiResource implements MetadataStore<Account>, Paym
      */
     @SerializedName("owners_provided")
     Boolean ownersProvided;
+
+    /**
+     * This hash is used to attest that the beneficial owner information provided to Stripe is both
+     * current and correct.
+     */
+    @SerializedName("ownership_declaration")
+    OwnershipDeclaration ownershipDeclaration;
 
     /** The company's phone number (used for verification). */
     @SerializedName("phone")

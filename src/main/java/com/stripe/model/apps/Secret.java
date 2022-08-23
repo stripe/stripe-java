@@ -17,6 +17,24 @@ import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.Setter;
 
+/**
+ * Secret Store is an API that allows Stripe Apps developers to securely persist secrets for use by
+ * UI Extensions and app backends.
+ *
+ * <p>The primary resource in Secret Store is a {@code secret}. Other apps can't view secrets
+ * created by an app. Additionally, secrets are scoped to provide further permission control.
+ *
+ * <p>All Dashboard users and the app backend share {@code account} scoped secrets. Use the {@code
+ * account} scope for secrets that don't change per-user, like a third-party API key.
+ *
+ * <p>A {@code user} scoped secret is accessible by the app backend and one specific Dashboard user.
+ * Use the {@code user} scope for per-user secrets like per-user OAuth tokens, where different users
+ * might have different permissions.
+ *
+ * <p>Related guide: <a
+ * href="https://stripe.com/docs/stripe-apps/store-auth-data-custom-objects">Store data between page
+ * reloads</a>.
+ */
 @Getter
 @Setter
 @EqualsAndHashCode(callSuper = false)
@@ -64,30 +82,6 @@ public class Secret extends ApiResource implements HasId {
   @SerializedName("scope")
   Scope scope;
 
-  /** Finds a secret in the secret store by name and scope. */
-  public static Secret find(Map<String, Object> params) throws StripeException {
-    return find(params, (RequestOptions) null);
-  }
-
-  /** Finds a secret in the secret store by name and scope. */
-  public static Secret find(Map<String, Object> params, RequestOptions options)
-      throws StripeException {
-    String url = String.format("%s%s", Stripe.getApiBase(), "/v1/apps/secrets/find");
-    return ApiResource.request(ApiResource.RequestMethod.GET, url, params, Secret.class, options);
-  }
-
-  /** Finds a secret in the secret store by name and scope. */
-  public static Secret find(SecretFindParams params) throws StripeException {
-    return find(params, (RequestOptions) null);
-  }
-
-  /** Finds a secret in the secret store by name and scope. */
-  public static Secret find(SecretFindParams params, RequestOptions options)
-      throws StripeException {
-    String url = String.format("%s%s", Stripe.getApiBase(), "/v1/apps/secrets/find");
-    return ApiResource.request(ApiResource.RequestMethod.GET, url, params, Secret.class, options);
-  }
-
   /** Create or replace a secret in the secret store. */
   public static Secret create(Map<String, Object> params) throws StripeException {
     return create(params, (RequestOptions) null);
@@ -134,6 +128,30 @@ public class Secret extends ApiResource implements HasId {
       throws StripeException {
     String url = String.format("%s%s", Stripe.getApiBase(), "/v1/apps/secrets/delete");
     return ApiResource.request(ApiResource.RequestMethod.POST, url, params, Secret.class, options);
+  }
+
+  /** Finds a secret in the secret store by name and scope. */
+  public static Secret find(Map<String, Object> params) throws StripeException {
+    return find(params, (RequestOptions) null);
+  }
+
+  /** Finds a secret in the secret store by name and scope. */
+  public static Secret find(Map<String, Object> params, RequestOptions options)
+      throws StripeException {
+    String url = String.format("%s%s", Stripe.getApiBase(), "/v1/apps/secrets/find");
+    return ApiResource.request(ApiResource.RequestMethod.GET, url, params, Secret.class, options);
+  }
+
+  /** Finds a secret in the secret store by name and scope. */
+  public static Secret find(SecretFindParams params) throws StripeException {
+    return find(params, (RequestOptions) null);
+  }
+
+  /** Finds a secret in the secret store by name and scope. */
+  public static Secret find(SecretFindParams params, RequestOptions options)
+      throws StripeException {
+    String url = String.format("%s%s", Stripe.getApiBase(), "/v1/apps/secrets/find");
+    return ApiResource.request(ApiResource.RequestMethod.GET, url, params, Secret.class, options);
   }
 
   /** List all secrets stored on the given scope. */

@@ -18,6 +18,14 @@ import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.Setter;
 
+/**
+ * {@code Source} objects allow you to accept a variety of payment methods. They represent a
+ * customer's payment instrument, and can be used with the Stripe API just like a {@code Card}
+ * object: once chargeable, they can be charged, or can be attached to customers.
+ *
+ * <p>Related guides: <a href="https://stripe.com/docs/sources">Sources API</a> and <a
+ * href="https://stripe.com/docs/sources/customers">Sources &amp; Customers</a>.
+ */
 @Getter
 @Setter
 @EqualsAndHashCode(callSuper = false)
@@ -200,6 +208,30 @@ public class Source extends ApiResource implements MetadataStore<Source>, Paymen
   @SerializedName("wechat")
   Wechat wechat;
 
+  /** Creates a new source object. */
+  public static Source create(Map<String, Object> params) throws StripeException {
+    return create(params, (RequestOptions) null);
+  }
+
+  /** Creates a new source object. */
+  public static Source create(Map<String, Object> params, RequestOptions options)
+      throws StripeException {
+    String url = String.format("%s%s", Stripe.getApiBase(), "/v1/sources");
+    return ApiResource.request(ApiResource.RequestMethod.POST, url, params, Source.class, options);
+  }
+
+  /** Creates a new source object. */
+  public static Source create(SourceCreateParams params) throws StripeException {
+    return create(params, (RequestOptions) null);
+  }
+
+  /** Creates a new source object. */
+  public static Source create(SourceCreateParams params, RequestOptions options)
+      throws StripeException {
+    String url = String.format("%s%s", Stripe.getApiBase(), "/v1/sources");
+    return ApiResource.request(ApiResource.RequestMethod.POST, url, params, Source.class, options);
+  }
+
   /** Delete a specified source for a given customer. */
   public Source detach() throws StripeException {
     return detach((Map<String, Object>) null, (RequestOptions) null);
@@ -285,28 +317,45 @@ public class Source extends ApiResource implements MetadataStore<Source>, Paymen
     return ApiResource.request(ApiResource.RequestMethod.GET, url, params, Source.class, options);
   }
 
-  /** Creates a new source object. */
-  public static Source create(Map<String, Object> params) throws StripeException {
-    return create(params, (RequestOptions) null);
+  /** List source transactions for a given source. */
+  public SourceTransactionCollection sourceTransactions() throws StripeException {
+    return sourceTransactions((Map<String, Object>) null, (RequestOptions) null);
   }
 
-  /** Creates a new source object. */
-  public static Source create(Map<String, Object> params, RequestOptions options)
+  /** List source transactions for a given source. */
+  public SourceTransactionCollection sourceTransactions(Map<String, Object> params)
       throws StripeException {
-    String url = String.format("%s%s", Stripe.getApiBase(), "/v1/sources");
-    return ApiResource.request(ApiResource.RequestMethod.POST, url, params, Source.class, options);
+    return sourceTransactions(params, (RequestOptions) null);
   }
 
-  /** Creates a new source object. */
-  public static Source create(SourceCreateParams params) throws StripeException {
-    return create(params, (RequestOptions) null);
+  /** List source transactions for a given source. */
+  public SourceTransactionCollection sourceTransactions(
+      Map<String, Object> params, RequestOptions options) throws StripeException {
+    String url =
+        String.format(
+            "%s%s",
+            Stripe.getApiBase(),
+            String.format(
+                "/v1/sources/%s/source_transactions", ApiResource.urlEncodeId(this.getId())));
+    return ApiResource.requestCollection(url, params, SourceTransactionCollection.class, options);
   }
 
-  /** Creates a new source object. */
-  public static Source create(SourceCreateParams params, RequestOptions options)
+  /** List source transactions for a given source. */
+  public SourceTransactionCollection sourceTransactions(SourceSourceTransactionsParams params)
       throws StripeException {
-    String url = String.format("%s%s", Stripe.getApiBase(), "/v1/sources");
-    return ApiResource.request(ApiResource.RequestMethod.POST, url, params, Source.class, options);
+    return sourceTransactions(params, (RequestOptions) null);
+  }
+
+  /** List source transactions for a given source. */
+  public SourceTransactionCollection sourceTransactions(
+      SourceSourceTransactionsParams params, RequestOptions options) throws StripeException {
+    String url =
+        String.format(
+            "%s%s",
+            Stripe.getApiBase(),
+            String.format(
+                "/v1/sources/%s/source_transactions", ApiResource.urlEncodeId(this.getId())));
+    return ApiResource.requestCollection(url, params, SourceTransactionCollection.class, options);
   }
 
   /**
@@ -397,47 +446,6 @@ public class Source extends ApiResource implements MetadataStore<Source>, Paymen
             Stripe.getApiBase(),
             String.format("/v1/sources/%s/verify", ApiResource.urlEncodeId(this.getId())));
     return ApiResource.request(ApiResource.RequestMethod.POST, url, params, Source.class, options);
-  }
-
-  /** List source transactions for a given source. */
-  public SourceTransactionCollection sourceTransactions() throws StripeException {
-    return sourceTransactions((Map<String, Object>) null, (RequestOptions) null);
-  }
-
-  /** List source transactions for a given source. */
-  public SourceTransactionCollection sourceTransactions(Map<String, Object> params)
-      throws StripeException {
-    return sourceTransactions(params, (RequestOptions) null);
-  }
-
-  /** List source transactions for a given source. */
-  public SourceTransactionCollection sourceTransactions(
-      Map<String, Object> params, RequestOptions options) throws StripeException {
-    String url =
-        String.format(
-            "%s%s",
-            Stripe.getApiBase(),
-            String.format(
-                "/v1/sources/%s/source_transactions", ApiResource.urlEncodeId(this.getId())));
-    return ApiResource.requestCollection(url, params, SourceTransactionCollection.class, options);
-  }
-
-  /** List source transactions for a given source. */
-  public SourceTransactionCollection sourceTransactions(SourceSourceTransactionsParams params)
-      throws StripeException {
-    return sourceTransactions(params, (RequestOptions) null);
-  }
-
-  /** List source transactions for a given source. */
-  public SourceTransactionCollection sourceTransactions(
-      SourceSourceTransactionsParams params, RequestOptions options) throws StripeException {
-    String url =
-        String.format(
-            "%s%s",
-            Stripe.getApiBase(),
-            String.format(
-                "/v1/sources/%s/source_transactions", ApiResource.urlEncodeId(this.getId())));
-    return ApiResource.requestCollection(url, params, SourceTransactionCollection.class, options);
   }
 
   @Getter
@@ -704,11 +712,11 @@ public class Source extends ApiResource implements MetadataStore<Source>, Paymen
     @SerializedName("pos_entry_mode")
     String posEntryMode;
 
-    @SerializedName("reader")
-    String reader;
-
     @SerializedName("read_method")
     String readMethod;
+
+    @SerializedName("reader")
+    String reader;
 
     @SerializedName("terminal_verification_results")
     String terminalVerificationResults;
@@ -819,9 +827,6 @@ public class Source extends ApiResource implements MetadataStore<Source>, Paymen
     @SerializedName("pay_later_redirect_url")
     String payLaterRedirectUrl;
 
-    @SerializedName("payment_method_categories")
-    String paymentMethodCategories;
-
     @SerializedName("pay_now_asset_urls_descriptive")
     String payNowAssetUrlsDescriptive;
 
@@ -845,6 +850,9 @@ public class Source extends ApiResource implements MetadataStore<Source>, Paymen
 
     @SerializedName("pay_over_time_redirect_url")
     String payOverTimeRedirectUrl;
+
+    @SerializedName("payment_method_categories")
+    String paymentMethodCategories;
 
     @SerializedName("purchase_country")
     String purchaseCountry;

@@ -31,6 +31,7 @@ final class EventDataClassLookup {
     classLookup.put("credit_note_line_item", CreditNoteLineItem.class);
     classLookup.put("customer", Customer.class);
     classLookup.put("customer_balance_transaction", CustomerBalanceTransaction.class);
+    classLookup.put("customer_cash_balance_transaction", CustomerCashBalanceTransaction.class);
     classLookup.put("discount", Discount.class);
     classLookup.put("dispute", Dispute.class);
     classLookup.put("ephemeral_key", EphemeralKey.class);

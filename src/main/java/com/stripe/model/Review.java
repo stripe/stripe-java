@@ -15,6 +15,12 @@ import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.Setter;
 
+/**
+ * Reviews can be used to supplement automated fraud detection with human expertise.
+ *
+ * <p>Learn more about <a href="https://stripe.com/radar">Radar</a> and reviewing payments <a
+ * href="https://stripe.com/docs/radar/reviews">here</a>.
+ */
 @Getter
 @Setter
 @EqualsAndHashCode(callSuper = false)
@@ -134,6 +140,46 @@ public class Review extends ApiResource implements HasId {
         new ExpandableField<PaymentIntent>(expandableObject.getId(), expandableObject);
   }
 
+  /** Approves a <code>Review</code> object, closing it and removing it from the list of reviews. */
+  public Review approve() throws StripeException {
+    return approve((Map<String, Object>) null, (RequestOptions) null);
+  }
+
+  /** Approves a <code>Review</code> object, closing it and removing it from the list of reviews. */
+  public Review approve(RequestOptions options) throws StripeException {
+    return approve((Map<String, Object>) null, options);
+  }
+
+  /** Approves a <code>Review</code> object, closing it and removing it from the list of reviews. */
+  public Review approve(Map<String, Object> params) throws StripeException {
+    return approve(params, (RequestOptions) null);
+  }
+
+  /** Approves a <code>Review</code> object, closing it and removing it from the list of reviews. */
+  public Review approve(Map<String, Object> params, RequestOptions options) throws StripeException {
+    String url =
+        String.format(
+            "%s%s",
+            Stripe.getApiBase(),
+            String.format("/v1/reviews/%s/approve", ApiResource.urlEncodeId(this.getId())));
+    return ApiResource.request(ApiResource.RequestMethod.POST, url, params, Review.class, options);
+  }
+
+  /** Approves a <code>Review</code> object, closing it and removing it from the list of reviews. */
+  public Review approve(ReviewApproveParams params) throws StripeException {
+    return approve(params, (RequestOptions) null);
+  }
+
+  /** Approves a <code>Review</code> object, closing it and removing it from the list of reviews. */
+  public Review approve(ReviewApproveParams params, RequestOptions options) throws StripeException {
+    String url =
+        String.format(
+            "%s%s",
+            Stripe.getApiBase(),
+            String.format("/v1/reviews/%s/approve", ApiResource.urlEncodeId(this.getId())));
+    return ApiResource.request(ApiResource.RequestMethod.POST, url, params, Review.class, options);
+  }
+
   /**
    * Returns a list of <code>Review</code> objects that have <code>open</code> set to <code>true
    * </code>. The objects are sorted in descending order by creation date, with the most recently
@@ -202,46 +248,6 @@ public class Review extends ApiResource implements HasId {
             "%s%s",
             Stripe.getApiBase(), String.format("/v1/reviews/%s", ApiResource.urlEncodeId(review)));
     return ApiResource.request(ApiResource.RequestMethod.GET, url, params, Review.class, options);
-  }
-
-  /** Approves a <code>Review</code> object, closing it and removing it from the list of reviews. */
-  public Review approve() throws StripeException {
-    return approve((Map<String, Object>) null, (RequestOptions) null);
-  }
-
-  /** Approves a <code>Review</code> object, closing it and removing it from the list of reviews. */
-  public Review approve(RequestOptions options) throws StripeException {
-    return approve((Map<String, Object>) null, options);
-  }
-
-  /** Approves a <code>Review</code> object, closing it and removing it from the list of reviews. */
-  public Review approve(Map<String, Object> params) throws StripeException {
-    return approve(params, (RequestOptions) null);
-  }
-
-  /** Approves a <code>Review</code> object, closing it and removing it from the list of reviews. */
-  public Review approve(Map<String, Object> params, RequestOptions options) throws StripeException {
-    String url =
-        String.format(
-            "%s%s",
-            Stripe.getApiBase(),
-            String.format("/v1/reviews/%s/approve", ApiResource.urlEncodeId(this.getId())));
-    return ApiResource.request(ApiResource.RequestMethod.POST, url, params, Review.class, options);
-  }
-
-  /** Approves a <code>Review</code> object, closing it and removing it from the list of reviews. */
-  public Review approve(ReviewApproveParams params) throws StripeException {
-    return approve(params, (RequestOptions) null);
-  }
-
-  /** Approves a <code>Review</code> object, closing it and removing it from the list of reviews. */
-  public Review approve(ReviewApproveParams params, RequestOptions options) throws StripeException {
-    String url =
-        String.format(
-            "%s%s",
-            Stripe.getApiBase(),
-            String.format("/v1/reviews/%s/approve", ApiResource.urlEncodeId(this.getId())));
-    return ApiResource.request(ApiResource.RequestMethod.POST, url, params, Review.class, options);
   }
 
   @Getter

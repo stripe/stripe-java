@@ -17,6 +17,13 @@ import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.Setter;
 
+/**
+ * An early fraud warning indicates that the card issuer has notified us that a charge may be
+ * fraudulent.
+ *
+ * <p>Related guide: <a href="https://stripe.com/docs/disputes/measuring#early-fraud-warnings">Early
+ * Fraud Warnings</a>.
+ */
 @Getter
 @Setter
 @EqualsAndHashCode(callSuper = false)

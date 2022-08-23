@@ -21,6 +21,14 @@ import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.Setter;
 
+/**
+ * Any use of an <a href="https://stripe.com/docs/issuing">issued card</a> that results in funds
+ * entering or leaving your Stripe account, such as a completed purchase or refund, is represented
+ * by an Issuing {@code Transaction} object.
+ *
+ * <p>Related guide: <a href="https://stripe.com/docs/issuing/purchases/transactions">Issued Card
+ * Transactions</a>.
+ */
 @Getter
 @Setter
 @EqualsAndHashCode(callSuper = false)

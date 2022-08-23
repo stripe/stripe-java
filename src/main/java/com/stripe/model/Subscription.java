@@ -20,6 +20,12 @@ import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.Setter;
 
+/**
+ * Subscriptions allow you to charge a customer on a recurring basis.
+ *
+ * <p>Related guide: <a href="https://stripe.com/docs/billing/subscriptions/creating">Creating
+ * Subscriptions</a>.
+ */
 @Getter
 @Setter
 @EqualsAndHashCode(callSuper = false)
@@ -473,266 +479,6 @@ public class Subscription extends ApiResource implements HasId, MetadataStore<Su
   }
 
   /**
-   * Search for subscriptions you’ve previously created using Stripe’s <a
-   * href="https://stripe.com/docs/search#search-query-language">Search Query Language</a>. Don’t
-   * use search in read-after-write flows where strict consistency is necessary. Under normal
-   * operating conditions, data is searchable in less than a minute. Occasionally, propagation of
-   * new or updated data can be up to an hour behind during outages. Search functionality is not
-   * available to merchants in India.
-   */
-  public static SubscriptionSearchResult search(Map<String, Object> params) throws StripeException {
-    return search(params, (RequestOptions) null);
-  }
-
-  /**
-   * Search for subscriptions you’ve previously created using Stripe’s <a
-   * href="https://stripe.com/docs/search#search-query-language">Search Query Language</a>. Don’t
-   * use search in read-after-write flows where strict consistency is necessary. Under normal
-   * operating conditions, data is searchable in less than a minute. Occasionally, propagation of
-   * new or updated data can be up to an hour behind during outages. Search functionality is not
-   * available to merchants in India.
-   */
-  public static SubscriptionSearchResult search(Map<String, Object> params, RequestOptions options)
-      throws StripeException {
-    String url = String.format("%s%s", Stripe.getApiBase(), "/v1/subscriptions/search");
-    return ApiResource.requestSearchResult(url, params, SubscriptionSearchResult.class, options);
-  }
-
-  /**
-   * Search for subscriptions you’ve previously created using Stripe’s <a
-   * href="https://stripe.com/docs/search#search-query-language">Search Query Language</a>. Don’t
-   * use search in read-after-write flows where strict consistency is necessary. Under normal
-   * operating conditions, data is searchable in less than a minute. Occasionally, propagation of
-   * new or updated data can be up to an hour behind during outages. Search functionality is not
-   * available to merchants in India.
-   */
-  public static SubscriptionSearchResult search(SubscriptionSearchParams params)
-      throws StripeException {
-    return search(params, (RequestOptions) null);
-  }
-
-  /**
-   * Search for subscriptions you’ve previously created using Stripe’s <a
-   * href="https://stripe.com/docs/search#search-query-language">Search Query Language</a>. Don’t
-   * use search in read-after-write flows where strict consistency is necessary. Under normal
-   * operating conditions, data is searchable in less than a minute. Occasionally, propagation of
-   * new or updated data can be up to an hour behind during outages. Search functionality is not
-   * available to merchants in India.
-   */
-  public static SubscriptionSearchResult search(
-      SubscriptionSearchParams params, RequestOptions options) throws StripeException {
-    String url = String.format("%s%s", Stripe.getApiBase(), "/v1/subscriptions/search");
-    return ApiResource.requestSearchResult(url, params, SubscriptionSearchResult.class, options);
-  }
-
-  /**
-   * By default, returns a list of subscriptions that have not been canceled. In order to list
-   * canceled subscriptions, specify <code>status=canceled</code>.
-   */
-  public static SubscriptionCollection list(Map<String, Object> params) throws StripeException {
-    return list(params, (RequestOptions) null);
-  }
-
-  /**
-   * By default, returns a list of subscriptions that have not been canceled. In order to list
-   * canceled subscriptions, specify <code>status=canceled</code>.
-   */
-  public static SubscriptionCollection list(Map<String, Object> params, RequestOptions options)
-      throws StripeException {
-    String url = String.format("%s%s", Stripe.getApiBase(), "/v1/subscriptions");
-    return ApiResource.requestCollection(url, params, SubscriptionCollection.class, options);
-  }
-
-  /**
-   * By default, returns a list of subscriptions that have not been canceled. In order to list
-   * canceled subscriptions, specify <code>status=canceled</code>.
-   */
-  public static SubscriptionCollection list(SubscriptionListParams params) throws StripeException {
-    return list(params, (RequestOptions) null);
-  }
-
-  /**
-   * By default, returns a list of subscriptions that have not been canceled. In order to list
-   * canceled subscriptions, specify <code>status=canceled</code>.
-   */
-  public static SubscriptionCollection list(SubscriptionListParams params, RequestOptions options)
-      throws StripeException {
-    String url = String.format("%s%s", Stripe.getApiBase(), "/v1/subscriptions");
-    return ApiResource.requestCollection(url, params, SubscriptionCollection.class, options);
-  }
-
-  /**
-   * Creates a new subscription on an existing customer. Each customer can have up to 500 active or
-   * scheduled subscriptions.
-   *
-   * <p>When you create a subscription with <code>collection_method=charge_automatically</code>, the
-   * first invoice is finalized as part of the request. The <code>payment_behavior</code> parameter
-   * determines the exact behavior of the initial payment.
-   *
-   * <p>To start subscriptions where the first invoice always begins in a <code>draft</code> status,
-   * use <a
-   * href="https://stripe.com/docs/billing/subscriptions/subscription-schedules#managing">subscription
-   * schedules</a> instead. Schedules provide the flexibility to model more complex billing
-   * configurations that change over time.
-   */
-  public static Subscription create(Map<String, Object> params) throws StripeException {
-    return create(params, (RequestOptions) null);
-  }
-
-  /**
-   * Creates a new subscription on an existing customer. Each customer can have up to 500 active or
-   * scheduled subscriptions.
-   *
-   * <p>When you create a subscription with <code>collection_method=charge_automatically</code>, the
-   * first invoice is finalized as part of the request. The <code>payment_behavior</code> parameter
-   * determines the exact behavior of the initial payment.
-   *
-   * <p>To start subscriptions where the first invoice always begins in a <code>draft</code> status,
-   * use <a
-   * href="https://stripe.com/docs/billing/subscriptions/subscription-schedules#managing">subscription
-   * schedules</a> instead. Schedules provide the flexibility to model more complex billing
-   * configurations that change over time.
-   */
-  public static Subscription create(Map<String, Object> params, RequestOptions options)
-      throws StripeException {
-    String url = String.format("%s%s", Stripe.getApiBase(), "/v1/subscriptions");
-    return ApiResource.request(
-        ApiResource.RequestMethod.POST, url, params, Subscription.class, options);
-  }
-
-  /**
-   * Creates a new subscription on an existing customer. Each customer can have up to 500 active or
-   * scheduled subscriptions.
-   *
-   * <p>When you create a subscription with <code>collection_method=charge_automatically</code>, the
-   * first invoice is finalized as part of the request. The <code>payment_behavior</code> parameter
-   * determines the exact behavior of the initial payment.
-   *
-   * <p>To start subscriptions where the first invoice always begins in a <code>draft</code> status,
-   * use <a
-   * href="https://stripe.com/docs/billing/subscriptions/subscription-schedules#managing">subscription
-   * schedules</a> instead. Schedules provide the flexibility to model more complex billing
-   * configurations that change over time.
-   */
-  public static Subscription create(SubscriptionCreateParams params) throws StripeException {
-    return create(params, (RequestOptions) null);
-  }
-
-  /**
-   * Creates a new subscription on an existing customer. Each customer can have up to 500 active or
-   * scheduled subscriptions.
-   *
-   * <p>When you create a subscription with <code>collection_method=charge_automatically</code>, the
-   * first invoice is finalized as part of the request. The <code>payment_behavior</code> parameter
-   * determines the exact behavior of the initial payment.
-   *
-   * <p>To start subscriptions where the first invoice always begins in a <code>draft</code> status,
-   * use <a
-   * href="https://stripe.com/docs/billing/subscriptions/subscription-schedules#managing">subscription
-   * schedules</a> instead. Schedules provide the flexibility to model more complex billing
-   * configurations that change over time.
-   */
-  public static Subscription create(SubscriptionCreateParams params, RequestOptions options)
-      throws StripeException {
-    String url = String.format("%s%s", Stripe.getApiBase(), "/v1/subscriptions");
-    return ApiResource.request(
-        ApiResource.RequestMethod.POST, url, params, Subscription.class, options);
-  }
-
-  /**
-   * Updates an existing subscription on a customer to match the specified parameters. When changing
-   * plans or quantities, we will optionally prorate the price we charge next month to make up for
-   * any price changes. To preview how the proration will be calculated, use the <a
-   * href="https://stripe.com/docs/api#upcoming_invoice">upcoming invoice</a> endpoint.
-   */
-  @Override
-  public Subscription update(Map<String, Object> params) throws StripeException {
-    return update(params, (RequestOptions) null);
-  }
-
-  /**
-   * Updates an existing subscription on a customer to match the specified parameters. When changing
-   * plans or quantities, we will optionally prorate the price we charge next month to make up for
-   * any price changes. To preview how the proration will be calculated, use the <a
-   * href="https://stripe.com/docs/api#upcoming_invoice">upcoming invoice</a> endpoint.
-   */
-  @Override
-  public Subscription update(Map<String, Object> params, RequestOptions options)
-      throws StripeException {
-    String url =
-        String.format(
-            "%s%s",
-            Stripe.getApiBase(),
-            String.format("/v1/subscriptions/%s", ApiResource.urlEncodeId(this.getId())));
-    return ApiResource.request(
-        ApiResource.RequestMethod.POST, url, params, Subscription.class, options);
-  }
-
-  /**
-   * Updates an existing subscription on a customer to match the specified parameters. When changing
-   * plans or quantities, we will optionally prorate the price we charge next month to make up for
-   * any price changes. To preview how the proration will be calculated, use the <a
-   * href="https://stripe.com/docs/api#upcoming_invoice">upcoming invoice</a> endpoint.
-   */
-  public Subscription update(SubscriptionUpdateParams params) throws StripeException {
-    return update(params, (RequestOptions) null);
-  }
-
-  /**
-   * Updates an existing subscription on a customer to match the specified parameters. When changing
-   * plans or quantities, we will optionally prorate the price we charge next month to make up for
-   * any price changes. To preview how the proration will be calculated, use the <a
-   * href="https://stripe.com/docs/api#upcoming_invoice">upcoming invoice</a> endpoint.
-   */
-  public Subscription update(SubscriptionUpdateParams params, RequestOptions options)
-      throws StripeException {
-    String url =
-        String.format(
-            "%s%s",
-            Stripe.getApiBase(),
-            String.format("/v1/subscriptions/%s", ApiResource.urlEncodeId(this.getId())));
-    return ApiResource.request(
-        ApiResource.RequestMethod.POST, url, params, Subscription.class, options);
-  }
-
-  /** Retrieves the subscription with the given ID. */
-  public static Subscription retrieve(String subscriptionExposedId) throws StripeException {
-    return retrieve(subscriptionExposedId, (Map<String, Object>) null, (RequestOptions) null);
-  }
-
-  /** Retrieves the subscription with the given ID. */
-  public static Subscription retrieve(String subscriptionExposedId, RequestOptions options)
-      throws StripeException {
-    return retrieve(subscriptionExposedId, (Map<String, Object>) null, options);
-  }
-
-  /** Retrieves the subscription with the given ID. */
-  public static Subscription retrieve(
-      String subscriptionExposedId, Map<String, Object> params, RequestOptions options)
-      throws StripeException {
-    String url =
-        String.format(
-            "%s%s",
-            Stripe.getApiBase(),
-            String.format("/v1/subscriptions/%s", ApiResource.urlEncodeId(subscriptionExposedId)));
-    return ApiResource.request(
-        ApiResource.RequestMethod.GET, url, params, Subscription.class, options);
-  }
-
-  /** Retrieves the subscription with the given ID. */
-  public static Subscription retrieve(
-      String subscriptionExposedId, SubscriptionRetrieveParams params, RequestOptions options)
-      throws StripeException {
-    String url =
-        String.format(
-            "%s%s",
-            Stripe.getApiBase(),
-            String.format("/v1/subscriptions/%s", ApiResource.urlEncodeId(subscriptionExposedId)));
-    return ApiResource.request(
-        ApiResource.RequestMethod.GET, url, params, Subscription.class, options);
-  }
-
-  /**
    * Cancels a customer’s subscription immediately. The customer will not be charged again for the
    * subscription.
    *
@@ -851,6 +597,84 @@ public class Subscription extends ApiResource implements HasId, MetadataStore<Su
         ApiResource.RequestMethod.DELETE, url, params, Subscription.class, options);
   }
 
+  /**
+   * Creates a new subscription on an existing customer. Each customer can have up to 500 active or
+   * scheduled subscriptions.
+   *
+   * <p>When you create a subscription with <code>collection_method=charge_automatically</code>, the
+   * first invoice is finalized as part of the request. The <code>payment_behavior</code> parameter
+   * determines the exact behavior of the initial payment.
+   *
+   * <p>To start subscriptions where the first invoice always begins in a <code>draft</code> status,
+   * use <a
+   * href="https://stripe.com/docs/billing/subscriptions/subscription-schedules#managing">subscription
+   * schedules</a> instead. Schedules provide the flexibility to model more complex billing
+   * configurations that change over time.
+   */
+  public static Subscription create(Map<String, Object> params) throws StripeException {
+    return create(params, (RequestOptions) null);
+  }
+
+  /**
+   * Creates a new subscription on an existing customer. Each customer can have up to 500 active or
+   * scheduled subscriptions.
+   *
+   * <p>When you create a subscription with <code>collection_method=charge_automatically</code>, the
+   * first invoice is finalized as part of the request. The <code>payment_behavior</code> parameter
+   * determines the exact behavior of the initial payment.
+   *
+   * <p>To start subscriptions where the first invoice always begins in a <code>draft</code> status,
+   * use <a
+   * href="https://stripe.com/docs/billing/subscriptions/subscription-schedules#managing">subscription
+   * schedules</a> instead. Schedules provide the flexibility to model more complex billing
+   * configurations that change over time.
+   */
+  public static Subscription create(Map<String, Object> params, RequestOptions options)
+      throws StripeException {
+    String url = String.format("%s%s", Stripe.getApiBase(), "/v1/subscriptions");
+    return ApiResource.request(
+        ApiResource.RequestMethod.POST, url, params, Subscription.class, options);
+  }
+
+  /**
+   * Creates a new subscription on an existing customer. Each customer can have up to 500 active or
+   * scheduled subscriptions.
+   *
+   * <p>When you create a subscription with <code>collection_method=charge_automatically</code>, the
+   * first invoice is finalized as part of the request. The <code>payment_behavior</code> parameter
+   * determines the exact behavior of the initial payment.
+   *
+   * <p>To start subscriptions where the first invoice always begins in a <code>draft</code> status,
+   * use <a
+   * href="https://stripe.com/docs/billing/subscriptions/subscription-schedules#managing">subscription
+   * schedules</a> instead. Schedules provide the flexibility to model more complex billing
+   * configurations that change over time.
+   */
+  public static Subscription create(SubscriptionCreateParams params) throws StripeException {
+    return create(params, (RequestOptions) null);
+  }
+
+  /**
+   * Creates a new subscription on an existing customer. Each customer can have up to 500 active or
+   * scheduled subscriptions.
+   *
+   * <p>When you create a subscription with <code>collection_method=charge_automatically</code>, the
+   * first invoice is finalized as part of the request. The <code>payment_behavior</code> parameter
+   * determines the exact behavior of the initial payment.
+   *
+   * <p>To start subscriptions where the first invoice always begins in a <code>draft</code> status,
+   * use <a
+   * href="https://stripe.com/docs/billing/subscriptions/subscription-schedules#managing">subscription
+   * schedules</a> instead. Schedules provide the flexibility to model more complex billing
+   * configurations that change over time.
+   */
+  public static Subscription create(SubscriptionCreateParams params, RequestOptions options)
+      throws StripeException {
+    String url = String.format("%s%s", Stripe.getApiBase(), "/v1/subscriptions");
+    return ApiResource.request(
+        ApiResource.RequestMethod.POST, url, params, Subscription.class, options);
+  }
+
   /** Removes the currently applied discount on a subscription. */
   public Discount deleteDiscount() throws StripeException {
     return deleteDiscount((Map<String, Object>) null, (RequestOptions) null);
@@ -871,6 +695,188 @@ public class Subscription extends ApiResource implements HasId, MetadataStore<Su
             String.format("/v1/subscriptions/%s/discount", ApiResource.urlEncodeId(this.getId())));
     return ApiResource.request(
         ApiResource.RequestMethod.DELETE, url, params, Discount.class, options);
+  }
+
+  /**
+   * By default, returns a list of subscriptions that have not been canceled. In order to list
+   * canceled subscriptions, specify <code>status=canceled</code>.
+   */
+  public static SubscriptionCollection list(Map<String, Object> params) throws StripeException {
+    return list(params, (RequestOptions) null);
+  }
+
+  /**
+   * By default, returns a list of subscriptions that have not been canceled. In order to list
+   * canceled subscriptions, specify <code>status=canceled</code>.
+   */
+  public static SubscriptionCollection list(Map<String, Object> params, RequestOptions options)
+      throws StripeException {
+    String url = String.format("%s%s", Stripe.getApiBase(), "/v1/subscriptions");
+    return ApiResource.requestCollection(url, params, SubscriptionCollection.class, options);
+  }
+
+  /**
+   * By default, returns a list of subscriptions that have not been canceled. In order to list
+   * canceled subscriptions, specify <code>status=canceled</code>.
+   */
+  public static SubscriptionCollection list(SubscriptionListParams params) throws StripeException {
+    return list(params, (RequestOptions) null);
+  }
+
+  /**
+   * By default, returns a list of subscriptions that have not been canceled. In order to list
+   * canceled subscriptions, specify <code>status=canceled</code>.
+   */
+  public static SubscriptionCollection list(SubscriptionListParams params, RequestOptions options)
+      throws StripeException {
+    String url = String.format("%s%s", Stripe.getApiBase(), "/v1/subscriptions");
+    return ApiResource.requestCollection(url, params, SubscriptionCollection.class, options);
+  }
+
+  /** Retrieves the subscription with the given ID. */
+  public static Subscription retrieve(String subscriptionExposedId) throws StripeException {
+    return retrieve(subscriptionExposedId, (Map<String, Object>) null, (RequestOptions) null);
+  }
+
+  /** Retrieves the subscription with the given ID. */
+  public static Subscription retrieve(String subscriptionExposedId, RequestOptions options)
+      throws StripeException {
+    return retrieve(subscriptionExposedId, (Map<String, Object>) null, options);
+  }
+
+  /** Retrieves the subscription with the given ID. */
+  public static Subscription retrieve(
+      String subscriptionExposedId, Map<String, Object> params, RequestOptions options)
+      throws StripeException {
+    String url =
+        String.format(
+            "%s%s",
+            Stripe.getApiBase(),
+            String.format("/v1/subscriptions/%s", ApiResource.urlEncodeId(subscriptionExposedId)));
+    return ApiResource.request(
+        ApiResource.RequestMethod.GET, url, params, Subscription.class, options);
+  }
+
+  /** Retrieves the subscription with the given ID. */
+  public static Subscription retrieve(
+      String subscriptionExposedId, SubscriptionRetrieveParams params, RequestOptions options)
+      throws StripeException {
+    String url =
+        String.format(
+            "%s%s",
+            Stripe.getApiBase(),
+            String.format("/v1/subscriptions/%s", ApiResource.urlEncodeId(subscriptionExposedId)));
+    return ApiResource.request(
+        ApiResource.RequestMethod.GET, url, params, Subscription.class, options);
+  }
+
+  /**
+   * Search for subscriptions you’ve previously created using Stripe’s <a
+   * href="https://stripe.com/docs/search#search-query-language">Search Query Language</a>. Don’t
+   * use search in read-after-write flows where strict consistency is necessary. Under normal
+   * operating conditions, data is searchable in less than a minute. Occasionally, propagation of
+   * new or updated data can be up to an hour behind during outages. Search functionality is not
+   * available to merchants in India.
+   */
+  public static SubscriptionSearchResult search(Map<String, Object> params) throws StripeException {
+    return search(params, (RequestOptions) null);
+  }
+
+  /**
+   * Search for subscriptions you’ve previously created using Stripe’s <a
+   * href="https://stripe.com/docs/search#search-query-language">Search Query Language</a>. Don’t
+   * use search in read-after-write flows where strict consistency is necessary. Under normal
+   * operating conditions, data is searchable in less than a minute. Occasionally, propagation of
+   * new or updated data can be up to an hour behind during outages. Search functionality is not
+   * available to merchants in India.
+   */
+  public static SubscriptionSearchResult search(Map<String, Object> params, RequestOptions options)
+      throws StripeException {
+    String url = String.format("%s%s", Stripe.getApiBase(), "/v1/subscriptions/search");
+    return ApiResource.requestSearchResult(url, params, SubscriptionSearchResult.class, options);
+  }
+
+  /**
+   * Search for subscriptions you’ve previously created using Stripe’s <a
+   * href="https://stripe.com/docs/search#search-query-language">Search Query Language</a>. Don’t
+   * use search in read-after-write flows where strict consistency is necessary. Under normal
+   * operating conditions, data is searchable in less than a minute. Occasionally, propagation of
+   * new or updated data can be up to an hour behind during outages. Search functionality is not
+   * available to merchants in India.
+   */
+  public static SubscriptionSearchResult search(SubscriptionSearchParams params)
+      throws StripeException {
+    return search(params, (RequestOptions) null);
+  }
+
+  /**
+   * Search for subscriptions you’ve previously created using Stripe’s <a
+   * href="https://stripe.com/docs/search#search-query-language">Search Query Language</a>. Don’t
+   * use search in read-after-write flows where strict consistency is necessary. Under normal
+   * operating conditions, data is searchable in less than a minute. Occasionally, propagation of
+   * new or updated data can be up to an hour behind during outages. Search functionality is not
+   * available to merchants in India.
+   */
+  public static SubscriptionSearchResult search(
+      SubscriptionSearchParams params, RequestOptions options) throws StripeException {
+    String url = String.format("%s%s", Stripe.getApiBase(), "/v1/subscriptions/search");
+    return ApiResource.requestSearchResult(url, params, SubscriptionSearchResult.class, options);
+  }
+
+  /**
+   * Updates an existing subscription on a customer to match the specified parameters. When changing
+   * plans or quantities, we will optionally prorate the price we charge next month to make up for
+   * any price changes. To preview how the proration will be calculated, use the <a
+   * href="https://stripe.com/docs/api#upcoming_invoice">upcoming invoice</a> endpoint.
+   */
+  @Override
+  public Subscription update(Map<String, Object> params) throws StripeException {
+    return update(params, (RequestOptions) null);
+  }
+
+  /**
+   * Updates an existing subscription on a customer to match the specified parameters. When changing
+   * plans or quantities, we will optionally prorate the price we charge next month to make up for
+   * any price changes. To preview how the proration will be calculated, use the <a
+   * href="https://stripe.com/docs/api#upcoming_invoice">upcoming invoice</a> endpoint.
+   */
+  @Override
+  public Subscription update(Map<String, Object> params, RequestOptions options)
+      throws StripeException {
+    String url =
+        String.format(
+            "%s%s",
+            Stripe.getApiBase(),
+            String.format("/v1/subscriptions/%s", ApiResource.urlEncodeId(this.getId())));
+    return ApiResource.request(
+        ApiResource.RequestMethod.POST, url, params, Subscription.class, options);
+  }
+
+  /**
+   * Updates an existing subscription on a customer to match the specified parameters. When changing
+   * plans or quantities, we will optionally prorate the price we charge next month to make up for
+   * any price changes. To preview how the proration will be calculated, use the <a
+   * href="https://stripe.com/docs/api#upcoming_invoice">upcoming invoice</a> endpoint.
+   */
+  public Subscription update(SubscriptionUpdateParams params) throws StripeException {
+    return update(params, (RequestOptions) null);
+  }
+
+  /**
+   * Updates an existing subscription on a customer to match the specified parameters. When changing
+   * plans or quantities, we will optionally prorate the price we charge next month to make up for
+   * any price changes. To preview how the proration will be calculated, use the <a
+   * href="https://stripe.com/docs/api#upcoming_invoice">upcoming invoice</a> endpoint.
+   */
+  public Subscription update(SubscriptionUpdateParams params, RequestOptions options)
+      throws StripeException {
+    String url =
+        String.format(
+            "%s%s",
+            Stripe.getApiBase(),
+            String.format("/v1/subscriptions/%s", ApiResource.urlEncodeId(this.getId())));
+    return ApiResource.request(
+        ApiResource.RequestMethod.POST, url, params, Subscription.class, options);
   }
 
   @Getter
@@ -900,6 +906,10 @@ public class Subscription extends ApiResource implements HasId, MetadataStore<Su
     Boolean resetBillingCycleAnchor;
   }
 
+  /**
+   * The Pause Collection settings determine how we will pause collection for this subscription and
+   * for how long the subscription should be paused.
+   */
   @Getter
   @Setter
   @EqualsAndHashCode(callSuper = false)
@@ -1010,6 +1020,13 @@ public class Subscription extends ApiResource implements HasId, MetadataStore<Su
     public static class Card extends StripeObject {
       @SerializedName("mandate_options")
       MandateOptions mandateOptions;
+
+      /**
+       * Selected network to process this Subscription on. Depends on the available networks of the
+       * card attached to the Subscription. Can be only set confirm-time.
+       */
+      @SerializedName("network")
+      String network;
 
       /**
        * We strongly recommend that you rely on our SCA Engine to automatically prompt your
@@ -1182,6 +1199,10 @@ public class Subscription extends ApiResource implements HasId, MetadataStore<Su
     Long intervalCount;
   }
 
+  /**
+   * Pending Updates store the changes pending from a previous update that will be applied to the
+   * Subscription upon successful payment.
+   */
   @Getter
   @Setter
   @EqualsAndHashCode(callSuper = false)

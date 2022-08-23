@@ -6,6 +6,7 @@ import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.Setter;
 
+/** An error response from the Stripe API. */
 @Getter
 @Setter
 @EqualsAndHashCode(callSuper = false)
