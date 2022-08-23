@@ -20,6 +20,14 @@ import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.Setter;
 
+/**
+ * A subscription schedule allows you to create and manage the lifecycle of a subscription by
+ * predefining expected changes.
+ *
+ * <p>Related guide: <a
+ * href="https://stripe.com/docs/billing/subscriptions/subscription-schedules">Subscription
+ * Schedules</a>.
+ */
 @Getter
 @Setter
 @EqualsAndHashCode(callSuper = false)
@@ -213,32 +221,75 @@ public class SubscriptionSchedule extends ApiResource
     this.testClock = new ExpandableField<TestClock>(expandableObject.getId(), expandableObject);
   }
 
-  /** Retrieves the list of your subscription schedules. */
-  public static SubscriptionScheduleCollection list(Map<String, Object> params)
+  /**
+   * Cancels a subscription schedule and its associated subscription immediately (if the
+   * subscription schedule has an active subscription). A subscription schedule can only be canceled
+   * if its status is <code>not_started</code> or <code>active</code>.
+   */
+  public SubscriptionSchedule cancel() throws StripeException {
+    return cancel((Map<String, Object>) null, (RequestOptions) null);
+  }
+
+  /**
+   * Cancels a subscription schedule and its associated subscription immediately (if the
+   * subscription schedule has an active subscription). A subscription schedule can only be canceled
+   * if its status is <code>not_started</code> or <code>active</code>.
+   */
+  public SubscriptionSchedule cancel(RequestOptions options) throws StripeException {
+    return cancel((Map<String, Object>) null, options);
+  }
+
+  /**
+   * Cancels a subscription schedule and its associated subscription immediately (if the
+   * subscription schedule has an active subscription). A subscription schedule can only be canceled
+   * if its status is <code>not_started</code> or <code>active</code>.
+   */
+  public SubscriptionSchedule cancel(Map<String, Object> params) throws StripeException {
+    return cancel(params, (RequestOptions) null);
+  }
+
+  /**
+   * Cancels a subscription schedule and its associated subscription immediately (if the
+   * subscription schedule has an active subscription). A subscription schedule can only be canceled
+   * if its status is <code>not_started</code> or <code>active</code>.
+   */
+  public SubscriptionSchedule cancel(Map<String, Object> params, RequestOptions options)
       throws StripeException {
-    return list(params, (RequestOptions) null);
+    String url =
+        String.format(
+            "%s%s",
+            Stripe.getApiBase(),
+            String.format(
+                "/v1/subscription_schedules/%s/cancel", ApiResource.urlEncodeId(this.getId())));
+    return ApiResource.request(
+        ApiResource.RequestMethod.POST, url, params, SubscriptionSchedule.class, options);
   }
 
-  /** Retrieves the list of your subscription schedules. */
-  public static SubscriptionScheduleCollection list(
-      Map<String, Object> params, RequestOptions options) throws StripeException {
-    String url = String.format("%s%s", Stripe.getApiBase(), "/v1/subscription_schedules");
-    return ApiResource.requestCollection(
-        url, params, SubscriptionScheduleCollection.class, options);
-  }
-
-  /** Retrieves the list of your subscription schedules. */
-  public static SubscriptionScheduleCollection list(SubscriptionScheduleListParams params)
+  /**
+   * Cancels a subscription schedule and its associated subscription immediately (if the
+   * subscription schedule has an active subscription). A subscription schedule can only be canceled
+   * if its status is <code>not_started</code> or <code>active</code>.
+   */
+  public SubscriptionSchedule cancel(SubscriptionScheduleCancelParams params)
       throws StripeException {
-    return list(params, (RequestOptions) null);
+    return cancel(params, (RequestOptions) null);
   }
 
-  /** Retrieves the list of your subscription schedules. */
-  public static SubscriptionScheduleCollection list(
-      SubscriptionScheduleListParams params, RequestOptions options) throws StripeException {
-    String url = String.format("%s%s", Stripe.getApiBase(), "/v1/subscription_schedules");
-    return ApiResource.requestCollection(
-        url, params, SubscriptionScheduleCollection.class, options);
+  /**
+   * Cancels a subscription schedule and its associated subscription immediately (if the
+   * subscription schedule has an active subscription). A subscription schedule can only be canceled
+   * if its status is <code>not_started</code> or <code>active</code>.
+   */
+  public SubscriptionSchedule cancel(
+      SubscriptionScheduleCancelParams params, RequestOptions options) throws StripeException {
+    String url =
+        String.format(
+            "%s%s",
+            Stripe.getApiBase(),
+            String.format(
+                "/v1/subscription_schedules/%s/cancel", ApiResource.urlEncodeId(this.getId())));
+    return ApiResource.request(
+        ApiResource.RequestMethod.POST, url, params, SubscriptionSchedule.class, options);
   }
 
   /**
@@ -276,6 +327,117 @@ public class SubscriptionSchedule extends ApiResource
   public static SubscriptionSchedule create(
       SubscriptionScheduleCreateParams params, RequestOptions options) throws StripeException {
     String url = String.format("%s%s", Stripe.getApiBase(), "/v1/subscription_schedules");
+    return ApiResource.request(
+        ApiResource.RequestMethod.POST, url, params, SubscriptionSchedule.class, options);
+  }
+
+  /** Retrieves the list of your subscription schedules. */
+  public static SubscriptionScheduleCollection list(Map<String, Object> params)
+      throws StripeException {
+    return list(params, (RequestOptions) null);
+  }
+
+  /** Retrieves the list of your subscription schedules. */
+  public static SubscriptionScheduleCollection list(
+      Map<String, Object> params, RequestOptions options) throws StripeException {
+    String url = String.format("%s%s", Stripe.getApiBase(), "/v1/subscription_schedules");
+    return ApiResource.requestCollection(
+        url, params, SubscriptionScheduleCollection.class, options);
+  }
+
+  /** Retrieves the list of your subscription schedules. */
+  public static SubscriptionScheduleCollection list(SubscriptionScheduleListParams params)
+      throws StripeException {
+    return list(params, (RequestOptions) null);
+  }
+
+  /** Retrieves the list of your subscription schedules. */
+  public static SubscriptionScheduleCollection list(
+      SubscriptionScheduleListParams params, RequestOptions options) throws StripeException {
+    String url = String.format("%s%s", Stripe.getApiBase(), "/v1/subscription_schedules");
+    return ApiResource.requestCollection(
+        url, params, SubscriptionScheduleCollection.class, options);
+  }
+
+  /**
+   * Releases the subscription schedule immediately, which will stop scheduling of its phases, but
+   * leave any existing subscription in place. A schedule can only be released if its status is
+   * <code>not_started</code> or <code>active</code>. If the subscription schedule is currently
+   * associated with a subscription, releasing it will remove its <code>subscription</code> property
+   * and set the subscription’s ID to the <code>released_subscription</code> property.
+   */
+  public SubscriptionSchedule release() throws StripeException {
+    return release((Map<String, Object>) null, (RequestOptions) null);
+  }
+
+  /**
+   * Releases the subscription schedule immediately, which will stop scheduling of its phases, but
+   * leave any existing subscription in place. A schedule can only be released if its status is
+   * <code>not_started</code> or <code>active</code>. If the subscription schedule is currently
+   * associated with a subscription, releasing it will remove its <code>subscription</code> property
+   * and set the subscription’s ID to the <code>released_subscription</code> property.
+   */
+  public SubscriptionSchedule release(RequestOptions options) throws StripeException {
+    return release((Map<String, Object>) null, options);
+  }
+
+  /**
+   * Releases the subscription schedule immediately, which will stop scheduling of its phases, but
+   * leave any existing subscription in place. A schedule can only be released if its status is
+   * <code>not_started</code> or <code>active</code>. If the subscription schedule is currently
+   * associated with a subscription, releasing it will remove its <code>subscription</code> property
+   * and set the subscription’s ID to the <code>released_subscription</code> property.
+   */
+  public SubscriptionSchedule release(Map<String, Object> params) throws StripeException {
+    return release(params, (RequestOptions) null);
+  }
+
+  /**
+   * Releases the subscription schedule immediately, which will stop scheduling of its phases, but
+   * leave any existing subscription in place. A schedule can only be released if its status is
+   * <code>not_started</code> or <code>active</code>. If the subscription schedule is currently
+   * associated with a subscription, releasing it will remove its <code>subscription</code> property
+   * and set the subscription’s ID to the <code>released_subscription</code> property.
+   */
+  public SubscriptionSchedule release(Map<String, Object> params, RequestOptions options)
+      throws StripeException {
+    String url =
+        String.format(
+            "%s%s",
+            Stripe.getApiBase(),
+            String.format(
+                "/v1/subscription_schedules/%s/release", ApiResource.urlEncodeId(this.getId())));
+    return ApiResource.request(
+        ApiResource.RequestMethod.POST, url, params, SubscriptionSchedule.class, options);
+  }
+
+  /**
+   * Releases the subscription schedule immediately, which will stop scheduling of its phases, but
+   * leave any existing subscription in place. A schedule can only be released if its status is
+   * <code>not_started</code> or <code>active</code>. If the subscription schedule is currently
+   * associated with a subscription, releasing it will remove its <code>subscription</code> property
+   * and set the subscription’s ID to the <code>released_subscription</code> property.
+   */
+  public SubscriptionSchedule release(SubscriptionScheduleReleaseParams params)
+      throws StripeException {
+    return release(params, (RequestOptions) null);
+  }
+
+  /**
+   * Releases the subscription schedule immediately, which will stop scheduling of its phases, but
+   * leave any existing subscription in place. A schedule can only be released if its status is
+   * <code>not_started</code> or <code>active</code>. If the subscription schedule is currently
+   * associated with a subscription, releasing it will remove its <code>subscription</code> property
+   * and set the subscription’s ID to the <code>released_subscription</code> property.
+   */
+  public SubscriptionSchedule release(
+      SubscriptionScheduleReleaseParams params, RequestOptions options) throws StripeException {
+    String url =
+        String.format(
+            "%s%s",
+            Stripe.getApiBase(),
+            String.format(
+                "/v1/subscription_schedules/%s/release", ApiResource.urlEncodeId(this.getId())));
     return ApiResource.request(
         ApiResource.RequestMethod.POST, url, params, SubscriptionSchedule.class, options);
   }
@@ -366,159 +528,9 @@ public class SubscriptionSchedule extends ApiResource
   }
 
   /**
-   * Cancels a subscription schedule and its associated subscription immediately (if the
-   * subscription schedule has an active subscription). A subscription schedule can only be canceled
-   * if its status is <code>not_started</code> or <code>active</code>.
+   * An Add Invoice Item describes the prices and quantities that will be added as pending invoice
+   * items when entering a phase.
    */
-  public SubscriptionSchedule cancel() throws StripeException {
-    return cancel((Map<String, Object>) null, (RequestOptions) null);
-  }
-
-  /**
-   * Cancels a subscription schedule and its associated subscription immediately (if the
-   * subscription schedule has an active subscription). A subscription schedule can only be canceled
-   * if its status is <code>not_started</code> or <code>active</code>.
-   */
-  public SubscriptionSchedule cancel(RequestOptions options) throws StripeException {
-    return cancel((Map<String, Object>) null, options);
-  }
-
-  /**
-   * Cancels a subscription schedule and its associated subscription immediately (if the
-   * subscription schedule has an active subscription). A subscription schedule can only be canceled
-   * if its status is <code>not_started</code> or <code>active</code>.
-   */
-  public SubscriptionSchedule cancel(Map<String, Object> params) throws StripeException {
-    return cancel(params, (RequestOptions) null);
-  }
-
-  /**
-   * Cancels a subscription schedule and its associated subscription immediately (if the
-   * subscription schedule has an active subscription). A subscription schedule can only be canceled
-   * if its status is <code>not_started</code> or <code>active</code>.
-   */
-  public SubscriptionSchedule cancel(Map<String, Object> params, RequestOptions options)
-      throws StripeException {
-    String url =
-        String.format(
-            "%s%s",
-            Stripe.getApiBase(),
-            String.format(
-                "/v1/subscription_schedules/%s/cancel", ApiResource.urlEncodeId(this.getId())));
-    return ApiResource.request(
-        ApiResource.RequestMethod.POST, url, params, SubscriptionSchedule.class, options);
-  }
-
-  /**
-   * Cancels a subscription schedule and its associated subscription immediately (if the
-   * subscription schedule has an active subscription). A subscription schedule can only be canceled
-   * if its status is <code>not_started</code> or <code>active</code>.
-   */
-  public SubscriptionSchedule cancel(SubscriptionScheduleCancelParams params)
-      throws StripeException {
-    return cancel(params, (RequestOptions) null);
-  }
-
-  /**
-   * Cancels a subscription schedule and its associated subscription immediately (if the
-   * subscription schedule has an active subscription). A subscription schedule can only be canceled
-   * if its status is <code>not_started</code> or <code>active</code>.
-   */
-  public SubscriptionSchedule cancel(
-      SubscriptionScheduleCancelParams params, RequestOptions options) throws StripeException {
-    String url =
-        String.format(
-            "%s%s",
-            Stripe.getApiBase(),
-            String.format(
-                "/v1/subscription_schedules/%s/cancel", ApiResource.urlEncodeId(this.getId())));
-    return ApiResource.request(
-        ApiResource.RequestMethod.POST, url, params, SubscriptionSchedule.class, options);
-  }
-
-  /**
-   * Releases the subscription schedule immediately, which will stop scheduling of its phases, but
-   * leave any existing subscription in place. A schedule can only be released if its status is
-   * <code>not_started</code> or <code>active</code>. If the subscription schedule is currently
-   * associated with a subscription, releasing it will remove its <code>subscription</code> property
-   * and set the subscription’s ID to the <code>released_subscription</code> property.
-   */
-  public SubscriptionSchedule release() throws StripeException {
-    return release((Map<String, Object>) null, (RequestOptions) null);
-  }
-
-  /**
-   * Releases the subscription schedule immediately, which will stop scheduling of its phases, but
-   * leave any existing subscription in place. A schedule can only be released if its status is
-   * <code>not_started</code> or <code>active</code>. If the subscription schedule is currently
-   * associated with a subscription, releasing it will remove its <code>subscription</code> property
-   * and set the subscription’s ID to the <code>released_subscription</code> property.
-   */
-  public SubscriptionSchedule release(RequestOptions options) throws StripeException {
-    return release((Map<String, Object>) null, options);
-  }
-
-  /**
-   * Releases the subscription schedule immediately, which will stop scheduling of its phases, but
-   * leave any existing subscription in place. A schedule can only be released if its status is
-   * <code>not_started</code> or <code>active</code>. If the subscription schedule is currently
-   * associated with a subscription, releasing it will remove its <code>subscription</code> property
-   * and set the subscription’s ID to the <code>released_subscription</code> property.
-   */
-  public SubscriptionSchedule release(Map<String, Object> params) throws StripeException {
-    return release(params, (RequestOptions) null);
-  }
-
-  /**
-   * Releases the subscription schedule immediately, which will stop scheduling of its phases, but
-   * leave any existing subscription in place. A schedule can only be released if its status is
-   * <code>not_started</code> or <code>active</code>. If the subscription schedule is currently
-   * associated with a subscription, releasing it will remove its <code>subscription</code> property
-   * and set the subscription’s ID to the <code>released_subscription</code> property.
-   */
-  public SubscriptionSchedule release(Map<String, Object> params, RequestOptions options)
-      throws StripeException {
-    String url =
-        String.format(
-            "%s%s",
-            Stripe.getApiBase(),
-            String.format(
-                "/v1/subscription_schedules/%s/release", ApiResource.urlEncodeId(this.getId())));
-    return ApiResource.request(
-        ApiResource.RequestMethod.POST, url, params, SubscriptionSchedule.class, options);
-  }
-
-  /**
-   * Releases the subscription schedule immediately, which will stop scheduling of its phases, but
-   * leave any existing subscription in place. A schedule can only be released if its status is
-   * <code>not_started</code> or <code>active</code>. If the subscription schedule is currently
-   * associated with a subscription, releasing it will remove its <code>subscription</code> property
-   * and set the subscription’s ID to the <code>released_subscription</code> property.
-   */
-  public SubscriptionSchedule release(SubscriptionScheduleReleaseParams params)
-      throws StripeException {
-    return release(params, (RequestOptions) null);
-  }
-
-  /**
-   * Releases the subscription schedule immediately, which will stop scheduling of its phases, but
-   * leave any existing subscription in place. A schedule can only be released if its status is
-   * <code>not_started</code> or <code>active</code>. If the subscription schedule is currently
-   * associated with a subscription, releasing it will remove its <code>subscription</code> property
-   * and set the subscription’s ID to the <code>released_subscription</code> property.
-   */
-  public SubscriptionSchedule release(
-      SubscriptionScheduleReleaseParams params, RequestOptions options) throws StripeException {
-    String url =
-        String.format(
-            "%s%s",
-            Stripe.getApiBase(),
-            String.format(
-                "/v1/subscription_schedules/%s/release", ApiResource.urlEncodeId(this.getId())));
-    return ApiResource.request(
-        ApiResource.RequestMethod.POST, url, params, SubscriptionSchedule.class, options);
-  }
-
   @Getter
   @Setter
   @EqualsAndHashCode(callSuper = false)
@@ -680,6 +692,10 @@ public class SubscriptionSchedule extends ApiResource
     Long daysUntilDue;
   }
 
+  /**
+   * A phase describes the plans, coupon, and trialing status of a subscription for a predefined
+   * time period.
+   */
   @Getter
   @Setter
   @EqualsAndHashCode(callSuper = false)
@@ -859,6 +875,7 @@ public class SubscriptionSchedule extends ApiResource
     }
   }
 
+  /** A phase item describes the price and quantity of a phase. */
   @Getter
   @Setter
   @EqualsAndHashCode(callSuper = false)

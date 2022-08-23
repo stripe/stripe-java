@@ -15,6 +15,19 @@ import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.Setter;
 
+/**
+ * A {@code Transfer} object is created when you move funds between Stripe accounts as part of
+ * Connect.
+ *
+ * <p>Before April 6, 2017, transfers also represented movement of funds from a Stripe account to a
+ * card or bank account. This behavior has since been split out into a <a
+ * href="https://stripe.com/docs/api#payout_object">Payout</a> object, with corresponding payout
+ * endpoints. For more information, read about the <a
+ * href="https://stripe.com/docs/transfer-payout-split">transfer/payout split</a>.
+ *
+ * <p>Related guide: <a href="https://stripe.com/docs/connect/charges-transfers">Creating Separate
+ * Charges and Transfers</a>.
+ */
 @Getter
 @Setter
 @EqualsAndHashCode(callSuper = false)

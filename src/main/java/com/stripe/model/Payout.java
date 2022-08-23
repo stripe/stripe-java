@@ -17,6 +17,16 @@ import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.Setter;
 
+/**
+ * A {@code Payout} object is created when you receive funds from Stripe, or when you initiate a
+ * payout to either a bank account or debit card of a <a
+ * href="https://stripe.com/docs/connect/bank-debit-card-payouts">connected Stripe account</a>. You
+ * can retrieve individual payouts, as well as list all payouts. Payouts are made on <a
+ * href="https://stripe.com/docs/connect/manage-payout-schedule">varying schedules</a>, depending on
+ * your country and industry.
+ *
+ * <p>Related guide: <a href="https://stripe.com/docs/payouts">Receiving Payouts</a>.
+ */
 @Getter
 @Setter
 @EqualsAndHashCode(callSuper = false)
@@ -264,89 +274,61 @@ public class Payout extends ApiResource implements MetadataStore<Payout>, Balanc
   }
 
   /**
-   * Retrieves the details of an existing payout. Supply the unique payout ID from either a payout
-   * creation request or the payout list, and Stripe will return the corresponding payout
-   * information.
+   * A previously created payout can be canceled if it has not yet been paid out. Funds will be
+   * refunded to your available balance. You may not cancel automatic Stripe payouts.
    */
-  public static Payout retrieve(String payout) throws StripeException {
-    return retrieve(payout, (Map<String, Object>) null, (RequestOptions) null);
+  public Payout cancel() throws StripeException {
+    return cancel((Map<String, Object>) null, (RequestOptions) null);
   }
 
   /**
-   * Retrieves the details of an existing payout. Supply the unique payout ID from either a payout
-   * creation request or the payout list, and Stripe will return the corresponding payout
-   * information.
+   * A previously created payout can be canceled if it has not yet been paid out. Funds will be
+   * refunded to your available balance. You may not cancel automatic Stripe payouts.
    */
-  public static Payout retrieve(String payout, RequestOptions options) throws StripeException {
-    return retrieve(payout, (Map<String, Object>) null, options);
+  public Payout cancel(RequestOptions options) throws StripeException {
+    return cancel((Map<String, Object>) null, options);
   }
 
   /**
-   * Retrieves the details of an existing payout. Supply the unique payout ID from either a payout
-   * creation request or the payout list, and Stripe will return the corresponding payout
-   * information.
+   * A previously created payout can be canceled if it has not yet been paid out. Funds will be
+   * refunded to your available balance. You may not cancel automatic Stripe payouts.
    */
-  public static Payout retrieve(String payout, Map<String, Object> params, RequestOptions options)
-      throws StripeException {
+  public Payout cancel(Map<String, Object> params) throws StripeException {
+    return cancel(params, (RequestOptions) null);
+  }
+
+  /**
+   * A previously created payout can be canceled if it has not yet been paid out. Funds will be
+   * refunded to your available balance. You may not cancel automatic Stripe payouts.
+   */
+  public Payout cancel(Map<String, Object> params, RequestOptions options) throws StripeException {
     String url =
         String.format(
             "%s%s",
-            Stripe.getApiBase(), String.format("/v1/payouts/%s", ApiResource.urlEncodeId(payout)));
-    return ApiResource.request(ApiResource.RequestMethod.GET, url, params, Payout.class, options);
+            Stripe.getApiBase(),
+            String.format("/v1/payouts/%s/cancel", ApiResource.urlEncodeId(this.getId())));
+    return ApiResource.request(ApiResource.RequestMethod.POST, url, params, Payout.class, options);
   }
 
   /**
-   * Retrieves the details of an existing payout. Supply the unique payout ID from either a payout
-   * creation request or the payout list, and Stripe will return the corresponding payout
-   * information.
+   * A previously created payout can be canceled if it has not yet been paid out. Funds will be
+   * refunded to your available balance. You may not cancel automatic Stripe payouts.
    */
-  public static Payout retrieve(String payout, PayoutRetrieveParams params, RequestOptions options)
-      throws StripeException {
+  public Payout cancel(PayoutCancelParams params) throws StripeException {
+    return cancel(params, (RequestOptions) null);
+  }
+
+  /**
+   * A previously created payout can be canceled if it has not yet been paid out. Funds will be
+   * refunded to your available balance. You may not cancel automatic Stripe payouts.
+   */
+  public Payout cancel(PayoutCancelParams params, RequestOptions options) throws StripeException {
     String url =
         String.format(
             "%s%s",
-            Stripe.getApiBase(), String.format("/v1/payouts/%s", ApiResource.urlEncodeId(payout)));
-    return ApiResource.request(ApiResource.RequestMethod.GET, url, params, Payout.class, options);
-  }
-
-  /**
-   * Returns a list of existing payouts sent to third-party bank accounts or that Stripe has sent
-   * you. The payouts are returned in sorted order, with the most recently created payouts appearing
-   * first.
-   */
-  public static PayoutCollection list(Map<String, Object> params) throws StripeException {
-    return list(params, (RequestOptions) null);
-  }
-
-  /**
-   * Returns a list of existing payouts sent to third-party bank accounts or that Stripe has sent
-   * you. The payouts are returned in sorted order, with the most recently created payouts appearing
-   * first.
-   */
-  public static PayoutCollection list(Map<String, Object> params, RequestOptions options)
-      throws StripeException {
-    String url = String.format("%s%s", Stripe.getApiBase(), "/v1/payouts");
-    return ApiResource.requestCollection(url, params, PayoutCollection.class, options);
-  }
-
-  /**
-   * Returns a list of existing payouts sent to third-party bank accounts or that Stripe has sent
-   * you. The payouts are returned in sorted order, with the most recently created payouts appearing
-   * first.
-   */
-  public static PayoutCollection list(PayoutListParams params) throws StripeException {
-    return list(params, (RequestOptions) null);
-  }
-
-  /**
-   * Returns a list of existing payouts sent to third-party bank accounts or that Stripe has sent
-   * you. The payouts are returned in sorted order, with the most recently created payouts appearing
-   * first.
-   */
-  public static PayoutCollection list(PayoutListParams params, RequestOptions options)
-      throws StripeException {
-    String url = String.format("%s%s", Stripe.getApiBase(), "/v1/payouts");
-    return ApiResource.requestCollection(url, params, PayoutCollection.class, options);
+            Stripe.getApiBase(),
+            String.format("/v1/payouts/%s/cancel", ApiResource.urlEncodeId(this.getId())));
+    return ApiResource.request(ApiResource.RequestMethod.POST, url, params, Payout.class, options);
   }
 
   /**
@@ -422,105 +404,89 @@ public class Payout extends ApiResource implements MetadataStore<Payout>, Balanc
   }
 
   /**
-   * Updates the specified payout by setting the values of the parameters passed. Any parameters not
-   * provided will be left unchanged. This request accepts only the metadata as arguments.
+   * Returns a list of existing payouts sent to third-party bank accounts or that Stripe has sent
+   * you. The payouts are returned in sorted order, with the most recently created payouts appearing
+   * first.
    */
-  @Override
-  public Payout update(Map<String, Object> params) throws StripeException {
-    return update(params, (RequestOptions) null);
+  public static PayoutCollection list(Map<String, Object> params) throws StripeException {
+    return list(params, (RequestOptions) null);
   }
 
   /**
-   * Updates the specified payout by setting the values of the parameters passed. Any parameters not
-   * provided will be left unchanged. This request accepts only the metadata as arguments.
+   * Returns a list of existing payouts sent to third-party bank accounts or that Stripe has sent
+   * you. The payouts are returned in sorted order, with the most recently created payouts appearing
+   * first.
    */
-  @Override
-  public Payout update(Map<String, Object> params, RequestOptions options) throws StripeException {
+  public static PayoutCollection list(Map<String, Object> params, RequestOptions options)
+      throws StripeException {
+    String url = String.format("%s%s", Stripe.getApiBase(), "/v1/payouts");
+    return ApiResource.requestCollection(url, params, PayoutCollection.class, options);
+  }
+
+  /**
+   * Returns a list of existing payouts sent to third-party bank accounts or that Stripe has sent
+   * you. The payouts are returned in sorted order, with the most recently created payouts appearing
+   * first.
+   */
+  public static PayoutCollection list(PayoutListParams params) throws StripeException {
+    return list(params, (RequestOptions) null);
+  }
+
+  /**
+   * Returns a list of existing payouts sent to third-party bank accounts or that Stripe has sent
+   * you. The payouts are returned in sorted order, with the most recently created payouts appearing
+   * first.
+   */
+  public static PayoutCollection list(PayoutListParams params, RequestOptions options)
+      throws StripeException {
+    String url = String.format("%s%s", Stripe.getApiBase(), "/v1/payouts");
+    return ApiResource.requestCollection(url, params, PayoutCollection.class, options);
+  }
+
+  /**
+   * Retrieves the details of an existing payout. Supply the unique payout ID from either a payout
+   * creation request or the payout list, and Stripe will return the corresponding payout
+   * information.
+   */
+  public static Payout retrieve(String payout) throws StripeException {
+    return retrieve(payout, (Map<String, Object>) null, (RequestOptions) null);
+  }
+
+  /**
+   * Retrieves the details of an existing payout. Supply the unique payout ID from either a payout
+   * creation request or the payout list, and Stripe will return the corresponding payout
+   * information.
+   */
+  public static Payout retrieve(String payout, RequestOptions options) throws StripeException {
+    return retrieve(payout, (Map<String, Object>) null, options);
+  }
+
+  /**
+   * Retrieves the details of an existing payout. Supply the unique payout ID from either a payout
+   * creation request or the payout list, and Stripe will return the corresponding payout
+   * information.
+   */
+  public static Payout retrieve(String payout, Map<String, Object> params, RequestOptions options)
+      throws StripeException {
     String url =
         String.format(
             "%s%s",
-            Stripe.getApiBase(),
-            String.format("/v1/payouts/%s", ApiResource.urlEncodeId(this.getId())));
-    return ApiResource.request(ApiResource.RequestMethod.POST, url, params, Payout.class, options);
+            Stripe.getApiBase(), String.format("/v1/payouts/%s", ApiResource.urlEncodeId(payout)));
+    return ApiResource.request(ApiResource.RequestMethod.GET, url, params, Payout.class, options);
   }
 
   /**
-   * Updates the specified payout by setting the values of the parameters passed. Any parameters not
-   * provided will be left unchanged. This request accepts only the metadata as arguments.
+   * Retrieves the details of an existing payout. Supply the unique payout ID from either a payout
+   * creation request or the payout list, and Stripe will return the corresponding payout
+   * information.
    */
-  public Payout update(PayoutUpdateParams params) throws StripeException {
-    return update(params, (RequestOptions) null);
-  }
-
-  /**
-   * Updates the specified payout by setting the values of the parameters passed. Any parameters not
-   * provided will be left unchanged. This request accepts only the metadata as arguments.
-   */
-  public Payout update(PayoutUpdateParams params, RequestOptions options) throws StripeException {
+  public static Payout retrieve(String payout, PayoutRetrieveParams params, RequestOptions options)
+      throws StripeException {
     String url =
         String.format(
             "%s%s",
-            Stripe.getApiBase(),
-            String.format("/v1/payouts/%s", ApiResource.urlEncodeId(this.getId())));
-    return ApiResource.request(ApiResource.RequestMethod.POST, url, params, Payout.class, options);
-  }
-
-  /**
-   * A previously created payout can be canceled if it has not yet been paid out. Funds will be
-   * refunded to your available balance. You may not cancel automatic Stripe payouts.
-   */
-  public Payout cancel() throws StripeException {
-    return cancel((Map<String, Object>) null, (RequestOptions) null);
-  }
-
-  /**
-   * A previously created payout can be canceled if it has not yet been paid out. Funds will be
-   * refunded to your available balance. You may not cancel automatic Stripe payouts.
-   */
-  public Payout cancel(RequestOptions options) throws StripeException {
-    return cancel((Map<String, Object>) null, options);
-  }
-
-  /**
-   * A previously created payout can be canceled if it has not yet been paid out. Funds will be
-   * refunded to your available balance. You may not cancel automatic Stripe payouts.
-   */
-  public Payout cancel(Map<String, Object> params) throws StripeException {
-    return cancel(params, (RequestOptions) null);
-  }
-
-  /**
-   * A previously created payout can be canceled if it has not yet been paid out. Funds will be
-   * refunded to your available balance. You may not cancel automatic Stripe payouts.
-   */
-  public Payout cancel(Map<String, Object> params, RequestOptions options) throws StripeException {
-    String url =
-        String.format(
-            "%s%s",
-            Stripe.getApiBase(),
-            String.format("/v1/payouts/%s/cancel", ApiResource.urlEncodeId(this.getId())));
-    return ApiResource.request(ApiResource.RequestMethod.POST, url, params, Payout.class, options);
-  }
-
-  /**
-   * A previously created payout can be canceled if it has not yet been paid out. Funds will be
-   * refunded to your available balance. You may not cancel automatic Stripe payouts.
-   */
-  public Payout cancel(PayoutCancelParams params) throws StripeException {
-    return cancel(params, (RequestOptions) null);
-  }
-
-  /**
-   * A previously created payout can be canceled if it has not yet been paid out. Funds will be
-   * refunded to your available balance. You may not cancel automatic Stripe payouts.
-   */
-  public Payout cancel(PayoutCancelParams params, RequestOptions options) throws StripeException {
-    String url =
-        String.format(
-            "%s%s",
-            Stripe.getApiBase(),
-            String.format("/v1/payouts/%s/cancel", ApiResource.urlEncodeId(this.getId())));
-    return ApiResource.request(ApiResource.RequestMethod.POST, url, params, Payout.class, options);
+            Stripe.getApiBase(), String.format("/v1/payouts/%s", ApiResource.urlEncodeId(payout)));
+    return ApiResource.request(ApiResource.RequestMethod.GET, url, params, Payout.class, options);
   }
 
   /**
@@ -608,6 +574,50 @@ public class Payout extends ApiResource implements MetadataStore<Payout>, Balanc
             "%s%s",
             Stripe.getApiBase(),
             String.format("/v1/payouts/%s/reverse", ApiResource.urlEncodeId(this.getId())));
+    return ApiResource.request(ApiResource.RequestMethod.POST, url, params, Payout.class, options);
+  }
+
+  /**
+   * Updates the specified payout by setting the values of the parameters passed. Any parameters not
+   * provided will be left unchanged. This request accepts only the metadata as arguments.
+   */
+  @Override
+  public Payout update(Map<String, Object> params) throws StripeException {
+    return update(params, (RequestOptions) null);
+  }
+
+  /**
+   * Updates the specified payout by setting the values of the parameters passed. Any parameters not
+   * provided will be left unchanged. This request accepts only the metadata as arguments.
+   */
+  @Override
+  public Payout update(Map<String, Object> params, RequestOptions options) throws StripeException {
+    String url =
+        String.format(
+            "%s%s",
+            Stripe.getApiBase(),
+            String.format("/v1/payouts/%s", ApiResource.urlEncodeId(this.getId())));
+    return ApiResource.request(ApiResource.RequestMethod.POST, url, params, Payout.class, options);
+  }
+
+  /**
+   * Updates the specified payout by setting the values of the parameters passed. Any parameters not
+   * provided will be left unchanged. This request accepts only the metadata as arguments.
+   */
+  public Payout update(PayoutUpdateParams params) throws StripeException {
+    return update(params, (RequestOptions) null);
+  }
+
+  /**
+   * Updates the specified payout by setting the values of the parameters passed. Any parameters not
+   * provided will be left unchanged. This request accepts only the metadata as arguments.
+   */
+  public Payout update(PayoutUpdateParams params, RequestOptions options) throws StripeException {
+    String url =
+        String.format(
+            "%s%s",
+            Stripe.getApiBase(),
+            String.format("/v1/payouts/%s", ApiResource.urlEncodeId(this.getId())));
     return ApiResource.request(ApiResource.RequestMethod.POST, url, params, Payout.class, options);
   }
 }

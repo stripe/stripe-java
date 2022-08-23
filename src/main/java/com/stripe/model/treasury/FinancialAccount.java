@@ -21,6 +21,11 @@ import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.Setter;
 
+/**
+ * Stripe Treasury provides users with a container for money called a FinancialAccount that is
+ * separate from their Payments balance. FinancialAccounts serve as the source and destination of
+ * Treasury’s money movement APIs.
+ */
 @Getter
 @Setter
 @EqualsAndHashCode(callSuper = false)
@@ -155,94 +160,6 @@ public class FinancialAccount extends ApiResource
         ApiResource.RequestMethod.POST, url, params, FinancialAccount.class, options);
   }
 
-  /** Updates the details of a FinancialAccount. */
-  @Override
-  public FinancialAccount update(Map<String, Object> params) throws StripeException {
-    return update(params, (RequestOptions) null);
-  }
-
-  /** Updates the details of a FinancialAccount. */
-  @Override
-  public FinancialAccount update(Map<String, Object> params, RequestOptions options)
-      throws StripeException {
-    String url =
-        String.format(
-            "%s%s",
-            Stripe.getApiBase(),
-            String.format(
-                "/v1/treasury/financial_accounts/%s", ApiResource.urlEncodeId(this.getId())));
-    return ApiResource.request(
-        ApiResource.RequestMethod.POST, url, params, FinancialAccount.class, options);
-  }
-
-  /** Updates the details of a FinancialAccount. */
-  public FinancialAccount update(FinancialAccountUpdateParams params) throws StripeException {
-    return update(params, (RequestOptions) null);
-  }
-
-  /** Updates the details of a FinancialAccount. */
-  public FinancialAccount update(FinancialAccountUpdateParams params, RequestOptions options)
-      throws StripeException {
-    String url =
-        String.format(
-            "%s%s",
-            Stripe.getApiBase(),
-            String.format(
-                "/v1/treasury/financial_accounts/%s", ApiResource.urlEncodeId(this.getId())));
-    return ApiResource.request(
-        ApiResource.RequestMethod.POST, url, params, FinancialAccount.class, options);
-  }
-
-  /** Updates the Features associated with a FinancialAccount. */
-  public FinancialAccountFeatures updateFeatures() throws StripeException {
-    return updateFeatures((Map<String, Object>) null, (RequestOptions) null);
-  }
-
-  /** Updates the Features associated with a FinancialAccount. */
-  public FinancialAccountFeatures updateFeatures(RequestOptions options) throws StripeException {
-    return updateFeatures((Map<String, Object>) null, options);
-  }
-
-  /** Updates the Features associated with a FinancialAccount. */
-  public FinancialAccountFeatures updateFeatures(Map<String, Object> params)
-      throws StripeException {
-    return updateFeatures(params, (RequestOptions) null);
-  }
-
-  /** Updates the Features associated with a FinancialAccount. */
-  public FinancialAccountFeatures updateFeatures(Map<String, Object> params, RequestOptions options)
-      throws StripeException {
-    String url =
-        String.format(
-            "%s%s",
-            Stripe.getApiBase(),
-            String.format(
-                "/v1/treasury/financial_accounts/%s/features",
-                ApiResource.urlEncodeId(this.getId())));
-    return ApiResource.request(
-        ApiResource.RequestMethod.POST, url, params, FinancialAccountFeatures.class, options);
-  }
-
-  /** Updates the Features associated with a FinancialAccount. */
-  public FinancialAccountFeatures updateFeatures(FinancialAccountUpdateFeaturesParams params)
-      throws StripeException {
-    return updateFeatures(params, (RequestOptions) null);
-  }
-
-  /** Updates the Features associated with a FinancialAccount. */
-  public FinancialAccountFeatures updateFeatures(
-      FinancialAccountUpdateFeaturesParams params, RequestOptions options) throws StripeException {
-    String url =
-        String.format(
-            "%s%s",
-            Stripe.getApiBase(),
-            String.format(
-                "/v1/treasury/financial_accounts/%s/features",
-                ApiResource.urlEncodeId(this.getId())));
-    return ApiResource.request(
-        ApiResource.RequestMethod.POST, url, params, FinancialAccountFeatures.class, options);
-  }
-
   /** Returns a list of FinancialAccounts. */
   public static FinancialAccountCollection list(Map<String, Object> params) throws StripeException {
     return list(params, (RequestOptions) null);
@@ -353,6 +270,95 @@ public class FinancialAccount extends ApiResource
         ApiResource.RequestMethod.GET, url, params, FinancialAccountFeatures.class, options);
   }
 
+  /** Updates the details of a FinancialAccount. */
+  @Override
+  public FinancialAccount update(Map<String, Object> params) throws StripeException {
+    return update(params, (RequestOptions) null);
+  }
+
+  /** Updates the details of a FinancialAccount. */
+  @Override
+  public FinancialAccount update(Map<String, Object> params, RequestOptions options)
+      throws StripeException {
+    String url =
+        String.format(
+            "%s%s",
+            Stripe.getApiBase(),
+            String.format(
+                "/v1/treasury/financial_accounts/%s", ApiResource.urlEncodeId(this.getId())));
+    return ApiResource.request(
+        ApiResource.RequestMethod.POST, url, params, FinancialAccount.class, options);
+  }
+
+  /** Updates the details of a FinancialAccount. */
+  public FinancialAccount update(FinancialAccountUpdateParams params) throws StripeException {
+    return update(params, (RequestOptions) null);
+  }
+
+  /** Updates the details of a FinancialAccount. */
+  public FinancialAccount update(FinancialAccountUpdateParams params, RequestOptions options)
+      throws StripeException {
+    String url =
+        String.format(
+            "%s%s",
+            Stripe.getApiBase(),
+            String.format(
+                "/v1/treasury/financial_accounts/%s", ApiResource.urlEncodeId(this.getId())));
+    return ApiResource.request(
+        ApiResource.RequestMethod.POST, url, params, FinancialAccount.class, options);
+  }
+
+  /** Updates the Features associated with a FinancialAccount. */
+  public FinancialAccountFeatures updateFeatures() throws StripeException {
+    return updateFeatures((Map<String, Object>) null, (RequestOptions) null);
+  }
+
+  /** Updates the Features associated with a FinancialAccount. */
+  public FinancialAccountFeatures updateFeatures(RequestOptions options) throws StripeException {
+    return updateFeatures((Map<String, Object>) null, options);
+  }
+
+  /** Updates the Features associated with a FinancialAccount. */
+  public FinancialAccountFeatures updateFeatures(Map<String, Object> params)
+      throws StripeException {
+    return updateFeatures(params, (RequestOptions) null);
+  }
+
+  /** Updates the Features associated with a FinancialAccount. */
+  public FinancialAccountFeatures updateFeatures(Map<String, Object> params, RequestOptions options)
+      throws StripeException {
+    String url =
+        String.format(
+            "%s%s",
+            Stripe.getApiBase(),
+            String.format(
+                "/v1/treasury/financial_accounts/%s/features",
+                ApiResource.urlEncodeId(this.getId())));
+    return ApiResource.request(
+        ApiResource.RequestMethod.POST, url, params, FinancialAccountFeatures.class, options);
+  }
+
+  /** Updates the Features associated with a FinancialAccount. */
+  public FinancialAccountFeatures updateFeatures(FinancialAccountUpdateFeaturesParams params)
+      throws StripeException {
+    return updateFeatures(params, (RequestOptions) null);
+  }
+
+  /** Updates the Features associated with a FinancialAccount. */
+  public FinancialAccountFeatures updateFeatures(
+      FinancialAccountUpdateFeaturesParams params, RequestOptions options) throws StripeException {
+    String url =
+        String.format(
+            "%s%s",
+            Stripe.getApiBase(),
+            String.format(
+                "/v1/treasury/financial_accounts/%s/features",
+                ApiResource.urlEncodeId(this.getId())));
+    return ApiResource.request(
+        ApiResource.RequestMethod.POST, url, params, FinancialAccountFeatures.class, options);
+  }
+
+  /** Balance information for the FinancialAccount. */
   @Getter
   @Setter
   @EqualsAndHashCode(callSuper = false)
@@ -373,6 +379,7 @@ public class FinancialAccount extends ApiResource
     Map<String, Long> outboundPending;
   }
 
+  /** FinancialAddresses contain identifying information that resolves to a FinancialAccount. */
   @Getter
   @Setter
   @EqualsAndHashCode(callSuper = false)
@@ -393,6 +400,7 @@ public class FinancialAccount extends ApiResource
     @SerializedName("type")
     String type;
 
+    /** ABA Records contain U.S. bank account details per the ABA format. */
     @Getter
     @Setter
     @EqualsAndHashCode(callSuper = false)
@@ -419,6 +427,7 @@ public class FinancialAccount extends ApiResource
     }
   }
 
+  /** Restrictions that a Connect Platform has placed on this FinancialAccount. */
   @Getter
   @Setter
   @EqualsAndHashCode(callSuper = false)
@@ -458,6 +467,7 @@ public class FinancialAccount extends ApiResource
     }
   }
 
+  /** Toggle settings for enabling/disabling a feature. */
   @Getter
   @Setter
   @EqualsAndHashCode(callSuper = false)
@@ -478,6 +488,7 @@ public class FinancialAccount extends ApiResource
     @SerializedName("status_details")
     List<FinancialAccount.ToggleSettings.StatusDetails> statusDetails;
 
+    /** Additional details on the FinancialAccount Features information. */
     @Getter
     @Setter
     @EqualsAndHashCode(callSuper = false)

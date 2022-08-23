@@ -12,6 +12,18 @@ import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.Setter;
 
+/**
+ * Each customer has a <a
+ * href="https://stripe.com/docs/api/customers/object#customer_object-balance">{@code balance}</a>
+ * value, which denotes a debit or credit that's automatically applied to their next invoice upon
+ * finalization. You may modify the value directly by using the <a
+ * href="https://stripe.com/docs/api/customers/update">update customer API</a>, or by creating a
+ * Customer Balance Transaction, which increments or decrements the customer's {@code balance} by
+ * the specified {@code amount}.
+ *
+ * <p>Related guide: <a href="https://stripe.com/docs/billing/customer/balance">Customer Balance</a>
+ * to learn more.
+ */
 @Getter
 @Setter
 @EqualsAndHashCode(callSuper = false)

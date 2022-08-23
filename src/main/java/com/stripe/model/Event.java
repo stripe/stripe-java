@@ -13,6 +13,34 @@ import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.Setter;
 
+/**
+ * Events are our way of letting you know when something interesting happens in your account. When
+ * an interesting event occurs, we create a new {@code Event} object. For example, when a charge
+ * succeeds, we create a {@code charge.succeeded} event; and when an invoice payment attempt fails,
+ * we create an {@code invoice.payment_failed} event. Note that many API requests may cause multiple
+ * events to be created. For example, if you create a new subscription for a customer, you will
+ * receive both a {@code customer.subscription.created} event and a {@code charge.succeeded} event.
+ *
+ * <p>Events occur when the state of another API resource changes. The state of that resource at the
+ * time of the change is embedded in the event's data field. For example, a {@code charge.succeeded}
+ * event will contain a charge, and an {@code invoice.payment_failed} event will contain an invoice.
+ *
+ * <p>As with other API resources, you can use endpoints to retrieve an <a
+ * href="https://stripe.com/docs/api#retrieve_event">individual event</a> or a <a
+ * href="https://stripe.com/docs/api#list_events">list of events</a> from the API. We also have a
+ * separate <a href="http://en.wikipedia.org/wiki/Webhook">webhooks</a> system for sending the
+ * {@code Event} objects directly to an endpoint on your server. Webhooks are managed in your <a
+ * href="https://dashboard.stripe.com/account/webhooks">account settings</a>, and our <a
+ * href="https://stripe.com/docs/webhooks">Using Webhooks</a> guide will help you get set up.
+ *
+ * <p>When using <a href="https://stripe.com/docs/connect">Connect</a>, you can also receive
+ * notifications of events that occur in connected accounts. For these events, there will be an
+ * additional {@code account} attribute in the received {@code Event} object.
+ *
+ * <p><strong>NOTE:</strong> Right now, access to events through the <a
+ * href="https://stripe.com/docs/api#retrieve_event">Retrieve Event API</a> is guaranteed only for
+ * 30 days.
+ */
 @Getter
 @Setter
 @EqualsAndHashCode(callSuper = false)

@@ -19,6 +19,16 @@ import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.Setter;
 
+/**
+ * Sometimes you want to add a charge or credit to a customer, but actually charge or credit the
+ * customer's card only at the end of a regular billing cycle. This is useful for combining several
+ * charges (to minimize per-transaction fees), or for having Stripe tabulate your usage-based
+ * billing totals.
+ *
+ * <p>Related guide: <a
+ * href="https://stripe.com/docs/billing/invoices/subscription#adding-upcoming-invoice-items">Subscription
+ * Invoices</a>.
+ */
 @Getter
 @Setter
 @EqualsAndHashCode(callSuper = false)
@@ -275,42 +285,6 @@ public class InvoiceItem extends ApiResource implements HasId, MetadataStore<Inv
   }
 
   /**
-   * Returns a list of your invoice items. Invoice items are returned sorted by creation date, with
-   * the most recently created invoice items appearing first.
-   */
-  public static InvoiceItemCollection list(Map<String, Object> params) throws StripeException {
-    return list(params, (RequestOptions) null);
-  }
-
-  /**
-   * Returns a list of your invoice items. Invoice items are returned sorted by creation date, with
-   * the most recently created invoice items appearing first.
-   */
-  public static InvoiceItemCollection list(Map<String, Object> params, RequestOptions options)
-      throws StripeException {
-    String url = String.format("%s%s", Stripe.getApiBase(), "/v1/invoiceitems");
-    return ApiResource.requestCollection(url, params, InvoiceItemCollection.class, options);
-  }
-
-  /**
-   * Returns a list of your invoice items. Invoice items are returned sorted by creation date, with
-   * the most recently created invoice items appearing first.
-   */
-  public static InvoiceItemCollection list(InvoiceItemListParams params) throws StripeException {
-    return list(params, (RequestOptions) null);
-  }
-
-  /**
-   * Returns a list of your invoice items. Invoice items are returned sorted by creation date, with
-   * the most recently created invoice items appearing first.
-   */
-  public static InvoiceItemCollection list(InvoiceItemListParams params, RequestOptions options)
-      throws StripeException {
-    String url = String.format("%s%s", Stripe.getApiBase(), "/v1/invoiceitems");
-    return ApiResource.requestCollection(url, params, InvoiceItemCollection.class, options);
-  }
-
-  /**
    * Creates an item to be added to a draft invoice (up to 250 items per invoice). If no invoice is
    * specified, the item will be on the next invoice created for the customer specified.
    */
@@ -346,6 +320,81 @@ public class InvoiceItem extends ApiResource implements HasId, MetadataStore<Inv
     String url = String.format("%s%s", Stripe.getApiBase(), "/v1/invoiceitems");
     return ApiResource.request(
         ApiResource.RequestMethod.POST, url, params, InvoiceItem.class, options);
+  }
+
+  /**
+   * Deletes an invoice item, removing it from an invoice. Deleting invoice items is only possible
+   * when they’re not attached to invoices, or if it’s attached to a draft invoice.
+   */
+  public InvoiceItem delete() throws StripeException {
+    return delete((Map<String, Object>) null, (RequestOptions) null);
+  }
+
+  /**
+   * Deletes an invoice item, removing it from an invoice. Deleting invoice items is only possible
+   * when they’re not attached to invoices, or if it’s attached to a draft invoice.
+   */
+  public InvoiceItem delete(RequestOptions options) throws StripeException {
+    return delete((Map<String, Object>) null, options);
+  }
+
+  /**
+   * Deletes an invoice item, removing it from an invoice. Deleting invoice items is only possible
+   * when they’re not attached to invoices, or if it’s attached to a draft invoice.
+   */
+  public InvoiceItem delete(Map<String, Object> params) throws StripeException {
+    return delete(params, (RequestOptions) null);
+  }
+
+  /**
+   * Deletes an invoice item, removing it from an invoice. Deleting invoice items is only possible
+   * when they’re not attached to invoices, or if it’s attached to a draft invoice.
+   */
+  public InvoiceItem delete(Map<String, Object> params, RequestOptions options)
+      throws StripeException {
+    String url =
+        String.format(
+            "%s%s",
+            Stripe.getApiBase(),
+            String.format("/v1/invoiceitems/%s", ApiResource.urlEncodeId(this.getId())));
+    return ApiResource.request(
+        ApiResource.RequestMethod.DELETE, url, params, InvoiceItem.class, options);
+  }
+
+  /**
+   * Returns a list of your invoice items. Invoice items are returned sorted by creation date, with
+   * the most recently created invoice items appearing first.
+   */
+  public static InvoiceItemCollection list(Map<String, Object> params) throws StripeException {
+    return list(params, (RequestOptions) null);
+  }
+
+  /**
+   * Returns a list of your invoice items. Invoice items are returned sorted by creation date, with
+   * the most recently created invoice items appearing first.
+   */
+  public static InvoiceItemCollection list(Map<String, Object> params, RequestOptions options)
+      throws StripeException {
+    String url = String.format("%s%s", Stripe.getApiBase(), "/v1/invoiceitems");
+    return ApiResource.requestCollection(url, params, InvoiceItemCollection.class, options);
+  }
+
+  /**
+   * Returns a list of your invoice items. Invoice items are returned sorted by creation date, with
+   * the most recently created invoice items appearing first.
+   */
+  public static InvoiceItemCollection list(InvoiceItemListParams params) throws StripeException {
+    return list(params, (RequestOptions) null);
+  }
+
+  /**
+   * Returns a list of your invoice items. Invoice items are returned sorted by creation date, with
+   * the most recently created invoice items appearing first.
+   */
+  public static InvoiceItemCollection list(InvoiceItemListParams params, RequestOptions options)
+      throws StripeException {
+    String url = String.format("%s%s", Stripe.getApiBase(), "/v1/invoiceitems");
+    return ApiResource.requestCollection(url, params, InvoiceItemCollection.class, options);
   }
 
   /** Retrieves the invoice item with the given ID. */
@@ -431,44 +480,5 @@ public class InvoiceItem extends ApiResource implements HasId, MetadataStore<Inv
             String.format("/v1/invoiceitems/%s", ApiResource.urlEncodeId(this.getId())));
     return ApiResource.request(
         ApiResource.RequestMethod.POST, url, params, InvoiceItem.class, options);
-  }
-
-  /**
-   * Deletes an invoice item, removing it from an invoice. Deleting invoice items is only possible
-   * when they’re not attached to invoices, or if it’s attached to a draft invoice.
-   */
-  public InvoiceItem delete() throws StripeException {
-    return delete((Map<String, Object>) null, (RequestOptions) null);
-  }
-
-  /**
-   * Deletes an invoice item, removing it from an invoice. Deleting invoice items is only possible
-   * when they’re not attached to invoices, or if it’s attached to a draft invoice.
-   */
-  public InvoiceItem delete(RequestOptions options) throws StripeException {
-    return delete((Map<String, Object>) null, options);
-  }
-
-  /**
-   * Deletes an invoice item, removing it from an invoice. Deleting invoice items is only possible
-   * when they’re not attached to invoices, or if it’s attached to a draft invoice.
-   */
-  public InvoiceItem delete(Map<String, Object> params) throws StripeException {
-    return delete(params, (RequestOptions) null);
-  }
-
-  /**
-   * Deletes an invoice item, removing it from an invoice. Deleting invoice items is only possible
-   * when they’re not attached to invoices, or if it’s attached to a draft invoice.
-   */
-  public InvoiceItem delete(Map<String, Object> params, RequestOptions options)
-      throws StripeException {
-    String url =
-        String.format(
-            "%s%s",
-            Stripe.getApiBase(),
-            String.format("/v1/invoiceitems/%s", ApiResource.urlEncodeId(this.getId())));
-    return ApiResource.request(
-        ApiResource.RequestMethod.DELETE, url, params, InvoiceItem.class, options);
   }
 }

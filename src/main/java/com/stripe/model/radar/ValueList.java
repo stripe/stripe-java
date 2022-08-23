@@ -17,6 +17,12 @@ import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.Setter;
 
+/**
+ * Value lists allow you to group values together which can then be referenced in rules.
+ *
+ * <p>Related guide: <a href="https://stripe.com/docs/radar/lists#managing-list-items">Default
+ * Stripe Lists</a>.
+ */
 @Getter
 @Setter
 @EqualsAndHashCode(callSuper = false)
@@ -81,6 +87,71 @@ public class ValueList extends ApiResource implements HasId, MetadataStore<Value
    */
   @SerializedName("object")
   String object;
+
+  /** Creates a new <code>ValueList</code> object, which can then be referenced in rules. */
+  public static ValueList create(Map<String, Object> params) throws StripeException {
+    return create(params, (RequestOptions) null);
+  }
+
+  /** Creates a new <code>ValueList</code> object, which can then be referenced in rules. */
+  public static ValueList create(Map<String, Object> params, RequestOptions options)
+      throws StripeException {
+    String url = String.format("%s%s", Stripe.getApiBase(), "/v1/radar/value_lists");
+    return ApiResource.request(
+        ApiResource.RequestMethod.POST, url, params, ValueList.class, options);
+  }
+
+  /** Creates a new <code>ValueList</code> object, which can then be referenced in rules. */
+  public static ValueList create(ValueListCreateParams params) throws StripeException {
+    return create(params, (RequestOptions) null);
+  }
+
+  /** Creates a new <code>ValueList</code> object, which can then be referenced in rules. */
+  public static ValueList create(ValueListCreateParams params, RequestOptions options)
+      throws StripeException {
+    String url = String.format("%s%s", Stripe.getApiBase(), "/v1/radar/value_lists");
+    return ApiResource.request(
+        ApiResource.RequestMethod.POST, url, params, ValueList.class, options);
+  }
+
+  /**
+   * Deletes a <code>ValueList</code> object, also deleting any items contained within the value
+   * list. To be deleted, a value list must not be referenced in any rules.
+   */
+  public ValueList delete() throws StripeException {
+    return delete((Map<String, Object>) null, (RequestOptions) null);
+  }
+
+  /**
+   * Deletes a <code>ValueList</code> object, also deleting any items contained within the value
+   * list. To be deleted, a value list must not be referenced in any rules.
+   */
+  public ValueList delete(RequestOptions options) throws StripeException {
+    return delete((Map<String, Object>) null, options);
+  }
+
+  /**
+   * Deletes a <code>ValueList</code> object, also deleting any items contained within the value
+   * list. To be deleted, a value list must not be referenced in any rules.
+   */
+  public ValueList delete(Map<String, Object> params) throws StripeException {
+    return delete(params, (RequestOptions) null);
+  }
+
+  /**
+   * Deletes a <code>ValueList</code> object, also deleting any items contained within the value
+   * list. To be deleted, a value list must not be referenced in any rules.
+   */
+  public ValueList delete(Map<String, Object> params, RequestOptions options)
+      throws StripeException {
+    String url =
+        String.format(
+            "%s%s",
+            Stripe.getApiBase(),
+            String.format("/v1/radar/value_lists/%s", ApiResource.urlEncodeId(this.getId())));
+    return ApiResource.request(
+        ApiResource.RequestMethod.DELETE, url, params, ValueList.class, options);
+  }
 
   /**
    * Returns a list of <code>ValueList</code> objects. The objects are sorted in descending order by
@@ -154,32 +225,6 @@ public class ValueList extends ApiResource implements HasId, MetadataStore<Value
         ApiResource.RequestMethod.GET, url, params, ValueList.class, options);
   }
 
-  /** Creates a new <code>ValueList</code> object, which can then be referenced in rules. */
-  public static ValueList create(Map<String, Object> params) throws StripeException {
-    return create(params, (RequestOptions) null);
-  }
-
-  /** Creates a new <code>ValueList</code> object, which can then be referenced in rules. */
-  public static ValueList create(Map<String, Object> params, RequestOptions options)
-      throws StripeException {
-    String url = String.format("%s%s", Stripe.getApiBase(), "/v1/radar/value_lists");
-    return ApiResource.request(
-        ApiResource.RequestMethod.POST, url, params, ValueList.class, options);
-  }
-
-  /** Creates a new <code>ValueList</code> object, which can then be referenced in rules. */
-  public static ValueList create(ValueListCreateParams params) throws StripeException {
-    return create(params, (RequestOptions) null);
-  }
-
-  /** Creates a new <code>ValueList</code> object, which can then be referenced in rules. */
-  public static ValueList create(ValueListCreateParams params, RequestOptions options)
-      throws StripeException {
-    String url = String.format("%s%s", Stripe.getApiBase(), "/v1/radar/value_lists");
-    return ApiResource.request(
-        ApiResource.RequestMethod.POST, url, params, ValueList.class, options);
-  }
-
   /**
    * Updates a <code>ValueList</code> object by setting the values of the parameters passed. Any
    * parameters not provided will be left unchanged. Note that <code>item_type</code> is immutable.
@@ -226,44 +271,5 @@ public class ValueList extends ApiResource implements HasId, MetadataStore<Value
             String.format("/v1/radar/value_lists/%s", ApiResource.urlEncodeId(this.getId())));
     return ApiResource.request(
         ApiResource.RequestMethod.POST, url, params, ValueList.class, options);
-  }
-
-  /**
-   * Deletes a <code>ValueList</code> object, also deleting any items contained within the value
-   * list. To be deleted, a value list must not be referenced in any rules.
-   */
-  public ValueList delete() throws StripeException {
-    return delete((Map<String, Object>) null, (RequestOptions) null);
-  }
-
-  /**
-   * Deletes a <code>ValueList</code> object, also deleting any items contained within the value
-   * list. To be deleted, a value list must not be referenced in any rules.
-   */
-  public ValueList delete(RequestOptions options) throws StripeException {
-    return delete((Map<String, Object>) null, options);
-  }
-
-  /**
-   * Deletes a <code>ValueList</code> object, also deleting any items contained within the value
-   * list. To be deleted, a value list must not be referenced in any rules.
-   */
-  public ValueList delete(Map<String, Object> params) throws StripeException {
-    return delete(params, (RequestOptions) null);
-  }
-
-  /**
-   * Deletes a <code>ValueList</code> object, also deleting any items contained within the value
-   * list. To be deleted, a value list must not be referenced in any rules.
-   */
-  public ValueList delete(Map<String, Object> params, RequestOptions options)
-      throws StripeException {
-    String url =
-        String.format(
-            "%s%s",
-            Stripe.getApiBase(),
-            String.format("/v1/radar/value_lists/%s", ApiResource.urlEncodeId(this.getId())));
-    return ApiResource.request(
-        ApiResource.RequestMethod.DELETE, url, params, ValueList.class, options);
   }
 }

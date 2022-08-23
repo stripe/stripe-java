@@ -15,6 +15,13 @@ import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.Setter;
 
+/**
+ * Balance transactions represent funds moving through your Stripe account. They're created for
+ * every type of transaction that comes into or flows out of your Stripe account balance.
+ *
+ * <p>Related guide: <a href="https://stripe.com/docs/reports/balance-transaction-types">Balance
+ * Transaction Types</a>.
+ */
 @Getter
 @Setter
 @EqualsAndHashCode(callSuper = false)

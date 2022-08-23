@@ -750,6 +750,9 @@ public class WebhookEndpointCreateParams extends ApiRequestParams {
     @SerializedName("customer.updated")
     CUSTOMER__UPDATED("customer.updated"),
 
+    @SerializedName("customer_cash_balance_transaction.created")
+    CUSTOMER_CASH_BALANCE_TRANSACTION__CREATED("customer_cash_balance_transaction.created"),
+
     @SerializedName("file.created")
     FILE__CREATED("file.created"),
 

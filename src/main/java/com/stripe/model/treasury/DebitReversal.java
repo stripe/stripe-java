@@ -17,6 +17,11 @@ import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.Setter;
 
+/**
+ * You can reverse some <a href="https://stripe.com/docs/api#received_debits">ReceivedDebits</a>
+ * depending on their network and source flow. Reversing a ReceivedDebit leads to the creation of a
+ * new object known as a DebitReversal.
+ */
 @Getter
 @Setter
 @EqualsAndHashCode(callSuper = false)
@@ -149,6 +154,31 @@ public class DebitReversal extends ApiResource implements HasId {
         ApiResource.RequestMethod.POST, url, params, DebitReversal.class, options);
   }
 
+  /** Returns a list of DebitReversals. */
+  public static DebitReversalCollection list(Map<String, Object> params) throws StripeException {
+    return list(params, (RequestOptions) null);
+  }
+
+  /** Returns a list of DebitReversals. */
+  public static DebitReversalCollection list(Map<String, Object> params, RequestOptions options)
+      throws StripeException {
+    String url = String.format("%s%s", Stripe.getApiBase(), "/v1/treasury/debit_reversals");
+    return ApiResource.requestCollection(url, params, DebitReversalCollection.class, options);
+  }
+
+  /** Returns a list of DebitReversals. */
+  public static DebitReversalCollection list(DebitReversalListParams params)
+      throws StripeException {
+    return list(params, (RequestOptions) null);
+  }
+
+  /** Returns a list of DebitReversals. */
+  public static DebitReversalCollection list(DebitReversalListParams params, RequestOptions options)
+      throws StripeException {
+    String url = String.format("%s%s", Stripe.getApiBase(), "/v1/treasury/debit_reversals");
+    return ApiResource.requestCollection(url, params, DebitReversalCollection.class, options);
+  }
+
   /** Retrieves a DebitReversal object. */
   public static DebitReversal retrieve(String debitReversal) throws StripeException {
     return retrieve(debitReversal, (Map<String, Object>) null, (RequestOptions) null);
@@ -186,31 +216,6 @@ public class DebitReversal extends ApiResource implements HasId {
                 "/v1/treasury/debit_reversals/%s", ApiResource.urlEncodeId(debitReversal)));
     return ApiResource.request(
         ApiResource.RequestMethod.GET, url, params, DebitReversal.class, options);
-  }
-
-  /** Returns a list of DebitReversals. */
-  public static DebitReversalCollection list(Map<String, Object> params) throws StripeException {
-    return list(params, (RequestOptions) null);
-  }
-
-  /** Returns a list of DebitReversals. */
-  public static DebitReversalCollection list(Map<String, Object> params, RequestOptions options)
-      throws StripeException {
-    String url = String.format("%s%s", Stripe.getApiBase(), "/v1/treasury/debit_reversals");
-    return ApiResource.requestCollection(url, params, DebitReversalCollection.class, options);
-  }
-
-  /** Returns a list of DebitReversals. */
-  public static DebitReversalCollection list(DebitReversalListParams params)
-      throws StripeException {
-    return list(params, (RequestOptions) null);
-  }
-
-  /** Returns a list of DebitReversals. */
-  public static DebitReversalCollection list(DebitReversalListParams params, RequestOptions options)
-      throws StripeException {
-    String url = String.format("%s%s", Stripe.getApiBase(), "/v1/treasury/debit_reversals");
-    return ApiResource.requestCollection(url, params, DebitReversalCollection.class, options);
   }
 
   @Getter

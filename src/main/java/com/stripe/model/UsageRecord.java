@@ -12,6 +12,13 @@ import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.Setter;
 
+/**
+ * Usage records allow you to report customer usage and metrics to Stripe for metered billing of
+ * subscription prices.
+ *
+ * <p>Related guide: <a href="https://stripe.com/docs/billing/subscriptions/metered-billing">Metered
+ * Billing</a>.
+ */
 @Getter
 @Setter
 @EqualsAndHashCode(callSuper = false)

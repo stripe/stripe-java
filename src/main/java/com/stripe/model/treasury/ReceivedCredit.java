@@ -19,6 +19,11 @@ import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.Setter;
 
+/**
+ * ReceivedCredits represent funds sent to a <a
+ * href="https://stripe.com/docs/api#financial_accounts">FinancialAccount</a> (for example, via ACH
+ * or wire). These money movements are not initiated from the FinancialAccount.
+ */
 @Getter
 @Setter
 @EqualsAndHashCode(callSuper = false)

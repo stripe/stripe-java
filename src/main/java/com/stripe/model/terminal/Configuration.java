@@ -20,6 +20,7 @@ import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.Setter;
 
+/** A Configurations object represents how features should be configured for terminal readers. */
 @Getter
 @Setter
 @EqualsAndHashCode(callSuper = false)
@@ -85,6 +86,33 @@ public class Configuration extends ApiResource implements HasId {
     String url = String.format("%s%s", Stripe.getApiBase(), "/v1/terminal/configurations");
     return ApiResource.request(
         ApiResource.RequestMethod.POST, url, params, Configuration.class, options);
+  }
+
+  /** Deletes a <code>Configuration</code> object. */
+  public Configuration delete() throws StripeException {
+    return delete((Map<String, Object>) null, (RequestOptions) null);
+  }
+
+  /** Deletes a <code>Configuration</code> object. */
+  public Configuration delete(RequestOptions options) throws StripeException {
+    return delete((Map<String, Object>) null, options);
+  }
+
+  /** Deletes a <code>Configuration</code> object. */
+  public Configuration delete(Map<String, Object> params) throws StripeException {
+    return delete(params, (RequestOptions) null);
+  }
+
+  /** Deletes a <code>Configuration</code> object. */
+  public Configuration delete(Map<String, Object> params, RequestOptions options)
+      throws StripeException {
+    String url =
+        String.format(
+            "%s%s",
+            Stripe.getApiBase(),
+            String.format("/v1/terminal/configurations/%s", ApiResource.urlEncodeId(this.getId())));
+    return ApiResource.request(
+        ApiResource.RequestMethod.DELETE, url, params, Configuration.class, options);
   }
 
   /** Returns a list of <code>Configuration</code> objects. */
@@ -183,33 +211,6 @@ public class Configuration extends ApiResource implements HasId {
             String.format("/v1/terminal/configurations/%s", ApiResource.urlEncodeId(this.getId())));
     return ApiResource.request(
         ApiResource.RequestMethod.POST, url, params, Configuration.class, options);
-  }
-
-  /** Deletes a <code>Configuration</code> object. */
-  public Configuration delete() throws StripeException {
-    return delete((Map<String, Object>) null, (RequestOptions) null);
-  }
-
-  /** Deletes a <code>Configuration</code> object. */
-  public Configuration delete(RequestOptions options) throws StripeException {
-    return delete((Map<String, Object>) null, options);
-  }
-
-  /** Deletes a <code>Configuration</code> object. */
-  public Configuration delete(Map<String, Object> params) throws StripeException {
-    return delete(params, (RequestOptions) null);
-  }
-
-  /** Deletes a <code>Configuration</code> object. */
-  public Configuration delete(Map<String, Object> params, RequestOptions options)
-      throws StripeException {
-    String url =
-        String.format(
-            "%s%s",
-            Stripe.getApiBase(),
-            String.format("/v1/terminal/configurations/%s", ApiResource.urlEncodeId(this.getId())));
-    return ApiResource.request(
-        ApiResource.RequestMethod.DELETE, url, params, Configuration.class, options);
   }
 
   @Getter

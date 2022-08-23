@@ -19,6 +19,14 @@ import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.Setter;
 
+/**
+ * To charge a credit or a debit card, you create a {@code Charge} object. You can retrieve and
+ * refund individual charges as well as list all charges. Charges are identified by a unique, random
+ * ID.
+ *
+ * <p>Related guide: <a href="https://stripe.com/docs/payments/accept-a-payment-charges">Accept a
+ * payment with the Charges API</a>.
+ */
 @Getter
 @Setter
 @EqualsAndHashCode(callSuper = false)
@@ -600,228 +608,6 @@ public class Charge extends ApiResource implements MetadataStore<Charge>, Balanc
   }
 
   /**
-   * Search for charges you’ve previously created using Stripe’s <a
-   * href="https://stripe.com/docs/search#search-query-language">Search Query Language</a>. Don’t
-   * use search in read-after-write flows where strict consistency is necessary. Under normal
-   * operating conditions, data is searchable in less than a minute. Occasionally, propagation of
-   * new or updated data can be up to an hour behind during outages. Search functionality is not
-   * available to merchants in India.
-   */
-  public static ChargeSearchResult search(Map<String, Object> params) throws StripeException {
-    return search(params, (RequestOptions) null);
-  }
-
-  /**
-   * Search for charges you’ve previously created using Stripe’s <a
-   * href="https://stripe.com/docs/search#search-query-language">Search Query Language</a>. Don’t
-   * use search in read-after-write flows where strict consistency is necessary. Under normal
-   * operating conditions, data is searchable in less than a minute. Occasionally, propagation of
-   * new or updated data can be up to an hour behind during outages. Search functionality is not
-   * available to merchants in India.
-   */
-  public static ChargeSearchResult search(Map<String, Object> params, RequestOptions options)
-      throws StripeException {
-    String url = String.format("%s%s", Stripe.getApiBase(), "/v1/charges/search");
-    return ApiResource.requestSearchResult(url, params, ChargeSearchResult.class, options);
-  }
-
-  /**
-   * Search for charges you’ve previously created using Stripe’s <a
-   * href="https://stripe.com/docs/search#search-query-language">Search Query Language</a>. Don’t
-   * use search in read-after-write flows where strict consistency is necessary. Under normal
-   * operating conditions, data is searchable in less than a minute. Occasionally, propagation of
-   * new or updated data can be up to an hour behind during outages. Search functionality is not
-   * available to merchants in India.
-   */
-  public static ChargeSearchResult search(ChargeSearchParams params) throws StripeException {
-    return search(params, (RequestOptions) null);
-  }
-
-  /**
-   * Search for charges you’ve previously created using Stripe’s <a
-   * href="https://stripe.com/docs/search#search-query-language">Search Query Language</a>. Don’t
-   * use search in read-after-write flows where strict consistency is necessary. Under normal
-   * operating conditions, data is searchable in less than a minute. Occasionally, propagation of
-   * new or updated data can be up to an hour behind during outages. Search functionality is not
-   * available to merchants in India.
-   */
-  public static ChargeSearchResult search(ChargeSearchParams params, RequestOptions options)
-      throws StripeException {
-    String url = String.format("%s%s", Stripe.getApiBase(), "/v1/charges/search");
-    return ApiResource.requestSearchResult(url, params, ChargeSearchResult.class, options);
-  }
-
-  /**
-   * Returns a list of charges you’ve previously created. The charges are returned in sorted order,
-   * with the most recent charges appearing first.
-   */
-  public static ChargeCollection list(Map<String, Object> params) throws StripeException {
-    return list(params, (RequestOptions) null);
-  }
-
-  /**
-   * Returns a list of charges you’ve previously created. The charges are returned in sorted order,
-   * with the most recent charges appearing first.
-   */
-  public static ChargeCollection list(Map<String, Object> params, RequestOptions options)
-      throws StripeException {
-    String url = String.format("%s%s", Stripe.getApiBase(), "/v1/charges");
-    return ApiResource.requestCollection(url, params, ChargeCollection.class, options);
-  }
-
-  /**
-   * Returns a list of charges you’ve previously created. The charges are returned in sorted order,
-   * with the most recent charges appearing first.
-   */
-  public static ChargeCollection list(ChargeListParams params) throws StripeException {
-    return list(params, (RequestOptions) null);
-  }
-
-  /**
-   * Returns a list of charges you’ve previously created. The charges are returned in sorted order,
-   * with the most recent charges appearing first.
-   */
-  public static ChargeCollection list(ChargeListParams params, RequestOptions options)
-      throws StripeException {
-    String url = String.format("%s%s", Stripe.getApiBase(), "/v1/charges");
-    return ApiResource.requestCollection(url, params, ChargeCollection.class, options);
-  }
-
-  /**
-   * To charge a credit card or other payment source, you create a <code>Charge</code> object. If
-   * your API key is in test mode, the supplied payment source (e.g., card) won’t actually be
-   * charged, although everything else will occur as if in live mode. (Stripe assumes that the
-   * charge would have completed successfully).
-   */
-  public static Charge create(Map<String, Object> params) throws StripeException {
-    return create(params, (RequestOptions) null);
-  }
-
-  /**
-   * To charge a credit card or other payment source, you create a <code>Charge</code> object. If
-   * your API key is in test mode, the supplied payment source (e.g., card) won’t actually be
-   * charged, although everything else will occur as if in live mode. (Stripe assumes that the
-   * charge would have completed successfully).
-   */
-  public static Charge create(Map<String, Object> params, RequestOptions options)
-      throws StripeException {
-    String url = String.format("%s%s", Stripe.getApiBase(), "/v1/charges");
-    return ApiResource.request(ApiResource.RequestMethod.POST, url, params, Charge.class, options);
-  }
-
-  /**
-   * To charge a credit card or other payment source, you create a <code>Charge</code> object. If
-   * your API key is in test mode, the supplied payment source (e.g., card) won’t actually be
-   * charged, although everything else will occur as if in live mode. (Stripe assumes that the
-   * charge would have completed successfully).
-   */
-  public static Charge create(ChargeCreateParams params) throws StripeException {
-    return create(params, (RequestOptions) null);
-  }
-
-  /**
-   * To charge a credit card or other payment source, you create a <code>Charge</code> object. If
-   * your API key is in test mode, the supplied payment source (e.g., card) won’t actually be
-   * charged, although everything else will occur as if in live mode. (Stripe assumes that the
-   * charge would have completed successfully).
-   */
-  public static Charge create(ChargeCreateParams params, RequestOptions options)
-      throws StripeException {
-    String url = String.format("%s%s", Stripe.getApiBase(), "/v1/charges");
-    return ApiResource.request(ApiResource.RequestMethod.POST, url, params, Charge.class, options);
-  }
-
-  /**
-   * Retrieves the details of a charge that has previously been created. Supply the unique charge ID
-   * that was returned from your previous request, and Stripe will return the corresponding charge
-   * information. The same information is returned when creating or refunding the charge.
-   */
-  public static Charge retrieve(String charge) throws StripeException {
-    return retrieve(charge, (Map<String, Object>) null, (RequestOptions) null);
-  }
-
-  /**
-   * Retrieves the details of a charge that has previously been created. Supply the unique charge ID
-   * that was returned from your previous request, and Stripe will return the corresponding charge
-   * information. The same information is returned when creating or refunding the charge.
-   */
-  public static Charge retrieve(String charge, RequestOptions options) throws StripeException {
-    return retrieve(charge, (Map<String, Object>) null, options);
-  }
-
-  /**
-   * Retrieves the details of a charge that has previously been created. Supply the unique charge ID
-   * that was returned from your previous request, and Stripe will return the corresponding charge
-   * information. The same information is returned when creating or refunding the charge.
-   */
-  public static Charge retrieve(String charge, Map<String, Object> params, RequestOptions options)
-      throws StripeException {
-    String url =
-        String.format(
-            "%s%s",
-            Stripe.getApiBase(), String.format("/v1/charges/%s", ApiResource.urlEncodeId(charge)));
-    return ApiResource.request(ApiResource.RequestMethod.GET, url, params, Charge.class, options);
-  }
-
-  /**
-   * Retrieves the details of a charge that has previously been created. Supply the unique charge ID
-   * that was returned from your previous request, and Stripe will return the corresponding charge
-   * information. The same information is returned when creating or refunding the charge.
-   */
-  public static Charge retrieve(String charge, ChargeRetrieveParams params, RequestOptions options)
-      throws StripeException {
-    String url =
-        String.format(
-            "%s%s",
-            Stripe.getApiBase(), String.format("/v1/charges/%s", ApiResource.urlEncodeId(charge)));
-    return ApiResource.request(ApiResource.RequestMethod.GET, url, params, Charge.class, options);
-  }
-
-  /**
-   * Updates the specified charge by setting the values of the parameters passed. Any parameters not
-   * provided will be left unchanged.
-   */
-  @Override
-  public Charge update(Map<String, Object> params) throws StripeException {
-    return update(params, (RequestOptions) null);
-  }
-
-  /**
-   * Updates the specified charge by setting the values of the parameters passed. Any parameters not
-   * provided will be left unchanged.
-   */
-  @Override
-  public Charge update(Map<String, Object> params, RequestOptions options) throws StripeException {
-    String url =
-        String.format(
-            "%s%s",
-            Stripe.getApiBase(),
-            String.format("/v1/charges/%s", ApiResource.urlEncodeId(this.getId())));
-    return ApiResource.request(ApiResource.RequestMethod.POST, url, params, Charge.class, options);
-  }
-
-  /**
-   * Updates the specified charge by setting the values of the parameters passed. Any parameters not
-   * provided will be left unchanged.
-   */
-  public Charge update(ChargeUpdateParams params) throws StripeException {
-    return update(params, (RequestOptions) null);
-  }
-
-  /**
-   * Updates the specified charge by setting the values of the parameters passed. Any parameters not
-   * provided will be left unchanged.
-   */
-  public Charge update(ChargeUpdateParams params, RequestOptions options) throws StripeException {
-    String url =
-        String.format(
-            "%s%s",
-            Stripe.getApiBase(),
-            String.format("/v1/charges/%s", ApiResource.urlEncodeId(this.getId())));
-    return ApiResource.request(ApiResource.RequestMethod.POST, url, params, Charge.class, options);
-  }
-
-  /**
    * Capture the payment of an existing, uncaptured, charge. This is the second half of the two-step
    * payment flow, where first you <a href="https://stripe.com/docs/api#create_charge">created a
    * charge</a> with the capture option set to false.
@@ -912,6 +698,228 @@ public class Charge extends ApiResource implements MetadataStore<Charge>, Balanc
             "%s%s",
             Stripe.getApiBase(),
             String.format("/v1/charges/%s/capture", ApiResource.urlEncodeId(this.getId())));
+    return ApiResource.request(ApiResource.RequestMethod.POST, url, params, Charge.class, options);
+  }
+
+  /**
+   * To charge a credit card or other payment source, you create a <code>Charge</code> object. If
+   * your API key is in test mode, the supplied payment source (e.g., card) won’t actually be
+   * charged, although everything else will occur as if in live mode. (Stripe assumes that the
+   * charge would have completed successfully).
+   */
+  public static Charge create(Map<String, Object> params) throws StripeException {
+    return create(params, (RequestOptions) null);
+  }
+
+  /**
+   * To charge a credit card or other payment source, you create a <code>Charge</code> object. If
+   * your API key is in test mode, the supplied payment source (e.g., card) won’t actually be
+   * charged, although everything else will occur as if in live mode. (Stripe assumes that the
+   * charge would have completed successfully).
+   */
+  public static Charge create(Map<String, Object> params, RequestOptions options)
+      throws StripeException {
+    String url = String.format("%s%s", Stripe.getApiBase(), "/v1/charges");
+    return ApiResource.request(ApiResource.RequestMethod.POST, url, params, Charge.class, options);
+  }
+
+  /**
+   * To charge a credit card or other payment source, you create a <code>Charge</code> object. If
+   * your API key is in test mode, the supplied payment source (e.g., card) won’t actually be
+   * charged, although everything else will occur as if in live mode. (Stripe assumes that the
+   * charge would have completed successfully).
+   */
+  public static Charge create(ChargeCreateParams params) throws StripeException {
+    return create(params, (RequestOptions) null);
+  }
+
+  /**
+   * To charge a credit card or other payment source, you create a <code>Charge</code> object. If
+   * your API key is in test mode, the supplied payment source (e.g., card) won’t actually be
+   * charged, although everything else will occur as if in live mode. (Stripe assumes that the
+   * charge would have completed successfully).
+   */
+  public static Charge create(ChargeCreateParams params, RequestOptions options)
+      throws StripeException {
+    String url = String.format("%s%s", Stripe.getApiBase(), "/v1/charges");
+    return ApiResource.request(ApiResource.RequestMethod.POST, url, params, Charge.class, options);
+  }
+
+  /**
+   * Returns a list of charges you’ve previously created. The charges are returned in sorted order,
+   * with the most recent charges appearing first.
+   */
+  public static ChargeCollection list(Map<String, Object> params) throws StripeException {
+    return list(params, (RequestOptions) null);
+  }
+
+  /**
+   * Returns a list of charges you’ve previously created. The charges are returned in sorted order,
+   * with the most recent charges appearing first.
+   */
+  public static ChargeCollection list(Map<String, Object> params, RequestOptions options)
+      throws StripeException {
+    String url = String.format("%s%s", Stripe.getApiBase(), "/v1/charges");
+    return ApiResource.requestCollection(url, params, ChargeCollection.class, options);
+  }
+
+  /**
+   * Returns a list of charges you’ve previously created. The charges are returned in sorted order,
+   * with the most recent charges appearing first.
+   */
+  public static ChargeCollection list(ChargeListParams params) throws StripeException {
+    return list(params, (RequestOptions) null);
+  }
+
+  /**
+   * Returns a list of charges you’ve previously created. The charges are returned in sorted order,
+   * with the most recent charges appearing first.
+   */
+  public static ChargeCollection list(ChargeListParams params, RequestOptions options)
+      throws StripeException {
+    String url = String.format("%s%s", Stripe.getApiBase(), "/v1/charges");
+    return ApiResource.requestCollection(url, params, ChargeCollection.class, options);
+  }
+
+  /**
+   * Retrieves the details of a charge that has previously been created. Supply the unique charge ID
+   * that was returned from your previous request, and Stripe will return the corresponding charge
+   * information. The same information is returned when creating or refunding the charge.
+   */
+  public static Charge retrieve(String charge) throws StripeException {
+    return retrieve(charge, (Map<String, Object>) null, (RequestOptions) null);
+  }
+
+  /**
+   * Retrieves the details of a charge that has previously been created. Supply the unique charge ID
+   * that was returned from your previous request, and Stripe will return the corresponding charge
+   * information. The same information is returned when creating or refunding the charge.
+   */
+  public static Charge retrieve(String charge, RequestOptions options) throws StripeException {
+    return retrieve(charge, (Map<String, Object>) null, options);
+  }
+
+  /**
+   * Retrieves the details of a charge that has previously been created. Supply the unique charge ID
+   * that was returned from your previous request, and Stripe will return the corresponding charge
+   * information. The same information is returned when creating or refunding the charge.
+   */
+  public static Charge retrieve(String charge, Map<String, Object> params, RequestOptions options)
+      throws StripeException {
+    String url =
+        String.format(
+            "%s%s",
+            Stripe.getApiBase(), String.format("/v1/charges/%s", ApiResource.urlEncodeId(charge)));
+    return ApiResource.request(ApiResource.RequestMethod.GET, url, params, Charge.class, options);
+  }
+
+  /**
+   * Retrieves the details of a charge that has previously been created. Supply the unique charge ID
+   * that was returned from your previous request, and Stripe will return the corresponding charge
+   * information. The same information is returned when creating or refunding the charge.
+   */
+  public static Charge retrieve(String charge, ChargeRetrieveParams params, RequestOptions options)
+      throws StripeException {
+    String url =
+        String.format(
+            "%s%s",
+            Stripe.getApiBase(), String.format("/v1/charges/%s", ApiResource.urlEncodeId(charge)));
+    return ApiResource.request(ApiResource.RequestMethod.GET, url, params, Charge.class, options);
+  }
+
+  /**
+   * Search for charges you’ve previously created using Stripe’s <a
+   * href="https://stripe.com/docs/search#search-query-language">Search Query Language</a>. Don’t
+   * use search in read-after-write flows where strict consistency is necessary. Under normal
+   * operating conditions, data is searchable in less than a minute. Occasionally, propagation of
+   * new or updated data can be up to an hour behind during outages. Search functionality is not
+   * available to merchants in India.
+   */
+  public static ChargeSearchResult search(Map<String, Object> params) throws StripeException {
+    return search(params, (RequestOptions) null);
+  }
+
+  /**
+   * Search for charges you’ve previously created using Stripe’s <a
+   * href="https://stripe.com/docs/search#search-query-language">Search Query Language</a>. Don’t
+   * use search in read-after-write flows where strict consistency is necessary. Under normal
+   * operating conditions, data is searchable in less than a minute. Occasionally, propagation of
+   * new or updated data can be up to an hour behind during outages. Search functionality is not
+   * available to merchants in India.
+   */
+  public static ChargeSearchResult search(Map<String, Object> params, RequestOptions options)
+      throws StripeException {
+    String url = String.format("%s%s", Stripe.getApiBase(), "/v1/charges/search");
+    return ApiResource.requestSearchResult(url, params, ChargeSearchResult.class, options);
+  }
+
+  /**
+   * Search for charges you’ve previously created using Stripe’s <a
+   * href="https://stripe.com/docs/search#search-query-language">Search Query Language</a>. Don’t
+   * use search in read-after-write flows where strict consistency is necessary. Under normal
+   * operating conditions, data is searchable in less than a minute. Occasionally, propagation of
+   * new or updated data can be up to an hour behind during outages. Search functionality is not
+   * available to merchants in India.
+   */
+  public static ChargeSearchResult search(ChargeSearchParams params) throws StripeException {
+    return search(params, (RequestOptions) null);
+  }
+
+  /**
+   * Search for charges you’ve previously created using Stripe’s <a
+   * href="https://stripe.com/docs/search#search-query-language">Search Query Language</a>. Don’t
+   * use search in read-after-write flows where strict consistency is necessary. Under normal
+   * operating conditions, data is searchable in less than a minute. Occasionally, propagation of
+   * new or updated data can be up to an hour behind during outages. Search functionality is not
+   * available to merchants in India.
+   */
+  public static ChargeSearchResult search(ChargeSearchParams params, RequestOptions options)
+      throws StripeException {
+    String url = String.format("%s%s", Stripe.getApiBase(), "/v1/charges/search");
+    return ApiResource.requestSearchResult(url, params, ChargeSearchResult.class, options);
+  }
+
+  /**
+   * Updates the specified charge by setting the values of the parameters passed. Any parameters not
+   * provided will be left unchanged.
+   */
+  @Override
+  public Charge update(Map<String, Object> params) throws StripeException {
+    return update(params, (RequestOptions) null);
+  }
+
+  /**
+   * Updates the specified charge by setting the values of the parameters passed. Any parameters not
+   * provided will be left unchanged.
+   */
+  @Override
+  public Charge update(Map<String, Object> params, RequestOptions options) throws StripeException {
+    String url =
+        String.format(
+            "%s%s",
+            Stripe.getApiBase(),
+            String.format("/v1/charges/%s", ApiResource.urlEncodeId(this.getId())));
+    return ApiResource.request(ApiResource.RequestMethod.POST, url, params, Charge.class, options);
+  }
+
+  /**
+   * Updates the specified charge by setting the values of the parameters passed. Any parameters not
+   * provided will be left unchanged.
+   */
+  public Charge update(ChargeUpdateParams params) throws StripeException {
+    return update(params, (RequestOptions) null);
+  }
+
+  /**
+   * Updates the specified charge by setting the values of the parameters passed. Any parameters not
+   * provided will be left unchanged.
+   */
+  public Charge update(ChargeUpdateParams params, RequestOptions options) throws StripeException {
+    String url =
+        String.format(
+            "%s%s",
+            Stripe.getApiBase(),
+            String.format("/v1/charges/%s", ApiResource.urlEncodeId(this.getId())));
     return ApiResource.request(ApiResource.RequestMethod.POST, url, params, Charge.class, options);
   }
 
@@ -2658,6 +2666,10 @@ public class Charge extends ApiResource implements MetadataStore<Charge>, Balanc
     }
   }
 
+  /**
+   * Options to configure Radar. See <a href="https://stripe.com/docs/radar/radar-session">Radar
+   * Session</a> for more information.
+   */
   @Getter
   @Setter
   @EqualsAndHashCode(callSuper = false)

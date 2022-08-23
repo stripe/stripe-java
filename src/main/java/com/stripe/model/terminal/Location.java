@@ -18,6 +18,12 @@ import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.Setter;
 
+/**
+ * A Location represents a grouping of readers.
+ *
+ * <p>Related guide: <a href="https://stripe.com/docs/terminal/fleet/locations">Fleet
+ * Management</a>.
+ */
 @Getter
 @Setter
 @EqualsAndHashCode(callSuper = false)
@@ -66,39 +72,6 @@ public class Location extends ApiResource implements HasId, MetadataStore<Locati
   @SerializedName("object")
   String object;
 
-  /** Retrieves a <code>Location</code> object. */
-  public static Location retrieve(String location) throws StripeException {
-    return retrieve(location, (Map<String, Object>) null, (RequestOptions) null);
-  }
-
-  /** Retrieves a <code>Location</code> object. */
-  public static Location retrieve(String location, RequestOptions options) throws StripeException {
-    return retrieve(location, (Map<String, Object>) null, options);
-  }
-
-  /** Retrieves a <code>Location</code> object. */
-  public static Location retrieve(
-      String location, Map<String, Object> params, RequestOptions options) throws StripeException {
-    String url =
-        String.format(
-            "%s%s",
-            Stripe.getApiBase(),
-            String.format("/v1/terminal/locations/%s", ApiResource.urlEncodeId(location)));
-    return ApiResource.request(ApiResource.RequestMethod.GET, url, params, Location.class, options);
-  }
-
-  /** Retrieves a <code>Location</code> object. */
-  public static Location retrieve(
-      String location, LocationRetrieveParams params, RequestOptions options)
-      throws StripeException {
-    String url =
-        String.format(
-            "%s%s",
-            Stripe.getApiBase(),
-            String.format("/v1/terminal/locations/%s", ApiResource.urlEncodeId(location)));
-    return ApiResource.request(ApiResource.RequestMethod.GET, url, params, Location.class, options);
-  }
-
   /**
    * Creates a new <code>Location</code> object. For further details, including which address fields
    * are required in each country, see the <a
@@ -139,6 +112,90 @@ public class Location extends ApiResource implements HasId, MetadataStore<Locati
     String url = String.format("%s%s", Stripe.getApiBase(), "/v1/terminal/locations");
     return ApiResource.request(
         ApiResource.RequestMethod.POST, url, params, Location.class, options);
+  }
+
+  /** Deletes a <code>Location</code> object. */
+  public Location delete() throws StripeException {
+    return delete((Map<String, Object>) null, (RequestOptions) null);
+  }
+
+  /** Deletes a <code>Location</code> object. */
+  public Location delete(RequestOptions options) throws StripeException {
+    return delete((Map<String, Object>) null, options);
+  }
+
+  /** Deletes a <code>Location</code> object. */
+  public Location delete(Map<String, Object> params) throws StripeException {
+    return delete(params, (RequestOptions) null);
+  }
+
+  /** Deletes a <code>Location</code> object. */
+  public Location delete(Map<String, Object> params, RequestOptions options)
+      throws StripeException {
+    String url =
+        String.format(
+            "%s%s",
+            Stripe.getApiBase(),
+            String.format("/v1/terminal/locations/%s", ApiResource.urlEncodeId(this.getId())));
+    return ApiResource.request(
+        ApiResource.RequestMethod.DELETE, url, params, Location.class, options);
+  }
+
+  /** Returns a list of <code>Location</code> objects. */
+  public static LocationCollection list(Map<String, Object> params) throws StripeException {
+    return list(params, (RequestOptions) null);
+  }
+
+  /** Returns a list of <code>Location</code> objects. */
+  public static LocationCollection list(Map<String, Object> params, RequestOptions options)
+      throws StripeException {
+    String url = String.format("%s%s", Stripe.getApiBase(), "/v1/terminal/locations");
+    return ApiResource.requestCollection(url, params, LocationCollection.class, options);
+  }
+
+  /** Returns a list of <code>Location</code> objects. */
+  public static LocationCollection list(LocationListParams params) throws StripeException {
+    return list(params, (RequestOptions) null);
+  }
+
+  /** Returns a list of <code>Location</code> objects. */
+  public static LocationCollection list(LocationListParams params, RequestOptions options)
+      throws StripeException {
+    String url = String.format("%s%s", Stripe.getApiBase(), "/v1/terminal/locations");
+    return ApiResource.requestCollection(url, params, LocationCollection.class, options);
+  }
+
+  /** Retrieves a <code>Location</code> object. */
+  public static Location retrieve(String location) throws StripeException {
+    return retrieve(location, (Map<String, Object>) null, (RequestOptions) null);
+  }
+
+  /** Retrieves a <code>Location</code> object. */
+  public static Location retrieve(String location, RequestOptions options) throws StripeException {
+    return retrieve(location, (Map<String, Object>) null, options);
+  }
+
+  /** Retrieves a <code>Location</code> object. */
+  public static Location retrieve(
+      String location, Map<String, Object> params, RequestOptions options) throws StripeException {
+    String url =
+        String.format(
+            "%s%s",
+            Stripe.getApiBase(),
+            String.format("/v1/terminal/locations/%s", ApiResource.urlEncodeId(location)));
+    return ApiResource.request(ApiResource.RequestMethod.GET, url, params, Location.class, options);
+  }
+
+  /** Retrieves a <code>Location</code> object. */
+  public static Location retrieve(
+      String location, LocationRetrieveParams params, RequestOptions options)
+      throws StripeException {
+    String url =
+        String.format(
+            "%s%s",
+            Stripe.getApiBase(),
+            String.format("/v1/terminal/locations/%s", ApiResource.urlEncodeId(location)));
+    return ApiResource.request(ApiResource.RequestMethod.GET, url, params, Location.class, options);
   }
 
   /**
@@ -187,56 +244,5 @@ public class Location extends ApiResource implements HasId, MetadataStore<Locati
             String.format("/v1/terminal/locations/%s", ApiResource.urlEncodeId(this.getId())));
     return ApiResource.request(
         ApiResource.RequestMethod.POST, url, params, Location.class, options);
-  }
-
-  /** Returns a list of <code>Location</code> objects. */
-  public static LocationCollection list(Map<String, Object> params) throws StripeException {
-    return list(params, (RequestOptions) null);
-  }
-
-  /** Returns a list of <code>Location</code> objects. */
-  public static LocationCollection list(Map<String, Object> params, RequestOptions options)
-      throws StripeException {
-    String url = String.format("%s%s", Stripe.getApiBase(), "/v1/terminal/locations");
-    return ApiResource.requestCollection(url, params, LocationCollection.class, options);
-  }
-
-  /** Returns a list of <code>Location</code> objects. */
-  public static LocationCollection list(LocationListParams params) throws StripeException {
-    return list(params, (RequestOptions) null);
-  }
-
-  /** Returns a list of <code>Location</code> objects. */
-  public static LocationCollection list(LocationListParams params, RequestOptions options)
-      throws StripeException {
-    String url = String.format("%s%s", Stripe.getApiBase(), "/v1/terminal/locations");
-    return ApiResource.requestCollection(url, params, LocationCollection.class, options);
-  }
-
-  /** Deletes a <code>Location</code> object. */
-  public Location delete() throws StripeException {
-    return delete((Map<String, Object>) null, (RequestOptions) null);
-  }
-
-  /** Deletes a <code>Location</code> object. */
-  public Location delete(RequestOptions options) throws StripeException {
-    return delete((Map<String, Object>) null, options);
-  }
-
-  /** Deletes a <code>Location</code> object. */
-  public Location delete(Map<String, Object> params) throws StripeException {
-    return delete(params, (RequestOptions) null);
-  }
-
-  /** Deletes a <code>Location</code> object. */
-  public Location delete(Map<String, Object> params, RequestOptions options)
-      throws StripeException {
-    String url =
-        String.format(
-            "%s%s",
-            Stripe.getApiBase(),
-            String.format("/v1/terminal/locations/%s", ApiResource.urlEncodeId(this.getId())));
-    return ApiResource.request(
-        ApiResource.RequestMethod.DELETE, url, params, Location.class, options);
   }
 }

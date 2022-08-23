@@ -23,6 +23,13 @@ import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.Setter;
 
+/**
+ * As a <a href="https://stripe.com/docs/issuing">card issuer</a>, you can dispute transactions that
+ * the cardholder does not recognize, suspects to be fraudulent, or has other issues with.
+ *
+ * <p>Related guide: <a href="https://stripe.com/docs/issuing/purchases/disputes">Disputing
+ * Transactions</a>
+ */
 @Getter
 @Setter
 @EqualsAndHashCode(callSuper = false)
@@ -121,42 +128,6 @@ public class Dispute extends ApiResource
   }
 
   /**
-   * Returns a list of Issuing <code>Dispute</code> objects. The objects are sorted in descending
-   * order by creation date, with the most recently created object appearing first.
-   */
-  public static DisputeCollection list(Map<String, Object> params) throws StripeException {
-    return list(params, (RequestOptions) null);
-  }
-
-  /**
-   * Returns a list of Issuing <code>Dispute</code> objects. The objects are sorted in descending
-   * order by creation date, with the most recently created object appearing first.
-   */
-  public static DisputeCollection list(Map<String, Object> params, RequestOptions options)
-      throws StripeException {
-    String url = String.format("%s%s", Stripe.getApiBase(), "/v1/issuing/disputes");
-    return ApiResource.requestCollection(url, params, DisputeCollection.class, options);
-  }
-
-  /**
-   * Returns a list of Issuing <code>Dispute</code> objects. The objects are sorted in descending
-   * order by creation date, with the most recently created object appearing first.
-   */
-  public static DisputeCollection list(DisputeListParams params) throws StripeException {
-    return list(params, (RequestOptions) null);
-  }
-
-  /**
-   * Returns a list of Issuing <code>Dispute</code> objects. The objects are sorted in descending
-   * order by creation date, with the most recently created object appearing first.
-   */
-  public static DisputeCollection list(DisputeListParams params, RequestOptions options)
-      throws StripeException {
-    String url = String.format("%s%s", Stripe.getApiBase(), "/v1/issuing/disputes");
-    return ApiResource.requestCollection(url, params, DisputeCollection.class, options);
-  }
-
-  /**
    * Creates an Issuing <code>Dispute</code> object. Individual pieces of evidence within the <code>
    * evidence</code> object are optional at this point. Stripe only validates that required evidence
    * is present during submission. Refer to <a
@@ -205,51 +176,39 @@ public class Dispute extends ApiResource
   }
 
   /**
-   * Updates the specified Issuing <code>Dispute</code> object by setting the values of the
-   * parameters passed. Any parameters not provided will be left unchanged. Properties on the <code>
-   * evidence</code> object can be unset by passing in an empty string.
+   * Returns a list of Issuing <code>Dispute</code> objects. The objects are sorted in descending
+   * order by creation date, with the most recently created object appearing first.
    */
-  @Override
-  public Dispute update(Map<String, Object> params) throws StripeException {
-    return update(params, (RequestOptions) null);
+  public static DisputeCollection list(Map<String, Object> params) throws StripeException {
+    return list(params, (RequestOptions) null);
   }
 
   /**
-   * Updates the specified Issuing <code>Dispute</code> object by setting the values of the
-   * parameters passed. Any parameters not provided will be left unchanged. Properties on the <code>
-   * evidence</code> object can be unset by passing in an empty string.
+   * Returns a list of Issuing <code>Dispute</code> objects. The objects are sorted in descending
+   * order by creation date, with the most recently created object appearing first.
    */
-  @Override
-  public Dispute update(Map<String, Object> params, RequestOptions options) throws StripeException {
-    String url =
-        String.format(
-            "%s%s",
-            Stripe.getApiBase(),
-            String.format("/v1/issuing/disputes/%s", ApiResource.urlEncodeId(this.getId())));
-    return ApiResource.request(ApiResource.RequestMethod.POST, url, params, Dispute.class, options);
+  public static DisputeCollection list(Map<String, Object> params, RequestOptions options)
+      throws StripeException {
+    String url = String.format("%s%s", Stripe.getApiBase(), "/v1/issuing/disputes");
+    return ApiResource.requestCollection(url, params, DisputeCollection.class, options);
   }
 
   /**
-   * Updates the specified Issuing <code>Dispute</code> object by setting the values of the
-   * parameters passed. Any parameters not provided will be left unchanged. Properties on the <code>
-   * evidence</code> object can be unset by passing in an empty string.
+   * Returns a list of Issuing <code>Dispute</code> objects. The objects are sorted in descending
+   * order by creation date, with the most recently created object appearing first.
    */
-  public Dispute update(DisputeUpdateParams params) throws StripeException {
-    return update(params, (RequestOptions) null);
+  public static DisputeCollection list(DisputeListParams params) throws StripeException {
+    return list(params, (RequestOptions) null);
   }
 
   /**
-   * Updates the specified Issuing <code>Dispute</code> object by setting the values of the
-   * parameters passed. Any parameters not provided will be left unchanged. Properties on the <code>
-   * evidence</code> object can be unset by passing in an empty string.
+   * Returns a list of Issuing <code>Dispute</code> objects. The objects are sorted in descending
+   * order by creation date, with the most recently created object appearing first.
    */
-  public Dispute update(DisputeUpdateParams params, RequestOptions options) throws StripeException {
-    String url =
-        String.format(
-            "%s%s",
-            Stripe.getApiBase(),
-            String.format("/v1/issuing/disputes/%s", ApiResource.urlEncodeId(this.getId())));
-    return ApiResource.request(ApiResource.RequestMethod.POST, url, params, Dispute.class, options);
+  public static DisputeCollection list(DisputeListParams params, RequestOptions options)
+      throws StripeException {
+    String url = String.format("%s%s", Stripe.getApiBase(), "/v1/issuing/disputes");
+    return ApiResource.requestCollection(url, params, DisputeCollection.class, options);
   }
 
   /** Retrieves an Issuing <code>Dispute</code> object. */
@@ -354,6 +313,54 @@ public class Dispute extends ApiResource
     return ApiResource.request(ApiResource.RequestMethod.POST, url, params, Dispute.class, options);
   }
 
+  /**
+   * Updates the specified Issuing <code>Dispute</code> object by setting the values of the
+   * parameters passed. Any parameters not provided will be left unchanged. Properties on the <code>
+   * evidence</code> object can be unset by passing in an empty string.
+   */
+  @Override
+  public Dispute update(Map<String, Object> params) throws StripeException {
+    return update(params, (RequestOptions) null);
+  }
+
+  /**
+   * Updates the specified Issuing <code>Dispute</code> object by setting the values of the
+   * parameters passed. Any parameters not provided will be left unchanged. Properties on the <code>
+   * evidence</code> object can be unset by passing in an empty string.
+   */
+  @Override
+  public Dispute update(Map<String, Object> params, RequestOptions options) throws StripeException {
+    String url =
+        String.format(
+            "%s%s",
+            Stripe.getApiBase(),
+            String.format("/v1/issuing/disputes/%s", ApiResource.urlEncodeId(this.getId())));
+    return ApiResource.request(ApiResource.RequestMethod.POST, url, params, Dispute.class, options);
+  }
+
+  /**
+   * Updates the specified Issuing <code>Dispute</code> object by setting the values of the
+   * parameters passed. Any parameters not provided will be left unchanged. Properties on the <code>
+   * evidence</code> object can be unset by passing in an empty string.
+   */
+  public Dispute update(DisputeUpdateParams params) throws StripeException {
+    return update(params, (RequestOptions) null);
+  }
+
+  /**
+   * Updates the specified Issuing <code>Dispute</code> object by setting the values of the
+   * parameters passed. Any parameters not provided will be left unchanged. Properties on the <code>
+   * evidence</code> object can be unset by passing in an empty string.
+   */
+  public Dispute update(DisputeUpdateParams params, RequestOptions options) throws StripeException {
+    String url =
+        String.format(
+            "%s%s",
+            Stripe.getApiBase(),
+            String.format("/v1/issuing/disputes/%s", ApiResource.urlEncodeId(this.getId())));
+    return ApiResource.request(ApiResource.RequestMethod.POST, url, params, Dispute.class, options);
+  }
+
   @Getter
   @Setter
   @EqualsAndHashCode(callSuper = false)
@@ -434,10 +441,6 @@ public class Dispute extends ApiResource
       @SerializedName("product_type")
       String productType;
 
-      /** Date when the product was returned or attempted to be returned. */
-      @SerializedName("returned_at")
-      Long returnedAt;
-
       /**
        * Result of cardholder's attempt to return the product.
        *
@@ -445,6 +448,10 @@ public class Dispute extends ApiResource
        */
       @SerializedName("return_status")
       String returnStatus;
+
+      /** Date when the product was returned or attempted to be returned. */
+      @SerializedName("returned_at")
+      Long returnedAt;
 
       /** Get ID of expandable {@code additionalDocumentation} object. */
       public String getAdditionalDocumentation() {
@@ -662,10 +669,6 @@ public class Dispute extends ApiResource
       @SerializedName("return_description")
       String returnDescription;
 
-      /** Date when the product was returned or attempted to be returned. */
-      @SerializedName("returned_at")
-      Long returnedAt;
-
       /**
        * Result of cardholder's attempt to return the product.
        *
@@ -673,6 +676,10 @@ public class Dispute extends ApiResource
        */
       @SerializedName("return_status")
       String returnStatus;
+
+      /** Date when the product was returned or attempted to be returned. */
+      @SerializedName("returned_at")
+      Long returnedAt;
 
       /** Get ID of expandable {@code additionalDocumentation} object. */
       public String getAdditionalDocumentation() {

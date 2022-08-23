@@ -12,6 +12,15 @@ import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.Setter;
 
+/**
+ * {@code Application Fee Refund} objects allow you to refund an application fee that has previously
+ * been created but not yet refunded. Funds will be refunded to the Stripe account from which the
+ * fee was originally collected.
+ *
+ * <p>Related guide: <a
+ * href="https://stripe.com/docs/connect/destination-charges#refunding-app-fee">Refunding
+ * Application Fees</a>.
+ */
 @Getter
 @Setter
 @EqualsAndHashCode(callSuper = false)

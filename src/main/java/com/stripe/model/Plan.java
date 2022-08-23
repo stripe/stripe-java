@@ -17,6 +17,25 @@ import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.Setter;
 
+/**
+ * You can now model subscriptions more flexibly using the <a
+ * href="https://stripe.com/docs/api#prices">Prices API</a>. It replaces the Plans API and is
+ * backwards compatible to simplify your migration.
+ *
+ * <p>Plans define the base price, currency, and billing cycle for recurring purchases of products.
+ * <a href="https://stripe.com/docs/api#products">Products</a> help you track inventory or
+ * provisioning, and plans help you track pricing. Different physical goods or levels of service
+ * should be represented by products, and pricing options should be represented by plans. This
+ * approach lets you change prices without having to change your provisioning scheme.
+ *
+ * <p>For example, you might have a single &quot;gold&quot; product that has plans for $10/month,
+ * $100/year, €9/month, and €90/year.
+ *
+ * <p>Related guides: <a
+ * href="https://stripe.com/docs/billing/subscriptions/set-up-subscription">Set up a
+ * subscription</a> and more about <a
+ * href="https://stripe.com/docs/products-prices/overview">products and prices</a>.
+ */
 @Getter
 @Setter
 @EqualsAndHashCode(callSuper = false)
@@ -192,30 +211,6 @@ public class Plan extends ApiResource implements HasId, MetadataStore<Plan> {
     this.product = new ExpandableField<Product>(expandableObject.getId(), expandableObject);
   }
 
-  /** Returns a list of your plans. */
-  public static PlanCollection list(Map<String, Object> params) throws StripeException {
-    return list(params, (RequestOptions) null);
-  }
-
-  /** Returns a list of your plans. */
-  public static PlanCollection list(Map<String, Object> params, RequestOptions options)
-      throws StripeException {
-    String url = String.format("%s%s", Stripe.getApiBase(), "/v1/plans");
-    return ApiResource.requestCollection(url, params, PlanCollection.class, options);
-  }
-
-  /** Returns a list of your plans. */
-  public static PlanCollection list(PlanListParams params) throws StripeException {
-    return list(params, (RequestOptions) null);
-  }
-
-  /** Returns a list of your plans. */
-  public static PlanCollection list(PlanListParams params, RequestOptions options)
-      throws StripeException {
-    String url = String.format("%s%s", Stripe.getApiBase(), "/v1/plans");
-    return ApiResource.requestCollection(url, params, PlanCollection.class, options);
-  }
-
   /**
    * You can now model subscriptions more flexibly using the <a
    * href="https://stripe.com/docs/api#prices">Prices API</a>. It replaces the Plans API and is
@@ -254,6 +249,55 @@ public class Plan extends ApiResource implements HasId, MetadataStore<Plan> {
       throws StripeException {
     String url = String.format("%s%s", Stripe.getApiBase(), "/v1/plans");
     return ApiResource.request(ApiResource.RequestMethod.POST, url, params, Plan.class, options);
+  }
+
+  /** Deleting plans means new subscribers can’t be added. Existing subscribers aren’t affected. */
+  public Plan delete() throws StripeException {
+    return delete((Map<String, Object>) null, (RequestOptions) null);
+  }
+
+  /** Deleting plans means new subscribers can’t be added. Existing subscribers aren’t affected. */
+  public Plan delete(RequestOptions options) throws StripeException {
+    return delete((Map<String, Object>) null, options);
+  }
+
+  /** Deleting plans means new subscribers can’t be added. Existing subscribers aren’t affected. */
+  public Plan delete(Map<String, Object> params) throws StripeException {
+    return delete(params, (RequestOptions) null);
+  }
+
+  /** Deleting plans means new subscribers can’t be added. Existing subscribers aren’t affected. */
+  public Plan delete(Map<String, Object> params, RequestOptions options) throws StripeException {
+    String url =
+        String.format(
+            "%s%s",
+            Stripe.getApiBase(),
+            String.format("/v1/plans/%s", ApiResource.urlEncodeId(this.getId())));
+    return ApiResource.request(ApiResource.RequestMethod.DELETE, url, params, Plan.class, options);
+  }
+
+  /** Returns a list of your plans. */
+  public static PlanCollection list(Map<String, Object> params) throws StripeException {
+    return list(params, (RequestOptions) null);
+  }
+
+  /** Returns a list of your plans. */
+  public static PlanCollection list(Map<String, Object> params, RequestOptions options)
+      throws StripeException {
+    String url = String.format("%s%s", Stripe.getApiBase(), "/v1/plans");
+    return ApiResource.requestCollection(url, params, PlanCollection.class, options);
+  }
+
+  /** Returns a list of your plans. */
+  public static PlanCollection list(PlanListParams params) throws StripeException {
+    return list(params, (RequestOptions) null);
+  }
+
+  /** Returns a list of your plans. */
+  public static PlanCollection list(PlanListParams params, RequestOptions options)
+      throws StripeException {
+    String url = String.format("%s%s", Stripe.getApiBase(), "/v1/plans");
+    return ApiResource.requestCollection(url, params, PlanCollection.class, options);
   }
 
   /** Retrieves the plan with the given ID. */
@@ -332,31 +376,6 @@ public class Plan extends ApiResource implements HasId, MetadataStore<Plan> {
             Stripe.getApiBase(),
             String.format("/v1/plans/%s", ApiResource.urlEncodeId(this.getId())));
     return ApiResource.request(ApiResource.RequestMethod.POST, url, params, Plan.class, options);
-  }
-
-  /** Deleting plans means new subscribers can’t be added. Existing subscribers aren’t affected. */
-  public Plan delete() throws StripeException {
-    return delete((Map<String, Object>) null, (RequestOptions) null);
-  }
-
-  /** Deleting plans means new subscribers can’t be added. Existing subscribers aren’t affected. */
-  public Plan delete(RequestOptions options) throws StripeException {
-    return delete((Map<String, Object>) null, options);
-  }
-
-  /** Deleting plans means new subscribers can’t be added. Existing subscribers aren’t affected. */
-  public Plan delete(Map<String, Object> params) throws StripeException {
-    return delete(params, (RequestOptions) null);
-  }
-
-  /** Deleting plans means new subscribers can’t be added. Existing subscribers aren’t affected. */
-  public Plan delete(Map<String, Object> params, RequestOptions options) throws StripeException {
-    String url =
-        String.format(
-            "%s%s",
-            Stripe.getApiBase(),
-            String.format("/v1/plans/%s", ApiResource.urlEncodeId(this.getId())));
-    return ApiResource.request(ApiResource.RequestMethod.DELETE, url, params, Plan.class, options);
   }
 
   @Getter

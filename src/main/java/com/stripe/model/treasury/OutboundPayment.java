@@ -22,6 +22,16 @@ import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.Setter;
 
+/**
+ * Use OutboundPayments to send funds to another party's external bank account or <a
+ * href="https://stripe.com/docs/api#financial_accounts">FinancialAccount</a>. To send money to an
+ * account belonging to the same user, use an <a
+ * href="https://stripe.com/docs/api#outbound_transfers">OutboundTransfer</a>.
+ *
+ * <p>Simulate OutboundPayment state changes with the {@code
+ * /v1/test_helpers/treasury/outbound_payments} endpoints. These methods can only be called on test
+ * mode objects.
+ */
 @Getter
 @Setter
 @EqualsAndHashCode(callSuper = false)
@@ -167,6 +177,52 @@ public class OutboundPayment extends ApiResource implements HasId {
     this.transaction = new ExpandableField<Transaction>(expandableObject.getId(), expandableObject);
   }
 
+  /** Cancel an OutboundPayment. */
+  public OutboundPayment cancel() throws StripeException {
+    return cancel((Map<String, Object>) null, (RequestOptions) null);
+  }
+
+  /** Cancel an OutboundPayment. */
+  public OutboundPayment cancel(RequestOptions options) throws StripeException {
+    return cancel((Map<String, Object>) null, options);
+  }
+
+  /** Cancel an OutboundPayment. */
+  public OutboundPayment cancel(Map<String, Object> params) throws StripeException {
+    return cancel(params, (RequestOptions) null);
+  }
+
+  /** Cancel an OutboundPayment. */
+  public OutboundPayment cancel(Map<String, Object> params, RequestOptions options)
+      throws StripeException {
+    String url =
+        String.format(
+            "%s%s",
+            Stripe.getApiBase(),
+            String.format(
+                "/v1/treasury/outbound_payments/%s/cancel", ApiResource.urlEncodeId(this.getId())));
+    return ApiResource.request(
+        ApiResource.RequestMethod.POST, url, params, OutboundPayment.class, options);
+  }
+
+  /** Cancel an OutboundPayment. */
+  public OutboundPayment cancel(OutboundPaymentCancelParams params) throws StripeException {
+    return cancel(params, (RequestOptions) null);
+  }
+
+  /** Cancel an OutboundPayment. */
+  public OutboundPayment cancel(OutboundPaymentCancelParams params, RequestOptions options)
+      throws StripeException {
+    String url =
+        String.format(
+            "%s%s",
+            Stripe.getApiBase(),
+            String.format(
+                "/v1/treasury/outbound_payments/%s/cancel", ApiResource.urlEncodeId(this.getId())));
+    return ApiResource.request(
+        ApiResource.RequestMethod.POST, url, params, OutboundPayment.class, options);
+  }
+
   /** Creates an OutboundPayment. */
   public static OutboundPayment create(Map<String, Object> params) throws StripeException {
     return create(params, (RequestOptions) null);
@@ -191,6 +247,31 @@ public class OutboundPayment extends ApiResource implements HasId {
     String url = String.format("%s%s", Stripe.getApiBase(), "/v1/treasury/outbound_payments");
     return ApiResource.request(
         ApiResource.RequestMethod.POST, url, params, OutboundPayment.class, options);
+  }
+
+  /** Returns a list of OutboundPayments sent from the specified FinancialAccount. */
+  public static OutboundPaymentCollection list(Map<String, Object> params) throws StripeException {
+    return list(params, (RequestOptions) null);
+  }
+
+  /** Returns a list of OutboundPayments sent from the specified FinancialAccount. */
+  public static OutboundPaymentCollection list(Map<String, Object> params, RequestOptions options)
+      throws StripeException {
+    String url = String.format("%s%s", Stripe.getApiBase(), "/v1/treasury/outbound_payments");
+    return ApiResource.requestCollection(url, params, OutboundPaymentCollection.class, options);
+  }
+
+  /** Returns a list of OutboundPayments sent from the specified FinancialAccount. */
+  public static OutboundPaymentCollection list(OutboundPaymentListParams params)
+      throws StripeException {
+    return list(params, (RequestOptions) null);
+  }
+
+  /** Returns a list of OutboundPayments sent from the specified FinancialAccount. */
+  public static OutboundPaymentCollection list(
+      OutboundPaymentListParams params, RequestOptions options) throws StripeException {
+    String url = String.format("%s%s", Stripe.getApiBase(), "/v1/treasury/outbound_payments");
+    return ApiResource.requestCollection(url, params, OutboundPaymentCollection.class, options);
   }
 
   /**
@@ -238,77 +319,6 @@ public class OutboundPayment extends ApiResource implements HasId {
             String.format("/v1/treasury/outbound_payments/%s", ApiResource.urlEncodeId(id)));
     return ApiResource.request(
         ApiResource.RequestMethod.GET, url, params, OutboundPayment.class, options);
-  }
-
-  /** Returns a list of OutboundPayments sent from the specified FinancialAccount. */
-  public static OutboundPaymentCollection list(Map<String, Object> params) throws StripeException {
-    return list(params, (RequestOptions) null);
-  }
-
-  /** Returns a list of OutboundPayments sent from the specified FinancialAccount. */
-  public static OutboundPaymentCollection list(Map<String, Object> params, RequestOptions options)
-      throws StripeException {
-    String url = String.format("%s%s", Stripe.getApiBase(), "/v1/treasury/outbound_payments");
-    return ApiResource.requestCollection(url, params, OutboundPaymentCollection.class, options);
-  }
-
-  /** Returns a list of OutboundPayments sent from the specified FinancialAccount. */
-  public static OutboundPaymentCollection list(OutboundPaymentListParams params)
-      throws StripeException {
-    return list(params, (RequestOptions) null);
-  }
-
-  /** Returns a list of OutboundPayments sent from the specified FinancialAccount. */
-  public static OutboundPaymentCollection list(
-      OutboundPaymentListParams params, RequestOptions options) throws StripeException {
-    String url = String.format("%s%s", Stripe.getApiBase(), "/v1/treasury/outbound_payments");
-    return ApiResource.requestCollection(url, params, OutboundPaymentCollection.class, options);
-  }
-
-  /** Cancel an OutboundPayment. */
-  public OutboundPayment cancel() throws StripeException {
-    return cancel((Map<String, Object>) null, (RequestOptions) null);
-  }
-
-  /** Cancel an OutboundPayment. */
-  public OutboundPayment cancel(RequestOptions options) throws StripeException {
-    return cancel((Map<String, Object>) null, options);
-  }
-
-  /** Cancel an OutboundPayment. */
-  public OutboundPayment cancel(Map<String, Object> params) throws StripeException {
-    return cancel(params, (RequestOptions) null);
-  }
-
-  /** Cancel an OutboundPayment. */
-  public OutboundPayment cancel(Map<String, Object> params, RequestOptions options)
-      throws StripeException {
-    String url =
-        String.format(
-            "%s%s",
-            Stripe.getApiBase(),
-            String.format(
-                "/v1/treasury/outbound_payments/%s/cancel", ApiResource.urlEncodeId(this.getId())));
-    return ApiResource.request(
-        ApiResource.RequestMethod.POST, url, params, OutboundPayment.class, options);
-  }
-
-  /** Cancel an OutboundPayment. */
-  public OutboundPayment cancel(OutboundPaymentCancelParams params) throws StripeException {
-    return cancel(params, (RequestOptions) null);
-  }
-
-  /** Cancel an OutboundPayment. */
-  public OutboundPayment cancel(OutboundPaymentCancelParams params, RequestOptions options)
-      throws StripeException {
-    String url =
-        String.format(
-            "%s%s",
-            Stripe.getApiBase(),
-            String.format(
-                "/v1/treasury/outbound_payments/%s/cancel", ApiResource.urlEncodeId(this.getId())));
-    return ApiResource.request(
-        ApiResource.RequestMethod.POST, url, params, OutboundPayment.class, options);
   }
 
   @Getter
