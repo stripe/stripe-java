@@ -158,8 +158,6 @@ public class SearchPagingIteratorTest extends BaseStripeTest {
 
     final SearchableModelCollection collection = SearchableModel.search(page0Params, null);
 
-    final List<SearchableModel> models = new ArrayList<>();
-
     Stripe.apiKey = null;
     assertThrows(
         ApiKeyMissingException.class,

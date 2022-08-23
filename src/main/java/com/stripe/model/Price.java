@@ -18,6 +18,23 @@ import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.Setter;
 
+/**
+ * Prices define the unit cost, currency, and (optional) billing cycle for both recurring and
+ * one-time purchases of products. <a href="https://stripe.com/docs/api#products">Products</a> help
+ * you track inventory or provisioning, and prices help you track payment terms. Different physical
+ * goods or levels of service should be represented by products, and pricing options should be
+ * represented by prices. This approach lets you change prices without having to change your
+ * provisioning scheme.
+ *
+ * <p>For example, you might have a single &quot;gold&quot; product that has prices for $10/month,
+ * $100/year, and €9 once.
+ *
+ * <p>Related guides: <a
+ * href="https://stripe.com/docs/billing/subscriptions/set-up-subscription">Set up a
+ * subscription</a>, <a href="https://stripe.com/docs/billing/invoices/create">create an
+ * invoice</a>, and more about <a href="https://stripe.com/docs/products-prices/overview">products
+ * and prices</a>.
+ */
 @Getter
 @Setter
 @EqualsAndHashCode(callSuper = false)
@@ -194,6 +211,84 @@ public class Price extends ApiResource implements HasId, MetadataStore<Price> {
     this.product = new ExpandableField<Product>(expandableObject.getId(), expandableObject);
   }
 
+  /** Creates a new price for an existing product. The price can be recurring or one-time. */
+  public static Price create(Map<String, Object> params) throws StripeException {
+    return create(params, (RequestOptions) null);
+  }
+
+  /** Creates a new price for an existing product. The price can be recurring or one-time. */
+  public static Price create(Map<String, Object> params, RequestOptions options)
+      throws StripeException {
+    String url = String.format("%s%s", Stripe.getApiBase(), "/v1/prices");
+    return ApiResource.request(ApiResource.RequestMethod.POST, url, params, Price.class, options);
+  }
+
+  /** Creates a new price for an existing product. The price can be recurring or one-time. */
+  public static Price create(PriceCreateParams params) throws StripeException {
+    return create(params, (RequestOptions) null);
+  }
+
+  /** Creates a new price for an existing product. The price can be recurring or one-time. */
+  public static Price create(PriceCreateParams params, RequestOptions options)
+      throws StripeException {
+    String url = String.format("%s%s", Stripe.getApiBase(), "/v1/prices");
+    return ApiResource.request(ApiResource.RequestMethod.POST, url, params, Price.class, options);
+  }
+
+  /** Returns a list of your prices. */
+  public static PriceCollection list(Map<String, Object> params) throws StripeException {
+    return list(params, (RequestOptions) null);
+  }
+
+  /** Returns a list of your prices. */
+  public static PriceCollection list(Map<String, Object> params, RequestOptions options)
+      throws StripeException {
+    String url = String.format("%s%s", Stripe.getApiBase(), "/v1/prices");
+    return ApiResource.requestCollection(url, params, PriceCollection.class, options);
+  }
+
+  /** Returns a list of your prices. */
+  public static PriceCollection list(PriceListParams params) throws StripeException {
+    return list(params, (RequestOptions) null);
+  }
+
+  /** Returns a list of your prices. */
+  public static PriceCollection list(PriceListParams params, RequestOptions options)
+      throws StripeException {
+    String url = String.format("%s%s", Stripe.getApiBase(), "/v1/prices");
+    return ApiResource.requestCollection(url, params, PriceCollection.class, options);
+  }
+
+  /** Retrieves the price with the given ID. */
+  public static Price retrieve(String price) throws StripeException {
+    return retrieve(price, (Map<String, Object>) null, (RequestOptions) null);
+  }
+
+  /** Retrieves the price with the given ID. */
+  public static Price retrieve(String price, RequestOptions options) throws StripeException {
+    return retrieve(price, (Map<String, Object>) null, options);
+  }
+
+  /** Retrieves the price with the given ID. */
+  public static Price retrieve(String price, Map<String, Object> params, RequestOptions options)
+      throws StripeException {
+    String url =
+        String.format(
+            "%s%s",
+            Stripe.getApiBase(), String.format("/v1/prices/%s", ApiResource.urlEncodeId(price)));
+    return ApiResource.request(ApiResource.RequestMethod.GET, url, params, Price.class, options);
+  }
+
+  /** Retrieves the price with the given ID. */
+  public static Price retrieve(String price, PriceRetrieveParams params, RequestOptions options)
+      throws StripeException {
+    String url =
+        String.format(
+            "%s%s",
+            Stripe.getApiBase(), String.format("/v1/prices/%s", ApiResource.urlEncodeId(price)));
+    return ApiResource.request(ApiResource.RequestMethod.GET, url, params, Price.class, options);
+  }
+
   /**
    * Search for prices you’ve previously created using Stripe’s <a
    * href="https://stripe.com/docs/search#search-query-language">Search Query Language</a>. Don’t
@@ -244,84 +339,6 @@ public class Price extends ApiResource implements HasId, MetadataStore<Price> {
       throws StripeException {
     String url = String.format("%s%s", Stripe.getApiBase(), "/v1/prices/search");
     return ApiResource.requestSearchResult(url, params, PriceSearchResult.class, options);
-  }
-
-  /** Returns a list of your prices. */
-  public static PriceCollection list(Map<String, Object> params) throws StripeException {
-    return list(params, (RequestOptions) null);
-  }
-
-  /** Returns a list of your prices. */
-  public static PriceCollection list(Map<String, Object> params, RequestOptions options)
-      throws StripeException {
-    String url = String.format("%s%s", Stripe.getApiBase(), "/v1/prices");
-    return ApiResource.requestCollection(url, params, PriceCollection.class, options);
-  }
-
-  /** Returns a list of your prices. */
-  public static PriceCollection list(PriceListParams params) throws StripeException {
-    return list(params, (RequestOptions) null);
-  }
-
-  /** Returns a list of your prices. */
-  public static PriceCollection list(PriceListParams params, RequestOptions options)
-      throws StripeException {
-    String url = String.format("%s%s", Stripe.getApiBase(), "/v1/prices");
-    return ApiResource.requestCollection(url, params, PriceCollection.class, options);
-  }
-
-  /** Creates a new price for an existing product. The price can be recurring or one-time. */
-  public static Price create(Map<String, Object> params) throws StripeException {
-    return create(params, (RequestOptions) null);
-  }
-
-  /** Creates a new price for an existing product. The price can be recurring or one-time. */
-  public static Price create(Map<String, Object> params, RequestOptions options)
-      throws StripeException {
-    String url = String.format("%s%s", Stripe.getApiBase(), "/v1/prices");
-    return ApiResource.request(ApiResource.RequestMethod.POST, url, params, Price.class, options);
-  }
-
-  /** Creates a new price for an existing product. The price can be recurring or one-time. */
-  public static Price create(PriceCreateParams params) throws StripeException {
-    return create(params, (RequestOptions) null);
-  }
-
-  /** Creates a new price for an existing product. The price can be recurring or one-time. */
-  public static Price create(PriceCreateParams params, RequestOptions options)
-      throws StripeException {
-    String url = String.format("%s%s", Stripe.getApiBase(), "/v1/prices");
-    return ApiResource.request(ApiResource.RequestMethod.POST, url, params, Price.class, options);
-  }
-
-  /** Retrieves the price with the given ID. */
-  public static Price retrieve(String price) throws StripeException {
-    return retrieve(price, (Map<String, Object>) null, (RequestOptions) null);
-  }
-
-  /** Retrieves the price with the given ID. */
-  public static Price retrieve(String price, RequestOptions options) throws StripeException {
-    return retrieve(price, (Map<String, Object>) null, options);
-  }
-
-  /** Retrieves the price with the given ID. */
-  public static Price retrieve(String price, Map<String, Object> params, RequestOptions options)
-      throws StripeException {
-    String url =
-        String.format(
-            "%s%s",
-            Stripe.getApiBase(), String.format("/v1/prices/%s", ApiResource.urlEncodeId(price)));
-    return ApiResource.request(ApiResource.RequestMethod.GET, url, params, Price.class, options);
-  }
-
-  /** Retrieves the price with the given ID. */
-  public static Price retrieve(String price, PriceRetrieveParams params, RequestOptions options)
-      throws StripeException {
-    String url =
-        String.format(
-            "%s%s",
-            Stripe.getApiBase(), String.format("/v1/prices/%s", ApiResource.urlEncodeId(price)));
-    return ApiResource.request(ApiResource.RequestMethod.GET, url, params, Price.class, options);
   }
 
   /**

@@ -17,6 +17,11 @@ import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.Setter;
 
+/**
+ * You can reverse some <a href="https://stripe.com/docs/api#received_credits">ReceivedCredits</a>
+ * depending on their network and source flow. Reversing a ReceivedCredit leads to the creation of a
+ * new object known as a CreditReversal.
+ */
 @Getter
 @Setter
 @EqualsAndHashCode(callSuper = false)
@@ -119,6 +124,32 @@ public class CreditReversal extends ApiResource implements HasId {
     this.transaction = new ExpandableField<Transaction>(expandableObject.getId(), expandableObject);
   }
 
+  /** Reverses a ReceivedCredit and creates a CreditReversal object. */
+  public static CreditReversal create(Map<String, Object> params) throws StripeException {
+    return create(params, (RequestOptions) null);
+  }
+
+  /** Reverses a ReceivedCredit and creates a CreditReversal object. */
+  public static CreditReversal create(Map<String, Object> params, RequestOptions options)
+      throws StripeException {
+    String url = String.format("%s%s", Stripe.getApiBase(), "/v1/treasury/credit_reversals");
+    return ApiResource.request(
+        ApiResource.RequestMethod.POST, url, params, CreditReversal.class, options);
+  }
+
+  /** Reverses a ReceivedCredit and creates a CreditReversal object. */
+  public static CreditReversal create(CreditReversalCreateParams params) throws StripeException {
+    return create(params, (RequestOptions) null);
+  }
+
+  /** Reverses a ReceivedCredit and creates a CreditReversal object. */
+  public static CreditReversal create(CreditReversalCreateParams params, RequestOptions options)
+      throws StripeException {
+    String url = String.format("%s%s", Stripe.getApiBase(), "/v1/treasury/credit_reversals");
+    return ApiResource.request(
+        ApiResource.RequestMethod.POST, url, params, CreditReversal.class, options);
+  }
+
   /** Returns a list of CreditReversals. */
   public static CreditReversalCollection list(Map<String, Object> params) throws StripeException {
     return list(params, (RequestOptions) null);
@@ -193,32 +224,6 @@ public class CreditReversal extends ApiResource implements HasId {
                 "/v1/treasury/credit_reversals/%s", ApiResource.urlEncodeId(creditReversal)));
     return ApiResource.request(
         ApiResource.RequestMethod.GET, url, params, CreditReversal.class, options);
-  }
-
-  /** Reverses a ReceivedCredit and creates a CreditReversal object. */
-  public static CreditReversal create(Map<String, Object> params) throws StripeException {
-    return create(params, (RequestOptions) null);
-  }
-
-  /** Reverses a ReceivedCredit and creates a CreditReversal object. */
-  public static CreditReversal create(Map<String, Object> params, RequestOptions options)
-      throws StripeException {
-    String url = String.format("%s%s", Stripe.getApiBase(), "/v1/treasury/credit_reversals");
-    return ApiResource.request(
-        ApiResource.RequestMethod.POST, url, params, CreditReversal.class, options);
-  }
-
-  /** Reverses a ReceivedCredit and creates a CreditReversal object. */
-  public static CreditReversal create(CreditReversalCreateParams params) throws StripeException {
-    return create(params, (RequestOptions) null);
-  }
-
-  /** Reverses a ReceivedCredit and creates a CreditReversal object. */
-  public static CreditReversal create(CreditReversalCreateParams params, RequestOptions options)
-      throws StripeException {
-    String url = String.format("%s%s", Stripe.getApiBase(), "/v1/treasury/credit_reversals");
-    return ApiResource.request(
-        ApiResource.RequestMethod.POST, url, params, CreditReversal.class, options);
   }
 
   @Getter

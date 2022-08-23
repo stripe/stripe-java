@@ -14,6 +14,7 @@ final class EventDataClassLookup {
   static {
     classLookup.put("account", Account.class);
     classLookup.put("account_link", AccountLink.class);
+    classLookup.put("account_session", AccountSession.class);
     classLookup.put("apple_pay_domain", ApplePayDomain.class);
     classLookup.put("application", Application.class);
     classLookup.put("application_fee", ApplicationFee.class);
@@ -31,6 +32,7 @@ final class EventDataClassLookup {
     classLookup.put("credit_note_line_item", CreditNoteLineItem.class);
     classLookup.put("customer", Customer.class);
     classLookup.put("customer_balance_transaction", CustomerBalanceTransaction.class);
+    classLookup.put("customer_cash_balance_transaction", CustomerCashBalanceTransaction.class);
     classLookup.put("discount", Discount.class);
     classLookup.put("dispute", Dispute.class);
     classLookup.put("ephemeral_key", EphemeralKey.class);

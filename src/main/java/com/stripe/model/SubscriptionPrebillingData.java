@@ -7,6 +7,7 @@ import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.Setter;
 
+/** Prebilling stores the time period and invoice for a Subscription billed in advance. */
 @Getter
 @Setter
 @EqualsAndHashCode(callSuper = false)

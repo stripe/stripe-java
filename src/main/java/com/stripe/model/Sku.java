@@ -15,6 +15,14 @@ import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.Setter;
 
+/**
+ * Stores representations of <a href="http://en.wikipedia.org/wiki/Stock_keeping_unit">stock keeping
+ * units</a>. SKUs describe specific product variations, taking into account any combination of:
+ * attributes, currency, and cost. For example, a product may be a T-shirt, whereas a specific SKU
+ * represents the {@code size: large}, {@code color: red} version of that shirt.
+ *
+ * <p>Can also be used to manage inventory.
+ */
 @Getter
 @Setter
 @EqualsAndHashCode(callSuper = false)
@@ -121,6 +129,90 @@ public class Sku extends ApiResource implements HasId, MetadataStore<Sku> {
     this.product = new ExpandableField<Product>(expandableObject.getId(), expandableObject);
   }
 
+  /** Creates a new SKU associated with a product. */
+  public static Sku create(Map<String, Object> params) throws StripeException {
+    return create(params, (RequestOptions) null);
+  }
+
+  /** Creates a new SKU associated with a product. */
+  public static Sku create(Map<String, Object> params, RequestOptions options)
+      throws StripeException {
+    String url = String.format("%s%s", Stripe.getApiBase(), "/v1/skus");
+    return ApiResource.request(ApiResource.RequestMethod.POST, url, params, Sku.class, options);
+  }
+
+  /** Creates a new SKU associated with a product. */
+  public static Sku create(SkuCreateParams params) throws StripeException {
+    return create(params, (RequestOptions) null);
+  }
+
+  /** Creates a new SKU associated with a product. */
+  public static Sku create(SkuCreateParams params, RequestOptions options) throws StripeException {
+    String url = String.format("%s%s", Stripe.getApiBase(), "/v1/skus");
+    return ApiResource.request(ApiResource.RequestMethod.POST, url, params, Sku.class, options);
+  }
+
+  /** Delete a SKU. Deleting a SKU is only possible until it has been used in an order. */
+  public Sku delete() throws StripeException {
+    return delete((Map<String, Object>) null, (RequestOptions) null);
+  }
+
+  /** Delete a SKU. Deleting a SKU is only possible until it has been used in an order. */
+  public Sku delete(RequestOptions options) throws StripeException {
+    return delete((Map<String, Object>) null, options);
+  }
+
+  /** Delete a SKU. Deleting a SKU is only possible until it has been used in an order. */
+  public Sku delete(Map<String, Object> params) throws StripeException {
+    return delete(params, (RequestOptions) null);
+  }
+
+  /** Delete a SKU. Deleting a SKU is only possible until it has been used in an order. */
+  public Sku delete(Map<String, Object> params, RequestOptions options) throws StripeException {
+    String url =
+        String.format(
+            "%s%s",
+            Stripe.getApiBase(),
+            String.format("/v1/skus/%s", ApiResource.urlEncodeId(this.getId())));
+    return ApiResource.request(ApiResource.RequestMethod.DELETE, url, params, Sku.class, options);
+  }
+
+  /**
+   * Returns a list of your SKUs. The SKUs are returned sorted by creation date, with the most
+   * recently created SKUs appearing first.
+   */
+  public static SkuCollection list(Map<String, Object> params) throws StripeException {
+    return list(params, (RequestOptions) null);
+  }
+
+  /**
+   * Returns a list of your SKUs. The SKUs are returned sorted by creation date, with the most
+   * recently created SKUs appearing first.
+   */
+  public static SkuCollection list(Map<String, Object> params, RequestOptions options)
+      throws StripeException {
+    String url = String.format("%s%s", Stripe.getApiBase(), "/v1/skus");
+    return ApiResource.requestCollection(url, params, SkuCollection.class, options);
+  }
+
+  /**
+   * Returns a list of your SKUs. The SKUs are returned sorted by creation date, with the most
+   * recently created SKUs appearing first.
+   */
+  public static SkuCollection list(SkuListParams params) throws StripeException {
+    return list(params, (RequestOptions) null);
+  }
+
+  /**
+   * Returns a list of your SKUs. The SKUs are returned sorted by creation date, with the most
+   * recently created SKUs appearing first.
+   */
+  public static SkuCollection list(SkuListParams params, RequestOptions options)
+      throws StripeException {
+    String url = String.format("%s%s", Stripe.getApiBase(), "/v1/skus");
+    return ApiResource.requestCollection(url, params, SkuCollection.class, options);
+  }
+
   /**
    * Retrieves the details of an existing SKU. Supply the unique SKU identifier from either a SKU
    * creation request or from the product, and Stripe will return the corresponding SKU information.
@@ -159,42 +251,6 @@ public class Sku extends ApiResource implements HasId, MetadataStore<Sku> {
         String.format(
             "%s%s", Stripe.getApiBase(), String.format("/v1/skus/%s", ApiResource.urlEncodeId(id)));
     return ApiResource.request(ApiResource.RequestMethod.GET, url, params, Sku.class, options);
-  }
-
-  /**
-   * Returns a list of your SKUs. The SKUs are returned sorted by creation date, with the most
-   * recently created SKUs appearing first.
-   */
-  public static SkuCollection list(Map<String, Object> params) throws StripeException {
-    return list(params, (RequestOptions) null);
-  }
-
-  /**
-   * Returns a list of your SKUs. The SKUs are returned sorted by creation date, with the most
-   * recently created SKUs appearing first.
-   */
-  public static SkuCollection list(Map<String, Object> params, RequestOptions options)
-      throws StripeException {
-    String url = String.format("%s%s", Stripe.getApiBase(), "/v1/skus");
-    return ApiResource.requestCollection(url, params, SkuCollection.class, options);
-  }
-
-  /**
-   * Returns a list of your SKUs. The SKUs are returned sorted by creation date, with the most
-   * recently created SKUs appearing first.
-   */
-  public static SkuCollection list(SkuListParams params) throws StripeException {
-    return list(params, (RequestOptions) null);
-  }
-
-  /**
-   * Returns a list of your SKUs. The SKUs are returned sorted by creation date, with the most
-   * recently created SKUs appearing first.
-   */
-  public static SkuCollection list(SkuListParams params, RequestOptions options)
-      throws StripeException {
-    String url = String.format("%s%s", Stripe.getApiBase(), "/v1/skus");
-    return ApiResource.requestCollection(url, params, SkuCollection.class, options);
   }
 
   /**
@@ -251,54 +307,6 @@ public class Sku extends ApiResource implements HasId, MetadataStore<Sku> {
             Stripe.getApiBase(),
             String.format("/v1/skus/%s", ApiResource.urlEncodeId(this.getId())));
     return ApiResource.request(ApiResource.RequestMethod.POST, url, params, Sku.class, options);
-  }
-
-  /** Creates a new SKU associated with a product. */
-  public static Sku create(Map<String, Object> params) throws StripeException {
-    return create(params, (RequestOptions) null);
-  }
-
-  /** Creates a new SKU associated with a product. */
-  public static Sku create(Map<String, Object> params, RequestOptions options)
-      throws StripeException {
-    String url = String.format("%s%s", Stripe.getApiBase(), "/v1/skus");
-    return ApiResource.request(ApiResource.RequestMethod.POST, url, params, Sku.class, options);
-  }
-
-  /** Creates a new SKU associated with a product. */
-  public static Sku create(SkuCreateParams params) throws StripeException {
-    return create(params, (RequestOptions) null);
-  }
-
-  /** Creates a new SKU associated with a product. */
-  public static Sku create(SkuCreateParams params, RequestOptions options) throws StripeException {
-    String url = String.format("%s%s", Stripe.getApiBase(), "/v1/skus");
-    return ApiResource.request(ApiResource.RequestMethod.POST, url, params, Sku.class, options);
-  }
-
-  /** Delete a SKU. Deleting a SKU is only possible until it has been used in an order. */
-  public Sku delete() throws StripeException {
-    return delete((Map<String, Object>) null, (RequestOptions) null);
-  }
-
-  /** Delete a SKU. Deleting a SKU is only possible until it has been used in an order. */
-  public Sku delete(RequestOptions options) throws StripeException {
-    return delete((Map<String, Object>) null, options);
-  }
-
-  /** Delete a SKU. Deleting a SKU is only possible until it has been used in an order. */
-  public Sku delete(Map<String, Object> params) throws StripeException {
-    return delete(params, (RequestOptions) null);
-  }
-
-  /** Delete a SKU. Deleting a SKU is only possible until it has been used in an order. */
-  public Sku delete(Map<String, Object> params, RequestOptions options) throws StripeException {
-    String url =
-        String.format(
-            "%s%s",
-            Stripe.getApiBase(),
-            String.format("/v1/skus/%s", ApiResource.urlEncodeId(this.getId())));
-    return ApiResource.request(ApiResource.RequestMethod.DELETE, url, params, Sku.class, options);
   }
 
   @Getter

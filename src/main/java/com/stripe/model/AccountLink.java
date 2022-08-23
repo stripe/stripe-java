@@ -12,6 +12,13 @@ import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.Setter;
 
+/**
+ * Account Links are the means by which a Connect platform grants a connected account permission to
+ * access Stripe-hosted applications, such as Connect Onboarding.
+ *
+ * <p>Related guide: <a href="https://stripe.com/docs/connect/connect-onboarding">Connect
+ * Onboarding</a>.
+ */
 @Getter
 @Setter
 @EqualsAndHashCode(callSuper = false)

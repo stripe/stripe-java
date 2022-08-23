@@ -22,6 +22,17 @@ import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.Setter;
 
+/**
+ * Use OutboundTransfers to transfer funds from a <a
+ * href="https://stripe.com/docs/api#financial_accounts">FinancialAccount</a> to a PaymentMethod
+ * belonging to the same entity. To send funds to a different party, use <a
+ * href="https://stripe.com/docs/api#outbound_payments">OutboundPayments</a> instead. You can send
+ * funds over ACH rails or through a domestic wire transfer to a user's own external bank account.
+ *
+ * <p>Simulate OutboundTransfer state changes with the {@code
+ * /v1/test_helpers/treasury/outbound_transfers} endpoints. These methods can only be called on test
+ * mode objects.
+ */
 @Getter
 @Setter
 @EqualsAndHashCode(callSuper = false)
@@ -153,6 +164,54 @@ public class OutboundTransfer extends ApiResource implements HasId {
     this.transaction = new ExpandableField<Transaction>(expandableObject.getId(), expandableObject);
   }
 
+  /** An OutboundTransfer can be canceled if the funds have not yet been paid out. */
+  public OutboundTransfer cancel() throws StripeException {
+    return cancel((Map<String, Object>) null, (RequestOptions) null);
+  }
+
+  /** An OutboundTransfer can be canceled if the funds have not yet been paid out. */
+  public OutboundTransfer cancel(RequestOptions options) throws StripeException {
+    return cancel((Map<String, Object>) null, options);
+  }
+
+  /** An OutboundTransfer can be canceled if the funds have not yet been paid out. */
+  public OutboundTransfer cancel(Map<String, Object> params) throws StripeException {
+    return cancel(params, (RequestOptions) null);
+  }
+
+  /** An OutboundTransfer can be canceled if the funds have not yet been paid out. */
+  public OutboundTransfer cancel(Map<String, Object> params, RequestOptions options)
+      throws StripeException {
+    String url =
+        String.format(
+            "%s%s",
+            Stripe.getApiBase(),
+            String.format(
+                "/v1/treasury/outbound_transfers/%s/cancel",
+                ApiResource.urlEncodeId(this.getId())));
+    return ApiResource.request(
+        ApiResource.RequestMethod.POST, url, params, OutboundTransfer.class, options);
+  }
+
+  /** An OutboundTransfer can be canceled if the funds have not yet been paid out. */
+  public OutboundTransfer cancel(OutboundTransferCancelParams params) throws StripeException {
+    return cancel(params, (RequestOptions) null);
+  }
+
+  /** An OutboundTransfer can be canceled if the funds have not yet been paid out. */
+  public OutboundTransfer cancel(OutboundTransferCancelParams params, RequestOptions options)
+      throws StripeException {
+    String url =
+        String.format(
+            "%s%s",
+            Stripe.getApiBase(),
+            String.format(
+                "/v1/treasury/outbound_transfers/%s/cancel",
+                ApiResource.urlEncodeId(this.getId())));
+    return ApiResource.request(
+        ApiResource.RequestMethod.POST, url, params, OutboundTransfer.class, options);
+  }
+
   /** Creates an OutboundTransfer. */
   public static OutboundTransfer create(Map<String, Object> params) throws StripeException {
     return create(params, (RequestOptions) null);
@@ -178,6 +237,31 @@ public class OutboundTransfer extends ApiResource implements HasId {
     String url = String.format("%s%s", Stripe.getApiBase(), "/v1/treasury/outbound_transfers");
     return ApiResource.request(
         ApiResource.RequestMethod.POST, url, params, OutboundTransfer.class, options);
+  }
+
+  /** Returns a list of OutboundTransfers sent from the specified FinancialAccount. */
+  public static OutboundTransferCollection list(Map<String, Object> params) throws StripeException {
+    return list(params, (RequestOptions) null);
+  }
+
+  /** Returns a list of OutboundTransfers sent from the specified FinancialAccount. */
+  public static OutboundTransferCollection list(Map<String, Object> params, RequestOptions options)
+      throws StripeException {
+    String url = String.format("%s%s", Stripe.getApiBase(), "/v1/treasury/outbound_transfers");
+    return ApiResource.requestCollection(url, params, OutboundTransferCollection.class, options);
+  }
+
+  /** Returns a list of OutboundTransfers sent from the specified FinancialAccount. */
+  public static OutboundTransferCollection list(OutboundTransferListParams params)
+      throws StripeException {
+    return list(params, (RequestOptions) null);
+  }
+
+  /** Returns a list of OutboundTransfers sent from the specified FinancialAccount. */
+  public static OutboundTransferCollection list(
+      OutboundTransferListParams params, RequestOptions options) throws StripeException {
+    String url = String.format("%s%s", Stripe.getApiBase(), "/v1/treasury/outbound_transfers");
+    return ApiResource.requestCollection(url, params, OutboundTransferCollection.class, options);
   }
 
   /**
@@ -229,79 +313,6 @@ public class OutboundTransfer extends ApiResource implements HasId {
                 "/v1/treasury/outbound_transfers/%s", ApiResource.urlEncodeId(outboundTransfer)));
     return ApiResource.request(
         ApiResource.RequestMethod.GET, url, params, OutboundTransfer.class, options);
-  }
-
-  /** Returns a list of OutboundTransfers sent from the specified FinancialAccount. */
-  public static OutboundTransferCollection list(Map<String, Object> params) throws StripeException {
-    return list(params, (RequestOptions) null);
-  }
-
-  /** Returns a list of OutboundTransfers sent from the specified FinancialAccount. */
-  public static OutboundTransferCollection list(Map<String, Object> params, RequestOptions options)
-      throws StripeException {
-    String url = String.format("%s%s", Stripe.getApiBase(), "/v1/treasury/outbound_transfers");
-    return ApiResource.requestCollection(url, params, OutboundTransferCollection.class, options);
-  }
-
-  /** Returns a list of OutboundTransfers sent from the specified FinancialAccount. */
-  public static OutboundTransferCollection list(OutboundTransferListParams params)
-      throws StripeException {
-    return list(params, (RequestOptions) null);
-  }
-
-  /** Returns a list of OutboundTransfers sent from the specified FinancialAccount. */
-  public static OutboundTransferCollection list(
-      OutboundTransferListParams params, RequestOptions options) throws StripeException {
-    String url = String.format("%s%s", Stripe.getApiBase(), "/v1/treasury/outbound_transfers");
-    return ApiResource.requestCollection(url, params, OutboundTransferCollection.class, options);
-  }
-
-  /** An OutboundTransfer can be canceled if the funds have not yet been paid out. */
-  public OutboundTransfer cancel() throws StripeException {
-    return cancel((Map<String, Object>) null, (RequestOptions) null);
-  }
-
-  /** An OutboundTransfer can be canceled if the funds have not yet been paid out. */
-  public OutboundTransfer cancel(RequestOptions options) throws StripeException {
-    return cancel((Map<String, Object>) null, options);
-  }
-
-  /** An OutboundTransfer can be canceled if the funds have not yet been paid out. */
-  public OutboundTransfer cancel(Map<String, Object> params) throws StripeException {
-    return cancel(params, (RequestOptions) null);
-  }
-
-  /** An OutboundTransfer can be canceled if the funds have not yet been paid out. */
-  public OutboundTransfer cancel(Map<String, Object> params, RequestOptions options)
-      throws StripeException {
-    String url =
-        String.format(
-            "%s%s",
-            Stripe.getApiBase(),
-            String.format(
-                "/v1/treasury/outbound_transfers/%s/cancel",
-                ApiResource.urlEncodeId(this.getId())));
-    return ApiResource.request(
-        ApiResource.RequestMethod.POST, url, params, OutboundTransfer.class, options);
-  }
-
-  /** An OutboundTransfer can be canceled if the funds have not yet been paid out. */
-  public OutboundTransfer cancel(OutboundTransferCancelParams params) throws StripeException {
-    return cancel(params, (RequestOptions) null);
-  }
-
-  /** An OutboundTransfer can be canceled if the funds have not yet been paid out. */
-  public OutboundTransfer cancel(OutboundTransferCancelParams params, RequestOptions options)
-      throws StripeException {
-    String url =
-        String.format(
-            "%s%s",
-            Stripe.getApiBase(),
-            String.format(
-                "/v1/treasury/outbound_transfers/%s/cancel",
-                ApiResource.urlEncodeId(this.getId())));
-    return ApiResource.request(
-        ApiResource.RequestMethod.POST, url, params, OutboundTransfer.class, options);
   }
 
   @Getter

@@ -22,6 +22,13 @@ import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.Setter;
 
+/**
+ * Use <a
+ * href="https://stripe.com/docs/treasury/moving-money/financial-accounts/into/inbound-transfers">InboundTransfers</a>
+ * to add funds to your <a
+ * href="https://stripe.com/docs/api#financial_accounts">FinancialAccount</a> via a PaymentMethod
+ * that is owned by you. The funds will be transferred via an ACH debit.
+ */
 @Getter
 @Setter
 @EqualsAndHashCode(callSuper = false)
@@ -228,6 +235,31 @@ public class InboundTransfer extends ApiResource implements HasId {
         ApiResource.RequestMethod.POST, url, params, InboundTransfer.class, options);
   }
 
+  /** Returns a list of InboundTransfers sent from the specified FinancialAccount. */
+  public static InboundTransferCollection list(Map<String, Object> params) throws StripeException {
+    return list(params, (RequestOptions) null);
+  }
+
+  /** Returns a list of InboundTransfers sent from the specified FinancialAccount. */
+  public static InboundTransferCollection list(Map<String, Object> params, RequestOptions options)
+      throws StripeException {
+    String url = String.format("%s%s", Stripe.getApiBase(), "/v1/treasury/inbound_transfers");
+    return ApiResource.requestCollection(url, params, InboundTransferCollection.class, options);
+  }
+
+  /** Returns a list of InboundTransfers sent from the specified FinancialAccount. */
+  public static InboundTransferCollection list(InboundTransferListParams params)
+      throws StripeException {
+    return list(params, (RequestOptions) null);
+  }
+
+  /** Returns a list of InboundTransfers sent from the specified FinancialAccount. */
+  public static InboundTransferCollection list(
+      InboundTransferListParams params, RequestOptions options) throws StripeException {
+    String url = String.format("%s%s", Stripe.getApiBase(), "/v1/treasury/inbound_transfers");
+    return ApiResource.requestCollection(url, params, InboundTransferCollection.class, options);
+  }
+
   /** Retrieves the details of an existing InboundTransfer. */
   public static InboundTransfer retrieve(String id) throws StripeException {
     return retrieve(id, (Map<String, Object>) null, (RequestOptions) null);
@@ -261,31 +293,6 @@ public class InboundTransfer extends ApiResource implements HasId {
             String.format("/v1/treasury/inbound_transfers/%s", ApiResource.urlEncodeId(id)));
     return ApiResource.request(
         ApiResource.RequestMethod.GET, url, params, InboundTransfer.class, options);
-  }
-
-  /** Returns a list of InboundTransfers sent from the specified FinancialAccount. */
-  public static InboundTransferCollection list(Map<String, Object> params) throws StripeException {
-    return list(params, (RequestOptions) null);
-  }
-
-  /** Returns a list of InboundTransfers sent from the specified FinancialAccount. */
-  public static InboundTransferCollection list(Map<String, Object> params, RequestOptions options)
-      throws StripeException {
-    String url = String.format("%s%s", Stripe.getApiBase(), "/v1/treasury/inbound_transfers");
-    return ApiResource.requestCollection(url, params, InboundTransferCollection.class, options);
-  }
-
-  /** Returns a list of InboundTransfers sent from the specified FinancialAccount. */
-  public static InboundTransferCollection list(InboundTransferListParams params)
-      throws StripeException {
-    return list(params, (RequestOptions) null);
-  }
-
-  /** Returns a list of InboundTransfers sent from the specified FinancialAccount. */
-  public static InboundTransferCollection list(
-      InboundTransferListParams params, RequestOptions options) throws StripeException {
-    String url = String.format("%s%s", Stripe.getApiBase(), "/v1/treasury/inbound_transfers");
-    return ApiResource.requestCollection(url, params, InboundTransferCollection.class, options);
   }
 
   @Getter

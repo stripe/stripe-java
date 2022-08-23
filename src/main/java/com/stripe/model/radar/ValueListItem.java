@@ -15,6 +15,13 @@ import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.Setter;
 
+/**
+ * Value list items allow you to add specific values to a given Radar value list, which can then be
+ * used in rules.
+ *
+ * <p>Related guide: <a href="https://stripe.com/docs/radar/lists#managing-list-items">Managing List
+ * Items</a>.
+ */
 @Getter
 @Setter
 @EqualsAndHashCode(callSuper = false)
@@ -58,6 +65,71 @@ public class ValueListItem extends ApiResource implements HasId {
   /** The identifier of the value list this item belongs to. */
   @SerializedName("value_list")
   String valueList;
+
+  /**
+   * Creates a new <code>ValueListItem</code> object, which is added to the specified parent value
+   * list.
+   */
+  public static ValueListItem create(Map<String, Object> params) throws StripeException {
+    return create(params, (RequestOptions) null);
+  }
+
+  /**
+   * Creates a new <code>ValueListItem</code> object, which is added to the specified parent value
+   * list.
+   */
+  public static ValueListItem create(Map<String, Object> params, RequestOptions options)
+      throws StripeException {
+    String url = String.format("%s%s", Stripe.getApiBase(), "/v1/radar/value_list_items");
+    return ApiResource.request(
+        ApiResource.RequestMethod.POST, url, params, ValueListItem.class, options);
+  }
+
+  /**
+   * Creates a new <code>ValueListItem</code> object, which is added to the specified parent value
+   * list.
+   */
+  public static ValueListItem create(ValueListItemCreateParams params) throws StripeException {
+    return create(params, (RequestOptions) null);
+  }
+
+  /**
+   * Creates a new <code>ValueListItem</code> object, which is added to the specified parent value
+   * list.
+   */
+  public static ValueListItem create(ValueListItemCreateParams params, RequestOptions options)
+      throws StripeException {
+    String url = String.format("%s%s", Stripe.getApiBase(), "/v1/radar/value_list_items");
+    return ApiResource.request(
+        ApiResource.RequestMethod.POST, url, params, ValueListItem.class, options);
+  }
+
+  /** Deletes a <code>ValueListItem</code> object, removing it from its parent value list. */
+  public ValueListItem delete() throws StripeException {
+    return delete((Map<String, Object>) null, (RequestOptions) null);
+  }
+
+  /** Deletes a <code>ValueListItem</code> object, removing it from its parent value list. */
+  public ValueListItem delete(RequestOptions options) throws StripeException {
+    return delete((Map<String, Object>) null, options);
+  }
+
+  /** Deletes a <code>ValueListItem</code> object, removing it from its parent value list. */
+  public ValueListItem delete(Map<String, Object> params) throws StripeException {
+    return delete(params, (RequestOptions) null);
+  }
+
+  /** Deletes a <code>ValueListItem</code> object, removing it from its parent value list. */
+  public ValueListItem delete(Map<String, Object> params, RequestOptions options)
+      throws StripeException {
+    String url =
+        String.format(
+            "%s%s",
+            Stripe.getApiBase(),
+            String.format("/v1/radar/value_list_items/%s", ApiResource.urlEncodeId(this.getId())));
+    return ApiResource.request(
+        ApiResource.RequestMethod.DELETE, url, params, ValueListItem.class, options);
+  }
 
   /**
    * Returns a list of <code>ValueListItem</code> objects. The objects are sorted in descending
@@ -129,70 +201,5 @@ public class ValueListItem extends ApiResource implements HasId {
             String.format("/v1/radar/value_list_items/%s", ApiResource.urlEncodeId(item)));
     return ApiResource.request(
         ApiResource.RequestMethod.GET, url, params, ValueListItem.class, options);
-  }
-
-  /**
-   * Creates a new <code>ValueListItem</code> object, which is added to the specified parent value
-   * list.
-   */
-  public static ValueListItem create(Map<String, Object> params) throws StripeException {
-    return create(params, (RequestOptions) null);
-  }
-
-  /**
-   * Creates a new <code>ValueListItem</code> object, which is added to the specified parent value
-   * list.
-   */
-  public static ValueListItem create(Map<String, Object> params, RequestOptions options)
-      throws StripeException {
-    String url = String.format("%s%s", Stripe.getApiBase(), "/v1/radar/value_list_items");
-    return ApiResource.request(
-        ApiResource.RequestMethod.POST, url, params, ValueListItem.class, options);
-  }
-
-  /**
-   * Creates a new <code>ValueListItem</code> object, which is added to the specified parent value
-   * list.
-   */
-  public static ValueListItem create(ValueListItemCreateParams params) throws StripeException {
-    return create(params, (RequestOptions) null);
-  }
-
-  /**
-   * Creates a new <code>ValueListItem</code> object, which is added to the specified parent value
-   * list.
-   */
-  public static ValueListItem create(ValueListItemCreateParams params, RequestOptions options)
-      throws StripeException {
-    String url = String.format("%s%s", Stripe.getApiBase(), "/v1/radar/value_list_items");
-    return ApiResource.request(
-        ApiResource.RequestMethod.POST, url, params, ValueListItem.class, options);
-  }
-
-  /** Deletes a <code>ValueListItem</code> object, removing it from its parent value list. */
-  public ValueListItem delete() throws StripeException {
-    return delete((Map<String, Object>) null, (RequestOptions) null);
-  }
-
-  /** Deletes a <code>ValueListItem</code> object, removing it from its parent value list. */
-  public ValueListItem delete(RequestOptions options) throws StripeException {
-    return delete((Map<String, Object>) null, options);
-  }
-
-  /** Deletes a <code>ValueListItem</code> object, removing it from its parent value list. */
-  public ValueListItem delete(Map<String, Object> params) throws StripeException {
-    return delete(params, (RequestOptions) null);
-  }
-
-  /** Deletes a <code>ValueListItem</code> object, removing it from its parent value list. */
-  public ValueListItem delete(Map<String, Object> params, RequestOptions options)
-      throws StripeException {
-    String url =
-        String.format(
-            "%s%s",
-            Stripe.getApiBase(),
-            String.format("/v1/radar/value_list_items/%s", ApiResource.urlEncodeId(this.getId())));
-    return ApiResource.request(
-        ApiResource.RequestMethod.DELETE, url, params, ValueListItem.class, options);
   }
 }

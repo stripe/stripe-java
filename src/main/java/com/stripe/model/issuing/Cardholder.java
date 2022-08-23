@@ -22,6 +22,13 @@ import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.Setter;
 
+/**
+ * An Issuing {@code Cardholder} object represents an individual or business entity who is <a
+ * href="https://stripe.com/docs/issuing">issued</a> cards.
+ *
+ * <p>Related guide: <a href="https://stripe.com/docs/issuing/cards#create-cardholder">How to create
+ * a Cardholder</a>
+ */
 @Getter
 @Setter
 @EqualsAndHashCode(callSuper = false)
@@ -109,6 +116,32 @@ public class Cardholder extends ApiResource implements HasId, MetadataStore<Card
   @SerializedName("type")
   String type;
 
+  /** Creates a new Issuing <code>Cardholder</code> object that can be issued cards. */
+  public static Cardholder create(Map<String, Object> params) throws StripeException {
+    return create(params, (RequestOptions) null);
+  }
+
+  /** Creates a new Issuing <code>Cardholder</code> object that can be issued cards. */
+  public static Cardholder create(Map<String, Object> params, RequestOptions options)
+      throws StripeException {
+    String url = String.format("%s%s", Stripe.getApiBase(), "/v1/issuing/cardholders");
+    return ApiResource.request(
+        ApiResource.RequestMethod.POST, url, params, Cardholder.class, options);
+  }
+
+  /** Creates a new Issuing <code>Cardholder</code> object that can be issued cards. */
+  public static Cardholder create(CardholderCreateParams params) throws StripeException {
+    return create(params, (RequestOptions) null);
+  }
+
+  /** Creates a new Issuing <code>Cardholder</code> object that can be issued cards. */
+  public static Cardholder create(CardholderCreateParams params, RequestOptions options)
+      throws StripeException {
+    String url = String.format("%s%s", Stripe.getApiBase(), "/v1/issuing/cardholders");
+    return ApiResource.request(
+        ApiResource.RequestMethod.POST, url, params, Cardholder.class, options);
+  }
+
   /**
    * Returns a list of Issuing <code>Cardholder</code> objects. The objects are sorted in descending
    * order by creation date, with the most recently created object appearing first.
@@ -143,32 +176,6 @@ public class Cardholder extends ApiResource implements HasId, MetadataStore<Card
       throws StripeException {
     String url = String.format("%s%s", Stripe.getApiBase(), "/v1/issuing/cardholders");
     return ApiResource.requestCollection(url, params, CardholderCollection.class, options);
-  }
-
-  /** Creates a new Issuing <code>Cardholder</code> object that can be issued cards. */
-  public static Cardholder create(Map<String, Object> params) throws StripeException {
-    return create(params, (RequestOptions) null);
-  }
-
-  /** Creates a new Issuing <code>Cardholder</code> object that can be issued cards. */
-  public static Cardholder create(Map<String, Object> params, RequestOptions options)
-      throws StripeException {
-    String url = String.format("%s%s", Stripe.getApiBase(), "/v1/issuing/cardholders");
-    return ApiResource.request(
-        ApiResource.RequestMethod.POST, url, params, Cardholder.class, options);
-  }
-
-  /** Creates a new Issuing <code>Cardholder</code> object that can be issued cards. */
-  public static Cardholder create(CardholderCreateParams params) throws StripeException {
-    return create(params, (RequestOptions) null);
-  }
-
-  /** Creates a new Issuing <code>Cardholder</code> object that can be issued cards. */
-  public static Cardholder create(CardholderCreateParams params, RequestOptions options)
-      throws StripeException {
-    String url = String.format("%s%s", Stripe.getApiBase(), "/v1/issuing/cardholders");
-    return ApiResource.request(
-        ApiResource.RequestMethod.POST, url, params, Cardholder.class, options);
   }
 
   /** Retrieves an Issuing <code>Cardholder</code> object. */

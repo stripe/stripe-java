@@ -19,6 +19,37 @@ import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.Setter;
 
+/**
+ * A SetupIntent guides you through the process of setting up and saving a customer's payment
+ * credentials for future payments. For example, you could use a SetupIntent to set up and save your
+ * customer's card without immediately collecting a payment. Later, you can use <a
+ * href="https://stripe.com/docs/api#payment_intents">PaymentIntents</a> to drive the payment flow.
+ *
+ * <p>Create a SetupIntent as soon as you're ready to collect your customer's payment credentials.
+ * Do not maintain long-lived, unconfirmed SetupIntents as they may no longer be valid. The
+ * SetupIntent then transitions through multiple <a
+ * href="https://stripe.com/docs/payments/intents#intent-statuses">statuses</a> as it guides you
+ * through the setup process.
+ *
+ * <p>Successful SetupIntents result in payment credentials that are optimized for future payments.
+ * For example, cardholders in <a
+ * href="https://stripe.com/guides/strong-customer-authentication">certain regions</a> may need to
+ * be run through <a href="https://stripe.com/docs/strong-customer-authentication">Strong Customer
+ * Authentication</a> at the time of payment method collection in order to streamline later <a
+ * href="https://stripe.com/docs/payments/setup-intents">off-session payments</a>. If the
+ * SetupIntent is used with a <a
+ * href="https://stripe.com/docs/api#setup_intent_object-customer">Customer</a>, upon success, it
+ * will automatically attach the resulting payment method to that Customer. We recommend using
+ * SetupIntents or <a
+ * href="https://stripe.com/docs/api#payment_intent_object-setup_future_usage">setup_future_usage</a>
+ * on PaymentIntents to save payment methods in order to prevent saving invalid or unoptimized
+ * payment methods.
+ *
+ * <p>By using SetupIntents, you ensure that your customers experience the minimum set of required
+ * friction, even as regulations change over time.
+ *
+ * <p>Related guide: <a href="https://stripe.com/docs/payments/setup-intents">Setup Intents API</a>.
+ */
 @Getter
 @Setter
 @EqualsAndHashCode(callSuper = false)
@@ -312,6 +343,202 @@ public class SetupIntent extends ApiResource implements HasId, MetadataStore<Set
   }
 
   /**
+   * A SetupIntent object can be canceled when it is in one of these statuses: <code>
+   * requires_payment_method</code>, <code>requires_confirmation</code>, or <code>requires_action
+   * </code>.
+   *
+   * <p>Once canceled, setup is abandoned and any operations on the SetupIntent will fail with an
+   * error.
+   */
+  public SetupIntent cancel() throws StripeException {
+    return cancel((Map<String, Object>) null, (RequestOptions) null);
+  }
+
+  /**
+   * A SetupIntent object can be canceled when it is in one of these statuses: <code>
+   * requires_payment_method</code>, <code>requires_confirmation</code>, or <code>requires_action
+   * </code>.
+   *
+   * <p>Once canceled, setup is abandoned and any operations on the SetupIntent will fail with an
+   * error.
+   */
+  public SetupIntent cancel(RequestOptions options) throws StripeException {
+    return cancel((Map<String, Object>) null, options);
+  }
+
+  /**
+   * A SetupIntent object can be canceled when it is in one of these statuses: <code>
+   * requires_payment_method</code>, <code>requires_confirmation</code>, or <code>requires_action
+   * </code>.
+   *
+   * <p>Once canceled, setup is abandoned and any operations on the SetupIntent will fail with an
+   * error.
+   */
+  public SetupIntent cancel(Map<String, Object> params) throws StripeException {
+    return cancel(params, (RequestOptions) null);
+  }
+
+  /**
+   * A SetupIntent object can be canceled when it is in one of these statuses: <code>
+   * requires_payment_method</code>, <code>requires_confirmation</code>, or <code>requires_action
+   * </code>.
+   *
+   * <p>Once canceled, setup is abandoned and any operations on the SetupIntent will fail with an
+   * error.
+   */
+  public SetupIntent cancel(Map<String, Object> params, RequestOptions options)
+      throws StripeException {
+    String url =
+        String.format(
+            "%s%s",
+            Stripe.getApiBase(),
+            String.format("/v1/setup_intents/%s/cancel", ApiResource.urlEncodeId(this.getId())));
+    return ApiResource.request(
+        ApiResource.RequestMethod.POST, url, params, SetupIntent.class, options);
+  }
+
+  /**
+   * A SetupIntent object can be canceled when it is in one of these statuses: <code>
+   * requires_payment_method</code>, <code>requires_confirmation</code>, or <code>requires_action
+   * </code>.
+   *
+   * <p>Once canceled, setup is abandoned and any operations on the SetupIntent will fail with an
+   * error.
+   */
+  public SetupIntent cancel(SetupIntentCancelParams params) throws StripeException {
+    return cancel(params, (RequestOptions) null);
+  }
+
+  /**
+   * A SetupIntent object can be canceled when it is in one of these statuses: <code>
+   * requires_payment_method</code>, <code>requires_confirmation</code>, or <code>requires_action
+   * </code>.
+   *
+   * <p>Once canceled, setup is abandoned and any operations on the SetupIntent will fail with an
+   * error.
+   */
+  public SetupIntent cancel(SetupIntentCancelParams params, RequestOptions options)
+      throws StripeException {
+    String url =
+        String.format(
+            "%s%s",
+            Stripe.getApiBase(),
+            String.format("/v1/setup_intents/%s/cancel", ApiResource.urlEncodeId(this.getId())));
+    return ApiResource.request(
+        ApiResource.RequestMethod.POST, url, params, SetupIntent.class, options);
+  }
+
+  /**
+   * Confirm that your customer intends to set up the current or provided payment method. For
+   * example, you would confirm a SetupIntent when a customer hits the “Save” button on a payment
+   * method management page on your website.
+   *
+   * <p>If the selected payment method does not require any additional steps from the customer, the
+   * SetupIntent will transition to the <code>succeeded</code> status.
+   *
+   * <p>Otherwise, it will transition to the <code>requires_action</code> status and suggest
+   * additional actions via <code>next_action</code>. If setup fails, the SetupIntent will
+   * transition to the <code>requires_payment_method</code> status.
+   */
+  public SetupIntent confirm() throws StripeException {
+    return confirm((Map<String, Object>) null, (RequestOptions) null);
+  }
+
+  /**
+   * Confirm that your customer intends to set up the current or provided payment method. For
+   * example, you would confirm a SetupIntent when a customer hits the “Save” button on a payment
+   * method management page on your website.
+   *
+   * <p>If the selected payment method does not require any additional steps from the customer, the
+   * SetupIntent will transition to the <code>succeeded</code> status.
+   *
+   * <p>Otherwise, it will transition to the <code>requires_action</code> status and suggest
+   * additional actions via <code>next_action</code>. If setup fails, the SetupIntent will
+   * transition to the <code>requires_payment_method</code> status.
+   */
+  public SetupIntent confirm(RequestOptions options) throws StripeException {
+    return confirm((Map<String, Object>) null, options);
+  }
+
+  /**
+   * Confirm that your customer intends to set up the current or provided payment method. For
+   * example, you would confirm a SetupIntent when a customer hits the “Save” button on a payment
+   * method management page on your website.
+   *
+   * <p>If the selected payment method does not require any additional steps from the customer, the
+   * SetupIntent will transition to the <code>succeeded</code> status.
+   *
+   * <p>Otherwise, it will transition to the <code>requires_action</code> status and suggest
+   * additional actions via <code>next_action</code>. If setup fails, the SetupIntent will
+   * transition to the <code>requires_payment_method</code> status.
+   */
+  public SetupIntent confirm(Map<String, Object> params) throws StripeException {
+    return confirm(params, (RequestOptions) null);
+  }
+
+  /**
+   * Confirm that your customer intends to set up the current or provided payment method. For
+   * example, you would confirm a SetupIntent when a customer hits the “Save” button on a payment
+   * method management page on your website.
+   *
+   * <p>If the selected payment method does not require any additional steps from the customer, the
+   * SetupIntent will transition to the <code>succeeded</code> status.
+   *
+   * <p>Otherwise, it will transition to the <code>requires_action</code> status and suggest
+   * additional actions via <code>next_action</code>. If setup fails, the SetupIntent will
+   * transition to the <code>requires_payment_method</code> status.
+   */
+  public SetupIntent confirm(Map<String, Object> params, RequestOptions options)
+      throws StripeException {
+    String url =
+        String.format(
+            "%s%s",
+            Stripe.getApiBase(),
+            String.format("/v1/setup_intents/%s/confirm", ApiResource.urlEncodeId(this.getId())));
+    return ApiResource.request(
+        ApiResource.RequestMethod.POST, url, params, SetupIntent.class, options);
+  }
+
+  /**
+   * Confirm that your customer intends to set up the current or provided payment method. For
+   * example, you would confirm a SetupIntent when a customer hits the “Save” button on a payment
+   * method management page on your website.
+   *
+   * <p>If the selected payment method does not require any additional steps from the customer, the
+   * SetupIntent will transition to the <code>succeeded</code> status.
+   *
+   * <p>Otherwise, it will transition to the <code>requires_action</code> status and suggest
+   * additional actions via <code>next_action</code>. If setup fails, the SetupIntent will
+   * transition to the <code>requires_payment_method</code> status.
+   */
+  public SetupIntent confirm(SetupIntentConfirmParams params) throws StripeException {
+    return confirm(params, (RequestOptions) null);
+  }
+
+  /**
+   * Confirm that your customer intends to set up the current or provided payment method. For
+   * example, you would confirm a SetupIntent when a customer hits the “Save” button on a payment
+   * method management page on your website.
+   *
+   * <p>If the selected payment method does not require any additional steps from the customer, the
+   * SetupIntent will transition to the <code>succeeded</code> status.
+   *
+   * <p>Otherwise, it will transition to the <code>requires_action</code> status and suggest
+   * additional actions via <code>next_action</code>. If setup fails, the SetupIntent will
+   * transition to the <code>requires_payment_method</code> status.
+   */
+  public SetupIntent confirm(SetupIntentConfirmParams params, RequestOptions options)
+      throws StripeException {
+    String url =
+        String.format(
+            "%s%s",
+            Stripe.getApiBase(),
+            String.format("/v1/setup_intents/%s/confirm", ApiResource.urlEncodeId(this.getId())));
+    return ApiResource.request(
+        ApiResource.RequestMethod.POST, url, params, SetupIntent.class, options);
+  }
+
+  /**
    * Creates a SetupIntent object.
    *
    * <p>After the SetupIntent is created, attach a payment method and <a
@@ -488,202 +715,6 @@ public class SetupIntent extends ApiResource implements HasId, MetadataStore<Set
             "%s%s",
             Stripe.getApiBase(),
             String.format("/v1/setup_intents/%s", ApiResource.urlEncodeId(this.getId())));
-    return ApiResource.request(
-        ApiResource.RequestMethod.POST, url, params, SetupIntent.class, options);
-  }
-
-  /**
-   * Confirm that your customer intends to set up the current or provided payment method. For
-   * example, you would confirm a SetupIntent when a customer hits the “Save” button on a payment
-   * method management page on your website.
-   *
-   * <p>If the selected payment method does not require any additional steps from the customer, the
-   * SetupIntent will transition to the <code>succeeded</code> status.
-   *
-   * <p>Otherwise, it will transition to the <code>requires_action</code> status and suggest
-   * additional actions via <code>next_action</code>. If setup fails, the SetupIntent will
-   * transition to the <code>requires_payment_method</code> status.
-   */
-  public SetupIntent confirm() throws StripeException {
-    return confirm((Map<String, Object>) null, (RequestOptions) null);
-  }
-
-  /**
-   * Confirm that your customer intends to set up the current or provided payment method. For
-   * example, you would confirm a SetupIntent when a customer hits the “Save” button on a payment
-   * method management page on your website.
-   *
-   * <p>If the selected payment method does not require any additional steps from the customer, the
-   * SetupIntent will transition to the <code>succeeded</code> status.
-   *
-   * <p>Otherwise, it will transition to the <code>requires_action</code> status and suggest
-   * additional actions via <code>next_action</code>. If setup fails, the SetupIntent will
-   * transition to the <code>requires_payment_method</code> status.
-   */
-  public SetupIntent confirm(RequestOptions options) throws StripeException {
-    return confirm((Map<String, Object>) null, options);
-  }
-
-  /**
-   * Confirm that your customer intends to set up the current or provided payment method. For
-   * example, you would confirm a SetupIntent when a customer hits the “Save” button on a payment
-   * method management page on your website.
-   *
-   * <p>If the selected payment method does not require any additional steps from the customer, the
-   * SetupIntent will transition to the <code>succeeded</code> status.
-   *
-   * <p>Otherwise, it will transition to the <code>requires_action</code> status and suggest
-   * additional actions via <code>next_action</code>. If setup fails, the SetupIntent will
-   * transition to the <code>requires_payment_method</code> status.
-   */
-  public SetupIntent confirm(Map<String, Object> params) throws StripeException {
-    return confirm(params, (RequestOptions) null);
-  }
-
-  /**
-   * Confirm that your customer intends to set up the current or provided payment method. For
-   * example, you would confirm a SetupIntent when a customer hits the “Save” button on a payment
-   * method management page on your website.
-   *
-   * <p>If the selected payment method does not require any additional steps from the customer, the
-   * SetupIntent will transition to the <code>succeeded</code> status.
-   *
-   * <p>Otherwise, it will transition to the <code>requires_action</code> status and suggest
-   * additional actions via <code>next_action</code>. If setup fails, the SetupIntent will
-   * transition to the <code>requires_payment_method</code> status.
-   */
-  public SetupIntent confirm(Map<String, Object> params, RequestOptions options)
-      throws StripeException {
-    String url =
-        String.format(
-            "%s%s",
-            Stripe.getApiBase(),
-            String.format("/v1/setup_intents/%s/confirm", ApiResource.urlEncodeId(this.getId())));
-    return ApiResource.request(
-        ApiResource.RequestMethod.POST, url, params, SetupIntent.class, options);
-  }
-
-  /**
-   * Confirm that your customer intends to set up the current or provided payment method. For
-   * example, you would confirm a SetupIntent when a customer hits the “Save” button on a payment
-   * method management page on your website.
-   *
-   * <p>If the selected payment method does not require any additional steps from the customer, the
-   * SetupIntent will transition to the <code>succeeded</code> status.
-   *
-   * <p>Otherwise, it will transition to the <code>requires_action</code> status and suggest
-   * additional actions via <code>next_action</code>. If setup fails, the SetupIntent will
-   * transition to the <code>requires_payment_method</code> status.
-   */
-  public SetupIntent confirm(SetupIntentConfirmParams params) throws StripeException {
-    return confirm(params, (RequestOptions) null);
-  }
-
-  /**
-   * Confirm that your customer intends to set up the current or provided payment method. For
-   * example, you would confirm a SetupIntent when a customer hits the “Save” button on a payment
-   * method management page on your website.
-   *
-   * <p>If the selected payment method does not require any additional steps from the customer, the
-   * SetupIntent will transition to the <code>succeeded</code> status.
-   *
-   * <p>Otherwise, it will transition to the <code>requires_action</code> status and suggest
-   * additional actions via <code>next_action</code>. If setup fails, the SetupIntent will
-   * transition to the <code>requires_payment_method</code> status.
-   */
-  public SetupIntent confirm(SetupIntentConfirmParams params, RequestOptions options)
-      throws StripeException {
-    String url =
-        String.format(
-            "%s%s",
-            Stripe.getApiBase(),
-            String.format("/v1/setup_intents/%s/confirm", ApiResource.urlEncodeId(this.getId())));
-    return ApiResource.request(
-        ApiResource.RequestMethod.POST, url, params, SetupIntent.class, options);
-  }
-
-  /**
-   * A SetupIntent object can be canceled when it is in one of these statuses: <code>
-   * requires_payment_method</code>, <code>requires_confirmation</code>, or <code>requires_action
-   * </code>.
-   *
-   * <p>Once canceled, setup is abandoned and any operations on the SetupIntent will fail with an
-   * error.
-   */
-  public SetupIntent cancel() throws StripeException {
-    return cancel((Map<String, Object>) null, (RequestOptions) null);
-  }
-
-  /**
-   * A SetupIntent object can be canceled when it is in one of these statuses: <code>
-   * requires_payment_method</code>, <code>requires_confirmation</code>, or <code>requires_action
-   * </code>.
-   *
-   * <p>Once canceled, setup is abandoned and any operations on the SetupIntent will fail with an
-   * error.
-   */
-  public SetupIntent cancel(RequestOptions options) throws StripeException {
-    return cancel((Map<String, Object>) null, options);
-  }
-
-  /**
-   * A SetupIntent object can be canceled when it is in one of these statuses: <code>
-   * requires_payment_method</code>, <code>requires_confirmation</code>, or <code>requires_action
-   * </code>.
-   *
-   * <p>Once canceled, setup is abandoned and any operations on the SetupIntent will fail with an
-   * error.
-   */
-  public SetupIntent cancel(Map<String, Object> params) throws StripeException {
-    return cancel(params, (RequestOptions) null);
-  }
-
-  /**
-   * A SetupIntent object can be canceled when it is in one of these statuses: <code>
-   * requires_payment_method</code>, <code>requires_confirmation</code>, or <code>requires_action
-   * </code>.
-   *
-   * <p>Once canceled, setup is abandoned and any operations on the SetupIntent will fail with an
-   * error.
-   */
-  public SetupIntent cancel(Map<String, Object> params, RequestOptions options)
-      throws StripeException {
-    String url =
-        String.format(
-            "%s%s",
-            Stripe.getApiBase(),
-            String.format("/v1/setup_intents/%s/cancel", ApiResource.urlEncodeId(this.getId())));
-    return ApiResource.request(
-        ApiResource.RequestMethod.POST, url, params, SetupIntent.class, options);
-  }
-
-  /**
-   * A SetupIntent object can be canceled when it is in one of these statuses: <code>
-   * requires_payment_method</code>, <code>requires_confirmation</code>, or <code>requires_action
-   * </code>.
-   *
-   * <p>Once canceled, setup is abandoned and any operations on the SetupIntent will fail with an
-   * error.
-   */
-  public SetupIntent cancel(SetupIntentCancelParams params) throws StripeException {
-    return cancel(params, (RequestOptions) null);
-  }
-
-  /**
-   * A SetupIntent object can be canceled when it is in one of these statuses: <code>
-   * requires_payment_method</code>, <code>requires_confirmation</code>, or <code>requires_action
-   * </code>.
-   *
-   * <p>Once canceled, setup is abandoned and any operations on the SetupIntent will fail with an
-   * error.
-   */
-  public SetupIntent cancel(SetupIntentCancelParams params, RequestOptions options)
-      throws StripeException {
-    String url =
-        String.format(
-            "%s%s",
-            Stripe.getApiBase(),
-            String.format("/v1/setup_intents/%s/cancel", ApiResource.urlEncodeId(this.getId())));
     return ApiResource.request(
         ApiResource.RequestMethod.POST, url, params, SetupIntent.class, options);
   }

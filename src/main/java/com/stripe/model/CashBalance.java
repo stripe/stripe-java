@@ -13,6 +13,11 @@ import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.Setter;
 
+/**
+ * A customer's {@code Cash balance} represents real funds. Customers can add funds to their cash
+ * balance by sending a bank transfer. These funds can be used for payment and can eventually be
+ * paid out to your bank account.
+ */
 @Getter
 @Setter
 @EqualsAndHashCode(callSuper = false)
@@ -122,6 +127,39 @@ public class CashBalance extends ApiResource {
   @Getter
   @Setter
   @EqualsAndHashCode(callSuper = false)
+  public static class AppliedToPaymentTransaction extends StripeObject {
+    /**
+     * The <a href="https://stripe.com/docs/api/payment_intents/object">Payment Intent</a> that
+     * funds were applied to.
+     */
+    @SerializedName("payment_intent")
+    @Getter(lombok.AccessLevel.NONE)
+    @Setter(lombok.AccessLevel.NONE)
+    ExpandableField<PaymentIntent> paymentIntent;
+
+    /** Get ID of expandable {@code paymentIntent} object. */
+    public String getPaymentIntent() {
+      return (this.paymentIntent != null) ? this.paymentIntent.getId() : null;
+    }
+
+    public void setPaymentIntent(String id) {
+      this.paymentIntent = ApiResource.setExpandableFieldId(id, this.paymentIntent);
+    }
+
+    /** Get expanded {@code paymentIntent}. */
+    public PaymentIntent getPaymentIntentObject() {
+      return (this.paymentIntent != null) ? this.paymentIntent.getExpanded() : null;
+    }
+
+    public void setPaymentIntentObject(PaymentIntent expandableObject) {
+      this.paymentIntent =
+          new ExpandableField<PaymentIntent>(expandableObject.getId(), expandableObject);
+    }
+  }
+
+  @Getter
+  @Setter
+  @EqualsAndHashCode(callSuper = false)
   public static class BalanceSettings extends StripeObject {
     /**
      * The configuration for how funds that land in the customer cash balance are reconciled.
@@ -130,5 +168,118 @@ public class CashBalance extends ApiResource {
      */
     @SerializedName("reconciliation_mode")
     String reconciliationMode;
+  }
+
+  @Getter
+  @Setter
+  @EqualsAndHashCode(callSuper = false)
+  public static class FundedTransaction extends StripeObject {
+    @SerializedName("bank_transfer")
+    BankTransfer bankTransfer;
+
+    @Getter
+    @Setter
+    @EqualsAndHashCode(callSuper = false)
+    public static class BankTransfer extends StripeObject {
+      @SerializedName("eu_bank_transfer")
+      EuBankTransfer euBankTransfer;
+
+      /** The user-supplied reference field on the bank transfer. */
+      @SerializedName("reference")
+      String reference;
+
+      /**
+       * The funding method type used to fund the customer balance. Permitted values include: {@code
+       * eu_bank_transfer}, {@code gb_bank_transfer}, {@code jp_bank_transfer}, or {@code
+       * mx_bank_transfer}.
+       *
+       * <p>One of {@code eu_bank_transfer}, {@code gb_bank_transfer}, {@code jp_bank_transfer}, or
+       * {@code mx_bank_transfer}.
+       */
+      @SerializedName("type")
+      String type;
+
+      @Getter
+      @Setter
+      @EqualsAndHashCode(callSuper = false)
+      public static class EuBankTransfer extends StripeObject {
+        /** The BIC of the bank of the sender of the funding. */
+        @SerializedName("bic")
+        String bic;
+
+        /** The last 4 digits of the IBAN of the sender of the funding. */
+        @SerializedName("iban_last4")
+        String ibanLast4;
+
+        /** The full name of the sender, as supplied by the sending bank. */
+        @SerializedName("sender_name")
+        String senderName;
+      }
+    }
+  }
+
+  @Getter
+  @Setter
+  @EqualsAndHashCode(callSuper = false)
+  public static class RefundedFromPaymentTransaction extends StripeObject {
+    /**
+     * The <a href="https://stripe.com/docs/api/refunds/object">Refund</a> that moved these funds
+     * into the customer's cash balance.
+     */
+    @SerializedName("refund")
+    @Getter(lombok.AccessLevel.NONE)
+    @Setter(lombok.AccessLevel.NONE)
+    ExpandableField<Refund> refund;
+
+    /** Get ID of expandable {@code refund} object. */
+    public String getRefund() {
+      return (this.refund != null) ? this.refund.getId() : null;
+    }
+
+    public void setRefund(String id) {
+      this.refund = ApiResource.setExpandableFieldId(id, this.refund);
+    }
+
+    /** Get expanded {@code refund}. */
+    public Refund getRefundObject() {
+      return (this.refund != null) ? this.refund.getExpanded() : null;
+    }
+
+    public void setRefundObject(Refund expandableObject) {
+      this.refund = new ExpandableField<Refund>(expandableObject.getId(), expandableObject);
+    }
+  }
+
+  @Getter
+  @Setter
+  @EqualsAndHashCode(callSuper = false)
+  public static class UnappliedFromPaymentTransaction extends StripeObject {
+    /**
+     * The <a href="https://stripe.com/docs/api/payment_intents/object">Payment Intent</a> that
+     * funds were unapplied from.
+     */
+    @SerializedName("payment_intent")
+    @Getter(lombok.AccessLevel.NONE)
+    @Setter(lombok.AccessLevel.NONE)
+    ExpandableField<PaymentIntent> paymentIntent;
+
+    /** Get ID of expandable {@code paymentIntent} object. */
+    public String getPaymentIntent() {
+      return (this.paymentIntent != null) ? this.paymentIntent.getId() : null;
+    }
+
+    public void setPaymentIntent(String id) {
+      this.paymentIntent = ApiResource.setExpandableFieldId(id, this.paymentIntent);
+    }
+
+    /** Get expanded {@code paymentIntent}. */
+    public PaymentIntent getPaymentIntentObject() {
+      return (this.paymentIntent != null) ? this.paymentIntent.getExpanded() : null;
+    }
+
+    public void setPaymentIntentObject(PaymentIntent expandableObject) {
+      this.paymentIntent =
+          new ExpandableField<PaymentIntent>(expandableObject.getId(), expandableObject);
+    }
   }
 }

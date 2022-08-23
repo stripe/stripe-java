@@ -25,6 +25,10 @@ import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.Setter;
 
+/**
+ * You can <a href="https://stripe.com/docs/issuing/cards">create physical or virtual cards</a> that
+ * are issued to cardholders.
+ */
 @Getter
 @Setter
 @EqualsAndHashCode(callSuper = false)
@@ -213,6 +217,30 @@ public class Card extends ApiResource implements HasId, MetadataStore<Card> {
     this.replacementFor = new ExpandableField<Card>(expandableObject.getId(), expandableObject);
   }
 
+  /** Creates an Issuing <code>Card</code> object. */
+  public static Card create(Map<String, Object> params) throws StripeException {
+    return create(params, (RequestOptions) null);
+  }
+
+  /** Creates an Issuing <code>Card</code> object. */
+  public static Card create(Map<String, Object> params, RequestOptions options)
+      throws StripeException {
+    String url = String.format("%s%s", Stripe.getApiBase(), "/v1/issuing/cards");
+    return ApiResource.request(ApiResource.RequestMethod.POST, url, params, Card.class, options);
+  }
+
+  /** Creates an Issuing <code>Card</code> object. */
+  public static Card create(CardCreateParams params) throws StripeException {
+    return create(params, (RequestOptions) null);
+  }
+
+  /** Creates an Issuing <code>Card</code> object. */
+  public static Card create(CardCreateParams params, RequestOptions options)
+      throws StripeException {
+    String url = String.format("%s%s", Stripe.getApiBase(), "/v1/issuing/cards");
+    return ApiResource.request(ApiResource.RequestMethod.POST, url, params, Card.class, options);
+  }
+
   /**
    * Returns a list of Issuing <code>Card</code> objects. The objects are sorted in descending order
    * by creation date, with the most recently created object appearing first.
@@ -247,30 +275,6 @@ public class Card extends ApiResource implements HasId, MetadataStore<Card> {
       throws StripeException {
     String url = String.format("%s%s", Stripe.getApiBase(), "/v1/issuing/cards");
     return ApiResource.requestCollection(url, params, CardCollection.class, options);
-  }
-
-  /** Creates an Issuing <code>Card</code> object. */
-  public static Card create(Map<String, Object> params) throws StripeException {
-    return create(params, (RequestOptions) null);
-  }
-
-  /** Creates an Issuing <code>Card</code> object. */
-  public static Card create(Map<String, Object> params, RequestOptions options)
-      throws StripeException {
-    String url = String.format("%s%s", Stripe.getApiBase(), "/v1/issuing/cards");
-    return ApiResource.request(ApiResource.RequestMethod.POST, url, params, Card.class, options);
-  }
-
-  /** Creates an Issuing <code>Card</code> object. */
-  public static Card create(CardCreateParams params) throws StripeException {
-    return create(params, (RequestOptions) null);
-  }
-
-  /** Creates an Issuing <code>Card</code> object. */
-  public static Card create(CardCreateParams params, RequestOptions options)
-      throws StripeException {
-    String url = String.format("%s%s", Stripe.getApiBase(), "/v1/issuing/cards");
-    return ApiResource.request(ApiResource.RequestMethod.POST, url, params, Card.class, options);
   }
 
   /** Retrieves an Issuing <code>Card</code> object. */

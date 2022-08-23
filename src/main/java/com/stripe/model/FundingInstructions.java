@@ -7,6 +7,15 @@ import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.Setter;
 
+/**
+ * Each customer has a <a
+ * href="https://stripe.com/docs/api/customers/object#customer_object-balance">{@code balance}</a>
+ * that is automatically applied to future invoices and payments using the {@code customer_balance}
+ * payment method. Customers can fund this balance by initiating a bank transfer to any account in
+ * the {@code financial_addresses} field. Related guide: <a
+ * href="https://stripe.com/docs/payments/customer-balance/funding-instructions">Customer Balance -
+ * Funding Instructions</a> to learn more
+ */
 @Getter
 @Setter
 @EqualsAndHashCode(callSuper = false)
@@ -64,6 +73,7 @@ public class FundingInstructions extends StripeObject {
     @SerializedName("type")
     String type;
 
+    /** FinancialAddresses contain identifying information that resolves to a FinancialAccount. */
     @Getter
     @Setter
     @EqualsAndHashCode(callSuper = false)
@@ -96,6 +106,7 @@ public class FundingInstructions extends StripeObject {
       @SerializedName("zengin")
       Zengin zengin;
 
+      /** Iban Records contain E.U. bank account details per the SEPA format. */
       @Getter
       @Setter
       @EqualsAndHashCode(callSuper = false)
@@ -120,6 +131,7 @@ public class FundingInstructions extends StripeObject {
         String iban;
       }
 
+      /** Sort Code Records contain U.K. bank account details per the sort code format. */
       @Getter
       @Setter
       @EqualsAndHashCode(callSuper = false)
@@ -137,6 +149,7 @@ public class FundingInstructions extends StripeObject {
         String sortCode;
       }
 
+      /** SPEI Records contain Mexico bank account details per the SPEI format. */
       @Getter
       @Setter
       @EqualsAndHashCode(callSuper = false)
@@ -154,6 +167,7 @@ public class FundingInstructions extends StripeObject {
         String clabe;
       }
 
+      /** Zengin Records contain Japan bank account details per the Zengin format. */
       @Getter
       @Setter
       @EqualsAndHashCode(callSuper = false)

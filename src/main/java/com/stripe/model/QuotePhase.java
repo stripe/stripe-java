@@ -15,6 +15,10 @@ import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.Setter;
 
+/**
+ * A quote phase describes the line items, coupons, and trialing status of a subscription for a
+ * predefined time period.
+ */
 @Getter
 @Setter
 @EqualsAndHashCode(callSuper = false)
@@ -201,43 +205,6 @@ public class QuotePhase extends ApiResource implements HasId {
             : null;
   }
 
-  /** Retrieves the quote phase with the given ID. */
-  public static QuotePhase retrieve(String quotePhase) throws StripeException {
-    return retrieve(quotePhase, (Map<String, Object>) null, (RequestOptions) null);
-  }
-
-  /** Retrieves the quote phase with the given ID. */
-  public static QuotePhase retrieve(String quotePhase, RequestOptions options)
-      throws StripeException {
-    return retrieve(quotePhase, (Map<String, Object>) null, options);
-  }
-
-  /** Retrieves the quote phase with the given ID. */
-  public static QuotePhase retrieve(
-      String quotePhase, Map<String, Object> params, RequestOptions options)
-      throws StripeException {
-    String url =
-        String.format(
-            "%s%s",
-            Stripe.getApiBase(),
-            String.format("/v1/quote_phases/%s", ApiResource.urlEncodeId(quotePhase)));
-    return ApiResource.request(
-        ApiResource.RequestMethod.GET, url, params, QuotePhase.class, options);
-  }
-
-  /** Retrieves the quote phase with the given ID. */
-  public static QuotePhase retrieve(
-      String quotePhase, QuotePhaseRetrieveParams params, RequestOptions options)
-      throws StripeException {
-    String url =
-        String.format(
-            "%s%s",
-            Stripe.getApiBase(),
-            String.format("/v1/quote_phases/%s", ApiResource.urlEncodeId(quotePhase)));
-    return ApiResource.request(
-        ApiResource.RequestMethod.GET, url, params, QuotePhase.class, options);
-  }
-
   /**
    * When retrieving a quote phase, there is an includable <strong>line_items</strong> property
    * containing the first handful of those items. There is also a URL where you can retrieve the
@@ -294,6 +261,43 @@ public class QuotePhase extends ApiResource implements HasId {
             Stripe.getApiBase(),
             String.format("/v1/quote_phases/%s/line_items", ApiResource.urlEncodeId(this.getId())));
     return ApiResource.requestCollection(url, params, LineItemCollection.class, options);
+  }
+
+  /** Retrieves the quote phase with the given ID. */
+  public static QuotePhase retrieve(String quotePhase) throws StripeException {
+    return retrieve(quotePhase, (Map<String, Object>) null, (RequestOptions) null);
+  }
+
+  /** Retrieves the quote phase with the given ID. */
+  public static QuotePhase retrieve(String quotePhase, RequestOptions options)
+      throws StripeException {
+    return retrieve(quotePhase, (Map<String, Object>) null, options);
+  }
+
+  /** Retrieves the quote phase with the given ID. */
+  public static QuotePhase retrieve(
+      String quotePhase, Map<String, Object> params, RequestOptions options)
+      throws StripeException {
+    String url =
+        String.format(
+            "%s%s",
+            Stripe.getApiBase(),
+            String.format("/v1/quote_phases/%s", ApiResource.urlEncodeId(quotePhase)));
+    return ApiResource.request(
+        ApiResource.RequestMethod.GET, url, params, QuotePhase.class, options);
+  }
+
+  /** Retrieves the quote phase with the given ID. */
+  public static QuotePhase retrieve(
+      String quotePhase, QuotePhaseRetrieveParams params, RequestOptions options)
+      throws StripeException {
+    String url =
+        String.format(
+            "%s%s",
+            Stripe.getApiBase(),
+            String.format("/v1/quote_phases/%s", ApiResource.urlEncodeId(quotePhase)));
+    return ApiResource.request(
+        ApiResource.RequestMethod.GET, url, params, QuotePhase.class, options);
   }
 
   @Getter

@@ -6289,9 +6289,6 @@ public class OrderUpdateParams extends ApiRequestParams {
         @SerializedName("p24")
         P24("p24"),
 
-        @SerializedName("paypal")
-        PAYPAL("paypal"),
-
         @SerializedName("sepa_debit")
         SEPA_DEBIT("sepa_debit"),
 

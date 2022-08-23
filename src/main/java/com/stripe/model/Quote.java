@@ -26,6 +26,10 @@ import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.Setter;
 
+/**
+ * A Quote is a way to model prices that you'd like to provide to a customer. Once accepted, it will
+ * automatically create an invoice, subscription or subscription schedule.
+ */
 @Getter
 @Setter
 @EqualsAndHashCode(callSuper = false)
@@ -448,34 +452,84 @@ public class Quote extends ApiResource implements HasId, MetadataStore<Quote> {
             : null;
   }
 
-  /** Retrieves the quote with the given ID. */
-  public static Quote retrieve(String quote) throws StripeException {
-    return retrieve(quote, (Map<String, Object>) null, (RequestOptions) null);
+  /** Accepts the specified quote. */
+  public Quote accept() throws StripeException {
+    return accept((Map<String, Object>) null, (RequestOptions) null);
   }
 
-  /** Retrieves the quote with the given ID. */
-  public static Quote retrieve(String quote, RequestOptions options) throws StripeException {
-    return retrieve(quote, (Map<String, Object>) null, options);
+  /** Accepts the specified quote. */
+  public Quote accept(RequestOptions options) throws StripeException {
+    return accept((Map<String, Object>) null, options);
   }
 
-  /** Retrieves the quote with the given ID. */
-  public static Quote retrieve(String quote, Map<String, Object> params, RequestOptions options)
-      throws StripeException {
+  /** Accepts the specified quote. */
+  public Quote accept(Map<String, Object> params) throws StripeException {
+    return accept(params, (RequestOptions) null);
+  }
+
+  /** Accepts the specified quote. */
+  public Quote accept(Map<String, Object> params, RequestOptions options) throws StripeException {
     String url =
         String.format(
             "%s%s",
-            Stripe.getApiBase(), String.format("/v1/quotes/%s", ApiResource.urlEncodeId(quote)));
-    return ApiResource.request(ApiResource.RequestMethod.GET, url, params, Quote.class, options);
+            Stripe.getApiBase(),
+            String.format("/v1/quotes/%s/accept", ApiResource.urlEncodeId(this.getId())));
+    return ApiResource.request(ApiResource.RequestMethod.POST, url, params, Quote.class, options);
   }
 
-  /** Retrieves the quote with the given ID. */
-  public static Quote retrieve(String quote, QuoteRetrieveParams params, RequestOptions options)
-      throws StripeException {
+  /** Accepts the specified quote. */
+  public Quote accept(QuoteAcceptParams params) throws StripeException {
+    return accept(params, (RequestOptions) null);
+  }
+
+  /** Accepts the specified quote. */
+  public Quote accept(QuoteAcceptParams params, RequestOptions options) throws StripeException {
     String url =
         String.format(
             "%s%s",
-            Stripe.getApiBase(), String.format("/v1/quotes/%s", ApiResource.urlEncodeId(quote)));
-    return ApiResource.request(ApiResource.RequestMethod.GET, url, params, Quote.class, options);
+            Stripe.getApiBase(),
+            String.format("/v1/quotes/%s/accept", ApiResource.urlEncodeId(this.getId())));
+    return ApiResource.request(ApiResource.RequestMethod.POST, url, params, Quote.class, options);
+  }
+
+  /** Cancels the quote. */
+  public Quote cancel() throws StripeException {
+    return cancel((Map<String, Object>) null, (RequestOptions) null);
+  }
+
+  /** Cancels the quote. */
+  public Quote cancel(RequestOptions options) throws StripeException {
+    return cancel((Map<String, Object>) null, options);
+  }
+
+  /** Cancels the quote. */
+  public Quote cancel(Map<String, Object> params) throws StripeException {
+    return cancel(params, (RequestOptions) null);
+  }
+
+  /** Cancels the quote. */
+  public Quote cancel(Map<String, Object> params, RequestOptions options) throws StripeException {
+    String url =
+        String.format(
+            "%s%s",
+            Stripe.getApiBase(),
+            String.format("/v1/quotes/%s/cancel", ApiResource.urlEncodeId(this.getId())));
+    return ApiResource.request(ApiResource.RequestMethod.POST, url, params, Quote.class, options);
+  }
+
+  /** Cancels the quote. */
+  public Quote cancel(QuoteCancelParams params) throws StripeException {
+    return cancel(params, (RequestOptions) null);
+  }
+
+  /** Cancels the quote. */
+  public Quote cancel(QuoteCancelParams params, RequestOptions options) throws StripeException {
+    String url =
+        String.format(
+            "%s%s",
+            Stripe.getApiBase(),
+            String.format("/v1/quotes/%s/cancel", ApiResource.urlEncodeId(this.getId())));
+    return ApiResource.request(ApiResource.RequestMethod.POST, url, params, Quote.class, options);
   }
 
   /**
@@ -522,78 +576,6 @@ public class Quote extends ApiResource implements HasId, MetadataStore<Quote> {
     return ApiResource.request(ApiResource.RequestMethod.POST, url, params, Quote.class, options);
   }
 
-  /** A quote models prices and services for a customer. */
-  @Override
-  public Quote update(Map<String, Object> params) throws StripeException {
-    return update(params, (RequestOptions) null);
-  }
-
-  /** A quote models prices and services for a customer. */
-  @Override
-  public Quote update(Map<String, Object> params, RequestOptions options) throws StripeException {
-    String url =
-        String.format(
-            "%s%s",
-            Stripe.getApiBase(),
-            String.format("/v1/quotes/%s", ApiResource.urlEncodeId(this.getId())));
-    return ApiResource.request(ApiResource.RequestMethod.POST, url, params, Quote.class, options);
-  }
-
-  /** A quote models prices and services for a customer. */
-  public Quote update(QuoteUpdateParams params) throws StripeException {
-    return update(params, (RequestOptions) null);
-  }
-
-  /** A quote models prices and services for a customer. */
-  public Quote update(QuoteUpdateParams params, RequestOptions options) throws StripeException {
-    String url =
-        String.format(
-            "%s%s",
-            Stripe.getApiBase(),
-            String.format("/v1/quotes/%s", ApiResource.urlEncodeId(this.getId())));
-    return ApiResource.request(ApiResource.RequestMethod.POST, url, params, Quote.class, options);
-  }
-
-  /** Cancels the quote. */
-  public Quote cancel() throws StripeException {
-    return cancel((Map<String, Object>) null, (RequestOptions) null);
-  }
-
-  /** Cancels the quote. */
-  public Quote cancel(RequestOptions options) throws StripeException {
-    return cancel((Map<String, Object>) null, options);
-  }
-
-  /** Cancels the quote. */
-  public Quote cancel(Map<String, Object> params) throws StripeException {
-    return cancel(params, (RequestOptions) null);
-  }
-
-  /** Cancels the quote. */
-  public Quote cancel(Map<String, Object> params, RequestOptions options) throws StripeException {
-    String url =
-        String.format(
-            "%s%s",
-            Stripe.getApiBase(),
-            String.format("/v1/quotes/%s/cancel", ApiResource.urlEncodeId(this.getId())));
-    return ApiResource.request(ApiResource.RequestMethod.POST, url, params, Quote.class, options);
-  }
-
-  /** Cancels the quote. */
-  public Quote cancel(QuoteCancelParams params) throws StripeException {
-    return cancel(params, (RequestOptions) null);
-  }
-
-  /** Cancels the quote. */
-  public Quote cancel(QuoteCancelParams params, RequestOptions options) throws StripeException {
-    String url =
-        String.format(
-            "%s%s",
-            Stripe.getApiBase(),
-            String.format("/v1/quotes/%s/cancel", ApiResource.urlEncodeId(this.getId())));
-    return ApiResource.request(ApiResource.RequestMethod.POST, url, params, Quote.class, options);
-  }
-
   /** Finalizes the quote. */
   public Quote finalizeQuote() throws StripeException {
     return finalizeQuote((Map<String, Object>) null, (RequestOptions) null);
@@ -636,46 +618,6 @@ public class Quote extends ApiResource implements HasId, MetadataStore<Quote> {
     return ApiResource.request(ApiResource.RequestMethod.POST, url, params, Quote.class, options);
   }
 
-  /** Accepts the specified quote. */
-  public Quote accept() throws StripeException {
-    return accept((Map<String, Object>) null, (RequestOptions) null);
-  }
-
-  /** Accepts the specified quote. */
-  public Quote accept(RequestOptions options) throws StripeException {
-    return accept((Map<String, Object>) null, options);
-  }
-
-  /** Accepts the specified quote. */
-  public Quote accept(Map<String, Object> params) throws StripeException {
-    return accept(params, (RequestOptions) null);
-  }
-
-  /** Accepts the specified quote. */
-  public Quote accept(Map<String, Object> params, RequestOptions options) throws StripeException {
-    String url =
-        String.format(
-            "%s%s",
-            Stripe.getApiBase(),
-            String.format("/v1/quotes/%s/accept", ApiResource.urlEncodeId(this.getId())));
-    return ApiResource.request(ApiResource.RequestMethod.POST, url, params, Quote.class, options);
-  }
-
-  /** Accepts the specified quote. */
-  public Quote accept(QuoteAcceptParams params) throws StripeException {
-    return accept(params, (RequestOptions) null);
-  }
-
-  /** Accepts the specified quote. */
-  public Quote accept(QuoteAcceptParams params, RequestOptions options) throws StripeException {
-    String url =
-        String.format(
-            "%s%s",
-            Stripe.getApiBase(),
-            String.format("/v1/quotes/%s/accept", ApiResource.urlEncodeId(this.getId())));
-    return ApiResource.request(ApiResource.RequestMethod.POST, url, params, Quote.class, options);
-  }
-
   /** Returns a list of your quotes. */
   public static QuoteCollection list(Map<String, Object> params) throws StripeException {
     return list(params, (RequestOptions) null);
@@ -698,63 +640,6 @@ public class Quote extends ApiResource implements HasId, MetadataStore<Quote> {
       throws StripeException {
     String url = String.format("%s%s", Stripe.getApiBase(), "/v1/quotes");
     return ApiResource.requestCollection(url, params, QuoteCollection.class, options);
-  }
-
-  /**
-   * When retrieving a quote, there is an includable <strong>line_items</strong> property containing
-   * the first handful of those items. There is also a URL where you can retrieve the full
-   * (paginated) list of line items.
-   */
-  public LineItemCollection listLineItems() throws StripeException {
-    return listLineItems((Map<String, Object>) null, (RequestOptions) null);
-  }
-
-  /**
-   * When retrieving a quote, there is an includable <strong>line_items</strong> property containing
-   * the first handful of those items. There is also a URL where you can retrieve the full
-   * (paginated) list of line items.
-   */
-  public LineItemCollection listLineItems(Map<String, Object> params) throws StripeException {
-    return listLineItems(params, (RequestOptions) null);
-  }
-
-  /**
-   * When retrieving a quote, there is an includable <strong>line_items</strong> property containing
-   * the first handful of those items. There is also a URL where you can retrieve the full
-   * (paginated) list of line items.
-   */
-  public LineItemCollection listLineItems(Map<String, Object> params, RequestOptions options)
-      throws StripeException {
-    String url =
-        String.format(
-            "%s%s",
-            Stripe.getApiBase(),
-            String.format("/v1/quotes/%s/line_items", ApiResource.urlEncodeId(this.getId())));
-    return ApiResource.requestCollection(url, params, LineItemCollection.class, options);
-  }
-
-  /**
-   * When retrieving a quote, there is an includable <strong>line_items</strong> property containing
-   * the first handful of those items. There is also a URL where you can retrieve the full
-   * (paginated) list of line items.
-   */
-  public LineItemCollection listLineItems(QuoteListLineItemsParams params) throws StripeException {
-    return listLineItems(params, (RequestOptions) null);
-  }
-
-  /**
-   * When retrieving a quote, there is an includable <strong>line_items</strong> property containing
-   * the first handful of those items. There is also a URL where you can retrieve the full
-   * (paginated) list of line items.
-   */
-  public LineItemCollection listLineItems(QuoteListLineItemsParams params, RequestOptions options)
-      throws StripeException {
-    String url =
-        String.format(
-            "%s%s",
-            Stripe.getApiBase(),
-            String.format("/v1/quotes/%s/line_items", ApiResource.urlEncodeId(this.getId())));
-    return ApiResource.requestCollection(url, params, LineItemCollection.class, options);
   }
 
   /**
@@ -826,6 +711,63 @@ public class Quote extends ApiResource implements HasId, MetadataStore<Quote> {
     return ApiResource.requestCollection(url, params, LineItemCollection.class, options);
   }
 
+  /**
+   * When retrieving a quote, there is an includable <strong>line_items</strong> property containing
+   * the first handful of those items. There is also a URL where you can retrieve the full
+   * (paginated) list of line items.
+   */
+  public LineItemCollection listLineItems() throws StripeException {
+    return listLineItems((Map<String, Object>) null, (RequestOptions) null);
+  }
+
+  /**
+   * When retrieving a quote, there is an includable <strong>line_items</strong> property containing
+   * the first handful of those items. There is also a URL where you can retrieve the full
+   * (paginated) list of line items.
+   */
+  public LineItemCollection listLineItems(Map<String, Object> params) throws StripeException {
+    return listLineItems(params, (RequestOptions) null);
+  }
+
+  /**
+   * When retrieving a quote, there is an includable <strong>line_items</strong> property containing
+   * the first handful of those items. There is also a URL where you can retrieve the full
+   * (paginated) list of line items.
+   */
+  public LineItemCollection listLineItems(Map<String, Object> params, RequestOptions options)
+      throws StripeException {
+    String url =
+        String.format(
+            "%s%s",
+            Stripe.getApiBase(),
+            String.format("/v1/quotes/%s/line_items", ApiResource.urlEncodeId(this.getId())));
+    return ApiResource.requestCollection(url, params, LineItemCollection.class, options);
+  }
+
+  /**
+   * When retrieving a quote, there is an includable <strong>line_items</strong> property containing
+   * the first handful of those items. There is also a URL where you can retrieve the full
+   * (paginated) list of line items.
+   */
+  public LineItemCollection listLineItems(QuoteListLineItemsParams params) throws StripeException {
+    return listLineItems(params, (RequestOptions) null);
+  }
+
+  /**
+   * When retrieving a quote, there is an includable <strong>line_items</strong> property containing
+   * the first handful of those items. There is also a URL where you can retrieve the full
+   * (paginated) list of line items.
+   */
+  public LineItemCollection listLineItems(QuoteListLineItemsParams params, RequestOptions options)
+      throws StripeException {
+    String url =
+        String.format(
+            "%s%s",
+            Stripe.getApiBase(),
+            String.format("/v1/quotes/%s/line_items", ApiResource.urlEncodeId(this.getId())));
+    return ApiResource.requestCollection(url, params, LineItemCollection.class, options);
+  }
+
   /** Download the PDF for a finalized quote. */
   public InputStream pdf() throws StripeException {
     return pdf((Map<String, Object>) null, (RequestOptions) null);
@@ -860,6 +802,68 @@ public class Quote extends ApiResource implements HasId, MetadataStore<Quote> {
             Stripe.getUploadBase(),
             String.format("/v1/quotes/%s/pdf", ApiResource.urlEncodeId(this.getId())));
     return ApiResource.requestStream(ApiResource.RequestMethod.GET, url, params, options);
+  }
+
+  /** Retrieves the quote with the given ID. */
+  public static Quote retrieve(String quote) throws StripeException {
+    return retrieve(quote, (Map<String, Object>) null, (RequestOptions) null);
+  }
+
+  /** Retrieves the quote with the given ID. */
+  public static Quote retrieve(String quote, RequestOptions options) throws StripeException {
+    return retrieve(quote, (Map<String, Object>) null, options);
+  }
+
+  /** Retrieves the quote with the given ID. */
+  public static Quote retrieve(String quote, Map<String, Object> params, RequestOptions options)
+      throws StripeException {
+    String url =
+        String.format(
+            "%s%s",
+            Stripe.getApiBase(), String.format("/v1/quotes/%s", ApiResource.urlEncodeId(quote)));
+    return ApiResource.request(ApiResource.RequestMethod.GET, url, params, Quote.class, options);
+  }
+
+  /** Retrieves the quote with the given ID. */
+  public static Quote retrieve(String quote, QuoteRetrieveParams params, RequestOptions options)
+      throws StripeException {
+    String url =
+        String.format(
+            "%s%s",
+            Stripe.getApiBase(), String.format("/v1/quotes/%s", ApiResource.urlEncodeId(quote)));
+    return ApiResource.request(ApiResource.RequestMethod.GET, url, params, Quote.class, options);
+  }
+
+  /** A quote models prices and services for a customer. */
+  @Override
+  public Quote update(Map<String, Object> params) throws StripeException {
+    return update(params, (RequestOptions) null);
+  }
+
+  /** A quote models prices and services for a customer. */
+  @Override
+  public Quote update(Map<String, Object> params, RequestOptions options) throws StripeException {
+    String url =
+        String.format(
+            "%s%s",
+            Stripe.getApiBase(),
+            String.format("/v1/quotes/%s", ApiResource.urlEncodeId(this.getId())));
+    return ApiResource.request(ApiResource.RequestMethod.POST, url, params, Quote.class, options);
+  }
+
+  /** A quote models prices and services for a customer. */
+  public Quote update(QuoteUpdateParams params) throws StripeException {
+    return update(params, (RequestOptions) null);
+  }
+
+  /** A quote models prices and services for a customer. */
+  public Quote update(QuoteUpdateParams params, RequestOptions options) throws StripeException {
+    String url =
+        String.format(
+            "%s%s",
+            Stripe.getApiBase(),
+            String.format("/v1/quotes/%s", ApiResource.urlEncodeId(this.getId())));
+    return ApiResource.request(ApiResource.RequestMethod.POST, url, params, Quote.class, options);
   }
 
   @Getter

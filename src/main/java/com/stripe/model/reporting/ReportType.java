@@ -15,6 +15,17 @@ import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.Setter;
 
+/**
+ * The Report Type resource corresponds to a particular type of report, such as the &quot;Activity
+ * summary&quot; or &quot;Itemized payouts&quot; reports. These objects are identified by an ID
+ * belonging to a set of enumerated values. See <a
+ * href="https://stripe.com/docs/reporting/statements/api">API Access to Reports documentation</a>
+ * for those Report Type IDs, along with required and optional parameters.
+ *
+ * <p>Note that certain report types can only be run based on your live-mode data (not test-mode
+ * data), and will error when queried without a <a
+ * href="https://stripe.com/docs/keys#test-live-modes">live-mode API key</a>.
+ */
 @Getter
 @Setter
 @EqualsAndHashCode(callSuper = false)
@@ -78,6 +89,30 @@ public class ReportType extends ApiResource implements HasId {
   @SerializedName("version")
   Long version;
 
+  /** Returns a full list of Report Types. */
+  public static ReportTypeCollection list(Map<String, Object> params) throws StripeException {
+    return list(params, (RequestOptions) null);
+  }
+
+  /** Returns a full list of Report Types. */
+  public static ReportTypeCollection list(Map<String, Object> params, RequestOptions options)
+      throws StripeException {
+    String url = String.format("%s%s", Stripe.getApiBase(), "/v1/reporting/report_types");
+    return ApiResource.requestCollection(url, params, ReportTypeCollection.class, options);
+  }
+
+  /** Returns a full list of Report Types. */
+  public static ReportTypeCollection list(ReportTypeListParams params) throws StripeException {
+    return list(params, (RequestOptions) null);
+  }
+
+  /** Returns a full list of Report Types. */
+  public static ReportTypeCollection list(ReportTypeListParams params, RequestOptions options)
+      throws StripeException {
+    String url = String.format("%s%s", Stripe.getApiBase(), "/v1/reporting/report_types");
+    return ApiResource.requestCollection(url, params, ReportTypeCollection.class, options);
+  }
+
   /**
    * Retrieves the details of a Report Type. (Certain report types require a <a
    * href="https://stripe.com/docs/keys#test-live-modes">live-mode API key</a>.)
@@ -125,29 +160,5 @@ public class ReportType extends ApiResource implements HasId {
             String.format("/v1/reporting/report_types/%s", ApiResource.urlEncodeId(reportType)));
     return ApiResource.request(
         ApiResource.RequestMethod.GET, url, params, ReportType.class, options);
-  }
-
-  /** Returns a full list of Report Types. */
-  public static ReportTypeCollection list(Map<String, Object> params) throws StripeException {
-    return list(params, (RequestOptions) null);
-  }
-
-  /** Returns a full list of Report Types. */
-  public static ReportTypeCollection list(Map<String, Object> params, RequestOptions options)
-      throws StripeException {
-    String url = String.format("%s%s", Stripe.getApiBase(), "/v1/reporting/report_types");
-    return ApiResource.requestCollection(url, params, ReportTypeCollection.class, options);
-  }
-
-  /** Returns a full list of Report Types. */
-  public static ReportTypeCollection list(ReportTypeListParams params) throws StripeException {
-    return list(params, (RequestOptions) null);
-  }
-
-  /** Returns a full list of Report Types. */
-  public static ReportTypeCollection list(ReportTypeListParams params, RequestOptions options)
-      throws StripeException {
-    String url = String.format("%s%s", Stripe.getApiBase(), "/v1/reporting/report_types");
-    return ApiResource.requestCollection(url, params, ReportTypeCollection.class, options);
   }
 }

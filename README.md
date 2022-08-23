@@ -6,6 +6,10 @@
 
 The official [Stripe][stripe] Java client library.
 
+## Support
+
+New features and bug fixes are released on the latest major version of the Stripe Java client library. If you are on an older major version, we recommend that you upgrade to the latest in order to use the new features and bug fixes including those for security vulnerabilities. Older major versions of the package will continue to be available for use, but will not be receiving any updates.
+
 ## Installation
 
 ### Requirements
@@ -36,7 +40,7 @@ Add this dependency to your project's POM:
 
 You'll need to manually install the following JARs:
 
-- [The Stripe JAR](https://search.maven.org/remote_content?g=com.stripe&a=stripe-java&v=LATEST)
+- [The Stripe JAR](https://search.maven.org/remotecontent?filepath=com/stripe/stripe-java/21.3.0-beta.1/stripe-java-21.3.0-beta.1.jar)
 - [Google Gson][gson] from <https://repo1.maven.org/maven2/com/google/code/gson/gson/2.9.0/gson-2.9.0.jar>.
 
 ### [ProGuard][proguard]
