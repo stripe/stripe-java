@@ -21,6 +21,14 @@ import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.Setter;
 
+/**
+ * A subscription schedule allows you to create and manage the lifecycle of a subscription by
+ * predefining expected changes.
+ *
+ * <p>Related guide: <a
+ * href="https://stripe.com/docs/billing/subscriptions/subscription-schedules">Subscription
+ * Schedules</a>.
+ */
 @Getter
 @Setter
 @EqualsAndHashCode(callSuper = false)
@@ -230,158 +238,6 @@ public class SubscriptionSchedule extends ApiResource
     this.testClock = new ExpandableField<TestClock>(expandableObject.getId(), expandableObject);
   }
 
-  /** Retrieves the list of your subscription schedules. */
-  public static SubscriptionScheduleCollection list(Map<String, Object> params)
-      throws StripeException {
-    return list(params, (RequestOptions) null);
-  }
-
-  /** Retrieves the list of your subscription schedules. */
-  public static SubscriptionScheduleCollection list(
-      Map<String, Object> params, RequestOptions options) throws StripeException {
-    String url = String.format("%s%s", Stripe.getApiBase(), "/v1/subscription_schedules");
-    return ApiResource.requestCollection(
-        url, params, SubscriptionScheduleCollection.class, options);
-  }
-
-  /** Retrieves the list of your subscription schedules. */
-  public static SubscriptionScheduleCollection list(SubscriptionScheduleListParams params)
-      throws StripeException {
-    return list(params, (RequestOptions) null);
-  }
-
-  /** Retrieves the list of your subscription schedules. */
-  public static SubscriptionScheduleCollection list(
-      SubscriptionScheduleListParams params, RequestOptions options) throws StripeException {
-    String url = String.format("%s%s", Stripe.getApiBase(), "/v1/subscription_schedules");
-    return ApiResource.requestCollection(
-        url, params, SubscriptionScheduleCollection.class, options);
-  }
-
-  /**
-   * Creates a new subscription schedule object. Each customer can have up to 500 active or
-   * scheduled subscriptions.
-   */
-  public static SubscriptionSchedule create(Map<String, Object> params) throws StripeException {
-    return create(params, (RequestOptions) null);
-  }
-
-  /**
-   * Creates a new subscription schedule object. Each customer can have up to 500 active or
-   * scheduled subscriptions.
-   */
-  public static SubscriptionSchedule create(Map<String, Object> params, RequestOptions options)
-      throws StripeException {
-    String url = String.format("%s%s", Stripe.getApiBase(), "/v1/subscription_schedules");
-    return ApiResource.request(
-        ApiResource.RequestMethod.POST, url, params, SubscriptionSchedule.class, options);
-  }
-
-  /**
-   * Creates a new subscription schedule object. Each customer can have up to 500 active or
-   * scheduled subscriptions.
-   */
-  public static SubscriptionSchedule create(SubscriptionScheduleCreateParams params)
-      throws StripeException {
-    return create(params, (RequestOptions) null);
-  }
-
-  /**
-   * Creates a new subscription schedule object. Each customer can have up to 500 active or
-   * scheduled subscriptions.
-   */
-  public static SubscriptionSchedule create(
-      SubscriptionScheduleCreateParams params, RequestOptions options) throws StripeException {
-    String url = String.format("%s%s", Stripe.getApiBase(), "/v1/subscription_schedules");
-    return ApiResource.request(
-        ApiResource.RequestMethod.POST, url, params, SubscriptionSchedule.class, options);
-  }
-
-  /**
-   * Retrieves the details of an existing subscription schedule. You only need to supply the unique
-   * subscription schedule identifier that was returned upon subscription schedule creation.
-   */
-  public static SubscriptionSchedule retrieve(String schedule) throws StripeException {
-    return retrieve(schedule, (Map<String, Object>) null, (RequestOptions) null);
-  }
-
-  /**
-   * Retrieves the details of an existing subscription schedule. You only need to supply the unique
-   * subscription schedule identifier that was returned upon subscription schedule creation.
-   */
-  public static SubscriptionSchedule retrieve(String schedule, RequestOptions options)
-      throws StripeException {
-    return retrieve(schedule, (Map<String, Object>) null, options);
-  }
-
-  /**
-   * Retrieves the details of an existing subscription schedule. You only need to supply the unique
-   * subscription schedule identifier that was returned upon subscription schedule creation.
-   */
-  public static SubscriptionSchedule retrieve(
-      String schedule, Map<String, Object> params, RequestOptions options) throws StripeException {
-    String url =
-        String.format(
-            "%s%s",
-            Stripe.getApiBase(),
-            String.format("/v1/subscription_schedules/%s", ApiResource.urlEncodeId(schedule)));
-    return ApiResource.request(
-        ApiResource.RequestMethod.GET, url, params, SubscriptionSchedule.class, options);
-  }
-
-  /**
-   * Retrieves the details of an existing subscription schedule. You only need to supply the unique
-   * subscription schedule identifier that was returned upon subscription schedule creation.
-   */
-  public static SubscriptionSchedule retrieve(
-      String schedule, SubscriptionScheduleRetrieveParams params, RequestOptions options)
-      throws StripeException {
-    String url =
-        String.format(
-            "%s%s",
-            Stripe.getApiBase(),
-            String.format("/v1/subscription_schedules/%s", ApiResource.urlEncodeId(schedule)));
-    return ApiResource.request(
-        ApiResource.RequestMethod.GET, url, params, SubscriptionSchedule.class, options);
-  }
-
-  /** Updates an existing subscription schedule. */
-  @Override
-  public SubscriptionSchedule update(Map<String, Object> params) throws StripeException {
-    return update(params, (RequestOptions) null);
-  }
-
-  /** Updates an existing subscription schedule. */
-  @Override
-  public SubscriptionSchedule update(Map<String, Object> params, RequestOptions options)
-      throws StripeException {
-    String url =
-        String.format(
-            "%s%s",
-            Stripe.getApiBase(),
-            String.format("/v1/subscription_schedules/%s", ApiResource.urlEncodeId(this.getId())));
-    return ApiResource.request(
-        ApiResource.RequestMethod.POST, url, params, SubscriptionSchedule.class, options);
-  }
-
-  /** Updates an existing subscription schedule. */
-  public SubscriptionSchedule update(SubscriptionScheduleUpdateParams params)
-      throws StripeException {
-    return update(params, (RequestOptions) null);
-  }
-
-  /** Updates an existing subscription schedule. */
-  public SubscriptionSchedule update(
-      SubscriptionScheduleUpdateParams params, RequestOptions options) throws StripeException {
-    String url =
-        String.format(
-            "%s%s",
-            Stripe.getApiBase(),
-            String.format("/v1/subscription_schedules/%s", ApiResource.urlEncodeId(this.getId())));
-    return ApiResource.request(
-        ApiResource.RequestMethod.POST, url, params, SubscriptionSchedule.class, options);
-  }
-
   /** Amends an existing subscription schedule. */
   public SubscriptionSchedule amend(Map<String, Object> params) throws StripeException {
     return amend(params, (RequestOptions) null);
@@ -490,6 +346,73 @@ public class SubscriptionSchedule extends ApiResource
   }
 
   /**
+   * Creates a new subscription schedule object. Each customer can have up to 500 active or
+   * scheduled subscriptions.
+   */
+  public static SubscriptionSchedule create(Map<String, Object> params) throws StripeException {
+    return create(params, (RequestOptions) null);
+  }
+
+  /**
+   * Creates a new subscription schedule object. Each customer can have up to 500 active or
+   * scheduled subscriptions.
+   */
+  public static SubscriptionSchedule create(Map<String, Object> params, RequestOptions options)
+      throws StripeException {
+    String url = String.format("%s%s", Stripe.getApiBase(), "/v1/subscription_schedules");
+    return ApiResource.request(
+        ApiResource.RequestMethod.POST, url, params, SubscriptionSchedule.class, options);
+  }
+
+  /**
+   * Creates a new subscription schedule object. Each customer can have up to 500 active or
+   * scheduled subscriptions.
+   */
+  public static SubscriptionSchedule create(SubscriptionScheduleCreateParams params)
+      throws StripeException {
+    return create(params, (RequestOptions) null);
+  }
+
+  /**
+   * Creates a new subscription schedule object. Each customer can have up to 500 active or
+   * scheduled subscriptions.
+   */
+  public static SubscriptionSchedule create(
+      SubscriptionScheduleCreateParams params, RequestOptions options) throws StripeException {
+    String url = String.format("%s%s", Stripe.getApiBase(), "/v1/subscription_schedules");
+    return ApiResource.request(
+        ApiResource.RequestMethod.POST, url, params, SubscriptionSchedule.class, options);
+  }
+
+  /** Retrieves the list of your subscription schedules. */
+  public static SubscriptionScheduleCollection list(Map<String, Object> params)
+      throws StripeException {
+    return list(params, (RequestOptions) null);
+  }
+
+  /** Retrieves the list of your subscription schedules. */
+  public static SubscriptionScheduleCollection list(
+      Map<String, Object> params, RequestOptions options) throws StripeException {
+    String url = String.format("%s%s", Stripe.getApiBase(), "/v1/subscription_schedules");
+    return ApiResource.requestCollection(
+        url, params, SubscriptionScheduleCollection.class, options);
+  }
+
+  /** Retrieves the list of your subscription schedules. */
+  public static SubscriptionScheduleCollection list(SubscriptionScheduleListParams params)
+      throws StripeException {
+    return list(params, (RequestOptions) null);
+  }
+
+  /** Retrieves the list of your subscription schedules. */
+  public static SubscriptionScheduleCollection list(
+      SubscriptionScheduleListParams params, RequestOptions options) throws StripeException {
+    String url = String.format("%s%s", Stripe.getApiBase(), "/v1/subscription_schedules");
+    return ApiResource.requestCollection(
+        url, params, SubscriptionScheduleCollection.class, options);
+  }
+
+  /**
    * Releases the subscription schedule immediately, which will stop scheduling of its phases, but
    * leave any existing subscription in place. A schedule can only be released if its status is
    * <code>not_started</code> or <code>active</code>. If the subscription schedule is currently
@@ -572,6 +495,95 @@ public class SubscriptionSchedule extends ApiResource
         ApiResource.RequestMethod.POST, url, params, SubscriptionSchedule.class, options);
   }
 
+  /**
+   * Retrieves the details of an existing subscription schedule. You only need to supply the unique
+   * subscription schedule identifier that was returned upon subscription schedule creation.
+   */
+  public static SubscriptionSchedule retrieve(String schedule) throws StripeException {
+    return retrieve(schedule, (Map<String, Object>) null, (RequestOptions) null);
+  }
+
+  /**
+   * Retrieves the details of an existing subscription schedule. You only need to supply the unique
+   * subscription schedule identifier that was returned upon subscription schedule creation.
+   */
+  public static SubscriptionSchedule retrieve(String schedule, RequestOptions options)
+      throws StripeException {
+    return retrieve(schedule, (Map<String, Object>) null, options);
+  }
+
+  /**
+   * Retrieves the details of an existing subscription schedule. You only need to supply the unique
+   * subscription schedule identifier that was returned upon subscription schedule creation.
+   */
+  public static SubscriptionSchedule retrieve(
+      String schedule, Map<String, Object> params, RequestOptions options) throws StripeException {
+    String url =
+        String.format(
+            "%s%s",
+            Stripe.getApiBase(),
+            String.format("/v1/subscription_schedules/%s", ApiResource.urlEncodeId(schedule)));
+    return ApiResource.request(
+        ApiResource.RequestMethod.GET, url, params, SubscriptionSchedule.class, options);
+  }
+
+  /**
+   * Retrieves the details of an existing subscription schedule. You only need to supply the unique
+   * subscription schedule identifier that was returned upon subscription schedule creation.
+   */
+  public static SubscriptionSchedule retrieve(
+      String schedule, SubscriptionScheduleRetrieveParams params, RequestOptions options)
+      throws StripeException {
+    String url =
+        String.format(
+            "%s%s",
+            Stripe.getApiBase(),
+            String.format("/v1/subscription_schedules/%s", ApiResource.urlEncodeId(schedule)));
+    return ApiResource.request(
+        ApiResource.RequestMethod.GET, url, params, SubscriptionSchedule.class, options);
+  }
+
+  /** Updates an existing subscription schedule. */
+  @Override
+  public SubscriptionSchedule update(Map<String, Object> params) throws StripeException {
+    return update(params, (RequestOptions) null);
+  }
+
+  /** Updates an existing subscription schedule. */
+  @Override
+  public SubscriptionSchedule update(Map<String, Object> params, RequestOptions options)
+      throws StripeException {
+    String url =
+        String.format(
+            "%s%s",
+            Stripe.getApiBase(),
+            String.format("/v1/subscription_schedules/%s", ApiResource.urlEncodeId(this.getId())));
+    return ApiResource.request(
+        ApiResource.RequestMethod.POST, url, params, SubscriptionSchedule.class, options);
+  }
+
+  /** Updates an existing subscription schedule. */
+  public SubscriptionSchedule update(SubscriptionScheduleUpdateParams params)
+      throws StripeException {
+    return update(params, (RequestOptions) null);
+  }
+
+  /** Updates an existing subscription schedule. */
+  public SubscriptionSchedule update(
+      SubscriptionScheduleUpdateParams params, RequestOptions options) throws StripeException {
+    String url =
+        String.format(
+            "%s%s",
+            Stripe.getApiBase(),
+            String.format("/v1/subscription_schedules/%s", ApiResource.urlEncodeId(this.getId())));
+    return ApiResource.request(
+        ApiResource.RequestMethod.POST, url, params, SubscriptionSchedule.class, options);
+  }
+
+  /**
+   * An Add Invoice Item describes the prices and quantities that will be added as pending invoice
+   * items when entering a phase.
+   */
   @Getter
   @Setter
   @EqualsAndHashCode(callSuper = false)
@@ -737,6 +749,10 @@ public class SubscriptionSchedule extends ApiResource
     Long daysUntilDue;
   }
 
+  /**
+   * A phase describes the plans, coupon, and trialing status of a subscription for a predefined
+   * time period.
+   */
   @Getter
   @Setter
   @EqualsAndHashCode(callSuper = false)
@@ -931,6 +947,7 @@ public class SubscriptionSchedule extends ApiResource
     }
   }
 
+  /** A phase item describes the price and quantity of a phase. */
   @Getter
   @Setter
   @EqualsAndHashCode(callSuper = false)

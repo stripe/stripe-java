@@ -88,8 +88,9 @@ public class AccountCreateParams extends ApiRequestParams {
    * href="https://stripe.com/docs/api#account_create_bank_account">bank account</a> creation.
    * &lt;br&gt;&lt;br&gt;By default, providing an external account sets it as the new default
    * external account for its currency, and deletes the old default if one exists. To add additional
-   * external accounts without replacing the existing default for the currency, use the bank account
-   * or card creation API.
+   * external accounts without replacing the existing default for the currency, use the <a
+   * href="https://stripe.com/docs/api#account_create_bank_account">bank account</a> or <a
+   * href="https://stripe.com/docs/api#account_create_card">card creation</a> APIs.
    */
   @SerializedName("external_account")
   String externalAccount;
@@ -353,7 +354,8 @@ public class AccountCreateParams extends ApiRequestParams {
      * &lt;br&gt;&lt;br&gt;By default, providing an external account sets it as the new default
      * external account for its currency, and deletes the old default if one exists. To add
      * additional external accounts without replacing the existing default for the currency, use the
-     * bank account or card creation API.
+     * <a href="https://stripe.com/docs/api#account_create_bank_account">bank account</a> or <a
+     * href="https://stripe.com/docs/api#account_create_card">card creation</a> APIs.
      */
     public Builder setExternalAccount(String externalAccount) {
       this.externalAccount = externalAccount;

@@ -8,6 +8,7 @@ import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.Setter;
 
+/** A line item. */
 @Getter
 @Setter
 @EqualsAndHashCode(callSuper = false)

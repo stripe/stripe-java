@@ -17,6 +17,22 @@ import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.Setter;
 
+/**
+ * A VerificationReport is the result of an attempt to collect and verify data from a user. The
+ * collection of verification checks performed is determined from the {@code type} and {@code
+ * options} parameters used. You can find the result of each verification check performed in the
+ * appropriate sub-resource: {@code document}, {@code id_number}, {@code selfie}.
+ *
+ * <p>Each VerificationReport contains a copy of any data collected by the user as well as reference
+ * IDs which can be used to access collected images through the <a
+ * href="https://stripe.com/docs/api/files">FileUpload</a> API. To configure and create
+ * VerificationReports, use the <a
+ * href="https://stripe.com/docs/api/identity/verification_sessions">VerificationSession</a> API.
+ *
+ * <p>Related guides: <a
+ * href="https://stripe.com/docs/identity/verification-sessions#results">Accessing verification
+ * results</a>.
+ */
 @Getter
 @Setter
 @EqualsAndHashCode(callSuper = false)
@@ -72,6 +88,32 @@ public class VerificationReport extends ApiResource implements HasId {
   @SerializedName("verification_session")
   String verificationSession;
 
+  /** List all verification reports. */
+  public static VerificationReportCollection list(Map<String, Object> params)
+      throws StripeException {
+    return list(params, (RequestOptions) null);
+  }
+
+  /** List all verification reports. */
+  public static VerificationReportCollection list(
+      Map<String, Object> params, RequestOptions options) throws StripeException {
+    String url = String.format("%s%s", Stripe.getApiBase(), "/v1/identity/verification_reports");
+    return ApiResource.requestCollection(url, params, VerificationReportCollection.class, options);
+  }
+
+  /** List all verification reports. */
+  public static VerificationReportCollection list(VerificationReportListParams params)
+      throws StripeException {
+    return list(params, (RequestOptions) null);
+  }
+
+  /** List all verification reports. */
+  public static VerificationReportCollection list(
+      VerificationReportListParams params, RequestOptions options) throws StripeException {
+    String url = String.format("%s%s", Stripe.getApiBase(), "/v1/identity/verification_reports");
+    return ApiResource.requestCollection(url, params, VerificationReportCollection.class, options);
+  }
+
   /** Retrieves an existing VerificationReport. */
   public static VerificationReport retrieve(String report) throws StripeException {
     return retrieve(report, (Map<String, Object>) null, (RequestOptions) null);
@@ -108,32 +150,7 @@ public class VerificationReport extends ApiResource implements HasId {
         ApiResource.RequestMethod.GET, url, params, VerificationReport.class, options);
   }
 
-  /** List all verification reports. */
-  public static VerificationReportCollection list(Map<String, Object> params)
-      throws StripeException {
-    return list(params, (RequestOptions) null);
-  }
-
-  /** List all verification reports. */
-  public static VerificationReportCollection list(
-      Map<String, Object> params, RequestOptions options) throws StripeException {
-    String url = String.format("%s%s", Stripe.getApiBase(), "/v1/identity/verification_reports");
-    return ApiResource.requestCollection(url, params, VerificationReportCollection.class, options);
-  }
-
-  /** List all verification reports. */
-  public static VerificationReportCollection list(VerificationReportListParams params)
-      throws StripeException {
-    return list(params, (RequestOptions) null);
-  }
-
-  /** List all verification reports. */
-  public static VerificationReportCollection list(
-      VerificationReportListParams params, RequestOptions options) throws StripeException {
-    String url = String.format("%s%s", Stripe.getApiBase(), "/v1/identity/verification_reports");
-    return ApiResource.requestCollection(url, params, VerificationReportCollection.class, options);
-  }
-
+  /** Result from a document check. */
   @Getter
   @Setter
   @EqualsAndHashCode(callSuper = false)
@@ -197,6 +214,7 @@ public class VerificationReport extends ApiResource implements HasId {
     @SerializedName("type")
     String type;
 
+    /** Point in Time. */
     @Getter
     @Setter
     @EqualsAndHashCode(callSuper = false)
@@ -235,6 +253,7 @@ public class VerificationReport extends ApiResource implements HasId {
       String reason;
     }
 
+    /** Point in Time. */
     @Getter
     @Setter
     @EqualsAndHashCode(callSuper = false)
@@ -252,6 +271,7 @@ public class VerificationReport extends ApiResource implements HasId {
       Long year;
     }
 
+    /** Point in Time. */
     @Getter
     @Setter
     @EqualsAndHashCode(callSuper = false)
@@ -270,6 +290,7 @@ public class VerificationReport extends ApiResource implements HasId {
     }
   }
 
+  /** Result from an id_number check. */
   @Getter
   @Setter
   @EqualsAndHashCode(callSuper = false)
@@ -310,6 +331,7 @@ public class VerificationReport extends ApiResource implements HasId {
     @SerializedName("status")
     String status;
 
+    /** Point in Time. */
     @Getter
     @Setter
     @EqualsAndHashCode(callSuper = false)
@@ -402,6 +424,7 @@ public class VerificationReport extends ApiResource implements HasId {
     public static class IdNumber extends StripeObject {}
   }
 
+  /** Result from a selfie check. */
   @Getter
   @Setter
   @EqualsAndHashCode(callSuper = false)

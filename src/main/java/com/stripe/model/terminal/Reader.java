@@ -30,6 +30,12 @@ import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.Setter;
 
+/**
+ * A Reader represents a physical device for accepting payment details.
+ *
+ * <p>Related guide: <a href="https://stripe.com/docs/terminal/payments/connect-reader">Connecting
+ * to a Reader</a>.
+ */
 @Getter
 @Setter
 @EqualsAndHashCode(callSuper = false)
@@ -122,80 +128,48 @@ public class Reader extends ApiResource implements HasId, MetadataStore<Reader> 
     this.location = new ExpandableField<Location>(expandableObject.getId(), expandableObject);
   }
 
-  /**
-   * Updates a <code>Reader</code> object by setting the values of the parameters passed. Any
-   * parameters not provided will be left unchanged.
-   */
-  @Override
-  public Reader update(Map<String, Object> params) throws StripeException {
-    return update(params, (RequestOptions) null);
+  /** Cancels the current reader action. */
+  public Reader cancelAction() throws StripeException {
+    return cancelAction((Map<String, Object>) null, (RequestOptions) null);
   }
 
-  /**
-   * Updates a <code>Reader</code> object by setting the values of the parameters passed. Any
-   * parameters not provided will be left unchanged.
-   */
-  @Override
-  public Reader update(Map<String, Object> params, RequestOptions options) throws StripeException {
-    String url =
-        String.format(
-            "%s%s",
-            Stripe.getApiBase(),
-            String.format("/v1/terminal/readers/%s", ApiResource.urlEncodeId(this.getId())));
-    return ApiResource.request(ApiResource.RequestMethod.POST, url, params, Reader.class, options);
+  /** Cancels the current reader action. */
+  public Reader cancelAction(RequestOptions options) throws StripeException {
+    return cancelAction((Map<String, Object>) null, options);
   }
 
-  /**
-   * Updates a <code>Reader</code> object by setting the values of the parameters passed. Any
-   * parameters not provided will be left unchanged.
-   */
-  public Reader update(ReaderUpdateParams params) throws StripeException {
-    return update(params, (RequestOptions) null);
+  /** Cancels the current reader action. */
+  public Reader cancelAction(Map<String, Object> params) throws StripeException {
+    return cancelAction(params, (RequestOptions) null);
   }
 
-  /**
-   * Updates a <code>Reader</code> object by setting the values of the parameters passed. Any
-   * parameters not provided will be left unchanged.
-   */
-  public Reader update(ReaderUpdateParams params, RequestOptions options) throws StripeException {
-    String url =
-        String.format(
-            "%s%s",
-            Stripe.getApiBase(),
-            String.format("/v1/terminal/readers/%s", ApiResource.urlEncodeId(this.getId())));
-    return ApiResource.request(ApiResource.RequestMethod.POST, url, params, Reader.class, options);
-  }
-
-  /** Retrieves a <code>Reader</code> object. */
-  public static Reader retrieve(String reader) throws StripeException {
-    return retrieve(reader, (Map<String, Object>) null, (RequestOptions) null);
-  }
-
-  /** Retrieves a <code>Reader</code> object. */
-  public static Reader retrieve(String reader, RequestOptions options) throws StripeException {
-    return retrieve(reader, (Map<String, Object>) null, options);
-  }
-
-  /** Retrieves a <code>Reader</code> object. */
-  public static Reader retrieve(String reader, Map<String, Object> params, RequestOptions options)
+  /** Cancels the current reader action. */
+  public Reader cancelAction(Map<String, Object> params, RequestOptions options)
       throws StripeException {
     String url =
         String.format(
             "%s%s",
             Stripe.getApiBase(),
-            String.format("/v1/terminal/readers/%s", ApiResource.urlEncodeId(reader)));
-    return ApiResource.request(ApiResource.RequestMethod.GET, url, params, Reader.class, options);
+            String.format(
+                "/v1/terminal/readers/%s/cancel_action", ApiResource.urlEncodeId(this.getId())));
+    return ApiResource.request(ApiResource.RequestMethod.POST, url, params, Reader.class, options);
   }
 
-  /** Retrieves a <code>Reader</code> object. */
-  public static Reader retrieve(String reader, ReaderRetrieveParams params, RequestOptions options)
+  /** Cancels the current reader action. */
+  public Reader cancelAction(ReaderCancelActionParams params) throws StripeException {
+    return cancelAction(params, (RequestOptions) null);
+  }
+
+  /** Cancels the current reader action. */
+  public Reader cancelAction(ReaderCancelActionParams params, RequestOptions options)
       throws StripeException {
     String url =
         String.format(
             "%s%s",
             Stripe.getApiBase(),
-            String.format("/v1/terminal/readers/%s", ApiResource.urlEncodeId(reader)));
-    return ApiResource.request(ApiResource.RequestMethod.GET, url, params, Reader.class, options);
+            String.format(
+                "/v1/terminal/readers/%s/cancel_action", ApiResource.urlEncodeId(this.getId())));
+    return ApiResource.request(ApiResource.RequestMethod.POST, url, params, Reader.class, options);
   }
 
   /** Creates a new <code>Reader</code> object. */
@@ -222,30 +196,6 @@ public class Reader extends ApiResource implements HasId, MetadataStore<Reader> 
     return ApiResource.request(ApiResource.RequestMethod.POST, url, params, Reader.class, options);
   }
 
-  /** Returns a list of <code>Reader</code> objects. */
-  public static ReaderCollection list(Map<String, Object> params) throws StripeException {
-    return list(params, (RequestOptions) null);
-  }
-
-  /** Returns a list of <code>Reader</code> objects. */
-  public static ReaderCollection list(Map<String, Object> params, RequestOptions options)
-      throws StripeException {
-    String url = String.format("%s%s", Stripe.getApiBase(), "/v1/terminal/readers");
-    return ApiResource.requestCollection(url, params, ReaderCollection.class, options);
-  }
-
-  /** Returns a list of <code>Reader</code> objects. */
-  public static ReaderCollection list(ReaderListParams params) throws StripeException {
-    return list(params, (RequestOptions) null);
-  }
-
-  /** Returns a list of <code>Reader</code> objects. */
-  public static ReaderCollection list(ReaderListParams params, RequestOptions options)
-      throws StripeException {
-    String url = String.format("%s%s", Stripe.getApiBase(), "/v1/terminal/readers");
-    return ApiResource.requestCollection(url, params, ReaderCollection.class, options);
-  }
-
   /** Deletes a <code>Reader</code> object. */
   public Reader delete() throws StripeException {
     return delete((Map<String, Object>) null, (RequestOptions) null);
@@ -270,6 +220,30 @@ public class Reader extends ApiResource implements HasId, MetadataStore<Reader> 
             String.format("/v1/terminal/readers/%s", ApiResource.urlEncodeId(this.getId())));
     return ApiResource.request(
         ApiResource.RequestMethod.DELETE, url, params, Reader.class, options);
+  }
+
+  /** Returns a list of <code>Reader</code> objects. */
+  public static ReaderCollection list(Map<String, Object> params) throws StripeException {
+    return list(params, (RequestOptions) null);
+  }
+
+  /** Returns a list of <code>Reader</code> objects. */
+  public static ReaderCollection list(Map<String, Object> params, RequestOptions options)
+      throws StripeException {
+    String url = String.format("%s%s", Stripe.getApiBase(), "/v1/terminal/readers");
+    return ApiResource.requestCollection(url, params, ReaderCollection.class, options);
+  }
+
+  /** Returns a list of <code>Reader</code> objects. */
+  public static ReaderCollection list(ReaderListParams params) throws StripeException {
+    return list(params, (RequestOptions) null);
+  }
+
+  /** Returns a list of <code>Reader</code> objects. */
+  public static ReaderCollection list(ReaderListParams params, RequestOptions options)
+      throws StripeException {
+    String url = String.format("%s%s", Stripe.getApiBase(), "/v1/terminal/readers");
+    return ApiResource.requestCollection(url, params, ReaderCollection.class, options);
   }
 
   /** Initiates a payment flow on a Reader. */
@@ -345,86 +319,6 @@ public class Reader extends ApiResource implements HasId, MetadataStore<Reader> 
     return ApiResource.request(ApiResource.RequestMethod.POST, url, params, Reader.class, options);
   }
 
-  /** Cancels the current reader action. */
-  public Reader cancelAction() throws StripeException {
-    return cancelAction((Map<String, Object>) null, (RequestOptions) null);
-  }
-
-  /** Cancels the current reader action. */
-  public Reader cancelAction(RequestOptions options) throws StripeException {
-    return cancelAction((Map<String, Object>) null, options);
-  }
-
-  /** Cancels the current reader action. */
-  public Reader cancelAction(Map<String, Object> params) throws StripeException {
-    return cancelAction(params, (RequestOptions) null);
-  }
-
-  /** Cancels the current reader action. */
-  public Reader cancelAction(Map<String, Object> params, RequestOptions options)
-      throws StripeException {
-    String url =
-        String.format(
-            "%s%s",
-            Stripe.getApiBase(),
-            String.format(
-                "/v1/terminal/readers/%s/cancel_action", ApiResource.urlEncodeId(this.getId())));
-    return ApiResource.request(ApiResource.RequestMethod.POST, url, params, Reader.class, options);
-  }
-
-  /** Cancels the current reader action. */
-  public Reader cancelAction(ReaderCancelActionParams params) throws StripeException {
-    return cancelAction(params, (RequestOptions) null);
-  }
-
-  /** Cancels the current reader action. */
-  public Reader cancelAction(ReaderCancelActionParams params, RequestOptions options)
-      throws StripeException {
-    String url =
-        String.format(
-            "%s%s",
-            Stripe.getApiBase(),
-            String.format(
-                "/v1/terminal/readers/%s/cancel_action", ApiResource.urlEncodeId(this.getId())));
-    return ApiResource.request(ApiResource.RequestMethod.POST, url, params, Reader.class, options);
-  }
-
-  /** Sets reader display to show cart details. */
-  public Reader setReaderDisplay(Map<String, Object> params) throws StripeException {
-    return setReaderDisplay(params, (RequestOptions) null);
-  }
-
-  /** Sets reader display to show cart details. */
-  public Reader setReaderDisplay(Map<String, Object> params, RequestOptions options)
-      throws StripeException {
-    String url =
-        String.format(
-            "%s%s",
-            Stripe.getApiBase(),
-            String.format(
-                "/v1/terminal/readers/%s/set_reader_display",
-                ApiResource.urlEncodeId(this.getId())));
-    return ApiResource.request(ApiResource.RequestMethod.POST, url, params, Reader.class, options);
-  }
-
-  /** Sets reader display to show cart details. */
-  public Reader setReaderDisplay(ReaderSetReaderDisplayParams params) throws StripeException {
-    return setReaderDisplay(params, (RequestOptions) null);
-  }
-
-  /** Sets reader display to show cart details. */
-  public Reader setReaderDisplay(ReaderSetReaderDisplayParams params, RequestOptions options)
-      throws StripeException {
-    String url =
-        String.format(
-            "%s%s",
-            Stripe.getApiBase(),
-            String.format(
-                "/v1/terminal/readers/%s/set_reader_display",
-                ApiResource.urlEncodeId(this.getId())));
-    return ApiResource.request(ApiResource.RequestMethod.POST, url, params, Reader.class, options);
-  }
-
   /** Initiates a refund on a Reader. */
   public Reader refundPayment() throws StripeException {
     return refundPayment((Map<String, Object>) null, (RequestOptions) null);
@@ -469,6 +363,119 @@ public class Reader extends ApiResource implements HasId, MetadataStore<Reader> 
     return ApiResource.request(ApiResource.RequestMethod.POST, url, params, Reader.class, options);
   }
 
+  /** Retrieves a <code>Reader</code> object. */
+  public static Reader retrieve(String reader) throws StripeException {
+    return retrieve(reader, (Map<String, Object>) null, (RequestOptions) null);
+  }
+
+  /** Retrieves a <code>Reader</code> object. */
+  public static Reader retrieve(String reader, RequestOptions options) throws StripeException {
+    return retrieve(reader, (Map<String, Object>) null, options);
+  }
+
+  /** Retrieves a <code>Reader</code> object. */
+  public static Reader retrieve(String reader, Map<String, Object> params, RequestOptions options)
+      throws StripeException {
+    String url =
+        String.format(
+            "%s%s",
+            Stripe.getApiBase(),
+            String.format("/v1/terminal/readers/%s", ApiResource.urlEncodeId(reader)));
+    return ApiResource.request(ApiResource.RequestMethod.GET, url, params, Reader.class, options);
+  }
+
+  /** Retrieves a <code>Reader</code> object. */
+  public static Reader retrieve(String reader, ReaderRetrieveParams params, RequestOptions options)
+      throws StripeException {
+    String url =
+        String.format(
+            "%s%s",
+            Stripe.getApiBase(),
+            String.format("/v1/terminal/readers/%s", ApiResource.urlEncodeId(reader)));
+    return ApiResource.request(ApiResource.RequestMethod.GET, url, params, Reader.class, options);
+  }
+
+  /** Sets reader display to show cart details. */
+  public Reader setReaderDisplay(Map<String, Object> params) throws StripeException {
+    return setReaderDisplay(params, (RequestOptions) null);
+  }
+
+  /** Sets reader display to show cart details. */
+  public Reader setReaderDisplay(Map<String, Object> params, RequestOptions options)
+      throws StripeException {
+    String url =
+        String.format(
+            "%s%s",
+            Stripe.getApiBase(),
+            String.format(
+                "/v1/terminal/readers/%s/set_reader_display",
+                ApiResource.urlEncodeId(this.getId())));
+    return ApiResource.request(ApiResource.RequestMethod.POST, url, params, Reader.class, options);
+  }
+
+  /** Sets reader display to show cart details. */
+  public Reader setReaderDisplay(ReaderSetReaderDisplayParams params) throws StripeException {
+    return setReaderDisplay(params, (RequestOptions) null);
+  }
+
+  /** Sets reader display to show cart details. */
+  public Reader setReaderDisplay(ReaderSetReaderDisplayParams params, RequestOptions options)
+      throws StripeException {
+    String url =
+        String.format(
+            "%s%s",
+            Stripe.getApiBase(),
+            String.format(
+                "/v1/terminal/readers/%s/set_reader_display",
+                ApiResource.urlEncodeId(this.getId())));
+    return ApiResource.request(ApiResource.RequestMethod.POST, url, params, Reader.class, options);
+  }
+
+  /**
+   * Updates a <code>Reader</code> object by setting the values of the parameters passed. Any
+   * parameters not provided will be left unchanged.
+   */
+  @Override
+  public Reader update(Map<String, Object> params) throws StripeException {
+    return update(params, (RequestOptions) null);
+  }
+
+  /**
+   * Updates a <code>Reader</code> object by setting the values of the parameters passed. Any
+   * parameters not provided will be left unchanged.
+   */
+  @Override
+  public Reader update(Map<String, Object> params, RequestOptions options) throws StripeException {
+    String url =
+        String.format(
+            "%s%s",
+            Stripe.getApiBase(),
+            String.format("/v1/terminal/readers/%s", ApiResource.urlEncodeId(this.getId())));
+    return ApiResource.request(ApiResource.RequestMethod.POST, url, params, Reader.class, options);
+  }
+
+  /**
+   * Updates a <code>Reader</code> object by setting the values of the parameters passed. Any
+   * parameters not provided will be left unchanged.
+   */
+  public Reader update(ReaderUpdateParams params) throws StripeException {
+    return update(params, (RequestOptions) null);
+  }
+
+  /**
+   * Updates a <code>Reader</code> object by setting the values of the parameters passed. Any
+   * parameters not provided will be left unchanged.
+   */
+  public Reader update(ReaderUpdateParams params, RequestOptions options) throws StripeException {
+    String url =
+        String.format(
+            "%s%s",
+            Stripe.getApiBase(),
+            String.format("/v1/terminal/readers/%s", ApiResource.urlEncodeId(this.getId())));
+    return ApiResource.request(ApiResource.RequestMethod.POST, url, params, Reader.class, options);
+  }
+
+  /** Represents an action performed by the reader. */
   @Getter
   @Setter
   @EqualsAndHashCode(callSuper = false)
@@ -514,6 +521,7 @@ public class Reader extends ApiResource implements HasId, MetadataStore<Reader> 
     @SerializedName("type")
     String type;
 
+    /** Represents a reader action to process a payment intent. */
     @Getter
     @Setter
     @EqualsAndHashCode(callSuper = false)
@@ -547,6 +555,7 @@ public class Reader extends ApiResource implements HasId, MetadataStore<Reader> 
             new ExpandableField<PaymentIntent>(expandableObject.getId(), expandableObject);
       }
 
+      /** Represents a per-transaction override of a reader configuration. */
       @Getter
       @Setter
       @EqualsAndHashCode(callSuper = false)
@@ -557,6 +566,7 @@ public class Reader extends ApiResource implements HasId, MetadataStore<Reader> 
       }
     }
 
+    /** Represents a reader action to process a setup intent. */
     @Getter
     @Setter
     @EqualsAndHashCode(callSuper = false)
@@ -590,6 +600,7 @@ public class Reader extends ApiResource implements HasId, MetadataStore<Reader> 
       }
     }
 
+    /** Represents a reader action to refund a payment. */
     @Getter
     @Setter
     @EqualsAndHashCode(callSuper = false)
@@ -699,6 +710,7 @@ public class Reader extends ApiResource implements HasId, MetadataStore<Reader> 
       }
     }
 
+    /** Represents a reader action to set the reader display. */
     @Getter
     @Setter
     @EqualsAndHashCode(callSuper = false)
@@ -715,6 +727,7 @@ public class Reader extends ApiResource implements HasId, MetadataStore<Reader> 
       @SerializedName("type")
       String type;
 
+      /** Represents a cart to be displayed on the reader. */
       @Getter
       @Setter
       @EqualsAndHashCode(callSuper = false)
@@ -745,6 +758,7 @@ public class Reader extends ApiResource implements HasId, MetadataStore<Reader> 
         @SerializedName("total")
         Long total;
 
+        /** Represents a line item to be displayed on the reader. */
         @Getter
         @Setter
         @EqualsAndHashCode(callSuper = false)

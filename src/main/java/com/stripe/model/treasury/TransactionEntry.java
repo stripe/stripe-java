@@ -16,6 +16,10 @@ import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.Setter;
 
+/**
+ * TransactionEntries represent individual units of money movements within a single <a
+ * href="https://stripe.com/docs/api#transactions">Transaction</a>.
+ */
 @Getter
 @Setter
 @EqualsAndHashCode(callSuper = false)
@@ -120,6 +124,31 @@ public class TransactionEntry extends ApiResource implements HasId {
     this.transaction = new ExpandableField<Transaction>(expandableObject.getId(), expandableObject);
   }
 
+  /** Retrieves a list of TransactionEntry objects. */
+  public static TransactionEntryCollection list(Map<String, Object> params) throws StripeException {
+    return list(params, (RequestOptions) null);
+  }
+
+  /** Retrieves a list of TransactionEntry objects. */
+  public static TransactionEntryCollection list(Map<String, Object> params, RequestOptions options)
+      throws StripeException {
+    String url = String.format("%s%s", Stripe.getApiBase(), "/v1/treasury/transaction_entries");
+    return ApiResource.requestCollection(url, params, TransactionEntryCollection.class, options);
+  }
+
+  /** Retrieves a list of TransactionEntry objects. */
+  public static TransactionEntryCollection list(TransactionEntryListParams params)
+      throws StripeException {
+    return list(params, (RequestOptions) null);
+  }
+
+  /** Retrieves a list of TransactionEntry objects. */
+  public static TransactionEntryCollection list(
+      TransactionEntryListParams params, RequestOptions options) throws StripeException {
+    String url = String.format("%s%s", Stripe.getApiBase(), "/v1/treasury/transaction_entries");
+    return ApiResource.requestCollection(url, params, TransactionEntryCollection.class, options);
+  }
+
   /** Retrieves a TransactionEntry object. */
   public static TransactionEntry retrieve(String id) throws StripeException {
     return retrieve(id, (Map<String, Object>) null, (RequestOptions) null);
@@ -156,31 +185,7 @@ public class TransactionEntry extends ApiResource implements HasId {
         ApiResource.RequestMethod.GET, url, params, TransactionEntry.class, options);
   }
 
-  /** Retrieves a list of TransactionEntry objects. */
-  public static TransactionEntryCollection list(Map<String, Object> params) throws StripeException {
-    return list(params, (RequestOptions) null);
-  }
-
-  /** Retrieves a list of TransactionEntry objects. */
-  public static TransactionEntryCollection list(Map<String, Object> params, RequestOptions options)
-      throws StripeException {
-    String url = String.format("%s%s", Stripe.getApiBase(), "/v1/treasury/transaction_entries");
-    return ApiResource.requestCollection(url, params, TransactionEntryCollection.class, options);
-  }
-
-  /** Retrieves a list of TransactionEntry objects. */
-  public static TransactionEntryCollection list(TransactionEntryListParams params)
-      throws StripeException {
-    return list(params, (RequestOptions) null);
-  }
-
-  /** Retrieves a list of TransactionEntry objects. */
-  public static TransactionEntryCollection list(
-      TransactionEntryListParams params, RequestOptions options) throws StripeException {
-    String url = String.format("%s%s", Stripe.getApiBase(), "/v1/treasury/transaction_entries");
-    return ApiResource.requestCollection(url, params, TransactionEntryCollection.class, options);
-  }
-
+  /** Change to a FinancialAccount's balance. */
   @Getter
   @Setter
   @EqualsAndHashCode(callSuper = false)

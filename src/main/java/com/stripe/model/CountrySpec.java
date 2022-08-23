@@ -14,6 +14,14 @@ import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.Setter;
 
+/**
+ * Stripe needs to collect certain pieces of information about each account created. These
+ * requirements can differ depending on the account's country. The Country Specs API makes these
+ * rules available to your integration.
+ *
+ * <p>You can also view the information from this API call as <a
+ * href="https://stripe.com/docs/connect/required-verification-information">an online guide</a>.
+ */
 @Getter
 @Setter
 @EqualsAndHashCode(callSuper = false)

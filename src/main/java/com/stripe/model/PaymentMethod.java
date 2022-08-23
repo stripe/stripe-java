@@ -18,6 +18,14 @@ import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.Setter;
 
+/**
+ * PaymentMethod objects represent your customer's payment instruments. You can use them with <a
+ * href="https://stripe.com/docs/payments/payment-intents">PaymentIntents</a> to collect payments or
+ * save them to Customer objects to store instrument details for future payments.
+ *
+ * <p>Related guides: <a href="https://stripe.com/docs/payments/payment-methods">Payment Methods</a>
+ * and <a href="https://stripe.com/docs/payments/more-payment-scenarios">More Payment Scenarios</a>.
+ */
 @Getter
 @Setter
 @EqualsAndHashCode(callSuper = false)
@@ -194,210 +202,6 @@ public class PaymentMethod extends ApiResource implements HasId, MetadataStore<P
   }
 
   /**
-   * Creates a PaymentMethod object. Read the <a
-   * href="https://stripe.com/docs/stripe-js/reference#stripe-create-payment-method">Stripe.js
-   * reference</a> to learn how to create PaymentMethods via Stripe.js.
-   *
-   * <p>Instead of creating a PaymentMethod directly, we recommend using the <a
-   * href="https://stripe.com/docs/payments/accept-a-payment">PaymentIntents</a> API to accept a
-   * payment immediately or the <a
-   * href="https://stripe.com/docs/payments/save-and-reuse">SetupIntent</a> API to collect payment
-   * method details ahead of a future payment.
-   */
-  public static PaymentMethod create(Map<String, Object> params) throws StripeException {
-    return create(params, (RequestOptions) null);
-  }
-
-  /**
-   * Creates a PaymentMethod object. Read the <a
-   * href="https://stripe.com/docs/stripe-js/reference#stripe-create-payment-method">Stripe.js
-   * reference</a> to learn how to create PaymentMethods via Stripe.js.
-   *
-   * <p>Instead of creating a PaymentMethod directly, we recommend using the <a
-   * href="https://stripe.com/docs/payments/accept-a-payment">PaymentIntents</a> API to accept a
-   * payment immediately or the <a
-   * href="https://stripe.com/docs/payments/save-and-reuse">SetupIntent</a> API to collect payment
-   * method details ahead of a future payment.
-   */
-  public static PaymentMethod create(Map<String, Object> params, RequestOptions options)
-      throws StripeException {
-    String url = String.format("%s%s", Stripe.getApiBase(), "/v1/payment_methods");
-    return ApiResource.request(
-        ApiResource.RequestMethod.POST, url, params, PaymentMethod.class, options);
-  }
-
-  /**
-   * Creates a PaymentMethod object. Read the <a
-   * href="https://stripe.com/docs/stripe-js/reference#stripe-create-payment-method">Stripe.js
-   * reference</a> to learn how to create PaymentMethods via Stripe.js.
-   *
-   * <p>Instead of creating a PaymentMethod directly, we recommend using the <a
-   * href="https://stripe.com/docs/payments/accept-a-payment">PaymentIntents</a> API to accept a
-   * payment immediately or the <a
-   * href="https://stripe.com/docs/payments/save-and-reuse">SetupIntent</a> API to collect payment
-   * method details ahead of a future payment.
-   */
-  public static PaymentMethod create(PaymentMethodCreateParams params) throws StripeException {
-    return create(params, (RequestOptions) null);
-  }
-
-  /**
-   * Creates a PaymentMethod object. Read the <a
-   * href="https://stripe.com/docs/stripe-js/reference#stripe-create-payment-method">Stripe.js
-   * reference</a> to learn how to create PaymentMethods via Stripe.js.
-   *
-   * <p>Instead of creating a PaymentMethod directly, we recommend using the <a
-   * href="https://stripe.com/docs/payments/accept-a-payment">PaymentIntents</a> API to accept a
-   * payment immediately or the <a
-   * href="https://stripe.com/docs/payments/save-and-reuse">SetupIntent</a> API to collect payment
-   * method details ahead of a future payment.
-   */
-  public static PaymentMethod create(PaymentMethodCreateParams params, RequestOptions options)
-      throws StripeException {
-    String url = String.format("%s%s", Stripe.getApiBase(), "/v1/payment_methods");
-    return ApiResource.request(
-        ApiResource.RequestMethod.POST, url, params, PaymentMethod.class, options);
-  }
-
-  /**
-   * Retrieves a PaymentMethod object attached to the StripeAccount. To retrieve a payment method
-   * attached to a Customer, you should use <a
-   * href="https://stripe.com/docs/api/payment_methods/customer">Retrieve a Customer’s
-   * PaymentMethods</a>
-   */
-  public static PaymentMethod retrieve(String paymentMethod) throws StripeException {
-    return retrieve(paymentMethod, (Map<String, Object>) null, (RequestOptions) null);
-  }
-
-  /**
-   * Retrieves a PaymentMethod object attached to the StripeAccount. To retrieve a payment method
-   * attached to a Customer, you should use <a
-   * href="https://stripe.com/docs/api/payment_methods/customer">Retrieve a Customer’s
-   * PaymentMethods</a>
-   */
-  public static PaymentMethod retrieve(String paymentMethod, RequestOptions options)
-      throws StripeException {
-    return retrieve(paymentMethod, (Map<String, Object>) null, options);
-  }
-
-  /**
-   * Retrieves a PaymentMethod object attached to the StripeAccount. To retrieve a payment method
-   * attached to a Customer, you should use <a
-   * href="https://stripe.com/docs/api/payment_methods/customer">Retrieve a Customer’s
-   * PaymentMethods</a>
-   */
-  public static PaymentMethod retrieve(
-      String paymentMethod, Map<String, Object> params, RequestOptions options)
-      throws StripeException {
-    String url =
-        String.format(
-            "%s%s",
-            Stripe.getApiBase(),
-            String.format("/v1/payment_methods/%s", ApiResource.urlEncodeId(paymentMethod)));
-    return ApiResource.request(
-        ApiResource.RequestMethod.GET, url, params, PaymentMethod.class, options);
-  }
-
-  /**
-   * Retrieves a PaymentMethod object attached to the StripeAccount. To retrieve a payment method
-   * attached to a Customer, you should use <a
-   * href="https://stripe.com/docs/api/payment_methods/customer">Retrieve a Customer’s
-   * PaymentMethods</a>
-   */
-  public static PaymentMethod retrieve(
-      String paymentMethod, PaymentMethodRetrieveParams params, RequestOptions options)
-      throws StripeException {
-    String url =
-        String.format(
-            "%s%s",
-            Stripe.getApiBase(),
-            String.format("/v1/payment_methods/%s", ApiResource.urlEncodeId(paymentMethod)));
-    return ApiResource.request(
-        ApiResource.RequestMethod.GET, url, params, PaymentMethod.class, options);
-  }
-
-  /** Updates a PaymentMethod object. A PaymentMethod must be attached a customer to be updated. */
-  @Override
-  public PaymentMethod update(Map<String, Object> params) throws StripeException {
-    return update(params, (RequestOptions) null);
-  }
-
-  /** Updates a PaymentMethod object. A PaymentMethod must be attached a customer to be updated. */
-  @Override
-  public PaymentMethod update(Map<String, Object> params, RequestOptions options)
-      throws StripeException {
-    String url =
-        String.format(
-            "%s%s",
-            Stripe.getApiBase(),
-            String.format("/v1/payment_methods/%s", ApiResource.urlEncodeId(this.getId())));
-    return ApiResource.request(
-        ApiResource.RequestMethod.POST, url, params, PaymentMethod.class, options);
-  }
-
-  /** Updates a PaymentMethod object. A PaymentMethod must be attached a customer to be updated. */
-  public PaymentMethod update(PaymentMethodUpdateParams params) throws StripeException {
-    return update(params, (RequestOptions) null);
-  }
-
-  /** Updates a PaymentMethod object. A PaymentMethod must be attached a customer to be updated. */
-  public PaymentMethod update(PaymentMethodUpdateParams params, RequestOptions options)
-      throws StripeException {
-    String url =
-        String.format(
-            "%s%s",
-            Stripe.getApiBase(),
-            String.format("/v1/payment_methods/%s", ApiResource.urlEncodeId(this.getId())));
-    return ApiResource.request(
-        ApiResource.RequestMethod.POST, url, params, PaymentMethod.class, options);
-  }
-
-  /**
-   * Returns a list of PaymentMethods attached to the StripeAccount. For listing a customer’s
-   * payment methods, you should use <a
-   * href="https://stripe.com/docs/api/payment_methods/customer_list">List a Customer’s
-   * PaymentMethods</a>
-   */
-  public static PaymentMethodCollection list(Map<String, Object> params) throws StripeException {
-    return list(params, (RequestOptions) null);
-  }
-
-  /**
-   * Returns a list of PaymentMethods attached to the StripeAccount. For listing a customer’s
-   * payment methods, you should use <a
-   * href="https://stripe.com/docs/api/payment_methods/customer_list">List a Customer’s
-   * PaymentMethods</a>
-   */
-  public static PaymentMethodCollection list(Map<String, Object> params, RequestOptions options)
-      throws StripeException {
-    String url = String.format("%s%s", Stripe.getApiBase(), "/v1/payment_methods");
-    return ApiResource.requestCollection(url, params, PaymentMethodCollection.class, options);
-  }
-
-  /**
-   * Returns a list of PaymentMethods attached to the StripeAccount. For listing a customer’s
-   * payment methods, you should use <a
-   * href="https://stripe.com/docs/api/payment_methods/customer_list">List a Customer’s
-   * PaymentMethods</a>
-   */
-  public static PaymentMethodCollection list(PaymentMethodListParams params)
-      throws StripeException {
-    return list(params, (RequestOptions) null);
-  }
-
-  /**
-   * Returns a list of PaymentMethods attached to the StripeAccount. For listing a customer’s
-   * payment methods, you should use <a
-   * href="https://stripe.com/docs/api/payment_methods/customer_list">List a Customer’s
-   * PaymentMethods</a>
-   */
-  public static PaymentMethodCollection list(PaymentMethodListParams params, RequestOptions options)
-      throws StripeException {
-    String url = String.format("%s%s", Stripe.getApiBase(), "/v1/payment_methods");
-    return ApiResource.requestCollection(url, params, PaymentMethodCollection.class, options);
-  }
-
-  /**
    * Attaches a PaymentMethod object to a Customer.
    *
    * <p>To attach a new PaymentMethod to a customer for future payments, we recommend you use a <a
@@ -500,6 +304,72 @@ public class PaymentMethod extends ApiResource implements HasId, MetadataStore<P
   }
 
   /**
+   * Creates a PaymentMethod object. Read the <a
+   * href="https://stripe.com/docs/stripe-js/reference#stripe-create-payment-method">Stripe.js
+   * reference</a> to learn how to create PaymentMethods via Stripe.js.
+   *
+   * <p>Instead of creating a PaymentMethod directly, we recommend using the <a
+   * href="https://stripe.com/docs/payments/accept-a-payment">PaymentIntents</a> API to accept a
+   * payment immediately or the <a
+   * href="https://stripe.com/docs/payments/save-and-reuse">SetupIntent</a> API to collect payment
+   * method details ahead of a future payment.
+   */
+  public static PaymentMethod create(Map<String, Object> params) throws StripeException {
+    return create(params, (RequestOptions) null);
+  }
+
+  /**
+   * Creates a PaymentMethod object. Read the <a
+   * href="https://stripe.com/docs/stripe-js/reference#stripe-create-payment-method">Stripe.js
+   * reference</a> to learn how to create PaymentMethods via Stripe.js.
+   *
+   * <p>Instead of creating a PaymentMethod directly, we recommend using the <a
+   * href="https://stripe.com/docs/payments/accept-a-payment">PaymentIntents</a> API to accept a
+   * payment immediately or the <a
+   * href="https://stripe.com/docs/payments/save-and-reuse">SetupIntent</a> API to collect payment
+   * method details ahead of a future payment.
+   */
+  public static PaymentMethod create(Map<String, Object> params, RequestOptions options)
+      throws StripeException {
+    String url = String.format("%s%s", Stripe.getApiBase(), "/v1/payment_methods");
+    return ApiResource.request(
+        ApiResource.RequestMethod.POST, url, params, PaymentMethod.class, options);
+  }
+
+  /**
+   * Creates a PaymentMethod object. Read the <a
+   * href="https://stripe.com/docs/stripe-js/reference#stripe-create-payment-method">Stripe.js
+   * reference</a> to learn how to create PaymentMethods via Stripe.js.
+   *
+   * <p>Instead of creating a PaymentMethod directly, we recommend using the <a
+   * href="https://stripe.com/docs/payments/accept-a-payment">PaymentIntents</a> API to accept a
+   * payment immediately or the <a
+   * href="https://stripe.com/docs/payments/save-and-reuse">SetupIntent</a> API to collect payment
+   * method details ahead of a future payment.
+   */
+  public static PaymentMethod create(PaymentMethodCreateParams params) throws StripeException {
+    return create(params, (RequestOptions) null);
+  }
+
+  /**
+   * Creates a PaymentMethod object. Read the <a
+   * href="https://stripe.com/docs/stripe-js/reference#stripe-create-payment-method">Stripe.js
+   * reference</a> to learn how to create PaymentMethods via Stripe.js.
+   *
+   * <p>Instead of creating a PaymentMethod directly, we recommend using the <a
+   * href="https://stripe.com/docs/payments/accept-a-payment">PaymentIntents</a> API to accept a
+   * payment immediately or the <a
+   * href="https://stripe.com/docs/payments/save-and-reuse">SetupIntent</a> API to collect payment
+   * method details ahead of a future payment.
+   */
+  public static PaymentMethod create(PaymentMethodCreateParams params, RequestOptions options)
+      throws StripeException {
+    String url = String.format("%s%s", Stripe.getApiBase(), "/v1/payment_methods");
+    return ApiResource.request(
+        ApiResource.RequestMethod.POST, url, params, PaymentMethod.class, options);
+  }
+
+  /**
    * Detaches a PaymentMethod object from a Customer. After a PaymentMethod is detached, it can no
    * longer be used for a payment or re-attached to a Customer.
    */
@@ -557,6 +427,144 @@ public class PaymentMethod extends ApiResource implements HasId, MetadataStore<P
             "%s%s",
             Stripe.getApiBase(),
             String.format("/v1/payment_methods/%s/detach", ApiResource.urlEncodeId(this.getId())));
+    return ApiResource.request(
+        ApiResource.RequestMethod.POST, url, params, PaymentMethod.class, options);
+  }
+
+  /**
+   * Returns a list of PaymentMethods attached to the StripeAccount. For listing a customer’s
+   * payment methods, you should use <a
+   * href="https://stripe.com/docs/api/payment_methods/customer_list">List a Customer’s
+   * PaymentMethods</a>
+   */
+  public static PaymentMethodCollection list(Map<String, Object> params) throws StripeException {
+    return list(params, (RequestOptions) null);
+  }
+
+  /**
+   * Returns a list of PaymentMethods attached to the StripeAccount. For listing a customer’s
+   * payment methods, you should use <a
+   * href="https://stripe.com/docs/api/payment_methods/customer_list">List a Customer’s
+   * PaymentMethods</a>
+   */
+  public static PaymentMethodCollection list(Map<String, Object> params, RequestOptions options)
+      throws StripeException {
+    String url = String.format("%s%s", Stripe.getApiBase(), "/v1/payment_methods");
+    return ApiResource.requestCollection(url, params, PaymentMethodCollection.class, options);
+  }
+
+  /**
+   * Returns a list of PaymentMethods attached to the StripeAccount. For listing a customer’s
+   * payment methods, you should use <a
+   * href="https://stripe.com/docs/api/payment_methods/customer_list">List a Customer’s
+   * PaymentMethods</a>
+   */
+  public static PaymentMethodCollection list(PaymentMethodListParams params)
+      throws StripeException {
+    return list(params, (RequestOptions) null);
+  }
+
+  /**
+   * Returns a list of PaymentMethods attached to the StripeAccount. For listing a customer’s
+   * payment methods, you should use <a
+   * href="https://stripe.com/docs/api/payment_methods/customer_list">List a Customer’s
+   * PaymentMethods</a>
+   */
+  public static PaymentMethodCollection list(PaymentMethodListParams params, RequestOptions options)
+      throws StripeException {
+    String url = String.format("%s%s", Stripe.getApiBase(), "/v1/payment_methods");
+    return ApiResource.requestCollection(url, params, PaymentMethodCollection.class, options);
+  }
+
+  /**
+   * Retrieves a PaymentMethod object attached to the StripeAccount. To retrieve a payment method
+   * attached to a Customer, you should use <a
+   * href="https://stripe.com/docs/api/payment_methods/customer">Retrieve a Customer’s
+   * PaymentMethods</a>
+   */
+  public static PaymentMethod retrieve(String paymentMethod) throws StripeException {
+    return retrieve(paymentMethod, (Map<String, Object>) null, (RequestOptions) null);
+  }
+
+  /**
+   * Retrieves a PaymentMethod object attached to the StripeAccount. To retrieve a payment method
+   * attached to a Customer, you should use <a
+   * href="https://stripe.com/docs/api/payment_methods/customer">Retrieve a Customer’s
+   * PaymentMethods</a>
+   */
+  public static PaymentMethod retrieve(String paymentMethod, RequestOptions options)
+      throws StripeException {
+    return retrieve(paymentMethod, (Map<String, Object>) null, options);
+  }
+
+  /**
+   * Retrieves a PaymentMethod object attached to the StripeAccount. To retrieve a payment method
+   * attached to a Customer, you should use <a
+   * href="https://stripe.com/docs/api/payment_methods/customer">Retrieve a Customer’s
+   * PaymentMethods</a>
+   */
+  public static PaymentMethod retrieve(
+      String paymentMethod, Map<String, Object> params, RequestOptions options)
+      throws StripeException {
+    String url =
+        String.format(
+            "%s%s",
+            Stripe.getApiBase(),
+            String.format("/v1/payment_methods/%s", ApiResource.urlEncodeId(paymentMethod)));
+    return ApiResource.request(
+        ApiResource.RequestMethod.GET, url, params, PaymentMethod.class, options);
+  }
+
+  /**
+   * Retrieves a PaymentMethod object attached to the StripeAccount. To retrieve a payment method
+   * attached to a Customer, you should use <a
+   * href="https://stripe.com/docs/api/payment_methods/customer">Retrieve a Customer’s
+   * PaymentMethods</a>
+   */
+  public static PaymentMethod retrieve(
+      String paymentMethod, PaymentMethodRetrieveParams params, RequestOptions options)
+      throws StripeException {
+    String url =
+        String.format(
+            "%s%s",
+            Stripe.getApiBase(),
+            String.format("/v1/payment_methods/%s", ApiResource.urlEncodeId(paymentMethod)));
+    return ApiResource.request(
+        ApiResource.RequestMethod.GET, url, params, PaymentMethod.class, options);
+  }
+
+  /** Updates a PaymentMethod object. A PaymentMethod must be attached a customer to be updated. */
+  @Override
+  public PaymentMethod update(Map<String, Object> params) throws StripeException {
+    return update(params, (RequestOptions) null);
+  }
+
+  /** Updates a PaymentMethod object. A PaymentMethod must be attached a customer to be updated. */
+  @Override
+  public PaymentMethod update(Map<String, Object> params, RequestOptions options)
+      throws StripeException {
+    String url =
+        String.format(
+            "%s%s",
+            Stripe.getApiBase(),
+            String.format("/v1/payment_methods/%s", ApiResource.urlEncodeId(this.getId())));
+    return ApiResource.request(
+        ApiResource.RequestMethod.POST, url, params, PaymentMethod.class, options);
+  }
+
+  /** Updates a PaymentMethod object. A PaymentMethod must be attached a customer to be updated. */
+  public PaymentMethod update(PaymentMethodUpdateParams params) throws StripeException {
+    return update(params, (RequestOptions) null);
+  }
+
+  /** Updates a PaymentMethod object. A PaymentMethod must be attached a customer to be updated. */
+  public PaymentMethod update(PaymentMethodUpdateParams params, RequestOptions options)
+      throws StripeException {
+    String url =
+        String.format(
+            "%s%s",
+            Stripe.getApiBase(),
+            String.format("/v1/payment_methods/%s", ApiResource.urlEncodeId(this.getId())));
     return ApiResource.request(
         ApiResource.RequestMethod.POST, url, params, PaymentMethod.class, options);
   }
@@ -1108,6 +1116,10 @@ public class PaymentMethod extends ApiResource implements HasId, MetadataStore<P
   @EqualsAndHashCode(callSuper = false)
   public static class Promptpay extends StripeObject {}
 
+  /**
+   * Options to configure Radar. See <a href="https://stripe.com/docs/radar/radar-session">Radar
+   * Session</a> for more information.
+   */
   @Getter
   @Setter
   @EqualsAndHashCode(callSuper = false)

@@ -13,6 +13,9 @@ import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.Setter;
 
+/**
+ * A Mandate is a record of the permission a customer has given you to debit their payment method.
+ */
 @Getter
 @Setter
 @EqualsAndHashCode(callSuper = false)

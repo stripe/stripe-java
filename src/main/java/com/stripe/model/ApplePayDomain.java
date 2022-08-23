@@ -49,31 +49,6 @@ public class ApplePayDomain extends ApiResource implements HasId {
   @SerializedName("object")
   String object;
 
-  /** List apple pay domains. */
-  public static ApplePayDomainCollection list(Map<String, Object> params) throws StripeException {
-    return list(params, (RequestOptions) null);
-  }
-
-  /** List apple pay domains. */
-  public static ApplePayDomainCollection list(Map<String, Object> params, RequestOptions options)
-      throws StripeException {
-    String url = String.format("%s%s", Stripe.getApiBase(), "/v1/apple_pay/domains");
-    return ApiResource.requestCollection(url, params, ApplePayDomainCollection.class, options);
-  }
-
-  /** List apple pay domains. */
-  public static ApplePayDomainCollection list(ApplePayDomainListParams params)
-      throws StripeException {
-    return list(params, (RequestOptions) null);
-  }
-
-  /** List apple pay domains. */
-  public static ApplePayDomainCollection list(
-      ApplePayDomainListParams params, RequestOptions options) throws StripeException {
-    String url = String.format("%s%s", Stripe.getApiBase(), "/v1/apple_pay/domains");
-    return ApiResource.requestCollection(url, params, ApplePayDomainCollection.class, options);
-  }
-
   /** Create an apple pay domain. */
   public static ApplePayDomain create(Map<String, Object> params) throws StripeException {
     return create(params, (RequestOptions) null);
@@ -98,6 +73,58 @@ public class ApplePayDomain extends ApiResource implements HasId {
     String url = String.format("%s%s", Stripe.getApiBase(), "/v1/apple_pay/domains");
     return ApiResource.request(
         ApiResource.RequestMethod.POST, url, params, ApplePayDomain.class, options);
+  }
+
+  /** Delete an apple pay domain. */
+  public ApplePayDomain delete() throws StripeException {
+    return delete((Map<String, Object>) null, (RequestOptions) null);
+  }
+
+  /** Delete an apple pay domain. */
+  public ApplePayDomain delete(RequestOptions options) throws StripeException {
+    return delete((Map<String, Object>) null, options);
+  }
+
+  /** Delete an apple pay domain. */
+  public ApplePayDomain delete(Map<String, Object> params) throws StripeException {
+    return delete(params, (RequestOptions) null);
+  }
+
+  /** Delete an apple pay domain. */
+  public ApplePayDomain delete(Map<String, Object> params, RequestOptions options)
+      throws StripeException {
+    String url =
+        String.format(
+            "%s%s",
+            Stripe.getApiBase(),
+            String.format("/v1/apple_pay/domains/%s", ApiResource.urlEncodeId(this.getId())));
+    return ApiResource.request(
+        ApiResource.RequestMethod.DELETE, url, params, ApplePayDomain.class, options);
+  }
+
+  /** List apple pay domains. */
+  public static ApplePayDomainCollection list(Map<String, Object> params) throws StripeException {
+    return list(params, (RequestOptions) null);
+  }
+
+  /** List apple pay domains. */
+  public static ApplePayDomainCollection list(Map<String, Object> params, RequestOptions options)
+      throws StripeException {
+    String url = String.format("%s%s", Stripe.getApiBase(), "/v1/apple_pay/domains");
+    return ApiResource.requestCollection(url, params, ApplePayDomainCollection.class, options);
+  }
+
+  /** List apple pay domains. */
+  public static ApplePayDomainCollection list(ApplePayDomainListParams params)
+      throws StripeException {
+    return list(params, (RequestOptions) null);
+  }
+
+  /** List apple pay domains. */
+  public static ApplePayDomainCollection list(
+      ApplePayDomainListParams params, RequestOptions options) throws StripeException {
+    String url = String.format("%s%s", Stripe.getApiBase(), "/v1/apple_pay/domains");
+    return ApiResource.requestCollection(url, params, ApplePayDomainCollection.class, options);
   }
 
   /** Retrieve an apple pay domain. */
@@ -134,32 +161,5 @@ public class ApplePayDomain extends ApiResource implements HasId {
             String.format("/v1/apple_pay/domains/%s", ApiResource.urlEncodeId(domain)));
     return ApiResource.request(
         ApiResource.RequestMethod.GET, url, params, ApplePayDomain.class, options);
-  }
-
-  /** Delete an apple pay domain. */
-  public ApplePayDomain delete() throws StripeException {
-    return delete((Map<String, Object>) null, (RequestOptions) null);
-  }
-
-  /** Delete an apple pay domain. */
-  public ApplePayDomain delete(RequestOptions options) throws StripeException {
-    return delete((Map<String, Object>) null, options);
-  }
-
-  /** Delete an apple pay domain. */
-  public ApplePayDomain delete(Map<String, Object> params) throws StripeException {
-    return delete(params, (RequestOptions) null);
-  }
-
-  /** Delete an apple pay domain. */
-  public ApplePayDomain delete(Map<String, Object> params, RequestOptions options)
-      throws StripeException {
-    String url =
-        String.format(
-            "%s%s",
-            Stripe.getApiBase(),
-            String.format("/v1/apple_pay/domains/%s", ApiResource.urlEncodeId(this.getId())));
-    return ApiResource.request(
-        ApiResource.RequestMethod.DELETE, url, params, ApplePayDomain.class, options);
   }
 }

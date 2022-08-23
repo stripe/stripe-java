@@ -8,6 +8,7 @@ import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.Setter;
 
+/** Describes a snapshot of the owners of an account at a particular point in time. */
 @Getter
 @Setter
 @EqualsAndHashCode(callSuper = false)

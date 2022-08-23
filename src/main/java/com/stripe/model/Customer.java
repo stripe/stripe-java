@@ -23,6 +23,13 @@ import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.Setter;
 
+/**
+ * This object represents a customer of your business. It lets you create recurring charges and
+ * track payments that belong to the same customer.
+ *
+ * <p>Related guide: <a href="https://stripe.com/docs/payments/save-during-payment">Save a card
+ * during payment</a>.
+ */
 @Getter
 @Setter
 @EqualsAndHashCode(callSuper = false)
@@ -238,6 +245,344 @@ public class Customer extends ApiResource implements HasId, MetadataStore<Custom
   }
 
   /**
+   * Returns a list of transactions that updated the customer’s <a
+   * href="https://stripe.com/docs/billing/customer/balance">balances</a>.
+   */
+  public CustomerBalanceTransactionCollection balanceTransactions() throws StripeException {
+    return balanceTransactions((Map<String, Object>) null, (RequestOptions) null);
+  }
+
+  /**
+   * Returns a list of transactions that updated the customer’s <a
+   * href="https://stripe.com/docs/billing/customer/balance">balances</a>.
+   */
+  public CustomerBalanceTransactionCollection balanceTransactions(Map<String, Object> params)
+      throws StripeException {
+    return balanceTransactions(params, (RequestOptions) null);
+  }
+
+  /**
+   * Returns a list of transactions that updated the customer’s <a
+   * href="https://stripe.com/docs/billing/customer/balance">balances</a>.
+   */
+  public CustomerBalanceTransactionCollection balanceTransactions(
+      Map<String, Object> params, RequestOptions options) throws StripeException {
+    String url =
+        String.format(
+            "%s%s",
+            Stripe.getApiBase(),
+            String.format(
+                "/v1/customers/%s/balance_transactions", ApiResource.urlEncodeId(this.getId())));
+    return ApiResource.requestCollection(
+        url, params, CustomerBalanceTransactionCollection.class, options);
+  }
+
+  /**
+   * Returns a list of transactions that updated the customer’s <a
+   * href="https://stripe.com/docs/billing/customer/balance">balances</a>.
+   */
+  public CustomerBalanceTransactionCollection balanceTransactions(
+      CustomerBalanceTransactionsParams params) throws StripeException {
+    return balanceTransactions(params, (RequestOptions) null);
+  }
+
+  /**
+   * Returns a list of transactions that updated the customer’s <a
+   * href="https://stripe.com/docs/billing/customer/balance">balances</a>.
+   */
+  public CustomerBalanceTransactionCollection balanceTransactions(
+      CustomerBalanceTransactionsParams params, RequestOptions options) throws StripeException {
+    String url =
+        String.format(
+            "%s%s",
+            Stripe.getApiBase(),
+            String.format(
+                "/v1/customers/%s/balance_transactions", ApiResource.urlEncodeId(this.getId())));
+    return ApiResource.requestCollection(
+        url, params, CustomerBalanceTransactionCollection.class, options);
+  }
+
+  /** Creates a new customer object. */
+  public static Customer create(Map<String, Object> params) throws StripeException {
+    return create(params, (RequestOptions) null);
+  }
+
+  /** Creates a new customer object. */
+  public static Customer create(Map<String, Object> params, RequestOptions options)
+      throws StripeException {
+    String url = String.format("%s%s", Stripe.getApiBase(), "/v1/customers");
+    return ApiResource.request(
+        ApiResource.RequestMethod.POST, url, params, Customer.class, options);
+  }
+
+  /** Creates a new customer object. */
+  public static Customer create(CustomerCreateParams params) throws StripeException {
+    return create(params, (RequestOptions) null);
+  }
+
+  /** Creates a new customer object. */
+  public static Customer create(CustomerCreateParams params, RequestOptions options)
+      throws StripeException {
+    String url = String.format("%s%s", Stripe.getApiBase(), "/v1/customers");
+    return ApiResource.request(
+        ApiResource.RequestMethod.POST, url, params, Customer.class, options);
+  }
+
+  /**
+   * Retrieve funding instructions for a customer cash balance. If funding instructions do not yet
+   * exist for the customer, new funding instructions will be created. If funding instructions have
+   * already been created for a given customer, the same funding instructions will be retrieved. In
+   * other words, we will return the same funding instructions each time.
+   */
+  public FundingInstructions createFundingInstructions(Map<String, Object> params)
+      throws StripeException {
+    return createFundingInstructions(params, (RequestOptions) null);
+  }
+
+  /**
+   * Retrieve funding instructions for a customer cash balance. If funding instructions do not yet
+   * exist for the customer, new funding instructions will be created. If funding instructions have
+   * already been created for a given customer, the same funding instructions will be retrieved. In
+   * other words, we will return the same funding instructions each time.
+   */
+  public FundingInstructions createFundingInstructions(
+      Map<String, Object> params, RequestOptions options) throws StripeException {
+    String url =
+        String.format(
+            "%s%s",
+            Stripe.getApiBase(),
+            String.format(
+                "/v1/customers/%s/funding_instructions", ApiResource.urlEncodeId(this.getId())));
+    return ApiResource.request(
+        ApiResource.RequestMethod.POST, url, params, FundingInstructions.class, options);
+  }
+
+  /**
+   * Retrieve funding instructions for a customer cash balance. If funding instructions do not yet
+   * exist for the customer, new funding instructions will be created. If funding instructions have
+   * already been created for a given customer, the same funding instructions will be retrieved. In
+   * other words, we will return the same funding instructions each time.
+   */
+  public FundingInstructions createFundingInstructions(
+      CustomerCreateFundingInstructionsParams params) throws StripeException {
+    return createFundingInstructions(params, (RequestOptions) null);
+  }
+
+  /**
+   * Retrieve funding instructions for a customer cash balance. If funding instructions do not yet
+   * exist for the customer, new funding instructions will be created. If funding instructions have
+   * already been created for a given customer, the same funding instructions will be retrieved. In
+   * other words, we will return the same funding instructions each time.
+   */
+  public FundingInstructions createFundingInstructions(
+      CustomerCreateFundingInstructionsParams params, RequestOptions options)
+      throws StripeException {
+    String url =
+        String.format(
+            "%s%s",
+            Stripe.getApiBase(),
+            String.format(
+                "/v1/customers/%s/funding_instructions", ApiResource.urlEncodeId(this.getId())));
+    return ApiResource.request(
+        ApiResource.RequestMethod.POST, url, params, FundingInstructions.class, options);
+  }
+
+  /**
+   * Permanently deletes a customer. It cannot be undone. Also immediately cancels any active
+   * subscriptions on the customer.
+   */
+  public Customer delete() throws StripeException {
+    return delete((Map<String, Object>) null, (RequestOptions) null);
+  }
+
+  /**
+   * Permanently deletes a customer. It cannot be undone. Also immediately cancels any active
+   * subscriptions on the customer.
+   */
+  public Customer delete(RequestOptions options) throws StripeException {
+    return delete((Map<String, Object>) null, options);
+  }
+
+  /**
+   * Permanently deletes a customer. It cannot be undone. Also immediately cancels any active
+   * subscriptions on the customer.
+   */
+  public Customer delete(Map<String, Object> params) throws StripeException {
+    return delete(params, (RequestOptions) null);
+  }
+
+  /**
+   * Permanently deletes a customer. It cannot be undone. Also immediately cancels any active
+   * subscriptions on the customer.
+   */
+  public Customer delete(Map<String, Object> params, RequestOptions options)
+      throws StripeException {
+    String url =
+        String.format(
+            "%s%s",
+            Stripe.getApiBase(),
+            String.format("/v1/customers/%s", ApiResource.urlEncodeId(this.getId())));
+    return ApiResource.request(
+        ApiResource.RequestMethod.DELETE, url, params, Customer.class, options);
+  }
+
+  /** Removes the currently applied discount on a customer. */
+  public Discount deleteDiscount() throws StripeException {
+    return deleteDiscount((Map<String, Object>) null, (RequestOptions) null);
+  }
+
+  /** Removes the currently applied discount on a customer. */
+  public Discount deleteDiscount(Map<String, Object> params) throws StripeException {
+    return deleteDiscount(params, (RequestOptions) null);
+  }
+
+  /** Removes the currently applied discount on a customer. */
+  public Discount deleteDiscount(Map<String, Object> params, RequestOptions options)
+      throws StripeException {
+    String url =
+        String.format(
+            "%s%s",
+            Stripe.getApiBase(),
+            String.format("/v1/customers/%s/discount", ApiResource.urlEncodeId(this.getId())));
+    return ApiResource.request(
+        ApiResource.RequestMethod.DELETE, url, params, Discount.class, options);
+  }
+
+  /**
+   * Returns a list of your customers. The customers are returned sorted by creation date, with the
+   * most recent customers appearing first.
+   */
+  public static CustomerCollection list(Map<String, Object> params) throws StripeException {
+    return list(params, (RequestOptions) null);
+  }
+
+  /**
+   * Returns a list of your customers. The customers are returned sorted by creation date, with the
+   * most recent customers appearing first.
+   */
+  public static CustomerCollection list(Map<String, Object> params, RequestOptions options)
+      throws StripeException {
+    String url = String.format("%s%s", Stripe.getApiBase(), "/v1/customers");
+    return ApiResource.requestCollection(url, params, CustomerCollection.class, options);
+  }
+
+  /**
+   * Returns a list of your customers. The customers are returned sorted by creation date, with the
+   * most recent customers appearing first.
+   */
+  public static CustomerCollection list(CustomerListParams params) throws StripeException {
+    return list(params, (RequestOptions) null);
+  }
+
+  /**
+   * Returns a list of your customers. The customers are returned sorted by creation date, with the
+   * most recent customers appearing first.
+   */
+  public static CustomerCollection list(CustomerListParams params, RequestOptions options)
+      throws StripeException {
+    String url = String.format("%s%s", Stripe.getApiBase(), "/v1/customers");
+    return ApiResource.requestCollection(url, params, CustomerCollection.class, options);
+  }
+
+  /** Returns a list of PaymentMethods for a given Customer. */
+  public PaymentMethodCollection listPaymentMethods(Map<String, Object> params)
+      throws StripeException {
+    return listPaymentMethods(params, (RequestOptions) null);
+  }
+
+  /** Returns a list of PaymentMethods for a given Customer. */
+  public PaymentMethodCollection listPaymentMethods(
+      Map<String, Object> params, RequestOptions options) throws StripeException {
+    String url =
+        String.format(
+            "%s%s",
+            Stripe.getApiBase(),
+            String.format(
+                "/v1/customers/%s/payment_methods", ApiResource.urlEncodeId(this.getId())));
+    return ApiResource.requestCollection(url, params, PaymentMethodCollection.class, options);
+  }
+
+  /** Returns a list of PaymentMethods for a given Customer. */
+  public PaymentMethodCollection listPaymentMethods(CustomerListPaymentMethodsParams params)
+      throws StripeException {
+    return listPaymentMethods(params, (RequestOptions) null);
+  }
+
+  /** Returns a list of PaymentMethods for a given Customer. */
+  public PaymentMethodCollection listPaymentMethods(
+      CustomerListPaymentMethodsParams params, RequestOptions options) throws StripeException {
+    String url =
+        String.format(
+            "%s%s",
+            Stripe.getApiBase(),
+            String.format(
+                "/v1/customers/%s/payment_methods", ApiResource.urlEncodeId(this.getId())));
+    return ApiResource.requestCollection(url, params, PaymentMethodCollection.class, options);
+  }
+
+  /** Retrieves a Customer object. */
+  public static Customer retrieve(String customer) throws StripeException {
+    return retrieve(customer, (Map<String, Object>) null, (RequestOptions) null);
+  }
+
+  /** Retrieves a Customer object. */
+  public static Customer retrieve(String customer, RequestOptions options) throws StripeException {
+    return retrieve(customer, (Map<String, Object>) null, options);
+  }
+
+  /** Retrieves a Customer object. */
+  public static Customer retrieve(
+      String customer, Map<String, Object> params, RequestOptions options) throws StripeException {
+    String url =
+        String.format(
+            "%s%s",
+            Stripe.getApiBase(),
+            String.format("/v1/customers/%s", ApiResource.urlEncodeId(customer)));
+    return ApiResource.request(ApiResource.RequestMethod.GET, url, params, Customer.class, options);
+  }
+
+  /** Retrieves a Customer object. */
+  public static Customer retrieve(
+      String customer, CustomerRetrieveParams params, RequestOptions options)
+      throws StripeException {
+    String url =
+        String.format(
+            "%s%s",
+            Stripe.getApiBase(),
+            String.format("/v1/customers/%s", ApiResource.urlEncodeId(customer)));
+    return ApiResource.request(ApiResource.RequestMethod.GET, url, params, Customer.class, options);
+  }
+
+  /** Retrieves a PaymentMethod object for a given Customer. */
+  public PaymentMethod retrievePaymentMethod(
+      String customer, Map<String, Object> params, RequestOptions options) throws StripeException {
+    String url =
+        String.format(
+            "%s%s",
+            Stripe.getApiBase(),
+            String.format(
+                "/v1/customers/%s/payment_methods/%s",
+                ApiResource.urlEncodeId(customer), ApiResource.urlEncodeId(this.getId())));
+    return ApiResource.request(
+        ApiResource.RequestMethod.GET, url, params, PaymentMethod.class, options);
+  }
+
+  /** Retrieves a PaymentMethod object for a given Customer. */
+  public PaymentMethod retrievePaymentMethod(
+      String customer, CustomerRetrievePaymentMethodParams params, RequestOptions options)
+      throws StripeException {
+    String url =
+        String.format(
+            "%s%s",
+            Stripe.getApiBase(),
+            String.format(
+                "/v1/customers/%s/payment_methods/%s",
+                ApiResource.urlEncodeId(customer), ApiResource.urlEncodeId(this.getId())));
+    return ApiResource.request(
+        ApiResource.RequestMethod.GET, url, params, PaymentMethod.class, options);
+  }
+
+  /**
    * Search for customers you’ve previously created using Stripe’s <a
    * href="https://stripe.com/docs/search#search-query-language">Search Query Language</a>. Don’t
    * use search in read-after-write flows where strict consistency is necessary. Under normal
@@ -287,101 +632,6 @@ public class Customer extends ApiResource implements HasId, MetadataStore<Custom
       throws StripeException {
     String url = String.format("%s%s", Stripe.getApiBase(), "/v1/customers/search");
     return ApiResource.requestSearchResult(url, params, CustomerSearchResult.class, options);
-  }
-
-  /**
-   * Returns a list of your customers. The customers are returned sorted by creation date, with the
-   * most recent customers appearing first.
-   */
-  public static CustomerCollection list(Map<String, Object> params) throws StripeException {
-    return list(params, (RequestOptions) null);
-  }
-
-  /**
-   * Returns a list of your customers. The customers are returned sorted by creation date, with the
-   * most recent customers appearing first.
-   */
-  public static CustomerCollection list(Map<String, Object> params, RequestOptions options)
-      throws StripeException {
-    String url = String.format("%s%s", Stripe.getApiBase(), "/v1/customers");
-    return ApiResource.requestCollection(url, params, CustomerCollection.class, options);
-  }
-
-  /**
-   * Returns a list of your customers. The customers are returned sorted by creation date, with the
-   * most recent customers appearing first.
-   */
-  public static CustomerCollection list(CustomerListParams params) throws StripeException {
-    return list(params, (RequestOptions) null);
-  }
-
-  /**
-   * Returns a list of your customers. The customers are returned sorted by creation date, with the
-   * most recent customers appearing first.
-   */
-  public static CustomerCollection list(CustomerListParams params, RequestOptions options)
-      throws StripeException {
-    String url = String.format("%s%s", Stripe.getApiBase(), "/v1/customers");
-    return ApiResource.requestCollection(url, params, CustomerCollection.class, options);
-  }
-
-  /** Creates a new customer object. */
-  public static Customer create(Map<String, Object> params) throws StripeException {
-    return create(params, (RequestOptions) null);
-  }
-
-  /** Creates a new customer object. */
-  public static Customer create(Map<String, Object> params, RequestOptions options)
-      throws StripeException {
-    String url = String.format("%s%s", Stripe.getApiBase(), "/v1/customers");
-    return ApiResource.request(
-        ApiResource.RequestMethod.POST, url, params, Customer.class, options);
-  }
-
-  /** Creates a new customer object. */
-  public static Customer create(CustomerCreateParams params) throws StripeException {
-    return create(params, (RequestOptions) null);
-  }
-
-  /** Creates a new customer object. */
-  public static Customer create(CustomerCreateParams params, RequestOptions options)
-      throws StripeException {
-    String url = String.format("%s%s", Stripe.getApiBase(), "/v1/customers");
-    return ApiResource.request(
-        ApiResource.RequestMethod.POST, url, params, Customer.class, options);
-  }
-
-  /** Retrieves a Customer object. */
-  public static Customer retrieve(String customer) throws StripeException {
-    return retrieve(customer, (Map<String, Object>) null, (RequestOptions) null);
-  }
-
-  /** Retrieves a Customer object. */
-  public static Customer retrieve(String customer, RequestOptions options) throws StripeException {
-    return retrieve(customer, (Map<String, Object>) null, options);
-  }
-
-  /** Retrieves a Customer object. */
-  public static Customer retrieve(
-      String customer, Map<String, Object> params, RequestOptions options) throws StripeException {
-    String url =
-        String.format(
-            "%s%s",
-            Stripe.getApiBase(),
-            String.format("/v1/customers/%s", ApiResource.urlEncodeId(customer)));
-    return ApiResource.request(ApiResource.RequestMethod.GET, url, params, Customer.class, options);
-  }
-
-  /** Retrieves a Customer object. */
-  public static Customer retrieve(
-      String customer, CustomerRetrieveParams params, RequestOptions options)
-      throws StripeException {
-    String url =
-        String.format(
-            "%s%s",
-            Stripe.getApiBase(),
-            String.format("/v1/customers/%s", ApiResource.urlEncodeId(customer)));
-    return ApiResource.request(ApiResource.RequestMethod.GET, url, params, Customer.class, options);
   }
 
   /**
@@ -470,249 +720,6 @@ public class Customer extends ApiResource implements HasId, MetadataStore<Custom
             String.format("/v1/customers/%s", ApiResource.urlEncodeId(this.getId())));
     return ApiResource.request(
         ApiResource.RequestMethod.POST, url, params, Customer.class, options);
-  }
-
-  /**
-   * Permanently deletes a customer. It cannot be undone. Also immediately cancels any active
-   * subscriptions on the customer.
-   */
-  public Customer delete() throws StripeException {
-    return delete((Map<String, Object>) null, (RequestOptions) null);
-  }
-
-  /**
-   * Permanently deletes a customer. It cannot be undone. Also immediately cancels any active
-   * subscriptions on the customer.
-   */
-  public Customer delete(RequestOptions options) throws StripeException {
-    return delete((Map<String, Object>) null, options);
-  }
-
-  /**
-   * Permanently deletes a customer. It cannot be undone. Also immediately cancels any active
-   * subscriptions on the customer.
-   */
-  public Customer delete(Map<String, Object> params) throws StripeException {
-    return delete(params, (RequestOptions) null);
-  }
-
-  /**
-   * Permanently deletes a customer. It cannot be undone. Also immediately cancels any active
-   * subscriptions on the customer.
-   */
-  public Customer delete(Map<String, Object> params, RequestOptions options)
-      throws StripeException {
-    String url =
-        String.format(
-            "%s%s",
-            Stripe.getApiBase(),
-            String.format("/v1/customers/%s", ApiResource.urlEncodeId(this.getId())));
-    return ApiResource.request(
-        ApiResource.RequestMethod.DELETE, url, params, Customer.class, options);
-  }
-
-  /** Returns a list of PaymentMethods for a given Customer. */
-  public PaymentMethodCollection listPaymentMethods(Map<String, Object> params)
-      throws StripeException {
-    return listPaymentMethods(params, (RequestOptions) null);
-  }
-
-  /** Returns a list of PaymentMethods for a given Customer. */
-  public PaymentMethodCollection listPaymentMethods(
-      Map<String, Object> params, RequestOptions options) throws StripeException {
-    String url =
-        String.format(
-            "%s%s",
-            Stripe.getApiBase(),
-            String.format(
-                "/v1/customers/%s/payment_methods", ApiResource.urlEncodeId(this.getId())));
-    return ApiResource.requestCollection(url, params, PaymentMethodCollection.class, options);
-  }
-
-  /** Returns a list of PaymentMethods for a given Customer. */
-  public PaymentMethodCollection listPaymentMethods(CustomerListPaymentMethodsParams params)
-      throws StripeException {
-    return listPaymentMethods(params, (RequestOptions) null);
-  }
-
-  /** Returns a list of PaymentMethods for a given Customer. */
-  public PaymentMethodCollection listPaymentMethods(
-      CustomerListPaymentMethodsParams params, RequestOptions options) throws StripeException {
-    String url =
-        String.format(
-            "%s%s",
-            Stripe.getApiBase(),
-            String.format(
-                "/v1/customers/%s/payment_methods", ApiResource.urlEncodeId(this.getId())));
-    return ApiResource.requestCollection(url, params, PaymentMethodCollection.class, options);
-  }
-
-  /** Retrieves a PaymentMethod object for a given Customer. */
-  public PaymentMethod retrievePaymentMethod(
-      String customer, Map<String, Object> params, RequestOptions options) throws StripeException {
-    String url =
-        String.format(
-            "%s%s",
-            Stripe.getApiBase(),
-            String.format(
-                "/v1/customers/%s/payment_methods/%s",
-                ApiResource.urlEncodeId(customer), ApiResource.urlEncodeId(this.getId())));
-    return ApiResource.request(
-        ApiResource.RequestMethod.GET, url, params, PaymentMethod.class, options);
-  }
-
-  /** Retrieves a PaymentMethod object for a given Customer. */
-  public PaymentMethod retrievePaymentMethod(
-      String customer, CustomerRetrievePaymentMethodParams params, RequestOptions options)
-      throws StripeException {
-    String url =
-        String.format(
-            "%s%s",
-            Stripe.getApiBase(),
-            String.format(
-                "/v1/customers/%s/payment_methods/%s",
-                ApiResource.urlEncodeId(customer), ApiResource.urlEncodeId(this.getId())));
-    return ApiResource.request(
-        ApiResource.RequestMethod.GET, url, params, PaymentMethod.class, options);
-  }
-
-  /**
-   * Returns a list of transactions that updated the customer’s <a
-   * href="https://stripe.com/docs/billing/customer/balance">balances</a>.
-   */
-  public CustomerBalanceTransactionCollection balanceTransactions() throws StripeException {
-    return balanceTransactions((Map<String, Object>) null, (RequestOptions) null);
-  }
-
-  /**
-   * Returns a list of transactions that updated the customer’s <a
-   * href="https://stripe.com/docs/billing/customer/balance">balances</a>.
-   */
-  public CustomerBalanceTransactionCollection balanceTransactions(Map<String, Object> params)
-      throws StripeException {
-    return balanceTransactions(params, (RequestOptions) null);
-  }
-
-  /**
-   * Returns a list of transactions that updated the customer’s <a
-   * href="https://stripe.com/docs/billing/customer/balance">balances</a>.
-   */
-  public CustomerBalanceTransactionCollection balanceTransactions(
-      Map<String, Object> params, RequestOptions options) throws StripeException {
-    String url =
-        String.format(
-            "%s%s",
-            Stripe.getApiBase(),
-            String.format(
-                "/v1/customers/%s/balance_transactions", ApiResource.urlEncodeId(this.getId())));
-    return ApiResource.requestCollection(
-        url, params, CustomerBalanceTransactionCollection.class, options);
-  }
-
-  /**
-   * Returns a list of transactions that updated the customer’s <a
-   * href="https://stripe.com/docs/billing/customer/balance">balances</a>.
-   */
-  public CustomerBalanceTransactionCollection balanceTransactions(
-      CustomerBalanceTransactionsParams params) throws StripeException {
-    return balanceTransactions(params, (RequestOptions) null);
-  }
-
-  /**
-   * Returns a list of transactions that updated the customer’s <a
-   * href="https://stripe.com/docs/billing/customer/balance">balances</a>.
-   */
-  public CustomerBalanceTransactionCollection balanceTransactions(
-      CustomerBalanceTransactionsParams params, RequestOptions options) throws StripeException {
-    String url =
-        String.format(
-            "%s%s",
-            Stripe.getApiBase(),
-            String.format(
-                "/v1/customers/%s/balance_transactions", ApiResource.urlEncodeId(this.getId())));
-    return ApiResource.requestCollection(
-        url, params, CustomerBalanceTransactionCollection.class, options);
-  }
-
-  /**
-   * Retrieve funding instructions for a customer cash balance. If funding instructions do not yet
-   * exist for the customer, new funding instructions will be created. If funding instructions have
-   * already been created for a given customer, the same funding instructions will be retrieved. In
-   * other words, we will return the same funding instructions each time.
-   */
-  public FundingInstructions createFundingInstructions(Map<String, Object> params)
-      throws StripeException {
-    return createFundingInstructions(params, (RequestOptions) null);
-  }
-
-  /**
-   * Retrieve funding instructions for a customer cash balance. If funding instructions do not yet
-   * exist for the customer, new funding instructions will be created. If funding instructions have
-   * already been created for a given customer, the same funding instructions will be retrieved. In
-   * other words, we will return the same funding instructions each time.
-   */
-  public FundingInstructions createFundingInstructions(
-      Map<String, Object> params, RequestOptions options) throws StripeException {
-    String url =
-        String.format(
-            "%s%s",
-            Stripe.getApiBase(),
-            String.format(
-                "/v1/customers/%s/funding_instructions", ApiResource.urlEncodeId(this.getId())));
-    return ApiResource.request(
-        ApiResource.RequestMethod.POST, url, params, FundingInstructions.class, options);
-  }
-
-  /**
-   * Retrieve funding instructions for a customer cash balance. If funding instructions do not yet
-   * exist for the customer, new funding instructions will be created. If funding instructions have
-   * already been created for a given customer, the same funding instructions will be retrieved. In
-   * other words, we will return the same funding instructions each time.
-   */
-  public FundingInstructions createFundingInstructions(
-      CustomerCreateFundingInstructionsParams params) throws StripeException {
-    return createFundingInstructions(params, (RequestOptions) null);
-  }
-
-  /**
-   * Retrieve funding instructions for a customer cash balance. If funding instructions do not yet
-   * exist for the customer, new funding instructions will be created. If funding instructions have
-   * already been created for a given customer, the same funding instructions will be retrieved. In
-   * other words, we will return the same funding instructions each time.
-   */
-  public FundingInstructions createFundingInstructions(
-      CustomerCreateFundingInstructionsParams params, RequestOptions options)
-      throws StripeException {
-    String url =
-        String.format(
-            "%s%s",
-            Stripe.getApiBase(),
-            String.format(
-                "/v1/customers/%s/funding_instructions", ApiResource.urlEncodeId(this.getId())));
-    return ApiResource.request(
-        ApiResource.RequestMethod.POST, url, params, FundingInstructions.class, options);
-  }
-
-  /** Removes the currently applied discount on a customer. */
-  public Discount deleteDiscount() throws StripeException {
-    return deleteDiscount((Map<String, Object>) null, (RequestOptions) null);
-  }
-
-  /** Removes the currently applied discount on a customer. */
-  public Discount deleteDiscount(Map<String, Object> params) throws StripeException {
-    return deleteDiscount(params, (RequestOptions) null);
-  }
-
-  /** Removes the currently applied discount on a customer. */
-  public Discount deleteDiscount(Map<String, Object> params, RequestOptions options)
-      throws StripeException {
-    String url =
-        String.format(
-            "%s%s",
-            Stripe.getApiBase(),
-            String.format("/v1/customers/%s/discount", ApiResource.urlEncodeId(this.getId())));
-    return ApiResource.request(
-        ApiResource.RequestMethod.DELETE, url, params, Discount.class, options);
   }
 
   @Getter

@@ -18,6 +18,11 @@ import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.Setter;
 
+/**
+ * ReceivedDebits represent funds pulled from a <a
+ * href="https://stripe.com/docs/api#financial_accounts">FinancialAccount</a>. These are not
+ * initiated from the FinancialAccount.
+ */
 @Getter
 @Setter
 @EqualsAndHashCode(callSuper = false)

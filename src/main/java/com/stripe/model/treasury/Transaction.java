@@ -15,6 +15,10 @@ import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.Setter;
 
+/**
+ * Transactions represent changes to a <a
+ * href="https://stripe.com/docs/api#financial_accounts">FinancialAccount's</a> balance.
+ */
 @Getter
 @Setter
 @EqualsAndHashCode(callSuper = false)
@@ -102,6 +106,30 @@ public class Transaction extends ApiResource implements HasId {
   @SerializedName("status_transitions")
   StatusTransitions statusTransitions;
 
+  /** Retrieves a list of Transaction objects. */
+  public static TransactionCollection list(Map<String, Object> params) throws StripeException {
+    return list(params, (RequestOptions) null);
+  }
+
+  /** Retrieves a list of Transaction objects. */
+  public static TransactionCollection list(Map<String, Object> params, RequestOptions options)
+      throws StripeException {
+    String url = String.format("%s%s", Stripe.getApiBase(), "/v1/treasury/transactions");
+    return ApiResource.requestCollection(url, params, TransactionCollection.class, options);
+  }
+
+  /** Retrieves a list of Transaction objects. */
+  public static TransactionCollection list(TransactionListParams params) throws StripeException {
+    return list(params, (RequestOptions) null);
+  }
+
+  /** Retrieves a list of Transaction objects. */
+  public static TransactionCollection list(TransactionListParams params, RequestOptions options)
+      throws StripeException {
+    String url = String.format("%s%s", Stripe.getApiBase(), "/v1/treasury/transactions");
+    return ApiResource.requestCollection(url, params, TransactionCollection.class, options);
+  }
+
   /** Retrieves the details of an existing Transaction. */
   public static Transaction retrieve(String id) throws StripeException {
     return retrieve(id, (Map<String, Object>) null, (RequestOptions) null);
@@ -136,30 +164,7 @@ public class Transaction extends ApiResource implements HasId {
         ApiResource.RequestMethod.GET, url, params, Transaction.class, options);
   }
 
-  /** Retrieves a list of Transaction objects. */
-  public static TransactionCollection list(Map<String, Object> params) throws StripeException {
-    return list(params, (RequestOptions) null);
-  }
-
-  /** Retrieves a list of Transaction objects. */
-  public static TransactionCollection list(Map<String, Object> params, RequestOptions options)
-      throws StripeException {
-    String url = String.format("%s%s", Stripe.getApiBase(), "/v1/treasury/transactions");
-    return ApiResource.requestCollection(url, params, TransactionCollection.class, options);
-  }
-
-  /** Retrieves a list of Transaction objects. */
-  public static TransactionCollection list(TransactionListParams params) throws StripeException {
-    return list(params, (RequestOptions) null);
-  }
-
-  /** Retrieves a list of Transaction objects. */
-  public static TransactionCollection list(TransactionListParams params, RequestOptions options)
-      throws StripeException {
-    String url = String.format("%s%s", Stripe.getApiBase(), "/v1/treasury/transactions");
-    return ApiResource.requestCollection(url, params, TransactionCollection.class, options);
-  }
-
+  /** Change to a FinancialAccount's balance. */
   @Getter
   @Setter
   @EqualsAndHashCode(callSuper = false)

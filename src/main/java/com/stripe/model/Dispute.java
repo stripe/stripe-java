@@ -16,6 +16,14 @@ import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.Setter;
 
+/**
+ * A dispute occurs when a customer questions your charge with their card issuer. When this happens,
+ * you're given the opportunity to respond to the dispute with evidence that shows that the charge
+ * is legitimate. You can find more information about the dispute process in our <a
+ * href="https://stripe.com/docs/disputes">Disputes and Fraud</a> documentation.
+ *
+ * <p>Related guide: <a href="https://stripe.com/docs/disputes">Disputes and Fraud</a>.
+ */
 @Getter
 @Setter
 @EqualsAndHashCode(callSuper = false)
@@ -165,6 +173,82 @@ public class Dispute extends ApiResource
         new ExpandableField<PaymentIntent>(expandableObject.getId(), expandableObject);
   }
 
+  /**
+   * Closing the dispute for a charge indicates that you do not have any evidence to submit and are
+   * essentially dismissing the dispute, acknowledging it as lost.
+   *
+   * <p>The status of the dispute will change from <code>needs_response</code> to <code>lost</code>.
+   * <em>Closing a dispute is irreversible</em>.
+   */
+  public Dispute close() throws StripeException {
+    return close((Map<String, Object>) null, (RequestOptions) null);
+  }
+
+  /**
+   * Closing the dispute for a charge indicates that you do not have any evidence to submit and are
+   * essentially dismissing the dispute, acknowledging it as lost.
+   *
+   * <p>The status of the dispute will change from <code>needs_response</code> to <code>lost</code>.
+   * <em>Closing a dispute is irreversible</em>.
+   */
+  public Dispute close(RequestOptions options) throws StripeException {
+    return close((Map<String, Object>) null, options);
+  }
+
+  /**
+   * Closing the dispute for a charge indicates that you do not have any evidence to submit and are
+   * essentially dismissing the dispute, acknowledging it as lost.
+   *
+   * <p>The status of the dispute will change from <code>needs_response</code> to <code>lost</code>.
+   * <em>Closing a dispute is irreversible</em>.
+   */
+  public Dispute close(Map<String, Object> params) throws StripeException {
+    return close(params, (RequestOptions) null);
+  }
+
+  /**
+   * Closing the dispute for a charge indicates that you do not have any evidence to submit and are
+   * essentially dismissing the dispute, acknowledging it as lost.
+   *
+   * <p>The status of the dispute will change from <code>needs_response</code> to <code>lost</code>.
+   * <em>Closing a dispute is irreversible</em>.
+   */
+  public Dispute close(Map<String, Object> params, RequestOptions options) throws StripeException {
+    String url =
+        String.format(
+            "%s%s",
+            Stripe.getApiBase(),
+            String.format("/v1/disputes/%s/close", ApiResource.urlEncodeId(this.getId())));
+    return ApiResource.request(ApiResource.RequestMethod.POST, url, params, Dispute.class, options);
+  }
+
+  /**
+   * Closing the dispute for a charge indicates that you do not have any evidence to submit and are
+   * essentially dismissing the dispute, acknowledging it as lost.
+   *
+   * <p>The status of the dispute will change from <code>needs_response</code> to <code>lost</code>.
+   * <em>Closing a dispute is irreversible</em>.
+   */
+  public Dispute close(DisputeCloseParams params) throws StripeException {
+    return close(params, (RequestOptions) null);
+  }
+
+  /**
+   * Closing the dispute for a charge indicates that you do not have any evidence to submit and are
+   * essentially dismissing the dispute, acknowledging it as lost.
+   *
+   * <p>The status of the dispute will change from <code>needs_response</code> to <code>lost</code>.
+   * <em>Closing a dispute is irreversible</em>.
+   */
+  public Dispute close(DisputeCloseParams params, RequestOptions options) throws StripeException {
+    String url =
+        String.format(
+            "%s%s",
+            Stripe.getApiBase(),
+            String.format("/v1/disputes/%s/close", ApiResource.urlEncodeId(this.getId())));
+    return ApiResource.request(ApiResource.RequestMethod.POST, url, params, Dispute.class, options);
+  }
+
   /** Returns a list of your disputes. */
   public static DisputeCollection list(Map<String, Object> params) throws StripeException {
     return list(params, (RequestOptions) null);
@@ -286,82 +370,6 @@ public class Dispute extends ApiResource
             "%s%s",
             Stripe.getApiBase(),
             String.format("/v1/disputes/%s", ApiResource.urlEncodeId(this.getId())));
-    return ApiResource.request(ApiResource.RequestMethod.POST, url, params, Dispute.class, options);
-  }
-
-  /**
-   * Closing the dispute for a charge indicates that you do not have any evidence to submit and are
-   * essentially dismissing the dispute, acknowledging it as lost.
-   *
-   * <p>The status of the dispute will change from <code>needs_response</code> to <code>lost</code>.
-   * <em>Closing a dispute is irreversible</em>.
-   */
-  public Dispute close() throws StripeException {
-    return close((Map<String, Object>) null, (RequestOptions) null);
-  }
-
-  /**
-   * Closing the dispute for a charge indicates that you do not have any evidence to submit and are
-   * essentially dismissing the dispute, acknowledging it as lost.
-   *
-   * <p>The status of the dispute will change from <code>needs_response</code> to <code>lost</code>.
-   * <em>Closing a dispute is irreversible</em>.
-   */
-  public Dispute close(RequestOptions options) throws StripeException {
-    return close((Map<String, Object>) null, options);
-  }
-
-  /**
-   * Closing the dispute for a charge indicates that you do not have any evidence to submit and are
-   * essentially dismissing the dispute, acknowledging it as lost.
-   *
-   * <p>The status of the dispute will change from <code>needs_response</code> to <code>lost</code>.
-   * <em>Closing a dispute is irreversible</em>.
-   */
-  public Dispute close(Map<String, Object> params) throws StripeException {
-    return close(params, (RequestOptions) null);
-  }
-
-  /**
-   * Closing the dispute for a charge indicates that you do not have any evidence to submit and are
-   * essentially dismissing the dispute, acknowledging it as lost.
-   *
-   * <p>The status of the dispute will change from <code>needs_response</code> to <code>lost</code>.
-   * <em>Closing a dispute is irreversible</em>.
-   */
-  public Dispute close(Map<String, Object> params, RequestOptions options) throws StripeException {
-    String url =
-        String.format(
-            "%s%s",
-            Stripe.getApiBase(),
-            String.format("/v1/disputes/%s/close", ApiResource.urlEncodeId(this.getId())));
-    return ApiResource.request(ApiResource.RequestMethod.POST, url, params, Dispute.class, options);
-  }
-
-  /**
-   * Closing the dispute for a charge indicates that you do not have any evidence to submit and are
-   * essentially dismissing the dispute, acknowledging it as lost.
-   *
-   * <p>The status of the dispute will change from <code>needs_response</code> to <code>lost</code>.
-   * <em>Closing a dispute is irreversible</em>.
-   */
-  public Dispute close(DisputeCloseParams params) throws StripeException {
-    return close(params, (RequestOptions) null);
-  }
-
-  /**
-   * Closing the dispute for a charge indicates that you do not have any evidence to submit and are
-   * essentially dismissing the dispute, acknowledging it as lost.
-   *
-   * <p>The status of the dispute will change from <code>needs_response</code> to <code>lost</code>.
-   * <em>Closing a dispute is irreversible</em>.
-   */
-  public Dispute close(DisputeCloseParams params, RequestOptions options) throws StripeException {
-    String url =
-        String.format(
-            "%s%s",
-            Stripe.getApiBase(),
-            String.format("/v1/disputes/%s/close", ApiResource.urlEncodeId(this.getId())));
     return ApiResource.request(ApiResource.RequestMethod.POST, url, params, Dispute.class, options);
   }
 

@@ -17,6 +17,16 @@ import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.Setter;
 
+/**
+ * A coupon contains information about a percent-off or amount-off discount you might want to apply
+ * to a customer. Coupons may be applied to <a
+ * href="https://stripe.com/docs/api#subscriptions">subscriptions</a>, <a
+ * href="https://stripe.com/docs/api#invoices">invoices</a>, <a
+ * href="https://stripe.com/docs/api/checkout/sessions">checkout sessions</a>, <a
+ * href="https://stripe.com/docs/api#quotes">quotes</a>, and more. Coupons do not work with
+ * conventional one-off <a href="https://stripe.com/docs/api#create_charge">charges</a> or <a
+ * href="https://stripe.com/docs/api/payment_intents">payment intents</a>.
+ */
 @Getter
 @Setter
 @EqualsAndHashCode(callSuper = false)
@@ -131,30 +141,6 @@ public class Coupon extends ApiResource implements HasId, MetadataStore<Coupon> 
   @SerializedName("valid")
   Boolean valid;
 
-  /** Returns a list of your coupons. */
-  public static CouponCollection list(Map<String, Object> params) throws StripeException {
-    return list(params, (RequestOptions) null);
-  }
-
-  /** Returns a list of your coupons. */
-  public static CouponCollection list(Map<String, Object> params, RequestOptions options)
-      throws StripeException {
-    String url = String.format("%s%s", Stripe.getApiBase(), "/v1/coupons");
-    return ApiResource.requestCollection(url, params, CouponCollection.class, options);
-  }
-
-  /** Returns a list of your coupons. */
-  public static CouponCollection list(CouponListParams params) throws StripeException {
-    return list(params, (RequestOptions) null);
-  }
-
-  /** Returns a list of your coupons. */
-  public static CouponCollection list(CouponListParams params, RequestOptions options)
-      throws StripeException {
-    String url = String.format("%s%s", Stripe.getApiBase(), "/v1/coupons");
-    return ApiResource.requestCollection(url, params, CouponCollection.class, options);
-  }
-
   /**
    * You can create coupons easily via the <a href="https://dashboard.stripe.com/coupons">coupon
    * management</a> page of the Stripe dashboard. Coupon creation is also accessible via the API if
@@ -221,6 +207,76 @@ public class Coupon extends ApiResource implements HasId, MetadataStore<Coupon> 
       throws StripeException {
     String url = String.format("%s%s", Stripe.getApiBase(), "/v1/coupons");
     return ApiResource.request(ApiResource.RequestMethod.POST, url, params, Coupon.class, options);
+  }
+
+  /**
+   * You can delete coupons via the <a href="https://dashboard.stripe.com/coupons">coupon
+   * management</a> page of the Stripe dashboard. However, deleting a coupon does not affect any
+   * customers who have already applied the coupon; it means that new customers can’t redeem the
+   * coupon. You can also delete coupons via the API.
+   */
+  public Coupon delete() throws StripeException {
+    return delete((Map<String, Object>) null, (RequestOptions) null);
+  }
+
+  /**
+   * You can delete coupons via the <a href="https://dashboard.stripe.com/coupons">coupon
+   * management</a> page of the Stripe dashboard. However, deleting a coupon does not affect any
+   * customers who have already applied the coupon; it means that new customers can’t redeem the
+   * coupon. You can also delete coupons via the API.
+   */
+  public Coupon delete(RequestOptions options) throws StripeException {
+    return delete((Map<String, Object>) null, options);
+  }
+
+  /**
+   * You can delete coupons via the <a href="https://dashboard.stripe.com/coupons">coupon
+   * management</a> page of the Stripe dashboard. However, deleting a coupon does not affect any
+   * customers who have already applied the coupon; it means that new customers can’t redeem the
+   * coupon. You can also delete coupons via the API.
+   */
+  public Coupon delete(Map<String, Object> params) throws StripeException {
+    return delete(params, (RequestOptions) null);
+  }
+
+  /**
+   * You can delete coupons via the <a href="https://dashboard.stripe.com/coupons">coupon
+   * management</a> page of the Stripe dashboard. However, deleting a coupon does not affect any
+   * customers who have already applied the coupon; it means that new customers can’t redeem the
+   * coupon. You can also delete coupons via the API.
+   */
+  public Coupon delete(Map<String, Object> params, RequestOptions options) throws StripeException {
+    String url =
+        String.format(
+            "%s%s",
+            Stripe.getApiBase(),
+            String.format("/v1/coupons/%s", ApiResource.urlEncodeId(this.getId())));
+    return ApiResource.request(
+        ApiResource.RequestMethod.DELETE, url, params, Coupon.class, options);
+  }
+
+  /** Returns a list of your coupons. */
+  public static CouponCollection list(Map<String, Object> params) throws StripeException {
+    return list(params, (RequestOptions) null);
+  }
+
+  /** Returns a list of your coupons. */
+  public static CouponCollection list(Map<String, Object> params, RequestOptions options)
+      throws StripeException {
+    String url = String.format("%s%s", Stripe.getApiBase(), "/v1/coupons");
+    return ApiResource.requestCollection(url, params, CouponCollection.class, options);
+  }
+
+  /** Returns a list of your coupons. */
+  public static CouponCollection list(CouponListParams params) throws StripeException {
+    return list(params, (RequestOptions) null);
+  }
+
+  /** Returns a list of your coupons. */
+  public static CouponCollection list(CouponListParams params, RequestOptions options)
+      throws StripeException {
+    String url = String.format("%s%s", Stripe.getApiBase(), "/v1/coupons");
+    return ApiResource.requestCollection(url, params, CouponCollection.class, options);
   }
 
   /** Retrieves the coupon with the given ID. */
@@ -295,52 +351,6 @@ public class Coupon extends ApiResource implements HasId, MetadataStore<Coupon> 
             Stripe.getApiBase(),
             String.format("/v1/coupons/%s", ApiResource.urlEncodeId(this.getId())));
     return ApiResource.request(ApiResource.RequestMethod.POST, url, params, Coupon.class, options);
-  }
-
-  /**
-   * You can delete coupons via the <a href="https://dashboard.stripe.com/coupons">coupon
-   * management</a> page of the Stripe dashboard. However, deleting a coupon does not affect any
-   * customers who have already applied the coupon; it means that new customers can’t redeem the
-   * coupon. You can also delete coupons via the API.
-   */
-  public Coupon delete() throws StripeException {
-    return delete((Map<String, Object>) null, (RequestOptions) null);
-  }
-
-  /**
-   * You can delete coupons via the <a href="https://dashboard.stripe.com/coupons">coupon
-   * management</a> page of the Stripe dashboard. However, deleting a coupon does not affect any
-   * customers who have already applied the coupon; it means that new customers can’t redeem the
-   * coupon. You can also delete coupons via the API.
-   */
-  public Coupon delete(RequestOptions options) throws StripeException {
-    return delete((Map<String, Object>) null, options);
-  }
-
-  /**
-   * You can delete coupons via the <a href="https://dashboard.stripe.com/coupons">coupon
-   * management</a> page of the Stripe dashboard. However, deleting a coupon does not affect any
-   * customers who have already applied the coupon; it means that new customers can’t redeem the
-   * coupon. You can also delete coupons via the API.
-   */
-  public Coupon delete(Map<String, Object> params) throws StripeException {
-    return delete(params, (RequestOptions) null);
-  }
-
-  /**
-   * You can delete coupons via the <a href="https://dashboard.stripe.com/coupons">coupon
-   * management</a> page of the Stripe dashboard. However, deleting a coupon does not affect any
-   * customers who have already applied the coupon; it means that new customers can’t redeem the
-   * coupon. You can also delete coupons via the API.
-   */
-  public Coupon delete(Map<String, Object> params, RequestOptions options) throws StripeException {
-    String url =
-        String.format(
-            "%s%s",
-            Stripe.getApiBase(),
-            String.format("/v1/coupons/%s", ApiResource.urlEncodeId(this.getId())));
-    return ApiResource.request(
-        ApiResource.RequestMethod.DELETE, url, params, Coupon.class, options);
   }
 
   @Getter

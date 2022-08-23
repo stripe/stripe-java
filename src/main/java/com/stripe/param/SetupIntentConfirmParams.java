@@ -4693,6 +4693,13 @@ public class SetupIntentConfirmParams extends ApiRequestParams {
       Boolean moto;
 
       /**
+       * Selected network to process this SetupIntent on. Depends on the available networks of the
+       * card attached to the SetupIntent. Can be only set confirm-time.
+       */
+      @SerializedName("network")
+      Network network;
+
+      /**
        * We strongly recommend that you rely on our SCA Engine to automatically prompt your
        * customers for authentication based on risk level and <a
        * href="https://stripe.com/docs/strong-customer-authentication">other requirements</a>.
@@ -4710,10 +4717,12 @@ public class SetupIntentConfirmParams extends ApiRequestParams {
           Map<String, Object> extraParams,
           MandateOptions mandateOptions,
           Boolean moto,
+          Network network,
           RequestThreeDSecure requestThreeDSecure) {
         this.extraParams = extraParams;
         this.mandateOptions = mandateOptions;
         this.moto = moto;
+        this.network = network;
         this.requestThreeDSecure = requestThreeDSecure;
       }
 
@@ -4728,12 +4737,18 @@ public class SetupIntentConfirmParams extends ApiRequestParams {
 
         private Boolean moto;
 
+        private Network network;
+
         private RequestThreeDSecure requestThreeDSecure;
 
         /** Finalize and obtain parameter instance from this builder. */
         public Card build() {
           return new Card(
-              this.extraParams, this.mandateOptions, this.moto, this.requestThreeDSecure);
+              this.extraParams,
+              this.mandateOptions,
+              this.moto,
+              this.network,
+              this.requestThreeDSecure);
         }
 
         /**
@@ -4777,6 +4792,15 @@ public class SetupIntentConfirmParams extends ApiRequestParams {
          */
         public Builder setMoto(Boolean moto) {
           this.moto = moto;
+          return this;
+        }
+
+        /**
+         * Selected network to process this SetupIntent on. Depends on the available networks of the
+         * card attached to the SetupIntent. Can be only set confirm-time.
+         */
+        public Builder setNetwork(Network network) {
+          this.network = network;
           return this;
         }
 
@@ -5132,6 +5156,45 @@ public class SetupIntentConfirmParams extends ApiRequestParams {
           SupportedType(String value) {
             this.value = value;
           }
+        }
+      }
+
+      public enum Network implements ApiRequestParams.EnumParam {
+        @SerializedName("amex")
+        AMEX("amex"),
+
+        @SerializedName("cartes_bancaires")
+        CARTES_BANCAIRES("cartes_bancaires"),
+
+        @SerializedName("diners")
+        DINERS("diners"),
+
+        @SerializedName("discover")
+        DISCOVER("discover"),
+
+        @SerializedName("interac")
+        INTERAC("interac"),
+
+        @SerializedName("jcb")
+        JCB("jcb"),
+
+        @SerializedName("mastercard")
+        MASTERCARD("mastercard"),
+
+        @SerializedName("unionpay")
+        UNIONPAY("unionpay"),
+
+        @SerializedName("unknown")
+        UNKNOWN("unknown"),
+
+        @SerializedName("visa")
+        VISA("visa");
+
+        @Getter(onMethod_ = {@Override})
+        private final String value;
+
+        Network(String value) {
+          this.value = value;
         }
       }
 

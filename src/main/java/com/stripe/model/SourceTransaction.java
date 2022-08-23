@@ -6,6 +6,11 @@ import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.Setter;
 
+/**
+ * Some payment methods have no required amount that a customer must send. Customers can be
+ * instructed to send any amount, and it can be made up of multiple transactions. As such, sources
+ * can have multiple associated transactions.
+ */
 @Getter
 @Setter
 @EqualsAndHashCode(callSuper = false)

@@ -161,10 +161,7 @@ public class SubscriptionScheduleAmendParams extends ApiRequestParams {
     @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
     Map<String, Object> extraParams;
 
-    /**
-     * Changes to the items being billed or provisioned to your customer during the amendment time
-     * span.
-     */
+    /** Changes to the subscription items during the amendment time span. */
     @SerializedName("item_actions")
     List<ItemAction> itemActions;
 
@@ -348,10 +345,6 @@ public class SubscriptionScheduleAmendParams extends ApiRequestParams {
       @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
       Map<String, Object> extraParams;
 
-      /** Cover all remaining phases of the subscription schedule with the amendment. */
-      @SerializedName("schedule_end")
-      ScheduleEnd scheduleEnd;
-
       /**
        * A precise Unix timestamp for the amendment to end. Must be after the {@code
        * amendment_start}.
@@ -364,14 +357,9 @@ public class SubscriptionScheduleAmendParams extends ApiRequestParams {
       Type type;
 
       private AmendmentEnd(
-          Duration duration,
-          Map<String, Object> extraParams,
-          ScheduleEnd scheduleEnd,
-          Timestamp timestamp,
-          Type type) {
+          Duration duration, Map<String, Object> extraParams, Timestamp timestamp, Type type) {
         this.duration = duration;
         this.extraParams = extraParams;
-        this.scheduleEnd = scheduleEnd;
         this.timestamp = timestamp;
         this.type = type;
       }
@@ -385,16 +373,13 @@ public class SubscriptionScheduleAmendParams extends ApiRequestParams {
 
         private Map<String, Object> extraParams;
 
-        private ScheduleEnd scheduleEnd;
-
         private Timestamp timestamp;
 
         private Type type;
 
         /** Finalize and obtain parameter instance from this builder. */
         public AmendmentEnd build() {
-          return new AmendmentEnd(
-              this.duration, this.extraParams, this.scheduleEnd, this.timestamp, this.type);
+          return new AmendmentEnd(this.duration, this.extraParams, this.timestamp, this.type);
         }
 
         /** Time span for the amendment starting from the {@code amendment_start}. */
@@ -428,12 +413,6 @@ public class SubscriptionScheduleAmendParams extends ApiRequestParams {
             this.extraParams = new HashMap<>();
           }
           this.extraParams.putAll(map);
-          return this;
-        }
-
-        /** Cover all remaining phases of the subscription schedule with the amendment. */
-        public Builder setScheduleEnd(ScheduleEnd scheduleEnd) {
-          this.scheduleEnd = scheduleEnd;
           return this;
         }
 
@@ -573,66 +552,6 @@ public class SubscriptionScheduleAmendParams extends ApiRequestParams {
       }
 
       @Getter
-      public static class ScheduleEnd {
-        /**
-         * Map of extra parameters for custom features not available in this client library. The
-         * content in this map is not serialized under this field's {@code @SerializedName} value.
-         * Instead, each key/value pair is serialized as if the key is a root-level field
-         * (serialized) name in this param object. Effectively, this map is flattened to its parent
-         * instance.
-         */
-        @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
-        Map<String, Object> extraParams;
-
-        private ScheduleEnd(Map<String, Object> extraParams) {
-          this.extraParams = extraParams;
-        }
-
-        public static Builder builder() {
-          return new Builder();
-        }
-
-        public static class Builder {
-          private Map<String, Object> extraParams;
-
-          /** Finalize and obtain parameter instance from this builder. */
-          public ScheduleEnd build() {
-            return new ScheduleEnd(this.extraParams);
-          }
-
-          /**
-           * Add a key/value pair to `extraParams` map. A map is initialized for the first
-           * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
-           * map. See {@link
-           * SubscriptionScheduleAmendParams.Amendment.AmendmentEnd.ScheduleEnd#extraParams} for the
-           * field documentation.
-           */
-          public Builder putExtraParam(String key, Object value) {
-            if (this.extraParams == null) {
-              this.extraParams = new HashMap<>();
-            }
-            this.extraParams.put(key, value);
-            return this;
-          }
-
-          /**
-           * Add all map key/value pairs to `extraParams` map. A map is initialized for the first
-           * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
-           * map. See {@link
-           * SubscriptionScheduleAmendParams.Amendment.AmendmentEnd.ScheduleEnd#extraParams} for the
-           * field documentation.
-           */
-          public Builder putAllExtraParam(Map<String, Object> map) {
-            if (this.extraParams == null) {
-              this.extraParams = new HashMap<>();
-            }
-            this.extraParams.putAll(map);
-            return this;
-          }
-        }
-      }
-
-      @Getter
       public static class Timestamp {
         /**
          * Map of extra parameters for custom features not available in this client library. The
@@ -748,14 +667,6 @@ public class SubscriptionScheduleAmendParams extends ApiRequestParams {
       @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
       Map<String, Object> extraParams;
 
-      /**
-       * Specify that this amendment should start at the current time as determined by Stripe
-       * servers. In the case of Test Clocks, {@code now} uses the frozen time on the testmode
-       * clock.
-       */
-      @SerializedName("now")
-      Now now;
-
       /** A precise Unix timestamp for the amendment to start. */
       @SerializedName("timestamp")
       Timestamp timestamp;
@@ -767,12 +678,10 @@ public class SubscriptionScheduleAmendParams extends ApiRequestParams {
       private AmendmentStart(
           AmendmentEnd amendmentEnd,
           Map<String, Object> extraParams,
-          Now now,
           Timestamp timestamp,
           Type type) {
         this.amendmentEnd = amendmentEnd;
         this.extraParams = extraParams;
-        this.now = now;
         this.timestamp = timestamp;
         this.type = type;
       }
@@ -786,16 +695,13 @@ public class SubscriptionScheduleAmendParams extends ApiRequestParams {
 
         private Map<String, Object> extraParams;
 
-        private Now now;
-
         private Timestamp timestamp;
 
         private Type type;
 
         /** Finalize and obtain parameter instance from this builder. */
         public AmendmentStart build() {
-          return new AmendmentStart(
-              this.amendmentEnd, this.extraParams, this.now, this.timestamp, this.type);
+          return new AmendmentStart(this.amendmentEnd, this.extraParams, this.timestamp, this.type);
         }
 
         /**
@@ -832,16 +738,6 @@ public class SubscriptionScheduleAmendParams extends ApiRequestParams {
             this.extraParams = new HashMap<>();
           }
           this.extraParams.putAll(map);
-          return this;
-        }
-
-        /**
-         * Specify that this amendment should start at the current time as determined by Stripe
-         * servers. In the case of Test Clocks, {@code now} uses the frozen time on the testmode
-         * clock.
-         */
-        public Builder setNow(Now now) {
-          this.now = now;
           return this;
         }
 
@@ -934,66 +830,6 @@ public class SubscriptionScheduleAmendParams extends ApiRequestParams {
            */
           public Builder setIndex(Long index) {
             this.index = index;
-            return this;
-          }
-        }
-      }
-
-      @Getter
-      public static class Now {
-        /**
-         * Map of extra parameters for custom features not available in this client library. The
-         * content in this map is not serialized under this field's {@code @SerializedName} value.
-         * Instead, each key/value pair is serialized as if the key is a root-level field
-         * (serialized) name in this param object. Effectively, this map is flattened to its parent
-         * instance.
-         */
-        @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
-        Map<String, Object> extraParams;
-
-        private Now(Map<String, Object> extraParams) {
-          this.extraParams = extraParams;
-        }
-
-        public static Builder builder() {
-          return new Builder();
-        }
-
-        public static class Builder {
-          private Map<String, Object> extraParams;
-
-          /** Finalize and obtain parameter instance from this builder. */
-          public Now build() {
-            return new Now(this.extraParams);
-          }
-
-          /**
-           * Add a key/value pair to `extraParams` map. A map is initialized for the first
-           * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
-           * map. See {@link
-           * SubscriptionScheduleAmendParams.Amendment.AmendmentStart.Now#extraParams} for the field
-           * documentation.
-           */
-          public Builder putExtraParam(String key, Object value) {
-            if (this.extraParams == null) {
-              this.extraParams = new HashMap<>();
-            }
-            this.extraParams.put(key, value);
-            return this;
-          }
-
-          /**
-           * Add all map key/value pairs to `extraParams` map. A map is initialized for the first
-           * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
-           * map. See {@link
-           * SubscriptionScheduleAmendParams.Amendment.AmendmentStart.Now#extraParams} for the field
-           * documentation.
-           */
-          public Builder putAllExtraParam(Map<String, Object> map) {
-            if (this.extraParams == null) {
-              this.extraParams = new HashMap<>();
-            }
-            this.extraParams.putAll(map);
             return this;
           }
         }

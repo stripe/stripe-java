@@ -16,6 +16,15 @@ import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.Setter;
 
+/**
+ * Tax rates can be applied to <a
+ * href="https://stripe.com/docs/billing/invoices/tax-rates">invoices</a>, <a
+ * href="https://stripe.com/docs/billing/subscriptions/taxes">subscriptions</a> and <a
+ * href="https://stripe.com/docs/payments/checkout/set-up-a-subscription#tax-rates">Checkout
+ * Sessions</a> to collect tax.
+ *
+ * <p>Related guide: <a href="https://stripe.com/docs/billing/taxes/tax-rates">Tax Rates</a>.
+ */
 @Getter
 @Setter
 @EqualsAndHashCode(callSuper = false)
@@ -113,6 +122,30 @@ public class TaxRate extends ApiResource implements HasId, MetadataStore<TaxRate
   @SerializedName("tax_type")
   String taxType;
 
+  /** Creates a new tax rate. */
+  public static TaxRate create(Map<String, Object> params) throws StripeException {
+    return create(params, (RequestOptions) null);
+  }
+
+  /** Creates a new tax rate. */
+  public static TaxRate create(Map<String, Object> params, RequestOptions options)
+      throws StripeException {
+    String url = String.format("%s%s", Stripe.getApiBase(), "/v1/tax_rates");
+    return ApiResource.request(ApiResource.RequestMethod.POST, url, params, TaxRate.class, options);
+  }
+
+  /** Creates a new tax rate. */
+  public static TaxRate create(TaxRateCreateParams params) throws StripeException {
+    return create(params, (RequestOptions) null);
+  }
+
+  /** Creates a new tax rate. */
+  public static TaxRate create(TaxRateCreateParams params, RequestOptions options)
+      throws StripeException {
+    String url = String.format("%s%s", Stripe.getApiBase(), "/v1/tax_rates");
+    return ApiResource.request(ApiResource.RequestMethod.POST, url, params, TaxRate.class, options);
+  }
+
   /**
    * Returns a list of your tax rates. Tax rates are returned sorted by creation date, with the most
    * recently created tax rates appearing first.
@@ -179,30 +212,6 @@ public class TaxRate extends ApiResource implements HasId, MetadataStore<TaxRate
             Stripe.getApiBase(),
             String.format("/v1/tax_rates/%s", ApiResource.urlEncodeId(taxRate)));
     return ApiResource.request(ApiResource.RequestMethod.GET, url, params, TaxRate.class, options);
-  }
-
-  /** Creates a new tax rate. */
-  public static TaxRate create(Map<String, Object> params) throws StripeException {
-    return create(params, (RequestOptions) null);
-  }
-
-  /** Creates a new tax rate. */
-  public static TaxRate create(Map<String, Object> params, RequestOptions options)
-      throws StripeException {
-    String url = String.format("%s%s", Stripe.getApiBase(), "/v1/tax_rates");
-    return ApiResource.request(ApiResource.RequestMethod.POST, url, params, TaxRate.class, options);
-  }
-
-  /** Creates a new tax rate. */
-  public static TaxRate create(TaxRateCreateParams params) throws StripeException {
-    return create(params, (RequestOptions) null);
-  }
-
-  /** Creates a new tax rate. */
-  public static TaxRate create(TaxRateCreateParams params, RequestOptions options)
-      throws StripeException {
-    String url = String.format("%s%s", Stripe.getApiBase(), "/v1/tax_rates");
-    return ApiResource.request(ApiResource.RequestMethod.POST, url, params, TaxRate.class, options);
   }
 
   /** Updates an existing tax rate. */

@@ -3582,6 +3582,13 @@ public class SubscriptionUpdateParams extends ApiRequestParams {
         MandateOptions mandateOptions;
 
         /**
+         * Selected network to process this Subscription on. Depends on the available networks of
+         * the card attached to the Subscription. Can be only set confirm-time.
+         */
+        @SerializedName("network")
+        Network network;
+
+        /**
          * We strongly recommend that you rely on our SCA Engine to automatically prompt your
          * customers for authentication based on risk level and <a
          * href="https://stripe.com/docs/strong-customer-authentication">other requirements</a>.
@@ -3597,9 +3604,11 @@ public class SubscriptionUpdateParams extends ApiRequestParams {
         private Card(
             Map<String, Object> extraParams,
             MandateOptions mandateOptions,
+            Network network,
             RequestThreeDSecure requestThreeDSecure) {
           this.extraParams = extraParams;
           this.mandateOptions = mandateOptions;
+          this.network = network;
           this.requestThreeDSecure = requestThreeDSecure;
         }
 
@@ -3612,11 +3621,14 @@ public class SubscriptionUpdateParams extends ApiRequestParams {
 
           private MandateOptions mandateOptions;
 
+          private Network network;
+
           private RequestThreeDSecure requestThreeDSecure;
 
           /** Finalize and obtain parameter instance from this builder. */
           public Card build() {
-            return new Card(this.extraParams, this.mandateOptions, this.requestThreeDSecure);
+            return new Card(
+                this.extraParams, this.mandateOptions, this.network, this.requestThreeDSecure);
           }
 
           /**
@@ -3652,6 +3664,15 @@ public class SubscriptionUpdateParams extends ApiRequestParams {
           /** Configuration options for setting up an eMandate for cards issued in India. */
           public Builder setMandateOptions(MandateOptions mandateOptions) {
             this.mandateOptions = mandateOptions;
+            return this;
+          }
+
+          /**
+           * Selected network to process this Subscription on. Depends on the available networks of
+           * the card attached to the Subscription. Can be only set confirm-time.
+           */
+          public Builder setNetwork(Network network) {
+            this.network = network;
             return this;
           }
 
@@ -3810,6 +3831,45 @@ public class SubscriptionUpdateParams extends ApiRequestParams {
             AmountType(String value) {
               this.value = value;
             }
+          }
+        }
+
+        public enum Network implements ApiRequestParams.EnumParam {
+          @SerializedName("amex")
+          AMEX("amex"),
+
+          @SerializedName("cartes_bancaires")
+          CARTES_BANCAIRES("cartes_bancaires"),
+
+          @SerializedName("diners")
+          DINERS("diners"),
+
+          @SerializedName("discover")
+          DISCOVER("discover"),
+
+          @SerializedName("interac")
+          INTERAC("interac"),
+
+          @SerializedName("jcb")
+          JCB("jcb"),
+
+          @SerializedName("mastercard")
+          MASTERCARD("mastercard"),
+
+          @SerializedName("unionpay")
+          UNIONPAY("unionpay"),
+
+          @SerializedName("unknown")
+          UNKNOWN("unknown"),
+
+          @SerializedName("visa")
+          VISA("visa");
+
+          @Getter(onMethod_ = {@Override})
+          private final String value;
+
+          Network(String value) {
+            this.value = value;
           }
         }
 

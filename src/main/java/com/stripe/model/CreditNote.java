@@ -18,6 +18,12 @@ import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.Setter;
 
+/**
+ * Issue a credit note to adjust an invoice's amount after the invoice is finalized.
+ *
+ * <p>Related guide: <a href="https://stripe.com/docs/billing/invoices/credit-notes">Credit
+ * Notes</a>.
+ */
 @Getter
 @Setter
 @EqualsAndHashCode(callSuper = false)
@@ -371,6 +377,30 @@ public class CreditNote extends ApiResource implements HasId, MetadataStore<Cred
         ApiResource.RequestMethod.POST, url, params, CreditNote.class, options);
   }
 
+  /** Returns a list of credit notes. */
+  public static CreditNoteCollection list(Map<String, Object> params) throws StripeException {
+    return list(params, (RequestOptions) null);
+  }
+
+  /** Returns a list of credit notes. */
+  public static CreditNoteCollection list(Map<String, Object> params, RequestOptions options)
+      throws StripeException {
+    String url = String.format("%s%s", Stripe.getApiBase(), "/v1/credit_notes");
+    return ApiResource.requestCollection(url, params, CreditNoteCollection.class, options);
+  }
+
+  /** Returns a list of credit notes. */
+  public static CreditNoteCollection list(CreditNoteListParams params) throws StripeException {
+    return list(params, (RequestOptions) null);
+  }
+
+  /** Returns a list of credit notes. */
+  public static CreditNoteCollection list(CreditNoteListParams params, RequestOptions options)
+      throws StripeException {
+    String url = String.format("%s%s", Stripe.getApiBase(), "/v1/credit_notes");
+    return ApiResource.requestCollection(url, params, CreditNoteCollection.class, options);
+  }
+
   /** Get a preview of a credit note without creating it. */
   public static CreditNote preview(Map<String, Object> params) throws StripeException {
     return preview(params, (RequestOptions) null);
@@ -427,30 +457,6 @@ public class CreditNote extends ApiResource implements HasId, MetadataStore<Cred
             Stripe.getApiBase(), String.format("/v1/credit_notes/%s", ApiResource.urlEncodeId(id)));
     return ApiResource.request(
         ApiResource.RequestMethod.GET, url, params, CreditNote.class, options);
-  }
-
-  /** Returns a list of credit notes. */
-  public static CreditNoteCollection list(Map<String, Object> params) throws StripeException {
-    return list(params, (RequestOptions) null);
-  }
-
-  /** Returns a list of credit notes. */
-  public static CreditNoteCollection list(Map<String, Object> params, RequestOptions options)
-      throws StripeException {
-    String url = String.format("%s%s", Stripe.getApiBase(), "/v1/credit_notes");
-    return ApiResource.requestCollection(url, params, CreditNoteCollection.class, options);
-  }
-
-  /** Returns a list of credit notes. */
-  public static CreditNoteCollection list(CreditNoteListParams params) throws StripeException {
-    return list(params, (RequestOptions) null);
-  }
-
-  /** Returns a list of credit notes. */
-  public static CreditNoteCollection list(CreditNoteListParams params, RequestOptions options)
-      throws StripeException {
-    String url = String.format("%s%s", Stripe.getApiBase(), "/v1/credit_notes");
-    return ApiResource.requestCollection(url, params, CreditNoteCollection.class, options);
   }
 
   /** Updates an existing credit note. */

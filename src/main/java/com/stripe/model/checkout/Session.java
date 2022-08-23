@@ -30,6 +30,22 @@ import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.Setter;
 
+/**
+ * A Checkout Session represents your customer's session as they pay for one-time purchases or
+ * subscriptions through <a href="https://stripe.com/docs/payments/checkout">Checkout</a> or <a
+ * href="https://stripe.com/docs/payments/payment-links">Payment Links</a>. We recommend creating a
+ * new Session each time your customer attempts to pay.
+ *
+ * <p>Once payment is successful, the Checkout Session will contain a reference to the <a
+ * href="https://stripe.com/docs/api/customers">Customer</a>, and either the successful <a
+ * href="https://stripe.com/docs/api/payment_intents">PaymentIntent</a> or an active <a
+ * href="https://stripe.com/docs/api/subscriptions">Subscription</a>.
+ *
+ * <p>You can create a Checkout Session on your server and pass its ID to the client to begin
+ * Checkout.
+ *
+ * <p>Related guide: <a href="https://stripe.com/docs/checkout/quickstart">Checkout Quickstart</a>.
+ */
 @Getter
 @Setter
 @EqualsAndHashCode(callSuper = false)
@@ -393,62 +409,6 @@ public class Session extends ApiResource implements HasId {
         new ExpandableField<Subscription>(expandableObject.getId(), expandableObject);
   }
 
-  /** Returns a list of Checkout Sessions. */
-  public static SessionCollection list(Map<String, Object> params) throws StripeException {
-    return list(params, (RequestOptions) null);
-  }
-
-  /** Returns a list of Checkout Sessions. */
-  public static SessionCollection list(Map<String, Object> params, RequestOptions options)
-      throws StripeException {
-    String url = String.format("%s%s", Stripe.getApiBase(), "/v1/checkout/sessions");
-    return ApiResource.requestCollection(url, params, SessionCollection.class, options);
-  }
-
-  /** Returns a list of Checkout Sessions. */
-  public static SessionCollection list(SessionListParams params) throws StripeException {
-    return list(params, (RequestOptions) null);
-  }
-
-  /** Returns a list of Checkout Sessions. */
-  public static SessionCollection list(SessionListParams params, RequestOptions options)
-      throws StripeException {
-    String url = String.format("%s%s", Stripe.getApiBase(), "/v1/checkout/sessions");
-    return ApiResource.requestCollection(url, params, SessionCollection.class, options);
-  }
-
-  /** Retrieves a Session object. */
-  public static Session retrieve(String session) throws StripeException {
-    return retrieve(session, (Map<String, Object>) null, (RequestOptions) null);
-  }
-
-  /** Retrieves a Session object. */
-  public static Session retrieve(String session, RequestOptions options) throws StripeException {
-    return retrieve(session, (Map<String, Object>) null, options);
-  }
-
-  /** Retrieves a Session object. */
-  public static Session retrieve(String session, Map<String, Object> params, RequestOptions options)
-      throws StripeException {
-    String url =
-        String.format(
-            "%s%s",
-            Stripe.getApiBase(),
-            String.format("/v1/checkout/sessions/%s", ApiResource.urlEncodeId(session)));
-    return ApiResource.request(ApiResource.RequestMethod.GET, url, params, Session.class, options);
-  }
-
-  /** Retrieves a Session object. */
-  public static Session retrieve(
-      String session, SessionRetrieveParams params, RequestOptions options) throws StripeException {
-    String url =
-        String.format(
-            "%s%s",
-            Stripe.getApiBase(),
-            String.format("/v1/checkout/sessions/%s", ApiResource.urlEncodeId(session)));
-    return ApiResource.request(ApiResource.RequestMethod.GET, url, params, Session.class, options);
-  }
-
   /** Creates a Session object. */
   public static Session create(Map<String, Object> params) throws StripeException {
     return create(params, (RequestOptions) null);
@@ -471,66 +431,6 @@ public class Session extends ApiResource implements HasId {
       throws StripeException {
     String url = String.format("%s%s", Stripe.getApiBase(), "/v1/checkout/sessions");
     return ApiResource.request(ApiResource.RequestMethod.POST, url, params, Session.class, options);
-  }
-
-  /**
-   * When retrieving a Checkout Session, there is an includable <strong>line_items</strong> property
-   * containing the first handful of those items. There is also a URL where you can retrieve the
-   * full (paginated) list of line items.
-   */
-  public LineItemCollection listLineItems() throws StripeException {
-    return listLineItems((Map<String, Object>) null, (RequestOptions) null);
-  }
-
-  /**
-   * When retrieving a Checkout Session, there is an includable <strong>line_items</strong> property
-   * containing the first handful of those items. There is also a URL where you can retrieve the
-   * full (paginated) list of line items.
-   */
-  public LineItemCollection listLineItems(Map<String, Object> params) throws StripeException {
-    return listLineItems(params, (RequestOptions) null);
-  }
-
-  /**
-   * When retrieving a Checkout Session, there is an includable <strong>line_items</strong> property
-   * containing the first handful of those items. There is also a URL where you can retrieve the
-   * full (paginated) list of line items.
-   */
-  public LineItemCollection listLineItems(Map<String, Object> params, RequestOptions options)
-      throws StripeException {
-    String url =
-        String.format(
-            "%s%s",
-            Stripe.getApiBase(),
-            String.format(
-                "/v1/checkout/sessions/%s/line_items", ApiResource.urlEncodeId(this.getId())));
-    return ApiResource.requestCollection(url, params, LineItemCollection.class, options);
-  }
-
-  /**
-   * When retrieving a Checkout Session, there is an includable <strong>line_items</strong> property
-   * containing the first handful of those items. There is also a URL where you can retrieve the
-   * full (paginated) list of line items.
-   */
-  public LineItemCollection listLineItems(SessionListLineItemsParams params)
-      throws StripeException {
-    return listLineItems(params, (RequestOptions) null);
-  }
-
-  /**
-   * When retrieving a Checkout Session, there is an includable <strong>line_items</strong> property
-   * containing the first handful of those items. There is also a URL where you can retrieve the
-   * full (paginated) list of line items.
-   */
-  public LineItemCollection listLineItems(SessionListLineItemsParams params, RequestOptions options)
-      throws StripeException {
-    String url =
-        String.format(
-            "%s%s",
-            Stripe.getApiBase(),
-            String.format(
-                "/v1/checkout/sessions/%s/line_items", ApiResource.urlEncodeId(this.getId())));
-    return ApiResource.requestCollection(url, params, LineItemCollection.class, options);
   }
 
   /**
@@ -603,6 +503,122 @@ public class Session extends ApiResource implements HasId {
             String.format(
                 "/v1/checkout/sessions/%s/expire", ApiResource.urlEncodeId(this.getId())));
     return ApiResource.request(ApiResource.RequestMethod.POST, url, params, Session.class, options);
+  }
+
+  /** Returns a list of Checkout Sessions. */
+  public static SessionCollection list(Map<String, Object> params) throws StripeException {
+    return list(params, (RequestOptions) null);
+  }
+
+  /** Returns a list of Checkout Sessions. */
+  public static SessionCollection list(Map<String, Object> params, RequestOptions options)
+      throws StripeException {
+    String url = String.format("%s%s", Stripe.getApiBase(), "/v1/checkout/sessions");
+    return ApiResource.requestCollection(url, params, SessionCollection.class, options);
+  }
+
+  /** Returns a list of Checkout Sessions. */
+  public static SessionCollection list(SessionListParams params) throws StripeException {
+    return list(params, (RequestOptions) null);
+  }
+
+  /** Returns a list of Checkout Sessions. */
+  public static SessionCollection list(SessionListParams params, RequestOptions options)
+      throws StripeException {
+    String url = String.format("%s%s", Stripe.getApiBase(), "/v1/checkout/sessions");
+    return ApiResource.requestCollection(url, params, SessionCollection.class, options);
+  }
+
+  /**
+   * When retrieving a Checkout Session, there is an includable <strong>line_items</strong> property
+   * containing the first handful of those items. There is also a URL where you can retrieve the
+   * full (paginated) list of line items.
+   */
+  public LineItemCollection listLineItems() throws StripeException {
+    return listLineItems((Map<String, Object>) null, (RequestOptions) null);
+  }
+
+  /**
+   * When retrieving a Checkout Session, there is an includable <strong>line_items</strong> property
+   * containing the first handful of those items. There is also a URL where you can retrieve the
+   * full (paginated) list of line items.
+   */
+  public LineItemCollection listLineItems(Map<String, Object> params) throws StripeException {
+    return listLineItems(params, (RequestOptions) null);
+  }
+
+  /**
+   * When retrieving a Checkout Session, there is an includable <strong>line_items</strong> property
+   * containing the first handful of those items. There is also a URL where you can retrieve the
+   * full (paginated) list of line items.
+   */
+  public LineItemCollection listLineItems(Map<String, Object> params, RequestOptions options)
+      throws StripeException {
+    String url =
+        String.format(
+            "%s%s",
+            Stripe.getApiBase(),
+            String.format(
+                "/v1/checkout/sessions/%s/line_items", ApiResource.urlEncodeId(this.getId())));
+    return ApiResource.requestCollection(url, params, LineItemCollection.class, options);
+  }
+
+  /**
+   * When retrieving a Checkout Session, there is an includable <strong>line_items</strong> property
+   * containing the first handful of those items. There is also a URL where you can retrieve the
+   * full (paginated) list of line items.
+   */
+  public LineItemCollection listLineItems(SessionListLineItemsParams params)
+      throws StripeException {
+    return listLineItems(params, (RequestOptions) null);
+  }
+
+  /**
+   * When retrieving a Checkout Session, there is an includable <strong>line_items</strong> property
+   * containing the first handful of those items. There is also a URL where you can retrieve the
+   * full (paginated) list of line items.
+   */
+  public LineItemCollection listLineItems(SessionListLineItemsParams params, RequestOptions options)
+      throws StripeException {
+    String url =
+        String.format(
+            "%s%s",
+            Stripe.getApiBase(),
+            String.format(
+                "/v1/checkout/sessions/%s/line_items", ApiResource.urlEncodeId(this.getId())));
+    return ApiResource.requestCollection(url, params, LineItemCollection.class, options);
+  }
+
+  /** Retrieves a Session object. */
+  public static Session retrieve(String session) throws StripeException {
+    return retrieve(session, (Map<String, Object>) null, (RequestOptions) null);
+  }
+
+  /** Retrieves a Session object. */
+  public static Session retrieve(String session, RequestOptions options) throws StripeException {
+    return retrieve(session, (Map<String, Object>) null, options);
+  }
+
+  /** Retrieves a Session object. */
+  public static Session retrieve(String session, Map<String, Object> params, RequestOptions options)
+      throws StripeException {
+    String url =
+        String.format(
+            "%s%s",
+            Stripe.getApiBase(),
+            String.format("/v1/checkout/sessions/%s", ApiResource.urlEncodeId(session)));
+    return ApiResource.request(ApiResource.RequestMethod.GET, url, params, Session.class, options);
+  }
+
+  /** Retrieves a Session object. */
+  public static Session retrieve(
+      String session, SessionRetrieveParams params, RequestOptions options) throws StripeException {
+    String url =
+        String.format(
+            "%s%s",
+            Stripe.getApiBase(),
+            String.format("/v1/checkout/sessions/%s", ApiResource.urlEncodeId(session)));
+    return ApiResource.request(ApiResource.RequestMethod.GET, url, params, Session.class, options);
   }
 
   @Getter
