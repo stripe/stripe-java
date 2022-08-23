@@ -1,5 +1,11 @@
 # Changelog
 
+## 21.3.0-beta.2 - 2022-08-23
+* [#1426](https://github.com/stripe/stripe-java/pull/1426) API Updates for beta branch
+  - Updated stable APIs to the latest version
+  - `Stripe-Version` beta headers are not pinned by-default and need to be manually specified, please refer to [beta SDKs README section](https://github.com/stripe/stripe-java/blob/master/README.md#beta-sdks)
+* [#1424](https://github.com/stripe/stripe-java/pull/1424) Allow setting Stripe API Version on global configuration.
+
 ## 21.3.0-beta.1 - 2022-08-11
 * [#1417](https://github.com/stripe/stripe-java/pull/1417) API Updates for beta branch
   - Updated stable APIs to the latest version
