@@ -244,11 +244,15 @@ Stripe has features in the beta phase that can be accessed via the beta version 
 We would love for you to try these and share feedback with us before these features reach the stable phase.
 To install a beta version of stripe-java follow steps [installation steps above](#installation) using the beta library version.
 
-> Note: There can be breaking changes between beta versions. Therefore we recommend pinning the package version to a specific version. This way you can install the same version each time without breaking changes unless you are intentionally looking for the latest beta version.
+> **Note**
+> There can be breaking changes between beta versions. Therefore we recommend pinning the package version to a specific version. This way you can install the same version each time without breaking changes unless you are intentionally looking for the latest beta version.
 
 We highly recommend keeping an eye on when the beta feature you are interested in goes from beta to stable so that you can move from using a beta version of the SDK to the stable version.
 
 If your beta feature requires a `Stripe-Version` header to be sent, use the `Stripe.stripeVersion` field to set it:
+
+> **Note**
+> The `stripeVersion` can only be set in beta versions of the library. 
 
 ```java
 Stripe.stripeVersion += "; feature_beta=v3";
