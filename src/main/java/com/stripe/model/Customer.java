@@ -824,13 +824,13 @@ public class Customer extends ApiResource implements HasId, MetadataStore<Custom
     }
 
     /** Create an incoming testmode bank transfer. */
-    public CustomerBalanceTransaction fundCashBalance(Map<String, Object> params)
+    public CustomerCashBalanceTransaction fundCashBalance(Map<String, Object> params)
         throws StripeException {
       return fundCashBalance(params, (RequestOptions) null);
     }
 
     /** Create an incoming testmode bank transfer. */
-    public CustomerBalanceTransaction fundCashBalance(
+    public CustomerCashBalanceTransaction fundCashBalance(
         Map<String, Object> params, RequestOptions options) throws StripeException {
       String url =
           String.format(
@@ -840,17 +840,21 @@ public class Customer extends ApiResource implements HasId, MetadataStore<Custom
                   "/v1/test_helpers/customers/%s/fund_cash_balance",
                   ApiResource.urlEncodeId(this.resource.getId())));
       return ApiResource.request(
-          ApiResource.RequestMethod.POST, url, params, CustomerBalanceTransaction.class, options);
+          ApiResource.RequestMethod.POST,
+          url,
+          params,
+          CustomerCashBalanceTransaction.class,
+          options);
     }
 
     /** Create an incoming testmode bank transfer. */
-    public CustomerBalanceTransaction fundCashBalance(CustomerFundCashBalanceParams params)
+    public CustomerCashBalanceTransaction fundCashBalance(CustomerFundCashBalanceParams params)
         throws StripeException {
       return fundCashBalance(params, (RequestOptions) null);
     }
 
     /** Create an incoming testmode bank transfer. */
-    public CustomerBalanceTransaction fundCashBalance(
+    public CustomerCashBalanceTransaction fundCashBalance(
         CustomerFundCashBalanceParams params, RequestOptions options) throws StripeException {
       String url =
           String.format(
@@ -860,7 +864,11 @@ public class Customer extends ApiResource implements HasId, MetadataStore<Custom
                   "/v1/test_helpers/customers/%s/fund_cash_balance",
                   ApiResource.urlEncodeId(this.resource.getId())));
       return ApiResource.request(
-          ApiResource.RequestMethod.POST, url, params, CustomerBalanceTransaction.class, options);
+          ApiResource.RequestMethod.POST,
+          url,
+          params,
+          CustomerCashBalanceTransaction.class,
+          options);
     }
   }
 }

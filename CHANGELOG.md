@@ -1,5 +1,22 @@
 # Changelog
 
+## 21.3.0 - 2022-08-23
+* [#1422](https://github.com/stripe/stripe-java/pull/1422) API Updates
+  * Add support for new resource `CustomerCashBalanceTransaction`
+  * Remove support for value `paypal` from enums `OrderCreateParams.payment.settings.payment_method_types[]` and `OrderUpdateParams.payment.settings.payment_method_types[]`
+  * Add support for `currency` on `PaymentLink`
+  * Add support for `network` on `SetupIntentConfirmParams.payment_method_options.card`, `SetupIntentCreateParams.payment_method_options.card`, `SetupIntentUpdateParams.payment_method_options.card`, `Subscription.payment_settings.payment_method_options.card`, `SubscriptionCreateParams.payment_settings.payment_method_options.card`, and `SubscriptionUpdateParams.payment_settings.payment_method_options.card`
+  * Change `TreasuryOutboundTransferCreateParams.destination_payment_method` to be optional
+  * Add support for new value `customer_cash_balance_transaction.created` on enums `WebhookEndpointCreateParams.enabled_events[]` and `WebhookEndpointUpdateParams.enabled_events[]`
+  * Change the return type of `Customer.fundCashBalance` test helper from `CustomerBalanceTransaction` to `CustomerCashBalanceTransaction`.
+    * This would generally be considered a breaking change, but we've worked with all existing users to migrate and are comfortable releasing this as a minor as it is solely a test helper method. This was essentially broken prior to this change. 
+* [#1425](https://github.com/stripe/stripe-java/pull/1425) Add beta readme.md section
+* [#1423](https://github.com/stripe/stripe-java/pull/1423) chore: Remove unused variable from SearchPagingIteratorTest.
+* [#1421](https://github.com/stripe/stripe-java/pull/1421) Add a support section to the readme
+* [#1420](https://github.com/stripe/stripe-java/pull/1420) Fix outdated test comment
+* [#1418](https://github.com/stripe/stripe-java/pull/1418) Fix latest JAR hyperlink and related tests
+* [#1419](https://github.com/stripe/stripe-java/pull/1419) Fix makefile indentation and improve regex
+
 ## 21.3.0-beta.2 - 2022-08-23
 * [#1426](https://github.com/stripe/stripe-java/pull/1426) API Updates for beta branch
   - Updated stable APIs to the latest version
