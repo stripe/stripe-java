@@ -368,6 +368,10 @@ public class Card extends ApiResource implements HasId, MetadataStore<Card> {
     @SerializedName("carrier")
     String carrier;
 
+    /** Additional information that may be required for clearing customs. */
+    @SerializedName("customs")
+    Customs customs;
+
     /** A unix timestamp representing a best estimate of when the card will be delivered. */
     @SerializedName("eta")
     Long eta;
@@ -375,6 +379,13 @@ public class Card extends ApiResource implements HasId, MetadataStore<Card> {
     /** Recipient name. */
     @SerializedName("name")
     String name;
+
+    /**
+     * The phone number of the receiver of the bulk shipment. This phone number will be provided to
+     * the shipping company, who might use it to contact the receiver in case of delivery issues.
+     */
+    @SerializedName("phone_number")
+    String phoneNumber;
 
     /**
      * Shipment service, such as {@code standard} or {@code express}.
@@ -411,6 +422,18 @@ public class Card extends ApiResource implements HasId, MetadataStore<Card> {
      */
     @SerializedName("type")
     String type;
+
+    @Getter
+    @Setter
+    @EqualsAndHashCode(callSuper = false)
+    public static class Customs extends StripeObject {
+      /**
+       * A registration number used for customs in Europe. See https://www.gov.uk/eori and
+       * https://ec.europa.eu/taxation_customs/business/customs-procedures-import-and-export/customs-procedures/economic-operators-registration-and-identification-number-eori_en.
+       */
+      @SerializedName("eori_number")
+      String eoriNumber;
+    }
   }
 
   @Getter

@@ -127,6 +127,10 @@ public class Product extends ApiResource implements HasId, MetadataStore<Product
   @SerializedName("package_dimensions")
   PackageDimensions packageDimensions;
 
+  /** Provisioning configuration for this product. */
+  @SerializedName("provisioning")
+  Provisioning provisioning;
+
   /** Whether this product is shipped (i.e., physical goods). */
   @SerializedName("shippable")
   Boolean shippable;

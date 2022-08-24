@@ -31,6 +31,9 @@ import lombok.Setter;
 @Setter
 @EqualsAndHashCode(callSuper = false)
 public class Order extends ApiResource implements HasId, MetadataStore<Order> {
+  @SerializedName("amount_remaining")
+  Long amountRemaining;
+
   /**
    * Order cost before any discounts or taxes are applied. A positive integer representing the
    * subtotal of the order in the <a href="https://stripe.com/docs/currencies#zero-decimal">smallest
@@ -81,6 +84,10 @@ public class Order extends ApiResource implements HasId, MetadataStore<Order> {
   /** Time at which the object was created. Measured in seconds since the Unix epoch. */
   @SerializedName("created")
   Long created;
+
+  /** The credits applied to the Order. At most 10 credits can be applied to an Order. */
+  @SerializedName("credits")
+  List<Order.Credit> credits;
 
   /**
    * Three-letter <a href="https://www.iso.org/iso-4217-currency-codes.html">ISO currency code</a>,
@@ -619,6 +626,40 @@ public class Order extends ApiResource implements HasId, MetadataStore<Order> {
     /** Billing phone number for the order (including extension). */
     @SerializedName("phone")
     String phone;
+  }
+
+  @Getter
+  @Setter
+  @EqualsAndHashCode(callSuper = false)
+  public static class Credit extends StripeObject {
+    /** The amount of this credit to apply to the order. */
+    @SerializedName("amount")
+    Long amount;
+
+    /** Details for a gift card. */
+    @SerializedName("gift_card")
+    GiftCard giftCard;
+
+    /** Line items on this order that are ineligible for this credit. */
+    @SerializedName("ineligible_line_items")
+    List<String> ineligibleLineItems;
+
+    /**
+     * The type of credit to apply to the order, only {@code gift_card} currently supported.
+     *
+     * <p>Equal to {@code gift_card}.
+     */
+    @SerializedName("type")
+    String type;
+
+    @Getter
+    @Setter
+    @EqualsAndHashCode(callSuper = false)
+    public static class GiftCard extends StripeObject {
+      /** The token of the gift card applied to the order. */
+      @SerializedName("card")
+      String card;
+    }
   }
 
   @Getter
@@ -1545,6 +1586,9 @@ public class Order extends ApiResource implements HasId, MetadataStore<Order> {
   @Setter
   @EqualsAndHashCode(callSuper = false)
   public static class TotalDetails extends StripeObject {
+    @SerializedName("amount_credit")
+    Long amountCredit;
+
     /** This is the sum of all the discounts. */
     @SerializedName("amount_discount")
     Long amountDiscount;

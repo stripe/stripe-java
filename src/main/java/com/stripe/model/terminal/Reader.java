@@ -571,6 +571,11 @@ public class Reader extends ApiResource implements HasId, MetadataStore<Reader> 
     @Setter
     @EqualsAndHashCode(callSuper = false)
     public static class ProcessSetupIntentAction extends StripeObject {
+      /**
+       * ID of a card PaymentMethod generated from the card_present PaymentMethod that may be
+       * attached to a Customer for future transactions. Only present if it was possible to generate
+       * a card PaymentMethod.
+       */
       @SerializedName("generated_card")
       String generatedCard;
 
