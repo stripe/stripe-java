@@ -250,6 +250,8 @@ We highly recommend keeping an eye on when the beta feature you are interested i
 
 If your beta feature requires a `Stripe-Version` header to be sent, use the `Stripe.stripeVersion` field to set it:
 
+> Note: the `stripeVersion` can only be set in beta versions of the library. 
+
 ```java
 Stripe.stripeVersion += "; feature_beta=v3";
 ```
