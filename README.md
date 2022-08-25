@@ -3,12 +3,9 @@
 [![Maven Central](https://img.shields.io/maven-central/v/com.stripe/stripe-java)](https://mvnrepository.com/artifact/com.stripe/stripe-java)
 [![JavaDoc](http://img.shields.io/badge/javadoc-reference-blue.svg)](https://stripe.dev/stripe-java)
 [![Build Status](https://github.com/stripe/stripe-java/actions/workflows/ci.yml/badge.svg?branch=master)](https://github.com/stripe/stripe-java/actions?query=branch%3Amaster)
+[![Coverage Status](https://coveralls.io/repos/github/stripe/stripe-java/badge.svg?branch=master)](https://coveralls.io/github/stripe/stripe-java?branch=master)
 
 The official [Stripe][stripe] Java client library.
-
-## Support
-
-New features and bug fixes are released on the latest major version of the Stripe Java client library. If you are on an older major version, we recommend that you upgrade to the latest in order to use the new features and bug fixes including those for security vulnerabilities. Older major versions of the package will continue to be available for use, but will not be receiving any updates.
 
 ## Installation
 
@@ -80,7 +77,7 @@ public class StripeExample {
 
     public static void main(String[] args) {
         Stripe.apiKey = "sk_test_...";
-        
+
         CustomerCreateParams params =
             CustomerCreateParams
                 .builder()
@@ -241,6 +238,30 @@ You can disable this behavior if you prefer:
 ```java
 Stripe.enableTelemetry = false;
 ```
+
+### Beta SDKs
+
+Stripe has features in the beta phase that can be accessed via the beta version of this package.
+We would love for you to try these and share feedback with us before these features reach the stable phase.
+To install a beta version of stripe-java follow steps [installation steps above](#installation) using the beta library version.
+
+> **Note**
+> There can be breaking changes between beta versions. Therefore we recommend pinning the package version to a specific version. This way you can install the same version each time without breaking changes unless you are intentionally looking for the latest beta version.
+
+We highly recommend keeping an eye on when the beta feature you are interested in goes from beta to stable so that you can move from using a beta version of the SDK to the stable version.
+
+If your beta feature requires a `Stripe-Version` header to be sent, use the `Stripe.stripeVersion` field to set it:
+
+> **Note**
+> The `stripeVersion` can only be set in beta versions of the library. 
+
+```java
+Stripe.stripeVersion += "; feature_beta=v3";
+```
+
+## Support
+
+New features and bug fixes are released on the latest major version of the Stripe Java client library. If you are on an older major version, we recommend that you upgrade to the latest in order to use the new features and bug fixes including those for security vulnerabilities. Older major versions of the package will continue to be available for use, but will not be receiving any updates.
 
 ## Development
 

@@ -18,7 +18,7 @@ import lombok.Setter;
 @EqualsAndHashCode(callSuper = false)
 public class CustomerCashBalanceTransaction extends StripeObject implements HasId {
   @SerializedName("applied_to_payment")
-  CashBalance.AppliedToPaymentTransaction appliedToPayment;
+  AppliedToPayment appliedToPayment;
 
   /** Time at which the object was created. Measured in seconds since the Unix epoch. */
   @SerializedName("created")
@@ -46,7 +46,7 @@ public class CustomerCashBalanceTransaction extends StripeObject implements HasI
   Long endingBalance;
 
   @SerializedName("funded")
-  CashBalance.FundedTransaction funded;
+  Funded funded;
 
   /** Unique identifier for the object. */
   @Getter(onMethod_ = {@Override})
@@ -78,7 +78,7 @@ public class CustomerCashBalanceTransaction extends StripeObject implements HasI
   String object;
 
   @SerializedName("refunded_from_payment")
-  CashBalance.RefundedFromPaymentTransaction refundedFromPayment;
+  RefundedFromPayment refundedFromPayment;
 
   /**
    * The type of the cash balance transaction. One of {@code applied_to_payment}, {@code
@@ -91,7 +91,7 @@ public class CustomerCashBalanceTransaction extends StripeObject implements HasI
   String type;
 
   @SerializedName("unapplied_from_payment")
-  CashBalance.UnappliedFromPaymentTransaction unappliedFromPayment;
+  UnappliedFromPayment unappliedFromPayment;
 
   /** Get ID of expandable {@code customer} object. */
   public String getCustomer() {
@@ -109,5 +109,151 @@ public class CustomerCashBalanceTransaction extends StripeObject implements HasI
 
   public void setCustomerObject(Customer expandableObject) {
     this.customer = new ExpandableField<Customer>(expandableObject.getId(), expandableObject);
+  }
+
+  @Getter
+  @Setter
+  @EqualsAndHashCode(callSuper = false)
+  public static class AppliedToPayment extends StripeObject {
+    /**
+     * The <a href="https://stripe.com/docs/api/payment_intents/object">Payment Intent</a> that
+     * funds were applied to.
+     */
+    @SerializedName("payment_intent")
+    @Getter(lombok.AccessLevel.NONE)
+    @Setter(lombok.AccessLevel.NONE)
+    ExpandableField<PaymentIntent> paymentIntent;
+
+    /** Get ID of expandable {@code paymentIntent} object. */
+    public String getPaymentIntent() {
+      return (this.paymentIntent != null) ? this.paymentIntent.getId() : null;
+    }
+
+    public void setPaymentIntent(String id) {
+      this.paymentIntent = ApiResource.setExpandableFieldId(id, this.paymentIntent);
+    }
+
+    /** Get expanded {@code paymentIntent}. */
+    public PaymentIntent getPaymentIntentObject() {
+      return (this.paymentIntent != null) ? this.paymentIntent.getExpanded() : null;
+    }
+
+    public void setPaymentIntentObject(PaymentIntent expandableObject) {
+      this.paymentIntent =
+          new ExpandableField<PaymentIntent>(expandableObject.getId(), expandableObject);
+    }
+  }
+
+  @Getter
+  @Setter
+  @EqualsAndHashCode(callSuper = false)
+  public static class Funded extends StripeObject {
+    @SerializedName("bank_transfer")
+    BankTransfer bankTransfer;
+
+    @Getter
+    @Setter
+    @EqualsAndHashCode(callSuper = false)
+    public static class BankTransfer extends StripeObject {
+      @SerializedName("eu_bank_transfer")
+      EuBankTransfer euBankTransfer;
+
+      /** The user-supplied reference field on the bank transfer. */
+      @SerializedName("reference")
+      String reference;
+
+      /**
+       * The funding method type used to fund the customer balance. Permitted values include: {@code
+       * eu_bank_transfer}, {@code gb_bank_transfer}, {@code jp_bank_transfer}, or {@code
+       * mx_bank_transfer}.
+       *
+       * <p>One of {@code eu_bank_transfer}, {@code gb_bank_transfer}, {@code jp_bank_transfer}, or
+       * {@code mx_bank_transfer}.
+       */
+      @SerializedName("type")
+      String type;
+
+      @Getter
+      @Setter
+      @EqualsAndHashCode(callSuper = false)
+      public static class EuBankTransfer extends StripeObject {
+        /** The BIC of the bank of the sender of the funding. */
+        @SerializedName("bic")
+        String bic;
+
+        /** The last 4 digits of the IBAN of the sender of the funding. */
+        @SerializedName("iban_last4")
+        String ibanLast4;
+
+        /** The full name of the sender, as supplied by the sending bank. */
+        @SerializedName("sender_name")
+        String senderName;
+      }
+    }
+  }
+
+  @Getter
+  @Setter
+  @EqualsAndHashCode(callSuper = false)
+  public static class RefundedFromPayment extends StripeObject {
+    /**
+     * The <a href="https://stripe.com/docs/api/refunds/object">Refund</a> that moved these funds
+     * into the customer's cash balance.
+     */
+    @SerializedName("refund")
+    @Getter(lombok.AccessLevel.NONE)
+    @Setter(lombok.AccessLevel.NONE)
+    ExpandableField<Refund> refund;
+
+    /** Get ID of expandable {@code refund} object. */
+    public String getRefund() {
+      return (this.refund != null) ? this.refund.getId() : null;
+    }
+
+    public void setRefund(String id) {
+      this.refund = ApiResource.setExpandableFieldId(id, this.refund);
+    }
+
+    /** Get expanded {@code refund}. */
+    public Refund getRefundObject() {
+      return (this.refund != null) ? this.refund.getExpanded() : null;
+    }
+
+    public void setRefundObject(Refund expandableObject) {
+      this.refund = new ExpandableField<Refund>(expandableObject.getId(), expandableObject);
+    }
+  }
+
+  @Getter
+  @Setter
+  @EqualsAndHashCode(callSuper = false)
+  public static class UnappliedFromPayment extends StripeObject {
+    /**
+     * The <a href="https://stripe.com/docs/api/payment_intents/object">Payment Intent</a> that
+     * funds were unapplied from.
+     */
+    @SerializedName("payment_intent")
+    @Getter(lombok.AccessLevel.NONE)
+    @Setter(lombok.AccessLevel.NONE)
+    ExpandableField<PaymentIntent> paymentIntent;
+
+    /** Get ID of expandable {@code paymentIntent} object. */
+    public String getPaymentIntent() {
+      return (this.paymentIntent != null) ? this.paymentIntent.getId() : null;
+    }
+
+    public void setPaymentIntent(String id) {
+      this.paymentIntent = ApiResource.setExpandableFieldId(id, this.paymentIntent);
+    }
+
+    /** Get expanded {@code paymentIntent}. */
+    public PaymentIntent getPaymentIntentObject() {
+      return (this.paymentIntent != null) ? this.paymentIntent.getExpanded() : null;
+    }
+
+    public void setPaymentIntentObject(PaymentIntent expandableObject) {
+      this.paymentIntent =
+          new ExpandableField<PaymentIntent>(expandableObject.getId(), expandableObject);
+    }
   }
 }

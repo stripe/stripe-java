@@ -104,6 +104,9 @@ final class EventDataClassLookup {
     classLookup.put(
         "financial_connections.session", com.stripe.model.financialconnections.Session.class);
 
+    classLookup.put("gift_cards.card", com.stripe.model.giftcards.Card.class);
+    classLookup.put("gift_cards.transaction", com.stripe.model.giftcards.Transaction.class);
+
     classLookup.put(
         "identity.verification_report", com.stripe.model.identity.VerificationReport.class);
     classLookup.put(
