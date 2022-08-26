@@ -43,6 +43,14 @@ public class ConfigurationCreateParams extends ApiRequestParams {
   Features features;
 
   /**
+   * The hosted login page for this configuration. Learn more about the portal login page in our <a
+   * href="https://stripe.com/docs/billing/subscriptions/integrating-customer-portal#share">integration
+   * docs</a>.
+   */
+  @SerializedName("login_page")
+  LoginPage loginPage;
+
+  /**
    * Set of <a href="https://stripe.com/docs/api/metadata">key-value pairs</a> that you can attach
    * to an object. This can be useful for storing additional information about the object in a
    * structured format. Individual keys can be unset by posting an empty value to them. All keys can
@@ -57,12 +65,14 @@ public class ConfigurationCreateParams extends ApiRequestParams {
       List<String> expand,
       Map<String, Object> extraParams,
       Features features,
+      LoginPage loginPage,
       Map<String, String> metadata) {
     this.businessProfile = businessProfile;
     this.defaultReturnUrl = defaultReturnUrl;
     this.expand = expand;
     this.extraParams = extraParams;
     this.features = features;
+    this.loginPage = loginPage;
     this.metadata = metadata;
   }
 
@@ -81,6 +91,8 @@ public class ConfigurationCreateParams extends ApiRequestParams {
 
     private Features features;
 
+    private LoginPage loginPage;
+
     private Map<String, String> metadata;
 
     /** Finalize and obtain parameter instance from this builder. */
@@ -91,6 +103,7 @@ public class ConfigurationCreateParams extends ApiRequestParams {
           this.expand,
           this.extraParams,
           this.features,
+          this.loginPage,
           this.metadata);
     }
 
@@ -177,6 +190,17 @@ public class ConfigurationCreateParams extends ApiRequestParams {
     /** Information about the features available in the portal. */
     public Builder setFeatures(Features features) {
       this.features = features;
+      return this;
+    }
+
+    /**
+     * The hosted login page for this configuration. Learn more about the portal login page in our
+     * <a
+     * href="https://stripe.com/docs/billing/subscriptions/integrating-customer-portal#share">integration
+     * docs</a>.
+     */
+    public Builder setLoginPage(LoginPage loginPage) {
+      this.loginPage = loginPage;
       return this;
     }
 
@@ -1516,6 +1540,84 @@ public class ConfigurationCreateParams extends ApiRequestParams {
         ProrationBehavior(String value) {
           this.value = value;
         }
+      }
+    }
+  }
+
+  @Getter
+  public static class LoginPage {
+    /**
+     * Set to {@code true} to generate a shareable URL <a
+     * href="https://stripe.com/docs/api/customer_portal/configuration#portal_configuration_object-login_page-url">{@code
+     * login_page.url}</a> that will take your customers to a hosted login page for the customer
+     * portal.
+     */
+    @SerializedName("enabled")
+    Boolean enabled;
+
+    /**
+     * Map of extra parameters for custom features not available in this client library. The content
+     * in this map is not serialized under this field's {@code @SerializedName} value. Instead, each
+     * key/value pair is serialized as if the key is a root-level field (serialized) name in this
+     * param object. Effectively, this map is flattened to its parent instance.
+     */
+    @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
+    Map<String, Object> extraParams;
+
+    private LoginPage(Boolean enabled, Map<String, Object> extraParams) {
+      this.enabled = enabled;
+      this.extraParams = extraParams;
+    }
+
+    public static Builder builder() {
+      return new Builder();
+    }
+
+    public static class Builder {
+      private Boolean enabled;
+
+      private Map<String, Object> extraParams;
+
+      /** Finalize and obtain parameter instance from this builder. */
+      public LoginPage build() {
+        return new LoginPage(this.enabled, this.extraParams);
+      }
+
+      /**
+       * Set to {@code true} to generate a shareable URL <a
+       * href="https://stripe.com/docs/api/customer_portal/configuration#portal_configuration_object-login_page-url">{@code
+       * login_page.url}</a> that will take your customers to a hosted login page for the customer
+       * portal.
+       */
+      public Builder setEnabled(Boolean enabled) {
+        this.enabled = enabled;
+        return this;
+      }
+
+      /**
+       * Add a key/value pair to `extraParams` map. A map is initialized for the first `put/putAll`
+       * call, and subsequent calls add additional key/value pairs to the original map. See {@link
+       * ConfigurationCreateParams.LoginPage#extraParams} for the field documentation.
+       */
+      public Builder putExtraParam(String key, Object value) {
+        if (this.extraParams == null) {
+          this.extraParams = new HashMap<>();
+        }
+        this.extraParams.put(key, value);
+        return this;
+      }
+
+      /**
+       * Add all map key/value pairs to `extraParams` map. A map is initialized for the first
+       * `put/putAll` call, and subsequent calls add additional key/value pairs to the original map.
+       * See {@link ConfigurationCreateParams.LoginPage#extraParams} for the field documentation.
+       */
+      public Builder putAllExtraParam(Map<String, Object> map) {
+        if (this.extraParams == null) {
+          this.extraParams = new HashMap<>();
+        }
+        this.extraParams.putAll(map);
+        return this;
       }
     }
   }

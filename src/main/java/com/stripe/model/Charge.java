@@ -1998,13 +1998,14 @@ public class Charge extends ApiResource implements MetadataStore<Charge>, Balanc
        * austrian_anadi_bank_ag}, {@code bank_austria}, {@code bankhaus_carl_spangler}, {@code
        * bankhaus_schelhammer_und_schattera_ag}, {@code bawag_psk_ag}, {@code bks_bank_ag}, {@code
        * brull_kallmus_bank_ag}, {@code btv_vier_lander_bank}, {@code capital_bank_grawe_gruppe_ag},
-       * {@code dolomitenbank}, {@code easybank_ag}, {@code erste_bank_und_sparkassen}, {@code
-       * hypo_alpeadriabank_international_ag}, {@code hypo_noe_lb_fur_niederosterreich_u_wien},
-       * {@code hypo_oberosterreich_salzburg_steiermark}, {@code hypo_tirol_bank_ag}, {@code
-       * hypo_vorarlberg_bank_ag}, {@code hypo_bank_burgenland_aktiengesellschaft}, {@code
-       * marchfelder_bank}, {@code oberbank_ag}, {@code raiffeisen_bankengruppe_osterreich}, {@code
-       * schoellerbank_ag}, {@code sparda_bank_wien}, {@code volksbank_gruppe}, {@code
-       * volkskreditbank_ag}, or {@code vr_bank_braunau}.
+       * {@code deutsche_bank_ag}, {@code dolomitenbank}, {@code easybank_ag}, {@code
+       * erste_bank_und_sparkassen}, {@code hypo_alpeadriabank_international_ag}, {@code
+       * hypo_noe_lb_fur_niederosterreich_u_wien}, {@code hypo_oberosterreich_salzburg_steiermark},
+       * {@code hypo_tirol_bank_ag}, {@code hypo_vorarlberg_bank_ag}, {@code
+       * hypo_bank_burgenland_aktiengesellschaft}, {@code marchfelder_bank}, {@code oberbank_ag},
+       * {@code raiffeisen_bankengruppe_osterreich}, {@code schoellerbank_ag}, {@code
+       * sparda_bank_wien}, {@code volksbank_gruppe}, {@code volkskreditbank_ag}, or {@code
+       * vr_bank_braunau}.
        */
       @SerializedName("bank")
       String bank;

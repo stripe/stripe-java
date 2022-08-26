@@ -1424,6 +1424,13 @@ public class QuoteCreateParams extends ApiRequestParams {
   @Getter
   public static class SubscriptionData {
     /**
+     * The subscription's description, meant to be displayable to the customer. Use this field to
+     * optionally store an explanation of the subscription.
+     */
+    @SerializedName("description")
+    String description;
+
+    /**
      * When creating a new subscription, the date of which the subscription schedule will start
      * after the quote is accepted. When updating a subscription, the date of which the subscription
      * will be updated using a subscription schedule. The special value {@code current_period_end}
@@ -1450,7 +1457,11 @@ public class QuoteCreateParams extends ApiRequestParams {
     Object trialPeriodDays;
 
     private SubscriptionData(
-        Object effectiveDate, Map<String, Object> extraParams, Object trialPeriodDays) {
+        String description,
+        Object effectiveDate,
+        Map<String, Object> extraParams,
+        Object trialPeriodDays) {
+      this.description = description;
       this.effectiveDate = effectiveDate;
       this.extraParams = extraParams;
       this.trialPeriodDays = trialPeriodDays;
@@ -1461,6 +1472,8 @@ public class QuoteCreateParams extends ApiRequestParams {
     }
 
     public static class Builder {
+      private String description;
+
       private Object effectiveDate;
 
       private Map<String, Object> extraParams;
@@ -1469,7 +1482,17 @@ public class QuoteCreateParams extends ApiRequestParams {
 
       /** Finalize and obtain parameter instance from this builder. */
       public SubscriptionData build() {
-        return new SubscriptionData(this.effectiveDate, this.extraParams, this.trialPeriodDays);
+        return new SubscriptionData(
+            this.description, this.effectiveDate, this.extraParams, this.trialPeriodDays);
+      }
+
+      /**
+       * The subscription's description, meant to be displayable to the customer. Use this field to
+       * optionally store an explanation of the subscription.
+       */
+      public Builder setDescription(String description) {
+        this.description = description;
+        return this;
       }
 
       /**

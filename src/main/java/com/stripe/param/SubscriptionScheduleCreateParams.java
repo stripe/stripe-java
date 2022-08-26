@@ -372,6 +372,13 @@ public class SubscriptionScheduleCreateParams extends ApiRequestParams {
     String defaultPaymentMethod;
 
     /**
+     * Subscription description, meant to be displayable to the customer. Use this field to
+     * optionally store an explanation of the subscription.
+     */
+    @SerializedName("description")
+    String description;
+
+    /**
      * Map of extra parameters for custom features not available in this client library. The content
      * in this map is not serialized under this field's {@code @SerializedName} value. Instead, each
      * key/value pair is serialized as if the key is a root-level field (serialized) name in this
@@ -398,6 +405,7 @@ public class SubscriptionScheduleCreateParams extends ApiRequestParams {
         Object billingThresholds,
         CollectionMethod collectionMethod,
         String defaultPaymentMethod,
+        String description,
         Map<String, Object> extraParams,
         InvoiceSettings invoiceSettings,
         Object transferData) {
@@ -407,6 +415,7 @@ public class SubscriptionScheduleCreateParams extends ApiRequestParams {
       this.billingThresholds = billingThresholds;
       this.collectionMethod = collectionMethod;
       this.defaultPaymentMethod = defaultPaymentMethod;
+      this.description = description;
       this.extraParams = extraParams;
       this.invoiceSettings = invoiceSettings;
       this.transferData = transferData;
@@ -429,6 +438,8 @@ public class SubscriptionScheduleCreateParams extends ApiRequestParams {
 
       private String defaultPaymentMethod;
 
+      private String description;
+
       private Map<String, Object> extraParams;
 
       private InvoiceSettings invoiceSettings;
@@ -444,6 +455,7 @@ public class SubscriptionScheduleCreateParams extends ApiRequestParams {
             this.billingThresholds,
             this.collectionMethod,
             this.defaultPaymentMethod,
+            this.description,
             this.extraParams,
             this.invoiceSettings,
             this.transferData);
@@ -516,6 +528,15 @@ public class SubscriptionScheduleCreateParams extends ApiRequestParams {
        */
       public Builder setDefaultPaymentMethod(String defaultPaymentMethod) {
         this.defaultPaymentMethod = defaultPaymentMethod;
+        return this;
+      }
+
+      /**
+       * Subscription description, meant to be displayable to the customer. Use this field to
+       * optionally store an explanation of the subscription.
+       */
+      public Builder setDescription(String description) {
+        this.description = description;
         return this;
       }
 
@@ -1032,6 +1053,13 @@ public class SubscriptionScheduleCreateParams extends ApiRequestParams {
     Object defaultTaxRates;
 
     /**
+     * Subscription description, meant to be displayable to the customer. Use this field to
+     * optionally store an explanation of the subscription.
+     */
+    @SerializedName("description")
+    String description;
+
+    /**
      * The date at which this phase of the subscription schedule ends. If set, {@code iterations}
      * must not be set.
      */
@@ -1119,6 +1147,7 @@ public class SubscriptionScheduleCreateParams extends ApiRequestParams {
         String currency,
         String defaultPaymentMethod,
         Object defaultTaxRates,
+        String description,
         Long endDate,
         Map<String, Object> extraParams,
         InvoiceSettings invoiceSettings,
@@ -1139,6 +1168,7 @@ public class SubscriptionScheduleCreateParams extends ApiRequestParams {
       this.currency = currency;
       this.defaultPaymentMethod = defaultPaymentMethod;
       this.defaultTaxRates = defaultTaxRates;
+      this.description = description;
       this.endDate = endDate;
       this.extraParams = extraParams;
       this.invoiceSettings = invoiceSettings;
@@ -1176,6 +1206,8 @@ public class SubscriptionScheduleCreateParams extends ApiRequestParams {
 
       private Object defaultTaxRates;
 
+      private String description;
+
       private Long endDate;
 
       private Map<String, Object> extraParams;
@@ -1209,6 +1241,7 @@ public class SubscriptionScheduleCreateParams extends ApiRequestParams {
             this.currency,
             this.defaultPaymentMethod,
             this.defaultTaxRates,
+            this.description,
             this.endDate,
             this.extraParams,
             this.invoiceSettings,
@@ -1384,6 +1417,15 @@ public class SubscriptionScheduleCreateParams extends ApiRequestParams {
        */
       public Builder setDefaultTaxRates(List<String> defaultTaxRates) {
         this.defaultTaxRates = defaultTaxRates;
+        return this;
+      }
+
+      /**
+       * Subscription description, meant to be displayable to the customer. Use this field to
+       * optionally store an explanation of the subscription.
+       */
+      public Builder setDescription(String description) {
+        this.description = description;
         return this;
       }
 

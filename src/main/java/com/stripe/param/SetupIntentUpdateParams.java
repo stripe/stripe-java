@@ -2301,6 +2301,9 @@ public class SetupIntentUpdateParams extends ApiRequestParams {
         @SerializedName("capital_bank_grawe_gruppe_ag")
         CAPITAL_BANK_GRAWE_GRUPPE_AG("capital_bank_grawe_gruppe_ag"),
 
+        @SerializedName("deutsche_bank_ag")
+        DEUTSCHE_BANK_AG("deutsche_bank_ag"),
+
         @SerializedName("dolomitenbank")
         DOLOMITENBANK("dolomitenbank"),
 

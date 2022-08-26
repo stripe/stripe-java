@@ -298,6 +298,10 @@ public class CardCreateParams extends ApiRequestParams {
     @SerializedName("address")
     Address address;
 
+    /** Customs information for the shipment. */
+    @SerializedName("customs")
+    Customs customs;
+
     /**
      * Map of extra parameters for custom features not available in this client library. The content
      * in this map is not serialized under this field's {@code @SerializedName} value. Instead, each
@@ -311,6 +315,10 @@ public class CardCreateParams extends ApiRequestParams {
     @SerializedName("name")
     String name;
 
+    /** Phone number of the recipient of the shipment. */
+    @SerializedName("phone_number")
+    String phoneNumber;
+
     /** Shipment service. */
     @SerializedName("service")
     Service service;
@@ -320,10 +328,18 @@ public class CardCreateParams extends ApiRequestParams {
     Type type;
 
     private Shipping(
-        Address address, Map<String, Object> extraParams, String name, Service service, Type type) {
+        Address address,
+        Customs customs,
+        Map<String, Object> extraParams,
+        String name,
+        String phoneNumber,
+        Service service,
+        Type type) {
       this.address = address;
+      this.customs = customs;
       this.extraParams = extraParams;
       this.name = name;
+      this.phoneNumber = phoneNumber;
       this.service = service;
       this.type = type;
     }
@@ -335,9 +351,13 @@ public class CardCreateParams extends ApiRequestParams {
     public static class Builder {
       private Address address;
 
+      private Customs customs;
+
       private Map<String, Object> extraParams;
 
       private String name;
+
+      private String phoneNumber;
 
       private Service service;
 
@@ -345,12 +365,25 @@ public class CardCreateParams extends ApiRequestParams {
 
       /** Finalize and obtain parameter instance from this builder. */
       public Shipping build() {
-        return new Shipping(this.address, this.extraParams, this.name, this.service, this.type);
+        return new Shipping(
+            this.address,
+            this.customs,
+            this.extraParams,
+            this.name,
+            this.phoneNumber,
+            this.service,
+            this.type);
       }
 
       /** The address that the card is shipped to. */
       public Builder setAddress(Address address) {
         this.address = address;
+        return this;
+      }
+
+      /** Customs information for the shipment. */
+      public Builder setCustoms(Customs customs) {
+        this.customs = customs;
         return this;
       }
 
@@ -383,6 +416,12 @@ public class CardCreateParams extends ApiRequestParams {
       /** The name printed on the shipping label when shipping the card. */
       public Builder setName(String name) {
         this.name = name;
+        return this;
+      }
+
+      /** Phone number of the recipient of the shipment. */
+      public Builder setPhoneNumber(String phoneNumber) {
+        this.phoneNumber = phoneNumber;
         return this;
       }
 
@@ -549,6 +588,82 @@ public class CardCreateParams extends ApiRequestParams {
         /** State, county, province, or region. */
         public Builder setState(String state) {
           this.state = state;
+          return this;
+        }
+      }
+    }
+
+    @Getter
+    public static class Customs {
+      /**
+       * The Economic Operators Registration and Identification (EORI) number to use for Customs.
+       * Required for bulk shipments to Europe.
+       */
+      @SerializedName("eori_number")
+      String eoriNumber;
+
+      /**
+       * Map of extra parameters for custom features not available in this client library. The
+       * content in this map is not serialized under this field's {@code @SerializedName} value.
+       * Instead, each key/value pair is serialized as if the key is a root-level field (serialized)
+       * name in this param object. Effectively, this map is flattened to its parent instance.
+       */
+      @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
+      Map<String, Object> extraParams;
+
+      private Customs(String eoriNumber, Map<String, Object> extraParams) {
+        this.eoriNumber = eoriNumber;
+        this.extraParams = extraParams;
+      }
+
+      public static Builder builder() {
+        return new Builder();
+      }
+
+      public static class Builder {
+        private String eoriNumber;
+
+        private Map<String, Object> extraParams;
+
+        /** Finalize and obtain parameter instance from this builder. */
+        public Customs build() {
+          return new Customs(this.eoriNumber, this.extraParams);
+        }
+
+        /**
+         * The Economic Operators Registration and Identification (EORI) number to use for Customs.
+         * Required for bulk shipments to Europe.
+         */
+        public Builder setEoriNumber(String eoriNumber) {
+          this.eoriNumber = eoriNumber;
+          return this;
+        }
+
+        /**
+         * Add a key/value pair to `extraParams` map. A map is initialized for the first
+         * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
+         * map. See {@link CardCreateParams.Shipping.Customs#extraParams} for the field
+         * documentation.
+         */
+        public Builder putExtraParam(String key, Object value) {
+          if (this.extraParams == null) {
+            this.extraParams = new HashMap<>();
+          }
+          this.extraParams.put(key, value);
+          return this;
+        }
+
+        /**
+         * Add all map key/value pairs to `extraParams` map. A map is initialized for the first
+         * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
+         * map. See {@link CardCreateParams.Shipping.Customs#extraParams} for the field
+         * documentation.
+         */
+        public Builder putAllExtraParam(Map<String, Object> map) {
+          if (this.extraParams == null) {
+            this.extraParams = new HashMap<>();
+          }
+          this.extraParams.putAll(map);
           return this;
         }
       }
