@@ -1,5 +1,10 @@
 # Changelog
 
+## 21.4.0-beta.1 - 2022-08-26
+* [#1429](https://github.com/stripe/stripe-java/pull/1429) API Updates for beta branch
+  * Updated stable APIs to the latest version
+  * Add support for the beta [Gift Card API](https://stripe.com/docs/gift-cards).
+
 ## 21.3.0 - 2022-08-23
 * [#1422](https://github.com/stripe/stripe-java/pull/1422) API Updates
   * Add support for new resource `CustomerCashBalanceTransaction`
