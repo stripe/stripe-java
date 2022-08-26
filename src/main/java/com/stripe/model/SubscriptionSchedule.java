@@ -638,6 +638,13 @@ public class SubscriptionSchedule extends ApiResource
     @Setter(lombok.AccessLevel.NONE)
     ExpandableField<PaymentMethod> defaultPaymentMethod;
 
+    /**
+     * Subscription description, meant to be displayable to the customer. Use this field to
+     * optionally store an explanation of the subscription.
+     */
+    @SerializedName("description")
+    String description;
+
     /** The subscription schedule's default invoice settings. */
     @SerializedName("invoice_settings")
     InvoiceSettings invoiceSettings;
@@ -778,6 +785,13 @@ public class SubscriptionSchedule extends ApiResource
      */
     @SerializedName("default_tax_rates")
     List<TaxRate> defaultTaxRates;
+
+    /**
+     * Subscription description, meant to be displayable to the customer. Use this field to
+     * optionally store an explanation of the subscription.
+     */
+    @SerializedName("description")
+    String description;
 
     /** The end of this phase of the subscription schedule. */
     @SerializedName("end_date")
