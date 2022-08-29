@@ -1,6 +1,7 @@
 .PHONY: update-version codegen-format
 update-version:
 	@echo "$(VERSION)" > VERSION
+	@perl -pi -e 's|badge/maven--central-v[.\d\-\w]+-blue|badge/maven--central-v$(VERSION)-blue|' README.md
 	@perl -pi -e 's|https:\/\/search\.maven\.org\/remotecontent\?filepath=com\/stripe\/stripe-java\/[.\d\-\w]+\/stripe-java-[.\d\-\w]+.jar|https://search.maven.org/remotecontent?filepath=com/stripe/stripe-java/$(VERSION)/stripe-java-$(VERSION).jar|' README.md
 	@perl -pi -e 's|implementation "com\.stripe:stripe-java:[.\d\-\w]+"|implementation "com.stripe:stripe-java:$(VERSION)"|' README.md
 	@perl -pi -e 's|<version>[.\d\-\w]+<\/version>|<version>$(VERSION)</version>|' README.md
