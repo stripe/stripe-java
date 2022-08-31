@@ -1,5 +1,12 @@
 # Changelog
 
+## 21.5.0 - 2022-08-31
+* [#1433](https://github.com/stripe/stripe-java/pull/1433) API Updates
+  * Add support for new values `de-CH`, `en-CH`, `en-PL`, `en-PT`, `fr-CH`, `it-CH`, `pl-PL`, and `pt-PT` on enums `OrderCreateParams.payment.settings.payment_method_options.klarna.preferred_locale`, `OrderUpdateParams.payment.settings.payment_method_options.klarna.preferred_locale`, `PaymentIntentConfirmParams.payment_method_options.klarna.preferred_locale`, `PaymentIntentCreateParams.payment_method_options.klarna.preferred_locale`, and `PaymentIntentUpdateParams.payment_method_options.klarna.preferred_locale`
+  * Add support for `description` on `PaymentLink.subscription_data` and `PaymentLinkCreateParams.subscription_data`
+* [#1432](https://github.com/stripe/stripe-java/pull/1432) Update README badge
+* [#1431](https://github.com/stripe/stripe-java/pull/1431) Update coveralls to only run for one java version
+
 ## 21.4.0 - 2022-08-26
 * [#1430](https://github.com/stripe/stripe-java/pull/1430) API Updates
   * Add support for `login_page` on `BillingPortal.Configuration`, `BillingPortalConfigurationCreateParams`, and `BillingPortalConfigurationUpdateParams`
@@ -18,7 +25,7 @@
   * Change `TreasuryOutboundTransferCreateParams.destination_payment_method` to be optional
   * Add support for new value `customer_cash_balance_transaction.created` on enums `WebhookEndpointCreateParams.enabled_events[]` and `WebhookEndpointUpdateParams.enabled_events[]`
   * Change the return type of `Customer.fundCashBalance` test helper from `CustomerBalanceTransaction` to `CustomerCashBalanceTransaction`.
-    * This would generally be considered a breaking change, but we've worked with all existing users to migrate and are comfortable releasing this as a minor as it is solely a test helper method. This was essentially broken prior to this change. 
+    * This would generally be considered a breaking change, but we've worked with all existing users to migrate and are comfortable releasing this as a minor as it is solely a test helper method. This was essentially broken prior to this change.
 * [#1425](https://github.com/stripe/stripe-java/pull/1425) Add beta readme.md section
 * [#1423](https://github.com/stripe/stripe-java/pull/1423) chore: Remove unused variable from SearchPagingIteratorTest.
 * [#1421](https://github.com/stripe/stripe-java/pull/1421) Add a support section to the readme
@@ -29,7 +36,7 @@
 ## 21.2.0 - 2022-08-11
 * [#1416](https://github.com/stripe/stripe-java/pull/1416) API Updates
   * Add support for `payment_method_collection` on `Checkout.Session`, `CheckoutSessionCreateParams`, `PaymentLinkCreateParams`, `PaymentLinkUpdateParams`, and `PaymentLink`
-  
+
 * [#1414](https://github.com/stripe/stripe-java/pull/1414) Stop publishing javadoc for beta Java SDKs
 
 ## 21.1.0 - 2022-08-09
