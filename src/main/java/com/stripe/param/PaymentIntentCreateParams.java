@@ -9792,6 +9792,9 @@ public class PaymentIntentCreateParams extends ApiRequestParams {
         @SerializedName("de-AT")
         DE_AT("de-AT"),
 
+        @SerializedName("de-CH")
+        DE_CH("de-CH"),
+
         @SerializedName("de-DE")
         DE_DE("de-DE"),
 
@@ -9806,6 +9809,9 @@ public class PaymentIntentCreateParams extends ApiRequestParams {
 
         @SerializedName("en-CA")
         EN_CA("en-CA"),
+
+        @SerializedName("en-CH")
+        EN_CH("en-CH"),
 
         @SerializedName("en-DE")
         EN_DE("en-DE"),
@@ -9840,6 +9846,12 @@ public class PaymentIntentCreateParams extends ApiRequestParams {
         @SerializedName("en-NZ")
         EN_NZ("en-NZ"),
 
+        @SerializedName("en-PL")
+        EN_PL("en-PL"),
+
+        @SerializedName("en-PT")
+        EN_PT("en-PT"),
+
         @SerializedName("en-SE")
         EN_SE("en-SE"),
 
@@ -9861,8 +9873,14 @@ public class PaymentIntentCreateParams extends ApiRequestParams {
         @SerializedName("fr-CA")
         FR_CA("fr-CA"),
 
+        @SerializedName("fr-CH")
+        FR_CH("fr-CH"),
+
         @SerializedName("fr-FR")
         FR_FR("fr-FR"),
+
+        @SerializedName("it-CH")
+        IT_CH("it-CH"),
 
         @SerializedName("it-IT")
         IT_IT("it-IT"),
@@ -9875,6 +9893,12 @@ public class PaymentIntentCreateParams extends ApiRequestParams {
 
         @SerializedName("nl-NL")
         NL_NL("nl-NL"),
+
+        @SerializedName("pl-PL")
+        PL_PL("pl-PL"),
+
+        @SerializedName("pt-PT")
+        PT_PT("pt-PT"),
 
         @SerializedName("sv-FI")
         SV_FI("sv-FI"),

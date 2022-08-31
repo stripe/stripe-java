@@ -2389,6 +2389,13 @@ public class PaymentLinkCreateParams extends ApiRequestParams {
   @Getter
   public static class SubscriptionData {
     /**
+     * The subscription's description, meant to be displayable to the customer. Use this field to
+     * optionally store an explanation of the subscription.
+     */
+    @SerializedName("description")
+    String description;
+
+    /**
      * Map of extra parameters for custom features not available in this client library. The content
      * in this map is not serialized under this field's {@code @SerializedName} value. Instead, each
      * key/value pair is serialized as if the key is a root-level field (serialized) name in this
@@ -2404,7 +2411,9 @@ public class PaymentLinkCreateParams extends ApiRequestParams {
     @SerializedName("trial_period_days")
     Long trialPeriodDays;
 
-    private SubscriptionData(Map<String, Object> extraParams, Long trialPeriodDays) {
+    private SubscriptionData(
+        String description, Map<String, Object> extraParams, Long trialPeriodDays) {
+      this.description = description;
       this.extraParams = extraParams;
       this.trialPeriodDays = trialPeriodDays;
     }
@@ -2414,13 +2423,24 @@ public class PaymentLinkCreateParams extends ApiRequestParams {
     }
 
     public static class Builder {
+      private String description;
+
       private Map<String, Object> extraParams;
 
       private Long trialPeriodDays;
 
       /** Finalize and obtain parameter instance from this builder. */
       public SubscriptionData build() {
-        return new SubscriptionData(this.extraParams, this.trialPeriodDays);
+        return new SubscriptionData(this.description, this.extraParams, this.trialPeriodDays);
+      }
+
+      /**
+       * The subscription's description, meant to be displayable to the customer. Use this field to
+       * optionally store an explanation of the subscription.
+       */
+      public Builder setDescription(String description) {
+        this.description = description;
+        return this;
       }
 
       /**

@@ -2351,7 +2351,8 @@ public class Charge extends ApiResource implements MetadataStore<Charge>, Balanc
        * fi-FI}, {@code sv-FI}, {@code en-FI}, {@code en-GB}, {@code en-IE}, {@code it-IT}, {@code
        * en-IT}, {@code nl-NL}, {@code en-NL}, {@code nb-NO}, {@code en-NO}, {@code sv-SE}, {@code
        * en-SE}, {@code en-US}, {@code es-US}, {@code fr-FR}, {@code en-FR}, {@code en-AU}, {@code
-       * en-NZ}, {@code en-CA}, or {@code fr-CA}
+       * en-NZ}, {@code en-CA}, {@code fr-CA}, {@code pl-PL}, {@code en-PL}, {@code pt-PT}, {@code
+       * en-PT}, {@code de-CH}, {@code fr-CH}, {@code it-CH}, or {@code en-CH}
        */
       @SerializedName("preferred_locale")
       String preferredLocale;
