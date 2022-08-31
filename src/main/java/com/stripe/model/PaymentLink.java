@@ -541,6 +541,13 @@ public class PaymentLink extends ApiResource implements HasId, MetadataStore<Pay
   @EqualsAndHashCode(callSuper = false)
   public static class SubscriptionData extends StripeObject {
     /**
+     * The subscription's description, meant to be displayable to the customer. Use this field to
+     * optionally store an explanation of the subscription.
+     */
+    @SerializedName("description")
+    String description;
+
+    /**
      * Integer representing the number of trial period days before the customer is charged for the
      * first time.
      */

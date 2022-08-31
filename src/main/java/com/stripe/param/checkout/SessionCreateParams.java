@@ -152,7 +152,7 @@ public class SessionCreateParams extends ApiRequestParams {
    * consolidate line items if there are more than a few dozen.
    *
    * <p>For {@code subscription} mode, there is a maximum of 20 line items with recurring Prices and
-   * 20 line items with one-time Prices. Line items with one-time Prices in will be on the initial
+   * 20 line items with one-time Prices. Line items with one-time Prices will be on the initial
    * invoice only.
    */
   @SerializedName("line_items")
@@ -3333,7 +3333,7 @@ public class SessionCreateParams extends ApiRequestParams {
     @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
     Map<String, Object> extraParams;
 
-    /** contains details about the EPS payment method options. */
+    /** contains details about the FPX payment method options. */
     @SerializedName("fpx")
     Fpx fpx;
 
@@ -3616,7 +3616,7 @@ public class SessionCreateParams extends ApiRequestParams {
         return this;
       }
 
-      /** contains details about the EPS payment method options. */
+      /** contains details about the FPX payment method options. */
       public Builder setFpx(Fpx fpx) {
         this.fpx = fpx;
         return this;
