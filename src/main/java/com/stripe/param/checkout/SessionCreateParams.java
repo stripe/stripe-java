@@ -1857,7 +1857,7 @@ public class SessionCreateParams extends ApiRequestParams {
 
       /**
        * The maximum quantity the customer can purchase for the Checkout Session. By default this
-       * value is 99. You can specify a value up to 999.
+       * value is 99. You can specify a value up to 999999.
        */
       @SerializedName("maximum")
       Long maximum;
@@ -1934,7 +1934,7 @@ public class SessionCreateParams extends ApiRequestParams {
 
         /**
          * The maximum quantity the customer can purchase for the Checkout Session. By default this
-         * value is 99. You can specify a value up to 999.
+         * value is 99. You can specify a value up to 999999.
          */
         public Builder setMaximum(Long maximum) {
           this.maximum = maximum;
