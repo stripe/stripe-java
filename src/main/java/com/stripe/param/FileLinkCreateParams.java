@@ -33,7 +33,8 @@ public class FileLinkCreateParams extends ApiRequestParams {
    * The ID of the file. The file's {@code purpose} must be one of the following: {@code
    * business_icon}, {@code business_logo}, {@code customer_signature}, {@code dispute_evidence},
    * {@code finance_report_run}, {@code identity_document_downloadable}, {@code pci_document},
-   * {@code selfie}, {@code sigma_scheduled_query}, or {@code tax_document_user_upload}.
+   * {@code selfie}, {@code sigma_scheduled_query}, {@code tax_document_user_upload}, or {@code
+   * terminal_reader_splashscreen}.
    */
   @SerializedName("file")
   String file;
@@ -143,7 +144,8 @@ public class FileLinkCreateParams extends ApiRequestParams {
      * The ID of the file. The file's {@code purpose} must be one of the following: {@code
      * business_icon}, {@code business_logo}, {@code customer_signature}, {@code dispute_evidence},
      * {@code finance_report_run}, {@code identity_document_downloadable}, {@code pci_document},
-     * {@code selfie}, {@code sigma_scheduled_query}, or {@code tax_document_user_upload}.
+     * {@code selfie}, {@code sigma_scheduled_query}, {@code tax_document_user_upload}, or {@code
+     * terminal_reader_splashscreen}.
      */
     public Builder setFile(String file) {
       this.file = file;

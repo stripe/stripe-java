@@ -118,7 +118,7 @@ public class LineItem extends StripeObject implements HasId {
      * Discounts to Subscriptions</a>.
      */
     @SerializedName("discount")
-    Discount discount;
+    com.stripe.model.Discount discount;
   }
 
   @Getter
