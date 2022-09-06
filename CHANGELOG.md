@@ -1,5 +1,11 @@
 # Changelog
 
+## 21.6.0 - 2022-09-06
+* [#1434](https://github.com/stripe/stripe-java/pull/1434) API Updates
+  * Add support for new value `terminal_reader_splashscreen` on enum `FileListParams.purpose`
+  * Fix `LineItem.Discount.discount` to reference the correct `Discount` class (`com.stripe.model.Discount`)
+  
+
 ## 21.5.0 - 2022-08-31
 * [#1433](https://github.com/stripe/stripe-java/pull/1433) API Updates
   * Add support for new values `de-CH`, `en-CH`, `en-PL`, `en-PT`, `fr-CH`, `it-CH`, `pl-PL`, and `pt-PT` on enums `OrderCreateParams.payment.settings.payment_method_options.klarna.preferred_locale`, `OrderUpdateParams.payment.settings.payment_method_options.klarna.preferred_locale`, `PaymentIntentConfirmParams.payment_method_options.klarna.preferred_locale`, `PaymentIntentCreateParams.payment_method_options.klarna.preferred_locale`, and `PaymentIntentUpdateParams.payment_method_options.klarna.preferred_locale`
