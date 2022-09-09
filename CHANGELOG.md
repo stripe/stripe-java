@@ -1,5 +1,9 @@
 # Changelog
 
+## 21.7.0 - 2022-09-09
+* [#1435](https://github.com/stripe/stripe-java/pull/1435) API Updates
+  * Add support for `require_signature` on `Issuing.Card.shipping` and `IssuingCardCreateParams.shipping`
+
 ## 21.6.0 - 2022-09-06
 * [#1434](https://github.com/stripe/stripe-java/pull/1434) API Updates
   * Add support for new value `terminal_reader_splashscreen` on enum `FileListParams.purpose`
