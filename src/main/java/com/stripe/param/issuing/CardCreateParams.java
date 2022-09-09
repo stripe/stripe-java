@@ -319,6 +319,10 @@ public class CardCreateParams extends ApiRequestParams {
     @SerializedName("phone_number")
     String phoneNumber;
 
+    /** Whether a signature is required for card delivery. */
+    @SerializedName("require_signature")
+    Boolean requireSignature;
+
     /** Shipment service. */
     @SerializedName("service")
     Service service;
@@ -333,6 +337,7 @@ public class CardCreateParams extends ApiRequestParams {
         Map<String, Object> extraParams,
         String name,
         String phoneNumber,
+        Boolean requireSignature,
         Service service,
         Type type) {
       this.address = address;
@@ -340,6 +345,7 @@ public class CardCreateParams extends ApiRequestParams {
       this.extraParams = extraParams;
       this.name = name;
       this.phoneNumber = phoneNumber;
+      this.requireSignature = requireSignature;
       this.service = service;
       this.type = type;
     }
@@ -359,6 +365,8 @@ public class CardCreateParams extends ApiRequestParams {
 
       private String phoneNumber;
 
+      private Boolean requireSignature;
+
       private Service service;
 
       private Type type;
@@ -371,6 +379,7 @@ public class CardCreateParams extends ApiRequestParams {
             this.extraParams,
             this.name,
             this.phoneNumber,
+            this.requireSignature,
             this.service,
             this.type);
       }
@@ -422,6 +431,12 @@ public class CardCreateParams extends ApiRequestParams {
       /** Phone number of the recipient of the shipment. */
       public Builder setPhoneNumber(String phoneNumber) {
         this.phoneNumber = phoneNumber;
+        return this;
+      }
+
+      /** Whether a signature is required for card delivery. */
+      public Builder setRequireSignature(Boolean requireSignature) {
+        this.requireSignature = requireSignature;
         return this;
       }
 
