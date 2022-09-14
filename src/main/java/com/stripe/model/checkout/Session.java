@@ -840,6 +840,9 @@ public class Session extends ApiResource implements HasId {
     @SerializedName("paynow")
     Paynow paynow;
 
+    @SerializedName("pix")
+    Pix pix;
+
     @SerializedName("sepa_debit")
     SepaDebit sepaDebit;
 
@@ -1517,6 +1520,15 @@ public class Session extends ApiResource implements HasId {
        */
       @SerializedName("setup_future_usage")
       String setupFutureUsage;
+    }
+
+    @Getter
+    @Setter
+    @EqualsAndHashCode(callSuper = false)
+    public static class Pix extends StripeObject {
+      /** The number of seconds after which Pix payment will expire. */
+      @SerializedName("expires_after_seconds")
+      Long expiresAfterSeconds;
     }
 
     @Getter
