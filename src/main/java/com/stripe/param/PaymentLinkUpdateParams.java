@@ -1900,6 +1900,9 @@ public class PaymentLinkUpdateParams extends ApiRequestParams {
     @SerializedName("paynow")
     PAYNOW("paynow"),
 
+    @SerializedName("pix")
+    PIX("pix"),
+
     @SerializedName("promptpay")
     PROMPTPAY("promptpay"),
 

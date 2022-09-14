@@ -129,6 +129,14 @@ public class InvoiceCreateParams extends ApiRequestParams {
   String footer;
 
   /**
+   * Revise an existing invoice. The new invoice will be created in {@code status=draft}. See the <a
+   * href="https://stripe.com/docs/invoicing/invoice-revisions">revision documentation</a> for more
+   * details.
+   */
+  @SerializedName("from_invoice")
+  FromInvoice fromInvoice;
+
+  /**
    * Set of <a href="https://stripe.com/docs/api/metadata">key-value pairs</a> that you can attach
    * to an object. This can be useful for storing additional information about the object in a
    * structured format. Individual keys can be unset by posting an empty value to them. All keys can
@@ -210,6 +218,7 @@ public class InvoiceCreateParams extends ApiRequestParams {
       List<String> expand,
       Map<String, Object> extraParams,
       String footer,
+      FromInvoice fromInvoice,
       Object metadata,
       String onBehalfOf,
       PaymentSettings paymentSettings,
@@ -236,6 +245,7 @@ public class InvoiceCreateParams extends ApiRequestParams {
     this.expand = expand;
     this.extraParams = extraParams;
     this.footer = footer;
+    this.fromInvoice = fromInvoice;
     this.metadata = metadata;
     this.onBehalfOf = onBehalfOf;
     this.paymentSettings = paymentSettings;
@@ -287,6 +297,8 @@ public class InvoiceCreateParams extends ApiRequestParams {
 
     private String footer;
 
+    private FromInvoice fromInvoice;
+
     private Object metadata;
 
     private String onBehalfOf;
@@ -324,6 +336,7 @@ public class InvoiceCreateParams extends ApiRequestParams {
           this.expand,
           this.extraParams,
           this.footer,
+          this.fromInvoice,
           this.metadata,
           this.onBehalfOf,
           this.paymentSettings,
@@ -647,6 +660,16 @@ public class InvoiceCreateParams extends ApiRequestParams {
     /** Footer to be displayed on the invoice. */
     public Builder setFooter(String footer) {
       this.footer = footer;
+      return this;
+    }
+
+    /**
+     * Revise an existing invoice. The new invoice will be created in {@code status=draft}. See the
+     * <a href="https://stripe.com/docs/invoicing/invoice-revisions">revision documentation</a> for
+     * more details.
+     */
+    public Builder setFromInvoice(FromInvoice fromInvoice) {
+      this.fromInvoice = fromInvoice;
       return this;
     }
 
@@ -1012,6 +1035,105 @@ public class InvoiceCreateParams extends ApiRequestParams {
         }
         this.extraParams.putAll(map);
         return this;
+      }
+    }
+  }
+
+  @Getter
+  public static class FromInvoice {
+    /**
+     * The relation between the new invoice and the original invoice. Currently, only 'revision' is
+     * permitted
+     */
+    @SerializedName("action")
+    Action action;
+
+    /**
+     * Map of extra parameters for custom features not available in this client library. The content
+     * in this map is not serialized under this field's {@code @SerializedName} value. Instead, each
+     * key/value pair is serialized as if the key is a root-level field (serialized) name in this
+     * param object. Effectively, this map is flattened to its parent instance.
+     */
+    @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
+    Map<String, Object> extraParams;
+
+    /** The {@code id} of the invoice that will be cloned. */
+    @SerializedName("invoice")
+    String invoice;
+
+    private FromInvoice(Action action, Map<String, Object> extraParams, String invoice) {
+      this.action = action;
+      this.extraParams = extraParams;
+      this.invoice = invoice;
+    }
+
+    public static Builder builder() {
+      return new Builder();
+    }
+
+    public static class Builder {
+      private Action action;
+
+      private Map<String, Object> extraParams;
+
+      private String invoice;
+
+      /** Finalize and obtain parameter instance from this builder. */
+      public FromInvoice build() {
+        return new FromInvoice(this.action, this.extraParams, this.invoice);
+      }
+
+      /**
+       * The relation between the new invoice and the original invoice. Currently, only 'revision'
+       * is permitted
+       */
+      public Builder setAction(Action action) {
+        this.action = action;
+        return this;
+      }
+
+      /**
+       * Add a key/value pair to `extraParams` map. A map is initialized for the first `put/putAll`
+       * call, and subsequent calls add additional key/value pairs to the original map. See {@link
+       * InvoiceCreateParams.FromInvoice#extraParams} for the field documentation.
+       */
+      public Builder putExtraParam(String key, Object value) {
+        if (this.extraParams == null) {
+          this.extraParams = new HashMap<>();
+        }
+        this.extraParams.put(key, value);
+        return this;
+      }
+
+      /**
+       * Add all map key/value pairs to `extraParams` map. A map is initialized for the first
+       * `put/putAll` call, and subsequent calls add additional key/value pairs to the original map.
+       * See {@link InvoiceCreateParams.FromInvoice#extraParams} for the field documentation.
+       */
+      public Builder putAllExtraParam(Map<String, Object> map) {
+        if (this.extraParams == null) {
+          this.extraParams = new HashMap<>();
+        }
+        this.extraParams.putAll(map);
+        return this;
+      }
+
+      /** The {@code id} of the invoice that will be cloned. */
+      public Builder setInvoice(String invoice) {
+        this.invoice = invoice;
+        return this;
+      }
+    }
+
+    public enum Action implements ApiRequestParams.EnumParam {
+      @SerializedName("revision")
+      REVISION("revision");
+
+      @Getter(onMethod_ = {@Override})
+      private final String value;
+
+      Action(String value) {
+        this.value = value;
       }
     }
   }
