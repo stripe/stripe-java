@@ -744,6 +744,13 @@ public class SetupIntentConfirmParams extends ApiRequestParams {
     Paynow paynow;
 
     /**
+     * If this is a {@code pix} PaymentMethod, this hash contains details about the Pix payment
+     * method.
+     */
+    @SerializedName("pix")
+    Pix pix;
+
+    /**
      * If this is a {@code promptpay} PaymentMethod, this hash contains details about the PromptPay
      * payment method.
      */
@@ -819,6 +826,7 @@ public class SetupIntentConfirmParams extends ApiRequestParams {
         Oxxo oxxo,
         P24 p24,
         Paynow paynow,
+        Pix pix,
         Promptpay promptpay,
         RadarOptions radarOptions,
         SepaDebit sepaDebit,
@@ -851,6 +859,7 @@ public class SetupIntentConfirmParams extends ApiRequestParams {
       this.oxxo = oxxo;
       this.p24 = p24;
       this.paynow = paynow;
+      this.pix = pix;
       this.promptpay = promptpay;
       this.radarOptions = radarOptions;
       this.sepaDebit = sepaDebit;
@@ -915,6 +924,8 @@ public class SetupIntentConfirmParams extends ApiRequestParams {
 
       private Paynow paynow;
 
+      private Pix pix;
+
       private Promptpay promptpay;
 
       private RadarOptions radarOptions;
@@ -957,6 +968,7 @@ public class SetupIntentConfirmParams extends ApiRequestParams {
             this.oxxo,
             this.p24,
             this.paynow,
+            this.pix,
             this.promptpay,
             this.radarOptions,
             this.sepaDebit,
@@ -1224,6 +1236,15 @@ public class SetupIntentConfirmParams extends ApiRequestParams {
        */
       public Builder setPaynow(Paynow paynow) {
         this.paynow = paynow;
+        return this;
+      }
+
+      /**
+       * If this is a {@code pix} PaymentMethod, this hash contains details about the Pix payment
+       * method.
+       */
+      public Builder setPix(Pix pix) {
+        this.pix = pix;
         return this;
       }
 
@@ -3433,6 +3454,63 @@ public class SetupIntentConfirmParams extends ApiRequestParams {
     }
 
     @Getter
+    public static class Pix {
+      /**
+       * Map of extra parameters for custom features not available in this client library. The
+       * content in this map is not serialized under this field's {@code @SerializedName} value.
+       * Instead, each key/value pair is serialized as if the key is a root-level field (serialized)
+       * name in this param object. Effectively, this map is flattened to its parent instance.
+       */
+      @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
+      Map<String, Object> extraParams;
+
+      private Pix(Map<String, Object> extraParams) {
+        this.extraParams = extraParams;
+      }
+
+      public static Builder builder() {
+        return new Builder();
+      }
+
+      public static class Builder {
+        private Map<String, Object> extraParams;
+
+        /** Finalize and obtain parameter instance from this builder. */
+        public Pix build() {
+          return new Pix(this.extraParams);
+        }
+
+        /**
+         * Add a key/value pair to `extraParams` map. A map is initialized for the first
+         * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
+         * map. See {@link SetupIntentConfirmParams.PaymentMethodData.Pix#extraParams} for the field
+         * documentation.
+         */
+        public Builder putExtraParam(String key, Object value) {
+          if (this.extraParams == null) {
+            this.extraParams = new HashMap<>();
+          }
+          this.extraParams.put(key, value);
+          return this;
+        }
+
+        /**
+         * Add all map key/value pairs to `extraParams` map. A map is initialized for the first
+         * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
+         * map. See {@link SetupIntentConfirmParams.PaymentMethodData.Pix#extraParams} for the field
+         * documentation.
+         */
+        public Builder putAllExtraParam(Map<String, Object> map) {
+          if (this.extraParams == null) {
+            this.extraParams = new HashMap<>();
+          }
+          this.extraParams.putAll(map);
+          return this;
+        }
+      }
+    }
+
+    @Getter
     public static class Promptpay {
       /**
        * Map of extra parameters for custom features not available in this client library. The
@@ -4018,6 +4096,9 @@ public class SetupIntentConfirmParams extends ApiRequestParams {
 
       @SerializedName("paynow")
       PAYNOW("paynow"),
+
+      @SerializedName("pix")
+      PIX("pix"),
 
       @SerializedName("promptpay")
       PROMPTPAY("promptpay"),
