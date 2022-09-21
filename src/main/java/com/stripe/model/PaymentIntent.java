@@ -1455,6 +1455,9 @@ public class PaymentIntent extends ApiResource implements HasId, MetadataStore<P
     @SerializedName("paynow_display_qr_code")
     PaynowDisplayQrCode paynowDisplayQrCode;
 
+    @SerializedName("pix_display_qr_code")
+    PixDisplayQrCode pixDisplayQrCode;
+
     @SerializedName("promptpay_display_qr_code")
     PromptpayDisplayQrCode promptpayDisplayQrCode;
 
@@ -1505,6 +1508,37 @@ public class PaymentIntent extends ApiResource implements HasId, MetadataStore<P
       String imageUrlPng;
 
       /** The image_url_svg string used to render QR code. */
+      @SerializedName("image_url_svg")
+      String imageUrlSvg;
+    }
+
+    @Getter
+    @Setter
+    @EqualsAndHashCode(callSuper = false)
+    public static class PixDisplayQrCode extends StripeObject {
+      /**
+       * The raw data string used to generate QR code, it should be used together with QR code
+       * library.
+       */
+      @SerializedName("data")
+      String data;
+
+      /** The date (unix timestamp) when the PIX expires. */
+      @SerializedName("expires_at")
+      Long expiresAt;
+
+      /**
+       * The URL to the hosted pix instructions page, which allows customers to view the pix QR
+       * code.
+       */
+      @SerializedName("hosted_instructions_url")
+      String hostedInstructionsUrl;
+
+      /** ​​The image_url_png string used to render png QR code. */
+      @SerializedName("image_url_png")
+      String imageUrlPng;
+
+      /** ​​The image_url_svg string used to render svg QR code. */
       @SerializedName("image_url_svg")
       String imageUrlSvg;
     }
@@ -2087,6 +2121,9 @@ public class PaymentIntent extends ApiResource implements HasId, MetadataStore<P
 
     @SerializedName("paynow")
     Paynow paynow;
+
+    @SerializedName("pix")
+    Pix pix;
 
     @SerializedName("promptpay")
     Promptpay promptpay;
@@ -3052,6 +3089,19 @@ public class PaymentIntent extends ApiResource implements HasId, MetadataStore<P
        */
       @SerializedName("setup_future_usage")
       String setupFutureUsage;
+    }
+
+    @Getter
+    @Setter
+    @EqualsAndHashCode(callSuper = false)
+    public static class Pix extends StripeObject {
+      /** The number of seconds (between 10 and 1209600) after which Pix payment will expire. */
+      @SerializedName("expires_after_seconds")
+      Long expiresAfterSeconds;
+
+      /** The timestamp at which the Pix expires. */
+      @SerializedName("expires_at")
+      Long expiresAt;
     }
 
     @Getter

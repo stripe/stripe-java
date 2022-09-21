@@ -1460,6 +1460,13 @@ public class PaymentIntentCreateParams extends ApiRequestParams {
     Paynow paynow;
 
     /**
+     * If this is a {@code pix} PaymentMethod, this hash contains details about the Pix payment
+     * method.
+     */
+    @SerializedName("pix")
+    Pix pix;
+
+    /**
      * If this is a {@code promptpay} PaymentMethod, this hash contains details about the PromptPay
      * payment method.
      */
@@ -1535,6 +1542,7 @@ public class PaymentIntentCreateParams extends ApiRequestParams {
         Oxxo oxxo,
         P24 p24,
         Paynow paynow,
+        Pix pix,
         Promptpay promptpay,
         RadarOptions radarOptions,
         SepaDebit sepaDebit,
@@ -1567,6 +1575,7 @@ public class PaymentIntentCreateParams extends ApiRequestParams {
       this.oxxo = oxxo;
       this.p24 = p24;
       this.paynow = paynow;
+      this.pix = pix;
       this.promptpay = promptpay;
       this.radarOptions = radarOptions;
       this.sepaDebit = sepaDebit;
@@ -1631,6 +1640,8 @@ public class PaymentIntentCreateParams extends ApiRequestParams {
 
       private Paynow paynow;
 
+      private Pix pix;
+
       private Promptpay promptpay;
 
       private RadarOptions radarOptions;
@@ -1673,6 +1684,7 @@ public class PaymentIntentCreateParams extends ApiRequestParams {
             this.oxxo,
             this.p24,
             this.paynow,
+            this.pix,
             this.promptpay,
             this.radarOptions,
             this.sepaDebit,
@@ -1940,6 +1952,15 @@ public class PaymentIntentCreateParams extends ApiRequestParams {
        */
       public Builder setPaynow(Paynow paynow) {
         this.paynow = paynow;
+        return this;
+      }
+
+      /**
+       * If this is a {@code pix} PaymentMethod, this hash contains details about the Pix payment
+       * method.
+       */
+      public Builder setPix(Pix pix) {
+        this.pix = pix;
         return this;
       }
 
@@ -4149,6 +4170,63 @@ public class PaymentIntentCreateParams extends ApiRequestParams {
     }
 
     @Getter
+    public static class Pix {
+      /**
+       * Map of extra parameters for custom features not available in this client library. The
+       * content in this map is not serialized under this field's {@code @SerializedName} value.
+       * Instead, each key/value pair is serialized as if the key is a root-level field (serialized)
+       * name in this param object. Effectively, this map is flattened to its parent instance.
+       */
+      @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
+      Map<String, Object> extraParams;
+
+      private Pix(Map<String, Object> extraParams) {
+        this.extraParams = extraParams;
+      }
+
+      public static Builder builder() {
+        return new Builder();
+      }
+
+      public static class Builder {
+        private Map<String, Object> extraParams;
+
+        /** Finalize and obtain parameter instance from this builder. */
+        public Pix build() {
+          return new Pix(this.extraParams);
+        }
+
+        /**
+         * Add a key/value pair to `extraParams` map. A map is initialized for the first
+         * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
+         * map. See {@link PaymentIntentCreateParams.PaymentMethodData.Pix#extraParams} for the
+         * field documentation.
+         */
+        public Builder putExtraParam(String key, Object value) {
+          if (this.extraParams == null) {
+            this.extraParams = new HashMap<>();
+          }
+          this.extraParams.put(key, value);
+          return this;
+        }
+
+        /**
+         * Add all map key/value pairs to `extraParams` map. A map is initialized for the first
+         * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
+         * map. See {@link PaymentIntentCreateParams.PaymentMethodData.Pix#extraParams} for the
+         * field documentation.
+         */
+        public Builder putAllExtraParam(Map<String, Object> map) {
+          if (this.extraParams == null) {
+            this.extraParams = new HashMap<>();
+          }
+          this.extraParams.putAll(map);
+          return this;
+        }
+      }
+    }
+
+    @Getter
     public static class Promptpay {
       /**
        * Map of extra parameters for custom features not available in this client library. The
@@ -4735,6 +4813,9 @@ public class PaymentIntentCreateParams extends ApiRequestParams {
       @SerializedName("paynow")
       PAYNOW("paynow"),
 
+      @SerializedName("pix")
+      PIX("pix"),
+
       @SerializedName("promptpay")
       PROMPTPAY("promptpay"),
 
@@ -4936,6 +5017,13 @@ public class PaymentIntentCreateParams extends ApiRequestParams {
     Object paynow;
 
     /**
+     * If this is a {@code pix} PaymentMethod, this sub-hash contains details about the Pix payment
+     * method options.
+     */
+    @SerializedName("pix")
+    Object pix;
+
+    /**
      * If this is a {@code promptpay} PaymentMethod, this sub-hash contains details about the
      * PromptPay payment method options.
      */
@@ -4996,6 +5084,7 @@ public class PaymentIntentCreateParams extends ApiRequestParams {
         Object oxxo,
         Object p24,
         Object paynow,
+        Object pix,
         Object promptpay,
         Object sepaDebit,
         Object sofort,
@@ -5026,6 +5115,7 @@ public class PaymentIntentCreateParams extends ApiRequestParams {
       this.oxxo = oxxo;
       this.p24 = p24;
       this.paynow = paynow;
+      this.pix = pix;
       this.promptpay = promptpay;
       this.sepaDebit = sepaDebit;
       this.sofort = sofort;
@@ -5088,6 +5178,8 @@ public class PaymentIntentCreateParams extends ApiRequestParams {
 
       private Object paynow;
 
+      private Object pix;
+
       private Object promptpay;
 
       private Object sepaDebit;
@@ -5126,6 +5218,7 @@ public class PaymentIntentCreateParams extends ApiRequestParams {
             this.oxxo,
             this.p24,
             this.paynow,
+            this.pix,
             this.promptpay,
             this.sepaDebit,
             this.sofort,
@@ -5583,6 +5676,24 @@ public class PaymentIntentCreateParams extends ApiRequestParams {
        */
       public Builder setPaynow(EmptyParam paynow) {
         this.paynow = paynow;
+        return this;
+      }
+
+      /**
+       * If this is a {@code pix} PaymentMethod, this sub-hash contains details about the Pix
+       * payment method options.
+       */
+      public Builder setPix(Pix pix) {
+        this.pix = pix;
+        return this;
+      }
+
+      /**
+       * If this is a {@code pix} PaymentMethod, this sub-hash contains details about the Pix
+       * payment method options.
+       */
+      public Builder setPix(EmptyParam pix) {
+        this.pix = pix;
         return this;
       }
 
@@ -9792,6 +9903,9 @@ public class PaymentIntentCreateParams extends ApiRequestParams {
         @SerializedName("de-AT")
         DE_AT("de-AT"),
 
+        @SerializedName("de-CH")
+        DE_CH("de-CH"),
+
         @SerializedName("de-DE")
         DE_DE("de-DE"),
 
@@ -9806,6 +9920,9 @@ public class PaymentIntentCreateParams extends ApiRequestParams {
 
         @SerializedName("en-CA")
         EN_CA("en-CA"),
+
+        @SerializedName("en-CH")
+        EN_CH("en-CH"),
 
         @SerializedName("en-DE")
         EN_DE("en-DE"),
@@ -9840,6 +9957,12 @@ public class PaymentIntentCreateParams extends ApiRequestParams {
         @SerializedName("en-NZ")
         EN_NZ("en-NZ"),
 
+        @SerializedName("en-PL")
+        EN_PL("en-PL"),
+
+        @SerializedName("en-PT")
+        EN_PT("en-PT"),
+
         @SerializedName("en-SE")
         EN_SE("en-SE"),
 
@@ -9861,8 +9984,14 @@ public class PaymentIntentCreateParams extends ApiRequestParams {
         @SerializedName("fr-CA")
         FR_CA("fr-CA"),
 
+        @SerializedName("fr-CH")
+        FR_CH("fr-CH"),
+
         @SerializedName("fr-FR")
         FR_FR("fr-FR"),
+
+        @SerializedName("it-CH")
+        IT_CH("it-CH"),
 
         @SerializedName("it-IT")
         IT_IT("it-IT"),
@@ -9875,6 +10004,12 @@ public class PaymentIntentCreateParams extends ApiRequestParams {
 
         @SerializedName("nl-NL")
         NL_NL("nl-NL"),
+
+        @SerializedName("pl-PL")
+        PL_PL("pl-PL"),
+
+        @SerializedName("pt-PT")
+        PT_PT("pt-PT"),
 
         @SerializedName("sv-FI")
         SV_FI("sv-FI"),
@@ -10749,6 +10884,101 @@ public class PaymentIntentCreateParams extends ApiRequestParams {
 
         SetupFutureUsage(String value) {
           this.value = value;
+        }
+      }
+    }
+
+    @Getter
+    public static class Pix {
+      /**
+       * The number of seconds (between 10 and 1209600) after which Pix payment will expire.
+       * Defaults to 86400 seconds.
+       */
+      @SerializedName("expires_after_seconds")
+      Long expiresAfterSeconds;
+
+      /**
+       * The timestamp at which the Pix expires (between 10 and 1209600 seconds in the future).
+       * Defaults to 1 day in the future.
+       */
+      @SerializedName("expires_at")
+      Long expiresAt;
+
+      /**
+       * Map of extra parameters for custom features not available in this client library. The
+       * content in this map is not serialized under this field's {@code @SerializedName} value.
+       * Instead, each key/value pair is serialized as if the key is a root-level field (serialized)
+       * name in this param object. Effectively, this map is flattened to its parent instance.
+       */
+      @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
+      Map<String, Object> extraParams;
+
+      private Pix(Long expiresAfterSeconds, Long expiresAt, Map<String, Object> extraParams) {
+        this.expiresAfterSeconds = expiresAfterSeconds;
+        this.expiresAt = expiresAt;
+        this.extraParams = extraParams;
+      }
+
+      public static Builder builder() {
+        return new Builder();
+      }
+
+      public static class Builder {
+        private Long expiresAfterSeconds;
+
+        private Long expiresAt;
+
+        private Map<String, Object> extraParams;
+
+        /** Finalize and obtain parameter instance from this builder. */
+        public Pix build() {
+          return new Pix(this.expiresAfterSeconds, this.expiresAt, this.extraParams);
+        }
+
+        /**
+         * The number of seconds (between 10 and 1209600) after which Pix payment will expire.
+         * Defaults to 86400 seconds.
+         */
+        public Builder setExpiresAfterSeconds(Long expiresAfterSeconds) {
+          this.expiresAfterSeconds = expiresAfterSeconds;
+          return this;
+        }
+
+        /**
+         * The timestamp at which the Pix expires (between 10 and 1209600 seconds in the future).
+         * Defaults to 1 day in the future.
+         */
+        public Builder setExpiresAt(Long expiresAt) {
+          this.expiresAt = expiresAt;
+          return this;
+        }
+
+        /**
+         * Add a key/value pair to `extraParams` map. A map is initialized for the first
+         * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
+         * map. See {@link PaymentIntentCreateParams.PaymentMethodOptions.Pix#extraParams} for the
+         * field documentation.
+         */
+        public Builder putExtraParam(String key, Object value) {
+          if (this.extraParams == null) {
+            this.extraParams = new HashMap<>();
+          }
+          this.extraParams.put(key, value);
+          return this;
+        }
+
+        /**
+         * Add all map key/value pairs to `extraParams` map. A map is initialized for the first
+         * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
+         * map. See {@link PaymentIntentCreateParams.PaymentMethodOptions.Pix#extraParams} for the
+         * field documentation.
+         */
+        public Builder putAllExtraParam(Map<String, Object> map) {
+          if (this.extraParams == null) {
+            this.extraParams = new HashMap<>();
+          }
+          this.extraParams.putAll(map);
+          return this;
         }
       }
     }
