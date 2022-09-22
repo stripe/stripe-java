@@ -95,7 +95,7 @@ public class AccountListParams extends ApiRequestParams {
           this.startingAfter);
     }
 
-    public Builder setCreated(Created created) {
+    public Builder setCreated(AccountListParams.Created created) {
       this.created = created;
       return this;
     }
@@ -240,8 +240,9 @@ public class AccountListParams extends ApiRequestParams {
       private Long lte;
 
       /** Finalize and obtain parameter instance from this builder. */
-      public Created build() {
-        return new Created(this.extraParams, this.gt, this.gte, this.lt, this.lte);
+      public AccountListParams.Created build() {
+        return new AccountListParams.Created(
+            this.extraParams, this.gt, this.gte, this.lt, this.lte);
       }
 
       /**

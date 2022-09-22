@@ -691,6 +691,15 @@ public class Session extends ApiResource implements HasId {
      */
     @SerializedName("promotions")
     String promotions;
+
+    /**
+     * If {@code accepted}, the customer in this Checkout Session has agreed to the merchant's terms
+     * of service.
+     *
+     * <p>Equal to {@code accepted}.
+     */
+    @SerializedName("terms_of_service")
+    String termsOfService;
   }
 
   @Getter
@@ -707,6 +716,15 @@ public class Session extends ApiResource implements HasId {
      */
     @SerializedName("promotions")
     String promotions;
+
+    /**
+     * If set to {@code required}, it requires customers to accept the terms of service before being
+     * able to pay.
+     *
+     * <p>One of {@code none}, or {@code required}.
+     */
+    @SerializedName("terms_of_service")
+    String termsOfService;
   }
 
   @Getter

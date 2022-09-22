@@ -195,7 +195,7 @@ public class ReceivedCreditListParams extends ApiRequestParams {
     }
 
     /** Only return ReceivedCredits described by the flow. */
-    public Builder setLinkedFlows(LinkedFlows linkedFlows) {
+    public Builder setLinkedFlows(ReceivedCreditListParams.LinkedFlows linkedFlows) {
       this.linkedFlows = linkedFlows;
       return this;
     }
@@ -214,7 +214,7 @@ public class ReceivedCreditListParams extends ApiRequestParams {
     /**
      * Only return ReceivedCredits that have the given status: {@code succeeded} or {@code failed}.
      */
-    public Builder setStatus(Status status) {
+    public Builder setStatus(ReceivedCreditListParams.Status status) {
       this.status = status;
       return this;
     }
@@ -250,8 +250,8 @@ public class ReceivedCreditListParams extends ApiRequestParams {
       private SourceFlowType sourceFlowType;
 
       /** Finalize and obtain parameter instance from this builder. */
-      public LinkedFlows build() {
-        return new LinkedFlows(this.extraParams, this.sourceFlowType);
+      public ReceivedCreditListParams.LinkedFlows build() {
+        return new ReceivedCreditListParams.LinkedFlows(this.extraParams, this.sourceFlowType);
       }
 
       /**
@@ -281,7 +281,8 @@ public class ReceivedCreditListParams extends ApiRequestParams {
       }
 
       /** The source flow type. */
-      public Builder setSourceFlowType(SourceFlowType sourceFlowType) {
+      public Builder setSourceFlowType(
+          ReceivedCreditListParams.LinkedFlows.SourceFlowType sourceFlowType) {
         this.sourceFlowType = sourceFlowType;
         return this;
       }

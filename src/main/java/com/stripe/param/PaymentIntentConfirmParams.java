@@ -3,7 +3,6 @@ package com.stripe.param;
 
 import com.google.gson.annotations.SerializedName;
 import com.stripe.net.ApiRequestParams;
-import com.stripe.net.ApiRequestParams.EnumParam;
 import com.stripe.param.common.EmptyParam;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -120,7 +119,7 @@ public class PaymentIntentConfirmParams extends ApiRequestParams {
    * publishable key, you may only update the value from {@code on_session} to {@code off_session}.
    */
   @SerializedName("setup_future_usage")
-  EnumParam setupFutureUsage;
+  ApiRequestParams.EnumParam setupFutureUsage;
 
   /** Shipping information for this PaymentIntent. */
   @SerializedName("shipping")
@@ -147,7 +146,7 @@ public class PaymentIntentConfirmParams extends ApiRequestParams {
       RadarOptions radarOptions,
       Object receiptEmail,
       String returnUrl,
-      EnumParam setupFutureUsage,
+      ApiRequestParams.EnumParam setupFutureUsage,
       Object shipping,
       Boolean useStripeSdk) {
     this.captureMethod = captureMethod;
@@ -199,7 +198,7 @@ public class PaymentIntentConfirmParams extends ApiRequestParams {
 
     private String returnUrl;
 
-    private EnumParam setupFutureUsage;
+    private ApiRequestParams.EnumParam setupFutureUsage;
 
     private Object shipping;
 
@@ -227,7 +226,7 @@ public class PaymentIntentConfirmParams extends ApiRequestParams {
     }
 
     /** Controls when the funds will be captured from the customer's account. */
-    public Builder setCaptureMethod(CaptureMethod captureMethod) {
+    public Builder setCaptureMethod(PaymentIntentConfirmParams.CaptureMethod captureMethod) {
       this.captureMethod = captureMethod;
       return this;
     }
@@ -303,7 +302,7 @@ public class PaymentIntentConfirmParams extends ApiRequestParams {
     }
 
     /** This hash contains details about the Mandate to create. */
-    public Builder setMandateData(MandateData mandateData) {
+    public Builder setMandateData(PaymentIntentConfirmParams.MandateData mandateData) {
       this.mandateData = mandateData;
       return this;
     }
@@ -325,7 +324,7 @@ public class PaymentIntentConfirmParams extends ApiRequestParams {
      * scenarios where you collect card details and <a
      * href="https://stripe.com/docs/payments/cards/charging-saved-cards">charge them later</a>.
      */
-    public Builder setOffSession(OffSession offSession) {
+    public Builder setOffSession(PaymentIntentConfirmParams.OffSession offSession) {
       this.offSession = offSession;
       return this;
     }
@@ -346,13 +345,15 @@ public class PaymentIntentConfirmParams extends ApiRequestParams {
      * href="https://stripe.com/docs/api/payment_intents/object#payment_intent_object-payment_method">payment_method</a>
      * property on the PaymentIntent.
      */
-    public Builder setPaymentMethodData(PaymentMethodData paymentMethodData) {
+    public Builder setPaymentMethodData(
+        PaymentIntentConfirmParams.PaymentMethodData paymentMethodData) {
       this.paymentMethodData = paymentMethodData;
       return this;
     }
 
     /** Payment-method-specific configuration for this PaymentIntent. */
-    public Builder setPaymentMethodOptions(PaymentMethodOptions paymentMethodOptions) {
+    public Builder setPaymentMethodOptions(
+        PaymentIntentConfirmParams.PaymentMethodOptions paymentMethodOptions) {
       this.paymentMethodOptions = paymentMethodOptions;
       return this;
     }
@@ -361,7 +362,7 @@ public class PaymentIntentConfirmParams extends ApiRequestParams {
      * Options to configure Radar. See <a href="https://stripe.com/docs/radar/radar-session">Radar
      * Session</a> for more information.
      */
-    public Builder setRadarOptions(RadarOptions radarOptions) {
+    public Builder setRadarOptions(PaymentIntentConfirmParams.RadarOptions radarOptions) {
       this.radarOptions = radarOptions;
       return this;
     }
@@ -415,7 +416,8 @@ public class PaymentIntentConfirmParams extends ApiRequestParams {
      * publishable key, you may only update the value from {@code on_session} to {@code
      * off_session}.
      */
-    public Builder setSetupFutureUsage(SetupFutureUsage setupFutureUsage) {
+    public Builder setSetupFutureUsage(
+        PaymentIntentConfirmParams.SetupFutureUsage setupFutureUsage) {
       this.setupFutureUsage = setupFutureUsage;
       return this;
     }
@@ -444,7 +446,7 @@ public class PaymentIntentConfirmParams extends ApiRequestParams {
     }
 
     /** Shipping information for this PaymentIntent. */
-    public Builder setShipping(Shipping shipping) {
+    public Builder setShipping(PaymentIntentConfirmParams.Shipping shipping) {
       this.shipping = shipping;
       return this;
     }
@@ -495,12 +497,14 @@ public class PaymentIntentConfirmParams extends ApiRequestParams {
       private Map<String, Object> extraParams;
 
       /** Finalize and obtain parameter instance from this builder. */
-      public MandateData build() {
-        return new MandateData(this.customerAcceptance, this.extraParams);
+      public PaymentIntentConfirmParams.MandateData build() {
+        return new PaymentIntentConfirmParams.MandateData(
+            this.customerAcceptance, this.extraParams);
       }
 
       /** This hash contains details about the customer acceptance of the Mandate. */
-      public Builder setCustomerAcceptance(CustomerAcceptance customerAcceptance) {
+      public Builder setCustomerAcceptance(
+          PaymentIntentConfirmParams.MandateData.CustomerAcceptance customerAcceptance) {
         this.customerAcceptance = customerAcceptance;
         return this;
       }
@@ -597,8 +601,8 @@ public class PaymentIntentConfirmParams extends ApiRequestParams {
         private Type type;
 
         /** Finalize and obtain parameter instance from this builder. */
-        public CustomerAcceptance build() {
-          return new CustomerAcceptance(
+        public PaymentIntentConfirmParams.MandateData.CustomerAcceptance build() {
+          return new PaymentIntentConfirmParams.MandateData.CustomerAcceptance(
               this.acceptedAt, this.extraParams, this.offline, this.online, this.type);
         }
 
@@ -640,7 +644,8 @@ public class PaymentIntentConfirmParams extends ApiRequestParams {
          * If this is a Mandate accepted offline, this hash contains details about the offline
          * acceptance.
          */
-        public Builder setOffline(Offline offline) {
+        public Builder setOffline(
+            PaymentIntentConfirmParams.MandateData.CustomerAcceptance.Offline offline) {
           this.offline = offline;
           return this;
         }
@@ -649,7 +654,8 @@ public class PaymentIntentConfirmParams extends ApiRequestParams {
          * If this is a Mandate accepted online, this hash contains details about the online
          * acceptance.
          */
-        public Builder setOnline(Online online) {
+        public Builder setOnline(
+            PaymentIntentConfirmParams.MandateData.CustomerAcceptance.Online online) {
           this.online = online;
           return this;
         }
@@ -658,7 +664,8 @@ public class PaymentIntentConfirmParams extends ApiRequestParams {
          * The type of customer acceptance information included with the Mandate. One of {@code
          * online} or {@code offline}.
          */
-        public Builder setType(Type type) {
+        public Builder setType(
+            PaymentIntentConfirmParams.MandateData.CustomerAcceptance.Type type) {
           this.type = type;
           return this;
         }
@@ -688,8 +695,9 @@ public class PaymentIntentConfirmParams extends ApiRequestParams {
           private Map<String, Object> extraParams;
 
           /** Finalize and obtain parameter instance from this builder. */
-          public Offline build() {
-            return new Offline(this.extraParams);
+          public PaymentIntentConfirmParams.MandateData.CustomerAcceptance.Offline build() {
+            return new PaymentIntentConfirmParams.MandateData.CustomerAcceptance.Offline(
+                this.extraParams);
           }
 
           /**
@@ -762,8 +770,9 @@ public class PaymentIntentConfirmParams extends ApiRequestParams {
           private String userAgent;
 
           /** Finalize and obtain parameter instance from this builder. */
-          public Online build() {
-            return new Online(this.extraParams, this.ipAddress, this.userAgent);
+          public PaymentIntentConfirmParams.MandateData.CustomerAcceptance.Online build() {
+            return new PaymentIntentConfirmParams.MandateData.CustomerAcceptance.Online(
+                this.extraParams, this.ipAddress, this.userAgent);
           }
 
           /**
@@ -1206,8 +1215,8 @@ public class PaymentIntentConfirmParams extends ApiRequestParams {
       private WechatPay wechatPay;
 
       /** Finalize and obtain parameter instance from this builder. */
-      public PaymentMethodData build() {
-        return new PaymentMethodData(
+      public PaymentIntentConfirmParams.PaymentMethodData build() {
+        return new PaymentIntentConfirmParams.PaymentMethodData(
             this.acssDebit,
             this.affirm,
             this.afterpayClearpay,
@@ -1247,7 +1256,8 @@ public class PaymentIntentConfirmParams extends ApiRequestParams {
        * If this is an {@code acss_debit} PaymentMethod, this hash contains details about the ACSS
        * Debit payment method.
        */
-      public Builder setAcssDebit(AcssDebit acssDebit) {
+      public Builder setAcssDebit(
+          PaymentIntentConfirmParams.PaymentMethodData.AcssDebit acssDebit) {
         this.acssDebit = acssDebit;
         return this;
       }
@@ -1256,7 +1266,7 @@ public class PaymentIntentConfirmParams extends ApiRequestParams {
        * If this is an {@code affirm} PaymentMethod, this hash contains details about the Affirm
        * payment method.
        */
-      public Builder setAffirm(Affirm affirm) {
+      public Builder setAffirm(PaymentIntentConfirmParams.PaymentMethodData.Affirm affirm) {
         this.affirm = affirm;
         return this;
       }
@@ -1265,7 +1275,8 @@ public class PaymentIntentConfirmParams extends ApiRequestParams {
        * If this is an {@code AfterpayClearpay} PaymentMethod, this hash contains details about the
        * AfterpayClearpay payment method.
        */
-      public Builder setAfterpayClearpay(AfterpayClearpay afterpayClearpay) {
+      public Builder setAfterpayClearpay(
+          PaymentIntentConfirmParams.PaymentMethodData.AfterpayClearpay afterpayClearpay) {
         this.afterpayClearpay = afterpayClearpay;
         return this;
       }
@@ -1274,7 +1285,7 @@ public class PaymentIntentConfirmParams extends ApiRequestParams {
        * If this is an {@code Alipay} PaymentMethod, this hash contains details about the Alipay
        * payment method.
        */
-      public Builder setAlipay(Alipay alipay) {
+      public Builder setAlipay(PaymentIntentConfirmParams.PaymentMethodData.Alipay alipay) {
         this.alipay = alipay;
         return this;
       }
@@ -1283,7 +1294,8 @@ public class PaymentIntentConfirmParams extends ApiRequestParams {
        * If this is an {@code au_becs_debit} PaymentMethod, this hash contains details about the
        * bank account.
        */
-      public Builder setAuBecsDebit(AuBecsDebit auBecsDebit) {
+      public Builder setAuBecsDebit(
+          PaymentIntentConfirmParams.PaymentMethodData.AuBecsDebit auBecsDebit) {
         this.auBecsDebit = auBecsDebit;
         return this;
       }
@@ -1292,7 +1304,8 @@ public class PaymentIntentConfirmParams extends ApiRequestParams {
        * If this is a {@code bacs_debit} PaymentMethod, this hash contains details about the Bacs
        * Direct Debit bank account.
        */
-      public Builder setBacsDebit(BacsDebit bacsDebit) {
+      public Builder setBacsDebit(
+          PaymentIntentConfirmParams.PaymentMethodData.BacsDebit bacsDebit) {
         this.bacsDebit = bacsDebit;
         return this;
       }
@@ -1301,7 +1314,8 @@ public class PaymentIntentConfirmParams extends ApiRequestParams {
        * If this is a {@code bancontact} PaymentMethod, this hash contains details about the
        * Bancontact payment method.
        */
-      public Builder setBancontact(Bancontact bancontact) {
+      public Builder setBancontact(
+          PaymentIntentConfirmParams.PaymentMethodData.Bancontact bancontact) {
         this.bancontact = bancontact;
         return this;
       }
@@ -1310,7 +1324,8 @@ public class PaymentIntentConfirmParams extends ApiRequestParams {
        * Billing information associated with the PaymentMethod that may be used or required by
        * particular types of payment methods.
        */
-      public Builder setBillingDetails(BillingDetails billingDetails) {
+      public Builder setBillingDetails(
+          PaymentIntentConfirmParams.PaymentMethodData.BillingDetails billingDetails) {
         this.billingDetails = billingDetails;
         return this;
       }
@@ -1319,7 +1334,7 @@ public class PaymentIntentConfirmParams extends ApiRequestParams {
        * If this is a {@code blik} PaymentMethod, this hash contains details about the BLIK payment
        * method.
        */
-      public Builder setBlik(Blik blik) {
+      public Builder setBlik(PaymentIntentConfirmParams.PaymentMethodData.Blik blik) {
         this.blik = blik;
         return this;
       }
@@ -1328,7 +1343,7 @@ public class PaymentIntentConfirmParams extends ApiRequestParams {
        * If this is a {@code boleto} PaymentMethod, this hash contains details about the Boleto
        * payment method.
        */
-      public Builder setBoleto(Boleto boleto) {
+      public Builder setBoleto(PaymentIntentConfirmParams.PaymentMethodData.Boleto boleto) {
         this.boleto = boleto;
         return this;
       }
@@ -1337,7 +1352,8 @@ public class PaymentIntentConfirmParams extends ApiRequestParams {
        * If this is a {@code customer_balance} PaymentMethod, this hash contains details about the
        * CustomerBalance payment method.
        */
-      public Builder setCustomerBalance(CustomerBalance customerBalance) {
+      public Builder setCustomerBalance(
+          PaymentIntentConfirmParams.PaymentMethodData.CustomerBalance customerBalance) {
         this.customerBalance = customerBalance;
         return this;
       }
@@ -1346,7 +1362,7 @@ public class PaymentIntentConfirmParams extends ApiRequestParams {
        * If this is an {@code eps} PaymentMethod, this hash contains details about the EPS payment
        * method.
        */
-      public Builder setEps(Eps eps) {
+      public Builder setEps(PaymentIntentConfirmParams.PaymentMethodData.Eps eps) {
         this.eps = eps;
         return this;
       }
@@ -1382,7 +1398,7 @@ public class PaymentIntentConfirmParams extends ApiRequestParams {
        * If this is an {@code fpx} PaymentMethod, this hash contains details about the FPX payment
        * method.
        */
-      public Builder setFpx(Fpx fpx) {
+      public Builder setFpx(PaymentIntentConfirmParams.PaymentMethodData.Fpx fpx) {
         this.fpx = fpx;
         return this;
       }
@@ -1391,7 +1407,7 @@ public class PaymentIntentConfirmParams extends ApiRequestParams {
        * If this is a {@code giropay} PaymentMethod, this hash contains details about the Giropay
        * payment method.
        */
-      public Builder setGiropay(Giropay giropay) {
+      public Builder setGiropay(PaymentIntentConfirmParams.PaymentMethodData.Giropay giropay) {
         this.giropay = giropay;
         return this;
       }
@@ -1400,7 +1416,7 @@ public class PaymentIntentConfirmParams extends ApiRequestParams {
        * If this is a {@code grabpay} PaymentMethod, this hash contains details about the GrabPay
        * payment method.
        */
-      public Builder setGrabpay(Grabpay grabpay) {
+      public Builder setGrabpay(PaymentIntentConfirmParams.PaymentMethodData.Grabpay grabpay) {
         this.grabpay = grabpay;
         return this;
       }
@@ -1409,7 +1425,7 @@ public class PaymentIntentConfirmParams extends ApiRequestParams {
        * If this is an {@code ideal} PaymentMethod, this hash contains details about the iDEAL
        * payment method.
        */
-      public Builder setIdeal(Ideal ideal) {
+      public Builder setIdeal(PaymentIntentConfirmParams.PaymentMethodData.Ideal ideal) {
         this.ideal = ideal;
         return this;
       }
@@ -1418,7 +1434,8 @@ public class PaymentIntentConfirmParams extends ApiRequestParams {
        * If this is an {@code interac_present} PaymentMethod, this hash contains details about the
        * Interac Present payment method.
        */
-      public Builder setInteracPresent(InteracPresent interacPresent) {
+      public Builder setInteracPresent(
+          PaymentIntentConfirmParams.PaymentMethodData.InteracPresent interacPresent) {
         this.interacPresent = interacPresent;
         return this;
       }
@@ -1427,7 +1444,7 @@ public class PaymentIntentConfirmParams extends ApiRequestParams {
        * If this is a {@code klarna} PaymentMethod, this hash contains details about the Klarna
        * payment method.
        */
-      public Builder setKlarna(Klarna klarna) {
+      public Builder setKlarna(PaymentIntentConfirmParams.PaymentMethodData.Klarna klarna) {
         this.klarna = klarna;
         return this;
       }
@@ -1436,7 +1453,7 @@ public class PaymentIntentConfirmParams extends ApiRequestParams {
        * If this is a {@code konbini} PaymentMethod, this hash contains details about the Konbini
        * payment method.
        */
-      public Builder setKonbini(Konbini konbini) {
+      public Builder setKonbini(PaymentIntentConfirmParams.PaymentMethodData.Konbini konbini) {
         this.konbini = konbini;
         return this;
       }
@@ -1445,7 +1462,7 @@ public class PaymentIntentConfirmParams extends ApiRequestParams {
        * If this is an {@code Link} PaymentMethod, this hash contains details about the Link payment
        * method.
        */
-      public Builder setLink(Link link) {
+      public Builder setLink(PaymentIntentConfirmParams.PaymentMethodData.Link link) {
         this.link = link;
         return this;
       }
@@ -1481,7 +1498,7 @@ public class PaymentIntentConfirmParams extends ApiRequestParams {
        * If this is an {@code oxxo} PaymentMethod, this hash contains details about the OXXO payment
        * method.
        */
-      public Builder setOxxo(Oxxo oxxo) {
+      public Builder setOxxo(PaymentIntentConfirmParams.PaymentMethodData.Oxxo oxxo) {
         this.oxxo = oxxo;
         return this;
       }
@@ -1490,7 +1507,7 @@ public class PaymentIntentConfirmParams extends ApiRequestParams {
        * If this is a {@code p24} PaymentMethod, this hash contains details about the P24 payment
        * method.
        */
-      public Builder setP24(P24 p24) {
+      public Builder setP24(PaymentIntentConfirmParams.PaymentMethodData.P24 p24) {
         this.p24 = p24;
         return this;
       }
@@ -1499,7 +1516,7 @@ public class PaymentIntentConfirmParams extends ApiRequestParams {
        * If this is a {@code paynow} PaymentMethod, this hash contains details about the PayNow
        * payment method.
        */
-      public Builder setPaynow(Paynow paynow) {
+      public Builder setPaynow(PaymentIntentConfirmParams.PaymentMethodData.Paynow paynow) {
         this.paynow = paynow;
         return this;
       }
@@ -1508,7 +1525,7 @@ public class PaymentIntentConfirmParams extends ApiRequestParams {
        * If this is a {@code pix} PaymentMethod, this hash contains details about the Pix payment
        * method.
        */
-      public Builder setPix(Pix pix) {
+      public Builder setPix(PaymentIntentConfirmParams.PaymentMethodData.Pix pix) {
         this.pix = pix;
         return this;
       }
@@ -1517,7 +1534,8 @@ public class PaymentIntentConfirmParams extends ApiRequestParams {
        * If this is a {@code promptpay} PaymentMethod, this hash contains details about the
        * PromptPay payment method.
        */
-      public Builder setPromptpay(Promptpay promptpay) {
+      public Builder setPromptpay(
+          PaymentIntentConfirmParams.PaymentMethodData.Promptpay promptpay) {
         this.promptpay = promptpay;
         return this;
       }
@@ -1526,7 +1544,8 @@ public class PaymentIntentConfirmParams extends ApiRequestParams {
        * Options to configure Radar. See <a href="https://stripe.com/docs/radar/radar-session">Radar
        * Session</a> for more information.
        */
-      public Builder setRadarOptions(RadarOptions radarOptions) {
+      public Builder setRadarOptions(
+          PaymentIntentConfirmParams.PaymentMethodData.RadarOptions radarOptions) {
         this.radarOptions = radarOptions;
         return this;
       }
@@ -1535,7 +1554,8 @@ public class PaymentIntentConfirmParams extends ApiRequestParams {
        * If this is a {@code sepa_debit} PaymentMethod, this hash contains details about the SEPA
        * debit bank account.
        */
-      public Builder setSepaDebit(SepaDebit sepaDebit) {
+      public Builder setSepaDebit(
+          PaymentIntentConfirmParams.PaymentMethodData.SepaDebit sepaDebit) {
         this.sepaDebit = sepaDebit;
         return this;
       }
@@ -1544,7 +1564,7 @@ public class PaymentIntentConfirmParams extends ApiRequestParams {
        * If this is a {@code sofort} PaymentMethod, this hash contains details about the SOFORT
        * payment method.
        */
-      public Builder setSofort(Sofort sofort) {
+      public Builder setSofort(PaymentIntentConfirmParams.PaymentMethodData.Sofort sofort) {
         this.sofort = sofort;
         return this;
       }
@@ -1554,7 +1574,7 @@ public class PaymentIntentConfirmParams extends ApiRequestParams {
        * name matching this value. It contains additional information specific to the PaymentMethod
        * type.
        */
-      public Builder setType(Type type) {
+      public Builder setType(PaymentIntentConfirmParams.PaymentMethodData.Type type) {
         this.type = type;
         return this;
       }
@@ -1563,7 +1583,8 @@ public class PaymentIntentConfirmParams extends ApiRequestParams {
        * If this is an {@code us_bank_account} PaymentMethod, this hash contains details about the
        * US bank account payment method.
        */
-      public Builder setUsBankAccount(UsBankAccount usBankAccount) {
+      public Builder setUsBankAccount(
+          PaymentIntentConfirmParams.PaymentMethodData.UsBankAccount usBankAccount) {
         this.usBankAccount = usBankAccount;
         return this;
       }
@@ -1572,7 +1593,8 @@ public class PaymentIntentConfirmParams extends ApiRequestParams {
        * If this is an {@code wechat_pay} PaymentMethod, this hash contains details about the
        * wechat_pay payment method.
        */
-      public Builder setWechatPay(WechatPay wechatPay) {
+      public Builder setWechatPay(
+          PaymentIntentConfirmParams.PaymentMethodData.WechatPay wechatPay) {
         this.wechatPay = wechatPay;
         return this;
       }
@@ -1626,8 +1648,8 @@ public class PaymentIntentConfirmParams extends ApiRequestParams {
         private String transitNumber;
 
         /** Finalize and obtain parameter instance from this builder. */
-        public AcssDebit build() {
-          return new AcssDebit(
+        public PaymentIntentConfirmParams.PaymentMethodData.AcssDebit build() {
+          return new PaymentIntentConfirmParams.PaymentMethodData.AcssDebit(
               this.accountNumber, this.extraParams, this.institutionNumber, this.transitNumber);
         }
 
@@ -1702,8 +1724,8 @@ public class PaymentIntentConfirmParams extends ApiRequestParams {
         private Map<String, Object> extraParams;
 
         /** Finalize and obtain parameter instance from this builder. */
-        public Affirm build() {
-          return new Affirm(this.extraParams);
+        public PaymentIntentConfirmParams.PaymentMethodData.Affirm build() {
+          return new PaymentIntentConfirmParams.PaymentMethodData.Affirm(this.extraParams);
         }
 
         /**
@@ -1759,8 +1781,9 @@ public class PaymentIntentConfirmParams extends ApiRequestParams {
         private Map<String, Object> extraParams;
 
         /** Finalize and obtain parameter instance from this builder. */
-        public AfterpayClearpay build() {
-          return new AfterpayClearpay(this.extraParams);
+        public PaymentIntentConfirmParams.PaymentMethodData.AfterpayClearpay build() {
+          return new PaymentIntentConfirmParams.PaymentMethodData.AfterpayClearpay(
+              this.extraParams);
         }
 
         /**
@@ -1818,8 +1841,8 @@ public class PaymentIntentConfirmParams extends ApiRequestParams {
         private Map<String, Object> extraParams;
 
         /** Finalize and obtain parameter instance from this builder. */
-        public Alipay build() {
-          return new Alipay(this.extraParams);
+        public PaymentIntentConfirmParams.PaymentMethodData.Alipay build() {
+          return new PaymentIntentConfirmParams.PaymentMethodData.Alipay(this.extraParams);
         }
 
         /**
@@ -1889,8 +1912,9 @@ public class PaymentIntentConfirmParams extends ApiRequestParams {
         private Map<String, Object> extraParams;
 
         /** Finalize and obtain parameter instance from this builder. */
-        public AuBecsDebit build() {
-          return new AuBecsDebit(this.accountNumber, this.bsbNumber, this.extraParams);
+        public PaymentIntentConfirmParams.PaymentMethodData.AuBecsDebit build() {
+          return new PaymentIntentConfirmParams.PaymentMethodData.AuBecsDebit(
+              this.accountNumber, this.bsbNumber, this.extraParams);
         }
 
         /** The account number for the bank account. */
@@ -1972,8 +1996,9 @@ public class PaymentIntentConfirmParams extends ApiRequestParams {
         private String sortCode;
 
         /** Finalize and obtain parameter instance from this builder. */
-        public BacsDebit build() {
-          return new BacsDebit(this.accountNumber, this.extraParams, this.sortCode);
+        public PaymentIntentConfirmParams.PaymentMethodData.BacsDebit build() {
+          return new PaymentIntentConfirmParams.PaymentMethodData.BacsDebit(
+              this.accountNumber, this.extraParams, this.sortCode);
         }
 
         /** Account number of the bank account that the funds will be debited from. */
@@ -2041,8 +2066,8 @@ public class PaymentIntentConfirmParams extends ApiRequestParams {
         private Map<String, Object> extraParams;
 
         /** Finalize and obtain parameter instance from this builder. */
-        public Bancontact build() {
-          return new Bancontact(this.extraParams);
+        public PaymentIntentConfirmParams.PaymentMethodData.Bancontact build() {
+          return new PaymentIntentConfirmParams.PaymentMethodData.Bancontact(this.extraParams);
         }
 
         /**
@@ -2131,13 +2156,14 @@ public class PaymentIntentConfirmParams extends ApiRequestParams {
         private String phone;
 
         /** Finalize and obtain parameter instance from this builder. */
-        public BillingDetails build() {
-          return new BillingDetails(
+        public PaymentIntentConfirmParams.PaymentMethodData.BillingDetails build() {
+          return new PaymentIntentConfirmParams.PaymentMethodData.BillingDetails(
               this.address, this.email, this.extraParams, this.name, this.phone);
         }
 
         /** Billing address. */
-        public Builder setAddress(Address address) {
+        public Builder setAddress(
+            PaymentIntentConfirmParams.PaymentMethodData.BillingDetails.Address address) {
           this.address = address;
           return this;
         }
@@ -2277,8 +2303,8 @@ public class PaymentIntentConfirmParams extends ApiRequestParams {
           private String state;
 
           /** Finalize and obtain parameter instance from this builder. */
-          public Address build() {
-            return new Address(
+          public PaymentIntentConfirmParams.PaymentMethodData.BillingDetails.Address build() {
+            return new PaymentIntentConfirmParams.PaymentMethodData.BillingDetails.Address(
                 this.city,
                 this.country,
                 this.extraParams,
@@ -2383,8 +2409,8 @@ public class PaymentIntentConfirmParams extends ApiRequestParams {
         private Map<String, Object> extraParams;
 
         /** Finalize and obtain parameter instance from this builder. */
-        public Blik build() {
-          return new Blik(this.extraParams);
+        public PaymentIntentConfirmParams.PaymentMethodData.Blik build() {
+          return new PaymentIntentConfirmParams.PaymentMethodData.Blik(this.extraParams);
         }
 
         /**
@@ -2449,8 +2475,9 @@ public class PaymentIntentConfirmParams extends ApiRequestParams {
         private String taxId;
 
         /** Finalize and obtain parameter instance from this builder. */
-        public Boleto build() {
-          return new Boleto(this.extraParams, this.taxId);
+        public PaymentIntentConfirmParams.PaymentMethodData.Boleto build() {
+          return new PaymentIntentConfirmParams.PaymentMethodData.Boleto(
+              this.extraParams, this.taxId);
         }
 
         /**
@@ -2515,8 +2542,8 @@ public class PaymentIntentConfirmParams extends ApiRequestParams {
         private Map<String, Object> extraParams;
 
         /** Finalize and obtain parameter instance from this builder. */
-        public CustomerBalance build() {
-          return new CustomerBalance(this.extraParams);
+        public PaymentIntentConfirmParams.PaymentMethodData.CustomerBalance build() {
+          return new PaymentIntentConfirmParams.PaymentMethodData.CustomerBalance(this.extraParams);
         }
 
         /**
@@ -2579,12 +2606,12 @@ public class PaymentIntentConfirmParams extends ApiRequestParams {
         private Map<String, Object> extraParams;
 
         /** Finalize and obtain parameter instance from this builder. */
-        public Eps build() {
-          return new Eps(this.bank, this.extraParams);
+        public PaymentIntentConfirmParams.PaymentMethodData.Eps build() {
+          return new PaymentIntentConfirmParams.PaymentMethodData.Eps(this.bank, this.extraParams);
         }
 
         /** The customer's bank. */
-        public Builder setBank(Bank bank) {
+        public Builder setBank(PaymentIntentConfirmParams.PaymentMethodData.Eps.Bank bank) {
           this.bank = bank;
           return this;
         }
@@ -2749,18 +2776,20 @@ public class PaymentIntentConfirmParams extends ApiRequestParams {
         private Map<String, Object> extraParams;
 
         /** Finalize and obtain parameter instance from this builder. */
-        public Fpx build() {
-          return new Fpx(this.accountHolderType, this.bank, this.extraParams);
+        public PaymentIntentConfirmParams.PaymentMethodData.Fpx build() {
+          return new PaymentIntentConfirmParams.PaymentMethodData.Fpx(
+              this.accountHolderType, this.bank, this.extraParams);
         }
 
         /** Account holder type for FPX transaction. */
-        public Builder setAccountHolderType(AccountHolderType accountHolderType) {
+        public Builder setAccountHolderType(
+            PaymentIntentConfirmParams.PaymentMethodData.Fpx.AccountHolderType accountHolderType) {
           this.accountHolderType = accountHolderType;
           return this;
         }
 
         /** The customer's bank. */
-        public Builder setBank(Bank bank) {
+        public Builder setBank(PaymentIntentConfirmParams.PaymentMethodData.Fpx.Bank bank) {
           this.bank = bank;
           return this;
         }
@@ -2905,8 +2934,8 @@ public class PaymentIntentConfirmParams extends ApiRequestParams {
         private Map<String, Object> extraParams;
 
         /** Finalize and obtain parameter instance from this builder. */
-        public Giropay build() {
-          return new Giropay(this.extraParams);
+        public PaymentIntentConfirmParams.PaymentMethodData.Giropay build() {
+          return new PaymentIntentConfirmParams.PaymentMethodData.Giropay(this.extraParams);
         }
 
         /**
@@ -2962,8 +2991,8 @@ public class PaymentIntentConfirmParams extends ApiRequestParams {
         private Map<String, Object> extraParams;
 
         /** Finalize and obtain parameter instance from this builder. */
-        public Grabpay build() {
-          return new Grabpay(this.extraParams);
+        public PaymentIntentConfirmParams.PaymentMethodData.Grabpay build() {
+          return new PaymentIntentConfirmParams.PaymentMethodData.Grabpay(this.extraParams);
         }
 
         /**
@@ -3026,12 +3055,13 @@ public class PaymentIntentConfirmParams extends ApiRequestParams {
         private Map<String, Object> extraParams;
 
         /** Finalize and obtain parameter instance from this builder. */
-        public Ideal build() {
-          return new Ideal(this.bank, this.extraParams);
+        public PaymentIntentConfirmParams.PaymentMethodData.Ideal build() {
+          return new PaymentIntentConfirmParams.PaymentMethodData.Ideal(
+              this.bank, this.extraParams);
         }
 
         /** The customer's bank. */
-        public Builder setBank(Bank bank) {
+        public Builder setBank(PaymentIntentConfirmParams.PaymentMethodData.Ideal.Bank bank) {
           this.bank = bank;
           return this;
         }
@@ -3137,8 +3167,8 @@ public class PaymentIntentConfirmParams extends ApiRequestParams {
         private Map<String, Object> extraParams;
 
         /** Finalize and obtain parameter instance from this builder. */
-        public InteracPresent build() {
-          return new InteracPresent(this.extraParams);
+        public PaymentIntentConfirmParams.PaymentMethodData.InteracPresent build() {
+          return new PaymentIntentConfirmParams.PaymentMethodData.InteracPresent(this.extraParams);
         }
 
         /**
@@ -3201,12 +3231,13 @@ public class PaymentIntentConfirmParams extends ApiRequestParams {
         private Map<String, Object> extraParams;
 
         /** Finalize and obtain parameter instance from this builder. */
-        public Klarna build() {
-          return new Klarna(this.dob, this.extraParams);
+        public PaymentIntentConfirmParams.PaymentMethodData.Klarna build() {
+          return new PaymentIntentConfirmParams.PaymentMethodData.Klarna(
+              this.dob, this.extraParams);
         }
 
         /** Customer's date of birth. */
-        public Builder setDob(Dob dob) {
+        public Builder setDob(PaymentIntentConfirmParams.PaymentMethodData.Klarna.Dob dob) {
           this.dob = dob;
           return this;
         }
@@ -3285,8 +3316,9 @@ public class PaymentIntentConfirmParams extends ApiRequestParams {
           private Long year;
 
           /** Finalize and obtain parameter instance from this builder. */
-          public Dob build() {
-            return new Dob(this.day, this.extraParams, this.month, this.year);
+          public PaymentIntentConfirmParams.PaymentMethodData.Klarna.Dob build() {
+            return new PaymentIntentConfirmParams.PaymentMethodData.Klarna.Dob(
+                this.day, this.extraParams, this.month, this.year);
           }
 
           /** The day of birth, between 1 and 31. */
@@ -3361,8 +3393,8 @@ public class PaymentIntentConfirmParams extends ApiRequestParams {
         private Map<String, Object> extraParams;
 
         /** Finalize and obtain parameter instance from this builder. */
-        public Konbini build() {
-          return new Konbini(this.extraParams);
+        public PaymentIntentConfirmParams.PaymentMethodData.Konbini build() {
+          return new PaymentIntentConfirmParams.PaymentMethodData.Konbini(this.extraParams);
         }
 
         /**
@@ -3418,8 +3450,8 @@ public class PaymentIntentConfirmParams extends ApiRequestParams {
         private Map<String, Object> extraParams;
 
         /** Finalize and obtain parameter instance from this builder. */
-        public Link build() {
-          return new Link(this.extraParams);
+        public PaymentIntentConfirmParams.PaymentMethodData.Link build() {
+          return new PaymentIntentConfirmParams.PaymentMethodData.Link(this.extraParams);
         }
 
         /**
@@ -3475,8 +3507,8 @@ public class PaymentIntentConfirmParams extends ApiRequestParams {
         private Map<String, Object> extraParams;
 
         /** Finalize and obtain parameter instance from this builder. */
-        public Oxxo build() {
-          return new Oxxo(this.extraParams);
+        public PaymentIntentConfirmParams.PaymentMethodData.Oxxo build() {
+          return new PaymentIntentConfirmParams.PaymentMethodData.Oxxo(this.extraParams);
         }
 
         /**
@@ -3539,12 +3571,12 @@ public class PaymentIntentConfirmParams extends ApiRequestParams {
         private Map<String, Object> extraParams;
 
         /** Finalize and obtain parameter instance from this builder. */
-        public P24 build() {
-          return new P24(this.bank, this.extraParams);
+        public PaymentIntentConfirmParams.PaymentMethodData.P24 build() {
+          return new PaymentIntentConfirmParams.PaymentMethodData.P24(this.bank, this.extraParams);
         }
 
         /** The customer's bank. */
-        public Builder setBank(Bank bank) {
+        public Builder setBank(PaymentIntentConfirmParams.PaymentMethodData.P24.Bank bank) {
           this.bank = bank;
           return this;
         }
@@ -3686,8 +3718,8 @@ public class PaymentIntentConfirmParams extends ApiRequestParams {
         private Map<String, Object> extraParams;
 
         /** Finalize and obtain parameter instance from this builder. */
-        public Paynow build() {
-          return new Paynow(this.extraParams);
+        public PaymentIntentConfirmParams.PaymentMethodData.Paynow build() {
+          return new PaymentIntentConfirmParams.PaymentMethodData.Paynow(this.extraParams);
         }
 
         /**
@@ -3743,8 +3775,8 @@ public class PaymentIntentConfirmParams extends ApiRequestParams {
         private Map<String, Object> extraParams;
 
         /** Finalize and obtain parameter instance from this builder. */
-        public Pix build() {
-          return new Pix(this.extraParams);
+        public PaymentIntentConfirmParams.PaymentMethodData.Pix build() {
+          return new PaymentIntentConfirmParams.PaymentMethodData.Pix(this.extraParams);
         }
 
         /**
@@ -3800,8 +3832,8 @@ public class PaymentIntentConfirmParams extends ApiRequestParams {
         private Map<String, Object> extraParams;
 
         /** Finalize and obtain parameter instance from this builder. */
-        public Promptpay build() {
-          return new Promptpay(this.extraParams);
+        public PaymentIntentConfirmParams.PaymentMethodData.Promptpay build() {
+          return new PaymentIntentConfirmParams.PaymentMethodData.Promptpay(this.extraParams);
         }
 
         /**
@@ -3868,8 +3900,9 @@ public class PaymentIntentConfirmParams extends ApiRequestParams {
         private String session;
 
         /** Finalize and obtain parameter instance from this builder. */
-        public RadarOptions build() {
-          return new RadarOptions(this.extraParams, this.session);
+        public PaymentIntentConfirmParams.PaymentMethodData.RadarOptions build() {
+          return new PaymentIntentConfirmParams.PaymentMethodData.RadarOptions(
+              this.extraParams, this.session);
         }
 
         /**
@@ -3942,8 +3975,9 @@ public class PaymentIntentConfirmParams extends ApiRequestParams {
         private String iban;
 
         /** Finalize and obtain parameter instance from this builder. */
-        public SepaDebit build() {
-          return new SepaDebit(this.extraParams, this.iban);
+        public PaymentIntentConfirmParams.PaymentMethodData.SepaDebit build() {
+          return new PaymentIntentConfirmParams.PaymentMethodData.SepaDebit(
+              this.extraParams, this.iban);
         }
 
         /**
@@ -4012,12 +4046,14 @@ public class PaymentIntentConfirmParams extends ApiRequestParams {
         private Map<String, Object> extraParams;
 
         /** Finalize and obtain parameter instance from this builder. */
-        public Sofort build() {
-          return new Sofort(this.country, this.extraParams);
+        public PaymentIntentConfirmParams.PaymentMethodData.Sofort build() {
+          return new PaymentIntentConfirmParams.PaymentMethodData.Sofort(
+              this.country, this.extraParams);
         }
 
         /** Two-letter ISO code representing the country the bank account is located in. */
-        public Builder setCountry(Country country) {
+        public Builder setCountry(
+            PaymentIntentConfirmParams.PaymentMethodData.Sofort.Country country) {
           this.country = country;
           return this;
         }
@@ -4143,8 +4179,8 @@ public class PaymentIntentConfirmParams extends ApiRequestParams {
         private String routingNumber;
 
         /** Finalize and obtain parameter instance from this builder. */
-        public UsBankAccount build() {
-          return new UsBankAccount(
+        public PaymentIntentConfirmParams.PaymentMethodData.UsBankAccount build() {
+          return new PaymentIntentConfirmParams.PaymentMethodData.UsBankAccount(
               this.accountHolderType,
               this.accountNumber,
               this.accountType,
@@ -4154,7 +4190,9 @@ public class PaymentIntentConfirmParams extends ApiRequestParams {
         }
 
         /** Account holder type: individual or company. */
-        public Builder setAccountHolderType(AccountHolderType accountHolderType) {
+        public Builder setAccountHolderType(
+            PaymentIntentConfirmParams.PaymentMethodData.UsBankAccount.AccountHolderType
+                accountHolderType) {
           this.accountHolderType = accountHolderType;
           return this;
         }
@@ -4166,7 +4204,8 @@ public class PaymentIntentConfirmParams extends ApiRequestParams {
         }
 
         /** Account type: checkings or savings. Defaults to checking if omitted. */
-        public Builder setAccountType(AccountType accountType) {
+        public Builder setAccountType(
+            PaymentIntentConfirmParams.PaymentMethodData.UsBankAccount.AccountType accountType) {
           this.accountType = accountType;
           return this;
         }
@@ -4266,8 +4305,8 @@ public class PaymentIntentConfirmParams extends ApiRequestParams {
         private Map<String, Object> extraParams;
 
         /** Finalize and obtain parameter instance from this builder. */
-        public WechatPay build() {
-          return new WechatPay(this.extraParams);
+        public PaymentIntentConfirmParams.PaymentMethodData.WechatPay build() {
+          return new PaymentIntentConfirmParams.PaymentMethodData.WechatPay(this.extraParams);
         }
 
         /**
@@ -4742,8 +4781,8 @@ public class PaymentIntentConfirmParams extends ApiRequestParams {
       private Object wechatPay;
 
       /** Finalize and obtain parameter instance from this builder. */
-      public PaymentMethodOptions build() {
-        return new PaymentMethodOptions(
+      public PaymentIntentConfirmParams.PaymentMethodOptions build() {
+        return new PaymentIntentConfirmParams.PaymentMethodOptions(
             this.acssDebit,
             this.affirm,
             this.afterpayClearpay,
@@ -4781,7 +4820,8 @@ public class PaymentIntentConfirmParams extends ApiRequestParams {
        * If this is a {@code acss_debit} PaymentMethod, this sub-hash contains details about the
        * ACSS Debit payment method options.
        */
-      public Builder setAcssDebit(AcssDebit acssDebit) {
+      public Builder setAcssDebit(
+          PaymentIntentConfirmParams.PaymentMethodOptions.AcssDebit acssDebit) {
         this.acssDebit = acssDebit;
         return this;
       }
@@ -4799,7 +4839,7 @@ public class PaymentIntentConfirmParams extends ApiRequestParams {
        * If this is an {@code affirm} PaymentMethod, this sub-hash contains details about the Affirm
        * payment method options.
        */
-      public Builder setAffirm(Affirm affirm) {
+      public Builder setAffirm(PaymentIntentConfirmParams.PaymentMethodOptions.Affirm affirm) {
         this.affirm = affirm;
         return this;
       }
@@ -4817,7 +4857,8 @@ public class PaymentIntentConfirmParams extends ApiRequestParams {
        * If this is a {@code afterpay_clearpay} PaymentMethod, this sub-hash contains details about
        * the Afterpay Clearpay payment method options.
        */
-      public Builder setAfterpayClearpay(AfterpayClearpay afterpayClearpay) {
+      public Builder setAfterpayClearpay(
+          PaymentIntentConfirmParams.PaymentMethodOptions.AfterpayClearpay afterpayClearpay) {
         this.afterpayClearpay = afterpayClearpay;
         return this;
       }
@@ -4835,7 +4876,7 @@ public class PaymentIntentConfirmParams extends ApiRequestParams {
        * If this is a {@code alipay} PaymentMethod, this sub-hash contains details about the Alipay
        * payment method options.
        */
-      public Builder setAlipay(Alipay alipay) {
+      public Builder setAlipay(PaymentIntentConfirmParams.PaymentMethodOptions.Alipay alipay) {
         this.alipay = alipay;
         return this;
       }
@@ -4853,7 +4894,8 @@ public class PaymentIntentConfirmParams extends ApiRequestParams {
        * If this is a {@code au_becs_debit} PaymentMethod, this sub-hash contains details about the
        * AU BECS Direct Debit payment method options.
        */
-      public Builder setAuBecsDebit(AuBecsDebit auBecsDebit) {
+      public Builder setAuBecsDebit(
+          PaymentIntentConfirmParams.PaymentMethodOptions.AuBecsDebit auBecsDebit) {
         this.auBecsDebit = auBecsDebit;
         return this;
       }
@@ -4871,7 +4913,8 @@ public class PaymentIntentConfirmParams extends ApiRequestParams {
        * If this is a {@code bacs_debit} PaymentMethod, this sub-hash contains details about the
        * BACS Debit payment method options.
        */
-      public Builder setBacsDebit(BacsDebit bacsDebit) {
+      public Builder setBacsDebit(
+          PaymentIntentConfirmParams.PaymentMethodOptions.BacsDebit bacsDebit) {
         this.bacsDebit = bacsDebit;
         return this;
       }
@@ -4889,7 +4932,8 @@ public class PaymentIntentConfirmParams extends ApiRequestParams {
        * If this is a {@code bancontact} PaymentMethod, this sub-hash contains details about the
        * Bancontact payment method options.
        */
-      public Builder setBancontact(Bancontact bancontact) {
+      public Builder setBancontact(
+          PaymentIntentConfirmParams.PaymentMethodOptions.Bancontact bancontact) {
         this.bancontact = bancontact;
         return this;
       }
@@ -4907,7 +4951,7 @@ public class PaymentIntentConfirmParams extends ApiRequestParams {
        * If this is a {@code blik} PaymentMethod, this sub-hash contains details about the BLIK
        * payment method options.
        */
-      public Builder setBlik(Blik blik) {
+      public Builder setBlik(PaymentIntentConfirmParams.PaymentMethodOptions.Blik blik) {
         this.blik = blik;
         return this;
       }
@@ -4925,7 +4969,7 @@ public class PaymentIntentConfirmParams extends ApiRequestParams {
        * If this is a {@code boleto} PaymentMethod, this sub-hash contains details about the Boleto
        * payment method options.
        */
-      public Builder setBoleto(Boleto boleto) {
+      public Builder setBoleto(PaymentIntentConfirmParams.PaymentMethodOptions.Boleto boleto) {
         this.boleto = boleto;
         return this;
       }
@@ -4940,7 +4984,7 @@ public class PaymentIntentConfirmParams extends ApiRequestParams {
       }
 
       /** Configuration for any card payments attempted on this PaymentIntent. */
-      public Builder setCard(Card card) {
+      public Builder setCard(PaymentIntentConfirmParams.PaymentMethodOptions.Card card) {
         this.card = card;
         return this;
       }
@@ -4955,7 +4999,8 @@ public class PaymentIntentConfirmParams extends ApiRequestParams {
        * If this is a {@code card_present} PaymentMethod, this sub-hash contains details about the
        * Card Present payment method options.
        */
-      public Builder setCardPresent(CardPresent cardPresent) {
+      public Builder setCardPresent(
+          PaymentIntentConfirmParams.PaymentMethodOptions.CardPresent cardPresent) {
         this.cardPresent = cardPresent;
         return this;
       }
@@ -4973,7 +5018,8 @@ public class PaymentIntentConfirmParams extends ApiRequestParams {
        * If this is a {@code customer balance} PaymentMethod, this sub-hash contains details about
        * the customer balance payment method options.
        */
-      public Builder setCustomerBalance(CustomerBalance customerBalance) {
+      public Builder setCustomerBalance(
+          PaymentIntentConfirmParams.PaymentMethodOptions.CustomerBalance customerBalance) {
         this.customerBalance = customerBalance;
         return this;
       }
@@ -4991,7 +5037,7 @@ public class PaymentIntentConfirmParams extends ApiRequestParams {
        * If this is a {@code eps} PaymentMethod, this sub-hash contains details about the EPS
        * payment method options.
        */
-      public Builder setEps(Eps eps) {
+      public Builder setEps(PaymentIntentConfirmParams.PaymentMethodOptions.Eps eps) {
         this.eps = eps;
         return this;
       }
@@ -5036,7 +5082,7 @@ public class PaymentIntentConfirmParams extends ApiRequestParams {
        * If this is a {@code fpx} PaymentMethod, this sub-hash contains details about the FPX
        * payment method options.
        */
-      public Builder setFpx(Fpx fpx) {
+      public Builder setFpx(PaymentIntentConfirmParams.PaymentMethodOptions.Fpx fpx) {
         this.fpx = fpx;
         return this;
       }
@@ -5054,7 +5100,7 @@ public class PaymentIntentConfirmParams extends ApiRequestParams {
        * If this is a {@code giropay} PaymentMethod, this sub-hash contains details about the
        * Giropay payment method options.
        */
-      public Builder setGiropay(Giropay giropay) {
+      public Builder setGiropay(PaymentIntentConfirmParams.PaymentMethodOptions.Giropay giropay) {
         this.giropay = giropay;
         return this;
       }
@@ -5072,7 +5118,7 @@ public class PaymentIntentConfirmParams extends ApiRequestParams {
        * If this is a {@code grabpay} PaymentMethod, this sub-hash contains details about the
        * Grabpay payment method options.
        */
-      public Builder setGrabpay(Grabpay grabpay) {
+      public Builder setGrabpay(PaymentIntentConfirmParams.PaymentMethodOptions.Grabpay grabpay) {
         this.grabpay = grabpay;
         return this;
       }
@@ -5090,7 +5136,7 @@ public class PaymentIntentConfirmParams extends ApiRequestParams {
        * If this is a {@code ideal} PaymentMethod, this sub-hash contains details about the Ideal
        * payment method options.
        */
-      public Builder setIdeal(Ideal ideal) {
+      public Builder setIdeal(PaymentIntentConfirmParams.PaymentMethodOptions.Ideal ideal) {
         this.ideal = ideal;
         return this;
       }
@@ -5108,7 +5154,8 @@ public class PaymentIntentConfirmParams extends ApiRequestParams {
        * If this is a {@code interac_present} PaymentMethod, this sub-hash contains details about
        * the Card Present payment method options.
        */
-      public Builder setInteracPresent(InteracPresent interacPresent) {
+      public Builder setInteracPresent(
+          PaymentIntentConfirmParams.PaymentMethodOptions.InteracPresent interacPresent) {
         this.interacPresent = interacPresent;
         return this;
       }
@@ -5126,7 +5173,7 @@ public class PaymentIntentConfirmParams extends ApiRequestParams {
        * If this is a {@code klarna} PaymentMethod, this sub-hash contains details about the Klarna
        * payment method options.
        */
-      public Builder setKlarna(Klarna klarna) {
+      public Builder setKlarna(PaymentIntentConfirmParams.PaymentMethodOptions.Klarna klarna) {
         this.klarna = klarna;
         return this;
       }
@@ -5144,7 +5191,7 @@ public class PaymentIntentConfirmParams extends ApiRequestParams {
        * If this is a {@code konbini} PaymentMethod, this sub-hash contains details about the
        * Konbini payment method options.
        */
-      public Builder setKonbini(Konbini konbini) {
+      public Builder setKonbini(PaymentIntentConfirmParams.PaymentMethodOptions.Konbini konbini) {
         this.konbini = konbini;
         return this;
       }
@@ -5162,7 +5209,7 @@ public class PaymentIntentConfirmParams extends ApiRequestParams {
        * If this is a {@code link} PaymentMethod, this sub-hash contains details about the Link
        * payment method options.
        */
-      public Builder setLink(Link link) {
+      public Builder setLink(PaymentIntentConfirmParams.PaymentMethodOptions.Link link) {
         this.link = link;
         return this;
       }
@@ -5180,7 +5227,7 @@ public class PaymentIntentConfirmParams extends ApiRequestParams {
        * If this is a {@code oxxo} PaymentMethod, this sub-hash contains details about the OXXO
        * payment method options.
        */
-      public Builder setOxxo(Oxxo oxxo) {
+      public Builder setOxxo(PaymentIntentConfirmParams.PaymentMethodOptions.Oxxo oxxo) {
         this.oxxo = oxxo;
         return this;
       }
@@ -5198,7 +5245,7 @@ public class PaymentIntentConfirmParams extends ApiRequestParams {
        * If this is a {@code p24} PaymentMethod, this sub-hash contains details about the Przelewy24
        * payment method options.
        */
-      public Builder setP24(P24 p24) {
+      public Builder setP24(PaymentIntentConfirmParams.PaymentMethodOptions.P24 p24) {
         this.p24 = p24;
         return this;
       }
@@ -5216,7 +5263,7 @@ public class PaymentIntentConfirmParams extends ApiRequestParams {
        * If this is a {@code paynow} PaymentMethod, this sub-hash contains details about the PayNow
        * payment method options.
        */
-      public Builder setPaynow(Paynow paynow) {
+      public Builder setPaynow(PaymentIntentConfirmParams.PaymentMethodOptions.Paynow paynow) {
         this.paynow = paynow;
         return this;
       }
@@ -5234,7 +5281,7 @@ public class PaymentIntentConfirmParams extends ApiRequestParams {
        * If this is a {@code pix} PaymentMethod, this sub-hash contains details about the Pix
        * payment method options.
        */
-      public Builder setPix(Pix pix) {
+      public Builder setPix(PaymentIntentConfirmParams.PaymentMethodOptions.Pix pix) {
         this.pix = pix;
         return this;
       }
@@ -5252,7 +5299,8 @@ public class PaymentIntentConfirmParams extends ApiRequestParams {
        * If this is a {@code promptpay} PaymentMethod, this sub-hash contains details about the
        * PromptPay payment method options.
        */
-      public Builder setPromptpay(Promptpay promptpay) {
+      public Builder setPromptpay(
+          PaymentIntentConfirmParams.PaymentMethodOptions.Promptpay promptpay) {
         this.promptpay = promptpay;
         return this;
       }
@@ -5270,7 +5318,8 @@ public class PaymentIntentConfirmParams extends ApiRequestParams {
        * If this is a {@code sepa_debit} PaymentIntent, this sub-hash contains details about the
        * SEPA Debit payment method options.
        */
-      public Builder setSepaDebit(SepaDebit sepaDebit) {
+      public Builder setSepaDebit(
+          PaymentIntentConfirmParams.PaymentMethodOptions.SepaDebit sepaDebit) {
         this.sepaDebit = sepaDebit;
         return this;
       }
@@ -5288,7 +5337,7 @@ public class PaymentIntentConfirmParams extends ApiRequestParams {
        * If this is a {@code sofort} PaymentMethod, this sub-hash contains details about the SOFORT
        * payment method options.
        */
-      public Builder setSofort(Sofort sofort) {
+      public Builder setSofort(PaymentIntentConfirmParams.PaymentMethodOptions.Sofort sofort) {
         this.sofort = sofort;
         return this;
       }
@@ -5306,7 +5355,8 @@ public class PaymentIntentConfirmParams extends ApiRequestParams {
        * If this is a {@code us_bank_account} PaymentMethod, this sub-hash contains details about
        * the US bank account payment method options.
        */
-      public Builder setUsBankAccount(UsBankAccount usBankAccount) {
+      public Builder setUsBankAccount(
+          PaymentIntentConfirmParams.PaymentMethodOptions.UsBankAccount usBankAccount) {
         this.usBankAccount = usBankAccount;
         return this;
       }
@@ -5324,7 +5374,8 @@ public class PaymentIntentConfirmParams extends ApiRequestParams {
        * If this is a {@code wechat_pay} PaymentMethod, this sub-hash contains details about the
        * WeChat Pay payment method options.
        */
-      public Builder setWechatPay(WechatPay wechatPay) {
+      public Builder setWechatPay(
+          PaymentIntentConfirmParams.PaymentMethodOptions.WechatPay wechatPay) {
         this.wechatPay = wechatPay;
         return this;
       }
@@ -5374,7 +5425,7 @@ public class PaymentIntentConfirmParams extends ApiRequestParams {
        * off_session}.
        */
       @SerializedName("setup_future_usage")
-      EnumParam setupFutureUsage;
+      ApiRequestParams.EnumParam setupFutureUsage;
 
       /** Verification method for the intent. */
       @SerializedName("verification_method")
@@ -5383,7 +5434,7 @@ public class PaymentIntentConfirmParams extends ApiRequestParams {
       private AcssDebit(
           Map<String, Object> extraParams,
           MandateOptions mandateOptions,
-          EnumParam setupFutureUsage,
+          ApiRequestParams.EnumParam setupFutureUsage,
           VerificationMethod verificationMethod) {
         this.extraParams = extraParams;
         this.mandateOptions = mandateOptions;
@@ -5400,13 +5451,13 @@ public class PaymentIntentConfirmParams extends ApiRequestParams {
 
         private MandateOptions mandateOptions;
 
-        private EnumParam setupFutureUsage;
+        private ApiRequestParams.EnumParam setupFutureUsage;
 
         private VerificationMethod verificationMethod;
 
         /** Finalize and obtain parameter instance from this builder. */
-        public AcssDebit build() {
-          return new AcssDebit(
+        public PaymentIntentConfirmParams.PaymentMethodOptions.AcssDebit build() {
+          return new PaymentIntentConfirmParams.PaymentMethodOptions.AcssDebit(
               this.extraParams,
               this.mandateOptions,
               this.setupFutureUsage,
@@ -5442,7 +5493,9 @@ public class PaymentIntentConfirmParams extends ApiRequestParams {
         }
 
         /** Additional fields for Mandate creation. */
-        public Builder setMandateOptions(MandateOptions mandateOptions) {
+        public Builder setMandateOptions(
+            PaymentIntentConfirmParams.PaymentMethodOptions.AcssDebit.MandateOptions
+                mandateOptions) {
           this.mandateOptions = mandateOptions;
           return this;
         }
@@ -5467,7 +5520,9 @@ public class PaymentIntentConfirmParams extends ApiRequestParams {
          * publishable key, you may only update the value from {@code on_session} to {@code
          * off_session}.
          */
-        public Builder setSetupFutureUsage(SetupFutureUsage setupFutureUsage) {
+        public Builder setSetupFutureUsage(
+            PaymentIntentConfirmParams.PaymentMethodOptions.AcssDebit.SetupFutureUsage
+                setupFutureUsage) {
           this.setupFutureUsage = setupFutureUsage;
           return this;
         }
@@ -5498,7 +5553,9 @@ public class PaymentIntentConfirmParams extends ApiRequestParams {
         }
 
         /** Verification method for the intent. */
-        public Builder setVerificationMethod(VerificationMethod verificationMethod) {
+        public Builder setVerificationMethod(
+            PaymentIntentConfirmParams.PaymentMethodOptions.AcssDebit.VerificationMethod
+                verificationMethod) {
           this.verificationMethod = verificationMethod;
           return this;
         }
@@ -5569,8 +5626,8 @@ public class PaymentIntentConfirmParams extends ApiRequestParams {
           private TransactionType transactionType;
 
           /** Finalize and obtain parameter instance from this builder. */
-          public MandateOptions build() {
-            return new MandateOptions(
+          public PaymentIntentConfirmParams.PaymentMethodOptions.AcssDebit.MandateOptions build() {
+            return new PaymentIntentConfirmParams.PaymentMethodOptions.AcssDebit.MandateOptions(
                 this.customMandateUrl,
                 this.extraParams,
                 this.intervalDescription,
@@ -5640,13 +5697,19 @@ public class PaymentIntentConfirmParams extends ApiRequestParams {
           }
 
           /** Payment schedule for the mandate. */
-          public Builder setPaymentSchedule(PaymentSchedule paymentSchedule) {
+          public Builder setPaymentSchedule(
+              PaymentIntentConfirmParams.PaymentMethodOptions.AcssDebit.MandateOptions
+                      .PaymentSchedule
+                  paymentSchedule) {
             this.paymentSchedule = paymentSchedule;
             return this;
           }
 
           /** Transaction type of the mandate. */
-          public Builder setTransactionType(TransactionType transactionType) {
+          public Builder setTransactionType(
+              PaymentIntentConfirmParams.PaymentMethodOptions.AcssDebit.MandateOptions
+                      .TransactionType
+                  transactionType) {
             this.transactionType = transactionType;
             return this;
           }
@@ -5735,7 +5798,7 @@ public class PaymentIntentConfirmParams extends ApiRequestParams {
        * for this parameter will unset the stored value for this payment method type.
        */
       @SerializedName("capture_method")
-      EnumParam captureMethod;
+      ApiRequestParams.EnumParam captureMethod;
 
       /**
        * Map of extra parameters for custom features not available in this client library. The
@@ -5769,7 +5832,7 @@ public class PaymentIntentConfirmParams extends ApiRequestParams {
       SetupFutureUsage setupFutureUsage;
 
       private Affirm(
-          EnumParam captureMethod,
+          ApiRequestParams.EnumParam captureMethod,
           Map<String, Object> extraParams,
           SetupFutureUsage setupFutureUsage) {
         this.captureMethod = captureMethod;
@@ -5782,15 +5845,16 @@ public class PaymentIntentConfirmParams extends ApiRequestParams {
       }
 
       public static class Builder {
-        private EnumParam captureMethod;
+        private ApiRequestParams.EnumParam captureMethod;
 
         private Map<String, Object> extraParams;
 
         private SetupFutureUsage setupFutureUsage;
 
         /** Finalize and obtain parameter instance from this builder. */
-        public Affirm build() {
-          return new Affirm(this.captureMethod, this.extraParams, this.setupFutureUsage);
+        public PaymentIntentConfirmParams.PaymentMethodOptions.Affirm build() {
+          return new PaymentIntentConfirmParams.PaymentMethodOptions.Affirm(
+              this.captureMethod, this.extraParams, this.setupFutureUsage);
         }
 
         /**
@@ -5802,7 +5866,8 @@ public class PaymentIntentConfirmParams extends ApiRequestParams {
          * <p>If {@code capture_method} is already set on the PaymentIntent, providing an empty
          * value for this parameter will unset the stored value for this payment method type.
          */
-        public Builder setCaptureMethod(CaptureMethod captureMethod) {
+        public Builder setCaptureMethod(
+            PaymentIntentConfirmParams.PaymentMethodOptions.Affirm.CaptureMethod captureMethod) {
           this.captureMethod = captureMethod;
           return this;
         }
@@ -5869,7 +5934,9 @@ public class PaymentIntentConfirmParams extends ApiRequestParams {
          * publishable key, you may only update the value from {@code on_session} to {@code
          * off_session}.
          */
-        public Builder setSetupFutureUsage(SetupFutureUsage setupFutureUsage) {
+        public Builder setSetupFutureUsage(
+            PaymentIntentConfirmParams.PaymentMethodOptions.Affirm.SetupFutureUsage
+                setupFutureUsage) {
           this.setupFutureUsage = setupFutureUsage;
           return this;
         }
@@ -5912,7 +5979,7 @@ public class PaymentIntentConfirmParams extends ApiRequestParams {
        * for this parameter will unset the stored value for this payment method type.
        */
       @SerializedName("capture_method")
-      EnumParam captureMethod;
+      ApiRequestParams.EnumParam captureMethod;
 
       /**
        * Map of extra parameters for custom features not available in this client library. The
@@ -5955,7 +6022,7 @@ public class PaymentIntentConfirmParams extends ApiRequestParams {
       SetupFutureUsage setupFutureUsage;
 
       private AfterpayClearpay(
-          EnumParam captureMethod,
+          ApiRequestParams.EnumParam captureMethod,
           Map<String, Object> extraParams,
           String reference,
           SetupFutureUsage setupFutureUsage) {
@@ -5970,7 +6037,7 @@ public class PaymentIntentConfirmParams extends ApiRequestParams {
       }
 
       public static class Builder {
-        private EnumParam captureMethod;
+        private ApiRequestParams.EnumParam captureMethod;
 
         private Map<String, Object> extraParams;
 
@@ -5979,8 +6046,8 @@ public class PaymentIntentConfirmParams extends ApiRequestParams {
         private SetupFutureUsage setupFutureUsage;
 
         /** Finalize and obtain parameter instance from this builder. */
-        public AfterpayClearpay build() {
-          return new AfterpayClearpay(
+        public PaymentIntentConfirmParams.PaymentMethodOptions.AfterpayClearpay build() {
+          return new PaymentIntentConfirmParams.PaymentMethodOptions.AfterpayClearpay(
               this.captureMethod, this.extraParams, this.reference, this.setupFutureUsage);
         }
 
@@ -5993,7 +6060,9 @@ public class PaymentIntentConfirmParams extends ApiRequestParams {
          * <p>If {@code capture_method} is already set on the PaymentIntent, providing an empty
          * value for this parameter will unset the stored value for this payment method type.
          */
-        public Builder setCaptureMethod(CaptureMethod captureMethod) {
+        public Builder setCaptureMethod(
+            PaymentIntentConfirmParams.PaymentMethodOptions.AfterpayClearpay.CaptureMethod
+                captureMethod) {
           this.captureMethod = captureMethod;
           return this;
         }
@@ -6073,7 +6142,9 @@ public class PaymentIntentConfirmParams extends ApiRequestParams {
          * publishable key, you may only update the value from {@code on_session} to {@code
          * off_session}.
          */
-        public Builder setSetupFutureUsage(SetupFutureUsage setupFutureUsage) {
+        public Builder setSetupFutureUsage(
+            PaymentIntentConfirmParams.PaymentMethodOptions.AfterpayClearpay.SetupFutureUsage
+                setupFutureUsage) {
           this.setupFutureUsage = setupFutureUsage;
           return this;
         }
@@ -6135,9 +6206,9 @@ public class PaymentIntentConfirmParams extends ApiRequestParams {
        * off_session}.
        */
       @SerializedName("setup_future_usage")
-      EnumParam setupFutureUsage;
+      ApiRequestParams.EnumParam setupFutureUsage;
 
-      private Alipay(Map<String, Object> extraParams, EnumParam setupFutureUsage) {
+      private Alipay(Map<String, Object> extraParams, ApiRequestParams.EnumParam setupFutureUsage) {
         this.extraParams = extraParams;
         this.setupFutureUsage = setupFutureUsage;
       }
@@ -6149,11 +6220,12 @@ public class PaymentIntentConfirmParams extends ApiRequestParams {
       public static class Builder {
         private Map<String, Object> extraParams;
 
-        private EnumParam setupFutureUsage;
+        private ApiRequestParams.EnumParam setupFutureUsage;
 
         /** Finalize and obtain parameter instance from this builder. */
-        public Alipay build() {
-          return new Alipay(this.extraParams, this.setupFutureUsage);
+        public PaymentIntentConfirmParams.PaymentMethodOptions.Alipay build() {
+          return new PaymentIntentConfirmParams.PaymentMethodOptions.Alipay(
+              this.extraParams, this.setupFutureUsage);
         }
 
         /**
@@ -6204,7 +6276,9 @@ public class PaymentIntentConfirmParams extends ApiRequestParams {
          * publishable key, you may only update the value from {@code on_session} to {@code
          * off_session}.
          */
-        public Builder setSetupFutureUsage(SetupFutureUsage setupFutureUsage) {
+        public Builder setSetupFutureUsage(
+            PaymentIntentConfirmParams.PaymentMethodOptions.Alipay.SetupFutureUsage
+                setupFutureUsage) {
           this.setupFutureUsage = setupFutureUsage;
           return this;
         }
@@ -6282,9 +6356,10 @@ public class PaymentIntentConfirmParams extends ApiRequestParams {
        * off_session}.
        */
       @SerializedName("setup_future_usage")
-      EnumParam setupFutureUsage;
+      ApiRequestParams.EnumParam setupFutureUsage;
 
-      private AuBecsDebit(Map<String, Object> extraParams, EnumParam setupFutureUsage) {
+      private AuBecsDebit(
+          Map<String, Object> extraParams, ApiRequestParams.EnumParam setupFutureUsage) {
         this.extraParams = extraParams;
         this.setupFutureUsage = setupFutureUsage;
       }
@@ -6296,11 +6371,12 @@ public class PaymentIntentConfirmParams extends ApiRequestParams {
       public static class Builder {
         private Map<String, Object> extraParams;
 
-        private EnumParam setupFutureUsage;
+        private ApiRequestParams.EnumParam setupFutureUsage;
 
         /** Finalize and obtain parameter instance from this builder. */
-        public AuBecsDebit build() {
-          return new AuBecsDebit(this.extraParams, this.setupFutureUsage);
+        public PaymentIntentConfirmParams.PaymentMethodOptions.AuBecsDebit build() {
+          return new PaymentIntentConfirmParams.PaymentMethodOptions.AuBecsDebit(
+              this.extraParams, this.setupFutureUsage);
         }
 
         /**
@@ -6351,7 +6427,9 @@ public class PaymentIntentConfirmParams extends ApiRequestParams {
          * publishable key, you may only update the value from {@code on_session} to {@code
          * off_session}.
          */
-        public Builder setSetupFutureUsage(SetupFutureUsage setupFutureUsage) {
+        public Builder setSetupFutureUsage(
+            PaymentIntentConfirmParams.PaymentMethodOptions.AuBecsDebit.SetupFutureUsage
+                setupFutureUsage) {
           this.setupFutureUsage = setupFutureUsage;
           return this;
         }
@@ -6432,9 +6510,10 @@ public class PaymentIntentConfirmParams extends ApiRequestParams {
        * off_session}.
        */
       @SerializedName("setup_future_usage")
-      EnumParam setupFutureUsage;
+      ApiRequestParams.EnumParam setupFutureUsage;
 
-      private BacsDebit(Map<String, Object> extraParams, EnumParam setupFutureUsage) {
+      private BacsDebit(
+          Map<String, Object> extraParams, ApiRequestParams.EnumParam setupFutureUsage) {
         this.extraParams = extraParams;
         this.setupFutureUsage = setupFutureUsage;
       }
@@ -6446,11 +6525,12 @@ public class PaymentIntentConfirmParams extends ApiRequestParams {
       public static class Builder {
         private Map<String, Object> extraParams;
 
-        private EnumParam setupFutureUsage;
+        private ApiRequestParams.EnumParam setupFutureUsage;
 
         /** Finalize and obtain parameter instance from this builder. */
-        public BacsDebit build() {
-          return new BacsDebit(this.extraParams, this.setupFutureUsage);
+        public PaymentIntentConfirmParams.PaymentMethodOptions.BacsDebit build() {
+          return new PaymentIntentConfirmParams.PaymentMethodOptions.BacsDebit(
+              this.extraParams, this.setupFutureUsage);
         }
 
         /**
@@ -6501,7 +6581,9 @@ public class PaymentIntentConfirmParams extends ApiRequestParams {
          * publishable key, you may only update the value from {@code on_session} to {@code
          * off_session}.
          */
-        public Builder setSetupFutureUsage(SetupFutureUsage setupFutureUsage) {
+        public Builder setSetupFutureUsage(
+            PaymentIntentConfirmParams.PaymentMethodOptions.BacsDebit.SetupFutureUsage
+                setupFutureUsage) {
           this.setupFutureUsage = setupFutureUsage;
           return this;
         }
@@ -6588,12 +6670,12 @@ public class PaymentIntentConfirmParams extends ApiRequestParams {
        * off_session}.
        */
       @SerializedName("setup_future_usage")
-      EnumParam setupFutureUsage;
+      ApiRequestParams.EnumParam setupFutureUsage;
 
       private Bancontact(
           Map<String, Object> extraParams,
           PreferredLanguage preferredLanguage,
-          EnumParam setupFutureUsage) {
+          ApiRequestParams.EnumParam setupFutureUsage) {
         this.extraParams = extraParams;
         this.preferredLanguage = preferredLanguage;
         this.setupFutureUsage = setupFutureUsage;
@@ -6608,11 +6690,12 @@ public class PaymentIntentConfirmParams extends ApiRequestParams {
 
         private PreferredLanguage preferredLanguage;
 
-        private EnumParam setupFutureUsage;
+        private ApiRequestParams.EnumParam setupFutureUsage;
 
         /** Finalize and obtain parameter instance from this builder. */
-        public Bancontact build() {
-          return new Bancontact(this.extraParams, this.preferredLanguage, this.setupFutureUsage);
+        public PaymentIntentConfirmParams.PaymentMethodOptions.Bancontact build() {
+          return new PaymentIntentConfirmParams.PaymentMethodOptions.Bancontact(
+              this.extraParams, this.preferredLanguage, this.setupFutureUsage);
         }
 
         /**
@@ -6647,7 +6730,9 @@ public class PaymentIntentConfirmParams extends ApiRequestParams {
          * Preferred language of the Bancontact authorization page that the customer is redirected
          * to.
          */
-        public Builder setPreferredLanguage(PreferredLanguage preferredLanguage) {
+        public Builder setPreferredLanguage(
+            PaymentIntentConfirmParams.PaymentMethodOptions.Bancontact.PreferredLanguage
+                preferredLanguage) {
           this.preferredLanguage = preferredLanguage;
           return this;
         }
@@ -6672,7 +6757,9 @@ public class PaymentIntentConfirmParams extends ApiRequestParams {
          * publishable key, you may only update the value from {@code on_session} to {@code
          * off_session}.
          */
-        public Builder setSetupFutureUsage(SetupFutureUsage setupFutureUsage) {
+        public Builder setSetupFutureUsage(
+            PaymentIntentConfirmParams.PaymentMethodOptions.Bancontact.SetupFutureUsage
+                setupFutureUsage) {
           this.setupFutureUsage = setupFutureUsage;
           return this;
         }
@@ -6773,8 +6860,9 @@ public class PaymentIntentConfirmParams extends ApiRequestParams {
         private Map<String, Object> extraParams;
 
         /** Finalize and obtain parameter instance from this builder. */
-        public Blik build() {
-          return new Blik(this.code, this.extraParams);
+        public PaymentIntentConfirmParams.PaymentMethodOptions.Blik build() {
+          return new PaymentIntentConfirmParams.PaymentMethodOptions.Blik(
+              this.code, this.extraParams);
         }
 
         /**
@@ -6855,10 +6943,12 @@ public class PaymentIntentConfirmParams extends ApiRequestParams {
        * off_session}.
        */
       @SerializedName("setup_future_usage")
-      EnumParam setupFutureUsage;
+      ApiRequestParams.EnumParam setupFutureUsage;
 
       private Boleto(
-          Long expiresAfterDays, Map<String, Object> extraParams, EnumParam setupFutureUsage) {
+          Long expiresAfterDays,
+          Map<String, Object> extraParams,
+          ApiRequestParams.EnumParam setupFutureUsage) {
         this.expiresAfterDays = expiresAfterDays;
         this.extraParams = extraParams;
         this.setupFutureUsage = setupFutureUsage;
@@ -6873,11 +6963,12 @@ public class PaymentIntentConfirmParams extends ApiRequestParams {
 
         private Map<String, Object> extraParams;
 
-        private EnumParam setupFutureUsage;
+        private ApiRequestParams.EnumParam setupFutureUsage;
 
         /** Finalize and obtain parameter instance from this builder. */
-        public Boleto build() {
-          return new Boleto(this.expiresAfterDays, this.extraParams, this.setupFutureUsage);
+        public PaymentIntentConfirmParams.PaymentMethodOptions.Boleto build() {
+          return new PaymentIntentConfirmParams.PaymentMethodOptions.Boleto(
+              this.expiresAfterDays, this.extraParams, this.setupFutureUsage);
         }
 
         /**
@@ -6938,7 +7029,9 @@ public class PaymentIntentConfirmParams extends ApiRequestParams {
          * publishable key, you may only update the value from {@code on_session} to {@code
          * off_session}.
          */
-        public Builder setSetupFutureUsage(SetupFutureUsage setupFutureUsage) {
+        public Builder setSetupFutureUsage(
+            PaymentIntentConfirmParams.PaymentMethodOptions.Boleto.SetupFutureUsage
+                setupFutureUsage) {
           this.setupFutureUsage = setupFutureUsage;
           return this;
         }
@@ -7000,7 +7093,7 @@ public class PaymentIntentConfirmParams extends ApiRequestParams {
        * for this parameter will unset the stored value for this payment method type.
        */
       @SerializedName("capture_method")
-      EnumParam captureMethod;
+      ApiRequestParams.EnumParam captureMethod;
 
       /**
        * A single-use {@code cvc_update} Token that represents a card CVC value. When provided, the
@@ -7081,7 +7174,7 @@ public class PaymentIntentConfirmParams extends ApiRequestParams {
        * off_session}.
        */
       @SerializedName("setup_future_usage")
-      EnumParam setupFutureUsage;
+      ApiRequestParams.EnumParam setupFutureUsage;
 
       /**
        * Provides information about a card payment that customers see on their statements.
@@ -7104,7 +7197,7 @@ public class PaymentIntentConfirmParams extends ApiRequestParams {
       Object statementDescriptorSuffixKanji;
 
       private Card(
-          EnumParam captureMethod,
+          ApiRequestParams.EnumParam captureMethod,
           String cvcToken,
           Map<String, Object> extraParams,
           Installments installments,
@@ -7112,7 +7205,7 @@ public class PaymentIntentConfirmParams extends ApiRequestParams {
           Boolean moto,
           Network network,
           RequestThreeDSecure requestThreeDSecure,
-          EnumParam setupFutureUsage,
+          ApiRequestParams.EnumParam setupFutureUsage,
           Object statementDescriptorSuffixKana,
           Object statementDescriptorSuffixKanji) {
         this.captureMethod = captureMethod;
@@ -7133,7 +7226,7 @@ public class PaymentIntentConfirmParams extends ApiRequestParams {
       }
 
       public static class Builder {
-        private EnumParam captureMethod;
+        private ApiRequestParams.EnumParam captureMethod;
 
         private String cvcToken;
 
@@ -7149,15 +7242,15 @@ public class PaymentIntentConfirmParams extends ApiRequestParams {
 
         private RequestThreeDSecure requestThreeDSecure;
 
-        private EnumParam setupFutureUsage;
+        private ApiRequestParams.EnumParam setupFutureUsage;
 
         private Object statementDescriptorSuffixKana;
 
         private Object statementDescriptorSuffixKanji;
 
         /** Finalize and obtain parameter instance from this builder. */
-        public Card build() {
-          return new Card(
+        public PaymentIntentConfirmParams.PaymentMethodOptions.Card build() {
+          return new PaymentIntentConfirmParams.PaymentMethodOptions.Card(
               this.captureMethod,
               this.cvcToken,
               this.extraParams,
@@ -7180,7 +7273,8 @@ public class PaymentIntentConfirmParams extends ApiRequestParams {
          * <p>If {@code capture_method} is already set on the PaymentIntent, providing an empty
          * value for this parameter will unset the stored value for this payment method type.
          */
-        public Builder setCaptureMethod(CaptureMethod captureMethod) {
+        public Builder setCaptureMethod(
+            PaymentIntentConfirmParams.PaymentMethodOptions.Card.CaptureMethod captureMethod) {
           this.captureMethod = captureMethod;
           return this;
         }
@@ -7243,13 +7337,15 @@ public class PaymentIntentConfirmParams extends ApiRequestParams {
          * <p>For more information, see the <a
          * href="https://stripe.com/docs/payments/installments">installments integration guide</a>.
          */
-        public Builder setInstallments(Installments installments) {
+        public Builder setInstallments(
+            PaymentIntentConfirmParams.PaymentMethodOptions.Card.Installments installments) {
           this.installments = installments;
           return this;
         }
 
         /** Configuration options for setting up an eMandate for cards issued in India. */
-        public Builder setMandateOptions(MandateOptions mandateOptions) {
+        public Builder setMandateOptions(
+            PaymentIntentConfirmParams.PaymentMethodOptions.Card.MandateOptions mandateOptions) {
           this.mandateOptions = mandateOptions;
           return this;
         }
@@ -7268,7 +7364,8 @@ public class PaymentIntentConfirmParams extends ApiRequestParams {
          * Selected network to process this PaymentIntent on. Depends on the available networks of
          * the card attached to the PaymentIntent. Can be only set confirm-time.
          */
-        public Builder setNetwork(Network network) {
+        public Builder setNetwork(
+            PaymentIntentConfirmParams.PaymentMethodOptions.Card.Network network) {
           this.network = network;
           return this;
         }
@@ -7284,7 +7381,9 @@ public class PaymentIntentConfirmParams extends ApiRequestParams {
          * Secure</a> for more information on how this configuration interacts with Radar and our
          * SCA Engine.
          */
-        public Builder setRequestThreeDSecure(RequestThreeDSecure requestThreeDSecure) {
+        public Builder setRequestThreeDSecure(
+            PaymentIntentConfirmParams.PaymentMethodOptions.Card.RequestThreeDSecure
+                requestThreeDSecure) {
           this.requestThreeDSecure = requestThreeDSecure;
           return this;
         }
@@ -7309,7 +7408,9 @@ public class PaymentIntentConfirmParams extends ApiRequestParams {
          * publishable key, you may only update the value from {@code on_session} to {@code
          * off_session}.
          */
-        public Builder setSetupFutureUsage(SetupFutureUsage setupFutureUsage) {
+        public Builder setSetupFutureUsage(
+            PaymentIntentConfirmParams.PaymentMethodOptions.Card.SetupFutureUsage
+                setupFutureUsage) {
           this.setupFutureUsage = setupFutureUsage;
           return this;
         }
@@ -7434,8 +7535,9 @@ public class PaymentIntentConfirmParams extends ApiRequestParams {
           private Object plan;
 
           /** Finalize and obtain parameter instance from this builder. */
-          public Installments build() {
-            return new Installments(this.enabled, this.extraParams, this.plan);
+          public PaymentIntentConfirmParams.PaymentMethodOptions.Card.Installments build() {
+            return new PaymentIntentConfirmParams.PaymentMethodOptions.Card.Installments(
+                this.enabled, this.extraParams, this.plan);
           }
 
           /**
@@ -7482,7 +7584,8 @@ public class PaymentIntentConfirmParams extends ApiRequestParams {
            * The selected installment plan to use for this payment attempt. This parameter can only
            * be provided during confirmation.
            */
-          public Builder setPlan(Plan plan) {
+          public Builder setPlan(
+              PaymentIntentConfirmParams.PaymentMethodOptions.Card.Installments.Plan plan) {
             this.plan = plan;
             return this;
           }
@@ -7548,8 +7651,9 @@ public class PaymentIntentConfirmParams extends ApiRequestParams {
             private Type type;
 
             /** Finalize and obtain parameter instance from this builder. */
-            public Plan build() {
-              return new Plan(this.count, this.extraParams, this.interval, this.type);
+            public PaymentIntentConfirmParams.PaymentMethodOptions.Card.Installments.Plan build() {
+              return new PaymentIntentConfirmParams.PaymentMethodOptions.Card.Installments.Plan(
+                  this.count, this.extraParams, this.interval, this.type);
             }
 
             /**
@@ -7595,13 +7699,16 @@ public class PaymentIntentConfirmParams extends ApiRequestParams {
              * For {@code fixed_count} installment plans, this is the interval between installment
              * payments your customer will make to their credit card. One of {@code month}.
              */
-            public Builder setInterval(Interval interval) {
+            public Builder setInterval(
+                PaymentIntentConfirmParams.PaymentMethodOptions.Card.Installments.Plan.Interval
+                    interval) {
               this.interval = interval;
               return this;
             }
 
             /** Type of installment plan, one of {@code fixed_count}. */
-            public Builder setType(Type type) {
+            public Builder setType(
+                PaymentIntentConfirmParams.PaymentMethodOptions.Card.Installments.Plan.Type type) {
               this.type = type;
               return this;
             }
@@ -7700,7 +7807,8 @@ public class PaymentIntentConfirmParams extends ApiRequestParams {
 
         /** Specifies the type of mandates supported. Possible values are {@code india}. */
         @SerializedName("supported_types")
-        List<SupportedType> supportedTypes;
+        List<PaymentIntentConfirmParams.PaymentMethodOptions.Card.MandateOptions.SupportedType>
+            supportedTypes;
 
         private MandateOptions(
             Long amount,
@@ -7712,7 +7820,8 @@ public class PaymentIntentConfirmParams extends ApiRequestParams {
             Long intervalCount,
             String reference,
             Long startDate,
-            List<SupportedType> supportedTypes) {
+            List<PaymentIntentConfirmParams.PaymentMethodOptions.Card.MandateOptions.SupportedType>
+                supportedTypes) {
           this.amount = amount;
           this.amountType = amountType;
           this.description = description;
@@ -7748,11 +7857,13 @@ public class PaymentIntentConfirmParams extends ApiRequestParams {
 
           private Long startDate;
 
-          private List<SupportedType> supportedTypes;
+          private List<
+                  PaymentIntentConfirmParams.PaymentMethodOptions.Card.MandateOptions.SupportedType>
+              supportedTypes;
 
           /** Finalize and obtain parameter instance from this builder. */
-          public MandateOptions build() {
-            return new MandateOptions(
+          public PaymentIntentConfirmParams.PaymentMethodOptions.Card.MandateOptions build() {
+            return new PaymentIntentConfirmParams.PaymentMethodOptions.Card.MandateOptions(
                 this.amount,
                 this.amountType,
                 this.description,
@@ -7776,7 +7887,9 @@ public class PaymentIntentConfirmParams extends ApiRequestParams {
            * refers to the exact amount to be charged in future payments. If {@code maximum}, the
            * amount charged can be up to the value passed for the {@code amount} param.
            */
-          public Builder setAmountType(AmountType amountType) {
+          public Builder setAmountType(
+              PaymentIntentConfirmParams.PaymentMethodOptions.Card.MandateOptions.AmountType
+                  amountType) {
             this.amountType = amountType;
             return this;
           }
@@ -7833,7 +7946,9 @@ public class PaymentIntentConfirmParams extends ApiRequestParams {
            * Specifies payment frequency. One of {@code day}, {@code week}, {@code month}, {@code
            * year}, or {@code sporadic}.
            */
-          public Builder setInterval(Interval interval) {
+          public Builder setInterval(
+              PaymentIntentConfirmParams.PaymentMethodOptions.Card.MandateOptions.Interval
+                  interval) {
             this.interval = interval;
             return this;
           }
@@ -7871,7 +7986,9 @@ public class PaymentIntentConfirmParams extends ApiRequestParams {
            * PaymentIntentConfirmParams.PaymentMethodOptions.Card.MandateOptions#supportedTypes} for
            * the field documentation.
            */
-          public Builder addSupportedType(SupportedType element) {
+          public Builder addSupportedType(
+              PaymentIntentConfirmParams.PaymentMethodOptions.Card.MandateOptions.SupportedType
+                  element) {
             if (this.supportedTypes == null) {
               this.supportedTypes = new ArrayList<>();
             }
@@ -7886,7 +8003,11 @@ public class PaymentIntentConfirmParams extends ApiRequestParams {
            * PaymentIntentConfirmParams.PaymentMethodOptions.Card.MandateOptions#supportedTypes} for
            * the field documentation.
            */
-          public Builder addAllSupportedType(List<SupportedType> elements) {
+          public Builder addAllSupportedType(
+              List<
+                      PaymentIntentConfirmParams.PaymentMethodOptions.Card.MandateOptions
+                          .SupportedType>
+                  elements) {
             if (this.supportedTypes == null) {
               this.supportedTypes = new ArrayList<>();
             }
@@ -8083,8 +8204,8 @@ public class PaymentIntentConfirmParams extends ApiRequestParams {
         private Boolean requestIncrementalAuthorizationSupport;
 
         /** Finalize and obtain parameter instance from this builder. */
-        public CardPresent build() {
-          return new CardPresent(
+        public PaymentIntentConfirmParams.PaymentMethodOptions.CardPresent build() {
+          return new PaymentIntentConfirmParams.PaymentMethodOptions.CardPresent(
               this.extraParams,
               this.requestExtendedAuthorization,
               this.requestIncrementalAuthorizationSupport);
@@ -8216,8 +8337,8 @@ public class PaymentIntentConfirmParams extends ApiRequestParams {
         private SetupFutureUsage setupFutureUsage;
 
         /** Finalize and obtain parameter instance from this builder. */
-        public CustomerBalance build() {
-          return new CustomerBalance(
+        public PaymentIntentConfirmParams.PaymentMethodOptions.CustomerBalance build() {
+          return new PaymentIntentConfirmParams.PaymentMethodOptions.CustomerBalance(
               this.bankTransfer, this.extraParams, this.fundingType, this.setupFutureUsage);
         }
 
@@ -8225,7 +8346,9 @@ public class PaymentIntentConfirmParams extends ApiRequestParams {
          * Configuration for the bank transfer funding type, if the {@code funding_type} is set to
          * {@code bank_transfer}.
          */
-        public Builder setBankTransfer(BankTransfer bankTransfer) {
+        public Builder setBankTransfer(
+            PaymentIntentConfirmParams.PaymentMethodOptions.CustomerBalance.BankTransfer
+                bankTransfer) {
           this.bankTransfer = bankTransfer;
           return this;
         }
@@ -8264,7 +8387,9 @@ public class PaymentIntentConfirmParams extends ApiRequestParams {
          * The funding method type to be used when there are not enough funds in the customer
          * balance. Permitted values include: {@code bank_transfer}.
          */
-        public Builder setFundingType(FundingType fundingType) {
+        public Builder setFundingType(
+            PaymentIntentConfirmParams.PaymentMethodOptions.CustomerBalance.FundingType
+                fundingType) {
           this.fundingType = fundingType;
           return this;
         }
@@ -8289,7 +8414,9 @@ public class PaymentIntentConfirmParams extends ApiRequestParams {
          * publishable key, you may only update the value from {@code on_session} to {@code
          * off_session}.
          */
-        public Builder setSetupFutureUsage(SetupFutureUsage setupFutureUsage) {
+        public Builder setSetupFutureUsage(
+            PaymentIntentConfirmParams.PaymentMethodOptions.CustomerBalance.SetupFutureUsage
+                setupFutureUsage) {
           this.setupFutureUsage = setupFutureUsage;
           return this;
         }
@@ -8318,7 +8445,10 @@ public class PaymentIntentConfirmParams extends ApiRequestParams {
          * spei}.
          */
         @SerializedName("requested_address_types")
-        List<RequestedAddressType> requestedAddressTypes;
+        List<
+                PaymentIntentConfirmParams.PaymentMethodOptions.CustomerBalance.BankTransfer
+                    .RequestedAddressType>
+            requestedAddressTypes;
 
         /**
          * The list of bank transfer types that this PaymentIntent is allowed to use for funding
@@ -8331,7 +8461,10 @@ public class PaymentIntentConfirmParams extends ApiRequestParams {
         private BankTransfer(
             EuBankTransfer euBankTransfer,
             Map<String, Object> extraParams,
-            List<RequestedAddressType> requestedAddressTypes,
+            List<
+                    PaymentIntentConfirmParams.PaymentMethodOptions.CustomerBalance.BankTransfer
+                        .RequestedAddressType>
+                requestedAddressTypes,
             Type type) {
           this.euBankTransfer = euBankTransfer;
           this.extraParams = extraParams;
@@ -8348,17 +8481,24 @@ public class PaymentIntentConfirmParams extends ApiRequestParams {
 
           private Map<String, Object> extraParams;
 
-          private List<RequestedAddressType> requestedAddressTypes;
+          private List<
+                  PaymentIntentConfirmParams.PaymentMethodOptions.CustomerBalance.BankTransfer
+                      .RequestedAddressType>
+              requestedAddressTypes;
 
           private Type type;
 
           /** Finalize and obtain parameter instance from this builder. */
-          public BankTransfer build() {
-            return new BankTransfer(
+          public PaymentIntentConfirmParams.PaymentMethodOptions.CustomerBalance.BankTransfer
+              build() {
+            return new PaymentIntentConfirmParams.PaymentMethodOptions.CustomerBalance.BankTransfer(
                 this.euBankTransfer, this.extraParams, this.requestedAddressTypes, this.type);
           }
 
-          public Builder setEuBankTransfer(EuBankTransfer euBankTransfer) {
+          public Builder setEuBankTransfer(
+              PaymentIntentConfirmParams.PaymentMethodOptions.CustomerBalance.BankTransfer
+                      .EuBankTransfer
+                  euBankTransfer) {
             this.euBankTransfer = euBankTransfer;
             return this;
           }
@@ -8400,7 +8540,10 @@ public class PaymentIntentConfirmParams extends ApiRequestParams {
            * PaymentIntentConfirmParams.PaymentMethodOptions.CustomerBalance.BankTransfer#requestedAddressTypes}
            * for the field documentation.
            */
-          public Builder addRequestedAddressType(RequestedAddressType element) {
+          public Builder addRequestedAddressType(
+              PaymentIntentConfirmParams.PaymentMethodOptions.CustomerBalance.BankTransfer
+                      .RequestedAddressType
+                  element) {
             if (this.requestedAddressTypes == null) {
               this.requestedAddressTypes = new ArrayList<>();
             }
@@ -8415,7 +8558,11 @@ public class PaymentIntentConfirmParams extends ApiRequestParams {
            * PaymentIntentConfirmParams.PaymentMethodOptions.CustomerBalance.BankTransfer#requestedAddressTypes}
            * for the field documentation.
            */
-          public Builder addAllRequestedAddressType(List<RequestedAddressType> elements) {
+          public Builder addAllRequestedAddressType(
+              List<
+                      PaymentIntentConfirmParams.PaymentMethodOptions.CustomerBalance.BankTransfer
+                          .RequestedAddressType>
+                  elements) {
             if (this.requestedAddressTypes == null) {
               this.requestedAddressTypes = new ArrayList<>();
             }
@@ -8428,7 +8575,9 @@ public class PaymentIntentConfirmParams extends ApiRequestParams {
            * Permitted values include: {@code eu_bank_transfer}, {@code gb_bank_transfer}, {@code
            * jp_bank_transfer}, or {@code mx_bank_transfer}.
            */
-          public Builder setType(Type type) {
+          public Builder setType(
+              PaymentIntentConfirmParams.PaymentMethodOptions.CustomerBalance.BankTransfer.Type
+                  type) {
             this.type = type;
             return this;
           }
@@ -8468,8 +8617,11 @@ public class PaymentIntentConfirmParams extends ApiRequestParams {
             private Map<String, Object> extraParams;
 
             /** Finalize and obtain parameter instance from this builder. */
-            public EuBankTransfer build() {
-              return new EuBankTransfer(this.country, this.extraParams);
+            public PaymentIntentConfirmParams.PaymentMethodOptions.CustomerBalance.BankTransfer
+                    .EuBankTransfer
+                build() {
+              return new PaymentIntentConfirmParams.PaymentMethodOptions.CustomerBalance
+                  .BankTransfer.EuBankTransfer(this.country, this.extraParams);
             }
 
             /**
@@ -8632,8 +8784,9 @@ public class PaymentIntentConfirmParams extends ApiRequestParams {
         private SetupFutureUsage setupFutureUsage;
 
         /** Finalize and obtain parameter instance from this builder. */
-        public Eps build() {
-          return new Eps(this.extraParams, this.setupFutureUsage);
+        public PaymentIntentConfirmParams.PaymentMethodOptions.Eps build() {
+          return new PaymentIntentConfirmParams.PaymentMethodOptions.Eps(
+              this.extraParams, this.setupFutureUsage);
         }
 
         /**
@@ -8684,7 +8837,8 @@ public class PaymentIntentConfirmParams extends ApiRequestParams {
          * publishable key, you may only update the value from {@code on_session} to {@code
          * off_session}.
          */
-        public Builder setSetupFutureUsage(SetupFutureUsage setupFutureUsage) {
+        public Builder setSetupFutureUsage(
+            PaymentIntentConfirmParams.PaymentMethodOptions.Eps.SetupFutureUsage setupFutureUsage) {
           this.setupFutureUsage = setupFutureUsage;
           return this;
         }
@@ -8751,8 +8905,9 @@ public class PaymentIntentConfirmParams extends ApiRequestParams {
         private SetupFutureUsage setupFutureUsage;
 
         /** Finalize and obtain parameter instance from this builder. */
-        public Fpx build() {
-          return new Fpx(this.extraParams, this.setupFutureUsage);
+        public PaymentIntentConfirmParams.PaymentMethodOptions.Fpx build() {
+          return new PaymentIntentConfirmParams.PaymentMethodOptions.Fpx(
+              this.extraParams, this.setupFutureUsage);
         }
 
         /**
@@ -8803,7 +8958,8 @@ public class PaymentIntentConfirmParams extends ApiRequestParams {
          * publishable key, you may only update the value from {@code on_session} to {@code
          * off_session}.
          */
-        public Builder setSetupFutureUsage(SetupFutureUsage setupFutureUsage) {
+        public Builder setSetupFutureUsage(
+            PaymentIntentConfirmParams.PaymentMethodOptions.Fpx.SetupFutureUsage setupFutureUsage) {
           this.setupFutureUsage = setupFutureUsage;
           return this;
         }
@@ -8870,8 +9026,9 @@ public class PaymentIntentConfirmParams extends ApiRequestParams {
         private SetupFutureUsage setupFutureUsage;
 
         /** Finalize and obtain parameter instance from this builder. */
-        public Giropay build() {
-          return new Giropay(this.extraParams, this.setupFutureUsage);
+        public PaymentIntentConfirmParams.PaymentMethodOptions.Giropay build() {
+          return new PaymentIntentConfirmParams.PaymentMethodOptions.Giropay(
+              this.extraParams, this.setupFutureUsage);
         }
 
         /**
@@ -8922,7 +9079,9 @@ public class PaymentIntentConfirmParams extends ApiRequestParams {
          * publishable key, you may only update the value from {@code on_session} to {@code
          * off_session}.
          */
-        public Builder setSetupFutureUsage(SetupFutureUsage setupFutureUsage) {
+        public Builder setSetupFutureUsage(
+            PaymentIntentConfirmParams.PaymentMethodOptions.Giropay.SetupFutureUsage
+                setupFutureUsage) {
           this.setupFutureUsage = setupFutureUsage;
           return this;
         }
@@ -8989,8 +9148,9 @@ public class PaymentIntentConfirmParams extends ApiRequestParams {
         private SetupFutureUsage setupFutureUsage;
 
         /** Finalize and obtain parameter instance from this builder. */
-        public Grabpay build() {
-          return new Grabpay(this.extraParams, this.setupFutureUsage);
+        public PaymentIntentConfirmParams.PaymentMethodOptions.Grabpay build() {
+          return new PaymentIntentConfirmParams.PaymentMethodOptions.Grabpay(
+              this.extraParams, this.setupFutureUsage);
         }
 
         /**
@@ -9041,7 +9201,9 @@ public class PaymentIntentConfirmParams extends ApiRequestParams {
          * publishable key, you may only update the value from {@code on_session} to {@code
          * off_session}.
          */
-        public Builder setSetupFutureUsage(SetupFutureUsage setupFutureUsage) {
+        public Builder setSetupFutureUsage(
+            PaymentIntentConfirmParams.PaymentMethodOptions.Grabpay.SetupFutureUsage
+                setupFutureUsage) {
           this.setupFutureUsage = setupFutureUsage;
           return this;
         }
@@ -9091,9 +9253,9 @@ public class PaymentIntentConfirmParams extends ApiRequestParams {
        * off_session}.
        */
       @SerializedName("setup_future_usage")
-      EnumParam setupFutureUsage;
+      ApiRequestParams.EnumParam setupFutureUsage;
 
-      private Ideal(Map<String, Object> extraParams, EnumParam setupFutureUsage) {
+      private Ideal(Map<String, Object> extraParams, ApiRequestParams.EnumParam setupFutureUsage) {
         this.extraParams = extraParams;
         this.setupFutureUsage = setupFutureUsage;
       }
@@ -9105,11 +9267,12 @@ public class PaymentIntentConfirmParams extends ApiRequestParams {
       public static class Builder {
         private Map<String, Object> extraParams;
 
-        private EnumParam setupFutureUsage;
+        private ApiRequestParams.EnumParam setupFutureUsage;
 
         /** Finalize and obtain parameter instance from this builder. */
-        public Ideal build() {
-          return new Ideal(this.extraParams, this.setupFutureUsage);
+        public PaymentIntentConfirmParams.PaymentMethodOptions.Ideal build() {
+          return new PaymentIntentConfirmParams.PaymentMethodOptions.Ideal(
+              this.extraParams, this.setupFutureUsage);
         }
 
         /**
@@ -9160,7 +9323,9 @@ public class PaymentIntentConfirmParams extends ApiRequestParams {
          * publishable key, you may only update the value from {@code on_session} to {@code
          * off_session}.
          */
-        public Builder setSetupFutureUsage(SetupFutureUsage setupFutureUsage) {
+        public Builder setSetupFutureUsage(
+            PaymentIntentConfirmParams.PaymentMethodOptions.Ideal.SetupFutureUsage
+                setupFutureUsage) {
           this.setupFutureUsage = setupFutureUsage;
           return this;
         }
@@ -9230,8 +9395,9 @@ public class PaymentIntentConfirmParams extends ApiRequestParams {
         private Map<String, Object> extraParams;
 
         /** Finalize and obtain parameter instance from this builder. */
-        public InteracPresent build() {
-          return new InteracPresent(this.extraParams);
+        public PaymentIntentConfirmParams.PaymentMethodOptions.InteracPresent build() {
+          return new PaymentIntentConfirmParams.PaymentMethodOptions.InteracPresent(
+              this.extraParams);
         }
 
         /**
@@ -9278,7 +9444,7 @@ public class PaymentIntentConfirmParams extends ApiRequestParams {
        * for this parameter will unset the stored value for this payment method type.
        */
       @SerializedName("capture_method")
-      EnumParam captureMethod;
+      ApiRequestParams.EnumParam captureMethod;
 
       /**
        * Map of extra parameters for custom features not available in this client library. The
@@ -9316,7 +9482,7 @@ public class PaymentIntentConfirmParams extends ApiRequestParams {
       SetupFutureUsage setupFutureUsage;
 
       private Klarna(
-          EnumParam captureMethod,
+          ApiRequestParams.EnumParam captureMethod,
           Map<String, Object> extraParams,
           PreferredLocale preferredLocale,
           SetupFutureUsage setupFutureUsage) {
@@ -9331,7 +9497,7 @@ public class PaymentIntentConfirmParams extends ApiRequestParams {
       }
 
       public static class Builder {
-        private EnumParam captureMethod;
+        private ApiRequestParams.EnumParam captureMethod;
 
         private Map<String, Object> extraParams;
 
@@ -9340,8 +9506,8 @@ public class PaymentIntentConfirmParams extends ApiRequestParams {
         private SetupFutureUsage setupFutureUsage;
 
         /** Finalize and obtain parameter instance from this builder. */
-        public Klarna build() {
-          return new Klarna(
+        public PaymentIntentConfirmParams.PaymentMethodOptions.Klarna build() {
+          return new PaymentIntentConfirmParams.PaymentMethodOptions.Klarna(
               this.captureMethod, this.extraParams, this.preferredLocale, this.setupFutureUsage);
         }
 
@@ -9354,7 +9520,8 @@ public class PaymentIntentConfirmParams extends ApiRequestParams {
          * <p>If {@code capture_method} is already set on the PaymentIntent, providing an empty
          * value for this parameter will unset the stored value for this payment method type.
          */
-        public Builder setCaptureMethod(CaptureMethod captureMethod) {
+        public Builder setCaptureMethod(
+            PaymentIntentConfirmParams.PaymentMethodOptions.Klarna.CaptureMethod captureMethod) {
           this.captureMethod = captureMethod;
           return this;
         }
@@ -9404,7 +9571,9 @@ public class PaymentIntentConfirmParams extends ApiRequestParams {
         /**
          * Preferred language of the Klarna authorization page that the customer is redirected to.
          */
-        public Builder setPreferredLocale(PreferredLocale preferredLocale) {
+        public Builder setPreferredLocale(
+            PaymentIntentConfirmParams.PaymentMethodOptions.Klarna.PreferredLocale
+                preferredLocale) {
           this.preferredLocale = preferredLocale;
           return this;
         }
@@ -9429,7 +9598,9 @@ public class PaymentIntentConfirmParams extends ApiRequestParams {
          * publishable key, you may only update the value from {@code on_session} to {@code
          * off_session}.
          */
-        public Builder setSetupFutureUsage(SetupFutureUsage setupFutureUsage) {
+        public Builder setSetupFutureUsage(
+            PaymentIntentConfirmParams.PaymentMethodOptions.Klarna.SetupFutureUsage
+                setupFutureUsage) {
           this.setupFutureUsage = setupFutureUsage;
           return this;
         }
@@ -9686,8 +9857,8 @@ public class PaymentIntentConfirmParams extends ApiRequestParams {
         private SetupFutureUsage setupFutureUsage;
 
         /** Finalize and obtain parameter instance from this builder. */
-        public Konbini build() {
-          return new Konbini(
+        public PaymentIntentConfirmParams.PaymentMethodOptions.Konbini build() {
+          return new PaymentIntentConfirmParams.PaymentMethodOptions.Konbini(
               this.confirmationNumber,
               this.expiresAfterDays,
               this.expiresAt,
@@ -9803,7 +9974,9 @@ public class PaymentIntentConfirmParams extends ApiRequestParams {
          * publishable key, you may only update the value from {@code on_session} to {@code
          * off_session}.
          */
-        public Builder setSetupFutureUsage(SetupFutureUsage setupFutureUsage) {
+        public Builder setSetupFutureUsage(
+            PaymentIntentConfirmParams.PaymentMethodOptions.Konbini.SetupFutureUsage
+                setupFutureUsage) {
           this.setupFutureUsage = setupFutureUsage;
           return this;
         }
@@ -9834,7 +10007,7 @@ public class PaymentIntentConfirmParams extends ApiRequestParams {
        * for this parameter will unset the stored value for this payment method type.
        */
       @SerializedName("capture_method")
-      EnumParam captureMethod;
+      ApiRequestParams.EnumParam captureMethod;
 
       /**
        * Map of extra parameters for custom features not available in this client library. The
@@ -9869,13 +10042,13 @@ public class PaymentIntentConfirmParams extends ApiRequestParams {
        * off_session}.
        */
       @SerializedName("setup_future_usage")
-      EnumParam setupFutureUsage;
+      ApiRequestParams.EnumParam setupFutureUsage;
 
       private Link(
-          EnumParam captureMethod,
+          ApiRequestParams.EnumParam captureMethod,
           Map<String, Object> extraParams,
           String persistentToken,
-          EnumParam setupFutureUsage) {
+          ApiRequestParams.EnumParam setupFutureUsage) {
         this.captureMethod = captureMethod;
         this.extraParams = extraParams;
         this.persistentToken = persistentToken;
@@ -9887,17 +10060,17 @@ public class PaymentIntentConfirmParams extends ApiRequestParams {
       }
 
       public static class Builder {
-        private EnumParam captureMethod;
+        private ApiRequestParams.EnumParam captureMethod;
 
         private Map<String, Object> extraParams;
 
         private String persistentToken;
 
-        private EnumParam setupFutureUsage;
+        private ApiRequestParams.EnumParam setupFutureUsage;
 
         /** Finalize and obtain parameter instance from this builder. */
-        public Link build() {
-          return new Link(
+        public PaymentIntentConfirmParams.PaymentMethodOptions.Link build() {
+          return new PaymentIntentConfirmParams.PaymentMethodOptions.Link(
               this.captureMethod, this.extraParams, this.persistentToken, this.setupFutureUsage);
         }
 
@@ -9910,7 +10083,8 @@ public class PaymentIntentConfirmParams extends ApiRequestParams {
          * <p>If {@code capture_method} is already set on the PaymentIntent, providing an empty
          * value for this parameter will unset the stored value for this payment method type.
          */
-        public Builder setCaptureMethod(CaptureMethod captureMethod) {
+        public Builder setCaptureMethod(
+            PaymentIntentConfirmParams.PaymentMethodOptions.Link.CaptureMethod captureMethod) {
           this.captureMethod = captureMethod;
           return this;
         }
@@ -9983,7 +10157,9 @@ public class PaymentIntentConfirmParams extends ApiRequestParams {
          * publishable key, you may only update the value from {@code on_session} to {@code
          * off_session}.
          */
-        public Builder setSetupFutureUsage(SetupFutureUsage setupFutureUsage) {
+        public Builder setSetupFutureUsage(
+            PaymentIntentConfirmParams.PaymentMethodOptions.Link.SetupFutureUsage
+                setupFutureUsage) {
           this.setupFutureUsage = setupFutureUsage;
           return this;
         }
@@ -10104,8 +10280,9 @@ public class PaymentIntentConfirmParams extends ApiRequestParams {
         private SetupFutureUsage setupFutureUsage;
 
         /** Finalize and obtain parameter instance from this builder. */
-        public Oxxo build() {
-          return new Oxxo(this.expiresAfterDays, this.extraParams, this.setupFutureUsage);
+        public PaymentIntentConfirmParams.PaymentMethodOptions.Oxxo build() {
+          return new PaymentIntentConfirmParams.PaymentMethodOptions.Oxxo(
+              this.expiresAfterDays, this.extraParams, this.setupFutureUsage);
         }
 
         /**
@@ -10166,7 +10343,9 @@ public class PaymentIntentConfirmParams extends ApiRequestParams {
          * publishable key, you may only update the value from {@code on_session} to {@code
          * off_session}.
          */
-        public Builder setSetupFutureUsage(SetupFutureUsage setupFutureUsage) {
+        public Builder setSetupFutureUsage(
+            PaymentIntentConfirmParams.PaymentMethodOptions.Oxxo.SetupFutureUsage
+                setupFutureUsage) {
           this.setupFutureUsage = setupFutureUsage;
           return this;
         }
@@ -10243,8 +10422,9 @@ public class PaymentIntentConfirmParams extends ApiRequestParams {
         private Boolean tosShownAndAccepted;
 
         /** Finalize and obtain parameter instance from this builder. */
-        public P24 build() {
-          return new P24(this.extraParams, this.setupFutureUsage, this.tosShownAndAccepted);
+        public PaymentIntentConfirmParams.PaymentMethodOptions.P24 build() {
+          return new PaymentIntentConfirmParams.PaymentMethodOptions.P24(
+              this.extraParams, this.setupFutureUsage, this.tosShownAndAccepted);
         }
 
         /**
@@ -10295,7 +10475,8 @@ public class PaymentIntentConfirmParams extends ApiRequestParams {
          * publishable key, you may only update the value from {@code on_session} to {@code
          * off_session}.
          */
-        public Builder setSetupFutureUsage(SetupFutureUsage setupFutureUsage) {
+        public Builder setSetupFutureUsage(
+            PaymentIntentConfirmParams.PaymentMethodOptions.P24.SetupFutureUsage setupFutureUsage) {
           this.setupFutureUsage = setupFutureUsage;
           return this;
         }
@@ -10368,8 +10549,9 @@ public class PaymentIntentConfirmParams extends ApiRequestParams {
         private SetupFutureUsage setupFutureUsage;
 
         /** Finalize and obtain parameter instance from this builder. */
-        public Paynow build() {
-          return new Paynow(this.extraParams, this.setupFutureUsage);
+        public PaymentIntentConfirmParams.PaymentMethodOptions.Paynow build() {
+          return new PaymentIntentConfirmParams.PaymentMethodOptions.Paynow(
+              this.extraParams, this.setupFutureUsage);
         }
 
         /**
@@ -10420,7 +10602,9 @@ public class PaymentIntentConfirmParams extends ApiRequestParams {
          * publishable key, you may only update the value from {@code on_session} to {@code
          * off_session}.
          */
-        public Builder setSetupFutureUsage(SetupFutureUsage setupFutureUsage) {
+        public Builder setSetupFutureUsage(
+            PaymentIntentConfirmParams.PaymentMethodOptions.Paynow.SetupFutureUsage
+                setupFutureUsage) {
           this.setupFutureUsage = setupFutureUsage;
           return this;
         }
@@ -10482,8 +10666,9 @@ public class PaymentIntentConfirmParams extends ApiRequestParams {
         private Map<String, Object> extraParams;
 
         /** Finalize and obtain parameter instance from this builder. */
-        public Pix build() {
-          return new Pix(this.expiresAfterSeconds, this.expiresAt, this.extraParams);
+        public PaymentIntentConfirmParams.PaymentMethodOptions.Pix build() {
+          return new PaymentIntentConfirmParams.PaymentMethodOptions.Pix(
+              this.expiresAfterSeconds, this.expiresAt, this.extraParams);
         }
 
         /**
@@ -10582,8 +10767,9 @@ public class PaymentIntentConfirmParams extends ApiRequestParams {
         private SetupFutureUsage setupFutureUsage;
 
         /** Finalize and obtain parameter instance from this builder. */
-        public Promptpay build() {
-          return new Promptpay(this.extraParams, this.setupFutureUsage);
+        public PaymentIntentConfirmParams.PaymentMethodOptions.Promptpay build() {
+          return new PaymentIntentConfirmParams.PaymentMethodOptions.Promptpay(
+              this.extraParams, this.setupFutureUsage);
         }
 
         /**
@@ -10634,7 +10820,9 @@ public class PaymentIntentConfirmParams extends ApiRequestParams {
          * publishable key, you may only update the value from {@code on_session} to {@code
          * off_session}.
          */
-        public Builder setSetupFutureUsage(SetupFutureUsage setupFutureUsage) {
+        public Builder setSetupFutureUsage(
+            PaymentIntentConfirmParams.PaymentMethodOptions.Promptpay.SetupFutureUsage
+                setupFutureUsage) {
           this.setupFutureUsage = setupFutureUsage;
           return this;
         }
@@ -10688,12 +10876,12 @@ public class PaymentIntentConfirmParams extends ApiRequestParams {
        * off_session}.
        */
       @SerializedName("setup_future_usage")
-      EnumParam setupFutureUsage;
+      ApiRequestParams.EnumParam setupFutureUsage;
 
       private SepaDebit(
           Map<String, Object> extraParams,
           MandateOptions mandateOptions,
-          EnumParam setupFutureUsage) {
+          ApiRequestParams.EnumParam setupFutureUsage) {
         this.extraParams = extraParams;
         this.mandateOptions = mandateOptions;
         this.setupFutureUsage = setupFutureUsage;
@@ -10708,11 +10896,12 @@ public class PaymentIntentConfirmParams extends ApiRequestParams {
 
         private MandateOptions mandateOptions;
 
-        private EnumParam setupFutureUsage;
+        private ApiRequestParams.EnumParam setupFutureUsage;
 
         /** Finalize and obtain parameter instance from this builder. */
-        public SepaDebit build() {
-          return new SepaDebit(this.extraParams, this.mandateOptions, this.setupFutureUsage);
+        public PaymentIntentConfirmParams.PaymentMethodOptions.SepaDebit build() {
+          return new PaymentIntentConfirmParams.PaymentMethodOptions.SepaDebit(
+              this.extraParams, this.mandateOptions, this.setupFutureUsage);
         }
 
         /**
@@ -10744,7 +10933,9 @@ public class PaymentIntentConfirmParams extends ApiRequestParams {
         }
 
         /** Additional fields for Mandate creation. */
-        public Builder setMandateOptions(MandateOptions mandateOptions) {
+        public Builder setMandateOptions(
+            PaymentIntentConfirmParams.PaymentMethodOptions.SepaDebit.MandateOptions
+                mandateOptions) {
           this.mandateOptions = mandateOptions;
           return this;
         }
@@ -10769,7 +10960,9 @@ public class PaymentIntentConfirmParams extends ApiRequestParams {
          * publishable key, you may only update the value from {@code on_session} to {@code
          * off_session}.
          */
-        public Builder setSetupFutureUsage(SetupFutureUsage setupFutureUsage) {
+        public Builder setSetupFutureUsage(
+            PaymentIntentConfirmParams.PaymentMethodOptions.SepaDebit.SetupFutureUsage
+                setupFutureUsage) {
           this.setupFutureUsage = setupFutureUsage;
           return this;
         }
@@ -10824,8 +11017,9 @@ public class PaymentIntentConfirmParams extends ApiRequestParams {
           private Map<String, Object> extraParams;
 
           /** Finalize and obtain parameter instance from this builder. */
-          public MandateOptions build() {
-            return new MandateOptions(this.extraParams);
+          public PaymentIntentConfirmParams.PaymentMethodOptions.SepaDebit.MandateOptions build() {
+            return new PaymentIntentConfirmParams.PaymentMethodOptions.SepaDebit.MandateOptions(
+                this.extraParams);
           }
 
           /**
@@ -10892,7 +11086,7 @@ public class PaymentIntentConfirmParams extends ApiRequestParams {
 
       /** Language shown to the payer on redirect. */
       @SerializedName("preferred_language")
-      EnumParam preferredLanguage;
+      ApiRequestParams.EnumParam preferredLanguage;
 
       /**
        * Indicates that you intend to make future payments with this PaymentIntent's payment method.
@@ -10914,12 +11108,12 @@ public class PaymentIntentConfirmParams extends ApiRequestParams {
        * off_session}.
        */
       @SerializedName("setup_future_usage")
-      EnumParam setupFutureUsage;
+      ApiRequestParams.EnumParam setupFutureUsage;
 
       private Sofort(
           Map<String, Object> extraParams,
-          EnumParam preferredLanguage,
-          EnumParam setupFutureUsage) {
+          ApiRequestParams.EnumParam preferredLanguage,
+          ApiRequestParams.EnumParam setupFutureUsage) {
         this.extraParams = extraParams;
         this.preferredLanguage = preferredLanguage;
         this.setupFutureUsage = setupFutureUsage;
@@ -10932,13 +11126,14 @@ public class PaymentIntentConfirmParams extends ApiRequestParams {
       public static class Builder {
         private Map<String, Object> extraParams;
 
-        private EnumParam preferredLanguage;
+        private ApiRequestParams.EnumParam preferredLanguage;
 
-        private EnumParam setupFutureUsage;
+        private ApiRequestParams.EnumParam setupFutureUsage;
 
         /** Finalize and obtain parameter instance from this builder. */
-        public Sofort build() {
-          return new Sofort(this.extraParams, this.preferredLanguage, this.setupFutureUsage);
+        public PaymentIntentConfirmParams.PaymentMethodOptions.Sofort build() {
+          return new PaymentIntentConfirmParams.PaymentMethodOptions.Sofort(
+              this.extraParams, this.preferredLanguage, this.setupFutureUsage);
         }
 
         /**
@@ -10970,7 +11165,9 @@ public class PaymentIntentConfirmParams extends ApiRequestParams {
         }
 
         /** Language shown to the payer on redirect. */
-        public Builder setPreferredLanguage(PreferredLanguage preferredLanguage) {
+        public Builder setPreferredLanguage(
+            PaymentIntentConfirmParams.PaymentMethodOptions.Sofort.PreferredLanguage
+                preferredLanguage) {
           this.preferredLanguage = preferredLanguage;
           return this;
         }
@@ -11001,7 +11198,9 @@ public class PaymentIntentConfirmParams extends ApiRequestParams {
          * publishable key, you may only update the value from {@code on_session} to {@code
          * off_session}.
          */
-        public Builder setSetupFutureUsage(SetupFutureUsage setupFutureUsage) {
+        public Builder setSetupFutureUsage(
+            PaymentIntentConfirmParams.PaymentMethodOptions.Sofort.SetupFutureUsage
+                setupFutureUsage) {
           this.setupFutureUsage = setupFutureUsage;
           return this;
         }
@@ -11117,7 +11316,7 @@ public class PaymentIntentConfirmParams extends ApiRequestParams {
        * off_session}.
        */
       @SerializedName("setup_future_usage")
-      EnumParam setupFutureUsage;
+      ApiRequestParams.EnumParam setupFutureUsage;
 
       /** Verification method for the intent. */
       @SerializedName("verification_method")
@@ -11127,7 +11326,7 @@ public class PaymentIntentConfirmParams extends ApiRequestParams {
           Map<String, Object> extraParams,
           FinancialConnections financialConnections,
           Networks networks,
-          EnumParam setupFutureUsage,
+          ApiRequestParams.EnumParam setupFutureUsage,
           VerificationMethod verificationMethod) {
         this.extraParams = extraParams;
         this.financialConnections = financialConnections;
@@ -11147,13 +11346,13 @@ public class PaymentIntentConfirmParams extends ApiRequestParams {
 
         private Networks networks;
 
-        private EnumParam setupFutureUsage;
+        private ApiRequestParams.EnumParam setupFutureUsage;
 
         private VerificationMethod verificationMethod;
 
         /** Finalize and obtain parameter instance from this builder. */
-        public UsBankAccount build() {
-          return new UsBankAccount(
+        public PaymentIntentConfirmParams.PaymentMethodOptions.UsBankAccount build() {
+          return new PaymentIntentConfirmParams.PaymentMethodOptions.UsBankAccount(
               this.extraParams,
               this.financialConnections,
               this.networks,
@@ -11192,13 +11391,16 @@ public class PaymentIntentConfirmParams extends ApiRequestParams {
         }
 
         /** Additional fields for Financial Connections Session creation. */
-        public Builder setFinancialConnections(FinancialConnections financialConnections) {
+        public Builder setFinancialConnections(
+            PaymentIntentConfirmParams.PaymentMethodOptions.UsBankAccount.FinancialConnections
+                financialConnections) {
           this.financialConnections = financialConnections;
           return this;
         }
 
         /** Additional fields for network related functions. */
-        public Builder setNetworks(Networks networks) {
+        public Builder setNetworks(
+            PaymentIntentConfirmParams.PaymentMethodOptions.UsBankAccount.Networks networks) {
           this.networks = networks;
           return this;
         }
@@ -11223,7 +11425,9 @@ public class PaymentIntentConfirmParams extends ApiRequestParams {
          * publishable key, you may only update the value from {@code on_session} to {@code
          * off_session}.
          */
-        public Builder setSetupFutureUsage(SetupFutureUsage setupFutureUsage) {
+        public Builder setSetupFutureUsage(
+            PaymentIntentConfirmParams.PaymentMethodOptions.UsBankAccount.SetupFutureUsage
+                setupFutureUsage) {
           this.setupFutureUsage = setupFutureUsage;
           return this;
         }
@@ -11254,7 +11458,9 @@ public class PaymentIntentConfirmParams extends ApiRequestParams {
         }
 
         /** Verification method for the intent. */
-        public Builder setVerificationMethod(VerificationMethod verificationMethod) {
+        public Builder setVerificationMethod(
+            PaymentIntentConfirmParams.PaymentMethodOptions.UsBankAccount.VerificationMethod
+                verificationMethod) {
           this.verificationMethod = verificationMethod;
           return this;
         }
@@ -11278,7 +11484,10 @@ public class PaymentIntentConfirmParams extends ApiRequestParams {
          * {@code ownership}, {@code payment_method}, and {@code transactions}.
          */
         @SerializedName("permissions")
-        List<Permission> permissions;
+        List<
+                PaymentIntentConfirmParams.PaymentMethodOptions.UsBankAccount.FinancialConnections
+                    .Permission>
+            permissions;
 
         /**
          * For webview integrations only. Upon completing OAuth login in the native browser, the
@@ -11288,7 +11497,12 @@ public class PaymentIntentConfirmParams extends ApiRequestParams {
         String returnUrl;
 
         private FinancialConnections(
-            Map<String, Object> extraParams, List<Permission> permissions, String returnUrl) {
+            Map<String, Object> extraParams,
+            List<
+                    PaymentIntentConfirmParams.PaymentMethodOptions.UsBankAccount
+                        .FinancialConnections.Permission>
+                permissions,
+            String returnUrl) {
           this.extraParams = extraParams;
           this.permissions = permissions;
           this.returnUrl = returnUrl;
@@ -11301,13 +11515,18 @@ public class PaymentIntentConfirmParams extends ApiRequestParams {
         public static class Builder {
           private Map<String, Object> extraParams;
 
-          private List<Permission> permissions;
+          private List<
+                  PaymentIntentConfirmParams.PaymentMethodOptions.UsBankAccount.FinancialConnections
+                      .Permission>
+              permissions;
 
           private String returnUrl;
 
           /** Finalize and obtain parameter instance from this builder. */
-          public FinancialConnections build() {
-            return new FinancialConnections(this.extraParams, this.permissions, this.returnUrl);
+          public PaymentIntentConfirmParams.PaymentMethodOptions.UsBankAccount.FinancialConnections
+              build() {
+            return new PaymentIntentConfirmParams.PaymentMethodOptions.UsBankAccount
+                .FinancialConnections(this.extraParams, this.permissions, this.returnUrl);
           }
 
           /**
@@ -11346,7 +11565,10 @@ public class PaymentIntentConfirmParams extends ApiRequestParams {
            * PaymentIntentConfirmParams.PaymentMethodOptions.UsBankAccount.FinancialConnections#permissions}
            * for the field documentation.
            */
-          public Builder addPermission(Permission element) {
+          public Builder addPermission(
+              PaymentIntentConfirmParams.PaymentMethodOptions.UsBankAccount.FinancialConnections
+                      .Permission
+                  element) {
             if (this.permissions == null) {
               this.permissions = new ArrayList<>();
             }
@@ -11361,7 +11583,11 @@ public class PaymentIntentConfirmParams extends ApiRequestParams {
            * PaymentIntentConfirmParams.PaymentMethodOptions.UsBankAccount.FinancialConnections#permissions}
            * for the field documentation.
            */
-          public Builder addAllPermission(List<Permission> elements) {
+          public Builder addAllPermission(
+              List<
+                      PaymentIntentConfirmParams.PaymentMethodOptions.UsBankAccount
+                          .FinancialConnections.Permission>
+                  elements) {
             if (this.permissions == null) {
               this.permissions = new ArrayList<>();
             }
@@ -11415,9 +11641,13 @@ public class PaymentIntentConfirmParams extends ApiRequestParams {
 
         /** Triggers validations to run across the selected networks. */
         @SerializedName("requested")
-        List<Requested> requested;
+        List<PaymentIntentConfirmParams.PaymentMethodOptions.UsBankAccount.Networks.Requested>
+            requested;
 
-        private Networks(Map<String, Object> extraParams, List<Requested> requested) {
+        private Networks(
+            Map<String, Object> extraParams,
+            List<PaymentIntentConfirmParams.PaymentMethodOptions.UsBankAccount.Networks.Requested>
+                requested) {
           this.extraParams = extraParams;
           this.requested = requested;
         }
@@ -11429,11 +11659,14 @@ public class PaymentIntentConfirmParams extends ApiRequestParams {
         public static class Builder {
           private Map<String, Object> extraParams;
 
-          private List<Requested> requested;
+          private List<
+                  PaymentIntentConfirmParams.PaymentMethodOptions.UsBankAccount.Networks.Requested>
+              requested;
 
           /** Finalize and obtain parameter instance from this builder. */
-          public Networks build() {
-            return new Networks(this.extraParams, this.requested);
+          public PaymentIntentConfirmParams.PaymentMethodOptions.UsBankAccount.Networks build() {
+            return new PaymentIntentConfirmParams.PaymentMethodOptions.UsBankAccount.Networks(
+                this.extraParams, this.requested);
           }
 
           /**
@@ -11472,7 +11705,9 @@ public class PaymentIntentConfirmParams extends ApiRequestParams {
            * PaymentIntentConfirmParams.PaymentMethodOptions.UsBankAccount.Networks#requested} for
            * the field documentation.
            */
-          public Builder addRequested(Requested element) {
+          public Builder addRequested(
+              PaymentIntentConfirmParams.PaymentMethodOptions.UsBankAccount.Networks.Requested
+                  element) {
             if (this.requested == null) {
               this.requested = new ArrayList<>();
             }
@@ -11486,7 +11721,9 @@ public class PaymentIntentConfirmParams extends ApiRequestParams {
            * PaymentIntentConfirmParams.PaymentMethodOptions.UsBankAccount.Networks#requested} for
            * the field documentation.
            */
-          public Builder addAllRequested(List<Requested> elements) {
+          public Builder addAllRequested(
+              List<PaymentIntentConfirmParams.PaymentMethodOptions.UsBankAccount.Networks.Requested>
+                  elements) {
             if (this.requested == null) {
               this.requested = new ArrayList<>();
             }
@@ -11614,8 +11851,9 @@ public class PaymentIntentConfirmParams extends ApiRequestParams {
         private SetupFutureUsage setupFutureUsage;
 
         /** Finalize and obtain parameter instance from this builder. */
-        public WechatPay build() {
-          return new WechatPay(this.appId, this.client, this.extraParams, this.setupFutureUsage);
+        public PaymentIntentConfirmParams.PaymentMethodOptions.WechatPay build() {
+          return new PaymentIntentConfirmParams.PaymentMethodOptions.WechatPay(
+              this.appId, this.client, this.extraParams, this.setupFutureUsage);
         }
 
         /** The app ID registered with WeChat Pay. Only required when client is ios or android. */
@@ -11625,7 +11863,8 @@ public class PaymentIntentConfirmParams extends ApiRequestParams {
         }
 
         /** The client type that the end customer will pay from. */
-        public Builder setClient(Client client) {
+        public Builder setClient(
+            PaymentIntentConfirmParams.PaymentMethodOptions.WechatPay.Client client) {
           this.client = client;
           return this;
         }
@@ -11678,7 +11917,9 @@ public class PaymentIntentConfirmParams extends ApiRequestParams {
          * publishable key, you may only update the value from {@code on_session} to {@code
          * off_session}.
          */
-        public Builder setSetupFutureUsage(SetupFutureUsage setupFutureUsage) {
+        public Builder setSetupFutureUsage(
+            PaymentIntentConfirmParams.PaymentMethodOptions.WechatPay.SetupFutureUsage
+                setupFutureUsage) {
           this.setupFutureUsage = setupFutureUsage;
           return this;
         }
@@ -11750,8 +11991,8 @@ public class PaymentIntentConfirmParams extends ApiRequestParams {
       private String session;
 
       /** Finalize and obtain parameter instance from this builder. */
-      public RadarOptions build() {
-        return new RadarOptions(this.extraParams, this.session);
+      public PaymentIntentConfirmParams.RadarOptions build() {
+        return new PaymentIntentConfirmParams.RadarOptions(this.extraParams, this.session);
       }
 
       /**
@@ -11860,8 +12101,8 @@ public class PaymentIntentConfirmParams extends ApiRequestParams {
       private String trackingNumber;
 
       /** Finalize and obtain parameter instance from this builder. */
-      public Shipping build() {
-        return new Shipping(
+      public PaymentIntentConfirmParams.Shipping build() {
+        return new PaymentIntentConfirmParams.Shipping(
             this.address,
             this.carrier,
             this.extraParams,
@@ -11871,7 +12112,7 @@ public class PaymentIntentConfirmParams extends ApiRequestParams {
       }
 
       /** Shipping address. */
-      public Builder setAddress(Address address) {
+      public Builder setAddress(PaymentIntentConfirmParams.Shipping.Address address) {
         this.address = address;
         return this;
       }
@@ -12005,8 +12246,8 @@ public class PaymentIntentConfirmParams extends ApiRequestParams {
         private String state;
 
         /** Finalize and obtain parameter instance from this builder. */
-        public Address build() {
-          return new Address(
+        public PaymentIntentConfirmParams.Shipping.Address build() {
+          return new PaymentIntentConfirmParams.Shipping.Address(
               this.city,
               this.country,
               this.extraParams,

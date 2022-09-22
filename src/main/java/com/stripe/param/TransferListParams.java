@@ -113,7 +113,7 @@ public class TransferListParams extends ApiRequestParams {
           this.transferGroup);
     }
 
-    public Builder setCreated(Created created) {
+    public Builder setCreated(TransferListParams.Created created) {
       this.created = created;
       return this;
     }
@@ -270,8 +270,9 @@ public class TransferListParams extends ApiRequestParams {
       private Long lte;
 
       /** Finalize and obtain parameter instance from this builder. */
-      public Created build() {
-        return new Created(this.extraParams, this.gt, this.gte, this.lt, this.lte);
+      public TransferListParams.Created build() {
+        return new TransferListParams.Created(
+            this.extraParams, this.gt, this.gte, this.lt, this.lte);
       }
 
       /**

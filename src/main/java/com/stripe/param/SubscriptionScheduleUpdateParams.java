@@ -55,7 +55,7 @@ public class SubscriptionScheduleUpdateParams extends ApiRequestParams {
    * be omitted.
    */
   @SerializedName("phases")
-  List<Phase> phases;
+  List<SubscriptionScheduleUpdateParams.Phase> phases;
 
   /**
    * If the update changes the current phase, indicates whether the changes should be prorated. The
@@ -70,7 +70,7 @@ public class SubscriptionScheduleUpdateParams extends ApiRequestParams {
       List<String> expand,
       Map<String, Object> extraParams,
       Object metadata,
-      List<Phase> phases,
+      List<SubscriptionScheduleUpdateParams.Phase> phases,
       ProrationBehavior prorationBehavior) {
     this.defaultSettings = defaultSettings;
     this.endBehavior = endBehavior;
@@ -96,7 +96,7 @@ public class SubscriptionScheduleUpdateParams extends ApiRequestParams {
 
     private Object metadata;
 
-    private List<Phase> phases;
+    private List<SubscriptionScheduleUpdateParams.Phase> phases;
 
     private ProrationBehavior prorationBehavior;
 
@@ -113,7 +113,8 @@ public class SubscriptionScheduleUpdateParams extends ApiRequestParams {
     }
 
     /** Object representing the subscription schedule's default settings. */
-    public Builder setDefaultSettings(DefaultSettings defaultSettings) {
+    public Builder setDefaultSettings(
+        SubscriptionScheduleUpdateParams.DefaultSettings defaultSettings) {
       this.defaultSettings = defaultSettings;
       return this;
     }
@@ -124,7 +125,7 @@ public class SubscriptionScheduleUpdateParams extends ApiRequestParams {
      * the subscription schedule and keep the underlying subscription running.{@code cancel} will
      * end the subscription schedule and cancel the underlying subscription.
      */
-    public Builder setEndBehavior(EndBehavior endBehavior) {
+    public Builder setEndBehavior(SubscriptionScheduleUpdateParams.EndBehavior endBehavior) {
       this.endBehavior = endBehavior;
       return this;
     }
@@ -236,7 +237,7 @@ public class SubscriptionScheduleUpdateParams extends ApiRequestParams {
      * subsequent calls adds additional elements to the original list. See {@link
      * SubscriptionScheduleUpdateParams#phases} for the field documentation.
      */
-    public Builder addPhase(Phase element) {
+    public Builder addPhase(SubscriptionScheduleUpdateParams.Phase element) {
       if (this.phases == null) {
         this.phases = new ArrayList<>();
       }
@@ -249,7 +250,7 @@ public class SubscriptionScheduleUpdateParams extends ApiRequestParams {
      * subsequent calls adds additional elements to the original list. See {@link
      * SubscriptionScheduleUpdateParams#phases} for the field documentation.
      */
-    public Builder addAllPhase(List<Phase> elements) {
+    public Builder addAllPhase(List<SubscriptionScheduleUpdateParams.Phase> elements) {
       if (this.phases == null) {
         this.phases = new ArrayList<>();
       }
@@ -261,7 +262,8 @@ public class SubscriptionScheduleUpdateParams extends ApiRequestParams {
      * If the update changes the current phase, indicates whether the changes should be prorated.
      * The default value is {@code create_prorations}.
      */
-    public Builder setProrationBehavior(ProrationBehavior prorationBehavior) {
+    public Builder setProrationBehavior(
+        SubscriptionScheduleUpdateParams.ProrationBehavior prorationBehavior) {
       this.prorationBehavior = prorationBehavior;
       return this;
     }
@@ -394,8 +396,8 @@ public class SubscriptionScheduleUpdateParams extends ApiRequestParams {
       private Object transferData;
 
       /** Finalize and obtain parameter instance from this builder. */
-      public DefaultSettings build() {
-        return new DefaultSettings(
+      public SubscriptionScheduleUpdateParams.DefaultSettings build() {
+        return new SubscriptionScheduleUpdateParams.DefaultSettings(
             this.applicationFeePercent,
             this.automaticTax,
             this.billingCycleAnchor,
@@ -422,7 +424,8 @@ public class SubscriptionScheduleUpdateParams extends ApiRequestParams {
       }
 
       /** Default settings for automatic tax computation. */
-      public Builder setAutomaticTax(AutomaticTax automaticTax) {
+      public Builder setAutomaticTax(
+          SubscriptionScheduleUpdateParams.DefaultSettings.AutomaticTax automaticTax) {
         this.automaticTax = automaticTax;
         return this;
       }
@@ -433,7 +436,8 @@ public class SubscriptionScheduleUpdateParams extends ApiRequestParams {
        * this phase specifies a trial. For more information, see the billing cycle <a
        * href="https://stripe.com/docs/billing/subscriptions/billing-cycle">documentation</a>.
        */
-      public Builder setBillingCycleAnchor(BillingCycleAnchor billingCycleAnchor) {
+      public Builder setBillingCycleAnchor(
+          SubscriptionScheduleUpdateParams.DefaultSettings.BillingCycleAnchor billingCycleAnchor) {
         this.billingCycleAnchor = billingCycleAnchor;
         return this;
       }
@@ -442,7 +446,8 @@ public class SubscriptionScheduleUpdateParams extends ApiRequestParams {
        * Define thresholds at which an invoice will be sent, and the subscription advanced to a new
        * billing period. Pass an empty string to remove previously-defined thresholds.
        */
-      public Builder setBillingThresholds(BillingThresholds billingThresholds) {
+      public Builder setBillingThresholds(
+          SubscriptionScheduleUpdateParams.DefaultSettings.BillingThresholds billingThresholds) {
         this.billingThresholds = billingThresholds;
         return this;
       }
@@ -463,7 +468,8 @@ public class SubscriptionScheduleUpdateParams extends ApiRequestParams {
        * email your customer an invoice with payment instructions. Defaults to {@code
        * charge_automatically} on creation.
        */
-      public Builder setCollectionMethod(CollectionMethod collectionMethod) {
+      public Builder setCollectionMethod(
+          SubscriptionScheduleUpdateParams.DefaultSettings.CollectionMethod collectionMethod) {
         this.collectionMethod = collectionMethod;
         return this;
       }
@@ -534,7 +540,8 @@ public class SubscriptionScheduleUpdateParams extends ApiRequestParams {
       }
 
       /** All invoices will be billed using the specified settings. */
-      public Builder setInvoiceSettings(InvoiceSettings invoiceSettings) {
+      public Builder setInvoiceSettings(
+          SubscriptionScheduleUpdateParams.DefaultSettings.InvoiceSettings invoiceSettings) {
         this.invoiceSettings = invoiceSettings;
         return this;
       }
@@ -543,7 +550,8 @@ public class SubscriptionScheduleUpdateParams extends ApiRequestParams {
        * The data with which to automatically create a Transfer for each of the associated
        * subscription's invoices.
        */
-      public Builder setTransferData(TransferData transferData) {
+      public Builder setTransferData(
+          SubscriptionScheduleUpdateParams.DefaultSettings.TransferData transferData) {
         this.transferData = transferData;
         return this;
       }
@@ -591,8 +599,9 @@ public class SubscriptionScheduleUpdateParams extends ApiRequestParams {
         private Map<String, Object> extraParams;
 
         /** Finalize and obtain parameter instance from this builder. */
-        public AutomaticTax build() {
-          return new AutomaticTax(this.enabled, this.extraParams);
+        public SubscriptionScheduleUpdateParams.DefaultSettings.AutomaticTax build() {
+          return new SubscriptionScheduleUpdateParams.DefaultSettings.AutomaticTax(
+              this.enabled, this.extraParams);
         }
 
         /**
@@ -678,8 +687,8 @@ public class SubscriptionScheduleUpdateParams extends ApiRequestParams {
         private Boolean resetBillingCycleAnchor;
 
         /** Finalize and obtain parameter instance from this builder. */
-        public BillingThresholds build() {
-          return new BillingThresholds(
+        public SubscriptionScheduleUpdateParams.DefaultSettings.BillingThresholds build() {
+          return new SubscriptionScheduleUpdateParams.DefaultSettings.BillingThresholds(
               this.amountGte, this.extraParams, this.resetBillingCycleAnchor);
         }
 
@@ -765,8 +774,9 @@ public class SubscriptionScheduleUpdateParams extends ApiRequestParams {
         private Map<String, Object> extraParams;
 
         /** Finalize and obtain parameter instance from this builder. */
-        public InvoiceSettings build() {
-          return new InvoiceSettings(this.daysUntilDue, this.extraParams);
+        public SubscriptionScheduleUpdateParams.DefaultSettings.InvoiceSettings build() {
+          return new SubscriptionScheduleUpdateParams.DefaultSettings.InvoiceSettings(
+              this.daysUntilDue, this.extraParams);
         }
 
         /**
@@ -853,8 +863,9 @@ public class SubscriptionScheduleUpdateParams extends ApiRequestParams {
         private Map<String, Object> extraParams;
 
         /** Finalize and obtain parameter instance from this builder. */
-        public TransferData build() {
-          return new TransferData(this.amountPercent, this.destination, this.extraParams);
+        public SubscriptionScheduleUpdateParams.DefaultSettings.TransferData build() {
+          return new SubscriptionScheduleUpdateParams.DefaultSettings.TransferData(
+              this.amountPercent, this.destination, this.extraParams);
         }
 
         /**
@@ -950,7 +961,7 @@ public class SubscriptionScheduleUpdateParams extends ApiRequestParams {
      * for this phase. You may pass up to 20 items.
      */
     @SerializedName("add_invoice_items")
-    List<AddInvoiceItem> addInvoiceItems;
+    List<SubscriptionScheduleUpdateParams.Phase.AddInvoiceItem> addInvoiceItems;
 
     /**
      * A non-negative decimal between 0 and 100, with at most two decimal places. This represents
@@ -1056,7 +1067,7 @@ public class SubscriptionScheduleUpdateParams extends ApiRequestParams {
      * subscription schedule.
      */
     @SerializedName("items")
-    List<Item> items;
+    List<SubscriptionScheduleUpdateParams.Phase.Item> items;
 
     /**
      * Integer representing the multiplier applied to the price interval. For example, {@code
@@ -1116,7 +1127,7 @@ public class SubscriptionScheduleUpdateParams extends ApiRequestParams {
     Object trialEnd;
 
     private Phase(
-        List<AddInvoiceItem> addInvoiceItems,
+        List<SubscriptionScheduleUpdateParams.Phase.AddInvoiceItem> addInvoiceItems,
         BigDecimal applicationFeePercent,
         AutomaticTax automaticTax,
         BillingCycleAnchor billingCycleAnchor,
@@ -1130,7 +1141,7 @@ public class SubscriptionScheduleUpdateParams extends ApiRequestParams {
         Object endDate,
         Map<String, Object> extraParams,
         InvoiceSettings invoiceSettings,
-        List<Item> items,
+        List<SubscriptionScheduleUpdateParams.Phase.Item> items,
         Long iterations,
         Map<String, String> metadata,
         ProrationBehavior prorationBehavior,
@@ -1167,7 +1178,7 @@ public class SubscriptionScheduleUpdateParams extends ApiRequestParams {
     }
 
     public static class Builder {
-      private List<AddInvoiceItem> addInvoiceItems;
+      private List<SubscriptionScheduleUpdateParams.Phase.AddInvoiceItem> addInvoiceItems;
 
       private BigDecimal applicationFeePercent;
 
@@ -1195,7 +1206,7 @@ public class SubscriptionScheduleUpdateParams extends ApiRequestParams {
 
       private InvoiceSettings invoiceSettings;
 
-      private List<Item> items;
+      private List<SubscriptionScheduleUpdateParams.Phase.Item> items;
 
       private Long iterations;
 
@@ -1212,8 +1223,8 @@ public class SubscriptionScheduleUpdateParams extends ApiRequestParams {
       private Object trialEnd;
 
       /** Finalize and obtain parameter instance from this builder. */
-      public Phase build() {
-        return new Phase(
+      public SubscriptionScheduleUpdateParams.Phase build() {
+        return new SubscriptionScheduleUpdateParams.Phase(
             this.addInvoiceItems,
             this.applicationFeePercent,
             this.automaticTax,
@@ -1243,7 +1254,8 @@ public class SubscriptionScheduleUpdateParams extends ApiRequestParams {
        * call, and subsequent calls adds additional elements to the original list. See {@link
        * SubscriptionScheduleUpdateParams.Phase#addInvoiceItems} for the field documentation.
        */
-      public Builder addAddInvoiceItem(AddInvoiceItem element) {
+      public Builder addAddInvoiceItem(
+          SubscriptionScheduleUpdateParams.Phase.AddInvoiceItem element) {
         if (this.addInvoiceItems == null) {
           this.addInvoiceItems = new ArrayList<>();
         }
@@ -1256,7 +1268,8 @@ public class SubscriptionScheduleUpdateParams extends ApiRequestParams {
        * `add/addAll` call, and subsequent calls adds additional elements to the original list. See
        * {@link SubscriptionScheduleUpdateParams.Phase#addInvoiceItems} for the field documentation.
        */
-      public Builder addAllAddInvoiceItem(List<AddInvoiceItem> elements) {
+      public Builder addAllAddInvoiceItem(
+          List<SubscriptionScheduleUpdateParams.Phase.AddInvoiceItem> elements) {
         if (this.addInvoiceItems == null) {
           this.addInvoiceItems = new ArrayList<>();
         }
@@ -1278,7 +1291,8 @@ public class SubscriptionScheduleUpdateParams extends ApiRequestParams {
       }
 
       /** Automatic tax settings for this phase. */
-      public Builder setAutomaticTax(AutomaticTax automaticTax) {
+      public Builder setAutomaticTax(
+          SubscriptionScheduleUpdateParams.Phase.AutomaticTax automaticTax) {
         this.automaticTax = automaticTax;
         return this;
       }
@@ -1289,7 +1303,8 @@ public class SubscriptionScheduleUpdateParams extends ApiRequestParams {
        * this phase specifies a trial. For more information, see the billing cycle <a
        * href="https://stripe.com/docs/billing/subscriptions/billing-cycle">documentation</a>.
        */
-      public Builder setBillingCycleAnchor(BillingCycleAnchor billingCycleAnchor) {
+      public Builder setBillingCycleAnchor(
+          SubscriptionScheduleUpdateParams.Phase.BillingCycleAnchor billingCycleAnchor) {
         this.billingCycleAnchor = billingCycleAnchor;
         return this;
       }
@@ -1298,7 +1313,8 @@ public class SubscriptionScheduleUpdateParams extends ApiRequestParams {
        * Define thresholds at which an invoice will be sent, and the subscription advanced to a new
        * billing period. Pass an empty string to remove previously-defined thresholds.
        */
-      public Builder setBillingThresholds(BillingThresholds billingThresholds) {
+      public Builder setBillingThresholds(
+          SubscriptionScheduleUpdateParams.Phase.BillingThresholds billingThresholds) {
         this.billingThresholds = billingThresholds;
         return this;
       }
@@ -1319,7 +1335,8 @@ public class SubscriptionScheduleUpdateParams extends ApiRequestParams {
        * email your customer an invoice with payment instructions. Defaults to {@code
        * charge_automatically} on creation.
        */
-      public Builder setCollectionMethod(CollectionMethod collectionMethod) {
+      public Builder setCollectionMethod(
+          SubscriptionScheduleUpdateParams.Phase.CollectionMethod collectionMethod) {
         this.collectionMethod = collectionMethod;
         return this;
       }
@@ -1461,7 +1478,7 @@ public class SubscriptionScheduleUpdateParams extends ApiRequestParams {
        * The date at which this phase of the subscription schedule ends. If set, {@code iterations}
        * must not be set.
        */
-      public Builder setEndDate(EndDate endDate) {
+      public Builder setEndDate(SubscriptionScheduleUpdateParams.Phase.EndDate endDate) {
         this.endDate = endDate;
         return this;
       }
@@ -1493,7 +1510,8 @@ public class SubscriptionScheduleUpdateParams extends ApiRequestParams {
       }
 
       /** All invoices will be billed using the specified settings. */
-      public Builder setInvoiceSettings(InvoiceSettings invoiceSettings) {
+      public Builder setInvoiceSettings(
+          SubscriptionScheduleUpdateParams.Phase.InvoiceSettings invoiceSettings) {
         this.invoiceSettings = invoiceSettings;
         return this;
       }
@@ -1503,7 +1521,7 @@ public class SubscriptionScheduleUpdateParams extends ApiRequestParams {
        * subsequent calls adds additional elements to the original list. See {@link
        * SubscriptionScheduleUpdateParams.Phase#items} for the field documentation.
        */
-      public Builder addItem(Item element) {
+      public Builder addItem(SubscriptionScheduleUpdateParams.Phase.Item element) {
         if (this.items == null) {
           this.items = new ArrayList<>();
         }
@@ -1516,7 +1534,7 @@ public class SubscriptionScheduleUpdateParams extends ApiRequestParams {
        * and subsequent calls adds additional elements to the original list. See {@link
        * SubscriptionScheduleUpdateParams.Phase#items} for the field documentation.
        */
-      public Builder addAllItem(List<Item> elements) {
+      public Builder addAllItem(List<SubscriptionScheduleUpdateParams.Phase.Item> elements) {
         if (this.items == null) {
           this.items = new ArrayList<>();
         }
@@ -1566,7 +1584,8 @@ public class SubscriptionScheduleUpdateParams extends ApiRequestParams {
        * href="https://stripe.com/docs/billing/subscriptions/prorations">prorations</a> when
        * transitioning to this phase. The default value is {@code create_prorations}.
        */
-      public Builder setProrationBehavior(ProrationBehavior prorationBehavior) {
+      public Builder setProrationBehavior(
+          SubscriptionScheduleUpdateParams.Phase.ProrationBehavior prorationBehavior) {
         this.prorationBehavior = prorationBehavior;
         return this;
       }
@@ -1584,7 +1603,7 @@ public class SubscriptionScheduleUpdateParams extends ApiRequestParams {
        * The date at which this phase of the subscription schedule starts or {@code now}. Must be
        * set on the first phase.
        */
-      public Builder setStartDate(StartDate startDate) {
+      public Builder setStartDate(SubscriptionScheduleUpdateParams.Phase.StartDate startDate) {
         this.startDate = startDate;
         return this;
       }
@@ -1593,7 +1612,8 @@ public class SubscriptionScheduleUpdateParams extends ApiRequestParams {
        * The data with which to automatically create a Transfer for each of the associated
        * subscription's invoices.
        */
-      public Builder setTransferData(TransferData transferData) {
+      public Builder setTransferData(
+          SubscriptionScheduleUpdateParams.Phase.TransferData transferData) {
         this.transferData = transferData;
         return this;
       }
@@ -1620,7 +1640,7 @@ public class SubscriptionScheduleUpdateParams extends ApiRequestParams {
        * Sets the phase to trialing from the start date to this date. Must be before the phase end
        * date, can not be combined with {@code trial}
        */
-      public Builder setTrialEnd(TrialEnd trialEnd) {
+      public Builder setTrialEnd(SubscriptionScheduleUpdateParams.Phase.TrialEnd trialEnd) {
         this.trialEnd = trialEnd;
         return this;
       }
@@ -1688,8 +1708,8 @@ public class SubscriptionScheduleUpdateParams extends ApiRequestParams {
         private Object taxRates;
 
         /** Finalize and obtain parameter instance from this builder. */
-        public AddInvoiceItem build() {
-          return new AddInvoiceItem(
+        public SubscriptionScheduleUpdateParams.Phase.AddInvoiceItem build() {
+          return new SubscriptionScheduleUpdateParams.Phase.AddInvoiceItem(
               this.extraParams, this.price, this.priceData, this.quantity, this.taxRates);
         }
 
@@ -1737,7 +1757,8 @@ public class SubscriptionScheduleUpdateParams extends ApiRequestParams {
          * Data used to generate a new <a href="https://stripe.com/docs/api/prices">Price</a> object
          * inline.
          */
-        public Builder setPriceData(PriceData priceData) {
+        public Builder setPriceData(
+            SubscriptionScheduleUpdateParams.Phase.AddInvoiceItem.PriceData priceData) {
           this.priceData = priceData;
           return this;
         }
@@ -1877,8 +1898,8 @@ public class SubscriptionScheduleUpdateParams extends ApiRequestParams {
           private Object unitAmountDecimal;
 
           /** Finalize and obtain parameter instance from this builder. */
-          public PriceData build() {
-            return new PriceData(
+          public SubscriptionScheduleUpdateParams.Phase.AddInvoiceItem.PriceData build() {
+            return new SubscriptionScheduleUpdateParams.Phase.AddInvoiceItem.PriceData(
                 this.currency,
                 this.extraParams,
                 this.product,
@@ -1954,7 +1975,9 @@ public class SubscriptionScheduleUpdateParams extends ApiRequestParams {
            * of {@code inclusive}, {@code exclusive}, or {@code unspecified}. Once specified as
            * either {@code inclusive} or {@code exclusive}, it cannot be changed.
            */
-          public Builder setTaxBehavior(TaxBehavior taxBehavior) {
+          public Builder setTaxBehavior(
+              SubscriptionScheduleUpdateParams.Phase.AddInvoiceItem.PriceData.TaxBehavior
+                  taxBehavior) {
             this.taxBehavior = taxBehavior;
             return this;
           }
@@ -2042,8 +2065,9 @@ public class SubscriptionScheduleUpdateParams extends ApiRequestParams {
         private Map<String, Object> extraParams;
 
         /** Finalize and obtain parameter instance from this builder. */
-        public AutomaticTax build() {
-          return new AutomaticTax(this.enabled, this.extraParams);
+        public SubscriptionScheduleUpdateParams.Phase.AutomaticTax build() {
+          return new SubscriptionScheduleUpdateParams.Phase.AutomaticTax(
+              this.enabled, this.extraParams);
         }
 
         /**
@@ -2127,8 +2151,8 @@ public class SubscriptionScheduleUpdateParams extends ApiRequestParams {
         private Boolean resetBillingCycleAnchor;
 
         /** Finalize and obtain parameter instance from this builder. */
-        public BillingThresholds build() {
-          return new BillingThresholds(
+        public SubscriptionScheduleUpdateParams.Phase.BillingThresholds build() {
+          return new SubscriptionScheduleUpdateParams.Phase.BillingThresholds(
               this.amountGte, this.extraParams, this.resetBillingCycleAnchor);
         }
 
@@ -2212,8 +2236,9 @@ public class SubscriptionScheduleUpdateParams extends ApiRequestParams {
         private Map<String, Object> extraParams;
 
         /** Finalize and obtain parameter instance from this builder. */
-        public InvoiceSettings build() {
-          return new InvoiceSettings(this.daysUntilDue, this.extraParams);
+        public SubscriptionScheduleUpdateParams.Phase.InvoiceSettings build() {
+          return new SubscriptionScheduleUpdateParams.Phase.InvoiceSettings(
+              this.daysUntilDue, this.extraParams);
         }
 
         /**
@@ -2346,8 +2371,8 @@ public class SubscriptionScheduleUpdateParams extends ApiRequestParams {
         private Object taxRates;
 
         /** Finalize and obtain parameter instance from this builder. */
-        public Item build() {
-          return new Item(
+        public SubscriptionScheduleUpdateParams.Phase.Item build() {
+          return new SubscriptionScheduleUpdateParams.Phase.Item(
               this.billingThresholds,
               this.extraParams,
               this.plan,
@@ -2362,7 +2387,8 @@ public class SubscriptionScheduleUpdateParams extends ApiRequestParams {
          * new billing period. When updating, pass an empty string to remove previously-defined
          * thresholds.
          */
-        public Builder setBillingThresholds(BillingThresholds billingThresholds) {
+        public Builder setBillingThresholds(
+            SubscriptionScheduleUpdateParams.Phase.Item.BillingThresholds billingThresholds) {
           this.billingThresholds = billingThresholds;
           return this;
         }
@@ -2439,7 +2465,8 @@ public class SubscriptionScheduleUpdateParams extends ApiRequestParams {
          * Data used to generate a new <a href="https://stripe.com/docs/api/prices">Price</a> object
          * inline.
          */
-        public Builder setPriceData(PriceData priceData) {
+        public Builder setPriceData(
+            SubscriptionScheduleUpdateParams.Phase.Item.PriceData priceData) {
           this.priceData = priceData;
           return this;
         }
@@ -2537,8 +2564,9 @@ public class SubscriptionScheduleUpdateParams extends ApiRequestParams {
           private Long usageGte;
 
           /** Finalize and obtain parameter instance from this builder. */
-          public BillingThresholds build() {
-            return new BillingThresholds(this.extraParams, this.usageGte);
+          public SubscriptionScheduleUpdateParams.Phase.Item.BillingThresholds build() {
+            return new SubscriptionScheduleUpdateParams.Phase.Item.BillingThresholds(
+                this.extraParams, this.usageGte);
           }
 
           /**
@@ -2669,8 +2697,8 @@ public class SubscriptionScheduleUpdateParams extends ApiRequestParams {
           private Object unitAmountDecimal;
 
           /** Finalize and obtain parameter instance from this builder. */
-          public PriceData build() {
-            return new PriceData(
+          public SubscriptionScheduleUpdateParams.Phase.Item.PriceData build() {
+            return new SubscriptionScheduleUpdateParams.Phase.Item.PriceData(
                 this.currency,
                 this.extraParams,
                 this.product,
@@ -2744,7 +2772,8 @@ public class SubscriptionScheduleUpdateParams extends ApiRequestParams {
            * The recurring components of a price such as {@code interval} and {@code
            * interval_count}.
            */
-          public Builder setRecurring(Recurring recurring) {
+          public Builder setRecurring(
+              SubscriptionScheduleUpdateParams.Phase.Item.PriceData.Recurring recurring) {
             this.recurring = recurring;
             return this;
           }
@@ -2754,7 +2783,8 @@ public class SubscriptionScheduleUpdateParams extends ApiRequestParams {
            * of {@code inclusive}, {@code exclusive}, or {@code unspecified}. Once specified as
            * either {@code inclusive} or {@code exclusive}, it cannot be changed.
            */
-          public Builder setTaxBehavior(TaxBehavior taxBehavior) {
+          public Builder setTaxBehavior(
+              SubscriptionScheduleUpdateParams.Phase.Item.PriceData.TaxBehavior taxBehavior) {
             this.taxBehavior = taxBehavior;
             return this;
           }
@@ -2835,8 +2865,9 @@ public class SubscriptionScheduleUpdateParams extends ApiRequestParams {
             private Long intervalCount;
 
             /** Finalize and obtain parameter instance from this builder. */
-            public Recurring build() {
-              return new Recurring(this.extraParams, this.interval, this.intervalCount);
+            public SubscriptionScheduleUpdateParams.Phase.Item.PriceData.Recurring build() {
+              return new SubscriptionScheduleUpdateParams.Phase.Item.PriceData.Recurring(
+                  this.extraParams, this.interval, this.intervalCount);
             }
 
             /**
@@ -2873,7 +2904,8 @@ public class SubscriptionScheduleUpdateParams extends ApiRequestParams {
              * Specifies billing frequency. Either {@code day}, {@code week}, {@code month} or
              * {@code year}.
              */
-            public Builder setInterval(Interval interval) {
+            public Builder setInterval(
+                SubscriptionScheduleUpdateParams.Phase.Item.PriceData.Recurring.Interval interval) {
               this.interval = interval;
               return this;
             }
@@ -2973,8 +3005,9 @@ public class SubscriptionScheduleUpdateParams extends ApiRequestParams {
         private Map<String, Object> extraParams;
 
         /** Finalize and obtain parameter instance from this builder. */
-        public TransferData build() {
-          return new TransferData(this.amountPercent, this.destination, this.extraParams);
+        public SubscriptionScheduleUpdateParams.Phase.TransferData build() {
+          return new SubscriptionScheduleUpdateParams.Phase.TransferData(
+              this.amountPercent, this.destination, this.extraParams);
         }
 
         /**

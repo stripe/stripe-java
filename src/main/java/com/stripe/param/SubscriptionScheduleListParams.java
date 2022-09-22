@@ -142,7 +142,7 @@ public class SubscriptionScheduleListParams extends ApiRequestParams {
     }
 
     /** Only return subscription schedules that were created canceled the given date interval. */
-    public Builder setCanceledAt(CanceledAt canceledAt) {
+    public Builder setCanceledAt(SubscriptionScheduleListParams.CanceledAt canceledAt) {
       this.canceledAt = canceledAt;
       return this;
     }
@@ -154,7 +154,7 @@ public class SubscriptionScheduleListParams extends ApiRequestParams {
     }
 
     /** Only return subscription schedules that completed during the given date interval. */
-    public Builder setCompletedAt(CompletedAt completedAt) {
+    public Builder setCompletedAt(SubscriptionScheduleListParams.CompletedAt completedAt) {
       this.completedAt = completedAt;
       return this;
     }
@@ -166,7 +166,7 @@ public class SubscriptionScheduleListParams extends ApiRequestParams {
     }
 
     /** Only return subscription schedules that were created during the given date interval. */
-    public Builder setCreated(Created created) {
+    public Builder setCreated(SubscriptionScheduleListParams.Created created) {
       this.created = created;
       return this;
     }
@@ -256,7 +256,7 @@ public class SubscriptionScheduleListParams extends ApiRequestParams {
     }
 
     /** Only return subscription schedules that were released during the given date interval. */
-    public Builder setReleasedAt(ReleasedAt releasedAt) {
+    public Builder setReleasedAt(SubscriptionScheduleListParams.ReleasedAt releasedAt) {
       this.releasedAt = releasedAt;
       return this;
     }
@@ -336,8 +336,9 @@ public class SubscriptionScheduleListParams extends ApiRequestParams {
       private Long lte;
 
       /** Finalize and obtain parameter instance from this builder. */
-      public CanceledAt build() {
-        return new CanceledAt(this.extraParams, this.gt, this.gte, this.lt, this.lte);
+      public SubscriptionScheduleListParams.CanceledAt build() {
+        return new SubscriptionScheduleListParams.CanceledAt(
+            this.extraParams, this.gt, this.gte, this.lt, this.lte);
       }
 
       /**
@@ -444,8 +445,9 @@ public class SubscriptionScheduleListParams extends ApiRequestParams {
       private Long lte;
 
       /** Finalize and obtain parameter instance from this builder. */
-      public CompletedAt build() {
-        return new CompletedAt(this.extraParams, this.gt, this.gte, this.lt, this.lte);
+      public SubscriptionScheduleListParams.CompletedAt build() {
+        return new SubscriptionScheduleListParams.CompletedAt(
+            this.extraParams, this.gt, this.gte, this.lt, this.lte);
       }
 
       /**
@@ -552,8 +554,9 @@ public class SubscriptionScheduleListParams extends ApiRequestParams {
       private Long lte;
 
       /** Finalize and obtain parameter instance from this builder. */
-      public Created build() {
-        return new Created(this.extraParams, this.gt, this.gte, this.lt, this.lte);
+      public SubscriptionScheduleListParams.Created build() {
+        return new SubscriptionScheduleListParams.Created(
+            this.extraParams, this.gt, this.gte, this.lt, this.lte);
       }
 
       /**
@@ -659,8 +662,9 @@ public class SubscriptionScheduleListParams extends ApiRequestParams {
       private Long lte;
 
       /** Finalize and obtain parameter instance from this builder. */
-      public ReleasedAt build() {
-        return new ReleasedAt(this.extraParams, this.gt, this.gte, this.lt, this.lte);
+      public SubscriptionScheduleListParams.ReleasedAt build() {
+        return new SubscriptionScheduleListParams.ReleasedAt(
+            this.extraParams, this.gt, this.gte, this.lt, this.lte);
       }
 
       /**

@@ -3,7 +3,6 @@ package com.stripe.param;
 
 import com.google.gson.annotations.SerializedName;
 import com.stripe.net.ApiRequestParams;
-import com.stripe.net.ApiRequestParams.EnumParam;
 import com.stripe.param.common.EmptyParam;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -247,13 +246,13 @@ public class AccountCreateParams extends ApiRequestParams {
     }
 
     /** Business information about the account. */
-    public Builder setBusinessProfile(BusinessProfile businessProfile) {
+    public Builder setBusinessProfile(AccountCreateParams.BusinessProfile businessProfile) {
       this.businessProfile = businessProfile;
       return this;
     }
 
     /** The business type. */
-    public Builder setBusinessType(BusinessType businessType) {
+    public Builder setBusinessType(AccountCreateParams.BusinessType businessType) {
       this.businessType = businessType;
       return this;
     }
@@ -264,7 +263,7 @@ public class AccountCreateParams extends ApiRequestParams {
      * provided its specific requirements and Stripe has verified them. An account may have some of
      * its requested capabilities be active and some be inactive.
      */
-    public Builder setCapabilities(Capabilities capabilities) {
+    public Builder setCapabilities(AccountCreateParams.Capabilities capabilities) {
       this.capabilities = capabilities;
       return this;
     }
@@ -273,7 +272,7 @@ public class AccountCreateParams extends ApiRequestParams {
      * Information about the company or business. This field is available for any {@code
      * business_type}.
      */
-    public Builder setCompany(Company company) {
+    public Builder setCompany(AccountCreateParams.Company company) {
       this.company = company;
       return this;
     }
@@ -304,7 +303,7 @@ public class AccountCreateParams extends ApiRequestParams {
     }
 
     /** Documents that may be submitted to satisfy various informational requests. */
-    public Builder setDocuments(Documents documents) {
+    public Builder setDocuments(AccountCreateParams.Documents documents) {
       this.documents = documents;
       return this;
     }
@@ -392,7 +391,7 @@ public class AccountCreateParams extends ApiRequestParams {
      * Information about the person represented by the account. This field is null unless {@code
      * business_type} is set to {@code individual}.
      */
-    public Builder setIndividual(Individual individual) {
+    public Builder setIndividual(AccountCreateParams.Individual individual) {
       this.individual = individual;
       return this;
     }
@@ -448,7 +447,7 @@ public class AccountCreateParams extends ApiRequestParams {
     }
 
     /** Options for customizing how the account functions within Stripe. */
-    public Builder setSettings(Settings settings) {
+    public Builder setSettings(AccountCreateParams.Settings settings) {
       this.settings = settings;
       return this;
     }
@@ -458,7 +457,7 @@ public class AccountCreateParams extends ApiRequestParams {
      * href="https://stripe.com/docs/connect/updating-accounts#tos-acceptance">Stripe Services
      * Agreement</a>.
      */
-    public Builder setTosAcceptance(TosAcceptance tosAcceptance) {
+    public Builder setTosAcceptance(AccountCreateParams.TosAcceptance tosAcceptance) {
       this.tosAcceptance = tosAcceptance;
       return this;
     }
@@ -467,7 +466,7 @@ public class AccountCreateParams extends ApiRequestParams {
      * The type of Stripe account to create. May be one of {@code custom}, {@code express} or {@code
      * standard}.
      */
-    public Builder setType(Type type) {
+    public Builder setType(AccountCreateParams.Type type) {
       this.type = type;
       return this;
     }
@@ -568,8 +567,8 @@ public class AccountCreateParams extends ApiRequestParams {
       private String url;
 
       /** Finalize and obtain parameter instance from this builder. */
-      public BusinessProfile build() {
-        return new BusinessProfile(
+      public AccountCreateParams.BusinessProfile build() {
+        return new AccountCreateParams.BusinessProfile(
             this.extraParams,
             this.mcc,
             this.name,
@@ -633,7 +632,8 @@ public class AccountCreateParams extends ApiRequestParams {
       }
 
       /** A publicly available mailing address for sending support issues to. */
-      public Builder setSupportAddress(SupportAddress supportAddress) {
+      public Builder setSupportAddress(
+          AccountCreateParams.BusinessProfile.SupportAddress supportAddress) {
         this.supportAddress = supportAddress;
         return this;
       }
@@ -744,8 +744,8 @@ public class AccountCreateParams extends ApiRequestParams {
         private String state;
 
         /** Finalize and obtain parameter instance from this builder. */
-        public SupportAddress build() {
-          return new SupportAddress(
+        public AccountCreateParams.BusinessProfile.SupportAddress build() {
+          return new AccountCreateParams.BusinessProfile.SupportAddress(
               this.city,
               this.country,
               this.extraParams,
@@ -1113,8 +1113,8 @@ public class AccountCreateParams extends ApiRequestParams {
       private UsBankAccountAchPayments usBankAccountAchPayments;
 
       /** Finalize and obtain parameter instance from this builder. */
-      public Capabilities build() {
-        return new Capabilities(
+      public AccountCreateParams.Capabilities build() {
+        return new AccountCreateParams.Capabilities(
             this.acssDebitPayments,
             this.affirmPayments,
             this.afterpayClearpayPayments,
@@ -1152,80 +1152,88 @@ public class AccountCreateParams extends ApiRequestParams {
       }
 
       /** The acss_debit_payments capability. */
-      public Builder setAcssDebitPayments(AcssDebitPayments acssDebitPayments) {
+      public Builder setAcssDebitPayments(
+          AccountCreateParams.Capabilities.AcssDebitPayments acssDebitPayments) {
         this.acssDebitPayments = acssDebitPayments;
         return this;
       }
 
       /** The affirm_payments capability. */
-      public Builder setAffirmPayments(AffirmPayments affirmPayments) {
+      public Builder setAffirmPayments(
+          AccountCreateParams.Capabilities.AffirmPayments affirmPayments) {
         this.affirmPayments = affirmPayments;
         return this;
       }
 
       /** The afterpay_clearpay_payments capability. */
       public Builder setAfterpayClearpayPayments(
-          AfterpayClearpayPayments afterpayClearpayPayments) {
+          AccountCreateParams.Capabilities.AfterpayClearpayPayments afterpayClearpayPayments) {
         this.afterpayClearpayPayments = afterpayClearpayPayments;
         return this;
       }
 
       /** The au_becs_debit_payments capability. */
-      public Builder setAuBecsDebitPayments(AuBecsDebitPayments auBecsDebitPayments) {
+      public Builder setAuBecsDebitPayments(
+          AccountCreateParams.Capabilities.AuBecsDebitPayments auBecsDebitPayments) {
         this.auBecsDebitPayments = auBecsDebitPayments;
         return this;
       }
 
       /** The bacs_debit_payments capability. */
-      public Builder setBacsDebitPayments(BacsDebitPayments bacsDebitPayments) {
+      public Builder setBacsDebitPayments(
+          AccountCreateParams.Capabilities.BacsDebitPayments bacsDebitPayments) {
         this.bacsDebitPayments = bacsDebitPayments;
         return this;
       }
 
       /** The bancontact_payments capability. */
-      public Builder setBancontactPayments(BancontactPayments bancontactPayments) {
+      public Builder setBancontactPayments(
+          AccountCreateParams.Capabilities.BancontactPayments bancontactPayments) {
         this.bancontactPayments = bancontactPayments;
         return this;
       }
 
       /** The bank_transfer_payments capability. */
-      public Builder setBankTransferPayments(BankTransferPayments bankTransferPayments) {
+      public Builder setBankTransferPayments(
+          AccountCreateParams.Capabilities.BankTransferPayments bankTransferPayments) {
         this.bankTransferPayments = bankTransferPayments;
         return this;
       }
 
       /** The blik_payments capability. */
-      public Builder setBlikPayments(BlikPayments blikPayments) {
+      public Builder setBlikPayments(AccountCreateParams.Capabilities.BlikPayments blikPayments) {
         this.blikPayments = blikPayments;
         return this;
       }
 
       /** The boleto_payments capability. */
-      public Builder setBoletoPayments(BoletoPayments boletoPayments) {
+      public Builder setBoletoPayments(
+          AccountCreateParams.Capabilities.BoletoPayments boletoPayments) {
         this.boletoPayments = boletoPayments;
         return this;
       }
 
       /** The card_issuing capability. */
-      public Builder setCardIssuing(CardIssuing cardIssuing) {
+      public Builder setCardIssuing(AccountCreateParams.Capabilities.CardIssuing cardIssuing) {
         this.cardIssuing = cardIssuing;
         return this;
       }
 
       /** The card_payments capability. */
-      public Builder setCardPayments(CardPayments cardPayments) {
+      public Builder setCardPayments(AccountCreateParams.Capabilities.CardPayments cardPayments) {
         this.cardPayments = cardPayments;
         return this;
       }
 
       /** The cartes_bancaires_payments capability. */
-      public Builder setCartesBancairesPayments(CartesBancairesPayments cartesBancairesPayments) {
+      public Builder setCartesBancairesPayments(
+          AccountCreateParams.Capabilities.CartesBancairesPayments cartesBancairesPayments) {
         this.cartesBancairesPayments = cartesBancairesPayments;
         return this;
       }
 
       /** The eps_payments capability. */
-      public Builder setEpsPayments(EpsPayments epsPayments) {
+      public Builder setEpsPayments(AccountCreateParams.Capabilities.EpsPayments epsPayments) {
         this.epsPayments = epsPayments;
         return this;
       }
@@ -1257,122 +1265,134 @@ public class AccountCreateParams extends ApiRequestParams {
       }
 
       /** The fpx_payments capability. */
-      public Builder setFpxPayments(FpxPayments fpxPayments) {
+      public Builder setFpxPayments(AccountCreateParams.Capabilities.FpxPayments fpxPayments) {
         this.fpxPayments = fpxPayments;
         return this;
       }
 
       /** The giropay_payments capability. */
-      public Builder setGiropayPayments(GiropayPayments giropayPayments) {
+      public Builder setGiropayPayments(
+          AccountCreateParams.Capabilities.GiropayPayments giropayPayments) {
         this.giropayPayments = giropayPayments;
         return this;
       }
 
       /** The grabpay_payments capability. */
-      public Builder setGrabpayPayments(GrabpayPayments grabpayPayments) {
+      public Builder setGrabpayPayments(
+          AccountCreateParams.Capabilities.GrabpayPayments grabpayPayments) {
         this.grabpayPayments = grabpayPayments;
         return this;
       }
 
       /** The ideal_payments capability. */
-      public Builder setIdealPayments(IdealPayments idealPayments) {
+      public Builder setIdealPayments(
+          AccountCreateParams.Capabilities.IdealPayments idealPayments) {
         this.idealPayments = idealPayments;
         return this;
       }
 
       /** The jcb_payments capability. */
-      public Builder setJcbPayments(JcbPayments jcbPayments) {
+      public Builder setJcbPayments(AccountCreateParams.Capabilities.JcbPayments jcbPayments) {
         this.jcbPayments = jcbPayments;
         return this;
       }
 
       /** The klarna_payments capability. */
-      public Builder setKlarnaPayments(KlarnaPayments klarnaPayments) {
+      public Builder setKlarnaPayments(
+          AccountCreateParams.Capabilities.KlarnaPayments klarnaPayments) {
         this.klarnaPayments = klarnaPayments;
         return this;
       }
 
       /** The konbini_payments capability. */
-      public Builder setKonbiniPayments(KonbiniPayments konbiniPayments) {
+      public Builder setKonbiniPayments(
+          AccountCreateParams.Capabilities.KonbiniPayments konbiniPayments) {
         this.konbiniPayments = konbiniPayments;
         return this;
       }
 
       /** The legacy_payments capability. */
-      public Builder setLegacyPayments(LegacyPayments legacyPayments) {
+      public Builder setLegacyPayments(
+          AccountCreateParams.Capabilities.LegacyPayments legacyPayments) {
         this.legacyPayments = legacyPayments;
         return this;
       }
 
       /** The link_payments capability. */
-      public Builder setLinkPayments(LinkPayments linkPayments) {
+      public Builder setLinkPayments(AccountCreateParams.Capabilities.LinkPayments linkPayments) {
         this.linkPayments = linkPayments;
         return this;
       }
 
       /** The oxxo_payments capability. */
-      public Builder setOxxoPayments(OxxoPayments oxxoPayments) {
+      public Builder setOxxoPayments(AccountCreateParams.Capabilities.OxxoPayments oxxoPayments) {
         this.oxxoPayments = oxxoPayments;
         return this;
       }
 
       /** The p24_payments capability. */
-      public Builder setP24Payments(P24Payments p24Payments) {
+      public Builder setP24Payments(AccountCreateParams.Capabilities.P24Payments p24Payments) {
         this.p24Payments = p24Payments;
         return this;
       }
 
       /** The paynow_payments capability. */
-      public Builder setPaynowPayments(PaynowPayments paynowPayments) {
+      public Builder setPaynowPayments(
+          AccountCreateParams.Capabilities.PaynowPayments paynowPayments) {
         this.paynowPayments = paynowPayments;
         return this;
       }
 
       /** The promptpay_payments capability. */
-      public Builder setPromptpayPayments(PromptpayPayments promptpayPayments) {
+      public Builder setPromptpayPayments(
+          AccountCreateParams.Capabilities.PromptpayPayments promptpayPayments) {
         this.promptpayPayments = promptpayPayments;
         return this;
       }
 
       /** The sepa_debit_payments capability. */
-      public Builder setSepaDebitPayments(SepaDebitPayments sepaDebitPayments) {
+      public Builder setSepaDebitPayments(
+          AccountCreateParams.Capabilities.SepaDebitPayments sepaDebitPayments) {
         this.sepaDebitPayments = sepaDebitPayments;
         return this;
       }
 
       /** The sofort_payments capability. */
-      public Builder setSofortPayments(SofortPayments sofortPayments) {
+      public Builder setSofortPayments(
+          AccountCreateParams.Capabilities.SofortPayments sofortPayments) {
         this.sofortPayments = sofortPayments;
         return this;
       }
 
       /** The tax_reporting_us_1099_k capability. */
-      public Builder setTaxReportingUs1099K(TaxReportingUs1099K taxReportingUs1099K) {
+      public Builder setTaxReportingUs1099K(
+          AccountCreateParams.Capabilities.TaxReportingUs1099K taxReportingUs1099K) {
         this.taxReportingUs1099K = taxReportingUs1099K;
         return this;
       }
 
       /** The tax_reporting_us_1099_misc capability. */
-      public Builder setTaxReportingUs1099Misc(TaxReportingUs1099Misc taxReportingUs1099Misc) {
+      public Builder setTaxReportingUs1099Misc(
+          AccountCreateParams.Capabilities.TaxReportingUs1099Misc taxReportingUs1099Misc) {
         this.taxReportingUs1099Misc = taxReportingUs1099Misc;
         return this;
       }
 
       /** The transfers capability. */
-      public Builder setTransfers(Transfers transfers) {
+      public Builder setTransfers(AccountCreateParams.Capabilities.Transfers transfers) {
         this.transfers = transfers;
         return this;
       }
 
       /** The treasury capability. */
-      public Builder setTreasury(Treasury treasury) {
+      public Builder setTreasury(AccountCreateParams.Capabilities.Treasury treasury) {
         this.treasury = treasury;
         return this;
       }
 
       /** The us_bank_account_ach_payments capability. */
       public Builder setUsBankAccountAchPayments(
-          UsBankAccountAchPayments usBankAccountAchPayments) {
+          AccountCreateParams.Capabilities.UsBankAccountAchPayments usBankAccountAchPayments) {
         this.usBankAccountAchPayments = usBankAccountAchPayments;
         return this;
       }
@@ -1412,8 +1432,9 @@ public class AccountCreateParams extends ApiRequestParams {
         private Boolean requested;
 
         /** Finalize and obtain parameter instance from this builder. */
-        public AcssDebitPayments build() {
-          return new AcssDebitPayments(this.extraParams, this.requested);
+        public AccountCreateParams.Capabilities.AcssDebitPayments build() {
+          return new AccountCreateParams.Capabilities.AcssDebitPayments(
+              this.extraParams, this.requested);
         }
 
         /**
@@ -1490,8 +1511,9 @@ public class AccountCreateParams extends ApiRequestParams {
         private Boolean requested;
 
         /** Finalize and obtain parameter instance from this builder. */
-        public AffirmPayments build() {
-          return new AffirmPayments(this.extraParams, this.requested);
+        public AccountCreateParams.Capabilities.AffirmPayments build() {
+          return new AccountCreateParams.Capabilities.AffirmPayments(
+              this.extraParams, this.requested);
         }
 
         /**
@@ -1568,8 +1590,9 @@ public class AccountCreateParams extends ApiRequestParams {
         private Boolean requested;
 
         /** Finalize and obtain parameter instance from this builder. */
-        public AfterpayClearpayPayments build() {
-          return new AfterpayClearpayPayments(this.extraParams, this.requested);
+        public AccountCreateParams.Capabilities.AfterpayClearpayPayments build() {
+          return new AccountCreateParams.Capabilities.AfterpayClearpayPayments(
+              this.extraParams, this.requested);
         }
 
         /**
@@ -1646,8 +1669,9 @@ public class AccountCreateParams extends ApiRequestParams {
         private Boolean requested;
 
         /** Finalize and obtain parameter instance from this builder. */
-        public AuBecsDebitPayments build() {
-          return new AuBecsDebitPayments(this.extraParams, this.requested);
+        public AccountCreateParams.Capabilities.AuBecsDebitPayments build() {
+          return new AccountCreateParams.Capabilities.AuBecsDebitPayments(
+              this.extraParams, this.requested);
         }
 
         /**
@@ -1724,8 +1748,9 @@ public class AccountCreateParams extends ApiRequestParams {
         private Boolean requested;
 
         /** Finalize and obtain parameter instance from this builder. */
-        public BacsDebitPayments build() {
-          return new BacsDebitPayments(this.extraParams, this.requested);
+        public AccountCreateParams.Capabilities.BacsDebitPayments build() {
+          return new AccountCreateParams.Capabilities.BacsDebitPayments(
+              this.extraParams, this.requested);
         }
 
         /**
@@ -1802,8 +1827,9 @@ public class AccountCreateParams extends ApiRequestParams {
         private Boolean requested;
 
         /** Finalize and obtain parameter instance from this builder. */
-        public BancontactPayments build() {
-          return new BancontactPayments(this.extraParams, this.requested);
+        public AccountCreateParams.Capabilities.BancontactPayments build() {
+          return new AccountCreateParams.Capabilities.BancontactPayments(
+              this.extraParams, this.requested);
         }
 
         /**
@@ -1880,8 +1906,9 @@ public class AccountCreateParams extends ApiRequestParams {
         private Boolean requested;
 
         /** Finalize and obtain parameter instance from this builder. */
-        public BankTransferPayments build() {
-          return new BankTransferPayments(this.extraParams, this.requested);
+        public AccountCreateParams.Capabilities.BankTransferPayments build() {
+          return new AccountCreateParams.Capabilities.BankTransferPayments(
+              this.extraParams, this.requested);
         }
 
         /**
@@ -1958,8 +1985,9 @@ public class AccountCreateParams extends ApiRequestParams {
         private Boolean requested;
 
         /** Finalize and obtain parameter instance from this builder. */
-        public BlikPayments build() {
-          return new BlikPayments(this.extraParams, this.requested);
+        public AccountCreateParams.Capabilities.BlikPayments build() {
+          return new AccountCreateParams.Capabilities.BlikPayments(
+              this.extraParams, this.requested);
         }
 
         /**
@@ -2036,8 +2064,9 @@ public class AccountCreateParams extends ApiRequestParams {
         private Boolean requested;
 
         /** Finalize and obtain parameter instance from this builder. */
-        public BoletoPayments build() {
-          return new BoletoPayments(this.extraParams, this.requested);
+        public AccountCreateParams.Capabilities.BoletoPayments build() {
+          return new AccountCreateParams.Capabilities.BoletoPayments(
+              this.extraParams, this.requested);
         }
 
         /**
@@ -2114,8 +2143,8 @@ public class AccountCreateParams extends ApiRequestParams {
         private Boolean requested;
 
         /** Finalize and obtain parameter instance from this builder. */
-        public CardIssuing build() {
-          return new CardIssuing(this.extraParams, this.requested);
+        public AccountCreateParams.Capabilities.CardIssuing build() {
+          return new AccountCreateParams.Capabilities.CardIssuing(this.extraParams, this.requested);
         }
 
         /**
@@ -2192,8 +2221,9 @@ public class AccountCreateParams extends ApiRequestParams {
         private Boolean requested;
 
         /** Finalize and obtain parameter instance from this builder. */
-        public CardPayments build() {
-          return new CardPayments(this.extraParams, this.requested);
+        public AccountCreateParams.Capabilities.CardPayments build() {
+          return new AccountCreateParams.Capabilities.CardPayments(
+              this.extraParams, this.requested);
         }
 
         /**
@@ -2270,8 +2300,9 @@ public class AccountCreateParams extends ApiRequestParams {
         private Boolean requested;
 
         /** Finalize and obtain parameter instance from this builder. */
-        public CartesBancairesPayments build() {
-          return new CartesBancairesPayments(this.extraParams, this.requested);
+        public AccountCreateParams.Capabilities.CartesBancairesPayments build() {
+          return new AccountCreateParams.Capabilities.CartesBancairesPayments(
+              this.extraParams, this.requested);
         }
 
         /**
@@ -2348,8 +2379,8 @@ public class AccountCreateParams extends ApiRequestParams {
         private Boolean requested;
 
         /** Finalize and obtain parameter instance from this builder. */
-        public EpsPayments build() {
-          return new EpsPayments(this.extraParams, this.requested);
+        public AccountCreateParams.Capabilities.EpsPayments build() {
+          return new AccountCreateParams.Capabilities.EpsPayments(this.extraParams, this.requested);
         }
 
         /**
@@ -2426,8 +2457,8 @@ public class AccountCreateParams extends ApiRequestParams {
         private Boolean requested;
 
         /** Finalize and obtain parameter instance from this builder. */
-        public FpxPayments build() {
-          return new FpxPayments(this.extraParams, this.requested);
+        public AccountCreateParams.Capabilities.FpxPayments build() {
+          return new AccountCreateParams.Capabilities.FpxPayments(this.extraParams, this.requested);
         }
 
         /**
@@ -2504,8 +2535,9 @@ public class AccountCreateParams extends ApiRequestParams {
         private Boolean requested;
 
         /** Finalize and obtain parameter instance from this builder. */
-        public GiropayPayments build() {
-          return new GiropayPayments(this.extraParams, this.requested);
+        public AccountCreateParams.Capabilities.GiropayPayments build() {
+          return new AccountCreateParams.Capabilities.GiropayPayments(
+              this.extraParams, this.requested);
         }
 
         /**
@@ -2582,8 +2614,9 @@ public class AccountCreateParams extends ApiRequestParams {
         private Boolean requested;
 
         /** Finalize and obtain parameter instance from this builder. */
-        public GrabpayPayments build() {
-          return new GrabpayPayments(this.extraParams, this.requested);
+        public AccountCreateParams.Capabilities.GrabpayPayments build() {
+          return new AccountCreateParams.Capabilities.GrabpayPayments(
+              this.extraParams, this.requested);
         }
 
         /**
@@ -2660,8 +2693,9 @@ public class AccountCreateParams extends ApiRequestParams {
         private Boolean requested;
 
         /** Finalize and obtain parameter instance from this builder. */
-        public IdealPayments build() {
-          return new IdealPayments(this.extraParams, this.requested);
+        public AccountCreateParams.Capabilities.IdealPayments build() {
+          return new AccountCreateParams.Capabilities.IdealPayments(
+              this.extraParams, this.requested);
         }
 
         /**
@@ -2738,8 +2772,8 @@ public class AccountCreateParams extends ApiRequestParams {
         private Boolean requested;
 
         /** Finalize and obtain parameter instance from this builder. */
-        public JcbPayments build() {
-          return new JcbPayments(this.extraParams, this.requested);
+        public AccountCreateParams.Capabilities.JcbPayments build() {
+          return new AccountCreateParams.Capabilities.JcbPayments(this.extraParams, this.requested);
         }
 
         /**
@@ -2816,8 +2850,9 @@ public class AccountCreateParams extends ApiRequestParams {
         private Boolean requested;
 
         /** Finalize and obtain parameter instance from this builder. */
-        public KlarnaPayments build() {
-          return new KlarnaPayments(this.extraParams, this.requested);
+        public AccountCreateParams.Capabilities.KlarnaPayments build() {
+          return new AccountCreateParams.Capabilities.KlarnaPayments(
+              this.extraParams, this.requested);
         }
 
         /**
@@ -2894,8 +2929,9 @@ public class AccountCreateParams extends ApiRequestParams {
         private Boolean requested;
 
         /** Finalize and obtain parameter instance from this builder. */
-        public KonbiniPayments build() {
-          return new KonbiniPayments(this.extraParams, this.requested);
+        public AccountCreateParams.Capabilities.KonbiniPayments build() {
+          return new AccountCreateParams.Capabilities.KonbiniPayments(
+              this.extraParams, this.requested);
         }
 
         /**
@@ -2972,8 +3008,9 @@ public class AccountCreateParams extends ApiRequestParams {
         private Boolean requested;
 
         /** Finalize and obtain parameter instance from this builder. */
-        public LegacyPayments build() {
-          return new LegacyPayments(this.extraParams, this.requested);
+        public AccountCreateParams.Capabilities.LegacyPayments build() {
+          return new AccountCreateParams.Capabilities.LegacyPayments(
+              this.extraParams, this.requested);
         }
 
         /**
@@ -3050,8 +3087,9 @@ public class AccountCreateParams extends ApiRequestParams {
         private Boolean requested;
 
         /** Finalize and obtain parameter instance from this builder. */
-        public LinkPayments build() {
-          return new LinkPayments(this.extraParams, this.requested);
+        public AccountCreateParams.Capabilities.LinkPayments build() {
+          return new AccountCreateParams.Capabilities.LinkPayments(
+              this.extraParams, this.requested);
         }
 
         /**
@@ -3128,8 +3166,9 @@ public class AccountCreateParams extends ApiRequestParams {
         private Boolean requested;
 
         /** Finalize and obtain parameter instance from this builder. */
-        public OxxoPayments build() {
-          return new OxxoPayments(this.extraParams, this.requested);
+        public AccountCreateParams.Capabilities.OxxoPayments build() {
+          return new AccountCreateParams.Capabilities.OxxoPayments(
+              this.extraParams, this.requested);
         }
 
         /**
@@ -3206,8 +3245,8 @@ public class AccountCreateParams extends ApiRequestParams {
         private Boolean requested;
 
         /** Finalize and obtain parameter instance from this builder. */
-        public P24Payments build() {
-          return new P24Payments(this.extraParams, this.requested);
+        public AccountCreateParams.Capabilities.P24Payments build() {
+          return new AccountCreateParams.Capabilities.P24Payments(this.extraParams, this.requested);
         }
 
         /**
@@ -3284,8 +3323,9 @@ public class AccountCreateParams extends ApiRequestParams {
         private Boolean requested;
 
         /** Finalize and obtain parameter instance from this builder. */
-        public PaynowPayments build() {
-          return new PaynowPayments(this.extraParams, this.requested);
+        public AccountCreateParams.Capabilities.PaynowPayments build() {
+          return new AccountCreateParams.Capabilities.PaynowPayments(
+              this.extraParams, this.requested);
         }
 
         /**
@@ -3362,8 +3402,9 @@ public class AccountCreateParams extends ApiRequestParams {
         private Boolean requested;
 
         /** Finalize and obtain parameter instance from this builder. */
-        public PromptpayPayments build() {
-          return new PromptpayPayments(this.extraParams, this.requested);
+        public AccountCreateParams.Capabilities.PromptpayPayments build() {
+          return new AccountCreateParams.Capabilities.PromptpayPayments(
+              this.extraParams, this.requested);
         }
 
         /**
@@ -3440,8 +3481,9 @@ public class AccountCreateParams extends ApiRequestParams {
         private Boolean requested;
 
         /** Finalize and obtain parameter instance from this builder. */
-        public SepaDebitPayments build() {
-          return new SepaDebitPayments(this.extraParams, this.requested);
+        public AccountCreateParams.Capabilities.SepaDebitPayments build() {
+          return new AccountCreateParams.Capabilities.SepaDebitPayments(
+              this.extraParams, this.requested);
         }
 
         /**
@@ -3518,8 +3560,9 @@ public class AccountCreateParams extends ApiRequestParams {
         private Boolean requested;
 
         /** Finalize and obtain parameter instance from this builder. */
-        public SofortPayments build() {
-          return new SofortPayments(this.extraParams, this.requested);
+        public AccountCreateParams.Capabilities.SofortPayments build() {
+          return new AccountCreateParams.Capabilities.SofortPayments(
+              this.extraParams, this.requested);
         }
 
         /**
@@ -3596,8 +3639,9 @@ public class AccountCreateParams extends ApiRequestParams {
         private Boolean requested;
 
         /** Finalize and obtain parameter instance from this builder. */
-        public TaxReportingUs1099K build() {
-          return new TaxReportingUs1099K(this.extraParams, this.requested);
+        public AccountCreateParams.Capabilities.TaxReportingUs1099K build() {
+          return new AccountCreateParams.Capabilities.TaxReportingUs1099K(
+              this.extraParams, this.requested);
         }
 
         /**
@@ -3674,8 +3718,9 @@ public class AccountCreateParams extends ApiRequestParams {
         private Boolean requested;
 
         /** Finalize and obtain parameter instance from this builder. */
-        public TaxReportingUs1099Misc build() {
-          return new TaxReportingUs1099Misc(this.extraParams, this.requested);
+        public AccountCreateParams.Capabilities.TaxReportingUs1099Misc build() {
+          return new AccountCreateParams.Capabilities.TaxReportingUs1099Misc(
+              this.extraParams, this.requested);
         }
 
         /**
@@ -3752,8 +3797,8 @@ public class AccountCreateParams extends ApiRequestParams {
         private Boolean requested;
 
         /** Finalize and obtain parameter instance from this builder. */
-        public Transfers build() {
-          return new Transfers(this.extraParams, this.requested);
+        public AccountCreateParams.Capabilities.Transfers build() {
+          return new AccountCreateParams.Capabilities.Transfers(this.extraParams, this.requested);
         }
 
         /**
@@ -3830,8 +3875,8 @@ public class AccountCreateParams extends ApiRequestParams {
         private Boolean requested;
 
         /** Finalize and obtain parameter instance from this builder. */
-        public Treasury build() {
-          return new Treasury(this.extraParams, this.requested);
+        public AccountCreateParams.Capabilities.Treasury build() {
+          return new AccountCreateParams.Capabilities.Treasury(this.extraParams, this.requested);
         }
 
         /**
@@ -3908,8 +3953,9 @@ public class AccountCreateParams extends ApiRequestParams {
         private Boolean requested;
 
         /** Finalize and obtain parameter instance from this builder. */
-        public UsBankAccountAchPayments build() {
-          return new UsBankAccountAchPayments(this.extraParams, this.requested);
+        public AccountCreateParams.Capabilities.UsBankAccountAchPayments build() {
+          return new AccountCreateParams.Capabilities.UsBankAccountAchPayments(
+              this.extraParams, this.requested);
         }
 
         /**
@@ -4040,7 +4086,7 @@ public class AccountCreateParams extends ApiRequestParams {
      * structure</a> for more details.
      */
     @SerializedName("structure")
-    EnumParam structure;
+    ApiRequestParams.EnumParam structure;
 
     /**
      * The business ID number of the company, as appropriate for the company’s country. (Examples
@@ -4078,7 +4124,7 @@ public class AccountCreateParams extends ApiRequestParams {
         OwnershipDeclaration ownershipDeclaration,
         String phone,
         String registrationNumber,
-        EnumParam structure,
+        ApiRequestParams.EnumParam structure,
         String taxId,
         String taxIdRegistrar,
         String vatId,
@@ -4134,7 +4180,7 @@ public class AccountCreateParams extends ApiRequestParams {
 
       private String registrationNumber;
 
-      private EnumParam structure;
+      private ApiRequestParams.EnumParam structure;
 
       private String taxId;
 
@@ -4145,8 +4191,8 @@ public class AccountCreateParams extends ApiRequestParams {
       private Verification verification;
 
       /** Finalize and obtain parameter instance from this builder. */
-      public Company build() {
-        return new Company(
+      public AccountCreateParams.Company build() {
+        return new AccountCreateParams.Company(
             this.address,
             this.addressKana,
             this.addressKanji,
@@ -4168,19 +4214,19 @@ public class AccountCreateParams extends ApiRequestParams {
       }
 
       /** The company's primary address. */
-      public Builder setAddress(Address address) {
+      public Builder setAddress(AccountCreateParams.Company.Address address) {
         this.address = address;
         return this;
       }
 
       /** The Kana variation of the company's primary address (Japan only). */
-      public Builder setAddressKana(AddressKana addressKana) {
+      public Builder setAddressKana(AccountCreateParams.Company.AddressKana addressKana) {
         this.addressKana = addressKana;
         return this;
       }
 
       /** The Kanji variation of the company's primary address (Japan only). */
-      public Builder setAddressKanji(AddressKanji addressKanji) {
+      public Builder setAddressKanji(AccountCreateParams.Company.AddressKanji addressKanji) {
         this.addressKanji = addressKanji;
         return this;
       }
@@ -4266,7 +4312,8 @@ public class AccountCreateParams extends ApiRequestParams {
        * This hash is used to attest that the beneficial owner information provided to Stripe is
        * both current and correct.
        */
-      public Builder setOwnershipDeclaration(OwnershipDeclaration ownershipDeclaration) {
+      public Builder setOwnershipDeclaration(
+          AccountCreateParams.Company.OwnershipDeclaration ownershipDeclaration) {
         this.ownershipDeclaration = ownershipDeclaration;
         return this;
       }
@@ -4293,7 +4340,7 @@ public class AccountCreateParams extends ApiRequestParams {
        * href="https://stripe.com/docs/connect/identity-verification#business-structure">Business
        * structure</a> for more details.
        */
-      public Builder setStructure(Structure structure) {
+      public Builder setStructure(AccountCreateParams.Company.Structure structure) {
         this.structure = structure;
         return this;
       }
@@ -4333,7 +4380,7 @@ public class AccountCreateParams extends ApiRequestParams {
       }
 
       /** Information on the verification state of the company. */
-      public Builder setVerification(Verification verification) {
+      public Builder setVerification(AccountCreateParams.Company.Verification verification) {
         this.verification = verification;
         return this;
       }
@@ -4414,8 +4461,8 @@ public class AccountCreateParams extends ApiRequestParams {
         private String state;
 
         /** Finalize and obtain parameter instance from this builder. */
-        public Address build() {
-          return new Address(
+        public AccountCreateParams.Company.Address build() {
+          return new AccountCreateParams.Company.Address(
               this.city,
               this.country,
               this.extraParams,
@@ -4577,8 +4624,8 @@ public class AccountCreateParams extends ApiRequestParams {
         private String town;
 
         /** Finalize and obtain parameter instance from this builder. */
-        public AddressKana build() {
-          return new AddressKana(
+        public AccountCreateParams.Company.AddressKana build() {
+          return new AccountCreateParams.Company.AddressKana(
               this.city,
               this.country,
               this.extraParams,
@@ -4747,8 +4794,8 @@ public class AccountCreateParams extends ApiRequestParams {
         private String town;
 
         /** Finalize and obtain parameter instance from this builder. */
-        public AddressKanji build() {
-          return new AddressKanji(
+        public AccountCreateParams.Company.AddressKanji build() {
+          return new AccountCreateParams.Company.AddressKanji(
               this.city,
               this.country,
               this.extraParams,
@@ -4879,8 +4926,9 @@ public class AccountCreateParams extends ApiRequestParams {
         private String userAgent;
 
         /** Finalize and obtain parameter instance from this builder. */
-        public OwnershipDeclaration build() {
-          return new OwnershipDeclaration(this.date, this.extraParams, this.ip, this.userAgent);
+        public AccountCreateParams.Company.OwnershipDeclaration build() {
+          return new AccountCreateParams.Company.OwnershipDeclaration(
+              this.date, this.extraParams, this.ip, this.userAgent);
         }
 
         /** The Unix timestamp marking when the beneficial owner attestation was made. */
@@ -4961,12 +5009,12 @@ public class AccountCreateParams extends ApiRequestParams {
         private Map<String, Object> extraParams;
 
         /** Finalize and obtain parameter instance from this builder. */
-        public Verification build() {
-          return new Verification(this.document, this.extraParams);
+        public AccountCreateParams.Company.Verification build() {
+          return new AccountCreateParams.Company.Verification(this.document, this.extraParams);
         }
 
         /** A document verifying the business. */
-        public Builder setDocument(Document document) {
+        public Builder setDocument(AccountCreateParams.Company.Verification.Document document) {
           this.document = document;
           return this;
         }
@@ -5050,8 +5098,9 @@ public class AccountCreateParams extends ApiRequestParams {
           private String front;
 
           /** Finalize and obtain parameter instance from this builder. */
-          public Document build() {
-            return new Document(this.back, this.extraParams, this.front);
+          public AccountCreateParams.Company.Verification.Document build() {
+            return new AccountCreateParams.Company.Verification.Document(
+                this.back, this.extraParams, this.front);
           }
 
           /**
@@ -5274,8 +5323,8 @@ public class AccountCreateParams extends ApiRequestParams {
       private ProofOfRegistration proofOfRegistration;
 
       /** Finalize and obtain parameter instance from this builder. */
-      public Documents build() {
-        return new Documents(
+      public AccountCreateParams.Documents build() {
+        return new AccountCreateParams.Documents(
             this.bankAccountOwnershipVerification,
             this.companyLicense,
             this.companyMemorandumOfAssociation,
@@ -5294,20 +5343,23 @@ public class AccountCreateParams extends ApiRequestParams {
        * number, either a statement or a voided check.
        */
       public Builder setBankAccountOwnershipVerification(
-          BankAccountOwnershipVerification bankAccountOwnershipVerification) {
+          AccountCreateParams.Documents.BankAccountOwnershipVerification
+              bankAccountOwnershipVerification) {
         this.bankAccountOwnershipVerification = bankAccountOwnershipVerification;
         return this;
       }
 
       /** One or more documents that demonstrate proof of a company's license to operate. */
-      public Builder setCompanyLicense(CompanyLicense companyLicense) {
+      public Builder setCompanyLicense(
+          AccountCreateParams.Documents.CompanyLicense companyLicense) {
         this.companyLicense = companyLicense;
         return this;
       }
 
       /** One or more documents showing the company's Memorandum of Association. */
       public Builder setCompanyMemorandumOfAssociation(
-          CompanyMemorandumOfAssociation companyMemorandumOfAssociation) {
+          AccountCreateParams.Documents.CompanyMemorandumOfAssociation
+              companyMemorandumOfAssociation) {
         this.companyMemorandumOfAssociation = companyMemorandumOfAssociation;
         return this;
       }
@@ -5317,7 +5369,7 @@ public class AccountCreateParams extends ApiRequestParams {
        * the company's establishment.
        */
       public Builder setCompanyMinisterialDecree(
-          CompanyMinisterialDecree companyMinisterialDecree) {
+          AccountCreateParams.Documents.CompanyMinisterialDecree companyMinisterialDecree) {
         this.companyMinisterialDecree = companyMinisterialDecree;
         return this;
       }
@@ -5327,14 +5379,15 @@ public class AccountCreateParams extends ApiRequestParams {
        * appropriate local authorities.
        */
       public Builder setCompanyRegistrationVerification(
-          CompanyRegistrationVerification companyRegistrationVerification) {
+          AccountCreateParams.Documents.CompanyRegistrationVerification
+              companyRegistrationVerification) {
         this.companyRegistrationVerification = companyRegistrationVerification;
         return this;
       }
 
       /** One or more documents that demonstrate proof of a company's tax ID. */
       public Builder setCompanyTaxIdVerification(
-          CompanyTaxIdVerification companyTaxIdVerification) {
+          AccountCreateParams.Documents.CompanyTaxIdVerification companyTaxIdVerification) {
         this.companyTaxIdVerification = companyTaxIdVerification;
         return this;
       }
@@ -5369,7 +5422,8 @@ public class AccountCreateParams extends ApiRequestParams {
        * One or more documents showing the company’s proof of registration with the national
        * business registry.
        */
-      public Builder setProofOfRegistration(ProofOfRegistration proofOfRegistration) {
+      public Builder setProofOfRegistration(
+          AccountCreateParams.Documents.ProofOfRegistration proofOfRegistration) {
         this.proofOfRegistration = proofOfRegistration;
         return this;
       }
@@ -5410,8 +5464,9 @@ public class AccountCreateParams extends ApiRequestParams {
         private List<String> files;
 
         /** Finalize and obtain parameter instance from this builder. */
-        public BankAccountOwnershipVerification build() {
-          return new BankAccountOwnershipVerification(this.extraParams, this.files);
+        public AccountCreateParams.Documents.BankAccountOwnershipVerification build() {
+          return new AccountCreateParams.Documents.BankAccountOwnershipVerification(
+              this.extraParams, this.files);
         }
 
         /**
@@ -5508,8 +5563,8 @@ public class AccountCreateParams extends ApiRequestParams {
         private List<String> files;
 
         /** Finalize and obtain parameter instance from this builder. */
-        public CompanyLicense build() {
-          return new CompanyLicense(this.extraParams, this.files);
+        public AccountCreateParams.Documents.CompanyLicense build() {
+          return new AccountCreateParams.Documents.CompanyLicense(this.extraParams, this.files);
         }
 
         /**
@@ -5602,8 +5657,9 @@ public class AccountCreateParams extends ApiRequestParams {
         private List<String> files;
 
         /** Finalize and obtain parameter instance from this builder. */
-        public CompanyMemorandumOfAssociation build() {
-          return new CompanyMemorandumOfAssociation(this.extraParams, this.files);
+        public AccountCreateParams.Documents.CompanyMemorandumOfAssociation build() {
+          return new AccountCreateParams.Documents.CompanyMemorandumOfAssociation(
+              this.extraParams, this.files);
         }
 
         /**
@@ -5698,8 +5754,9 @@ public class AccountCreateParams extends ApiRequestParams {
         private List<String> files;
 
         /** Finalize and obtain parameter instance from this builder. */
-        public CompanyMinisterialDecree build() {
-          return new CompanyMinisterialDecree(this.extraParams, this.files);
+        public AccountCreateParams.Documents.CompanyMinisterialDecree build() {
+          return new AccountCreateParams.Documents.CompanyMinisterialDecree(
+              this.extraParams, this.files);
         }
 
         /**
@@ -5794,8 +5851,9 @@ public class AccountCreateParams extends ApiRequestParams {
         private List<String> files;
 
         /** Finalize and obtain parameter instance from this builder. */
-        public CompanyRegistrationVerification build() {
-          return new CompanyRegistrationVerification(this.extraParams, this.files);
+        public AccountCreateParams.Documents.CompanyRegistrationVerification build() {
+          return new AccountCreateParams.Documents.CompanyRegistrationVerification(
+              this.extraParams, this.files);
         }
 
         /**
@@ -5892,8 +5950,9 @@ public class AccountCreateParams extends ApiRequestParams {
         private List<String> files;
 
         /** Finalize and obtain parameter instance from this builder. */
-        public CompanyTaxIdVerification build() {
-          return new CompanyTaxIdVerification(this.extraParams, this.files);
+        public AccountCreateParams.Documents.CompanyTaxIdVerification build() {
+          return new AccountCreateParams.Documents.CompanyTaxIdVerification(
+              this.extraParams, this.files);
         }
 
         /**
@@ -5988,8 +6047,9 @@ public class AccountCreateParams extends ApiRequestParams {
         private List<String> files;
 
         /** Finalize and obtain parameter instance from this builder. */
-        public ProofOfRegistration build() {
-          return new ProofOfRegistration(this.extraParams, this.files);
+        public AccountCreateParams.Documents.ProofOfRegistration build() {
+          return new AccountCreateParams.Documents.ProofOfRegistration(
+              this.extraParams, this.files);
         }
 
         /**
@@ -6274,8 +6334,8 @@ public class AccountCreateParams extends ApiRequestParams {
       private Verification verification;
 
       /** Finalize and obtain parameter instance from this builder. */
-      public Individual build() {
-        return new Individual(
+      public AccountCreateParams.Individual build() {
+        return new AccountCreateParams.Individual(
             this.address,
             this.addressKana,
             this.addressKanji,
@@ -6302,25 +6362,25 @@ public class AccountCreateParams extends ApiRequestParams {
       }
 
       /** The individual's primary address. */
-      public Builder setAddress(Address address) {
+      public Builder setAddress(AccountCreateParams.Individual.Address address) {
         this.address = address;
         return this;
       }
 
       /** The Kana variation of the the individual's primary address (Japan only). */
-      public Builder setAddressKana(AddressKana addressKana) {
+      public Builder setAddressKana(AccountCreateParams.Individual.AddressKana addressKana) {
         this.addressKana = addressKana;
         return this;
       }
 
       /** The Kanji variation of the the individual's primary address (Japan only). */
-      public Builder setAddressKanji(AddressKanji addressKanji) {
+      public Builder setAddressKanji(AccountCreateParams.Individual.AddressKanji addressKanji) {
         this.addressKanji = addressKanji;
         return this;
       }
 
       /** The individual's date of birth. */
-      public Builder setDob(Dob dob) {
+      public Builder setDob(AccountCreateParams.Individual.Dob dob) {
         this.dob = dob;
         return this;
       }
@@ -6540,13 +6600,15 @@ public class AccountCreateParams extends ApiRequestParams {
        * related persons, declares that they hold or have held an important public job or function,
        * in any jurisdiction.
        */
-      public Builder setPoliticalExposure(PoliticalExposure politicalExposure) {
+      public Builder setPoliticalExposure(
+          AccountCreateParams.Individual.PoliticalExposure politicalExposure) {
         this.politicalExposure = politicalExposure;
         return this;
       }
 
       /** The individual's registered address. */
-      public Builder setRegisteredAddress(RegisteredAddress registeredAddress) {
+      public Builder setRegisteredAddress(
+          AccountCreateParams.Individual.RegisteredAddress registeredAddress) {
         this.registeredAddress = registeredAddress;
         return this;
       }
@@ -6558,7 +6620,7 @@ public class AccountCreateParams extends ApiRequestParams {
       }
 
       /** The individual's verification document information. */
-      public Builder setVerification(Verification verification) {
+      public Builder setVerification(AccountCreateParams.Individual.Verification verification) {
         this.verification = verification;
         return this;
       }
@@ -6639,8 +6701,8 @@ public class AccountCreateParams extends ApiRequestParams {
         private String state;
 
         /** Finalize and obtain parameter instance from this builder. */
-        public Address build() {
-          return new Address(
+        public AccountCreateParams.Individual.Address build() {
+          return new AccountCreateParams.Individual.Address(
               this.city,
               this.country,
               this.extraParams,
@@ -6802,8 +6864,8 @@ public class AccountCreateParams extends ApiRequestParams {
         private String town;
 
         /** Finalize and obtain parameter instance from this builder. */
-        public AddressKana build() {
-          return new AddressKana(
+        public AccountCreateParams.Individual.AddressKana build() {
+          return new AccountCreateParams.Individual.AddressKana(
               this.city,
               this.country,
               this.extraParams,
@@ -6972,8 +7034,8 @@ public class AccountCreateParams extends ApiRequestParams {
         private String town;
 
         /** Finalize and obtain parameter instance from this builder. */
-        public AddressKanji build() {
-          return new AddressKanji(
+        public AccountCreateParams.Individual.AddressKanji build() {
+          return new AccountCreateParams.Individual.AddressKanji(
               this.city,
               this.country,
               this.extraParams,
@@ -7103,8 +7165,9 @@ public class AccountCreateParams extends ApiRequestParams {
         private Long year;
 
         /** Finalize and obtain parameter instance from this builder. */
-        public Dob build() {
-          return new Dob(this.day, this.extraParams, this.month, this.year);
+        public AccountCreateParams.Individual.Dob build() {
+          return new AccountCreateParams.Individual.Dob(
+              this.day, this.extraParams, this.month, this.year);
         }
 
         /** The day of birth, between 1 and 31. */
@@ -7230,8 +7293,8 @@ public class AccountCreateParams extends ApiRequestParams {
         private String state;
 
         /** Finalize and obtain parameter instance from this builder. */
-        public RegisteredAddress build() {
-          return new RegisteredAddress(
+        public AccountCreateParams.Individual.RegisteredAddress build() {
+          return new AccountCreateParams.Individual.RegisteredAddress(
               this.city,
               this.country,
               this.extraParams,
@@ -7353,21 +7416,23 @@ public class AccountCreateParams extends ApiRequestParams {
         private Map<String, Object> extraParams;
 
         /** Finalize and obtain parameter instance from this builder. */
-        public Verification build() {
-          return new Verification(this.additionalDocument, this.document, this.extraParams);
+        public AccountCreateParams.Individual.Verification build() {
+          return new AccountCreateParams.Individual.Verification(
+              this.additionalDocument, this.document, this.extraParams);
         }
 
         /**
          * A document showing address, either a passport, local ID card, or utility bill from a
          * well-known utility company.
          */
-        public Builder setAdditionalDocument(AdditionalDocument additionalDocument) {
+        public Builder setAdditionalDocument(
+            AccountCreateParams.Individual.Verification.AdditionalDocument additionalDocument) {
           this.additionalDocument = additionalDocument;
           return this;
         }
 
         /** An identifying document, either a passport or local ID card. */
-        public Builder setDocument(Document document) {
+        public Builder setDocument(AccountCreateParams.Individual.Verification.Document document) {
           this.document = document;
           return this;
         }
@@ -7449,8 +7514,9 @@ public class AccountCreateParams extends ApiRequestParams {
           private String front;
 
           /** Finalize and obtain parameter instance from this builder. */
-          public AdditionalDocument build() {
-            return new AdditionalDocument(this.back, this.extraParams, this.front);
+          public AccountCreateParams.Individual.Verification.AdditionalDocument build() {
+            return new AccountCreateParams.Individual.Verification.AdditionalDocument(
+                this.back, this.extraParams, this.front);
           }
 
           /**
@@ -7555,8 +7621,9 @@ public class AccountCreateParams extends ApiRequestParams {
           private String front;
 
           /** Finalize and obtain parameter instance from this builder. */
-          public Document build() {
-            return new Document(this.back, this.extraParams, this.front);
+          public AccountCreateParams.Individual.Verification.Document build() {
+            return new AccountCreateParams.Individual.Verification.Document(
+                this.back, this.extraParams, this.front);
           }
 
           /**
@@ -7703,8 +7770,8 @@ public class AccountCreateParams extends ApiRequestParams {
       private Treasury treasury;
 
       /** Finalize and obtain parameter instance from this builder. */
-      public Settings build() {
-        return new Settings(
+      public AccountCreateParams.Settings build() {
+        return new AccountCreateParams.Settings(
             this.branding,
             this.cardIssuing,
             this.cardPayments,
@@ -7718,19 +7785,19 @@ public class AccountCreateParams extends ApiRequestParams {
        * Settings used to apply the account's branding to email receipts, invoices, Checkout, and
        * other products.
        */
-      public Builder setBranding(Branding branding) {
+      public Builder setBranding(AccountCreateParams.Settings.Branding branding) {
         this.branding = branding;
         return this;
       }
 
       /** Settings specific to the account's use of the Card Issuing product. */
-      public Builder setCardIssuing(CardIssuing cardIssuing) {
+      public Builder setCardIssuing(AccountCreateParams.Settings.CardIssuing cardIssuing) {
         this.cardIssuing = cardIssuing;
         return this;
       }
 
       /** Settings specific to card charging on the account. */
-      public Builder setCardPayments(CardPayments cardPayments) {
+      public Builder setCardPayments(AccountCreateParams.Settings.CardPayments cardPayments) {
         this.cardPayments = cardPayments;
         return this;
       }
@@ -7762,19 +7829,19 @@ public class AccountCreateParams extends ApiRequestParams {
       }
 
       /** Settings that apply across payment methods for charging on the account. */
-      public Builder setPayments(Payments payments) {
+      public Builder setPayments(AccountCreateParams.Settings.Payments payments) {
         this.payments = payments;
         return this;
       }
 
       /** Settings specific to the account's payouts. */
-      public Builder setPayouts(Payouts payouts) {
+      public Builder setPayouts(AccountCreateParams.Settings.Payouts payouts) {
         this.payouts = payouts;
         return this;
       }
 
       /** Settings specific to the account's Treasury FinancialAccounts. */
-      public Builder setTreasury(Treasury treasury) {
+      public Builder setTreasury(AccountCreateParams.Settings.Treasury treasury) {
         this.treasury = treasury;
         return this;
       }
@@ -7843,8 +7910,8 @@ public class AccountCreateParams extends ApiRequestParams {
         private String secondaryColor;
 
         /** Finalize and obtain parameter instance from this builder. */
-        public Branding build() {
-          return new Branding(
+        public AccountCreateParams.Settings.Branding build() {
+          return new AccountCreateParams.Settings.Branding(
               this.extraParams, this.icon, this.logo, this.primaryColor, this.secondaryColor);
         }
 
@@ -7943,8 +8010,8 @@ public class AccountCreateParams extends ApiRequestParams {
         private TosAcceptance tosAcceptance;
 
         /** Finalize and obtain parameter instance from this builder. */
-        public CardIssuing build() {
-          return new CardIssuing(this.extraParams, this.tosAcceptance);
+        public AccountCreateParams.Settings.CardIssuing build() {
+          return new AccountCreateParams.Settings.CardIssuing(this.extraParams, this.tosAcceptance);
         }
 
         /**
@@ -7980,7 +8047,8 @@ public class AccountCreateParams extends ApiRequestParams {
          * href="https://stripe.com/docs/issuing/connect/tos_acceptance">Stripe Issuing Terms and
          * Disclosures</a>.
          */
-        public Builder setTosAcceptance(TosAcceptance tosAcceptance) {
+        public Builder setTosAcceptance(
+            AccountCreateParams.Settings.CardIssuing.TosAcceptance tosAcceptance) {
           this.tosAcceptance = tosAcceptance;
           return this;
         }
@@ -8038,8 +8106,9 @@ public class AccountCreateParams extends ApiRequestParams {
           private String userAgent;
 
           /** Finalize and obtain parameter instance from this builder. */
-          public TosAcceptance build() {
-            return new TosAcceptance(this.date, this.extraParams, this.ip, this.userAgent);
+          public AccountCreateParams.Settings.CardIssuing.TosAcceptance build() {
+            return new AccountCreateParams.Settings.CardIssuing.TosAcceptance(
+                this.date, this.extraParams, this.ip, this.userAgent);
           }
 
           /**
@@ -8175,8 +8244,8 @@ public class AccountCreateParams extends ApiRequestParams {
         private Object statementDescriptorPrefixKanji;
 
         /** Finalize and obtain parameter instance from this builder. */
-        public CardPayments build() {
-          return new CardPayments(
+        public AccountCreateParams.Settings.CardPayments build() {
+          return new AccountCreateParams.Settings.CardPayments(
               this.declineOn,
               this.extraParams,
               this.statementDescriptorPrefix,
@@ -8188,7 +8257,7 @@ public class AccountCreateParams extends ApiRequestParams {
          * Automatically declines certain charge types regardless of whether the card issuer
          * accepted or declined the charge.
          */
-        public Builder setDeclineOn(DeclineOn declineOn) {
+        public Builder setDeclineOn(AccountCreateParams.Settings.CardPayments.DeclineOn declineOn) {
           this.declineOn = declineOn;
           return this;
         }
@@ -8327,8 +8396,9 @@ public class AccountCreateParams extends ApiRequestParams {
           private Map<String, Object> extraParams;
 
           /** Finalize and obtain parameter instance from this builder. */
-          public DeclineOn build() {
-            return new DeclineOn(this.avsFailure, this.cvcFailure, this.extraParams);
+          public AccountCreateParams.Settings.CardPayments.DeclineOn build() {
+            return new AccountCreateParams.Settings.CardPayments.DeclineOn(
+                this.avsFailure, this.cvcFailure, this.extraParams);
           }
 
           /**
@@ -8438,8 +8508,8 @@ public class AccountCreateParams extends ApiRequestParams {
         private String statementDescriptorKanji;
 
         /** Finalize and obtain parameter instance from this builder. */
-        public Payments build() {
-          return new Payments(
+        public AccountCreateParams.Settings.Payments build() {
+          return new AccountCreateParams.Settings.Payments(
               this.extraParams,
               this.statementDescriptor,
               this.statementDescriptorKana,
@@ -8564,8 +8634,8 @@ public class AccountCreateParams extends ApiRequestParams {
         private String statementDescriptor;
 
         /** Finalize and obtain parameter instance from this builder. */
-        public Payouts build() {
-          return new Payouts(
+        public AccountCreateParams.Settings.Payouts build() {
+          return new AccountCreateParams.Settings.Payouts(
               this.debitNegativeBalances,
               this.extraParams,
               this.schedule,
@@ -8617,7 +8687,7 @@ public class AccountCreateParams extends ApiRequestParams {
          * href="https://stripe.com/docs/connect/bank-transfers#payout-information">Setting Bank and
          * Debit Card Payouts</a> documentation.
          */
-        public Builder setSchedule(Schedule schedule) {
+        public Builder setSchedule(AccountCreateParams.Settings.Payouts.Schedule schedule) {
           this.schedule = schedule;
           return this;
         }
@@ -8706,8 +8776,8 @@ public class AccountCreateParams extends ApiRequestParams {
           private WeeklyAnchor weeklyAnchor;
 
           /** Finalize and obtain parameter instance from this builder. */
-          public Schedule build() {
-            return new Schedule(
+          public AccountCreateParams.Settings.Payouts.Schedule build() {
+            return new AccountCreateParams.Settings.Payouts.Schedule(
                 this.delayDays,
                 this.extraParams,
                 this.interval,
@@ -8721,7 +8791,8 @@ public class AccountCreateParams extends ApiRequestParams {
            * Default is {@code minimum}. The {@code delay_days} parameter does not apply when the
            * {@code interval} is {@code manual}.
            */
-          public Builder setDelayDays(DelayDays delayDays) {
+          public Builder setDelayDays(
+              AccountCreateParams.Settings.Payouts.Schedule.DelayDays delayDays) {
             this.delayDays = delayDays;
             return this;
           }
@@ -8769,7 +8840,8 @@ public class AccountCreateParams extends ApiRequestParams {
            * How frequently available funds are paid out. One of: {@code daily}, {@code manual},
            * {@code weekly}, or {@code monthly}. Default is {@code daily}.
            */
-          public Builder setInterval(Interval interval) {
+          public Builder setInterval(
+              AccountCreateParams.Settings.Payouts.Schedule.Interval interval) {
             this.interval = interval;
             return this;
           }
@@ -8790,7 +8862,8 @@ public class AccountCreateParams extends ApiRequestParams {
            * {@code tuesday}, etc. (required and applicable only if {@code interval} is {@code
            * weekly}.)
            */
-          public Builder setWeeklyAnchor(WeeklyAnchor weeklyAnchor) {
+          public Builder setWeeklyAnchor(
+              AccountCreateParams.Settings.Payouts.Schedule.WeeklyAnchor weeklyAnchor) {
             this.weeklyAnchor = weeklyAnchor;
             return this;
           }
@@ -8891,8 +8964,8 @@ public class AccountCreateParams extends ApiRequestParams {
         private TosAcceptance tosAcceptance;
 
         /** Finalize and obtain parameter instance from this builder. */
-        public Treasury build() {
-          return new Treasury(this.extraParams, this.tosAcceptance);
+        public AccountCreateParams.Settings.Treasury build() {
+          return new AccountCreateParams.Settings.Treasury(this.extraParams, this.tosAcceptance);
         }
 
         /**
@@ -8924,7 +8997,8 @@ public class AccountCreateParams extends ApiRequestParams {
         }
 
         /** Details on the account's acceptance of the Stripe Treasury Services Agreement. */
-        public Builder setTosAcceptance(TosAcceptance tosAcceptance) {
+        public Builder setTosAcceptance(
+            AccountCreateParams.Settings.Treasury.TosAcceptance tosAcceptance) {
           this.tosAcceptance = tosAcceptance;
           return this;
         }
@@ -8982,8 +9056,9 @@ public class AccountCreateParams extends ApiRequestParams {
           private String userAgent;
 
           /** Finalize and obtain parameter instance from this builder. */
-          public TosAcceptance build() {
-            return new TosAcceptance(this.date, this.extraParams, this.ip, this.userAgent);
+          public AccountCreateParams.Settings.Treasury.TosAcceptance build() {
+            return new AccountCreateParams.Settings.Treasury.TosAcceptance(
+                this.date, this.extraParams, this.ip, this.userAgent);
           }
 
           /**
@@ -9105,8 +9180,8 @@ public class AccountCreateParams extends ApiRequestParams {
       private String userAgent;
 
       /** Finalize and obtain parameter instance from this builder. */
-      public TosAcceptance build() {
-        return new TosAcceptance(
+      public AccountCreateParams.TosAcceptance build() {
+        return new AccountCreateParams.TosAcceptance(
             this.date, this.extraParams, this.ip, this.serviceAgreement, this.userAgent);
       }
 

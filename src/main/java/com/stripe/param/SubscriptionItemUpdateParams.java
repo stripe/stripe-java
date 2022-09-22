@@ -208,7 +208,8 @@ public class SubscriptionItemUpdateParams extends ApiRequestParams {
      * Define thresholds at which an invoice will be sent, and the subscription advanced to a new
      * billing period. When updating, pass an empty string to remove previously-defined thresholds.
      */
-    public Builder setBillingThresholds(BillingThresholds billingThresholds) {
+    public Builder setBillingThresholds(
+        SubscriptionItemUpdateParams.BillingThresholds billingThresholds) {
       this.billingThresholds = billingThresholds;
       return this;
     }
@@ -358,7 +359,8 @@ public class SubscriptionItemUpdateParams extends ApiRequestParams {
      * API versions prior to 2019-03-14. See the <a
      * href="https://stripe.com/docs/upgrades#2019-03-14">changelog</a> to learn more.
      */
-    public Builder setPaymentBehavior(PaymentBehavior paymentBehavior) {
+    public Builder setPaymentBehavior(
+        SubscriptionItemUpdateParams.PaymentBehavior paymentBehavior) {
       this.paymentBehavior = paymentBehavior;
       return this;
     }
@@ -397,7 +399,7 @@ public class SubscriptionItemUpdateParams extends ApiRequestParams {
      * Data used to generate a new <a href="https://stripe.com/docs/api/prices">Price</a> object
      * inline.
      */
-    public Builder setPriceData(PriceData priceData) {
+    public Builder setPriceData(SubscriptionItemUpdateParams.PriceData priceData) {
       this.priceData = priceData;
       return this;
     }
@@ -408,7 +410,8 @@ public class SubscriptionItemUpdateParams extends ApiRequestParams {
      * billing cycle changes (e.g., when switching plans, resetting {@code
      * billing_cycle_anchor=now}, or starting a trial), or if an item's {@code quantity} changes.
      */
-    public Builder setProrationBehavior(ProrationBehavior prorationBehavior) {
+    public Builder setProrationBehavior(
+        SubscriptionItemUpdateParams.ProrationBehavior prorationBehavior) {
       this.prorationBehavior = prorationBehavior;
       return this;
     }
@@ -512,8 +515,8 @@ public class SubscriptionItemUpdateParams extends ApiRequestParams {
       private Long usageGte;
 
       /** Finalize and obtain parameter instance from this builder. */
-      public BillingThresholds build() {
-        return new BillingThresholds(this.extraParams, this.usageGte);
+      public SubscriptionItemUpdateParams.BillingThresholds build() {
+        return new SubscriptionItemUpdateParams.BillingThresholds(this.extraParams, this.usageGte);
       }
 
       /**
@@ -638,8 +641,8 @@ public class SubscriptionItemUpdateParams extends ApiRequestParams {
       private Object unitAmountDecimal;
 
       /** Finalize and obtain parameter instance from this builder. */
-      public PriceData build() {
-        return new PriceData(
+      public SubscriptionItemUpdateParams.PriceData build() {
+        return new SubscriptionItemUpdateParams.PriceData(
             this.currency,
             this.extraParams,
             this.product,
@@ -710,7 +713,7 @@ public class SubscriptionItemUpdateParams extends ApiRequestParams {
       /**
        * The recurring components of a price such as {@code interval} and {@code interval_count}.
        */
-      public Builder setRecurring(Recurring recurring) {
+      public Builder setRecurring(SubscriptionItemUpdateParams.PriceData.Recurring recurring) {
         this.recurring = recurring;
         return this;
       }
@@ -720,7 +723,8 @@ public class SubscriptionItemUpdateParams extends ApiRequestParams {
        * {@code inclusive}, {@code exclusive}, or {@code unspecified}. Once specified as either
        * {@code inclusive} or {@code exclusive}, it cannot be changed.
        */
-      public Builder setTaxBehavior(TaxBehavior taxBehavior) {
+      public Builder setTaxBehavior(
+          SubscriptionItemUpdateParams.PriceData.TaxBehavior taxBehavior) {
         this.taxBehavior = taxBehavior;
         return this;
       }
@@ -799,8 +803,9 @@ public class SubscriptionItemUpdateParams extends ApiRequestParams {
         private Long intervalCount;
 
         /** Finalize and obtain parameter instance from this builder. */
-        public Recurring build() {
-          return new Recurring(this.extraParams, this.interval, this.intervalCount);
+        public SubscriptionItemUpdateParams.PriceData.Recurring build() {
+          return new SubscriptionItemUpdateParams.PriceData.Recurring(
+              this.extraParams, this.interval, this.intervalCount);
         }
 
         /**
@@ -835,7 +840,8 @@ public class SubscriptionItemUpdateParams extends ApiRequestParams {
          * Specifies billing frequency. Either {@code day}, {@code week}, {@code month} or {@code
          * year}.
          */
-        public Builder setInterval(Interval interval) {
+        public Builder setInterval(
+            SubscriptionItemUpdateParams.PriceData.Recurring.Interval interval) {
           this.interval = interval;
           return this;
         }

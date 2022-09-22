@@ -357,7 +357,7 @@ public class ChargeCreateParams extends ApiRequestParams {
       return this;
     }
 
-    public Builder setDestination(Destination destination) {
+    public Builder setDestination(ChargeCreateParams.Destination destination) {
       this.destination = destination;
       return this;
     }
@@ -479,7 +479,7 @@ public class ChargeCreateParams extends ApiRequestParams {
      * Options to configure Radar. See <a href="https://stripe.com/docs/radar/radar-session">Radar
      * Session</a> for more information.
      */
-    public Builder setRadarOptions(RadarOptions radarOptions) {
+    public Builder setRadarOptions(ChargeCreateParams.RadarOptions radarOptions) {
       this.radarOptions = radarOptions;
       return this;
     }
@@ -499,7 +499,7 @@ public class ChargeCreateParams extends ApiRequestParams {
     }
 
     /** Shipping information for the charge. Helps prevent fraud on charges for physical goods. */
-    public Builder setShipping(Shipping shipping) {
+    public Builder setShipping(ChargeCreateParams.Shipping shipping) {
       this.shipping = shipping;
       return this;
     }
@@ -548,7 +548,7 @@ public class ChargeCreateParams extends ApiRequestParams {
      * destination charge. <a href="https://stripe.com/docs/connect/destination-charges">See the
      * Connect documentation</a> for details.
      */
-    public Builder setTransferData(TransferData transferData) {
+    public Builder setTransferData(ChargeCreateParams.TransferData transferData) {
       this.transferData = transferData;
       return this;
     }
@@ -605,8 +605,8 @@ public class ChargeCreateParams extends ApiRequestParams {
       private Map<String, Object> extraParams;
 
       /** Finalize and obtain parameter instance from this builder. */
-      public Destination build() {
-        return new Destination(this.account, this.amount, this.extraParams);
+      public ChargeCreateParams.Destination build() {
+        return new ChargeCreateParams.Destination(this.account, this.amount, this.extraParams);
       }
 
       /** ID of an existing, connected Stripe account. */
@@ -687,8 +687,8 @@ public class ChargeCreateParams extends ApiRequestParams {
       private String session;
 
       /** Finalize and obtain parameter instance from this builder. */
-      public RadarOptions build() {
-        return new RadarOptions(this.extraParams, this.session);
+      public ChargeCreateParams.RadarOptions build() {
+        return new ChargeCreateParams.RadarOptions(this.extraParams, this.session);
       }
 
       /**
@@ -796,8 +796,8 @@ public class ChargeCreateParams extends ApiRequestParams {
       private String trackingNumber;
 
       /** Finalize and obtain parameter instance from this builder. */
-      public Shipping build() {
-        return new Shipping(
+      public ChargeCreateParams.Shipping build() {
+        return new ChargeCreateParams.Shipping(
             this.address,
             this.carrier,
             this.extraParams,
@@ -807,7 +807,7 @@ public class ChargeCreateParams extends ApiRequestParams {
       }
 
       /** Shipping address. */
-      public Builder setAddress(Address address) {
+      public Builder setAddress(ChargeCreateParams.Shipping.Address address) {
         this.address = address;
         return this;
       }
@@ -941,8 +941,8 @@ public class ChargeCreateParams extends ApiRequestParams {
         private String state;
 
         /** Finalize and obtain parameter instance from this builder. */
-        public Address build() {
-          return new Address(
+        public ChargeCreateParams.Shipping.Address build() {
+          return new ChargeCreateParams.Shipping.Address(
               this.city,
               this.country,
               this.extraParams,
@@ -1062,8 +1062,8 @@ public class ChargeCreateParams extends ApiRequestParams {
       private Map<String, Object> extraParams;
 
       /** Finalize and obtain parameter instance from this builder. */
-      public TransferData build() {
-        return new TransferData(this.amount, this.destination, this.extraParams);
+      public ChargeCreateParams.TransferData build() {
+        return new ChargeCreateParams.TransferData(this.amount, this.destination, this.extraParams);
       }
 
       /**

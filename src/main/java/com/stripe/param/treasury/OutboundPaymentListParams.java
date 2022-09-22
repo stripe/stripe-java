@@ -216,7 +216,7 @@ public class OutboundPaymentListParams extends ApiRequestParams {
      * Only return OutboundPayments that have the given status: {@code processing}, {@code failed},
      * {@code posted}, {@code returned}, or {@code canceled}.
      */
-    public Builder setStatus(Status status) {
+    public Builder setStatus(OutboundPaymentListParams.Status status) {
       this.status = status;
       return this;
     }

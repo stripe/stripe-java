@@ -182,12 +182,12 @@ public class SubscriptionListParams extends ApiRequestParams {
      * The collection method of the subscriptions to retrieve. Either {@code charge_automatically}
      * or {@code send_invoice}.
      */
-    public Builder setCollectionMethod(CollectionMethod collectionMethod) {
+    public Builder setCollectionMethod(SubscriptionListParams.CollectionMethod collectionMethod) {
       this.collectionMethod = collectionMethod;
       return this;
     }
 
-    public Builder setCreated(Created created) {
+    public Builder setCreated(SubscriptionListParams.Created created) {
       this.created = created;
       return this;
     }
@@ -197,7 +197,7 @@ public class SubscriptionListParams extends ApiRequestParams {
       return this;
     }
 
-    public Builder setCurrentPeriodEnd(CurrentPeriodEnd currentPeriodEnd) {
+    public Builder setCurrentPeriodEnd(SubscriptionListParams.CurrentPeriodEnd currentPeriodEnd) {
       this.currentPeriodEnd = currentPeriodEnd;
       return this;
     }
@@ -207,7 +207,8 @@ public class SubscriptionListParams extends ApiRequestParams {
       return this;
     }
 
-    public Builder setCurrentPeriodStart(CurrentPeriodStart currentPeriodStart) {
+    public Builder setCurrentPeriodStart(
+        SubscriptionListParams.CurrentPeriodStart currentPeriodStart) {
       this.currentPeriodStart = currentPeriodStart;
       return this;
     }
@@ -327,7 +328,7 @@ public class SubscriptionListParams extends ApiRequestParams {
      * payment</a>. Passing in a value of {@code all} will return subscriptions of all statuses. If
      * no value is supplied, all subscriptions that have not been canceled are returned.
      */
-    public Builder setStatus(Status status) {
+    public Builder setStatus(SubscriptionListParams.Status status) {
       this.status = status;
       return this;
     }
@@ -393,8 +394,9 @@ public class SubscriptionListParams extends ApiRequestParams {
       private Long lte;
 
       /** Finalize and obtain parameter instance from this builder. */
-      public Created build() {
-        return new Created(this.extraParams, this.gt, this.gte, this.lt, this.lte);
+      public SubscriptionListParams.Created build() {
+        return new SubscriptionListParams.Created(
+            this.extraParams, this.gt, this.gte, this.lt, this.lte);
       }
 
       /**
@@ -501,8 +503,9 @@ public class SubscriptionListParams extends ApiRequestParams {
       private Long lte;
 
       /** Finalize and obtain parameter instance from this builder. */
-      public CurrentPeriodEnd build() {
-        return new CurrentPeriodEnd(this.extraParams, this.gt, this.gte, this.lt, this.lte);
+      public SubscriptionListParams.CurrentPeriodEnd build() {
+        return new SubscriptionListParams.CurrentPeriodEnd(
+            this.extraParams, this.gt, this.gte, this.lt, this.lte);
       }
 
       /**
@@ -610,8 +613,9 @@ public class SubscriptionListParams extends ApiRequestParams {
       private Long lte;
 
       /** Finalize and obtain parameter instance from this builder. */
-      public CurrentPeriodStart build() {
-        return new CurrentPeriodStart(this.extraParams, this.gt, this.gte, this.lt, this.lte);
+      public SubscriptionListParams.CurrentPeriodStart build() {
+        return new SubscriptionListParams.CurrentPeriodStart(
+            this.extraParams, this.gt, this.gte, this.lt, this.lte);
       }
 
       /**

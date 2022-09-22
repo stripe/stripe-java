@@ -201,7 +201,7 @@ public class InboundTransferListParams extends ApiRequestParams {
      * Only return InboundTransfers that have the given status: {@code processing}, {@code
      * succeeded}, {@code failed} or {@code canceled}.
      */
-    public Builder setStatus(Status status) {
+    public Builder setStatus(InboundTransferListParams.Status status) {
       this.status = status;
       return this;
     }

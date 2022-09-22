@@ -35,7 +35,7 @@ public class WebhookEndpointCreateParams extends ApiRequestParams {
    * events, except those that require explicit selection.
    */
   @SerializedName("enabled_events")
-  List<EnabledEvent> enabledEvents;
+  List<WebhookEndpointCreateParams.EnabledEvent> enabledEvents;
 
   /** Specifies which fields in the response should be expanded. */
   @SerializedName("expand")
@@ -67,7 +67,7 @@ public class WebhookEndpointCreateParams extends ApiRequestParams {
       ApiVersion apiVersion,
       Boolean connect,
       String description,
-      List<EnabledEvent> enabledEvents,
+      List<WebhookEndpointCreateParams.EnabledEvent> enabledEvents,
       List<String> expand,
       Map<String, Object> extraParams,
       Object metadata,
@@ -93,7 +93,7 @@ public class WebhookEndpointCreateParams extends ApiRequestParams {
 
     private String description;
 
-    private List<EnabledEvent> enabledEvents;
+    private List<WebhookEndpointCreateParams.EnabledEvent> enabledEvents;
 
     private List<String> expand;
 
@@ -120,7 +120,7 @@ public class WebhookEndpointCreateParams extends ApiRequestParams {
      * Events sent to this endpoint will be generated with this Stripe Version instead of your
      * account's default Stripe Version.
      */
-    public Builder setApiVersion(ApiVersion apiVersion) {
+    public Builder setApiVersion(WebhookEndpointCreateParams.ApiVersion apiVersion) {
       this.apiVersion = apiVersion;
       return this;
     }
@@ -145,7 +145,7 @@ public class WebhookEndpointCreateParams extends ApiRequestParams {
      * call, and subsequent calls adds additional elements to the original list. See {@link
      * WebhookEndpointCreateParams#enabledEvents} for the field documentation.
      */
-    public Builder addEnabledEvent(EnabledEvent element) {
+    public Builder addEnabledEvent(WebhookEndpointCreateParams.EnabledEvent element) {
       if (this.enabledEvents == null) {
         this.enabledEvents = new ArrayList<>();
       }
@@ -158,7 +158,7 @@ public class WebhookEndpointCreateParams extends ApiRequestParams {
      * call, and subsequent calls adds additional elements to the original list. See {@link
      * WebhookEndpointCreateParams#enabledEvents} for the field documentation.
      */
-    public Builder addAllEnabledEvent(List<EnabledEvent> elements) {
+    public Builder addAllEnabledEvent(List<WebhookEndpointCreateParams.EnabledEvent> elements) {
       if (this.enabledEvents == null) {
         this.enabledEvents = new ArrayList<>();
       }

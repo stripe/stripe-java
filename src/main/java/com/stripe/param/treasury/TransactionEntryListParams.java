@@ -133,7 +133,7 @@ public class TransactionEntryListParams extends ApiRequestParams {
           this.transaction);
     }
 
-    public Builder setCreated(Created created) {
+    public Builder setCreated(TransactionEntryListParams.Created created) {
       this.created = created;
       return this;
     }
@@ -143,7 +143,7 @@ public class TransactionEntryListParams extends ApiRequestParams {
       return this;
     }
 
-    public Builder setEffectiveAt(EffectiveAt effectiveAt) {
+    public Builder setEffectiveAt(TransactionEntryListParams.EffectiveAt effectiveAt) {
       this.effectiveAt = effectiveAt;
       return this;
     }
@@ -235,7 +235,7 @@ public class TransactionEntryListParams extends ApiRequestParams {
      * The results are in reverse chronological order by {@code created} or {@code effective_at}.
      * The default is {@code created}.
      */
-    public Builder setOrderBy(OrderBy orderBy) {
+    public Builder setOrderBy(TransactionEntryListParams.OrderBy orderBy) {
       this.orderBy = orderBy;
       return this;
     }
@@ -309,8 +309,9 @@ public class TransactionEntryListParams extends ApiRequestParams {
       private Long lte;
 
       /** Finalize and obtain parameter instance from this builder. */
-      public Created build() {
-        return new Created(this.extraParams, this.gt, this.gte, this.lt, this.lte);
+      public TransactionEntryListParams.Created build() {
+        return new TransactionEntryListParams.Created(
+            this.extraParams, this.gt, this.gte, this.lt, this.lte);
       }
 
       /**
@@ -416,8 +417,9 @@ public class TransactionEntryListParams extends ApiRequestParams {
       private Long lte;
 
       /** Finalize and obtain parameter instance from this builder. */
-      public EffectiveAt build() {
-        return new EffectiveAt(this.extraParams, this.gt, this.gte, this.lt, this.lte);
+      public TransactionEntryListParams.EffectiveAt build() {
+        return new TransactionEntryListParams.EffectiveAt(
+            this.extraParams, this.gt, this.gte, this.lt, this.lte);
       }
 
       /**

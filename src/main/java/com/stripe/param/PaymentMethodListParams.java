@@ -195,7 +195,7 @@ public class PaymentMethodListParams extends ApiRequestParams {
     }
 
     /** A required filter on the list, based on the object {@code type} field. */
-    public Builder setType(Type type) {
+    public Builder setType(PaymentMethodListParams.Type type) {
       this.type = type;
       return this;
     }

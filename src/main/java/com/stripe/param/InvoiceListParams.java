@@ -150,12 +150,12 @@ public class InvoiceListParams extends ApiRequestParams {
      * The collection method of the invoice to retrieve. Either {@code charge_automatically} or
      * {@code send_invoice}.
      */
-    public Builder setCollectionMethod(CollectionMethod collectionMethod) {
+    public Builder setCollectionMethod(InvoiceListParams.CollectionMethod collectionMethod) {
       this.collectionMethod = collectionMethod;
       return this;
     }
 
-    public Builder setCreated(Created created) {
+    public Builder setCreated(InvoiceListParams.Created created) {
       this.created = created;
       return this;
     }
@@ -171,7 +171,7 @@ public class InvoiceListParams extends ApiRequestParams {
       return this;
     }
 
-    public Builder setDueDate(DueDate dueDate) {
+    public Builder setDueDate(InvoiceListParams.DueDate dueDate) {
       this.dueDate = dueDate;
       return this;
     }
@@ -269,7 +269,7 @@ public class InvoiceListParams extends ApiRequestParams {
      * uncollectible}, or {@code void}. <a
      * href="https://stripe.com/docs/billing/invoices/workflow#workflow-overview">Learn more</a>
      */
-    public Builder setStatus(Status status) {
+    public Builder setStatus(InvoiceListParams.Status status) {
       this.status = status;
       return this;
     }
@@ -332,8 +332,9 @@ public class InvoiceListParams extends ApiRequestParams {
       private Long lte;
 
       /** Finalize and obtain parameter instance from this builder. */
-      public Created build() {
-        return new Created(this.extraParams, this.gt, this.gte, this.lt, this.lte);
+      public InvoiceListParams.Created build() {
+        return new InvoiceListParams.Created(
+            this.extraParams, this.gt, this.gte, this.lt, this.lte);
       }
 
       /**
@@ -439,8 +440,9 @@ public class InvoiceListParams extends ApiRequestParams {
       private Long lte;
 
       /** Finalize and obtain parameter instance from this builder. */
-      public DueDate build() {
-        return new DueDate(this.extraParams, this.gt, this.gte, this.lt, this.lte);
+      public InvoiceListParams.DueDate build() {
+        return new InvoiceListParams.DueDate(
+            this.extraParams, this.gt, this.gte, this.lt, this.lte);
       }
 
       /**

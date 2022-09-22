@@ -213,7 +213,7 @@ public class PaymentIntentCaptureParams extends ApiRequestParams {
      * href="https://stripe.com/docs/payments/connected-accounts">use case for connected
      * accounts</a>.
      */
-    public Builder setTransferData(TransferData transferData) {
+    public Builder setTransferData(PaymentIntentCaptureParams.TransferData transferData) {
       this.transferData = transferData;
       return this;
     }
@@ -249,8 +249,8 @@ public class PaymentIntentCaptureParams extends ApiRequestParams {
       private Map<String, Object> extraParams;
 
       /** Finalize and obtain parameter instance from this builder. */
-      public TransferData build() {
-        return new TransferData(this.amount, this.extraParams);
+      public PaymentIntentCaptureParams.TransferData build() {
+        return new PaymentIntentCaptureParams.TransferData(this.amount, this.extraParams);
       }
 
       /** The amount that will be transferred automatically when a charge succeeds. */

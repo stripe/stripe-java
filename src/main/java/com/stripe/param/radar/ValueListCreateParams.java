@@ -151,7 +151,7 @@ public class ValueListCreateParams extends ApiRequestParams {
      * case_sensitive_string}, or {@code customer_id}. Use {@code string} if the item type is
      * unknown or mixed.
      */
-    public Builder setItemType(ItemType itemType) {
+    public Builder setItemType(ValueListCreateParams.ItemType itemType) {
       this.itemType = itemType;
       return this;
     }

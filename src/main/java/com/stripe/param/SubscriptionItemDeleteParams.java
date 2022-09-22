@@ -113,7 +113,8 @@ public class SubscriptionItemDeleteParams extends ApiRequestParams {
      * billing cycle changes (e.g., when switching plans, resetting {@code
      * billing_cycle_anchor=now}, or starting a trial), or if an item's {@code quantity} changes.
      */
-    public Builder setProrationBehavior(ProrationBehavior prorationBehavior) {
+    public Builder setProrationBehavior(
+        SubscriptionItemDeleteParams.ProrationBehavior prorationBehavior) {
       this.prorationBehavior = prorationBehavior;
       return this;
     }

@@ -115,7 +115,7 @@ public class ReaderListParams extends ApiRequestParams {
     }
 
     /** Filters readers by device type. */
-    public Builder setDeviceType(DeviceType deviceType) {
+    public Builder setDeviceType(ReaderListParams.DeviceType deviceType) {
       this.deviceType = deviceType;
       return this;
     }
@@ -210,7 +210,7 @@ public class ReaderListParams extends ApiRequestParams {
     }
 
     /** A status filter to filter readers to only offline or online readers. */
-    public Builder setStatus(Status status) {
+    public Builder setStatus(ReaderListParams.Status status) {
       this.status = status;
       return this;
     }

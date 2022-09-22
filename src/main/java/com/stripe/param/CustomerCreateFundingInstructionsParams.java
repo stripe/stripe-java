@@ -74,7 +74,8 @@ public class CustomerCreateFundingInstructionsParams extends ApiRequestParams {
     }
 
     /** Additional parameters for {@code bank_transfer} funding types. */
-    public Builder setBankTransfer(BankTransfer bankTransfer) {
+    public Builder setBankTransfer(
+        CustomerCreateFundingInstructionsParams.BankTransfer bankTransfer) {
       this.bankTransfer = bankTransfer;
       return this;
     }
@@ -142,7 +143,7 @@ public class CustomerCreateFundingInstructionsParams extends ApiRequestParams {
     }
 
     /** The {@code funding_type} to get the instructions for. */
-    public Builder setFundingType(FundingType fundingType) {
+    public Builder setFundingType(CustomerCreateFundingInstructionsParams.FundingType fundingType) {
       this.fundingType = fundingType;
       return this;
     }
@@ -171,7 +172,8 @@ public class CustomerCreateFundingInstructionsParams extends ApiRequestParams {
      * spei}.
      */
     @SerializedName("requested_address_types")
-    List<RequestedAddressType> requestedAddressTypes;
+    List<CustomerCreateFundingInstructionsParams.BankTransfer.RequestedAddressType>
+        requestedAddressTypes;
 
     /** The type of the {@code bank_transfer}. */
     @SerializedName("type")
@@ -180,7 +182,8 @@ public class CustomerCreateFundingInstructionsParams extends ApiRequestParams {
     private BankTransfer(
         EuBankTransfer euBankTransfer,
         Map<String, Object> extraParams,
-        List<RequestedAddressType> requestedAddressTypes,
+        List<CustomerCreateFundingInstructionsParams.BankTransfer.RequestedAddressType>
+            requestedAddressTypes,
         Type type) {
       this.euBankTransfer = euBankTransfer;
       this.extraParams = extraParams;
@@ -197,18 +200,20 @@ public class CustomerCreateFundingInstructionsParams extends ApiRequestParams {
 
       private Map<String, Object> extraParams;
 
-      private List<RequestedAddressType> requestedAddressTypes;
+      private List<CustomerCreateFundingInstructionsParams.BankTransfer.RequestedAddressType>
+          requestedAddressTypes;
 
       private Type type;
 
       /** Finalize and obtain parameter instance from this builder. */
-      public BankTransfer build() {
-        return new BankTransfer(
+      public CustomerCreateFundingInstructionsParams.BankTransfer build() {
+        return new CustomerCreateFundingInstructionsParams.BankTransfer(
             this.euBankTransfer, this.extraParams, this.requestedAddressTypes, this.type);
       }
 
       /** Configuration for eu_bank_transfer funding type. */
-      public Builder setEuBankTransfer(EuBankTransfer euBankTransfer) {
+      public Builder setEuBankTransfer(
+          CustomerCreateFundingInstructionsParams.BankTransfer.EuBankTransfer euBankTransfer) {
         this.euBankTransfer = euBankTransfer;
         return this;
       }
@@ -247,7 +252,8 @@ public class CustomerCreateFundingInstructionsParams extends ApiRequestParams {
        * {@link CustomerCreateFundingInstructionsParams.BankTransfer#requestedAddressTypes} for the
        * field documentation.
        */
-      public Builder addRequestedAddressType(RequestedAddressType element) {
+      public Builder addRequestedAddressType(
+          CustomerCreateFundingInstructionsParams.BankTransfer.RequestedAddressType element) {
         if (this.requestedAddressTypes == null) {
           this.requestedAddressTypes = new ArrayList<>();
         }
@@ -261,7 +267,9 @@ public class CustomerCreateFundingInstructionsParams extends ApiRequestParams {
        * {@link CustomerCreateFundingInstructionsParams.BankTransfer#requestedAddressTypes} for the
        * field documentation.
        */
-      public Builder addAllRequestedAddressType(List<RequestedAddressType> elements) {
+      public Builder addAllRequestedAddressType(
+          List<CustomerCreateFundingInstructionsParams.BankTransfer.RequestedAddressType>
+              elements) {
         if (this.requestedAddressTypes == null) {
           this.requestedAddressTypes = new ArrayList<>();
         }
@@ -270,7 +278,7 @@ public class CustomerCreateFundingInstructionsParams extends ApiRequestParams {
       }
 
       /** The type of the {@code bank_transfer}. */
-      public Builder setType(Type type) {
+      public Builder setType(CustomerCreateFundingInstructionsParams.BankTransfer.Type type) {
         this.type = type;
         return this;
       }
@@ -309,8 +317,9 @@ public class CustomerCreateFundingInstructionsParams extends ApiRequestParams {
         private Map<String, Object> extraParams;
 
         /** Finalize and obtain parameter instance from this builder. */
-        public EuBankTransfer build() {
-          return new EuBankTransfer(this.country, this.extraParams);
+        public CustomerCreateFundingInstructionsParams.BankTransfer.EuBankTransfer build() {
+          return new CustomerCreateFundingInstructionsParams.BankTransfer.EuBankTransfer(
+              this.country, this.extraParams);
         }
 
         /**

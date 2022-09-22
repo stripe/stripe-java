@@ -25,7 +25,7 @@ public class WebhookEndpointUpdateParams extends ApiRequestParams {
    * events, except those that require explicit selection.
    */
   @SerializedName("enabled_events")
-  List<EnabledEvent> enabledEvents;
+  List<WebhookEndpointUpdateParams.EnabledEvent> enabledEvents;
 
   /** Specifies which fields in the response should be expanded. */
   @SerializedName("expand")
@@ -56,7 +56,7 @@ public class WebhookEndpointUpdateParams extends ApiRequestParams {
   private WebhookEndpointUpdateParams(
       Object description,
       Boolean disabled,
-      List<EnabledEvent> enabledEvents,
+      List<WebhookEndpointUpdateParams.EnabledEvent> enabledEvents,
       List<String> expand,
       Map<String, Object> extraParams,
       Object metadata,
@@ -79,7 +79,7 @@ public class WebhookEndpointUpdateParams extends ApiRequestParams {
 
     private Boolean disabled;
 
-    private List<EnabledEvent> enabledEvents;
+    private List<WebhookEndpointUpdateParams.EnabledEvent> enabledEvents;
 
     private List<String> expand;
 
@@ -124,7 +124,7 @@ public class WebhookEndpointUpdateParams extends ApiRequestParams {
      * call, and subsequent calls adds additional elements to the original list. See {@link
      * WebhookEndpointUpdateParams#enabledEvents} for the field documentation.
      */
-    public Builder addEnabledEvent(EnabledEvent element) {
+    public Builder addEnabledEvent(WebhookEndpointUpdateParams.EnabledEvent element) {
       if (this.enabledEvents == null) {
         this.enabledEvents = new ArrayList<>();
       }
@@ -137,7 +137,7 @@ public class WebhookEndpointUpdateParams extends ApiRequestParams {
      * call, and subsequent calls adds additional elements to the original list. See {@link
      * WebhookEndpointUpdateParams#enabledEvents} for the field documentation.
      */
-    public Builder addAllEnabledEvent(List<EnabledEvent> elements) {
+    public Builder addAllEnabledEvent(List<WebhookEndpointUpdateParams.EnabledEvent> elements) {
       if (this.enabledEvents == null) {
         this.enabledEvents = new ArrayList<>();
       }
