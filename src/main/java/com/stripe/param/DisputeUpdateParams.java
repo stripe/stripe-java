@@ -89,7 +89,7 @@ public class DisputeUpdateParams extends ApiRequestParams {
      * fields in the hash for review. The combined character count of all fields is limited to
      * 150,000.
      */
-    public Builder setEvidence(Evidence evidence) {
+    public Builder setEvidence(DisputeUpdateParams.Evidence evidence) {
       this.evidence = evidence;
       return this;
     }
@@ -520,8 +520,8 @@ public class DisputeUpdateParams extends ApiRequestParams {
       private Object uncategorizedText;
 
       /** Finalize and obtain parameter instance from this builder. */
-      public Evidence build() {
-        return new Evidence(
+      public DisputeUpdateParams.Evidence build() {
+        return new DisputeUpdateParams.Evidence(
             this.accessActivityLog,
             this.billingAddress,
             this.cancellationPolicy,

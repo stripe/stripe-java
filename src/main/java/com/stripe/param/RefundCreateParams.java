@@ -286,7 +286,7 @@ public class RefundCreateParams extends ApiRequestParams {
     }
 
     /** Origin of the refund. */
-    public Builder setOrigin(Origin origin) {
+    public Builder setOrigin(RefundCreateParams.Origin origin) {
       this.origin = origin;
       return this;
     }
@@ -296,7 +296,7 @@ public class RefundCreateParams extends ApiRequestParams {
       return this;
     }
 
-    public Builder setReason(Reason reason) {
+    public Builder setReason(RefundCreateParams.Reason reason) {
       this.reason = reason;
       return this;
     }

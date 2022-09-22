@@ -24,15 +24,14 @@ public class AccountRefreshParams extends ApiRequestParams {
   @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
   Map<String, Object> extraParams;
 
-  /**
-   * The list of account features that you would like to refresh. Either: {@code balance} or {@code
-   * ownership}.
-   */
+  /** The list of account features that you would like to refresh. */
   @SerializedName("features")
-  List<Feature> features;
+  List<AccountRefreshParams.Feature> features;
 
   private AccountRefreshParams(
-      List<String> expand, Map<String, Object> extraParams, List<Feature> features) {
+      List<String> expand,
+      Map<String, Object> extraParams,
+      List<AccountRefreshParams.Feature> features) {
     this.expand = expand;
     this.extraParams = extraParams;
     this.features = features;
@@ -47,7 +46,7 @@ public class AccountRefreshParams extends ApiRequestParams {
 
     private Map<String, Object> extraParams;
 
-    private List<Feature> features;
+    private List<AccountRefreshParams.Feature> features;
 
     /** Finalize and obtain parameter instance from this builder. */
     public AccountRefreshParams build() {
@@ -111,7 +110,7 @@ public class AccountRefreshParams extends ApiRequestParams {
      * subsequent calls adds additional elements to the original list. See {@link
      * AccountRefreshParams#features} for the field documentation.
      */
-    public Builder addFeature(Feature element) {
+    public Builder addFeature(AccountRefreshParams.Feature element) {
       if (this.features == null) {
         this.features = new ArrayList<>();
       }
@@ -124,7 +123,7 @@ public class AccountRefreshParams extends ApiRequestParams {
      * and subsequent calls adds additional elements to the original list. See {@link
      * AccountRefreshParams#features} for the field documentation.
      */
-    public Builder addAllFeature(List<Feature> elements) {
+    public Builder addAllFeature(List<AccountRefreshParams.Feature> elements) {
       if (this.features == null) {
         this.features = new ArrayList<>();
       }

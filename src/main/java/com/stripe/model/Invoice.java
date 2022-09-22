@@ -15,6 +15,7 @@ import com.stripe.param.InvoicePayParams;
 import com.stripe.param.InvoiceRetrieveParams;
 import com.stripe.param.InvoiceSearchParams;
 import com.stripe.param.InvoiceSendInvoiceParams;
+import com.stripe.param.InvoiceUpcomingLinesParams;
 import com.stripe.param.InvoiceUpcomingParams;
 import com.stripe.param.InvoiceUpdateParams;
 import com.stripe.param.InvoiceVoidInvoiceParams;
@@ -1479,6 +1480,57 @@ public class Invoice extends ApiResource implements HasId, MetadataStore<Invoice
       throws StripeException {
     String url = String.format("%s%s", Stripe.getApiBase(), "/v1/invoices/upcoming");
     return ApiResource.request(ApiResource.RequestMethod.GET, url, params, Invoice.class, options);
+  }
+
+  /**
+   * When retrieving an upcoming invoice, you’ll get a <strong>lines</strong> property containing
+   * the total count of line items and the first handful of those items. There is also a URL where
+   * you can retrieve the full (paginated) list of line items.
+   */
+  public static InvoiceLineItemCollection upcomingLines() throws StripeException {
+    return upcomingLines((Map<String, Object>) null, (RequestOptions) null);
+  }
+
+  /**
+   * When retrieving an upcoming invoice, you’ll get a <strong>lines</strong> property containing
+   * the total count of line items and the first handful of those items. There is also a URL where
+   * you can retrieve the full (paginated) list of line items.
+   */
+  public static InvoiceLineItemCollection upcomingLines(Map<String, Object> params)
+      throws StripeException {
+    return upcomingLines(params, (RequestOptions) null);
+  }
+
+  /**
+   * When retrieving an upcoming invoice, you’ll get a <strong>lines</strong> property containing
+   * the total count of line items and the first handful of those items. There is also a URL where
+   * you can retrieve the full (paginated) list of line items.
+   */
+  public static InvoiceLineItemCollection upcomingLines(
+      Map<String, Object> params, RequestOptions options) throws StripeException {
+    String url = String.format("%s%s", Stripe.getApiBase(), "/v1/invoices/upcoming/lines");
+    return ApiResource.requestCollection(url, params, InvoiceLineItemCollection.class, options);
+  }
+
+  /**
+   * When retrieving an upcoming invoice, you’ll get a <strong>lines</strong> property containing
+   * the total count of line items and the first handful of those items. There is also a URL where
+   * you can retrieve the full (paginated) list of line items.
+   */
+  public static InvoiceLineItemCollection upcomingLines(InvoiceUpcomingLinesParams params)
+      throws StripeException {
+    return upcomingLines(params, (RequestOptions) null);
+  }
+
+  /**
+   * When retrieving an upcoming invoice, you’ll get a <strong>lines</strong> property containing
+   * the total count of line items and the first handful of those items. There is also a URL where
+   * you can retrieve the full (paginated) list of line items.
+   */
+  public static InvoiceLineItemCollection upcomingLines(
+      InvoiceUpcomingLinesParams params, RequestOptions options) throws StripeException {
+    String url = String.format("%s%s", Stripe.getApiBase(), "/v1/invoices/upcoming/lines");
+    return ApiResource.requestCollection(url, params, InvoiceLineItemCollection.class, options);
   }
 
   /**

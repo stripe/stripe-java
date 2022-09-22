@@ -3,7 +3,6 @@ package com.stripe.param;
 
 import com.google.gson.annotations.SerializedName;
 import com.stripe.net.ApiRequestParams;
-import com.stripe.net.ApiRequestParams.EnumParam;
 import com.stripe.param.common.EmptyParam;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -415,7 +414,7 @@ public class InvoiceCreateParams extends ApiRequestParams {
     }
 
     /** Settings for automatic tax lookup for this invoice. */
-    public Builder setAutomaticTax(AutomaticTax automaticTax) {
+    public Builder setAutomaticTax(InvoiceCreateParams.AutomaticTax automaticTax) {
       this.automaticTax = automaticTax;
       return this;
     }
@@ -426,7 +425,7 @@ public class InvoiceCreateParams extends ApiRequestParams {
      * When sending an invoice, Stripe will email this invoice to the customer with payment
      * instructions. Defaults to {@code charge_automatically}.
      */
-    public Builder setCollectionMethod(CollectionMethod collectionMethod) {
+    public Builder setCollectionMethod(InvoiceCreateParams.CollectionMethod collectionMethod) {
       this.collectionMethod = collectionMethod;
       return this;
     }
@@ -446,7 +445,7 @@ public class InvoiceCreateParams extends ApiRequestParams {
      * InvoiceCreateParams#customFields} for the field documentation.
      */
     @SuppressWarnings("unchecked")
-    public Builder addCustomField(CustomField element) {
+    public Builder addCustomField(InvoiceCreateParams.CustomField element) {
       if (this.customFields == null || this.customFields instanceof EmptyParam) {
         this.customFields = new ArrayList<InvoiceCreateParams.CustomField>();
       }
@@ -460,7 +459,7 @@ public class InvoiceCreateParams extends ApiRequestParams {
      * InvoiceCreateParams#customFields} for the field documentation.
      */
     @SuppressWarnings("unchecked")
-    public Builder addAllCustomField(List<CustomField> elements) {
+    public Builder addAllCustomField(List<InvoiceCreateParams.CustomField> elements) {
       if (this.customFields == null || this.customFields instanceof EmptyParam) {
         this.customFields = new ArrayList<InvoiceCreateParams.CustomField>();
       }
@@ -475,7 +474,7 @@ public class InvoiceCreateParams extends ApiRequestParams {
     }
 
     /** A list of up to 4 custom fields to be displayed on the invoice. */
-    public Builder setCustomFields(List<CustomField> customFields) {
+    public Builder setCustomFields(List<InvoiceCreateParams.CustomField> customFields) {
       this.customFields = customFields;
       return this;
     }
@@ -556,7 +555,7 @@ public class InvoiceCreateParams extends ApiRequestParams {
      * InvoiceCreateParams#discounts} for the field documentation.
      */
     @SuppressWarnings("unchecked")
-    public Builder addDiscount(Discount element) {
+    public Builder addDiscount(InvoiceCreateParams.Discount element) {
       if (this.discounts == null || this.discounts instanceof EmptyParam) {
         this.discounts = new ArrayList<InvoiceCreateParams.Discount>();
       }
@@ -570,7 +569,7 @@ public class InvoiceCreateParams extends ApiRequestParams {
      * InvoiceCreateParams#discounts} for the field documentation.
      */
     @SuppressWarnings("unchecked")
-    public Builder addAllDiscount(List<Discount> elements) {
+    public Builder addAllDiscount(List<InvoiceCreateParams.Discount> elements) {
       if (this.discounts == null || this.discounts instanceof EmptyParam) {
         this.discounts = new ArrayList<InvoiceCreateParams.Discount>();
       }
@@ -591,7 +590,7 @@ public class InvoiceCreateParams extends ApiRequestParams {
      * The coupons to redeem into discounts for the invoice. If not specified, inherits the discount
      * from the invoice's customer. Pass an empty string to avoid inheriting any discounts.
      */
-    public Builder setDiscounts(List<Discount> discounts) {
+    public Builder setDiscounts(List<InvoiceCreateParams.Discount> discounts) {
       this.discounts = discounts;
       return this;
     }
@@ -668,7 +667,7 @@ public class InvoiceCreateParams extends ApiRequestParams {
      * <a href="https://stripe.com/docs/invoicing/invoice-revisions">revision documentation</a> for
      * more details.
      */
-    public Builder setFromInvoice(FromInvoice fromInvoice) {
+    public Builder setFromInvoice(InvoiceCreateParams.FromInvoice fromInvoice) {
       this.fromInvoice = fromInvoice;
       return this;
     }
@@ -737,7 +736,7 @@ public class InvoiceCreateParams extends ApiRequestParams {
     /**
      * Configuration settings for the PaymentIntent that is generated when the invoice is finalized.
      */
-    public Builder setPaymentSettings(PaymentSettings paymentSettings) {
+    public Builder setPaymentSettings(InvoiceCreateParams.PaymentSettings paymentSettings) {
       this.paymentSettings = paymentSettings;
       return this;
     }
@@ -750,13 +749,13 @@ public class InvoiceCreateParams extends ApiRequestParams {
      * exclude} if the parameter is omitted.
      */
     public Builder setPendingInvoiceItemsBehavior(
-        PendingInvoiceItemsBehavior pendingInvoiceItemsBehavior) {
+        InvoiceCreateParams.PendingInvoiceItemsBehavior pendingInvoiceItemsBehavior) {
       this.pendingInvoiceItemsBehavior = pendingInvoiceItemsBehavior;
       return this;
     }
 
     /** Options for invoice PDF rendering. */
-    public Builder setRenderingOptions(RenderingOptions renderingOptions) {
+    public Builder setRenderingOptions(InvoiceCreateParams.RenderingOptions renderingOptions) {
       this.renderingOptions = renderingOptions;
       return this;
     }
@@ -793,7 +792,7 @@ public class InvoiceCreateParams extends ApiRequestParams {
      * If specified, the funds from the invoice will be transferred to the destination and the ID of
      * the resulting transfer will be found on the invoice's charge.
      */
-    public Builder setTransferData(TransferData transferData) {
+    public Builder setTransferData(InvoiceCreateParams.TransferData transferData) {
       this.transferData = transferData;
       return this;
     }
@@ -834,8 +833,8 @@ public class InvoiceCreateParams extends ApiRequestParams {
       private Map<String, Object> extraParams;
 
       /** Finalize and obtain parameter instance from this builder. */
-      public AutomaticTax build() {
-        return new AutomaticTax(this.enabled, this.extraParams);
+      public InvoiceCreateParams.AutomaticTax build() {
+        return new InvoiceCreateParams.AutomaticTax(this.enabled, this.extraParams);
       }
 
       /**
@@ -914,8 +913,8 @@ public class InvoiceCreateParams extends ApiRequestParams {
       private String value;
 
       /** Finalize and obtain parameter instance from this builder. */
-      public CustomField build() {
-        return new CustomField(this.extraParams, this.name, this.value);
+      public InvoiceCreateParams.CustomField build() {
+        return new InvoiceCreateParams.CustomField(this.extraParams, this.name, this.value);
       }
 
       /**
@@ -995,8 +994,8 @@ public class InvoiceCreateParams extends ApiRequestParams {
       private Map<String, Object> extraParams;
 
       /** Finalize and obtain parameter instance from this builder. */
-      public Discount build() {
-        return new Discount(this.coupon, this.discount, this.extraParams);
+      public InvoiceCreateParams.Discount build() {
+        return new InvoiceCreateParams.Discount(this.coupon, this.discount, this.extraParams);
       }
 
       /** ID of the coupon to create a new discount for. */
@@ -1079,15 +1078,15 @@ public class InvoiceCreateParams extends ApiRequestParams {
       private String invoice;
 
       /** Finalize and obtain parameter instance from this builder. */
-      public FromInvoice build() {
-        return new FromInvoice(this.action, this.extraParams, this.invoice);
+      public InvoiceCreateParams.FromInvoice build() {
+        return new InvoiceCreateParams.FromInvoice(this.action, this.extraParams, this.invoice);
       }
 
       /**
        * The relation between the new invoice and the original invoice. Currently, only 'revision'
        * is permitted
        */
-      public Builder setAction(Action action) {
+      public Builder setAction(InvoiceCreateParams.FromInvoice.Action action) {
         this.action = action;
         return this;
       }
@@ -1195,8 +1194,8 @@ public class InvoiceCreateParams extends ApiRequestParams {
       private Object paymentMethodTypes;
 
       /** Finalize and obtain parameter instance from this builder. */
-      public PaymentSettings build() {
-        return new PaymentSettings(
+      public InvoiceCreateParams.PaymentSettings build() {
+        return new InvoiceCreateParams.PaymentSettings(
             this.defaultMandate,
             this.extraParams,
             this.paymentMethodOptions,
@@ -1240,7 +1239,8 @@ public class InvoiceCreateParams extends ApiRequestParams {
       }
 
       /** Payment-method-specific configuration to provide to the invoice’s PaymentIntent. */
-      public Builder setPaymentMethodOptions(PaymentMethodOptions paymentMethodOptions) {
+      public Builder setPaymentMethodOptions(
+          InvoiceCreateParams.PaymentSettings.PaymentMethodOptions paymentMethodOptions) {
         this.paymentMethodOptions = paymentMethodOptions;
         return this;
       }
@@ -1251,7 +1251,8 @@ public class InvoiceCreateParams extends ApiRequestParams {
        * {@link InvoiceCreateParams.PaymentSettings#paymentMethodTypes} for the field documentation.
        */
       @SuppressWarnings("unchecked")
-      public Builder addPaymentMethodType(PaymentMethodType element) {
+      public Builder addPaymentMethodType(
+          InvoiceCreateParams.PaymentSettings.PaymentMethodType element) {
         if (this.paymentMethodTypes == null || this.paymentMethodTypes instanceof EmptyParam) {
           this.paymentMethodTypes =
               new ArrayList<InvoiceCreateParams.PaymentSettings.PaymentMethodType>();
@@ -1267,7 +1268,8 @@ public class InvoiceCreateParams extends ApiRequestParams {
        * {@link InvoiceCreateParams.PaymentSettings#paymentMethodTypes} for the field documentation.
        */
       @SuppressWarnings("unchecked")
-      public Builder addAllPaymentMethodType(List<PaymentMethodType> elements) {
+      public Builder addAllPaymentMethodType(
+          List<InvoiceCreateParams.PaymentSettings.PaymentMethodType> elements) {
         if (this.paymentMethodTypes == null || this.paymentMethodTypes instanceof EmptyParam) {
           this.paymentMethodTypes =
               new ArrayList<InvoiceCreateParams.PaymentSettings.PaymentMethodType>();
@@ -1296,7 +1298,8 @@ public class InvoiceCreateParams extends ApiRequestParams {
        * default payment method, and your <a
        * href="https://dashboard.stripe.com/settings/billing/invoice">invoice template settings</a>.
        */
-      public Builder setPaymentMethodTypes(List<PaymentMethodType> paymentMethodTypes) {
+      public Builder setPaymentMethodTypes(
+          List<InvoiceCreateParams.PaymentSettings.PaymentMethodType> paymentMethodTypes) {
         this.paymentMethodTypes = paymentMethodTypes;
         return this;
       }
@@ -1392,8 +1395,8 @@ public class InvoiceCreateParams extends ApiRequestParams {
         private Object usBankAccount;
 
         /** Finalize and obtain parameter instance from this builder. */
-        public PaymentMethodOptions build() {
-          return new PaymentMethodOptions(
+        public InvoiceCreateParams.PaymentSettings.PaymentMethodOptions build() {
+          return new InvoiceCreateParams.PaymentSettings.PaymentMethodOptions(
               this.acssDebit,
               this.bancontact,
               this.card,
@@ -1407,7 +1410,8 @@ public class InvoiceCreateParams extends ApiRequestParams {
          * If paying by {@code acss_debit}, this sub-hash contains details about the Canadian
          * pre-authorized debit payment method options to pass to the invoice’s PaymentIntent.
          */
-        public Builder setAcssDebit(AcssDebit acssDebit) {
+        public Builder setAcssDebit(
+            InvoiceCreateParams.PaymentSettings.PaymentMethodOptions.AcssDebit acssDebit) {
           this.acssDebit = acssDebit;
           return this;
         }
@@ -1425,7 +1429,8 @@ public class InvoiceCreateParams extends ApiRequestParams {
          * If paying by {@code bancontact}, this sub-hash contains details about the Bancontact
          * payment method options to pass to the invoice’s PaymentIntent.
          */
-        public Builder setBancontact(Bancontact bancontact) {
+        public Builder setBancontact(
+            InvoiceCreateParams.PaymentSettings.PaymentMethodOptions.Bancontact bancontact) {
           this.bancontact = bancontact;
           return this;
         }
@@ -1443,7 +1448,7 @@ public class InvoiceCreateParams extends ApiRequestParams {
          * If paying by {@code card}, this sub-hash contains details about the Card payment method
          * options to pass to the invoice’s PaymentIntent.
          */
-        public Builder setCard(Card card) {
+        public Builder setCard(InvoiceCreateParams.PaymentSettings.PaymentMethodOptions.Card card) {
           this.card = card;
           return this;
         }
@@ -1461,7 +1466,9 @@ public class InvoiceCreateParams extends ApiRequestParams {
          * If paying by {@code customer_balance}, this sub-hash contains details about the Bank
          * transfer payment method options to pass to the invoice’s PaymentIntent.
          */
-        public Builder setCustomerBalance(CustomerBalance customerBalance) {
+        public Builder setCustomerBalance(
+            InvoiceCreateParams.PaymentSettings.PaymentMethodOptions.CustomerBalance
+                customerBalance) {
           this.customerBalance = customerBalance;
           return this;
         }
@@ -1507,7 +1514,8 @@ public class InvoiceCreateParams extends ApiRequestParams {
          * If paying by {@code konbini}, this sub-hash contains details about the Konbini payment
          * method options to pass to the invoice’s PaymentIntent.
          */
-        public Builder setKonbini(Konbini konbini) {
+        public Builder setKonbini(
+            InvoiceCreateParams.PaymentSettings.PaymentMethodOptions.Konbini konbini) {
           this.konbini = konbini;
           return this;
         }
@@ -1525,7 +1533,8 @@ public class InvoiceCreateParams extends ApiRequestParams {
          * If paying by {@code us_bank_account}, this sub-hash contains details about the ACH direct
          * debit payment method options to pass to the invoice’s PaymentIntent.
          */
-        public Builder setUsBankAccount(UsBankAccount usBankAccount) {
+        public Builder setUsBankAccount(
+            InvoiceCreateParams.PaymentSettings.PaymentMethodOptions.UsBankAccount usBankAccount) {
           this.usBankAccount = usBankAccount;
           return this;
         }
@@ -1581,8 +1590,9 @@ public class InvoiceCreateParams extends ApiRequestParams {
           private VerificationMethod verificationMethod;
 
           /** Finalize and obtain parameter instance from this builder. */
-          public AcssDebit build() {
-            return new AcssDebit(this.extraParams, this.mandateOptions, this.verificationMethod);
+          public InvoiceCreateParams.PaymentSettings.PaymentMethodOptions.AcssDebit build() {
+            return new InvoiceCreateParams.PaymentSettings.PaymentMethodOptions.AcssDebit(
+                this.extraParams, this.mandateOptions, this.verificationMethod);
           }
 
           /**
@@ -1616,13 +1626,17 @@ public class InvoiceCreateParams extends ApiRequestParams {
           }
 
           /** Additional fields for Mandate creation. */
-          public Builder setMandateOptions(MandateOptions mandateOptions) {
+          public Builder setMandateOptions(
+              InvoiceCreateParams.PaymentSettings.PaymentMethodOptions.AcssDebit.MandateOptions
+                  mandateOptions) {
             this.mandateOptions = mandateOptions;
             return this;
           }
 
           /** Verification method for the intent. */
-          public Builder setVerificationMethod(VerificationMethod verificationMethod) {
+          public Builder setVerificationMethod(
+              InvoiceCreateParams.PaymentSettings.PaymentMethodOptions.AcssDebit.VerificationMethod
+                  verificationMethod) {
             this.verificationMethod = verificationMethod;
             return this;
           }
@@ -1659,8 +1673,10 @@ public class InvoiceCreateParams extends ApiRequestParams {
             private TransactionType transactionType;
 
             /** Finalize and obtain parameter instance from this builder. */
-            public MandateOptions build() {
-              return new MandateOptions(this.extraParams, this.transactionType);
+            public InvoiceCreateParams.PaymentSettings.PaymentMethodOptions.AcssDebit.MandateOptions
+                build() {
+              return new InvoiceCreateParams.PaymentSettings.PaymentMethodOptions.AcssDebit
+                  .MandateOptions(this.extraParams, this.transactionType);
             }
 
             /**
@@ -1694,7 +1710,10 @@ public class InvoiceCreateParams extends ApiRequestParams {
             }
 
             /** Transaction type of the mandate. */
-            public Builder setTransactionType(TransactionType transactionType) {
+            public Builder setTransactionType(
+                InvoiceCreateParams.PaymentSettings.PaymentMethodOptions.AcssDebit.MandateOptions
+                        .TransactionType
+                    transactionType) {
               this.transactionType = transactionType;
               return this;
             }
@@ -1769,8 +1788,9 @@ public class InvoiceCreateParams extends ApiRequestParams {
           private PreferredLanguage preferredLanguage;
 
           /** Finalize and obtain parameter instance from this builder. */
-          public Bancontact build() {
-            return new Bancontact(this.extraParams, this.preferredLanguage);
+          public InvoiceCreateParams.PaymentSettings.PaymentMethodOptions.Bancontact build() {
+            return new InvoiceCreateParams.PaymentSettings.PaymentMethodOptions.Bancontact(
+                this.extraParams, this.preferredLanguage);
           }
 
           /**
@@ -1807,7 +1827,9 @@ public class InvoiceCreateParams extends ApiRequestParams {
            * Preferred language of the Bancontact authorization page that the customer is redirected
            * to.
            */
-          public Builder setPreferredLanguage(PreferredLanguage preferredLanguage) {
+          public Builder setPreferredLanguage(
+              InvoiceCreateParams.PaymentSettings.PaymentMethodOptions.Bancontact.PreferredLanguage
+                  preferredLanguage) {
             this.preferredLanguage = preferredLanguage;
             return this;
           }
@@ -1890,8 +1912,9 @@ public class InvoiceCreateParams extends ApiRequestParams {
           private RequestThreeDSecure requestThreeDSecure;
 
           /** Finalize and obtain parameter instance from this builder. */
-          public Card build() {
-            return new Card(this.extraParams, this.installments, this.requestThreeDSecure);
+          public InvoiceCreateParams.PaymentSettings.PaymentMethodOptions.Card build() {
+            return new InvoiceCreateParams.PaymentSettings.PaymentMethodOptions.Card(
+                this.extraParams, this.installments, this.requestThreeDSecure);
           }
 
           /**
@@ -1931,7 +1954,9 @@ public class InvoiceCreateParams extends ApiRequestParams {
            * href="https://stripe.com/docs/payments/installments">installments integration
            * guide</a>.
            */
-          public Builder setInstallments(Installments installments) {
+          public Builder setInstallments(
+              InvoiceCreateParams.PaymentSettings.PaymentMethodOptions.Card.Installments
+                  installments) {
             this.installments = installments;
             return this;
           }
@@ -1946,7 +1971,9 @@ public class InvoiceCreateParams extends ApiRequestParams {
            * 3D Secure</a> for more information on how this configuration interacts with Radar and
            * our SCA Engine.
            */
-          public Builder setRequestThreeDSecure(RequestThreeDSecure requestThreeDSecure) {
+          public Builder setRequestThreeDSecure(
+              InvoiceCreateParams.PaymentSettings.PaymentMethodOptions.Card.RequestThreeDSecure
+                  requestThreeDSecure) {
             this.requestThreeDSecure = requestThreeDSecure;
             return this;
           }
@@ -1993,8 +2020,10 @@ public class InvoiceCreateParams extends ApiRequestParams {
             private Object plan;
 
             /** Finalize and obtain parameter instance from this builder. */
-            public Installments build() {
-              return new Installments(this.enabled, this.extraParams, this.plan);
+            public InvoiceCreateParams.PaymentSettings.PaymentMethodOptions.Card.Installments
+                build() {
+              return new InvoiceCreateParams.PaymentSettings.PaymentMethodOptions.Card.Installments(
+                  this.enabled, this.extraParams, this.plan);
             }
 
             /**
@@ -2037,7 +2066,9 @@ public class InvoiceCreateParams extends ApiRequestParams {
             }
 
             /** The selected installment plan to use for this invoice. */
-            public Builder setPlan(Plan plan) {
+            public Builder setPlan(
+                InvoiceCreateParams.PaymentSettings.PaymentMethodOptions.Card.Installments.Plan
+                    plan) {
               this.plan = plan;
               return this;
             }
@@ -2101,8 +2132,10 @@ public class InvoiceCreateParams extends ApiRequestParams {
               private Type type;
 
               /** Finalize and obtain parameter instance from this builder. */
-              public Plan build() {
-                return new Plan(this.count, this.extraParams, this.interval, this.type);
+              public InvoiceCreateParams.PaymentSettings.PaymentMethodOptions.Card.Installments.Plan
+                  build() {
+                return new InvoiceCreateParams.PaymentSettings.PaymentMethodOptions.Card
+                    .Installments.Plan(this.count, this.extraParams, this.interval, this.type);
               }
 
               /**
@@ -2148,13 +2181,19 @@ public class InvoiceCreateParams extends ApiRequestParams {
                * For {@code fixed_count} installment plans, this is the interval between installment
                * payments your customer will make to their credit card. One of {@code month}.
                */
-              public Builder setInterval(Interval interval) {
+              public Builder setInterval(
+                  InvoiceCreateParams.PaymentSettings.PaymentMethodOptions.Card.Installments.Plan
+                          .Interval
+                      interval) {
                 this.interval = interval;
                 return this;
               }
 
               /** Type of installment plan, one of {@code fixed_count}. */
-              public Builder setType(Type type) {
+              public Builder setType(
+                  InvoiceCreateParams.PaymentSettings.PaymentMethodOptions.Card.Installments.Plan
+                          .Type
+                      type) {
                 this.type = type;
                 return this;
               }
@@ -2247,15 +2286,18 @@ public class InvoiceCreateParams extends ApiRequestParams {
           private String fundingType;
 
           /** Finalize and obtain parameter instance from this builder. */
-          public CustomerBalance build() {
-            return new CustomerBalance(this.bankTransfer, this.extraParams, this.fundingType);
+          public InvoiceCreateParams.PaymentSettings.PaymentMethodOptions.CustomerBalance build() {
+            return new InvoiceCreateParams.PaymentSettings.PaymentMethodOptions.CustomerBalance(
+                this.bankTransfer, this.extraParams, this.fundingType);
           }
 
           /**
            * Configuration for the bank transfer funding type, if the {@code funding_type} is set to
            * {@code bank_transfer}.
            */
-          public Builder setBankTransfer(BankTransfer bankTransfer) {
+          public Builder setBankTransfer(
+              InvoiceCreateParams.PaymentSettings.PaymentMethodOptions.CustomerBalance.BankTransfer
+                  bankTransfer) {
             this.bankTransfer = bankTransfer;
             return this;
           }
@@ -2343,12 +2385,18 @@ public class InvoiceCreateParams extends ApiRequestParams {
             private String type;
 
             /** Finalize and obtain parameter instance from this builder. */
-            public BankTransfer build() {
-              return new BankTransfer(this.euBankTransfer, this.extraParams, this.type);
+            public InvoiceCreateParams.PaymentSettings.PaymentMethodOptions.CustomerBalance
+                    .BankTransfer
+                build() {
+              return new InvoiceCreateParams.PaymentSettings.PaymentMethodOptions.CustomerBalance
+                  .BankTransfer(this.euBankTransfer, this.extraParams, this.type);
             }
 
             /** Configuration for eu_bank_transfer funding type. */
-            public Builder setEuBankTransfer(EuBankTransfer euBankTransfer) {
+            public Builder setEuBankTransfer(
+                InvoiceCreateParams.PaymentSettings.PaymentMethodOptions.CustomerBalance
+                        .BankTransfer.EuBankTransfer
+                    euBankTransfer) {
               this.euBankTransfer = euBankTransfer;
               return this;
             }
@@ -2428,8 +2476,11 @@ public class InvoiceCreateParams extends ApiRequestParams {
               private Map<String, Object> extraParams;
 
               /** Finalize and obtain parameter instance from this builder. */
-              public EuBankTransfer build() {
-                return new EuBankTransfer(this.country, this.extraParams);
+              public InvoiceCreateParams.PaymentSettings.PaymentMethodOptions.CustomerBalance
+                      .BankTransfer.EuBankTransfer
+                  build() {
+                return new InvoiceCreateParams.PaymentSettings.PaymentMethodOptions.CustomerBalance
+                    .BankTransfer.EuBankTransfer(this.country, this.extraParams);
               }
 
               /**
@@ -2499,8 +2550,9 @@ public class InvoiceCreateParams extends ApiRequestParams {
           private Map<String, Object> extraParams;
 
           /** Finalize and obtain parameter instance from this builder. */
-          public Konbini build() {
-            return new Konbini(this.extraParams);
+          public InvoiceCreateParams.PaymentSettings.PaymentMethodOptions.Konbini build() {
+            return new InvoiceCreateParams.PaymentSettings.PaymentMethodOptions.Konbini(
+                this.extraParams);
           }
 
           /**
@@ -2576,8 +2628,8 @@ public class InvoiceCreateParams extends ApiRequestParams {
           private VerificationMethod verificationMethod;
 
           /** Finalize and obtain parameter instance from this builder. */
-          public UsBankAccount build() {
-            return new UsBankAccount(
+          public InvoiceCreateParams.PaymentSettings.PaymentMethodOptions.UsBankAccount build() {
+            return new InvoiceCreateParams.PaymentSettings.PaymentMethodOptions.UsBankAccount(
                 this.extraParams, this.financialConnections, this.verificationMethod);
           }
 
@@ -2612,13 +2664,19 @@ public class InvoiceCreateParams extends ApiRequestParams {
           }
 
           /** Additional fields for Financial Connections Session creation. */
-          public Builder setFinancialConnections(FinancialConnections financialConnections) {
+          public Builder setFinancialConnections(
+              InvoiceCreateParams.PaymentSettings.PaymentMethodOptions.UsBankAccount
+                      .FinancialConnections
+                  financialConnections) {
             this.financialConnections = financialConnections;
             return this;
           }
 
           /** Verification method for the intent. */
-          public Builder setVerificationMethod(VerificationMethod verificationMethod) {
+          public Builder setVerificationMethod(
+              InvoiceCreateParams.PaymentSettings.PaymentMethodOptions.UsBankAccount
+                      .VerificationMethod
+                  verificationMethod) {
             this.verificationMethod = verificationMethod;
             return this;
           }
@@ -2642,10 +2700,17 @@ public class InvoiceCreateParams extends ApiRequestParams {
            * balances}, {@code ownership}, {@code payment_method}, and {@code transactions}.
            */
           @SerializedName("permissions")
-          List<Permission> permissions;
+          List<
+                  InvoiceCreateParams.PaymentSettings.PaymentMethodOptions.UsBankAccount
+                      .FinancialConnections.Permission>
+              permissions;
 
           private FinancialConnections(
-              Map<String, Object> extraParams, List<Permission> permissions) {
+              Map<String, Object> extraParams,
+              List<
+                      InvoiceCreateParams.PaymentSettings.PaymentMethodOptions.UsBankAccount
+                          .FinancialConnections.Permission>
+                  permissions) {
             this.extraParams = extraParams;
             this.permissions = permissions;
           }
@@ -2657,11 +2722,17 @@ public class InvoiceCreateParams extends ApiRequestParams {
           public static class Builder {
             private Map<String, Object> extraParams;
 
-            private List<Permission> permissions;
+            private List<
+                    InvoiceCreateParams.PaymentSettings.PaymentMethodOptions.UsBankAccount
+                        .FinancialConnections.Permission>
+                permissions;
 
             /** Finalize and obtain parameter instance from this builder. */
-            public FinancialConnections build() {
-              return new FinancialConnections(this.extraParams, this.permissions);
+            public InvoiceCreateParams.PaymentSettings.PaymentMethodOptions.UsBankAccount
+                    .FinancialConnections
+                build() {
+              return new InvoiceCreateParams.PaymentSettings.PaymentMethodOptions.UsBankAccount
+                  .FinancialConnections(this.extraParams, this.permissions);
             }
 
             /**
@@ -2701,7 +2772,10 @@ public class InvoiceCreateParams extends ApiRequestParams {
              * InvoiceCreateParams.PaymentSettings.PaymentMethodOptions.UsBankAccount.FinancialConnections#permissions}
              * for the field documentation.
              */
-            public Builder addPermission(Permission element) {
+            public Builder addPermission(
+                InvoiceCreateParams.PaymentSettings.PaymentMethodOptions.UsBankAccount
+                        .FinancialConnections.Permission
+                    element) {
               if (this.permissions == null) {
                 this.permissions = new ArrayList<>();
               }
@@ -2716,7 +2790,11 @@ public class InvoiceCreateParams extends ApiRequestParams {
              * InvoiceCreateParams.PaymentSettings.PaymentMethodOptions.UsBankAccount.FinancialConnections#permissions}
              * for the field documentation.
              */
-            public Builder addAllPermission(List<Permission> elements) {
+            public Builder addAllPermission(
+                List<
+                        InvoiceCreateParams.PaymentSettings.PaymentMethodOptions.UsBankAccount
+                            .FinancialConnections.Permission>
+                    elements) {
               if (this.permissions == null) {
                 this.permissions = new ArrayList<>();
               }
@@ -2852,7 +2930,7 @@ public class InvoiceCreateParams extends ApiRequestParams {
      * will exclude all tax (inclusive and exclusive alike) from invoice PDF amounts.
      */
     @SerializedName("amount_tax_display")
-    EnumParam amountTaxDisplay;
+    ApiRequestParams.EnumParam amountTaxDisplay;
 
     /**
      * Map of extra parameters for custom features not available in this client library. The content
@@ -2863,7 +2941,8 @@ public class InvoiceCreateParams extends ApiRequestParams {
     @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
     Map<String, Object> extraParams;
 
-    private RenderingOptions(EnumParam amountTaxDisplay, Map<String, Object> extraParams) {
+    private RenderingOptions(
+        ApiRequestParams.EnumParam amountTaxDisplay, Map<String, Object> extraParams) {
       this.amountTaxDisplay = amountTaxDisplay;
       this.extraParams = extraParams;
     }
@@ -2873,13 +2952,13 @@ public class InvoiceCreateParams extends ApiRequestParams {
     }
 
     public static class Builder {
-      private EnumParam amountTaxDisplay;
+      private ApiRequestParams.EnumParam amountTaxDisplay;
 
       private Map<String, Object> extraParams;
 
       /** Finalize and obtain parameter instance from this builder. */
-      public RenderingOptions build() {
-        return new RenderingOptions(this.amountTaxDisplay, this.extraParams);
+      public InvoiceCreateParams.RenderingOptions build() {
+        return new InvoiceCreateParams.RenderingOptions(this.amountTaxDisplay, this.extraParams);
       }
 
       /**
@@ -2888,7 +2967,8 @@ public class InvoiceCreateParams extends ApiRequestParams {
        * include inclusive tax (and exclude exclusive tax) in invoice PDF amounts. {@code
        * exclude_tax} will exclude all tax (inclusive and exclusive alike) from invoice PDF amounts.
        */
-      public Builder setAmountTaxDisplay(AmountTaxDisplay amountTaxDisplay) {
+      public Builder setAmountTaxDisplay(
+          InvoiceCreateParams.RenderingOptions.AmountTaxDisplay amountTaxDisplay) {
         this.amountTaxDisplay = amountTaxDisplay;
         return this;
       }
@@ -2987,8 +3067,9 @@ public class InvoiceCreateParams extends ApiRequestParams {
       private Map<String, Object> extraParams;
 
       /** Finalize and obtain parameter instance from this builder. */
-      public TransferData build() {
-        return new TransferData(this.amount, this.destination, this.extraParams);
+      public InvoiceCreateParams.TransferData build() {
+        return new InvoiceCreateParams.TransferData(
+            this.amount, this.destination, this.extraParams);
       }
 
       /**

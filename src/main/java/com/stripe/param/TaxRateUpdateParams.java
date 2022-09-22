@@ -338,7 +338,7 @@ public class TaxRateUpdateParams extends ApiRequestParams {
     }
 
     /** The high-level tax type, such as {@code vat} or {@code sales_tax}. */
-    public Builder setTaxType(TaxType taxType) {
+    public Builder setTaxType(TaxRateUpdateParams.TaxType taxType) {
       this.taxType = taxType;
       return this;
     }

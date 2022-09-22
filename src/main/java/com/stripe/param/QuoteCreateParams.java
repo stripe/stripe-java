@@ -122,7 +122,7 @@ public class QuoteCreateParams extends ApiRequestParams {
    * about the product, the quantity, and the resulting cost.
    */
   @SerializedName("line_items")
-  List<LineItem> lineItems;
+  List<QuoteCreateParams.LineItem> lineItems;
 
   /**
    * Set of <a href="https://stripe.com/docs/api/metadata">key-value pairs</a> that you can attach
@@ -171,7 +171,7 @@ public class QuoteCreateParams extends ApiRequestParams {
       FromQuote fromQuote,
       String header,
       InvoiceSettings invoiceSettings,
-      List<LineItem> lineItems,
+      List<QuoteCreateParams.LineItem> lineItems,
       Map<String, String> metadata,
       Object onBehalfOf,
       SubscriptionData subscriptionData,
@@ -235,7 +235,7 @@ public class QuoteCreateParams extends ApiRequestParams {
 
     private InvoiceSettings invoiceSettings;
 
-    private List<LineItem> lineItems;
+    private List<QuoteCreateParams.LineItem> lineItems;
 
     private Map<String, String> metadata;
 
@@ -318,7 +318,7 @@ public class QuoteCreateParams extends ApiRequestParams {
     /**
      * Settings for automatic tax lookup for this quote and resulting invoices and subscriptions.
      */
-    public Builder setAutomaticTax(AutomaticTax automaticTax) {
+    public Builder setAutomaticTax(QuoteCreateParams.AutomaticTax automaticTax) {
       this.automaticTax = automaticTax;
       return this;
     }
@@ -330,7 +330,7 @@ public class QuoteCreateParams extends ApiRequestParams {
      * sending an invoice, Stripe will email your customer an invoice with payment instructions.
      * Defaults to {@code charge_automatically}.
      */
-    public Builder setCollectionMethod(CollectionMethod collectionMethod) {
+    public Builder setCollectionMethod(QuoteCreateParams.CollectionMethod collectionMethod) {
       this.collectionMethod = collectionMethod;
       return this;
     }
@@ -401,7 +401,7 @@ public class QuoteCreateParams extends ApiRequestParams {
      * QuoteCreateParams#discounts} for the field documentation.
      */
     @SuppressWarnings("unchecked")
-    public Builder addDiscount(Discount element) {
+    public Builder addDiscount(QuoteCreateParams.Discount element) {
       if (this.discounts == null || this.discounts instanceof EmptyParam) {
         this.discounts = new ArrayList<QuoteCreateParams.Discount>();
       }
@@ -415,7 +415,7 @@ public class QuoteCreateParams extends ApiRequestParams {
      * QuoteCreateParams#discounts} for the field documentation.
      */
     @SuppressWarnings("unchecked")
-    public Builder addAllDiscount(List<Discount> elements) {
+    public Builder addAllDiscount(List<QuoteCreateParams.Discount> elements) {
       if (this.discounts == null || this.discounts instanceof EmptyParam) {
         this.discounts = new ArrayList<QuoteCreateParams.Discount>();
       }
@@ -430,7 +430,7 @@ public class QuoteCreateParams extends ApiRequestParams {
     }
 
     /** The discounts applied to the quote. You can only set up to one discount. */
-    public Builder setDiscounts(List<Discount> discounts) {
+    public Builder setDiscounts(List<QuoteCreateParams.Discount> discounts) {
       this.discounts = discounts;
       return this;
     }
@@ -513,7 +513,7 @@ public class QuoteCreateParams extends ApiRequestParams {
      * Clone an existing quote. The new quote will be created in {@code status=draft}. When using
      * this parameter, you cannot specify any other parameters except for {@code expires_at}.
      */
-    public Builder setFromQuote(FromQuote fromQuote) {
+    public Builder setFromQuote(QuoteCreateParams.FromQuote fromQuote) {
       this.fromQuote = fromQuote;
       return this;
     }
@@ -529,7 +529,7 @@ public class QuoteCreateParams extends ApiRequestParams {
     }
 
     /** All invoices will be billed using the specified settings. */
-    public Builder setInvoiceSettings(InvoiceSettings invoiceSettings) {
+    public Builder setInvoiceSettings(QuoteCreateParams.InvoiceSettings invoiceSettings) {
       this.invoiceSettings = invoiceSettings;
       return this;
     }
@@ -539,7 +539,7 @@ public class QuoteCreateParams extends ApiRequestParams {
      * and subsequent calls adds additional elements to the original list. See {@link
      * QuoteCreateParams#lineItems} for the field documentation.
      */
-    public Builder addLineItem(LineItem element) {
+    public Builder addLineItem(QuoteCreateParams.LineItem element) {
       if (this.lineItems == null) {
         this.lineItems = new ArrayList<>();
       }
@@ -552,7 +552,7 @@ public class QuoteCreateParams extends ApiRequestParams {
      * and subsequent calls adds additional elements to the original list. See {@link
      * QuoteCreateParams#lineItems} for the field documentation.
      */
-    public Builder addAllLineItem(List<LineItem> elements) {
+    public Builder addAllLineItem(List<QuoteCreateParams.LineItem> elements) {
       if (this.lineItems == null) {
         this.lineItems = new ArrayList<>();
       }
@@ -605,7 +605,7 @@ public class QuoteCreateParams extends ApiRequestParams {
      * subscription_data[effective_date]} is present and in the future, otherwise a subscription is
      * created.
      */
-    public Builder setSubscriptionData(SubscriptionData subscriptionData) {
+    public Builder setSubscriptionData(QuoteCreateParams.SubscriptionData subscriptionData) {
       this.subscriptionData = subscriptionData;
       return this;
     }
@@ -617,7 +617,7 @@ public class QuoteCreateParams extends ApiRequestParams {
     }
 
     /** The data with which to automatically create a Transfer for each of the invoices. */
-    public Builder setTransferData(TransferData transferData) {
+    public Builder setTransferData(QuoteCreateParams.TransferData transferData) {
       this.transferData = transferData;
       return this;
     }
@@ -662,8 +662,8 @@ public class QuoteCreateParams extends ApiRequestParams {
       private Map<String, Object> extraParams;
 
       /** Finalize and obtain parameter instance from this builder. */
-      public AutomaticTax build() {
-        return new AutomaticTax(this.enabled, this.extraParams);
+      public QuoteCreateParams.AutomaticTax build() {
+        return new QuoteCreateParams.AutomaticTax(this.enabled, this.extraParams);
       }
 
       /**
@@ -740,8 +740,8 @@ public class QuoteCreateParams extends ApiRequestParams {
       private Map<String, Object> extraParams;
 
       /** Finalize and obtain parameter instance from this builder. */
-      public Discount build() {
-        return new Discount(this.coupon, this.discount, this.extraParams);
+      public QuoteCreateParams.Discount build() {
+        return new QuoteCreateParams.Discount(this.coupon, this.discount, this.extraParams);
       }
 
       /** ID of the coupon to create a new discount for. */
@@ -821,8 +821,8 @@ public class QuoteCreateParams extends ApiRequestParams {
       private String quote;
 
       /** Finalize and obtain parameter instance from this builder. */
-      public FromQuote build() {
-        return new FromQuote(this.extraParams, this.isRevision, this.quote);
+      public QuoteCreateParams.FromQuote build() {
+        return new QuoteCreateParams.FromQuote(this.extraParams, this.isRevision, this.quote);
       }
 
       /**
@@ -898,8 +898,8 @@ public class QuoteCreateParams extends ApiRequestParams {
       private Map<String, Object> extraParams;
 
       /** Finalize and obtain parameter instance from this builder. */
-      public InvoiceSettings build() {
-        return new InvoiceSettings(this.daysUntilDue, this.extraParams);
+      public QuoteCreateParams.InvoiceSettings build() {
+        return new QuoteCreateParams.InvoiceSettings(this.daysUntilDue, this.extraParams);
       }
 
       /**
@@ -1001,8 +1001,8 @@ public class QuoteCreateParams extends ApiRequestParams {
       private Object taxRates;
 
       /** Finalize and obtain parameter instance from this builder. */
-      public LineItem build() {
-        return new LineItem(
+      public QuoteCreateParams.LineItem build() {
+        return new QuoteCreateParams.LineItem(
             this.extraParams, this.price, this.priceData, this.quantity, this.taxRates);
       }
 
@@ -1042,7 +1042,7 @@ public class QuoteCreateParams extends ApiRequestParams {
        * Data used to generate a new <a href="https://stripe.com/docs/api/prices">Price</a> object
        * inline. One of {@code price} or {@code price_data} is required.
        */
-      public Builder setPriceData(PriceData priceData) {
+      public Builder setPriceData(QuoteCreateParams.LineItem.PriceData priceData) {
         this.priceData = priceData;
         return this;
       }
@@ -1189,8 +1189,8 @@ public class QuoteCreateParams extends ApiRequestParams {
         private BigDecimal unitAmountDecimal;
 
         /** Finalize and obtain parameter instance from this builder. */
-        public PriceData build() {
-          return new PriceData(
+        public QuoteCreateParams.LineItem.PriceData build() {
+          return new QuoteCreateParams.LineItem.PriceData(
               this.currency,
               this.extraParams,
               this.product,
@@ -1247,7 +1247,7 @@ public class QuoteCreateParams extends ApiRequestParams {
         /**
          * The recurring components of a price such as {@code interval} and {@code interval_count}.
          */
-        public Builder setRecurring(Recurring recurring) {
+        public Builder setRecurring(QuoteCreateParams.LineItem.PriceData.Recurring recurring) {
           this.recurring = recurring;
           return this;
         }
@@ -1257,7 +1257,8 @@ public class QuoteCreateParams extends ApiRequestParams {
          * of {@code inclusive}, {@code exclusive}, or {@code unspecified}. Once specified as either
          * {@code inclusive} or {@code exclusive}, it cannot be changed.
          */
-        public Builder setTaxBehavior(TaxBehavior taxBehavior) {
+        public Builder setTaxBehavior(
+            QuoteCreateParams.LineItem.PriceData.TaxBehavior taxBehavior) {
           this.taxBehavior = taxBehavior;
           return this;
         }
@@ -1327,8 +1328,9 @@ public class QuoteCreateParams extends ApiRequestParams {
           private Long intervalCount;
 
           /** Finalize and obtain parameter instance from this builder. */
-          public Recurring build() {
-            return new Recurring(this.extraParams, this.interval, this.intervalCount);
+          public QuoteCreateParams.LineItem.PriceData.Recurring build() {
+            return new QuoteCreateParams.LineItem.PriceData.Recurring(
+                this.extraParams, this.interval, this.intervalCount);
           }
 
           /**
@@ -1363,7 +1365,8 @@ public class QuoteCreateParams extends ApiRequestParams {
            * Specifies billing frequency. Either {@code day}, {@code week}, {@code month} or {@code
            * year}.
            */
-          public Builder setInterval(Interval interval) {
+          public Builder setInterval(
+              QuoteCreateParams.LineItem.PriceData.Recurring.Interval interval) {
             this.interval = interval;
             return this;
           }
@@ -1481,8 +1484,8 @@ public class QuoteCreateParams extends ApiRequestParams {
       private Object trialPeriodDays;
 
       /** Finalize and obtain parameter instance from this builder. */
-      public SubscriptionData build() {
-        return new SubscriptionData(
+      public QuoteCreateParams.SubscriptionData build() {
+        return new QuoteCreateParams.SubscriptionData(
             this.description, this.effectiveDate, this.extraParams, this.trialPeriodDays);
       }
 
@@ -1503,7 +1506,8 @@ public class QuoteCreateParams extends ApiRequestParams {
        * period. The {@code effective_date} is ignored if it is in the past when the quote is
        * accepted.
        */
-      public Builder setEffectiveDate(EffectiveDate effectiveDate) {
+      public Builder setEffectiveDate(
+          QuoteCreateParams.SubscriptionData.EffectiveDate effectiveDate) {
         this.effectiveDate = effectiveDate;
         return this;
       }
@@ -1649,8 +1653,8 @@ public class QuoteCreateParams extends ApiRequestParams {
       private Map<String, Object> extraParams;
 
       /** Finalize and obtain parameter instance from this builder. */
-      public TransferData build() {
-        return new TransferData(
+      public QuoteCreateParams.TransferData build() {
+        return new QuoteCreateParams.TransferData(
             this.amount, this.amountPercent, this.destination, this.extraParams);
       }
 

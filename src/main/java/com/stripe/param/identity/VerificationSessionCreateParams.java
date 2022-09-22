@@ -166,7 +166,7 @@ public class VerificationSessionCreateParams extends ApiRequestParams {
     }
 
     /** A set of options for the session’s verification checks. */
-    public Builder setOptions(Options options) {
+    public Builder setOptions(VerificationSessionCreateParams.Options options) {
       this.options = options;
       return this;
     }
@@ -181,7 +181,7 @@ public class VerificationSessionCreateParams extends ApiRequestParams {
      * The type of <a href="https://stripe.com/docs/identity/verification-checks">verification
      * check</a> to be performed.
      */
-    public Builder setType(Type type) {
+    public Builder setType(VerificationSessionCreateParams.Type type) {
       this.type = type;
       return this;
     }
@@ -220,8 +220,8 @@ public class VerificationSessionCreateParams extends ApiRequestParams {
       private Map<String, Object> extraParams;
 
       /** Finalize and obtain parameter instance from this builder. */
-      public Options build() {
-        return new Options(this.document, this.extraParams);
+      public VerificationSessionCreateParams.Options build() {
+        return new VerificationSessionCreateParams.Options(this.document, this.extraParams);
       }
 
       /**
@@ -229,7 +229,7 @@ public class VerificationSessionCreateParams extends ApiRequestParams {
        * href="https://stripe.com/docs/identity/verification-checks?type=document">document
        * check</a>.
        */
-      public Builder setDocument(Document document) {
+      public Builder setDocument(VerificationSessionCreateParams.Options.Document document) {
         this.document = document;
         return this;
       }
@@ -280,7 +280,7 @@ public class VerificationSessionCreateParams extends ApiRequestParams {
        * document_type_not_allowed error code.
        */
       @SerializedName("allowed_types")
-      List<AllowedType> allowedTypes;
+      List<VerificationSessionCreateParams.Options.Document.AllowedType> allowedTypes;
 
       /**
        * Map of extra parameters for custom features not available in this client library. The
@@ -316,7 +316,7 @@ public class VerificationSessionCreateParams extends ApiRequestParams {
       Boolean requireMatchingSelfie;
 
       private Document(
-          List<AllowedType> allowedTypes,
+          List<VerificationSessionCreateParams.Options.Document.AllowedType> allowedTypes,
           Map<String, Object> extraParams,
           Boolean requireIdNumber,
           Boolean requireLiveCapture,
@@ -333,7 +333,7 @@ public class VerificationSessionCreateParams extends ApiRequestParams {
       }
 
       public static class Builder {
-        private List<AllowedType> allowedTypes;
+        private List<VerificationSessionCreateParams.Options.Document.AllowedType> allowedTypes;
 
         private Map<String, Object> extraParams;
 
@@ -344,8 +344,8 @@ public class VerificationSessionCreateParams extends ApiRequestParams {
         private Boolean requireMatchingSelfie;
 
         /** Finalize and obtain parameter instance from this builder. */
-        public Document build() {
-          return new Document(
+        public VerificationSessionCreateParams.Options.Document build() {
+          return new VerificationSessionCreateParams.Options.Document(
               this.allowedTypes,
               this.extraParams,
               this.requireIdNumber,
@@ -359,7 +359,8 @@ public class VerificationSessionCreateParams extends ApiRequestParams {
          * VerificationSessionCreateParams.Options.Document#allowedTypes} for the field
          * documentation.
          */
-        public Builder addAllowedType(AllowedType element) {
+        public Builder addAllowedType(
+            VerificationSessionCreateParams.Options.Document.AllowedType element) {
           if (this.allowedTypes == null) {
             this.allowedTypes = new ArrayList<>();
           }
@@ -373,7 +374,8 @@ public class VerificationSessionCreateParams extends ApiRequestParams {
          * VerificationSessionCreateParams.Options.Document#allowedTypes} for the field
          * documentation.
          */
-        public Builder addAllAllowedType(List<AllowedType> elements) {
+        public Builder addAllAllowedType(
+            List<VerificationSessionCreateParams.Options.Document.AllowedType> elements) {
           if (this.allowedTypes == null) {
             this.allowedTypes = new ArrayList<>();
           }

@@ -116,7 +116,7 @@ public class VerificationReportListParams extends ApiRequestParams {
           this.verificationSession);
     }
 
-    public Builder setCreated(Created created) {
+    public Builder setCreated(VerificationReportListParams.Created created) {
       this.created = created;
       return this;
     }
@@ -210,7 +210,7 @@ public class VerificationReportListParams extends ApiRequestParams {
     }
 
     /** Only return VerificationReports of this type. */
-    public Builder setType(Type type) {
+    public Builder setType(VerificationReportListParams.Type type) {
       this.type = type;
       return this;
     }
@@ -276,8 +276,9 @@ public class VerificationReportListParams extends ApiRequestParams {
       private Long lte;
 
       /** Finalize and obtain parameter instance from this builder. */
-      public Created build() {
-        return new Created(this.extraParams, this.gt, this.gte, this.lt, this.lte);
+      public VerificationReportListParams.Created build() {
+        return new VerificationReportListParams.Created(
+            this.extraParams, this.gt, this.gte, this.lt, this.lte);
       }
 
       /**

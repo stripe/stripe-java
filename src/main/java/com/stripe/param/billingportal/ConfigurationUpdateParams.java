@@ -123,7 +123,7 @@ public class ConfigurationUpdateParams extends ApiRequestParams {
     }
 
     /** The business information shown to customers in the portal. */
-    public Builder setBusinessProfile(BusinessProfile businessProfile) {
+    public Builder setBusinessProfile(ConfigurationUpdateParams.BusinessProfile businessProfile) {
       this.businessProfile = businessProfile;
       return this;
     }
@@ -203,7 +203,7 @@ public class ConfigurationUpdateParams extends ApiRequestParams {
     }
 
     /** Information about the features available in the portal. */
-    public Builder setFeatures(Features features) {
+    public Builder setFeatures(ConfigurationUpdateParams.Features features) {
       this.features = features;
       return this;
     }
@@ -214,7 +214,7 @@ public class ConfigurationUpdateParams extends ApiRequestParams {
      * href="https://stripe.com/docs/billing/subscriptions/integrating-customer-portal#share">integration
      * docs</a>.
      */
-    public Builder setLoginPage(LoginPage loginPage) {
+    public Builder setLoginPage(ConfigurationUpdateParams.LoginPage loginPage) {
       this.loginPage = loginPage;
       return this;
     }
@@ -318,8 +318,8 @@ public class ConfigurationUpdateParams extends ApiRequestParams {
       private Object termsOfServiceUrl;
 
       /** Finalize and obtain parameter instance from this builder. */
-      public BusinessProfile build() {
-        return new BusinessProfile(
+      public ConfigurationUpdateParams.BusinessProfile build() {
+        return new ConfigurationUpdateParams.BusinessProfile(
             this.extraParams, this.headline, this.privacyPolicyUrl, this.termsOfServiceUrl);
       }
 
@@ -460,8 +460,8 @@ public class ConfigurationUpdateParams extends ApiRequestParams {
       private SubscriptionUpdate subscriptionUpdate;
 
       /** Finalize and obtain parameter instance from this builder. */
-      public Features build() {
-        return new Features(
+      public ConfigurationUpdateParams.Features build() {
+        return new ConfigurationUpdateParams.Features(
             this.customerUpdate,
             this.extraParams,
             this.invoiceHistory,
@@ -472,7 +472,8 @@ public class ConfigurationUpdateParams extends ApiRequestParams {
       }
 
       /** Information about updating the customer details in the portal. */
-      public Builder setCustomerUpdate(CustomerUpdate customerUpdate) {
+      public Builder setCustomerUpdate(
+          ConfigurationUpdateParams.Features.CustomerUpdate customerUpdate) {
         this.customerUpdate = customerUpdate;
         return this;
       }
@@ -504,31 +505,36 @@ public class ConfigurationUpdateParams extends ApiRequestParams {
       }
 
       /** Information about showing the billing history in the portal. */
-      public Builder setInvoiceHistory(InvoiceHistory invoiceHistory) {
+      public Builder setInvoiceHistory(
+          ConfigurationUpdateParams.Features.InvoiceHistory invoiceHistory) {
         this.invoiceHistory = invoiceHistory;
         return this;
       }
 
       /** Information about updating payment methods in the portal. */
-      public Builder setPaymentMethodUpdate(PaymentMethodUpdate paymentMethodUpdate) {
+      public Builder setPaymentMethodUpdate(
+          ConfigurationUpdateParams.Features.PaymentMethodUpdate paymentMethodUpdate) {
         this.paymentMethodUpdate = paymentMethodUpdate;
         return this;
       }
 
       /** Information about canceling subscriptions in the portal. */
-      public Builder setSubscriptionCancel(SubscriptionCancel subscriptionCancel) {
+      public Builder setSubscriptionCancel(
+          ConfigurationUpdateParams.Features.SubscriptionCancel subscriptionCancel) {
         this.subscriptionCancel = subscriptionCancel;
         return this;
       }
 
       /** Information about pausing subscriptions in the portal. */
-      public Builder setSubscriptionPause(SubscriptionPause subscriptionPause) {
+      public Builder setSubscriptionPause(
+          ConfigurationUpdateParams.Features.SubscriptionPause subscriptionPause) {
         this.subscriptionPause = subscriptionPause;
         return this;
       }
 
       /** Information about updating subscriptions in the portal. */
-      public Builder setSubscriptionUpdate(SubscriptionUpdate subscriptionUpdate) {
+      public Builder setSubscriptionUpdate(
+          ConfigurationUpdateParams.Features.SubscriptionUpdate subscriptionUpdate) {
         this.subscriptionUpdate = subscriptionUpdate;
         return this;
       }
@@ -574,8 +580,9 @@ public class ConfigurationUpdateParams extends ApiRequestParams {
         private Map<String, Object> extraParams;
 
         /** Finalize and obtain parameter instance from this builder. */
-        public CustomerUpdate build() {
-          return new CustomerUpdate(this.allowedUpdates, this.enabled, this.extraParams);
+        public ConfigurationUpdateParams.Features.CustomerUpdate build() {
+          return new ConfigurationUpdateParams.Features.CustomerUpdate(
+              this.allowedUpdates, this.enabled, this.extraParams);
         }
 
         /**
@@ -585,7 +592,8 @@ public class ConfigurationUpdateParams extends ApiRequestParams {
          * documentation.
          */
         @SuppressWarnings("unchecked")
-        public Builder addAllowedUpdate(AllowedUpdate element) {
+        public Builder addAllowedUpdate(
+            ConfigurationUpdateParams.Features.CustomerUpdate.AllowedUpdate element) {
           if (this.allowedUpdates == null || this.allowedUpdates instanceof EmptyParam) {
             this.allowedUpdates =
                 new ArrayList<ConfigurationUpdateParams.Features.CustomerUpdate.AllowedUpdate>();
@@ -603,7 +611,8 @@ public class ConfigurationUpdateParams extends ApiRequestParams {
          * field documentation.
          */
         @SuppressWarnings("unchecked")
-        public Builder addAllAllowedUpdate(List<AllowedUpdate> elements) {
+        public Builder addAllAllowedUpdate(
+            List<ConfigurationUpdateParams.Features.CustomerUpdate.AllowedUpdate> elements) {
           if (this.allowedUpdates == null || this.allowedUpdates instanceof EmptyParam) {
             this.allowedUpdates =
                 new ArrayList<ConfigurationUpdateParams.Features.CustomerUpdate.AllowedUpdate>();
@@ -627,7 +636,8 @@ public class ConfigurationUpdateParams extends ApiRequestParams {
          * The types of customer updates that are supported. When empty, customers are not
          * updateable.
          */
-        public Builder setAllowedUpdates(List<AllowedUpdate> allowedUpdates) {
+        public Builder setAllowedUpdates(
+            List<ConfigurationUpdateParams.Features.CustomerUpdate.AllowedUpdate> allowedUpdates) {
           this.allowedUpdates = allowedUpdates;
           return this;
         }
@@ -722,8 +732,9 @@ public class ConfigurationUpdateParams extends ApiRequestParams {
         private Map<String, Object> extraParams;
 
         /** Finalize and obtain parameter instance from this builder. */
-        public InvoiceHistory build() {
-          return new InvoiceHistory(this.enabled, this.extraParams);
+        public ConfigurationUpdateParams.Features.InvoiceHistory build() {
+          return new ConfigurationUpdateParams.Features.InvoiceHistory(
+              this.enabled, this.extraParams);
         }
 
         /** Whether the feature is enabled. */
@@ -792,8 +803,9 @@ public class ConfigurationUpdateParams extends ApiRequestParams {
         private Map<String, Object> extraParams;
 
         /** Finalize and obtain parameter instance from this builder. */
-        public PaymentMethodUpdate build() {
-          return new PaymentMethodUpdate(this.enabled, this.extraParams);
+        public ConfigurationUpdateParams.Features.PaymentMethodUpdate build() {
+          return new ConfigurationUpdateParams.Features.PaymentMethodUpdate(
+              this.enabled, this.extraParams);
         }
 
         /** Whether the feature is enabled. */
@@ -896,8 +908,8 @@ public class ConfigurationUpdateParams extends ApiRequestParams {
         private ProrationBehavior prorationBehavior;
 
         /** Finalize and obtain parameter instance from this builder. */
-        public SubscriptionCancel build() {
-          return new SubscriptionCancel(
+        public ConfigurationUpdateParams.Features.SubscriptionCancel build() {
+          return new ConfigurationUpdateParams.Features.SubscriptionCancel(
               this.cancellationReason,
               this.enabled,
               this.extraParams,
@@ -909,7 +921,9 @@ public class ConfigurationUpdateParams extends ApiRequestParams {
          * Whether the cancellation reasons will be collected in the portal and which options are
          * exposed to the customer.
          */
-        public Builder setCancellationReason(CancellationReason cancellationReason) {
+        public Builder setCancellationReason(
+            ConfigurationUpdateParams.Features.SubscriptionCancel.CancellationReason
+                cancellationReason) {
           this.cancellationReason = cancellationReason;
           return this;
         }
@@ -949,7 +963,7 @@ public class ConfigurationUpdateParams extends ApiRequestParams {
         }
 
         /** Whether to cancel subscriptions immediately or at the end of the billing period. */
-        public Builder setMode(Mode mode) {
+        public Builder setMode(ConfigurationUpdateParams.Features.SubscriptionCancel.Mode mode) {
           this.mode = mode;
           return this;
         }
@@ -960,7 +974,9 @@ public class ConfigurationUpdateParams extends ApiRequestParams {
          * mode=immediately}. No prorations are generated when canceling a subscription at the end
          * of its natural billing period.
          */
-        public Builder setProrationBehavior(ProrationBehavior prorationBehavior) {
+        public Builder setProrationBehavior(
+            ConfigurationUpdateParams.Features.SubscriptionCancel.ProrationBehavior
+                prorationBehavior) {
           this.prorationBehavior = prorationBehavior;
           return this;
         }
@@ -1005,8 +1021,9 @@ public class ConfigurationUpdateParams extends ApiRequestParams {
           private Object options;
 
           /** Finalize and obtain parameter instance from this builder. */
-          public CancellationReason build() {
-            return new CancellationReason(this.enabled, this.extraParams, this.options);
+          public ConfigurationUpdateParams.Features.SubscriptionCancel.CancellationReason build() {
+            return new ConfigurationUpdateParams.Features.SubscriptionCancel.CancellationReason(
+                this.enabled, this.extraParams, this.options);
           }
 
           /** Whether the feature is enabled. */
@@ -1052,7 +1069,9 @@ public class ConfigurationUpdateParams extends ApiRequestParams {
            * the field documentation.
            */
           @SuppressWarnings("unchecked")
-          public Builder addOption(Option element) {
+          public Builder addOption(
+              ConfigurationUpdateParams.Features.SubscriptionCancel.CancellationReason.Option
+                  element) {
             if (this.options == null || this.options instanceof EmptyParam) {
               this.options =
                   new ArrayList<
@@ -1072,7 +1091,9 @@ public class ConfigurationUpdateParams extends ApiRequestParams {
            * the field documentation.
            */
           @SuppressWarnings("unchecked")
-          public Builder addAllOption(List<Option> elements) {
+          public Builder addAllOption(
+              List<ConfigurationUpdateParams.Features.SubscriptionCancel.CancellationReason.Option>
+                  elements) {
             if (this.options == null || this.options instanceof EmptyParam) {
               this.options =
                   new ArrayList<
@@ -1092,7 +1113,9 @@ public class ConfigurationUpdateParams extends ApiRequestParams {
           }
 
           /** Which cancellation reasons will be given as options to the customer. */
-          public Builder setOptions(List<Option> options) {
+          public Builder setOptions(
+              List<ConfigurationUpdateParams.Features.SubscriptionCancel.CancellationReason.Option>
+                  options) {
             this.options = options;
             return this;
           }
@@ -1196,8 +1219,9 @@ public class ConfigurationUpdateParams extends ApiRequestParams {
         private Map<String, Object> extraParams;
 
         /** Finalize and obtain parameter instance from this builder. */
-        public SubscriptionPause build() {
-          return new SubscriptionPause(this.enabled, this.extraParams);
+        public ConfigurationUpdateParams.Features.SubscriptionPause build() {
+          return new ConfigurationUpdateParams.Features.SubscriptionPause(
+              this.enabled, this.extraParams);
         }
 
         /** Whether the feature is enabled. */
@@ -1298,8 +1322,8 @@ public class ConfigurationUpdateParams extends ApiRequestParams {
         private ProrationBehavior prorationBehavior;
 
         /** Finalize and obtain parameter instance from this builder. */
-        public SubscriptionUpdate build() {
-          return new SubscriptionUpdate(
+        public ConfigurationUpdateParams.Features.SubscriptionUpdate build() {
+          return new ConfigurationUpdateParams.Features.SubscriptionUpdate(
               this.defaultAllowedUpdates,
               this.enabled,
               this.extraParams,
@@ -1314,7 +1338,8 @@ public class ConfigurationUpdateParams extends ApiRequestParams {
          * for the field documentation.
          */
         @SuppressWarnings("unchecked")
-        public Builder addDefaultAllowedUpdate(DefaultAllowedUpdate element) {
+        public Builder addDefaultAllowedUpdate(
+            ConfigurationUpdateParams.Features.SubscriptionUpdate.DefaultAllowedUpdate element) {
           if (this.defaultAllowedUpdates == null
               || this.defaultAllowedUpdates instanceof EmptyParam) {
             this.defaultAllowedUpdates =
@@ -1334,7 +1359,9 @@ public class ConfigurationUpdateParams extends ApiRequestParams {
          * for the field documentation.
          */
         @SuppressWarnings("unchecked")
-        public Builder addAllDefaultAllowedUpdate(List<DefaultAllowedUpdate> elements) {
+        public Builder addAllDefaultAllowedUpdate(
+            List<ConfigurationUpdateParams.Features.SubscriptionUpdate.DefaultAllowedUpdate>
+                elements) {
           if (this.defaultAllowedUpdates == null
               || this.defaultAllowedUpdates instanceof EmptyParam) {
             this.defaultAllowedUpdates =
@@ -1360,7 +1387,9 @@ public class ConfigurationUpdateParams extends ApiRequestParams {
          * The types of subscription updates that are supported. When empty, subscriptions are not
          * updateable.
          */
-        public Builder setDefaultAllowedUpdates(List<DefaultAllowedUpdate> defaultAllowedUpdates) {
+        public Builder setDefaultAllowedUpdates(
+            List<ConfigurationUpdateParams.Features.SubscriptionUpdate.DefaultAllowedUpdate>
+                defaultAllowedUpdates) {
           this.defaultAllowedUpdates = defaultAllowedUpdates;
           return this;
         }
@@ -1406,7 +1435,8 @@ public class ConfigurationUpdateParams extends ApiRequestParams {
          * documentation.
          */
         @SuppressWarnings("unchecked")
-        public Builder addProduct(Product element) {
+        public Builder addProduct(
+            ConfigurationUpdateParams.Features.SubscriptionUpdate.Product element) {
           if (this.products == null || this.products instanceof EmptyParam) {
             this.products =
                 new ArrayList<ConfigurationUpdateParams.Features.SubscriptionUpdate.Product>();
@@ -1423,7 +1453,8 @@ public class ConfigurationUpdateParams extends ApiRequestParams {
          * documentation.
          */
         @SuppressWarnings("unchecked")
-        public Builder addAllProduct(List<Product> elements) {
+        public Builder addAllProduct(
+            List<ConfigurationUpdateParams.Features.SubscriptionUpdate.Product> elements) {
           if (this.products == null || this.products instanceof EmptyParam) {
             this.products =
                 new ArrayList<ConfigurationUpdateParams.Features.SubscriptionUpdate.Product>();
@@ -1440,7 +1471,8 @@ public class ConfigurationUpdateParams extends ApiRequestParams {
         }
 
         /** The list of products that support subscription updates. */
-        public Builder setProducts(List<Product> products) {
+        public Builder setProducts(
+            List<ConfigurationUpdateParams.Features.SubscriptionUpdate.Product> products) {
           this.products = products;
           return this;
         }
@@ -1449,7 +1481,9 @@ public class ConfigurationUpdateParams extends ApiRequestParams {
          * Determines how to handle prorations resulting from subscription updates. Valid values are
          * {@code none}, {@code create_prorations}, and {@code always_invoice}.
          */
-        public Builder setProrationBehavior(ProrationBehavior prorationBehavior) {
+        public Builder setProrationBehavior(
+            ConfigurationUpdateParams.Features.SubscriptionUpdate.ProrationBehavior
+                prorationBehavior) {
           this.prorationBehavior = prorationBehavior;
           return this;
         }
@@ -1493,8 +1527,9 @@ public class ConfigurationUpdateParams extends ApiRequestParams {
           private Object product;
 
           /** Finalize and obtain parameter instance from this builder. */
-          public Product build() {
-            return new Product(this.extraParams, this.prices, this.product);
+          public ConfigurationUpdateParams.Features.SubscriptionUpdate.Product build() {
+            return new ConfigurationUpdateParams.Features.SubscriptionUpdate.Product(
+                this.extraParams, this.prices, this.product);
           }
 
           /**
@@ -1644,8 +1679,8 @@ public class ConfigurationUpdateParams extends ApiRequestParams {
       private Map<String, Object> extraParams;
 
       /** Finalize and obtain parameter instance from this builder. */
-      public LoginPage build() {
-        return new LoginPage(this.enabled, this.extraParams);
+      public ConfigurationUpdateParams.LoginPage build() {
+        return new ConfigurationUpdateParams.LoginPage(this.enabled, this.extraParams);
       }
 
       /**

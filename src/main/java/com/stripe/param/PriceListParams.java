@@ -170,7 +170,7 @@ public class PriceListParams extends ApiRequestParams {
      * with an integer Unix timestamp, or it can be a dictionary with a number of different query
      * options.
      */
-    public Builder setCreated(Created created) {
+    public Builder setCreated(PriceListParams.Created created) {
       this.created = created;
       return this;
     }
@@ -296,7 +296,7 @@ public class PriceListParams extends ApiRequestParams {
     }
 
     /** Only return prices with these recurring fields. */
-    public Builder setRecurring(Recurring recurring) {
+    public Builder setRecurring(PriceListParams.Recurring recurring) {
       this.recurring = recurring;
       return this;
     }
@@ -313,7 +313,7 @@ public class PriceListParams extends ApiRequestParams {
     }
 
     /** Only return prices of type {@code recurring} or {@code one_time}. */
-    public Builder setType(Type type) {
+    public Builder setType(PriceListParams.Type type) {
       this.type = type;
       return this;
     }
@@ -370,8 +370,8 @@ public class PriceListParams extends ApiRequestParams {
       private Long lte;
 
       /** Finalize and obtain parameter instance from this builder. */
-      public Created build() {
-        return new Created(this.extraParams, this.gt, this.gte, this.lt, this.lte);
+      public PriceListParams.Created build() {
+        return new PriceListParams.Created(this.extraParams, this.gt, this.gte, this.lt, this.lte);
       }
 
       /**
@@ -467,8 +467,8 @@ public class PriceListParams extends ApiRequestParams {
       private UsageType usageType;
 
       /** Finalize and obtain parameter instance from this builder. */
-      public Recurring build() {
-        return new Recurring(this.extraParams, this.interval, this.usageType);
+      public PriceListParams.Recurring build() {
+        return new PriceListParams.Recurring(this.extraParams, this.interval, this.usageType);
       }
 
       /**
@@ -501,7 +501,7 @@ public class PriceListParams extends ApiRequestParams {
        * Filter by billing frequency. Either {@code day}, {@code week}, {@code month} or {@code
        * year}.
        */
-      public Builder setInterval(Interval interval) {
+      public Builder setInterval(PriceListParams.Recurring.Interval interval) {
         this.interval = interval;
         return this;
       }
@@ -509,7 +509,7 @@ public class PriceListParams extends ApiRequestParams {
       /**
        * Filter by the usage type for this price. Can be either {@code metered} or {@code licensed}.
        */
-      public Builder setUsageType(UsageType usageType) {
+      public Builder setUsageType(PriceListParams.Recurring.UsageType usageType) {
         this.usageType = usageType;
         return this;
       }

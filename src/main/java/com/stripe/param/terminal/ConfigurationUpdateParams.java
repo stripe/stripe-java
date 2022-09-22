@@ -72,7 +72,7 @@ public class ConfigurationUpdateParams extends ApiRequestParams {
     }
 
     /** An object containing device type specific settings for BBPOS WisePOS E readers. */
-    public Builder setBbposWiseposE(BbposWiseposE bbposWiseposE) {
+    public Builder setBbposWiseposE(ConfigurationUpdateParams.BbposWiseposE bbposWiseposE) {
       this.bbposWiseposE = bbposWiseposE;
       return this;
     }
@@ -136,7 +136,7 @@ public class ConfigurationUpdateParams extends ApiRequestParams {
     }
 
     /** Tipping configurations for readers supporting on-reader tips. */
-    public Builder setTipping(Tipping tipping) {
+    public Builder setTipping(ConfigurationUpdateParams.Tipping tipping) {
       this.tipping = tipping;
       return this;
     }
@@ -148,7 +148,7 @@ public class ConfigurationUpdateParams extends ApiRequestParams {
     }
 
     /** An object containing device type specific settings for Verifone P400 readers. */
-    public Builder setVerifoneP400(VerifoneP400 verifoneP400) {
+    public Builder setVerifoneP400(ConfigurationUpdateParams.VerifoneP400 verifoneP400) {
       this.verifoneP400 = verifoneP400;
       return this;
     }
@@ -190,8 +190,8 @@ public class ConfigurationUpdateParams extends ApiRequestParams {
       private Object splashscreen;
 
       /** Finalize and obtain parameter instance from this builder. */
-      public BbposWiseposE build() {
-        return new BbposWiseposE(this.extraParams, this.splashscreen);
+      public ConfigurationUpdateParams.BbposWiseposE build() {
+        return new ConfigurationUpdateParams.BbposWiseposE(this.extraParams, this.splashscreen);
       }
 
       /**
@@ -371,8 +371,8 @@ public class ConfigurationUpdateParams extends ApiRequestParams {
       private Usd usd;
 
       /** Finalize and obtain parameter instance from this builder. */
-      public Tipping build() {
-        return new Tipping(
+      public ConfigurationUpdateParams.Tipping build() {
+        return new ConfigurationUpdateParams.Tipping(
             this.aud,
             this.cad,
             this.chf,
@@ -391,37 +391,37 @@ public class ConfigurationUpdateParams extends ApiRequestParams {
       }
 
       /** Tipping configuration for AUD. */
-      public Builder setAud(Aud aud) {
+      public Builder setAud(ConfigurationUpdateParams.Tipping.Aud aud) {
         this.aud = aud;
         return this;
       }
 
       /** Tipping configuration for CAD. */
-      public Builder setCad(Cad cad) {
+      public Builder setCad(ConfigurationUpdateParams.Tipping.Cad cad) {
         this.cad = cad;
         return this;
       }
 
       /** Tipping configuration for CHF. */
-      public Builder setChf(Chf chf) {
+      public Builder setChf(ConfigurationUpdateParams.Tipping.Chf chf) {
         this.chf = chf;
         return this;
       }
 
       /** Tipping configuration for CZK. */
-      public Builder setCzk(Czk czk) {
+      public Builder setCzk(ConfigurationUpdateParams.Tipping.Czk czk) {
         this.czk = czk;
         return this;
       }
 
       /** Tipping configuration for DKK. */
-      public Builder setDkk(Dkk dkk) {
+      public Builder setDkk(ConfigurationUpdateParams.Tipping.Dkk dkk) {
         this.dkk = dkk;
         return this;
       }
 
       /** Tipping configuration for EUR. */
-      public Builder setEur(Eur eur) {
+      public Builder setEur(ConfigurationUpdateParams.Tipping.Eur eur) {
         this.eur = eur;
         return this;
       }
@@ -453,49 +453,49 @@ public class ConfigurationUpdateParams extends ApiRequestParams {
       }
 
       /** Tipping configuration for GBP. */
-      public Builder setGbp(Gbp gbp) {
+      public Builder setGbp(ConfigurationUpdateParams.Tipping.Gbp gbp) {
         this.gbp = gbp;
         return this;
       }
 
       /** Tipping configuration for HKD. */
-      public Builder setHkd(Hkd hkd) {
+      public Builder setHkd(ConfigurationUpdateParams.Tipping.Hkd hkd) {
         this.hkd = hkd;
         return this;
       }
 
       /** Tipping configuration for MYR. */
-      public Builder setMyr(Myr myr) {
+      public Builder setMyr(ConfigurationUpdateParams.Tipping.Myr myr) {
         this.myr = myr;
         return this;
       }
 
       /** Tipping configuration for NOK. */
-      public Builder setNok(Nok nok) {
+      public Builder setNok(ConfigurationUpdateParams.Tipping.Nok nok) {
         this.nok = nok;
         return this;
       }
 
       /** Tipping configuration for NZD. */
-      public Builder setNzd(Nzd nzd) {
+      public Builder setNzd(ConfigurationUpdateParams.Tipping.Nzd nzd) {
         this.nzd = nzd;
         return this;
       }
 
       /** Tipping configuration for SEK. */
-      public Builder setSek(Sek sek) {
+      public Builder setSek(ConfigurationUpdateParams.Tipping.Sek sek) {
         this.sek = sek;
         return this;
       }
 
       /** Tipping configuration for SGD. */
-      public Builder setSgd(Sgd sgd) {
+      public Builder setSgd(ConfigurationUpdateParams.Tipping.Sgd sgd) {
         this.sgd = sgd;
         return this;
       }
 
       /** Tipping configuration for USD. */
-      public Builder setUsd(Usd usd) {
+      public Builder setUsd(ConfigurationUpdateParams.Tipping.Usd usd) {
         this.usd = usd;
         return this;
       }
@@ -552,8 +552,8 @@ public class ConfigurationUpdateParams extends ApiRequestParams {
         private Long smartTipThreshold;
 
         /** Finalize and obtain parameter instance from this builder. */
-        public Aud build() {
-          return new Aud(
+        public ConfigurationUpdateParams.Tipping.Aud build() {
+          return new ConfigurationUpdateParams.Tipping.Aud(
               this.extraParams, this.fixedAmounts, this.percentages, this.smartTipThreshold);
         }
 
@@ -699,8 +699,8 @@ public class ConfigurationUpdateParams extends ApiRequestParams {
         private Long smartTipThreshold;
 
         /** Finalize and obtain parameter instance from this builder. */
-        public Cad build() {
-          return new Cad(
+        public ConfigurationUpdateParams.Tipping.Cad build() {
+          return new ConfigurationUpdateParams.Tipping.Cad(
               this.extraParams, this.fixedAmounts, this.percentages, this.smartTipThreshold);
         }
 
@@ -846,8 +846,8 @@ public class ConfigurationUpdateParams extends ApiRequestParams {
         private Long smartTipThreshold;
 
         /** Finalize and obtain parameter instance from this builder. */
-        public Chf build() {
-          return new Chf(
+        public ConfigurationUpdateParams.Tipping.Chf build() {
+          return new ConfigurationUpdateParams.Tipping.Chf(
               this.extraParams, this.fixedAmounts, this.percentages, this.smartTipThreshold);
         }
 
@@ -993,8 +993,8 @@ public class ConfigurationUpdateParams extends ApiRequestParams {
         private Long smartTipThreshold;
 
         /** Finalize and obtain parameter instance from this builder. */
-        public Czk build() {
-          return new Czk(
+        public ConfigurationUpdateParams.Tipping.Czk build() {
+          return new ConfigurationUpdateParams.Tipping.Czk(
               this.extraParams, this.fixedAmounts, this.percentages, this.smartTipThreshold);
         }
 
@@ -1140,8 +1140,8 @@ public class ConfigurationUpdateParams extends ApiRequestParams {
         private Long smartTipThreshold;
 
         /** Finalize and obtain parameter instance from this builder. */
-        public Dkk build() {
-          return new Dkk(
+        public ConfigurationUpdateParams.Tipping.Dkk build() {
+          return new ConfigurationUpdateParams.Tipping.Dkk(
               this.extraParams, this.fixedAmounts, this.percentages, this.smartTipThreshold);
         }
 
@@ -1287,8 +1287,8 @@ public class ConfigurationUpdateParams extends ApiRequestParams {
         private Long smartTipThreshold;
 
         /** Finalize and obtain parameter instance from this builder. */
-        public Eur build() {
-          return new Eur(
+        public ConfigurationUpdateParams.Tipping.Eur build() {
+          return new ConfigurationUpdateParams.Tipping.Eur(
               this.extraParams, this.fixedAmounts, this.percentages, this.smartTipThreshold);
         }
 
@@ -1434,8 +1434,8 @@ public class ConfigurationUpdateParams extends ApiRequestParams {
         private Long smartTipThreshold;
 
         /** Finalize and obtain parameter instance from this builder. */
-        public Gbp build() {
-          return new Gbp(
+        public ConfigurationUpdateParams.Tipping.Gbp build() {
+          return new ConfigurationUpdateParams.Tipping.Gbp(
               this.extraParams, this.fixedAmounts, this.percentages, this.smartTipThreshold);
         }
 
@@ -1581,8 +1581,8 @@ public class ConfigurationUpdateParams extends ApiRequestParams {
         private Long smartTipThreshold;
 
         /** Finalize and obtain parameter instance from this builder. */
-        public Hkd build() {
-          return new Hkd(
+        public ConfigurationUpdateParams.Tipping.Hkd build() {
+          return new ConfigurationUpdateParams.Tipping.Hkd(
               this.extraParams, this.fixedAmounts, this.percentages, this.smartTipThreshold);
         }
 
@@ -1728,8 +1728,8 @@ public class ConfigurationUpdateParams extends ApiRequestParams {
         private Long smartTipThreshold;
 
         /** Finalize and obtain parameter instance from this builder. */
-        public Myr build() {
-          return new Myr(
+        public ConfigurationUpdateParams.Tipping.Myr build() {
+          return new ConfigurationUpdateParams.Tipping.Myr(
               this.extraParams, this.fixedAmounts, this.percentages, this.smartTipThreshold);
         }
 
@@ -1875,8 +1875,8 @@ public class ConfigurationUpdateParams extends ApiRequestParams {
         private Long smartTipThreshold;
 
         /** Finalize and obtain parameter instance from this builder. */
-        public Nok build() {
-          return new Nok(
+        public ConfigurationUpdateParams.Tipping.Nok build() {
+          return new ConfigurationUpdateParams.Tipping.Nok(
               this.extraParams, this.fixedAmounts, this.percentages, this.smartTipThreshold);
         }
 
@@ -2022,8 +2022,8 @@ public class ConfigurationUpdateParams extends ApiRequestParams {
         private Long smartTipThreshold;
 
         /** Finalize and obtain parameter instance from this builder. */
-        public Nzd build() {
-          return new Nzd(
+        public ConfigurationUpdateParams.Tipping.Nzd build() {
+          return new ConfigurationUpdateParams.Tipping.Nzd(
               this.extraParams, this.fixedAmounts, this.percentages, this.smartTipThreshold);
         }
 
@@ -2169,8 +2169,8 @@ public class ConfigurationUpdateParams extends ApiRequestParams {
         private Long smartTipThreshold;
 
         /** Finalize and obtain parameter instance from this builder. */
-        public Sek build() {
-          return new Sek(
+        public ConfigurationUpdateParams.Tipping.Sek build() {
+          return new ConfigurationUpdateParams.Tipping.Sek(
               this.extraParams, this.fixedAmounts, this.percentages, this.smartTipThreshold);
         }
 
@@ -2316,8 +2316,8 @@ public class ConfigurationUpdateParams extends ApiRequestParams {
         private Long smartTipThreshold;
 
         /** Finalize and obtain parameter instance from this builder. */
-        public Sgd build() {
-          return new Sgd(
+        public ConfigurationUpdateParams.Tipping.Sgd build() {
+          return new ConfigurationUpdateParams.Tipping.Sgd(
               this.extraParams, this.fixedAmounts, this.percentages, this.smartTipThreshold);
         }
 
@@ -2463,8 +2463,8 @@ public class ConfigurationUpdateParams extends ApiRequestParams {
         private Long smartTipThreshold;
 
         /** Finalize and obtain parameter instance from this builder. */
-        public Usd build() {
-          return new Usd(
+        public ConfigurationUpdateParams.Tipping.Usd build() {
+          return new ConfigurationUpdateParams.Tipping.Usd(
               this.extraParams, this.fixedAmounts, this.percentages, this.smartTipThreshold);
         }
 
@@ -2590,8 +2590,8 @@ public class ConfigurationUpdateParams extends ApiRequestParams {
       private Object splashscreen;
 
       /** Finalize and obtain parameter instance from this builder. */
-      public VerifoneP400 build() {
-        return new VerifoneP400(this.extraParams, this.splashscreen);
+      public ConfigurationUpdateParams.VerifoneP400 build() {
+        return new ConfigurationUpdateParams.VerifoneP400(this.extraParams, this.splashscreen);
       }
 
       /**

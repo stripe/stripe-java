@@ -136,7 +136,7 @@ public class ShippingRateCreateParams extends ApiRequestParams {
      * The estimated range for how long shipping will take, meant to be displayable to the customer.
      * This will appear on CheckoutSessions.
      */
-    public Builder setDeliveryEstimate(DeliveryEstimate deliveryEstimate) {
+    public Builder setDeliveryEstimate(ShippingRateCreateParams.DeliveryEstimate deliveryEstimate) {
       this.deliveryEstimate = deliveryEstimate;
       return this;
     }
@@ -206,7 +206,7 @@ public class ShippingRateCreateParams extends ApiRequestParams {
      * Describes a fixed amount to charge for shipping. Must be present if type is {@code
      * fixed_amount}.
      */
-    public Builder setFixedAmount(FixedAmount fixedAmount) {
+    public Builder setFixedAmount(ShippingRateCreateParams.FixedAmount fixedAmount) {
       this.fixedAmount = fixedAmount;
       return this;
     }
@@ -241,7 +241,7 @@ public class ShippingRateCreateParams extends ApiRequestParams {
      * Specifies whether the rate is considered inclusive of taxes or exclusive of taxes. One of
      * {@code inclusive}, {@code exclusive}, or {@code unspecified}.
      */
-    public Builder setTaxBehavior(TaxBehavior taxBehavior) {
+    public Builder setTaxBehavior(ShippingRateCreateParams.TaxBehavior taxBehavior) {
       this.taxBehavior = taxBehavior;
       return this;
     }
@@ -259,7 +259,7 @@ public class ShippingRateCreateParams extends ApiRequestParams {
      * The type of calculation to use on the shipping rate. Can only be {@code fixed_amount} for
      * now.
      */
-    public Builder setType(Type type) {
+    public Builder setType(ShippingRateCreateParams.Type type) {
       this.type = type;
       return this;
     }
@@ -304,8 +304,9 @@ public class ShippingRateCreateParams extends ApiRequestParams {
       private Minimum minimum;
 
       /** Finalize and obtain parameter instance from this builder. */
-      public DeliveryEstimate build() {
-        return new DeliveryEstimate(this.extraParams, this.maximum, this.minimum);
+      public ShippingRateCreateParams.DeliveryEstimate build() {
+        return new ShippingRateCreateParams.DeliveryEstimate(
+            this.extraParams, this.maximum, this.minimum);
       }
 
       /**
@@ -338,13 +339,13 @@ public class ShippingRateCreateParams extends ApiRequestParams {
       /**
        * The upper bound of the estimated range. If empty, represents no upper bound i.e., infinite.
        */
-      public Builder setMaximum(Maximum maximum) {
+      public Builder setMaximum(ShippingRateCreateParams.DeliveryEstimate.Maximum maximum) {
         this.maximum = maximum;
         return this;
       }
 
       /** The lower bound of the estimated range. If empty, represents no lower bound. */
-      public Builder setMinimum(Minimum minimum) {
+      public Builder setMinimum(ShippingRateCreateParams.DeliveryEstimate.Minimum minimum) {
         this.minimum = minimum;
         return this;
       }
@@ -387,8 +388,9 @@ public class ShippingRateCreateParams extends ApiRequestParams {
         private Long value;
 
         /** Finalize and obtain parameter instance from this builder. */
-        public Maximum build() {
-          return new Maximum(this.extraParams, this.unit, this.value);
+        public ShippingRateCreateParams.DeliveryEstimate.Maximum build() {
+          return new ShippingRateCreateParams.DeliveryEstimate.Maximum(
+              this.extraParams, this.unit, this.value);
         }
 
         /**
@@ -420,7 +422,7 @@ public class ShippingRateCreateParams extends ApiRequestParams {
         }
 
         /** A unit of time. */
-        public Builder setUnit(Unit unit) {
+        public Builder setUnit(ShippingRateCreateParams.DeliveryEstimate.Maximum.Unit unit) {
           this.unit = unit;
           return this;
         }
@@ -494,8 +496,9 @@ public class ShippingRateCreateParams extends ApiRequestParams {
         private Long value;
 
         /** Finalize and obtain parameter instance from this builder. */
-        public Minimum build() {
-          return new Minimum(this.extraParams, this.unit, this.value);
+        public ShippingRateCreateParams.DeliveryEstimate.Minimum build() {
+          return new ShippingRateCreateParams.DeliveryEstimate.Minimum(
+              this.extraParams, this.unit, this.value);
         }
 
         /**
@@ -527,7 +530,7 @@ public class ShippingRateCreateParams extends ApiRequestParams {
         }
 
         /** A unit of time. */
-        public Builder setUnit(Unit unit) {
+        public Builder setUnit(ShippingRateCreateParams.DeliveryEstimate.Minimum.Unit unit) {
           this.unit = unit;
           return this;
         }
@@ -585,7 +588,7 @@ public class ShippingRateCreateParams extends ApiRequestParams {
      * href="https://stripe.com/docs/currencies">supported currency</a>.
      */
     @SerializedName("currency_options")
-    Map<String, CurrencyOption> currencyOptions;
+    Map<String, ShippingRateCreateParams.FixedAmount.CurrencyOption> currencyOptions;
 
     /**
      * Map of extra parameters for custom features not available in this client library. The content
@@ -599,7 +602,7 @@ public class ShippingRateCreateParams extends ApiRequestParams {
     private FixedAmount(
         Long amount,
         String currency,
-        Map<String, CurrencyOption> currencyOptions,
+        Map<String, ShippingRateCreateParams.FixedAmount.CurrencyOption> currencyOptions,
         Map<String, Object> extraParams) {
       this.amount = amount;
       this.currency = currency;
@@ -616,13 +619,14 @@ public class ShippingRateCreateParams extends ApiRequestParams {
 
       private String currency;
 
-      private Map<String, CurrencyOption> currencyOptions;
+      private Map<String, ShippingRateCreateParams.FixedAmount.CurrencyOption> currencyOptions;
 
       private Map<String, Object> extraParams;
 
       /** Finalize and obtain parameter instance from this builder. */
-      public FixedAmount build() {
-        return new FixedAmount(this.amount, this.currency, this.currencyOptions, this.extraParams);
+      public ShippingRateCreateParams.FixedAmount build() {
+        return new ShippingRateCreateParams.FixedAmount(
+            this.amount, this.currency, this.currencyOptions, this.extraParams);
       }
 
       /** A non-negative integer in cents representing how much to charge. */
@@ -647,7 +651,8 @@ public class ShippingRateCreateParams extends ApiRequestParams {
        * See {@link ShippingRateCreateParams.FixedAmount#currencyOptions} for the field
        * documentation.
        */
-      public Builder putCurrencyOption(String key, CurrencyOption value) {
+      public Builder putCurrencyOption(
+          String key, ShippingRateCreateParams.FixedAmount.CurrencyOption value) {
         if (this.currencyOptions == null) {
           this.currencyOptions = new HashMap<>();
         }
@@ -661,7 +666,8 @@ public class ShippingRateCreateParams extends ApiRequestParams {
        * See {@link ShippingRateCreateParams.FixedAmount#currencyOptions} for the field
        * documentation.
        */
-      public Builder putAllCurrencyOption(Map<String, CurrencyOption> map) {
+      public Builder putAllCurrencyOption(
+          Map<String, ShippingRateCreateParams.FixedAmount.CurrencyOption> map) {
         if (this.currencyOptions == null) {
           this.currencyOptions = new HashMap<>();
         }
@@ -737,8 +743,9 @@ public class ShippingRateCreateParams extends ApiRequestParams {
         private TaxBehavior taxBehavior;
 
         /** Finalize and obtain parameter instance from this builder. */
-        public CurrencyOption build() {
-          return new CurrencyOption(this.amount, this.extraParams, this.taxBehavior);
+        public ShippingRateCreateParams.FixedAmount.CurrencyOption build() {
+          return new ShippingRateCreateParams.FixedAmount.CurrencyOption(
+              this.amount, this.extraParams, this.taxBehavior);
         }
 
         /** A non-negative integer in cents representing how much to charge. */
@@ -779,7 +786,8 @@ public class ShippingRateCreateParams extends ApiRequestParams {
          * Specifies whether the rate is considered inclusive of taxes or exclusive of taxes. One of
          * {@code inclusive}, {@code exclusive}, or {@code unspecified}.
          */
-        public Builder setTaxBehavior(TaxBehavior taxBehavior) {
+        public Builder setTaxBehavior(
+            ShippingRateCreateParams.FixedAmount.CurrencyOption.TaxBehavior taxBehavior) {
           this.taxBehavior = taxBehavior;
           return this;
         }

@@ -124,7 +124,7 @@ public class PayoutListParams extends ApiRequestParams {
           this.status);
     }
 
-    public Builder setArrivalDate(ArrivalDate arrivalDate) {
+    public Builder setArrivalDate(PayoutListParams.ArrivalDate arrivalDate) {
       this.arrivalDate = arrivalDate;
       return this;
     }
@@ -134,7 +134,7 @@ public class PayoutListParams extends ApiRequestParams {
       return this;
     }
 
-    public Builder setCreated(Created created) {
+    public Builder setCreated(PayoutListParams.Created created) {
       this.created = created;
       return this;
     }
@@ -294,8 +294,9 @@ public class PayoutListParams extends ApiRequestParams {
       private Long lte;
 
       /** Finalize and obtain parameter instance from this builder. */
-      public ArrivalDate build() {
-        return new ArrivalDate(this.extraParams, this.gt, this.gte, this.lt, this.lte);
+      public PayoutListParams.ArrivalDate build() {
+        return new PayoutListParams.ArrivalDate(
+            this.extraParams, this.gt, this.gte, this.lt, this.lte);
       }
 
       /**
@@ -401,8 +402,8 @@ public class PayoutListParams extends ApiRequestParams {
       private Long lte;
 
       /** Finalize and obtain parameter instance from this builder. */
-      public Created build() {
-        return new Created(this.extraParams, this.gt, this.gte, this.lt, this.lte);
+      public PayoutListParams.Created build() {
+        return new PayoutListParams.Created(this.extraParams, this.gt, this.gte, this.lt, this.lte);
       }
 
       /**

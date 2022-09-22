@@ -183,7 +183,7 @@ public class PaymentMethodUpdateParams extends ApiRequestParams {
      * This is a legacy parameter that will be removed in the future. It is a hash that does not
      * accept any keys.
      */
-    public Builder setAcssDebit(AcssDebit acssDebit) {
+    public Builder setAcssDebit(PaymentMethodUpdateParams.AcssDebit acssDebit) {
       this.acssDebit = acssDebit;
       return this;
     }
@@ -192,7 +192,7 @@ public class PaymentMethodUpdateParams extends ApiRequestParams {
      * This is a legacy parameter that will be removed in the future. It is a hash that does not
      * accept any keys.
      */
-    public Builder setAffirm(Affirm affirm) {
+    public Builder setAffirm(PaymentMethodUpdateParams.Affirm affirm) {
       this.affirm = affirm;
       return this;
     }
@@ -201,7 +201,7 @@ public class PaymentMethodUpdateParams extends ApiRequestParams {
      * This is a legacy parameter that will be removed in the future. It is a hash that does not
      * accept any keys.
      */
-    public Builder setAuBecsDebit(AuBecsDebit auBecsDebit) {
+    public Builder setAuBecsDebit(PaymentMethodUpdateParams.AuBecsDebit auBecsDebit) {
       this.auBecsDebit = auBecsDebit;
       return this;
     }
@@ -210,7 +210,7 @@ public class PaymentMethodUpdateParams extends ApiRequestParams {
      * This is a legacy parameter that will be removed in the future. It is a hash that does not
      * accept any keys.
      */
-    public Builder setBacsDebit(BacsDebit bacsDebit) {
+    public Builder setBacsDebit(PaymentMethodUpdateParams.BacsDebit bacsDebit) {
       this.bacsDebit = bacsDebit;
       return this;
     }
@@ -219,7 +219,7 @@ public class PaymentMethodUpdateParams extends ApiRequestParams {
      * Billing information associated with the PaymentMethod that may be used or required by
      * particular types of payment methods.
      */
-    public Builder setBillingDetails(BillingDetails billingDetails) {
+    public Builder setBillingDetails(PaymentMethodUpdateParams.BillingDetails billingDetails) {
       this.billingDetails = billingDetails;
       return this;
     }
@@ -228,13 +228,13 @@ public class PaymentMethodUpdateParams extends ApiRequestParams {
      * This is a legacy parameter that will be removed in the future. It is a hash that does not
      * accept any keys.
      */
-    public Builder setBlik(Blik blik) {
+    public Builder setBlik(PaymentMethodUpdateParams.Blik blik) {
       this.blik = blik;
       return this;
     }
 
     /** If this is a {@code card} PaymentMethod, this hash contains the user's card details. */
-    public Builder setCard(Card card) {
+    public Builder setCard(PaymentMethodUpdateParams.Card card) {
       this.card = card;
       return this;
     }
@@ -295,7 +295,7 @@ public class PaymentMethodUpdateParams extends ApiRequestParams {
      * If this is an {@code Link} PaymentMethod, this hash contains details about the Link payment
      * method.
      */
-    public Builder setLink(Link link) {
+    public Builder setLink(PaymentMethodUpdateParams.Link link) {
       this.link = link;
       return this;
     }
@@ -354,7 +354,7 @@ public class PaymentMethodUpdateParams extends ApiRequestParams {
      * This is a legacy parameter that will be removed in the future. It is a hash that does not
      * accept any keys.
      */
-    public Builder setSepaDebit(SepaDebit sepaDebit) {
+    public Builder setSepaDebit(PaymentMethodUpdateParams.SepaDebit sepaDebit) {
       this.sepaDebit = sepaDebit;
       return this;
     }
@@ -363,7 +363,7 @@ public class PaymentMethodUpdateParams extends ApiRequestParams {
      * If this is an {@code us_bank_account} PaymentMethod, this hash contains details about the US
      * bank account payment method.
      */
-    public Builder setUsBankAccount(UsBankAccount usBankAccount) {
+    public Builder setUsBankAccount(PaymentMethodUpdateParams.UsBankAccount usBankAccount) {
       this.usBankAccount = usBankAccount;
       return this;
     }
@@ -392,8 +392,8 @@ public class PaymentMethodUpdateParams extends ApiRequestParams {
       private Map<String, Object> extraParams;
 
       /** Finalize and obtain parameter instance from this builder. */
-      public AcssDebit build() {
-        return new AcssDebit(this.extraParams);
+      public PaymentMethodUpdateParams.AcssDebit build() {
+        return new PaymentMethodUpdateParams.AcssDebit(this.extraParams);
       }
 
       /**
@@ -447,8 +447,8 @@ public class PaymentMethodUpdateParams extends ApiRequestParams {
       private Map<String, Object> extraParams;
 
       /** Finalize and obtain parameter instance from this builder. */
-      public Affirm build() {
-        return new Affirm(this.extraParams);
+      public PaymentMethodUpdateParams.Affirm build() {
+        return new PaymentMethodUpdateParams.Affirm(this.extraParams);
       }
 
       /**
@@ -502,8 +502,8 @@ public class PaymentMethodUpdateParams extends ApiRequestParams {
       private Map<String, Object> extraParams;
 
       /** Finalize and obtain parameter instance from this builder. */
-      public AuBecsDebit build() {
-        return new AuBecsDebit(this.extraParams);
+      public PaymentMethodUpdateParams.AuBecsDebit build() {
+        return new PaymentMethodUpdateParams.AuBecsDebit(this.extraParams);
       }
 
       /**
@@ -557,8 +557,8 @@ public class PaymentMethodUpdateParams extends ApiRequestParams {
       private Map<String, Object> extraParams;
 
       /** Finalize and obtain parameter instance from this builder. */
-      public BacsDebit build() {
-        return new BacsDebit(this.extraParams);
+      public PaymentMethodUpdateParams.BacsDebit build() {
+        return new PaymentMethodUpdateParams.BacsDebit(this.extraParams);
       }
 
       /**
@@ -641,13 +641,13 @@ public class PaymentMethodUpdateParams extends ApiRequestParams {
       private Object phone;
 
       /** Finalize and obtain parameter instance from this builder. */
-      public BillingDetails build() {
-        return new BillingDetails(
+      public PaymentMethodUpdateParams.BillingDetails build() {
+        return new PaymentMethodUpdateParams.BillingDetails(
             this.address, this.email, this.extraParams, this.name, this.phone);
       }
 
       /** Billing address. */
-      public Builder setAddress(Address address) {
+      public Builder setAddress(PaymentMethodUpdateParams.BillingDetails.Address address) {
         this.address = address;
         return this;
       }
@@ -797,8 +797,8 @@ public class PaymentMethodUpdateParams extends ApiRequestParams {
         private Object state;
 
         /** Finalize and obtain parameter instance from this builder. */
-        public Address build() {
-          return new Address(
+        public PaymentMethodUpdateParams.BillingDetails.Address build() {
+          return new PaymentMethodUpdateParams.BillingDetails.Address(
               this.city,
               this.country,
               this.extraParams,
@@ -940,8 +940,8 @@ public class PaymentMethodUpdateParams extends ApiRequestParams {
       private Map<String, Object> extraParams;
 
       /** Finalize and obtain parameter instance from this builder. */
-      public Blik build() {
-        return new Blik(this.extraParams);
+      public PaymentMethodUpdateParams.Blik build() {
+        return new PaymentMethodUpdateParams.Blik(this.extraParams);
       }
 
       /**
@@ -1009,8 +1009,8 @@ public class PaymentMethodUpdateParams extends ApiRequestParams {
       private Map<String, Object> extraParams;
 
       /** Finalize and obtain parameter instance from this builder. */
-      public Card build() {
-        return new Card(this.expMonth, this.expYear, this.extraParams);
+      public PaymentMethodUpdateParams.Card build() {
+        return new PaymentMethodUpdateParams.Card(this.expMonth, this.expYear, this.extraParams);
       }
 
       /** Two-digit number representing the card's expiration month. */
@@ -1076,8 +1076,8 @@ public class PaymentMethodUpdateParams extends ApiRequestParams {
       private Map<String, Object> extraParams;
 
       /** Finalize and obtain parameter instance from this builder. */
-      public Link build() {
-        return new Link(this.extraParams);
+      public PaymentMethodUpdateParams.Link build() {
+        return new PaymentMethodUpdateParams.Link(this.extraParams);
       }
 
       /**
@@ -1131,8 +1131,8 @@ public class PaymentMethodUpdateParams extends ApiRequestParams {
       private Map<String, Object> extraParams;
 
       /** Finalize and obtain parameter instance from this builder. */
-      public SepaDebit build() {
-        return new SepaDebit(this.extraParams);
+      public PaymentMethodUpdateParams.SepaDebit build() {
+        return new PaymentMethodUpdateParams.SepaDebit(this.extraParams);
       }
 
       /**
@@ -1193,12 +1193,14 @@ public class PaymentMethodUpdateParams extends ApiRequestParams {
       private Map<String, Object> extraParams;
 
       /** Finalize and obtain parameter instance from this builder. */
-      public UsBankAccount build() {
-        return new UsBankAccount(this.accountHolderType, this.extraParams);
+      public PaymentMethodUpdateParams.UsBankAccount build() {
+        return new PaymentMethodUpdateParams.UsBankAccount(
+            this.accountHolderType, this.extraParams);
       }
 
       /** Bank account type. */
-      public Builder setAccountHolderType(AccountHolderType accountHolderType) {
+      public Builder setAccountHolderType(
+          PaymentMethodUpdateParams.UsBankAccount.AccountHolderType accountHolderType) {
         this.accountHolderType = accountHolderType;
         return this;
       }

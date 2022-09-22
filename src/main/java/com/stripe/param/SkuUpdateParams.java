@@ -3,7 +3,6 @@ package com.stripe.param;
 
 import com.google.gson.annotations.SerializedName;
 import com.stripe.net.ApiRequestParams;
-import com.stripe.net.ApiRequestParams.EnumParam;
 import com.stripe.param.common.EmptyParam;
 import java.math.BigDecimal;
 import java.util.ArrayList;
@@ -267,7 +266,7 @@ public class SkuUpdateParams extends ApiRequestParams {
     }
 
     /** Description of the SKU's inventory. */
-    public Builder setInventory(Inventory inventory) {
+    public Builder setInventory(SkuUpdateParams.Inventory inventory) {
       this.inventory = inventory;
       return this;
     }
@@ -323,7 +322,7 @@ public class SkuUpdateParams extends ApiRequestParams {
     }
 
     /** The dimensions of this SKU for shipping purposes. */
-    public Builder setPackageDimensions(PackageDimensions packageDimensions) {
+    public Builder setPackageDimensions(SkuUpdateParams.PackageDimensions packageDimensions) {
       this.packageDimensions = packageDimensions;
       return this;
     }
@@ -390,9 +389,13 @@ public class SkuUpdateParams extends ApiRequestParams {
      * bucket}.
      */
     @SerializedName("value")
-    EnumParam value;
+    ApiRequestParams.EnumParam value;
 
-    private Inventory(Map<String, Object> extraParams, Long quantity, Type type, EnumParam value) {
+    private Inventory(
+        Map<String, Object> extraParams,
+        Long quantity,
+        Type type,
+        ApiRequestParams.EnumParam value) {
       this.extraParams = extraParams;
       this.quantity = quantity;
       this.type = type;
@@ -410,11 +413,12 @@ public class SkuUpdateParams extends ApiRequestParams {
 
       private Type type;
 
-      private EnumParam value;
+      private ApiRequestParams.EnumParam value;
 
       /** Finalize and obtain parameter instance from this builder. */
-      public Inventory build() {
-        return new Inventory(this.extraParams, this.quantity, this.type, this.value);
+      public SkuUpdateParams.Inventory build() {
+        return new SkuUpdateParams.Inventory(
+            this.extraParams, this.quantity, this.type, this.value);
       }
 
       /**
@@ -453,7 +457,7 @@ public class SkuUpdateParams extends ApiRequestParams {
        * Inventory type. Possible values are {@code finite}, {@code bucket} (not quantified), and
        * {@code infinite}.
        */
-      public Builder setType(Type type) {
+      public Builder setType(SkuUpdateParams.Inventory.Type type) {
         this.type = type;
         return this;
       }
@@ -463,7 +467,7 @@ public class SkuUpdateParams extends ApiRequestParams {
        * limited}, and {@code out_of_stock}. Will be present if and only if {@code type} is {@code
        * bucket}.
        */
-      public Builder setValue(Value value) {
+      public Builder setValue(SkuUpdateParams.Inventory.Value value) {
         this.value = value;
         return this;
       }
@@ -572,8 +576,8 @@ public class SkuUpdateParams extends ApiRequestParams {
       private BigDecimal width;
 
       /** Finalize and obtain parameter instance from this builder. */
-      public PackageDimensions build() {
-        return new PackageDimensions(
+      public SkuUpdateParams.PackageDimensions build() {
+        return new SkuUpdateParams.PackageDimensions(
             this.extraParams, this.height, this.length, this.weight, this.width);
       }
 

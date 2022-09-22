@@ -58,7 +58,8 @@ public class SetupIntentCancelParams extends ApiRequestParams {
      * Reason for canceling this SetupIntent. Possible values are {@code abandoned}, {@code
      * requested_by_customer}, or {@code duplicate}
      */
-    public Builder setCancellationReason(CancellationReason cancellationReason) {
+    public Builder setCancellationReason(
+        SetupIntentCancelParams.CancellationReason cancellationReason) {
       this.cancellationReason = cancellationReason;
       return this;
     }

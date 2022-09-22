@@ -3,7 +3,6 @@ package com.stripe.param;
 
 import com.google.gson.annotations.SerializedName;
 import com.stripe.net.ApiRequestParams;
-import com.stripe.net.ApiRequestParams.EnumParam;
 import com.stripe.param.common.EmptyParam;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -238,7 +237,7 @@ public class ChargeUpdateParams extends ApiRequestParams {
      * value of {@code safe}. Stripe will use the information you send to improve our fraud
      * detection algorithms.
      */
-    public Builder setFraudDetails(FraudDetails fraudDetails) {
+    public Builder setFraudDetails(ChargeUpdateParams.FraudDetails fraudDetails) {
       this.fraudDetails = fraudDetails;
       return this;
     }
@@ -312,7 +311,7 @@ public class ChargeUpdateParams extends ApiRequestParams {
     }
 
     /** Shipping information for the charge. Helps prevent fraud on charges for physical goods. */
-    public Builder setShipping(Shipping shipping) {
+    public Builder setShipping(ChargeUpdateParams.Shipping shipping) {
       this.shipping = shipping;
       return this;
     }
@@ -353,9 +352,9 @@ public class ChargeUpdateParams extends ApiRequestParams {
 
     /** Either {@code safe} or {@code fraudulent}. */
     @SerializedName("user_report")
-    EnumParam userReport;
+    ApiRequestParams.EnumParam userReport;
 
-    private FraudDetails(Map<String, Object> extraParams, EnumParam userReport) {
+    private FraudDetails(Map<String, Object> extraParams, ApiRequestParams.EnumParam userReport) {
       this.extraParams = extraParams;
       this.userReport = userReport;
     }
@@ -367,11 +366,11 @@ public class ChargeUpdateParams extends ApiRequestParams {
     public static class Builder {
       private Map<String, Object> extraParams;
 
-      private EnumParam userReport;
+      private ApiRequestParams.EnumParam userReport;
 
       /** Finalize and obtain parameter instance from this builder. */
-      public FraudDetails build() {
-        return new FraudDetails(this.extraParams, this.userReport);
+      public ChargeUpdateParams.FraudDetails build() {
+        return new ChargeUpdateParams.FraudDetails(this.extraParams, this.userReport);
       }
 
       /**
@@ -401,7 +400,7 @@ public class ChargeUpdateParams extends ApiRequestParams {
       }
 
       /** Either {@code safe} or {@code fraudulent}. */
-      public Builder setUserReport(UserReport userReport) {
+      public Builder setUserReport(ChargeUpdateParams.FraudDetails.UserReport userReport) {
         this.userReport = userReport;
         return this;
       }
@@ -496,8 +495,8 @@ public class ChargeUpdateParams extends ApiRequestParams {
       private Object trackingNumber;
 
       /** Finalize and obtain parameter instance from this builder. */
-      public Shipping build() {
-        return new Shipping(
+      public ChargeUpdateParams.Shipping build() {
+        return new ChargeUpdateParams.Shipping(
             this.address,
             this.carrier,
             this.extraParams,
@@ -507,7 +506,7 @@ public class ChargeUpdateParams extends ApiRequestParams {
       }
 
       /** Shipping address. */
-      public Builder setAddress(Address address) {
+      public Builder setAddress(ChargeUpdateParams.Shipping.Address address) {
         this.address = address;
         return this;
       }
@@ -668,8 +667,8 @@ public class ChargeUpdateParams extends ApiRequestParams {
         private Object state;
 
         /** Finalize and obtain parameter instance from this builder. */
-        public Address build() {
-          return new Address(
+        public ChargeUpdateParams.Shipping.Address build() {
+          return new ChargeUpdateParams.Shipping.Address(
               this.city,
               this.country,
               this.extraParams,

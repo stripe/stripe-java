@@ -456,6 +456,16 @@ public class PaymentLink extends ApiResource implements HasId, MetadataStore<Pay
      */
     @SerializedName("promotions")
     String promotions;
+
+    /**
+     * If set to {@code required}, it requires cutomers to accept the terms of service before being
+     * able to pay. If set to {@code none}, customers won't be shown a checkbox to accept the terms
+     * of service.
+     *
+     * <p>One of {@code none}, or {@code required}.
+     */
+    @SerializedName("terms_of_service")
+    String termsOfService;
   }
 
   @Getter

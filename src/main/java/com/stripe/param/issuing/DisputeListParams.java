@@ -115,7 +115,7 @@ public class DisputeListParams extends ApiRequestParams {
     }
 
     /** Select Issuing disputes that were created during the given date interval. */
-    public Builder setCreated(Created created) {
+    public Builder setCreated(DisputeListParams.Created created) {
       this.created = created;
       return this;
     }
@@ -210,7 +210,7 @@ public class DisputeListParams extends ApiRequestParams {
     }
 
     /** Select Issuing disputes with the given status. */
-    public Builder setStatus(Status status) {
+    public Builder setStatus(DisputeListParams.Status status) {
       this.status = status;
       return this;
     }
@@ -273,8 +273,9 @@ public class DisputeListParams extends ApiRequestParams {
       private Long lte;
 
       /** Finalize and obtain parameter instance from this builder. */
-      public Created build() {
-        return new Created(this.extraParams, this.gt, this.gte, this.lt, this.lte);
+      public DisputeListParams.Created build() {
+        return new DisputeListParams.Created(
+            this.extraParams, this.gt, this.gte, this.lt, this.lte);
       }
 
       /**

@@ -18,7 +18,7 @@ public class SubscriptionCreateParams extends ApiRequestParams {
    * for this subscription. You may pass up to 20 items.
    */
   @SerializedName("add_invoice_items")
-  List<AddInvoiceItem> addInvoiceItems;
+  List<SubscriptionCreateParams.AddInvoiceItem> addInvoiceItems;
 
   /**
    * A non-negative decimal between 0 and 100, with at most two decimal places. This represents the
@@ -164,7 +164,7 @@ public class SubscriptionCreateParams extends ApiRequestParams {
 
   /** A list of up to 20 subscription items, each with an attached price. */
   @SerializedName("items")
-  List<Item> items;
+  List<SubscriptionCreateParams.Item> items;
 
   /**
    * Set of <a href="https://stripe.com/docs/api/metadata">key-value pairs</a> that you can attach
@@ -277,7 +277,7 @@ public class SubscriptionCreateParams extends ApiRequestParams {
   Long trialPeriodDays;
 
   private SubscriptionCreateParams(
-      List<AddInvoiceItem> addInvoiceItems,
+      List<SubscriptionCreateParams.AddInvoiceItem> addInvoiceItems,
       BigDecimal applicationFeePercent,
       AutomaticTax automaticTax,
       Long backdateStartDate,
@@ -296,7 +296,7 @@ public class SubscriptionCreateParams extends ApiRequestParams {
       String description,
       List<String> expand,
       Map<String, Object> extraParams,
-      List<Item> items,
+      List<SubscriptionCreateParams.Item> items,
       Object metadata,
       Boolean offSession,
       PaymentBehavior paymentBehavior,
@@ -346,7 +346,7 @@ public class SubscriptionCreateParams extends ApiRequestParams {
   }
 
   public static class Builder {
-    private List<AddInvoiceItem> addInvoiceItems;
+    private List<SubscriptionCreateParams.AddInvoiceItem> addInvoiceItems;
 
     private BigDecimal applicationFeePercent;
 
@@ -384,7 +384,7 @@ public class SubscriptionCreateParams extends ApiRequestParams {
 
     private Map<String, Object> extraParams;
 
-    private List<Item> items;
+    private List<SubscriptionCreateParams.Item> items;
 
     private Object metadata;
 
@@ -449,7 +449,7 @@ public class SubscriptionCreateParams extends ApiRequestParams {
      * call, and subsequent calls adds additional elements to the original list. See {@link
      * SubscriptionCreateParams#addInvoiceItems} for the field documentation.
      */
-    public Builder addAddInvoiceItem(AddInvoiceItem element) {
+    public Builder addAddInvoiceItem(SubscriptionCreateParams.AddInvoiceItem element) {
       if (this.addInvoiceItems == null) {
         this.addInvoiceItems = new ArrayList<>();
       }
@@ -462,7 +462,7 @@ public class SubscriptionCreateParams extends ApiRequestParams {
      * call, and subsequent calls adds additional elements to the original list. See {@link
      * SubscriptionCreateParams#addInvoiceItems} for the field documentation.
      */
-    public Builder addAllAddInvoiceItem(List<AddInvoiceItem> elements) {
+    public Builder addAllAddInvoiceItem(List<SubscriptionCreateParams.AddInvoiceItem> elements) {
       if (this.addInvoiceItems == null) {
         this.addInvoiceItems = new ArrayList<>();
       }
@@ -487,7 +487,7 @@ public class SubscriptionCreateParams extends ApiRequestParams {
      * Automatic tax settings for this subscription. We recommend you only include this parameter
      * when the existing value is being changed.
      */
-    public Builder setAutomaticTax(AutomaticTax automaticTax) {
+    public Builder setAutomaticTax(SubscriptionCreateParams.AutomaticTax automaticTax) {
       this.automaticTax = automaticTax;
       return this;
     }
@@ -518,7 +518,8 @@ public class SubscriptionCreateParams extends ApiRequestParams {
      * Define thresholds at which an invoice will be sent, and the subscription advanced to a new
      * billing period. Pass an empty string to remove previously-defined thresholds.
      */
-    public Builder setBillingThresholds(BillingThresholds billingThresholds) {
+    public Builder setBillingThresholds(
+        SubscriptionCreateParams.BillingThresholds billingThresholds) {
       this.billingThresholds = billingThresholds;
       return this;
     }
@@ -557,7 +558,7 @@ public class SubscriptionCreateParams extends ApiRequestParams {
      * attached to the customer. When sending an invoice, Stripe will email your customer an invoice
      * with payment instructions. Defaults to {@code charge_automatically}.
      */
-    public Builder setCollectionMethod(CollectionMethod collectionMethod) {
+    public Builder setCollectionMethod(SubscriptionCreateParams.CollectionMethod collectionMethod) {
       this.collectionMethod = collectionMethod;
       return this;
     }
@@ -737,7 +738,7 @@ public class SubscriptionCreateParams extends ApiRequestParams {
      * subsequent calls adds additional elements to the original list. See {@link
      * SubscriptionCreateParams#items} for the field documentation.
      */
-    public Builder addItem(Item element) {
+    public Builder addItem(SubscriptionCreateParams.Item element) {
       if (this.items == null) {
         this.items = new ArrayList<>();
       }
@@ -750,7 +751,7 @@ public class SubscriptionCreateParams extends ApiRequestParams {
      * subsequent calls adds additional elements to the original list. See {@link
      * SubscriptionCreateParams#items} for the field documentation.
      */
-    public Builder addAllItem(List<Item> elements) {
+    public Builder addAllItem(List<SubscriptionCreateParams.Item> elements) {
       if (this.items == null) {
         this.items = new ArrayList<>();
       }
@@ -842,13 +843,13 @@ public class SubscriptionCreateParams extends ApiRequestParams {
      * <p>{@code pending_if_incomplete} is only used with updates and cannot be passed when creating
      * a subscription.
      */
-    public Builder setPaymentBehavior(PaymentBehavior paymentBehavior) {
+    public Builder setPaymentBehavior(SubscriptionCreateParams.PaymentBehavior paymentBehavior) {
       this.paymentBehavior = paymentBehavior;
       return this;
     }
 
     /** Payment settings to pass to invoices created by the subscription. */
-    public Builder setPaymentSettings(PaymentSettings paymentSettings) {
+    public Builder setPaymentSettings(SubscriptionCreateParams.PaymentSettings paymentSettings) {
       this.paymentSettings = paymentSettings;
       return this;
     }
@@ -859,7 +860,7 @@ public class SubscriptionCreateParams extends ApiRequestParams {
      * given subscription at the specified interval.
      */
     public Builder setPendingInvoiceItemInterval(
-        PendingInvoiceItemInterval pendingInvoiceItemInterval) {
+        SubscriptionCreateParams.PendingInvoiceItemInterval pendingInvoiceItemInterval) {
       this.pendingInvoiceItemInterval = pendingInvoiceItemInterval;
       return this;
     }
@@ -889,7 +890,8 @@ public class SubscriptionCreateParams extends ApiRequestParams {
      * resulting from the {@code billing_cycle_anchor}. If no value is passed, the default is {@code
      * create_prorations}.
      */
-    public Builder setProrationBehavior(ProrationBehavior prorationBehavior) {
+    public Builder setProrationBehavior(
+        SubscriptionCreateParams.ProrationBehavior prorationBehavior) {
       this.prorationBehavior = prorationBehavior;
       return this;
     }
@@ -898,7 +900,7 @@ public class SubscriptionCreateParams extends ApiRequestParams {
      * If specified, the funds from the subscription's invoices will be transferred to the
      * destination and the ID of the resulting transfers will be found on the resulting charges.
      */
-    public Builder setTransferData(TransferData transferData) {
+    public Builder setTransferData(SubscriptionCreateParams.TransferData transferData) {
       this.transferData = transferData;
       return this;
     }
@@ -912,7 +914,7 @@ public class SubscriptionCreateParams extends ApiRequestParams {
      * <a href="https://stripe.com/docs/billing/subscriptions/trials">Using trial periods on
      * subscriptions</a> to learn more.
      */
-    public Builder setTrialEnd(TrialEnd trialEnd) {
+    public Builder setTrialEnd(SubscriptionCreateParams.TrialEnd trialEnd) {
       this.trialEnd = trialEnd;
       return this;
     }
@@ -1017,8 +1019,8 @@ public class SubscriptionCreateParams extends ApiRequestParams {
       private Object taxRates;
 
       /** Finalize and obtain parameter instance from this builder. */
-      public AddInvoiceItem build() {
-        return new AddInvoiceItem(
+      public SubscriptionCreateParams.AddInvoiceItem build() {
+        return new SubscriptionCreateParams.AddInvoiceItem(
             this.extraParams, this.price, this.priceData, this.quantity, this.taxRates);
       }
 
@@ -1059,7 +1061,7 @@ public class SubscriptionCreateParams extends ApiRequestParams {
        * Data used to generate a new <a href="https://stripe.com/docs/api/prices">Price</a> object
        * inline.
        */
-      public Builder setPriceData(PriceData priceData) {
+      public Builder setPriceData(SubscriptionCreateParams.AddInvoiceItem.PriceData priceData) {
         this.priceData = priceData;
         return this;
       }
@@ -1196,8 +1198,8 @@ public class SubscriptionCreateParams extends ApiRequestParams {
         private BigDecimal unitAmountDecimal;
 
         /** Finalize and obtain parameter instance from this builder. */
-        public PriceData build() {
-          return new PriceData(
+        public SubscriptionCreateParams.AddInvoiceItem.PriceData build() {
+          return new SubscriptionCreateParams.AddInvoiceItem.PriceData(
               this.currency,
               this.extraParams,
               this.product,
@@ -1255,7 +1257,8 @@ public class SubscriptionCreateParams extends ApiRequestParams {
          * of {@code inclusive}, {@code exclusive}, or {@code unspecified}. Once specified as either
          * {@code inclusive} or {@code exclusive}, it cannot be changed.
          */
-        public Builder setTaxBehavior(TaxBehavior taxBehavior) {
+        public Builder setTaxBehavior(
+            SubscriptionCreateParams.AddInvoiceItem.PriceData.TaxBehavior taxBehavior) {
           this.taxBehavior = taxBehavior;
           return this;
         }
@@ -1333,8 +1336,8 @@ public class SubscriptionCreateParams extends ApiRequestParams {
       private Map<String, Object> extraParams;
 
       /** Finalize and obtain parameter instance from this builder. */
-      public AutomaticTax build() {
-        return new AutomaticTax(this.enabled, this.extraParams);
+      public SubscriptionCreateParams.AutomaticTax build() {
+        return new SubscriptionCreateParams.AutomaticTax(this.enabled, this.extraParams);
       }
 
       /**
@@ -1416,8 +1419,8 @@ public class SubscriptionCreateParams extends ApiRequestParams {
       private Boolean resetBillingCycleAnchor;
 
       /** Finalize and obtain parameter instance from this builder. */
-      public BillingThresholds build() {
-        return new BillingThresholds(
+      public SubscriptionCreateParams.BillingThresholds build() {
+        return new SubscriptionCreateParams.BillingThresholds(
             this.amountGte, this.extraParams, this.resetBillingCycleAnchor);
       }
 
@@ -1563,8 +1566,8 @@ public class SubscriptionCreateParams extends ApiRequestParams {
       private Object taxRates;
 
       /** Finalize and obtain parameter instance from this builder. */
-      public Item build() {
-        return new Item(
+      public SubscriptionCreateParams.Item build() {
+        return new SubscriptionCreateParams.Item(
             this.billingThresholds,
             this.extraParams,
             this.metadata,
@@ -1580,7 +1583,8 @@ public class SubscriptionCreateParams extends ApiRequestParams {
        * billing period. When updating, pass an empty string to remove previously-defined
        * thresholds.
        */
-      public Builder setBillingThresholds(BillingThresholds billingThresholds) {
+      public Builder setBillingThresholds(
+          SubscriptionCreateParams.Item.BillingThresholds billingThresholds) {
         this.billingThresholds = billingThresholds;
         return this;
       }
@@ -1663,7 +1667,7 @@ public class SubscriptionCreateParams extends ApiRequestParams {
        * Data used to generate a new <a href="https://stripe.com/docs/api/prices">Price</a> object
        * inline.
        */
-      public Builder setPriceData(PriceData priceData) {
+      public Builder setPriceData(SubscriptionCreateParams.Item.PriceData priceData) {
         this.priceData = priceData;
         return this;
       }
@@ -1757,8 +1761,9 @@ public class SubscriptionCreateParams extends ApiRequestParams {
         private Long usageGte;
 
         /** Finalize and obtain parameter instance from this builder. */
-        public BillingThresholds build() {
-          return new BillingThresholds(this.extraParams, this.usageGte);
+        public SubscriptionCreateParams.Item.BillingThresholds build() {
+          return new SubscriptionCreateParams.Item.BillingThresholds(
+              this.extraParams, this.usageGte);
         }
 
         /**
@@ -1886,8 +1891,8 @@ public class SubscriptionCreateParams extends ApiRequestParams {
         private BigDecimal unitAmountDecimal;
 
         /** Finalize and obtain parameter instance from this builder. */
-        public PriceData build() {
-          return new PriceData(
+        public SubscriptionCreateParams.Item.PriceData build() {
+          return new SubscriptionCreateParams.Item.PriceData(
               this.currency,
               this.extraParams,
               this.product,
@@ -1944,7 +1949,7 @@ public class SubscriptionCreateParams extends ApiRequestParams {
         /**
          * The recurring components of a price such as {@code interval} and {@code interval_count}.
          */
-        public Builder setRecurring(Recurring recurring) {
+        public Builder setRecurring(SubscriptionCreateParams.Item.PriceData.Recurring recurring) {
           this.recurring = recurring;
           return this;
         }
@@ -1954,7 +1959,8 @@ public class SubscriptionCreateParams extends ApiRequestParams {
          * of {@code inclusive}, {@code exclusive}, or {@code unspecified}. Once specified as either
          * {@code inclusive} or {@code exclusive}, it cannot be changed.
          */
-        public Builder setTaxBehavior(TaxBehavior taxBehavior) {
+        public Builder setTaxBehavior(
+            SubscriptionCreateParams.Item.PriceData.TaxBehavior taxBehavior) {
           this.taxBehavior = taxBehavior;
           return this;
         }
@@ -2024,8 +2030,9 @@ public class SubscriptionCreateParams extends ApiRequestParams {
           private Long intervalCount;
 
           /** Finalize and obtain parameter instance from this builder. */
-          public Recurring build() {
-            return new Recurring(this.extraParams, this.interval, this.intervalCount);
+          public SubscriptionCreateParams.Item.PriceData.Recurring build() {
+            return new SubscriptionCreateParams.Item.PriceData.Recurring(
+                this.extraParams, this.interval, this.intervalCount);
           }
 
           /**
@@ -2060,7 +2067,8 @@ public class SubscriptionCreateParams extends ApiRequestParams {
            * Specifies billing frequency. Either {@code day}, {@code week}, {@code month} or {@code
            * year}.
            */
-          public Builder setInterval(Interval interval) {
+          public Builder setInterval(
+              SubscriptionCreateParams.Item.PriceData.Recurring.Interval interval) {
             this.interval = interval;
             return this;
           }
@@ -2175,8 +2183,8 @@ public class SubscriptionCreateParams extends ApiRequestParams {
       private SaveDefaultPaymentMethod saveDefaultPaymentMethod;
 
       /** Finalize and obtain parameter instance from this builder. */
-      public PaymentSettings build() {
-        return new PaymentSettings(
+      public SubscriptionCreateParams.PaymentSettings build() {
+        return new SubscriptionCreateParams.PaymentSettings(
             this.extraParams,
             this.paymentMethodOptions,
             this.paymentMethodTypes,
@@ -2213,7 +2221,8 @@ public class SubscriptionCreateParams extends ApiRequestParams {
       /**
        * Payment-method-specific configuration to provide to invoices created by the subscription.
        */
-      public Builder setPaymentMethodOptions(PaymentMethodOptions paymentMethodOptions) {
+      public Builder setPaymentMethodOptions(
+          SubscriptionCreateParams.PaymentSettings.PaymentMethodOptions paymentMethodOptions) {
         this.paymentMethodOptions = paymentMethodOptions;
         return this;
       }
@@ -2225,7 +2234,8 @@ public class SubscriptionCreateParams extends ApiRequestParams {
        * documentation.
        */
       @SuppressWarnings("unchecked")
-      public Builder addPaymentMethodType(PaymentMethodType element) {
+      public Builder addPaymentMethodType(
+          SubscriptionCreateParams.PaymentSettings.PaymentMethodType element) {
         if (this.paymentMethodTypes == null || this.paymentMethodTypes instanceof EmptyParam) {
           this.paymentMethodTypes =
               new ArrayList<SubscriptionCreateParams.PaymentSettings.PaymentMethodType>();
@@ -2242,7 +2252,8 @@ public class SubscriptionCreateParams extends ApiRequestParams {
        * documentation.
        */
       @SuppressWarnings("unchecked")
-      public Builder addAllPaymentMethodType(List<PaymentMethodType> elements) {
+      public Builder addAllPaymentMethodType(
+          List<SubscriptionCreateParams.PaymentSettings.PaymentMethodType> elements) {
         if (this.paymentMethodTypes == null || this.paymentMethodTypes instanceof EmptyParam) {
           this.paymentMethodTypes =
               new ArrayList<SubscriptionCreateParams.PaymentSettings.PaymentMethodType>();
@@ -2271,7 +2282,8 @@ public class SubscriptionCreateParams extends ApiRequestParams {
        * default payment method, and your <a
        * href="https://dashboard.stripe.com/settings/billing/invoice">invoice template settings</a>.
        */
-      public Builder setPaymentMethodTypes(List<PaymentMethodType> paymentMethodTypes) {
+      public Builder setPaymentMethodTypes(
+          List<SubscriptionCreateParams.PaymentSettings.PaymentMethodType> paymentMethodTypes) {
         this.paymentMethodTypes = paymentMethodTypes;
         return this;
       }
@@ -2281,7 +2293,8 @@ public class SubscriptionCreateParams extends ApiRequestParams {
        * {@code subscription.default_payment_method} when a subscription payment succeeds.
        */
       public Builder setSaveDefaultPaymentMethod(
-          SaveDefaultPaymentMethod saveDefaultPaymentMethod) {
+          SubscriptionCreateParams.PaymentSettings.SaveDefaultPaymentMethod
+              saveDefaultPaymentMethod) {
         this.saveDefaultPaymentMethod = saveDefaultPaymentMethod;
         return this;
       }
@@ -2377,8 +2390,8 @@ public class SubscriptionCreateParams extends ApiRequestParams {
         private Object usBankAccount;
 
         /** Finalize and obtain parameter instance from this builder. */
-        public PaymentMethodOptions build() {
-          return new PaymentMethodOptions(
+        public SubscriptionCreateParams.PaymentSettings.PaymentMethodOptions build() {
+          return new SubscriptionCreateParams.PaymentSettings.PaymentMethodOptions(
               this.acssDebit,
               this.bancontact,
               this.card,
@@ -2392,7 +2405,8 @@ public class SubscriptionCreateParams extends ApiRequestParams {
          * This sub-hash contains details about the Canadian pre-authorized debit payment method
          * options to pass to the invoice’s PaymentIntent.
          */
-        public Builder setAcssDebit(AcssDebit acssDebit) {
+        public Builder setAcssDebit(
+            SubscriptionCreateParams.PaymentSettings.PaymentMethodOptions.AcssDebit acssDebit) {
           this.acssDebit = acssDebit;
           return this;
         }
@@ -2410,7 +2424,8 @@ public class SubscriptionCreateParams extends ApiRequestParams {
          * This sub-hash contains details about the Bancontact payment method options to pass to the
          * invoice’s PaymentIntent.
          */
-        public Builder setBancontact(Bancontact bancontact) {
+        public Builder setBancontact(
+            SubscriptionCreateParams.PaymentSettings.PaymentMethodOptions.Bancontact bancontact) {
           this.bancontact = bancontact;
           return this;
         }
@@ -2428,7 +2443,8 @@ public class SubscriptionCreateParams extends ApiRequestParams {
          * This sub-hash contains details about the Card payment method options to pass to the
          * invoice’s PaymentIntent.
          */
-        public Builder setCard(Card card) {
+        public Builder setCard(
+            SubscriptionCreateParams.PaymentSettings.PaymentMethodOptions.Card card) {
           this.card = card;
           return this;
         }
@@ -2446,7 +2462,9 @@ public class SubscriptionCreateParams extends ApiRequestParams {
          * This sub-hash contains details about the Bank transfer payment method options to pass to
          * the invoice’s PaymentIntent.
          */
-        public Builder setCustomerBalance(CustomerBalance customerBalance) {
+        public Builder setCustomerBalance(
+            SubscriptionCreateParams.PaymentSettings.PaymentMethodOptions.CustomerBalance
+                customerBalance) {
           this.customerBalance = customerBalance;
           return this;
         }
@@ -2494,7 +2512,8 @@ public class SubscriptionCreateParams extends ApiRequestParams {
          * This sub-hash contains details about the Konbini payment method options to pass to the
          * invoice’s PaymentIntent.
          */
-        public Builder setKonbini(Konbini konbini) {
+        public Builder setKonbini(
+            SubscriptionCreateParams.PaymentSettings.PaymentMethodOptions.Konbini konbini) {
           this.konbini = konbini;
           return this;
         }
@@ -2512,7 +2531,9 @@ public class SubscriptionCreateParams extends ApiRequestParams {
          * This sub-hash contains details about the ACH direct debit payment method options to pass
          * to the invoice’s PaymentIntent.
          */
-        public Builder setUsBankAccount(UsBankAccount usBankAccount) {
+        public Builder setUsBankAccount(
+            SubscriptionCreateParams.PaymentSettings.PaymentMethodOptions.UsBankAccount
+                usBankAccount) {
           this.usBankAccount = usBankAccount;
           return this;
         }
@@ -2568,8 +2589,9 @@ public class SubscriptionCreateParams extends ApiRequestParams {
           private VerificationMethod verificationMethod;
 
           /** Finalize and obtain parameter instance from this builder. */
-          public AcssDebit build() {
-            return new AcssDebit(this.extraParams, this.mandateOptions, this.verificationMethod);
+          public SubscriptionCreateParams.PaymentSettings.PaymentMethodOptions.AcssDebit build() {
+            return new SubscriptionCreateParams.PaymentSettings.PaymentMethodOptions.AcssDebit(
+                this.extraParams, this.mandateOptions, this.verificationMethod);
           }
 
           /**
@@ -2603,13 +2625,18 @@ public class SubscriptionCreateParams extends ApiRequestParams {
           }
 
           /** Additional fields for Mandate creation. */
-          public Builder setMandateOptions(MandateOptions mandateOptions) {
+          public Builder setMandateOptions(
+              SubscriptionCreateParams.PaymentSettings.PaymentMethodOptions.AcssDebit.MandateOptions
+                  mandateOptions) {
             this.mandateOptions = mandateOptions;
             return this;
           }
 
           /** Verification method for the intent. */
-          public Builder setVerificationMethod(VerificationMethod verificationMethod) {
+          public Builder setVerificationMethod(
+              SubscriptionCreateParams.PaymentSettings.PaymentMethodOptions.AcssDebit
+                      .VerificationMethod
+                  verificationMethod) {
             this.verificationMethod = verificationMethod;
             return this;
           }
@@ -2646,8 +2673,11 @@ public class SubscriptionCreateParams extends ApiRequestParams {
             private TransactionType transactionType;
 
             /** Finalize and obtain parameter instance from this builder. */
-            public MandateOptions build() {
-              return new MandateOptions(this.extraParams, this.transactionType);
+            public SubscriptionCreateParams.PaymentSettings.PaymentMethodOptions.AcssDebit
+                    .MandateOptions
+                build() {
+              return new SubscriptionCreateParams.PaymentSettings.PaymentMethodOptions.AcssDebit
+                  .MandateOptions(this.extraParams, this.transactionType);
             }
 
             /**
@@ -2681,7 +2711,10 @@ public class SubscriptionCreateParams extends ApiRequestParams {
             }
 
             /** Transaction type of the mandate. */
-            public Builder setTransactionType(TransactionType transactionType) {
+            public Builder setTransactionType(
+                SubscriptionCreateParams.PaymentSettings.PaymentMethodOptions.AcssDebit
+                        .MandateOptions.TransactionType
+                    transactionType) {
               this.transactionType = transactionType;
               return this;
             }
@@ -2756,8 +2789,9 @@ public class SubscriptionCreateParams extends ApiRequestParams {
           private PreferredLanguage preferredLanguage;
 
           /** Finalize and obtain parameter instance from this builder. */
-          public Bancontact build() {
-            return new Bancontact(this.extraParams, this.preferredLanguage);
+          public SubscriptionCreateParams.PaymentSettings.PaymentMethodOptions.Bancontact build() {
+            return new SubscriptionCreateParams.PaymentSettings.PaymentMethodOptions.Bancontact(
+                this.extraParams, this.preferredLanguage);
           }
 
           /**
@@ -2794,7 +2828,10 @@ public class SubscriptionCreateParams extends ApiRequestParams {
            * Preferred language of the Bancontact authorization page that the customer is redirected
            * to.
            */
-          public Builder setPreferredLanguage(PreferredLanguage preferredLanguage) {
+          public Builder setPreferredLanguage(
+              SubscriptionCreateParams.PaymentSettings.PaymentMethodOptions.Bancontact
+                      .PreferredLanguage
+                  preferredLanguage) {
             this.preferredLanguage = preferredLanguage;
             return this;
           }
@@ -2883,8 +2920,8 @@ public class SubscriptionCreateParams extends ApiRequestParams {
           private RequestThreeDSecure requestThreeDSecure;
 
           /** Finalize and obtain parameter instance from this builder. */
-          public Card build() {
-            return new Card(
+          public SubscriptionCreateParams.PaymentSettings.PaymentMethodOptions.Card build() {
+            return new SubscriptionCreateParams.PaymentSettings.PaymentMethodOptions.Card(
                 this.extraParams, this.mandateOptions, this.network, this.requestThreeDSecure);
           }
 
@@ -2919,7 +2956,9 @@ public class SubscriptionCreateParams extends ApiRequestParams {
           }
 
           /** Configuration options for setting up an eMandate for cards issued in India. */
-          public Builder setMandateOptions(MandateOptions mandateOptions) {
+          public Builder setMandateOptions(
+              SubscriptionCreateParams.PaymentSettings.PaymentMethodOptions.Card.MandateOptions
+                  mandateOptions) {
             this.mandateOptions = mandateOptions;
             return this;
           }
@@ -2928,7 +2967,8 @@ public class SubscriptionCreateParams extends ApiRequestParams {
            * Selected network to process this Subscription on. Depends on the available networks of
            * the card attached to the Subscription. Can be only set confirm-time.
            */
-          public Builder setNetwork(Network network) {
+          public Builder setNetwork(
+              SubscriptionCreateParams.PaymentSettings.PaymentMethodOptions.Card.Network network) {
             this.network = network;
             return this;
           }
@@ -2943,7 +2983,9 @@ public class SubscriptionCreateParams extends ApiRequestParams {
            * 3D Secure</a> for more information on how this configuration interacts with Radar and
            * our SCA Engine.
            */
-          public Builder setRequestThreeDSecure(RequestThreeDSecure requestThreeDSecure) {
+          public Builder setRequestThreeDSecure(
+              SubscriptionCreateParams.PaymentSettings.PaymentMethodOptions.Card.RequestThreeDSecure
+                  requestThreeDSecure) {
             this.requestThreeDSecure = requestThreeDSecure;
             return this;
           }
@@ -3005,9 +3047,10 @@ public class SubscriptionCreateParams extends ApiRequestParams {
             private Map<String, Object> extraParams;
 
             /** Finalize and obtain parameter instance from this builder. */
-            public MandateOptions build() {
-              return new MandateOptions(
-                  this.amount, this.amountType, this.description, this.extraParams);
+            public SubscriptionCreateParams.PaymentSettings.PaymentMethodOptions.Card.MandateOptions
+                build() {
+              return new SubscriptionCreateParams.PaymentSettings.PaymentMethodOptions.Card
+                  .MandateOptions(this.amount, this.amountType, this.description, this.extraParams);
             }
 
             /** Amount to be charged for future payments. */
@@ -3021,7 +3064,10 @@ public class SubscriptionCreateParams extends ApiRequestParams {
              * refers to the exact amount to be charged in future payments. If {@code maximum}, the
              * amount charged can be up to the value passed for the {@code amount} param.
              */
-            public Builder setAmountType(AmountType amountType) {
+            public Builder setAmountType(
+                SubscriptionCreateParams.PaymentSettings.PaymentMethodOptions.Card.MandateOptions
+                        .AmountType
+                    amountType) {
               this.amountType = amountType;
               return this;
             }
@@ -3182,15 +3228,20 @@ public class SubscriptionCreateParams extends ApiRequestParams {
           private String fundingType;
 
           /** Finalize and obtain parameter instance from this builder. */
-          public CustomerBalance build() {
-            return new CustomerBalance(this.bankTransfer, this.extraParams, this.fundingType);
+          public SubscriptionCreateParams.PaymentSettings.PaymentMethodOptions.CustomerBalance
+              build() {
+            return new SubscriptionCreateParams.PaymentSettings.PaymentMethodOptions
+                .CustomerBalance(this.bankTransfer, this.extraParams, this.fundingType);
           }
 
           /**
            * Configuration for the bank transfer funding type, if the {@code funding_type} is set to
            * {@code bank_transfer}.
            */
-          public Builder setBankTransfer(BankTransfer bankTransfer) {
+          public Builder setBankTransfer(
+              SubscriptionCreateParams.PaymentSettings.PaymentMethodOptions.CustomerBalance
+                      .BankTransfer
+                  bankTransfer) {
             this.bankTransfer = bankTransfer;
             return this;
           }
@@ -3278,12 +3329,18 @@ public class SubscriptionCreateParams extends ApiRequestParams {
             private String type;
 
             /** Finalize and obtain parameter instance from this builder. */
-            public BankTransfer build() {
-              return new BankTransfer(this.euBankTransfer, this.extraParams, this.type);
+            public SubscriptionCreateParams.PaymentSettings.PaymentMethodOptions.CustomerBalance
+                    .BankTransfer
+                build() {
+              return new SubscriptionCreateParams.PaymentSettings.PaymentMethodOptions
+                  .CustomerBalance.BankTransfer(this.euBankTransfer, this.extraParams, this.type);
             }
 
             /** Configuration for eu_bank_transfer funding type. */
-            public Builder setEuBankTransfer(EuBankTransfer euBankTransfer) {
+            public Builder setEuBankTransfer(
+                SubscriptionCreateParams.PaymentSettings.PaymentMethodOptions.CustomerBalance
+                        .BankTransfer.EuBankTransfer
+                    euBankTransfer) {
               this.euBankTransfer = euBankTransfer;
               return this;
             }
@@ -3363,8 +3420,11 @@ public class SubscriptionCreateParams extends ApiRequestParams {
               private Map<String, Object> extraParams;
 
               /** Finalize and obtain parameter instance from this builder. */
-              public EuBankTransfer build() {
-                return new EuBankTransfer(this.country, this.extraParams);
+              public SubscriptionCreateParams.PaymentSettings.PaymentMethodOptions.CustomerBalance
+                      .BankTransfer.EuBankTransfer
+                  build() {
+                return new SubscriptionCreateParams.PaymentSettings.PaymentMethodOptions
+                    .CustomerBalance.BankTransfer.EuBankTransfer(this.country, this.extraParams);
               }
 
               /**
@@ -3434,8 +3494,9 @@ public class SubscriptionCreateParams extends ApiRequestParams {
           private Map<String, Object> extraParams;
 
           /** Finalize and obtain parameter instance from this builder. */
-          public Konbini build() {
-            return new Konbini(this.extraParams);
+          public SubscriptionCreateParams.PaymentSettings.PaymentMethodOptions.Konbini build() {
+            return new SubscriptionCreateParams.PaymentSettings.PaymentMethodOptions.Konbini(
+                this.extraParams);
           }
 
           /**
@@ -3511,8 +3572,9 @@ public class SubscriptionCreateParams extends ApiRequestParams {
           private VerificationMethod verificationMethod;
 
           /** Finalize and obtain parameter instance from this builder. */
-          public UsBankAccount build() {
-            return new UsBankAccount(
+          public SubscriptionCreateParams.PaymentSettings.PaymentMethodOptions.UsBankAccount
+              build() {
+            return new SubscriptionCreateParams.PaymentSettings.PaymentMethodOptions.UsBankAccount(
                 this.extraParams, this.financialConnections, this.verificationMethod);
           }
 
@@ -3547,13 +3609,19 @@ public class SubscriptionCreateParams extends ApiRequestParams {
           }
 
           /** Additional fields for Financial Connections Session creation. */
-          public Builder setFinancialConnections(FinancialConnections financialConnections) {
+          public Builder setFinancialConnections(
+              SubscriptionCreateParams.PaymentSettings.PaymentMethodOptions.UsBankAccount
+                      .FinancialConnections
+                  financialConnections) {
             this.financialConnections = financialConnections;
             return this;
           }
 
           /** Verification method for the intent. */
-          public Builder setVerificationMethod(VerificationMethod verificationMethod) {
+          public Builder setVerificationMethod(
+              SubscriptionCreateParams.PaymentSettings.PaymentMethodOptions.UsBankAccount
+                      .VerificationMethod
+                  verificationMethod) {
             this.verificationMethod = verificationMethod;
             return this;
           }
@@ -3577,10 +3645,17 @@ public class SubscriptionCreateParams extends ApiRequestParams {
            * balances}, {@code ownership}, {@code payment_method}, and {@code transactions}.
            */
           @SerializedName("permissions")
-          List<Permission> permissions;
+          List<
+                  SubscriptionCreateParams.PaymentSettings.PaymentMethodOptions.UsBankAccount
+                      .FinancialConnections.Permission>
+              permissions;
 
           private FinancialConnections(
-              Map<String, Object> extraParams, List<Permission> permissions) {
+              Map<String, Object> extraParams,
+              List<
+                      SubscriptionCreateParams.PaymentSettings.PaymentMethodOptions.UsBankAccount
+                          .FinancialConnections.Permission>
+                  permissions) {
             this.extraParams = extraParams;
             this.permissions = permissions;
           }
@@ -3592,11 +3667,17 @@ public class SubscriptionCreateParams extends ApiRequestParams {
           public static class Builder {
             private Map<String, Object> extraParams;
 
-            private List<Permission> permissions;
+            private List<
+                    SubscriptionCreateParams.PaymentSettings.PaymentMethodOptions.UsBankAccount
+                        .FinancialConnections.Permission>
+                permissions;
 
             /** Finalize and obtain parameter instance from this builder. */
-            public FinancialConnections build() {
-              return new FinancialConnections(this.extraParams, this.permissions);
+            public SubscriptionCreateParams.PaymentSettings.PaymentMethodOptions.UsBankAccount
+                    .FinancialConnections
+                build() {
+              return new SubscriptionCreateParams.PaymentSettings.PaymentMethodOptions.UsBankAccount
+                  .FinancialConnections(this.extraParams, this.permissions);
             }
 
             /**
@@ -3636,7 +3717,10 @@ public class SubscriptionCreateParams extends ApiRequestParams {
              * SubscriptionCreateParams.PaymentSettings.PaymentMethodOptions.UsBankAccount.FinancialConnections#permissions}
              * for the field documentation.
              */
-            public Builder addPermission(Permission element) {
+            public Builder addPermission(
+                SubscriptionCreateParams.PaymentSettings.PaymentMethodOptions.UsBankAccount
+                        .FinancialConnections.Permission
+                    element) {
               if (this.permissions == null) {
                 this.permissions = new ArrayList<>();
               }
@@ -3651,7 +3735,11 @@ public class SubscriptionCreateParams extends ApiRequestParams {
              * SubscriptionCreateParams.PaymentSettings.PaymentMethodOptions.UsBankAccount.FinancialConnections#permissions}
              * for the field documentation.
              */
-            public Builder addAllPermission(List<Permission> elements) {
+            public Builder addAllPermission(
+                List<
+                        SubscriptionCreateParams.PaymentSettings.PaymentMethodOptions.UsBankAccount
+                            .FinancialConnections.Permission>
+                    elements) {
               if (this.permissions == null) {
                 this.permissions = new ArrayList<>();
               }
@@ -3838,8 +3926,9 @@ public class SubscriptionCreateParams extends ApiRequestParams {
       private Long intervalCount;
 
       /** Finalize and obtain parameter instance from this builder. */
-      public PendingInvoiceItemInterval build() {
-        return new PendingInvoiceItemInterval(this.extraParams, this.interval, this.intervalCount);
+      public SubscriptionCreateParams.PendingInvoiceItemInterval build() {
+        return new SubscriptionCreateParams.PendingInvoiceItemInterval(
+            this.extraParams, this.interval, this.intervalCount);
       }
 
       /**
@@ -3874,7 +3963,8 @@ public class SubscriptionCreateParams extends ApiRequestParams {
        * Specifies invoicing frequency. Either {@code day}, {@code week}, {@code month} or {@code
        * year}.
        */
-      public Builder setInterval(Interval interval) {
+      public Builder setInterval(
+          SubscriptionCreateParams.PendingInvoiceItemInterval.Interval interval) {
         this.interval = interval;
         return this;
       }
@@ -3954,8 +4044,9 @@ public class SubscriptionCreateParams extends ApiRequestParams {
       private Map<String, Object> extraParams;
 
       /** Finalize and obtain parameter instance from this builder. */
-      public TransferData build() {
-        return new TransferData(this.amountPercent, this.destination, this.extraParams);
+      public SubscriptionCreateParams.TransferData build() {
+        return new SubscriptionCreateParams.TransferData(
+            this.amountPercent, this.destination, this.extraParams);
       }
 
       /**

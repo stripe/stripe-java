@@ -197,7 +197,7 @@ public class ReceivedDebitListParams extends ApiRequestParams {
     /**
      * Only return ReceivedDebits that have the given status: {@code succeeded} or {@code failed}.
      */
-    public Builder setStatus(Status status) {
+    public Builder setStatus(ReceivedDebitListParams.Status status) {
       this.status = status;
       return this;
     }

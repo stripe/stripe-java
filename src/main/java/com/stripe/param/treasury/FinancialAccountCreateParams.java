@@ -147,7 +147,7 @@ public class FinancialAccountCreateParams extends ApiRequestParams {
      * Encodes whether a FinancialAccount has access to a particular feature. Stripe or the platform
      * can control features via the requested field.
      */
-    public Builder setFeatures(Features features) {
+    public Builder setFeatures(FinancialAccountCreateParams.Features features) {
       this.features = features;
       return this;
     }
@@ -179,7 +179,8 @@ public class FinancialAccountCreateParams extends ApiRequestParams {
     }
 
     /** The set of functionalities that the platform can restrict on the FinancialAccount. */
-    public Builder setPlatformRestrictions(PlatformRestrictions platformRestrictions) {
+    public Builder setPlatformRestrictions(
+        FinancialAccountCreateParams.PlatformRestrictions platformRestrictions) {
       this.platformRestrictions = platformRestrictions;
       return this;
     }
@@ -309,8 +310,8 @@ public class FinancialAccountCreateParams extends ApiRequestParams {
       private OutboundTransfers outboundTransfers;
 
       /** Finalize and obtain parameter instance from this builder. */
-      public Features build() {
-        return new Features(
+      public FinancialAccountCreateParams.Features build() {
+        return new FinancialAccountCreateParams.Features(
             this.cardIssuing,
             this.depositInsurance,
             this.extraParams,
@@ -325,7 +326,7 @@ public class FinancialAccountCreateParams extends ApiRequestParams {
        * Encodes the FinancialAccount's ability to be used with the Issuing product, including
        * attaching cards to and drawing funds from the FinancialAccount.
        */
-      public Builder setCardIssuing(CardIssuing cardIssuing) {
+      public Builder setCardIssuing(FinancialAccountCreateParams.Features.CardIssuing cardIssuing) {
         this.cardIssuing = cardIssuing;
         return this;
       }
@@ -334,7 +335,8 @@ public class FinancialAccountCreateParams extends ApiRequestParams {
        * Represents whether this FinancialAccount is eligible for deposit insurance. Various factors
        * determine the insurance amount.
        */
-      public Builder setDepositInsurance(DepositInsurance depositInsurance) {
+      public Builder setDepositInsurance(
+          FinancialAccountCreateParams.Features.DepositInsurance depositInsurance) {
         this.depositInsurance = depositInsurance;
         return this;
       }
@@ -366,7 +368,8 @@ public class FinancialAccountCreateParams extends ApiRequestParams {
       }
 
       /** Contains Features that add FinancialAddresses to the FinancialAccount. */
-      public Builder setFinancialAddresses(FinancialAddresses financialAddresses) {
+      public Builder setFinancialAddresses(
+          FinancialAccountCreateParams.Features.FinancialAddresses financialAddresses) {
         this.financialAddresses = financialAddresses;
         return this;
       }
@@ -375,7 +378,8 @@ public class FinancialAccountCreateParams extends ApiRequestParams {
        * Contains settings related to adding funds to a FinancialAccount from another Account with
        * the same owner.
        */
-      public Builder setInboundTransfers(InboundTransfers inboundTransfers) {
+      public Builder setInboundTransfers(
+          FinancialAccountCreateParams.Features.InboundTransfers inboundTransfers) {
         this.inboundTransfers = inboundTransfers;
         return this;
       }
@@ -384,7 +388,8 @@ public class FinancialAccountCreateParams extends ApiRequestParams {
        * Represents the ability for the FinancialAccount to send money to, or receive money from
        * other FinancialAccounts (for example, via OutboundPayment).
        */
-      public Builder setIntraStripeFlows(IntraStripeFlows intraStripeFlows) {
+      public Builder setIntraStripeFlows(
+          FinancialAccountCreateParams.Features.IntraStripeFlows intraStripeFlows) {
         this.intraStripeFlows = intraStripeFlows;
         return this;
       }
@@ -393,7 +398,8 @@ public class FinancialAccountCreateParams extends ApiRequestParams {
        * Includes Features related to initiating money movement out of the FinancialAccount to
        * someone else's bucket of money.
        */
-      public Builder setOutboundPayments(OutboundPayments outboundPayments) {
+      public Builder setOutboundPayments(
+          FinancialAccountCreateParams.Features.OutboundPayments outboundPayments) {
         this.outboundPayments = outboundPayments;
         return this;
       }
@@ -402,7 +408,8 @@ public class FinancialAccountCreateParams extends ApiRequestParams {
        * Contains a Feature and settings related to moving money out of the FinancialAccount into
        * another Account with the same owner.
        */
-      public Builder setOutboundTransfers(OutboundTransfers outboundTransfers) {
+      public Builder setOutboundTransfers(
+          FinancialAccountCreateParams.Features.OutboundTransfers outboundTransfers) {
         this.outboundTransfers = outboundTransfers;
         return this;
       }
@@ -438,8 +445,9 @@ public class FinancialAccountCreateParams extends ApiRequestParams {
         private Boolean requested;
 
         /** Finalize and obtain parameter instance from this builder. */
-        public CardIssuing build() {
-          return new CardIssuing(this.extraParams, this.requested);
+        public FinancialAccountCreateParams.Features.CardIssuing build() {
+          return new FinancialAccountCreateParams.Features.CardIssuing(
+              this.extraParams, this.requested);
         }
 
         /**
@@ -508,8 +516,9 @@ public class FinancialAccountCreateParams extends ApiRequestParams {
         private Boolean requested;
 
         /** Finalize and obtain parameter instance from this builder. */
-        public DepositInsurance build() {
-          return new DepositInsurance(this.extraParams, this.requested);
+        public FinancialAccountCreateParams.Features.DepositInsurance build() {
+          return new FinancialAccountCreateParams.Features.DepositInsurance(
+              this.extraParams, this.requested);
         }
 
         /**
@@ -578,12 +587,13 @@ public class FinancialAccountCreateParams extends ApiRequestParams {
         private Map<String, Object> extraParams;
 
         /** Finalize and obtain parameter instance from this builder. */
-        public FinancialAddresses build() {
-          return new FinancialAddresses(this.aba, this.extraParams);
+        public FinancialAccountCreateParams.Features.FinancialAddresses build() {
+          return new FinancialAccountCreateParams.Features.FinancialAddresses(
+              this.aba, this.extraParams);
         }
 
         /** Adds an ABA FinancialAddress to the FinancialAccount. */
-        public Builder setAba(Aba aba) {
+        public Builder setAba(FinancialAccountCreateParams.Features.FinancialAddresses.Aba aba) {
           this.aba = aba;
           return this;
         }
@@ -648,8 +658,9 @@ public class FinancialAccountCreateParams extends ApiRequestParams {
           private Boolean requested;
 
           /** Finalize and obtain parameter instance from this builder. */
-          public Aba build() {
-            return new Aba(this.extraParams, this.requested);
+          public FinancialAccountCreateParams.Features.FinancialAddresses.Aba build() {
+            return new FinancialAccountCreateParams.Features.FinancialAddresses.Aba(
+                this.extraParams, this.requested);
           }
 
           /**
@@ -721,12 +732,13 @@ public class FinancialAccountCreateParams extends ApiRequestParams {
         private Map<String, Object> extraParams;
 
         /** Finalize and obtain parameter instance from this builder. */
-        public InboundTransfers build() {
-          return new InboundTransfers(this.ach, this.extraParams);
+        public FinancialAccountCreateParams.Features.InboundTransfers build() {
+          return new FinancialAccountCreateParams.Features.InboundTransfers(
+              this.ach, this.extraParams);
         }
 
         /** Enables ACH Debits via the InboundTransfers API. */
-        public Builder setAch(Ach ach) {
+        public Builder setAch(FinancialAccountCreateParams.Features.InboundTransfers.Ach ach) {
           this.ach = ach;
           return this;
         }
@@ -791,8 +803,9 @@ public class FinancialAccountCreateParams extends ApiRequestParams {
           private Boolean requested;
 
           /** Finalize and obtain parameter instance from this builder. */
-          public Ach build() {
-            return new Ach(this.extraParams, this.requested);
+          public FinancialAccountCreateParams.Features.InboundTransfers.Ach build() {
+            return new FinancialAccountCreateParams.Features.InboundTransfers.Ach(
+                this.extraParams, this.requested);
           }
 
           /**
@@ -862,8 +875,9 @@ public class FinancialAccountCreateParams extends ApiRequestParams {
         private Boolean requested;
 
         /** Finalize and obtain parameter instance from this builder. */
-        public IntraStripeFlows build() {
-          return new IntraStripeFlows(this.extraParams, this.requested);
+        public FinancialAccountCreateParams.Features.IntraStripeFlows build() {
+          return new FinancialAccountCreateParams.Features.IntraStripeFlows(
+              this.extraParams, this.requested);
         }
 
         /**
@@ -940,12 +954,13 @@ public class FinancialAccountCreateParams extends ApiRequestParams {
         private UsDomesticWire usDomesticWire;
 
         /** Finalize and obtain parameter instance from this builder. */
-        public OutboundPayments build() {
-          return new OutboundPayments(this.ach, this.extraParams, this.usDomesticWire);
+        public FinancialAccountCreateParams.Features.OutboundPayments build() {
+          return new FinancialAccountCreateParams.Features.OutboundPayments(
+              this.ach, this.extraParams, this.usDomesticWire);
         }
 
         /** Enables ACH transfers via the OutboundPayments API. */
-        public Builder setAch(Ach ach) {
+        public Builder setAch(FinancialAccountCreateParams.Features.OutboundPayments.Ach ach) {
           this.ach = ach;
           return this;
         }
@@ -979,7 +994,8 @@ public class FinancialAccountCreateParams extends ApiRequestParams {
         }
 
         /** Enables US domestic wire tranfers via the OutboundPayments API. */
-        public Builder setUsDomesticWire(UsDomesticWire usDomesticWire) {
+        public Builder setUsDomesticWire(
+            FinancialAccountCreateParams.Features.OutboundPayments.UsDomesticWire usDomesticWire) {
           this.usDomesticWire = usDomesticWire;
           return this;
         }
@@ -1016,8 +1032,9 @@ public class FinancialAccountCreateParams extends ApiRequestParams {
           private Boolean requested;
 
           /** Finalize and obtain parameter instance from this builder. */
-          public Ach build() {
-            return new Ach(this.extraParams, this.requested);
+          public FinancialAccountCreateParams.Features.OutboundPayments.Ach build() {
+            return new FinancialAccountCreateParams.Features.OutboundPayments.Ach(
+                this.extraParams, this.requested);
           }
 
           /**
@@ -1087,8 +1104,9 @@ public class FinancialAccountCreateParams extends ApiRequestParams {
           private Boolean requested;
 
           /** Finalize and obtain parameter instance from this builder. */
-          public UsDomesticWire build() {
-            return new UsDomesticWire(this.extraParams, this.requested);
+          public FinancialAccountCreateParams.Features.OutboundPayments.UsDomesticWire build() {
+            return new FinancialAccountCreateParams.Features.OutboundPayments.UsDomesticWire(
+                this.extraParams, this.requested);
           }
 
           /**
@@ -1168,12 +1186,13 @@ public class FinancialAccountCreateParams extends ApiRequestParams {
         private UsDomesticWire usDomesticWire;
 
         /** Finalize and obtain parameter instance from this builder. */
-        public OutboundTransfers build() {
-          return new OutboundTransfers(this.ach, this.extraParams, this.usDomesticWire);
+        public FinancialAccountCreateParams.Features.OutboundTransfers build() {
+          return new FinancialAccountCreateParams.Features.OutboundTransfers(
+              this.ach, this.extraParams, this.usDomesticWire);
         }
 
         /** Enables ACH transfers via the OutboundTransfers API. */
-        public Builder setAch(Ach ach) {
+        public Builder setAch(FinancialAccountCreateParams.Features.OutboundTransfers.Ach ach) {
           this.ach = ach;
           return this;
         }
@@ -1207,7 +1226,8 @@ public class FinancialAccountCreateParams extends ApiRequestParams {
         }
 
         /** Enables US domestic wire tranfers via the OutboundTransfers API. */
-        public Builder setUsDomesticWire(UsDomesticWire usDomesticWire) {
+        public Builder setUsDomesticWire(
+            FinancialAccountCreateParams.Features.OutboundTransfers.UsDomesticWire usDomesticWire) {
           this.usDomesticWire = usDomesticWire;
           return this;
         }
@@ -1244,8 +1264,9 @@ public class FinancialAccountCreateParams extends ApiRequestParams {
           private Boolean requested;
 
           /** Finalize and obtain parameter instance from this builder. */
-          public Ach build() {
-            return new Ach(this.extraParams, this.requested);
+          public FinancialAccountCreateParams.Features.OutboundTransfers.Ach build() {
+            return new FinancialAccountCreateParams.Features.OutboundTransfers.Ach(
+                this.extraParams, this.requested);
           }
 
           /**
@@ -1317,8 +1338,9 @@ public class FinancialAccountCreateParams extends ApiRequestParams {
           private Boolean requested;
 
           /** Finalize and obtain parameter instance from this builder. */
-          public UsDomesticWire build() {
-            return new UsDomesticWire(this.extraParams, this.requested);
+          public FinancialAccountCreateParams.Features.OutboundTransfers.UsDomesticWire build() {
+            return new FinancialAccountCreateParams.Features.OutboundTransfers.UsDomesticWire(
+                this.extraParams, this.requested);
           }
 
           /**
@@ -1399,8 +1421,9 @@ public class FinancialAccountCreateParams extends ApiRequestParams {
       private OutboundFlows outboundFlows;
 
       /** Finalize and obtain parameter instance from this builder. */
-      public PlatformRestrictions build() {
-        return new PlatformRestrictions(this.extraParams, this.inboundFlows, this.outboundFlows);
+      public FinancialAccountCreateParams.PlatformRestrictions build() {
+        return new FinancialAccountCreateParams.PlatformRestrictions(
+            this.extraParams, this.inboundFlows, this.outboundFlows);
       }
 
       /**
@@ -1431,13 +1454,15 @@ public class FinancialAccountCreateParams extends ApiRequestParams {
       }
 
       /** Restricts all inbound money movement. */
-      public Builder setInboundFlows(InboundFlows inboundFlows) {
+      public Builder setInboundFlows(
+          FinancialAccountCreateParams.PlatformRestrictions.InboundFlows inboundFlows) {
         this.inboundFlows = inboundFlows;
         return this;
       }
 
       /** Restricts all outbound money movement. */
-      public Builder setOutboundFlows(OutboundFlows outboundFlows) {
+      public Builder setOutboundFlows(
+          FinancialAccountCreateParams.PlatformRestrictions.OutboundFlows outboundFlows) {
         this.outboundFlows = outboundFlows;
         return this;
       }

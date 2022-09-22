@@ -169,7 +169,7 @@ public class SourceUpdateParams extends ApiRequestParams {
      * Information about a mandate possibility attached to a source object (generally for bank
      * debits) as well as its acceptance status.
      */
-    public Builder setMandate(Mandate mandate) {
+    public Builder setMandate(SourceUpdateParams.Mandate mandate) {
       this.mandate = mandate;
       return this;
     }
@@ -228,7 +228,7 @@ public class SourceUpdateParams extends ApiRequestParams {
      * Information about the owner of the payment instrument that may be used or required by
      * particular source types.
      */
-    public Builder setOwner(Owner owner) {
+    public Builder setOwner(SourceUpdateParams.Owner owner) {
       this.owner = owner;
       return this;
     }
@@ -237,7 +237,7 @@ public class SourceUpdateParams extends ApiRequestParams {
      * Information about the items and shipping associated with the source. Required for
      * transactional credit (for example Klarna) sources before you can charge it.
      */
-    public Builder setSourceOrder(SourceOrder sourceOrder) {
+    public Builder setSourceOrder(SourceUpdateParams.SourceOrder sourceOrder) {
       this.sourceOrder = sourceOrder;
       return this;
     }
@@ -320,8 +320,8 @@ public class SourceUpdateParams extends ApiRequestParams {
       private NotificationMethod notificationMethod;
 
       /** Finalize and obtain parameter instance from this builder. */
-      public Mandate build() {
-        return new Mandate(
+      public SourceUpdateParams.Mandate build() {
+        return new SourceUpdateParams.Mandate(
             this.acceptance,
             this.amount,
             this.currency,
@@ -334,7 +334,7 @@ public class SourceUpdateParams extends ApiRequestParams {
        * The parameters required to notify Stripe of a mandate acceptance or refusal by the
        * customer.
        */
-      public Builder setAcceptance(Acceptance acceptance) {
+      public Builder setAcceptance(SourceUpdateParams.Mandate.Acceptance acceptance) {
         this.acceptance = acceptance;
         return this;
       }
@@ -394,7 +394,7 @@ public class SourceUpdateParams extends ApiRequestParams {
        * single debit), {@code scheduled} (with debits on an agreed schedule or for clearly-defined
        * events), or {@code variable}(for debits with any frequency)
        */
-      public Builder setInterval(Interval interval) {
+      public Builder setInterval(SourceUpdateParams.Mandate.Interval interval) {
         this.interval = interval;
         return this;
       }
@@ -407,7 +407,8 @@ public class SourceUpdateParams extends ApiRequestParams {
        * the notification) or {@code none} (the underlying debit network does not require any
        * notification).
        */
-      public Builder setNotificationMethod(NotificationMethod notificationMethod) {
+      public Builder setNotificationMethod(
+          SourceUpdateParams.Mandate.NotificationMethod notificationMethod) {
         this.notificationMethod = notificationMethod;
         return this;
       }
@@ -510,8 +511,8 @@ public class SourceUpdateParams extends ApiRequestParams {
         private Object userAgent;
 
         /** Finalize and obtain parameter instance from this builder. */
-        public Acceptance build() {
-          return new Acceptance(
+        public SourceUpdateParams.Mandate.Acceptance build() {
+          return new SourceUpdateParams.Mandate.Acceptance(
               this.date,
               this.extraParams,
               this.ip,
@@ -574,7 +575,7 @@ public class SourceUpdateParams extends ApiRequestParams {
          * The parameters required to store a mandate accepted offline. Should only be set if {@code
          * mandate[type]} is {@code offline}
          */
-        public Builder setOffline(Offline offline) {
+        public Builder setOffline(SourceUpdateParams.Mandate.Acceptance.Offline offline) {
           this.offline = offline;
           return this;
         }
@@ -583,7 +584,7 @@ public class SourceUpdateParams extends ApiRequestParams {
          * The parameters required to store a mandate accepted online. Should only be set if {@code
          * mandate[type]} is {@code online}
          */
-        public Builder setOnline(Online online) {
+        public Builder setOnline(SourceUpdateParams.Mandate.Acceptance.Online online) {
           this.online = online;
           return this;
         }
@@ -592,7 +593,7 @@ public class SourceUpdateParams extends ApiRequestParams {
          * The status of the mandate acceptance. Either {@code accepted} (the mandate was accepted)
          * or {@code refused} (the mandate was refused).
          */
-        public Builder setStatus(Status status) {
+        public Builder setStatus(SourceUpdateParams.Mandate.Acceptance.Status status) {
           this.status = status;
           return this;
         }
@@ -601,7 +602,7 @@ public class SourceUpdateParams extends ApiRequestParams {
          * The type of acceptance information included with the mandate. Either {@code online} or
          * {@code offline}
          */
-        public Builder setType(Type type) {
+        public Builder setType(SourceUpdateParams.Mandate.Acceptance.Type type) {
           this.type = type;
           return this;
         }
@@ -659,8 +660,9 @@ public class SourceUpdateParams extends ApiRequestParams {
           private Map<String, Object> extraParams;
 
           /** Finalize and obtain parameter instance from this builder. */
-          public Offline build() {
-            return new Offline(this.contactEmail, this.extraParams);
+          public SourceUpdateParams.Mandate.Acceptance.Offline build() {
+            return new SourceUpdateParams.Mandate.Acceptance.Offline(
+                this.contactEmail, this.extraParams);
           }
 
           /**
@@ -761,8 +763,9 @@ public class SourceUpdateParams extends ApiRequestParams {
           private Object userAgent;
 
           /** Finalize and obtain parameter instance from this builder. */
-          public Online build() {
-            return new Online(this.date, this.extraParams, this.ip, this.userAgent);
+          public SourceUpdateParams.Mandate.Acceptance.Online build() {
+            return new SourceUpdateParams.Mandate.Acceptance.Online(
+                this.date, this.extraParams, this.ip, this.userAgent);
           }
 
           /**
@@ -966,12 +969,13 @@ public class SourceUpdateParams extends ApiRequestParams {
       private Object phone;
 
       /** Finalize and obtain parameter instance from this builder. */
-      public Owner build() {
-        return new Owner(this.address, this.email, this.extraParams, this.name, this.phone);
+      public SourceUpdateParams.Owner build() {
+        return new SourceUpdateParams.Owner(
+            this.address, this.email, this.extraParams, this.name, this.phone);
       }
 
       /** Owner's address. */
-      public Builder setAddress(Address address) {
+      public Builder setAddress(SourceUpdateParams.Owner.Address address) {
         this.address = address;
         return this;
       }
@@ -1114,8 +1118,8 @@ public class SourceUpdateParams extends ApiRequestParams {
         private Object state;
 
         /** Finalize and obtain parameter instance from this builder. */
-        public Address build() {
-          return new Address(
+        public SourceUpdateParams.Owner.Address build() {
+          return new SourceUpdateParams.Owner.Address(
               this.city,
               this.country,
               this.extraParams,
@@ -1247,7 +1251,7 @@ public class SourceUpdateParams extends ApiRequestParams {
 
     /** List of items constituting the order. */
     @SerializedName("items")
-    List<Item> items;
+    List<SourceUpdateParams.SourceOrder.Item> items;
 
     /**
      * Shipping address for the order. Required if any of the SKUs are for products that have {@code
@@ -1256,7 +1260,10 @@ public class SourceUpdateParams extends ApiRequestParams {
     @SerializedName("shipping")
     Shipping shipping;
 
-    private SourceOrder(Map<String, Object> extraParams, List<Item> items, Shipping shipping) {
+    private SourceOrder(
+        Map<String, Object> extraParams,
+        List<SourceUpdateParams.SourceOrder.Item> items,
+        Shipping shipping) {
       this.extraParams = extraParams;
       this.items = items;
       this.shipping = shipping;
@@ -1269,13 +1276,13 @@ public class SourceUpdateParams extends ApiRequestParams {
     public static class Builder {
       private Map<String, Object> extraParams;
 
-      private List<Item> items;
+      private List<SourceUpdateParams.SourceOrder.Item> items;
 
       private Shipping shipping;
 
       /** Finalize and obtain parameter instance from this builder. */
-      public SourceOrder build() {
-        return new SourceOrder(this.extraParams, this.items, this.shipping);
+      public SourceUpdateParams.SourceOrder build() {
+        return new SourceUpdateParams.SourceOrder(this.extraParams, this.items, this.shipping);
       }
 
       /**
@@ -1309,7 +1316,7 @@ public class SourceUpdateParams extends ApiRequestParams {
        * subsequent calls adds additional elements to the original list. See {@link
        * SourceUpdateParams.SourceOrder#items} for the field documentation.
        */
-      public Builder addItem(Item element) {
+      public Builder addItem(SourceUpdateParams.SourceOrder.Item element) {
         if (this.items == null) {
           this.items = new ArrayList<>();
         }
@@ -1322,7 +1329,7 @@ public class SourceUpdateParams extends ApiRequestParams {
        * and subsequent calls adds additional elements to the original list. See {@link
        * SourceUpdateParams.SourceOrder#items} for the field documentation.
        */
-      public Builder addAllItem(List<Item> elements) {
+      public Builder addAllItem(List<SourceUpdateParams.SourceOrder.Item> elements) {
         if (this.items == null) {
           this.items = new ArrayList<>();
         }
@@ -1334,7 +1341,7 @@ public class SourceUpdateParams extends ApiRequestParams {
        * Shipping address for the order. Required if any of the SKUs are for products that have
        * {@code shippable} set to true.
        */
-      public Builder setShipping(Shipping shipping) {
+      public Builder setShipping(SourceUpdateParams.SourceOrder.Shipping shipping) {
         this.shipping = shipping;
         return this;
       }
@@ -1411,8 +1418,8 @@ public class SourceUpdateParams extends ApiRequestParams {
         private Type type;
 
         /** Finalize and obtain parameter instance from this builder. */
-        public Item build() {
-          return new Item(
+        public SourceUpdateParams.SourceOrder.Item build() {
+          return new SourceUpdateParams.SourceOrder.Item(
               this.amount,
               this.currency,
               this.description,
@@ -1496,7 +1503,7 @@ public class SourceUpdateParams extends ApiRequestParams {
           return this;
         }
 
-        public Builder setType(Type type) {
+        public Builder setType(SourceUpdateParams.SourceOrder.Item.Type type) {
           this.type = type;
           return this;
         }
@@ -1591,8 +1598,8 @@ public class SourceUpdateParams extends ApiRequestParams {
         private Object trackingNumber;
 
         /** Finalize and obtain parameter instance from this builder. */
-        public Shipping build() {
-          return new Shipping(
+        public SourceUpdateParams.SourceOrder.Shipping build() {
+          return new SourceUpdateParams.SourceOrder.Shipping(
               this.address,
               this.carrier,
               this.extraParams,
@@ -1602,7 +1609,7 @@ public class SourceUpdateParams extends ApiRequestParams {
         }
 
         /** Shipping address. */
-        public Builder setAddress(Address address) {
+        public Builder setAddress(SourceUpdateParams.SourceOrder.Shipping.Address address) {
           this.address = address;
           return this;
         }
@@ -1768,8 +1775,8 @@ public class SourceUpdateParams extends ApiRequestParams {
           private Object state;
 
           /** Finalize and obtain parameter instance from this builder. */
-          public Address build() {
-            return new Address(
+          public SourceUpdateParams.SourceOrder.Shipping.Address build() {
+            return new SourceUpdateParams.SourceOrder.Shipping.Address(
                 this.city,
                 this.country,
                 this.extraParams,

@@ -314,25 +314,25 @@ public class PersonCollectionCreateParams extends ApiRequestParams {
     }
 
     /** The person's address. */
-    public Builder setAddress(Address address) {
+    public Builder setAddress(PersonCollectionCreateParams.Address address) {
       this.address = address;
       return this;
     }
 
     /** The Kana variation of the person's address (Japan only). */
-    public Builder setAddressKana(AddressKana addressKana) {
+    public Builder setAddressKana(PersonCollectionCreateParams.AddressKana addressKana) {
       this.addressKana = addressKana;
       return this;
     }
 
     /** The Kanji variation of the person's address (Japan only). */
-    public Builder setAddressKanji(AddressKanji addressKanji) {
+    public Builder setAddressKanji(PersonCollectionCreateParams.AddressKanji addressKanji) {
       this.addressKanji = addressKanji;
       return this;
     }
 
     /** The person's date of birth. */
-    public Builder setDob(Dob dob) {
+    public Builder setDob(PersonCollectionCreateParams.Dob dob) {
       this.dob = dob;
       return this;
     }
@@ -344,7 +344,7 @@ public class PersonCollectionCreateParams extends ApiRequestParams {
     }
 
     /** Documents that may be submitted to satisfy various informational requests. */
-    public Builder setDocuments(Documents documents) {
+    public Builder setDocuments(PersonCollectionCreateParams.Documents documents) {
       this.documents = documents;
       return this;
     }
@@ -608,13 +608,14 @@ public class PersonCollectionCreateParams extends ApiRequestParams {
     }
 
     /** The person's registered address. */
-    public Builder setRegisteredAddress(RegisteredAddress registeredAddress) {
+    public Builder setRegisteredAddress(
+        PersonCollectionCreateParams.RegisteredAddress registeredAddress) {
       this.registeredAddress = registeredAddress;
       return this;
     }
 
     /** The relationship that this person has with the account's legal entity. */
-    public Builder setRelationship(Relationship relationship) {
+    public Builder setRelationship(PersonCollectionCreateParams.Relationship relationship) {
       this.relationship = relationship;
       return this;
     }
@@ -626,7 +627,7 @@ public class PersonCollectionCreateParams extends ApiRequestParams {
     }
 
     /** The person's verification status. */
-    public Builder setVerification(Verification verification) {
+    public Builder setVerification(PersonCollectionCreateParams.Verification verification) {
       this.verification = verification;
       return this;
     }
@@ -707,8 +708,8 @@ public class PersonCollectionCreateParams extends ApiRequestParams {
       private String state;
 
       /** Finalize and obtain parameter instance from this builder. */
-      public Address build() {
-        return new Address(
+      public PersonCollectionCreateParams.Address build() {
+        return new PersonCollectionCreateParams.Address(
             this.city,
             this.country,
             this.extraParams,
@@ -868,8 +869,8 @@ public class PersonCollectionCreateParams extends ApiRequestParams {
       private String town;
 
       /** Finalize and obtain parameter instance from this builder. */
-      public AddressKana build() {
-        return new AddressKana(
+      public PersonCollectionCreateParams.AddressKana build() {
+        return new PersonCollectionCreateParams.AddressKana(
             this.city,
             this.country,
             this.extraParams,
@@ -1037,8 +1038,8 @@ public class PersonCollectionCreateParams extends ApiRequestParams {
       private String town;
 
       /** Finalize and obtain parameter instance from this builder. */
-      public AddressKanji build() {
-        return new AddressKanji(
+      public PersonCollectionCreateParams.AddressKanji build() {
+        return new PersonCollectionCreateParams.AddressKanji(
             this.city,
             this.country,
             this.extraParams,
@@ -1167,8 +1168,9 @@ public class PersonCollectionCreateParams extends ApiRequestParams {
       private Long year;
 
       /** Finalize and obtain parameter instance from this builder. */
-      public Dob build() {
-        return new Dob(this.day, this.extraParams, this.month, this.year);
+      public PersonCollectionCreateParams.Dob build() {
+        return new PersonCollectionCreateParams.Dob(
+            this.day, this.extraParams, this.month, this.year);
       }
 
       /** The day of birth, between 1 and 31. */
@@ -1271,15 +1273,17 @@ public class PersonCollectionCreateParams extends ApiRequestParams {
       private Visa visa;
 
       /** Finalize and obtain parameter instance from this builder. */
-      public Documents build() {
-        return new Documents(this.companyAuthorization, this.extraParams, this.passport, this.visa);
+      public PersonCollectionCreateParams.Documents build() {
+        return new PersonCollectionCreateParams.Documents(
+            this.companyAuthorization, this.extraParams, this.passport, this.visa);
       }
 
       /**
        * One or more documents that demonstrate proof that this person is authorized to represent
        * the company.
        */
-      public Builder setCompanyAuthorization(CompanyAuthorization companyAuthorization) {
+      public Builder setCompanyAuthorization(
+          PersonCollectionCreateParams.Documents.CompanyAuthorization companyAuthorization) {
         this.companyAuthorization = companyAuthorization;
         return this;
       }
@@ -1311,7 +1315,7 @@ public class PersonCollectionCreateParams extends ApiRequestParams {
       }
 
       /** One or more documents showing the person's passport page with photo and personal data. */
-      public Builder setPassport(Passport passport) {
+      public Builder setPassport(PersonCollectionCreateParams.Documents.Passport passport) {
         this.passport = passport;
         return this;
       }
@@ -1320,7 +1324,7 @@ public class PersonCollectionCreateParams extends ApiRequestParams {
        * One or more documents showing the person's visa required for living in the country where
        * they are residing.
        */
-      public Builder setVisa(Visa visa) {
+      public Builder setVisa(PersonCollectionCreateParams.Documents.Visa visa) {
         this.visa = visa;
         return this;
       }
@@ -1360,8 +1364,9 @@ public class PersonCollectionCreateParams extends ApiRequestParams {
         private List<String> files;
 
         /** Finalize and obtain parameter instance from this builder. */
-        public CompanyAuthorization build() {
-          return new CompanyAuthorization(this.extraParams, this.files);
+        public PersonCollectionCreateParams.Documents.CompanyAuthorization build() {
+          return new PersonCollectionCreateParams.Documents.CompanyAuthorization(
+              this.extraParams, this.files);
         }
 
         /**
@@ -1456,8 +1461,8 @@ public class PersonCollectionCreateParams extends ApiRequestParams {
         private List<String> files;
 
         /** Finalize and obtain parameter instance from this builder. */
-        public Passport build() {
-          return new Passport(this.extraParams, this.files);
+        public PersonCollectionCreateParams.Documents.Passport build() {
+          return new PersonCollectionCreateParams.Documents.Passport(this.extraParams, this.files);
         }
 
         /**
@@ -1550,8 +1555,8 @@ public class PersonCollectionCreateParams extends ApiRequestParams {
         private List<String> files;
 
         /** Finalize and obtain parameter instance from this builder. */
-        public Visa build() {
-          return new Visa(this.extraParams, this.files);
+        public PersonCollectionCreateParams.Documents.Visa build() {
+          return new PersonCollectionCreateParams.Documents.Visa(this.extraParams, this.files);
         }
 
         /**
@@ -1686,8 +1691,8 @@ public class PersonCollectionCreateParams extends ApiRequestParams {
       private String state;
 
       /** Finalize and obtain parameter instance from this builder. */
-      public RegisteredAddress build() {
-        return new RegisteredAddress(
+      public PersonCollectionCreateParams.RegisteredAddress build() {
+        return new PersonCollectionCreateParams.RegisteredAddress(
             this.city,
             this.country,
             this.extraParams,
@@ -1850,8 +1855,8 @@ public class PersonCollectionCreateParams extends ApiRequestParams {
       private String title;
 
       /** Finalize and obtain parameter instance from this builder. */
-      public Relationship build() {
-        return new Relationship(
+      public PersonCollectionCreateParams.Relationship build() {
+        return new PersonCollectionCreateParams.Relationship(
             this.director,
             this.executive,
             this.extraParams,
@@ -1986,21 +1991,23 @@ public class PersonCollectionCreateParams extends ApiRequestParams {
       private Map<String, Object> extraParams;
 
       /** Finalize and obtain parameter instance from this builder. */
-      public Verification build() {
-        return new Verification(this.additionalDocument, this.document, this.extraParams);
+      public PersonCollectionCreateParams.Verification build() {
+        return new PersonCollectionCreateParams.Verification(
+            this.additionalDocument, this.document, this.extraParams);
       }
 
       /**
        * A document showing address, either a passport, local ID card, or utility bill from a
        * well-known utility company.
        */
-      public Builder setAdditionalDocument(AdditionalDocument additionalDocument) {
+      public Builder setAdditionalDocument(
+          PersonCollectionCreateParams.Verification.AdditionalDocument additionalDocument) {
         this.additionalDocument = additionalDocument;
         return this;
       }
 
       /** An identifying document, either a passport or local ID card. */
-      public Builder setDocument(Document document) {
+      public Builder setDocument(PersonCollectionCreateParams.Verification.Document document) {
         this.document = document;
         return this;
       }
@@ -2080,8 +2087,9 @@ public class PersonCollectionCreateParams extends ApiRequestParams {
         private String front;
 
         /** Finalize and obtain parameter instance from this builder. */
-        public AdditionalDocument build() {
-          return new AdditionalDocument(this.back, this.extraParams, this.front);
+        public PersonCollectionCreateParams.Verification.AdditionalDocument build() {
+          return new PersonCollectionCreateParams.Verification.AdditionalDocument(
+              this.back, this.extraParams, this.front);
         }
 
         /**
@@ -2183,8 +2191,9 @@ public class PersonCollectionCreateParams extends ApiRequestParams {
         private String front;
 
         /** Finalize and obtain parameter instance from this builder. */
-        public Document build() {
-          return new Document(this.back, this.extraParams, this.front);
+        public PersonCollectionCreateParams.Verification.Document build() {
+          return new PersonCollectionCreateParams.Verification.Document(
+              this.back, this.extraParams, this.front);
         }
 
         /**

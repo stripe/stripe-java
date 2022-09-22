@@ -59,7 +59,7 @@ public class ReaderSetReaderDisplayParams extends ApiRequestParams {
     }
 
     /** Cart. */
-    public Builder setCart(Cart cart) {
+    public Builder setCart(ReaderSetReaderDisplayParams.Cart cart) {
       this.cart = cart;
       return this;
     }
@@ -117,7 +117,7 @@ public class ReaderSetReaderDisplayParams extends ApiRequestParams {
     }
 
     /** Type. */
-    public Builder setType(Type type) {
+    public Builder setType(ReaderSetReaderDisplayParams.Type type) {
       this.type = type;
       return this;
     }
@@ -144,7 +144,7 @@ public class ReaderSetReaderDisplayParams extends ApiRequestParams {
 
     /** Array of line items that were purchased. */
     @SerializedName("line_items")
-    List<LineItem> lineItems;
+    List<ReaderSetReaderDisplayParams.Cart.LineItem> lineItems;
 
     /** The amount of tax in cents. */
     @SerializedName("tax")
@@ -157,7 +157,7 @@ public class ReaderSetReaderDisplayParams extends ApiRequestParams {
     private Cart(
         String currency,
         Map<String, Object> extraParams,
-        List<LineItem> lineItems,
+        List<ReaderSetReaderDisplayParams.Cart.LineItem> lineItems,
         Long tax,
         Long total) {
       this.currency = currency;
@@ -176,15 +176,16 @@ public class ReaderSetReaderDisplayParams extends ApiRequestParams {
 
       private Map<String, Object> extraParams;
 
-      private List<LineItem> lineItems;
+      private List<ReaderSetReaderDisplayParams.Cart.LineItem> lineItems;
 
       private Long tax;
 
       private Long total;
 
       /** Finalize and obtain parameter instance from this builder. */
-      public Cart build() {
-        return new Cart(this.currency, this.extraParams, this.lineItems, this.tax, this.total);
+      public ReaderSetReaderDisplayParams.Cart build() {
+        return new ReaderSetReaderDisplayParams.Cart(
+            this.currency, this.extraParams, this.lineItems, this.tax, this.total);
       }
 
       /**
@@ -228,7 +229,7 @@ public class ReaderSetReaderDisplayParams extends ApiRequestParams {
        * and subsequent calls adds additional elements to the original list. See {@link
        * ReaderSetReaderDisplayParams.Cart#lineItems} for the field documentation.
        */
-      public Builder addLineItem(LineItem element) {
+      public Builder addLineItem(ReaderSetReaderDisplayParams.Cart.LineItem element) {
         if (this.lineItems == null) {
           this.lineItems = new ArrayList<>();
         }
@@ -241,7 +242,7 @@ public class ReaderSetReaderDisplayParams extends ApiRequestParams {
        * call, and subsequent calls adds additional elements to the original list. See {@link
        * ReaderSetReaderDisplayParams.Cart#lineItems} for the field documentation.
        */
-      public Builder addAllLineItem(List<LineItem> elements) {
+      public Builder addAllLineItem(List<ReaderSetReaderDisplayParams.Cart.LineItem> elements) {
         if (this.lineItems == null) {
           this.lineItems = new ArrayList<>();
         }
@@ -307,8 +308,9 @@ public class ReaderSetReaderDisplayParams extends ApiRequestParams {
         private Long quantity;
 
         /** Finalize and obtain parameter instance from this builder. */
-        public LineItem build() {
-          return new LineItem(this.amount, this.description, this.extraParams, this.quantity);
+        public ReaderSetReaderDisplayParams.Cart.LineItem build() {
+          return new ReaderSetReaderDisplayParams.Cart.LineItem(
+              this.amount, this.description, this.extraParams, this.quantity);
         }
 
         /** The price of the item in cents. */

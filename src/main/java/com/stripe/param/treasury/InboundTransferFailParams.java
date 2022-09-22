@@ -104,7 +104,7 @@ public class InboundTransferFailParams extends ApiRequestParams {
     }
 
     /** Details about a failed InboundTransfer. */
-    public Builder setFailureDetails(FailureDetails failureDetails) {
+    public Builder setFailureDetails(InboundTransferFailParams.FailureDetails failureDetails) {
       this.failureDetails = failureDetails;
       return this;
     }
@@ -140,12 +140,12 @@ public class InboundTransferFailParams extends ApiRequestParams {
       private Map<String, Object> extraParams;
 
       /** Finalize and obtain parameter instance from this builder. */
-      public FailureDetails build() {
-        return new FailureDetails(this.code, this.extraParams);
+      public InboundTransferFailParams.FailureDetails build() {
+        return new InboundTransferFailParams.FailureDetails(this.code, this.extraParams);
       }
 
       /** Reason for the failure. */
-      public Builder setCode(Code code) {
+      public Builder setCode(InboundTransferFailParams.FailureDetails.Code code) {
         this.code = code;
         return this;
       }

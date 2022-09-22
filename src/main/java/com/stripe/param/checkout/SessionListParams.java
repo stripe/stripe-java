@@ -130,7 +130,7 @@ public class SessionListParams extends ApiRequestParams {
     }
 
     /** Only return the Checkout Sessions for the Customer details specified. */
-    public Builder setCustomerDetails(CustomerDetails customerDetails) {
+    public Builder setCustomerDetails(SessionListParams.CustomerDetails customerDetails) {
       this.customerDetails = customerDetails;
       return this;
     }
@@ -261,8 +261,8 @@ public class SessionListParams extends ApiRequestParams {
       private Map<String, Object> extraParams;
 
       /** Finalize and obtain parameter instance from this builder. */
-      public CustomerDetails build() {
-        return new CustomerDetails(this.email, this.extraParams);
+      public SessionListParams.CustomerDetails build() {
+        return new SessionListParams.CustomerDetails(this.email, this.extraParams);
       }
 
       /** Customer's email address. */

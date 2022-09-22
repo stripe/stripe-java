@@ -162,7 +162,8 @@ public class OutboundTransferCreateParams extends ApiRequestParams {
 
     /** Hash describing payment method configuration details. */
     public Builder setDestinationPaymentMethodOptions(
-        DestinationPaymentMethodOptions destinationPaymentMethodOptions) {
+        OutboundTransferCreateParams.DestinationPaymentMethodOptions
+            destinationPaymentMethodOptions) {
       this.destinationPaymentMethodOptions = destinationPaymentMethodOptions;
       return this;
     }
@@ -292,8 +293,9 @@ public class OutboundTransferCreateParams extends ApiRequestParams {
       private Object usBankAccount;
 
       /** Finalize and obtain parameter instance from this builder. */
-      public DestinationPaymentMethodOptions build() {
-        return new DestinationPaymentMethodOptions(this.extraParams, this.usBankAccount);
+      public OutboundTransferCreateParams.DestinationPaymentMethodOptions build() {
+        return new OutboundTransferCreateParams.DestinationPaymentMethodOptions(
+            this.extraParams, this.usBankAccount);
       }
 
       /**
@@ -325,7 +327,9 @@ public class OutboundTransferCreateParams extends ApiRequestParams {
       }
 
       /** Optional fields for {@code us_bank_account}. */
-      public Builder setUsBankAccount(UsBankAccount usBankAccount) {
+      public Builder setUsBankAccount(
+          OutboundTransferCreateParams.DestinationPaymentMethodOptions.UsBankAccount
+              usBankAccount) {
         this.usBankAccount = usBankAccount;
         return this;
       }
@@ -367,8 +371,9 @@ public class OutboundTransferCreateParams extends ApiRequestParams {
         private Network network;
 
         /** Finalize and obtain parameter instance from this builder. */
-        public UsBankAccount build() {
-          return new UsBankAccount(this.extraParams, this.network);
+        public OutboundTransferCreateParams.DestinationPaymentMethodOptions.UsBankAccount build() {
+          return new OutboundTransferCreateParams.DestinationPaymentMethodOptions.UsBankAccount(
+              this.extraParams, this.network);
         }
 
         /**
@@ -402,7 +407,9 @@ public class OutboundTransferCreateParams extends ApiRequestParams {
         }
 
         /** Designate the OutboundTransfer as using a US bank account network configuration. */
-        public Builder setNetwork(Network network) {
+        public Builder setNetwork(
+            OutboundTransferCreateParams.DestinationPaymentMethodOptions.UsBankAccount.Network
+                network) {
           this.network = network;
           return this;
         }

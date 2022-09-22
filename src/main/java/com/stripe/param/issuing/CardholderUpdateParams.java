@@ -134,13 +134,13 @@ public class CardholderUpdateParams extends ApiRequestParams {
     }
 
     /** The cardholder's billing address. */
-    public Builder setBilling(Billing billing) {
+    public Builder setBilling(CardholderUpdateParams.Billing billing) {
       this.billing = billing;
       return this;
     }
 
     /** Additional information about a {@code company} cardholder. */
-    public Builder setCompany(Company company) {
+    public Builder setCompany(CardholderUpdateParams.Company company) {
       this.company = company;
       return this;
     }
@@ -210,7 +210,7 @@ public class CardholderUpdateParams extends ApiRequestParams {
     }
 
     /** Additional information about an {@code individual} cardholder. */
-    public Builder setIndividual(Individual individual) {
+    public Builder setIndividual(CardholderUpdateParams.Individual individual) {
       this.individual = individual;
       return this;
     }
@@ -266,13 +266,13 @@ public class CardholderUpdateParams extends ApiRequestParams {
      * href="https://stripe.com/docs/issuing/controls/spending-controls">documentation</a> for more
      * details.
      */
-    public Builder setSpendingControls(SpendingControls spendingControls) {
+    public Builder setSpendingControls(CardholderUpdateParams.SpendingControls spendingControls) {
       this.spendingControls = spendingControls;
       return this;
     }
 
     /** Specifies whether to permit authorizations on this cardholder's cards. */
-    public Builder setStatus(Status status) {
+    public Builder setStatus(CardholderUpdateParams.Status status) {
       this.status = status;
       return this;
     }
@@ -308,12 +308,12 @@ public class CardholderUpdateParams extends ApiRequestParams {
       private Map<String, Object> extraParams;
 
       /** Finalize and obtain parameter instance from this builder. */
-      public Billing build() {
-        return new Billing(this.address, this.extraParams);
+      public CardholderUpdateParams.Billing build() {
+        return new CardholderUpdateParams.Billing(this.address, this.extraParams);
       }
 
       /** The cardholder’s billing address. */
-      public Builder setAddress(Address address) {
+      public Builder setAddress(CardholderUpdateParams.Billing.Address address) {
         this.address = address;
         return this;
       }
@@ -420,8 +420,8 @@ public class CardholderUpdateParams extends ApiRequestParams {
         private Object state;
 
         /** Finalize and obtain parameter instance from this builder. */
-        public Address build() {
-          return new Address(
+        public CardholderUpdateParams.Billing.Address build() {
+          return new CardholderUpdateParams.Billing.Address(
               this.city,
               this.country,
               this.extraParams,
@@ -570,8 +570,8 @@ public class CardholderUpdateParams extends ApiRequestParams {
       private Object taxId;
 
       /** Finalize and obtain parameter instance from this builder. */
-      public Company build() {
-        return new Company(this.extraParams, this.taxId);
+      public CardholderUpdateParams.Company build() {
+        return new CardholderUpdateParams.Company(this.extraParams, this.taxId);
       }
 
       /**
@@ -676,13 +676,13 @@ public class CardholderUpdateParams extends ApiRequestParams {
       private Verification verification;
 
       /** Finalize and obtain parameter instance from this builder. */
-      public Individual build() {
-        return new Individual(
+      public CardholderUpdateParams.Individual build() {
+        return new CardholderUpdateParams.Individual(
             this.dob, this.extraParams, this.firstName, this.lastName, this.verification);
       }
 
       /** The date of birth of this cardholder. */
-      public Builder setDob(Dob dob) {
+      public Builder setDob(CardholderUpdateParams.Individual.Dob dob) {
         this.dob = dob;
         return this;
       }
@@ -750,7 +750,7 @@ public class CardholderUpdateParams extends ApiRequestParams {
       }
 
       /** Government-issued ID document for this cardholder. */
-      public Builder setVerification(Verification verification) {
+      public Builder setVerification(CardholderUpdateParams.Individual.Verification verification) {
         this.verification = verification;
         return this;
       }
@@ -800,8 +800,9 @@ public class CardholderUpdateParams extends ApiRequestParams {
         private Long year;
 
         /** Finalize and obtain parameter instance from this builder. */
-        public Dob build() {
-          return new Dob(this.day, this.extraParams, this.month, this.year);
+        public CardholderUpdateParams.Individual.Dob build() {
+          return new CardholderUpdateParams.Individual.Dob(
+              this.day, this.extraParams, this.month, this.year);
         }
 
         /** The day of birth, between 1 and 31. */
@@ -882,12 +883,14 @@ public class CardholderUpdateParams extends ApiRequestParams {
         private Map<String, Object> extraParams;
 
         /** Finalize and obtain parameter instance from this builder. */
-        public Verification build() {
-          return new Verification(this.document, this.extraParams);
+        public CardholderUpdateParams.Individual.Verification build() {
+          return new CardholderUpdateParams.Individual.Verification(
+              this.document, this.extraParams);
         }
 
         /** An identifying document, either a passport or local ID card. */
-        public Builder setDocument(Document document) {
+        public Builder setDocument(
+            CardholderUpdateParams.Individual.Verification.Document document) {
           this.document = document;
           return this;
         }
@@ -965,8 +968,9 @@ public class CardholderUpdateParams extends ApiRequestParams {
           private Object front;
 
           /** Finalize and obtain parameter instance from this builder. */
-          public Document build() {
-            return new Document(this.back, this.extraParams, this.front);
+          public CardholderUpdateParams.Individual.Verification.Document build() {
+            return new CardholderUpdateParams.Individual.Verification.Document(
+                this.back, this.extraParams, this.front);
           }
 
           /**
@@ -1046,7 +1050,7 @@ public class CardholderUpdateParams extends ApiRequestParams {
      * blocked_categories}.
      */
     @SerializedName("allowed_categories")
-    List<AllowedCategory> allowedCategories;
+    List<CardholderUpdateParams.SpendingControls.AllowedCategory> allowedCategories;
 
     /**
      * Array of strings containing <a
@@ -1055,7 +1059,7 @@ public class CardholderUpdateParams extends ApiRequestParams {
      * allowed_categories}.
      */
     @SerializedName("blocked_categories")
-    List<BlockedCategory> blockedCategories;
+    List<CardholderUpdateParams.SpendingControls.BlockedCategory> blockedCategories;
 
     /**
      * Map of extra parameters for custom features not available in this client library. The content
@@ -1068,7 +1072,7 @@ public class CardholderUpdateParams extends ApiRequestParams {
 
     /** Limit spending with amount-based rules that apply across this cardholder's cards. */
     @SerializedName("spending_limits")
-    List<SpendingLimit> spendingLimits;
+    List<CardholderUpdateParams.SpendingControls.SpendingLimit> spendingLimits;
 
     /**
      * Currency of amounts within {@code spending_limits}. Defaults to your merchant country's
@@ -1078,10 +1082,10 @@ public class CardholderUpdateParams extends ApiRequestParams {
     Object spendingLimitsCurrency;
 
     private SpendingControls(
-        List<AllowedCategory> allowedCategories,
-        List<BlockedCategory> blockedCategories,
+        List<CardholderUpdateParams.SpendingControls.AllowedCategory> allowedCategories,
+        List<CardholderUpdateParams.SpendingControls.BlockedCategory> blockedCategories,
         Map<String, Object> extraParams,
-        List<SpendingLimit> spendingLimits,
+        List<CardholderUpdateParams.SpendingControls.SpendingLimit> spendingLimits,
         Object spendingLimitsCurrency) {
       this.allowedCategories = allowedCategories;
       this.blockedCategories = blockedCategories;
@@ -1095,19 +1099,19 @@ public class CardholderUpdateParams extends ApiRequestParams {
     }
 
     public static class Builder {
-      private List<AllowedCategory> allowedCategories;
+      private List<CardholderUpdateParams.SpendingControls.AllowedCategory> allowedCategories;
 
-      private List<BlockedCategory> blockedCategories;
+      private List<CardholderUpdateParams.SpendingControls.BlockedCategory> blockedCategories;
 
       private Map<String, Object> extraParams;
 
-      private List<SpendingLimit> spendingLimits;
+      private List<CardholderUpdateParams.SpendingControls.SpendingLimit> spendingLimits;
 
       private Object spendingLimitsCurrency;
 
       /** Finalize and obtain parameter instance from this builder. */
-      public SpendingControls build() {
-        return new SpendingControls(
+      public CardholderUpdateParams.SpendingControls build() {
+        return new CardholderUpdateParams.SpendingControls(
             this.allowedCategories,
             this.blockedCategories,
             this.extraParams,
@@ -1121,7 +1125,8 @@ public class CardholderUpdateParams extends ApiRequestParams {
        * {@link CardholderUpdateParams.SpendingControls#allowedCategories} for the field
        * documentation.
        */
-      public Builder addAllowedCategory(AllowedCategory element) {
+      public Builder addAllowedCategory(
+          CardholderUpdateParams.SpendingControls.AllowedCategory element) {
         if (this.allowedCategories == null) {
           this.allowedCategories = new ArrayList<>();
         }
@@ -1135,7 +1140,8 @@ public class CardholderUpdateParams extends ApiRequestParams {
        * {@link CardholderUpdateParams.SpendingControls#allowedCategories} for the field
        * documentation.
        */
-      public Builder addAllAllowedCategory(List<AllowedCategory> elements) {
+      public Builder addAllAllowedCategory(
+          List<CardholderUpdateParams.SpendingControls.AllowedCategory> elements) {
         if (this.allowedCategories == null) {
           this.allowedCategories = new ArrayList<>();
         }
@@ -1149,7 +1155,8 @@ public class CardholderUpdateParams extends ApiRequestParams {
        * {@link CardholderUpdateParams.SpendingControls#blockedCategories} for the field
        * documentation.
        */
-      public Builder addBlockedCategory(BlockedCategory element) {
+      public Builder addBlockedCategory(
+          CardholderUpdateParams.SpendingControls.BlockedCategory element) {
         if (this.blockedCategories == null) {
           this.blockedCategories = new ArrayList<>();
         }
@@ -1163,7 +1170,8 @@ public class CardholderUpdateParams extends ApiRequestParams {
        * {@link CardholderUpdateParams.SpendingControls#blockedCategories} for the field
        * documentation.
        */
-      public Builder addAllBlockedCategory(List<BlockedCategory> elements) {
+      public Builder addAllBlockedCategory(
+          List<CardholderUpdateParams.SpendingControls.BlockedCategory> elements) {
         if (this.blockedCategories == null) {
           this.blockedCategories = new ArrayList<>();
         }
@@ -1203,7 +1211,8 @@ public class CardholderUpdateParams extends ApiRequestParams {
        * call, and subsequent calls adds additional elements to the original list. See {@link
        * CardholderUpdateParams.SpendingControls#spendingLimits} for the field documentation.
        */
-      public Builder addSpendingLimit(SpendingLimit element) {
+      public Builder addSpendingLimit(
+          CardholderUpdateParams.SpendingControls.SpendingLimit element) {
         if (this.spendingLimits == null) {
           this.spendingLimits = new ArrayList<>();
         }
@@ -1216,7 +1225,8 @@ public class CardholderUpdateParams extends ApiRequestParams {
        * call, and subsequent calls adds additional elements to the original list. See {@link
        * CardholderUpdateParams.SpendingControls#spendingLimits} for the field documentation.
        */
-      public Builder addAllSpendingLimit(List<SpendingLimit> elements) {
+      public Builder addAllSpendingLimit(
+          List<CardholderUpdateParams.SpendingControls.SpendingLimit> elements) {
         if (this.spendingLimits == null) {
           this.spendingLimits = new ArrayList<>();
         }
@@ -1255,7 +1265,7 @@ public class CardholderUpdateParams extends ApiRequestParams {
        * this limit applies to. Omitting this field will apply the limit to all categories.
        */
       @SerializedName("categories")
-      List<Category> categories;
+      List<CardholderUpdateParams.SpendingControls.SpendingLimit.Category> categories;
 
       /**
        * Map of extra parameters for custom features not available in this client library. The
@@ -1272,7 +1282,7 @@ public class CardholderUpdateParams extends ApiRequestParams {
 
       private SpendingLimit(
           Long amount,
-          List<Category> categories,
+          List<CardholderUpdateParams.SpendingControls.SpendingLimit.Category> categories,
           Map<String, Object> extraParams,
           Interval interval) {
         this.amount = amount;
@@ -1288,15 +1298,16 @@ public class CardholderUpdateParams extends ApiRequestParams {
       public static class Builder {
         private Long amount;
 
-        private List<Category> categories;
+        private List<CardholderUpdateParams.SpendingControls.SpendingLimit.Category> categories;
 
         private Map<String, Object> extraParams;
 
         private Interval interval;
 
         /** Finalize and obtain parameter instance from this builder. */
-        public SpendingLimit build() {
-          return new SpendingLimit(this.amount, this.categories, this.extraParams, this.interval);
+        public CardholderUpdateParams.SpendingControls.SpendingLimit build() {
+          return new CardholderUpdateParams.SpendingControls.SpendingLimit(
+              this.amount, this.categories, this.extraParams, this.interval);
         }
 
         /** Maximum amount allowed to spend per interval. */
@@ -1311,7 +1322,8 @@ public class CardholderUpdateParams extends ApiRequestParams {
          * CardholderUpdateParams.SpendingControls.SpendingLimit#categories} for the field
          * documentation.
          */
-        public Builder addCategory(Category element) {
+        public Builder addCategory(
+            CardholderUpdateParams.SpendingControls.SpendingLimit.Category element) {
           if (this.categories == null) {
             this.categories = new ArrayList<>();
           }
@@ -1325,7 +1337,8 @@ public class CardholderUpdateParams extends ApiRequestParams {
          * CardholderUpdateParams.SpendingControls.SpendingLimit#categories} for the field
          * documentation.
          */
-        public Builder addAllCategory(List<Category> elements) {
+        public Builder addAllCategory(
+            List<CardholderUpdateParams.SpendingControls.SpendingLimit.Category> elements) {
           if (this.categories == null) {
             this.categories = new ArrayList<>();
           }
@@ -1362,7 +1375,8 @@ public class CardholderUpdateParams extends ApiRequestParams {
         }
 
         /** Interval (or event) to which the amount applies. */
-        public Builder setInterval(Interval interval) {
+        public Builder setInterval(
+            CardholderUpdateParams.SpendingControls.SpendingLimit.Interval interval) {
           this.interval = interval;
           return this;
         }

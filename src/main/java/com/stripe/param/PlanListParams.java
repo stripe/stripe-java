@@ -134,7 +134,7 @@ public class PlanListParams extends ApiRequestParams {
      * with an integer Unix timestamp, or it can be a dictionary with a number of different query
      * options.
      */
-    public Builder setCreated(Created created) {
+    public Builder setCreated(PlanListParams.Created created) {
       this.created = created;
       return this;
     }
@@ -290,8 +290,8 @@ public class PlanListParams extends ApiRequestParams {
       private Long lte;
 
       /** Finalize and obtain parameter instance from this builder. */
-      public Created build() {
-        return new Created(this.extraParams, this.gt, this.gte, this.lt, this.lte);
+      public PlanListParams.Created build() {
+        return new PlanListParams.Created(this.extraParams, this.gt, this.gte, this.lt, this.lte);
       }
 
       /**
