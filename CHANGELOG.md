@@ -1,5 +1,13 @@
 # Changelog
 
+## 21.9.0 - 2022-09-22
+* [#1445](https://github.com/stripe/stripe-java/pull/1445) API Updates
+  * Add support for `terms_of_service` on `Checkout.Session.consent_collection`, `Checkout.Session.consent`, `CheckoutSessionCreateParams.consent_collection`, `PaymentLink.consent_collection`, and `PaymentLinkCreateParams.consent_collection`
+  * ⚠️ Remove support for `plan` on `CheckoutSessionCreateParams.payment_method_options.card.installments`. The property was mistakenly released and never worked.
+  * Add support for `amount` on `IssuingDisputeCreateParams` and `IssuingDisputeUpdateParams`
+  * Add support for `statement_descriptor` on `PaymentIntentIncrementAuthorizationParams`
+  * Add `upcomingLines` method to `Invoice` resource.
+
 ## 21.8.0 - 2022-09-15
 * [#1444](https://github.com/stripe/stripe-java/pull/1444) API Updates
   * Add support for `pix` on `Charge.payment_method_details`, `Checkout.Session.payment_method_options`, `CheckoutSessionCreateParams.payment_method_options`, `PaymentIntent.payment_method_options`, `PaymentIntentConfirmParams.payment_method_data`, `PaymentIntentConfirmParams.payment_method_options`, `PaymentIntentCreateParams.payment_method_data`, `PaymentIntentCreateParams.payment_method_options`, `PaymentIntentUpdateParams.payment_method_data`, `PaymentIntentUpdateParams.payment_method_options`, `PaymentMethodCreateParams`, `PaymentMethod`, `SetupIntentConfirmParams.payment_method_data`, `SetupIntentCreateParams.payment_method_data`, and `SetupIntentUpdateParams.payment_method_data`
@@ -21,7 +29,7 @@
 * [#1434](https://github.com/stripe/stripe-java/pull/1434) API Updates
   * Add support for new value `terminal_reader_splashscreen` on enum `FileListParams.purpose`
   * Fix `LineItem.Discount.discount` to reference the correct `Discount` class (`com.stripe.model.Discount`)
-  
+
 
 ## 21.5.0 - 2022-08-31
 * [#1433](https://github.com/stripe/stripe-java/pull/1433) API Updates
