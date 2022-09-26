@@ -129,7 +129,8 @@ public class ReaderPresentPaymentMethodParams extends ApiRequestParams {
     }
 
     /** Simulated data for the interac_present payment method. */
-    public Builder setInteracPresent(InteracPresent interacPresent) {
+    public Builder setInteracPresent(
+        ReaderPresentPaymentMethodParams.InteracPresent interacPresent) {
       this.interacPresent = interacPresent;
       return this;
     }
@@ -240,8 +241,8 @@ public class ReaderPresentPaymentMethodParams extends ApiRequestParams {
       private String number;
 
       /** Finalize and obtain parameter instance from this builder. */
-      public InteracPresent build() {
-        return new InteracPresent(this.extraParams, this.number);
+      public ReaderPresentPaymentMethodParams.InteracPresent build() {
+        return new ReaderPresentPaymentMethodParams.InteracPresent(this.extraParams, this.number);
       }
 
       /**

@@ -460,7 +460,7 @@ public class ProductCreateParams extends ApiRequestParams {
     }
 
     /** Provisioning configuration for this product. */
-    public Builder setProvisioning(Provisioning provisioning) {
+    public Builder setProvisioning(ProductCreateParams.Provisioning provisioning) {
       this.provisioning = provisioning;
       return this;
     }
@@ -1534,8 +1534,8 @@ public class ProductCreateParams extends ApiRequestParams {
       private Type type;
 
       /** Finalize and obtain parameter instance from this builder. */
-      public Provisioning build() {
-        return new Provisioning(this.extraParams, this.giftCard, this.type);
+      public ProductCreateParams.Provisioning build() {
+        return new ProductCreateParams.Provisioning(this.extraParams, this.giftCard, this.type);
       }
 
       /**
@@ -1564,13 +1564,13 @@ public class ProductCreateParams extends ApiRequestParams {
         return this;
       }
 
-      public Builder setGiftCard(GiftCard giftCard) {
+      public Builder setGiftCard(ProductCreateParams.Provisioning.GiftCard giftCard) {
         this.giftCard = giftCard;
         return this;
       }
 
       /** The type of provisioning, only {@code gift_card} currently supported. */
-      public Builder setType(Type type) {
+      public Builder setType(ProductCreateParams.Provisioning.Type type) {
         this.type = type;
         return this;
       }
@@ -1614,8 +1614,9 @@ public class ProductCreateParams extends ApiRequestParams {
         private Type type;
 
         /** Finalize and obtain parameter instance from this builder. */
-        public GiftCard build() {
-          return new GiftCard(this.extraParams, this.fixedAmount, this.type);
+        public ProductCreateParams.Provisioning.GiftCard build() {
+          return new ProductCreateParams.Provisioning.GiftCard(
+              this.extraParams, this.fixedAmount, this.type);
         }
 
         /**
@@ -1646,7 +1647,8 @@ public class ProductCreateParams extends ApiRequestParams {
           return this;
         }
 
-        public Builder setFixedAmount(FixedAmount fixedAmount) {
+        public Builder setFixedAmount(
+            ProductCreateParams.Provisioning.GiftCard.FixedAmount fixedAmount) {
           this.fixedAmount = fixedAmount;
           return this;
         }
@@ -1655,7 +1657,7 @@ public class ProductCreateParams extends ApiRequestParams {
          * The specific type of gift_card provisioning, only {@code fixed_amount} currently
          * supported.
          */
-        public Builder setType(Type type) {
+        public Builder setType(ProductCreateParams.Provisioning.GiftCard.Type type) {
           this.type = type;
           return this;
         }
@@ -1698,8 +1700,9 @@ public class ProductCreateParams extends ApiRequestParams {
           private Map<String, Object> extraParams;
 
           /** Finalize and obtain parameter instance from this builder. */
-          public FixedAmount build() {
-            return new FixedAmount(this.amount, this.currency, this.extraParams);
+          public ProductCreateParams.Provisioning.GiftCard.FixedAmount build() {
+            return new ProductCreateParams.Provisioning.GiftCard.FixedAmount(
+                this.amount, this.currency, this.extraParams);
           }
 
           /** The initial amount with which the provisioned gift card will be created. */

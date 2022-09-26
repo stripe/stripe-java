@@ -207,7 +207,7 @@ public class ReceivedCreditCreateParams extends ApiRequestParams {
     }
 
     /** Details about the network used for the ReceivedCredit. */
-    public Builder setNetworkDetails(NetworkDetails networkDetails) {
+    public Builder setNetworkDetails(ReceivedCreditCreateParams.NetworkDetails networkDetails) {
       this.networkDetails = networkDetails;
       return this;
     }
@@ -451,12 +451,12 @@ public class ReceivedCreditCreateParams extends ApiRequestParams {
       private Type type;
 
       /** Finalize and obtain parameter instance from this builder. */
-      public NetworkDetails build() {
-        return new NetworkDetails(this.ach, this.extraParams, this.type);
+      public ReceivedCreditCreateParams.NetworkDetails build() {
+        return new ReceivedCreditCreateParams.NetworkDetails(this.ach, this.extraParams, this.type);
       }
 
       /** Optional fields for {@code ach}. */
-      public Builder setAch(Ach ach) {
+      public Builder setAch(ReceivedCreditCreateParams.NetworkDetails.Ach ach) {
         this.ach = ach;
         return this;
       }
@@ -489,7 +489,7 @@ public class ReceivedCreditCreateParams extends ApiRequestParams {
       }
 
       /** The type of flow that originated the ReceivedCredit. */
-      public Builder setType(Type type) {
+      public Builder setType(ReceivedCreditCreateParams.NetworkDetails.Type type) {
         this.type = type;
         return this;
       }
@@ -525,8 +525,8 @@ public class ReceivedCreditCreateParams extends ApiRequestParams {
         private Map<String, Object> extraParams;
 
         /** Finalize and obtain parameter instance from this builder. */
-        public Ach build() {
-          return new Ach(this.addenda, this.extraParams);
+        public ReceivedCreditCreateParams.NetworkDetails.Ach build() {
+          return new ReceivedCreditCreateParams.NetworkDetails.Ach(this.addenda, this.extraParams);
         }
 
         /** ACH Addenda record. */

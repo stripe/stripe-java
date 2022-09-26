@@ -275,7 +275,7 @@ public class Subscription extends ApiResource implements HasId, MetadataStore<Su
 
   /** Time period and invoice for a Subscription billed in advance. */
   @SerializedName("prebilling")
-  SubscriptionPrebillingData prebilling;
+  Prebilling prebilling;
 
   /** The schedule attached to the subscription. */
   @SerializedName("schedule")
@@ -1302,6 +1302,44 @@ public class Subscription extends ApiResource implements HasId, MetadataStore<Su
      */
     @SerializedName("trial_from_plan")
     Boolean trialFromPlan;
+  }
+
+  /** Prebilling stores the time period and invoice for a Subscription billed in advance. */
+  @Getter
+  @Setter
+  @EqualsAndHashCode(callSuper = false)
+  public static class Prebilling extends StripeObject {
+    /** ID of the prebilling invoice. */
+    @SerializedName("invoice")
+    @Getter(lombok.AccessLevel.NONE)
+    @Setter(lombok.AccessLevel.NONE)
+    ExpandableField<Invoice> invoice;
+
+    /** The end of the last period for which the invoice pre-bills. */
+    @SerializedName("period_end")
+    Long periodEnd;
+
+    /** The start of the first period for which the invoice pre-bills. */
+    @SerializedName("period_start")
+    Long periodStart;
+
+    /** Get ID of expandable {@code invoice} object. */
+    public String getInvoice() {
+      return (this.invoice != null) ? this.invoice.getId() : null;
+    }
+
+    public void setInvoice(String id) {
+      this.invoice = ApiResource.setExpandableFieldId(id, this.invoice);
+    }
+
+    /** Get expanded {@code invoice}. */
+    public Invoice getInvoiceObject() {
+      return (this.invoice != null) ? this.invoice.getExpanded() : null;
+    }
+
+    public void setInvoiceObject(Invoice expandableObject) {
+      this.invoice = new ExpandableField<Invoice>(expandableObject.getId(), expandableObject);
+    }
   }
 
   @Getter

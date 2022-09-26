@@ -1,5 +1,5 @@
 // File generated from our OpenAPI spec
-package com.stripe.param;
+package com.stripe.param.capital;
 
 import com.google.gson.annotations.SerializedName;
 import com.stripe.net.ApiRequestParams;
@@ -10,10 +10,13 @@ import java.util.Map;
 import lombok.Getter;
 
 @Getter
-public class PaymentMethodListParams extends ApiRequestParams {
-  /** The ID of the customer whose PaymentMethods will be retrieved. */
-  @SerializedName("customer")
-  String customer;
+public class FinancingOfferListParams extends ApiRequestParams {
+  /** limit list to offers belonging to given connected account. */
+  @SerializedName("connected_account")
+  String connectedAccount;
+
+  @SerializedName("created")
+  Object created;
 
   /**
    * A cursor for use in pagination. {@code ending_before} is an object ID that defines your place
@@ -53,25 +56,27 @@ public class PaymentMethodListParams extends ApiRequestParams {
   @SerializedName("starting_after")
   String startingAfter;
 
-  /** A required filter on the list, based on the object {@code type} field. */
-  @SerializedName("type")
-  Type type;
+  /** limit list to offers with given status. */
+  @SerializedName("status")
+  Status status;
 
-  private PaymentMethodListParams(
-      String customer,
+  private FinancingOfferListParams(
+      String connectedAccount,
+      Object created,
       String endingBefore,
       List<String> expand,
       Map<String, Object> extraParams,
       Long limit,
       String startingAfter,
-      Type type) {
-    this.customer = customer;
+      Status status) {
+    this.connectedAccount = connectedAccount;
+    this.created = created;
     this.endingBefore = endingBefore;
     this.expand = expand;
     this.extraParams = extraParams;
     this.limit = limit;
     this.startingAfter = startingAfter;
-    this.type = type;
+    this.status = status;
   }
 
   public static Builder builder() {
@@ -79,7 +84,9 @@ public class PaymentMethodListParams extends ApiRequestParams {
   }
 
   public static class Builder {
-    private String customer;
+    private String connectedAccount;
+
+    private Object created;
 
     private String endingBefore;
 
@@ -91,23 +98,34 @@ public class PaymentMethodListParams extends ApiRequestParams {
 
     private String startingAfter;
 
-    private Type type;
+    private Status status;
 
     /** Finalize and obtain parameter instance from this builder. */
-    public PaymentMethodListParams build() {
-      return new PaymentMethodListParams(
-          this.customer,
+    public FinancingOfferListParams build() {
+      return new FinancingOfferListParams(
+          this.connectedAccount,
+          this.created,
           this.endingBefore,
           this.expand,
           this.extraParams,
           this.limit,
           this.startingAfter,
-          this.type);
+          this.status);
     }
 
-    /** The ID of the customer whose PaymentMethods will be retrieved. */
-    public Builder setCustomer(String customer) {
-      this.customer = customer;
+    /** limit list to offers belonging to given connected account. */
+    public Builder setConnectedAccount(String connectedAccount) {
+      this.connectedAccount = connectedAccount;
+      return this;
+    }
+
+    public Builder setCreated(FinancingOfferListParams.Created created) {
+      this.created = created;
+      return this;
+    }
+
+    public Builder setCreated(Long created) {
+      this.created = created;
       return this;
     }
 
@@ -125,7 +143,7 @@ public class PaymentMethodListParams extends ApiRequestParams {
     /**
      * Add an element to `expand` list. A list is initialized for the first `add/addAll` call, and
      * subsequent calls adds additional elements to the original list. See {@link
-     * PaymentMethodListParams#expand} for the field documentation.
+     * FinancingOfferListParams#expand} for the field documentation.
      */
     public Builder addExpand(String element) {
       if (this.expand == null) {
@@ -138,7 +156,7 @@ public class PaymentMethodListParams extends ApiRequestParams {
     /**
      * Add all elements to `expand` list. A list is initialized for the first `add/addAll` call, and
      * subsequent calls adds additional elements to the original list. See {@link
-     * PaymentMethodListParams#expand} for the field documentation.
+     * FinancingOfferListParams#expand} for the field documentation.
      */
     public Builder addAllExpand(List<String> elements) {
       if (this.expand == null) {
@@ -151,7 +169,7 @@ public class PaymentMethodListParams extends ApiRequestParams {
     /**
      * Add a key/value pair to `extraParams` map. A map is initialized for the first `put/putAll`
      * call, and subsequent calls add additional key/value pairs to the original map. See {@link
-     * PaymentMethodListParams#extraParams} for the field documentation.
+     * FinancingOfferListParams#extraParams} for the field documentation.
      */
     public Builder putExtraParam(String key, Object value) {
       if (this.extraParams == null) {
@@ -164,7 +182,7 @@ public class PaymentMethodListParams extends ApiRequestParams {
     /**
      * Add all map key/value pairs to `extraParams` map. A map is initialized for the first
      * `put/putAll` call, and subsequent calls add additional key/value pairs to the original map.
-     * See {@link PaymentMethodListParams#extraParams} for the field documentation.
+     * See {@link FinancingOfferListParams#extraParams} for the field documentation.
      */
     public Builder putAllExtraParam(Map<String, Object> map) {
       if (this.extraParams == null) {
@@ -194,108 +212,153 @@ public class PaymentMethodListParams extends ApiRequestParams {
       return this;
     }
 
-    /** A required filter on the list, based on the object {@code type} field. */
-    public Builder setType(PaymentMethodListParams.Type type) {
-      this.type = type;
+    /** limit list to offers with given status. */
+    public Builder setStatus(FinancingOfferListParams.Status status) {
+      this.status = status;
       return this;
     }
   }
 
-  public enum Type implements ApiRequestParams.EnumParam {
-    @SerializedName("acss_debit")
-    ACSS_DEBIT("acss_debit"),
+  @Getter
+  public static class Created {
+    /**
+     * Map of extra parameters for custom features not available in this client library. The content
+     * in this map is not serialized under this field's {@code @SerializedName} value. Instead, each
+     * key/value pair is serialized as if the key is a root-level field (serialized) name in this
+     * param object. Effectively, this map is flattened to its parent instance.
+     */
+    @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
+    Map<String, Object> extraParams;
 
-    @SerializedName("affirm")
-    AFFIRM("affirm"),
+    /** Minimum value to filter by (exclusive). */
+    @SerializedName("gt")
+    Long gt;
 
-    @SerializedName("afterpay_clearpay")
-    AFTERPAY_CLEARPAY("afterpay_clearpay"),
+    /** Minimum value to filter by (inclusive). */
+    @SerializedName("gte")
+    Long gte;
 
-    @SerializedName("alipay")
-    ALIPAY("alipay"),
+    /** Maximum value to filter by (exclusive). */
+    @SerializedName("lt")
+    Long lt;
 
-    @SerializedName("au_becs_debit")
-    AU_BECS_DEBIT("au_becs_debit"),
+    /** Maximum value to filter by (inclusive). */
+    @SerializedName("lte")
+    Long lte;
 
-    @SerializedName("bacs_debit")
-    BACS_DEBIT("bacs_debit"),
+    private Created(Map<String, Object> extraParams, Long gt, Long gte, Long lt, Long lte) {
+      this.extraParams = extraParams;
+      this.gt = gt;
+      this.gte = gte;
+      this.lt = lt;
+      this.lte = lte;
+    }
 
-    @SerializedName("bancontact")
-    BANCONTACT("bancontact"),
+    public static Builder builder() {
+      return new Builder();
+    }
 
-    @SerializedName("blik")
-    BLIK("blik"),
+    public static class Builder {
+      private Map<String, Object> extraParams;
 
-    @SerializedName("boleto")
-    BOLETO("boleto"),
+      private Long gt;
 
-    @SerializedName("card")
-    CARD("card"),
+      private Long gte;
 
-    @SerializedName("card_present")
-    CARD_PRESENT("card_present"),
+      private Long lt;
 
-    @SerializedName("customer_balance")
-    CUSTOMER_BALANCE("customer_balance"),
+      private Long lte;
 
-    @SerializedName("eps")
-    EPS("eps"),
+      /** Finalize and obtain parameter instance from this builder. */
+      public FinancingOfferListParams.Created build() {
+        return new FinancingOfferListParams.Created(
+            this.extraParams, this.gt, this.gte, this.lt, this.lte);
+      }
 
-    @SerializedName("fpx")
-    FPX("fpx"),
+      /**
+       * Add a key/value pair to `extraParams` map. A map is initialized for the first `put/putAll`
+       * call, and subsequent calls add additional key/value pairs to the original map. See {@link
+       * FinancingOfferListParams.Created#extraParams} for the field documentation.
+       */
+      public Builder putExtraParam(String key, Object value) {
+        if (this.extraParams == null) {
+          this.extraParams = new HashMap<>();
+        }
+        this.extraParams.put(key, value);
+        return this;
+      }
 
-    @SerializedName("giropay")
-    GIROPAY("giropay"),
+      /**
+       * Add all map key/value pairs to `extraParams` map. A map is initialized for the first
+       * `put/putAll` call, and subsequent calls add additional key/value pairs to the original map.
+       * See {@link FinancingOfferListParams.Created#extraParams} for the field documentation.
+       */
+      public Builder putAllExtraParam(Map<String, Object> map) {
+        if (this.extraParams == null) {
+          this.extraParams = new HashMap<>();
+        }
+        this.extraParams.putAll(map);
+        return this;
+      }
 
-    @SerializedName("grabpay")
-    GRABPAY("grabpay"),
+      /** Minimum value to filter by (exclusive). */
+      public Builder setGt(Long gt) {
+        this.gt = gt;
+        return this;
+      }
 
-    @SerializedName("ideal")
-    IDEAL("ideal"),
+      /** Minimum value to filter by (inclusive). */
+      public Builder setGte(Long gte) {
+        this.gte = gte;
+        return this;
+      }
 
-    @SerializedName("klarna")
-    KLARNA("klarna"),
+      /** Maximum value to filter by (exclusive). */
+      public Builder setLt(Long lt) {
+        this.lt = lt;
+        return this;
+      }
 
-    @SerializedName("konbini")
-    KONBINI("konbini"),
+      /** Maximum value to filter by (inclusive). */
+      public Builder setLte(Long lte) {
+        this.lte = lte;
+        return this;
+      }
+    }
+  }
 
-    @SerializedName("link")
-    LINK("link"),
+  public enum Status implements ApiRequestParams.EnumParam {
+    @SerializedName("accepted")
+    ACCEPTED("accepted"),
 
-    @SerializedName("oxxo")
-    OXXO("oxxo"),
+    @SerializedName("canceled")
+    CANCELED("canceled"),
 
-    @SerializedName("p24")
-    P24("p24"),
+    @SerializedName("completed")
+    COMPLETED("completed"),
 
-    @SerializedName("paynow")
-    PAYNOW("paynow"),
+    @SerializedName("delivered")
+    DELIVERED("delivered"),
 
-    @SerializedName("paypal")
-    PAYPAL("paypal"),
+    @SerializedName("expired")
+    EXPIRED("expired"),
 
-    @SerializedName("pix")
-    PIX("pix"),
+    @SerializedName("fully_repaid")
+    FULLY_REPAID("fully_repaid"),
 
-    @SerializedName("promptpay")
-    PROMPTPAY("promptpay"),
+    @SerializedName("paid_out")
+    PAID_OUT("paid_out"),
 
-    @SerializedName("sepa_debit")
-    SEPA_DEBIT("sepa_debit"),
+    @SerializedName("rejected")
+    REJECTED("rejected"),
 
-    @SerializedName("sofort")
-    SOFORT("sofort"),
-
-    @SerializedName("us_bank_account")
-    US_BANK_ACCOUNT("us_bank_account"),
-
-    @SerializedName("wechat_pay")
-    WECHAT_PAY("wechat_pay");
+    @SerializedName("undelivered")
+    UNDELIVERED("undelivered");
 
     @Getter(onMethod_ = {@Override})
     private final String value;
 
-    Type(String value) {
+    Status(String value) {
       this.value = value;
     }
   }

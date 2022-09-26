@@ -154,7 +154,7 @@ public class TransactionCreateParams extends ApiRequestParams {
     }
 
     /** Related objects which created this transaction. */
-    public Builder setCreatedBy(CreatedBy createdBy) {
+    public Builder setCreatedBy(TransactionCreateParams.CreatedBy createdBy) {
       this.createdBy = createdBy;
       return this;
     }
@@ -303,8 +303,8 @@ public class TransactionCreateParams extends ApiRequestParams {
       private Type type;
 
       /** Finalize and obtain parameter instance from this builder. */
-      public CreatedBy build() {
-        return new CreatedBy(this.extraParams, this.payment, this.type);
+      public TransactionCreateParams.CreatedBy build() {
+        return new TransactionCreateParams.CreatedBy(this.extraParams, this.payment, this.type);
       }
 
       /**
@@ -334,13 +334,13 @@ public class TransactionCreateParams extends ApiRequestParams {
       }
 
       /** The details for the payment that created this object. */
-      public Builder setPayment(Payment payment) {
+      public Builder setPayment(TransactionCreateParams.CreatedBy.Payment payment) {
         this.payment = payment;
         return this;
       }
 
       /** The type of event that created this object. */
-      public Builder setType(Type type) {
+      public Builder setType(TransactionCreateParams.CreatedBy.Type type) {
         this.type = type;
         return this;
       }
@@ -376,8 +376,9 @@ public class TransactionCreateParams extends ApiRequestParams {
         private String paymentIntent;
 
         /** Finalize and obtain parameter instance from this builder. */
-        public Payment build() {
-          return new Payment(this.extraParams, this.paymentIntent);
+        public TransactionCreateParams.CreatedBy.Payment build() {
+          return new TransactionCreateParams.CreatedBy.Payment(
+              this.extraParams, this.paymentIntent);
         }
 
         /**

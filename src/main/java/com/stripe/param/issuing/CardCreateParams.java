@@ -258,13 +258,13 @@ public class CardCreateParams extends ApiRequestParams {
      * If {@code replacement_for} is specified, this should indicate why that card is being
      * replaced.
      */
-    public Builder setReplacementReason(ReplacementReason replacementReason) {
+    public Builder setReplacementReason(CardCreateParams.ReplacementReason replacementReason) {
       this.replacementReason = replacementReason;
       return this;
     }
 
     /** The address where the card will be shipped. */
-    public Builder setShipping(Shipping shipping) {
+    public Builder setShipping(CardCreateParams.Shipping shipping) {
       this.shipping = shipping;
       return this;
     }
@@ -274,19 +274,19 @@ public class CardCreateParams extends ApiRequestParams {
      * href="https://stripe.com/docs/issuing/controls/spending-controls">documentation</a> for more
      * details.
      */
-    public Builder setSpendingControls(SpendingControls spendingControls) {
+    public Builder setSpendingControls(CardCreateParams.SpendingControls spendingControls) {
       this.spendingControls = spendingControls;
       return this;
     }
 
     /** Whether authorizations can be approved on this card. Defaults to {@code inactive}. */
-    public Builder setStatus(Status status) {
+    public Builder setStatus(CardCreateParams.Status status) {
       this.status = status;
       return this;
     }
 
     /** The type of card to issue. Possible values are {@code physical} or {@code virtual}. */
-    public Builder setType(Type type) {
+    public Builder setType(CardCreateParams.Type type) {
       this.type = type;
       return this;
     }
@@ -319,6 +319,10 @@ public class CardCreateParams extends ApiRequestParams {
     @SerializedName("phone_number")
     String phoneNumber;
 
+    /** Whether a signature is required for card delivery. */
+    @SerializedName("require_signature")
+    Boolean requireSignature;
+
     /** Shipment service. */
     @SerializedName("service")
     Service service;
@@ -333,6 +337,7 @@ public class CardCreateParams extends ApiRequestParams {
         Map<String, Object> extraParams,
         String name,
         String phoneNumber,
+        Boolean requireSignature,
         Service service,
         Type type) {
       this.address = address;
@@ -340,6 +345,7 @@ public class CardCreateParams extends ApiRequestParams {
       this.extraParams = extraParams;
       this.name = name;
       this.phoneNumber = phoneNumber;
+      this.requireSignature = requireSignature;
       this.service = service;
       this.type = type;
     }
@@ -359,30 +365,33 @@ public class CardCreateParams extends ApiRequestParams {
 
       private String phoneNumber;
 
+      private Boolean requireSignature;
+
       private Service service;
 
       private Type type;
 
       /** Finalize and obtain parameter instance from this builder. */
-      public Shipping build() {
-        return new Shipping(
+      public CardCreateParams.Shipping build() {
+        return new CardCreateParams.Shipping(
             this.address,
             this.customs,
             this.extraParams,
             this.name,
             this.phoneNumber,
+            this.requireSignature,
             this.service,
             this.type);
       }
 
       /** The address that the card is shipped to. */
-      public Builder setAddress(Address address) {
+      public Builder setAddress(CardCreateParams.Shipping.Address address) {
         this.address = address;
         return this;
       }
 
       /** Customs information for the shipment. */
-      public Builder setCustoms(Customs customs) {
+      public Builder setCustoms(CardCreateParams.Shipping.Customs customs) {
         this.customs = customs;
         return this;
       }
@@ -425,14 +434,20 @@ public class CardCreateParams extends ApiRequestParams {
         return this;
       }
 
+      /** Whether a signature is required for card delivery. */
+      public Builder setRequireSignature(Boolean requireSignature) {
+        this.requireSignature = requireSignature;
+        return this;
+      }
+
       /** Shipment service. */
-      public Builder setService(Service service) {
+      public Builder setService(CardCreateParams.Shipping.Service service) {
         this.service = service;
         return this;
       }
 
       /** Packaging options. */
-      public Builder setType(Type type) {
+      public Builder setType(CardCreateParams.Shipping.Type type) {
         this.type = type;
         return this;
       }
@@ -513,8 +528,8 @@ public class CardCreateParams extends ApiRequestParams {
         private String state;
 
         /** Finalize and obtain parameter instance from this builder. */
-        public Address build() {
-          return new Address(
+        public CardCreateParams.Shipping.Address build() {
+          return new CardCreateParams.Shipping.Address(
               this.city,
               this.country,
               this.extraParams,
@@ -626,8 +641,8 @@ public class CardCreateParams extends ApiRequestParams {
         private Map<String, Object> extraParams;
 
         /** Finalize and obtain parameter instance from this builder. */
-        public Customs build() {
-          return new Customs(this.eoriNumber, this.extraParams);
+        public CardCreateParams.Shipping.Customs build() {
+          return new CardCreateParams.Shipping.Customs(this.eoriNumber, this.extraParams);
         }
 
         /**
@@ -712,7 +727,7 @@ public class CardCreateParams extends ApiRequestParams {
      * blocked_categories}.
      */
     @SerializedName("allowed_categories")
-    List<AllowedCategory> allowedCategories;
+    List<CardCreateParams.SpendingControls.AllowedCategory> allowedCategories;
 
     /**
      * Array of strings containing <a
@@ -721,7 +736,7 @@ public class CardCreateParams extends ApiRequestParams {
      * allowed_categories}.
      */
     @SerializedName("blocked_categories")
-    List<BlockedCategory> blockedCategories;
+    List<CardCreateParams.SpendingControls.BlockedCategory> blockedCategories;
 
     /**
      * Map of extra parameters for custom features not available in this client library. The content
@@ -738,13 +753,13 @@ public class CardCreateParams extends ApiRequestParams {
      * the chain).
      */
     @SerializedName("spending_limits")
-    List<SpendingLimit> spendingLimits;
+    List<CardCreateParams.SpendingControls.SpendingLimit> spendingLimits;
 
     private SpendingControls(
-        List<AllowedCategory> allowedCategories,
-        List<BlockedCategory> blockedCategories,
+        List<CardCreateParams.SpendingControls.AllowedCategory> allowedCategories,
+        List<CardCreateParams.SpendingControls.BlockedCategory> blockedCategories,
         Map<String, Object> extraParams,
-        List<SpendingLimit> spendingLimits) {
+        List<CardCreateParams.SpendingControls.SpendingLimit> spendingLimits) {
       this.allowedCategories = allowedCategories;
       this.blockedCategories = blockedCategories;
       this.extraParams = extraParams;
@@ -756,17 +771,17 @@ public class CardCreateParams extends ApiRequestParams {
     }
 
     public static class Builder {
-      private List<AllowedCategory> allowedCategories;
+      private List<CardCreateParams.SpendingControls.AllowedCategory> allowedCategories;
 
-      private List<BlockedCategory> blockedCategories;
+      private List<CardCreateParams.SpendingControls.BlockedCategory> blockedCategories;
 
       private Map<String, Object> extraParams;
 
-      private List<SpendingLimit> spendingLimits;
+      private List<CardCreateParams.SpendingControls.SpendingLimit> spendingLimits;
 
       /** Finalize and obtain parameter instance from this builder. */
-      public SpendingControls build() {
-        return new SpendingControls(
+      public CardCreateParams.SpendingControls build() {
+        return new CardCreateParams.SpendingControls(
             this.allowedCategories, this.blockedCategories, this.extraParams, this.spendingLimits);
       }
 
@@ -775,7 +790,7 @@ public class CardCreateParams extends ApiRequestParams {
        * `add/addAll` call, and subsequent calls adds additional elements to the original list. See
        * {@link CardCreateParams.SpendingControls#allowedCategories} for the field documentation.
        */
-      public Builder addAllowedCategory(AllowedCategory element) {
+      public Builder addAllowedCategory(CardCreateParams.SpendingControls.AllowedCategory element) {
         if (this.allowedCategories == null) {
           this.allowedCategories = new ArrayList<>();
         }
@@ -788,7 +803,8 @@ public class CardCreateParams extends ApiRequestParams {
        * `add/addAll` call, and subsequent calls adds additional elements to the original list. See
        * {@link CardCreateParams.SpendingControls#allowedCategories} for the field documentation.
        */
-      public Builder addAllAllowedCategory(List<AllowedCategory> elements) {
+      public Builder addAllAllowedCategory(
+          List<CardCreateParams.SpendingControls.AllowedCategory> elements) {
         if (this.allowedCategories == null) {
           this.allowedCategories = new ArrayList<>();
         }
@@ -801,7 +817,7 @@ public class CardCreateParams extends ApiRequestParams {
        * `add/addAll` call, and subsequent calls adds additional elements to the original list. See
        * {@link CardCreateParams.SpendingControls#blockedCategories} for the field documentation.
        */
-      public Builder addBlockedCategory(BlockedCategory element) {
+      public Builder addBlockedCategory(CardCreateParams.SpendingControls.BlockedCategory element) {
         if (this.blockedCategories == null) {
           this.blockedCategories = new ArrayList<>();
         }
@@ -814,7 +830,8 @@ public class CardCreateParams extends ApiRequestParams {
        * `add/addAll` call, and subsequent calls adds additional elements to the original list. See
        * {@link CardCreateParams.SpendingControls#blockedCategories} for the field documentation.
        */
-      public Builder addAllBlockedCategory(List<BlockedCategory> elements) {
+      public Builder addAllBlockedCategory(
+          List<CardCreateParams.SpendingControls.BlockedCategory> elements) {
         if (this.blockedCategories == null) {
           this.blockedCategories = new ArrayList<>();
         }
@@ -853,7 +870,7 @@ public class CardCreateParams extends ApiRequestParams {
        * call, and subsequent calls adds additional elements to the original list. See {@link
        * CardCreateParams.SpendingControls#spendingLimits} for the field documentation.
        */
-      public Builder addSpendingLimit(SpendingLimit element) {
+      public Builder addSpendingLimit(CardCreateParams.SpendingControls.SpendingLimit element) {
         if (this.spendingLimits == null) {
           this.spendingLimits = new ArrayList<>();
         }
@@ -866,7 +883,8 @@ public class CardCreateParams extends ApiRequestParams {
        * call, and subsequent calls adds additional elements to the original list. See {@link
        * CardCreateParams.SpendingControls#spendingLimits} for the field documentation.
        */
-      public Builder addAllSpendingLimit(List<SpendingLimit> elements) {
+      public Builder addAllSpendingLimit(
+          List<CardCreateParams.SpendingControls.SpendingLimit> elements) {
         if (this.spendingLimits == null) {
           this.spendingLimits = new ArrayList<>();
         }
@@ -887,7 +905,7 @@ public class CardCreateParams extends ApiRequestParams {
        * this limit applies to. Omitting this field will apply the limit to all categories.
        */
       @SerializedName("categories")
-      List<Category> categories;
+      List<CardCreateParams.SpendingControls.SpendingLimit.Category> categories;
 
       /**
        * Map of extra parameters for custom features not available in this client library. The
@@ -904,7 +922,7 @@ public class CardCreateParams extends ApiRequestParams {
 
       private SpendingLimit(
           Long amount,
-          List<Category> categories,
+          List<CardCreateParams.SpendingControls.SpendingLimit.Category> categories,
           Map<String, Object> extraParams,
           Interval interval) {
         this.amount = amount;
@@ -920,15 +938,16 @@ public class CardCreateParams extends ApiRequestParams {
       public static class Builder {
         private Long amount;
 
-        private List<Category> categories;
+        private List<CardCreateParams.SpendingControls.SpendingLimit.Category> categories;
 
         private Map<String, Object> extraParams;
 
         private Interval interval;
 
         /** Finalize and obtain parameter instance from this builder. */
-        public SpendingLimit build() {
-          return new SpendingLimit(this.amount, this.categories, this.extraParams, this.interval);
+        public CardCreateParams.SpendingControls.SpendingLimit build() {
+          return new CardCreateParams.SpendingControls.SpendingLimit(
+              this.amount, this.categories, this.extraParams, this.interval);
         }
 
         /** Maximum amount allowed to spend per interval. */
@@ -942,7 +961,8 @@ public class CardCreateParams extends ApiRequestParams {
          * call, and subsequent calls adds additional elements to the original list. See {@link
          * CardCreateParams.SpendingControls.SpendingLimit#categories} for the field documentation.
          */
-        public Builder addCategory(Category element) {
+        public Builder addCategory(
+            CardCreateParams.SpendingControls.SpendingLimit.Category element) {
           if (this.categories == null) {
             this.categories = new ArrayList<>();
           }
@@ -955,7 +975,8 @@ public class CardCreateParams extends ApiRequestParams {
          * call, and subsequent calls adds additional elements to the original list. See {@link
          * CardCreateParams.SpendingControls.SpendingLimit#categories} for the field documentation.
          */
-        public Builder addAllCategory(List<Category> elements) {
+        public Builder addAllCategory(
+            List<CardCreateParams.SpendingControls.SpendingLimit.Category> elements) {
           if (this.categories == null) {
             this.categories = new ArrayList<>();
           }
@@ -992,7 +1013,8 @@ public class CardCreateParams extends ApiRequestParams {
         }
 
         /** Interval (or event) to which the amount applies. */
-        public Builder setInterval(Interval interval) {
+        public Builder setInterval(
+            CardCreateParams.SpendingControls.SpendingLimit.Interval interval) {
           this.interval = interval;
           return this;
         }

@@ -1017,6 +1017,13 @@ public class Quote extends ApiResource implements HasId, MetadataStore<Quote> {
     String billingCycleAnchor;
 
     /**
+     * The subscription's description, meant to be displayable to the customer. Use this field to
+     * optionally store an explanation of the subscription.
+     */
+    @SerializedName("description")
+    String description;
+
+    /**
      * When creating a new subscription, the date of which the subscription schedule will start
      * after the quote is accepted. This date is ignored if it is in the past when the quote is
      * accepted. Measured in seconds since the Unix epoch.

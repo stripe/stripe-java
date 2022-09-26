@@ -244,7 +244,7 @@ public class SubscriptionItemCreateParams extends ApiRequestParams {
      * SubscriptionItemCreateParams#discounts} for the field documentation.
      */
     @SuppressWarnings("unchecked")
-    public Builder addDiscount(Discount element) {
+    public Builder addDiscount(SubscriptionItemCreateParams.Discount element) {
       if (this.discounts == null || this.discounts instanceof EmptyParam) {
         this.discounts = new ArrayList<SubscriptionItemCreateParams.Discount>();
       }
@@ -258,7 +258,7 @@ public class SubscriptionItemCreateParams extends ApiRequestParams {
      * SubscriptionItemCreateParams#discounts} for the field documentation.
      */
     @SuppressWarnings("unchecked")
-    public Builder addAllDiscount(List<Discount> elements) {
+    public Builder addAllDiscount(List<SubscriptionItemCreateParams.Discount> elements) {
       if (this.discounts == null || this.discounts instanceof EmptyParam) {
         this.discounts = new ArrayList<SubscriptionItemCreateParams.Discount>();
       }
@@ -273,7 +273,7 @@ public class SubscriptionItemCreateParams extends ApiRequestParams {
     }
 
     /** The coupons to redeem into discounts for the subscription item. */
-    public Builder setDiscounts(List<Discount> discounts) {
+    public Builder setDiscounts(List<SubscriptionItemCreateParams.Discount> discounts) {
       this.discounts = discounts;
       return this;
     }
@@ -498,7 +498,7 @@ public class SubscriptionItemCreateParams extends ApiRequestParams {
     }
 
     /** Options that configure the trial on the subscription item. */
-    public Builder setTrial(Trial trial) {
+    public Builder setTrial(SubscriptionItemCreateParams.Trial trial) {
       this.trial = trial;
       return this;
     }
@@ -610,8 +610,9 @@ public class SubscriptionItemCreateParams extends ApiRequestParams {
       private Map<String, Object> extraParams;
 
       /** Finalize and obtain parameter instance from this builder. */
-      public Discount build() {
-        return new Discount(this.coupon, this.discount, this.extraParams);
+      public SubscriptionItemCreateParams.Discount build() {
+        return new SubscriptionItemCreateParams.Discount(
+            this.coupon, this.discount, this.extraParams);
       }
 
       /** ID of the coupon to create a new discount for. */
@@ -1002,8 +1003,8 @@ public class SubscriptionItemCreateParams extends ApiRequestParams {
       private Type type;
 
       /** Finalize and obtain parameter instance from this builder. */
-      public Trial build() {
-        return new Trial(this.extraParams, this.type);
+      public SubscriptionItemCreateParams.Trial build() {
+        return new SubscriptionItemCreateParams.Trial(this.extraParams, this.type);
       }
 
       /**
@@ -1033,7 +1034,7 @@ public class SubscriptionItemCreateParams extends ApiRequestParams {
       }
 
       /** Determines the type of trial for this item. */
-      public Builder setType(Type type) {
+      public Builder setType(SubscriptionItemCreateParams.Trial.Type type) {
         this.type = type;
         return this;
       }

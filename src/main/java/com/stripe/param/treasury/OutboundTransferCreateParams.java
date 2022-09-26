@@ -262,7 +262,7 @@ public class OutboundTransferCreateParams extends ApiRequestParams {
     }
 
     /** Details about the network used for the OutboundTransfer. */
-    public Builder setNetworkDetails(NetworkDetails networkDetails) {
+    public Builder setNetworkDetails(OutboundTransferCreateParams.NetworkDetails networkDetails) {
       this.networkDetails = networkDetails;
       return this;
     }
@@ -484,12 +484,13 @@ public class OutboundTransferCreateParams extends ApiRequestParams {
       private Type type;
 
       /** Finalize and obtain parameter instance from this builder. */
-      public NetworkDetails build() {
-        return new NetworkDetails(this.ach, this.extraParams, this.type);
+      public OutboundTransferCreateParams.NetworkDetails build() {
+        return new OutboundTransferCreateParams.NetworkDetails(
+            this.ach, this.extraParams, this.type);
       }
 
       /** Optional fields for {@code ach}. */
-      public Builder setAch(Ach ach) {
+      public Builder setAch(OutboundTransferCreateParams.NetworkDetails.Ach ach) {
         this.ach = ach;
         return this;
       }
@@ -522,7 +523,7 @@ public class OutboundTransferCreateParams extends ApiRequestParams {
       }
 
       /** The type of flow that originated the OutboundTransfer. */
-      public Builder setType(Type type) {
+      public Builder setType(OutboundTransferCreateParams.NetworkDetails.Type type) {
         this.type = type;
         return this;
       }
@@ -558,8 +559,9 @@ public class OutboundTransferCreateParams extends ApiRequestParams {
         private Map<String, Object> extraParams;
 
         /** Finalize and obtain parameter instance from this builder. */
-        public Ach build() {
-          return new Ach(this.addenda, this.extraParams);
+        public OutboundTransferCreateParams.NetworkDetails.Ach build() {
+          return new OutboundTransferCreateParams.NetworkDetails.Ach(
+              this.addenda, this.extraParams);
         }
 
         /** Addenda record data associated with this OutboundTransfer. */

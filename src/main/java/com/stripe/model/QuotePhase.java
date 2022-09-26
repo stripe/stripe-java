@@ -338,11 +338,33 @@ public class QuotePhase extends ApiResource implements HasId {
     public static class Breakdown extends StripeObject {
       /** The aggregated discounts. */
       @SerializedName("discounts")
-      List<LineItem.Discount> discounts;
+      List<QuotePhase.TotalDetails.Breakdown.Discount> discounts;
 
       /** The aggregated tax amounts by rate. */
       @SerializedName("taxes")
       List<QuotePhase.TotalDetails.Breakdown.Tax> taxes;
+
+      @Getter
+      @Setter
+      @EqualsAndHashCode(callSuper = false)
+      public static class Discount extends StripeObject {
+        /** The amount discounted. */
+        @SerializedName("amount")
+        Long amount;
+
+        /**
+         * A discount represents the actual application of a <a
+         * href="https://stripe.com/docs/api#coupons">coupon</a> or <a
+         * href="https://stripe.com/docs/api#promotion_codes">promotion code</a>. It contains
+         * information about when the discount began, when it will end, and what it is applied to.
+         *
+         * <p>Related guide: <a
+         * href="https://stripe.com/docs/billing/subscriptions/discounts">Applying Discounts to
+         * Subscriptions</a>.
+         */
+        @SerializedName("discount")
+        com.stripe.model.Discount discount;
+      }
 
       @Getter
       @Setter

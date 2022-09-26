@@ -329,7 +329,7 @@ public class PriceUpdateParams extends ApiRequestParams {
     /**
      * If specified, subscriptions using this price will be updated to use the new referenced price.
      */
-    public Builder setMigrateTo(MigrateTo migrateTo) {
+    public Builder setMigrateTo(PriceUpdateParams.MigrateTo migrateTo) {
       this.migrateTo = migrateTo;
       return this;
     }
@@ -975,15 +975,16 @@ public class PriceUpdateParams extends ApiRequestParams {
       private Object price;
 
       /** Finalize and obtain parameter instance from this builder. */
-      public MigrateTo build() {
-        return new MigrateTo(this.behavior, this.effectiveAfter, this.extraParams, this.price);
+      public PriceUpdateParams.MigrateTo build() {
+        return new PriceUpdateParams.MigrateTo(
+            this.behavior, this.effectiveAfter, this.extraParams, this.price);
       }
 
       /**
        * The behavior controlling the point in the subscription lifecycle after which to migrate the
        * price. Currently must be {@code at_cycle_end}.
        */
-      public Builder setBehavior(Behavior behavior) {
+      public Builder setBehavior(PriceUpdateParams.MigrateTo.Behavior behavior) {
         this.behavior = behavior;
         return this;
       }

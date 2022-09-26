@@ -207,7 +207,7 @@ public class ReceivedDebitCreateParams extends ApiRequestParams {
     }
 
     /** Details about the network used for the ReceivedDebit. */
-    public Builder setNetworkDetails(NetworkDetails networkDetails) {
+    public Builder setNetworkDetails(ReceivedDebitCreateParams.NetworkDetails networkDetails) {
       this.networkDetails = networkDetails;
       return this;
     }
@@ -451,12 +451,12 @@ public class ReceivedDebitCreateParams extends ApiRequestParams {
       private Type type;
 
       /** Finalize and obtain parameter instance from this builder. */
-      public NetworkDetails build() {
-        return new NetworkDetails(this.ach, this.extraParams, this.type);
+      public ReceivedDebitCreateParams.NetworkDetails build() {
+        return new ReceivedDebitCreateParams.NetworkDetails(this.ach, this.extraParams, this.type);
       }
 
       /** Optional fields for {@code ach}. */
-      public Builder setAch(Ach ach) {
+      public Builder setAch(ReceivedDebitCreateParams.NetworkDetails.Ach ach) {
         this.ach = ach;
         return this;
       }
@@ -489,7 +489,7 @@ public class ReceivedDebitCreateParams extends ApiRequestParams {
       }
 
       /** The type of flow that originated the ReceivedDebit. */
-      public Builder setType(Type type) {
+      public Builder setType(ReceivedDebitCreateParams.NetworkDetails.Type type) {
         this.type = type;
         return this;
       }
@@ -525,8 +525,8 @@ public class ReceivedDebitCreateParams extends ApiRequestParams {
         private Map<String, Object> extraParams;
 
         /** Finalize and obtain parameter instance from this builder. */
-        public Ach build() {
-          return new Ach(this.addenda, this.extraParams);
+        public ReceivedDebitCreateParams.NetworkDetails.Ach build() {
+          return new ReceivedDebitCreateParams.NetworkDetails.Ach(this.addenda, this.extraParams);
         }
 
         /** Addenda record data associated with this ReceivedDebit. */

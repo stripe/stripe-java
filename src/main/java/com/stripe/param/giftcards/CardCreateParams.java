@@ -113,7 +113,7 @@ public class CardCreateParams extends ApiRequestParams {
     }
 
     /** Related objects which created this gift card. */
-    public Builder setCreatedBy(CreatedBy createdBy) {
+    public Builder setCreatedBy(CardCreateParams.CreatedBy createdBy) {
       this.createdBy = createdBy;
       return this;
     }
@@ -250,8 +250,8 @@ public class CardCreateParams extends ApiRequestParams {
       private Type type;
 
       /** Finalize and obtain parameter instance from this builder. */
-      public CreatedBy build() {
-        return new CreatedBy(this.extraParams, this.payment, this.type);
+      public CardCreateParams.CreatedBy build() {
+        return new CardCreateParams.CreatedBy(this.extraParams, this.payment, this.type);
       }
 
       /**
@@ -281,13 +281,13 @@ public class CardCreateParams extends ApiRequestParams {
       }
 
       /** The details for the payment that created this object. */
-      public Builder setPayment(Payment payment) {
+      public Builder setPayment(CardCreateParams.CreatedBy.Payment payment) {
         this.payment = payment;
         return this;
       }
 
       /** The type of event that created this object. */
-      public Builder setType(Type type) {
+      public Builder setType(CardCreateParams.CreatedBy.Type type) {
         this.type = type;
         return this;
       }
@@ -323,8 +323,8 @@ public class CardCreateParams extends ApiRequestParams {
         private String paymentIntent;
 
         /** Finalize and obtain parameter instance from this builder. */
-        public Payment build() {
-          return new Payment(this.extraParams, this.paymentIntent);
+        public CardCreateParams.CreatedBy.Payment build() {
+          return new CardCreateParams.CreatedBy.Payment(this.extraParams, this.paymentIntent);
         }
 
         /**

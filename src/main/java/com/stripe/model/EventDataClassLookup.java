@@ -91,6 +91,11 @@ final class EventDataClassLookup {
         "billing_portal.configuration", com.stripe.model.billingportal.Configuration.class);
     classLookup.put("billing_portal.session", com.stripe.model.billingportal.Session.class);
 
+    classLookup.put("capital.financing_offer", com.stripe.model.capital.FinancingOffer.class);
+    classLookup.put("capital.financing_summary", com.stripe.model.capital.FinancingSummary.class);
+    classLookup.put(
+        "capital.financing_transaction", com.stripe.model.capital.FinancingTransaction.class);
+
     classLookup.put("checkout.session", com.stripe.model.checkout.Session.class);
 
     classLookup.put(

@@ -3,7 +3,6 @@ package com.stripe.param;
 
 import com.google.gson.annotations.SerializedName;
 import com.stripe.net.ApiRequestParams;
-import com.stripe.net.ApiRequestParams.EnumParam;
 import com.stripe.param.common.EmptyParam;
 import java.math.BigDecimal;
 import java.util.ArrayList;
@@ -70,7 +69,7 @@ public class OrderCreateParams extends ApiRequestParams {
    * product, the quantity, and the resulting cost.
    */
   @SerializedName("line_items")
-  List<LineItem> lineItems;
+  List<OrderCreateParams.LineItem> lineItems;
 
   /**
    * Set of <a href="https://stripe.com/docs/api/metadata">key-value pairs</a> that you can attach
@@ -108,7 +107,7 @@ public class OrderCreateParams extends ApiRequestParams {
       List<String> expand,
       Map<String, Object> extraParams,
       String ipAddress,
-      List<LineItem> lineItems,
+      List<OrderCreateParams.LineItem> lineItems,
       Map<String, String> metadata,
       Payment payment,
       Object shippingCost,
@@ -157,7 +156,7 @@ public class OrderCreateParams extends ApiRequestParams {
 
     private String ipAddress;
 
-    private List<LineItem> lineItems;
+    private List<OrderCreateParams.LineItem> lineItems;
 
     private Map<String, String> metadata;
 
@@ -191,7 +190,7 @@ public class OrderCreateParams extends ApiRequestParams {
     }
 
     /** Settings for automatic tax calculation for this order. */
-    public Builder setAutomaticTax(AutomaticTax automaticTax) {
+    public Builder setAutomaticTax(OrderCreateParams.AutomaticTax automaticTax) {
       this.automaticTax = automaticTax;
       return this;
     }
@@ -200,7 +199,7 @@ public class OrderCreateParams extends ApiRequestParams {
      * Billing details for the customer. If a customer is provided, this will be automatically
      * populated with values from that customer if override values are not provided.
      */
-    public Builder setBillingDetails(BillingDetails billingDetails) {
+    public Builder setBillingDetails(OrderCreateParams.BillingDetails billingDetails) {
       this.billingDetails = billingDetails;
       return this;
     }
@@ -220,7 +219,7 @@ public class OrderCreateParams extends ApiRequestParams {
      * OrderCreateParams#credits} for the field documentation.
      */
     @SuppressWarnings("unchecked")
-    public Builder addCredit(Credit element) {
+    public Builder addCredit(OrderCreateParams.Credit element) {
       if (this.credits == null || this.credits instanceof EmptyParam) {
         this.credits = new ArrayList<OrderCreateParams.Credit>();
       }
@@ -234,7 +233,7 @@ public class OrderCreateParams extends ApiRequestParams {
      * OrderCreateParams#credits} for the field documentation.
      */
     @SuppressWarnings("unchecked")
-    public Builder addAllCredit(List<Credit> elements) {
+    public Builder addAllCredit(List<OrderCreateParams.Credit> elements) {
       if (this.credits == null || this.credits instanceof EmptyParam) {
         this.credits = new ArrayList<OrderCreateParams.Credit>();
       }
@@ -249,7 +248,7 @@ public class OrderCreateParams extends ApiRequestParams {
     }
 
     /** The credits to apply to the order, only {@code gift_card} currently supported. */
-    public Builder setCredits(List<Credit> credits) {
+    public Builder setCredits(List<OrderCreateParams.Credit> credits) {
       this.credits = credits;
       return this;
     }
@@ -282,7 +281,7 @@ public class OrderCreateParams extends ApiRequestParams {
      * OrderCreateParams#discounts} for the field documentation.
      */
     @SuppressWarnings("unchecked")
-    public Builder addDiscount(Discount element) {
+    public Builder addDiscount(OrderCreateParams.Discount element) {
       if (this.discounts == null || this.discounts instanceof EmptyParam) {
         this.discounts = new ArrayList<OrderCreateParams.Discount>();
       }
@@ -296,7 +295,7 @@ public class OrderCreateParams extends ApiRequestParams {
      * OrderCreateParams#discounts} for the field documentation.
      */
     @SuppressWarnings("unchecked")
-    public Builder addAllDiscount(List<Discount> elements) {
+    public Builder addAllDiscount(List<OrderCreateParams.Discount> elements) {
       if (this.discounts == null || this.discounts instanceof EmptyParam) {
         this.discounts = new ArrayList<OrderCreateParams.Discount>();
       }
@@ -311,7 +310,7 @@ public class OrderCreateParams extends ApiRequestParams {
     }
 
     /** The coupons, promotion codes, and/or discounts to apply to the order. */
-    public Builder setDiscounts(List<Discount> discounts) {
+    public Builder setDiscounts(List<OrderCreateParams.Discount> discounts) {
       this.discounts = discounts;
       return this;
     }
@@ -379,7 +378,7 @@ public class OrderCreateParams extends ApiRequestParams {
      * and subsequent calls adds additional elements to the original list. See {@link
      * OrderCreateParams#lineItems} for the field documentation.
      */
-    public Builder addLineItem(LineItem element) {
+    public Builder addLineItem(OrderCreateParams.LineItem element) {
       if (this.lineItems == null) {
         this.lineItems = new ArrayList<>();
       }
@@ -392,7 +391,7 @@ public class OrderCreateParams extends ApiRequestParams {
      * and subsequent calls adds additional elements to the original list. See {@link
      * OrderCreateParams#lineItems} for the field documentation.
      */
-    public Builder addAllLineItem(List<LineItem> elements) {
+    public Builder addAllLineItem(List<OrderCreateParams.LineItem> elements) {
       if (this.lineItems == null) {
         this.lineItems = new ArrayList<>();
       }
@@ -427,13 +426,13 @@ public class OrderCreateParams extends ApiRequestParams {
     }
 
     /** Payment information associated with the order, including payment settings. */
-    public Builder setPayment(Payment payment) {
+    public Builder setPayment(OrderCreateParams.Payment payment) {
       this.payment = payment;
       return this;
     }
 
     /** Settings for the customer cost of shipping for this order. */
-    public Builder setShippingCost(ShippingCost shippingCost) {
+    public Builder setShippingCost(OrderCreateParams.ShippingCost shippingCost) {
       this.shippingCost = shippingCost;
       return this;
     }
@@ -445,7 +444,7 @@ public class OrderCreateParams extends ApiRequestParams {
     }
 
     /** Shipping details for the order. */
-    public Builder setShippingDetails(ShippingDetails shippingDetails) {
+    public Builder setShippingDetails(OrderCreateParams.ShippingDetails shippingDetails) {
       this.shippingDetails = shippingDetails;
       return this;
     }
@@ -457,7 +456,7 @@ public class OrderCreateParams extends ApiRequestParams {
     }
 
     /** Additional tax details about the purchaser to be used for this order. */
-    public Builder setTaxDetails(TaxDetails taxDetails) {
+    public Builder setTaxDetails(OrderCreateParams.TaxDetails taxDetails) {
       this.taxDetails = taxDetails;
       return this;
     }
@@ -495,8 +494,8 @@ public class OrderCreateParams extends ApiRequestParams {
       private Map<String, Object> extraParams;
 
       /** Finalize and obtain parameter instance from this builder. */
-      public AutomaticTax build() {
-        return new AutomaticTax(this.enabled, this.extraParams);
+      public OrderCreateParams.AutomaticTax build() {
+        return new OrderCreateParams.AutomaticTax(this.enabled, this.extraParams);
       }
 
       /**
@@ -587,13 +586,13 @@ public class OrderCreateParams extends ApiRequestParams {
       private String phone;
 
       /** Finalize and obtain parameter instance from this builder. */
-      public BillingDetails build() {
-        return new BillingDetails(
+      public OrderCreateParams.BillingDetails build() {
+        return new OrderCreateParams.BillingDetails(
             this.address, this.email, this.extraParams, this.name, this.phone);
       }
 
       /** The billing address provided by the customer. */
-      public Builder setAddress(Address address) {
+      public Builder setAddress(OrderCreateParams.BillingDetails.Address address) {
         this.address = address;
         return this;
       }
@@ -721,8 +720,8 @@ public class OrderCreateParams extends ApiRequestParams {
         private String state;
 
         /** Finalize and obtain parameter instance from this builder. */
-        public Address build() {
-          return new Address(
+        public OrderCreateParams.BillingDetails.Address build() {
+          return new OrderCreateParams.BillingDetails.Address(
               this.city,
               this.country,
               this.extraParams,
@@ -842,8 +841,8 @@ public class OrderCreateParams extends ApiRequestParams {
       private Type type;
 
       /** Finalize and obtain parameter instance from this builder. */
-      public Credit build() {
-        return new Credit(this.extraParams, this.giftCard, this.type);
+      public OrderCreateParams.Credit build() {
+        return new OrderCreateParams.Credit(this.extraParams, this.giftCard, this.type);
       }
 
       /**
@@ -879,7 +878,7 @@ public class OrderCreateParams extends ApiRequestParams {
       }
 
       /** The type of credit to apply to the order, only {@code gift_card} currently supported. */
-      public Builder setType(Type type) {
+      public Builder setType(OrderCreateParams.Credit.Type type) {
         this.type = type;
         return this;
       }
@@ -943,8 +942,9 @@ public class OrderCreateParams extends ApiRequestParams {
       private String promotionCode;
 
       /** Finalize and obtain parameter instance from this builder. */
-      public Discount build() {
-        return new Discount(this.coupon, this.discount, this.extraParams, this.promotionCode);
+      public OrderCreateParams.Discount build() {
+        return new OrderCreateParams.Discount(
+            this.coupon, this.discount, this.extraParams, this.promotionCode);
       }
 
       /** ID of the coupon to create a new discount for. */
@@ -1116,8 +1116,8 @@ public class OrderCreateParams extends ApiRequestParams {
       private Object taxRates;
 
       /** Finalize and obtain parameter instance from this builder. */
-      public LineItem build() {
-        return new LineItem(
+      public OrderCreateParams.LineItem build() {
+        return new OrderCreateParams.LineItem(
             this.description,
             this.discounts,
             this.extraParams,
@@ -1141,7 +1141,7 @@ public class OrderCreateParams extends ApiRequestParams {
        * OrderCreateParams.LineItem#discounts} for the field documentation.
        */
       @SuppressWarnings("unchecked")
-      public Builder addDiscount(Discount element) {
+      public Builder addDiscount(OrderCreateParams.LineItem.Discount element) {
         if (this.discounts == null || this.discounts instanceof EmptyParam) {
           this.discounts = new ArrayList<OrderCreateParams.LineItem.Discount>();
         }
@@ -1155,7 +1155,7 @@ public class OrderCreateParams extends ApiRequestParams {
        * OrderCreateParams.LineItem#discounts} for the field documentation.
        */
       @SuppressWarnings("unchecked")
-      public Builder addAllDiscount(List<Discount> elements) {
+      public Builder addAllDiscount(List<OrderCreateParams.LineItem.Discount> elements) {
         if (this.discounts == null || this.discounts instanceof EmptyParam) {
           this.discounts = new ArrayList<OrderCreateParams.LineItem.Discount>();
         }
@@ -1170,7 +1170,7 @@ public class OrderCreateParams extends ApiRequestParams {
       }
 
       /** The discounts applied to this line item. */
-      public Builder setDiscounts(List<Discount> discounts) {
+      public Builder setDiscounts(List<OrderCreateParams.LineItem.Discount> discounts) {
         this.discounts = discounts;
         return this;
       }
@@ -1227,7 +1227,7 @@ public class OrderCreateParams extends ApiRequestParams {
        * <p>Each time you pass {@code price_data} we create a Price for the product. This Price is
        * hidden in both the Dashboard and API lists and cannot be reused.
        */
-      public Builder setPriceData(PriceData priceData) {
+      public Builder setPriceData(OrderCreateParams.LineItem.PriceData priceData) {
         this.priceData = priceData;
         return this;
       }
@@ -1255,7 +1255,7 @@ public class OrderCreateParams extends ApiRequestParams {
        * created the Product. If a Product with the same ID already exists, then {@code
        * product_data} re-uses it to avoid duplicates.
        */
-      public Builder setProductData(ProductData productData) {
+      public Builder setProductData(OrderCreateParams.LineItem.ProductData productData) {
         this.productData = productData;
         return this;
       }
@@ -1344,8 +1344,9 @@ public class OrderCreateParams extends ApiRequestParams {
         private Map<String, Object> extraParams;
 
         /** Finalize and obtain parameter instance from this builder. */
-        public Discount build() {
-          return new Discount(this.coupon, this.discount, this.extraParams);
+        public OrderCreateParams.LineItem.Discount build() {
+          return new OrderCreateParams.LineItem.Discount(
+              this.coupon, this.discount, this.extraParams);
         }
 
         /** ID of the coupon to create a new discount for. */
@@ -1474,8 +1475,8 @@ public class OrderCreateParams extends ApiRequestParams {
         private BigDecimal unitAmountDecimal;
 
         /** Finalize and obtain parameter instance from this builder. */
-        public PriceData build() {
-          return new PriceData(
+        public OrderCreateParams.LineItem.PriceData build() {
+          return new OrderCreateParams.LineItem.PriceData(
               this.currency,
               this.extraParams,
               this.product,
@@ -1538,7 +1539,8 @@ public class OrderCreateParams extends ApiRequestParams {
          * of {@code inclusive}, {@code exclusive}, or {@code unspecified}. Once specified as either
          * {@code inclusive} or {@code exclusive}, it cannot be changed.
          */
-        public Builder setTaxBehavior(TaxBehavior taxBehavior) {
+        public Builder setTaxBehavior(
+            OrderCreateParams.LineItem.PriceData.TaxBehavior taxBehavior) {
           this.taxBehavior = taxBehavior;
           return this;
         }
@@ -1698,8 +1700,8 @@ public class OrderCreateParams extends ApiRequestParams {
         private Object url;
 
         /** Finalize and obtain parameter instance from this builder. */
-        public ProductData build() {
-          return new ProductData(
+        public OrderCreateParams.LineItem.ProductData build() {
+          return new OrderCreateParams.LineItem.ProductData(
               this.description,
               this.extraParams,
               this.id,
@@ -1869,7 +1871,8 @@ public class OrderCreateParams extends ApiRequestParams {
         }
 
         /** The dimensions of this product for shipping purposes. */
-        public Builder setPackageDimensions(PackageDimensions packageDimensions) {
+        public Builder setPackageDimensions(
+            OrderCreateParams.LineItem.ProductData.PackageDimensions packageDimensions) {
           this.packageDimensions = packageDimensions;
           return this;
         }
@@ -1962,8 +1965,8 @@ public class OrderCreateParams extends ApiRequestParams {
           private BigDecimal width;
 
           /** Finalize and obtain parameter instance from this builder. */
-          public PackageDimensions build() {
-            return new PackageDimensions(
+          public OrderCreateParams.LineItem.ProductData.PackageDimensions build() {
+            return new OrderCreateParams.LineItem.ProductData.PackageDimensions(
                 this.extraParams, this.height, this.length, this.weight, this.width);
           }
 
@@ -2053,8 +2056,8 @@ public class OrderCreateParams extends ApiRequestParams {
       private Settings settings;
 
       /** Finalize and obtain parameter instance from this builder. */
-      public Payment build() {
-        return new Payment(this.extraParams, this.settings);
+      public OrderCreateParams.Payment build() {
+        return new OrderCreateParams.Payment(this.extraParams, this.settings);
       }
 
       /**
@@ -2084,7 +2087,7 @@ public class OrderCreateParams extends ApiRequestParams {
       }
 
       /** Settings describing how the order should configure generated PaymentIntents. */
-      public Builder setSettings(Settings settings) {
+      public Builder setSettings(OrderCreateParams.Payment.Settings settings) {
         this.settings = settings;
         return this;
       }
@@ -2119,7 +2122,7 @@ public class OrderCreateParams extends ApiRequestParams {
        * href="https://dashboard.stripe.com/settings/payment_methods">Stripe Dashboard</a>.
        */
       @SerializedName("payment_method_types")
-      List<PaymentMethodType> paymentMethodTypes;
+      List<OrderCreateParams.Payment.Settings.PaymentMethodType> paymentMethodTypes;
 
       /** The URL to redirect the customer to after they authenticate their payment. */
       @SerializedName("return_url")
@@ -2149,7 +2152,7 @@ public class OrderCreateParams extends ApiRequestParams {
           Long applicationFeeAmount,
           Map<String, Object> extraParams,
           PaymentMethodOptions paymentMethodOptions,
-          List<PaymentMethodType> paymentMethodTypes,
+          List<OrderCreateParams.Payment.Settings.PaymentMethodType> paymentMethodTypes,
           String returnUrl,
           String statementDescriptor,
           String statementDescriptorSuffix,
@@ -2175,7 +2178,7 @@ public class OrderCreateParams extends ApiRequestParams {
 
         private PaymentMethodOptions paymentMethodOptions;
 
-        private List<PaymentMethodType> paymentMethodTypes;
+        private List<OrderCreateParams.Payment.Settings.PaymentMethodType> paymentMethodTypes;
 
         private String returnUrl;
 
@@ -2186,8 +2189,8 @@ public class OrderCreateParams extends ApiRequestParams {
         private TransferData transferData;
 
         /** Finalize and obtain parameter instance from this builder. */
-        public Settings build() {
-          return new Settings(
+        public OrderCreateParams.Payment.Settings build() {
+          return new OrderCreateParams.Payment.Settings(
               this.applicationFeeAmount,
               this.extraParams,
               this.paymentMethodOptions,
@@ -2236,7 +2239,8 @@ public class OrderCreateParams extends ApiRequestParams {
         }
 
         /** PaymentMethod-specific configuration to provide to the order's PaymentIntent. */
-        public Builder setPaymentMethodOptions(PaymentMethodOptions paymentMethodOptions) {
+        public Builder setPaymentMethodOptions(
+            OrderCreateParams.Payment.Settings.PaymentMethodOptions paymentMethodOptions) {
           this.paymentMethodOptions = paymentMethodOptions;
           return this;
         }
@@ -2247,7 +2251,8 @@ public class OrderCreateParams extends ApiRequestParams {
          * See {@link OrderCreateParams.Payment.Settings#paymentMethodTypes} for the field
          * documentation.
          */
-        public Builder addPaymentMethodType(PaymentMethodType element) {
+        public Builder addPaymentMethodType(
+            OrderCreateParams.Payment.Settings.PaymentMethodType element) {
           if (this.paymentMethodTypes == null) {
             this.paymentMethodTypes = new ArrayList<>();
           }
@@ -2261,7 +2266,8 @@ public class OrderCreateParams extends ApiRequestParams {
          * See {@link OrderCreateParams.Payment.Settings#paymentMethodTypes} for the field
          * documentation.
          */
-        public Builder addAllPaymentMethodType(List<PaymentMethodType> elements) {
+        public Builder addAllPaymentMethodType(
+            List<OrderCreateParams.Payment.Settings.PaymentMethodType> elements) {
           if (this.paymentMethodTypes == null) {
             this.paymentMethodTypes = new ArrayList<>();
           }
@@ -2296,7 +2302,8 @@ public class OrderCreateParams extends ApiRequestParams {
         }
 
         /** Provides configuration for completing a transfer for the order after it is paid. */
-        public Builder setTransferData(TransferData transferData) {
+        public Builder setTransferData(
+            OrderCreateParams.Payment.Settings.TransferData transferData) {
           this.transferData = transferData;
           return this;
         }
@@ -2392,6 +2399,13 @@ public class OrderCreateParams extends ApiRequestParams {
         P24 p24;
 
         /**
+         * If paying by {@code paypal}, this sub-hash contains details about the PayPal payment
+         * method options to pass to the order's PaymentIntent.
+         */
+        @SerializedName("paypal")
+        Paypal paypal;
+
+        /**
          * If paying by {@code sepa_debit}, this sub-hash contains details about the SEPA Debit
          * payment method options to pass to the order's PaymentIntent.
          */
@@ -2425,6 +2439,7 @@ public class OrderCreateParams extends ApiRequestParams {
             Link link,
             Oxxo oxxo,
             P24 p24,
+            Paypal paypal,
             SepaDebit sepaDebit,
             Sofort sofort,
             WechatPay wechatPay) {
@@ -2440,6 +2455,7 @@ public class OrderCreateParams extends ApiRequestParams {
           this.link = link;
           this.oxxo = oxxo;
           this.p24 = p24;
+          this.paypal = paypal;
           this.sepaDebit = sepaDebit;
           this.sofort = sofort;
           this.wechatPay = wechatPay;
@@ -2474,6 +2490,8 @@ public class OrderCreateParams extends ApiRequestParams {
 
           private P24 p24;
 
+          private Paypal paypal;
+
           private SepaDebit sepaDebit;
 
           private Sofort sofort;
@@ -2481,8 +2499,8 @@ public class OrderCreateParams extends ApiRequestParams {
           private WechatPay wechatPay;
 
           /** Finalize and obtain parameter instance from this builder. */
-          public PaymentMethodOptions build() {
-            return new PaymentMethodOptions(
+          public OrderCreateParams.Payment.Settings.PaymentMethodOptions build() {
+            return new OrderCreateParams.Payment.Settings.PaymentMethodOptions(
                 this.acssDebit,
                 this.afterpayClearpay,
                 this.alipay,
@@ -2495,6 +2513,7 @@ public class OrderCreateParams extends ApiRequestParams {
                 this.link,
                 this.oxxo,
                 this.p24,
+                this.paypal,
                 this.sepaDebit,
                 this.sofort,
                 this.wechatPay);
@@ -2504,7 +2523,8 @@ public class OrderCreateParams extends ApiRequestParams {
            * If paying by {@code acss_debit}, this sub-hash contains details about the ACSS Debit
            * payment method options to pass to the order's PaymentIntent.
            */
-          public Builder setAcssDebit(AcssDebit acssDebit) {
+          public Builder setAcssDebit(
+              OrderCreateParams.Payment.Settings.PaymentMethodOptions.AcssDebit acssDebit) {
             this.acssDebit = acssDebit;
             return this;
           }
@@ -2513,7 +2533,9 @@ public class OrderCreateParams extends ApiRequestParams {
            * If paying by {@code afterpay_clearpay}, this sub-hash contains details about the
            * AfterpayClearpay payment method options to pass to the order's PaymentIntent.
            */
-          public Builder setAfterpayClearpay(AfterpayClearpay afterpayClearpay) {
+          public Builder setAfterpayClearpay(
+              OrderCreateParams.Payment.Settings.PaymentMethodOptions.AfterpayClearpay
+                  afterpayClearpay) {
             this.afterpayClearpay = afterpayClearpay;
             return this;
           }
@@ -2522,7 +2544,8 @@ public class OrderCreateParams extends ApiRequestParams {
            * If paying by {@code alipay}, this sub-hash contains details about the Alipay payment
            * method options to pass to the order's PaymentIntent.
            */
-          public Builder setAlipay(Alipay alipay) {
+          public Builder setAlipay(
+              OrderCreateParams.Payment.Settings.PaymentMethodOptions.Alipay alipay) {
             this.alipay = alipay;
             return this;
           }
@@ -2531,7 +2554,8 @@ public class OrderCreateParams extends ApiRequestParams {
            * If paying by {@code bancontact}, this sub-hash contains details about the Bancontact
            * payment method options to pass to the order's PaymentIntent.
            */
-          public Builder setBancontact(Bancontact bancontact) {
+          public Builder setBancontact(
+              OrderCreateParams.Payment.Settings.PaymentMethodOptions.Bancontact bancontact) {
             this.bancontact = bancontact;
             return this;
           }
@@ -2540,7 +2564,8 @@ public class OrderCreateParams extends ApiRequestParams {
            * If paying by {@code card}, this sub-hash contains details about the Card payment method
            * options to pass to the order's PaymentIntent.
            */
-          public Builder setCard(Card card) {
+          public Builder setCard(
+              OrderCreateParams.Payment.Settings.PaymentMethodOptions.Card card) {
             this.card = card;
             return this;
           }
@@ -2549,7 +2574,9 @@ public class OrderCreateParams extends ApiRequestParams {
            * If paying by {@code customer_balance}, this sub-hash contains details about the
            * Customer Balance payment method options to pass to the order's PaymentIntent.
            */
-          public Builder setCustomerBalance(CustomerBalance customerBalance) {
+          public Builder setCustomerBalance(
+              OrderCreateParams.Payment.Settings.PaymentMethodOptions.CustomerBalance
+                  customerBalance) {
             this.customerBalance = customerBalance;
             return this;
           }
@@ -2586,7 +2613,8 @@ public class OrderCreateParams extends ApiRequestParams {
            * If paying by {@code ideal}, this sub-hash contains details about the iDEAL payment
            * method options to pass to the order's PaymentIntent.
            */
-          public Builder setIdeal(Ideal ideal) {
+          public Builder setIdeal(
+              OrderCreateParams.Payment.Settings.PaymentMethodOptions.Ideal ideal) {
             this.ideal = ideal;
             return this;
           }
@@ -2595,7 +2623,8 @@ public class OrderCreateParams extends ApiRequestParams {
            * If paying by {@code klarna}, this sub-hash contains details about the Klarna payment
            * method options to pass to the order's PaymentIntent.
            */
-          public Builder setKlarna(Klarna klarna) {
+          public Builder setKlarna(
+              OrderCreateParams.Payment.Settings.PaymentMethodOptions.Klarna klarna) {
             this.klarna = klarna;
             return this;
           }
@@ -2604,7 +2633,8 @@ public class OrderCreateParams extends ApiRequestParams {
            * If paying by {@code link}, this sub-hash contains details about the Link payment method
            * options to pass to the order's PaymentIntent.
            */
-          public Builder setLink(Link link) {
+          public Builder setLink(
+              OrderCreateParams.Payment.Settings.PaymentMethodOptions.Link link) {
             this.link = link;
             return this;
           }
@@ -2613,7 +2643,8 @@ public class OrderCreateParams extends ApiRequestParams {
            * If paying by {@code oxxo}, this sub-hash contains details about the OXXO payment method
            * options to pass to the order's PaymentIntent.
            */
-          public Builder setOxxo(Oxxo oxxo) {
+          public Builder setOxxo(
+              OrderCreateParams.Payment.Settings.PaymentMethodOptions.Oxxo oxxo) {
             this.oxxo = oxxo;
             return this;
           }
@@ -2622,8 +2653,18 @@ public class OrderCreateParams extends ApiRequestParams {
            * If paying by {@code p24}, this sub-hash contains details about the P24 payment method
            * options to pass to the order's PaymentIntent.
            */
-          public Builder setP24(P24 p24) {
+          public Builder setP24(OrderCreateParams.Payment.Settings.PaymentMethodOptions.P24 p24) {
             this.p24 = p24;
+            return this;
+          }
+
+          /**
+           * If paying by {@code paypal}, this sub-hash contains details about the PayPal payment
+           * method options to pass to the order's PaymentIntent.
+           */
+          public Builder setPaypal(
+              OrderCreateParams.Payment.Settings.PaymentMethodOptions.Paypal paypal) {
+            this.paypal = paypal;
             return this;
           }
 
@@ -2631,7 +2672,8 @@ public class OrderCreateParams extends ApiRequestParams {
            * If paying by {@code sepa_debit}, this sub-hash contains details about the SEPA Debit
            * payment method options to pass to the order's PaymentIntent.
            */
-          public Builder setSepaDebit(SepaDebit sepaDebit) {
+          public Builder setSepaDebit(
+              OrderCreateParams.Payment.Settings.PaymentMethodOptions.SepaDebit sepaDebit) {
             this.sepaDebit = sepaDebit;
             return this;
           }
@@ -2640,7 +2682,8 @@ public class OrderCreateParams extends ApiRequestParams {
            * If paying by {@code sofort}, this sub-hash contains details about the Sofort payment
            * method options to pass to the order's PaymentIntent.
            */
-          public Builder setSofort(Sofort sofort) {
+          public Builder setSofort(
+              OrderCreateParams.Payment.Settings.PaymentMethodOptions.Sofort sofort) {
             this.sofort = sofort;
             return this;
           }
@@ -2649,7 +2692,8 @@ public class OrderCreateParams extends ApiRequestParams {
            * If paying by {@code wechat_pay}, this sub-hash contains details about the WeChat Pay
            * payment method options to pass to the order's PaymentIntent.
            */
-          public Builder setWechatPay(WechatPay wechatPay) {
+          public Builder setWechatPay(
+              OrderCreateParams.Payment.Settings.PaymentMethodOptions.WechatPay wechatPay) {
             this.wechatPay = wechatPay;
             return this;
           }
@@ -2693,7 +2737,7 @@ public class OrderCreateParams extends ApiRequestParams {
            * off_session}.
            */
           @SerializedName("setup_future_usage")
-          EnumParam setupFutureUsage;
+          ApiRequestParams.EnumParam setupFutureUsage;
 
           /** Verification method for the intent. */
           @SerializedName("verification_method")
@@ -2702,7 +2746,7 @@ public class OrderCreateParams extends ApiRequestParams {
           private AcssDebit(
               Map<String, Object> extraParams,
               MandateOptions mandateOptions,
-              EnumParam setupFutureUsage,
+              ApiRequestParams.EnumParam setupFutureUsage,
               VerificationMethod verificationMethod) {
             this.extraParams = extraParams;
             this.mandateOptions = mandateOptions;
@@ -2719,13 +2763,13 @@ public class OrderCreateParams extends ApiRequestParams {
 
             private MandateOptions mandateOptions;
 
-            private EnumParam setupFutureUsage;
+            private ApiRequestParams.EnumParam setupFutureUsage;
 
             private VerificationMethod verificationMethod;
 
             /** Finalize and obtain parameter instance from this builder. */
-            public AcssDebit build() {
-              return new AcssDebit(
+            public OrderCreateParams.Payment.Settings.PaymentMethodOptions.AcssDebit build() {
+              return new OrderCreateParams.Payment.Settings.PaymentMethodOptions.AcssDebit(
                   this.extraParams,
                   this.mandateOptions,
                   this.setupFutureUsage,
@@ -2763,7 +2807,9 @@ public class OrderCreateParams extends ApiRequestParams {
             }
 
             /** Additional fields for Mandate creation. */
-            public Builder setMandateOptions(MandateOptions mandateOptions) {
+            public Builder setMandateOptions(
+                OrderCreateParams.Payment.Settings.PaymentMethodOptions.AcssDebit.MandateOptions
+                    mandateOptions) {
               this.mandateOptions = mandateOptions;
               return this;
             }
@@ -2789,7 +2835,9 @@ public class OrderCreateParams extends ApiRequestParams {
              * using a publishable key, you may only update the value from {@code on_session} to
              * {@code off_session}.
              */
-            public Builder setSetupFutureUsage(SetupFutureUsage setupFutureUsage) {
+            public Builder setSetupFutureUsage(
+                OrderCreateParams.Payment.Settings.PaymentMethodOptions.AcssDebit.SetupFutureUsage
+                    setupFutureUsage) {
               this.setupFutureUsage = setupFutureUsage;
               return this;
             }
@@ -2821,7 +2869,9 @@ public class OrderCreateParams extends ApiRequestParams {
             }
 
             /** Verification method for the intent. */
-            public Builder setVerificationMethod(VerificationMethod verificationMethod) {
+            public Builder setVerificationMethod(
+                OrderCreateParams.Payment.Settings.PaymentMethodOptions.AcssDebit.VerificationMethod
+                    verificationMethod) {
               this.verificationMethod = verificationMethod;
               return this;
             }
@@ -2892,8 +2942,11 @@ public class OrderCreateParams extends ApiRequestParams {
               private TransactionType transactionType;
 
               /** Finalize and obtain parameter instance from this builder. */
-              public MandateOptions build() {
-                return new MandateOptions(
+              public OrderCreateParams.Payment.Settings.PaymentMethodOptions.AcssDebit
+                      .MandateOptions
+                  build() {
+                return new OrderCreateParams.Payment.Settings.PaymentMethodOptions.AcssDebit
+                    .MandateOptions(
                     this.customMandateUrl,
                     this.extraParams,
                     this.intervalDescription,
@@ -2965,13 +3018,19 @@ public class OrderCreateParams extends ApiRequestParams {
               }
 
               /** Payment schedule for the mandate. */
-              public Builder setPaymentSchedule(PaymentSchedule paymentSchedule) {
+              public Builder setPaymentSchedule(
+                  OrderCreateParams.Payment.Settings.PaymentMethodOptions.AcssDebit.MandateOptions
+                          .PaymentSchedule
+                      paymentSchedule) {
                 this.paymentSchedule = paymentSchedule;
                 return this;
               }
 
               /** Transaction type of the mandate. */
-              public Builder setTransactionType(TransactionType transactionType) {
+              public Builder setTransactionType(
+                  OrderCreateParams.Payment.Settings.PaymentMethodOptions.AcssDebit.MandateOptions
+                          .TransactionType
+                      transactionType) {
                 this.transactionType = transactionType;
                 return this;
               }
@@ -3129,8 +3188,9 @@ public class OrderCreateParams extends ApiRequestParams {
             private SetupFutureUsage setupFutureUsage;
 
             /** Finalize and obtain parameter instance from this builder. */
-            public AfterpayClearpay build() {
-              return new AfterpayClearpay(
+            public OrderCreateParams.Payment.Settings.PaymentMethodOptions.AfterpayClearpay
+                build() {
+              return new OrderCreateParams.Payment.Settings.PaymentMethodOptions.AfterpayClearpay(
                   this.captureMethod, this.extraParams, this.reference, this.setupFutureUsage);
             }
 
@@ -3143,7 +3203,10 @@ public class OrderCreateParams extends ApiRequestParams {
              * <p>If {@code capture_method} is already set on the PaymentIntent, providing an empty
              * value for this parameter will unset the stored value for this payment method type.
              */
-            public Builder setCaptureMethod(CaptureMethod captureMethod) {
+            public Builder setCaptureMethod(
+                OrderCreateParams.Payment.Settings.PaymentMethodOptions.AfterpayClearpay
+                        .CaptureMethod
+                    captureMethod) {
               this.captureMethod = captureMethod;
               return this;
             }
@@ -3209,7 +3272,10 @@ public class OrderCreateParams extends ApiRequestParams {
              * using a publishable key, you may only update the value from {@code on_session} to
              * {@code off_session}.
              */
-            public Builder setSetupFutureUsage(SetupFutureUsage setupFutureUsage) {
+            public Builder setSetupFutureUsage(
+                OrderCreateParams.Payment.Settings.PaymentMethodOptions.AfterpayClearpay
+                        .SetupFutureUsage
+                    setupFutureUsage) {
               this.setupFutureUsage = setupFutureUsage;
               return this;
             }
@@ -3277,9 +3343,10 @@ public class OrderCreateParams extends ApiRequestParams {
            * off_session}.
            */
           @SerializedName("setup_future_usage")
-          EnumParam setupFutureUsage;
+          ApiRequestParams.EnumParam setupFutureUsage;
 
-          private Alipay(Map<String, Object> extraParams, EnumParam setupFutureUsage) {
+          private Alipay(
+              Map<String, Object> extraParams, ApiRequestParams.EnumParam setupFutureUsage) {
             this.extraParams = extraParams;
             this.setupFutureUsage = setupFutureUsage;
           }
@@ -3291,11 +3358,12 @@ public class OrderCreateParams extends ApiRequestParams {
           public static class Builder {
             private Map<String, Object> extraParams;
 
-            private EnumParam setupFutureUsage;
+            private ApiRequestParams.EnumParam setupFutureUsage;
 
             /** Finalize and obtain parameter instance from this builder. */
-            public Alipay build() {
-              return new Alipay(this.extraParams, this.setupFutureUsage);
+            public OrderCreateParams.Payment.Settings.PaymentMethodOptions.Alipay build() {
+              return new OrderCreateParams.Payment.Settings.PaymentMethodOptions.Alipay(
+                  this.extraParams, this.setupFutureUsage);
             }
 
             /**
@@ -3349,7 +3417,9 @@ public class OrderCreateParams extends ApiRequestParams {
              * using a publishable key, you may only update the value from {@code on_session} to
              * {@code off_session}.
              */
-            public Builder setSetupFutureUsage(SetupFutureUsage setupFutureUsage) {
+            public Builder setSetupFutureUsage(
+                OrderCreateParams.Payment.Settings.PaymentMethodOptions.Alipay.SetupFutureUsage
+                    setupFutureUsage) {
               this.setupFutureUsage = setupFutureUsage;
               return this;
             }
@@ -3438,12 +3508,12 @@ public class OrderCreateParams extends ApiRequestParams {
            * off_session}.
            */
           @SerializedName("setup_future_usage")
-          EnumParam setupFutureUsage;
+          ApiRequestParams.EnumParam setupFutureUsage;
 
           private Bancontact(
               Map<String, Object> extraParams,
               PreferredLanguage preferredLanguage,
-              EnumParam setupFutureUsage) {
+              ApiRequestParams.EnumParam setupFutureUsage) {
             this.extraParams = extraParams;
             this.preferredLanguage = preferredLanguage;
             this.setupFutureUsage = setupFutureUsage;
@@ -3458,11 +3528,11 @@ public class OrderCreateParams extends ApiRequestParams {
 
             private PreferredLanguage preferredLanguage;
 
-            private EnumParam setupFutureUsage;
+            private ApiRequestParams.EnumParam setupFutureUsage;
 
             /** Finalize and obtain parameter instance from this builder. */
-            public Bancontact build() {
-              return new Bancontact(
+            public OrderCreateParams.Payment.Settings.PaymentMethodOptions.Bancontact build() {
+              return new OrderCreateParams.Payment.Settings.PaymentMethodOptions.Bancontact(
                   this.extraParams, this.preferredLanguage, this.setupFutureUsage);
             }
 
@@ -3500,7 +3570,9 @@ public class OrderCreateParams extends ApiRequestParams {
              * Preferred language of the Bancontact authorization page that the customer is
              * redirected to.
              */
-            public Builder setPreferredLanguage(PreferredLanguage preferredLanguage) {
+            public Builder setPreferredLanguage(
+                OrderCreateParams.Payment.Settings.PaymentMethodOptions.Bancontact.PreferredLanguage
+                    preferredLanguage) {
               this.preferredLanguage = preferredLanguage;
               return this;
             }
@@ -3526,7 +3598,9 @@ public class OrderCreateParams extends ApiRequestParams {
              * using a publishable key, you may only update the value from {@code on_session} to
              * {@code off_session}.
              */
-            public Builder setSetupFutureUsage(SetupFutureUsage setupFutureUsage) {
+            public Builder setSetupFutureUsage(
+                OrderCreateParams.Payment.Settings.PaymentMethodOptions.Bancontact.SetupFutureUsage
+                    setupFutureUsage) {
               this.setupFutureUsage = setupFutureUsage;
               return this;
             }
@@ -3655,12 +3729,15 @@ public class OrderCreateParams extends ApiRequestParams {
             private SetupFutureUsage setupFutureUsage;
 
             /** Finalize and obtain parameter instance from this builder. */
-            public Card build() {
-              return new Card(this.captureMethod, this.extraParams, this.setupFutureUsage);
+            public OrderCreateParams.Payment.Settings.PaymentMethodOptions.Card build() {
+              return new OrderCreateParams.Payment.Settings.PaymentMethodOptions.Card(
+                  this.captureMethod, this.extraParams, this.setupFutureUsage);
             }
 
             /** Controls when the funds will be captured from the customer's account. */
-            public Builder setCaptureMethod(CaptureMethod captureMethod) {
+            public Builder setCaptureMethod(
+                OrderCreateParams.Payment.Settings.PaymentMethodOptions.Card.CaptureMethod
+                    captureMethod) {
               this.captureMethod = captureMethod;
               return this;
             }
@@ -3715,7 +3792,9 @@ public class OrderCreateParams extends ApiRequestParams {
              * using a publishable key, you may only update the value from {@code on_session} to
              * {@code off_session}.
              */
-            public Builder setSetupFutureUsage(SetupFutureUsage setupFutureUsage) {
+            public Builder setSetupFutureUsage(
+                OrderCreateParams.Payment.Settings.PaymentMethodOptions.Card.SetupFutureUsage
+                    setupFutureUsage) {
               this.setupFutureUsage = setupFutureUsage;
               return this;
             }
@@ -3830,8 +3909,8 @@ public class OrderCreateParams extends ApiRequestParams {
             private SetupFutureUsage setupFutureUsage;
 
             /** Finalize and obtain parameter instance from this builder. */
-            public CustomerBalance build() {
-              return new CustomerBalance(
+            public OrderCreateParams.Payment.Settings.PaymentMethodOptions.CustomerBalance build() {
+              return new OrderCreateParams.Payment.Settings.PaymentMethodOptions.CustomerBalance(
                   this.bankTransfer, this.extraParams, this.fundingType, this.setupFutureUsage);
             }
 
@@ -3839,7 +3918,9 @@ public class OrderCreateParams extends ApiRequestParams {
              * Configuration for the bank transfer funding type, if the {@code funding_type} is set
              * to {@code bank_transfer}.
              */
-            public Builder setBankTransfer(BankTransfer bankTransfer) {
+            public Builder setBankTransfer(
+                OrderCreateParams.Payment.Settings.PaymentMethodOptions.CustomerBalance.BankTransfer
+                    bankTransfer) {
               this.bankTransfer = bankTransfer;
               return this;
             }
@@ -3878,7 +3959,9 @@ public class OrderCreateParams extends ApiRequestParams {
              * The funding method type to be used when there are not enough funds in the customer
              * balance. Permitted values include: {@code bank_transfer}.
              */
-            public Builder setFundingType(FundingType fundingType) {
+            public Builder setFundingType(
+                OrderCreateParams.Payment.Settings.PaymentMethodOptions.CustomerBalance.FundingType
+                    fundingType) {
               this.fundingType = fundingType;
               return this;
             }
@@ -3904,7 +3987,10 @@ public class OrderCreateParams extends ApiRequestParams {
              * using a publishable key, you may only update the value from {@code on_session} to
              * {@code off_session}.
              */
-            public Builder setSetupFutureUsage(SetupFutureUsage setupFutureUsage) {
+            public Builder setSetupFutureUsage(
+                OrderCreateParams.Payment.Settings.PaymentMethodOptions.CustomerBalance
+                        .SetupFutureUsage
+                    setupFutureUsage) {
               this.setupFutureUsage = setupFutureUsage;
               return this;
             }
@@ -3933,7 +4019,10 @@ public class OrderCreateParams extends ApiRequestParams {
              * {@code spei}.
              */
             @SerializedName("requested_address_types")
-            List<RequestedAddressType> requestedAddressTypes;
+            List<
+                    OrderCreateParams.Payment.Settings.PaymentMethodOptions.CustomerBalance
+                        .BankTransfer.RequestedAddressType>
+                requestedAddressTypes;
 
             /**
              * The list of bank transfer types that this PaymentIntent is allowed to use for funding
@@ -3946,7 +4035,10 @@ public class OrderCreateParams extends ApiRequestParams {
             private BankTransfer(
                 EuBankTransfer euBankTransfer,
                 Map<String, Object> extraParams,
-                List<RequestedAddressType> requestedAddressTypes,
+                List<
+                        OrderCreateParams.Payment.Settings.PaymentMethodOptions.CustomerBalance
+                            .BankTransfer.RequestedAddressType>
+                    requestedAddressTypes,
                 Type type) {
               this.euBankTransfer = euBankTransfer;
               this.extraParams = extraParams;
@@ -3963,17 +4055,26 @@ public class OrderCreateParams extends ApiRequestParams {
 
               private Map<String, Object> extraParams;
 
-              private List<RequestedAddressType> requestedAddressTypes;
+              private List<
+                      OrderCreateParams.Payment.Settings.PaymentMethodOptions.CustomerBalance
+                          .BankTransfer.RequestedAddressType>
+                  requestedAddressTypes;
 
               private Type type;
 
               /** Finalize and obtain parameter instance from this builder. */
-              public BankTransfer build() {
-                return new BankTransfer(
+              public OrderCreateParams.Payment.Settings.PaymentMethodOptions.CustomerBalance
+                      .BankTransfer
+                  build() {
+                return new OrderCreateParams.Payment.Settings.PaymentMethodOptions.CustomerBalance
+                    .BankTransfer(
                     this.euBankTransfer, this.extraParams, this.requestedAddressTypes, this.type);
               }
 
-              public Builder setEuBankTransfer(EuBankTransfer euBankTransfer) {
+              public Builder setEuBankTransfer(
+                  OrderCreateParams.Payment.Settings.PaymentMethodOptions.CustomerBalance
+                          .BankTransfer.EuBankTransfer
+                      euBankTransfer) {
                 this.euBankTransfer = euBankTransfer;
                 return this;
               }
@@ -4015,7 +4116,10 @@ public class OrderCreateParams extends ApiRequestParams {
                * OrderCreateParams.Payment.Settings.PaymentMethodOptions.CustomerBalance.BankTransfer#requestedAddressTypes}
                * for the field documentation.
                */
-              public Builder addRequestedAddressType(RequestedAddressType element) {
+              public Builder addRequestedAddressType(
+                  OrderCreateParams.Payment.Settings.PaymentMethodOptions.CustomerBalance
+                          .BankTransfer.RequestedAddressType
+                      element) {
                 if (this.requestedAddressTypes == null) {
                   this.requestedAddressTypes = new ArrayList<>();
                 }
@@ -4030,7 +4134,11 @@ public class OrderCreateParams extends ApiRequestParams {
                * OrderCreateParams.Payment.Settings.PaymentMethodOptions.CustomerBalance.BankTransfer#requestedAddressTypes}
                * for the field documentation.
                */
-              public Builder addAllRequestedAddressType(List<RequestedAddressType> elements) {
+              public Builder addAllRequestedAddressType(
+                  List<
+                          OrderCreateParams.Payment.Settings.PaymentMethodOptions.CustomerBalance
+                              .BankTransfer.RequestedAddressType>
+                      elements) {
                 if (this.requestedAddressTypes == null) {
                   this.requestedAddressTypes = new ArrayList<>();
                 }
@@ -4043,7 +4151,10 @@ public class OrderCreateParams extends ApiRequestParams {
                * funding Permitted values include: {@code eu_bank_transfer}, {@code
                * gb_bank_transfer}, {@code jp_bank_transfer}, or {@code mx_bank_transfer}.
                */
-              public Builder setType(Type type) {
+              public Builder setType(
+                  OrderCreateParams.Payment.Settings.PaymentMethodOptions.CustomerBalance
+                          .BankTransfer.Type
+                      type) {
                 this.type = type;
                 return this;
               }
@@ -4083,8 +4194,11 @@ public class OrderCreateParams extends ApiRequestParams {
                 private Map<String, Object> extraParams;
 
                 /** Finalize and obtain parameter instance from this builder. */
-                public EuBankTransfer build() {
-                  return new EuBankTransfer(this.country, this.extraParams);
+                public OrderCreateParams.Payment.Settings.PaymentMethodOptions.CustomerBalance
+                        .BankTransfer.EuBankTransfer
+                    build() {
+                  return new OrderCreateParams.Payment.Settings.PaymentMethodOptions.CustomerBalance
+                      .BankTransfer.EuBankTransfer(this.country, this.extraParams);
                 }
 
                 /**
@@ -4233,9 +4347,10 @@ public class OrderCreateParams extends ApiRequestParams {
            * off_session}.
            */
           @SerializedName("setup_future_usage")
-          EnumParam setupFutureUsage;
+          ApiRequestParams.EnumParam setupFutureUsage;
 
-          private Ideal(Map<String, Object> extraParams, EnumParam setupFutureUsage) {
+          private Ideal(
+              Map<String, Object> extraParams, ApiRequestParams.EnumParam setupFutureUsage) {
             this.extraParams = extraParams;
             this.setupFutureUsage = setupFutureUsage;
           }
@@ -4247,11 +4362,12 @@ public class OrderCreateParams extends ApiRequestParams {
           public static class Builder {
             private Map<String, Object> extraParams;
 
-            private EnumParam setupFutureUsage;
+            private ApiRequestParams.EnumParam setupFutureUsage;
 
             /** Finalize and obtain parameter instance from this builder. */
-            public Ideal build() {
-              return new Ideal(this.extraParams, this.setupFutureUsage);
+            public OrderCreateParams.Payment.Settings.PaymentMethodOptions.Ideal build() {
+              return new OrderCreateParams.Payment.Settings.PaymentMethodOptions.Ideal(
+                  this.extraParams, this.setupFutureUsage);
             }
 
             /**
@@ -4305,7 +4421,9 @@ public class OrderCreateParams extends ApiRequestParams {
              * using a publishable key, you may only update the value from {@code on_session} to
              * {@code off_session}.
              */
-            public Builder setSetupFutureUsage(SetupFutureUsage setupFutureUsage) {
+            public Builder setSetupFutureUsage(
+                OrderCreateParams.Payment.Settings.PaymentMethodOptions.Ideal.SetupFutureUsage
+                    setupFutureUsage) {
               this.setupFutureUsage = setupFutureUsage;
               return this;
             }
@@ -4365,7 +4483,7 @@ public class OrderCreateParams extends ApiRequestParams {
            * value for this parameter will unset the stored value for this payment method type.
            */
           @SerializedName("capture_method")
-          EnumParam captureMethod;
+          ApiRequestParams.EnumParam captureMethod;
 
           /**
            * Map of extra parameters for custom features not available in this client library. The
@@ -4408,7 +4526,7 @@ public class OrderCreateParams extends ApiRequestParams {
           SetupFutureUsage setupFutureUsage;
 
           private Klarna(
-              EnumParam captureMethod,
+              ApiRequestParams.EnumParam captureMethod,
               Map<String, Object> extraParams,
               PreferredLocale preferredLocale,
               SetupFutureUsage setupFutureUsage) {
@@ -4423,7 +4541,7 @@ public class OrderCreateParams extends ApiRequestParams {
           }
 
           public static class Builder {
-            private EnumParam captureMethod;
+            private ApiRequestParams.EnumParam captureMethod;
 
             private Map<String, Object> extraParams;
 
@@ -4432,8 +4550,8 @@ public class OrderCreateParams extends ApiRequestParams {
             private SetupFutureUsage setupFutureUsage;
 
             /** Finalize and obtain parameter instance from this builder. */
-            public Klarna build() {
-              return new Klarna(
+            public OrderCreateParams.Payment.Settings.PaymentMethodOptions.Klarna build() {
+              return new OrderCreateParams.Payment.Settings.PaymentMethodOptions.Klarna(
                   this.captureMethod,
                   this.extraParams,
                   this.preferredLocale,
@@ -4449,7 +4567,9 @@ public class OrderCreateParams extends ApiRequestParams {
              * <p>If {@code capture_method} is already set on the PaymentIntent, providing an empty
              * value for this parameter will unset the stored value for this payment method type.
              */
-            public Builder setCaptureMethod(CaptureMethod captureMethod) {
+            public Builder setCaptureMethod(
+                OrderCreateParams.Payment.Settings.PaymentMethodOptions.Klarna.CaptureMethod
+                    captureMethod) {
               this.captureMethod = captureMethod;
               return this;
             }
@@ -4502,7 +4622,9 @@ public class OrderCreateParams extends ApiRequestParams {
              * Preferred language of the Klarna authorization page that the customer is redirected
              * to.
              */
-            public Builder setPreferredLocale(PreferredLocale preferredLocale) {
+            public Builder setPreferredLocale(
+                OrderCreateParams.Payment.Settings.PaymentMethodOptions.Klarna.PreferredLocale
+                    preferredLocale) {
               this.preferredLocale = preferredLocale;
               return this;
             }
@@ -4528,7 +4650,9 @@ public class OrderCreateParams extends ApiRequestParams {
              * using a publishable key, you may only update the value from {@code on_session} to
              * {@code off_session}.
              */
-            public Builder setSetupFutureUsage(SetupFutureUsage setupFutureUsage) {
+            public Builder setSetupFutureUsage(
+                OrderCreateParams.Payment.Settings.PaymentMethodOptions.Klarna.SetupFutureUsage
+                    setupFutureUsage) {
               this.setupFutureUsage = setupFutureUsage;
               return this;
             }
@@ -4553,6 +4677,9 @@ public class OrderCreateParams extends ApiRequestParams {
             @SerializedName("de-AT")
             DE_AT("de-AT"),
 
+            @SerializedName("de-CH")
+            DE_CH("de-CH"),
+
             @SerializedName("de-DE")
             DE_DE("de-DE"),
 
@@ -4567,6 +4694,9 @@ public class OrderCreateParams extends ApiRequestParams {
 
             @SerializedName("en-CA")
             EN_CA("en-CA"),
+
+            @SerializedName("en-CH")
+            EN_CH("en-CH"),
 
             @SerializedName("en-DE")
             EN_DE("en-DE"),
@@ -4601,6 +4731,12 @@ public class OrderCreateParams extends ApiRequestParams {
             @SerializedName("en-NZ")
             EN_NZ("en-NZ"),
 
+            @SerializedName("en-PL")
+            EN_PL("en-PL"),
+
+            @SerializedName("en-PT")
+            EN_PT("en-PT"),
+
             @SerializedName("en-SE")
             EN_SE("en-SE"),
 
@@ -4622,8 +4758,14 @@ public class OrderCreateParams extends ApiRequestParams {
             @SerializedName("fr-CA")
             FR_CA("fr-CA"),
 
+            @SerializedName("fr-CH")
+            FR_CH("fr-CH"),
+
             @SerializedName("fr-FR")
             FR_FR("fr-FR"),
+
+            @SerializedName("it-CH")
+            IT_CH("it-CH"),
 
             @SerializedName("it-IT")
             IT_IT("it-IT"),
@@ -4636,6 +4778,12 @@ public class OrderCreateParams extends ApiRequestParams {
 
             @SerializedName("nl-NL")
             NL_NL("nl-NL"),
+
+            @SerializedName("pl-PL")
+            PL_PL("pl-PL"),
+
+            @SerializedName("pt-PT")
+            PT_PT("pt-PT"),
 
             @SerializedName("sv-FI")
             SV_FI("sv-FI"),
@@ -4676,7 +4824,7 @@ public class OrderCreateParams extends ApiRequestParams {
            * value for this parameter will unset the stored value for this payment method type.
            */
           @SerializedName("capture_method")
-          EnumParam captureMethod;
+          ApiRequestParams.EnumParam captureMethod;
 
           /**
            * Map of extra parameters for custom features not available in this client library. The
@@ -4714,13 +4862,13 @@ public class OrderCreateParams extends ApiRequestParams {
            * off_session}.
            */
           @SerializedName("setup_future_usage")
-          EnumParam setupFutureUsage;
+          ApiRequestParams.EnumParam setupFutureUsage;
 
           private Link(
-              EnumParam captureMethod,
+              ApiRequestParams.EnumParam captureMethod,
               Map<String, Object> extraParams,
               String persistentToken,
-              EnumParam setupFutureUsage) {
+              ApiRequestParams.EnumParam setupFutureUsage) {
             this.captureMethod = captureMethod;
             this.extraParams = extraParams;
             this.persistentToken = persistentToken;
@@ -4732,17 +4880,17 @@ public class OrderCreateParams extends ApiRequestParams {
           }
 
           public static class Builder {
-            private EnumParam captureMethod;
+            private ApiRequestParams.EnumParam captureMethod;
 
             private Map<String, Object> extraParams;
 
             private String persistentToken;
 
-            private EnumParam setupFutureUsage;
+            private ApiRequestParams.EnumParam setupFutureUsage;
 
             /** Finalize and obtain parameter instance from this builder. */
-            public Link build() {
-              return new Link(
+            public OrderCreateParams.Payment.Settings.PaymentMethodOptions.Link build() {
+              return new OrderCreateParams.Payment.Settings.PaymentMethodOptions.Link(
                   this.captureMethod,
                   this.extraParams,
                   this.persistentToken,
@@ -4758,7 +4906,9 @@ public class OrderCreateParams extends ApiRequestParams {
              * <p>If {@code capture_method} is already set on the PaymentIntent, providing an empty
              * value for this parameter will unset the stored value for this payment method type.
              */
-            public Builder setCaptureMethod(CaptureMethod captureMethod) {
+            public Builder setCaptureMethod(
+                OrderCreateParams.Payment.Settings.PaymentMethodOptions.Link.CaptureMethod
+                    captureMethod) {
               this.captureMethod = captureMethod;
               return this;
             }
@@ -4834,7 +4984,9 @@ public class OrderCreateParams extends ApiRequestParams {
              * using a publishable key, you may only update the value from {@code on_session} to
              * {@code off_session}.
              */
-            public Builder setSetupFutureUsage(SetupFutureUsage setupFutureUsage) {
+            public Builder setSetupFutureUsage(
+                OrderCreateParams.Payment.Settings.PaymentMethodOptions.Link.SetupFutureUsage
+                    setupFutureUsage) {
               this.setupFutureUsage = setupFutureUsage;
               return this;
             }
@@ -4959,8 +5111,9 @@ public class OrderCreateParams extends ApiRequestParams {
             private SetupFutureUsage setupFutureUsage;
 
             /** Finalize and obtain parameter instance from this builder. */
-            public Oxxo build() {
-              return new Oxxo(this.expiresAfterDays, this.extraParams, this.setupFutureUsage);
+            public OrderCreateParams.Payment.Settings.PaymentMethodOptions.Oxxo build() {
+              return new OrderCreateParams.Payment.Settings.PaymentMethodOptions.Oxxo(
+                  this.expiresAfterDays, this.extraParams, this.setupFutureUsage);
             }
 
             /**
@@ -5024,7 +5177,9 @@ public class OrderCreateParams extends ApiRequestParams {
              * using a publishable key, you may only update the value from {@code on_session} to
              * {@code off_session}.
              */
-            public Builder setSetupFutureUsage(SetupFutureUsage setupFutureUsage) {
+            public Builder setSetupFutureUsage(
+                OrderCreateParams.Payment.Settings.PaymentMethodOptions.Oxxo.SetupFutureUsage
+                    setupFutureUsage) {
               this.setupFutureUsage = setupFutureUsage;
               return this;
             }
@@ -5104,8 +5259,9 @@ public class OrderCreateParams extends ApiRequestParams {
             private Boolean tosShownAndAccepted;
 
             /** Finalize and obtain parameter instance from this builder. */
-            public P24 build() {
-              return new P24(this.extraParams, this.setupFutureUsage, this.tosShownAndAccepted);
+            public OrderCreateParams.Payment.Settings.PaymentMethodOptions.P24 build() {
+              return new OrderCreateParams.Payment.Settings.PaymentMethodOptions.P24(
+                  this.extraParams, this.setupFutureUsage, this.tosShownAndAccepted);
             }
 
             /**
@@ -5159,7 +5315,9 @@ public class OrderCreateParams extends ApiRequestParams {
              * using a publishable key, you may only update the value from {@code on_session} to
              * {@code off_session}.
              */
-            public Builder setSetupFutureUsage(SetupFutureUsage setupFutureUsage) {
+            public Builder setSetupFutureUsage(
+                OrderCreateParams.Payment.Settings.PaymentMethodOptions.P24.SetupFutureUsage
+                    setupFutureUsage) {
               this.setupFutureUsage = setupFutureUsage;
               return this;
             }
@@ -5179,6 +5337,185 @@ public class OrderCreateParams extends ApiRequestParams {
             private final String value;
 
             SetupFutureUsage(String value) {
+              this.value = value;
+            }
+          }
+        }
+
+        @Getter
+        public static class Paypal {
+          @SerializedName("capture_method")
+          ApiRequestParams.EnumParam captureMethod;
+
+          /**
+           * Map of extra parameters for custom features not available in this client library. The
+           * content in this map is not serialized under this field's {@code @SerializedName} value.
+           * Instead, each key/value pair is serialized as if the key is a root-level field
+           * (serialized) name in this param object. Effectively, this map is flattened to its
+           * parent instance.
+           */
+          @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
+          Map<String, Object> extraParams;
+
+          @SerializedName("preferred_locale")
+          PreferredLocale preferredLocale;
+
+          private Paypal(
+              ApiRequestParams.EnumParam captureMethod,
+              Map<String, Object> extraParams,
+              PreferredLocale preferredLocale) {
+            this.captureMethod = captureMethod;
+            this.extraParams = extraParams;
+            this.preferredLocale = preferredLocale;
+          }
+
+          public static Builder builder() {
+            return new Builder();
+          }
+
+          public static class Builder {
+            private ApiRequestParams.EnumParam captureMethod;
+
+            private Map<String, Object> extraParams;
+
+            private PreferredLocale preferredLocale;
+
+            /** Finalize and obtain parameter instance from this builder. */
+            public OrderCreateParams.Payment.Settings.PaymentMethodOptions.Paypal build() {
+              return new OrderCreateParams.Payment.Settings.PaymentMethodOptions.Paypal(
+                  this.captureMethod, this.extraParams, this.preferredLocale);
+            }
+
+            public Builder setCaptureMethod(
+                OrderCreateParams.Payment.Settings.PaymentMethodOptions.Paypal.CaptureMethod
+                    captureMethod) {
+              this.captureMethod = captureMethod;
+              return this;
+            }
+
+            public Builder setCaptureMethod(EmptyParam captureMethod) {
+              this.captureMethod = captureMethod;
+              return this;
+            }
+
+            /**
+             * Add a key/value pair to `extraParams` map. A map is initialized for the first
+             * `put/putAll` call, and subsequent calls add additional key/value pairs to the
+             * original map. See {@link
+             * OrderCreateParams.Payment.Settings.PaymentMethodOptions.Paypal#extraParams} for the
+             * field documentation.
+             */
+            public Builder putExtraParam(String key, Object value) {
+              if (this.extraParams == null) {
+                this.extraParams = new HashMap<>();
+              }
+              this.extraParams.put(key, value);
+              return this;
+            }
+
+            /**
+             * Add all map key/value pairs to `extraParams` map. A map is initialized for the first
+             * `put/putAll` call, and subsequent calls add additional key/value pairs to the
+             * original map. See {@link
+             * OrderCreateParams.Payment.Settings.PaymentMethodOptions.Paypal#extraParams} for the
+             * field documentation.
+             */
+            public Builder putAllExtraParam(Map<String, Object> map) {
+              if (this.extraParams == null) {
+                this.extraParams = new HashMap<>();
+              }
+              this.extraParams.putAll(map);
+              return this;
+            }
+
+            public Builder setPreferredLocale(
+                OrderCreateParams.Payment.Settings.PaymentMethodOptions.Paypal.PreferredLocale
+                    preferredLocale) {
+              this.preferredLocale = preferredLocale;
+              return this;
+            }
+          }
+
+          public enum CaptureMethod implements ApiRequestParams.EnumParam {
+            @SerializedName("manual")
+            MANUAL("manual");
+
+            @Getter(onMethod_ = {@Override})
+            private final String value;
+
+            CaptureMethod(String value) {
+              this.value = value;
+            }
+          }
+
+          public enum PreferredLocale implements ApiRequestParams.EnumParam {
+            @SerializedName("cs_CZ")
+            CS_CZ("cs_CZ"),
+
+            @SerializedName("da_DK")
+            DA_DK("da_DK"),
+
+            @SerializedName("de_AT")
+            DE_AT("de_AT"),
+
+            @SerializedName("de_DE")
+            DE_DE("de_DE"),
+
+            @SerializedName("de_LU")
+            DE_LU("de_LU"),
+
+            @SerializedName("el_GR")
+            EL_GR("el_GR"),
+
+            @SerializedName("en_GB")
+            EN_GB("en_GB"),
+
+            @SerializedName("en_US")
+            EN_US("en_US"),
+
+            @SerializedName("es_ES")
+            ES_ES("es_ES"),
+
+            @SerializedName("fi_FI")
+            FI_FI("fi_FI"),
+
+            @SerializedName("fr_BE")
+            FR_BE("fr_BE"),
+
+            @SerializedName("fr_FR")
+            FR_FR("fr_FR"),
+
+            @SerializedName("fr_LU")
+            FR_LU("fr_LU"),
+
+            @SerializedName("hu_HU")
+            HU_HU("hu_HU"),
+
+            @SerializedName("it_IT")
+            IT_IT("it_IT"),
+
+            @SerializedName("nl_BE")
+            NL_BE("nl_BE"),
+
+            @SerializedName("nl_NL")
+            NL_NL("nl_NL"),
+
+            @SerializedName("pl_PL")
+            PL_PL("pl_PL"),
+
+            @SerializedName("pt_PT")
+            PT_PT("pt_PT"),
+
+            @SerializedName("sk_SK")
+            SK_SK("sk_SK"),
+
+            @SerializedName("sv_SE")
+            SV_SE("sv_SE");
+
+            @Getter(onMethod_ = {@Override})
+            private final String value;
+
+            PreferredLocale(String value) {
               this.value = value;
             }
           }
@@ -5222,12 +5559,12 @@ public class OrderCreateParams extends ApiRequestParams {
            * off_session}.
            */
           @SerializedName("setup_future_usage")
-          EnumParam setupFutureUsage;
+          ApiRequestParams.EnumParam setupFutureUsage;
 
           private SepaDebit(
               Map<String, Object> extraParams,
               MandateOptions mandateOptions,
-              EnumParam setupFutureUsage) {
+              ApiRequestParams.EnumParam setupFutureUsage) {
             this.extraParams = extraParams;
             this.mandateOptions = mandateOptions;
             this.setupFutureUsage = setupFutureUsage;
@@ -5242,11 +5579,12 @@ public class OrderCreateParams extends ApiRequestParams {
 
             private MandateOptions mandateOptions;
 
-            private EnumParam setupFutureUsage;
+            private ApiRequestParams.EnumParam setupFutureUsage;
 
             /** Finalize and obtain parameter instance from this builder. */
-            public SepaDebit build() {
-              return new SepaDebit(this.extraParams, this.mandateOptions, this.setupFutureUsage);
+            public OrderCreateParams.Payment.Settings.PaymentMethodOptions.SepaDebit build() {
+              return new OrderCreateParams.Payment.Settings.PaymentMethodOptions.SepaDebit(
+                  this.extraParams, this.mandateOptions, this.setupFutureUsage);
             }
 
             /**
@@ -5280,7 +5618,9 @@ public class OrderCreateParams extends ApiRequestParams {
             }
 
             /** Additional fields for Mandate creation. */
-            public Builder setMandateOptions(MandateOptions mandateOptions) {
+            public Builder setMandateOptions(
+                OrderCreateParams.Payment.Settings.PaymentMethodOptions.SepaDebit.MandateOptions
+                    mandateOptions) {
               this.mandateOptions = mandateOptions;
               return this;
             }
@@ -5306,7 +5646,9 @@ public class OrderCreateParams extends ApiRequestParams {
              * using a publishable key, you may only update the value from {@code on_session} to
              * {@code off_session}.
              */
-            public Builder setSetupFutureUsage(SetupFutureUsage setupFutureUsage) {
+            public Builder setSetupFutureUsage(
+                OrderCreateParams.Payment.Settings.PaymentMethodOptions.SepaDebit.SetupFutureUsage
+                    setupFutureUsage) {
               this.setupFutureUsage = setupFutureUsage;
               return this;
             }
@@ -5362,8 +5704,11 @@ public class OrderCreateParams extends ApiRequestParams {
               private Map<String, Object> extraParams;
 
               /** Finalize and obtain parameter instance from this builder. */
-              public MandateOptions build() {
-                return new MandateOptions(this.extraParams);
+              public OrderCreateParams.Payment.Settings.PaymentMethodOptions.SepaDebit
+                      .MandateOptions
+                  build() {
+                return new OrderCreateParams.Payment.Settings.PaymentMethodOptions.SepaDebit
+                    .MandateOptions(this.extraParams);
               }
 
               /**
@@ -5431,7 +5776,7 @@ public class OrderCreateParams extends ApiRequestParams {
 
           /** Language shown to the payer on redirect. */
           @SerializedName("preferred_language")
-          EnumParam preferredLanguage;
+          ApiRequestParams.EnumParam preferredLanguage;
 
           /**
            * Indicates that you intend to make future payments with this PaymentIntent's payment
@@ -5455,12 +5800,12 @@ public class OrderCreateParams extends ApiRequestParams {
            * off_session}.
            */
           @SerializedName("setup_future_usage")
-          EnumParam setupFutureUsage;
+          ApiRequestParams.EnumParam setupFutureUsage;
 
           private Sofort(
               Map<String, Object> extraParams,
-              EnumParam preferredLanguage,
-              EnumParam setupFutureUsage) {
+              ApiRequestParams.EnumParam preferredLanguage,
+              ApiRequestParams.EnumParam setupFutureUsage) {
             this.extraParams = extraParams;
             this.preferredLanguage = preferredLanguage;
             this.setupFutureUsage = setupFutureUsage;
@@ -5473,13 +5818,14 @@ public class OrderCreateParams extends ApiRequestParams {
           public static class Builder {
             private Map<String, Object> extraParams;
 
-            private EnumParam preferredLanguage;
+            private ApiRequestParams.EnumParam preferredLanguage;
 
-            private EnumParam setupFutureUsage;
+            private ApiRequestParams.EnumParam setupFutureUsage;
 
             /** Finalize and obtain parameter instance from this builder. */
-            public Sofort build() {
-              return new Sofort(this.extraParams, this.preferredLanguage, this.setupFutureUsage);
+            public OrderCreateParams.Payment.Settings.PaymentMethodOptions.Sofort build() {
+              return new OrderCreateParams.Payment.Settings.PaymentMethodOptions.Sofort(
+                  this.extraParams, this.preferredLanguage, this.setupFutureUsage);
             }
 
             /**
@@ -5513,7 +5859,9 @@ public class OrderCreateParams extends ApiRequestParams {
             }
 
             /** Language shown to the payer on redirect. */
-            public Builder setPreferredLanguage(PreferredLanguage preferredLanguage) {
+            public Builder setPreferredLanguage(
+                OrderCreateParams.Payment.Settings.PaymentMethodOptions.Sofort.PreferredLanguage
+                    preferredLanguage) {
               this.preferredLanguage = preferredLanguage;
               return this;
             }
@@ -5545,7 +5893,9 @@ public class OrderCreateParams extends ApiRequestParams {
              * using a publishable key, you may only update the value from {@code on_session} to
              * {@code off_session}.
              */
-            public Builder setSetupFutureUsage(SetupFutureUsage setupFutureUsage) {
+            public Builder setSetupFutureUsage(
+                OrderCreateParams.Payment.Settings.PaymentMethodOptions.Sofort.SetupFutureUsage
+                    setupFutureUsage) {
               this.setupFutureUsage = setupFutureUsage;
               return this;
             }
@@ -5692,8 +6042,8 @@ public class OrderCreateParams extends ApiRequestParams {
             private SetupFutureUsage setupFutureUsage;
 
             /** Finalize and obtain parameter instance from this builder. */
-            public WechatPay build() {
-              return new WechatPay(
+            public OrderCreateParams.Payment.Settings.PaymentMethodOptions.WechatPay build() {
+              return new OrderCreateParams.Payment.Settings.PaymentMethodOptions.WechatPay(
                   this.appId, this.client, this.extraParams, this.setupFutureUsage);
             }
 
@@ -5706,7 +6056,8 @@ public class OrderCreateParams extends ApiRequestParams {
             }
 
             /** The client type that the end customer will pay from. */
-            public Builder setClient(Client client) {
+            public Builder setClient(
+                OrderCreateParams.Payment.Settings.PaymentMethodOptions.WechatPay.Client client) {
               this.client = client;
               return this;
             }
@@ -5762,7 +6113,9 @@ public class OrderCreateParams extends ApiRequestParams {
              * using a publishable key, you may only update the value from {@code on_session} to
              * {@code off_session}.
              */
-            public Builder setSetupFutureUsage(SetupFutureUsage setupFutureUsage) {
+            public Builder setSetupFutureUsage(
+                OrderCreateParams.Payment.Settings.PaymentMethodOptions.WechatPay.SetupFutureUsage
+                    setupFutureUsage) {
               this.setupFutureUsage = setupFutureUsage;
               return this;
             }
@@ -5842,8 +6195,9 @@ public class OrderCreateParams extends ApiRequestParams {
           private Map<String, Object> extraParams;
 
           /** Finalize and obtain parameter instance from this builder. */
-          public TransferData build() {
-            return new TransferData(this.amount, this.destination, this.extraParams);
+          public OrderCreateParams.Payment.Settings.TransferData build() {
+            return new OrderCreateParams.Payment.Settings.TransferData(
+                this.amount, this.destination, this.extraParams);
           }
 
           /**
@@ -5944,6 +6298,9 @@ public class OrderCreateParams extends ApiRequestParams {
         @SerializedName("p24")
         P24("p24"),
 
+        @SerializedName("paypal")
+        PAYPAL("paypal"),
+
         @SerializedName("sepa_debit")
         SEPA_DEBIT("sepa_debit"),
 
@@ -6001,8 +6358,9 @@ public class OrderCreateParams extends ApiRequestParams {
       private ShippingRateData shippingRateData;
 
       /** Finalize and obtain parameter instance from this builder. */
-      public ShippingCost build() {
-        return new ShippingCost(this.extraParams, this.shippingRate, this.shippingRateData);
+      public OrderCreateParams.ShippingCost build() {
+        return new OrderCreateParams.ShippingCost(
+            this.extraParams, this.shippingRate, this.shippingRateData);
       }
 
       /**
@@ -6038,7 +6396,8 @@ public class OrderCreateParams extends ApiRequestParams {
       }
 
       /** Parameters to create a new ad-hoc shipping rate for this order. */
-      public Builder setShippingRateData(ShippingRateData shippingRateData) {
+      public Builder setShippingRateData(
+          OrderCreateParams.ShippingCost.ShippingRateData shippingRateData) {
         this.shippingRateData = shippingRateData;
         return this;
       }
@@ -6147,8 +6506,8 @@ public class OrderCreateParams extends ApiRequestParams {
         private Type type;
 
         /** Finalize and obtain parameter instance from this builder. */
-        public ShippingRateData build() {
-          return new ShippingRateData(
+        public OrderCreateParams.ShippingCost.ShippingRateData build() {
+          return new OrderCreateParams.ShippingCost.ShippingRateData(
               this.deliveryEstimate,
               this.displayName,
               this.extraParams,
@@ -6163,7 +6522,8 @@ public class OrderCreateParams extends ApiRequestParams {
          * The estimated range for how long shipping will take, meant to be displayable to the
          * customer. This will appear on CheckoutSessions.
          */
-        public Builder setDeliveryEstimate(DeliveryEstimate deliveryEstimate) {
+        public Builder setDeliveryEstimate(
+            OrderCreateParams.ShippingCost.ShippingRateData.DeliveryEstimate deliveryEstimate) {
           this.deliveryEstimate = deliveryEstimate;
           return this;
         }
@@ -6209,7 +6569,8 @@ public class OrderCreateParams extends ApiRequestParams {
          * Describes a fixed amount to charge for shipping. Must be present if type is {@code
          * fixed_amount}.
          */
-        public Builder setFixedAmount(FixedAmount fixedAmount) {
+        public Builder setFixedAmount(
+            OrderCreateParams.ShippingCost.ShippingRateData.FixedAmount fixedAmount) {
           this.fixedAmount = fixedAmount;
           return this;
         }
@@ -6245,7 +6606,8 @@ public class OrderCreateParams extends ApiRequestParams {
          * Specifies whether the rate is considered inclusive of taxes or exclusive of taxes. One of
          * {@code inclusive}, {@code exclusive}, or {@code unspecified}.
          */
-        public Builder setTaxBehavior(TaxBehavior taxBehavior) {
+        public Builder setTaxBehavior(
+            OrderCreateParams.ShippingCost.ShippingRateData.TaxBehavior taxBehavior) {
           this.taxBehavior = taxBehavior;
           return this;
         }
@@ -6263,7 +6625,7 @@ public class OrderCreateParams extends ApiRequestParams {
          * The type of calculation to use on the shipping rate. Can only be {@code fixed_amount} for
          * now.
          */
-        public Builder setType(Type type) {
+        public Builder setType(OrderCreateParams.ShippingCost.ShippingRateData.Type type) {
           this.type = type;
           return this;
         }
@@ -6311,8 +6673,9 @@ public class OrderCreateParams extends ApiRequestParams {
           private Minimum minimum;
 
           /** Finalize and obtain parameter instance from this builder. */
-          public DeliveryEstimate build() {
-            return new DeliveryEstimate(this.extraParams, this.maximum, this.minimum);
+          public OrderCreateParams.ShippingCost.ShippingRateData.DeliveryEstimate build() {
+            return new OrderCreateParams.ShippingCost.ShippingRateData.DeliveryEstimate(
+                this.extraParams, this.maximum, this.minimum);
           }
 
           /**
@@ -6349,13 +6712,15 @@ public class OrderCreateParams extends ApiRequestParams {
            * The upper bound of the estimated range. If empty, represents no upper bound i.e.,
            * infinite.
            */
-          public Builder setMaximum(Maximum maximum) {
+          public Builder setMaximum(
+              OrderCreateParams.ShippingCost.ShippingRateData.DeliveryEstimate.Maximum maximum) {
             this.maximum = maximum;
             return this;
           }
 
           /** The lower bound of the estimated range. If empty, represents no lower bound. */
-          public Builder setMinimum(Minimum minimum) {
+          public Builder setMinimum(
+              OrderCreateParams.ShippingCost.ShippingRateData.DeliveryEstimate.Minimum minimum) {
             this.minimum = minimum;
             return this;
           }
@@ -6399,8 +6764,10 @@ public class OrderCreateParams extends ApiRequestParams {
             private Long value;
 
             /** Finalize and obtain parameter instance from this builder. */
-            public Maximum build() {
-              return new Maximum(this.extraParams, this.unit, this.value);
+            public OrderCreateParams.ShippingCost.ShippingRateData.DeliveryEstimate.Maximum
+                build() {
+              return new OrderCreateParams.ShippingCost.ShippingRateData.DeliveryEstimate.Maximum(
+                  this.extraParams, this.unit, this.value);
             }
 
             /**
@@ -6434,7 +6801,9 @@ public class OrderCreateParams extends ApiRequestParams {
             }
 
             /** A unit of time. */
-            public Builder setUnit(Unit unit) {
+            public Builder setUnit(
+                OrderCreateParams.ShippingCost.ShippingRateData.DeliveryEstimate.Maximum.Unit
+                    unit) {
               this.unit = unit;
               return this;
             }
@@ -6509,8 +6878,10 @@ public class OrderCreateParams extends ApiRequestParams {
             private Long value;
 
             /** Finalize and obtain parameter instance from this builder. */
-            public Minimum build() {
-              return new Minimum(this.extraParams, this.unit, this.value);
+            public OrderCreateParams.ShippingCost.ShippingRateData.DeliveryEstimate.Minimum
+                build() {
+              return new OrderCreateParams.ShippingCost.ShippingRateData.DeliveryEstimate.Minimum(
+                  this.extraParams, this.unit, this.value);
             }
 
             /**
@@ -6544,7 +6915,9 @@ public class OrderCreateParams extends ApiRequestParams {
             }
 
             /** A unit of time. */
-            public Builder setUnit(Unit unit) {
+            public Builder setUnit(
+                OrderCreateParams.ShippingCost.ShippingRateData.DeliveryEstimate.Minimum.Unit
+                    unit) {
               this.unit = unit;
               return this;
             }
@@ -6602,7 +6975,8 @@ public class OrderCreateParams extends ApiRequestParams {
          * href="https://stripe.com/docs/currencies">supported currency</a>.
          */
         @SerializedName("currency_options")
-        Map<String, CurrencyOption> currencyOptions;
+        Map<String, OrderCreateParams.ShippingCost.ShippingRateData.FixedAmount.CurrencyOption>
+            currencyOptions;
 
         /**
          * Map of extra parameters for custom features not available in this client library. The
@@ -6617,7 +6991,8 @@ public class OrderCreateParams extends ApiRequestParams {
         private FixedAmount(
             Long amount,
             String currency,
-            Map<String, CurrencyOption> currencyOptions,
+            Map<String, OrderCreateParams.ShippingCost.ShippingRateData.FixedAmount.CurrencyOption>
+                currencyOptions,
             Map<String, Object> extraParams) {
           this.amount = amount;
           this.currency = currency;
@@ -6634,13 +7009,16 @@ public class OrderCreateParams extends ApiRequestParams {
 
           private String currency;
 
-          private Map<String, CurrencyOption> currencyOptions;
+          private Map<
+                  String,
+                  OrderCreateParams.ShippingCost.ShippingRateData.FixedAmount.CurrencyOption>
+              currencyOptions;
 
           private Map<String, Object> extraParams;
 
           /** Finalize and obtain parameter instance from this builder. */
-          public FixedAmount build() {
-            return new FixedAmount(
+          public OrderCreateParams.ShippingCost.ShippingRateData.FixedAmount build() {
+            return new OrderCreateParams.ShippingCost.ShippingRateData.FixedAmount(
                 this.amount, this.currency, this.currencyOptions, this.extraParams);
           }
 
@@ -6667,7 +7045,9 @@ public class OrderCreateParams extends ApiRequestParams {
            * OrderCreateParams.ShippingCost.ShippingRateData.FixedAmount#currencyOptions} for the
            * field documentation.
            */
-          public Builder putCurrencyOption(String key, CurrencyOption value) {
+          public Builder putCurrencyOption(
+              String key,
+              OrderCreateParams.ShippingCost.ShippingRateData.FixedAmount.CurrencyOption value) {
             if (this.currencyOptions == null) {
               this.currencyOptions = new HashMap<>();
             }
@@ -6682,7 +7062,11 @@ public class OrderCreateParams extends ApiRequestParams {
            * OrderCreateParams.ShippingCost.ShippingRateData.FixedAmount#currencyOptions} for the
            * field documentation.
            */
-          public Builder putAllCurrencyOption(Map<String, CurrencyOption> map) {
+          public Builder putAllCurrencyOption(
+              Map<
+                      String,
+                      OrderCreateParams.ShippingCost.ShippingRateData.FixedAmount.CurrencyOption>
+                  map) {
             if (this.currencyOptions == null) {
               this.currencyOptions = new HashMap<>();
             }
@@ -6763,8 +7147,10 @@ public class OrderCreateParams extends ApiRequestParams {
             private TaxBehavior taxBehavior;
 
             /** Finalize and obtain parameter instance from this builder. */
-            public CurrencyOption build() {
-              return new CurrencyOption(this.amount, this.extraParams, this.taxBehavior);
+            public OrderCreateParams.ShippingCost.ShippingRateData.FixedAmount.CurrencyOption
+                build() {
+              return new OrderCreateParams.ShippingCost.ShippingRateData.FixedAmount.CurrencyOption(
+                  this.amount, this.extraParams, this.taxBehavior);
             }
 
             /** A non-negative integer in cents representing how much to charge. */
@@ -6807,7 +7193,10 @@ public class OrderCreateParams extends ApiRequestParams {
              * Specifies whether the rate is considered inclusive of taxes or exclusive of taxes.
              * One of {@code inclusive}, {@code exclusive}, or {@code unspecified}.
              */
-            public Builder setTaxBehavior(TaxBehavior taxBehavior) {
+            public Builder setTaxBehavior(
+                OrderCreateParams.ShippingCost.ShippingRateData.FixedAmount.CurrencyOption
+                        .TaxBehavior
+                    taxBehavior) {
               this.taxBehavior = taxBehavior;
               return this;
             }
@@ -6910,12 +7299,13 @@ public class OrderCreateParams extends ApiRequestParams {
       private String phone;
 
       /** Finalize and obtain parameter instance from this builder. */
-      public ShippingDetails build() {
-        return new ShippingDetails(this.address, this.extraParams, this.name, this.phone);
+      public OrderCreateParams.ShippingDetails build() {
+        return new OrderCreateParams.ShippingDetails(
+            this.address, this.extraParams, this.name, this.phone);
       }
 
       /** The shipping address for the order. */
-      public Builder setAddress(Address address) {
+      public Builder setAddress(OrderCreateParams.ShippingDetails.Address address) {
         this.address = address;
         return this;
       }
@@ -7037,8 +7427,8 @@ public class OrderCreateParams extends ApiRequestParams {
         private String state;
 
         /** Finalize and obtain parameter instance from this builder. */
-        public Address build() {
-          return new Address(
+        public OrderCreateParams.ShippingDetails.Address build() {
+          return new OrderCreateParams.ShippingDetails.Address(
               this.city,
               this.country,
               this.extraParams,
@@ -7137,13 +7527,16 @@ public class OrderCreateParams extends ApiRequestParams {
      * reverse}.
      */
     @SerializedName("tax_exempt")
-    EnumParam taxExempt;
+    ApiRequestParams.EnumParam taxExempt;
 
     /** The purchaser's tax IDs to be used for this order. */
     @SerializedName("tax_ids")
-    List<TaxId> taxIds;
+    List<OrderCreateParams.TaxDetails.TaxId> taxIds;
 
-    private TaxDetails(Map<String, Object> extraParams, EnumParam taxExempt, List<TaxId> taxIds) {
+    private TaxDetails(
+        Map<String, Object> extraParams,
+        ApiRequestParams.EnumParam taxExempt,
+        List<OrderCreateParams.TaxDetails.TaxId> taxIds) {
       this.extraParams = extraParams;
       this.taxExempt = taxExempt;
       this.taxIds = taxIds;
@@ -7156,13 +7549,13 @@ public class OrderCreateParams extends ApiRequestParams {
     public static class Builder {
       private Map<String, Object> extraParams;
 
-      private EnumParam taxExempt;
+      private ApiRequestParams.EnumParam taxExempt;
 
-      private List<TaxId> taxIds;
+      private List<OrderCreateParams.TaxDetails.TaxId> taxIds;
 
       /** Finalize and obtain parameter instance from this builder. */
-      public TaxDetails build() {
-        return new TaxDetails(this.extraParams, this.taxExempt, this.taxIds);
+      public OrderCreateParams.TaxDetails build() {
+        return new OrderCreateParams.TaxDetails(this.extraParams, this.taxExempt, this.taxIds);
       }
 
       /**
@@ -7195,7 +7588,7 @@ public class OrderCreateParams extends ApiRequestParams {
        * The purchaser's tax exemption status. One of {@code none}, {@code exempt}, or {@code
        * reverse}.
        */
-      public Builder setTaxExempt(TaxExempt taxExempt) {
+      public Builder setTaxExempt(OrderCreateParams.TaxDetails.TaxExempt taxExempt) {
         this.taxExempt = taxExempt;
         return this;
       }
@@ -7214,7 +7607,7 @@ public class OrderCreateParams extends ApiRequestParams {
        * subsequent calls adds additional elements to the original list. See {@link
        * OrderCreateParams.TaxDetails#taxIds} for the field documentation.
        */
-      public Builder addTaxId(TaxId element) {
+      public Builder addTaxId(OrderCreateParams.TaxDetails.TaxId element) {
         if (this.taxIds == null) {
           this.taxIds = new ArrayList<>();
         }
@@ -7227,7 +7620,7 @@ public class OrderCreateParams extends ApiRequestParams {
        * and subsequent calls adds additional elements to the original list. See {@link
        * OrderCreateParams.TaxDetails#taxIds} for the field documentation.
        */
-      public Builder addAllTaxId(List<TaxId> elements) {
+      public Builder addAllTaxId(List<OrderCreateParams.TaxDetails.TaxId> elements) {
         if (this.taxIds == null) {
           this.taxIds = new ArrayList<>();
         }
@@ -7283,8 +7676,8 @@ public class OrderCreateParams extends ApiRequestParams {
         private String value;
 
         /** Finalize and obtain parameter instance from this builder. */
-        public TaxId build() {
-          return new TaxId(this.extraParams, this.type, this.value);
+        public OrderCreateParams.TaxDetails.TaxId build() {
+          return new OrderCreateParams.TaxDetails.TaxId(this.extraParams, this.type, this.value);
         }
 
         /**
@@ -7327,7 +7720,7 @@ public class OrderCreateParams extends ApiRequestParams {
          * si_tin}, {@code th_vat}, {@code tw_vat}, {@code ua_vat}, {@code us_ein}, or {@code
          * za_vat}.
          */
-        public Builder setType(Type type) {
+        public Builder setType(OrderCreateParams.TaxDetails.TaxId.Type type) {
           this.type = type;
           return this;
         }

@@ -621,6 +621,9 @@ public class WebhookEndpointCreateParams extends ApiRequestParams {
     @SerializedName("capability.updated")
     CAPABILITY__UPDATED("capability.updated"),
 
+    @SerializedName("capital.financing_transaction.created")
+    CAPITAL__FINANCING_TRANSACTION__CREATED("capital.financing_transaction.created"),
+
     @SerializedName("cash_balance.funds_available")
     CASH_BALANCE__FUNDS_AVAILABLE("cash_balance.funds_available"),
 

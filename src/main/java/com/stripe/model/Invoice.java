@@ -15,6 +15,7 @@ import com.stripe.param.InvoicePayParams;
 import com.stripe.param.InvoiceRetrieveParams;
 import com.stripe.param.InvoiceSearchParams;
 import com.stripe.param.InvoiceSendInvoiceParams;
+import com.stripe.param.InvoiceUpcomingLinesParams;
 import com.stripe.param.InvoiceUpcomingParams;
 import com.stripe.param.InvoiceUpdateParams;
 import com.stripe.param.InvoiceVoidInvoiceParams;
@@ -317,6 +318,14 @@ public class Invoice extends ApiResource implements HasId, MetadataStore<Invoice
   String footer;
 
   /**
+   * Details of the invoice that was cloned. See the <a
+   * href="https://stripe.com/docs/invoicing/invoice-revisions">revision documentation</a> for more
+   * details.
+   */
+  @SerializedName("from_invoice")
+  FromInvoice fromInvoice;
+
+  /**
    * The URL for the hosted invoice page, which allows customers to view and pay an invoice. If the
    * invoice has not been finalized yet, this will be null.
    */
@@ -341,6 +350,12 @@ public class Invoice extends ApiResource implements HasId, MetadataStore<Invoice
    */
   @SerializedName("last_finalization_error")
   StripeError lastFinalizationError;
+
+  /** The ID of the most recent non-draft revision of this invoice. */
+  @SerializedName("latest_revision")
+  @Getter(lombok.AccessLevel.NONE)
+  @Setter(lombok.AccessLevel.NONE)
+  ExpandableField<Invoice> latestRevision;
 
   /**
    * The individual line items that make up the invoice. {@code lines} is sorted as follows: invoice
@@ -522,7 +537,7 @@ public class Invoice extends ApiResource implements HasId, MetadataStore<Invoice
 
   /** The aggregate amounts calculated per discount across all line items. */
   @SerializedName("total_discount_amounts")
-  List<DiscountAmount> totalDiscountAmounts;
+  List<Invoice.DiscountAmount> totalDiscountAmounts;
 
   /**
    * The integer amount in %s representing the total amount of the invoice including all discounts
@@ -642,6 +657,24 @@ public class Invoice extends ApiResource implements HasId, MetadataStore<Invoice
   public void setDefaultSourceObject(PaymentSource expandableObject) {
     this.defaultSource =
         new ExpandableField<PaymentSource>(expandableObject.getId(), expandableObject);
+  }
+
+  /** Get ID of expandable {@code latestRevision} object. */
+  public String getLatestRevision() {
+    return (this.latestRevision != null) ? this.latestRevision.getId() : null;
+  }
+
+  public void setLatestRevision(String id) {
+    this.latestRevision = ApiResource.setExpandableFieldId(id, this.latestRevision);
+  }
+
+  /** Get expanded {@code latestRevision}. */
+  public Invoice getLatestRevisionObject() {
+    return (this.latestRevision != null) ? this.latestRevision.getExpanded() : null;
+  }
+
+  public void setLatestRevisionObject(Invoice expandableObject) {
+    this.latestRevision = new ExpandableField<Invoice>(expandableObject.getId(), expandableObject);
   }
 
   /** Get ID of expandable {@code onBehalfOf} object. */
@@ -1450,6 +1483,57 @@ public class Invoice extends ApiResource implements HasId, MetadataStore<Invoice
   }
 
   /**
+   * When retrieving an upcoming invoice, you’ll get a <strong>lines</strong> property containing
+   * the total count of line items and the first handful of those items. There is also a URL where
+   * you can retrieve the full (paginated) list of line items.
+   */
+  public static InvoiceLineItemCollection upcomingLines() throws StripeException {
+    return upcomingLines((Map<String, Object>) null, (RequestOptions) null);
+  }
+
+  /**
+   * When retrieving an upcoming invoice, you’ll get a <strong>lines</strong> property containing
+   * the total count of line items and the first handful of those items. There is also a URL where
+   * you can retrieve the full (paginated) list of line items.
+   */
+  public static InvoiceLineItemCollection upcomingLines(Map<String, Object> params)
+      throws StripeException {
+    return upcomingLines(params, (RequestOptions) null);
+  }
+
+  /**
+   * When retrieving an upcoming invoice, you’ll get a <strong>lines</strong> property containing
+   * the total count of line items and the first handful of those items. There is also a URL where
+   * you can retrieve the full (paginated) list of line items.
+   */
+  public static InvoiceLineItemCollection upcomingLines(
+      Map<String, Object> params, RequestOptions options) throws StripeException {
+    String url = String.format("%s%s", Stripe.getApiBase(), "/v1/invoices/upcoming/lines");
+    return ApiResource.requestCollection(url, params, InvoiceLineItemCollection.class, options);
+  }
+
+  /**
+   * When retrieving an upcoming invoice, you’ll get a <strong>lines</strong> property containing
+   * the total count of line items and the first handful of those items. There is also a URL where
+   * you can retrieve the full (paginated) list of line items.
+   */
+  public static InvoiceLineItemCollection upcomingLines(InvoiceUpcomingLinesParams params)
+      throws StripeException {
+    return upcomingLines(params, (RequestOptions) null);
+  }
+
+  /**
+   * When retrieving an upcoming invoice, you’ll get a <strong>lines</strong> property containing
+   * the total count of line items and the first handful of those items. There is also a URL where
+   * you can retrieve the full (paginated) list of line items.
+   */
+  public static InvoiceLineItemCollection upcomingLines(
+      InvoiceUpcomingLinesParams params, RequestOptions options) throws StripeException {
+    String url = String.format("%s%s", Stripe.getApiBase(), "/v1/invoices/upcoming/lines");
+    return ApiResource.requestCollection(url, params, InvoiceLineItemCollection.class, options);
+  }
+
+  /**
    * Draft invoices are fully editable. Once an invoice is <a
    * href="https://stripe.com/docs/billing/invoices/workflow#finalized">finalized</a>, monetary
    * values, as well as <code>collection_method</code>, become uneditable.
@@ -1671,6 +1755,39 @@ public class Invoice extends ApiResource implements HasId, MetadataStore<Invoice
 
     public void setDiscountObject(Discount expandableObject) {
       this.discount = new ExpandableField<Discount>(expandableObject.getId(), expandableObject);
+    }
+  }
+
+  @Getter
+  @Setter
+  @EqualsAndHashCode(callSuper = false)
+  public static class FromInvoice extends StripeObject {
+    /** The relation between this invoice and the cloned invoice. */
+    @SerializedName("action")
+    String action;
+
+    /** The invoice that was cloned. */
+    @SerializedName("invoice")
+    @Getter(lombok.AccessLevel.NONE)
+    @Setter(lombok.AccessLevel.NONE)
+    ExpandableField<Invoice> invoice;
+
+    /** Get ID of expandable {@code invoice} object. */
+    public String getInvoice() {
+      return (this.invoice != null) ? this.invoice.getId() : null;
+    }
+
+    public void setInvoice(String id) {
+      this.invoice = ApiResource.setExpandableFieldId(id, this.invoice);
+    }
+
+    /** Get expanded {@code invoice}. */
+    public Invoice getInvoiceObject() {
+      return (this.invoice != null) ? this.invoice.getExpanded() : null;
+    }
+
+    public void setInvoiceObject(Invoice expandableObject) {
+      this.invoice = new ExpandableField<Invoice>(expandableObject.getId(), expandableObject);
     }
   }
 

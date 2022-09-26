@@ -238,7 +238,7 @@ public class SubscriptionItemUpdateParams extends ApiRequestParams {
      * SubscriptionItemUpdateParams#discounts} for the field documentation.
      */
     @SuppressWarnings("unchecked")
-    public Builder addDiscount(Discount element) {
+    public Builder addDiscount(SubscriptionItemUpdateParams.Discount element) {
       if (this.discounts == null || this.discounts instanceof EmptyParam) {
         this.discounts = new ArrayList<SubscriptionItemUpdateParams.Discount>();
       }
@@ -252,7 +252,7 @@ public class SubscriptionItemUpdateParams extends ApiRequestParams {
      * SubscriptionItemUpdateParams#discounts} for the field documentation.
      */
     @SuppressWarnings("unchecked")
-    public Builder addAllDiscount(List<Discount> elements) {
+    public Builder addAllDiscount(List<SubscriptionItemUpdateParams.Discount> elements) {
       if (this.discounts == null || this.discounts instanceof EmptyParam) {
         this.discounts = new ArrayList<SubscriptionItemUpdateParams.Discount>();
       }
@@ -267,7 +267,7 @@ public class SubscriptionItemUpdateParams extends ApiRequestParams {
     }
 
     /** The coupons to redeem into discounts for the subscription item. */
-    public Builder setDiscounts(List<Discount> discounts) {
+    public Builder setDiscounts(List<SubscriptionItemUpdateParams.Discount> discounts) {
       this.discounts = discounts;
       return this;
     }
@@ -640,8 +640,9 @@ public class SubscriptionItemUpdateParams extends ApiRequestParams {
       private Map<String, Object> extraParams;
 
       /** Finalize and obtain parameter instance from this builder. */
-      public Discount build() {
-        return new Discount(this.coupon, this.discount, this.extraParams);
+      public SubscriptionItemUpdateParams.Discount build() {
+        return new SubscriptionItemUpdateParams.Discount(
+            this.coupon, this.discount, this.extraParams);
       }
 
       /** ID of the coupon to create a new discount for. */

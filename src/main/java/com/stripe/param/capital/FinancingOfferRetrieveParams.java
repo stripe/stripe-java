@@ -1,5 +1,5 @@
 // File generated from our OpenAPI spec
-package com.stripe.param.giftcards;
+package com.stripe.param.capital;
 
 import com.google.gson.annotations.SerializedName;
 import com.stripe.net.ApiRequestParams;
@@ -10,11 +10,7 @@ import java.util.Map;
 import lombok.Getter;
 
 @Getter
-public class CardValidateParams extends ApiRequestParams {
-  /** The gift card code to be validated. */
-  @SerializedName("code")
-  String code;
-
+public class FinancingOfferRetrieveParams extends ApiRequestParams {
   /** Specifies which fields in the response should be expanded. */
   @SerializedName("expand")
   List<String> expand;
@@ -28,16 +24,9 @@ public class CardValidateParams extends ApiRequestParams {
   @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
   Map<String, Object> extraParams;
 
-  /** The pin associated with the gift card. Not all gift cards have pins. */
-  @SerializedName("giftcard_pin")
-  String giftcardPin;
-
-  private CardValidateParams(
-      String code, List<String> expand, Map<String, Object> extraParams, String giftcardPin) {
-    this.code = code;
+  private FinancingOfferRetrieveParams(List<String> expand, Map<String, Object> extraParams) {
     this.expand = expand;
     this.extraParams = extraParams;
-    this.giftcardPin = giftcardPin;
   }
 
   public static Builder builder() {
@@ -45,29 +34,19 @@ public class CardValidateParams extends ApiRequestParams {
   }
 
   public static class Builder {
-    private String code;
-
     private List<String> expand;
 
     private Map<String, Object> extraParams;
 
-    private String giftcardPin;
-
     /** Finalize and obtain parameter instance from this builder. */
-    public CardValidateParams build() {
-      return new CardValidateParams(this.code, this.expand, this.extraParams, this.giftcardPin);
-    }
-
-    /** The gift card code to be validated. */
-    public Builder setCode(String code) {
-      this.code = code;
-      return this;
+    public FinancingOfferRetrieveParams build() {
+      return new FinancingOfferRetrieveParams(this.expand, this.extraParams);
     }
 
     /**
      * Add an element to `expand` list. A list is initialized for the first `add/addAll` call, and
      * subsequent calls adds additional elements to the original list. See {@link
-     * CardValidateParams#expand} for the field documentation.
+     * FinancingOfferRetrieveParams#expand} for the field documentation.
      */
     public Builder addExpand(String element) {
       if (this.expand == null) {
@@ -80,7 +59,7 @@ public class CardValidateParams extends ApiRequestParams {
     /**
      * Add all elements to `expand` list. A list is initialized for the first `add/addAll` call, and
      * subsequent calls adds additional elements to the original list. See {@link
-     * CardValidateParams#expand} for the field documentation.
+     * FinancingOfferRetrieveParams#expand} for the field documentation.
      */
     public Builder addAllExpand(List<String> elements) {
       if (this.expand == null) {
@@ -93,7 +72,7 @@ public class CardValidateParams extends ApiRequestParams {
     /**
      * Add a key/value pair to `extraParams` map. A map is initialized for the first `put/putAll`
      * call, and subsequent calls add additional key/value pairs to the original map. See {@link
-     * CardValidateParams#extraParams} for the field documentation.
+     * FinancingOfferRetrieveParams#extraParams} for the field documentation.
      */
     public Builder putExtraParam(String key, Object value) {
       if (this.extraParams == null) {
@@ -106,19 +85,13 @@ public class CardValidateParams extends ApiRequestParams {
     /**
      * Add all map key/value pairs to `extraParams` map. A map is initialized for the first
      * `put/putAll` call, and subsequent calls add additional key/value pairs to the original map.
-     * See {@link CardValidateParams#extraParams} for the field documentation.
+     * See {@link FinancingOfferRetrieveParams#extraParams} for the field documentation.
      */
     public Builder putAllExtraParam(Map<String, Object> map) {
       if (this.extraParams == null) {
         this.extraParams = new HashMap<>();
       }
       this.extraParams.putAll(map);
-      return this;
-    }
-
-    /** The pin associated with the gift card. Not all gift cards have pins. */
-    public Builder setGiftcardPin(String giftcardPin) {
-      this.giftcardPin = giftcardPin;
       return this;
     }
   }

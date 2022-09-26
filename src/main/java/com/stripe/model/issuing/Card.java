@@ -388,6 +388,14 @@ public class Card extends ApiResource implements HasId, MetadataStore<Card> {
     String phoneNumber;
 
     /**
+     * Whether a signature is required for card delivery. This feature is only supported for US
+     * users. Standard shipping service does not support signature on delivery. The default value
+     * for standard shipping service is false and for express and priority services is true.
+     */
+    @SerializedName("require_signature")
+    Boolean requireSignature;
+
+    /**
      * Shipment service, such as {@code standard} or {@code express}.
      *
      * <p>One of {@code express}, {@code priority}, or {@code standard}.

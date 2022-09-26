@@ -3425,6 +3425,10 @@ public class SessionCreateParams extends ApiRequestParams {
     @SerializedName("paynow")
     Paynow paynow;
 
+    /** contains details about the PayPal payment method options. */
+    @SerializedName("paypal")
+    Paypal paypal;
+
     /** contains details about the Pix payment method options. */
     @SerializedName("pix")
     Pix pix;
@@ -3467,6 +3471,7 @@ public class SessionCreateParams extends ApiRequestParams {
         Oxxo oxxo,
         P24 p24,
         Paynow paynow,
+        Paypal paypal,
         Pix pix,
         SepaDebit sepaDebit,
         Sofort sofort,
@@ -3493,6 +3498,7 @@ public class SessionCreateParams extends ApiRequestParams {
       this.oxxo = oxxo;
       this.p24 = p24;
       this.paynow = paynow;
+      this.paypal = paypal;
       this.pix = pix;
       this.sepaDebit = sepaDebit;
       this.sofort = sofort;
@@ -3547,6 +3553,8 @@ public class SessionCreateParams extends ApiRequestParams {
 
       private Paynow paynow;
 
+      private Paypal paypal;
+
       private Pix pix;
 
       private SepaDebit sepaDebit;
@@ -3581,6 +3589,7 @@ public class SessionCreateParams extends ApiRequestParams {
             this.oxxo,
             this.p24,
             this.paynow,
+            this.paypal,
             this.pix,
             this.sepaDebit,
             this.sofort,
@@ -3735,6 +3744,12 @@ public class SessionCreateParams extends ApiRequestParams {
       /** contains details about the PayNow payment method options. */
       public Builder setPaynow(SessionCreateParams.PaymentMethodOptions.Paynow paynow) {
         this.paynow = paynow;
+        return this;
+      }
+
+      /** contains details about the PayPal payment method options. */
+      public Builder setPaypal(SessionCreateParams.PaymentMethodOptions.Paypal paypal) {
+        this.paypal = paypal;
         return this;
       }
 
@@ -6998,6 +7013,75 @@ public class SessionCreateParams extends ApiRequestParams {
 
         SetupFutureUsage(String value) {
           this.value = value;
+        }
+      }
+    }
+
+    @Getter
+    public static class Paypal {
+      @SerializedName("currency")
+      String currency;
+
+      /**
+       * Map of extra parameters for custom features not available in this client library. The
+       * content in this map is not serialized under this field's {@code @SerializedName} value.
+       * Instead, each key/value pair is serialized as if the key is a root-level field (serialized)
+       * name in this param object. Effectively, this map is flattened to its parent instance.
+       */
+      @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
+      Map<String, Object> extraParams;
+
+      private Paypal(String currency, Map<String, Object> extraParams) {
+        this.currency = currency;
+        this.extraParams = extraParams;
+      }
+
+      public static Builder builder() {
+        return new Builder();
+      }
+
+      public static class Builder {
+        private String currency;
+
+        private Map<String, Object> extraParams;
+
+        /** Finalize and obtain parameter instance from this builder. */
+        public SessionCreateParams.PaymentMethodOptions.Paypal build() {
+          return new SessionCreateParams.PaymentMethodOptions.Paypal(
+              this.currency, this.extraParams);
+        }
+
+        public Builder setCurrency(String currency) {
+          this.currency = currency;
+          return this;
+        }
+
+        /**
+         * Add a key/value pair to `extraParams` map. A map is initialized for the first
+         * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
+         * map. See {@link SessionCreateParams.PaymentMethodOptions.Paypal#extraParams} for the
+         * field documentation.
+         */
+        public Builder putExtraParam(String key, Object value) {
+          if (this.extraParams == null) {
+            this.extraParams = new HashMap<>();
+          }
+          this.extraParams.put(key, value);
+          return this;
+        }
+
+        /**
+         * Add all map key/value pairs to `extraParams` map. A map is initialized for the first
+         * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
+         * map. See {@link SessionCreateParams.PaymentMethodOptions.Paypal#extraParams} for the
+         * field documentation.
+         */
+        public Builder putAllExtraParam(Map<String, Object> map) {
+          if (this.extraParams == null) {
+            this.extraParams = new HashMap<>();
+          }
+          this.extraParams.putAll(map);
+          return this;
         }
       }
     }
@@ -10617,6 +10701,9 @@ public class SessionCreateParams extends ApiRequestParams {
 
     @SerializedName("paynow")
     PAYNOW("paynow"),
+
+    @SerializedName("paypal")
+    PAYPAL("paypal"),
 
     @SerializedName("pix")
     PIX("pix"),

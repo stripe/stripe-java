@@ -18,7 +18,7 @@ public class SubscriptionUpdateParams extends ApiRequestParams {
    * for this subscription. You may pass up to 20 items.
    */
   @SerializedName("add_invoice_items")
-  List<AddInvoiceItem> addInvoiceItems;
+  List<SubscriptionUpdateParams.AddInvoiceItem> addInvoiceItems;
 
   /**
    * A non-negative decimal between 0 and 100, with at most two decimal places. This represents the
@@ -152,7 +152,7 @@ public class SubscriptionUpdateParams extends ApiRequestParams {
 
   /** A list of up to 20 subscription items, each with an attached price. */
   @SerializedName("items")
-  List<Item> items;
+  List<SubscriptionUpdateParams.Item> items;
 
   /**
    * Set of <a href="https://stripe.com/docs/api/metadata">key-value pairs</a> that you can attach
@@ -273,7 +273,7 @@ public class SubscriptionUpdateParams extends ApiRequestParams {
   Boolean trialFromPlan;
 
   private SubscriptionUpdateParams(
-      List<AddInvoiceItem> addInvoiceItems,
+      List<SubscriptionUpdateParams.AddInvoiceItem> addInvoiceItems,
       BigDecimal applicationFeePercent,
       AutomaticTax automaticTax,
       BillingCycleAnchor billingCycleAnchor,
@@ -290,7 +290,7 @@ public class SubscriptionUpdateParams extends ApiRequestParams {
       Object discounts,
       List<String> expand,
       Map<String, Object> extraParams,
-      List<Item> items,
+      List<SubscriptionUpdateParams.Item> items,
       Object metadata,
       Boolean offSession,
       Object pauseCollection,
@@ -342,7 +342,7 @@ public class SubscriptionUpdateParams extends ApiRequestParams {
   }
 
   public static class Builder {
-    private List<AddInvoiceItem> addInvoiceItems;
+    private List<SubscriptionUpdateParams.AddInvoiceItem> addInvoiceItems;
 
     private BigDecimal applicationFeePercent;
 
@@ -376,7 +376,7 @@ public class SubscriptionUpdateParams extends ApiRequestParams {
 
     private Map<String, Object> extraParams;
 
-    private List<Item> items;
+    private List<SubscriptionUpdateParams.Item> items;
 
     private Object metadata;
 
@@ -445,7 +445,7 @@ public class SubscriptionUpdateParams extends ApiRequestParams {
      * call, and subsequent calls adds additional elements to the original list. See {@link
      * SubscriptionUpdateParams#addInvoiceItems} for the field documentation.
      */
-    public Builder addAddInvoiceItem(AddInvoiceItem element) {
+    public Builder addAddInvoiceItem(SubscriptionUpdateParams.AddInvoiceItem element) {
       if (this.addInvoiceItems == null) {
         this.addInvoiceItems = new ArrayList<>();
       }
@@ -458,7 +458,7 @@ public class SubscriptionUpdateParams extends ApiRequestParams {
      * call, and subsequent calls adds additional elements to the original list. See {@link
      * SubscriptionUpdateParams#addInvoiceItems} for the field documentation.
      */
-    public Builder addAllAddInvoiceItem(List<AddInvoiceItem> elements) {
+    public Builder addAllAddInvoiceItem(List<SubscriptionUpdateParams.AddInvoiceItem> elements) {
       if (this.addInvoiceItems == null) {
         this.addInvoiceItems = new ArrayList<>();
       }
@@ -483,7 +483,7 @@ public class SubscriptionUpdateParams extends ApiRequestParams {
      * Automatic tax settings for this subscription. We recommend you only include this parameter
      * when the existing value is being changed.
      */
-    public Builder setAutomaticTax(AutomaticTax automaticTax) {
+    public Builder setAutomaticTax(SubscriptionUpdateParams.AutomaticTax automaticTax) {
       this.automaticTax = automaticTax;
       return this;
     }
@@ -494,7 +494,8 @@ public class SubscriptionUpdateParams extends ApiRequestParams {
      * the billing cycle <a
      * href="https://stripe.com/docs/billing/subscriptions/billing-cycle">documentation</a>.
      */
-    public Builder setBillingCycleAnchor(BillingCycleAnchor billingCycleAnchor) {
+    public Builder setBillingCycleAnchor(
+        SubscriptionUpdateParams.BillingCycleAnchor billingCycleAnchor) {
       this.billingCycleAnchor = billingCycleAnchor;
       return this;
     }
@@ -503,7 +504,8 @@ public class SubscriptionUpdateParams extends ApiRequestParams {
      * Define thresholds at which an invoice will be sent, and the subscription advanced to a new
      * billing period. Pass an empty string to remove previously-defined thresholds.
      */
-    public Builder setBillingThresholds(BillingThresholds billingThresholds) {
+    public Builder setBillingThresholds(
+        SubscriptionUpdateParams.BillingThresholds billingThresholds) {
       this.billingThresholds = billingThresholds;
       return this;
     }
@@ -553,7 +555,7 @@ public class SubscriptionUpdateParams extends ApiRequestParams {
      * attached to the customer. When sending an invoice, Stripe will email your customer an invoice
      * with payment instructions. Defaults to {@code charge_automatically}.
      */
-    public Builder setCollectionMethod(CollectionMethod collectionMethod) {
+    public Builder setCollectionMethod(SubscriptionUpdateParams.CollectionMethod collectionMethod) {
       this.collectionMethod = collectionMethod;
       return this;
     }
@@ -711,7 +713,7 @@ public class SubscriptionUpdateParams extends ApiRequestParams {
      * SubscriptionUpdateParams#discounts} for the field documentation.
      */
     @SuppressWarnings("unchecked")
-    public Builder addDiscount(Discount element) {
+    public Builder addDiscount(SubscriptionUpdateParams.Discount element) {
       if (this.discounts == null || this.discounts instanceof EmptyParam) {
         this.discounts = new ArrayList<SubscriptionUpdateParams.Discount>();
       }
@@ -725,7 +727,7 @@ public class SubscriptionUpdateParams extends ApiRequestParams {
      * SubscriptionUpdateParams#discounts} for the field documentation.
      */
     @SuppressWarnings("unchecked")
-    public Builder addAllDiscount(List<Discount> elements) {
+    public Builder addAllDiscount(List<SubscriptionUpdateParams.Discount> elements) {
       if (this.discounts == null || this.discounts instanceof EmptyParam) {
         this.discounts = new ArrayList<SubscriptionUpdateParams.Discount>();
       }
@@ -746,7 +748,7 @@ public class SubscriptionUpdateParams extends ApiRequestParams {
      * The coupons to redeem into discounts for the subscription. If not specified or empty,
      * inherits the discount from the subscription's customer.
      */
-    public Builder setDiscounts(List<Discount> discounts) {
+    public Builder setDiscounts(List<SubscriptionUpdateParams.Discount> discounts) {
       this.discounts = discounts;
       return this;
     }
@@ -808,7 +810,7 @@ public class SubscriptionUpdateParams extends ApiRequestParams {
      * subsequent calls adds additional elements to the original list. See {@link
      * SubscriptionUpdateParams#items} for the field documentation.
      */
-    public Builder addItem(Item element) {
+    public Builder addItem(SubscriptionUpdateParams.Item element) {
       if (this.items == null) {
         this.items = new ArrayList<>();
       }
@@ -821,7 +823,7 @@ public class SubscriptionUpdateParams extends ApiRequestParams {
      * subsequent calls adds additional elements to the original list. See {@link
      * SubscriptionUpdateParams#items} for the field documentation.
      */
-    public Builder addAllItem(List<Item> elements) {
+    public Builder addAllItem(List<SubscriptionUpdateParams.Item> elements) {
       if (this.items == null) {
         this.items = new ArrayList<>();
       }
@@ -886,7 +888,7 @@ public class SubscriptionUpdateParams extends ApiRequestParams {
     }
 
     /** If specified, payment collection for this subscription will be paused. */
-    public Builder setPauseCollection(PauseCollection pauseCollection) {
+    public Builder setPauseCollection(SubscriptionUpdateParams.PauseCollection pauseCollection) {
       this.pauseCollection = pauseCollection;
       return this;
     }
@@ -925,13 +927,13 @@ public class SubscriptionUpdateParams extends ApiRequestParams {
      * API versions prior to 2019-03-14. See the <a
      * href="https://stripe.com/docs/upgrades#2019-03-14">changelog</a> to learn more.
      */
-    public Builder setPaymentBehavior(PaymentBehavior paymentBehavior) {
+    public Builder setPaymentBehavior(SubscriptionUpdateParams.PaymentBehavior paymentBehavior) {
       this.paymentBehavior = paymentBehavior;
       return this;
     }
 
     /** Payment settings to pass to invoices created by the subscription. */
-    public Builder setPaymentSettings(PaymentSettings paymentSettings) {
+    public Builder setPaymentSettings(SubscriptionUpdateParams.PaymentSettings paymentSettings) {
       this.paymentSettings = paymentSettings;
       return this;
     }
@@ -942,7 +944,7 @@ public class SubscriptionUpdateParams extends ApiRequestParams {
      * given subscription at the specified interval.
      */
     public Builder setPendingInvoiceItemInterval(
-        PendingInvoiceItemInterval pendingInvoiceItemInterval) {
+        SubscriptionUpdateParams.PendingInvoiceItemInterval pendingInvoiceItemInterval) {
       this.pendingInvoiceItemInterval = pendingInvoiceItemInterval;
       return this;
     }
@@ -958,7 +960,7 @@ public class SubscriptionUpdateParams extends ApiRequestParams {
     }
 
     /** If specified, the invoicing for the given billing cycle iterations will be processed now. */
-    public Builder setPrebilling(Prebilling prebilling) {
+    public Builder setPrebilling(SubscriptionUpdateParams.Prebilling prebilling) {
       this.prebilling = prebilling;
       return this;
     }
@@ -987,7 +989,8 @@ public class SubscriptionUpdateParams extends ApiRequestParams {
      * billing cycle changes (e.g., when switching plans, resetting {@code
      * billing_cycle_anchor=now}, or starting a trial), or if an item's {@code quantity} changes.
      */
-    public Builder setProrationBehavior(ProrationBehavior prorationBehavior) {
+    public Builder setProrationBehavior(
+        SubscriptionUpdateParams.ProrationBehavior prorationBehavior) {
       this.prorationBehavior = prorationBehavior;
       return this;
     }
@@ -1009,7 +1012,7 @@ public class SubscriptionUpdateParams extends ApiRequestParams {
      * destination and the ID of the resulting transfers will be found on the resulting charges.
      * This will be unset if you POST an empty value.
      */
-    public Builder setTransferData(TransferData transferData) {
+    public Builder setTransferData(SubscriptionUpdateParams.TransferData transferData) {
       this.transferData = transferData;
       return this;
     }
@@ -1031,7 +1034,7 @@ public class SubscriptionUpdateParams extends ApiRequestParams {
      * customer is being subscribed to. The special value {@code now} can be provided to end the
      * customer's trial immediately. Can be at most two years from {@code billing_cycle_anchor}.
      */
-    public Builder setTrialEnd(TrialEnd trialEnd) {
+    public Builder setTrialEnd(SubscriptionUpdateParams.TrialEnd trialEnd) {
       this.trialEnd = trialEnd;
       return this;
     }
@@ -1065,7 +1068,7 @@ public class SubscriptionUpdateParams extends ApiRequestParams {
   public static class AddInvoiceItem {
     /** The coupons to redeem into discounts for the item. */
     @SerializedName("discounts")
-    List<Discount> discounts;
+    List<SubscriptionUpdateParams.AddInvoiceItem.Discount> discounts;
 
     /**
      * Map of extra parameters for custom features not available in this client library. The content
@@ -1099,7 +1102,7 @@ public class SubscriptionUpdateParams extends ApiRequestParams {
     Object taxRates;
 
     private AddInvoiceItem(
-        List<Discount> discounts,
+        List<SubscriptionUpdateParams.AddInvoiceItem.Discount> discounts,
         Map<String, Object> extraParams,
         Object price,
         PriceData priceData,
@@ -1118,7 +1121,7 @@ public class SubscriptionUpdateParams extends ApiRequestParams {
     }
 
     public static class Builder {
-      private List<Discount> discounts;
+      private List<SubscriptionUpdateParams.AddInvoiceItem.Discount> discounts;
 
       private Map<String, Object> extraParams;
 
@@ -1131,8 +1134,8 @@ public class SubscriptionUpdateParams extends ApiRequestParams {
       private Object taxRates;
 
       /** Finalize and obtain parameter instance from this builder. */
-      public AddInvoiceItem build() {
-        return new AddInvoiceItem(
+      public SubscriptionUpdateParams.AddInvoiceItem build() {
+        return new SubscriptionUpdateParams.AddInvoiceItem(
             this.discounts,
             this.extraParams,
             this.price,
@@ -1146,7 +1149,7 @@ public class SubscriptionUpdateParams extends ApiRequestParams {
        * and subsequent calls adds additional elements to the original list. See {@link
        * SubscriptionUpdateParams.AddInvoiceItem#discounts} for the field documentation.
        */
-      public Builder addDiscount(Discount element) {
+      public Builder addDiscount(SubscriptionUpdateParams.AddInvoiceItem.Discount element) {
         if (this.discounts == null) {
           this.discounts = new ArrayList<>();
         }
@@ -1159,7 +1162,8 @@ public class SubscriptionUpdateParams extends ApiRequestParams {
        * call, and subsequent calls adds additional elements to the original list. See {@link
        * SubscriptionUpdateParams.AddInvoiceItem#discounts} for the field documentation.
        */
-      public Builder addAllDiscount(List<Discount> elements) {
+      public Builder addAllDiscount(
+          List<SubscriptionUpdateParams.AddInvoiceItem.Discount> elements) {
         if (this.discounts == null) {
           this.discounts = new ArrayList<>();
         }
@@ -1210,7 +1214,7 @@ public class SubscriptionUpdateParams extends ApiRequestParams {
        * Data used to generate a new <a href="https://stripe.com/docs/api/prices">Price</a> object
        * inline.
        */
-      public Builder setPriceData(PriceData priceData) {
+      public Builder setPriceData(SubscriptionUpdateParams.AddInvoiceItem.PriceData priceData) {
         this.priceData = priceData;
         return this;
       }
@@ -1305,8 +1309,9 @@ public class SubscriptionUpdateParams extends ApiRequestParams {
         private Map<String, Object> extraParams;
 
         /** Finalize and obtain parameter instance from this builder. */
-        public Discount build() {
-          return new Discount(this.coupon, this.discount, this.extraParams);
+        public SubscriptionUpdateParams.AddInvoiceItem.Discount build() {
+          return new SubscriptionUpdateParams.AddInvoiceItem.Discount(
+              this.coupon, this.discount, this.extraParams);
         }
 
         /** ID of the coupon to create a new discount for. */
@@ -1442,8 +1447,8 @@ public class SubscriptionUpdateParams extends ApiRequestParams {
         private Object unitAmountDecimal;
 
         /** Finalize and obtain parameter instance from this builder. */
-        public PriceData build() {
-          return new PriceData(
+        public SubscriptionUpdateParams.AddInvoiceItem.PriceData build() {
+          return new SubscriptionUpdateParams.AddInvoiceItem.PriceData(
               this.currency,
               this.extraParams,
               this.product,
@@ -1517,7 +1522,8 @@ public class SubscriptionUpdateParams extends ApiRequestParams {
          * of {@code inclusive}, {@code exclusive}, or {@code unspecified}. Once specified as either
          * {@code inclusive} or {@code exclusive}, it cannot be changed.
          */
-        public Builder setTaxBehavior(TaxBehavior taxBehavior) {
+        public Builder setTaxBehavior(
+            SubscriptionUpdateParams.AddInvoiceItem.PriceData.TaxBehavior taxBehavior) {
           this.taxBehavior = taxBehavior;
           return this;
         }
@@ -1605,8 +1611,8 @@ public class SubscriptionUpdateParams extends ApiRequestParams {
       private Map<String, Object> extraParams;
 
       /** Finalize and obtain parameter instance from this builder. */
-      public AutomaticTax build() {
-        return new AutomaticTax(this.enabled, this.extraParams);
+      public SubscriptionUpdateParams.AutomaticTax build() {
+        return new SubscriptionUpdateParams.AutomaticTax(this.enabled, this.extraParams);
       }
 
       /**
@@ -1688,8 +1694,8 @@ public class SubscriptionUpdateParams extends ApiRequestParams {
       private Boolean resetBillingCycleAnchor;
 
       /** Finalize and obtain parameter instance from this builder. */
-      public BillingThresholds build() {
-        return new BillingThresholds(
+      public SubscriptionUpdateParams.BillingThresholds build() {
+        return new SubscriptionUpdateParams.BillingThresholds(
             this.amountGte, this.extraParams, this.resetBillingCycleAnchor);
       }
 
@@ -1775,8 +1781,8 @@ public class SubscriptionUpdateParams extends ApiRequestParams {
       private Map<String, Object> extraParams;
 
       /** Finalize and obtain parameter instance from this builder. */
-      public Discount build() {
-        return new Discount(this.coupon, this.discount, this.extraParams);
+      public SubscriptionUpdateParams.Discount build() {
+        return new SubscriptionUpdateParams.Discount(this.coupon, this.discount, this.extraParams);
       }
 
       /** ID of the coupon to create a new discount for. */
@@ -1966,8 +1972,8 @@ public class SubscriptionUpdateParams extends ApiRequestParams {
       private Object taxRates;
 
       /** Finalize and obtain parameter instance from this builder. */
-      public Item build() {
-        return new Item(
+      public SubscriptionUpdateParams.Item build() {
+        return new SubscriptionUpdateParams.Item(
             this.billingThresholds,
             this.clearUsage,
             this.deleted,
@@ -1987,7 +1993,8 @@ public class SubscriptionUpdateParams extends ApiRequestParams {
        * billing period. When updating, pass an empty string to remove previously-defined
        * thresholds.
        */
-      public Builder setBillingThresholds(BillingThresholds billingThresholds) {
+      public Builder setBillingThresholds(
+          SubscriptionUpdateParams.Item.BillingThresholds billingThresholds) {
         this.billingThresholds = billingThresholds;
         return this;
       }
@@ -2023,7 +2030,7 @@ public class SubscriptionUpdateParams extends ApiRequestParams {
        * SubscriptionUpdateParams.Item#discounts} for the field documentation.
        */
       @SuppressWarnings("unchecked")
-      public Builder addDiscount(Discount element) {
+      public Builder addDiscount(SubscriptionUpdateParams.Item.Discount element) {
         if (this.discounts == null || this.discounts instanceof EmptyParam) {
           this.discounts = new ArrayList<SubscriptionUpdateParams.Item.Discount>();
         }
@@ -2037,7 +2044,7 @@ public class SubscriptionUpdateParams extends ApiRequestParams {
        * SubscriptionUpdateParams.Item#discounts} for the field documentation.
        */
       @SuppressWarnings("unchecked")
-      public Builder addAllDiscount(List<Discount> elements) {
+      public Builder addAllDiscount(List<SubscriptionUpdateParams.Item.Discount> elements) {
         if (this.discounts == null || this.discounts instanceof EmptyParam) {
           this.discounts = new ArrayList<SubscriptionUpdateParams.Item.Discount>();
         }
@@ -2052,7 +2059,7 @@ public class SubscriptionUpdateParams extends ApiRequestParams {
       }
 
       /** The coupons to redeem into discounts for the subscription item. */
-      public Builder setDiscounts(List<Discount> discounts) {
+      public Builder setDiscounts(List<SubscriptionUpdateParams.Item.Discount> discounts) {
         this.discounts = discounts;
         return this;
       }
@@ -2179,7 +2186,7 @@ public class SubscriptionUpdateParams extends ApiRequestParams {
        * Data used to generate a new <a href="https://stripe.com/docs/api/prices">Price</a> object
        * inline.
        */
-      public Builder setPriceData(PriceData priceData) {
+      public Builder setPriceData(SubscriptionUpdateParams.Item.PriceData priceData) {
         this.priceData = priceData;
         return this;
       }
@@ -2273,8 +2280,9 @@ public class SubscriptionUpdateParams extends ApiRequestParams {
         private Long usageGte;
 
         /** Finalize and obtain parameter instance from this builder. */
-        public BillingThresholds build() {
-          return new BillingThresholds(this.extraParams, this.usageGte);
+        public SubscriptionUpdateParams.Item.BillingThresholds build() {
+          return new SubscriptionUpdateParams.Item.BillingThresholds(
+              this.extraParams, this.usageGte);
         }
 
         /**
@@ -2350,8 +2358,9 @@ public class SubscriptionUpdateParams extends ApiRequestParams {
         private Map<String, Object> extraParams;
 
         /** Finalize and obtain parameter instance from this builder. */
-        public Discount build() {
-          return new Discount(this.coupon, this.discount, this.extraParams);
+        public SubscriptionUpdateParams.Item.Discount build() {
+          return new SubscriptionUpdateParams.Item.Discount(
+              this.coupon, this.discount, this.extraParams);
         }
 
         /** ID of the coupon to create a new discount for. */
@@ -2497,8 +2506,8 @@ public class SubscriptionUpdateParams extends ApiRequestParams {
         private Object unitAmountDecimal;
 
         /** Finalize and obtain parameter instance from this builder. */
-        public PriceData build() {
-          return new PriceData(
+        public SubscriptionUpdateParams.Item.PriceData build() {
+          return new SubscriptionUpdateParams.Item.PriceData(
               this.currency,
               this.extraParams,
               this.product,
@@ -2571,7 +2580,7 @@ public class SubscriptionUpdateParams extends ApiRequestParams {
         /**
          * The recurring components of a price such as {@code interval} and {@code interval_count}.
          */
-        public Builder setRecurring(Recurring recurring) {
+        public Builder setRecurring(SubscriptionUpdateParams.Item.PriceData.Recurring recurring) {
           this.recurring = recurring;
           return this;
         }
@@ -2581,7 +2590,8 @@ public class SubscriptionUpdateParams extends ApiRequestParams {
          * of {@code inclusive}, {@code exclusive}, or {@code unspecified}. Once specified as either
          * {@code inclusive} or {@code exclusive}, it cannot be changed.
          */
-        public Builder setTaxBehavior(TaxBehavior taxBehavior) {
+        public Builder setTaxBehavior(
+            SubscriptionUpdateParams.Item.PriceData.TaxBehavior taxBehavior) {
           this.taxBehavior = taxBehavior;
           return this;
         }
@@ -2661,8 +2671,9 @@ public class SubscriptionUpdateParams extends ApiRequestParams {
           private Long intervalCount;
 
           /** Finalize and obtain parameter instance from this builder. */
-          public Recurring build() {
-            return new Recurring(this.extraParams, this.interval, this.intervalCount);
+          public SubscriptionUpdateParams.Item.PriceData.Recurring build() {
+            return new SubscriptionUpdateParams.Item.PriceData.Recurring(
+                this.extraParams, this.interval, this.intervalCount);
           }
 
           /**
@@ -2697,7 +2708,8 @@ public class SubscriptionUpdateParams extends ApiRequestParams {
            * Specifies billing frequency. Either {@code day}, {@code week}, {@code month} or {@code
            * year}.
            */
-          public Builder setInterval(Interval interval) {
+          public Builder setInterval(
+              SubscriptionUpdateParams.Item.PriceData.Recurring.Interval interval) {
             this.interval = interval;
             return this;
           }
@@ -2795,15 +2807,16 @@ public class SubscriptionUpdateParams extends ApiRequestParams {
       private Long resumesAt;
 
       /** Finalize and obtain parameter instance from this builder. */
-      public PauseCollection build() {
-        return new PauseCollection(this.behavior, this.extraParams, this.resumesAt);
+      public SubscriptionUpdateParams.PauseCollection build() {
+        return new SubscriptionUpdateParams.PauseCollection(
+            this.behavior, this.extraParams, this.resumesAt);
       }
 
       /**
        * The payment collection behavior for this subscription while paused. One of {@code
        * keep_as_draft}, {@code mark_uncollectible}, or {@code void}.
        */
-      public Builder setBehavior(Behavior behavior) {
+      public Builder setBehavior(SubscriptionUpdateParams.PauseCollection.Behavior behavior) {
         this.behavior = behavior;
         return this;
       }
@@ -2918,8 +2931,8 @@ public class SubscriptionUpdateParams extends ApiRequestParams {
       private SaveDefaultPaymentMethod saveDefaultPaymentMethod;
 
       /** Finalize and obtain parameter instance from this builder. */
-      public PaymentSettings build() {
-        return new PaymentSettings(
+      public SubscriptionUpdateParams.PaymentSettings build() {
+        return new SubscriptionUpdateParams.PaymentSettings(
             this.extraParams,
             this.paymentMethodOptions,
             this.paymentMethodTypes,
@@ -2956,7 +2969,8 @@ public class SubscriptionUpdateParams extends ApiRequestParams {
       /**
        * Payment-method-specific configuration to provide to invoices created by the subscription.
        */
-      public Builder setPaymentMethodOptions(PaymentMethodOptions paymentMethodOptions) {
+      public Builder setPaymentMethodOptions(
+          SubscriptionUpdateParams.PaymentSettings.PaymentMethodOptions paymentMethodOptions) {
         this.paymentMethodOptions = paymentMethodOptions;
         return this;
       }
@@ -2968,7 +2982,8 @@ public class SubscriptionUpdateParams extends ApiRequestParams {
        * documentation.
        */
       @SuppressWarnings("unchecked")
-      public Builder addPaymentMethodType(PaymentMethodType element) {
+      public Builder addPaymentMethodType(
+          SubscriptionUpdateParams.PaymentSettings.PaymentMethodType element) {
         if (this.paymentMethodTypes == null || this.paymentMethodTypes instanceof EmptyParam) {
           this.paymentMethodTypes =
               new ArrayList<SubscriptionUpdateParams.PaymentSettings.PaymentMethodType>();
@@ -2985,7 +3000,8 @@ public class SubscriptionUpdateParams extends ApiRequestParams {
        * documentation.
        */
       @SuppressWarnings("unchecked")
-      public Builder addAllPaymentMethodType(List<PaymentMethodType> elements) {
+      public Builder addAllPaymentMethodType(
+          List<SubscriptionUpdateParams.PaymentSettings.PaymentMethodType> elements) {
         if (this.paymentMethodTypes == null || this.paymentMethodTypes instanceof EmptyParam) {
           this.paymentMethodTypes =
               new ArrayList<SubscriptionUpdateParams.PaymentSettings.PaymentMethodType>();
@@ -3014,7 +3030,8 @@ public class SubscriptionUpdateParams extends ApiRequestParams {
        * default payment method, and your <a
        * href="https://dashboard.stripe.com/settings/billing/invoice">invoice template settings</a>.
        */
-      public Builder setPaymentMethodTypes(List<PaymentMethodType> paymentMethodTypes) {
+      public Builder setPaymentMethodTypes(
+          List<SubscriptionUpdateParams.PaymentSettings.PaymentMethodType> paymentMethodTypes) {
         this.paymentMethodTypes = paymentMethodTypes;
         return this;
       }
@@ -3024,7 +3041,8 @@ public class SubscriptionUpdateParams extends ApiRequestParams {
        * {@code subscription.default_payment_method} when a subscription payment succeeds.
        */
       public Builder setSaveDefaultPaymentMethod(
-          SaveDefaultPaymentMethod saveDefaultPaymentMethod) {
+          SubscriptionUpdateParams.PaymentSettings.SaveDefaultPaymentMethod
+              saveDefaultPaymentMethod) {
         this.saveDefaultPaymentMethod = saveDefaultPaymentMethod;
         return this;
       }
@@ -3120,8 +3138,8 @@ public class SubscriptionUpdateParams extends ApiRequestParams {
         private Object usBankAccount;
 
         /** Finalize and obtain parameter instance from this builder. */
-        public PaymentMethodOptions build() {
-          return new PaymentMethodOptions(
+        public SubscriptionUpdateParams.PaymentSettings.PaymentMethodOptions build() {
+          return new SubscriptionUpdateParams.PaymentSettings.PaymentMethodOptions(
               this.acssDebit,
               this.bancontact,
               this.card,
@@ -3135,7 +3153,8 @@ public class SubscriptionUpdateParams extends ApiRequestParams {
          * This sub-hash contains details about the Canadian pre-authorized debit payment method
          * options to pass to the invoice’s PaymentIntent.
          */
-        public Builder setAcssDebit(AcssDebit acssDebit) {
+        public Builder setAcssDebit(
+            SubscriptionUpdateParams.PaymentSettings.PaymentMethodOptions.AcssDebit acssDebit) {
           this.acssDebit = acssDebit;
           return this;
         }
@@ -3153,7 +3172,8 @@ public class SubscriptionUpdateParams extends ApiRequestParams {
          * This sub-hash contains details about the Bancontact payment method options to pass to the
          * invoice’s PaymentIntent.
          */
-        public Builder setBancontact(Bancontact bancontact) {
+        public Builder setBancontact(
+            SubscriptionUpdateParams.PaymentSettings.PaymentMethodOptions.Bancontact bancontact) {
           this.bancontact = bancontact;
           return this;
         }
@@ -3171,7 +3191,8 @@ public class SubscriptionUpdateParams extends ApiRequestParams {
          * This sub-hash contains details about the Card payment method options to pass to the
          * invoice’s PaymentIntent.
          */
-        public Builder setCard(Card card) {
+        public Builder setCard(
+            SubscriptionUpdateParams.PaymentSettings.PaymentMethodOptions.Card card) {
           this.card = card;
           return this;
         }
@@ -3189,7 +3210,9 @@ public class SubscriptionUpdateParams extends ApiRequestParams {
          * This sub-hash contains details about the Bank transfer payment method options to pass to
          * the invoice’s PaymentIntent.
          */
-        public Builder setCustomerBalance(CustomerBalance customerBalance) {
+        public Builder setCustomerBalance(
+            SubscriptionUpdateParams.PaymentSettings.PaymentMethodOptions.CustomerBalance
+                customerBalance) {
           this.customerBalance = customerBalance;
           return this;
         }
@@ -3237,7 +3260,8 @@ public class SubscriptionUpdateParams extends ApiRequestParams {
          * This sub-hash contains details about the Konbini payment method options to pass to the
          * invoice’s PaymentIntent.
          */
-        public Builder setKonbini(Konbini konbini) {
+        public Builder setKonbini(
+            SubscriptionUpdateParams.PaymentSettings.PaymentMethodOptions.Konbini konbini) {
           this.konbini = konbini;
           return this;
         }
@@ -3255,7 +3279,9 @@ public class SubscriptionUpdateParams extends ApiRequestParams {
          * This sub-hash contains details about the ACH direct debit payment method options to pass
          * to the invoice’s PaymentIntent.
          */
-        public Builder setUsBankAccount(UsBankAccount usBankAccount) {
+        public Builder setUsBankAccount(
+            SubscriptionUpdateParams.PaymentSettings.PaymentMethodOptions.UsBankAccount
+                usBankAccount) {
           this.usBankAccount = usBankAccount;
           return this;
         }
@@ -3311,8 +3337,9 @@ public class SubscriptionUpdateParams extends ApiRequestParams {
           private VerificationMethod verificationMethod;
 
           /** Finalize and obtain parameter instance from this builder. */
-          public AcssDebit build() {
-            return new AcssDebit(this.extraParams, this.mandateOptions, this.verificationMethod);
+          public SubscriptionUpdateParams.PaymentSettings.PaymentMethodOptions.AcssDebit build() {
+            return new SubscriptionUpdateParams.PaymentSettings.PaymentMethodOptions.AcssDebit(
+                this.extraParams, this.mandateOptions, this.verificationMethod);
           }
 
           /**
@@ -3346,13 +3373,18 @@ public class SubscriptionUpdateParams extends ApiRequestParams {
           }
 
           /** Additional fields for Mandate creation. */
-          public Builder setMandateOptions(MandateOptions mandateOptions) {
+          public Builder setMandateOptions(
+              SubscriptionUpdateParams.PaymentSettings.PaymentMethodOptions.AcssDebit.MandateOptions
+                  mandateOptions) {
             this.mandateOptions = mandateOptions;
             return this;
           }
 
           /** Verification method for the intent. */
-          public Builder setVerificationMethod(VerificationMethod verificationMethod) {
+          public Builder setVerificationMethod(
+              SubscriptionUpdateParams.PaymentSettings.PaymentMethodOptions.AcssDebit
+                      .VerificationMethod
+                  verificationMethod) {
             this.verificationMethod = verificationMethod;
             return this;
           }
@@ -3389,8 +3421,11 @@ public class SubscriptionUpdateParams extends ApiRequestParams {
             private TransactionType transactionType;
 
             /** Finalize and obtain parameter instance from this builder. */
-            public MandateOptions build() {
-              return new MandateOptions(this.extraParams, this.transactionType);
+            public SubscriptionUpdateParams.PaymentSettings.PaymentMethodOptions.AcssDebit
+                    .MandateOptions
+                build() {
+              return new SubscriptionUpdateParams.PaymentSettings.PaymentMethodOptions.AcssDebit
+                  .MandateOptions(this.extraParams, this.transactionType);
             }
 
             /**
@@ -3424,7 +3459,10 @@ public class SubscriptionUpdateParams extends ApiRequestParams {
             }
 
             /** Transaction type of the mandate. */
-            public Builder setTransactionType(TransactionType transactionType) {
+            public Builder setTransactionType(
+                SubscriptionUpdateParams.PaymentSettings.PaymentMethodOptions.AcssDebit
+                        .MandateOptions.TransactionType
+                    transactionType) {
               this.transactionType = transactionType;
               return this;
             }
@@ -3499,8 +3537,9 @@ public class SubscriptionUpdateParams extends ApiRequestParams {
           private PreferredLanguage preferredLanguage;
 
           /** Finalize and obtain parameter instance from this builder. */
-          public Bancontact build() {
-            return new Bancontact(this.extraParams, this.preferredLanguage);
+          public SubscriptionUpdateParams.PaymentSettings.PaymentMethodOptions.Bancontact build() {
+            return new SubscriptionUpdateParams.PaymentSettings.PaymentMethodOptions.Bancontact(
+                this.extraParams, this.preferredLanguage);
           }
 
           /**
@@ -3537,7 +3576,10 @@ public class SubscriptionUpdateParams extends ApiRequestParams {
            * Preferred language of the Bancontact authorization page that the customer is redirected
            * to.
            */
-          public Builder setPreferredLanguage(PreferredLanguage preferredLanguage) {
+          public Builder setPreferredLanguage(
+              SubscriptionUpdateParams.PaymentSettings.PaymentMethodOptions.Bancontact
+                      .PreferredLanguage
+                  preferredLanguage) {
             this.preferredLanguage = preferredLanguage;
             return this;
           }
@@ -3626,8 +3668,8 @@ public class SubscriptionUpdateParams extends ApiRequestParams {
           private RequestThreeDSecure requestThreeDSecure;
 
           /** Finalize and obtain parameter instance from this builder. */
-          public Card build() {
-            return new Card(
+          public SubscriptionUpdateParams.PaymentSettings.PaymentMethodOptions.Card build() {
+            return new SubscriptionUpdateParams.PaymentSettings.PaymentMethodOptions.Card(
                 this.extraParams, this.mandateOptions, this.network, this.requestThreeDSecure);
           }
 
@@ -3662,7 +3704,9 @@ public class SubscriptionUpdateParams extends ApiRequestParams {
           }
 
           /** Configuration options for setting up an eMandate for cards issued in India. */
-          public Builder setMandateOptions(MandateOptions mandateOptions) {
+          public Builder setMandateOptions(
+              SubscriptionUpdateParams.PaymentSettings.PaymentMethodOptions.Card.MandateOptions
+                  mandateOptions) {
             this.mandateOptions = mandateOptions;
             return this;
           }
@@ -3671,7 +3715,8 @@ public class SubscriptionUpdateParams extends ApiRequestParams {
            * Selected network to process this Subscription on. Depends on the available networks of
            * the card attached to the Subscription. Can be only set confirm-time.
            */
-          public Builder setNetwork(Network network) {
+          public Builder setNetwork(
+              SubscriptionUpdateParams.PaymentSettings.PaymentMethodOptions.Card.Network network) {
             this.network = network;
             return this;
           }
@@ -3686,7 +3731,9 @@ public class SubscriptionUpdateParams extends ApiRequestParams {
            * 3D Secure</a> for more information on how this configuration interacts with Radar and
            * our SCA Engine.
            */
-          public Builder setRequestThreeDSecure(RequestThreeDSecure requestThreeDSecure) {
+          public Builder setRequestThreeDSecure(
+              SubscriptionUpdateParams.PaymentSettings.PaymentMethodOptions.Card.RequestThreeDSecure
+                  requestThreeDSecure) {
             this.requestThreeDSecure = requestThreeDSecure;
             return this;
           }
@@ -3748,9 +3795,10 @@ public class SubscriptionUpdateParams extends ApiRequestParams {
             private Map<String, Object> extraParams;
 
             /** Finalize and obtain parameter instance from this builder. */
-            public MandateOptions build() {
-              return new MandateOptions(
-                  this.amount, this.amountType, this.description, this.extraParams);
+            public SubscriptionUpdateParams.PaymentSettings.PaymentMethodOptions.Card.MandateOptions
+                build() {
+              return new SubscriptionUpdateParams.PaymentSettings.PaymentMethodOptions.Card
+                  .MandateOptions(this.amount, this.amountType, this.description, this.extraParams);
             }
 
             /** Amount to be charged for future payments. */
@@ -3764,7 +3812,10 @@ public class SubscriptionUpdateParams extends ApiRequestParams {
              * refers to the exact amount to be charged in future payments. If {@code maximum}, the
              * amount charged can be up to the value passed for the {@code amount} param.
              */
-            public Builder setAmountType(AmountType amountType) {
+            public Builder setAmountType(
+                SubscriptionUpdateParams.PaymentSettings.PaymentMethodOptions.Card.MandateOptions
+                        .AmountType
+                    amountType) {
               this.amountType = amountType;
               return this;
             }
@@ -3934,15 +3985,20 @@ public class SubscriptionUpdateParams extends ApiRequestParams {
           private Object fundingType;
 
           /** Finalize and obtain parameter instance from this builder. */
-          public CustomerBalance build() {
-            return new CustomerBalance(this.bankTransfer, this.extraParams, this.fundingType);
+          public SubscriptionUpdateParams.PaymentSettings.PaymentMethodOptions.CustomerBalance
+              build() {
+            return new SubscriptionUpdateParams.PaymentSettings.PaymentMethodOptions
+                .CustomerBalance(this.bankTransfer, this.extraParams, this.fundingType);
           }
 
           /**
            * Configuration for the bank transfer funding type, if the {@code funding_type} is set to
            * {@code bank_transfer}.
            */
-          public Builder setBankTransfer(BankTransfer bankTransfer) {
+          public Builder setBankTransfer(
+              SubscriptionUpdateParams.PaymentSettings.PaymentMethodOptions.CustomerBalance
+                      .BankTransfer
+                  bankTransfer) {
             this.bankTransfer = bankTransfer;
             return this;
           }
@@ -4039,12 +4095,18 @@ public class SubscriptionUpdateParams extends ApiRequestParams {
             private Object type;
 
             /** Finalize and obtain parameter instance from this builder. */
-            public BankTransfer build() {
-              return new BankTransfer(this.euBankTransfer, this.extraParams, this.type);
+            public SubscriptionUpdateParams.PaymentSettings.PaymentMethodOptions.CustomerBalance
+                    .BankTransfer
+                build() {
+              return new SubscriptionUpdateParams.PaymentSettings.PaymentMethodOptions
+                  .CustomerBalance.BankTransfer(this.euBankTransfer, this.extraParams, this.type);
             }
 
             /** Configuration for eu_bank_transfer funding type. */
-            public Builder setEuBankTransfer(EuBankTransfer euBankTransfer) {
+            public Builder setEuBankTransfer(
+                SubscriptionUpdateParams.PaymentSettings.PaymentMethodOptions.CustomerBalance
+                        .BankTransfer.EuBankTransfer
+                    euBankTransfer) {
               this.euBankTransfer = euBankTransfer;
               return this;
             }
@@ -4134,8 +4196,11 @@ public class SubscriptionUpdateParams extends ApiRequestParams {
               private Map<String, Object> extraParams;
 
               /** Finalize and obtain parameter instance from this builder. */
-              public EuBankTransfer build() {
-                return new EuBankTransfer(this.country, this.extraParams);
+              public SubscriptionUpdateParams.PaymentSettings.PaymentMethodOptions.CustomerBalance
+                      .BankTransfer.EuBankTransfer
+                  build() {
+                return new SubscriptionUpdateParams.PaymentSettings.PaymentMethodOptions
+                    .CustomerBalance.BankTransfer.EuBankTransfer(this.country, this.extraParams);
               }
 
               /**
@@ -4214,8 +4279,9 @@ public class SubscriptionUpdateParams extends ApiRequestParams {
           private Map<String, Object> extraParams;
 
           /** Finalize and obtain parameter instance from this builder. */
-          public Konbini build() {
-            return new Konbini(this.extraParams);
+          public SubscriptionUpdateParams.PaymentSettings.PaymentMethodOptions.Konbini build() {
+            return new SubscriptionUpdateParams.PaymentSettings.PaymentMethodOptions.Konbini(
+                this.extraParams);
           }
 
           /**
@@ -4291,8 +4357,9 @@ public class SubscriptionUpdateParams extends ApiRequestParams {
           private VerificationMethod verificationMethod;
 
           /** Finalize and obtain parameter instance from this builder. */
-          public UsBankAccount build() {
-            return new UsBankAccount(
+          public SubscriptionUpdateParams.PaymentSettings.PaymentMethodOptions.UsBankAccount
+              build() {
+            return new SubscriptionUpdateParams.PaymentSettings.PaymentMethodOptions.UsBankAccount(
                 this.extraParams, this.financialConnections, this.verificationMethod);
           }
 
@@ -4327,13 +4394,19 @@ public class SubscriptionUpdateParams extends ApiRequestParams {
           }
 
           /** Additional fields for Financial Connections Session creation. */
-          public Builder setFinancialConnections(FinancialConnections financialConnections) {
+          public Builder setFinancialConnections(
+              SubscriptionUpdateParams.PaymentSettings.PaymentMethodOptions.UsBankAccount
+                      .FinancialConnections
+                  financialConnections) {
             this.financialConnections = financialConnections;
             return this;
           }
 
           /** Verification method for the intent. */
-          public Builder setVerificationMethod(VerificationMethod verificationMethod) {
+          public Builder setVerificationMethod(
+              SubscriptionUpdateParams.PaymentSettings.PaymentMethodOptions.UsBankAccount
+                      .VerificationMethod
+                  verificationMethod) {
             this.verificationMethod = verificationMethod;
             return this;
           }
@@ -4357,10 +4430,17 @@ public class SubscriptionUpdateParams extends ApiRequestParams {
            * balances}, {@code ownership}, {@code payment_method}, and {@code transactions}.
            */
           @SerializedName("permissions")
-          List<Permission> permissions;
+          List<
+                  SubscriptionUpdateParams.PaymentSettings.PaymentMethodOptions.UsBankAccount
+                      .FinancialConnections.Permission>
+              permissions;
 
           private FinancialConnections(
-              Map<String, Object> extraParams, List<Permission> permissions) {
+              Map<String, Object> extraParams,
+              List<
+                      SubscriptionUpdateParams.PaymentSettings.PaymentMethodOptions.UsBankAccount
+                          .FinancialConnections.Permission>
+                  permissions) {
             this.extraParams = extraParams;
             this.permissions = permissions;
           }
@@ -4372,11 +4452,17 @@ public class SubscriptionUpdateParams extends ApiRequestParams {
           public static class Builder {
             private Map<String, Object> extraParams;
 
-            private List<Permission> permissions;
+            private List<
+                    SubscriptionUpdateParams.PaymentSettings.PaymentMethodOptions.UsBankAccount
+                        .FinancialConnections.Permission>
+                permissions;
 
             /** Finalize and obtain parameter instance from this builder. */
-            public FinancialConnections build() {
-              return new FinancialConnections(this.extraParams, this.permissions);
+            public SubscriptionUpdateParams.PaymentSettings.PaymentMethodOptions.UsBankAccount
+                    .FinancialConnections
+                build() {
+              return new SubscriptionUpdateParams.PaymentSettings.PaymentMethodOptions.UsBankAccount
+                  .FinancialConnections(this.extraParams, this.permissions);
             }
 
             /**
@@ -4416,7 +4502,10 @@ public class SubscriptionUpdateParams extends ApiRequestParams {
              * SubscriptionUpdateParams.PaymentSettings.PaymentMethodOptions.UsBankAccount.FinancialConnections#permissions}
              * for the field documentation.
              */
-            public Builder addPermission(Permission element) {
+            public Builder addPermission(
+                SubscriptionUpdateParams.PaymentSettings.PaymentMethodOptions.UsBankAccount
+                        .FinancialConnections.Permission
+                    element) {
               if (this.permissions == null) {
                 this.permissions = new ArrayList<>();
               }
@@ -4431,7 +4520,11 @@ public class SubscriptionUpdateParams extends ApiRequestParams {
              * SubscriptionUpdateParams.PaymentSettings.PaymentMethodOptions.UsBankAccount.FinancialConnections#permissions}
              * for the field documentation.
              */
-            public Builder addAllPermission(List<Permission> elements) {
+            public Builder addAllPermission(
+                List<
+                        SubscriptionUpdateParams.PaymentSettings.PaymentMethodOptions.UsBankAccount
+                            .FinancialConnections.Permission>
+                    elements) {
               if (this.permissions == null) {
                 this.permissions = new ArrayList<>();
               }
@@ -4618,8 +4711,9 @@ public class SubscriptionUpdateParams extends ApiRequestParams {
       private Long intervalCount;
 
       /** Finalize and obtain parameter instance from this builder. */
-      public PendingInvoiceItemInterval build() {
-        return new PendingInvoiceItemInterval(this.extraParams, this.interval, this.intervalCount);
+      public SubscriptionUpdateParams.PendingInvoiceItemInterval build() {
+        return new SubscriptionUpdateParams.PendingInvoiceItemInterval(
+            this.extraParams, this.interval, this.intervalCount);
       }
 
       /**
@@ -4654,7 +4748,8 @@ public class SubscriptionUpdateParams extends ApiRequestParams {
        * Specifies invoicing frequency. Either {@code day}, {@code week}, {@code month} or {@code
        * year}.
        */
-      public Builder setInterval(Interval interval) {
+      public Builder setInterval(
+          SubscriptionUpdateParams.PendingInvoiceItemInterval.Interval interval) {
         this.interval = interval;
         return this;
       }
@@ -4722,8 +4817,8 @@ public class SubscriptionUpdateParams extends ApiRequestParams {
       private Long iterations;
 
       /** Finalize and obtain parameter instance from this builder. */
-      public Prebilling build() {
-        return new Prebilling(this.extraParams, this.iterations);
+      public SubscriptionUpdateParams.Prebilling build() {
+        return new SubscriptionUpdateParams.Prebilling(this.extraParams, this.iterations);
       }
 
       /**
@@ -4802,8 +4897,9 @@ public class SubscriptionUpdateParams extends ApiRequestParams {
       private Map<String, Object> extraParams;
 
       /** Finalize and obtain parameter instance from this builder. */
-      public TransferData build() {
-        return new TransferData(this.amountPercent, this.destination, this.extraParams);
+      public SubscriptionUpdateParams.TransferData build() {
+        return new SubscriptionUpdateParams.TransferData(
+            this.amountPercent, this.destination, this.extraParams);
       }
 
       /**

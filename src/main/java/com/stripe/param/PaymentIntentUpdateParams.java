@@ -458,7 +458,7 @@ public class PaymentIntentUpdateParams extends ApiRequestParams {
     }
 
     /** This hash contains details about the Mandate to create. */
-    public Builder setMandateData(MandateDataPublishableKey mandateData) {
+    public Builder setMandateData(PaymentIntentUpdateParams.MandateDataPublishableKey mandateData) {
       this.mandateData = mandateData;
       return this;
     }
@@ -762,12 +762,15 @@ public class PaymentIntentUpdateParams extends ApiRequestParams {
       private Map<String, Object> extraParams;
 
       /** Finalize and obtain parameter instance from this builder. */
-      public MandateDataPublishableKey build() {
-        return new MandateDataPublishableKey(this.customerAcceptance, this.extraParams);
+      public PaymentIntentUpdateParams.MandateDataPublishableKey build() {
+        return new PaymentIntentUpdateParams.MandateDataPublishableKey(
+            this.customerAcceptance, this.extraParams);
       }
 
       /** This hash contains details about the customer acceptance of the Mandate. */
-      public Builder setCustomerAcceptance(CustomerAcceptance customerAcceptance) {
+      public Builder setCustomerAcceptance(
+          PaymentIntentUpdateParams.MandateDataPublishableKey.CustomerAcceptance
+              customerAcceptance) {
         this.customerAcceptance = customerAcceptance;
         return this;
       }
@@ -841,8 +844,9 @@ public class PaymentIntentUpdateParams extends ApiRequestParams {
         private Type type;
 
         /** Finalize and obtain parameter instance from this builder. */
-        public CustomerAcceptance build() {
-          return new CustomerAcceptance(this.extraParams, this.online, this.type);
+        public PaymentIntentUpdateParams.MandateDataPublishableKey.CustomerAcceptance build() {
+          return new PaymentIntentUpdateParams.MandateDataPublishableKey.CustomerAcceptance(
+              this.extraParams, this.online, this.type);
         }
 
         /**
@@ -879,13 +883,15 @@ public class PaymentIntentUpdateParams extends ApiRequestParams {
          * If this is a Mandate accepted online, this hash contains details about the online
          * acceptance.
          */
-        public Builder setOnline(Online online) {
+        public Builder setOnline(
+            PaymentIntentUpdateParams.MandateDataPublishableKey.CustomerAcceptance.Online online) {
           this.online = online;
           return this;
         }
 
         /** The type of customer acceptance information included with the Mandate. */
-        public Builder setType(Type type) {
+        public Builder setType(
+            PaymentIntentUpdateParams.MandateDataPublishableKey.CustomerAcceptance.Type type) {
           this.type = type;
           return this;
         }
@@ -929,8 +935,10 @@ public class PaymentIntentUpdateParams extends ApiRequestParams {
           private Object userAgent;
 
           /** Finalize and obtain parameter instance from this builder. */
-          public Online build() {
-            return new Online(this.extraParams, this.ipAddress, this.userAgent);
+          public PaymentIntentUpdateParams.MandateDataPublishableKey.CustomerAcceptance.Online
+              build() {
+            return new PaymentIntentUpdateParams.MandateDataPublishableKey.CustomerAcceptance
+                .Online(this.extraParams, this.ipAddress, this.userAgent);
           }
 
           /**
@@ -1185,6 +1193,13 @@ public class PaymentIntentUpdateParams extends ApiRequestParams {
     Paynow paynow;
 
     /**
+     * If this is a {@code paypal} PaymentMethod, this hash contains details about the PayPal
+     * payment method.
+     */
+    @SerializedName("paypal")
+    Paypal paypal;
+
+    /**
      * If this is a {@code pix} PaymentMethod, this hash contains details about the Pix payment
      * method.
      */
@@ -1267,6 +1282,7 @@ public class PaymentIntentUpdateParams extends ApiRequestParams {
         Oxxo oxxo,
         P24 p24,
         Paynow paynow,
+        Paypal paypal,
         Pix pix,
         Promptpay promptpay,
         RadarOptions radarOptions,
@@ -1300,6 +1316,7 @@ public class PaymentIntentUpdateParams extends ApiRequestParams {
       this.oxxo = oxxo;
       this.p24 = p24;
       this.paynow = paynow;
+      this.paypal = paypal;
       this.pix = pix;
       this.promptpay = promptpay;
       this.radarOptions = radarOptions;
@@ -1365,6 +1382,8 @@ public class PaymentIntentUpdateParams extends ApiRequestParams {
 
       private Paynow paynow;
 
+      private Paypal paypal;
+
       private Pix pix;
 
       private Promptpay promptpay;
@@ -1409,6 +1428,7 @@ public class PaymentIntentUpdateParams extends ApiRequestParams {
             this.oxxo,
             this.p24,
             this.paynow,
+            this.paypal,
             this.pix,
             this.promptpay,
             this.radarOptions,
@@ -1683,6 +1703,15 @@ public class PaymentIntentUpdateParams extends ApiRequestParams {
        */
       public Builder setPaynow(PaymentIntentUpdateParams.PaymentMethodData.Paynow paynow) {
         this.paynow = paynow;
+        return this;
+      }
+
+      /**
+       * If this is a {@code paypal} PaymentMethod, this hash contains details about the PayPal
+       * payment method.
+       */
+      public Builder setPaypal(PaymentIntentUpdateParams.PaymentMethodData.Paypal paypal) {
+        this.paypal = paypal;
         return this;
       }
 
@@ -4012,6 +4041,63 @@ public class PaymentIntentUpdateParams extends ApiRequestParams {
     }
 
     @Getter
+    public static class Paypal {
+      /**
+       * Map of extra parameters for custom features not available in this client library. The
+       * content in this map is not serialized under this field's {@code @SerializedName} value.
+       * Instead, each key/value pair is serialized as if the key is a root-level field (serialized)
+       * name in this param object. Effectively, this map is flattened to its parent instance.
+       */
+      @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
+      Map<String, Object> extraParams;
+
+      private Paypal(Map<String, Object> extraParams) {
+        this.extraParams = extraParams;
+      }
+
+      public static Builder builder() {
+        return new Builder();
+      }
+
+      public static class Builder {
+        private Map<String, Object> extraParams;
+
+        /** Finalize and obtain parameter instance from this builder. */
+        public PaymentIntentUpdateParams.PaymentMethodData.Paypal build() {
+          return new PaymentIntentUpdateParams.PaymentMethodData.Paypal(this.extraParams);
+        }
+
+        /**
+         * Add a key/value pair to `extraParams` map. A map is initialized for the first
+         * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
+         * map. See {@link PaymentIntentUpdateParams.PaymentMethodData.Paypal#extraParams} for the
+         * field documentation.
+         */
+        public Builder putExtraParam(String key, Object value) {
+          if (this.extraParams == null) {
+            this.extraParams = new HashMap<>();
+          }
+          this.extraParams.put(key, value);
+          return this;
+        }
+
+        /**
+         * Add all map key/value pairs to `extraParams` map. A map is initialized for the first
+         * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
+         * map. See {@link PaymentIntentUpdateParams.PaymentMethodData.Paypal#extraParams} for the
+         * field documentation.
+         */
+        public Builder putAllExtraParam(Map<String, Object> map) {
+          if (this.extraParams == null) {
+            this.extraParams = new HashMap<>();
+          }
+          this.extraParams.putAll(map);
+          return this;
+        }
+      }
+    }
+
+    @Getter
     public static class Pix {
       /**
        * Map of extra parameters for custom features not available in this client library. The
@@ -4696,6 +4782,9 @@ public class PaymentIntentUpdateParams extends ApiRequestParams {
       @SerializedName("paynow")
       PAYNOW("paynow"),
 
+      @SerializedName("paypal")
+      PAYPAL("paypal"),
+
       @SerializedName("pix")
       PIX("pix"),
 
@@ -4900,6 +4989,13 @@ public class PaymentIntentUpdateParams extends ApiRequestParams {
     Object paynow;
 
     /**
+     * If this is a {@code paypal} PaymentMethod, this sub-hash contains details about the PayPal
+     * payment method options.
+     */
+    @SerializedName("paypal")
+    Object paypal;
+
+    /**
      * If this is a {@code pix} PaymentMethod, this sub-hash contains details about the Pix payment
      * method options.
      */
@@ -4967,6 +5063,7 @@ public class PaymentIntentUpdateParams extends ApiRequestParams {
         Object oxxo,
         Object p24,
         Object paynow,
+        Object paypal,
         Object pix,
         Object promptpay,
         Object sepaDebit,
@@ -4998,6 +5095,7 @@ public class PaymentIntentUpdateParams extends ApiRequestParams {
       this.oxxo = oxxo;
       this.p24 = p24;
       this.paynow = paynow;
+      this.paypal = paypal;
       this.pix = pix;
       this.promptpay = promptpay;
       this.sepaDebit = sepaDebit;
@@ -5061,6 +5159,8 @@ public class PaymentIntentUpdateParams extends ApiRequestParams {
 
       private Object paynow;
 
+      private Object paypal;
+
       private Object pix;
 
       private Object promptpay;
@@ -5101,6 +5201,7 @@ public class PaymentIntentUpdateParams extends ApiRequestParams {
             this.oxxo,
             this.p24,
             this.paynow,
+            this.paypal,
             this.pix,
             this.promptpay,
             this.sepaDebit,
@@ -5567,6 +5668,24 @@ public class PaymentIntentUpdateParams extends ApiRequestParams {
        */
       public Builder setPaynow(EmptyParam paynow) {
         this.paynow = paynow;
+        return this;
+      }
+
+      /**
+       * If this is a {@code paypal} PaymentMethod, this sub-hash contains details about the PayPal
+       * payment method options.
+       */
+      public Builder setPaypal(PaymentIntentUpdateParams.PaymentMethodOptions.Paypal paypal) {
+        this.paypal = paypal;
+        return this;
+      }
+
+      /**
+       * If this is a {@code paypal} PaymentMethod, this sub-hash contains details about the PayPal
+       * payment method options.
+       */
+      public Builder setPaypal(EmptyParam paypal) {
+        this.paypal = paypal;
         return this;
       }
 
@@ -10993,6 +11112,180 @@ public class PaymentIntentUpdateParams extends ApiRequestParams {
         private final String value;
 
         SetupFutureUsage(String value) {
+          this.value = value;
+        }
+      }
+    }
+
+    @Getter
+    public static class Paypal {
+      @SerializedName("capture_method")
+      ApiRequestParams.EnumParam captureMethod;
+
+      /**
+       * Map of extra parameters for custom features not available in this client library. The
+       * content in this map is not serialized under this field's {@code @SerializedName} value.
+       * Instead, each key/value pair is serialized as if the key is a root-level field (serialized)
+       * name in this param object. Effectively, this map is flattened to its parent instance.
+       */
+      @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
+      Map<String, Object> extraParams;
+
+      @SerializedName("preferred_locale")
+      PreferredLocale preferredLocale;
+
+      private Paypal(
+          ApiRequestParams.EnumParam captureMethod,
+          Map<String, Object> extraParams,
+          PreferredLocale preferredLocale) {
+        this.captureMethod = captureMethod;
+        this.extraParams = extraParams;
+        this.preferredLocale = preferredLocale;
+      }
+
+      public static Builder builder() {
+        return new Builder();
+      }
+
+      public static class Builder {
+        private ApiRequestParams.EnumParam captureMethod;
+
+        private Map<String, Object> extraParams;
+
+        private PreferredLocale preferredLocale;
+
+        /** Finalize and obtain parameter instance from this builder. */
+        public PaymentIntentUpdateParams.PaymentMethodOptions.Paypal build() {
+          return new PaymentIntentUpdateParams.PaymentMethodOptions.Paypal(
+              this.captureMethod, this.extraParams, this.preferredLocale);
+        }
+
+        public Builder setCaptureMethod(
+            PaymentIntentUpdateParams.PaymentMethodOptions.Paypal.CaptureMethod captureMethod) {
+          this.captureMethod = captureMethod;
+          return this;
+        }
+
+        public Builder setCaptureMethod(EmptyParam captureMethod) {
+          this.captureMethod = captureMethod;
+          return this;
+        }
+
+        /**
+         * Add a key/value pair to `extraParams` map. A map is initialized for the first
+         * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
+         * map. See {@link PaymentIntentUpdateParams.PaymentMethodOptions.Paypal#extraParams} for
+         * the field documentation.
+         */
+        public Builder putExtraParam(String key, Object value) {
+          if (this.extraParams == null) {
+            this.extraParams = new HashMap<>();
+          }
+          this.extraParams.put(key, value);
+          return this;
+        }
+
+        /**
+         * Add all map key/value pairs to `extraParams` map. A map is initialized for the first
+         * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
+         * map. See {@link PaymentIntentUpdateParams.PaymentMethodOptions.Paypal#extraParams} for
+         * the field documentation.
+         */
+        public Builder putAllExtraParam(Map<String, Object> map) {
+          if (this.extraParams == null) {
+            this.extraParams = new HashMap<>();
+          }
+          this.extraParams.putAll(map);
+          return this;
+        }
+
+        public Builder setPreferredLocale(
+            PaymentIntentUpdateParams.PaymentMethodOptions.Paypal.PreferredLocale preferredLocale) {
+          this.preferredLocale = preferredLocale;
+          return this;
+        }
+      }
+
+      public enum CaptureMethod implements ApiRequestParams.EnumParam {
+        @SerializedName("manual")
+        MANUAL("manual");
+
+        @Getter(onMethod_ = {@Override})
+        private final String value;
+
+        CaptureMethod(String value) {
+          this.value = value;
+        }
+      }
+
+      public enum PreferredLocale implements ApiRequestParams.EnumParam {
+        @SerializedName("cs_CZ")
+        CS_CZ("cs_CZ"),
+
+        @SerializedName("da_DK")
+        DA_DK("da_DK"),
+
+        @SerializedName("de_AT")
+        DE_AT("de_AT"),
+
+        @SerializedName("de_DE")
+        DE_DE("de_DE"),
+
+        @SerializedName("de_LU")
+        DE_LU("de_LU"),
+
+        @SerializedName("el_GR")
+        EL_GR("el_GR"),
+
+        @SerializedName("en_GB")
+        EN_GB("en_GB"),
+
+        @SerializedName("en_US")
+        EN_US("en_US"),
+
+        @SerializedName("es_ES")
+        ES_ES("es_ES"),
+
+        @SerializedName("fi_FI")
+        FI_FI("fi_FI"),
+
+        @SerializedName("fr_BE")
+        FR_BE("fr_BE"),
+
+        @SerializedName("fr_FR")
+        FR_FR("fr_FR"),
+
+        @SerializedName("fr_LU")
+        FR_LU("fr_LU"),
+
+        @SerializedName("hu_HU")
+        HU_HU("hu_HU"),
+
+        @SerializedName("it_IT")
+        IT_IT("it_IT"),
+
+        @SerializedName("nl_BE")
+        NL_BE("nl_BE"),
+
+        @SerializedName("nl_NL")
+        NL_NL("nl_NL"),
+
+        @SerializedName("pl_PL")
+        PL_PL("pl_PL"),
+
+        @SerializedName("pt_PT")
+        PT_PT("pt_PT"),
+
+        @SerializedName("sk_SK")
+        SK_SK("sk_SK"),
+
+        @SerializedName("sv_SE")
+        SV_SE("sv_SE");
+
+        @Getter(onMethod_ = {@Override})
+        private final String value;
+
+        PreferredLocale(String value) {
           this.value = value;
         }
       }

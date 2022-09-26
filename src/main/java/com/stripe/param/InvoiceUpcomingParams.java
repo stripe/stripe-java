@@ -3,7 +3,6 @@ package com.stripe.param;
 
 import com.google.gson.annotations.SerializedName;
 import com.stripe.net.ApiRequestParams;
-import com.stripe.net.ApiRequestParams.EnumParam;
 import com.stripe.param.common.EmptyParam;
 import java.math.BigDecimal;
 import java.util.ArrayList;
@@ -67,7 +66,7 @@ public class InvoiceUpcomingParams extends ApiRequestParams {
 
   /** List of invoice items to add or update in the upcoming invoice preview. */
   @SerializedName("invoice_items")
-  List<InvoiceItem> invoiceItems;
+  List<InvoiceUpcomingParams.InvoiceItem> invoiceItems;
 
   /**
    * The identifier of the unstarted schedule whose upcoming invoice you'd like to retrieve. Cannot
@@ -123,7 +122,7 @@ public class InvoiceUpcomingParams extends ApiRequestParams {
 
   /** A list of up to 20 subscription items, each with an attached price. */
   @SerializedName("subscription_items")
-  List<SubscriptionItem> subscriptionItems;
+  List<InvoiceUpcomingParams.SubscriptionItem> subscriptionItems;
 
   /** The pre-billing to apply to the subscription as a preview. */
   @SerializedName("subscription_prebilling")
@@ -179,7 +178,7 @@ public class InvoiceUpcomingParams extends ApiRequestParams {
       Object discounts,
       List<String> expand,
       Map<String, Object> extraParams,
-      List<InvoiceItem> invoiceItems,
+      List<InvoiceUpcomingParams.InvoiceItem> invoiceItems,
       String schedule,
       String subscription,
       Object subscriptionBillingCycleAnchor,
@@ -187,7 +186,7 @@ public class InvoiceUpcomingParams extends ApiRequestParams {
       Boolean subscriptionCancelAtPeriodEnd,
       Boolean subscriptionCancelNow,
       Object subscriptionDefaultTaxRates,
-      List<SubscriptionItem> subscriptionItems,
+      List<InvoiceUpcomingParams.SubscriptionItem> subscriptionItems,
       SubscriptionPrebilling subscriptionPrebilling,
       SubscriptionProrationBehavior subscriptionProrationBehavior,
       Long subscriptionProrationDate,
@@ -240,7 +239,7 @@ public class InvoiceUpcomingParams extends ApiRequestParams {
 
     private Map<String, Object> extraParams;
 
-    private List<InvoiceItem> invoiceItems;
+    private List<InvoiceUpcomingParams.InvoiceItem> invoiceItems;
 
     private String schedule;
 
@@ -256,7 +255,7 @@ public class InvoiceUpcomingParams extends ApiRequestParams {
 
     private Object subscriptionDefaultTaxRates;
 
-    private List<SubscriptionItem> subscriptionItems;
+    private List<InvoiceUpcomingParams.SubscriptionItem> subscriptionItems;
 
     private SubscriptionPrebilling subscriptionPrebilling;
 
@@ -299,7 +298,7 @@ public class InvoiceUpcomingParams extends ApiRequestParams {
     }
 
     /** Settings for automatic tax lookup for this invoice preview. */
-    public Builder setAutomaticTax(AutomaticTax automaticTax) {
+    public Builder setAutomaticTax(InvoiceUpcomingParams.AutomaticTax automaticTax) {
       this.automaticTax = automaticTax;
       return this;
     }
@@ -332,7 +331,7 @@ public class InvoiceUpcomingParams extends ApiRequestParams {
     }
 
     /** Details about the customer you want to invoice or overrides for an existing customer. */
-    public Builder setCustomerDetails(CustomerDetails customerDetails) {
+    public Builder setCustomerDetails(InvoiceUpcomingParams.CustomerDetails customerDetails) {
       this.customerDetails = customerDetails;
       return this;
     }
@@ -343,7 +342,7 @@ public class InvoiceUpcomingParams extends ApiRequestParams {
      * InvoiceUpcomingParams#discounts} for the field documentation.
      */
     @SuppressWarnings("unchecked")
-    public Builder addDiscount(Discount element) {
+    public Builder addDiscount(InvoiceUpcomingParams.Discount element) {
       if (this.discounts == null || this.discounts instanceof EmptyParam) {
         this.discounts = new ArrayList<InvoiceUpcomingParams.Discount>();
       }
@@ -357,7 +356,7 @@ public class InvoiceUpcomingParams extends ApiRequestParams {
      * InvoiceUpcomingParams#discounts} for the field documentation.
      */
     @SuppressWarnings("unchecked")
-    public Builder addAllDiscount(List<Discount> elements) {
+    public Builder addAllDiscount(List<InvoiceUpcomingParams.Discount> elements) {
       if (this.discounts == null || this.discounts instanceof EmptyParam) {
         this.discounts = new ArrayList<InvoiceUpcomingParams.Discount>();
       }
@@ -384,7 +383,7 @@ public class InvoiceUpcomingParams extends ApiRequestParams {
      * instead. Pass an empty string to avoid inheriting any discounts. To preview the upcoming
      * invoice for a subscription that hasn't been created, use {@code coupon} instead.
      */
-    public Builder setDiscounts(List<Discount> discounts) {
+    public Builder setDiscounts(List<InvoiceUpcomingParams.Discount> discounts) {
       this.discounts = discounts;
       return this;
     }
@@ -446,7 +445,7 @@ public class InvoiceUpcomingParams extends ApiRequestParams {
      * and subsequent calls adds additional elements to the original list. See {@link
      * InvoiceUpcomingParams#invoiceItems} for the field documentation.
      */
-    public Builder addInvoiceItem(InvoiceItem element) {
+    public Builder addInvoiceItem(InvoiceUpcomingParams.InvoiceItem element) {
       if (this.invoiceItems == null) {
         this.invoiceItems = new ArrayList<>();
       }
@@ -459,7 +458,7 @@ public class InvoiceUpcomingParams extends ApiRequestParams {
      * call, and subsequent calls adds additional elements to the original list. See {@link
      * InvoiceUpcomingParams#invoiceItems} for the field documentation.
      */
-    public Builder addAllInvoiceItem(List<InvoiceItem> elements) {
+    public Builder addAllInvoiceItem(List<InvoiceUpcomingParams.InvoiceItem> elements) {
       if (this.invoiceItems == null) {
         this.invoiceItems = new ArrayList<>();
       }
@@ -496,7 +495,7 @@ public class InvoiceUpcomingParams extends ApiRequestParams {
      * the value can only be set to {@code now} or {@code unchanged}.
      */
     public Builder setSubscriptionBillingCycleAnchor(
-        SubscriptionBillingCycleAnchor subscriptionBillingCycleAnchor) {
+        InvoiceUpcomingParams.SubscriptionBillingCycleAnchor subscriptionBillingCycleAnchor) {
       this.subscriptionBillingCycleAnchor = subscriptionBillingCycleAnchor;
       return this;
     }
@@ -600,7 +599,7 @@ public class InvoiceUpcomingParams extends ApiRequestParams {
      * call, and subsequent calls adds additional elements to the original list. See {@link
      * InvoiceUpcomingParams#subscriptionItems} for the field documentation.
      */
-    public Builder addSubscriptionItem(SubscriptionItem element) {
+    public Builder addSubscriptionItem(InvoiceUpcomingParams.SubscriptionItem element) {
       if (this.subscriptionItems == null) {
         this.subscriptionItems = new ArrayList<>();
       }
@@ -613,7 +612,7 @@ public class InvoiceUpcomingParams extends ApiRequestParams {
      * `add/addAll` call, and subsequent calls adds additional elements to the original list. See
      * {@link InvoiceUpcomingParams#subscriptionItems} for the field documentation.
      */
-    public Builder addAllSubscriptionItem(List<SubscriptionItem> elements) {
+    public Builder addAllSubscriptionItem(List<InvoiceUpcomingParams.SubscriptionItem> elements) {
       if (this.subscriptionItems == null) {
         this.subscriptionItems = new ArrayList<>();
       }
@@ -622,7 +621,8 @@ public class InvoiceUpcomingParams extends ApiRequestParams {
     }
 
     /** The pre-billing to apply to the subscription as a preview. */
-    public Builder setSubscriptionPrebilling(SubscriptionPrebilling subscriptionPrebilling) {
+    public Builder setSubscriptionPrebilling(
+        InvoiceUpcomingParams.SubscriptionPrebilling subscriptionPrebilling) {
       this.subscriptionPrebilling = subscriptionPrebilling;
       return this;
     }
@@ -634,7 +634,7 @@ public class InvoiceUpcomingParams extends ApiRequestParams {
      * billing_cycle_anchor=now}, or starting a trial), or if an item's {@code quantity} changes.
      */
     public Builder setSubscriptionProrationBehavior(
-        SubscriptionProrationBehavior subscriptionProrationBehavior) {
+        InvoiceUpcomingParams.SubscriptionProrationBehavior subscriptionProrationBehavior) {
       this.subscriptionProrationBehavior = subscriptionProrationBehavior;
       return this;
     }
@@ -662,7 +662,8 @@ public class InvoiceUpcomingParams extends ApiRequestParams {
      * If provided, the invoice returned will preview updating or creating a subscription with that
      * trial end. If set, one of {@code subscription_items} or {@code subscription} is required.
      */
-    public Builder setSubscriptionTrialEnd(SubscriptionTrialEnd subscriptionTrialEnd) {
+    public Builder setSubscriptionTrialEnd(
+        InvoiceUpcomingParams.SubscriptionTrialEnd subscriptionTrialEnd) {
       this.subscriptionTrialEnd = subscriptionTrialEnd;
       return this;
     }
@@ -724,8 +725,8 @@ public class InvoiceUpcomingParams extends ApiRequestParams {
       private Map<String, Object> extraParams;
 
       /** Finalize and obtain parameter instance from this builder. */
-      public AutomaticTax build() {
-        return new AutomaticTax(this.enabled, this.extraParams);
+      public InvoiceUpcomingParams.AutomaticTax build() {
+        return new InvoiceUpcomingParams.AutomaticTax(this.enabled, this.extraParams);
       }
 
       /**
@@ -792,19 +793,19 @@ public class InvoiceUpcomingParams extends ApiRequestParams {
 
     /** The customer's tax exemption. One of {@code none}, {@code exempt}, or {@code reverse}. */
     @SerializedName("tax_exempt")
-    EnumParam taxExempt;
+    ApiRequestParams.EnumParam taxExempt;
 
     /** The customer's tax IDs. */
     @SerializedName("tax_ids")
-    List<TaxId> taxIds;
+    List<InvoiceUpcomingParams.CustomerDetails.TaxId> taxIds;
 
     private CustomerDetails(
         Object address,
         Map<String, Object> extraParams,
         Object shipping,
         Tax tax,
-        EnumParam taxExempt,
-        List<TaxId> taxIds) {
+        ApiRequestParams.EnumParam taxExempt,
+        List<InvoiceUpcomingParams.CustomerDetails.TaxId> taxIds) {
       this.address = address;
       this.extraParams = extraParams;
       this.shipping = shipping;
@@ -826,18 +827,18 @@ public class InvoiceUpcomingParams extends ApiRequestParams {
 
       private Tax tax;
 
-      private EnumParam taxExempt;
+      private ApiRequestParams.EnumParam taxExempt;
 
-      private List<TaxId> taxIds;
+      private List<InvoiceUpcomingParams.CustomerDetails.TaxId> taxIds;
 
       /** Finalize and obtain parameter instance from this builder. */
-      public CustomerDetails build() {
-        return new CustomerDetails(
+      public InvoiceUpcomingParams.CustomerDetails build() {
+        return new InvoiceUpcomingParams.CustomerDetails(
             this.address, this.extraParams, this.shipping, this.tax, this.taxExempt, this.taxIds);
       }
 
       /** The customer's address. */
-      public Builder setAddress(Address address) {
+      public Builder setAddress(InvoiceUpcomingParams.CustomerDetails.Address address) {
         this.address = address;
         return this;
       }
@@ -875,7 +876,7 @@ public class InvoiceUpcomingParams extends ApiRequestParams {
       }
 
       /** The customer's shipping information. Appears on invoices emailed to this customer. */
-      public Builder setShipping(Shipping shipping) {
+      public Builder setShipping(InvoiceUpcomingParams.CustomerDetails.Shipping shipping) {
         this.shipping = shipping;
         return this;
       }
@@ -887,13 +888,13 @@ public class InvoiceUpcomingParams extends ApiRequestParams {
       }
 
       /** Tax details about the customer. */
-      public Builder setTax(Tax tax) {
+      public Builder setTax(InvoiceUpcomingParams.CustomerDetails.Tax tax) {
         this.tax = tax;
         return this;
       }
 
       /** The customer's tax exemption. One of {@code none}, {@code exempt}, or {@code reverse}. */
-      public Builder setTaxExempt(TaxExempt taxExempt) {
+      public Builder setTaxExempt(InvoiceUpcomingParams.CustomerDetails.TaxExempt taxExempt) {
         this.taxExempt = taxExempt;
         return this;
       }
@@ -909,7 +910,7 @@ public class InvoiceUpcomingParams extends ApiRequestParams {
        * subsequent calls adds additional elements to the original list. See {@link
        * InvoiceUpcomingParams.CustomerDetails#taxIds} for the field documentation.
        */
-      public Builder addTaxId(TaxId element) {
+      public Builder addTaxId(InvoiceUpcomingParams.CustomerDetails.TaxId element) {
         if (this.taxIds == null) {
           this.taxIds = new ArrayList<>();
         }
@@ -922,7 +923,7 @@ public class InvoiceUpcomingParams extends ApiRequestParams {
        * and subsequent calls adds additional elements to the original list. See {@link
        * InvoiceUpcomingParams.CustomerDetails#taxIds} for the field documentation.
        */
-      public Builder addAllTaxId(List<TaxId> elements) {
+      public Builder addAllTaxId(List<InvoiceUpcomingParams.CustomerDetails.TaxId> elements) {
         if (this.taxIds == null) {
           this.taxIds = new ArrayList<>();
         }
@@ -1006,8 +1007,8 @@ public class InvoiceUpcomingParams extends ApiRequestParams {
         private String state;
 
         /** Finalize and obtain parameter instance from this builder. */
-        public Address build() {
-          return new Address(
+        public InvoiceUpcomingParams.CustomerDetails.Address build() {
+          return new InvoiceUpcomingParams.CustomerDetails.Address(
               this.city,
               this.country,
               this.extraParams,
@@ -1131,12 +1132,13 @@ public class InvoiceUpcomingParams extends ApiRequestParams {
         private String phone;
 
         /** Finalize and obtain parameter instance from this builder. */
-        public Shipping build() {
-          return new Shipping(this.address, this.extraParams, this.name, this.phone);
+        public InvoiceUpcomingParams.CustomerDetails.Shipping build() {
+          return new InvoiceUpcomingParams.CustomerDetails.Shipping(
+              this.address, this.extraParams, this.name, this.phone);
         }
 
         /** Customer shipping address. */
-        public Builder setAddress(Address address) {
+        public Builder setAddress(InvoiceUpcomingParams.CustomerDetails.Shipping.Address address) {
           this.address = address;
           return this;
         }
@@ -1258,8 +1260,8 @@ public class InvoiceUpcomingParams extends ApiRequestParams {
           private String state;
 
           /** Finalize and obtain parameter instance from this builder. */
-          public Address build() {
-            return new Address(
+          public InvoiceUpcomingParams.CustomerDetails.Shipping.Address build() {
+            return new InvoiceUpcomingParams.CustomerDetails.Shipping.Address(
                 this.city,
                 this.country,
                 this.extraParams,
@@ -1374,8 +1376,8 @@ public class InvoiceUpcomingParams extends ApiRequestParams {
         private Object ipAddress;
 
         /** Finalize and obtain parameter instance from this builder. */
-        public Tax build() {
-          return new Tax(this.extraParams, this.ipAddress);
+        public InvoiceUpcomingParams.CustomerDetails.Tax build() {
+          return new InvoiceUpcomingParams.CustomerDetails.Tax(this.extraParams, this.ipAddress);
         }
 
         /**
@@ -1477,8 +1479,9 @@ public class InvoiceUpcomingParams extends ApiRequestParams {
         private String value;
 
         /** Finalize and obtain parameter instance from this builder. */
-        public TaxId build() {
-          return new TaxId(this.extraParams, this.type, this.value);
+        public InvoiceUpcomingParams.CustomerDetails.TaxId build() {
+          return new InvoiceUpcomingParams.CustomerDetails.TaxId(
+              this.extraParams, this.type, this.value);
         }
 
         /**
@@ -1521,7 +1524,7 @@ public class InvoiceUpcomingParams extends ApiRequestParams {
          * si_tin}, {@code th_vat}, {@code tw_vat}, {@code ua_vat}, {@code us_ein}, or {@code
          * za_vat}.
          */
-        public Builder setType(Type type) {
+        public Builder setType(InvoiceUpcomingParams.CustomerDetails.TaxId.Type type) {
           this.type = type;
           return this;
         }
@@ -1737,8 +1740,8 @@ public class InvoiceUpcomingParams extends ApiRequestParams {
       private Map<String, Object> extraParams;
 
       /** Finalize and obtain parameter instance from this builder. */
-      public Discount build() {
-        return new Discount(this.coupon, this.discount, this.extraParams);
+      public InvoiceUpcomingParams.Discount build() {
+        return new InvoiceUpcomingParams.Discount(this.coupon, this.discount, this.extraParams);
       }
 
       /** ID of the coupon to create a new discount for. */
@@ -1952,8 +1955,8 @@ public class InvoiceUpcomingParams extends ApiRequestParams {
       private BigDecimal unitAmountDecimal;
 
       /** Finalize and obtain parameter instance from this builder. */
-      public InvoiceItem build() {
-        return new InvoiceItem(
+      public InvoiceUpcomingParams.InvoiceItem build() {
+        return new InvoiceUpcomingParams.InvoiceItem(
             this.amount,
             this.currency,
             this.description,
@@ -2011,7 +2014,7 @@ public class InvoiceUpcomingParams extends ApiRequestParams {
        * InvoiceUpcomingParams.InvoiceItem#discounts} for the field documentation.
        */
       @SuppressWarnings("unchecked")
-      public Builder addDiscount(Discount element) {
+      public Builder addDiscount(InvoiceUpcomingParams.InvoiceItem.Discount element) {
         if (this.discounts == null || this.discounts instanceof EmptyParam) {
           this.discounts = new ArrayList<InvoiceUpcomingParams.InvoiceItem.Discount>();
         }
@@ -2025,7 +2028,7 @@ public class InvoiceUpcomingParams extends ApiRequestParams {
        * InvoiceUpcomingParams.InvoiceItem#discounts} for the field documentation.
        */
       @SuppressWarnings("unchecked")
-      public Builder addAllDiscount(List<Discount> elements) {
+      public Builder addAllDiscount(List<InvoiceUpcomingParams.InvoiceItem.Discount> elements) {
         if (this.discounts == null || this.discounts instanceof EmptyParam) {
           this.discounts = new ArrayList<InvoiceUpcomingParams.InvoiceItem.Discount>();
         }
@@ -2040,7 +2043,7 @@ public class InvoiceUpcomingParams extends ApiRequestParams {
       }
 
       /** The coupons to redeem into discounts for the invoice item in the preview. */
-      public Builder setDiscounts(List<Discount> discounts) {
+      public Builder setDiscounts(List<InvoiceUpcomingParams.InvoiceItem.Discount> discounts) {
         this.discounts = discounts;
         return this;
       }
@@ -2134,7 +2137,7 @@ public class InvoiceUpcomingParams extends ApiRequestParams {
        * The period associated with this invoice item. When set to different values, the period will
        * be rendered on the invoice.
        */
-      public Builder setPeriod(Period period) {
+      public Builder setPeriod(InvoiceUpcomingParams.InvoiceItem.Period period) {
         this.period = period;
         return this;
       }
@@ -2149,7 +2152,7 @@ public class InvoiceUpcomingParams extends ApiRequestParams {
        * Data used to generate a new <a href="https://stripe.com/docs/api/prices">Price</a> object
        * inline.
        */
-      public Builder setPriceData(PriceData priceData) {
+      public Builder setPriceData(InvoiceUpcomingParams.InvoiceItem.PriceData priceData) {
         this.priceData = priceData;
         return this;
       }
@@ -2265,8 +2268,9 @@ public class InvoiceUpcomingParams extends ApiRequestParams {
         private Map<String, Object> extraParams;
 
         /** Finalize and obtain parameter instance from this builder. */
-        public Discount build() {
-          return new Discount(this.coupon, this.discount, this.extraParams);
+        public InvoiceUpcomingParams.InvoiceItem.Discount build() {
+          return new InvoiceUpcomingParams.InvoiceItem.Discount(
+              this.coupon, this.discount, this.extraParams);
         }
 
         /** ID of the coupon to create a new discount for. */
@@ -2348,8 +2352,9 @@ public class InvoiceUpcomingParams extends ApiRequestParams {
         private Long start;
 
         /** Finalize and obtain parameter instance from this builder. */
-        public Period build() {
-          return new Period(this.end, this.extraParams, this.start);
+        public InvoiceUpcomingParams.InvoiceItem.Period build() {
+          return new InvoiceUpcomingParams.InvoiceItem.Period(
+              this.end, this.extraParams, this.start);
         }
 
         /** The end of the period, which must be greater than or equal to the start. */
@@ -2473,8 +2478,8 @@ public class InvoiceUpcomingParams extends ApiRequestParams {
         private BigDecimal unitAmountDecimal;
 
         /** Finalize and obtain parameter instance from this builder. */
-        public PriceData build() {
-          return new PriceData(
+        public InvoiceUpcomingParams.InvoiceItem.PriceData build() {
+          return new InvoiceUpcomingParams.InvoiceItem.PriceData(
               this.currency,
               this.extraParams,
               this.product,
@@ -2532,7 +2537,8 @@ public class InvoiceUpcomingParams extends ApiRequestParams {
          * of {@code inclusive}, {@code exclusive}, or {@code unspecified}. Once specified as either
          * {@code inclusive} or {@code exclusive}, it cannot be changed.
          */
-        public Builder setTaxBehavior(TaxBehavior taxBehavior) {
+        public Builder setTaxBehavior(
+            InvoiceUpcomingParams.InvoiceItem.PriceData.TaxBehavior taxBehavior) {
           this.taxBehavior = taxBehavior;
           return this;
         }
@@ -2712,8 +2718,8 @@ public class InvoiceUpcomingParams extends ApiRequestParams {
       private Object taxRates;
 
       /** Finalize and obtain parameter instance from this builder. */
-      public SubscriptionItem build() {
-        return new SubscriptionItem(
+      public InvoiceUpcomingParams.SubscriptionItem build() {
+        return new InvoiceUpcomingParams.SubscriptionItem(
             this.billingThresholds,
             this.clearUsage,
             this.deleted,
@@ -2733,7 +2739,8 @@ public class InvoiceUpcomingParams extends ApiRequestParams {
        * billing period. When updating, pass an empty string to remove previously-defined
        * thresholds.
        */
-      public Builder setBillingThresholds(BillingThresholds billingThresholds) {
+      public Builder setBillingThresholds(
+          InvoiceUpcomingParams.SubscriptionItem.BillingThresholds billingThresholds) {
         this.billingThresholds = billingThresholds;
         return this;
       }
@@ -2769,7 +2776,7 @@ public class InvoiceUpcomingParams extends ApiRequestParams {
        * InvoiceUpcomingParams.SubscriptionItem#discounts} for the field documentation.
        */
       @SuppressWarnings("unchecked")
-      public Builder addDiscount(Discount element) {
+      public Builder addDiscount(InvoiceUpcomingParams.SubscriptionItem.Discount element) {
         if (this.discounts == null || this.discounts instanceof EmptyParam) {
           this.discounts = new ArrayList<InvoiceUpcomingParams.SubscriptionItem.Discount>();
         }
@@ -2783,7 +2790,8 @@ public class InvoiceUpcomingParams extends ApiRequestParams {
        * InvoiceUpcomingParams.SubscriptionItem#discounts} for the field documentation.
        */
       @SuppressWarnings("unchecked")
-      public Builder addAllDiscount(List<Discount> elements) {
+      public Builder addAllDiscount(
+          List<InvoiceUpcomingParams.SubscriptionItem.Discount> elements) {
         if (this.discounts == null || this.discounts instanceof EmptyParam) {
           this.discounts = new ArrayList<InvoiceUpcomingParams.SubscriptionItem.Discount>();
         }
@@ -2798,7 +2806,7 @@ public class InvoiceUpcomingParams extends ApiRequestParams {
       }
 
       /** The coupons to redeem into discounts for the subscription item. */
-      public Builder setDiscounts(List<Discount> discounts) {
+      public Builder setDiscounts(List<InvoiceUpcomingParams.SubscriptionItem.Discount> discounts) {
         this.discounts = discounts;
         return this;
       }
@@ -2904,7 +2912,7 @@ public class InvoiceUpcomingParams extends ApiRequestParams {
        * Data used to generate a new <a href="https://stripe.com/docs/api/prices">Price</a> object
        * inline.
        */
-      public Builder setPriceData(PriceData priceData) {
+      public Builder setPriceData(InvoiceUpcomingParams.SubscriptionItem.PriceData priceData) {
         this.priceData = priceData;
         return this;
       }
@@ -2998,8 +3006,9 @@ public class InvoiceUpcomingParams extends ApiRequestParams {
         private Long usageGte;
 
         /** Finalize and obtain parameter instance from this builder. */
-        public BillingThresholds build() {
-          return new BillingThresholds(this.extraParams, this.usageGte);
+        public InvoiceUpcomingParams.SubscriptionItem.BillingThresholds build() {
+          return new InvoiceUpcomingParams.SubscriptionItem.BillingThresholds(
+              this.extraParams, this.usageGte);
         }
 
         /**
@@ -3075,8 +3084,9 @@ public class InvoiceUpcomingParams extends ApiRequestParams {
         private Map<String, Object> extraParams;
 
         /** Finalize and obtain parameter instance from this builder. */
-        public Discount build() {
-          return new Discount(this.coupon, this.discount, this.extraParams);
+        public InvoiceUpcomingParams.SubscriptionItem.Discount build() {
+          return new InvoiceUpcomingParams.SubscriptionItem.Discount(
+              this.coupon, this.discount, this.extraParams);
         }
 
         /** ID of the coupon to create a new discount for. */
@@ -3210,8 +3220,8 @@ public class InvoiceUpcomingParams extends ApiRequestParams {
         private BigDecimal unitAmountDecimal;
 
         /** Finalize and obtain parameter instance from this builder. */
-        public PriceData build() {
-          return new PriceData(
+        public InvoiceUpcomingParams.SubscriptionItem.PriceData build() {
+          return new InvoiceUpcomingParams.SubscriptionItem.PriceData(
               this.currency,
               this.extraParams,
               this.product,
@@ -3268,7 +3278,8 @@ public class InvoiceUpcomingParams extends ApiRequestParams {
         /**
          * The recurring components of a price such as {@code interval} and {@code interval_count}.
          */
-        public Builder setRecurring(Recurring recurring) {
+        public Builder setRecurring(
+            InvoiceUpcomingParams.SubscriptionItem.PriceData.Recurring recurring) {
           this.recurring = recurring;
           return this;
         }
@@ -3278,7 +3289,8 @@ public class InvoiceUpcomingParams extends ApiRequestParams {
          * of {@code inclusive}, {@code exclusive}, or {@code unspecified}. Once specified as either
          * {@code inclusive} or {@code exclusive}, it cannot be changed.
          */
-        public Builder setTaxBehavior(TaxBehavior taxBehavior) {
+        public Builder setTaxBehavior(
+            InvoiceUpcomingParams.SubscriptionItem.PriceData.TaxBehavior taxBehavior) {
           this.taxBehavior = taxBehavior;
           return this;
         }
@@ -3348,8 +3360,9 @@ public class InvoiceUpcomingParams extends ApiRequestParams {
           private Long intervalCount;
 
           /** Finalize and obtain parameter instance from this builder. */
-          public Recurring build() {
-            return new Recurring(this.extraParams, this.interval, this.intervalCount);
+          public InvoiceUpcomingParams.SubscriptionItem.PriceData.Recurring build() {
+            return new InvoiceUpcomingParams.SubscriptionItem.PriceData.Recurring(
+                this.extraParams, this.interval, this.intervalCount);
           }
 
           /**
@@ -3384,7 +3397,8 @@ public class InvoiceUpcomingParams extends ApiRequestParams {
            * Specifies billing frequency. Either {@code day}, {@code week}, {@code month} or {@code
            * year}.
            */
-          public Builder setInterval(Interval interval) {
+          public Builder setInterval(
+              InvoiceUpcomingParams.SubscriptionItem.PriceData.Recurring.Interval interval) {
             this.interval = interval;
             return this;
           }
@@ -3472,8 +3486,8 @@ public class InvoiceUpcomingParams extends ApiRequestParams {
       private Long iterations;
 
       /** Finalize and obtain parameter instance from this builder. */
-      public SubscriptionPrebilling build() {
-        return new SubscriptionPrebilling(this.extraParams, this.iterations);
+      public InvoiceUpcomingParams.SubscriptionPrebilling build() {
+        return new InvoiceUpcomingParams.SubscriptionPrebilling(this.extraParams, this.iterations);
       }
 
       /**
