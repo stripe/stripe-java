@@ -40,7 +40,7 @@ public class PriceCreateParams extends ApiRequestParams {
    * href="https://stripe.com/docs/currencies">supported currency</a>.
    */
   @SerializedName("currency_options")
-  Map<String, CurrencyOption> currencyOptions;
+  Map<String, PriceCreateParams.CurrencyOption> currencyOptions;
 
   /**
    * When set, provides configuration for the amount to be adjusted by the customer during Checkout
@@ -107,7 +107,7 @@ public class PriceCreateParams extends ApiRequestParams {
    * set to {@code tiered}. See also the documentation for {@code billing_scheme}.
    */
   @SerializedName("tiers")
-  List<Tier> tiers;
+  List<PriceCreateParams.Tier> tiers;
 
   /**
    * Defines if the tiering price should be {@code graduated} or {@code volume} based. In {@code
@@ -151,7 +151,7 @@ public class PriceCreateParams extends ApiRequestParams {
       Boolean active,
       BillingScheme billingScheme,
       String currency,
-      Map<String, CurrencyOption> currencyOptions,
+      Map<String, PriceCreateParams.CurrencyOption> currencyOptions,
       CustomUnitAmount customUnitAmount,
       List<String> expand,
       Map<String, Object> extraParams,
@@ -162,7 +162,7 @@ public class PriceCreateParams extends ApiRequestParams {
       ProductData productData,
       Recurring recurring,
       TaxBehavior taxBehavior,
-      List<Tier> tiers,
+      List<PriceCreateParams.Tier> tiers,
       TiersMode tiersMode,
       Boolean transferLookupKey,
       TransformQuantity transformQuantity,
@@ -201,7 +201,7 @@ public class PriceCreateParams extends ApiRequestParams {
 
     private String currency;
 
-    private Map<String, CurrencyOption> currencyOptions;
+    private Map<String, PriceCreateParams.CurrencyOption> currencyOptions;
 
     private CustomUnitAmount customUnitAmount;
 
@@ -223,7 +223,7 @@ public class PriceCreateParams extends ApiRequestParams {
 
     private TaxBehavior taxBehavior;
 
-    private List<Tier> tiers;
+    private List<PriceCreateParams.Tier> tiers;
 
     private TiersMode tiersMode;
 
@@ -274,7 +274,7 @@ public class PriceCreateParams extends ApiRequestParams {
      * usage_type=metered}). {@code tiered} indicates that the unit pricing will be computed using a
      * tiering strategy as defined using the {@code tiers} and {@code tiers_mode} attributes.
      */
-    public Builder setBillingScheme(BillingScheme billingScheme) {
+    public Builder setBillingScheme(PriceCreateParams.BillingScheme billingScheme) {
       this.billingScheme = billingScheme;
       return this;
     }
@@ -294,7 +294,7 @@ public class PriceCreateParams extends ApiRequestParams {
      * `put/putAll` call, and subsequent calls add additional key/value pairs to the original map.
      * See {@link PriceCreateParams#currencyOptions} for the field documentation.
      */
-    public Builder putCurrencyOption(String key, CurrencyOption value) {
+    public Builder putCurrencyOption(String key, PriceCreateParams.CurrencyOption value) {
       if (this.currencyOptions == null) {
         this.currencyOptions = new HashMap<>();
       }
@@ -307,7 +307,7 @@ public class PriceCreateParams extends ApiRequestParams {
      * `put/putAll` call, and subsequent calls add additional key/value pairs to the original map.
      * See {@link PriceCreateParams#currencyOptions} for the field documentation.
      */
-    public Builder putAllCurrencyOption(Map<String, CurrencyOption> map) {
+    public Builder putAllCurrencyOption(Map<String, PriceCreateParams.CurrencyOption> map) {
       if (this.currencyOptions == null) {
         this.currencyOptions = new HashMap<>();
       }
@@ -319,7 +319,7 @@ public class PriceCreateParams extends ApiRequestParams {
      * When set, provides configuration for the amount to be adjusted by the customer during
      * Checkout Sessions and Payment Links.
      */
-    public Builder setCustomUnitAmount(CustomUnitAmount customUnitAmount) {
+    public Builder setCustomUnitAmount(PriceCreateParams.CustomUnitAmount customUnitAmount) {
       this.customUnitAmount = customUnitAmount;
       return this;
     }
@@ -424,13 +424,13 @@ public class PriceCreateParams extends ApiRequestParams {
     }
 
     /** These fields can be used to create a new product that this price will belong to. */
-    public Builder setProductData(ProductData productData) {
+    public Builder setProductData(PriceCreateParams.ProductData productData) {
       this.productData = productData;
       return this;
     }
 
     /** The recurring components of a price such as {@code interval} and {@code usage_type}. */
-    public Builder setRecurring(Recurring recurring) {
+    public Builder setRecurring(PriceCreateParams.Recurring recurring) {
       this.recurring = recurring;
       return this;
     }
@@ -440,7 +440,7 @@ public class PriceCreateParams extends ApiRequestParams {
      * {@code inclusive}, {@code exclusive}, or {@code unspecified}. Once specified as either {@code
      * inclusive} or {@code exclusive}, it cannot be changed.
      */
-    public Builder setTaxBehavior(TaxBehavior taxBehavior) {
+    public Builder setTaxBehavior(PriceCreateParams.TaxBehavior taxBehavior) {
       this.taxBehavior = taxBehavior;
       return this;
     }
@@ -450,7 +450,7 @@ public class PriceCreateParams extends ApiRequestParams {
      * subsequent calls adds additional elements to the original list. See {@link
      * PriceCreateParams#tiers} for the field documentation.
      */
-    public Builder addTier(Tier element) {
+    public Builder addTier(PriceCreateParams.Tier element) {
       if (this.tiers == null) {
         this.tiers = new ArrayList<>();
       }
@@ -463,7 +463,7 @@ public class PriceCreateParams extends ApiRequestParams {
      * subsequent calls adds additional elements to the original list. See {@link
      * PriceCreateParams#tiers} for the field documentation.
      */
-    public Builder addAllTier(List<Tier> elements) {
+    public Builder addAllTier(List<PriceCreateParams.Tier> elements) {
       if (this.tiers == null) {
         this.tiers = new ArrayList<>();
       }
@@ -476,7 +476,7 @@ public class PriceCreateParams extends ApiRequestParams {
      * volume}-based tiering, the maximum quantity within a period determines the per unit price, in
      * {@code graduated} tiering pricing can successively change as the quantity grows.
      */
-    public Builder setTiersMode(TiersMode tiersMode) {
+    public Builder setTiersMode(PriceCreateParams.TiersMode tiersMode) {
       this.tiersMode = tiersMode;
       return this;
     }
@@ -494,7 +494,7 @@ public class PriceCreateParams extends ApiRequestParams {
      * Apply a transformation to the reported usage or set quantity before computing the billed
      * price. Cannot be combined with {@code tiers}.
      */
-    public Builder setTransformQuantity(TransformQuantity transformQuantity) {
+    public Builder setTransformQuantity(PriceCreateParams.TransformQuantity transformQuantity) {
       this.transformQuantity = transformQuantity;
       return this;
     }
@@ -551,7 +551,7 @@ public class PriceCreateParams extends ApiRequestParams {
      * set to {@code tiered}. See also the documentation for {@code billing_scheme}.
      */
     @SerializedName("tiers")
-    List<Tier> tiers;
+    List<PriceCreateParams.CurrencyOption.Tier> tiers;
 
     /**
      * A positive integer in cents (or local equivalent) (or 0 for a free price) representing how
@@ -572,7 +572,7 @@ public class PriceCreateParams extends ApiRequestParams {
         CustomUnitAmount customUnitAmount,
         Map<String, Object> extraParams,
         TaxBehavior taxBehavior,
-        List<Tier> tiers,
+        List<PriceCreateParams.CurrencyOption.Tier> tiers,
         Long unitAmount,
         BigDecimal unitAmountDecimal) {
       this.customUnitAmount = customUnitAmount;
@@ -594,15 +594,15 @@ public class PriceCreateParams extends ApiRequestParams {
 
       private TaxBehavior taxBehavior;
 
-      private List<Tier> tiers;
+      private List<PriceCreateParams.CurrencyOption.Tier> tiers;
 
       private Long unitAmount;
 
       private BigDecimal unitAmountDecimal;
 
       /** Finalize and obtain parameter instance from this builder. */
-      public CurrencyOption build() {
-        return new CurrencyOption(
+      public PriceCreateParams.CurrencyOption build() {
+        return new PriceCreateParams.CurrencyOption(
             this.customUnitAmount,
             this.extraParams,
             this.taxBehavior,
@@ -615,7 +615,8 @@ public class PriceCreateParams extends ApiRequestParams {
        * When set, provides configuration for the amount to be adjusted by the customer during
        * Checkout Sessions and Payment Links.
        */
-      public Builder setCustomUnitAmount(CustomUnitAmount customUnitAmount) {
+      public Builder setCustomUnitAmount(
+          PriceCreateParams.CurrencyOption.CustomUnitAmount customUnitAmount) {
         this.customUnitAmount = customUnitAmount;
         return this;
       }
@@ -651,7 +652,7 @@ public class PriceCreateParams extends ApiRequestParams {
        * {@code inclusive}, {@code exclusive}, or {@code unspecified}. Once specified as either
        * {@code inclusive} or {@code exclusive}, it cannot be changed.
        */
-      public Builder setTaxBehavior(TaxBehavior taxBehavior) {
+      public Builder setTaxBehavior(PriceCreateParams.CurrencyOption.TaxBehavior taxBehavior) {
         this.taxBehavior = taxBehavior;
         return this;
       }
@@ -661,7 +662,7 @@ public class PriceCreateParams extends ApiRequestParams {
        * subsequent calls adds additional elements to the original list. See {@link
        * PriceCreateParams.CurrencyOption#tiers} for the field documentation.
        */
-      public Builder addTier(Tier element) {
+      public Builder addTier(PriceCreateParams.CurrencyOption.Tier element) {
         if (this.tiers == null) {
           this.tiers = new ArrayList<>();
         }
@@ -674,7 +675,7 @@ public class PriceCreateParams extends ApiRequestParams {
        * and subsequent calls adds additional elements to the original list. See {@link
        * PriceCreateParams.CurrencyOption#tiers} for the field documentation.
        */
-      public Builder addAllTier(List<Tier> elements) {
+      public Builder addAllTier(List<PriceCreateParams.CurrencyOption.Tier> elements) {
         if (this.tiers == null) {
           this.tiers = new ArrayList<>();
         }
@@ -764,8 +765,8 @@ public class PriceCreateParams extends ApiRequestParams {
         private Long preset;
 
         /** Finalize and obtain parameter instance from this builder. */
-        public CustomUnitAmount build() {
-          return new CustomUnitAmount(
+        public PriceCreateParams.CurrencyOption.CustomUnitAmount build() {
+          return new PriceCreateParams.CurrencyOption.CustomUnitAmount(
               this.enabled, this.extraParams, this.maximum, this.minimum, this.preset);
         }
 
@@ -906,8 +907,8 @@ public class PriceCreateParams extends ApiRequestParams {
         private Object upTo;
 
         /** Finalize and obtain parameter instance from this builder. */
-        public Tier build() {
-          return new Tier(
+        public PriceCreateParams.CurrencyOption.Tier build() {
+          return new PriceCreateParams.CurrencyOption.Tier(
               this.extraParams,
               this.flatAmount,
               this.flatAmountDecimal,
@@ -983,7 +984,7 @@ public class PriceCreateParams extends ApiRequestParams {
          * Specifies the upper bound of this tier. The lower bound of a tier is the upper bound of
          * the previous tier adding one. Use {@code inf} to define a fallback tier.
          */
-        public Builder setUpTo(UpTo upTo) {
+        public Builder setUpTo(PriceCreateParams.CurrencyOption.Tier.UpTo upTo) {
           this.upTo = upTo;
           return this;
         }
@@ -1088,8 +1089,8 @@ public class PriceCreateParams extends ApiRequestParams {
       private Long preset;
 
       /** Finalize and obtain parameter instance from this builder. */
-      public CustomUnitAmount build() {
-        return new CustomUnitAmount(
+      public PriceCreateParams.CustomUnitAmount build() {
+        return new PriceCreateParams.CustomUnitAmount(
             this.enabled, this.extraParams, this.maximum, this.minimum, this.preset);
       }
 
@@ -1250,8 +1251,8 @@ public class PriceCreateParams extends ApiRequestParams {
       private String unitLabel;
 
       /** Finalize and obtain parameter instance from this builder. */
-      public ProductData build() {
-        return new ProductData(
+      public PriceCreateParams.ProductData build() {
+        return new PriceCreateParams.ProductData(
             this.active,
             this.extraParams,
             this.id,
@@ -1451,8 +1452,8 @@ public class PriceCreateParams extends ApiRequestParams {
       private UsageType usageType;
 
       /** Finalize and obtain parameter instance from this builder. */
-      public Recurring build() {
-        return new Recurring(
+      public PriceCreateParams.Recurring build() {
+        return new PriceCreateParams.Recurring(
             this.aggregateUsage,
             this.extraParams,
             this.interval,
@@ -1468,7 +1469,7 @@ public class PriceCreateParams extends ApiRequestParams {
        * last usage record ever (across period bounds) or {@code max} which uses the usage record
        * with the maximum reported usage during a period. Defaults to {@code sum}.
        */
-      public Builder setAggregateUsage(AggregateUsage aggregateUsage) {
+      public Builder setAggregateUsage(PriceCreateParams.Recurring.AggregateUsage aggregateUsage) {
         this.aggregateUsage = aggregateUsage;
         return this;
       }
@@ -1503,7 +1504,7 @@ public class PriceCreateParams extends ApiRequestParams {
        * Specifies billing frequency. Either {@code day}, {@code week}, {@code month} or {@code
        * year}.
        */
-      public Builder setInterval(Interval interval) {
+      public Builder setInterval(PriceCreateParams.Recurring.Interval interval) {
         this.interval = interval;
         return this;
       }
@@ -1534,7 +1535,7 @@ public class PriceCreateParams extends ApiRequestParams {
        * adding it to a subscription. {@code metered} aggregates the total usage based on usage
        * records. Defaults to {@code licensed}.
        */
-      public Builder setUsageType(UsageType usageType) {
+      public Builder setUsageType(PriceCreateParams.Recurring.UsageType usageType) {
         this.usageType = usageType;
         return this;
       }
@@ -1675,8 +1676,8 @@ public class PriceCreateParams extends ApiRequestParams {
       private Object upTo;
 
       /** Finalize and obtain parameter instance from this builder. */
-      public Tier build() {
-        return new Tier(
+      public PriceCreateParams.Tier build() {
+        return new PriceCreateParams.Tier(
             this.extraParams,
             this.flatAmount,
             this.flatAmountDecimal,
@@ -1749,7 +1750,7 @@ public class PriceCreateParams extends ApiRequestParams {
        * Specifies the upper bound of this tier. The lower bound of a tier is the upper bound of the
        * previous tier adding one. Use {@code inf} to define a fallback tier.
        */
-      public Builder setUpTo(UpTo upTo) {
+      public Builder setUpTo(PriceCreateParams.Tier.UpTo upTo) {
         this.upTo = upTo;
         return this;
       }
@@ -1814,8 +1815,8 @@ public class PriceCreateParams extends ApiRequestParams {
       private Round round;
 
       /** Finalize and obtain parameter instance from this builder. */
-      public TransformQuantity build() {
-        return new TransformQuantity(this.divideBy, this.extraParams, this.round);
+      public PriceCreateParams.TransformQuantity build() {
+        return new PriceCreateParams.TransformQuantity(this.divideBy, this.extraParams, this.round);
       }
 
       /** Divide usage by this number. */
@@ -1851,7 +1852,7 @@ public class PriceCreateParams extends ApiRequestParams {
       }
 
       /** After division, either round the result {@code up} or {@code down}. */
-      public Builder setRound(Round round) {
+      public Builder setRound(PriceCreateParams.TransformQuantity.Round round) {
         this.round = round;
         return this;
       }

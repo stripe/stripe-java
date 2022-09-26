@@ -14,14 +14,14 @@ import lombok.Setter;
 
 /**
  * An AccountSession allows a Connect platform to grant access to a connected account in Connect
- * Elements.
+ * Embedded UIs.
  *
  * <p>We recommend that you create an AccountSession each time you need to display an embedded UI to
  * your user. Do not save AccountSessions to your database as they expire relatively quickly, and
  * cannot be used more than once.
  *
  * <p>Related guide: <a href="https://stripe.com/docs/connect/get-started-connect-elements">Connect
- * Elements</a>.
+ * Embedded UIs</a>.
  */
 @Getter
 @Setter
@@ -40,8 +40,8 @@ public class AccountSession extends ApiResource {
    * that you have TLS enabled on any page that includes the client secret.
    *
    * <p>Refer to our docs to <a
-   * href="https://stripe.com/docs/connect/get-started-connect-elements">setup Connect Elements</a>
-   * and learn about how {@code client_secret} should be handled.
+   * href="https://stripe.com/docs/connect/get-started-connect-elements">setup Connect Embedded
+   * UIs</a> and learn about how {@code client_secret} should be handled.
    */
   @SerializedName("client_secret")
   String clientSecret;

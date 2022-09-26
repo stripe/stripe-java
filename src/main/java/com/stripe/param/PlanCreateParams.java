@@ -115,7 +115,7 @@ public class PlanCreateParams extends ApiRequestParams {
    * set to {@code tiered}. See also the documentation for {@code billing_scheme}.
    */
   @SerializedName("tiers")
-  List<Tier> tiers;
+  List<PlanCreateParams.Tier> tiers;
 
   /**
    * Defines if the tiering price should be {@code graduated} or {@code volume} based. In {@code
@@ -164,7 +164,7 @@ public class PlanCreateParams extends ApiRequestParams {
       Object metadata,
       String nickname,
       Object product,
-      List<Tier> tiers,
+      List<PlanCreateParams.Tier> tiers,
       TiersMode tiersMode,
       TransformUsage transformUsage,
       Long trialPeriodDays,
@@ -223,7 +223,7 @@ public class PlanCreateParams extends ApiRequestParams {
 
     private Object product;
 
-    private List<Tier> tiers;
+    private List<PlanCreateParams.Tier> tiers;
 
     private TiersMode tiersMode;
 
@@ -270,7 +270,7 @@ public class PlanCreateParams extends ApiRequestParams {
      * last usage record ever (across period bounds) or {@code max} which uses the usage record with
      * the maximum reported usage during a period. Defaults to {@code sum}.
      */
-    public Builder setAggregateUsage(AggregateUsage aggregateUsage) {
+    public Builder setAggregateUsage(PlanCreateParams.AggregateUsage aggregateUsage) {
       this.aggregateUsage = aggregateUsage;
       return this;
     }
@@ -301,7 +301,7 @@ public class PlanCreateParams extends ApiRequestParams {
      * that the unit pricing will be computed using a tiering strategy as defined using the {@code
      * tiers} and {@code tiers_mode} attributes.
      */
-    public Builder setBillingScheme(BillingScheme billingScheme) {
+    public Builder setBillingScheme(PlanCreateParams.BillingScheme billingScheme) {
       this.billingScheme = billingScheme;
       return this;
     }
@@ -381,7 +381,7 @@ public class PlanCreateParams extends ApiRequestParams {
     /**
      * Specifies billing frequency. Either {@code day}, {@code week}, {@code month} or {@code year}.
      */
-    public Builder setInterval(Interval interval) {
+    public Builder setInterval(PlanCreateParams.Interval interval) {
       this.interval = interval;
       return this;
     }
@@ -452,7 +452,7 @@ public class PlanCreateParams extends ApiRequestParams {
       return this;
     }
 
-    public Builder setProduct(Product product) {
+    public Builder setProduct(PlanCreateParams.Product product) {
       this.product = product;
       return this;
     }
@@ -467,7 +467,7 @@ public class PlanCreateParams extends ApiRequestParams {
      * subsequent calls adds additional elements to the original list. See {@link
      * PlanCreateParams#tiers} for the field documentation.
      */
-    public Builder addTier(Tier element) {
+    public Builder addTier(PlanCreateParams.Tier element) {
       if (this.tiers == null) {
         this.tiers = new ArrayList<>();
       }
@@ -480,7 +480,7 @@ public class PlanCreateParams extends ApiRequestParams {
      * subsequent calls adds additional elements to the original list. See {@link
      * PlanCreateParams#tiers} for the field documentation.
      */
-    public Builder addAllTier(List<Tier> elements) {
+    public Builder addAllTier(List<PlanCreateParams.Tier> elements) {
       if (this.tiers == null) {
         this.tiers = new ArrayList<>();
       }
@@ -493,7 +493,7 @@ public class PlanCreateParams extends ApiRequestParams {
      * volume}-based tiering, the maximum quantity within a period determines the per unit price, in
      * {@code graduated} tiering pricing can successively change as the quantity grows.
      */
-    public Builder setTiersMode(TiersMode tiersMode) {
+    public Builder setTiersMode(PlanCreateParams.TiersMode tiersMode) {
       this.tiersMode = tiersMode;
       return this;
     }
@@ -502,7 +502,7 @@ public class PlanCreateParams extends ApiRequestParams {
      * Apply a transformation to the reported usage or set quantity before computing the billed
      * price. Cannot be combined with {@code tiers}.
      */
-    public Builder setTransformUsage(TransformUsage transformUsage) {
+    public Builder setTransformUsage(PlanCreateParams.TransformUsage transformUsage) {
       this.transformUsage = transformUsage;
       return this;
     }
@@ -523,7 +523,7 @@ public class PlanCreateParams extends ApiRequestParams {
      * it to a subscription. {@code metered} aggregates the total usage based on usage records.
      * Defaults to {@code licensed}.
      */
-    public Builder setUsageType(UsageType usageType) {
+    public Builder setUsageType(PlanCreateParams.UsageType usageType) {
       this.usageType = usageType;
       return this;
     }
@@ -628,8 +628,8 @@ public class PlanCreateParams extends ApiRequestParams {
       private String unitLabel;
 
       /** Finalize and obtain parameter instance from this builder. */
-      public Product build() {
-        return new Product(
+      public PlanCreateParams.Product build() {
+        return new PlanCreateParams.Product(
             this.active,
             this.extraParams,
             this.id,
@@ -821,8 +821,8 @@ public class PlanCreateParams extends ApiRequestParams {
       private Object upTo;
 
       /** Finalize and obtain parameter instance from this builder. */
-      public Tier build() {
-        return new Tier(
+      public PlanCreateParams.Tier build() {
+        return new PlanCreateParams.Tier(
             this.extraParams,
             this.flatAmount,
             this.flatAmountDecimal,
@@ -895,7 +895,7 @@ public class PlanCreateParams extends ApiRequestParams {
        * Specifies the upper bound of this tier. The lower bound of a tier is the upper bound of the
        * previous tier adding one. Use {@code inf} to define a fallback tier.
        */
-      public Builder setUpTo(UpTo upTo) {
+      public Builder setUpTo(PlanCreateParams.Tier.UpTo upTo) {
         this.upTo = upTo;
         return this;
       }
@@ -960,8 +960,8 @@ public class PlanCreateParams extends ApiRequestParams {
       private Round round;
 
       /** Finalize and obtain parameter instance from this builder. */
-      public TransformUsage build() {
-        return new TransformUsage(this.divideBy, this.extraParams, this.round);
+      public PlanCreateParams.TransformUsage build() {
+        return new PlanCreateParams.TransformUsage(this.divideBy, this.extraParams, this.round);
       }
 
       /** Divide usage by this number. */
@@ -997,7 +997,7 @@ public class PlanCreateParams extends ApiRequestParams {
       }
 
       /** After division, either round the result {@code up} or {@code down}. */
-      public Builder setRound(Round round) {
+      public Builder setRound(PlanCreateParams.TransformUsage.Round round) {
         this.round = round;
         return this;
       }

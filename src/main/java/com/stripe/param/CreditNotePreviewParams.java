@@ -46,7 +46,7 @@ public class CreditNotePreviewParams extends ApiRequestParams {
 
   /** Line items that make up the credit note. */
   @SerializedName("lines")
-  List<Line> lines;
+  List<CreditNotePreviewParams.Line> lines;
 
   /** The credit note's memo appears on the credit note PDF. */
   @SerializedName("memo")
@@ -92,7 +92,7 @@ public class CreditNotePreviewParams extends ApiRequestParams {
       List<String> expand,
       Map<String, Object> extraParams,
       String invoice,
-      List<Line> lines,
+      List<CreditNotePreviewParams.Line> lines,
       String memo,
       Map<String, String> metadata,
       Long outOfBandAmount,
@@ -128,7 +128,7 @@ public class CreditNotePreviewParams extends ApiRequestParams {
 
     private String invoice;
 
-    private List<Line> lines;
+    private List<CreditNotePreviewParams.Line> lines;
 
     private String memo;
 
@@ -240,7 +240,7 @@ public class CreditNotePreviewParams extends ApiRequestParams {
      * subsequent calls adds additional elements to the original list. See {@link
      * CreditNotePreviewParams#lines} for the field documentation.
      */
-    public Builder addLine(Line element) {
+    public Builder addLine(CreditNotePreviewParams.Line element) {
       if (this.lines == null) {
         this.lines = new ArrayList<>();
       }
@@ -253,7 +253,7 @@ public class CreditNotePreviewParams extends ApiRequestParams {
      * subsequent calls adds additional elements to the original list. See {@link
      * CreditNotePreviewParams#lines} for the field documentation.
      */
-    public Builder addAllLine(List<Line> elements) {
+    public Builder addAllLine(List<CreditNotePreviewParams.Line> elements) {
       if (this.lines == null) {
         this.lines = new ArrayList<>();
       }
@@ -306,7 +306,7 @@ public class CreditNotePreviewParams extends ApiRequestParams {
      * Reason for issuing this credit note, one of {@code duplicate}, {@code fraudulent}, {@code
      * order_change}, or {@code product_unsatisfactory}.
      */
-    public Builder setReason(Reason reason) {
+    public Builder setReason(CreditNotePreviewParams.Reason reason) {
       this.reason = reason;
       return this;
     }
@@ -437,8 +437,8 @@ public class CreditNotePreviewParams extends ApiRequestParams {
       private BigDecimal unitAmountDecimal;
 
       /** Finalize and obtain parameter instance from this builder. */
-      public Line build() {
-        return new Line(
+      public CreditNotePreviewParams.Line build() {
+        return new CreditNotePreviewParams.Line(
             this.amount,
             this.description,
             this.extraParams,
@@ -558,7 +558,7 @@ public class CreditNotePreviewParams extends ApiRequestParams {
        * Type of the credit note line item, one of {@code invoice_line_item} or {@code
        * custom_line_item}.
        */
-      public Builder setType(Type type) {
+      public Builder setType(CreditNotePreviewParams.Line.Type type) {
         this.type = type;
         return this;
       }

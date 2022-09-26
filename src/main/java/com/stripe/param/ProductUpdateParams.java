@@ -517,7 +517,7 @@ public class ProductUpdateParams extends ApiRequestParams {
     }
 
     /** The dimensions of this product for shipping purposes. */
-    public Builder setPackageDimensions(PackageDimensions packageDimensions) {
+    public Builder setPackageDimensions(ProductUpdateParams.PackageDimensions packageDimensions) {
       this.packageDimensions = packageDimensions;
       return this;
     }
@@ -665,8 +665,8 @@ public class ProductUpdateParams extends ApiRequestParams {
       private BigDecimal width;
 
       /** Finalize and obtain parameter instance from this builder. */
-      public PackageDimensions build() {
-        return new PackageDimensions(
+      public ProductUpdateParams.PackageDimensions build() {
+        return new ProductUpdateParams.PackageDimensions(
             this.extraParams, this.height, this.length, this.weight, this.width);
       }
 

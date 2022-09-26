@@ -131,7 +131,7 @@ public class TaxIdCollectionCreateParams extends ApiRequestParams {
      * {@code sa_vat}, {@code sg_gst}, {@code sg_uen}, {@code si_tin}, {@code th_vat}, {@code
      * tw_vat}, {@code ua_vat}, {@code us_ein}, or {@code za_vat}.
      */
-    public Builder setType(Type type) {
+    public Builder setType(TaxIdCollectionCreateParams.Type type) {
       this.type = type;
       return this;
     }

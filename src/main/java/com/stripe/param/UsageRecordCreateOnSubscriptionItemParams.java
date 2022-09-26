@@ -88,7 +88,7 @@ public class UsageRecordCreateOnSubscriptionItemParams extends ApiRequestParams 
      * href="https://stripe.com/docs/api/subscriptions/object#subscription_object-billing_thresholds">billing
      * thresholds</a>, {@code increment} is the only allowed value.
      */
-    public Builder setAction(Action action) {
+    public Builder setAction(UsageRecordCreateOnSubscriptionItemParams.Action action) {
       this.action = action;
       return this;
     }
@@ -158,7 +158,7 @@ public class UsageRecordCreateOnSubscriptionItemParams extends ApiRequestParams 
      * When passing {@code "now"}, Stripe records usage for the current time. Default is {@code
      * "now"} if a value is not provided.
      */
-    public Builder setTimestamp(Timestamp timestamp) {
+    public Builder setTimestamp(UsageRecordCreateOnSubscriptionItemParams.Timestamp timestamp) {
       this.timestamp = timestamp;
       return this;
     }

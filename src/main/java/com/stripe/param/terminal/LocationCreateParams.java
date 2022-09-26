@@ -90,7 +90,7 @@ public class LocationCreateParams extends ApiRequestParams {
     }
 
     /** The full address of the location. */
-    public Builder setAddress(Address address) {
+    public Builder setAddress(LocationCreateParams.Address address) {
       this.address = address;
       return this;
     }
@@ -285,8 +285,8 @@ public class LocationCreateParams extends ApiRequestParams {
       private String state;
 
       /** Finalize and obtain parameter instance from this builder. */
-      public Address build() {
-        return new Address(
+      public LocationCreateParams.Address build() {
+        return new LocationCreateParams.Address(
             this.city,
             this.country,
             this.extraParams,

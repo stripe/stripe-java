@@ -106,7 +106,8 @@ public class OutboundPaymentReturnOutboundPaymentParams extends ApiRequestParams
     }
 
     /** Optional hash to set the the return code. */
-    public Builder setReturnedDetails(ReturnedDetails returnedDetails) {
+    public Builder setReturnedDetails(
+        OutboundPaymentReturnOutboundPaymentParams.ReturnedDetails returnedDetails) {
       this.returnedDetails = returnedDetails;
       return this;
     }
@@ -142,12 +143,13 @@ public class OutboundPaymentReturnOutboundPaymentParams extends ApiRequestParams
       private Map<String, Object> extraParams;
 
       /** Finalize and obtain parameter instance from this builder. */
-      public ReturnedDetails build() {
-        return new ReturnedDetails(this.code, this.extraParams);
+      public OutboundPaymentReturnOutboundPaymentParams.ReturnedDetails build() {
+        return new OutboundPaymentReturnOutboundPaymentParams.ReturnedDetails(
+            this.code, this.extraParams);
       }
 
       /** The return code to be set on the OutboundPayment object. */
-      public Builder setCode(Code code) {
+      public Builder setCode(OutboundPaymentReturnOutboundPaymentParams.ReturnedDetails.Code code) {
         this.code = code;
         return this;
       }

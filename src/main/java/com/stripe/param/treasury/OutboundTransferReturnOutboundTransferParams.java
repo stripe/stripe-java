@@ -106,7 +106,8 @@ public class OutboundTransferReturnOutboundTransferParams extends ApiRequestPara
     }
 
     /** Details about a returned OutboundTransfer. */
-    public Builder setReturnedDetails(ReturnedDetails returnedDetails) {
+    public Builder setReturnedDetails(
+        OutboundTransferReturnOutboundTransferParams.ReturnedDetails returnedDetails) {
       this.returnedDetails = returnedDetails;
       return this;
     }
@@ -142,12 +143,14 @@ public class OutboundTransferReturnOutboundTransferParams extends ApiRequestPara
       private Map<String, Object> extraParams;
 
       /** Finalize and obtain parameter instance from this builder. */
-      public ReturnedDetails build() {
-        return new ReturnedDetails(this.code, this.extraParams);
+      public OutboundTransferReturnOutboundTransferParams.ReturnedDetails build() {
+        return new OutboundTransferReturnOutboundTransferParams.ReturnedDetails(
+            this.code, this.extraParams);
       }
 
       /** Reason for the return. */
-      public Builder setCode(Code code) {
+      public Builder setCode(
+          OutboundTransferReturnOutboundTransferParams.ReturnedDetails.Code code) {
         this.code = code;
         return this;
       }

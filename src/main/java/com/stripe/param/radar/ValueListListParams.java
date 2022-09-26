@@ -125,7 +125,7 @@ public class ValueListListParams extends ApiRequestParams {
       return this;
     }
 
-    public Builder setCreated(Created created) {
+    public Builder setCreated(ValueListListParams.Created created) {
       this.created = created;
       return this;
     }
@@ -270,8 +270,9 @@ public class ValueListListParams extends ApiRequestParams {
       private Long lte;
 
       /** Finalize and obtain parameter instance from this builder. */
-      public Created build() {
-        return new Created(this.extraParams, this.gt, this.gte, this.lt, this.lte);
+      public ValueListListParams.Created build() {
+        return new ValueListListParams.Created(
+            this.extraParams, this.gt, this.gte, this.lt, this.lte);
       }
 
       /**

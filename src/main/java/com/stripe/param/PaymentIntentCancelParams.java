@@ -58,7 +58,8 @@ public class PaymentIntentCancelParams extends ApiRequestParams {
      * Reason for canceling this PaymentIntent. Possible values are {@code duplicate}, {@code
      * fraudulent}, {@code requested_by_customer}, or {@code abandoned}
      */
-    public Builder setCancellationReason(CancellationReason cancellationReason) {
+    public Builder setCancellationReason(
+        PaymentIntentCancelParams.CancellationReason cancellationReason) {
       this.cancellationReason = cancellationReason;
       return this;
     }

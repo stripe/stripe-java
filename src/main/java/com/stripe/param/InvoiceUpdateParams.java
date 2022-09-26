@@ -3,7 +3,6 @@ package com.stripe.param;
 
 import com.google.gson.annotations.SerializedName;
 import com.stripe.net.ApiRequestParams;
-import com.stripe.net.ApiRequestParams.EnumParam;
 import com.stripe.param.common.EmptyParam;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -358,7 +357,7 @@ public class InvoiceUpdateParams extends ApiRequestParams {
     }
 
     /** Settings for automatic tax lookup for this invoice. */
-    public Builder setAutomaticTax(AutomaticTax automaticTax) {
+    public Builder setAutomaticTax(InvoiceUpdateParams.AutomaticTax automaticTax) {
       this.automaticTax = automaticTax;
       return this;
     }
@@ -367,7 +366,7 @@ public class InvoiceUpdateParams extends ApiRequestParams {
      * Either {@code charge_automatically} or {@code send_invoice}. This field can be updated only
      * on {@code draft} invoices.
      */
-    public Builder setCollectionMethod(CollectionMethod collectionMethod) {
+    public Builder setCollectionMethod(InvoiceUpdateParams.CollectionMethod collectionMethod) {
       this.collectionMethod = collectionMethod;
       return this;
     }
@@ -378,7 +377,7 @@ public class InvoiceUpdateParams extends ApiRequestParams {
      * InvoiceUpdateParams#customFields} for the field documentation.
      */
     @SuppressWarnings("unchecked")
-    public Builder addCustomField(CustomField element) {
+    public Builder addCustomField(InvoiceUpdateParams.CustomField element) {
       if (this.customFields == null || this.customFields instanceof EmptyParam) {
         this.customFields = new ArrayList<InvoiceUpdateParams.CustomField>();
       }
@@ -392,7 +391,7 @@ public class InvoiceUpdateParams extends ApiRequestParams {
      * InvoiceUpdateParams#customFields} for the field documentation.
      */
     @SuppressWarnings("unchecked")
-    public Builder addAllCustomField(List<CustomField> elements) {
+    public Builder addAllCustomField(List<InvoiceUpdateParams.CustomField> elements) {
       if (this.customFields == null || this.customFields instanceof EmptyParam) {
         this.customFields = new ArrayList<InvoiceUpdateParams.CustomField>();
       }
@@ -415,7 +414,7 @@ public class InvoiceUpdateParams extends ApiRequestParams {
      * custom_fields} is specified, the list specified will replace the existing custom field list
      * on this invoice. Pass an empty string to remove previously-defined fields.
      */
-    public Builder setCustomFields(List<CustomField> customFields) {
+    public Builder setCustomFields(List<InvoiceUpdateParams.CustomField> customFields) {
       this.customFields = customFields;
       return this;
     }
@@ -540,7 +539,7 @@ public class InvoiceUpdateParams extends ApiRequestParams {
      * InvoiceUpdateParams#discounts} for the field documentation.
      */
     @SuppressWarnings("unchecked")
-    public Builder addDiscount(Discount element) {
+    public Builder addDiscount(InvoiceUpdateParams.Discount element) {
       if (this.discounts == null || this.discounts instanceof EmptyParam) {
         this.discounts = new ArrayList<InvoiceUpdateParams.Discount>();
       }
@@ -554,7 +553,7 @@ public class InvoiceUpdateParams extends ApiRequestParams {
      * InvoiceUpdateParams#discounts} for the field documentation.
      */
     @SuppressWarnings("unchecked")
-    public Builder addAllDiscount(List<Discount> elements) {
+    public Builder addAllDiscount(List<InvoiceUpdateParams.Discount> elements) {
       if (this.discounts == null || this.discounts instanceof EmptyParam) {
         this.discounts = new ArrayList<InvoiceUpdateParams.Discount>();
       }
@@ -575,7 +574,7 @@ public class InvoiceUpdateParams extends ApiRequestParams {
      * The discounts that will apply to the invoice. Pass an empty string to remove
      * previously-defined discounts.
      */
-    public Builder setDiscounts(List<Discount> discounts) {
+    public Builder setDiscounts(List<InvoiceUpdateParams.Discount> discounts) {
       this.discounts = discounts;
       return this;
     }
@@ -728,13 +727,13 @@ public class InvoiceUpdateParams extends ApiRequestParams {
     /**
      * Configuration settings for the PaymentIntent that is generated when the invoice is finalized.
      */
-    public Builder setPaymentSettings(PaymentSettings paymentSettings) {
+    public Builder setPaymentSettings(InvoiceUpdateParams.PaymentSettings paymentSettings) {
       this.paymentSettings = paymentSettings;
       return this;
     }
 
     /** Options for invoice PDF rendering. */
-    public Builder setRenderingOptions(RenderingOptions renderingOptions) {
+    public Builder setRenderingOptions(InvoiceUpdateParams.RenderingOptions renderingOptions) {
       this.renderingOptions = renderingOptions;
       return this;
     }
@@ -772,7 +771,7 @@ public class InvoiceUpdateParams extends ApiRequestParams {
      * the resulting transfer will be found on the invoice's charge. This will be unset if you POST
      * an empty value.
      */
-    public Builder setTransferData(TransferData transferData) {
+    public Builder setTransferData(InvoiceUpdateParams.TransferData transferData) {
       this.transferData = transferData;
       return this;
     }
@@ -823,8 +822,8 @@ public class InvoiceUpdateParams extends ApiRequestParams {
       private Map<String, Object> extraParams;
 
       /** Finalize and obtain parameter instance from this builder. */
-      public AutomaticTax build() {
-        return new AutomaticTax(this.enabled, this.extraParams);
+      public InvoiceUpdateParams.AutomaticTax build() {
+        return new InvoiceUpdateParams.AutomaticTax(this.enabled, this.extraParams);
       }
 
       /**
@@ -903,8 +902,8 @@ public class InvoiceUpdateParams extends ApiRequestParams {
       private Object value;
 
       /** Finalize and obtain parameter instance from this builder. */
-      public CustomField build() {
-        return new CustomField(this.extraParams, this.name, this.value);
+      public InvoiceUpdateParams.CustomField build() {
+        return new InvoiceUpdateParams.CustomField(this.extraParams, this.name, this.value);
       }
 
       /**
@@ -996,8 +995,8 @@ public class InvoiceUpdateParams extends ApiRequestParams {
       private Map<String, Object> extraParams;
 
       /** Finalize and obtain parameter instance from this builder. */
-      public Discount build() {
-        return new Discount(this.coupon, this.discount, this.extraParams);
+      public InvoiceUpdateParams.Discount build() {
+        return new InvoiceUpdateParams.Discount(this.coupon, this.discount, this.extraParams);
       }
 
       /** ID of the coupon to create a new discount for. */
@@ -1109,8 +1108,8 @@ public class InvoiceUpdateParams extends ApiRequestParams {
       private Object paymentMethodTypes;
 
       /** Finalize and obtain parameter instance from this builder. */
-      public PaymentSettings build() {
-        return new PaymentSettings(
+      public InvoiceUpdateParams.PaymentSettings build() {
+        return new InvoiceUpdateParams.PaymentSettings(
             this.defaultMandate,
             this.extraParams,
             this.paymentMethodOptions,
@@ -1164,7 +1163,8 @@ public class InvoiceUpdateParams extends ApiRequestParams {
       }
 
       /** Payment-method-specific configuration to provide to the invoice’s PaymentIntent. */
-      public Builder setPaymentMethodOptions(PaymentMethodOptions paymentMethodOptions) {
+      public Builder setPaymentMethodOptions(
+          InvoiceUpdateParams.PaymentSettings.PaymentMethodOptions paymentMethodOptions) {
         this.paymentMethodOptions = paymentMethodOptions;
         return this;
       }
@@ -1175,7 +1175,8 @@ public class InvoiceUpdateParams extends ApiRequestParams {
        * {@link InvoiceUpdateParams.PaymentSettings#paymentMethodTypes} for the field documentation.
        */
       @SuppressWarnings("unchecked")
-      public Builder addPaymentMethodType(PaymentMethodType element) {
+      public Builder addPaymentMethodType(
+          InvoiceUpdateParams.PaymentSettings.PaymentMethodType element) {
         if (this.paymentMethodTypes == null || this.paymentMethodTypes instanceof EmptyParam) {
           this.paymentMethodTypes =
               new ArrayList<InvoiceUpdateParams.PaymentSettings.PaymentMethodType>();
@@ -1191,7 +1192,8 @@ public class InvoiceUpdateParams extends ApiRequestParams {
        * {@link InvoiceUpdateParams.PaymentSettings#paymentMethodTypes} for the field documentation.
        */
       @SuppressWarnings("unchecked")
-      public Builder addAllPaymentMethodType(List<PaymentMethodType> elements) {
+      public Builder addAllPaymentMethodType(
+          List<InvoiceUpdateParams.PaymentSettings.PaymentMethodType> elements) {
         if (this.paymentMethodTypes == null || this.paymentMethodTypes instanceof EmptyParam) {
           this.paymentMethodTypes =
               new ArrayList<InvoiceUpdateParams.PaymentSettings.PaymentMethodType>();
@@ -1220,7 +1222,8 @@ public class InvoiceUpdateParams extends ApiRequestParams {
        * default payment method, and your <a
        * href="https://dashboard.stripe.com/settings/billing/invoice">invoice template settings</a>.
        */
-      public Builder setPaymentMethodTypes(List<PaymentMethodType> paymentMethodTypes) {
+      public Builder setPaymentMethodTypes(
+          List<InvoiceUpdateParams.PaymentSettings.PaymentMethodType> paymentMethodTypes) {
         this.paymentMethodTypes = paymentMethodTypes;
         return this;
       }
@@ -1316,8 +1319,8 @@ public class InvoiceUpdateParams extends ApiRequestParams {
         private Object usBankAccount;
 
         /** Finalize and obtain parameter instance from this builder. */
-        public PaymentMethodOptions build() {
-          return new PaymentMethodOptions(
+        public InvoiceUpdateParams.PaymentSettings.PaymentMethodOptions build() {
+          return new InvoiceUpdateParams.PaymentSettings.PaymentMethodOptions(
               this.acssDebit,
               this.bancontact,
               this.card,
@@ -1331,7 +1334,8 @@ public class InvoiceUpdateParams extends ApiRequestParams {
          * If paying by {@code acss_debit}, this sub-hash contains details about the Canadian
          * pre-authorized debit payment method options to pass to the invoice’s PaymentIntent.
          */
-        public Builder setAcssDebit(AcssDebit acssDebit) {
+        public Builder setAcssDebit(
+            InvoiceUpdateParams.PaymentSettings.PaymentMethodOptions.AcssDebit acssDebit) {
           this.acssDebit = acssDebit;
           return this;
         }
@@ -1349,7 +1353,8 @@ public class InvoiceUpdateParams extends ApiRequestParams {
          * If paying by {@code bancontact}, this sub-hash contains details about the Bancontact
          * payment method options to pass to the invoice’s PaymentIntent.
          */
-        public Builder setBancontact(Bancontact bancontact) {
+        public Builder setBancontact(
+            InvoiceUpdateParams.PaymentSettings.PaymentMethodOptions.Bancontact bancontact) {
           this.bancontact = bancontact;
           return this;
         }
@@ -1367,7 +1372,7 @@ public class InvoiceUpdateParams extends ApiRequestParams {
          * If paying by {@code card}, this sub-hash contains details about the Card payment method
          * options to pass to the invoice’s PaymentIntent.
          */
-        public Builder setCard(Card card) {
+        public Builder setCard(InvoiceUpdateParams.PaymentSettings.PaymentMethodOptions.Card card) {
           this.card = card;
           return this;
         }
@@ -1385,7 +1390,9 @@ public class InvoiceUpdateParams extends ApiRequestParams {
          * If paying by {@code customer_balance}, this sub-hash contains details about the Bank
          * transfer payment method options to pass to the invoice’s PaymentIntent.
          */
-        public Builder setCustomerBalance(CustomerBalance customerBalance) {
+        public Builder setCustomerBalance(
+            InvoiceUpdateParams.PaymentSettings.PaymentMethodOptions.CustomerBalance
+                customerBalance) {
           this.customerBalance = customerBalance;
           return this;
         }
@@ -1431,7 +1438,8 @@ public class InvoiceUpdateParams extends ApiRequestParams {
          * If paying by {@code konbini}, this sub-hash contains details about the Konbini payment
          * method options to pass to the invoice’s PaymentIntent.
          */
-        public Builder setKonbini(Konbini konbini) {
+        public Builder setKonbini(
+            InvoiceUpdateParams.PaymentSettings.PaymentMethodOptions.Konbini konbini) {
           this.konbini = konbini;
           return this;
         }
@@ -1449,7 +1457,8 @@ public class InvoiceUpdateParams extends ApiRequestParams {
          * If paying by {@code us_bank_account}, this sub-hash contains details about the ACH direct
          * debit payment method options to pass to the invoice’s PaymentIntent.
          */
-        public Builder setUsBankAccount(UsBankAccount usBankAccount) {
+        public Builder setUsBankAccount(
+            InvoiceUpdateParams.PaymentSettings.PaymentMethodOptions.UsBankAccount usBankAccount) {
           this.usBankAccount = usBankAccount;
           return this;
         }
@@ -1505,8 +1514,9 @@ public class InvoiceUpdateParams extends ApiRequestParams {
           private VerificationMethod verificationMethod;
 
           /** Finalize and obtain parameter instance from this builder. */
-          public AcssDebit build() {
-            return new AcssDebit(this.extraParams, this.mandateOptions, this.verificationMethod);
+          public InvoiceUpdateParams.PaymentSettings.PaymentMethodOptions.AcssDebit build() {
+            return new InvoiceUpdateParams.PaymentSettings.PaymentMethodOptions.AcssDebit(
+                this.extraParams, this.mandateOptions, this.verificationMethod);
           }
 
           /**
@@ -1540,13 +1550,17 @@ public class InvoiceUpdateParams extends ApiRequestParams {
           }
 
           /** Additional fields for Mandate creation. */
-          public Builder setMandateOptions(MandateOptions mandateOptions) {
+          public Builder setMandateOptions(
+              InvoiceUpdateParams.PaymentSettings.PaymentMethodOptions.AcssDebit.MandateOptions
+                  mandateOptions) {
             this.mandateOptions = mandateOptions;
             return this;
           }
 
           /** Verification method for the intent. */
-          public Builder setVerificationMethod(VerificationMethod verificationMethod) {
+          public Builder setVerificationMethod(
+              InvoiceUpdateParams.PaymentSettings.PaymentMethodOptions.AcssDebit.VerificationMethod
+                  verificationMethod) {
             this.verificationMethod = verificationMethod;
             return this;
           }
@@ -1583,8 +1597,10 @@ public class InvoiceUpdateParams extends ApiRequestParams {
             private TransactionType transactionType;
 
             /** Finalize and obtain parameter instance from this builder. */
-            public MandateOptions build() {
-              return new MandateOptions(this.extraParams, this.transactionType);
+            public InvoiceUpdateParams.PaymentSettings.PaymentMethodOptions.AcssDebit.MandateOptions
+                build() {
+              return new InvoiceUpdateParams.PaymentSettings.PaymentMethodOptions.AcssDebit
+                  .MandateOptions(this.extraParams, this.transactionType);
             }
 
             /**
@@ -1618,7 +1634,10 @@ public class InvoiceUpdateParams extends ApiRequestParams {
             }
 
             /** Transaction type of the mandate. */
-            public Builder setTransactionType(TransactionType transactionType) {
+            public Builder setTransactionType(
+                InvoiceUpdateParams.PaymentSettings.PaymentMethodOptions.AcssDebit.MandateOptions
+                        .TransactionType
+                    transactionType) {
               this.transactionType = transactionType;
               return this;
             }
@@ -1693,8 +1712,9 @@ public class InvoiceUpdateParams extends ApiRequestParams {
           private PreferredLanguage preferredLanguage;
 
           /** Finalize and obtain parameter instance from this builder. */
-          public Bancontact build() {
-            return new Bancontact(this.extraParams, this.preferredLanguage);
+          public InvoiceUpdateParams.PaymentSettings.PaymentMethodOptions.Bancontact build() {
+            return new InvoiceUpdateParams.PaymentSettings.PaymentMethodOptions.Bancontact(
+                this.extraParams, this.preferredLanguage);
           }
 
           /**
@@ -1731,7 +1751,9 @@ public class InvoiceUpdateParams extends ApiRequestParams {
            * Preferred language of the Bancontact authorization page that the customer is redirected
            * to.
            */
-          public Builder setPreferredLanguage(PreferredLanguage preferredLanguage) {
+          public Builder setPreferredLanguage(
+              InvoiceUpdateParams.PaymentSettings.PaymentMethodOptions.Bancontact.PreferredLanguage
+                  preferredLanguage) {
             this.preferredLanguage = preferredLanguage;
             return this;
           }
@@ -1814,8 +1836,9 @@ public class InvoiceUpdateParams extends ApiRequestParams {
           private RequestThreeDSecure requestThreeDSecure;
 
           /** Finalize and obtain parameter instance from this builder. */
-          public Card build() {
-            return new Card(this.extraParams, this.installments, this.requestThreeDSecure);
+          public InvoiceUpdateParams.PaymentSettings.PaymentMethodOptions.Card build() {
+            return new InvoiceUpdateParams.PaymentSettings.PaymentMethodOptions.Card(
+                this.extraParams, this.installments, this.requestThreeDSecure);
           }
 
           /**
@@ -1855,7 +1878,9 @@ public class InvoiceUpdateParams extends ApiRequestParams {
            * href="https://stripe.com/docs/payments/installments">installments integration
            * guide</a>.
            */
-          public Builder setInstallments(Installments installments) {
+          public Builder setInstallments(
+              InvoiceUpdateParams.PaymentSettings.PaymentMethodOptions.Card.Installments
+                  installments) {
             this.installments = installments;
             return this;
           }
@@ -1870,7 +1895,9 @@ public class InvoiceUpdateParams extends ApiRequestParams {
            * 3D Secure</a> for more information on how this configuration interacts with Radar and
            * our SCA Engine.
            */
-          public Builder setRequestThreeDSecure(RequestThreeDSecure requestThreeDSecure) {
+          public Builder setRequestThreeDSecure(
+              InvoiceUpdateParams.PaymentSettings.PaymentMethodOptions.Card.RequestThreeDSecure
+                  requestThreeDSecure) {
             this.requestThreeDSecure = requestThreeDSecure;
             return this;
           }
@@ -1917,8 +1944,10 @@ public class InvoiceUpdateParams extends ApiRequestParams {
             private Object plan;
 
             /** Finalize and obtain parameter instance from this builder. */
-            public Installments build() {
-              return new Installments(this.enabled, this.extraParams, this.plan);
+            public InvoiceUpdateParams.PaymentSettings.PaymentMethodOptions.Card.Installments
+                build() {
+              return new InvoiceUpdateParams.PaymentSettings.PaymentMethodOptions.Card.Installments(
+                  this.enabled, this.extraParams, this.plan);
             }
 
             /**
@@ -1961,7 +1990,9 @@ public class InvoiceUpdateParams extends ApiRequestParams {
             }
 
             /** The selected installment plan to use for this invoice. */
-            public Builder setPlan(Plan plan) {
+            public Builder setPlan(
+                InvoiceUpdateParams.PaymentSettings.PaymentMethodOptions.Card.Installments.Plan
+                    plan) {
               this.plan = plan;
               return this;
             }
@@ -2025,8 +2056,10 @@ public class InvoiceUpdateParams extends ApiRequestParams {
               private Type type;
 
               /** Finalize and obtain parameter instance from this builder. */
-              public Plan build() {
-                return new Plan(this.count, this.extraParams, this.interval, this.type);
+              public InvoiceUpdateParams.PaymentSettings.PaymentMethodOptions.Card.Installments.Plan
+                  build() {
+                return new InvoiceUpdateParams.PaymentSettings.PaymentMethodOptions.Card
+                    .Installments.Plan(this.count, this.extraParams, this.interval, this.type);
               }
 
               /**
@@ -2072,13 +2105,19 @@ public class InvoiceUpdateParams extends ApiRequestParams {
                * For {@code fixed_count} installment plans, this is the interval between installment
                * payments your customer will make to their credit card. One of {@code month}.
                */
-              public Builder setInterval(Interval interval) {
+              public Builder setInterval(
+                  InvoiceUpdateParams.PaymentSettings.PaymentMethodOptions.Card.Installments.Plan
+                          .Interval
+                      interval) {
                 this.interval = interval;
                 return this;
               }
 
               /** Type of installment plan, one of {@code fixed_count}. */
-              public Builder setType(Type type) {
+              public Builder setType(
+                  InvoiceUpdateParams.PaymentSettings.PaymentMethodOptions.Card.Installments.Plan
+                          .Type
+                      type) {
                 this.type = type;
                 return this;
               }
@@ -2171,15 +2210,18 @@ public class InvoiceUpdateParams extends ApiRequestParams {
           private Object fundingType;
 
           /** Finalize and obtain parameter instance from this builder. */
-          public CustomerBalance build() {
-            return new CustomerBalance(this.bankTransfer, this.extraParams, this.fundingType);
+          public InvoiceUpdateParams.PaymentSettings.PaymentMethodOptions.CustomerBalance build() {
+            return new InvoiceUpdateParams.PaymentSettings.PaymentMethodOptions.CustomerBalance(
+                this.bankTransfer, this.extraParams, this.fundingType);
           }
 
           /**
            * Configuration for the bank transfer funding type, if the {@code funding_type} is set to
            * {@code bank_transfer}.
            */
-          public Builder setBankTransfer(BankTransfer bankTransfer) {
+          public Builder setBankTransfer(
+              InvoiceUpdateParams.PaymentSettings.PaymentMethodOptions.CustomerBalance.BankTransfer
+                  bankTransfer) {
             this.bankTransfer = bankTransfer;
             return this;
           }
@@ -2276,12 +2318,18 @@ public class InvoiceUpdateParams extends ApiRequestParams {
             private Object type;
 
             /** Finalize and obtain parameter instance from this builder. */
-            public BankTransfer build() {
-              return new BankTransfer(this.euBankTransfer, this.extraParams, this.type);
+            public InvoiceUpdateParams.PaymentSettings.PaymentMethodOptions.CustomerBalance
+                    .BankTransfer
+                build() {
+              return new InvoiceUpdateParams.PaymentSettings.PaymentMethodOptions.CustomerBalance
+                  .BankTransfer(this.euBankTransfer, this.extraParams, this.type);
             }
 
             /** Configuration for eu_bank_transfer funding type. */
-            public Builder setEuBankTransfer(EuBankTransfer euBankTransfer) {
+            public Builder setEuBankTransfer(
+                InvoiceUpdateParams.PaymentSettings.PaymentMethodOptions.CustomerBalance
+                        .BankTransfer.EuBankTransfer
+                    euBankTransfer) {
               this.euBankTransfer = euBankTransfer;
               return this;
             }
@@ -2371,8 +2419,11 @@ public class InvoiceUpdateParams extends ApiRequestParams {
               private Map<String, Object> extraParams;
 
               /** Finalize and obtain parameter instance from this builder. */
-              public EuBankTransfer build() {
-                return new EuBankTransfer(this.country, this.extraParams);
+              public InvoiceUpdateParams.PaymentSettings.PaymentMethodOptions.CustomerBalance
+                      .BankTransfer.EuBankTransfer
+                  build() {
+                return new InvoiceUpdateParams.PaymentSettings.PaymentMethodOptions.CustomerBalance
+                    .BankTransfer.EuBankTransfer(this.country, this.extraParams);
               }
 
               /**
@@ -2451,8 +2502,9 @@ public class InvoiceUpdateParams extends ApiRequestParams {
           private Map<String, Object> extraParams;
 
           /** Finalize and obtain parameter instance from this builder. */
-          public Konbini build() {
-            return new Konbini(this.extraParams);
+          public InvoiceUpdateParams.PaymentSettings.PaymentMethodOptions.Konbini build() {
+            return new InvoiceUpdateParams.PaymentSettings.PaymentMethodOptions.Konbini(
+                this.extraParams);
           }
 
           /**
@@ -2528,8 +2580,8 @@ public class InvoiceUpdateParams extends ApiRequestParams {
           private VerificationMethod verificationMethod;
 
           /** Finalize and obtain parameter instance from this builder. */
-          public UsBankAccount build() {
-            return new UsBankAccount(
+          public InvoiceUpdateParams.PaymentSettings.PaymentMethodOptions.UsBankAccount build() {
+            return new InvoiceUpdateParams.PaymentSettings.PaymentMethodOptions.UsBankAccount(
                 this.extraParams, this.financialConnections, this.verificationMethod);
           }
 
@@ -2564,13 +2616,19 @@ public class InvoiceUpdateParams extends ApiRequestParams {
           }
 
           /** Additional fields for Financial Connections Session creation. */
-          public Builder setFinancialConnections(FinancialConnections financialConnections) {
+          public Builder setFinancialConnections(
+              InvoiceUpdateParams.PaymentSettings.PaymentMethodOptions.UsBankAccount
+                      .FinancialConnections
+                  financialConnections) {
             this.financialConnections = financialConnections;
             return this;
           }
 
           /** Verification method for the intent. */
-          public Builder setVerificationMethod(VerificationMethod verificationMethod) {
+          public Builder setVerificationMethod(
+              InvoiceUpdateParams.PaymentSettings.PaymentMethodOptions.UsBankAccount
+                      .VerificationMethod
+                  verificationMethod) {
             this.verificationMethod = verificationMethod;
             return this;
           }
@@ -2594,10 +2652,17 @@ public class InvoiceUpdateParams extends ApiRequestParams {
            * balances}, {@code ownership}, {@code payment_method}, and {@code transactions}.
            */
           @SerializedName("permissions")
-          List<Permission> permissions;
+          List<
+                  InvoiceUpdateParams.PaymentSettings.PaymentMethodOptions.UsBankAccount
+                      .FinancialConnections.Permission>
+              permissions;
 
           private FinancialConnections(
-              Map<String, Object> extraParams, List<Permission> permissions) {
+              Map<String, Object> extraParams,
+              List<
+                      InvoiceUpdateParams.PaymentSettings.PaymentMethodOptions.UsBankAccount
+                          .FinancialConnections.Permission>
+                  permissions) {
             this.extraParams = extraParams;
             this.permissions = permissions;
           }
@@ -2609,11 +2674,17 @@ public class InvoiceUpdateParams extends ApiRequestParams {
           public static class Builder {
             private Map<String, Object> extraParams;
 
-            private List<Permission> permissions;
+            private List<
+                    InvoiceUpdateParams.PaymentSettings.PaymentMethodOptions.UsBankAccount
+                        .FinancialConnections.Permission>
+                permissions;
 
             /** Finalize and obtain parameter instance from this builder. */
-            public FinancialConnections build() {
-              return new FinancialConnections(this.extraParams, this.permissions);
+            public InvoiceUpdateParams.PaymentSettings.PaymentMethodOptions.UsBankAccount
+                    .FinancialConnections
+                build() {
+              return new InvoiceUpdateParams.PaymentSettings.PaymentMethodOptions.UsBankAccount
+                  .FinancialConnections(this.extraParams, this.permissions);
             }
 
             /**
@@ -2653,7 +2724,10 @@ public class InvoiceUpdateParams extends ApiRequestParams {
              * InvoiceUpdateParams.PaymentSettings.PaymentMethodOptions.UsBankAccount.FinancialConnections#permissions}
              * for the field documentation.
              */
-            public Builder addPermission(Permission element) {
+            public Builder addPermission(
+                InvoiceUpdateParams.PaymentSettings.PaymentMethodOptions.UsBankAccount
+                        .FinancialConnections.Permission
+                    element) {
               if (this.permissions == null) {
                 this.permissions = new ArrayList<>();
               }
@@ -2668,7 +2742,11 @@ public class InvoiceUpdateParams extends ApiRequestParams {
              * InvoiceUpdateParams.PaymentSettings.PaymentMethodOptions.UsBankAccount.FinancialConnections#permissions}
              * for the field documentation.
              */
-            public Builder addAllPermission(List<Permission> elements) {
+            public Builder addAllPermission(
+                List<
+                        InvoiceUpdateParams.PaymentSettings.PaymentMethodOptions.UsBankAccount
+                            .FinancialConnections.Permission>
+                    elements) {
               if (this.permissions == null) {
                 this.permissions = new ArrayList<>();
               }
@@ -2804,7 +2882,7 @@ public class InvoiceUpdateParams extends ApiRequestParams {
      * will exclude all tax (inclusive and exclusive alike) from invoice PDF amounts.
      */
     @SerializedName("amount_tax_display")
-    EnumParam amountTaxDisplay;
+    ApiRequestParams.EnumParam amountTaxDisplay;
 
     /**
      * Map of extra parameters for custom features not available in this client library. The content
@@ -2815,7 +2893,8 @@ public class InvoiceUpdateParams extends ApiRequestParams {
     @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
     Map<String, Object> extraParams;
 
-    private RenderingOptions(EnumParam amountTaxDisplay, Map<String, Object> extraParams) {
+    private RenderingOptions(
+        ApiRequestParams.EnumParam amountTaxDisplay, Map<String, Object> extraParams) {
       this.amountTaxDisplay = amountTaxDisplay;
       this.extraParams = extraParams;
     }
@@ -2825,13 +2904,13 @@ public class InvoiceUpdateParams extends ApiRequestParams {
     }
 
     public static class Builder {
-      private EnumParam amountTaxDisplay;
+      private ApiRequestParams.EnumParam amountTaxDisplay;
 
       private Map<String, Object> extraParams;
 
       /** Finalize and obtain parameter instance from this builder. */
-      public RenderingOptions build() {
-        return new RenderingOptions(this.amountTaxDisplay, this.extraParams);
+      public InvoiceUpdateParams.RenderingOptions build() {
+        return new InvoiceUpdateParams.RenderingOptions(this.amountTaxDisplay, this.extraParams);
       }
 
       /**
@@ -2840,7 +2919,8 @@ public class InvoiceUpdateParams extends ApiRequestParams {
        * include inclusive tax (and exclude exclusive tax) in invoice PDF amounts. {@code
        * exclude_tax} will exclude all tax (inclusive and exclusive alike) from invoice PDF amounts.
        */
-      public Builder setAmountTaxDisplay(AmountTaxDisplay amountTaxDisplay) {
+      public Builder setAmountTaxDisplay(
+          InvoiceUpdateParams.RenderingOptions.AmountTaxDisplay amountTaxDisplay) {
         this.amountTaxDisplay = amountTaxDisplay;
         return this;
       }
@@ -2939,8 +3019,9 @@ public class InvoiceUpdateParams extends ApiRequestParams {
       private Map<String, Object> extraParams;
 
       /** Finalize and obtain parameter instance from this builder. */
-      public TransferData build() {
-        return new TransferData(this.amount, this.destination, this.extraParams);
+      public InvoiceUpdateParams.TransferData build() {
+        return new InvoiceUpdateParams.TransferData(
+            this.amount, this.destination, this.extraParams);
       }
 
       /**

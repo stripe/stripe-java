@@ -129,7 +129,7 @@ public class SubscriptionSchedule extends ApiResource
 
   /** Time period and invoice for a Subscription billed in advance. */
   @SerializedName("prebilling")
-  SubscriptionPrebillingData prebilling;
+  Prebilling prebilling;
 
   /**
    * Time at which the subscription schedule was released. Measured in seconds since the Unix epoch.
@@ -590,7 +590,7 @@ public class SubscriptionSchedule extends ApiResource
   public static class AddInvoiceItem extends StripeObject {
     /** The stackable discounts that will be applied to the item. */
     @SerializedName("discounts")
-    List<StackableDiscount> discounts;
+    List<SubscriptionSchedule.AddInvoiceItem.StackableDiscount> discounts;
 
     /** ID of the price used to generate the invoice item. */
     @SerializedName("price")
@@ -625,6 +625,59 @@ public class SubscriptionSchedule extends ApiResource
 
     public void setPriceObject(Price expandableObject) {
       this.price = new ExpandableField<Price>(expandableObject.getId(), expandableObject);
+    }
+
+    @Getter
+    @Setter
+    @EqualsAndHashCode(callSuper = false)
+    public static class StackableDiscount extends StripeObject {
+      /** ID of the coupon to create a new discount for. */
+      @SerializedName("coupon")
+      @Getter(lombok.AccessLevel.NONE)
+      @Setter(lombok.AccessLevel.NONE)
+      ExpandableField<Coupon> coupon;
+
+      /** ID of an existing discount on the object (or one of its ancestors) to reuse. */
+      @SerializedName("discount")
+      @Getter(lombok.AccessLevel.NONE)
+      @Setter(lombok.AccessLevel.NONE)
+      ExpandableField<Discount> discount;
+
+      /** Get ID of expandable {@code coupon} object. */
+      public String getCoupon() {
+        return (this.coupon != null) ? this.coupon.getId() : null;
+      }
+
+      public void setCoupon(String id) {
+        this.coupon = ApiResource.setExpandableFieldId(id, this.coupon);
+      }
+
+      /** Get expanded {@code coupon}. */
+      public Coupon getCouponObject() {
+        return (this.coupon != null) ? this.coupon.getExpanded() : null;
+      }
+
+      public void setCouponObject(Coupon expandableObject) {
+        this.coupon = new ExpandableField<Coupon>(expandableObject.getId(), expandableObject);
+      }
+
+      /** Get ID of expandable {@code discount} object. */
+      public String getDiscount() {
+        return (this.discount != null) ? this.discount.getId() : null;
+      }
+
+      public void setDiscount(String id) {
+        this.discount = ApiResource.setExpandableFieldId(id, this.discount);
+      }
+
+      /** Get expanded {@code discount}. */
+      public Discount getDiscountObject() {
+        return (this.discount != null) ? this.discount.getExpanded() : null;
+      }
+
+      public void setDiscountObject(Discount expandableObject) {
+        this.discount = new ExpandableField<Discount>(expandableObject.getId(), expandableObject);
+      }
     }
   }
 
@@ -694,6 +747,13 @@ public class SubscriptionSchedule extends ApiResource
     @Getter(lombok.AccessLevel.NONE)
     @Setter(lombok.AccessLevel.NONE)
     ExpandableField<PaymentMethod> defaultPaymentMethod;
+
+    /**
+     * Subscription description, meant to be displayable to the customer. Use this field to
+     * optionally store an explanation of the subscription.
+     */
+    @SerializedName("description")
+    String description;
 
     /** The subscription schedule's default invoice settings. */
     @SerializedName("invoice_settings")
@@ -837,11 +897,18 @@ public class SubscriptionSchedule extends ApiResource
     List<TaxRate> defaultTaxRates;
 
     /**
+     * Subscription description, meant to be displayable to the customer. Use this field to
+     * optionally store an explanation of the subscription.
+     */
+    @SerializedName("description")
+    String description;
+
+    /**
      * The stackable discounts that will be applied to the subscription on this phase. Subscription
      * item discounts are applied before subscription discounts.
      */
     @SerializedName("discounts")
-    List<StackableDiscount> discounts;
+    List<SubscriptionSchedule.Phase.Discount> discounts;
 
     /** The end of this phase of the subscription schedule. */
     @SerializedName("end_date")
@@ -945,6 +1012,61 @@ public class SubscriptionSchedule extends ApiResource
       @SerializedName("enabled")
       Boolean enabled;
     }
+
+    @Getter
+    @Setter
+    @EqualsAndHashCode(callSuper = false)
+    public static class Discount extends StripeObject {
+      /** ID of the coupon to create a new discount for. */
+      @SerializedName("coupon")
+      @Getter(lombok.AccessLevel.NONE)
+      @Setter(lombok.AccessLevel.NONE)
+      ExpandableField<Coupon> coupon;
+
+      /** ID of an existing discount on the object (or one of its ancestors) to reuse. */
+      @SerializedName("discount")
+      @Getter(lombok.AccessLevel.NONE)
+      @Setter(lombok.AccessLevel.NONE)
+      ExpandableField<com.stripe.model.Discount> discount;
+
+      /** Get ID of expandable {@code coupon} object. */
+      public String getCoupon() {
+        return (this.coupon != null) ? this.coupon.getId() : null;
+      }
+
+      public void setCoupon(String id) {
+        this.coupon = ApiResource.setExpandableFieldId(id, this.coupon);
+      }
+
+      /** Get expanded {@code coupon}. */
+      public Coupon getCouponObject() {
+        return (this.coupon != null) ? this.coupon.getExpanded() : null;
+      }
+
+      public void setCouponObject(Coupon expandableObject) {
+        this.coupon = new ExpandableField<Coupon>(expandableObject.getId(), expandableObject);
+      }
+
+      /** Get ID of expandable {@code discount} object. */
+      public String getDiscount() {
+        return (this.discount != null) ? this.discount.getId() : null;
+      }
+
+      public void setDiscount(String id) {
+        this.discount = ApiResource.setExpandableFieldId(id, this.discount);
+      }
+
+      /** Get expanded {@code discount}. */
+      public com.stripe.model.Discount getDiscountObject() {
+        return (this.discount != null) ? this.discount.getExpanded() : null;
+      }
+
+      public void setDiscountObject(com.stripe.model.Discount expandableObject) {
+        this.discount =
+            new ExpandableField<com.stripe.model.Discount>(
+                expandableObject.getId(), expandableObject);
+      }
+    }
   }
 
   /** A phase item describes the price and quantity of a phase. */
@@ -964,7 +1086,7 @@ public class SubscriptionSchedule extends ApiResource
      * before subscription discounts. Use {@code expand[]=discounts} to expand each discount.
      */
     @SerializedName("discounts")
-    List<StackableDiscount> discounts;
+    List<SubscriptionSchedule.PhaseItem.StackableDiscount> discounts;
 
     /**
      * Set of <a href="https://stripe.com/docs/api/metadata">key-value pairs</a> that you can attach
@@ -1040,9 +1162,100 @@ public class SubscriptionSchedule extends ApiResource
     @Getter
     @Setter
     @EqualsAndHashCode(callSuper = false)
+    public static class StackableDiscount extends StripeObject {
+      /** ID of the coupon to create a new discount for. */
+      @SerializedName("coupon")
+      @Getter(lombok.AccessLevel.NONE)
+      @Setter(lombok.AccessLevel.NONE)
+      ExpandableField<Coupon> coupon;
+
+      /** ID of an existing discount on the object (or one of its ancestors) to reuse. */
+      @SerializedName("discount")
+      @Getter(lombok.AccessLevel.NONE)
+      @Setter(lombok.AccessLevel.NONE)
+      ExpandableField<Discount> discount;
+
+      /** Get ID of expandable {@code coupon} object. */
+      public String getCoupon() {
+        return (this.coupon != null) ? this.coupon.getId() : null;
+      }
+
+      public void setCoupon(String id) {
+        this.coupon = ApiResource.setExpandableFieldId(id, this.coupon);
+      }
+
+      /** Get expanded {@code coupon}. */
+      public Coupon getCouponObject() {
+        return (this.coupon != null) ? this.coupon.getExpanded() : null;
+      }
+
+      public void setCouponObject(Coupon expandableObject) {
+        this.coupon = new ExpandableField<Coupon>(expandableObject.getId(), expandableObject);
+      }
+
+      /** Get ID of expandable {@code discount} object. */
+      public String getDiscount() {
+        return (this.discount != null) ? this.discount.getId() : null;
+      }
+
+      public void setDiscount(String id) {
+        this.discount = ApiResource.setExpandableFieldId(id, this.discount);
+      }
+
+      /** Get expanded {@code discount}. */
+      public Discount getDiscountObject() {
+        return (this.discount != null) ? this.discount.getExpanded() : null;
+      }
+
+      public void setDiscountObject(Discount expandableObject) {
+        this.discount = new ExpandableField<Discount>(expandableObject.getId(), expandableObject);
+      }
+    }
+
+    @Getter
+    @Setter
+    @EqualsAndHashCode(callSuper = false)
     public static class Trial extends StripeObject {
       @SerializedName("type")
       String type;
+    }
+  }
+
+  /** Prebilling stores the time period and invoice for a Subscription billed in advance. */
+  @Getter
+  @Setter
+  @EqualsAndHashCode(callSuper = false)
+  public static class Prebilling extends StripeObject {
+    /** ID of the prebilling invoice. */
+    @SerializedName("invoice")
+    @Getter(lombok.AccessLevel.NONE)
+    @Setter(lombok.AccessLevel.NONE)
+    ExpandableField<Invoice> invoice;
+
+    /** The end of the last period for which the invoice pre-bills. */
+    @SerializedName("period_end")
+    Long periodEnd;
+
+    /** The start of the first period for which the invoice pre-bills. */
+    @SerializedName("period_start")
+    Long periodStart;
+
+    /** Get ID of expandable {@code invoice} object. */
+    public String getInvoice() {
+      return (this.invoice != null) ? this.invoice.getId() : null;
+    }
+
+    public void setInvoice(String id) {
+      this.invoice = ApiResource.setExpandableFieldId(id, this.invoice);
+    }
+
+    /** Get expanded {@code invoice}. */
+    public Invoice getInvoiceObject() {
+      return (this.invoice != null) ? this.invoice.getExpanded() : null;
+    }
+
+    public void setInvoiceObject(Invoice expandableObject) {
+      this.invoice = new ExpandableField<Invoice>(expandableObject.getId(), expandableObject);
     }
   }
 }

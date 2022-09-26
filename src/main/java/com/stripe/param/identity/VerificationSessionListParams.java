@@ -108,7 +108,7 @@ public class VerificationSessionListParams extends ApiRequestParams {
           this.status);
     }
 
-    public Builder setCreated(Created created) {
+    public Builder setCreated(VerificationSessionListParams.Created created) {
       this.created = created;
       return this;
     }
@@ -206,7 +206,7 @@ public class VerificationSessionListParams extends ApiRequestParams {
      * href="https://stripe.com/docs/identity/how-sessions-work">Learn more about the lifecycle of
      * sessions</a>.
      */
-    public Builder setStatus(Status status) {
+    public Builder setStatus(VerificationSessionListParams.Status status) {
       this.status = status;
       return this;
     }
@@ -263,8 +263,9 @@ public class VerificationSessionListParams extends ApiRequestParams {
       private Long lte;
 
       /** Finalize and obtain parameter instance from this builder. */
-      public Created build() {
-        return new Created(this.extraParams, this.gt, this.gte, this.lt, this.lte);
+      public VerificationSessionListParams.Created build() {
+        return new VerificationSessionListParams.Created(
+            this.extraParams, this.gt, this.gte, this.lt, this.lte);
       }
 
       /**

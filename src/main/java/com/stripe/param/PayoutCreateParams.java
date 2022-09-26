@@ -259,7 +259,7 @@ public class PayoutCreateParams extends ApiRequestParams {
      * href="https://stripe.com/blog/instant-payouts-for-marketplaces">Instant payouts for
      * marketplaces for more information</a>.)
      */
-    public Builder setMethod(Method method) {
+    public Builder setMethod(PayoutCreateParams.Method method) {
       this.method = method;
       return this;
     }
@@ -269,7 +269,7 @@ public class PayoutCreateParams extends ApiRequestParams {
      * payment sources are kept separately. You can find the amounts with the balances API. One of
      * {@code bank_account}, {@code card}, or {@code fpx}.
      */
-    public Builder setSourceType(SourceType sourceType) {
+    public Builder setSourceType(PayoutCreateParams.SourceType sourceType) {
       this.sourceType = sourceType;
       return this;
     }

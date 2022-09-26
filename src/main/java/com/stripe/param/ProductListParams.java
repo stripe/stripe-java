@@ -158,7 +158,7 @@ public class ProductListParams extends ApiRequestParams {
     }
 
     /** Only return products that were created during the given date interval. */
-    public Builder setCreated(Created created) {
+    public Builder setCreated(ProductListParams.Created created) {
       this.created = created;
       return this;
     }
@@ -285,7 +285,7 @@ public class ProductListParams extends ApiRequestParams {
     }
 
     /** Only return products of this type. */
-    public Builder setType(Type type) {
+    public Builder setType(ProductListParams.Type type) {
       this.type = type;
       return this;
     }
@@ -348,8 +348,9 @@ public class ProductListParams extends ApiRequestParams {
       private Long lte;
 
       /** Finalize and obtain parameter instance from this builder. */
-      public Created build() {
-        return new Created(this.extraParams, this.gt, this.gte, this.lt, this.lte);
+      public ProductListParams.Created build() {
+        return new ProductListParams.Created(
+            this.extraParams, this.gt, this.gte, this.lt, this.lte);
       }
 
       /**

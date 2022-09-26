@@ -3,7 +3,6 @@ package com.stripe.param;
 
 import com.google.gson.annotations.SerializedName;
 import com.stripe.net.ApiRequestParams;
-import com.stripe.net.ApiRequestParams.EnumParam;
 import com.stripe.param.common.EmptyParam;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -22,7 +21,7 @@ public class ExternalAccountUpdateParams extends ApiRequestParams {
    * company}.
    */
   @SerializedName("account_holder_type")
-  EnumParam accountHolderType;
+  ApiRequestParams.EnumParam accountHolderType;
 
   /**
    * The bank account type. This can only be {@code checking} or {@code savings} in most countries.
@@ -95,7 +94,7 @@ public class ExternalAccountUpdateParams extends ApiRequestParams {
 
   private ExternalAccountUpdateParams(
       Object accountHolderName,
-      EnumParam accountHolderType,
+      ApiRequestParams.EnumParam accountHolderType,
       AccountType accountType,
       Object addressCity,
       Object addressCountry,
@@ -135,7 +134,7 @@ public class ExternalAccountUpdateParams extends ApiRequestParams {
   public static class Builder {
     private Object accountHolderName;
 
-    private EnumParam accountHolderType;
+    private ApiRequestParams.EnumParam accountHolderType;
 
     private AccountType accountType;
 
@@ -202,7 +201,8 @@ public class ExternalAccountUpdateParams extends ApiRequestParams {
      * The type of entity that holds the account. This can be either {@code individual} or {@code
      * company}.
      */
-    public Builder setAccountHolderType(AccountHolderType accountHolderType) {
+    public Builder setAccountHolderType(
+        ExternalAccountUpdateParams.AccountHolderType accountHolderType) {
       this.accountHolderType = accountHolderType;
       return this;
     }
@@ -220,7 +220,7 @@ public class ExternalAccountUpdateParams extends ApiRequestParams {
      * The bank account type. This can only be {@code checking} or {@code savings} in most
      * countries. In Japan, this can only be {@code futsu} or {@code toza}.
      */
-    public Builder setAccountType(AccountType accountType) {
+    public Builder setAccountType(ExternalAccountUpdateParams.AccountType accountType) {
       this.accountType = accountType;
       return this;
     }

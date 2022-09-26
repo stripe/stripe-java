@@ -263,7 +263,7 @@ public class TransferCreateParams extends ApiRequestParams {
      * The source balance to use for this transfer. One of {@code bank_account}, {@code card}, or
      * {@code fpx}. For most users, this will default to {@code card}.
      */
-    public Builder setSourceType(SourceType sourceType) {
+    public Builder setSourceType(TransferCreateParams.SourceType sourceType) {
       this.sourceType = sourceType;
       return this;
     }

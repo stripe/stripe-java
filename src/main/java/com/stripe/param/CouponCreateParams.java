@@ -38,7 +38,7 @@ public class CouponCreateParams extends ApiRequestParams {
    * href="https://stripe.com/docs/currencies">supported currency</a>.
    */
   @SerializedName("currency_options")
-  Map<String, CurrencyOption> currencyOptions;
+  Map<String, CouponCreateParams.CurrencyOption> currencyOptions;
 
   /**
    * Specifies how long the discount will be in effect if used on a subscription. Can be {@code
@@ -117,7 +117,7 @@ public class CouponCreateParams extends ApiRequestParams {
       Long amountOff,
       AppliesTo appliesTo,
       String currency,
-      Map<String, CurrencyOption> currencyOptions,
+      Map<String, CouponCreateParams.CurrencyOption> currencyOptions,
       Duration duration,
       Long durationInMonths,
       List<String> expand,
@@ -155,7 +155,7 @@ public class CouponCreateParams extends ApiRequestParams {
 
     private String currency;
 
-    private Map<String, CurrencyOption> currencyOptions;
+    private Map<String, CouponCreateParams.CurrencyOption> currencyOptions;
 
     private Duration duration;
 
@@ -206,7 +206,7 @@ public class CouponCreateParams extends ApiRequestParams {
     }
 
     /** A hash containing directions for what this Coupon will apply discounts to. */
-    public Builder setAppliesTo(AppliesTo appliesTo) {
+    public Builder setAppliesTo(CouponCreateParams.AppliesTo appliesTo) {
       this.appliesTo = appliesTo;
       return this;
     }
@@ -225,7 +225,7 @@ public class CouponCreateParams extends ApiRequestParams {
      * `put/putAll` call, and subsequent calls add additional key/value pairs to the original map.
      * See {@link CouponCreateParams#currencyOptions} for the field documentation.
      */
-    public Builder putCurrencyOption(String key, CurrencyOption value) {
+    public Builder putCurrencyOption(String key, CouponCreateParams.CurrencyOption value) {
       if (this.currencyOptions == null) {
         this.currencyOptions = new HashMap<>();
       }
@@ -238,7 +238,7 @@ public class CouponCreateParams extends ApiRequestParams {
      * `put/putAll` call, and subsequent calls add additional key/value pairs to the original map.
      * See {@link CouponCreateParams#currencyOptions} for the field documentation.
      */
-    public Builder putAllCurrencyOption(Map<String, CurrencyOption> map) {
+    public Builder putAllCurrencyOption(Map<String, CouponCreateParams.CurrencyOption> map) {
       if (this.currencyOptions == null) {
         this.currencyOptions = new HashMap<>();
       }
@@ -250,7 +250,7 @@ public class CouponCreateParams extends ApiRequestParams {
      * Specifies how long the discount will be in effect if used on a subscription. Can be {@code
      * forever}, {@code once}, or {@code repeating}. Defaults to {@code once}.
      */
-    public Builder setDuration(Duration duration) {
+    public Builder setDuration(CouponCreateParams.Duration duration) {
       this.duration = duration;
       return this;
     }
@@ -444,8 +444,8 @@ public class CouponCreateParams extends ApiRequestParams {
       private List<String> products;
 
       /** Finalize and obtain parameter instance from this builder. */
-      public AppliesTo build() {
-        return new AppliesTo(this.extraParams, this.products);
+      public CouponCreateParams.AppliesTo build() {
+        return new CouponCreateParams.AppliesTo(this.extraParams, this.products);
       }
 
       /**
@@ -532,8 +532,8 @@ public class CouponCreateParams extends ApiRequestParams {
       private Map<String, Object> extraParams;
 
       /** Finalize and obtain parameter instance from this builder. */
-      public CurrencyOption build() {
-        return new CurrencyOption(this.amountOff, this.extraParams);
+      public CouponCreateParams.CurrencyOption build() {
+        return new CouponCreateParams.CurrencyOption(this.amountOff, this.extraParams);
       }
 
       /** A positive integer representing the amount to subtract from an invoice total. */

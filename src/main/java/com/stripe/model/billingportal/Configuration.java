@@ -75,6 +75,9 @@ public class Configuration extends ApiResource implements HasId, MetadataStore<C
   @SerializedName("livemode")
   Boolean livemode;
 
+  @SerializedName("login_page")
+  LoginPage loginPage;
+
   /**
    * Set of <a href="https://stripe.com/docs/api/metadata">key-value pairs</a> that you can attach
    * to an object. This can be useful for storing additional information about the object in a
@@ -406,5 +409,27 @@ public class Configuration extends ApiResource implements HasId, MetadataStore<C
         String product;
       }
     }
+  }
+
+  @Getter
+  @Setter
+  @EqualsAndHashCode(callSuper = false)
+  public static class LoginPage extends StripeObject {
+    /**
+     * If {@code true}, a shareable {@code url} will be generated that will take your customers to a
+     * hosted login page for the customer portal.
+     *
+     * <p>If {@code false}, the previously generated {@code url}, if any, will be deactivated.
+     */
+    @SerializedName("enabled")
+    Boolean enabled;
+
+    /**
+     * A shareable URL to the hosted portal login page. Your customers will be able to log in with
+     * their <a href="https://stripe.com/docs/api/customers/object#customer_object-email">email</a>
+     * and receive a link to their customer portal.
+     */
+    @SerializedName("url")
+    String url;
   }
 }

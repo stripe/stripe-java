@@ -29,15 +29,15 @@ public class CardValidateParams extends ApiRequestParams {
   Map<String, Object> extraParams;
 
   /** The pin associated with the gift card. Not all gift cards have pins. */
-  @SerializedName("pin")
-  String pin;
+  @SerializedName("giftcard_pin")
+  String giftcardPin;
 
   private CardValidateParams(
-      String code, List<String> expand, Map<String, Object> extraParams, String pin) {
+      String code, List<String> expand, Map<String, Object> extraParams, String giftcardPin) {
     this.code = code;
     this.expand = expand;
     this.extraParams = extraParams;
-    this.pin = pin;
+    this.giftcardPin = giftcardPin;
   }
 
   public static Builder builder() {
@@ -51,11 +51,11 @@ public class CardValidateParams extends ApiRequestParams {
 
     private Map<String, Object> extraParams;
 
-    private String pin;
+    private String giftcardPin;
 
     /** Finalize and obtain parameter instance from this builder. */
     public CardValidateParams build() {
-      return new CardValidateParams(this.code, this.expand, this.extraParams, this.pin);
+      return new CardValidateParams(this.code, this.expand, this.extraParams, this.giftcardPin);
     }
 
     /** The gift card code to be validated. */
@@ -117,8 +117,8 @@ public class CardValidateParams extends ApiRequestParams {
     }
 
     /** The pin associated with the gift card. Not all gift cards have pins. */
-    public Builder setPin(String pin) {
-      this.pin = pin;
+    public Builder setGiftcardPin(String giftcardPin) {
+      this.giftcardPin = giftcardPin;
       return this;
     }
   }

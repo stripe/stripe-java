@@ -171,7 +171,8 @@ public class OutboundTransferCreateParams extends ApiRequestParams {
 
     /** Hash describing payment method configuration details. */
     public Builder setDestinationPaymentMethodOptions(
-        DestinationPaymentMethodOptions destinationPaymentMethodOptions) {
+        OutboundTransferCreateParams.DestinationPaymentMethodOptions
+            destinationPaymentMethodOptions) {
       this.destinationPaymentMethodOptions = destinationPaymentMethodOptions;
       return this;
     }
@@ -261,7 +262,7 @@ public class OutboundTransferCreateParams extends ApiRequestParams {
     }
 
     /** Details about the network used for the OutboundTransfer. */
-    public Builder setNetworkDetails(NetworkDetails networkDetails) {
+    public Builder setNetworkDetails(OutboundTransferCreateParams.NetworkDetails networkDetails) {
       this.networkDetails = networkDetails;
       return this;
     }
@@ -307,8 +308,9 @@ public class OutboundTransferCreateParams extends ApiRequestParams {
       private Object usBankAccount;
 
       /** Finalize and obtain parameter instance from this builder. */
-      public DestinationPaymentMethodOptions build() {
-        return new DestinationPaymentMethodOptions(this.extraParams, this.usBankAccount);
+      public OutboundTransferCreateParams.DestinationPaymentMethodOptions build() {
+        return new OutboundTransferCreateParams.DestinationPaymentMethodOptions(
+            this.extraParams, this.usBankAccount);
       }
 
       /**
@@ -340,7 +342,9 @@ public class OutboundTransferCreateParams extends ApiRequestParams {
       }
 
       /** Optional fields for {@code us_bank_account}. */
-      public Builder setUsBankAccount(UsBankAccount usBankAccount) {
+      public Builder setUsBankAccount(
+          OutboundTransferCreateParams.DestinationPaymentMethodOptions.UsBankAccount
+              usBankAccount) {
         this.usBankAccount = usBankAccount;
         return this;
       }
@@ -382,8 +386,9 @@ public class OutboundTransferCreateParams extends ApiRequestParams {
         private Network network;
 
         /** Finalize and obtain parameter instance from this builder. */
-        public UsBankAccount build() {
-          return new UsBankAccount(this.extraParams, this.network);
+        public OutboundTransferCreateParams.DestinationPaymentMethodOptions.UsBankAccount build() {
+          return new OutboundTransferCreateParams.DestinationPaymentMethodOptions.UsBankAccount(
+              this.extraParams, this.network);
         }
 
         /**
@@ -417,7 +422,9 @@ public class OutboundTransferCreateParams extends ApiRequestParams {
         }
 
         /** Designate the OutboundTransfer as using a US bank account network configuration. */
-        public Builder setNetwork(Network network) {
+        public Builder setNetwork(
+            OutboundTransferCreateParams.DestinationPaymentMethodOptions.UsBankAccount.Network
+                network) {
           this.network = network;
           return this;
         }
@@ -477,12 +484,13 @@ public class OutboundTransferCreateParams extends ApiRequestParams {
       private Type type;
 
       /** Finalize and obtain parameter instance from this builder. */
-      public NetworkDetails build() {
-        return new NetworkDetails(this.ach, this.extraParams, this.type);
+      public OutboundTransferCreateParams.NetworkDetails build() {
+        return new OutboundTransferCreateParams.NetworkDetails(
+            this.ach, this.extraParams, this.type);
       }
 
       /** Optional fields for {@code ach}. */
-      public Builder setAch(Ach ach) {
+      public Builder setAch(OutboundTransferCreateParams.NetworkDetails.Ach ach) {
         this.ach = ach;
         return this;
       }
@@ -515,7 +523,7 @@ public class OutboundTransferCreateParams extends ApiRequestParams {
       }
 
       /** The type of flow that originated the OutboundTransfer. */
-      public Builder setType(Type type) {
+      public Builder setType(OutboundTransferCreateParams.NetworkDetails.Type type) {
         this.type = type;
         return this;
       }
@@ -551,8 +559,9 @@ public class OutboundTransferCreateParams extends ApiRequestParams {
         private Map<String, Object> extraParams;
 
         /** Finalize and obtain parameter instance from this builder. */
-        public Ach build() {
-          return new Ach(this.addenda, this.extraParams);
+        public OutboundTransferCreateParams.NetworkDetails.Ach build() {
+          return new OutboundTransferCreateParams.NetworkDetails.Ach(
+              this.addenda, this.extraParams);
         }
 
         /** Addenda record data associated with this OutboundTransfer. */

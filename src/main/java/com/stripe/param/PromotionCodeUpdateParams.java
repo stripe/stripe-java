@@ -191,7 +191,7 @@ public class PromotionCodeUpdateParams extends ApiRequestParams {
     }
 
     /** Settings that restrict the redemption of the promotion code. */
-    public Builder setRestrictions(Restrictions restrictions) {
+    public Builder setRestrictions(PromotionCodeUpdateParams.Restrictions restrictions) {
       this.restrictions = restrictions;
       return this;
     }
@@ -205,7 +205,7 @@ public class PromotionCodeUpdateParams extends ApiRequestParams {
      * href="https://stripe.com/docs/currencies">supported currency</a>.
      */
     @SerializedName("currency_options")
-    Map<String, CurrencyOption> currencyOptions;
+    Map<String, PromotionCodeUpdateParams.Restrictions.CurrencyOption> currencyOptions;
 
     /**
      * Map of extra parameters for custom features not available in this client library. The content
@@ -217,7 +217,8 @@ public class PromotionCodeUpdateParams extends ApiRequestParams {
     Map<String, Object> extraParams;
 
     private Restrictions(
-        Map<String, CurrencyOption> currencyOptions, Map<String, Object> extraParams) {
+        Map<String, PromotionCodeUpdateParams.Restrictions.CurrencyOption> currencyOptions,
+        Map<String, Object> extraParams) {
       this.currencyOptions = currencyOptions;
       this.extraParams = extraParams;
     }
@@ -227,13 +228,13 @@ public class PromotionCodeUpdateParams extends ApiRequestParams {
     }
 
     public static class Builder {
-      private Map<String, CurrencyOption> currencyOptions;
+      private Map<String, PromotionCodeUpdateParams.Restrictions.CurrencyOption> currencyOptions;
 
       private Map<String, Object> extraParams;
 
       /** Finalize and obtain parameter instance from this builder. */
-      public Restrictions build() {
-        return new Restrictions(this.currencyOptions, this.extraParams);
+      public PromotionCodeUpdateParams.Restrictions build() {
+        return new PromotionCodeUpdateParams.Restrictions(this.currencyOptions, this.extraParams);
       }
 
       /**
@@ -242,7 +243,8 @@ public class PromotionCodeUpdateParams extends ApiRequestParams {
        * See {@link PromotionCodeUpdateParams.Restrictions#currencyOptions} for the field
        * documentation.
        */
-      public Builder putCurrencyOption(String key, CurrencyOption value) {
+      public Builder putCurrencyOption(
+          String key, PromotionCodeUpdateParams.Restrictions.CurrencyOption value) {
         if (this.currencyOptions == null) {
           this.currencyOptions = new HashMap<>();
         }
@@ -256,7 +258,8 @@ public class PromotionCodeUpdateParams extends ApiRequestParams {
        * See {@link PromotionCodeUpdateParams.Restrictions#currencyOptions} for the field
        * documentation.
        */
-      public Builder putAllCurrencyOption(Map<String, CurrencyOption> map) {
+      public Builder putAllCurrencyOption(
+          Map<String, PromotionCodeUpdateParams.Restrictions.CurrencyOption> map) {
         if (this.currencyOptions == null) {
           this.currencyOptions = new HashMap<>();
         }
@@ -324,8 +327,9 @@ public class PromotionCodeUpdateParams extends ApiRequestParams {
         private Long minimumAmount;
 
         /** Finalize and obtain parameter instance from this builder. */
-        public CurrencyOption build() {
-          return new CurrencyOption(this.extraParams, this.minimumAmount);
+        public PromotionCodeUpdateParams.Restrictions.CurrencyOption build() {
+          return new PromotionCodeUpdateParams.Restrictions.CurrencyOption(
+              this.extraParams, this.minimumAmount);
         }
 
         /**

@@ -319,7 +319,7 @@ public class ProductCreateParams extends ApiRequestParams {
      * Data used to generate a new <a href="https://stripe.com/docs/api/prices">Price</a> object.
      * This Price will be set as the default price for this product.
      */
-    public Builder setDefaultPriceData(DefaultPriceData defaultPriceData) {
+    public Builder setDefaultPriceData(ProductCreateParams.DefaultPriceData defaultPriceData) {
       this.defaultPriceData = defaultPriceData;
       return this;
     }
@@ -454,13 +454,13 @@ public class ProductCreateParams extends ApiRequestParams {
     }
 
     /** The dimensions of this product for shipping purposes. */
-    public Builder setPackageDimensions(PackageDimensions packageDimensions) {
+    public Builder setPackageDimensions(ProductCreateParams.PackageDimensions packageDimensions) {
       this.packageDimensions = packageDimensions;
       return this;
     }
 
     /** Provisioning configuration for this product. */
-    public Builder setProvisioning(Provisioning provisioning) {
+    public Builder setProvisioning(ProductCreateParams.Provisioning provisioning) {
       this.provisioning = provisioning;
       return this;
     }
@@ -498,7 +498,7 @@ public class ProductCreateParams extends ApiRequestParams {
      * this product with Orders and SKUs. On API versions before {@code 2018-02-05}, this field
      * defaults to {@code good} for compatibility reasons.
      */
-    public Builder setType(Type type) {
+    public Builder setType(ProductCreateParams.Type type) {
       this.type = type;
       return this;
     }
@@ -535,7 +535,7 @@ public class ProductCreateParams extends ApiRequestParams {
      * href="https://stripe.com/docs/currencies">supported currency</a>.
      */
     @SerializedName("currency_options")
-    Map<String, CurrencyOption> currencyOptions;
+    Map<String, ProductCreateParams.DefaultPriceData.CurrencyOption> currencyOptions;
 
     /**
      * Map of extra parameters for custom features not available in this client library. The content
@@ -575,7 +575,7 @@ public class ProductCreateParams extends ApiRequestParams {
 
     private DefaultPriceData(
         String currency,
-        Map<String, CurrencyOption> currencyOptions,
+        Map<String, ProductCreateParams.DefaultPriceData.CurrencyOption> currencyOptions,
         Map<String, Object> extraParams,
         Recurring recurring,
         TaxBehavior taxBehavior,
@@ -597,7 +597,7 @@ public class ProductCreateParams extends ApiRequestParams {
     public static class Builder {
       private String currency;
 
-      private Map<String, CurrencyOption> currencyOptions;
+      private Map<String, ProductCreateParams.DefaultPriceData.CurrencyOption> currencyOptions;
 
       private Map<String, Object> extraParams;
 
@@ -610,8 +610,8 @@ public class ProductCreateParams extends ApiRequestParams {
       private BigDecimal unitAmountDecimal;
 
       /** Finalize and obtain parameter instance from this builder. */
-      public DefaultPriceData build() {
-        return new DefaultPriceData(
+      public ProductCreateParams.DefaultPriceData build() {
+        return new ProductCreateParams.DefaultPriceData(
             this.currency,
             this.currencyOptions,
             this.extraParams,
@@ -637,7 +637,8 @@ public class ProductCreateParams extends ApiRequestParams {
        * See {@link ProductCreateParams.DefaultPriceData#currencyOptions} for the field
        * documentation.
        */
-      public Builder putCurrencyOption(String key, CurrencyOption value) {
+      public Builder putCurrencyOption(
+          String key, ProductCreateParams.DefaultPriceData.CurrencyOption value) {
         if (this.currencyOptions == null) {
           this.currencyOptions = new HashMap<>();
         }
@@ -651,7 +652,8 @@ public class ProductCreateParams extends ApiRequestParams {
        * See {@link ProductCreateParams.DefaultPriceData#currencyOptions} for the field
        * documentation.
        */
-      public Builder putAllCurrencyOption(Map<String, CurrencyOption> map) {
+      public Builder putAllCurrencyOption(
+          Map<String, ProductCreateParams.DefaultPriceData.CurrencyOption> map) {
         if (this.currencyOptions == null) {
           this.currencyOptions = new HashMap<>();
         }
@@ -688,7 +690,7 @@ public class ProductCreateParams extends ApiRequestParams {
       /**
        * The recurring components of a price such as {@code interval} and {@code interval_count}.
        */
-      public Builder setRecurring(Recurring recurring) {
+      public Builder setRecurring(ProductCreateParams.DefaultPriceData.Recurring recurring) {
         this.recurring = recurring;
         return this;
       }
@@ -698,7 +700,7 @@ public class ProductCreateParams extends ApiRequestParams {
        * {@code inclusive}, {@code exclusive}, or {@code unspecified}. Once specified as either
        * {@code inclusive} or {@code exclusive}, it cannot be changed.
        */
-      public Builder setTaxBehavior(TaxBehavior taxBehavior) {
+      public Builder setTaxBehavior(ProductCreateParams.DefaultPriceData.TaxBehavior taxBehavior) {
         this.taxBehavior = taxBehavior;
         return this;
       }
@@ -754,7 +756,7 @@ public class ProductCreateParams extends ApiRequestParams {
        * be set to {@code tiered}. See also the documentation for {@code billing_scheme}.
        */
       @SerializedName("tiers")
-      List<Tier> tiers;
+      List<ProductCreateParams.DefaultPriceData.CurrencyOption.Tier> tiers;
 
       /**
        * A positive integer in cents (or local equivalent) (or 0 for a free price) representing how
@@ -775,7 +777,7 @@ public class ProductCreateParams extends ApiRequestParams {
           CustomUnitAmount customUnitAmount,
           Map<String, Object> extraParams,
           TaxBehavior taxBehavior,
-          List<Tier> tiers,
+          List<ProductCreateParams.DefaultPriceData.CurrencyOption.Tier> tiers,
           Long unitAmount,
           BigDecimal unitAmountDecimal) {
         this.customUnitAmount = customUnitAmount;
@@ -797,15 +799,15 @@ public class ProductCreateParams extends ApiRequestParams {
 
         private TaxBehavior taxBehavior;
 
-        private List<Tier> tiers;
+        private List<ProductCreateParams.DefaultPriceData.CurrencyOption.Tier> tiers;
 
         private Long unitAmount;
 
         private BigDecimal unitAmountDecimal;
 
         /** Finalize and obtain parameter instance from this builder. */
-        public CurrencyOption build() {
-          return new CurrencyOption(
+        public ProductCreateParams.DefaultPriceData.CurrencyOption build() {
+          return new ProductCreateParams.DefaultPriceData.CurrencyOption(
               this.customUnitAmount,
               this.extraParams,
               this.taxBehavior,
@@ -818,7 +820,8 @@ public class ProductCreateParams extends ApiRequestParams {
          * When set, provides configuration for the amount to be adjusted by the customer during
          * Checkout Sessions and Payment Links.
          */
-        public Builder setCustomUnitAmount(CustomUnitAmount customUnitAmount) {
+        public Builder setCustomUnitAmount(
+            ProductCreateParams.DefaultPriceData.CurrencyOption.CustomUnitAmount customUnitAmount) {
           this.customUnitAmount = customUnitAmount;
           return this;
         }
@@ -856,7 +859,8 @@ public class ProductCreateParams extends ApiRequestParams {
          * of {@code inclusive}, {@code exclusive}, or {@code unspecified}. Once specified as either
          * {@code inclusive} or {@code exclusive}, it cannot be changed.
          */
-        public Builder setTaxBehavior(TaxBehavior taxBehavior) {
+        public Builder setTaxBehavior(
+            ProductCreateParams.DefaultPriceData.CurrencyOption.TaxBehavior taxBehavior) {
           this.taxBehavior = taxBehavior;
           return this;
         }
@@ -866,7 +870,7 @@ public class ProductCreateParams extends ApiRequestParams {
          * and subsequent calls adds additional elements to the original list. See {@link
          * ProductCreateParams.DefaultPriceData.CurrencyOption#tiers} for the field documentation.
          */
-        public Builder addTier(Tier element) {
+        public Builder addTier(ProductCreateParams.DefaultPriceData.CurrencyOption.Tier element) {
           if (this.tiers == null) {
             this.tiers = new ArrayList<>();
           }
@@ -879,7 +883,8 @@ public class ProductCreateParams extends ApiRequestParams {
          * and subsequent calls adds additional elements to the original list. See {@link
          * ProductCreateParams.DefaultPriceData.CurrencyOption#tiers} for the field documentation.
          */
-        public Builder addAllTier(List<Tier> elements) {
+        public Builder addAllTier(
+            List<ProductCreateParams.DefaultPriceData.CurrencyOption.Tier> elements) {
           if (this.tiers == null) {
             this.tiers = new ArrayList<>();
           }
@@ -970,8 +975,8 @@ public class ProductCreateParams extends ApiRequestParams {
           private Long preset;
 
           /** Finalize and obtain parameter instance from this builder. */
-          public CustomUnitAmount build() {
-            return new CustomUnitAmount(
+          public ProductCreateParams.DefaultPriceData.CurrencyOption.CustomUnitAmount build() {
+            return new ProductCreateParams.DefaultPriceData.CurrencyOption.CustomUnitAmount(
                 this.enabled, this.extraParams, this.maximum, this.minimum, this.preset);
           }
 
@@ -1116,8 +1121,8 @@ public class ProductCreateParams extends ApiRequestParams {
           private Object upTo;
 
           /** Finalize and obtain parameter instance from this builder. */
-          public Tier build() {
-            return new Tier(
+          public ProductCreateParams.DefaultPriceData.CurrencyOption.Tier build() {
+            return new ProductCreateParams.DefaultPriceData.CurrencyOption.Tier(
                 this.extraParams,
                 this.flatAmount,
                 this.flatAmountDecimal,
@@ -1193,7 +1198,8 @@ public class ProductCreateParams extends ApiRequestParams {
            * Specifies the upper bound of this tier. The lower bound of a tier is the upper bound of
            * the previous tier adding one. Use {@code inf} to define a fallback tier.
            */
-          public Builder setUpTo(UpTo upTo) {
+          public Builder setUpTo(
+              ProductCreateParams.DefaultPriceData.CurrencyOption.Tier.UpTo upTo) {
             this.upTo = upTo;
             return this;
           }
@@ -1284,8 +1290,9 @@ public class ProductCreateParams extends ApiRequestParams {
         private Long intervalCount;
 
         /** Finalize and obtain parameter instance from this builder. */
-        public Recurring build() {
-          return new Recurring(this.extraParams, this.interval, this.intervalCount);
+        public ProductCreateParams.DefaultPriceData.Recurring build() {
+          return new ProductCreateParams.DefaultPriceData.Recurring(
+              this.extraParams, this.interval, this.intervalCount);
         }
 
         /**
@@ -1320,7 +1327,8 @@ public class ProductCreateParams extends ApiRequestParams {
          * Specifies billing frequency. Either {@code day}, {@code week}, {@code month} or {@code
          * year}.
          */
-        public Builder setInterval(Interval interval) {
+        public Builder setInterval(
+            ProductCreateParams.DefaultPriceData.Recurring.Interval interval) {
           this.interval = interval;
           return this;
         }
@@ -1433,8 +1441,8 @@ public class ProductCreateParams extends ApiRequestParams {
       private BigDecimal width;
 
       /** Finalize and obtain parameter instance from this builder. */
-      public PackageDimensions build() {
-        return new PackageDimensions(
+      public ProductCreateParams.PackageDimensions build() {
+        return new ProductCreateParams.PackageDimensions(
             this.extraParams, this.height, this.length, this.weight, this.width);
       }
 
@@ -1526,8 +1534,8 @@ public class ProductCreateParams extends ApiRequestParams {
       private Type type;
 
       /** Finalize and obtain parameter instance from this builder. */
-      public Provisioning build() {
-        return new Provisioning(this.extraParams, this.giftCard, this.type);
+      public ProductCreateParams.Provisioning build() {
+        return new ProductCreateParams.Provisioning(this.extraParams, this.giftCard, this.type);
       }
 
       /**
@@ -1556,13 +1564,13 @@ public class ProductCreateParams extends ApiRequestParams {
         return this;
       }
 
-      public Builder setGiftCard(GiftCard giftCard) {
+      public Builder setGiftCard(ProductCreateParams.Provisioning.GiftCard giftCard) {
         this.giftCard = giftCard;
         return this;
       }
 
       /** The type of provisioning, only {@code gift_card} currently supported. */
-      public Builder setType(Type type) {
+      public Builder setType(ProductCreateParams.Provisioning.Type type) {
         this.type = type;
         return this;
       }
@@ -1606,8 +1614,9 @@ public class ProductCreateParams extends ApiRequestParams {
         private Type type;
 
         /** Finalize and obtain parameter instance from this builder. */
-        public GiftCard build() {
-          return new GiftCard(this.extraParams, this.fixedAmount, this.type);
+        public ProductCreateParams.Provisioning.GiftCard build() {
+          return new ProductCreateParams.Provisioning.GiftCard(
+              this.extraParams, this.fixedAmount, this.type);
         }
 
         /**
@@ -1638,7 +1647,8 @@ public class ProductCreateParams extends ApiRequestParams {
           return this;
         }
 
-        public Builder setFixedAmount(FixedAmount fixedAmount) {
+        public Builder setFixedAmount(
+            ProductCreateParams.Provisioning.GiftCard.FixedAmount fixedAmount) {
           this.fixedAmount = fixedAmount;
           return this;
         }
@@ -1647,7 +1657,7 @@ public class ProductCreateParams extends ApiRequestParams {
          * The specific type of gift_card provisioning, only {@code fixed_amount} currently
          * supported.
          */
-        public Builder setType(Type type) {
+        public Builder setType(ProductCreateParams.Provisioning.GiftCard.Type type) {
           this.type = type;
           return this;
         }
@@ -1690,8 +1700,9 @@ public class ProductCreateParams extends ApiRequestParams {
           private Map<String, Object> extraParams;
 
           /** Finalize and obtain parameter instance from this builder. */
-          public FixedAmount build() {
-            return new FixedAmount(this.amount, this.currency, this.extraParams);
+          public ProductCreateParams.Provisioning.GiftCard.FixedAmount build() {
+            return new ProductCreateParams.Provisioning.GiftCard.FixedAmount(
+                this.amount, this.currency, this.extraParams);
           }
 
           /** The initial amount with which the provisioned gift card will be created. */

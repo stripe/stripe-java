@@ -1084,7 +1084,7 @@ public class Order extends ApiResource implements HasId, MetadataStore<Order> {
           @EqualsAndHashCode(callSuper = false)
           public static class BankTransfer extends StripeObject {
             @SerializedName("eu_bank_transfer")
-            PaymentIntent.PaymentMethodOptions.BankTransfer.EuBankTransfer euBankTransfer;
+            EuBankTransfer euBankTransfer;
 
             /**
              * List of address types that should be returned in the financial_addresses response. If
@@ -1635,7 +1635,7 @@ public class Order extends ApiResource implements HasId, MetadataStore<Order> {
          * Subscriptions</a>.
          */
         @SerializedName("discount")
-        Discount discount;
+        com.stripe.model.Discount discount;
       }
 
       @Getter

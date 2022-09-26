@@ -121,7 +121,7 @@ public class TopupListParams extends ApiRequestParams {
     }
 
     /** A positive integer representing how much to transfer. */
-    public Builder setAmount(Amount amount) {
+    public Builder setAmount(TopupListParams.Amount amount) {
       this.amount = amount;
       return this;
     }
@@ -137,7 +137,7 @@ public class TopupListParams extends ApiRequestParams {
      * with an integer Unix timestamp, or it can be a dictionary with a number of different query
      * options.
      */
-    public Builder setCreated(Created created) {
+    public Builder setCreated(TopupListParams.Created created) {
       this.created = created;
       return this;
     }
@@ -239,7 +239,7 @@ public class TopupListParams extends ApiRequestParams {
      * Only return top-ups that have the given status. One of {@code canceled}, {@code failed},
      * {@code pending} or {@code succeeded}.
      */
-    public Builder setStatus(Status status) {
+    public Builder setStatus(TopupListParams.Status status) {
       this.status = status;
       return this;
     }
@@ -296,8 +296,8 @@ public class TopupListParams extends ApiRequestParams {
       private Long lte;
 
       /** Finalize and obtain parameter instance from this builder. */
-      public Amount build() {
-        return new Amount(this.extraParams, this.gt, this.gte, this.lt, this.lte);
+      public TopupListParams.Amount build() {
+        return new TopupListParams.Amount(this.extraParams, this.gt, this.gte, this.lt, this.lte);
       }
 
       /**
@@ -403,8 +403,8 @@ public class TopupListParams extends ApiRequestParams {
       private Long lte;
 
       /** Finalize and obtain parameter instance from this builder. */
-      public Created build() {
-        return new Created(this.extraParams, this.gt, this.gte, this.lt, this.lte);
+      public TopupListParams.Created build() {
+        return new TopupListParams.Created(this.extraParams, this.gt, this.gte, this.lt, this.lte);
       }
 
       /**

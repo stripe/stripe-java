@@ -215,6 +215,20 @@ public class PaymentMethodCreateParams extends ApiRequestParams {
   Paynow paynow;
 
   /**
+   * If this is a {@code paypal} PaymentMethod, this hash contains details about the PayPal payment
+   * method.
+   */
+  @SerializedName("paypal")
+  Paypal paypal;
+
+  /**
+   * If this is a {@code pix} PaymentMethod, this hash contains details about the Pix payment
+   * method.
+   */
+  @SerializedName("pix")
+  Pix pix;
+
+  /**
    * If this is a {@code promptpay} PaymentMethod, this hash contains details about the PromptPay
    * payment method.
    */
@@ -293,6 +307,8 @@ public class PaymentMethodCreateParams extends ApiRequestParams {
       P24 p24,
       String paymentMethod,
       Paynow paynow,
+      Paypal paypal,
+      Pix pix,
       Promptpay promptpay,
       RadarOptions radarOptions,
       SepaDebit sepaDebit,
@@ -329,6 +345,8 @@ public class PaymentMethodCreateParams extends ApiRequestParams {
     this.p24 = p24;
     this.paymentMethod = paymentMethod;
     this.paynow = paynow;
+    this.paypal = paypal;
+    this.pix = pix;
     this.promptpay = promptpay;
     this.radarOptions = radarOptions;
     this.sepaDebit = sepaDebit;
@@ -401,6 +419,10 @@ public class PaymentMethodCreateParams extends ApiRequestParams {
 
     private Paynow paynow;
 
+    private Paypal paypal;
+
+    private Pix pix;
+
     private Promptpay promptpay;
 
     private RadarOptions radarOptions;
@@ -447,6 +469,8 @@ public class PaymentMethodCreateParams extends ApiRequestParams {
           this.p24,
           this.paymentMethod,
           this.paynow,
+          this.paypal,
+          this.pix,
           this.promptpay,
           this.radarOptions,
           this.sepaDebit,
@@ -460,7 +484,7 @@ public class PaymentMethodCreateParams extends ApiRequestParams {
      * If this is an {@code acss_debit} PaymentMethod, this hash contains details about the ACSS
      * Debit payment method.
      */
-    public Builder setAcssDebit(AcssDebit acssDebit) {
+    public Builder setAcssDebit(PaymentMethodCreateParams.AcssDebit acssDebit) {
       this.acssDebit = acssDebit;
       return this;
     }
@@ -469,7 +493,7 @@ public class PaymentMethodCreateParams extends ApiRequestParams {
      * If this is an {@code affirm} PaymentMethod, this hash contains details about the Affirm
      * payment method.
      */
-    public Builder setAffirm(Affirm affirm) {
+    public Builder setAffirm(PaymentMethodCreateParams.Affirm affirm) {
       this.affirm = affirm;
       return this;
     }
@@ -478,7 +502,8 @@ public class PaymentMethodCreateParams extends ApiRequestParams {
      * If this is an {@code AfterpayClearpay} PaymentMethod, this hash contains details about the
      * AfterpayClearpay payment method.
      */
-    public Builder setAfterpayClearpay(AfterpayClearpay afterpayClearpay) {
+    public Builder setAfterpayClearpay(
+        PaymentMethodCreateParams.AfterpayClearpay afterpayClearpay) {
       this.afterpayClearpay = afterpayClearpay;
       return this;
     }
@@ -487,7 +512,7 @@ public class PaymentMethodCreateParams extends ApiRequestParams {
      * If this is an {@code Alipay} PaymentMethod, this hash contains details about the Alipay
      * payment method.
      */
-    public Builder setAlipay(Alipay alipay) {
+    public Builder setAlipay(PaymentMethodCreateParams.Alipay alipay) {
       this.alipay = alipay;
       return this;
     }
@@ -496,7 +521,7 @@ public class PaymentMethodCreateParams extends ApiRequestParams {
      * If this is an {@code au_becs_debit} PaymentMethod, this hash contains details about the bank
      * account.
      */
-    public Builder setAuBecsDebit(AuBecsDebit auBecsDebit) {
+    public Builder setAuBecsDebit(PaymentMethodCreateParams.AuBecsDebit auBecsDebit) {
       this.auBecsDebit = auBecsDebit;
       return this;
     }
@@ -505,7 +530,7 @@ public class PaymentMethodCreateParams extends ApiRequestParams {
      * If this is a {@code bacs_debit} PaymentMethod, this hash contains details about the Bacs
      * Direct Debit bank account.
      */
-    public Builder setBacsDebit(BacsDebit bacsDebit) {
+    public Builder setBacsDebit(PaymentMethodCreateParams.BacsDebit bacsDebit) {
       this.bacsDebit = bacsDebit;
       return this;
     }
@@ -514,7 +539,7 @@ public class PaymentMethodCreateParams extends ApiRequestParams {
      * If this is a {@code bancontact} PaymentMethod, this hash contains details about the
      * Bancontact payment method.
      */
-    public Builder setBancontact(Bancontact bancontact) {
+    public Builder setBancontact(PaymentMethodCreateParams.Bancontact bancontact) {
       this.bancontact = bancontact;
       return this;
     }
@@ -523,7 +548,7 @@ public class PaymentMethodCreateParams extends ApiRequestParams {
      * Billing information associated with the PaymentMethod that may be used or required by
      * particular types of payment methods.
      */
-    public Builder setBillingDetails(BillingDetails billingDetails) {
+    public Builder setBillingDetails(PaymentMethodCreateParams.BillingDetails billingDetails) {
       this.billingDetails = billingDetails;
       return this;
     }
@@ -532,7 +557,7 @@ public class PaymentMethodCreateParams extends ApiRequestParams {
      * If this is a {@code blik} PaymentMethod, this hash contains details about the BLIK payment
      * method.
      */
-    public Builder setBlik(Blik blik) {
+    public Builder setBlik(PaymentMethodCreateParams.Blik blik) {
       this.blik = blik;
       return this;
     }
@@ -541,7 +566,7 @@ public class PaymentMethodCreateParams extends ApiRequestParams {
      * If this is a {@code boleto} PaymentMethod, this hash contains details about the Boleto
      * payment method.
      */
-    public Builder setBoleto(Boleto boleto) {
+    public Builder setBoleto(PaymentMethodCreateParams.Boleto boleto) {
       this.boleto = boleto;
       return this;
     }
@@ -554,7 +579,7 @@ public class PaymentMethodCreateParams extends ApiRequestParams {
      * href="https://stripe.com/docs/security#validating-pci-compliance">PCI compliance</a>. We
      * strongly recommend using Stripe.js instead of interacting with this API directly.
      */
-    public Builder setCard(CardDetails card) {
+    public Builder setCard(PaymentMethodCreateParams.CardDetails card) {
       this.card = card;
       return this;
     }
@@ -567,7 +592,7 @@ public class PaymentMethodCreateParams extends ApiRequestParams {
      * href="https://stripe.com/docs/security#validating-pci-compliance">PCI compliance</a>. We
      * strongly recommend using Stripe.js instead of interacting with this API directly.
      */
-    public Builder setCard(Token card) {
+    public Builder setCard(PaymentMethodCreateParams.Token card) {
       this.card = card;
       return this;
     }
@@ -582,7 +607,7 @@ public class PaymentMethodCreateParams extends ApiRequestParams {
      * If this is a {@code customer_balance} PaymentMethod, this hash contains details about the
      * CustomerBalance payment method.
      */
-    public Builder setCustomerBalance(CustomerBalance customerBalance) {
+    public Builder setCustomerBalance(PaymentMethodCreateParams.CustomerBalance customerBalance) {
       this.customerBalance = customerBalance;
       return this;
     }
@@ -591,7 +616,7 @@ public class PaymentMethodCreateParams extends ApiRequestParams {
      * If this is an {@code eps} PaymentMethod, this hash contains details about the EPS payment
      * method.
      */
-    public Builder setEps(Eps eps) {
+    public Builder setEps(PaymentMethodCreateParams.Eps eps) {
       this.eps = eps;
       return this;
     }
@@ -652,7 +677,7 @@ public class PaymentMethodCreateParams extends ApiRequestParams {
      * If this is an {@code fpx} PaymentMethod, this hash contains details about the FPX payment
      * method.
      */
-    public Builder setFpx(Fpx fpx) {
+    public Builder setFpx(PaymentMethodCreateParams.Fpx fpx) {
       this.fpx = fpx;
       return this;
     }
@@ -661,7 +686,7 @@ public class PaymentMethodCreateParams extends ApiRequestParams {
      * If this is a {@code giropay} PaymentMethod, this hash contains details about the Giropay
      * payment method.
      */
-    public Builder setGiropay(Giropay giropay) {
+    public Builder setGiropay(PaymentMethodCreateParams.Giropay giropay) {
       this.giropay = giropay;
       return this;
     }
@@ -670,7 +695,7 @@ public class PaymentMethodCreateParams extends ApiRequestParams {
      * If this is a {@code grabpay} PaymentMethod, this hash contains details about the GrabPay
      * payment method.
      */
-    public Builder setGrabpay(Grabpay grabpay) {
+    public Builder setGrabpay(PaymentMethodCreateParams.Grabpay grabpay) {
       this.grabpay = grabpay;
       return this;
     }
@@ -679,7 +704,7 @@ public class PaymentMethodCreateParams extends ApiRequestParams {
      * If this is an {@code ideal} PaymentMethod, this hash contains details about the iDEAL payment
      * method.
      */
-    public Builder setIdeal(Ideal ideal) {
+    public Builder setIdeal(PaymentMethodCreateParams.Ideal ideal) {
       this.ideal = ideal;
       return this;
     }
@@ -688,7 +713,7 @@ public class PaymentMethodCreateParams extends ApiRequestParams {
      * If this is an {@code interac_present} PaymentMethod, this hash contains details about the
      * Interac Present payment method.
      */
-    public Builder setInteracPresent(InteracPresent interacPresent) {
+    public Builder setInteracPresent(PaymentMethodCreateParams.InteracPresent interacPresent) {
       this.interacPresent = interacPresent;
       return this;
     }
@@ -697,7 +722,7 @@ public class PaymentMethodCreateParams extends ApiRequestParams {
      * If this is a {@code klarna} PaymentMethod, this hash contains details about the Klarna
      * payment method.
      */
-    public Builder setKlarna(Klarna klarna) {
+    public Builder setKlarna(PaymentMethodCreateParams.Klarna klarna) {
       this.klarna = klarna;
       return this;
     }
@@ -706,7 +731,7 @@ public class PaymentMethodCreateParams extends ApiRequestParams {
      * If this is a {@code konbini} PaymentMethod, this hash contains details about the Konbini
      * payment method.
      */
-    public Builder setKonbini(Konbini konbini) {
+    public Builder setKonbini(PaymentMethodCreateParams.Konbini konbini) {
       this.konbini = konbini;
       return this;
     }
@@ -715,7 +740,7 @@ public class PaymentMethodCreateParams extends ApiRequestParams {
      * If this is an {@code Link} PaymentMethod, this hash contains details about the Link payment
      * method.
      */
-    public Builder setLink(Link link) {
+    public Builder setLink(PaymentMethodCreateParams.Link link) {
       this.link = link;
       return this;
     }
@@ -750,7 +775,7 @@ public class PaymentMethodCreateParams extends ApiRequestParams {
      * If this is an {@code oxxo} PaymentMethod, this hash contains details about the OXXO payment
      * method.
      */
-    public Builder setOxxo(Oxxo oxxo) {
+    public Builder setOxxo(PaymentMethodCreateParams.Oxxo oxxo) {
       this.oxxo = oxxo;
       return this;
     }
@@ -759,7 +784,7 @@ public class PaymentMethodCreateParams extends ApiRequestParams {
      * If this is a {@code p24} PaymentMethod, this hash contains details about the P24 payment
      * method.
      */
-    public Builder setP24(P24 p24) {
+    public Builder setP24(PaymentMethodCreateParams.P24 p24) {
       this.p24 = p24;
       return this;
     }
@@ -774,8 +799,26 @@ public class PaymentMethodCreateParams extends ApiRequestParams {
      * If this is a {@code paynow} PaymentMethod, this hash contains details about the PayNow
      * payment method.
      */
-    public Builder setPaynow(Paynow paynow) {
+    public Builder setPaynow(PaymentMethodCreateParams.Paynow paynow) {
       this.paynow = paynow;
+      return this;
+    }
+
+    /**
+     * If this is a {@code paypal} PaymentMethod, this hash contains details about the PayPal
+     * payment method.
+     */
+    public Builder setPaypal(PaymentMethodCreateParams.Paypal paypal) {
+      this.paypal = paypal;
+      return this;
+    }
+
+    /**
+     * If this is a {@code pix} PaymentMethod, this hash contains details about the Pix payment
+     * method.
+     */
+    public Builder setPix(PaymentMethodCreateParams.Pix pix) {
+      this.pix = pix;
       return this;
     }
 
@@ -783,7 +826,7 @@ public class PaymentMethodCreateParams extends ApiRequestParams {
      * If this is a {@code promptpay} PaymentMethod, this hash contains details about the PromptPay
      * payment method.
      */
-    public Builder setPromptpay(Promptpay promptpay) {
+    public Builder setPromptpay(PaymentMethodCreateParams.Promptpay promptpay) {
       this.promptpay = promptpay;
       return this;
     }
@@ -792,7 +835,7 @@ public class PaymentMethodCreateParams extends ApiRequestParams {
      * Options to configure Radar. See <a href="https://stripe.com/docs/radar/radar-session">Radar
      * Session</a> for more information.
      */
-    public Builder setRadarOptions(RadarOptions radarOptions) {
+    public Builder setRadarOptions(PaymentMethodCreateParams.RadarOptions radarOptions) {
       this.radarOptions = radarOptions;
       return this;
     }
@@ -801,7 +844,7 @@ public class PaymentMethodCreateParams extends ApiRequestParams {
      * If this is a {@code sepa_debit} PaymentMethod, this hash contains details about the SEPA
      * debit bank account.
      */
-    public Builder setSepaDebit(SepaDebit sepaDebit) {
+    public Builder setSepaDebit(PaymentMethodCreateParams.SepaDebit sepaDebit) {
       this.sepaDebit = sepaDebit;
       return this;
     }
@@ -810,7 +853,7 @@ public class PaymentMethodCreateParams extends ApiRequestParams {
      * If this is a {@code sofort} PaymentMethod, this hash contains details about the SOFORT
      * payment method.
      */
-    public Builder setSofort(Sofort sofort) {
+    public Builder setSofort(PaymentMethodCreateParams.Sofort sofort) {
       this.sofort = sofort;
       return this;
     }
@@ -820,7 +863,7 @@ public class PaymentMethodCreateParams extends ApiRequestParams {
      * name matching this value. It contains additional information specific to the PaymentMethod
      * type.
      */
-    public Builder setType(Type type) {
+    public Builder setType(PaymentMethodCreateParams.Type type) {
       this.type = type;
       return this;
     }
@@ -829,7 +872,7 @@ public class PaymentMethodCreateParams extends ApiRequestParams {
      * If this is an {@code us_bank_account} PaymentMethod, this hash contains details about the US
      * bank account payment method.
      */
-    public Builder setUsBankAccount(UsBankAccount usBankAccount) {
+    public Builder setUsBankAccount(PaymentMethodCreateParams.UsBankAccount usBankAccount) {
       this.usBankAccount = usBankAccount;
       return this;
     }
@@ -838,7 +881,7 @@ public class PaymentMethodCreateParams extends ApiRequestParams {
      * If this is an {@code wechat_pay} PaymentMethod, this hash contains details about the
      * wechat_pay payment method.
      */
-    public Builder setWechatPay(WechatPay wechatPay) {
+    public Builder setWechatPay(PaymentMethodCreateParams.WechatPay wechatPay) {
       this.wechatPay = wechatPay;
       return this;
     }
@@ -892,8 +935,8 @@ public class PaymentMethodCreateParams extends ApiRequestParams {
       private String transitNumber;
 
       /** Finalize and obtain parameter instance from this builder. */
-      public AcssDebit build() {
-        return new AcssDebit(
+      public PaymentMethodCreateParams.AcssDebit build() {
+        return new PaymentMethodCreateParams.AcssDebit(
             this.accountNumber, this.extraParams, this.institutionNumber, this.transitNumber);
       }
 
@@ -966,8 +1009,8 @@ public class PaymentMethodCreateParams extends ApiRequestParams {
       private Map<String, Object> extraParams;
 
       /** Finalize and obtain parameter instance from this builder. */
-      public Affirm build() {
-        return new Affirm(this.extraParams);
+      public PaymentMethodCreateParams.Affirm build() {
+        return new PaymentMethodCreateParams.Affirm(this.extraParams);
       }
 
       /**
@@ -1021,8 +1064,8 @@ public class PaymentMethodCreateParams extends ApiRequestParams {
       private Map<String, Object> extraParams;
 
       /** Finalize and obtain parameter instance from this builder. */
-      public AfterpayClearpay build() {
-        return new AfterpayClearpay(this.extraParams);
+      public PaymentMethodCreateParams.AfterpayClearpay build() {
+        return new PaymentMethodCreateParams.AfterpayClearpay(this.extraParams);
       }
 
       /**
@@ -1077,8 +1120,8 @@ public class PaymentMethodCreateParams extends ApiRequestParams {
       private Map<String, Object> extraParams;
 
       /** Finalize and obtain parameter instance from this builder. */
-      public Alipay build() {
-        return new Alipay(this.extraParams);
+      public PaymentMethodCreateParams.Alipay build() {
+        return new PaymentMethodCreateParams.Alipay(this.extraParams);
       }
 
       /**
@@ -1146,8 +1189,9 @@ public class PaymentMethodCreateParams extends ApiRequestParams {
       private Map<String, Object> extraParams;
 
       /** Finalize and obtain parameter instance from this builder. */
-      public AuBecsDebit build() {
-        return new AuBecsDebit(this.accountNumber, this.bsbNumber, this.extraParams);
+      public PaymentMethodCreateParams.AuBecsDebit build() {
+        return new PaymentMethodCreateParams.AuBecsDebit(
+            this.accountNumber, this.bsbNumber, this.extraParams);
       }
 
       /** The account number for the bank account. */
@@ -1227,8 +1271,9 @@ public class PaymentMethodCreateParams extends ApiRequestParams {
       private String sortCode;
 
       /** Finalize and obtain parameter instance from this builder. */
-      public BacsDebit build() {
-        return new BacsDebit(this.accountNumber, this.extraParams, this.sortCode);
+      public PaymentMethodCreateParams.BacsDebit build() {
+        return new PaymentMethodCreateParams.BacsDebit(
+            this.accountNumber, this.extraParams, this.sortCode);
       }
 
       /** Account number of the bank account that the funds will be debited from. */
@@ -1294,8 +1339,8 @@ public class PaymentMethodCreateParams extends ApiRequestParams {
       private Map<String, Object> extraParams;
 
       /** Finalize and obtain parameter instance from this builder. */
-      public Bancontact build() {
-        return new Bancontact(this.extraParams);
+      public PaymentMethodCreateParams.Bancontact build() {
+        return new PaymentMethodCreateParams.Bancontact(this.extraParams);
       }
 
       /**
@@ -1378,13 +1423,13 @@ public class PaymentMethodCreateParams extends ApiRequestParams {
       private String phone;
 
       /** Finalize and obtain parameter instance from this builder. */
-      public BillingDetails build() {
-        return new BillingDetails(
+      public PaymentMethodCreateParams.BillingDetails build() {
+        return new PaymentMethodCreateParams.BillingDetails(
             this.address, this.email, this.extraParams, this.name, this.phone);
       }
 
       /** Billing address. */
-      public Builder setAddress(Address address) {
+      public Builder setAddress(PaymentMethodCreateParams.BillingDetails.Address address) {
         this.address = address;
         return this;
       }
@@ -1522,8 +1567,8 @@ public class PaymentMethodCreateParams extends ApiRequestParams {
         private String state;
 
         /** Finalize and obtain parameter instance from this builder. */
-        public Address build() {
-          return new Address(
+        public PaymentMethodCreateParams.BillingDetails.Address build() {
+          return new PaymentMethodCreateParams.BillingDetails.Address(
               this.city,
               this.country,
               this.extraParams,
@@ -1626,8 +1671,8 @@ public class PaymentMethodCreateParams extends ApiRequestParams {
       private Map<String, Object> extraParams;
 
       /** Finalize and obtain parameter instance from this builder. */
-      public Blik build() {
-        return new Blik(this.extraParams);
+      public PaymentMethodCreateParams.Blik build() {
+        return new PaymentMethodCreateParams.Blik(this.extraParams);
       }
 
       /**
@@ -1690,8 +1735,8 @@ public class PaymentMethodCreateParams extends ApiRequestParams {
       private String taxId;
 
       /** Finalize and obtain parameter instance from this builder. */
-      public Boleto build() {
-        return new Boleto(this.extraParams, this.taxId);
+      public PaymentMethodCreateParams.Boleto build() {
+        return new PaymentMethodCreateParams.Boleto(this.extraParams, this.taxId);
       }
 
       /**
@@ -1782,8 +1827,8 @@ public class PaymentMethodCreateParams extends ApiRequestParams {
       private String number;
 
       /** Finalize and obtain parameter instance from this builder. */
-      public CardDetails build() {
-        return new CardDetails(
+      public PaymentMethodCreateParams.CardDetails build() {
+        return new PaymentMethodCreateParams.CardDetails(
             this.cvc, this.expMonth, this.expYear, this.extraParams, this.number);
       }
 
@@ -1862,8 +1907,8 @@ public class PaymentMethodCreateParams extends ApiRequestParams {
       private Map<String, Object> extraParams;
 
       /** Finalize and obtain parameter instance from this builder. */
-      public CustomerBalance build() {
-        return new CustomerBalance(this.extraParams);
+      public PaymentMethodCreateParams.CustomerBalance build() {
+        return new PaymentMethodCreateParams.CustomerBalance(this.extraParams);
       }
 
       /**
@@ -1925,12 +1970,12 @@ public class PaymentMethodCreateParams extends ApiRequestParams {
       private Map<String, Object> extraParams;
 
       /** Finalize and obtain parameter instance from this builder. */
-      public Eps build() {
-        return new Eps(this.bank, this.extraParams);
+      public PaymentMethodCreateParams.Eps build() {
+        return new PaymentMethodCreateParams.Eps(this.bank, this.extraParams);
       }
 
       /** The customer's bank. */
-      public Builder setBank(Bank bank) {
+      public Builder setBank(PaymentMethodCreateParams.Eps.Bank bank) {
         this.bank = bank;
         return this;
       }
@@ -1992,6 +2037,9 @@ public class PaymentMethodCreateParams extends ApiRequestParams {
 
       @SerializedName("capital_bank_grawe_gruppe_ag")
       CAPITAL_BANK_GRAWE_GRUPPE_AG("capital_bank_grawe_gruppe_ag"),
+
+      @SerializedName("deutsche_bank_ag")
+      DEUTSCHE_BANK_AG("deutsche_bank_ag"),
 
       @SerializedName("dolomitenbank")
       DOLOMITENBANK("dolomitenbank"),
@@ -2090,18 +2138,20 @@ public class PaymentMethodCreateParams extends ApiRequestParams {
       private Map<String, Object> extraParams;
 
       /** Finalize and obtain parameter instance from this builder. */
-      public Fpx build() {
-        return new Fpx(this.accountHolderType, this.bank, this.extraParams);
+      public PaymentMethodCreateParams.Fpx build() {
+        return new PaymentMethodCreateParams.Fpx(
+            this.accountHolderType, this.bank, this.extraParams);
       }
 
       /** Account holder type for FPX transaction. */
-      public Builder setAccountHolderType(AccountHolderType accountHolderType) {
+      public Builder setAccountHolderType(
+          PaymentMethodCreateParams.Fpx.AccountHolderType accountHolderType) {
         this.accountHolderType = accountHolderType;
         return this;
       }
 
       /** The customer's bank. */
-      public Builder setBank(Bank bank) {
+      public Builder setBank(PaymentMethodCreateParams.Fpx.Bank bank) {
         this.bank = bank;
         return this;
       }
@@ -2244,8 +2294,8 @@ public class PaymentMethodCreateParams extends ApiRequestParams {
       private Map<String, Object> extraParams;
 
       /** Finalize and obtain parameter instance from this builder. */
-      public Giropay build() {
-        return new Giropay(this.extraParams);
+      public PaymentMethodCreateParams.Giropay build() {
+        return new PaymentMethodCreateParams.Giropay(this.extraParams);
       }
 
       /**
@@ -2299,8 +2349,8 @@ public class PaymentMethodCreateParams extends ApiRequestParams {
       private Map<String, Object> extraParams;
 
       /** Finalize and obtain parameter instance from this builder. */
-      public Grabpay build() {
-        return new Grabpay(this.extraParams);
+      public PaymentMethodCreateParams.Grabpay build() {
+        return new PaymentMethodCreateParams.Grabpay(this.extraParams);
       }
 
       /**
@@ -2361,12 +2411,12 @@ public class PaymentMethodCreateParams extends ApiRequestParams {
       private Map<String, Object> extraParams;
 
       /** Finalize and obtain parameter instance from this builder. */
-      public Ideal build() {
-        return new Ideal(this.bank, this.extraParams);
+      public PaymentMethodCreateParams.Ideal build() {
+        return new PaymentMethodCreateParams.Ideal(this.bank, this.extraParams);
       }
 
       /** The customer's bank. */
-      public Builder setBank(Bank bank) {
+      public Builder setBank(PaymentMethodCreateParams.Ideal.Bank bank) {
         this.bank = bank;
         return this;
       }
@@ -2470,8 +2520,8 @@ public class PaymentMethodCreateParams extends ApiRequestParams {
       private Map<String, Object> extraParams;
 
       /** Finalize and obtain parameter instance from this builder. */
-      public InteracPresent build() {
-        return new InteracPresent(this.extraParams);
+      public PaymentMethodCreateParams.InteracPresent build() {
+        return new PaymentMethodCreateParams.InteracPresent(this.extraParams);
       }
 
       /**
@@ -2533,12 +2583,12 @@ public class PaymentMethodCreateParams extends ApiRequestParams {
       private Map<String, Object> extraParams;
 
       /** Finalize and obtain parameter instance from this builder. */
-      public Klarna build() {
-        return new Klarna(this.dob, this.extraParams);
+      public PaymentMethodCreateParams.Klarna build() {
+        return new PaymentMethodCreateParams.Klarna(this.dob, this.extraParams);
       }
 
       /** Customer's date of birth. */
-      public Builder setDob(Dob dob) {
+      public Builder setDob(PaymentMethodCreateParams.Klarna.Dob dob) {
         this.dob = dob;
         return this;
       }
@@ -2614,8 +2664,9 @@ public class PaymentMethodCreateParams extends ApiRequestParams {
         private Long year;
 
         /** Finalize and obtain parameter instance from this builder. */
-        public Dob build() {
-          return new Dob(this.day, this.extraParams, this.month, this.year);
+        public PaymentMethodCreateParams.Klarna.Dob build() {
+          return new PaymentMethodCreateParams.Klarna.Dob(
+              this.day, this.extraParams, this.month, this.year);
         }
 
         /** The day of birth, between 1 and 31. */
@@ -2690,8 +2741,8 @@ public class PaymentMethodCreateParams extends ApiRequestParams {
       private Map<String, Object> extraParams;
 
       /** Finalize and obtain parameter instance from this builder. */
-      public Konbini build() {
-        return new Konbini(this.extraParams);
+      public PaymentMethodCreateParams.Konbini build() {
+        return new PaymentMethodCreateParams.Konbini(this.extraParams);
       }
 
       /**
@@ -2745,8 +2796,8 @@ public class PaymentMethodCreateParams extends ApiRequestParams {
       private Map<String, Object> extraParams;
 
       /** Finalize and obtain parameter instance from this builder. */
-      public Link build() {
-        return new Link(this.extraParams);
+      public PaymentMethodCreateParams.Link build() {
+        return new PaymentMethodCreateParams.Link(this.extraParams);
       }
 
       /**
@@ -2800,8 +2851,8 @@ public class PaymentMethodCreateParams extends ApiRequestParams {
       private Map<String, Object> extraParams;
 
       /** Finalize and obtain parameter instance from this builder. */
-      public Oxxo build() {
-        return new Oxxo(this.extraParams);
+      public PaymentMethodCreateParams.Oxxo build() {
+        return new PaymentMethodCreateParams.Oxxo(this.extraParams);
       }
 
       /**
@@ -2862,12 +2913,12 @@ public class PaymentMethodCreateParams extends ApiRequestParams {
       private Map<String, Object> extraParams;
 
       /** Finalize and obtain parameter instance from this builder. */
-      public P24 build() {
-        return new P24(this.bank, this.extraParams);
+      public PaymentMethodCreateParams.P24 build() {
+        return new PaymentMethodCreateParams.P24(this.bank, this.extraParams);
       }
 
       /** The customer's bank. */
-      public Builder setBank(Bank bank) {
+      public Builder setBank(PaymentMethodCreateParams.P24.Bank bank) {
         this.bank = bank;
         return this;
       }
@@ -3007,8 +3058,8 @@ public class PaymentMethodCreateParams extends ApiRequestParams {
       private Map<String, Object> extraParams;
 
       /** Finalize and obtain parameter instance from this builder. */
-      public Paynow build() {
-        return new Paynow(this.extraParams);
+      public PaymentMethodCreateParams.Paynow build() {
+        return new PaymentMethodCreateParams.Paynow(this.extraParams);
       }
 
       /**
@@ -3028,6 +3079,116 @@ public class PaymentMethodCreateParams extends ApiRequestParams {
        * Add all map key/value pairs to `extraParams` map. A map is initialized for the first
        * `put/putAll` call, and subsequent calls add additional key/value pairs to the original map.
        * See {@link PaymentMethodCreateParams.Paynow#extraParams} for the field documentation.
+       */
+      public Builder putAllExtraParam(Map<String, Object> map) {
+        if (this.extraParams == null) {
+          this.extraParams = new HashMap<>();
+        }
+        this.extraParams.putAll(map);
+        return this;
+      }
+    }
+  }
+
+  @Getter
+  public static class Paypal {
+    /**
+     * Map of extra parameters for custom features not available in this client library. The content
+     * in this map is not serialized under this field's {@code @SerializedName} value. Instead, each
+     * key/value pair is serialized as if the key is a root-level field (serialized) name in this
+     * param object. Effectively, this map is flattened to its parent instance.
+     */
+    @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
+    Map<String, Object> extraParams;
+
+    private Paypal(Map<String, Object> extraParams) {
+      this.extraParams = extraParams;
+    }
+
+    public static Builder builder() {
+      return new Builder();
+    }
+
+    public static class Builder {
+      private Map<String, Object> extraParams;
+
+      /** Finalize and obtain parameter instance from this builder. */
+      public PaymentMethodCreateParams.Paypal build() {
+        return new PaymentMethodCreateParams.Paypal(this.extraParams);
+      }
+
+      /**
+       * Add a key/value pair to `extraParams` map. A map is initialized for the first `put/putAll`
+       * call, and subsequent calls add additional key/value pairs to the original map. See {@link
+       * PaymentMethodCreateParams.Paypal#extraParams} for the field documentation.
+       */
+      public Builder putExtraParam(String key, Object value) {
+        if (this.extraParams == null) {
+          this.extraParams = new HashMap<>();
+        }
+        this.extraParams.put(key, value);
+        return this;
+      }
+
+      /**
+       * Add all map key/value pairs to `extraParams` map. A map is initialized for the first
+       * `put/putAll` call, and subsequent calls add additional key/value pairs to the original map.
+       * See {@link PaymentMethodCreateParams.Paypal#extraParams} for the field documentation.
+       */
+      public Builder putAllExtraParam(Map<String, Object> map) {
+        if (this.extraParams == null) {
+          this.extraParams = new HashMap<>();
+        }
+        this.extraParams.putAll(map);
+        return this;
+      }
+    }
+  }
+
+  @Getter
+  public static class Pix {
+    /**
+     * Map of extra parameters for custom features not available in this client library. The content
+     * in this map is not serialized under this field's {@code @SerializedName} value. Instead, each
+     * key/value pair is serialized as if the key is a root-level field (serialized) name in this
+     * param object. Effectively, this map is flattened to its parent instance.
+     */
+    @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
+    Map<String, Object> extraParams;
+
+    private Pix(Map<String, Object> extraParams) {
+      this.extraParams = extraParams;
+    }
+
+    public static Builder builder() {
+      return new Builder();
+    }
+
+    public static class Builder {
+      private Map<String, Object> extraParams;
+
+      /** Finalize and obtain parameter instance from this builder. */
+      public PaymentMethodCreateParams.Pix build() {
+        return new PaymentMethodCreateParams.Pix(this.extraParams);
+      }
+
+      /**
+       * Add a key/value pair to `extraParams` map. A map is initialized for the first `put/putAll`
+       * call, and subsequent calls add additional key/value pairs to the original map. See {@link
+       * PaymentMethodCreateParams.Pix#extraParams} for the field documentation.
+       */
+      public Builder putExtraParam(String key, Object value) {
+        if (this.extraParams == null) {
+          this.extraParams = new HashMap<>();
+        }
+        this.extraParams.put(key, value);
+        return this;
+      }
+
+      /**
+       * Add all map key/value pairs to `extraParams` map. A map is initialized for the first
+       * `put/putAll` call, and subsequent calls add additional key/value pairs to the original map.
+       * See {@link PaymentMethodCreateParams.Pix#extraParams} for the field documentation.
        */
       public Builder putAllExtraParam(Map<String, Object> map) {
         if (this.extraParams == null) {
@@ -3062,8 +3223,8 @@ public class PaymentMethodCreateParams extends ApiRequestParams {
       private Map<String, Object> extraParams;
 
       /** Finalize and obtain parameter instance from this builder. */
-      public Promptpay build() {
-        return new Promptpay(this.extraParams);
+      public PaymentMethodCreateParams.Promptpay build() {
+        return new PaymentMethodCreateParams.Promptpay(this.extraParams);
       }
 
       /**
@@ -3128,8 +3289,8 @@ public class PaymentMethodCreateParams extends ApiRequestParams {
       private String session;
 
       /** Finalize and obtain parameter instance from this builder. */
-      public RadarOptions build() {
-        return new RadarOptions(this.extraParams, this.session);
+      public PaymentMethodCreateParams.RadarOptions build() {
+        return new PaymentMethodCreateParams.RadarOptions(this.extraParams, this.session);
       }
 
       /**
@@ -3200,8 +3361,8 @@ public class PaymentMethodCreateParams extends ApiRequestParams {
       private String iban;
 
       /** Finalize and obtain parameter instance from this builder. */
-      public SepaDebit build() {
-        return new SepaDebit(this.extraParams, this.iban);
+      public PaymentMethodCreateParams.SepaDebit build() {
+        return new PaymentMethodCreateParams.SepaDebit(this.extraParams, this.iban);
       }
 
       /**
@@ -3268,12 +3429,12 @@ public class PaymentMethodCreateParams extends ApiRequestParams {
       private Map<String, Object> extraParams;
 
       /** Finalize and obtain parameter instance from this builder. */
-      public Sofort build() {
-        return new Sofort(this.country, this.extraParams);
+      public PaymentMethodCreateParams.Sofort build() {
+        return new PaymentMethodCreateParams.Sofort(this.country, this.extraParams);
       }
 
       /** Two-letter ISO code representing the country the bank account is located in. */
-      public Builder setCountry(Country country) {
+      public Builder setCountry(PaymentMethodCreateParams.Sofort.Country country) {
         this.country = country;
         return this;
       }
@@ -3362,8 +3523,8 @@ public class PaymentMethodCreateParams extends ApiRequestParams {
       private String token;
 
       /** Finalize and obtain parameter instance from this builder. */
-      public Token build() {
-        return new Token(this.extraParams, this.token);
+      public PaymentMethodCreateParams.Token build() {
+        return new PaymentMethodCreateParams.Token(this.extraParams, this.token);
       }
 
       /**
@@ -3463,8 +3624,8 @@ public class PaymentMethodCreateParams extends ApiRequestParams {
       private String routingNumber;
 
       /** Finalize and obtain parameter instance from this builder. */
-      public UsBankAccount build() {
-        return new UsBankAccount(
+      public PaymentMethodCreateParams.UsBankAccount build() {
+        return new PaymentMethodCreateParams.UsBankAccount(
             this.accountHolderType,
             this.accountNumber,
             this.accountType,
@@ -3474,7 +3635,8 @@ public class PaymentMethodCreateParams extends ApiRequestParams {
       }
 
       /** Account holder type: individual or company. */
-      public Builder setAccountHolderType(AccountHolderType accountHolderType) {
+      public Builder setAccountHolderType(
+          PaymentMethodCreateParams.UsBankAccount.AccountHolderType accountHolderType) {
         this.accountHolderType = accountHolderType;
         return this;
       }
@@ -3486,7 +3648,8 @@ public class PaymentMethodCreateParams extends ApiRequestParams {
       }
 
       /** Account type: checkings or savings. Defaults to checking if omitted. */
-      public Builder setAccountType(AccountType accountType) {
+      public Builder setAccountType(
+          PaymentMethodCreateParams.UsBankAccount.AccountType accountType) {
         this.accountType = accountType;
         return this;
       }
@@ -3585,8 +3748,8 @@ public class PaymentMethodCreateParams extends ApiRequestParams {
       private Map<String, Object> extraParams;
 
       /** Finalize and obtain parameter instance from this builder. */
-      public WechatPay build() {
-        return new WechatPay(this.extraParams);
+      public PaymentMethodCreateParams.WechatPay build() {
+        return new PaymentMethodCreateParams.WechatPay(this.extraParams);
       }
 
       /**
@@ -3683,6 +3846,12 @@ public class PaymentMethodCreateParams extends ApiRequestParams {
 
     @SerializedName("paynow")
     PAYNOW("paynow"),
+
+    @SerializedName("paypal")
+    PAYPAL("paypal"),
+
+    @SerializedName("pix")
+    PIX("pix"),
 
     @SerializedName("promptpay")
     PROMPTPAY("promptpay"),

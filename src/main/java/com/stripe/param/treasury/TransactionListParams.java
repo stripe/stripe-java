@@ -140,7 +140,7 @@ public class TransactionListParams extends ApiRequestParams {
           this.statusTransitions);
     }
 
-    public Builder setCreated(Created created) {
+    public Builder setCreated(TransactionListParams.Created created) {
       this.created = created;
       return this;
     }
@@ -232,7 +232,7 @@ public class TransactionListParams extends ApiRequestParams {
      * The results are in reverse chronological order by {@code created} or {@code posted_at}. The
      * default is {@code created}.
      */
-    public Builder setOrderBy(OrderBy orderBy) {
+    public Builder setOrderBy(TransactionListParams.OrderBy orderBy) {
       this.orderBy = orderBy;
       return this;
     }
@@ -252,7 +252,7 @@ public class TransactionListParams extends ApiRequestParams {
      * Only return Transactions that have the given status: {@code open}, {@code posted}, or {@code
      * void}.
      */
-    public Builder setStatus(Status status) {
+    public Builder setStatus(TransactionListParams.Status status) {
       this.status = status;
       return this;
     }
@@ -261,7 +261,7 @@ public class TransactionListParams extends ApiRequestParams {
      * A filter for the {@code status_transitions.posted_at} timestamp. When using this filter,
      * {@code status=posted} and {@code order_by=posted_at} must also be specified.
      */
-    public Builder setStatusTransitions(StatusTransitions statusTransitions) {
+    public Builder setStatusTransitions(TransactionListParams.StatusTransitions statusTransitions) {
       this.statusTransitions = statusTransitions;
       return this;
     }
@@ -318,8 +318,9 @@ public class TransactionListParams extends ApiRequestParams {
       private Long lte;
 
       /** Finalize and obtain parameter instance from this builder. */
-      public Created build() {
-        return new Created(this.extraParams, this.gt, this.gte, this.lt, this.lte);
+      public TransactionListParams.Created build() {
+        return new TransactionListParams.Created(
+            this.extraParams, this.gt, this.gte, this.lt, this.lte);
       }
 
       /**
@@ -404,8 +405,8 @@ public class TransactionListParams extends ApiRequestParams {
       private Object postedAt;
 
       /** Finalize and obtain parameter instance from this builder. */
-      public StatusTransitions build() {
-        return new StatusTransitions(this.extraParams, this.postedAt);
+      public TransactionListParams.StatusTransitions build() {
+        return new TransactionListParams.StatusTransitions(this.extraParams, this.postedAt);
       }
 
       /**
@@ -436,7 +437,7 @@ public class TransactionListParams extends ApiRequestParams {
       }
 
       /** Returns Transactions with {@code posted_at} within the specified range. */
-      public Builder setPostedAt(PostedAt postedAt) {
+      public Builder setPostedAt(TransactionListParams.StatusTransitions.PostedAt postedAt) {
         this.postedAt = postedAt;
         return this;
       }
@@ -499,8 +500,9 @@ public class TransactionListParams extends ApiRequestParams {
         private Long lte;
 
         /** Finalize and obtain parameter instance from this builder. */
-        public PostedAt build() {
-          return new PostedAt(this.extraParams, this.gt, this.gte, this.lt, this.lte);
+        public TransactionListParams.StatusTransitions.PostedAt build() {
+          return new TransactionListParams.StatusTransitions.PostedAt(
+              this.extraParams, this.gt, this.gte, this.lt, this.lte);
         }
 
         /**

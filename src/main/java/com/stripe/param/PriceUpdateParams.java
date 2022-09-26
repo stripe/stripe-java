@@ -163,7 +163,7 @@ public class PriceUpdateParams extends ApiRequestParams {
      * See {@link PriceUpdateParams#currencyOptions} for the field documentation.
      */
     @SuppressWarnings("unchecked")
-    public Builder putCurrencyOption(String key, CurrencyOption value) {
+    public Builder putCurrencyOption(String key, PriceUpdateParams.CurrencyOption value) {
       if (this.currencyOptions == null || this.currencyOptions instanceof EmptyParam) {
         this.currencyOptions = new HashMap<String, PriceUpdateParams.CurrencyOption>();
       }
@@ -177,7 +177,7 @@ public class PriceUpdateParams extends ApiRequestParams {
      * See {@link PriceUpdateParams#currencyOptions} for the field documentation.
      */
     @SuppressWarnings("unchecked")
-    public Builder putAllCurrencyOption(Map<String, CurrencyOption> map) {
+    public Builder putAllCurrencyOption(Map<String, PriceUpdateParams.CurrencyOption> map) {
       if (this.currencyOptions == null || this.currencyOptions instanceof EmptyParam) {
         this.currencyOptions = new HashMap<String, PriceUpdateParams.CurrencyOption>();
       }
@@ -200,7 +200,8 @@ public class PriceUpdateParams extends ApiRequestParams {
      * href="https://www.iso.org/iso-4217-currency-codes.html">ISO currency code</a> and a <a
      * href="https://stripe.com/docs/currencies">supported currency</a>.
      */
-    public Builder setCurrencyOptions(Map<String, CurrencyOption> currencyOptions) {
+    public Builder setCurrencyOptions(
+        Map<String, PriceUpdateParams.CurrencyOption> currencyOptions) {
       this.currencyOptions = currencyOptions;
       return this;
     }
@@ -328,7 +329,7 @@ public class PriceUpdateParams extends ApiRequestParams {
     /**
      * If specified, subscriptions using this price will be updated to use the new referenced price.
      */
-    public Builder setMigrateTo(MigrateTo migrateTo) {
+    public Builder setMigrateTo(PriceUpdateParams.MigrateTo migrateTo) {
       this.migrateTo = migrateTo;
       return this;
     }
@@ -354,7 +355,7 @@ public class PriceUpdateParams extends ApiRequestParams {
     }
 
     /** The recurring components of a price such as {@code interval} and {@code usage_type}. */
-    public Builder setRecurring(Recurring recurring) {
+    public Builder setRecurring(PriceUpdateParams.Recurring recurring) {
       this.recurring = recurring;
       return this;
     }
@@ -370,7 +371,7 @@ public class PriceUpdateParams extends ApiRequestParams {
      * {@code inclusive}, {@code exclusive}, or {@code unspecified}. Once specified as either {@code
      * inclusive} or {@code exclusive}, it cannot be changed.
      */
-    public Builder setTaxBehavior(TaxBehavior taxBehavior) {
+    public Builder setTaxBehavior(PriceUpdateParams.TaxBehavior taxBehavior) {
       this.taxBehavior = taxBehavior;
       return this;
     }
@@ -416,7 +417,7 @@ public class PriceUpdateParams extends ApiRequestParams {
      * set to {@code tiered}. See also the documentation for {@code billing_scheme}.
      */
     @SerializedName("tiers")
-    List<Tier> tiers;
+    List<PriceUpdateParams.CurrencyOption.Tier> tiers;
 
     /**
      * A positive integer in cents (or local equivalent) (or 0 for a free price) representing how
@@ -437,7 +438,7 @@ public class PriceUpdateParams extends ApiRequestParams {
         CustomUnitAmount customUnitAmount,
         Map<String, Object> extraParams,
         TaxBehavior taxBehavior,
-        List<Tier> tiers,
+        List<PriceUpdateParams.CurrencyOption.Tier> tiers,
         Long unitAmount,
         Object unitAmountDecimal) {
       this.customUnitAmount = customUnitAmount;
@@ -459,15 +460,15 @@ public class PriceUpdateParams extends ApiRequestParams {
 
       private TaxBehavior taxBehavior;
 
-      private List<Tier> tiers;
+      private List<PriceUpdateParams.CurrencyOption.Tier> tiers;
 
       private Long unitAmount;
 
       private Object unitAmountDecimal;
 
       /** Finalize and obtain parameter instance from this builder. */
-      public CurrencyOption build() {
-        return new CurrencyOption(
+      public PriceUpdateParams.CurrencyOption build() {
+        return new PriceUpdateParams.CurrencyOption(
             this.customUnitAmount,
             this.extraParams,
             this.taxBehavior,
@@ -480,7 +481,8 @@ public class PriceUpdateParams extends ApiRequestParams {
        * When set, provides configuration for the amount to be adjusted by the customer during
        * Checkout Sessions and Payment Links.
        */
-      public Builder setCustomUnitAmount(CustomUnitAmount customUnitAmount) {
+      public Builder setCustomUnitAmount(
+          PriceUpdateParams.CurrencyOption.CustomUnitAmount customUnitAmount) {
         this.customUnitAmount = customUnitAmount;
         return this;
       }
@@ -516,7 +518,7 @@ public class PriceUpdateParams extends ApiRequestParams {
        * {@code inclusive}, {@code exclusive}, or {@code unspecified}. Once specified as either
        * {@code inclusive} or {@code exclusive}, it cannot be changed.
        */
-      public Builder setTaxBehavior(TaxBehavior taxBehavior) {
+      public Builder setTaxBehavior(PriceUpdateParams.CurrencyOption.TaxBehavior taxBehavior) {
         this.taxBehavior = taxBehavior;
         return this;
       }
@@ -526,7 +528,7 @@ public class PriceUpdateParams extends ApiRequestParams {
        * subsequent calls adds additional elements to the original list. See {@link
        * PriceUpdateParams.CurrencyOption#tiers} for the field documentation.
        */
-      public Builder addTier(Tier element) {
+      public Builder addTier(PriceUpdateParams.CurrencyOption.Tier element) {
         if (this.tiers == null) {
           this.tiers = new ArrayList<>();
         }
@@ -539,7 +541,7 @@ public class PriceUpdateParams extends ApiRequestParams {
        * and subsequent calls adds additional elements to the original list. See {@link
        * PriceUpdateParams.CurrencyOption#tiers} for the field documentation.
        */
-      public Builder addAllTier(List<Tier> elements) {
+      public Builder addAllTier(List<PriceUpdateParams.CurrencyOption.Tier> elements) {
         if (this.tiers == null) {
           this.tiers = new ArrayList<>();
         }
@@ -639,8 +641,8 @@ public class PriceUpdateParams extends ApiRequestParams {
         private Long preset;
 
         /** Finalize and obtain parameter instance from this builder. */
-        public CustomUnitAmount build() {
-          return new CustomUnitAmount(
+        public PriceUpdateParams.CurrencyOption.CustomUnitAmount build() {
+          return new PriceUpdateParams.CurrencyOption.CustomUnitAmount(
               this.enabled, this.extraParams, this.maximum, this.minimum, this.preset);
         }
 
@@ -781,8 +783,8 @@ public class PriceUpdateParams extends ApiRequestParams {
         private Object upTo;
 
         /** Finalize and obtain parameter instance from this builder. */
-        public Tier build() {
-          return new Tier(
+        public PriceUpdateParams.CurrencyOption.Tier build() {
+          return new PriceUpdateParams.CurrencyOption.Tier(
               this.extraParams,
               this.flatAmount,
               this.flatAmountDecimal,
@@ -878,7 +880,7 @@ public class PriceUpdateParams extends ApiRequestParams {
          * Specifies the upper bound of this tier. The lower bound of a tier is the upper bound of
          * the previous tier adding one. Use {@code inf} to define a fallback tier.
          */
-        public Builder setUpTo(UpTo upTo) {
+        public Builder setUpTo(PriceUpdateParams.CurrencyOption.Tier.UpTo upTo) {
           this.upTo = upTo;
           return this;
         }
@@ -973,15 +975,16 @@ public class PriceUpdateParams extends ApiRequestParams {
       private Object price;
 
       /** Finalize and obtain parameter instance from this builder. */
-      public MigrateTo build() {
-        return new MigrateTo(this.behavior, this.effectiveAfter, this.extraParams, this.price);
+      public PriceUpdateParams.MigrateTo build() {
+        return new PriceUpdateParams.MigrateTo(
+            this.behavior, this.effectiveAfter, this.extraParams, this.price);
       }
 
       /**
        * The behavior controlling the point in the subscription lifecycle after which to migrate the
        * price. Currently must be {@code at_cycle_end}.
        */
-      public Builder setBehavior(Behavior behavior) {
+      public Builder setBehavior(PriceUpdateParams.MigrateTo.Behavior behavior) {
         this.behavior = behavior;
         return this;
       }
@@ -1078,8 +1081,8 @@ public class PriceUpdateParams extends ApiRequestParams {
       private Long trialPeriodDays;
 
       /** Finalize and obtain parameter instance from this builder. */
-      public Recurring build() {
-        return new Recurring(this.extraParams, this.trialPeriodDays);
+      public PriceUpdateParams.Recurring build() {
+        return new PriceUpdateParams.Recurring(this.extraParams, this.trialPeriodDays);
       }
 
       /**

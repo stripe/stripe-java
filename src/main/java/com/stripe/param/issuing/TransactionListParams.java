@@ -138,7 +138,7 @@ public class TransactionListParams extends ApiRequestParams {
     }
 
     /** Only return transactions that were created during the given date interval. */
-    public Builder setCreated(Created created) {
+    public Builder setCreated(TransactionListParams.Created created) {
       this.created = created;
       return this;
     }
@@ -235,7 +235,7 @@ public class TransactionListParams extends ApiRequestParams {
     /**
      * Only return transactions that have the given type. One of {@code capture} or {@code refund}.
      */
-    public Builder setType(Type type) {
+    public Builder setType(TransactionListParams.Type type) {
       this.type = type;
       return this;
     }
@@ -292,8 +292,9 @@ public class TransactionListParams extends ApiRequestParams {
       private Long lte;
 
       /** Finalize and obtain parameter instance from this builder. */
-      public Created build() {
-        return new Created(this.extraParams, this.gt, this.gte, this.lt, this.lte);
+      public TransactionListParams.Created build() {
+        return new TransactionListParams.Created(
+            this.extraParams, this.gt, this.gte, this.lt, this.lte);
       }
 
       /**

@@ -95,7 +95,7 @@ public class ReviewListParams extends ApiRequestParams {
           this.startingAfter);
     }
 
-    public Builder setCreated(Created created) {
+    public Builder setCreated(ReviewListParams.Created created) {
       this.created = created;
       return this;
     }
@@ -240,8 +240,8 @@ public class ReviewListParams extends ApiRequestParams {
       private Long lte;
 
       /** Finalize and obtain parameter instance from this builder. */
-      public Created build() {
-        return new Created(this.extraParams, this.gt, this.gte, this.lt, this.lte);
+      public ReviewListParams.Created build() {
+        return new ReviewListParams.Created(this.extraParams, this.gt, this.gte, this.lt, this.lte);
       }
 
       /**

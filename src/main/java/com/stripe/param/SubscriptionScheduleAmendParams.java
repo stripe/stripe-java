@@ -13,7 +13,7 @@ import lombok.Getter;
 public class SubscriptionScheduleAmendParams extends ApiRequestParams {
   /** Changes to apply to the phases of the subscription schedule, in the order provided. */
   @SerializedName("amendments")
-  List<Amendment> amendments;
+  List<SubscriptionScheduleAmendParams.Amendment> amendments;
 
   /** Specifies which fields in the response should be expanded. */
   @SerializedName("expand")
@@ -29,7 +29,9 @@ public class SubscriptionScheduleAmendParams extends ApiRequestParams {
   Map<String, Object> extraParams;
 
   private SubscriptionScheduleAmendParams(
-      List<Amendment> amendments, List<String> expand, Map<String, Object> extraParams) {
+      List<SubscriptionScheduleAmendParams.Amendment> amendments,
+      List<String> expand,
+      Map<String, Object> extraParams) {
     this.amendments = amendments;
     this.expand = expand;
     this.extraParams = extraParams;
@@ -40,7 +42,7 @@ public class SubscriptionScheduleAmendParams extends ApiRequestParams {
   }
 
   public static class Builder {
-    private List<Amendment> amendments;
+    private List<SubscriptionScheduleAmendParams.Amendment> amendments;
 
     private List<String> expand;
 
@@ -56,7 +58,7 @@ public class SubscriptionScheduleAmendParams extends ApiRequestParams {
      * and subsequent calls adds additional elements to the original list. See {@link
      * SubscriptionScheduleAmendParams#amendments} for the field documentation.
      */
-    public Builder addAmendment(Amendment element) {
+    public Builder addAmendment(SubscriptionScheduleAmendParams.Amendment element) {
       if (this.amendments == null) {
         this.amendments = new ArrayList<>();
       }
@@ -69,7 +71,7 @@ public class SubscriptionScheduleAmendParams extends ApiRequestParams {
      * and subsequent calls adds additional elements to the original list. See {@link
      * SubscriptionScheduleAmendParams#amendments} for the field documentation.
      */
-    public Builder addAllAmendment(List<Amendment> elements) {
+    public Builder addAllAmendment(List<SubscriptionScheduleAmendParams.Amendment> elements) {
       if (this.amendments == null) {
         this.amendments = new ArrayList<>();
       }
@@ -150,7 +152,7 @@ public class SubscriptionScheduleAmendParams extends ApiRequestParams {
      * span.
      */
     @SerializedName("discount_actions")
-    List<DiscountAction> discountActions;
+    List<SubscriptionScheduleAmendParams.Amendment.DiscountAction> discountActions;
 
     /**
      * Map of extra parameters for custom features not available in this client library. The content
@@ -163,7 +165,7 @@ public class SubscriptionScheduleAmendParams extends ApiRequestParams {
 
     /** Changes to the subscription items during the amendment time span. */
     @SerializedName("item_actions")
-    List<ItemAction> itemActions;
+    List<SubscriptionScheduleAmendParams.Amendment.ItemAction> itemActions;
 
     /**
      * Changes to how Stripe handles prorations during the amendment time span. Affects if and how
@@ -178,9 +180,9 @@ public class SubscriptionScheduleAmendParams extends ApiRequestParams {
     private Amendment(
         AmendmentEnd amendmentEnd,
         AmendmentStart amendmentStart,
-        List<DiscountAction> discountActions,
+        List<SubscriptionScheduleAmendParams.Amendment.DiscountAction> discountActions,
         Map<String, Object> extraParams,
-        List<ItemAction> itemActions,
+        List<SubscriptionScheduleAmendParams.Amendment.ItemAction> itemActions,
         ProrationBehavior prorationBehavior) {
       this.amendmentEnd = amendmentEnd;
       this.amendmentStart = amendmentStart;
@@ -199,17 +201,17 @@ public class SubscriptionScheduleAmendParams extends ApiRequestParams {
 
       private AmendmentStart amendmentStart;
 
-      private List<DiscountAction> discountActions;
+      private List<SubscriptionScheduleAmendParams.Amendment.DiscountAction> discountActions;
 
       private Map<String, Object> extraParams;
 
-      private List<ItemAction> itemActions;
+      private List<SubscriptionScheduleAmendParams.Amendment.ItemAction> itemActions;
 
       private ProrationBehavior prorationBehavior;
 
       /** Finalize and obtain parameter instance from this builder. */
-      public Amendment build() {
-        return new Amendment(
+      public SubscriptionScheduleAmendParams.Amendment build() {
+        return new SubscriptionScheduleAmendParams.Amendment(
             this.amendmentEnd,
             this.amendmentStart,
             this.discountActions,
@@ -224,7 +226,8 @@ public class SubscriptionScheduleAmendParams extends ApiRequestParams {
        * timestamp at {@code amendment_start}, and a restricted set of attributes is supported on
        * the amendment.
        */
-      public Builder setAmendmentEnd(AmendmentEnd amendmentEnd) {
+      public Builder setAmendmentEnd(
+          SubscriptionScheduleAmendParams.Amendment.AmendmentEnd amendmentEnd) {
         this.amendmentEnd = amendmentEnd;
         return this;
       }
@@ -232,7 +235,8 @@ public class SubscriptionScheduleAmendParams extends ApiRequestParams {
       /**
        * Details to identify the earliest timestamp where the proposed change should take effect.
        */
-      public Builder setAmendmentStart(AmendmentStart amendmentStart) {
+      public Builder setAmendmentStart(
+          SubscriptionScheduleAmendParams.Amendment.AmendmentStart amendmentStart) {
         this.amendmentStart = amendmentStart;
         return this;
       }
@@ -242,7 +246,8 @@ public class SubscriptionScheduleAmendParams extends ApiRequestParams {
        * call, and subsequent calls adds additional elements to the original list. See {@link
        * SubscriptionScheduleAmendParams.Amendment#discountActions} for the field documentation.
        */
-      public Builder addDiscountAction(DiscountAction element) {
+      public Builder addDiscountAction(
+          SubscriptionScheduleAmendParams.Amendment.DiscountAction element) {
         if (this.discountActions == null) {
           this.discountActions = new ArrayList<>();
         }
@@ -256,7 +261,8 @@ public class SubscriptionScheduleAmendParams extends ApiRequestParams {
        * {@link SubscriptionScheduleAmendParams.Amendment#discountActions} for the field
        * documentation.
        */
-      public Builder addAllDiscountAction(List<DiscountAction> elements) {
+      public Builder addAllDiscountAction(
+          List<SubscriptionScheduleAmendParams.Amendment.DiscountAction> elements) {
         if (this.discountActions == null) {
           this.discountActions = new ArrayList<>();
         }
@@ -296,7 +302,7 @@ public class SubscriptionScheduleAmendParams extends ApiRequestParams {
        * call, and subsequent calls adds additional elements to the original list. See {@link
        * SubscriptionScheduleAmendParams.Amendment#itemActions} for the field documentation.
        */
-      public Builder addItemAction(ItemAction element) {
+      public Builder addItemAction(SubscriptionScheduleAmendParams.Amendment.ItemAction element) {
         if (this.itemActions == null) {
           this.itemActions = new ArrayList<>();
         }
@@ -309,7 +315,8 @@ public class SubscriptionScheduleAmendParams extends ApiRequestParams {
        * call, and subsequent calls adds additional elements to the original list. See {@link
        * SubscriptionScheduleAmendParams.Amendment#itemActions} for the field documentation.
        */
-      public Builder addAllItemAction(List<ItemAction> elements) {
+      public Builder addAllItemAction(
+          List<SubscriptionScheduleAmendParams.Amendment.ItemAction> elements) {
         if (this.itemActions == null) {
           this.itemActions = new ArrayList<>();
         }
@@ -324,7 +331,8 @@ public class SubscriptionScheduleAmendParams extends ApiRequestParams {
        * of the request. Also supported as a point-in-time operation when {@code amendment_end} is
        * {@code null}.
        */
-      public Builder setProrationBehavior(ProrationBehavior prorationBehavior) {
+      public Builder setProrationBehavior(
+          SubscriptionScheduleAmendParams.Amendment.ProrationBehavior prorationBehavior) {
         this.prorationBehavior = prorationBehavior;
         return this;
       }
@@ -378,12 +386,14 @@ public class SubscriptionScheduleAmendParams extends ApiRequestParams {
         private Type type;
 
         /** Finalize and obtain parameter instance from this builder. */
-        public AmendmentEnd build() {
-          return new AmendmentEnd(this.duration, this.extraParams, this.timestamp, this.type);
+        public SubscriptionScheduleAmendParams.Amendment.AmendmentEnd build() {
+          return new SubscriptionScheduleAmendParams.Amendment.AmendmentEnd(
+              this.duration, this.extraParams, this.timestamp, this.type);
         }
 
         /** Time span for the amendment starting from the {@code amendment_start}. */
-        public Builder setDuration(Duration duration) {
+        public Builder setDuration(
+            SubscriptionScheduleAmendParams.Amendment.AmendmentEnd.Duration duration) {
           this.duration = duration;
           return this;
         }
@@ -420,13 +430,14 @@ public class SubscriptionScheduleAmendParams extends ApiRequestParams {
          * A precise Unix timestamp for the amendment to end. Must be after the {@code
          * amendment_start}.
          */
-        public Builder setTimestamp(Timestamp timestamp) {
+        public Builder setTimestamp(
+            SubscriptionScheduleAmendParams.Amendment.AmendmentEnd.Timestamp timestamp) {
           this.timestamp = timestamp;
           return this;
         }
 
         /** Select one of three ways to pass the {@code amendment_end}. */
-        public Builder setType(Type type) {
+        public Builder setType(SubscriptionScheduleAmendParams.Amendment.AmendmentEnd.Type type) {
           this.type = type;
           return this;
         }
@@ -476,8 +487,9 @@ public class SubscriptionScheduleAmendParams extends ApiRequestParams {
           private Long intervalCount;
 
           /** Finalize and obtain parameter instance from this builder. */
-          public Duration build() {
-            return new Duration(this.extraParams, this.interval, this.intervalCount);
+          public SubscriptionScheduleAmendParams.Amendment.AmendmentEnd.Duration build() {
+            return new SubscriptionScheduleAmendParams.Amendment.AmendmentEnd.Duration(
+                this.extraParams, this.interval, this.intervalCount);
           }
 
           /**
@@ -514,7 +526,8 @@ public class SubscriptionScheduleAmendParams extends ApiRequestParams {
            * Specifies a type of interval unit. Either {@code day}, {@code week}, {@code month} or
            * {@code year}.
            */
-          public Builder setInterval(Interval interval) {
+          public Builder setInterval(
+              SubscriptionScheduleAmendParams.Amendment.AmendmentEnd.Duration.Interval interval) {
             this.interval = interval;
             return this;
           }
@@ -585,8 +598,9 @@ public class SubscriptionScheduleAmendParams extends ApiRequestParams {
           private Long value;
 
           /** Finalize and obtain parameter instance from this builder. */
-          public Timestamp build() {
-            return new Timestamp(this.extraParams, this.value);
+          public SubscriptionScheduleAmendParams.Amendment.AmendmentEnd.Timestamp build() {
+            return new SubscriptionScheduleAmendParams.Amendment.AmendmentEnd.Timestamp(
+                this.extraParams, this.value);
           }
 
           /**
@@ -700,15 +714,17 @@ public class SubscriptionScheduleAmendParams extends ApiRequestParams {
         private Type type;
 
         /** Finalize and obtain parameter instance from this builder. */
-        public AmendmentStart build() {
-          return new AmendmentStart(this.amendmentEnd, this.extraParams, this.timestamp, this.type);
+        public SubscriptionScheduleAmendParams.Amendment.AmendmentStart build() {
+          return new SubscriptionScheduleAmendParams.Amendment.AmendmentStart(
+              this.amendmentEnd, this.extraParams, this.timestamp, this.type);
         }
 
         /**
          * Details of another amendment in the same array, immediately after which this amendment
          * should begin.
          */
-        public Builder setAmendmentEnd(AmendmentEnd amendmentEnd) {
+        public Builder setAmendmentEnd(
+            SubscriptionScheduleAmendParams.Amendment.AmendmentStart.AmendmentEnd amendmentEnd) {
           this.amendmentEnd = amendmentEnd;
           return this;
         }
@@ -742,13 +758,14 @@ public class SubscriptionScheduleAmendParams extends ApiRequestParams {
         }
 
         /** A precise Unix timestamp for the amendment to start. */
-        public Builder setTimestamp(Timestamp timestamp) {
+        public Builder setTimestamp(
+            SubscriptionScheduleAmendParams.Amendment.AmendmentStart.Timestamp timestamp) {
           this.timestamp = timestamp;
           return this;
         }
 
         /** Select one of three ways to pass the {@code amendment_start}. */
-        public Builder setType(Type type) {
+        public Builder setType(SubscriptionScheduleAmendParams.Amendment.AmendmentStart.Type type) {
           this.type = type;
           return this;
         }
@@ -789,8 +806,9 @@ public class SubscriptionScheduleAmendParams extends ApiRequestParams {
           private Long index;
 
           /** Finalize and obtain parameter instance from this builder. */
-          public AmendmentEnd build() {
-            return new AmendmentEnd(this.extraParams, this.index);
+          public SubscriptionScheduleAmendParams.Amendment.AmendmentStart.AmendmentEnd build() {
+            return new SubscriptionScheduleAmendParams.Amendment.AmendmentStart.AmendmentEnd(
+                this.extraParams, this.index);
           }
 
           /**
@@ -869,8 +887,9 @@ public class SubscriptionScheduleAmendParams extends ApiRequestParams {
           private Long value;
 
           /** Finalize and obtain parameter instance from this builder. */
-          public Timestamp build() {
-            return new Timestamp(this.extraParams, this.value);
+          public SubscriptionScheduleAmendParams.Amendment.AmendmentStart.Timestamp build() {
+            return new SubscriptionScheduleAmendParams.Amendment.AmendmentStart.Timestamp(
+                this.extraParams, this.value);
           }
 
           /**
@@ -985,12 +1004,13 @@ public class SubscriptionScheduleAmendParams extends ApiRequestParams {
         private Type type;
 
         /** Finalize and obtain parameter instance from this builder. */
-        public DiscountAction build() {
-          return new DiscountAction(this.add, this.extraParams, this.remove, this.set, this.type);
+        public SubscriptionScheduleAmendParams.Amendment.DiscountAction build() {
+          return new SubscriptionScheduleAmendParams.Amendment.DiscountAction(
+              this.add, this.extraParams, this.remove, this.set, this.type);
         }
 
         /** Details of the discount to add. */
-        public Builder setAdd(Add add) {
+        public Builder setAdd(SubscriptionScheduleAmendParams.Amendment.DiscountAction.Add add) {
           this.add = add;
           return this;
         }
@@ -1024,19 +1044,20 @@ public class SubscriptionScheduleAmendParams extends ApiRequestParams {
         }
 
         /** Details of the discount to remove. */
-        public Builder setRemove(Remove remove) {
+        public Builder setRemove(
+            SubscriptionScheduleAmendParams.Amendment.DiscountAction.Remove remove) {
           this.remove = remove;
           return this;
         }
 
         /** Details of the discount to replace the existing discounts with. */
-        public Builder setSet(Set set) {
+        public Builder setSet(SubscriptionScheduleAmendParams.Amendment.DiscountAction.Set set) {
           this.set = set;
           return this;
         }
 
         /** Determines the type of discount action. */
-        public Builder setType(Type type) {
+        public Builder setType(SubscriptionScheduleAmendParams.Amendment.DiscountAction.Type type) {
           this.type = type;
           return this;
         }
@@ -1090,8 +1111,9 @@ public class SubscriptionScheduleAmendParams extends ApiRequestParams {
           private Long index;
 
           /** Finalize and obtain parameter instance from this builder. */
-          public Add build() {
-            return new Add(this.coupon, this.discount, this.extraParams, this.index);
+          public SubscriptionScheduleAmendParams.Amendment.DiscountAction.Add build() {
+            return new SubscriptionScheduleAmendParams.Amendment.DiscountAction.Add(
+                this.coupon, this.discount, this.extraParams, this.index);
           }
 
           /** The coupon code to redeem. */
@@ -1185,8 +1207,9 @@ public class SubscriptionScheduleAmendParams extends ApiRequestParams {
           private Map<String, Object> extraParams;
 
           /** Finalize and obtain parameter instance from this builder. */
-          public Remove build() {
-            return new Remove(this.coupon, this.discount, this.extraParams);
+          public SubscriptionScheduleAmendParams.Amendment.DiscountAction.Remove build() {
+            return new SubscriptionScheduleAmendParams.Amendment.DiscountAction.Remove(
+                this.coupon, this.discount, this.extraParams);
           }
 
           /** The coupon code to remove from the {@code discounts} array. */
@@ -1271,8 +1294,9 @@ public class SubscriptionScheduleAmendParams extends ApiRequestParams {
           private Map<String, Object> extraParams;
 
           /** Finalize and obtain parameter instance from this builder. */
-          public Set build() {
-            return new Set(this.coupon, this.discount, this.extraParams);
+          public SubscriptionScheduleAmendParams.Amendment.DiscountAction.Set build() {
+            return new SubscriptionScheduleAmendParams.Amendment.DiscountAction.Set(
+                this.coupon, this.discount, this.extraParams);
           }
 
           /** The coupon code to replace the {@code discounts} array with. */
@@ -1341,7 +1365,8 @@ public class SubscriptionScheduleAmendParams extends ApiRequestParams {
     @Getter
     public static class ItemAction {
       /**
-       * Details of the subscription item to add. The {@code price} must be unique across all items.
+       * Details of the subscription item to add. If an item with the same {@code price} exists, it
+       * will be replaced by this new item. Otherwise, it adds the new item.
        */
       @SerializedName("add")
       Add add;
@@ -1397,15 +1422,16 @@ public class SubscriptionScheduleAmendParams extends ApiRequestParams {
         private Type type;
 
         /** Finalize and obtain parameter instance from this builder. */
-        public ItemAction build() {
-          return new ItemAction(this.add, this.extraParams, this.remove, this.set, this.type);
+        public SubscriptionScheduleAmendParams.Amendment.ItemAction build() {
+          return new SubscriptionScheduleAmendParams.Amendment.ItemAction(
+              this.add, this.extraParams, this.remove, this.set, this.type);
         }
 
         /**
-         * Details of the subscription item to add. The {@code price} must be unique across all
-         * items.
+         * Details of the subscription item to add. If an item with the same {@code price} exists,
+         * it will be replaced by this new item. Otherwise, it adds the new item.
          */
-        public Builder setAdd(Add add) {
+        public Builder setAdd(SubscriptionScheduleAmendParams.Amendment.ItemAction.Add add) {
           this.add = add;
           return this;
         }
@@ -1439,7 +1465,8 @@ public class SubscriptionScheduleAmendParams extends ApiRequestParams {
         }
 
         /** Details of the subscription item to remove. */
-        public Builder setRemove(Remove remove) {
+        public Builder setRemove(
+            SubscriptionScheduleAmendParams.Amendment.ItemAction.Remove remove) {
           this.remove = remove;
           return this;
         }
@@ -1450,13 +1477,13 @@ public class SubscriptionScheduleAmendParams extends ApiRequestParams {
          * of the other {@code set} properties that are passed in this request will replace the
          * existing values for the configuration item.
          */
-        public Builder setSet(Set set) {
+        public Builder setSet(SubscriptionScheduleAmendParams.Amendment.ItemAction.Set set) {
           this.set = set;
           return this;
         }
 
         /** Determines the type of item action. */
-        public Builder setType(Type type) {
+        public Builder setType(SubscriptionScheduleAmendParams.Amendment.ItemAction.Type type) {
           this.type = type;
           return this;
         }
@@ -1469,7 +1496,7 @@ public class SubscriptionScheduleAmendParams extends ApiRequestParams {
          * subscription discounts.
          */
         @SerializedName("discounts")
-        List<Discount> discounts;
+        List<SubscriptionScheduleAmendParams.Amendment.ItemAction.Add.Discount> discounts;
 
         /**
          * Map of extra parameters for custom features not available in this client library. The
@@ -1510,7 +1537,7 @@ public class SubscriptionScheduleAmendParams extends ApiRequestParams {
         Trial trial;
 
         private Add(
-            List<Discount> discounts,
+            List<SubscriptionScheduleAmendParams.Amendment.ItemAction.Add.Discount> discounts,
             Map<String, Object> extraParams,
             Map<String, String> metadata,
             String price,
@@ -1531,7 +1558,7 @@ public class SubscriptionScheduleAmendParams extends ApiRequestParams {
         }
 
         public static class Builder {
-          private List<Discount> discounts;
+          private List<SubscriptionScheduleAmendParams.Amendment.ItemAction.Add.Discount> discounts;
 
           private Map<String, Object> extraParams;
 
@@ -1546,8 +1573,8 @@ public class SubscriptionScheduleAmendParams extends ApiRequestParams {
           private Trial trial;
 
           /** Finalize and obtain parameter instance from this builder. */
-          public Add build() {
-            return new Add(
+          public SubscriptionScheduleAmendParams.Amendment.ItemAction.Add build() {
+            return new SubscriptionScheduleAmendParams.Amendment.ItemAction.Add(
                 this.discounts,
                 this.extraParams,
                 this.metadata,
@@ -1563,7 +1590,8 @@ public class SubscriptionScheduleAmendParams extends ApiRequestParams {
            * SubscriptionScheduleAmendParams.Amendment.ItemAction.Add#discounts} for the field
            * documentation.
            */
-          public Builder addDiscount(Discount element) {
+          public Builder addDiscount(
+              SubscriptionScheduleAmendParams.Amendment.ItemAction.Add.Discount element) {
             if (this.discounts == null) {
               this.discounts = new ArrayList<>();
             }
@@ -1577,7 +1605,8 @@ public class SubscriptionScheduleAmendParams extends ApiRequestParams {
            * SubscriptionScheduleAmendParams.Amendment.ItemAction.Add#discounts} for the field
            * documentation.
            */
-          public Builder addAllDiscount(List<Discount> elements) {
+          public Builder addAllDiscount(
+              List<SubscriptionScheduleAmendParams.Amendment.ItemAction.Add.Discount> elements) {
             if (this.discounts == null) {
               this.discounts = new ArrayList<>();
             }
@@ -1682,7 +1711,8 @@ public class SubscriptionScheduleAmendParams extends ApiRequestParams {
           }
 
           /** Options that configure the trial on the subscription item. */
-          public Builder setTrial(Trial trial) {
+          public Builder setTrial(
+              SubscriptionScheduleAmendParams.Amendment.ItemAction.Add.Trial trial) {
             this.trial = trial;
             return this;
           }
@@ -1726,8 +1756,9 @@ public class SubscriptionScheduleAmendParams extends ApiRequestParams {
             private Map<String, Object> extraParams;
 
             /** Finalize and obtain parameter instance from this builder. */
-            public Discount build() {
-              return new Discount(this.coupon, this.discount, this.extraParams);
+            public SubscriptionScheduleAmendParams.Amendment.ItemAction.Add.Discount build() {
+              return new SubscriptionScheduleAmendParams.Amendment.ItemAction.Add.Discount(
+                  this.coupon, this.discount, this.extraParams);
             }
 
             /** ID of the coupon to create a new discount for. */
@@ -1805,8 +1836,9 @@ public class SubscriptionScheduleAmendParams extends ApiRequestParams {
             private Type type;
 
             /** Finalize and obtain parameter instance from this builder. */
-            public Trial build() {
-              return new Trial(this.extraParams, this.type);
+            public SubscriptionScheduleAmendParams.Amendment.ItemAction.Add.Trial build() {
+              return new SubscriptionScheduleAmendParams.Amendment.ItemAction.Add.Trial(
+                  this.extraParams, this.type);
             }
 
             /**
@@ -1840,7 +1872,8 @@ public class SubscriptionScheduleAmendParams extends ApiRequestParams {
             }
 
             /** Determines the type of trial for this item. */
-            public Builder setType(Type type) {
+            public Builder setType(
+                SubscriptionScheduleAmendParams.Amendment.ItemAction.Add.Trial.Type type) {
               this.type = type;
               return this;
             }
@@ -1894,8 +1927,9 @@ public class SubscriptionScheduleAmendParams extends ApiRequestParams {
           private String price;
 
           /** Finalize and obtain parameter instance from this builder. */
-          public Remove build() {
-            return new Remove(this.extraParams, this.price);
+          public SubscriptionScheduleAmendParams.Amendment.ItemAction.Remove build() {
+            return new SubscriptionScheduleAmendParams.Amendment.ItemAction.Remove(
+                this.extraParams, this.price);
           }
 
           /**
@@ -1945,7 +1979,7 @@ public class SubscriptionScheduleAmendParams extends ApiRequestParams {
          * discounts}.
          */
         @SerializedName("discounts")
-        List<Discount> discounts;
+        List<SubscriptionScheduleAmendParams.Amendment.ItemAction.Set.Discount> discounts;
 
         /**
          * Map of extra parameters for custom features not available in this client library. The
@@ -1997,7 +2031,7 @@ public class SubscriptionScheduleAmendParams extends ApiRequestParams {
         Trial trial;
 
         private Set(
-            List<Discount> discounts,
+            List<SubscriptionScheduleAmendParams.Amendment.ItemAction.Set.Discount> discounts,
             Map<String, Object> extraParams,
             Map<String, String> metadata,
             String price,
@@ -2018,7 +2052,7 @@ public class SubscriptionScheduleAmendParams extends ApiRequestParams {
         }
 
         public static class Builder {
-          private List<Discount> discounts;
+          private List<SubscriptionScheduleAmendParams.Amendment.ItemAction.Set.Discount> discounts;
 
           private Map<String, Object> extraParams;
 
@@ -2033,8 +2067,8 @@ public class SubscriptionScheduleAmendParams extends ApiRequestParams {
           private Trial trial;
 
           /** Finalize and obtain parameter instance from this builder. */
-          public Set build() {
-            return new Set(
+          public SubscriptionScheduleAmendParams.Amendment.ItemAction.Set build() {
+            return new SubscriptionScheduleAmendParams.Amendment.ItemAction.Set(
                 this.discounts,
                 this.extraParams,
                 this.metadata,
@@ -2050,7 +2084,8 @@ public class SubscriptionScheduleAmendParams extends ApiRequestParams {
            * SubscriptionScheduleAmendParams.Amendment.ItemAction.Set#discounts} for the field
            * documentation.
            */
-          public Builder addDiscount(Discount element) {
+          public Builder addDiscount(
+              SubscriptionScheduleAmendParams.Amendment.ItemAction.Set.Discount element) {
             if (this.discounts == null) {
               this.discounts = new ArrayList<>();
             }
@@ -2064,7 +2099,8 @@ public class SubscriptionScheduleAmendParams extends ApiRequestParams {
            * SubscriptionScheduleAmendParams.Amendment.ItemAction.Set#discounts} for the field
            * documentation.
            */
-          public Builder addAllDiscount(List<Discount> elements) {
+          public Builder addAllDiscount(
+              List<SubscriptionScheduleAmendParams.Amendment.ItemAction.Set.Discount> elements) {
             if (this.discounts == null) {
               this.discounts = new ArrayList<>();
             }
@@ -2178,7 +2214,8 @@ public class SubscriptionScheduleAmendParams extends ApiRequestParams {
            * Otherwise, the {@code items} array is cleared and a single new item is added with the
            * supplied {@code trial}.
            */
-          public Builder setTrial(Trial trial) {
+          public Builder setTrial(
+              SubscriptionScheduleAmendParams.Amendment.ItemAction.Set.Trial trial) {
             this.trial = trial;
             return this;
           }
@@ -2222,8 +2259,9 @@ public class SubscriptionScheduleAmendParams extends ApiRequestParams {
             private Map<String, Object> extraParams;
 
             /** Finalize and obtain parameter instance from this builder. */
-            public Discount build() {
-              return new Discount(this.coupon, this.discount, this.extraParams);
+            public SubscriptionScheduleAmendParams.Amendment.ItemAction.Set.Discount build() {
+              return new SubscriptionScheduleAmendParams.Amendment.ItemAction.Set.Discount(
+                  this.coupon, this.discount, this.extraParams);
             }
 
             /** ID of the coupon to create a new discount for. */
@@ -2301,8 +2339,9 @@ public class SubscriptionScheduleAmendParams extends ApiRequestParams {
             private Type type;
 
             /** Finalize and obtain parameter instance from this builder. */
-            public Trial build() {
-              return new Trial(this.extraParams, this.type);
+            public SubscriptionScheduleAmendParams.Amendment.ItemAction.Set.Trial build() {
+              return new SubscriptionScheduleAmendParams.Amendment.ItemAction.Set.Trial(
+                  this.extraParams, this.type);
             }
 
             /**
@@ -2336,7 +2375,8 @@ public class SubscriptionScheduleAmendParams extends ApiRequestParams {
             }
 
             /** Determines the type of trial for this item. */
-            public Builder setType(Type type) {
+            public Builder setType(
+                SubscriptionScheduleAmendParams.Amendment.ItemAction.Set.Trial.Type type) {
               this.type = type;
               return this;
             }

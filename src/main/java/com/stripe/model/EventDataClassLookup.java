@@ -9,7 +9,7 @@ import java.util.Map;
  * string of the model.
  */
 final class EventDataClassLookup {
-  private static final Map<String, Class<? extends StripeObject>> classLookup = new HashMap<>();
+  public static final Map<String, Class<? extends StripeObject>> classLookup = new HashMap<>();
 
   static {
     classLookup.put("account", Account.class);
@@ -91,6 +91,11 @@ final class EventDataClassLookup {
         "billing_portal.configuration", com.stripe.model.billingportal.Configuration.class);
     classLookup.put("billing_portal.session", com.stripe.model.billingportal.Session.class);
 
+    classLookup.put("capital.financing_offer", com.stripe.model.capital.FinancingOffer.class);
+    classLookup.put("capital.financing_summary", com.stripe.model.capital.FinancingSummary.class);
+    classLookup.put(
+        "capital.financing_transaction", com.stripe.model.capital.FinancingTransaction.class);
+
     classLookup.put("checkout.session", com.stripe.model.checkout.Session.class);
 
     classLookup.put(
@@ -147,9 +152,5 @@ final class EventDataClassLookup {
     classLookup.put("treasury.received_debit", com.stripe.model.treasury.ReceivedDebit.class);
     classLookup.put("treasury.transaction", com.stripe.model.treasury.Transaction.class);
     classLookup.put("treasury.transaction_entry", com.stripe.model.treasury.TransactionEntry.class);
-  }
-
-  public static Class<? extends StripeObject> findClass(String objectType) {
-    return classLookup.get(objectType);
   }
 }

@@ -180,7 +180,7 @@ public class CustomerListPaymentMethodsParams extends ApiRequestParams {
     }
 
     /** A required filter on the list, based on the object {@code type} field. */
-    public Builder setType(Type type) {
+    public Builder setType(CustomerListPaymentMethodsParams.Type type) {
       this.type = type;
       return this;
     }
@@ -255,6 +255,12 @@ public class CustomerListPaymentMethodsParams extends ApiRequestParams {
 
     @SerializedName("paynow")
     PAYNOW("paynow"),
+
+    @SerializedName("paypal")
+    PAYPAL("paypal"),
+
+    @SerializedName("pix")
+    PIX("pix"),
 
     @SerializedName("promptpay")
     PROMPTPAY("promptpay"),

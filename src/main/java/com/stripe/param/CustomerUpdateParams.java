@@ -3,7 +3,6 @@ package com.stripe.param;
 
 import com.google.gson.annotations.SerializedName;
 import com.stripe.net.ApiRequestParams;
-import com.stripe.net.ApiRequestParams.EnumParam;
 import com.stripe.param.common.EmptyParam;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -131,7 +130,7 @@ public class CustomerUpdateParams extends ApiRequestParams {
 
   /** The customer's tax exemption. One of {@code none}, {@code exempt}, or {@code reverse}. */
   @SerializedName("tax_exempt")
-  EnumParam taxExempt;
+  ApiRequestParams.EnumParam taxExempt;
 
   @SerializedName("validate")
   Boolean validate;
@@ -157,7 +156,7 @@ public class CustomerUpdateParams extends ApiRequestParams {
       Object shipping,
       Object source,
       Tax tax,
-      EnumParam taxExempt,
+      ApiRequestParams.EnumParam taxExempt,
       Boolean validate) {
     this.address = address;
     this.balance = balance;
@@ -228,7 +227,7 @@ public class CustomerUpdateParams extends ApiRequestParams {
 
     private Tax tax;
 
-    private EnumParam taxExempt;
+    private ApiRequestParams.EnumParam taxExempt;
 
     private Boolean validate;
 
@@ -260,7 +259,7 @@ public class CustomerUpdateParams extends ApiRequestParams {
     }
 
     /** The customer's address. */
-    public Builder setAddress(Address address) {
+    public Builder setAddress(CustomerUpdateParams.Address address) {
       this.address = address;
       return this;
     }
@@ -283,7 +282,7 @@ public class CustomerUpdateParams extends ApiRequestParams {
     }
 
     /** Balance information and default balance settings for this customer. */
-    public Builder setCashBalance(CashBalance cashBalance) {
+    public Builder setCashBalance(CustomerUpdateParams.CashBalance cashBalance) {
       this.cashBalance = cashBalance;
       return this;
     }
@@ -439,7 +438,7 @@ public class CustomerUpdateParams extends ApiRequestParams {
     }
 
     /** Default invoice settings for this customer. */
-    public Builder setInvoiceSettings(InvoiceSettings invoiceSettings) {
+    public Builder setInvoiceSettings(CustomerUpdateParams.InvoiceSettings invoiceSettings) {
       this.invoiceSettings = invoiceSettings;
       return this;
     }
@@ -571,7 +570,7 @@ public class CustomerUpdateParams extends ApiRequestParams {
     }
 
     /** The customer's shipping information. Appears on invoices emailed to this customer. */
-    public Builder setShipping(Shipping shipping) {
+    public Builder setShipping(CustomerUpdateParams.Shipping shipping) {
       this.shipping = shipping;
       return this;
     }
@@ -593,13 +592,13 @@ public class CustomerUpdateParams extends ApiRequestParams {
     }
 
     /** Tax details about the customer. */
-    public Builder setTax(Tax tax) {
+    public Builder setTax(CustomerUpdateParams.Tax tax) {
       this.tax = tax;
       return this;
     }
 
     /** The customer's tax exemption. One of {@code none}, {@code exempt}, or {@code reverse}. */
-    public Builder setTaxExempt(TaxExempt taxExempt) {
+    public Builder setTaxExempt(CustomerUpdateParams.TaxExempt taxExempt) {
       this.taxExempt = taxExempt;
       return this;
     }
@@ -691,8 +690,8 @@ public class CustomerUpdateParams extends ApiRequestParams {
       private Object state;
 
       /** Finalize and obtain parameter instance from this builder. */
-      public Address build() {
-        return new Address(
+      public CustomerUpdateParams.Address build() {
+        return new CustomerUpdateParams.Address(
             this.city,
             this.country,
             this.extraParams,
@@ -841,8 +840,8 @@ public class CustomerUpdateParams extends ApiRequestParams {
       private Settings settings;
 
       /** Finalize and obtain parameter instance from this builder. */
-      public CashBalance build() {
-        return new CashBalance(this.extraParams, this.settings);
+      public CustomerUpdateParams.CashBalance build() {
+        return new CustomerUpdateParams.CashBalance(this.extraParams, this.settings);
       }
 
       /**
@@ -875,7 +874,7 @@ public class CustomerUpdateParams extends ApiRequestParams {
        * Settings controlling the behavior of the customer's cash balance, such as reconciliation of
        * funds received.
        */
-      public Builder setSettings(Settings settings) {
+      public Builder setSettings(CustomerUpdateParams.CashBalance.Settings settings) {
         this.settings = settings;
         return this;
       }
@@ -916,8 +915,9 @@ public class CustomerUpdateParams extends ApiRequestParams {
         private ReconciliationMode reconciliationMode;
 
         /** Finalize and obtain parameter instance from this builder. */
-        public Settings build() {
-          return new Settings(this.extraParams, this.reconciliationMode);
+        public CustomerUpdateParams.CashBalance.Settings build() {
+          return new CustomerUpdateParams.CashBalance.Settings(
+              this.extraParams, this.reconciliationMode);
         }
 
         /**
@@ -954,7 +954,8 @@ public class CustomerUpdateParams extends ApiRequestParams {
          * about these reconciliation modes, see <a
          * href="https://stripe.com/docs/payments/customer-balance/reconciliation">Reconciliation</a>.
          */
-        public Builder setReconciliationMode(ReconciliationMode reconciliationMode) {
+        public Builder setReconciliationMode(
+            CustomerUpdateParams.CashBalance.Settings.ReconciliationMode reconciliationMode) {
           this.reconciliationMode = reconciliationMode;
           return this;
         }
@@ -1039,8 +1040,8 @@ public class CustomerUpdateParams extends ApiRequestParams {
       private Object renderingOptions;
 
       /** Finalize and obtain parameter instance from this builder. */
-      public InvoiceSettings build() {
-        return new InvoiceSettings(
+      public CustomerUpdateParams.InvoiceSettings build() {
+        return new CustomerUpdateParams.InvoiceSettings(
             this.customFields,
             this.defaultPaymentMethod,
             this.extraParams,
@@ -1054,7 +1055,7 @@ public class CustomerUpdateParams extends ApiRequestParams {
        * CustomerUpdateParams.InvoiceSettings#customFields} for the field documentation.
        */
       @SuppressWarnings("unchecked")
-      public Builder addCustomField(CustomField element) {
+      public Builder addCustomField(CustomerUpdateParams.InvoiceSettings.CustomField element) {
         if (this.customFields == null || this.customFields instanceof EmptyParam) {
           this.customFields = new ArrayList<CustomerUpdateParams.InvoiceSettings.CustomField>();
         }
@@ -1068,7 +1069,8 @@ public class CustomerUpdateParams extends ApiRequestParams {
        * CustomerUpdateParams.InvoiceSettings#customFields} for the field documentation.
        */
       @SuppressWarnings("unchecked")
-      public Builder addAllCustomField(List<CustomField> elements) {
+      public Builder addAllCustomField(
+          List<CustomerUpdateParams.InvoiceSettings.CustomField> elements) {
         if (this.customFields == null || this.customFields instanceof EmptyParam) {
           this.customFields = new ArrayList<CustomerUpdateParams.InvoiceSettings.CustomField>();
         }
@@ -1090,7 +1092,8 @@ public class CustomerUpdateParams extends ApiRequestParams {
        * Default custom fields to be displayed on invoices for this customer. When updating, pass an
        * empty string to remove previously-defined fields.
        */
-      public Builder setCustomFields(List<CustomField> customFields) {
+      public Builder setCustomFields(
+          List<CustomerUpdateParams.InvoiceSettings.CustomField> customFields) {
         this.customFields = customFields;
         return this;
       }
@@ -1152,7 +1155,8 @@ public class CustomerUpdateParams extends ApiRequestParams {
       }
 
       /** Default options for invoice PDF rendering for this customer. */
-      public Builder setRenderingOptions(RenderingOptions renderingOptions) {
+      public Builder setRenderingOptions(
+          CustomerUpdateParams.InvoiceSettings.RenderingOptions renderingOptions) {
         this.renderingOptions = renderingOptions;
         return this;
       }
@@ -1201,8 +1205,9 @@ public class CustomerUpdateParams extends ApiRequestParams {
         private Object value;
 
         /** Finalize and obtain parameter instance from this builder. */
-        public CustomField build() {
-          return new CustomField(this.extraParams, this.name, this.value);
+        public CustomerUpdateParams.InvoiceSettings.CustomField build() {
+          return new CustomerUpdateParams.InvoiceSettings.CustomField(
+              this.extraParams, this.name, this.value);
         }
 
         /**
@@ -1268,7 +1273,7 @@ public class CustomerUpdateParams extends ApiRequestParams {
        * exclude_tax} will exclude all tax (inclusive and exclusive alike) from invoice PDF amounts.
        */
       @SerializedName("amount_tax_display")
-      EnumParam amountTaxDisplay;
+      ApiRequestParams.EnumParam amountTaxDisplay;
 
       /**
        * Map of extra parameters for custom features not available in this client library. The
@@ -1279,7 +1284,8 @@ public class CustomerUpdateParams extends ApiRequestParams {
       @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
       Map<String, Object> extraParams;
 
-      private RenderingOptions(EnumParam amountTaxDisplay, Map<String, Object> extraParams) {
+      private RenderingOptions(
+          ApiRequestParams.EnumParam amountTaxDisplay, Map<String, Object> extraParams) {
         this.amountTaxDisplay = amountTaxDisplay;
         this.extraParams = extraParams;
       }
@@ -1289,13 +1295,14 @@ public class CustomerUpdateParams extends ApiRequestParams {
       }
 
       public static class Builder {
-        private EnumParam amountTaxDisplay;
+        private ApiRequestParams.EnumParam amountTaxDisplay;
 
         private Map<String, Object> extraParams;
 
         /** Finalize and obtain parameter instance from this builder. */
-        public RenderingOptions build() {
-          return new RenderingOptions(this.amountTaxDisplay, this.extraParams);
+        public CustomerUpdateParams.InvoiceSettings.RenderingOptions build() {
+          return new CustomerUpdateParams.InvoiceSettings.RenderingOptions(
+              this.amountTaxDisplay, this.extraParams);
         }
 
         /**
@@ -1305,7 +1312,9 @@ public class CustomerUpdateParams extends ApiRequestParams {
          * PDF amounts. {@code exclude_tax} will exclude all tax (inclusive and exclusive alike)
          * from invoice PDF amounts.
          */
-        public Builder setAmountTaxDisplay(AmountTaxDisplay amountTaxDisplay) {
+        public Builder setAmountTaxDisplay(
+            CustomerUpdateParams.InvoiceSettings.RenderingOptions.AmountTaxDisplay
+                amountTaxDisplay) {
           this.amountTaxDisplay = amountTaxDisplay;
           return this;
         }
@@ -1412,12 +1421,13 @@ public class CustomerUpdateParams extends ApiRequestParams {
       private Object phone;
 
       /** Finalize and obtain parameter instance from this builder. */
-      public Shipping build() {
-        return new Shipping(this.address, this.extraParams, this.name, this.phone);
+      public CustomerUpdateParams.Shipping build() {
+        return new CustomerUpdateParams.Shipping(
+            this.address, this.extraParams, this.name, this.phone);
       }
 
       /** Customer shipping address. */
-      public Builder setAddress(Address address) {
+      public Builder setAddress(CustomerUpdateParams.Shipping.Address address) {
         this.address = address;
         return this;
       }
@@ -1548,8 +1558,8 @@ public class CustomerUpdateParams extends ApiRequestParams {
         private Object state;
 
         /** Finalize and obtain parameter instance from this builder. */
-        public Address build() {
-          return new Address(
+        public CustomerUpdateParams.Shipping.Address build() {
+          return new CustomerUpdateParams.Shipping.Address(
               this.city,
               this.country,
               this.extraParams,
@@ -1703,8 +1713,8 @@ public class CustomerUpdateParams extends ApiRequestParams {
       private Object ipAddress;
 
       /** Finalize and obtain parameter instance from this builder. */
-      public Tax build() {
-        return new Tax(this.extraParams, this.ipAddress);
+      public CustomerUpdateParams.Tax build() {
+        return new CustomerUpdateParams.Tax(this.extraParams, this.ipAddress);
       }
 
       /**

@@ -83,7 +83,7 @@ public class PaymentLinkCreateParams extends ApiRequestParams {
    * Up to 20 line items are supported.
    */
   @SerializedName("line_items")
-  List<LineItem> lineItems;
+  List<PaymentLinkCreateParams.LineItem> lineItems;
 
   /**
    * Set of <a href="https://stripe.com/docs/api/metadata">key-value pairs</a> that you can attach
@@ -130,7 +130,7 @@ public class PaymentLinkCreateParams extends ApiRequestParams {
    * href="https://stripe.com/docs/payments/payment-methods/integration-options#payment-method-product-support">supported</a>).
    */
   @SerializedName("payment_method_types")
-  List<PaymentMethodType> paymentMethodTypes;
+  List<PaymentLinkCreateParams.PaymentMethodType> paymentMethodTypes;
 
   /**
    * Controls phone number collection settings during checkout.
@@ -150,7 +150,7 @@ public class PaymentLinkCreateParams extends ApiRequestParams {
    * payment link.
    */
   @SerializedName("shipping_options")
-  List<ShippingOption> shippingOptions;
+  List<PaymentLinkCreateParams.ShippingOption> shippingOptions;
 
   /**
    * Describes the type of transaction being performed in order to customize relevant text on the
@@ -191,15 +191,15 @@ public class PaymentLinkCreateParams extends ApiRequestParams {
       CustomerCreation customerCreation,
       List<String> expand,
       Map<String, Object> extraParams,
-      List<LineItem> lineItems,
+      List<PaymentLinkCreateParams.LineItem> lineItems,
       Map<String, String> metadata,
       String onBehalfOf,
       PaymentIntentData paymentIntentData,
       PaymentMethodCollection paymentMethodCollection,
-      List<PaymentMethodType> paymentMethodTypes,
+      List<PaymentLinkCreateParams.PaymentMethodType> paymentMethodTypes,
       PhoneNumberCollection phoneNumberCollection,
       ShippingAddressCollection shippingAddressCollection,
-      List<ShippingOption> shippingOptions,
+      List<PaymentLinkCreateParams.ShippingOption> shippingOptions,
       SubmitType submitType,
       SubscriptionData subscriptionData,
       TaxIdCollection taxIdCollection,
@@ -257,7 +257,7 @@ public class PaymentLinkCreateParams extends ApiRequestParams {
 
     private Map<String, Object> extraParams;
 
-    private List<LineItem> lineItems;
+    private List<PaymentLinkCreateParams.LineItem> lineItems;
 
     private Map<String, String> metadata;
 
@@ -267,13 +267,13 @@ public class PaymentLinkCreateParams extends ApiRequestParams {
 
     private PaymentMethodCollection paymentMethodCollection;
 
-    private List<PaymentMethodType> paymentMethodTypes;
+    private List<PaymentLinkCreateParams.PaymentMethodType> paymentMethodTypes;
 
     private PhoneNumberCollection phoneNumberCollection;
 
     private ShippingAddressCollection shippingAddressCollection;
 
-    private List<ShippingOption> shippingOptions;
+    private List<PaymentLinkCreateParams.ShippingOption> shippingOptions;
 
     private SubmitType submitType;
 
@@ -313,7 +313,7 @@ public class PaymentLinkCreateParams extends ApiRequestParams {
     }
 
     /** Behavior after the purchase is complete. */
-    public Builder setAfterCompletion(AfterCompletion afterCompletion) {
+    public Builder setAfterCompletion(PaymentLinkCreateParams.AfterCompletion afterCompletion) {
       this.afterCompletion = afterCompletion;
       return this;
     }
@@ -346,19 +346,21 @@ public class PaymentLinkCreateParams extends ApiRequestParams {
     }
 
     /** Configuration for automatic tax collection. */
-    public Builder setAutomaticTax(AutomaticTax automaticTax) {
+    public Builder setAutomaticTax(PaymentLinkCreateParams.AutomaticTax automaticTax) {
       this.automaticTax = automaticTax;
       return this;
     }
 
     /** Configuration for collecting the customer's billing address. */
-    public Builder setBillingAddressCollection(BillingAddressCollection billingAddressCollection) {
+    public Builder setBillingAddressCollection(
+        PaymentLinkCreateParams.BillingAddressCollection billingAddressCollection) {
       this.billingAddressCollection = billingAddressCollection;
       return this;
     }
 
     /** Configure fields to gather active consent from customers. */
-    public Builder setConsentCollection(ConsentCollection consentCollection) {
+    public Builder setConsentCollection(
+        PaymentLinkCreateParams.ConsentCollection consentCollection) {
       this.consentCollection = consentCollection;
       return this;
     }
@@ -378,7 +380,7 @@ public class PaymentLinkCreateParams extends ApiRequestParams {
      * sessions</a> created by this payment link create a <a
      * href="https://stripe.com/docs/api/customers">Customer</a>.
      */
-    public Builder setCustomerCreation(CustomerCreation customerCreation) {
+    public Builder setCustomerCreation(PaymentLinkCreateParams.CustomerCreation customerCreation) {
       this.customerCreation = customerCreation;
       return this;
     }
@@ -440,7 +442,7 @@ public class PaymentLinkCreateParams extends ApiRequestParams {
      * and subsequent calls adds additional elements to the original list. See {@link
      * PaymentLinkCreateParams#lineItems} for the field documentation.
      */
-    public Builder addLineItem(LineItem element) {
+    public Builder addLineItem(PaymentLinkCreateParams.LineItem element) {
       if (this.lineItems == null) {
         this.lineItems = new ArrayList<>();
       }
@@ -453,7 +455,7 @@ public class PaymentLinkCreateParams extends ApiRequestParams {
      * and subsequent calls adds additional elements to the original list. See {@link
      * PaymentLinkCreateParams#lineItems} for the field documentation.
      */
-    public Builder addAllLineItem(List<LineItem> elements) {
+    public Builder addAllLineItem(List<PaymentLinkCreateParams.LineItem> elements) {
       if (this.lineItems == null) {
         this.lineItems = new ArrayList<>();
       }
@@ -497,7 +499,8 @@ public class PaymentLinkCreateParams extends ApiRequestParams {
      * A subset of parameters to be passed to PaymentIntent creation for Checkout Sessions in {@code
      * payment} mode.
      */
-    public Builder setPaymentIntentData(PaymentIntentData paymentIntentData) {
+    public Builder setPaymentIntentData(
+        PaymentLinkCreateParams.PaymentIntentData paymentIntentData) {
       this.paymentIntentData = paymentIntentData;
       return this;
     }
@@ -513,7 +516,8 @@ public class PaymentLinkCreateParams extends ApiRequestParams {
      * guide on <a href="https://stripe.com/docs/payments/checkout/free-trials">configuring
      * subscriptions with a free trial</a>.
      */
-    public Builder setPaymentMethodCollection(PaymentMethodCollection paymentMethodCollection) {
+    public Builder setPaymentMethodCollection(
+        PaymentLinkCreateParams.PaymentMethodCollection paymentMethodCollection) {
       this.paymentMethodCollection = paymentMethodCollection;
       return this;
     }
@@ -523,7 +527,7 @@ public class PaymentLinkCreateParams extends ApiRequestParams {
      * call, and subsequent calls adds additional elements to the original list. See {@link
      * PaymentLinkCreateParams#paymentMethodTypes} for the field documentation.
      */
-    public Builder addPaymentMethodType(PaymentMethodType element) {
+    public Builder addPaymentMethodType(PaymentLinkCreateParams.PaymentMethodType element) {
       if (this.paymentMethodTypes == null) {
         this.paymentMethodTypes = new ArrayList<>();
       }
@@ -536,7 +540,8 @@ public class PaymentLinkCreateParams extends ApiRequestParams {
      * `add/addAll` call, and subsequent calls adds additional elements to the original list. See
      * {@link PaymentLinkCreateParams#paymentMethodTypes} for the field documentation.
      */
-    public Builder addAllPaymentMethodType(List<PaymentMethodType> elements) {
+    public Builder addAllPaymentMethodType(
+        List<PaymentLinkCreateParams.PaymentMethodType> elements) {
       if (this.paymentMethodTypes == null) {
         this.paymentMethodTypes = new ArrayList<>();
       }
@@ -549,14 +554,15 @@ public class PaymentLinkCreateParams extends ApiRequestParams {
      *
      * <p>We recommend that you review your privacy policy and check with your legal contacts.
      */
-    public Builder setPhoneNumberCollection(PhoneNumberCollection phoneNumberCollection) {
+    public Builder setPhoneNumberCollection(
+        PaymentLinkCreateParams.PhoneNumberCollection phoneNumberCollection) {
       this.phoneNumberCollection = phoneNumberCollection;
       return this;
     }
 
     /** Configuration for collecting the customer's shipping address. */
     public Builder setShippingAddressCollection(
-        ShippingAddressCollection shippingAddressCollection) {
+        PaymentLinkCreateParams.ShippingAddressCollection shippingAddressCollection) {
       this.shippingAddressCollection = shippingAddressCollection;
       return this;
     }
@@ -566,7 +572,7 @@ public class PaymentLinkCreateParams extends ApiRequestParams {
      * call, and subsequent calls adds additional elements to the original list. See {@link
      * PaymentLinkCreateParams#shippingOptions} for the field documentation.
      */
-    public Builder addShippingOption(ShippingOption element) {
+    public Builder addShippingOption(PaymentLinkCreateParams.ShippingOption element) {
       if (this.shippingOptions == null) {
         this.shippingOptions = new ArrayList<>();
       }
@@ -579,7 +585,7 @@ public class PaymentLinkCreateParams extends ApiRequestParams {
      * call, and subsequent calls adds additional elements to the original list. See {@link
      * PaymentLinkCreateParams#shippingOptions} for the field documentation.
      */
-    public Builder addAllShippingOption(List<ShippingOption> elements) {
+    public Builder addAllShippingOption(List<PaymentLinkCreateParams.ShippingOption> elements) {
       if (this.shippingOptions == null) {
         this.shippingOptions = new ArrayList<>();
       }
@@ -593,7 +599,7 @@ public class PaymentLinkCreateParams extends ApiRequestParams {
      * href="https://stripe.com/docs/api/payment_links/payment_links/object#url">url</a> property
      * (example: {@code donate.stripe.com}).
      */
-    public Builder setSubmitType(SubmitType submitType) {
+    public Builder setSubmitType(PaymentLinkCreateParams.SubmitType submitType) {
       this.submitType = submitType;
       return this;
     }
@@ -602,13 +608,13 @@ public class PaymentLinkCreateParams extends ApiRequestParams {
      * When creating a subscription, the specified configuration data will be used. There must be at
      * least one line item with a recurring price to use {@code subscription_data}.
      */
-    public Builder setSubscriptionData(SubscriptionData subscriptionData) {
+    public Builder setSubscriptionData(PaymentLinkCreateParams.SubscriptionData subscriptionData) {
       this.subscriptionData = subscriptionData;
       return this;
     }
 
     /** Controls tax ID collection during checkout. */
-    public Builder setTaxIdCollection(TaxIdCollection taxIdCollection) {
+    public Builder setTaxIdCollection(PaymentLinkCreateParams.TaxIdCollection taxIdCollection) {
       this.taxIdCollection = taxIdCollection;
       return this;
     }
@@ -617,7 +623,7 @@ public class PaymentLinkCreateParams extends ApiRequestParams {
      * The account (if any) the payments will be attributed to for tax reporting, and where funds
      * from each payment will be transferred to.
      */
-    public Builder setTransferData(TransferData transferData) {
+    public Builder setTransferData(PaymentLinkCreateParams.TransferData transferData) {
       this.transferData = transferData;
       return this;
     }
@@ -674,8 +680,8 @@ public class PaymentLinkCreateParams extends ApiRequestParams {
       private Type type;
 
       /** Finalize and obtain parameter instance from this builder. */
-      public AfterCompletion build() {
-        return new AfterCompletion(
+      public PaymentLinkCreateParams.AfterCompletion build() {
+        return new PaymentLinkCreateParams.AfterCompletion(
             this.extraParams, this.hostedConfirmation, this.redirect, this.type);
       }
 
@@ -707,13 +713,14 @@ public class PaymentLinkCreateParams extends ApiRequestParams {
       }
 
       /** Configuration when {@code type=hosted_confirmation}. */
-      public Builder setHostedConfirmation(HostedConfirmation hostedConfirmation) {
+      public Builder setHostedConfirmation(
+          PaymentLinkCreateParams.AfterCompletion.HostedConfirmation hostedConfirmation) {
         this.hostedConfirmation = hostedConfirmation;
         return this;
       }
 
       /** Configuration when {@code type=redirect}. */
-      public Builder setRedirect(Redirect redirect) {
+      public Builder setRedirect(PaymentLinkCreateParams.AfterCompletion.Redirect redirect) {
         this.redirect = redirect;
         return this;
       }
@@ -722,7 +729,7 @@ public class PaymentLinkCreateParams extends ApiRequestParams {
        * The specified behavior after the purchase is complete. Either {@code redirect} or {@code
        * hosted_confirmation}.
        */
-      public Builder setType(Type type) {
+      public Builder setType(PaymentLinkCreateParams.AfterCompletion.Type type) {
         this.type = type;
         return this;
       }
@@ -758,8 +765,9 @@ public class PaymentLinkCreateParams extends ApiRequestParams {
         private Map<String, Object> extraParams;
 
         /** Finalize and obtain parameter instance from this builder. */
-        public HostedConfirmation build() {
-          return new HostedConfirmation(this.customMessage, this.extraParams);
+        public PaymentLinkCreateParams.AfterCompletion.HostedConfirmation build() {
+          return new PaymentLinkCreateParams.AfterCompletion.HostedConfirmation(
+              this.customMessage, this.extraParams);
         }
 
         /** A custom message to display to the customer after the purchase is complete. */
@@ -833,8 +841,8 @@ public class PaymentLinkCreateParams extends ApiRequestParams {
         private String url;
 
         /** Finalize and obtain parameter instance from this builder. */
-        public Redirect build() {
-          return new Redirect(this.extraParams, this.url);
+        public PaymentLinkCreateParams.AfterCompletion.Redirect build() {
+          return new PaymentLinkCreateParams.AfterCompletion.Redirect(this.extraParams, this.url);
         }
 
         /**
@@ -924,8 +932,8 @@ public class PaymentLinkCreateParams extends ApiRequestParams {
       private Map<String, Object> extraParams;
 
       /** Finalize and obtain parameter instance from this builder. */
-      public AutomaticTax build() {
-        return new AutomaticTax(this.enabled, this.extraParams);
+      public PaymentLinkCreateParams.AutomaticTax build() {
+        return new PaymentLinkCreateParams.AutomaticTax(this.enabled, this.extraParams);
       }
 
       /** If {@code true}, tax will be calculated automatically using the customer's location. */
@@ -982,9 +990,19 @@ public class PaymentLinkCreateParams extends ApiRequestParams {
     @SerializedName("promotions")
     Promotions promotions;
 
-    private ConsentCollection(Map<String, Object> extraParams, Promotions promotions) {
+    /**
+     * If set to {@code required}, it requires customers to check a terms of service checkbox before
+     * being able to pay. There must be a valid terms of service URL set in your <a
+     * href="https://dashboard.stripe.com/settings/public">Dashboard settings</a>.
+     */
+    @SerializedName("terms_of_service")
+    TermsOfService termsOfService;
+
+    private ConsentCollection(
+        Map<String, Object> extraParams, Promotions promotions, TermsOfService termsOfService) {
       this.extraParams = extraParams;
       this.promotions = promotions;
+      this.termsOfService = termsOfService;
     }
 
     public static Builder builder() {
@@ -996,9 +1014,12 @@ public class PaymentLinkCreateParams extends ApiRequestParams {
 
       private Promotions promotions;
 
+      private TermsOfService termsOfService;
+
       /** Finalize and obtain parameter instance from this builder. */
-      public ConsentCollection build() {
-        return new ConsentCollection(this.extraParams, this.promotions);
+      public PaymentLinkCreateParams.ConsentCollection build() {
+        return new PaymentLinkCreateParams.ConsentCollection(
+            this.extraParams, this.promotions, this.termsOfService);
       }
 
       /**
@@ -1034,8 +1055,20 @@ public class PaymentLinkCreateParams extends ApiRequestParams {
        * into promotional communication from the merchant depending on the customer's locale. Only
        * available to US merchants.
        */
-      public Builder setPromotions(Promotions promotions) {
+      public Builder setPromotions(
+          PaymentLinkCreateParams.ConsentCollection.Promotions promotions) {
         this.promotions = promotions;
+        return this;
+      }
+
+      /**
+       * If set to {@code required}, it requires customers to check a terms of service checkbox
+       * before being able to pay. There must be a valid terms of service URL set in your <a
+       * href="https://dashboard.stripe.com/settings/public">Dashboard settings</a>.
+       */
+      public Builder setTermsOfService(
+          PaymentLinkCreateParams.ConsentCollection.TermsOfService termsOfService) {
+        this.termsOfService = termsOfService;
         return this;
       }
     }
@@ -1051,6 +1084,21 @@ public class PaymentLinkCreateParams extends ApiRequestParams {
       private final String value;
 
       Promotions(String value) {
+        this.value = value;
+      }
+    }
+
+    public enum TermsOfService implements ApiRequestParams.EnumParam {
+      @SerializedName("none")
+      NONE("none"),
+
+      @SerializedName("required")
+      REQUIRED("required");
+
+      @Getter(onMethod_ = {@Override})
+      private final String value;
+
+      TermsOfService(String value) {
         this.value = value;
       }
     }
@@ -1110,15 +1158,17 @@ public class PaymentLinkCreateParams extends ApiRequestParams {
       private Long quantity;
 
       /** Finalize and obtain parameter instance from this builder. */
-      public LineItem build() {
-        return new LineItem(this.adjustableQuantity, this.extraParams, this.price, this.quantity);
+      public PaymentLinkCreateParams.LineItem build() {
+        return new PaymentLinkCreateParams.LineItem(
+            this.adjustableQuantity, this.extraParams, this.price, this.quantity);
       }
 
       /**
        * When set, provides configuration for this item’s quantity to be adjusted by the customer
        * during checkout.
        */
-      public Builder setAdjustableQuantity(AdjustableQuantity adjustableQuantity) {
+      public Builder setAdjustableQuantity(
+          PaymentLinkCreateParams.LineItem.AdjustableQuantity adjustableQuantity) {
         this.adjustableQuantity = adjustableQuantity;
         return this;
       }
@@ -1217,8 +1267,9 @@ public class PaymentLinkCreateParams extends ApiRequestParams {
         private Long minimum;
 
         /** Finalize and obtain parameter instance from this builder. */
-        public AdjustableQuantity build() {
-          return new AdjustableQuantity(this.enabled, this.extraParams, this.maximum, this.minimum);
+        public PaymentLinkCreateParams.LineItem.AdjustableQuantity build() {
+          return new PaymentLinkCreateParams.LineItem.AdjustableQuantity(
+              this.enabled, this.extraParams, this.maximum, this.minimum);
         }
 
         /** Set to true if the quantity can be adjusted to any non-negative Integer. */
@@ -1337,12 +1388,14 @@ public class PaymentLinkCreateParams extends ApiRequestParams {
       private SetupFutureUsage setupFutureUsage;
 
       /** Finalize and obtain parameter instance from this builder. */
-      public PaymentIntentData build() {
-        return new PaymentIntentData(this.captureMethod, this.extraParams, this.setupFutureUsage);
+      public PaymentLinkCreateParams.PaymentIntentData build() {
+        return new PaymentLinkCreateParams.PaymentIntentData(
+            this.captureMethod, this.extraParams, this.setupFutureUsage);
       }
 
       /** Controls when the funds will be captured from the customer's account. */
-      public Builder setCaptureMethod(CaptureMethod captureMethod) {
+      public Builder setCaptureMethod(
+          PaymentLinkCreateParams.PaymentIntentData.CaptureMethod captureMethod) {
         this.captureMethod = captureMethod;
         return this;
       }
@@ -1396,7 +1449,8 @@ public class PaymentLinkCreateParams extends ApiRequestParams {
        * dynamically optimize your payment flow and comply with regional legislation and network
        * rules, such as SCA.
        */
-      public Builder setSetupFutureUsage(SetupFutureUsage setupFutureUsage) {
+      public Builder setSetupFutureUsage(
+          PaymentLinkCreateParams.PaymentIntentData.SetupFutureUsage setupFutureUsage) {
         this.setupFutureUsage = setupFutureUsage;
         return this;
       }
@@ -1463,8 +1517,8 @@ public class PaymentLinkCreateParams extends ApiRequestParams {
       private Map<String, Object> extraParams;
 
       /** Finalize and obtain parameter instance from this builder. */
-      public PhoneNumberCollection build() {
-        return new PhoneNumberCollection(this.enabled, this.extraParams);
+      public PaymentLinkCreateParams.PhoneNumberCollection build() {
+        return new PaymentLinkCreateParams.PhoneNumberCollection(this.enabled, this.extraParams);
       }
 
       /** Set to {@code true} to enable phone number collection. */
@@ -1510,7 +1564,7 @@ public class PaymentLinkCreateParams extends ApiRequestParams {
      * KP, MH, FM, NF, MP, PW, SD, SY, UM, VI}.
      */
     @SerializedName("allowed_countries")
-    List<AllowedCountry> allowedCountries;
+    List<PaymentLinkCreateParams.ShippingAddressCollection.AllowedCountry> allowedCountries;
 
     /**
      * Map of extra parameters for custom features not available in this client library. The content
@@ -1522,7 +1576,8 @@ public class PaymentLinkCreateParams extends ApiRequestParams {
     Map<String, Object> extraParams;
 
     private ShippingAddressCollection(
-        List<AllowedCountry> allowedCountries, Map<String, Object> extraParams) {
+        List<PaymentLinkCreateParams.ShippingAddressCollection.AllowedCountry> allowedCountries,
+        Map<String, Object> extraParams) {
       this.allowedCountries = allowedCountries;
       this.extraParams = extraParams;
     }
@@ -1532,13 +1587,15 @@ public class PaymentLinkCreateParams extends ApiRequestParams {
     }
 
     public static class Builder {
-      private List<AllowedCountry> allowedCountries;
+      private List<PaymentLinkCreateParams.ShippingAddressCollection.AllowedCountry>
+          allowedCountries;
 
       private Map<String, Object> extraParams;
 
       /** Finalize and obtain parameter instance from this builder. */
-      public ShippingAddressCollection build() {
-        return new ShippingAddressCollection(this.allowedCountries, this.extraParams);
+      public PaymentLinkCreateParams.ShippingAddressCollection build() {
+        return new PaymentLinkCreateParams.ShippingAddressCollection(
+            this.allowedCountries, this.extraParams);
       }
 
       /**
@@ -1547,7 +1604,8 @@ public class PaymentLinkCreateParams extends ApiRequestParams {
        * PaymentLinkCreateParams.ShippingAddressCollection#allowedCountries} for the field
        * documentation.
        */
-      public Builder addAllowedCountry(AllowedCountry element) {
+      public Builder addAllowedCountry(
+          PaymentLinkCreateParams.ShippingAddressCollection.AllowedCountry element) {
         if (this.allowedCountries == null) {
           this.allowedCountries = new ArrayList<>();
         }
@@ -1561,7 +1619,8 @@ public class PaymentLinkCreateParams extends ApiRequestParams {
        * {@link PaymentLinkCreateParams.ShippingAddressCollection#allowedCountries} for the field
        * documentation.
        */
-      public Builder addAllAllowedCountry(List<AllowedCountry> elements) {
+      public Builder addAllAllowedCountry(
+          List<PaymentLinkCreateParams.ShippingAddressCollection.AllowedCountry> elements) {
         if (this.allowedCountries == null) {
           this.allowedCountries = new ArrayList<>();
         }
@@ -2348,8 +2407,8 @@ public class PaymentLinkCreateParams extends ApiRequestParams {
       private String shippingRate;
 
       /** Finalize and obtain parameter instance from this builder. */
-      public ShippingOption build() {
-        return new ShippingOption(this.extraParams, this.shippingRate);
+      public PaymentLinkCreateParams.ShippingOption build() {
+        return new PaymentLinkCreateParams.ShippingOption(this.extraParams, this.shippingRate);
       }
 
       /**
@@ -2389,6 +2448,13 @@ public class PaymentLinkCreateParams extends ApiRequestParams {
   @Getter
   public static class SubscriptionData {
     /**
+     * The subscription's description, meant to be displayable to the customer. Use this field to
+     * optionally store an explanation of the subscription.
+     */
+    @SerializedName("description")
+    String description;
+
+    /**
      * Map of extra parameters for custom features not available in this client library. The content
      * in this map is not serialized under this field's {@code @SerializedName} value. Instead, each
      * key/value pair is serialized as if the key is a root-level field (serialized) name in this
@@ -2404,7 +2470,9 @@ public class PaymentLinkCreateParams extends ApiRequestParams {
     @SerializedName("trial_period_days")
     Long trialPeriodDays;
 
-    private SubscriptionData(Map<String, Object> extraParams, Long trialPeriodDays) {
+    private SubscriptionData(
+        String description, Map<String, Object> extraParams, Long trialPeriodDays) {
+      this.description = description;
       this.extraParams = extraParams;
       this.trialPeriodDays = trialPeriodDays;
     }
@@ -2414,13 +2482,25 @@ public class PaymentLinkCreateParams extends ApiRequestParams {
     }
 
     public static class Builder {
+      private String description;
+
       private Map<String, Object> extraParams;
 
       private Long trialPeriodDays;
 
       /** Finalize and obtain parameter instance from this builder. */
-      public SubscriptionData build() {
-        return new SubscriptionData(this.extraParams, this.trialPeriodDays);
+      public PaymentLinkCreateParams.SubscriptionData build() {
+        return new PaymentLinkCreateParams.SubscriptionData(
+            this.description, this.extraParams, this.trialPeriodDays);
+      }
+
+      /**
+       * The subscription's description, meant to be displayable to the customer. Use this field to
+       * optionally store an explanation of the subscription.
+       */
+      public Builder setDescription(String description) {
+        this.description = description;
+        return this;
       }
 
       /**
@@ -2491,8 +2571,8 @@ public class PaymentLinkCreateParams extends ApiRequestParams {
       private Map<String, Object> extraParams;
 
       /** Finalize and obtain parameter instance from this builder. */
-      public TaxIdCollection build() {
-        return new TaxIdCollection(this.enabled, this.extraParams);
+      public PaymentLinkCreateParams.TaxIdCollection build() {
+        return new PaymentLinkCreateParams.TaxIdCollection(this.enabled, this.extraParams);
       }
 
       /** Set to {@code true} to enable tax ID collection. */
@@ -2571,8 +2651,9 @@ public class PaymentLinkCreateParams extends ApiRequestParams {
       private Map<String, Object> extraParams;
 
       /** Finalize and obtain parameter instance from this builder. */
-      public TransferData build() {
-        return new TransferData(this.amount, this.destination, this.extraParams);
+      public PaymentLinkCreateParams.TransferData build() {
+        return new PaymentLinkCreateParams.TransferData(
+            this.amount, this.destination, this.extraParams);
       }
 
       /** The amount that will be transferred automatically when a charge succeeds. */
@@ -2722,6 +2803,12 @@ public class PaymentLinkCreateParams extends ApiRequestParams {
 
     @SerializedName("paynow")
     PAYNOW("paynow"),
+
+    @SerializedName("paypal")
+    PAYPAL("paypal"),
+
+    @SerializedName("pix")
+    PIX("pix"),
 
     @SerializedName("promptpay")
     PROMPTPAY("promptpay"),

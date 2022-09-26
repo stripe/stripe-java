@@ -201,7 +201,7 @@ public class OutboundTransferListParams extends ApiRequestParams {
      * Only return OutboundTransfers that have the given status: {@code processing}, {@code
      * canceled}, {@code failed}, {@code posted}, or {@code returned}.
      */
-    public Builder setStatus(Status status) {
+    public Builder setStatus(OutboundTransferListParams.Status status) {
       this.status = status;
       return this;
     }

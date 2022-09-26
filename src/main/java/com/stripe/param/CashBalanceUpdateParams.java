@@ -104,7 +104,7 @@ public class CashBalanceUpdateParams extends ApiRequestParams {
     }
 
     /** A hash of settings for this cash balance. */
-    public Builder setSettings(Settings settings) {
+    public Builder setSettings(CashBalanceUpdateParams.Settings settings) {
       this.settings = settings;
       return this;
     }
@@ -145,8 +145,8 @@ public class CashBalanceUpdateParams extends ApiRequestParams {
       private ReconciliationMode reconciliationMode;
 
       /** Finalize and obtain parameter instance from this builder. */
-      public Settings build() {
-        return new Settings(this.extraParams, this.reconciliationMode);
+      public CashBalanceUpdateParams.Settings build() {
+        return new CashBalanceUpdateParams.Settings(this.extraParams, this.reconciliationMode);
       }
 
       /**
@@ -181,7 +181,8 @@ public class CashBalanceUpdateParams extends ApiRequestParams {
        * reconciliation modes, see <a
        * href="https://stripe.com/docs/payments/customer-balance/reconciliation">Reconciliation</a>.
        */
-      public Builder setReconciliationMode(ReconciliationMode reconciliationMode) {
+      public Builder setReconciliationMode(
+          CashBalanceUpdateParams.Settings.ReconciliationMode reconciliationMode) {
         this.reconciliationMode = reconciliationMode;
         return this;
       }

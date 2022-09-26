@@ -160,7 +160,7 @@ public class CardListParams extends ApiRequestParams {
     }
 
     /** Only return cards that were issued during the given date interval. */
-    public Builder setCreated(Created created) {
+    public Builder setCreated(CardListParams.Created created) {
       this.created = created;
       return this;
     }
@@ -276,13 +276,13 @@ public class CardListParams extends ApiRequestParams {
      * Only return cards that have the given status. One of {@code active}, {@code inactive}, or
      * {@code canceled}.
      */
-    public Builder setStatus(Status status) {
+    public Builder setStatus(CardListParams.Status status) {
       this.status = status;
       return this;
     }
 
     /** Only return cards that have the given type. One of {@code virtual} or {@code physical}. */
-    public Builder setType(Type type) {
+    public Builder setType(CardListParams.Type type) {
       this.type = type;
       return this;
     }
@@ -339,8 +339,8 @@ public class CardListParams extends ApiRequestParams {
       private Long lte;
 
       /** Finalize and obtain parameter instance from this builder. */
-      public Created build() {
-        return new Created(this.extraParams, this.gt, this.gte, this.lt, this.lte);
+      public CardListParams.Created build() {
+        return new CardListParams.Created(this.extraParams, this.gt, this.gte, this.lt, this.lte);
       }
 
       /**

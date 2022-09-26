@@ -237,7 +237,7 @@ public class InvoiceItemUpdateParams extends ApiRequestParams {
      * InvoiceItemUpdateParams#discounts} for the field documentation.
      */
     @SuppressWarnings("unchecked")
-    public Builder addDiscount(Discount element) {
+    public Builder addDiscount(InvoiceItemUpdateParams.Discount element) {
       if (this.discounts == null || this.discounts instanceof EmptyParam) {
         this.discounts = new ArrayList<InvoiceItemUpdateParams.Discount>();
       }
@@ -251,7 +251,7 @@ public class InvoiceItemUpdateParams extends ApiRequestParams {
      * InvoiceItemUpdateParams#discounts} for the field documentation.
      */
     @SuppressWarnings("unchecked")
-    public Builder addAllDiscount(List<Discount> elements) {
+    public Builder addAllDiscount(List<InvoiceItemUpdateParams.Discount> elements) {
       if (this.discounts == null || this.discounts instanceof EmptyParam) {
         this.discounts = new ArrayList<InvoiceItemUpdateParams.Discount>();
       }
@@ -274,7 +274,7 @@ public class InvoiceItemUpdateParams extends ApiRequestParams {
      * Item discounts are applied before invoice discounts. Pass an empty string to remove
      * previously-defined discounts.
      */
-    public Builder setDiscounts(List<Discount> discounts) {
+    public Builder setDiscounts(List<InvoiceItemUpdateParams.Discount> discounts) {
       this.discounts = discounts;
       return this;
     }
@@ -385,7 +385,7 @@ public class InvoiceItemUpdateParams extends ApiRequestParams {
      * The period associated with this invoice item. When set to different values, the period will
      * be rendered on the invoice.
      */
-    public Builder setPeriod(Period period) {
+    public Builder setPeriod(InvoiceItemUpdateParams.Period period) {
       this.period = period;
       return this;
     }
@@ -406,7 +406,7 @@ public class InvoiceItemUpdateParams extends ApiRequestParams {
      * Data used to generate a new <a href="https://stripe.com/docs/api/prices">Price</a> object
      * inline.
      */
-    public Builder setPriceData(PriceData priceData) {
+    public Builder setPriceData(InvoiceItemUpdateParams.PriceData priceData) {
       this.priceData = priceData;
       return this;
     }
@@ -533,8 +533,8 @@ public class InvoiceItemUpdateParams extends ApiRequestParams {
       private Map<String, Object> extraParams;
 
       /** Finalize and obtain parameter instance from this builder. */
-      public Discount build() {
-        return new Discount(this.coupon, this.discount, this.extraParams);
+      public InvoiceItemUpdateParams.Discount build() {
+        return new InvoiceItemUpdateParams.Discount(this.coupon, this.discount, this.extraParams);
       }
 
       /** ID of the coupon to create a new discount for. */
@@ -626,8 +626,8 @@ public class InvoiceItemUpdateParams extends ApiRequestParams {
       private Long start;
 
       /** Finalize and obtain parameter instance from this builder. */
-      public Period build() {
-        return new Period(this.end, this.extraParams, this.start);
+      public InvoiceItemUpdateParams.Period build() {
+        return new InvoiceItemUpdateParams.Period(this.end, this.extraParams, this.start);
       }
 
       /** The end of the period, which must be greater than or equal to the start. */
@@ -749,8 +749,8 @@ public class InvoiceItemUpdateParams extends ApiRequestParams {
       private Object unitAmountDecimal;
 
       /** Finalize and obtain parameter instance from this builder. */
-      public PriceData build() {
-        return new PriceData(
+      public InvoiceItemUpdateParams.PriceData build() {
+        return new InvoiceItemUpdateParams.PriceData(
             this.currency,
             this.extraParams,
             this.product,
@@ -822,7 +822,7 @@ public class InvoiceItemUpdateParams extends ApiRequestParams {
        * {@code inclusive}, {@code exclusive}, or {@code unspecified}. Once specified as either
        * {@code inclusive} or {@code exclusive}, it cannot be changed.
        */
-      public Builder setTaxBehavior(TaxBehavior taxBehavior) {
+      public Builder setTaxBehavior(InvoiceItemUpdateParams.PriceData.TaxBehavior taxBehavior) {
         this.taxBehavior = taxBehavior;
         return this;
       }

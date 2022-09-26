@@ -223,7 +223,8 @@ public class SubscriptionItemCreateParams extends ApiRequestParams {
      * Define thresholds at which an invoice will be sent, and the subscription advanced to a new
      * billing period. When updating, pass an empty string to remove previously-defined thresholds.
      */
-    public Builder setBillingThresholds(BillingThresholds billingThresholds) {
+    public Builder setBillingThresholds(
+        SubscriptionItemCreateParams.BillingThresholds billingThresholds) {
       this.billingThresholds = billingThresholds;
       return this;
     }
@@ -243,7 +244,7 @@ public class SubscriptionItemCreateParams extends ApiRequestParams {
      * SubscriptionItemCreateParams#discounts} for the field documentation.
      */
     @SuppressWarnings("unchecked")
-    public Builder addDiscount(Discount element) {
+    public Builder addDiscount(SubscriptionItemCreateParams.Discount element) {
       if (this.discounts == null || this.discounts instanceof EmptyParam) {
         this.discounts = new ArrayList<SubscriptionItemCreateParams.Discount>();
       }
@@ -257,7 +258,7 @@ public class SubscriptionItemCreateParams extends ApiRequestParams {
      * SubscriptionItemCreateParams#discounts} for the field documentation.
      */
     @SuppressWarnings("unchecked")
-    public Builder addAllDiscount(List<Discount> elements) {
+    public Builder addAllDiscount(List<SubscriptionItemCreateParams.Discount> elements) {
       if (this.discounts == null || this.discounts instanceof EmptyParam) {
         this.discounts = new ArrayList<SubscriptionItemCreateParams.Discount>();
       }
@@ -272,7 +273,7 @@ public class SubscriptionItemCreateParams extends ApiRequestParams {
     }
 
     /** The coupons to redeem into discounts for the subscription item. */
-    public Builder setDiscounts(List<Discount> discounts) {
+    public Builder setDiscounts(List<SubscriptionItemCreateParams.Discount> discounts) {
       this.discounts = discounts;
       return this;
     }
@@ -383,7 +384,8 @@ public class SubscriptionItemCreateParams extends ApiRequestParams {
      * API versions prior to 2019-03-14. See the <a
      * href="https://stripe.com/docs/upgrades#2019-03-14">changelog</a> to learn more.
      */
-    public Builder setPaymentBehavior(PaymentBehavior paymentBehavior) {
+    public Builder setPaymentBehavior(
+        SubscriptionItemCreateParams.PaymentBehavior paymentBehavior) {
       this.paymentBehavior = paymentBehavior;
       return this;
     }
@@ -404,7 +406,7 @@ public class SubscriptionItemCreateParams extends ApiRequestParams {
      * Data used to generate a new <a href="https://stripe.com/docs/api/prices">Price</a> object
      * inline.
      */
-    public Builder setPriceData(PriceData priceData) {
+    public Builder setPriceData(SubscriptionItemCreateParams.PriceData priceData) {
       this.priceData = priceData;
       return this;
     }
@@ -415,7 +417,8 @@ public class SubscriptionItemCreateParams extends ApiRequestParams {
      * billing cycle changes (e.g., when switching plans, resetting {@code
      * billing_cycle_anchor=now}, or starting a trial), or if an item's {@code quantity} changes.
      */
-    public Builder setProrationBehavior(ProrationBehavior prorationBehavior) {
+    public Builder setProrationBehavior(
+        SubscriptionItemCreateParams.ProrationBehavior prorationBehavior) {
       this.prorationBehavior = prorationBehavior;
       return this;
     }
@@ -495,7 +498,7 @@ public class SubscriptionItemCreateParams extends ApiRequestParams {
     }
 
     /** Options that configure the trial on the subscription item. */
-    public Builder setTrial(Trial trial) {
+    public Builder setTrial(SubscriptionItemCreateParams.Trial trial) {
       this.trial = trial;
       return this;
     }
@@ -531,8 +534,8 @@ public class SubscriptionItemCreateParams extends ApiRequestParams {
       private Long usageGte;
 
       /** Finalize and obtain parameter instance from this builder. */
-      public BillingThresholds build() {
-        return new BillingThresholds(this.extraParams, this.usageGte);
+      public SubscriptionItemCreateParams.BillingThresholds build() {
+        return new SubscriptionItemCreateParams.BillingThresholds(this.extraParams, this.usageGte);
       }
 
       /**
@@ -607,8 +610,9 @@ public class SubscriptionItemCreateParams extends ApiRequestParams {
       private Map<String, Object> extraParams;
 
       /** Finalize and obtain parameter instance from this builder. */
-      public Discount build() {
-        return new Discount(this.coupon, this.discount, this.extraParams);
+      public SubscriptionItemCreateParams.Discount build() {
+        return new SubscriptionItemCreateParams.Discount(
+            this.coupon, this.discount, this.extraParams);
       }
 
       /** ID of the coupon to create a new discount for. */
@@ -738,8 +742,8 @@ public class SubscriptionItemCreateParams extends ApiRequestParams {
       private BigDecimal unitAmountDecimal;
 
       /** Finalize and obtain parameter instance from this builder. */
-      public PriceData build() {
-        return new PriceData(
+      public SubscriptionItemCreateParams.PriceData build() {
+        return new SubscriptionItemCreateParams.PriceData(
             this.currency,
             this.extraParams,
             this.product,
@@ -794,7 +798,7 @@ public class SubscriptionItemCreateParams extends ApiRequestParams {
       /**
        * The recurring components of a price such as {@code interval} and {@code interval_count}.
        */
-      public Builder setRecurring(Recurring recurring) {
+      public Builder setRecurring(SubscriptionItemCreateParams.PriceData.Recurring recurring) {
         this.recurring = recurring;
         return this;
       }
@@ -804,7 +808,8 @@ public class SubscriptionItemCreateParams extends ApiRequestParams {
        * {@code inclusive}, {@code exclusive}, or {@code unspecified}. Once specified as either
        * {@code inclusive} or {@code exclusive}, it cannot be changed.
        */
-      public Builder setTaxBehavior(TaxBehavior taxBehavior) {
+      public Builder setTaxBehavior(
+          SubscriptionItemCreateParams.PriceData.TaxBehavior taxBehavior) {
         this.taxBehavior = taxBehavior;
         return this;
       }
@@ -873,8 +878,9 @@ public class SubscriptionItemCreateParams extends ApiRequestParams {
         private Long intervalCount;
 
         /** Finalize and obtain parameter instance from this builder. */
-        public Recurring build() {
-          return new Recurring(this.extraParams, this.interval, this.intervalCount);
+        public SubscriptionItemCreateParams.PriceData.Recurring build() {
+          return new SubscriptionItemCreateParams.PriceData.Recurring(
+              this.extraParams, this.interval, this.intervalCount);
         }
 
         /**
@@ -909,7 +915,8 @@ public class SubscriptionItemCreateParams extends ApiRequestParams {
          * Specifies billing frequency. Either {@code day}, {@code week}, {@code month} or {@code
          * year}.
          */
-        public Builder setInterval(Interval interval) {
+        public Builder setInterval(
+            SubscriptionItemCreateParams.PriceData.Recurring.Interval interval) {
           this.interval = interval;
           return this;
         }
@@ -996,8 +1003,8 @@ public class SubscriptionItemCreateParams extends ApiRequestParams {
       private Type type;
 
       /** Finalize and obtain parameter instance from this builder. */
-      public Trial build() {
-        return new Trial(this.extraParams, this.type);
+      public SubscriptionItemCreateParams.Trial build() {
+        return new SubscriptionItemCreateParams.Trial(this.extraParams, this.type);
       }
 
       /**
@@ -1027,7 +1034,7 @@ public class SubscriptionItemCreateParams extends ApiRequestParams {
       }
 
       /** Determines the type of trial for this item. */
-      public Builder setType(Type type) {
+      public Builder setType(SubscriptionItemCreateParams.Trial.Type type) {
         this.type = type;
         return this;
       }
