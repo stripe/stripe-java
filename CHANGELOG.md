@@ -1,5 +1,10 @@
 # Changelog
 
+## 21.10.0-beta.1 - 2022-09-26
+* [#1447](https://github.com/stripe/stripe-java/pull/1447) API Updates for beta branch
+  * Updated stable APIs to the latest version
+  * Add `FinancingOffer`, `FinancingSummary` and `FinancingTransaction` resources.
+
 ## 21.9.0 - 2022-09-22
 * [#1445](https://github.com/stripe/stripe-java/pull/1445) API Updates
   * Add support for `terms_of_service` on `Checkout.Session.consent_collection`, `Checkout.Session.consent`, `CheckoutSessionCreateParams.consent_collection`, `PaymentLink.consent_collection`, and `PaymentLinkCreateParams.consent_collection`
@@ -60,7 +65,7 @@
   * Change `TreasuryOutboundTransferCreateParams.destination_payment_method` to be optional
   * Add support for new value `customer_cash_balance_transaction.created` on enums `WebhookEndpointCreateParams.enabled_events[]` and `WebhookEndpointUpdateParams.enabled_events[]`
   * Change the return type of `Customer.fundCashBalance` test helper from `CustomerBalanceTransaction` to `CustomerCashBalanceTransaction`.
-    * This would generally be considered a breaking change, but we've worked with all existing users to migrate and are comfortable releasing this as a minor as it is solely a test helper method. This was essentially broken prior to this change. 
+    * This would generally be considered a breaking change, but we've worked with all existing users to migrate and are comfortable releasing this as a minor as it is solely a test helper method. This was essentially broken prior to this change.
 * [#1425](https://github.com/stripe/stripe-java/pull/1425) Add beta readme.md section
 * [#1423](https://github.com/stripe/stripe-java/pull/1423) chore: Remove unused variable from SearchPagingIteratorTest.
 * [#1421](https://github.com/stripe/stripe-java/pull/1421) Add a support section to the readme
