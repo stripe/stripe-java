@@ -19,7 +19,7 @@ public class CouponUpdateParams extends ApiRequestParams {
    * href="https://stripe.com/docs/currencies">supported currency</a>.
    */
   @SerializedName("currency_options")
-  Map<String, CurrencyOption> currencyOptions;
+  Map<String, CouponUpdateParams.CurrencyOption> currencyOptions;
 
   /** Specifies which fields in the response should be expanded. */
   @SerializedName("expand")
@@ -51,7 +51,7 @@ public class CouponUpdateParams extends ApiRequestParams {
   Object name;
 
   private CouponUpdateParams(
-      Map<String, CurrencyOption> currencyOptions,
+      Map<String, CouponUpdateParams.CurrencyOption> currencyOptions,
       List<String> expand,
       Map<String, Object> extraParams,
       Object metadata,
@@ -68,7 +68,7 @@ public class CouponUpdateParams extends ApiRequestParams {
   }
 
   public static class Builder {
-    private Map<String, CurrencyOption> currencyOptions;
+    private Map<String, CouponUpdateParams.CurrencyOption> currencyOptions;
 
     private List<String> expand;
 
@@ -89,7 +89,7 @@ public class CouponUpdateParams extends ApiRequestParams {
      * `put/putAll` call, and subsequent calls add additional key/value pairs to the original map.
      * See {@link CouponUpdateParams#currencyOptions} for the field documentation.
      */
-    public Builder putCurrencyOption(String key, CurrencyOption value) {
+    public Builder putCurrencyOption(String key, CouponUpdateParams.CurrencyOption value) {
       if (this.currencyOptions == null) {
         this.currencyOptions = new HashMap<>();
       }
@@ -102,7 +102,7 @@ public class CouponUpdateParams extends ApiRequestParams {
      * `put/putAll` call, and subsequent calls add additional key/value pairs to the original map.
      * See {@link CouponUpdateParams#currencyOptions} for the field documentation.
      */
-    public Builder putAllCurrencyOption(Map<String, CurrencyOption> map) {
+    public Builder putAllCurrencyOption(Map<String, CouponUpdateParams.CurrencyOption> map) {
       if (this.currencyOptions == null) {
         this.currencyOptions = new HashMap<>();
       }
@@ -261,8 +261,8 @@ public class CouponUpdateParams extends ApiRequestParams {
       private Map<String, Object> extraParams;
 
       /** Finalize and obtain parameter instance from this builder. */
-      public CurrencyOption build() {
-        return new CurrencyOption(this.amountOff, this.extraParams);
+      public CouponUpdateParams.CurrencyOption build() {
+        return new CouponUpdateParams.CurrencyOption(this.amountOff, this.extraParams);
       }
 
       /** A positive integer representing the amount to subtract from an invoice total. */

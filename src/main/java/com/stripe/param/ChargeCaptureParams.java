@@ -257,7 +257,7 @@ public class ChargeCaptureParams extends ApiRequestParams {
      * destination charge. <a href="https://stripe.com/docs/connect/destination-charges">See the
      * Connect documentation</a> for details.
      */
-    public Builder setTransferData(TransferData transferData) {
+    public Builder setTransferData(ChargeCaptureParams.TransferData transferData) {
       this.transferData = transferData;
       return this;
     }
@@ -307,8 +307,8 @@ public class ChargeCaptureParams extends ApiRequestParams {
       private Map<String, Object> extraParams;
 
       /** Finalize and obtain parameter instance from this builder. */
-      public TransferData build() {
-        return new TransferData(this.amount, this.extraParams);
+      public ChargeCaptureParams.TransferData build() {
+        return new ChargeCaptureParams.TransferData(this.amount, this.extraParams);
       }
 
       /**

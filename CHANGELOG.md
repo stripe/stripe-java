@@ -1,5 +1,51 @@
 # Changelog
 
+## 21.9.0 - 2022-09-22
+* [#1445](https://github.com/stripe/stripe-java/pull/1445) API Updates
+  * Add support for `terms_of_service` on `Checkout.Session.consent_collection`, `Checkout.Session.consent`, `CheckoutSessionCreateParams.consent_collection`, `PaymentLink.consent_collection`, and `PaymentLinkCreateParams.consent_collection`
+  * ⚠️ Remove support for `plan` on `CheckoutSessionCreateParams.payment_method_options.card.installments`. The property was mistakenly released and never worked.
+  * Add support for `amount` on `IssuingDisputeCreateParams` and `IssuingDisputeUpdateParams`
+  * Add support for `statement_descriptor` on `PaymentIntentIncrementAuthorizationParams`
+  * Add `upcomingLines` method to `Invoice` resource.
+
+## 21.8.0 - 2022-09-15
+* [#1444](https://github.com/stripe/stripe-java/pull/1444) API Updates
+  * Add support for `pix` on `Charge.payment_method_details`, `Checkout.Session.payment_method_options`, `CheckoutSessionCreateParams.payment_method_options`, `PaymentIntent.payment_method_options`, `PaymentIntentConfirmParams.payment_method_data`, `PaymentIntentConfirmParams.payment_method_options`, `PaymentIntentCreateParams.payment_method_data`, `PaymentIntentCreateParams.payment_method_options`, `PaymentIntentUpdateParams.payment_method_data`, `PaymentIntentUpdateParams.payment_method_options`, `PaymentMethodCreateParams`, `PaymentMethod`, `SetupIntentConfirmParams.payment_method_data`, `SetupIntentCreateParams.payment_method_data`, and `SetupIntentUpdateParams.payment_method_data`
+  * Add support for new value `pix` on enum `CheckoutSessionCreateParams.payment_method_types[]`
+  * Add support for new value `pix` on enums `CustomerListPaymentMethodsParams.type` and `PaymentMethodListParams.type`
+  * Add support for `from_invoice` on `InvoiceCreateParams` and `Invoice`
+  * Add support for `latest_revision` on `Invoice`
+  * Add support for new value `pix` on enums `PaymentIntentConfirmParams.payment_method_data.type`, `PaymentIntentCreateParams.payment_method_data.type`, `PaymentIntentUpdateParams.payment_method_data.type`, `SetupIntentConfirmParams.payment_method_data.type`, `SetupIntentCreateParams.payment_method_data.type`, and `SetupIntentUpdateParams.payment_method_data.type`
+  * Add support for `pix_display_qr_code` on `PaymentIntent.next_action`
+  * Add support for new value `pix` on enums `PaymentLinkCreateParams.payment_method_types[]` and `PaymentLinkUpdateParams.payment_method_types[]`
+  * Add support for new value `pix` on enum `PaymentMethodCreateParams.type`
+  * Add support for `created` on `Treasury.CreditReversal` and `Treasury.DebitReversal`
+
+## 21.7.0 - 2022-09-09
+* [#1435](https://github.com/stripe/stripe-java/pull/1435) API Updates
+  * Add support for `require_signature` on `Issuing.Card.shipping` and `IssuingCardCreateParams.shipping`
+
+## 21.6.0 - 2022-09-06
+* [#1434](https://github.com/stripe/stripe-java/pull/1434) API Updates
+  * Add support for new value `terminal_reader_splashscreen` on enum `FileListParams.purpose`
+  * Fix `LineItem.Discount.discount` to reference the correct `Discount` class (`com.stripe.model.Discount`)
+
+## 21.5.0 - 2022-08-31
+* [#1433](https://github.com/stripe/stripe-java/pull/1433) API Updates
+  * Add support for new values `de-CH`, `en-CH`, `en-PL`, `en-PT`, `fr-CH`, `it-CH`, `pl-PL`, and `pt-PT` on enums `OrderCreateParams.payment.settings.payment_method_options.klarna.preferred_locale`, `OrderUpdateParams.payment.settings.payment_method_options.klarna.preferred_locale`, `PaymentIntentConfirmParams.payment_method_options.klarna.preferred_locale`, `PaymentIntentCreateParams.payment_method_options.klarna.preferred_locale`, and `PaymentIntentUpdateParams.payment_method_options.klarna.preferred_locale`
+  * Add support for `description` on `PaymentLink.subscription_data` and `PaymentLinkCreateParams.subscription_data`
+* [#1432](https://github.com/stripe/stripe-java/pull/1432) Update README badge
+* [#1431](https://github.com/stripe/stripe-java/pull/1431) Update coveralls to only run for one java version
+
+## 21.4.0 - 2022-08-26
+* [#1430](https://github.com/stripe/stripe-java/pull/1430) API Updates
+  * Add support for `login_page` on `BillingPortal.Configuration`, `BillingPortalConfigurationCreateParams`, and `BillingPortalConfigurationUpdateParams`
+  * Add support for `customs` and `phone_number` on `Issuing.Card.shipping` and `IssuingCardCreateParams.shipping`
+  * Add support for new value `deutsche_bank_ag` on enums `PaymentIntentConfirmParams.payment_method_data.eps.bank`, `PaymentIntentCreateParams.payment_method_data.eps.bank`, `PaymentIntentUpdateParams.payment_method_data.eps.bank`, `PaymentMethodCreateParams.eps.bank`, `SetupIntentConfirmParams.payment_method_data.eps.bank`, `SetupIntentCreateParams.payment_method_data.eps.bank`, and `SetupIntentUpdateParams.payment_method_data.eps.bank`
+  * Add support for `description` on `Quote.subscription_data`, `QuoteCreateParams.subscription_data`, `QuoteUpdateParams.subscription_data`, `SubscriptionSchedule.default_settings`, `SubscriptionSchedule.phases[]`, `SubscriptionScheduleCreateParams.default_settings`, `SubscriptionScheduleCreateParams.phases[]`, `SubscriptionScheduleUpdateParams.default_settings`, and `SubscriptionScheduleUpdateParams.phases[]`
+* [#1428](https://github.com/stripe/stripe-java/pull/1428) Show test coverage in README
+* [#1427](https://github.com/stripe/stripe-java/pull/1427) Update README.md to clarify that API version can only be change in beta
+
 ## 21.4.0-beta.1 - 2022-08-26
 * [#1429](https://github.com/stripe/stripe-java/pull/1429) API Updates for beta branch
   * Updated stable APIs to the latest version

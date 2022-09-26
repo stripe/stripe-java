@@ -132,7 +132,7 @@ public class EventListParams extends ApiRequestParams {
           this.types);
     }
 
-    public Builder setCreated(Created created) {
+    public Builder setCreated(EventListParams.Created created) {
       this.created = created;
       return this;
     }
@@ -321,8 +321,8 @@ public class EventListParams extends ApiRequestParams {
       private Long lte;
 
       /** Finalize and obtain parameter instance from this builder. */
-      public Created build() {
-        return new Created(this.extraParams, this.gt, this.gte, this.lt, this.lte);
+      public EventListParams.Created build() {
+        return new EventListParams.Created(this.extraParams, this.gt, this.gte, this.lt, this.lte);
       }
 
       /**

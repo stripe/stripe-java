@@ -222,7 +222,7 @@ public class QuoteListParams extends ApiRequestParams {
     }
 
     /** The status of the quote. */
-    public Builder setStatus(Status status) {
+    public Builder setStatus(QuoteListParams.Status status) {
       this.status = status;
       return this;
     }

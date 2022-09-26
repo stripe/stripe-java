@@ -214,20 +214,21 @@ public class OutboundPaymentCreateParams extends ApiRequestParams {
      * {@code destination_payment_method}.
      */
     public Builder setDestinationPaymentMethodData(
-        DestinationPaymentMethodData destinationPaymentMethodData) {
+        OutboundPaymentCreateParams.DestinationPaymentMethodData destinationPaymentMethodData) {
       this.destinationPaymentMethodData = destinationPaymentMethodData;
       return this;
     }
 
     /** Payment method-specific configuration for this OutboundPayment. */
     public Builder setDestinationPaymentMethodOptions(
-        DestinationPaymentMethodOptions destinationPaymentMethodOptions) {
+        OutboundPaymentCreateParams.DestinationPaymentMethodOptions
+            destinationPaymentMethodOptions) {
       this.destinationPaymentMethodOptions = destinationPaymentMethodOptions;
       return this;
     }
 
     /** End user details. */
-    public Builder setEndUserDetails(EndUserDetails endUserDetails) {
+    public Builder setEndUserDetails(OutboundPaymentCreateParams.EndUserDetails endUserDetails) {
       this.endUserDetails = endUserDetails;
       return this;
     }
@@ -407,8 +408,8 @@ public class OutboundPaymentCreateParams extends ApiRequestParams {
       private UsBankAccount usBankAccount;
 
       /** Finalize and obtain parameter instance from this builder. */
-      public DestinationPaymentMethodData build() {
-        return new DestinationPaymentMethodData(
+      public OutboundPaymentCreateParams.DestinationPaymentMethodData build() {
+        return new OutboundPaymentCreateParams.DestinationPaymentMethodData(
             this.billingDetails,
             this.extraParams,
             this.financialAccount,
@@ -421,7 +422,8 @@ public class OutboundPaymentCreateParams extends ApiRequestParams {
        * Billing information associated with the PaymentMethod that may be used or required by
        * particular types of payment methods.
        */
-      public Builder setBillingDetails(BillingDetails billingDetails) {
+      public Builder setBillingDetails(
+          OutboundPaymentCreateParams.DestinationPaymentMethodData.BillingDetails billingDetails) {
         this.billingDetails = billingDetails;
         return this;
       }
@@ -496,13 +498,14 @@ public class OutboundPaymentCreateParams extends ApiRequestParams {
        * name matching this value. It contains additional information specific to the PaymentMethod
        * type.
        */
-      public Builder setType(Type type) {
+      public Builder setType(OutboundPaymentCreateParams.DestinationPaymentMethodData.Type type) {
         this.type = type;
         return this;
       }
 
       /** Required hash if type is set to {@code us_bank_account}. */
-      public Builder setUsBankAccount(UsBankAccount usBankAccount) {
+      public Builder setUsBankAccount(
+          OutboundPaymentCreateParams.DestinationPaymentMethodData.UsBankAccount usBankAccount) {
         this.usBankAccount = usBankAccount;
         return this;
       }
@@ -564,13 +567,15 @@ public class OutboundPaymentCreateParams extends ApiRequestParams {
         private String phone;
 
         /** Finalize and obtain parameter instance from this builder. */
-        public BillingDetails build() {
-          return new BillingDetails(
+        public OutboundPaymentCreateParams.DestinationPaymentMethodData.BillingDetails build() {
+          return new OutboundPaymentCreateParams.DestinationPaymentMethodData.BillingDetails(
               this.address, this.email, this.extraParams, this.name, this.phone);
         }
 
         /** Billing address. */
-        public Builder setAddress(Address address) {
+        public Builder setAddress(
+            OutboundPaymentCreateParams.DestinationPaymentMethodData.BillingDetails.Address
+                address) {
           this.address = address;
           return this;
         }
@@ -712,8 +717,10 @@ public class OutboundPaymentCreateParams extends ApiRequestParams {
           private String state;
 
           /** Finalize and obtain parameter instance from this builder. */
-          public Address build() {
-            return new Address(
+          public OutboundPaymentCreateParams.DestinationPaymentMethodData.BillingDetails.Address
+              build() {
+            return new OutboundPaymentCreateParams.DestinationPaymentMethodData.BillingDetails
+                .Address(
                 this.city,
                 this.country,
                 this.extraParams,
@@ -859,8 +866,8 @@ public class OutboundPaymentCreateParams extends ApiRequestParams {
         private String routingNumber;
 
         /** Finalize and obtain parameter instance from this builder. */
-        public UsBankAccount build() {
-          return new UsBankAccount(
+        public OutboundPaymentCreateParams.DestinationPaymentMethodData.UsBankAccount build() {
+          return new OutboundPaymentCreateParams.DestinationPaymentMethodData.UsBankAccount(
               this.accountHolderType,
               this.accountNumber,
               this.accountType,
@@ -870,7 +877,9 @@ public class OutboundPaymentCreateParams extends ApiRequestParams {
         }
 
         /** Account holder type: individual or company. */
-        public Builder setAccountHolderType(AccountHolderType accountHolderType) {
+        public Builder setAccountHolderType(
+            OutboundPaymentCreateParams.DestinationPaymentMethodData.UsBankAccount.AccountHolderType
+                accountHolderType) {
           this.accountHolderType = accountHolderType;
           return this;
         }
@@ -882,7 +891,9 @@ public class OutboundPaymentCreateParams extends ApiRequestParams {
         }
 
         /** Account type: checkings or savings. Defaults to checking if omitted. */
-        public Builder setAccountType(AccountType accountType) {
+        public Builder setAccountType(
+            OutboundPaymentCreateParams.DestinationPaymentMethodData.UsBankAccount.AccountType
+                accountType) {
           this.accountType = accountType;
           return this;
         }
@@ -1007,8 +1018,9 @@ public class OutboundPaymentCreateParams extends ApiRequestParams {
       private Object usBankAccount;
 
       /** Finalize and obtain parameter instance from this builder. */
-      public DestinationPaymentMethodOptions build() {
-        return new DestinationPaymentMethodOptions(this.extraParams, this.usBankAccount);
+      public OutboundPaymentCreateParams.DestinationPaymentMethodOptions build() {
+        return new OutboundPaymentCreateParams.DestinationPaymentMethodOptions(
+            this.extraParams, this.usBankAccount);
       }
 
       /**
@@ -1040,7 +1052,8 @@ public class OutboundPaymentCreateParams extends ApiRequestParams {
       }
 
       /** Optional fields for {@code us_bank_account}. */
-      public Builder setUsBankAccount(UsBankAccount usBankAccount) {
+      public Builder setUsBankAccount(
+          OutboundPaymentCreateParams.DestinationPaymentMethodOptions.UsBankAccount usBankAccount) {
         this.usBankAccount = usBankAccount;
         return this;
       }
@@ -1085,8 +1098,9 @@ public class OutboundPaymentCreateParams extends ApiRequestParams {
         private Network network;
 
         /** Finalize and obtain parameter instance from this builder. */
-        public UsBankAccount build() {
-          return new UsBankAccount(this.extraParams, this.network);
+        public OutboundPaymentCreateParams.DestinationPaymentMethodOptions.UsBankAccount build() {
+          return new OutboundPaymentCreateParams.DestinationPaymentMethodOptions.UsBankAccount(
+              this.extraParams, this.network);
         }
 
         /**
@@ -1123,7 +1137,9 @@ public class OutboundPaymentCreateParams extends ApiRequestParams {
          * The US bank account network that must be used for this OutboundPayment. If not set, we
          * will default to the PaymentMethod's preferred network.
          */
-        public Builder setNetwork(Network network) {
+        public Builder setNetwork(
+            OutboundPaymentCreateParams.DestinationPaymentMethodOptions.UsBankAccount.Network
+                network) {
           this.network = network;
           return this;
         }
@@ -1189,8 +1205,9 @@ public class OutboundPaymentCreateParams extends ApiRequestParams {
       private Boolean present;
 
       /** Finalize and obtain parameter instance from this builder. */
-      public EndUserDetails build() {
-        return new EndUserDetails(this.extraParams, this.ipAddress, this.present);
+      public OutboundPaymentCreateParams.EndUserDetails build() {
+        return new OutboundPaymentCreateParams.EndUserDetails(
+            this.extraParams, this.ipAddress, this.present);
       }
 
       /**

@@ -195,13 +195,13 @@ public class ReceivedCreditCreateParams extends ApiRequestParams {
 
     /** Initiating payment method details for the object. */
     public Builder setInitiatingPaymentMethodDetails(
-        InitiatingPaymentMethodDetails initiatingPaymentMethodDetails) {
+        ReceivedCreditCreateParams.InitiatingPaymentMethodDetails initiatingPaymentMethodDetails) {
       this.initiatingPaymentMethodDetails = initiatingPaymentMethodDetails;
       return this;
     }
 
     /** The rails used for the object. */
-    public Builder setNetwork(Network network) {
+    public Builder setNetwork(ReceivedCreditCreateParams.Network network) {
       this.network = network;
       return this;
     }
@@ -251,8 +251,9 @@ public class ReceivedCreditCreateParams extends ApiRequestParams {
       private UsBankAccount usBankAccount;
 
       /** Finalize and obtain parameter instance from this builder. */
-      public InitiatingPaymentMethodDetails build() {
-        return new InitiatingPaymentMethodDetails(this.extraParams, this.type, this.usBankAccount);
+      public ReceivedCreditCreateParams.InitiatingPaymentMethodDetails build() {
+        return new ReceivedCreditCreateParams.InitiatingPaymentMethodDetails(
+            this.extraParams, this.type, this.usBankAccount);
       }
 
       /**
@@ -284,13 +285,14 @@ public class ReceivedCreditCreateParams extends ApiRequestParams {
       }
 
       /** The source type. */
-      public Builder setType(Type type) {
+      public Builder setType(ReceivedCreditCreateParams.InitiatingPaymentMethodDetails.Type type) {
         this.type = type;
         return this;
       }
 
       /** Optional fields for {@code us_bank_account}. */
-      public Builder setUsBankAccount(UsBankAccount usBankAccount) {
+      public Builder setUsBankAccount(
+          ReceivedCreditCreateParams.InitiatingPaymentMethodDetails.UsBankAccount usBankAccount) {
         this.usBankAccount = usBankAccount;
         return this;
       }
@@ -344,8 +346,8 @@ public class ReceivedCreditCreateParams extends ApiRequestParams {
         private String routingNumber;
 
         /** Finalize and obtain parameter instance from this builder. */
-        public UsBankAccount build() {
-          return new UsBankAccount(
+        public ReceivedCreditCreateParams.InitiatingPaymentMethodDetails.UsBankAccount build() {
+          return new ReceivedCreditCreateParams.InitiatingPaymentMethodDetails.UsBankAccount(
               this.accountHolderName, this.accountNumber, this.extraParams, this.routingNumber);
         }
 

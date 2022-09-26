@@ -128,7 +128,7 @@ public class ReportRunCreateParams extends ApiRequestParams {
      * href="https://stripe.com/docs/reporting/statements/api">API Access to Reports</a>
      * documentation.
      */
-    public Builder setParameters(Parameters parameters) {
+    public Builder setParameters(ReportRunCreateParams.Parameters parameters) {
       this.parameters = parameters;
       return this;
     }
@@ -238,8 +238,8 @@ public class ReportRunCreateParams extends ApiRequestParams {
       private Timezone timezone;
 
       /** Finalize and obtain parameter instance from this builder. */
-      public Parameters build() {
-        return new Parameters(
+      public ReportRunCreateParams.Parameters build() {
+        return new ReportRunCreateParams.Parameters(
             this.columns,
             this.connectedAccount,
             this.currency,
@@ -334,7 +334,8 @@ public class ReportRunCreateParams extends ApiRequestParams {
       }
 
       /** Category of balance transactions to be included in the report run. */
-      public Builder setReportingCategory(ReportingCategory reportingCategory) {
+      public Builder setReportingCategory(
+          ReportRunCreateParams.Parameters.ReportingCategory reportingCategory) {
         this.reportingCategory = reportingCategory;
         return this;
       }
@@ -345,7 +346,7 @@ public class ReportRunCreateParams extends ApiRequestParams {
        * href="http://www.iana.org/time-zones">IANA Time Zone Database</a>. Has no effect on {@code
        * interval_start} or {@code interval_end}.
        */
-      public Builder setTimezone(Timezone timezone) {
+      public Builder setTimezone(ReportRunCreateParams.Parameters.Timezone timezone) {
         this.timezone = timezone;
         return this;
       }

@@ -208,7 +208,7 @@ public class DebitReversalListParams extends ApiRequestParams {
     }
 
     /** Only return DebitReversals for a given resolution. */
-    public Builder setResolution(Resolution resolution) {
+    public Builder setResolution(DebitReversalListParams.Resolution resolution) {
       this.resolution = resolution;
       return this;
     }
@@ -225,7 +225,7 @@ public class DebitReversalListParams extends ApiRequestParams {
     }
 
     /** Only return DebitReversals for a given status. */
-    public Builder setStatus(Status status) {
+    public Builder setStatus(DebitReversalListParams.Status status) {
       this.status = status;
       return this;
     }

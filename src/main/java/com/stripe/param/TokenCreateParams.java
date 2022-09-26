@@ -3,7 +3,6 @@ package com.stripe.param;
 
 import com.google.gson.annotations.SerializedName;
 import com.stripe.net.ApiRequestParams;
-import com.stripe.net.ApiRequestParams.EnumParam;
 import com.stripe.param.common.EmptyParam;
 import java.math.BigDecimal;
 import java.util.ArrayList;
@@ -119,18 +118,18 @@ public class TokenCreateParams extends ApiRequestParams {
     }
 
     /** Information for the account this token will represent. */
-    public Builder setAccount(Account account) {
+    public Builder setAccount(TokenCreateParams.Account account) {
       this.account = account;
       return this;
     }
 
     /** The bank account this token will represent. */
-    public Builder setBankAccount(BankAccount bankAccount) {
+    public Builder setBankAccount(TokenCreateParams.BankAccount bankAccount) {
       this.bankAccount = bankAccount;
       return this;
     }
 
-    public Builder setCard(Card card) {
+    public Builder setCard(TokenCreateParams.Card card) {
       this.card = card;
       return this;
     }
@@ -154,7 +153,7 @@ public class TokenCreateParams extends ApiRequestParams {
     }
 
     /** The updated CVC value this token will represent. */
-    public Builder setCvcUpdate(CvcUpdate cvcUpdate) {
+    public Builder setCvcUpdate(TokenCreateParams.CvcUpdate cvcUpdate) {
       this.cvcUpdate = cvcUpdate;
       return this;
     }
@@ -212,13 +211,13 @@ public class TokenCreateParams extends ApiRequestParams {
     }
 
     /** Information for the person this token will represent. */
-    public Builder setPerson(Person person) {
+    public Builder setPerson(TokenCreateParams.Person person) {
       this.person = person;
       return this;
     }
 
     /** The PII this token will represent. */
-    public Builder setPii(Pii pii) {
+    public Builder setPii(TokenCreateParams.Pii pii) {
       this.pii = pii;
       return this;
     }
@@ -285,8 +284,8 @@ public class TokenCreateParams extends ApiRequestParams {
       private Boolean tosShownAndAccepted;
 
       /** Finalize and obtain parameter instance from this builder. */
-      public Account build() {
-        return new Account(
+      public TokenCreateParams.Account build() {
+        return new TokenCreateParams.Account(
             this.businessType,
             this.company,
             this.extraParams,
@@ -295,13 +294,13 @@ public class TokenCreateParams extends ApiRequestParams {
       }
 
       /** The business type. */
-      public Builder setBusinessType(BusinessType businessType) {
+      public Builder setBusinessType(TokenCreateParams.Account.BusinessType businessType) {
         this.businessType = businessType;
         return this;
       }
 
       /** Information about the company or business. */
-      public Builder setCompany(Company company) {
+      public Builder setCompany(TokenCreateParams.Account.Company company) {
         this.company = company;
         return this;
       }
@@ -333,7 +332,7 @@ public class TokenCreateParams extends ApiRequestParams {
       }
 
       /** Information about the person represented by the account. */
-      public Builder setIndividual(Individual individual) {
+      public Builder setIndividual(TokenCreateParams.Account.Individual individual) {
         this.individual = individual;
         return this;
       }
@@ -445,7 +444,7 @@ public class TokenCreateParams extends ApiRequestParams {
        * structure</a> for more details.
        */
       @SerializedName("structure")
-      EnumParam structure;
+      ApiRequestParams.EnumParam structure;
 
       /**
        * The business ID number of the company, as appropriate for the company’s country. (Examples
@@ -484,7 +483,7 @@ public class TokenCreateParams extends ApiRequestParams {
           Boolean ownershipDeclarationShownAndSigned,
           String phone,
           String registrationNumber,
-          EnumParam structure,
+          ApiRequestParams.EnumParam structure,
           String taxId,
           String taxIdRegistrar,
           String vatId,
@@ -543,7 +542,7 @@ public class TokenCreateParams extends ApiRequestParams {
 
         private String registrationNumber;
 
-        private EnumParam structure;
+        private ApiRequestParams.EnumParam structure;
 
         private String taxId;
 
@@ -554,8 +553,8 @@ public class TokenCreateParams extends ApiRequestParams {
         private Verification verification;
 
         /** Finalize and obtain parameter instance from this builder. */
-        public Company build() {
-          return new Company(
+        public TokenCreateParams.Account.Company build() {
+          return new TokenCreateParams.Account.Company(
               this.address,
               this.addressKana,
               this.addressKanji,
@@ -578,19 +577,20 @@ public class TokenCreateParams extends ApiRequestParams {
         }
 
         /** The company's primary address. */
-        public Builder setAddress(Address address) {
+        public Builder setAddress(TokenCreateParams.Account.Company.Address address) {
           this.address = address;
           return this;
         }
 
         /** The Kana variation of the company's primary address (Japan only). */
-        public Builder setAddressKana(AddressKana addressKana) {
+        public Builder setAddressKana(TokenCreateParams.Account.Company.AddressKana addressKana) {
           this.addressKana = addressKana;
           return this;
         }
 
         /** The Kanji variation of the company's primary address (Japan only). */
-        public Builder setAddressKanji(AddressKanji addressKanji) {
+        public Builder setAddressKanji(
+            TokenCreateParams.Account.Company.AddressKanji addressKanji) {
           this.addressKanji = addressKanji;
           return this;
         }
@@ -679,7 +679,8 @@ public class TokenCreateParams extends ApiRequestParams {
          * This hash is used to attest that the beneficial owner information provided to Stripe is
          * both current and correct.
          */
-        public Builder setOwnershipDeclaration(OwnershipDeclaration ownershipDeclaration) {
+        public Builder setOwnershipDeclaration(
+            TokenCreateParams.Account.Company.OwnershipDeclaration ownershipDeclaration) {
           this.ownershipDeclaration = ownershipDeclaration;
           return this;
         }
@@ -716,7 +717,7 @@ public class TokenCreateParams extends ApiRequestParams {
          * href="https://stripe.com/docs/connect/identity-verification#business-structure">Business
          * structure</a> for more details.
          */
-        public Builder setStructure(Structure structure) {
+        public Builder setStructure(TokenCreateParams.Account.Company.Structure structure) {
           this.structure = structure;
           return this;
         }
@@ -757,7 +758,8 @@ public class TokenCreateParams extends ApiRequestParams {
         }
 
         /** Information on the verification state of the company. */
-        public Builder setVerification(Verification verification) {
+        public Builder setVerification(
+            TokenCreateParams.Account.Company.Verification verification) {
           this.verification = verification;
           return this;
         }
@@ -839,8 +841,8 @@ public class TokenCreateParams extends ApiRequestParams {
           private String state;
 
           /** Finalize and obtain parameter instance from this builder. */
-          public Address build() {
-            return new Address(
+          public TokenCreateParams.Account.Company.Address build() {
+            return new TokenCreateParams.Account.Company.Address(
                 this.city,
                 this.country,
                 this.extraParams,
@@ -1003,8 +1005,8 @@ public class TokenCreateParams extends ApiRequestParams {
           private String town;
 
           /** Finalize and obtain parameter instance from this builder. */
-          public AddressKana build() {
-            return new AddressKana(
+          public TokenCreateParams.Account.Company.AddressKana build() {
+            return new TokenCreateParams.Account.Company.AddressKana(
                 this.city,
                 this.country,
                 this.extraParams,
@@ -1174,8 +1176,8 @@ public class TokenCreateParams extends ApiRequestParams {
           private String town;
 
           /** Finalize and obtain parameter instance from this builder. */
-          public AddressKanji build() {
-            return new AddressKanji(
+          public TokenCreateParams.Account.Company.AddressKanji build() {
+            return new TokenCreateParams.Account.Company.AddressKanji(
                 this.city,
                 this.country,
                 this.extraParams,
@@ -1307,8 +1309,9 @@ public class TokenCreateParams extends ApiRequestParams {
           private String userAgent;
 
           /** Finalize and obtain parameter instance from this builder. */
-          public OwnershipDeclaration build() {
-            return new OwnershipDeclaration(this.date, this.extraParams, this.ip, this.userAgent);
+          public TokenCreateParams.Account.Company.OwnershipDeclaration build() {
+            return new TokenCreateParams.Account.Company.OwnershipDeclaration(
+                this.date, this.extraParams, this.ip, this.userAgent);
           }
 
           /** The Unix timestamp marking when the beneficial owner attestation was made. */
@@ -1390,12 +1393,14 @@ public class TokenCreateParams extends ApiRequestParams {
           private Map<String, Object> extraParams;
 
           /** Finalize and obtain parameter instance from this builder. */
-          public Verification build() {
-            return new Verification(this.document, this.extraParams);
+          public TokenCreateParams.Account.Company.Verification build() {
+            return new TokenCreateParams.Account.Company.Verification(
+                this.document, this.extraParams);
           }
 
           /** A document verifying the business. */
-          public Builder setDocument(Document document) {
+          public Builder setDocument(
+              TokenCreateParams.Account.Company.Verification.Document document) {
             this.document = document;
             return this;
           }
@@ -1479,8 +1484,9 @@ public class TokenCreateParams extends ApiRequestParams {
             private String front;
 
             /** Finalize and obtain parameter instance from this builder. */
-            public Document build() {
-              return new Document(this.back, this.extraParams, this.front);
+            public TokenCreateParams.Account.Company.Verification.Document build() {
+              return new TokenCreateParams.Account.Company.Verification.Document(
+                  this.back, this.extraParams, this.front);
             }
 
             /**
@@ -1835,8 +1841,8 @@ public class TokenCreateParams extends ApiRequestParams {
         private Verification verification;
 
         /** Finalize and obtain parameter instance from this builder. */
-        public Individual build() {
-          return new Individual(
+        public TokenCreateParams.Account.Individual build() {
+          return new TokenCreateParams.Account.Individual(
               this.address,
               this.addressKana,
               this.addressKanji,
@@ -1863,25 +1869,27 @@ public class TokenCreateParams extends ApiRequestParams {
         }
 
         /** The individual's primary address. */
-        public Builder setAddress(Address address) {
+        public Builder setAddress(TokenCreateParams.Account.Individual.Address address) {
           this.address = address;
           return this;
         }
 
         /** The Kana variation of the the individual's primary address (Japan only). */
-        public Builder setAddressKana(AddressKana addressKana) {
+        public Builder setAddressKana(
+            TokenCreateParams.Account.Individual.AddressKana addressKana) {
           this.addressKana = addressKana;
           return this;
         }
 
         /** The Kanji variation of the the individual's primary address (Japan only). */
-        public Builder setAddressKanji(AddressKanji addressKanji) {
+        public Builder setAddressKanji(
+            TokenCreateParams.Account.Individual.AddressKanji addressKanji) {
           this.addressKanji = addressKanji;
           return this;
         }
 
         /** The individual's date of birth. */
-        public Builder setDob(Dob dob) {
+        public Builder setDob(TokenCreateParams.Account.Individual.Dob dob) {
           this.dob = dob;
           return this;
         }
@@ -2106,13 +2114,15 @@ public class TokenCreateParams extends ApiRequestParams {
          * related persons, declares that they hold or have held an important public job or
          * function, in any jurisdiction.
          */
-        public Builder setPoliticalExposure(PoliticalExposure politicalExposure) {
+        public Builder setPoliticalExposure(
+            TokenCreateParams.Account.Individual.PoliticalExposure politicalExposure) {
           this.politicalExposure = politicalExposure;
           return this;
         }
 
         /** The individual's registered address. */
-        public Builder setRegisteredAddress(RegisteredAddress registeredAddress) {
+        public Builder setRegisteredAddress(
+            TokenCreateParams.Account.Individual.RegisteredAddress registeredAddress) {
           this.registeredAddress = registeredAddress;
           return this;
         }
@@ -2124,7 +2134,8 @@ public class TokenCreateParams extends ApiRequestParams {
         }
 
         /** The individual's verification document information. */
-        public Builder setVerification(Verification verification) {
+        public Builder setVerification(
+            TokenCreateParams.Account.Individual.Verification verification) {
           this.verification = verification;
           return this;
         }
@@ -2206,8 +2217,8 @@ public class TokenCreateParams extends ApiRequestParams {
           private String state;
 
           /** Finalize and obtain parameter instance from this builder. */
-          public Address build() {
-            return new Address(
+          public TokenCreateParams.Account.Individual.Address build() {
+            return new TokenCreateParams.Account.Individual.Address(
                 this.city,
                 this.country,
                 this.extraParams,
@@ -2370,8 +2381,8 @@ public class TokenCreateParams extends ApiRequestParams {
           private String town;
 
           /** Finalize and obtain parameter instance from this builder. */
-          public AddressKana build() {
-            return new AddressKana(
+          public TokenCreateParams.Account.Individual.AddressKana build() {
+            return new TokenCreateParams.Account.Individual.AddressKana(
                 this.city,
                 this.country,
                 this.extraParams,
@@ -2541,8 +2552,8 @@ public class TokenCreateParams extends ApiRequestParams {
           private String town;
 
           /** Finalize and obtain parameter instance from this builder. */
-          public AddressKanji build() {
-            return new AddressKanji(
+          public TokenCreateParams.Account.Individual.AddressKanji build() {
+            return new TokenCreateParams.Account.Individual.AddressKanji(
                 this.city,
                 this.country,
                 this.extraParams,
@@ -2673,8 +2684,9 @@ public class TokenCreateParams extends ApiRequestParams {
           private Long year;
 
           /** Finalize and obtain parameter instance from this builder. */
-          public Dob build() {
-            return new Dob(this.day, this.extraParams, this.month, this.year);
+          public TokenCreateParams.Account.Individual.Dob build() {
+            return new TokenCreateParams.Account.Individual.Dob(
+                this.day, this.extraParams, this.month, this.year);
           }
 
           /** The day of birth, between 1 and 31. */
@@ -2801,8 +2813,8 @@ public class TokenCreateParams extends ApiRequestParams {
           private String state;
 
           /** Finalize and obtain parameter instance from this builder. */
-          public RegisteredAddress build() {
-            return new RegisteredAddress(
+          public TokenCreateParams.Account.Individual.RegisteredAddress build() {
+            return new TokenCreateParams.Account.Individual.RegisteredAddress(
                 this.city,
                 this.country,
                 this.extraParams,
@@ -2925,21 +2937,25 @@ public class TokenCreateParams extends ApiRequestParams {
           private Map<String, Object> extraParams;
 
           /** Finalize and obtain parameter instance from this builder. */
-          public Verification build() {
-            return new Verification(this.additionalDocument, this.document, this.extraParams);
+          public TokenCreateParams.Account.Individual.Verification build() {
+            return new TokenCreateParams.Account.Individual.Verification(
+                this.additionalDocument, this.document, this.extraParams);
           }
 
           /**
            * A document showing address, either a passport, local ID card, or utility bill from a
            * well-known utility company.
            */
-          public Builder setAdditionalDocument(AdditionalDocument additionalDocument) {
+          public Builder setAdditionalDocument(
+              TokenCreateParams.Account.Individual.Verification.AdditionalDocument
+                  additionalDocument) {
             this.additionalDocument = additionalDocument;
             return this;
           }
 
           /** An identifying document, either a passport or local ID card. */
-          public Builder setDocument(Document document) {
+          public Builder setDocument(
+              TokenCreateParams.Account.Individual.Verification.Document document) {
             this.document = document;
             return this;
           }
@@ -3021,8 +3037,9 @@ public class TokenCreateParams extends ApiRequestParams {
             private String front;
 
             /** Finalize and obtain parameter instance from this builder. */
-            public AdditionalDocument build() {
-              return new AdditionalDocument(this.back, this.extraParams, this.front);
+            public TokenCreateParams.Account.Individual.Verification.AdditionalDocument build() {
+              return new TokenCreateParams.Account.Individual.Verification.AdditionalDocument(
+                  this.back, this.extraParams, this.front);
             }
 
             /**
@@ -3129,8 +3146,9 @@ public class TokenCreateParams extends ApiRequestParams {
             private String front;
 
             /** Finalize and obtain parameter instance from this builder. */
-            public Document build() {
-              return new Document(this.back, this.extraParams, this.front);
+            public TokenCreateParams.Account.Individual.Verification.Document build() {
+              return new TokenCreateParams.Account.Individual.Verification.Document(
+                  this.back, this.extraParams, this.front);
             }
 
             /**
@@ -3325,8 +3343,8 @@ public class TokenCreateParams extends ApiRequestParams {
       private String routingNumber;
 
       /** Finalize and obtain parameter instance from this builder. */
-      public BankAccount build() {
-        return new BankAccount(
+      public TokenCreateParams.BankAccount build() {
+        return new TokenCreateParams.BankAccount(
             this.accountHolderName,
             this.accountHolderType,
             this.accountNumber,
@@ -3350,7 +3368,8 @@ public class TokenCreateParams extends ApiRequestParams {
        * The type of entity that holds the account. It can be {@code company} or {@code individual}.
        * This field is required when attaching the bank account to a {@code Customer} object.
        */
-      public Builder setAccountHolderType(AccountHolderType accountHolderType) {
+      public Builder setAccountHolderType(
+          TokenCreateParams.BankAccount.AccountHolderType accountHolderType) {
         this.accountHolderType = accountHolderType;
         return this;
       }
@@ -3365,7 +3384,7 @@ public class TokenCreateParams extends ApiRequestParams {
        * The bank account type. This can only be {@code checking} or {@code savings} in most
        * countries. In Japan, this can only be {@code futsu} or {@code toza}.
        */
-      public Builder setAccountType(AccountType accountType) {
+      public Builder setAccountType(TokenCreateParams.BankAccount.AccountType accountType) {
         this.accountType = accountType;
         return this;
       }
@@ -3568,8 +3587,8 @@ public class TokenCreateParams extends ApiRequestParams {
       private String number;
 
       /** Finalize and obtain parameter instance from this builder. */
-      public Card build() {
-        return new Card(
+      public TokenCreateParams.Card build() {
+        return new TokenCreateParams.Card(
             this.addressCity,
             this.addressCountry,
             this.addressLine1,
@@ -3703,8 +3722,8 @@ public class TokenCreateParams extends ApiRequestParams {
       private Map<String, Object> extraParams;
 
       /** Finalize and obtain parameter instance from this builder. */
-      public CvcUpdate build() {
-        return new CvcUpdate(this.cvc, this.extraParams);
+      public TokenCreateParams.CvcUpdate build() {
+        return new TokenCreateParams.CvcUpdate(this.cvc, this.extraParams);
       }
 
       /** The CVC value, in string form. */
@@ -3993,8 +4012,8 @@ public class TokenCreateParams extends ApiRequestParams {
       private Verification verification;
 
       /** Finalize and obtain parameter instance from this builder. */
-      public Person build() {
-        return new Person(
+      public TokenCreateParams.Person build() {
+        return new TokenCreateParams.Person(
             this.address,
             this.addressKana,
             this.addressKanji,
@@ -4024,25 +4043,25 @@ public class TokenCreateParams extends ApiRequestParams {
       }
 
       /** The person's address. */
-      public Builder setAddress(Address address) {
+      public Builder setAddress(TokenCreateParams.Person.Address address) {
         this.address = address;
         return this;
       }
 
       /** The Kana variation of the person's address (Japan only). */
-      public Builder setAddressKana(AddressKana addressKana) {
+      public Builder setAddressKana(TokenCreateParams.Person.AddressKana addressKana) {
         this.addressKana = addressKana;
         return this;
       }
 
       /** The Kanji variation of the person's address (Japan only). */
-      public Builder setAddressKanji(AddressKanji addressKanji) {
+      public Builder setAddressKanji(TokenCreateParams.Person.AddressKanji addressKanji) {
         this.addressKanji = addressKanji;
         return this;
       }
 
       /** The person's date of birth. */
-      public Builder setDob(Dob dob) {
+      public Builder setDob(TokenCreateParams.Person.Dob dob) {
         this.dob = dob;
         return this;
       }
@@ -4054,7 +4073,7 @@ public class TokenCreateParams extends ApiRequestParams {
       }
 
       /** Documents that may be submitted to satisfy various informational requests. */
-      public Builder setDocuments(Documents documents) {
+      public Builder setDocuments(TokenCreateParams.Person.Documents documents) {
         this.documents = documents;
         return this;
       }
@@ -4283,13 +4302,14 @@ public class TokenCreateParams extends ApiRequestParams {
       }
 
       /** The person's registered address. */
-      public Builder setRegisteredAddress(RegisteredAddress registeredAddress) {
+      public Builder setRegisteredAddress(
+          TokenCreateParams.Person.RegisteredAddress registeredAddress) {
         this.registeredAddress = registeredAddress;
         return this;
       }
 
       /** The relationship that this person has with the account's legal entity. */
-      public Builder setRelationship(Relationship relationship) {
+      public Builder setRelationship(TokenCreateParams.Person.Relationship relationship) {
         this.relationship = relationship;
         return this;
       }
@@ -4301,7 +4321,7 @@ public class TokenCreateParams extends ApiRequestParams {
       }
 
       /** The person's verification status. */
-      public Builder setVerification(Verification verification) {
+      public Builder setVerification(TokenCreateParams.Person.Verification verification) {
         this.verification = verification;
         return this;
       }
@@ -4382,8 +4402,8 @@ public class TokenCreateParams extends ApiRequestParams {
         private String state;
 
         /** Finalize and obtain parameter instance from this builder. */
-        public Address build() {
-          return new Address(
+        public TokenCreateParams.Person.Address build() {
+          return new TokenCreateParams.Person.Address(
               this.city,
               this.country,
               this.extraParams,
@@ -4545,8 +4565,8 @@ public class TokenCreateParams extends ApiRequestParams {
         private String town;
 
         /** Finalize and obtain parameter instance from this builder. */
-        public AddressKana build() {
-          return new AddressKana(
+        public TokenCreateParams.Person.AddressKana build() {
+          return new TokenCreateParams.Person.AddressKana(
               this.city,
               this.country,
               this.extraParams,
@@ -4715,8 +4735,8 @@ public class TokenCreateParams extends ApiRequestParams {
         private String town;
 
         /** Finalize and obtain parameter instance from this builder. */
-        public AddressKanji build() {
-          return new AddressKanji(
+        public TokenCreateParams.Person.AddressKanji build() {
+          return new TokenCreateParams.Person.AddressKanji(
               this.city,
               this.country,
               this.extraParams,
@@ -4846,8 +4866,9 @@ public class TokenCreateParams extends ApiRequestParams {
         private Long year;
 
         /** Finalize and obtain parameter instance from this builder. */
-        public Dob build() {
-          return new Dob(this.day, this.extraParams, this.month, this.year);
+        public TokenCreateParams.Person.Dob build() {
+          return new TokenCreateParams.Person.Dob(
+              this.day, this.extraParams, this.month, this.year);
         }
 
         /** The day of birth, between 1 and 31. */
@@ -4950,8 +4971,8 @@ public class TokenCreateParams extends ApiRequestParams {
         private Visa visa;
 
         /** Finalize and obtain parameter instance from this builder. */
-        public Documents build() {
-          return new Documents(
+        public TokenCreateParams.Person.Documents build() {
+          return new TokenCreateParams.Person.Documents(
               this.companyAuthorization, this.extraParams, this.passport, this.visa);
         }
 
@@ -4959,7 +4980,8 @@ public class TokenCreateParams extends ApiRequestParams {
          * One or more documents that demonstrate proof that this person is authorized to represent
          * the company.
          */
-        public Builder setCompanyAuthorization(CompanyAuthorization companyAuthorization) {
+        public Builder setCompanyAuthorization(
+            TokenCreateParams.Person.Documents.CompanyAuthorization companyAuthorization) {
           this.companyAuthorization = companyAuthorization;
           return this;
         }
@@ -4995,7 +5017,7 @@ public class TokenCreateParams extends ApiRequestParams {
         /**
          * One or more documents showing the person's passport page with photo and personal data.
          */
-        public Builder setPassport(Passport passport) {
+        public Builder setPassport(TokenCreateParams.Person.Documents.Passport passport) {
           this.passport = passport;
           return this;
         }
@@ -5004,7 +5026,7 @@ public class TokenCreateParams extends ApiRequestParams {
          * One or more documents showing the person's visa required for living in the country where
          * they are residing.
          */
-        public Builder setVisa(Visa visa) {
+        public Builder setVisa(TokenCreateParams.Person.Documents.Visa visa) {
           this.visa = visa;
           return this;
         }
@@ -5045,8 +5067,9 @@ public class TokenCreateParams extends ApiRequestParams {
           private List<String> files;
 
           /** Finalize and obtain parameter instance from this builder. */
-          public CompanyAuthorization build() {
-            return new CompanyAuthorization(this.extraParams, this.files);
+          public TokenCreateParams.Person.Documents.CompanyAuthorization build() {
+            return new TokenCreateParams.Person.Documents.CompanyAuthorization(
+                this.extraParams, this.files);
           }
 
           /**
@@ -5142,8 +5165,8 @@ public class TokenCreateParams extends ApiRequestParams {
           private List<String> files;
 
           /** Finalize and obtain parameter instance from this builder. */
-          public Passport build() {
-            return new Passport(this.extraParams, this.files);
+          public TokenCreateParams.Person.Documents.Passport build() {
+            return new TokenCreateParams.Person.Documents.Passport(this.extraParams, this.files);
           }
 
           /**
@@ -5237,8 +5260,8 @@ public class TokenCreateParams extends ApiRequestParams {
           private List<String> files;
 
           /** Finalize and obtain parameter instance from this builder. */
-          public Visa build() {
-            return new Visa(this.extraParams, this.files);
+          public TokenCreateParams.Person.Documents.Visa build() {
+            return new TokenCreateParams.Person.Documents.Visa(this.extraParams, this.files);
           }
 
           /**
@@ -5373,8 +5396,8 @@ public class TokenCreateParams extends ApiRequestParams {
         private String state;
 
         /** Finalize and obtain parameter instance from this builder. */
-        public RegisteredAddress build() {
-          return new RegisteredAddress(
+        public TokenCreateParams.Person.RegisteredAddress build() {
+          return new TokenCreateParams.Person.RegisteredAddress(
               this.city,
               this.country,
               this.extraParams,
@@ -5538,8 +5561,8 @@ public class TokenCreateParams extends ApiRequestParams {
         private String title;
 
         /** Finalize and obtain parameter instance from this builder. */
-        public Relationship build() {
-          return new Relationship(
+        public TokenCreateParams.Person.Relationship build() {
+          return new TokenCreateParams.Person.Relationship(
               this.director,
               this.executive,
               this.extraParams,
@@ -5677,21 +5700,23 @@ public class TokenCreateParams extends ApiRequestParams {
         private Map<String, Object> extraParams;
 
         /** Finalize and obtain parameter instance from this builder. */
-        public Verification build() {
-          return new Verification(this.additionalDocument, this.document, this.extraParams);
+        public TokenCreateParams.Person.Verification build() {
+          return new TokenCreateParams.Person.Verification(
+              this.additionalDocument, this.document, this.extraParams);
         }
 
         /**
          * A document showing address, either a passport, local ID card, or utility bill from a
          * well-known utility company.
          */
-        public Builder setAdditionalDocument(AdditionalDocument additionalDocument) {
+        public Builder setAdditionalDocument(
+            TokenCreateParams.Person.Verification.AdditionalDocument additionalDocument) {
           this.additionalDocument = additionalDocument;
           return this;
         }
 
         /** An identifying document, either a passport or local ID card. */
-        public Builder setDocument(Document document) {
+        public Builder setDocument(TokenCreateParams.Person.Verification.Document document) {
           this.document = document;
           return this;
         }
@@ -5773,8 +5798,9 @@ public class TokenCreateParams extends ApiRequestParams {
           private String front;
 
           /** Finalize and obtain parameter instance from this builder. */
-          public AdditionalDocument build() {
-            return new AdditionalDocument(this.back, this.extraParams, this.front);
+          public TokenCreateParams.Person.Verification.AdditionalDocument build() {
+            return new TokenCreateParams.Person.Verification.AdditionalDocument(
+                this.back, this.extraParams, this.front);
           }
 
           /**
@@ -5877,8 +5903,9 @@ public class TokenCreateParams extends ApiRequestParams {
           private String front;
 
           /** Finalize and obtain parameter instance from this builder. */
-          public Document build() {
-            return new Document(this.back, this.extraParams, this.front);
+          public TokenCreateParams.Person.Verification.Document build() {
+            return new TokenCreateParams.Person.Verification.Document(
+                this.back, this.extraParams, this.front);
           }
 
           /**
@@ -5965,8 +5992,8 @@ public class TokenCreateParams extends ApiRequestParams {
       private String idNumber;
 
       /** Finalize and obtain parameter instance from this builder. */
-      public Pii build() {
-        return new Pii(this.extraParams, this.idNumber);
+      public TokenCreateParams.Pii build() {
+        return new TokenCreateParams.Pii(this.extraParams, this.idNumber);
       }
 
       /**

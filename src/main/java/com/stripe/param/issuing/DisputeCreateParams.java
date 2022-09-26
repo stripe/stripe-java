@@ -3,7 +3,6 @@ package com.stripe.param.issuing;
 
 import com.google.gson.annotations.SerializedName;
 import com.stripe.net.ApiRequestParams;
-import com.stripe.net.ApiRequestParams.EnumParam;
 import com.stripe.param.common.EmptyParam;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -13,6 +12,14 @@ import lombok.Getter;
 
 @Getter
 public class DisputeCreateParams extends ApiRequestParams {
+  /**
+   * The dispute amount in the card's currency and in the <a
+   * href="https://stripe.com/docs/currencies#zero-decimal">smallest currency unit</a>. If not set,
+   * defaults to the full transaction amount.
+   */
+  @SerializedName("amount")
+  Long amount;
+
   /** Evidence provided for the dispute. */
   @SerializedName("evidence")
   Evidence evidence;
@@ -51,12 +58,14 @@ public class DisputeCreateParams extends ApiRequestParams {
   Treasury treasury;
 
   private DisputeCreateParams(
+      Long amount,
       Evidence evidence,
       List<String> expand,
       Map<String, Object> extraParams,
       Map<String, String> metadata,
       String transaction,
       Treasury treasury) {
+    this.amount = amount;
     this.evidence = evidence;
     this.expand = expand;
     this.extraParams = extraParams;
@@ -70,6 +79,8 @@ public class DisputeCreateParams extends ApiRequestParams {
   }
 
   public static class Builder {
+    private Long amount;
+
     private Evidence evidence;
 
     private List<String> expand;
@@ -85,6 +96,7 @@ public class DisputeCreateParams extends ApiRequestParams {
     /** Finalize and obtain parameter instance from this builder. */
     public DisputeCreateParams build() {
       return new DisputeCreateParams(
+          this.amount,
           this.evidence,
           this.expand,
           this.extraParams,
@@ -93,8 +105,18 @@ public class DisputeCreateParams extends ApiRequestParams {
           this.treasury);
     }
 
+    /**
+     * The dispute amount in the card's currency and in the <a
+     * href="https://stripe.com/docs/currencies#zero-decimal">smallest currency unit</a>. If not
+     * set, defaults to the full transaction amount.
+     */
+    public Builder setAmount(Long amount) {
+      this.amount = amount;
+      return this;
+    }
+
     /** Evidence provided for the dispute. */
-    public Builder setEvidence(Evidence evidence) {
+    public Builder setEvidence(DisputeCreateParams.Evidence evidence) {
       this.evidence = evidence;
       return this;
     }
@@ -187,7 +209,7 @@ public class DisputeCreateParams extends ApiRequestParams {
     }
 
     /** Params for disputes related to Treasury FinancialAccounts. */
-    public Builder setTreasury(Treasury treasury) {
+    public Builder setTreasury(DisputeCreateParams.Treasury treasury) {
       this.treasury = treasury;
       return this;
     }
@@ -284,8 +306,8 @@ public class DisputeCreateParams extends ApiRequestParams {
       private Object serviceNotAsDescribed;
 
       /** Finalize and obtain parameter instance from this builder. */
-      public Evidence build() {
-        return new Evidence(
+      public DisputeCreateParams.Evidence build() {
+        return new DisputeCreateParams.Evidence(
             this.canceled,
             this.duplicate,
             this.extraParams,
@@ -298,7 +320,7 @@ public class DisputeCreateParams extends ApiRequestParams {
       }
 
       /** Evidence provided when {@code reason} is 'canceled'. */
-      public Builder setCanceled(Canceled canceled) {
+      public Builder setCanceled(DisputeCreateParams.Evidence.Canceled canceled) {
         this.canceled = canceled;
         return this;
       }
@@ -310,7 +332,7 @@ public class DisputeCreateParams extends ApiRequestParams {
       }
 
       /** Evidence provided when {@code reason} is 'duplicate'. */
-      public Builder setDuplicate(Duplicate duplicate) {
+      public Builder setDuplicate(DisputeCreateParams.Evidence.Duplicate duplicate) {
         this.duplicate = duplicate;
         return this;
       }
@@ -348,7 +370,7 @@ public class DisputeCreateParams extends ApiRequestParams {
       }
 
       /** Evidence provided when {@code reason} is 'fraudulent'. */
-      public Builder setFraudulent(Fraudulent fraudulent) {
+      public Builder setFraudulent(DisputeCreateParams.Evidence.Fraudulent fraudulent) {
         this.fraudulent = fraudulent;
         return this;
       }
@@ -361,7 +383,7 @@ public class DisputeCreateParams extends ApiRequestParams {
 
       /** Evidence provided when {@code reason} is 'merchandise_not_as_described'. */
       public Builder setMerchandiseNotAsDescribed(
-          MerchandiseNotAsDescribed merchandiseNotAsDescribed) {
+          DisputeCreateParams.Evidence.MerchandiseNotAsDescribed merchandiseNotAsDescribed) {
         this.merchandiseNotAsDescribed = merchandiseNotAsDescribed;
         return this;
       }
@@ -373,7 +395,7 @@ public class DisputeCreateParams extends ApiRequestParams {
       }
 
       /** Evidence provided when {@code reason} is 'not_received'. */
-      public Builder setNotReceived(NotReceived notReceived) {
+      public Builder setNotReceived(DisputeCreateParams.Evidence.NotReceived notReceived) {
         this.notReceived = notReceived;
         return this;
       }
@@ -385,7 +407,7 @@ public class DisputeCreateParams extends ApiRequestParams {
       }
 
       /** Evidence provided when {@code reason} is 'other'. */
-      public Builder setOther(Other other) {
+      public Builder setOther(DisputeCreateParams.Evidence.Other other) {
         this.other = other;
         return this;
       }
@@ -400,13 +422,14 @@ public class DisputeCreateParams extends ApiRequestParams {
        * The reason for filing the dispute. The evidence should be submitted in the field of the
        * same name.
        */
-      public Builder setReason(Reason reason) {
+      public Builder setReason(DisputeCreateParams.Evidence.Reason reason) {
         this.reason = reason;
         return this;
       }
 
       /** Evidence provided when {@code reason} is 'service_not_as_described'. */
-      public Builder setServiceNotAsDescribed(ServiceNotAsDescribed serviceNotAsDescribed) {
+      public Builder setServiceNotAsDescribed(
+          DisputeCreateParams.Evidence.ServiceNotAsDescribed serviceNotAsDescribed) {
         this.serviceNotAsDescribed = serviceNotAsDescribed;
         return this;
       }
@@ -462,11 +485,11 @@ public class DisputeCreateParams extends ApiRequestParams {
 
       /** Whether the product was a merchandise or service. */
       @SerializedName("product_type")
-      EnumParam productType;
+      ApiRequestParams.EnumParam productType;
 
       /** Result of cardholder's attempt to return the product. */
       @SerializedName("return_status")
-      EnumParam returnStatus;
+      ApiRequestParams.EnumParam returnStatus;
 
       /** Date when the product was returned or attempted to be returned. */
       @SerializedName("returned_at")
@@ -481,8 +504,8 @@ public class DisputeCreateParams extends ApiRequestParams {
           String explanation,
           Map<String, Object> extraParams,
           String productDescription,
-          EnumParam productType,
-          EnumParam returnStatus,
+          ApiRequestParams.EnumParam productType,
+          ApiRequestParams.EnumParam returnStatus,
           Object returnedAt) {
         this.additionalDocumentation = additionalDocumentation;
         this.canceledAt = canceledAt;
@@ -518,15 +541,15 @@ public class DisputeCreateParams extends ApiRequestParams {
 
         private String productDescription;
 
-        private EnumParam productType;
+        private ApiRequestParams.EnumParam productType;
 
-        private EnumParam returnStatus;
+        private ApiRequestParams.EnumParam returnStatus;
 
         private Object returnedAt;
 
         /** Finalize and obtain parameter instance from this builder. */
-        public Canceled build() {
-          return new Canceled(
+        public DisputeCreateParams.Evidence.Canceled build() {
+          return new DisputeCreateParams.Evidence.Canceled(
               this.additionalDocumentation,
               this.canceledAt,
               this.cancellationPolicyProvided,
@@ -641,7 +664,8 @@ public class DisputeCreateParams extends ApiRequestParams {
         }
 
         /** Whether the product was a merchandise or service. */
-        public Builder setProductType(ProductType productType) {
+        public Builder setProductType(
+            DisputeCreateParams.Evidence.Canceled.ProductType productType) {
           this.productType = productType;
           return this;
         }
@@ -653,7 +677,8 @@ public class DisputeCreateParams extends ApiRequestParams {
         }
 
         /** Result of cardholder's attempt to return the product. */
-        public Builder setReturnStatus(ReturnStatus returnStatus) {
+        public Builder setReturnStatus(
+            DisputeCreateParams.Evidence.Canceled.ReturnStatus returnStatus) {
           this.returnStatus = returnStatus;
           return this;
         }
@@ -795,8 +820,8 @@ public class DisputeCreateParams extends ApiRequestParams {
         private String originalTransaction;
 
         /** Finalize and obtain parameter instance from this builder. */
-        public Duplicate build() {
-          return new Duplicate(
+        public DisputeCreateParams.Evidence.Duplicate build() {
+          return new DisputeCreateParams.Evidence.Duplicate(
               this.additionalDocumentation,
               this.cardStatement,
               this.cashReceipt,
@@ -964,8 +989,9 @@ public class DisputeCreateParams extends ApiRequestParams {
         private Map<String, Object> extraParams;
 
         /** Finalize and obtain parameter instance from this builder. */
-        public Fraudulent build() {
-          return new Fraudulent(this.additionalDocumentation, this.explanation, this.extraParams);
+        public DisputeCreateParams.Evidence.Fraudulent build() {
+          return new DisputeCreateParams.Evidence.Fraudulent(
+              this.additionalDocumentation, this.explanation, this.extraParams);
         }
 
         /**
@@ -1054,7 +1080,7 @@ public class DisputeCreateParams extends ApiRequestParams {
 
       /** Result of cardholder's attempt to return the product. */
       @SerializedName("return_status")
-      EnumParam returnStatus;
+      ApiRequestParams.EnumParam returnStatus;
 
       /** Date when the product was returned or attempted to be returned. */
       @SerializedName("returned_at")
@@ -1066,7 +1092,7 @@ public class DisputeCreateParams extends ApiRequestParams {
           Map<String, Object> extraParams,
           Object receivedAt,
           String returnDescription,
-          EnumParam returnStatus,
+          ApiRequestParams.EnumParam returnStatus,
           Object returnedAt) {
         this.additionalDocumentation = additionalDocumentation;
         this.explanation = explanation;
@@ -1092,13 +1118,13 @@ public class DisputeCreateParams extends ApiRequestParams {
 
         private String returnDescription;
 
-        private EnumParam returnStatus;
+        private ApiRequestParams.EnumParam returnStatus;
 
         private Object returnedAt;
 
         /** Finalize and obtain parameter instance from this builder. */
-        public MerchandiseNotAsDescribed build() {
-          return new MerchandiseNotAsDescribed(
+        public DisputeCreateParams.Evidence.MerchandiseNotAsDescribed build() {
+          return new DisputeCreateParams.Evidence.MerchandiseNotAsDescribed(
               this.additionalDocumentation,
               this.explanation,
               this.extraParams,
@@ -1179,7 +1205,8 @@ public class DisputeCreateParams extends ApiRequestParams {
         }
 
         /** Result of cardholder's attempt to return the product. */
-        public Builder setReturnStatus(ReturnStatus returnStatus) {
+        public Builder setReturnStatus(
+            DisputeCreateParams.Evidence.MerchandiseNotAsDescribed.ReturnStatus returnStatus) {
           this.returnStatus = returnStatus;
           return this;
         }
@@ -1251,7 +1278,7 @@ public class DisputeCreateParams extends ApiRequestParams {
 
       /** Whether the product was a merchandise or service. */
       @SerializedName("product_type")
-      EnumParam productType;
+      ApiRequestParams.EnumParam productType;
 
       private NotReceived(
           Object additionalDocumentation,
@@ -1259,7 +1286,7 @@ public class DisputeCreateParams extends ApiRequestParams {
           String explanation,
           Map<String, Object> extraParams,
           String productDescription,
-          EnumParam productType) {
+          ApiRequestParams.EnumParam productType) {
         this.additionalDocumentation = additionalDocumentation;
         this.expectedAt = expectedAt;
         this.explanation = explanation;
@@ -1283,11 +1310,11 @@ public class DisputeCreateParams extends ApiRequestParams {
 
         private String productDescription;
 
-        private EnumParam productType;
+        private ApiRequestParams.EnumParam productType;
 
         /** Finalize and obtain parameter instance from this builder. */
-        public NotReceived build() {
-          return new NotReceived(
+        public DisputeCreateParams.Evidence.NotReceived build() {
+          return new DisputeCreateParams.Evidence.NotReceived(
               this.additionalDocumentation,
               this.expectedAt,
               this.explanation,
@@ -1367,7 +1394,8 @@ public class DisputeCreateParams extends ApiRequestParams {
         }
 
         /** Whether the product was a merchandise or service. */
-        public Builder setProductType(ProductType productType) {
+        public Builder setProductType(
+            DisputeCreateParams.Evidence.NotReceived.ProductType productType) {
           this.productType = productType;
           return this;
         }
@@ -1423,14 +1451,14 @@ public class DisputeCreateParams extends ApiRequestParams {
 
       /** Whether the product was a merchandise or service. */
       @SerializedName("product_type")
-      EnumParam productType;
+      ApiRequestParams.EnumParam productType;
 
       private Other(
           Object additionalDocumentation,
           String explanation,
           Map<String, Object> extraParams,
           String productDescription,
-          EnumParam productType) {
+          ApiRequestParams.EnumParam productType) {
         this.additionalDocumentation = additionalDocumentation;
         this.explanation = explanation;
         this.extraParams = extraParams;
@@ -1451,11 +1479,11 @@ public class DisputeCreateParams extends ApiRequestParams {
 
         private String productDescription;
 
-        private EnumParam productType;
+        private ApiRequestParams.EnumParam productType;
 
         /** Finalize and obtain parameter instance from this builder. */
-        public Other build() {
-          return new Other(
+        public DisputeCreateParams.Evidence.Other build() {
+          return new DisputeCreateParams.Evidence.Other(
               this.additionalDocumentation,
               this.explanation,
               this.extraParams,
@@ -1522,7 +1550,7 @@ public class DisputeCreateParams extends ApiRequestParams {
         }
 
         /** Whether the product was a merchandise or service. */
-        public Builder setProductType(ProductType productType) {
+        public Builder setProductType(DisputeCreateParams.Evidence.Other.ProductType productType) {
           this.productType = productType;
           return this;
         }
@@ -1617,8 +1645,8 @@ public class DisputeCreateParams extends ApiRequestParams {
         private Object receivedAt;
 
         /** Finalize and obtain parameter instance from this builder. */
-        public ServiceNotAsDescribed build() {
-          return new ServiceNotAsDescribed(
+        public DisputeCreateParams.Evidence.ServiceNotAsDescribed build() {
+          return new DisputeCreateParams.Evidence.ServiceNotAsDescribed(
               this.additionalDocumentation,
               this.canceledAt,
               this.cancellationReason,
@@ -1772,8 +1800,8 @@ public class DisputeCreateParams extends ApiRequestParams {
       private String receivedDebit;
 
       /** Finalize and obtain parameter instance from this builder. */
-      public Treasury build() {
-        return new Treasury(this.extraParams, this.receivedDebit);
+      public DisputeCreateParams.Treasury build() {
+        return new DisputeCreateParams.Treasury(this.extraParams, this.receivedDebit);
       }
 
       /**

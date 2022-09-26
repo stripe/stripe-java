@@ -313,6 +313,7 @@ public class Session extends ApiResource implements HasId {
    * The URL to the Checkout Session. Redirect customers to this URL to take them to Checkout. If
    * you’re using <a href="https://stripe.com/docs/payments/checkout/custom-domains">Custom
    * Domains</a>, the URL will use your subdomain. Otherwise, it’ll use {@code checkout.stripe.com.}
+   * This value is only present when the session is active.
    */
   @SerializedName("url")
   String url;
@@ -690,6 +691,15 @@ public class Session extends ApiResource implements HasId {
      */
     @SerializedName("promotions")
     String promotions;
+
+    /**
+     * If {@code accepted}, the customer in this Checkout Session has agreed to the merchant's terms
+     * of service.
+     *
+     * <p>Equal to {@code accepted}.
+     */
+    @SerializedName("terms_of_service")
+    String termsOfService;
   }
 
   @Getter
@@ -706,6 +716,15 @@ public class Session extends ApiResource implements HasId {
      */
     @SerializedName("promotions")
     String promotions;
+
+    /**
+     * If set to {@code required}, it requires customers to accept the terms of service before being
+     * able to pay.
+     *
+     * <p>One of {@code none}, or {@code required}.
+     */
+    @SerializedName("terms_of_service")
+    String termsOfService;
   }
 
   @Getter
@@ -839,6 +858,9 @@ public class Session extends ApiResource implements HasId {
 
     @SerializedName("paynow")
     Paynow paynow;
+
+    @SerializedName("pix")
+    Pix pix;
 
     @SerializedName("sepa_debit")
     SepaDebit sepaDebit;
@@ -1517,6 +1539,15 @@ public class Session extends ApiResource implements HasId {
        */
       @SerializedName("setup_future_usage")
       String setupFutureUsage;
+    }
+
+    @Getter
+    @Setter
+    @EqualsAndHashCode(callSuper = false)
+    public static class Pix extends StripeObject {
+      /** The number of seconds after which Pix payment will expire. */
+      @SerializedName("expires_after_seconds")
+      Long expiresAfterSeconds;
     }
 
     @Getter

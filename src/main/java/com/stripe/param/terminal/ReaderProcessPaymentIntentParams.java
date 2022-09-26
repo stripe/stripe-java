@@ -121,7 +121,7 @@ public class ReaderProcessPaymentIntentParams extends ApiRequestParams {
     }
 
     /** Configuration overrides. */
-    public Builder setProcessConfig(ProcessConfig processConfig) {
+    public Builder setProcessConfig(ReaderProcessPaymentIntentParams.ProcessConfig processConfig) {
       this.processConfig = processConfig;
       return this;
     }
@@ -157,8 +157,9 @@ public class ReaderProcessPaymentIntentParams extends ApiRequestParams {
       private Boolean skipTipping;
 
       /** Finalize and obtain parameter instance from this builder. */
-      public ProcessConfig build() {
-        return new ProcessConfig(this.extraParams, this.skipTipping);
+      public ReaderProcessPaymentIntentParams.ProcessConfig build() {
+        return new ReaderProcessPaymentIntentParams.ProcessConfig(
+            this.extraParams, this.skipTipping);
       }
 
       /**

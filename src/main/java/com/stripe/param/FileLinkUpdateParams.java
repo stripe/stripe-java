@@ -97,7 +97,7 @@ public class FileLinkUpdateParams extends ApiRequestParams {
      * A future timestamp after which the link will no longer be usable, or {@code now} to expire
      * the link immediately.
      */
-    public Builder setExpiresAt(ExpiresAt expiresAt) {
+    public Builder setExpiresAt(FileLinkUpdateParams.ExpiresAt expiresAt) {
       this.expiresAt = expiresAt;
       return this;
     }

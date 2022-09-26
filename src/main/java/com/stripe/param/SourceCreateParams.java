@@ -310,7 +310,7 @@ public class SourceCreateParams extends ApiRequestParams {
      * redirect}, {@code receiver}, {@code code_verification}, {@code none}. It is generally
      * inferred unless a type supports multiple flows.
      */
-    public Builder setFlow(Flow flow) {
+    public Builder setFlow(SourceCreateParams.Flow flow) {
       this.flow = flow;
       return this;
     }
@@ -319,7 +319,7 @@ public class SourceCreateParams extends ApiRequestParams {
      * Information about a mandate possibility attached to a source object (generally for bank
      * debits) as well as its acceptance status.
      */
-    public Builder setMandate(Mandate mandate) {
+    public Builder setMandate(SourceCreateParams.Mandate mandate) {
       this.mandate = mandate;
       return this;
     }
@@ -360,7 +360,7 @@ public class SourceCreateParams extends ApiRequestParams {
      * Information about the owner of the payment instrument that may be used or required by
      * particular source types.
      */
-    public Builder setOwner(Owner owner) {
+    public Builder setOwner(SourceCreateParams.Owner owner) {
       this.owner = owner;
       return this;
     }
@@ -369,7 +369,7 @@ public class SourceCreateParams extends ApiRequestParams {
      * Optional parameters for the receiver flow. Can be set only if the source is a receiver
      * ({@code flow} is {@code receiver}).
      */
-    public Builder setReceiver(Receiver receiver) {
+    public Builder setReceiver(SourceCreateParams.Receiver receiver) {
       this.receiver = receiver;
       return this;
     }
@@ -378,7 +378,7 @@ public class SourceCreateParams extends ApiRequestParams {
      * Parameters required for the redirect flow. Required if the source is authenticated by a
      * redirect ({@code flow} is {@code redirect}).
      */
-    public Builder setRedirect(Redirect redirect) {
+    public Builder setRedirect(SourceCreateParams.Redirect redirect) {
       this.redirect = redirect;
       return this;
     }
@@ -387,7 +387,7 @@ public class SourceCreateParams extends ApiRequestParams {
      * Information about the items and shipping associated with the source. Required for
      * transactional credit (for example Klarna) sources before you can charge it.
      */
-    public Builder setSourceOrder(SourceOrder sourceOrder) {
+    public Builder setSourceOrder(SourceCreateParams.SourceOrder sourceOrder) {
       this.sourceOrder = sourceOrder;
       return this;
     }
@@ -423,7 +423,7 @@ public class SourceCreateParams extends ApiRequestParams {
       return this;
     }
 
-    public Builder setUsage(Usage usage) {
+    public Builder setUsage(SourceCreateParams.Usage usage) {
       this.usage = usage;
       return this;
     }
@@ -506,8 +506,8 @@ public class SourceCreateParams extends ApiRequestParams {
       private NotificationMethod notificationMethod;
 
       /** Finalize and obtain parameter instance from this builder. */
-      public Mandate build() {
-        return new Mandate(
+      public SourceCreateParams.Mandate build() {
+        return new SourceCreateParams.Mandate(
             this.acceptance,
             this.amount,
             this.currency,
@@ -520,7 +520,7 @@ public class SourceCreateParams extends ApiRequestParams {
        * The parameters required to notify Stripe of a mandate acceptance or refusal by the
        * customer.
        */
-      public Builder setAcceptance(Acceptance acceptance) {
+      public Builder setAcceptance(SourceCreateParams.Mandate.Acceptance acceptance) {
         this.acceptance = acceptance;
         return this;
       }
@@ -574,7 +574,7 @@ public class SourceCreateParams extends ApiRequestParams {
        * single debit), {@code scheduled} (with debits on an agreed schedule or for clearly-defined
        * events), or {@code variable}(for debits with any frequency)
        */
-      public Builder setInterval(Interval interval) {
+      public Builder setInterval(SourceCreateParams.Mandate.Interval interval) {
         this.interval = interval;
         return this;
       }
@@ -587,7 +587,8 @@ public class SourceCreateParams extends ApiRequestParams {
        * the notification) or {@code none} (the underlying debit network does not require any
        * notification).
        */
-      public Builder setNotificationMethod(NotificationMethod notificationMethod) {
+      public Builder setNotificationMethod(
+          SourceCreateParams.Mandate.NotificationMethod notificationMethod) {
         this.notificationMethod = notificationMethod;
         return this;
       }
@@ -690,8 +691,8 @@ public class SourceCreateParams extends ApiRequestParams {
         private String userAgent;
 
         /** Finalize and obtain parameter instance from this builder. */
-        public Acceptance build() {
-          return new Acceptance(
+        public SourceCreateParams.Mandate.Acceptance build() {
+          return new SourceCreateParams.Mandate.Acceptance(
               this.date,
               this.extraParams,
               this.ip,
@@ -748,7 +749,7 @@ public class SourceCreateParams extends ApiRequestParams {
          * The parameters required to store a mandate accepted offline. Should only be set if {@code
          * mandate[type]} is {@code offline}
          */
-        public Builder setOffline(Offline offline) {
+        public Builder setOffline(SourceCreateParams.Mandate.Acceptance.Offline offline) {
           this.offline = offline;
           return this;
         }
@@ -757,7 +758,7 @@ public class SourceCreateParams extends ApiRequestParams {
          * The parameters required to store a mandate accepted online. Should only be set if {@code
          * mandate[type]} is {@code online}
          */
-        public Builder setOnline(Online online) {
+        public Builder setOnline(SourceCreateParams.Mandate.Acceptance.Online online) {
           this.online = online;
           return this;
         }
@@ -766,7 +767,7 @@ public class SourceCreateParams extends ApiRequestParams {
          * The status of the mandate acceptance. Either {@code accepted} (the mandate was accepted)
          * or {@code refused} (the mandate was refused).
          */
-        public Builder setStatus(Status status) {
+        public Builder setStatus(SourceCreateParams.Mandate.Acceptance.Status status) {
           this.status = status;
           return this;
         }
@@ -775,7 +776,7 @@ public class SourceCreateParams extends ApiRequestParams {
          * The type of acceptance information included with the mandate. Either {@code online} or
          * {@code offline}
          */
-        public Builder setType(Type type) {
+        public Builder setType(SourceCreateParams.Mandate.Acceptance.Type type) {
           this.type = type;
           return this;
         }
@@ -824,8 +825,9 @@ public class SourceCreateParams extends ApiRequestParams {
           private Map<String, Object> extraParams;
 
           /** Finalize and obtain parameter instance from this builder. */
-          public Offline build() {
-            return new Offline(this.contactEmail, this.extraParams);
+          public SourceCreateParams.Mandate.Acceptance.Offline build() {
+            return new SourceCreateParams.Mandate.Acceptance.Offline(
+                this.contactEmail, this.extraParams);
           }
 
           /**
@@ -917,8 +919,9 @@ public class SourceCreateParams extends ApiRequestParams {
           private String userAgent;
 
           /** Finalize and obtain parameter instance from this builder. */
-          public Online build() {
-            return new Online(this.date, this.extraParams, this.ip, this.userAgent);
+          public SourceCreateParams.Mandate.Acceptance.Online build() {
+            return new SourceCreateParams.Mandate.Acceptance.Online(
+                this.date, this.extraParams, this.ip, this.userAgent);
           }
 
           /**
@@ -1107,12 +1110,13 @@ public class SourceCreateParams extends ApiRequestParams {
       private String phone;
 
       /** Finalize and obtain parameter instance from this builder. */
-      public Owner build() {
-        return new Owner(this.address, this.email, this.extraParams, this.name, this.phone);
+      public SourceCreateParams.Owner build() {
+        return new SourceCreateParams.Owner(
+            this.address, this.email, this.extraParams, this.name, this.phone);
       }
 
       /** Owner's address. */
-      public Builder setAddress(Address address) {
+      public Builder setAddress(SourceCreateParams.Owner.Address address) {
         this.address = address;
         return this;
       }
@@ -1237,8 +1241,8 @@ public class SourceCreateParams extends ApiRequestParams {
         private String state;
 
         /** Finalize and obtain parameter instance from this builder. */
-        public Address build() {
-          return new Address(
+        public SourceCreateParams.Owner.Address build() {
+          return new SourceCreateParams.Owner.Address(
               this.city,
               this.country,
               this.extraParams,
@@ -1354,8 +1358,8 @@ public class SourceCreateParams extends ApiRequestParams {
       private RefundAttributesMethod refundAttributesMethod;
 
       /** Finalize and obtain parameter instance from this builder. */
-      public Receiver build() {
-        return new Receiver(this.extraParams, this.refundAttributesMethod);
+      public SourceCreateParams.Receiver build() {
+        return new SourceCreateParams.Receiver(this.extraParams, this.refundAttributesMethod);
       }
 
       /**
@@ -1391,7 +1395,8 @@ public class SourceCreateParams extends ApiRequestParams {
        * endpoint). Refer to each payment method's documentation to learn which refund attributes
        * may be required.
        */
-      public Builder setRefundAttributesMethod(RefundAttributesMethod refundAttributesMethod) {
+      public Builder setRefundAttributesMethod(
+          SourceCreateParams.Receiver.RefundAttributesMethod refundAttributesMethod) {
         this.refundAttributesMethod = refundAttributesMethod;
         return this;
       }
@@ -1449,8 +1454,8 @@ public class SourceCreateParams extends ApiRequestParams {
       private String returnUrl;
 
       /** Finalize and obtain parameter instance from this builder. */
-      public Redirect build() {
-        return new Redirect(this.extraParams, this.returnUrl);
+      public SourceCreateParams.Redirect build() {
+        return new SourceCreateParams.Redirect(this.extraParams, this.returnUrl);
       }
 
       /**
@@ -1503,7 +1508,7 @@ public class SourceCreateParams extends ApiRequestParams {
 
     /** List of items constituting the order. */
     @SerializedName("items")
-    List<Item> items;
+    List<SourceCreateParams.SourceOrder.Item> items;
 
     /**
      * Shipping address for the order. Required if any of the SKUs are for products that have {@code
@@ -1512,7 +1517,10 @@ public class SourceCreateParams extends ApiRequestParams {
     @SerializedName("shipping")
     Shipping shipping;
 
-    private SourceOrder(Map<String, Object> extraParams, List<Item> items, Shipping shipping) {
+    private SourceOrder(
+        Map<String, Object> extraParams,
+        List<SourceCreateParams.SourceOrder.Item> items,
+        Shipping shipping) {
       this.extraParams = extraParams;
       this.items = items;
       this.shipping = shipping;
@@ -1525,13 +1533,13 @@ public class SourceCreateParams extends ApiRequestParams {
     public static class Builder {
       private Map<String, Object> extraParams;
 
-      private List<Item> items;
+      private List<SourceCreateParams.SourceOrder.Item> items;
 
       private Shipping shipping;
 
       /** Finalize and obtain parameter instance from this builder. */
-      public SourceOrder build() {
-        return new SourceOrder(this.extraParams, this.items, this.shipping);
+      public SourceCreateParams.SourceOrder build() {
+        return new SourceCreateParams.SourceOrder(this.extraParams, this.items, this.shipping);
       }
 
       /**
@@ -1565,7 +1573,7 @@ public class SourceCreateParams extends ApiRequestParams {
        * subsequent calls adds additional elements to the original list. See {@link
        * SourceCreateParams.SourceOrder#items} for the field documentation.
        */
-      public Builder addItem(Item element) {
+      public Builder addItem(SourceCreateParams.SourceOrder.Item element) {
         if (this.items == null) {
           this.items = new ArrayList<>();
         }
@@ -1578,7 +1586,7 @@ public class SourceCreateParams extends ApiRequestParams {
        * and subsequent calls adds additional elements to the original list. See {@link
        * SourceCreateParams.SourceOrder#items} for the field documentation.
        */
-      public Builder addAllItem(List<Item> elements) {
+      public Builder addAllItem(List<SourceCreateParams.SourceOrder.Item> elements) {
         if (this.items == null) {
           this.items = new ArrayList<>();
         }
@@ -1590,7 +1598,7 @@ public class SourceCreateParams extends ApiRequestParams {
        * Shipping address for the order. Required if any of the SKUs are for products that have
        * {@code shippable} set to true.
        */
-      public Builder setShipping(Shipping shipping) {
+      public Builder setShipping(SourceCreateParams.SourceOrder.Shipping shipping) {
         this.shipping = shipping;
         return this;
       }
@@ -1667,8 +1675,8 @@ public class SourceCreateParams extends ApiRequestParams {
         private Type type;
 
         /** Finalize and obtain parameter instance from this builder. */
-        public Item build() {
-          return new Item(
+        public SourceCreateParams.SourceOrder.Item build() {
+          return new SourceCreateParams.SourceOrder.Item(
               this.amount,
               this.currency,
               this.description,
@@ -1736,7 +1744,7 @@ public class SourceCreateParams extends ApiRequestParams {
           return this;
         }
 
-        public Builder setType(Type type) {
+        public Builder setType(SourceCreateParams.SourceOrder.Item.Type type) {
           this.type = type;
           return this;
         }
@@ -1831,8 +1839,8 @@ public class SourceCreateParams extends ApiRequestParams {
         private String trackingNumber;
 
         /** Finalize and obtain parameter instance from this builder. */
-        public Shipping build() {
-          return new Shipping(
+        public SourceCreateParams.SourceOrder.Shipping build() {
+          return new SourceCreateParams.SourceOrder.Shipping(
               this.address,
               this.carrier,
               this.extraParams,
@@ -1842,7 +1850,7 @@ public class SourceCreateParams extends ApiRequestParams {
         }
 
         /** Shipping address. */
-        public Builder setAddress(Address address) {
+        public Builder setAddress(SourceCreateParams.SourceOrder.Shipping.Address address) {
           this.address = address;
           return this;
         }
@@ -1980,8 +1988,8 @@ public class SourceCreateParams extends ApiRequestParams {
           private String state;
 
           /** Finalize and obtain parameter instance from this builder. */
-          public Address build() {
-            return new Address(
+          public SourceCreateParams.SourceOrder.Shipping.Address build() {
+            return new SourceCreateParams.SourceOrder.Shipping.Address(
                 this.city,
                 this.country,
                 this.extraParams,

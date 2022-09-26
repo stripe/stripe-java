@@ -123,7 +123,7 @@ public class SecretFindParams extends ApiRequestParams {
      * Specifies the scoping of the secret. Requests originating from UI extensions can only access
      * account-scoped secrets or secrets scoped to their own user.
      */
-    public Builder setScope(Scope scope) {
+    public Builder setScope(SecretFindParams.Scope scope) {
       this.scope = scope;
       return this;
     }
@@ -169,8 +169,8 @@ public class SecretFindParams extends ApiRequestParams {
       private String user;
 
       /** Finalize and obtain parameter instance from this builder. */
-      public Scope build() {
-        return new Scope(this.extraParams, this.type, this.user);
+      public SecretFindParams.Scope build() {
+        return new SecretFindParams.Scope(this.extraParams, this.type, this.user);
       }
 
       /**
@@ -200,7 +200,7 @@ public class SecretFindParams extends ApiRequestParams {
       }
 
       /** The secret scope type. */
-      public Builder setType(Type type) {
+      public Builder setType(SecretFindParams.Scope.Type type) {
         this.type = type;
         return this;
       }

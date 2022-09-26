@@ -139,7 +139,7 @@ public class AuthorizationListParams extends ApiRequestParams {
     }
 
     /** Only return authorizations that were created during the given date interval. */
-    public Builder setCreated(Created created) {
+    public Builder setCreated(AuthorizationListParams.Created created) {
       this.created = created;
       return this;
     }
@@ -237,7 +237,7 @@ public class AuthorizationListParams extends ApiRequestParams {
      * Only return authorizations with the given status. One of {@code pending}, {@code closed}, or
      * {@code reversed}.
      */
-    public Builder setStatus(Status status) {
+    public Builder setStatus(AuthorizationListParams.Status status) {
       this.status = status;
       return this;
     }
@@ -294,8 +294,9 @@ public class AuthorizationListParams extends ApiRequestParams {
       private Long lte;
 
       /** Finalize and obtain parameter instance from this builder. */
-      public Created build() {
-        return new Created(this.extraParams, this.gt, this.gte, this.lt, this.lte);
+      public AuthorizationListParams.Created build() {
+        return new AuthorizationListParams.Created(
+            this.extraParams, this.gt, this.gte, this.lt, this.lte);
       }
 
       /**

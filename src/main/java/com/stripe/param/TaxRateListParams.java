@@ -121,7 +121,7 @@ public class TaxRateListParams extends ApiRequestParams {
     }
 
     /** Optional range for filtering created date. */
-    public Builder setCreated(Created created) {
+    public Builder setCreated(TaxRateListParams.Created created) {
       this.created = created;
       return this;
     }
@@ -275,8 +275,9 @@ public class TaxRateListParams extends ApiRequestParams {
       private Long lte;
 
       /** Finalize and obtain parameter instance from this builder. */
-      public Created build() {
-        return new Created(this.extraParams, this.gt, this.gte, this.lt, this.lte);
+      public TaxRateListParams.Created build() {
+        return new TaxRateListParams.Created(
+            this.extraParams, this.gt, this.gte, this.lt, this.lte);
       }
 
       /**

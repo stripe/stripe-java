@@ -165,7 +165,7 @@ public class BalanceTransactionListParams extends ApiRequestParams {
      * This parameter is deprecated and we recommend listing by created and filtering in memory
      * instead.
      */
-    public Builder setAvailableOn(AvailableOn availableOn) {
+    public Builder setAvailableOn(BalanceTransactionListParams.AvailableOn availableOn) {
       this.availableOn = availableOn;
       return this;
     }
@@ -179,7 +179,7 @@ public class BalanceTransactionListParams extends ApiRequestParams {
       return this;
     }
 
-    public Builder setCreated(Created created) {
+    public Builder setCreated(BalanceTransactionListParams.Created created) {
       this.created = created;
       return this;
     }
@@ -366,8 +366,9 @@ public class BalanceTransactionListParams extends ApiRequestParams {
       private Long lte;
 
       /** Finalize and obtain parameter instance from this builder. */
-      public AvailableOn build() {
-        return new AvailableOn(this.extraParams, this.gt, this.gte, this.lt, this.lte);
+      public BalanceTransactionListParams.AvailableOn build() {
+        return new BalanceTransactionListParams.AvailableOn(
+            this.extraParams, this.gt, this.gte, this.lt, this.lte);
       }
 
       /**
@@ -474,8 +475,9 @@ public class BalanceTransactionListParams extends ApiRequestParams {
       private Long lte;
 
       /** Finalize and obtain parameter instance from this builder. */
-      public Created build() {
-        return new Created(this.extraParams, this.gt, this.gte, this.lt, this.lte);
+      public BalanceTransactionListParams.Created build() {
+        return new BalanceTransactionListParams.Created(
+            this.extraParams, this.gt, this.gte, this.lt, this.lte);
       }
 
       /**

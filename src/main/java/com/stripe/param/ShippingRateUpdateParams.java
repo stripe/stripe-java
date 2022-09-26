@@ -157,7 +157,7 @@ public class ShippingRateUpdateParams extends ApiRequestParams {
      * Describes a fixed amount to charge for shipping. Must be present if type is {@code
      * fixed_amount}.
      */
-    public Builder setFixedAmount(FixedAmount fixedAmount) {
+    public Builder setFixedAmount(ShippingRateUpdateParams.FixedAmount fixedAmount) {
       this.fixedAmount = fixedAmount;
       return this;
     }
@@ -216,7 +216,7 @@ public class ShippingRateUpdateParams extends ApiRequestParams {
      * Specifies whether the rate is considered inclusive of taxes or exclusive of taxes. One of
      * {@code inclusive}, {@code exclusive}, or {@code unspecified}.
      */
-    public Builder setTaxBehavior(TaxBehavior taxBehavior) {
+    public Builder setTaxBehavior(ShippingRateUpdateParams.TaxBehavior taxBehavior) {
       this.taxBehavior = taxBehavior;
       return this;
     }
@@ -230,7 +230,7 @@ public class ShippingRateUpdateParams extends ApiRequestParams {
      * href="https://stripe.com/docs/currencies">supported currency</a>.
      */
     @SerializedName("currency_options")
-    Map<String, CurrencyOption> currencyOptions;
+    Map<String, ShippingRateUpdateParams.FixedAmount.CurrencyOption> currencyOptions;
 
     /**
      * Map of extra parameters for custom features not available in this client library. The content
@@ -242,7 +242,8 @@ public class ShippingRateUpdateParams extends ApiRequestParams {
     Map<String, Object> extraParams;
 
     private FixedAmount(
-        Map<String, CurrencyOption> currencyOptions, Map<String, Object> extraParams) {
+        Map<String, ShippingRateUpdateParams.FixedAmount.CurrencyOption> currencyOptions,
+        Map<String, Object> extraParams) {
       this.currencyOptions = currencyOptions;
       this.extraParams = extraParams;
     }
@@ -252,13 +253,13 @@ public class ShippingRateUpdateParams extends ApiRequestParams {
     }
 
     public static class Builder {
-      private Map<String, CurrencyOption> currencyOptions;
+      private Map<String, ShippingRateUpdateParams.FixedAmount.CurrencyOption> currencyOptions;
 
       private Map<String, Object> extraParams;
 
       /** Finalize and obtain parameter instance from this builder. */
-      public FixedAmount build() {
-        return new FixedAmount(this.currencyOptions, this.extraParams);
+      public ShippingRateUpdateParams.FixedAmount build() {
+        return new ShippingRateUpdateParams.FixedAmount(this.currencyOptions, this.extraParams);
       }
 
       /**
@@ -267,7 +268,8 @@ public class ShippingRateUpdateParams extends ApiRequestParams {
        * See {@link ShippingRateUpdateParams.FixedAmount#currencyOptions} for the field
        * documentation.
        */
-      public Builder putCurrencyOption(String key, CurrencyOption value) {
+      public Builder putCurrencyOption(
+          String key, ShippingRateUpdateParams.FixedAmount.CurrencyOption value) {
         if (this.currencyOptions == null) {
           this.currencyOptions = new HashMap<>();
         }
@@ -281,7 +283,8 @@ public class ShippingRateUpdateParams extends ApiRequestParams {
        * See {@link ShippingRateUpdateParams.FixedAmount#currencyOptions} for the field
        * documentation.
        */
-      public Builder putAllCurrencyOption(Map<String, CurrencyOption> map) {
+      public Builder putAllCurrencyOption(
+          Map<String, ShippingRateUpdateParams.FixedAmount.CurrencyOption> map) {
         if (this.currencyOptions == null) {
           this.currencyOptions = new HashMap<>();
         }
@@ -357,8 +360,9 @@ public class ShippingRateUpdateParams extends ApiRequestParams {
         private TaxBehavior taxBehavior;
 
         /** Finalize and obtain parameter instance from this builder. */
-        public CurrencyOption build() {
-          return new CurrencyOption(this.amount, this.extraParams, this.taxBehavior);
+        public ShippingRateUpdateParams.FixedAmount.CurrencyOption build() {
+          return new ShippingRateUpdateParams.FixedAmount.CurrencyOption(
+              this.amount, this.extraParams, this.taxBehavior);
         }
 
         /** A non-negative integer in cents representing how much to charge. */
@@ -399,7 +403,8 @@ public class ShippingRateUpdateParams extends ApiRequestParams {
          * Specifies whether the rate is considered inclusive of taxes or exclusive of taxes. One of
          * {@code inclusive}, {@code exclusive}, or {@code unspecified}.
          */
-        public Builder setTaxBehavior(TaxBehavior taxBehavior) {
+        public Builder setTaxBehavior(
+            ShippingRateUpdateParams.FixedAmount.CurrencyOption.TaxBehavior taxBehavior) {
           this.taxBehavior = taxBehavior;
           return this;
         }

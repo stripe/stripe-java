@@ -184,7 +184,7 @@ public class SessionCreateParams extends ApiRequestParams {
      * The IETF language tag of the locale Customer Portal is displayed in. If blank or auto, the
      * customer’s {@code preferred_locales} or browser’s locale is used.
      */
-    public Builder setLocale(Locale locale) {
+    public Builder setLocale(SessionCreateParams.Locale locale) {
       this.locale = locale;
       return this;
     }

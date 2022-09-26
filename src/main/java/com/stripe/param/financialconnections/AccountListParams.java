@@ -112,7 +112,7 @@ public class AccountListParams extends ApiRequestParams {
      * If present, only return accounts that belong to the specified account holder. {@code
      * account_holder[customer]} and {@code account_holder[account]} are mutually exclusive.
      */
-    public Builder setAccountHolder(AccountHolder accountHolder) {
+    public Builder setAccountHolder(AccountListParams.AccountHolder accountHolder) {
       this.accountHolder = accountHolder;
       return this;
     }
@@ -244,8 +244,8 @@ public class AccountListParams extends ApiRequestParams {
       private Map<String, Object> extraParams;
 
       /** Finalize and obtain parameter instance from this builder. */
-      public AccountHolder build() {
-        return new AccountHolder(this.account, this.customer, this.extraParams);
+      public AccountListParams.AccountHolder build() {
+        return new AccountListParams.AccountHolder(this.account, this.customer, this.extraParams);
       }
 
       /** The ID of the Stripe account whose accounts will be retrieved. */

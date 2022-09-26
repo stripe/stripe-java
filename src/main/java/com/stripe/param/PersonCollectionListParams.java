@@ -175,7 +175,7 @@ public class PersonCollectionListParams extends ApiRequestParams {
      * Filters on the list of people returned based on the person's relationship to the account's
      * company.
      */
-    public Builder setRelationship(Relationship relationship) {
+    public Builder setRelationship(PersonCollectionListParams.Relationship relationship) {
       this.relationship = relationship;
       return this;
     }
@@ -260,8 +260,8 @@ public class PersonCollectionListParams extends ApiRequestParams {
       private Boolean representative;
 
       /** Finalize and obtain parameter instance from this builder. */
-      public Relationship build() {
-        return new Relationship(
+      public PersonCollectionListParams.Relationship build() {
+        return new PersonCollectionListParams.Relationship(
             this.director, this.executive, this.extraParams, this.owner, this.representative);
       }
 

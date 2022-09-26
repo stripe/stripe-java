@@ -265,7 +265,7 @@ public class PromotionCodeCreateParams extends ApiRequestParams {
     }
 
     /** Settings that restrict the redemption of the promotion code. */
-    public Builder setRestrictions(Restrictions restrictions) {
+    public Builder setRestrictions(PromotionCodeCreateParams.Restrictions restrictions) {
       this.restrictions = restrictions;
       return this;
     }
@@ -279,7 +279,7 @@ public class PromotionCodeCreateParams extends ApiRequestParams {
      * href="https://stripe.com/docs/currencies">supported currency</a>.
      */
     @SerializedName("currency_options")
-    Map<String, CurrencyOption> currencyOptions;
+    Map<String, PromotionCodeCreateParams.Restrictions.CurrencyOption> currencyOptions;
 
     /**
      * Map of extra parameters for custom features not available in this client library. The content
@@ -309,7 +309,7 @@ public class PromotionCodeCreateParams extends ApiRequestParams {
     String minimumAmountCurrency;
 
     private Restrictions(
-        Map<String, CurrencyOption> currencyOptions,
+        Map<String, PromotionCodeCreateParams.Restrictions.CurrencyOption> currencyOptions,
         Map<String, Object> extraParams,
         Boolean firstTimeTransaction,
         Long minimumAmount,
@@ -326,7 +326,7 @@ public class PromotionCodeCreateParams extends ApiRequestParams {
     }
 
     public static class Builder {
-      private Map<String, CurrencyOption> currencyOptions;
+      private Map<String, PromotionCodeCreateParams.Restrictions.CurrencyOption> currencyOptions;
 
       private Map<String, Object> extraParams;
 
@@ -337,8 +337,8 @@ public class PromotionCodeCreateParams extends ApiRequestParams {
       private String minimumAmountCurrency;
 
       /** Finalize and obtain parameter instance from this builder. */
-      public Restrictions build() {
-        return new Restrictions(
+      public PromotionCodeCreateParams.Restrictions build() {
+        return new PromotionCodeCreateParams.Restrictions(
             this.currencyOptions,
             this.extraParams,
             this.firstTimeTransaction,
@@ -352,7 +352,8 @@ public class PromotionCodeCreateParams extends ApiRequestParams {
        * See {@link PromotionCodeCreateParams.Restrictions#currencyOptions} for the field
        * documentation.
        */
-      public Builder putCurrencyOption(String key, CurrencyOption value) {
+      public Builder putCurrencyOption(
+          String key, PromotionCodeCreateParams.Restrictions.CurrencyOption value) {
         if (this.currencyOptions == null) {
           this.currencyOptions = new HashMap<>();
         }
@@ -366,7 +367,8 @@ public class PromotionCodeCreateParams extends ApiRequestParams {
        * See {@link PromotionCodeCreateParams.Restrictions#currencyOptions} for the field
        * documentation.
        */
-      public Builder putAllCurrencyOption(Map<String, CurrencyOption> map) {
+      public Builder putAllCurrencyOption(
+          Map<String, PromotionCodeCreateParams.Restrictions.CurrencyOption> map) {
         if (this.currencyOptions == null) {
           this.currencyOptions = new HashMap<>();
         }
@@ -460,8 +462,9 @@ public class PromotionCodeCreateParams extends ApiRequestParams {
         private Long minimumAmount;
 
         /** Finalize and obtain parameter instance from this builder. */
-        public CurrencyOption build() {
-          return new CurrencyOption(this.extraParams, this.minimumAmount);
+        public PromotionCodeCreateParams.Restrictions.CurrencyOption build() {
+          return new PromotionCodeCreateParams.Restrictions.CurrencyOption(
+              this.extraParams, this.minimumAmount);
         }
 
         /**

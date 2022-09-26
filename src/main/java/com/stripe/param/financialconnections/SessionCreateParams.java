@@ -39,7 +39,7 @@ public class SessionCreateParams extends ApiRequestParams {
    * payment_method}.
    */
   @SerializedName("permissions")
-  List<Permission> permissions;
+  List<SessionCreateParams.Permission> permissions;
 
   /**
    * For webview integrations only. Upon completing OAuth login in the native browser, the user will
@@ -53,7 +53,7 @@ public class SessionCreateParams extends ApiRequestParams {
       List<String> expand,
       Map<String, Object> extraParams,
       Filters filters,
-      List<Permission> permissions,
+      List<SessionCreateParams.Permission> permissions,
       String returnUrl) {
     this.accountHolder = accountHolder;
     this.expand = expand;
@@ -76,7 +76,7 @@ public class SessionCreateParams extends ApiRequestParams {
 
     private Filters filters;
 
-    private List<Permission> permissions;
+    private List<SessionCreateParams.Permission> permissions;
 
     private String returnUrl;
 
@@ -92,7 +92,7 @@ public class SessionCreateParams extends ApiRequestParams {
     }
 
     /** The account holder to link accounts for. */
-    public Builder setAccountHolder(AccountHolder accountHolder) {
+    public Builder setAccountHolder(SessionCreateParams.AccountHolder accountHolder) {
       this.accountHolder = accountHolder;
       return this;
     }
@@ -150,7 +150,7 @@ public class SessionCreateParams extends ApiRequestParams {
     }
 
     /** Filters to restrict the kinds of accounts to collect. */
-    public Builder setFilters(Filters filters) {
+    public Builder setFilters(SessionCreateParams.Filters filters) {
       this.filters = filters;
       return this;
     }
@@ -160,7 +160,7 @@ public class SessionCreateParams extends ApiRequestParams {
      * and subsequent calls adds additional elements to the original list. See {@link
      * SessionCreateParams#permissions} for the field documentation.
      */
-    public Builder addPermission(Permission element) {
+    public Builder addPermission(SessionCreateParams.Permission element) {
       if (this.permissions == null) {
         this.permissions = new ArrayList<>();
       }
@@ -173,7 +173,7 @@ public class SessionCreateParams extends ApiRequestParams {
      * call, and subsequent calls adds additional elements to the original list. See {@link
      * SessionCreateParams#permissions} for the field documentation.
      */
-    public Builder addAllPermission(List<Permission> elements) {
+    public Builder addAllPermission(List<SessionCreateParams.Permission> elements) {
       if (this.permissions == null) {
         this.permissions = new ArrayList<>();
       }
@@ -242,8 +242,9 @@ public class SessionCreateParams extends ApiRequestParams {
       private Type type;
 
       /** Finalize and obtain parameter instance from this builder. */
-      public AccountHolder build() {
-        return new AccountHolder(this.account, this.customer, this.extraParams, this.type);
+      public SessionCreateParams.AccountHolder build() {
+        return new SessionCreateParams.AccountHolder(
+            this.account, this.customer, this.extraParams, this.type);
       }
 
       /**
@@ -291,7 +292,7 @@ public class SessionCreateParams extends ApiRequestParams {
       }
 
       /** Type of account holder to collect accounts for. */
-      public Builder setType(Type type) {
+      public Builder setType(SessionCreateParams.AccountHolder.Type type) {
         this.type = type;
         return this;
       }
@@ -343,8 +344,8 @@ public class SessionCreateParams extends ApiRequestParams {
       private Map<String, Object> extraParams;
 
       /** Finalize and obtain parameter instance from this builder. */
-      public Filters build() {
-        return new Filters(this.countries, this.extraParams);
+      public SessionCreateParams.Filters build() {
+        return new SessionCreateParams.Filters(this.countries, this.extraParams);
       }
 
       /**

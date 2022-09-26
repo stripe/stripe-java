@@ -55,6 +55,13 @@ public class PaymentIntentIncrementAuthorizationParams extends ApiRequestParams 
   Map<String, String> metadata;
 
   /**
+   * For non-card charges, you can use this value as the complete description that appears on your
+   * customers’ statements. Must contain at least one letter, maximum 22 characters.
+   */
+  @SerializedName("statement_descriptor")
+  String statementDescriptor;
+
+  /**
    * The parameters used to automatically create a Transfer when the payment is captured. For more
    * information, see the PaymentIntents <a
    * href="https://stripe.com/docs/payments/connected-accounts">use case for connected accounts</a>.
@@ -69,6 +76,7 @@ public class PaymentIntentIncrementAuthorizationParams extends ApiRequestParams 
       List<String> expand,
       Map<String, Object> extraParams,
       Map<String, String> metadata,
+      String statementDescriptor,
       TransferData transferData) {
     this.amount = amount;
     this.applicationFeeAmount = applicationFeeAmount;
@@ -76,6 +84,7 @@ public class PaymentIntentIncrementAuthorizationParams extends ApiRequestParams 
     this.expand = expand;
     this.extraParams = extraParams;
     this.metadata = metadata;
+    this.statementDescriptor = statementDescriptor;
     this.transferData = transferData;
   }
 
@@ -96,6 +105,8 @@ public class PaymentIntentIncrementAuthorizationParams extends ApiRequestParams 
 
     private Map<String, String> metadata;
 
+    private String statementDescriptor;
+
     private TransferData transferData;
 
     /** Finalize and obtain parameter instance from this builder. */
@@ -107,6 +118,7 @@ public class PaymentIntentIncrementAuthorizationParams extends ApiRequestParams 
           this.expand,
           this.extraParams,
           this.metadata,
+          this.statementDescriptor,
           this.transferData);
     }
 
@@ -217,12 +229,22 @@ public class PaymentIntentIncrementAuthorizationParams extends ApiRequestParams 
     }
 
     /**
+     * For non-card charges, you can use this value as the complete description that appears on your
+     * customers’ statements. Must contain at least one letter, maximum 22 characters.
+     */
+    public Builder setStatementDescriptor(String statementDescriptor) {
+      this.statementDescriptor = statementDescriptor;
+      return this;
+    }
+
+    /**
      * The parameters used to automatically create a Transfer when the payment is captured. For more
      * information, see the PaymentIntents <a
      * href="https://stripe.com/docs/payments/connected-accounts">use case for connected
      * accounts</a>.
      */
-    public Builder setTransferData(TransferData transferData) {
+    public Builder setTransferData(
+        PaymentIntentIncrementAuthorizationParams.TransferData transferData) {
       this.transferData = transferData;
       return this;
     }
@@ -258,8 +280,9 @@ public class PaymentIntentIncrementAuthorizationParams extends ApiRequestParams 
       private Map<String, Object> extraParams;
 
       /** Finalize and obtain parameter instance from this builder. */
-      public TransferData build() {
-        return new TransferData(this.amount, this.extraParams);
+      public PaymentIntentIncrementAuthorizationParams.TransferData build() {
+        return new PaymentIntentIncrementAuthorizationParams.TransferData(
+            this.amount, this.extraParams);
       }
 
       /** The amount that will be transferred automatically when a charge succeeds. */

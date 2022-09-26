@@ -210,7 +210,7 @@ public class CreditReversalListParams extends ApiRequestParams {
     }
 
     /** Only return CreditReversals for a given status. */
-    public Builder setStatus(Status status) {
+    public Builder setStatus(CreditReversalListParams.Status status) {
       this.status = status;
       return this;
     }

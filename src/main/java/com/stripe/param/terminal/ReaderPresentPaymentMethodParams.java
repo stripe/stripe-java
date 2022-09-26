@@ -71,7 +71,7 @@ public class ReaderPresentPaymentMethodParams extends ApiRequestParams {
     }
 
     /** Simulated data for the card_present payment method. */
-    public Builder setCardPresent(CardPresent cardPresent) {
+    public Builder setCardPresent(ReaderPresentPaymentMethodParams.CardPresent cardPresent) {
       this.cardPresent = cardPresent;
       return this;
     }
@@ -135,7 +135,7 @@ public class ReaderPresentPaymentMethodParams extends ApiRequestParams {
     }
 
     /** Simulated payment type. */
-    public Builder setType(Type type) {
+    public Builder setType(ReaderPresentPaymentMethodParams.Type type) {
       this.type = type;
       return this;
     }
@@ -171,8 +171,8 @@ public class ReaderPresentPaymentMethodParams extends ApiRequestParams {
       private String number;
 
       /** Finalize and obtain parameter instance from this builder. */
-      public CardPresent build() {
-        return new CardPresent(this.extraParams, this.number);
+      public ReaderPresentPaymentMethodParams.CardPresent build() {
+        return new ReaderPresentPaymentMethodParams.CardPresent(this.extraParams, this.number);
       }
 
       /**
