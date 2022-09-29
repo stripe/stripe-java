@@ -102,6 +102,10 @@ public class Session extends ApiResource implements HasId {
   @SerializedName("consent_collection")
   ConsentCollection consentCollection;
 
+  /** Time at which the object was created. Measured in seconds since the Unix epoch. */
+  @SerializedName("created")
+  Long created;
+
   /**
    * Three-letter <a href="https://www.iso.org/iso-4217-currency-codes.html">ISO currency code</a>,
    * in lowercase. Must be a <a href="https://stripe.com/docs/currencies">supported currency</a>.
