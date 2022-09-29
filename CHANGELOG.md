@@ -1,5 +1,12 @@
 # Changelog
 
+## 21.10.0 - 2022-09-29
+* [#1448](https://github.com/stripe/stripe-java/pull/1448) API Updates
+  * Add support for `created` on `Checkout.Session`
+  * Add support for `setup_future_usage` on `PaymentIntent.payment_method_options.pix`, `PaymentIntentConfirmParams.payment_method_options.pix`, `PaymentIntentCreateParams.payment_method_options.pix`, and `PaymentIntentUpdateParams.payment_method_options.pix`
+  * Deprecate `SessionCreateParams.subscription_data.items` (use the `line_items` param instead). This will be removed in the next major version.
+  
+
 ## 21.9.0 - 2022-09-22
 * [#1445](https://github.com/stripe/stripe-java/pull/1445) API Updates
   * Add support for `terms_of_service` on `Checkout.Session.consent_collection`, `Checkout.Session.consent`, `CheckoutSessionCreateParams.consent_collection`, `PaymentLink.consent_collection`, and `PaymentLinkCreateParams.consent_collection`
