@@ -30,7 +30,7 @@ jobs:
         id: setup-jre
         uses: actions/setup-java@v1
         with:
-          java-version: "18" # always use 18 for building
+          java-version: "17" # always use 17 LTS for building
           architecture: x64
 
       - name: Set Test Java Runtime Environment variable
@@ -79,7 +79,7 @@ jobs:
       - name: Setup Java
         uses: actions/setup-java@v1
         with:
-          java-version: "18" # always use 18 for building
+          java-version: "17" # always use 17 LTS for building
           architecture: x64
 
       - name: Tweak gradle.properties for Java 1.8
@@ -99,7 +99,7 @@ jobs:
 
       - name: Send code coverage report to coveralls.io
         run: ./gradlew jacocoTestReport coveralls
-        if: matrix.java-version == '18'
+        if: matrix.java-version == '17'
         env:
           CI_NAME: github-actions
           COVERALLS_REPO_TOKEN: ${{ secrets.COVERALLS_REPO_TOKEN }}
@@ -117,7 +117,7 @@ jobs:
         id: setup-jre
         uses: actions/setup-java@v1
         with:
-          java-version: "18" # always use 18 for building
+          java-version: "17" # always use 17 LTS for building
           architecture: x64
       - name: Set Test Java Runtime Environment variable
         run: echo "JAVA_TEST_HOME=${{ steps.setup-jre.outputs.path }}" >> $GITHUB_ENV
@@ -153,7 +153,7 @@ jobs:
         id: setup-jre
         uses: actions/setup-java@v1
         with:
-          java-version: "18" # always use 18 for building
+          java-version: "17" # always use 17 TLS for building
           architecture: x64
       - name: Set Test Java Runtime Environment variable
         run: echo "JAVA_TEST_HOME=${{ steps.setup-jre.outputs.path }}" >> $GITHUB_ENV
