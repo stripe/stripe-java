@@ -11137,13 +11137,18 @@ public class PaymentIntentUpdateParams extends ApiRequestParams {
       @SerializedName("preferred_locale")
       PreferredLocale preferredLocale;
 
+      @SerializedName("reference_id")
+      Object referenceId;
+
       private Paypal(
           ApiRequestParams.EnumParam captureMethod,
           Map<String, Object> extraParams,
-          PreferredLocale preferredLocale) {
+          PreferredLocale preferredLocale,
+          Object referenceId) {
         this.captureMethod = captureMethod;
         this.extraParams = extraParams;
         this.preferredLocale = preferredLocale;
+        this.referenceId = referenceId;
       }
 
       public static Builder builder() {
@@ -11157,10 +11162,12 @@ public class PaymentIntentUpdateParams extends ApiRequestParams {
 
         private PreferredLocale preferredLocale;
 
+        private Object referenceId;
+
         /** Finalize and obtain parameter instance from this builder. */
         public PaymentIntentUpdateParams.PaymentMethodOptions.Paypal build() {
           return new PaymentIntentUpdateParams.PaymentMethodOptions.Paypal(
-              this.captureMethod, this.extraParams, this.preferredLocale);
+              this.captureMethod, this.extraParams, this.preferredLocale, this.referenceId);
         }
 
         public Builder setCaptureMethod(
@@ -11205,6 +11212,16 @@ public class PaymentIntentUpdateParams extends ApiRequestParams {
         public Builder setPreferredLocale(
             PaymentIntentUpdateParams.PaymentMethodOptions.Paypal.PreferredLocale preferredLocale) {
           this.preferredLocale = preferredLocale;
+          return this;
+        }
+
+        public Builder setReferenceId(String referenceId) {
+          this.referenceId = referenceId;
+          return this;
+        }
+
+        public Builder setReferenceId(EmptyParam referenceId) {
+          this.referenceId = referenceId;
           return this;
         }
       }

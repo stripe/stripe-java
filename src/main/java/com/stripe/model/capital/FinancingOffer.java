@@ -316,9 +316,9 @@ public class FinancingOffer extends ApiResource implements HasId {
 
     /**
      * Populated when the {@code product_type} of the {@code financingoffer} is {@code refill}.
-     * Represents the discount rate percentage on remaining premium on the existing loan. When the
+     * Represents the discount rate percentage on remaining fee on the existing loan. When the
      * {@code financing_offer} is paid out, the {@code previous_financing_fee_discount_amount} will
-     * be computed as the multiple of this rate and the remaining premium.
+     * be computed as the multiple of this rate and the remaining fee.
      */
     @SerializedName("previous_financing_fee_discount_rate")
     BigDecimal previousFinancingFeeDiscountRate;

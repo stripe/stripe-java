@@ -239,6 +239,16 @@ public class SubscriptionSchedule extends ApiResource
   }
 
   /** Amends an existing subscription schedule. */
+  public SubscriptionSchedule amend() throws StripeException {
+    return amend((Map<String, Object>) null, (RequestOptions) null);
+  }
+
+  /** Amends an existing subscription schedule. */
+  public SubscriptionSchedule amend(RequestOptions options) throws StripeException {
+    return amend((Map<String, Object>) null, options);
+  }
+
+  /** Amends an existing subscription schedule. */
   public SubscriptionSchedule amend(Map<String, Object> params) throws StripeException {
     return amend(params, (RequestOptions) null);
   }

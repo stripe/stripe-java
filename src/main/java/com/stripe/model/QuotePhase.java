@@ -46,7 +46,7 @@ public class QuotePhase extends ApiResource implements HasId {
    * Either {@code charge_automatically}, or {@code send_invoice}. When charging automatically,
    * Stripe will attempt to pay the underlying subscription at the end of each billing cycle using
    * the default source attached to the customer. When sending an invoice, Stripe will email your
-   * customer an invoice with payment instructions.
+   * customer an invoice with payment instructions and mark the subscription as {@code active}.
    *
    * <p>One of {@code charge_automatically}, or {@code send_invoice}.
    */

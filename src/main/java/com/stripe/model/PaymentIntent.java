@@ -3118,6 +3118,13 @@ public class PaymentIntent extends ApiResource implements HasId, MetadataStore<P
       /** Preferred locale of the PayPal checkout page that the customer is redirected to. */
       @SerializedName("preferred_locale")
       String preferredLocale;
+
+      /**
+       * A unique reference ID of the PayPal transaction. This must be a globally unique ID across
+       * all PayPal transactions or the transaction will fail.
+       */
+      @SerializedName("reference_id")
+      String referenceId;
     }
 
     @Getter
