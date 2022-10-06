@@ -472,7 +472,8 @@ public class Invoice extends ApiResource implements HasId, MetadataStore<Invoice
 
   /**
    * Starting customer balance before the invoice is finalized. If the invoice has not been
-   * finalized yet, this will be the current customer balance.
+   * finalized yet, this will be the current customer balance. For revision invoices, this also
+   * includes any customer balance that was applied to the original invoice.
    */
   @SerializedName("starting_balance")
   Long startingBalance;

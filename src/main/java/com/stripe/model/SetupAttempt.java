@@ -278,6 +278,9 @@ public class SetupAttempt extends ApiResource implements HasId {
     @SerializedName("ideal")
     Ideal ideal;
 
+    @SerializedName("klarna")
+    Klarna klarna;
+
     @SerializedName("link")
     Link link;
 
@@ -547,6 +550,11 @@ public class SetupAttempt extends ApiResource implements HasId {
             new ExpandableField<Mandate>(expandableObject.getId(), expandableObject);
       }
     }
+
+    @Getter
+    @Setter
+    @EqualsAndHashCode(callSuper = false)
+    public static class Klarna extends StripeObject {}
 
     @Getter
     @Setter
