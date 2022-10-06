@@ -9865,10 +9865,7 @@ public class SessionCreateParams extends ApiRequestParams {
     @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
     Map<String, Object> extraParams;
 
-    /**
-     * A list of items, each with an attached plan, that the customer is subscribing to. Prefer
-     * using {@code line_items}.
-     */
+    /** This parameter is deprecated. Use the line_items parameter on the Session instead. */
     @SerializedName("items")
     List<SessionCreateParams.SubscriptionData.Item> items;
 

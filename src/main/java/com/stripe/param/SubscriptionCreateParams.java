@@ -81,7 +81,8 @@ public class SubscriptionCreateParams extends ApiRequestParams {
    * Either {@code charge_automatically}, or {@code send_invoice}. When charging automatically,
    * Stripe will attempt to pay this subscription at the end of the cycle using the default source
    * attached to the customer. When sending an invoice, Stripe will email your customer an invoice
-   * with payment instructions. Defaults to {@code charge_automatically}.
+   * with payment instructions and mark the subscription as {@code active}. Defaults to {@code
+   * charge_automatically}.
    */
   @SerializedName("collection_method")
   CollectionMethod collectionMethod;
@@ -187,7 +188,9 @@ public class SubscriptionCreateParams extends ApiRequestParams {
   Boolean offSession;
 
   /**
-   * Use {@code allow_incomplete} to create subscriptions with {@code status=incomplete} if the
+   * Only applies to subscriptions with {@code collection_method=charge_automatically}.
+   *
+   * <p>Use {@code allow_incomplete} to create subscriptions with {@code status=incomplete} if the
    * first invoice cannot be paid. Creating subscriptions with this status allows you to manage
    * scenarios where additional user actions are needed to pay a subscription's invoice. For
    * example, SCA regulation may require 3DS authentication to complete payment. See the <a
@@ -213,6 +216,9 @@ public class SubscriptionCreateParams extends ApiRequestParams {
    *
    * <p>{@code pending_if_incomplete} is only used with updates and cannot be passed when creating a
    * subscription.
+   *
+   * <p>Subscriptions with {@code collection_method=send_invoice} are automatically activated
+   * regardless of the first invoice status.
    */
   @SerializedName("payment_behavior")
   PaymentBehavior paymentBehavior;
@@ -577,7 +583,8 @@ public class SubscriptionCreateParams extends ApiRequestParams {
      * Either {@code charge_automatically}, or {@code send_invoice}. When charging automatically,
      * Stripe will attempt to pay this subscription at the end of the cycle using the default source
      * attached to the customer. When sending an invoice, Stripe will email your customer an invoice
-     * with payment instructions. Defaults to {@code charge_automatically}.
+     * with payment instructions and mark the subscription as {@code active}. Defaults to {@code
+     * charge_automatically}.
      */
     public Builder setCollectionMethod(SubscriptionCreateParams.CollectionMethod collectionMethod) {
       this.collectionMethod = collectionMethod;
@@ -883,7 +890,9 @@ public class SubscriptionCreateParams extends ApiRequestParams {
     }
 
     /**
-     * Use {@code allow_incomplete} to create subscriptions with {@code status=incomplete} if the
+     * Only applies to subscriptions with {@code collection_method=charge_automatically}.
+     *
+     * <p>Use {@code allow_incomplete} to create subscriptions with {@code status=incomplete} if the
      * first invoice cannot be paid. Creating subscriptions with this status allows you to manage
      * scenarios where additional user actions are needed to pay a subscription's invoice. For
      * example, SCA regulation may require 3DS authentication to complete payment. See the <a
@@ -909,6 +918,9 @@ public class SubscriptionCreateParams extends ApiRequestParams {
      *
      * <p>{@code pending_if_incomplete} is only used with updates and cannot be passed when creating
      * a subscription.
+     *
+     * <p>Subscriptions with {@code collection_method=send_invoice} are automatically activated
+     * regardless of the first invoice status.
      */
     public Builder setPaymentBehavior(SubscriptionCreateParams.PaymentBehavior paymentBehavior) {
       this.paymentBehavior = paymentBehavior;
