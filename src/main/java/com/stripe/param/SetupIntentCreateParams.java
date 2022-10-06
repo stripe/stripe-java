@@ -2856,6 +2856,9 @@ public class SetupIntentCreateParams extends ApiRequestParams {
         @SerializedName("bank_muamalat")
         BANK_MUAMALAT("bank_muamalat"),
 
+        @SerializedName("bank_of_china")
+        BANK_OF_CHINA("bank_of_china"),
+
         @SerializedName("bank_rakyat")
         BANK_RAKYAT("bank_rakyat"),
 
