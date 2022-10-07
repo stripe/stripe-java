@@ -239,6 +239,16 @@ public class SubscriptionSchedule extends ApiResource
   }
 
   /** Amends an existing subscription schedule. */
+  public SubscriptionSchedule amend() throws StripeException {
+    return amend((Map<String, Object>) null, (RequestOptions) null);
+  }
+
+  /** Amends an existing subscription schedule. */
+  public SubscriptionSchedule amend(RequestOptions options) throws StripeException {
+    return amend((Map<String, Object>) null, options);
+  }
+
+  /** Amends an existing subscription schedule. */
   public SubscriptionSchedule amend(Map<String, Object> params) throws StripeException {
     return amend(params, (RequestOptions) null);
   }
@@ -732,7 +742,7 @@ public class SubscriptionSchedule extends ApiResource
      * Either {@code charge_automatically}, or {@code send_invoice}. When charging automatically,
      * Stripe will attempt to pay the underlying subscription at the end of each billing cycle using
      * the default source attached to the customer. When sending an invoice, Stripe will email your
-     * customer an invoice with payment instructions.
+     * customer an invoice with payment instructions and mark the subscription as {@code active}.
      *
      * <p>One of {@code charge_automatically}, or {@code send_invoice}.
      */
@@ -858,7 +868,7 @@ public class SubscriptionSchedule extends ApiResource
      * Either {@code charge_automatically}, or {@code send_invoice}. When charging automatically,
      * Stripe will attempt to pay the underlying subscription at the end of each billing cycle using
      * the default source attached to the customer. When sending an invoice, Stripe will email your
-     * customer an invoice with payment instructions.
+     * customer an invoice with payment instructions and mark the subscription as {@code active}.
      *
      * <p>One of {@code charge_automatically}, or {@code send_invoice}.
      */

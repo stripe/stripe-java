@@ -358,14 +358,14 @@ public class SubscriptionScheduleAmendParams extends ApiRequestParams {
        * amendment_start}.
        */
       @SerializedName("timestamp")
-      Timestamp timestamp;
+      Long timestamp;
 
       /** Select one of three ways to pass the {@code amendment_end}. */
       @SerializedName("type")
       Type type;
 
       private AmendmentEnd(
-          Duration duration, Map<String, Object> extraParams, Timestamp timestamp, Type type) {
+          Duration duration, Map<String, Object> extraParams, Long timestamp, Type type) {
         this.duration = duration;
         this.extraParams = extraParams;
         this.timestamp = timestamp;
@@ -381,7 +381,7 @@ public class SubscriptionScheduleAmendParams extends ApiRequestParams {
 
         private Map<String, Object> extraParams;
 
-        private Timestamp timestamp;
+        private Long timestamp;
 
         private Type type;
 
@@ -430,8 +430,7 @@ public class SubscriptionScheduleAmendParams extends ApiRequestParams {
          * A precise Unix timestamp for the amendment to end. Must be after the {@code
          * amendment_start}.
          */
-        public Builder setTimestamp(
-            SubscriptionScheduleAmendParams.Amendment.AmendmentEnd.Timestamp timestamp) {
+        public Builder setTimestamp(Long timestamp) {
           this.timestamp = timestamp;
           return this;
         }
@@ -564,86 +563,6 @@ public class SubscriptionScheduleAmendParams extends ApiRequestParams {
         }
       }
 
-      @Getter
-      public static class Timestamp {
-        /**
-         * Map of extra parameters for custom features not available in this client library. The
-         * content in this map is not serialized under this field's {@code @SerializedName} value.
-         * Instead, each key/value pair is serialized as if the key is a root-level field
-         * (serialized) name in this param object. Effectively, this map is flattened to its parent
-         * instance.
-         */
-        @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
-        Map<String, Object> extraParams;
-
-        /**
-         * A precise numeric timestamp, provided as an integer number of seconds since the Unix
-         * epoch.
-         */
-        @SerializedName("value")
-        Long value;
-
-        private Timestamp(Map<String, Object> extraParams, Long value) {
-          this.extraParams = extraParams;
-          this.value = value;
-        }
-
-        public static Builder builder() {
-          return new Builder();
-        }
-
-        public static class Builder {
-          private Map<String, Object> extraParams;
-
-          private Long value;
-
-          /** Finalize and obtain parameter instance from this builder. */
-          public SubscriptionScheduleAmendParams.Amendment.AmendmentEnd.Timestamp build() {
-            return new SubscriptionScheduleAmendParams.Amendment.AmendmentEnd.Timestamp(
-                this.extraParams, this.value);
-          }
-
-          /**
-           * Add a key/value pair to `extraParams` map. A map is initialized for the first
-           * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
-           * map. See {@link
-           * SubscriptionScheduleAmendParams.Amendment.AmendmentEnd.Timestamp#extraParams} for the
-           * field documentation.
-           */
-          public Builder putExtraParam(String key, Object value) {
-            if (this.extraParams == null) {
-              this.extraParams = new HashMap<>();
-            }
-            this.extraParams.put(key, value);
-            return this;
-          }
-
-          /**
-           * Add all map key/value pairs to `extraParams` map. A map is initialized for the first
-           * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
-           * map. See {@link
-           * SubscriptionScheduleAmendParams.Amendment.AmendmentEnd.Timestamp#extraParams} for the
-           * field documentation.
-           */
-          public Builder putAllExtraParam(Map<String, Object> map) {
-            if (this.extraParams == null) {
-              this.extraParams = new HashMap<>();
-            }
-            this.extraParams.putAll(map);
-            return this;
-          }
-
-          /**
-           * A precise numeric timestamp, provided as an integer number of seconds since the Unix
-           * epoch.
-           */
-          public Builder setValue(Long value) {
-            this.value = value;
-            return this;
-          }
-        }
-      }
-
       public enum Type implements ApiRequestParams.EnumParam {
         @SerializedName("duration")
         DURATION("duration"),
@@ -683,17 +602,14 @@ public class SubscriptionScheduleAmendParams extends ApiRequestParams {
 
       /** A precise Unix timestamp for the amendment to start. */
       @SerializedName("timestamp")
-      Timestamp timestamp;
+      Long timestamp;
 
       /** Select one of three ways to pass the {@code amendment_start}. */
       @SerializedName("type")
       Type type;
 
       private AmendmentStart(
-          AmendmentEnd amendmentEnd,
-          Map<String, Object> extraParams,
-          Timestamp timestamp,
-          Type type) {
+          AmendmentEnd amendmentEnd, Map<String, Object> extraParams, Long timestamp, Type type) {
         this.amendmentEnd = amendmentEnd;
         this.extraParams = extraParams;
         this.timestamp = timestamp;
@@ -709,7 +625,7 @@ public class SubscriptionScheduleAmendParams extends ApiRequestParams {
 
         private Map<String, Object> extraParams;
 
-        private Timestamp timestamp;
+        private Long timestamp;
 
         private Type type;
 
@@ -758,8 +674,7 @@ public class SubscriptionScheduleAmendParams extends ApiRequestParams {
         }
 
         /** A precise Unix timestamp for the amendment to start. */
-        public Builder setTimestamp(
-            SubscriptionScheduleAmendParams.Amendment.AmendmentStart.Timestamp timestamp) {
+        public Builder setTimestamp(Long timestamp) {
           this.timestamp = timestamp;
           return this;
         }
@@ -848,86 +763,6 @@ public class SubscriptionScheduleAmendParams extends ApiRequestParams {
            */
           public Builder setIndex(Long index) {
             this.index = index;
-            return this;
-          }
-        }
-      }
-
-      @Getter
-      public static class Timestamp {
-        /**
-         * Map of extra parameters for custom features not available in this client library. The
-         * content in this map is not serialized under this field's {@code @SerializedName} value.
-         * Instead, each key/value pair is serialized as if the key is a root-level field
-         * (serialized) name in this param object. Effectively, this map is flattened to its parent
-         * instance.
-         */
-        @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
-        Map<String, Object> extraParams;
-
-        /**
-         * A precise numeric timestamp, provided as an integer number of seconds since the Unix
-         * epoch.
-         */
-        @SerializedName("value")
-        Long value;
-
-        private Timestamp(Map<String, Object> extraParams, Long value) {
-          this.extraParams = extraParams;
-          this.value = value;
-        }
-
-        public static Builder builder() {
-          return new Builder();
-        }
-
-        public static class Builder {
-          private Map<String, Object> extraParams;
-
-          private Long value;
-
-          /** Finalize and obtain parameter instance from this builder. */
-          public SubscriptionScheduleAmendParams.Amendment.AmendmentStart.Timestamp build() {
-            return new SubscriptionScheduleAmendParams.Amendment.AmendmentStart.Timestamp(
-                this.extraParams, this.value);
-          }
-
-          /**
-           * Add a key/value pair to `extraParams` map. A map is initialized for the first
-           * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
-           * map. See {@link
-           * SubscriptionScheduleAmendParams.Amendment.AmendmentStart.Timestamp#extraParams} for the
-           * field documentation.
-           */
-          public Builder putExtraParam(String key, Object value) {
-            if (this.extraParams == null) {
-              this.extraParams = new HashMap<>();
-            }
-            this.extraParams.put(key, value);
-            return this;
-          }
-
-          /**
-           * Add all map key/value pairs to `extraParams` map. A map is initialized for the first
-           * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
-           * map. See {@link
-           * SubscriptionScheduleAmendParams.Amendment.AmendmentStart.Timestamp#extraParams} for the
-           * field documentation.
-           */
-          public Builder putAllExtraParam(Map<String, Object> map) {
-            if (this.extraParams == null) {
-              this.extraParams = new HashMap<>();
-            }
-            this.extraParams.putAll(map);
-            return this;
-          }
-
-          /**
-           * A precise numeric timestamp, provided as an integer number of seconds since the Unix
-           * epoch.
-           */
-          public Builder setValue(Long value) {
-            this.value = value;
             return this;
           }
         }

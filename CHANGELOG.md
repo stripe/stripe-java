@@ -1,5 +1,18 @@
 # Changelog
 
+## 21.11.0 - 2022-10-06
+* [#1451](https://github.com/stripe/stripe-java/pull/1451) API Updates
+  * Add support for new value `bank_of_china` on enums `PaymentIntentConfirmParams.payment_method_data.fpx.bank`, `PaymentIntentCreateParams.payment_method_data.fpx.bank`, `PaymentIntentUpdateParams.payment_method_data.fpx.bank`, `PaymentMethodCreateParams.fpx.bank`, `SetupIntentConfirmParams.payment_method_data.fpx.bank`, `SetupIntentCreateParams.payment_method_data.fpx.bank`, and `SetupIntentUpdateParams.payment_method_data.fpx.bank`
+  * Add support for new values `America/Nuuk`, `Europe/Kyiv`, and `Pacific/Kanton` on enum `ReportingReportRunCreateParams.parameters.timezone`
+  * Add support for `klarna` on `SetupAttempt.payment_method_details`
+* [#1450](https://github.com/stripe/stripe-java/pull/1450) Set JDK to 17 LTS
+
+## 21.10.0 - 2022-09-29
+* [#1448](https://github.com/stripe/stripe-java/pull/1448) API Updates
+  * Add support for `created` on `Checkout.Session`
+  * Add support for `setup_future_usage` on `PaymentIntent.payment_method_options.pix`, `PaymentIntentConfirmParams.payment_method_options.pix`, `PaymentIntentCreateParams.payment_method_options.pix`, and `PaymentIntentUpdateParams.payment_method_options.pix`
+  * Deprecate `SessionCreateParams.subscription_data.items` (use the `line_items` param instead). This will be removed in the next major version.
+
 ## 21.10.0-beta.1 - 2022-09-26
 * [#1447](https://github.com/stripe/stripe-java/pull/1447) API Updates for beta branch
   * Updated stable APIs to the latest version

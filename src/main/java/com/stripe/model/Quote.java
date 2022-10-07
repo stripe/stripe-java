@@ -72,8 +72,8 @@ public class Quote extends ApiResource implements HasId, MetadataStore<Quote> {
    * Either {@code charge_automatically}, or {@code send_invoice}. When charging automatically,
    * Stripe will attempt to pay invoices at the end of the subscription cycle or on finalization
    * using the default payment method attached to the subscription or customer. When sending an
-   * invoice, Stripe will email your customer an invoice with payment instructions. Defaults to
-   * {@code charge_automatically}.
+   * invoice, Stripe will email your customer an invoice with payment instructions and mark the
+   * subscription as {@code active}. Defaults to {@code charge_automatically}.
    *
    * <p>One of {@code charge_automatically}, or {@code send_invoice}.
    */

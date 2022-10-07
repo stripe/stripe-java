@@ -265,7 +265,7 @@ New features and bug fixes are released on the latest major version of the Strip
 
 ## Development
 
-JDK 18 is required to build the Stripe Java library. By default, tests use the same Java runtime as the build.
+JDK 17 is required to build the Stripe Java library. By default, tests use the same Java runtime as the build.
 To use a custom version of Java runtime for tests set the `JAVA_TEST_HOME` environment variable to runtime's
 home directory.
 
