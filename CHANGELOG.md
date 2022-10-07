@@ -1,5 +1,9 @@
 # Changelog
 
+## 21.12.0-beta.1 - 2022-10-07
+* [#1452](https://github.com/stripe/stripe-java/pull/1452) API Updates for beta branch
+  * Updated stable APIs to the latest version
+
 ## 21.11.0 - 2022-10-06
 * [#1451](https://github.com/stripe/stripe-java/pull/1451) API Updates
   * Add support for new value `bank_of_china` on enums `PaymentIntentConfirmParams.payment_method_data.fpx.bank`, `PaymentIntentCreateParams.payment_method_data.fpx.bank`, `PaymentIntentUpdateParams.payment_method_data.fpx.bank`, `PaymentMethodCreateParams.fpx.bank`, `SetupIntentConfirmParams.payment_method_data.fpx.bank`, `SetupIntentCreateParams.payment_method_data.fpx.bank`, and `SetupIntentUpdateParams.payment_method_data.fpx.bank`
