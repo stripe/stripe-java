@@ -941,11 +941,11 @@ public class Account extends ApiResource implements MetadataStore<Account>, Paym
 
     /** The Kana variation of the company's primary address (Japan only). */
     @SerializedName("address_kana")
-    Person.JapanAddress addressKana;
+    AddressKana addressKana;
 
     /** The Kanji variation of the company's primary address (Japan only). */
     @SerializedName("address_kanji")
-    Person.JapanAddress addressKanji;
+    AddressKanji addressKanji;
 
     /**
      * Whether the company's directors have been provided. This Boolean will be {@code true} if
@@ -1039,6 +1039,78 @@ public class Account extends ApiResource implements MetadataStore<Account>, Paym
     @Getter
     @Setter
     @EqualsAndHashCode(callSuper = false)
+    public static class AddressKana extends StripeObject {
+      /** City/Ward. */
+      @SerializedName("city")
+      String city;
+
+      /**
+       * Two-letter country code (<a href="https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2">ISO
+       * 3166-1 alpha-2</a>).
+       */
+      @SerializedName("country")
+      String country;
+
+      /** Block/Building number. */
+      @SerializedName("line1")
+      String line1;
+
+      /** Building details. */
+      @SerializedName("line2")
+      String line2;
+
+      /** ZIP or postal code. */
+      @SerializedName("postal_code")
+      String postalCode;
+
+      /** Prefecture. */
+      @SerializedName("state")
+      String state;
+
+      /** Town/cho-me. */
+      @SerializedName("town")
+      String town;
+    }
+
+    @Getter
+    @Setter
+    @EqualsAndHashCode(callSuper = false)
+    public static class AddressKanji extends StripeObject {
+      /** City/Ward. */
+      @SerializedName("city")
+      String city;
+
+      /**
+       * Two-letter country code (<a href="https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2">ISO
+       * 3166-1 alpha-2</a>).
+       */
+      @SerializedName("country")
+      String country;
+
+      /** Block/Building number. */
+      @SerializedName("line1")
+      String line1;
+
+      /** Building details. */
+      @SerializedName("line2")
+      String line2;
+
+      /** ZIP or postal code. */
+      @SerializedName("postal_code")
+      String postalCode;
+
+      /** Prefecture. */
+      @SerializedName("state")
+      String state;
+
+      /** Town/cho-me. */
+      @SerializedName("town")
+      String town;
+    }
+
+    @Getter
+    @Setter
+    @EqualsAndHashCode(callSuper = false)
     public static class OwnershipDeclaration extends StripeObject {
       /** The Unix timestamp marking when the beneficial owner attestation was made. */
       @SerializedName("date")
@@ -1058,12 +1130,12 @@ public class Account extends ApiResource implements MetadataStore<Account>, Paym
     @EqualsAndHashCode(callSuper = false)
     public static class Verification extends StripeObject {
       @SerializedName("document")
-      VerificationDocument document;
+      Document document;
 
       @Getter
       @Setter
       @EqualsAndHashCode(callSuper = false)
-      public static class VerificationDocument extends StripeObject {
+      public static class Document extends StripeObject {
         /**
          * The back of a document returned by a <a
          * href="https://stripe.com/docs/api#create_file">file upload</a> with a {@code purpose}
@@ -1163,25 +1235,6 @@ public class Account extends ApiResource implements MetadataStore<Account>, Paym
   @Getter
   @Setter
   @EqualsAndHashCode(callSuper = false)
-  public static class DeclineChargeOn extends StripeObject {
-    /**
-     * Whether Stripe automatically declines charges with an incorrect ZIP or postal code. This
-     * setting only applies when a ZIP or postal code is provided and they fail bank verification.
-     */
-    @SerializedName("avs_failure")
-    Boolean avsFailure;
-
-    /**
-     * Whether Stripe automatically declines charges with an incorrect CVC. This setting only
-     * applies when a CVC is provided and it fails bank verification.
-     */
-    @SerializedName("cvc_failure")
-    Boolean cvcFailure;
-  }
-
-  @Getter
-  @Setter
-  @EqualsAndHashCode(callSuper = false)
   public static class FutureRequirements extends StripeObject {
     /**
      * Fields that are due and can be satisfied by providing the corresponding alternative fields
@@ -1269,26 +1322,27 @@ public class Account extends ApiResource implements MetadataStore<Account>, Paym
       /**
        * The code for the type of error.
        *
-       * <p>One of {@code invalid_address_city_state_postal_code}, {@code invalid_street_address},
-       * {@code invalid_tos_acceptance}, {@code invalid_value_other}, {@code
-       * verification_document_address_mismatch}, {@code verification_document_address_missing},
-       * {@code verification_document_corrupt}, {@code verification_document_country_not_supported},
-       * {@code verification_document_dob_mismatch}, {@code verification_document_duplicate_type},
-       * {@code verification_document_expired}, {@code verification_document_failed_copy}, {@code
-       * verification_document_failed_greyscale}, {@code verification_document_failed_other}, {@code
-       * verification_document_failed_test_mode}, {@code verification_document_fraudulent}, {@code
-       * verification_document_id_number_mismatch}, {@code verification_document_id_number_missing},
-       * {@code verification_document_incomplete}, {@code verification_document_invalid}, {@code
-       * verification_document_issue_or_expiry_date_missing}, {@code
-       * verification_document_manipulated}, {@code verification_document_missing_back}, {@code
-       * verification_document_missing_front}, {@code verification_document_name_mismatch}, {@code
-       * verification_document_name_missing}, {@code verification_document_nationality_mismatch},
-       * {@code verification_document_not_readable}, {@code verification_document_not_signed},
-       * {@code verification_document_not_uploaded}, {@code verification_document_photo_mismatch},
-       * {@code verification_document_too_large}, {@code verification_document_type_not_supported},
-       * {@code verification_failed_address_match}, {@code verification_failed_business_iec_number},
-       * {@code verification_failed_document_match}, {@code verification_failed_id_number_match},
-       * {@code verification_failed_keyed_identity}, {@code verification_failed_keyed_match}, {@code
+       * <p>One of {@code invalid_address_city_state_postal_code}, {@code invalid_dob_age_under_18},
+       * {@code invalid_street_address}, {@code invalid_tos_acceptance}, {@code
+       * invalid_value_other}, {@code verification_document_address_mismatch}, {@code
+       * verification_document_address_missing}, {@code verification_document_corrupt}, {@code
+       * verification_document_country_not_supported}, {@code verification_document_dob_mismatch},
+       * {@code verification_document_duplicate_type}, {@code verification_document_expired}, {@code
+       * verification_document_failed_copy}, {@code verification_document_failed_greyscale}, {@code
+       * verification_document_failed_other}, {@code verification_document_failed_test_mode}, {@code
+       * verification_document_fraudulent}, {@code verification_document_id_number_mismatch}, {@code
+       * verification_document_id_number_missing}, {@code verification_document_incomplete}, {@code
+       * verification_document_invalid}, {@code verification_document_issue_or_expiry_date_missing},
+       * {@code verification_document_manipulated}, {@code verification_document_missing_back},
+       * {@code verification_document_missing_front}, {@code verification_document_name_mismatch},
+       * {@code verification_document_name_missing}, {@code
+       * verification_document_nationality_mismatch}, {@code verification_document_not_readable},
+       * {@code verification_document_not_signed}, {@code verification_document_not_uploaded},
+       * {@code verification_document_photo_mismatch}, {@code verification_document_too_large},
+       * {@code verification_document_type_not_supported}, {@code
+       * verification_failed_address_match}, {@code verification_failed_business_iec_number}, {@code
+       * verification_failed_document_match}, {@code verification_failed_id_number_match}, {@code
+       * verification_failed_keyed_identity}, {@code verification_failed_keyed_match}, {@code
        * verification_failed_name_match}, {@code verification_failed_other}, {@code
        * verification_failed_tax_id_match}, {@code verification_failed_tax_id_not_issued}, {@code
        * verification_missing_executives}, {@code verification_missing_owners}, or {@code
@@ -1311,37 +1365,6 @@ public class Account extends ApiResource implements MetadataStore<Account>, Paym
       @SerializedName("requirement")
       String requirement;
     }
-  }
-
-  @Getter
-  @Setter
-  @EqualsAndHashCode(callSuper = false)
-  public static class PayoutSchedule extends StripeObject {
-    /** The number of days charges for the account will be held before being paid out. */
-    @SerializedName("delay_days")
-    Long delayDays;
-
-    /**
-     * How frequently funds will be paid out. One of {@code manual} (payouts only created via API
-     * call), {@code daily}, {@code weekly}, or {@code monthly}.
-     */
-    @SerializedName("interval")
-    String interval;
-
-    /**
-     * The day of the month funds will be paid out. Only shown if {@code interval} is monthly.
-     * Payouts scheduled between the 29th and 31st of the month are sent on the last day of shorter
-     * months.
-     */
-    @SerializedName("monthly_anchor")
-    Long monthlyAnchor;
-
-    /**
-     * The day of the week funds will be paid out, of the style 'monday', 'tuesday', etc. Only shown
-     * if {@code interval} is weekly.
-     */
-    @SerializedName("weekly_anchor")
-    String weeklyAnchor;
   }
 
   @Getter
@@ -1433,26 +1456,27 @@ public class Account extends ApiResource implements MetadataStore<Account>, Paym
       /**
        * The code for the type of error.
        *
-       * <p>One of {@code invalid_address_city_state_postal_code}, {@code invalid_street_address},
-       * {@code invalid_tos_acceptance}, {@code invalid_value_other}, {@code
-       * verification_document_address_mismatch}, {@code verification_document_address_missing},
-       * {@code verification_document_corrupt}, {@code verification_document_country_not_supported},
-       * {@code verification_document_dob_mismatch}, {@code verification_document_duplicate_type},
-       * {@code verification_document_expired}, {@code verification_document_failed_copy}, {@code
-       * verification_document_failed_greyscale}, {@code verification_document_failed_other}, {@code
-       * verification_document_failed_test_mode}, {@code verification_document_fraudulent}, {@code
-       * verification_document_id_number_mismatch}, {@code verification_document_id_number_missing},
-       * {@code verification_document_incomplete}, {@code verification_document_invalid}, {@code
-       * verification_document_issue_or_expiry_date_missing}, {@code
-       * verification_document_manipulated}, {@code verification_document_missing_back}, {@code
-       * verification_document_missing_front}, {@code verification_document_name_mismatch}, {@code
-       * verification_document_name_missing}, {@code verification_document_nationality_mismatch},
-       * {@code verification_document_not_readable}, {@code verification_document_not_signed},
-       * {@code verification_document_not_uploaded}, {@code verification_document_photo_mismatch},
-       * {@code verification_document_too_large}, {@code verification_document_type_not_supported},
-       * {@code verification_failed_address_match}, {@code verification_failed_business_iec_number},
-       * {@code verification_failed_document_match}, {@code verification_failed_id_number_match},
-       * {@code verification_failed_keyed_identity}, {@code verification_failed_keyed_match}, {@code
+       * <p>One of {@code invalid_address_city_state_postal_code}, {@code invalid_dob_age_under_18},
+       * {@code invalid_street_address}, {@code invalid_tos_acceptance}, {@code
+       * invalid_value_other}, {@code verification_document_address_mismatch}, {@code
+       * verification_document_address_missing}, {@code verification_document_corrupt}, {@code
+       * verification_document_country_not_supported}, {@code verification_document_dob_mismatch},
+       * {@code verification_document_duplicate_type}, {@code verification_document_expired}, {@code
+       * verification_document_failed_copy}, {@code verification_document_failed_greyscale}, {@code
+       * verification_document_failed_other}, {@code verification_document_failed_test_mode}, {@code
+       * verification_document_fraudulent}, {@code verification_document_id_number_mismatch}, {@code
+       * verification_document_id_number_missing}, {@code verification_document_incomplete}, {@code
+       * verification_document_invalid}, {@code verification_document_issue_or_expiry_date_missing},
+       * {@code verification_document_manipulated}, {@code verification_document_missing_back},
+       * {@code verification_document_missing_front}, {@code verification_document_name_mismatch},
+       * {@code verification_document_name_missing}, {@code
+       * verification_document_nationality_mismatch}, {@code verification_document_not_readable},
+       * {@code verification_document_not_signed}, {@code verification_document_not_uploaded},
+       * {@code verification_document_photo_mismatch}, {@code verification_document_too_large},
+       * {@code verification_document_type_not_supported}, {@code
+       * verification_failed_address_match}, {@code verification_failed_business_iec_number}, {@code
+       * verification_failed_document_match}, {@code verification_failed_id_number_match}, {@code
+       * verification_failed_keyed_identity}, {@code verification_failed_keyed_match}, {@code
        * verification_failed_name_match}, {@code verification_failed_other}, {@code
        * verification_failed_tax_id_match}, {@code verification_failed_tax_id_not_issued}, {@code
        * verification_missing_executives}, {@code verification_missing_owners}, or {@code
@@ -1485,28 +1509,28 @@ public class Account extends ApiResource implements MetadataStore<Account>, Paym
     BacsDebitPayments bacsDebitPayments;
 
     @SerializedName("branding")
-    SettingsBranding branding;
+    Branding branding;
 
     @SerializedName("card_issuing")
-    SettingsCardIssuing cardIssuing;
+    CardIssuing cardIssuing;
 
     @SerializedName("card_payments")
-    SettingsCardPayments cardPayments;
+    CardPayments cardPayments;
 
     @SerializedName("dashboard")
-    SettingsDashboard dashboard;
+    Dashboard dashboard;
 
     @SerializedName("payments")
-    SettingsPayments payments;
+    Payments payments;
 
     @SerializedName("payouts")
-    SettingsPayouts payouts;
+    Payouts payouts;
 
     @SerializedName("sepa_debit_payments")
     SepaDebitPayments sepaDebitPayments;
 
     @SerializedName("treasury")
-    SettingsTreasury treasury;
+    Treasury treasury;
 
     @Getter
     @Setter
@@ -1523,6 +1547,284 @@ public class Account extends ApiResource implements MetadataStore<Account>, Paym
     @Getter
     @Setter
     @EqualsAndHashCode(callSuper = false)
+    public static class Branding extends StripeObject {
+      /**
+       * (ID of a <a href="https://stripe.com/docs/guides/file-upload">file upload</a>) An icon for
+       * the account. Must be square and at least 128px x 128px.
+       */
+      @SerializedName("icon")
+      @Getter(lombok.AccessLevel.NONE)
+      @Setter(lombok.AccessLevel.NONE)
+      ExpandableField<File> icon;
+
+      /**
+       * (ID of a <a href="https://stripe.com/docs/guides/file-upload">file upload</a>) A logo for
+       * the account that will be used in Checkout instead of the icon and without the account's
+       * name next to it if provided. Must be at least 128px x 128px.
+       */
+      @SerializedName("logo")
+      @Getter(lombok.AccessLevel.NONE)
+      @Setter(lombok.AccessLevel.NONE)
+      ExpandableField<File> logo;
+
+      /** A CSS hex color value representing the primary branding color for this account. */
+      @SerializedName("primary_color")
+      String primaryColor;
+
+      /** A CSS hex color value representing the secondary branding color for this account. */
+      @SerializedName("secondary_color")
+      String secondaryColor;
+
+      /** Get ID of expandable {@code icon} object. */
+      public String getIcon() {
+        return (this.icon != null) ? this.icon.getId() : null;
+      }
+
+      public void setIcon(String id) {
+        this.icon = ApiResource.setExpandableFieldId(id, this.icon);
+      }
+
+      /** Get expanded {@code icon}. */
+      public File getIconObject() {
+        return (this.icon != null) ? this.icon.getExpanded() : null;
+      }
+
+      public void setIconObject(File expandableObject) {
+        this.icon = new ExpandableField<File>(expandableObject.getId(), expandableObject);
+      }
+
+      /** Get ID of expandable {@code logo} object. */
+      public String getLogo() {
+        return (this.logo != null) ? this.logo.getId() : null;
+      }
+
+      public void setLogo(String id) {
+        this.logo = ApiResource.setExpandableFieldId(id, this.logo);
+      }
+
+      /** Get expanded {@code logo}. */
+      public File getLogoObject() {
+        return (this.logo != null) ? this.logo.getExpanded() : null;
+      }
+
+      public void setLogoObject(File expandableObject) {
+        this.logo = new ExpandableField<File>(expandableObject.getId(), expandableObject);
+      }
+    }
+
+    @Getter
+    @Setter
+    @EqualsAndHashCode(callSuper = false)
+    public static class CardIssuing extends StripeObject {
+      @SerializedName("tos_acceptance")
+      TosAcceptance tosAcceptance;
+
+      @Getter
+      @Setter
+      @EqualsAndHashCode(callSuper = false)
+      public static class TosAcceptance extends StripeObject {
+        /**
+         * The Unix timestamp marking when the account representative accepted the service
+         * agreement.
+         */
+        @SerializedName("date")
+        Long date;
+
+        /** The IP address from which the account representative accepted the service agreement. */
+        @SerializedName("ip")
+        String ip;
+
+        /**
+         * The user agent of the browser from which the account representative accepted the service
+         * agreement.
+         */
+        @SerializedName("user_agent")
+        String userAgent;
+      }
+    }
+
+    @Getter
+    @Setter
+    @EqualsAndHashCode(callSuper = false)
+    public static class CardPayments extends StripeObject {
+      @SerializedName("decline_on")
+      DeclineOn declineOn;
+
+      /**
+       * The default text that appears on credit card statements when a charge is made. This field
+       * prefixes any dynamic {@code statement_descriptor} specified on the charge. {@code
+       * statement_descriptor_prefix} is useful for maximizing descriptor space for the dynamic
+       * portion.
+       */
+      @SerializedName("statement_descriptor_prefix")
+      String statementDescriptorPrefix;
+
+      /**
+       * The Kana variation of the default text that appears on credit card statements when a charge
+       * is made (Japan only). This field prefixes any dynamic {@code
+       * statement_descriptor_suffix_kana} specified on the charge. {@code
+       * statement_descriptor_prefix_kana} is useful for maximizing descriptor space for the dynamic
+       * portion.
+       */
+      @SerializedName("statement_descriptor_prefix_kana")
+      String statementDescriptorPrefixKana;
+
+      /**
+       * The Kanji variation of the default text that appears on credit card statements when a
+       * charge is made (Japan only). This field prefixes any dynamic {@code
+       * statement_descriptor_suffix_kanji} specified on the charge. {@code
+       * statement_descriptor_prefix_kanji} is useful for maximizing descriptor space for the
+       * dynamic portion.
+       */
+      @SerializedName("statement_descriptor_prefix_kanji")
+      String statementDescriptorPrefixKanji;
+
+      @Getter
+      @Setter
+      @EqualsAndHashCode(callSuper = false)
+      public static class DeclineOn extends StripeObject {
+        /**
+         * Whether Stripe automatically declines charges with an incorrect ZIP or postal code. This
+         * setting only applies when a ZIP or postal code is provided and they fail bank
+         * verification.
+         */
+        @SerializedName("avs_failure")
+        Boolean avsFailure;
+
+        /**
+         * Whether Stripe automatically declines charges with an incorrect CVC. This setting only
+         * applies when a CVC is provided and it fails bank verification.
+         */
+        @SerializedName("cvc_failure")
+        Boolean cvcFailure;
+      }
+    }
+
+    @Getter
+    @Setter
+    @EqualsAndHashCode(callSuper = false)
+    public static class Dashboard extends StripeObject {
+      /**
+       * The display name for this account. This is used on the Stripe Dashboard to differentiate
+       * between accounts.
+       */
+      @SerializedName("display_name")
+      String displayName;
+
+      /**
+       * The timezone used in the Stripe Dashboard for this account. A list of possible time zone
+       * values is maintained at the <a href="http://www.iana.org/time-zones">IANA Time Zone
+       * Database</a>.
+       */
+      @SerializedName("timezone")
+      String timezone;
+    }
+
+    @Getter
+    @Setter
+    @EqualsAndHashCode(callSuper = false)
+    public static class Payments extends StripeObject {
+      /**
+       * The default text that appears on credit card statements when a charge is made. This field
+       * prefixes any dynamic {@code statement_descriptor} specified on the charge.
+       */
+      @SerializedName("statement_descriptor")
+      String statementDescriptor;
+
+      /**
+       * The Kana variation of the default text that appears on credit card statements when a charge
+       * is made (Japan only).
+       */
+      @SerializedName("statement_descriptor_kana")
+      String statementDescriptorKana;
+
+      /**
+       * The Kanji variation of the default text that appears on credit card statements when a
+       * charge is made (Japan only).
+       */
+      @SerializedName("statement_descriptor_kanji")
+      String statementDescriptorKanji;
+
+      /**
+       * The Kana variation of the default text that appears on credit card statements when a charge
+       * is made (Japan only). This field prefixes any dynamic {@code
+       * statement_descriptor_suffix_kana} specified on the charge. {@code
+       * statement_descriptor_prefix_kana} is useful for maximizing descriptor space for the dynamic
+       * portion.
+       */
+      @SerializedName("statement_descriptor_prefix_kana")
+      String statementDescriptorPrefixKana;
+
+      /**
+       * The Kanji variation of the default text that appears on credit card statements when a
+       * charge is made (Japan only). This field prefixes any dynamic {@code
+       * statement_descriptor_suffix_kanji} specified on the charge. {@code
+       * statement_descriptor_prefix_kanji} is useful for maximizing descriptor space for the
+       * dynamic portion.
+       */
+      @SerializedName("statement_descriptor_prefix_kanji")
+      String statementDescriptorPrefixKanji;
+    }
+
+    @Getter
+    @Setter
+    @EqualsAndHashCode(callSuper = false)
+    public static class Payouts extends StripeObject {
+      /**
+       * A Boolean indicating if Stripe should try to reclaim negative balances from an attached
+       * bank account. See our <a
+       * href="https://stripe.com/docs/connect/account-balances">Understanding Connect Account
+       * Balances</a> documentation for details. Default value is {@code false} for Custom accounts,
+       * otherwise {@code true}.
+       */
+      @SerializedName("debit_negative_balances")
+      Boolean debitNegativeBalances;
+
+      @SerializedName("schedule")
+      Schedule schedule;
+
+      /**
+       * The text that appears on the bank account statement for payouts. If not set, this defaults
+       * to the platform's bank descriptor as set in the Dashboard.
+       */
+      @SerializedName("statement_descriptor")
+      String statementDescriptor;
+
+      @Getter
+      @Setter
+      @EqualsAndHashCode(callSuper = false)
+      public static class Schedule extends StripeObject {
+        /** The number of days charges for the account will be held before being paid out. */
+        @SerializedName("delay_days")
+        Long delayDays;
+
+        /**
+         * How frequently funds will be paid out. One of {@code manual} (payouts only created via
+         * API call), {@code daily}, {@code weekly}, or {@code monthly}.
+         */
+        @SerializedName("interval")
+        String interval;
+
+        /**
+         * The day of the month funds will be paid out. Only shown if {@code interval} is monthly.
+         * Payouts scheduled between the 29th and 31st of the month are sent on the last day of
+         * shorter months.
+         */
+        @SerializedName("monthly_anchor")
+        Long monthlyAnchor;
+
+        /**
+         * The day of the week funds will be paid out, of the style 'monday', 'tuesday', etc. Only
+         * shown if {@code interval} is weekly.
+         */
+        @SerializedName("weekly_anchor")
+        String weeklyAnchor;
+      }
+    }
+
+    @Getter
+    @Setter
+    @EqualsAndHashCode(callSuper = false)
     public static class SepaDebitPayments extends StripeObject {
       /** SEPA creditor identifier that identifies the company making the payment. */
       @SerializedName("creditor_id")
@@ -1532,7 +1834,7 @@ public class Account extends ApiResource implements MetadataStore<Account>, Paym
     @Getter
     @Setter
     @EqualsAndHashCode(callSuper = false)
-    public static class SettingsCardIssuing extends StripeObject {
+    public static class Treasury extends StripeObject {
       @SerializedName("tos_acceptance")
       TosAcceptance tosAcceptance;
 
@@ -1559,232 +1861,6 @@ public class Account extends ApiResource implements MetadataStore<Account>, Paym
         String userAgent;
       }
     }
-
-    @Getter
-    @Setter
-    @EqualsAndHashCode(callSuper = false)
-    public static class SettingsTreasury extends StripeObject {
-      @SerializedName("tos_acceptance")
-      TosAcceptance tosAcceptance;
-
-      @Getter
-      @Setter
-      @EqualsAndHashCode(callSuper = false)
-      public static class TosAcceptance extends StripeObject {
-        /**
-         * The Unix timestamp marking when the account representative accepted the service
-         * agreement.
-         */
-        @SerializedName("date")
-        Long date;
-
-        /** The IP address from which the account representative accepted the service agreement. */
-        @SerializedName("ip")
-        String ip;
-
-        /**
-         * The user agent of the browser from which the account representative accepted the service
-         * agreement.
-         */
-        @SerializedName("user_agent")
-        String userAgent;
-      }
-    }
-  }
-
-  @Getter
-  @Setter
-  @EqualsAndHashCode(callSuper = false)
-  public static class SettingsBranding extends StripeObject {
-    /**
-     * (ID of a <a href="https://stripe.com/docs/guides/file-upload">file upload</a>) An icon for
-     * the account. Must be square and at least 128px x 128px.
-     */
-    @SerializedName("icon")
-    @Getter(lombok.AccessLevel.NONE)
-    @Setter(lombok.AccessLevel.NONE)
-    ExpandableField<File> icon;
-
-    /**
-     * (ID of a <a href="https://stripe.com/docs/guides/file-upload">file upload</a>) A logo for the
-     * account that will be used in Checkout instead of the icon and without the account's name next
-     * to it if provided. Must be at least 128px x 128px.
-     */
-    @SerializedName("logo")
-    @Getter(lombok.AccessLevel.NONE)
-    @Setter(lombok.AccessLevel.NONE)
-    ExpandableField<File> logo;
-
-    /** A CSS hex color value representing the primary branding color for this account. */
-    @SerializedName("primary_color")
-    String primaryColor;
-
-    /** A CSS hex color value representing the secondary branding color for this account. */
-    @SerializedName("secondary_color")
-    String secondaryColor;
-
-    /** Get ID of expandable {@code icon} object. */
-    public String getIcon() {
-      return (this.icon != null) ? this.icon.getId() : null;
-    }
-
-    public void setIcon(String id) {
-      this.icon = ApiResource.setExpandableFieldId(id, this.icon);
-    }
-
-    /** Get expanded {@code icon}. */
-    public File getIconObject() {
-      return (this.icon != null) ? this.icon.getExpanded() : null;
-    }
-
-    public void setIconObject(File expandableObject) {
-      this.icon = new ExpandableField<File>(expandableObject.getId(), expandableObject);
-    }
-
-    /** Get ID of expandable {@code logo} object. */
-    public String getLogo() {
-      return (this.logo != null) ? this.logo.getId() : null;
-    }
-
-    public void setLogo(String id) {
-      this.logo = ApiResource.setExpandableFieldId(id, this.logo);
-    }
-
-    /** Get expanded {@code logo}. */
-    public File getLogoObject() {
-      return (this.logo != null) ? this.logo.getExpanded() : null;
-    }
-
-    public void setLogoObject(File expandableObject) {
-      this.logo = new ExpandableField<File>(expandableObject.getId(), expandableObject);
-    }
-  }
-
-  @Getter
-  @Setter
-  @EqualsAndHashCode(callSuper = false)
-  public static class SettingsCardPayments extends StripeObject {
-    @SerializedName("decline_on")
-    DeclineChargeOn declineOn;
-
-    /**
-     * The default text that appears on credit card statements when a charge is made. This field
-     * prefixes any dynamic {@code statement_descriptor} specified on the charge. {@code
-     * statement_descriptor_prefix} is useful for maximizing descriptor space for the dynamic
-     * portion.
-     */
-    @SerializedName("statement_descriptor_prefix")
-    String statementDescriptorPrefix;
-
-    /**
-     * The Kana variation of the default text that appears on credit card statements when a charge
-     * is made (Japan only). This field prefixes any dynamic {@code
-     * statement_descriptor_suffix_kana} specified on the charge. {@code
-     * statement_descriptor_prefix_kana} is useful for maximizing descriptor space for the dynamic
-     * portion.
-     */
-    @SerializedName("statement_descriptor_prefix_kana")
-    String statementDescriptorPrefixKana;
-
-    /**
-     * The Kanji variation of the default text that appears on credit card statements when a charge
-     * is made (Japan only). This field prefixes any dynamic {@code
-     * statement_descriptor_suffix_kanji} specified on the charge. {@code
-     * statement_descriptor_prefix_kanji} is useful for maximizing descriptor space for the dynamic
-     * portion.
-     */
-    @SerializedName("statement_descriptor_prefix_kanji")
-    String statementDescriptorPrefixKanji;
-  }
-
-  @Getter
-  @Setter
-  @EqualsAndHashCode(callSuper = false)
-  public static class SettingsDashboard extends StripeObject {
-    /**
-     * The display name for this account. This is used on the Stripe Dashboard to differentiate
-     * between accounts.
-     */
-    @SerializedName("display_name")
-    String displayName;
-
-    /**
-     * The timezone used in the Stripe Dashboard for this account. A list of possible time zone
-     * values is maintained at the <a href="http://www.iana.org/time-zones">IANA Time Zone
-     * Database</a>.
-     */
-    @SerializedName("timezone")
-    String timezone;
-  }
-
-  @Getter
-  @Setter
-  @EqualsAndHashCode(callSuper = false)
-  public static class SettingsPayments extends StripeObject {
-    /**
-     * The default text that appears on credit card statements when a charge is made. This field
-     * prefixes any dynamic {@code statement_descriptor} specified on the charge.
-     */
-    @SerializedName("statement_descriptor")
-    String statementDescriptor;
-
-    /**
-     * The Kana variation of the default text that appears on credit card statements when a charge
-     * is made (Japan only).
-     */
-    @SerializedName("statement_descriptor_kana")
-    String statementDescriptorKana;
-
-    /**
-     * The Kanji variation of the default text that appears on credit card statements when a charge
-     * is made (Japan only).
-     */
-    @SerializedName("statement_descriptor_kanji")
-    String statementDescriptorKanji;
-
-    /**
-     * The Kana variation of the default text that appears on credit card statements when a charge
-     * is made (Japan only). This field prefixes any dynamic {@code
-     * statement_descriptor_suffix_kana} specified on the charge. {@code
-     * statement_descriptor_prefix_kana} is useful for maximizing descriptor space for the dynamic
-     * portion.
-     */
-    @SerializedName("statement_descriptor_prefix_kana")
-    String statementDescriptorPrefixKana;
-
-    /**
-     * The Kanji variation of the default text that appears on credit card statements when a charge
-     * is made (Japan only). This field prefixes any dynamic {@code
-     * statement_descriptor_suffix_kanji} specified on the charge. {@code
-     * statement_descriptor_prefix_kanji} is useful for maximizing descriptor space for the dynamic
-     * portion.
-     */
-    @SerializedName("statement_descriptor_prefix_kanji")
-    String statementDescriptorPrefixKanji;
-  }
-
-  @Getter
-  @Setter
-  @EqualsAndHashCode(callSuper = false)
-  public static class SettingsPayouts extends StripeObject {
-    /**
-     * A Boolean indicating if Stripe should try to reclaim negative balances from an attached bank
-     * account. See our <a href="https://stripe.com/docs/connect/account-balances">Understanding
-     * Connect Account Balances</a> documentation for details. Default value is {@code false} for
-     * Custom accounts, otherwise {@code true}.
-     */
-    @SerializedName("debit_negative_balances")
-    Boolean debitNegativeBalances;
-
-    @SerializedName("schedule")
-    PayoutSchedule schedule;
-
-    /**
-     * The text that appears on the bank account statement for payouts. If not set, this defaults to
-     * the platform's bank descriptor as set in the Dashboard.
-     */
-    @SerializedName("statement_descriptor")
-    String statementDescriptor;
   }
 
   @Getter

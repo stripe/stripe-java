@@ -15,7 +15,7 @@ import lombok.Setter;
 @EqualsAndHashCode(callSuper = false)
 public class SourceMandateNotification extends StripeObject implements HasId {
   @SerializedName("acss_debit")
-  AcssDebitData acssDebit;
+  AcssDebit acssDebit;
 
   /**
    * A positive integer in the smallest currency unit (that is, 100 cents for $1.00, or 1 for ¥1,
@@ -27,7 +27,7 @@ public class SourceMandateNotification extends StripeObject implements HasId {
   Long amount;
 
   @SerializedName("bacs_debit")
-  BacsDebitData bacsDebit;
+  BacsDebit bacsDebit;
 
   /** Time at which the object was created. Measured in seconds since the Unix epoch. */
   @SerializedName("created")
@@ -61,7 +61,7 @@ public class SourceMandateNotification extends StripeObject implements HasId {
   String reason;
 
   @SerializedName("sepa_debit")
-  SepaDebitData sepaDebit;
+  SepaDebit sepaDebit;
 
   /**
    * {@code Source} objects allow you to accept a variety of payment methods. They represent a
@@ -91,7 +91,7 @@ public class SourceMandateNotification extends StripeObject implements HasId {
   @Getter
   @Setter
   @EqualsAndHashCode(callSuper = false)
-  public static class AcssDebitData extends StripeObject {
+  public static class AcssDebit extends StripeObject {
     /** The statement descriptor associate with the debit. */
     @SerializedName("statement_descriptor")
     String statementDescriptor;
@@ -100,7 +100,7 @@ public class SourceMandateNotification extends StripeObject implements HasId {
   @Getter
   @Setter
   @EqualsAndHashCode(callSuper = false)
-  public static class BacsDebitData extends StripeObject {
+  public static class BacsDebit extends StripeObject {
     /** Last 4 digits of the account number associated with the debit. */
     @SerializedName("last4")
     String last4;
@@ -109,7 +109,7 @@ public class SourceMandateNotification extends StripeObject implements HasId {
   @Getter
   @Setter
   @EqualsAndHashCode(callSuper = false)
-  public static class SepaDebitData extends StripeObject {
+  public static class SepaDebit extends StripeObject {
     /** SEPA creditor ID. */
     @SerializedName("creditor_identifier")
     String creditorIdentifier;

@@ -50,7 +50,7 @@ public class Customer extends ApiResource implements HasId, MetadataStore<Custom
 
   /**
    * The current funds being held by Stripe on behalf of the customer. These funds can be applied
-   * towards payment intents with source &quot;cash_balance&quot;.The settings[reconciliation_mode]
+   * towards payment intents with source &quot;cash_balance&quot;. The settings[reconciliation_mode]
    * field describes whether these funds are applied to such payment intents manually or
    * automatically.
    */
@@ -115,10 +115,10 @@ public class Customer extends ApiResource implements HasId, MetadataStore<Custom
   String id;
 
   /**
-   * The current multi-currency balances, if any, being stored on the customer.If positive in a
+   * The current multi-currency balances, if any, being stored on the customer. If positive in a
    * currency, the customer has a credit to apply to their next invoice denominated in that
-   * currency.If negative, the customer has an amount owed that will be added to their next invoice
-   * denominated in that currency. These balances do not refer to any unpaid invoices.They solely
+   * currency. If negative, the customer has an amount owed that will be added to their next invoice
+   * denominated in that currency. These balances do not refer to any unpaid invoices. They solely
    * track amounts that have yet to be successfully applied to any invoice. A balance in a
    * particular currency is only applied to any invoice as an invoice in that currency is finalized.
    */
@@ -728,7 +728,7 @@ public class Customer extends ApiResource implements HasId, MetadataStore<Custom
   public static class InvoiceSettings extends StripeObject {
     /** Default custom fields to be displayed on invoices for this customer. */
     @SerializedName("custom_fields")
-    List<Invoice.CustomField> customFields;
+    List<Customer.InvoiceSettings.CustomField> customFields;
 
     /**
      * ID of a payment method that's attached to the customer, to be used as the customer's default
@@ -745,7 +745,7 @@ public class Customer extends ApiResource implements HasId, MetadataStore<Custom
 
     /** Default options for invoice PDF rendering for this customer. */
     @SerializedName("rendering_options")
-    Invoice.RenderingOptions renderingOptions;
+    RenderingOptions renderingOptions;
 
     /** Get ID of expandable {@code defaultPaymentMethod} object. */
     public String getDefaultPaymentMethod() {
@@ -764,6 +764,28 @@ public class Customer extends ApiResource implements HasId, MetadataStore<Custom
     public void setDefaultPaymentMethodObject(PaymentMethod expandableObject) {
       this.defaultPaymentMethod =
           new ExpandableField<PaymentMethod>(expandableObject.getId(), expandableObject);
+    }
+
+    @Getter
+    @Setter
+    @EqualsAndHashCode(callSuper = false)
+    public static class CustomField extends StripeObject {
+      /** The name of the custom field. */
+      @SerializedName("name")
+      String name;
+
+      /** The value of the custom field. */
+      @SerializedName("value")
+      String value;
+    }
+
+    @Getter
+    @Setter
+    @EqualsAndHashCode(callSuper = false)
+    public static class RenderingOptions extends StripeObject {
+      /** How line-item prices and amounts will be displayed with respect to tax on invoice PDFs. */
+      @SerializedName("amount_tax_display")
+      String amountTaxDisplay;
     }
   }
 

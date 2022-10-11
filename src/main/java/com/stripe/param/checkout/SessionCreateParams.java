@@ -9781,10 +9781,6 @@ public class SessionCreateParams extends ApiRequestParams {
     @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
     Map<String, Object> extraParams;
 
-    /** This parameter is deprecated. Use the line_items parameter on the Session instead. */
-    @SerializedName("items")
-    List<SessionCreateParams.SubscriptionData.Item> items;
-
     /**
      * Set of <a href="https://stripe.com/docs/api/metadata">key-value pairs</a> that you can attach
      * to an object. This can be useful for storing additional information about the object in a
@@ -9829,7 +9825,6 @@ public class SessionCreateParams extends ApiRequestParams {
         List<String> defaultTaxRates,
         String description,
         Map<String, Object> extraParams,
-        List<SessionCreateParams.SubscriptionData.Item> items,
         Map<String, String> metadata,
         TransferData transferData,
         Long trialEnd,
@@ -9840,7 +9835,6 @@ public class SessionCreateParams extends ApiRequestParams {
       this.defaultTaxRates = defaultTaxRates;
       this.description = description;
       this.extraParams = extraParams;
-      this.items = items;
       this.metadata = metadata;
       this.transferData = transferData;
       this.trialEnd = trialEnd;
@@ -9863,8 +9857,6 @@ public class SessionCreateParams extends ApiRequestParams {
 
       private Map<String, Object> extraParams;
 
-      private List<SessionCreateParams.SubscriptionData.Item> items;
-
       private Map<String, String> metadata;
 
       private TransferData transferData;
@@ -9883,7 +9875,6 @@ public class SessionCreateParams extends ApiRequestParams {
             this.defaultTaxRates,
             this.description,
             this.extraParams,
-            this.items,
             this.metadata,
             this.transferData,
             this.trialEnd,
@@ -9976,32 +9967,6 @@ public class SessionCreateParams extends ApiRequestParams {
       }
 
       /**
-       * Add an element to `items` list. A list is initialized for the first `add/addAll` call, and
-       * subsequent calls adds additional elements to the original list. See {@link
-       * SessionCreateParams.SubscriptionData#items} for the field documentation.
-       */
-      public Builder addItem(SessionCreateParams.SubscriptionData.Item element) {
-        if (this.items == null) {
-          this.items = new ArrayList<>();
-        }
-        this.items.add(element);
-        return this;
-      }
-
-      /**
-       * Add all elements to `items` list. A list is initialized for the first `add/addAll` call,
-       * and subsequent calls adds additional elements to the original list. See {@link
-       * SessionCreateParams.SubscriptionData#items} for the field documentation.
-       */
-      public Builder addAllItem(List<SessionCreateParams.SubscriptionData.Item> elements) {
-        if (this.items == null) {
-          this.items = new ArrayList<>();
-        }
-        this.items.addAll(elements);
-        return this;
-      }
-
-      /**
        * Add a key/value pair to `metadata` map. A map is initialized for the first `put/putAll`
        * call, and subsequent calls add additional key/value pairs to the original map. See {@link
        * SessionCreateParams.SubscriptionData#metadata} for the field documentation.
@@ -10063,133 +10028,6 @@ public class SessionCreateParams extends ApiRequestParams {
       public Builder setTrialPeriodDays(Long trialPeriodDays) {
         this.trialPeriodDays = trialPeriodDays;
         return this;
-      }
-    }
-
-    @Getter
-    public static class Item {
-      /**
-       * Map of extra parameters for custom features not available in this client library. The
-       * content in this map is not serialized under this field's {@code @SerializedName} value.
-       * Instead, each key/value pair is serialized as if the key is a root-level field (serialized)
-       * name in this param object. Effectively, this map is flattened to its parent instance.
-       */
-      @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
-      Map<String, Object> extraParams;
-
-      /** Plan ID for this item. */
-      @SerializedName("plan")
-      String plan;
-
-      /**
-       * The quantity of the subscription item being purchased. Quantity should not be defined when
-       * {@code recurring.usage_type=metered}.
-       */
-      @SerializedName("quantity")
-      Long quantity;
-
-      /**
-       * The tax rates which apply to this item. When set, the {@code default_tax_rates} on {@code
-       * subscription_data} do not apply to this item.
-       */
-      @SerializedName("tax_rates")
-      List<String> taxRates;
-
-      private Item(
-          Map<String, Object> extraParams, String plan, Long quantity, List<String> taxRates) {
-        this.extraParams = extraParams;
-        this.plan = plan;
-        this.quantity = quantity;
-        this.taxRates = taxRates;
-      }
-
-      public static Builder builder() {
-        return new Builder();
-      }
-
-      public static class Builder {
-        private Map<String, Object> extraParams;
-
-        private String plan;
-
-        private Long quantity;
-
-        private List<String> taxRates;
-
-        /** Finalize and obtain parameter instance from this builder. */
-        public SessionCreateParams.SubscriptionData.Item build() {
-          return new SessionCreateParams.SubscriptionData.Item(
-              this.extraParams, this.plan, this.quantity, this.taxRates);
-        }
-
-        /**
-         * Add a key/value pair to `extraParams` map. A map is initialized for the first
-         * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
-         * map. See {@link SessionCreateParams.SubscriptionData.Item#extraParams} for the field
-         * documentation.
-         */
-        public Builder putExtraParam(String key, Object value) {
-          if (this.extraParams == null) {
-            this.extraParams = new HashMap<>();
-          }
-          this.extraParams.put(key, value);
-          return this;
-        }
-
-        /**
-         * Add all map key/value pairs to `extraParams` map. A map is initialized for the first
-         * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
-         * map. See {@link SessionCreateParams.SubscriptionData.Item#extraParams} for the field
-         * documentation.
-         */
-        public Builder putAllExtraParam(Map<String, Object> map) {
-          if (this.extraParams == null) {
-            this.extraParams = new HashMap<>();
-          }
-          this.extraParams.putAll(map);
-          return this;
-        }
-
-        /** Plan ID for this item. */
-        public Builder setPlan(String plan) {
-          this.plan = plan;
-          return this;
-        }
-
-        /**
-         * The quantity of the subscription item being purchased. Quantity should not be defined
-         * when {@code recurring.usage_type=metered}.
-         */
-        public Builder setQuantity(Long quantity) {
-          this.quantity = quantity;
-          return this;
-        }
-
-        /**
-         * Add an element to `taxRates` list. A list is initialized for the first `add/addAll` call,
-         * and subsequent calls adds additional elements to the original list. See {@link
-         * SessionCreateParams.SubscriptionData.Item#taxRates} for the field documentation.
-         */
-        public Builder addTaxRate(String element) {
-          if (this.taxRates == null) {
-            this.taxRates = new ArrayList<>();
-          }
-          this.taxRates.add(element);
-          return this;
-        }
-
-        /**
-         * Add all elements to `taxRates` list. A list is initialized for the first `add/addAll`
-         * call, and subsequent calls adds additional elements to the original list. See {@link
-         * SessionCreateParams.SubscriptionData.Item#taxRates} for the field documentation.
-         */
-        public Builder addAllTaxRate(List<String> elements) {
-          if (this.taxRates == null) {
-            this.taxRates = new ArrayList<>();
-          }
-          this.taxRates.addAll(elements);
-          return this;
-        }
       }
     }
 

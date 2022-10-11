@@ -89,7 +89,7 @@ public class InvoiceLineItem extends StripeObject implements HasId {
   String object;
 
   @SerializedName("period")
-  InvoiceLineItemPeriod period;
+  Period period;
 
   /** The plan of the subscription, if the line item is a subscription or a proration. */
   @SerializedName("plan")
@@ -124,7 +124,7 @@ public class InvoiceLineItem extends StripeObject implements HasId {
 
   /** The amount of tax calculated per tax rate for this line item. */
   @SerializedName("tax_amounts")
-  List<Invoice.TaxAmount> taxAmounts;
+  List<InvoiceLineItem.TaxAmount> taxAmounts;
 
   /** The tax rates which apply to the line item. */
   @SerializedName("tax_rates")
@@ -217,6 +217,81 @@ public class InvoiceLineItem extends StripeObject implements HasId {
 
     public void setDiscountObject(Discount expandableObject) {
       this.discount = new ExpandableField<Discount>(expandableObject.getId(), expandableObject);
+    }
+  }
+
+  @Getter
+  @Setter
+  @EqualsAndHashCode(callSuper = false)
+  public static class Period extends StripeObject {
+    /** The end of the period, which must be greater than or equal to the start. */
+    @SerializedName("end")
+    Long end;
+
+    /** The start of the period. */
+    @SerializedName("start")
+    Long start;
+  }
+
+  @Getter
+  @Setter
+  @EqualsAndHashCode(callSuper = false)
+  public static class ProrationDetails extends StripeObject {
+    /**
+     * For a credit proration {@code line_item}, the original debit line_items to which the credit
+     * proration applies.
+     */
+    @SerializedName("credited_items")
+    CreditedItems creditedItems;
+
+    @Getter
+    @Setter
+    @EqualsAndHashCode(callSuper = false)
+    public static class CreditedItems extends StripeObject {
+      /** Invoice containing the credited invoice line items. */
+      @SerializedName("invoice")
+      String invoice;
+
+      /** Credited invoice line items. */
+      @SerializedName("invoice_line_items")
+      List<String> invoiceLineItems;
+    }
+  }
+
+  @Getter
+  @Setter
+  @EqualsAndHashCode(callSuper = false)
+  public static class TaxAmount extends StripeObject {
+    /** The amount, in %s, of the tax. */
+    @SerializedName("amount")
+    Long amount;
+
+    /** Whether this tax amount is inclusive or exclusive. */
+    @SerializedName("inclusive")
+    Boolean inclusive;
+
+    /** The tax rate that was applied to get this tax amount. */
+    @SerializedName("tax_rate")
+    @Getter(lombok.AccessLevel.NONE)
+    @Setter(lombok.AccessLevel.NONE)
+    ExpandableField<TaxRate> taxRate;
+
+    /** Get ID of expandable {@code taxRate} object. */
+    public String getTaxRate() {
+      return (this.taxRate != null) ? this.taxRate.getId() : null;
+    }
+
+    public void setTaxRate(String id) {
+      this.taxRate = ApiResource.setExpandableFieldId(id, this.taxRate);
+    }
+
+    /** Get expanded {@code taxRate}. */
+    public TaxRate getTaxRateObject() {
+      return (this.taxRate != null) ? this.taxRate.getExpanded() : null;
+    }
+
+    public void setTaxRateObject(TaxRate expandableObject) {
+      this.taxRate = new ExpandableField<TaxRate>(expandableObject.getId(), expandableObject);
     }
   }
 }

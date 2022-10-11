@@ -989,6 +989,9 @@ public class ReportRunCreateParams extends ApiRequestParams {
       @SerializedName("America/North_Dakota/New_Salem")
       AMERICA_NORTH_DAKOTA_NEW_SALEM("America/North_Dakota/New_Salem"),
 
+      @SerializedName("America/Nuuk")
+      AMERICA_NUUK("America/Nuuk"),
+
       @SerializedName("America/Ojinaga")
       AMERICA_OJINAGA("America/Ojinaga"),
 
@@ -1808,6 +1811,9 @@ public class ReportRunCreateParams extends ApiRequestParams {
       @SerializedName("Europe/Kirov")
       EUROPE_KIROV("Europe/Kirov"),
 
+      @SerializedName("Europe/Kyiv")
+      EUROPE_KYIV("Europe/Kyiv"),
+
       @SerializedName("Europe/Lisbon")
       EUROPE_LISBON("Europe/Lisbon"),
 
@@ -2092,6 +2098,9 @@ public class ReportRunCreateParams extends ApiRequestParams {
 
       @SerializedName("Pacific/Johnston")
       PACIFIC_JOHNSTON("Pacific/Johnston"),
+
+      @SerializedName("Pacific/Kanton")
+      PACIFIC_KANTON("Pacific/Kanton"),
 
       @SerializedName("Pacific/Kiritimati")
       PACIFIC_KIRITIMATI("Pacific/Kiritimati"),

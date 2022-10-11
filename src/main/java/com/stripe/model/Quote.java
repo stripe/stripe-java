@@ -72,8 +72,8 @@ public class Quote extends ApiResource implements HasId, MetadataStore<Quote> {
    * Either {@code charge_automatically}, or {@code send_invoice}. When charging automatically,
    * Stripe will attempt to pay invoices at the end of the subscription cycle or on finalization
    * using the default payment method attached to the subscription or customer. When sending an
-   * invoice, Stripe will email your customer an invoice with payment instructions. Defaults to
-   * {@code charge_automatically}.
+   * invoice, Stripe will email your customer an invoice with payment instructions and mark the
+   * subscription as {@code active}. Defaults to {@code charge_automatically}.
    *
    * <p>One of {@code charge_automatically}, or {@code send_invoice}.
    */
@@ -897,6 +897,217 @@ public class Quote extends ApiResource implements HasId, MetadataStore<Quote> {
 
     @SerializedName("upfront")
     Upfront upfront;
+
+    @Getter
+    @Setter
+    @EqualsAndHashCode(callSuper = false)
+    public static class Recurring extends StripeObject {
+      /** Total before any discounts or taxes are applied. */
+      @SerializedName("amount_subtotal")
+      Long amountSubtotal;
+
+      /** Total after discounts and taxes are applied. */
+      @SerializedName("amount_total")
+      Long amountTotal;
+
+      /**
+       * The frequency at which a subscription is billed. One of {@code day}, {@code week}, {@code
+       * month} or {@code year}.
+       */
+      @SerializedName("interval")
+      String interval;
+
+      /**
+       * The number of intervals (specified in the {@code interval} attribute) between subscription
+       * billings. For example, {@code interval=month} and {@code interval_count=3} bills every 3
+       * months.
+       */
+      @SerializedName("interval_count")
+      Long intervalCount;
+
+      @SerializedName("total_details")
+      TotalDetails totalDetails;
+
+      @Getter
+      @Setter
+      @EqualsAndHashCode(callSuper = false)
+      public static class TotalDetails extends StripeObject {
+        /** This is the sum of all the discounts. */
+        @SerializedName("amount_discount")
+        Long amountDiscount;
+
+        /** This is the sum of all the shipping amounts. */
+        @SerializedName("amount_shipping")
+        Long amountShipping;
+
+        /** This is the sum of all the tax amounts. */
+        @SerializedName("amount_tax")
+        Long amountTax;
+
+        @SerializedName("breakdown")
+        Breakdown breakdown;
+
+        @Getter
+        @Setter
+        @EqualsAndHashCode(callSuper = false)
+        public static class Breakdown extends StripeObject {
+          /** The aggregated discounts. */
+          @SerializedName("discounts")
+          List<Quote.Computed.Recurring.TotalDetails.Breakdown.Discount> discounts;
+
+          /** The aggregated tax amounts by rate. */
+          @SerializedName("taxes")
+          List<Quote.Computed.Recurring.TotalDetails.Breakdown.Tax> taxes;
+
+          @Getter
+          @Setter
+          @EqualsAndHashCode(callSuper = false)
+          public static class Discount extends StripeObject {
+            /** The amount discounted. */
+            @SerializedName("amount")
+            Long amount;
+
+            /**
+             * A discount represents the actual application of a <a
+             * href="https://stripe.com/docs/api#coupons">coupon</a> or <a
+             * href="https://stripe.com/docs/api#promotion_codes">promotion code</a>. It contains
+             * information about when the discount began, when it will end, and what it is applied
+             * to.
+             *
+             * <p>Related guide: <a
+             * href="https://stripe.com/docs/billing/subscriptions/discounts">Applying Discounts to
+             * Subscriptions</a>.
+             */
+            @SerializedName("discount")
+            com.stripe.model.Discount discount;
+          }
+
+          @Getter
+          @Setter
+          @EqualsAndHashCode(callSuper = false)
+          public static class Tax extends StripeObject {
+            /** Amount of tax applied for this rate. */
+            @SerializedName("amount")
+            Long amount;
+
+            /**
+             * Tax rates can be applied to <a
+             * href="https://stripe.com/docs/billing/invoices/tax-rates">invoices</a>, <a
+             * href="https://stripe.com/docs/billing/subscriptions/taxes">subscriptions</a> and <a
+             * href="https://stripe.com/docs/payments/checkout/set-up-a-subscription#tax-rates">Checkout
+             * Sessions</a> to collect tax.
+             *
+             * <p>Related guide: <a href="https://stripe.com/docs/billing/taxes/tax-rates">Tax
+             * Rates</a>.
+             */
+            @SerializedName("rate")
+            TaxRate rate;
+          }
+        }
+      }
+    }
+
+    @Getter
+    @Setter
+    @EqualsAndHashCode(callSuper = false)
+    public static class Upfront extends StripeObject {
+      /** Total before any discounts or taxes are applied. */
+      @SerializedName("amount_subtotal")
+      Long amountSubtotal;
+
+      /** Total after discounts and taxes are applied. */
+      @SerializedName("amount_total")
+      Long amountTotal;
+
+      /**
+       * The line items that will appear on the next invoice after this quote is accepted. This does
+       * not include pending invoice items that exist on the customer but may still be included in
+       * the next invoice.
+       */
+      @SerializedName("line_items")
+      LineItemCollection lineItems;
+
+      @SerializedName("total_details")
+      TotalDetails totalDetails;
+
+      @Getter
+      @Setter
+      @EqualsAndHashCode(callSuper = false)
+      public static class TotalDetails extends StripeObject {
+        /** This is the sum of all the discounts. */
+        @SerializedName("amount_discount")
+        Long amountDiscount;
+
+        /** This is the sum of all the shipping amounts. */
+        @SerializedName("amount_shipping")
+        Long amountShipping;
+
+        /** This is the sum of all the tax amounts. */
+        @SerializedName("amount_tax")
+        Long amountTax;
+
+        @SerializedName("breakdown")
+        Breakdown breakdown;
+
+        @Getter
+        @Setter
+        @EqualsAndHashCode(callSuper = false)
+        public static class Breakdown extends StripeObject {
+          /** The aggregated discounts. */
+          @SerializedName("discounts")
+          List<Quote.Computed.Upfront.TotalDetails.Breakdown.Discount> discounts;
+
+          /** The aggregated tax amounts by rate. */
+          @SerializedName("taxes")
+          List<Quote.Computed.Upfront.TotalDetails.Breakdown.Tax> taxes;
+
+          @Getter
+          @Setter
+          @EqualsAndHashCode(callSuper = false)
+          public static class Discount extends StripeObject {
+            /** The amount discounted. */
+            @SerializedName("amount")
+            Long amount;
+
+            /**
+             * A discount represents the actual application of a <a
+             * href="https://stripe.com/docs/api#coupons">coupon</a> or <a
+             * href="https://stripe.com/docs/api#promotion_codes">promotion code</a>. It contains
+             * information about when the discount began, when it will end, and what it is applied
+             * to.
+             *
+             * <p>Related guide: <a
+             * href="https://stripe.com/docs/billing/subscriptions/discounts">Applying Discounts to
+             * Subscriptions</a>.
+             */
+            @SerializedName("discount")
+            com.stripe.model.Discount discount;
+          }
+
+          @Getter
+          @Setter
+          @EqualsAndHashCode(callSuper = false)
+          public static class Tax extends StripeObject {
+            /** Amount of tax applied for this rate. */
+            @SerializedName("amount")
+            Long amount;
+
+            /**
+             * Tax rates can be applied to <a
+             * href="https://stripe.com/docs/billing/invoices/tax-rates">invoices</a>, <a
+             * href="https://stripe.com/docs/billing/subscriptions/taxes">subscriptions</a> and <a
+             * href="https://stripe.com/docs/payments/checkout/set-up-a-subscription#tax-rates">Checkout
+             * Sessions</a> to collect tax.
+             *
+             * <p>Related guide: <a href="https://stripe.com/docs/billing/taxes/tax-rates">Tax
+             * Rates</a>.
+             */
+            @SerializedName("rate")
+            TaxRate rate;
+          }
+        }
+      }
+    }
   }
 
   @Getter
@@ -942,37 +1153,6 @@ public class Quote extends ApiResource implements HasId, MetadataStore<Quote> {
      */
     @SerializedName("days_until_due")
     Long daysUntilDue;
-  }
-
-  @Getter
-  @Setter
-  @EqualsAndHashCode(callSuper = false)
-  public static class Recurring extends StripeObject {
-    /** Total before any discounts or taxes are applied. */
-    @SerializedName("amount_subtotal")
-    Long amountSubtotal;
-
-    /** Total after discounts and taxes are applied. */
-    @SerializedName("amount_total")
-    Long amountTotal;
-
-    /**
-     * The frequency at which a subscription is billed. One of {@code day}, {@code week}, {@code
-     * month} or {@code year}.
-     */
-    @SerializedName("interval")
-    String interval;
-
-    /**
-     * The number of intervals (specified in the {@code interval} attribute) between subscription
-     * billings. For example, {@code interval=month} and {@code interval_count=3} bills every 3
-     * months.
-     */
-    @SerializedName("interval_count")
-    Long intervalCount;
-
-    @SerializedName("total_details")
-    TotalDetails totalDetails;
   }
 
   @Getter
@@ -1044,11 +1224,55 @@ public class Quote extends ApiResource implements HasId, MetadataStore<Quote> {
     public static class Breakdown extends StripeObject {
       /** The aggregated discounts. */
       @SerializedName("discounts")
-      List<LineItem.Discount> discounts;
+      List<Quote.TotalDetails.Breakdown.Discount> discounts;
 
       /** The aggregated tax amounts by rate. */
       @SerializedName("taxes")
-      List<LineItem.Tax> taxes;
+      List<Quote.TotalDetails.Breakdown.Tax> taxes;
+
+      @Getter
+      @Setter
+      @EqualsAndHashCode(callSuper = false)
+      public static class Discount extends StripeObject {
+        /** The amount discounted. */
+        @SerializedName("amount")
+        Long amount;
+
+        /**
+         * A discount represents the actual application of a <a
+         * href="https://stripe.com/docs/api#coupons">coupon</a> or <a
+         * href="https://stripe.com/docs/api#promotion_codes">promotion code</a>. It contains
+         * information about when the discount began, when it will end, and what it is applied to.
+         *
+         * <p>Related guide: <a
+         * href="https://stripe.com/docs/billing/subscriptions/discounts">Applying Discounts to
+         * Subscriptions</a>.
+         */
+        @SerializedName("discount")
+        com.stripe.model.Discount discount;
+      }
+
+      @Getter
+      @Setter
+      @EqualsAndHashCode(callSuper = false)
+      public static class Tax extends StripeObject {
+        /** Amount of tax applied for this rate. */
+        @SerializedName("amount")
+        Long amount;
+
+        /**
+         * Tax rates can be applied to <a
+         * href="https://stripe.com/docs/billing/invoices/tax-rates">invoices</a>, <a
+         * href="https://stripe.com/docs/billing/subscriptions/taxes">subscriptions</a> and <a
+         * href="https://stripe.com/docs/payments/checkout/set-up-a-subscription#tax-rates">Checkout
+         * Sessions</a> to collect tax.
+         *
+         * <p>Related guide: <a href="https://stripe.com/docs/billing/taxes/tax-rates">Tax
+         * Rates</a>.
+         */
+        @SerializedName("rate")
+        TaxRate rate;
+      }
     }
   }
 
@@ -1094,29 +1318,5 @@ public class Quote extends ApiResource implements HasId, MetadataStore<Quote> {
     public void setDestinationObject(Account expandableObject) {
       this.destination = new ExpandableField<Account>(expandableObject.getId(), expandableObject);
     }
-  }
-
-  @Getter
-  @Setter
-  @EqualsAndHashCode(callSuper = false)
-  public static class Upfront extends StripeObject {
-    /** Total before any discounts or taxes are applied. */
-    @SerializedName("amount_subtotal")
-    Long amountSubtotal;
-
-    /** Total after discounts and taxes are applied. */
-    @SerializedName("amount_total")
-    Long amountTotal;
-
-    /**
-     * The line items that will appear on the next invoice after this quote is accepted. This does
-     * not include pending invoice items that exist on the customer but may still be included in the
-     * next invoice.
-     */
-    @SerializedName("line_items")
-    LineItemCollection lineItems;
-
-    @SerializedName("total_details")
-    TotalDetails totalDetails;
   }
 }

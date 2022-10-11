@@ -472,7 +472,8 @@ public class Invoice extends ApiResource implements HasId, MetadataStore<Invoice
 
   /**
    * Starting customer balance before the invoice is finalized. If the invoice has not been
-   * finalized yet, this will be the current customer balance.
+   * finalized yet, this will be the current customer balance. For revision invoices, this also
+   * includes any customer balance that was applied to the original invoice.
    */
   @SerializedName("starting_balance")
   Long startingBalance;
@@ -537,7 +538,7 @@ public class Invoice extends ApiResource implements HasId, MetadataStore<Invoice
 
   /** The aggregate amounts calculated per discount across all line items. */
   @SerializedName("total_discount_amounts")
-  List<Invoice.DiscountAmount> totalDiscountAmounts;
+  List<Invoice.TotalDiscountAmount> totalDiscountAmounts;
 
   /**
    * The integer amount in %s representing the total amount of the invoice including all discounts
@@ -548,7 +549,7 @@ public class Invoice extends ApiResource implements HasId, MetadataStore<Invoice
 
   /** The aggregate amounts calculated per tax rate for all line items. */
   @SerializedName("total_tax_amounts")
-  List<Invoice.TaxAmount> totalTaxAmounts;
+  List<Invoice.TotalTaxAmount> totalTaxAmounts;
 
   /**
    * The account (if any) the payment will be attributed to for tax reporting, and where funds from
@@ -1728,39 +1729,6 @@ public class Invoice extends ApiResource implements HasId, MetadataStore<Invoice
   @Getter
   @Setter
   @EqualsAndHashCode(callSuper = false)
-  public static class DiscountAmount extends StripeObject {
-    /** The amount, in %s, of the discount. */
-    @SerializedName("amount")
-    Long amount;
-
-    /** The discount that was applied to get this discount amount. */
-    @SerializedName("discount")
-    @Getter(lombok.AccessLevel.NONE)
-    @Setter(lombok.AccessLevel.NONE)
-    ExpandableField<Discount> discount;
-
-    /** Get ID of expandable {@code discount} object. */
-    public String getDiscount() {
-      return (this.discount != null) ? this.discount.getId() : null;
-    }
-
-    public void setDiscount(String id) {
-      this.discount = ApiResource.setExpandableFieldId(id, this.discount);
-    }
-
-    /** Get expanded {@code discount}. */
-    public Discount getDiscountObject() {
-      return (this.discount != null) ? this.discount.getExpanded() : null;
-    }
-
-    public void setDiscountObject(Discount expandableObject) {
-      this.discount = new ExpandableField<Discount>(expandableObject.getId(), expandableObject);
-    }
-  }
-
-  @Getter
-  @Setter
-  @EqualsAndHashCode(callSuper = false)
   public static class FromInvoice extends StripeObject {
     /** The relation between this invoice and the cloned invoice. */
     @SerializedName("action")
@@ -1794,207 +1762,6 @@ public class Invoice extends ApiResource implements HasId, MetadataStore<Invoice
   @Getter
   @Setter
   @EqualsAndHashCode(callSuper = false)
-  public static class PaymentMethodOptions extends StripeObject {
-    /**
-     * If paying by {@code acss_debit}, this sub-hash contains details about the Canadian
-     * pre-authorized debit payment method options to pass to the invoice’s PaymentIntent.
-     */
-    @SerializedName("acss_debit")
-    AcssDebit acssDebit;
-
-    /**
-     * If paying by {@code bancontact}, this sub-hash contains details about the Bancontact payment
-     * method options to pass to the invoice’s PaymentIntent.
-     */
-    @SerializedName("bancontact")
-    Bancontact bancontact;
-
-    /**
-     * If paying by {@code card}, this sub-hash contains details about the Card payment method
-     * options to pass to the invoice’s PaymentIntent.
-     */
-    @SerializedName("card")
-    Card card;
-
-    /**
-     * If paying by {@code customer_balance}, this sub-hash contains details about the Bank transfer
-     * payment method options to pass to the invoice’s PaymentIntent.
-     */
-    @SerializedName("customer_balance")
-    CustomerBalance customerBalance;
-
-    /**
-     * If paying by {@code konbini}, this sub-hash contains details about the Konbini payment method
-     * options to pass to the invoice’s PaymentIntent.
-     */
-    @SerializedName("konbini")
-    Konbini konbini;
-
-    /**
-     * If paying by {@code us_bank_account}, this sub-hash contains details about the ACH direct
-     * debit payment method options to pass to the invoice’s PaymentIntent.
-     */
-    @SerializedName("us_bank_account")
-    UsBankAccount usBankAccount;
-
-    @Getter
-    @Setter
-    @EqualsAndHashCode(callSuper = false)
-    public static class AcssDebit extends StripeObject {
-      @SerializedName("mandate_options")
-      MandateOptions mandateOptions;
-
-      /**
-       * Bank account verification method.
-       *
-       * <p>One of {@code automatic}, {@code instant}, or {@code microdeposits}.
-       */
-      @SerializedName("verification_method")
-      String verificationMethod;
-
-      @Getter
-      @Setter
-      @EqualsAndHashCode(callSuper = false)
-      public static class MandateOptions extends StripeObject {
-        /**
-         * Transaction type of the mandate.
-         *
-         * <p>One of {@code business}, or {@code personal}.
-         */
-        @SerializedName("transaction_type")
-        String transactionType;
-      }
-    }
-
-    @Getter
-    @Setter
-    @EqualsAndHashCode(callSuper = false)
-    public static class Bancontact extends StripeObject {
-      /**
-       * Preferred language of the Bancontact authorization page that the customer is redirected to.
-       *
-       * <p>One of {@code de}, {@code en}, {@code fr}, or {@code nl}.
-       */
-      @SerializedName("preferred_language")
-      String preferredLanguage;
-    }
-
-    @Getter
-    @Setter
-    @EqualsAndHashCode(callSuper = false)
-    public static class Card extends StripeObject {
-      @SerializedName("installments")
-      Installments installments;
-
-      /**
-       * We strongly recommend that you rely on our SCA Engine to automatically prompt your
-       * customers for authentication based on risk level and <a
-       * href="https://stripe.com/docs/strong-customer-authentication">other requirements</a>.
-       * However, if you wish to request 3D Secure based on logic from your own fraud engine,
-       * provide this option. Read our guide on <a
-       * href="https://stripe.com/docs/payments/3d-secure#manual-three-ds">manually requesting 3D
-       * Secure</a> for more information on how this configuration interacts with Radar and our SCA
-       * Engine.
-       *
-       * <p>One of {@code any}, or {@code automatic}.
-       */
-      @SerializedName("request_three_d_secure")
-      String requestThreeDSecure;
-
-      @Getter
-      @Setter
-      @EqualsAndHashCode(callSuper = false)
-      public static class Installments extends StripeObject {
-        /** Whether Installments are enabled for this Invoice. */
-        @SerializedName("enabled")
-        Boolean enabled;
-      }
-    }
-
-    @Getter
-    @Setter
-    @EqualsAndHashCode(callSuper = false)
-    public static class CustomerBalance extends StripeObject {
-      @SerializedName("bank_transfer")
-      BankTransfer bankTransfer;
-
-      /**
-       * The funding method type to be used when there are not enough funds in the customer balance.
-       * Permitted values include: {@code bank_transfer}.
-       *
-       * <p>Equal to {@code bank_transfer}.
-       */
-      @SerializedName("funding_type")
-      String fundingType;
-
-      @Getter
-      @Setter
-      @EqualsAndHashCode(callSuper = false)
-      public static class BankTransfer extends StripeObject {
-        @SerializedName("eu_bank_transfer")
-        EuBankTransfer euBankTransfer;
-
-        /**
-         * The bank transfer type that can be used for funding. Permitted values include: {@code
-         * eu_bank_transfer}, {@code gb_bank_transfer}, {@code jp_bank_transfer}, or {@code
-         * mx_bank_transfer}.
-         */
-        @SerializedName("type")
-        String type;
-
-        @Getter
-        @Setter
-        @EqualsAndHashCode(callSuper = false)
-        public static class EuBankTransfer extends StripeObject {
-          /**
-           * The desired country code of the bank account information. Permitted values include:
-           * {@code DE}, {@code ES}, {@code FR}, {@code IE}, or {@code NL}.
-           *
-           * <p>One of {@code DE}, {@code ES}, {@code FR}, {@code IE}, or {@code NL}.
-           */
-          @SerializedName("country")
-          String country;
-        }
-      }
-    }
-
-    @Getter
-    @Setter
-    @EqualsAndHashCode(callSuper = false)
-    public static class Konbini extends StripeObject {}
-
-    @Getter
-    @Setter
-    @EqualsAndHashCode(callSuper = false)
-    public static class UsBankAccount extends StripeObject {
-      @SerializedName("financial_connections")
-      FinancialConnections financialConnections;
-
-      /**
-       * Bank account verification method.
-       *
-       * <p>One of {@code automatic}, {@code instant}, or {@code microdeposits}.
-       */
-      @SerializedName("verification_method")
-      String verificationMethod;
-
-      @Getter
-      @Setter
-      @EqualsAndHashCode(callSuper = false)
-      public static class FinancialConnections extends StripeObject {
-        /**
-         * The list of permissions to request. The {@code payment_method} permission must be
-         * included.
-         */
-        @SerializedName("permissions")
-        List<String> permissions;
-      }
-    }
-  }
-
-  @Getter
-  @Setter
-  @EqualsAndHashCode(callSuper = false)
   public static class PaymentSettings extends StripeObject {
     /**
      * ID of the mandate to be used for this invoice. It must correspond to the payment method used
@@ -2016,6 +1783,208 @@ public class Invoice extends ApiResource implements HasId, MetadataStore<Invoice
      */
     @SerializedName("payment_method_types")
     List<String> paymentMethodTypes;
+
+    @Getter
+    @Setter
+    @EqualsAndHashCode(callSuper = false)
+    public static class PaymentMethodOptions extends StripeObject {
+      /**
+       * If paying by {@code acss_debit}, this sub-hash contains details about the Canadian
+       * pre-authorized debit payment method options to pass to the invoice’s PaymentIntent.
+       */
+      @SerializedName("acss_debit")
+      AcssDebit acssDebit;
+
+      /**
+       * If paying by {@code bancontact}, this sub-hash contains details about the Bancontact
+       * payment method options to pass to the invoice’s PaymentIntent.
+       */
+      @SerializedName("bancontact")
+      Bancontact bancontact;
+
+      /**
+       * If paying by {@code card}, this sub-hash contains details about the Card payment method
+       * options to pass to the invoice’s PaymentIntent.
+       */
+      @SerializedName("card")
+      Card card;
+
+      /**
+       * If paying by {@code customer_balance}, this sub-hash contains details about the Bank
+       * transfer payment method options to pass to the invoice’s PaymentIntent.
+       */
+      @SerializedName("customer_balance")
+      CustomerBalance customerBalance;
+
+      /**
+       * If paying by {@code konbini}, this sub-hash contains details about the Konbini payment
+       * method options to pass to the invoice’s PaymentIntent.
+       */
+      @SerializedName("konbini")
+      Konbini konbini;
+
+      /**
+       * If paying by {@code us_bank_account}, this sub-hash contains details about the ACH direct
+       * debit payment method options to pass to the invoice’s PaymentIntent.
+       */
+      @SerializedName("us_bank_account")
+      UsBankAccount usBankAccount;
+
+      @Getter
+      @Setter
+      @EqualsAndHashCode(callSuper = false)
+      public static class AcssDebit extends StripeObject {
+        @SerializedName("mandate_options")
+        MandateOptions mandateOptions;
+
+        /**
+         * Bank account verification method.
+         *
+         * <p>One of {@code automatic}, {@code instant}, or {@code microdeposits}.
+         */
+        @SerializedName("verification_method")
+        String verificationMethod;
+
+        @Getter
+        @Setter
+        @EqualsAndHashCode(callSuper = false)
+        public static class MandateOptions extends StripeObject {
+          /**
+           * Transaction type of the mandate.
+           *
+           * <p>One of {@code business}, or {@code personal}.
+           */
+          @SerializedName("transaction_type")
+          String transactionType;
+        }
+      }
+
+      @Getter
+      @Setter
+      @EqualsAndHashCode(callSuper = false)
+      public static class Bancontact extends StripeObject {
+        /**
+         * Preferred language of the Bancontact authorization page that the customer is redirected
+         * to.
+         *
+         * <p>One of {@code de}, {@code en}, {@code fr}, or {@code nl}.
+         */
+        @SerializedName("preferred_language")
+        String preferredLanguage;
+      }
+
+      @Getter
+      @Setter
+      @EqualsAndHashCode(callSuper = false)
+      public static class Card extends StripeObject {
+        @SerializedName("installments")
+        Installments installments;
+
+        /**
+         * We strongly recommend that you rely on our SCA Engine to automatically prompt your
+         * customers for authentication based on risk level and <a
+         * href="https://stripe.com/docs/strong-customer-authentication">other requirements</a>.
+         * However, if you wish to request 3D Secure based on logic from your own fraud engine,
+         * provide this option. Read our guide on <a
+         * href="https://stripe.com/docs/payments/3d-secure#manual-three-ds">manually requesting 3D
+         * Secure</a> for more information on how this configuration interacts with Radar and our
+         * SCA Engine.
+         *
+         * <p>One of {@code any}, or {@code automatic}.
+         */
+        @SerializedName("request_three_d_secure")
+        String requestThreeDSecure;
+
+        @Getter
+        @Setter
+        @EqualsAndHashCode(callSuper = false)
+        public static class Installments extends StripeObject {
+          /** Whether Installments are enabled for this Invoice. */
+          @SerializedName("enabled")
+          Boolean enabled;
+        }
+      }
+
+      @Getter
+      @Setter
+      @EqualsAndHashCode(callSuper = false)
+      public static class CustomerBalance extends StripeObject {
+        @SerializedName("bank_transfer")
+        BankTransfer bankTransfer;
+
+        /**
+         * The funding method type to be used when there are not enough funds in the customer
+         * balance. Permitted values include: {@code bank_transfer}.
+         *
+         * <p>Equal to {@code bank_transfer}.
+         */
+        @SerializedName("funding_type")
+        String fundingType;
+
+        @Getter
+        @Setter
+        @EqualsAndHashCode(callSuper = false)
+        public static class BankTransfer extends StripeObject {
+          @SerializedName("eu_bank_transfer")
+          EuBankTransfer euBankTransfer;
+
+          /**
+           * The bank transfer type that can be used for funding. Permitted values include: {@code
+           * eu_bank_transfer}, {@code gb_bank_transfer}, {@code jp_bank_transfer}, or {@code
+           * mx_bank_transfer}.
+           */
+          @SerializedName("type")
+          String type;
+
+          @Getter
+          @Setter
+          @EqualsAndHashCode(callSuper = false)
+          public static class EuBankTransfer extends StripeObject {
+            /**
+             * The desired country code of the bank account information. Permitted values include:
+             * {@code DE}, {@code ES}, {@code FR}, {@code IE}, or {@code NL}.
+             *
+             * <p>One of {@code DE}, {@code ES}, {@code FR}, {@code IE}, or {@code NL}.
+             */
+            @SerializedName("country")
+            String country;
+          }
+        }
+      }
+
+      @Getter
+      @Setter
+      @EqualsAndHashCode(callSuper = false)
+      public static class Konbini extends StripeObject {}
+
+      @Getter
+      @Setter
+      @EqualsAndHashCode(callSuper = false)
+      public static class UsBankAccount extends StripeObject {
+        @SerializedName("financial_connections")
+        FinancialConnections financialConnections;
+
+        /**
+         * Bank account verification method.
+         *
+         * <p>One of {@code automatic}, {@code instant}, or {@code microdeposits}.
+         */
+        @SerializedName("verification_method")
+        String verificationMethod;
+
+        @Getter
+        @Setter
+        @EqualsAndHashCode(callSuper = false)
+        public static class FinancialConnections extends StripeObject {
+          /**
+           * The list of permissions to request. The {@code payment_method} permission must be
+           * included.
+           */
+          @SerializedName("permissions")
+          List<String> permissions;
+        }
+      }
+    }
   }
 
   @Getter
@@ -2051,7 +2020,66 @@ public class Invoice extends ApiResource implements HasId, MetadataStore<Invoice
   @Getter
   @Setter
   @EqualsAndHashCode(callSuper = false)
-  public static class TaxAmount extends StripeObject {
+  public static class ThresholdReason extends StripeObject {
+    /** The total invoice amount threshold boundary if it triggered the threshold invoice. */
+    @SerializedName("amount_gte")
+    Long amountGte;
+
+    /** Indicates which line items triggered a threshold invoice. */
+    @SerializedName("item_reasons")
+    List<Invoice.ThresholdReason.ItemReason> itemReasons;
+
+    @Getter
+    @Setter
+    @EqualsAndHashCode(callSuper = false)
+    public static class ItemReason extends StripeObject {
+      /** The IDs of the line items that triggered the threshold invoice. */
+      @SerializedName("line_item_ids")
+      List<String> lineItemIds;
+
+      /** The quantity threshold boundary that applied to the given line item. */
+      @SerializedName("usage_gte")
+      Long usageGte;
+    }
+  }
+
+  @Getter
+  @Setter
+  @EqualsAndHashCode(callSuper = false)
+  public static class TotalDiscountAmount extends StripeObject {
+    /** The amount, in %s, of the discount. */
+    @SerializedName("amount")
+    Long amount;
+
+    /** The discount that was applied to get this discount amount. */
+    @SerializedName("discount")
+    @Getter(lombok.AccessLevel.NONE)
+    @Setter(lombok.AccessLevel.NONE)
+    ExpandableField<Discount> discount;
+
+    /** Get ID of expandable {@code discount} object. */
+    public String getDiscount() {
+      return (this.discount != null) ? this.discount.getId() : null;
+    }
+
+    public void setDiscount(String id) {
+      this.discount = ApiResource.setExpandableFieldId(id, this.discount);
+    }
+
+    /** Get expanded {@code discount}. */
+    public Discount getDiscountObject() {
+      return (this.discount != null) ? this.discount.getExpanded() : null;
+    }
+
+    public void setDiscountObject(Discount expandableObject) {
+      this.discount = new ExpandableField<Discount>(expandableObject.getId(), expandableObject);
+    }
+  }
+
+  @Getter
+  @Setter
+  @EqualsAndHashCode(callSuper = false)
+  public static class TotalTaxAmount extends StripeObject {
     /** The amount, in %s, of the tax. */
     @SerializedName("amount")
     Long amount;
@@ -2083,32 +2111,6 @@ public class Invoice extends ApiResource implements HasId, MetadataStore<Invoice
     public void setTaxRateObject(TaxRate expandableObject) {
       this.taxRate = new ExpandableField<TaxRate>(expandableObject.getId(), expandableObject);
     }
-  }
-
-  @Getter
-  @Setter
-  @EqualsAndHashCode(callSuper = false)
-  public static class ThresholdItemReason extends StripeObject {
-    /** The IDs of the line items that triggered the threshold invoice. */
-    @SerializedName("line_item_ids")
-    List<String> lineItemIds;
-
-    /** The quantity threshold boundary that applied to the given line item. */
-    @SerializedName("usage_gte")
-    Long usageGte;
-  }
-
-  @Getter
-  @Setter
-  @EqualsAndHashCode(callSuper = false)
-  public static class ThresholdReason extends StripeObject {
-    /** The total invoice amount threshold boundary if it triggered the threshold invoice. */
-    @SerializedName("amount_gte")
-    Long amountGte;
-
-    /** Indicates which line items triggered a threshold invoice. */
-    @SerializedName("item_reasons")
-    List<Invoice.ThresholdItemReason> itemReasons;
   }
 
   @Getter
