@@ -996,8 +996,8 @@ public class PaymentMethod extends ApiResource implements HasId, MetadataStore<P
      * alliance_bank}, {@code ambank}, {@code bank_islam}, {@code bank_muamalat}, {@code
      * bank_rakyat}, {@code bsn}, {@code cimb}, {@code hong_leong_bank}, {@code hsbc}, {@code kfh},
      * {@code maybank2u}, {@code ocbc}, {@code public_bank}, {@code rhb}, {@code
-     * standard_chartered}, {@code uob}, {@code deutsche_bank}, {@code maybank2e}, or {@code
-     * pb_enterprise}.
+     * standard_chartered}, {@code uob}, {@code deutsche_bank}, {@code maybank2e}, {@code
+     * pb_enterprise}, or {@code bank_of_china}.
      */
     @SerializedName("bank")
     String bank;
