@@ -7,21 +7,7 @@ import com.google.gson.TypeAdapterFactory;
 import com.stripe.Stripe;
 import com.stripe.exception.InvalidRequestException;
 import com.stripe.exception.StripeException;
-import com.stripe.model.EphemeralKey;
-import com.stripe.model.EphemeralKeyDeserializer;
-import com.stripe.model.EventData;
-import com.stripe.model.EventDataDeserializer;
-import com.stripe.model.EventRequest;
-import com.stripe.model.EventRequestDeserializer;
-import com.stripe.model.ExpandableField;
-import com.stripe.model.ExpandableFieldDeserializer;
-import com.stripe.model.HasId;
-import com.stripe.model.StripeCollectionInterface;
-import com.stripe.model.StripeObject;
-import com.stripe.model.StripeObjectInterface;
-import com.stripe.model.StripeRawJsonObject;
-import com.stripe.model.StripeRawJsonObjectDeserializer;
-import com.stripe.model.StripeSearchResultInterface;
+import com.stripe.model.*;
 import com.stripe.util.StringUtils;
 import java.io.InputStream;
 import java.io.UnsupportedEncodingException;
@@ -47,8 +33,8 @@ public abstract class ApiResource extends StripeObject {
         new GsonBuilder()
             .setFieldNamingPolicy(FieldNamingPolicy.LOWER_CASE_WITH_UNDERSCORES)
             .registerTypeAdapter(EphemeralKey.class, new EphemeralKeyDeserializer())
-            .registerTypeAdapter(EventData.class, new EventDataDeserializer())
-            .registerTypeAdapter(EventRequest.class, new EventRequestDeserializer())
+            .registerTypeAdapter(Event.Data.class, new EventDataDeserializer())
+            .registerTypeAdapter(Event.Request.class, new EventRequestDeserializer())
             .registerTypeAdapter(ExpandableField.class, new ExpandableFieldDeserializer())
             .registerTypeAdapter(StripeRawJsonObject.class, new StripeRawJsonObjectDeserializer());
 

@@ -50,7 +50,7 @@ public class CashBalance extends ApiResource {
   String object;
 
   @SerializedName("settings")
-  BalanceSettings settings;
+  Settings settings;
 
   /** Retrieves a customer’s cash balance. */
   public static CashBalance retrieve(String customer) throws StripeException {
@@ -127,7 +127,7 @@ public class CashBalance extends ApiResource {
   @Getter
   @Setter
   @EqualsAndHashCode(callSuper = false)
-  public static class BalanceSettings extends StripeObject {
+  public static class Settings extends StripeObject {
     /**
      * The configuration for how funds that land in the customer cash balance are reconciled.
      *

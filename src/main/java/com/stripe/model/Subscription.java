@@ -929,229 +929,6 @@ public class Subscription extends ApiResource implements HasId, MetadataStore<Su
   @Getter
   @Setter
   @EqualsAndHashCode(callSuper = false)
-  public static class PaymentMethodOptions extends StripeObject {
-    /**
-     * This sub-hash contains details about the Canadian pre-authorized debit payment method options
-     * to pass to invoices created by the subscription.
-     */
-    @SerializedName("acss_debit")
-    AcssDebit acssDebit;
-
-    /**
-     * This sub-hash contains details about the Bancontact payment method options to pass to
-     * invoices created by the subscription.
-     */
-    @SerializedName("bancontact")
-    Bancontact bancontact;
-
-    /**
-     * This sub-hash contains details about the Card payment method options to pass to invoices
-     * created by the subscription.
-     */
-    @SerializedName("card")
-    Card card;
-
-    /**
-     * This sub-hash contains details about the Bank transfer payment method options to pass to
-     * invoices created by the subscription.
-     */
-    @SerializedName("customer_balance")
-    CustomerBalance customerBalance;
-
-    /**
-     * This sub-hash contains details about the Konbini payment method options to pass to invoices
-     * created by the subscription.
-     */
-    @SerializedName("konbini")
-    Konbini konbini;
-
-    /**
-     * This sub-hash contains details about the ACH direct debit payment method options to pass to
-     * invoices created by the subscription.
-     */
-    @SerializedName("us_bank_account")
-    UsBankAccount usBankAccount;
-
-    @Getter
-    @Setter
-    @EqualsAndHashCode(callSuper = false)
-    public static class AcssDebit extends StripeObject {
-      @SerializedName("mandate_options")
-      MandateOptions mandateOptions;
-
-      /**
-       * Bank account verification method.
-       *
-       * <p>One of {@code automatic}, {@code instant}, or {@code microdeposits}.
-       */
-      @SerializedName("verification_method")
-      String verificationMethod;
-
-      @Getter
-      @Setter
-      @EqualsAndHashCode(callSuper = false)
-      public static class MandateOptions extends StripeObject {
-        /**
-         * Transaction type of the mandate.
-         *
-         * <p>One of {@code business}, or {@code personal}.
-         */
-        @SerializedName("transaction_type")
-        String transactionType;
-      }
-    }
-
-    @Getter
-    @Setter
-    @EqualsAndHashCode(callSuper = false)
-    public static class Bancontact extends StripeObject {
-      /**
-       * Preferred language of the Bancontact authorization page that the customer is redirected to.
-       *
-       * <p>One of {@code de}, {@code en}, {@code fr}, or {@code nl}.
-       */
-      @SerializedName("preferred_language")
-      String preferredLanguage;
-    }
-
-    @Getter
-    @Setter
-    @EqualsAndHashCode(callSuper = false)
-    public static class Card extends StripeObject {
-      @SerializedName("mandate_options")
-      MandateOptions mandateOptions;
-
-      /**
-       * Selected network to process this Subscription on. Depends on the available networks of the
-       * card attached to the Subscription. Can be only set confirm-time.
-       */
-      @SerializedName("network")
-      String network;
-
-      /**
-       * We strongly recommend that you rely on our SCA Engine to automatically prompt your
-       * customers for authentication based on risk level and <a
-       * href="https://stripe.com/docs/strong-customer-authentication">other requirements</a>.
-       * However, if you wish to request 3D Secure based on logic from your own fraud engine,
-       * provide this option. Read our guide on <a
-       * href="https://stripe.com/docs/payments/3d-secure#manual-three-ds">manually requesting 3D
-       * Secure</a> for more information on how this configuration interacts with Radar and our SCA
-       * Engine.
-       *
-       * <p>One of {@code any}, or {@code automatic}.
-       */
-      @SerializedName("request_three_d_secure")
-      String requestThreeDSecure;
-
-      @Getter
-      @Setter
-      @EqualsAndHashCode(callSuper = false)
-      public static class MandateOptions extends StripeObject {
-        /** Amount to be charged for future payments. */
-        @SerializedName("amount")
-        Long amount;
-
-        /**
-         * One of {@code fixed} or {@code maximum}. If {@code fixed}, the {@code amount} param
-         * refers to the exact amount to be charged in future payments. If {@code maximum}, the
-         * amount charged can be up to the value passed for the {@code amount} param.
-         */
-        @SerializedName("amount_type")
-        String amountType;
-
-        /**
-         * A description of the mandate or subscription that is meant to be displayed to the
-         * customer.
-         */
-        @SerializedName("description")
-        String description;
-      }
-    }
-
-    @Getter
-    @Setter
-    @EqualsAndHashCode(callSuper = false)
-    public static class CustomerBalance extends StripeObject {
-      @SerializedName("bank_transfer")
-      BankTransfer bankTransfer;
-
-      /**
-       * The funding method type to be used when there are not enough funds in the customer balance.
-       * Permitted values include: {@code bank_transfer}.
-       *
-       * <p>Equal to {@code bank_transfer}.
-       */
-      @SerializedName("funding_type")
-      String fundingType;
-
-      @Getter
-      @Setter
-      @EqualsAndHashCode(callSuper = false)
-      public static class BankTransfer extends StripeObject {
-        @SerializedName("eu_bank_transfer")
-        EuBankTransfer euBankTransfer;
-
-        /**
-         * The bank transfer type that can be used for funding. Permitted values include: {@code
-         * eu_bank_transfer}, {@code gb_bank_transfer}, {@code jp_bank_transfer}, or {@code
-         * mx_bank_transfer}.
-         */
-        @SerializedName("type")
-        String type;
-
-        @Getter
-        @Setter
-        @EqualsAndHashCode(callSuper = false)
-        public static class EuBankTransfer extends StripeObject {
-          /**
-           * The desired country code of the bank account information. Permitted values include:
-           * {@code DE}, {@code ES}, {@code FR}, {@code IE}, or {@code NL}.
-           *
-           * <p>One of {@code DE}, {@code ES}, {@code FR}, {@code IE}, or {@code NL}.
-           */
-          @SerializedName("country")
-          String country;
-        }
-      }
-    }
-
-    @Getter
-    @Setter
-    @EqualsAndHashCode(callSuper = false)
-    public static class Konbini extends StripeObject {}
-
-    @Getter
-    @Setter
-    @EqualsAndHashCode(callSuper = false)
-    public static class UsBankAccount extends StripeObject {
-      @SerializedName("financial_connections")
-      FinancialConnections financialConnections;
-
-      /**
-       * Bank account verification method.
-       *
-       * <p>One of {@code automatic}, {@code instant}, or {@code microdeposits}.
-       */
-      @SerializedName("verification_method")
-      String verificationMethod;
-
-      @Getter
-      @Setter
-      @EqualsAndHashCode(callSuper = false)
-      public static class FinancialConnections extends StripeObject {
-        /**
-         * The list of permissions to request. The {@code payment_method} permission must be
-         * included.
-         */
-        @SerializedName("permissions")
-        List<String> permissions;
-      }
-    }
-  }
-
-  @Getter
-  @Setter
-  @EqualsAndHashCode(callSuper = false)
   public static class PaymentSettings extends StripeObject {
     /** Payment-method-specific configuration to provide to invoices created by the subscription. */
     @SerializedName("payment_method_options")
@@ -1175,6 +952,230 @@ public class Subscription extends ApiResource implements HasId, MetadataStore<Su
      */
     @SerializedName("save_default_payment_method")
     String saveDefaultPaymentMethod;
+
+    @Getter
+    @Setter
+    @EqualsAndHashCode(callSuper = false)
+    public static class PaymentMethodOptions extends StripeObject {
+      /**
+       * This sub-hash contains details about the Canadian pre-authorized debit payment method
+       * options to pass to invoices created by the subscription.
+       */
+      @SerializedName("acss_debit")
+      AcssDebit acssDebit;
+
+      /**
+       * This sub-hash contains details about the Bancontact payment method options to pass to
+       * invoices created by the subscription.
+       */
+      @SerializedName("bancontact")
+      Bancontact bancontact;
+
+      /**
+       * This sub-hash contains details about the Card payment method options to pass to invoices
+       * created by the subscription.
+       */
+      @SerializedName("card")
+      Card card;
+
+      /**
+       * This sub-hash contains details about the Bank transfer payment method options to pass to
+       * invoices created by the subscription.
+       */
+      @SerializedName("customer_balance")
+      CustomerBalance customerBalance;
+
+      /**
+       * This sub-hash contains details about the Konbini payment method options to pass to invoices
+       * created by the subscription.
+       */
+      @SerializedName("konbini")
+      Konbini konbini;
+
+      /**
+       * This sub-hash contains details about the ACH direct debit payment method options to pass to
+       * invoices created by the subscription.
+       */
+      @SerializedName("us_bank_account")
+      UsBankAccount usBankAccount;
+
+      @Getter
+      @Setter
+      @EqualsAndHashCode(callSuper = false)
+      public static class AcssDebit extends StripeObject {
+        @SerializedName("mandate_options")
+        MandateOptions mandateOptions;
+
+        /**
+         * Bank account verification method.
+         *
+         * <p>One of {@code automatic}, {@code instant}, or {@code microdeposits}.
+         */
+        @SerializedName("verification_method")
+        String verificationMethod;
+
+        @Getter
+        @Setter
+        @EqualsAndHashCode(callSuper = false)
+        public static class MandateOptions extends StripeObject {
+          /**
+           * Transaction type of the mandate.
+           *
+           * <p>One of {@code business}, or {@code personal}.
+           */
+          @SerializedName("transaction_type")
+          String transactionType;
+        }
+      }
+
+      @Getter
+      @Setter
+      @EqualsAndHashCode(callSuper = false)
+      public static class Bancontact extends StripeObject {
+        /**
+         * Preferred language of the Bancontact authorization page that the customer is redirected
+         * to.
+         *
+         * <p>One of {@code de}, {@code en}, {@code fr}, or {@code nl}.
+         */
+        @SerializedName("preferred_language")
+        String preferredLanguage;
+      }
+
+      @Getter
+      @Setter
+      @EqualsAndHashCode(callSuper = false)
+      public static class Card extends StripeObject {
+        @SerializedName("mandate_options")
+        MandateOptions mandateOptions;
+
+        /**
+         * Selected network to process this Subscription on. Depends on the available networks of
+         * the card attached to the Subscription. Can be only set confirm-time.
+         */
+        @SerializedName("network")
+        String network;
+
+        /**
+         * We strongly recommend that you rely on our SCA Engine to automatically prompt your
+         * customers for authentication based on risk level and <a
+         * href="https://stripe.com/docs/strong-customer-authentication">other requirements</a>.
+         * However, if you wish to request 3D Secure based on logic from your own fraud engine,
+         * provide this option. Read our guide on <a
+         * href="https://stripe.com/docs/payments/3d-secure#manual-three-ds">manually requesting 3D
+         * Secure</a> for more information on how this configuration interacts with Radar and our
+         * SCA Engine.
+         *
+         * <p>One of {@code any}, or {@code automatic}.
+         */
+        @SerializedName("request_three_d_secure")
+        String requestThreeDSecure;
+
+        @Getter
+        @Setter
+        @EqualsAndHashCode(callSuper = false)
+        public static class MandateOptions extends StripeObject {
+          /** Amount to be charged for future payments. */
+          @SerializedName("amount")
+          Long amount;
+
+          /**
+           * One of {@code fixed} or {@code maximum}. If {@code fixed}, the {@code amount} param
+           * refers to the exact amount to be charged in future payments. If {@code maximum}, the
+           * amount charged can be up to the value passed for the {@code amount} param.
+           */
+          @SerializedName("amount_type")
+          String amountType;
+
+          /**
+           * A description of the mandate or subscription that is meant to be displayed to the
+           * customer.
+           */
+          @SerializedName("description")
+          String description;
+        }
+      }
+
+      @Getter
+      @Setter
+      @EqualsAndHashCode(callSuper = false)
+      public static class CustomerBalance extends StripeObject {
+        @SerializedName("bank_transfer")
+        BankTransfer bankTransfer;
+
+        /**
+         * The funding method type to be used when there are not enough funds in the customer
+         * balance. Permitted values include: {@code bank_transfer}.
+         *
+         * <p>Equal to {@code bank_transfer}.
+         */
+        @SerializedName("funding_type")
+        String fundingType;
+
+        @Getter
+        @Setter
+        @EqualsAndHashCode(callSuper = false)
+        public static class BankTransfer extends StripeObject {
+          @SerializedName("eu_bank_transfer")
+          EuBankTransfer euBankTransfer;
+
+          /**
+           * The bank transfer type that can be used for funding. Permitted values include: {@code
+           * eu_bank_transfer}, {@code gb_bank_transfer}, {@code jp_bank_transfer}, or {@code
+           * mx_bank_transfer}.
+           */
+          @SerializedName("type")
+          String type;
+
+          @Getter
+          @Setter
+          @EqualsAndHashCode(callSuper = false)
+          public static class EuBankTransfer extends StripeObject {
+            /**
+             * The desired country code of the bank account information. Permitted values include:
+             * {@code DE}, {@code ES}, {@code FR}, {@code IE}, or {@code NL}.
+             *
+             * <p>One of {@code DE}, {@code ES}, {@code FR}, {@code IE}, or {@code NL}.
+             */
+            @SerializedName("country")
+            String country;
+          }
+        }
+      }
+
+      @Getter
+      @Setter
+      @EqualsAndHashCode(callSuper = false)
+      public static class Konbini extends StripeObject {}
+
+      @Getter
+      @Setter
+      @EqualsAndHashCode(callSuper = false)
+      public static class UsBankAccount extends StripeObject {
+        @SerializedName("financial_connections")
+        FinancialConnections financialConnections;
+
+        /**
+         * Bank account verification method.
+         *
+         * <p>One of {@code automatic}, {@code instant}, or {@code microdeposits}.
+         */
+        @SerializedName("verification_method")
+        String verificationMethod;
+
+        @Getter
+        @Setter
+        @EqualsAndHashCode(callSuper = false)
+        public static class FinancialConnections extends StripeObject {
+          /**
+           * The list of permissions to request. The {@code payment_method} permission must be
+           * included.
+           */
+          @SerializedName("permissions")
+          List<String> permissions;
+        }
+      }
+    }
   }
 
   @Getter

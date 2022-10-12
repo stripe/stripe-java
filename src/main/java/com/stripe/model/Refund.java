@@ -492,35 +492,35 @@ public class Refund extends ApiResource implements MetadataStore<Refund>, Balanc
   public static class NextAction extends StripeObject {
     /** Contains the refund details. */
     @SerializedName("display_details")
-    NextActionDisplayDetails displayDetails;
+    DisplayDetails displayDetails;
 
     /** Type of the next action to perform. */
     @SerializedName("type")
     String type;
-  }
-
-  @Getter
-  @Setter
-  @EqualsAndHashCode(callSuper = false)
-  public static class NextActionDisplayDetails extends StripeObject {
-    @SerializedName("email_sent")
-    EmailSent emailSent;
-
-    /** The expiry timestamp. */
-    @SerializedName("expires_at")
-    Long expiresAt;
 
     @Getter
     @Setter
     @EqualsAndHashCode(callSuper = false)
-    public static class EmailSent extends StripeObject {
-      /** The timestamp when the email was sent. */
-      @SerializedName("email_sent_at")
-      Long emailSentAt;
+    public static class DisplayDetails extends StripeObject {
+      @SerializedName("email_sent")
+      EmailSent emailSent;
 
-      /** The recipient's email address. */
-      @SerializedName("email_sent_to")
-      String emailSentTo;
+      /** The expiry timestamp. */
+      @SerializedName("expires_at")
+      Long expiresAt;
+
+      @Getter
+      @Setter
+      @EqualsAndHashCode(callSuper = false)
+      public static class EmailSent extends StripeObject {
+        /** The timestamp when the email was sent. */
+        @SerializedName("email_sent_at")
+        Long emailSentAt;
+
+        /** The recipient's email address. */
+        @SerializedName("email_sent_to")
+        String emailSentTo;
+      }
     }
   }
 

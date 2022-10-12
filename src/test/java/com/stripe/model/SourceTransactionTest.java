@@ -29,7 +29,7 @@ public class SourceTransactionTest extends BaseStripeTest {
     assertEquals("src_123", transaction.getSource());
     assertEquals("ach_credit_transfer", transaction.getType());
 
-    final SourceTransaction.AchCreditTransferData typeData = transaction.getAchCreditTransfer();
+    final SourceTransaction.AchCreditTransfer typeData = transaction.getAchCreditTransfer();
     assertEquals("110000000", typeData.getRoutingNumber());
     assertEquals("U9AqfhJoSWCOImOv", typeData.getFingerprint());
   }
