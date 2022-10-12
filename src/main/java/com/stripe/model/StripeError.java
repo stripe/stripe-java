@@ -86,6 +86,10 @@ public class StripeError extends StripeObject {
   @SerializedName("payment_method_type")
   String paymentMethodType;
 
+  /** A URL to the request log entry in your dashboard. */
+  @SerializedName("request_log_url")
+  String requestLogUrl;
+
   /**
    * A SetupIntent guides you through the process of setting up and saving a customer's payment
    * credentials for future payments. For example, you could use a SetupIntent to set up and save

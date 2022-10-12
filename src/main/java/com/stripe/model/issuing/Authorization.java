@@ -131,6 +131,10 @@ public class Authorization extends ApiResource
   @SerializedName("metadata")
   Map<String, String> metadata;
 
+  /** Details about the authorization, such as identifiers, set by the card network. */
+  @SerializedName("network_data")
+  NetworkData networkData;
+
   /**
    * String representing the object's type. Objects of the same type share the same value.
    *
@@ -529,6 +533,20 @@ public class Authorization extends ApiResource
     /** State where the seller is located. */
     @SerializedName("state")
     String state;
+  }
+
+  @Getter
+  @Setter
+  @EqualsAndHashCode(callSuper = false)
+  public static class NetworkData extends StripeObject {
+    /**
+     * ID from the network that identifies the acquiring financial institution. For Visa and
+     * Mastercard credit transactions this is as 6 digit code. For Maestro debit transactions this
+     * is a 9 digit code. Uncommonly, acquiring institution ID is not provided. When this occurs,
+     * the value will be null.
+     */
+    @SerializedName("acquiring_institution_id")
+    String acquiringInstitutionId;
   }
 
   @Getter
