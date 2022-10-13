@@ -4,6 +4,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.mockito.Mockito.verifyNoMoreInteractions;
 
+import com.stripe.Stripe;
 import com.stripe.BaseStripeTest;
 import com.stripe.Stripe;
 import com.stripe.exception.ApiKeyMissingException;
@@ -16,6 +17,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import lombok.Getter;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mockito;
@@ -44,10 +46,26 @@ public class PagingIteratorTest extends BaseStripeTest {
 
   private static class PageableModelCollection extends StripeCollection<PageableModel> {}
 
+  private static class ReferencesPageableModel extends ApiResource implements HasId {
+    @Getter String id;
+
+    @Getter PageableModelCollection pages;
+
+    public static ReferencesPageableModel retrieve(RequestOptions options) throws StripeException {
+      return request(
+          ApiResource.RequestMethod.GET,
+          "/v1/doesntmatter",
+          new HashMap<String, Object>(),
+          ReferencesPageableModel.class,
+          options);
+    }
+  }
+
+  List<String> pages;
   /** Sets the mock page fixtures. */
   @BeforeEach
   public void setUpMockPages() throws IOException, StripeException {
-    final List<String> pages = new ArrayList<>();
+    pages = new ArrayList<>();
     pages.add(getResourceAsString("/model_fixtures/pageable_model_page_0.json"));
     pages.add(getResourceAsString("/model_fixtures/pageable_model_page_1.json"));
     pages.add(getResourceAsString("/model_fixtures/pageable_model_page_2.json"));
@@ -75,6 +93,28 @@ public class PagingIteratorTest extends BaseStripeTest {
             Mockito.<Map<String, Object>>any(),
             Mockito.<Class<PageableModelCollection>>any(),
             Mockito.<RequestOptions>any());
+  }
+
+  @Test
+  void testAutoPaginationFromReferencedCollection() throws StripeException, IOException {
+    Mockito.doAnswer(
+            new Answer<ReferencesPageableModel>() {
+              public ReferencesPageableModel answer(InvocationOnMock invocation) throws Exception {
+                return ApiResource.GSON.fromJson("{\"id\": \"xyz\", \"pages\": {\"data\": [], \"url\": \"foo\", \"has_more\": true}}", ReferencesPageableModel.class);
+              }
+            })
+        .when(networkSpy)
+        .request(
+            Mockito.any(ApiResource.RequestMethod.class),
+            Mockito.anyString(),
+            Mockito.<Map<String, Object>>any(),
+            Mockito.<Class<ReferencesPageableModel>>any(),
+            Mockito.<RequestOptions>any());
+    Stripe.apiKey = null;
+    ReferencesPageableModel model =
+        ReferencesPageableModel.retrieve(RequestOptions.builder().setApiKey("sk_test_xyz").build());
+    setUpMockPages();
+    assertEquals(model.getPages().getRequestOptions().getApiKey(), "sk_test_xyz");
   }
 
   @Test
@@ -167,5 +207,29 @@ public class PagingIteratorTest extends BaseStripeTest {
         () -> {
           collection.autoPagingIterable();
         });
+  }
+
+  @Test
+  void testAutoPaginationRequestOptionsPropagation() throws StripeException {
+    // set some arbitrary parameters so that we can verify that they're
+    // used for requests on ALL pages
+    final Map<String, Object> page0Params = new HashMap<>();
+    page0Params.put("foo", "bar");
+
+    Stripe.apiKey = null;
+    final PageableModelCollection collection = PageableModel.list(page0Params, RequestOptions.builder().setApiKey("sk_test_xyz").build());
+    assertEquals(collection.getRequestOptions().getApiKey(), "sk_test_xyz");
+    final List<PageableModel> models = new ArrayList<>();
+
+    for (PageableModel model : collection.autoPagingIterable()) {
+      models.add(model);
+    }
+
+    assertEquals(5, models.size());
+    assertEquals("pm_123", models.get(0).getId());
+    assertEquals("pm_124", models.get(1).getId());
+    assertEquals("pm_125", models.get(2).getId());
+    assertEquals("pm_126", models.get(3).getId());
+    assertEquals("pm_127", models.get(4).getId());
   }
 }
