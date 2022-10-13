@@ -4,7 +4,6 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.mockito.Mockito.verifyNoMoreInteractions;
 
-import com.stripe.Stripe;
 import com.stripe.BaseStripeTest;
 import com.stripe.Stripe;
 import com.stripe.exception.ApiKeyMissingException;
@@ -49,13 +48,12 @@ public class PagingIteratorTest extends BaseStripeTest {
   /**
    * A model with a property that is a PageableModelCollection.
    *
-   * It's worth testing this case too, as there are some differences between
-   * autopaginating on a collection on an object vs.
-   * autopagination on a collection that is the result
-   * of a list request.
+   * <p>It's worth testing this case too, as there are some differences between autopaginating on a
+   * collection on an object vs. autopagination on a collection that is the result of a list
+   * request.
    */
   private static class ReferencesPageableModel extends ApiResource implements HasId {
-    @Getter String id;
+    String id;
 
     @Getter PageableModelCollection pages;
 
@@ -66,6 +64,11 @@ public class PagingIteratorTest extends BaseStripeTest {
           new HashMap<String, Object>(),
           ReferencesPageableModel.class,
           options);
+    }
+
+    @Override
+    public String getId() {
+      return id;
     }
   }
 
@@ -107,8 +110,11 @@ public class PagingIteratorTest extends BaseStripeTest {
   void testAutoPaginationFromReferencedCollection() throws StripeException, IOException {
     Mockito.doAnswer(
             new Answer<ReferencesPageableModel>() {
+              @Override
               public ReferencesPageableModel answer(InvocationOnMock invocation) throws Exception {
-                return ApiResource.GSON.fromJson("{\"id\": \"xyz\", \"pages\": {\"data\": [{\"id\": \"pm_121\"}, {\"id\": \"pm_122\"}], \"url\": \"/v1/pageable_models\", \"has_more\": true}}", ReferencesPageableModel.class);
+                return ApiResource.GSON.fromJson(
+                    "{\"id\": \"xyz\", \"pages\": {\"data\": [{\"id\": \"pm_121\"}, {\"id\": \"pm_122\"}], \"url\": \"/v1/pageable_models\", \"has_more\": true}}",
+                    ReferencesPageableModel.class);
               }
             })
         .when(networkSpy)
@@ -128,7 +134,12 @@ public class PagingIteratorTest extends BaseStripeTest {
     setUpMockPages();
 
     final List<PageableModel> models = new ArrayList<>();
-    for (PageableModel m : model.getPages().autoPagingIterable(new HashMap<String, Object>(), RequestOptions.builder().setApiKey("sk_test_abc").build())) {
+    for (PageableModel m :
+        model
+            .getPages()
+            .autoPagingIterable(
+                new HashMap<String, Object>(),
+                RequestOptions.builder().setApiKey("sk_test_abc").build())) {
       models.add(m);
     }
     assertEquals(7, models.size());
@@ -258,7 +269,8 @@ public class PagingIteratorTest extends BaseStripeTest {
     page0Params.put("foo", "bar");
 
     Stripe.apiKey = null;
-    final PageableModelCollection collection = PageableModel.list(page0Params, RequestOptions.builder().setApiKey("sk_test_xyz").build());
+    final PageableModelCollection collection =
+        PageableModel.list(page0Params, RequestOptions.builder().setApiKey("sk_test_xyz").build());
     assertEquals(collection.getRequestOptions().getApiKey(), "sk_test_xyz");
     final List<PageableModel> models = new ArrayList<>();
 
