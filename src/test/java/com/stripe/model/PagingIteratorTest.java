@@ -46,6 +46,14 @@ public class PagingIteratorTest extends BaseStripeTest {
 
   private static class PageableModelCollection extends StripeCollection<PageableModel> {}
 
+  /**
+   * A model with a property that is a PageableModelCollection.
+   *
+   * It's worth testing this case too, as there are some differences between
+   * autopaginating on a collection on an object vs.
+   * autopagination on a collection that is the result
+   * of a list request.
+   */
   private static class ReferencesPageableModel extends ApiResource implements HasId {
     @Getter String id;
 
@@ -61,10 +69,10 @@ public class PagingIteratorTest extends BaseStripeTest {
     }
   }
 
-  List<String> pages;
   /** Sets the mock page fixtures. */
   @BeforeEach
   public void setUpMockPages() throws IOException, StripeException {
+    final List<String> pages;
     pages = new ArrayList<>();
     pages.add(getResourceAsString("/model_fixtures/pageable_model_page_0.json"));
     pages.add(getResourceAsString("/model_fixtures/pageable_model_page_1.json"));
@@ -113,8 +121,11 @@ public class PagingIteratorTest extends BaseStripeTest {
     Stripe.apiKey = null;
     ReferencesPageableModel model =
         ReferencesPageableModel.retrieve(RequestOptions.builder().setApiKey("sk_test_xyz").build());
-    setUpMockPages();
+
+    // The RequestOptions DOES NOT flow from a request
+    // to collection properties on the response
     assertEquals(model.getPages().getRequestOptions(), null);
+    setUpMockPages();
 
     final List<PageableModel> models = new ArrayList<>();
     for (PageableModel m : model.getPages().autoPagingIterable(new HashMap<String, Object>(), RequestOptions.builder().setApiKey("sk_test_abc").build())) {
@@ -160,7 +171,13 @@ public class PagingIteratorTest extends BaseStripeTest {
     page2Params.put("foo", "bar");
     page2Params.put("starting_after", "pm_126");
 
-    final PageableModelCollection collection = PageableModel.list(page0Params, null);
+    final RequestOptions ro = RequestOptions.builder().build();
+
+    final PageableModelCollection collection = PageableModel.list(page0Params, ro);
+
+    // RequestOptions DO flow from a list method to the
+    // collection that is the response.
+    assertEquals(collection, ro);
 
     final List<PageableModel> models = new ArrayList<>();
     for (PageableModel model : collection.autoPagingIterable()) {
