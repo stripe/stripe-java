@@ -188,7 +188,7 @@ public class PagingIteratorTest extends BaseStripeTest {
 
     // RequestOptions DO flow from a list method to the
     // collection that is the response.
-    assertEquals(collection, ro);
+    assertEquals(collection.getRequestOptions(), ro);
 
     final List<PageableModel> models = new ArrayList<>();
     for (PageableModel model : collection.autoPagingIterable()) {
