@@ -3216,62 +3216,6 @@ class GeneratedExamples extends BaseStripeTest {
   }
 
   @Test
-  public void testSkuList() throws StripeException {
-    SkuListParams params = SkuListParams.builder().setLimit(3L).build();
-
-    SkuCollection skus = Sku.list(params);
-    assertNotNull(skus);
-    verifyRequest(ApiResource.RequestMethod.GET, "/v1/skus", params.toMap());
-  }
-
-  @Test
-  public void testSkuCreate() throws StripeException {
-    SkuCreateParams params =
-        SkuCreateParams.builder()
-            .putAttribute("size", "Medium")
-            .putAttribute("gender", "Unisex")
-            .setPrice(1500L)
-            .setCurrency("usd")
-            .setInventory(
-                SkuCreateParams.Inventory.builder()
-                    .setType(SkuCreateParams.Inventory.Type.FINITE)
-                    .setQuantity(500L)
-                    .build())
-            .setProduct("prod_xxxxxxxxxxxxx")
-            .build();
-
-    Sku sku = Sku.create(params);
-    assertNotNull(sku);
-    verifyRequest(ApiResource.RequestMethod.POST, "/v1/skus", params.toMap());
-  }
-
-  @Test
-  public void testSkuDelete() throws StripeException {
-    Sku resource = Sku.retrieve("sku_xxxxxxxxxxxxx");
-
-    Sku sku = resource.delete();
-    assertNotNull(sku);
-    verifyRequest(ApiResource.RequestMethod.DELETE, "/v1/skus/sku_xxxxxxxxxxxxx");
-  }
-
-  @Test
-  public void testSkuRetrieve() throws StripeException {
-    Sku sku = Sku.retrieve("sku_xxxxxxxxxxxxx");
-    assertNotNull(sku);
-    verifyRequest(ApiResource.RequestMethod.GET, "/v1/skus/sku_xxxxxxxxxxxxx");
-  }
-
-  @Test
-  public void testSkuUpdate() throws StripeException {
-    Sku resource = Sku.retrieve("sku_xxxxxxxxxxxxx");
-    SkuUpdateParams params = SkuUpdateParams.builder().putMetadata("order_id", "6735").build();
-
-    Sku sku = resource.update(params);
-    assertNotNull(sku);
-    verifyRequest(ApiResource.RequestMethod.POST, "/v1/skus/sku_xxxxxxxxxxxxx", params.toMap());
-  }
-
-  @Test
   public void testSourceRetrieve() throws StripeException {
     Source source = Source.retrieve("src_xxxxxxxxxxxxx");
     assertNotNull(source);
