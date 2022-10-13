@@ -238,7 +238,7 @@ public class PagingIteratorTest extends BaseStripeTest {
   }
 
   @Test
-  void testAutoPaginationRequestOptionsPropagation() throws StripeException {
+  public void testAutoPaginationRequestOptionsPropagation() throws StripeException {
     // set some arbitrary parameters so that we can verify that they're
     // used for requests on ALL pages
     final Map<String, Object> page0Params = new HashMap<>();
