@@ -59,7 +59,9 @@ public abstract class StripeCollection<T extends HasId> extends StripeObject
   private Map<String, Object> requestParams;
 
   public Iterable<T> autoPagingIterable() {
-    if (Stripe.apiKey == null) {
+    System.out.println("foo");
+    System.out.println(this.requestOptions);
+    if (Stripe.apiKey == null && (this.requestOptions == null || this.requestOptions.getApiKey() == null)) {
       throw new ApiKeyMissingException(
           "API key is not set for autoPagingIterable. You can set the API key globally using Stripe.ApiKey, or through RequestOptions with autoPagingIterable(params, options).");
     }
@@ -67,7 +69,7 @@ public abstract class StripeCollection<T extends HasId> extends StripeObject
   }
 
   public Iterable<T> autoPagingIterable(Map<String, Object> params) {
-    if (Stripe.apiKey == null) {
+    if (Stripe.apiKey == null && (this.requestOptions == null || this.requestOptions.getApiKey() == null)) {
       throw new ApiKeyMissingException(
           "API key is not set for autoPagingIterable. You can set the API key globally using Stripe.ApiKey, or through RequestOptions with autoPagingIterable(params, options).");
     }
