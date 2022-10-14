@@ -1,5 +1,11 @@
 # Changelog
 
+## 21.12.0 - 2022-10-14
+* [#1457](https://github.com/stripe/stripe-java/pull/1457) Bugfix: Don't require global API Key when API Key is propagated from list request
+* [#1458](https://github.com/stripe/stripe-java/pull/1458) API Updates
+  * Add support for `request_log_url` on `StripeError`
+  * Add support for `network_data` on `Issuing.Authorization`
+
 ## 21.12.0-beta.1 - 2022-10-07
 * [#1452](https://github.com/stripe/stripe-java/pull/1452) API Updates for beta branch
   * Updated stable APIs to the latest version
