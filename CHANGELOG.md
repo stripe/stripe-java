@@ -1,5 +1,10 @@
 # Changelog
 
+## 21.13.0-beta.1 - 2022-10-14
+* Add support for `schedule_settings` on `SubscriptionScheduleAmendParams`
+* Add support for new value `upcoming_invoice` on enum `SubscriptionScheduleAmendParams.amendments[].amendment_end.type`
+* Add support for new values `schedule_end` and `upcoming_invoice` on enum `SubscriptionScheduleAmendParams.amendments[].amendment_start.type`
+
 ## 21.12.0 - 2022-10-14
 * [#1457](https://github.com/stripe/stripe-java/pull/1457) Bugfix: Don't require global API Key when API Key is propagated from list request
 * [#1458](https://github.com/stripe/stripe-java/pull/1458) API Updates
