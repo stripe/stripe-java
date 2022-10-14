@@ -28,13 +28,19 @@ public class SubscriptionScheduleAmendParams extends ApiRequestParams {
   @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
   Map<String, Object> extraParams;
 
+  /** Changes to apply to the subscription schedule. */
+  @SerializedName("schedule_settings")
+  ScheduleSettings scheduleSettings;
+
   private SubscriptionScheduleAmendParams(
       List<SubscriptionScheduleAmendParams.Amendment> amendments,
       List<String> expand,
-      Map<String, Object> extraParams) {
+      Map<String, Object> extraParams,
+      ScheduleSettings scheduleSettings) {
     this.amendments = amendments;
     this.expand = expand;
     this.extraParams = extraParams;
+    this.scheduleSettings = scheduleSettings;
   }
 
   public static Builder builder() {
@@ -48,9 +54,12 @@ public class SubscriptionScheduleAmendParams extends ApiRequestParams {
 
     private Map<String, Object> extraParams;
 
+    private ScheduleSettings scheduleSettings;
+
     /** Finalize and obtain parameter instance from this builder. */
     public SubscriptionScheduleAmendParams build() {
-      return new SubscriptionScheduleAmendParams(this.amendments, this.expand, this.extraParams);
+      return new SubscriptionScheduleAmendParams(
+          this.amendments, this.expand, this.extraParams, this.scheduleSettings);
     }
 
     /**
@@ -128,6 +137,13 @@ public class SubscriptionScheduleAmendParams extends ApiRequestParams {
         this.extraParams = new HashMap<>();
       }
       this.extraParams.putAll(map);
+      return this;
+    }
+
+    /** Changes to apply to the subscription schedule. */
+    public Builder setScheduleSettings(
+        SubscriptionScheduleAmendParams.ScheduleSettings scheduleSettings) {
+      this.scheduleSettings = scheduleSettings;
       return this;
     }
   }
@@ -571,7 +587,10 @@ public class SubscriptionScheduleAmendParams extends ApiRequestParams {
         SCHEDULE_END("schedule_end"),
 
         @SerializedName("timestamp")
-        TIMESTAMP("timestamp");
+        TIMESTAMP("timestamp"),
+
+        @SerializedName("upcoming_invoice")
+        UPCOMING_INVOICE("upcoming_invoice");
 
         @Getter(onMethod_ = {@Override})
         private final String value;
@@ -775,8 +794,14 @@ public class SubscriptionScheduleAmendParams extends ApiRequestParams {
         @SerializedName("now")
         NOW("now"),
 
+        @SerializedName("schedule_end")
+        SCHEDULE_END("schedule_end"),
+
         @SerializedName("timestamp")
-        TIMESTAMP("timestamp");
+        TIMESTAMP("timestamp"),
+
+        @SerializedName("upcoming_invoice")
+        UPCOMING_INVOICE("upcoming_invoice");
 
         @Getter(onMethod_ = {@Override})
         private final String value;
@@ -2267,6 +2292,92 @@ public class SubscriptionScheduleAmendParams extends ApiRequestParams {
       private final String value;
 
       ProrationBehavior(String value) {
+        this.value = value;
+      }
+    }
+  }
+
+  @Getter
+  public static class ScheduleSettings {
+    /** Configures how the subscription schedule behaves when it ends. */
+    @SerializedName("end_behavior")
+    EndBehavior endBehavior;
+
+    /**
+     * Map of extra parameters for custom features not available in this client library. The content
+     * in this map is not serialized under this field's {@code @SerializedName} value. Instead, each
+     * key/value pair is serialized as if the key is a root-level field (serialized) name in this
+     * param object. Effectively, this map is flattened to its parent instance.
+     */
+    @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
+    Map<String, Object> extraParams;
+
+    private ScheduleSettings(EndBehavior endBehavior, Map<String, Object> extraParams) {
+      this.endBehavior = endBehavior;
+      this.extraParams = extraParams;
+    }
+
+    public static Builder builder() {
+      return new Builder();
+    }
+
+    public static class Builder {
+      private EndBehavior endBehavior;
+
+      private Map<String, Object> extraParams;
+
+      /** Finalize and obtain parameter instance from this builder. */
+      public SubscriptionScheduleAmendParams.ScheduleSettings build() {
+        return new SubscriptionScheduleAmendParams.ScheduleSettings(
+            this.endBehavior, this.extraParams);
+      }
+
+      /** Configures how the subscription schedule behaves when it ends. */
+      public Builder setEndBehavior(
+          SubscriptionScheduleAmendParams.ScheduleSettings.EndBehavior endBehavior) {
+        this.endBehavior = endBehavior;
+        return this;
+      }
+
+      /**
+       * Add a key/value pair to `extraParams` map. A map is initialized for the first `put/putAll`
+       * call, and subsequent calls add additional key/value pairs to the original map. See {@link
+       * SubscriptionScheduleAmendParams.ScheduleSettings#extraParams} for the field documentation.
+       */
+      public Builder putExtraParam(String key, Object value) {
+        if (this.extraParams == null) {
+          this.extraParams = new HashMap<>();
+        }
+        this.extraParams.put(key, value);
+        return this;
+      }
+
+      /**
+       * Add all map key/value pairs to `extraParams` map. A map is initialized for the first
+       * `put/putAll` call, and subsequent calls add additional key/value pairs to the original map.
+       * See {@link SubscriptionScheduleAmendParams.ScheduleSettings#extraParams} for the field
+       * documentation.
+       */
+      public Builder putAllExtraParam(Map<String, Object> map) {
+        if (this.extraParams == null) {
+          this.extraParams = new HashMap<>();
+        }
+        this.extraParams.putAll(map);
+        return this;
+      }
+    }
+
+    public enum EndBehavior implements ApiRequestParams.EnumParam {
+      @SerializedName("cancel")
+      CANCEL("cancel"),
+
+      @SerializedName("release")
+      RELEASE("release");
+
+      @Getter(onMethod_ = {@Override})
+      private final String value;
+
+      EndBehavior(String value) {
         this.value = value;
       }
     }

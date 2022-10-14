@@ -165,4 +165,28 @@ public class SearchPagingIteratorTest extends BaseStripeTest {
           collection.autoPagingIterable();
         });
   }
+
+  @Test
+  public void testAutoPaginationRequestOptionsPropagation() throws StripeException {
+    final Map<String, Object> page0Params = new HashMap<>();
+    page0Params.put("foo", "bar");
+
+    Stripe.apiKey = null;
+    final SearchableModelCollection collection =
+        SearchableModel.search(
+            page0Params, RequestOptions.builder().setApiKey("sk_test_xyz").build());
+    assertEquals(collection.getRequestOptions().getApiKey(), "sk_test_xyz");
+    final List<SearchableModel> models = new ArrayList<>();
+
+    for (SearchableModel model : collection.autoPagingIterable()) {
+      models.add(model);
+    }
+
+    assertEquals(5, models.size());
+    assertEquals("pm_123", models.get(0).getId());
+    assertEquals("pm_124", models.get(1).getId());
+    assertEquals("pm_125", models.get(2).getId());
+    assertEquals("pm_126", models.get(3).getId());
+    assertEquals("pm_127", models.get(4).getId());
+  }
 }
