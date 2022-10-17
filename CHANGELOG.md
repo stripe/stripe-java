@@ -1,5 +1,11 @@
 # Changelog
 
+## 21.12.0 - 2022-10-14
+* [#1457](https://github.com/stripe/stripe-java/pull/1457) Bugfix: Don't require global API Key when API Key is propagated from list request
+* [#1458](https://github.com/stripe/stripe-java/pull/1458) API Updates
+  * Add support for `request_log_url` on `StripeError`
+  * Add support for `network_data` on `Issuing.Authorization`
+
 ## 21.11.0 - 2022-10-06
 * [#1451](https://github.com/stripe/stripe-java/pull/1451) API Updates
   * Add support for new value `bank_of_china` on enums `PaymentIntentConfirmParams.payment_method_data.fpx.bank`, `PaymentIntentCreateParams.payment_method_data.fpx.bank`, `PaymentIntentUpdateParams.payment_method_data.fpx.bank`, `PaymentMethodCreateParams.fpx.bank`, `SetupIntentConfirmParams.payment_method_data.fpx.bank`, `SetupIntentCreateParams.payment_method_data.fpx.bank`, and `SetupIntentUpdateParams.payment_method_data.fpx.bank`
