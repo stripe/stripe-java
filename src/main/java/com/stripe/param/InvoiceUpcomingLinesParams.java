@@ -1511,10 +1511,11 @@ public class InvoiceUpcomingLinesParams extends ApiRequestParams {
        * {@code ca_pst_mb}, {@code ca_pst_sk}, {@code ca_qst}, {@code ch_vat}, {@code cl_tin},
        * {@code es_cif}, {@code eu_oss_vat}, {@code eu_vat}, {@code gb_vat}, {@code ge_vat}, {@code
        * hk_br}, {@code hu_tin}, {@code id_npwp}, {@code il_vat}, {@code in_gst}, {@code is_vat},
-       * {@code jp_cn}, {@code jp_rn}, {@code kr_brn}, {@code li_uid}, {@code mx_rfc}, {@code
-       * my_frp}, {@code my_itn}, {@code my_sst}, {@code no_vat}, {@code nz_gst}, {@code ru_inn},
-       * {@code ru_kpp}, {@code sa_vat}, {@code sg_gst}, {@code sg_uen}, {@code si_tin}, {@code
-       * th_vat}, {@code tw_vat}, {@code ua_vat}, {@code us_ein}, or {@code za_vat}.
+       * {@code jp_cn}, {@code jp_rn}, {@code jp_trn}, {@code ke_pin}, {@code kr_brn}, {@code
+       * li_uid}, {@code mx_rfc}, {@code my_frp}, {@code my_itn}, {@code my_sst}, {@code no_vat},
+       * {@code nz_gst}, {@code ru_inn}, {@code ru_kpp}, {@code sa_vat}, {@code sg_gst}, {@code
+       * sg_uen}, {@code si_tin}, {@code th_vat}, {@code tw_vat}, {@code ua_vat}, {@code us_ein}, or
+       * {@code za_vat}.
        */
       @SerializedName("type")
       Type type;
@@ -1580,11 +1581,11 @@ public class InvoiceUpcomingLinesParams extends ApiRequestParams {
          * ca_pst_bc}, {@code ca_pst_mb}, {@code ca_pst_sk}, {@code ca_qst}, {@code ch_vat}, {@code
          * cl_tin}, {@code es_cif}, {@code eu_oss_vat}, {@code eu_vat}, {@code gb_vat}, {@code
          * ge_vat}, {@code hk_br}, {@code hu_tin}, {@code id_npwp}, {@code il_vat}, {@code in_gst},
-         * {@code is_vat}, {@code jp_cn}, {@code jp_rn}, {@code kr_brn}, {@code li_uid}, {@code
-         * mx_rfc}, {@code my_frp}, {@code my_itn}, {@code my_sst}, {@code no_vat}, {@code nz_gst},
-         * {@code ru_inn}, {@code ru_kpp}, {@code sa_vat}, {@code sg_gst}, {@code sg_uen}, {@code
-         * si_tin}, {@code th_vat}, {@code tw_vat}, {@code ua_vat}, {@code us_ein}, or {@code
-         * za_vat}.
+         * {@code is_vat}, {@code jp_cn}, {@code jp_rn}, {@code jp_trn}, {@code ke_pin}, {@code
+         * kr_brn}, {@code li_uid}, {@code mx_rfc}, {@code my_frp}, {@code my_itn}, {@code my_sst},
+         * {@code no_vat}, {@code nz_gst}, {@code ru_inn}, {@code ru_kpp}, {@code sa_vat}, {@code
+         * sg_gst}, {@code sg_uen}, {@code si_tin}, {@code th_vat}, {@code tw_vat}, {@code ua_vat},
+         * {@code us_ein}, or {@code za_vat}.
          */
         public Builder setType(InvoiceUpcomingLinesParams.CustomerDetails.TaxId.Type type) {
           this.type = type;
@@ -1679,6 +1680,12 @@ public class InvoiceUpcomingLinesParams extends ApiRequestParams {
 
         @SerializedName("jp_rn")
         JP_RN("jp_rn"),
+
+        @SerializedName("jp_trn")
+        JP_TRN("jp_trn"),
+
+        @SerializedName("ke_pin")
+        KE_PIN("ke_pin"),
 
         @SerializedName("kr_brn")
         KR_BRN("kr_brn"),
