@@ -512,6 +512,24 @@ public class Reader extends ApiResource implements HasId, MetadataStore<Reader> 
         /** Override showing a tipping selection screen on this transaction. */
         @SerializedName("skip_tipping")
         Boolean skipTipping;
+
+        /** Represents a per-transaction tipping configuration. */
+        @SerializedName("tipping")
+        TippingConfig tipping;
+
+        /** Represents a per-transaction tipping configuration. */
+        @Getter
+        @Setter
+        @EqualsAndHashCode(callSuper = false)
+        public static class TippingConfig extends StripeObject {
+          /**
+           * Amount used to calculate tip suggestions on tipping selection screen for this
+           * transaction. Must be a positive integer in the smallest currency unit (e.g., 100 cents
+           * to represent $1.00 or 100 to represent ¥100, a zero-decimal currency).
+           */
+          @SerializedName("amount_eligible")
+          Long amountEligible;
+        }
       }
     }
 
