@@ -1,5 +1,10 @@
 # Changelog
 
+## 21.13.0 - 2022-10-20
+* [#1461](https://github.com/stripe/stripe-java/pull/1461) API Updates
+  * Add support for new values `jp_trn` and `ke_pin` on enums `CustomerCreateParams.tax_id_data[].type`, `InvoiceUpcomingLinesParams.customer_details.tax_ids[].type`, `InvoiceUpcomingParams.customer_details.tax_ids[].type`, `OrderCreateParams.tax_details.tax_ids[].type`, `OrderUpdateParams.tax_details.tax_ids[].type`, and `TaxIdCreateParams.type`
+  * Add support for `tipping` on `Terminal.Reader.action.process_payment_intent.process_config` and `TerminalReaderProcessPaymentIntentParams.process_config`
+
 ## 21.12.0 - 2022-10-14
 * [#1457](https://github.com/stripe/stripe-java/pull/1457) Bugfix: Don't require global API Key when API Key is propagated from list request
 * [#1458](https://github.com/stripe/stripe-java/pull/1458) API Updates
