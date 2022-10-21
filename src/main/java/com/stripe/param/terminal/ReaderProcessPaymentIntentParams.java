@@ -142,9 +142,14 @@ public class ReaderProcessPaymentIntentParams extends ApiRequestParams {
     @SerializedName("skip_tipping")
     Boolean skipTipping;
 
-    private ProcessConfig(Map<String, Object> extraParams, Boolean skipTipping) {
+    /** Tipping configuration for this transaction. */
+    @SerializedName("tipping")
+    Tipping tipping;
+
+    private ProcessConfig(Map<String, Object> extraParams, Boolean skipTipping, Tipping tipping) {
       this.extraParams = extraParams;
       this.skipTipping = skipTipping;
+      this.tipping = tipping;
     }
 
     public static Builder builder() {
@@ -156,10 +161,12 @@ public class ReaderProcessPaymentIntentParams extends ApiRequestParams {
 
       private Boolean skipTipping;
 
+      private Tipping tipping;
+
       /** Finalize and obtain parameter instance from this builder. */
       public ReaderProcessPaymentIntentParams.ProcessConfig build() {
         return new ReaderProcessPaymentIntentParams.ProcessConfig(
-            this.extraParams, this.skipTipping);
+            this.extraParams, this.skipTipping, this.tipping);
       }
 
       /**
@@ -193,6 +200,91 @@ public class ReaderProcessPaymentIntentParams extends ApiRequestParams {
       public Builder setSkipTipping(Boolean skipTipping) {
         this.skipTipping = skipTipping;
         return this;
+      }
+
+      /** Tipping configuration for this transaction. */
+      public Builder setTipping(ReaderProcessPaymentIntentParams.ProcessConfig.Tipping tipping) {
+        this.tipping = tipping;
+        return this;
+      }
+    }
+
+    @Getter
+    public static class Tipping {
+      /**
+       * Amount used to calculate tip suggestions on tipping selection screen for this transaction.
+       * Must be a positive integer in the smallest currency unit (e.g., 100 cents to represent
+       * $1.00 or 100 to represent ¥100, a zero-decimal currency).
+       */
+      @SerializedName("amount_eligible")
+      Long amountEligible;
+
+      /**
+       * Map of extra parameters for custom features not available in this client library. The
+       * content in this map is not serialized under this field's {@code @SerializedName} value.
+       * Instead, each key/value pair is serialized as if the key is a root-level field (serialized)
+       * name in this param object. Effectively, this map is flattened to its parent instance.
+       */
+      @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
+      Map<String, Object> extraParams;
+
+      private Tipping(Long amountEligible, Map<String, Object> extraParams) {
+        this.amountEligible = amountEligible;
+        this.extraParams = extraParams;
+      }
+
+      public static Builder builder() {
+        return new Builder();
+      }
+
+      public static class Builder {
+        private Long amountEligible;
+
+        private Map<String, Object> extraParams;
+
+        /** Finalize and obtain parameter instance from this builder. */
+        public ReaderProcessPaymentIntentParams.ProcessConfig.Tipping build() {
+          return new ReaderProcessPaymentIntentParams.ProcessConfig.Tipping(
+              this.amountEligible, this.extraParams);
+        }
+
+        /**
+         * Amount used to calculate tip suggestions on tipping selection screen for this
+         * transaction. Must be a positive integer in the smallest currency unit (e.g., 100 cents to
+         * represent $1.00 or 100 to represent ¥100, a zero-decimal currency).
+         */
+        public Builder setAmountEligible(Long amountEligible) {
+          this.amountEligible = amountEligible;
+          return this;
+        }
+
+        /**
+         * Add a key/value pair to `extraParams` map. A map is initialized for the first
+         * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
+         * map. See {@link ReaderProcessPaymentIntentParams.ProcessConfig.Tipping#extraParams} for
+         * the field documentation.
+         */
+        public Builder putExtraParam(String key, Object value) {
+          if (this.extraParams == null) {
+            this.extraParams = new HashMap<>();
+          }
+          this.extraParams.put(key, value);
+          return this;
+        }
+
+        /**
+         * Add all map key/value pairs to `extraParams` map. A map is initialized for the first
+         * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
+         * map. See {@link ReaderProcessPaymentIntentParams.ProcessConfig.Tipping#extraParams} for
+         * the field documentation.
+         */
+        public Builder putAllExtraParam(Map<String, Object> map) {
+          if (this.extraParams == null) {
+            this.extraParams = new HashMap<>();
+          }
+          this.extraParams.putAll(map);
+          return this;
+        }
       }
     }
   }

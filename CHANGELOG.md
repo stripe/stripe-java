@@ -1,5 +1,10 @@
 # Changelog
 
+## 21.13.0 - 2022-10-20
+* [#1461](https://github.com/stripe/stripe-java/pull/1461) API Updates
+  * Add support for new values `jp_trn` and `ke_pin` on enums `CustomerCreateParams.tax_id_data[].type`, `InvoiceUpcomingLinesParams.customer_details.tax_ids[].type`, `InvoiceUpcomingParams.customer_details.tax_ids[].type`, `OrderCreateParams.tax_details.tax_ids[].type`, `OrderUpdateParams.tax_details.tax_ids[].type`, and `TaxIdCreateParams.type`
+  * Add support for `tipping` on `Terminal.Reader.action.process_payment_intent.process_config` and `TerminalReaderProcessPaymentIntentParams.process_config`
+
 ## 21.13.0-beta.1 - 2022-10-14
 * Add support for `schedule_settings` on `SubscriptionScheduleAmendParams`
 * Add support for new value `upcoming_invoice` on enum `SubscriptionScheduleAmendParams.amendments[].amendment_end.type`
