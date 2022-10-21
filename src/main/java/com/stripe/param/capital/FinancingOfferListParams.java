@@ -352,6 +352,9 @@ public class FinancingOfferListParams extends ApiRequestParams {
     @SerializedName("rejected")
     REJECTED("rejected"),
 
+    @SerializedName("revoked")
+    REVOKED("revoked"),
+
     @SerializedName("undelivered")
     UNDELIVERED("undelivered");
 

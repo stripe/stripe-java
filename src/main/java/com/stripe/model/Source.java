@@ -155,6 +155,9 @@ public class Source extends ApiResource implements MetadataStore<Source>, Paymen
   @SerializedName("p24")
   P24 p24;
 
+  @SerializedName("paypal")
+  Paypal paypal;
+
   @SerializedName("receiver")
   ReceiverFlow receiver;
 
@@ -1038,6 +1041,38 @@ public class Source extends ApiResource implements MetadataStore<Source>, Paymen
   public static class P24 extends StripeObject {
     @SerializedName("reference")
     String reference;
+  }
+
+  @Getter
+  @Setter
+  @EqualsAndHashCode(callSuper = false)
+  public static class Paypal extends StripeObject {
+    @SerializedName("billing_agreement")
+    String billingAgreement;
+
+    @SerializedName("fingerprint")
+    String fingerprint;
+
+    @SerializedName("payer_id")
+    String payerId;
+
+    @SerializedName("reference_id")
+    String referenceId;
+
+    @SerializedName("reference_transaction_amount")
+    String referenceTransactionAmount;
+
+    @SerializedName("reference_transaction_charged")
+    Boolean referenceTransactionCharged;
+
+    @SerializedName("statement_descriptor")
+    String statementDescriptor;
+
+    @SerializedName("transaction_id")
+    String transactionId;
+
+    @SerializedName("verified_email")
+    String verifiedEmail;
   }
 
   @Getter

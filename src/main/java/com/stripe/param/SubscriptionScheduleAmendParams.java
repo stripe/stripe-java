@@ -164,6 +164,13 @@ public class SubscriptionScheduleAmendParams extends ApiRequestParams {
     AmendmentStart amendmentStart;
 
     /**
+     * For a point-in-time amendment, this attribute lets you set or update whether the
+     * subscription's billing cycle anchor is reset at the {@code amendment_start} timestamp.
+     */
+    @SerializedName("billing_cycle_anchor")
+    BillingCycleAnchor billingCycleAnchor;
+
+    /**
      * Changes to the coupons being redeemed or discounts being applied during the amendment time
      * span.
      */
@@ -196,12 +203,14 @@ public class SubscriptionScheduleAmendParams extends ApiRequestParams {
     private Amendment(
         AmendmentEnd amendmentEnd,
         AmendmentStart amendmentStart,
+        BillingCycleAnchor billingCycleAnchor,
         List<SubscriptionScheduleAmendParams.Amendment.DiscountAction> discountActions,
         Map<String, Object> extraParams,
         List<SubscriptionScheduleAmendParams.Amendment.ItemAction> itemActions,
         ProrationBehavior prorationBehavior) {
       this.amendmentEnd = amendmentEnd;
       this.amendmentStart = amendmentStart;
+      this.billingCycleAnchor = billingCycleAnchor;
       this.discountActions = discountActions;
       this.extraParams = extraParams;
       this.itemActions = itemActions;
@@ -217,6 +226,8 @@ public class SubscriptionScheduleAmendParams extends ApiRequestParams {
 
       private AmendmentStart amendmentStart;
 
+      private BillingCycleAnchor billingCycleAnchor;
+
       private List<SubscriptionScheduleAmendParams.Amendment.DiscountAction> discountActions;
 
       private Map<String, Object> extraParams;
@@ -230,6 +241,7 @@ public class SubscriptionScheduleAmendParams extends ApiRequestParams {
         return new SubscriptionScheduleAmendParams.Amendment(
             this.amendmentEnd,
             this.amendmentStart,
+            this.billingCycleAnchor,
             this.discountActions,
             this.extraParams,
             this.itemActions,
@@ -254,6 +266,16 @@ public class SubscriptionScheduleAmendParams extends ApiRequestParams {
       public Builder setAmendmentStart(
           SubscriptionScheduleAmendParams.Amendment.AmendmentStart amendmentStart) {
         this.amendmentStart = amendmentStart;
+        return this;
+      }
+
+      /**
+       * For a point-in-time amendment, this attribute lets you set or update whether the
+       * subscription's billing cycle anchor is reset at the {@code amendment_start} timestamp.
+       */
+      public Builder setBillingCycleAnchor(
+          SubscriptionScheduleAmendParams.Amendment.BillingCycleAnchor billingCycleAnchor) {
+        this.billingCycleAnchor = billingCycleAnchor;
         return this;
       }
 
@@ -2275,6 +2297,21 @@ public class SubscriptionScheduleAmendParams extends ApiRequestParams {
         Type(String value) {
           this.value = value;
         }
+      }
+    }
+
+    public enum BillingCycleAnchor implements ApiRequestParams.EnumParam {
+      @SerializedName("amendment_start")
+      AMENDMENT_START("amendment_start"),
+
+      @SerializedName("automatic")
+      AUTOMATIC("automatic");
+
+      @Getter(onMethod_ = {@Override})
+      private final String value;
+
+      BillingCycleAnchor(String value) {
+        this.value = value;
       }
     }
 

@@ -129,6 +129,10 @@ public class Transaction extends ApiResource
   @SerializedName("metadata")
   Map<String, String> metadata;
 
+  /** Details about the transaction, such as processing dates, set by the card network. */
+  @SerializedName("network_data")
+  NetworkData networkData;
+
   /**
    * String representing the object's type. Objects of the same type share the same value.
    *
@@ -383,6 +387,19 @@ public class Transaction extends ApiResource
     /** The fee charged by the ATM for the cash withdrawal. */
     @SerializedName("atm_fee")
     Long atmFee;
+  }
+
+  @Getter
+  @Setter
+  @EqualsAndHashCode(callSuper = false)
+  public static class NetworkData extends StripeObject {
+    /**
+     * The date the transaction was processed by the card network. This can be different from the
+     * date the seller recorded the transaction depending on when the acquirer submits the
+     * transaction to the network.
+     */
+    @SerializedName("processing_date")
+    String processingDate;
   }
 
   @Getter
