@@ -1,5 +1,14 @@
 # Changelog
 
+## 21.14.0-beta.1 - 2022-10-21
+* [#1462](https://github.com/stripe/stripe-java/pull/1462) API Updates for beta branch
+  * Updated stable APIs to the latest version
+  * Add support for new value `revoked` on enum `CapitalFinancingOfferListParams.status`
+  * Add support for `paypal` on `Charge.payment_method_details` and `Source`
+  * Add support for `network_data` on `Issuing.Transaction`
+  * Add support for `billing_cycle_anchor` on `SubscriptionScheduleAmendParams.amendments[]`
+  * Add support for `tipping` on `Terminal.Reader.action.process_payment_intent.process_config` and `TerminalReaderProcessPaymentIntentParams.process_config`
+
 ## 21.13.0 - 2022-10-20
 * [#1461](https://github.com/stripe/stripe-java/pull/1461) API Updates
   * Add support for new values `jp_trn` and `ke_pin` on enums `CustomerCreateParams.tax_id_data[].type`, `InvoiceUpcomingLinesParams.customer_details.tax_ids[].type`, `InvoiceUpcomingParams.customer_details.tax_ids[].type`, `OrderCreateParams.tax_details.tax_ids[].type`, `OrderUpdateParams.tax_details.tax_ids[].type`, and `TaxIdCreateParams.type`
