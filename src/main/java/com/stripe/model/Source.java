@@ -23,6 +23,11 @@ import lombok.Setter;
  * customer's payment instrument, and can be used with the Stripe API just like a {@code Card}
  * object: once chargeable, they can be charged, or can be attached to customers.
  *
+ * <p>Stripe doesn't recommend using the deprecated <a
+ * href="https://stripe.com/docs/api/sources">Sources API</a>. We recommend that you adopt the <a
+ * href="https://stripe.com/docs/api/payment_methods">PaymentMethods API</a>. This newer API
+ * provides access to our latest features and payment method types.
+ *
  * <p>Related guides: <a href="https://stripe.com/docs/sources">Sources API</a> and <a
  * href="https://stripe.com/docs/sources/customers">Sources &amp; Customers</a>.
  */
@@ -149,6 +154,9 @@ public class Source extends ApiResource implements MetadataStore<Source>, Paymen
 
   @SerializedName("p24")
   P24 p24;
+
+  @SerializedName("paypal")
+  Paypal paypal;
 
   @SerializedName("receiver")
   ReceiverFlow receiver;
@@ -1033,6 +1041,38 @@ public class Source extends ApiResource implements MetadataStore<Source>, Paymen
   public static class P24 extends StripeObject {
     @SerializedName("reference")
     String reference;
+  }
+
+  @Getter
+  @Setter
+  @EqualsAndHashCode(callSuper = false)
+  public static class Paypal extends StripeObject {
+    @SerializedName("billing_agreement")
+    String billingAgreement;
+
+    @SerializedName("fingerprint")
+    String fingerprint;
+
+    @SerializedName("payer_id")
+    String payerId;
+
+    @SerializedName("reference_id")
+    String referenceId;
+
+    @SerializedName("reference_transaction_amount")
+    String referenceTransactionAmount;
+
+    @SerializedName("reference_transaction_charged")
+    Boolean referenceTransactionCharged;
+
+    @SerializedName("statement_descriptor")
+    String statementDescriptor;
+
+    @SerializedName("transaction_id")
+    String transactionId;
+
+    @SerializedName("verified_email")
+    String verifiedEmail;
   }
 
   @Getter
