@@ -1,13 +1,11 @@
 package com.stripe.functional;
 
 import static org.junit.jupiter.api.Assertions.assertNotNull;
-import static org.junit.jupiter.api.Assertions.assertNull;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import com.google.common.collect.ImmutableMap;
 import com.stripe.BaseStripeTest;
-import com.stripe.Stripe;
 import com.stripe.exception.StripeException;
 import com.stripe.model.EphemeralKey;
 import com.stripe.net.ApiResource;
@@ -21,20 +19,43 @@ import org.junit.jupiter.api.Test;
 public class EphemeralKeyTest extends BaseStripeTest {
 
   @Test
-  public void testCreate() throws StripeException {
+  public void testCreateUntypedParamsSuccess() throws StripeException {
     final Map<String, Object> params = new HashMap<>();
     params.put("customer", "cus_123");
+    params.put("stripe-version", "foobar");
 
-    // In actual usage, version override is likely different from the pinned API version.
-    // Passing the same API version here to comply with stripe-mock `-strict-version-check`
-    // flag--it errors on passing API version different from that in OpenAPI spec.
-    final RequestOptions options =
-        RequestOptions.builder().setStripeVersionOverride(Stripe.API_VERSION).build();
+    final Map<String, Object> expectedParams = new HashMap<>();
+    expectedParams.put("customer", "cus_123");
 
-    final EphemeralKey key = EphemeralKey.create(params, options);
+    final EphemeralKey key = EphemeralKey.create(params);
 
     assertNotNull(key);
-    verifyRequest(ApiResource.RequestMethod.POST, "/v1/ephemeral_keys", params, options);
+    verifyRequest(
+        ApiResource.RequestMethod.POST,
+        "/v1/ephemeral_keys",
+        expectedParams,
+        RequestOptions.builder()._setStripeVersionOverride("foobar").build());
+  }
+
+  @Test
+  public void testCreateTypedParamsSuccess() throws StripeException {
+    final EphemeralKeyCreateParams params =
+        EphemeralKeyCreateParams.builder()
+            .setCustomer("cus_123")
+            .setStripeVersion("foobar")
+            .build();
+
+    final Map<String, Object> expectedParams = new HashMap<>();
+    expectedParams.put("customer", "cus_123");
+
+    final EphemeralKey key = EphemeralKey.create(params);
+
+    assertNotNull(key);
+    verifyRequest(
+        ApiResource.RequestMethod.POST,
+        "/v1/ephemeral_keys",
+        expectedParams,
+        RequestOptions.builder()._setStripeVersionOverride("foobar").build());
   }
 
   @Test
@@ -49,91 +70,80 @@ public class EphemeralKeyTest extends BaseStripeTest {
   }
 
   @Test
-  public void testCreateWithTypedParams() throws StripeException {
+  public void testThrowExceptionWithBadTypedParams() throws StripeException {
     EphemeralKeyCreateParams createParams =
         EphemeralKeyCreateParams.builder()
             .setCustomer("cust_123")
             .setIssuingCard("card_123")
             .build();
 
-    final RequestOptions options =
-        RequestOptions.builder().setStripeVersionOverride(Stripe.API_VERSION).build();
+    assertThrows(
+        IllegalArgumentException.class,
+        () -> {
+          EphemeralKey.create(createParams);
+        });
 
-    final EphemeralKey key = EphemeralKey.create(createParams, options);
+    assertThrows(
+        IllegalArgumentException.class,
+        () -> {
+          EphemeralKey.create(createParams, RequestOptions.builder().build());
+        });
+  }
 
-    assertNotNull(key);
-    verifyRequest(
-        ApiResource.RequestMethod.POST,
-        "/v1/ephemeral_keys",
-        ImmutableMap.of(
-            "customer", "cust_123",
-            "issuing_card", "card_123"),
-        options);
+  @Test
+  public void testThrowExceptionWithBadUntypedParams() throws StripeException {
+    Map<String, Object> createParams = new HashMap<>();
+    createParams.put("customer", "cust_123");
+    createParams.put("issuing_card", "card_123");
+
+    assertThrows(
+        IllegalArgumentException.class,
+        () -> {
+          EphemeralKey.create(createParams);
+        });
+
+    assertThrows(
+        IllegalArgumentException.class,
+        () -> {
+          EphemeralKey.create(createParams, RequestOptions.builder().build());
+        });
   }
 
   @Test
   public void testCreateWithTypedParamsAndExtraParam() throws IOException, StripeException {
     EphemeralKeyCreateParams createParams =
         EphemeralKeyCreateParams.builder()
+            .setStripeVersion("foobarbaz")
             .putExtraParam("my_secret_parameter", "my_secret_value")
             .build();
 
-    final RequestOptions options =
-        RequestOptions.builder().setStripeVersionOverride(Stripe.API_VERSION).build();
+    final Map<String, Object> paramsMap = new HashMap<>();
+    paramsMap.put("my_secret_parameter", "my_secret_value");
 
     // stripe-mock doesn't handle extra parameters so we stub the request
     stubRequest(
         ApiResource.RequestMethod.POST,
         "/v1/ephemeral_keys",
-        createParams.toMap(),
+        paramsMap,
         EphemeralKey.class,
         getResourceAsString("/api_fixtures/ephemeral_key.json"));
 
-    final EphemeralKey key = EphemeralKey.create(createParams, options);
+    final EphemeralKey key = EphemeralKey.create(createParams);
 
     assertNotNull(key);
     verifyRequest(
         ApiResource.RequestMethod.POST,
         "/v1/ephemeral_keys",
-        ImmutableMap.of("my_secret_parameter", "my_secret_value"),
-        options);
-  }
-
-  @Test
-  public void testCreateWithoutApiVersionOverride() throws StripeException {
-    final Map<String, Object> params = new HashMap<>();
-    params.put("customer", "cus_123");
-
-    final RequestOptions options = RequestOptions.getDefault();
-    assertNull(options.getStripeVersionOverride());
-
-    assertThrows(
-        IllegalArgumentException.class,
-        () -> {
-          EphemeralKey.create(params, options);
-        });
-
-    // create with typed params should have same validation behavior
-    EphemeralKeyCreateParams typedParams =
-        EphemeralKeyCreateParams.builder().setCustomer("cust_123").build();
-    assertThrows(
-        IllegalArgumentException.class,
-        () -> {
-          EphemeralKey.create(typedParams, options);
-        });
+        ImmutableMap.of("my_secret_parameter", "my_secret_value"));
   }
 
   @Test
   public void testDelete() throws StripeException {
     final Map<String, Object> params = new HashMap<>();
     params.put("customer", "cus_123");
+    params.put("stripe-version", "foobar");
 
-    // Passing the same API version here to comply with stripe-mock `-strict-version-check`
-    // flag--it errors on passing API version different from that in OpenAPI spec.
-    final RequestOptions options =
-        RequestOptions.builder().setStripeVersionOverride(Stripe.API_VERSION).build();
-
-    final EphemeralKey key = EphemeralKey.create(params, options);
+    final EphemeralKey key = EphemeralKey.create(params);
 
     final EphemeralKey deletedKey = key.delete();
 

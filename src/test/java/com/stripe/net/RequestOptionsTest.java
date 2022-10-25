@@ -19,7 +19,7 @@ public class RequestOptionsTest {
             .setClientId("123")
             .setIdempotencyKey("123")
             .setStripeAccount("acct_bar")
-            .setStripeVersionOverride("2015-05-05")
+            ._setStripeVersionOverride("2015-05-05")
             .setConnectTimeout(100)
             .setReadTimeout(100)
             .setConnectionProxy(
@@ -27,6 +27,7 @@ public class RequestOptionsTest {
             .setProxyCredential(new PasswordAuthentication("username", "password".toCharArray()))
             .build();
 
+    @SuppressWarnings("deprecation")
     RequestOptions optsRebuilt = opts.toBuilder().build();
 
     // only api keys and account should persist
@@ -44,16 +45,34 @@ public class RequestOptionsTest {
   }
 
   @Test
+  public void testToBuilderFullCopy() {
+    RequestOptions opts =
+        RequestOptions.builder()
+            .setApiKey("sk_foo")
+            .setClientId("123")
+            .setIdempotencyKey("123")
+            .setStripeAccount("acct_bar")
+            ._setStripeVersionOverride("2015-05-05")
+            .setConnectTimeout(100)
+            .setReadTimeout(100)
+            .setConnectionProxy(
+                new Proxy(Proxy.Type.HTTP, new InetSocketAddress("localhost", 1234)))
+            .setProxyCredential(new PasswordAuthentication("username", "password".toCharArray()))
+            .build();
+
+    RequestOptions optsRebuilt = opts.toBuilderFullCopy().build();
+
+    assertEquals(opts, optsRebuilt);
+  }
+
+  @Test
   public void testStripeVersionOverride() {
     String stripeVersionOverride = "2015-05-05";
 
     RequestOptions.RequestOptionsBuilder builder =
-        RequestOptions.builder().setStripeVersionOverride(stripeVersionOverride);
+        RequestOptions.builder()._setStripeVersionOverride(stripeVersionOverride);
 
-    assertEquals(stripeVersionOverride, builder.getStripeVersionOverride());
-
-    builder.clearStripeVersionOverride();
-    assertNull(builder.getStripeVersionOverride());
+    assertEquals(stripeVersionOverride, builder._getStripeVersionOverride());
   }
 
   @Test
@@ -68,7 +87,7 @@ public class RequestOptionsTest {
             .setClientId("123")
             .setIdempotencyKey("123")
             .setStripeAccount("acct_bar")
-            .setStripeVersionOverride("2015-05-05")
+            ._setStripeVersionOverride("2015-05-05")
             .setConnectTimeout(100)
             .setReadTimeout(200)
             .setConnectionProxy(connectionProxy)
@@ -81,7 +100,7 @@ public class RequestOptionsTest {
             .setClientId("123")
             .setIdempotencyKey("123")
             .setStripeAccount("acct_bar")
-            .setStripeVersionOverride("2015-05-05")
+            ._setStripeVersionOverride("2015-05-05")
             .setConnectTimeout(100)
             .setReadTimeout(200)
             .setConnectionProxy(connectionProxy)
