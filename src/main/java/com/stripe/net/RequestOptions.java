@@ -84,8 +84,8 @@ public class RequestOptions {
     return stripeVersion;
   }
 
-  public String getStripeVersionOverride() {
-    return stripeVersionOverride;
+  public static String unsafeGetStripeVersionOverride(RequestOptions options) {
+    return options.stripeVersionOverride;
   }
 
   public int getReadTimeout() {
@@ -130,17 +130,18 @@ public class RequestOptions {
    * @return option builder.
    */
   public RequestOptionsBuilder toBuilderFullCopy() {
-    return new RequestOptionsBuilder()
-        .setApiKey(this.apiKey)
-        .setClientId(this.clientId)
-        .setIdempotencyKey(this.idempotencyKey)
-        .setStripeAccount(this.stripeAccount)
-        ._setStripeVersionOverride(this.stripeVersionOverride)
-        .setConnectTimeout(this.connectTimeout)
-        .setReadTimeout(this.readTimeout)
-        .setMaxNetworkRetries(this.maxNetworkRetries)
-        .setConnectionProxy(this.connectionProxy)
-        .setProxyCredential(this.proxyCredential);
+    return RequestOptionsBuilder.unsafeSetStripeVersionOverride(
+        new RequestOptionsBuilder()
+            .setApiKey(this.apiKey)
+            .setClientId(this.clientId)
+            .setIdempotencyKey(this.idempotencyKey)
+            .setStripeAccount(this.stripeAccount)
+            .setConnectTimeout(this.connectTimeout)
+            .setReadTimeout(this.readTimeout)
+            .setMaxNetworkRetries(this.maxNetworkRetries)
+            .setConnectionProxy(this.connectionProxy)
+            .setProxyCredential(this.proxyCredential),
+        stripeVersionOverride);
   }
 
   public static final class RequestOptionsBuilder {
@@ -300,11 +301,14 @@ public class RequestOptions {
      * request and this library's types, which can result in missing data and deserialization
      * errors.
      *
+     * <p>Static, so that it doesn't appear in IDE auto-completion alongside the other setters.
+     *
      * @return option builder
      */
-    public RequestOptionsBuilder _setStripeVersionOverride(String stripeVersionOverride) {
-      this.stripeVersionOverride = normalizeStripeVersion(stripeVersionOverride);
-      return this;
+    public static RequestOptionsBuilder unsafeSetStripeVersionOverride(
+        RequestOptionsBuilder builder, String stripeVersionOverride) {
+      builder.stripeVersionOverride = normalizeStripeVersion(stripeVersionOverride);
+      return builder;
     }
 
     /** Constructs a {@link RequestOptions} with the specified values. */

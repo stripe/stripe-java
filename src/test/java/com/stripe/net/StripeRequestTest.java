@@ -103,7 +103,7 @@ public class StripeRequestTest extends BaseStripeTest {
             .setApiKey("sk_override")
             .setIdempotencyKey("idempotency_key")
             .setStripeAccount("acct_456")
-            ._setStripeVersionOverride("2012-12-21")
+            .unsafeStripeVersionOverride("2012-12-21")
             .build();
     StripeRequest request =
         new StripeRequest(ApiResource.RequestMethod.GET, "http://example.com/get", null, options);

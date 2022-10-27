@@ -19,7 +19,7 @@ public class RequestOptionsTest {
             .setClientId("123")
             .setIdempotencyKey("123")
             .setStripeAccount("acct_bar")
-            ._setStripeVersionOverride("2015-05-05")
+            .unsafeStripeVersionOverride("2015-05-05")
             .setConnectTimeout(100)
             .setReadTimeout(100)
             .setConnectionProxy(
@@ -52,7 +52,7 @@ public class RequestOptionsTest {
             .setClientId("123")
             .setIdempotencyKey("123")
             .setStripeAccount("acct_bar")
-            ._setStripeVersionOverride("2015-05-05")
+            .unsafeStripeVersionOverride("2015-05-05")
             .setConnectTimeout(100)
             .setReadTimeout(100)
             .setConnectionProxy(
@@ -70,7 +70,7 @@ public class RequestOptionsTest {
     String stripeVersionOverride = "2015-05-05";
 
     RequestOptions.RequestOptionsBuilder builder =
-        RequestOptions.builder()._setStripeVersionOverride(stripeVersionOverride);
+        RequestOptions.builder().unsafeStripeVersionOverride(stripeVersionOverride);
 
     assertEquals(stripeVersionOverride, builder._getStripeVersionOverride());
   }
@@ -87,7 +87,7 @@ public class RequestOptionsTest {
             .setClientId("123")
             .setIdempotencyKey("123")
             .setStripeAccount("acct_bar")
-            ._setStripeVersionOverride("2015-05-05")
+            .unsafeStripeVersionOverride("2015-05-05")
             .setConnectTimeout(100)
             .setReadTimeout(200)
             .setConnectionProxy(connectionProxy)
@@ -100,7 +100,7 @@ public class RequestOptionsTest {
             .setClientId("123")
             .setIdempotencyKey("123")
             .setStripeAccount("acct_bar")
-            ._setStripeVersionOverride("2015-05-05")
+            .unsafeStripeVersionOverride("2015-05-05")
             .setConnectTimeout(100)
             .setReadTimeout(200)
             .setConnectionProxy(connectionProxy)

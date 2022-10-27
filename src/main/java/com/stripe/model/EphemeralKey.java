@@ -4,6 +4,7 @@ import com.google.gson.annotations.SerializedName;
 import com.stripe.exception.StripeException;
 import com.stripe.net.ApiResource;
 import com.stripe.net.RequestOptions;
+import com.stripe.net.RequestOptions.RequestOptionsBuilder;
 import com.stripe.param.EphemeralKeyCreateParams;
 import java.util.HashMap;
 import java.util.List;
@@ -123,7 +124,9 @@ public class EphemeralKey extends ApiResource implements HasId {
     // Take "stripe-version" from params and plug it into RequestOptions
     // so it will be sent in the Stripe-Version header
     final RequestOptions overriddenOptions =
-        options.toBuilderFullCopy()._setStripeVersionOverride(versionOverride).build();
+        RequestOptionsBuilder.unsafeSetStripeVersionOverride(
+                options.toBuilderFullCopy(), versionOverride)
+            .build();
 
     // Remove "stripe-version" from params so that it is not sent in the
     // request body.

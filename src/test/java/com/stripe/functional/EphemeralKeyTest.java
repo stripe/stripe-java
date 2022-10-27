@@ -34,7 +34,7 @@ public class EphemeralKeyTest extends BaseStripeTest {
         ApiResource.RequestMethod.POST,
         "/v1/ephemeral_keys",
         expectedParams,
-        RequestOptions.builder()._setStripeVersionOverride("foobar").build());
+        RequestOptions.builder().unsafeStripeVersionOverride("foobar").build());
   }
 
   @Test
@@ -55,7 +55,7 @@ public class EphemeralKeyTest extends BaseStripeTest {
         ApiResource.RequestMethod.POST,
         "/v1/ephemeral_keys",
         expectedParams,
-        RequestOptions.builder()._setStripeVersionOverride("foobar").build());
+        RequestOptions.builder().unsafeStripeVersionOverride("foobar").build());
   }
 
   @Test
