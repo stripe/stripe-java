@@ -747,6 +747,15 @@ public class Account extends ApiResource implements MetadataStore<Account>, Paym
     String cartesBancairesPayments;
 
     /**
+     * The status of the Cash App Pay capability of the account, or whether the account can directly
+     * process Cash App Pay payments.
+     *
+     * <p>One of {@code active}, {@code inactive}, or {@code pending}.
+     */
+    @SerializedName("cashapp_payments")
+    String cashappPayments;
+
+    /**
      * The status of the EPS payments capability of the account, or whether the account can directly
      * process EPS charges.
      *
@@ -930,6 +939,15 @@ public class Account extends ApiResource implements MetadataStore<Account>, Paym
      */
     @SerializedName("us_bank_account_ach_payments")
     String usBankAccountAchPayments;
+
+    /**
+     * The status of the Zip capability of the account, or whether the account can directly process
+     * Zip charges.
+     *
+     * <p>One of {@code active}, {@code inactive}, or {@code pending}.
+     */
+    @SerializedName("zip_payments")
+    String zipPayments;
   }
 
   @Getter

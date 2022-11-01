@@ -200,6 +200,10 @@ public class SubscriptionScheduleAmendParams extends ApiRequestParams {
     @SerializedName("proration_behavior")
     ProrationBehavior prorationBehavior;
 
+    /** Settings related to subscription trials. */
+    @SerializedName("trial_settings")
+    TrialSettings trialSettings;
+
     private Amendment(
         AmendmentEnd amendmentEnd,
         AmendmentStart amendmentStart,
@@ -207,7 +211,8 @@ public class SubscriptionScheduleAmendParams extends ApiRequestParams {
         List<SubscriptionScheduleAmendParams.Amendment.DiscountAction> discountActions,
         Map<String, Object> extraParams,
         List<SubscriptionScheduleAmendParams.Amendment.ItemAction> itemActions,
-        ProrationBehavior prorationBehavior) {
+        ProrationBehavior prorationBehavior,
+        TrialSettings trialSettings) {
       this.amendmentEnd = amendmentEnd;
       this.amendmentStart = amendmentStart;
       this.billingCycleAnchor = billingCycleAnchor;
@@ -215,6 +220,7 @@ public class SubscriptionScheduleAmendParams extends ApiRequestParams {
       this.extraParams = extraParams;
       this.itemActions = itemActions;
       this.prorationBehavior = prorationBehavior;
+      this.trialSettings = trialSettings;
     }
 
     public static Builder builder() {
@@ -236,6 +242,8 @@ public class SubscriptionScheduleAmendParams extends ApiRequestParams {
 
       private ProrationBehavior prorationBehavior;
 
+      private TrialSettings trialSettings;
+
       /** Finalize and obtain parameter instance from this builder. */
       public SubscriptionScheduleAmendParams.Amendment build() {
         return new SubscriptionScheduleAmendParams.Amendment(
@@ -245,7 +253,8 @@ public class SubscriptionScheduleAmendParams extends ApiRequestParams {
             this.discountActions,
             this.extraParams,
             this.itemActions,
-            this.prorationBehavior);
+            this.prorationBehavior,
+            this.trialSettings);
       }
 
       /**
@@ -374,10 +383,21 @@ public class SubscriptionScheduleAmendParams extends ApiRequestParams {
         this.prorationBehavior = prorationBehavior;
         return this;
       }
+
+      /** Settings related to subscription trials. */
+      public Builder setTrialSettings(
+          SubscriptionScheduleAmendParams.Amendment.TrialSettings trialSettings) {
+        this.trialSettings = trialSettings;
+        return this;
+      }
     }
 
     @Getter
     public static class AmendmentEnd {
+      /** Use the {@code end} time of a given discount. */
+      @SerializedName("discount_end")
+      DiscountEnd discountEnd;
+
       /** Time span for the amendment starting from the {@code amendment_start}. */
       @SerializedName("duration")
       Duration duration;
@@ -403,7 +423,12 @@ public class SubscriptionScheduleAmendParams extends ApiRequestParams {
       Type type;
 
       private AmendmentEnd(
-          Duration duration, Map<String, Object> extraParams, Long timestamp, Type type) {
+          DiscountEnd discountEnd,
+          Duration duration,
+          Map<String, Object> extraParams,
+          Long timestamp,
+          Type type) {
+        this.discountEnd = discountEnd;
         this.duration = duration;
         this.extraParams = extraParams;
         this.timestamp = timestamp;
@@ -415,6 +440,8 @@ public class SubscriptionScheduleAmendParams extends ApiRequestParams {
       }
 
       public static class Builder {
+        private DiscountEnd discountEnd;
+
         private Duration duration;
 
         private Map<String, Object> extraParams;
@@ -426,7 +453,14 @@ public class SubscriptionScheduleAmendParams extends ApiRequestParams {
         /** Finalize and obtain parameter instance from this builder. */
         public SubscriptionScheduleAmendParams.Amendment.AmendmentEnd build() {
           return new SubscriptionScheduleAmendParams.Amendment.AmendmentEnd(
-              this.duration, this.extraParams, this.timestamp, this.type);
+              this.discountEnd, this.duration, this.extraParams, this.timestamp, this.type);
+        }
+
+        /** Use the {@code end} time of a given discount. */
+        public Builder setDiscountEnd(
+            SubscriptionScheduleAmendParams.Amendment.AmendmentEnd.DiscountEnd discountEnd) {
+          this.discountEnd = discountEnd;
+          return this;
         }
 
         /** Time span for the amendment starting from the {@code amendment_start}. */
@@ -477,6 +511,80 @@ public class SubscriptionScheduleAmendParams extends ApiRequestParams {
         public Builder setType(SubscriptionScheduleAmendParams.Amendment.AmendmentEnd.Type type) {
           this.type = type;
           return this;
+        }
+      }
+
+      @Getter
+      public static class DiscountEnd {
+        /** The ID of a specific discount. */
+        @SerializedName("discount")
+        String discount;
+
+        /**
+         * Map of extra parameters for custom features not available in this client library. The
+         * content in this map is not serialized under this field's {@code @SerializedName} value.
+         * Instead, each key/value pair is serialized as if the key is a root-level field
+         * (serialized) name in this param object. Effectively, this map is flattened to its parent
+         * instance.
+         */
+        @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
+        Map<String, Object> extraParams;
+
+        private DiscountEnd(String discount, Map<String, Object> extraParams) {
+          this.discount = discount;
+          this.extraParams = extraParams;
+        }
+
+        public static Builder builder() {
+          return new Builder();
+        }
+
+        public static class Builder {
+          private String discount;
+
+          private Map<String, Object> extraParams;
+
+          /** Finalize and obtain parameter instance from this builder. */
+          public SubscriptionScheduleAmendParams.Amendment.AmendmentEnd.DiscountEnd build() {
+            return new SubscriptionScheduleAmendParams.Amendment.AmendmentEnd.DiscountEnd(
+                this.discount, this.extraParams);
+          }
+
+          /** The ID of a specific discount. */
+          public Builder setDiscount(String discount) {
+            this.discount = discount;
+            return this;
+          }
+
+          /**
+           * Add a key/value pair to `extraParams` map. A map is initialized for the first
+           * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
+           * map. See {@link
+           * SubscriptionScheduleAmendParams.Amendment.AmendmentEnd.DiscountEnd#extraParams} for the
+           * field documentation.
+           */
+          public Builder putExtraParam(String key, Object value) {
+            if (this.extraParams == null) {
+              this.extraParams = new HashMap<>();
+            }
+            this.extraParams.put(key, value);
+            return this;
+          }
+
+          /**
+           * Add all map key/value pairs to `extraParams` map. A map is initialized for the first
+           * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
+           * map. See {@link
+           * SubscriptionScheduleAmendParams.Amendment.AmendmentEnd.DiscountEnd#extraParams} for the
+           * field documentation.
+           */
+          public Builder putAllExtraParam(Map<String, Object> map) {
+            if (this.extraParams == null) {
+              this.extraParams = new HashMap<>();
+            }
+            this.extraParams.putAll(map);
+            return this;
+          }
         }
       }
 
@@ -602,6 +710,9 @@ public class SubscriptionScheduleAmendParams extends ApiRequestParams {
       }
 
       public enum Type implements ApiRequestParams.EnumParam {
+        @SerializedName("discount_end")
+        DISCOUNT_END("discount_end"),
+
         @SerializedName("duration")
         DURATION("duration"),
 
@@ -632,6 +743,10 @@ public class SubscriptionScheduleAmendParams extends ApiRequestParams {
       @SerializedName("amendment_end")
       AmendmentEnd amendmentEnd;
 
+      /** Use the {@code end} time of a given discount. */
+      @SerializedName("discount_end")
+      DiscountEnd discountEnd;
+
       /**
        * Map of extra parameters for custom features not available in this client library. The
        * content in this map is not serialized under this field's {@code @SerializedName} value.
@@ -650,8 +765,13 @@ public class SubscriptionScheduleAmendParams extends ApiRequestParams {
       Type type;
 
       private AmendmentStart(
-          AmendmentEnd amendmentEnd, Map<String, Object> extraParams, Long timestamp, Type type) {
+          AmendmentEnd amendmentEnd,
+          DiscountEnd discountEnd,
+          Map<String, Object> extraParams,
+          Long timestamp,
+          Type type) {
         this.amendmentEnd = amendmentEnd;
+        this.discountEnd = discountEnd;
         this.extraParams = extraParams;
         this.timestamp = timestamp;
         this.type = type;
@@ -664,6 +784,8 @@ public class SubscriptionScheduleAmendParams extends ApiRequestParams {
       public static class Builder {
         private AmendmentEnd amendmentEnd;
 
+        private DiscountEnd discountEnd;
+
         private Map<String, Object> extraParams;
 
         private Long timestamp;
@@ -673,7 +795,7 @@ public class SubscriptionScheduleAmendParams extends ApiRequestParams {
         /** Finalize and obtain parameter instance from this builder. */
         public SubscriptionScheduleAmendParams.Amendment.AmendmentStart build() {
           return new SubscriptionScheduleAmendParams.Amendment.AmendmentStart(
-              this.amendmentEnd, this.extraParams, this.timestamp, this.type);
+              this.amendmentEnd, this.discountEnd, this.extraParams, this.timestamp, this.type);
         }
 
         /**
@@ -683,6 +805,13 @@ public class SubscriptionScheduleAmendParams extends ApiRequestParams {
         public Builder setAmendmentEnd(
             SubscriptionScheduleAmendParams.Amendment.AmendmentStart.AmendmentEnd amendmentEnd) {
           this.amendmentEnd = amendmentEnd;
+          return this;
+        }
+
+        /** Use the {@code end} time of a given discount. */
+        public Builder setDiscountEnd(
+            SubscriptionScheduleAmendParams.Amendment.AmendmentStart.DiscountEnd discountEnd) {
+          this.discountEnd = discountEnd;
           return this;
         }
 
@@ -809,9 +938,86 @@ public class SubscriptionScheduleAmendParams extends ApiRequestParams {
         }
       }
 
+      @Getter
+      public static class DiscountEnd {
+        /** The ID of a specific discount. */
+        @SerializedName("discount")
+        String discount;
+
+        /**
+         * Map of extra parameters for custom features not available in this client library. The
+         * content in this map is not serialized under this field's {@code @SerializedName} value.
+         * Instead, each key/value pair is serialized as if the key is a root-level field
+         * (serialized) name in this param object. Effectively, this map is flattened to its parent
+         * instance.
+         */
+        @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
+        Map<String, Object> extraParams;
+
+        private DiscountEnd(String discount, Map<String, Object> extraParams) {
+          this.discount = discount;
+          this.extraParams = extraParams;
+        }
+
+        public static Builder builder() {
+          return new Builder();
+        }
+
+        public static class Builder {
+          private String discount;
+
+          private Map<String, Object> extraParams;
+
+          /** Finalize and obtain parameter instance from this builder. */
+          public SubscriptionScheduleAmendParams.Amendment.AmendmentStart.DiscountEnd build() {
+            return new SubscriptionScheduleAmendParams.Amendment.AmendmentStart.DiscountEnd(
+                this.discount, this.extraParams);
+          }
+
+          /** The ID of a specific discount. */
+          public Builder setDiscount(String discount) {
+            this.discount = discount;
+            return this;
+          }
+
+          /**
+           * Add a key/value pair to `extraParams` map. A map is initialized for the first
+           * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
+           * map. See {@link
+           * SubscriptionScheduleAmendParams.Amendment.AmendmentStart.DiscountEnd#extraParams} for
+           * the field documentation.
+           */
+          public Builder putExtraParam(String key, Object value) {
+            if (this.extraParams == null) {
+              this.extraParams = new HashMap<>();
+            }
+            this.extraParams.put(key, value);
+            return this;
+          }
+
+          /**
+           * Add all map key/value pairs to `extraParams` map. A map is initialized for the first
+           * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
+           * map. See {@link
+           * SubscriptionScheduleAmendParams.Amendment.AmendmentStart.DiscountEnd#extraParams} for
+           * the field documentation.
+           */
+          public Builder putAllExtraParam(Map<String, Object> map) {
+            if (this.extraParams == null) {
+              this.extraParams = new HashMap<>();
+            }
+            this.extraParams.putAll(map);
+            return this;
+          }
+        }
+      }
+
       public enum Type implements ApiRequestParams.EnumParam {
         @SerializedName("amendment_end")
         AMENDMENT_END("amendment_end"),
+
+        @SerializedName("discount_end")
+        DISCOUNT_END("discount_end"),
 
         @SerializedName("now")
         NOW("now"),
@@ -1690,6 +1896,13 @@ public class SubscriptionScheduleAmendParams extends ApiRequestParams {
         @Getter
         public static class Trial {
           /**
+           * List of price IDs which, if present on the subscription following a paid trial,
+           * constitute opting-in to the paid trial.
+           */
+          @SerializedName("converts_to")
+          List<String> convertsTo;
+
+          /**
            * Map of extra parameters for custom features not available in this client library. The
            * content in this map is not serialized under this field's {@code @SerializedName} value.
            * Instead, each key/value pair is serialized as if the key is a root-level field
@@ -1703,7 +1916,8 @@ public class SubscriptionScheduleAmendParams extends ApiRequestParams {
           @SerializedName("type")
           Type type;
 
-          private Trial(Map<String, Object> extraParams, Type type) {
+          private Trial(List<String> convertsTo, Map<String, Object> extraParams, Type type) {
+            this.convertsTo = convertsTo;
             this.extraParams = extraParams;
             this.type = type;
           }
@@ -1713,6 +1927,8 @@ public class SubscriptionScheduleAmendParams extends ApiRequestParams {
           }
 
           public static class Builder {
+            private List<String> convertsTo;
+
             private Map<String, Object> extraParams;
 
             private Type type;
@@ -1720,7 +1936,36 @@ public class SubscriptionScheduleAmendParams extends ApiRequestParams {
             /** Finalize and obtain parameter instance from this builder. */
             public SubscriptionScheduleAmendParams.Amendment.ItemAction.Add.Trial build() {
               return new SubscriptionScheduleAmendParams.Amendment.ItemAction.Add.Trial(
-                  this.extraParams, this.type);
+                  this.convertsTo, this.extraParams, this.type);
+            }
+
+            /**
+             * Add an element to `convertsTo` list. A list is initialized for the first `add/addAll`
+             * call, and subsequent calls adds additional elements to the original list. See {@link
+             * SubscriptionScheduleAmendParams.Amendment.ItemAction.Add.Trial#convertsTo} for the
+             * field documentation.
+             */
+            public Builder addConvertsTo(String element) {
+              if (this.convertsTo == null) {
+                this.convertsTo = new ArrayList<>();
+              }
+              this.convertsTo.add(element);
+              return this;
+            }
+
+            /**
+             * Add all elements to `convertsTo` list. A list is initialized for the first
+             * `add/addAll` call, and subsequent calls adds additional elements to the original
+             * list. See {@link
+             * SubscriptionScheduleAmendParams.Amendment.ItemAction.Add.Trial#convertsTo} for the
+             * field documentation.
+             */
+            public Builder addAllConvertsTo(List<String> elements) {
+              if (this.convertsTo == null) {
+                this.convertsTo = new ArrayList<>();
+              }
+              this.convertsTo.addAll(elements);
+              return this;
             }
 
             /**
@@ -1855,9 +2100,9 @@ public class SubscriptionScheduleAmendParams extends ApiRequestParams {
       @Getter
       public static class Set {
         /**
-         * If the an item with the {@code price} already exists, passing this will override the
-         * {@code discounts} array on the subscription item that matches that price. Otherwise, the
-         * {@code items} array is cleared and a single new item is added with the supplied {@code
+         * If an item with the {@code price} already exists, passing this will override the {@code
+         * discounts} array on the subscription item that matches that price. Otherwise, the {@code
+         * items} array is cleared and a single new item is added with the supplied {@code
          * discounts}.
          */
         @SerializedName("discounts")
@@ -1874,10 +2119,9 @@ public class SubscriptionScheduleAmendParams extends ApiRequestParams {
         Map<String, Object> extraParams;
 
         /**
-         * If the an item with the {@code price} already exists, passing this will override the
-         * {@code metadata} on the subscription item that matches that price. Otherwise, the {@code
-         * items} array is cleared and a single new item is added with the supplied {@code
-         * metadata}.
+         * If an item with the {@code price} already exists, passing this will override the {@code
+         * metadata} on the subscription item that matches that price. Otherwise, the {@code items}
+         * array is cleared and a single new item is added with the supplied {@code metadata}.
          */
         @SerializedName("metadata")
         Map<String, String> metadata;
@@ -1887,27 +2131,27 @@ public class SubscriptionScheduleAmendParams extends ApiRequestParams {
         String price;
 
         /**
-         * If the an item with the {@code price} already exists, passing this will override the
-         * quantity on the subscription item that matches that price. Otherwise, the {@code items}
-         * array is cleared and a single new item is added with the supplied {@code quantity}.
+         * If an item with the {@code price} already exists, passing this will override the quantity
+         * on the subscription item that matches that price. Otherwise, the {@code items} array is
+         * cleared and a single new item is added with the supplied {@code quantity}.
          */
         @SerializedName("quantity")
         Long quantity;
 
         /**
-         * If the an item with the {@code price} already exists, passing this will override the
-         * {@code tax_rates} array on the subscription item that matches that price. Otherwise, the
-         * {@code items} array is cleared and a single new item is added with the supplied {@code
+         * If an item with the {@code price} already exists, passing this will override the {@code
+         * tax_rates} array on the subscription item that matches that price. Otherwise, the {@code
+         * items} array is cleared and a single new item is added with the supplied {@code
          * tax_rates}.
          */
         @SerializedName("tax_rates")
         List<String> taxRates;
 
         /**
-         * If the an item with the {@code price} already exists, passing this will override the
-         * {@code trial} configuration on the subscription item that matches that price. Otherwise,
-         * the {@code items} array is cleared and a single new item is added with the supplied
-         * {@code trial}.
+         * If an item with the {@code price} already exists, passing this will override the {@code
+         * trial} configuration on the subscription item that matches that price. Otherwise, the
+         * {@code items} array is cleared and a single new item is added with the supplied {@code
+         * trial}.
          */
         @SerializedName("trial")
         Trial trial;
@@ -2053,7 +2297,7 @@ public class SubscriptionScheduleAmendParams extends ApiRequestParams {
           }
 
           /**
-           * If the an item with the {@code price} already exists, passing this will override the
+           * If an item with the {@code price} already exists, passing this will override the
            * quantity on the subscription item that matches that price. Otherwise, the {@code items}
            * array is cleared and a single new item is added with the supplied {@code quantity}.
            */
@@ -2091,10 +2335,10 @@ public class SubscriptionScheduleAmendParams extends ApiRequestParams {
           }
 
           /**
-           * If the an item with the {@code price} already exists, passing this will override the
-           * {@code trial} configuration on the subscription item that matches that price.
-           * Otherwise, the {@code items} array is cleared and a single new item is added with the
-           * supplied {@code trial}.
+           * If an item with the {@code price} already exists, passing this will override the {@code
+           * trial} configuration on the subscription item that matches that price. Otherwise, the
+           * {@code items} array is cleared and a single new item is added with the supplied {@code
+           * trial}.
            */
           public Builder setTrial(
               SubscriptionScheduleAmendParams.Amendment.ItemAction.Set.Trial trial) {
@@ -2193,6 +2437,13 @@ public class SubscriptionScheduleAmendParams extends ApiRequestParams {
         @Getter
         public static class Trial {
           /**
+           * List of price IDs which, if present on the subscription following a paid trial,
+           * constitute opting-in to the paid trial.
+           */
+          @SerializedName("converts_to")
+          List<String> convertsTo;
+
+          /**
            * Map of extra parameters for custom features not available in this client library. The
            * content in this map is not serialized under this field's {@code @SerializedName} value.
            * Instead, each key/value pair is serialized as if the key is a root-level field
@@ -2206,7 +2457,8 @@ public class SubscriptionScheduleAmendParams extends ApiRequestParams {
           @SerializedName("type")
           Type type;
 
-          private Trial(Map<String, Object> extraParams, Type type) {
+          private Trial(List<String> convertsTo, Map<String, Object> extraParams, Type type) {
+            this.convertsTo = convertsTo;
             this.extraParams = extraParams;
             this.type = type;
           }
@@ -2216,6 +2468,8 @@ public class SubscriptionScheduleAmendParams extends ApiRequestParams {
           }
 
           public static class Builder {
+            private List<String> convertsTo;
+
             private Map<String, Object> extraParams;
 
             private Type type;
@@ -2223,7 +2477,36 @@ public class SubscriptionScheduleAmendParams extends ApiRequestParams {
             /** Finalize and obtain parameter instance from this builder. */
             public SubscriptionScheduleAmendParams.Amendment.ItemAction.Set.Trial build() {
               return new SubscriptionScheduleAmendParams.Amendment.ItemAction.Set.Trial(
-                  this.extraParams, this.type);
+                  this.convertsTo, this.extraParams, this.type);
+            }
+
+            /**
+             * Add an element to `convertsTo` list. A list is initialized for the first `add/addAll`
+             * call, and subsequent calls adds additional elements to the original list. See {@link
+             * SubscriptionScheduleAmendParams.Amendment.ItemAction.Set.Trial#convertsTo} for the
+             * field documentation.
+             */
+            public Builder addConvertsTo(String element) {
+              if (this.convertsTo == null) {
+                this.convertsTo = new ArrayList<>();
+              }
+              this.convertsTo.add(element);
+              return this;
+            }
+
+            /**
+             * Add all elements to `convertsTo` list. A list is initialized for the first
+             * `add/addAll` call, and subsequent calls adds additional elements to the original
+             * list. See {@link
+             * SubscriptionScheduleAmendParams.Amendment.ItemAction.Set.Trial#convertsTo} for the
+             * field documentation.
+             */
+            public Builder addAllConvertsTo(List<String> elements) {
+              if (this.convertsTo == null) {
+                this.convertsTo = new ArrayList<>();
+              }
+              this.convertsTo.addAll(elements);
+              return this;
             }
 
             /**
@@ -2296,6 +2579,175 @@ public class SubscriptionScheduleAmendParams extends ApiRequestParams {
 
         Type(String value) {
           this.value = value;
+        }
+      }
+    }
+
+    @Getter
+    public static class TrialSettings {
+      /** Defines how the subscription should behave when a trial ends. */
+      @SerializedName("end_behavior")
+      EndBehavior endBehavior;
+
+      /**
+       * Map of extra parameters for custom features not available in this client library. The
+       * content in this map is not serialized under this field's {@code @SerializedName} value.
+       * Instead, each key/value pair is serialized as if the key is a root-level field (serialized)
+       * name in this param object. Effectively, this map is flattened to its parent instance.
+       */
+      @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
+      Map<String, Object> extraParams;
+
+      private TrialSettings(EndBehavior endBehavior, Map<String, Object> extraParams) {
+        this.endBehavior = endBehavior;
+        this.extraParams = extraParams;
+      }
+
+      public static Builder builder() {
+        return new Builder();
+      }
+
+      public static class Builder {
+        private EndBehavior endBehavior;
+
+        private Map<String, Object> extraParams;
+
+        /** Finalize and obtain parameter instance from this builder. */
+        public SubscriptionScheduleAmendParams.Amendment.TrialSettings build() {
+          return new SubscriptionScheduleAmendParams.Amendment.TrialSettings(
+              this.endBehavior, this.extraParams);
+        }
+
+        /** Defines how the subscription should behave when a trial ends. */
+        public Builder setEndBehavior(
+            SubscriptionScheduleAmendParams.Amendment.TrialSettings.EndBehavior endBehavior) {
+          this.endBehavior = endBehavior;
+          return this;
+        }
+
+        /**
+         * Add a key/value pair to `extraParams` map. A map is initialized for the first
+         * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
+         * map. See {@link SubscriptionScheduleAmendParams.Amendment.TrialSettings#extraParams} for
+         * the field documentation.
+         */
+        public Builder putExtraParam(String key, Object value) {
+          if (this.extraParams == null) {
+            this.extraParams = new HashMap<>();
+          }
+          this.extraParams.put(key, value);
+          return this;
+        }
+
+        /**
+         * Add all map key/value pairs to `extraParams` map. A map is initialized for the first
+         * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
+         * map. See {@link SubscriptionScheduleAmendParams.Amendment.TrialSettings#extraParams} for
+         * the field documentation.
+         */
+        public Builder putAllExtraParam(Map<String, Object> map) {
+          if (this.extraParams == null) {
+            this.extraParams = new HashMap<>();
+          }
+          this.extraParams.putAll(map);
+          return this;
+        }
+      }
+
+      @Getter
+      public static class EndBehavior {
+        /**
+         * Map of extra parameters for custom features not available in this client library. The
+         * content in this map is not serialized under this field's {@code @SerializedName} value.
+         * Instead, each key/value pair is serialized as if the key is a root-level field
+         * (serialized) name in this param object. Effectively, this map is flattened to its parent
+         * instance.
+         */
+        @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
+        Map<String, Object> extraParams;
+
+        /**
+         * Configure how an opt-in following a paid trial is billed when using {@code
+         * billing_behavior: prorate_up_front}.
+         */
+        @SerializedName("prorate_up_front")
+        ProrateUpFront prorateUpFront;
+
+        private EndBehavior(Map<String, Object> extraParams, ProrateUpFront prorateUpFront) {
+          this.extraParams = extraParams;
+          this.prorateUpFront = prorateUpFront;
+        }
+
+        public static Builder builder() {
+          return new Builder();
+        }
+
+        public static class Builder {
+          private Map<String, Object> extraParams;
+
+          private ProrateUpFront prorateUpFront;
+
+          /** Finalize and obtain parameter instance from this builder. */
+          public SubscriptionScheduleAmendParams.Amendment.TrialSettings.EndBehavior build() {
+            return new SubscriptionScheduleAmendParams.Amendment.TrialSettings.EndBehavior(
+                this.extraParams, this.prorateUpFront);
+          }
+
+          /**
+           * Add a key/value pair to `extraParams` map. A map is initialized for the first
+           * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
+           * map. See {@link
+           * SubscriptionScheduleAmendParams.Amendment.TrialSettings.EndBehavior#extraParams} for
+           * the field documentation.
+           */
+          public Builder putExtraParam(String key, Object value) {
+            if (this.extraParams == null) {
+              this.extraParams = new HashMap<>();
+            }
+            this.extraParams.put(key, value);
+            return this;
+          }
+
+          /**
+           * Add all map key/value pairs to `extraParams` map. A map is initialized for the first
+           * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
+           * map. See {@link
+           * SubscriptionScheduleAmendParams.Amendment.TrialSettings.EndBehavior#extraParams} for
+           * the field documentation.
+           */
+          public Builder putAllExtraParam(Map<String, Object> map) {
+            if (this.extraParams == null) {
+              this.extraParams = new HashMap<>();
+            }
+            this.extraParams.putAll(map);
+            return this;
+          }
+
+          /**
+           * Configure how an opt-in following a paid trial is billed when using {@code
+           * billing_behavior: prorate_up_front}.
+           */
+          public Builder setProrateUpFront(
+              SubscriptionScheduleAmendParams.Amendment.TrialSettings.EndBehavior.ProrateUpFront
+                  prorateUpFront) {
+            this.prorateUpFront = prorateUpFront;
+            return this;
+          }
+        }
+
+        public enum ProrateUpFront implements ApiRequestParams.EnumParam {
+          @SerializedName("defer")
+          DEFER("defer"),
+
+          @SerializedName("include")
+          INCLUDE("include");
+
+          @Getter(onMethod_ = {@Override})
+          private final String value;
+
+          ProrateUpFront(String value) {
+            this.value = value;
+          }
         }
       }
     }

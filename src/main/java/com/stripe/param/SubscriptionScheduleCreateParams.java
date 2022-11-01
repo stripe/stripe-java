@@ -436,6 +436,12 @@ public class SubscriptionScheduleCreateParams extends ApiRequestParams {
     InvoiceSettings invoiceSettings;
 
     /**
+     * The account on behalf of which to charge, for each of the associated subscription's invoices.
+     */
+    @SerializedName("on_behalf_of")
+    Object onBehalfOf;
+
+    /**
      * The data with which to automatically create a Transfer for each of the associated
      * subscription's invoices.
      */
@@ -452,6 +458,7 @@ public class SubscriptionScheduleCreateParams extends ApiRequestParams {
         String description,
         Map<String, Object> extraParams,
         InvoiceSettings invoiceSettings,
+        Object onBehalfOf,
         Object transferData) {
       this.applicationFeePercent = applicationFeePercent;
       this.automaticTax = automaticTax;
@@ -462,6 +469,7 @@ public class SubscriptionScheduleCreateParams extends ApiRequestParams {
       this.description = description;
       this.extraParams = extraParams;
       this.invoiceSettings = invoiceSettings;
+      this.onBehalfOf = onBehalfOf;
       this.transferData = transferData;
     }
 
@@ -488,6 +496,8 @@ public class SubscriptionScheduleCreateParams extends ApiRequestParams {
 
       private InvoiceSettings invoiceSettings;
 
+      private Object onBehalfOf;
+
       private Object transferData;
 
       /** Finalize and obtain parameter instance from this builder. */
@@ -502,6 +512,7 @@ public class SubscriptionScheduleCreateParams extends ApiRequestParams {
             this.description,
             this.extraParams,
             this.invoiceSettings,
+            this.onBehalfOf,
             this.transferData);
       }
 
@@ -619,6 +630,24 @@ public class SubscriptionScheduleCreateParams extends ApiRequestParams {
       public Builder setInvoiceSettings(
           SubscriptionScheduleCreateParams.DefaultSettings.InvoiceSettings invoiceSettings) {
         this.invoiceSettings = invoiceSettings;
+        return this;
+      }
+
+      /**
+       * The account on behalf of which to charge, for each of the associated subscription's
+       * invoices.
+       */
+      public Builder setOnBehalfOf(String onBehalfOf) {
+        this.onBehalfOf = onBehalfOf;
+        return this;
+      }
+
+      /**
+       * The account on behalf of which to charge, for each of the associated subscription's
+       * invoices.
+       */
+      public Builder setOnBehalfOf(EmptyParam onBehalfOf) {
+        this.onBehalfOf = onBehalfOf;
         return this;
       }
 
@@ -1169,6 +1198,12 @@ public class SubscriptionScheduleCreateParams extends ApiRequestParams {
     Map<String, String> metadata;
 
     /**
+     * The account on behalf of which to charge, for each of the associated subscription's invoices.
+     */
+    @SerializedName("on_behalf_of")
+    String onBehalfOf;
+
+    /**
      * Whether the subscription schedule will create <a
      * href="https://stripe.com/docs/billing/subscriptions/prorations">prorations</a> when
      * transitioning to this phase. The default value is {@code create_prorations}.
@@ -1201,6 +1236,10 @@ public class SubscriptionScheduleCreateParams extends ApiRequestParams {
     @SerializedName("trial_end")
     Long trialEnd;
 
+    /** Settings related to subscription trials. */
+    @SerializedName("trial_settings")
+    TrialSettings trialSettings;
+
     private Phase(
         List<SubscriptionScheduleCreateParams.Phase.AddInvoiceItem> addInvoiceItems,
         BigDecimal applicationFeePercent,
@@ -1220,11 +1259,13 @@ public class SubscriptionScheduleCreateParams extends ApiRequestParams {
         List<SubscriptionScheduleCreateParams.Phase.Item> items,
         Long iterations,
         Map<String, String> metadata,
+        String onBehalfOf,
         ProrationBehavior prorationBehavior,
         TransferData transferData,
         Boolean trial,
         TrialContinuation trialContinuation,
-        Long trialEnd) {
+        Long trialEnd,
+        TrialSettings trialSettings) {
       this.addInvoiceItems = addInvoiceItems;
       this.applicationFeePercent = applicationFeePercent;
       this.automaticTax = automaticTax;
@@ -1243,11 +1284,13 @@ public class SubscriptionScheduleCreateParams extends ApiRequestParams {
       this.items = items;
       this.iterations = iterations;
       this.metadata = metadata;
+      this.onBehalfOf = onBehalfOf;
       this.prorationBehavior = prorationBehavior;
       this.transferData = transferData;
       this.trial = trial;
       this.trialContinuation = trialContinuation;
       this.trialEnd = trialEnd;
+      this.trialSettings = trialSettings;
     }
 
     public static Builder builder() {
@@ -1291,6 +1334,8 @@ public class SubscriptionScheduleCreateParams extends ApiRequestParams {
 
       private Map<String, String> metadata;
 
+      private String onBehalfOf;
+
       private ProrationBehavior prorationBehavior;
 
       private TransferData transferData;
@@ -1300,6 +1345,8 @@ public class SubscriptionScheduleCreateParams extends ApiRequestParams {
       private TrialContinuation trialContinuation;
 
       private Long trialEnd;
+
+      private TrialSettings trialSettings;
 
       /** Finalize and obtain parameter instance from this builder. */
       public SubscriptionScheduleCreateParams.Phase build() {
@@ -1322,11 +1369,13 @@ public class SubscriptionScheduleCreateParams extends ApiRequestParams {
             this.items,
             this.iterations,
             this.metadata,
+            this.onBehalfOf,
             this.prorationBehavior,
             this.transferData,
             this.trial,
             this.trialContinuation,
-            this.trialEnd);
+            this.trialEnd,
+            this.trialSettings);
       }
 
       /**
@@ -1665,6 +1714,15 @@ public class SubscriptionScheduleCreateParams extends ApiRequestParams {
       }
 
       /**
+       * The account on behalf of which to charge, for each of the associated subscription's
+       * invoices.
+       */
+      public Builder setOnBehalfOf(String onBehalfOf) {
+        this.onBehalfOf = onBehalfOf;
+        return this;
+      }
+
+      /**
        * Whether the subscription schedule will create <a
        * href="https://stripe.com/docs/billing/subscriptions/prorations">prorations</a> when
        * transitioning to this phase. The default value is {@code create_prorations}.
@@ -1707,6 +1765,13 @@ public class SubscriptionScheduleCreateParams extends ApiRequestParams {
        */
       public Builder setTrialEnd(Long trialEnd) {
         this.trialEnd = trialEnd;
+        return this;
+      }
+
+      /** Settings related to subscription trials. */
+      public Builder setTrialSettings(
+          SubscriptionScheduleCreateParams.Phase.TrialSettings trialSettings) {
+        this.trialSettings = trialSettings;
         return this;
       }
     }
@@ -3368,6 +3433,13 @@ public class SubscriptionScheduleCreateParams extends ApiRequestParams {
       @Getter
       public static class Trial {
         /**
+         * List of price IDs which, if present on the subscription following a paid trial,
+         * constitute opting-in to the paid trial.
+         */
+        @SerializedName("converts_to")
+        List<String> convertsTo;
+
+        /**
          * Map of extra parameters for custom features not available in this client library. The
          * content in this map is not serialized under this field's {@code @SerializedName} value.
          * Instead, each key/value pair is serialized as if the key is a root-level field
@@ -3381,7 +3453,8 @@ public class SubscriptionScheduleCreateParams extends ApiRequestParams {
         @SerializedName("type")
         Type type;
 
-        private Trial(Map<String, Object> extraParams, Type type) {
+        private Trial(List<String> convertsTo, Map<String, Object> extraParams, Type type) {
+          this.convertsTo = convertsTo;
           this.extraParams = extraParams;
           this.type = type;
         }
@@ -3391,6 +3464,8 @@ public class SubscriptionScheduleCreateParams extends ApiRequestParams {
         }
 
         public static class Builder {
+          private List<String> convertsTo;
+
           private Map<String, Object> extraParams;
 
           private Type type;
@@ -3398,7 +3473,35 @@ public class SubscriptionScheduleCreateParams extends ApiRequestParams {
           /** Finalize and obtain parameter instance from this builder. */
           public SubscriptionScheduleCreateParams.Phase.Item.Trial build() {
             return new SubscriptionScheduleCreateParams.Phase.Item.Trial(
-                this.extraParams, this.type);
+                this.convertsTo, this.extraParams, this.type);
+          }
+
+          /**
+           * Add an element to `convertsTo` list. A list is initialized for the first `add/addAll`
+           * call, and subsequent calls adds additional elements to the original list. See {@link
+           * SubscriptionScheduleCreateParams.Phase.Item.Trial#convertsTo} for the field
+           * documentation.
+           */
+          public Builder addConvertsTo(String element) {
+            if (this.convertsTo == null) {
+              this.convertsTo = new ArrayList<>();
+            }
+            this.convertsTo.add(element);
+            return this;
+          }
+
+          /**
+           * Add all elements to `convertsTo` list. A list is initialized for the first `add/addAll`
+           * call, and subsequent calls adds additional elements to the original list. See {@link
+           * SubscriptionScheduleCreateParams.Phase.Item.Trial#convertsTo} for the field
+           * documentation.
+           */
+          public Builder addAllConvertsTo(List<String> elements) {
+            if (this.convertsTo == null) {
+              this.convertsTo = new ArrayList<>();
+            }
+            this.convertsTo.addAll(elements);
+            return this;
           }
 
           /**
@@ -3543,6 +3646,175 @@ public class SubscriptionScheduleCreateParams extends ApiRequestParams {
           }
           this.extraParams.putAll(map);
           return this;
+        }
+      }
+    }
+
+    @Getter
+    public static class TrialSettings {
+      /** Defines how the subscription should behave when a trial ends. */
+      @SerializedName("end_behavior")
+      EndBehavior endBehavior;
+
+      /**
+       * Map of extra parameters for custom features not available in this client library. The
+       * content in this map is not serialized under this field's {@code @SerializedName} value.
+       * Instead, each key/value pair is serialized as if the key is a root-level field (serialized)
+       * name in this param object. Effectively, this map is flattened to its parent instance.
+       */
+      @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
+      Map<String, Object> extraParams;
+
+      private TrialSettings(EndBehavior endBehavior, Map<String, Object> extraParams) {
+        this.endBehavior = endBehavior;
+        this.extraParams = extraParams;
+      }
+
+      public static Builder builder() {
+        return new Builder();
+      }
+
+      public static class Builder {
+        private EndBehavior endBehavior;
+
+        private Map<String, Object> extraParams;
+
+        /** Finalize and obtain parameter instance from this builder. */
+        public SubscriptionScheduleCreateParams.Phase.TrialSettings build() {
+          return new SubscriptionScheduleCreateParams.Phase.TrialSettings(
+              this.endBehavior, this.extraParams);
+        }
+
+        /** Defines how the subscription should behave when a trial ends. */
+        public Builder setEndBehavior(
+            SubscriptionScheduleCreateParams.Phase.TrialSettings.EndBehavior endBehavior) {
+          this.endBehavior = endBehavior;
+          return this;
+        }
+
+        /**
+         * Add a key/value pair to `extraParams` map. A map is initialized for the first
+         * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
+         * map. See {@link SubscriptionScheduleCreateParams.Phase.TrialSettings#extraParams} for the
+         * field documentation.
+         */
+        public Builder putExtraParam(String key, Object value) {
+          if (this.extraParams == null) {
+            this.extraParams = new HashMap<>();
+          }
+          this.extraParams.put(key, value);
+          return this;
+        }
+
+        /**
+         * Add all map key/value pairs to `extraParams` map. A map is initialized for the first
+         * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
+         * map. See {@link SubscriptionScheduleCreateParams.Phase.TrialSettings#extraParams} for the
+         * field documentation.
+         */
+        public Builder putAllExtraParam(Map<String, Object> map) {
+          if (this.extraParams == null) {
+            this.extraParams = new HashMap<>();
+          }
+          this.extraParams.putAll(map);
+          return this;
+        }
+      }
+
+      @Getter
+      public static class EndBehavior {
+        /**
+         * Map of extra parameters for custom features not available in this client library. The
+         * content in this map is not serialized under this field's {@code @SerializedName} value.
+         * Instead, each key/value pair is serialized as if the key is a root-level field
+         * (serialized) name in this param object. Effectively, this map is flattened to its parent
+         * instance.
+         */
+        @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
+        Map<String, Object> extraParams;
+
+        /**
+         * Configure how an opt-in following a paid trial is billed when using {@code
+         * billing_behavior: prorate_up_front}.
+         */
+        @SerializedName("prorate_up_front")
+        ProrateUpFront prorateUpFront;
+
+        private EndBehavior(Map<String, Object> extraParams, ProrateUpFront prorateUpFront) {
+          this.extraParams = extraParams;
+          this.prorateUpFront = prorateUpFront;
+        }
+
+        public static Builder builder() {
+          return new Builder();
+        }
+
+        public static class Builder {
+          private Map<String, Object> extraParams;
+
+          private ProrateUpFront prorateUpFront;
+
+          /** Finalize and obtain parameter instance from this builder. */
+          public SubscriptionScheduleCreateParams.Phase.TrialSettings.EndBehavior build() {
+            return new SubscriptionScheduleCreateParams.Phase.TrialSettings.EndBehavior(
+                this.extraParams, this.prorateUpFront);
+          }
+
+          /**
+           * Add a key/value pair to `extraParams` map. A map is initialized for the first
+           * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
+           * map. See {@link
+           * SubscriptionScheduleCreateParams.Phase.TrialSettings.EndBehavior#extraParams} for the
+           * field documentation.
+           */
+          public Builder putExtraParam(String key, Object value) {
+            if (this.extraParams == null) {
+              this.extraParams = new HashMap<>();
+            }
+            this.extraParams.put(key, value);
+            return this;
+          }
+
+          /**
+           * Add all map key/value pairs to `extraParams` map. A map is initialized for the first
+           * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
+           * map. See {@link
+           * SubscriptionScheduleCreateParams.Phase.TrialSettings.EndBehavior#extraParams} for the
+           * field documentation.
+           */
+          public Builder putAllExtraParam(Map<String, Object> map) {
+            if (this.extraParams == null) {
+              this.extraParams = new HashMap<>();
+            }
+            this.extraParams.putAll(map);
+            return this;
+          }
+
+          /**
+           * Configure how an opt-in following a paid trial is billed when using {@code
+           * billing_behavior: prorate_up_front}.
+           */
+          public Builder setProrateUpFront(
+              SubscriptionScheduleCreateParams.Phase.TrialSettings.EndBehavior.ProrateUpFront
+                  prorateUpFront) {
+            this.prorateUpFront = prorateUpFront;
+            return this;
+          }
+        }
+
+        public enum ProrateUpFront implements ApiRequestParams.EnumParam {
+          @SerializedName("defer")
+          DEFER("defer"),
+
+          @SerializedName("include")
+          INCLUDE("include");
+
+          @Getter(onMethod_ = {@Override})
+          private final String value;
+
+          ProrateUpFront(String value) {
+            this.value = value;
+          }
         }
       }
     }

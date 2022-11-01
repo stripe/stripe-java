@@ -236,6 +236,15 @@ public class Subscription extends ApiResource implements HasId, MetadataStore<Su
   @SerializedName("object")
   String object;
 
+  /**
+   * The account (if any) the charge was made on behalf of for charges associated with this
+   * subscription. See the Connect documentation for details.
+   */
+  @SerializedName("on_behalf_of")
+  @Getter(lombok.AccessLevel.NONE)
+  @Setter(lombok.AccessLevel.NONE)
+  ExpandableField<Account> onBehalfOf;
+
   /** If specified, payment collection for this subscription will be paused. */
   @SerializedName("pause_collection")
   PauseCollection pauseCollection;
@@ -432,6 +441,24 @@ public class Subscription extends ApiResource implements HasId, MetadataStore<Su
 
   public void setLatestInvoiceObject(Invoice expandableObject) {
     this.latestInvoice = new ExpandableField<Invoice>(expandableObject.getId(), expandableObject);
+  }
+
+  /** Get ID of expandable {@code onBehalfOf} object. */
+  public String getOnBehalfOf() {
+    return (this.onBehalfOf != null) ? this.onBehalfOf.getId() : null;
+  }
+
+  public void setOnBehalfOf(String id) {
+    this.onBehalfOf = ApiResource.setExpandableFieldId(id, this.onBehalfOf);
+  }
+
+  /** Get expanded {@code onBehalfOf}. */
+  public Account getOnBehalfOfObject() {
+    return (this.onBehalfOf != null) ? this.onBehalfOf.getExpanded() : null;
+  }
+
+  public void setOnBehalfOfObject(Account expandableObject) {
+    this.onBehalfOf = new ExpandableField<Account>(expandableObject.getId(), expandableObject);
   }
 
   /** Get ID of expandable {@code pendingSetupIntent} object. */

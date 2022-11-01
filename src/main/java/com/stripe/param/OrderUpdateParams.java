@@ -8260,13 +8260,13 @@ public class OrderUpdateParams extends ApiRequestParams {
        * Type of the tax ID, one of {@code ae_trn}, {@code au_abn}, {@code au_arn}, {@code bg_uic},
        * {@code br_cnpj}, {@code br_cpf}, {@code ca_bn}, {@code ca_gst_hst}, {@code ca_pst_bc},
        * {@code ca_pst_mb}, {@code ca_pst_sk}, {@code ca_qst}, {@code ch_vat}, {@code cl_tin},
-       * {@code es_cif}, {@code eu_oss_vat}, {@code eu_vat}, {@code gb_vat}, {@code ge_vat}, {@code
-       * hk_br}, {@code hu_tin}, {@code id_npwp}, {@code il_vat}, {@code in_gst}, {@code is_vat},
-       * {@code jp_cn}, {@code jp_rn}, {@code jp_trn}, {@code ke_pin}, {@code kr_brn}, {@code
-       * li_uid}, {@code mx_rfc}, {@code my_frp}, {@code my_itn}, {@code my_sst}, {@code no_vat},
-       * {@code nz_gst}, {@code ru_inn}, {@code ru_kpp}, {@code sa_vat}, {@code sg_gst}, {@code
-       * sg_uen}, {@code si_tin}, {@code th_vat}, {@code tw_vat}, {@code ua_vat}, {@code us_ein}, or
-       * {@code za_vat}.
+       * {@code eg_tin}, {@code es_cif}, {@code eu_oss_vat}, {@code eu_vat}, {@code gb_vat}, {@code
+       * ge_vat}, {@code hk_br}, {@code hu_tin}, {@code id_npwp}, {@code il_vat}, {@code in_gst},
+       * {@code is_vat}, {@code jp_cn}, {@code jp_rn}, {@code jp_trn}, {@code ke_pin}, {@code
+       * kr_brn}, {@code li_uid}, {@code mx_rfc}, {@code my_frp}, {@code my_itn}, {@code my_sst},
+       * {@code no_vat}, {@code nz_gst}, {@code ph_tin}, {@code ru_inn}, {@code ru_kpp}, {@code
+       * sa_vat}, {@code sg_gst}, {@code sg_uen}, {@code si_tin}, {@code th_vat}, {@code tr_tin},
+       * {@code tw_vat}, {@code ua_vat}, {@code us_ein}, or {@code za_vat}.
        */
       @SerializedName("type")
       Type type;
@@ -8329,13 +8329,13 @@ public class OrderUpdateParams extends ApiRequestParams {
          * Type of the tax ID, one of {@code ae_trn}, {@code au_abn}, {@code au_arn}, {@code
          * bg_uic}, {@code br_cnpj}, {@code br_cpf}, {@code ca_bn}, {@code ca_gst_hst}, {@code
          * ca_pst_bc}, {@code ca_pst_mb}, {@code ca_pst_sk}, {@code ca_qst}, {@code ch_vat}, {@code
-         * cl_tin}, {@code es_cif}, {@code eu_oss_vat}, {@code eu_vat}, {@code gb_vat}, {@code
-         * ge_vat}, {@code hk_br}, {@code hu_tin}, {@code id_npwp}, {@code il_vat}, {@code in_gst},
-         * {@code is_vat}, {@code jp_cn}, {@code jp_rn}, {@code jp_trn}, {@code ke_pin}, {@code
-         * kr_brn}, {@code li_uid}, {@code mx_rfc}, {@code my_frp}, {@code my_itn}, {@code my_sst},
-         * {@code no_vat}, {@code nz_gst}, {@code ru_inn}, {@code ru_kpp}, {@code sa_vat}, {@code
-         * sg_gst}, {@code sg_uen}, {@code si_tin}, {@code th_vat}, {@code tw_vat}, {@code ua_vat},
-         * {@code us_ein}, or {@code za_vat}.
+         * cl_tin}, {@code eg_tin}, {@code es_cif}, {@code eu_oss_vat}, {@code eu_vat}, {@code
+         * gb_vat}, {@code ge_vat}, {@code hk_br}, {@code hu_tin}, {@code id_npwp}, {@code il_vat},
+         * {@code in_gst}, {@code is_vat}, {@code jp_cn}, {@code jp_rn}, {@code jp_trn}, {@code
+         * ke_pin}, {@code kr_brn}, {@code li_uid}, {@code mx_rfc}, {@code my_frp}, {@code my_itn},
+         * {@code my_sst}, {@code no_vat}, {@code nz_gst}, {@code ph_tin}, {@code ru_inn}, {@code
+         * ru_kpp}, {@code sa_vat}, {@code sg_gst}, {@code sg_uen}, {@code si_tin}, {@code th_vat},
+         * {@code tr_tin}, {@code tw_vat}, {@code ua_vat}, {@code us_ein}, or {@code za_vat}.
          */
         public Builder setType(OrderUpdateParams.TaxDetails.TaxId.Type type) {
           this.type = type;
@@ -8397,6 +8397,9 @@ public class OrderUpdateParams extends ApiRequestParams {
 
         @SerializedName("cl_tin")
         CL_TIN("cl_tin"),
+
+        @SerializedName("eg_tin")
+        EG_TIN("eg_tin"),
 
         @SerializedName("es_cif")
         ES_CIF("es_cif"),
@@ -8467,6 +8470,9 @@ public class OrderUpdateParams extends ApiRequestParams {
         @SerializedName("nz_gst")
         NZ_GST("nz_gst"),
 
+        @SerializedName("ph_tin")
+        PH_TIN("ph_tin"),
+
         @SerializedName("ru_inn")
         RU_INN("ru_inn"),
 
@@ -8487,6 +8493,9 @@ public class OrderUpdateParams extends ApiRequestParams {
 
         @SerializedName("th_vat")
         TH_VAT("th_vat"),
+
+        @SerializedName("tr_tin")
+        TR_TIN("tr_tin"),
 
         @SerializedName("tw_vat")
         TW_VAT("tw_vat"),

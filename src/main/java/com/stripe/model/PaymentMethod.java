@@ -66,6 +66,9 @@ public class PaymentMethod extends ApiResource implements HasId, MetadataStore<P
   @SerializedName("card_present")
   CardPresent cardPresent;
 
+  @SerializedName("cashapp")
+  Cashapp cashapp;
+
   /** Time at which the object was created. Measured in seconds since the Unix epoch. */
   @SerializedName("created")
   Long created;
@@ -175,11 +178,11 @@ public class PaymentMethod extends ApiResource implements HasId, MetadataStore<P
    *
    * <p>One of {@code acss_debit}, {@code affirm}, {@code afterpay_clearpay}, {@code alipay}, {@code
    * au_becs_debit}, {@code bacs_debit}, {@code bancontact}, {@code blik}, {@code boleto}, {@code
-   * card}, {@code card_present}, {@code customer_balance}, {@code eps}, {@code fpx}, {@code
-   * giropay}, {@code grabpay}, {@code ideal}, {@code interac_present}, {@code klarna}, {@code
-   * konbini}, {@code link}, {@code oxxo}, {@code p24}, {@code paynow}, {@code paypal}, {@code pix},
-   * {@code promptpay}, {@code sepa_debit}, {@code sofort}, {@code us_bank_account}, or {@code
-   * wechat_pay}.
+   * card}, {@code card_present}, {@code cashapp}, {@code customer_balance}, {@code eps}, {@code
+   * fpx}, {@code giropay}, {@code grabpay}, {@code ideal}, {@code interac_present}, {@code klarna},
+   * {@code konbini}, {@code link}, {@code oxxo}, {@code p24}, {@code paynow}, {@code paypal},
+   * {@code pix}, {@code promptpay}, {@code sepa_debit}, {@code sofort}, {@code us_bank_account},
+   * {@code wechat_pay}, or {@code zip}.
    */
   @SerializedName("type")
   String type;
@@ -189,6 +192,9 @@ public class PaymentMethod extends ApiResource implements HasId, MetadataStore<P
 
   @SerializedName("wechat_pay")
   WechatPay wechatPay;
+
+  @SerializedName("zip")
+  Zip zip;
 
   /** Get ID of expandable {@code customer} object. */
   public String getCustomer() {
@@ -963,6 +969,11 @@ public class PaymentMethod extends ApiResource implements HasId, MetadataStore<P
   @Getter
   @Setter
   @EqualsAndHashCode(callSuper = false)
+  public static class Cashapp extends StripeObject {}
+
+  @Getter
+  @Setter
+  @EqualsAndHashCode(callSuper = false)
   public static class CustomerBalance extends StripeObject {}
 
   @Getter
@@ -1311,4 +1322,9 @@ public class PaymentMethod extends ApiResource implements HasId, MetadataStore<P
   @Setter
   @EqualsAndHashCode(callSuper = false)
   public static class WechatPay extends StripeObject {}
+
+  @Getter
+  @Setter
+  @EqualsAndHashCode(callSuper = false)
+  public static class Zip extends StripeObject {}
 }

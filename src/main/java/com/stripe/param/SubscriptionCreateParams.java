@@ -187,6 +187,10 @@ public class SubscriptionCreateParams extends ApiRequestParams {
   @SerializedName("off_session")
   Boolean offSession;
 
+  /** The account on behalf of which to charge, for each of the subscription's invoices. */
+  @SerializedName("on_behalf_of")
+  Object onBehalfOf;
+
   /**
    * Only applies to subscriptions with {@code collection_method=charge_automatically}.
    *
@@ -317,6 +321,7 @@ public class SubscriptionCreateParams extends ApiRequestParams {
       List<SubscriptionCreateParams.Item> items,
       Object metadata,
       Boolean offSession,
+      Object onBehalfOf,
       PaymentBehavior paymentBehavior,
       PaymentSettings paymentSettings,
       Object pendingInvoiceItemInterval,
@@ -350,6 +355,7 @@ public class SubscriptionCreateParams extends ApiRequestParams {
     this.items = items;
     this.metadata = metadata;
     this.offSession = offSession;
+    this.onBehalfOf = onBehalfOf;
     this.paymentBehavior = paymentBehavior;
     this.paymentSettings = paymentSettings;
     this.pendingInvoiceItemInterval = pendingInvoiceItemInterval;
@@ -413,6 +419,8 @@ public class SubscriptionCreateParams extends ApiRequestParams {
 
     private Boolean offSession;
 
+    private Object onBehalfOf;
+
     private PaymentBehavior paymentBehavior;
 
     private PaymentSettings paymentSettings;
@@ -459,6 +467,7 @@ public class SubscriptionCreateParams extends ApiRequestParams {
           this.items,
           this.metadata,
           this.offSession,
+          this.onBehalfOf,
           this.paymentBehavior,
           this.paymentSettings,
           this.pendingInvoiceItemInterval,
@@ -886,6 +895,18 @@ public class SubscriptionCreateParams extends ApiRequestParams {
     /** Indicates if a customer is on or off-session while an invoice payment is attempted. */
     public Builder setOffSession(Boolean offSession) {
       this.offSession = offSession;
+      return this;
+    }
+
+    /** The account on behalf of which to charge, for each of the subscription's invoices. */
+    public Builder setOnBehalfOf(String onBehalfOf) {
+      this.onBehalfOf = onBehalfOf;
+      return this;
+    }
+
+    /** The account on behalf of which to charge, for each of the subscription's invoices. */
+    public Builder setOnBehalfOf(EmptyParam onBehalfOf) {
+      this.onBehalfOf = onBehalfOf;
       return this;
     }
 
@@ -2566,6 +2587,13 @@ public class SubscriptionCreateParams extends ApiRequestParams {
     @Getter
     public static class Trial {
       /**
+       * List of price IDs which, if present on the subscription following a paid trial, constitute
+       * opting-in to the paid trial.
+       */
+      @SerializedName("converts_to")
+      List<String> convertsTo;
+
+      /**
        * Map of extra parameters for custom features not available in this client library. The
        * content in this map is not serialized under this field's {@code @SerializedName} value.
        * Instead, each key/value pair is serialized as if the key is a root-level field (serialized)
@@ -2578,7 +2606,8 @@ public class SubscriptionCreateParams extends ApiRequestParams {
       @SerializedName("type")
       Type type;
 
-      private Trial(Map<String, Object> extraParams, Type type) {
+      private Trial(List<String> convertsTo, Map<String, Object> extraParams, Type type) {
+        this.convertsTo = convertsTo;
         this.extraParams = extraParams;
         this.type = type;
       }
@@ -2588,13 +2617,42 @@ public class SubscriptionCreateParams extends ApiRequestParams {
       }
 
       public static class Builder {
+        private List<String> convertsTo;
+
         private Map<String, Object> extraParams;
 
         private Type type;
 
         /** Finalize and obtain parameter instance from this builder. */
         public SubscriptionCreateParams.Item.Trial build() {
-          return new SubscriptionCreateParams.Item.Trial(this.extraParams, this.type);
+          return new SubscriptionCreateParams.Item.Trial(
+              this.convertsTo, this.extraParams, this.type);
+        }
+
+        /**
+         * Add an element to `convertsTo` list. A list is initialized for the first `add/addAll`
+         * call, and subsequent calls adds additional elements to the original list. See {@link
+         * SubscriptionCreateParams.Item.Trial#convertsTo} for the field documentation.
+         */
+        public Builder addConvertsTo(String element) {
+          if (this.convertsTo == null) {
+            this.convertsTo = new ArrayList<>();
+          }
+          this.convertsTo.add(element);
+          return this;
+        }
+
+        /**
+         * Add all elements to `convertsTo` list. A list is initialized for the first `add/addAll`
+         * call, and subsequent calls adds additional elements to the original list. See {@link
+         * SubscriptionCreateParams.Item.Trial#convertsTo} for the field documentation.
+         */
+        public Builder addAllConvertsTo(List<String> elements) {
+          if (this.convertsTo == null) {
+            this.convertsTo = new ArrayList<>();
+          }
+          this.convertsTo.addAll(elements);
+          return this;
         }
 
         /**

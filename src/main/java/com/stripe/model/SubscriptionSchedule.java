@@ -770,6 +770,15 @@ public class SubscriptionSchedule extends ApiResource
     InvoiceSettings invoiceSettings;
 
     /**
+     * The account (if any) the charge was made on behalf of for charges associated with the
+     * schedule's subscription. See the Connect documentation for details.
+     */
+    @SerializedName("on_behalf_of")
+    @Getter(lombok.AccessLevel.NONE)
+    @Setter(lombok.AccessLevel.NONE)
+    ExpandableField<Account> onBehalfOf;
+
+    /**
      * The account (if any) the associated subscription's payments will be attributed to for tax
      * reporting, and where funds from each payment will be transferred to for each of the
      * subscription's invoices.
@@ -794,6 +803,24 @@ public class SubscriptionSchedule extends ApiResource
     public void setDefaultPaymentMethodObject(PaymentMethod expandableObject) {
       this.defaultPaymentMethod =
           new ExpandableField<PaymentMethod>(expandableObject.getId(), expandableObject);
+    }
+
+    /** Get ID of expandable {@code onBehalfOf} object. */
+    public String getOnBehalfOf() {
+      return (this.onBehalfOf != null) ? this.onBehalfOf.getId() : null;
+    }
+
+    public void setOnBehalfOf(String id) {
+      this.onBehalfOf = ApiResource.setExpandableFieldId(id, this.onBehalfOf);
+    }
+
+    /** Get expanded {@code onBehalfOf}. */
+    public Account getOnBehalfOfObject() {
+      return (this.onBehalfOf != null) ? this.onBehalfOf.getExpanded() : null;
+    }
+
+    public void setOnBehalfOfObject(Account expandableObject) {
+      this.onBehalfOf = new ExpandableField<Account>(expandableObject.getId(), expandableObject);
     }
 
     @Getter
@@ -945,6 +972,15 @@ public class SubscriptionSchedule extends ApiResource
     Map<String, String> metadata;
 
     /**
+     * The account (if any) the charge was made on behalf of for charges associated with the
+     * schedule's subscription. See the Connect documentation for details.
+     */
+    @SerializedName("on_behalf_of")
+    @Getter(lombok.AccessLevel.NONE)
+    @Setter(lombok.AccessLevel.NONE)
+    ExpandableField<Account> onBehalfOf;
+
+    /**
      * If the subscription schedule will prorate when transitioning to this phase. Possible values
      * are {@code create_prorations} and {@code none}.
      *
@@ -976,6 +1012,10 @@ public class SubscriptionSchedule extends ApiResource
     /** When the trial ends within the phase. */
     @SerializedName("trial_end")
     Long trialEnd;
+
+    /** Settings related to any trials on the subscription during this phase. */
+    @SerializedName("trial_settings")
+    TrialSettings trialSettings;
 
     /** Get ID of expandable {@code coupon} object. */
     public String getCoupon() {
@@ -1012,6 +1052,24 @@ public class SubscriptionSchedule extends ApiResource
     public void setDefaultPaymentMethodObject(PaymentMethod expandableObject) {
       this.defaultPaymentMethod =
           new ExpandableField<PaymentMethod>(expandableObject.getId(), expandableObject);
+    }
+
+    /** Get ID of expandable {@code onBehalfOf} object. */
+    public String getOnBehalfOf() {
+      return (this.onBehalfOf != null) ? this.onBehalfOf.getId() : null;
+    }
+
+    public void setOnBehalfOf(String id) {
+      this.onBehalfOf = ApiResource.setExpandableFieldId(id, this.onBehalfOf);
+    }
+
+    /** Get expanded {@code onBehalfOf}. */
+    public Account getOnBehalfOfObject() {
+      return (this.onBehalfOf != null) ? this.onBehalfOf.getExpanded() : null;
+    }
+
+    public void setOnBehalfOfObject(Account expandableObject) {
+      this.onBehalfOf = new ExpandableField<Account>(expandableObject.getId(), expandableObject);
     }
 
     @Getter
@@ -1075,6 +1133,31 @@ public class SubscriptionSchedule extends ApiResource
         this.discount =
             new ExpandableField<com.stripe.model.Discount>(
                 expandableObject.getId(), expandableObject);
+      }
+    }
+
+    /** Configures how the scheduled subscription behaves during the trial period. */
+    @Getter
+    @Setter
+    @EqualsAndHashCode(callSuper = false)
+    public static class TrialSettings extends StripeObject {
+      /** Defines how the subscription should behaves when a trial ensd. */
+      @SerializedName("end_behavior")
+      EndBehavior endBehavior;
+
+      /** Defines how the scheduled subscription behaves when a trial ends. */
+      @Getter
+      @Setter
+      @EqualsAndHashCode(callSuper = false)
+      public static class EndBehavior extends StripeObject {
+        /**
+         * Configure how an opt-in following a paid trial is billed when using {@code
+         * billing_behavior: prorate_up_front}.
+         *
+         * <p>One of {@code defer}, or {@code include}.
+         */
+        @SerializedName("prorate_up_front")
+        String prorateUpFront;
       }
     }
   }
@@ -1226,6 +1309,13 @@ public class SubscriptionSchedule extends ApiResource
     @Setter
     @EqualsAndHashCode(callSuper = false)
     public static class Trial extends StripeObject {
+      /**
+       * List of price IDs which, if present on the subscription following a paid trial, constitute
+       * opting-in to the paid trial.
+       */
+      @SerializedName("converts_to")
+      List<String> convertsTo;
+
       @SerializedName("type")
       String type;
     }
