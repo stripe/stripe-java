@@ -161,6 +161,10 @@ public class SubscriptionUpdateParams extends ApiRequestParams {
   @SerializedName("off_session")
   Boolean offSession;
 
+  /** The account on behalf of which to charge, for each of the subscription's invoices. */
+  @SerializedName("on_behalf_of")
+  Object onBehalfOf;
+
   /** If specified, payment collection for this subscription will be paused. */
   @SerializedName("pause_collection")
   Object pauseCollection;
@@ -282,6 +286,7 @@ public class SubscriptionUpdateParams extends ApiRequestParams {
       List<SubscriptionUpdateParams.Item> items,
       Object metadata,
       Boolean offSession,
+      Object onBehalfOf,
       Object pauseCollection,
       PaymentBehavior paymentBehavior,
       PaymentSettings paymentSettings,
@@ -311,6 +316,7 @@ public class SubscriptionUpdateParams extends ApiRequestParams {
     this.items = items;
     this.metadata = metadata;
     this.offSession = offSession;
+    this.onBehalfOf = onBehalfOf;
     this.pauseCollection = pauseCollection;
     this.paymentBehavior = paymentBehavior;
     this.paymentSettings = paymentSettings;
@@ -366,6 +372,8 @@ public class SubscriptionUpdateParams extends ApiRequestParams {
 
     private Boolean offSession;
 
+    private Object onBehalfOf;
+
     private Object pauseCollection;
 
     private PaymentBehavior paymentBehavior;
@@ -408,6 +416,7 @@ public class SubscriptionUpdateParams extends ApiRequestParams {
           this.items,
           this.metadata,
           this.offSession,
+          this.onBehalfOf,
           this.pauseCollection,
           this.paymentBehavior,
           this.paymentSettings,
@@ -819,6 +828,18 @@ public class SubscriptionUpdateParams extends ApiRequestParams {
     /** Indicates if a customer is on or off-session while an invoice payment is attempted. */
     public Builder setOffSession(Boolean offSession) {
       this.offSession = offSession;
+      return this;
+    }
+
+    /** The account on behalf of which to charge, for each of the subscription's invoices. */
+    public Builder setOnBehalfOf(String onBehalfOf) {
+      this.onBehalfOf = onBehalfOf;
+      return this;
+    }
+
+    /** The account on behalf of which to charge, for each of the subscription's invoices. */
+    public Builder setOnBehalfOf(EmptyParam onBehalfOf) {
+      this.onBehalfOf = onBehalfOf;
       return this;
     }
 

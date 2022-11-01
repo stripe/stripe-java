@@ -650,6 +650,15 @@ public class SubscriptionSchedule extends ApiResource
     InvoiceSettings invoiceSettings;
 
     /**
+     * The account (if any) the charge was made on behalf of for charges associated with the
+     * schedule's subscription. See the Connect documentation for details.
+     */
+    @SerializedName("on_behalf_of")
+    @Getter(lombok.AccessLevel.NONE)
+    @Setter(lombok.AccessLevel.NONE)
+    ExpandableField<Account> onBehalfOf;
+
+    /**
      * The account (if any) the associated subscription's payments will be attributed to for tax
      * reporting, and where funds from each payment will be transferred to for each of the
      * subscription's invoices.
@@ -674,6 +683,24 @@ public class SubscriptionSchedule extends ApiResource
     public void setDefaultPaymentMethodObject(PaymentMethod expandableObject) {
       this.defaultPaymentMethod =
           new ExpandableField<PaymentMethod>(expandableObject.getId(), expandableObject);
+    }
+
+    /** Get ID of expandable {@code onBehalfOf} object. */
+    public String getOnBehalfOf() {
+      return (this.onBehalfOf != null) ? this.onBehalfOf.getId() : null;
+    }
+
+    public void setOnBehalfOf(String id) {
+      this.onBehalfOf = ApiResource.setExpandableFieldId(id, this.onBehalfOf);
+    }
+
+    /** Get expanded {@code onBehalfOf}. */
+    public Account getOnBehalfOfObject() {
+      return (this.onBehalfOf != null) ? this.onBehalfOf.getExpanded() : null;
+    }
+
+    public void setOnBehalfOfObject(Account expandableObject) {
+      this.onBehalfOf = new ExpandableField<Account>(expandableObject.getId(), expandableObject);
     }
 
     @Getter
@@ -818,6 +845,15 @@ public class SubscriptionSchedule extends ApiResource
     Map<String, String> metadata;
 
     /**
+     * The account (if any) the charge was made on behalf of for charges associated with the
+     * schedule's subscription. See the Connect documentation for details.
+     */
+    @SerializedName("on_behalf_of")
+    @Getter(lombok.AccessLevel.NONE)
+    @Setter(lombok.AccessLevel.NONE)
+    ExpandableField<Account> onBehalfOf;
+
+    /**
      * If the subscription schedule will prorate when transitioning to this phase. Possible values
      * are {@code create_prorations} and {@code none}.
      *
@@ -877,6 +913,24 @@ public class SubscriptionSchedule extends ApiResource
     public void setDefaultPaymentMethodObject(PaymentMethod expandableObject) {
       this.defaultPaymentMethod =
           new ExpandableField<PaymentMethod>(expandableObject.getId(), expandableObject);
+    }
+
+    /** Get ID of expandable {@code onBehalfOf} object. */
+    public String getOnBehalfOf() {
+      return (this.onBehalfOf != null) ? this.onBehalfOf.getId() : null;
+    }
+
+    public void setOnBehalfOf(String id) {
+      this.onBehalfOf = ApiResource.setExpandableFieldId(id, this.onBehalfOf);
+    }
+
+    /** Get expanded {@code onBehalfOf}. */
+    public Account getOnBehalfOfObject() {
+      return (this.onBehalfOf != null) ? this.onBehalfOf.getExpanded() : null;
+    }
+
+    public void setOnBehalfOfObject(Account expandableObject) {
+      this.onBehalfOf = new ExpandableField<Account>(expandableObject.getId(), expandableObject);
     }
 
     @Getter
