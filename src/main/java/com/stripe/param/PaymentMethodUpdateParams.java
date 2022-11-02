@@ -58,6 +58,13 @@ public class PaymentMethodUpdateParams extends ApiRequestParams {
   @SerializedName("card")
   Card card;
 
+  /**
+   * This is a legacy parameter that will be removed in the future. It is a hash that does not
+   * accept any keys.
+   */
+  @SerializedName("cashapp")
+  Cashapp cashapp;
+
   /** Specifies which fields in the response should be expanded. */
   @SerializedName("expand")
   List<String> expand;
@@ -101,6 +108,13 @@ public class PaymentMethodUpdateParams extends ApiRequestParams {
   @SerializedName("us_bank_account")
   UsBankAccount usBankAccount;
 
+  /**
+   * This is a legacy parameter that will be removed in the future. It is a hash that does not
+   * accept any keys.
+   */
+  @SerializedName("zip")
+  Zip zip;
+
   private PaymentMethodUpdateParams(
       AcssDebit acssDebit,
       Affirm affirm,
@@ -109,12 +123,14 @@ public class PaymentMethodUpdateParams extends ApiRequestParams {
       BillingDetails billingDetails,
       Blik blik,
       Card card,
+      Cashapp cashapp,
       List<String> expand,
       Map<String, Object> extraParams,
       Link link,
       Object metadata,
       SepaDebit sepaDebit,
-      UsBankAccount usBankAccount) {
+      UsBankAccount usBankAccount,
+      Zip zip) {
     this.acssDebit = acssDebit;
     this.affirm = affirm;
     this.auBecsDebit = auBecsDebit;
@@ -122,12 +138,14 @@ public class PaymentMethodUpdateParams extends ApiRequestParams {
     this.billingDetails = billingDetails;
     this.blik = blik;
     this.card = card;
+    this.cashapp = cashapp;
     this.expand = expand;
     this.extraParams = extraParams;
     this.link = link;
     this.metadata = metadata;
     this.sepaDebit = sepaDebit;
     this.usBankAccount = usBankAccount;
+    this.zip = zip;
   }
 
   public static Builder builder() {
@@ -149,6 +167,8 @@ public class PaymentMethodUpdateParams extends ApiRequestParams {
 
     private Card card;
 
+    private Cashapp cashapp;
+
     private List<String> expand;
 
     private Map<String, Object> extraParams;
@@ -161,6 +181,8 @@ public class PaymentMethodUpdateParams extends ApiRequestParams {
 
     private UsBankAccount usBankAccount;
 
+    private Zip zip;
+
     /** Finalize and obtain parameter instance from this builder. */
     public PaymentMethodUpdateParams build() {
       return new PaymentMethodUpdateParams(
@@ -171,12 +193,14 @@ public class PaymentMethodUpdateParams extends ApiRequestParams {
           this.billingDetails,
           this.blik,
           this.card,
+          this.cashapp,
           this.expand,
           this.extraParams,
           this.link,
           this.metadata,
           this.sepaDebit,
-          this.usBankAccount);
+          this.usBankAccount,
+          this.zip);
     }
 
     /**
@@ -236,6 +260,15 @@ public class PaymentMethodUpdateParams extends ApiRequestParams {
     /** If this is a {@code card} PaymentMethod, this hash contains the user's card details. */
     public Builder setCard(PaymentMethodUpdateParams.Card card) {
       this.card = card;
+      return this;
+    }
+
+    /**
+     * This is a legacy parameter that will be removed in the future. It is a hash that does not
+     * accept any keys.
+     */
+    public Builder setCashapp(PaymentMethodUpdateParams.Cashapp cashapp) {
+      this.cashapp = cashapp;
       return this;
     }
 
@@ -365,6 +398,15 @@ public class PaymentMethodUpdateParams extends ApiRequestParams {
      */
     public Builder setUsBankAccount(PaymentMethodUpdateParams.UsBankAccount usBankAccount) {
       this.usBankAccount = usBankAccount;
+      return this;
+    }
+
+    /**
+     * This is a legacy parameter that will be removed in the future. It is a hash that does not
+     * accept any keys.
+     */
+    public Builder setZip(PaymentMethodUpdateParams.Zip zip) {
+      this.zip = zip;
       return this;
     }
   }
@@ -1054,6 +1096,61 @@ public class PaymentMethodUpdateParams extends ApiRequestParams {
   }
 
   @Getter
+  public static class Cashapp {
+    /**
+     * Map of extra parameters for custom features not available in this client library. The content
+     * in this map is not serialized under this field's {@code @SerializedName} value. Instead, each
+     * key/value pair is serialized as if the key is a root-level field (serialized) name in this
+     * param object. Effectively, this map is flattened to its parent instance.
+     */
+    @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
+    Map<String, Object> extraParams;
+
+    private Cashapp(Map<String, Object> extraParams) {
+      this.extraParams = extraParams;
+    }
+
+    public static Builder builder() {
+      return new Builder();
+    }
+
+    public static class Builder {
+      private Map<String, Object> extraParams;
+
+      /** Finalize and obtain parameter instance from this builder. */
+      public PaymentMethodUpdateParams.Cashapp build() {
+        return new PaymentMethodUpdateParams.Cashapp(this.extraParams);
+      }
+
+      /**
+       * Add a key/value pair to `extraParams` map. A map is initialized for the first `put/putAll`
+       * call, and subsequent calls add additional key/value pairs to the original map. See {@link
+       * PaymentMethodUpdateParams.Cashapp#extraParams} for the field documentation.
+       */
+      public Builder putExtraParam(String key, Object value) {
+        if (this.extraParams == null) {
+          this.extraParams = new HashMap<>();
+        }
+        this.extraParams.put(key, value);
+        return this;
+      }
+
+      /**
+       * Add all map key/value pairs to `extraParams` map. A map is initialized for the first
+       * `put/putAll` call, and subsequent calls add additional key/value pairs to the original map.
+       * See {@link PaymentMethodUpdateParams.Cashapp#extraParams} for the field documentation.
+       */
+      public Builder putAllExtraParam(Map<String, Object> map) {
+        if (this.extraParams == null) {
+          this.extraParams = new HashMap<>();
+        }
+        this.extraParams.putAll(map);
+        return this;
+      }
+    }
+  }
+
+  @Getter
   public static class Link {
     /**
      * Map of extra parameters for custom features not available in this client library. The content
@@ -1245,6 +1342,61 @@ public class PaymentMethodUpdateParams extends ApiRequestParams {
 
       AccountHolderType(String value) {
         this.value = value;
+      }
+    }
+  }
+
+  @Getter
+  public static class Zip {
+    /**
+     * Map of extra parameters for custom features not available in this client library. The content
+     * in this map is not serialized under this field's {@code @SerializedName} value. Instead, each
+     * key/value pair is serialized as if the key is a root-level field (serialized) name in this
+     * param object. Effectively, this map is flattened to its parent instance.
+     */
+    @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
+    Map<String, Object> extraParams;
+
+    private Zip(Map<String, Object> extraParams) {
+      this.extraParams = extraParams;
+    }
+
+    public static Builder builder() {
+      return new Builder();
+    }
+
+    public static class Builder {
+      private Map<String, Object> extraParams;
+
+      /** Finalize and obtain parameter instance from this builder. */
+      public PaymentMethodUpdateParams.Zip build() {
+        return new PaymentMethodUpdateParams.Zip(this.extraParams);
+      }
+
+      /**
+       * Add a key/value pair to `extraParams` map. A map is initialized for the first `put/putAll`
+       * call, and subsequent calls add additional key/value pairs to the original map. See {@link
+       * PaymentMethodUpdateParams.Zip#extraParams} for the field documentation.
+       */
+      public Builder putExtraParam(String key, Object value) {
+        if (this.extraParams == null) {
+          this.extraParams = new HashMap<>();
+        }
+        this.extraParams.put(key, value);
+        return this;
+      }
+
+      /**
+       * Add all map key/value pairs to `extraParams` map. A map is initialized for the first
+       * `put/putAll` call, and subsequent calls add additional key/value pairs to the original map.
+       * See {@link PaymentMethodUpdateParams.Zip#extraParams} for the field documentation.
+       */
+      public Builder putAllExtraParam(Map<String, Object> map) {
+        if (this.extraParams == null) {
+          this.extraParams = new HashMap<>();
+        }
+        this.extraParams.putAll(map);
+        return this;
       }
     }
   }

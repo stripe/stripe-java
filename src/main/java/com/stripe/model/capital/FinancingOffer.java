@@ -95,11 +95,20 @@ public class FinancingOffer extends ApiResource implements HasId {
   @SerializedName("product_type")
   String productType;
 
+  /** The ID of the financing offer that replaced this offer. */
+  @SerializedName("replacement")
+  String replacement;
+
+  /** The ID of the financing offer that this offer is a replacement for. */
+  @SerializedName("replacement_for")
+  String replacementFor;
+
   /**
    * The current status of the offer.
    *
    * <p>One of {@code accepted}, {@code canceled}, {@code completed}, {@code delivered}, {@code
-   * expired}, {@code fully_repaid}, {@code paid_out}, {@code rejected}, or {@code undelivered}.
+   * expired}, {@code fully_repaid}, {@code paid_out}, {@code rejected}, {@code replaced}, or {@code
+   * undelivered}.
    */
   @SerializedName("status")
   String status;

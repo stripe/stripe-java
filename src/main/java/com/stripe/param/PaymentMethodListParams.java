@@ -235,6 +235,9 @@ public class PaymentMethodListParams extends ApiRequestParams {
     @SerializedName("card_present")
     CARD_PRESENT("card_present"),
 
+    @SerializedName("cashapp")
+    CASHAPP("cashapp"),
+
     @SerializedName("customer_balance")
     CUSTOMER_BALANCE("customer_balance"),
 
@@ -290,7 +293,10 @@ public class PaymentMethodListParams extends ApiRequestParams {
     US_BANK_ACCOUNT("us_bank_account"),
 
     @SerializedName("wechat_pay")
-    WECHAT_PAY("wechat_pay");
+    WECHAT_PAY("wechat_pay"),
+
+    @SerializedName("zip")
+    ZIP("zip");
 
     @Getter(onMethod_ = {@Override})
     private final String value;

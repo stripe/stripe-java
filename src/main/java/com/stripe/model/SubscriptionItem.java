@@ -465,6 +465,13 @@ public class SubscriptionItem extends ApiResource
   @Setter
   @EqualsAndHashCode(callSuper = false)
   public static class Trial extends StripeObject {
+    /**
+     * List of price IDs which, if present on the subscription following a paid trial, constitute
+     * opting-in to the paid trial.
+     */
+    @SerializedName("converts_to")
+    List<String> convertsTo;
+
     @SerializedName("type")
     String type;
   }

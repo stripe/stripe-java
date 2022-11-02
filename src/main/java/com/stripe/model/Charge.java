@@ -1126,6 +1126,9 @@ public class Charge extends ApiResource implements MetadataStore<Charge>, Balanc
     @SerializedName("card_present")
     CardPresent cardPresent;
 
+    @SerializedName("cashapp")
+    Cashapp cashapp;
+
     @SerializedName("customer_balance")
     CustomerBalance customerBalance;
 
@@ -1209,6 +1212,9 @@ public class Charge extends ApiResource implements MetadataStore<Charge>, Balanc
 
     @SerializedName("wechat_pay")
     WechatPay wechatPay;
+
+    @SerializedName("zip")
+    Zip zip;
 
     @Getter
     @Setter
@@ -1993,6 +1999,11 @@ public class Charge extends ApiResource implements MetadataStore<Charge>, Balanc
     @Getter
     @Setter
     @EqualsAndHashCode(callSuper = false)
+    public static class Cashapp extends StripeObject {}
+
+    @Getter
+    @Setter
+    @EqualsAndHashCode(callSuper = false)
     public static class CustomerBalance extends StripeObject {}
 
     @Getter
@@ -2724,6 +2735,11 @@ public class Charge extends ApiResource implements MetadataStore<Charge>, Balanc
       @SerializedName("transaction_id")
       String transactionId;
     }
+
+    @Getter
+    @Setter
+    @EqualsAndHashCode(callSuper = false)
+    public static class Zip extends StripeObject {}
   }
 
   /**
