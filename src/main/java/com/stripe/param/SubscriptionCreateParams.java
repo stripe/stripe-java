@@ -180,6 +180,10 @@ public class SubscriptionCreateParams extends ApiRequestParams {
   @SerializedName("off_session")
   Boolean offSession;
 
+  /** The account on behalf of which to charge, for each of the subscription's invoices. */
+  @SerializedName("on_behalf_of")
+  Object onBehalfOf;
+
   /**
    * Only applies to subscriptions with {@code collection_method=charge_automatically}.
    *
@@ -305,6 +309,7 @@ public class SubscriptionCreateParams extends ApiRequestParams {
       List<SubscriptionCreateParams.Item> items,
       Object metadata,
       Boolean offSession,
+      Object onBehalfOf,
       PaymentBehavior paymentBehavior,
       PaymentSettings paymentSettings,
       Object pendingInvoiceItemInterval,
@@ -336,6 +341,7 @@ public class SubscriptionCreateParams extends ApiRequestParams {
     this.items = items;
     this.metadata = metadata;
     this.offSession = offSession;
+    this.onBehalfOf = onBehalfOf;
     this.paymentBehavior = paymentBehavior;
     this.paymentSettings = paymentSettings;
     this.pendingInvoiceItemInterval = pendingInvoiceItemInterval;
@@ -396,6 +402,8 @@ public class SubscriptionCreateParams extends ApiRequestParams {
 
     private Boolean offSession;
 
+    private Object onBehalfOf;
+
     private PaymentBehavior paymentBehavior;
 
     private PaymentSettings paymentSettings;
@@ -439,6 +447,7 @@ public class SubscriptionCreateParams extends ApiRequestParams {
           this.items,
           this.metadata,
           this.offSession,
+          this.onBehalfOf,
           this.paymentBehavior,
           this.paymentSettings,
           this.pendingInvoiceItemInterval,
@@ -819,6 +828,18 @@ public class SubscriptionCreateParams extends ApiRequestParams {
     /** Indicates if a customer is on or off-session while an invoice payment is attempted. */
     public Builder setOffSession(Boolean offSession) {
       this.offSession = offSession;
+      return this;
+    }
+
+    /** The account on behalf of which to charge, for each of the subscription's invoices. */
+    public Builder setOnBehalfOf(String onBehalfOf) {
+      this.onBehalfOf = onBehalfOf;
+      return this;
+    }
+
+    /** The account on behalf of which to charge, for each of the subscription's invoices. */
+    public Builder setOnBehalfOf(EmptyParam onBehalfOf) {
+      this.onBehalfOf = onBehalfOf;
       return this;
     }
 

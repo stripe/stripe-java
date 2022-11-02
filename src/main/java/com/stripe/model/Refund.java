@@ -21,6 +21,10 @@ import lombok.Setter;
  * {@code Refund} objects allow you to refund a charge that has previously been created but not yet
  * refunded. Funds will be refunded to the credit or debit card that was originally charged.
  *
+ * <p>Stripe Tax users with recurring payments and invoices can create <a
+ * href="https://stripe.com/docs/api/credit_notes">Credit Notes</a>, which reduce overall tax
+ * liability because tax is correctly recalculated and apportioned to the related invoice.
+ *
  * <p>Related guide: <a href="https://stripe.com/docs/refunds">Refunds</a>.
  */
 @Getter
