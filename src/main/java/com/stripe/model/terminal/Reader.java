@@ -515,13 +515,13 @@ public class Reader extends ApiResource implements HasId, MetadataStore<Reader> 
 
         /** Represents a per-transaction tipping configuration. */
         @SerializedName("tipping")
-        TippingConfig tipping;
+        Tipping tipping;
 
         /** Represents a per-transaction tipping configuration. */
         @Getter
         @Setter
         @EqualsAndHashCode(callSuper = false)
-        public static class TippingConfig extends StripeObject {
+        public static class Tipping extends StripeObject {
           /**
            * Amount used to calculate tip suggestions on tipping selection screen for this
            * transaction. Must be a positive integer in the smallest currency unit (e.g., 100 cents

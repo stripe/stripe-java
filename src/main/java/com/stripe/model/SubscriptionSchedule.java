@@ -927,7 +927,24 @@ public class SubscriptionSchedule extends ApiResource
           new ExpandableField<PaymentMethod>(expandableObject.getId(), expandableObject);
     }
 
-<<<<<<< HEAD
+    /** Get ID of expandable {@code onBehalfOf} object. */
+    public String getOnBehalfOf() {
+      return (this.onBehalfOf != null) ? this.onBehalfOf.getId() : null;
+    }
+
+    public void setOnBehalfOf(String id) {
+      this.onBehalfOf = ApiResource.setExpandableFieldId(id, this.onBehalfOf);
+    }
+
+    /** Get expanded {@code onBehalfOf}. */
+    public Account getOnBehalfOfObject() {
+      return (this.onBehalfOf != null) ? this.onBehalfOf.getExpanded() : null;
+    }
+
+    public void setOnBehalfOfObject(Account expandableObject) {
+      this.onBehalfOf = new ExpandableField<Account>(expandableObject.getId(), expandableObject);
+    }
+
     /**
      * An Add Invoice Item describes the prices and quantities that will be added as pending invoice
      * items when entering a phase.
@@ -970,24 +987,6 @@ public class SubscriptionSchedule extends ApiResource
       public void setPriceObject(Price expandableObject) {
         this.price = new ExpandableField<Price>(expandableObject.getId(), expandableObject);
       }
-=======
-    /** Get ID of expandable {@code onBehalfOf} object. */
-    public String getOnBehalfOf() {
-      return (this.onBehalfOf != null) ? this.onBehalfOf.getId() : null;
-    }
-
-    public void setOnBehalfOf(String id) {
-      this.onBehalfOf = ApiResource.setExpandableFieldId(id, this.onBehalfOf);
-    }
-
-    /** Get expanded {@code onBehalfOf}. */
-    public Account getOnBehalfOfObject() {
-      return (this.onBehalfOf != null) ? this.onBehalfOf.getExpanded() : null;
-    }
-
-    public void setOnBehalfOfObject(Account expandableObject) {
-      this.onBehalfOf = new ExpandableField<Account>(expandableObject.getId(), expandableObject);
->>>>>>> master
     }
 
     @Getter
