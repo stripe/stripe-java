@@ -291,7 +291,7 @@ public class RequestOptions {
     }
 
     /** For internal use only. */
-    public String _getStripeVersionOverride() {
+   String getStripeVersionOverride() {
       return this.stripeVersionOverride;
     }
 
