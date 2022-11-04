@@ -10,6 +10,7 @@ import com.stripe.exception.StripeException;
 import com.stripe.model.EphemeralKey;
 import com.stripe.net.ApiResource;
 import com.stripe.net.RequestOptions;
+import com.stripe.net.RequestOptions.RequestOptionsBuilder;
 import com.stripe.param.EphemeralKeyCreateParams;
 import java.io.IOException;
 import java.util.HashMap;
@@ -34,7 +35,8 @@ public class EphemeralKeyTest extends BaseStripeTest {
         ApiResource.RequestMethod.POST,
         "/v1/ephemeral_keys",
         expectedParams,
-        RequestOptions.builder().unsafeStripeVersionOverride("foobar").build());
+        RequestOptionsBuilder.unsafeSetStripeVersionOverride(RequestOptions.builder(), "foobar")
+            .build());
   }
 
   @Test
@@ -55,7 +57,8 @@ public class EphemeralKeyTest extends BaseStripeTest {
         ApiResource.RequestMethod.POST,
         "/v1/ephemeral_keys",
         expectedParams,
-        RequestOptions.builder().unsafeStripeVersionOverride("foobar").build());
+        RequestOptionsBuilder.unsafeSetStripeVersionOverride(RequestOptions.builder(), "foobar")
+            .build());
   }
 
   @Test

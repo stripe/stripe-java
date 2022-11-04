@@ -4,6 +4,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNull;
 
 import com.stripe.Stripe;
+import com.stripe.net.RequestOptions.RequestOptionsBuilder;
 import java.net.InetSocketAddress;
 import java.net.PasswordAuthentication;
 import java.net.Proxy;
@@ -14,17 +15,19 @@ public class RequestOptionsTest {
   @Test
   public void testPersistentValuesInToBuilder() {
     RequestOptions opts =
-        RequestOptions.builder()
-            .setApiKey("sk_foo")
-            .setClientId("123")
-            .setIdempotencyKey("123")
-            .setStripeAccount("acct_bar")
-            .unsafeStripeVersionOverride("2015-05-05")
-            .setConnectTimeout(100)
-            .setReadTimeout(100)
-            .setConnectionProxy(
-                new Proxy(Proxy.Type.HTTP, new InetSocketAddress("localhost", 1234)))
-            .setProxyCredential(new PasswordAuthentication("username", "password".toCharArray()))
+        RequestOptionsBuilder.unsafeSetStripeVersionOverride(
+                RequestOptions.builder()
+                    .setApiKey("sk_foo")
+                    .setClientId("123")
+                    .setIdempotencyKey("123")
+                    .setStripeAccount("acct_bar")
+                    .setConnectTimeout(100)
+                    .setReadTimeout(100)
+                    .setConnectionProxy(
+                        new Proxy(Proxy.Type.HTTP, new InetSocketAddress("localhost", 1234)))
+                    .setProxyCredential(
+                        new PasswordAuthentication("username", "password".toCharArray())),
+                "2015-05-05")
             .build();
 
     @SuppressWarnings("deprecation")
@@ -37,7 +40,7 @@ public class RequestOptionsTest {
 
     assertNull(optsRebuilt.getClientId());
     assertNull(optsRebuilt.getIdempotencyKey());
-    assertNull(optsRebuilt.getStripeVersionOverride());
+    assertNull(RequestOptions.unsafeGetStripeVersionOverride(optsRebuilt));
     assertEquals(Stripe.DEFAULT_CONNECT_TIMEOUT, optsRebuilt.getConnectTimeout());
     assertEquals(Stripe.DEFAULT_READ_TIMEOUT, optsRebuilt.getReadTimeout());
     assertEquals(Stripe.getConnectionProxy(), optsRebuilt.getConnectionProxy());
@@ -47,17 +50,19 @@ public class RequestOptionsTest {
   @Test
   public void testToBuilderFullCopy() {
     RequestOptions opts =
-        RequestOptions.builder()
-            .setApiKey("sk_foo")
-            .setClientId("123")
-            .setIdempotencyKey("123")
-            .setStripeAccount("acct_bar")
-            .unsafeStripeVersionOverride("2015-05-05")
-            .setConnectTimeout(100)
-            .setReadTimeout(100)
-            .setConnectionProxy(
-                new Proxy(Proxy.Type.HTTP, new InetSocketAddress("localhost", 1234)))
-            .setProxyCredential(new PasswordAuthentication("username", "password".toCharArray()))
+        RequestOptionsBuilder.unsafeSetStripeVersionOverride(
+                RequestOptions.builder()
+                    .setApiKey("sk_foo")
+                    .setClientId("123")
+                    .setIdempotencyKey("123")
+                    .setStripeAccount("acct_bar")
+                    .setConnectTimeout(100)
+                    .setReadTimeout(100)
+                    .setConnectionProxy(
+                        new Proxy(Proxy.Type.HTTP, new InetSocketAddress("localhost", 1234)))
+                    .setProxyCredential(
+                        new PasswordAuthentication("username", "password".toCharArray())),
+                "2015-05-05")
             .build();
 
     RequestOptions optsRebuilt = opts.toBuilderFullCopy().build();
@@ -70,7 +75,8 @@ public class RequestOptionsTest {
     String stripeVersionOverride = "2015-05-05";
 
     RequestOptions.RequestOptionsBuilder builder =
-        RequestOptions.builder().unsafeStripeVersionOverride(stripeVersionOverride);
+        RequestOptionsBuilder.unsafeSetStripeVersionOverride(
+            RequestOptions.builder(), stripeVersionOverride);
 
     assertEquals(stripeVersionOverride, builder._getStripeVersionOverride());
   }
@@ -82,29 +88,31 @@ public class RequestOptionsTest {
         new PasswordAuthentication("username", "password".toCharArray());
 
     RequestOptions opts1 =
-        RequestOptions.builder()
-            .setApiKey("sk_foo")
-            .setClientId("123")
-            .setIdempotencyKey("123")
-            .setStripeAccount("acct_bar")
-            .unsafeStripeVersionOverride("2015-05-05")
-            .setConnectTimeout(100)
-            .setReadTimeout(200)
-            .setConnectionProxy(connectionProxy)
-            .setProxyCredential(proxyCredential)
+        RequestOptionsBuilder.unsafeSetStripeVersionOverride(
+                RequestOptions.builder()
+                    .setApiKey("sk_foo")
+                    .setClientId("123")
+                    .setIdempotencyKey("123")
+                    .setStripeAccount("acct_bar")
+                    .setConnectTimeout(100)
+                    .setReadTimeout(200)
+                    .setConnectionProxy(connectionProxy)
+                    .setProxyCredential(proxyCredential),
+                "2015-05-05")
             .build();
 
     RequestOptions opts2 =
-        RequestOptions.builder()
-            .setApiKey("sk_foo")
-            .setClientId("123")
-            .setIdempotencyKey("123")
-            .setStripeAccount("acct_bar")
-            .unsafeStripeVersionOverride("2015-05-05")
-            .setConnectTimeout(100)
-            .setReadTimeout(200)
-            .setConnectionProxy(connectionProxy)
-            .setProxyCredential(proxyCredential)
+        RequestOptionsBuilder.unsafeSetStripeVersionOverride(
+                RequestOptions.builder()
+                    .setApiKey("sk_foo")
+                    .setClientId("123")
+                    .setIdempotencyKey("123")
+                    .setStripeAccount("acct_bar")
+                    .setConnectTimeout(100)
+                    .setReadTimeout(200)
+                    .setConnectionProxy(connectionProxy)
+                    .setProxyCredential(proxyCredential),
+                "2015-05-05")
             .build();
 
     assertEquals(opts1, opts2);
