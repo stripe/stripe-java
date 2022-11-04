@@ -180,8 +180,9 @@ public class StripeRequest {
     headerMap.put("Authorization", Arrays.asList(String.format("Bearer %s", apiKey)));
 
     // Stripe-Version
-    if (options.getStripeVersionOverride() != null) {
-      headerMap.put("Stripe-Version", Arrays.asList(options.getStripeVersionOverride()));
+    if (RequestOptions.unsafeGetStripeVersionOverride(options) != null) {
+      headerMap.put(
+          "Stripe-Version", Arrays.asList(RequestOptions.unsafeGetStripeVersionOverride(options)));
     } else if (options.getStripeVersion() != null) {
       headerMap.put("Stripe-Version", Arrays.asList(options.getStripeVersion()));
     } else {
