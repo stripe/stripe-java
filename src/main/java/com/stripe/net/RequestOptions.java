@@ -84,8 +84,8 @@ public class RequestOptions {
     return stripeVersion;
   }
 
-  public String getStripeVersionOverride() {
-    return stripeVersionOverride;
+  public static String unsafeGetStripeVersionOverride(RequestOptions options) {
+    return options.stripeVersionOverride;
   }
 
   public int getReadTimeout() {
@@ -115,10 +115,33 @@ public class RequestOptions {
   /**
    * Convert request options to builder, retaining invariant values for the integration.
    *
+   * @deprecated prefer {@link toBuilderFullCopy} which fully copies the request options instead of
+   *     a subset of its options.
    * @return option builder.
    */
+  @Deprecated
   public RequestOptionsBuilder toBuilder() {
     return new RequestOptionsBuilder().setApiKey(this.apiKey).setStripeAccount(this.stripeAccount);
+  }
+
+  /**
+   * Convert request options to builder, copying all options.
+   *
+   * @return option builder.
+   */
+  public RequestOptionsBuilder toBuilderFullCopy() {
+    return RequestOptionsBuilder.unsafeSetStripeVersionOverride(
+        new RequestOptionsBuilder()
+            .setApiKey(this.apiKey)
+            .setClientId(this.clientId)
+            .setIdempotencyKey(this.idempotencyKey)
+            .setStripeAccount(this.stripeAccount)
+            .setConnectTimeout(this.connectTimeout)
+            .setReadTimeout(this.readTimeout)
+            .setMaxNetworkRetries(this.maxNetworkRetries)
+            .setConnectionProxy(this.connectionProxy)
+            .setProxyCredential(this.proxyCredential),
+        stripeVersionOverride);
   }
 
   public static final class RequestOptionsBuilder {
@@ -267,29 +290,25 @@ public class RequestOptions {
       return setStripeAccount(null);
     }
 
-    public String getStripeVersionOverride() {
+    /** For internal use only. */
+    String getStripeVersionOverride() {
       return this.stripeVersionOverride;
     }
 
     /**
-     * Do not use this except for in API where JSON response is not fully deserialized into explicit
-     * Stripe classes, but only passed to other clients as raw data -- essentially making request on
-     * behalf of others with their API version. One example is in {@link
-     * com.stripe.model.EphemeralKey#create(Map, RequestOptions)}. Setting this value in a typical
-     * scenario will result in deserialization error as the model classes have schema according to
-     * the pinned {@link Stripe#API_VERSION} and not the {@code stripeVersionOverride}
+     * This is for internal use only. See {@link com.stripe.model.EphemeralKey#create(Map,
+     * RequestOptions)}. Setting this yourself will result in a version mismatch between your
+     * request and this library's types, which can result in missing data and deserialization
+     * errors.
      *
-     * @param stripeVersionOverride stripe version override which belongs to the client to make
-     *     request on behalf of.
+     * <p>Static, so that it doesn't appear in IDE auto-completion alongside the other setters.
+     *
      * @return option builder
      */
-    public RequestOptionsBuilder setStripeVersionOverride(String stripeVersionOverride) {
-      this.stripeVersionOverride = normalizeStripeVersion(stripeVersionOverride);
-      return this;
-    }
-
-    public RequestOptionsBuilder clearStripeVersionOverride() {
-      return setStripeVersionOverride(null);
+    public static RequestOptionsBuilder unsafeSetStripeVersionOverride(
+        RequestOptionsBuilder builder, String stripeVersionOverride) {
+      builder.stripeVersionOverride = normalizeStripeVersion(stripeVersionOverride);
+      return builder;
     }
 
     /** Constructs a {@link RequestOptions} with the specified values. */
