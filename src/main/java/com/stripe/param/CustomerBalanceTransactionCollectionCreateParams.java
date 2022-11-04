@@ -21,11 +21,11 @@ public class CustomerBalanceTransactionCollectionCreateParams extends ApiRequest
 
   /**
    * Three-letter <a href="https://www.iso.org/iso-4217-currency-codes.html">ISO currency code</a>,
-   * in lowercase. Must be a <a href="https://stripe.com/docs/currencies">supported currency</a>. If
-   * the customer's <a
-   * href="https://stripe.com/docs/api/customers/object#customer_object-currency">{@code
-   * currency}</a> is set, this value must match it. If the customer's {@code currency} is not set,
-   * it will be updated to this value.
+   * in lowercase. Must be a <a href="https://stripe.com/docs/currencies">supported currency</a>.
+   * Specifies the <a
+   * href="https://stripe.com/docs/api/customers/object#customer_object-invoice_credit_balance">{@code
+   * invoice_credit_balance}</a> that this transaction will apply to. If the customer's {@code
+   * currency} is not set, it will be updated to this value.
    */
   @SerializedName("currency")
   String currency;
@@ -111,10 +111,10 @@ public class CustomerBalanceTransactionCollectionCreateParams extends ApiRequest
     /**
      * Three-letter <a href="https://www.iso.org/iso-4217-currency-codes.html">ISO currency
      * code</a>, in lowercase. Must be a <a href="https://stripe.com/docs/currencies">supported
-     * currency</a>. If the customer's <a
-     * href="https://stripe.com/docs/api/customers/object#customer_object-currency">{@code
-     * currency}</a> is set, this value must match it. If the customer's {@code currency} is not
-     * set, it will be updated to this value.
+     * currency</a>. Specifies the <a
+     * href="https://stripe.com/docs/api/customers/object#customer_object-invoice_credit_balance">{@code
+     * invoice_credit_balance}</a> that this transaction will apply to. If the customer's {@code
+     * currency} is not set, it will be updated to this value.
      */
     public Builder setCurrency(String currency) {
       this.currency = currency;

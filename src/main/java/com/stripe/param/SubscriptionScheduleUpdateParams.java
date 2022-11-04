@@ -341,6 +341,12 @@ public class SubscriptionScheduleUpdateParams extends ApiRequestParams {
     InvoiceSettings invoiceSettings;
 
     /**
+     * The account on behalf of which to charge, for each of the associated subscription's invoices.
+     */
+    @SerializedName("on_behalf_of")
+    Object onBehalfOf;
+
+    /**
      * The data with which to automatically create a Transfer for each of the associated
      * subscription's invoices.
      */
@@ -357,6 +363,7 @@ public class SubscriptionScheduleUpdateParams extends ApiRequestParams {
         Object description,
         Map<String, Object> extraParams,
         InvoiceSettings invoiceSettings,
+        Object onBehalfOf,
         Object transferData) {
       this.applicationFeePercent = applicationFeePercent;
       this.automaticTax = automaticTax;
@@ -367,6 +374,7 @@ public class SubscriptionScheduleUpdateParams extends ApiRequestParams {
       this.description = description;
       this.extraParams = extraParams;
       this.invoiceSettings = invoiceSettings;
+      this.onBehalfOf = onBehalfOf;
       this.transferData = transferData;
     }
 
@@ -393,6 +401,8 @@ public class SubscriptionScheduleUpdateParams extends ApiRequestParams {
 
       private InvoiceSettings invoiceSettings;
 
+      private Object onBehalfOf;
+
       private Object transferData;
 
       /** Finalize and obtain parameter instance from this builder. */
@@ -407,6 +417,7 @@ public class SubscriptionScheduleUpdateParams extends ApiRequestParams {
             this.description,
             this.extraParams,
             this.invoiceSettings,
+            this.onBehalfOf,
             this.transferData);
       }
 
@@ -543,6 +554,24 @@ public class SubscriptionScheduleUpdateParams extends ApiRequestParams {
       public Builder setInvoiceSettings(
           SubscriptionScheduleUpdateParams.DefaultSettings.InvoiceSettings invoiceSettings) {
         this.invoiceSettings = invoiceSettings;
+        return this;
+      }
+
+      /**
+       * The account on behalf of which to charge, for each of the associated subscription's
+       * invoices.
+       */
+      public Builder setOnBehalfOf(String onBehalfOf) {
+        this.onBehalfOf = onBehalfOf;
+        return this;
+      }
+
+      /**
+       * The account on behalf of which to charge, for each of the associated subscription's
+       * invoices.
+       */
+      public Builder setOnBehalfOf(EmptyParam onBehalfOf) {
+        this.onBehalfOf = onBehalfOf;
         return this;
       }
 
@@ -1091,6 +1120,12 @@ public class SubscriptionScheduleUpdateParams extends ApiRequestParams {
     Map<String, String> metadata;
 
     /**
+     * The account on behalf of which to charge, for each of the associated subscription's invoices.
+     */
+    @SerializedName("on_behalf_of")
+    Object onBehalfOf;
+
+    /**
      * Whether the subscription schedule will create <a
      * href="https://stripe.com/docs/billing/subscriptions/prorations">prorations</a> when
      * transitioning to this phase. The default value is {@code create_prorations}.
@@ -1144,6 +1179,7 @@ public class SubscriptionScheduleUpdateParams extends ApiRequestParams {
         List<SubscriptionScheduleUpdateParams.Phase.Item> items,
         Long iterations,
         Map<String, String> metadata,
+        Object onBehalfOf,
         ProrationBehavior prorationBehavior,
         Object startDate,
         TransferData transferData,
@@ -1166,6 +1202,7 @@ public class SubscriptionScheduleUpdateParams extends ApiRequestParams {
       this.items = items;
       this.iterations = iterations;
       this.metadata = metadata;
+      this.onBehalfOf = onBehalfOf;
       this.prorationBehavior = prorationBehavior;
       this.startDate = startDate;
       this.transferData = transferData;
@@ -1212,6 +1249,8 @@ public class SubscriptionScheduleUpdateParams extends ApiRequestParams {
 
       private Map<String, String> metadata;
 
+      private Object onBehalfOf;
+
       private ProrationBehavior prorationBehavior;
 
       private Object startDate;
@@ -1242,6 +1281,7 @@ public class SubscriptionScheduleUpdateParams extends ApiRequestParams {
             this.items,
             this.iterations,
             this.metadata,
+            this.onBehalfOf,
             this.prorationBehavior,
             this.startDate,
             this.transferData,
@@ -1576,6 +1616,24 @@ public class SubscriptionScheduleUpdateParams extends ApiRequestParams {
           this.metadata = new HashMap<>();
         }
         this.metadata.putAll(map);
+        return this;
+      }
+
+      /**
+       * The account on behalf of which to charge, for each of the associated subscription's
+       * invoices.
+       */
+      public Builder setOnBehalfOf(String onBehalfOf) {
+        this.onBehalfOf = onBehalfOf;
+        return this;
+      }
+
+      /**
+       * The account on behalf of which to charge, for each of the associated subscription's
+       * invoices.
+       */
+      public Builder setOnBehalfOf(EmptyParam onBehalfOf) {
+        this.onBehalfOf = onBehalfOf;
         return this;
       }
 
