@@ -9790,6 +9790,10 @@ public class SessionCreateParams extends ApiRequestParams {
     @SerializedName("metadata")
     Map<String, String> metadata;
 
+    /** The account on behalf of which to charge, for each of the subscription's invoices. */
+    @SerializedName("on_behalf_of")
+    String onBehalfOf;
+
     /**
      * If specified, the funds from the subscription's invoices will be transferred to the
      * destination and the ID of the resulting transfers will be found on the resulting charges.
@@ -9826,6 +9830,7 @@ public class SessionCreateParams extends ApiRequestParams {
         String description,
         Map<String, Object> extraParams,
         Map<String, String> metadata,
+        String onBehalfOf,
         TransferData transferData,
         Long trialEnd,
         Boolean trialFromPlan,
@@ -9836,6 +9841,7 @@ public class SessionCreateParams extends ApiRequestParams {
       this.description = description;
       this.extraParams = extraParams;
       this.metadata = metadata;
+      this.onBehalfOf = onBehalfOf;
       this.transferData = transferData;
       this.trialEnd = trialEnd;
       this.trialFromPlan = trialFromPlan;
@@ -9859,6 +9865,8 @@ public class SessionCreateParams extends ApiRequestParams {
 
       private Map<String, String> metadata;
 
+      private String onBehalfOf;
+
       private TransferData transferData;
 
       private Long trialEnd;
@@ -9876,6 +9884,7 @@ public class SessionCreateParams extends ApiRequestParams {
             this.description,
             this.extraParams,
             this.metadata,
+            this.onBehalfOf,
             this.transferData,
             this.trialEnd,
             this.trialFromPlan,
@@ -9989,6 +9998,12 @@ public class SessionCreateParams extends ApiRequestParams {
           this.metadata = new HashMap<>();
         }
         this.metadata.putAll(map);
+        return this;
+      }
+
+      /** The account on behalf of which to charge, for each of the subscription's invoices. */
+      public Builder setOnBehalfOf(String onBehalfOf) {
+        this.onBehalfOf = onBehalfOf;
         return this;
       }
 

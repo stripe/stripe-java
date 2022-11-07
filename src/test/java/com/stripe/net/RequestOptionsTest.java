@@ -78,7 +78,8 @@ public class RequestOptionsTest {
         RequestOptionsBuilder.unsafeSetStripeVersionOverride(
             RequestOptions.builder(), stripeVersionOverride);
 
-    assertEquals(stripeVersionOverride, builder._getStripeVersionOverride());
+    assertEquals(
+        stripeVersionOverride, RequestOptions.unsafeGetStripeVersionOverride(builder.build()));
   }
 
   @Test
