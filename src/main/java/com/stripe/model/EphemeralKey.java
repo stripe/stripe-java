@@ -77,33 +77,8 @@ public class EphemeralKey extends ApiResource implements HasId {
   }
 
   /** Invalidates a short-lived API key for a given resource. */
-  public EphemeralKey delete(EphemeralKeyDeleteParams params) throws StripeException {
-    return delete(params, (RequestOptions) null);
-  }
-
-  /** Creates a short-lived API key for a given resource. */
-  public static EphemeralKey create(Map<String, Object> params, RequestOptions options)
-      throws StripeException {
-    validateStripeVersionOverride(options);
-    String url = String.format("%s%s", Stripe.getApiBase(), "/v1/ephemeral_keys");
-    return ApiResource.request(
-        ApiResource.RequestMethod.POST, url, params, EphemeralKey.class, options);
-  }
-
-  /** Creates a short-lived API key for a given resource. */
-  public static EphemeralKey create(EphemeralKeyCreateParams params, RequestOptions options)
-      throws StripeException {
-    validateStripeVersionOverride(options);
-    String url = String.format("%s%s", Stripe.getApiBase(), "/v1/ephemeral_keys");
-    return ApiResource.request(
-        ApiResource.RequestMethod.POST, url, params, EphemeralKey.class, options);
-  }
-
-  /** Invalidates a short-lived API key for a given resource. */
   public EphemeralKey delete(Map<String, Object> params, RequestOptions options)
       throws StripeException {
-    validateStripeVersionOverride(options);
-
     String url =
         String.format(
             "%s%s",
@@ -111,13 +86,16 @@ public class EphemeralKey extends ApiResource implements HasId {
             String.format("/v1/ephemeral_keys/%s", ApiResource.urlEncodeId(this.getId())));
     return ApiResource.request(
         ApiResource.RequestMethod.DELETE, url, params, EphemeralKey.class, options);
+  }
+
+  /** Invalidates a short-lived API key for a given resource. */
+  public EphemeralKey delete(EphemeralKeyDeleteParams params) throws StripeException {
+    return delete(params, (RequestOptions) null);
   }
 
   /** Invalidates a short-lived API key for a given resource. */
   public EphemeralKey delete(EphemeralKeyDeleteParams params, RequestOptions options)
       throws StripeException {
-    validateStripeVersionOverride(options);
-
     String url =
         String.format(
             "%s%s",
@@ -127,11 +105,54 @@ public class EphemeralKey extends ApiResource implements HasId {
         ApiResource.RequestMethod.DELETE, url, params, EphemeralKey.class, options);
   }
 
-  private static void validateStripeVersionOverride(RequestOptions options)
-      throws IllegalArgumentException {
-    if (options.getStripeVersionOverride() == null) {
+  /** Creates a short-lived API key for a given resource. */
+  public static EphemeralKey create(Map<String, Object> params, RequestOptions options)
+      throws StripeException {
+    final String versionOverride;
+    if (!params.containsKey("stripe-version")) {
       throw new IllegalArgumentException(
-          "`stripeVersionOverride` must be specified in RequestOptions with stripe version of your mobile client.");
+          "`stripe-version` must be explicitly specified in "
+              + "`params` as the stripe version of your mobile client.");
     }
+    try {
+      versionOverride = (String) params.get("stripe-version");
+    } catch (ClassCastException e) {
+      throw new IllegalArgumentException(
+          "`stripe-version` must be explicitly specified in " + "`params` as a string");
+    }
+    if (options == null) {
+      options = RequestOptions.getDefault();
+    }
+    // Take "stripe-version" from params and plug it into RequestOptions
+    // so it will be sent in the Stripe-Version header
+    final RequestOptions overriddenOptions =
+        com.stripe.net.RequestOptions.RequestOptionsBuilder.unsafeSetStripeVersionOverride(
+                options.toBuilderFullCopy(), versionOverride)
+            .build();
+
+    // Remove "stripe-version" from params so that it is not sent in the
+    // request body.
+    final Map<String, Object> overriddenParams = new java.util.HashMap<String, Object>(params);
+    overriddenParams.remove("stripe-version");
+    String url = String.format("%s%s", Stripe.getApiBase(), "/v1/ephemeral_keys");
+    return ApiResource.request(
+        ApiResource.RequestMethod.POST,
+        url,
+        overriddenParams,
+        EphemeralKey.class,
+        overriddenOptions);
+  }
+
+  /** Creates a short-lived API key for a given resource. */
+  public static EphemeralKey create(EphemeralKeyCreateParams params, RequestOptions options)
+      throws StripeException {
+    checkNullTypedParams("/v1/ephemeral_keys", params);
+    Map<String, Object> paramMap = params.toMap();
+    if (!paramMap.containsKey("stripe-version")) {
+      throw new IllegalArgumentException(
+          "You must .setStripeVersion on EphemeralKeyCreateParams.builder() with"
+              + " the stripe version of your mobile client.");
+    }
+    return create(paramMap, options);
   }
 }

@@ -290,11 +290,6 @@ public class RequestOptions {
       return setStripeAccount(null);
     }
 
-    /** For internal use only. */
-    String getStripeVersionOverride() {
-      return this.stripeVersionOverride;
-    }
-
     /**
      * This is for internal use only. See {@link com.stripe.model.EphemeralKey#create(Map,
      * RequestOptions)}. Setting this yourself will result in a version mismatch between your
