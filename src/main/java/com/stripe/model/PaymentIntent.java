@@ -113,10 +113,6 @@ public class PaymentIntent extends ApiResource implements HasId, MetadataStore<P
   @SerializedName("capture_method")
   String captureMethod;
 
-  /** Charges that were created by this PaymentIntent, if any. */
-  @SerializedName("charges")
-  ChargeCollection charges;
-
   /**
    * The client secret of this PaymentIntent. Used for client-side retrieval using a publishable
    * key.
@@ -182,6 +178,12 @@ public class PaymentIntent extends ApiResource implements HasId, MetadataStore<P
    */
   @SerializedName("last_payment_error")
   StripeError lastPaymentError;
+
+  /** The latest charge created by this payment intent. */
+  @SerializedName("latest_charge")
+  @Getter(lombok.AccessLevel.NONE)
+  @Setter(lombok.AccessLevel.NONE)
+  ExpandableField<Charge> latestCharge;
 
   /**
    * Has the value {@code true} if the object exists in live mode or the value {@code false} if the
@@ -381,6 +383,24 @@ public class PaymentIntent extends ApiResource implements HasId, MetadataStore<P
 
   public void setInvoiceObject(Invoice expandableObject) {
     this.invoice = new ExpandableField<Invoice>(expandableObject.getId(), expandableObject);
+  }
+
+  /** Get ID of expandable {@code latestCharge} object. */
+  public String getLatestCharge() {
+    return (this.latestCharge != null) ? this.latestCharge.getId() : null;
+  }
+
+  public void setLatestCharge(String id) {
+    this.latestCharge = ApiResource.setExpandableFieldId(id, this.latestCharge);
+  }
+
+  /** Get expanded {@code latestCharge}. */
+  public Charge getLatestChargeObject() {
+    return (this.latestCharge != null) ? this.latestCharge.getExpanded() : null;
+  }
+
+  public void setLatestChargeObject(Charge expandableObject) {
+    this.latestCharge = new ExpandableField<Charge>(expandableObject.getId(), expandableObject);
   }
 
   /** Get ID of expandable {@code onBehalfOf} object. */
