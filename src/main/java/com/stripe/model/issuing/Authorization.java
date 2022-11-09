@@ -692,11 +692,18 @@ public class Authorization extends ApiResource
      * <p>One of {@code account_disabled}, {@code card_active}, {@code card_inactive}, {@code
      * cardholder_inactive}, {@code cardholder_verification_required}, {@code insufficient_funds},
      * {@code not_allowed}, {@code spending_controls}, {@code suspected_fraud}, {@code
-     * verification_failed}, {@code webhook_approved}, {@code webhook_declined}, or {@code
-     * webhook_timeout}.
+     * verification_failed}, {@code webhook_approved}, {@code webhook_declined}, {@code
+     * webhook_error}, or {@code webhook_timeout}.
      */
     @SerializedName("reason")
     String reason;
+
+    /**
+     * If approve/decline decision is directly responsed to the webhook with json payload and if the
+     * response is invalid (e.g., parsing errors), we surface the detailed message via this field.
+     */
+    @SerializedName("reason_message")
+    String reasonMessage;
 
     @Getter
     @Setter

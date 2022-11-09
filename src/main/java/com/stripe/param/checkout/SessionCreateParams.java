@@ -1553,26 +1553,6 @@ public class SessionCreateParams extends ApiRequestParams {
     AdjustableQuantity adjustableQuantity;
 
     /**
-     * [Deprecated] The amount to be collected per unit of the line item. If specified, must also
-     * pass {@code currency} and {@code name}.
-     */
-    @SerializedName("amount")
-    Long amount;
-
-    /**
-     * [Deprecated] Three-letter <a href="https://www.iso.org/iso-4217-currency-codes.html">ISO
-     * currency code</a>, in lowercase. Must be a <a
-     * href="https://stripe.com/docs/currencies">supported currency</a>. Required if {@code amount}
-     * is passed.
-     */
-    @SerializedName("currency")
-    String currency;
-
-    /** [Deprecated] The description for the line item, to be displayed on the Checkout page. */
-    @SerializedName("description")
-    String description;
-
-    /**
      * The <a href="https://stripe.com/docs/api/tax_rates">tax rates</a> that will be applied to
      * this line item depending on the customer's billing/shipping address. We currently support the
      * following countries: US, GB, AU, and all countries in the EU.
@@ -1588,21 +1568,6 @@ public class SessionCreateParams extends ApiRequestParams {
      */
     @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
     Map<String, Object> extraParams;
-
-    /**
-     * [Deprecated] A list of image URLs representing this line item. Each image can be up to 5 MB
-     * in size. If passing {@code price} or {@code price_data}, specify images on the associated
-     * product instead.
-     */
-    @SerializedName("images")
-    List<String> images;
-
-    /**
-     * [Deprecated] The name for the item to be displayed on the Checkout page. Required if {@code
-     * amount} is passed.
-     */
-    @SerializedName("name")
-    String name;
 
     /**
      * The ID of the <a href="https://stripe.com/docs/api/prices">Price</a> or <a
@@ -1635,25 +1600,15 @@ public class SessionCreateParams extends ApiRequestParams {
 
     private LineItem(
         AdjustableQuantity adjustableQuantity,
-        Long amount,
-        String currency,
-        String description,
         List<String> dynamicTaxRates,
         Map<String, Object> extraParams,
-        List<String> images,
-        String name,
         String price,
         PriceData priceData,
         Long quantity,
         List<String> taxRates) {
       this.adjustableQuantity = adjustableQuantity;
-      this.amount = amount;
-      this.currency = currency;
-      this.description = description;
       this.dynamicTaxRates = dynamicTaxRates;
       this.extraParams = extraParams;
-      this.images = images;
-      this.name = name;
       this.price = price;
       this.priceData = priceData;
       this.quantity = quantity;
@@ -1667,19 +1622,9 @@ public class SessionCreateParams extends ApiRequestParams {
     public static class Builder {
       private AdjustableQuantity adjustableQuantity;
 
-      private Long amount;
-
-      private String currency;
-
-      private String description;
-
       private List<String> dynamicTaxRates;
 
       private Map<String, Object> extraParams;
-
-      private List<String> images;
-
-      private String name;
 
       private String price;
 
@@ -1693,13 +1638,8 @@ public class SessionCreateParams extends ApiRequestParams {
       public SessionCreateParams.LineItem build() {
         return new SessionCreateParams.LineItem(
             this.adjustableQuantity,
-            this.amount,
-            this.currency,
-            this.description,
             this.dynamicTaxRates,
             this.extraParams,
-            this.images,
-            this.name,
             this.price,
             this.priceData,
             this.quantity,
@@ -1713,32 +1653,6 @@ public class SessionCreateParams extends ApiRequestParams {
       public Builder setAdjustableQuantity(
           SessionCreateParams.LineItem.AdjustableQuantity adjustableQuantity) {
         this.adjustableQuantity = adjustableQuantity;
-        return this;
-      }
-
-      /**
-       * [Deprecated] The amount to be collected per unit of the line item. If specified, must also
-       * pass {@code currency} and {@code name}.
-       */
-      public Builder setAmount(Long amount) {
-        this.amount = amount;
-        return this;
-      }
-
-      /**
-       * [Deprecated] Three-letter <a href="https://www.iso.org/iso-4217-currency-codes.html">ISO
-       * currency code</a>, in lowercase. Must be a <a
-       * href="https://stripe.com/docs/currencies">supported currency</a>. Required if {@code
-       * amount} is passed.
-       */
-      public Builder setCurrency(String currency) {
-        this.currency = currency;
-        return this;
-      }
-
-      /** [Deprecated] The description for the line item, to be displayed on the Checkout page. */
-      public Builder setDescription(String description) {
-        this.description = description;
         return this;
       }
 
@@ -1791,41 +1705,6 @@ public class SessionCreateParams extends ApiRequestParams {
           this.extraParams = new HashMap<>();
         }
         this.extraParams.putAll(map);
-        return this;
-      }
-
-      /**
-       * Add an element to `images` list. A list is initialized for the first `add/addAll` call, and
-       * subsequent calls adds additional elements to the original list. See {@link
-       * SessionCreateParams.LineItem#images} for the field documentation.
-       */
-      public Builder addImage(String element) {
-        if (this.images == null) {
-          this.images = new ArrayList<>();
-        }
-        this.images.add(element);
-        return this;
-      }
-
-      /**
-       * Add all elements to `images` list. A list is initialized for the first `add/addAll` call,
-       * and subsequent calls adds additional elements to the original list. See {@link
-       * SessionCreateParams.LineItem#images} for the field documentation.
-       */
-      public Builder addAllImage(List<String> elements) {
-        if (this.images == null) {
-          this.images = new ArrayList<>();
-        }
-        this.images.addAll(elements);
-        return this;
-      }
-
-      /**
-       * [Deprecated] The name for the item to be displayed on the Checkout page. Required if {@code
-       * amount} is passed.
-       */
-      public Builder setName(String name) {
-        this.name = name;
         return this;
       }
 
@@ -6902,17 +6781,9 @@ public class SessionCreateParams extends ApiRequestParams {
       @SerializedName("setup_future_usage")
       SetupFutureUsage setupFutureUsage;
 
-      /** Confirm that the payer has accepted the P24 terms and conditions. */
-      @SerializedName("tos_shown_and_accepted")
-      Boolean tosShownAndAccepted;
-
-      private Paynow(
-          Map<String, Object> extraParams,
-          SetupFutureUsage setupFutureUsage,
-          Boolean tosShownAndAccepted) {
+      private Paynow(Map<String, Object> extraParams, SetupFutureUsage setupFutureUsage) {
         this.extraParams = extraParams;
         this.setupFutureUsage = setupFutureUsage;
-        this.tosShownAndAccepted = tosShownAndAccepted;
       }
 
       public static Builder builder() {
@@ -6924,12 +6795,10 @@ public class SessionCreateParams extends ApiRequestParams {
 
         private SetupFutureUsage setupFutureUsage;
 
-        private Boolean tosShownAndAccepted;
-
         /** Finalize and obtain parameter instance from this builder. */
         public SessionCreateParams.PaymentMethodOptions.Paynow build() {
           return new SessionCreateParams.PaymentMethodOptions.Paynow(
-              this.extraParams, this.setupFutureUsage, this.tosShownAndAccepted);
+              this.extraParams, this.setupFutureUsage);
         }
 
         /**
@@ -6979,12 +6848,6 @@ public class SessionCreateParams extends ApiRequestParams {
         public Builder setSetupFutureUsage(
             SessionCreateParams.PaymentMethodOptions.Paynow.SetupFutureUsage setupFutureUsage) {
           this.setupFutureUsage = setupFutureUsage;
-          return this;
-        }
-
-        /** Confirm that the payer has accepted the P24 terms and conditions. */
-        public Builder setTosShownAndAccepted(Boolean tosShownAndAccepted) {
-          this.tosShownAndAccepted = tosShownAndAccepted;
           return this;
         }
       }
