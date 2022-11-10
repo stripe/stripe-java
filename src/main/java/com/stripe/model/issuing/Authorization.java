@@ -557,6 +557,10 @@ public class Authorization extends ApiResource
     /** State where the seller is located. */
     @SerializedName("state")
     String state;
+
+    /** URL provided by the merchant on a 3DS request. */
+    @SerializedName("url")
+    String url;
   }
 
   @Getter
@@ -762,5 +766,23 @@ public class Authorization extends ApiResource
      */
     @SerializedName("expiry_check")
     String expiryCheck;
+
+    /** 3D Secure details. */
+    @SerializedName("three_d_secure")
+    ThreeDSecure threeDSecure;
+
+    @Getter
+    @Setter
+    @EqualsAndHashCode(callSuper = false)
+    public static class ThreeDSecure extends StripeObject {
+      /**
+       * The outcome of the 3D Secure authentication request.
+       *
+       * <p>One of {@code attempt_acknowledged}, {@code authenticated}, {@code failed}, or {@code
+       * required}.
+       */
+      @SerializedName("result")
+      String result;
+    }
   }
 }
