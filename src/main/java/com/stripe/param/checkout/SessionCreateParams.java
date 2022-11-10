@@ -6917,17 +6917,9 @@ public class SessionCreateParams extends ApiRequestParams {
       @SerializedName("setup_future_usage")
       SetupFutureUsage setupFutureUsage;
 
-      /** Confirm that the payer has accepted the P24 terms and conditions. */
-      @SerializedName("tos_shown_and_accepted")
-      Boolean tosShownAndAccepted;
-
-      private Paynow(
-          Map<String, Object> extraParams,
-          SetupFutureUsage setupFutureUsage,
-          Boolean tosShownAndAccepted) {
+      private Paynow(Map<String, Object> extraParams, SetupFutureUsage setupFutureUsage) {
         this.extraParams = extraParams;
         this.setupFutureUsage = setupFutureUsage;
-        this.tosShownAndAccepted = tosShownAndAccepted;
       }
 
       public static Builder builder() {
@@ -6939,12 +6931,10 @@ public class SessionCreateParams extends ApiRequestParams {
 
         private SetupFutureUsage setupFutureUsage;
 
-        private Boolean tosShownAndAccepted;
-
         /** Finalize and obtain parameter instance from this builder. */
         public SessionCreateParams.PaymentMethodOptions.Paynow build() {
           return new SessionCreateParams.PaymentMethodOptions.Paynow(
-              this.extraParams, this.setupFutureUsage, this.tosShownAndAccepted);
+              this.extraParams, this.setupFutureUsage);
         }
 
         /**
@@ -6994,12 +6984,6 @@ public class SessionCreateParams extends ApiRequestParams {
         public Builder setSetupFutureUsage(
             SessionCreateParams.PaymentMethodOptions.Paynow.SetupFutureUsage setupFutureUsage) {
           this.setupFutureUsage = setupFutureUsage;
-          return this;
-        }
-
-        /** Confirm that the payer has accepted the P24 terms and conditions. */
-        public Builder setTosShownAndAccepted(Boolean tosShownAndAccepted) {
-          this.tosShownAndAccepted = tosShownAndAccepted;
           return this;
         }
       }
