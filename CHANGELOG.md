@@ -1,5 +1,11 @@
 # Changelog
 
+## 21.16.0-beta.1 - 2022-11-10
+* [#1475](https://github.com/stripe/stripe-java/pull/1475) API Updates for beta branch
+  * Updated stable APIs to the latest version
+  * Add support for `DiscountEnd` on `Discount`.
+  * Add support for `url` on `MerchantData`.
+
 ## 21.15.0 - 2022-11-08
 * [#1472](https://github.com/stripe/stripe-java/pull/1472) API Updates
   * Add support for new values `eg_tin`, `ph_tin`, and `tr_tin` on enums `CustomerCreateParams.tax_id_data[].type`, `InvoiceUpcomingLinesParams.customer_details.tax_ids[].type`, `InvoiceUpcomingParams.customer_details.tax_ids[].type`, `OrderCreateParams.tax_details.tax_ids[].type`, `OrderUpdateParams.tax_details.tax_ids[].type`, and `TaxIdCreateParams.type`
