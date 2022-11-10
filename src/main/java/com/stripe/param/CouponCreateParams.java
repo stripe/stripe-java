@@ -578,7 +578,10 @@ public class CouponCreateParams extends ApiRequestParams {
     ONCE("once"),
 
     @SerializedName("repeating")
-    REPEATING("repeating");
+    REPEATING("repeating"),
+
+    @SerializedName("variable")
+    VARIABLE("variable");
 
     @Getter(onMethod_ = {@Override})
     private final String value;

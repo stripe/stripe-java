@@ -557,6 +557,10 @@ public class Authorization extends ApiResource
     /** State where the seller is located. */
     @SerializedName("state")
     String state;
+
+    /** URL provided by the merchant on a 3DS request. */
+    @SerializedName("url")
+    String url;
   }
 
   @Getter
@@ -683,11 +687,18 @@ public class Authorization extends ApiResource
      * <p>One of {@code account_disabled}, {@code card_active}, {@code card_inactive}, {@code
      * cardholder_inactive}, {@code cardholder_verification_required}, {@code insufficient_funds},
      * {@code not_allowed}, {@code spending_controls}, {@code suspected_fraud}, {@code
-     * verification_failed}, {@code webhook_approved}, {@code webhook_declined}, or {@code
-     * webhook_timeout}.
+     * verification_failed}, {@code webhook_approved}, {@code webhook_declined}, {@code
+     * webhook_error}, or {@code webhook_timeout}.
      */
     @SerializedName("reason")
     String reason;
+
+    /**
+     * If approve/decline decision is directly responsed to the webhook with json payload and if the
+     * response is invalid (e.g., parsing errors), we surface the detailed message via this field.
+     */
+    @SerializedName("reason_message")
+    String reasonMessage;
   }
 
   @Getter
@@ -755,5 +766,23 @@ public class Authorization extends ApiResource
      */
     @SerializedName("expiry_check")
     String expiryCheck;
+
+    /** 3D Secure details. */
+    @SerializedName("three_d_secure")
+    ThreeDSecure threeDSecure;
+
+    @Getter
+    @Setter
+    @EqualsAndHashCode(callSuper = false)
+    public static class ThreeDSecure extends StripeObject {
+      /**
+       * The outcome of the 3D Secure authentication request.
+       *
+       * <p>One of {@code attempt_acknowledged}, {@code authenticated}, {@code failed}, or {@code
+       * required}.
+       */
+      @SerializedName("result")
+      String result;
+    }
   }
 }

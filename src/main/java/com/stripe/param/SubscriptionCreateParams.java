@@ -1275,6 +1275,10 @@ public class SubscriptionCreateParams extends ApiRequestParams {
       @SerializedName("discount")
       String discount;
 
+      /** Details to determine how long the discount should be applied for. */
+      @SerializedName("discount_end")
+      DiscountEnd discountEnd;
+
       /**
        * Map of extra parameters for custom features not available in this client library. The
        * content in this map is not serialized under this field's {@code @SerializedName} value.
@@ -1284,9 +1288,14 @@ public class SubscriptionCreateParams extends ApiRequestParams {
       @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
       Map<String, Object> extraParams;
 
-      private Discount(String coupon, String discount, Map<String, Object> extraParams) {
+      private Discount(
+          String coupon,
+          String discount,
+          DiscountEnd discountEnd,
+          Map<String, Object> extraParams) {
         this.coupon = coupon;
         this.discount = discount;
+        this.discountEnd = discountEnd;
         this.extraParams = extraParams;
       }
 
@@ -1299,12 +1308,14 @@ public class SubscriptionCreateParams extends ApiRequestParams {
 
         private String discount;
 
+        private DiscountEnd discountEnd;
+
         private Map<String, Object> extraParams;
 
         /** Finalize and obtain parameter instance from this builder. */
         public SubscriptionCreateParams.AddInvoiceItem.Discount build() {
           return new SubscriptionCreateParams.AddInvoiceItem.Discount(
-              this.coupon, this.discount, this.extraParams);
+              this.coupon, this.discount, this.discountEnd, this.extraParams);
         }
 
         /** ID of the coupon to create a new discount for. */
@@ -1316,6 +1327,13 @@ public class SubscriptionCreateParams extends ApiRequestParams {
         /** ID of an existing discount on the object (or one of its ancestors) to reuse. */
         public Builder setDiscount(String discount) {
           this.discount = discount;
+          return this;
+        }
+
+        /** Details to determine how long the discount should be applied for. */
+        public Builder setDiscountEnd(
+            SubscriptionCreateParams.AddInvoiceItem.Discount.DiscountEnd discountEnd) {
+          this.discountEnd = discountEnd;
           return this;
         }
 
@@ -1345,6 +1363,106 @@ public class SubscriptionCreateParams extends ApiRequestParams {
           }
           this.extraParams.putAll(map);
           return this;
+        }
+      }
+
+      @Getter
+      public static class DiscountEnd {
+        /**
+         * Map of extra parameters for custom features not available in this client library. The
+         * content in this map is not serialized under this field's {@code @SerializedName} value.
+         * Instead, each key/value pair is serialized as if the key is a root-level field
+         * (serialized) name in this param object. Effectively, this map is flattened to its parent
+         * instance.
+         */
+        @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
+        Map<String, Object> extraParams;
+
+        /** A precise Unix timestamp for the discount to end. Must be in the future. */
+        @SerializedName("timestamp")
+        Long timestamp;
+
+        /** The type of calculation made to determine when the discount ends. */
+        @SerializedName("type")
+        Type type;
+
+        private DiscountEnd(Map<String, Object> extraParams, Long timestamp, Type type) {
+          this.extraParams = extraParams;
+          this.timestamp = timestamp;
+          this.type = type;
+        }
+
+        public static Builder builder() {
+          return new Builder();
+        }
+
+        public static class Builder {
+          private Map<String, Object> extraParams;
+
+          private Long timestamp;
+
+          private Type type;
+
+          /** Finalize and obtain parameter instance from this builder. */
+          public SubscriptionCreateParams.AddInvoiceItem.Discount.DiscountEnd build() {
+            return new SubscriptionCreateParams.AddInvoiceItem.Discount.DiscountEnd(
+                this.extraParams, this.timestamp, this.type);
+          }
+
+          /**
+           * Add a key/value pair to `extraParams` map. A map is initialized for the first
+           * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
+           * map. See {@link
+           * SubscriptionCreateParams.AddInvoiceItem.Discount.DiscountEnd#extraParams} for the field
+           * documentation.
+           */
+          public Builder putExtraParam(String key, Object value) {
+            if (this.extraParams == null) {
+              this.extraParams = new HashMap<>();
+            }
+            this.extraParams.put(key, value);
+            return this;
+          }
+
+          /**
+           * Add all map key/value pairs to `extraParams` map. A map is initialized for the first
+           * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
+           * map. See {@link
+           * SubscriptionCreateParams.AddInvoiceItem.Discount.DiscountEnd#extraParams} for the field
+           * documentation.
+           */
+          public Builder putAllExtraParam(Map<String, Object> map) {
+            if (this.extraParams == null) {
+              this.extraParams = new HashMap<>();
+            }
+            this.extraParams.putAll(map);
+            return this;
+          }
+
+          /** A precise Unix timestamp for the discount to end. Must be in the future. */
+          public Builder setTimestamp(Long timestamp) {
+            this.timestamp = timestamp;
+            return this;
+          }
+
+          /** The type of calculation made to determine when the discount ends. */
+          public Builder setType(
+              SubscriptionCreateParams.AddInvoiceItem.Discount.DiscountEnd.Type type) {
+            this.type = type;
+            return this;
+          }
+        }
+
+        public enum Type implements ApiRequestParams.EnumParam {
+          @SerializedName("timestamp")
+          TIMESTAMP("timestamp");
+
+          @Getter(onMethod_ = {@Override})
+          private final String value;
+
+          Type(String value) {
+            this.value = value;
+          }
         }
       }
     }
@@ -1709,6 +1827,10 @@ public class SubscriptionCreateParams extends ApiRequestParams {
     @SerializedName("discount")
     String discount;
 
+    /** Details to determine how long the discount should be applied for. */
+    @SerializedName("discount_end")
+    DiscountEnd discountEnd;
+
     /**
      * Map of extra parameters for custom features not available in this client library. The content
      * in this map is not serialized under this field's {@code @SerializedName} value. Instead, each
@@ -1718,9 +1840,11 @@ public class SubscriptionCreateParams extends ApiRequestParams {
     @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
     Map<String, Object> extraParams;
 
-    private Discount(String coupon, String discount, Map<String, Object> extraParams) {
+    private Discount(
+        String coupon, String discount, DiscountEnd discountEnd, Map<String, Object> extraParams) {
       this.coupon = coupon;
       this.discount = discount;
+      this.discountEnd = discountEnd;
       this.extraParams = extraParams;
     }
 
@@ -1733,11 +1857,14 @@ public class SubscriptionCreateParams extends ApiRequestParams {
 
       private String discount;
 
+      private DiscountEnd discountEnd;
+
       private Map<String, Object> extraParams;
 
       /** Finalize and obtain parameter instance from this builder. */
       public SubscriptionCreateParams.Discount build() {
-        return new SubscriptionCreateParams.Discount(this.coupon, this.discount, this.extraParams);
+        return new SubscriptionCreateParams.Discount(
+            this.coupon, this.discount, this.discountEnd, this.extraParams);
       }
 
       /** ID of the coupon to create a new discount for. */
@@ -1749,6 +1876,12 @@ public class SubscriptionCreateParams extends ApiRequestParams {
       /** ID of an existing discount on the object (or one of its ancestors) to reuse. */
       public Builder setDiscount(String discount) {
         this.discount = discount;
+        return this;
+      }
+
+      /** Details to determine how long the discount should be applied for. */
+      public Builder setDiscountEnd(SubscriptionCreateParams.Discount.DiscountEnd discountEnd) {
+        this.discountEnd = discountEnd;
         return this;
       }
 
@@ -1776,6 +1909,102 @@ public class SubscriptionCreateParams extends ApiRequestParams {
         }
         this.extraParams.putAll(map);
         return this;
+      }
+    }
+
+    @Getter
+    public static class DiscountEnd {
+      /**
+       * Map of extra parameters for custom features not available in this client library. The
+       * content in this map is not serialized under this field's {@code @SerializedName} value.
+       * Instead, each key/value pair is serialized as if the key is a root-level field (serialized)
+       * name in this param object. Effectively, this map is flattened to its parent instance.
+       */
+      @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
+      Map<String, Object> extraParams;
+
+      /** A precise Unix timestamp for the discount to end. Must be in the future. */
+      @SerializedName("timestamp")
+      Long timestamp;
+
+      /** The type of calculation made to determine when the discount ends. */
+      @SerializedName("type")
+      Type type;
+
+      private DiscountEnd(Map<String, Object> extraParams, Long timestamp, Type type) {
+        this.extraParams = extraParams;
+        this.timestamp = timestamp;
+        this.type = type;
+      }
+
+      public static Builder builder() {
+        return new Builder();
+      }
+
+      public static class Builder {
+        private Map<String, Object> extraParams;
+
+        private Long timestamp;
+
+        private Type type;
+
+        /** Finalize and obtain parameter instance from this builder. */
+        public SubscriptionCreateParams.Discount.DiscountEnd build() {
+          return new SubscriptionCreateParams.Discount.DiscountEnd(
+              this.extraParams, this.timestamp, this.type);
+        }
+
+        /**
+         * Add a key/value pair to `extraParams` map. A map is initialized for the first
+         * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
+         * map. See {@link SubscriptionCreateParams.Discount.DiscountEnd#extraParams} for the field
+         * documentation.
+         */
+        public Builder putExtraParam(String key, Object value) {
+          if (this.extraParams == null) {
+            this.extraParams = new HashMap<>();
+          }
+          this.extraParams.put(key, value);
+          return this;
+        }
+
+        /**
+         * Add all map key/value pairs to `extraParams` map. A map is initialized for the first
+         * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
+         * map. See {@link SubscriptionCreateParams.Discount.DiscountEnd#extraParams} for the field
+         * documentation.
+         */
+        public Builder putAllExtraParam(Map<String, Object> map) {
+          if (this.extraParams == null) {
+            this.extraParams = new HashMap<>();
+          }
+          this.extraParams.putAll(map);
+          return this;
+        }
+
+        /** A precise Unix timestamp for the discount to end. Must be in the future. */
+        public Builder setTimestamp(Long timestamp) {
+          this.timestamp = timestamp;
+          return this;
+        }
+
+        /** The type of calculation made to determine when the discount ends. */
+        public Builder setType(SubscriptionCreateParams.Discount.DiscountEnd.Type type) {
+          this.type = type;
+          return this;
+        }
+      }
+
+      public enum Type implements ApiRequestParams.EnumParam {
+        @SerializedName("timestamp")
+        TIMESTAMP("timestamp");
+
+        @Getter(onMethod_ = {@Override})
+        private final String value;
+
+        Type(String value) {
+          this.value = value;
+        }
       }
     }
   }
@@ -2187,6 +2416,10 @@ public class SubscriptionCreateParams extends ApiRequestParams {
       @SerializedName("discount")
       String discount;
 
+      /** Details to determine how long the discount should be applied for. */
+      @SerializedName("discount_end")
+      DiscountEnd discountEnd;
+
       /**
        * Map of extra parameters for custom features not available in this client library. The
        * content in this map is not serialized under this field's {@code @SerializedName} value.
@@ -2196,9 +2429,14 @@ public class SubscriptionCreateParams extends ApiRequestParams {
       @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
       Map<String, Object> extraParams;
 
-      private Discount(String coupon, String discount, Map<String, Object> extraParams) {
+      private Discount(
+          String coupon,
+          String discount,
+          DiscountEnd discountEnd,
+          Map<String, Object> extraParams) {
         this.coupon = coupon;
         this.discount = discount;
+        this.discountEnd = discountEnd;
         this.extraParams = extraParams;
       }
 
@@ -2211,12 +2449,14 @@ public class SubscriptionCreateParams extends ApiRequestParams {
 
         private String discount;
 
+        private DiscountEnd discountEnd;
+
         private Map<String, Object> extraParams;
 
         /** Finalize and obtain parameter instance from this builder. */
         public SubscriptionCreateParams.Item.Discount build() {
           return new SubscriptionCreateParams.Item.Discount(
-              this.coupon, this.discount, this.extraParams);
+              this.coupon, this.discount, this.discountEnd, this.extraParams);
         }
 
         /** ID of the coupon to create a new discount for. */
@@ -2228,6 +2468,13 @@ public class SubscriptionCreateParams extends ApiRequestParams {
         /** ID of an existing discount on the object (or one of its ancestors) to reuse. */
         public Builder setDiscount(String discount) {
           this.discount = discount;
+          return this;
+        }
+
+        /** Details to determine how long the discount should be applied for. */
+        public Builder setDiscountEnd(
+            SubscriptionCreateParams.Item.Discount.DiscountEnd discountEnd) {
+          this.discountEnd = discountEnd;
           return this;
         }
 
@@ -2257,6 +2504,103 @@ public class SubscriptionCreateParams extends ApiRequestParams {
           }
           this.extraParams.putAll(map);
           return this;
+        }
+      }
+
+      @Getter
+      public static class DiscountEnd {
+        /**
+         * Map of extra parameters for custom features not available in this client library. The
+         * content in this map is not serialized under this field's {@code @SerializedName} value.
+         * Instead, each key/value pair is serialized as if the key is a root-level field
+         * (serialized) name in this param object. Effectively, this map is flattened to its parent
+         * instance.
+         */
+        @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
+        Map<String, Object> extraParams;
+
+        /** A precise Unix timestamp for the discount to end. Must be in the future. */
+        @SerializedName("timestamp")
+        Long timestamp;
+
+        /** The type of calculation made to determine when the discount ends. */
+        @SerializedName("type")
+        Type type;
+
+        private DiscountEnd(Map<String, Object> extraParams, Long timestamp, Type type) {
+          this.extraParams = extraParams;
+          this.timestamp = timestamp;
+          this.type = type;
+        }
+
+        public static Builder builder() {
+          return new Builder();
+        }
+
+        public static class Builder {
+          private Map<String, Object> extraParams;
+
+          private Long timestamp;
+
+          private Type type;
+
+          /** Finalize and obtain parameter instance from this builder. */
+          public SubscriptionCreateParams.Item.Discount.DiscountEnd build() {
+            return new SubscriptionCreateParams.Item.Discount.DiscountEnd(
+                this.extraParams, this.timestamp, this.type);
+          }
+
+          /**
+           * Add a key/value pair to `extraParams` map. A map is initialized for the first
+           * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
+           * map. See {@link SubscriptionCreateParams.Item.Discount.DiscountEnd#extraParams} for the
+           * field documentation.
+           */
+          public Builder putExtraParam(String key, Object value) {
+            if (this.extraParams == null) {
+              this.extraParams = new HashMap<>();
+            }
+            this.extraParams.put(key, value);
+            return this;
+          }
+
+          /**
+           * Add all map key/value pairs to `extraParams` map. A map is initialized for the first
+           * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
+           * map. See {@link SubscriptionCreateParams.Item.Discount.DiscountEnd#extraParams} for the
+           * field documentation.
+           */
+          public Builder putAllExtraParam(Map<String, Object> map) {
+            if (this.extraParams == null) {
+              this.extraParams = new HashMap<>();
+            }
+            this.extraParams.putAll(map);
+            return this;
+          }
+
+          /** A precise Unix timestamp for the discount to end. Must be in the future. */
+          public Builder setTimestamp(Long timestamp) {
+            this.timestamp = timestamp;
+            return this;
+          }
+
+          /** The type of calculation made to determine when the discount ends. */
+          public Builder setType(SubscriptionCreateParams.Item.Discount.DiscountEnd.Type type) {
+            this.type = type;
+            return this;
+          }
+        }
+
+        public enum Type implements ApiRequestParams.EnumParam {
+          @SerializedName("timestamp")
+          TIMESTAMP("timestamp");
+
+          @Getter(onMethod_ = {@Override})
+          private final String value;
+
+          Type(String value) {
+            this.value = value;
+          }
         }
       }
     }
