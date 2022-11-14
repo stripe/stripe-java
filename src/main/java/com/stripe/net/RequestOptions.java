@@ -4,6 +4,8 @@ import com.stripe.Stripe;
 import java.net.PasswordAuthentication;
 import java.net.Proxy;
 import java.util.Map;
+import java.util.Optional;
+
 import lombok.EqualsAndHashCode;
 
 @EqualsAndHashCode(callSuper = false)
@@ -26,6 +28,10 @@ public class RequestOptions {
   private final int maxNetworkRetries;
   private final Proxy connectionProxy;
   private final PasswordAuthentication proxyCredential;
+
+  /**
+   * Stripe API Base override when made on behalf of others.
+   */
   private final String apiBase;
 
   public static RequestOptions getDefault() {
@@ -304,7 +310,7 @@ public class RequestOptions {
 
 
     public RequestOptionsBuilder setApiBase(final String overriddenApiBase) {
-      this.apiBase = overriddenApiBase;
+      this.apiBase = normalizeApiBase(overriddenApiBase);
       return this;
     }
 
@@ -335,6 +341,15 @@ public class RequestOptions {
       throw new InvalidRequestOptionsException("Empty API key specified!");
     }
     return normalized;
+  }
+
+
+  private static String normalizeApiBase(String apiBase) {
+
+    return Optional.ofNullable(apiBase)
+      .map(String::trim)
+      .orElseGet(()-> Stripe.getApiBase());
+
   }
 
   private static String normalizeClientId(String clientId) {
