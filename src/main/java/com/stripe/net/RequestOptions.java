@@ -26,6 +26,7 @@ public class RequestOptions {
   private final int maxNetworkRetries;
   private final Proxy connectionProxy;
   private final PasswordAuthentication proxyCredential;
+  private final String apiBase;
 
   public static RequestOptions getDefault() {
     return new RequestOptions(
@@ -38,7 +39,8 @@ public class RequestOptions {
         Stripe.getReadTimeout(),
         Stripe.getMaxNetworkRetries(),
         Stripe.getConnectionProxy(),
-        Stripe.getProxyCredential());
+        Stripe.getProxyCredential(),
+        Stripe.getApiBase());
   }
 
   private RequestOptions(
@@ -51,7 +53,8 @@ public class RequestOptions {
       int readTimeout,
       int maxNetworkRetries,
       Proxy connectionProxy,
-      PasswordAuthentication proxyCredential) {
+      PasswordAuthentication proxyCredential,
+      String apiBase) {
     this.apiKey = apiKey;
     this.clientId = clientId;
     this.idempotencyKey = idempotencyKey;
@@ -62,6 +65,7 @@ public class RequestOptions {
     this.maxNetworkRetries = maxNetworkRetries;
     this.connectionProxy = connectionProxy;
     this.proxyCredential = proxyCredential;
+    this.apiBase = apiBase;
   }
 
   public String getApiKey() {
@@ -108,6 +112,10 @@ public class RequestOptions {
     return proxyCredential;
   }
 
+  public String getApiBase() {
+    return apiBase;
+  }
+
   public static RequestOptionsBuilder builder() {
     return new RequestOptionsBuilder();
   }
@@ -132,6 +140,7 @@ public class RequestOptions {
     private int maxNetworkRetries;
     private Proxy connectionProxy;
     private PasswordAuthentication proxyCredential;
+    private String apiBase;
 
     /**
      * Constructs a request options builder with the global parameters (API key and client ID) as
@@ -145,6 +154,7 @@ public class RequestOptions {
       this.maxNetworkRetries = Stripe.getMaxNetworkRetries();
       this.connectionProxy = Stripe.getConnectionProxy();
       this.proxyCredential = Stripe.getProxyCredential();
+      this.apiBase = Stripe.getApiBase();
     }
 
     public String getApiKey() {
@@ -292,6 +302,12 @@ public class RequestOptions {
       return setStripeVersionOverride(null);
     }
 
+
+    public RequestOptionsBuilder setApiBase(final String overriddenApiBase) {
+      this.apiBase = overriddenApiBase;
+      return this;
+    }
+
     /** Constructs a {@link RequestOptions} with the specified values. */
     public RequestOptions build() {
       return new RequestOptions(
@@ -304,7 +320,8 @@ public class RequestOptions {
           readTimeout,
           maxNetworkRetries,
           connectionProxy,
-          proxyCredential);
+          proxyCredential,
+          apiBase);
     }
   }
 

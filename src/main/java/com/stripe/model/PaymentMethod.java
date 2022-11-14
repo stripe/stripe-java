@@ -334,7 +334,7 @@ public class PaymentMethod extends ApiResource implements HasId, MetadataStore<P
    */
   public static PaymentMethod create(Map<String, Object> params, RequestOptions options)
       throws StripeException {
-    String url = String.format("%s%s", Stripe.getApiBase(), "/v1/payment_methods");
+    String url = String.format("%s%s",options.getApiBase(), "/v1/payment_methods");
     return ApiResource.request(
         ApiResource.RequestMethod.POST, url, params, PaymentMethod.class, options);
   }
