@@ -435,20 +435,20 @@ public class PaymentMethod extends ApiResource implements HasId, MetadataStore<P
   }
 
   /**
-   * Returns a list of PaymentMethods attached to the StripeAccount. For listing a customer’s
-   * payment methods, you should use <a
+   * Returns a list of PaymentMethods for Treasury flows. If you want to list the PaymentMethods
+   * attached to a Customer for payments, you should use the <a
    * href="https://stripe.com/docs/api/payment_methods/customer_list">List a Customer’s
-   * PaymentMethods</a>
+   * PaymentMethods</a> API instead.
    */
   public static PaymentMethodCollection list(Map<String, Object> params) throws StripeException {
     return list(params, (RequestOptions) null);
   }
 
   /**
-   * Returns a list of PaymentMethods attached to the StripeAccount. For listing a customer’s
-   * payment methods, you should use <a
+   * Returns a list of PaymentMethods for Treasury flows. If you want to list the PaymentMethods
+   * attached to a Customer for payments, you should use the <a
    * href="https://stripe.com/docs/api/payment_methods/customer_list">List a Customer’s
-   * PaymentMethods</a>
+   * PaymentMethods</a> API instead.
    */
   public static PaymentMethodCollection list(Map<String, Object> params, RequestOptions options)
       throws StripeException {
@@ -457,10 +457,10 @@ public class PaymentMethod extends ApiResource implements HasId, MetadataStore<P
   }
 
   /**
-   * Returns a list of PaymentMethods attached to the StripeAccount. For listing a customer’s
-   * payment methods, you should use <a
+   * Returns a list of PaymentMethods for Treasury flows. If you want to list the PaymentMethods
+   * attached to a Customer for payments, you should use the <a
    * href="https://stripe.com/docs/api/payment_methods/customer_list">List a Customer’s
-   * PaymentMethods</a>
+   * PaymentMethods</a> API instead.
    */
   public static PaymentMethodCollection list(PaymentMethodListParams params)
       throws StripeException {
@@ -468,10 +468,10 @@ public class PaymentMethod extends ApiResource implements HasId, MetadataStore<P
   }
 
   /**
-   * Returns a list of PaymentMethods attached to the StripeAccount. For listing a customer’s
-   * payment methods, you should use <a
+   * Returns a list of PaymentMethods for Treasury flows. If you want to list the PaymentMethods
+   * attached to a Customer for payments, you should use the <a
    * href="https://stripe.com/docs/api/payment_methods/customer_list">List a Customer’s
-   * PaymentMethods</a>
+   * PaymentMethods</a> API instead.
    */
   public static PaymentMethodCollection list(PaymentMethodListParams params, RequestOptions options)
       throws StripeException {
