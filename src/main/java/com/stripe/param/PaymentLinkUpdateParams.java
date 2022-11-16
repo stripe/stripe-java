@@ -35,6 +35,10 @@ public class PaymentLinkUpdateParams extends ApiRequestParams {
   @SerializedName("billing_address_collection")
   BillingAddressCollection billingAddressCollection;
 
+  /** Display additional text for your customers using custom text. */
+  @SerializedName("custom_text")
+  CustomText customText;
+
   /**
    * Configures whether <a href="https://stripe.com/docs/api/checkout/sessions">checkout
    * sessions</a> created by this payment link create a <a
@@ -107,6 +111,7 @@ public class PaymentLinkUpdateParams extends ApiRequestParams {
       Boolean allowPromotionCodes,
       AutomaticTax automaticTax,
       BillingAddressCollection billingAddressCollection,
+      CustomText customText,
       CustomerCreation customerCreation,
       List<String> expand,
       Map<String, Object> extraParams,
@@ -120,6 +125,7 @@ public class PaymentLinkUpdateParams extends ApiRequestParams {
     this.allowPromotionCodes = allowPromotionCodes;
     this.automaticTax = automaticTax;
     this.billingAddressCollection = billingAddressCollection;
+    this.customText = customText;
     this.customerCreation = customerCreation;
     this.expand = expand;
     this.extraParams = extraParams;
@@ -145,6 +151,8 @@ public class PaymentLinkUpdateParams extends ApiRequestParams {
 
     private BillingAddressCollection billingAddressCollection;
 
+    private CustomText customText;
+
     private CustomerCreation customerCreation;
 
     private List<String> expand;
@@ -169,6 +177,7 @@ public class PaymentLinkUpdateParams extends ApiRequestParams {
           this.allowPromotionCodes,
           this.automaticTax,
           this.billingAddressCollection,
+          this.customText,
           this.customerCreation,
           this.expand,
           this.extraParams,
@@ -210,6 +219,12 @@ public class PaymentLinkUpdateParams extends ApiRequestParams {
     public Builder setBillingAddressCollection(
         PaymentLinkUpdateParams.BillingAddressCollection billingAddressCollection) {
       this.billingAddressCollection = billingAddressCollection;
+      return this;
+    }
+
+    /** Display additional text for your customers using custom text. */
+    public Builder setCustomText(PaymentLinkUpdateParams.CustomText customText) {
+      this.customText = customText;
       return this;
     }
 
@@ -762,6 +777,254 @@ public class PaymentLinkUpdateParams extends ApiRequestParams {
         }
         this.extraParams.putAll(map);
         return this;
+      }
+    }
+  }
+
+  @Getter
+  public static class CustomText {
+    /**
+     * Map of extra parameters for custom features not available in this client library. The content
+     * in this map is not serialized under this field's {@code @SerializedName} value. Instead, each
+     * key/value pair is serialized as if the key is a root-level field (serialized) name in this
+     * param object. Effectively, this map is flattened to its parent instance.
+     */
+    @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
+    Map<String, Object> extraParams;
+
+    /** Custom text that should be displayed alongside shipping address collection. */
+    @SerializedName("shipping_address")
+    Object shippingAddress;
+
+    /** Custom text that should be displayed alongside the payment confirmation button. */
+    @SerializedName("submit")
+    Object submit;
+
+    private CustomText(Map<String, Object> extraParams, Object shippingAddress, Object submit) {
+      this.extraParams = extraParams;
+      this.shippingAddress = shippingAddress;
+      this.submit = submit;
+    }
+
+    public static Builder builder() {
+      return new Builder();
+    }
+
+    public static class Builder {
+      private Map<String, Object> extraParams;
+
+      private Object shippingAddress;
+
+      private Object submit;
+
+      /** Finalize and obtain parameter instance from this builder. */
+      public PaymentLinkUpdateParams.CustomText build() {
+        return new PaymentLinkUpdateParams.CustomText(
+            this.extraParams, this.shippingAddress, this.submit);
+      }
+
+      /**
+       * Add a key/value pair to `extraParams` map. A map is initialized for the first `put/putAll`
+       * call, and subsequent calls add additional key/value pairs to the original map. See {@link
+       * PaymentLinkUpdateParams.CustomText#extraParams} for the field documentation.
+       */
+      public Builder putExtraParam(String key, Object value) {
+        if (this.extraParams == null) {
+          this.extraParams = new HashMap<>();
+        }
+        this.extraParams.put(key, value);
+        return this;
+      }
+
+      /**
+       * Add all map key/value pairs to `extraParams` map. A map is initialized for the first
+       * `put/putAll` call, and subsequent calls add additional key/value pairs to the original map.
+       * See {@link PaymentLinkUpdateParams.CustomText#extraParams} for the field documentation.
+       */
+      public Builder putAllExtraParam(Map<String, Object> map) {
+        if (this.extraParams == null) {
+          this.extraParams = new HashMap<>();
+        }
+        this.extraParams.putAll(map);
+        return this;
+      }
+
+      /** Custom text that should be displayed alongside shipping address collection. */
+      public Builder setShippingAddress(
+          PaymentLinkUpdateParams.CustomText.ShippingAddress shippingAddress) {
+        this.shippingAddress = shippingAddress;
+        return this;
+      }
+
+      /** Custom text that should be displayed alongside shipping address collection. */
+      public Builder setShippingAddress(EmptyParam shippingAddress) {
+        this.shippingAddress = shippingAddress;
+        return this;
+      }
+
+      /** Custom text that should be displayed alongside the payment confirmation button. */
+      public Builder setSubmit(PaymentLinkUpdateParams.CustomText.Submit submit) {
+        this.submit = submit;
+        return this;
+      }
+
+      /** Custom text that should be displayed alongside the payment confirmation button. */
+      public Builder setSubmit(EmptyParam submit) {
+        this.submit = submit;
+        return this;
+      }
+    }
+
+    @Getter
+    public static class ShippingAddress {
+      /**
+       * Map of extra parameters for custom features not available in this client library. The
+       * content in this map is not serialized under this field's {@code @SerializedName} value.
+       * Instead, each key/value pair is serialized as if the key is a root-level field (serialized)
+       * name in this param object. Effectively, this map is flattened to its parent instance.
+       */
+      @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
+      Map<String, Object> extraParams;
+
+      /** Text may be up to 500 characters in length. */
+      @SerializedName("message")
+      Object message;
+
+      private ShippingAddress(Map<String, Object> extraParams, Object message) {
+        this.extraParams = extraParams;
+        this.message = message;
+      }
+
+      public static Builder builder() {
+        return new Builder();
+      }
+
+      public static class Builder {
+        private Map<String, Object> extraParams;
+
+        private Object message;
+
+        /** Finalize and obtain parameter instance from this builder. */
+        public PaymentLinkUpdateParams.CustomText.ShippingAddress build() {
+          return new PaymentLinkUpdateParams.CustomText.ShippingAddress(
+              this.extraParams, this.message);
+        }
+
+        /**
+         * Add a key/value pair to `extraParams` map. A map is initialized for the first
+         * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
+         * map. See {@link PaymentLinkUpdateParams.CustomText.ShippingAddress#extraParams} for the
+         * field documentation.
+         */
+        public Builder putExtraParam(String key, Object value) {
+          if (this.extraParams == null) {
+            this.extraParams = new HashMap<>();
+          }
+          this.extraParams.put(key, value);
+          return this;
+        }
+
+        /**
+         * Add all map key/value pairs to `extraParams` map. A map is initialized for the first
+         * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
+         * map. See {@link PaymentLinkUpdateParams.CustomText.ShippingAddress#extraParams} for the
+         * field documentation.
+         */
+        public Builder putAllExtraParam(Map<String, Object> map) {
+          if (this.extraParams == null) {
+            this.extraParams = new HashMap<>();
+          }
+          this.extraParams.putAll(map);
+          return this;
+        }
+
+        /** Text may be up to 500 characters in length. */
+        public Builder setMessage(String message) {
+          this.message = message;
+          return this;
+        }
+
+        /** Text may be up to 500 characters in length. */
+        public Builder setMessage(EmptyParam message) {
+          this.message = message;
+          return this;
+        }
+      }
+    }
+
+    @Getter
+    public static class Submit {
+      /**
+       * Map of extra parameters for custom features not available in this client library. The
+       * content in this map is not serialized under this field's {@code @SerializedName} value.
+       * Instead, each key/value pair is serialized as if the key is a root-level field (serialized)
+       * name in this param object. Effectively, this map is flattened to its parent instance.
+       */
+      @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
+      Map<String, Object> extraParams;
+
+      /** Text may be up to 500 characters in length. */
+      @SerializedName("message")
+      Object message;
+
+      private Submit(Map<String, Object> extraParams, Object message) {
+        this.extraParams = extraParams;
+        this.message = message;
+      }
+
+      public static Builder builder() {
+        return new Builder();
+      }
+
+      public static class Builder {
+        private Map<String, Object> extraParams;
+
+        private Object message;
+
+        /** Finalize and obtain parameter instance from this builder. */
+        public PaymentLinkUpdateParams.CustomText.Submit build() {
+          return new PaymentLinkUpdateParams.CustomText.Submit(this.extraParams, this.message);
+        }
+
+        /**
+         * Add a key/value pair to `extraParams` map. A map is initialized for the first
+         * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
+         * map. See {@link PaymentLinkUpdateParams.CustomText.Submit#extraParams} for the field
+         * documentation.
+         */
+        public Builder putExtraParam(String key, Object value) {
+          if (this.extraParams == null) {
+            this.extraParams = new HashMap<>();
+          }
+          this.extraParams.put(key, value);
+          return this;
+        }
+
+        /**
+         * Add all map key/value pairs to `extraParams` map. A map is initialized for the first
+         * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
+         * map. See {@link PaymentLinkUpdateParams.CustomText.Submit#extraParams} for the field
+         * documentation.
+         */
+        public Builder putAllExtraParam(Map<String, Object> map) {
+          if (this.extraParams == null) {
+            this.extraParams = new HashMap<>();
+          }
+          this.extraParams.putAll(map);
+          return this;
+        }
+
+        /** Text may be up to 500 characters in length. */
+        public Builder setMessage(String message) {
+          this.message = message;
+          return this;
+        }
+
+        /** Text may be up to 500 characters in length. */
+        public Builder setMessage(EmptyParam message) {
+          this.message = message;
+          return this;
+        }
       }
     }
   }

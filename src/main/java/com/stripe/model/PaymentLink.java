@@ -85,6 +85,9 @@ public class PaymentLink extends ApiResource implements HasId, MetadataStore<Pay
   @SerializedName("currency")
   String currency;
 
+  @SerializedName("custom_text")
+  CustomText customText;
+
   /**
    * Configuration for Customer creation during checkout.
    *
@@ -466,6 +469,37 @@ public class PaymentLink extends ApiResource implements HasId, MetadataStore<Pay
      */
     @SerializedName("terms_of_service")
     String termsOfService;
+  }
+
+  @Getter
+  @Setter
+  @EqualsAndHashCode(callSuper = false)
+  public static class CustomText extends StripeObject {
+    /** Custom text that should be displayed alongside shipping address collection. */
+    @SerializedName("shipping_address")
+    ShippingAddress shippingAddress;
+
+    /** Custom text that should be displayed alongside the payment confirmation button. */
+    @SerializedName("submit")
+    Submit submit;
+
+    @Getter
+    @Setter
+    @EqualsAndHashCode(callSuper = false)
+    public static class ShippingAddress extends StripeObject {
+      /** Text may be up to 500 characters in length. */
+      @SerializedName("message")
+      String message;
+    }
+
+    @Getter
+    @Setter
+    @EqualsAndHashCode(callSuper = false)
+    public static class Submit extends StripeObject {
+      /** Text may be up to 500 characters in length. */
+      @SerializedName("message")
+      String message;
+    }
   }
 
   @Getter
