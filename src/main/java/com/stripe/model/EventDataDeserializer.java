@@ -17,7 +17,7 @@ public class EventDataDeserializer implements JsonDeserializer<Event.Data> {
 
   /**
    * Deserializes the JSON payload contained in an event's {@code data} attribute into an {@link
-   * Event.Data} instance.
+   * EventData} instance.
    */
   @Override
   public Event.Data deserialize(JsonElement json, Type typeOfT, JsonDeserializationContext context)
