@@ -248,7 +248,7 @@ public class ReceivedDebit extends ApiResource implements HasId {
     String type;
 
     @SerializedName("us_bank_account")
-    ReceivedCredit.InitiatingPaymentMethodDetails.UsBankAccount usBankAccount;
+    UsBankAccount usBankAccount;
 
     @Getter
     @Setter
@@ -346,15 +346,6 @@ public class ReceivedDebit extends ApiResource implements HasId {
      */
     @SerializedName("restricted_reason")
     String restrictedReason;
-  }
-
-  @Getter
-  @Setter
-  @EqualsAndHashCode(callSuper = false)
-  public static class StatusTransitions extends StripeObject {
-    /** Timestamp describing when the DebitReversal changed status to {@code completed}. */
-    @SerializedName("completed_at")
-    Long completedAt;
   }
 
   public static class TestHelpers {

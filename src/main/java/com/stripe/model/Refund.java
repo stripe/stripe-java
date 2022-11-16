@@ -21,10 +21,6 @@ import lombok.Setter;
  * {@code Refund} objects allow you to refund a charge that has previously been created but not yet
  * refunded. Funds will be refunded to the credit or debit card that was originally charged.
  *
- * <p>Stripe Tax users with recurring payments and invoices can create <a
- * href="https://stripe.com/docs/api/credit_notes">Credit Notes</a>, which reduce overall tax
- * liability because tax is correctly recalculated and apportioned to the related invoice.
- *
  * <p>Related guide: <a href="https://stripe.com/docs/refunds">Refunds</a>.
  */
 @Getter
@@ -496,35 +492,35 @@ public class Refund extends ApiResource implements MetadataStore<Refund>, Balanc
   public static class NextAction extends StripeObject {
     /** Contains the refund details. */
     @SerializedName("display_details")
-    NextActionDisplayDetails displayDetails;
+    DisplayDetails displayDetails;
 
     /** Type of the next action to perform. */
     @SerializedName("type")
     String type;
-  }
-
-  @Getter
-  @Setter
-  @EqualsAndHashCode(callSuper = false)
-  public static class NextActionDisplayDetails extends StripeObject {
-    @SerializedName("email_sent")
-    EmailSent emailSent;
-
-    /** The expiry timestamp. */
-    @SerializedName("expires_at")
-    Long expiresAt;
 
     @Getter
     @Setter
     @EqualsAndHashCode(callSuper = false)
-    public static class EmailSent extends StripeObject {
-      /** The timestamp when the email was sent. */
-      @SerializedName("email_sent_at")
-      Long emailSentAt;
+    public static class DisplayDetails extends StripeObject {
+      @SerializedName("email_sent")
+      EmailSent emailSent;
 
-      /** The recipient's email address. */
-      @SerializedName("email_sent_to")
-      String emailSentTo;
+      /** The expiry timestamp. */
+      @SerializedName("expires_at")
+      Long expiresAt;
+
+      @Getter
+      @Setter
+      @EqualsAndHashCode(callSuper = false)
+      public static class EmailSent extends StripeObject {
+        /** The timestamp when the email was sent. */
+        @SerializedName("email_sent_at")
+        Long emailSentAt;
+
+        /** The recipient's email address. */
+        @SerializedName("email_sent_to")
+        String emailSentTo;
+      }
     }
   }
 

@@ -40,11 +40,11 @@ public class Person extends ApiResource implements HasId, MetadataStore<Person> 
 
   /** The Kana variation of the person's address (Japan only). */
   @SerializedName("address_kana")
-  JapanAddress addressKana;
+  AddressKana addressKana;
 
   /** The Kanji variation of the person's address (Japan only). */
   @SerializedName("address_kanji")
-  JapanAddress addressKanji;
+  AddressKanji addressKanji;
 
   /** Time at which the object was created. Measured in seconds since the Unix epoch. */
   @SerializedName("created")
@@ -55,7 +55,7 @@ public class Person extends ApiResource implements HasId, MetadataStore<Person> 
   Boolean deleted;
 
   @SerializedName("dob")
-  DateOfBirth dob;
+  Dob dob;
 
   /** The person's email address. */
   @SerializedName("email")
@@ -265,7 +265,79 @@ public class Person extends ApiResource implements HasId, MetadataStore<Person> 
   @Getter
   @Setter
   @EqualsAndHashCode(callSuper = false)
-  public static class DateOfBirth extends StripeObject {
+  public static class AddressKana extends StripeObject {
+    /** City/Ward. */
+    @SerializedName("city")
+    String city;
+
+    /**
+     * Two-letter country code (<a href="https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2">ISO
+     * 3166-1 alpha-2</a>).
+     */
+    @SerializedName("country")
+    String country;
+
+    /** Block/Building number. */
+    @SerializedName("line1")
+    String line1;
+
+    /** Building details. */
+    @SerializedName("line2")
+    String line2;
+
+    /** ZIP or postal code. */
+    @SerializedName("postal_code")
+    String postalCode;
+
+    /** Prefecture. */
+    @SerializedName("state")
+    String state;
+
+    /** Town/cho-me. */
+    @SerializedName("town")
+    String town;
+  }
+
+  @Getter
+  @Setter
+  @EqualsAndHashCode(callSuper = false)
+  public static class AddressKanji extends StripeObject {
+    /** City/Ward. */
+    @SerializedName("city")
+    String city;
+
+    /**
+     * Two-letter country code (<a href="https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2">ISO
+     * 3166-1 alpha-2</a>).
+     */
+    @SerializedName("country")
+    String country;
+
+    /** Block/Building number. */
+    @SerializedName("line1")
+    String line1;
+
+    /** Building details. */
+    @SerializedName("line2")
+    String line2;
+
+    /** ZIP or postal code. */
+    @SerializedName("postal_code")
+    String postalCode;
+
+    /** Prefecture. */
+    @SerializedName("state")
+    String state;
+
+    /** Town/cho-me. */
+    @SerializedName("town")
+    String town;
+  }
+
+  @Getter
+  @Setter
+  @EqualsAndHashCode(callSuper = false)
+  public static class Dob extends StripeObject {
     /** The day of birth, between 1 and 31. */
     @SerializedName("day")
     Long day;
@@ -404,42 +476,6 @@ public class Person extends ApiResource implements HasId, MetadataStore<Person> 
   @Getter
   @Setter
   @EqualsAndHashCode(callSuper = false)
-  public static class JapanAddress extends StripeObject {
-    /** City/Ward. */
-    @SerializedName("city")
-    String city;
-
-    /**
-     * Two-letter country code (<a href="https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2">ISO
-     * 3166-1 alpha-2</a>).
-     */
-    @SerializedName("country")
-    String country;
-
-    /** Block/Building number. */
-    @SerializedName("line1")
-    String line1;
-
-    /** Building details. */
-    @SerializedName("line2")
-    String line2;
-
-    /** ZIP or postal code. */
-    @SerializedName("postal_code")
-    String postalCode;
-
-    /** Prefecture. */
-    @SerializedName("state")
-    String state;
-
-    /** Town/cho-me. */
-    @SerializedName("town")
-    String town;
-  }
-
-  @Getter
-  @Setter
-  @EqualsAndHashCode(callSuper = false)
   public static class Relationship extends StripeObject {
     /**
      * Whether the person is a director of the account's legal entity. Directors are typically
@@ -503,7 +539,7 @@ public class Person extends ApiResource implements HasId, MetadataStore<Person> 
      * verification failed.
      */
     @SerializedName("errors")
-    List<Account.Requirements.Errors> errors;
+    List<Person.Requirements.Errors> errors;
 
     /**
      * Fields that need to be collected assuming all volume thresholds are reached. As they become
@@ -543,6 +579,58 @@ public class Person extends ApiResource implements HasId, MetadataStore<Person> 
       @SerializedName("original_fields_due")
       List<String> originalFieldsDue;
     }
+
+    @Getter
+    @Setter
+    @EqualsAndHashCode(callSuper = false)
+    public static class Errors extends StripeObject {
+      /**
+       * The code for the type of error.
+       *
+       * <p>One of {@code invalid_address_city_state_postal_code}, {@code invalid_dob_age_under_18},
+       * {@code invalid_representative_country}, {@code invalid_street_address}, {@code
+       * invalid_tos_acceptance}, {@code invalid_value_other}, {@code
+       * verification_document_address_mismatch}, {@code verification_document_address_missing},
+       * {@code verification_document_corrupt}, {@code verification_document_country_not_supported},
+       * {@code verification_document_dob_mismatch}, {@code verification_document_duplicate_type},
+       * {@code verification_document_expired}, {@code verification_document_failed_copy}, {@code
+       * verification_document_failed_greyscale}, {@code verification_document_failed_other}, {@code
+       * verification_document_failed_test_mode}, {@code verification_document_fraudulent}, {@code
+       * verification_document_id_number_mismatch}, {@code verification_document_id_number_missing},
+       * {@code verification_document_incomplete}, {@code verification_document_invalid}, {@code
+       * verification_document_issue_or_expiry_date_missing}, {@code
+       * verification_document_manipulated}, {@code verification_document_missing_back}, {@code
+       * verification_document_missing_front}, {@code verification_document_name_mismatch}, {@code
+       * verification_document_name_missing}, {@code verification_document_nationality_mismatch},
+       * {@code verification_document_not_readable}, {@code verification_document_not_signed},
+       * {@code verification_document_not_uploaded}, {@code verification_document_photo_mismatch},
+       * {@code verification_document_too_large}, {@code verification_document_type_not_supported},
+       * {@code verification_failed_address_match}, {@code verification_failed_business_iec_number},
+       * {@code verification_failed_document_match}, {@code verification_failed_id_number_match},
+       * {@code verification_failed_keyed_identity}, {@code verification_failed_keyed_match}, {@code
+       * verification_failed_name_match}, {@code verification_failed_other}, {@code
+       * verification_failed_residential_address}, {@code verification_failed_tax_id_match}, {@code
+       * verification_failed_tax_id_not_issued}, {@code verification_missing_executives}, {@code
+       * verification_missing_owners}, or {@code
+       * verification_requires_additional_memorandum_of_associations}.
+       */
+      @SerializedName("code")
+      String code;
+
+      /**
+       * An informative message that indicates the error type and provides additional details about
+       * the error.
+       */
+      @SerializedName("reason")
+      String reason;
+
+      /**
+       * The specific user onboarding requirement field (in the requirements hash) that needs to be
+       * resolved.
+       */
+      @SerializedName("requirement")
+      String requirement;
+    }
   }
 
   @Getter
@@ -554,7 +642,7 @@ public class Person extends ApiResource implements HasId, MetadataStore<Person> 
      * well-known utility company.
      */
     @SerializedName("additional_document")
-    VerificationDocument additionalDocument;
+    AdditionalDocument additionalDocument;
 
     /**
      * A user-displayable string describing the verification state for the person. For example, this
@@ -574,7 +662,7 @@ public class Person extends ApiResource implements HasId, MetadataStore<Person> 
     String detailsCode;
 
     @SerializedName("document")
-    VerificationDocument document;
+    Document document;
 
     /**
      * The state of verification for the person. Possible values are {@code unverified}, {@code
@@ -582,85 +670,165 @@ public class Person extends ApiResource implements HasId, MetadataStore<Person> 
      */
     @SerializedName("status")
     String status;
-  }
 
-  @Getter
-  @Setter
-  @EqualsAndHashCode(callSuper = false)
-  public static class VerificationDocument extends StripeObject {
-    /**
-     * The back of an ID returned by a <a href="https://stripe.com/docs/api#create_file">file
-     * upload</a> with a {@code purpose} value of {@code identity_document}.
-     */
-    @SerializedName("back")
-    @Getter(lombok.AccessLevel.NONE)
-    @Setter(lombok.AccessLevel.NONE)
-    ExpandableField<File> back;
+    @Getter
+    @Setter
+    @EqualsAndHashCode(callSuper = false)
+    public static class AdditionalDocument extends StripeObject {
+      /**
+       * The back of an ID returned by a <a href="https://stripe.com/docs/api#create_file">file
+       * upload</a> with a {@code purpose} value of {@code identity_document}.
+       */
+      @SerializedName("back")
+      @Getter(lombok.AccessLevel.NONE)
+      @Setter(lombok.AccessLevel.NONE)
+      ExpandableField<File> back;
 
-    /**
-     * A user-displayable string describing the verification state of this document. For example, if
-     * a document is uploaded and the picture is too fuzzy, this may say &quot;Identity document is
-     * too unclear to read&quot;.
-     */
-    @SerializedName("details")
-    String details;
+      /**
+       * A user-displayable string describing the verification state of this document. For example,
+       * if a document is uploaded and the picture is too fuzzy, this may say &quot;Identity
+       * document is too unclear to read&quot;.
+       */
+      @SerializedName("details")
+      String details;
 
-    /**
-     * One of {@code document_corrupt}, {@code document_country_not_supported}, {@code
-     * document_expired}, {@code document_failed_copy}, {@code document_failed_other}, {@code
-     * document_failed_test_mode}, {@code document_fraudulent}, {@code document_failed_greyscale},
-     * {@code document_incomplete}, {@code document_invalid}, {@code document_manipulated}, {@code
-     * document_missing_back}, {@code document_missing_front}, {@code document_not_readable}, {@code
-     * document_not_uploaded}, {@code document_photo_mismatch}, {@code document_too_large}, or
-     * {@code document_type_not_supported}. A machine-readable code specifying the verification
-     * state for this document.
-     */
-    @SerializedName("details_code")
-    String detailsCode;
+      /**
+       * One of {@code document_corrupt}, {@code document_country_not_supported}, {@code
+       * document_expired}, {@code document_failed_copy}, {@code document_failed_other}, {@code
+       * document_failed_test_mode}, {@code document_fraudulent}, {@code document_failed_greyscale},
+       * {@code document_incomplete}, {@code document_invalid}, {@code document_manipulated}, {@code
+       * document_missing_back}, {@code document_missing_front}, {@code document_not_readable},
+       * {@code document_not_uploaded}, {@code document_photo_mismatch}, {@code document_too_large},
+       * or {@code document_type_not_supported}. A machine-readable code specifying the verification
+       * state for this document.
+       */
+      @SerializedName("details_code")
+      String detailsCode;
 
-    /**
-     * The front of an ID returned by a <a href="https://stripe.com/docs/api#create_file">file
-     * upload</a> with a {@code purpose} value of {@code identity_document}.
-     */
-    @SerializedName("front")
-    @Getter(lombok.AccessLevel.NONE)
-    @Setter(lombok.AccessLevel.NONE)
-    ExpandableField<File> front;
+      /**
+       * The front of an ID returned by a <a href="https://stripe.com/docs/api#create_file">file
+       * upload</a> with a {@code purpose} value of {@code identity_document}.
+       */
+      @SerializedName("front")
+      @Getter(lombok.AccessLevel.NONE)
+      @Setter(lombok.AccessLevel.NONE)
+      ExpandableField<File> front;
 
-    /** Get ID of expandable {@code back} object. */
-    public String getBack() {
-      return (this.back != null) ? this.back.getId() : null;
+      /** Get ID of expandable {@code back} object. */
+      public String getBack() {
+        return (this.back != null) ? this.back.getId() : null;
+      }
+
+      public void setBack(String id) {
+        this.back = ApiResource.setExpandableFieldId(id, this.back);
+      }
+
+      /** Get expanded {@code back}. */
+      public File getBackObject() {
+        return (this.back != null) ? this.back.getExpanded() : null;
+      }
+
+      public void setBackObject(File expandableObject) {
+        this.back = new ExpandableField<File>(expandableObject.getId(), expandableObject);
+      }
+
+      /** Get ID of expandable {@code front} object. */
+      public String getFront() {
+        return (this.front != null) ? this.front.getId() : null;
+      }
+
+      public void setFront(String id) {
+        this.front = ApiResource.setExpandableFieldId(id, this.front);
+      }
+
+      /** Get expanded {@code front}. */
+      public File getFrontObject() {
+        return (this.front != null) ? this.front.getExpanded() : null;
+      }
+
+      public void setFrontObject(File expandableObject) {
+        this.front = new ExpandableField<File>(expandableObject.getId(), expandableObject);
+      }
     }
 
-    public void setBack(String id) {
-      this.back = ApiResource.setExpandableFieldId(id, this.back);
-    }
+    @Getter
+    @Setter
+    @EqualsAndHashCode(callSuper = false)
+    public static class Document extends StripeObject {
+      /**
+       * The back of an ID returned by a <a href="https://stripe.com/docs/api#create_file">file
+       * upload</a> with a {@code purpose} value of {@code identity_document}.
+       */
+      @SerializedName("back")
+      @Getter(lombok.AccessLevel.NONE)
+      @Setter(lombok.AccessLevel.NONE)
+      ExpandableField<File> back;
 
-    /** Get expanded {@code back}. */
-    public File getBackObject() {
-      return (this.back != null) ? this.back.getExpanded() : null;
-    }
+      /**
+       * A user-displayable string describing the verification state of this document. For example,
+       * if a document is uploaded and the picture is too fuzzy, this may say &quot;Identity
+       * document is too unclear to read&quot;.
+       */
+      @SerializedName("details")
+      String details;
 
-    public void setBackObject(File expandableObject) {
-      this.back = new ExpandableField<File>(expandableObject.getId(), expandableObject);
-    }
+      /**
+       * One of {@code document_corrupt}, {@code document_country_not_supported}, {@code
+       * document_expired}, {@code document_failed_copy}, {@code document_failed_other}, {@code
+       * document_failed_test_mode}, {@code document_fraudulent}, {@code document_failed_greyscale},
+       * {@code document_incomplete}, {@code document_invalid}, {@code document_manipulated}, {@code
+       * document_missing_back}, {@code document_missing_front}, {@code document_not_readable},
+       * {@code document_not_uploaded}, {@code document_photo_mismatch}, {@code document_too_large},
+       * or {@code document_type_not_supported}. A machine-readable code specifying the verification
+       * state for this document.
+       */
+      @SerializedName("details_code")
+      String detailsCode;
 
-    /** Get ID of expandable {@code front} object. */
-    public String getFront() {
-      return (this.front != null) ? this.front.getId() : null;
-    }
+      /**
+       * The front of an ID returned by a <a href="https://stripe.com/docs/api#create_file">file
+       * upload</a> with a {@code purpose} value of {@code identity_document}.
+       */
+      @SerializedName("front")
+      @Getter(lombok.AccessLevel.NONE)
+      @Setter(lombok.AccessLevel.NONE)
+      ExpandableField<File> front;
 
-    public void setFront(String id) {
-      this.front = ApiResource.setExpandableFieldId(id, this.front);
-    }
+      /** Get ID of expandable {@code back} object. */
+      public String getBack() {
+        return (this.back != null) ? this.back.getId() : null;
+      }
 
-    /** Get expanded {@code front}. */
-    public File getFrontObject() {
-      return (this.front != null) ? this.front.getExpanded() : null;
-    }
+      public void setBack(String id) {
+        this.back = ApiResource.setExpandableFieldId(id, this.back);
+      }
 
-    public void setFrontObject(File expandableObject) {
-      this.front = new ExpandableField<File>(expandableObject.getId(), expandableObject);
+      /** Get expanded {@code back}. */
+      public File getBackObject() {
+        return (this.back != null) ? this.back.getExpanded() : null;
+      }
+
+      public void setBackObject(File expandableObject) {
+        this.back = new ExpandableField<File>(expandableObject.getId(), expandableObject);
+      }
+
+      /** Get ID of expandable {@code front} object. */
+      public String getFront() {
+        return (this.front != null) ? this.front.getId() : null;
+      }
+
+      public void setFront(String id) {
+        this.front = ApiResource.setExpandableFieldId(id, this.front);
+      }
+
+      /** Get expanded {@code front}. */
+      public File getFrontObject() {
+        return (this.front != null) ? this.front.getExpanded() : null;
+      }
+
+      public void setFrontObject(File expandableObject) {
+        this.front = new ExpandableField<File>(expandableObject.getId(), expandableObject);
+      }
     }
   }
 }

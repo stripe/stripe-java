@@ -72,13 +72,13 @@ public class FinancialAccountFeatures extends StripeObject {
 
     /** Additional details; includes at least one entry when the status is not {@code active}. */
     @SerializedName("status_details")
-    List<FinancialAccountFeatures.CardIssuing.StatusDetails> statusDetails;
+    List<FinancialAccountFeatures.CardIssuing.StatusDetail> statusDetails;
 
     /** Additional details on the FinancialAccount Features information. */
     @Getter
     @Setter
     @EqualsAndHashCode(callSuper = false)
-    public static class StatusDetails extends StripeObject {
+    public static class StatusDetail extends StripeObject {
       /**
        * Represents the reason why the status is {@code pending} or {@code restricted}.
        *
@@ -128,13 +128,13 @@ public class FinancialAccountFeatures extends StripeObject {
 
     /** Additional details; includes at least one entry when the status is not {@code active}. */
     @SerializedName("status_details")
-    List<FinancialAccountFeatures.DepositInsurance.StatusDetails> statusDetails;
+    List<FinancialAccountFeatures.DepositInsurance.StatusDetail> statusDetails;
 
     /** Additional details on the FinancialAccount Features information. */
     @Getter
     @Setter
     @EqualsAndHashCode(callSuper = false)
-    public static class StatusDetails extends StripeObject {
+    public static class StatusDetail extends StripeObject {
       /**
        * Represents the reason why the status is {@code pending} or {@code restricted}.
        *
@@ -193,13 +193,13 @@ public class FinancialAccountFeatures extends StripeObject {
 
       /** Additional details; includes at least one entry when the status is not {@code active}. */
       @SerializedName("status_details")
-      List<FinancialAccountFeatures.FinancialAddresses.Aba.StatusDetails> statusDetails;
+      List<FinancialAccountFeatures.FinancialAddresses.Aba.StatusDetail> statusDetails;
 
       /** Additional details on the FinancialAccount Features information. */
       @Getter
       @Setter
       @EqualsAndHashCode(callSuper = false)
-      public static class StatusDetails extends StripeObject {
+      public static class StatusDetail extends StripeObject {
         /**
          * Represents the reason why the status is {@code pending} or {@code restricted}.
          *
@@ -259,13 +259,13 @@ public class FinancialAccountFeatures extends StripeObject {
 
       /** Additional details; includes at least one entry when the status is not {@code active}. */
       @SerializedName("status_details")
-      List<FinancialAccountFeatures.InboundTransfers.Ach.StatusDetails> statusDetails;
+      List<FinancialAccountFeatures.InboundTransfers.Ach.StatusDetail> statusDetails;
 
       /** Additional details on the FinancialAccount Features information. */
       @Getter
       @Setter
       @EqualsAndHashCode(callSuper = false)
-      public static class StatusDetails extends StripeObject {
+      public static class StatusDetail extends StripeObject {
         /**
          * Represents the reason why the status is {@code pending} or {@code restricted}.
          *
@@ -316,13 +316,13 @@ public class FinancialAccountFeatures extends StripeObject {
 
     /** Additional details; includes at least one entry when the status is not {@code active}. */
     @SerializedName("status_details")
-    List<FinancialAccountFeatures.IntraStripeFlows.StatusDetails> statusDetails;
+    List<FinancialAccountFeatures.IntraStripeFlows.StatusDetail> statusDetails;
 
     /** Additional details on the FinancialAccount Features information. */
     @Getter
     @Setter
     @EqualsAndHashCode(callSuper = false)
-    public static class StatusDetails extends StripeObject {
+    public static class StatusDetail extends StripeObject {
       /**
        * Represents the reason why the status is {@code pending} or {@code restricted}.
        *
@@ -385,13 +385,13 @@ public class FinancialAccountFeatures extends StripeObject {
 
       /** Additional details; includes at least one entry when the status is not {@code active}. */
       @SerializedName("status_details")
-      List<FinancialAccountFeatures.OutboundPayments.Ach.StatusDetails> statusDetails;
+      List<FinancialAccountFeatures.OutboundPayments.Ach.StatusDetail> statusDetails;
 
       /** Additional details on the FinancialAccount Features information. */
       @Getter
       @Setter
       @EqualsAndHashCode(callSuper = false)
-      public static class StatusDetails extends StripeObject {
+      public static class StatusDetail extends StripeObject {
         /**
          * Represents the reason why the status is {@code pending} or {@code restricted}.
          *
@@ -441,13 +441,13 @@ public class FinancialAccountFeatures extends StripeObject {
 
       /** Additional details; includes at least one entry when the status is not {@code active}. */
       @SerializedName("status_details")
-      List<FinancialAccountFeatures.OutboundPayments.UsDomesticWire.StatusDetails> statusDetails;
+      List<FinancialAccountFeatures.OutboundPayments.UsDomesticWire.StatusDetail> statusDetails;
 
       /** Additional details on the FinancialAccount Features information. */
       @Getter
       @Setter
       @EqualsAndHashCode(callSuper = false)
-      public static class StatusDetails extends StripeObject {
+      public static class StatusDetail extends StripeObject {
         /**
          * Represents the reason why the status is {@code pending} or {@code restricted}.
          *
@@ -511,13 +511,13 @@ public class FinancialAccountFeatures extends StripeObject {
 
       /** Additional details; includes at least one entry when the status is not {@code active}. */
       @SerializedName("status_details")
-      List<FinancialAccountFeatures.OutboundTransfers.Ach.StatusDetails> statusDetails;
+      List<FinancialAccountFeatures.OutboundTransfers.Ach.StatusDetail> statusDetails;
 
       /** Additional details on the FinancialAccount Features information. */
       @Getter
       @Setter
       @EqualsAndHashCode(callSuper = false)
-      public static class StatusDetails extends StripeObject {
+      public static class StatusDetail extends StripeObject {
         /**
          * Represents the reason why the status is {@code pending} or {@code restricted}.
          *
@@ -567,13 +567,13 @@ public class FinancialAccountFeatures extends StripeObject {
 
       /** Additional details; includes at least one entry when the status is not {@code active}. */
       @SerializedName("status_details")
-      List<FinancialAccountFeatures.OutboundTransfers.UsDomesticWire.StatusDetails> statusDetails;
+      List<FinancialAccountFeatures.OutboundTransfers.UsDomesticWire.StatusDetail> statusDetails;
 
       /** Additional details on the FinancialAccount Features information. */
       @Getter
       @Setter
       @EqualsAndHashCode(callSuper = false)
-      public static class StatusDetails extends StripeObject {
+      public static class StatusDetail extends StripeObject {
         /**
          * Represents the reason why the status is {@code pending} or {@code restricted}.
          *
@@ -603,27 +603,5 @@ public class FinancialAccountFeatures extends StripeObject {
         String restriction;
       }
     }
-  }
-
-  /** Restrictions that a Connect Platform has placed on this FinancialAccount. */
-  @Getter
-  @Setter
-  @EqualsAndHashCode(callSuper = false)
-  public static class PlatformRestriction extends StripeObject {
-    /**
-     * Restricts all inbound money movement.
-     *
-     * <p>One of {@code restricted}, or {@code unrestricted}.
-     */
-    @SerializedName("inbound_flows")
-    String inboundFlows;
-
-    /**
-     * Restricts all outbound money movement.
-     *
-     * <p>One of {@code restricted}, or {@code unrestricted}.
-     */
-    @SerializedName("outbound_flows")
-    String outboundFlows;
   }
 }

@@ -85,7 +85,7 @@ public class PaymentIntent extends ApiResource implements HasId, MetadataStore<P
    * href="https://dashboard.stripe.com/settings/payment_methods">Stripe Dashboard.</a>
    */
   @SerializedName("automatic_payment_methods")
-  AutomaticPaymentMethodsPaymentIntent automaticPaymentMethods;
+  AutomaticPaymentMethods automaticPaymentMethods;
 
   /**
    * Populated when {@code status} is {@code canceled}, this is the time at which the PaymentIntent
@@ -112,10 +112,6 @@ public class PaymentIntent extends ApiResource implements HasId, MetadataStore<P
    */
   @SerializedName("capture_method")
   String captureMethod;
-
-  /** Charges that were created by this PaymentIntent, if any. */
-  @SerializedName("charges")
-  ChargeCollection charges;
 
   /**
    * The client secret of this PaymentIntent. Used for client-side retrieval using a publishable
@@ -182,6 +178,12 @@ public class PaymentIntent extends ApiResource implements HasId, MetadataStore<P
    */
   @SerializedName("last_payment_error")
   StripeError lastPaymentError;
+
+  /** The latest charge created by this payment intent. */
+  @SerializedName("latest_charge")
+  @Getter(lombok.AccessLevel.NONE)
+  @Setter(lombok.AccessLevel.NONE)
+  ExpandableField<Charge> latestCharge;
 
   /**
    * Has the value {@code true} if the object exists in live mode or the value {@code false} if the
@@ -381,6 +383,24 @@ public class PaymentIntent extends ApiResource implements HasId, MetadataStore<P
 
   public void setInvoiceObject(Invoice expandableObject) {
     this.invoice = new ExpandableField<Invoice>(expandableObject.getId(), expandableObject);
+  }
+
+  /** Get ID of expandable {@code latestCharge} object. */
+  public String getLatestCharge() {
+    return (this.latestCharge != null) ? this.latestCharge.getId() : null;
+  }
+
+  public void setLatestCharge(String id) {
+    this.latestCharge = ApiResource.setExpandableFieldId(id, this.latestCharge);
+  }
+
+  /** Get expanded {@code latestCharge}. */
+  public Charge getLatestChargeObject() {
+    return (this.latestCharge != null) ? this.latestCharge.getExpanded() : null;
+  }
+
+  public void setLatestChargeObject(Charge expandableObject) {
+    this.latestCharge = new ExpandableField<Charge>(expandableObject.getId(), expandableObject);
   }
 
   /** Get ID of expandable {@code onBehalfOf} object. */
@@ -1403,24 +1423,33 @@ public class PaymentIntent extends ApiResource implements HasId, MetadataStore<P
   @Getter
   @Setter
   @EqualsAndHashCode(callSuper = false)
+  public static class AutomaticPaymentMethods extends StripeObject {
+    /** Automatically calculates compatible payment methods. */
+    @SerializedName("enabled")
+    Boolean enabled;
+  }
+
+  @Getter
+  @Setter
+  @EqualsAndHashCode(callSuper = false)
   public static class NextAction extends StripeObject {
     @SerializedName("alipay_handle_redirect")
-    NextActionAlipayHandleRedirect alipayHandleRedirect;
+    AlipayHandleRedirect alipayHandleRedirect;
 
     @SerializedName("boleto_display_details")
-    NextActionDisplayBoletoDetails boletoDisplayDetails;
+    BoletoDisplayDetails boletoDisplayDetails;
 
     @SerializedName("card_await_notification")
-    NextActionCardAwaitNotification cardAwaitNotification;
+    CardAwaitNotification cardAwaitNotification;
 
     @SerializedName("display_bank_transfer_instructions")
-    NextActionDisplayBankTransferInstructions displayBankTransferInstructions;
+    DisplayBankTransferInstructions displayBankTransferInstructions;
 
     @SerializedName("konbini_display_details")
-    NextActionKonbiniDisplayDetails konbiniDisplayDetails;
+    KonbiniDisplayDetails konbiniDisplayDetails;
 
     @SerializedName("oxxo_display_details")
-    NextActionOxxoDisplayDetails oxxoDisplayDetails;
+    OxxoDisplayDetails oxxoDisplayDetails;
 
     @SerializedName("paynow_display_qr_code")
     PaynowDisplayQrCode paynowDisplayQrCode;
@@ -1432,7 +1461,7 @@ public class PaymentIntent extends ApiResource implements HasId, MetadataStore<P
     PromptpayDisplayQrCode promptpayDisplayQrCode;
 
     @SerializedName("redirect_to_url")
-    NextActionRedirectToUrl redirectToUrl;
+    RedirectToUrl redirectToUrl;
 
     /**
      * Type of the next action to perform, one of {@code redirect_to_url}, {@code use_stripe_sdk},
@@ -1461,6 +1490,362 @@ public class PaymentIntent extends ApiResource implements HasId, MetadataStore<P
 
     @SerializedName("wechat_pay_redirect_to_ios_app")
     WechatPayRedirectToIosApp wechatPayRedirectToIosApp;
+
+    @Getter
+    @Setter
+    @EqualsAndHashCode(callSuper = false)
+    public static class AlipayHandleRedirect extends StripeObject {
+      /**
+       * The native data to be used with Alipay SDK you must redirect your customer to in order to
+       * authenticate the payment in an Android App.
+       */
+      @SerializedName("native_data")
+      String nativeData;
+
+      /**
+       * The native URL you must redirect your customer to in order to authenticate the payment in
+       * an iOS App.
+       */
+      @SerializedName("native_url")
+      String nativeUrl;
+
+      /**
+       * If the customer does not exit their browser while authenticating, they will be redirected
+       * to this specified URL after completion.
+       */
+      @SerializedName("return_url")
+      String returnUrl;
+
+      /** The URL you must redirect your customer to in order to authenticate the payment. */
+      @SerializedName("url")
+      String url;
+    }
+
+    @Getter
+    @Setter
+    @EqualsAndHashCode(callSuper = false)
+    public static class BoletoDisplayDetails extends StripeObject {
+      /** The timestamp after which the boleto expires. */
+      @SerializedName("expires_at")
+      Long expiresAt;
+
+      /**
+       * The URL to the hosted boleto voucher page, which allows customers to view the boleto
+       * voucher.
+       */
+      @SerializedName("hosted_voucher_url")
+      String hostedVoucherUrl;
+
+      /** The boleto number. */
+      @SerializedName("number")
+      String number;
+
+      /** The URL to the downloadable boleto voucher PDF. */
+      @SerializedName("pdf")
+      String pdf;
+    }
+
+    @Getter
+    @Setter
+    @EqualsAndHashCode(callSuper = false)
+    public static class CardAwaitNotification extends StripeObject {
+      /**
+       * The time that payment will be attempted. If customer approval is required, they need to
+       * provide approval before this time.
+       */
+      @SerializedName("charge_attempt_at")
+      Long chargeAttemptAt;
+
+      /**
+       * For payments greater than INR 15000, the customer must provide explicit approval of the
+       * payment with their bank. For payments of lower amount, no customer action is required.
+       */
+      @SerializedName("customer_approval_required")
+      Boolean customerApprovalRequired;
+    }
+
+    @Getter
+    @Setter
+    @EqualsAndHashCode(callSuper = false)
+    public static class DisplayBankTransferInstructions extends StripeObject {
+      /** The remaining amount that needs to be transferred to complete the payment. */
+      @SerializedName("amount_remaining")
+      Long amountRemaining;
+
+      /**
+       * Three-letter <a href="https://www.iso.org/iso-4217-currency-codes.html">ISO currency
+       * code</a>, in lowercase. Must be a <a href="https://stripe.com/docs/currencies">supported
+       * currency</a>.
+       */
+      @SerializedName("currency")
+      String currency;
+
+      /** A list of financial addresses that can be used to fund the customer balance. */
+      @SerializedName("financial_addresses")
+      List<PaymentIntent.NextAction.DisplayBankTransferInstructions.FinancialAddress>
+          financialAddresses;
+
+      /** A link to a hosted page that guides your customer through completing the transfer. */
+      @SerializedName("hosted_instructions_url")
+      String hostedInstructionsUrl;
+
+      /**
+       * A string identifying this payment. Instruct your customer to include this code in the
+       * reference or memo field of their bank transfer.
+       */
+      @SerializedName("reference")
+      String reference;
+
+      /**
+       * Type of bank transfer
+       *
+       * <p>One of {@code eu_bank_transfer}, {@code gb_bank_transfer}, {@code jp_bank_transfer}, or
+       * {@code mx_bank_transfer}.
+       */
+      @SerializedName("type")
+      String type;
+
+      /** FinancialAddresses contain identifying information that resolves to a FinancialAccount. */
+      @Getter
+      @Setter
+      @EqualsAndHashCode(callSuper = false)
+      public static class FinancialAddress extends StripeObject {
+        /** Iban Records contain E.U. bank account details per the SEPA format. */
+        @SerializedName("iban")
+        Iban iban;
+
+        /** Sort Code Records contain U.K. bank account details per the sort code format. */
+        @SerializedName("sort_code")
+        SortCode sortCode;
+
+        /** SPEI Records contain Mexico bank account details per the SPEI format. */
+        @SerializedName("spei")
+        Spei spei;
+
+        /** The payment networks supported by this FinancialAddress. */
+        @SerializedName("supported_networks")
+        List<String> supportedNetworks;
+
+        /**
+         * The type of financial address
+         *
+         * <p>One of {@code iban}, {@code sort_code}, {@code spei}, or {@code zengin}.
+         */
+        @SerializedName("type")
+        String type;
+
+        /** Zengin Records contain Japan bank account details per the Zengin format. */
+        @SerializedName("zengin")
+        Zengin zengin;
+
+        /** Iban Records contain E.U. bank account details per the SEPA format. */
+        @Getter
+        @Setter
+        @EqualsAndHashCode(callSuper = false)
+        public static class Iban extends StripeObject {
+          /** The name of the person or business that owns the bank account. */
+          @SerializedName("account_holder_name")
+          String accountHolderName;
+
+          /** The BIC/SWIFT code of the account. */
+          @SerializedName("bic")
+          String bic;
+
+          /**
+           * Two-letter country code (<a href="https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2">ISO
+           * 3166-1 alpha-2</a>).
+           */
+          @SerializedName("country")
+          String country;
+
+          /** The IBAN of the account. */
+          @SerializedName("iban")
+          String iban;
+        }
+
+        /** Sort Code Records contain U.K. bank account details per the sort code format. */
+        @Getter
+        @Setter
+        @EqualsAndHashCode(callSuper = false)
+        public static class SortCode extends StripeObject {
+          /** The name of the person or business that owns the bank account. */
+          @SerializedName("account_holder_name")
+          String accountHolderName;
+
+          /** The account number. */
+          @SerializedName("account_number")
+          String accountNumber;
+
+          /** The six-digit sort code. */
+          @SerializedName("sort_code")
+          String sortCode;
+        }
+
+        /** SPEI Records contain Mexico bank account details per the SPEI format. */
+        @Getter
+        @Setter
+        @EqualsAndHashCode(callSuper = false)
+        public static class Spei extends StripeObject {
+          /** The three-digit bank code. */
+          @SerializedName("bank_code")
+          String bankCode;
+
+          /** The short banking institution name. */
+          @SerializedName("bank_name")
+          String bankName;
+
+          /** The CLABE number. */
+          @SerializedName("clabe")
+          String clabe;
+        }
+
+        /** Zengin Records contain Japan bank account details per the Zengin format. */
+        @Getter
+        @Setter
+        @EqualsAndHashCode(callSuper = false)
+        public static class Zengin extends StripeObject {
+          /** The account holder name. */
+          @SerializedName("account_holder_name")
+          String accountHolderName;
+
+          /** The account number. */
+          @SerializedName("account_number")
+          String accountNumber;
+
+          /** The bank account type. In Japan, this can only be {@code futsu} or {@code toza}. */
+          @SerializedName("account_type")
+          String accountType;
+
+          /** The bank code of the account. */
+          @SerializedName("bank_code")
+          String bankCode;
+
+          /** The bank name of the account. */
+          @SerializedName("bank_name")
+          String bankName;
+
+          /** The branch code of the account. */
+          @SerializedName("branch_code")
+          String branchCode;
+
+          /** The branch name of the account. */
+          @SerializedName("branch_name")
+          String branchName;
+        }
+      }
+    }
+
+    @Getter
+    @Setter
+    @EqualsAndHashCode(callSuper = false)
+    public static class KonbiniDisplayDetails extends StripeObject {
+      /** The timestamp at which the pending Konbini payment expires. */
+      @SerializedName("expires_at")
+      Long expiresAt;
+
+      /**
+       * The URL for the Konbini payment instructions page, which allows customers to view and print
+       * a Konbini voucher.
+       */
+      @SerializedName("hosted_voucher_url")
+      String hostedVoucherUrl;
+
+      @SerializedName("stores")
+      Stores stores;
+
+      @Getter
+      @Setter
+      @EqualsAndHashCode(callSuper = false)
+      public static class Stores extends StripeObject {
+        /** FamilyMart instruction details. */
+        @SerializedName("familymart")
+        Familymart familymart;
+
+        /** Lawson instruction details. */
+        @SerializedName("lawson")
+        Lawson lawson;
+
+        /** Ministop instruction details. */
+        @SerializedName("ministop")
+        Ministop ministop;
+
+        /** Seicomart instruction details. */
+        @SerializedName("seicomart")
+        Seicomart seicomart;
+
+        @Getter
+        @Setter
+        @EqualsAndHashCode(callSuper = false)
+        public static class Familymart extends StripeObject {
+          /** The confirmation number. */
+          @SerializedName("confirmation_number")
+          String confirmationNumber;
+
+          /** The payment code. */
+          @SerializedName("payment_code")
+          String paymentCode;
+        }
+
+        @Getter
+        @Setter
+        @EqualsAndHashCode(callSuper = false)
+        public static class Lawson extends StripeObject {
+          /** The confirmation number. */
+          @SerializedName("confirmation_number")
+          String confirmationNumber;
+
+          /** The payment code. */
+          @SerializedName("payment_code")
+          String paymentCode;
+        }
+
+        @Getter
+        @Setter
+        @EqualsAndHashCode(callSuper = false)
+        public static class Ministop extends StripeObject {
+          /** The confirmation number. */
+          @SerializedName("confirmation_number")
+          String confirmationNumber;
+
+          /** The payment code. */
+          @SerializedName("payment_code")
+          String paymentCode;
+        }
+
+        @Getter
+        @Setter
+        @EqualsAndHashCode(callSuper = false)
+        public static class Seicomart extends StripeObject {
+          /** The confirmation number. */
+          @SerializedName("confirmation_number")
+          String confirmationNumber;
+
+          /** The payment code. */
+          @SerializedName("payment_code")
+          String paymentCode;
+        }
+      }
+    }
+
+    @Getter
+    @Setter
+    @EqualsAndHashCode(callSuper = false)
+    public static class OxxoDisplayDetails extends StripeObject {
+      /** The timestamp after which the OXXO voucher expires. */
+      @SerializedName("expires_after")
+      Long expiresAfter;
+
+      /**
+       * The URL for the hosted OXXO voucher page, which allows customers to view and print an OXXO
+       * voucher.
+       */
+      @SerializedName("hosted_voucher_url")
+      String hostedVoucherUrl;
+
+      /** OXXO reference number. */
+      @SerializedName("number")
+      String number;
+    }
 
     @Getter
     @Setter
@@ -1544,6 +1929,22 @@ public class PaymentIntent extends ApiResource implements HasId, MetadataStore<P
        */
       @SerializedName("image_url_svg")
       String imageUrlSvg;
+    }
+
+    @Getter
+    @Setter
+    @EqualsAndHashCode(callSuper = false)
+    public static class RedirectToUrl extends StripeObject {
+      /**
+       * If the customer does not exit their browser while authenticating, they will be redirected
+       * to this specified URL after completion.
+       */
+      @SerializedName("return_url")
+      String returnUrl;
+
+      /** The URL you must redirect your customer to in order to authenticate the payment. */
+      @SerializedName("url")
+      String url;
     }
 
     @Getter
@@ -1643,377 +2044,6 @@ public class PaymentIntent extends ApiResource implements HasId, MetadataStore<P
       @SerializedName("native_url")
       String nativeUrl;
     }
-  }
-
-  @Getter
-  @Setter
-  @EqualsAndHashCode(callSuper = false)
-  public static class NextActionAlipayHandleRedirect extends StripeObject {
-    /**
-     * The native data to be used with Alipay SDK you must redirect your customer to in order to
-     * authenticate the payment in an Android App.
-     */
-    @SerializedName("native_data")
-    String nativeData;
-
-    /**
-     * The native URL you must redirect your customer to in order to authenticate the payment in an
-     * iOS App.
-     */
-    @SerializedName("native_url")
-    String nativeUrl;
-
-    /**
-     * If the customer does not exit their browser while authenticating, they will be redirected to
-     * this specified URL after completion.
-     */
-    @SerializedName("return_url")
-    String returnUrl;
-
-    /** The URL you must redirect your customer to in order to authenticate the payment. */
-    @SerializedName("url")
-    String url;
-  }
-
-  @Getter
-  @Setter
-  @EqualsAndHashCode(callSuper = false)
-  public static class NextActionCardAwaitNotification extends StripeObject {
-    /**
-     * The time that payment will be attempted. If customer approval is required, they need to
-     * provide approval before this time.
-     */
-    @SerializedName("charge_attempt_at")
-    Long chargeAttemptAt;
-
-    /**
-     * For payments greater than INR 15000, the customer must provide explicit approval of the
-     * payment with their bank. For payments of lower amount, no customer action is required.
-     */
-    @SerializedName("customer_approval_required")
-    Boolean customerApprovalRequired;
-  }
-
-  @Getter
-  @Setter
-  @EqualsAndHashCode(callSuper = false)
-  public static class NextActionDisplayBankTransferInstructions extends StripeObject {
-    /** The remaining amount that needs to be transferred to complete the payment. */
-    @SerializedName("amount_remaining")
-    Long amountRemaining;
-
-    /**
-     * Three-letter <a href="https://www.iso.org/iso-4217-currency-codes.html">ISO currency
-     * code</a>, in lowercase. Must be a <a href="https://stripe.com/docs/currencies">supported
-     * currency</a>.
-     */
-    @SerializedName("currency")
-    String currency;
-
-    /** A list of financial addresses that can be used to fund the customer balance. */
-    @SerializedName("financial_addresses")
-    List<PaymentIntent.NextActionDisplayBankTransferInstructions.FinancialAddress>
-        financialAddresses;
-
-    /** A link to a hosted page that guides your customer through completing the transfer. */
-    @SerializedName("hosted_instructions_url")
-    String hostedInstructionsUrl;
-
-    /**
-     * A string identifying this payment. Instruct your customer to include this code in the
-     * reference or memo field of their bank transfer.
-     */
-    @SerializedName("reference")
-    String reference;
-
-    /**
-     * Type of bank transfer
-     *
-     * <p>One of {@code eu_bank_transfer}, {@code gb_bank_transfer}, {@code jp_bank_transfer}, or
-     * {@code mx_bank_transfer}.
-     */
-    @SerializedName("type")
-    String type;
-
-    /** FinancialAddresses contain identifying information that resolves to a FinancialAccount. */
-    @Getter
-    @Setter
-    @EqualsAndHashCode(callSuper = false)
-    public static class FinancialAddress extends StripeObject {
-      /** Iban Records contain E.U. bank account details per the SEPA format. */
-      @SerializedName("iban")
-      Iban iban;
-
-      /** Sort Code Records contain U.K. bank account details per the sort code format. */
-      @SerializedName("sort_code")
-      SortCode sortCode;
-
-      /** SPEI Records contain Mexico bank account details per the SPEI format. */
-      @SerializedName("spei")
-      Spei spei;
-
-      /** The payment networks supported by this FinancialAddress. */
-      @SerializedName("supported_networks")
-      List<String> supportedNetworks;
-
-      /**
-       * The type of financial address
-       *
-       * <p>One of {@code iban}, {@code sort_code}, {@code spei}, or {@code zengin}.
-       */
-      @SerializedName("type")
-      String type;
-
-      /** Zengin Records contain Japan bank account details per the Zengin format. */
-      @SerializedName("zengin")
-      Zengin zengin;
-
-      /** Iban Records contain E.U. bank account details per the SEPA format. */
-      @Getter
-      @Setter
-      @EqualsAndHashCode(callSuper = false)
-      public static class Iban extends StripeObject {
-        /** The name of the person or business that owns the bank account. */
-        @SerializedName("account_holder_name")
-        String accountHolderName;
-
-        /** The BIC/SWIFT code of the account. */
-        @SerializedName("bic")
-        String bic;
-
-        /**
-         * Two-letter country code (<a href="https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2">ISO
-         * 3166-1 alpha-2</a>).
-         */
-        @SerializedName("country")
-        String country;
-
-        /** The IBAN of the account. */
-        @SerializedName("iban")
-        String iban;
-      }
-
-      /** Sort Code Records contain U.K. bank account details per the sort code format. */
-      @Getter
-      @Setter
-      @EqualsAndHashCode(callSuper = false)
-      public static class SortCode extends StripeObject {
-        /** The name of the person or business that owns the bank account. */
-        @SerializedName("account_holder_name")
-        String accountHolderName;
-
-        /** The account number. */
-        @SerializedName("account_number")
-        String accountNumber;
-
-        /** The six-digit sort code. */
-        @SerializedName("sort_code")
-        String sortCode;
-      }
-
-      /** SPEI Records contain Mexico bank account details per the SPEI format. */
-      @Getter
-      @Setter
-      @EqualsAndHashCode(callSuper = false)
-      public static class Spei extends StripeObject {
-        /** The three-digit bank code. */
-        @SerializedName("bank_code")
-        String bankCode;
-
-        /** The short banking institution name. */
-        @SerializedName("bank_name")
-        String bankName;
-
-        /** The CLABE number. */
-        @SerializedName("clabe")
-        String clabe;
-      }
-
-      /** Zengin Records contain Japan bank account details per the Zengin format. */
-      @Getter
-      @Setter
-      @EqualsAndHashCode(callSuper = false)
-      public static class Zengin extends StripeObject {
-        /** The account holder name. */
-        @SerializedName("account_holder_name")
-        String accountHolderName;
-
-        /** The account number. */
-        @SerializedName("account_number")
-        String accountNumber;
-
-        /** The bank account type. In Japan, this can only be {@code futsu} or {@code toza}. */
-        @SerializedName("account_type")
-        String accountType;
-
-        /** The bank code of the account. */
-        @SerializedName("bank_code")
-        String bankCode;
-
-        /** The bank name of the account. */
-        @SerializedName("bank_name")
-        String bankName;
-
-        /** The branch code of the account. */
-        @SerializedName("branch_code")
-        String branchCode;
-
-        /** The branch name of the account. */
-        @SerializedName("branch_name")
-        String branchName;
-      }
-    }
-  }
-
-  @Getter
-  @Setter
-  @EqualsAndHashCode(callSuper = false)
-  public static class NextActionDisplayBoletoDetails extends StripeObject {
-    /** The timestamp after which the boleto expires. */
-    @SerializedName("expires_at")
-    Long expiresAt;
-
-    /**
-     * The URL to the hosted boleto voucher page, which allows customers to view the boleto voucher.
-     */
-    @SerializedName("hosted_voucher_url")
-    String hostedVoucherUrl;
-
-    /** The boleto number. */
-    @SerializedName("number")
-    String number;
-
-    /** The URL to the downloadable boleto voucher PDF. */
-    @SerializedName("pdf")
-    String pdf;
-  }
-
-  @Getter
-  @Setter
-  @EqualsAndHashCode(callSuper = false)
-  public static class NextActionKonbiniDisplayDetails extends StripeObject {
-    /** The timestamp at which the pending Konbini payment expires. */
-    @SerializedName("expires_at")
-    Long expiresAt;
-
-    /**
-     * The URL for the Konbini payment instructions page, which allows customers to view and print a
-     * Konbini voucher.
-     */
-    @SerializedName("hosted_voucher_url")
-    String hostedVoucherUrl;
-
-    @SerializedName("stores")
-    Stores stores;
-
-    @Getter
-    @Setter
-    @EqualsAndHashCode(callSuper = false)
-    public static class Stores extends StripeObject {
-      /** FamilyMart instruction details. */
-      @SerializedName("familymart")
-      Familymart familymart;
-
-      /** Lawson instruction details. */
-      @SerializedName("lawson")
-      Lawson lawson;
-
-      /** Ministop instruction details. */
-      @SerializedName("ministop")
-      Ministop ministop;
-
-      /** Seicomart instruction details. */
-      @SerializedName("seicomart")
-      Seicomart seicomart;
-
-      @Getter
-      @Setter
-      @EqualsAndHashCode(callSuper = false)
-      public static class Familymart extends StripeObject {
-        /** The confirmation number. */
-        @SerializedName("confirmation_number")
-        String confirmationNumber;
-
-        /** The payment code. */
-        @SerializedName("payment_code")
-        String paymentCode;
-      }
-
-      @Getter
-      @Setter
-      @EqualsAndHashCode(callSuper = false)
-      public static class Lawson extends StripeObject {
-        /** The confirmation number. */
-        @SerializedName("confirmation_number")
-        String confirmationNumber;
-
-        /** The payment code. */
-        @SerializedName("payment_code")
-        String paymentCode;
-      }
-
-      @Getter
-      @Setter
-      @EqualsAndHashCode(callSuper = false)
-      public static class Ministop extends StripeObject {
-        /** The confirmation number. */
-        @SerializedName("confirmation_number")
-        String confirmationNumber;
-
-        /** The payment code. */
-        @SerializedName("payment_code")
-        String paymentCode;
-      }
-
-      @Getter
-      @Setter
-      @EqualsAndHashCode(callSuper = false)
-      public static class Seicomart extends StripeObject {
-        /** The confirmation number. */
-        @SerializedName("confirmation_number")
-        String confirmationNumber;
-
-        /** The payment code. */
-        @SerializedName("payment_code")
-        String paymentCode;
-      }
-    }
-  }
-
-  @Getter
-  @Setter
-  @EqualsAndHashCode(callSuper = false)
-  public static class NextActionOxxoDisplayDetails extends StripeObject {
-    /** The timestamp after which the OXXO voucher expires. */
-    @SerializedName("expires_after")
-    Long expiresAfter;
-
-    /**
-     * The URL for the hosted OXXO voucher page, which allows customers to view and print an OXXO
-     * voucher.
-     */
-    @SerializedName("hosted_voucher_url")
-    String hostedVoucherUrl;
-
-    /** OXXO reference number. */
-    @SerializedName("number")
-    String number;
-  }
-
-  @Getter
-  @Setter
-  @EqualsAndHashCode(callSuper = false)
-  public static class NextActionRedirectToUrl extends StripeObject {
-    /**
-     * If the customer does not exit their browser while authenticating, they will be redirected to
-     * this specified URL after completion.
-     */
-    @SerializedName("return_url")
-    String returnUrl;
-
-    /** The URL you must redirect your customer to in order to authenticate the payment. */
-    @SerializedName("url")
-    String url;
   }
 
   @Getter
@@ -2364,75 +2394,7 @@ public class PaymentIntent extends ApiResource implements HasId, MetadataStore<P
     @Getter
     @Setter
     @EqualsAndHashCode(callSuper = false)
-    public static class BankTransfer extends StripeObject {
-      @SerializedName("eu_bank_transfer")
-      EuBankTransfer euBankTransfer;
-
-      /**
-       * List of address types that should be returned in the financial_addresses response. If not
-       * specified, all valid types will be returned.
-       *
-       * <p>Permitted values include: {@code sort_code}, {@code zengin}, {@code iban}, or {@code
-       * spei}.
-       */
-      @SerializedName("requested_address_types")
-      List<String> requestedAddressTypes;
-
-      /**
-       * The bank transfer type that this PaymentIntent is allowed to use for funding Permitted
-       * values include: {@code eu_bank_transfer}, {@code gb_bank_transfer}, {@code
-       * jp_bank_transfer}, or {@code mx_bank_transfer}.
-       *
-       * <p>One of {@code eu_bank_transfer}, {@code gb_bank_transfer}, {@code jp_bank_transfer}, or
-       * {@code mx_bank_transfer}.
-       */
-      @SerializedName("type")
-      String type;
-
-      @Getter
-      @Setter
-      @EqualsAndHashCode(callSuper = false)
-      public static class EuBankTransfer extends StripeObject {
-        /**
-         * The desired country code of the bank account information. Permitted values include:
-         * {@code DE}, {@code ES}, {@code FR}, {@code IE}, or {@code NL}.
-         *
-         * <p>One of {@code DE}, {@code ES}, {@code FR}, {@code IE}, or {@code NL}.
-         */
-        @SerializedName("country")
-        String country;
-      }
-    }
-
-    @Getter
-    @Setter
-    @EqualsAndHashCode(callSuper = false)
     public static class Blik extends StripeObject {}
-
-    @Getter
-    @Setter
-    @EqualsAndHashCode(callSuper = false)
-    public static class BlikMandateOptionsOffSessionDetails extends StripeObject {
-      /** Amount of each recurring payment. */
-      @SerializedName("amount")
-      Long amount;
-
-      /** Currency of each recurring payment. */
-      @SerializedName("currency")
-      String currency;
-
-      /**
-       * Frequency interval of each recurring payment.
-       *
-       * <p>One of {@code day}, {@code month}, {@code week}, or {@code year}.
-       */
-      @SerializedName("interval")
-      String interval;
-
-      /** Frequency indicator of each recurring payment. */
-      @SerializedName("interval_count")
-      Long intervalCount;
-    }
 
     @Getter
     @Setter
@@ -2561,7 +2523,7 @@ public class PaymentIntent extends ApiResource implements HasId, MetadataStore<P
       public static class Installments extends StripeObject {
         /** Installment plans that may be selected for this PaymentIntent. */
         @SerializedName("available_plans")
-        List<PaymentIntent.PaymentMethodOptions.Card.Installments.Plan> availablePlans;
+        List<PaymentIntent.PaymentMethodOptions.Card.Installments.AvailablePlan> availablePlans;
 
         /** Whether Installments are enabled for this PaymentIntent. */
         @SerializedName("enabled")
@@ -2570,6 +2532,29 @@ public class PaymentIntent extends ApiResource implements HasId, MetadataStore<P
         /** Installment plan selected for this PaymentIntent. */
         @SerializedName("plan")
         Plan plan;
+
+        @Getter
+        @Setter
+        @EqualsAndHashCode(callSuper = false)
+        public static class AvailablePlan extends StripeObject {
+          /**
+           * For {@code fixed_count} installment plans, this is the number of installment payments
+           * your customer will make to their credit card.
+           */
+          @SerializedName("count")
+          Long count;
+
+          /**
+           * For {@code fixed_count} installment plans, this is the interval between installment
+           * payments your customer will make to their credit card. One of {@code month}.
+           */
+          @SerializedName("interval")
+          String interval;
+
+          /** Type of installment plan, one of {@code fixed_count}. */
+          @SerializedName("type")
+          String type;
+        }
 
         @Getter
         @Setter
@@ -2717,6 +2702,49 @@ public class PaymentIntent extends ApiResource implements HasId, MetadataStore<P
        */
       @SerializedName("setup_future_usage")
       String setupFutureUsage;
+
+      @Getter
+      @Setter
+      @EqualsAndHashCode(callSuper = false)
+      public static class BankTransfer extends StripeObject {
+        @SerializedName("eu_bank_transfer")
+        EuBankTransfer euBankTransfer;
+
+        /**
+         * List of address types that should be returned in the financial_addresses response. If not
+         * specified, all valid types will be returned.
+         *
+         * <p>Permitted values include: {@code sort_code}, {@code zengin}, {@code iban}, or {@code
+         * spei}.
+         */
+        @SerializedName("requested_address_types")
+        List<String> requestedAddressTypes;
+
+        /**
+         * The bank transfer type that this PaymentIntent is allowed to use for funding Permitted
+         * values include: {@code eu_bank_transfer}, {@code gb_bank_transfer}, {@code
+         * jp_bank_transfer}, or {@code mx_bank_transfer}.
+         *
+         * <p>One of {@code eu_bank_transfer}, {@code gb_bank_transfer}, {@code jp_bank_transfer},
+         * or {@code mx_bank_transfer}.
+         */
+        @SerializedName("type")
+        String type;
+
+        @Getter
+        @Setter
+        @EqualsAndHashCode(callSuper = false)
+        public static class EuBankTransfer extends StripeObject {
+          /**
+           * The desired country code of the bank account information. Permitted values include:
+           * {@code DE}, {@code ES}, {@code FR}, {@code IE}, or {@code NL}.
+           *
+           * <p>One of {@code DE}, {@code ES}, {@code FR}, {@code IE}, or {@code NL}.
+           */
+          @SerializedName("country")
+          String country;
+        }
+      }
     }
 
     @Getter
@@ -3124,7 +3152,7 @@ public class PaymentIntent extends ApiResource implements HasId, MetadataStore<P
     @EqualsAndHashCode(callSuper = false)
     public static class SepaDebit extends StripeObject {
       @SerializedName("mandate_options")
-      SepaDebitMandateOptions mandateOptions;
+      MandateOptions mandateOptions;
 
       /**
        * Indicates that you intend to make future payments with this PaymentIntent's payment method.
@@ -3145,12 +3173,12 @@ public class PaymentIntent extends ApiResource implements HasId, MetadataStore<P
        */
       @SerializedName("setup_future_usage")
       String setupFutureUsage;
-    }
 
-    @Getter
-    @Setter
-    @EqualsAndHashCode(callSuper = false)
-    public static class SepaDebitMandateOptions extends StripeObject {}
+      @Getter
+      @Setter
+      @EqualsAndHashCode(callSuper = false)
+      public static class MandateOptions extends StripeObject {}
+    }
 
     @Getter
     @Setter

@@ -35,7 +35,7 @@ public class ScheduledQueryRun extends ApiResource implements HasId {
   Long dataLoadTime;
 
   @SerializedName("error")
-  RunError error;
+  Errors error;
 
   /** The file object representing the results of the query. */
   @SerializedName("file")
@@ -148,7 +148,7 @@ public class ScheduledQueryRun extends ApiResource implements HasId {
   @Getter
   @Setter
   @EqualsAndHashCode(callSuper = false)
-  public static class RunError extends StripeObject {
+  public static class Errors extends StripeObject {
     /** Information about the run failure. */
     @SerializedName("message")
     String message;

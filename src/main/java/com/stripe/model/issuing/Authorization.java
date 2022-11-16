@@ -621,6 +621,15 @@ public class Authorization extends ApiResource
     /** The local currency the merchant is requesting to authorize. */
     @SerializedName("merchant_currency")
     String merchantCurrency;
+
+    @Getter
+    @Setter
+    @EqualsAndHashCode(callSuper = false)
+    public static class AmountDetails extends StripeObject {
+      /** The fee charged by the ATM for the cash withdrawal. */
+      @SerializedName("atm_fee")
+      Long atmFee;
+    }
   }
 
   @Getter
@@ -695,6 +704,15 @@ public class Authorization extends ApiResource
      */
     @SerializedName("reason_message")
     String reasonMessage;
+
+    @Getter
+    @Setter
+    @EqualsAndHashCode(callSuper = false)
+    public static class AmountDetails extends StripeObject {
+      /** The fee charged by the ATM for the cash withdrawal. */
+      @SerializedName("atm_fee")
+      Long atmFee;
+    }
   }
 
   @Getter
