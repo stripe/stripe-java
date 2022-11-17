@@ -114,6 +114,9 @@ public class Session extends ApiResource implements HasId {
   @SerializedName("currency")
   String currency;
 
+  @SerializedName("custom_text")
+  CustomText customText;
+
   /**
    * The ID of the customer for this Session. For Checkout Sessions in {@code payment} or {@code
    * subscription} mode, Checkout will create a new customer object based on information provided
@@ -730,6 +733,37 @@ public class Session extends ApiResource implements HasId {
      */
     @SerializedName("terms_of_service")
     String termsOfService;
+  }
+
+  @Getter
+  @Setter
+  @EqualsAndHashCode(callSuper = false)
+  public static class CustomText extends StripeObject {
+    /** Custom text that should be displayed alongside shipping address collection. */
+    @SerializedName("shipping_address")
+    ShippingAddress shippingAddress;
+
+    /** Custom text that should be displayed alongside the payment confirmation button. */
+    @SerializedName("submit")
+    Submit submit;
+
+    @Getter
+    @Setter
+    @EqualsAndHashCode(callSuper = false)
+    public static class ShippingAddress extends StripeObject {
+      /** Text may be up to 500 characters in length. */
+      @SerializedName("message")
+      String message;
+    }
+
+    @Getter
+    @Setter
+    @EqualsAndHashCode(callSuper = false)
+    public static class Submit extends StripeObject {
+      /** Text may be up to 500 characters in length. */
+      @SerializedName("message")
+      String message;
+    }
   }
 
   @Getter

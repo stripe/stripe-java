@@ -1858,6 +1858,13 @@ public class PaymentIntent extends ApiResource implements HasId, MetadataStore<P
       @SerializedName("data")
       String data;
 
+      /**
+       * The URL to the hosted PayNow instructions page, which allows customers to view the PayNow
+       * QR code.
+       */
+      @SerializedName("hosted_instructions_url")
+      String hostedInstructionsUrl;
+
       /** The image_url_png string used to render QR code. */
       @SerializedName("image_url_png")
       String imageUrlPng;
