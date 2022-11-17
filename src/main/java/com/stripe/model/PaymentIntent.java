@@ -1923,17 +1923,11 @@ public class PaymentIntent extends ApiResource implements HasId, MetadataStore<P
       @SerializedName("hosted_instructions_url")
       String hostedInstructionsUrl;
 
-      /**
-       * The image_url_png string used to render QR code, can be used as &lt;img src=&quot;…&quot;
-       * /&gt;.
-       */
+      /** The PNG path used to render the QR code, can be used as the source in an HTML img tag. */
       @SerializedName("image_url_png")
       String imageUrlPng;
 
-      /**
-       * The image_url_svg string used to render QR code, can be used as &lt;img src=&quot;…&quot;
-       * /&gt;.
-       */
+      /** The SVG path used to render the QR code, can be used as the source in an HTML img tag. */
       @SerializedName("image_url_svg")
       String imageUrlSvg;
     }
@@ -1986,6 +1980,13 @@ public class PaymentIntent extends ApiResource implements HasId, MetadataStore<P
       /** The data being used to generate QR code. */
       @SerializedName("data")
       String data;
+
+      /**
+       * The URL to the hosted WeChat Pay instructions page, which allows customers to view the
+       * WeChat Pay QR code.
+       */
+      @SerializedName("hosted_instructions_url")
+      String hostedInstructionsUrl;
 
       /** The base64 image data for a pre-generated QR code. */
       @SerializedName("image_data_url")
