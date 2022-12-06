@@ -2262,6 +2262,18 @@ public class SubscriptionScheduleCreateParams extends ApiRequestParams {
       Map<String, Object> extraParams;
 
       /**
+       * Set of <a href="https://stripe.com/docs/api/metadata">key-value pairs</a> that you can
+       * attach to a configuration item. Metadata on a configuration item will update the underlying
+       * subscription item's {@code metadata} when the phase is entered, adding new keys and
+       * replacing existing keys. Individual keys in the subscription item's {@code metadata} can be
+       * unset by posting an empty value to them in the configuration item's {@code metadata}. To
+       * unset all keys in the subscription item's {@code metadata}, update the subscription item
+       * directly or unset every key individually from the configuration item's {@code metadata}.
+       */
+      @SerializedName("metadata")
+      Map<String, String> metadata;
+
+      /**
        * The plan ID to subscribe to. You may specify the same ID in {@code plan} and {@code price}.
        */
       @SerializedName("plan")
@@ -2298,6 +2310,7 @@ public class SubscriptionScheduleCreateParams extends ApiRequestParams {
       private Item(
           Object billingThresholds,
           Map<String, Object> extraParams,
+          Map<String, String> metadata,
           String plan,
           String price,
           PriceData priceData,
@@ -2305,6 +2318,7 @@ public class SubscriptionScheduleCreateParams extends ApiRequestParams {
           Object taxRates) {
         this.billingThresholds = billingThresholds;
         this.extraParams = extraParams;
+        this.metadata = metadata;
         this.plan = plan;
         this.price = price;
         this.priceData = priceData;
@@ -2321,6 +2335,8 @@ public class SubscriptionScheduleCreateParams extends ApiRequestParams {
 
         private Map<String, Object> extraParams;
 
+        private Map<String, String> metadata;
+
         private String plan;
 
         private String price;
@@ -2336,6 +2352,7 @@ public class SubscriptionScheduleCreateParams extends ApiRequestParams {
           return new SubscriptionScheduleCreateParams.Phase.Item(
               this.billingThresholds,
               this.extraParams,
+              this.metadata,
               this.plan,
               this.price,
               this.priceData,
@@ -2389,6 +2406,33 @@ public class SubscriptionScheduleCreateParams extends ApiRequestParams {
             this.extraParams = new HashMap<>();
           }
           this.extraParams.putAll(map);
+          return this;
+        }
+
+        /**
+         * Add a key/value pair to `metadata` map. A map is initialized for the first `put/putAll`
+         * call, and subsequent calls add additional key/value pairs to the original map. See {@link
+         * SubscriptionScheduleCreateParams.Phase.Item#metadata} for the field documentation.
+         */
+        public Builder putMetadata(String key, String value) {
+          if (this.metadata == null) {
+            this.metadata = new HashMap<>();
+          }
+          this.metadata.put(key, value);
+          return this;
+        }
+
+        /**
+         * Add all map key/value pairs to `metadata` map. A map is initialized for the first
+         * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
+         * map. See {@link SubscriptionScheduleCreateParams.Phase.Item#metadata} for the field
+         * documentation.
+         */
+        public Builder putAllMetadata(Map<String, String> map) {
+          if (this.metadata == null) {
+            this.metadata = new HashMap<>();
+          }
+          this.metadata.putAll(map);
           return this;
         }
 

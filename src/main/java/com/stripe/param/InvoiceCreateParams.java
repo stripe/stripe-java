@@ -184,9 +184,8 @@ public class InvoiceCreateParams extends ApiRequestParams {
 
   /**
    * The ID of the subscription to invoice, if any. If set, the created invoice will only include
-   * pending invoice items for that subscription and pending invoice items not associated with any
-   * subscription if {@code pending_invoice_items_behavior} is {@code include}. The subscription's
-   * billing cycle and regular subscription events won't be affected.
+   * pending invoice items for that subscription. The subscription's billing cycle and regular
+   * subscription events won't be affected.
    */
   @SerializedName("subscription")
   String subscription;
@@ -779,9 +778,8 @@ public class InvoiceCreateParams extends ApiRequestParams {
 
     /**
      * The ID of the subscription to invoice, if any. If set, the created invoice will only include
-     * pending invoice items for that subscription and pending invoice items not associated with any
-     * subscription if {@code pending_invoice_items_behavior} is {@code include}. The subscription's
-     * billing cycle and regular subscription events won't be affected.
+     * pending invoice items for that subscription. The subscription's billing cycle and regular
+     * subscription events won't be affected.
      */
     public Builder setSubscription(String subscription) {
       this.subscription = subscription;
