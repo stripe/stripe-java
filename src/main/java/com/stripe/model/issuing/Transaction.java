@@ -413,7 +413,10 @@ public class Transaction extends ApiResource
     @SerializedName("name")
     String name;
 
-    /** Identifier assigned to the seller by the card brand. */
+    /**
+     * Identifier assigned to the seller by the card network. Different card networks may assign
+     * different network_id fields to the same merchant.
+     */
     @SerializedName("network_id")
     String networkId;
 

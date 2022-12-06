@@ -792,6 +792,15 @@ public class Account extends ApiResource implements MetadataStore<Account>, Paym
     String idealPayments;
 
     /**
+     * The status of the india_international_payments capability of the account, or whether the
+     * account can process international charges (non INR) in India.
+     *
+     * <p>One of {@code active}, {@code inactive}, or {@code pending}.
+     */
+    @SerializedName("india_international_payments")
+    String indiaInternationalPayments;
+
+    /**
      * The status of the JCB payments capability of the account, or whether the account (Japan only)
      * can directly process JCB credit card charges in JPY currency.
      *

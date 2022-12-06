@@ -9,6 +9,7 @@ import com.stripe.model.Customer;
 import com.stripe.model.Discount;
 import com.stripe.model.ExpandableField;
 import com.stripe.model.HasId;
+import com.stripe.model.Invoice;
 import com.stripe.model.LineItemCollection;
 import com.stripe.model.PaymentIntent;
 import com.stripe.model.PaymentLink;
@@ -17,6 +18,7 @@ import com.stripe.model.ShippingDetails;
 import com.stripe.model.ShippingRate;
 import com.stripe.model.StripeObject;
 import com.stripe.model.Subscription;
+import com.stripe.model.TaxId;
 import com.stripe.model.TaxRate;
 import com.stripe.net.ApiResource;
 import com.stripe.net.RequestOptions;
@@ -27,6 +29,7 @@ import com.stripe.param.checkout.SessionListParams;
 import com.stripe.param.checkout.SessionRetrieveParams;
 import java.util.List;
 import java.util.Map;
+import java.util.stream.Collectors;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.Setter;
@@ -159,6 +162,16 @@ public class Session extends ApiResource implements HasId {
   @Getter(onMethod_ = {@Override})
   @SerializedName("id")
   String id;
+
+  /** ID of the invoice created by the Checkout Session, if it exists. */
+  @SerializedName("invoice")
+  @Getter(lombok.AccessLevel.NONE)
+  @Setter(lombok.AccessLevel.NONE)
+  ExpandableField<Invoice> invoice;
+
+  /** Details on the state of invoice creation for the Checkout Session. */
+  @SerializedName("invoice_creation")
+  InvoiceCreation invoiceCreation;
 
   /** The line items purchased by the customer. */
   @SerializedName("line_items")
@@ -342,6 +355,24 @@ public class Session extends ApiResource implements HasId {
 
   public void setCustomerObject(Customer expandableObject) {
     this.customer = new ExpandableField<Customer>(expandableObject.getId(), expandableObject);
+  }
+
+  /** Get ID of expandable {@code invoice} object. */
+  public String getInvoice() {
+    return (this.invoice != null) ? this.invoice.getId() : null;
+  }
+
+  public void setInvoice(String id) {
+    this.invoice = ApiResource.setExpandableFieldId(id, this.invoice);
+  }
+
+  /** Get expanded {@code invoice}. */
+  public Invoice getInvoiceObject() {
+    return (this.invoice != null) ? this.invoice.getExpanded() : null;
+  }
+
+  public void setInvoiceObject(Invoice expandableObject) {
+    this.invoice = new ExpandableField<Invoice>(expandableObject.getId(), expandableObject);
   }
 
   /** Get ID of expandable {@code paymentIntent} object. */
@@ -832,6 +863,119 @@ public class Session extends ApiResource implements HasId {
       /** The value of the tax ID. */
       @SerializedName("value")
       String value;
+    }
+  }
+
+  @Getter
+  @Setter
+  @EqualsAndHashCode(callSuper = false)
+  public static class InvoiceCreation extends StripeObject {
+    /** Indicates whether invoice creation is enabled for the Checkout Session. */
+    @SerializedName("enabled")
+    Boolean enabled;
+
+    @SerializedName("invoice_data")
+    InvoiceData invoiceData;
+
+    @Getter
+    @Setter
+    @EqualsAndHashCode(callSuper = false)
+    public static class InvoiceData extends StripeObject {
+      /** The account tax IDs associated with the invoice. */
+      @SerializedName("account_tax_ids")
+      List<ExpandableField<TaxId>> accountTaxIds;
+
+      /** Custom fields displayed on the invoice. */
+      @SerializedName("custom_fields")
+      List<Session.InvoiceCreation.InvoiceData.CustomField> customFields;
+
+      /** An arbitrary string attached to the object. Often useful for displaying to users. */
+      @SerializedName("description")
+      String description;
+
+      /** Footer displayed on the invoice. */
+      @SerializedName("footer")
+      String footer;
+
+      /**
+       * Set of <a href="https://stripe.com/docs/api/metadata">key-value pairs</a> that you can
+       * attach to an object. This can be useful for storing additional information about the object
+       * in a structured format.
+       */
+      @SerializedName("metadata")
+      Map<String, String> metadata;
+
+      /** Options for invoice PDF rendering. */
+      @SerializedName("rendering_options")
+      RenderingOptions renderingOptions;
+
+      /** Get IDs of expandable {@code accountTaxIds} object list. */
+      public List<String> getAccountTaxIds() {
+        return (this.accountTaxIds != null)
+            ? this.accountTaxIds.stream().map(x -> x.getId()).collect(Collectors.toList())
+            : null;
+      }
+
+      public void setAccountTaxIds(List<String> ids) {
+        if (ids == null) {
+          this.accountTaxIds = null;
+          return;
+        }
+        if (this.accountTaxIds != null
+            && this.accountTaxIds.stream()
+                .map(x -> x.getId())
+                .collect(Collectors.toList())
+                .equals(ids)) {
+          // noop if the ids are equal to what are already present
+          return;
+        }
+        this.accountTaxIds =
+            (ids != null)
+                ? ids.stream()
+                    .map(id -> new ExpandableField<TaxId>(id, null))
+                    .collect(Collectors.toList())
+                : null;
+      }
+
+      /** Get expanded {@code accountTaxIds}. */
+      public List<TaxId> getAccountTaxIdObjects() {
+        return (this.accountTaxIds != null)
+            ? this.accountTaxIds.stream().map(x -> x.getExpanded()).collect(Collectors.toList())
+            : null;
+      }
+
+      public void setAccountTaxIdObjects(List<TaxId> objs) {
+        this.accountTaxIds =
+            objs != null
+                ? objs.stream()
+                    .map(x -> new ExpandableField<TaxId>(x.getId(), x))
+                    .collect(Collectors.toList())
+                : null;
+      }
+
+      @Getter
+      @Setter
+      @EqualsAndHashCode(callSuper = false)
+      public static class CustomField extends StripeObject {
+        /** The name of the custom field. */
+        @SerializedName("name")
+        String name;
+
+        /** The value of the custom field. */
+        @SerializedName("value")
+        String value;
+      }
+
+      @Getter
+      @Setter
+      @EqualsAndHashCode(callSuper = false)
+      public static class RenderingOptions extends StripeObject {
+        /**
+         * How line-item prices and amounts will be displayed with respect to tax on invoice PDFs.
+         */
+        @SerializedName("amount_tax_display")
+        String amountTaxDisplay;
+      }
     }
   }
 

@@ -1042,6 +1042,14 @@ public class SubscriptionSchedule extends ApiResource
       @SerializedName("billing_thresholds")
       BillingThresholds billingThresholds;
 
+      /**
+       * Set of <a href="https://stripe.com/docs/api/metadata">key-value pairs</a> that you can
+       * attach to an item. Metadata on this item will update the underlying subscription item's
+       * {@code metadata} when the phase is entered.
+       */
+      @SerializedName("metadata")
+      Map<String, String> metadata;
+
       /** ID of the plan to which the customer should be subscribed. */
       @SerializedName("plan")
       @Getter(lombok.AccessLevel.NONE)

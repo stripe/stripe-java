@@ -1484,15 +1484,14 @@ public class PaymentLinkCreateParams extends ApiRequestParams {
 
       /**
        * The maximum quantity the customer can purchase. By default this value is 99. You can
-       * specify a value up to 99.
+       * specify a value up to 999.
        */
       @SerializedName("maximum")
       Long maximum;
 
       /**
-       * The minimum quantity the customer can purchase. By default this value is 0. You can specify
-       * a value up to 98. If there is only one item in the cart then that item's quantity cannot go
-       * down to 0.
+       * The minimum quantity the customer can purchase. By default this value is 0. If there is
+       * only one item in the cart then that item's quantity cannot go down to 0.
        */
       @SerializedName("minimum")
       Long minimum;
@@ -1560,7 +1559,7 @@ public class PaymentLinkCreateParams extends ApiRequestParams {
 
         /**
          * The maximum quantity the customer can purchase. By default this value is 99. You can
-         * specify a value up to 99.
+         * specify a value up to 999.
          */
         public Builder setMaximum(Long maximum) {
           this.maximum = maximum;
@@ -1568,9 +1567,8 @@ public class PaymentLinkCreateParams extends ApiRequestParams {
         }
 
         /**
-         * The minimum quantity the customer can purchase. By default this value is 0. You can
-         * specify a value up to 98. If there is only one item in the cart then that item's quantity
-         * cannot go down to 0.
+         * The minimum quantity the customer can purchase. By default this value is 0. If there is
+         * only one item in the cart then that item's quantity cannot go down to 0.
          */
         public Builder setMinimum(Long minimum) {
           this.minimum = minimum;
