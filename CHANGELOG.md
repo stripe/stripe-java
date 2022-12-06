@@ -1,5 +1,15 @@
 # Changelog
 
+## 22.2.0 - 2022-12-06
+* [#1484](https://github.com/stripe/stripe-java/pull/1484) API Updates
+  * Add support for `flow_data` on `BillingPortalSessionCreateParams`
+  * Add support for `flow` on `BillingPortal.Session`
+* [#1483](https://github.com/stripe/stripe-java/pull/1483) API Updates
+  * Add support for `india_international_payments` on `Account.capabilities`, `AccountCreateParams.capabilities`, and `AccountUpdateParams.capabilities`
+  * Add support for `invoice_creation` on `Checkout.Session` and `CheckoutSessionCreateParams`
+  * Add support for `invoice` on `Checkout.Session`
+  * Add support for `metadata` on `SubscriptionSchedule.phases[].items[]`, `SubscriptionScheduleCreateParams.phases[].items[]`, and `SubscriptionScheduleUpdateParams.phases[].items[]`
+
 ## 22.1.0 - 2022-11-17
 * [#1480](https://github.com/stripe/stripe-java/pull/1480) API Updates
   * Add support for `hosted_instructions_url` on `PaymentIntent.next_action.wechat_pay_display_qr_code`
