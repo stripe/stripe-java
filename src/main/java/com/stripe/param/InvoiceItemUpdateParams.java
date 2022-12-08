@@ -657,6 +657,10 @@ public class InvoiceItemUpdateParams extends ApiRequestParams {
 
     @Getter
     public static class DiscountEnd {
+      /** Time span for the redeemed discount. */
+      @SerializedName("duration")
+      Duration duration;
+
       /**
        * Map of extra parameters for custom features not available in this client library. The
        * content in this map is not serialized under this field's {@code @SerializedName} value.
@@ -674,7 +678,9 @@ public class InvoiceItemUpdateParams extends ApiRequestParams {
       @SerializedName("type")
       Type type;
 
-      private DiscountEnd(Map<String, Object> extraParams, Long timestamp, Type type) {
+      private DiscountEnd(
+          Duration duration, Map<String, Object> extraParams, Long timestamp, Type type) {
+        this.duration = duration;
         this.extraParams = extraParams;
         this.timestamp = timestamp;
         this.type = type;
@@ -685,6 +691,8 @@ public class InvoiceItemUpdateParams extends ApiRequestParams {
       }
 
       public static class Builder {
+        private Duration duration;
+
         private Map<String, Object> extraParams;
 
         private Long timestamp;
@@ -694,7 +702,13 @@ public class InvoiceItemUpdateParams extends ApiRequestParams {
         /** Finalize and obtain parameter instance from this builder. */
         public InvoiceItemUpdateParams.Discount.DiscountEnd build() {
           return new InvoiceItemUpdateParams.Discount.DiscountEnd(
-              this.extraParams, this.timestamp, this.type);
+              this.duration, this.extraParams, this.timestamp, this.type);
+        }
+
+        /** Time span for the redeemed discount. */
+        public Builder setDuration(InvoiceItemUpdateParams.Discount.DiscountEnd.Duration duration) {
+          this.duration = duration;
+          return this;
         }
 
         /**
@@ -738,7 +752,129 @@ public class InvoiceItemUpdateParams extends ApiRequestParams {
         }
       }
 
+      @Getter
+      public static class Duration {
+        /**
+         * Map of extra parameters for custom features not available in this client library. The
+         * content in this map is not serialized under this field's {@code @SerializedName} value.
+         * Instead, each key/value pair is serialized as if the key is a root-level field
+         * (serialized) name in this param object. Effectively, this map is flattened to its parent
+         * instance.
+         */
+        @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
+        Map<String, Object> extraParams;
+
+        /**
+         * Specifies a type of interval unit. Either {@code day}, {@code week}, {@code month} or
+         * {@code year}.
+         */
+        @SerializedName("interval")
+        Interval interval;
+
+        /**
+         * The number of intervals, as an whole number greater than 0. Stripe multiplies this by the
+         * interval type to get the overall duration.
+         */
+        @SerializedName("interval_count")
+        Long intervalCount;
+
+        private Duration(Map<String, Object> extraParams, Interval interval, Long intervalCount) {
+          this.extraParams = extraParams;
+          this.interval = interval;
+          this.intervalCount = intervalCount;
+        }
+
+        public static Builder builder() {
+          return new Builder();
+        }
+
+        public static class Builder {
+          private Map<String, Object> extraParams;
+
+          private Interval interval;
+
+          private Long intervalCount;
+
+          /** Finalize and obtain parameter instance from this builder. */
+          public InvoiceItemUpdateParams.Discount.DiscountEnd.Duration build() {
+            return new InvoiceItemUpdateParams.Discount.DiscountEnd.Duration(
+                this.extraParams, this.interval, this.intervalCount);
+          }
+
+          /**
+           * Add a key/value pair to `extraParams` map. A map is initialized for the first
+           * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
+           * map. See {@link InvoiceItemUpdateParams.Discount.DiscountEnd.Duration#extraParams} for
+           * the field documentation.
+           */
+          public Builder putExtraParam(String key, Object value) {
+            if (this.extraParams == null) {
+              this.extraParams = new HashMap<>();
+            }
+            this.extraParams.put(key, value);
+            return this;
+          }
+
+          /**
+           * Add all map key/value pairs to `extraParams` map. A map is initialized for the first
+           * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
+           * map. See {@link InvoiceItemUpdateParams.Discount.DiscountEnd.Duration#extraParams} for
+           * the field documentation.
+           */
+          public Builder putAllExtraParam(Map<String, Object> map) {
+            if (this.extraParams == null) {
+              this.extraParams = new HashMap<>();
+            }
+            this.extraParams.putAll(map);
+            return this;
+          }
+
+          /**
+           * Specifies a type of interval unit. Either {@code day}, {@code week}, {@code month} or
+           * {@code year}.
+           */
+          public Builder setInterval(
+              InvoiceItemUpdateParams.Discount.DiscountEnd.Duration.Interval interval) {
+            this.interval = interval;
+            return this;
+          }
+
+          /**
+           * The number of intervals, as an whole number greater than 0. Stripe multiplies this by
+           * the interval type to get the overall duration.
+           */
+          public Builder setIntervalCount(Long intervalCount) {
+            this.intervalCount = intervalCount;
+            return this;
+          }
+        }
+
+        public enum Interval implements ApiRequestParams.EnumParam {
+          @SerializedName("day")
+          DAY("day"),
+
+          @SerializedName("month")
+          MONTH("month"),
+
+          @SerializedName("week")
+          WEEK("week"),
+
+          @SerializedName("year")
+          YEAR("year");
+
+          @Getter(onMethod_ = {@Override})
+          private final String value;
+
+          Interval(String value) {
+            this.value = value;
+          }
+        }
+      }
+
       public enum Type implements ApiRequestParams.EnumParam {
+        @SerializedName("duration")
+        DURATION("duration"),
+
         @SerializedName("timestamp")
         TIMESTAMP("timestamp");
 

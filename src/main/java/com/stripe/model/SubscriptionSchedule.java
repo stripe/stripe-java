@@ -1143,7 +1143,7 @@ public class SubscriptionSchedule extends ApiResource
           /**
            * The discount end type
            *
-           * <p>Equal to {@code timestamp}.
+           * <p>One of {@code duration}, or {@code timestamp}.
            */
           @SerializedName("type")
           String type;
@@ -1248,7 +1248,7 @@ public class SubscriptionSchedule extends ApiResource
         /**
          * The discount end type
          *
-         * <p>Equal to {@code timestamp}.
+         * <p>One of {@code duration}, or {@code timestamp}.
          */
         @SerializedName("type")
         String type;
@@ -1436,7 +1436,7 @@ public class SubscriptionSchedule extends ApiResource
           /**
            * The discount end type
            *
-           * <p>Equal to {@code timestamp}.
+           * <p>One of {@code duration}, or {@code timestamp}.
            */
           @SerializedName("type")
           String type;
