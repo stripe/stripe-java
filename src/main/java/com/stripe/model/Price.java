@@ -409,7 +409,7 @@ public class Price extends ApiResource implements HasId, MetadataStore<Price> {
      * set to {@code tiered}. See also the documentation for {@code billing_scheme}.
      */
     @SerializedName("tiers")
-    List<Price.Tier> tiers;
+    List<Price.CurrencyOption.Tier> tiers;
 
     /**
      * The unit amount in %s to be charged, represented as a whole integer if possible. Only set if
@@ -424,6 +424,55 @@ public class Price extends ApiResource implements HasId, MetadataStore<Price> {
      */
     @SerializedName("unit_amount_decimal")
     BigDecimal unitAmountDecimal;
+
+    @Getter
+    @Setter
+    @EqualsAndHashCode(callSuper = false)
+    public static class CustomUnitAmount extends StripeObject {
+      /** The maximum unit amount the customer can specify for this item. */
+      @SerializedName("maximum")
+      Long maximum;
+
+      /**
+       * The minimum unit amount the customer can specify for this item. Must be at least the
+       * minimum charge amount.
+       */
+      @SerializedName("minimum")
+      Long minimum;
+
+      /** The starting unit amount which can be updated by the customer. */
+      @SerializedName("preset")
+      Long preset;
+    }
+
+    @Getter
+    @Setter
+    @EqualsAndHashCode(callSuper = false)
+    public static class Tier extends StripeObject {
+      /** Price for the entire tier. */
+      @SerializedName("flat_amount")
+      Long flatAmount;
+
+      /**
+       * Same as {@code flat_amount}, but contains a decimal value with at most 12 decimal places.
+       */
+      @SerializedName("flat_amount_decimal")
+      BigDecimal flatAmountDecimal;
+
+      /** Per unit price for units relevant to the tier. */
+      @SerializedName("unit_amount")
+      Long unitAmount;
+
+      /**
+       * Same as {@code unit_amount}, but contains a decimal value with at most 12 decimal places.
+       */
+      @SerializedName("unit_amount_decimal")
+      BigDecimal unitAmountDecimal;
+
+      /** Up to and including to this quantity will be contained in the tier. */
+      @SerializedName("up_to")
+      Long upTo;
+    }
   }
 
   @Getter

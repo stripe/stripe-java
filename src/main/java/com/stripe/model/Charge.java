@@ -4,7 +4,6 @@ package com.stripe.model;
 import com.google.gson.annotations.SerializedName;
 import com.stripe.Stripe;
 import com.stripe.exception.StripeException;
-import com.stripe.model.radar.Rule;
 import com.stripe.net.ApiResource;
 import com.stripe.net.RequestOptions;
 import com.stripe.param.ChargeCaptureParams;
@@ -98,7 +97,7 @@ public class Charge extends ApiResource implements MetadataStore<Charge>, Balanc
   ExpandableField<BalanceTransaction> balanceTransaction;
 
   @SerializedName("billing_details")
-  PaymentMethod.BillingDetails billingDetails;
+  BillingDetails billingDetails;
 
   /**
    * The full statement descriptor that is passed to card networks, and that is displayed on your
@@ -939,6 +938,27 @@ public class Charge extends ApiResource implements MetadataStore<Charge>, Balanc
   @Getter
   @Setter
   @EqualsAndHashCode(callSuper = false)
+  public static class BillingDetails extends StripeObject {
+    /** Billing address. */
+    @SerializedName("address")
+    Address address;
+
+    /** Email address. */
+    @SerializedName("email")
+    String email;
+
+    /** Full name. */
+    @SerializedName("name")
+    String name;
+
+    /** Billing phone number (including extension). */
+    @SerializedName("phone")
+    String phone;
+  }
+
+  @Getter
+  @Setter
+  @EqualsAndHashCode(callSuper = false)
   public static class FraudDetails extends StripeObject {
     /** Assessments from Stripe. If set, the value is {@code fraudulent}. */
     @SerializedName("stripe_report")
@@ -1080,6 +1100,24 @@ public class Charge extends ApiResource implements MetadataStore<Charge>, Balanc
 
     public void setRuleObject(Rule expandableObject) {
       this.rule = new ExpandableField<Rule>(expandableObject.getId(), expandableObject);
+    }
+
+    @Getter
+    @Setter
+    @EqualsAndHashCode(callSuper = false)
+    public static class Rule extends StripeObject implements HasId {
+      /** The action taken on the payment. */
+      @SerializedName("action")
+      String action;
+
+      /** Unique identifier for the object. */
+      @Getter(onMethod_ = {@Override})
+      @SerializedName("id")
+      String id;
+
+      /** The predicate to evaluate the payment against. */
+      @SerializedName("predicate")
+      String predicate;
     }
   }
 
@@ -1637,7 +1675,30 @@ public class Charge extends ApiResource implements MetadataStore<Charge>, Balanc
       public static class Installments extends StripeObject {
         /** Installment plan selected for the payment. */
         @SerializedName("plan")
-        PaymentIntent.PaymentMethodOptions.Card.Installments.Plan plan;
+        Plan plan;
+
+        @Getter
+        @Setter
+        @EqualsAndHashCode(callSuper = false)
+        public static class Plan extends StripeObject {
+          /**
+           * For {@code fixed_count} installment plans, this is the number of installment payments
+           * your customer will make to their credit card.
+           */
+          @SerializedName("count")
+          Long count;
+
+          /**
+           * For {@code fixed_count} installment plans, this is the interval between installment
+           * payments your customer will make to their credit card. One of {@code month}.
+           */
+          @SerializedName("interval")
+          String interval;
+
+          /** Type of installment plan, one of {@code fixed_count}. */
+          @SerializedName("type")
+          String type;
+        }
       }
 
       @Getter
@@ -2385,6 +2446,19 @@ public class Charge extends ApiResource implements MetadataStore<Charge>, Balanc
        */
       @SerializedName("store")
       Store store;
+
+      @Getter
+      @Setter
+      @EqualsAndHashCode(callSuper = false)
+      public static class Store extends StripeObject {
+        /**
+         * The name of the convenience store chain where the payment was completed.
+         *
+         * <p>One of {@code familymart}, {@code lawson}, {@code ministop}, or {@code seicomart}.
+         */
+        @SerializedName("chain")
+        String chain;
+      }
     }
 
     @Getter
@@ -2655,19 +2729,6 @@ public class Charge extends ApiResource implements MetadataStore<Charge>, Balanc
         this.generatedSepaDebitMandate =
             new ExpandableField<Mandate>(expandableObject.getId(), expandableObject);
       }
-    }
-
-    @Getter
-    @Setter
-    @EqualsAndHashCode(callSuper = false)
-    public static class Store extends StripeObject {
-      /**
-       * The name of the convenience store chain where the payment was completed.
-       *
-       * <p>One of {@code familymart}, {@code lawson}, {@code ministop}, or {@code seicomart}.
-       */
-      @SerializedName("chain")
-      String chain;
     }
 
     @Getter

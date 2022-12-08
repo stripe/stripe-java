@@ -462,10 +462,10 @@ public class Account extends ApiResource implements HasId {
     Long asOf;
 
     @SerializedName("cash")
-    CashBalance cash;
+    Cash cash;
 
     @SerializedName("credit")
-    CreditBalance credit;
+    Credit credit;
 
     /**
      * The balances owed to (or by) the account holder.
@@ -491,7 +491,7 @@ public class Account extends ApiResource implements HasId {
     @Getter
     @Setter
     @EqualsAndHashCode(callSuper = false)
-    public static class CashBalance extends StripeObject {
+    public static class Cash extends StripeObject {
       /**
        * The funds available to the account holder. Typically this is the current balance less any
        * holds.
@@ -510,7 +510,7 @@ public class Account extends ApiResource implements HasId {
     @Getter
     @Setter
     @EqualsAndHashCode(callSuper = false)
-    public static class CreditBalance extends StripeObject {
+    public static class Credit extends StripeObject {
       /**
        * The credit that has been used by the account holder.
        *

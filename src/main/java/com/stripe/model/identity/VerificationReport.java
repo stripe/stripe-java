@@ -161,11 +161,11 @@ public class VerificationReport extends ApiResource implements HasId {
 
     /** Date of birth as it appears in the document. */
     @SerializedName("dob")
-    DateOfBirth dob;
+    Dob dob;
 
     /** Details on the verification error. Present when status is {@code unverified}. */
     @SerializedName("error")
-    DocumentCheckError error;
+    Errors error;
 
     /** Expiration date of the document. */
     @SerializedName("expiration_date")
@@ -218,7 +218,7 @@ public class VerificationReport extends ApiResource implements HasId {
     @Getter
     @Setter
     @EqualsAndHashCode(callSuper = false)
-    public static class DateOfBirth extends StripeObject {
+    public static class Dob extends StripeObject {
       /** Numerical day between 1 and 31. */
       @SerializedName("day")
       Long day;
@@ -235,7 +235,7 @@ public class VerificationReport extends ApiResource implements HasId {
     @Getter
     @Setter
     @EqualsAndHashCode(callSuper = false)
-    public static class DocumentCheckError extends StripeObject {
+    public static class Errors extends StripeObject {
       /**
        * A short machine-readable string giving the reason for the verification failure.
        *
@@ -297,11 +297,11 @@ public class VerificationReport extends ApiResource implements HasId {
   public static class IdNumber extends StripeObject {
     /** Date of birth. */
     @SerializedName("dob")
-    DateOfBirth dob;
+    Dob dob;
 
     /** Details on the verification error. Present when status is {@code unverified}. */
     @SerializedName("error")
-    IdNumberCheckError error;
+    Errors error;
 
     /** First name. */
     @SerializedName("first_name")
@@ -335,7 +335,7 @@ public class VerificationReport extends ApiResource implements HasId {
     @Getter
     @Setter
     @EqualsAndHashCode(callSuper = false)
-    public static class DateOfBirth extends StripeObject {
+    public static class Dob extends StripeObject {
       /** Numerical day between 1 and 31. */
       @SerializedName("day")
       Long day;
@@ -352,7 +352,7 @@ public class VerificationReport extends ApiResource implements HasId {
     @Getter
     @Setter
     @EqualsAndHashCode(callSuper = false)
-    public static class IdNumberCheckError extends StripeObject {
+    public static class Errors extends StripeObject {
       /**
        * A short machine-readable string giving the reason for the verification failure.
        *
@@ -438,7 +438,7 @@ public class VerificationReport extends ApiResource implements HasId {
 
     /** Details on the verification error. Present when status is {@code unverified}. */
     @SerializedName("error")
-    SelfieCheckError error;
+    Errors error;
 
     /**
      * ID of the <a href="https://stripe.com/docs/api/files">File</a> holding the image of the
@@ -458,7 +458,7 @@ public class VerificationReport extends ApiResource implements HasId {
     @Getter
     @Setter
     @EqualsAndHashCode(callSuper = false)
-    public static class SelfieCheckError extends StripeObject {
+    public static class Errors extends StripeObject {
       /**
        * A short machine-readable string giving the reason for the verification failure.
        *

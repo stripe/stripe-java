@@ -188,7 +188,7 @@ public class PaymentMethod extends ApiResource implements HasId, MetadataStore<P
   String type;
 
   @SerializedName("us_bank_account")
-  USBankAccount usBankAccount;
+  UsBankAccount usBankAccount;
 
   @SerializedName("wechat_pay")
   WechatPay wechatPay;
@@ -1063,12 +1063,12 @@ public class PaymentMethod extends ApiResource implements HasId, MetadataStore<P
   public static class Klarna extends StripeObject {
     /** The customer's date of birth, if provided. */
     @SerializedName("dob")
-    DateOfBirth dob;
+    Dob dob;
 
     @Getter
     @Setter
     @EqualsAndHashCode(callSuper = false)
-    public static class DateOfBirth extends StripeObject {
+    public static class Dob extends StripeObject {
       /** The day of birth, between 1 and 31. */
       @SerializedName("day")
       Long day;
@@ -1260,7 +1260,7 @@ public class PaymentMethod extends ApiResource implements HasId, MetadataStore<P
   @Getter
   @Setter
   @EqualsAndHashCode(callSuper = false)
-  public static class USBankAccount extends StripeObject {
+  public static class UsBankAccount extends StripeObject {
     /**
      * Account holder type: individual or company.
      *

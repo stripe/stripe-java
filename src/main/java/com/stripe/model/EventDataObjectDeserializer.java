@@ -66,12 +66,11 @@ public class EventDataObjectDeserializer {
   }
 
   /**
-   * Gets an {@code Optional} of data event object, in favor of the deprecated {@link
-   * EventData#getObject()}. When the optional is present, the deserialized {@code StripeObject}
-   * preserves high data integrity because of correspondence between schema of the API response and
-   * the model class (the underlying concrete class for abstract {@code StripeObject}) schema. This
-   * is when {@link Event#getApiVersion()} matches {@link Stripe#API_VERSION}. Otherwise, the
-   * optional is empty.
+   * Gets an {@code Optional} of data event object. When the optional is present, the deserialized
+   * {@code StripeObject} preserves high data integrity because of correspondence between schema of
+   * the PI response and the model class (the underlying concrete class for abstract {@code
+   * StripeObject}) schema. This is when {@link Event#getApiVersion()} matches {@link
+   * Stripe#API_VERSION}. Otherwise, the optional is empty.
    *
    * @return {@code Optional} of stripe object when deserialization is safe.
    */

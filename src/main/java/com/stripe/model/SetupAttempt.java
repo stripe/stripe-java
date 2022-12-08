@@ -425,7 +425,48 @@ public class SetupAttempt extends ApiResource implements HasId {
     public static class Card extends StripeObject {
       /** Populated if this authorization used 3D Secure authentication. */
       @SerializedName("three_d_secure")
-      Charge.PaymentMethodDetails.Card.ThreeDSecure threeDSecure;
+      ThreeDSecure threeDSecure;
+
+      @Getter
+      @Setter
+      @EqualsAndHashCode(callSuper = false)
+      public static class ThreeDSecure extends StripeObject {
+        /**
+         * For authenticated transactions: how the customer was authenticated by the issuing bank.
+         *
+         * <p>One of {@code challenge}, or {@code frictionless}.
+         */
+        @SerializedName("authentication_flow")
+        String authenticationFlow;
+
+        /**
+         * Indicates the outcome of 3D Secure authentication.
+         *
+         * <p>One of {@code attempt_acknowledged}, {@code authenticated}, {@code exempted}, {@code
+         * failed}, {@code not_supported}, or {@code processing_error}.
+         */
+        @SerializedName("result")
+        String result;
+
+        /**
+         * Additional information about why 3D Secure succeeded or failed based on the {@code
+         * result}.
+         *
+         * <p>One of {@code abandoned}, {@code bypassed}, {@code canceled}, {@code
+         * card_not_enrolled}, {@code network_not_supported}, {@code protocol_error}, or {@code
+         * rejected}.
+         */
+        @SerializedName("result_reason")
+        String resultReason;
+
+        /**
+         * The version of 3D Secure that was used.
+         *
+         * <p>One of {@code 1.0.2}, {@code 2.1.0}, or {@code 2.2.0}.
+         */
+        @SerializedName("version")
+        String version;
+      }
     }
 
     @Getter

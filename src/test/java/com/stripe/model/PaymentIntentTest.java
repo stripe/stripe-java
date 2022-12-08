@@ -20,7 +20,7 @@ public class PaymentIntentTest extends BaseStripeTest {
     PaymentIntent.NextAction action = resource.getNextAction();
     assertNotNull(action);
 
-    PaymentIntent.NextActionRedirectToUrl actionRedirect = action.getRedirectToUrl();
+    PaymentIntent.NextAction.RedirectToUrl actionRedirect = action.getRedirectToUrl();
     assertNotNull(actionRedirect);
     assertEquals("https://stripe.com", actionRedirect.getUrl());
     assertEquals("https://stripe.com/return", actionRedirect.getReturnUrl());

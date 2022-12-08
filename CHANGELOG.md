@@ -1,5 +1,57 @@
 # Changelog
 
+## 22.2.0 - 2022-12-06
+* [#1484](https://github.com/stripe/stripe-java/pull/1484) API Updates
+  * Add support for `flow_data` on `BillingPortalSessionCreateParams`
+  * Add support for `flow` on `BillingPortal.Session`
+* [#1483](https://github.com/stripe/stripe-java/pull/1483) API Updates
+  * Add support for `india_international_payments` on `Account.capabilities`, `AccountCreateParams.capabilities`, and `AccountUpdateParams.capabilities`
+  * Add support for `invoice_creation` on `Checkout.Session` and `CheckoutSessionCreateParams`
+  * Add support for `invoice` on `Checkout.Session`
+  * Add support for `metadata` on `SubscriptionSchedule.phases[].items[]`, `SubscriptionScheduleCreateParams.phases[].items[]`, and `SubscriptionScheduleUpdateParams.phases[].items[]`
+
+## 22.1.0 - 2022-11-17
+* [#1480](https://github.com/stripe/stripe-java/pull/1480) API Updates
+  * Add support for `hosted_instructions_url` on `PaymentIntent.next_action.wechat_pay_display_qr_code`
+* [#1479](https://github.com/stripe/stripe-java/pull/1479) API Updates
+  * Add support for `custom_text` on `Checkout.Session`, `CheckoutSessionCreateParams`, `PaymentLinkCreateParams`, `PaymentLinkUpdateParams`, and `PaymentLink`
+  * Add support for `hosted_instructions_url` on `PaymentIntent.next_action.paynow_display_qr_code`
+
+## 22.0.0 - 2022-11-16
+* [#1471](https://github.com/stripe/stripe-java/pull/1471) Next major release changes
+
+Breaking changes that arose during code generation of the library that we postponed for the next major version. For changes to the Stripe products, read more at https://stripe.com/docs/upgrades#2022-11-15.
+
+"⚠️" symbol highlights breaking changes.
+
+- ⚠️ Inline several "shared" classes for consistency (#1455)
+- ⚠️ Removed `LineItem.Product` property that was released by mistake. (#1456)
+- ⚠️ Removed `Charges` property on `PaymentIntent` and replace it with `LatestCharge` (#1473)
+- ⚠️ Removed deprecated `Amount`, `Currency`, `Description`, `Images`, `Name` properties from `SessionCreateParams.LineItem` (#1473)
+- ⚠️ Remove support for `tos_shown_and_accepted` on `CheckoutSessionCreateParams.payment_method_options.paynow` (#1473)
+- ⚠️ Removed deprecated `Sku` resource (#1459)
+- ⚠️ Removed `RequestOptions.getStripeVersionOverride`, `RequestOptions.setStripeVersionOverride`,  and `RequestOptions.clearStripeVersionOverride` (#1464)
+
+Use of `setStripeVersionOverride` is discouraged and can lead to unexpected errors during service calls because Java SDK class shapes are not guaranteed to match API responses on arbitrary versions.
+
+If you were using these methods in conjunction with `EphemeralKey` resource prefer the `EphemeralKeyCreateParamsBuilder.setStripeVersion`.
+```java
+EphemeralKeyCreateParams params = EphemeralKeyCreateParams.builder()
+  .setStripeVersion("XXXX-YY-ZZ")
+  .build();
+```
+
+If you have a use case that requires per-request version overrides, please file an issue on [stripe-java](https://github.com/stripe/stripe-java/issues) repository to ensure we are aware and can add first-class support for it. In the meantime you can use `unsafeSetStripeVersionOverride` method as a workaround.
+```java
+RequestOptions.RequestOptionsBuilder builder = RequestOptions.builder();
+builder.setApiKey(...)
+            .setClientId(...);
+
+RequestOptionsBuilder.unsafeSetStripeVersionOverride(builder, "2022-11-15");
+```
+* [#1474](https://github.com/stripe/stripe-java/pull/1474) API Updates
+  * ⚠️ Remove support for `tos_shown_and_accepted` on `CheckoutSessionCreateParams.payment_method_options.paynow`. The property was mistakenly released and never worked.
+
 ## 21.16.0-beta.1 - 2022-11-10
 * [#1475](https://github.com/stripe/stripe-java/pull/1475) API Updates for beta branch
   * Updated stable APIs to the latest version

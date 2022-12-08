@@ -1,6 +1,8 @@
 // File generated from our OpenAPI spec
 package com.stripe.model;
 
+import com.google.gson.JsonObject;
+import com.google.gson.JsonParseException;
 import com.google.gson.annotations.SerializedName;
 import com.stripe.Stripe;
 import com.stripe.exception.StripeException;
@@ -61,7 +63,7 @@ public class Event extends ApiResource implements HasId {
   Long created;
 
   @SerializedName("data")
-  EventData data;
+  Data data;
 
   /** Unique identifier for the object. */
   @Getter(onMethod_ = {@Override})
@@ -92,7 +94,7 @@ public class Event extends ApiResource implements HasId {
 
   /** Information on the API request that instigated the event. */
   @SerializedName("request")
-  EventRequest request;
+  Request request;
 
   /** Description of the event (e.g., {@code invoice.created} or {@code charge.refunded}). */
   @SerializedName("type")
@@ -207,5 +209,57 @@ public class Event extends ApiResource implements HasId {
    */
   public EventDataObjectDeserializer getDataObjectDeserializer() {
     return new EventDataObjectDeserializer(apiVersion, type, data.object);
+  }
+
+  @Getter
+  @Setter
+  @EqualsAndHashCode(callSuper = false)
+  public static class Data extends StripeObject {
+    /**
+     * Object containing the names of the attributes that have changed, and their previous values
+     * (sent along only with *.updated events).
+     */
+    @SerializedName("previous_attributes")
+    Map<String, Object> previousAttributes;
+
+    /**
+     * Raw JSON object intended to be deserialized as {@code StripeObject}. The deserialization
+     * should be deferred to the user. See the now deprecated method {@link #getObject()}.
+     */
+    @SerializedName("object")
+    JsonObject object;
+
+    /**
+     * @deprecated Deprecated in favor of getting {@code StripeObject} from {@link
+     *     Event#getDataObjectDeserializer()} and {@link EventDataObjectDeserializer#getObject()}.
+     *     Throws {@link JsonParseException} deserialization failure due to general invalid JSON, or
+     *     more specifically when JSON data and model class have incompatible schemas.
+     * @return Deserialized StripeObject for event data.
+     */
+    @Deprecated
+    public StripeObject getObject() {
+      return EventDataDeserializer.deserializeStripeObject(object);
+    }
+  }
+
+  @Getter
+  @Setter
+  @EqualsAndHashCode(callSuper = false)
+  public static class Request extends StripeObject implements HasId {
+    /**
+     * ID of the API request that caused the event. If null, the event was automatic (e.g., Stripe's
+     * automatic subscription handling). Request logs are available in the <a
+     * href="https://dashboard.stripe.com/logs">dashboard</a>, but currently not in the API.
+     */
+    @Getter(onMethod_ = {@Override})
+    @SerializedName("id")
+    String id;
+
+    /**
+     * The idempotency key transmitted during the request, if any. <em>Note: This property is
+     * populated only for events on or after May 23, 2017</em>.
+     */
+    @SerializedName("idempotency_key")
+    String idempotencyKey;
   }
 }
