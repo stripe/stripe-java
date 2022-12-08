@@ -1,5 +1,11 @@
 # Changelog
 
+## 22.3.0-beta.1 - 2022-12-08
+* [#1488](https://github.com/stripe/stripe-java/pull/1488) API Updates for beta branch
+  * Updated stable APIs to the latest version
+* [#1485](https://github.com/stripe/stripe-java/pull/1485) API Updates for beta branch
+  * Updated stable APIs to the latest version
+
 ## 22.2.0 - 2022-12-06
 * [#1484](https://github.com/stripe/stripe-java/pull/1484) API Updates
   * Add support for `flow_data` on `BillingPortalSessionCreateParams`
