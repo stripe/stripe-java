@@ -776,7 +776,7 @@ public class SetupIntent extends ApiResource implements HasId, MetadataStore<Set
     CashappHandleRedirectOrDisplayQrCode cashappHandleRedirectOrDisplayQrCode;
 
     @SerializedName("redirect_to_url")
-    NextActionRedirectToUrl redirectToUrl;
+    RedirectToUrl redirectToUrl;
 
     /**
      * Type of the next action to perform, one of {@code redirect_to_url}, {@code use_stripe_sdk},
@@ -836,6 +836,22 @@ public class SetupIntent extends ApiResource implements HasId, MetadataStore<Set
     @Getter
     @Setter
     @EqualsAndHashCode(callSuper = false)
+    public static class RedirectToUrl extends StripeObject {
+      /**
+       * If the customer does not exit their browser while authenticating, they will be redirected
+       * to this specified URL after completion.
+       */
+      @SerializedName("return_url")
+      String returnUrl;
+
+      /** The URL you must redirect your customer to in order to authenticate. */
+      @SerializedName("url")
+      String url;
+    }
+
+    @Getter
+    @Setter
+    @EqualsAndHashCode(callSuper = false)
     public static class VerifyWithMicrodeposits extends StripeObject {
       /** The timestamp when the microdeposits are expected to land. */
       @SerializedName("arrival_date")
@@ -857,22 +873,6 @@ public class SetupIntent extends ApiResource implements HasId, MetadataStore<Set
       @SerializedName("microdeposit_type")
       String microdepositType;
     }
-  }
-
-  @Getter
-  @Setter
-  @EqualsAndHashCode(callSuper = false)
-  public static class NextActionRedirectToUrl extends StripeObject {
-    /**
-     * If the customer does not exit their browser while authenticating, they will be redirected to
-     * this specified URL after completion.
-     */
-    @SerializedName("return_url")
-    String returnUrl;
-
-    /** The URL you must redirect your customer to in order to authenticate. */
-    @SerializedName("url")
-    String url;
   }
 
   @Getter
@@ -962,27 +962,52 @@ public class SetupIntent extends ApiResource implements HasId, MetadataStore<Set
     @EqualsAndHashCode(callSuper = false)
     public static class Blik extends StripeObject {
       @SerializedName("mandate_options")
-      BlikMandateOptions mandateOptions;
-    }
+      MandateOptions mandateOptions;
 
-    @Getter
-    @Setter
-    @EqualsAndHashCode(callSuper = false)
-    public static class BlikMandateOptions extends StripeObject {
-      /** Date at which the mandate expires. */
-      @SerializedName("expires_after")
-      Long expiresAfter;
+      @Getter
+      @Setter
+      @EqualsAndHashCode(callSuper = false)
+      public static class MandateOptions extends StripeObject {
+        /** Date at which the mandate expires. */
+        @SerializedName("expires_after")
+        Long expiresAfter;
 
-      @SerializedName("off_session")
-      PaymentIntent.PaymentMethodOptions.BlikMandateOptionsOffSessionDetails offSession;
+        @SerializedName("off_session")
+        OffSession offSession;
 
-      /**
-       * Type of the mandate.
-       *
-       * <p>One of {@code off_session}, or {@code on_session}.
-       */
-      @SerializedName("type")
-      String type;
+        /**
+         * Type of the mandate.
+         *
+         * <p>One of {@code off_session}, or {@code on_session}.
+         */
+        @SerializedName("type")
+        String type;
+
+        @Getter
+        @Setter
+        @EqualsAndHashCode(callSuper = false)
+        public static class OffSession extends StripeObject {
+          /** Amount of each recurring payment. */
+          @SerializedName("amount")
+          Long amount;
+
+          /** Currency of each recurring payment. */
+          @SerializedName("currency")
+          String currency;
+
+          /**
+           * Frequency interval of each recurring payment.
+           *
+           * <p>One of {@code day}, {@code month}, {@code week}, or {@code year}.
+           */
+          @SerializedName("interval")
+          String interval;
+
+          /** Frequency indicator of each recurring payment. */
+          @SerializedName("interval_count")
+          Long intervalCount;
+        }
+      }
     }
 
     @Getter
@@ -1101,13 +1126,13 @@ public class SetupIntent extends ApiResource implements HasId, MetadataStore<Set
     @EqualsAndHashCode(callSuper = false)
     public static class SepaDebit extends StripeObject {
       @SerializedName("mandate_options")
-      SepaDebitMandateOptions mandateOptions;
-    }
+      MandateOptions mandateOptions;
 
-    @Getter
-    @Setter
-    @EqualsAndHashCode(callSuper = false)
-    public static class SepaDebitMandateOptions extends StripeObject {}
+      @Getter
+      @Setter
+      @EqualsAndHashCode(callSuper = false)
+      public static class MandateOptions extends StripeObject {}
+    }
 
     @Getter
     @Setter

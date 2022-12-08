@@ -3,6 +3,7 @@ package com.stripe.param;
 
 import com.google.gson.annotations.SerializedName;
 import com.stripe.net.ApiRequestParams;
+import com.stripe.param.common.EmptyParam;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -28,6 +29,13 @@ public class SubscriptionScheduleAmendParams extends ApiRequestParams {
   @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
   Map<String, Object> extraParams;
 
+  /**
+   * In cases where the amendment changes the currently active phase, specifies if and how to
+   * prorate at the time of the request.
+   */
+  @SerializedName("proration_behavior")
+  ProrationBehavior prorationBehavior;
+
   /** Changes to apply to the subscription schedule. */
   @SerializedName("schedule_settings")
   ScheduleSettings scheduleSettings;
@@ -36,10 +44,12 @@ public class SubscriptionScheduleAmendParams extends ApiRequestParams {
       List<SubscriptionScheduleAmendParams.Amendment> amendments,
       List<String> expand,
       Map<String, Object> extraParams,
+      ProrationBehavior prorationBehavior,
       ScheduleSettings scheduleSettings) {
     this.amendments = amendments;
     this.expand = expand;
     this.extraParams = extraParams;
+    this.prorationBehavior = prorationBehavior;
     this.scheduleSettings = scheduleSettings;
   }
 
@@ -54,12 +64,18 @@ public class SubscriptionScheduleAmendParams extends ApiRequestParams {
 
     private Map<String, Object> extraParams;
 
+    private ProrationBehavior prorationBehavior;
+
     private ScheduleSettings scheduleSettings;
 
     /** Finalize and obtain parameter instance from this builder. */
     public SubscriptionScheduleAmendParams build() {
       return new SubscriptionScheduleAmendParams(
-          this.amendments, this.expand, this.extraParams, this.scheduleSettings);
+          this.amendments,
+          this.expand,
+          this.extraParams,
+          this.prorationBehavior,
+          this.scheduleSettings);
     }
 
     /**
@@ -140,6 +156,16 @@ public class SubscriptionScheduleAmendParams extends ApiRequestParams {
       return this;
     }
 
+    /**
+     * In cases where the amendment changes the currently active phase, specifies if and how to
+     * prorate at the time of the request.
+     */
+    public Builder setProrationBehavior(
+        SubscriptionScheduleAmendParams.ProrationBehavior prorationBehavior) {
+      this.prorationBehavior = prorationBehavior;
+      return this;
+    }
+
     /** Changes to apply to the subscription schedule. */
     public Builder setScheduleSettings(
         SubscriptionScheduleAmendParams.ScheduleSettings scheduleSettings) {
@@ -190,6 +216,10 @@ public class SubscriptionScheduleAmendParams extends ApiRequestParams {
     @SerializedName("item_actions")
     List<SubscriptionScheduleAmendParams.Amendment.ItemAction> itemActions;
 
+    /** Instructions for how to modify phase metadata. */
+    @SerializedName("metadata_actions")
+    List<SubscriptionScheduleAmendParams.Amendment.MetadataAction> metadataActions;
+
     /**
      * Changes to how Stripe handles prorations during the amendment time span. Affects if and how
      * prorations are created when a future phase starts. In cases where the amendment changes the
@@ -211,6 +241,7 @@ public class SubscriptionScheduleAmendParams extends ApiRequestParams {
         List<SubscriptionScheduleAmendParams.Amendment.DiscountAction> discountActions,
         Map<String, Object> extraParams,
         List<SubscriptionScheduleAmendParams.Amendment.ItemAction> itemActions,
+        List<SubscriptionScheduleAmendParams.Amendment.MetadataAction> metadataActions,
         ProrationBehavior prorationBehavior,
         TrialSettings trialSettings) {
       this.amendmentEnd = amendmentEnd;
@@ -219,6 +250,7 @@ public class SubscriptionScheduleAmendParams extends ApiRequestParams {
       this.discountActions = discountActions;
       this.extraParams = extraParams;
       this.itemActions = itemActions;
+      this.metadataActions = metadataActions;
       this.prorationBehavior = prorationBehavior;
       this.trialSettings = trialSettings;
     }
@@ -240,6 +272,8 @@ public class SubscriptionScheduleAmendParams extends ApiRequestParams {
 
       private List<SubscriptionScheduleAmendParams.Amendment.ItemAction> itemActions;
 
+      private List<SubscriptionScheduleAmendParams.Amendment.MetadataAction> metadataActions;
+
       private ProrationBehavior prorationBehavior;
 
       private TrialSettings trialSettings;
@@ -253,6 +287,7 @@ public class SubscriptionScheduleAmendParams extends ApiRequestParams {
             this.discountActions,
             this.extraParams,
             this.itemActions,
+            this.metadataActions,
             this.prorationBehavior,
             this.trialSettings);
       }
@@ -368,6 +403,35 @@ public class SubscriptionScheduleAmendParams extends ApiRequestParams {
           this.itemActions = new ArrayList<>();
         }
         this.itemActions.addAll(elements);
+        return this;
+      }
+
+      /**
+       * Add an element to `metadataActions` list. A list is initialized for the first `add/addAll`
+       * call, and subsequent calls adds additional elements to the original list. See {@link
+       * SubscriptionScheduleAmendParams.Amendment#metadataActions} for the field documentation.
+       */
+      public Builder addMetadataAction(
+          SubscriptionScheduleAmendParams.Amendment.MetadataAction element) {
+        if (this.metadataActions == null) {
+          this.metadataActions = new ArrayList<>();
+        }
+        this.metadataActions.add(element);
+        return this;
+      }
+
+      /**
+       * Add all elements to `metadataActions` list. A list is initialized for the first
+       * `add/addAll` call, and subsequent calls adds additional elements to the original list. See
+       * {@link SubscriptionScheduleAmendParams.Amendment#metadataActions} for the field
+       * documentation.
+       */
+      public Builder addAllMetadataAction(
+          List<SubscriptionScheduleAmendParams.Amendment.MetadataAction> elements) {
+        if (this.metadataActions == null) {
+          this.metadataActions = new ArrayList<>();
+        }
+        this.metadataActions.addAll(elements);
         return this;
       }
 
@@ -2935,6 +2999,236 @@ public class SubscriptionScheduleAmendParams extends ApiRequestParams {
     }
 
     @Getter
+    public static class MetadataAction {
+      /**
+       * Key-value pairs to add to schedule phase metadata. These values will merge with existing
+       * schedule phase metadata.
+       */
+      @SerializedName("add")
+      Map<String, String> add;
+
+      /**
+       * Map of extra parameters for custom features not available in this client library. The
+       * content in this map is not serialized under this field's {@code @SerializedName} value.
+       * Instead, each key/value pair is serialized as if the key is a root-level field (serialized)
+       * name in this param object. Effectively, this map is flattened to its parent instance.
+       */
+      @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
+      Map<String, Object> extraParams;
+
+      /** Keys to remove from schedule phase metadata. */
+      @SerializedName("remove")
+      List<String> remove;
+
+      /**
+       * Key-value pairs to set as schedule phase metadata. Existing schedule phase metadata will be
+       * overwritten.
+       */
+      @SerializedName("set")
+      Object set;
+
+      /**
+       * Select one of three ways to update phase-level {@code metadata} on subscription schedules.
+       */
+      @SerializedName("type")
+      Type type;
+
+      private MetadataAction(
+          Map<String, String> add,
+          Map<String, Object> extraParams,
+          List<String> remove,
+          Object set,
+          Type type) {
+        this.add = add;
+        this.extraParams = extraParams;
+        this.remove = remove;
+        this.set = set;
+        this.type = type;
+      }
+
+      public static Builder builder() {
+        return new Builder();
+      }
+
+      public static class Builder {
+        private Map<String, String> add;
+
+        private Map<String, Object> extraParams;
+
+        private List<String> remove;
+
+        private Object set;
+
+        private Type type;
+
+        /** Finalize and obtain parameter instance from this builder. */
+        public SubscriptionScheduleAmendParams.Amendment.MetadataAction build() {
+          return new SubscriptionScheduleAmendParams.Amendment.MetadataAction(
+              this.add, this.extraParams, this.remove, this.set, this.type);
+        }
+
+        /**
+         * Add a key/value pair to `add` map. A map is initialized for the first `put/putAll` call,
+         * and subsequent calls add additional key/value pairs to the original map. See {@link
+         * SubscriptionScheduleAmendParams.Amendment.MetadataAction#add} for the field
+         * documentation.
+         */
+        public Builder putAdd(String key, String value) {
+          if (this.add == null) {
+            this.add = new HashMap<>();
+          }
+          this.add.put(key, value);
+          return this;
+        }
+
+        /**
+         * Add all map key/value pairs to `add` map. A map is initialized for the first `put/putAll`
+         * call, and subsequent calls add additional key/value pairs to the original map. See {@link
+         * SubscriptionScheduleAmendParams.Amendment.MetadataAction#add} for the field
+         * documentation.
+         */
+        public Builder putAllAdd(Map<String, String> map) {
+          if (this.add == null) {
+            this.add = new HashMap<>();
+          }
+          this.add.putAll(map);
+          return this;
+        }
+
+        /**
+         * Add a key/value pair to `extraParams` map. A map is initialized for the first
+         * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
+         * map. See {@link SubscriptionScheduleAmendParams.Amendment.MetadataAction#extraParams} for
+         * the field documentation.
+         */
+        public Builder putExtraParam(String key, Object value) {
+          if (this.extraParams == null) {
+            this.extraParams = new HashMap<>();
+          }
+          this.extraParams.put(key, value);
+          return this;
+        }
+
+        /**
+         * Add all map key/value pairs to `extraParams` map. A map is initialized for the first
+         * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
+         * map. See {@link SubscriptionScheduleAmendParams.Amendment.MetadataAction#extraParams} for
+         * the field documentation.
+         */
+        public Builder putAllExtraParam(Map<String, Object> map) {
+          if (this.extraParams == null) {
+            this.extraParams = new HashMap<>();
+          }
+          this.extraParams.putAll(map);
+          return this;
+        }
+
+        /**
+         * Add an element to `remove` list. A list is initialized for the first `add/addAll` call,
+         * and subsequent calls adds additional elements to the original list. See {@link
+         * SubscriptionScheduleAmendParams.Amendment.MetadataAction#remove} for the field
+         * documentation.
+         */
+        public Builder addRemove(String element) {
+          if (this.remove == null) {
+            this.remove = new ArrayList<>();
+          }
+          this.remove.add(element);
+          return this;
+        }
+
+        /**
+         * Add all elements to `remove` list. A list is initialized for the first `add/addAll` call,
+         * and subsequent calls adds additional elements to the original list. See {@link
+         * SubscriptionScheduleAmendParams.Amendment.MetadataAction#remove} for the field
+         * documentation.
+         */
+        public Builder addAllRemove(List<String> elements) {
+          if (this.remove == null) {
+            this.remove = new ArrayList<>();
+          }
+          this.remove.addAll(elements);
+          return this;
+        }
+
+        /**
+         * Add a key/value pair to `set` map. A map is initialized for the first `put/putAll` call,
+         * and subsequent calls add additional key/value pairs to the original map. See {@link
+         * SubscriptionScheduleAmendParams.Amendment.MetadataAction#set} for the field
+         * documentation.
+         */
+        @SuppressWarnings("unchecked")
+        public Builder putSet(String key, String value) {
+          if (this.set == null || this.set instanceof EmptyParam) {
+            this.set = new HashMap<String, String>();
+          }
+          ((Map<String, String>) this.set).put(key, value);
+          return this;
+        }
+
+        /**
+         * Add all map key/value pairs to `set` map. A map is initialized for the first `put/putAll`
+         * call, and subsequent calls add additional key/value pairs to the original map. See {@link
+         * SubscriptionScheduleAmendParams.Amendment.MetadataAction#set} for the field
+         * documentation.
+         */
+        @SuppressWarnings("unchecked")
+        public Builder putAllSet(Map<String, String> map) {
+          if (this.set == null || this.set instanceof EmptyParam) {
+            this.set = new HashMap<String, String>();
+          }
+          ((Map<String, String>) this.set).putAll(map);
+          return this;
+        }
+
+        /**
+         * Key-value pairs to set as schedule phase metadata. Existing schedule phase metadata will
+         * be overwritten.
+         */
+        public Builder setSet(EmptyParam set) {
+          this.set = set;
+          return this;
+        }
+
+        /**
+         * Key-value pairs to set as schedule phase metadata. Existing schedule phase metadata will
+         * be overwritten.
+         */
+        public Builder setSet(Map<String, String> set) {
+          this.set = set;
+          return this;
+        }
+
+        /**
+         * Select one of three ways to update phase-level {@code metadata} on subscription
+         * schedules.
+         */
+        public Builder setType(SubscriptionScheduleAmendParams.Amendment.MetadataAction.Type type) {
+          this.type = type;
+          return this;
+        }
+      }
+
+      public enum Type implements ApiRequestParams.EnumParam {
+        @SerializedName("add")
+        ADD("add"),
+
+        @SerializedName("remove")
+        REMOVE("remove"),
+
+        @SerializedName("set")
+        SET("set");
+
+        @Getter(onMethod_ = {@Override})
+        private final String value;
+
+        Type(String value) {
+          this.value = value;
+        }
+      }
+    }
+
+    @Getter
     public static class TrialSettings {
       /** Defines how the subscription should behave when a trial ends. */
       @SerializedName("end_behavior")
@@ -3220,6 +3514,24 @@ public class SubscriptionScheduleAmendParams extends ApiRequestParams {
       EndBehavior(String value) {
         this.value = value;
       }
+    }
+  }
+
+  public enum ProrationBehavior implements ApiRequestParams.EnumParam {
+    @SerializedName("always_invoice")
+    ALWAYS_INVOICE("always_invoice"),
+
+    @SerializedName("create_prorations")
+    CREATE_PRORATIONS("create_prorations"),
+
+    @SerializedName("none")
+    NONE("none");
+
+    @Getter(onMethod_ = {@Override})
+    private final String value;
+
+    ProrationBehavior(String value) {
+      this.value = value;
     }
   }
 }

@@ -498,7 +498,7 @@ public class Reader extends ApiResource implements HasId, MetadataStore<Reader> 
 
     /** Represents a reader action to refund a payment. */
     @SerializedName("refund_payment")
-    RefundPaymentAction refundPayment;
+    RefundPayment refundPayment;
 
     /** Represents a reader action to set the reader display. */
     @SerializedName("set_reader_display")
@@ -627,7 +627,7 @@ public class Reader extends ApiResource implements HasId, MetadataStore<Reader> 
     @Getter
     @Setter
     @EqualsAndHashCode(callSuper = false)
-    public static class RefundPaymentAction extends StripeObject {
+    public static class RefundPayment extends StripeObject {
       /** The amount being refunded. */
       @SerializedName("amount")
       Long amount;
