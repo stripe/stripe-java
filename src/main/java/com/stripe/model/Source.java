@@ -73,7 +73,7 @@ public class Source extends ApiResource implements MetadataStore<Source>, Paymen
   String clientSecret;
 
   @SerializedName("code_verification")
-  CodeVerificationFlow codeVerification;
+  CodeVerification codeVerification;
 
   /** Time at which the object was created. Measured in seconds since the Unix epoch. */
   @SerializedName("created")
@@ -159,10 +159,10 @@ public class Source extends ApiResource implements MetadataStore<Source>, Paymen
   Paypal paypal;
 
   @SerializedName("receiver")
-  ReceiverFlow receiver;
+  Receiver receiver;
 
   @SerializedName("redirect")
-  RedirectFlow redirect;
+  Redirect redirect;
 
   @SerializedName("sepa_credit_transfer")
   SepaCreditTransfer sepaCreditTransfer;
@@ -174,7 +174,7 @@ public class Source extends ApiResource implements MetadataStore<Source>, Paymen
   Sofort sofort;
 
   @SerializedName("source_order")
-  Order sourceOrder;
+  SourceOrder sourceOrder;
 
   /**
    * Extra information about a source. This will appear on your customer's statement every time you
@@ -736,7 +736,7 @@ public class Source extends ApiResource implements MetadataStore<Source>, Paymen
   @Getter
   @Setter
   @EqualsAndHashCode(callSuper = false)
-  public static class CodeVerificationFlow extends StripeObject {
+  public static class CodeVerification extends StripeObject {
     /**
      * The number of attempts remaining to authenticate the source object with a verification code.
      */
@@ -919,72 +919,6 @@ public class Source extends ApiResource implements MetadataStore<Source>, Paymen
   @Getter
   @Setter
   @EqualsAndHashCode(callSuper = false)
-  public static class Order extends StripeObject {
-    /**
-     * A positive integer in the smallest currency unit (that is, 100 cents for $1.00, or 1 for ¥1,
-     * Japanese Yen being a zero-decimal currency) representing the total amount for the order.
-     */
-    @SerializedName("amount")
-    Long amount;
-
-    /**
-     * Three-letter <a href="https://www.iso.org/iso-4217-currency-codes.html">ISO currency
-     * code</a>, in lowercase. Must be a <a href="https://stripe.com/docs/currencies">supported
-     * currency</a>.
-     */
-    @SerializedName("currency")
-    String currency;
-
-    /** The email address of the customer placing the order. */
-    @SerializedName("email")
-    String email;
-
-    /** List of items constituting the order. */
-    @SerializedName("items")
-    List<Source.OrderItem> items;
-
-    @SerializedName("shipping")
-    ShippingDetails shipping;
-  }
-
-  @Getter
-  @Setter
-  @EqualsAndHashCode(callSuper = false)
-  public static class OrderItem extends StripeObject {
-    /** The amount (price) for this order item. */
-    @SerializedName("amount")
-    Long amount;
-
-    /** This currency of this order item. Required when {@code amount} is present. */
-    @SerializedName("currency")
-    String currency;
-
-    /** Human-readable description for this order item. */
-    @SerializedName("description")
-    String description;
-
-    /**
-     * The ID of the associated object for this line item. Expandable if not null (e.g., expandable
-     * to a SKU).
-     */
-    @SerializedName("parent")
-    String parent;
-
-    /**
-     * The quantity of this order item. When type is {@code sku}, this is the number of instances of
-     * the SKU to be ordered.
-     */
-    @SerializedName("quantity")
-    Long quantity;
-
-    /** The type of this order item. Must be {@code sku}, {@code tax}, or {@code shipping}. */
-    @SerializedName("type")
-    String type;
-  }
-
-  @Getter
-  @Setter
-  @EqualsAndHashCode(callSuper = false)
   public static class Owner extends StripeObject {
     /** Owner's address. */
     @SerializedName("address")
@@ -1078,7 +1012,7 @@ public class Source extends ApiResource implements MetadataStore<Source>, Paymen
   @Getter
   @Setter
   @EqualsAndHashCode(callSuper = false)
-  public static class ReceiverFlow extends StripeObject {
+  public static class Receiver extends StripeObject {
     /**
      * The address of the receiver source. This is the value that should be communicated to the
      * customer to send their funds to.
@@ -1125,7 +1059,7 @@ public class Source extends ApiResource implements MetadataStore<Source>, Paymen
   @Getter
   @Setter
   @EqualsAndHashCode(callSuper = false)
-  public static class RedirectFlow extends StripeObject {
+  public static class Redirect extends StripeObject {
     /**
      * The failure reason for the redirect, either {@code user_abort} (the customer aborted or
      * dropped out of the redirect flow), {@code declined} (the authentication failed or the
@@ -1244,6 +1178,72 @@ public class Source extends ApiResource implements MetadataStore<Source>, Paymen
 
     @SerializedName("statement_descriptor")
     String statementDescriptor;
+  }
+
+  @Getter
+  @Setter
+  @EqualsAndHashCode(callSuper = false)
+  public static class SourceOrder extends StripeObject {
+    /**
+     * A positive integer in the smallest currency unit (that is, 100 cents for $1.00, or 1 for ¥1,
+     * Japanese Yen being a zero-decimal currency) representing the total amount for the order.
+     */
+    @SerializedName("amount")
+    Long amount;
+
+    /**
+     * Three-letter <a href="https://www.iso.org/iso-4217-currency-codes.html">ISO currency
+     * code</a>, in lowercase. Must be a <a href="https://stripe.com/docs/currencies">supported
+     * currency</a>.
+     */
+    @SerializedName("currency")
+    String currency;
+
+    /** The email address of the customer placing the order. */
+    @SerializedName("email")
+    String email;
+
+    /** List of items constituting the order. */
+    @SerializedName("items")
+    List<Source.SourceOrder.Item> items;
+
+    @SerializedName("shipping")
+    ShippingDetails shipping;
+
+    @Getter
+    @Setter
+    @EqualsAndHashCode(callSuper = false)
+    public static class Item extends StripeObject {
+      /** The amount (price) for this order item. */
+      @SerializedName("amount")
+      Long amount;
+
+      /** This currency of this order item. Required when {@code amount} is present. */
+      @SerializedName("currency")
+      String currency;
+
+      /** Human-readable description for this order item. */
+      @SerializedName("description")
+      String description;
+
+      /**
+       * The ID of the associated object for this line item. Expandable if not null (e.g.,
+       * expandable to a SKU).
+       */
+      @SerializedName("parent")
+      String parent;
+
+      /**
+       * The quantity of this order item. When type is {@code sku}, this is the number of instances
+       * of the SKU to be ordered.
+       */
+      @SerializedName("quantity")
+      Long quantity;
+
+      /** The type of this order item. Must be {@code sku}, {@code tax}, or {@code shipping}. */
+      @SerializedName("type")
+      String type;
+    }
   }
 
   @Getter

@@ -42,7 +42,7 @@ import lombok.Setter;
 public class Reader extends ApiResource implements HasId, MetadataStore<Reader> {
   /** The most recent action performed by the reader. */
   @SerializedName("action")
-  ReaderAction action;
+  Action action;
 
   /** Always true for a deleted object. */
   @SerializedName("deleted")
@@ -479,7 +479,7 @@ public class Reader extends ApiResource implements HasId, MetadataStore<Reader> 
   @Getter
   @Setter
   @EqualsAndHashCode(callSuper = false)
-  public static class ReaderAction extends StripeObject {
+  public static class Action extends StripeObject {
     /** Failure code, only set if status is {@code failed}. */
     @SerializedName("failure_code")
     String failureCode;
@@ -490,19 +490,19 @@ public class Reader extends ApiResource implements HasId, MetadataStore<Reader> 
 
     /** Represents a reader action to process a payment intent. */
     @SerializedName("process_payment_intent")
-    ProcessPaymentIntentAction processPaymentIntent;
+    ProcessPaymentIntent processPaymentIntent;
 
     /** Represents a reader action to process a setup intent. */
     @SerializedName("process_setup_intent")
-    ProcessSetupIntentAction processSetupIntent;
+    ProcessSetupIntent processSetupIntent;
 
     /** Represents a reader action to refund a payment. */
     @SerializedName("refund_payment")
-    RefundPaymentAction refundPayment;
+    RefundPayment refundPayment;
 
     /** Represents a reader action to set the reader display. */
     @SerializedName("set_reader_display")
-    SetReaderDisplayAction setReaderDisplay;
+    SetReaderDisplay setReaderDisplay;
 
     /**
      * Status of the action performed by the reader.
@@ -525,7 +525,7 @@ public class Reader extends ApiResource implements HasId, MetadataStore<Reader> 
     @Getter
     @Setter
     @EqualsAndHashCode(callSuper = false)
-    public static class ProcessPaymentIntentAction extends StripeObject {
+    public static class ProcessPaymentIntent extends StripeObject {
       /** Most recent PaymentIntent processed by the reader. */
       @SerializedName("payment_intent")
       @Getter(lombok.AccessLevel.NONE)
@@ -566,13 +566,13 @@ public class Reader extends ApiResource implements HasId, MetadataStore<Reader> 
 
         /** Represents a per-transaction tipping configuration. */
         @SerializedName("tipping")
-        TippingConfig tipping;
+        Tipping tipping;
 
         /** Represents a per-transaction tipping configuration. */
         @Getter
         @Setter
         @EqualsAndHashCode(callSuper = false)
-        public static class TippingConfig extends StripeObject {
+        public static class Tipping extends StripeObject {
           /**
            * Amount used to calculate tip suggestions on tipping selection screen for this
            * transaction. Must be a positive integer in the smallest currency unit (e.g., 100 cents
@@ -588,7 +588,7 @@ public class Reader extends ApiResource implements HasId, MetadataStore<Reader> 
     @Getter
     @Setter
     @EqualsAndHashCode(callSuper = false)
-    public static class ProcessSetupIntentAction extends StripeObject {
+    public static class ProcessSetupIntent extends StripeObject {
       /**
        * ID of a card PaymentMethod generated from the card_present PaymentMethod that may be
        * attached to a Customer for future transactions. Only present if it was possible to generate
@@ -627,7 +627,7 @@ public class Reader extends ApiResource implements HasId, MetadataStore<Reader> 
     @Getter
     @Setter
     @EqualsAndHashCode(callSuper = false)
-    public static class RefundPaymentAction extends StripeObject {
+    public static class RefundPayment extends StripeObject {
       /** The amount being refunded. */
       @SerializedName("amount")
       Long amount;
@@ -737,7 +737,7 @@ public class Reader extends ApiResource implements HasId, MetadataStore<Reader> 
     @Getter
     @Setter
     @EqualsAndHashCode(callSuper = false)
-    public static class SetReaderDisplayAction extends StripeObject {
+    public static class SetReaderDisplay extends StripeObject {
       /** Cart object to be displayed by the reader. */
       @SerializedName("cart")
       Cart cart;
@@ -765,7 +765,7 @@ public class Reader extends ApiResource implements HasId, MetadataStore<Reader> 
 
         /** List of line items in the cart. */
         @SerializedName("line_items")
-        List<Reader.ReaderAction.SetReaderDisplayAction.Cart.LineItem> lineItems;
+        List<Reader.Action.SetReaderDisplay.Cart.LineItem> lineItems;
 
         /**
          * Tax amount for the entire cart. A positive integer in the <a

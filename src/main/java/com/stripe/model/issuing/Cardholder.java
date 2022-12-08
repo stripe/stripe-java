@@ -286,7 +286,7 @@ public class Cardholder extends ApiResource implements HasId, MetadataStore<Card
   public static class Individual extends StripeObject {
     /** The date of birth of this cardholder. */
     @SerializedName("dob")
-    DateOfBirth dob;
+    Dob dob;
 
     /** The first name of this cardholder. */
     @SerializedName("first_name")
@@ -303,7 +303,7 @@ public class Cardholder extends ApiResource implements HasId, MetadataStore<Card
     @Getter
     @Setter
     @EqualsAndHashCode(callSuper = false)
-    public static class DateOfBirth extends StripeObject {
+    public static class Dob extends StripeObject {
       /** The day of birth, between 1 and 31. */
       @SerializedName("day")
       Long day;

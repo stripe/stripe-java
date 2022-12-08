@@ -6,6 +6,7 @@ import com.stripe.Stripe;
 import com.stripe.exception.StripeException;
 import com.stripe.model.ExpandableField;
 import com.stripe.model.HasId;
+import com.stripe.model.StripeObject;
 import com.stripe.net.ApiResource;
 import com.stripe.net.RequestOptions;
 import com.stripe.param.billingportal.SessionCreateParams;
@@ -47,6 +48,10 @@ public class Session extends ApiResource implements HasId {
   /** The ID of the customer for this session. */
   @SerializedName("customer")
   String customer;
+
+  /** Information about a specific flow for the customer to go through. */
+  @SerializedName("flow")
+  Flow flow;
 
   /** Unique identifier for the object. */
   @Getter(onMethod_ = {@Override})
@@ -147,5 +152,73 @@ public class Session extends ApiResource implements HasId {
       throws StripeException {
     String url = String.format("%s%s", Stripe.getApiBase(), "/v1/billing_portal/sessions");
     return ApiResource.request(ApiResource.RequestMethod.POST, url, params, Session.class, options);
+  }
+
+  @Getter
+  @Setter
+  @EqualsAndHashCode(callSuper = false)
+  public static class Flow extends StripeObject {
+    @SerializedName("after_completion")
+    AfterCompletion afterCompletion;
+
+    /** Configuration when {@code flow.type=subscription_cancel}. */
+    @SerializedName("subscription_cancel")
+    SubscriptionCancel subscriptionCancel;
+
+    /**
+     * Type of flow that the customer will go through.
+     *
+     * <p>One of {@code payment_method_update}, or {@code subscription_cancel}.
+     */
+    @SerializedName("type")
+    String type;
+
+    @Getter
+    @Setter
+    @EqualsAndHashCode(callSuper = false)
+    public static class AfterCompletion extends StripeObject {
+      /** Configuration when {@code after_completion.type=hosted_confirmation}. */
+      @SerializedName("hosted_confirmation")
+      HostedConfirmation hostedConfirmation;
+
+      /** Configuration when {@code after_completion.type=redirect}. */
+      @SerializedName("redirect")
+      Redirect redirect;
+
+      /**
+       * The specified type of behavior after the flow is completed.
+       *
+       * <p>One of {@code hosted_confirmation}, {@code portal_homepage}, or {@code redirect}.
+       */
+      @SerializedName("type")
+      String type;
+
+      @Getter
+      @Setter
+      @EqualsAndHashCode(callSuper = false)
+      public static class HostedConfirmation extends StripeObject {
+        /** A custom message to display to the customer after the flow is completed. */
+        @SerializedName("custom_message")
+        String customMessage;
+      }
+
+      @Getter
+      @Setter
+      @EqualsAndHashCode(callSuper = false)
+      public static class Redirect extends StripeObject {
+        /** The URL the customer will be redirected to after the flow is completed. */
+        @SerializedName("return_url")
+        String returnUrl;
+      }
+    }
+
+    @Getter
+    @Setter
+    @EqualsAndHashCode(callSuper = false)
+    public static class SubscriptionCancel extends StripeObject {
+      /** The ID of the subscription to be canceled. */
+      @SerializedName("subscription")
+      String subscription;
+    }
   }
 }

@@ -83,7 +83,11 @@ public class InvoiceItemCreateParams extends ApiRequestParams {
 
   /**
    * The period associated with this invoice item. When set to different values, the period will be
-   * rendered on the invoice.
+   * rendered on the invoice. If you have <a
+   * href="https://stripe.com/docs/revenue-recognition">Stripe Revenue Recognition</a> enabled, the
+   * period will be used to recognize and defer revenue. See the <a
+   * href="https://stripe.com/docs/revenue-recognition/methodology/subscriptions-and-invoicing">Revenue
+   * Recognition documentation</a> for details.
    */
   @SerializedName("period")
   Period period;
@@ -460,7 +464,11 @@ public class InvoiceItemCreateParams extends ApiRequestParams {
 
     /**
      * The period associated with this invoice item. When set to different values, the period will
-     * be rendered on the invoice.
+     * be rendered on the invoice. If you have <a
+     * href="https://stripe.com/docs/revenue-recognition">Stripe Revenue Recognition</a> enabled,
+     * the period will be used to recognize and defer revenue. See the <a
+     * href="https://stripe.com/docs/revenue-recognition/methodology/subscriptions-and-invoicing">Revenue
+     * Recognition documentation</a> for details.
      */
     public Builder setPeriod(InvoiceItemCreateParams.Period period) {
       this.period = period;

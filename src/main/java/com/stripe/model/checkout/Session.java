@@ -6,9 +6,10 @@ import com.stripe.Stripe;
 import com.stripe.exception.StripeException;
 import com.stripe.model.Address;
 import com.stripe.model.Customer;
+import com.stripe.model.Discount;
 import com.stripe.model.ExpandableField;
 import com.stripe.model.HasId;
-import com.stripe.model.LineItem;
+import com.stripe.model.Invoice;
 import com.stripe.model.LineItemCollection;
 import com.stripe.model.PaymentIntent;
 import com.stripe.model.PaymentLink;
@@ -17,6 +18,8 @@ import com.stripe.model.ShippingDetails;
 import com.stripe.model.ShippingRate;
 import com.stripe.model.StripeObject;
 import com.stripe.model.Subscription;
+import com.stripe.model.TaxId;
+import com.stripe.model.TaxRate;
 import com.stripe.net.ApiResource;
 import com.stripe.net.RequestOptions;
 import com.stripe.param.checkout.SessionCreateParams;
@@ -26,6 +29,7 @@ import com.stripe.param.checkout.SessionListParams;
 import com.stripe.param.checkout.SessionRetrieveParams;
 import java.util.List;
 import java.util.Map;
+import java.util.stream.Collectors;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.Setter;
@@ -113,6 +117,9 @@ public class Session extends ApiResource implements HasId {
   @SerializedName("currency")
   String currency;
 
+  @SerializedName("custom_text")
+  CustomText customText;
+
   /**
    * The ID of the customer for this Session. For Checkout Sessions in {@code payment} or {@code
    * subscription} mode, Checkout will create a new customer object based on information provided
@@ -155,6 +162,16 @@ public class Session extends ApiResource implements HasId {
   @Getter(onMethod_ = {@Override})
   @SerializedName("id")
   String id;
+
+  /** ID of the invoice created by the Checkout Session, if it exists. */
+  @SerializedName("invoice")
+  @Getter(lombok.AccessLevel.NONE)
+  @Setter(lombok.AccessLevel.NONE)
+  ExpandableField<Invoice> invoice;
+
+  /** Details on the state of invoice creation for the Checkout Session. */
+  @SerializedName("invoice_creation")
+  InvoiceCreation invoiceCreation;
 
   /** The line items purchased by the customer. */
   @SerializedName("line_items")
@@ -307,7 +324,7 @@ public class Session extends ApiResource implements HasId {
   String successUrl;
 
   @SerializedName("tax_id_collection")
-  TaxIDCollection taxIdCollection;
+  TaxIdCollection taxIdCollection;
 
   /** Tax and discount details for the computed total amount. */
   @SerializedName("total_details")
@@ -338,6 +355,24 @@ public class Session extends ApiResource implements HasId {
 
   public void setCustomerObject(Customer expandableObject) {
     this.customer = new ExpandableField<Customer>(expandableObject.getId(), expandableObject);
+  }
+
+  /** Get ID of expandable {@code invoice} object. */
+  public String getInvoice() {
+    return (this.invoice != null) ? this.invoice.getId() : null;
+  }
+
+  public void setInvoice(String id) {
+    this.invoice = ApiResource.setExpandableFieldId(id, this.invoice);
+  }
+
+  /** Get expanded {@code invoice}. */
+  public Invoice getInvoiceObject() {
+    return (this.invoice != null) ? this.invoice.getExpanded() : null;
+  }
+
+  public void setInvoiceObject(Invoice expandableObject) {
+    this.invoice = new ExpandableField<Invoice>(expandableObject.getId(), expandableObject);
   }
 
   /** Get ID of expandable {@code paymentIntent} object. */
@@ -734,6 +769,37 @@ public class Session extends ApiResource implements HasId {
   @Getter
   @Setter
   @EqualsAndHashCode(callSuper = false)
+  public static class CustomText extends StripeObject {
+    /** Custom text that should be displayed alongside shipping address collection. */
+    @SerializedName("shipping_address")
+    ShippingAddress shippingAddress;
+
+    /** Custom text that should be displayed alongside the payment confirmation button. */
+    @SerializedName("submit")
+    Submit submit;
+
+    @Getter
+    @Setter
+    @EqualsAndHashCode(callSuper = false)
+    public static class ShippingAddress extends StripeObject {
+      /** Text may be up to 500 characters in length. */
+      @SerializedName("message")
+      String message;
+    }
+
+    @Getter
+    @Setter
+    @EqualsAndHashCode(callSuper = false)
+    public static class Submit extends StripeObject {
+      /** Text may be up to 500 characters in length. */
+      @SerializedName("message")
+      String message;
+    }
+  }
+
+  @Getter
+  @Setter
+  @EqualsAndHashCode(callSuper = false)
   public static class CustomerDetails extends StripeObject {
     /**
      * The customer's address after a completed Checkout Session. Note: This property is populated
@@ -772,12 +838,12 @@ public class Session extends ApiResource implements HasId {
 
     /** The customer’s tax IDs after a completed Checkout Session. */
     @SerializedName("tax_ids")
-    List<Session.CustomerDetails.TaxID> taxIds;
+    List<Session.CustomerDetails.TaxId> taxIds;
 
     @Getter
     @Setter
     @EqualsAndHashCode(callSuper = false)
-    public static class TaxID extends StripeObject {
+    public static class TaxId extends StripeObject {
       /**
        * The type of the tax ID, one of {@code eu_vat}, {@code br_cnpj}, {@code br_cpf}, {@code
        * eu_oss_vat}, {@code gb_vat}, {@code nz_gst}, {@code au_abn}, {@code au_arn}, {@code
@@ -797,6 +863,119 @@ public class Session extends ApiResource implements HasId {
       /** The value of the tax ID. */
       @SerializedName("value")
       String value;
+    }
+  }
+
+  @Getter
+  @Setter
+  @EqualsAndHashCode(callSuper = false)
+  public static class InvoiceCreation extends StripeObject {
+    /** Indicates whether invoice creation is enabled for the Checkout Session. */
+    @SerializedName("enabled")
+    Boolean enabled;
+
+    @SerializedName("invoice_data")
+    InvoiceData invoiceData;
+
+    @Getter
+    @Setter
+    @EqualsAndHashCode(callSuper = false)
+    public static class InvoiceData extends StripeObject {
+      /** The account tax IDs associated with the invoice. */
+      @SerializedName("account_tax_ids")
+      List<ExpandableField<TaxId>> accountTaxIds;
+
+      /** Custom fields displayed on the invoice. */
+      @SerializedName("custom_fields")
+      List<Session.InvoiceCreation.InvoiceData.CustomField> customFields;
+
+      /** An arbitrary string attached to the object. Often useful for displaying to users. */
+      @SerializedName("description")
+      String description;
+
+      /** Footer displayed on the invoice. */
+      @SerializedName("footer")
+      String footer;
+
+      /**
+       * Set of <a href="https://stripe.com/docs/api/metadata">key-value pairs</a> that you can
+       * attach to an object. This can be useful for storing additional information about the object
+       * in a structured format.
+       */
+      @SerializedName("metadata")
+      Map<String, String> metadata;
+
+      /** Options for invoice PDF rendering. */
+      @SerializedName("rendering_options")
+      RenderingOptions renderingOptions;
+
+      /** Get IDs of expandable {@code accountTaxIds} object list. */
+      public List<String> getAccountTaxIds() {
+        return (this.accountTaxIds != null)
+            ? this.accountTaxIds.stream().map(x -> x.getId()).collect(Collectors.toList())
+            : null;
+      }
+
+      public void setAccountTaxIds(List<String> ids) {
+        if (ids == null) {
+          this.accountTaxIds = null;
+          return;
+        }
+        if (this.accountTaxIds != null
+            && this.accountTaxIds.stream()
+                .map(x -> x.getId())
+                .collect(Collectors.toList())
+                .equals(ids)) {
+          // noop if the ids are equal to what are already present
+          return;
+        }
+        this.accountTaxIds =
+            (ids != null)
+                ? ids.stream()
+                    .map(id -> new ExpandableField<TaxId>(id, null))
+                    .collect(Collectors.toList())
+                : null;
+      }
+
+      /** Get expanded {@code accountTaxIds}. */
+      public List<TaxId> getAccountTaxIdObjects() {
+        return (this.accountTaxIds != null)
+            ? this.accountTaxIds.stream().map(x -> x.getExpanded()).collect(Collectors.toList())
+            : null;
+      }
+
+      public void setAccountTaxIdObjects(List<TaxId> objs) {
+        this.accountTaxIds =
+            objs != null
+                ? objs.stream()
+                    .map(x -> new ExpandableField<TaxId>(x.getId(), x))
+                    .collect(Collectors.toList())
+                : null;
+      }
+
+      @Getter
+      @Setter
+      @EqualsAndHashCode(callSuper = false)
+      public static class CustomField extends StripeObject {
+        /** The name of the custom field. */
+        @SerializedName("name")
+        String name;
+
+        /** The value of the custom field. */
+        @SerializedName("value")
+        String value;
+      }
+
+      @Getter
+      @Setter
+      @EqualsAndHashCode(callSuper = false)
+      public static class RenderingOptions extends StripeObject {
+        /**
+         * How line-item prices and amounts will be displayed with respect to tax on invoice PDFs.
+         */
+        @SerializedName("amount_tax_display")
+        String amountTaxDisplay;
+      }
     }
   }
 
@@ -844,7 +1023,7 @@ public class Session extends ApiResource implements HasId {
     Giropay giropay;
 
     @SerializedName("grabpay")
-    GrabPay grabpay;
+    Grabpay grabpay;
 
     @SerializedName("ideal")
     Ideal ideal;
@@ -1112,49 +1291,6 @@ public class Session extends ApiResource implements HasId {
     @Getter
     @Setter
     @EqualsAndHashCode(callSuper = false)
-    public static class BankTransfer extends StripeObject {
-      @SerializedName("eu_bank_transfer")
-      EuBankTransfer euBankTransfer;
-
-      /**
-       * List of address types that should be returned in the financial_addresses response. If not
-       * specified, all valid types will be returned.
-       *
-       * <p>Permitted values include: {@code sort_code}, {@code zengin}, {@code iban}, or {@code
-       * spei}.
-       */
-      @SerializedName("requested_address_types")
-      List<String> requestedAddressTypes;
-
-      /**
-       * The bank transfer type that this PaymentIntent is allowed to use for funding Permitted
-       * values include: {@code eu_bank_transfer}, {@code gb_bank_transfer}, {@code
-       * jp_bank_transfer}, or {@code mx_bank_transfer}.
-       *
-       * <p>One of {@code eu_bank_transfer}, {@code gb_bank_transfer}, {@code jp_bank_transfer}, or
-       * {@code mx_bank_transfer}.
-       */
-      @SerializedName("type")
-      String type;
-
-      @Getter
-      @Setter
-      @EqualsAndHashCode(callSuper = false)
-      public static class EuBankTransfer extends StripeObject {
-        /**
-         * The desired country code of the bank account information. Permitted values include:
-         * {@code DE}, {@code ES}, {@code FR}, {@code IE}, or {@code NL}.
-         *
-         * <p>One of {@code DE}, {@code ES}, {@code FR}, {@code IE}, or {@code NL}.
-         */
-        @SerializedName("country")
-        String country;
-      }
-    }
-
-    @Getter
-    @Setter
-    @EqualsAndHashCode(callSuper = false)
     public static class Boleto extends StripeObject {
       /**
        * The number of calendar days before a Boleto voucher expires. For example, if you create a
@@ -1277,6 +1413,49 @@ public class Session extends ApiResource implements HasId {
        */
       @SerializedName("setup_future_usage")
       String setupFutureUsage;
+
+      @Getter
+      @Setter
+      @EqualsAndHashCode(callSuper = false)
+      public static class BankTransfer extends StripeObject {
+        @SerializedName("eu_bank_transfer")
+        EuBankTransfer euBankTransfer;
+
+        /**
+         * List of address types that should be returned in the financial_addresses response. If not
+         * specified, all valid types will be returned.
+         *
+         * <p>Permitted values include: {@code sort_code}, {@code zengin}, {@code iban}, or {@code
+         * spei}.
+         */
+        @SerializedName("requested_address_types")
+        List<String> requestedAddressTypes;
+
+        /**
+         * The bank transfer type that this PaymentIntent is allowed to use for funding Permitted
+         * values include: {@code eu_bank_transfer}, {@code gb_bank_transfer}, {@code
+         * jp_bank_transfer}, or {@code mx_bank_transfer}.
+         *
+         * <p>One of {@code eu_bank_transfer}, {@code gb_bank_transfer}, {@code jp_bank_transfer},
+         * or {@code mx_bank_transfer}.
+         */
+        @SerializedName("type")
+        String type;
+
+        @Getter
+        @Setter
+        @EqualsAndHashCode(callSuper = false)
+        public static class EuBankTransfer extends StripeObject {
+          /**
+           * The desired country code of the bank account information. Permitted values include:
+           * {@code DE}, {@code ES}, {@code FR}, {@code IE}, or {@code NL}.
+           *
+           * <p>One of {@code DE}, {@code ES}, {@code FR}, {@code IE}, or {@code NL}.
+           */
+          @SerializedName("country")
+          String country;
+        }
+      }
     }
 
     @Getter
@@ -1357,7 +1536,7 @@ public class Session extends ApiResource implements HasId {
     @Getter
     @Setter
     @EqualsAndHashCode(callSuper = false)
-    public static class GrabPay extends StripeObject {
+    public static class Grabpay extends StripeObject {
       /**
        * Indicates that you intend to make future payments with this PaymentIntent's payment method.
        *
@@ -1707,7 +1886,7 @@ public class Session extends ApiResource implements HasId {
 
     /** The taxes applied to the shipping rate. */
     @SerializedName("taxes")
-    List<LineItem.Tax> taxes;
+    List<Session.ShippingCost.Tax> taxes;
 
     /** Get ID of expandable {@code shippingRate} object. */
     public String getShippingRate() {
@@ -1726,6 +1905,27 @@ public class Session extends ApiResource implements HasId {
     public void setShippingRateObject(ShippingRate expandableObject) {
       this.shippingRate =
           new ExpandableField<ShippingRate>(expandableObject.getId(), expandableObject);
+    }
+
+    @Getter
+    @Setter
+    @EqualsAndHashCode(callSuper = false)
+    public static class Tax extends StripeObject {
+      /** Amount of tax applied for this rate. */
+      @SerializedName("amount")
+      Long amount;
+
+      /**
+       * Tax rates can be applied to <a
+       * href="https://stripe.com/docs/billing/invoices/tax-rates">invoices</a>, <a
+       * href="https://stripe.com/docs/billing/subscriptions/taxes">subscriptions</a> and <a
+       * href="https://stripe.com/docs/payments/checkout/set-up-a-subscription#tax-rates">Checkout
+       * Sessions</a> to collect tax.
+       *
+       * <p>Related guide: <a href="https://stripe.com/docs/billing/taxes/tax-rates">Tax Rates</a>.
+       */
+      @SerializedName("rate")
+      TaxRate rate;
     }
   }
 
@@ -1766,7 +1966,7 @@ public class Session extends ApiResource implements HasId {
   @Getter
   @Setter
   @EqualsAndHashCode(callSuper = false)
-  public static class TaxIDCollection extends StripeObject {
+  public static class TaxIdCollection extends StripeObject {
     /** Indicates whether tax ID collection is enabled for the session. */
     @SerializedName("enabled")
     Boolean enabled;
@@ -1797,11 +1997,55 @@ public class Session extends ApiResource implements HasId {
     public static class Breakdown extends StripeObject {
       /** The aggregated discounts. */
       @SerializedName("discounts")
-      List<LineItem.Discount> discounts;
+      List<Session.TotalDetails.Breakdown.Discount> discounts;
 
       /** The aggregated tax amounts by rate. */
       @SerializedName("taxes")
-      List<LineItem.Tax> taxes;
+      List<Session.TotalDetails.Breakdown.Tax> taxes;
+
+      @Getter
+      @Setter
+      @EqualsAndHashCode(callSuper = false)
+      public static class Discount extends StripeObject {
+        /** The amount discounted. */
+        @SerializedName("amount")
+        Long amount;
+
+        /**
+         * A discount represents the actual application of a <a
+         * href="https://stripe.com/docs/api#coupons">coupon</a> or <a
+         * href="https://stripe.com/docs/api#promotion_codes">promotion code</a>. It contains
+         * information about when the discount began, when it will end, and what it is applied to.
+         *
+         * <p>Related guide: <a
+         * href="https://stripe.com/docs/billing/subscriptions/discounts">Applying Discounts to
+         * Subscriptions</a>.
+         */
+        @SerializedName("discount")
+        Discount discount;
+      }
+
+      @Getter
+      @Setter
+      @EqualsAndHashCode(callSuper = false)
+      public static class Tax extends StripeObject {
+        /** Amount of tax applied for this rate. */
+        @SerializedName("amount")
+        Long amount;
+
+        /**
+         * Tax rates can be applied to <a
+         * href="https://stripe.com/docs/billing/invoices/tax-rates">invoices</a>, <a
+         * href="https://stripe.com/docs/billing/subscriptions/taxes">subscriptions</a> and <a
+         * href="https://stripe.com/docs/payments/checkout/set-up-a-subscription#tax-rates">Checkout
+         * Sessions</a> to collect tax.
+         *
+         * <p>Related guide: <a href="https://stripe.com/docs/billing/taxes/tax-rates">Tax
+         * Rates</a>.
+         */
+        @SerializedName("rate")
+        TaxRate rate;
+      }
     }
   }
 }

@@ -48,6 +48,7 @@ final class EventDataClassLookup {
     classLookup.put("line_item", InvoiceLineItem.class);
     classLookup.put("login_link", LoginLink.class);
     classLookup.put("mandate", Mandate.class);
+    classLookup.put("order", Order.class);
     classLookup.put("payment_intent", PaymentIntent.class);
     classLookup.put("payment_link", PaymentLink.class);
     classLookup.put("payment_method", PaymentMethod.class);
@@ -66,7 +67,6 @@ final class EventDataClassLookup {
     classLookup.put("setup_attempt", SetupAttempt.class);
     classLookup.put("setup_intent", SetupIntent.class);
     classLookup.put("shipping_rate", ShippingRate.class);
-    classLookup.put("sku", Sku.class);
     classLookup.put("source", Source.class);
     classLookup.put("source_mandate_notification", SourceMandateNotification.class);
     classLookup.put("source_transaction", SourceTransaction.class);

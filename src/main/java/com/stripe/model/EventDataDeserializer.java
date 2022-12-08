@@ -10,19 +10,19 @@ import com.stripe.net.UntypedMapDeserializer;
 import java.lang.reflect.Type;
 import java.util.Map;
 
-public class EventDataDeserializer implements JsonDeserializer<EventData> {
+public class EventDataDeserializer implements JsonDeserializer<Event.Data> {
 
   private static final UntypedMapDeserializer UNTYPED_MAP_DESERIALIZER =
       new UntypedMapDeserializer();
 
   /**
    * Deserializes the JSON payload contained in an event's {@code data} attribute into an {@link
-   * EventData} instance.
+   * Event.Data} instance.
    */
   @Override
-  public EventData deserialize(JsonElement json, Type typeOfT, JsonDeserializationContext context)
+  public Event.Data deserialize(JsonElement json, Type typeOfT, JsonDeserializationContext context)
       throws JsonParseException {
-    EventData eventData = new EventData();
+    Event.Data eventData = new Event.Data();
     JsonObject jsonObject = json.getAsJsonObject();
     for (Map.Entry<String, JsonElement> entry : jsonObject.entrySet()) {
       String key = entry.getKey();

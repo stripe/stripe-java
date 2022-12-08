@@ -12,6 +12,7 @@ import com.stripe.BaseStripeTest;
 import com.stripe.Stripe;
 import com.stripe.exception.AuthenticationException;
 import com.stripe.exception.StripeException;
+import com.stripe.net.RequestOptions.RequestOptionsBuilder;
 import java.nio.charset.StandardCharsets;
 import org.junit.jupiter.api.Test;
 
@@ -99,11 +100,12 @@ public class StripeRequestTest extends BaseStripeTest {
   @Test
   public void testCtorRequestOptions() throws StripeException {
     RequestOptions options =
-        RequestOptions.builder()
-            .setApiKey("sk_override")
-            .setIdempotencyKey("idempotency_key")
-            .setStripeAccount("acct_456")
-            .setStripeVersionOverride("2012-12-21")
+        RequestOptionsBuilder.unsafeSetStripeVersionOverride(
+                RequestOptions.builder()
+                    .setApiKey("sk_override")
+                    .setIdempotencyKey("idempotency_key")
+                    .setStripeAccount("acct_456"),
+                "2012-12-21")
             .build();
     StripeRequest request =
         new StripeRequest(ApiResource.RequestMethod.GET, "http://example.com/get", null, options);

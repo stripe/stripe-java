@@ -38,21 +38,21 @@ public class Balance extends ApiResource {
    * currency and payment type can be found in the {@code source_types} property.
    */
   @SerializedName("available")
-  List<Balance.Money> available;
+  List<Balance.Available> available;
 
   /**
    * Funds held due to negative balances on connected Custom accounts. The connect reserve balance
    * for each currency and payment type can be found in the {@code source_types} property.
    */
   @SerializedName("connect_reserved")
-  List<Balance.Money> connectReserved;
+  List<Balance.ConnectReserved> connectReserved;
 
   /** Funds that can be paid out using Instant Payouts. */
   @SerializedName("instant_available")
-  List<Balance.Money> instantAvailable;
+  List<Balance.InstantAvailable> instantAvailable;
 
   @SerializedName("issuing")
-  Details issuing;
+  Issuing issuing;
 
   /**
    * Has the value {@code true} if the object exists in live mode or the value {@code false} if the
@@ -75,7 +75,7 @@ public class Balance extends ApiResource {
    * source_types} property.
    */
   @SerializedName("pending")
-  List<Balance.Money> pending;
+  List<Balance.Pending> pending;
 
   /**
    * Retrieves the current account balance, based on the authentication that was used to make the
@@ -124,16 +124,164 @@ public class Balance extends ApiResource {
   @Getter
   @Setter
   @EqualsAndHashCode(callSuper = false)
-  public static class Details extends StripeObject {
-    /** Funds that are available for use. */
-    @SerializedName("available")
-    List<Balance.Money> available;
+  public static class Available extends StripeObject {
+    /** Balance amount. */
+    @SerializedName("amount")
+    Long amount;
+
+    /**
+     * Three-letter <a href="https://www.iso.org/iso-4217-currency-codes.html">ISO currency
+     * code</a>, in lowercase. Must be a <a href="https://stripe.com/docs/currencies">supported
+     * currency</a>.
+     */
+    @SerializedName("currency")
+    String currency;
+
+    @SerializedName("source_types")
+    SourceTypes sourceTypes;
+
+    @Getter
+    @Setter
+    @EqualsAndHashCode(callSuper = false)
+    public static class SourceTypes extends StripeObject {
+      /** Amount for bank account. */
+      @SerializedName("bank_account")
+      Long bankAccount;
+
+      /** Amount for card. */
+      @SerializedName("card")
+      Long card;
+
+      /** Amount for FPX. */
+      @SerializedName("fpx")
+      Long fpx;
+    }
   }
 
   @Getter
   @Setter
   @EqualsAndHashCode(callSuper = false)
-  public static class Money extends StripeObject {
+  public static class ConnectReserved extends StripeObject {
+    /** Balance amount. */
+    @SerializedName("amount")
+    Long amount;
+
+    /**
+     * Three-letter <a href="https://www.iso.org/iso-4217-currency-codes.html">ISO currency
+     * code</a>, in lowercase. Must be a <a href="https://stripe.com/docs/currencies">supported
+     * currency</a>.
+     */
+    @SerializedName("currency")
+    String currency;
+
+    @SerializedName("source_types")
+    SourceTypes sourceTypes;
+
+    @Getter
+    @Setter
+    @EqualsAndHashCode(callSuper = false)
+    public static class SourceTypes extends StripeObject {
+      /** Amount for bank account. */
+      @SerializedName("bank_account")
+      Long bankAccount;
+
+      /** Amount for card. */
+      @SerializedName("card")
+      Long card;
+
+      /** Amount for FPX. */
+      @SerializedName("fpx")
+      Long fpx;
+    }
+  }
+
+  @Getter
+  @Setter
+  @EqualsAndHashCode(callSuper = false)
+  public static class InstantAvailable extends StripeObject {
+    /** Balance amount. */
+    @SerializedName("amount")
+    Long amount;
+
+    /**
+     * Three-letter <a href="https://www.iso.org/iso-4217-currency-codes.html">ISO currency
+     * code</a>, in lowercase. Must be a <a href="https://stripe.com/docs/currencies">supported
+     * currency</a>.
+     */
+    @SerializedName("currency")
+    String currency;
+
+    @SerializedName("source_types")
+    SourceTypes sourceTypes;
+
+    @Getter
+    @Setter
+    @EqualsAndHashCode(callSuper = false)
+    public static class SourceTypes extends StripeObject {
+      /** Amount for bank account. */
+      @SerializedName("bank_account")
+      Long bankAccount;
+
+      /** Amount for card. */
+      @SerializedName("card")
+      Long card;
+
+      /** Amount for FPX. */
+      @SerializedName("fpx")
+      Long fpx;
+    }
+  }
+
+  @Getter
+  @Setter
+  @EqualsAndHashCode(callSuper = false)
+  public static class Issuing extends StripeObject {
+    /** Funds that are available for use. */
+    @SerializedName("available")
+    List<Balance.Issuing.Available> available;
+
+    @Getter
+    @Setter
+    @EqualsAndHashCode(callSuper = false)
+    public static class Available extends StripeObject {
+      /** Balance amount. */
+      @SerializedName("amount")
+      Long amount;
+
+      /**
+       * Three-letter <a href="https://www.iso.org/iso-4217-currency-codes.html">ISO currency
+       * code</a>, in lowercase. Must be a <a href="https://stripe.com/docs/currencies">supported
+       * currency</a>.
+       */
+      @SerializedName("currency")
+      String currency;
+
+      @SerializedName("source_types")
+      SourceTypes sourceTypes;
+
+      @Getter
+      @Setter
+      @EqualsAndHashCode(callSuper = false)
+      public static class SourceTypes extends StripeObject {
+        /** Amount for bank account. */
+        @SerializedName("bank_account")
+        Long bankAccount;
+
+        /** Amount for card. */
+        @SerializedName("card")
+        Long card;
+
+        /** Amount for FPX. */
+        @SerializedName("fpx")
+        Long fpx;
+      }
+    }
+  }
+
+  @Getter
+  @Setter
+  @EqualsAndHashCode(callSuper = false)
+  public static class Pending extends StripeObject {
     /** Balance amount. */
     @SerializedName("amount")
     Long amount;

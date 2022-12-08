@@ -441,15 +441,6 @@ public class ReceivedCredit extends ApiResource implements HasId {
     String restrictedReason;
   }
 
-  @Getter
-  @Setter
-  @EqualsAndHashCode(callSuper = false)
-  public static class StatusTransitions extends StripeObject {
-    /** Timestamp describing when the CreditReversal changed status to {@code posted}. */
-    @SerializedName("posted_at")
-    Long postedAt;
-  }
-
   public static class TestHelpers {
     private TestHelpers() {}
 

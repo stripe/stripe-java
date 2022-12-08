@@ -288,82 +288,6 @@ class GeneratedExamples extends BaseStripeTest {
   }
 
   @Test
-  public void testOrderCreate() throws StripeException {
-    OrderCreateParams params =
-        OrderCreateParams.builder()
-            .setDescription("description")
-            .setCurrency("usd")
-            .addLineItem(
-                OrderCreateParams.LineItem.builder().setDescription("my line item").build())
-            .build();
-
-    Order order = Order.create(params);
-    assertNotNull(order);
-    verifyRequest(ApiResource.RequestMethod.POST, "/v1/orders", params.toMap());
-  }
-
-  @Test
-  public void testOrderRetrieve() throws StripeException {
-    Order order = Order.retrieve("order_xyz");
-    assertNotNull(order);
-    verifyRequest(ApiResource.RequestMethod.GET, "/v1/orders/order_xyz");
-  }
-
-  @Test
-  public void testOrderUpdate() throws StripeException {
-    Order resource = Order.retrieve("order_xyz");
-    OrderUpdateParams params =
-        OrderUpdateParams.builder()
-            .putMetadata("reference_number", "123")
-            .setIpAddress("0.0.0.0")
-            .build();
-
-    Order order = resource.update(params);
-    assertNotNull(order);
-    verifyRequest(ApiResource.RequestMethod.POST, "/v1/orders/order_xyz", params.toMap());
-  }
-
-  @Test
-  public void testOrderCancel() throws StripeException {
-    Order resource = Order.retrieve("order_xyz");
-    OrderCancelParams params = OrderCancelParams.builder().build();
-
-    Order order = resource.cancel(params);
-    assertNotNull(order);
-    verifyRequest(ApiResource.RequestMethod.POST, "/v1/orders/order_xyz/cancel", params.toMap());
-  }
-
-  @Test
-  public void testOrderListLineItems() throws StripeException {
-    Order resource = Order.retrieve("order_xyz");
-    OrderListLineItemsParams params = OrderListLineItemsParams.builder().build();
-
-    LineItemCollection lineItems = resource.listLineItems(params);
-    assertNotNull(lineItems);
-    verifyRequest(ApiResource.RequestMethod.GET, "/v1/orders/order_xyz/line_items", params.toMap());
-  }
-
-  @Test
-  public void testOrderReopen() throws StripeException {
-    Order resource = Order.retrieve("order_xyz");
-    OrderReopenParams params = OrderReopenParams.builder().build();
-
-    Order order = resource.reopen(params);
-    assertNotNull(order);
-    verifyRequest(ApiResource.RequestMethod.POST, "/v1/orders/order_xyz/reopen", params.toMap());
-  }
-
-  @Test
-  public void testOrderSubmit() throws StripeException {
-    Order resource = Order.retrieve("order_xyz");
-    OrderSubmitParams params = OrderSubmitParams.builder().setExpectedTotal(100L).build();
-
-    Order order = resource.submit(params);
-    assertNotNull(order);
-    verifyRequest(ApiResource.RequestMethod.POST, "/v1/orders/order_xyz/submit", params.toMap());
-  }
-
-  @Test
   public void testPaymentIntentCreate() throws StripeException {
     PaymentIntentCreateParams params =
         PaymentIntentCreateParams.builder()
@@ -2345,15 +2269,6 @@ class GeneratedExamples extends BaseStripeTest {
   }
 
   @Test
-  public void testOrderList() throws StripeException {
-    OrderListParams params = OrderListParams.builder().setLimit(3L).build();
-
-    OrderCollection orders = Order.list(params);
-    assertNotNull(orders);
-    verifyRequest(ApiResource.RequestMethod.GET, "/v1/orders", params.toMap());
-  }
-
-  @Test
   public void testPaymentIntentList() throws StripeException {
     PaymentIntentListParams params = PaymentIntentListParams.builder().setLimit(3L).build();
 
@@ -3298,62 +3213,6 @@ class GeneratedExamples extends BaseStripeTest {
     assertNotNull(scheduledQueryRun);
     verifyRequest(
         ApiResource.RequestMethod.GET, "/v1/sigma/scheduled_query_runs/sqr_xxxxxxxxxxxxx");
-  }
-
-  @Test
-  public void testSkuList() throws StripeException {
-    SkuListParams params = SkuListParams.builder().setLimit(3L).build();
-
-    SkuCollection skus = Sku.list(params);
-    assertNotNull(skus);
-    verifyRequest(ApiResource.RequestMethod.GET, "/v1/skus", params.toMap());
-  }
-
-  @Test
-  public void testSkuCreate() throws StripeException {
-    SkuCreateParams params =
-        SkuCreateParams.builder()
-            .putAttribute("size", "Medium")
-            .putAttribute("gender", "Unisex")
-            .setPrice(1500L)
-            .setCurrency("usd")
-            .setInventory(
-                SkuCreateParams.Inventory.builder()
-                    .setType(SkuCreateParams.Inventory.Type.FINITE)
-                    .setQuantity(500L)
-                    .build())
-            .setProduct("prod_xxxxxxxxxxxxx")
-            .build();
-
-    Sku sku = Sku.create(params);
-    assertNotNull(sku);
-    verifyRequest(ApiResource.RequestMethod.POST, "/v1/skus", params.toMap());
-  }
-
-  @Test
-  public void testSkuDelete() throws StripeException {
-    Sku resource = Sku.retrieve("sku_xxxxxxxxxxxxx");
-
-    Sku sku = resource.delete();
-    assertNotNull(sku);
-    verifyRequest(ApiResource.RequestMethod.DELETE, "/v1/skus/sku_xxxxxxxxxxxxx");
-  }
-
-  @Test
-  public void testSkuRetrieve() throws StripeException {
-    Sku sku = Sku.retrieve("sku_xxxxxxxxxxxxx");
-    assertNotNull(sku);
-    verifyRequest(ApiResource.RequestMethod.GET, "/v1/skus/sku_xxxxxxxxxxxxx");
-  }
-
-  @Test
-  public void testSkuUpdate() throws StripeException {
-    Sku resource = Sku.retrieve("sku_xxxxxxxxxxxxx");
-    SkuUpdateParams params = SkuUpdateParams.builder().putMetadata("order_id", "6735").build();
-
-    Sku sku = resource.update(params);
-    assertNotNull(sku);
-    verifyRequest(ApiResource.RequestMethod.POST, "/v1/skus/sku_xxxxxxxxxxxxx", params.toMap());
   }
 
   @Test
