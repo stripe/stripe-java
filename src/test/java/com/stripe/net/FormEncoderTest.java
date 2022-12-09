@@ -451,7 +451,6 @@ public class FormEncoderTest extends BaseStripeTest {
                         new KeyValuePair<String, Object>("collection[0]", "1"),
                         new KeyValuePair<String, Object>("collection[1]", "2"),
                         new KeyValuePair<String, Object>("collection[2]", "3"))));
-
             add(
                 new TestCase(
                     Collections.singletonMap("map", ImmutableMap.of("one", 1, "two", 2)),
