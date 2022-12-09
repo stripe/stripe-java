@@ -411,6 +411,7 @@ public class FormEncoderTest extends BaseStripeTest {
         };
 
     for (TestCase testCase : testCases) {
+      System.out.println(System.getProperty("java.version"));
       assertEquals(testCase.getWant(), FormEncoder.createQueryString(testCase.getData()));
     }
   }
