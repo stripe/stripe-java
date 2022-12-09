@@ -396,29 +396,20 @@ public class FormEncoderTest extends BaseStripeTest {
                     "map[one]=1&map[two]=2"));
 
             // --- URL-encoding of both keys and values ---
+
             add(
                 new TestCase(
                     ImmutableMap.of(
                         "map",
                         ImmutableMap.of("#", "1 2 3", "bar&baz", "+foo?"),
                         "string",
-                        "[éàü]"),
+                        "[\u00E9\u00E0\u00FC]"),
                     "map[%23]=1+2+3&map[bar%26baz]=%2Bfoo%3F&string=[%C3%A9%C3%A0%C3%BC]"));
           }
         };
 
     for (TestCase testCase : testCases) {
-      String want = testCase.getWant();
-      String qs = FormEncoder.createQueryString(testCase.getData());
-      assertEquals(want.length(), qs.length());
-      for (int i = 0; i < want.length(); i++) {
-        assertEquals(want.charAt(i), qs.charAt(i));
-      }
-      assertEquals(want.hashCode(), qs.hashCode());
-      assertEquals(0, want.compareToIgnoreCase(qs));
-      assertEquals(0, want.compareTo(qs));
-      assertEquals(true, want.equals(qs));
-      assertEquals(want, qs);
+      assertEquals(testCase.getWant(), FormEncoder.createQueryString(testCase.getData()));
     }
   }
 
