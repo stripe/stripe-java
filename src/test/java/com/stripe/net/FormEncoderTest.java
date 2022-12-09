@@ -29,7 +29,6 @@ import java.util.TreeSet;
 import lombok.Data;
 import org.hamcrest.CoreMatchers;
 import org.junit.jupiter.api.Test;
-import org.opentest4j.TestSkippedException;
 
 public class FormEncoderTest extends BaseStripeTest {
   enum TestEnum {
