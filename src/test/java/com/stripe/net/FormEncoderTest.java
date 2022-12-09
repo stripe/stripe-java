@@ -124,9 +124,8 @@ public class FormEncoderTest extends BaseStripeTest {
   @Test
   @SuppressWarnings("cast")
   public void testCreateQueryString() {
-    if (System.getProperty("java.version").startsWith("10.")) {
-      throw new TestSkippedException("This test case intermittently fails on Java 10");
-    }
+    // This test case intermittently fails on Java 10
+    org.junit.Assume.assumeTrue(!System.getProperty("java.version").startsWith("10."));
 
     @Data
     class TestCase {
