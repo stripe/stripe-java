@@ -410,9 +410,11 @@ public class FormEncoderTest extends BaseStripeTest {
     for (TestCase testCase : testCases) {
       String want = testCase.getWant();
       String qs = FormEncoder.createQueryString(testCase.getData());
+      assertEquals(want.length(), qs.length());
       for (int i = 0; i < want.length(); i++) {
         assertEquals(want.charAt(i), qs.charAt(i));
       }
+      assertEquals(want.hashCode(), qs.hashCode());
       assertEquals(testCase.getWant(), FormEncoder.createQueryString(testCase.getData()));
     }
   }
