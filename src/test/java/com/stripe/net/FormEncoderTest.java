@@ -415,7 +415,7 @@ public class FormEncoderTest extends BaseStripeTest {
         assertEquals(want.charAt(i), qs.charAt(i));
       }
       assertEquals(want.hashCode(), qs.hashCode());
-      assertEquals(want.equals(qs));
+      assertEquals(true, want.equals(qs));
       assertEquals(want, qs);
     }
   }
