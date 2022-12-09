@@ -398,6 +398,7 @@ public class FormEncoderTest extends BaseStripeTest {
                     Collections.singletonMap("map", ImmutableMap.of("one", 1, "two", 2)),
                     "map[one]=1&map[two]=2"));
 
+            // --- URL-encoding of both keys and values ---
             add(
                 new TestCase(
                     ImmutableMap.of(
@@ -451,7 +452,6 @@ public class FormEncoderTest extends BaseStripeTest {
                         new KeyValuePair<String, Object>("collection[1]", "2"),
                         new KeyValuePair<String, Object>("collection[2]", "3"))));
 
-            // --- URL-encoding of both keys and values ---
             add(
                 new TestCase(
                     Collections.singletonMap("map", ImmutableMap.of("one", 1, "two", 2)),
