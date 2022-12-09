@@ -14,8 +14,8 @@ public abstract class StripeException extends Exception {
   @Setter transient StripeError stripeError;
 
   /**
-   * Returns the error code of the response that triggered this exception.
-   * For {@link ApiException} the error code will be equal to {@link StripeError#getCode()}.
+   * Returns the error code of the response that triggered this exception. For {@link ApiException}
+   * the error code will be equal to {@link StripeError#getCode()}.
    *
    * @return the string representation of the error code.
    */
