@@ -118,7 +118,7 @@ public class Transaction extends ApiResource
   String merchantCurrency;
 
   @SerializedName("merchant_data")
-  Authorization.MerchantData merchantData;
+  MerchantData merchantData;
 
   /**
    * Set of <a href="https://stripe.com/docs/api/metadata">key-value pairs</a> that you can attach
@@ -388,6 +388,50 @@ public class Transaction extends ApiResource
   @Getter
   @Setter
   @EqualsAndHashCode(callSuper = false)
+  public static class MerchantData extends StripeObject {
+    /**
+     * A categorization of the seller's type of business. See our <a
+     * href="https://stripe.com/docs/issuing/merchant-categories">merchant categories guide</a> for
+     * a list of possible values.
+     */
+    @SerializedName("category")
+    String category;
+
+    /** The merchant category code for the seller’s business. */
+    @SerializedName("category_code")
+    String categoryCode;
+
+    /** City where the seller is located. */
+    @SerializedName("city")
+    String city;
+
+    /** Country where the seller is located. */
+    @SerializedName("country")
+    String country;
+
+    /** Name of the seller. */
+    @SerializedName("name")
+    String name;
+
+    /**
+     * Identifier assigned to the seller by the card network. Different card networks may assign
+     * different network_id fields to the same merchant.
+     */
+    @SerializedName("network_id")
+    String networkId;
+
+    /** Postal code where the seller is located. */
+    @SerializedName("postal_code")
+    String postalCode;
+
+    /** State where the seller is located. */
+    @SerializedName("state")
+    String state;
+  }
+
+  @Getter
+  @Setter
+  @EqualsAndHashCode(callSuper = false)
   public static class PurchaseDetails extends StripeObject {
     /** Information about the flight that was purchased with this transaction. */
     @SerializedName("flight")
@@ -427,7 +471,7 @@ public class Transaction extends ApiResource
 
       /** The legs of the trip. */
       @SerializedName("segments")
-      List<Transaction.PurchaseDetails.Flight.Segments> segments;
+      List<Transaction.PurchaseDetails.Flight.Segment> segments;
 
       /** The travel agency that issued the ticket. */
       @SerializedName("travel_agency")
@@ -436,7 +480,7 @@ public class Transaction extends ApiResource
       @Getter
       @Setter
       @EqualsAndHashCode(callSuper = false)
-      public static class Segments extends StripeObject {
+      public static class Segment extends StripeObject {
         /** The three-letter IATA airport code of the flight's destination. */
         @SerializedName("arrival_airport_code")
         String arrivalAirportCode;

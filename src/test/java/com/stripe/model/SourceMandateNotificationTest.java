@@ -22,7 +22,7 @@ public class SourceMandateNotificationTest extends BaseStripeTest {
     assertEquals("src_123", mandateNotification.getSource().getId());
     assertEquals("sepa_debit", mandateNotification.getSource().getType());
 
-    final SourceMandateNotification.SepaDebitData typeData = mandateNotification.getSepaDebit();
+    final SourceMandateNotification.SepaDebit typeData = mandateNotification.getSepaDebit();
     assertEquals("OAAAAAAAAAAAAAAO", typeData.getMandateReference());
     assertEquals("3000", typeData.getLast4());
   }

@@ -737,7 +737,7 @@ public class VerificationSession extends ApiResource
 
     /** The user’s verified date of birth. */
     @SerializedName("dob")
-    DateOfBirth dob;
+    Dob dob;
 
     /** The user's verified first name. */
     @SerializedName("first_name")
@@ -763,7 +763,7 @@ public class VerificationSession extends ApiResource
     @Getter
     @Setter
     @EqualsAndHashCode(callSuper = false)
-    public static class DateOfBirth extends StripeObject {
+    public static class Dob extends StripeObject {
       /** Numerical day between 1 and 31. */
       @SerializedName("day")
       Long day;

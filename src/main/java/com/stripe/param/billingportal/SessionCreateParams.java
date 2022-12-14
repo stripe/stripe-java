@@ -37,6 +37,10 @@ public class SessionCreateParams extends ApiRequestParams {
   @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
   Map<String, Object> extraParams;
 
+  /** Information about a specific flow for the customer to go through. */
+  @SerializedName("flow_data")
+  FlowData flowData;
+
   /**
    * The IETF language tag of the locale Customer Portal is displayed in. If blank or auto, the
    * customer’s {@code preferred_locales} or browser’s locale is used.
@@ -68,6 +72,7 @@ public class SessionCreateParams extends ApiRequestParams {
       String customer,
       List<String> expand,
       Map<String, Object> extraParams,
+      FlowData flowData,
       Locale locale,
       String onBehalfOf,
       String returnUrl) {
@@ -75,6 +80,7 @@ public class SessionCreateParams extends ApiRequestParams {
     this.customer = customer;
     this.expand = expand;
     this.extraParams = extraParams;
+    this.flowData = flowData;
     this.locale = locale;
     this.onBehalfOf = onBehalfOf;
     this.returnUrl = returnUrl;
@@ -93,6 +99,8 @@ public class SessionCreateParams extends ApiRequestParams {
 
     private Map<String, Object> extraParams;
 
+    private FlowData flowData;
+
     private Locale locale;
 
     private String onBehalfOf;
@@ -106,6 +114,7 @@ public class SessionCreateParams extends ApiRequestParams {
           this.customer,
           this.expand,
           this.extraParams,
+          this.flowData,
           this.locale,
           this.onBehalfOf,
           this.returnUrl);
@@ -180,6 +189,12 @@ public class SessionCreateParams extends ApiRequestParams {
       return this;
     }
 
+    /** Information about a specific flow for the customer to go through. */
+    public Builder setFlowData(SessionCreateParams.FlowData flowData) {
+      this.flowData = flowData;
+      return this;
+    }
+
     /**
      * The IETF language tag of the locale Customer Portal is displayed in. If blank or auto, the
      * customer’s {@code preferred_locales} or browser’s locale is used.
@@ -210,6 +225,459 @@ public class SessionCreateParams extends ApiRequestParams {
     public Builder setReturnUrl(String returnUrl) {
       this.returnUrl = returnUrl;
       return this;
+    }
+  }
+
+  @Getter
+  public static class FlowData {
+    /** Behavior after the flow is completed. */
+    @SerializedName("after_completion")
+    AfterCompletion afterCompletion;
+
+    /**
+     * Map of extra parameters for custom features not available in this client library. The content
+     * in this map is not serialized under this field's {@code @SerializedName} value. Instead, each
+     * key/value pair is serialized as if the key is a root-level field (serialized) name in this
+     * param object. Effectively, this map is flattened to its parent instance.
+     */
+    @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
+    Map<String, Object> extraParams;
+
+    /** Configuration when {@code flow_data.type=subscription_cancel}. */
+    @SerializedName("subscription_cancel")
+    SubscriptionCancel subscriptionCancel;
+
+    /** Type of flow that the customer will go through. */
+    @SerializedName("type")
+    Type type;
+
+    private FlowData(
+        AfterCompletion afterCompletion,
+        Map<String, Object> extraParams,
+        SubscriptionCancel subscriptionCancel,
+        Type type) {
+      this.afterCompletion = afterCompletion;
+      this.extraParams = extraParams;
+      this.subscriptionCancel = subscriptionCancel;
+      this.type = type;
+    }
+
+    public static Builder builder() {
+      return new Builder();
+    }
+
+    public static class Builder {
+      private AfterCompletion afterCompletion;
+
+      private Map<String, Object> extraParams;
+
+      private SubscriptionCancel subscriptionCancel;
+
+      private Type type;
+
+      /** Finalize and obtain parameter instance from this builder. */
+      public SessionCreateParams.FlowData build() {
+        return new SessionCreateParams.FlowData(
+            this.afterCompletion, this.extraParams, this.subscriptionCancel, this.type);
+      }
+
+      /** Behavior after the flow is completed. */
+      public Builder setAfterCompletion(
+          SessionCreateParams.FlowData.AfterCompletion afterCompletion) {
+        this.afterCompletion = afterCompletion;
+        return this;
+      }
+
+      /**
+       * Add a key/value pair to `extraParams` map. A map is initialized for the first `put/putAll`
+       * call, and subsequent calls add additional key/value pairs to the original map. See {@link
+       * SessionCreateParams.FlowData#extraParams} for the field documentation.
+       */
+      public Builder putExtraParam(String key, Object value) {
+        if (this.extraParams == null) {
+          this.extraParams = new HashMap<>();
+        }
+        this.extraParams.put(key, value);
+        return this;
+      }
+
+      /**
+       * Add all map key/value pairs to `extraParams` map. A map is initialized for the first
+       * `put/putAll` call, and subsequent calls add additional key/value pairs to the original map.
+       * See {@link SessionCreateParams.FlowData#extraParams} for the field documentation.
+       */
+      public Builder putAllExtraParam(Map<String, Object> map) {
+        if (this.extraParams == null) {
+          this.extraParams = new HashMap<>();
+        }
+        this.extraParams.putAll(map);
+        return this;
+      }
+
+      /** Configuration when {@code flow_data.type=subscription_cancel}. */
+      public Builder setSubscriptionCancel(
+          SessionCreateParams.FlowData.SubscriptionCancel subscriptionCancel) {
+        this.subscriptionCancel = subscriptionCancel;
+        return this;
+      }
+
+      /** Type of flow that the customer will go through. */
+      public Builder setType(SessionCreateParams.FlowData.Type type) {
+        this.type = type;
+        return this;
+      }
+    }
+
+    @Getter
+    public static class AfterCompletion {
+      /**
+       * Map of extra parameters for custom features not available in this client library. The
+       * content in this map is not serialized under this field's {@code @SerializedName} value.
+       * Instead, each key/value pair is serialized as if the key is a root-level field (serialized)
+       * name in this param object. Effectively, this map is flattened to its parent instance.
+       */
+      @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
+      Map<String, Object> extraParams;
+
+      /** Configuration when {@code after_completion.type=hosted_confirmation}. */
+      @SerializedName("hosted_confirmation")
+      HostedConfirmation hostedConfirmation;
+
+      /** Configuration when {@code after_completion.type=redirect}. */
+      @SerializedName("redirect")
+      Redirect redirect;
+
+      /** The specified behavior after the flow is completed. */
+      @SerializedName("type")
+      Type type;
+
+      private AfterCompletion(
+          Map<String, Object> extraParams,
+          HostedConfirmation hostedConfirmation,
+          Redirect redirect,
+          Type type) {
+        this.extraParams = extraParams;
+        this.hostedConfirmation = hostedConfirmation;
+        this.redirect = redirect;
+        this.type = type;
+      }
+
+      public static Builder builder() {
+        return new Builder();
+      }
+
+      public static class Builder {
+        private Map<String, Object> extraParams;
+
+        private HostedConfirmation hostedConfirmation;
+
+        private Redirect redirect;
+
+        private Type type;
+
+        /** Finalize and obtain parameter instance from this builder. */
+        public SessionCreateParams.FlowData.AfterCompletion build() {
+          return new SessionCreateParams.FlowData.AfterCompletion(
+              this.extraParams, this.hostedConfirmation, this.redirect, this.type);
+        }
+
+        /**
+         * Add a key/value pair to `extraParams` map. A map is initialized for the first
+         * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
+         * map. See {@link SessionCreateParams.FlowData.AfterCompletion#extraParams} for the field
+         * documentation.
+         */
+        public Builder putExtraParam(String key, Object value) {
+          if (this.extraParams == null) {
+            this.extraParams = new HashMap<>();
+          }
+          this.extraParams.put(key, value);
+          return this;
+        }
+
+        /**
+         * Add all map key/value pairs to `extraParams` map. A map is initialized for the first
+         * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
+         * map. See {@link SessionCreateParams.FlowData.AfterCompletion#extraParams} for the field
+         * documentation.
+         */
+        public Builder putAllExtraParam(Map<String, Object> map) {
+          if (this.extraParams == null) {
+            this.extraParams = new HashMap<>();
+          }
+          this.extraParams.putAll(map);
+          return this;
+        }
+
+        /** Configuration when {@code after_completion.type=hosted_confirmation}. */
+        public Builder setHostedConfirmation(
+            SessionCreateParams.FlowData.AfterCompletion.HostedConfirmation hostedConfirmation) {
+          this.hostedConfirmation = hostedConfirmation;
+          return this;
+        }
+
+        /** Configuration when {@code after_completion.type=redirect}. */
+        public Builder setRedirect(SessionCreateParams.FlowData.AfterCompletion.Redirect redirect) {
+          this.redirect = redirect;
+          return this;
+        }
+
+        /** The specified behavior after the flow is completed. */
+        public Builder setType(SessionCreateParams.FlowData.AfterCompletion.Type type) {
+          this.type = type;
+          return this;
+        }
+      }
+
+      @Getter
+      public static class HostedConfirmation {
+        /** A custom message to display to the customer after the flow is completed. */
+        @SerializedName("custom_message")
+        String customMessage;
+
+        /**
+         * Map of extra parameters for custom features not available in this client library. The
+         * content in this map is not serialized under this field's {@code @SerializedName} value.
+         * Instead, each key/value pair is serialized as if the key is a root-level field
+         * (serialized) name in this param object. Effectively, this map is flattened to its parent
+         * instance.
+         */
+        @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
+        Map<String, Object> extraParams;
+
+        private HostedConfirmation(String customMessage, Map<String, Object> extraParams) {
+          this.customMessage = customMessage;
+          this.extraParams = extraParams;
+        }
+
+        public static Builder builder() {
+          return new Builder();
+        }
+
+        public static class Builder {
+          private String customMessage;
+
+          private Map<String, Object> extraParams;
+
+          /** Finalize and obtain parameter instance from this builder. */
+          public SessionCreateParams.FlowData.AfterCompletion.HostedConfirmation build() {
+            return new SessionCreateParams.FlowData.AfterCompletion.HostedConfirmation(
+                this.customMessage, this.extraParams);
+          }
+
+          /** A custom message to display to the customer after the flow is completed. */
+          public Builder setCustomMessage(String customMessage) {
+            this.customMessage = customMessage;
+            return this;
+          }
+
+          /**
+           * Add a key/value pair to `extraParams` map. A map is initialized for the first
+           * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
+           * map. See {@link
+           * SessionCreateParams.FlowData.AfterCompletion.HostedConfirmation#extraParams} for the
+           * field documentation.
+           */
+          public Builder putExtraParam(String key, Object value) {
+            if (this.extraParams == null) {
+              this.extraParams = new HashMap<>();
+            }
+            this.extraParams.put(key, value);
+            return this;
+          }
+
+          /**
+           * Add all map key/value pairs to `extraParams` map. A map is initialized for the first
+           * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
+           * map. See {@link
+           * SessionCreateParams.FlowData.AfterCompletion.HostedConfirmation#extraParams} for the
+           * field documentation.
+           */
+          public Builder putAllExtraParam(Map<String, Object> map) {
+            if (this.extraParams == null) {
+              this.extraParams = new HashMap<>();
+            }
+            this.extraParams.putAll(map);
+            return this;
+          }
+        }
+      }
+
+      @Getter
+      public static class Redirect {
+        /**
+         * Map of extra parameters for custom features not available in this client library. The
+         * content in this map is not serialized under this field's {@code @SerializedName} value.
+         * Instead, each key/value pair is serialized as if the key is a root-level field
+         * (serialized) name in this param object. Effectively, this map is flattened to its parent
+         * instance.
+         */
+        @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
+        Map<String, Object> extraParams;
+
+        /** The URL the customer will be redirected to after the flow is completed. */
+        @SerializedName("return_url")
+        String returnUrl;
+
+        private Redirect(Map<String, Object> extraParams, String returnUrl) {
+          this.extraParams = extraParams;
+          this.returnUrl = returnUrl;
+        }
+
+        public static Builder builder() {
+          return new Builder();
+        }
+
+        public static class Builder {
+          private Map<String, Object> extraParams;
+
+          private String returnUrl;
+
+          /** Finalize and obtain parameter instance from this builder. */
+          public SessionCreateParams.FlowData.AfterCompletion.Redirect build() {
+            return new SessionCreateParams.FlowData.AfterCompletion.Redirect(
+                this.extraParams, this.returnUrl);
+          }
+
+          /**
+           * Add a key/value pair to `extraParams` map. A map is initialized for the first
+           * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
+           * map. See {@link SessionCreateParams.FlowData.AfterCompletion.Redirect#extraParams} for
+           * the field documentation.
+           */
+          public Builder putExtraParam(String key, Object value) {
+            if (this.extraParams == null) {
+              this.extraParams = new HashMap<>();
+            }
+            this.extraParams.put(key, value);
+            return this;
+          }
+
+          /**
+           * Add all map key/value pairs to `extraParams` map. A map is initialized for the first
+           * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
+           * map. See {@link SessionCreateParams.FlowData.AfterCompletion.Redirect#extraParams} for
+           * the field documentation.
+           */
+          public Builder putAllExtraParam(Map<String, Object> map) {
+            if (this.extraParams == null) {
+              this.extraParams = new HashMap<>();
+            }
+            this.extraParams.putAll(map);
+            return this;
+          }
+
+          /** The URL the customer will be redirected to after the flow is completed. */
+          public Builder setReturnUrl(String returnUrl) {
+            this.returnUrl = returnUrl;
+            return this;
+          }
+        }
+      }
+
+      public enum Type implements ApiRequestParams.EnumParam {
+        @SerializedName("hosted_confirmation")
+        HOSTED_CONFIRMATION("hosted_confirmation"),
+
+        @SerializedName("portal_homepage")
+        PORTAL_HOMEPAGE("portal_homepage"),
+
+        @SerializedName("redirect")
+        REDIRECT("redirect");
+
+        @Getter(onMethod_ = {@Override})
+        private final String value;
+
+        Type(String value) {
+          this.value = value;
+        }
+      }
+    }
+
+    @Getter
+    public static class SubscriptionCancel {
+      /**
+       * Map of extra parameters for custom features not available in this client library. The
+       * content in this map is not serialized under this field's {@code @SerializedName} value.
+       * Instead, each key/value pair is serialized as if the key is a root-level field (serialized)
+       * name in this param object. Effectively, this map is flattened to its parent instance.
+       */
+      @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
+      Map<String, Object> extraParams;
+
+      /** The ID of the subscription to be canceled. */
+      @SerializedName("subscription")
+      String subscription;
+
+      private SubscriptionCancel(Map<String, Object> extraParams, String subscription) {
+        this.extraParams = extraParams;
+        this.subscription = subscription;
+      }
+
+      public static Builder builder() {
+        return new Builder();
+      }
+
+      public static class Builder {
+        private Map<String, Object> extraParams;
+
+        private String subscription;
+
+        /** Finalize and obtain parameter instance from this builder. */
+        public SessionCreateParams.FlowData.SubscriptionCancel build() {
+          return new SessionCreateParams.FlowData.SubscriptionCancel(
+              this.extraParams, this.subscription);
+        }
+
+        /**
+         * Add a key/value pair to `extraParams` map. A map is initialized for the first
+         * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
+         * map. See {@link SessionCreateParams.FlowData.SubscriptionCancel#extraParams} for the
+         * field documentation.
+         */
+        public Builder putExtraParam(String key, Object value) {
+          if (this.extraParams == null) {
+            this.extraParams = new HashMap<>();
+          }
+          this.extraParams.put(key, value);
+          return this;
+        }
+
+        /**
+         * Add all map key/value pairs to `extraParams` map. A map is initialized for the first
+         * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
+         * map. See {@link SessionCreateParams.FlowData.SubscriptionCancel#extraParams} for the
+         * field documentation.
+         */
+        public Builder putAllExtraParam(Map<String, Object> map) {
+          if (this.extraParams == null) {
+            this.extraParams = new HashMap<>();
+          }
+          this.extraParams.putAll(map);
+          return this;
+        }
+
+        /** The ID of the subscription to be canceled. */
+        public Builder setSubscription(String subscription) {
+          this.subscription = subscription;
+          return this;
+        }
+      }
+    }
+
+    public enum Type implements ApiRequestParams.EnumParam {
+      @SerializedName("payment_method_update")
+      PAYMENT_METHOD_UPDATE("payment_method_update"),
+
+      @SerializedName("subscription_cancel")
+      SUBSCRIPTION_CANCEL("subscription_cancel");
+
+      @Getter(onMethod_ = {@Override})
+      private final String value;
+
+      Type(String value) {
+        this.value = value;
+      }
     }
   }
 

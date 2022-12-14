@@ -67,7 +67,7 @@ public class BalanceTransaction extends ApiResource implements HasId {
 
   /** Detailed breakdown of fees (in %s) paid for this transaction. */
   @SerializedName("fee_details")
-  List<BalanceTransaction.Fee> feeDetails;
+  List<BalanceTransaction.FeeDetail> feeDetails;
 
   /** Unique identifier for the object. */
   @Getter(onMethod_ = {@Override})
@@ -264,7 +264,7 @@ public class BalanceTransaction extends ApiResource implements HasId {
   @Getter
   @Setter
   @EqualsAndHashCode(callSuper = false)
-  public static class Fee extends StripeObject {
+  public static class FeeDetail extends StripeObject {
     /** Amount of the fee, in cents. */
     @SerializedName("amount")
     Long amount;

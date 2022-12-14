@@ -16,7 +16,7 @@ import lombok.Setter;
 @EqualsAndHashCode(callSuper = false)
 public class SourceTransaction extends StripeObject implements HasId {
   @SerializedName("ach_credit_transfer")
-  AchCreditTransferData achCreditTransfer;
+  AchCreditTransfer achCreditTransfer;
 
   /**
    * A positive integer in the smallest currency unit (that is, 100 cents for $1.00, or 1 for ¥1,
@@ -27,7 +27,7 @@ public class SourceTransaction extends StripeObject implements HasId {
   Long amount;
 
   @SerializedName("chf_credit_transfer")
-  ChfCreditTransferData chfCreditTransfer;
+  ChfCreditTransfer chfCreditTransfer;
 
   /** Time at which the object was created. Measured in seconds since the Unix epoch. */
   @SerializedName("created")
@@ -41,7 +41,7 @@ public class SourceTransaction extends StripeObject implements HasId {
   String currency;
 
   @SerializedName("gbp_credit_transfer")
-  GbpCreditTransferData gbpCreditTransfer;
+  GbpCreditTransfer gbpCreditTransfer;
 
   /** Unique identifier for the object. */
   @Getter(onMethod_ = {@Override})
@@ -64,10 +64,10 @@ public class SourceTransaction extends StripeObject implements HasId {
   String object;
 
   @SerializedName("paper_check")
-  PaperCheckData paperCheck;
+  PaperCheck paperCheck;
 
   @SerializedName("sepa_credit_transfer")
-  SepaCreditTransferData sepaCreditTransfer;
+  SepaCreditTransfer sepaCreditTransfer;
 
   /** The ID of the source this transaction is attached to. */
   @SerializedName("source")
@@ -93,7 +93,7 @@ public class SourceTransaction extends StripeObject implements HasId {
   @Getter
   @Setter
   @EqualsAndHashCode(callSuper = false)
-  public static class AchCreditTransferData extends StripeObject {
+  public static class AchCreditTransfer extends StripeObject {
     /** Customer data associated with the transfer. */
     @SerializedName("customer_data")
     String customerData;
@@ -114,7 +114,7 @@ public class SourceTransaction extends StripeObject implements HasId {
   @Getter
   @Setter
   @EqualsAndHashCode(callSuper = false)
-  public static class ChfCreditTransferData extends StripeObject {
+  public static class ChfCreditTransfer extends StripeObject {
     /** Reference associated with the transfer. */
     @SerializedName("reference")
     String reference;
@@ -139,7 +139,7 @@ public class SourceTransaction extends StripeObject implements HasId {
   @Getter
   @Setter
   @EqualsAndHashCode(callSuper = false)
-  public static class GbpCreditTransferData extends StripeObject {
+  public static class GbpCreditTransfer extends StripeObject {
     /**
      * Bank account fingerprint associated with the Stripe owned bank account receiving the
      * transfer.
@@ -179,7 +179,7 @@ public class SourceTransaction extends StripeObject implements HasId {
   @Getter
   @Setter
   @EqualsAndHashCode(callSuper = false)
-  public static class PaperCheckData extends StripeObject {
+  public static class PaperCheck extends StripeObject {
     /**
      * Time at which the deposited funds will be available for use. Measured in seconds since the
      * Unix epoch.
@@ -195,7 +195,7 @@ public class SourceTransaction extends StripeObject implements HasId {
   @Getter
   @Setter
   @EqualsAndHashCode(callSuper = false)
-  public static class SepaCreditTransferData extends StripeObject {
+  public static class SepaCreditTransfer extends StripeObject {
     /** Reference associated with the transfer. */
     @SerializedName("reference")
     String reference;

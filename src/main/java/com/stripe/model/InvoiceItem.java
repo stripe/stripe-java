@@ -112,7 +112,7 @@ public class InvoiceItem extends ApiResource implements HasId, MetadataStore<Inv
   String object;
 
   @SerializedName("period")
-  InvoiceLineItemPeriod period;
+  Period period;
 
   /**
    * If the invoice item is a proration, the plan of the subscription that the proration was
@@ -480,5 +480,18 @@ public class InvoiceItem extends ApiResource implements HasId, MetadataStore<Inv
             String.format("/v1/invoiceitems/%s", ApiResource.urlEncodeId(this.getId())));
     return ApiResource.request(
         ApiResource.RequestMethod.POST, url, params, InvoiceItem.class, options);
+  }
+
+  @Getter
+  @Setter
+  @EqualsAndHashCode(callSuper = false)
+  public static class Period extends StripeObject {
+    /** The end of the period, which must be greater than or equal to the start. */
+    @SerializedName("end")
+    Long end;
+
+    /** The start of the period. */
+    @SerializedName("start")
+    Long start;
   }
 }

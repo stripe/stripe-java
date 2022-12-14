@@ -9,14 +9,14 @@ import com.google.gson.JsonElement;
 import com.google.gson.JsonParseException;
 import java.lang.reflect.Type;
 
-public class EventRequestDeserializer implements JsonDeserializer<EventRequest> {
+public class EventRequestDeserializer implements JsonDeserializer<Event.Request> {
 
   /**
    * Deserializes the JSON payload contained in an event's {@code request} attribute into an {@link
-   * EventRequest} instance.
+   * Event.Request} instance.
    */
   @Override
-  public EventRequest deserialize(
+  public Event.Request deserialize(
       JsonElement json, Type typeOfT, JsonDeserializationContext context)
       throws JsonParseException {
     Gson gson =
@@ -27,7 +27,7 @@ public class EventRequestDeserializer implements JsonDeserializer<EventRequest> 
     // API versions 2017-05-25 and earlier render `request` as a string
     // instead of a JSON object
     if (json.isJsonPrimitive()) {
-      EventRequest request = new EventRequest();
+      Event.Request request = new Event.Request();
       request.setId(json.getAsString());
       return request;
     } else {

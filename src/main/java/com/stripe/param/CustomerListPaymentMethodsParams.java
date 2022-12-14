@@ -49,7 +49,11 @@ public class CustomerListPaymentMethodsParams extends ApiRequestParams {
   @SerializedName("starting_after")
   String startingAfter;
 
-  /** A required filter on the list, based on the object {@code type} field. */
+  /**
+   * An optional filter on the list, based on the object {@code type} field. Without the filter, the
+   * list includes all current and future payment method types. If your integration expects only one
+   * type of payment method in the response, make sure to provide a type value in the request.
+   */
   @SerializedName("type")
   Type type;
 
@@ -179,7 +183,12 @@ public class CustomerListPaymentMethodsParams extends ApiRequestParams {
       return this;
     }
 
-    /** A required filter on the list, based on the object {@code type} field. */
+    /**
+     * An optional filter on the list, based on the object {@code type} field. Without the filter,
+     * the list includes all current and future payment method types. If your integration expects
+     * only one type of payment method in the response, make sure to provide a type value in the
+     * request.
+     */
     public Builder setType(CustomerListPaymentMethodsParams.Type type) {
       this.type = type;
       return this;

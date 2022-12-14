@@ -485,6 +485,11 @@ public class Customer extends ApiResource implements HasId, MetadataStore<Custom
   }
 
   /** Returns a list of PaymentMethods for a given Customer. */
+  public PaymentMethodCollection listPaymentMethods() throws StripeException {
+    return listPaymentMethods((Map<String, Object>) null, (RequestOptions) null);
+  }
+
+  /** Returns a list of PaymentMethods for a given Customer. */
   public PaymentMethodCollection listPaymentMethods(Map<String, Object> params)
       throws StripeException {
     return listPaymentMethods(params, (RequestOptions) null);
@@ -728,7 +733,7 @@ public class Customer extends ApiResource implements HasId, MetadataStore<Custom
   public static class InvoiceSettings extends StripeObject {
     /** Default custom fields to be displayed on invoices for this customer. */
     @SerializedName("custom_fields")
-    List<Invoice.CustomField> customFields;
+    List<Customer.InvoiceSettings.CustomField> customFields;
 
     /**
      * ID of a payment method that's attached to the customer, to be used as the customer's default
@@ -745,7 +750,7 @@ public class Customer extends ApiResource implements HasId, MetadataStore<Custom
 
     /** Default options for invoice PDF rendering for this customer. */
     @SerializedName("rendering_options")
-    Invoice.RenderingOptions renderingOptions;
+    RenderingOptions renderingOptions;
 
     /** Get ID of expandable {@code defaultPaymentMethod} object. */
     public String getDefaultPaymentMethod() {
@@ -764,6 +769,28 @@ public class Customer extends ApiResource implements HasId, MetadataStore<Custom
     public void setDefaultPaymentMethodObject(PaymentMethod expandableObject) {
       this.defaultPaymentMethod =
           new ExpandableField<PaymentMethod>(expandableObject.getId(), expandableObject);
+    }
+
+    @Getter
+    @Setter
+    @EqualsAndHashCode(callSuper = false)
+    public static class CustomField extends StripeObject {
+      /** The name of the custom field. */
+      @SerializedName("name")
+      String name;
+
+      /** The value of the custom field. */
+      @SerializedName("value")
+      String value;
+    }
+
+    @Getter
+    @Setter
+    @EqualsAndHashCode(callSuper = false)
+    public static class RenderingOptions extends StripeObject {
+      /** How line-item prices and amounts will be displayed with respect to tax on invoice PDFs. */
+      @SerializedName("amount_tax_display")
+      String amountTaxDisplay;
     }
   }
 

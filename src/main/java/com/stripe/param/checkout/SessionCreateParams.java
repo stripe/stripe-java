@@ -57,6 +57,10 @@ public class SessionCreateParams extends ApiRequestParams {
   @SerializedName("currency")
   String currency;
 
+  /** Display additional text for your customers using custom text. */
+  @SerializedName("custom_text")
+  CustomText customText;
+
   /**
    * ID of an existing Customer, if one exists. In {@code payment} mode, the customer’s most recent
    * card payment method will be used to prefill the email, name, card details, and billing address
@@ -143,6 +147,10 @@ public class SessionCreateParams extends ApiRequestParams {
    */
   @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
   Map<String, Object> extraParams;
+
+  /** Generate a post-purchase Invoice for one-time payments. */
+  @SerializedName("invoice_creation")
+  InvoiceCreation invoiceCreation;
 
   /**
    * A list of items the customer is purchasing. Use this parameter to pass one-time or recurring <a
@@ -294,6 +302,7 @@ public class SessionCreateParams extends ApiRequestParams {
       String clientReferenceId,
       ConsentCollection consentCollection,
       String currency,
+      CustomText customText,
       String customer,
       CustomerCreation customerCreation,
       String customerEmail,
@@ -302,6 +311,7 @@ public class SessionCreateParams extends ApiRequestParams {
       List<String> expand,
       Long expiresAt,
       Map<String, Object> extraParams,
+      InvoiceCreation invoiceCreation,
       List<SessionCreateParams.LineItem> lineItems,
       Locale locale,
       Map<String, String> metadata,
@@ -327,6 +337,7 @@ public class SessionCreateParams extends ApiRequestParams {
     this.clientReferenceId = clientReferenceId;
     this.consentCollection = consentCollection;
     this.currency = currency;
+    this.customText = customText;
     this.customer = customer;
     this.customerCreation = customerCreation;
     this.customerEmail = customerEmail;
@@ -335,6 +346,7 @@ public class SessionCreateParams extends ApiRequestParams {
     this.expand = expand;
     this.expiresAt = expiresAt;
     this.extraParams = extraParams;
+    this.invoiceCreation = invoiceCreation;
     this.lineItems = lineItems;
     this.locale = locale;
     this.metadata = metadata;
@@ -375,6 +387,8 @@ public class SessionCreateParams extends ApiRequestParams {
 
     private String currency;
 
+    private CustomText customText;
+
     private String customer;
 
     private CustomerCreation customerCreation;
@@ -390,6 +404,8 @@ public class SessionCreateParams extends ApiRequestParams {
     private Long expiresAt;
 
     private Map<String, Object> extraParams;
+
+    private InvoiceCreation invoiceCreation;
 
     private List<SessionCreateParams.LineItem> lineItems;
 
@@ -436,6 +452,7 @@ public class SessionCreateParams extends ApiRequestParams {
           this.clientReferenceId,
           this.consentCollection,
           this.currency,
+          this.customText,
           this.customer,
           this.customerCreation,
           this.customerEmail,
@@ -444,6 +461,7 @@ public class SessionCreateParams extends ApiRequestParams {
           this.expand,
           this.expiresAt,
           this.extraParams,
+          this.invoiceCreation,
           this.lineItems,
           this.locale,
           this.metadata,
@@ -522,6 +540,12 @@ public class SessionCreateParams extends ApiRequestParams {
      */
     public Builder setCurrency(String currency) {
       this.currency = currency;
+      return this;
+    }
+
+    /** Display additional text for your customers using custom text. */
+    public Builder setCustomText(SessionCreateParams.CustomText customText) {
+      this.customText = customText;
       return this;
     }
 
@@ -677,6 +701,12 @@ public class SessionCreateParams extends ApiRequestParams {
         this.extraParams = new HashMap<>();
       }
       this.extraParams.putAll(map);
+      return this;
+    }
+
+    /** Generate a post-purchase Invoice for one-time payments. */
+    public Builder setInvoiceCreation(SessionCreateParams.InvoiceCreation invoiceCreation) {
+      this.invoiceCreation = invoiceCreation;
       return this;
     }
 
@@ -1300,6 +1330,241 @@ public class SessionCreateParams extends ApiRequestParams {
   }
 
   @Getter
+  public static class CustomText {
+    /**
+     * Map of extra parameters for custom features not available in this client library. The content
+     * in this map is not serialized under this field's {@code @SerializedName} value. Instead, each
+     * key/value pair is serialized as if the key is a root-level field (serialized) name in this
+     * param object. Effectively, this map is flattened to its parent instance.
+     */
+    @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
+    Map<String, Object> extraParams;
+
+    /** Custom text that should be displayed alongside shipping address collection. */
+    @SerializedName("shipping_address")
+    Object shippingAddress;
+
+    /** Custom text that should be displayed alongside the payment confirmation button. */
+    @SerializedName("submit")
+    Object submit;
+
+    private CustomText(Map<String, Object> extraParams, Object shippingAddress, Object submit) {
+      this.extraParams = extraParams;
+      this.shippingAddress = shippingAddress;
+      this.submit = submit;
+    }
+
+    public static Builder builder() {
+      return new Builder();
+    }
+
+    public static class Builder {
+      private Map<String, Object> extraParams;
+
+      private Object shippingAddress;
+
+      private Object submit;
+
+      /** Finalize and obtain parameter instance from this builder. */
+      public SessionCreateParams.CustomText build() {
+        return new SessionCreateParams.CustomText(
+            this.extraParams, this.shippingAddress, this.submit);
+      }
+
+      /**
+       * Add a key/value pair to `extraParams` map. A map is initialized for the first `put/putAll`
+       * call, and subsequent calls add additional key/value pairs to the original map. See {@link
+       * SessionCreateParams.CustomText#extraParams} for the field documentation.
+       */
+      public Builder putExtraParam(String key, Object value) {
+        if (this.extraParams == null) {
+          this.extraParams = new HashMap<>();
+        }
+        this.extraParams.put(key, value);
+        return this;
+      }
+
+      /**
+       * Add all map key/value pairs to `extraParams` map. A map is initialized for the first
+       * `put/putAll` call, and subsequent calls add additional key/value pairs to the original map.
+       * See {@link SessionCreateParams.CustomText#extraParams} for the field documentation.
+       */
+      public Builder putAllExtraParam(Map<String, Object> map) {
+        if (this.extraParams == null) {
+          this.extraParams = new HashMap<>();
+        }
+        this.extraParams.putAll(map);
+        return this;
+      }
+
+      /** Custom text that should be displayed alongside shipping address collection. */
+      public Builder setShippingAddress(
+          SessionCreateParams.CustomText.ShippingAddress shippingAddress) {
+        this.shippingAddress = shippingAddress;
+        return this;
+      }
+
+      /** Custom text that should be displayed alongside shipping address collection. */
+      public Builder setShippingAddress(EmptyParam shippingAddress) {
+        this.shippingAddress = shippingAddress;
+        return this;
+      }
+
+      /** Custom text that should be displayed alongside the payment confirmation button. */
+      public Builder setSubmit(SessionCreateParams.CustomText.Submit submit) {
+        this.submit = submit;
+        return this;
+      }
+
+      /** Custom text that should be displayed alongside the payment confirmation button. */
+      public Builder setSubmit(EmptyParam submit) {
+        this.submit = submit;
+        return this;
+      }
+    }
+
+    @Getter
+    public static class ShippingAddress {
+      /**
+       * Map of extra parameters for custom features not available in this client library. The
+       * content in this map is not serialized under this field's {@code @SerializedName} value.
+       * Instead, each key/value pair is serialized as if the key is a root-level field (serialized)
+       * name in this param object. Effectively, this map is flattened to its parent instance.
+       */
+      @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
+      Map<String, Object> extraParams;
+
+      /** Text may be up to 500 characters in length. */
+      @SerializedName("message")
+      String message;
+
+      private ShippingAddress(Map<String, Object> extraParams, String message) {
+        this.extraParams = extraParams;
+        this.message = message;
+      }
+
+      public static Builder builder() {
+        return new Builder();
+      }
+
+      public static class Builder {
+        private Map<String, Object> extraParams;
+
+        private String message;
+
+        /** Finalize and obtain parameter instance from this builder. */
+        public SessionCreateParams.CustomText.ShippingAddress build() {
+          return new SessionCreateParams.CustomText.ShippingAddress(this.extraParams, this.message);
+        }
+
+        /**
+         * Add a key/value pair to `extraParams` map. A map is initialized for the first
+         * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
+         * map. See {@link SessionCreateParams.CustomText.ShippingAddress#extraParams} for the field
+         * documentation.
+         */
+        public Builder putExtraParam(String key, Object value) {
+          if (this.extraParams == null) {
+            this.extraParams = new HashMap<>();
+          }
+          this.extraParams.put(key, value);
+          return this;
+        }
+
+        /**
+         * Add all map key/value pairs to `extraParams` map. A map is initialized for the first
+         * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
+         * map. See {@link SessionCreateParams.CustomText.ShippingAddress#extraParams} for the field
+         * documentation.
+         */
+        public Builder putAllExtraParam(Map<String, Object> map) {
+          if (this.extraParams == null) {
+            this.extraParams = new HashMap<>();
+          }
+          this.extraParams.putAll(map);
+          return this;
+        }
+
+        /** Text may be up to 500 characters in length. */
+        public Builder setMessage(String message) {
+          this.message = message;
+          return this;
+        }
+      }
+    }
+
+    @Getter
+    public static class Submit {
+      /**
+       * Map of extra parameters for custom features not available in this client library. The
+       * content in this map is not serialized under this field's {@code @SerializedName} value.
+       * Instead, each key/value pair is serialized as if the key is a root-level field (serialized)
+       * name in this param object. Effectively, this map is flattened to its parent instance.
+       */
+      @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
+      Map<String, Object> extraParams;
+
+      /** Text may be up to 500 characters in length. */
+      @SerializedName("message")
+      String message;
+
+      private Submit(Map<String, Object> extraParams, String message) {
+        this.extraParams = extraParams;
+        this.message = message;
+      }
+
+      public static Builder builder() {
+        return new Builder();
+      }
+
+      public static class Builder {
+        private Map<String, Object> extraParams;
+
+        private String message;
+
+        /** Finalize and obtain parameter instance from this builder. */
+        public SessionCreateParams.CustomText.Submit build() {
+          return new SessionCreateParams.CustomText.Submit(this.extraParams, this.message);
+        }
+
+        /**
+         * Add a key/value pair to `extraParams` map. A map is initialized for the first
+         * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
+         * map. See {@link SessionCreateParams.CustomText.Submit#extraParams} for the field
+         * documentation.
+         */
+        public Builder putExtraParam(String key, Object value) {
+          if (this.extraParams == null) {
+            this.extraParams = new HashMap<>();
+          }
+          this.extraParams.put(key, value);
+          return this;
+        }
+
+        /**
+         * Add all map key/value pairs to `extraParams` map. A map is initialized for the first
+         * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
+         * map. See {@link SessionCreateParams.CustomText.Submit#extraParams} for the field
+         * documentation.
+         */
+        public Builder putAllExtraParam(Map<String, Object> map) {
+          if (this.extraParams == null) {
+            this.extraParams = new HashMap<>();
+          }
+          this.extraParams.putAll(map);
+          return this;
+        }
+
+        /** Text may be up to 500 characters in length. */
+        public Builder setMessage(String message) {
+          this.message = message;
+          return this;
+        }
+      }
+    }
+  }
+
+  @Getter
   public static class CustomerUpdate {
     /**
      * Describes whether Checkout saves the billing address onto {@code customer.address}. To always
@@ -1544,6 +1809,553 @@ public class SessionCreateParams extends ApiRequestParams {
   }
 
   @Getter
+  public static class InvoiceCreation {
+    /** Set to {@code true} to enable invoice creation. */
+    @SerializedName("enabled")
+    Boolean enabled;
+
+    /**
+     * Map of extra parameters for custom features not available in this client library. The content
+     * in this map is not serialized under this field's {@code @SerializedName} value. Instead, each
+     * key/value pair is serialized as if the key is a root-level field (serialized) name in this
+     * param object. Effectively, this map is flattened to its parent instance.
+     */
+    @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
+    Map<String, Object> extraParams;
+
+    /** Parameters passed when creating invoices for payment-mode Checkout Sessions. */
+    @SerializedName("invoice_data")
+    InvoiceData invoiceData;
+
+    private InvoiceCreation(
+        Boolean enabled, Map<String, Object> extraParams, InvoiceData invoiceData) {
+      this.enabled = enabled;
+      this.extraParams = extraParams;
+      this.invoiceData = invoiceData;
+    }
+
+    public static Builder builder() {
+      return new Builder();
+    }
+
+    public static class Builder {
+      private Boolean enabled;
+
+      private Map<String, Object> extraParams;
+
+      private InvoiceData invoiceData;
+
+      /** Finalize and obtain parameter instance from this builder. */
+      public SessionCreateParams.InvoiceCreation build() {
+        return new SessionCreateParams.InvoiceCreation(
+            this.enabled, this.extraParams, this.invoiceData);
+      }
+
+      /** Set to {@code true} to enable invoice creation. */
+      public Builder setEnabled(Boolean enabled) {
+        this.enabled = enabled;
+        return this;
+      }
+
+      /**
+       * Add a key/value pair to `extraParams` map. A map is initialized for the first `put/putAll`
+       * call, and subsequent calls add additional key/value pairs to the original map. See {@link
+       * SessionCreateParams.InvoiceCreation#extraParams} for the field documentation.
+       */
+      public Builder putExtraParam(String key, Object value) {
+        if (this.extraParams == null) {
+          this.extraParams = new HashMap<>();
+        }
+        this.extraParams.put(key, value);
+        return this;
+      }
+
+      /**
+       * Add all map key/value pairs to `extraParams` map. A map is initialized for the first
+       * `put/putAll` call, and subsequent calls add additional key/value pairs to the original map.
+       * See {@link SessionCreateParams.InvoiceCreation#extraParams} for the field documentation.
+       */
+      public Builder putAllExtraParam(Map<String, Object> map) {
+        if (this.extraParams == null) {
+          this.extraParams = new HashMap<>();
+        }
+        this.extraParams.putAll(map);
+        return this;
+      }
+
+      /** Parameters passed when creating invoices for payment-mode Checkout Sessions. */
+      public Builder setInvoiceData(SessionCreateParams.InvoiceCreation.InvoiceData invoiceData) {
+        this.invoiceData = invoiceData;
+        return this;
+      }
+    }
+
+    @Getter
+    public static class InvoiceData {
+      /** The account tax IDs associated with the invoice. */
+      @SerializedName("account_tax_ids")
+      Object accountTaxIds;
+
+      /** Default custom fields to be displayed on invoices for this customer. */
+      @SerializedName("custom_fields")
+      Object customFields;
+
+      /** An arbitrary string attached to the object. Often useful for displaying to users. */
+      @SerializedName("description")
+      String description;
+
+      /**
+       * Map of extra parameters for custom features not available in this client library. The
+       * content in this map is not serialized under this field's {@code @SerializedName} value.
+       * Instead, each key/value pair is serialized as if the key is a root-level field (serialized)
+       * name in this param object. Effectively, this map is flattened to its parent instance.
+       */
+      @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
+      Map<String, Object> extraParams;
+
+      /** Default footer to be displayed on invoices for this customer. */
+      @SerializedName("footer")
+      String footer;
+
+      /**
+       * Set of <a href="https://stripe.com/docs/api/metadata">key-value pairs</a> that you can
+       * attach to an object. This can be useful for storing additional information about the object
+       * in a structured format. Individual keys can be unset by posting an empty value to them. All
+       * keys can be unset by posting an empty value to {@code metadata}.
+       */
+      @SerializedName("metadata")
+      Map<String, String> metadata;
+
+      /** Default options for invoice PDF rendering for this customer. */
+      @SerializedName("rendering_options")
+      Object renderingOptions;
+
+      private InvoiceData(
+          Object accountTaxIds,
+          Object customFields,
+          String description,
+          Map<String, Object> extraParams,
+          String footer,
+          Map<String, String> metadata,
+          Object renderingOptions) {
+        this.accountTaxIds = accountTaxIds;
+        this.customFields = customFields;
+        this.description = description;
+        this.extraParams = extraParams;
+        this.footer = footer;
+        this.metadata = metadata;
+        this.renderingOptions = renderingOptions;
+      }
+
+      public static Builder builder() {
+        return new Builder();
+      }
+
+      public static class Builder {
+        private Object accountTaxIds;
+
+        private Object customFields;
+
+        private String description;
+
+        private Map<String, Object> extraParams;
+
+        private String footer;
+
+        private Map<String, String> metadata;
+
+        private Object renderingOptions;
+
+        /** Finalize and obtain parameter instance from this builder. */
+        public SessionCreateParams.InvoiceCreation.InvoiceData build() {
+          return new SessionCreateParams.InvoiceCreation.InvoiceData(
+              this.accountTaxIds,
+              this.customFields,
+              this.description,
+              this.extraParams,
+              this.footer,
+              this.metadata,
+              this.renderingOptions);
+        }
+
+        /**
+         * Add an element to `accountTaxIds` list. A list is initialized for the first `add/addAll`
+         * call, and subsequent calls adds additional elements to the original list. See {@link
+         * SessionCreateParams.InvoiceCreation.InvoiceData#accountTaxIds} for the field
+         * documentation.
+         */
+        @SuppressWarnings("unchecked")
+        public Builder addAccountTaxId(String element) {
+          if (this.accountTaxIds == null || this.accountTaxIds instanceof EmptyParam) {
+            this.accountTaxIds = new ArrayList<String>();
+          }
+          ((List<String>) this.accountTaxIds).add(element);
+          return this;
+        }
+
+        /**
+         * Add all elements to `accountTaxIds` list. A list is initialized for the first
+         * `add/addAll` call, and subsequent calls adds additional elements to the original list.
+         * See {@link SessionCreateParams.InvoiceCreation.InvoiceData#accountTaxIds} for the field
+         * documentation.
+         */
+        @SuppressWarnings("unchecked")
+        public Builder addAllAccountTaxId(List<String> elements) {
+          if (this.accountTaxIds == null || this.accountTaxIds instanceof EmptyParam) {
+            this.accountTaxIds = new ArrayList<String>();
+          }
+          ((List<String>) this.accountTaxIds).addAll(elements);
+          return this;
+        }
+
+        /** The account tax IDs associated with the invoice. */
+        public Builder setAccountTaxIds(EmptyParam accountTaxIds) {
+          this.accountTaxIds = accountTaxIds;
+          return this;
+        }
+
+        /** The account tax IDs associated with the invoice. */
+        public Builder setAccountTaxIds(List<String> accountTaxIds) {
+          this.accountTaxIds = accountTaxIds;
+          return this;
+        }
+
+        /**
+         * Add an element to `customFields` list. A list is initialized for the first `add/addAll`
+         * call, and subsequent calls adds additional elements to the original list. See {@link
+         * SessionCreateParams.InvoiceCreation.InvoiceData#customFields} for the field
+         * documentation.
+         */
+        @SuppressWarnings("unchecked")
+        public Builder addCustomField(
+            SessionCreateParams.InvoiceCreation.InvoiceData.CustomField element) {
+          if (this.customFields == null || this.customFields instanceof EmptyParam) {
+            this.customFields =
+                new ArrayList<SessionCreateParams.InvoiceCreation.InvoiceData.CustomField>();
+          }
+          ((List<SessionCreateParams.InvoiceCreation.InvoiceData.CustomField>) this.customFields)
+              .add(element);
+          return this;
+        }
+
+        /**
+         * Add all elements to `customFields` list. A list is initialized for the first `add/addAll`
+         * call, and subsequent calls adds additional elements to the original list. See {@link
+         * SessionCreateParams.InvoiceCreation.InvoiceData#customFields} for the field
+         * documentation.
+         */
+        @SuppressWarnings("unchecked")
+        public Builder addAllCustomField(
+            List<SessionCreateParams.InvoiceCreation.InvoiceData.CustomField> elements) {
+          if (this.customFields == null || this.customFields instanceof EmptyParam) {
+            this.customFields =
+                new ArrayList<SessionCreateParams.InvoiceCreation.InvoiceData.CustomField>();
+          }
+          ((List<SessionCreateParams.InvoiceCreation.InvoiceData.CustomField>) this.customFields)
+              .addAll(elements);
+          return this;
+        }
+
+        /** Default custom fields to be displayed on invoices for this customer. */
+        public Builder setCustomFields(EmptyParam customFields) {
+          this.customFields = customFields;
+          return this;
+        }
+
+        /** Default custom fields to be displayed on invoices for this customer. */
+        public Builder setCustomFields(
+            List<SessionCreateParams.InvoiceCreation.InvoiceData.CustomField> customFields) {
+          this.customFields = customFields;
+          return this;
+        }
+
+        /** An arbitrary string attached to the object. Often useful for displaying to users. */
+        public Builder setDescription(String description) {
+          this.description = description;
+          return this;
+        }
+
+        /**
+         * Add a key/value pair to `extraParams` map. A map is initialized for the first
+         * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
+         * map. See {@link SessionCreateParams.InvoiceCreation.InvoiceData#extraParams} for the
+         * field documentation.
+         */
+        public Builder putExtraParam(String key, Object value) {
+          if (this.extraParams == null) {
+            this.extraParams = new HashMap<>();
+          }
+          this.extraParams.put(key, value);
+          return this;
+        }
+
+        /**
+         * Add all map key/value pairs to `extraParams` map. A map is initialized for the first
+         * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
+         * map. See {@link SessionCreateParams.InvoiceCreation.InvoiceData#extraParams} for the
+         * field documentation.
+         */
+        public Builder putAllExtraParam(Map<String, Object> map) {
+          if (this.extraParams == null) {
+            this.extraParams = new HashMap<>();
+          }
+          this.extraParams.putAll(map);
+          return this;
+        }
+
+        /** Default footer to be displayed on invoices for this customer. */
+        public Builder setFooter(String footer) {
+          this.footer = footer;
+          return this;
+        }
+
+        /**
+         * Add a key/value pair to `metadata` map. A map is initialized for the first `put/putAll`
+         * call, and subsequent calls add additional key/value pairs to the original map. See {@link
+         * SessionCreateParams.InvoiceCreation.InvoiceData#metadata} for the field documentation.
+         */
+        public Builder putMetadata(String key, String value) {
+          if (this.metadata == null) {
+            this.metadata = new HashMap<>();
+          }
+          this.metadata.put(key, value);
+          return this;
+        }
+
+        /**
+         * Add all map key/value pairs to `metadata` map. A map is initialized for the first
+         * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
+         * map. See {@link SessionCreateParams.InvoiceCreation.InvoiceData#metadata} for the field
+         * documentation.
+         */
+        public Builder putAllMetadata(Map<String, String> map) {
+          if (this.metadata == null) {
+            this.metadata = new HashMap<>();
+          }
+          this.metadata.putAll(map);
+          return this;
+        }
+
+        /** Default options for invoice PDF rendering for this customer. */
+        public Builder setRenderingOptions(
+            SessionCreateParams.InvoiceCreation.InvoiceData.RenderingOptions renderingOptions) {
+          this.renderingOptions = renderingOptions;
+          return this;
+        }
+
+        /** Default options for invoice PDF rendering for this customer. */
+        public Builder setRenderingOptions(EmptyParam renderingOptions) {
+          this.renderingOptions = renderingOptions;
+          return this;
+        }
+      }
+
+      @Getter
+      public static class CustomField {
+        /**
+         * Map of extra parameters for custom features not available in this client library. The
+         * content in this map is not serialized under this field's {@code @SerializedName} value.
+         * Instead, each key/value pair is serialized as if the key is a root-level field
+         * (serialized) name in this param object. Effectively, this map is flattened to its parent
+         * instance.
+         */
+        @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
+        Map<String, Object> extraParams;
+
+        /** The name of the custom field. This may be up to 30 characters. */
+        @SerializedName("name")
+        String name;
+
+        /** The value of the custom field. This may be up to 30 characters. */
+        @SerializedName("value")
+        String value;
+
+        private CustomField(Map<String, Object> extraParams, String name, String value) {
+          this.extraParams = extraParams;
+          this.name = name;
+          this.value = value;
+        }
+
+        public static Builder builder() {
+          return new Builder();
+        }
+
+        public static class Builder {
+          private Map<String, Object> extraParams;
+
+          private String name;
+
+          private String value;
+
+          /** Finalize and obtain parameter instance from this builder. */
+          public SessionCreateParams.InvoiceCreation.InvoiceData.CustomField build() {
+            return new SessionCreateParams.InvoiceCreation.InvoiceData.CustomField(
+                this.extraParams, this.name, this.value);
+          }
+
+          /**
+           * Add a key/value pair to `extraParams` map. A map is initialized for the first
+           * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
+           * map. See {@link
+           * SessionCreateParams.InvoiceCreation.InvoiceData.CustomField#extraParams} for the field
+           * documentation.
+           */
+          public Builder putExtraParam(String key, Object value) {
+            if (this.extraParams == null) {
+              this.extraParams = new HashMap<>();
+            }
+            this.extraParams.put(key, value);
+            return this;
+          }
+
+          /**
+           * Add all map key/value pairs to `extraParams` map. A map is initialized for the first
+           * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
+           * map. See {@link
+           * SessionCreateParams.InvoiceCreation.InvoiceData.CustomField#extraParams} for the field
+           * documentation.
+           */
+          public Builder putAllExtraParam(Map<String, Object> map) {
+            if (this.extraParams == null) {
+              this.extraParams = new HashMap<>();
+            }
+            this.extraParams.putAll(map);
+            return this;
+          }
+
+          /** The name of the custom field. This may be up to 30 characters. */
+          public Builder setName(String name) {
+            this.name = name;
+            return this;
+          }
+
+          /** The value of the custom field. This may be up to 30 characters. */
+          public Builder setValue(String value) {
+            this.value = value;
+            return this;
+          }
+        }
+      }
+
+      @Getter
+      public static class RenderingOptions {
+        /**
+         * How line-item prices and amounts will be displayed with respect to tax on invoice PDFs.
+         * One of {@code exclude_tax} or {@code include_inclusive_tax}. {@code
+         * include_inclusive_tax} will include inclusive tax (and exclude exclusive tax) in invoice
+         * PDF amounts. {@code exclude_tax} will exclude all tax (inclusive and exclusive alike)
+         * from invoice PDF amounts.
+         */
+        @SerializedName("amount_tax_display")
+        ApiRequestParams.EnumParam amountTaxDisplay;
+
+        /**
+         * Map of extra parameters for custom features not available in this client library. The
+         * content in this map is not serialized under this field's {@code @SerializedName} value.
+         * Instead, each key/value pair is serialized as if the key is a root-level field
+         * (serialized) name in this param object. Effectively, this map is flattened to its parent
+         * instance.
+         */
+        @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
+        Map<String, Object> extraParams;
+
+        private RenderingOptions(
+            ApiRequestParams.EnumParam amountTaxDisplay, Map<String, Object> extraParams) {
+          this.amountTaxDisplay = amountTaxDisplay;
+          this.extraParams = extraParams;
+        }
+
+        public static Builder builder() {
+          return new Builder();
+        }
+
+        public static class Builder {
+          private ApiRequestParams.EnumParam amountTaxDisplay;
+
+          private Map<String, Object> extraParams;
+
+          /** Finalize and obtain parameter instance from this builder. */
+          public SessionCreateParams.InvoiceCreation.InvoiceData.RenderingOptions build() {
+            return new SessionCreateParams.InvoiceCreation.InvoiceData.RenderingOptions(
+                this.amountTaxDisplay, this.extraParams);
+          }
+
+          /**
+           * How line-item prices and amounts will be displayed with respect to tax on invoice PDFs.
+           * One of {@code exclude_tax} or {@code include_inclusive_tax}. {@code
+           * include_inclusive_tax} will include inclusive tax (and exclude exclusive tax) in
+           * invoice PDF amounts. {@code exclude_tax} will exclude all tax (inclusive and exclusive
+           * alike) from invoice PDF amounts.
+           */
+          public Builder setAmountTaxDisplay(
+              SessionCreateParams.InvoiceCreation.InvoiceData.RenderingOptions.AmountTaxDisplay
+                  amountTaxDisplay) {
+            this.amountTaxDisplay = amountTaxDisplay;
+            return this;
+          }
+
+          /**
+           * How line-item prices and amounts will be displayed with respect to tax on invoice PDFs.
+           * One of {@code exclude_tax} or {@code include_inclusive_tax}. {@code
+           * include_inclusive_tax} will include inclusive tax (and exclude exclusive tax) in
+           * invoice PDF amounts. {@code exclude_tax} will exclude all tax (inclusive and exclusive
+           * alike) from invoice PDF amounts.
+           */
+          public Builder setAmountTaxDisplay(EmptyParam amountTaxDisplay) {
+            this.amountTaxDisplay = amountTaxDisplay;
+            return this;
+          }
+
+          /**
+           * Add a key/value pair to `extraParams` map. A map is initialized for the first
+           * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
+           * map. See {@link
+           * SessionCreateParams.InvoiceCreation.InvoiceData.RenderingOptions#extraParams} for the
+           * field documentation.
+           */
+          public Builder putExtraParam(String key, Object value) {
+            if (this.extraParams == null) {
+              this.extraParams = new HashMap<>();
+            }
+            this.extraParams.put(key, value);
+            return this;
+          }
+
+          /**
+           * Add all map key/value pairs to `extraParams` map. A map is initialized for the first
+           * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
+           * map. See {@link
+           * SessionCreateParams.InvoiceCreation.InvoiceData.RenderingOptions#extraParams} for the
+           * field documentation.
+           */
+          public Builder putAllExtraParam(Map<String, Object> map) {
+            if (this.extraParams == null) {
+              this.extraParams = new HashMap<>();
+            }
+            this.extraParams.putAll(map);
+            return this;
+          }
+        }
+
+        public enum AmountTaxDisplay implements ApiRequestParams.EnumParam {
+          @SerializedName("exclude_tax")
+          EXCLUDE_TAX("exclude_tax"),
+
+          @SerializedName("include_inclusive_tax")
+          INCLUDE_INCLUSIVE_TAX("include_inclusive_tax");
+
+          @Getter(onMethod_ = {@Override})
+          private final String value;
+
+          AmountTaxDisplay(String value) {
+            this.value = value;
+          }
+        }
+      }
+    }
+  }
+
+  @Getter
   public static class LineItem {
     /**
      * When set, provides configuration for this item’s quantity to be adjusted by the customer
@@ -1551,26 +2363,6 @@ public class SessionCreateParams extends ApiRequestParams {
      */
     @SerializedName("adjustable_quantity")
     AdjustableQuantity adjustableQuantity;
-
-    /**
-     * [Deprecated] The amount to be collected per unit of the line item. If specified, must also
-     * pass {@code currency} and {@code name}.
-     */
-    @SerializedName("amount")
-    Long amount;
-
-    /**
-     * [Deprecated] Three-letter <a href="https://www.iso.org/iso-4217-currency-codes.html">ISO
-     * currency code</a>, in lowercase. Must be a <a
-     * href="https://stripe.com/docs/currencies">supported currency</a>. Required if {@code amount}
-     * is passed.
-     */
-    @SerializedName("currency")
-    String currency;
-
-    /** [Deprecated] The description for the line item, to be displayed on the Checkout page. */
-    @SerializedName("description")
-    String description;
 
     /**
      * The <a href="https://stripe.com/docs/api/tax_rates">tax rates</a> that will be applied to
@@ -1588,21 +2380,6 @@ public class SessionCreateParams extends ApiRequestParams {
      */
     @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
     Map<String, Object> extraParams;
-
-    /**
-     * [Deprecated] A list of image URLs representing this line item. Each image can be up to 5 MB
-     * in size. If passing {@code price} or {@code price_data}, specify images on the associated
-     * product instead.
-     */
-    @SerializedName("images")
-    List<String> images;
-
-    /**
-     * [Deprecated] The name for the item to be displayed on the Checkout page. Required if {@code
-     * amount} is passed.
-     */
-    @SerializedName("name")
-    String name;
 
     /**
      * The ID of the <a href="https://stripe.com/docs/api/prices">Price</a> or <a
@@ -1635,25 +2412,15 @@ public class SessionCreateParams extends ApiRequestParams {
 
     private LineItem(
         AdjustableQuantity adjustableQuantity,
-        Long amount,
-        String currency,
-        String description,
         List<String> dynamicTaxRates,
         Map<String, Object> extraParams,
-        List<String> images,
-        String name,
         String price,
         PriceData priceData,
         Long quantity,
         List<String> taxRates) {
       this.adjustableQuantity = adjustableQuantity;
-      this.amount = amount;
-      this.currency = currency;
-      this.description = description;
       this.dynamicTaxRates = dynamicTaxRates;
       this.extraParams = extraParams;
-      this.images = images;
-      this.name = name;
       this.price = price;
       this.priceData = priceData;
       this.quantity = quantity;
@@ -1667,19 +2434,9 @@ public class SessionCreateParams extends ApiRequestParams {
     public static class Builder {
       private AdjustableQuantity adjustableQuantity;
 
-      private Long amount;
-
-      private String currency;
-
-      private String description;
-
       private List<String> dynamicTaxRates;
 
       private Map<String, Object> extraParams;
-
-      private List<String> images;
-
-      private String name;
 
       private String price;
 
@@ -1693,13 +2450,8 @@ public class SessionCreateParams extends ApiRequestParams {
       public SessionCreateParams.LineItem build() {
         return new SessionCreateParams.LineItem(
             this.adjustableQuantity,
-            this.amount,
-            this.currency,
-            this.description,
             this.dynamicTaxRates,
             this.extraParams,
-            this.images,
-            this.name,
             this.price,
             this.priceData,
             this.quantity,
@@ -1713,32 +2465,6 @@ public class SessionCreateParams extends ApiRequestParams {
       public Builder setAdjustableQuantity(
           SessionCreateParams.LineItem.AdjustableQuantity adjustableQuantity) {
         this.adjustableQuantity = adjustableQuantity;
-        return this;
-      }
-
-      /**
-       * [Deprecated] The amount to be collected per unit of the line item. If specified, must also
-       * pass {@code currency} and {@code name}.
-       */
-      public Builder setAmount(Long amount) {
-        this.amount = amount;
-        return this;
-      }
-
-      /**
-       * [Deprecated] Three-letter <a href="https://www.iso.org/iso-4217-currency-codes.html">ISO
-       * currency code</a>, in lowercase. Must be a <a
-       * href="https://stripe.com/docs/currencies">supported currency</a>. Required if {@code
-       * amount} is passed.
-       */
-      public Builder setCurrency(String currency) {
-        this.currency = currency;
-        return this;
-      }
-
-      /** [Deprecated] The description for the line item, to be displayed on the Checkout page. */
-      public Builder setDescription(String description) {
-        this.description = description;
         return this;
       }
 
@@ -1791,41 +2517,6 @@ public class SessionCreateParams extends ApiRequestParams {
           this.extraParams = new HashMap<>();
         }
         this.extraParams.putAll(map);
-        return this;
-      }
-
-      /**
-       * Add an element to `images` list. A list is initialized for the first `add/addAll` call, and
-       * subsequent calls adds additional elements to the original list. See {@link
-       * SessionCreateParams.LineItem#images} for the field documentation.
-       */
-      public Builder addImage(String element) {
-        if (this.images == null) {
-          this.images = new ArrayList<>();
-        }
-        this.images.add(element);
-        return this;
-      }
-
-      /**
-       * Add all elements to `images` list. A list is initialized for the first `add/addAll` call,
-       * and subsequent calls adds additional elements to the original list. See {@link
-       * SessionCreateParams.LineItem#images} for the field documentation.
-       */
-      public Builder addAllImage(List<String> elements) {
-        if (this.images == null) {
-          this.images = new ArrayList<>();
-        }
-        this.images.addAll(elements);
-        return this;
-      }
-
-      /**
-       * [Deprecated] The name for the item to be displayed on the Checkout page. Required if {@code
-       * amount} is passed.
-       */
-      public Builder setName(String name) {
-        this.name = name;
         return this;
       }
 
@@ -9765,10 +10456,6 @@ public class SessionCreateParams extends ApiRequestParams {
     @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
     Map<String, Object> extraParams;
 
-    /** This parameter is deprecated. Use the line_items parameter on the Session instead. */
-    @SerializedName("items")
-    List<SessionCreateParams.SubscriptionData.Item> items;
-
     /**
      * Set of <a href="https://stripe.com/docs/api/metadata">key-value pairs</a> that you can attach
      * to an object. This can be useful for storing additional information about the object in a
@@ -9817,7 +10504,6 @@ public class SessionCreateParams extends ApiRequestParams {
         List<String> defaultTaxRates,
         String description,
         Map<String, Object> extraParams,
-        List<SessionCreateParams.SubscriptionData.Item> items,
         Map<String, String> metadata,
         String onBehalfOf,
         TransferData transferData,
@@ -9829,7 +10515,6 @@ public class SessionCreateParams extends ApiRequestParams {
       this.defaultTaxRates = defaultTaxRates;
       this.description = description;
       this.extraParams = extraParams;
-      this.items = items;
       this.metadata = metadata;
       this.onBehalfOf = onBehalfOf;
       this.transferData = transferData;
@@ -9853,8 +10538,6 @@ public class SessionCreateParams extends ApiRequestParams {
 
       private Map<String, Object> extraParams;
 
-      private List<SessionCreateParams.SubscriptionData.Item> items;
-
       private Map<String, String> metadata;
 
       private String onBehalfOf;
@@ -9875,7 +10558,6 @@ public class SessionCreateParams extends ApiRequestParams {
             this.defaultTaxRates,
             this.description,
             this.extraParams,
-            this.items,
             this.metadata,
             this.onBehalfOf,
             this.transferData,
@@ -9969,32 +10651,6 @@ public class SessionCreateParams extends ApiRequestParams {
       }
 
       /**
-       * Add an element to `items` list. A list is initialized for the first `add/addAll` call, and
-       * subsequent calls adds additional elements to the original list. See {@link
-       * SessionCreateParams.SubscriptionData#items} for the field documentation.
-       */
-      public Builder addItem(SessionCreateParams.SubscriptionData.Item element) {
-        if (this.items == null) {
-          this.items = new ArrayList<>();
-        }
-        this.items.add(element);
-        return this;
-      }
-
-      /**
-       * Add all elements to `items` list. A list is initialized for the first `add/addAll` call,
-       * and subsequent calls adds additional elements to the original list. See {@link
-       * SessionCreateParams.SubscriptionData#items} for the field documentation.
-       */
-      public Builder addAllItem(List<SessionCreateParams.SubscriptionData.Item> elements) {
-        if (this.items == null) {
-          this.items = new ArrayList<>();
-        }
-        this.items.addAll(elements);
-        return this;
-      }
-
-      /**
        * Add a key/value pair to `metadata` map. A map is initialized for the first `put/putAll`
        * call, and subsequent calls add additional key/value pairs to the original map. See {@link
        * SessionCreateParams.SubscriptionData#metadata} for the field documentation.
@@ -10062,133 +10718,6 @@ public class SessionCreateParams extends ApiRequestParams {
       public Builder setTrialPeriodDays(Long trialPeriodDays) {
         this.trialPeriodDays = trialPeriodDays;
         return this;
-      }
-    }
-
-    @Getter
-    public static class Item {
-      /**
-       * Map of extra parameters for custom features not available in this client library. The
-       * content in this map is not serialized under this field's {@code @SerializedName} value.
-       * Instead, each key/value pair is serialized as if the key is a root-level field (serialized)
-       * name in this param object. Effectively, this map is flattened to its parent instance.
-       */
-      @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
-      Map<String, Object> extraParams;
-
-      /** Plan ID for this item. */
-      @SerializedName("plan")
-      String plan;
-
-      /**
-       * The quantity of the subscription item being purchased. Quantity should not be defined when
-       * {@code recurring.usage_type=metered}.
-       */
-      @SerializedName("quantity")
-      Long quantity;
-
-      /**
-       * The tax rates which apply to this item. When set, the {@code default_tax_rates} on {@code
-       * subscription_data} do not apply to this item.
-       */
-      @SerializedName("tax_rates")
-      List<String> taxRates;
-
-      private Item(
-          Map<String, Object> extraParams, String plan, Long quantity, List<String> taxRates) {
-        this.extraParams = extraParams;
-        this.plan = plan;
-        this.quantity = quantity;
-        this.taxRates = taxRates;
-      }
-
-      public static Builder builder() {
-        return new Builder();
-      }
-
-      public static class Builder {
-        private Map<String, Object> extraParams;
-
-        private String plan;
-
-        private Long quantity;
-
-        private List<String> taxRates;
-
-        /** Finalize and obtain parameter instance from this builder. */
-        public SessionCreateParams.SubscriptionData.Item build() {
-          return new SessionCreateParams.SubscriptionData.Item(
-              this.extraParams, this.plan, this.quantity, this.taxRates);
-        }
-
-        /**
-         * Add a key/value pair to `extraParams` map. A map is initialized for the first
-         * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
-         * map. See {@link SessionCreateParams.SubscriptionData.Item#extraParams} for the field
-         * documentation.
-         */
-        public Builder putExtraParam(String key, Object value) {
-          if (this.extraParams == null) {
-            this.extraParams = new HashMap<>();
-          }
-          this.extraParams.put(key, value);
-          return this;
-        }
-
-        /**
-         * Add all map key/value pairs to `extraParams` map. A map is initialized for the first
-         * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
-         * map. See {@link SessionCreateParams.SubscriptionData.Item#extraParams} for the field
-         * documentation.
-         */
-        public Builder putAllExtraParam(Map<String, Object> map) {
-          if (this.extraParams == null) {
-            this.extraParams = new HashMap<>();
-          }
-          this.extraParams.putAll(map);
-          return this;
-        }
-
-        /** Plan ID for this item. */
-        public Builder setPlan(String plan) {
-          this.plan = plan;
-          return this;
-        }
-
-        /**
-         * The quantity of the subscription item being purchased. Quantity should not be defined
-         * when {@code recurring.usage_type=metered}.
-         */
-        public Builder setQuantity(Long quantity) {
-          this.quantity = quantity;
-          return this;
-        }
-
-        /**
-         * Add an element to `taxRates` list. A list is initialized for the first `add/addAll` call,
-         * and subsequent calls adds additional elements to the original list. See {@link
-         * SessionCreateParams.SubscriptionData.Item#taxRates} for the field documentation.
-         */
-        public Builder addTaxRate(String element) {
-          if (this.taxRates == null) {
-            this.taxRates = new ArrayList<>();
-          }
-          this.taxRates.add(element);
-          return this;
-        }
-
-        /**
-         * Add all elements to `taxRates` list. A list is initialized for the first `add/addAll`
-         * call, and subsequent calls adds additional elements to the original list. See {@link
-         * SessionCreateParams.SubscriptionData.Item#taxRates} for the field documentation.
-         */
-        public Builder addAllTaxRate(List<String> elements) {
-          if (this.taxRates == null) {
-            this.taxRates = new ArrayList<>();
-          }
-          this.taxRates.addAll(elements);
-          return this;
-        }
       }
     }
 

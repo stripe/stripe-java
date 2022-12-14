@@ -69,7 +69,7 @@ public class CreditNoteLineItem extends StripeObject implements HasId {
 
   /** The amount of tax calculated per tax rate for this line item. */
   @SerializedName("tax_amounts")
-  List<CreditNote.TaxAmount> taxAmounts;
+  List<CreditNoteLineItem.TaxAmount> taxAmounts;
 
   /** The tax rates which apply to the line item. */
   @SerializedName("tax_rates")
@@ -129,6 +129,43 @@ public class CreditNoteLineItem extends StripeObject implements HasId {
 
     public void setDiscountObject(Discount expandableObject) {
       this.discount = new ExpandableField<Discount>(expandableObject.getId(), expandableObject);
+    }
+  }
+
+  @Getter
+  @Setter
+  @EqualsAndHashCode(callSuper = false)
+  public static class TaxAmount extends StripeObject {
+    /** The amount, in %s, of the tax. */
+    @SerializedName("amount")
+    Long amount;
+
+    /** Whether this tax amount is inclusive or exclusive. */
+    @SerializedName("inclusive")
+    Boolean inclusive;
+
+    /** The tax rate that was applied to get this tax amount. */
+    @SerializedName("tax_rate")
+    @Getter(lombok.AccessLevel.NONE)
+    @Setter(lombok.AccessLevel.NONE)
+    ExpandableField<TaxRate> taxRate;
+
+    /** Get ID of expandable {@code taxRate} object. */
+    public String getTaxRate() {
+      return (this.taxRate != null) ? this.taxRate.getId() : null;
+    }
+
+    public void setTaxRate(String id) {
+      this.taxRate = ApiResource.setExpandableFieldId(id, this.taxRate);
+    }
+
+    /** Get expanded {@code taxRate}. */
+    public TaxRate getTaxRateObject() {
+      return (this.taxRate != null) ? this.taxRate.getExpanded() : null;
+    }
+
+    public void setTaxRateObject(TaxRate expandableObject) {
+      this.taxRate = new ExpandableField<TaxRate>(expandableObject.getId(), expandableObject);
     }
   }
 }

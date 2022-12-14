@@ -39,7 +39,7 @@ afterEvaluate { project ->
 
     task sourcesJar(type: Jar) {
         classifier = "sources"
-        from delombok
+        from sourceSets.main.java
     }
 
     task javadocJar(type: Jar, dependsOn: javadoc) {

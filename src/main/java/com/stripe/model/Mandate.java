@@ -128,38 +128,6 @@ public class Mandate extends ApiResource implements HasId {
   @Getter
   @Setter
   @EqualsAndHashCode(callSuper = false)
-  public static class AuBecsDebit extends StripeObject {
-    /**
-     * The URL of the mandate. This URL generally contains sensitive information about the customer
-     * and should be shared with them exclusively.
-     */
-    @SerializedName("url")
-    String url;
-  }
-
-  @Getter
-  @Setter
-  @EqualsAndHashCode(callSuper = false)
-  public static class BacsDebit extends StripeObject {
-    /**
-     * The status of the mandate on the Bacs network. Can be one of {@code pending}, {@code
-     * revoked}, {@code refused}, or {@code accepted}.
-     */
-    @SerializedName("network_status")
-    String networkStatus;
-
-    /** The unique reference identifying the mandate on the Bacs network. */
-    @SerializedName("reference")
-    String reference;
-
-    /** The URL that will contain the mandate that the customer has signed. */
-    @SerializedName("url")
-    String url;
-  }
-
-  @Getter
-  @Setter
-  @EqualsAndHashCode(callSuper = false)
   public static class CustomerAcceptance extends StripeObject {
     /** The time at which the customer accepted the Mandate. */
     @SerializedName("accepted_at")
@@ -273,13 +241,45 @@ public class Mandate extends ApiResource implements HasId {
     @Getter
     @Setter
     @EqualsAndHashCode(callSuper = false)
+    public static class AuBecsDebit extends StripeObject {
+      /**
+       * The URL of the mandate. This URL generally contains sensitive information about the
+       * customer and should be shared with them exclusively.
+       */
+      @SerializedName("url")
+      String url;
+    }
+
+    @Getter
+    @Setter
+    @EqualsAndHashCode(callSuper = false)
+    public static class BacsDebit extends StripeObject {
+      /**
+       * The status of the mandate on the Bacs network. Can be one of {@code pending}, {@code
+       * revoked}, {@code refused}, or {@code accepted}.
+       */
+      @SerializedName("network_status")
+      String networkStatus;
+
+      /** The unique reference identifying the mandate on the Bacs network. */
+      @SerializedName("reference")
+      String reference;
+
+      /** The URL that will contain the mandate that the customer has signed. */
+      @SerializedName("url")
+      String url;
+    }
+
+    @Getter
+    @Setter
+    @EqualsAndHashCode(callSuper = false)
     public static class Blik extends StripeObject {
       /** Date at which the mandate expires. */
       @SerializedName("expires_after")
       Long expiresAfter;
 
       @SerializedName("off_session")
-      PaymentIntent.PaymentMethodOptions.BlikMandateOptionsOffSessionDetails offSession;
+      OffSession offSession;
 
       /**
        * Type of the mandate.
@@ -288,6 +288,31 @@ public class Mandate extends ApiResource implements HasId {
        */
       @SerializedName("type")
       String type;
+
+      @Getter
+      @Setter
+      @EqualsAndHashCode(callSuper = false)
+      public static class OffSession extends StripeObject {
+        /** Amount of each recurring payment. */
+        @SerializedName("amount")
+        Long amount;
+
+        /** Currency of each recurring payment. */
+        @SerializedName("currency")
+        String currency;
+
+        /**
+         * Frequency interval of each recurring payment.
+         *
+         * <p>One of {@code day}, {@code month}, {@code week}, or {@code year}.
+         */
+        @SerializedName("interval")
+        String interval;
+
+        /** Frequency indicator of each recurring payment. */
+        @SerializedName("interval_count")
+        Long intervalCount;
+      }
     }
 
     @Getter

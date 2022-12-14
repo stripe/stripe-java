@@ -61,7 +61,7 @@ public class Review extends ApiResource implements HasId {
    * determine a specific address.
    */
   @SerializedName("ip_address_location")
-  Location ipAddressLocation;
+  IpAddressLocation ipAddressLocation;
 
   /**
    * Has the value {@code true} if the object exists in live mode or the value {@code false} if the
@@ -253,7 +253,7 @@ public class Review extends ApiResource implements HasId {
   @Getter
   @Setter
   @EqualsAndHashCode(callSuper = false)
-  public static class Location extends StripeObject {
+  public static class IpAddressLocation extends StripeObject {
     /** The city where the payment originated. */
     @SerializedName("city")
     String city;
