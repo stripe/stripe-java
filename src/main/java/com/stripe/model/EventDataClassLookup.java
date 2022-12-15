@@ -60,6 +60,7 @@ final class EventDataClassLookup {
     classLookup.put("product", Product.class);
     classLookup.put("promotion_code", PromotionCode.class);
     classLookup.put("quote", Quote.class);
+    classLookup.put("quote_line", QuoteLine.class);
     classLookup.put("quote_phase", QuotePhase.class);
     classLookup.put("refund", Refund.class);
     classLookup.put("reserve_transaction", ReserveTransaction.class);
@@ -73,6 +74,8 @@ final class EventDataClassLookup {
     classLookup.put("subscription", Subscription.class);
     classLookup.put("subscription_item", SubscriptionItem.class);
     classLookup.put("subscription_schedule", SubscriptionSchedule.class);
+    classLookup.put("tax.calculation", TaxCalculation.class);
+    classLookup.put("tax.transaction", TaxTransaction.class);
     classLookup.put("tax_code", TaxCode.class);
     classLookup.put("tax_deducted_at_source", TaxDeductedAtSource.class);
     classLookup.put("tax_id", TaxId.class);

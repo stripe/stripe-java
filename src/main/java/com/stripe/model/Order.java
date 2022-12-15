@@ -108,7 +108,7 @@ public class Order extends ApiResource implements HasId, MetadataStore<Order> {
 
   /** The discounts applied to the order. Use {@code expand[]=discounts} to expand each discount. */
   @SerializedName("discounts")
-  List<ExpandableField<Discount>> discounts;
+  List<ExpandableField<com.stripe.model.Discount>> discounts;
 
   /** Unique identifier for the object. */
   @Getter(onMethod_ = {@Override})
@@ -232,23 +232,23 @@ public class Order extends ApiResource implements HasId, MetadataStore<Order> {
     this.discounts =
         (ids != null)
             ? ids.stream()
-                .map(id -> new ExpandableField<Discount>(id, null))
+                .map(id -> new ExpandableField<com.stripe.model.Discount>(id, null))
                 .collect(Collectors.toList())
             : null;
   }
 
   /** Get expanded {@code discounts}. */
-  public List<Discount> getDiscountObjects() {
+  public List<com.stripe.model.Discount> getDiscountObjects() {
     return (this.discounts != null)
         ? this.discounts.stream().map(x -> x.getExpanded()).collect(Collectors.toList())
         : null;
   }
 
-  public void setDiscountObjects(List<Discount> objs) {
+  public void setDiscountObjects(List<com.stripe.model.Discount> objs) {
     this.discounts =
         objs != null
             ? objs.stream()
-                .map(x -> new ExpandableField<Discount>(x.getId(), x))
+                .map(x -> new ExpandableField<com.stripe.model.Discount>(x.getId(), x))
                 .collect(Collectors.toList())
             : null;
   }

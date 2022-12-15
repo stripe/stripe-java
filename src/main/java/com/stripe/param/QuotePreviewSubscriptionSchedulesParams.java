@@ -10,11 +10,7 @@ import java.util.Map;
 import lombok.Getter;
 
 @Getter
-public class QuoteListParams extends ApiRequestParams {
-  /** The ID of the customer whose quotes will be retrieved. */
-  @SerializedName("customer")
-  String customer;
-
+public class QuotePreviewSubscriptionSchedulesParams extends ApiRequestParams {
   /**
    * A cursor for use in pagination. {@code ending_before} is an object ID that defines your place
    * in the list. For instance, if you make a list request and receive 100 objects, starting with
@@ -37,10 +33,6 @@ public class QuoteListParams extends ApiRequestParams {
   @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
   Map<String, Object> extraParams;
 
-  /** The subscription which the quote updates. */
-  @SerializedName("from_subscription")
-  String fromSubscription;
-
   /**
    * A limit on the number of objects to be returned. Limit can range between 1 and 100, and the
    * default is 10.
@@ -57,36 +49,17 @@ public class QuoteListParams extends ApiRequestParams {
   @SerializedName("starting_after")
   String startingAfter;
 
-  /** The status of the quote. */
-  @SerializedName("status")
-  Status status;
-
-  /**
-   * Provides a list of quotes that are associated with the specified test clock. The response will
-   * not include quotes with test clocks if this and the customer parameter is not set.
-   */
-  @SerializedName("test_clock")
-  String testClock;
-
-  private QuoteListParams(
-      String customer,
+  private QuotePreviewSubscriptionSchedulesParams(
       String endingBefore,
       List<String> expand,
       Map<String, Object> extraParams,
-      String fromSubscription,
       Long limit,
-      String startingAfter,
-      Status status,
-      String testClock) {
-    this.customer = customer;
+      String startingAfter) {
     this.endingBefore = endingBefore;
     this.expand = expand;
     this.extraParams = extraParams;
-    this.fromSubscription = fromSubscription;
     this.limit = limit;
     this.startingAfter = startingAfter;
-    this.status = status;
-    this.testClock = testClock;
   }
 
   public static Builder builder() {
@@ -94,42 +67,20 @@ public class QuoteListParams extends ApiRequestParams {
   }
 
   public static class Builder {
-    private String customer;
-
     private String endingBefore;
 
     private List<String> expand;
 
     private Map<String, Object> extraParams;
 
-    private String fromSubscription;
-
     private Long limit;
 
     private String startingAfter;
 
-    private Status status;
-
-    private String testClock;
-
     /** Finalize and obtain parameter instance from this builder. */
-    public QuoteListParams build() {
-      return new QuoteListParams(
-          this.customer,
-          this.endingBefore,
-          this.expand,
-          this.extraParams,
-          this.fromSubscription,
-          this.limit,
-          this.startingAfter,
-          this.status,
-          this.testClock);
-    }
-
-    /** The ID of the customer whose quotes will be retrieved. */
-    public Builder setCustomer(String customer) {
-      this.customer = customer;
-      return this;
+    public QuotePreviewSubscriptionSchedulesParams build() {
+      return new QuotePreviewSubscriptionSchedulesParams(
+          this.endingBefore, this.expand, this.extraParams, this.limit, this.startingAfter);
     }
 
     /**
@@ -146,7 +97,7 @@ public class QuoteListParams extends ApiRequestParams {
     /**
      * Add an element to `expand` list. A list is initialized for the first `add/addAll` call, and
      * subsequent calls adds additional elements to the original list. See {@link
-     * QuoteListParams#expand} for the field documentation.
+     * QuotePreviewSubscriptionSchedulesParams#expand} for the field documentation.
      */
     public Builder addExpand(String element) {
       if (this.expand == null) {
@@ -159,7 +110,7 @@ public class QuoteListParams extends ApiRequestParams {
     /**
      * Add all elements to `expand` list. A list is initialized for the first `add/addAll` call, and
      * subsequent calls adds additional elements to the original list. See {@link
-     * QuoteListParams#expand} for the field documentation.
+     * QuotePreviewSubscriptionSchedulesParams#expand} for the field documentation.
      */
     public Builder addAllExpand(List<String> elements) {
       if (this.expand == null) {
@@ -172,7 +123,7 @@ public class QuoteListParams extends ApiRequestParams {
     /**
      * Add a key/value pair to `extraParams` map. A map is initialized for the first `put/putAll`
      * call, and subsequent calls add additional key/value pairs to the original map. See {@link
-     * QuoteListParams#extraParams} for the field documentation.
+     * QuotePreviewSubscriptionSchedulesParams#extraParams} for the field documentation.
      */
     public Builder putExtraParam(String key, Object value) {
       if (this.extraParams == null) {
@@ -185,19 +136,13 @@ public class QuoteListParams extends ApiRequestParams {
     /**
      * Add all map key/value pairs to `extraParams` map. A map is initialized for the first
      * `put/putAll` call, and subsequent calls add additional key/value pairs to the original map.
-     * See {@link QuoteListParams#extraParams} for the field documentation.
+     * See {@link QuotePreviewSubscriptionSchedulesParams#extraParams} for the field documentation.
      */
     public Builder putAllExtraParam(Map<String, Object> map) {
       if (this.extraParams == null) {
         this.extraParams = new HashMap<>();
       }
       this.extraParams.putAll(map);
-      return this;
-    }
-
-    /** The subscription which the quote updates. */
-    public Builder setFromSubscription(String fromSubscription) {
-      this.fromSubscription = fromSubscription;
       return this;
     }
 
@@ -219,48 +164,6 @@ public class QuoteListParams extends ApiRequestParams {
     public Builder setStartingAfter(String startingAfter) {
       this.startingAfter = startingAfter;
       return this;
-    }
-
-    /** The status of the quote. */
-    public Builder setStatus(QuoteListParams.Status status) {
-      this.status = status;
-      return this;
-    }
-
-    /**
-     * Provides a list of quotes that are associated with the specified test clock. The response
-     * will not include quotes with test clocks if this and the customer parameter is not set.
-     */
-    public Builder setTestClock(String testClock) {
-      this.testClock = testClock;
-      return this;
-    }
-  }
-
-  public enum Status implements ApiRequestParams.EnumParam {
-    @SerializedName("accepted")
-    ACCEPTED("accepted"),
-
-    @SerializedName("accepting")
-    ACCEPTING("accepting"),
-
-    @SerializedName("canceled")
-    CANCELED("canceled"),
-
-    @SerializedName("draft")
-    DRAFT("draft"),
-
-    @SerializedName("open")
-    OPEN("open"),
-
-    @SerializedName("stale")
-    STALE("stale");
-
-    @Getter(onMethod_ = {@Override})
-    private final String value;
-
-    Status(String value) {
-      this.value = value;
     }
   }
 }

@@ -26,6 +26,9 @@ public class InvoiceLineItem extends StripeObject implements HasId {
   @SerializedName("amount_excluding_tax")
   Long amountExcludingTax;
 
+  @SerializedName("applies_to")
+  AppliesTo appliesTo;
+
   /**
    * Three-letter <a href="https://www.iso.org/iso-4217-currency-codes.html">ISO currency code</a>,
    * in lowercase. Must be a <a href="https://stripe.com/docs/currencies">supported currency</a>.
@@ -185,6 +188,31 @@ public class InvoiceLineItem extends StripeObject implements HasId {
                 .map(x -> new ExpandableField<Discount>(x.getId(), x))
                 .collect(Collectors.toList())
             : null;
+  }
+
+  @Getter
+  @Setter
+  @EqualsAndHashCode(callSuper = false)
+  public static class AppliesTo extends StripeObject {
+    /**
+     * A custom string that identifies a new subscription schedule being created upon quote
+     * acceptance. All quote lines with the same {@code new_reference} field will be applied to the
+     * creation of a new subscription schedule.
+     */
+    @SerializedName("new_reference")
+    String newReference;
+
+    /** The ID of the schedule the line applies to. */
+    @SerializedName("subscription_schedule")
+    String subscriptionSchedule;
+
+    /**
+     * Describes whether the quote line is affecting a new schedule or an existing schedule.
+     *
+     * <p>One of {@code new_reference}, or {@code subscription_schedule}.
+     */
+    @SerializedName("type")
+    String type;
   }
 
   @Getter
