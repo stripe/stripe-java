@@ -13,8 +13,26 @@ public abstract class StripeException extends Exception {
   // implement Serializable
   @Setter transient StripeError stripeError;
 
+  /**
+   * Returns the error code of the response that triggered this exception. For {@link ApiException}
+   * the error code will be equal to {@link StripeError#getCode()}.
+   *
+   * @return the string representation of the error code.
+   */
   private String code;
+
+  /**
+   * Returns the request ID of the request that triggered this exception.
+   *
+   * @return the request ID.
+   */
   private String requestId;
+
+  /**
+   * Returns the status code of the response that triggered this exception.
+   *
+   * @return the status code.
+   */
   private Integer statusCode;
 
   protected StripeException(String message, String requestId, String code, Integer statusCode) {

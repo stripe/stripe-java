@@ -40,6 +40,10 @@ public class SubscriptionSchedule extends ApiResource
   @Setter(lombok.AccessLevel.NONE)
   ExpandableField<Application> application;
 
+  /** Details to identify the subscription schedule the quote line applies to. */
+  @SerializedName("applies_to")
+  AppliesTo appliesTo;
+
   /**
    * Configures when the subscription schedule generates prorations for phase transitions. Possible
    * values are {@code prorate_on_next_phase} or {@code prorate_up_front} with the default being
@@ -593,6 +597,31 @@ public class SubscriptionSchedule extends ApiResource
   @Getter
   @Setter
   @EqualsAndHashCode(callSuper = false)
+  public static class AppliesTo extends StripeObject {
+    /**
+     * A custom string that identifies a new subscription schedule being created upon quote
+     * acceptance. All quote lines with the same {@code new_reference} field will be applied to the
+     * creation of a new subscription schedule.
+     */
+    @SerializedName("new_reference")
+    String newReference;
+
+    /** The ID of the schedule the line applies to. */
+    @SerializedName("subscription_schedule")
+    String subscriptionSchedule;
+
+    /**
+     * Describes whether the quote line is affecting a new schedule or an existing schedule.
+     *
+     * <p>One of {@code new_reference}, or {@code subscription_schedule}.
+     */
+    @SerializedName("type")
+    String type;
+  }
+
+  @Getter
+  @Setter
+  @EqualsAndHashCode(callSuper = false)
   public static class CurrentPhase extends StripeObject {
     /** The end of this phase of the subscription schedule. */
     @SerializedName("end_date")
@@ -1094,6 +1123,13 @@ public class SubscriptionSchedule extends ApiResource
         @SerializedName("discount_end")
         DiscountEnd discountEnd;
 
+        /**
+         * The index, starting at 0, at which to position the new discount. When not supplied,
+         * Stripe defaults to appending the discount to the end of the {@code discounts} array.
+         */
+        @SerializedName("index")
+        Long index;
+
         /** Get ID of expandable {@code coupon} object. */
         public String getCoupon() {
           return (this.coupon != null) ? this.coupon.getId() : null;
@@ -1143,7 +1179,7 @@ public class SubscriptionSchedule extends ApiResource
           /**
            * The discount end type
            *
-           * <p>One of {@code duration}, or {@code timestamp}.
+           * <p>Equal to {@code timestamp}.
            */
           @SerializedName("type")
           String type;
@@ -1199,6 +1235,13 @@ public class SubscriptionSchedule extends ApiResource
       @SerializedName("discount_end")
       DiscountEnd discountEnd;
 
+      /**
+       * The index, starting at 0, at which to position the new discount. When not supplied, Stripe
+       * defaults to appending the discount to the end of the {@code discounts} array.
+       */
+      @SerializedName("index")
+      Long index;
+
       /** Get ID of expandable {@code coupon} object. */
       public String getCoupon() {
         return (this.coupon != null) ? this.coupon.getId() : null;
@@ -1248,7 +1291,7 @@ public class SubscriptionSchedule extends ApiResource
         /**
          * The discount end type
          *
-         * <p>One of {@code duration}, or {@code timestamp}.
+         * <p>Equal to {@code timestamp}.
          */
         @SerializedName("type")
         String type;
@@ -1387,6 +1430,13 @@ public class SubscriptionSchedule extends ApiResource
         @SerializedName("discount_end")
         DiscountEnd discountEnd;
 
+        /**
+         * The index, starting at 0, at which to position the new discount. When not supplied,
+         * Stripe defaults to appending the discount to the end of the {@code discounts} array.
+         */
+        @SerializedName("index")
+        Long index;
+
         /** Get ID of expandable {@code coupon} object. */
         public String getCoupon() {
           return (this.coupon != null) ? this.coupon.getId() : null;
@@ -1436,7 +1486,7 @@ public class SubscriptionSchedule extends ApiResource
           /**
            * The discount end type
            *
-           * <p>One of {@code duration}, or {@code timestamp}.
+           * <p>Equal to {@code timestamp}.
            */
           @SerializedName("type")
           String type;

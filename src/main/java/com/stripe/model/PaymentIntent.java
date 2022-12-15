@@ -538,7 +538,8 @@ public class PaymentIntent extends ApiResource implements HasId, MetadataStore<P
   /**
    * A PaymentIntent object can be canceled when it is in one of these statuses: <code>
    * requires_payment_method</code>, <code>requires_capture</code>, <code>requires_confirmation
-   * </code>, <code>requires_action</code>, or <code>processing</code>.
+   * </code>, <code>requires_action</code> or, <a href="https://stripe.com/docs/payments/intents">in
+   * rare cases</a>, <code>processing</code>.
    *
    * <p>Once canceled, no additional charges will be made by the PaymentIntent and any operations on
    * the PaymentIntent will fail with an error. For PaymentIntents with <code>
@@ -547,7 +548,7 @@ public class PaymentIntent extends ApiResource implements HasId, MetadataStore<P
    *
    * <p>You cannot cancel the PaymentIntent for a Checkout Session. <a
    * href="https://stripe.com/docs/api/checkout/sessions/expire">Expire the Checkout Session</a>
-   * instead
+   * instead.
    */
   public PaymentIntent cancel() throws StripeException {
     return cancel((Map<String, Object>) null, (RequestOptions) null);
@@ -556,7 +557,8 @@ public class PaymentIntent extends ApiResource implements HasId, MetadataStore<P
   /**
    * A PaymentIntent object can be canceled when it is in one of these statuses: <code>
    * requires_payment_method</code>, <code>requires_capture</code>, <code>requires_confirmation
-   * </code>, <code>requires_action</code>, or <code>processing</code>.
+   * </code>, <code>requires_action</code> or, <a href="https://stripe.com/docs/payments/intents">in
+   * rare cases</a>, <code>processing</code>.
    *
    * <p>Once canceled, no additional charges will be made by the PaymentIntent and any operations on
    * the PaymentIntent will fail with an error. For PaymentIntents with <code>
@@ -565,7 +567,7 @@ public class PaymentIntent extends ApiResource implements HasId, MetadataStore<P
    *
    * <p>You cannot cancel the PaymentIntent for a Checkout Session. <a
    * href="https://stripe.com/docs/api/checkout/sessions/expire">Expire the Checkout Session</a>
-   * instead
+   * instead.
    */
   public PaymentIntent cancel(RequestOptions options) throws StripeException {
     return cancel((Map<String, Object>) null, options);
@@ -574,7 +576,8 @@ public class PaymentIntent extends ApiResource implements HasId, MetadataStore<P
   /**
    * A PaymentIntent object can be canceled when it is in one of these statuses: <code>
    * requires_payment_method</code>, <code>requires_capture</code>, <code>requires_confirmation
-   * </code>, <code>requires_action</code>, or <code>processing</code>.
+   * </code>, <code>requires_action</code> or, <a href="https://stripe.com/docs/payments/intents">in
+   * rare cases</a>, <code>processing</code>.
    *
    * <p>Once canceled, no additional charges will be made by the PaymentIntent and any operations on
    * the PaymentIntent will fail with an error. For PaymentIntents with <code>
@@ -583,7 +586,7 @@ public class PaymentIntent extends ApiResource implements HasId, MetadataStore<P
    *
    * <p>You cannot cancel the PaymentIntent for a Checkout Session. <a
    * href="https://stripe.com/docs/api/checkout/sessions/expire">Expire the Checkout Session</a>
-   * instead
+   * instead.
    */
   public PaymentIntent cancel(Map<String, Object> params) throws StripeException {
     return cancel(params, (RequestOptions) null);
@@ -592,7 +595,8 @@ public class PaymentIntent extends ApiResource implements HasId, MetadataStore<P
   /**
    * A PaymentIntent object can be canceled when it is in one of these statuses: <code>
    * requires_payment_method</code>, <code>requires_capture</code>, <code>requires_confirmation
-   * </code>, <code>requires_action</code>, or <code>processing</code>.
+   * </code>, <code>requires_action</code> or, <a href="https://stripe.com/docs/payments/intents">in
+   * rare cases</a>, <code>processing</code>.
    *
    * <p>Once canceled, no additional charges will be made by the PaymentIntent and any operations on
    * the PaymentIntent will fail with an error. For PaymentIntents with <code>
@@ -601,7 +605,7 @@ public class PaymentIntent extends ApiResource implements HasId, MetadataStore<P
    *
    * <p>You cannot cancel the PaymentIntent for a Checkout Session. <a
    * href="https://stripe.com/docs/api/checkout/sessions/expire">Expire the Checkout Session</a>
-   * instead
+   * instead.
    */
   public PaymentIntent cancel(Map<String, Object> params, RequestOptions options)
       throws StripeException {
@@ -617,7 +621,8 @@ public class PaymentIntent extends ApiResource implements HasId, MetadataStore<P
   /**
    * A PaymentIntent object can be canceled when it is in one of these statuses: <code>
    * requires_payment_method</code>, <code>requires_capture</code>, <code>requires_confirmation
-   * </code>, <code>requires_action</code>, or <code>processing</code>.
+   * </code>, <code>requires_action</code> or, <a href="https://stripe.com/docs/payments/intents">in
+   * rare cases</a>, <code>processing</code>.
    *
    * <p>Once canceled, no additional charges will be made by the PaymentIntent and any operations on
    * the PaymentIntent will fail with an error. For PaymentIntents with <code>
@@ -626,7 +631,7 @@ public class PaymentIntent extends ApiResource implements HasId, MetadataStore<P
    *
    * <p>You cannot cancel the PaymentIntent for a Checkout Session. <a
    * href="https://stripe.com/docs/api/checkout/sessions/expire">Expire the Checkout Session</a>
-   * instead
+   * instead.
    */
   public PaymentIntent cancel(PaymentIntentCancelParams params) throws StripeException {
     return cancel(params, (RequestOptions) null);
@@ -635,7 +640,8 @@ public class PaymentIntent extends ApiResource implements HasId, MetadataStore<P
   /**
    * A PaymentIntent object can be canceled when it is in one of these statuses: <code>
    * requires_payment_method</code>, <code>requires_capture</code>, <code>requires_confirmation
-   * </code>, <code>requires_action</code>, or <code>processing</code>.
+   * </code>, <code>requires_action</code> or, <a href="https://stripe.com/docs/payments/intents">in
+   * rare cases</a>, <code>processing</code>.
    *
    * <p>Once canceled, no additional charges will be made by the PaymentIntent and any operations on
    * the PaymentIntent will fail with an error. For PaymentIntents with <code>
@@ -644,7 +650,7 @@ public class PaymentIntent extends ApiResource implements HasId, MetadataStore<P
    *
    * <p>You cannot cancel the PaymentIntent for a Checkout Session. <a
    * href="https://stripe.com/docs/api/checkout/sessions/expire">Expire the Checkout Session</a>
-   * instead
+   * instead.
    */
   public PaymentIntent cancel(PaymentIntentCancelParams params, RequestOptions options)
       throws StripeException {

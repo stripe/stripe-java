@@ -1,5 +1,10 @@
 # Changelog
 
+## 22.3.0 - 2022-12-08
+* [#1487](https://github.com/stripe/stripe-java/pull/1487) API Updates
+  * Change `CustomerListPaymentMethodsParams.type` and `PaymentMethodListParams.type`.
+  * Added parameterless overload of `Customer.listPaymentMethods`.
+
 ## 22.3.0-beta.1 - 2022-12-08
 * [#1488](https://github.com/stripe/stripe-java/pull/1488) API Updates for beta branch
   * Updated stable APIs to the latest version

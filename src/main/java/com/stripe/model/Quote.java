@@ -10,11 +10,17 @@ import com.stripe.net.RequestOptions;
 import com.stripe.param.QuoteAcceptParams;
 import com.stripe.param.QuoteCancelParams;
 import com.stripe.param.QuoteCreateParams;
+import com.stripe.param.QuoteDraftQuoteParams;
 import com.stripe.param.QuoteFinalizeQuoteParams;
 import com.stripe.param.QuoteListComputedUpfrontLineItemsParams;
 import com.stripe.param.QuoteListLineItemsParams;
+import com.stripe.param.QuoteListLinesParams;
 import com.stripe.param.QuoteListParams;
 import com.stripe.param.QuotePdfParams;
+import com.stripe.param.QuotePreviewInvoiceLinesParams;
+import com.stripe.param.QuotePreviewInvoicesParams;
+import com.stripe.param.QuotePreviewSubscriptionSchedulesParams;
+import com.stripe.param.QuoteReestimateParams;
 import com.stripe.param.QuoteRetrieveParams;
 import com.stripe.param.QuoteUpdateParams;
 import java.io.InputStream;
@@ -113,7 +119,7 @@ public class Quote extends ApiResource implements HasId, MetadataStore<Quote> {
 
   /** The discounts applied to this quote. */
   @SerializedName("discounts")
-  List<ExpandableField<Discount>> discounts;
+  List<ExpandableField<com.stripe.model.Discount>> discounts;
 
   /**
    * The date on which the quote will be canceled if in {@code open} or {@code draft} status.
@@ -155,6 +161,13 @@ public class Quote extends ApiResource implements HasId, MetadataStore<Quote> {
   /** A list of items the customer is being quoted for. */
   @SerializedName("line_items")
   LineItemCollection lineItems;
+
+  /**
+   * A list of lines on the quote. These lines describe changes that will be used to create new
+   * subscription schedules or update existing subscription schedules when the quote is accepted.
+   */
+  @SerializedName("lines")
+  List<String> lines;
 
   /**
    * Has the value {@code true} if the object exists in live mode or the value {@code false} if the
@@ -200,10 +213,15 @@ public class Quote extends ApiResource implements HasId, MetadataStore<Quote> {
   /**
    * The status of the quote.
    *
-   * <p>One of {@code accepted}, {@code canceled}, {@code draft}, or {@code open}.
+   * <p>One of {@code accepted}, {@code accepting}, {@code canceled}, {@code draft}, {@code open},
+   * or {@code stale}.
    */
   @SerializedName("status")
   String status;
+
+  /** Details on when and why a quote has been marked as stale or canceled. */
+  @SerializedName("status_details")
+  StatusDetails statusDetails;
 
   @SerializedName("status_transitions")
   StatusTransitions statusTransitions;
@@ -217,11 +235,18 @@ public class Quote extends ApiResource implements HasId, MetadataStore<Quote> {
   @SerializedName("subscription_data")
   SubscriptionData subscriptionData;
 
+  @SerializedName("subscription_data_overrides")
+  List<Quote.SubscriptionDataOverride> subscriptionDataOverrides;
+
   /** The subscription schedule that was created or updated from this quote. */
   @SerializedName("subscription_schedule")
   @Getter(lombok.AccessLevel.NONE)
   @Setter(lombok.AccessLevel.NONE)
-  ExpandableField<SubscriptionSchedule> subscriptionSchedule;
+  ExpandableField<com.stripe.model.SubscriptionSchedule> subscriptionSchedule;
+
+  /** The subscription schedules that were created or updated from this quote. */
+  @SerializedName("subscription_schedules")
+  List<Quote.SubscriptionSchedule> subscriptionSchedules;
 
   /** ID of the test clock this quote belongs to. */
   @SerializedName("test_clock")
@@ -340,13 +365,15 @@ public class Quote extends ApiResource implements HasId, MetadataStore<Quote> {
   }
 
   /** Get expanded {@code subscriptionSchedule}. */
-  public SubscriptionSchedule getSubscriptionScheduleObject() {
+  public com.stripe.model.SubscriptionSchedule getSubscriptionScheduleObject() {
     return (this.subscriptionSchedule != null) ? this.subscriptionSchedule.getExpanded() : null;
   }
 
-  public void setSubscriptionScheduleObject(SubscriptionSchedule expandableObject) {
+  public void setSubscriptionScheduleObject(
+      com.stripe.model.SubscriptionSchedule expandableObject) {
     this.subscriptionSchedule =
-        new ExpandableField<SubscriptionSchedule>(expandableObject.getId(), expandableObject);
+        new ExpandableField<com.stripe.model.SubscriptionSchedule>(
+            expandableObject.getId(), expandableObject);
   }
 
   /** Get ID of expandable {@code testClock} object. */
@@ -431,23 +458,23 @@ public class Quote extends ApiResource implements HasId, MetadataStore<Quote> {
     this.discounts =
         (ids != null)
             ? ids.stream()
-                .map(id -> new ExpandableField<Discount>(id, null))
+                .map(id -> new ExpandableField<com.stripe.model.Discount>(id, null))
                 .collect(Collectors.toList())
             : null;
   }
 
   /** Get expanded {@code discounts}. */
-  public List<Discount> getDiscountObjects() {
+  public List<com.stripe.model.Discount> getDiscountObjects() {
     return (this.discounts != null)
         ? this.discounts.stream().map(x -> x.getExpanded()).collect(Collectors.toList())
         : null;
   }
 
-  public void setDiscountObjects(List<Discount> objs) {
+  public void setDiscountObjects(List<com.stripe.model.Discount> objs) {
     this.discounts =
         objs != null
             ? objs.stream()
-                .map(x -> new ExpandableField<Discount>(x.getId(), x))
+                .map(x -> new ExpandableField<com.stripe.model.Discount>(x.getId(), x))
                 .collect(Collectors.toList())
             : null;
   }
@@ -573,6 +600,48 @@ public class Quote extends ApiResource implements HasId, MetadataStore<Quote> {
   public static Quote create(QuoteCreateParams params, RequestOptions options)
       throws StripeException {
     String url = String.format("%s%s", Stripe.getApiBase(), "/v1/quotes");
+    return ApiResource.request(ApiResource.RequestMethod.POST, url, params, Quote.class, options);
+  }
+
+  /** Converts a stale quote to draft. */
+  public Quote draftQuote() throws StripeException {
+    return draftQuote((Map<String, Object>) null, (RequestOptions) null);
+  }
+
+  /** Converts a stale quote to draft. */
+  public Quote draftQuote(RequestOptions options) throws StripeException {
+    return draftQuote((Map<String, Object>) null, options);
+  }
+
+  /** Converts a stale quote to draft. */
+  public Quote draftQuote(Map<String, Object> params) throws StripeException {
+    return draftQuote(params, (RequestOptions) null);
+  }
+
+  /** Converts a stale quote to draft. */
+  public Quote draftQuote(Map<String, Object> params, RequestOptions options)
+      throws StripeException {
+    String url =
+        String.format(
+            "%s%s",
+            Stripe.getApiBase(),
+            String.format("/v1/quotes/%s/draft", ApiResource.urlEncodeId(this.getId())));
+    return ApiResource.request(ApiResource.RequestMethod.POST, url, params, Quote.class, options);
+  }
+
+  /** Converts a stale quote to draft. */
+  public Quote draftQuote(QuoteDraftQuoteParams params) throws StripeException {
+    return draftQuote(params, (RequestOptions) null);
+  }
+
+  /** Converts a stale quote to draft. */
+  public Quote draftQuote(QuoteDraftQuoteParams params, RequestOptions options)
+      throws StripeException {
+    String url =
+        String.format(
+            "%s%s",
+            Stripe.getApiBase(),
+            String.format("/v1/quotes/%s/draft", ApiResource.urlEncodeId(this.getId())));
     return ApiResource.request(ApiResource.RequestMethod.POST, url, params, Quote.class, options);
   }
 
@@ -768,6 +837,63 @@ public class Quote extends ApiResource implements HasId, MetadataStore<Quote> {
     return ApiResource.requestCollection(url, params, LineItemCollection.class, options);
   }
 
+  /**
+   * When retrieving a quote, there is an includable <strong>lines</strong> property containing the
+   * first handful of those items. There is also a URL where you can retrieve the full (paginated)
+   * list of lines.
+   */
+  public QuoteLineCollection listLines() throws StripeException {
+    return listLines((Map<String, Object>) null, (RequestOptions) null);
+  }
+
+  /**
+   * When retrieving a quote, there is an includable <strong>lines</strong> property containing the
+   * first handful of those items. There is also a URL where you can retrieve the full (paginated)
+   * list of lines.
+   */
+  public QuoteLineCollection listLines(Map<String, Object> params) throws StripeException {
+    return listLines(params, (RequestOptions) null);
+  }
+
+  /**
+   * When retrieving a quote, there is an includable <strong>lines</strong> property containing the
+   * first handful of those items. There is also a URL where you can retrieve the full (paginated)
+   * list of lines.
+   */
+  public QuoteLineCollection listLines(Map<String, Object> params, RequestOptions options)
+      throws StripeException {
+    String url =
+        String.format(
+            "%s%s",
+            Stripe.getApiBase(),
+            String.format("/v1/quotes/%s/lines", ApiResource.urlEncodeId(this.getId())));
+    return ApiResource.requestCollection(url, params, QuoteLineCollection.class, options);
+  }
+
+  /**
+   * When retrieving a quote, there is an includable <strong>lines</strong> property containing the
+   * first handful of those items. There is also a URL where you can retrieve the full (paginated)
+   * list of lines.
+   */
+  public QuoteLineCollection listLines(QuoteListLinesParams params) throws StripeException {
+    return listLines(params, (RequestOptions) null);
+  }
+
+  /**
+   * When retrieving a quote, there is an includable <strong>lines</strong> property containing the
+   * first handful of those items. There is also a URL where you can retrieve the full (paginated)
+   * list of lines.
+   */
+  public QuoteLineCollection listLines(QuoteListLinesParams params, RequestOptions options)
+      throws StripeException {
+    String url =
+        String.format(
+            "%s%s",
+            Stripe.getApiBase(),
+            String.format("/v1/quotes/%s/lines", ApiResource.urlEncodeId(this.getId())));
+    return ApiResource.requestCollection(url, params, QuoteLineCollection.class, options);
+  }
+
   /** Download the PDF for a finalized quote. */
   public InputStream pdf() throws StripeException {
     return pdf((Map<String, Object>) null, (RequestOptions) null);
@@ -802,6 +928,173 @@ public class Quote extends ApiResource implements HasId, MetadataStore<Quote> {
             Stripe.getUploadBase(),
             String.format("/v1/quotes/%s/pdf", ApiResource.urlEncodeId(this.getId())));
     return ApiResource.requestStream(ApiResource.RequestMethod.GET, url, params, options);
+  }
+
+  /** Preview the invoice line items that would be generated by accepting the quote. */
+  public InvoiceLineItemCollection previewInvoiceLines() throws StripeException {
+    return previewInvoiceLines((Map<String, Object>) null, (RequestOptions) null);
+  }
+
+  /** Preview the invoice line items that would be generated by accepting the quote. */
+  public InvoiceLineItemCollection previewInvoiceLines(Map<String, Object> params)
+      throws StripeException {
+    return previewInvoiceLines(params, (RequestOptions) null);
+  }
+
+  /** Preview the invoice line items that would be generated by accepting the quote. */
+  public InvoiceLineItemCollection previewInvoiceLines(
+      Map<String, Object> params, RequestOptions options) throws StripeException {
+    String url =
+        String.format(
+            "%s%s",
+            Stripe.getApiBase(),
+            String.format(
+                "/v1/quotes/%s/preview_invoice_lines", ApiResource.urlEncodeId(this.getId())));
+    return ApiResource.requestCollection(url, params, InvoiceLineItemCollection.class, options);
+  }
+
+  /** Preview the invoice line items that would be generated by accepting the quote. */
+  public InvoiceLineItemCollection previewInvoiceLines(QuotePreviewInvoiceLinesParams params)
+      throws StripeException {
+    return previewInvoiceLines(params, (RequestOptions) null);
+  }
+
+  /** Preview the invoice line items that would be generated by accepting the quote. */
+  public InvoiceLineItemCollection previewInvoiceLines(
+      QuotePreviewInvoiceLinesParams params, RequestOptions options) throws StripeException {
+    String url =
+        String.format(
+            "%s%s",
+            Stripe.getApiBase(),
+            String.format(
+                "/v1/quotes/%s/preview_invoice_lines", ApiResource.urlEncodeId(this.getId())));
+    return ApiResource.requestCollection(url, params, InvoiceLineItemCollection.class, options);
+  }
+
+  /** Preview the invoices that would be generated by accepting the quote. */
+  public InvoiceCollection previewInvoices() throws StripeException {
+    return previewInvoices((Map<String, Object>) null, (RequestOptions) null);
+  }
+
+  /** Preview the invoices that would be generated by accepting the quote. */
+  public InvoiceCollection previewInvoices(Map<String, Object> params) throws StripeException {
+    return previewInvoices(params, (RequestOptions) null);
+  }
+
+  /** Preview the invoices that would be generated by accepting the quote. */
+  public InvoiceCollection previewInvoices(Map<String, Object> params, RequestOptions options)
+      throws StripeException {
+    String url =
+        String.format(
+            "%s%s",
+            Stripe.getApiBase(),
+            String.format("/v1/quotes/%s/preview_invoices", ApiResource.urlEncodeId(this.getId())));
+    return ApiResource.requestCollection(url, params, InvoiceCollection.class, options);
+  }
+
+  /** Preview the invoices that would be generated by accepting the quote. */
+  public InvoiceCollection previewInvoices(QuotePreviewInvoicesParams params)
+      throws StripeException {
+    return previewInvoices(params, (RequestOptions) null);
+  }
+
+  /** Preview the invoices that would be generated by accepting the quote. */
+  public InvoiceCollection previewInvoices(
+      QuotePreviewInvoicesParams params, RequestOptions options) throws StripeException {
+    String url =
+        String.format(
+            "%s%s",
+            Stripe.getApiBase(),
+            String.format("/v1/quotes/%s/preview_invoices", ApiResource.urlEncodeId(this.getId())));
+    return ApiResource.requestCollection(url, params, InvoiceCollection.class, options);
+  }
+
+  /** Preview the schedules that would be generated by accepting the quote. */
+  public SubscriptionScheduleCollection previewSubscriptionSchedules() throws StripeException {
+    return previewSubscriptionSchedules((Map<String, Object>) null, (RequestOptions) null);
+  }
+
+  /** Preview the schedules that would be generated by accepting the quote. */
+  public SubscriptionScheduleCollection previewSubscriptionSchedules(Map<String, Object> params)
+      throws StripeException {
+    return previewSubscriptionSchedules(params, (RequestOptions) null);
+  }
+
+  /** Preview the schedules that would be generated by accepting the quote. */
+  public SubscriptionScheduleCollection previewSubscriptionSchedules(
+      Map<String, Object> params, RequestOptions options) throws StripeException {
+    String url =
+        String.format(
+            "%s%s",
+            Stripe.getApiBase(),
+            String.format(
+                "/v1/quotes/%s/preview_subscription_schedules",
+                ApiResource.urlEncodeId(this.getId())));
+    return ApiResource.requestCollection(
+        url, params, SubscriptionScheduleCollection.class, options);
+  }
+
+  /** Preview the schedules that would be generated by accepting the quote. */
+  public SubscriptionScheduleCollection previewSubscriptionSchedules(
+      QuotePreviewSubscriptionSchedulesParams params) throws StripeException {
+    return previewSubscriptionSchedules(params, (RequestOptions) null);
+  }
+
+  /** Preview the schedules that would be generated by accepting the quote. */
+  public SubscriptionScheduleCollection previewSubscriptionSchedules(
+      QuotePreviewSubscriptionSchedulesParams params, RequestOptions options)
+      throws StripeException {
+    String url =
+        String.format(
+            "%s%s",
+            Stripe.getApiBase(),
+            String.format(
+                "/v1/quotes/%s/preview_subscription_schedules",
+                ApiResource.urlEncodeId(this.getId())));
+    return ApiResource.requestCollection(
+        url, params, SubscriptionScheduleCollection.class, options);
+  }
+
+  /** Recompute the upcoming invoice estimate for the quote. */
+  public Quote reestimate() throws StripeException {
+    return reestimate((Map<String, Object>) null, (RequestOptions) null);
+  }
+
+  /** Recompute the upcoming invoice estimate for the quote. */
+  public Quote reestimate(RequestOptions options) throws StripeException {
+    return reestimate((Map<String, Object>) null, options);
+  }
+
+  /** Recompute the upcoming invoice estimate for the quote. */
+  public Quote reestimate(Map<String, Object> params) throws StripeException {
+    return reestimate(params, (RequestOptions) null);
+  }
+
+  /** Recompute the upcoming invoice estimate for the quote. */
+  public Quote reestimate(Map<String, Object> params, RequestOptions options)
+      throws StripeException {
+    String url =
+        String.format(
+            "%s%s",
+            Stripe.getApiBase(),
+            String.format("/v1/quotes/%s/reestimate", ApiResource.urlEncodeId(this.getId())));
+    return ApiResource.request(ApiResource.RequestMethod.POST, url, params, Quote.class, options);
+  }
+
+  /** Recompute the upcoming invoice estimate for the quote. */
+  public Quote reestimate(QuoteReestimateParams params) throws StripeException {
+    return reestimate(params, (RequestOptions) null);
+  }
+
+  /** Recompute the upcoming invoice estimate for the quote. */
+  public Quote reestimate(QuoteReestimateParams params, RequestOptions options)
+      throws StripeException {
+    String url =
+        String.format(
+            "%s%s",
+            Stripe.getApiBase(),
+            String.format("/v1/quotes/%s/reestimate", ApiResource.urlEncodeId(this.getId())));
+    return ApiResource.request(ApiResource.RequestMethod.POST, url, params, Quote.class, options);
   }
 
   /** Retrieves the quote with the given ID. */
@@ -894,6 +1187,10 @@ public class Quote extends ApiResource implements HasId, MetadataStore<Quote> {
      */
     @SerializedName("recurring")
     Recurring recurring;
+
+    /** The time at which the quote's estimated schedules and upcoming invoices were generated. */
+    @SerializedName("updated_at")
+    Long updatedAt;
 
     @SerializedName("upfront")
     Upfront upfront;
@@ -1158,6 +1455,104 @@ public class Quote extends ApiResource implements HasId, MetadataStore<Quote> {
   @Getter
   @Setter
   @EqualsAndHashCode(callSuper = false)
+  public static class StatusDetails extends StripeObject {
+    /** Details on when and why a quote has been marked as canceled. */
+    @SerializedName("canceled")
+    Canceled canceled;
+
+    /** Details on when and why a quote has been marked as stale. */
+    @SerializedName("stale")
+    Stale stale;
+
+    @Getter
+    @Setter
+    @EqualsAndHashCode(callSuper = false)
+    public static class Canceled extends StripeObject {
+      /**
+       * The reason this quote was marked as canceled.
+       *
+       * <p>One of {@code quote_accepted}, {@code quote_expired}, {@code quote_superseded}, {@code
+       * subscription_canceled}, or {@code user_canceled}.
+       */
+      @SerializedName("reason")
+      String reason;
+
+      /**
+       * Time at which the quote was marked as canceled. Measured in seconds since the Unix epoch.
+       */
+      @SerializedName("transitioned_at")
+      Long transitionedAt;
+    }
+
+    @Getter
+    @Setter
+    @EqualsAndHashCode(callSuper = false)
+    public static class Stale extends StripeObject {
+      /** Time at which the quote expires. Measured in seconds since the Unix epoch. */
+      @SerializedName("expires_at")
+      Long expiresAt;
+
+      /** The most recent reason this quote was marked as stale. */
+      @SerializedName("last_reason")
+      LastReason lastReason;
+
+      /** Time at which the stale reason was updated. Measured in seconds since the Unix epoch. */
+      @SerializedName("last_updated_at")
+      Long lastUpdatedAt;
+
+      /** Time at which the quote was marked as stale. Measured in seconds since the Unix epoch. */
+      @SerializedName("transitioned_at")
+      Long transitionedAt;
+
+      @Getter
+      @Setter
+      @EqualsAndHashCode(callSuper = false)
+      public static class LastReason extends StripeObject {
+        /** The ID of the line that is invalid if the stale reason type is {@code line_invalid}. */
+        @SerializedName("line_invalid")
+        String lineInvalid;
+
+        /** The state of the subscription before the quote was marked as stale. */
+        @SerializedName("subscription_changed")
+        SubscriptionChanged subscriptionChanged;
+
+        /** The state of the subscription schedule before the quote was marked as stale. */
+        @SerializedName("subscription_schedule_changed")
+        SubscriptionScheduleChanged subscriptionScheduleChanged;
+
+        /**
+         * The reason the quote was marked as stale.
+         *
+         * <p>One of {@code bill_on_acceptance_invalid}, {@code line_invalid}, {@code
+         * subscription_changed}, or {@code subscription_schedule_changed}.
+         */
+        @SerializedName("type")
+        String type;
+
+        @Getter
+        @Setter
+        @EqualsAndHashCode(callSuper = false)
+        public static class SubscriptionChanged extends StripeObject {
+          /** The subscription's state before the quote was marked as stale. */
+          @SerializedName("previous_subscription")
+          Subscription previousSubscription;
+        }
+
+        @Getter
+        @Setter
+        @EqualsAndHashCode(callSuper = false)
+        public static class SubscriptionScheduleChanged extends StripeObject {
+          /** The subscription schedule's state before the quote was marked as stale. */
+          @SerializedName("previous_subscription_schedule")
+          com.stripe.model.SubscriptionSchedule previousSubscriptionSchedule;
+        }
+      }
+    }
+  }
+
+  @Getter
+  @Setter
+  @EqualsAndHashCode(callSuper = false)
   public static class StatusTransitions extends StripeObject {
     /** The time that the quote was accepted. Measured in seconds since Unix epoch. */
     @SerializedName("accepted_at")
@@ -1176,6 +1571,10 @@ public class Quote extends ApiResource implements HasId, MetadataStore<Quote> {
   @Setter
   @EqualsAndHashCode(callSuper = false)
   public static class SubscriptionData extends StripeObject {
+    /** TODO. */
+    @SerializedName("bill_on_acceptance")
+    BillOnAcceptance billOnAcceptance;
+
     /**
      * Configures when the subscription schedule generates prorations for phase transitions.
      * Possible values are {@code prorate_on_next_phase} or {@code prorate_up_front} with the
@@ -1224,7 +1623,7 @@ public class Quote extends ApiResource implements HasId, MetadataStore<Quote> {
     @SerializedName("from_schedule")
     @Getter(lombok.AccessLevel.NONE)
     @Setter(lombok.AccessLevel.NONE)
-    ExpandableField<SubscriptionSchedule> fromSchedule;
+    ExpandableField<com.stripe.model.SubscriptionSchedule> fromSchedule;
 
     /** The id of the subscription that will be updated when the quote is accepted. */
     @SerializedName("from_subscription")
@@ -1266,13 +1665,14 @@ public class Quote extends ApiResource implements HasId, MetadataStore<Quote> {
     }
 
     /** Get expanded {@code fromSchedule}. */
-    public SubscriptionSchedule getFromScheduleObject() {
+    public com.stripe.model.SubscriptionSchedule getFromScheduleObject() {
       return (this.fromSchedule != null) ? this.fromSchedule.getExpanded() : null;
     }
 
-    public void setFromScheduleObject(SubscriptionSchedule expandableObject) {
+    public void setFromScheduleObject(com.stripe.model.SubscriptionSchedule expandableObject) {
       this.fromSchedule =
-          new ExpandableField<SubscriptionSchedule>(expandableObject.getId(), expandableObject);
+          new ExpandableField<com.stripe.model.SubscriptionSchedule>(
+              expandableObject.getId(), expandableObject);
     }
 
     /** Get ID of expandable {@code fromSubscription} object. */
@@ -1297,9 +1697,348 @@ public class Quote extends ApiResource implements HasId, MetadataStore<Quote> {
     @Getter
     @Setter
     @EqualsAndHashCode(callSuper = false)
+    public static class BillOnAcceptance extends StripeObject {
+      /** The start of the period to bill from when the Quote is accepted. */
+      @SerializedName("bill_from")
+      BillFrom billFrom;
+
+      /** The end of the period to bill until when the Quote is accepted. */
+      @SerializedName("bill_until")
+      BillUntil billUntil;
+
+      @Getter
+      @Setter
+      @EqualsAndHashCode(callSuper = false)
+      public static class BillFrom extends StripeObject {
+        /** The materialized time. */
+        @SerializedName("computed")
+        Long computed;
+
+        /** The timestamp the given line starts at. */
+        @SerializedName("line_starts_at")
+        LineStartsAt lineStartsAt;
+
+        /** A precise Unix timestamp. */
+        @SerializedName("timestamp")
+        Long timestamp;
+
+        /**
+         * The type of method to specify the {@code bill_from} time.
+         *
+         * <p>One of {@code line_starts_at}, {@code now}, {@code quote_acceptance_date}, or {@code
+         * timestamp}.
+         */
+        @SerializedName("type")
+        String type;
+
+        @Getter
+        @Setter
+        @EqualsAndHashCode(callSuper = false)
+        public static class LineStartsAt extends StripeObject implements HasId {
+          /** Unique identifier for the object. */
+          @Getter(onMethod_ = {@Override})
+          @SerializedName("id")
+          String id;
+        }
+      }
+
+      @Getter
+      @Setter
+      @EqualsAndHashCode(callSuper = false)
+      public static class BillUntil extends StripeObject {
+        /** The materialized time. */
+        @SerializedName("computed")
+        Long computed;
+
+        /** Time span for the quote line starting from the {@code starts_at} date. */
+        @SerializedName("duration")
+        Duration duration;
+
+        /** The timestamp the given line ends at. */
+        @SerializedName("line_ends_at")
+        LineEndsAt lineEndsAt;
+
+        /** A precise Unix timestamp. */
+        @SerializedName("timestamp")
+        Long timestamp;
+
+        /**
+         * The type of method to specify the {@code bill_until} time.
+         *
+         * <p>One of {@code duration}, {@code line_ends_at}, {@code schedule_end}, {@code
+         * timestamp}, or {@code upcoming_invoice}.
+         */
+        @SerializedName("type")
+        String type;
+
+        @Getter
+        @Setter
+        @EqualsAndHashCode(callSuper = false)
+        public static class Duration extends StripeObject {
+          /**
+           * Specifies a type of interval unit. Either {@code day}, {@code week}, {@code month} or
+           * {@code year}.
+           *
+           * <p>One of {@code day}, {@code month}, {@code week}, or {@code year}.
+           */
+          @SerializedName("interval")
+          String interval;
+
+          /**
+           * The number of intervals, as an whole number greater than 0. Stripe multiplies this by
+           * the interval type to get the overall duration.
+           */
+          @SerializedName("interval_count")
+          Long intervalCount;
+        }
+
+        @Getter
+        @Setter
+        @EqualsAndHashCode(callSuper = false)
+        public static class LineEndsAt extends StripeObject implements HasId {
+          /** Unique identifier for the object. */
+          @Getter(onMethod_ = {@Override})
+          @SerializedName("id")
+          String id;
+        }
+      }
+    }
+
+    @Getter
+    @Setter
+    @EqualsAndHashCode(callSuper = false)
     public static class Prebilling extends StripeObject {
       @SerializedName("iterations")
       Long iterations;
+    }
+  }
+
+  @Getter
+  @Setter
+  @EqualsAndHashCode(callSuper = false)
+  public static class SubscriptionDataOverride extends StripeObject {
+    @SerializedName("applies_to")
+    AppliesTo appliesTo;
+
+    /** The start of the period to bill from when the Quote is accepted. */
+    @SerializedName("bill_on_acceptance")
+    BillOnAcceptance billOnAcceptance;
+
+    /**
+     * Configures when the subscription schedule generates prorations for phase transitions.
+     * Possible values are {@code prorate_on_next_phase} or {@code prorate_up_front} with the
+     * default being {@code prorate_on_next_phase}. {@code prorate_on_next_phase} will apply phase
+     * changes and generate prorations at transition time.{@code prorate_up_front} will bill for all
+     * phases within the current billing cycle up front.
+     *
+     * <p>One of {@code prorate_on_next_phase}, or {@code prorate_up_front}.
+     */
+    @SerializedName("billing_behavior")
+    String billingBehavior;
+
+    /**
+     * The customer which this quote belongs to. A customer is required before finalizing the quote.
+     * Once specified, it cannot be changed.
+     */
+    @SerializedName("customer")
+    String customer;
+
+    /**
+     * The subscription's description, meant to be displayable to the customer. Use this field to
+     * optionally store an explanation of the subscription.
+     */
+    @SerializedName("description")
+    String description;
+
+    /**
+     * Behavior of the subscription schedule and underlying subscription when it ends. Possible
+     * values are {@code release} and {@code cancel}.
+     *
+     * <p>One of {@code cancel}, or {@code release}.
+     */
+    @SerializedName("end_behavior")
+    String endBehavior;
+
+    /**
+     * Determines how to handle <a
+     * href="https://stripe.com/docs/subscriptions/billing-cycle#prorations">prorations</a> when the
+     * quote is accepted.
+     *
+     * <p>One of {@code always_invoice}, {@code create_prorations}, or {@code none}.
+     */
+    @SerializedName("proration_behavior")
+    String prorationBehavior;
+
+    @Getter
+    @Setter
+    @EqualsAndHashCode(callSuper = false)
+    public static class AppliesTo extends StripeObject {
+      /**
+       * A custom string that identifies a new subscription schedule being created upon quote
+       * acceptance. All quote lines with the same {@code new_reference} field will be applied to
+       * the creation of a new subscription schedule.
+       */
+      @SerializedName("new_reference")
+      String newReference;
+
+      /** The ID of the schedule the line applies to. */
+      @SerializedName("subscription_schedule")
+      String subscriptionSchedule;
+
+      /**
+       * Describes whether the quote line is affecting a new schedule or an existing schedule.
+       *
+       * <p>One of {@code new_reference}, or {@code subscription_schedule}.
+       */
+      @SerializedName("type")
+      String type;
+    }
+
+    @Getter
+    @Setter
+    @EqualsAndHashCode(callSuper = false)
+    public static class BillOnAcceptance extends StripeObject {
+      /** The start of the period to bill from when the Quote is accepted. */
+      @SerializedName("bill_from")
+      BillFrom billFrom;
+
+      /** The end of the period to bill until when the Quote is accepted. */
+      @SerializedName("bill_until")
+      BillUntil billUntil;
+
+      @Getter
+      @Setter
+      @EqualsAndHashCode(callSuper = false)
+      public static class BillFrom extends StripeObject {
+        /** The materialized time. */
+        @SerializedName("computed")
+        Long computed;
+
+        /** The timestamp the given line starts at. */
+        @SerializedName("line_starts_at")
+        LineStartsAt lineStartsAt;
+
+        /** A precise Unix timestamp. */
+        @SerializedName("timestamp")
+        Long timestamp;
+
+        /**
+         * The type of method to specify the {@code bill_from} time.
+         *
+         * <p>One of {@code line_starts_at}, {@code now}, {@code quote_acceptance_date}, or {@code
+         * timestamp}.
+         */
+        @SerializedName("type")
+        String type;
+
+        @Getter
+        @Setter
+        @EqualsAndHashCode(callSuper = false)
+        public static class LineStartsAt extends StripeObject implements HasId {
+          /** Unique identifier for the object. */
+          @Getter(onMethod_ = {@Override})
+          @SerializedName("id")
+          String id;
+        }
+      }
+
+      @Getter
+      @Setter
+      @EqualsAndHashCode(callSuper = false)
+      public static class BillUntil extends StripeObject {
+        /** The materialized time. */
+        @SerializedName("computed")
+        Long computed;
+
+        /** Time span for the quote line starting from the {@code starts_at} date. */
+        @SerializedName("duration")
+        Duration duration;
+
+        /** The timestamp the given line ends at. */
+        @SerializedName("line_ends_at")
+        LineEndsAt lineEndsAt;
+
+        /** A precise Unix timestamp. */
+        @SerializedName("timestamp")
+        Long timestamp;
+
+        /**
+         * The type of method to specify the {@code bill_until} time.
+         *
+         * <p>One of {@code duration}, {@code line_ends_at}, {@code schedule_end}, {@code
+         * timestamp}, or {@code upcoming_invoice}.
+         */
+        @SerializedName("type")
+        String type;
+
+        @Getter
+        @Setter
+        @EqualsAndHashCode(callSuper = false)
+        public static class Duration extends StripeObject {
+          /**
+           * Specifies a type of interval unit. Either {@code day}, {@code week}, {@code month} or
+           * {@code year}.
+           *
+           * <p>One of {@code day}, {@code month}, {@code week}, or {@code year}.
+           */
+          @SerializedName("interval")
+          String interval;
+
+          /**
+           * The number of intervals, as an whole number greater than 0. Stripe multiplies this by
+           * the interval type to get the overall duration.
+           */
+          @SerializedName("interval_count")
+          Long intervalCount;
+        }
+
+        @Getter
+        @Setter
+        @EqualsAndHashCode(callSuper = false)
+        public static class LineEndsAt extends StripeObject implements HasId {
+          /** Unique identifier for the object. */
+          @Getter(onMethod_ = {@Override})
+          @SerializedName("id")
+          String id;
+        }
+      }
+    }
+  }
+
+  @Getter
+  @Setter
+  @EqualsAndHashCode(callSuper = false)
+  public static class SubscriptionSchedule extends StripeObject {
+    @SerializedName("applies_to")
+    AppliesTo appliesTo;
+
+    /** The subscription schedule that was created or updated from this quote. */
+    @SerializedName("subscription_schedule")
+    String subscriptionSchedule;
+
+    @Getter
+    @Setter
+    @EqualsAndHashCode(callSuper = false)
+    public static class AppliesTo extends StripeObject {
+      /**
+       * A custom string that identifies a new subscription schedule being created upon quote
+       * acceptance. All quote lines with the same {@code new_reference} field will be applied to
+       * the creation of a new subscription schedule.
+       */
+      @SerializedName("new_reference")
+      String newReference;
+
+      /** The ID of the schedule the line applies to. */
+      @SerializedName("subscription_schedule")
+      String subscriptionSchedule;
+
+      /**
+       * Describes whether the quote line is affecting a new schedule or an existing schedule.
+       *
+       * <p>One of {@code new_reference}, or {@code subscription_schedule}.
+       */
+      @SerializedName("type")
+      String type;
     }
   }
 

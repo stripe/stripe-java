@@ -113,6 +113,9 @@ public class Invoice extends ApiResource implements HasId, MetadataStore<Invoice
   @SerializedName("application_fee_amount")
   Long applicationFeeAmount;
 
+  @SerializedName("applies_to")
+  AppliesTo appliesTo;
+
   /**
    * Number of payment attempts made for this invoice, from the perspective of the payment retry
    * schedule. Any payment attempt counts as the first attempt, and subsequently only automatic
@@ -1670,6 +1673,31 @@ public class Invoice extends ApiResource implements HasId, MetadataStore<Invoice
             Stripe.getApiBase(),
             String.format("/v1/invoices/%s/void", ApiResource.urlEncodeId(this.getId())));
     return ApiResource.request(ApiResource.RequestMethod.POST, url, params, Invoice.class, options);
+  }
+
+  @Getter
+  @Setter
+  @EqualsAndHashCode(callSuper = false)
+  public static class AppliesTo extends StripeObject {
+    /**
+     * A custom string that identifies a new subscription schedule being created upon quote
+     * acceptance. All quote lines with the same {@code new_reference} field will be applied to the
+     * creation of a new subscription schedule.
+     */
+    @SerializedName("new_reference")
+    String newReference;
+
+    /** The ID of the schedule the line applies to. */
+    @SerializedName("subscription_schedule")
+    String subscriptionSchedule;
+
+    /**
+     * Describes whether the quote line is affecting a new schedule or an existing schedule.
+     *
+     * <p>One of {@code new_reference}, or {@code subscription_schedule}.
+     */
+    @SerializedName("type")
+    String type;
   }
 
   @Getter
