@@ -1,5 +1,12 @@
 # Changelog
 
+## 22.4.0-beta.1 - 2022-12-15
+* [#1493](https://github.com/stripe/stripe-java/pull/1493) API Updates for beta branch
+  * Updated stable APIs to the latest version
+  * Add support for new resources `QuoteLine`, `TaxCalculation`, and `TaxTransaction`
+  * Add support for `create` and `list_line_items` methods on resource `TaxCalculation`
+  * Add support for `create_reversal`, `create`, and `retrieve` methods on resource `TaxTransaction`
+
 ## 22.3.0 - 2022-12-08
 * [#1487](https://github.com/stripe/stripe-java/pull/1487) API Updates
   * Change `CustomerListPaymentMethodsParams.type` and `PaymentMethodListParams.type`.
