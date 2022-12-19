@@ -8,7 +8,6 @@
 
 apply plugin: "maven-publish"
 apply plugin: "signing"
-apply plugin: "io.codearte.nexus-staging"
 
 def isReleaseBuild() {
     return VERSION_NAME.contains("SNAPSHOT") == false
@@ -53,12 +52,20 @@ afterEvaluate { project ->
         sign publishing.publications
     }
 
-    nexusStaging {
+    nexusPublishing {
         packageGroup = GROUP
-        numberOfRetries = 40
-        delayBetweenRetriesInMillis = 4000
-        username = getRepositoryUsername()
-        password = getRepositoryPassword()
+
+        repositories {
+            sonatype {
+                username = getRepositoryUsername()
+                password = getRepositoryPassword()
+            }
+        }
+
+        transitionCheckOptions {
+            maxRetries.set(40)
+            delayBetween.set(java.time.Duration.ofMillis(4000))
+        }
     }
 
     publishing {
