@@ -16,6 +16,7 @@ on:
       - beta
       - sdk-release/**
       - feature/**
+      - anniel-gradle-nexus-publish-plugin
 
 jobs:
   build:
