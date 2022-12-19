@@ -132,7 +132,7 @@ jobs:
 
       - name: Publish package
         run: |
-          ./gradlew publishToSonatype closeAndReleaseSonatypeStagingRepository -Dorg.gradle.project.NEXUS_USERNAME=$NEXUS_USERNAME -Dorg.gradle.project.NEXUS_PASSWORD=$NEXUS_PASSWORD -Dorg.gradle.project.signing.gnupg.keyName=$GPG_SIGNING_KEYID -Dorg.gradle.project.signing.gnupg.passphrase=$GPG_SIGNING_PASSPHRASE
+          ./gradlew publishToSonatype closeSonatypeStagingRepository -Dorg.gradle.project.NEXUS_USERNAME=$NEXUS_USERNAME -Dorg.gradle.project.NEXUS_PASSWORD=$NEXUS_PASSWORD -Dorg.gradle.project.signing.gnupg.keyName=$GPG_SIGNING_KEYID -Dorg.gradle.project.signing.gnupg.passphrase=$GPG_SIGNING_PASSPHRASE
         env:
           NEXUS_USERNAME: ${{ secrets.NEXUS_USERNAME }}
           NEXUS_PASSWORD: ${{ secrets.NEXUS_PASSWORD }}
