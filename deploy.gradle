@@ -110,7 +110,7 @@ afterEvaluate { project ->
         }
         repositories {
             maven {
-                name = "nexus"
+                name = "sonatype"
                 def releasesRepoUrl = getReleaseRepositoryUrl()
                 def snapshotsRepoUrl = getSnapshotRepositoryUrl()
                 url = isReleaseBuild() ? releasesRepoUrl : snapshotsRepoUrl
