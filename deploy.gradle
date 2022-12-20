@@ -31,6 +31,23 @@ def getRepositoryPassword() {
     return hasProperty("NEXUS_PASSWORD") ? NEXUS_PASSWORD : ""
 }
 
+
+nexusPublishing {
+    packageGroup = GROUP
+
+    repositories {
+        sonatype {
+            username = getRepositoryUsername()
+            password = getRepositoryPassword()
+        }
+    }
+
+    transitionCheckOptions {
+        maxRetries.set(40)
+        delayBetween.set(java.time.Duration.ofMillis(4000))
+    }
+}
+
 afterEvaluate { project ->
     tasks.withType(Sign) {
         onlyIf { isReleaseBuild() && project.hasProperty("signing.gnupg.keyName") }
@@ -50,22 +67,6 @@ afterEvaluate { project ->
         required { isReleaseBuild() && gradle.taskGraph.hasTask("publish") }
         useGpgCmd()
         sign publishing.publications
-    }
-
-    nexusPublishing {
-        packageGroup = GROUP
-
-        repositories {
-            sonatype {
-                username = getRepositoryUsername()
-                password = getRepositoryPassword()
-            }
-        }
-
-        transitionCheckOptions {
-            maxRetries.set(40)
-            delayBetween.set(java.time.Duration.ofMillis(4000))
-        }
     }
 
     publishing {
