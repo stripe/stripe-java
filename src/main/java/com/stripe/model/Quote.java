@@ -113,7 +113,7 @@ public class Quote extends ApiResource implements HasId, MetadataStore<Quote> {
 
   /** The discounts applied to this quote. */
   @SerializedName("discounts")
-  List<ExpandableField<Discount>> discounts;
+  List<ExpandableField<com.stripe.model.Discount>> discounts;
 
   /**
    * The date on which the quote will be canceled if in {@code open} or {@code draft} status.
@@ -431,23 +431,23 @@ public class Quote extends ApiResource implements HasId, MetadataStore<Quote> {
     this.discounts =
         (ids != null)
             ? ids.stream()
-                .map(id -> new ExpandableField<Discount>(id, null))
+                .map(id -> new ExpandableField<com.stripe.model.Discount>(id, null))
                 .collect(Collectors.toList())
             : null;
   }
 
   /** Get expanded {@code discounts}. */
-  public List<Discount> getDiscountObjects() {
+  public List<com.stripe.model.Discount> getDiscountObjects() {
     return (this.discounts != null)
         ? this.discounts.stream().map(x -> x.getExpanded()).collect(Collectors.toList())
         : null;
   }
 
-  public void setDiscountObjects(List<Discount> objs) {
+  public void setDiscountObjects(List<com.stripe.model.Discount> objs) {
     this.discounts =
         objs != null
             ? objs.stream()
-                .map(x -> new ExpandableField<Discount>(x.getId(), x))
+                .map(x -> new ExpandableField<com.stripe.model.Discount>(x.getId(), x))
                 .collect(Collectors.toList())
             : null;
   }
