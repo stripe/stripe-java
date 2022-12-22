@@ -74,8 +74,6 @@ final class EventDataClassLookup {
     classLookup.put("subscription", Subscription.class);
     classLookup.put("subscription_item", SubscriptionItem.class);
     classLookup.put("subscription_schedule", SubscriptionSchedule.class);
-    classLookup.put("tax.calculation", TaxCalculation.class);
-    classLookup.put("tax.transaction", TaxTransaction.class);
     classLookup.put("tax_code", TaxCode.class);
     classLookup.put("tax_deducted_at_source", TaxDeductedAtSource.class);
     classLookup.put("tax_id", TaxId.class);
@@ -134,6 +132,9 @@ final class EventDataClassLookup {
     classLookup.put("reporting.report_type", com.stripe.model.reporting.ReportType.class);
 
     classLookup.put("scheduled_query_run", com.stripe.model.sigma.ScheduledQueryRun.class);
+
+    classLookup.put("tax.calculation", com.stripe.model.tax.Calculation.class);
+    classLookup.put("tax.transaction", com.stripe.model.tax.Transaction.class);
 
     classLookup.put("terminal.configuration", com.stripe.model.terminal.Configuration.class);
     classLookup.put("terminal.connection_token", com.stripe.model.terminal.ConnectionToken.class);

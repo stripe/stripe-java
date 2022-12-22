@@ -7493,12 +7493,7 @@ public class QuoteUpdateParams extends ApiRequestParams {
     @SerializedName("effective_date")
     Object effectiveDate;
 
-    /**
-     * Configures how the subscription schedule behaves when it ends. Possible values are {@code
-     * release} or {@code cancel} with the default being {@code release}. {@code release} will end
-     * the subscription schedule and keep the underlying subscription running.{@code cancel} will
-     * end the subscription schedule and cancel the underlying subscription.
-     */
+    /** Behavior of the subscription schedule and underlying subscription when it ends. */
     @SerializedName("end_behavior")
     EndBehavior endBehavior;
 
@@ -7704,12 +7699,7 @@ public class QuoteUpdateParams extends ApiRequestParams {
         return this;
       }
 
-      /**
-       * Configures how the subscription schedule behaves when it ends. Possible values are {@code
-       * release} or {@code cancel} with the default being {@code release}. {@code release} will end
-       * the subscription schedule and keep the underlying subscription running.{@code cancel} will
-       * end the subscription schedule and cancel the underlying subscription.
-       */
+      /** Behavior of the subscription schedule and underlying subscription when it ends. */
       public Builder setEndBehavior(QuoteUpdateParams.SubscriptionData.EndBehavior endBehavior) {
         this.endBehavior = endBehavior;
         return this;
@@ -8681,12 +8671,7 @@ public class QuoteUpdateParams extends ApiRequestParams {
     @SerializedName("description")
     Object description;
 
-    /**
-     * Configures how the subscription schedule behaves when it ends. Possible values are {@code
-     * release} or {@code cancel} with the default being {@code release}. {@code release} will end
-     * the subscription schedule and keep the underlying subscription running.{@code cancel} will
-     * end the subscription schedule and cancel the underlying subscription.
-     */
+    /** Behavior of the subscription schedule and underlying subscription when it ends. */
     @SerializedName("end_behavior")
     EndBehavior endBehavior;
 
@@ -8836,12 +8821,7 @@ public class QuoteUpdateParams extends ApiRequestParams {
         return this;
       }
 
-      /**
-       * Configures how the subscription schedule behaves when it ends. Possible values are {@code
-       * release} or {@code cancel} with the default being {@code release}. {@code release} will end
-       * the subscription schedule and keep the underlying subscription running.{@code cancel} will
-       * end the subscription schedule and cancel the underlying subscription.
-       */
+      /** Behavior of the subscription schedule and underlying subscription when it ends. */
       public Builder setEndBehavior(
           QuoteUpdateParams.SubscriptionDataOverride.EndBehavior endBehavior) {
         this.endBehavior = endBehavior;

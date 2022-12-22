@@ -1,5 +1,5 @@
 // File generated from our OpenAPI spec
-package com.stripe.param;
+package com.stripe.param.tax;
 
 import com.google.gson.annotations.SerializedName;
 import com.stripe.net.ApiRequestParams;
@@ -10,7 +10,7 @@ import java.util.Map;
 import lombok.Getter;
 
 @Getter
-public class TaxTransactionCreateReversalParams extends ApiRequestParams {
+public class TransactionCreateReversalParams extends ApiRequestParams {
   /** Specifies which fields in the response should be expanded. */
   @SerializedName("expand")
   List<String> expand;
@@ -26,7 +26,7 @@ public class TaxTransactionCreateReversalParams extends ApiRequestParams {
 
   /** The line item amounts to reverse. */
   @SerializedName("line_items")
-  List<TaxTransactionCreateReversalParams.LineItem> lineItems;
+  List<TransactionCreateReversalParams.LineItem> lineItems;
 
   /**
    * Set of <a href="https://stripe.com/docs/api/metadata">key-value pairs</a> that you can attach
@@ -44,7 +44,7 @@ public class TaxTransactionCreateReversalParams extends ApiRequestParams {
   @SerializedName("mode")
   Mode mode;
 
-  /** The ID of the transaction to partially or fully reverse. */
+  /** The ID of the Transaction to partially or fully reverse. */
   @SerializedName("original_transaction")
   String originalTransaction;
 
@@ -55,10 +55,10 @@ public class TaxTransactionCreateReversalParams extends ApiRequestParams {
   @SerializedName("reference")
   String reference;
 
-  private TaxTransactionCreateReversalParams(
+  private TransactionCreateReversalParams(
       List<String> expand,
       Map<String, Object> extraParams,
-      List<TaxTransactionCreateReversalParams.LineItem> lineItems,
+      List<TransactionCreateReversalParams.LineItem> lineItems,
       Map<String, String> metadata,
       Mode mode,
       String originalTransaction,
@@ -81,7 +81,7 @@ public class TaxTransactionCreateReversalParams extends ApiRequestParams {
 
     private Map<String, Object> extraParams;
 
-    private List<TaxTransactionCreateReversalParams.LineItem> lineItems;
+    private List<TransactionCreateReversalParams.LineItem> lineItems;
 
     private Map<String, String> metadata;
 
@@ -92,8 +92,8 @@ public class TaxTransactionCreateReversalParams extends ApiRequestParams {
     private String reference;
 
     /** Finalize and obtain parameter instance from this builder. */
-    public TaxTransactionCreateReversalParams build() {
-      return new TaxTransactionCreateReversalParams(
+    public TransactionCreateReversalParams build() {
+      return new TransactionCreateReversalParams(
           this.expand,
           this.extraParams,
           this.lineItems,
@@ -106,7 +106,7 @@ public class TaxTransactionCreateReversalParams extends ApiRequestParams {
     /**
      * Add an element to `expand` list. A list is initialized for the first `add/addAll` call, and
      * subsequent calls adds additional elements to the original list. See {@link
-     * TaxTransactionCreateReversalParams#expand} for the field documentation.
+     * TransactionCreateReversalParams#expand} for the field documentation.
      */
     public Builder addExpand(String element) {
       if (this.expand == null) {
@@ -119,7 +119,7 @@ public class TaxTransactionCreateReversalParams extends ApiRequestParams {
     /**
      * Add all elements to `expand` list. A list is initialized for the first `add/addAll` call, and
      * subsequent calls adds additional elements to the original list. See {@link
-     * TaxTransactionCreateReversalParams#expand} for the field documentation.
+     * TransactionCreateReversalParams#expand} for the field documentation.
      */
     public Builder addAllExpand(List<String> elements) {
       if (this.expand == null) {
@@ -132,7 +132,7 @@ public class TaxTransactionCreateReversalParams extends ApiRequestParams {
     /**
      * Add a key/value pair to `extraParams` map. A map is initialized for the first `put/putAll`
      * call, and subsequent calls add additional key/value pairs to the original map. See {@link
-     * TaxTransactionCreateReversalParams#extraParams} for the field documentation.
+     * TransactionCreateReversalParams#extraParams} for the field documentation.
      */
     public Builder putExtraParam(String key, Object value) {
       if (this.extraParams == null) {
@@ -145,7 +145,7 @@ public class TaxTransactionCreateReversalParams extends ApiRequestParams {
     /**
      * Add all map key/value pairs to `extraParams` map. A map is initialized for the first
      * `put/putAll` call, and subsequent calls add additional key/value pairs to the original map.
-     * See {@link TaxTransactionCreateReversalParams#extraParams} for the field documentation.
+     * See {@link TransactionCreateReversalParams#extraParams} for the field documentation.
      */
     public Builder putAllExtraParam(Map<String, Object> map) {
       if (this.extraParams == null) {
@@ -158,9 +158,9 @@ public class TaxTransactionCreateReversalParams extends ApiRequestParams {
     /**
      * Add an element to `lineItems` list. A list is initialized for the first `add/addAll` call,
      * and subsequent calls adds additional elements to the original list. See {@link
-     * TaxTransactionCreateReversalParams#lineItems} for the field documentation.
+     * TransactionCreateReversalParams#lineItems} for the field documentation.
      */
-    public Builder addLineItem(TaxTransactionCreateReversalParams.LineItem element) {
+    public Builder addLineItem(TransactionCreateReversalParams.LineItem element) {
       if (this.lineItems == null) {
         this.lineItems = new ArrayList<>();
       }
@@ -171,9 +171,9 @@ public class TaxTransactionCreateReversalParams extends ApiRequestParams {
     /**
      * Add all elements to `lineItems` list. A list is initialized for the first `add/addAll` call,
      * and subsequent calls adds additional elements to the original list. See {@link
-     * TaxTransactionCreateReversalParams#lineItems} for the field documentation.
+     * TransactionCreateReversalParams#lineItems} for the field documentation.
      */
-    public Builder addAllLineItem(List<TaxTransactionCreateReversalParams.LineItem> elements) {
+    public Builder addAllLineItem(List<TransactionCreateReversalParams.LineItem> elements) {
       if (this.lineItems == null) {
         this.lineItems = new ArrayList<>();
       }
@@ -184,7 +184,7 @@ public class TaxTransactionCreateReversalParams extends ApiRequestParams {
     /**
      * Add a key/value pair to `metadata` map. A map is initialized for the first `put/putAll` call,
      * and subsequent calls add additional key/value pairs to the original map. See {@link
-     * TaxTransactionCreateReversalParams#metadata} for the field documentation.
+     * TransactionCreateReversalParams#metadata} for the field documentation.
      */
     public Builder putMetadata(String key, String value) {
       if (this.metadata == null) {
@@ -197,7 +197,7 @@ public class TaxTransactionCreateReversalParams extends ApiRequestParams {
     /**
      * Add all map key/value pairs to `metadata` map. A map is initialized for the first
      * `put/putAll` call, and subsequent calls add additional key/value pairs to the original map.
-     * See {@link TaxTransactionCreateReversalParams#metadata} for the field documentation.
+     * See {@link TransactionCreateReversalParams#metadata} for the field documentation.
      */
     public Builder putAllMetadata(Map<String, String> map) {
       if (this.metadata == null) {
@@ -211,12 +211,12 @@ public class TaxTransactionCreateReversalParams extends ApiRequestParams {
      * If {@code partial}, the provided line item amounts are reversed. If {@code full}, the
      * original transaction is fully reversed.
      */
-    public Builder setMode(TaxTransactionCreateReversalParams.Mode mode) {
+    public Builder setMode(TransactionCreateReversalParams.Mode mode) {
       this.mode = mode;
       return this;
     }
 
-    /** The ID of the transaction to partially or fully reverse. */
+    /** The ID of the Transaction to partially or fully reverse. */
     public Builder setOriginalTransaction(String originalTransaction) {
       this.originalTransaction = originalTransaction;
       return this;
@@ -308,8 +308,8 @@ public class TaxTransactionCreateReversalParams extends ApiRequestParams {
       private String reference;
 
       /** Finalize and obtain parameter instance from this builder. */
-      public TaxTransactionCreateReversalParams.LineItem build() {
-        return new TaxTransactionCreateReversalParams.LineItem(
+      public TransactionCreateReversalParams.LineItem build() {
+        return new TransactionCreateReversalParams.LineItem(
             this.amount,
             this.amountTax,
             this.extraParams,
@@ -334,7 +334,7 @@ public class TaxTransactionCreateReversalParams extends ApiRequestParams {
       /**
        * Add a key/value pair to `extraParams` map. A map is initialized for the first `put/putAll`
        * call, and subsequent calls add additional key/value pairs to the original map. See {@link
-       * TaxTransactionCreateReversalParams.LineItem#extraParams} for the field documentation.
+       * TransactionCreateReversalParams.LineItem#extraParams} for the field documentation.
        */
       public Builder putExtraParam(String key, Object value) {
         if (this.extraParams == null) {
@@ -347,7 +347,7 @@ public class TaxTransactionCreateReversalParams extends ApiRequestParams {
       /**
        * Add all map key/value pairs to `extraParams` map. A map is initialized for the first
        * `put/putAll` call, and subsequent calls add additional key/value pairs to the original map.
-       * See {@link TaxTransactionCreateReversalParams.LineItem#extraParams} for the field
+       * See {@link TransactionCreateReversalParams.LineItem#extraParams} for the field
        * documentation.
        */
       public Builder putAllExtraParam(Map<String, Object> map) {
@@ -361,7 +361,7 @@ public class TaxTransactionCreateReversalParams extends ApiRequestParams {
       /**
        * Add a key/value pair to `metadata` map. A map is initialized for the first `put/putAll`
        * call, and subsequent calls add additional key/value pairs to the original map. See {@link
-       * TaxTransactionCreateReversalParams.LineItem#metadata} for the field documentation.
+       * TransactionCreateReversalParams.LineItem#metadata} for the field documentation.
        */
       public Builder putMetadata(String key, String value) {
         if (this.metadata == null) {
@@ -374,8 +374,7 @@ public class TaxTransactionCreateReversalParams extends ApiRequestParams {
       /**
        * Add all map key/value pairs to `metadata` map. A map is initialized for the first
        * `put/putAll` call, and subsequent calls add additional key/value pairs to the original map.
-       * See {@link TaxTransactionCreateReversalParams.LineItem#metadata} for the field
-       * documentation.
+       * See {@link TransactionCreateReversalParams.LineItem#metadata} for the field documentation.
        */
       public Builder putAllMetadata(Map<String, String> map) {
         if (this.metadata == null) {

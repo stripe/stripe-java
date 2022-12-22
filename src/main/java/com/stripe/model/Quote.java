@@ -1571,7 +1571,7 @@ public class Quote extends ApiResource implements HasId, MetadataStore<Quote> {
   @Setter
   @EqualsAndHashCode(callSuper = false)
   public static class SubscriptionData extends StripeObject {
-    /** TODO. */
+    /** Describes what period to bill for upon accepting the quote. */
     @SerializedName("bill_on_acceptance")
     BillOnAcceptance billOnAcceptance;
 
@@ -1611,8 +1611,7 @@ public class Quote extends ApiResource implements HasId, MetadataStore<Quote> {
     Long effectiveDate;
 
     /**
-     * Behavior of the subscription schedule and underlying subscription when it ends. Possible
-     * values are {@code release} and {@code cancel}.
+     * Behavior of the subscription schedule and underlying subscription when it ends.
      *
      * <p>One of {@code cancel}, or {@code release}.
      */
@@ -1851,8 +1850,7 @@ public class Quote extends ApiResource implements HasId, MetadataStore<Quote> {
     String description;
 
     /**
-     * Behavior of the subscription schedule and underlying subscription when it ends. Possible
-     * values are {@code release} and {@code cancel}.
+     * Behavior of the subscription schedule and underlying subscription when it ends.
      *
      * <p>One of {@code cancel}, or {@code release}.
      */
