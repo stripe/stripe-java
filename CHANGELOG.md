@@ -3,7 +3,7 @@
 ## 22.5.0-beta.1 - 2022-12-22
 * [#1498](https://github.com/stripe/stripe-java/pull/1498) API Updates for beta branch
   * Updated stable APIs to the latest version
-  * Move `TaxCalculation` and `TaxTransaction` to `Tax::Calculation` and `Tax::Transaction`.
+  * Move `TaxCalculation` and `TaxTransaction` to `Tax.Calculation` and `Tax.Transaction`.
 
 ## 22.4.0 - 2022-12-22
 * [#1497](https://github.com/stripe/stripe-java/pull/1497) API Updates
