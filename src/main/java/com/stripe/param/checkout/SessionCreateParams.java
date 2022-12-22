@@ -33,8 +33,8 @@ public class SessionCreateParams extends ApiRequestParams {
   BillingAddressCollection billingAddressCollection;
 
   /**
-   * The URL the customer will be directed to if they decide to cancel payment and return to your
-   * website.
+   * If set, Checkout displays a back button and customers will be directed to this URL if they
+   * decide to cancel payment and return to your website.
    */
   @SerializedName("cancel_url")
   String cancelUrl;
@@ -510,8 +510,8 @@ public class SessionCreateParams extends ApiRequestParams {
     }
 
     /**
-     * The URL the customer will be directed to if they decide to cancel payment and return to your
-     * website.
+     * If set, Checkout displays a back button and customers will be directed to this URL if they
+     * decide to cancel payment and return to your website.
      */
     public Builder setCancelUrl(String cancelUrl) {
       this.cancelUrl = cancelUrl;

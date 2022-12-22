@@ -8866,6 +8866,7 @@ public class PaymentIntentCreateParams extends ApiRequestParams {
 
       @Getter
       public static class BankTransfer {
+        /** Configuration for the eu_bank_transfer funding type. */
         @SerializedName("eu_bank_transfer")
         EuBankTransfer euBankTransfer;
 
@@ -8937,6 +8938,7 @@ public class PaymentIntentCreateParams extends ApiRequestParams {
                 this.euBankTransfer, this.extraParams, this.requestedAddressTypes, this.type);
           }
 
+          /** Configuration for the eu_bank_transfer funding type. */
           public Builder setEuBankTransfer(
               PaymentIntentCreateParams.PaymentMethodOptions.CustomerBalance.BankTransfer
                       .EuBankTransfer
