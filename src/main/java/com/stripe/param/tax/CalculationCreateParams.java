@@ -1,5 +1,5 @@
 // File generated from our OpenAPI spec
-package com.stripe.param;
+package com.stripe.param.tax;
 
 import com.google.gson.annotations.SerializedName;
 import com.stripe.net.ApiRequestParams;
@@ -10,7 +10,7 @@ import java.util.Map;
 import lombok.Getter;
 
 @Getter
-public class TaxCalculationCreateParams extends ApiRequestParams {
+public class CalculationCreateParams extends ApiRequestParams {
   /**
    * Three-letter <a href="https://www.iso.org/iso-4217-currency-codes.html">ISO currency code</a>,
    * in lowercase. Must be a <a href="https://stripe.com/docs/currencies">supported currency</a>.
@@ -44,7 +44,7 @@ public class TaxCalculationCreateParams extends ApiRequestParams {
 
   /** A list of items the customer is purchasing. */
   @SerializedName("line_items")
-  List<TaxCalculationCreateParams.LineItem> lineItems;
+  List<CalculationCreateParams.LineItem> lineItems;
 
   /**
    * The boolean value that indicates if the calculation is a preview. If true, the calculation is
@@ -64,13 +64,13 @@ public class TaxCalculationCreateParams extends ApiRequestParams {
   @SerializedName("tax_date")
   Long taxDate;
 
-  private TaxCalculationCreateParams(
+  private CalculationCreateParams(
       String currency,
       String customer,
       CustomerDetails customerDetails,
       List<String> expand,
       Map<String, Object> extraParams,
-      List<TaxCalculationCreateParams.LineItem> lineItems,
+      List<CalculationCreateParams.LineItem> lineItems,
       Boolean preview,
       String reference,
       Long taxDate) {
@@ -100,7 +100,7 @@ public class TaxCalculationCreateParams extends ApiRequestParams {
 
     private Map<String, Object> extraParams;
 
-    private List<TaxCalculationCreateParams.LineItem> lineItems;
+    private List<CalculationCreateParams.LineItem> lineItems;
 
     private Boolean preview;
 
@@ -109,8 +109,8 @@ public class TaxCalculationCreateParams extends ApiRequestParams {
     private Long taxDate;
 
     /** Finalize and obtain parameter instance from this builder. */
-    public TaxCalculationCreateParams build() {
-      return new TaxCalculationCreateParams(
+    public CalculationCreateParams build() {
+      return new CalculationCreateParams(
           this.currency,
           this.customer,
           this.customerDetails,
@@ -142,7 +142,7 @@ public class TaxCalculationCreateParams extends ApiRequestParams {
     }
 
     /** Details about the customer, including address and tax IDs. */
-    public Builder setCustomerDetails(TaxCalculationCreateParams.CustomerDetails customerDetails) {
+    public Builder setCustomerDetails(CalculationCreateParams.CustomerDetails customerDetails) {
       this.customerDetails = customerDetails;
       return this;
     }
@@ -150,7 +150,7 @@ public class TaxCalculationCreateParams extends ApiRequestParams {
     /**
      * Add an element to `expand` list. A list is initialized for the first `add/addAll` call, and
      * subsequent calls adds additional elements to the original list. See {@link
-     * TaxCalculationCreateParams#expand} for the field documentation.
+     * CalculationCreateParams#expand} for the field documentation.
      */
     public Builder addExpand(String element) {
       if (this.expand == null) {
@@ -163,7 +163,7 @@ public class TaxCalculationCreateParams extends ApiRequestParams {
     /**
      * Add all elements to `expand` list. A list is initialized for the first `add/addAll` call, and
      * subsequent calls adds additional elements to the original list. See {@link
-     * TaxCalculationCreateParams#expand} for the field documentation.
+     * CalculationCreateParams#expand} for the field documentation.
      */
     public Builder addAllExpand(List<String> elements) {
       if (this.expand == null) {
@@ -176,7 +176,7 @@ public class TaxCalculationCreateParams extends ApiRequestParams {
     /**
      * Add a key/value pair to `extraParams` map. A map is initialized for the first `put/putAll`
      * call, and subsequent calls add additional key/value pairs to the original map. See {@link
-     * TaxCalculationCreateParams#extraParams} for the field documentation.
+     * CalculationCreateParams#extraParams} for the field documentation.
      */
     public Builder putExtraParam(String key, Object value) {
       if (this.extraParams == null) {
@@ -189,7 +189,7 @@ public class TaxCalculationCreateParams extends ApiRequestParams {
     /**
      * Add all map key/value pairs to `extraParams` map. A map is initialized for the first
      * `put/putAll` call, and subsequent calls add additional key/value pairs to the original map.
-     * See {@link TaxCalculationCreateParams#extraParams} for the field documentation.
+     * See {@link CalculationCreateParams#extraParams} for the field documentation.
      */
     public Builder putAllExtraParam(Map<String, Object> map) {
       if (this.extraParams == null) {
@@ -202,9 +202,9 @@ public class TaxCalculationCreateParams extends ApiRequestParams {
     /**
      * Add an element to `lineItems` list. A list is initialized for the first `add/addAll` call,
      * and subsequent calls adds additional elements to the original list. See {@link
-     * TaxCalculationCreateParams#lineItems} for the field documentation.
+     * CalculationCreateParams#lineItems} for the field documentation.
      */
-    public Builder addLineItem(TaxCalculationCreateParams.LineItem element) {
+    public Builder addLineItem(CalculationCreateParams.LineItem element) {
       if (this.lineItems == null) {
         this.lineItems = new ArrayList<>();
       }
@@ -215,9 +215,9 @@ public class TaxCalculationCreateParams extends ApiRequestParams {
     /**
      * Add all elements to `lineItems` list. A list is initialized for the first `add/addAll` call,
      * and subsequent calls adds additional elements to the original list. See {@link
-     * TaxCalculationCreateParams#lineItems} for the field documentation.
+     * CalculationCreateParams#lineItems} for the field documentation.
      */
-    public Builder addAllLineItem(List<TaxCalculationCreateParams.LineItem> elements) {
+    public Builder addAllLineItem(List<CalculationCreateParams.LineItem> elements) {
       if (this.lineItems == null) {
         this.lineItems = new ArrayList<>();
       }
@@ -275,14 +275,14 @@ public class TaxCalculationCreateParams extends ApiRequestParams {
 
     /** The customer's tax IDs. */
     @SerializedName("tax_ids")
-    List<TaxCalculationCreateParams.CustomerDetails.TaxId> taxIds;
+    List<CalculationCreateParams.CustomerDetails.TaxId> taxIds;
 
     private CustomerDetails(
         Address address,
         AddressSource addressSource,
         Map<String, Object> extraParams,
         String ipAddress,
-        List<TaxCalculationCreateParams.CustomerDetails.TaxId> taxIds) {
+        List<CalculationCreateParams.CustomerDetails.TaxId> taxIds) {
       this.address = address;
       this.addressSource = addressSource;
       this.extraParams = extraParams;
@@ -303,23 +303,23 @@ public class TaxCalculationCreateParams extends ApiRequestParams {
 
       private String ipAddress;
 
-      private List<TaxCalculationCreateParams.CustomerDetails.TaxId> taxIds;
+      private List<CalculationCreateParams.CustomerDetails.TaxId> taxIds;
 
       /** Finalize and obtain parameter instance from this builder. */
-      public TaxCalculationCreateParams.CustomerDetails build() {
-        return new TaxCalculationCreateParams.CustomerDetails(
+      public CalculationCreateParams.CustomerDetails build() {
+        return new CalculationCreateParams.CustomerDetails(
             this.address, this.addressSource, this.extraParams, this.ipAddress, this.taxIds);
       }
 
       /** The customer's postal address (e.g., home or business location). */
-      public Builder setAddress(TaxCalculationCreateParams.CustomerDetails.Address address) {
+      public Builder setAddress(CalculationCreateParams.CustomerDetails.Address address) {
         this.address = address;
         return this;
       }
 
       /** The type of customer address provided. Required when using {@code address}. */
       public Builder setAddressSource(
-          TaxCalculationCreateParams.CustomerDetails.AddressSource addressSource) {
+          CalculationCreateParams.CustomerDetails.AddressSource addressSource) {
         this.addressSource = addressSource;
         return this;
       }
@@ -327,7 +327,7 @@ public class TaxCalculationCreateParams extends ApiRequestParams {
       /**
        * Add a key/value pair to `extraParams` map. A map is initialized for the first `put/putAll`
        * call, and subsequent calls add additional key/value pairs to the original map. See {@link
-       * TaxCalculationCreateParams.CustomerDetails#extraParams} for the field documentation.
+       * CalculationCreateParams.CustomerDetails#extraParams} for the field documentation.
        */
       public Builder putExtraParam(String key, Object value) {
         if (this.extraParams == null) {
@@ -340,7 +340,7 @@ public class TaxCalculationCreateParams extends ApiRequestParams {
       /**
        * Add all map key/value pairs to `extraParams` map. A map is initialized for the first
        * `put/putAll` call, and subsequent calls add additional key/value pairs to the original map.
-       * See {@link TaxCalculationCreateParams.CustomerDetails#extraParams} for the field
+       * See {@link CalculationCreateParams.CustomerDetails#extraParams} for the field
        * documentation.
        */
       public Builder putAllExtraParam(Map<String, Object> map) {
@@ -360,9 +360,9 @@ public class TaxCalculationCreateParams extends ApiRequestParams {
       /**
        * Add an element to `taxIds` list. A list is initialized for the first `add/addAll` call, and
        * subsequent calls adds additional elements to the original list. See {@link
-       * TaxCalculationCreateParams.CustomerDetails#taxIds} for the field documentation.
+       * CalculationCreateParams.CustomerDetails#taxIds} for the field documentation.
        */
-      public Builder addTaxId(TaxCalculationCreateParams.CustomerDetails.TaxId element) {
+      public Builder addTaxId(CalculationCreateParams.CustomerDetails.TaxId element) {
         if (this.taxIds == null) {
           this.taxIds = new ArrayList<>();
         }
@@ -373,9 +373,9 @@ public class TaxCalculationCreateParams extends ApiRequestParams {
       /**
        * Add all elements to `taxIds` list. A list is initialized for the first `add/addAll` call,
        * and subsequent calls adds additional elements to the original list. See {@link
-       * TaxCalculationCreateParams.CustomerDetails#taxIds} for the field documentation.
+       * CalculationCreateParams.CustomerDetails#taxIds} for the field documentation.
        */
-      public Builder addAllTaxId(List<TaxCalculationCreateParams.CustomerDetails.TaxId> elements) {
+      public Builder addAllTaxId(List<CalculationCreateParams.CustomerDetails.TaxId> elements) {
         if (this.taxIds == null) {
           this.taxIds = new ArrayList<>();
         }
@@ -462,8 +462,8 @@ public class TaxCalculationCreateParams extends ApiRequestParams {
         private String state;
 
         /** Finalize and obtain parameter instance from this builder. */
-        public TaxCalculationCreateParams.CustomerDetails.Address build() {
-          return new TaxCalculationCreateParams.CustomerDetails.Address(
+        public CalculationCreateParams.CustomerDetails.Address build() {
+          return new CalculationCreateParams.CustomerDetails.Address(
               this.city,
               this.country,
               this.extraParams,
@@ -491,7 +491,7 @@ public class TaxCalculationCreateParams extends ApiRequestParams {
         /**
          * Add a key/value pair to `extraParams` map. A map is initialized for the first
          * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
-         * map. See {@link TaxCalculationCreateParams.CustomerDetails.Address#extraParams} for the
+         * map. See {@link CalculationCreateParams.CustomerDetails.Address#extraParams} for the
          * field documentation.
          */
         public Builder putExtraParam(String key, Object value) {
@@ -505,7 +505,7 @@ public class TaxCalculationCreateParams extends ApiRequestParams {
         /**
          * Add all map key/value pairs to `extraParams` map. A map is initialized for the first
          * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
-         * map. See {@link TaxCalculationCreateParams.CustomerDetails.Address#extraParams} for the
+         * map. See {@link CalculationCreateParams.CustomerDetails.Address#extraParams} for the
          * field documentation.
          */
         public Builder putAllExtraParam(Map<String, Object> map) {
@@ -593,16 +593,16 @@ public class TaxCalculationCreateParams extends ApiRequestParams {
         private String value;
 
         /** Finalize and obtain parameter instance from this builder. */
-        public TaxCalculationCreateParams.CustomerDetails.TaxId build() {
-          return new TaxCalculationCreateParams.CustomerDetails.TaxId(
+        public CalculationCreateParams.CustomerDetails.TaxId build() {
+          return new CalculationCreateParams.CustomerDetails.TaxId(
               this.extraParams, this.type, this.value);
         }
 
         /**
          * Add a key/value pair to `extraParams` map. A map is initialized for the first
          * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
-         * map. See {@link TaxCalculationCreateParams.CustomerDetails.TaxId#extraParams} for the
-         * field documentation.
+         * map. See {@link CalculationCreateParams.CustomerDetails.TaxId#extraParams} for the field
+         * documentation.
          */
         public Builder putExtraParam(String key, Object value) {
           if (this.extraParams == null) {
@@ -615,8 +615,8 @@ public class TaxCalculationCreateParams extends ApiRequestParams {
         /**
          * Add all map key/value pairs to `extraParams` map. A map is initialized for the first
          * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
-         * map. See {@link TaxCalculationCreateParams.CustomerDetails.TaxId#extraParams} for the
-         * field documentation.
+         * map. See {@link CalculationCreateParams.CustomerDetails.TaxId#extraParams} for the field
+         * documentation.
          */
         public Builder putAllExtraParam(Map<String, Object> map) {
           if (this.extraParams == null) {
@@ -638,7 +638,7 @@ public class TaxCalculationCreateParams extends ApiRequestParams {
          * ru_kpp}, {@code sa_vat}, {@code sg_gst}, {@code sg_uen}, {@code si_tin}, {@code th_vat},
          * {@code tr_tin}, {@code tw_vat}, {@code ua_vat}, {@code us_ein}, or {@code za_vat}.
          */
-        public Builder setType(TaxCalculationCreateParams.CustomerDetails.TaxId.Type type) {
+        public Builder setType(CalculationCreateParams.CustomerDetails.TaxId.Type type) {
           this.type = type;
           return this;
         }
@@ -921,8 +921,8 @@ public class TaxCalculationCreateParams extends ApiRequestParams {
       private String taxCode;
 
       /** Finalize and obtain parameter instance from this builder. */
-      public TaxCalculationCreateParams.LineItem build() {
-        return new TaxCalculationCreateParams.LineItem(
+      public CalculationCreateParams.LineItem build() {
+        return new CalculationCreateParams.LineItem(
             this.amount,
             this.extraParams,
             this.product,
@@ -945,7 +945,7 @@ public class TaxCalculationCreateParams extends ApiRequestParams {
       /**
        * Add a key/value pair to `extraParams` map. A map is initialized for the first `put/putAll`
        * call, and subsequent calls add additional key/value pairs to the original map. See {@link
-       * TaxCalculationCreateParams.LineItem#extraParams} for the field documentation.
+       * CalculationCreateParams.LineItem#extraParams} for the field documentation.
        */
       public Builder putExtraParam(String key, Object value) {
         if (this.extraParams == null) {
@@ -958,7 +958,7 @@ public class TaxCalculationCreateParams extends ApiRequestParams {
       /**
        * Add all map key/value pairs to `extraParams` map. A map is initialized for the first
        * `put/putAll` call, and subsequent calls add additional key/value pairs to the original map.
-       * See {@link TaxCalculationCreateParams.LineItem#extraParams} for the field documentation.
+       * See {@link CalculationCreateParams.LineItem#extraParams} for the field documentation.
        */
       public Builder putAllExtraParam(Map<String, Object> map) {
         if (this.extraParams == null) {
@@ -999,7 +999,7 @@ public class TaxCalculationCreateParams extends ApiRequestParams {
        * Specifies whether the {@code amount} includes taxes. If {@code tax_behavior=inclusive},
        * then the amount includes taxes.
        */
-      public Builder setTaxBehavior(TaxCalculationCreateParams.LineItem.TaxBehavior taxBehavior) {
+      public Builder setTaxBehavior(CalculationCreateParams.LineItem.TaxBehavior taxBehavior) {
         this.taxBehavior = taxBehavior;
         return this;
       }

@@ -135,5 +135,12 @@ public class CashBalance extends ApiResource {
      */
     @SerializedName("reconciliation_mode")
     String reconciliationMode;
+
+    /**
+     * A flag to indicate if reconciliation mode returned is the user's default or is specific to
+     * this customer cash balance.
+     */
+    @SerializedName("using_merchant_default")
+    Boolean usingMerchantDefault;
   }
 }

@@ -786,6 +786,12 @@ public class SubscriptionScheduleAmendParams extends ApiRequestParams {
         @SerializedName("timestamp")
         TIMESTAMP("timestamp"),
 
+        @SerializedName("trial_end")
+        TRIAL_END("trial_end"),
+
+        @SerializedName("trial_start")
+        TRIAL_START("trial_start"),
+
         @SerializedName("upcoming_invoice")
         UPCOMING_INVOICE("upcoming_invoice");
 
@@ -1091,6 +1097,12 @@ public class SubscriptionScheduleAmendParams extends ApiRequestParams {
 
         @SerializedName("timestamp")
         TIMESTAMP("timestamp"),
+
+        @SerializedName("trial_end")
+        TRIAL_END("trial_end"),
+
+        @SerializedName("trial_start")
+        TRIAL_START("trial_start"),
 
         @SerializedName("upcoming_invoice")
         UPCOMING_INVOICE("upcoming_invoice");
@@ -3725,7 +3737,7 @@ public class SubscriptionScheduleAmendParams extends ApiRequestParams {
 
   @Getter
   public static class ScheduleSettings {
-    /** Configures how the subscription schedule behaves when it ends. */
+    /** Behavior of the subscription schedule and underlying subscription when it ends. */
     @SerializedName("end_behavior")
     EndBehavior endBehavior;
 
@@ -3758,7 +3770,7 @@ public class SubscriptionScheduleAmendParams extends ApiRequestParams {
             this.endBehavior, this.extraParams);
       }
 
-      /** Configures how the subscription schedule behaves when it ends. */
+      /** Behavior of the subscription schedule and underlying subscription when it ends. */
       public Builder setEndBehavior(
           SubscriptionScheduleAmendParams.ScheduleSettings.EndBehavior endBehavior) {
         this.endBehavior = endBehavior;

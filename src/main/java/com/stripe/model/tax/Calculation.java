@@ -1,13 +1,16 @@
 // File generated from our OpenAPI spec
-package com.stripe.model;
+package com.stripe.model.tax;
 
 import com.google.gson.annotations.SerializedName;
 import com.stripe.Stripe;
 import com.stripe.exception.StripeException;
+import com.stripe.model.HasId;
+import com.stripe.model.LineItemCollection;
+import com.stripe.model.StripeObject;
 import com.stripe.net.ApiResource;
 import com.stripe.net.RequestOptions;
-import com.stripe.param.TaxCalculationCreateParams;
-import com.stripe.param.TaxCalculationListLineItemsParams;
+import com.stripe.param.tax.CalculationCreateParams;
+import com.stripe.param.tax.CalculationListLineItemsParams;
 import java.util.List;
 import java.util.Map;
 import lombok.EqualsAndHashCode;
@@ -18,7 +21,7 @@ import lombok.Setter;
 @Getter
 @Setter
 @EqualsAndHashCode(callSuper = false)
-public class TaxCalculation extends ApiResource implements HasId {
+public class Calculation extends ApiResource implements HasId {
   /** Total after taxes. */
   @SerializedName("amount_total")
   Long amountTotal;
@@ -85,36 +88,36 @@ public class TaxCalculation extends ApiResource implements HasId {
 
   /** Breakdown of individual tax amounts that add up to the total. */
   @SerializedName("tax_breakdown")
-  List<TaxCalculation.TaxBreakdown> taxBreakdown;
+  List<Calculation.TaxBreakdown> taxBreakdown;
 
   /** Timestamp of date at which the tax rules and rates in effect applies for the calculation. */
   @SerializedName("tax_date")
   Long taxDate;
 
   /** Calculates tax based on input and returns a Tax <code>Calculation</code> object. */
-  public static TaxCalculation create(Map<String, Object> params) throws StripeException {
+  public static Calculation create(Map<String, Object> params) throws StripeException {
     return create(params, (RequestOptions) null);
   }
 
   /** Calculates tax based on input and returns a Tax <code>Calculation</code> object. */
-  public static TaxCalculation create(Map<String, Object> params, RequestOptions options)
+  public static Calculation create(Map<String, Object> params, RequestOptions options)
       throws StripeException {
     String url = String.format("%s%s", Stripe.getApiBase(), "/v1/tax/calculations");
     return ApiResource.request(
-        ApiResource.RequestMethod.POST, url, params, TaxCalculation.class, options);
+        ApiResource.RequestMethod.POST, url, params, Calculation.class, options);
   }
 
   /** Calculates tax based on input and returns a Tax <code>Calculation</code> object. */
-  public static TaxCalculation create(TaxCalculationCreateParams params) throws StripeException {
+  public static Calculation create(CalculationCreateParams params) throws StripeException {
     return create(params, (RequestOptions) null);
   }
 
   /** Calculates tax based on input and returns a Tax <code>Calculation</code> object. */
-  public static TaxCalculation create(TaxCalculationCreateParams params, RequestOptions options)
+  public static Calculation create(CalculationCreateParams params, RequestOptions options)
       throws StripeException {
     String url = String.format("%s%s", Stripe.getApiBase(), "/v1/tax/calculations");
     return ApiResource.request(
-        ApiResource.RequestMethod.POST, url, params, TaxCalculation.class, options);
+        ApiResource.RequestMethod.POST, url, params, Calculation.class, options);
   }
 
   /** Retrieves the line items of a persisted tax calculation as a collection. */
@@ -140,14 +143,14 @@ public class TaxCalculation extends ApiResource implements HasId {
   }
 
   /** Retrieves the line items of a persisted tax calculation as a collection. */
-  public LineItemCollection listLineItems(TaxCalculationListLineItemsParams params)
+  public LineItemCollection listLineItems(CalculationListLineItemsParams params)
       throws StripeException {
     return listLineItems(params, (RequestOptions) null);
   }
 
   /** Retrieves the line items of a persisted tax calculation as a collection. */
   public LineItemCollection listLineItems(
-      TaxCalculationListLineItemsParams params, RequestOptions options) throws StripeException {
+      CalculationListLineItemsParams params, RequestOptions options) throws StripeException {
     String url =
         String.format(
             "%s%s",
@@ -179,7 +182,7 @@ public class TaxCalculation extends ApiResource implements HasId {
 
     /** The customer's tax IDs (e.g., EU VAT numbers). */
     @SerializedName("tax_ids")
-    List<TaxCalculation.CustomerDetails.TaxId> taxIds;
+    List<Calculation.CustomerDetails.TaxId> taxIds;
 
     @Getter
     @Setter

@@ -3,6 +3,7 @@ package com.stripe.net;
 import com.google.gson.FieldNamingPolicy;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
+import com.google.gson.ReflectionAccessFilter;
 import com.google.gson.TypeAdapterFactory;
 import com.stripe.Stripe;
 import com.stripe.exception.InvalidRequestException;
@@ -36,7 +37,17 @@ public abstract class ApiResource extends StripeObject {
             .registerTypeAdapter(Event.Data.class, new EventDataDeserializer())
             .registerTypeAdapter(Event.Request.class, new EventRequestDeserializer())
             .registerTypeAdapter(ExpandableField.class, new ExpandableFieldDeserializer())
-            .registerTypeAdapter(StripeRawJsonObject.class, new StripeRawJsonObjectDeserializer());
+            .registerTypeAdapter(StripeRawJsonObject.class, new StripeRawJsonObjectDeserializer())
+            .addReflectionAccessFilter(
+                new ReflectionAccessFilter() {
+                  @Override
+                  public ReflectionAccessFilter.FilterResult check(Class<?> rawClass) {
+                    if (rawClass.getTypeName().startsWith("com.stripe.")) {
+                      return ReflectionAccessFilter.FilterResult.ALLOW;
+                    }
+                    return ReflectionAccessFilter.FilterResult.BLOCK_ALL;
+                  }
+                });
 
     for (TypeAdapterFactory factory : ApiResourceTypeAdapterFactoryProvider.getAll()) {
       builder.registerTypeAdapterFactory(factory);
