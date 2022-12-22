@@ -1,5 +1,12 @@
 # Changelog
 
+## 22.4.0 - 2022-12-22
+* [#1497](https://github.com/stripe/stripe-java/pull/1497) API Updates
+  * Add support for new value `merchant_default` on enums `CashBalanceUpdateParams.settings.reconciliation_mode`, `CustomerCreateParams.cash_balance.settings.reconciliation_mode`, and `CustomerUpdateParams.cash_balance.settings.reconciliation_mode`
+  * Add support for `using_merchant_default` on `CashBalance.settings`
+* [#1496](https://github.com/stripe/stripe-java/pull/1496) Replace ReflectionCheckingTypeAdapterFactory with a ReflectionAccessFilter
+* [#1491](https://github.com/stripe/stripe-java/pull/1491) Don't delombok sources
+
 ## 22.3.0 - 2022-12-08
 * [#1487](https://github.com/stripe/stripe-java/pull/1487) API Updates
   * Change `CustomerListPaymentMethodsParams.type` and `PaymentMethodListParams.type`.
