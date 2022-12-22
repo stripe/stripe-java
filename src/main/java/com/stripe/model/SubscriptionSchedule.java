@@ -91,7 +91,9 @@ public class SubscriptionSchedule extends ApiResource
 
   /**
    * Behavior of the subscription schedule and underlying subscription when it ends. Possible values
-   * are {@code release} and {@code cancel}.
+   * are {@code release} or {@code cancel} with the default being {@code release}. {@code release}
+   * will end the subscription schedule and keep the underlying subscription running.{@code cancel}
+   * will end the subscription schedule and cancel the underlying subscription.
    *
    * <p>One of {@code cancel}, {@code none}, {@code release}, or {@code renew}.
    */
