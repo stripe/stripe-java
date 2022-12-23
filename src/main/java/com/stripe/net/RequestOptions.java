@@ -4,7 +4,6 @@ import com.stripe.Stripe;
 import java.net.PasswordAuthentication;
 import java.net.Proxy;
 import java.util.Map;
-
 import lombok.EqualsAndHashCode;
 
 @EqualsAndHashCode(callSuper = false)
@@ -317,7 +316,6 @@ public class RequestOptions {
       return builder;
     }
 
-
     public RequestOptionsBuilder setBaseUrl(final String baseUrl) {
       this.baseUrl = baseUrl;
       return this;
@@ -351,7 +349,6 @@ public class RequestOptions {
     }
     return normalized;
   }
-
 
   private static String normalizeClientId(String clientId) {
     // null client_ids are considered "valid"
