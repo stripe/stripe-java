@@ -115,7 +115,7 @@ public class Transaction extends ApiResource implements HasId {
   /** Retrieves a list of Transaction objects. */
   public static TransactionCollection list(Map<String, Object> params, RequestOptions options)
       throws StripeException {
-    String url = String.format("%s%s", Stripe.getApiBase(), "/v1/treasury/transactions");
+    String url = ApiResource.fullUrl(Stripe.getApiBase(), options, "/v1/treasury/transactions");
     return ApiResource.requestCollection(url, params, TransactionCollection.class, options);
   }
 
@@ -127,7 +127,7 @@ public class Transaction extends ApiResource implements HasId {
   /** Retrieves a list of Transaction objects. */
   public static TransactionCollection list(TransactionListParams params, RequestOptions options)
       throws StripeException {
-    String url = String.format("%s%s", Stripe.getApiBase(), "/v1/treasury/transactions");
+    String url = ApiResource.fullUrl(Stripe.getApiBase(), options, "/v1/treasury/transactions");
     return ApiResource.requestCollection(url, params, TransactionCollection.class, options);
   }
 
@@ -145,9 +145,9 @@ public class Transaction extends ApiResource implements HasId {
   public static Transaction retrieve(String id, Map<String, Object> params, RequestOptions options)
       throws StripeException {
     String url =
-        String.format(
-            "%s%s",
+        ApiResource.fullUrl(
             Stripe.getApiBase(),
+            options,
             String.format("/v1/treasury/transactions/%s", ApiResource.urlEncodeId(id)));
     return ApiResource.request(
         ApiResource.RequestMethod.GET, url, params, Transaction.class, options);
@@ -157,9 +157,9 @@ public class Transaction extends ApiResource implements HasId {
   public static Transaction retrieve(
       String id, TransactionRetrieveParams params, RequestOptions options) throws StripeException {
     String url =
-        String.format(
-            "%s%s",
+        ApiResource.fullUrl(
             Stripe.getApiBase(),
+            options,
             String.format("/v1/treasury/transactions/%s", ApiResource.urlEncodeId(id)));
     return ApiResource.request(
         ApiResource.RequestMethod.GET, url, params, Transaction.class, options);

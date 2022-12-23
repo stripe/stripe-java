@@ -88,7 +88,7 @@ public class Location extends ApiResource implements HasId, MetadataStore<Locati
    */
   public static Location create(Map<String, Object> params, RequestOptions options)
       throws StripeException {
-    String url = String.format("%s%s", Stripe.getApiBase(), "/v1/terminal/locations");
+    String url = ApiResource.fullUrl(Stripe.getApiBase(), options, "/v1/terminal/locations");
     return ApiResource.request(
         ApiResource.RequestMethod.POST, url, params, Location.class, options);
   }
@@ -109,7 +109,7 @@ public class Location extends ApiResource implements HasId, MetadataStore<Locati
    */
   public static Location create(LocationCreateParams params, RequestOptions options)
       throws StripeException {
-    String url = String.format("%s%s", Stripe.getApiBase(), "/v1/terminal/locations");
+    String url = ApiResource.fullUrl(Stripe.getApiBase(), options, "/v1/terminal/locations");
     return ApiResource.request(
         ApiResource.RequestMethod.POST, url, params, Location.class, options);
   }
@@ -133,9 +133,9 @@ public class Location extends ApiResource implements HasId, MetadataStore<Locati
   public Location delete(Map<String, Object> params, RequestOptions options)
       throws StripeException {
     String url =
-        String.format(
-            "%s%s",
+        ApiResource.fullUrl(
             Stripe.getApiBase(),
+            options,
             String.format("/v1/terminal/locations/%s", ApiResource.urlEncodeId(this.getId())));
     return ApiResource.request(
         ApiResource.RequestMethod.DELETE, url, params, Location.class, options);
@@ -149,7 +149,7 @@ public class Location extends ApiResource implements HasId, MetadataStore<Locati
   /** Returns a list of <code>Location</code> objects. */
   public static LocationCollection list(Map<String, Object> params, RequestOptions options)
       throws StripeException {
-    String url = String.format("%s%s", Stripe.getApiBase(), "/v1/terminal/locations");
+    String url = ApiResource.fullUrl(Stripe.getApiBase(), options, "/v1/terminal/locations");
     return ApiResource.requestCollection(url, params, LocationCollection.class, options);
   }
 
@@ -161,7 +161,7 @@ public class Location extends ApiResource implements HasId, MetadataStore<Locati
   /** Returns a list of <code>Location</code> objects. */
   public static LocationCollection list(LocationListParams params, RequestOptions options)
       throws StripeException {
-    String url = String.format("%s%s", Stripe.getApiBase(), "/v1/terminal/locations");
+    String url = ApiResource.fullUrl(Stripe.getApiBase(), options, "/v1/terminal/locations");
     return ApiResource.requestCollection(url, params, LocationCollection.class, options);
   }
 
@@ -179,9 +179,9 @@ public class Location extends ApiResource implements HasId, MetadataStore<Locati
   public static Location retrieve(
       String location, Map<String, Object> params, RequestOptions options) throws StripeException {
     String url =
-        String.format(
-            "%s%s",
+        ApiResource.fullUrl(
             Stripe.getApiBase(),
+            options,
             String.format("/v1/terminal/locations/%s", ApiResource.urlEncodeId(location)));
     return ApiResource.request(ApiResource.RequestMethod.GET, url, params, Location.class, options);
   }
@@ -191,9 +191,9 @@ public class Location extends ApiResource implements HasId, MetadataStore<Locati
       String location, LocationRetrieveParams params, RequestOptions options)
       throws StripeException {
     String url =
-        String.format(
-            "%s%s",
+        ApiResource.fullUrl(
             Stripe.getApiBase(),
+            options,
             String.format("/v1/terminal/locations/%s", ApiResource.urlEncodeId(location)));
     return ApiResource.request(ApiResource.RequestMethod.GET, url, params, Location.class, options);
   }
@@ -215,9 +215,9 @@ public class Location extends ApiResource implements HasId, MetadataStore<Locati
   public Location update(Map<String, Object> params, RequestOptions options)
       throws StripeException {
     String url =
-        String.format(
-            "%s%s",
+        ApiResource.fullUrl(
             Stripe.getApiBase(),
+            options,
             String.format("/v1/terminal/locations/%s", ApiResource.urlEncodeId(this.getId())));
     return ApiResource.request(
         ApiResource.RequestMethod.POST, url, params, Location.class, options);
@@ -238,9 +238,9 @@ public class Location extends ApiResource implements HasId, MetadataStore<Locati
   public Location update(LocationUpdateParams params, RequestOptions options)
       throws StripeException {
     String url =
-        String.format(
-            "%s%s",
+        ApiResource.fullUrl(
             Stripe.getApiBase(),
+            options,
             String.format("/v1/terminal/locations/%s", ApiResource.urlEncodeId(this.getId())));
     return ApiResource.request(
         ApiResource.RequestMethod.POST, url, params, Location.class, options);

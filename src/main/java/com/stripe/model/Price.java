@@ -215,7 +215,7 @@ public class Price extends ApiResource implements HasId, MetadataStore<Price> {
   /** Creates a new price for an existing product. The price can be recurring or one-time. */
   public static Price create(Map<String, Object> params, RequestOptions options)
       throws StripeException {
-    String url = String.format("%s%s", Stripe.getApiBase(), "/v1/prices");
+    String url = ApiResource.fullUrl(Stripe.getApiBase(), options, "/v1/prices");
     return ApiResource.request(ApiResource.RequestMethod.POST, url, params, Price.class, options);
   }
 
@@ -227,7 +227,7 @@ public class Price extends ApiResource implements HasId, MetadataStore<Price> {
   /** Creates a new price for an existing product. The price can be recurring or one-time. */
   public static Price create(PriceCreateParams params, RequestOptions options)
       throws StripeException {
-    String url = String.format("%s%s", Stripe.getApiBase(), "/v1/prices");
+    String url = ApiResource.fullUrl(Stripe.getApiBase(), options, "/v1/prices");
     return ApiResource.request(ApiResource.RequestMethod.POST, url, params, Price.class, options);
   }
 
@@ -239,7 +239,7 @@ public class Price extends ApiResource implements HasId, MetadataStore<Price> {
   /** Returns a list of your prices. */
   public static PriceCollection list(Map<String, Object> params, RequestOptions options)
       throws StripeException {
-    String url = String.format("%s%s", Stripe.getApiBase(), "/v1/prices");
+    String url = ApiResource.fullUrl(Stripe.getApiBase(), options, "/v1/prices");
     return ApiResource.requestCollection(url, params, PriceCollection.class, options);
   }
 
@@ -251,7 +251,7 @@ public class Price extends ApiResource implements HasId, MetadataStore<Price> {
   /** Returns a list of your prices. */
   public static PriceCollection list(PriceListParams params, RequestOptions options)
       throws StripeException {
-    String url = String.format("%s%s", Stripe.getApiBase(), "/v1/prices");
+    String url = ApiResource.fullUrl(Stripe.getApiBase(), options, "/v1/prices");
     return ApiResource.requestCollection(url, params, PriceCollection.class, options);
   }
 
@@ -269,9 +269,10 @@ public class Price extends ApiResource implements HasId, MetadataStore<Price> {
   public static Price retrieve(String price, Map<String, Object> params, RequestOptions options)
       throws StripeException {
     String url =
-        String.format(
-            "%s%s",
-            Stripe.getApiBase(), String.format("/v1/prices/%s", ApiResource.urlEncodeId(price)));
+        ApiResource.fullUrl(
+            Stripe.getApiBase(),
+            options,
+            String.format("/v1/prices/%s", ApiResource.urlEncodeId(price)));
     return ApiResource.request(ApiResource.RequestMethod.GET, url, params, Price.class, options);
   }
 
@@ -279,9 +280,10 @@ public class Price extends ApiResource implements HasId, MetadataStore<Price> {
   public static Price retrieve(String price, PriceRetrieveParams params, RequestOptions options)
       throws StripeException {
     String url =
-        String.format(
-            "%s%s",
-            Stripe.getApiBase(), String.format("/v1/prices/%s", ApiResource.urlEncodeId(price)));
+        ApiResource.fullUrl(
+            Stripe.getApiBase(),
+            options,
+            String.format("/v1/prices/%s", ApiResource.urlEncodeId(price)));
     return ApiResource.request(ApiResource.RequestMethod.GET, url, params, Price.class, options);
   }
 
@@ -307,7 +309,7 @@ public class Price extends ApiResource implements HasId, MetadataStore<Price> {
    */
   public static PriceSearchResult search(Map<String, Object> params, RequestOptions options)
       throws StripeException {
-    String url = String.format("%s%s", Stripe.getApiBase(), "/v1/prices/search");
+    String url = ApiResource.fullUrl(Stripe.getApiBase(), options, "/v1/prices/search");
     return ApiResource.requestSearchResult(url, params, PriceSearchResult.class, options);
   }
 
@@ -333,7 +335,7 @@ public class Price extends ApiResource implements HasId, MetadataStore<Price> {
    */
   public static PriceSearchResult search(PriceSearchParams params, RequestOptions options)
       throws StripeException {
-    String url = String.format("%s%s", Stripe.getApiBase(), "/v1/prices/search");
+    String url = ApiResource.fullUrl(Stripe.getApiBase(), options, "/v1/prices/search");
     return ApiResource.requestSearchResult(url, params, PriceSearchResult.class, options);
   }
 
@@ -353,9 +355,9 @@ public class Price extends ApiResource implements HasId, MetadataStore<Price> {
   @Override
   public Price update(Map<String, Object> params, RequestOptions options) throws StripeException {
     String url =
-        String.format(
-            "%s%s",
+        ApiResource.fullUrl(
             Stripe.getApiBase(),
+            options,
             String.format("/v1/prices/%s", ApiResource.urlEncodeId(this.getId())));
     return ApiResource.request(ApiResource.RequestMethod.POST, url, params, Price.class, options);
   }
@@ -374,9 +376,9 @@ public class Price extends ApiResource implements HasId, MetadataStore<Price> {
    */
   public Price update(PriceUpdateParams params, RequestOptions options) throws StripeException {
     String url =
-        String.format(
-            "%s%s",
+        ApiResource.fullUrl(
             Stripe.getApiBase(),
+            options,
             String.format("/v1/prices/%s", ApiResource.urlEncodeId(this.getId())));
     return ApiResource.request(ApiResource.RequestMethod.POST, url, params, Price.class, options);
   }

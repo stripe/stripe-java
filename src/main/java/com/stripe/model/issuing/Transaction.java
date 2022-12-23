@@ -269,7 +269,7 @@ public class Transaction extends ApiResource
    */
   public static TransactionCollection list(Map<String, Object> params, RequestOptions options)
       throws StripeException {
-    String url = String.format("%s%s", Stripe.getApiBase(), "/v1/issuing/transactions");
+    String url = ApiResource.fullUrl(Stripe.getApiBase(), options, "/v1/issuing/transactions");
     return ApiResource.requestCollection(url, params, TransactionCollection.class, options);
   }
 
@@ -287,7 +287,7 @@ public class Transaction extends ApiResource
    */
   public static TransactionCollection list(TransactionListParams params, RequestOptions options)
       throws StripeException {
-    String url = String.format("%s%s", Stripe.getApiBase(), "/v1/issuing/transactions");
+    String url = ApiResource.fullUrl(Stripe.getApiBase(), options, "/v1/issuing/transactions");
     return ApiResource.requestCollection(url, params, TransactionCollection.class, options);
   }
 
@@ -307,9 +307,9 @@ public class Transaction extends ApiResource
       String transaction, Map<String, Object> params, RequestOptions options)
       throws StripeException {
     String url =
-        String.format(
-            "%s%s",
+        ApiResource.fullUrl(
             Stripe.getApiBase(),
+            options,
             String.format("/v1/issuing/transactions/%s", ApiResource.urlEncodeId(transaction)));
     return ApiResource.request(
         ApiResource.RequestMethod.GET, url, params, Transaction.class, options);
@@ -320,9 +320,9 @@ public class Transaction extends ApiResource
       String transaction, TransactionRetrieveParams params, RequestOptions options)
       throws StripeException {
     String url =
-        String.format(
-            "%s%s",
+        ApiResource.fullUrl(
             Stripe.getApiBase(),
+            options,
             String.format("/v1/issuing/transactions/%s", ApiResource.urlEncodeId(transaction)));
     return ApiResource.request(
         ApiResource.RequestMethod.GET, url, params, Transaction.class, options);
@@ -345,9 +345,9 @@ public class Transaction extends ApiResource
   public Transaction update(Map<String, Object> params, RequestOptions options)
       throws StripeException {
     String url =
-        String.format(
-            "%s%s",
+        ApiResource.fullUrl(
             Stripe.getApiBase(),
+            options,
             String.format("/v1/issuing/transactions/%s", ApiResource.urlEncodeId(this.getId())));
     return ApiResource.request(
         ApiResource.RequestMethod.POST, url, params, Transaction.class, options);
@@ -368,9 +368,9 @@ public class Transaction extends ApiResource
   public Transaction update(TransactionUpdateParams params, RequestOptions options)
       throws StripeException {
     String url =
-        String.format(
-            "%s%s",
+        ApiResource.fullUrl(
             Stripe.getApiBase(),
+            options,
             String.format("/v1/issuing/transactions/%s", ApiResource.urlEncodeId(this.getId())));
     return ApiResource.request(
         ApiResource.RequestMethod.POST, url, params, Transaction.class, options);

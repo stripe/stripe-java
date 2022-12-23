@@ -158,9 +158,9 @@ public class Review extends ApiResource implements HasId {
   /** Approves a <code>Review</code> object, closing it and removing it from the list of reviews. */
   public Review approve(Map<String, Object> params, RequestOptions options) throws StripeException {
     String url =
-        String.format(
-            "%s%s",
+        ApiResource.fullUrl(
             Stripe.getApiBase(),
+            options,
             String.format("/v1/reviews/%s/approve", ApiResource.urlEncodeId(this.getId())));
     return ApiResource.request(ApiResource.RequestMethod.POST, url, params, Review.class, options);
   }
@@ -173,9 +173,9 @@ public class Review extends ApiResource implements HasId {
   /** Approves a <code>Review</code> object, closing it and removing it from the list of reviews. */
   public Review approve(ReviewApproveParams params, RequestOptions options) throws StripeException {
     String url =
-        String.format(
-            "%s%s",
+        ApiResource.fullUrl(
             Stripe.getApiBase(),
+            options,
             String.format("/v1/reviews/%s/approve", ApiResource.urlEncodeId(this.getId())));
     return ApiResource.request(ApiResource.RequestMethod.POST, url, params, Review.class, options);
   }
@@ -196,7 +196,7 @@ public class Review extends ApiResource implements HasId {
    */
   public static ReviewCollection list(Map<String, Object> params, RequestOptions options)
       throws StripeException {
-    String url = String.format("%s%s", Stripe.getApiBase(), "/v1/reviews");
+    String url = ApiResource.fullUrl(Stripe.getApiBase(), options, "/v1/reviews");
     return ApiResource.requestCollection(url, params, ReviewCollection.class, options);
   }
 
@@ -216,7 +216,7 @@ public class Review extends ApiResource implements HasId {
    */
   public static ReviewCollection list(ReviewListParams params, RequestOptions options)
       throws StripeException {
-    String url = String.format("%s%s", Stripe.getApiBase(), "/v1/reviews");
+    String url = ApiResource.fullUrl(Stripe.getApiBase(), options, "/v1/reviews");
     return ApiResource.requestCollection(url, params, ReviewCollection.class, options);
   }
 
@@ -234,9 +234,10 @@ public class Review extends ApiResource implements HasId {
   public static Review retrieve(String review, Map<String, Object> params, RequestOptions options)
       throws StripeException {
     String url =
-        String.format(
-            "%s%s",
-            Stripe.getApiBase(), String.format("/v1/reviews/%s", ApiResource.urlEncodeId(review)));
+        ApiResource.fullUrl(
+            Stripe.getApiBase(),
+            options,
+            String.format("/v1/reviews/%s", ApiResource.urlEncodeId(review)));
     return ApiResource.request(ApiResource.RequestMethod.GET, url, params, Review.class, options);
   }
 
@@ -244,9 +245,10 @@ public class Review extends ApiResource implements HasId {
   public static Review retrieve(String review, ReviewRetrieveParams params, RequestOptions options)
       throws StripeException {
     String url =
-        String.format(
-            "%s%s",
-            Stripe.getApiBase(), String.format("/v1/reviews/%s", ApiResource.urlEncodeId(review)));
+        ApiResource.fullUrl(
+            Stripe.getApiBase(),
+            options,
+            String.format("/v1/reviews/%s", ApiResource.urlEncodeId(review)));
     return ApiResource.request(ApiResource.RequestMethod.GET, url, params, Review.class, options);
   }
 

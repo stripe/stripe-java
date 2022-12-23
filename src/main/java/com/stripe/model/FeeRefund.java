@@ -133,9 +133,9 @@ public class FeeRefund extends ApiResource
   public FeeRefund update(Map<String, Object> params, RequestOptions options)
       throws StripeException {
     String url =
-        String.format(
-            "%s%s",
+        ApiResource.fullUrl(
             Stripe.getApiBase(),
+            options,
             String.format(
                 "/v1/application_fees/%s/refunds/%s",
                 ApiResource.urlEncodeId(this.getFee()), ApiResource.urlEncodeId(this.getId())));
@@ -162,9 +162,9 @@ public class FeeRefund extends ApiResource
   public FeeRefund update(FeeRefundUpdateParams params, RequestOptions options)
       throws StripeException {
     String url =
-        String.format(
-            "%s%s",
+        ApiResource.fullUrl(
             Stripe.getApiBase(),
+            options,
             String.format(
                 "/v1/application_fees/%s/refunds/%s",
                 ApiResource.urlEncodeId(this.getFee()), ApiResource.urlEncodeId(this.getId())));

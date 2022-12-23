@@ -18,7 +18,7 @@ public class TaxIdCollection extends StripeCollection<TaxId> {
 
   /** Creates a new <code>TaxID</code> object for a customer. */
   public TaxId create(Map<String, Object> params, RequestOptions options) throws StripeException {
-    String url = String.format("%s%s", Stripe.getApiBase(), this.getUrl());
+    String url = ApiResource.fullUrl(Stripe.getApiBase(), options, this.getUrl());
     return ApiResource.request(ApiResource.RequestMethod.POST, url, params, TaxId.class, options);
   }
 
@@ -30,7 +30,7 @@ public class TaxIdCollection extends StripeCollection<TaxId> {
   /** Creates a new <code>TaxID</code> object for a customer. */
   public TaxId create(TaxIdCollectionCreateParams params, RequestOptions options)
       throws StripeException {
-    String url = String.format("%s%s", Stripe.getApiBase(), this.getUrl());
+    String url = ApiResource.fullUrl(Stripe.getApiBase(), options, this.getUrl());
     return ApiResource.request(ApiResource.RequestMethod.POST, url, params, TaxId.class, options);
   }
 
@@ -42,7 +42,7 @@ public class TaxIdCollection extends StripeCollection<TaxId> {
   /** Returns a list of tax IDs for a customer. */
   public TaxIdCollection list(Map<String, Object> params, RequestOptions options)
       throws StripeException {
-    String url = String.format("%s%s", Stripe.getApiBase(), this.getUrl());
+    String url = ApiResource.fullUrl(Stripe.getApiBase(), options, this.getUrl());
     return ApiResource.requestCollection(url, params, TaxIdCollection.class, options);
   }
 
@@ -54,7 +54,7 @@ public class TaxIdCollection extends StripeCollection<TaxId> {
   /** Returns a list of tax IDs for a customer. */
   public TaxIdCollection list(TaxIdCollectionListParams params, RequestOptions options)
       throws StripeException {
-    String url = String.format("%s%s", Stripe.getApiBase(), this.getUrl());
+    String url = ApiResource.fullUrl(Stripe.getApiBase(), options, this.getUrl());
     return ApiResource.requestCollection(url, params, TaxIdCollection.class, options);
   }
 
@@ -72,9 +72,9 @@ public class TaxIdCollection extends StripeCollection<TaxId> {
   public TaxId retrieve(String id, Map<String, Object> params, RequestOptions options)
       throws StripeException {
     String url =
-        String.format(
-            "%s%s",
+        ApiResource.fullUrl(
             Stripe.getApiBase(),
+            options,
             String.format("%s/%s", this.getUrl(), ApiResource.urlEncodeId(id)));
     return ApiResource.request(ApiResource.RequestMethod.GET, url, params, TaxId.class, options);
   }
@@ -83,9 +83,9 @@ public class TaxIdCollection extends StripeCollection<TaxId> {
   public TaxId retrieve(String id, TaxIdCollectionRetrieveParams params, RequestOptions options)
       throws StripeException {
     String url =
-        String.format(
-            "%s%s",
+        ApiResource.fullUrl(
             Stripe.getApiBase(),
+            options,
             String.format("%s/%s", this.getUrl(), ApiResource.urlEncodeId(id)));
     return ApiResource.request(ApiResource.RequestMethod.GET, url, params, TaxId.class, options);
   }

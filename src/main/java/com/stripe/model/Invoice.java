@@ -877,7 +877,7 @@ public class Invoice extends ApiResource implements HasId, MetadataStore<Invoice
    */
   public static Invoice create(Map<String, Object> params, RequestOptions options)
       throws StripeException {
-    String url = String.format("%s%s", Stripe.getApiBase(), "/v1/invoices");
+    String url = ApiResource.fullUrl(Stripe.getApiBase(), options, "/v1/invoices");
     return ApiResource.request(ApiResource.RequestMethod.POST, url, params, Invoice.class, options);
   }
 
@@ -899,7 +899,7 @@ public class Invoice extends ApiResource implements HasId, MetadataStore<Invoice
    */
   public static Invoice create(InvoiceCreateParams params, RequestOptions options)
       throws StripeException {
-    String url = String.format("%s%s", Stripe.getApiBase(), "/v1/invoices");
+    String url = ApiResource.fullUrl(Stripe.getApiBase(), options, "/v1/invoices");
     return ApiResource.request(ApiResource.RequestMethod.POST, url, params, Invoice.class, options);
   }
 
@@ -941,9 +941,9 @@ public class Invoice extends ApiResource implements HasId, MetadataStore<Invoice
    */
   public Invoice delete(Map<String, Object> params, RequestOptions options) throws StripeException {
     String url =
-        String.format(
-            "%s%s",
+        ApiResource.fullUrl(
             Stripe.getApiBase(),
+            options,
             String.format("/v1/invoices/%s", ApiResource.urlEncodeId(this.getId())));
     return ApiResource.request(
         ApiResource.RequestMethod.DELETE, url, params, Invoice.class, options);
@@ -980,9 +980,9 @@ public class Invoice extends ApiResource implements HasId, MetadataStore<Invoice
   public Invoice finalizeInvoice(Map<String, Object> params, RequestOptions options)
       throws StripeException {
     String url =
-        String.format(
-            "%s%s",
+        ApiResource.fullUrl(
             Stripe.getApiBase(),
+            options,
             String.format("/v1/invoices/%s/finalize", ApiResource.urlEncodeId(this.getId())));
     return ApiResource.request(ApiResource.RequestMethod.POST, url, params, Invoice.class, options);
   }
@@ -1002,9 +1002,9 @@ public class Invoice extends ApiResource implements HasId, MetadataStore<Invoice
   public Invoice finalizeInvoice(InvoiceFinalizeInvoiceParams params, RequestOptions options)
       throws StripeException {
     String url =
-        String.format(
-            "%s%s",
+        ApiResource.fullUrl(
             Stripe.getApiBase(),
+            options,
             String.format("/v1/invoices/%s/finalize", ApiResource.urlEncodeId(this.getId())));
     return ApiResource.request(ApiResource.RequestMethod.POST, url, params, Invoice.class, options);
   }
@@ -1023,7 +1023,7 @@ public class Invoice extends ApiResource implements HasId, MetadataStore<Invoice
    */
   public static InvoiceCollection list(Map<String, Object> params, RequestOptions options)
       throws StripeException {
-    String url = String.format("%s%s", Stripe.getApiBase(), "/v1/invoices");
+    String url = ApiResource.fullUrl(Stripe.getApiBase(), options, "/v1/invoices");
     return ApiResource.requestCollection(url, params, InvoiceCollection.class, options);
   }
 
@@ -1041,7 +1041,7 @@ public class Invoice extends ApiResource implements HasId, MetadataStore<Invoice
    */
   public static InvoiceCollection list(InvoiceListParams params, RequestOptions options)
       throws StripeException {
-    String url = String.format("%s%s", Stripe.getApiBase(), "/v1/invoices");
+    String url = ApiResource.fullUrl(Stripe.getApiBase(), options, "/v1/invoices");
     return ApiResource.requestCollection(url, params, InvoiceCollection.class, options);
   }
 
@@ -1076,9 +1076,9 @@ public class Invoice extends ApiResource implements HasId, MetadataStore<Invoice
   public Invoice markUncollectible(Map<String, Object> params, RequestOptions options)
       throws StripeException {
     String url =
-        String.format(
-            "%s%s",
+        ApiResource.fullUrl(
             Stripe.getApiBase(),
+            options,
             String.format(
                 "/v1/invoices/%s/mark_uncollectible", ApiResource.urlEncodeId(this.getId())));
     return ApiResource.request(ApiResource.RequestMethod.POST, url, params, Invoice.class, options);
@@ -1099,9 +1099,9 @@ public class Invoice extends ApiResource implements HasId, MetadataStore<Invoice
   public Invoice markUncollectible(InvoiceMarkUncollectibleParams params, RequestOptions options)
       throws StripeException {
     String url =
-        String.format(
-            "%s%s",
+        ApiResource.fullUrl(
             Stripe.getApiBase(),
+            options,
             String.format(
                 "/v1/invoices/%s/mark_uncollectible", ApiResource.urlEncodeId(this.getId())));
     return ApiResource.request(ApiResource.RequestMethod.POST, url, params, Invoice.class, options);
@@ -1149,9 +1149,9 @@ public class Invoice extends ApiResource implements HasId, MetadataStore<Invoice
    */
   public Invoice pay(Map<String, Object> params, RequestOptions options) throws StripeException {
     String url =
-        String.format(
-            "%s%s",
+        ApiResource.fullUrl(
             Stripe.getApiBase(),
+            options,
             String.format("/v1/invoices/%s/pay", ApiResource.urlEncodeId(this.getId())));
     return ApiResource.request(ApiResource.RequestMethod.POST, url, params, Invoice.class, options);
   }
@@ -1176,9 +1176,9 @@ public class Invoice extends ApiResource implements HasId, MetadataStore<Invoice
    */
   public Invoice pay(InvoicePayParams params, RequestOptions options) throws StripeException {
     String url =
-        String.format(
-            "%s%s",
+        ApiResource.fullUrl(
             Stripe.getApiBase(),
+            options,
             String.format("/v1/invoices/%s/pay", ApiResource.urlEncodeId(this.getId())));
     return ApiResource.request(ApiResource.RequestMethod.POST, url, params, Invoice.class, options);
   }
@@ -1197,9 +1197,9 @@ public class Invoice extends ApiResource implements HasId, MetadataStore<Invoice
   public static Invoice retrieve(String invoice, Map<String, Object> params, RequestOptions options)
       throws StripeException {
     String url =
-        String.format(
-            "%s%s",
+        ApiResource.fullUrl(
             Stripe.getApiBase(),
+            options,
             String.format("/v1/invoices/%s", ApiResource.urlEncodeId(invoice)));
     return ApiResource.request(ApiResource.RequestMethod.GET, url, params, Invoice.class, options);
   }
@@ -1208,9 +1208,9 @@ public class Invoice extends ApiResource implements HasId, MetadataStore<Invoice
   public static Invoice retrieve(
       String invoice, InvoiceRetrieveParams params, RequestOptions options) throws StripeException {
     String url =
-        String.format(
-            "%s%s",
+        ApiResource.fullUrl(
             Stripe.getApiBase(),
+            options,
             String.format("/v1/invoices/%s", ApiResource.urlEncodeId(invoice)));
     return ApiResource.request(ApiResource.RequestMethod.GET, url, params, Invoice.class, options);
   }
@@ -1237,7 +1237,7 @@ public class Invoice extends ApiResource implements HasId, MetadataStore<Invoice
    */
   public static InvoiceSearchResult search(Map<String, Object> params, RequestOptions options)
       throws StripeException {
-    String url = String.format("%s%s", Stripe.getApiBase(), "/v1/invoices/search");
+    String url = ApiResource.fullUrl(Stripe.getApiBase(), options, "/v1/invoices/search");
     return ApiResource.requestSearchResult(url, params, InvoiceSearchResult.class, options);
   }
 
@@ -1263,7 +1263,7 @@ public class Invoice extends ApiResource implements HasId, MetadataStore<Invoice
    */
   public static InvoiceSearchResult search(InvoiceSearchParams params, RequestOptions options)
       throws StripeException {
-    String url = String.format("%s%s", Stripe.getApiBase(), "/v1/invoices/search");
+    String url = ApiResource.fullUrl(Stripe.getApiBase(), options, "/v1/invoices/search");
     return ApiResource.requestSearchResult(url, params, InvoiceSearchResult.class, options);
   }
 
@@ -1322,9 +1322,9 @@ public class Invoice extends ApiResource implements HasId, MetadataStore<Invoice
   public Invoice sendInvoice(Map<String, Object> params, RequestOptions options)
       throws StripeException {
     String url =
-        String.format(
-            "%s%s",
+        ApiResource.fullUrl(
             Stripe.getApiBase(),
+            options,
             String.format("/v1/invoices/%s/send", ApiResource.urlEncodeId(this.getId())));
     return ApiResource.request(ApiResource.RequestMethod.POST, url, params, Invoice.class, options);
   }
@@ -1356,9 +1356,9 @@ public class Invoice extends ApiResource implements HasId, MetadataStore<Invoice
   public Invoice sendInvoice(InvoiceSendInvoiceParams params, RequestOptions options)
       throws StripeException {
     String url =
-        String.format(
-            "%s%s",
+        ApiResource.fullUrl(
             Stripe.getApiBase(),
+            options,
             String.format("/v1/invoices/%s/send", ApiResource.urlEncodeId(this.getId())));
     return ApiResource.request(ApiResource.RequestMethod.POST, url, params, Invoice.class, options);
   }
@@ -1433,7 +1433,7 @@ public class Invoice extends ApiResource implements HasId, MetadataStore<Invoice
    */
   public static Invoice upcoming(Map<String, Object> params, RequestOptions options)
       throws StripeException {
-    String url = String.format("%s%s", Stripe.getApiBase(), "/v1/invoices/upcoming");
+    String url = ApiResource.fullUrl(Stripe.getApiBase(), options, "/v1/invoices/upcoming");
     return ApiResource.request(ApiResource.RequestMethod.GET, url, params, Invoice.class, options);
   }
 
@@ -1483,7 +1483,7 @@ public class Invoice extends ApiResource implements HasId, MetadataStore<Invoice
    */
   public static Invoice upcoming(InvoiceUpcomingParams params, RequestOptions options)
       throws StripeException {
-    String url = String.format("%s%s", Stripe.getApiBase(), "/v1/invoices/upcoming");
+    String url = ApiResource.fullUrl(Stripe.getApiBase(), options, "/v1/invoices/upcoming");
     return ApiResource.request(ApiResource.RequestMethod.GET, url, params, Invoice.class, options);
   }
 
@@ -1513,7 +1513,7 @@ public class Invoice extends ApiResource implements HasId, MetadataStore<Invoice
    */
   public static InvoiceLineItemCollection upcomingLines(
       Map<String, Object> params, RequestOptions options) throws StripeException {
-    String url = String.format("%s%s", Stripe.getApiBase(), "/v1/invoices/upcoming/lines");
+    String url = ApiResource.fullUrl(Stripe.getApiBase(), options, "/v1/invoices/upcoming/lines");
     return ApiResource.requestCollection(url, params, InvoiceLineItemCollection.class, options);
   }
 
@@ -1534,7 +1534,7 @@ public class Invoice extends ApiResource implements HasId, MetadataStore<Invoice
    */
   public static InvoiceLineItemCollection upcomingLines(
       InvoiceUpcomingLinesParams params, RequestOptions options) throws StripeException {
-    String url = String.format("%s%s", Stripe.getApiBase(), "/v1/invoices/upcoming/lines");
+    String url = ApiResource.fullUrl(Stripe.getApiBase(), options, "/v1/invoices/upcoming/lines");
     return ApiResource.requestCollection(url, params, InvoiceLineItemCollection.class, options);
   }
 
@@ -1566,9 +1566,9 @@ public class Invoice extends ApiResource implements HasId, MetadataStore<Invoice
   @Override
   public Invoice update(Map<String, Object> params, RequestOptions options) throws StripeException {
     String url =
-        String.format(
-            "%s%s",
+        ApiResource.fullUrl(
             Stripe.getApiBase(),
+            options,
             String.format("/v1/invoices/%s", ApiResource.urlEncodeId(this.getId())));
     return ApiResource.request(ApiResource.RequestMethod.POST, url, params, Invoice.class, options);
   }
@@ -1599,9 +1599,9 @@ public class Invoice extends ApiResource implements HasId, MetadataStore<Invoice
    */
   public Invoice update(InvoiceUpdateParams params, RequestOptions options) throws StripeException {
     String url =
-        String.format(
-            "%s%s",
+        ApiResource.fullUrl(
             Stripe.getApiBase(),
+            options,
             String.format("/v1/invoices/%s", ApiResource.urlEncodeId(this.getId())));
     return ApiResource.request(ApiResource.RequestMethod.POST, url, params, Invoice.class, options);
   }
@@ -1641,9 +1641,9 @@ public class Invoice extends ApiResource implements HasId, MetadataStore<Invoice
   public Invoice voidInvoice(Map<String, Object> params, RequestOptions options)
       throws StripeException {
     String url =
-        String.format(
-            "%s%s",
+        ApiResource.fullUrl(
             Stripe.getApiBase(),
+            options,
             String.format("/v1/invoices/%s/void", ApiResource.urlEncodeId(this.getId())));
     return ApiResource.request(ApiResource.RequestMethod.POST, url, params, Invoice.class, options);
   }
@@ -1665,9 +1665,9 @@ public class Invoice extends ApiResource implements HasId, MetadataStore<Invoice
   public Invoice voidInvoice(InvoiceVoidInvoiceParams params, RequestOptions options)
       throws StripeException {
     String url =
-        String.format(
-            "%s%s",
+        ApiResource.fullUrl(
             Stripe.getApiBase(),
+            options,
             String.format("/v1/invoices/%s/void", ApiResource.urlEncodeId(this.getId())));
     return ApiResource.request(ApiResource.RequestMethod.POST, url, params, Invoice.class, options);
   }

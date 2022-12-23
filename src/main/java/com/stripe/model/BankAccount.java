@@ -203,9 +203,9 @@ public class BankAccount extends ApiResource
   public BankAccount verify(Map<String, Object> params, RequestOptions options)
       throws StripeException {
     String url =
-        String.format(
-            "%s%s",
+        ApiResource.fullUrl(
             Stripe.getApiBase(),
+            options,
             String.format(
                 "/v1/customers/%s/sources/%s/verify",
                 ApiResource.urlEncodeId(this.getCustomer()),
@@ -223,9 +223,9 @@ public class BankAccount extends ApiResource
   public BankAccount verify(BankAccountVerifyParams params, RequestOptions options)
       throws StripeException {
     String url =
-        String.format(
-            "%s%s",
+        ApiResource.fullUrl(
             Stripe.getApiBase(),
+            options,
             String.format(
                 "/v1/customers/%s/sources/%s/verify",
                 ApiResource.urlEncodeId(this.getCustomer()),

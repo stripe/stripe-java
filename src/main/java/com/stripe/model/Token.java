@@ -117,7 +117,7 @@ public class Token extends ApiResource implements HasId {
    */
   public static Token create(Map<String, Object> params, RequestOptions options)
       throws StripeException {
-    String url = String.format("%s%s", Stripe.getApiBase(), "/v1/tokens");
+    String url = ApiResource.fullUrl(Stripe.getApiBase(), options, "/v1/tokens");
     return ApiResource.request(ApiResource.RequestMethod.POST, url, params, Token.class, options);
   }
 
@@ -137,7 +137,7 @@ public class Token extends ApiResource implements HasId {
    */
   public static Token create(TokenCreateParams params, RequestOptions options)
       throws StripeException {
-    String url = String.format("%s%s", Stripe.getApiBase(), "/v1/tokens");
+    String url = ApiResource.fullUrl(Stripe.getApiBase(), options, "/v1/tokens");
     return ApiResource.request(ApiResource.RequestMethod.POST, url, params, Token.class, options);
   }
 
@@ -155,9 +155,10 @@ public class Token extends ApiResource implements HasId {
   public static Token retrieve(String token, Map<String, Object> params, RequestOptions options)
       throws StripeException {
     String url =
-        String.format(
-            "%s%s",
-            Stripe.getApiBase(), String.format("/v1/tokens/%s", ApiResource.urlEncodeId(token)));
+        ApiResource.fullUrl(
+            Stripe.getApiBase(),
+            options,
+            String.format("/v1/tokens/%s", ApiResource.urlEncodeId(token)));
     return ApiResource.request(ApiResource.RequestMethod.GET, url, params, Token.class, options);
   }
 
@@ -165,9 +166,10 @@ public class Token extends ApiResource implements HasId {
   public static Token retrieve(String token, TokenRetrieveParams params, RequestOptions options)
       throws StripeException {
     String url =
-        String.format(
-            "%s%s",
-            Stripe.getApiBase(), String.format("/v1/tokens/%s", ApiResource.urlEncodeId(token)));
+        ApiResource.fullUrl(
+            Stripe.getApiBase(),
+            options,
+            String.format("/v1/tokens/%s", ApiResource.urlEncodeId(token)));
     return ApiResource.request(ApiResource.RequestMethod.GET, url, params, Token.class, options);
   }
 }

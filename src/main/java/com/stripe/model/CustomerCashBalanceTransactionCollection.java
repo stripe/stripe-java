@@ -26,7 +26,7 @@ public class CustomerCashBalanceTransactionCollection
    */
   public CustomerCashBalanceTransactionCollection list(
       Map<String, Object> params, RequestOptions options) throws StripeException {
-    String url = String.format("%s%s", Stripe.getApiBase(), this.getUrl());
+    String url = ApiResource.fullUrl(Stripe.getApiBase(), options, this.getUrl());
     return ApiResource.requestCollection(
         url, params, CustomerCashBalanceTransactionCollection.class, options);
   }
@@ -47,7 +47,7 @@ public class CustomerCashBalanceTransactionCollection
   public CustomerCashBalanceTransactionCollection list(
       CustomerCashBalanceTransactionCollectionListParams params, RequestOptions options)
       throws StripeException {
-    String url = String.format("%s%s", Stripe.getApiBase(), this.getUrl());
+    String url = ApiResource.fullUrl(Stripe.getApiBase(), options, this.getUrl());
     return ApiResource.requestCollection(
         url, params, CustomerCashBalanceTransactionCollection.class, options);
   }
@@ -76,9 +76,9 @@ public class CustomerCashBalanceTransactionCollection
   public CustomerCashBalanceTransaction retrieve(
       String id, Map<String, Object> params, RequestOptions options) throws StripeException {
     String url =
-        String.format(
-            "%s%s",
+        ApiResource.fullUrl(
             Stripe.getApiBase(),
+            options,
             String.format("%s/%s", this.getUrl(), ApiResource.urlEncodeId(id)));
     return ApiResource.request(
         ApiResource.RequestMethod.GET, url, params, CustomerCashBalanceTransaction.class, options);
@@ -94,9 +94,9 @@ public class CustomerCashBalanceTransactionCollection
       RequestOptions options)
       throws StripeException {
     String url =
-        String.format(
-            "%s%s",
+        ApiResource.fullUrl(
             Stripe.getApiBase(),
+            options,
             String.format("%s/%s", this.getUrl(), ApiResource.urlEncodeId(id)));
     return ApiResource.request(
         ApiResource.RequestMethod.GET, url, params, CustomerCashBalanceTransaction.class, options);

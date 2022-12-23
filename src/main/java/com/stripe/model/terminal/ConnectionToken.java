@@ -59,7 +59,8 @@ public class ConnectionToken extends ApiResource {
    */
   public static ConnectionToken create(Map<String, Object> params, RequestOptions options)
       throws StripeException {
-    String url = String.format("%s%s", Stripe.getApiBase(), "/v1/terminal/connection_tokens");
+    String url =
+        ApiResource.fullUrl(Stripe.getApiBase(), options, "/v1/terminal/connection_tokens");
     return ApiResource.request(
         ApiResource.RequestMethod.POST, url, params, ConnectionToken.class, options);
   }
@@ -80,7 +81,8 @@ public class ConnectionToken extends ApiResource {
    */
   public static ConnectionToken create(ConnectionTokenCreateParams params, RequestOptions options)
       throws StripeException {
-    String url = String.format("%s%s", Stripe.getApiBase(), "/v1/terminal/connection_tokens");
+    String url =
+        ApiResource.fullUrl(Stripe.getApiBase(), options, "/v1/terminal/connection_tokens");
     return ApiResource.request(
         ApiResource.RequestMethod.POST, url, params, ConnectionToken.class, options);
   }

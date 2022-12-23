@@ -80,9 +80,9 @@ public class EphemeralKey extends ApiResource implements HasId {
   public EphemeralKey delete(Map<String, Object> params, RequestOptions options)
       throws StripeException {
     String url =
-        String.format(
-            "%s%s",
+        ApiResource.fullUrl(
             Stripe.getApiBase(),
+            options,
             String.format("/v1/ephemeral_keys/%s", ApiResource.urlEncodeId(this.getId())));
     return ApiResource.request(
         ApiResource.RequestMethod.DELETE, url, params, EphemeralKey.class, options);
@@ -97,9 +97,9 @@ public class EphemeralKey extends ApiResource implements HasId {
   public EphemeralKey delete(EphemeralKeyDeleteParams params, RequestOptions options)
       throws StripeException {
     String url =
-        String.format(
-            "%s%s",
+        ApiResource.fullUrl(
             Stripe.getApiBase(),
+            options,
             String.format("/v1/ephemeral_keys/%s", ApiResource.urlEncodeId(this.getId())));
     return ApiResource.request(
         ApiResource.RequestMethod.DELETE, url, params, EphemeralKey.class, options);

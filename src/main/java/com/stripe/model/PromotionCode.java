@@ -137,7 +137,7 @@ public class PromotionCode extends ApiResource implements HasId, MetadataStore<P
    */
   public static PromotionCode create(Map<String, Object> params, RequestOptions options)
       throws StripeException {
-    String url = String.format("%s%s", Stripe.getApiBase(), "/v1/promotion_codes");
+    String url = ApiResource.fullUrl(Stripe.getApiBase(), options, "/v1/promotion_codes");
     return ApiResource.request(
         ApiResource.RequestMethod.POST, url, params, PromotionCode.class, options);
   }
@@ -156,7 +156,7 @@ public class PromotionCode extends ApiResource implements HasId, MetadataStore<P
    */
   public static PromotionCode create(PromotionCodeCreateParams params, RequestOptions options)
       throws StripeException {
-    String url = String.format("%s%s", Stripe.getApiBase(), "/v1/promotion_codes");
+    String url = ApiResource.fullUrl(Stripe.getApiBase(), options, "/v1/promotion_codes");
     return ApiResource.request(
         ApiResource.RequestMethod.POST, url, params, PromotionCode.class, options);
   }
@@ -169,7 +169,7 @@ public class PromotionCode extends ApiResource implements HasId, MetadataStore<P
   /** Returns a list of your promotion codes. */
   public static PromotionCodeCollection list(Map<String, Object> params, RequestOptions options)
       throws StripeException {
-    String url = String.format("%s%s", Stripe.getApiBase(), "/v1/promotion_codes");
+    String url = ApiResource.fullUrl(Stripe.getApiBase(), options, "/v1/promotion_codes");
     return ApiResource.requestCollection(url, params, PromotionCodeCollection.class, options);
   }
 
@@ -182,7 +182,7 @@ public class PromotionCode extends ApiResource implements HasId, MetadataStore<P
   /** Returns a list of your promotion codes. */
   public static PromotionCodeCollection list(PromotionCodeListParams params, RequestOptions options)
       throws StripeException {
-    String url = String.format("%s%s", Stripe.getApiBase(), "/v1/promotion_codes");
+    String url = ApiResource.fullUrl(Stripe.getApiBase(), options, "/v1/promotion_codes");
     return ApiResource.requestCollection(url, params, PromotionCodeCollection.class, options);
   }
 
@@ -217,9 +217,9 @@ public class PromotionCode extends ApiResource implements HasId, MetadataStore<P
       String promotionCode, Map<String, Object> params, RequestOptions options)
       throws StripeException {
     String url =
-        String.format(
-            "%s%s",
+        ApiResource.fullUrl(
             Stripe.getApiBase(),
+            options,
             String.format("/v1/promotion_codes/%s", ApiResource.urlEncodeId(promotionCode)));
     return ApiResource.request(
         ApiResource.RequestMethod.GET, url, params, PromotionCode.class, options);
@@ -235,9 +235,9 @@ public class PromotionCode extends ApiResource implements HasId, MetadataStore<P
       String promotionCode, PromotionCodeRetrieveParams params, RequestOptions options)
       throws StripeException {
     String url =
-        String.format(
-            "%s%s",
+        ApiResource.fullUrl(
             Stripe.getApiBase(),
+            options,
             String.format("/v1/promotion_codes/%s", ApiResource.urlEncodeId(promotionCode)));
     return ApiResource.request(
         ApiResource.RequestMethod.GET, url, params, PromotionCode.class, options);
@@ -260,9 +260,9 @@ public class PromotionCode extends ApiResource implements HasId, MetadataStore<P
   public PromotionCode update(Map<String, Object> params, RequestOptions options)
       throws StripeException {
     String url =
-        String.format(
-            "%s%s",
+        ApiResource.fullUrl(
             Stripe.getApiBase(),
+            options,
             String.format("/v1/promotion_codes/%s", ApiResource.urlEncodeId(this.getId())));
     return ApiResource.request(
         ApiResource.RequestMethod.POST, url, params, PromotionCode.class, options);
@@ -283,9 +283,9 @@ public class PromotionCode extends ApiResource implements HasId, MetadataStore<P
   public PromotionCode update(PromotionCodeUpdateParams params, RequestOptions options)
       throws StripeException {
     String url =
-        String.format(
-            "%s%s",
+        ApiResource.fullUrl(
             Stripe.getApiBase(),
+            options,
             String.format("/v1/promotion_codes/%s", ApiResource.urlEncodeId(this.getId())));
     return ApiResource.request(
         ApiResource.RequestMethod.POST, url, params, PromotionCode.class, options);

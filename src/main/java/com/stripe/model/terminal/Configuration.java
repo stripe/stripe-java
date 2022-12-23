@@ -70,7 +70,7 @@ public class Configuration extends ApiResource implements HasId {
   /** Creates a new <code>Configuration</code> object. */
   public static Configuration create(Map<String, Object> params, RequestOptions options)
       throws StripeException {
-    String url = String.format("%s%s", Stripe.getApiBase(), "/v1/terminal/configurations");
+    String url = ApiResource.fullUrl(Stripe.getApiBase(), options, "/v1/terminal/configurations");
     return ApiResource.request(
         ApiResource.RequestMethod.POST, url, params, Configuration.class, options);
   }
@@ -83,7 +83,7 @@ public class Configuration extends ApiResource implements HasId {
   /** Creates a new <code>Configuration</code> object. */
   public static Configuration create(ConfigurationCreateParams params, RequestOptions options)
       throws StripeException {
-    String url = String.format("%s%s", Stripe.getApiBase(), "/v1/terminal/configurations");
+    String url = ApiResource.fullUrl(Stripe.getApiBase(), options, "/v1/terminal/configurations");
     return ApiResource.request(
         ApiResource.RequestMethod.POST, url, params, Configuration.class, options);
   }
@@ -107,9 +107,9 @@ public class Configuration extends ApiResource implements HasId {
   public Configuration delete(Map<String, Object> params, RequestOptions options)
       throws StripeException {
     String url =
-        String.format(
-            "%s%s",
+        ApiResource.fullUrl(
             Stripe.getApiBase(),
+            options,
             String.format("/v1/terminal/configurations/%s", ApiResource.urlEncodeId(this.getId())));
     return ApiResource.request(
         ApiResource.RequestMethod.DELETE, url, params, Configuration.class, options);
@@ -123,7 +123,7 @@ public class Configuration extends ApiResource implements HasId {
   /** Returns a list of <code>Configuration</code> objects. */
   public static ConfigurationCollection list(Map<String, Object> params, RequestOptions options)
       throws StripeException {
-    String url = String.format("%s%s", Stripe.getApiBase(), "/v1/terminal/configurations");
+    String url = ApiResource.fullUrl(Stripe.getApiBase(), options, "/v1/terminal/configurations");
     return ApiResource.requestCollection(url, params, ConfigurationCollection.class, options);
   }
 
@@ -136,7 +136,7 @@ public class Configuration extends ApiResource implements HasId {
   /** Returns a list of <code>Configuration</code> objects. */
   public static ConfigurationCollection list(ConfigurationListParams params, RequestOptions options)
       throws StripeException {
-    String url = String.format("%s%s", Stripe.getApiBase(), "/v1/terminal/configurations");
+    String url = ApiResource.fullUrl(Stripe.getApiBase(), options, "/v1/terminal/configurations");
     return ApiResource.requestCollection(url, params, ConfigurationCollection.class, options);
   }
 
@@ -156,9 +156,9 @@ public class Configuration extends ApiResource implements HasId {
       String configuration, Map<String, Object> params, RequestOptions options)
       throws StripeException {
     String url =
-        String.format(
-            "%s%s",
+        ApiResource.fullUrl(
             Stripe.getApiBase(),
+            options,
             String.format(
                 "/v1/terminal/configurations/%s", ApiResource.urlEncodeId(configuration)));
     return ApiResource.request(
@@ -170,9 +170,9 @@ public class Configuration extends ApiResource implements HasId {
       String configuration, ConfigurationRetrieveParams params, RequestOptions options)
       throws StripeException {
     String url =
-        String.format(
-            "%s%s",
+        ApiResource.fullUrl(
             Stripe.getApiBase(),
+            options,
             String.format(
                 "/v1/terminal/configurations/%s", ApiResource.urlEncodeId(configuration)));
     return ApiResource.request(
@@ -188,9 +188,9 @@ public class Configuration extends ApiResource implements HasId {
   public Configuration update(Map<String, Object> params, RequestOptions options)
       throws StripeException {
     String url =
-        String.format(
-            "%s%s",
+        ApiResource.fullUrl(
             Stripe.getApiBase(),
+            options,
             String.format("/v1/terminal/configurations/%s", ApiResource.urlEncodeId(this.getId())));
     return ApiResource.request(
         ApiResource.RequestMethod.POST, url, params, Configuration.class, options);
@@ -205,9 +205,9 @@ public class Configuration extends ApiResource implements HasId {
   public Configuration update(ConfigurationUpdateParams params, RequestOptions options)
       throws StripeException {
     String url =
-        String.format(
-            "%s%s",
+        ApiResource.fullUrl(
             Stripe.getApiBase(),
+            options,
             String.format("/v1/terminal/configurations/%s", ApiResource.urlEncodeId(this.getId())));
     return ApiResource.request(
         ApiResource.RequestMethod.POST, url, params, Configuration.class, options);

@@ -215,9 +215,9 @@ public class Dispute extends ApiResource
    */
   public Dispute close(Map<String, Object> params, RequestOptions options) throws StripeException {
     String url =
-        String.format(
-            "%s%s",
+        ApiResource.fullUrl(
             Stripe.getApiBase(),
+            options,
             String.format("/v1/disputes/%s/close", ApiResource.urlEncodeId(this.getId())));
     return ApiResource.request(ApiResource.RequestMethod.POST, url, params, Dispute.class, options);
   }
@@ -242,9 +242,9 @@ public class Dispute extends ApiResource
    */
   public Dispute close(DisputeCloseParams params, RequestOptions options) throws StripeException {
     String url =
-        String.format(
-            "%s%s",
+        ApiResource.fullUrl(
             Stripe.getApiBase(),
+            options,
             String.format("/v1/disputes/%s/close", ApiResource.urlEncodeId(this.getId())));
     return ApiResource.request(ApiResource.RequestMethod.POST, url, params, Dispute.class, options);
   }
@@ -257,7 +257,7 @@ public class Dispute extends ApiResource
   /** Returns a list of your disputes. */
   public static DisputeCollection list(Map<String, Object> params, RequestOptions options)
       throws StripeException {
-    String url = String.format("%s%s", Stripe.getApiBase(), "/v1/disputes");
+    String url = ApiResource.fullUrl(Stripe.getApiBase(), options, "/v1/disputes");
     return ApiResource.requestCollection(url, params, DisputeCollection.class, options);
   }
 
@@ -269,7 +269,7 @@ public class Dispute extends ApiResource
   /** Returns a list of your disputes. */
   public static DisputeCollection list(DisputeListParams params, RequestOptions options)
       throws StripeException {
-    String url = String.format("%s%s", Stripe.getApiBase(), "/v1/disputes");
+    String url = ApiResource.fullUrl(Stripe.getApiBase(), options, "/v1/disputes");
     return ApiResource.requestCollection(url, params, DisputeCollection.class, options);
   }
 
@@ -287,9 +287,9 @@ public class Dispute extends ApiResource
   public static Dispute retrieve(String dispute, Map<String, Object> params, RequestOptions options)
       throws StripeException {
     String url =
-        String.format(
-            "%s%s",
+        ApiResource.fullUrl(
             Stripe.getApiBase(),
+            options,
             String.format("/v1/disputes/%s", ApiResource.urlEncodeId(dispute)));
     return ApiResource.request(ApiResource.RequestMethod.GET, url, params, Dispute.class, options);
   }
@@ -298,9 +298,9 @@ public class Dispute extends ApiResource
   public static Dispute retrieve(
       String dispute, DisputeRetrieveParams params, RequestOptions options) throws StripeException {
     String url =
-        String.format(
-            "%s%s",
+        ApiResource.fullUrl(
             Stripe.getApiBase(),
+            options,
             String.format("/v1/disputes/%s", ApiResource.urlEncodeId(dispute)));
     return ApiResource.request(ApiResource.RequestMethod.GET, url, params, Dispute.class, options);
   }
@@ -333,9 +333,9 @@ public class Dispute extends ApiResource
   @Override
   public Dispute update(Map<String, Object> params, RequestOptions options) throws StripeException {
     String url =
-        String.format(
-            "%s%s",
+        ApiResource.fullUrl(
             Stripe.getApiBase(),
+            options,
             String.format("/v1/disputes/%s", ApiResource.urlEncodeId(this.getId())));
     return ApiResource.request(ApiResource.RequestMethod.POST, url, params, Dispute.class, options);
   }
@@ -366,9 +366,9 @@ public class Dispute extends ApiResource
    */
   public Dispute update(DisputeUpdateParams params, RequestOptions options) throws StripeException {
     String url =
-        String.format(
-            "%s%s",
+        ApiResource.fullUrl(
             Stripe.getApiBase(),
+            options,
             String.format("/v1/disputes/%s", ApiResource.urlEncodeId(this.getId())));
     return ApiResource.request(ApiResource.RequestMethod.POST, url, params, Dispute.class, options);
   }

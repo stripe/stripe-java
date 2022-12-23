@@ -148,7 +148,7 @@ public class ReceivedDebit extends ApiResource implements HasId {
   /** Returns a list of ReceivedDebits. */
   public static ReceivedDebitCollection list(Map<String, Object> params, RequestOptions options)
       throws StripeException {
-    String url = String.format("%s%s", Stripe.getApiBase(), "/v1/treasury/received_debits");
+    String url = ApiResource.fullUrl(Stripe.getApiBase(), options, "/v1/treasury/received_debits");
     return ApiResource.requestCollection(url, params, ReceivedDebitCollection.class, options);
   }
 
@@ -161,7 +161,7 @@ public class ReceivedDebit extends ApiResource implements HasId {
   /** Returns a list of ReceivedDebits. */
   public static ReceivedDebitCollection list(ReceivedDebitListParams params, RequestOptions options)
       throws StripeException {
-    String url = String.format("%s%s", Stripe.getApiBase(), "/v1/treasury/received_debits");
+    String url = ApiResource.fullUrl(Stripe.getApiBase(), options, "/v1/treasury/received_debits");
     return ApiResource.requestCollection(url, params, ReceivedDebitCollection.class, options);
   }
 
@@ -188,9 +188,9 @@ public class ReceivedDebit extends ApiResource implements HasId {
   public static ReceivedDebit retrieve(
       String id, Map<String, Object> params, RequestOptions options) throws StripeException {
     String url =
-        String.format(
-            "%s%s",
+        ApiResource.fullUrl(
             Stripe.getApiBase(),
+            options,
             String.format("/v1/treasury/received_debits/%s", ApiResource.urlEncodeId(id)));
     return ApiResource.request(
         ApiResource.RequestMethod.GET, url, params, ReceivedDebit.class, options);
@@ -204,9 +204,9 @@ public class ReceivedDebit extends ApiResource implements HasId {
       String id, ReceivedDebitRetrieveParams params, RequestOptions options)
       throws StripeException {
     String url =
-        String.format(
-            "%s%s",
+        ApiResource.fullUrl(
             Stripe.getApiBase(),
+            options,
             String.format("/v1/treasury/received_debits/%s", ApiResource.urlEncodeId(id)));
     return ApiResource.request(
         ApiResource.RequestMethod.GET, url, params, ReceivedDebit.class, options);
@@ -366,7 +366,8 @@ public class ReceivedDebit extends ApiResource implements HasId {
     public static ReceivedDebit create(Map<String, Object> params, RequestOptions options)
         throws StripeException {
       String url =
-          String.format("%s%s", Stripe.getApiBase(), "/v1/test_helpers/treasury/received_debits");
+          ApiResource.fullUrl(
+              Stripe.getApiBase(), options, "/v1/test_helpers/treasury/received_debits");
       return ApiResource.request(
           ApiResource.RequestMethod.POST, url, params, ReceivedDebit.class, options);
     }
@@ -386,7 +387,8 @@ public class ReceivedDebit extends ApiResource implements HasId {
     public static ReceivedDebit create(ReceivedDebitCreateParams params, RequestOptions options)
         throws StripeException {
       String url =
-          String.format("%s%s", Stripe.getApiBase(), "/v1/test_helpers/treasury/received_debits");
+          ApiResource.fullUrl(
+              Stripe.getApiBase(), options, "/v1/test_helpers/treasury/received_debits");
       return ApiResource.request(
           ApiResource.RequestMethod.POST, url, params, ReceivedDebit.class, options);
     }
