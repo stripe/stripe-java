@@ -92,7 +92,7 @@ public class File extends ApiResource implements HasId {
    */
   public static File create(FileCreateParams params, RequestOptions options)
       throws StripeException {
-    checkNullTypedParams(classUrl(File.class, Stripe.getUploadBase()), params);
+    checkNullTypedParams(String.format("%s/v1/files", Stripe.getUploadBase()), params);
     return create(params.toMap(), options);
   }
 
@@ -105,7 +105,7 @@ public class File extends ApiResource implements HasId {
       throws StripeException {
     return request(
         RequestMethod.POST,
-        classUrl(File.class, Stripe.getUploadBase()),
+        String.format("%s/v1/files", Stripe.getUploadBase()),
         params,
         File.class,
         options);
@@ -125,7 +125,8 @@ public class File extends ApiResource implements HasId {
    */
   public static FileCollection list(Map<String, Object> params, RequestOptions options)
       throws StripeException {
-    return requestCollection(classUrl(File.class), params, FileCollection.class, options);
+    return requestCollection(
+        String.format("%s/v1/files", Stripe.getApiBase()), params, FileCollection.class, options);
   }
 
   /**
@@ -142,7 +143,8 @@ public class File extends ApiResource implements HasId {
    */
   public static FileCollection list(FileListParams params, RequestOptions options)
       throws StripeException {
-    return requestCollection(classUrl(File.class), params, FileCollection.class, options);
+    return requestCollection(
+        String.format("%s/v1/files", Stripe.getApiBase()), params, FileCollection.class, options);
   }
 
   /**
@@ -167,6 +169,11 @@ public class File extends ApiResource implements HasId {
    */
   public static File retrieve(String id, Map<String, Object> params, RequestOptions options)
       throws StripeException {
-    return request(RequestMethod.GET, instanceUrl(File.class, id), params, File.class, options);
+    return request(
+        RequestMethod.GET,
+        String.format("%s/v1/files/%s", Stripe.getApiBase(), id),
+        params,
+        File.class,
+        options);
   }
 }
