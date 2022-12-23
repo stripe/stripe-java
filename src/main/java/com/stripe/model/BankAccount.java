@@ -271,18 +271,18 @@ public class BankAccount extends ApiResource
     String url;
     if (this.getAccount() != null) {
       url =
-          String.format(
-              "%s%s",
+          ApiResource.fullUrl(
               Stripe.getApiBase(),
+              options,
               String.format(
                   "/v1/accounts/%s/external_accounts/%s",
                   ApiResource.urlEncodeId(this.getAccount()),
                   ApiResource.urlEncodeId(this.getId())));
     } else if (this.getCustomer() != null) {
       url =
-          String.format(
-              "%s%s",
+          ApiResource.fullUrl(
               Stripe.getApiBase(),
+              options,
               String.format(
                   "/v1/customers/%s/sources/%s",
                   ApiResource.urlEncodeId(this.getCustomer()),
@@ -334,9 +334,9 @@ public class BankAccount extends ApiResource
     String url;
     if (this.getAccount() != null) {
       url =
-          String.format(
-              "%s%s",
+          ApiResource.fullUrl(
               Stripe.getApiBase(),
+              options,
               String.format(
                   "/v1/accounts/%s/external_accounts/%s",
                   ApiResource.urlEncodeId(this.getAccount()),
@@ -388,9 +388,9 @@ public class BankAccount extends ApiResource
     String url;
     if (this.getCustomer() != null) {
       url =
-          String.format(
-              "%s%s",
+          ApiResource.fullUrl(
               Stripe.getApiBase(),
+              options,
               String.format(
                   "/v1/customers/%s/sources/%s",
                   ApiResource.urlEncodeId(this.getCustomer()),
@@ -448,18 +448,18 @@ public class BankAccount extends ApiResource
     String url;
     if (this.getAccount() != null) {
       url =
-          String.format(
-              "%s%s",
+          ApiResource.fullUrl(
               Stripe.getApiBase(),
+              options,
               String.format(
                   "/v1/accounts/%s/external_accounts/%s",
                   ApiResource.urlEncodeId(this.getAccount()),
                   ApiResource.urlEncodeId(this.getId())));
     } else if (this.getCustomer() != null) {
       url =
-          String.format(
-              "%s%s",
+          ApiResource.fullUrl(
               Stripe.getApiBase(),
+              options,
               String.format(
                   "/v1/customers/%s/sources/%s",
                   ApiResource.urlEncodeId(this.getCustomer()),

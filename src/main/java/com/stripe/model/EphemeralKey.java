@@ -134,7 +134,7 @@ public class EphemeralKey extends ApiResource implements HasId {
     // request body.
     final Map<String, Object> overriddenParams = new java.util.HashMap<String, Object>(params);
     overriddenParams.remove("stripe-version");
-    String url = String.format("%s%s", Stripe.getApiBase(), "/v1/ephemeral_keys");
+    String url = ApiResource.fullUrl(Stripe.getApiBase(), overriddenOptions, "/v1/ephemeral_keys");
     return ApiResource.request(
         ApiResource.RequestMethod.POST,
         url,
