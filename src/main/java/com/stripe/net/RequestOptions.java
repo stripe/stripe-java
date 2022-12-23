@@ -4,7 +4,6 @@ import com.stripe.Stripe;
 import java.net.PasswordAuthentication;
 import java.net.Proxy;
 import java.util.Map;
-import java.util.Optional;
 
 import lombok.EqualsAndHashCode;
 
@@ -14,6 +13,7 @@ public class RequestOptions {
   private final String clientId;
   private final String idempotencyKey;
   private final String stripeAccount;
+  private final String baseUrl;
   /** Stripe version always set at {@link Stripe#API_VERSION}. */
   private final String stripeVersion = Stripe.API_VERSION;
   /**
@@ -29,11 +29,6 @@ public class RequestOptions {
   private final Proxy connectionProxy;
   private final PasswordAuthentication proxyCredential;
 
-  /**
-   * Stripe API Base override when made on behalf of others.
-   */
-  private final String apiBase;
-
   public static RequestOptions getDefault() {
     return new RequestOptions(
         Stripe.apiKey,
@@ -41,12 +36,12 @@ public class RequestOptions {
         null,
         null,
         null,
+        null,
         Stripe.getConnectTimeout(),
         Stripe.getReadTimeout(),
         Stripe.getMaxNetworkRetries(),
         Stripe.getConnectionProxy(),
-        Stripe.getProxyCredential(),
-        Stripe.getApiBase());
+        Stripe.getProxyCredential());
   }
 
   private RequestOptions(
@@ -55,23 +50,23 @@ public class RequestOptions {
       String idempotencyKey,
       String stripeAccount,
       String stripeVersionOverride,
+      String baseUrl,
       int connectTimeout,
       int readTimeout,
       int maxNetworkRetries,
       Proxy connectionProxy,
-      PasswordAuthentication proxyCredential,
-      String apiBase) {
+      PasswordAuthentication proxyCredential) {
     this.apiKey = apiKey;
     this.clientId = clientId;
     this.idempotencyKey = idempotencyKey;
     this.stripeAccount = stripeAccount;
     this.stripeVersionOverride = stripeVersionOverride;
+    this.baseUrl = baseUrl;
     this.connectTimeout = connectTimeout;
     this.readTimeout = readTimeout;
     this.maxNetworkRetries = maxNetworkRetries;
     this.connectionProxy = connectionProxy;
     this.proxyCredential = proxyCredential;
-    this.apiBase = apiBase;
   }
 
   public String getApiKey() {
@@ -118,8 +113,8 @@ public class RequestOptions {
     return proxyCredential;
   }
 
-  public String getApiBase() {
-    return apiBase;
+  public String getBaseUrl() {
+    return baseUrl;
   }
 
   public static RequestOptionsBuilder builder() {
@@ -169,7 +164,7 @@ public class RequestOptions {
     private int maxNetworkRetries;
     private Proxy connectionProxy;
     private PasswordAuthentication proxyCredential;
-    private String apiBase;
+    private String baseUrl;
 
     /**
      * Constructs a request options builder with the global parameters (API key and client ID) as
@@ -183,7 +178,7 @@ public class RequestOptions {
       this.maxNetworkRetries = Stripe.getMaxNetworkRetries();
       this.connectionProxy = Stripe.getConnectionProxy();
       this.proxyCredential = Stripe.getProxyCredential();
-      this.apiBase = Stripe.getApiBase();
+      this.baseUrl = Stripe.getApiBase();
     }
 
     public String getApiKey() {
@@ -323,8 +318,8 @@ public class RequestOptions {
     }
 
 
-    public RequestOptionsBuilder setApiBase(final String overriddenApiBase) {
-      this.apiBase = normalizeApiBase(overriddenApiBase);
+    public RequestOptionsBuilder setBaseUrl(final String baseUrl) {
+      this.baseUrl = baseUrl;
       return this;
     }
 
@@ -336,12 +331,12 @@ public class RequestOptions {
           normalizeIdempotencyKey(this.idempotencyKey),
           normalizeStripeAccount(this.stripeAccount),
           normalizeStripeVersion(this.stripeVersionOverride),
+          normalizeBaseUrl(this.baseUrl),
           connectTimeout,
           readTimeout,
           maxNetworkRetries,
           connectionProxy,
-          proxyCredential,
-          apiBase);
+          proxyCredential);
     }
   }
 
@@ -357,14 +352,6 @@ public class RequestOptions {
     return normalized;
   }
 
-
-  private static String normalizeApiBase(String apiBase) {
-
-    return Optional.ofNullable(apiBase)
-      .map(String::trim)
-      .orElseGet(()-> Stripe.getApiBase());
-
-  }
 
   private static String normalizeClientId(String clientId) {
     // null client_ids are considered "valid"
@@ -386,6 +373,19 @@ public class RequestOptions {
     String normalized = stripeVersion.trim();
     if (normalized.isEmpty()) {
       throw new InvalidRequestOptionsException("Empty Stripe version specified!");
+    }
+    return normalized;
+  }
+
+  private static String normalizeBaseUrl(String baseUrl) {
+    // null baseUrl is valid, and will fall back to e.g. Stripe.apiBase or Stripe.connectBase
+    // (depending on the method)
+    if (baseUrl == null) {
+      return null;
+    }
+    String normalized = baseUrl.trim();
+    if (normalized.isEmpty()) {
+      throw new InvalidRequestOptionsException("Empty baseUrl specified!");
     }
     return normalized;
   }

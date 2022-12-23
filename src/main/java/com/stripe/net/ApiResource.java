@@ -55,6 +55,14 @@ public abstract class ApiResource extends StripeObject {
     return builder.create();
   }
 
+  public static String fullUrl(String defaultBaseUrl, RequestOptions options, String relativeUrl) {
+    String baseUrl = defaultBaseUrl;
+    if (options != null && options.getBaseUrl() != null) {
+      baseUrl = options.getBaseUrl();
+    }
+    return String.format("%s%s", baseUrl, relativeUrl);
+  }
+
   @Deprecated
   private static String className(Class<?> clazz) {
     // Convert CamelCase to snake_case
