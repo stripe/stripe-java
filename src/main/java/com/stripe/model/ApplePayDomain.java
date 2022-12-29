@@ -57,7 +57,7 @@ public class ApplePayDomain extends ApiResource implements HasId {
   /** Create an apple pay domain. */
   public static ApplePayDomain create(Map<String, Object> params, RequestOptions options)
       throws StripeException {
-    String url = String.format("%s%s", Stripe.getApiBase(), "/v1/apple_pay/domains");
+    String url = ApiResource.fullUrl(Stripe.getApiBase(), options, "/v1/apple_pay/domains");
     return ApiResource.request(
         ApiResource.RequestMethod.POST, url, params, ApplePayDomain.class, options);
   }
@@ -70,7 +70,7 @@ public class ApplePayDomain extends ApiResource implements HasId {
   /** Create an apple pay domain. */
   public static ApplePayDomain create(ApplePayDomainCreateParams params, RequestOptions options)
       throws StripeException {
-    String url = String.format("%s%s", Stripe.getApiBase(), "/v1/apple_pay/domains");
+    String url = ApiResource.fullUrl(Stripe.getApiBase(), options, "/v1/apple_pay/domains");
     return ApiResource.request(
         ApiResource.RequestMethod.POST, url, params, ApplePayDomain.class, options);
   }
@@ -94,9 +94,9 @@ public class ApplePayDomain extends ApiResource implements HasId {
   public ApplePayDomain delete(Map<String, Object> params, RequestOptions options)
       throws StripeException {
     String url =
-        String.format(
-            "%s%s",
+        ApiResource.fullUrl(
             Stripe.getApiBase(),
+            options,
             String.format("/v1/apple_pay/domains/%s", ApiResource.urlEncodeId(this.getId())));
     return ApiResource.request(
         ApiResource.RequestMethod.DELETE, url, params, ApplePayDomain.class, options);
@@ -110,7 +110,7 @@ public class ApplePayDomain extends ApiResource implements HasId {
   /** List apple pay domains. */
   public static ApplePayDomainCollection list(Map<String, Object> params, RequestOptions options)
       throws StripeException {
-    String url = String.format("%s%s", Stripe.getApiBase(), "/v1/apple_pay/domains");
+    String url = ApiResource.fullUrl(Stripe.getApiBase(), options, "/v1/apple_pay/domains");
     return ApiResource.requestCollection(url, params, ApplePayDomainCollection.class, options);
   }
 
@@ -123,7 +123,7 @@ public class ApplePayDomain extends ApiResource implements HasId {
   /** List apple pay domains. */
   public static ApplePayDomainCollection list(
       ApplePayDomainListParams params, RequestOptions options) throws StripeException {
-    String url = String.format("%s%s", Stripe.getApiBase(), "/v1/apple_pay/domains");
+    String url = ApiResource.fullUrl(Stripe.getApiBase(), options, "/v1/apple_pay/domains");
     return ApiResource.requestCollection(url, params, ApplePayDomainCollection.class, options);
   }
 
@@ -142,9 +142,9 @@ public class ApplePayDomain extends ApiResource implements HasId {
   public static ApplePayDomain retrieve(
       String domain, Map<String, Object> params, RequestOptions options) throws StripeException {
     String url =
-        String.format(
-            "%s%s",
+        ApiResource.fullUrl(
             Stripe.getApiBase(),
+            options,
             String.format("/v1/apple_pay/domains/%s", ApiResource.urlEncodeId(domain)));
     return ApiResource.request(
         ApiResource.RequestMethod.GET, url, params, ApplePayDomain.class, options);
@@ -155,9 +155,9 @@ public class ApplePayDomain extends ApiResource implements HasId {
       String domain, ApplePayDomainRetrieveParams params, RequestOptions options)
       throws StripeException {
     String url =
-        String.format(
-            "%s%s",
+        ApiResource.fullUrl(
             Stripe.getApiBase(),
+            options,
             String.format("/v1/apple_pay/domains/%s", ApiResource.urlEncodeId(domain)));
     return ApiResource.request(
         ApiResource.RequestMethod.GET, url, params, ApplePayDomain.class, options);

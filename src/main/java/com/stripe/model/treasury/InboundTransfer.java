@@ -182,9 +182,9 @@ public class InboundTransfer extends ApiResource implements HasId {
   public InboundTransfer cancel(Map<String, Object> params, RequestOptions options)
       throws StripeException {
     String url =
-        String.format(
-            "%s%s",
+        ApiResource.fullUrl(
             Stripe.getApiBase(),
+            options,
             String.format(
                 "/v1/treasury/inbound_transfers/%s/cancel", ApiResource.urlEncodeId(this.getId())));
     return ApiResource.request(
@@ -200,9 +200,9 @@ public class InboundTransfer extends ApiResource implements HasId {
   public InboundTransfer cancel(InboundTransferCancelParams params, RequestOptions options)
       throws StripeException {
     String url =
-        String.format(
-            "%s%s",
+        ApiResource.fullUrl(
             Stripe.getApiBase(),
+            options,
             String.format(
                 "/v1/treasury/inbound_transfers/%s/cancel", ApiResource.urlEncodeId(this.getId())));
     return ApiResource.request(
@@ -217,7 +217,8 @@ public class InboundTransfer extends ApiResource implements HasId {
   /** Creates an InboundTransfer. */
   public static InboundTransfer create(Map<String, Object> params, RequestOptions options)
       throws StripeException {
-    String url = String.format("%s%s", Stripe.getApiBase(), "/v1/treasury/inbound_transfers");
+    String url =
+        ApiResource.fullUrl(Stripe.getApiBase(), options, "/v1/treasury/inbound_transfers");
     return ApiResource.request(
         ApiResource.RequestMethod.POST, url, params, InboundTransfer.class, options);
   }
@@ -230,7 +231,8 @@ public class InboundTransfer extends ApiResource implements HasId {
   /** Creates an InboundTransfer. */
   public static InboundTransfer create(InboundTransferCreateParams params, RequestOptions options)
       throws StripeException {
-    String url = String.format("%s%s", Stripe.getApiBase(), "/v1/treasury/inbound_transfers");
+    String url =
+        ApiResource.fullUrl(Stripe.getApiBase(), options, "/v1/treasury/inbound_transfers");
     return ApiResource.request(
         ApiResource.RequestMethod.POST, url, params, InboundTransfer.class, options);
   }
@@ -243,7 +245,8 @@ public class InboundTransfer extends ApiResource implements HasId {
   /** Returns a list of InboundTransfers sent from the specified FinancialAccount. */
   public static InboundTransferCollection list(Map<String, Object> params, RequestOptions options)
       throws StripeException {
-    String url = String.format("%s%s", Stripe.getApiBase(), "/v1/treasury/inbound_transfers");
+    String url =
+        ApiResource.fullUrl(Stripe.getApiBase(), options, "/v1/treasury/inbound_transfers");
     return ApiResource.requestCollection(url, params, InboundTransferCollection.class, options);
   }
 
@@ -256,7 +259,8 @@ public class InboundTransfer extends ApiResource implements HasId {
   /** Returns a list of InboundTransfers sent from the specified FinancialAccount. */
   public static InboundTransferCollection list(
       InboundTransferListParams params, RequestOptions options) throws StripeException {
-    String url = String.format("%s%s", Stripe.getApiBase(), "/v1/treasury/inbound_transfers");
+    String url =
+        ApiResource.fullUrl(Stripe.getApiBase(), options, "/v1/treasury/inbound_transfers");
     return ApiResource.requestCollection(url, params, InboundTransferCollection.class, options);
   }
 
@@ -274,9 +278,9 @@ public class InboundTransfer extends ApiResource implements HasId {
   public static InboundTransfer retrieve(
       String id, Map<String, Object> params, RequestOptions options) throws StripeException {
     String url =
-        String.format(
-            "%s%s",
+        ApiResource.fullUrl(
             Stripe.getApiBase(),
+            options,
             String.format("/v1/treasury/inbound_transfers/%s", ApiResource.urlEncodeId(id)));
     return ApiResource.request(
         ApiResource.RequestMethod.GET, url, params, InboundTransfer.class, options);
@@ -287,9 +291,9 @@ public class InboundTransfer extends ApiResource implements HasId {
       String id, InboundTransferRetrieveParams params, RequestOptions options)
       throws StripeException {
     String url =
-        String.format(
-            "%s%s",
+        ApiResource.fullUrl(
             Stripe.getApiBase(),
+            options,
             String.format("/v1/treasury/inbound_transfers/%s", ApiResource.urlEncodeId(id)));
     return ApiResource.request(
         ApiResource.RequestMethod.GET, url, params, InboundTransfer.class, options);
@@ -466,9 +470,9 @@ public class InboundTransfer extends ApiResource implements HasId {
     public InboundTransfer succeed(Map<String, Object> params, RequestOptions options)
         throws StripeException {
       String url =
-          String.format(
-              "%s%s",
+          ApiResource.fullUrl(
               Stripe.getApiBase(),
+              options,
               String.format(
                   "/v1/test_helpers/treasury/inbound_transfers/%s/succeed",
                   ApiResource.urlEncodeId(this.resource.getId())));
@@ -491,9 +495,9 @@ public class InboundTransfer extends ApiResource implements HasId {
     public InboundTransfer succeed(InboundTransferSucceedParams params, RequestOptions options)
         throws StripeException {
       String url =
-          String.format(
-              "%s%s",
+          ApiResource.fullUrl(
               Stripe.getApiBase(),
+              options,
               String.format(
                   "/v1/test_helpers/treasury/inbound_transfers/%s/succeed",
                   ApiResource.urlEncodeId(this.resource.getId())));
@@ -532,9 +536,9 @@ public class InboundTransfer extends ApiResource implements HasId {
     public InboundTransfer fail(Map<String, Object> params, RequestOptions options)
         throws StripeException {
       String url =
-          String.format(
-              "%s%s",
+          ApiResource.fullUrl(
               Stripe.getApiBase(),
+              options,
               String.format(
                   "/v1/test_helpers/treasury/inbound_transfers/%s/fail",
                   ApiResource.urlEncodeId(this.resource.getId())));
@@ -557,9 +561,9 @@ public class InboundTransfer extends ApiResource implements HasId {
     public InboundTransfer fail(InboundTransferFailParams params, RequestOptions options)
         throws StripeException {
       String url =
-          String.format(
-              "%s%s",
+          ApiResource.fullUrl(
               Stripe.getApiBase(),
+              options,
               String.format(
                   "/v1/test_helpers/treasury/inbound_transfers/%s/fail",
                   ApiResource.urlEncodeId(this.resource.getId())));
@@ -599,9 +603,9 @@ public class InboundTransfer extends ApiResource implements HasId {
     public InboundTransfer returnInboundTransfer(Map<String, Object> params, RequestOptions options)
         throws StripeException {
       String url =
-          String.format(
-              "%s%s",
+          ApiResource.fullUrl(
               Stripe.getApiBase(),
+              options,
               String.format(
                   "/v1/test_helpers/treasury/inbound_transfers/%s/return",
                   ApiResource.urlEncodeId(this.resource.getId())));
@@ -626,9 +630,9 @@ public class InboundTransfer extends ApiResource implements HasId {
         InboundTransferReturnInboundTransferParams params, RequestOptions options)
         throws StripeException {
       String url =
-          String.format(
-              "%s%s",
+          ApiResource.fullUrl(
               Stripe.getApiBase(),
+              options,
               String.format(
                   "/v1/test_helpers/treasury/inbound_transfers/%s/return",
                   ApiResource.urlEncodeId(this.resource.getId())));

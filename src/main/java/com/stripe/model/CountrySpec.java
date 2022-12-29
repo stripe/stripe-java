@@ -77,7 +77,7 @@ public class CountrySpec extends ApiResource implements HasId {
   /** Lists all Country Spec objects available in the API. */
   public static CountrySpecCollection list(Map<String, Object> params, RequestOptions options)
       throws StripeException {
-    String url = String.format("%s%s", Stripe.getApiBase(), "/v1/country_specs");
+    String url = ApiResource.fullUrl(Stripe.getApiBase(), options, "/v1/country_specs");
     return ApiResource.requestCollection(url, params, CountrySpecCollection.class, options);
   }
 
@@ -89,7 +89,7 @@ public class CountrySpec extends ApiResource implements HasId {
   /** Lists all Country Spec objects available in the API. */
   public static CountrySpecCollection list(CountrySpecListParams params, RequestOptions options)
       throws StripeException {
-    String url = String.format("%s%s", Stripe.getApiBase(), "/v1/country_specs");
+    String url = ApiResource.fullUrl(Stripe.getApiBase(), options, "/v1/country_specs");
     return ApiResource.requestCollection(url, params, CountrySpecCollection.class, options);
   }
 
@@ -108,9 +108,9 @@ public class CountrySpec extends ApiResource implements HasId {
   public static CountrySpec retrieve(
       String country, Map<String, Object> params, RequestOptions options) throws StripeException {
     String url =
-        String.format(
-            "%s%s",
+        ApiResource.fullUrl(
             Stripe.getApiBase(),
+            options,
             String.format("/v1/country_specs/%s", ApiResource.urlEncodeId(country)));
     return ApiResource.request(
         ApiResource.RequestMethod.GET, url, params, CountrySpec.class, options);
@@ -121,9 +121,9 @@ public class CountrySpec extends ApiResource implements HasId {
       String country, CountrySpecRetrieveParams params, RequestOptions options)
       throws StripeException {
     String url =
-        String.format(
-            "%s%s",
+        ApiResource.fullUrl(
             Stripe.getApiBase(),
+            options,
             String.format("/v1/country_specs/%s", ApiResource.urlEncodeId(country)));
     return ApiResource.request(
         ApiResource.RequestMethod.GET, url, params, CountrySpec.class, options);

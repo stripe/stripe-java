@@ -144,9 +144,9 @@ public class Reader extends ApiResource implements HasId, MetadataStore<Reader> 
   public Reader cancelAction(Map<String, Object> params, RequestOptions options)
       throws StripeException {
     String url =
-        String.format(
-            "%s%s",
+        ApiResource.fullUrl(
             Stripe.getApiBase(),
+            options,
             String.format(
                 "/v1/terminal/readers/%s/cancel_action", ApiResource.urlEncodeId(this.getId())));
     return ApiResource.request(ApiResource.RequestMethod.POST, url, params, Reader.class, options);
@@ -161,9 +161,9 @@ public class Reader extends ApiResource implements HasId, MetadataStore<Reader> 
   public Reader cancelAction(ReaderCancelActionParams params, RequestOptions options)
       throws StripeException {
     String url =
-        String.format(
-            "%s%s",
+        ApiResource.fullUrl(
             Stripe.getApiBase(),
+            options,
             String.format(
                 "/v1/terminal/readers/%s/cancel_action", ApiResource.urlEncodeId(this.getId())));
     return ApiResource.request(ApiResource.RequestMethod.POST, url, params, Reader.class, options);
@@ -177,7 +177,7 @@ public class Reader extends ApiResource implements HasId, MetadataStore<Reader> 
   /** Creates a new <code>Reader</code> object. */
   public static Reader create(Map<String, Object> params, RequestOptions options)
       throws StripeException {
-    String url = String.format("%s%s", Stripe.getApiBase(), "/v1/terminal/readers");
+    String url = ApiResource.fullUrl(Stripe.getApiBase(), options, "/v1/terminal/readers");
     return ApiResource.request(ApiResource.RequestMethod.POST, url, params, Reader.class, options);
   }
 
@@ -189,7 +189,7 @@ public class Reader extends ApiResource implements HasId, MetadataStore<Reader> 
   /** Creates a new <code>Reader</code> object. */
   public static Reader create(ReaderCreateParams params, RequestOptions options)
       throws StripeException {
-    String url = String.format("%s%s", Stripe.getApiBase(), "/v1/terminal/readers");
+    String url = ApiResource.fullUrl(Stripe.getApiBase(), options, "/v1/terminal/readers");
     return ApiResource.request(ApiResource.RequestMethod.POST, url, params, Reader.class, options);
   }
 
@@ -211,9 +211,9 @@ public class Reader extends ApiResource implements HasId, MetadataStore<Reader> 
   /** Deletes a <code>Reader</code> object. */
   public Reader delete(Map<String, Object> params, RequestOptions options) throws StripeException {
     String url =
-        String.format(
-            "%s%s",
+        ApiResource.fullUrl(
             Stripe.getApiBase(),
+            options,
             String.format("/v1/terminal/readers/%s", ApiResource.urlEncodeId(this.getId())));
     return ApiResource.request(
         ApiResource.RequestMethod.DELETE, url, params, Reader.class, options);
@@ -227,7 +227,7 @@ public class Reader extends ApiResource implements HasId, MetadataStore<Reader> 
   /** Returns a list of <code>Reader</code> objects. */
   public static ReaderCollection list(Map<String, Object> params, RequestOptions options)
       throws StripeException {
-    String url = String.format("%s%s", Stripe.getApiBase(), "/v1/terminal/readers");
+    String url = ApiResource.fullUrl(Stripe.getApiBase(), options, "/v1/terminal/readers");
     return ApiResource.requestCollection(url, params, ReaderCollection.class, options);
   }
 
@@ -239,7 +239,7 @@ public class Reader extends ApiResource implements HasId, MetadataStore<Reader> 
   /** Returns a list of <code>Reader</code> objects. */
   public static ReaderCollection list(ReaderListParams params, RequestOptions options)
       throws StripeException {
-    String url = String.format("%s%s", Stripe.getApiBase(), "/v1/terminal/readers");
+    String url = ApiResource.fullUrl(Stripe.getApiBase(), options, "/v1/terminal/readers");
     return ApiResource.requestCollection(url, params, ReaderCollection.class, options);
   }
 
@@ -252,9 +252,9 @@ public class Reader extends ApiResource implements HasId, MetadataStore<Reader> 
   public Reader processPaymentIntent(Map<String, Object> params, RequestOptions options)
       throws StripeException {
     String url =
-        String.format(
-            "%s%s",
+        ApiResource.fullUrl(
             Stripe.getApiBase(),
+            options,
             String.format(
                 "/v1/terminal/readers/%s/process_payment_intent",
                 ApiResource.urlEncodeId(this.getId())));
@@ -271,9 +271,9 @@ public class Reader extends ApiResource implements HasId, MetadataStore<Reader> 
   public Reader processPaymentIntent(
       ReaderProcessPaymentIntentParams params, RequestOptions options) throws StripeException {
     String url =
-        String.format(
-            "%s%s",
+        ApiResource.fullUrl(
             Stripe.getApiBase(),
+            options,
             String.format(
                 "/v1/terminal/readers/%s/process_payment_intent",
                 ApiResource.urlEncodeId(this.getId())));
@@ -289,9 +289,9 @@ public class Reader extends ApiResource implements HasId, MetadataStore<Reader> 
   public Reader processSetupIntent(Map<String, Object> params, RequestOptions options)
       throws StripeException {
     String url =
-        String.format(
-            "%s%s",
+        ApiResource.fullUrl(
             Stripe.getApiBase(),
+            options,
             String.format(
                 "/v1/terminal/readers/%s/process_setup_intent",
                 ApiResource.urlEncodeId(this.getId())));
@@ -307,9 +307,9 @@ public class Reader extends ApiResource implements HasId, MetadataStore<Reader> 
   public Reader processSetupIntent(ReaderProcessSetupIntentParams params, RequestOptions options)
       throws StripeException {
     String url =
-        String.format(
-            "%s%s",
+        ApiResource.fullUrl(
             Stripe.getApiBase(),
+            options,
             String.format(
                 "/v1/terminal/readers/%s/process_setup_intent",
                 ApiResource.urlEncodeId(this.getId())));
@@ -330,9 +330,9 @@ public class Reader extends ApiResource implements HasId, MetadataStore<Reader> 
   public static Reader retrieve(String reader, Map<String, Object> params, RequestOptions options)
       throws StripeException {
     String url =
-        String.format(
-            "%s%s",
+        ApiResource.fullUrl(
             Stripe.getApiBase(),
+            options,
             String.format("/v1/terminal/readers/%s", ApiResource.urlEncodeId(reader)));
     return ApiResource.request(ApiResource.RequestMethod.GET, url, params, Reader.class, options);
   }
@@ -341,9 +341,9 @@ public class Reader extends ApiResource implements HasId, MetadataStore<Reader> 
   public static Reader retrieve(String reader, ReaderRetrieveParams params, RequestOptions options)
       throws StripeException {
     String url =
-        String.format(
-            "%s%s",
+        ApiResource.fullUrl(
             Stripe.getApiBase(),
+            options,
             String.format("/v1/terminal/readers/%s", ApiResource.urlEncodeId(reader)));
     return ApiResource.request(ApiResource.RequestMethod.GET, url, params, Reader.class, options);
   }
@@ -357,9 +357,9 @@ public class Reader extends ApiResource implements HasId, MetadataStore<Reader> 
   public Reader setReaderDisplay(Map<String, Object> params, RequestOptions options)
       throws StripeException {
     String url =
-        String.format(
-            "%s%s",
+        ApiResource.fullUrl(
             Stripe.getApiBase(),
+            options,
             String.format(
                 "/v1/terminal/readers/%s/set_reader_display",
                 ApiResource.urlEncodeId(this.getId())));
@@ -375,9 +375,9 @@ public class Reader extends ApiResource implements HasId, MetadataStore<Reader> 
   public Reader setReaderDisplay(ReaderSetReaderDisplayParams params, RequestOptions options)
       throws StripeException {
     String url =
-        String.format(
-            "%s%s",
+        ApiResource.fullUrl(
             Stripe.getApiBase(),
+            options,
             String.format(
                 "/v1/terminal/readers/%s/set_reader_display",
                 ApiResource.urlEncodeId(this.getId())));
@@ -400,9 +400,9 @@ public class Reader extends ApiResource implements HasId, MetadataStore<Reader> 
   @Override
   public Reader update(Map<String, Object> params, RequestOptions options) throws StripeException {
     String url =
-        String.format(
-            "%s%s",
+        ApiResource.fullUrl(
             Stripe.getApiBase(),
+            options,
             String.format("/v1/terminal/readers/%s", ApiResource.urlEncodeId(this.getId())));
     return ApiResource.request(ApiResource.RequestMethod.POST, url, params, Reader.class, options);
   }
@@ -421,9 +421,9 @@ public class Reader extends ApiResource implements HasId, MetadataStore<Reader> 
    */
   public Reader update(ReaderUpdateParams params, RequestOptions options) throws StripeException {
     String url =
-        String.format(
-            "%s%s",
+        ApiResource.fullUrl(
             Stripe.getApiBase(),
+            options,
             String.format("/v1/terminal/readers/%s", ApiResource.urlEncodeId(this.getId())));
     return ApiResource.request(ApiResource.RequestMethod.POST, url, params, Reader.class, options);
   }
@@ -686,9 +686,9 @@ public class Reader extends ApiResource implements HasId, MetadataStore<Reader> 
     public Reader presentPaymentMethod(Map<String, Object> params, RequestOptions options)
         throws StripeException {
       String url =
-          String.format(
-              "%s%s",
+          ApiResource.fullUrl(
               Stripe.getApiBase(),
+              options,
               String.format(
                   "/v1/test_helpers/terminal/readers/%s/present_payment_method",
                   ApiResource.urlEncodeId(this.resource.getId())));
@@ -712,9 +712,9 @@ public class Reader extends ApiResource implements HasId, MetadataStore<Reader> 
     public Reader presentPaymentMethod(
         ReaderPresentPaymentMethodParams params, RequestOptions options) throws StripeException {
       String url =
-          String.format(
-              "%s%s",
+          ApiResource.fullUrl(
               Stripe.getApiBase(),
+              options,
               String.format(
                   "/v1/test_helpers/terminal/readers/%s/present_payment_method",
                   ApiResource.urlEncodeId(this.resource.getId())));

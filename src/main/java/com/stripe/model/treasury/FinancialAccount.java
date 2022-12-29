@@ -135,7 +135,8 @@ public class FinancialAccount extends ApiResource
    */
   public static FinancialAccount create(Map<String, Object> params, RequestOptions options)
       throws StripeException {
-    String url = String.format("%s%s", Stripe.getApiBase(), "/v1/treasury/financial_accounts");
+    String url =
+        ApiResource.fullUrl(Stripe.getApiBase(), options, "/v1/treasury/financial_accounts");
     return ApiResource.request(
         ApiResource.RequestMethod.POST, url, params, FinancialAccount.class, options);
   }
@@ -155,7 +156,8 @@ public class FinancialAccount extends ApiResource
    */
   public static FinancialAccount create(FinancialAccountCreateParams params, RequestOptions options)
       throws StripeException {
-    String url = String.format("%s%s", Stripe.getApiBase(), "/v1/treasury/financial_accounts");
+    String url =
+        ApiResource.fullUrl(Stripe.getApiBase(), options, "/v1/treasury/financial_accounts");
     return ApiResource.request(
         ApiResource.RequestMethod.POST, url, params, FinancialAccount.class, options);
   }
@@ -168,7 +170,8 @@ public class FinancialAccount extends ApiResource
   /** Returns a list of FinancialAccounts. */
   public static FinancialAccountCollection list(Map<String, Object> params, RequestOptions options)
       throws StripeException {
-    String url = String.format("%s%s", Stripe.getApiBase(), "/v1/treasury/financial_accounts");
+    String url =
+        ApiResource.fullUrl(Stripe.getApiBase(), options, "/v1/treasury/financial_accounts");
     return ApiResource.requestCollection(url, params, FinancialAccountCollection.class, options);
   }
 
@@ -181,7 +184,8 @@ public class FinancialAccount extends ApiResource
   /** Returns a list of FinancialAccounts. */
   public static FinancialAccountCollection list(
       FinancialAccountListParams params, RequestOptions options) throws StripeException {
-    String url = String.format("%s%s", Stripe.getApiBase(), "/v1/treasury/financial_accounts");
+    String url =
+        ApiResource.fullUrl(Stripe.getApiBase(), options, "/v1/treasury/financial_accounts");
     return ApiResource.requestCollection(url, params, FinancialAccountCollection.class, options);
   }
 
@@ -201,9 +205,9 @@ public class FinancialAccount extends ApiResource
       String financialAccount, Map<String, Object> params, RequestOptions options)
       throws StripeException {
     String url =
-        String.format(
-            "%s%s",
+        ApiResource.fullUrl(
             Stripe.getApiBase(),
+            options,
             String.format(
                 "/v1/treasury/financial_accounts/%s", ApiResource.urlEncodeId(financialAccount)));
     return ApiResource.request(
@@ -215,9 +219,9 @@ public class FinancialAccount extends ApiResource
       String financialAccount, FinancialAccountRetrieveParams params, RequestOptions options)
       throws StripeException {
     String url =
-        String.format(
-            "%s%s",
+        ApiResource.fullUrl(
             Stripe.getApiBase(),
+            options,
             String.format(
                 "/v1/treasury/financial_accounts/%s", ApiResource.urlEncodeId(financialAccount)));
     return ApiResource.request(
@@ -239,9 +243,9 @@ public class FinancialAccount extends ApiResource
   public FinancialAccountFeatures retrieveFeatures(
       Map<String, Object> params, RequestOptions options) throws StripeException {
     String url =
-        String.format(
-            "%s%s",
+        ApiResource.fullUrl(
             Stripe.getApiBase(),
+            options,
             String.format(
                 "/v1/treasury/financial_accounts/%s/features",
                 ApiResource.urlEncodeId(this.getId())));
@@ -260,9 +264,9 @@ public class FinancialAccount extends ApiResource
       FinancialAccountRetrieveFeaturesParams params, RequestOptions options)
       throws StripeException {
     String url =
-        String.format(
-            "%s%s",
+        ApiResource.fullUrl(
             Stripe.getApiBase(),
+            options,
             String.format(
                 "/v1/treasury/financial_accounts/%s/features",
                 ApiResource.urlEncodeId(this.getId())));
@@ -281,9 +285,9 @@ public class FinancialAccount extends ApiResource
   public FinancialAccount update(Map<String, Object> params, RequestOptions options)
       throws StripeException {
     String url =
-        String.format(
-            "%s%s",
+        ApiResource.fullUrl(
             Stripe.getApiBase(),
+            options,
             String.format(
                 "/v1/treasury/financial_accounts/%s", ApiResource.urlEncodeId(this.getId())));
     return ApiResource.request(
@@ -299,9 +303,9 @@ public class FinancialAccount extends ApiResource
   public FinancialAccount update(FinancialAccountUpdateParams params, RequestOptions options)
       throws StripeException {
     String url =
-        String.format(
-            "%s%s",
+        ApiResource.fullUrl(
             Stripe.getApiBase(),
+            options,
             String.format(
                 "/v1/treasury/financial_accounts/%s", ApiResource.urlEncodeId(this.getId())));
     return ApiResource.request(
@@ -328,9 +332,9 @@ public class FinancialAccount extends ApiResource
   public FinancialAccountFeatures updateFeatures(Map<String, Object> params, RequestOptions options)
       throws StripeException {
     String url =
-        String.format(
-            "%s%s",
+        ApiResource.fullUrl(
             Stripe.getApiBase(),
+            options,
             String.format(
                 "/v1/treasury/financial_accounts/%s/features",
                 ApiResource.urlEncodeId(this.getId())));
@@ -348,9 +352,9 @@ public class FinancialAccount extends ApiResource
   public FinancialAccountFeatures updateFeatures(
       FinancialAccountUpdateFeaturesParams params, RequestOptions options) throws StripeException {
     String url =
-        String.format(
-            "%s%s",
+        ApiResource.fullUrl(
             Stripe.getApiBase(),
+            options,
             String.format(
                 "/v1/treasury/financial_accounts/%s/features",
                 ApiResource.urlEncodeId(this.getId())));

@@ -130,7 +130,7 @@ public class TaxRate extends ApiResource implements HasId, MetadataStore<TaxRate
   /** Creates a new tax rate. */
   public static TaxRate create(Map<String, Object> params, RequestOptions options)
       throws StripeException {
-    String url = String.format("%s%s", Stripe.getApiBase(), "/v1/tax_rates");
+    String url = ApiResource.fullUrl(Stripe.getApiBase(), options, "/v1/tax_rates");
     return ApiResource.request(ApiResource.RequestMethod.POST, url, params, TaxRate.class, options);
   }
 
@@ -142,7 +142,7 @@ public class TaxRate extends ApiResource implements HasId, MetadataStore<TaxRate
   /** Creates a new tax rate. */
   public static TaxRate create(TaxRateCreateParams params, RequestOptions options)
       throws StripeException {
-    String url = String.format("%s%s", Stripe.getApiBase(), "/v1/tax_rates");
+    String url = ApiResource.fullUrl(Stripe.getApiBase(), options, "/v1/tax_rates");
     return ApiResource.request(ApiResource.RequestMethod.POST, url, params, TaxRate.class, options);
   }
 
@@ -160,7 +160,7 @@ public class TaxRate extends ApiResource implements HasId, MetadataStore<TaxRate
    */
   public static TaxRateCollection list(Map<String, Object> params, RequestOptions options)
       throws StripeException {
-    String url = String.format("%s%s", Stripe.getApiBase(), "/v1/tax_rates");
+    String url = ApiResource.fullUrl(Stripe.getApiBase(), options, "/v1/tax_rates");
     return ApiResource.requestCollection(url, params, TaxRateCollection.class, options);
   }
 
@@ -178,7 +178,7 @@ public class TaxRate extends ApiResource implements HasId, MetadataStore<TaxRate
    */
   public static TaxRateCollection list(TaxRateListParams params, RequestOptions options)
       throws StripeException {
-    String url = String.format("%s%s", Stripe.getApiBase(), "/v1/tax_rates");
+    String url = ApiResource.fullUrl(Stripe.getApiBase(), options, "/v1/tax_rates");
     return ApiResource.requestCollection(url, params, TaxRateCollection.class, options);
   }
 
@@ -196,9 +196,9 @@ public class TaxRate extends ApiResource implements HasId, MetadataStore<TaxRate
   public static TaxRate retrieve(String taxRate, Map<String, Object> params, RequestOptions options)
       throws StripeException {
     String url =
-        String.format(
-            "%s%s",
+        ApiResource.fullUrl(
             Stripe.getApiBase(),
+            options,
             String.format("/v1/tax_rates/%s", ApiResource.urlEncodeId(taxRate)));
     return ApiResource.request(ApiResource.RequestMethod.GET, url, params, TaxRate.class, options);
   }
@@ -207,9 +207,9 @@ public class TaxRate extends ApiResource implements HasId, MetadataStore<TaxRate
   public static TaxRate retrieve(
       String taxRate, TaxRateRetrieveParams params, RequestOptions options) throws StripeException {
     String url =
-        String.format(
-            "%s%s",
+        ApiResource.fullUrl(
             Stripe.getApiBase(),
+            options,
             String.format("/v1/tax_rates/%s", ApiResource.urlEncodeId(taxRate)));
     return ApiResource.request(ApiResource.RequestMethod.GET, url, params, TaxRate.class, options);
   }
@@ -224,9 +224,9 @@ public class TaxRate extends ApiResource implements HasId, MetadataStore<TaxRate
   @Override
   public TaxRate update(Map<String, Object> params, RequestOptions options) throws StripeException {
     String url =
-        String.format(
-            "%s%s",
+        ApiResource.fullUrl(
             Stripe.getApiBase(),
+            options,
             String.format("/v1/tax_rates/%s", ApiResource.urlEncodeId(this.getId())));
     return ApiResource.request(ApiResource.RequestMethod.POST, url, params, TaxRate.class, options);
   }
@@ -239,9 +239,9 @@ public class TaxRate extends ApiResource implements HasId, MetadataStore<TaxRate
   /** Updates an existing tax rate. */
   public TaxRate update(TaxRateUpdateParams params, RequestOptions options) throws StripeException {
     String url =
-        String.format(
-            "%s%s",
+        ApiResource.fullUrl(
             Stripe.getApiBase(),
+            options,
             String.format("/v1/tax_rates/%s", ApiResource.urlEncodeId(this.getId())));
     return ApiResource.request(ApiResource.RequestMethod.POST, url, params, TaxRate.class, options);
   }

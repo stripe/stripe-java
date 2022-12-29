@@ -136,7 +136,7 @@ public class CreditReversal extends ApiResource implements HasId {
   /** Reverses a ReceivedCredit and creates a CreditReversal object. */
   public static CreditReversal create(Map<String, Object> params, RequestOptions options)
       throws StripeException {
-    String url = String.format("%s%s", Stripe.getApiBase(), "/v1/treasury/credit_reversals");
+    String url = ApiResource.fullUrl(Stripe.getApiBase(), options, "/v1/treasury/credit_reversals");
     return ApiResource.request(
         ApiResource.RequestMethod.POST, url, params, CreditReversal.class, options);
   }
@@ -149,7 +149,7 @@ public class CreditReversal extends ApiResource implements HasId {
   /** Reverses a ReceivedCredit and creates a CreditReversal object. */
   public static CreditReversal create(CreditReversalCreateParams params, RequestOptions options)
       throws StripeException {
-    String url = String.format("%s%s", Stripe.getApiBase(), "/v1/treasury/credit_reversals");
+    String url = ApiResource.fullUrl(Stripe.getApiBase(), options, "/v1/treasury/credit_reversals");
     return ApiResource.request(
         ApiResource.RequestMethod.POST, url, params, CreditReversal.class, options);
   }
@@ -162,7 +162,7 @@ public class CreditReversal extends ApiResource implements HasId {
   /** Returns a list of CreditReversals. */
   public static CreditReversalCollection list(Map<String, Object> params, RequestOptions options)
       throws StripeException {
-    String url = String.format("%s%s", Stripe.getApiBase(), "/v1/treasury/credit_reversals");
+    String url = ApiResource.fullUrl(Stripe.getApiBase(), options, "/v1/treasury/credit_reversals");
     return ApiResource.requestCollection(url, params, CreditReversalCollection.class, options);
   }
 
@@ -175,7 +175,7 @@ public class CreditReversal extends ApiResource implements HasId {
   /** Returns a list of CreditReversals. */
   public static CreditReversalCollection list(
       CreditReversalListParams params, RequestOptions options) throws StripeException {
-    String url = String.format("%s%s", Stripe.getApiBase(), "/v1/treasury/credit_reversals");
+    String url = ApiResource.fullUrl(Stripe.getApiBase(), options, "/v1/treasury/credit_reversals");
     return ApiResource.requestCollection(url, params, CreditReversalCollection.class, options);
   }
 
@@ -204,9 +204,9 @@ public class CreditReversal extends ApiResource implements HasId {
       String creditReversal, Map<String, Object> params, RequestOptions options)
       throws StripeException {
     String url =
-        String.format(
-            "%s%s",
+        ApiResource.fullUrl(
             Stripe.getApiBase(),
+            options,
             String.format(
                 "/v1/treasury/credit_reversals/%s", ApiResource.urlEncodeId(creditReversal)));
     return ApiResource.request(
@@ -221,9 +221,9 @@ public class CreditReversal extends ApiResource implements HasId {
       String creditReversal, CreditReversalRetrieveParams params, RequestOptions options)
       throws StripeException {
     String url =
-        String.format(
-            "%s%s",
+        ApiResource.fullUrl(
             Stripe.getApiBase(),
+            options,
             String.format(
                 "/v1/treasury/credit_reversals/%s", ApiResource.urlEncodeId(creditReversal)));
     return ApiResource.request(

@@ -138,7 +138,7 @@ public class Session extends ApiResource implements HasId {
   /** Creates a session of the customer portal. */
   public static Session create(Map<String, Object> params, RequestOptions options)
       throws StripeException {
-    String url = String.format("%s%s", Stripe.getApiBase(), "/v1/billing_portal/sessions");
+    String url = ApiResource.fullUrl(Stripe.getApiBase(), options, "/v1/billing_portal/sessions");
     return ApiResource.request(ApiResource.RequestMethod.POST, url, params, Session.class, options);
   }
 
@@ -150,7 +150,7 @@ public class Session extends ApiResource implements HasId {
   /** Creates a session of the customer portal. */
   public static Session create(SessionCreateParams params, RequestOptions options)
       throws StripeException {
-    String url = String.format("%s%s", Stripe.getApiBase(), "/v1/billing_portal/sessions");
+    String url = ApiResource.fullUrl(Stripe.getApiBase(), options, "/v1/billing_portal/sessions");
     return ApiResource.request(ApiResource.RequestMethod.POST, url, params, Session.class, options);
   }
 

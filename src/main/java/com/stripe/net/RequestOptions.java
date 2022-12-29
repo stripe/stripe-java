@@ -12,6 +12,7 @@ public class RequestOptions {
   private final String clientId;
   private final String idempotencyKey;
   private final String stripeAccount;
+  private final String baseUrl;
   /** Stripe version always set at {@link Stripe#API_VERSION}. */
   private final String stripeVersion = Stripe.API_VERSION;
   /**
@@ -34,6 +35,7 @@ public class RequestOptions {
         null,
         null,
         null,
+        null,
         Stripe.getConnectTimeout(),
         Stripe.getReadTimeout(),
         Stripe.getMaxNetworkRetries(),
@@ -47,6 +49,7 @@ public class RequestOptions {
       String idempotencyKey,
       String stripeAccount,
       String stripeVersionOverride,
+      String baseUrl,
       int connectTimeout,
       int readTimeout,
       int maxNetworkRetries,
@@ -57,6 +60,7 @@ public class RequestOptions {
     this.idempotencyKey = idempotencyKey;
     this.stripeAccount = stripeAccount;
     this.stripeVersionOverride = stripeVersionOverride;
+    this.baseUrl = baseUrl;
     this.connectTimeout = connectTimeout;
     this.readTimeout = readTimeout;
     this.maxNetworkRetries = maxNetworkRetries;
@@ -108,6 +112,10 @@ public class RequestOptions {
     return proxyCredential;
   }
 
+  public String getBaseUrl() {
+    return baseUrl;
+  }
+
   public static RequestOptionsBuilder builder() {
     return new RequestOptionsBuilder();
   }
@@ -155,6 +163,7 @@ public class RequestOptions {
     private int maxNetworkRetries;
     private Proxy connectionProxy;
     private PasswordAuthentication proxyCredential;
+    private String baseUrl;
 
     /**
      * Constructs a request options builder with the global parameters (API key and client ID) as
@@ -168,6 +177,7 @@ public class RequestOptions {
       this.maxNetworkRetries = Stripe.getMaxNetworkRetries();
       this.connectionProxy = Stripe.getConnectionProxy();
       this.proxyCredential = Stripe.getProxyCredential();
+      this.baseUrl = Stripe.getApiBase();
     }
 
     public String getApiKey() {
@@ -306,6 +316,11 @@ public class RequestOptions {
       return builder;
     }
 
+    public RequestOptionsBuilder setBaseUrl(final String baseUrl) {
+      this.baseUrl = baseUrl;
+      return this;
+    }
+
     /** Constructs a {@link RequestOptions} with the specified values. */
     public RequestOptions build() {
       return new RequestOptions(
@@ -314,6 +329,7 @@ public class RequestOptions {
           normalizeIdempotencyKey(this.idempotencyKey),
           normalizeStripeAccount(this.stripeAccount),
           normalizeStripeVersion(this.stripeVersionOverride),
+          normalizeBaseUrl(this.baseUrl),
           connectTimeout,
           readTimeout,
           maxNetworkRetries,
@@ -354,6 +370,19 @@ public class RequestOptions {
     String normalized = stripeVersion.trim();
     if (normalized.isEmpty()) {
       throw new InvalidRequestOptionsException("Empty Stripe version specified!");
+    }
+    return normalized;
+  }
+
+  private static String normalizeBaseUrl(String baseUrl) {
+    // null baseUrl is valid, and will fall back to e.g. Stripe.apiBase or Stripe.connectBase
+    // (depending on the method)
+    if (baseUrl == null) {
+      return null;
+    }
+    String normalized = baseUrl.trim();
+    if (normalized.isEmpty()) {
+      throw new InvalidRequestOptionsException("Empty baseUrl specified!");
     }
     return normalized;
   }

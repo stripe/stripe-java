@@ -89,7 +89,8 @@ public class ScheduledQueryRun extends ApiResource implements HasId {
   /** Returns a list of scheduled query runs. */
   public static ScheduledQueryRunCollection list(Map<String, Object> params, RequestOptions options)
       throws StripeException {
-    String url = String.format("%s%s", Stripe.getApiBase(), "/v1/sigma/scheduled_query_runs");
+    String url =
+        ApiResource.fullUrl(Stripe.getApiBase(), options, "/v1/sigma/scheduled_query_runs");
     return ApiResource.requestCollection(url, params, ScheduledQueryRunCollection.class, options);
   }
 
@@ -102,7 +103,8 @@ public class ScheduledQueryRun extends ApiResource implements HasId {
   /** Returns a list of scheduled query runs. */
   public static ScheduledQueryRunCollection list(
       ScheduledQueryRunListParams params, RequestOptions options) throws StripeException {
-    String url = String.format("%s%s", Stripe.getApiBase(), "/v1/sigma/scheduled_query_runs");
+    String url =
+        ApiResource.fullUrl(Stripe.getApiBase(), options, "/v1/sigma/scheduled_query_runs");
     return ApiResource.requestCollection(url, params, ScheduledQueryRunCollection.class, options);
   }
 
@@ -122,9 +124,9 @@ public class ScheduledQueryRun extends ApiResource implements HasId {
       String scheduledQueryRun, Map<String, Object> params, RequestOptions options)
       throws StripeException {
     String url =
-        String.format(
-            "%s%s",
+        ApiResource.fullUrl(
             Stripe.getApiBase(),
+            options,
             String.format(
                 "/v1/sigma/scheduled_query_runs/%s", ApiResource.urlEncodeId(scheduledQueryRun)));
     return ApiResource.request(
@@ -136,9 +138,9 @@ public class ScheduledQueryRun extends ApiResource implements HasId {
       String scheduledQueryRun, ScheduledQueryRunRetrieveParams params, RequestOptions options)
       throws StripeException {
     String url =
-        String.format(
-            "%s%s",
+        ApiResource.fullUrl(
             Stripe.getApiBase(),
+            options,
             String.format(
                 "/v1/sigma/scheduled_query_runs/%s", ApiResource.urlEncodeId(scheduledQueryRun)));
     return ApiResource.request(

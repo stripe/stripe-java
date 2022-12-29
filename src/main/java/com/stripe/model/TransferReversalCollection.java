@@ -37,7 +37,7 @@ public class TransferReversalCollection extends StripeCollection<TransferReversa
    */
   public TransferReversal create(Map<String, Object> params, RequestOptions options)
       throws StripeException {
-    String url = String.format("%s%s", Stripe.getApiBase(), this.getUrl());
+    String url = ApiResource.fullUrl(Stripe.getApiBase(), options, this.getUrl());
     return ApiResource.request(
         ApiResource.RequestMethod.POST, url, params, TransferReversal.class, options);
   }
@@ -70,7 +70,7 @@ public class TransferReversalCollection extends StripeCollection<TransferReversa
   public TransferReversal create(
       TransferReversalCollectionCreateParams params, RequestOptions options)
       throws StripeException {
-    String url = String.format("%s%s", Stripe.getApiBase(), this.getUrl());
+    String url = ApiResource.fullUrl(Stripe.getApiBase(), options, this.getUrl());
     return ApiResource.request(
         ApiResource.RequestMethod.POST, url, params, TransferReversal.class, options);
   }
@@ -93,7 +93,7 @@ public class TransferReversalCollection extends StripeCollection<TransferReversa
    */
   public TransferReversalCollection list(Map<String, Object> params, RequestOptions options)
       throws StripeException {
-    String url = String.format("%s%s", Stripe.getApiBase(), this.getUrl());
+    String url = ApiResource.fullUrl(Stripe.getApiBase(), options, this.getUrl());
     return ApiResource.requestCollection(url, params, TransferReversalCollection.class, options);
   }
 
@@ -116,7 +116,7 @@ public class TransferReversalCollection extends StripeCollection<TransferReversa
    */
   public TransferReversalCollection list(
       TransferReversalCollectionListParams params, RequestOptions options) throws StripeException {
-    String url = String.format("%s%s", Stripe.getApiBase(), this.getUrl());
+    String url = ApiResource.fullUrl(Stripe.getApiBase(), options, this.getUrl());
     return ApiResource.requestCollection(url, params, TransferReversalCollection.class, options);
   }
 
@@ -143,9 +143,9 @@ public class TransferReversalCollection extends StripeCollection<TransferReversa
   public TransferReversal retrieve(String id, Map<String, Object> params, RequestOptions options)
       throws StripeException {
     String url =
-        String.format(
-            "%s%s",
+        ApiResource.fullUrl(
             Stripe.getApiBase(),
+            options,
             String.format("%s/%s", this.getUrl(), ApiResource.urlEncodeId(id)));
     return ApiResource.request(
         ApiResource.RequestMethod.GET, url, params, TransferReversal.class, options);
@@ -159,9 +159,9 @@ public class TransferReversalCollection extends StripeCollection<TransferReversa
       String id, TransferReversalCollectionRetrieveParams params, RequestOptions options)
       throws StripeException {
     String url =
-        String.format(
-            "%s%s",
+        ApiResource.fullUrl(
             Stripe.getApiBase(),
+            options,
             String.format("%s/%s", this.getUrl(), ApiResource.urlEncodeId(id)));
     return ApiResource.request(
         ApiResource.RequestMethod.GET, url, params, TransferReversal.class, options);

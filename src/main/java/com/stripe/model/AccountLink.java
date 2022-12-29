@@ -57,7 +57,7 @@ public class AccountLink extends ApiResource {
    */
   public static AccountLink create(Map<String, Object> params, RequestOptions options)
       throws StripeException {
-    String url = String.format("%s%s", Stripe.getApiBase(), "/v1/account_links");
+    String url = ApiResource.fullUrl(Stripe.getApiBase(), options, "/v1/account_links");
     return ApiResource.request(
         ApiResource.RequestMethod.POST, url, params, AccountLink.class, options);
   }
@@ -76,7 +76,7 @@ public class AccountLink extends ApiResource {
    */
   public static AccountLink create(AccountLinkCreateParams params, RequestOptions options)
       throws StripeException {
-    String url = String.format("%s%s", Stripe.getApiBase(), "/v1/account_links");
+    String url = ApiResource.fullUrl(Stripe.getApiBase(), options, "/v1/account_links");
     return ApiResource.request(
         ApiResource.RequestMethod.POST, url, params, AccountLink.class, options);
   }
