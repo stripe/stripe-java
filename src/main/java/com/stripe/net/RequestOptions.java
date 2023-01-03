@@ -141,6 +141,7 @@ public class RequestOptions {
     return RequestOptionsBuilder.unsafeSetStripeVersionOverride(
         new RequestOptionsBuilder()
             .setApiKey(this.apiKey)
+            .setBaseUrl(this.baseUrl)
             .setClientId(this.clientId)
             .setIdempotencyKey(this.idempotencyKey)
             .setStripeAccount(this.stripeAccount)
@@ -177,7 +178,6 @@ public class RequestOptions {
       this.maxNetworkRetries = Stripe.getMaxNetworkRetries();
       this.connectionProxy = Stripe.getConnectionProxy();
       this.proxyCredential = Stripe.getProxyCredential();
-      this.baseUrl = Stripe.getApiBase();
     }
 
     public String getApiKey() {
