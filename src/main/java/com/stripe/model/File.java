@@ -105,8 +105,7 @@ public class File extends ApiResource implements HasId {
       throws StripeException {
     return request(
         RequestMethod.POST,
-        ApiResource.fullUrl(
-        Stripe.getUploadBase(), options, "/v1/files"),
+        ApiResource.fullUrl(Stripe.getUploadBase(), options, "/v1/files"),
         params,
         File.class,
         options);

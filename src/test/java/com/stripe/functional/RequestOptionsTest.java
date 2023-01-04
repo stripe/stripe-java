@@ -4,9 +4,6 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.junit.jupiter.api.Assertions.assertNull;
 
-import java.util.HashMap;
-import java.util.Map;
-
 import com.google.gson.annotations.SerializedName;
 import com.stripe.BaseStripeTest;
 import com.stripe.Stripe;
@@ -15,11 +12,12 @@ import com.stripe.model.Balance;
 import com.stripe.net.ApiResource;
 import com.stripe.net.RequestOptions;
 import com.stripe.net.StripeResponse;
-import org.junit.jupiter.api.Test;
-
+import java.util.HashMap;
+import java.util.Map;
 import lombok.Cleanup;
 import okhttp3.mockwebserver.MockResponse;
 import okhttp3.mockwebserver.MockWebServer;
+import org.junit.jupiter.api.Test;
 
 public class RequestOptionsTest extends BaseStripeTest {
   @Test
@@ -53,17 +51,13 @@ public class RequestOptionsTest extends BaseStripeTest {
   static class MyResource extends ApiResource {
     @SerializedName("id")
     String id;
-    public static MyResource myMethod(Map<String, Object> params, RequestOptions options) throws StripeException {
-      String url = ApiResource.fullUrl(
-          Stripe.getUploadBase(),
-          options,
-          String.format("/v1/foo/bar"));
+
+    public static MyResource myMethod(Map<String, Object> params, RequestOptions options)
+        throws StripeException {
+      String url =
+          ApiResource.fullUrl(Stripe.getUploadBase(), options, String.format("/v1/foo/bar"));
       return ApiResource.request(
-          ApiResource.RequestMethod.POST,
-          url,
-          params,
-          MyResource.class,
-          options);
+          ApiResource.RequestMethod.POST, url, params, MyResource.class, options);
     }
   }
 
@@ -82,10 +76,12 @@ public class RequestOptionsTest extends BaseStripeTest {
     @Cleanup MockWebServer serverOverride = new MockWebServer();
     serverOverride.enqueue(new MockResponse().setBody("{\"id\": \"override\"}"));
     serverOverride.start();
-    MyResource r2 = MyResource.myMethod(new HashMap<>(), RequestOptions.builder().setBaseUrl(serverOverride.url("").toString()).build());
+    MyResource r2 =
+        MyResource.myMethod(
+            new HashMap<>(),
+            RequestOptions.builder().setBaseUrl(serverOverride.url("").toString()).build());
     serverOverride.takeRequest();
     assertEquals("override", r2.id);
     serverOverride.shutdown();
   }
-  
 }

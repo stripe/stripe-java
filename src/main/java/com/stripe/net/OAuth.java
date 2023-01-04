@@ -46,7 +46,7 @@ public final class OAuth {
    */
   public static TokenResponse token(Map<String, Object> params, RequestOptions options)
       throws StripeException {
-    String url = ApiResource.fullUrl(Stripe.getConnectBase(), options,"/oauth/token");
+    String url = ApiResource.fullUrl(Stripe.getConnectBase(), options, "/oauth/token");
     return OAuth.stripeResponseGetter.oauthRequest(
         ApiResource.RequestMethod.POST, url, params, TokenResponse.class, options);
   }
