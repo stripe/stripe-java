@@ -92,7 +92,7 @@ public class File extends ApiResource implements HasId {
    */
   public static File create(FileCreateParams params, RequestOptions options)
       throws StripeException {
-    checkNullTypedParams(String.format("%s/v1/files", Stripe.getUploadBase()), params);
+    checkNullTypedParams(ApiResource.fullUrl(Stripe.getUploadBase(), options, "/v1/files"), params);
     return create(params.toMap(), options);
   }
 
@@ -105,7 +105,7 @@ public class File extends ApiResource implements HasId {
       throws StripeException {
     return request(
         RequestMethod.POST,
-        String.format("%s/v1/files", Stripe.getUploadBase()),
+        ApiResource.fullUrl(Stripe.getUploadBase(), options, "/v1/files"),
         params,
         File.class,
         options);
