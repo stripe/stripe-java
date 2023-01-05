@@ -90,7 +90,8 @@ public class FinancingTransaction extends ApiResource implements HasId {
    */
   public static FinancingTransactionCollection list(
       Map<String, Object> params, RequestOptions options) throws StripeException {
-    String url = String.format("%s%s", Stripe.getApiBase(), "/v1/capital/financing_transactions");
+    String url =
+        ApiResource.fullUrl(Stripe.getApiBase(), options, "/v1/capital/financing_transactions");
     return ApiResource.requestCollection(
         url, params, FinancingTransactionCollection.class, options);
   }
@@ -110,7 +111,8 @@ public class FinancingTransaction extends ApiResource implements HasId {
    */
   public static FinancingTransactionCollection list(
       FinancingTransactionListParams params, RequestOptions options) throws StripeException {
-    String url = String.format("%s%s", Stripe.getApiBase(), "/v1/capital/financing_transactions");
+    String url =
+        ApiResource.fullUrl(Stripe.getApiBase(), options, "/v1/capital/financing_transactions");
     return ApiResource.requestCollection(
         url, params, FinancingTransactionCollection.class, options);
   }
@@ -131,9 +133,9 @@ public class FinancingTransaction extends ApiResource implements HasId {
       String financingTransaction, Map<String, Object> params, RequestOptions options)
       throws StripeException {
     String url =
-        String.format(
-            "%s%s",
+        ApiResource.fullUrl(
             Stripe.getApiBase(),
+            options,
             String.format(
                 "/v1/capital/financing_transactions/%s",
                 ApiResource.urlEncodeId(financingTransaction)));
@@ -148,9 +150,9 @@ public class FinancingTransaction extends ApiResource implements HasId {
       RequestOptions options)
       throws StripeException {
     String url =
-        String.format(
-            "%s%s",
+        ApiResource.fullUrl(
             Stripe.getApiBase(),
+            options,
             String.format(
                 "/v1/capital/financing_transactions/%s",
                 ApiResource.urlEncodeId(financingTransaction)));

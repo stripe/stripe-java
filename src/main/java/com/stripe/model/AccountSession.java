@@ -79,7 +79,7 @@ public class AccountSession extends ApiResource {
    */
   public static AccountSession create(Map<String, Object> params, RequestOptions options)
       throws StripeException {
-    String url = String.format("%s%s", Stripe.getApiBase(), "/v1/account_sessions");
+    String url = ApiResource.fullUrl(Stripe.getApiBase(), options, "/v1/account_sessions");
     return ApiResource.request(
         ApiResource.RequestMethod.POST, url, params, AccountSession.class, options);
   }
@@ -98,7 +98,7 @@ public class AccountSession extends ApiResource {
    */
   public static AccountSession create(AccountSessionCreateParams params, RequestOptions options)
       throws StripeException {
-    String url = String.format("%s%s", Stripe.getApiBase(), "/v1/account_sessions");
+    String url = ApiResource.fullUrl(Stripe.getApiBase(), options, "/v1/account_sessions");
     return ApiResource.request(
         ApiResource.RequestMethod.POST, url, params, AccountSession.class, options);
   }

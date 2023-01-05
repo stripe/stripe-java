@@ -134,7 +134,7 @@ public class FinancingOffer extends ApiResource implements HasId {
    */
   public static FinancingOfferCollection list(Map<String, Object> params, RequestOptions options)
       throws StripeException {
-    String url = String.format("%s%s", Stripe.getApiBase(), "/v1/capital/financing_offers");
+    String url = ApiResource.fullUrl(Stripe.getApiBase(), options, "/v1/capital/financing_offers");
     return ApiResource.requestCollection(url, params, FinancingOfferCollection.class, options);
   }
 
@@ -151,7 +151,7 @@ public class FinancingOffer extends ApiResource implements HasId {
    */
   public static FinancingOfferCollection list(
       FinancingOfferListParams params, RequestOptions options) throws StripeException {
-    String url = String.format("%s%s", Stripe.getApiBase(), "/v1/capital/financing_offers");
+    String url = ApiResource.fullUrl(Stripe.getApiBase(), options, "/v1/capital/financing_offers");
     return ApiResource.requestCollection(url, params, FinancingOfferCollection.class, options);
   }
 
@@ -186,9 +186,9 @@ public class FinancingOffer extends ApiResource implements HasId {
   public FinancingOffer markDelivered(Map<String, Object> params, RequestOptions options)
       throws StripeException {
     String url =
-        String.format(
-            "%s%s",
+        ApiResource.fullUrl(
             Stripe.getApiBase(),
+            options,
             String.format(
                 "/v1/capital/financing_offers/%s/mark_delivered",
                 ApiResource.urlEncodeId(this.getId())));
@@ -212,9 +212,9 @@ public class FinancingOffer extends ApiResource implements HasId {
   public FinancingOffer markDelivered(
       FinancingOfferMarkDeliveredParams params, RequestOptions options) throws StripeException {
     String url =
-        String.format(
-            "%s%s",
+        ApiResource.fullUrl(
             Stripe.getApiBase(),
+            options,
             String.format(
                 "/v1/capital/financing_offers/%s/mark_delivered",
                 ApiResource.urlEncodeId(this.getId())));
@@ -238,9 +238,9 @@ public class FinancingOffer extends ApiResource implements HasId {
       String financingOffer, Map<String, Object> params, RequestOptions options)
       throws StripeException {
     String url =
-        String.format(
-            "%s%s",
+        ApiResource.fullUrl(
             Stripe.getApiBase(),
+            options,
             String.format(
                 "/v1/capital/financing_offers/%s", ApiResource.urlEncodeId(financingOffer)));
     return ApiResource.request(
@@ -252,9 +252,9 @@ public class FinancingOffer extends ApiResource implements HasId {
       String financingOffer, FinancingOfferRetrieveParams params, RequestOptions options)
       throws StripeException {
     String url =
-        String.format(
-            "%s%s",
+        ApiResource.fullUrl(
             Stripe.getApiBase(),
+            options,
             String.format(
                 "/v1/capital/financing_offers/%s", ApiResource.urlEncodeId(financingOffer)));
     return ApiResource.request(
