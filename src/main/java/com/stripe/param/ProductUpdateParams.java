@@ -111,9 +111,8 @@ public class ProductUpdateParams extends ApiRequestParams {
   Object taxCode;
 
   /**
-   * A label that represents units of this product in Stripe and on customers’ receipts and
-   * invoices. When set, this will be included in associated invoice line item descriptions. May
-   * only be set if {@code type=service}.
+   * A label that represents units of this product. When set, this will be included in customers'
+   * receipts, invoices, Checkout, and the customer portal. May only be set if {@code type=service}.
    */
   @SerializedName("unit_label")
   Object unitLabel;
@@ -577,9 +576,9 @@ public class ProductUpdateParams extends ApiRequestParams {
     }
 
     /**
-     * A label that represents units of this product in Stripe and on customers’ receipts and
-     * invoices. When set, this will be included in associated invoice line item descriptions. May
-     * only be set if {@code type=service}.
+     * A label that represents units of this product. When set, this will be included in customers'
+     * receipts, invoices, Checkout, and the customer portal. May only be set if {@code
+     * type=service}.
      */
     public Builder setUnitLabel(String unitLabel) {
       this.unitLabel = unitLabel;
@@ -587,9 +586,9 @@ public class ProductUpdateParams extends ApiRequestParams {
     }
 
     /**
-     * A label that represents units of this product in Stripe and on customers’ receipts and
-     * invoices. When set, this will be included in associated invoice line item descriptions. May
-     * only be set if {@code type=service}.
+     * A label that represents units of this product. When set, this will be included in customers'
+     * receipts, invoices, Checkout, and the customer portal. May only be set if {@code
+     * type=service}.
      */
     public Builder setUnitLabel(EmptyParam unitLabel) {
       this.unitLabel = unitLabel;

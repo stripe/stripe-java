@@ -772,7 +772,7 @@ public class PaymentMethod extends ApiResource implements HasId, MetadataStore<P
     @SerializedName("networks")
     Networks networks;
 
-    /** Contains details on how this Card maybe be used for 3D Secure authentication. */
+    /** Contains details on how this Card may be used for 3D Secure authentication. */
     @SerializedName("three_d_secure_usage")
     ThreeDSecureUsage threeDSecureUsage;
 
