@@ -111,7 +111,7 @@ public class ReportRun extends ApiResource implements HasId {
    */
   public static ReportRun create(Map<String, Object> params, RequestOptions options)
       throws StripeException {
-    String url = String.format("%s%s", Stripe.getApiBase(), "/v1/reporting/report_runs");
+    String url = ApiResource.fullUrl(Stripe.getApiBase(), options, "/v1/reporting/report_runs");
     return ApiResource.request(
         ApiResource.RequestMethod.POST, url, params, ReportRun.class, options);
   }
@@ -130,7 +130,7 @@ public class ReportRun extends ApiResource implements HasId {
    */
   public static ReportRun create(ReportRunCreateParams params, RequestOptions options)
       throws StripeException {
-    String url = String.format("%s%s", Stripe.getApiBase(), "/v1/reporting/report_runs");
+    String url = ApiResource.fullUrl(Stripe.getApiBase(), options, "/v1/reporting/report_runs");
     return ApiResource.request(
         ApiResource.RequestMethod.POST, url, params, ReportRun.class, options);
   }
@@ -143,7 +143,7 @@ public class ReportRun extends ApiResource implements HasId {
   /** Returns a list of Report Runs, with the most recent appearing first. */
   public static ReportRunCollection list(Map<String, Object> params, RequestOptions options)
       throws StripeException {
-    String url = String.format("%s%s", Stripe.getApiBase(), "/v1/reporting/report_runs");
+    String url = ApiResource.fullUrl(Stripe.getApiBase(), options, "/v1/reporting/report_runs");
     return ApiResource.requestCollection(url, params, ReportRunCollection.class, options);
   }
 
@@ -155,7 +155,7 @@ public class ReportRun extends ApiResource implements HasId {
   /** Returns a list of Report Runs, with the most recent appearing first. */
   public static ReportRunCollection list(ReportRunListParams params, RequestOptions options)
       throws StripeException {
-    String url = String.format("%s%s", Stripe.getApiBase(), "/v1/reporting/report_runs");
+    String url = ApiResource.fullUrl(Stripe.getApiBase(), options, "/v1/reporting/report_runs");
     return ApiResource.requestCollection(url, params, ReportRunCollection.class, options);
   }
 
@@ -174,9 +174,9 @@ public class ReportRun extends ApiResource implements HasId {
   public static ReportRun retrieve(
       String reportRun, Map<String, Object> params, RequestOptions options) throws StripeException {
     String url =
-        String.format(
-            "%s%s",
+        ApiResource.fullUrl(
             Stripe.getApiBase(),
+            options,
             String.format("/v1/reporting/report_runs/%s", ApiResource.urlEncodeId(reportRun)));
     return ApiResource.request(
         ApiResource.RequestMethod.GET, url, params, ReportRun.class, options);
@@ -187,9 +187,9 @@ public class ReportRun extends ApiResource implements HasId {
       String reportRun, ReportRunRetrieveParams params, RequestOptions options)
       throws StripeException {
     String url =
-        String.format(
-            "%s%s",
+        ApiResource.fullUrl(
             Stripe.getApiBase(),
+            options,
             String.format("/v1/reporting/report_runs/%s", ApiResource.urlEncodeId(reportRun)));
     return ApiResource.request(
         ApiResource.RequestMethod.GET, url, params, ReportRun.class, options);

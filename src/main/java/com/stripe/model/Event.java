@@ -120,7 +120,7 @@ public class Event extends ApiResource implements HasId {
    */
   public static EventCollection list(Map<String, Object> params, RequestOptions options)
       throws StripeException {
-    String url = String.format("%s%s", Stripe.getApiBase(), "/v1/events");
+    String url = ApiResource.fullUrl(Stripe.getApiBase(), options, "/v1/events");
     return ApiResource.requestCollection(url, params, EventCollection.class, options);
   }
 
@@ -144,7 +144,7 @@ public class Event extends ApiResource implements HasId {
    */
   public static EventCollection list(EventListParams params, RequestOptions options)
       throws StripeException {
-    String url = String.format("%s%s", Stripe.getApiBase(), "/v1/events");
+    String url = ApiResource.fullUrl(Stripe.getApiBase(), options, "/v1/events");
     return ApiResource.requestCollection(url, params, EventCollection.class, options);
   }
 
@@ -171,9 +171,10 @@ public class Event extends ApiResource implements HasId {
   public static Event retrieve(String id, Map<String, Object> params, RequestOptions options)
       throws StripeException {
     String url =
-        String.format(
-            "%s%s",
-            Stripe.getApiBase(), String.format("/v1/events/%s", ApiResource.urlEncodeId(id)));
+        ApiResource.fullUrl(
+            Stripe.getApiBase(),
+            options,
+            String.format("/v1/events/%s", ApiResource.urlEncodeId(id)));
     return ApiResource.request(ApiResource.RequestMethod.GET, url, params, Event.class, options);
   }
 
@@ -184,9 +185,10 @@ public class Event extends ApiResource implements HasId {
   public static Event retrieve(String id, EventRetrieveParams params, RequestOptions options)
       throws StripeException {
     String url =
-        String.format(
-            "%s%s",
-            Stripe.getApiBase(), String.format("/v1/events/%s", ApiResource.urlEncodeId(id)));
+        ApiResource.fullUrl(
+            Stripe.getApiBase(),
+            options,
+            String.format("/v1/events/%s", ApiResource.urlEncodeId(id)));
     return ApiResource.request(ApiResource.RequestMethod.GET, url, params, Event.class, options);
   }
 

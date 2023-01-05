@@ -209,9 +209,9 @@ public class VerificationSession extends ApiResource
   public VerificationSession cancel(Map<String, Object> params, RequestOptions options)
       throws StripeException {
     String url =
-        String.format(
-            "%s%s",
+        ApiResource.fullUrl(
             Stripe.getApiBase(),
+            options,
             String.format(
                 "/v1/identity/verification_sessions/%s/cancel",
                 ApiResource.urlEncodeId(this.getId())));
@@ -240,9 +240,9 @@ public class VerificationSession extends ApiResource
   public VerificationSession cancel(VerificationSessionCancelParams params, RequestOptions options)
       throws StripeException {
     String url =
-        String.format(
-            "%s%s",
+        ApiResource.fullUrl(
             Stripe.getApiBase(),
+            options,
             String.format(
                 "/v1/identity/verification_sessions/%s/cancel",
                 ApiResource.urlEncodeId(this.getId())));
@@ -280,7 +280,8 @@ public class VerificationSession extends ApiResource
    */
   public static VerificationSession create(Map<String, Object> params, RequestOptions options)
       throws StripeException {
-    String url = String.format("%s%s", Stripe.getApiBase(), "/v1/identity/verification_sessions");
+    String url =
+        ApiResource.fullUrl(Stripe.getApiBase(), options, "/v1/identity/verification_sessions");
     return ApiResource.request(
         ApiResource.RequestMethod.POST, url, params, VerificationSession.class, options);
   }
@@ -316,7 +317,8 @@ public class VerificationSession extends ApiResource
    */
   public static VerificationSession create(
       VerificationSessionCreateParams params, RequestOptions options) throws StripeException {
-    String url = String.format("%s%s", Stripe.getApiBase(), "/v1/identity/verification_sessions");
+    String url =
+        ApiResource.fullUrl(Stripe.getApiBase(), options, "/v1/identity/verification_sessions");
     return ApiResource.request(
         ApiResource.RequestMethod.POST, url, params, VerificationSession.class, options);
   }
@@ -330,7 +332,8 @@ public class VerificationSession extends ApiResource
   /** Returns a list of VerificationSessions. */
   public static VerificationSessionCollection list(
       Map<String, Object> params, RequestOptions options) throws StripeException {
-    String url = String.format("%s%s", Stripe.getApiBase(), "/v1/identity/verification_sessions");
+    String url =
+        ApiResource.fullUrl(Stripe.getApiBase(), options, "/v1/identity/verification_sessions");
     return ApiResource.requestCollection(url, params, VerificationSessionCollection.class, options);
   }
 
@@ -343,7 +346,8 @@ public class VerificationSession extends ApiResource
   /** Returns a list of VerificationSessions. */
   public static VerificationSessionCollection list(
       VerificationSessionListParams params, RequestOptions options) throws StripeException {
-    String url = String.format("%s%s", Stripe.getApiBase(), "/v1/identity/verification_sessions");
+    String url =
+        ApiResource.fullUrl(Stripe.getApiBase(), options, "/v1/identity/verification_sessions");
     return ApiResource.requestCollection(url, params, VerificationSessionCollection.class, options);
   }
 
@@ -450,9 +454,9 @@ public class VerificationSession extends ApiResource
   public VerificationSession redact(Map<String, Object> params, RequestOptions options)
       throws StripeException {
     String url =
-        String.format(
-            "%s%s",
+        ApiResource.fullUrl(
             Stripe.getApiBase(),
+            options,
             String.format(
                 "/v1/identity/verification_sessions/%s/redact",
                 ApiResource.urlEncodeId(this.getId())));
@@ -511,9 +515,9 @@ public class VerificationSession extends ApiResource
   public VerificationSession redact(VerificationSessionRedactParams params, RequestOptions options)
       throws StripeException {
     String url =
-        String.format(
-            "%s%s",
+        ApiResource.fullUrl(
             Stripe.getApiBase(),
+            options,
             String.format(
                 "/v1/identity/verification_sessions/%s/redact",
                 ApiResource.urlEncodeId(this.getId())));
@@ -551,9 +555,9 @@ public class VerificationSession extends ApiResource
   public static VerificationSession retrieve(
       String session, Map<String, Object> params, RequestOptions options) throws StripeException {
     String url =
-        String.format(
-            "%s%s",
+        ApiResource.fullUrl(
             Stripe.getApiBase(),
+            options,
             String.format(
                 "/v1/identity/verification_sessions/%s", ApiResource.urlEncodeId(session)));
     return ApiResource.request(
@@ -570,9 +574,9 @@ public class VerificationSession extends ApiResource
       String session, VerificationSessionRetrieveParams params, RequestOptions options)
       throws StripeException {
     String url =
-        String.format(
-            "%s%s",
+        ApiResource.fullUrl(
             Stripe.getApiBase(),
+            options,
             String.format(
                 "/v1/identity/verification_sessions/%s", ApiResource.urlEncodeId(session)));
     return ApiResource.request(
@@ -600,9 +604,9 @@ public class VerificationSession extends ApiResource
   public VerificationSession update(Map<String, Object> params, RequestOptions options)
       throws StripeException {
     String url =
-        String.format(
-            "%s%s",
+        ApiResource.fullUrl(
             Stripe.getApiBase(),
+            options,
             String.format(
                 "/v1/identity/verification_sessions/%s", ApiResource.urlEncodeId(this.getId())));
     return ApiResource.request(
@@ -628,9 +632,9 @@ public class VerificationSession extends ApiResource
   public VerificationSession update(VerificationSessionUpdateParams params, RequestOptions options)
       throws StripeException {
     String url =
-        String.format(
-            "%s%s",
+        ApiResource.fullUrl(
             Stripe.getApiBase(),
+            options,
             String.format(
                 "/v1/identity/verification_sessions/%s", ApiResource.urlEncodeId(this.getId())));
     return ApiResource.request(

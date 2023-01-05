@@ -128,7 +128,7 @@ public class ShippingRate extends ApiResource implements HasId, MetadataStore<Sh
   /** Creates a new shipping rate object. */
   public static ShippingRate create(Map<String, Object> params, RequestOptions options)
       throws StripeException {
-    String url = String.format("%s%s", Stripe.getApiBase(), "/v1/shipping_rates");
+    String url = ApiResource.fullUrl(Stripe.getApiBase(), options, "/v1/shipping_rates");
     return ApiResource.request(
         ApiResource.RequestMethod.POST, url, params, ShippingRate.class, options);
   }
@@ -141,7 +141,7 @@ public class ShippingRate extends ApiResource implements HasId, MetadataStore<Sh
   /** Creates a new shipping rate object. */
   public static ShippingRate create(ShippingRateCreateParams params, RequestOptions options)
       throws StripeException {
-    String url = String.format("%s%s", Stripe.getApiBase(), "/v1/shipping_rates");
+    String url = ApiResource.fullUrl(Stripe.getApiBase(), options, "/v1/shipping_rates");
     return ApiResource.request(
         ApiResource.RequestMethod.POST, url, params, ShippingRate.class, options);
   }
@@ -154,7 +154,7 @@ public class ShippingRate extends ApiResource implements HasId, MetadataStore<Sh
   /** Returns a list of your shipping rates. */
   public static ShippingRateCollection list(Map<String, Object> params, RequestOptions options)
       throws StripeException {
-    String url = String.format("%s%s", Stripe.getApiBase(), "/v1/shipping_rates");
+    String url = ApiResource.fullUrl(Stripe.getApiBase(), options, "/v1/shipping_rates");
     return ApiResource.requestCollection(url, params, ShippingRateCollection.class, options);
   }
 
@@ -166,7 +166,7 @@ public class ShippingRate extends ApiResource implements HasId, MetadataStore<Sh
   /** Returns a list of your shipping rates. */
   public static ShippingRateCollection list(ShippingRateListParams params, RequestOptions options)
       throws StripeException {
-    String url = String.format("%s%s", Stripe.getApiBase(), "/v1/shipping_rates");
+    String url = ApiResource.fullUrl(Stripe.getApiBase(), options, "/v1/shipping_rates");
     return ApiResource.requestCollection(url, params, ShippingRateCollection.class, options);
   }
 
@@ -186,9 +186,9 @@ public class ShippingRate extends ApiResource implements HasId, MetadataStore<Sh
       String shippingRateToken, Map<String, Object> params, RequestOptions options)
       throws StripeException {
     String url =
-        String.format(
-            "%s%s",
+        ApiResource.fullUrl(
             Stripe.getApiBase(),
+            options,
             String.format("/v1/shipping_rates/%s", ApiResource.urlEncodeId(shippingRateToken)));
     return ApiResource.request(
         ApiResource.RequestMethod.GET, url, params, ShippingRate.class, options);
@@ -199,9 +199,9 @@ public class ShippingRate extends ApiResource implements HasId, MetadataStore<Sh
       String shippingRateToken, ShippingRateRetrieveParams params, RequestOptions options)
       throws StripeException {
     String url =
-        String.format(
-            "%s%s",
+        ApiResource.fullUrl(
             Stripe.getApiBase(),
+            options,
             String.format("/v1/shipping_rates/%s", ApiResource.urlEncodeId(shippingRateToken)));
     return ApiResource.request(
         ApiResource.RequestMethod.GET, url, params, ShippingRate.class, options);
@@ -218,9 +218,9 @@ public class ShippingRate extends ApiResource implements HasId, MetadataStore<Sh
   public ShippingRate update(Map<String, Object> params, RequestOptions options)
       throws StripeException {
     String url =
-        String.format(
-            "%s%s",
+        ApiResource.fullUrl(
             Stripe.getApiBase(),
+            options,
             String.format("/v1/shipping_rates/%s", ApiResource.urlEncodeId(this.getId())));
     return ApiResource.request(
         ApiResource.RequestMethod.POST, url, params, ShippingRate.class, options);
@@ -235,9 +235,9 @@ public class ShippingRate extends ApiResource implements HasId, MetadataStore<Sh
   public ShippingRate update(ShippingRateUpdateParams params, RequestOptions options)
       throws StripeException {
     String url =
-        String.format(
-            "%s%s",
+        ApiResource.fullUrl(
             Stripe.getApiBase(),
+            options,
             String.format("/v1/shipping_rates/%s", ApiResource.urlEncodeId(this.getId())));
     return ApiResource.request(
         ApiResource.RequestMethod.POST, url, params, ShippingRate.class, options);

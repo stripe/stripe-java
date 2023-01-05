@@ -80,9 +80,9 @@ public class EphemeralKey extends ApiResource implements HasId {
   public EphemeralKey delete(Map<String, Object> params, RequestOptions options)
       throws StripeException {
     String url =
-        String.format(
-            "%s%s",
+        ApiResource.fullUrl(
             Stripe.getApiBase(),
+            options,
             String.format("/v1/ephemeral_keys/%s", ApiResource.urlEncodeId(this.getId())));
     return ApiResource.request(
         ApiResource.RequestMethod.DELETE, url, params, EphemeralKey.class, options);
@@ -97,9 +97,9 @@ public class EphemeralKey extends ApiResource implements HasId {
   public EphemeralKey delete(EphemeralKeyDeleteParams params, RequestOptions options)
       throws StripeException {
     String url =
-        String.format(
-            "%s%s",
+        ApiResource.fullUrl(
             Stripe.getApiBase(),
+            options,
             String.format("/v1/ephemeral_keys/%s", ApiResource.urlEncodeId(this.getId())));
     return ApiResource.request(
         ApiResource.RequestMethod.DELETE, url, params, EphemeralKey.class, options);
@@ -134,7 +134,7 @@ public class EphemeralKey extends ApiResource implements HasId {
     // request body.
     final Map<String, Object> overriddenParams = new java.util.HashMap<String, Object>(params);
     overriddenParams.remove("stripe-version");
-    String url = String.format("%s%s", Stripe.getApiBase(), "/v1/ephemeral_keys");
+    String url = ApiResource.fullUrl(Stripe.getApiBase(), overriddenOptions, "/v1/ephemeral_keys");
     return ApiResource.request(
         ApiResource.RequestMethod.POST,
         url,

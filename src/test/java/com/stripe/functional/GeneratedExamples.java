@@ -882,6 +882,19 @@ class GeneratedExamples extends BaseStripeTest {
   }
 
   @Test
+  public void testAccountCapabilities() throws StripeException {
+    Account resource = Account.retrieve("acct_xxxxxxxxxxxxx");
+    AccountCapabilitiesParams params = AccountCapabilitiesParams.builder().build();
+
+    CapabilityCollection capabilities = resource.capabilities(params);
+    assertNotNull(capabilities);
+    verifyRequest(
+        ApiResource.RequestMethod.GET,
+        "/v1/accounts/acct_xxxxxxxxxxxxx/capabilities",
+        params.toMap());
+  }
+
+  @Test
   public void testCapabilityRetrieve() throws StripeException {
     Account account = Account.retrieve("acct_xxxxxxxxxxxxx");
 
@@ -907,11 +920,11 @@ class GeneratedExamples extends BaseStripeTest {
   }
 
   @Test
-  public void testPersonList() throws StripeException {
-    Account account = Account.retrieve("acct_xxxxxxxxxxxxx");
-    PersonCollectionListParams params = PersonCollectionListParams.builder().setLimit(3L).build();
+  public void testAccountPersons() throws StripeException {
+    Account resource = Account.retrieve("acct_xxxxxxxxxxxxx");
+    AccountPersonsParams params = AccountPersonsParams.builder().setLimit(3L).build();
 
-    PersonCollection persons = account.persons().list(params);
+    PersonCollection persons = resource.persons(params);
     assertNotNull(persons);
     verifyRequest(
         ApiResource.RequestMethod.GET, "/v1/accounts/acct_xxxxxxxxxxxxx/persons", params.toMap());
@@ -1469,6 +1482,21 @@ class GeneratedExamples extends BaseStripeTest {
     assertNotNull(customer);
     verifyRequest(
         ApiResource.RequestMethod.POST, "/v1/customers/cus_xxxxxxxxxxxxx", params.toMap());
+  }
+
+  @Test
+  public void testCustomerBalanceTransactions() throws StripeException {
+    Customer resource = Customer.retrieve("cus_xxxxxxxxxxxxx");
+    CustomerBalanceTransactionsParams params =
+        CustomerBalanceTransactionsParams.builder().setLimit(3L).build();
+
+    CustomerBalanceTransactionCollection customerBalanceTransactions =
+        resource.balanceTransactions(params);
+    assertNotNull(customerBalanceTransactions);
+    verifyRequest(
+        ApiResource.RequestMethod.GET,
+        "/v1/customers/cus_xxxxxxxxxxxxx/balance_transactions",
+        params.toMap());
   }
 
   @Test
@@ -3294,6 +3322,20 @@ class GeneratedExamples extends BaseStripeTest {
     assertNotNull(subscriptionItem);
     verifyRequest(
         ApiResource.RequestMethod.POST, "/v1/subscription_items/si_xxxxxxxxxxxxx", params.toMap());
+  }
+
+  @Test
+  public void testSubscriptionItemUsageRecordSummaries() throws StripeException {
+    SubscriptionItem resource = SubscriptionItem.retrieve("si_xxxxxxxxxxxxx");
+    SubscriptionItemUsageRecordSummariesParams params =
+        SubscriptionItemUsageRecordSummariesParams.builder().setLimit(3L).build();
+
+    UsageRecordSummaryCollection usageRecordSummaries = resource.usageRecordSummaries(params);
+    assertNotNull(usageRecordSummaries);
+    verifyRequest(
+        ApiResource.RequestMethod.GET,
+        "/v1/subscription_items/si_xxxxxxxxxxxxx/usage_record_summaries",
+        params.toMap());
   }
 
   @Test

@@ -34,7 +34,10 @@ public class PagingIteratorTest extends BaseStripeTest {
     public static PageableModelCollection list(Map<String, Object> params, RequestOptions options)
         throws StripeException {
       return requestCollection(
-          classUrl(PageableModel.class), params, PageableModelCollection.class, options);
+          String.format("%s/v1/pageable_models", Stripe.getApiBase()),
+          params,
+          PageableModelCollection.class,
+          options);
     }
 
     @Override
@@ -60,7 +63,7 @@ public class PagingIteratorTest extends BaseStripeTest {
     public static ReferencesPageableModel retrieve(RequestOptions options) throws StripeException {
       return request(
           ApiResource.RequestMethod.GET,
-          classUrl(ReferencesPageableModel.class),
+          String.format("%s/v1/references_pageable_models", Stripe.getApiBase()),
           new HashMap<String, Object>(),
           ReferencesPageableModel.class,
           options);

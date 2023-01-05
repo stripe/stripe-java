@@ -56,7 +56,7 @@ public class TaxCode extends ApiResource implements HasId {
    */
   public static TaxCodeCollection list(Map<String, Object> params, RequestOptions options)
       throws StripeException {
-    String url = String.format("%s%s", Stripe.getApiBase(), "/v1/tax_codes");
+    String url = ApiResource.fullUrl(Stripe.getApiBase(), options, "/v1/tax_codes");
     return ApiResource.requestCollection(url, params, TaxCodeCollection.class, options);
   }
 
@@ -74,7 +74,7 @@ public class TaxCode extends ApiResource implements HasId {
    */
   public static TaxCodeCollection list(TaxCodeListParams params, RequestOptions options)
       throws StripeException {
-    String url = String.format("%s%s", Stripe.getApiBase(), "/v1/tax_codes");
+    String url = ApiResource.fullUrl(Stripe.getApiBase(), options, "/v1/tax_codes");
     return ApiResource.requestCollection(url, params, TaxCodeCollection.class, options);
   }
 
@@ -101,9 +101,10 @@ public class TaxCode extends ApiResource implements HasId {
   public static TaxCode retrieve(String id, Map<String, Object> params, RequestOptions options)
       throws StripeException {
     String url =
-        String.format(
-            "%s%s",
-            Stripe.getApiBase(), String.format("/v1/tax_codes/%s", ApiResource.urlEncodeId(id)));
+        ApiResource.fullUrl(
+            Stripe.getApiBase(),
+            options,
+            String.format("/v1/tax_codes/%s", ApiResource.urlEncodeId(id)));
     return ApiResource.request(ApiResource.RequestMethod.GET, url, params, TaxCode.class, options);
   }
 
@@ -114,9 +115,10 @@ public class TaxCode extends ApiResource implements HasId {
   public static TaxCode retrieve(String id, TaxCodeRetrieveParams params, RequestOptions options)
       throws StripeException {
     String url =
-        String.format(
-            "%s%s",
-            Stripe.getApiBase(), String.format("/v1/tax_codes/%s", ApiResource.urlEncodeId(id)));
+        ApiResource.fullUrl(
+            Stripe.getApiBase(),
+            options,
+            String.format("/v1/tax_codes/%s", ApiResource.urlEncodeId(id)));
     return ApiResource.request(ApiResource.RequestMethod.GET, url, params, TaxCode.class, options);
   }
 }

@@ -581,8 +581,8 @@ public class PlanCreateParams extends ApiRequestParams {
     String taxCode;
 
     /**
-     * A label that represents units of this product in Stripe and on customers’ receipts and
-     * invoices. When set, this will be included in associated invoice line item descriptions.
+     * A label that represents units of this product. When set, this will be included in customers'
+     * receipts, invoices, Checkout, and the customer portal.
      */
     @SerializedName("unit_label")
     String unitLabel;
@@ -734,8 +734,8 @@ public class PlanCreateParams extends ApiRequestParams {
       }
 
       /**
-       * A label that represents units of this product in Stripe and on customers’ receipts and
-       * invoices. When set, this will be included in associated invoice line item descriptions.
+       * A label that represents units of this product. When set, this will be included in
+       * customers' receipts, invoices, Checkout, and the customer portal.
        */
       public Builder setUnitLabel(String unitLabel) {
         this.unitLabel = unitLabel;

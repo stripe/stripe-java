@@ -66,7 +66,7 @@ public class ExchangeRate extends ApiResource implements HasId {
    */
   public static ExchangeRateCollection list(Map<String, Object> params, RequestOptions options)
       throws StripeException {
-    String url = String.format("%s%s", Stripe.getApiBase(), "/v1/exchange_rates");
+    String url = ApiResource.fullUrl(Stripe.getApiBase(), options, "/v1/exchange_rates");
     return ApiResource.requestCollection(url, params, ExchangeRateCollection.class, options);
   }
 
@@ -84,7 +84,7 @@ public class ExchangeRate extends ApiResource implements HasId {
    */
   public static ExchangeRateCollection list(ExchangeRateListParams params, RequestOptions options)
       throws StripeException {
-    String url = String.format("%s%s", Stripe.getApiBase(), "/v1/exchange_rates");
+    String url = ApiResource.fullUrl(Stripe.getApiBase(), options, "/v1/exchange_rates");
     return ApiResource.requestCollection(url, params, ExchangeRateCollection.class, options);
   }
 
@@ -103,9 +103,9 @@ public class ExchangeRate extends ApiResource implements HasId {
   public static ExchangeRate retrieve(
       String rateId, Map<String, Object> params, RequestOptions options) throws StripeException {
     String url =
-        String.format(
-            "%s%s",
+        ApiResource.fullUrl(
             Stripe.getApiBase(),
+            options,
             String.format("/v1/exchange_rates/%s", ApiResource.urlEncodeId(rateId)));
     return ApiResource.request(
         ApiResource.RequestMethod.GET, url, params, ExchangeRate.class, options);
@@ -116,9 +116,9 @@ public class ExchangeRate extends ApiResource implements HasId {
       String rateId, ExchangeRateRetrieveParams params, RequestOptions options)
       throws StripeException {
     String url =
-        String.format(
-            "%s%s",
+        ApiResource.fullUrl(
             Stripe.getApiBase(),
+            options,
             String.format("/v1/exchange_rates/%s", ApiResource.urlEncodeId(rateId)));
     return ApiResource.request(
         ApiResource.RequestMethod.GET, url, params, ExchangeRate.class, options);

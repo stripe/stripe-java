@@ -48,6 +48,7 @@ public class RequestOptionsTest extends BaseStripeTest {
     assertEquals(Stripe.DEFAULT_READ_TIMEOUT, optsRebuilt.getReadTimeout());
     assertEquals(Stripe.getConnectionProxy(), optsRebuilt.getConnectionProxy());
     assertEquals(Stripe.getProxyCredential(), optsRebuilt.getProxyCredential());
+    assertEquals(null, optsRebuilt.getBaseUrl());
   }
 
   @Test
@@ -74,6 +75,7 @@ public class RequestOptionsTest extends BaseStripeTest {
         RequestOptionsBuilder.unsafeSetStripeVersionOverride(
                 RequestOptions.builder()
                     .setApiKey("sk_foo")
+                    .setBaseUrl("http://example.com")
                     .setClientId("123")
                     .setIdempotencyKey("123")
                     .setStripeAccount("acct_bar")

@@ -126,7 +126,8 @@ public class EarlyFraudWarning extends ApiResource implements HasId {
   /** Returns a list of early fraud warnings. */
   public static EarlyFraudWarningCollection list(Map<String, Object> params, RequestOptions options)
       throws StripeException {
-    String url = String.format("%s%s", Stripe.getApiBase(), "/v1/radar/early_fraud_warnings");
+    String url =
+        ApiResource.fullUrl(Stripe.getApiBase(), options, "/v1/radar/early_fraud_warnings");
     return ApiResource.requestCollection(url, params, EarlyFraudWarningCollection.class, options);
   }
 
@@ -139,7 +140,8 @@ public class EarlyFraudWarning extends ApiResource implements HasId {
   /** Returns a list of early fraud warnings. */
   public static EarlyFraudWarningCollection list(
       EarlyFraudWarningListParams params, RequestOptions options) throws StripeException {
-    String url = String.format("%s%s", Stripe.getApiBase(), "/v1/radar/early_fraud_warnings");
+    String url =
+        ApiResource.fullUrl(Stripe.getApiBase(), options, "/v1/radar/early_fraud_warnings");
     return ApiResource.requestCollection(url, params, EarlyFraudWarningCollection.class, options);
   }
 
@@ -174,9 +176,9 @@ public class EarlyFraudWarning extends ApiResource implements HasId {
       String earlyFraudWarning, Map<String, Object> params, RequestOptions options)
       throws StripeException {
     String url =
-        String.format(
-            "%s%s",
+        ApiResource.fullUrl(
             Stripe.getApiBase(),
+            options,
             String.format(
                 "/v1/radar/early_fraud_warnings/%s", ApiResource.urlEncodeId(earlyFraudWarning)));
     return ApiResource.request(
@@ -193,9 +195,9 @@ public class EarlyFraudWarning extends ApiResource implements HasId {
       String earlyFraudWarning, EarlyFraudWarningRetrieveParams params, RequestOptions options)
       throws StripeException {
     String url =
-        String.format(
-            "%s%s",
+        ApiResource.fullUrl(
             Stripe.getApiBase(),
+            options,
             String.format(
                 "/v1/radar/early_fraud_warnings/%s", ApiResource.urlEncodeId(earlyFraudWarning)));
     return ApiResource.request(
