@@ -1,5 +1,14 @@
 # Changelog
 
+## 22.5.0 - 2023-01-05
+* [#1502](https://github.com/stripe/stripe-java/pull/1502) API Updates
+  * Add support for `card_issuing` on `Issuing.Cardholder.individual`
+* [#1501](https://github.com/stripe/stripe-java/pull/1501) Add fix for per-request ApiBase
+* [#1476](https://github.com/stripe/stripe-java/pull/1476) Solution For "Regarding ability to override stripe api url per API re…
+* [#1500](https://github.com/stripe/stripe-java/pull/1500) Deprecate ApiResource.classUrl, etc.
+  * Mark `ApiResource.className`, `ApiResource.singleClassUrl`, `ApiResource.classUrl`, `ApiResource.instanceUrl`, and `ApiResource.subresourceUrl` as deprecated
+* [#1499](https://github.com/stripe/stripe-java/pull/1499) Fix publish command
+
 ## 22.4.0 - 2022-12-22
 * [#1497](https://github.com/stripe/stripe-java/pull/1497) API Updates
   * Add support for new value `merchant_default` on enums `CashBalanceUpdateParams.settings.reconciliation_mode`, `CustomerCreateParams.cash_balance.settings.reconciliation_mode`, and `CustomerUpdateParams.cash_balance.settings.reconciliation_mode`
