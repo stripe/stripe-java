@@ -389,9 +389,9 @@ public class SetupIntent extends ApiResource implements HasId, MetadataStore<Set
   public SetupIntent cancel(Map<String, Object> params, RequestOptions options)
       throws StripeException {
     String url =
-        String.format(
-            "%s%s",
+        ApiResource.fullUrl(
             Stripe.getApiBase(),
+            options,
             String.format("/v1/setup_intents/%s/cancel", ApiResource.urlEncodeId(this.getId())));
     return ApiResource.request(
         ApiResource.RequestMethod.POST, url, params, SetupIntent.class, options);
@@ -420,9 +420,9 @@ public class SetupIntent extends ApiResource implements HasId, MetadataStore<Set
   public SetupIntent cancel(SetupIntentCancelParams params, RequestOptions options)
       throws StripeException {
     String url =
-        String.format(
-            "%s%s",
+        ApiResource.fullUrl(
             Stripe.getApiBase(),
+            options,
             String.format("/v1/setup_intents/%s/cancel", ApiResource.urlEncodeId(this.getId())));
     return ApiResource.request(
         ApiResource.RequestMethod.POST, url, params, SetupIntent.class, options);
@@ -491,9 +491,9 @@ public class SetupIntent extends ApiResource implements HasId, MetadataStore<Set
   public SetupIntent confirm(Map<String, Object> params, RequestOptions options)
       throws StripeException {
     String url =
-        String.format(
-            "%s%s",
+        ApiResource.fullUrl(
             Stripe.getApiBase(),
+            options,
             String.format("/v1/setup_intents/%s/confirm", ApiResource.urlEncodeId(this.getId())));
     return ApiResource.request(
         ApiResource.RequestMethod.POST, url, params, SetupIntent.class, options);
@@ -530,9 +530,9 @@ public class SetupIntent extends ApiResource implements HasId, MetadataStore<Set
   public SetupIntent confirm(SetupIntentConfirmParams params, RequestOptions options)
       throws StripeException {
     String url =
-        String.format(
-            "%s%s",
+        ApiResource.fullUrl(
             Stripe.getApiBase(),
+            options,
             String.format("/v1/setup_intents/%s/confirm", ApiResource.urlEncodeId(this.getId())));
     return ApiResource.request(
         ApiResource.RequestMethod.POST, url, params, SetupIntent.class, options);
@@ -558,7 +558,7 @@ public class SetupIntent extends ApiResource implements HasId, MetadataStore<Set
    */
   public static SetupIntent create(Map<String, Object> params, RequestOptions options)
       throws StripeException {
-    String url = String.format("%s%s", Stripe.getApiBase(), "/v1/setup_intents");
+    String url = ApiResource.fullUrl(Stripe.getApiBase(), options, "/v1/setup_intents");
     return ApiResource.request(
         ApiResource.RequestMethod.POST, url, params, SetupIntent.class, options);
   }
@@ -583,7 +583,7 @@ public class SetupIntent extends ApiResource implements HasId, MetadataStore<Set
    */
   public static SetupIntent create(SetupIntentCreateParams params, RequestOptions options)
       throws StripeException {
-    String url = String.format("%s%s", Stripe.getApiBase(), "/v1/setup_intents");
+    String url = ApiResource.fullUrl(Stripe.getApiBase(), options, "/v1/setup_intents");
     return ApiResource.request(
         ApiResource.RequestMethod.POST, url, params, SetupIntent.class, options);
   }
@@ -596,7 +596,7 @@ public class SetupIntent extends ApiResource implements HasId, MetadataStore<Set
   /** Returns a list of SetupIntents. */
   public static SetupIntentCollection list(Map<String, Object> params, RequestOptions options)
       throws StripeException {
-    String url = String.format("%s%s", Stripe.getApiBase(), "/v1/setup_intents");
+    String url = ApiResource.fullUrl(Stripe.getApiBase(), options, "/v1/setup_intents");
     return ApiResource.requestCollection(url, params, SetupIntentCollection.class, options);
   }
 
@@ -608,7 +608,7 @@ public class SetupIntent extends ApiResource implements HasId, MetadataStore<Set
   /** Returns a list of SetupIntents. */
   public static SetupIntentCollection list(SetupIntentListParams params, RequestOptions options)
       throws StripeException {
-    String url = String.format("%s%s", Stripe.getApiBase(), "/v1/setup_intents");
+    String url = ApiResource.fullUrl(Stripe.getApiBase(), options, "/v1/setup_intents");
     return ApiResource.requestCollection(url, params, SetupIntentCollection.class, options);
   }
 
@@ -653,9 +653,9 @@ public class SetupIntent extends ApiResource implements HasId, MetadataStore<Set
   public static SetupIntent retrieve(
       String intent, Map<String, Object> params, RequestOptions options) throws StripeException {
     String url =
-        String.format(
-            "%s%s",
+        ApiResource.fullUrl(
             Stripe.getApiBase(),
+            options,
             String.format("/v1/setup_intents/%s", ApiResource.urlEncodeId(intent)));
     return ApiResource.request(
         ApiResource.RequestMethod.GET, url, params, SetupIntent.class, options);
@@ -675,9 +675,9 @@ public class SetupIntent extends ApiResource implements HasId, MetadataStore<Set
       String intent, SetupIntentRetrieveParams params, RequestOptions options)
       throws StripeException {
     String url =
-        String.format(
-            "%s%s",
+        ApiResource.fullUrl(
             Stripe.getApiBase(),
+            options,
             String.format("/v1/setup_intents/%s", ApiResource.urlEncodeId(intent)));
     return ApiResource.request(
         ApiResource.RequestMethod.GET, url, params, SetupIntent.class, options);
@@ -694,9 +694,9 @@ public class SetupIntent extends ApiResource implements HasId, MetadataStore<Set
   public SetupIntent update(Map<String, Object> params, RequestOptions options)
       throws StripeException {
     String url =
-        String.format(
-            "%s%s",
+        ApiResource.fullUrl(
             Stripe.getApiBase(),
+            options,
             String.format("/v1/setup_intents/%s", ApiResource.urlEncodeId(this.getId())));
     return ApiResource.request(
         ApiResource.RequestMethod.POST, url, params, SetupIntent.class, options);
@@ -711,9 +711,9 @@ public class SetupIntent extends ApiResource implements HasId, MetadataStore<Set
   public SetupIntent update(SetupIntentUpdateParams params, RequestOptions options)
       throws StripeException {
     String url =
-        String.format(
-            "%s%s",
+        ApiResource.fullUrl(
             Stripe.getApiBase(),
+            options,
             String.format("/v1/setup_intents/%s", ApiResource.urlEncodeId(this.getId())));
     return ApiResource.request(
         ApiResource.RequestMethod.POST, url, params, SetupIntent.class, options);
@@ -738,9 +738,9 @@ public class SetupIntent extends ApiResource implements HasId, MetadataStore<Set
   public SetupIntent verifyMicrodeposits(Map<String, Object> params, RequestOptions options)
       throws StripeException {
     String url =
-        String.format(
-            "%s%s",
+        ApiResource.fullUrl(
             Stripe.getApiBase(),
+            options,
             String.format(
                 "/v1/setup_intents/%s/verify_microdeposits",
                 ApiResource.urlEncodeId(this.getId())));
@@ -758,9 +758,9 @@ public class SetupIntent extends ApiResource implements HasId, MetadataStore<Set
   public SetupIntent verifyMicrodeposits(
       SetupIntentVerifyMicrodepositsParams params, RequestOptions options) throws StripeException {
     String url =
-        String.format(
-            "%s%s",
+        ApiResource.fullUrl(
             Stripe.getApiBase(),
+            options,
             String.format(
                 "/v1/setup_intents/%s/verify_microdeposits",
                 ApiResource.urlEncodeId(this.getId())));

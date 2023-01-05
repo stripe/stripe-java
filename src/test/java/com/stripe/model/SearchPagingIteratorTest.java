@@ -29,7 +29,10 @@ public class SearchPagingIteratorTest extends BaseStripeTest {
     public static SearchableModelCollection search(
         Map<String, Object> params, RequestOptions options) throws StripeException {
       return requestSearchResult(
-          classUrl(SearchableModel.class), params, SearchableModelCollection.class, options);
+          String.format("%s/v1/searchable_models", Stripe.getApiBase()),
+          params,
+          SearchableModelCollection.class,
+          options);
     }
 
     @Override

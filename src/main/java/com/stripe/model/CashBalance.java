@@ -67,9 +67,9 @@ public class CashBalance extends ApiResource {
   public static CashBalance retrieve(
       String customer, Map<String, Object> params, RequestOptions options) throws StripeException {
     String url =
-        String.format(
-            "%s%s",
+        ApiResource.fullUrl(
             Stripe.getApiBase(),
+            options,
             String.format("/v1/customers/%s/cash_balance", ApiResource.urlEncodeId(customer)));
     return ApiResource.request(
         ApiResource.RequestMethod.GET, url, params, CashBalance.class, options);
@@ -80,9 +80,9 @@ public class CashBalance extends ApiResource {
       String customer, CashBalanceRetrieveParams params, RequestOptions options)
       throws StripeException {
     String url =
-        String.format(
-            "%s%s",
+        ApiResource.fullUrl(
             Stripe.getApiBase(),
+            options,
             String.format("/v1/customers/%s/cash_balance", ApiResource.urlEncodeId(customer)));
     return ApiResource.request(
         ApiResource.RequestMethod.GET, url, params, CashBalance.class, options);
@@ -97,9 +97,9 @@ public class CashBalance extends ApiResource {
   public CashBalance update(Map<String, Object> params, RequestOptions options)
       throws StripeException {
     String url =
-        String.format(
-            "%s%s",
+        ApiResource.fullUrl(
             Stripe.getApiBase(),
+            options,
             String.format(
                 "/v1/customers/%s/cash_balance", ApiResource.urlEncodeId(this.getCustomer())));
     return ApiResource.request(
@@ -115,9 +115,9 @@ public class CashBalance extends ApiResource {
   public CashBalance update(CashBalanceUpdateParams params, RequestOptions options)
       throws StripeException {
     String url =
-        String.format(
-            "%s%s",
+        ApiResource.fullUrl(
             Stripe.getApiBase(),
+            options,
             String.format(
                 "/v1/customers/%s/cash_balance", ApiResource.urlEncodeId(this.getCustomer())));
     return ApiResource.request(

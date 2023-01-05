@@ -97,7 +97,7 @@ public class ReportType extends ApiResource implements HasId {
   /** Returns a full list of Report Types. */
   public static ReportTypeCollection list(Map<String, Object> params, RequestOptions options)
       throws StripeException {
-    String url = String.format("%s%s", Stripe.getApiBase(), "/v1/reporting/report_types");
+    String url = ApiResource.fullUrl(Stripe.getApiBase(), options, "/v1/reporting/report_types");
     return ApiResource.requestCollection(url, params, ReportTypeCollection.class, options);
   }
 
@@ -109,7 +109,7 @@ public class ReportType extends ApiResource implements HasId {
   /** Returns a full list of Report Types. */
   public static ReportTypeCollection list(ReportTypeListParams params, RequestOptions options)
       throws StripeException {
-    String url = String.format("%s%s", Stripe.getApiBase(), "/v1/reporting/report_types");
+    String url = ApiResource.fullUrl(Stripe.getApiBase(), options, "/v1/reporting/report_types");
     return ApiResource.requestCollection(url, params, ReportTypeCollection.class, options);
   }
 
@@ -138,9 +138,9 @@ public class ReportType extends ApiResource implements HasId {
       String reportType, Map<String, Object> params, RequestOptions options)
       throws StripeException {
     String url =
-        String.format(
-            "%s%s",
+        ApiResource.fullUrl(
             Stripe.getApiBase(),
+            options,
             String.format("/v1/reporting/report_types/%s", ApiResource.urlEncodeId(reportType)));
     return ApiResource.request(
         ApiResource.RequestMethod.GET, url, params, ReportType.class, options);
@@ -154,9 +154,9 @@ public class ReportType extends ApiResource implements HasId {
       String reportType, ReportTypeRetrieveParams params, RequestOptions options)
       throws StripeException {
     String url =
-        String.format(
-            "%s%s",
+        ApiResource.fullUrl(
             Stripe.getApiBase(),
+            options,
             String.format("/v1/reporting/report_types/%s", ApiResource.urlEncodeId(reportType)));
     return ApiResource.request(
         ApiResource.RequestMethod.GET, url, params, ReportType.class, options);

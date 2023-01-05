@@ -107,9 +107,9 @@ public class Mandate extends ApiResource implements HasId {
   public static Mandate retrieve(String mandate, Map<String, Object> params, RequestOptions options)
       throws StripeException {
     String url =
-        String.format(
-            "%s%s",
+        ApiResource.fullUrl(
             Stripe.getApiBase(),
+            options,
             String.format("/v1/mandates/%s", ApiResource.urlEncodeId(mandate)));
     return ApiResource.request(ApiResource.RequestMethod.GET, url, params, Mandate.class, options);
   }
@@ -118,9 +118,9 @@ public class Mandate extends ApiResource implements HasId {
   public static Mandate retrieve(
       String mandate, MandateRetrieveParams params, RequestOptions options) throws StripeException {
     String url =
-        String.format(
-            "%s%s",
+        ApiResource.fullUrl(
             Stripe.getApiBase(),
+            options,
             String.format("/v1/mandates/%s", ApiResource.urlEncodeId(mandate)));
     return ApiResource.request(ApiResource.RequestMethod.GET, url, params, Mandate.class, options);
   }

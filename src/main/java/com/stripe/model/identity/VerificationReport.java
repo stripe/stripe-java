@@ -97,7 +97,8 @@ public class VerificationReport extends ApiResource implements HasId {
   /** List all verification reports. */
   public static VerificationReportCollection list(
       Map<String, Object> params, RequestOptions options) throws StripeException {
-    String url = String.format("%s%s", Stripe.getApiBase(), "/v1/identity/verification_reports");
+    String url =
+        ApiResource.fullUrl(Stripe.getApiBase(), options, "/v1/identity/verification_reports");
     return ApiResource.requestCollection(url, params, VerificationReportCollection.class, options);
   }
 
@@ -110,7 +111,8 @@ public class VerificationReport extends ApiResource implements HasId {
   /** List all verification reports. */
   public static VerificationReportCollection list(
       VerificationReportListParams params, RequestOptions options) throws StripeException {
-    String url = String.format("%s%s", Stripe.getApiBase(), "/v1/identity/verification_reports");
+    String url =
+        ApiResource.fullUrl(Stripe.getApiBase(), options, "/v1/identity/verification_reports");
     return ApiResource.requestCollection(url, params, VerificationReportCollection.class, options);
   }
 
@@ -129,9 +131,9 @@ public class VerificationReport extends ApiResource implements HasId {
   public static VerificationReport retrieve(
       String report, Map<String, Object> params, RequestOptions options) throws StripeException {
     String url =
-        String.format(
-            "%s%s",
+        ApiResource.fullUrl(
             Stripe.getApiBase(),
+            options,
             String.format("/v1/identity/verification_reports/%s", ApiResource.urlEncodeId(report)));
     return ApiResource.request(
         ApiResource.RequestMethod.GET, url, params, VerificationReport.class, options);
@@ -142,9 +144,9 @@ public class VerificationReport extends ApiResource implements HasId {
       String report, VerificationReportRetrieveParams params, RequestOptions options)
       throws StripeException {
     String url =
-        String.format(
-            "%s%s",
+        ApiResource.fullUrl(
             Stripe.getApiBase(),
+            options,
             String.format("/v1/identity/verification_reports/%s", ApiResource.urlEncodeId(report)));
     return ApiResource.request(
         ApiResource.RequestMethod.GET, url, params, VerificationReport.class, options);

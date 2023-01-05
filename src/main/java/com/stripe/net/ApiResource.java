@@ -55,6 +55,15 @@ public abstract class ApiResource extends StripeObject {
     return builder.create();
   }
 
+  public static String fullUrl(String defaultBaseUrl, RequestOptions options, String relativeUrl) {
+    String baseUrl = defaultBaseUrl;
+    if (options != null && options.getBaseUrl() != null) {
+      baseUrl = options.getBaseUrl();
+    }
+    return String.format("%s%s", baseUrl, relativeUrl);
+  }
+
+  @Deprecated
   private static String className(Class<?> clazz) {
     // Convert CamelCase to snake_case
     String className = StringUtils.toSnakeCase(clazz.getSimpleName());
@@ -79,36 +88,44 @@ public abstract class ApiResource extends StripeObject {
     }
   }
 
+  @Deprecated
   protected static String singleClassUrl(Class<?> clazz) {
     return singleClassUrl(clazz, Stripe.getApiBase());
   }
 
+  @Deprecated
   protected static String singleClassUrl(Class<?> clazz, String apiBase) {
     return String.format("%s/v1/%s", apiBase, className(clazz));
   }
 
+  @Deprecated
   protected static String classUrl(Class<?> clazz) {
     return classUrl(clazz, Stripe.getApiBase());
   }
 
+  @Deprecated
   protected static String classUrl(Class<?> clazz, String apiBase) {
     return String.format("%ss", singleClassUrl(clazz, apiBase));
   }
 
+  @Deprecated
   protected static String instanceUrl(Class<?> clazz, String id) throws InvalidRequestException {
     return instanceUrl(clazz, id, Stripe.getApiBase());
   }
 
+  @Deprecated
   protected static String instanceUrl(Class<?> clazz, String id, String apiBase)
       throws InvalidRequestException {
     return String.format("%s/%s", classUrl(clazz, apiBase), urlEncode(id));
   }
 
+  @Deprecated
   protected static String subresourceUrl(Class<?> clazz, String id, Class<?> subClazz)
       throws InvalidRequestException {
     return subresourceUrl(clazz, id, subClazz, Stripe.getApiBase());
   }
 
+  @Deprecated
   private static String subresourceUrl(Class<?> clazz, String id, Class<?> subClazz, String apiBase)
       throws InvalidRequestException {
     return String.format("%s/%s/%ss", classUrl(clazz, apiBase), urlEncode(id), className(subClazz));

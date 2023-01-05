@@ -81,9 +81,9 @@ public class UsageRecord extends ApiResource implements HasId {
       String subscriptionItem, Map<String, Object> params, RequestOptions options)
       throws StripeException {
     String url =
-        String.format(
-            "%s%s",
+        ApiResource.fullUrl(
             Stripe.getApiBase(),
+            options,
             String.format(
                 "/v1/subscription_items/%s/usage_records",
                 ApiResource.urlEncodeId(subscriptionItem)));
@@ -119,9 +119,9 @@ public class UsageRecord extends ApiResource implements HasId {
       RequestOptions options)
       throws StripeException {
     String url =
-        String.format(
-            "%s%s",
+        ApiResource.fullUrl(
             Stripe.getApiBase(),
+            options,
             String.format(
                 "/v1/subscription_items/%s/usage_records",
                 ApiResource.urlEncodeId(subscriptionItem)));

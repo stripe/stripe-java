@@ -315,7 +315,7 @@ public class CreditNote extends ApiResource implements HasId, MetadataStore<Cred
    */
   public static CreditNote create(Map<String, Object> params, RequestOptions options)
       throws StripeException {
-    String url = String.format("%s%s", Stripe.getApiBase(), "/v1/credit_notes");
+    String url = ApiResource.fullUrl(Stripe.getApiBase(), options, "/v1/credit_notes");
     return ApiResource.request(
         ApiResource.RequestMethod.POST, url, params, CreditNote.class, options);
   }
@@ -372,7 +372,7 @@ public class CreditNote extends ApiResource implements HasId, MetadataStore<Cred
    */
   public static CreditNote create(CreditNoteCreateParams params, RequestOptions options)
       throws StripeException {
-    String url = String.format("%s%s", Stripe.getApiBase(), "/v1/credit_notes");
+    String url = ApiResource.fullUrl(Stripe.getApiBase(), options, "/v1/credit_notes");
     return ApiResource.request(
         ApiResource.RequestMethod.POST, url, params, CreditNote.class, options);
   }
@@ -385,7 +385,7 @@ public class CreditNote extends ApiResource implements HasId, MetadataStore<Cred
   /** Returns a list of credit notes. */
   public static CreditNoteCollection list(Map<String, Object> params, RequestOptions options)
       throws StripeException {
-    String url = String.format("%s%s", Stripe.getApiBase(), "/v1/credit_notes");
+    String url = ApiResource.fullUrl(Stripe.getApiBase(), options, "/v1/credit_notes");
     return ApiResource.requestCollection(url, params, CreditNoteCollection.class, options);
   }
 
@@ -397,7 +397,7 @@ public class CreditNote extends ApiResource implements HasId, MetadataStore<Cred
   /** Returns a list of credit notes. */
   public static CreditNoteCollection list(CreditNoteListParams params, RequestOptions options)
       throws StripeException {
-    String url = String.format("%s%s", Stripe.getApiBase(), "/v1/credit_notes");
+    String url = ApiResource.fullUrl(Stripe.getApiBase(), options, "/v1/credit_notes");
     return ApiResource.requestCollection(url, params, CreditNoteCollection.class, options);
   }
 
@@ -409,7 +409,7 @@ public class CreditNote extends ApiResource implements HasId, MetadataStore<Cred
   /** Get a preview of a credit note without creating it. */
   public static CreditNote preview(Map<String, Object> params, RequestOptions options)
       throws StripeException {
-    String url = String.format("%s%s", Stripe.getApiBase(), "/v1/credit_notes/preview");
+    String url = ApiResource.fullUrl(Stripe.getApiBase(), options, "/v1/credit_notes/preview");
     return ApiResource.request(
         ApiResource.RequestMethod.GET, url, params, CreditNote.class, options);
   }
@@ -422,7 +422,7 @@ public class CreditNote extends ApiResource implements HasId, MetadataStore<Cred
   /** Get a preview of a credit note without creating it. */
   public static CreditNote preview(CreditNotePreviewParams params, RequestOptions options)
       throws StripeException {
-    String url = String.format("%s%s", Stripe.getApiBase(), "/v1/credit_notes/preview");
+    String url = ApiResource.fullUrl(Stripe.getApiBase(), options, "/v1/credit_notes/preview");
     return ApiResource.request(
         ApiResource.RequestMethod.GET, url, params, CreditNote.class, options);
   }
@@ -441,9 +441,10 @@ public class CreditNote extends ApiResource implements HasId, MetadataStore<Cred
   public static CreditNote retrieve(String id, Map<String, Object> params, RequestOptions options)
       throws StripeException {
     String url =
-        String.format(
-            "%s%s",
-            Stripe.getApiBase(), String.format("/v1/credit_notes/%s", ApiResource.urlEncodeId(id)));
+        ApiResource.fullUrl(
+            Stripe.getApiBase(),
+            options,
+            String.format("/v1/credit_notes/%s", ApiResource.urlEncodeId(id)));
     return ApiResource.request(
         ApiResource.RequestMethod.GET, url, params, CreditNote.class, options);
   }
@@ -452,9 +453,10 @@ public class CreditNote extends ApiResource implements HasId, MetadataStore<Cred
   public static CreditNote retrieve(
       String id, CreditNoteRetrieveParams params, RequestOptions options) throws StripeException {
     String url =
-        String.format(
-            "%s%s",
-            Stripe.getApiBase(), String.format("/v1/credit_notes/%s", ApiResource.urlEncodeId(id)));
+        ApiResource.fullUrl(
+            Stripe.getApiBase(),
+            options,
+            String.format("/v1/credit_notes/%s", ApiResource.urlEncodeId(id)));
     return ApiResource.request(
         ApiResource.RequestMethod.GET, url, params, CreditNote.class, options);
   }
@@ -470,9 +472,9 @@ public class CreditNote extends ApiResource implements HasId, MetadataStore<Cred
   public CreditNote update(Map<String, Object> params, RequestOptions options)
       throws StripeException {
     String url =
-        String.format(
-            "%s%s",
+        ApiResource.fullUrl(
             Stripe.getApiBase(),
+            options,
             String.format("/v1/credit_notes/%s", ApiResource.urlEncodeId(this.getId())));
     return ApiResource.request(
         ApiResource.RequestMethod.POST, url, params, CreditNote.class, options);
@@ -487,9 +489,9 @@ public class CreditNote extends ApiResource implements HasId, MetadataStore<Cred
   public CreditNote update(CreditNoteUpdateParams params, RequestOptions options)
       throws StripeException {
     String url =
-        String.format(
-            "%s%s",
+        ApiResource.fullUrl(
             Stripe.getApiBase(),
+            options,
             String.format("/v1/credit_notes/%s", ApiResource.urlEncodeId(this.getId())));
     return ApiResource.request(
         ApiResource.RequestMethod.POST, url, params, CreditNote.class, options);
@@ -526,9 +528,9 @@ public class CreditNote extends ApiResource implements HasId, MetadataStore<Cred
   public CreditNote voidCreditNote(Map<String, Object> params, RequestOptions options)
       throws StripeException {
     String url =
-        String.format(
-            "%s%s",
+        ApiResource.fullUrl(
             Stripe.getApiBase(),
+            options,
             String.format("/v1/credit_notes/%s/void", ApiResource.urlEncodeId(this.getId())));
     return ApiResource.request(
         ApiResource.RequestMethod.POST, url, params, CreditNote.class, options);
@@ -549,9 +551,9 @@ public class CreditNote extends ApiResource implements HasId, MetadataStore<Cred
   public CreditNote voidCreditNote(CreditNoteVoidCreditNoteParams params, RequestOptions options)
       throws StripeException {
     String url =
-        String.format(
-            "%s%s",
+        ApiResource.fullUrl(
             Stripe.getApiBase(),
+            options,
             String.format("/v1/credit_notes/%s/void", ApiResource.urlEncodeId(this.getId())));
     return ApiResource.request(
         ApiResource.RequestMethod.POST, url, params, CreditNote.class, options);

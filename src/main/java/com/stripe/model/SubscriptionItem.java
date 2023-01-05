@@ -185,7 +185,7 @@ public class SubscriptionItem extends ApiResource
   /** Adds a new item to an existing subscription. No existing items will be changed or replaced. */
   public static SubscriptionItem create(Map<String, Object> params, RequestOptions options)
       throws StripeException {
-    String url = String.format("%s%s", Stripe.getApiBase(), "/v1/subscription_items");
+    String url = ApiResource.fullUrl(Stripe.getApiBase(), options, "/v1/subscription_items");
     return ApiResource.request(
         ApiResource.RequestMethod.POST, url, params, SubscriptionItem.class, options);
   }
@@ -199,7 +199,7 @@ public class SubscriptionItem extends ApiResource
   /** Adds a new item to an existing subscription. No existing items will be changed or replaced. */
   public static SubscriptionItem create(SubscriptionItemCreateParams params, RequestOptions options)
       throws StripeException {
-    String url = String.format("%s%s", Stripe.getApiBase(), "/v1/subscription_items");
+    String url = ApiResource.fullUrl(Stripe.getApiBase(), options, "/v1/subscription_items");
     return ApiResource.request(
         ApiResource.RequestMethod.POST, url, params, SubscriptionItem.class, options);
   }
@@ -235,9 +235,9 @@ public class SubscriptionItem extends ApiResource
   public SubscriptionItem delete(Map<String, Object> params, RequestOptions options)
       throws StripeException {
     String url =
-        String.format(
-            "%s%s",
+        ApiResource.fullUrl(
             Stripe.getApiBase(),
+            options,
             String.format("/v1/subscription_items/%s", ApiResource.urlEncodeId(this.getId())));
     return ApiResource.request(
         ApiResource.RequestMethod.DELETE, url, params, SubscriptionItem.class, options);
@@ -258,9 +258,9 @@ public class SubscriptionItem extends ApiResource
   public SubscriptionItem delete(SubscriptionItemDeleteParams params, RequestOptions options)
       throws StripeException {
     String url =
-        String.format(
-            "%s%s",
+        ApiResource.fullUrl(
             Stripe.getApiBase(),
+            options,
             String.format("/v1/subscription_items/%s", ApiResource.urlEncodeId(this.getId())));
     return ApiResource.request(
         ApiResource.RequestMethod.DELETE, url, params, SubscriptionItem.class, options);
@@ -274,7 +274,7 @@ public class SubscriptionItem extends ApiResource
   /** Returns a list of your subscription items for a given subscription. */
   public static SubscriptionItemCollection list(Map<String, Object> params, RequestOptions options)
       throws StripeException {
-    String url = String.format("%s%s", Stripe.getApiBase(), "/v1/subscription_items");
+    String url = ApiResource.fullUrl(Stripe.getApiBase(), options, "/v1/subscription_items");
     return ApiResource.requestCollection(url, params, SubscriptionItemCollection.class, options);
   }
 
@@ -287,7 +287,7 @@ public class SubscriptionItem extends ApiResource
   /** Returns a list of your subscription items for a given subscription. */
   public static SubscriptionItemCollection list(
       SubscriptionItemListParams params, RequestOptions options) throws StripeException {
-    String url = String.format("%s%s", Stripe.getApiBase(), "/v1/subscription_items");
+    String url = ApiResource.fullUrl(Stripe.getApiBase(), options, "/v1/subscription_items");
     return ApiResource.requestCollection(url, params, SubscriptionItemCollection.class, options);
   }
 
@@ -306,9 +306,9 @@ public class SubscriptionItem extends ApiResource
   public static SubscriptionItem retrieve(
       String item, Map<String, Object> params, RequestOptions options) throws StripeException {
     String url =
-        String.format(
-            "%s%s",
+        ApiResource.fullUrl(
             Stripe.getApiBase(),
+            options,
             String.format("/v1/subscription_items/%s", ApiResource.urlEncodeId(item)));
     return ApiResource.request(
         ApiResource.RequestMethod.GET, url, params, SubscriptionItem.class, options);
@@ -319,9 +319,9 @@ public class SubscriptionItem extends ApiResource
       String item, SubscriptionItemRetrieveParams params, RequestOptions options)
       throws StripeException {
     String url =
-        String.format(
-            "%s%s",
+        ApiResource.fullUrl(
             Stripe.getApiBase(),
+            options,
             String.format("/v1/subscription_items/%s", ApiResource.urlEncodeId(item)));
     return ApiResource.request(
         ApiResource.RequestMethod.GET, url, params, SubscriptionItem.class, options);
@@ -338,9 +338,9 @@ public class SubscriptionItem extends ApiResource
   public SubscriptionItem update(Map<String, Object> params, RequestOptions options)
       throws StripeException {
     String url =
-        String.format(
-            "%s%s",
+        ApiResource.fullUrl(
             Stripe.getApiBase(),
+            options,
             String.format("/v1/subscription_items/%s", ApiResource.urlEncodeId(this.getId())));
     return ApiResource.request(
         ApiResource.RequestMethod.POST, url, params, SubscriptionItem.class, options);
@@ -355,9 +355,9 @@ public class SubscriptionItem extends ApiResource
   public SubscriptionItem update(SubscriptionItemUpdateParams params, RequestOptions options)
       throws StripeException {
     String url =
-        String.format(
-            "%s%s",
+        ApiResource.fullUrl(
             Stripe.getApiBase(),
+            options,
             String.format("/v1/subscription_items/%s", ApiResource.urlEncodeId(this.getId())));
     return ApiResource.request(
         ApiResource.RequestMethod.POST, url, params, SubscriptionItem.class, options);
@@ -405,9 +405,9 @@ public class SubscriptionItem extends ApiResource
   public UsageRecordSummaryCollection usageRecordSummaries(
       Map<String, Object> params, RequestOptions options) throws StripeException {
     String url =
-        String.format(
-            "%s%s",
+        ApiResource.fullUrl(
             Stripe.getApiBase(),
+            options,
             String.format(
                 "/v1/subscription_items/%s/usage_record_summaries",
                 ApiResource.urlEncodeId(this.getId())));
@@ -443,9 +443,9 @@ public class SubscriptionItem extends ApiResource
       SubscriptionItemUsageRecordSummariesParams params, RequestOptions options)
       throws StripeException {
     String url =
-        String.format(
-            "%s%s",
+        ApiResource.fullUrl(
             Stripe.getApiBase(),
+            options,
             String.format(
                 "/v1/subscription_items/%s/usage_record_summaries",
                 ApiResource.urlEncodeId(this.getId())));

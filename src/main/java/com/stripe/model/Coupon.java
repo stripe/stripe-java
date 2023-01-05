@@ -171,7 +171,7 @@ public class Coupon extends ApiResource implements HasId, MetadataStore<Coupon> 
    */
   public static Coupon create(Map<String, Object> params, RequestOptions options)
       throws StripeException {
-    String url = String.format("%s%s", Stripe.getApiBase(), "/v1/coupons");
+    String url = ApiResource.fullUrl(Stripe.getApiBase(), options, "/v1/coupons");
     return ApiResource.request(ApiResource.RequestMethod.POST, url, params, Coupon.class, options);
   }
 
@@ -205,7 +205,7 @@ public class Coupon extends ApiResource implements HasId, MetadataStore<Coupon> 
    */
   public static Coupon create(CouponCreateParams params, RequestOptions options)
       throws StripeException {
-    String url = String.format("%s%s", Stripe.getApiBase(), "/v1/coupons");
+    String url = ApiResource.fullUrl(Stripe.getApiBase(), options, "/v1/coupons");
     return ApiResource.request(ApiResource.RequestMethod.POST, url, params, Coupon.class, options);
   }
 
@@ -247,9 +247,9 @@ public class Coupon extends ApiResource implements HasId, MetadataStore<Coupon> 
    */
   public Coupon delete(Map<String, Object> params, RequestOptions options) throws StripeException {
     String url =
-        String.format(
-            "%s%s",
+        ApiResource.fullUrl(
             Stripe.getApiBase(),
+            options,
             String.format("/v1/coupons/%s", ApiResource.urlEncodeId(this.getId())));
     return ApiResource.request(
         ApiResource.RequestMethod.DELETE, url, params, Coupon.class, options);
@@ -263,7 +263,7 @@ public class Coupon extends ApiResource implements HasId, MetadataStore<Coupon> 
   /** Returns a list of your coupons. */
   public static CouponCollection list(Map<String, Object> params, RequestOptions options)
       throws StripeException {
-    String url = String.format("%s%s", Stripe.getApiBase(), "/v1/coupons");
+    String url = ApiResource.fullUrl(Stripe.getApiBase(), options, "/v1/coupons");
     return ApiResource.requestCollection(url, params, CouponCollection.class, options);
   }
 
@@ -275,7 +275,7 @@ public class Coupon extends ApiResource implements HasId, MetadataStore<Coupon> 
   /** Returns a list of your coupons. */
   public static CouponCollection list(CouponListParams params, RequestOptions options)
       throws StripeException {
-    String url = String.format("%s%s", Stripe.getApiBase(), "/v1/coupons");
+    String url = ApiResource.fullUrl(Stripe.getApiBase(), options, "/v1/coupons");
     return ApiResource.requestCollection(url, params, CouponCollection.class, options);
   }
 
@@ -293,9 +293,10 @@ public class Coupon extends ApiResource implements HasId, MetadataStore<Coupon> 
   public static Coupon retrieve(String coupon, Map<String, Object> params, RequestOptions options)
       throws StripeException {
     String url =
-        String.format(
-            "%s%s",
-            Stripe.getApiBase(), String.format("/v1/coupons/%s", ApiResource.urlEncodeId(coupon)));
+        ApiResource.fullUrl(
+            Stripe.getApiBase(),
+            options,
+            String.format("/v1/coupons/%s", ApiResource.urlEncodeId(coupon)));
     return ApiResource.request(ApiResource.RequestMethod.GET, url, params, Coupon.class, options);
   }
 
@@ -303,9 +304,10 @@ public class Coupon extends ApiResource implements HasId, MetadataStore<Coupon> 
   public static Coupon retrieve(String coupon, CouponRetrieveParams params, RequestOptions options)
       throws StripeException {
     String url =
-        String.format(
-            "%s%s",
-            Stripe.getApiBase(), String.format("/v1/coupons/%s", ApiResource.urlEncodeId(coupon)));
+        ApiResource.fullUrl(
+            Stripe.getApiBase(),
+            options,
+            String.format("/v1/coupons/%s", ApiResource.urlEncodeId(coupon)));
     return ApiResource.request(ApiResource.RequestMethod.GET, url, params, Coupon.class, options);
   }
 
@@ -325,9 +327,9 @@ public class Coupon extends ApiResource implements HasId, MetadataStore<Coupon> 
   @Override
   public Coupon update(Map<String, Object> params, RequestOptions options) throws StripeException {
     String url =
-        String.format(
-            "%s%s",
+        ApiResource.fullUrl(
             Stripe.getApiBase(),
+            options,
             String.format("/v1/coupons/%s", ApiResource.urlEncodeId(this.getId())));
     return ApiResource.request(ApiResource.RequestMethod.POST, url, params, Coupon.class, options);
   }
@@ -346,9 +348,9 @@ public class Coupon extends ApiResource implements HasId, MetadataStore<Coupon> 
    */
   public Coupon update(CouponUpdateParams params, RequestOptions options) throws StripeException {
     String url =
-        String.format(
-            "%s%s",
+        ApiResource.fullUrl(
             Stripe.getApiBase(),
+            options,
             String.format("/v1/coupons/%s", ApiResource.urlEncodeId(this.getId())));
     return ApiResource.request(ApiResource.RequestMethod.POST, url, params, Coupon.class, options);
   }
