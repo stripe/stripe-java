@@ -61,7 +61,7 @@ public class FinancingSummary extends ApiResource {
   /** Retrieve the financing state for the account that was authenticated in the request. */
   public static FinancingSummary retrieve(Map<String, Object> params, RequestOptions options)
       throws StripeException {
-    String url = String.format("%s%s", Stripe.getApiBase(), "/v1/capital/financing_summary");
+    String url = ApiResource.fullUrl(Stripe.getApiBase(), options, "/v1/capital/financing_summary");
     return ApiResource.request(
         ApiResource.RequestMethod.GET, url, params, FinancingSummary.class, options);
   }
@@ -69,7 +69,7 @@ public class FinancingSummary extends ApiResource {
   /** Retrieve the financing state for the account that was authenticated in the request. */
   public static FinancingSummary retrieve(
       FinancingSummaryRetrieveParams params, RequestOptions options) throws StripeException {
-    String url = String.format("%s%s", Stripe.getApiBase(), "/v1/capital/financing_summary");
+    String url = ApiResource.fullUrl(Stripe.getApiBase(), options, "/v1/capital/financing_summary");
     return ApiResource.request(
         ApiResource.RequestMethod.GET, url, params, FinancingSummary.class, options);
   }

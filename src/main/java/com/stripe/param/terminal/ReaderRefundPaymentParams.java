@@ -34,6 +34,15 @@ public class ReaderRefundPaymentParams extends ApiRequestParams {
   @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
   Map<String, Object> extraParams;
 
+  /**
+   * Set of <a href="https://stripe.com/docs/api/metadata">key-value pairs</a> that you can attach
+   * to an object. This can be useful for storing additional information about the object in a
+   * structured format. Individual keys can be unset by posting an empty value to them. All keys can
+   * be unset by posting an empty value to {@code metadata}.
+   */
+  @SerializedName("metadata")
+  Map<String, String> metadata;
+
   /** ID of the PaymentIntent to refund. */
   @SerializedName("payment_intent")
   String paymentIntent;
@@ -60,6 +69,7 @@ public class ReaderRefundPaymentParams extends ApiRequestParams {
       String charge,
       List<String> expand,
       Map<String, Object> extraParams,
+      Map<String, String> metadata,
       String paymentIntent,
       Boolean refundApplicationFee,
       Boolean reverseTransfer) {
@@ -67,6 +77,7 @@ public class ReaderRefundPaymentParams extends ApiRequestParams {
     this.charge = charge;
     this.expand = expand;
     this.extraParams = extraParams;
+    this.metadata = metadata;
     this.paymentIntent = paymentIntent;
     this.refundApplicationFee = refundApplicationFee;
     this.reverseTransfer = reverseTransfer;
@@ -85,6 +96,8 @@ public class ReaderRefundPaymentParams extends ApiRequestParams {
 
     private Map<String, Object> extraParams;
 
+    private Map<String, String> metadata;
+
     private String paymentIntent;
 
     private Boolean refundApplicationFee;
@@ -98,6 +111,7 @@ public class ReaderRefundPaymentParams extends ApiRequestParams {
           this.charge,
           this.expand,
           this.extraParams,
+          this.metadata,
           this.paymentIntent,
           this.refundApplicationFee,
           this.reverseTransfer);
@@ -166,6 +180,32 @@ public class ReaderRefundPaymentParams extends ApiRequestParams {
         this.extraParams = new HashMap<>();
       }
       this.extraParams.putAll(map);
+      return this;
+    }
+
+    /**
+     * Add a key/value pair to `metadata` map. A map is initialized for the first `put/putAll` call,
+     * and subsequent calls add additional key/value pairs to the original map. See {@link
+     * ReaderRefundPaymentParams#metadata} for the field documentation.
+     */
+    public Builder putMetadata(String key, String value) {
+      if (this.metadata == null) {
+        this.metadata = new HashMap<>();
+      }
+      this.metadata.put(key, value);
+      return this;
+    }
+
+    /**
+     * Add all map key/value pairs to `metadata` map. A map is initialized for the first
+     * `put/putAll` call, and subsequent calls add additional key/value pairs to the original map.
+     * See {@link ReaderRefundPaymentParams#metadata} for the field documentation.
+     */
+    public Builder putAllMetadata(Map<String, String> map) {
+      if (this.metadata == null) {
+        this.metadata = new HashMap<>();
+      }
+      this.metadata.putAll(map);
       return this;
     }
 

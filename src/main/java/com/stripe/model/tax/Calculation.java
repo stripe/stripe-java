@@ -102,7 +102,7 @@ public class Calculation extends ApiResource implements HasId {
   /** Calculates tax based on input and returns a Tax <code>Calculation</code> object. */
   public static Calculation create(Map<String, Object> params, RequestOptions options)
       throws StripeException {
-    String url = String.format("%s%s", Stripe.getApiBase(), "/v1/tax/calculations");
+    String url = ApiResource.fullUrl(Stripe.getApiBase(), options, "/v1/tax/calculations");
     return ApiResource.request(
         ApiResource.RequestMethod.POST, url, params, Calculation.class, options);
   }
@@ -115,7 +115,7 @@ public class Calculation extends ApiResource implements HasId {
   /** Calculates tax based on input and returns a Tax <code>Calculation</code> object. */
   public static Calculation create(CalculationCreateParams params, RequestOptions options)
       throws StripeException {
-    String url = String.format("%s%s", Stripe.getApiBase(), "/v1/tax/calculations");
+    String url = ApiResource.fullUrl(Stripe.getApiBase(), options, "/v1/tax/calculations");
     return ApiResource.request(
         ApiResource.RequestMethod.POST, url, params, Calculation.class, options);
   }
@@ -134,9 +134,9 @@ public class Calculation extends ApiResource implements HasId {
   public LineItemCollection listLineItems(Map<String, Object> params, RequestOptions options)
       throws StripeException {
     String url =
-        String.format(
-            "%s%s",
+        ApiResource.fullUrl(
             Stripe.getApiBase(),
+            options,
             String.format(
                 "/v1/tax/calculations/%s/line_items", ApiResource.urlEncodeId(this.getId())));
     return ApiResource.requestCollection(url, params, LineItemCollection.class, options);
@@ -152,9 +152,9 @@ public class Calculation extends ApiResource implements HasId {
   public LineItemCollection listLineItems(
       CalculationListLineItemsParams params, RequestOptions options) throws StripeException {
     String url =
-        String.format(
-            "%s%s",
+        ApiResource.fullUrl(
             Stripe.getApiBase(),
+            options,
             String.format(
                 "/v1/tax/calculations/%s/line_items", ApiResource.urlEncodeId(this.getId())));
     return ApiResource.requestCollection(url, params, LineItemCollection.class, options);

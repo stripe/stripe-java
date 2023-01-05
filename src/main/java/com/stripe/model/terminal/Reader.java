@@ -338,9 +338,9 @@ public class Reader extends ApiResource implements HasId, MetadataStore<Reader> 
   public Reader refundPayment(Map<String, Object> params, RequestOptions options)
       throws StripeException {
     String url =
-        String.format(
-            "%s%s",
+        ApiResource.fullUrl(
             Stripe.getApiBase(),
+            options,
             String.format(
                 "/v1/terminal/readers/%s/refund_payment", ApiResource.urlEncodeId(this.getId())));
     return ApiResource.request(ApiResource.RequestMethod.POST, url, params, Reader.class, options);
@@ -355,9 +355,9 @@ public class Reader extends ApiResource implements HasId, MetadataStore<Reader> 
   public Reader refundPayment(ReaderRefundPaymentParams params, RequestOptions options)
       throws StripeException {
     String url =
-        String.format(
-            "%s%s",
+        ApiResource.fullUrl(
             Stripe.getApiBase(),
+            options,
             String.format(
                 "/v1/terminal/readers/%s/refund_payment", ApiResource.urlEncodeId(this.getId())));
     return ApiResource.request(ApiResource.RequestMethod.POST, url, params, Reader.class, options);
@@ -637,6 +637,14 @@ public class Reader extends ApiResource implements HasId, MetadataStore<Reader> 
       @Getter(lombok.AccessLevel.NONE)
       @Setter(lombok.AccessLevel.NONE)
       ExpandableField<Charge> charge;
+
+      /**
+       * Set of <a href="https://stripe.com/docs/api/metadata">key-value pairs</a> that you can
+       * attach to an object. This can be useful for storing additional information about the object
+       * in a structured format.
+       */
+      @SerializedName("metadata")
+      Map<String, String> metadata;
 
       /** Payment intent that is being refunded. */
       @SerializedName("payment_intent")

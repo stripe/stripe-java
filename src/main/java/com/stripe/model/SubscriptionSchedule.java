@@ -263,9 +263,9 @@ public class SubscriptionSchedule extends ApiResource
   public SubscriptionSchedule amend(Map<String, Object> params, RequestOptions options)
       throws StripeException {
     String url =
-        String.format(
-            "%s%s",
+        ApiResource.fullUrl(
             Stripe.getApiBase(),
+            options,
             String.format(
                 "/v1/subscription_schedules/%s/amend", ApiResource.urlEncodeId(this.getId())));
     return ApiResource.request(
@@ -281,9 +281,9 @@ public class SubscriptionSchedule extends ApiResource
   public SubscriptionSchedule amend(SubscriptionScheduleAmendParams params, RequestOptions options)
       throws StripeException {
     String url =
-        String.format(
-            "%s%s",
+        ApiResource.fullUrl(
             Stripe.getApiBase(),
+            options,
             String.format(
                 "/v1/subscription_schedules/%s/amend", ApiResource.urlEncodeId(this.getId())));
     return ApiResource.request(

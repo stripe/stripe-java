@@ -17,7 +17,7 @@ public class QuotePhaseCollection extends StripeCollection<QuotePhase> {
   /** Returns a list of quote phases. */
   public QuotePhaseCollection list(Map<String, Object> params, RequestOptions options)
       throws StripeException {
-    String url = String.format("%s%s", Stripe.getApiBase(), this.getUrl());
+    String url = ApiResource.fullUrl(Stripe.getApiBase(), options, this.getUrl());
     return ApiResource.requestCollection(url, params, QuotePhaseCollection.class, options);
   }
 
@@ -29,7 +29,7 @@ public class QuotePhaseCollection extends StripeCollection<QuotePhase> {
   /** Returns a list of quote phases. */
   public QuotePhaseCollection list(QuotePhaseCollectionListParams params, RequestOptions options)
       throws StripeException {
-    String url = String.format("%s%s", Stripe.getApiBase(), this.getUrl());
+    String url = ApiResource.fullUrl(Stripe.getApiBase(), options, this.getUrl());
     return ApiResource.requestCollection(url, params, QuotePhaseCollection.class, options);
   }
 }
