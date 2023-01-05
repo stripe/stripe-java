@@ -90,9 +90,9 @@ public class Capability extends ApiResource implements HasId {
   public Capability update(Map<String, Object> params, RequestOptions options)
       throws StripeException {
     String url =
-        String.format(
-            "%s%s",
+        ApiResource.fullUrl(
             Stripe.getApiBase(),
+            options,
             String.format(
                 "/v1/accounts/%s/capabilities/%s",
                 ApiResource.urlEncodeId(this.getAccount()), ApiResource.urlEncodeId(this.getId())));
@@ -109,9 +109,9 @@ public class Capability extends ApiResource implements HasId {
   public Capability update(CapabilityUpdateParams params, RequestOptions options)
       throws StripeException {
     String url =
-        String.format(
-            "%s%s",
+        ApiResource.fullUrl(
             Stripe.getApiBase(),
+            options,
             String.format(
                 "/v1/accounts/%s/capabilities/%s",
                 ApiResource.urlEncodeId(this.getAccount()), ApiResource.urlEncodeId(this.getId())));

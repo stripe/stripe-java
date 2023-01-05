@@ -183,9 +183,9 @@ public class OutboundTransfer extends ApiResource implements HasId {
   public OutboundTransfer cancel(Map<String, Object> params, RequestOptions options)
       throws StripeException {
     String url =
-        String.format(
-            "%s%s",
+        ApiResource.fullUrl(
             Stripe.getApiBase(),
+            options,
             String.format(
                 "/v1/treasury/outbound_transfers/%s/cancel",
                 ApiResource.urlEncodeId(this.getId())));
@@ -202,9 +202,9 @@ public class OutboundTransfer extends ApiResource implements HasId {
   public OutboundTransfer cancel(OutboundTransferCancelParams params, RequestOptions options)
       throws StripeException {
     String url =
-        String.format(
-            "%s%s",
+        ApiResource.fullUrl(
             Stripe.getApiBase(),
+            options,
             String.format(
                 "/v1/treasury/outbound_transfers/%s/cancel",
                 ApiResource.urlEncodeId(this.getId())));
@@ -220,7 +220,8 @@ public class OutboundTransfer extends ApiResource implements HasId {
   /** Creates an OutboundTransfer. */
   public static OutboundTransfer create(Map<String, Object> params, RequestOptions options)
       throws StripeException {
-    String url = String.format("%s%s", Stripe.getApiBase(), "/v1/treasury/outbound_transfers");
+    String url =
+        ApiResource.fullUrl(Stripe.getApiBase(), options, "/v1/treasury/outbound_transfers");
     return ApiResource.request(
         ApiResource.RequestMethod.POST, url, params, OutboundTransfer.class, options);
   }
@@ -234,7 +235,8 @@ public class OutboundTransfer extends ApiResource implements HasId {
   /** Creates an OutboundTransfer. */
   public static OutboundTransfer create(OutboundTransferCreateParams params, RequestOptions options)
       throws StripeException {
-    String url = String.format("%s%s", Stripe.getApiBase(), "/v1/treasury/outbound_transfers");
+    String url =
+        ApiResource.fullUrl(Stripe.getApiBase(), options, "/v1/treasury/outbound_transfers");
     return ApiResource.request(
         ApiResource.RequestMethod.POST, url, params, OutboundTransfer.class, options);
   }
@@ -247,7 +249,8 @@ public class OutboundTransfer extends ApiResource implements HasId {
   /** Returns a list of OutboundTransfers sent from the specified FinancialAccount. */
   public static OutboundTransferCollection list(Map<String, Object> params, RequestOptions options)
       throws StripeException {
-    String url = String.format("%s%s", Stripe.getApiBase(), "/v1/treasury/outbound_transfers");
+    String url =
+        ApiResource.fullUrl(Stripe.getApiBase(), options, "/v1/treasury/outbound_transfers");
     return ApiResource.requestCollection(url, params, OutboundTransferCollection.class, options);
   }
 
@@ -260,7 +263,8 @@ public class OutboundTransfer extends ApiResource implements HasId {
   /** Returns a list of OutboundTransfers sent from the specified FinancialAccount. */
   public static OutboundTransferCollection list(
       OutboundTransferListParams params, RequestOptions options) throws StripeException {
-    String url = String.format("%s%s", Stripe.getApiBase(), "/v1/treasury/outbound_transfers");
+    String url =
+        ApiResource.fullUrl(Stripe.getApiBase(), options, "/v1/treasury/outbound_transfers");
     return ApiResource.requestCollection(url, params, OutboundTransferCollection.class, options);
   }
 
@@ -289,9 +293,9 @@ public class OutboundTransfer extends ApiResource implements HasId {
       String outboundTransfer, Map<String, Object> params, RequestOptions options)
       throws StripeException {
     String url =
-        String.format(
-            "%s%s",
+        ApiResource.fullUrl(
             Stripe.getApiBase(),
+            options,
             String.format(
                 "/v1/treasury/outbound_transfers/%s", ApiResource.urlEncodeId(outboundTransfer)));
     return ApiResource.request(
@@ -306,9 +310,9 @@ public class OutboundTransfer extends ApiResource implements HasId {
       String outboundTransfer, OutboundTransferRetrieveParams params, RequestOptions options)
       throws StripeException {
     String url =
-        String.format(
-            "%s%s",
+        ApiResource.fullUrl(
             Stripe.getApiBase(),
+            options,
             String.format(
                 "/v1/treasury/outbound_transfers/%s", ApiResource.urlEncodeId(outboundTransfer)));
     return ApiResource.request(
@@ -528,9 +532,9 @@ public class OutboundTransfer extends ApiResource implements HasId {
     public OutboundTransfer fail(Map<String, Object> params, RequestOptions options)
         throws StripeException {
       String url =
-          String.format(
-              "%s%s",
+          ApiResource.fullUrl(
               Stripe.getApiBase(),
+              options,
               String.format(
                   "/v1/test_helpers/treasury/outbound_transfers/%s/fail",
                   ApiResource.urlEncodeId(this.resource.getId())));
@@ -553,9 +557,9 @@ public class OutboundTransfer extends ApiResource implements HasId {
     public OutboundTransfer fail(OutboundTransferFailParams params, RequestOptions options)
         throws StripeException {
       String url =
-          String.format(
-              "%s%s",
+          ApiResource.fullUrl(
               Stripe.getApiBase(),
+              options,
               String.format(
                   "/v1/test_helpers/treasury/outbound_transfers/%s/fail",
                   ApiResource.urlEncodeId(this.resource.getId())));
@@ -594,9 +598,9 @@ public class OutboundTransfer extends ApiResource implements HasId {
     public OutboundTransfer post(Map<String, Object> params, RequestOptions options)
         throws StripeException {
       String url =
-          String.format(
-              "%s%s",
+          ApiResource.fullUrl(
               Stripe.getApiBase(),
+              options,
               String.format(
                   "/v1/test_helpers/treasury/outbound_transfers/%s/post",
                   ApiResource.urlEncodeId(this.resource.getId())));
@@ -619,9 +623,9 @@ public class OutboundTransfer extends ApiResource implements HasId {
     public OutboundTransfer post(OutboundTransferPostParams params, RequestOptions options)
         throws StripeException {
       String url =
-          String.format(
-              "%s%s",
+          ApiResource.fullUrl(
               Stripe.getApiBase(),
+              options,
               String.format(
                   "/v1/test_helpers/treasury/outbound_transfers/%s/post",
                   ApiResource.urlEncodeId(this.resource.getId())));
@@ -661,9 +665,9 @@ public class OutboundTransfer extends ApiResource implements HasId {
     public OutboundTransfer returnOutboundTransfer(
         Map<String, Object> params, RequestOptions options) throws StripeException {
       String url =
-          String.format(
-              "%s%s",
+          ApiResource.fullUrl(
               Stripe.getApiBase(),
+              options,
               String.format(
                   "/v1/test_helpers/treasury/outbound_transfers/%s/return",
                   ApiResource.urlEncodeId(this.resource.getId())));
@@ -688,9 +692,9 @@ public class OutboundTransfer extends ApiResource implements HasId {
         OutboundTransferReturnOutboundTransferParams params, RequestOptions options)
         throws StripeException {
       String url =
-          String.format(
-              "%s%s",
+          ApiResource.fullUrl(
               Stripe.getApiBase(),
+              options,
               String.format(
                   "/v1/test_helpers/treasury/outbound_transfers/%s/return",
                   ApiResource.urlEncodeId(this.resource.getId())));

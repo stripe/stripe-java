@@ -258,9 +258,9 @@ public class Authorization extends ApiResource
   public Authorization approve(Map<String, Object> params, RequestOptions options)
       throws StripeException {
     String url =
-        String.format(
-            "%s%s",
+        ApiResource.fullUrl(
             Stripe.getApiBase(),
+            options,
             String.format(
                 "/v1/issuing/authorizations/%s/approve", ApiResource.urlEncodeId(this.getId())));
     return ApiResource.request(
@@ -290,9 +290,9 @@ public class Authorization extends ApiResource
   public Authorization approve(AuthorizationApproveParams params, RequestOptions options)
       throws StripeException {
     String url =
-        String.format(
-            "%s%s",
+        ApiResource.fullUrl(
             Stripe.getApiBase(),
+            options,
             String.format(
                 "/v1/issuing/authorizations/%s/approve", ApiResource.urlEncodeId(this.getId())));
     return ApiResource.request(
@@ -346,9 +346,9 @@ public class Authorization extends ApiResource
   public Authorization decline(Map<String, Object> params, RequestOptions options)
       throws StripeException {
     String url =
-        String.format(
-            "%s%s",
+        ApiResource.fullUrl(
             Stripe.getApiBase(),
+            options,
             String.format(
                 "/v1/issuing/authorizations/%s/decline", ApiResource.urlEncodeId(this.getId())));
     return ApiResource.request(
@@ -378,9 +378,9 @@ public class Authorization extends ApiResource
   public Authorization decline(AuthorizationDeclineParams params, RequestOptions options)
       throws StripeException {
     String url =
-        String.format(
-            "%s%s",
+        ApiResource.fullUrl(
             Stripe.getApiBase(),
+            options,
             String.format(
                 "/v1/issuing/authorizations/%s/decline", ApiResource.urlEncodeId(this.getId())));
     return ApiResource.request(
@@ -401,7 +401,7 @@ public class Authorization extends ApiResource
    */
   public static AuthorizationCollection list(Map<String, Object> params, RequestOptions options)
       throws StripeException {
-    String url = String.format("%s%s", Stripe.getApiBase(), "/v1/issuing/authorizations");
+    String url = ApiResource.fullUrl(Stripe.getApiBase(), options, "/v1/issuing/authorizations");
     return ApiResource.requestCollection(url, params, AuthorizationCollection.class, options);
   }
 
@@ -420,7 +420,7 @@ public class Authorization extends ApiResource
    */
   public static AuthorizationCollection list(AuthorizationListParams params, RequestOptions options)
       throws StripeException {
-    String url = String.format("%s%s", Stripe.getApiBase(), "/v1/issuing/authorizations");
+    String url = ApiResource.fullUrl(Stripe.getApiBase(), options, "/v1/issuing/authorizations");
     return ApiResource.requestCollection(url, params, AuthorizationCollection.class, options);
   }
 
@@ -440,9 +440,9 @@ public class Authorization extends ApiResource
       String authorization, Map<String, Object> params, RequestOptions options)
       throws StripeException {
     String url =
-        String.format(
-            "%s%s",
+        ApiResource.fullUrl(
             Stripe.getApiBase(),
+            options,
             String.format("/v1/issuing/authorizations/%s", ApiResource.urlEncodeId(authorization)));
     return ApiResource.request(
         ApiResource.RequestMethod.GET, url, params, Authorization.class, options);
@@ -453,9 +453,9 @@ public class Authorization extends ApiResource
       String authorization, AuthorizationRetrieveParams params, RequestOptions options)
       throws StripeException {
     String url =
-        String.format(
-            "%s%s",
+        ApiResource.fullUrl(
             Stripe.getApiBase(),
+            options,
             String.format("/v1/issuing/authorizations/%s", ApiResource.urlEncodeId(authorization)));
     return ApiResource.request(
         ApiResource.RequestMethod.GET, url, params, Authorization.class, options);
@@ -478,9 +478,9 @@ public class Authorization extends ApiResource
   public Authorization update(Map<String, Object> params, RequestOptions options)
       throws StripeException {
     String url =
-        String.format(
-            "%s%s",
+        ApiResource.fullUrl(
             Stripe.getApiBase(),
+            options,
             String.format("/v1/issuing/authorizations/%s", ApiResource.urlEncodeId(this.getId())));
     return ApiResource.request(
         ApiResource.RequestMethod.POST, url, params, Authorization.class, options);
@@ -501,9 +501,9 @@ public class Authorization extends ApiResource
   public Authorization update(AuthorizationUpdateParams params, RequestOptions options)
       throws StripeException {
     String url =
-        String.format(
-            "%s%s",
+        ApiResource.fullUrl(
             Stripe.getApiBase(),
+            options,
             String.format("/v1/issuing/authorizations/%s", ApiResource.urlEncodeId(this.getId())));
     return ApiResource.request(
         ApiResource.RequestMethod.POST, url, params, Authorization.class, options);

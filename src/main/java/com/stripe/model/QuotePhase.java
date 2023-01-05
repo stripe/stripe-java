@@ -231,9 +231,9 @@ public class QuotePhase extends ApiResource implements HasId {
   public LineItemCollection listLineItems(Map<String, Object> params, RequestOptions options)
       throws StripeException {
     String url =
-        String.format(
-            "%s%s",
+        ApiResource.fullUrl(
             Stripe.getApiBase(),
+            options,
             String.format("/v1/quote_phases/%s/line_items", ApiResource.urlEncodeId(this.getId())));
     return ApiResource.requestCollection(url, params, LineItemCollection.class, options);
   }
@@ -256,9 +256,9 @@ public class QuotePhase extends ApiResource implements HasId {
   public LineItemCollection listLineItems(
       QuotePhaseListLineItemsParams params, RequestOptions options) throws StripeException {
     String url =
-        String.format(
-            "%s%s",
+        ApiResource.fullUrl(
             Stripe.getApiBase(),
+            options,
             String.format("/v1/quote_phases/%s/line_items", ApiResource.urlEncodeId(this.getId())));
     return ApiResource.requestCollection(url, params, LineItemCollection.class, options);
   }
@@ -279,9 +279,9 @@ public class QuotePhase extends ApiResource implements HasId {
       String quotePhase, Map<String, Object> params, RequestOptions options)
       throws StripeException {
     String url =
-        String.format(
-            "%s%s",
+        ApiResource.fullUrl(
             Stripe.getApiBase(),
+            options,
             String.format("/v1/quote_phases/%s", ApiResource.urlEncodeId(quotePhase)));
     return ApiResource.request(
         ApiResource.RequestMethod.GET, url, params, QuotePhase.class, options);
@@ -292,9 +292,9 @@ public class QuotePhase extends ApiResource implements HasId {
       String quotePhase, QuotePhaseRetrieveParams params, RequestOptions options)
       throws StripeException {
     String url =
-        String.format(
-            "%s%s",
+        ApiResource.fullUrl(
             Stripe.getApiBase(),
+            options,
             String.format("/v1/quote_phases/%s", ApiResource.urlEncodeId(quotePhase)));
     return ApiResource.request(
         ApiResource.RequestMethod.GET, url, params, QuotePhase.class, options);

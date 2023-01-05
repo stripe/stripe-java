@@ -87,7 +87,8 @@ public class Session extends ApiResource implements HasId {
    */
   public static Session create(Map<String, Object> params, RequestOptions options)
       throws StripeException {
-    String url = String.format("%s%s", Stripe.getApiBase(), "/v1/financial_connections/sessions");
+    String url =
+        ApiResource.fullUrl(Stripe.getApiBase(), options, "/v1/financial_connections/sessions");
     return ApiResource.request(ApiResource.RequestMethod.POST, url, params, Session.class, options);
   }
 
@@ -105,7 +106,8 @@ public class Session extends ApiResource implements HasId {
    */
   public static Session create(SessionCreateParams params, RequestOptions options)
       throws StripeException {
-    String url = String.format("%s%s", Stripe.getApiBase(), "/v1/financial_connections/sessions");
+    String url =
+        ApiResource.fullUrl(Stripe.getApiBase(), options, "/v1/financial_connections/sessions");
     return ApiResource.request(ApiResource.RequestMethod.POST, url, params, Session.class, options);
   }
 
@@ -123,9 +125,9 @@ public class Session extends ApiResource implements HasId {
   public static Session retrieve(String session, Map<String, Object> params, RequestOptions options)
       throws StripeException {
     String url =
-        String.format(
-            "%s%s",
+        ApiResource.fullUrl(
             Stripe.getApiBase(),
+            options,
             String.format(
                 "/v1/financial_connections/sessions/%s", ApiResource.urlEncodeId(session)));
     return ApiResource.request(ApiResource.RequestMethod.GET, url, params, Session.class, options);
@@ -135,9 +137,9 @@ public class Session extends ApiResource implements HasId {
   public static Session retrieve(
       String session, SessionRetrieveParams params, RequestOptions options) throws StripeException {
     String url =
-        String.format(
-            "%s%s",
+        ApiResource.fullUrl(
             Stripe.getApiBase(),
+            options,
             String.format(
                 "/v1/financial_connections/sessions/%s", ApiResource.urlEncodeId(session)));
     return ApiResource.request(ApiResource.RequestMethod.GET, url, params, Session.class, options);

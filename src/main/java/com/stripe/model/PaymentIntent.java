@@ -504,9 +504,9 @@ public class PaymentIntent extends ApiResource implements HasId, MetadataStore<P
   public PaymentIntent applyCustomerBalance(Map<String, Object> params, RequestOptions options)
       throws StripeException {
     String url =
-        String.format(
-            "%s%s",
+        ApiResource.fullUrl(
             Stripe.getApiBase(),
+            options,
             String.format(
                 "/v1/payment_intents/%s/apply_customer_balance",
                 ApiResource.urlEncodeId(this.getId())));
@@ -525,9 +525,9 @@ public class PaymentIntent extends ApiResource implements HasId, MetadataStore<P
       PaymentIntentApplyCustomerBalanceParams params, RequestOptions options)
       throws StripeException {
     String url =
-        String.format(
-            "%s%s",
+        ApiResource.fullUrl(
             Stripe.getApiBase(),
+            options,
             String.format(
                 "/v1/payment_intents/%s/apply_customer_balance",
                 ApiResource.urlEncodeId(this.getId())));
@@ -610,9 +610,9 @@ public class PaymentIntent extends ApiResource implements HasId, MetadataStore<P
   public PaymentIntent cancel(Map<String, Object> params, RequestOptions options)
       throws StripeException {
     String url =
-        String.format(
-            "%s%s",
+        ApiResource.fullUrl(
             Stripe.getApiBase(),
+            options,
             String.format("/v1/payment_intents/%s/cancel", ApiResource.urlEncodeId(this.getId())));
     return ApiResource.request(
         ApiResource.RequestMethod.POST, url, params, PaymentIntent.class, options);
@@ -655,9 +655,9 @@ public class PaymentIntent extends ApiResource implements HasId, MetadataStore<P
   public PaymentIntent cancel(PaymentIntentCancelParams params, RequestOptions options)
       throws StripeException {
     String url =
-        String.format(
-            "%s%s",
+        ApiResource.fullUrl(
             Stripe.getApiBase(),
+            options,
             String.format("/v1/payment_intents/%s/cancel", ApiResource.urlEncodeId(this.getId())));
     return ApiResource.request(
         ApiResource.RequestMethod.POST, url, params, PaymentIntent.class, options);
@@ -718,9 +718,9 @@ public class PaymentIntent extends ApiResource implements HasId, MetadataStore<P
   public PaymentIntent capture(Map<String, Object> params, RequestOptions options)
       throws StripeException {
     String url =
-        String.format(
-            "%s%s",
+        ApiResource.fullUrl(
             Stripe.getApiBase(),
+            options,
             String.format("/v1/payment_intents/%s/capture", ApiResource.urlEncodeId(this.getId())));
     return ApiResource.request(
         ApiResource.RequestMethod.POST, url, params, PaymentIntent.class, options);
@@ -753,9 +753,9 @@ public class PaymentIntent extends ApiResource implements HasId, MetadataStore<P
   public PaymentIntent capture(PaymentIntentCaptureParams params, RequestOptions options)
       throws StripeException {
     String url =
-        String.format(
-            "%s%s",
+        ApiResource.fullUrl(
             Stripe.getApiBase(),
+            options,
             String.format("/v1/payment_intents/%s/capture", ApiResource.urlEncodeId(this.getId())));
     return ApiResource.request(
         ApiResource.RequestMethod.POST, url, params, PaymentIntent.class, options);
@@ -864,9 +864,9 @@ public class PaymentIntent extends ApiResource implements HasId, MetadataStore<P
   public PaymentIntent confirm(Map<String, Object> params, RequestOptions options)
       throws StripeException {
     String url =
-        String.format(
-            "%s%s",
+        ApiResource.fullUrl(
             Stripe.getApiBase(),
+            options,
             String.format("/v1/payment_intents/%s/confirm", ApiResource.urlEncodeId(this.getId())));
     return ApiResource.request(
         ApiResource.RequestMethod.POST, url, params, PaymentIntent.class, options);
@@ -923,9 +923,9 @@ public class PaymentIntent extends ApiResource implements HasId, MetadataStore<P
   public PaymentIntent confirm(PaymentIntentConfirmParams params, RequestOptions options)
       throws StripeException {
     String url =
-        String.format(
-            "%s%s",
+        ApiResource.fullUrl(
             Stripe.getApiBase(),
+            options,
             String.format("/v1/payment_intents/%s/confirm", ApiResource.urlEncodeId(this.getId())));
     return ApiResource.request(
         ApiResource.RequestMethod.POST, url, params, PaymentIntent.class, options);
@@ -963,7 +963,7 @@ public class PaymentIntent extends ApiResource implements HasId, MetadataStore<P
    */
   public static PaymentIntent create(Map<String, Object> params, RequestOptions options)
       throws StripeException {
-    String url = String.format("%s%s", Stripe.getApiBase(), "/v1/payment_intents");
+    String url = ApiResource.fullUrl(Stripe.getApiBase(), options, "/v1/payment_intents");
     return ApiResource.request(
         ApiResource.RequestMethod.POST, url, params, PaymentIntent.class, options);
   }
@@ -1000,7 +1000,7 @@ public class PaymentIntent extends ApiResource implements HasId, MetadataStore<P
    */
   public static PaymentIntent create(PaymentIntentCreateParams params, RequestOptions options)
       throws StripeException {
-    String url = String.format("%s%s", Stripe.getApiBase(), "/v1/payment_intents");
+    String url = ApiResource.fullUrl(Stripe.getApiBase(), options, "/v1/payment_intents");
     return ApiResource.request(
         ApiResource.RequestMethod.POST, url, params, PaymentIntent.class, options);
   }
@@ -1066,9 +1066,9 @@ public class PaymentIntent extends ApiResource implements HasId, MetadataStore<P
   public PaymentIntent incrementAuthorization(Map<String, Object> params, RequestOptions options)
       throws StripeException {
     String url =
-        String.format(
-            "%s%s",
+        ApiResource.fullUrl(
             Stripe.getApiBase(),
+            options,
             String.format(
                 "/v1/payment_intents/%s/increment_authorization",
                 ApiResource.urlEncodeId(this.getId())));
@@ -1139,9 +1139,9 @@ public class PaymentIntent extends ApiResource implements HasId, MetadataStore<P
       PaymentIntentIncrementAuthorizationParams params, RequestOptions options)
       throws StripeException {
     String url =
-        String.format(
-            "%s%s",
+        ApiResource.fullUrl(
             Stripe.getApiBase(),
+            options,
             String.format(
                 "/v1/payment_intents/%s/increment_authorization",
                 ApiResource.urlEncodeId(this.getId())));
@@ -1157,7 +1157,7 @@ public class PaymentIntent extends ApiResource implements HasId, MetadataStore<P
   /** Returns a list of PaymentIntents. */
   public static PaymentIntentCollection list(Map<String, Object> params, RequestOptions options)
       throws StripeException {
-    String url = String.format("%s%s", Stripe.getApiBase(), "/v1/payment_intents");
+    String url = ApiResource.fullUrl(Stripe.getApiBase(), options, "/v1/payment_intents");
     return ApiResource.requestCollection(url, params, PaymentIntentCollection.class, options);
   }
 
@@ -1170,7 +1170,7 @@ public class PaymentIntent extends ApiResource implements HasId, MetadataStore<P
   /** Returns a list of PaymentIntents. */
   public static PaymentIntentCollection list(PaymentIntentListParams params, RequestOptions options)
       throws StripeException {
-    String url = String.format("%s%s", Stripe.getApiBase(), "/v1/payment_intents");
+    String url = ApiResource.fullUrl(Stripe.getApiBase(), options, "/v1/payment_intents");
     return ApiResource.requestCollection(url, params, PaymentIntentCollection.class, options);
   }
 
@@ -1216,9 +1216,9 @@ public class PaymentIntent extends ApiResource implements HasId, MetadataStore<P
   public static PaymentIntent retrieve(
       String intent, Map<String, Object> params, RequestOptions options) throws StripeException {
     String url =
-        String.format(
-            "%s%s",
+        ApiResource.fullUrl(
             Stripe.getApiBase(),
+            options,
             String.format("/v1/payment_intents/%s", ApiResource.urlEncodeId(intent)));
     return ApiResource.request(
         ApiResource.RequestMethod.GET, url, params, PaymentIntent.class, options);
@@ -1238,9 +1238,9 @@ public class PaymentIntent extends ApiResource implements HasId, MetadataStore<P
       String intent, PaymentIntentRetrieveParams params, RequestOptions options)
       throws StripeException {
     String url =
-        String.format(
-            "%s%s",
+        ApiResource.fullUrl(
             Stripe.getApiBase(),
+            options,
             String.format("/v1/payment_intents/%s", ApiResource.urlEncodeId(intent)));
     return ApiResource.request(
         ApiResource.RequestMethod.GET, url, params, PaymentIntent.class, options);
@@ -1269,7 +1269,7 @@ public class PaymentIntent extends ApiResource implements HasId, MetadataStore<P
    */
   public static PaymentIntentSearchResult search(Map<String, Object> params, RequestOptions options)
       throws StripeException {
-    String url = String.format("%s%s", Stripe.getApiBase(), "/v1/payment_intents/search");
+    String url = ApiResource.fullUrl(Stripe.getApiBase(), options, "/v1/payment_intents/search");
     return ApiResource.requestSearchResult(url, params, PaymentIntentSearchResult.class, options);
   }
 
@@ -1296,7 +1296,7 @@ public class PaymentIntent extends ApiResource implements HasId, MetadataStore<P
    */
   public static PaymentIntentSearchResult search(
       PaymentIntentSearchParams params, RequestOptions options) throws StripeException {
-    String url = String.format("%s%s", Stripe.getApiBase(), "/v1/payment_intents/search");
+    String url = ApiResource.fullUrl(Stripe.getApiBase(), options, "/v1/payment_intents/search");
     return ApiResource.requestSearchResult(url, params, PaymentIntentSearchResult.class, options);
   }
 
@@ -1327,9 +1327,9 @@ public class PaymentIntent extends ApiResource implements HasId, MetadataStore<P
   public PaymentIntent update(Map<String, Object> params, RequestOptions options)
       throws StripeException {
     String url =
-        String.format(
-            "%s%s",
+        ApiResource.fullUrl(
             Stripe.getApiBase(),
+            options,
             String.format("/v1/payment_intents/%s", ApiResource.urlEncodeId(this.getId())));
     return ApiResource.request(
         ApiResource.RequestMethod.POST, url, params, PaymentIntent.class, options);
@@ -1360,9 +1360,9 @@ public class PaymentIntent extends ApiResource implements HasId, MetadataStore<P
   public PaymentIntent update(PaymentIntentUpdateParams params, RequestOptions options)
       throws StripeException {
     String url =
-        String.format(
-            "%s%s",
+        ApiResource.fullUrl(
             Stripe.getApiBase(),
+            options,
             String.format("/v1/payment_intents/%s", ApiResource.urlEncodeId(this.getId())));
     return ApiResource.request(
         ApiResource.RequestMethod.POST, url, params, PaymentIntent.class, options);
@@ -1387,9 +1387,9 @@ public class PaymentIntent extends ApiResource implements HasId, MetadataStore<P
   public PaymentIntent verifyMicrodeposits(Map<String, Object> params, RequestOptions options)
       throws StripeException {
     String url =
-        String.format(
-            "%s%s",
+        ApiResource.fullUrl(
             Stripe.getApiBase(),
+            options,
             String.format(
                 "/v1/payment_intents/%s/verify_microdeposits",
                 ApiResource.urlEncodeId(this.getId())));
@@ -1408,9 +1408,9 @@ public class PaymentIntent extends ApiResource implements HasId, MetadataStore<P
       PaymentIntentVerifyMicrodepositsParams params, RequestOptions options)
       throws StripeException {
     String url =
-        String.format(
-            "%s%s",
+        ApiResource.fullUrl(
             Stripe.getApiBase(),
+            options,
             String.format(
                 "/v1/payment_intents/%s/verify_microdeposits",
                 ApiResource.urlEncodeId(this.getId())));

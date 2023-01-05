@@ -140,7 +140,7 @@ public class DebitReversal extends ApiResource implements HasId {
   /** Reverses a ReceivedDebit and creates a DebitReversal object. */
   public static DebitReversal create(Map<String, Object> params, RequestOptions options)
       throws StripeException {
-    String url = String.format("%s%s", Stripe.getApiBase(), "/v1/treasury/debit_reversals");
+    String url = ApiResource.fullUrl(Stripe.getApiBase(), options, "/v1/treasury/debit_reversals");
     return ApiResource.request(
         ApiResource.RequestMethod.POST, url, params, DebitReversal.class, options);
   }
@@ -153,7 +153,7 @@ public class DebitReversal extends ApiResource implements HasId {
   /** Reverses a ReceivedDebit and creates a DebitReversal object. */
   public static DebitReversal create(DebitReversalCreateParams params, RequestOptions options)
       throws StripeException {
-    String url = String.format("%s%s", Stripe.getApiBase(), "/v1/treasury/debit_reversals");
+    String url = ApiResource.fullUrl(Stripe.getApiBase(), options, "/v1/treasury/debit_reversals");
     return ApiResource.request(
         ApiResource.RequestMethod.POST, url, params, DebitReversal.class, options);
   }
@@ -166,7 +166,7 @@ public class DebitReversal extends ApiResource implements HasId {
   /** Returns a list of DebitReversals. */
   public static DebitReversalCollection list(Map<String, Object> params, RequestOptions options)
       throws StripeException {
-    String url = String.format("%s%s", Stripe.getApiBase(), "/v1/treasury/debit_reversals");
+    String url = ApiResource.fullUrl(Stripe.getApiBase(), options, "/v1/treasury/debit_reversals");
     return ApiResource.requestCollection(url, params, DebitReversalCollection.class, options);
   }
 
@@ -179,7 +179,7 @@ public class DebitReversal extends ApiResource implements HasId {
   /** Returns a list of DebitReversals. */
   public static DebitReversalCollection list(DebitReversalListParams params, RequestOptions options)
       throws StripeException {
-    String url = String.format("%s%s", Stripe.getApiBase(), "/v1/treasury/debit_reversals");
+    String url = ApiResource.fullUrl(Stripe.getApiBase(), options, "/v1/treasury/debit_reversals");
     return ApiResource.requestCollection(url, params, DebitReversalCollection.class, options);
   }
 
@@ -199,9 +199,9 @@ public class DebitReversal extends ApiResource implements HasId {
       String debitReversal, Map<String, Object> params, RequestOptions options)
       throws StripeException {
     String url =
-        String.format(
-            "%s%s",
+        ApiResource.fullUrl(
             Stripe.getApiBase(),
+            options,
             String.format(
                 "/v1/treasury/debit_reversals/%s", ApiResource.urlEncodeId(debitReversal)));
     return ApiResource.request(
@@ -213,9 +213,9 @@ public class DebitReversal extends ApiResource implements HasId {
       String debitReversal, DebitReversalRetrieveParams params, RequestOptions options)
       throws StripeException {
     String url =
-        String.format(
-            "%s%s",
+        ApiResource.fullUrl(
             Stripe.getApiBase(),
+            options,
             String.format(
                 "/v1/treasury/debit_reversals/%s", ApiResource.urlEncodeId(debitReversal)));
     return ApiResource.request(

@@ -178,7 +178,7 @@ public class BalanceTransaction extends ApiResource implements HasId {
    */
   public static BalanceTransactionCollection list(
       Map<String, Object> params, RequestOptions options) throws StripeException {
-    String url = String.format("%s%s", Stripe.getApiBase(), "/v1/balance_transactions");
+    String url = ApiResource.fullUrl(Stripe.getApiBase(), options, "/v1/balance_transactions");
     return ApiResource.requestCollection(url, params, BalanceTransactionCollection.class, options);
   }
 
@@ -205,7 +205,7 @@ public class BalanceTransaction extends ApiResource implements HasId {
    */
   public static BalanceTransactionCollection list(
       BalanceTransactionListParams params, RequestOptions options) throws StripeException {
-    String url = String.format("%s%s", Stripe.getApiBase(), "/v1/balance_transactions");
+    String url = ApiResource.fullUrl(Stripe.getApiBase(), options, "/v1/balance_transactions");
     return ApiResource.requestCollection(url, params, BalanceTransactionCollection.class, options);
   }
 
@@ -236,9 +236,9 @@ public class BalanceTransaction extends ApiResource implements HasId {
   public static BalanceTransaction retrieve(
       String id, Map<String, Object> params, RequestOptions options) throws StripeException {
     String url =
-        String.format(
-            "%s%s",
+        ApiResource.fullUrl(
             Stripe.getApiBase(),
+            options,
             String.format("/v1/balance_transactions/%s", ApiResource.urlEncodeId(id)));
     return ApiResource.request(
         ApiResource.RequestMethod.GET, url, params, BalanceTransaction.class, options);
@@ -253,9 +253,9 @@ public class BalanceTransaction extends ApiResource implements HasId {
       String id, BalanceTransactionRetrieveParams params, RequestOptions options)
       throws StripeException {
     String url =
-        String.format(
-            "%s%s",
+        ApiResource.fullUrl(
             Stripe.getApiBase(),
+            options,
             String.format("/v1/balance_transactions/%s", ApiResource.urlEncodeId(id)));
     return ApiResource.request(
         ApiResource.RequestMethod.GET, url, params, BalanceTransaction.class, options);

@@ -104,7 +104,7 @@ public class Transaction extends ApiResource implements HasId {
   /** Creates a Tax <code>Transaction</code> from a calculation. */
   public static Transaction create(Map<String, Object> params, RequestOptions options)
       throws StripeException {
-    String url = String.format("%s%s", Stripe.getApiBase(), "/v1/tax/transactions");
+    String url = ApiResource.fullUrl(Stripe.getApiBase(), options, "/v1/tax/transactions");
     return ApiResource.request(
         ApiResource.RequestMethod.POST, url, params, Transaction.class, options);
   }
@@ -117,7 +117,7 @@ public class Transaction extends ApiResource implements HasId {
   /** Creates a Tax <code>Transaction</code> from a calculation. */
   public static Transaction create(TransactionCreateParams params, RequestOptions options)
       throws StripeException {
-    String url = String.format("%s%s", Stripe.getApiBase(), "/v1/tax/transactions");
+    String url = ApiResource.fullUrl(Stripe.getApiBase(), options, "/v1/tax/transactions");
     return ApiResource.request(
         ApiResource.RequestMethod.POST, url, params, Transaction.class, options);
   }
@@ -130,7 +130,8 @@ public class Transaction extends ApiResource implements HasId {
   /** Partially or fully reverses a previously created <code>Transaction</code>. */
   public static Transaction createReversal(Map<String, Object> params, RequestOptions options)
       throws StripeException {
-    String url = String.format("%s%s", Stripe.getApiBase(), "/v1/tax/transactions/create_reversal");
+    String url =
+        ApiResource.fullUrl(Stripe.getApiBase(), options, "/v1/tax/transactions/create_reversal");
     return ApiResource.request(
         ApiResource.RequestMethod.POST, url, params, Transaction.class, options);
   }
@@ -144,7 +145,8 @@ public class Transaction extends ApiResource implements HasId {
   /** Partially or fully reverses a previously created <code>Transaction</code>. */
   public static Transaction createReversal(
       TransactionCreateReversalParams params, RequestOptions options) throws StripeException {
-    String url = String.format("%s%s", Stripe.getApiBase(), "/v1/tax/transactions/create_reversal");
+    String url =
+        ApiResource.fullUrl(Stripe.getApiBase(), options, "/v1/tax/transactions/create_reversal");
     return ApiResource.request(
         ApiResource.RequestMethod.POST, url, params, Transaction.class, options);
   }
@@ -165,9 +167,9 @@ public class Transaction extends ApiResource implements HasId {
       String transaction, Map<String, Object> params, RequestOptions options)
       throws StripeException {
     String url =
-        String.format(
-            "%s%s",
+        ApiResource.fullUrl(
             Stripe.getApiBase(),
+            options,
             String.format("/v1/tax/transactions/%s", ApiResource.urlEncodeId(transaction)));
     return ApiResource.request(
         ApiResource.RequestMethod.GET, url, params, Transaction.class, options);
@@ -178,9 +180,9 @@ public class Transaction extends ApiResource implements HasId {
       String transaction, TransactionRetrieveParams params, RequestOptions options)
       throws StripeException {
     String url =
-        String.format(
-            "%s%s",
+        ApiResource.fullUrl(
             Stripe.getApiBase(),
+            options,
             String.format("/v1/tax/transactions/%s", ApiResource.urlEncodeId(transaction)));
     return ApiResource.request(
         ApiResource.RequestMethod.GET, url, params, Transaction.class, options);

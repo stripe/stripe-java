@@ -191,9 +191,9 @@ public class CustomerBalanceTransaction extends ApiResource
   public CustomerBalanceTransaction update(Map<String, Object> params, RequestOptions options)
       throws StripeException {
     String url =
-        String.format(
-            "%s%s",
+        ApiResource.fullUrl(
             Stripe.getApiBase(),
+            options,
             String.format(
                 "/v1/customers/%s/balance_transactions/%s",
                 ApiResource.urlEncodeId(this.getCustomer()),
@@ -219,9 +219,9 @@ public class CustomerBalanceTransaction extends ApiResource
       CustomerBalanceTransactionUpdateParams params, RequestOptions options)
       throws StripeException {
     String url =
-        String.format(
-            "%s%s",
+        ApiResource.fullUrl(
             Stripe.getApiBase(),
+            options,
             String.format(
                 "/v1/customers/%s/balance_transactions/%s",
                 ApiResource.urlEncodeId(this.getCustomer()),

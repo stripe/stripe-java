@@ -257,9 +257,9 @@ public class PaymentMethod extends ApiResource implements HasId, MetadataStore<P
   public PaymentMethod attach(Map<String, Object> params, RequestOptions options)
       throws StripeException {
     String url =
-        String.format(
-            "%s%s",
+        ApiResource.fullUrl(
             Stripe.getApiBase(),
+            options,
             String.format("/v1/payment_methods/%s/attach", ApiResource.urlEncodeId(this.getId())));
     return ApiResource.request(
         ApiResource.RequestMethod.POST, url, params, PaymentMethod.class, options);
@@ -308,9 +308,9 @@ public class PaymentMethod extends ApiResource implements HasId, MetadataStore<P
   public PaymentMethod attach(PaymentMethodAttachParams params, RequestOptions options)
       throws StripeException {
     String url =
-        String.format(
-            "%s%s",
+        ApiResource.fullUrl(
             Stripe.getApiBase(),
+            options,
             String.format("/v1/payment_methods/%s/attach", ApiResource.urlEncodeId(this.getId())));
     return ApiResource.request(
         ApiResource.RequestMethod.POST, url, params, PaymentMethod.class, options);
@@ -344,7 +344,7 @@ public class PaymentMethod extends ApiResource implements HasId, MetadataStore<P
    */
   public static PaymentMethod create(Map<String, Object> params, RequestOptions options)
       throws StripeException {
-    String url = String.format("%s%s", Stripe.getApiBase(), "/v1/payment_methods");
+    String url = ApiResource.fullUrl(Stripe.getApiBase(), options, "/v1/payment_methods");
     return ApiResource.request(
         ApiResource.RequestMethod.POST, url, params, PaymentMethod.class, options);
   }
@@ -377,7 +377,7 @@ public class PaymentMethod extends ApiResource implements HasId, MetadataStore<P
    */
   public static PaymentMethod create(PaymentMethodCreateParams params, RequestOptions options)
       throws StripeException {
-    String url = String.format("%s%s", Stripe.getApiBase(), "/v1/payment_methods");
+    String url = ApiResource.fullUrl(Stripe.getApiBase(), options, "/v1/payment_methods");
     return ApiResource.request(
         ApiResource.RequestMethod.POST, url, params, PaymentMethod.class, options);
   }
@@ -413,9 +413,9 @@ public class PaymentMethod extends ApiResource implements HasId, MetadataStore<P
   public PaymentMethod detach(Map<String, Object> params, RequestOptions options)
       throws StripeException {
     String url =
-        String.format(
-            "%s%s",
+        ApiResource.fullUrl(
             Stripe.getApiBase(),
+            options,
             String.format("/v1/payment_methods/%s/detach", ApiResource.urlEncodeId(this.getId())));
     return ApiResource.request(
         ApiResource.RequestMethod.POST, url, params, PaymentMethod.class, options);
@@ -436,9 +436,9 @@ public class PaymentMethod extends ApiResource implements HasId, MetadataStore<P
   public PaymentMethod detach(PaymentMethodDetachParams params, RequestOptions options)
       throws StripeException {
     String url =
-        String.format(
-            "%s%s",
+        ApiResource.fullUrl(
             Stripe.getApiBase(),
+            options,
             String.format("/v1/payment_methods/%s/detach", ApiResource.urlEncodeId(this.getId())));
     return ApiResource.request(
         ApiResource.RequestMethod.POST, url, params, PaymentMethod.class, options);
@@ -462,7 +462,7 @@ public class PaymentMethod extends ApiResource implements HasId, MetadataStore<P
    */
   public static PaymentMethodCollection list(Map<String, Object> params, RequestOptions options)
       throws StripeException {
-    String url = String.format("%s%s", Stripe.getApiBase(), "/v1/payment_methods");
+    String url = ApiResource.fullUrl(Stripe.getApiBase(), options, "/v1/payment_methods");
     return ApiResource.requestCollection(url, params, PaymentMethodCollection.class, options);
   }
 
@@ -485,7 +485,7 @@ public class PaymentMethod extends ApiResource implements HasId, MetadataStore<P
    */
   public static PaymentMethodCollection list(PaymentMethodListParams params, RequestOptions options)
       throws StripeException {
-    String url = String.format("%s%s", Stripe.getApiBase(), "/v1/payment_methods");
+    String url = ApiResource.fullUrl(Stripe.getApiBase(), options, "/v1/payment_methods");
     return ApiResource.requestCollection(url, params, PaymentMethodCollection.class, options);
   }
 
@@ -520,9 +520,9 @@ public class PaymentMethod extends ApiResource implements HasId, MetadataStore<P
       String paymentMethod, Map<String, Object> params, RequestOptions options)
       throws StripeException {
     String url =
-        String.format(
-            "%s%s",
+        ApiResource.fullUrl(
             Stripe.getApiBase(),
+            options,
             String.format("/v1/payment_methods/%s", ApiResource.urlEncodeId(paymentMethod)));
     return ApiResource.request(
         ApiResource.RequestMethod.GET, url, params, PaymentMethod.class, options);
@@ -538,9 +538,9 @@ public class PaymentMethod extends ApiResource implements HasId, MetadataStore<P
       String paymentMethod, PaymentMethodRetrieveParams params, RequestOptions options)
       throws StripeException {
     String url =
-        String.format(
-            "%s%s",
+        ApiResource.fullUrl(
             Stripe.getApiBase(),
+            options,
             String.format("/v1/payment_methods/%s", ApiResource.urlEncodeId(paymentMethod)));
     return ApiResource.request(
         ApiResource.RequestMethod.GET, url, params, PaymentMethod.class, options);
@@ -557,9 +557,9 @@ public class PaymentMethod extends ApiResource implements HasId, MetadataStore<P
   public PaymentMethod update(Map<String, Object> params, RequestOptions options)
       throws StripeException {
     String url =
-        String.format(
-            "%s%s",
+        ApiResource.fullUrl(
             Stripe.getApiBase(),
+            options,
             String.format("/v1/payment_methods/%s", ApiResource.urlEncodeId(this.getId())));
     return ApiResource.request(
         ApiResource.RequestMethod.POST, url, params, PaymentMethod.class, options);
@@ -574,9 +574,9 @@ public class PaymentMethod extends ApiResource implements HasId, MetadataStore<P
   public PaymentMethod update(PaymentMethodUpdateParams params, RequestOptions options)
       throws StripeException {
     String url =
-        String.format(
-            "%s%s",
+        ApiResource.fullUrl(
             Stripe.getApiBase(),
+            options,
             String.format("/v1/payment_methods/%s", ApiResource.urlEncodeId(this.getId())));
     return ApiResource.request(
         ApiResource.RequestMethod.POST, url, params, PaymentMethod.class, options);
@@ -782,7 +782,7 @@ public class PaymentMethod extends ApiResource implements HasId, MetadataStore<P
     @SerializedName("networks")
     Networks networks;
 
-    /** Contains details on how this Card maybe be used for 3D Secure authentication. */
+    /** Contains details on how this Card may be used for 3D Secure authentication. */
     @SerializedName("three_d_secure_usage")
     ThreeDSecureUsage threeDSecureUsage;
 

@@ -7310,7 +7310,7 @@ public class QuoteCreateParams extends ApiRequestParams {
 
   @Getter
   public static class SubscriptionData {
-    /** The start of the period to bill from when the Quote is accepted. */
+    /** Describes the period to bill for upon accepting the quote. */
     @SerializedName("bill_on_acceptance")
     BillOnAcceptance billOnAcceptance;
 
@@ -7482,7 +7482,7 @@ public class QuoteCreateParams extends ApiRequestParams {
             this.trialPeriodDays);
       }
 
-      /** The start of the period to bill from when the Quote is accepted. */
+      /** Describes the period to bill for upon accepting the quote. */
       public Builder setBillOnAcceptance(
           QuoteCreateParams.SubscriptionData.BillOnAcceptance billOnAcceptance) {
         this.billOnAcceptance = billOnAcceptance;
@@ -8068,6 +8068,10 @@ public class QuoteCreateParams extends ApiRequestParams {
 
       @Getter
       public static class BillUntil {
+        /** Details of the duration over which to bill. */
+        @SerializedName("duration")
+        Duration duration;
+
         /**
          * Map of extra parameters for custom features not available in this client library. The
          * content in this map is not serialized under this field's {@code @SerializedName} value.
@@ -8079,8 +8083,8 @@ public class QuoteCreateParams extends ApiRequestParams {
         Map<String, Object> extraParams;
 
         /** Details of a Quote line item from which to bill until. */
-        @SerializedName("line_starts_at")
-        LineStartsAt lineStartsAt;
+        @SerializedName("line_ends_at")
+        LineEndsAt lineEndsAt;
 
         /** Details of a Unix timestamp to bill until. */
         @SerializedName("timestamp")
@@ -8091,12 +8095,14 @@ public class QuoteCreateParams extends ApiRequestParams {
         Type type;
 
         private BillUntil(
+            Duration duration,
             Map<String, Object> extraParams,
-            LineStartsAt lineStartsAt,
+            LineEndsAt lineEndsAt,
             Timestamp timestamp,
             Type type) {
+          this.duration = duration;
           this.extraParams = extraParams;
-          this.lineStartsAt = lineStartsAt;
+          this.lineEndsAt = lineEndsAt;
           this.timestamp = timestamp;
           this.type = type;
         }
@@ -8106,9 +8112,11 @@ public class QuoteCreateParams extends ApiRequestParams {
         }
 
         public static class Builder {
+          private Duration duration;
+
           private Map<String, Object> extraParams;
 
-          private LineStartsAt lineStartsAt;
+          private LineEndsAt lineEndsAt;
 
           private Timestamp timestamp;
 
@@ -8117,7 +8125,14 @@ public class QuoteCreateParams extends ApiRequestParams {
           /** Finalize and obtain parameter instance from this builder. */
           public QuoteCreateParams.SubscriptionData.BillOnAcceptance.BillUntil build() {
             return new QuoteCreateParams.SubscriptionData.BillOnAcceptance.BillUntil(
-                this.extraParams, this.lineStartsAt, this.timestamp, this.type);
+                this.duration, this.extraParams, this.lineEndsAt, this.timestamp, this.type);
+          }
+
+          /** Details of the duration over which to bill. */
+          public Builder setDuration(
+              QuoteCreateParams.SubscriptionData.BillOnAcceptance.BillUntil.Duration duration) {
+            this.duration = duration;
+            return this;
           }
 
           /**
@@ -8151,10 +8166,9 @@ public class QuoteCreateParams extends ApiRequestParams {
           }
 
           /** Details of a Quote line item from which to bill until. */
-          public Builder setLineStartsAt(
-              QuoteCreateParams.SubscriptionData.BillOnAcceptance.BillUntil.LineStartsAt
-                  lineStartsAt) {
-            this.lineStartsAt = lineStartsAt;
+          public Builder setLineEndsAt(
+              QuoteCreateParams.SubscriptionData.BillOnAcceptance.BillUntil.LineEndsAt lineEndsAt) {
+            this.lineEndsAt = lineEndsAt;
             return this;
           }
 
@@ -8174,7 +8188,129 @@ public class QuoteCreateParams extends ApiRequestParams {
         }
 
         @Getter
-        public static class LineStartsAt {
+        public static class Duration {
+          /**
+           * Map of extra parameters for custom features not available in this client library. The
+           * content in this map is not serialized under this field's {@code @SerializedName} value.
+           * Instead, each key/value pair is serialized as if the key is a root-level field
+           * (serialized) name in this param object. Effectively, this map is flattened to its
+           * parent instance.
+           */
+          @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
+          Map<String, Object> extraParams;
+
+          /**
+           * Specifies a type of interval unit. Either {@code day}, {@code week}, {@code month} or
+           * {@code year}.
+           */
+          @SerializedName("interval")
+          Interval interval;
+
+          /**
+           * The number of intervals, as an whole number greater than 0. Stripe multiplies this by
+           * the interval type to get the overall duration.
+           */
+          @SerializedName("interval_count")
+          Long intervalCount;
+
+          private Duration(Map<String, Object> extraParams, Interval interval, Long intervalCount) {
+            this.extraParams = extraParams;
+            this.interval = interval;
+            this.intervalCount = intervalCount;
+          }
+
+          public static Builder builder() {
+            return new Builder();
+          }
+
+          public static class Builder {
+            private Map<String, Object> extraParams;
+
+            private Interval interval;
+
+            private Long intervalCount;
+
+            /** Finalize and obtain parameter instance from this builder. */
+            public QuoteCreateParams.SubscriptionData.BillOnAcceptance.BillUntil.Duration build() {
+              return new QuoteCreateParams.SubscriptionData.BillOnAcceptance.BillUntil.Duration(
+                  this.extraParams, this.interval, this.intervalCount);
+            }
+
+            /**
+             * Add a key/value pair to `extraParams` map. A map is initialized for the first
+             * `put/putAll` call, and subsequent calls add additional key/value pairs to the
+             * original map. See {@link
+             * QuoteCreateParams.SubscriptionData.BillOnAcceptance.BillUntil.Duration#extraParams}
+             * for the field documentation.
+             */
+            public Builder putExtraParam(String key, Object value) {
+              if (this.extraParams == null) {
+                this.extraParams = new HashMap<>();
+              }
+              this.extraParams.put(key, value);
+              return this;
+            }
+
+            /**
+             * Add all map key/value pairs to `extraParams` map. A map is initialized for the first
+             * `put/putAll` call, and subsequent calls add additional key/value pairs to the
+             * original map. See {@link
+             * QuoteCreateParams.SubscriptionData.BillOnAcceptance.BillUntil.Duration#extraParams}
+             * for the field documentation.
+             */
+            public Builder putAllExtraParam(Map<String, Object> map) {
+              if (this.extraParams == null) {
+                this.extraParams = new HashMap<>();
+              }
+              this.extraParams.putAll(map);
+              return this;
+            }
+
+            /**
+             * Specifies a type of interval unit. Either {@code day}, {@code week}, {@code month} or
+             * {@code year}.
+             */
+            public Builder setInterval(
+                QuoteCreateParams.SubscriptionData.BillOnAcceptance.BillUntil.Duration.Interval
+                    interval) {
+              this.interval = interval;
+              return this;
+            }
+
+            /**
+             * The number of intervals, as an whole number greater than 0. Stripe multiplies this by
+             * the interval type to get the overall duration.
+             */
+            public Builder setIntervalCount(Long intervalCount) {
+              this.intervalCount = intervalCount;
+              return this;
+            }
+          }
+
+          public enum Interval implements ApiRequestParams.EnumParam {
+            @SerializedName("day")
+            DAY("day"),
+
+            @SerializedName("month")
+            MONTH("month"),
+
+            @SerializedName("week")
+            WEEK("week"),
+
+            @SerializedName("year")
+            YEAR("year");
+
+            @Getter(onMethod_ = {@Override})
+            private final String value;
+
+            Interval(String value) {
+              this.value = value;
+            }
+          }
+        }
+
+        @Getter
+        public static class LineEndsAt {
           /**
            * Map of extra parameters for custom features not available in this client library. The
            * content in this map is not serialized under this field's {@code @SerializedName} value.
@@ -8197,7 +8333,7 @@ public class QuoteCreateParams extends ApiRequestParams {
           @SerializedName("index")
           Long index;
 
-          private LineStartsAt(Map<String, Object> extraParams, String id, Long index) {
+          private LineEndsAt(Map<String, Object> extraParams, String id, Long index) {
             this.extraParams = extraParams;
             this.id = id;
             this.index = index;
@@ -8215,9 +8351,9 @@ public class QuoteCreateParams extends ApiRequestParams {
             private Long index;
 
             /** Finalize and obtain parameter instance from this builder. */
-            public QuoteCreateParams.SubscriptionData.BillOnAcceptance.BillUntil.LineStartsAt
+            public QuoteCreateParams.SubscriptionData.BillOnAcceptance.BillUntil.LineEndsAt
                 build() {
-              return new QuoteCreateParams.SubscriptionData.BillOnAcceptance.BillUntil.LineStartsAt(
+              return new QuoteCreateParams.SubscriptionData.BillOnAcceptance.BillUntil.LineEndsAt(
                   this.extraParams, this.id, this.index);
             }
 
@@ -8225,7 +8361,7 @@ public class QuoteCreateParams extends ApiRequestParams {
              * Add a key/value pair to `extraParams` map. A map is initialized for the first
              * `put/putAll` call, and subsequent calls add additional key/value pairs to the
              * original map. See {@link
-             * QuoteCreateParams.SubscriptionData.BillOnAcceptance.BillUntil.LineStartsAt#extraParams}
+             * QuoteCreateParams.SubscriptionData.BillOnAcceptance.BillUntil.LineEndsAt#extraParams}
              * for the field documentation.
              */
             public Builder putExtraParam(String key, Object value) {
@@ -8240,7 +8376,7 @@ public class QuoteCreateParams extends ApiRequestParams {
              * Add all map key/value pairs to `extraParams` map. A map is initialized for the first
              * `put/putAll` call, and subsequent calls add additional key/value pairs to the
              * original map. See {@link
-             * QuoteCreateParams.SubscriptionData.BillOnAcceptance.BillUntil.LineStartsAt#extraParams}
+             * QuoteCreateParams.SubscriptionData.BillOnAcceptance.BillUntil.LineEndsAt#extraParams}
              * for the field documentation.
              */
             public Builder putAllExtraParam(Map<String, Object> map) {
@@ -8522,7 +8658,7 @@ public class QuoteCreateParams extends ApiRequestParams {
     @SerializedName("applies_to")
     AppliesTo appliesTo;
 
-    /** The start of the period to bill from when the Quote is accepted. */
+    /** Describes the period to bill for upon accepting the quote. */
     @SerializedName("bill_on_acceptance")
     BillOnAcceptance billOnAcceptance;
 
@@ -8644,7 +8780,7 @@ public class QuoteCreateParams extends ApiRequestParams {
         return this;
       }
 
-      /** The start of the period to bill from when the Quote is accepted. */
+      /** Describes the period to bill for upon accepting the quote. */
       public Builder setBillOnAcceptance(
           QuoteCreateParams.SubscriptionDataOverride.BillOnAcceptance billOnAcceptance) {
         this.billOnAcceptance = billOnAcceptance;
@@ -9252,6 +9388,10 @@ public class QuoteCreateParams extends ApiRequestParams {
 
       @Getter
       public static class BillUntil {
+        /** Details of the duration over which to bill. */
+        @SerializedName("duration")
+        Duration duration;
+
         /**
          * Map of extra parameters for custom features not available in this client library. The
          * content in this map is not serialized under this field's {@code @SerializedName} value.
@@ -9263,8 +9403,8 @@ public class QuoteCreateParams extends ApiRequestParams {
         Map<String, Object> extraParams;
 
         /** Details of a Quote line item from which to bill until. */
-        @SerializedName("line_starts_at")
-        LineStartsAt lineStartsAt;
+        @SerializedName("line_ends_at")
+        LineEndsAt lineEndsAt;
 
         /** Details of a Unix timestamp to bill until. */
         @SerializedName("timestamp")
@@ -9275,12 +9415,14 @@ public class QuoteCreateParams extends ApiRequestParams {
         Type type;
 
         private BillUntil(
+            Duration duration,
             Map<String, Object> extraParams,
-            LineStartsAt lineStartsAt,
+            LineEndsAt lineEndsAt,
             Timestamp timestamp,
             Type type) {
+          this.duration = duration;
           this.extraParams = extraParams;
-          this.lineStartsAt = lineStartsAt;
+          this.lineEndsAt = lineEndsAt;
           this.timestamp = timestamp;
           this.type = type;
         }
@@ -9290,9 +9432,11 @@ public class QuoteCreateParams extends ApiRequestParams {
         }
 
         public static class Builder {
+          private Duration duration;
+
           private Map<String, Object> extraParams;
 
-          private LineStartsAt lineStartsAt;
+          private LineEndsAt lineEndsAt;
 
           private Timestamp timestamp;
 
@@ -9301,7 +9445,15 @@ public class QuoteCreateParams extends ApiRequestParams {
           /** Finalize and obtain parameter instance from this builder. */
           public QuoteCreateParams.SubscriptionDataOverride.BillOnAcceptance.BillUntil build() {
             return new QuoteCreateParams.SubscriptionDataOverride.BillOnAcceptance.BillUntil(
-                this.extraParams, this.lineStartsAt, this.timestamp, this.type);
+                this.duration, this.extraParams, this.lineEndsAt, this.timestamp, this.type);
+          }
+
+          /** Details of the duration over which to bill. */
+          public Builder setDuration(
+              QuoteCreateParams.SubscriptionDataOverride.BillOnAcceptance.BillUntil.Duration
+                  duration) {
+            this.duration = duration;
+            return this;
           }
 
           /**
@@ -9335,10 +9487,10 @@ public class QuoteCreateParams extends ApiRequestParams {
           }
 
           /** Details of a Quote line item from which to bill until. */
-          public Builder setLineStartsAt(
-              QuoteCreateParams.SubscriptionDataOverride.BillOnAcceptance.BillUntil.LineStartsAt
-                  lineStartsAt) {
-            this.lineStartsAt = lineStartsAt;
+          public Builder setLineEndsAt(
+              QuoteCreateParams.SubscriptionDataOverride.BillOnAcceptance.BillUntil.LineEndsAt
+                  lineEndsAt) {
+            this.lineEndsAt = lineEndsAt;
             return this;
           }
 
@@ -9359,7 +9511,131 @@ public class QuoteCreateParams extends ApiRequestParams {
         }
 
         @Getter
-        public static class LineStartsAt {
+        public static class Duration {
+          /**
+           * Map of extra parameters for custom features not available in this client library. The
+           * content in this map is not serialized under this field's {@code @SerializedName} value.
+           * Instead, each key/value pair is serialized as if the key is a root-level field
+           * (serialized) name in this param object. Effectively, this map is flattened to its
+           * parent instance.
+           */
+          @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
+          Map<String, Object> extraParams;
+
+          /**
+           * Specifies a type of interval unit. Either {@code day}, {@code week}, {@code month} or
+           * {@code year}.
+           */
+          @SerializedName("interval")
+          Interval interval;
+
+          /**
+           * The number of intervals, as an whole number greater than 0. Stripe multiplies this by
+           * the interval type to get the overall duration.
+           */
+          @SerializedName("interval_count")
+          Long intervalCount;
+
+          private Duration(Map<String, Object> extraParams, Interval interval, Long intervalCount) {
+            this.extraParams = extraParams;
+            this.interval = interval;
+            this.intervalCount = intervalCount;
+          }
+
+          public static Builder builder() {
+            return new Builder();
+          }
+
+          public static class Builder {
+            private Map<String, Object> extraParams;
+
+            private Interval interval;
+
+            private Long intervalCount;
+
+            /** Finalize and obtain parameter instance from this builder. */
+            public QuoteCreateParams.SubscriptionDataOverride.BillOnAcceptance.BillUntil.Duration
+                build() {
+              return new QuoteCreateParams.SubscriptionDataOverride.BillOnAcceptance.BillUntil
+                  .Duration(this.extraParams, this.interval, this.intervalCount);
+            }
+
+            /**
+             * Add a key/value pair to `extraParams` map. A map is initialized for the first
+             * `put/putAll` call, and subsequent calls add additional key/value pairs to the
+             * original map. See {@link
+             * QuoteCreateParams.SubscriptionDataOverride.BillOnAcceptance.BillUntil.Duration#extraParams}
+             * for the field documentation.
+             */
+            public Builder putExtraParam(String key, Object value) {
+              if (this.extraParams == null) {
+                this.extraParams = new HashMap<>();
+              }
+              this.extraParams.put(key, value);
+              return this;
+            }
+
+            /**
+             * Add all map key/value pairs to `extraParams` map. A map is initialized for the first
+             * `put/putAll` call, and subsequent calls add additional key/value pairs to the
+             * original map. See {@link
+             * QuoteCreateParams.SubscriptionDataOverride.BillOnAcceptance.BillUntil.Duration#extraParams}
+             * for the field documentation.
+             */
+            public Builder putAllExtraParam(Map<String, Object> map) {
+              if (this.extraParams == null) {
+                this.extraParams = new HashMap<>();
+              }
+              this.extraParams.putAll(map);
+              return this;
+            }
+
+            /**
+             * Specifies a type of interval unit. Either {@code day}, {@code week}, {@code month} or
+             * {@code year}.
+             */
+            public Builder setInterval(
+                QuoteCreateParams.SubscriptionDataOverride.BillOnAcceptance.BillUntil.Duration
+                        .Interval
+                    interval) {
+              this.interval = interval;
+              return this;
+            }
+
+            /**
+             * The number of intervals, as an whole number greater than 0. Stripe multiplies this by
+             * the interval type to get the overall duration.
+             */
+            public Builder setIntervalCount(Long intervalCount) {
+              this.intervalCount = intervalCount;
+              return this;
+            }
+          }
+
+          public enum Interval implements ApiRequestParams.EnumParam {
+            @SerializedName("day")
+            DAY("day"),
+
+            @SerializedName("month")
+            MONTH("month"),
+
+            @SerializedName("week")
+            WEEK("week"),
+
+            @SerializedName("year")
+            YEAR("year");
+
+            @Getter(onMethod_ = {@Override})
+            private final String value;
+
+            Interval(String value) {
+              this.value = value;
+            }
+          }
+        }
+
+        @Getter
+        public static class LineEndsAt {
           /**
            * Map of extra parameters for custom features not available in this client library. The
            * content in this map is not serialized under this field's {@code @SerializedName} value.
@@ -9382,7 +9658,7 @@ public class QuoteCreateParams extends ApiRequestParams {
           @SerializedName("index")
           Long index;
 
-          private LineStartsAt(Map<String, Object> extraParams, String id, Long index) {
+          private LineEndsAt(Map<String, Object> extraParams, String id, Long index) {
             this.extraParams = extraParams;
             this.id = id;
             this.index = index;
@@ -9400,18 +9676,17 @@ public class QuoteCreateParams extends ApiRequestParams {
             private Long index;
 
             /** Finalize and obtain parameter instance from this builder. */
-            public QuoteCreateParams.SubscriptionDataOverride.BillOnAcceptance.BillUntil
-                    .LineStartsAt
+            public QuoteCreateParams.SubscriptionDataOverride.BillOnAcceptance.BillUntil.LineEndsAt
                 build() {
               return new QuoteCreateParams.SubscriptionDataOverride.BillOnAcceptance.BillUntil
-                  .LineStartsAt(this.extraParams, this.id, this.index);
+                  .LineEndsAt(this.extraParams, this.id, this.index);
             }
 
             /**
              * Add a key/value pair to `extraParams` map. A map is initialized for the first
              * `put/putAll` call, and subsequent calls add additional key/value pairs to the
              * original map. See {@link
-             * QuoteCreateParams.SubscriptionDataOverride.BillOnAcceptance.BillUntil.LineStartsAt#extraParams}
+             * QuoteCreateParams.SubscriptionDataOverride.BillOnAcceptance.BillUntil.LineEndsAt#extraParams}
              * for the field documentation.
              */
             public Builder putExtraParam(String key, Object value) {
@@ -9426,7 +9701,7 @@ public class QuoteCreateParams extends ApiRequestParams {
              * Add all map key/value pairs to `extraParams` map. A map is initialized for the first
              * `put/putAll` call, and subsequent calls add additional key/value pairs to the
              * original map. See {@link
-             * QuoteCreateParams.SubscriptionDataOverride.BillOnAcceptance.BillUntil.LineStartsAt#extraParams}
+             * QuoteCreateParams.SubscriptionDataOverride.BillOnAcceptance.BillUntil.LineEndsAt#extraParams}
              * for the field documentation.
              */
             public Builder putAllExtraParam(Map<String, Object> map) {

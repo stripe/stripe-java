@@ -216,9 +216,9 @@ public class Person extends ApiResource implements HasId, MetadataStore<Person> 
    */
   public Person delete(Map<String, Object> params, RequestOptions options) throws StripeException {
     String url =
-        String.format(
-            "%s%s",
+        ApiResource.fullUrl(
             Stripe.getApiBase(),
+            options,
             String.format(
                 "/v1/accounts/%s/persons/%s",
                 ApiResource.urlEncodeId(this.getAccount()), ApiResource.urlEncodeId(this.getId())));
@@ -236,9 +236,9 @@ public class Person extends ApiResource implements HasId, MetadataStore<Person> 
   @Override
   public Person update(Map<String, Object> params, RequestOptions options) throws StripeException {
     String url =
-        String.format(
-            "%s%s",
+        ApiResource.fullUrl(
             Stripe.getApiBase(),
+            options,
             String.format(
                 "/v1/accounts/%s/persons/%s",
                 ApiResource.urlEncodeId(this.getAccount()), ApiResource.urlEncodeId(this.getId())));
@@ -253,9 +253,9 @@ public class Person extends ApiResource implements HasId, MetadataStore<Person> 
   /** Updates an existing person. */
   public Person update(PersonUpdateParams params, RequestOptions options) throws StripeException {
     String url =
-        String.format(
-            "%s%s",
+        ApiResource.fullUrl(
             Stripe.getApiBase(),
+            options,
             String.format(
                 "/v1/accounts/%s/persons/%s",
                 ApiResource.urlEncodeId(this.getAccount()), ApiResource.urlEncodeId(this.getId())));
