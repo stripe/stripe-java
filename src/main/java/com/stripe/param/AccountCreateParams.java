@@ -43,6 +43,10 @@ public class AccountCreateParams extends ApiRequestParams {
   @SerializedName("company")
   Company company;
 
+  /** The configuration of the account when {@code type} is not provided. */
+  @SerializedName("controller")
+  Controller controller;
+
   /**
    * The country in which the account holder resides, or in which the business is legally
    * established. This should be an ISO 3166-1 alpha-2 country code. For example, if you are in the
@@ -144,6 +148,7 @@ public class AccountCreateParams extends ApiRequestParams {
       BusinessType businessType,
       Capabilities capabilities,
       Company company,
+      Controller controller,
       String country,
       String defaultCurrency,
       Documents documents,
@@ -161,6 +166,7 @@ public class AccountCreateParams extends ApiRequestParams {
     this.businessType = businessType;
     this.capabilities = capabilities;
     this.company = company;
+    this.controller = controller;
     this.country = country;
     this.defaultCurrency = defaultCurrency;
     this.documents = documents;
@@ -189,6 +195,8 @@ public class AccountCreateParams extends ApiRequestParams {
     private Capabilities capabilities;
 
     private Company company;
+
+    private Controller controller;
 
     private String country;
 
@@ -222,6 +230,7 @@ public class AccountCreateParams extends ApiRequestParams {
           this.businessType,
           this.capabilities,
           this.company,
+          this.controller,
           this.country,
           this.defaultCurrency,
           this.documents,
@@ -274,6 +283,12 @@ public class AccountCreateParams extends ApiRequestParams {
      */
     public Builder setCompany(AccountCreateParams.Company company) {
       this.company = company;
+      return this;
+    }
+
+    /** The configuration of the account when {@code type} is not provided. */
+    public Builder setController(AccountCreateParams.Controller controller) {
+      this.controller = controller;
       return this;
     }
 
@@ -5507,6 +5522,292 @@ public class AccountCreateParams extends ApiRequestParams {
 
       Structure(String value) {
         this.value = value;
+      }
+    }
+  }
+
+  @Getter
+  public static class Controller {
+    /** The documentation for the application hash. */
+    @SerializedName("application")
+    Application application;
+
+    /** Properties of the account's dashboard. */
+    @SerializedName("dashboard")
+    Dashboard dashboard;
+
+    /**
+     * Map of extra parameters for custom features not available in this client library. The content
+     * in this map is not serialized under this field's {@code @SerializedName} value. Instead, each
+     * key/value pair is serialized as if the key is a root-level field (serialized) name in this
+     * param object. Effectively, this map is flattened to its parent instance.
+     */
+    @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
+    Map<String, Object> extraParams;
+
+    private Controller(
+        Application application, Dashboard dashboard, Map<String, Object> extraParams) {
+      this.application = application;
+      this.dashboard = dashboard;
+      this.extraParams = extraParams;
+    }
+
+    public static Builder builder() {
+      return new Builder();
+    }
+
+    public static class Builder {
+      private Application application;
+
+      private Dashboard dashboard;
+
+      private Map<String, Object> extraParams;
+
+      /** Finalize and obtain parameter instance from this builder. */
+      public AccountCreateParams.Controller build() {
+        return new AccountCreateParams.Controller(
+            this.application, this.dashboard, this.extraParams);
+      }
+
+      /** The documentation for the application hash. */
+      public Builder setApplication(AccountCreateParams.Controller.Application application) {
+        this.application = application;
+        return this;
+      }
+
+      /** Properties of the account's dashboard. */
+      public Builder setDashboard(AccountCreateParams.Controller.Dashboard dashboard) {
+        this.dashboard = dashboard;
+        return this;
+      }
+
+      /**
+       * Add a key/value pair to `extraParams` map. A map is initialized for the first `put/putAll`
+       * call, and subsequent calls add additional key/value pairs to the original map. See {@link
+       * AccountCreateParams.Controller#extraParams} for the field documentation.
+       */
+      public Builder putExtraParam(String key, Object value) {
+        if (this.extraParams == null) {
+          this.extraParams = new HashMap<>();
+        }
+        this.extraParams.put(key, value);
+        return this;
+      }
+
+      /**
+       * Add all map key/value pairs to `extraParams` map. A map is initialized for the first
+       * `put/putAll` call, and subsequent calls add additional key/value pairs to the original map.
+       * See {@link AccountCreateParams.Controller#extraParams} for the field documentation.
+       */
+      public Builder putAllExtraParam(Map<String, Object> map) {
+        if (this.extraParams == null) {
+          this.extraParams = new HashMap<>();
+        }
+        this.extraParams.putAll(map);
+        return this;
+      }
+    }
+
+    @Getter
+    public static class Application {
+      /**
+       * Map of extra parameters for custom features not available in this client library. The
+       * content in this map is not serialized under this field's {@code @SerializedName} value.
+       * Instead, each key/value pair is serialized as if the key is a root-level field (serialized)
+       * name in this param object. Effectively, this map is flattened to its parent instance.
+       */
+      @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
+      Map<String, Object> extraParams;
+
+      /**
+       * Whether the controller is liable for losses on this account. For details, see <a
+       * href="https://stripe.com/docs/connect/account-balances">Understanding Connect Account
+       * Balances</a>.
+       */
+      @SerializedName("loss_liable")
+      Boolean lossLiable;
+
+      /** Whether the controller owns onboarding for this account. */
+      @SerializedName("onboarding_owner")
+      Boolean onboardingOwner;
+
+      /** Whether the controller has pricing controls for this account. */
+      @SerializedName("pricing_controls")
+      Boolean pricingControls;
+
+      private Application(
+          Map<String, Object> extraParams,
+          Boolean lossLiable,
+          Boolean onboardingOwner,
+          Boolean pricingControls) {
+        this.extraParams = extraParams;
+        this.lossLiable = lossLiable;
+        this.onboardingOwner = onboardingOwner;
+        this.pricingControls = pricingControls;
+      }
+
+      public static Builder builder() {
+        return new Builder();
+      }
+
+      public static class Builder {
+        private Map<String, Object> extraParams;
+
+        private Boolean lossLiable;
+
+        private Boolean onboardingOwner;
+
+        private Boolean pricingControls;
+
+        /** Finalize and obtain parameter instance from this builder. */
+        public AccountCreateParams.Controller.Application build() {
+          return new AccountCreateParams.Controller.Application(
+              this.extraParams, this.lossLiable, this.onboardingOwner, this.pricingControls);
+        }
+
+        /**
+         * Add a key/value pair to `extraParams` map. A map is initialized for the first
+         * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
+         * map. See {@link AccountCreateParams.Controller.Application#extraParams} for the field
+         * documentation.
+         */
+        public Builder putExtraParam(String key, Object value) {
+          if (this.extraParams == null) {
+            this.extraParams = new HashMap<>();
+          }
+          this.extraParams.put(key, value);
+          return this;
+        }
+
+        /**
+         * Add all map key/value pairs to `extraParams` map. A map is initialized for the first
+         * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
+         * map. See {@link AccountCreateParams.Controller.Application#extraParams} for the field
+         * documentation.
+         */
+        public Builder putAllExtraParam(Map<String, Object> map) {
+          if (this.extraParams == null) {
+            this.extraParams = new HashMap<>();
+          }
+          this.extraParams.putAll(map);
+          return this;
+        }
+
+        /**
+         * Whether the controller is liable for losses on this account. For details, see <a
+         * href="https://stripe.com/docs/connect/account-balances">Understanding Connect Account
+         * Balances</a>.
+         */
+        public Builder setLossLiable(Boolean lossLiable) {
+          this.lossLiable = lossLiable;
+          return this;
+        }
+
+        /** Whether the controller owns onboarding for this account. */
+        public Builder setOnboardingOwner(Boolean onboardingOwner) {
+          this.onboardingOwner = onboardingOwner;
+          return this;
+        }
+
+        /** Whether the controller has pricing controls for this account. */
+        public Builder setPricingControls(Boolean pricingControls) {
+          this.pricingControls = pricingControls;
+          return this;
+        }
+      }
+    }
+
+    @Getter
+    public static class Dashboard {
+      /**
+       * Map of extra parameters for custom features not available in this client library. The
+       * content in this map is not serialized under this field's {@code @SerializedName} value.
+       * Instead, each key/value pair is serialized as if the key is a root-level field (serialized)
+       * name in this param object. Effectively, this map is flattened to its parent instance.
+       */
+      @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
+      Map<String, Object> extraParams;
+
+      /**
+       * Whether this account should have access to the full Stripe dashboard ({@code full}) or no
+       * dashboard ({@code none}).
+       */
+      @SerializedName("type")
+      Type type;
+
+      private Dashboard(Map<String, Object> extraParams, Type type) {
+        this.extraParams = extraParams;
+        this.type = type;
+      }
+
+      public static Builder builder() {
+        return new Builder();
+      }
+
+      public static class Builder {
+        private Map<String, Object> extraParams;
+
+        private Type type;
+
+        /** Finalize and obtain parameter instance from this builder. */
+        public AccountCreateParams.Controller.Dashboard build() {
+          return new AccountCreateParams.Controller.Dashboard(this.extraParams, this.type);
+        }
+
+        /**
+         * Add a key/value pair to `extraParams` map. A map is initialized for the first
+         * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
+         * map. See {@link AccountCreateParams.Controller.Dashboard#extraParams} for the field
+         * documentation.
+         */
+        public Builder putExtraParam(String key, Object value) {
+          if (this.extraParams == null) {
+            this.extraParams = new HashMap<>();
+          }
+          this.extraParams.put(key, value);
+          return this;
+        }
+
+        /**
+         * Add all map key/value pairs to `extraParams` map. A map is initialized for the first
+         * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
+         * map. See {@link AccountCreateParams.Controller.Dashboard#extraParams} for the field
+         * documentation.
+         */
+        public Builder putAllExtraParam(Map<String, Object> map) {
+          if (this.extraParams == null) {
+            this.extraParams = new HashMap<>();
+          }
+          this.extraParams.putAll(map);
+          return this;
+        }
+
+        /**
+         * Whether this account should have access to the full Stripe dashboard ({@code full}) or no
+         * dashboard ({@code none}).
+         */
+        public Builder setType(AccountCreateParams.Controller.Dashboard.Type type) {
+          this.type = type;
+          return this;
+        }
+      }
+
+      public enum Type implements ApiRequestParams.EnumParam {
+        @SerializedName("express")
+        EXPRESS("express"),
+
+        @SerializedName("full")
+        FULL("full"),
+
+        @SerializedName("none")
+        NONE("none");
+
+        @Getter(onMethod_ = {@Override})
+        private final String value;
+
+        Type(String value) {
+          this.value = value;
+        }
       }
     }
   }
