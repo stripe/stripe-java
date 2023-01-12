@@ -1,5 +1,8 @@
 # Changelog
 
+## 22.5.1 - 2023-01-12
+* [#1505](https://github.com/stripe/stripe-java/pull/1505) Bump Gson to 2.10.1
+
 ## 22.5.0 - 2023-01-05
 * [#1502](https://github.com/stripe/stripe-java/pull/1502) API Updates
   * Add support for `card_issuing` on `Issuing.Cardholder.individual`
