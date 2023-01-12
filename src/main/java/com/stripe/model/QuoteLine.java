@@ -188,14 +188,10 @@ public class QuoteLine extends StripeObject implements HasId {
       @Setter
       @EqualsAndHashCode(callSuper = false)
       public static class DiscountEnd extends StripeObject {
-        /** The discount end timestamp. */
-        @SerializedName("timestamp")
-        Long timestamp;
-
         /**
-         * The discount end type
+         * The discount end type.
          *
-         * <p>Equal to {@code timestamp}.
+         * <p>Equal to {@code line_ends_at}.
          */
         @SerializedName("type")
         String type;
@@ -280,13 +276,6 @@ public class QuoteLine extends StripeObject implements HasId {
         @SerializedName("discount_end")
         DiscountEnd discountEnd;
 
-        /**
-         * The index, starting at 0, at which to position the new discount. When not supplied,
-         * Stripe defaults to appending the discount to the end of the {@code discounts} array.
-         */
-        @SerializedName("index")
-        Long index;
-
         /** Get ID of expandable {@code coupon} object. */
         public String getCoupon() {
           return (this.coupon != null) ? this.coupon.getId() : null;
@@ -334,7 +323,7 @@ public class QuoteLine extends StripeObject implements HasId {
           Long timestamp;
 
           /**
-           * The discount end type
+           * The discount end type.
            *
            * <p>Equal to {@code timestamp}.
            */
@@ -378,13 +367,6 @@ public class QuoteLine extends StripeObject implements HasId {
       /** Details to determine how long the discount should be applied for. */
       @SerializedName("discount_end")
       DiscountEnd discountEnd;
-
-      /**
-       * The index, starting at 0, at which to position the new discount. When not supplied, Stripe
-       * defaults to appending the discount to the end of the {@code discounts} array.
-       */
-      @SerializedName("index")
-      Long index;
 
       /** Get ID of expandable {@code coupon} object. */
       public String getCoupon() {
@@ -433,7 +415,7 @@ public class QuoteLine extends StripeObject implements HasId {
         Long timestamp;
 
         /**
-         * The discount end type
+         * The discount end type.
          *
          * <p>Equal to {@code timestamp}.
          */
@@ -491,13 +473,6 @@ public class QuoteLine extends StripeObject implements HasId {
       @SerializedName("discount_end")
       DiscountEnd discountEnd;
 
-      /**
-       * The index, starting at 0, at which to position the new discount. When not supplied, Stripe
-       * defaults to appending the discount to the end of the {@code discounts} array.
-       */
-      @SerializedName("index")
-      Long index;
-
       /** Get ID of expandable {@code coupon} object. */
       public String getCoupon() {
         return (this.coupon != null) ? this.coupon.getId() : null;
@@ -545,7 +520,7 @@ public class QuoteLine extends StripeObject implements HasId {
         Long timestamp;
 
         /**
-         * The discount end type
+         * The discount end type.
          *
          * <p>Equal to {@code timestamp}.
          */
@@ -632,13 +607,6 @@ public class QuoteLine extends StripeObject implements HasId {
         @SerializedName("discount_end")
         DiscountEnd discountEnd;
 
-        /**
-         * The index, starting at 0, at which to position the new discount. When not supplied,
-         * Stripe defaults to appending the discount to the end of the {@code discounts} array.
-         */
-        @SerializedName("index")
-        Long index;
-
         /** Get ID of expandable {@code coupon} object. */
         public String getCoupon() {
           return (this.coupon != null) ? this.coupon.getId() : null;
@@ -686,7 +654,7 @@ public class QuoteLine extends StripeObject implements HasId {
           Long timestamp;
 
           /**
-           * The discount end type
+           * The discount end type.
            *
            * <p>Equal to {@code timestamp}.
            */

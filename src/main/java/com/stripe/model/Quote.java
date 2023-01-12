@@ -626,7 +626,7 @@ public class Quote extends ApiResource implements HasId, MetadataStore<Quote> {
         ApiResource.fullUrl(
             Stripe.getApiBase(),
             options,
-            String.format("/v1/quotes/%s/draft", ApiResource.urlEncodeId(this.getId())));
+            String.format("/v1/quotes/%s/mark_draft", ApiResource.urlEncodeId(this.getId())));
     return ApiResource.request(ApiResource.RequestMethod.POST, url, params, Quote.class, options);
   }
 
@@ -642,7 +642,7 @@ public class Quote extends ApiResource implements HasId, MetadataStore<Quote> {
         ApiResource.fullUrl(
             Stripe.getApiBase(),
             options,
-            String.format("/v1/quotes/%s/draft", ApiResource.urlEncodeId(this.getId())));
+            String.format("/v1/quotes/%s/mark_draft", ApiResource.urlEncodeId(this.getId())));
     return ApiResource.request(ApiResource.RequestMethod.POST, url, params, Quote.class, options);
   }
 

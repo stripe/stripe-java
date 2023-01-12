@@ -43,6 +43,10 @@ public class AccountUpdateParams extends ApiRequestParams {
   @SerializedName("company")
   Company company;
 
+  /** The configuration of the account when using unified accounts. */
+  @SerializedName("controller")
+  Controller controller;
+
   /**
    * Three-letter ISO currency code representing the default currency for the account. This must be
    * a currency that <a href="https://stripe.com/docs/payouts">Stripe supports in the account's
@@ -125,6 +129,7 @@ public class AccountUpdateParams extends ApiRequestParams {
       BusinessType businessType,
       Capabilities capabilities,
       Company company,
+      Controller controller,
       Object defaultCurrency,
       Documents documents,
       Object email,
@@ -140,6 +145,7 @@ public class AccountUpdateParams extends ApiRequestParams {
     this.businessType = businessType;
     this.capabilities = capabilities;
     this.company = company;
+    this.controller = controller;
     this.defaultCurrency = defaultCurrency;
     this.documents = documents;
     this.email = email;
@@ -166,6 +172,8 @@ public class AccountUpdateParams extends ApiRequestParams {
     private Capabilities capabilities;
 
     private Company company;
+
+    private Controller controller;
 
     private Object defaultCurrency;
 
@@ -195,6 +203,7 @@ public class AccountUpdateParams extends ApiRequestParams {
           this.businessType,
           this.capabilities,
           this.company,
+          this.controller,
           this.defaultCurrency,
           this.documents,
           this.email,
@@ -254,6 +263,12 @@ public class AccountUpdateParams extends ApiRequestParams {
      */
     public Builder setCompany(AccountUpdateParams.Company company) {
       this.company = company;
+      return this;
+    }
+
+    /** The configuration of the account when using unified accounts. */
+    public Builder setController(AccountUpdateParams.Controller controller) {
+      this.controller = controller;
       return this;
     }
 
@@ -5806,6 +5821,145 @@ public class AccountUpdateParams extends ApiRequestParams {
 
       Structure(String value) {
         this.value = value;
+      }
+    }
+  }
+
+  @Getter
+  public static class Controller {
+    /** Properties of the controlling application. */
+    @SerializedName("application")
+    Application application;
+
+    /**
+     * Map of extra parameters for custom features not available in this client library. The content
+     * in this map is not serialized under this field's {@code @SerializedName} value. Instead, each
+     * key/value pair is serialized as if the key is a root-level field (serialized) name in this
+     * param object. Effectively, this map is flattened to its parent instance.
+     */
+    @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
+    Map<String, Object> extraParams;
+
+    private Controller(Application application, Map<String, Object> extraParams) {
+      this.application = application;
+      this.extraParams = extraParams;
+    }
+
+    public static Builder builder() {
+      return new Builder();
+    }
+
+    public static class Builder {
+      private Application application;
+
+      private Map<String, Object> extraParams;
+
+      /** Finalize and obtain parameter instance from this builder. */
+      public AccountUpdateParams.Controller build() {
+        return new AccountUpdateParams.Controller(this.application, this.extraParams);
+      }
+
+      /** Properties of the controlling application. */
+      public Builder setApplication(AccountUpdateParams.Controller.Application application) {
+        this.application = application;
+        return this;
+      }
+
+      /**
+       * Add a key/value pair to `extraParams` map. A map is initialized for the first `put/putAll`
+       * call, and subsequent calls add additional key/value pairs to the original map. See {@link
+       * AccountUpdateParams.Controller#extraParams} for the field documentation.
+       */
+      public Builder putExtraParam(String key, Object value) {
+        if (this.extraParams == null) {
+          this.extraParams = new HashMap<>();
+        }
+        this.extraParams.put(key, value);
+        return this;
+      }
+
+      /**
+       * Add all map key/value pairs to `extraParams` map. A map is initialized for the first
+       * `put/putAll` call, and subsequent calls add additional key/value pairs to the original map.
+       * See {@link AccountUpdateParams.Controller#extraParams} for the field documentation.
+       */
+      public Builder putAllExtraParam(Map<String, Object> map) {
+        if (this.extraParams == null) {
+          this.extraParams = new HashMap<>();
+        }
+        this.extraParams.putAll(map);
+        return this;
+      }
+    }
+
+    @Getter
+    public static class Application {
+      /**
+       * Map of extra parameters for custom features not available in this client library. The
+       * content in this map is not serialized under this field's {@code @SerializedName} value.
+       * Instead, each key/value pair is serialized as if the key is a root-level field (serialized)
+       * name in this param object. Effectively, this map is flattened to its parent instance.
+       */
+      @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
+      Map<String, Object> extraParams;
+
+      /** A Boolean indicating whether the application has pricing controls for this accounts. */
+      @SerializedName("pricing_controls")
+      Boolean pricingControls;
+
+      private Application(Map<String, Object> extraParams, Boolean pricingControls) {
+        this.extraParams = extraParams;
+        this.pricingControls = pricingControls;
+      }
+
+      public static Builder builder() {
+        return new Builder();
+      }
+
+      public static class Builder {
+        private Map<String, Object> extraParams;
+
+        private Boolean pricingControls;
+
+        /** Finalize and obtain parameter instance from this builder. */
+        public AccountUpdateParams.Controller.Application build() {
+          return new AccountUpdateParams.Controller.Application(
+              this.extraParams, this.pricingControls);
+        }
+
+        /**
+         * Add a key/value pair to `extraParams` map. A map is initialized for the first
+         * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
+         * map. See {@link AccountUpdateParams.Controller.Application#extraParams} for the field
+         * documentation.
+         */
+        public Builder putExtraParam(String key, Object value) {
+          if (this.extraParams == null) {
+            this.extraParams = new HashMap<>();
+          }
+          this.extraParams.put(key, value);
+          return this;
+        }
+
+        /**
+         * Add all map key/value pairs to `extraParams` map. A map is initialized for the first
+         * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
+         * map. See {@link AccountUpdateParams.Controller.Application#extraParams} for the field
+         * documentation.
+         */
+        public Builder putAllExtraParam(Map<String, Object> map) {
+          if (this.extraParams == null) {
+            this.extraParams = new HashMap<>();
+          }
+          this.extraParams.putAll(map);
+          return this;
+        }
+
+        /** A Boolean indicating whether the application has pricing controls for this accounts. */
+        public Builder setPricingControls(Boolean pricingControls) {
+          this.pricingControls = pricingControls;
+          return this;
+        }
       }
     }
   }

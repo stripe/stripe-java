@@ -1242,6 +1242,12 @@ public class Account extends ApiResource implements MetadataStore<Account>, Paym
   @Setter
   @EqualsAndHashCode(callSuper = false)
   public static class Controller extends StripeObject {
+    @SerializedName("application")
+    Application application;
+
+    @SerializedName("dashboard")
+    Dashboard dashboard;
+
     /**
      * {@code true} if the Connect application retrieving the resource controls the account and can
      * therefore exercise <a
@@ -1257,6 +1263,43 @@ public class Account extends ApiResource implements MetadataStore<Account>, Paym
      */
     @SerializedName("type")
     String type;
+
+    @Getter
+    @Setter
+    @EqualsAndHashCode(callSuper = false)
+    public static class Application extends StripeObject {
+      /**
+       * {@code true} if the Connect application is responsible for negative balances and should
+       * manage credit and fraud risk on the account.
+       */
+      @SerializedName("loss_liable")
+      Boolean lossLiable;
+
+      /** {@code true} if the Connect application is responsible for onboarding the account. */
+      @SerializedName("onboarding_owner")
+      Boolean onboardingOwner;
+
+      /**
+       * {@code true} if the Connect application is responsible for paying Stripe fees on
+       * pricing-control eligible products.
+       */
+      @SerializedName("pricing_controls")
+      Boolean pricingControls;
+    }
+
+    @Getter
+    @Setter
+    @EqualsAndHashCode(callSuper = false)
+    public static class Dashboard extends StripeObject {
+      /**
+       * Whether this account has access to the full Stripe dashboard ({@code full}), to the Express
+       * dashboard ({@code express}), or to no dashboard ({@code none}).
+       *
+       * <p>One of {@code express}, {@code full}, or {@code none}.
+       */
+      @SerializedName("type")
+      String type;
+    }
   }
 
   @Getter

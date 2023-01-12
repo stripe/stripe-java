@@ -1125,13 +1125,6 @@ public class SubscriptionSchedule extends ApiResource
         @SerializedName("discount_end")
         DiscountEnd discountEnd;
 
-        /**
-         * The index, starting at 0, at which to position the new discount. When not supplied,
-         * Stripe defaults to appending the discount to the end of the {@code discounts} array.
-         */
-        @SerializedName("index")
-        Long index;
-
         /** Get ID of expandable {@code coupon} object. */
         public String getCoupon() {
           return (this.coupon != null) ? this.coupon.getId() : null;
@@ -1179,7 +1172,7 @@ public class SubscriptionSchedule extends ApiResource
           Long timestamp;
 
           /**
-           * The discount end type
+           * The discount end type.
            *
            * <p>Equal to {@code timestamp}.
            */
@@ -1237,13 +1230,6 @@ public class SubscriptionSchedule extends ApiResource
       @SerializedName("discount_end")
       DiscountEnd discountEnd;
 
-      /**
-       * The index, starting at 0, at which to position the new discount. When not supplied, Stripe
-       * defaults to appending the discount to the end of the {@code discounts} array.
-       */
-      @SerializedName("index")
-      Long index;
-
       /** Get ID of expandable {@code coupon} object. */
       public String getCoupon() {
         return (this.coupon != null) ? this.coupon.getId() : null;
@@ -1291,7 +1277,7 @@ public class SubscriptionSchedule extends ApiResource
         Long timestamp;
 
         /**
-         * The discount end type
+         * The discount end type.
          *
          * <p>Equal to {@code timestamp}.
          */
@@ -1432,13 +1418,6 @@ public class SubscriptionSchedule extends ApiResource
         @SerializedName("discount_end")
         DiscountEnd discountEnd;
 
-        /**
-         * The index, starting at 0, at which to position the new discount. When not supplied,
-         * Stripe defaults to appending the discount to the end of the {@code discounts} array.
-         */
-        @SerializedName("index")
-        Long index;
-
         /** Get ID of expandable {@code coupon} object. */
         public String getCoupon() {
           return (this.coupon != null) ? this.coupon.getId() : null;
@@ -1486,7 +1465,7 @@ public class SubscriptionSchedule extends ApiResource
           Long timestamp;
 
           /**
-           * The discount end type
+           * The discount end type.
            *
            * <p>Equal to {@code timestamp}.
            */

@@ -676,6 +676,9 @@ public class WebhookEndpointUpdateParams extends ApiRequestParams {
     @SerializedName("quote.accepted")
     QUOTE__ACCEPTED("quote.accepted"),
 
+    @SerializedName("quote.accepting")
+    QUOTE__ACCEPTING("quote.accepting"),
+
     @SerializedName("quote.canceled")
     QUOTE__CANCELED("quote.canceled"),
 
@@ -684,6 +687,12 @@ public class WebhookEndpointUpdateParams extends ApiRequestParams {
 
     @SerializedName("quote.finalized")
     QUOTE__FINALIZED("quote.finalized"),
+
+    @SerializedName("quote.reestimated")
+    QUOTE__REESTIMATED("quote.reestimated"),
+
+    @SerializedName("quote.stale")
+    QUOTE__STALE("quote.stale"),
 
     @SerializedName("radar.early_fraud_warning.created")
     RADAR__EARLY_FRAUD_WARNING__CREATED("radar.early_fraud_warning.created"),

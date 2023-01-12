@@ -134,6 +134,7 @@ final class EventDataClassLookup {
     classLookup.put("scheduled_query_run", com.stripe.model.sigma.ScheduledQueryRun.class);
 
     classLookup.put("tax.calculation", com.stripe.model.tax.Calculation.class);
+    classLookup.put("tax.registration", com.stripe.model.tax.Registration.class);
     classLookup.put("tax.transaction", com.stripe.model.tax.Transaction.class);
 
     classLookup.put("terminal.configuration", com.stripe.model.terminal.Configuration.class);
