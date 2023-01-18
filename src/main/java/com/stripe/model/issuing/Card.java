@@ -118,6 +118,10 @@ public class Card extends ApiResource implements HasId, MetadataStore<Card> {
   @SerializedName("metadata")
   Map<String, String> metadata;
 
+  /** The name of the cardholder, printed on the card. */
+  @SerializedName("name")
+  String name;
+
   /**
    * The full unredacted card number. For security reasons, this is only available for virtual
    * cards, and will be omitted unless you explicitly request it with <a
