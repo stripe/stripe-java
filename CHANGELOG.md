@@ -1,5 +1,10 @@
 # Changelog
 
+## 22.6.0 - 2023-01-19
+* [#1507](https://github.com/stripe/stripe-java/pull/1507) API Updates
+  * Add support for `verification_session` on `EphemeralKeyCreateParams`
+  * Add support for new values `refund.created` and `refund.updated` on enums `WebhookEndpointCreateParams.enabled_events[]` and `WebhookEndpointUpdateParams.enabled_events[]`
+
 ## 22.5.1 - 2023-01-12
 * [#1505](https://github.com/stripe/stripe-java/pull/1505) Bump Gson to 2.10.1
 
