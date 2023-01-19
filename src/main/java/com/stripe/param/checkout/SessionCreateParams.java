@@ -1434,7 +1434,7 @@ public class SessionCreateParams extends ApiRequestParams {
       @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
       Map<String, Object> extraParams;
 
-      /** Text may be up to 500 characters in length. */
+      /** Text may be up to 1000 characters in length. */
       @SerializedName("message")
       String message;
 
@@ -1485,7 +1485,7 @@ public class SessionCreateParams extends ApiRequestParams {
           return this;
         }
 
-        /** Text may be up to 500 characters in length. */
+        /** Text may be up to 1000 characters in length. */
         public Builder setMessage(String message) {
           this.message = message;
           return this;
@@ -1504,7 +1504,7 @@ public class SessionCreateParams extends ApiRequestParams {
       @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
       Map<String, Object> extraParams;
 
-      /** Text may be up to 500 characters in length. */
+      /** Text may be up to 1000 characters in length. */
       @SerializedName("message")
       String message;
 
@@ -1555,7 +1555,7 @@ public class SessionCreateParams extends ApiRequestParams {
           return this;
         }
 
-        /** Text may be up to 500 characters in length. */
+        /** Text may be up to 1000 characters in length. */
         public Builder setMessage(String message) {
           this.message = message;
           return this;

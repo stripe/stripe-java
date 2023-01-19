@@ -1129,7 +1129,12 @@ public class SubscriptionScheduleUpdateParams extends ApiRequestParams {
     /**
      * Whether the subscription schedule will create <a
      * href="https://stripe.com/docs/billing/subscriptions/prorations">prorations</a> when
-     * transitioning to this phase. The default value is {@code create_prorations}.
+     * transitioning to this phase. The default value is {@code create_prorations}. This setting
+     * controls prorations when a phase is started asynchronously and it is persisted as a field on
+     * the phase. It's different from the request-level <a
+     * href="https://stripe.com/docs/api/subscription_schedules/update#update_subscription_schedule-proration_behavior">proration_behavior</a>
+     * parameter which controls what happens if the update request affects the billing configuration
+     * of the current phase.
      */
     @SerializedName("proration_behavior")
     ProrationBehavior prorationBehavior;
@@ -1641,7 +1646,12 @@ public class SubscriptionScheduleUpdateParams extends ApiRequestParams {
       /**
        * Whether the subscription schedule will create <a
        * href="https://stripe.com/docs/billing/subscriptions/prorations">prorations</a> when
-       * transitioning to this phase. The default value is {@code create_prorations}.
+       * transitioning to this phase. The default value is {@code create_prorations}. This setting
+       * controls prorations when a phase is started asynchronously and it is persisted as a field
+       * on the phase. It's different from the request-level <a
+       * href="https://stripe.com/docs/api/subscription_schedules/update#update_subscription_schedule-proration_behavior">proration_behavior</a>
+       * parameter which controls what happens if the update request affects the billing
+       * configuration of the current phase.
        */
       public Builder setProrationBehavior(
           SubscriptionScheduleUpdateParams.Phase.ProrationBehavior prorationBehavior) {
