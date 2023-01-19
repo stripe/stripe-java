@@ -487,7 +487,7 @@ public class PaymentLink extends ApiResource implements HasId, MetadataStore<Pay
     @Setter
     @EqualsAndHashCode(callSuper = false)
     public static class ShippingAddress extends StripeObject {
-      /** Text may be up to 500 characters in length. */
+      /** Text may be up to 1000 characters in length. */
       @SerializedName("message")
       String message;
     }
@@ -496,7 +496,7 @@ public class PaymentLink extends ApiResource implements HasId, MetadataStore<Pay
     @Setter
     @EqualsAndHashCode(callSuper = false)
     public static class Submit extends StripeObject {
-      /** Text may be up to 500 characters in length. */
+      /** Text may be up to 1000 characters in length. */
       @SerializedName("message")
       String message;
     }

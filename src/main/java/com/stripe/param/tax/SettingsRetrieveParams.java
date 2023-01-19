@@ -1,5 +1,5 @@
 // File generated from our OpenAPI spec
-package com.stripe.param;
+package com.stripe.param.tax;
 
 import com.google.gson.annotations.SerializedName;
 import com.stripe.net.ApiRequestParams;
@@ -10,11 +10,7 @@ import java.util.Map;
 import lombok.Getter;
 
 @Getter
-public class EphemeralKeyCreateParams extends ApiRequestParams {
-  /** The ID of the Customer you'd like to modify using the resulting ephemeral key. */
-  @SerializedName("customer")
-  String customer;
-
+public class SettingsRetrieveParams extends ApiRequestParams {
   /** Specifies which fields in the response should be expanded. */
   @SerializedName("expand")
   List<String> expand;
@@ -28,37 +24,9 @@ public class EphemeralKeyCreateParams extends ApiRequestParams {
   @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
   Map<String, Object> extraParams;
 
-  /** The ID of the Issuing Card you'd like to access using the resulting ephemeral key. */
-  @SerializedName("issuing_card")
-  String issuingCard;
-
-  /**
-   * Determines the value of the Stripe-Version header. Set this to the API Version of your mobile
-   * client.
-   */
-  @SerializedName("stripe-version")
-  String stripeVersion;
-
-  /**
-   * The ID of the Identity VerificationSession you'd like to access using the resulting ephemeral
-   * key.
-   */
-  @SerializedName("verification_session")
-  String verificationSession;
-
-  private EphemeralKeyCreateParams(
-      String customer,
-      List<String> expand,
-      Map<String, Object> extraParams,
-      String issuingCard,
-      String stripeVersion,
-      String verificationSession) {
-    this.customer = customer;
+  private SettingsRetrieveParams(List<String> expand, Map<String, Object> extraParams) {
     this.expand = expand;
     this.extraParams = extraParams;
-    this.issuingCard = issuingCard;
-    this.stripeVersion = stripeVersion;
-    this.verificationSession = verificationSession;
   }
 
   public static Builder builder() {
@@ -66,39 +34,19 @@ public class EphemeralKeyCreateParams extends ApiRequestParams {
   }
 
   public static class Builder {
-    private String customer;
-
     private List<String> expand;
 
     private Map<String, Object> extraParams;
 
-    private String issuingCard;
-
-    private String stripeVersion;
-
-    private String verificationSession;
-
     /** Finalize and obtain parameter instance from this builder. */
-    public EphemeralKeyCreateParams build() {
-      return new EphemeralKeyCreateParams(
-          this.customer,
-          this.expand,
-          this.extraParams,
-          this.issuingCard,
-          this.stripeVersion,
-          this.verificationSession);
-    }
-
-    /** The ID of the Customer you'd like to modify using the resulting ephemeral key. */
-    public Builder setCustomer(String customer) {
-      this.customer = customer;
-      return this;
+    public SettingsRetrieveParams build() {
+      return new SettingsRetrieveParams(this.expand, this.extraParams);
     }
 
     /**
      * Add an element to `expand` list. A list is initialized for the first `add/addAll` call, and
      * subsequent calls adds additional elements to the original list. See {@link
-     * EphemeralKeyCreateParams#expand} for the field documentation.
+     * SettingsRetrieveParams#expand} for the field documentation.
      */
     public Builder addExpand(String element) {
       if (this.expand == null) {
@@ -111,7 +59,7 @@ public class EphemeralKeyCreateParams extends ApiRequestParams {
     /**
      * Add all elements to `expand` list. A list is initialized for the first `add/addAll` call, and
      * subsequent calls adds additional elements to the original list. See {@link
-     * EphemeralKeyCreateParams#expand} for the field documentation.
+     * SettingsRetrieveParams#expand} for the field documentation.
      */
     public Builder addAllExpand(List<String> elements) {
       if (this.expand == null) {
@@ -124,7 +72,7 @@ public class EphemeralKeyCreateParams extends ApiRequestParams {
     /**
      * Add a key/value pair to `extraParams` map. A map is initialized for the first `put/putAll`
      * call, and subsequent calls add additional key/value pairs to the original map. See {@link
-     * EphemeralKeyCreateParams#extraParams} for the field documentation.
+     * SettingsRetrieveParams#extraParams} for the field documentation.
      */
     public Builder putExtraParam(String key, Object value) {
       if (this.extraParams == null) {
@@ -137,37 +85,13 @@ public class EphemeralKeyCreateParams extends ApiRequestParams {
     /**
      * Add all map key/value pairs to `extraParams` map. A map is initialized for the first
      * `put/putAll` call, and subsequent calls add additional key/value pairs to the original map.
-     * See {@link EphemeralKeyCreateParams#extraParams} for the field documentation.
+     * See {@link SettingsRetrieveParams#extraParams} for the field documentation.
      */
     public Builder putAllExtraParam(Map<String, Object> map) {
       if (this.extraParams == null) {
         this.extraParams = new HashMap<>();
       }
       this.extraParams.putAll(map);
-      return this;
-    }
-
-    /** The ID of the Issuing Card you'd like to access using the resulting ephemeral key. */
-    public Builder setIssuingCard(String issuingCard) {
-      this.issuingCard = issuingCard;
-      return this;
-    }
-
-    /**
-     * The ID of the Identity VerificationSession you'd like to access using the resulting ephemeral
-     * key.
-     */
-    public Builder setVerificationSession(String verificationSession) {
-      this.verificationSession = verificationSession;
-      return this;
-    }
-
-    /**
-     * Determines the value of the Stripe-Version header. Set this to the API Version of your mobile
-     * client.
-     */
-    public Builder setStripeVersion(String stripeVersion) {
-      this.stripeVersion = stripeVersion;
       return this;
     }
   }

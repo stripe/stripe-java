@@ -1516,8 +1516,8 @@ public class Quote extends ApiResource implements HasId, MetadataStore<Quote> {
       /**
        * The reason this quote was marked as canceled.
        *
-       * <p>One of {@code quote_accepted}, {@code quote_expired}, {@code quote_superseded}, {@code
-       * subscription_canceled}, or {@code user_canceled}.
+       * <p>One of {@code canceled}, {@code quote_accepted}, {@code quote_expired}, {@code
+       * quote_superseded}, or {@code subscription_canceled}.
        */
       @SerializedName("reason")
       String reason;
@@ -1557,19 +1557,35 @@ public class Quote extends ApiResource implements HasId, MetadataStore<Quote> {
         @SerializedName("line_invalid")
         String lineInvalid;
 
-        /** The state of the subscription before the quote was marked as stale. */
+        /** The ID of the subscription that was canceled. */
+        @SerializedName("subscription_canceled")
+        String subscriptionCanceled;
+
         @SerializedName("subscription_changed")
         SubscriptionChanged subscriptionChanged;
 
-        /** The state of the subscription schedule before the quote was marked as stale. */
+        /** The ID of the subscription that was expired. */
+        @SerializedName("subscription_expired")
+        String subscriptionExpired;
+
+        /** The ID of the subscription schedule that was canceled. */
+        @SerializedName("subscription_schedule_canceled")
+        String subscriptionScheduleCanceled;
+
         @SerializedName("subscription_schedule_changed")
         SubscriptionScheduleChanged subscriptionScheduleChanged;
+
+        /** The ID of the subscription schedule that was released. */
+        @SerializedName("subscription_schedule_released")
+        String subscriptionScheduleReleased;
 
         /**
          * The reason the quote was marked as stale.
          *
-         * <p>One of {@code bill_on_acceptance_invalid}, {@code line_invalid}, {@code
-         * subscription_changed}, or {@code subscription_schedule_changed}.
+         * <p>One of {@code bill_on_acceptance_invalid}, {@code line_invalid}, {@code marked_stale},
+         * {@code subscription_canceled}, {@code subscription_changed}, {@code
+         * subscription_expired}, {@code subscription_schedule_canceled}, {@code
+         * subscription_schedule_changed}, or {@code subscription_schedule_released}.
          */
         @SerializedName("type")
         String type;
