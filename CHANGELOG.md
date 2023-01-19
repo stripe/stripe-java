@@ -1,5 +1,10 @@
 # Changelog
 
+## 22.7.0-beta.1 - 2023-01-19
+* [#1508](https://github.com/stripe/stripe-java/pull/1508) API Updates for beta branch
+  * Updated stable APIs to the latest version
+  * Add support for `Tax.Settings` resource.
+
 ## 22.6.0 - 2023-01-19
 * [#1507](https://github.com/stripe/stripe-java/pull/1507) API Updates
   * Add support for `verification_session` on `EphemeralKeyCreateParams`
@@ -14,7 +19,7 @@
   * Remove support for `timestamp` on `QuoteLine.actions[].add_discount.discount_end`
   * Remove support for `index` on `QuoteLine.actions[].add_item.discounts[]`, `QuoteLine.actions[].remove_discount`, `QuoteLine.actions[].set_discounts[]`, `QuoteLine.actions[].set_items[].discounts[]`, `SubscriptionSchedule.phases[].add_invoice_items[].discounts[]`, `SubscriptionSchedule.phases[].discounts[]`, and `SubscriptionSchedule.phases[].items[].discounts[]`
   * Add support for new values `quote.accepting`, `quote.reestimated`, and `quote.stale` on enums `WebhookEndpointCreateParams.enabled_events[]` and `WebhookEndpointUpdateParams.enabled_events[]`
-  
+
   * Updated stable APIs to the latest version
 
 ## 22.6.0-beta.1 - 2023-01-05
