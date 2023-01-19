@@ -1015,6 +1015,12 @@ public class WebhookEndpointCreateParams extends ApiRequestParams {
     @SerializedName("recipient.updated")
     RECIPIENT__UPDATED("recipient.updated"),
 
+    @SerializedName("refund.created")
+    REFUND__CREATED("refund.created"),
+
+    @SerializedName("refund.updated")
+    REFUND__UPDATED("refund.updated"),
+
     @SerializedName("reporting.report_run.failed")
     REPORTING__REPORT_RUN__FAILED("reporting.report_run.failed"),
 

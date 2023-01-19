@@ -223,7 +223,8 @@ public class SubscriptionUpdateParams extends ApiRequestParams {
    * Determines how to handle <a
    * href="https://stripe.com/docs/subscriptions/billing-cycle#prorations">prorations</a> when the
    * billing cycle changes (e.g., when switching plans, resetting {@code billing_cycle_anchor=now},
-   * or starting a trial), or if an item's {@code quantity} changes.
+   * or starting a trial), or if an item's {@code quantity} changes. The default value is {@code
+   * create_prorations}.
    */
   @SerializedName("proration_behavior")
   ProrationBehavior prorationBehavior;
@@ -938,6 +939,7 @@ public class SubscriptionUpdateParams extends ApiRequestParams {
      * href="https://stripe.com/docs/subscriptions/billing-cycle#prorations">prorations</a> when the
      * billing cycle changes (e.g., when switching plans, resetting {@code
      * billing_cycle_anchor=now}, or starting a trial), or if an item's {@code quantity} changes.
+     * The default value is {@code create_prorations}.
      */
     public Builder setProrationBehavior(
         SubscriptionUpdateParams.ProrationBehavior prorationBehavior) {
