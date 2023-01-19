@@ -39,17 +39,26 @@ public class EphemeralKeyCreateParams extends ApiRequestParams {
   @SerializedName("stripe-version")
   String stripeVersion;
 
+  /**
+   * The ID of the Identity VerificationSession you'd like to access using the resulting ephemeral
+   * key.
+   */
+  @SerializedName("verification_session")
+  String verificationSession;
+
   private EphemeralKeyCreateParams(
       String customer,
       List<String> expand,
       Map<String, Object> extraParams,
       String issuingCard,
-      String stripeVersion) {
+      String stripeVersion,
+      String verificationSession) {
     this.customer = customer;
     this.expand = expand;
     this.extraParams = extraParams;
     this.issuingCard = issuingCard;
     this.stripeVersion = stripeVersion;
+    this.verificationSession = verificationSession;
   }
 
   public static Builder builder() {
@@ -67,10 +76,17 @@ public class EphemeralKeyCreateParams extends ApiRequestParams {
 
     private String stripeVersion;
 
+    private String verificationSession;
+
     /** Finalize and obtain parameter instance from this builder. */
     public EphemeralKeyCreateParams build() {
       return new EphemeralKeyCreateParams(
-          this.customer, this.expand, this.extraParams, this.issuingCard, this.stripeVersion);
+          this.customer,
+          this.expand,
+          this.extraParams,
+          this.issuingCard,
+          this.stripeVersion,
+          this.verificationSession);
     }
 
     /** The ID of the Customer you'd like to modify using the resulting ephemeral key. */
@@ -134,6 +150,15 @@ public class EphemeralKeyCreateParams extends ApiRequestParams {
     /** The ID of the Issuing Card you'd like to access using the resulting ephemeral key. */
     public Builder setIssuingCard(String issuingCard) {
       this.issuingCard = issuingCard;
+      return this;
+    }
+
+    /**
+     * The ID of the Identity VerificationSession you'd like to access using the resulting ephemeral
+     * key.
+     */
+    public Builder setVerificationSession(String verificationSession) {
+      this.verificationSession = verificationSession;
       return this;
     }
 
