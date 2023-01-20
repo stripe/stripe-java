@@ -230,6 +230,13 @@ public class SubscriptionScheduleAmendParams extends ApiRequestParams {
     @SerializedName("proration_behavior")
     ProrationBehavior prorationBehavior;
 
+    /**
+     * Ends the subscription schedule early as dictated by either the accompanying amendment's start
+     * or end.
+     */
+    @SerializedName("set_schedule_end")
+    SetScheduleEnd setScheduleEnd;
+
     /** Settings related to subscription trials. */
     @SerializedName("trial_settings")
     TrialSettings trialSettings;
@@ -243,6 +250,7 @@ public class SubscriptionScheduleAmendParams extends ApiRequestParams {
         List<SubscriptionScheduleAmendParams.Amendment.ItemAction> itemActions,
         List<SubscriptionScheduleAmendParams.Amendment.MetadataAction> metadataActions,
         ProrationBehavior prorationBehavior,
+        SetScheduleEnd setScheduleEnd,
         TrialSettings trialSettings) {
       this.amendmentEnd = amendmentEnd;
       this.amendmentStart = amendmentStart;
@@ -252,6 +260,7 @@ public class SubscriptionScheduleAmendParams extends ApiRequestParams {
       this.itemActions = itemActions;
       this.metadataActions = metadataActions;
       this.prorationBehavior = prorationBehavior;
+      this.setScheduleEnd = setScheduleEnd;
       this.trialSettings = trialSettings;
     }
 
@@ -276,6 +285,8 @@ public class SubscriptionScheduleAmendParams extends ApiRequestParams {
 
       private ProrationBehavior prorationBehavior;
 
+      private SetScheduleEnd setScheduleEnd;
+
       private TrialSettings trialSettings;
 
       /** Finalize and obtain parameter instance from this builder. */
@@ -289,6 +300,7 @@ public class SubscriptionScheduleAmendParams extends ApiRequestParams {
             this.itemActions,
             this.metadataActions,
             this.prorationBehavior,
+            this.setScheduleEnd,
             this.trialSettings);
       }
 
@@ -445,6 +457,16 @@ public class SubscriptionScheduleAmendParams extends ApiRequestParams {
       public Builder setProrationBehavior(
           SubscriptionScheduleAmendParams.Amendment.ProrationBehavior prorationBehavior) {
         this.prorationBehavior = prorationBehavior;
+        return this;
+      }
+
+      /**
+       * Ends the subscription schedule early as dictated by either the accompanying amendment's
+       * start or end.
+       */
+      public Builder setSetScheduleEnd(
+          SubscriptionScheduleAmendParams.Amendment.SetScheduleEnd setScheduleEnd) {
+        this.setScheduleEnd = setScheduleEnd;
         return this;
       }
 
@@ -3730,6 +3752,21 @@ public class SubscriptionScheduleAmendParams extends ApiRequestParams {
       private final String value;
 
       ProrationBehavior(String value) {
+        this.value = value;
+      }
+    }
+
+    public enum SetScheduleEnd implements ApiRequestParams.EnumParam {
+      @SerializedName("amendment_end")
+      AMENDMENT_END("amendment_end"),
+
+      @SerializedName("amendment_start")
+      AMENDMENT_START("amendment_start");
+
+      @Getter(onMethod_ = {@Override})
+      private final String value;
+
+      SetScheduleEnd(String value) {
         this.value = value;
       }
     }

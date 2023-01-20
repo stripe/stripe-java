@@ -1342,6 +1342,13 @@ public class QuoteCreateParams extends ApiRequestParams {
     @SerializedName("proration_behavior")
     ProrationBehavior prorationBehavior;
 
+    /**
+     * Timestsamp helper to end the underlying schedule early, based on the acompanying line's start
+     * or end date.
+     */
+    @SerializedName("set_schedule_end")
+    SetScheduleEnd setScheduleEnd;
+
     /** Details to identify the earliest timestamp where the proposed change should take effect. */
     @SerializedName("starts_at")
     StartsAt startsAt;
@@ -1357,6 +1364,7 @@ public class QuoteCreateParams extends ApiRequestParams {
         EndsAt endsAt,
         Map<String, Object> extraParams,
         ProrationBehavior prorationBehavior,
+        SetScheduleEnd setScheduleEnd,
         StartsAt startsAt,
         TrialSettings trialSettings) {
       this.actions = actions;
@@ -1365,6 +1373,7 @@ public class QuoteCreateParams extends ApiRequestParams {
       this.endsAt = endsAt;
       this.extraParams = extraParams;
       this.prorationBehavior = prorationBehavior;
+      this.setScheduleEnd = setScheduleEnd;
       this.startsAt = startsAt;
       this.trialSettings = trialSettings;
     }
@@ -1386,6 +1395,8 @@ public class QuoteCreateParams extends ApiRequestParams {
 
       private ProrationBehavior prorationBehavior;
 
+      private SetScheduleEnd setScheduleEnd;
+
       private StartsAt startsAt;
 
       private TrialSettings trialSettings;
@@ -1399,6 +1410,7 @@ public class QuoteCreateParams extends ApiRequestParams {
             this.endsAt,
             this.extraParams,
             this.prorationBehavior,
+            this.setScheduleEnd,
             this.startsAt,
             this.trialSettings);
       }
@@ -1489,6 +1501,15 @@ public class QuoteCreateParams extends ApiRequestParams {
       public Builder setProrationBehavior(
           QuoteCreateParams.Line.ProrationBehavior prorationBehavior) {
         this.prorationBehavior = prorationBehavior;
+        return this;
+      }
+
+      /**
+       * Timestsamp helper to end the underlying schedule early, based on the acompanying line's
+       * start or end date.
+       */
+      public Builder setSetScheduleEnd(QuoteCreateParams.Line.SetScheduleEnd setScheduleEnd) {
+        this.setScheduleEnd = setScheduleEnd;
         return this;
       }
 
@@ -4679,6 +4700,21 @@ public class QuoteCreateParams extends ApiRequestParams {
       private final String value;
 
       ProrationBehavior(String value) {
+        this.value = value;
+      }
+    }
+
+    public enum SetScheduleEnd implements ApiRequestParams.EnumParam {
+      @SerializedName("line_ends_at")
+      LINE_ENDS_AT("line_ends_at"),
+
+      @SerializedName("line_starts_at")
+      LINE_STARTS_AT("line_starts_at");
+
+      @Getter(onMethod_ = {@Override})
+      private final String value;
+
+      SetScheduleEnd(String value) {
         this.value = value;
       }
     }

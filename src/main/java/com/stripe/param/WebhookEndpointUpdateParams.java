@@ -685,6 +685,9 @@ public class WebhookEndpointUpdateParams extends ApiRequestParams {
     @SerializedName("quote.created")
     QUOTE__CREATED("quote.created"),
 
+    @SerializedName("quote.draft")
+    QUOTE__DRAFT("quote.draft"),
+
     @SerializedName("quote.finalized")
     QUOTE__FINALIZED("quote.finalized"),
 

@@ -61,6 +61,15 @@ public class QuoteLine extends StripeObject implements HasId {
   @SerializedName("proration_behavior")
   String prorationBehavior;
 
+  /**
+   * Timestsamp helper to end the underlying schedule early, based on the acompanying line's start
+   * or end date.
+   *
+   * <p>One of {@code line_ends_at}, or {@code line_starts_at}.
+   */
+  @SerializedName("set_schedule_end")
+  String setScheduleEnd;
+
   /** Details to identify the earliest timestamp where the proposed change should take effect. */
   @SerializedName("starts_at")
   StartsAt startsAt;
