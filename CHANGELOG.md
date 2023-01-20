@@ -1,5 +1,10 @@
 # Changelog
 
+## 22.7.0-beta.2 - 2023-01-20
+* [#1509](https://github.com/stripe/stripe-java/pull/1509) API Updates for beta branch
+  * Updated stable APIs to the latest version
+  * Adds support for `set_schedule_end` on `Quote`.
+
 ## 22.7.0-beta.1 - 2023-01-19
 * [#1508](https://github.com/stripe/stripe-java/pull/1508) API Updates for beta branch
   * Updated stable APIs to the latest version
