@@ -6347,7 +6347,7 @@ public class SessionCreateParams extends ApiRequestParams {
         public static class EuBankTransfer {
           /**
            * The desired country code of the bank account information. Permitted values include:
-           * {@code DE}, {@code ES}, {@code FR}, {@code IE}, or {@code NL}.
+           * {@code BE}, {@code DE}, {@code ES}, {@code FR}, {@code IE}, or {@code NL}.
            */
           @SerializedName("country")
           String country;
@@ -6386,7 +6386,7 @@ public class SessionCreateParams extends ApiRequestParams {
 
             /**
              * The desired country code of the bank account information. Permitted values include:
-             * {@code DE}, {@code ES}, {@code FR}, {@code IE}, or {@code NL}.
+             * {@code BE}, {@code DE}, {@code ES}, {@code FR}, {@code IE}, or {@code NL}.
              */
             public Builder setCountry(String country) {
               this.country = country;

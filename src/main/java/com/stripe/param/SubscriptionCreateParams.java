@@ -268,11 +268,10 @@ public class SubscriptionCreateParams extends ApiRequestParams {
 
   /**
    * Unix timestamp representing the end of the trial period the customer will get before being
-   * charged for the first time. This will always overwrite any trials that might apply via a
-   * subscribed plan. If set, trial_end will override the default trial period of the plan the
-   * customer is being subscribed to. The special value {@code now} can be provided to end the
-   * customer's trial immediately. Can be at most two years from {@code billing_cycle_anchor}. See
-   * <a href="https://stripe.com/docs/billing/subscriptions/trials">Using trial periods on
+   * charged for the first time. If set, trial_end will override the default trial period of the
+   * plan the customer is being subscribed to. The special value {@code now} can be provided to end
+   * the customer's trial immediately. Can be at most two years from {@code billing_cycle_anchor}.
+   * See <a href="https://stripe.com/docs/billing/subscriptions/trials">Using trial periods on
    * subscriptions</a> to learn more.
    */
   @SerializedName("trial_end")
@@ -1013,11 +1012,11 @@ public class SubscriptionCreateParams extends ApiRequestParams {
 
     /**
      * Unix timestamp representing the end of the trial period the customer will get before being
-     * charged for the first time. This will always overwrite any trials that might apply via a
-     * subscribed plan. If set, trial_end will override the default trial period of the plan the
-     * customer is being subscribed to. The special value {@code now} can be provided to end the
-     * customer's trial immediately. Can be at most two years from {@code billing_cycle_anchor}. See
-     * <a href="https://stripe.com/docs/billing/subscriptions/trials">Using trial periods on
+     * charged for the first time. If set, trial_end will override the default trial period of the
+     * plan the customer is being subscribed to. The special value {@code now} can be provided to
+     * end the customer's trial immediately. Can be at most two years from {@code
+     * billing_cycle_anchor}. See <a
+     * href="https://stripe.com/docs/billing/subscriptions/trials">Using trial periods on
      * subscriptions</a> to learn more.
      */
     public Builder setTrialEnd(SubscriptionCreateParams.TrialEnd trialEnd) {
@@ -1027,11 +1026,11 @@ public class SubscriptionCreateParams extends ApiRequestParams {
 
     /**
      * Unix timestamp representing the end of the trial period the customer will get before being
-     * charged for the first time. This will always overwrite any trials that might apply via a
-     * subscribed plan. If set, trial_end will override the default trial period of the plan the
-     * customer is being subscribed to. The special value {@code now} can be provided to end the
-     * customer's trial immediately. Can be at most two years from {@code billing_cycle_anchor}. See
-     * <a href="https://stripe.com/docs/billing/subscriptions/trials">Using trial periods on
+     * charged for the first time. If set, trial_end will override the default trial period of the
+     * plan the customer is being subscribed to. The special value {@code now} can be provided to
+     * end the customer's trial immediately. Can be at most two years from {@code
+     * billing_cycle_anchor}. See <a
+     * href="https://stripe.com/docs/billing/subscriptions/trials">Using trial periods on
      * subscriptions</a> to learn more.
      */
     public Builder setTrialEnd(Long trialEnd) {
@@ -4731,7 +4730,7 @@ public class SubscriptionCreateParams extends ApiRequestParams {
           public static class EuBankTransfer {
             /**
              * The desired country code of the bank account information. Permitted values include:
-             * {@code DE}, {@code ES}, {@code FR}, {@code IE}, or {@code NL}.
+             * {@code BE}, {@code DE}, {@code ES}, {@code FR}, {@code IE}, or {@code NL}.
              */
             @SerializedName("country")
             String country;
@@ -4770,7 +4769,7 @@ public class SubscriptionCreateParams extends ApiRequestParams {
 
               /**
                * The desired country code of the bank account information. Permitted values include:
-               * {@code DE}, {@code ES}, {@code FR}, {@code IE}, or {@code NL}.
+               * {@code BE}, {@code DE}, {@code ES}, {@code FR}, {@code IE}, or {@code NL}.
                */
               public Builder setCountry(String country) {
                 this.country = country;
