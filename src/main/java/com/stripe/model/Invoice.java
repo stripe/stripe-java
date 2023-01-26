@@ -1947,9 +1947,9 @@ public class Invoice extends ApiResource implements HasId, MetadataStore<Invoice
           public static class EuBankTransfer extends StripeObject {
             /**
              * The desired country code of the bank account information. Permitted values include:
-             * {@code DE}, {@code ES}, {@code FR}, {@code IE}, or {@code NL}.
+             * {@code BE}, {@code DE}, {@code ES}, {@code FR}, {@code IE}, or {@code NL}.
              *
-             * <p>One of {@code DE}, {@code ES}, {@code FR}, {@code IE}, or {@code NL}.
+             * <p>One of {@code BE}, {@code DE}, {@code ES}, {@code FR}, {@code IE}, or {@code NL}.
              */
             @SerializedName("country")
             String country;

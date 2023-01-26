@@ -8649,7 +8649,7 @@ public class PaymentIntentUpdateParams extends ApiRequestParams {
         public static class EuBankTransfer {
           /**
            * The desired country code of the bank account information. Permitted values include:
-           * {@code DE}, {@code ES}, {@code FR}, {@code IE}, or {@code NL}.
+           * {@code BE}, {@code DE}, {@code ES}, {@code FR}, {@code IE}, or {@code NL}.
            */
           @SerializedName("country")
           Object country;
@@ -8688,7 +8688,7 @@ public class PaymentIntentUpdateParams extends ApiRequestParams {
 
             /**
              * The desired country code of the bank account information. Permitted values include:
-             * {@code DE}, {@code ES}, {@code FR}, {@code IE}, or {@code NL}.
+             * {@code BE}, {@code DE}, {@code ES}, {@code FR}, {@code IE}, or {@code NL}.
              */
             public Builder setCountry(String country) {
               this.country = country;
@@ -8697,7 +8697,7 @@ public class PaymentIntentUpdateParams extends ApiRequestParams {
 
             /**
              * The desired country code of the bank account information. Permitted values include:
-             * {@code DE}, {@code ES}, {@code FR}, {@code IE}, or {@code NL}.
+             * {@code BE}, {@code DE}, {@code ES}, {@code FR}, {@code IE}, or {@code NL}.
              */
             public Builder setCountry(EmptyParam country) {
               this.country = country;
@@ -9689,6 +9689,9 @@ public class PaymentIntentUpdateParams extends ApiRequestParams {
       }
 
       public enum PreferredLocale implements ApiRequestParams.EnumParam {
+        @SerializedName("cs-CZ")
+        CS_CZ("cs-CZ"),
+
         @SerializedName("da-DK")
         DA_DK("da-DK"),
 
@@ -9700,6 +9703,9 @@ public class PaymentIntentUpdateParams extends ApiRequestParams {
 
         @SerializedName("de-DE")
         DE_DE("de-DE"),
+
+        @SerializedName("el-GR")
+        EL_GR("el-GR"),
 
         @SerializedName("en-AT")
         EN_AT("en-AT"),
@@ -9715,6 +9721,9 @@ public class PaymentIntentUpdateParams extends ApiRequestParams {
 
         @SerializedName("en-CH")
         EN_CH("en-CH"),
+
+        @SerializedName("en-CZ")
+        EN_CZ("en-CZ"),
 
         @SerializedName("en-DE")
         EN_DE("en-DE"),
@@ -9733,6 +9742,9 @@ public class PaymentIntentUpdateParams extends ApiRequestParams {
 
         @SerializedName("en-GB")
         EN_GB("en-GB"),
+
+        @SerializedName("en-GR")
+        EN_GR("en-GR"),
 
         @SerializedName("en-IE")
         EN_IE("en-IE"),
