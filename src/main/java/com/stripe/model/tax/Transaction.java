@@ -11,6 +11,8 @@ import com.stripe.net.ApiResource;
 import com.stripe.net.RequestOptions;
 import com.stripe.param.tax.TransactionCreateParams;
 import com.stripe.param.tax.TransactionCreateReversalParams;
+import com.stripe.param.tax.TransactionListLineItemsParams;
+import com.stripe.param.tax.TransactionListTransactionsParams;
 import com.stripe.param.tax.TransactionRetrieveParams;
 import java.util.List;
 import java.util.Map;
@@ -149,6 +151,77 @@ public class Transaction extends ApiResource implements HasId {
         ApiResource.fullUrl(Stripe.getApiBase(), options, "/v1/tax/transactions/create_reversal");
     return ApiResource.request(
         ApiResource.RequestMethod.POST, url, params, Transaction.class, options);
+  }
+
+  /** Retrieves the line items of a committed standalone transaction as a collection. */
+  public LineItemCollection listLineItems() throws StripeException {
+    return listLineItems((Map<String, Object>) null, (RequestOptions) null);
+  }
+
+  /** Retrieves the line items of a committed standalone transaction as a collection. */
+  public LineItemCollection listLineItems(Map<String, Object> params) throws StripeException {
+    return listLineItems(params, (RequestOptions) null);
+  }
+
+  /** Retrieves the line items of a committed standalone transaction as a collection. */
+  public LineItemCollection listLineItems(Map<String, Object> params, RequestOptions options)
+      throws StripeException {
+    String url =
+        ApiResource.fullUrl(
+            Stripe.getApiBase(),
+            options,
+            String.format(
+                "/v1/tax/transactions/%s/line_items", ApiResource.urlEncodeId(this.getId())));
+    return ApiResource.requestCollection(url, params, LineItemCollection.class, options);
+  }
+
+  /** Retrieves the line items of a committed standalone transaction as a collection. */
+  public LineItemCollection listLineItems(TransactionListLineItemsParams params)
+      throws StripeException {
+    return listLineItems(params, (RequestOptions) null);
+  }
+
+  /** Retrieves the line items of a committed standalone transaction as a collection. */
+  public LineItemCollection listLineItems(
+      TransactionListLineItemsParams params, RequestOptions options) throws StripeException {
+    String url =
+        ApiResource.fullUrl(
+            Stripe.getApiBase(),
+            options,
+            String.format(
+                "/v1/tax/transactions/%s/line_items", ApiResource.urlEncodeId(this.getId())));
+    return ApiResource.requestCollection(url, params, LineItemCollection.class, options);
+  }
+
+  /** Lists Tax Transaction objects. */
+  public static TransactionCollection listTransactions() throws StripeException {
+    return listTransactions((Map<String, Object>) null, (RequestOptions) null);
+  }
+
+  /** Lists Tax Transaction objects. */
+  public static TransactionCollection listTransactions(Map<String, Object> params)
+      throws StripeException {
+    return listTransactions(params, (RequestOptions) null);
+  }
+
+  /** Lists Tax Transaction objects. */
+  public static TransactionCollection listTransactions(
+      Map<String, Object> params, RequestOptions options) throws StripeException {
+    String url = ApiResource.fullUrl(Stripe.getApiBase(), options, "/v1/tax/transactions");
+    return ApiResource.requestCollection(url, params, TransactionCollection.class, options);
+  }
+
+  /** Lists Tax Transaction objects. */
+  public static TransactionCollection listTransactions(TransactionListTransactionsParams params)
+      throws StripeException {
+    return listTransactions(params, (RequestOptions) null);
+  }
+
+  /** Lists Tax Transaction objects. */
+  public static TransactionCollection listTransactions(
+      TransactionListTransactionsParams params, RequestOptions options) throws StripeException {
+    String url = ApiResource.fullUrl(Stripe.getApiBase(), options, "/v1/tax/transactions");
+    return ApiResource.requestCollection(url, params, TransactionCollection.class, options);
   }
 
   /** Retrieves a Tax <code>Transaction</code> object. */

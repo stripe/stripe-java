@@ -143,7 +143,7 @@ public class QuoteUpdateParams extends ApiRequestParams {
    * List representing overrides for {@code subscription_data} configurations for specific groups.
    */
   @SerializedName("subscription_data_overrides")
-  List<QuoteUpdateParams.SubscriptionDataOverride> subscriptionDataOverrides;
+  Object subscriptionDataOverrides;
 
   /** The data with which to automatically create a Transfer for each of the invoices. */
   @SerializedName("transfer_data")
@@ -170,7 +170,7 @@ public class QuoteUpdateParams extends ApiRequestParams {
       Object onBehalfOf,
       List<QuoteUpdateParams.Phase> phases,
       SubscriptionData subscriptionData,
-      List<QuoteUpdateParams.SubscriptionDataOverride> subscriptionDataOverrides,
+      Object subscriptionDataOverrides,
       Object transferData) {
     this.applicationFeeAmount = applicationFeeAmount;
     this.applicationFeePercent = applicationFeePercent;
@@ -241,7 +241,7 @@ public class QuoteUpdateParams extends ApiRequestParams {
 
     private SubscriptionData subscriptionData;
 
-    private List<QuoteUpdateParams.SubscriptionDataOverride> subscriptionDataOverrides;
+    private Object subscriptionDataOverrides;
 
     private Object transferData;
 
@@ -668,11 +668,15 @@ public class QuoteUpdateParams extends ApiRequestParams {
      * `add/addAll` call, and subsequent calls adds additional elements to the original list. See
      * {@link QuoteUpdateParams#subscriptionDataOverrides} for the field documentation.
      */
+    @SuppressWarnings("unchecked")
     public Builder addSubscriptionDataOverride(QuoteUpdateParams.SubscriptionDataOverride element) {
-      if (this.subscriptionDataOverrides == null) {
-        this.subscriptionDataOverrides = new ArrayList<>();
+      if (this.subscriptionDataOverrides == null
+          || this.subscriptionDataOverrides instanceof EmptyParam) {
+        this.subscriptionDataOverrides =
+            new ArrayList<QuoteUpdateParams.SubscriptionDataOverride>();
       }
-      this.subscriptionDataOverrides.add(element);
+      ((List<QuoteUpdateParams.SubscriptionDataOverride>) this.subscriptionDataOverrides)
+          .add(element);
       return this;
     }
 
@@ -681,12 +685,33 @@ public class QuoteUpdateParams extends ApiRequestParams {
      * `add/addAll` call, and subsequent calls adds additional elements to the original list. See
      * {@link QuoteUpdateParams#subscriptionDataOverrides} for the field documentation.
      */
+    @SuppressWarnings("unchecked")
     public Builder addAllSubscriptionDataOverride(
         List<QuoteUpdateParams.SubscriptionDataOverride> elements) {
-      if (this.subscriptionDataOverrides == null) {
-        this.subscriptionDataOverrides = new ArrayList<>();
+      if (this.subscriptionDataOverrides == null
+          || this.subscriptionDataOverrides instanceof EmptyParam) {
+        this.subscriptionDataOverrides =
+            new ArrayList<QuoteUpdateParams.SubscriptionDataOverride>();
       }
-      this.subscriptionDataOverrides.addAll(elements);
+      ((List<QuoteUpdateParams.SubscriptionDataOverride>) this.subscriptionDataOverrides)
+          .addAll(elements);
+      return this;
+    }
+
+    /**
+     * List representing overrides for {@code subscription_data} configurations for specific groups.
+     */
+    public Builder setSubscriptionDataOverrides(EmptyParam subscriptionDataOverrides) {
+      this.subscriptionDataOverrides = subscriptionDataOverrides;
+      return this;
+    }
+
+    /**
+     * List representing overrides for {@code subscription_data} configurations for specific groups.
+     */
+    public Builder setSubscriptionDataOverrides(
+        List<QuoteUpdateParams.SubscriptionDataOverride> subscriptionDataOverrides) {
+      this.subscriptionDataOverrides = subscriptionDataOverrides;
       return this;
     }
 
@@ -7493,7 +7518,7 @@ public class QuoteUpdateParams extends ApiRequestParams {
   public static class SubscriptionData {
     /** Describes the period to bill for upon accepting the quote. */
     @SerializedName("bill_on_acceptance")
-    BillOnAcceptance billOnAcceptance;
+    Object billOnAcceptance;
 
     /**
      * Configures when the subscription schedule generates prorations for phase transitions.
@@ -7576,7 +7601,7 @@ public class QuoteUpdateParams extends ApiRequestParams {
     Object trialPeriodDays;
 
     private SubscriptionData(
-        BillOnAcceptance billOnAcceptance,
+        Object billOnAcceptance,
         BillingBehavior billingBehavior,
         ApiRequestParams.EnumParam billingCycleAnchor,
         Object description,
@@ -7603,7 +7628,7 @@ public class QuoteUpdateParams extends ApiRequestParams {
     }
 
     public static class Builder {
-      private BillOnAcceptance billOnAcceptance;
+      private Object billOnAcceptance;
 
       private BillingBehavior billingBehavior;
 
@@ -7641,6 +7666,12 @@ public class QuoteUpdateParams extends ApiRequestParams {
       /** Describes the period to bill for upon accepting the quote. */
       public Builder setBillOnAcceptance(
           QuoteUpdateParams.SubscriptionData.BillOnAcceptance billOnAcceptance) {
+        this.billOnAcceptance = billOnAcceptance;
+        return this;
+      }
+
+      /** Describes the period to bill for upon accepting the quote. */
+      public Builder setBillOnAcceptance(EmptyParam billOnAcceptance) {
         this.billOnAcceptance = billOnAcceptance;
         return this;
       }
@@ -7928,19 +7959,16 @@ public class QuoteUpdateParams extends ApiRequestParams {
         @SerializedName("line_starts_at")
         LineStartsAt lineStartsAt;
 
-        /** Details for a Unix timestamp to start the bill period from. */
+        /** A precise Unix timestamp. */
         @SerializedName("timestamp")
-        Timestamp timestamp;
+        Long timestamp;
 
         /** The type of method to specify the {@code bill_from} time. */
         @SerializedName("type")
         Type type;
 
         private BillFrom(
-            Map<String, Object> extraParams,
-            LineStartsAt lineStartsAt,
-            Timestamp timestamp,
-            Type type) {
+            Map<String, Object> extraParams, LineStartsAt lineStartsAt, Long timestamp, Type type) {
           this.extraParams = extraParams;
           this.lineStartsAt = lineStartsAt;
           this.timestamp = timestamp;
@@ -7956,7 +7984,7 @@ public class QuoteUpdateParams extends ApiRequestParams {
 
           private LineStartsAt lineStartsAt;
 
-          private Timestamp timestamp;
+          private Long timestamp;
 
           private Type type;
 
@@ -8004,9 +8032,8 @@ public class QuoteUpdateParams extends ApiRequestParams {
             return this;
           }
 
-          /** Details for a Unix timestamp to start the bill period from. */
-          public Builder setTimestamp(
-              QuoteUpdateParams.SubscriptionData.BillOnAcceptance.BillFrom.Timestamp timestamp) {
+          /** A precise Unix timestamp. */
+          public Builder setTimestamp(Long timestamp) {
             this.timestamp = timestamp;
             return this;
           }
@@ -8121,80 +8148,6 @@ public class QuoteUpdateParams extends ApiRequestParams {
           }
         }
 
-        @Getter
-        public static class Timestamp {
-          /**
-           * Map of extra parameters for custom features not available in this client library. The
-           * content in this map is not serialized under this field's {@code @SerializedName} value.
-           * Instead, each key/value pair is serialized as if the key is a root-level field
-           * (serialized) name in this param object. Effectively, this map is flattened to its
-           * parent instance.
-           */
-          @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
-          Map<String, Object> extraParams;
-
-          /** A precise Unix timestamp. */
-          @SerializedName("timestamp")
-          Long timestamp;
-
-          private Timestamp(Map<String, Object> extraParams, Long timestamp) {
-            this.extraParams = extraParams;
-            this.timestamp = timestamp;
-          }
-
-          public static Builder builder() {
-            return new Builder();
-          }
-
-          public static class Builder {
-            private Map<String, Object> extraParams;
-
-            private Long timestamp;
-
-            /** Finalize and obtain parameter instance from this builder. */
-            public QuoteUpdateParams.SubscriptionData.BillOnAcceptance.BillFrom.Timestamp build() {
-              return new QuoteUpdateParams.SubscriptionData.BillOnAcceptance.BillFrom.Timestamp(
-                  this.extraParams, this.timestamp);
-            }
-
-            /**
-             * Add a key/value pair to `extraParams` map. A map is initialized for the first
-             * `put/putAll` call, and subsequent calls add additional key/value pairs to the
-             * original map. See {@link
-             * QuoteUpdateParams.SubscriptionData.BillOnAcceptance.BillFrom.Timestamp#extraParams}
-             * for the field documentation.
-             */
-            public Builder putExtraParam(String key, Object value) {
-              if (this.extraParams == null) {
-                this.extraParams = new HashMap<>();
-              }
-              this.extraParams.put(key, value);
-              return this;
-            }
-
-            /**
-             * Add all map key/value pairs to `extraParams` map. A map is initialized for the first
-             * `put/putAll` call, and subsequent calls add additional key/value pairs to the
-             * original map. See {@link
-             * QuoteUpdateParams.SubscriptionData.BillOnAcceptance.BillFrom.Timestamp#extraParams}
-             * for the field documentation.
-             */
-            public Builder putAllExtraParam(Map<String, Object> map) {
-              if (this.extraParams == null) {
-                this.extraParams = new HashMap<>();
-              }
-              this.extraParams.putAll(map);
-              return this;
-            }
-
-            /** A precise Unix timestamp. */
-            public Builder setTimestamp(Long timestamp) {
-              this.timestamp = timestamp;
-              return this;
-            }
-          }
-        }
-
         public enum Type implements ApiRequestParams.EnumParam {
           @SerializedName("line_starts_at")
           LINE_STARTS_AT("line_starts_at"),
@@ -8237,9 +8190,9 @@ public class QuoteUpdateParams extends ApiRequestParams {
         @SerializedName("line_ends_at")
         LineEndsAt lineEndsAt;
 
-        /** Details of a Unix timestamp to bill until. */
+        /** A precise Unix timestamp. */
         @SerializedName("timestamp")
-        Timestamp timestamp;
+        Long timestamp;
 
         /** The type of method to specify the {@code bill_until} time. */
         @SerializedName("type")
@@ -8249,7 +8202,7 @@ public class QuoteUpdateParams extends ApiRequestParams {
             Duration duration,
             Map<String, Object> extraParams,
             LineEndsAt lineEndsAt,
-            Timestamp timestamp,
+            Long timestamp,
             Type type) {
           this.duration = duration;
           this.extraParams = extraParams;
@@ -8269,7 +8222,7 @@ public class QuoteUpdateParams extends ApiRequestParams {
 
           private LineEndsAt lineEndsAt;
 
-          private Timestamp timestamp;
+          private Long timestamp;
 
           private Type type;
 
@@ -8323,9 +8276,8 @@ public class QuoteUpdateParams extends ApiRequestParams {
             return this;
           }
 
-          /** Details of a Unix timestamp to bill until. */
-          public Builder setTimestamp(
-              QuoteUpdateParams.SubscriptionData.BillOnAcceptance.BillUntil.Timestamp timestamp) {
+          /** A precise Unix timestamp. */
+          public Builder setTimestamp(Long timestamp) {
             this.timestamp = timestamp;
             return this;
           }
@@ -8562,80 +8514,6 @@ public class QuoteUpdateParams extends ApiRequestParams {
           }
         }
 
-        @Getter
-        public static class Timestamp {
-          /**
-           * Map of extra parameters for custom features not available in this client library. The
-           * content in this map is not serialized under this field's {@code @SerializedName} value.
-           * Instead, each key/value pair is serialized as if the key is a root-level field
-           * (serialized) name in this param object. Effectively, this map is flattened to its
-           * parent instance.
-           */
-          @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
-          Map<String, Object> extraParams;
-
-          /** A precise Unix timestamp. */
-          @SerializedName("timestamp")
-          Long timestamp;
-
-          private Timestamp(Map<String, Object> extraParams, Long timestamp) {
-            this.extraParams = extraParams;
-            this.timestamp = timestamp;
-          }
-
-          public static Builder builder() {
-            return new Builder();
-          }
-
-          public static class Builder {
-            private Map<String, Object> extraParams;
-
-            private Long timestamp;
-
-            /** Finalize and obtain parameter instance from this builder. */
-            public QuoteUpdateParams.SubscriptionData.BillOnAcceptance.BillUntil.Timestamp build() {
-              return new QuoteUpdateParams.SubscriptionData.BillOnAcceptance.BillUntil.Timestamp(
-                  this.extraParams, this.timestamp);
-            }
-
-            /**
-             * Add a key/value pair to `extraParams` map. A map is initialized for the first
-             * `put/putAll` call, and subsequent calls add additional key/value pairs to the
-             * original map. See {@link
-             * QuoteUpdateParams.SubscriptionData.BillOnAcceptance.BillUntil.Timestamp#extraParams}
-             * for the field documentation.
-             */
-            public Builder putExtraParam(String key, Object value) {
-              if (this.extraParams == null) {
-                this.extraParams = new HashMap<>();
-              }
-              this.extraParams.put(key, value);
-              return this;
-            }
-
-            /**
-             * Add all map key/value pairs to `extraParams` map. A map is initialized for the first
-             * `put/putAll` call, and subsequent calls add additional key/value pairs to the
-             * original map. See {@link
-             * QuoteUpdateParams.SubscriptionData.BillOnAcceptance.BillUntil.Timestamp#extraParams}
-             * for the field documentation.
-             */
-            public Builder putAllExtraParam(Map<String, Object> map) {
-              if (this.extraParams == null) {
-                this.extraParams = new HashMap<>();
-              }
-              this.extraParams.putAll(map);
-              return this;
-            }
-
-            /** A precise Unix timestamp. */
-            public Builder setTimestamp(Long timestamp) {
-              this.timestamp = timestamp;
-              return this;
-            }
-          }
-        }
-
         public enum Type implements ApiRequestParams.EnumParam {
           @SerializedName("duration")
           DURATION("duration"),
@@ -8817,7 +8695,7 @@ public class QuoteUpdateParams extends ApiRequestParams {
 
     /** Describes the period to bill for upon accepting the quote. */
     @SerializedName("bill_on_acceptance")
-    BillOnAcceptance billOnAcceptance;
+    Object billOnAcceptance;
 
     /**
      * Configures when the subscription schedule generates prorations for phase transitions.
@@ -8829,10 +8707,7 @@ public class QuoteUpdateParams extends ApiRequestParams {
     @SerializedName("billing_behavior")
     BillingBehavior billingBehavior;
 
-    /**
-     * The customer the Subscription Data override applies to. This is only relevant when {@code
-     * applies_to.type=new_reference}.
-     */
+    /** The customer the Subscription Data override applies to. */
     @SerializedName("customer")
     Object customer;
 
@@ -8877,7 +8752,7 @@ public class QuoteUpdateParams extends ApiRequestParams {
 
     private SubscriptionDataOverride(
         AppliesTo appliesTo,
-        BillOnAcceptance billOnAcceptance,
+        Object billOnAcceptance,
         BillingBehavior billingBehavior,
         Object customer,
         Object description,
@@ -8901,7 +8776,7 @@ public class QuoteUpdateParams extends ApiRequestParams {
     public static class Builder {
       private AppliesTo appliesTo;
 
-      private BillOnAcceptance billOnAcceptance;
+      private Object billOnAcceptance;
 
       private BillingBehavior billingBehavior;
 
@@ -8944,6 +8819,12 @@ public class QuoteUpdateParams extends ApiRequestParams {
         return this;
       }
 
+      /** Describes the period to bill for upon accepting the quote. */
+      public Builder setBillOnAcceptance(EmptyParam billOnAcceptance) {
+        this.billOnAcceptance = billOnAcceptance;
+        return this;
+      }
+
       /**
        * Configures when the subscription schedule generates prorations for phase transitions.
        * Possible values are {@code prorate_on_next_phase} or {@code prorate_up_front} with the
@@ -8957,19 +8838,13 @@ public class QuoteUpdateParams extends ApiRequestParams {
         return this;
       }
 
-      /**
-       * The customer the Subscription Data override applies to. This is only relevant when {@code
-       * applies_to.type=new_reference}.
-       */
+      /** The customer the Subscription Data override applies to. */
       public Builder setCustomer(String customer) {
         this.customer = customer;
         return this;
       }
 
-      /**
-       * The customer the Subscription Data override applies to. This is only relevant when {@code
-       * applies_to.type=new_reference}.
-       */
+      /** The customer the Subscription Data override applies to. */
       public Builder setCustomer(EmptyParam customer) {
         this.customer = customer;
         return this;
@@ -9292,19 +9167,16 @@ public class QuoteUpdateParams extends ApiRequestParams {
         @SerializedName("line_starts_at")
         LineStartsAt lineStartsAt;
 
-        /** Details for a Unix timestamp to start the bill period from. */
+        /** A precise Unix timestamp. */
         @SerializedName("timestamp")
-        Timestamp timestamp;
+        Long timestamp;
 
         /** The type of method to specify the {@code bill_from} time. */
         @SerializedName("type")
         Type type;
 
         private BillFrom(
-            Map<String, Object> extraParams,
-            LineStartsAt lineStartsAt,
-            Timestamp timestamp,
-            Type type) {
+            Map<String, Object> extraParams, LineStartsAt lineStartsAt, Long timestamp, Type type) {
           this.extraParams = extraParams;
           this.lineStartsAt = lineStartsAt;
           this.timestamp = timestamp;
@@ -9320,7 +9192,7 @@ public class QuoteUpdateParams extends ApiRequestParams {
 
           private LineStartsAt lineStartsAt;
 
-          private Timestamp timestamp;
+          private Long timestamp;
 
           private Type type;
 
@@ -9368,10 +9240,8 @@ public class QuoteUpdateParams extends ApiRequestParams {
             return this;
           }
 
-          /** Details for a Unix timestamp to start the bill period from. */
-          public Builder setTimestamp(
-              QuoteUpdateParams.SubscriptionDataOverride.BillOnAcceptance.BillFrom.Timestamp
-                  timestamp) {
+          /** A precise Unix timestamp. */
+          public Builder setTimestamp(Long timestamp) {
             this.timestamp = timestamp;
             return this;
           }
@@ -9486,81 +9356,6 @@ public class QuoteUpdateParams extends ApiRequestParams {
           }
         }
 
-        @Getter
-        public static class Timestamp {
-          /**
-           * Map of extra parameters for custom features not available in this client library. The
-           * content in this map is not serialized under this field's {@code @SerializedName} value.
-           * Instead, each key/value pair is serialized as if the key is a root-level field
-           * (serialized) name in this param object. Effectively, this map is flattened to its
-           * parent instance.
-           */
-          @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
-          Map<String, Object> extraParams;
-
-          /** A precise Unix timestamp. */
-          @SerializedName("timestamp")
-          Long timestamp;
-
-          private Timestamp(Map<String, Object> extraParams, Long timestamp) {
-            this.extraParams = extraParams;
-            this.timestamp = timestamp;
-          }
-
-          public static Builder builder() {
-            return new Builder();
-          }
-
-          public static class Builder {
-            private Map<String, Object> extraParams;
-
-            private Long timestamp;
-
-            /** Finalize and obtain parameter instance from this builder. */
-            public QuoteUpdateParams.SubscriptionDataOverride.BillOnAcceptance.BillFrom.Timestamp
-                build() {
-              return new QuoteUpdateParams.SubscriptionDataOverride.BillOnAcceptance.BillFrom
-                  .Timestamp(this.extraParams, this.timestamp);
-            }
-
-            /**
-             * Add a key/value pair to `extraParams` map. A map is initialized for the first
-             * `put/putAll` call, and subsequent calls add additional key/value pairs to the
-             * original map. See {@link
-             * QuoteUpdateParams.SubscriptionDataOverride.BillOnAcceptance.BillFrom.Timestamp#extraParams}
-             * for the field documentation.
-             */
-            public Builder putExtraParam(String key, Object value) {
-              if (this.extraParams == null) {
-                this.extraParams = new HashMap<>();
-              }
-              this.extraParams.put(key, value);
-              return this;
-            }
-
-            /**
-             * Add all map key/value pairs to `extraParams` map. A map is initialized for the first
-             * `put/putAll` call, and subsequent calls add additional key/value pairs to the
-             * original map. See {@link
-             * QuoteUpdateParams.SubscriptionDataOverride.BillOnAcceptance.BillFrom.Timestamp#extraParams}
-             * for the field documentation.
-             */
-            public Builder putAllExtraParam(Map<String, Object> map) {
-              if (this.extraParams == null) {
-                this.extraParams = new HashMap<>();
-              }
-              this.extraParams.putAll(map);
-              return this;
-            }
-
-            /** A precise Unix timestamp. */
-            public Builder setTimestamp(Long timestamp) {
-              this.timestamp = timestamp;
-              return this;
-            }
-          }
-        }
-
         public enum Type implements ApiRequestParams.EnumParam {
           @SerializedName("line_starts_at")
           LINE_STARTS_AT("line_starts_at"),
@@ -9603,9 +9398,9 @@ public class QuoteUpdateParams extends ApiRequestParams {
         @SerializedName("line_ends_at")
         LineEndsAt lineEndsAt;
 
-        /** Details of a Unix timestamp to bill until. */
+        /** A precise Unix timestamp. */
         @SerializedName("timestamp")
-        Timestamp timestamp;
+        Long timestamp;
 
         /** The type of method to specify the {@code bill_until} time. */
         @SerializedName("type")
@@ -9615,7 +9410,7 @@ public class QuoteUpdateParams extends ApiRequestParams {
             Duration duration,
             Map<String, Object> extraParams,
             LineEndsAt lineEndsAt,
-            Timestamp timestamp,
+            Long timestamp,
             Type type) {
           this.duration = duration;
           this.extraParams = extraParams;
@@ -9635,7 +9430,7 @@ public class QuoteUpdateParams extends ApiRequestParams {
 
           private LineEndsAt lineEndsAt;
 
-          private Timestamp timestamp;
+          private Long timestamp;
 
           private Type type;
 
@@ -9691,10 +9486,8 @@ public class QuoteUpdateParams extends ApiRequestParams {
             return this;
           }
 
-          /** Details of a Unix timestamp to bill until. */
-          public Builder setTimestamp(
-              QuoteUpdateParams.SubscriptionDataOverride.BillOnAcceptance.BillUntil.Timestamp
-                  timestamp) {
+          /** A precise Unix timestamp. */
+          public Builder setTimestamp(Long timestamp) {
             this.timestamp = timestamp;
             return this;
           }
@@ -9928,81 +9721,6 @@ public class QuoteUpdateParams extends ApiRequestParams {
              */
             public Builder setIndex(Long index) {
               this.index = index;
-              return this;
-            }
-          }
-        }
-
-        @Getter
-        public static class Timestamp {
-          /**
-           * Map of extra parameters for custom features not available in this client library. The
-           * content in this map is not serialized under this field's {@code @SerializedName} value.
-           * Instead, each key/value pair is serialized as if the key is a root-level field
-           * (serialized) name in this param object. Effectively, this map is flattened to its
-           * parent instance.
-           */
-          @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
-          Map<String, Object> extraParams;
-
-          /** A precise Unix timestamp. */
-          @SerializedName("timestamp")
-          Long timestamp;
-
-          private Timestamp(Map<String, Object> extraParams, Long timestamp) {
-            this.extraParams = extraParams;
-            this.timestamp = timestamp;
-          }
-
-          public static Builder builder() {
-            return new Builder();
-          }
-
-          public static class Builder {
-            private Map<String, Object> extraParams;
-
-            private Long timestamp;
-
-            /** Finalize and obtain parameter instance from this builder. */
-            public QuoteUpdateParams.SubscriptionDataOverride.BillOnAcceptance.BillUntil.Timestamp
-                build() {
-              return new QuoteUpdateParams.SubscriptionDataOverride.BillOnAcceptance.BillUntil
-                  .Timestamp(this.extraParams, this.timestamp);
-            }
-
-            /**
-             * Add a key/value pair to `extraParams` map. A map is initialized for the first
-             * `put/putAll` call, and subsequent calls add additional key/value pairs to the
-             * original map. See {@link
-             * QuoteUpdateParams.SubscriptionDataOverride.BillOnAcceptance.BillUntil.Timestamp#extraParams}
-             * for the field documentation.
-             */
-            public Builder putExtraParam(String key, Object value) {
-              if (this.extraParams == null) {
-                this.extraParams = new HashMap<>();
-              }
-              this.extraParams.put(key, value);
-              return this;
-            }
-
-            /**
-             * Add all map key/value pairs to `extraParams` map. A map is initialized for the first
-             * `put/putAll` call, and subsequent calls add additional key/value pairs to the
-             * original map. See {@link
-             * QuoteUpdateParams.SubscriptionDataOverride.BillOnAcceptance.BillUntil.Timestamp#extraParams}
-             * for the field documentation.
-             */
-            public Builder putAllExtraParam(Map<String, Object> map) {
-              if (this.extraParams == null) {
-                this.extraParams = new HashMap<>();
-              }
-              this.extraParams.putAll(map);
-              return this;
-            }
-
-            /** A precise Unix timestamp. */
-            public Builder setTimestamp(Long timestamp) {
-              this.timestamp = timestamp;
               return this;
             }
           }
