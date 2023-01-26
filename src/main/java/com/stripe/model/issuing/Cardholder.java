@@ -291,11 +291,17 @@ public class Cardholder extends ApiResource implements HasId, MetadataStore<Card
     @SerializedName("dob")
     Dob dob;
 
-    /** The first name of this cardholder. */
+    /**
+     * The first name of this cardholder. This field cannot contain any numbers, special characters
+     * (except periods, commas, hyphens, spaces and apostrophes) or non-latin letters.
+     */
     @SerializedName("first_name")
     String firstName;
 
-    /** The last name of this cardholder. */
+    /**
+     * The last name of this cardholder. This field cannot contain any numbers, special characters
+     * (except periods, commas, hyphens, spaces and apostrophes) or non-latin letters.
+     */
     @SerializedName("last_name")
     String lastName;
 
