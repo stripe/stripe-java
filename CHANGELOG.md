@@ -1,5 +1,12 @@
 # Changelog
 
+## 22.8.0-beta.1 - 2023-01-26
+* [#1511](https://github.com/stripe/stripe-java/pull/1511) API Updates for beta branch
+  * Updated stable APIs to the latest version
+  * Add support for `list_transactions` method on resource `Tax.Transaction`
+  * Add support for `billing_agreement_id` on `CheckoutSessionCreateParams.payment_method_options.paypal`
+  * Change type of `QuoteUpdateParams.subscription_data_overrides` from `array(create_specs)` to `emptyStringable(array(update_specs))`
+
 ## 22.7.0 - 2023-01-26
 * [#1510](https://github.com/stripe/stripe-java/pull/1510) API Updates
   * Add support for new values `cs-CZ`, `el-GR`, `en-CZ`, and `en-GR` on enums `PaymentIntentConfirmParams.payment_method_options.klarna.preferred_locale`, `PaymentIntentCreateParams.payment_method_options.klarna.preferred_locale`, and `PaymentIntentUpdateParams.payment_method_options.klarna.preferred_locale`
