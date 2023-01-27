@@ -6347,7 +6347,7 @@ public class SessionCreateParams extends ApiRequestParams {
         public static class EuBankTransfer {
           /**
            * The desired country code of the bank account information. Permitted values include:
-           * {@code DE}, {@code ES}, {@code FR}, {@code IE}, or {@code NL}.
+           * {@code BE}, {@code DE}, {@code ES}, {@code FR}, {@code IE}, or {@code NL}.
            */
           @SerializedName("country")
           String country;
@@ -6386,7 +6386,7 @@ public class SessionCreateParams extends ApiRequestParams {
 
             /**
              * The desired country code of the bank account information. Permitted values include:
-             * {@code DE}, {@code ES}, {@code FR}, {@code IE}, or {@code NL}.
+             * {@code BE}, {@code DE}, {@code ES}, {@code FR}, {@code IE}, or {@code NL}.
              */
             public Builder setCountry(String country) {
               this.country = country;
@@ -7694,6 +7694,9 @@ public class SessionCreateParams extends ApiRequestParams {
 
     @Getter
     public static class Paypal {
+      @SerializedName("billing_agreement_id")
+      String billingAgreementId;
+
       @SerializedName("currency")
       String currency;
 
@@ -7706,7 +7709,8 @@ public class SessionCreateParams extends ApiRequestParams {
       @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
       Map<String, Object> extraParams;
 
-      private Paypal(String currency, Map<String, Object> extraParams) {
+      private Paypal(String billingAgreementId, String currency, Map<String, Object> extraParams) {
+        this.billingAgreementId = billingAgreementId;
         this.currency = currency;
         this.extraParams = extraParams;
       }
@@ -7716,6 +7720,8 @@ public class SessionCreateParams extends ApiRequestParams {
       }
 
       public static class Builder {
+        private String billingAgreementId;
+
         private String currency;
 
         private Map<String, Object> extraParams;
@@ -7723,7 +7729,12 @@ public class SessionCreateParams extends ApiRequestParams {
         /** Finalize and obtain parameter instance from this builder. */
         public SessionCreateParams.PaymentMethodOptions.Paypal build() {
           return new SessionCreateParams.PaymentMethodOptions.Paypal(
-              this.currency, this.extraParams);
+              this.billingAgreementId, this.currency, this.extraParams);
+        }
+
+        public Builder setBillingAgreementId(String billingAgreementId) {
+          this.billingAgreementId = billingAgreementId;
+          return this;
         }
 
         public Builder setCurrency(String currency) {

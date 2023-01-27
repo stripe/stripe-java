@@ -1,5 +1,9 @@
 # Changelog
 
+## 22.7.0 - 2023-01-26
+* [#1510](https://github.com/stripe/stripe-java/pull/1510) API Updates
+  * Add support for new values `cs-CZ`, `el-GR`, `en-CZ`, and `en-GR` on enums `PaymentIntentConfirmParams.payment_method_options.klarna.preferred_locale`, `PaymentIntentCreateParams.payment_method_options.klarna.preferred_locale`, and `PaymentIntentUpdateParams.payment_method_options.klarna.preferred_locale`
+
 ## 22.7.0-beta.2 - 2023-01-20
 * [#1509](https://github.com/stripe/stripe-java/pull/1509) API Updates for beta branch
   * Updated stable APIs to the latest version
