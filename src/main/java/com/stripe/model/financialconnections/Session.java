@@ -54,6 +54,9 @@ public class Session extends ApiResource implements HasId {
   @SerializedName("livemode")
   Boolean livemode;
 
+  @SerializedName("manual_entry")
+  ManualEntry manualEntry;
+
   /**
    * String representing the object's type. Objects of the same type share the same value.
    *
@@ -66,12 +69,27 @@ public class Session extends ApiResource implements HasId {
   @SerializedName("permissions")
   List<String> permissions;
 
+  /** Data features requested to be retrieved upon account creation. */
+  @SerializedName("prefetch")
+  List<String> prefetch;
+
   /**
    * For webview integrations only. Upon completing OAuth login in the native browser, the user will
    * be redirected to this URL to return to your app.
    */
   @SerializedName("return_url")
   String returnUrl;
+
+  /**
+   * The current state of the session.
+   *
+   * <p>One of {@code cancelled}, {@code failed}, {@code pending}, or {@code succeeded}.
+   */
+  @SerializedName("status")
+  String status;
+
+  @SerializedName("status_details")
+  StatusDetails statusDetails;
 
   /**
    * To launch the Financial Connections authorization flow, create a <code>Session</code>. The
@@ -219,5 +237,31 @@ public class Session extends ApiResource implements HasId {
     /** List of countries from which to filter accounts. */
     @SerializedName("countries")
     List<String> countries;
+  }
+
+  @Getter
+  @Setter
+  @EqualsAndHashCode(callSuper = false)
+  public static class ManualEntry extends StripeObject {}
+
+  @Getter
+  @Setter
+  @EqualsAndHashCode(callSuper = false)
+  public static class StatusDetails extends StripeObject {
+    @SerializedName("cancelled")
+    Cancelled cancelled;
+
+    @Getter
+    @Setter
+    @EqualsAndHashCode(callSuper = false)
+    public static class Cancelled extends StripeObject {
+      /**
+       * The reason for the Session being cancelled.
+       *
+       * <p>One of {@code custom_manual_entry}, or {@code other}.
+       */
+      @SerializedName("reason")
+      String reason;
+    }
   }
 }

@@ -10,6 +10,7 @@ import com.stripe.net.RequestOptions;
 import com.stripe.param.SubscriptionCancelParams;
 import com.stripe.param.SubscriptionCreateParams;
 import com.stripe.param.SubscriptionListParams;
+import com.stripe.param.SubscriptionResumeParams;
 import com.stripe.param.SubscriptionRetrieveParams;
 import com.stripe.param.SubscriptionSearchParams;
 import com.stripe.param.SubscriptionUpdateParams;
@@ -325,7 +326,7 @@ public class Subscription extends ApiResource implements HasId, MetadataStore<Su
    * you may choose to reopen and pay their closed invoices.
    *
    * <p>One of {@code active}, {@code canceled}, {@code incomplete}, {@code incomplete_expired},
-   * {@code past_due}, {@code trialing}, or {@code unpaid}.
+   * {@code past_due}, {@code paused}, {@code trialing}, or {@code unpaid}.
    */
   @SerializedName("status")
   String status;
@@ -346,6 +347,10 @@ public class Subscription extends ApiResource implements HasId, MetadataStore<Su
   /** If the subscription has a trial, the end of that trial. */
   @SerializedName("trial_end")
   Long trialEnd;
+
+  /** Settings related to subscription trials. */
+  @SerializedName("trial_settings")
+  TrialSettings trialSettings;
 
   /** If the subscription has a trial, the beginning of that trial. */
   @SerializedName("trial_start")
@@ -813,6 +818,86 @@ public class Subscription extends ApiResource implements HasId, MetadataStore<Su
     return ApiResource.requestCollection(url, params, SubscriptionCollection.class, options);
   }
 
+  /**
+   * Initiates resumption of a paused subscription, optionally resetting the billing cycle anchor
+   * and creating prorations. If a resumption invoice is generated, it must be paid or marked
+   * uncollectible before the subscription will be unpaused. If payment succeeds the subscription
+   * will become <code>active</code>, and if payment fails the subscription will be <code>past_due
+   * </code>. The resumption invoice will void automatically if not paid by the expiration date.
+   */
+  public Subscription resume() throws StripeException {
+    return resume((Map<String, Object>) null, (RequestOptions) null);
+  }
+
+  /**
+   * Initiates resumption of a paused subscription, optionally resetting the billing cycle anchor
+   * and creating prorations. If a resumption invoice is generated, it must be paid or marked
+   * uncollectible before the subscription will be unpaused. If payment succeeds the subscription
+   * will become <code>active</code>, and if payment fails the subscription will be <code>past_due
+   * </code>. The resumption invoice will void automatically if not paid by the expiration date.
+   */
+  public Subscription resume(RequestOptions options) throws StripeException {
+    return resume((Map<String, Object>) null, options);
+  }
+
+  /**
+   * Initiates resumption of a paused subscription, optionally resetting the billing cycle anchor
+   * and creating prorations. If a resumption invoice is generated, it must be paid or marked
+   * uncollectible before the subscription will be unpaused. If payment succeeds the subscription
+   * will become <code>active</code>, and if payment fails the subscription will be <code>past_due
+   * </code>. The resumption invoice will void automatically if not paid by the expiration date.
+   */
+  public Subscription resume(Map<String, Object> params) throws StripeException {
+    return resume(params, (RequestOptions) null);
+  }
+
+  /**
+   * Initiates resumption of a paused subscription, optionally resetting the billing cycle anchor
+   * and creating prorations. If a resumption invoice is generated, it must be paid or marked
+   * uncollectible before the subscription will be unpaused. If payment succeeds the subscription
+   * will become <code>active</code>, and if payment fails the subscription will be <code>past_due
+   * </code>. The resumption invoice will void automatically if not paid by the expiration date.
+   */
+  public Subscription resume(Map<String, Object> params, RequestOptions options)
+      throws StripeException {
+    String url =
+        ApiResource.fullUrl(
+            Stripe.getApiBase(),
+            options,
+            String.format("/v1/subscriptions/%s/resume", ApiResource.urlEncodeId(this.getId())));
+    return ApiResource.request(
+        ApiResource.RequestMethod.POST, url, params, Subscription.class, options);
+  }
+
+  /**
+   * Initiates resumption of a paused subscription, optionally resetting the billing cycle anchor
+   * and creating prorations. If a resumption invoice is generated, it must be paid or marked
+   * uncollectible before the subscription will be unpaused. If payment succeeds the subscription
+   * will become <code>active</code>, and if payment fails the subscription will be <code>past_due
+   * </code>. The resumption invoice will void automatically if not paid by the expiration date.
+   */
+  public Subscription resume(SubscriptionResumeParams params) throws StripeException {
+    return resume(params, (RequestOptions) null);
+  }
+
+  /**
+   * Initiates resumption of a paused subscription, optionally resetting the billing cycle anchor
+   * and creating prorations. If a resumption invoice is generated, it must be paid or marked
+   * uncollectible before the subscription will be unpaused. If payment succeeds the subscription
+   * will become <code>active</code>, and if payment fails the subscription will be <code>past_due
+   * </code>. The resumption invoice will void automatically if not paid by the expiration date.
+   */
+  public Subscription resume(SubscriptionResumeParams params, RequestOptions options)
+      throws StripeException {
+    String url =
+        ApiResource.fullUrl(
+            Stripe.getApiBase(),
+            options,
+            String.format("/v1/subscriptions/%s/resume", ApiResource.urlEncodeId(this.getId())));
+    return ApiResource.request(
+        ApiResource.RequestMethod.POST, url, params, Subscription.class, options);
+  }
+
   /** Retrieves the subscription with the given ID. */
   public static Subscription retrieve(String subscriptionExposedId) throws StripeException {
     return retrieve(subscriptionExposedId, (Map<String, Object>) null, (RequestOptions) null);
@@ -1253,6 +1338,10 @@ public class Subscription extends ApiResource implements HasId, MetadataStore<Su
            */
           @SerializedName("permissions")
           List<String> permissions;
+
+          /** Data features requested to be retrieved upon account creation. */
+          @SerializedName("prefetch")
+          List<String> prefetch;
         }
       }
     }
@@ -1404,6 +1493,31 @@ public class Subscription extends ApiResource implements HasId, MetadataStore<Su
 
     public void setDestinationObject(Account expandableObject) {
       this.destination = new ExpandableField<Account>(expandableObject.getId(), expandableObject);
+    }
+  }
+
+  /** Configures how this subscription behaves during the trial period. */
+  @Getter
+  @Setter
+  @EqualsAndHashCode(callSuper = false)
+  public static class TrialSettings extends StripeObject {
+    /** Defines how a subscription behaves when a free trial ends. */
+    @SerializedName("end_behavior")
+    EndBehavior endBehavior;
+
+    /** Defines how a subscription behaves when a free trial ends. */
+    @Getter
+    @Setter
+    @EqualsAndHashCode(callSuper = false)
+    public static class EndBehavior extends StripeObject {
+      /**
+       * Indicates how the subscription should change when the trial ends if the user did not
+       * provide a payment method.
+       *
+       * <p>One of {@code cancel}, {@code create_invoice}, or {@code pause}.
+       */
+      @SerializedName("missing_payment_method")
+      String missingPaymentMethod;
     }
   }
 }

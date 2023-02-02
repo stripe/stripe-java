@@ -1,5 +1,5 @@
 // File generated from our OpenAPI spec
-package com.stripe.param.checkout;
+package com.stripe.param.financialconnections;
 
 import com.google.gson.annotations.SerializedName;
 import com.stripe.net.ApiRequestParams;
@@ -10,14 +10,10 @@ import java.util.Map;
 import lombok.Getter;
 
 @Getter
-public class SessionListParams extends ApiRequestParams {
-  /** Only return the Checkout Sessions for the Customer specified. */
-  @SerializedName("customer")
-  String customer;
-
-  /** Only return the Checkout Sessions for the Customer details specified. */
-  @SerializedName("customer_details")
-  CustomerDetails customerDetails;
+public class TransactionCollectionListParams extends ApiRequestParams {
+  /** The ID of the Stripe account whose transactions will be retrieved. */
+  @SerializedName("account")
+  String account;
 
   /**
    * A cursor for use in pagination. {@code ending_before} is an object ID that defines your place
@@ -48,14 +44,6 @@ public class SessionListParams extends ApiRequestParams {
   @SerializedName("limit")
   Long limit;
 
-  /** Only return the Checkout Session for the PaymentIntent specified. */
-  @SerializedName("payment_intent")
-  String paymentIntent;
-
-  /** Only return the Checkout Sessions for the Payment Link specified. */
-  @SerializedName("payment_link")
-  String paymentLink;
-
   /**
    * A cursor for use in pagination. {@code starting_after} is an object ID that defines your place
    * in the list. For instance, if you make a list request and receive 100 objects, ending with
@@ -65,31 +53,37 @@ public class SessionListParams extends ApiRequestParams {
   @SerializedName("starting_after")
   String startingAfter;
 
-  /** Only return the Checkout Session for the subscription specified. */
-  @SerializedName("subscription")
-  String subscription;
+  /**
+   * A filter on the list based on the object {@code transacted_at} field. The value can be a string
+   * with an integer Unix timestamp, or it can be a dictionary with the following options:
+   */
+  @SerializedName("transacted_at")
+  Object transactedAt;
 
-  private SessionListParams(
-      String customer,
-      CustomerDetails customerDetails,
+  /**
+   * A filter on the list based on the object {@code transaction_refresh} field. The value can be a
+   * dictionary with the following options:
+   */
+  @SerializedName("transaction_refresh")
+  TransactionRefresh transactionRefresh;
+
+  private TransactionCollectionListParams(
+      String account,
       String endingBefore,
       List<String> expand,
       Map<String, Object> extraParams,
       Long limit,
-      String paymentIntent,
-      String paymentLink,
       String startingAfter,
-      String subscription) {
-    this.customer = customer;
-    this.customerDetails = customerDetails;
+      Object transactedAt,
+      TransactionRefresh transactionRefresh) {
+    this.account = account;
     this.endingBefore = endingBefore;
     this.expand = expand;
     this.extraParams = extraParams;
     this.limit = limit;
-    this.paymentIntent = paymentIntent;
-    this.paymentLink = paymentLink;
     this.startingAfter = startingAfter;
-    this.subscription = subscription;
+    this.transactedAt = transactedAt;
+    this.transactionRefresh = transactionRefresh;
   }
 
   public static Builder builder() {
@@ -97,9 +91,7 @@ public class SessionListParams extends ApiRequestParams {
   }
 
   public static class Builder {
-    private String customer;
-
-    private CustomerDetails customerDetails;
+    private String account;
 
     private String endingBefore;
 
@@ -109,38 +101,28 @@ public class SessionListParams extends ApiRequestParams {
 
     private Long limit;
 
-    private String paymentIntent;
-
-    private String paymentLink;
-
     private String startingAfter;
 
-    private String subscription;
+    private Object transactedAt;
+
+    private TransactionRefresh transactionRefresh;
 
     /** Finalize and obtain parameter instance from this builder. */
-    public SessionListParams build() {
-      return new SessionListParams(
-          this.customer,
-          this.customerDetails,
+    public TransactionCollectionListParams build() {
+      return new TransactionCollectionListParams(
+          this.account,
           this.endingBefore,
           this.expand,
           this.extraParams,
           this.limit,
-          this.paymentIntent,
-          this.paymentLink,
           this.startingAfter,
-          this.subscription);
+          this.transactedAt,
+          this.transactionRefresh);
     }
 
-    /** Only return the Checkout Sessions for the Customer specified. */
-    public Builder setCustomer(String customer) {
-      this.customer = customer;
-      return this;
-    }
-
-    /** Only return the Checkout Sessions for the Customer details specified. */
-    public Builder setCustomerDetails(SessionListParams.CustomerDetails customerDetails) {
-      this.customerDetails = customerDetails;
+    /** The ID of the Stripe account whose transactions will be retrieved. */
+    public Builder setAccount(String account) {
+      this.account = account;
       return this;
     }
 
@@ -158,7 +140,7 @@ public class SessionListParams extends ApiRequestParams {
     /**
      * Add an element to `expand` list. A list is initialized for the first `add/addAll` call, and
      * subsequent calls adds additional elements to the original list. See {@link
-     * SessionListParams#expand} for the field documentation.
+     * TransactionCollectionListParams#expand} for the field documentation.
      */
     public Builder addExpand(String element) {
       if (this.expand == null) {
@@ -171,7 +153,7 @@ public class SessionListParams extends ApiRequestParams {
     /**
      * Add all elements to `expand` list. A list is initialized for the first `add/addAll` call, and
      * subsequent calls adds additional elements to the original list. See {@link
-     * SessionListParams#expand} for the field documentation.
+     * TransactionCollectionListParams#expand} for the field documentation.
      */
     public Builder addAllExpand(List<String> elements) {
       if (this.expand == null) {
@@ -184,7 +166,7 @@ public class SessionListParams extends ApiRequestParams {
     /**
      * Add a key/value pair to `extraParams` map. A map is initialized for the first `put/putAll`
      * call, and subsequent calls add additional key/value pairs to the original map. See {@link
-     * SessionListParams#extraParams} for the field documentation.
+     * TransactionCollectionListParams#extraParams} for the field documentation.
      */
     public Builder putExtraParam(String key, Object value) {
       if (this.extraParams == null) {
@@ -197,7 +179,7 @@ public class SessionListParams extends ApiRequestParams {
     /**
      * Add all map key/value pairs to `extraParams` map. A map is initialized for the first
      * `put/putAll` call, and subsequent calls add additional key/value pairs to the original map.
-     * See {@link SessionListParams#extraParams} for the field documentation.
+     * See {@link TransactionCollectionListParams#extraParams} for the field documentation.
      */
     public Builder putAllExtraParam(Map<String, Object> map) {
       if (this.extraParams == null) {
@@ -216,18 +198,6 @@ public class SessionListParams extends ApiRequestParams {
       return this;
     }
 
-    /** Only return the Checkout Session for the PaymentIntent specified. */
-    public Builder setPaymentIntent(String paymentIntent) {
-      this.paymentIntent = paymentIntent;
-      return this;
-    }
-
-    /** Only return the Checkout Sessions for the Payment Link specified. */
-    public Builder setPaymentLink(String paymentLink) {
-      this.paymentLink = paymentLink;
-      return this;
-    }
-
     /**
      * A cursor for use in pagination. {@code starting_after} is an object ID that defines your
      * place in the list. For instance, if you make a list request and receive 100 objects, ending
@@ -239,19 +209,37 @@ public class SessionListParams extends ApiRequestParams {
       return this;
     }
 
-    /** Only return the Checkout Session for the subscription specified. */
-    public Builder setSubscription(String subscription) {
-      this.subscription = subscription;
+    /**
+     * A filter on the list based on the object {@code transacted_at} field. The value can be a
+     * string with an integer Unix timestamp, or it can be a dictionary with the following options:
+     */
+    public Builder setTransactedAt(TransactionCollectionListParams.TransactedAt transactedAt) {
+      this.transactedAt = transactedAt;
+      return this;
+    }
+
+    /**
+     * A filter on the list based on the object {@code transacted_at} field. The value can be a
+     * string with an integer Unix timestamp, or it can be a dictionary with the following options:
+     */
+    public Builder setTransactedAt(Long transactedAt) {
+      this.transactedAt = transactedAt;
+      return this;
+    }
+
+    /**
+     * A filter on the list based on the object {@code transaction_refresh} field. The value can be
+     * a dictionary with the following options:
+     */
+    public Builder setTransactionRefresh(
+        TransactionCollectionListParams.TransactionRefresh transactionRefresh) {
+      this.transactionRefresh = transactionRefresh;
       return this;
     }
   }
 
   @Getter
-  public static class CustomerDetails {
-    /** Customer's email address. */
-    @SerializedName("email")
-    String email;
-
+  public static class TransactedAt {
     /**
      * Map of extra parameters for custom features not available in this client library. The content
      * in this map is not serialized under this field's {@code @SerializedName} value. Instead, each
@@ -261,9 +249,28 @@ public class SessionListParams extends ApiRequestParams {
     @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
     Map<String, Object> extraParams;
 
-    private CustomerDetails(String email, Map<String, Object> extraParams) {
-      this.email = email;
+    /** Minimum value to filter by (exclusive). */
+    @SerializedName("gt")
+    Long gt;
+
+    /** Minimum value to filter by (inclusive). */
+    @SerializedName("gte")
+    Long gte;
+
+    /** Maximum value to filter by (exclusive). */
+    @SerializedName("lt")
+    Long lt;
+
+    /** Maximum value to filter by (inclusive). */
+    @SerializedName("lte")
+    Long lte;
+
+    private TransactedAt(Map<String, Object> extraParams, Long gt, Long gte, Long lt, Long lte) {
       this.extraParams = extraParams;
+      this.gt = gt;
+      this.gte = gte;
+      this.lt = lt;
+      this.lte = lte;
     }
 
     public static Builder builder() {
@@ -271,25 +278,26 @@ public class SessionListParams extends ApiRequestParams {
     }
 
     public static class Builder {
-      private String email;
-
       private Map<String, Object> extraParams;
 
-      /** Finalize and obtain parameter instance from this builder. */
-      public SessionListParams.CustomerDetails build() {
-        return new SessionListParams.CustomerDetails(this.email, this.extraParams);
-      }
+      private Long gt;
 
-      /** Customer's email address. */
-      public Builder setEmail(String email) {
-        this.email = email;
-        return this;
+      private Long gte;
+
+      private Long lt;
+
+      private Long lte;
+
+      /** Finalize and obtain parameter instance from this builder. */
+      public TransactionCollectionListParams.TransactedAt build() {
+        return new TransactionCollectionListParams.TransactedAt(
+            this.extraParams, this.gt, this.gte, this.lt, this.lte);
       }
 
       /**
        * Add a key/value pair to `extraParams` map. A map is initialized for the first `put/putAll`
        * call, and subsequent calls add additional key/value pairs to the original map. See {@link
-       * SessionListParams.CustomerDetails#extraParams} for the field documentation.
+       * TransactionCollectionListParams.TransactedAt#extraParams} for the field documentation.
        */
       public Builder putExtraParam(String key, Object value) {
         if (this.extraParams == null) {
@@ -302,7 +310,108 @@ public class SessionListParams extends ApiRequestParams {
       /**
        * Add all map key/value pairs to `extraParams` map. A map is initialized for the first
        * `put/putAll` call, and subsequent calls add additional key/value pairs to the original map.
-       * See {@link SessionListParams.CustomerDetails#extraParams} for the field documentation.
+       * See {@link TransactionCollectionListParams.TransactedAt#extraParams} for the field
+       * documentation.
+       */
+      public Builder putAllExtraParam(Map<String, Object> map) {
+        if (this.extraParams == null) {
+          this.extraParams = new HashMap<>();
+        }
+        this.extraParams.putAll(map);
+        return this;
+      }
+
+      /** Minimum value to filter by (exclusive). */
+      public Builder setGt(Long gt) {
+        this.gt = gt;
+        return this;
+      }
+
+      /** Minimum value to filter by (inclusive). */
+      public Builder setGte(Long gte) {
+        this.gte = gte;
+        return this;
+      }
+
+      /** Maximum value to filter by (exclusive). */
+      public Builder setLt(Long lt) {
+        this.lt = lt;
+        return this;
+      }
+
+      /** Maximum value to filter by (inclusive). */
+      public Builder setLte(Long lte) {
+        this.lte = lte;
+        return this;
+      }
+    }
+  }
+
+  @Getter
+  public static class TransactionRefresh {
+    /**
+     * Return results where the transactions were created or updated by a refresh that took place
+     * after this refresh (non-inclusive).
+     */
+    @SerializedName("after")
+    String after;
+
+    /**
+     * Map of extra parameters for custom features not available in this client library. The content
+     * in this map is not serialized under this field's {@code @SerializedName} value. Instead, each
+     * key/value pair is serialized as if the key is a root-level field (serialized) name in this
+     * param object. Effectively, this map is flattened to its parent instance.
+     */
+    @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
+    Map<String, Object> extraParams;
+
+    private TransactionRefresh(String after, Map<String, Object> extraParams) {
+      this.after = after;
+      this.extraParams = extraParams;
+    }
+
+    public static Builder builder() {
+      return new Builder();
+    }
+
+    public static class Builder {
+      private String after;
+
+      private Map<String, Object> extraParams;
+
+      /** Finalize and obtain parameter instance from this builder. */
+      public TransactionCollectionListParams.TransactionRefresh build() {
+        return new TransactionCollectionListParams.TransactionRefresh(this.after, this.extraParams);
+      }
+
+      /**
+       * Return results where the transactions were created or updated by a refresh that took place
+       * after this refresh (non-inclusive).
+       */
+      public Builder setAfter(String after) {
+        this.after = after;
+        return this;
+      }
+
+      /**
+       * Add a key/value pair to `extraParams` map. A map is initialized for the first `put/putAll`
+       * call, and subsequent calls add additional key/value pairs to the original map. See {@link
+       * TransactionCollectionListParams.TransactionRefresh#extraParams} for the field
+       * documentation.
+       */
+      public Builder putExtraParam(String key, Object value) {
+        if (this.extraParams == null) {
+          this.extraParams = new HashMap<>();
+        }
+        this.extraParams.put(key, value);
+        return this;
+      }
+
+      /**
+       * Add all map key/value pairs to `extraParams` map. A map is initialized for the first
+       * `put/putAll` call, and subsequent calls add additional key/value pairs to the original map.
+       * See {@link TransactionCollectionListParams.TransactionRefresh#extraParams} for the field
+       * documentation.
        */
       public Builder putAllExtraParam(Map<String, Object> map) {
         if (this.extraParams == null) {

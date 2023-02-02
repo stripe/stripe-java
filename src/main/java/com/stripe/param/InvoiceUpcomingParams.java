@@ -141,13 +141,21 @@ public class InvoiceUpcomingParams extends ApiRequestParams {
   /**
    * If previewing an update to a subscription, and doing proration, {@code
    * subscription_proration_date} forces the proration to be calculated as though the update was
-   * done at the specified time. The time given must be within the current subscription period, and
-   * cannot be before the subscription was on its current plan. If set, {@code subscription}, and
-   * one of {@code subscription_items}, or {@code subscription_trial_end} are required. Also, {@code
-   * subscription_proration_behavior} cannot be set to 'none'.
+   * done at the specified time. The time given must be within the current subscription period and
+   * within the current phase of the schedule backing this subscription, if the schedule exists. If
+   * set, {@code subscription}, and one of {@code subscription_items}, or {@code
+   * subscription_trial_end} are required. Also, {@code subscription_proration_behavior} cannot be
+   * set to 'none'.
    */
   @SerializedName("subscription_proration_date")
   Long subscriptionProrationDate;
+
+  /**
+   * For paused subscriptions, setting {@code subscription_resume_at} to {@code now} will preview
+   * the invoice that will be generated if the subscription is resumed.
+   */
+  @SerializedName("subscription_resume_at")
+  SubscriptionResumeAt subscriptionResumeAt;
 
   /** Date a subscription is intended to start (can be future or past). */
   @SerializedName("subscription_start_date")
@@ -191,6 +199,7 @@ public class InvoiceUpcomingParams extends ApiRequestParams {
       SubscriptionPrebilling subscriptionPrebilling,
       SubscriptionProrationBehavior subscriptionProrationBehavior,
       Long subscriptionProrationDate,
+      SubscriptionResumeAt subscriptionResumeAt,
       Long subscriptionStartDate,
       Object subscriptionTrialEnd,
       Boolean subscriptionTrialFromPlan) {
@@ -214,6 +223,7 @@ public class InvoiceUpcomingParams extends ApiRequestParams {
     this.subscriptionPrebilling = subscriptionPrebilling;
     this.subscriptionProrationBehavior = subscriptionProrationBehavior;
     this.subscriptionProrationDate = subscriptionProrationDate;
+    this.subscriptionResumeAt = subscriptionResumeAt;
     this.subscriptionStartDate = subscriptionStartDate;
     this.subscriptionTrialEnd = subscriptionTrialEnd;
     this.subscriptionTrialFromPlan = subscriptionTrialFromPlan;
@@ -264,6 +274,8 @@ public class InvoiceUpcomingParams extends ApiRequestParams {
 
     private Long subscriptionProrationDate;
 
+    private SubscriptionResumeAt subscriptionResumeAt;
+
     private Long subscriptionStartDate;
 
     private Object subscriptionTrialEnd;
@@ -293,6 +305,7 @@ public class InvoiceUpcomingParams extends ApiRequestParams {
           this.subscriptionPrebilling,
           this.subscriptionProrationBehavior,
           this.subscriptionProrationDate,
+          this.subscriptionResumeAt,
           this.subscriptionStartDate,
           this.subscriptionTrialEnd,
           this.subscriptionTrialFromPlan);
@@ -644,13 +657,24 @@ public class InvoiceUpcomingParams extends ApiRequestParams {
     /**
      * If previewing an update to a subscription, and doing proration, {@code
      * subscription_proration_date} forces the proration to be calculated as though the update was
-     * done at the specified time. The time given must be within the current subscription period,
-     * and cannot be before the subscription was on its current plan. If set, {@code subscription},
-     * and one of {@code subscription_items}, or {@code subscription_trial_end} are required. Also,
-     * {@code subscription_proration_behavior} cannot be set to 'none'.
+     * done at the specified time. The time given must be within the current subscription period and
+     * within the current phase of the schedule backing this subscription, if the schedule exists.
+     * If set, {@code subscription}, and one of {@code subscription_items}, or {@code
+     * subscription_trial_end} are required. Also, {@code subscription_proration_behavior} cannot be
+     * set to 'none'.
      */
     public Builder setSubscriptionProrationDate(Long subscriptionProrationDate) {
       this.subscriptionProrationDate = subscriptionProrationDate;
+      return this;
+    }
+
+    /**
+     * For paused subscriptions, setting {@code subscription_resume_at} to {@code now} will preview
+     * the invoice that will be generated if the subscription is resumed.
+     */
+    public Builder setSubscriptionResumeAt(
+        InvoiceUpcomingParams.SubscriptionResumeAt subscriptionResumeAt) {
+      this.subscriptionResumeAt = subscriptionResumeAt;
       return this;
     }
 
@@ -4401,6 +4425,18 @@ public class InvoiceUpcomingParams extends ApiRequestParams {
     private final String value;
 
     SubscriptionProrationBehavior(String value) {
+      this.value = value;
+    }
+  }
+
+  public enum SubscriptionResumeAt implements ApiRequestParams.EnumParam {
+    @SerializedName("now")
+    NOW("now");
+
+    @Getter(onMethod_ = {@Override})
+    private final String value;
+
+    SubscriptionResumeAt(String value) {
       this.value = value;
     }
   }

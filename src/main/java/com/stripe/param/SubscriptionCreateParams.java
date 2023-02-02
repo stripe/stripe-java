@@ -296,6 +296,10 @@ public class SubscriptionCreateParams extends ApiRequestParams {
   @SerializedName("trial_period_days")
   Long trialPeriodDays;
 
+  /** Settings related to subscription trials. */
+  @SerializedName("trial_settings")
+  TrialSettings trialSettings;
+
   private SubscriptionCreateParams(
       List<SubscriptionCreateParams.AddInvoiceItem> addInvoiceItems,
       BigDecimal applicationFeePercent,
@@ -330,7 +334,8 @@ public class SubscriptionCreateParams extends ApiRequestParams {
       TransferData transferData,
       Object trialEnd,
       Boolean trialFromPlan,
-      Long trialPeriodDays) {
+      Long trialPeriodDays,
+      TrialSettings trialSettings) {
     this.addInvoiceItems = addInvoiceItems;
     this.applicationFeePercent = applicationFeePercent;
     this.automaticTax = automaticTax;
@@ -365,6 +370,7 @@ public class SubscriptionCreateParams extends ApiRequestParams {
     this.trialEnd = trialEnd;
     this.trialFromPlan = trialFromPlan;
     this.trialPeriodDays = trialPeriodDays;
+    this.trialSettings = trialSettings;
   }
 
   public static Builder builder() {
@@ -440,6 +446,8 @@ public class SubscriptionCreateParams extends ApiRequestParams {
 
     private Long trialPeriodDays;
 
+    private TrialSettings trialSettings;
+
     /** Finalize and obtain parameter instance from this builder. */
     public SubscriptionCreateParams build() {
       return new SubscriptionCreateParams(
@@ -476,7 +484,8 @@ public class SubscriptionCreateParams extends ApiRequestParams {
           this.transferData,
           this.trialEnd,
           this.trialFromPlan,
-          this.trialPeriodDays);
+          this.trialPeriodDays,
+          this.trialSettings);
     }
 
     /**
@@ -1058,6 +1067,12 @@ public class SubscriptionCreateParams extends ApiRequestParams {
      */
     public Builder setTrialPeriodDays(Long trialPeriodDays) {
       this.trialPeriodDays = trialPeriodDays;
+      return this;
+    }
+
+    /** Settings related to subscription trials. */
+    public Builder setTrialSettings(SubscriptionCreateParams.TrialSettings trialSettings) {
+      this.trialSettings = trialSettings;
       return this;
     }
   }
@@ -4990,14 +5005,26 @@ public class SubscriptionCreateParams extends ApiRequestParams {
                       .FinancialConnections.Permission>
               permissions;
 
+          /** List of data features that you would like to retrieve upon account creation. */
+          @SerializedName("prefetch")
+          List<
+                  SubscriptionCreateParams.PaymentSettings.PaymentMethodOptions.UsBankAccount
+                      .FinancialConnections.Prefetch>
+              prefetch;
+
           private FinancialConnections(
               Map<String, Object> extraParams,
               List<
                       SubscriptionCreateParams.PaymentSettings.PaymentMethodOptions.UsBankAccount
                           .FinancialConnections.Permission>
-                  permissions) {
+                  permissions,
+              List<
+                      SubscriptionCreateParams.PaymentSettings.PaymentMethodOptions.UsBankAccount
+                          .FinancialConnections.Prefetch>
+                  prefetch) {
             this.extraParams = extraParams;
             this.permissions = permissions;
+            this.prefetch = prefetch;
           }
 
           public static Builder builder() {
@@ -5012,12 +5039,17 @@ public class SubscriptionCreateParams extends ApiRequestParams {
                         .FinancialConnections.Permission>
                 permissions;
 
+            private List<
+                    SubscriptionCreateParams.PaymentSettings.PaymentMethodOptions.UsBankAccount
+                        .FinancialConnections.Prefetch>
+                prefetch;
+
             /** Finalize and obtain parameter instance from this builder. */
             public SubscriptionCreateParams.PaymentSettings.PaymentMethodOptions.UsBankAccount
                     .FinancialConnections
                 build() {
               return new SubscriptionCreateParams.PaymentSettings.PaymentMethodOptions.UsBankAccount
-                  .FinancialConnections(this.extraParams, this.permissions);
+                  .FinancialConnections(this.extraParams, this.permissions, this.prefetch);
             }
 
             /**
@@ -5086,6 +5118,41 @@ public class SubscriptionCreateParams extends ApiRequestParams {
               this.permissions.addAll(elements);
               return this;
             }
+
+            /**
+             * Add an element to `prefetch` list. A list is initialized for the first `add/addAll`
+             * call, and subsequent calls adds additional elements to the original list. See {@link
+             * SubscriptionCreateParams.PaymentSettings.PaymentMethodOptions.UsBankAccount.FinancialConnections#prefetch}
+             * for the field documentation.
+             */
+            public Builder addPrefetch(
+                SubscriptionCreateParams.PaymentSettings.PaymentMethodOptions.UsBankAccount
+                        .FinancialConnections.Prefetch
+                    element) {
+              if (this.prefetch == null) {
+                this.prefetch = new ArrayList<>();
+              }
+              this.prefetch.add(element);
+              return this;
+            }
+
+            /**
+             * Add all elements to `prefetch` list. A list is initialized for the first `add/addAll`
+             * call, and subsequent calls adds additional elements to the original list. See {@link
+             * SubscriptionCreateParams.PaymentSettings.PaymentMethodOptions.UsBankAccount.FinancialConnections#prefetch}
+             * for the field documentation.
+             */
+            public Builder addAllPrefetch(
+                List<
+                        SubscriptionCreateParams.PaymentSettings.PaymentMethodOptions.UsBankAccount
+                            .FinancialConnections.Prefetch>
+                    elements) {
+              if (this.prefetch == null) {
+                this.prefetch = new ArrayList<>();
+              }
+              this.prefetch.addAll(elements);
+              return this;
+            }
           }
 
           public enum Permission implements ApiRequestParams.EnumParam {
@@ -5105,6 +5172,27 @@ public class SubscriptionCreateParams extends ApiRequestParams {
             private final String value;
 
             Permission(String value) {
+              this.value = value;
+            }
+          }
+
+          public enum Prefetch implements ApiRequestParams.EnumParam {
+            @SerializedName("balances")
+            BALANCES("balances"),
+
+            @SerializedName("inferred_balances")
+            INFERRED_BALANCES("inferred_balances"),
+
+            @SerializedName("ownership")
+            OWNERSHIP("ownership"),
+
+            @SerializedName("transactions")
+            TRANSACTIONS("transactions");
+
+            @Getter(onMethod_ = {@Override})
+            private final String value;
+
+            Prefetch(String value) {
               this.value = value;
             }
           }
@@ -5497,6 +5585,173 @@ public class SubscriptionCreateParams extends ApiRequestParams {
         }
         this.extraParams.putAll(map);
         return this;
+      }
+    }
+  }
+
+  @Getter
+  public static class TrialSettings {
+    /** Defines how the subscription should behave when the user's free trial ends. */
+    @SerializedName("end_behavior")
+    EndBehavior endBehavior;
+
+    /**
+     * Map of extra parameters for custom features not available in this client library. The content
+     * in this map is not serialized under this field's {@code @SerializedName} value. Instead, each
+     * key/value pair is serialized as if the key is a root-level field (serialized) name in this
+     * param object. Effectively, this map is flattened to its parent instance.
+     */
+    @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
+    Map<String, Object> extraParams;
+
+    private TrialSettings(EndBehavior endBehavior, Map<String, Object> extraParams) {
+      this.endBehavior = endBehavior;
+      this.extraParams = extraParams;
+    }
+
+    public static Builder builder() {
+      return new Builder();
+    }
+
+    public static class Builder {
+      private EndBehavior endBehavior;
+
+      private Map<String, Object> extraParams;
+
+      /** Finalize and obtain parameter instance from this builder. */
+      public SubscriptionCreateParams.TrialSettings build() {
+        return new SubscriptionCreateParams.TrialSettings(this.endBehavior, this.extraParams);
+      }
+
+      /** Defines how the subscription should behave when the user's free trial ends. */
+      public Builder setEndBehavior(
+          SubscriptionCreateParams.TrialSettings.EndBehavior endBehavior) {
+        this.endBehavior = endBehavior;
+        return this;
+      }
+
+      /**
+       * Add a key/value pair to `extraParams` map. A map is initialized for the first `put/putAll`
+       * call, and subsequent calls add additional key/value pairs to the original map. See {@link
+       * SubscriptionCreateParams.TrialSettings#extraParams} for the field documentation.
+       */
+      public Builder putExtraParam(String key, Object value) {
+        if (this.extraParams == null) {
+          this.extraParams = new HashMap<>();
+        }
+        this.extraParams.put(key, value);
+        return this;
+      }
+
+      /**
+       * Add all map key/value pairs to `extraParams` map. A map is initialized for the first
+       * `put/putAll` call, and subsequent calls add additional key/value pairs to the original map.
+       * See {@link SubscriptionCreateParams.TrialSettings#extraParams} for the field documentation.
+       */
+      public Builder putAllExtraParam(Map<String, Object> map) {
+        if (this.extraParams == null) {
+          this.extraParams = new HashMap<>();
+        }
+        this.extraParams.putAll(map);
+        return this;
+      }
+    }
+
+    @Getter
+    public static class EndBehavior {
+      /**
+       * Map of extra parameters for custom features not available in this client library. The
+       * content in this map is not serialized under this field's {@code @SerializedName} value.
+       * Instead, each key/value pair is serialized as if the key is a root-level field (serialized)
+       * name in this param object. Effectively, this map is flattened to its parent instance.
+       */
+      @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
+      Map<String, Object> extraParams;
+
+      /**
+       * Indicates how the subscription should change when the trial ends if the user did not
+       * provide a payment method.
+       */
+      @SerializedName("missing_payment_method")
+      MissingPaymentMethod missingPaymentMethod;
+
+      private EndBehavior(
+          Map<String, Object> extraParams, MissingPaymentMethod missingPaymentMethod) {
+        this.extraParams = extraParams;
+        this.missingPaymentMethod = missingPaymentMethod;
+      }
+
+      public static Builder builder() {
+        return new Builder();
+      }
+
+      public static class Builder {
+        private Map<String, Object> extraParams;
+
+        private MissingPaymentMethod missingPaymentMethod;
+
+        /** Finalize and obtain parameter instance from this builder. */
+        public SubscriptionCreateParams.TrialSettings.EndBehavior build() {
+          return new SubscriptionCreateParams.TrialSettings.EndBehavior(
+              this.extraParams, this.missingPaymentMethod);
+        }
+
+        /**
+         * Add a key/value pair to `extraParams` map. A map is initialized for the first
+         * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
+         * map. See {@link SubscriptionCreateParams.TrialSettings.EndBehavior#extraParams} for the
+         * field documentation.
+         */
+        public Builder putExtraParam(String key, Object value) {
+          if (this.extraParams == null) {
+            this.extraParams = new HashMap<>();
+          }
+          this.extraParams.put(key, value);
+          return this;
+        }
+
+        /**
+         * Add all map key/value pairs to `extraParams` map. A map is initialized for the first
+         * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
+         * map. See {@link SubscriptionCreateParams.TrialSettings.EndBehavior#extraParams} for the
+         * field documentation.
+         */
+        public Builder putAllExtraParam(Map<String, Object> map) {
+          if (this.extraParams == null) {
+            this.extraParams = new HashMap<>();
+          }
+          this.extraParams.putAll(map);
+          return this;
+        }
+
+        /**
+         * Indicates how the subscription should change when the trial ends if the user did not
+         * provide a payment method.
+         */
+        public Builder setMissingPaymentMethod(
+            SubscriptionCreateParams.TrialSettings.EndBehavior.MissingPaymentMethod
+                missingPaymentMethod) {
+          this.missingPaymentMethod = missingPaymentMethod;
+          return this;
+        }
+      }
+
+      public enum MissingPaymentMethod implements ApiRequestParams.EnumParam {
+        @SerializedName("cancel")
+        CANCEL("cancel"),
+
+        @SerializedName("create_invoice")
+        CREATE_INVOICE("create_invoice"),
+
+        @SerializedName("pause")
+        PAUSE("pause");
+
+        @Getter(onMethod_ = {@Override})
+        private final String value;
+
+        MissingPaymentMethod(String value) {
+          this.value = value;
+        }
       }
     }
   }

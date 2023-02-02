@@ -32,6 +32,10 @@ public class SessionCreateParams extends ApiRequestParams {
   @SerializedName("filters")
   Filters filters;
 
+  /** Settings for configuring manual entry of account details for this Session. */
+  @SerializedName("manual_entry")
+  ManualEntry manualEntry;
+
   /**
    * List of data features that you would like to request access to.
    *
@@ -40,6 +44,10 @@ public class SessionCreateParams extends ApiRequestParams {
    */
   @SerializedName("permissions")
   List<SessionCreateParams.Permission> permissions;
+
+  /** List of data features that you would like to retrieve upon account creation. */
+  @SerializedName("prefetch")
+  List<SessionCreateParams.Prefetch> prefetch;
 
   /**
    * For webview integrations only. Upon completing OAuth login in the native browser, the user will
@@ -53,13 +61,17 @@ public class SessionCreateParams extends ApiRequestParams {
       List<String> expand,
       Map<String, Object> extraParams,
       Filters filters,
+      ManualEntry manualEntry,
       List<SessionCreateParams.Permission> permissions,
+      List<SessionCreateParams.Prefetch> prefetch,
       String returnUrl) {
     this.accountHolder = accountHolder;
     this.expand = expand;
     this.extraParams = extraParams;
     this.filters = filters;
+    this.manualEntry = manualEntry;
     this.permissions = permissions;
+    this.prefetch = prefetch;
     this.returnUrl = returnUrl;
   }
 
@@ -76,7 +88,11 @@ public class SessionCreateParams extends ApiRequestParams {
 
     private Filters filters;
 
+    private ManualEntry manualEntry;
+
     private List<SessionCreateParams.Permission> permissions;
+
+    private List<SessionCreateParams.Prefetch> prefetch;
 
     private String returnUrl;
 
@@ -87,7 +103,9 @@ public class SessionCreateParams extends ApiRequestParams {
           this.expand,
           this.extraParams,
           this.filters,
+          this.manualEntry,
           this.permissions,
+          this.prefetch,
           this.returnUrl);
     }
 
@@ -155,6 +173,12 @@ public class SessionCreateParams extends ApiRequestParams {
       return this;
     }
 
+    /** Settings for configuring manual entry of account details for this Session. */
+    public Builder setManualEntry(SessionCreateParams.ManualEntry manualEntry) {
+      this.manualEntry = manualEntry;
+      return this;
+    }
+
     /**
      * Add an element to `permissions` list. A list is initialized for the first `add/addAll` call,
      * and subsequent calls adds additional elements to the original list. See {@link
@@ -178,6 +202,32 @@ public class SessionCreateParams extends ApiRequestParams {
         this.permissions = new ArrayList<>();
       }
       this.permissions.addAll(elements);
+      return this;
+    }
+
+    /**
+     * Add an element to `prefetch` list. A list is initialized for the first `add/addAll` call, and
+     * subsequent calls adds additional elements to the original list. See {@link
+     * SessionCreateParams#prefetch} for the field documentation.
+     */
+    public Builder addPrefetch(SessionCreateParams.Prefetch element) {
+      if (this.prefetch == null) {
+        this.prefetch = new ArrayList<>();
+      }
+      this.prefetch.add(element);
+      return this;
+    }
+
+    /**
+     * Add all elements to `prefetch` list. A list is initialized for the first `add/addAll` call,
+     * and subsequent calls adds additional elements to the original list. See {@link
+     * SessionCreateParams#prefetch} for the field documentation.
+     */
+    public Builder addAllPrefetch(List<SessionCreateParams.Prefetch> elements) {
+      if (this.prefetch == null) {
+        this.prefetch = new ArrayList<>();
+      }
+      this.prefetch.addAll(elements);
       return this;
     }
 
@@ -402,6 +452,102 @@ public class SessionCreateParams extends ApiRequestParams {
     }
   }
 
+  @Getter
+  public static class ManualEntry {
+    /** Whether manual entry will be allowed on this Session. */
+    @SerializedName("enabled")
+    Boolean enabled;
+
+    /**
+     * Map of extra parameters for custom features not available in this client library. The content
+     * in this map is not serialized under this field's {@code @SerializedName} value. Instead, each
+     * key/value pair is serialized as if the key is a root-level field (serialized) name in this
+     * param object. Effectively, this map is flattened to its parent instance.
+     */
+    @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
+    Map<String, Object> extraParams;
+
+    /** Whether manual entry will be handled by Stripe during the Session. */
+    @SerializedName("mode")
+    Mode mode;
+
+    private ManualEntry(Boolean enabled, Map<String, Object> extraParams, Mode mode) {
+      this.enabled = enabled;
+      this.extraParams = extraParams;
+      this.mode = mode;
+    }
+
+    public static Builder builder() {
+      return new Builder();
+    }
+
+    public static class Builder {
+      private Boolean enabled;
+
+      private Map<String, Object> extraParams;
+
+      private Mode mode;
+
+      /** Finalize and obtain parameter instance from this builder. */
+      public SessionCreateParams.ManualEntry build() {
+        return new SessionCreateParams.ManualEntry(this.enabled, this.extraParams, this.mode);
+      }
+
+      /** Whether manual entry will be allowed on this Session. */
+      public Builder setEnabled(Boolean enabled) {
+        this.enabled = enabled;
+        return this;
+      }
+
+      /**
+       * Add a key/value pair to `extraParams` map. A map is initialized for the first `put/putAll`
+       * call, and subsequent calls add additional key/value pairs to the original map. See {@link
+       * SessionCreateParams.ManualEntry#extraParams} for the field documentation.
+       */
+      public Builder putExtraParam(String key, Object value) {
+        if (this.extraParams == null) {
+          this.extraParams = new HashMap<>();
+        }
+        this.extraParams.put(key, value);
+        return this;
+      }
+
+      /**
+       * Add all map key/value pairs to `extraParams` map. A map is initialized for the first
+       * `put/putAll` call, and subsequent calls add additional key/value pairs to the original map.
+       * See {@link SessionCreateParams.ManualEntry#extraParams} for the field documentation.
+       */
+      public Builder putAllExtraParam(Map<String, Object> map) {
+        if (this.extraParams == null) {
+          this.extraParams = new HashMap<>();
+        }
+        this.extraParams.putAll(map);
+        return this;
+      }
+
+      /** Whether manual entry will be handled by Stripe during the Session. */
+      public Builder setMode(SessionCreateParams.ManualEntry.Mode mode) {
+        this.mode = mode;
+        return this;
+      }
+    }
+
+    public enum Mode implements ApiRequestParams.EnumParam {
+      @SerializedName("automatic")
+      AUTOMATIC("automatic"),
+
+      @SerializedName("custom")
+      CUSTOM("custom");
+
+      @Getter(onMethod_ = {@Override})
+      private final String value;
+
+      Mode(String value) {
+        this.value = value;
+      }
+    }
+  }
+
   public enum Permission implements ApiRequestParams.EnumParam {
     @SerializedName("balances")
     BALANCES("balances"),
@@ -419,6 +565,27 @@ public class SessionCreateParams extends ApiRequestParams {
     private final String value;
 
     Permission(String value) {
+      this.value = value;
+    }
+  }
+
+  public enum Prefetch implements ApiRequestParams.EnumParam {
+    @SerializedName("balances")
+    BALANCES("balances"),
+
+    @SerializedName("inferred_balances")
+    INFERRED_BALANCES("inferred_balances"),
+
+    @SerializedName("ownership")
+    OWNERSHIP("ownership"),
+
+    @SerializedName("transactions")
+    TRANSACTIONS("transactions");
+
+    @Getter(onMethod_ = {@Override})
+    private final String value;
+
+    Prefetch(String value) {
       this.value = value;
     }
   }

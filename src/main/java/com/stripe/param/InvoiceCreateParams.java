@@ -173,6 +173,17 @@ public class InvoiceCreateParams extends ApiRequestParams {
   @SerializedName("rendering_options")
   Object renderingOptions;
 
+  /** Settings for the cost of shipping for this invoice. */
+  @SerializedName("shipping_cost")
+  ShippingCost shippingCost;
+
+  /**
+   * Shipping details for the invoice. The Invoice PDF will use the {@code shipping_details} value
+   * if it is set, otherwise the PDF will render the shipping address from the customer.
+   */
+  @SerializedName("shipping_details")
+  ShippingDetails shippingDetails;
+
   /**
    * Extra information about a charge for the customer's credit card statement. It must contain at
    * least one letter. If not specified and this invoice is part of a subscription, the default
@@ -222,6 +233,8 @@ public class InvoiceCreateParams extends ApiRequestParams {
       PaymentSettings paymentSettings,
       PendingInvoiceItemsBehavior pendingInvoiceItemsBehavior,
       Object renderingOptions,
+      ShippingCost shippingCost,
+      ShippingDetails shippingDetails,
       String statementDescriptor,
       String subscription,
       TransferData transferData) {
@@ -249,6 +262,8 @@ public class InvoiceCreateParams extends ApiRequestParams {
     this.paymentSettings = paymentSettings;
     this.pendingInvoiceItemsBehavior = pendingInvoiceItemsBehavior;
     this.renderingOptions = renderingOptions;
+    this.shippingCost = shippingCost;
+    this.shippingDetails = shippingDetails;
     this.statementDescriptor = statementDescriptor;
     this.subscription = subscription;
     this.transferData = transferData;
@@ -307,6 +322,10 @@ public class InvoiceCreateParams extends ApiRequestParams {
 
     private Object renderingOptions;
 
+    private ShippingCost shippingCost;
+
+    private ShippingDetails shippingDetails;
+
     private String statementDescriptor;
 
     private String subscription;
@@ -340,6 +359,8 @@ public class InvoiceCreateParams extends ApiRequestParams {
           this.paymentSettings,
           this.pendingInvoiceItemsBehavior,
           this.renderingOptions,
+          this.shippingCost,
+          this.shippingDetails,
           this.statementDescriptor,
           this.subscription,
           this.transferData);
@@ -762,6 +783,21 @@ public class InvoiceCreateParams extends ApiRequestParams {
     /** Options for invoice PDF rendering. */
     public Builder setRenderingOptions(EmptyParam renderingOptions) {
       this.renderingOptions = renderingOptions;
+      return this;
+    }
+
+    /** Settings for the cost of shipping for this invoice. */
+    public Builder setShippingCost(InvoiceCreateParams.ShippingCost shippingCost) {
+      this.shippingCost = shippingCost;
+      return this;
+    }
+
+    /**
+     * Shipping details for the invoice. The Invoice PDF will use the {@code shipping_details} value
+     * if it is set, otherwise the PDF will render the shipping address from the customer.
+     */
+    public Builder setShippingDetails(InvoiceCreateParams.ShippingDetails shippingDetails) {
+      this.shippingDetails = shippingDetails;
       return this;
     }
 
@@ -2950,14 +2986,26 @@ public class InvoiceCreateParams extends ApiRequestParams {
                       .FinancialConnections.Permission>
               permissions;
 
+          /** List of data features that you would like to retrieve upon account creation. */
+          @SerializedName("prefetch")
+          List<
+                  InvoiceCreateParams.PaymentSettings.PaymentMethodOptions.UsBankAccount
+                      .FinancialConnections.Prefetch>
+              prefetch;
+
           private FinancialConnections(
               Map<String, Object> extraParams,
               List<
                       InvoiceCreateParams.PaymentSettings.PaymentMethodOptions.UsBankAccount
                           .FinancialConnections.Permission>
-                  permissions) {
+                  permissions,
+              List<
+                      InvoiceCreateParams.PaymentSettings.PaymentMethodOptions.UsBankAccount
+                          .FinancialConnections.Prefetch>
+                  prefetch) {
             this.extraParams = extraParams;
             this.permissions = permissions;
+            this.prefetch = prefetch;
           }
 
           public static Builder builder() {
@@ -2972,12 +3020,17 @@ public class InvoiceCreateParams extends ApiRequestParams {
                         .FinancialConnections.Permission>
                 permissions;
 
+            private List<
+                    InvoiceCreateParams.PaymentSettings.PaymentMethodOptions.UsBankAccount
+                        .FinancialConnections.Prefetch>
+                prefetch;
+
             /** Finalize and obtain parameter instance from this builder. */
             public InvoiceCreateParams.PaymentSettings.PaymentMethodOptions.UsBankAccount
                     .FinancialConnections
                 build() {
               return new InvoiceCreateParams.PaymentSettings.PaymentMethodOptions.UsBankAccount
-                  .FinancialConnections(this.extraParams, this.permissions);
+                  .FinancialConnections(this.extraParams, this.permissions, this.prefetch);
             }
 
             /**
@@ -3046,6 +3099,41 @@ public class InvoiceCreateParams extends ApiRequestParams {
               this.permissions.addAll(elements);
               return this;
             }
+
+            /**
+             * Add an element to `prefetch` list. A list is initialized for the first `add/addAll`
+             * call, and subsequent calls adds additional elements to the original list. See {@link
+             * InvoiceCreateParams.PaymentSettings.PaymentMethodOptions.UsBankAccount.FinancialConnections#prefetch}
+             * for the field documentation.
+             */
+            public Builder addPrefetch(
+                InvoiceCreateParams.PaymentSettings.PaymentMethodOptions.UsBankAccount
+                        .FinancialConnections.Prefetch
+                    element) {
+              if (this.prefetch == null) {
+                this.prefetch = new ArrayList<>();
+              }
+              this.prefetch.add(element);
+              return this;
+            }
+
+            /**
+             * Add all elements to `prefetch` list. A list is initialized for the first `add/addAll`
+             * call, and subsequent calls adds additional elements to the original list. See {@link
+             * InvoiceCreateParams.PaymentSettings.PaymentMethodOptions.UsBankAccount.FinancialConnections#prefetch}
+             * for the field documentation.
+             */
+            public Builder addAllPrefetch(
+                List<
+                        InvoiceCreateParams.PaymentSettings.PaymentMethodOptions.UsBankAccount
+                            .FinancialConnections.Prefetch>
+                    elements) {
+              if (this.prefetch == null) {
+                this.prefetch = new ArrayList<>();
+              }
+              this.prefetch.addAll(elements);
+              return this;
+            }
           }
 
           public enum Permission implements ApiRequestParams.EnumParam {
@@ -3065,6 +3153,27 @@ public class InvoiceCreateParams extends ApiRequestParams {
             private final String value;
 
             Permission(String value) {
+              this.value = value;
+            }
+          }
+
+          public enum Prefetch implements ApiRequestParams.EnumParam {
+            @SerializedName("balances")
+            BALANCES("balances"),
+
+            @SerializedName("inferred_balances")
+            INFERRED_BALANCES("inferred_balances"),
+
+            @SerializedName("ownership")
+            OWNERSHIP("ownership"),
+
+            @SerializedName("transactions")
+            TRANSACTIONS("transactions");
+
+            @Getter(onMethod_ = {@Override})
+            private final String value;
+
+            Prefetch(String value) {
               this.value = value;
             }
           }
@@ -3268,6 +3377,1193 @@ public class InvoiceCreateParams extends ApiRequestParams {
 
       AmountTaxDisplay(String value) {
         this.value = value;
+      }
+    }
+  }
+
+  @Getter
+  public static class ShippingCost {
+    /**
+     * Map of extra parameters for custom features not available in this client library. The content
+     * in this map is not serialized under this field's {@code @SerializedName} value. Instead, each
+     * key/value pair is serialized as if the key is a root-level field (serialized) name in this
+     * param object. Effectively, this map is flattened to its parent instance.
+     */
+    @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
+    Map<String, Object> extraParams;
+
+    /** The ID of the shipping rate to use for this order. */
+    @SerializedName("shipping_rate")
+    String shippingRate;
+
+    /** Parameters to create a new ad-hoc shipping rate for this order. */
+    @SerializedName("shipping_rate_data")
+    ShippingRateData shippingRateData;
+
+    private ShippingCost(
+        Map<String, Object> extraParams, String shippingRate, ShippingRateData shippingRateData) {
+      this.extraParams = extraParams;
+      this.shippingRate = shippingRate;
+      this.shippingRateData = shippingRateData;
+    }
+
+    public static Builder builder() {
+      return new Builder();
+    }
+
+    public static class Builder {
+      private Map<String, Object> extraParams;
+
+      private String shippingRate;
+
+      private ShippingRateData shippingRateData;
+
+      /** Finalize and obtain parameter instance from this builder. */
+      public InvoiceCreateParams.ShippingCost build() {
+        return new InvoiceCreateParams.ShippingCost(
+            this.extraParams, this.shippingRate, this.shippingRateData);
+      }
+
+      /**
+       * Add a key/value pair to `extraParams` map. A map is initialized for the first `put/putAll`
+       * call, and subsequent calls add additional key/value pairs to the original map. See {@link
+       * InvoiceCreateParams.ShippingCost#extraParams} for the field documentation.
+       */
+      public Builder putExtraParam(String key, Object value) {
+        if (this.extraParams == null) {
+          this.extraParams = new HashMap<>();
+        }
+        this.extraParams.put(key, value);
+        return this;
+      }
+
+      /**
+       * Add all map key/value pairs to `extraParams` map. A map is initialized for the first
+       * `put/putAll` call, and subsequent calls add additional key/value pairs to the original map.
+       * See {@link InvoiceCreateParams.ShippingCost#extraParams} for the field documentation.
+       */
+      public Builder putAllExtraParam(Map<String, Object> map) {
+        if (this.extraParams == null) {
+          this.extraParams = new HashMap<>();
+        }
+        this.extraParams.putAll(map);
+        return this;
+      }
+
+      /** The ID of the shipping rate to use for this order. */
+      public Builder setShippingRate(String shippingRate) {
+        this.shippingRate = shippingRate;
+        return this;
+      }
+
+      /** Parameters to create a new ad-hoc shipping rate for this order. */
+      public Builder setShippingRateData(
+          InvoiceCreateParams.ShippingCost.ShippingRateData shippingRateData) {
+        this.shippingRateData = shippingRateData;
+        return this;
+      }
+    }
+
+    @Getter
+    public static class ShippingRateData {
+      /**
+       * The estimated range for how long shipping will take, meant to be displayable to the
+       * customer. This will appear on CheckoutSessions.
+       */
+      @SerializedName("delivery_estimate")
+      DeliveryEstimate deliveryEstimate;
+
+      /**
+       * The name of the shipping rate, meant to be displayable to the customer. This will appear on
+       * CheckoutSessions.
+       */
+      @SerializedName("display_name")
+      String displayName;
+
+      /**
+       * Map of extra parameters for custom features not available in this client library. The
+       * content in this map is not serialized under this field's {@code @SerializedName} value.
+       * Instead, each key/value pair is serialized as if the key is a root-level field (serialized)
+       * name in this param object. Effectively, this map is flattened to its parent instance.
+       */
+      @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
+      Map<String, Object> extraParams;
+
+      /**
+       * Describes a fixed amount to charge for shipping. Must be present if type is {@code
+       * fixed_amount}.
+       */
+      @SerializedName("fixed_amount")
+      FixedAmount fixedAmount;
+
+      /**
+       * Set of <a href="https://stripe.com/docs/api/metadata">key-value pairs</a> that you can
+       * attach to an object. This can be useful for storing additional information about the object
+       * in a structured format. Individual keys can be unset by posting an empty value to them. All
+       * keys can be unset by posting an empty value to {@code metadata}.
+       */
+      @SerializedName("metadata")
+      Map<String, String> metadata;
+
+      /**
+       * Specifies whether the rate is considered inclusive of taxes or exclusive of taxes. One of
+       * {@code inclusive}, {@code exclusive}, or {@code unspecified}.
+       */
+      @SerializedName("tax_behavior")
+      TaxBehavior taxBehavior;
+
+      /**
+       * A <a href="https://stripe.com/docs/tax/tax-categories">tax code</a> ID. The Shipping tax
+       * code is {@code txcd_92010001}.
+       */
+      @SerializedName("tax_code")
+      String taxCode;
+
+      /**
+       * The type of calculation to use on the shipping rate. Can only be {@code fixed_amount} for
+       * now.
+       */
+      @SerializedName("type")
+      Type type;
+
+      private ShippingRateData(
+          DeliveryEstimate deliveryEstimate,
+          String displayName,
+          Map<String, Object> extraParams,
+          FixedAmount fixedAmount,
+          Map<String, String> metadata,
+          TaxBehavior taxBehavior,
+          String taxCode,
+          Type type) {
+        this.deliveryEstimate = deliveryEstimate;
+        this.displayName = displayName;
+        this.extraParams = extraParams;
+        this.fixedAmount = fixedAmount;
+        this.metadata = metadata;
+        this.taxBehavior = taxBehavior;
+        this.taxCode = taxCode;
+        this.type = type;
+      }
+
+      public static Builder builder() {
+        return new Builder();
+      }
+
+      public static class Builder {
+        private DeliveryEstimate deliveryEstimate;
+
+        private String displayName;
+
+        private Map<String, Object> extraParams;
+
+        private FixedAmount fixedAmount;
+
+        private Map<String, String> metadata;
+
+        private TaxBehavior taxBehavior;
+
+        private String taxCode;
+
+        private Type type;
+
+        /** Finalize and obtain parameter instance from this builder. */
+        public InvoiceCreateParams.ShippingCost.ShippingRateData build() {
+          return new InvoiceCreateParams.ShippingCost.ShippingRateData(
+              this.deliveryEstimate,
+              this.displayName,
+              this.extraParams,
+              this.fixedAmount,
+              this.metadata,
+              this.taxBehavior,
+              this.taxCode,
+              this.type);
+        }
+
+        /**
+         * The estimated range for how long shipping will take, meant to be displayable to the
+         * customer. This will appear on CheckoutSessions.
+         */
+        public Builder setDeliveryEstimate(
+            InvoiceCreateParams.ShippingCost.ShippingRateData.DeliveryEstimate deliveryEstimate) {
+          this.deliveryEstimate = deliveryEstimate;
+          return this;
+        }
+
+        /**
+         * The name of the shipping rate, meant to be displayable to the customer. This will appear
+         * on CheckoutSessions.
+         */
+        public Builder setDisplayName(String displayName) {
+          this.displayName = displayName;
+          return this;
+        }
+
+        /**
+         * Add a key/value pair to `extraParams` map. A map is initialized for the first
+         * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
+         * map. See {@link InvoiceCreateParams.ShippingCost.ShippingRateData#extraParams} for the
+         * field documentation.
+         */
+        public Builder putExtraParam(String key, Object value) {
+          if (this.extraParams == null) {
+            this.extraParams = new HashMap<>();
+          }
+          this.extraParams.put(key, value);
+          return this;
+        }
+
+        /**
+         * Add all map key/value pairs to `extraParams` map. A map is initialized for the first
+         * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
+         * map. See {@link InvoiceCreateParams.ShippingCost.ShippingRateData#extraParams} for the
+         * field documentation.
+         */
+        public Builder putAllExtraParam(Map<String, Object> map) {
+          if (this.extraParams == null) {
+            this.extraParams = new HashMap<>();
+          }
+          this.extraParams.putAll(map);
+          return this;
+        }
+
+        /**
+         * Describes a fixed amount to charge for shipping. Must be present if type is {@code
+         * fixed_amount}.
+         */
+        public Builder setFixedAmount(
+            InvoiceCreateParams.ShippingCost.ShippingRateData.FixedAmount fixedAmount) {
+          this.fixedAmount = fixedAmount;
+          return this;
+        }
+
+        /**
+         * Add a key/value pair to `metadata` map. A map is initialized for the first `put/putAll`
+         * call, and subsequent calls add additional key/value pairs to the original map. See {@link
+         * InvoiceCreateParams.ShippingCost.ShippingRateData#metadata} for the field documentation.
+         */
+        public Builder putMetadata(String key, String value) {
+          if (this.metadata == null) {
+            this.metadata = new HashMap<>();
+          }
+          this.metadata.put(key, value);
+          return this;
+        }
+
+        /**
+         * Add all map key/value pairs to `metadata` map. A map is initialized for the first
+         * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
+         * map. See {@link InvoiceCreateParams.ShippingCost.ShippingRateData#metadata} for the field
+         * documentation.
+         */
+        public Builder putAllMetadata(Map<String, String> map) {
+          if (this.metadata == null) {
+            this.metadata = new HashMap<>();
+          }
+          this.metadata.putAll(map);
+          return this;
+        }
+
+        /**
+         * Specifies whether the rate is considered inclusive of taxes or exclusive of taxes. One of
+         * {@code inclusive}, {@code exclusive}, or {@code unspecified}.
+         */
+        public Builder setTaxBehavior(
+            InvoiceCreateParams.ShippingCost.ShippingRateData.TaxBehavior taxBehavior) {
+          this.taxBehavior = taxBehavior;
+          return this;
+        }
+
+        /**
+         * A <a href="https://stripe.com/docs/tax/tax-categories">tax code</a> ID. The Shipping tax
+         * code is {@code txcd_92010001}.
+         */
+        public Builder setTaxCode(String taxCode) {
+          this.taxCode = taxCode;
+          return this;
+        }
+
+        /**
+         * The type of calculation to use on the shipping rate. Can only be {@code fixed_amount} for
+         * now.
+         */
+        public Builder setType(InvoiceCreateParams.ShippingCost.ShippingRateData.Type type) {
+          this.type = type;
+          return this;
+        }
+      }
+
+      @Getter
+      public static class DeliveryEstimate {
+        /**
+         * Map of extra parameters for custom features not available in this client library. The
+         * content in this map is not serialized under this field's {@code @SerializedName} value.
+         * Instead, each key/value pair is serialized as if the key is a root-level field
+         * (serialized) name in this param object. Effectively, this map is flattened to its parent
+         * instance.
+         */
+        @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
+        Map<String, Object> extraParams;
+
+        /**
+         * The upper bound of the estimated range. If empty, represents no upper bound i.e.,
+         * infinite.
+         */
+        @SerializedName("maximum")
+        Maximum maximum;
+
+        /** The lower bound of the estimated range. If empty, represents no lower bound. */
+        @SerializedName("minimum")
+        Minimum minimum;
+
+        private DeliveryEstimate(
+            Map<String, Object> extraParams, Maximum maximum, Minimum minimum) {
+          this.extraParams = extraParams;
+          this.maximum = maximum;
+          this.minimum = minimum;
+        }
+
+        public static Builder builder() {
+          return new Builder();
+        }
+
+        public static class Builder {
+          private Map<String, Object> extraParams;
+
+          private Maximum maximum;
+
+          private Minimum minimum;
+
+          /** Finalize and obtain parameter instance from this builder. */
+          public InvoiceCreateParams.ShippingCost.ShippingRateData.DeliveryEstimate build() {
+            return new InvoiceCreateParams.ShippingCost.ShippingRateData.DeliveryEstimate(
+                this.extraParams, this.maximum, this.minimum);
+          }
+
+          /**
+           * Add a key/value pair to `extraParams` map. A map is initialized for the first
+           * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
+           * map. See {@link
+           * InvoiceCreateParams.ShippingCost.ShippingRateData.DeliveryEstimate#extraParams} for the
+           * field documentation.
+           */
+          public Builder putExtraParam(String key, Object value) {
+            if (this.extraParams == null) {
+              this.extraParams = new HashMap<>();
+            }
+            this.extraParams.put(key, value);
+            return this;
+          }
+
+          /**
+           * Add all map key/value pairs to `extraParams` map. A map is initialized for the first
+           * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
+           * map. See {@link
+           * InvoiceCreateParams.ShippingCost.ShippingRateData.DeliveryEstimate#extraParams} for the
+           * field documentation.
+           */
+          public Builder putAllExtraParam(Map<String, Object> map) {
+            if (this.extraParams == null) {
+              this.extraParams = new HashMap<>();
+            }
+            this.extraParams.putAll(map);
+            return this;
+          }
+
+          /**
+           * The upper bound of the estimated range. If empty, represents no upper bound i.e.,
+           * infinite.
+           */
+          public Builder setMaximum(
+              InvoiceCreateParams.ShippingCost.ShippingRateData.DeliveryEstimate.Maximum maximum) {
+            this.maximum = maximum;
+            return this;
+          }
+
+          /** The lower bound of the estimated range. If empty, represents no lower bound. */
+          public Builder setMinimum(
+              InvoiceCreateParams.ShippingCost.ShippingRateData.DeliveryEstimate.Minimum minimum) {
+            this.minimum = minimum;
+            return this;
+          }
+        }
+
+        @Getter
+        public static class Maximum {
+          /**
+           * Map of extra parameters for custom features not available in this client library. The
+           * content in this map is not serialized under this field's {@code @SerializedName} value.
+           * Instead, each key/value pair is serialized as if the key is a root-level field
+           * (serialized) name in this param object. Effectively, this map is flattened to its
+           * parent instance.
+           */
+          @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
+          Map<String, Object> extraParams;
+
+          /** A unit of time. */
+          @SerializedName("unit")
+          Unit unit;
+
+          /** Must be greater than 0. */
+          @SerializedName("value")
+          Long value;
+
+          private Maximum(Map<String, Object> extraParams, Unit unit, Long value) {
+            this.extraParams = extraParams;
+            this.unit = unit;
+            this.value = value;
+          }
+
+          public static Builder builder() {
+            return new Builder();
+          }
+
+          public static class Builder {
+            private Map<String, Object> extraParams;
+
+            private Unit unit;
+
+            private Long value;
+
+            /** Finalize and obtain parameter instance from this builder. */
+            public InvoiceCreateParams.ShippingCost.ShippingRateData.DeliveryEstimate.Maximum
+                build() {
+              return new InvoiceCreateParams.ShippingCost.ShippingRateData.DeliveryEstimate.Maximum(
+                  this.extraParams, this.unit, this.value);
+            }
+
+            /**
+             * Add a key/value pair to `extraParams` map. A map is initialized for the first
+             * `put/putAll` call, and subsequent calls add additional key/value pairs to the
+             * original map. See {@link
+             * InvoiceCreateParams.ShippingCost.ShippingRateData.DeliveryEstimate.Maximum#extraParams}
+             * for the field documentation.
+             */
+            public Builder putExtraParam(String key, Object value) {
+              if (this.extraParams == null) {
+                this.extraParams = new HashMap<>();
+              }
+              this.extraParams.put(key, value);
+              return this;
+            }
+
+            /**
+             * Add all map key/value pairs to `extraParams` map. A map is initialized for the first
+             * `put/putAll` call, and subsequent calls add additional key/value pairs to the
+             * original map. See {@link
+             * InvoiceCreateParams.ShippingCost.ShippingRateData.DeliveryEstimate.Maximum#extraParams}
+             * for the field documentation.
+             */
+            public Builder putAllExtraParam(Map<String, Object> map) {
+              if (this.extraParams == null) {
+                this.extraParams = new HashMap<>();
+              }
+              this.extraParams.putAll(map);
+              return this;
+            }
+
+            /** A unit of time. */
+            public Builder setUnit(
+                InvoiceCreateParams.ShippingCost.ShippingRateData.DeliveryEstimate.Maximum.Unit
+                    unit) {
+              this.unit = unit;
+              return this;
+            }
+
+            /** Must be greater than 0. */
+            public Builder setValue(Long value) {
+              this.value = value;
+              return this;
+            }
+          }
+
+          public enum Unit implements ApiRequestParams.EnumParam {
+            @SerializedName("business_day")
+            BUSINESS_DAY("business_day"),
+
+            @SerializedName("day")
+            DAY("day"),
+
+            @SerializedName("hour")
+            HOUR("hour"),
+
+            @SerializedName("month")
+            MONTH("month"),
+
+            @SerializedName("week")
+            WEEK("week");
+
+            @Getter(onMethod_ = {@Override})
+            private final String value;
+
+            Unit(String value) {
+              this.value = value;
+            }
+          }
+        }
+
+        @Getter
+        public static class Minimum {
+          /**
+           * Map of extra parameters for custom features not available in this client library. The
+           * content in this map is not serialized under this field's {@code @SerializedName} value.
+           * Instead, each key/value pair is serialized as if the key is a root-level field
+           * (serialized) name in this param object. Effectively, this map is flattened to its
+           * parent instance.
+           */
+          @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
+          Map<String, Object> extraParams;
+
+          /** A unit of time. */
+          @SerializedName("unit")
+          Unit unit;
+
+          /** Must be greater than 0. */
+          @SerializedName("value")
+          Long value;
+
+          private Minimum(Map<String, Object> extraParams, Unit unit, Long value) {
+            this.extraParams = extraParams;
+            this.unit = unit;
+            this.value = value;
+          }
+
+          public static Builder builder() {
+            return new Builder();
+          }
+
+          public static class Builder {
+            private Map<String, Object> extraParams;
+
+            private Unit unit;
+
+            private Long value;
+
+            /** Finalize and obtain parameter instance from this builder. */
+            public InvoiceCreateParams.ShippingCost.ShippingRateData.DeliveryEstimate.Minimum
+                build() {
+              return new InvoiceCreateParams.ShippingCost.ShippingRateData.DeliveryEstimate.Minimum(
+                  this.extraParams, this.unit, this.value);
+            }
+
+            /**
+             * Add a key/value pair to `extraParams` map. A map is initialized for the first
+             * `put/putAll` call, and subsequent calls add additional key/value pairs to the
+             * original map. See {@link
+             * InvoiceCreateParams.ShippingCost.ShippingRateData.DeliveryEstimate.Minimum#extraParams}
+             * for the field documentation.
+             */
+            public Builder putExtraParam(String key, Object value) {
+              if (this.extraParams == null) {
+                this.extraParams = new HashMap<>();
+              }
+              this.extraParams.put(key, value);
+              return this;
+            }
+
+            /**
+             * Add all map key/value pairs to `extraParams` map. A map is initialized for the first
+             * `put/putAll` call, and subsequent calls add additional key/value pairs to the
+             * original map. See {@link
+             * InvoiceCreateParams.ShippingCost.ShippingRateData.DeliveryEstimate.Minimum#extraParams}
+             * for the field documentation.
+             */
+            public Builder putAllExtraParam(Map<String, Object> map) {
+              if (this.extraParams == null) {
+                this.extraParams = new HashMap<>();
+              }
+              this.extraParams.putAll(map);
+              return this;
+            }
+
+            /** A unit of time. */
+            public Builder setUnit(
+                InvoiceCreateParams.ShippingCost.ShippingRateData.DeliveryEstimate.Minimum.Unit
+                    unit) {
+              this.unit = unit;
+              return this;
+            }
+
+            /** Must be greater than 0. */
+            public Builder setValue(Long value) {
+              this.value = value;
+              return this;
+            }
+          }
+
+          public enum Unit implements ApiRequestParams.EnumParam {
+            @SerializedName("business_day")
+            BUSINESS_DAY("business_day"),
+
+            @SerializedName("day")
+            DAY("day"),
+
+            @SerializedName("hour")
+            HOUR("hour"),
+
+            @SerializedName("month")
+            MONTH("month"),
+
+            @SerializedName("week")
+            WEEK("week");
+
+            @Getter(onMethod_ = {@Override})
+            private final String value;
+
+            Unit(String value) {
+              this.value = value;
+            }
+          }
+        }
+      }
+
+      @Getter
+      public static class FixedAmount {
+        /** A non-negative integer in cents representing how much to charge. */
+        @SerializedName("amount")
+        Long amount;
+
+        /**
+         * Three-letter <a href="https://www.iso.org/iso-4217-currency-codes.html">ISO currency
+         * code</a>, in lowercase. Must be a <a href="https://stripe.com/docs/currencies">supported
+         * currency</a>.
+         */
+        @SerializedName("currency")
+        String currency;
+
+        /**
+         * Shipping rates defined in each available currency option. Each key must be a three-letter
+         * <a href="https://www.iso.org/iso-4217-currency-codes.html">ISO currency code</a> and a <a
+         * href="https://stripe.com/docs/currencies">supported currency</a>.
+         */
+        @SerializedName("currency_options")
+        Map<String, InvoiceCreateParams.ShippingCost.ShippingRateData.FixedAmount.CurrencyOption>
+            currencyOptions;
+
+        /**
+         * Map of extra parameters for custom features not available in this client library. The
+         * content in this map is not serialized under this field's {@code @SerializedName} value.
+         * Instead, each key/value pair is serialized as if the key is a root-level field
+         * (serialized) name in this param object. Effectively, this map is flattened to its parent
+         * instance.
+         */
+        @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
+        Map<String, Object> extraParams;
+
+        private FixedAmount(
+            Long amount,
+            String currency,
+            Map<
+                    String,
+                    InvoiceCreateParams.ShippingCost.ShippingRateData.FixedAmount.CurrencyOption>
+                currencyOptions,
+            Map<String, Object> extraParams) {
+          this.amount = amount;
+          this.currency = currency;
+          this.currencyOptions = currencyOptions;
+          this.extraParams = extraParams;
+        }
+
+        public static Builder builder() {
+          return new Builder();
+        }
+
+        public static class Builder {
+          private Long amount;
+
+          private String currency;
+
+          private Map<
+                  String,
+                  InvoiceCreateParams.ShippingCost.ShippingRateData.FixedAmount.CurrencyOption>
+              currencyOptions;
+
+          private Map<String, Object> extraParams;
+
+          /** Finalize and obtain parameter instance from this builder. */
+          public InvoiceCreateParams.ShippingCost.ShippingRateData.FixedAmount build() {
+            return new InvoiceCreateParams.ShippingCost.ShippingRateData.FixedAmount(
+                this.amount, this.currency, this.currencyOptions, this.extraParams);
+          }
+
+          /** A non-negative integer in cents representing how much to charge. */
+          public Builder setAmount(Long amount) {
+            this.amount = amount;
+            return this;
+          }
+
+          /**
+           * Three-letter <a href="https://www.iso.org/iso-4217-currency-codes.html">ISO currency
+           * code</a>, in lowercase. Must be a <a
+           * href="https://stripe.com/docs/currencies">supported currency</a>.
+           */
+          public Builder setCurrency(String currency) {
+            this.currency = currency;
+            return this;
+          }
+
+          /**
+           * Add a key/value pair to `currencyOptions` map. A map is initialized for the first
+           * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
+           * map. See {@link
+           * InvoiceCreateParams.ShippingCost.ShippingRateData.FixedAmount#currencyOptions} for the
+           * field documentation.
+           */
+          public Builder putCurrencyOption(
+              String key,
+              InvoiceCreateParams.ShippingCost.ShippingRateData.FixedAmount.CurrencyOption value) {
+            if (this.currencyOptions == null) {
+              this.currencyOptions = new HashMap<>();
+            }
+            this.currencyOptions.put(key, value);
+            return this;
+          }
+
+          /**
+           * Add all map key/value pairs to `currencyOptions` map. A map is initialized for the
+           * first `put/putAll` call, and subsequent calls add additional key/value pairs to the
+           * original map. See {@link
+           * InvoiceCreateParams.ShippingCost.ShippingRateData.FixedAmount#currencyOptions} for the
+           * field documentation.
+           */
+          public Builder putAllCurrencyOption(
+              Map<
+                      String,
+                      InvoiceCreateParams.ShippingCost.ShippingRateData.FixedAmount.CurrencyOption>
+                  map) {
+            if (this.currencyOptions == null) {
+              this.currencyOptions = new HashMap<>();
+            }
+            this.currencyOptions.putAll(map);
+            return this;
+          }
+
+          /**
+           * Add a key/value pair to `extraParams` map. A map is initialized for the first
+           * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
+           * map. See {@link
+           * InvoiceCreateParams.ShippingCost.ShippingRateData.FixedAmount#extraParams} for the
+           * field documentation.
+           */
+          public Builder putExtraParam(String key, Object value) {
+            if (this.extraParams == null) {
+              this.extraParams = new HashMap<>();
+            }
+            this.extraParams.put(key, value);
+            return this;
+          }
+
+          /**
+           * Add all map key/value pairs to `extraParams` map. A map is initialized for the first
+           * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
+           * map. See {@link
+           * InvoiceCreateParams.ShippingCost.ShippingRateData.FixedAmount#extraParams} for the
+           * field documentation.
+           */
+          public Builder putAllExtraParam(Map<String, Object> map) {
+            if (this.extraParams == null) {
+              this.extraParams = new HashMap<>();
+            }
+            this.extraParams.putAll(map);
+            return this;
+          }
+        }
+
+        @Getter
+        public static class CurrencyOption {
+          /** A non-negative integer in cents representing how much to charge. */
+          @SerializedName("amount")
+          Long amount;
+
+          /**
+           * Map of extra parameters for custom features not available in this client library. The
+           * content in this map is not serialized under this field's {@code @SerializedName} value.
+           * Instead, each key/value pair is serialized as if the key is a root-level field
+           * (serialized) name in this param object. Effectively, this map is flattened to its
+           * parent instance.
+           */
+          @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
+          Map<String, Object> extraParams;
+
+          /**
+           * Specifies whether the rate is considered inclusive of taxes or exclusive of taxes. One
+           * of {@code inclusive}, {@code exclusive}, or {@code unspecified}.
+           */
+          @SerializedName("tax_behavior")
+          TaxBehavior taxBehavior;
+
+          private CurrencyOption(
+              Long amount, Map<String, Object> extraParams, TaxBehavior taxBehavior) {
+            this.amount = amount;
+            this.extraParams = extraParams;
+            this.taxBehavior = taxBehavior;
+          }
+
+          public static Builder builder() {
+            return new Builder();
+          }
+
+          public static class Builder {
+            private Long amount;
+
+            private Map<String, Object> extraParams;
+
+            private TaxBehavior taxBehavior;
+
+            /** Finalize and obtain parameter instance from this builder. */
+            public InvoiceCreateParams.ShippingCost.ShippingRateData.FixedAmount.CurrencyOption
+                build() {
+              return new InvoiceCreateParams.ShippingCost.ShippingRateData.FixedAmount
+                  .CurrencyOption(this.amount, this.extraParams, this.taxBehavior);
+            }
+
+            /** A non-negative integer in cents representing how much to charge. */
+            public Builder setAmount(Long amount) {
+              this.amount = amount;
+              return this;
+            }
+
+            /**
+             * Add a key/value pair to `extraParams` map. A map is initialized for the first
+             * `put/putAll` call, and subsequent calls add additional key/value pairs to the
+             * original map. See {@link
+             * InvoiceCreateParams.ShippingCost.ShippingRateData.FixedAmount.CurrencyOption#extraParams}
+             * for the field documentation.
+             */
+            public Builder putExtraParam(String key, Object value) {
+              if (this.extraParams == null) {
+                this.extraParams = new HashMap<>();
+              }
+              this.extraParams.put(key, value);
+              return this;
+            }
+
+            /**
+             * Add all map key/value pairs to `extraParams` map. A map is initialized for the first
+             * `put/putAll` call, and subsequent calls add additional key/value pairs to the
+             * original map. See {@link
+             * InvoiceCreateParams.ShippingCost.ShippingRateData.FixedAmount.CurrencyOption#extraParams}
+             * for the field documentation.
+             */
+            public Builder putAllExtraParam(Map<String, Object> map) {
+              if (this.extraParams == null) {
+                this.extraParams = new HashMap<>();
+              }
+              this.extraParams.putAll(map);
+              return this;
+            }
+
+            /**
+             * Specifies whether the rate is considered inclusive of taxes or exclusive of taxes.
+             * One of {@code inclusive}, {@code exclusive}, or {@code unspecified}.
+             */
+            public Builder setTaxBehavior(
+                InvoiceCreateParams.ShippingCost.ShippingRateData.FixedAmount.CurrencyOption
+                        .TaxBehavior
+                    taxBehavior) {
+              this.taxBehavior = taxBehavior;
+              return this;
+            }
+          }
+
+          public enum TaxBehavior implements ApiRequestParams.EnumParam {
+            @SerializedName("exclusive")
+            EXCLUSIVE("exclusive"),
+
+            @SerializedName("inclusive")
+            INCLUSIVE("inclusive"),
+
+            @SerializedName("unspecified")
+            UNSPECIFIED("unspecified");
+
+            @Getter(onMethod_ = {@Override})
+            private final String value;
+
+            TaxBehavior(String value) {
+              this.value = value;
+            }
+          }
+        }
+      }
+
+      public enum TaxBehavior implements ApiRequestParams.EnumParam {
+        @SerializedName("exclusive")
+        EXCLUSIVE("exclusive"),
+
+        @SerializedName("inclusive")
+        INCLUSIVE("inclusive"),
+
+        @SerializedName("unspecified")
+        UNSPECIFIED("unspecified");
+
+        @Getter(onMethod_ = {@Override})
+        private final String value;
+
+        TaxBehavior(String value) {
+          this.value = value;
+        }
+      }
+
+      public enum Type implements ApiRequestParams.EnumParam {
+        @SerializedName("fixed_amount")
+        FIXED_AMOUNT("fixed_amount");
+
+        @Getter(onMethod_ = {@Override})
+        private final String value;
+
+        Type(String value) {
+          this.value = value;
+        }
+      }
+    }
+  }
+
+  @Getter
+  public static class ShippingDetails {
+    /** Shipping address. */
+    @SerializedName("address")
+    Address address;
+
+    /**
+     * Map of extra parameters for custom features not available in this client library. The content
+     * in this map is not serialized under this field's {@code @SerializedName} value. Instead, each
+     * key/value pair is serialized as if the key is a root-level field (serialized) name in this
+     * param object. Effectively, this map is flattened to its parent instance.
+     */
+    @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
+    Map<String, Object> extraParams;
+
+    /** Recipient name. */
+    @SerializedName("name")
+    String name;
+
+    /** Recipient phone (including extension). */
+    @SerializedName("phone")
+    String phone;
+
+    private ShippingDetails(
+        Address address, Map<String, Object> extraParams, String name, String phone) {
+      this.address = address;
+      this.extraParams = extraParams;
+      this.name = name;
+      this.phone = phone;
+    }
+
+    public static Builder builder() {
+      return new Builder();
+    }
+
+    public static class Builder {
+      private Address address;
+
+      private Map<String, Object> extraParams;
+
+      private String name;
+
+      private String phone;
+
+      /** Finalize and obtain parameter instance from this builder. */
+      public InvoiceCreateParams.ShippingDetails build() {
+        return new InvoiceCreateParams.ShippingDetails(
+            this.address, this.extraParams, this.name, this.phone);
+      }
+
+      /** Shipping address. */
+      public Builder setAddress(InvoiceCreateParams.ShippingDetails.Address address) {
+        this.address = address;
+        return this;
+      }
+
+      /**
+       * Add a key/value pair to `extraParams` map. A map is initialized for the first `put/putAll`
+       * call, and subsequent calls add additional key/value pairs to the original map. See {@link
+       * InvoiceCreateParams.ShippingDetails#extraParams} for the field documentation.
+       */
+      public Builder putExtraParam(String key, Object value) {
+        if (this.extraParams == null) {
+          this.extraParams = new HashMap<>();
+        }
+        this.extraParams.put(key, value);
+        return this;
+      }
+
+      /**
+       * Add all map key/value pairs to `extraParams` map. A map is initialized for the first
+       * `put/putAll` call, and subsequent calls add additional key/value pairs to the original map.
+       * See {@link InvoiceCreateParams.ShippingDetails#extraParams} for the field documentation.
+       */
+      public Builder putAllExtraParam(Map<String, Object> map) {
+        if (this.extraParams == null) {
+          this.extraParams = new HashMap<>();
+        }
+        this.extraParams.putAll(map);
+        return this;
+      }
+
+      /** Recipient name. */
+      public Builder setName(String name) {
+        this.name = name;
+        return this;
+      }
+
+      /** Recipient phone (including extension). */
+      public Builder setPhone(String phone) {
+        this.phone = phone;
+        return this;
+      }
+    }
+
+    @Getter
+    public static class Address {
+      /** City, district, suburb, town, or village. */
+      @SerializedName("city")
+      String city;
+
+      /**
+       * Two-letter country code (<a href="https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2">ISO
+       * 3166-1 alpha-2</a>).
+       */
+      @SerializedName("country")
+      String country;
+
+      /**
+       * Map of extra parameters for custom features not available in this client library. The
+       * content in this map is not serialized under this field's {@code @SerializedName} value.
+       * Instead, each key/value pair is serialized as if the key is a root-level field (serialized)
+       * name in this param object. Effectively, this map is flattened to its parent instance.
+       */
+      @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
+      Map<String, Object> extraParams;
+
+      /** Address line 1 (e.g., street, PO Box, or company name). */
+      @SerializedName("line1")
+      String line1;
+
+      /** Address line 2 (e.g., apartment, suite, unit, or building). */
+      @SerializedName("line2")
+      String line2;
+
+      /** ZIP or postal code. */
+      @SerializedName("postal_code")
+      String postalCode;
+
+      /** State, county, province, or region. */
+      @SerializedName("state")
+      String state;
+
+      private Address(
+          String city,
+          String country,
+          Map<String, Object> extraParams,
+          String line1,
+          String line2,
+          String postalCode,
+          String state) {
+        this.city = city;
+        this.country = country;
+        this.extraParams = extraParams;
+        this.line1 = line1;
+        this.line2 = line2;
+        this.postalCode = postalCode;
+        this.state = state;
+      }
+
+      public static Builder builder() {
+        return new Builder();
+      }
+
+      public static class Builder {
+        private String city;
+
+        private String country;
+
+        private Map<String, Object> extraParams;
+
+        private String line1;
+
+        private String line2;
+
+        private String postalCode;
+
+        private String state;
+
+        /** Finalize and obtain parameter instance from this builder. */
+        public InvoiceCreateParams.ShippingDetails.Address build() {
+          return new InvoiceCreateParams.ShippingDetails.Address(
+              this.city,
+              this.country,
+              this.extraParams,
+              this.line1,
+              this.line2,
+              this.postalCode,
+              this.state);
+        }
+
+        /** City, district, suburb, town, or village. */
+        public Builder setCity(String city) {
+          this.city = city;
+          return this;
+        }
+
+        /**
+         * Two-letter country code (<a href="https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2">ISO
+         * 3166-1 alpha-2</a>).
+         */
+        public Builder setCountry(String country) {
+          this.country = country;
+          return this;
+        }
+
+        /**
+         * Add a key/value pair to `extraParams` map. A map is initialized for the first
+         * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
+         * map. See {@link InvoiceCreateParams.ShippingDetails.Address#extraParams} for the field
+         * documentation.
+         */
+        public Builder putExtraParam(String key, Object value) {
+          if (this.extraParams == null) {
+            this.extraParams = new HashMap<>();
+          }
+          this.extraParams.put(key, value);
+          return this;
+        }
+
+        /**
+         * Add all map key/value pairs to `extraParams` map. A map is initialized for the first
+         * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
+         * map. See {@link InvoiceCreateParams.ShippingDetails.Address#extraParams} for the field
+         * documentation.
+         */
+        public Builder putAllExtraParam(Map<String, Object> map) {
+          if (this.extraParams == null) {
+            this.extraParams = new HashMap<>();
+          }
+          this.extraParams.putAll(map);
+          return this;
+        }
+
+        /** Address line 1 (e.g., street, PO Box, or company name). */
+        public Builder setLine1(String line1) {
+          this.line1 = line1;
+          return this;
+        }
+
+        /** Address line 2 (e.g., apartment, suite, unit, or building). */
+        public Builder setLine2(String line2) {
+          this.line2 = line2;
+          return this;
+        }
+
+        /** ZIP or postal code. */
+        public Builder setPostalCode(String postalCode) {
+          this.postalCode = postalCode;
+          return this;
+        }
+
+        /** State, county, province, or region. */
+        public Builder setState(String state) {
+          this.state = state;
+          return this;
+        }
       }
     }
   }

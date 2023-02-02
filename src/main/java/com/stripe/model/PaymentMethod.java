@@ -1269,6 +1269,10 @@ public class PaymentMethod extends ApiResource implements HasId, MetadataStore<P
     @SerializedName("account_holder_type")
     String accountHolderType;
 
+    /** Account number of the bank account. */
+    @SerializedName("account_number")
+    String accountNumber;
+
     /**
      * Account type: checkings or savings. Defaults to checking if omitted.
      *
