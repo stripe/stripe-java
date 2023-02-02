@@ -100,6 +100,10 @@ public class Invoice extends ApiResource implements HasId, MetadataStore<Invoice
   @SerializedName("amount_remaining")
   Long amountRemaining;
 
+  /** This is the sum of all the shipping amounts. */
+  @SerializedName("amount_shipping")
+  Long amountShipping;
+
   /** ID of the Connect Application that created the invoice. */
   @SerializedName("application")
   @Getter(lombok.AccessLevel.NONE)
@@ -476,6 +480,17 @@ public class Invoice extends ApiResource implements HasId, MetadataStore<Invoice
   /** Options for invoice PDF rendering. */
   @SerializedName("rendering_options")
   RenderingOptions renderingOptions;
+
+  /** The details of the cost of shipping, including the ShippingRate applied on the invoice. */
+  @SerializedName("shipping_cost")
+  ShippingCost shippingCost;
+
+  /**
+   * Shipping details for the invoice. The Invoice PDF will use the {@code shipping_details} value
+   * if it is set, otherwise the PDF will render the shipping address from the customer.
+   */
+  @SerializedName("shipping_details")
+  ShippingDetails shippingDetails;
 
   /**
    * Starting customer balance before the invoice is finalized. If the invoice has not been
@@ -2027,6 +2042,73 @@ public class Invoice extends ApiResource implements HasId, MetadataStore<Invoice
     /** How line-item prices and amounts will be displayed with respect to tax on invoice PDFs. */
     @SerializedName("amount_tax_display")
     String amountTaxDisplay;
+  }
+
+  @Getter
+  @Setter
+  @EqualsAndHashCode(callSuper = false)
+  public static class ShippingCost extends StripeObject {
+    /** Total shipping cost before any taxes are applied. */
+    @SerializedName("amount_subtotal")
+    Long amountSubtotal;
+
+    /** Total tax amount applied due to shipping costs. If no tax was applied, defaults to 0. */
+    @SerializedName("amount_tax")
+    Long amountTax;
+
+    /** Total shipping cost after taxes are applied. */
+    @SerializedName("amount_total")
+    Long amountTotal;
+
+    /** The ID of the ShippingRate for this invoice. */
+    @SerializedName("shipping_rate")
+    @Getter(lombok.AccessLevel.NONE)
+    @Setter(lombok.AccessLevel.NONE)
+    ExpandableField<ShippingRate> shippingRate;
+
+    /** The taxes applied to the shipping rate. */
+    @SerializedName("taxes")
+    List<Invoice.ShippingCost.Tax> taxes;
+
+    /** Get ID of expandable {@code shippingRate} object. */
+    public String getShippingRate() {
+      return (this.shippingRate != null) ? this.shippingRate.getId() : null;
+    }
+
+    public void setShippingRate(String id) {
+      this.shippingRate = ApiResource.setExpandableFieldId(id, this.shippingRate);
+    }
+
+    /** Get expanded {@code shippingRate}. */
+    public ShippingRate getShippingRateObject() {
+      return (this.shippingRate != null) ? this.shippingRate.getExpanded() : null;
+    }
+
+    public void setShippingRateObject(ShippingRate expandableObject) {
+      this.shippingRate =
+          new ExpandableField<ShippingRate>(expandableObject.getId(), expandableObject);
+    }
+
+    @Getter
+    @Setter
+    @EqualsAndHashCode(callSuper = false)
+    public static class Tax extends StripeObject {
+      /** Amount of tax applied for this rate. */
+      @SerializedName("amount")
+      Long amount;
+
+      /**
+       * Tax rates can be applied to <a
+       * href="https://stripe.com/docs/billing/invoices/tax-rates">invoices</a>, <a
+       * href="https://stripe.com/docs/billing/subscriptions/taxes">subscriptions</a> and <a
+       * href="https://stripe.com/docs/payments/checkout/set-up-a-subscription#tax-rates">Checkout
+       * Sessions</a> to collect tax.
+       *
+       * <p>Related guide: <a href="https://stripe.com/docs/billing/taxes/tax-rates">Tax Rates</a>.
+       */
+      @SerializedName("rate")
+      TaxRate rate;
+    }
   }
 
   @Getter

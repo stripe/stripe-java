@@ -60,6 +60,10 @@ public class PaymentLinkUpdateParams extends ApiRequestParams {
   @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
   Map<String, Object> extraParams;
 
+  /** Generate a post-purchase Invoice for one-time payments. */
+  @SerializedName("invoice_creation")
+  InvoiceCreation invoiceCreation;
+
   /**
    * The line items representing what is being sold. Each line item represents an item being sold.
    * Up to 20 line items are supported.
@@ -115,6 +119,7 @@ public class PaymentLinkUpdateParams extends ApiRequestParams {
       CustomerCreation customerCreation,
       List<String> expand,
       Map<String, Object> extraParams,
+      InvoiceCreation invoiceCreation,
       List<PaymentLinkUpdateParams.LineItem> lineItems,
       Map<String, String> metadata,
       PaymentMethodCollection paymentMethodCollection,
@@ -129,6 +134,7 @@ public class PaymentLinkUpdateParams extends ApiRequestParams {
     this.customerCreation = customerCreation;
     this.expand = expand;
     this.extraParams = extraParams;
+    this.invoiceCreation = invoiceCreation;
     this.lineItems = lineItems;
     this.metadata = metadata;
     this.paymentMethodCollection = paymentMethodCollection;
@@ -159,6 +165,8 @@ public class PaymentLinkUpdateParams extends ApiRequestParams {
 
     private Map<String, Object> extraParams;
 
+    private InvoiceCreation invoiceCreation;
+
     private List<PaymentLinkUpdateParams.LineItem> lineItems;
 
     private Map<String, String> metadata;
@@ -181,6 +189,7 @@ public class PaymentLinkUpdateParams extends ApiRequestParams {
           this.customerCreation,
           this.expand,
           this.extraParams,
+          this.invoiceCreation,
           this.lineItems,
           this.metadata,
           this.paymentMethodCollection,
@@ -287,6 +296,12 @@ public class PaymentLinkUpdateParams extends ApiRequestParams {
         this.extraParams = new HashMap<>();
       }
       this.extraParams.putAll(map);
+      return this;
+    }
+
+    /** Generate a post-purchase Invoice for one-time payments. */
+    public Builder setInvoiceCreation(PaymentLinkUpdateParams.InvoiceCreation invoiceCreation) {
+      this.invoiceCreation = invoiceCreation;
       return this;
     }
 
@@ -1024,6 +1039,606 @@ public class PaymentLinkUpdateParams extends ApiRequestParams {
         public Builder setMessage(EmptyParam message) {
           this.message = message;
           return this;
+        }
+      }
+    }
+  }
+
+  @Getter
+  public static class InvoiceCreation {
+    /** Whether the feature is enabled. */
+    @SerializedName("enabled")
+    Boolean enabled;
+
+    /**
+     * Map of extra parameters for custom features not available in this client library. The content
+     * in this map is not serialized under this field's {@code @SerializedName} value. Instead, each
+     * key/value pair is serialized as if the key is a root-level field (serialized) name in this
+     * param object. Effectively, this map is flattened to its parent instance.
+     */
+    @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
+    Map<String, Object> extraParams;
+
+    /** Invoice PDF configuration. */
+    @SerializedName("invoice_data")
+    InvoiceData invoiceData;
+
+    private InvoiceCreation(
+        Boolean enabled, Map<String, Object> extraParams, InvoiceData invoiceData) {
+      this.enabled = enabled;
+      this.extraParams = extraParams;
+      this.invoiceData = invoiceData;
+    }
+
+    public static Builder builder() {
+      return new Builder();
+    }
+
+    public static class Builder {
+      private Boolean enabled;
+
+      private Map<String, Object> extraParams;
+
+      private InvoiceData invoiceData;
+
+      /** Finalize and obtain parameter instance from this builder. */
+      public PaymentLinkUpdateParams.InvoiceCreation build() {
+        return new PaymentLinkUpdateParams.InvoiceCreation(
+            this.enabled, this.extraParams, this.invoiceData);
+      }
+
+      /** Whether the feature is enabled. */
+      public Builder setEnabled(Boolean enabled) {
+        this.enabled = enabled;
+        return this;
+      }
+
+      /**
+       * Add a key/value pair to `extraParams` map. A map is initialized for the first `put/putAll`
+       * call, and subsequent calls add additional key/value pairs to the original map. See {@link
+       * PaymentLinkUpdateParams.InvoiceCreation#extraParams} for the field documentation.
+       */
+      public Builder putExtraParam(String key, Object value) {
+        if (this.extraParams == null) {
+          this.extraParams = new HashMap<>();
+        }
+        this.extraParams.put(key, value);
+        return this;
+      }
+
+      /**
+       * Add all map key/value pairs to `extraParams` map. A map is initialized for the first
+       * `put/putAll` call, and subsequent calls add additional key/value pairs to the original map.
+       * See {@link PaymentLinkUpdateParams.InvoiceCreation#extraParams} for the field
+       * documentation.
+       */
+      public Builder putAllExtraParam(Map<String, Object> map) {
+        if (this.extraParams == null) {
+          this.extraParams = new HashMap<>();
+        }
+        this.extraParams.putAll(map);
+        return this;
+      }
+
+      /** Invoice PDF configuration. */
+      public Builder setInvoiceData(
+          PaymentLinkUpdateParams.InvoiceCreation.InvoiceData invoiceData) {
+        this.invoiceData = invoiceData;
+        return this;
+      }
+    }
+
+    @Getter
+    public static class InvoiceData {
+      /** The account tax IDs associated with the invoice. */
+      @SerializedName("account_tax_ids")
+      Object accountTaxIds;
+
+      /** Default custom fields to be displayed on invoices for this customer. */
+      @SerializedName("custom_fields")
+      Object customFields;
+
+      /** An arbitrary string attached to the object. Often useful for displaying to users. */
+      @SerializedName("description")
+      Object description;
+
+      /**
+       * Map of extra parameters for custom features not available in this client library. The
+       * content in this map is not serialized under this field's {@code @SerializedName} value.
+       * Instead, each key/value pair is serialized as if the key is a root-level field (serialized)
+       * name in this param object. Effectively, this map is flattened to its parent instance.
+       */
+      @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
+      Map<String, Object> extraParams;
+
+      /** Default footer to be displayed on invoices for this customer. */
+      @SerializedName("footer")
+      Object footer;
+
+      /**
+       * Set of <a href="https://stripe.com/docs/api/metadata">key-value pairs</a> that you can
+       * attach to an object. This can be useful for storing additional information about the object
+       * in a structured format. Individual keys can be unset by posting an empty value to them. All
+       * keys can be unset by posting an empty value to {@code metadata}.
+       */
+      @SerializedName("metadata")
+      Object metadata;
+
+      /** Default options for invoice PDF rendering for this customer. */
+      @SerializedName("rendering_options")
+      Object renderingOptions;
+
+      private InvoiceData(
+          Object accountTaxIds,
+          Object customFields,
+          Object description,
+          Map<String, Object> extraParams,
+          Object footer,
+          Object metadata,
+          Object renderingOptions) {
+        this.accountTaxIds = accountTaxIds;
+        this.customFields = customFields;
+        this.description = description;
+        this.extraParams = extraParams;
+        this.footer = footer;
+        this.metadata = metadata;
+        this.renderingOptions = renderingOptions;
+      }
+
+      public static Builder builder() {
+        return new Builder();
+      }
+
+      public static class Builder {
+        private Object accountTaxIds;
+
+        private Object customFields;
+
+        private Object description;
+
+        private Map<String, Object> extraParams;
+
+        private Object footer;
+
+        private Object metadata;
+
+        private Object renderingOptions;
+
+        /** Finalize and obtain parameter instance from this builder. */
+        public PaymentLinkUpdateParams.InvoiceCreation.InvoiceData build() {
+          return new PaymentLinkUpdateParams.InvoiceCreation.InvoiceData(
+              this.accountTaxIds,
+              this.customFields,
+              this.description,
+              this.extraParams,
+              this.footer,
+              this.metadata,
+              this.renderingOptions);
+        }
+
+        /**
+         * Add an element to `accountTaxIds` list. A list is initialized for the first `add/addAll`
+         * call, and subsequent calls adds additional elements to the original list. See {@link
+         * PaymentLinkUpdateParams.InvoiceCreation.InvoiceData#accountTaxIds} for the field
+         * documentation.
+         */
+        @SuppressWarnings("unchecked")
+        public Builder addAccountTaxId(String element) {
+          if (this.accountTaxIds == null || this.accountTaxIds instanceof EmptyParam) {
+            this.accountTaxIds = new ArrayList<String>();
+          }
+          ((List<String>) this.accountTaxIds).add(element);
+          return this;
+        }
+
+        /**
+         * Add all elements to `accountTaxIds` list. A list is initialized for the first
+         * `add/addAll` call, and subsequent calls adds additional elements to the original list.
+         * See {@link PaymentLinkUpdateParams.InvoiceCreation.InvoiceData#accountTaxIds} for the
+         * field documentation.
+         */
+        @SuppressWarnings("unchecked")
+        public Builder addAllAccountTaxId(List<String> elements) {
+          if (this.accountTaxIds == null || this.accountTaxIds instanceof EmptyParam) {
+            this.accountTaxIds = new ArrayList<String>();
+          }
+          ((List<String>) this.accountTaxIds).addAll(elements);
+          return this;
+        }
+
+        /** The account tax IDs associated with the invoice. */
+        public Builder setAccountTaxIds(EmptyParam accountTaxIds) {
+          this.accountTaxIds = accountTaxIds;
+          return this;
+        }
+
+        /** The account tax IDs associated with the invoice. */
+        public Builder setAccountTaxIds(List<String> accountTaxIds) {
+          this.accountTaxIds = accountTaxIds;
+          return this;
+        }
+
+        /**
+         * Add an element to `customFields` list. A list is initialized for the first `add/addAll`
+         * call, and subsequent calls adds additional elements to the original list. See {@link
+         * PaymentLinkUpdateParams.InvoiceCreation.InvoiceData#customFields} for the field
+         * documentation.
+         */
+        @SuppressWarnings("unchecked")
+        public Builder addCustomField(
+            PaymentLinkUpdateParams.InvoiceCreation.InvoiceData.CustomField element) {
+          if (this.customFields == null || this.customFields instanceof EmptyParam) {
+            this.customFields =
+                new ArrayList<PaymentLinkUpdateParams.InvoiceCreation.InvoiceData.CustomField>();
+          }
+          ((List<PaymentLinkUpdateParams.InvoiceCreation.InvoiceData.CustomField>)
+                  this.customFields)
+              .add(element);
+          return this;
+        }
+
+        /**
+         * Add all elements to `customFields` list. A list is initialized for the first `add/addAll`
+         * call, and subsequent calls adds additional elements to the original list. See {@link
+         * PaymentLinkUpdateParams.InvoiceCreation.InvoiceData#customFields} for the field
+         * documentation.
+         */
+        @SuppressWarnings("unchecked")
+        public Builder addAllCustomField(
+            List<PaymentLinkUpdateParams.InvoiceCreation.InvoiceData.CustomField> elements) {
+          if (this.customFields == null || this.customFields instanceof EmptyParam) {
+            this.customFields =
+                new ArrayList<PaymentLinkUpdateParams.InvoiceCreation.InvoiceData.CustomField>();
+          }
+          ((List<PaymentLinkUpdateParams.InvoiceCreation.InvoiceData.CustomField>)
+                  this.customFields)
+              .addAll(elements);
+          return this;
+        }
+
+        /** Default custom fields to be displayed on invoices for this customer. */
+        public Builder setCustomFields(EmptyParam customFields) {
+          this.customFields = customFields;
+          return this;
+        }
+
+        /** Default custom fields to be displayed on invoices for this customer. */
+        public Builder setCustomFields(
+            List<PaymentLinkUpdateParams.InvoiceCreation.InvoiceData.CustomField> customFields) {
+          this.customFields = customFields;
+          return this;
+        }
+
+        /** An arbitrary string attached to the object. Often useful for displaying to users. */
+        public Builder setDescription(String description) {
+          this.description = description;
+          return this;
+        }
+
+        /** An arbitrary string attached to the object. Often useful for displaying to users. */
+        public Builder setDescription(EmptyParam description) {
+          this.description = description;
+          return this;
+        }
+
+        /**
+         * Add a key/value pair to `extraParams` map. A map is initialized for the first
+         * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
+         * map. See {@link PaymentLinkUpdateParams.InvoiceCreation.InvoiceData#extraParams} for the
+         * field documentation.
+         */
+        public Builder putExtraParam(String key, Object value) {
+          if (this.extraParams == null) {
+            this.extraParams = new HashMap<>();
+          }
+          this.extraParams.put(key, value);
+          return this;
+        }
+
+        /**
+         * Add all map key/value pairs to `extraParams` map. A map is initialized for the first
+         * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
+         * map. See {@link PaymentLinkUpdateParams.InvoiceCreation.InvoiceData#extraParams} for the
+         * field documentation.
+         */
+        public Builder putAllExtraParam(Map<String, Object> map) {
+          if (this.extraParams == null) {
+            this.extraParams = new HashMap<>();
+          }
+          this.extraParams.putAll(map);
+          return this;
+        }
+
+        /** Default footer to be displayed on invoices for this customer. */
+        public Builder setFooter(String footer) {
+          this.footer = footer;
+          return this;
+        }
+
+        /** Default footer to be displayed on invoices for this customer. */
+        public Builder setFooter(EmptyParam footer) {
+          this.footer = footer;
+          return this;
+        }
+
+        /**
+         * Add a key/value pair to `metadata` map. A map is initialized for the first `put/putAll`
+         * call, and subsequent calls add additional key/value pairs to the original map. See {@link
+         * PaymentLinkUpdateParams.InvoiceCreation.InvoiceData#metadata} for the field
+         * documentation.
+         */
+        @SuppressWarnings("unchecked")
+        public Builder putMetadata(String key, String value) {
+          if (this.metadata == null || this.metadata instanceof EmptyParam) {
+            this.metadata = new HashMap<String, String>();
+          }
+          ((Map<String, String>) this.metadata).put(key, value);
+          return this;
+        }
+
+        /**
+         * Add all map key/value pairs to `metadata` map. A map is initialized for the first
+         * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
+         * map. See {@link PaymentLinkUpdateParams.InvoiceCreation.InvoiceData#metadata} for the
+         * field documentation.
+         */
+        @SuppressWarnings("unchecked")
+        public Builder putAllMetadata(Map<String, String> map) {
+          if (this.metadata == null || this.metadata instanceof EmptyParam) {
+            this.metadata = new HashMap<String, String>();
+          }
+          ((Map<String, String>) this.metadata).putAll(map);
+          return this;
+        }
+
+        /**
+         * Set of <a href="https://stripe.com/docs/api/metadata">key-value pairs</a> that you can
+         * attach to an object. This can be useful for storing additional information about the
+         * object in a structured format. Individual keys can be unset by posting an empty value to
+         * them. All keys can be unset by posting an empty value to {@code metadata}.
+         */
+        public Builder setMetadata(EmptyParam metadata) {
+          this.metadata = metadata;
+          return this;
+        }
+
+        /**
+         * Set of <a href="https://stripe.com/docs/api/metadata">key-value pairs</a> that you can
+         * attach to an object. This can be useful for storing additional information about the
+         * object in a structured format. Individual keys can be unset by posting an empty value to
+         * them. All keys can be unset by posting an empty value to {@code metadata}.
+         */
+        public Builder setMetadata(Map<String, String> metadata) {
+          this.metadata = metadata;
+          return this;
+        }
+
+        /** Default options for invoice PDF rendering for this customer. */
+        public Builder setRenderingOptions(
+            PaymentLinkUpdateParams.InvoiceCreation.InvoiceData.RenderingOptions renderingOptions) {
+          this.renderingOptions = renderingOptions;
+          return this;
+        }
+
+        /** Default options for invoice PDF rendering for this customer. */
+        public Builder setRenderingOptions(EmptyParam renderingOptions) {
+          this.renderingOptions = renderingOptions;
+          return this;
+        }
+      }
+
+      @Getter
+      public static class CustomField {
+        /**
+         * Map of extra parameters for custom features not available in this client library. The
+         * content in this map is not serialized under this field's {@code @SerializedName} value.
+         * Instead, each key/value pair is serialized as if the key is a root-level field
+         * (serialized) name in this param object. Effectively, this map is flattened to its parent
+         * instance.
+         */
+        @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
+        Map<String, Object> extraParams;
+
+        /** The name of the custom field. This may be up to 30 characters. */
+        @SerializedName("name")
+        Object name;
+
+        /** The value of the custom field. This may be up to 30 characters. */
+        @SerializedName("value")
+        Object value;
+
+        private CustomField(Map<String, Object> extraParams, Object name, Object value) {
+          this.extraParams = extraParams;
+          this.name = name;
+          this.value = value;
+        }
+
+        public static Builder builder() {
+          return new Builder();
+        }
+
+        public static class Builder {
+          private Map<String, Object> extraParams;
+
+          private Object name;
+
+          private Object value;
+
+          /** Finalize and obtain parameter instance from this builder. */
+          public PaymentLinkUpdateParams.InvoiceCreation.InvoiceData.CustomField build() {
+            return new PaymentLinkUpdateParams.InvoiceCreation.InvoiceData.CustomField(
+                this.extraParams, this.name, this.value);
+          }
+
+          /**
+           * Add a key/value pair to `extraParams` map. A map is initialized for the first
+           * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
+           * map. See {@link
+           * PaymentLinkUpdateParams.InvoiceCreation.InvoiceData.CustomField#extraParams} for the
+           * field documentation.
+           */
+          public Builder putExtraParam(String key, Object value) {
+            if (this.extraParams == null) {
+              this.extraParams = new HashMap<>();
+            }
+            this.extraParams.put(key, value);
+            return this;
+          }
+
+          /**
+           * Add all map key/value pairs to `extraParams` map. A map is initialized for the first
+           * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
+           * map. See {@link
+           * PaymentLinkUpdateParams.InvoiceCreation.InvoiceData.CustomField#extraParams} for the
+           * field documentation.
+           */
+          public Builder putAllExtraParam(Map<String, Object> map) {
+            if (this.extraParams == null) {
+              this.extraParams = new HashMap<>();
+            }
+            this.extraParams.putAll(map);
+            return this;
+          }
+
+          /** The name of the custom field. This may be up to 30 characters. */
+          public Builder setName(String name) {
+            this.name = name;
+            return this;
+          }
+
+          /** The name of the custom field. This may be up to 30 characters. */
+          public Builder setName(EmptyParam name) {
+            this.name = name;
+            return this;
+          }
+
+          /** The value of the custom field. This may be up to 30 characters. */
+          public Builder setValue(String value) {
+            this.value = value;
+            return this;
+          }
+
+          /** The value of the custom field. This may be up to 30 characters. */
+          public Builder setValue(EmptyParam value) {
+            this.value = value;
+            return this;
+          }
+        }
+      }
+
+      @Getter
+      public static class RenderingOptions {
+        /**
+         * How line-item prices and amounts will be displayed with respect to tax on invoice PDFs.
+         * One of {@code exclude_tax} or {@code include_inclusive_tax}. {@code
+         * include_inclusive_tax} will include inclusive tax (and exclude exclusive tax) in invoice
+         * PDF amounts. {@code exclude_tax} will exclude all tax (inclusive and exclusive alike)
+         * from invoice PDF amounts.
+         */
+        @SerializedName("amount_tax_display")
+        ApiRequestParams.EnumParam amountTaxDisplay;
+
+        /**
+         * Map of extra parameters for custom features not available in this client library. The
+         * content in this map is not serialized under this field's {@code @SerializedName} value.
+         * Instead, each key/value pair is serialized as if the key is a root-level field
+         * (serialized) name in this param object. Effectively, this map is flattened to its parent
+         * instance.
+         */
+        @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
+        Map<String, Object> extraParams;
+
+        private RenderingOptions(
+            ApiRequestParams.EnumParam amountTaxDisplay, Map<String, Object> extraParams) {
+          this.amountTaxDisplay = amountTaxDisplay;
+          this.extraParams = extraParams;
+        }
+
+        public static Builder builder() {
+          return new Builder();
+        }
+
+        public static class Builder {
+          private ApiRequestParams.EnumParam amountTaxDisplay;
+
+          private Map<String, Object> extraParams;
+
+          /** Finalize and obtain parameter instance from this builder. */
+          public PaymentLinkUpdateParams.InvoiceCreation.InvoiceData.RenderingOptions build() {
+            return new PaymentLinkUpdateParams.InvoiceCreation.InvoiceData.RenderingOptions(
+                this.amountTaxDisplay, this.extraParams);
+          }
+
+          /**
+           * How line-item prices and amounts will be displayed with respect to tax on invoice PDFs.
+           * One of {@code exclude_tax} or {@code include_inclusive_tax}. {@code
+           * include_inclusive_tax} will include inclusive tax (and exclude exclusive tax) in
+           * invoice PDF amounts. {@code exclude_tax} will exclude all tax (inclusive and exclusive
+           * alike) from invoice PDF amounts.
+           */
+          public Builder setAmountTaxDisplay(
+              PaymentLinkUpdateParams.InvoiceCreation.InvoiceData.RenderingOptions.AmountTaxDisplay
+                  amountTaxDisplay) {
+            this.amountTaxDisplay = amountTaxDisplay;
+            return this;
+          }
+
+          /**
+           * How line-item prices and amounts will be displayed with respect to tax on invoice PDFs.
+           * One of {@code exclude_tax} or {@code include_inclusive_tax}. {@code
+           * include_inclusive_tax} will include inclusive tax (and exclude exclusive tax) in
+           * invoice PDF amounts. {@code exclude_tax} will exclude all tax (inclusive and exclusive
+           * alike) from invoice PDF amounts.
+           */
+          public Builder setAmountTaxDisplay(EmptyParam amountTaxDisplay) {
+            this.amountTaxDisplay = amountTaxDisplay;
+            return this;
+          }
+
+          /**
+           * Add a key/value pair to `extraParams` map. A map is initialized for the first
+           * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
+           * map. See {@link
+           * PaymentLinkUpdateParams.InvoiceCreation.InvoiceData.RenderingOptions#extraParams} for
+           * the field documentation.
+           */
+          public Builder putExtraParam(String key, Object value) {
+            if (this.extraParams == null) {
+              this.extraParams = new HashMap<>();
+            }
+            this.extraParams.put(key, value);
+            return this;
+          }
+
+          /**
+           * Add all map key/value pairs to `extraParams` map. A map is initialized for the first
+           * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
+           * map. See {@link
+           * PaymentLinkUpdateParams.InvoiceCreation.InvoiceData.RenderingOptions#extraParams} for
+           * the field documentation.
+           */
+          public Builder putAllExtraParam(Map<String, Object> map) {
+            if (this.extraParams == null) {
+              this.extraParams = new HashMap<>();
+            }
+            this.extraParams.putAll(map);
+            return this;
+          }
+        }
+
+        public enum AmountTaxDisplay implements ApiRequestParams.EnumParam {
+          @SerializedName("exclude_tax")
+          EXCLUDE_TAX("exclude_tax"),
+
+          @SerializedName("include_inclusive_tax")
+          INCLUDE_INCLUSIVE_TAX("include_inclusive_tax");
+
+          @Getter(onMethod_ = {@Override})
+          private final String value;
+
+          AmountTaxDisplay(String value) {
+            this.value = value;
+          }
         }
       }
     }

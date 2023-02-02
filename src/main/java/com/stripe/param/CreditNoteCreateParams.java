@@ -86,6 +86,13 @@ public class CreditNoteCreateParams extends ApiRequestParams {
   @SerializedName("refund_amount")
   Long refundAmount;
 
+  /**
+   * When shipping_cost contains the shipping_rate from the invoice, the shipping_cost is included
+   * in the credit note.
+   */
+  @SerializedName("shipping_cost")
+  ShippingCost shippingCost;
+
   private CreditNoteCreateParams(
       Long amount,
       Long creditAmount,
@@ -98,7 +105,8 @@ public class CreditNoteCreateParams extends ApiRequestParams {
       Long outOfBandAmount,
       Reason reason,
       String refund,
-      Long refundAmount) {
+      Long refundAmount,
+      ShippingCost shippingCost) {
     this.amount = amount;
     this.creditAmount = creditAmount;
     this.expand = expand;
@@ -111,6 +119,7 @@ public class CreditNoteCreateParams extends ApiRequestParams {
     this.reason = reason;
     this.refund = refund;
     this.refundAmount = refundAmount;
+    this.shippingCost = shippingCost;
   }
 
   public static Builder builder() {
@@ -142,6 +151,8 @@ public class CreditNoteCreateParams extends ApiRequestParams {
 
     private Long refundAmount;
 
+    private ShippingCost shippingCost;
+
     /** Finalize and obtain parameter instance from this builder. */
     public CreditNoteCreateParams build() {
       return new CreditNoteCreateParams(
@@ -156,7 +167,8 @@ public class CreditNoteCreateParams extends ApiRequestParams {
           this.outOfBandAmount,
           this.reason,
           this.refund,
-          this.refundAmount);
+          this.refundAmount,
+          this.shippingCost);
     }
 
     /**
@@ -323,6 +335,15 @@ public class CreditNoteCreateParams extends ApiRequestParams {
      */
     public Builder setRefundAmount(Long refundAmount) {
       this.refundAmount = refundAmount;
+      return this;
+    }
+
+    /**
+     * When shipping_cost contains the shipping_rate from the invoice, the shipping_cost is included
+     * in the credit note.
+     */
+    public Builder setShippingCost(CreditNoteCreateParams.ShippingCost shippingCost) {
+      this.shippingCost = shippingCost;
       return this;
     }
   }
@@ -596,6 +617,74 @@ public class CreditNoteCreateParams extends ApiRequestParams {
 
       Type(String value) {
         this.value = value;
+      }
+    }
+  }
+
+  @Getter
+  public static class ShippingCost {
+    /**
+     * Map of extra parameters for custom features not available in this client library. The content
+     * in this map is not serialized under this field's {@code @SerializedName} value. Instead, each
+     * key/value pair is serialized as if the key is a root-level field (serialized) name in this
+     * param object. Effectively, this map is flattened to its parent instance.
+     */
+    @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
+    Map<String, Object> extraParams;
+
+    /** The ID of the shipping rate to use for this order. */
+    @SerializedName("shipping_rate")
+    String shippingRate;
+
+    private ShippingCost(Map<String, Object> extraParams, String shippingRate) {
+      this.extraParams = extraParams;
+      this.shippingRate = shippingRate;
+    }
+
+    public static Builder builder() {
+      return new Builder();
+    }
+
+    public static class Builder {
+      private Map<String, Object> extraParams;
+
+      private String shippingRate;
+
+      /** Finalize and obtain parameter instance from this builder. */
+      public CreditNoteCreateParams.ShippingCost build() {
+        return new CreditNoteCreateParams.ShippingCost(this.extraParams, this.shippingRate);
+      }
+
+      /**
+       * Add a key/value pair to `extraParams` map. A map is initialized for the first `put/putAll`
+       * call, and subsequent calls add additional key/value pairs to the original map. See {@link
+       * CreditNoteCreateParams.ShippingCost#extraParams} for the field documentation.
+       */
+      public Builder putExtraParam(String key, Object value) {
+        if (this.extraParams == null) {
+          this.extraParams = new HashMap<>();
+        }
+        this.extraParams.put(key, value);
+        return this;
+      }
+
+      /**
+       * Add all map key/value pairs to `extraParams` map. A map is initialized for the first
+       * `put/putAll` call, and subsequent calls add additional key/value pairs to the original map.
+       * See {@link CreditNoteCreateParams.ShippingCost#extraParams} for the field documentation.
+       */
+      public Builder putAllExtraParam(Map<String, Object> map) {
+        if (this.extraParams == null) {
+          this.extraParams = new HashMap<>();
+        }
+        this.extraParams.putAll(map);
+        return this;
+      }
+
+      /** The ID of the shipping rate to use for this order. */
+      public Builder setShippingRate(String shippingRate) {
+        this.shippingRate = shippingRate;
+        return this;
       }
     }
   }
