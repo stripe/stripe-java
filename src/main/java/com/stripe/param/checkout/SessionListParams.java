@@ -52,6 +52,10 @@ public class SessionListParams extends ApiRequestParams {
   @SerializedName("payment_intent")
   String paymentIntent;
 
+  /** Only return the Checkout Sessions for the Payment Link specified. */
+  @SerializedName("payment_link")
+  String paymentLink;
+
   /**
    * A cursor for use in pagination. {@code starting_after} is an object ID that defines your place
    * in the list. For instance, if you make a list request and receive 100 objects, ending with
@@ -73,6 +77,7 @@ public class SessionListParams extends ApiRequestParams {
       Map<String, Object> extraParams,
       Long limit,
       String paymentIntent,
+      String paymentLink,
       String startingAfter,
       String subscription) {
     this.customer = customer;
@@ -82,6 +87,7 @@ public class SessionListParams extends ApiRequestParams {
     this.extraParams = extraParams;
     this.limit = limit;
     this.paymentIntent = paymentIntent;
+    this.paymentLink = paymentLink;
     this.startingAfter = startingAfter;
     this.subscription = subscription;
   }
@@ -105,6 +111,8 @@ public class SessionListParams extends ApiRequestParams {
 
     private String paymentIntent;
 
+    private String paymentLink;
+
     private String startingAfter;
 
     private String subscription;
@@ -119,6 +127,7 @@ public class SessionListParams extends ApiRequestParams {
           this.extraParams,
           this.limit,
           this.paymentIntent,
+          this.paymentLink,
           this.startingAfter,
           this.subscription);
     }
@@ -210,6 +219,12 @@ public class SessionListParams extends ApiRequestParams {
     /** Only return the Checkout Session for the PaymentIntent specified. */
     public Builder setPaymentIntent(String paymentIntent) {
       this.paymentIntent = paymentIntent;
+      return this;
+    }
+
+    /** Only return the Checkout Sessions for the Payment Link specified. */
+    public Builder setPaymentLink(String paymentLink) {
+      this.paymentLink = paymentLink;
       return this;
     }
 

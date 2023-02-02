@@ -708,6 +708,9 @@ public class SubscriptionListParams extends ApiRequestParams {
     @SerializedName("past_due")
     PAST_DUE("past_due"),
 
+    @SerializedName("paused")
+    PAUSED("paused"),
+
     @SerializedName("trialing")
     TRIALING("trialing"),
 
