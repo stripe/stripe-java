@@ -4394,10 +4394,6 @@ public class QuoteCreateParams extends ApiRequestParams {
         @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
         Map<String, Object> extraParams;
 
-        /** The ID of a quote line. */
-        @SerializedName("id")
-        String id;
-
         /**
          * The position of the previous quote line in the {@code lines} array after which this line
          * should begin. Indexes start from 0 and must be less than the index of the current line in
@@ -4406,9 +4402,8 @@ public class QuoteCreateParams extends ApiRequestParams {
         @SerializedName("index")
         Long index;
 
-        private LineEndsAt(Map<String, Object> extraParams, String id, Long index) {
+        private LineEndsAt(Map<String, Object> extraParams, Long index) {
           this.extraParams = extraParams;
-          this.id = id;
           this.index = index;
         }
 
@@ -4419,14 +4414,11 @@ public class QuoteCreateParams extends ApiRequestParams {
         public static class Builder {
           private Map<String, Object> extraParams;
 
-          private String id;
-
           private Long index;
 
           /** Finalize and obtain parameter instance from this builder. */
           public QuoteCreateParams.Line.StartsAt.LineEndsAt build() {
-            return new QuoteCreateParams.Line.StartsAt.LineEndsAt(
-                this.extraParams, this.id, this.index);
+            return new QuoteCreateParams.Line.StartsAt.LineEndsAt(this.extraParams, this.index);
           }
 
           /**
@@ -4454,12 +4446,6 @@ public class QuoteCreateParams extends ApiRequestParams {
               this.extraParams = new HashMap<>();
             }
             this.extraParams.putAll(map);
-            return this;
-          }
-
-          /** The ID of a quote line. */
-          public Builder setId(String id) {
-            this.id = id;
             return this;
           }
 

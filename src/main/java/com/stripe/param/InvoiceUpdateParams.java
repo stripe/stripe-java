@@ -2955,14 +2955,26 @@ public class InvoiceUpdateParams extends ApiRequestParams {
                       .FinancialConnections.Permission>
               permissions;
 
+          /** List of data features that you would like to retrieve upon account creation. */
+          @SerializedName("prefetch")
+          List<
+                  InvoiceUpdateParams.PaymentSettings.PaymentMethodOptions.UsBankAccount
+                      .FinancialConnections.Prefetch>
+              prefetch;
+
           private FinancialConnections(
               Map<String, Object> extraParams,
               List<
                       InvoiceUpdateParams.PaymentSettings.PaymentMethodOptions.UsBankAccount
                           .FinancialConnections.Permission>
-                  permissions) {
+                  permissions,
+              List<
+                      InvoiceUpdateParams.PaymentSettings.PaymentMethodOptions.UsBankAccount
+                          .FinancialConnections.Prefetch>
+                  prefetch) {
             this.extraParams = extraParams;
             this.permissions = permissions;
+            this.prefetch = prefetch;
           }
 
           public static Builder builder() {
@@ -2977,12 +2989,17 @@ public class InvoiceUpdateParams extends ApiRequestParams {
                         .FinancialConnections.Permission>
                 permissions;
 
+            private List<
+                    InvoiceUpdateParams.PaymentSettings.PaymentMethodOptions.UsBankAccount
+                        .FinancialConnections.Prefetch>
+                prefetch;
+
             /** Finalize and obtain parameter instance from this builder. */
             public InvoiceUpdateParams.PaymentSettings.PaymentMethodOptions.UsBankAccount
                     .FinancialConnections
                 build() {
               return new InvoiceUpdateParams.PaymentSettings.PaymentMethodOptions.UsBankAccount
-                  .FinancialConnections(this.extraParams, this.permissions);
+                  .FinancialConnections(this.extraParams, this.permissions, this.prefetch);
             }
 
             /**
@@ -3051,6 +3068,41 @@ public class InvoiceUpdateParams extends ApiRequestParams {
               this.permissions.addAll(elements);
               return this;
             }
+
+            /**
+             * Add an element to `prefetch` list. A list is initialized for the first `add/addAll`
+             * call, and subsequent calls adds additional elements to the original list. See {@link
+             * InvoiceUpdateParams.PaymentSettings.PaymentMethodOptions.UsBankAccount.FinancialConnections#prefetch}
+             * for the field documentation.
+             */
+            public Builder addPrefetch(
+                InvoiceUpdateParams.PaymentSettings.PaymentMethodOptions.UsBankAccount
+                        .FinancialConnections.Prefetch
+                    element) {
+              if (this.prefetch == null) {
+                this.prefetch = new ArrayList<>();
+              }
+              this.prefetch.add(element);
+              return this;
+            }
+
+            /**
+             * Add all elements to `prefetch` list. A list is initialized for the first `add/addAll`
+             * call, and subsequent calls adds additional elements to the original list. See {@link
+             * InvoiceUpdateParams.PaymentSettings.PaymentMethodOptions.UsBankAccount.FinancialConnections#prefetch}
+             * for the field documentation.
+             */
+            public Builder addAllPrefetch(
+                List<
+                        InvoiceUpdateParams.PaymentSettings.PaymentMethodOptions.UsBankAccount
+                            .FinancialConnections.Prefetch>
+                    elements) {
+              if (this.prefetch == null) {
+                this.prefetch = new ArrayList<>();
+              }
+              this.prefetch.addAll(elements);
+              return this;
+            }
           }
 
           public enum Permission implements ApiRequestParams.EnumParam {
@@ -3070,6 +3122,27 @@ public class InvoiceUpdateParams extends ApiRequestParams {
             private final String value;
 
             Permission(String value) {
+              this.value = value;
+            }
+          }
+
+          public enum Prefetch implements ApiRequestParams.EnumParam {
+            @SerializedName("balances")
+            BALANCES("balances"),
+
+            @SerializedName("inferred_balances")
+            INFERRED_BALANCES("inferred_balances"),
+
+            @SerializedName("ownership")
+            OWNERSHIP("ownership"),
+
+            @SerializedName("transactions")
+            TRANSACTIONS("transactions");
+
+            @Getter(onMethod_ = {@Override})
+            private final String value;
+
+            Prefetch(String value) {
               this.value = value;
             }
           }

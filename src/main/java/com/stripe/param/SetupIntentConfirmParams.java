@@ -5942,6 +5942,13 @@ public class SetupIntentConfirmParams extends ApiRequestParams {
                     .Permission>
             permissions;
 
+        /** List of data features that you would like to retrieve upon account creation. */
+        @SerializedName("prefetch")
+        List<
+                SetupIntentConfirmParams.PaymentMethodOptions.UsBankAccount.FinancialConnections
+                    .Prefetch>
+            prefetch;
+
         /**
          * For webview integrations only. Upon completing OAuth login in the native browser, the
          * user will be redirected to this URL to return to your app.
@@ -5955,9 +5962,14 @@ public class SetupIntentConfirmParams extends ApiRequestParams {
                     SetupIntentConfirmParams.PaymentMethodOptions.UsBankAccount.FinancialConnections
                         .Permission>
                 permissions,
+            List<
+                    SetupIntentConfirmParams.PaymentMethodOptions.UsBankAccount.FinancialConnections
+                        .Prefetch>
+                prefetch,
             String returnUrl) {
           this.extraParams = extraParams;
           this.permissions = permissions;
+          this.prefetch = prefetch;
           this.returnUrl = returnUrl;
         }
 
@@ -5973,13 +5985,19 @@ public class SetupIntentConfirmParams extends ApiRequestParams {
                       .Permission>
               permissions;
 
+          private List<
+                  SetupIntentConfirmParams.PaymentMethodOptions.UsBankAccount.FinancialConnections
+                      .Prefetch>
+              prefetch;
+
           private String returnUrl;
 
           /** Finalize and obtain parameter instance from this builder. */
           public SetupIntentConfirmParams.PaymentMethodOptions.UsBankAccount.FinancialConnections
               build() {
             return new SetupIntentConfirmParams.PaymentMethodOptions.UsBankAccount
-                .FinancialConnections(this.extraParams, this.permissions, this.returnUrl);
+                .FinancialConnections(
+                this.extraParams, this.permissions, this.prefetch, this.returnUrl);
           }
 
           /**
@@ -6049,6 +6067,41 @@ public class SetupIntentConfirmParams extends ApiRequestParams {
           }
 
           /**
+           * Add an element to `prefetch` list. A list is initialized for the first `add/addAll`
+           * call, and subsequent calls adds additional elements to the original list. See {@link
+           * SetupIntentConfirmParams.PaymentMethodOptions.UsBankAccount.FinancialConnections#prefetch}
+           * for the field documentation.
+           */
+          public Builder addPrefetch(
+              SetupIntentConfirmParams.PaymentMethodOptions.UsBankAccount.FinancialConnections
+                      .Prefetch
+                  element) {
+            if (this.prefetch == null) {
+              this.prefetch = new ArrayList<>();
+            }
+            this.prefetch.add(element);
+            return this;
+          }
+
+          /**
+           * Add all elements to `prefetch` list. A list is initialized for the first `add/addAll`
+           * call, and subsequent calls adds additional elements to the original list. See {@link
+           * SetupIntentConfirmParams.PaymentMethodOptions.UsBankAccount.FinancialConnections#prefetch}
+           * for the field documentation.
+           */
+          public Builder addAllPrefetch(
+              List<
+                      SetupIntentConfirmParams.PaymentMethodOptions.UsBankAccount
+                          .FinancialConnections.Prefetch>
+                  elements) {
+            if (this.prefetch == null) {
+              this.prefetch = new ArrayList<>();
+            }
+            this.prefetch.addAll(elements);
+            return this;
+          }
+
+          /**
            * For webview integrations only. Upon completing OAuth login in the native browser, the
            * user will be redirected to this URL to return to your app.
            */
@@ -6075,6 +6128,27 @@ public class SetupIntentConfirmParams extends ApiRequestParams {
           private final String value;
 
           Permission(String value) {
+            this.value = value;
+          }
+        }
+
+        public enum Prefetch implements ApiRequestParams.EnumParam {
+          @SerializedName("balances")
+          BALANCES("balances"),
+
+          @SerializedName("inferred_balances")
+          INFERRED_BALANCES("inferred_balances"),
+
+          @SerializedName("ownership")
+          OWNERSHIP("ownership"),
+
+          @SerializedName("transactions")
+          TRANSACTIONS("transactions");
+
+          @Getter(onMethod_ = {@Override})
+          private final String value;
+
+          Prefetch(String value) {
             this.value = value;
           }
         }

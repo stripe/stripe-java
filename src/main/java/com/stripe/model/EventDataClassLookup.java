@@ -102,6 +102,9 @@ final class EventDataClassLookup {
     classLookup.put(
         "financial_connections.account", com.stripe.model.financialconnections.Account.class);
     classLookup.put(
+        "financial_connections.account_inferred_balance",
+        com.stripe.model.financialconnections.InferredBalance.class);
+    classLookup.put(
         "financial_connections.account_owner",
         com.stripe.model.financialconnections.AccountOwner.class);
     classLookup.put(
@@ -109,6 +112,9 @@ final class EventDataClassLookup {
         com.stripe.model.financialconnections.AccountOwnership.class);
     classLookup.put(
         "financial_connections.session", com.stripe.model.financialconnections.Session.class);
+    classLookup.put(
+        "financial_connections.transaction",
+        com.stripe.model.financialconnections.Transaction.class);
 
     classLookup.put("gift_cards.card", com.stripe.model.giftcards.Card.class);
     classLookup.put("gift_cards.transaction", com.stripe.model.giftcards.Transaction.class);

@@ -65,6 +65,10 @@ public class Account extends ApiResource implements HasId {
   @SerializedName("id")
   String id;
 
+  /** The state of the most recent attempt to refresh the account's inferred balance history. */
+  @SerializedName("inferred_balances_refresh")
+  InferredBalancesRefresh inferredBalancesRefresh;
+
   /** The name of the institution that holds this account. */
   @SerializedName("institution_name")
   String institutionName;
@@ -124,6 +128,10 @@ public class Account extends ApiResource implements HasId {
   @SerializedName("subcategory")
   String subcategory;
 
+  /** The list of data refresh subscriptions requested on this account. */
+  @SerializedName("subscriptions")
+  List<String> subscriptions;
+
   /**
    * The <a
    * href="https://stripe.com/docs/api/payment_methods/object#payment_method_object-type">PaymentMethod
@@ -131,6 +139,10 @@ public class Account extends ApiResource implements HasId {
    */
   @SerializedName("supported_payment_method_types")
   List<String> supportedPaymentMethodTypes;
+
+  /** The state of the most recent attempt to refresh the account transactions. */
+  @SerializedName("transaction_refresh")
+  TransactionRefresh transactionRefresh;
 
   /** Get ID of expandable {@code ownership} object. */
   public String getOwnership() {
@@ -551,7 +563,52 @@ public class Account extends ApiResource implements HasId {
   @Getter
   @Setter
   @EqualsAndHashCode(callSuper = false)
+  public static class InferredBalancesRefresh extends StripeObject {
+    /**
+     * The time at which the last refresh attempt was initiated. Measured in seconds since the Unix
+     * epoch.
+     */
+    @SerializedName("last_attempted_at")
+    Long lastAttemptedAt;
+
+    /**
+     * The status of the last refresh attempt.
+     *
+     * <p>One of {@code failed}, {@code pending}, or {@code succeeded}.
+     */
+    @SerializedName("status")
+    String status;
+  }
+
+  @Getter
+  @Setter
+  @EqualsAndHashCode(callSuper = false)
   public static class OwnershipRefresh extends StripeObject {
+    /**
+     * The time at which the last refresh attempt was initiated. Measured in seconds since the Unix
+     * epoch.
+     */
+    @SerializedName("last_attempted_at")
+    Long lastAttemptedAt;
+
+    /**
+     * The status of the last refresh attempt.
+     *
+     * <p>One of {@code failed}, {@code pending}, or {@code succeeded}.
+     */
+    @SerializedName("status")
+    String status;
+  }
+
+  @Getter
+  @Setter
+  @EqualsAndHashCode(callSuper = false)
+  public static class TransactionRefresh extends StripeObject implements HasId {
+    /** Unique identifier for the object. */
+    @Getter(onMethod_ = {@Override})
+    @SerializedName("id")
+    String id;
+
     /**
      * The time at which the last refresh attempt was initiated. Measured in seconds since the Unix
      * epoch.
