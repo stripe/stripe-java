@@ -920,6 +920,23 @@ class GeneratedExamples extends BaseStripeTest {
   }
 
   @Test
+  public void testSubscriptionResume() throws StripeException {
+    Subscription resource = Subscription.retrieve("sub_xxxxxxxxxxxxx");
+    SubscriptionResumeParams params =
+        SubscriptionResumeParams.builder()
+            .setProrationDate(1675400000L)
+            .setProrationBehavior(SubscriptionResumeParams.ProrationBehavior.ALWAYS_INVOICE)
+            .build();
+
+    Subscription subscription = resource.resume(params);
+    assertNotNull(subscription);
+    verifyRequest(
+        ApiResource.RequestMethod.POST,
+        "/v1/subscriptions/sub_xxxxxxxxxxxxx/resume",
+        params.toMap());
+  }
+
+  @Test
   public void testAccountPersons() throws StripeException {
     Account resource = Account.retrieve("acct_xxxxxxxxxxxxx");
     AccountPersonsParams params = AccountPersonsParams.builder().setLimit(3L).build();
