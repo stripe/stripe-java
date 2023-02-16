@@ -1,5 +1,14 @@
 # Changelog
 
+## 22.9.0 - 2023-02-16
+* [#1514](https://github.com/stripe/stripe-java/pull/1514) API Updates
+  * Add support for `refund_payment` method on resource `Terminal.Reader`
+  * Add support for new value `name` on enums `BillingPortalConfigurationCreateParams.features.customer_update.allowed_updates[]` and `BillingPortalConfigurationUpdateParams.features.customer_update.allowed_updates[]`
+  * Add support for `custom_fields` on `Checkout.Session`, `CheckoutSessionCreateParams`, `PaymentLinkCreateParams`, `PaymentLinkUpdateParams`, and `PaymentLink`
+  * Add support for `interac_present` on `TerminalReaderPresentPaymentMethodParams`
+  * Change type of `TerminalReaderPresentPaymentMethodParams.type` from `literal('card_present')` to `enum('card_present'|'interac_present')`
+  * Add support for `refund_payment` on `Terminal.Reader.action`
+
 ## 22.8.0 - 2023-02-02
 * [#1512](https://github.com/stripe/stripe-java/pull/1512) API Updates
   * Add support for `resume` method on resource `Subscription`
