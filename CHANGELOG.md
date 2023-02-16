@@ -1,5 +1,8 @@
 # Changelog
 
+## 22.9.0-beta.2 - 2023-02-15
+* [#1515](https://github.com/stripe/stripe-java/pull/1515) Fix inferred balance beta
+
 ## 22.9.0-beta.1 - 2023-02-02
 * [#1513](https://github.com/stripe/stripe-java/pull/1513) API Updates for beta branch
   * Updated stable APIs to the latest version
