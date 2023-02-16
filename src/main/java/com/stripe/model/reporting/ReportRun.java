@@ -211,11 +211,19 @@ public class ReportRun extends ApiResource implements HasId {
     @SerializedName("currency")
     String currency;
 
-    /** Ending timestamp of data to be included in the report run (exclusive). */
+    /**
+     * Ending timestamp of data to be included in the report run. Can be any UTC timestamp between 1
+     * second after the user specified {@code interval_start} and 1 second before this report's last
+     * {@code data_available_end} value.
+     */
     @SerializedName("interval_end")
     Long intervalEnd;
 
-    /** Starting timestamp of data to be included in the report run. */
+    /**
+     * Starting timestamp of data to be included in the report run. Can be any UTC timestamp between
+     * 1 second after this report's {@code data_available_start} and 1 second before the user
+     * specified {@code interval_end} value.
+     */
     @SerializedName("interval_start")
     Long intervalStart;
 

@@ -72,7 +72,9 @@ public class Refund extends ApiResource implements MetadataStore<Refund>, Balanc
 
   /**
    * If the refund failed, the reason for refund failure if known. Possible values are {@code
-   * lost_or_stolen_card}, {@code expired_or_canceled_card}, or {@code unknown}.
+   * lost_or_stolen_card}, {@code expired_or_canceled_card}, {@code
+   * charge_for_pending_refund_disputed}, {@code insufficient_funds}, {@code declined}, {@code
+   * merchant_request} or {@code unknown}.
    */
   @SerializedName("failure_reason")
   String failureReason;

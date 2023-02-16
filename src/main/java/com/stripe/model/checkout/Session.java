@@ -45,8 +45,7 @@ import lombok.Setter;
  * href="https://stripe.com/docs/api/payment_intents">PaymentIntent</a> or an active <a
  * href="https://stripe.com/docs/api/subscriptions">Subscription</a>.
  *
- * <p>You can create a Checkout Session on your server and pass its ID to the client to begin
- * Checkout.
+ * <p>You can create a Checkout Session on your server and redirect to its URL to begin Checkout.
  *
  * <p>Related guide: <a href="https://stripe.com/docs/checkout/quickstart">Checkout Quickstart</a>.
  */
@@ -117,6 +116,13 @@ public class Session extends ApiResource implements HasId {
   @SerializedName("currency")
   String currency;
 
+  /**
+   * Collect additional information from your customer using custom fields. Up to 2 fields are
+   * supported.
+   */
+  @SerializedName("custom_fields")
+  List<Session.CustomField> customFields;
+
   @SerializedName("custom_text")
   CustomText customText;
 
@@ -158,7 +164,7 @@ public class Session extends ApiResource implements HasId {
   @SerializedName("expires_at")
   Long expiresAt;
 
-  /** Unique identifier for the object. Used to pass to {@code redirectToCheckout} in Stripe.js. */
+  /** Unique identifier for the object. */
   @Getter(onMethod_ = {@Override})
   @SerializedName("id")
   String id;
@@ -764,6 +770,113 @@ public class Session extends ApiResource implements HasId {
      */
     @SerializedName("terms_of_service")
     String termsOfService;
+  }
+
+  @Getter
+  @Setter
+  @EqualsAndHashCode(callSuper = false)
+  public static class CustomField extends StripeObject {
+    /** Configuration for {@code type=dropdown} fields. */
+    @SerializedName("dropdown")
+    Dropdown dropdown;
+
+    /**
+     * String of your choice that your integration can use to reconcile this field. Must be unique
+     * to this field, alphanumeric, and up to 200 characters.
+     */
+    @SerializedName("key")
+    String key;
+
+    @SerializedName("label")
+    Label label;
+
+    /** Configuration for {@code type=numeric} fields. */
+    @SerializedName("numeric")
+    Numeric numeric;
+
+    /**
+     * Whether the customer is required to complete the field before completing the Checkout
+     * Session. Defaults to {@code false}.
+     */
+    @SerializedName("optional")
+    Boolean optional;
+
+    /** Configuration for {@code type=text} fields. */
+    @SerializedName("text")
+    Text text;
+
+    /**
+     * The type of the field.
+     *
+     * <p>One of {@code dropdown}, {@code numeric}, or {@code text}.
+     */
+    @SerializedName("type")
+    String type;
+
+    @Getter
+    @Setter
+    @EqualsAndHashCode(callSuper = false)
+    public static class Dropdown extends StripeObject {
+      /** The options available for the customer to select. Up to 200 options allowed. */
+      @SerializedName("options")
+      List<Session.CustomField.Dropdown.Option> options;
+
+      /** The option selected by the customer. This will be the {@code value} for the option. */
+      @SerializedName("value")
+      String value;
+
+      @Getter
+      @Setter
+      @EqualsAndHashCode(callSuper = false)
+      public static class Option extends StripeObject {
+        /** The label for the option, displayed to the customer. Up to 100 characters. */
+        @SerializedName("label")
+        String label;
+
+        /**
+         * The value for this option, not displayed to the customer, used by your integration to
+         * reconcile the option selected by the customer. Must be unique to this option,
+         * alphanumeric, and up to 100 characters.
+         */
+        @SerializedName("value")
+        String value;
+      }
+    }
+
+    @Getter
+    @Setter
+    @EqualsAndHashCode(callSuper = false)
+    public static class Label extends StripeObject {
+      /** Custom text for the label, displayed to the customer. Up to 50 characters. */
+      @SerializedName("custom")
+      String custom;
+
+      /**
+       * The type of the label.
+       *
+       * <p>Equal to {@code custom}.
+       */
+      @SerializedName("type")
+      String type;
+    }
+
+    @Getter
+    @Setter
+    @EqualsAndHashCode(callSuper = false)
+    public static class Numeric extends StripeObject {
+      /** The value entered by the customer, containing only digits. */
+      @SerializedName("value")
+      String value;
+    }
+
+    @Getter
+    @Setter
+    @EqualsAndHashCode(callSuper = false)
+    public static class Text extends StripeObject {
+      /** The value entered by the customer. */
+      @SerializedName("value")
+      String value;
+    }
   }
 
   @Getter
