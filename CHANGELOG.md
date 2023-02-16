@@ -1,5 +1,14 @@
 # Changelog
 
+## 22.10.0-beta.1 - 2023-02-16
+* [#1516](https://github.com/stripe/stripe-java/pull/1516) API Updates for beta branch
+  * Updated stable APIs to the latest version
+  * Add support for `currency_conversion` on `Checkout.Session`
+  * Add support for `limits` on `FinancialConnections.Session` and `FinancialConnectionsSessionCreateParams`
+  * Remove support for `enabled` on `FinancialConnectionsSessionCreateParams.manual_entry`
+  * Remove support for `reference` on `Tax.Calculation` and `TaxCalculationCreateParams`
+  * Add support for `reference` on `TaxTransactionCreateParams`
+
 ## 22.9.0-beta.2 - 2023-02-15
 * [#1515](https://github.com/stripe/stripe-java/pull/1515) Fix inferred balance beta
 
