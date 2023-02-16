@@ -920,23 +920,6 @@ class GeneratedExamples extends BaseStripeTest {
   }
 
   @Test
-  public void testSubscriptionResume() throws StripeException {
-    Subscription resource = Subscription.retrieve("sub_xxxxxxxxxxxxx");
-    SubscriptionResumeParams params =
-        SubscriptionResumeParams.builder()
-            .setProrationDate(1675400000L)
-            .setProrationBehavior(SubscriptionResumeParams.ProrationBehavior.ALWAYS_INVOICE)
-            .build();
-
-    Subscription subscription = resource.resume(params);
-    assertNotNull(subscription);
-    verifyRequest(
-        ApiResource.RequestMethod.POST,
-        "/v1/subscriptions/sub_xxxxxxxxxxxxx/resume",
-        params.toMap());
-  }
-
-  @Test
   public void testAccountPersons() throws StripeException {
     Account resource = Account.retrieve("acct_xxxxxxxxxxxxx");
     AccountPersonsParams params = AccountPersonsParams.builder().setLimit(3L).build();
@@ -1064,6 +1047,22 @@ class GeneratedExamples extends BaseStripeTest {
         ApiResource.RequestMethod.POST,
         "/v1/application_fees/fee_xxxxxxxxxxxxx/refunds/fr_xxxxxxxxxxxxx",
         params.toMap());
+  }
+
+  @Test
+  public void testSecretList2() throws StripeException {
+    com.stripe.param.apps.SecretListParams params =
+        com.stripe.param.apps.SecretListParams.builder()
+            .setScope(
+                com.stripe.param.apps.SecretListParams.Scope.builder()
+                    .setType(com.stripe.param.apps.SecretListParams.Scope.Type.ACCOUNT)
+                    .build())
+            .setLimit(2L)
+            .build();
+
+    com.stripe.model.apps.SecretCollection secrets = com.stripe.model.apps.Secret.list(params);
+    assertNotNull(secrets);
+    verifyRequest(ApiResource.RequestMethod.GET, "/v1/apps/secrets", params.toMap());
   }
 
   @Test
@@ -1209,7 +1208,8 @@ class GeneratedExamples extends BaseStripeTest {
             .setAmount(2000L)
             .setCurrency("usd")
             .setSource("tok_xxxx")
-            .setDescription("My First Test Charge (created for API docs)")
+            .setDescription(
+                "My First Test Charge (created for API docs at https://www.stripe.com/docs/api)")
             .build();
 
     Charge charge = Charge.create(params);
@@ -1272,7 +1272,6 @@ class GeneratedExamples extends BaseStripeTest {
     com.stripe.param.checkout.SessionCreateParams params =
         com.stripe.param.checkout.SessionCreateParams.builder()
             .setSuccessUrl("https://example.com/success")
-            .setCancelUrl("https://example.com/cancel")
             .addLineItem(
                 com.stripe.param.checkout.SessionCreateParams.LineItem.builder()
                     .setPrice("price_xxxxxxxxxxxxx")
@@ -1465,7 +1464,8 @@ class GeneratedExamples extends BaseStripeTest {
   public void testCustomerCreate() throws StripeException {
     CustomerCreateParams params =
         CustomerCreateParams.builder()
-            .setDescription("My First Test Customer (created for API docs)")
+            .setDescription(
+                "My First Test Customer (created for API docs at https://www.stripe.com/docs/api)")
             .build();
 
     Customer customer = Customer.create(params);
@@ -1718,6 +1718,21 @@ class GeneratedExamples extends BaseStripeTest {
     assertNotNull(account);
     verifyRequest(
         ApiResource.RequestMethod.GET, "/v1/financial_connections/accounts/fca_xxxxxxxxxxxxx");
+  }
+
+  @Test
+  public void testAccountDisconnect2() throws StripeException {
+    com.stripe.model.financialconnections.Account resource =
+        com.stripe.model.financialconnections.Account.retrieve("fca_xxxxxxxxxxxxx");
+    com.stripe.param.financialconnections.AccountDisconnectParams params =
+        com.stripe.param.financialconnections.AccountDisconnectParams.builder().build();
+
+    com.stripe.model.financialconnections.Account account = resource.disconnect(params);
+    assertNotNull(account);
+    verifyRequest(
+        ApiResource.RequestMethod.POST,
+        "/v1/financial_connections/accounts/fca_xxxxxxxxxxxxx/disconnect",
+        params.toMap());
   }
 
   @Test
@@ -2328,7 +2343,10 @@ class GeneratedExamples extends BaseStripeTest {
         PaymentIntentCreateParams.builder()
             .setAmount(2000L)
             .setCurrency("usd")
-            .addPaymentMethodType("card")
+            .setAutomaticPaymentMethods(
+                PaymentIntentCreateParams.AutomaticPaymentMethods.builder()
+                    .setEnabled(true)
+                    .build())
             .build();
 
     PaymentIntent paymentIntent = PaymentIntent.create(params);
@@ -2420,6 +2438,20 @@ class GeneratedExamples extends BaseStripeTest {
     verifyRequest(
         ApiResource.RequestMethod.POST,
         "/v1/payment_intents/pi_xxxxxxxxxxxxx/increment_authorization",
+        params.toMap());
+  }
+
+  @Test
+  public void testPaymentIntentVerifyMicrodeposits2() throws StripeException {
+    PaymentIntent resource = PaymentIntent.retrieve("pi_xxxxxxxxxxxxx");
+    PaymentIntentVerifyMicrodepositsParams params =
+        PaymentIntentVerifyMicrodepositsParams.builder().addAmount(32L).addAmount(45L).build();
+
+    PaymentIntent paymentIntent = resource.verifyMicrodeposits(params);
+    assertNotNull(paymentIntent);
+    verifyRequest(
+        ApiResource.RequestMethod.POST,
+        "/v1/payment_intents/pi_xxxxxxxxxxxxx/verify_microdeposits",
         params.toMap());
   }
 
@@ -3195,6 +3227,20 @@ class GeneratedExamples extends BaseStripeTest {
   }
 
   @Test
+  public void testSetupIntentVerifyMicrodeposits2() throws StripeException {
+    SetupIntent resource = SetupIntent.retrieve("seti_xxxxxxxxxxxxx");
+    SetupIntentVerifyMicrodepositsParams params =
+        SetupIntentVerifyMicrodepositsParams.builder().addAmount(32L).addAmount(45L).build();
+
+    SetupIntent setupIntent = resource.verifyMicrodeposits(params);
+    assertNotNull(setupIntent);
+    verifyRequest(
+        ApiResource.RequestMethod.POST,
+        "/v1/setup_intents/seti_xxxxxxxxxxxxx/verify_microdeposits",
+        params.toMap());
+  }
+
+  @Test
   public void testShippingRateList2() throws StripeException {
     ShippingRateListParams params = ShippingRateListParams.builder().setLimit(3L).build();
 
@@ -3370,7 +3416,7 @@ class GeneratedExamples extends BaseStripeTest {
     SubscriptionScheduleCreateParams params =
         SubscriptionScheduleCreateParams.builder()
             .setCustomer("cus_xxxxxxxxxxxxx")
-            .setStartDate(1652909005L)
+            .setStartDate(1676070661L)
             .setEndBehavior(SubscriptionScheduleCreateParams.EndBehavior.RELEASE)
             .addPhase(
                 SubscriptionScheduleCreateParams.Phase.builder()
@@ -3660,8 +3706,9 @@ class GeneratedExamples extends BaseStripeTest {
                 com.stripe.param.terminal.LocationCreateParams.Address.builder()
                     .setLine1("1234 Main Street")
                     .setCity("San Francisco")
-                    .setCountry("US")
                     .setPostalCode("94111")
+                    .setState("CA")
+                    .setCountry("US")
                     .build())
             .build();
 
@@ -3792,6 +3839,24 @@ class GeneratedExamples extends BaseStripeTest {
   }
 
   @Test
+  public void testReaderProcessSetupIntent() throws StripeException {
+    com.stripe.model.terminal.Reader resource =
+        com.stripe.model.terminal.Reader.retrieve("tmr_xxxxxxxxxxxxx");
+    com.stripe.param.terminal.ReaderProcessSetupIntentParams params =
+        com.stripe.param.terminal.ReaderProcessSetupIntentParams.builder()
+            .setSetupIntent("seti_xxxxxxxxxxxxx")
+            .setCustomerConsentCollected(true)
+            .build();
+
+    com.stripe.model.terminal.Reader reader = resource.processSetupIntent(params);
+    assertNotNull(reader);
+    verifyRequest(
+        ApiResource.RequestMethod.POST,
+        "/v1/terminal/readers/tmr_xxxxxxxxxxxxx/process_setup_intent",
+        params.toMap());
+  }
+
+  @Test
   public void testTestClockList2() throws StripeException {
     com.stripe.param.testhelpers.TestClockListParams params =
         com.stripe.param.testhelpers.TestClockListParams.builder().setLimit(3L).build();
@@ -3841,7 +3906,7 @@ class GeneratedExamples extends BaseStripeTest {
         com.stripe.model.testhelpers.TestClock.retrieve("clock_xxxxxxxxxxxxx");
     com.stripe.param.testhelpers.TestClockAdvanceParams params =
         com.stripe.param.testhelpers.TestClockAdvanceParams.builder()
-            .setFrozenTime(1652390605L)
+            .setFrozenTime(1675552261L)
             .build();
 
     com.stripe.model.testhelpers.TestClock testClock = resource.advance(params);
@@ -4228,27 +4293,6 @@ class GeneratedExamples extends BaseStripeTest {
   }
 
   @Test
-  public void testFinancialAccountUpdateFeatures() throws StripeException {
-    com.stripe.model.treasury.FinancialAccount resource =
-        com.stripe.model.treasury.FinancialAccount.retrieve("fa_xxxxxxxxxxxxx");
-    com.stripe.param.treasury.FinancialAccountUpdateFeaturesParams params =
-        com.stripe.param.treasury.FinancialAccountUpdateFeaturesParams.builder()
-            .setCardIssuing(
-                com.stripe.param.treasury.FinancialAccountUpdateFeaturesParams.CardIssuing.builder()
-                    .setRequested(false)
-                    .build())
-            .build();
-
-    com.stripe.model.treasury.FinancialAccountFeatures financialAccountFeatures =
-        resource.updateFeatures(params);
-    assertNotNull(financialAccountFeatures);
-    verifyRequest(
-        ApiResource.RequestMethod.POST,
-        "/v1/treasury/financial_accounts/fa_xxxxxxxxxxxxx/features",
-        params.toMap());
-  }
-
-  @Test
   public void testInboundTransferList() throws StripeException {
     com.stripe.param.treasury.InboundTransferListParams params =
         com.stripe.param.treasury.InboundTransferListParams.builder()
@@ -4324,7 +4368,7 @@ class GeneratedExamples extends BaseStripeTest {
             .setFinancialAccount("fa_xxxxxxxxxxxxx")
             .setAmount(10000L)
             .setCurrency("usd")
-            .setCustomer("cu_xxxxxxxxxxxxx")
+            .setCustomer("cus_xxxxxxxxxxxxx")
             .setDestinationPaymentMethod("pm_xxxxxxxxxxxxx")
             .setDescription("OutboundPayment to a 3rd party")
             .build();
@@ -4338,16 +4382,16 @@ class GeneratedExamples extends BaseStripeTest {
   @Test
   public void testOutboundPaymentRetrieve() throws StripeException {
     com.stripe.model.treasury.OutboundPayment outboundPayment =
-        com.stripe.model.treasury.OutboundPayment.retrieve("obp_xxxxxxxxxxxxx");
+        com.stripe.model.treasury.OutboundPayment.retrieve("bot_xxxxxxxxxxxxx");
     assertNotNull(outboundPayment);
     verifyRequest(
-        ApiResource.RequestMethod.GET, "/v1/treasury/outbound_payments/obp_xxxxxxxxxxxxx");
+        ApiResource.RequestMethod.GET, "/v1/treasury/outbound_payments/bot_xxxxxxxxxxxxx");
   }
 
   @Test
   public void testOutboundPaymentCancel() throws StripeException {
     com.stripe.model.treasury.OutboundPayment resource =
-        com.stripe.model.treasury.OutboundPayment.retrieve("obp_xxxxxxxxxxxxx");
+        com.stripe.model.treasury.OutboundPayment.retrieve("bot_xxxxxxxxxxxxx");
     com.stripe.param.treasury.OutboundPaymentCancelParams params =
         com.stripe.param.treasury.OutboundPaymentCancelParams.builder().build();
 
@@ -4355,7 +4399,7 @@ class GeneratedExamples extends BaseStripeTest {
     assertNotNull(outboundPayment);
     verifyRequest(
         ApiResource.RequestMethod.POST,
-        "/v1/treasury/outbound_payments/obp_xxxxxxxxxxxxx/cancel",
+        "/v1/treasury/outbound_payments/bot_xxxxxxxxxxxxx/cancel",
         params.toMap());
   }
 

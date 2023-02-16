@@ -627,6 +627,9 @@ public class ConfigurationCreateParams extends ApiRequestParams {
         @SerializedName("email")
         EMAIL("email"),
 
+        @SerializedName("name")
+        NAME("name"),
+
         @SerializedName("phone")
         PHONE("phone"),
 

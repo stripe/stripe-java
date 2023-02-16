@@ -37,7 +37,11 @@ public class SessionCreateParams extends ApiRequestParams {
   @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
   Map<String, Object> extraParams;
 
-  /** Information about a specific flow for the customer to go through. */
+  /**
+   * Information about a specific flow for the customer to go through. See the <a
+   * href="https://stripe.com/docs/customer-management/portal-deep-links">docs</a> to learn more
+   * about using customer portal deep links and flows.
+   */
   @SerializedName("flow_data")
   FlowData flowData;
 
@@ -189,7 +193,11 @@ public class SessionCreateParams extends ApiRequestParams {
       return this;
     }
 
-    /** Information about a specific flow for the customer to go through. */
+    /**
+     * Information about a specific flow for the customer to go through. See the <a
+     * href="https://stripe.com/docs/customer-management/portal-deep-links">docs</a> to learn more
+     * about using customer portal deep links and flows.
+     */
     public Builder setFlowData(SessionCreateParams.FlowData flowData) {
       this.flowData = flowData;
       return this;

@@ -58,6 +58,13 @@ public class PaymentLinkCreateParams extends ApiRequestParams {
   @SerializedName("currency")
   String currency;
 
+  /**
+   * Collect additional information from your customer using custom fields. Up to 2 fields are
+   * supported.
+   */
+  @SerializedName("custom_fields")
+  List<PaymentLinkCreateParams.CustomField> customFields;
+
   /** Display additional text for your customers using custom text. */
   @SerializedName("custom_text")
   CustomText customText;
@@ -197,6 +204,7 @@ public class PaymentLinkCreateParams extends ApiRequestParams {
       BillingAddressCollection billingAddressCollection,
       ConsentCollection consentCollection,
       String currency,
+      List<PaymentLinkCreateParams.CustomField> customFields,
       CustomText customText,
       CustomerCreation customerCreation,
       List<String> expand,
@@ -223,6 +231,7 @@ public class PaymentLinkCreateParams extends ApiRequestParams {
     this.billingAddressCollection = billingAddressCollection;
     this.consentCollection = consentCollection;
     this.currency = currency;
+    this.customFields = customFields;
     this.customText = customText;
     this.customerCreation = customerCreation;
     this.expand = expand;
@@ -263,6 +272,8 @@ public class PaymentLinkCreateParams extends ApiRequestParams {
     private ConsentCollection consentCollection;
 
     private String currency;
+
+    private List<PaymentLinkCreateParams.CustomField> customFields;
 
     private CustomText customText;
 
@@ -311,6 +322,7 @@ public class PaymentLinkCreateParams extends ApiRequestParams {
           this.billingAddressCollection,
           this.consentCollection,
           this.currency,
+          this.customFields,
           this.customText,
           this.customerCreation,
           this.expand,
@@ -391,6 +403,32 @@ public class PaymentLinkCreateParams extends ApiRequestParams {
      */
     public Builder setCurrency(String currency) {
       this.currency = currency;
+      return this;
+    }
+
+    /**
+     * Add an element to `customFields` list. A list is initialized for the first `add/addAll` call,
+     * and subsequent calls adds additional elements to the original list. See {@link
+     * PaymentLinkCreateParams#customFields} for the field documentation.
+     */
+    public Builder addCustomField(PaymentLinkCreateParams.CustomField element) {
+      if (this.customFields == null) {
+        this.customFields = new ArrayList<>();
+      }
+      this.customFields.add(element);
+      return this;
+    }
+
+    /**
+     * Add all elements to `customFields` list. A list is initialized for the first `add/addAll`
+     * call, and subsequent calls adds additional elements to the original list. See {@link
+     * PaymentLinkCreateParams#customFields} for the field documentation.
+     */
+    public Builder addAllCustomField(List<PaymentLinkCreateParams.CustomField> elements) {
+      if (this.customFields == null) {
+        this.customFields = new ArrayList<>();
+      }
+      this.customFields.addAll(elements);
       return this;
     }
 
@@ -1130,6 +1168,445 @@ public class PaymentLinkCreateParams extends ApiRequestParams {
       private final String value;
 
       TermsOfService(String value) {
+        this.value = value;
+      }
+    }
+  }
+
+  @Getter
+  public static class CustomField {
+    /** Configuration for {@code type=dropdown} fields. */
+    @SerializedName("dropdown")
+    Dropdown dropdown;
+
+    /**
+     * Map of extra parameters for custom features not available in this client library. The content
+     * in this map is not serialized under this field's {@code @SerializedName} value. Instead, each
+     * key/value pair is serialized as if the key is a root-level field (serialized) name in this
+     * param object. Effectively, this map is flattened to its parent instance.
+     */
+    @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
+    Map<String, Object> extraParams;
+
+    /**
+     * String of your choice that your integration can use to reconcile this field. Must be unique
+     * to this field, alphanumeric, and up to 200 characters.
+     */
+    @SerializedName("key")
+    String key;
+
+    /** The label for the field, displayed to the customer. */
+    @SerializedName("label")
+    Label label;
+
+    /**
+     * Whether the customer is required to complete the field before completing the Checkout
+     * Session. Defaults to {@code false}.
+     */
+    @SerializedName("optional")
+    Boolean optional;
+
+    /** The type of the field. */
+    @SerializedName("type")
+    Type type;
+
+    private CustomField(
+        Dropdown dropdown,
+        Map<String, Object> extraParams,
+        String key,
+        Label label,
+        Boolean optional,
+        Type type) {
+      this.dropdown = dropdown;
+      this.extraParams = extraParams;
+      this.key = key;
+      this.label = label;
+      this.optional = optional;
+      this.type = type;
+    }
+
+    public static Builder builder() {
+      return new Builder();
+    }
+
+    public static class Builder {
+      private Dropdown dropdown;
+
+      private Map<String, Object> extraParams;
+
+      private String key;
+
+      private Label label;
+
+      private Boolean optional;
+
+      private Type type;
+
+      /** Finalize and obtain parameter instance from this builder. */
+      public PaymentLinkCreateParams.CustomField build() {
+        return new PaymentLinkCreateParams.CustomField(
+            this.dropdown, this.extraParams, this.key, this.label, this.optional, this.type);
+      }
+
+      /** Configuration for {@code type=dropdown} fields. */
+      public Builder setDropdown(PaymentLinkCreateParams.CustomField.Dropdown dropdown) {
+        this.dropdown = dropdown;
+        return this;
+      }
+
+      /**
+       * Add a key/value pair to `extraParams` map. A map is initialized for the first `put/putAll`
+       * call, and subsequent calls add additional key/value pairs to the original map. See {@link
+       * PaymentLinkCreateParams.CustomField#extraParams} for the field documentation.
+       */
+      public Builder putExtraParam(String key, Object value) {
+        if (this.extraParams == null) {
+          this.extraParams = new HashMap<>();
+        }
+        this.extraParams.put(key, value);
+        return this;
+      }
+
+      /**
+       * Add all map key/value pairs to `extraParams` map. A map is initialized for the first
+       * `put/putAll` call, and subsequent calls add additional key/value pairs to the original map.
+       * See {@link PaymentLinkCreateParams.CustomField#extraParams} for the field documentation.
+       */
+      public Builder putAllExtraParam(Map<String, Object> map) {
+        if (this.extraParams == null) {
+          this.extraParams = new HashMap<>();
+        }
+        this.extraParams.putAll(map);
+        return this;
+      }
+
+      /**
+       * String of your choice that your integration can use to reconcile this field. Must be unique
+       * to this field, alphanumeric, and up to 200 characters.
+       */
+      public Builder setKey(String key) {
+        this.key = key;
+        return this;
+      }
+
+      /** The label for the field, displayed to the customer. */
+      public Builder setLabel(PaymentLinkCreateParams.CustomField.Label label) {
+        this.label = label;
+        return this;
+      }
+
+      /**
+       * Whether the customer is required to complete the field before completing the Checkout
+       * Session. Defaults to {@code false}.
+       */
+      public Builder setOptional(Boolean optional) {
+        this.optional = optional;
+        return this;
+      }
+
+      /** The type of the field. */
+      public Builder setType(PaymentLinkCreateParams.CustomField.Type type) {
+        this.type = type;
+        return this;
+      }
+    }
+
+    @Getter
+    public static class Dropdown {
+      /**
+       * Map of extra parameters for custom features not available in this client library. The
+       * content in this map is not serialized under this field's {@code @SerializedName} value.
+       * Instead, each key/value pair is serialized as if the key is a root-level field (serialized)
+       * name in this param object. Effectively, this map is flattened to its parent instance.
+       */
+      @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
+      Map<String, Object> extraParams;
+
+      /** The options available for the customer to select. Up to 200 options allowed. */
+      @SerializedName("options")
+      List<PaymentLinkCreateParams.CustomField.Dropdown.Option> options;
+
+      private Dropdown(
+          Map<String, Object> extraParams,
+          List<PaymentLinkCreateParams.CustomField.Dropdown.Option> options) {
+        this.extraParams = extraParams;
+        this.options = options;
+      }
+
+      public static Builder builder() {
+        return new Builder();
+      }
+
+      public static class Builder {
+        private Map<String, Object> extraParams;
+
+        private List<PaymentLinkCreateParams.CustomField.Dropdown.Option> options;
+
+        /** Finalize and obtain parameter instance from this builder. */
+        public PaymentLinkCreateParams.CustomField.Dropdown build() {
+          return new PaymentLinkCreateParams.CustomField.Dropdown(this.extraParams, this.options);
+        }
+
+        /**
+         * Add a key/value pair to `extraParams` map. A map is initialized for the first
+         * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
+         * map. See {@link PaymentLinkCreateParams.CustomField.Dropdown#extraParams} for the field
+         * documentation.
+         */
+        public Builder putExtraParam(String key, Object value) {
+          if (this.extraParams == null) {
+            this.extraParams = new HashMap<>();
+          }
+          this.extraParams.put(key, value);
+          return this;
+        }
+
+        /**
+         * Add all map key/value pairs to `extraParams` map. A map is initialized for the first
+         * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
+         * map. See {@link PaymentLinkCreateParams.CustomField.Dropdown#extraParams} for the field
+         * documentation.
+         */
+        public Builder putAllExtraParam(Map<String, Object> map) {
+          if (this.extraParams == null) {
+            this.extraParams = new HashMap<>();
+          }
+          this.extraParams.putAll(map);
+          return this;
+        }
+
+        /**
+         * Add an element to `options` list. A list is initialized for the first `add/addAll` call,
+         * and subsequent calls adds additional elements to the original list. See {@link
+         * PaymentLinkCreateParams.CustomField.Dropdown#options} for the field documentation.
+         */
+        public Builder addOption(PaymentLinkCreateParams.CustomField.Dropdown.Option element) {
+          if (this.options == null) {
+            this.options = new ArrayList<>();
+          }
+          this.options.add(element);
+          return this;
+        }
+
+        /**
+         * Add all elements to `options` list. A list is initialized for the first `add/addAll`
+         * call, and subsequent calls adds additional elements to the original list. See {@link
+         * PaymentLinkCreateParams.CustomField.Dropdown#options} for the field documentation.
+         */
+        public Builder addAllOption(
+            List<PaymentLinkCreateParams.CustomField.Dropdown.Option> elements) {
+          if (this.options == null) {
+            this.options = new ArrayList<>();
+          }
+          this.options.addAll(elements);
+          return this;
+        }
+      }
+
+      @Getter
+      public static class Option {
+        /**
+         * Map of extra parameters for custom features not available in this client library. The
+         * content in this map is not serialized under this field's {@code @SerializedName} value.
+         * Instead, each key/value pair is serialized as if the key is a root-level field
+         * (serialized) name in this param object. Effectively, this map is flattened to its parent
+         * instance.
+         */
+        @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
+        Map<String, Object> extraParams;
+
+        /** The label for the option, displayed to the customer. Up to 100 characters. */
+        @SerializedName("label")
+        String label;
+
+        /**
+         * The value for this option, not displayed to the customer, used by your integration to
+         * reconcile the option selected by the customer. Must be unique to this option,
+         * alphanumeric, and up to 100 characters.
+         */
+        @SerializedName("value")
+        String value;
+
+        private Option(Map<String, Object> extraParams, String label, String value) {
+          this.extraParams = extraParams;
+          this.label = label;
+          this.value = value;
+        }
+
+        public static Builder builder() {
+          return new Builder();
+        }
+
+        public static class Builder {
+          private Map<String, Object> extraParams;
+
+          private String label;
+
+          private String value;
+
+          /** Finalize and obtain parameter instance from this builder. */
+          public PaymentLinkCreateParams.CustomField.Dropdown.Option build() {
+            return new PaymentLinkCreateParams.CustomField.Dropdown.Option(
+                this.extraParams, this.label, this.value);
+          }
+
+          /**
+           * Add a key/value pair to `extraParams` map. A map is initialized for the first
+           * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
+           * map. See {@link PaymentLinkCreateParams.CustomField.Dropdown.Option#extraParams} for
+           * the field documentation.
+           */
+          public Builder putExtraParam(String key, Object value) {
+            if (this.extraParams == null) {
+              this.extraParams = new HashMap<>();
+            }
+            this.extraParams.put(key, value);
+            return this;
+          }
+
+          /**
+           * Add all map key/value pairs to `extraParams` map. A map is initialized for the first
+           * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
+           * map. See {@link PaymentLinkCreateParams.CustomField.Dropdown.Option#extraParams} for
+           * the field documentation.
+           */
+          public Builder putAllExtraParam(Map<String, Object> map) {
+            if (this.extraParams == null) {
+              this.extraParams = new HashMap<>();
+            }
+            this.extraParams.putAll(map);
+            return this;
+          }
+
+          /** The label for the option, displayed to the customer. Up to 100 characters. */
+          public Builder setLabel(String label) {
+            this.label = label;
+            return this;
+          }
+
+          /**
+           * The value for this option, not displayed to the customer, used by your integration to
+           * reconcile the option selected by the customer. Must be unique to this option,
+           * alphanumeric, and up to 100 characters.
+           */
+          public Builder setValue(String value) {
+            this.value = value;
+            return this;
+          }
+        }
+      }
+    }
+
+    @Getter
+    public static class Label {
+      /** Custom text for the label, displayed to the customer. Up to 50 characters. */
+      @SerializedName("custom")
+      String custom;
+
+      /**
+       * Map of extra parameters for custom features not available in this client library. The
+       * content in this map is not serialized under this field's {@code @SerializedName} value.
+       * Instead, each key/value pair is serialized as if the key is a root-level field (serialized)
+       * name in this param object. Effectively, this map is flattened to its parent instance.
+       */
+      @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
+      Map<String, Object> extraParams;
+
+      /** The type of the label. */
+      @SerializedName("type")
+      Type type;
+
+      private Label(String custom, Map<String, Object> extraParams, Type type) {
+        this.custom = custom;
+        this.extraParams = extraParams;
+        this.type = type;
+      }
+
+      public static Builder builder() {
+        return new Builder();
+      }
+
+      public static class Builder {
+        private String custom;
+
+        private Map<String, Object> extraParams;
+
+        private Type type;
+
+        /** Finalize and obtain parameter instance from this builder. */
+        public PaymentLinkCreateParams.CustomField.Label build() {
+          return new PaymentLinkCreateParams.CustomField.Label(
+              this.custom, this.extraParams, this.type);
+        }
+
+        /** Custom text for the label, displayed to the customer. Up to 50 characters. */
+        public Builder setCustom(String custom) {
+          this.custom = custom;
+          return this;
+        }
+
+        /**
+         * Add a key/value pair to `extraParams` map. A map is initialized for the first
+         * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
+         * map. See {@link PaymentLinkCreateParams.CustomField.Label#extraParams} for the field
+         * documentation.
+         */
+        public Builder putExtraParam(String key, Object value) {
+          if (this.extraParams == null) {
+            this.extraParams = new HashMap<>();
+          }
+          this.extraParams.put(key, value);
+          return this;
+        }
+
+        /**
+         * Add all map key/value pairs to `extraParams` map. A map is initialized for the first
+         * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
+         * map. See {@link PaymentLinkCreateParams.CustomField.Label#extraParams} for the field
+         * documentation.
+         */
+        public Builder putAllExtraParam(Map<String, Object> map) {
+          if (this.extraParams == null) {
+            this.extraParams = new HashMap<>();
+          }
+          this.extraParams.putAll(map);
+          return this;
+        }
+
+        /** The type of the label. */
+        public Builder setType(PaymentLinkCreateParams.CustomField.Label.Type type) {
+          this.type = type;
+          return this;
+        }
+      }
+
+      public enum Type implements ApiRequestParams.EnumParam {
+        @SerializedName("custom")
+        CUSTOM("custom");
+
+        @Getter(onMethod_ = {@Override})
+        private final String value;
+
+        Type(String value) {
+          this.value = value;
+        }
+      }
+    }
+
+    public enum Type implements ApiRequestParams.EnumParam {
+      @SerializedName("dropdown")
+      DROPDOWN("dropdown"),
+
+      @SerializedName("numeric")
+      NUMERIC("numeric"),
+
+      @SerializedName("text")
+      TEXT("text");
+
+      @Getter(onMethod_ = {@Override})
+      private final String value;
+
+      Type(String value) {
         this.value = value;
       }
     }
