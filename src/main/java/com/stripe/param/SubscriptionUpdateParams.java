@@ -1950,7 +1950,12 @@ public class SubscriptionUpdateParams extends ApiRequestParams {
       @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
       Map<String, Object> extraParams;
 
-      /** Usage threshold that triggers the subscription to advance to a new billing period. */
+      /**
+       * Number of units that meets the billing threshold to advance the subscription to a new
+       * billing period (e.g., it takes 10 $5 units to meet a $50 <a
+       * href="https://stripe.com/docs/api/subscriptions/update#update_subscription-billing_thresholds-amount_gte">monetary
+       * threshold</a>)
+       */
       @SerializedName("usage_gte")
       Long usageGte;
 
@@ -2002,7 +2007,12 @@ public class SubscriptionUpdateParams extends ApiRequestParams {
           return this;
         }
 
-        /** Usage threshold that triggers the subscription to advance to a new billing period. */
+        /**
+         * Number of units that meets the billing threshold to advance the subscription to a new
+         * billing period (e.g., it takes 10 $5 units to meet a $50 <a
+         * href="https://stripe.com/docs/api/subscriptions/update#update_subscription-billing_thresholds-amount_gte">monetary
+         * threshold</a>)
+         */
         public Builder setUsageGte(Long usageGte) {
           this.usageGte = usageGte;
           return this;

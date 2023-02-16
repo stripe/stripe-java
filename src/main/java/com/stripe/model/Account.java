@@ -21,10 +21,15 @@ import lombok.Setter;
 
 /**
  * This is an object representing a Stripe account. You can retrieve it to see properties on the
- * account like its current e-mail address or if the account is enabled yet to make live charges.
+ * account like its current requirements or if the account is enabled to make live charges or
+ * receive payouts.
  *
- * <p>Some properties, marked below, are available only to platforms that want to <a
- * href="https://stripe.com/docs/connect/accounts">create and manage Express or Custom accounts</a>.
+ * <p>For Custom accounts, the properties below are always returned. For other accounts, some
+ * properties are returned until that account has started to go through Connect Onboarding. Once you
+ * create an <a href="https://stripe.com/docs/api/account_links">Account Link</a> for a Standard or
+ * Express account, some parameters are no longer returned. These are marked as <strong>Custom
+ * Only</strong> or <strong>Custom and Express</strong> below. Learn about the differences <a
+ * href="https://stripe.com/docs/connect/accounts">between accounts</a>.
  */
 @Getter
 @Setter
@@ -210,6 +215,11 @@ public class Account extends ApiResource implements MetadataStore<Account>, Paym
    * With <a href="https://stripe.com/docs/connect">Connect</a>, you can create Stripe accounts for
    * your users. To do this, you’ll first need to <a
    * href="https://dashboard.stripe.com/account/applications/settings">register your platform</a>.
+   *
+   * <p>If you’ve already collected information for your connected accounts, you <a
+   * href="https://stripe.com/docs/connect/best-practices#onboarding">can pre-fill that
+   * information</a> when creating the account. Connect Onboarding won’t ask for the pre-filled
+   * information during account onboarding. You can pre-fill any information on the account.
    */
   public static Account create(Map<String, Object> params) throws StripeException {
     return create(params, (RequestOptions) null);
@@ -219,6 +229,11 @@ public class Account extends ApiResource implements MetadataStore<Account>, Paym
    * With <a href="https://stripe.com/docs/connect">Connect</a>, you can create Stripe accounts for
    * your users. To do this, you’ll first need to <a
    * href="https://dashboard.stripe.com/account/applications/settings">register your platform</a>.
+   *
+   * <p>If you’ve already collected information for your connected accounts, you <a
+   * href="https://stripe.com/docs/connect/best-practices#onboarding">can pre-fill that
+   * information</a> when creating the account. Connect Onboarding won’t ask for the pre-filled
+   * information during account onboarding. You can pre-fill any information on the account.
    */
   public static Account create(Map<String, Object> params, RequestOptions options)
       throws StripeException {
@@ -230,6 +245,11 @@ public class Account extends ApiResource implements MetadataStore<Account>, Paym
    * With <a href="https://stripe.com/docs/connect">Connect</a>, you can create Stripe accounts for
    * your users. To do this, you’ll first need to <a
    * href="https://dashboard.stripe.com/account/applications/settings">register your platform</a>.
+   *
+   * <p>If you’ve already collected information for your connected accounts, you <a
+   * href="https://stripe.com/docs/connect/best-practices#onboarding">can pre-fill that
+   * information</a> when creating the account. Connect Onboarding won’t ask for the pre-filled
+   * information during account onboarding. You can pre-fill any information on the account.
    */
   public static Account create(AccountCreateParams params) throws StripeException {
     return create(params, (RequestOptions) null);
@@ -239,6 +259,11 @@ public class Account extends ApiResource implements MetadataStore<Account>, Paym
    * With <a href="https://stripe.com/docs/connect">Connect</a>, you can create Stripe accounts for
    * your users. To do this, you’ll first need to <a
    * href="https://dashboard.stripe.com/account/applications/settings">register your platform</a>.
+   *
+   * <p>If you’ve already collected information for your connected accounts, you <a
+   * href="https://stripe.com/docs/connect/best-practices#onboarding">can pre-fill that
+   * information</a> when creating the account. Connect Onboarding won’t ask for the pre-filled
+   * information during account onboarding. You can pre-fill any information on the account.
    */
   public static Account create(AccountCreateParams params, RequestOptions options)
       throws StripeException {
@@ -516,10 +541,13 @@ public class Account extends ApiResource implements MetadataStore<Account>, Paym
 
   /**
    * Updates a <a href="https://stripe.com/docs/connect/accounts">connected account</a> by setting
-   * the values of the parameters passed. Any parameters not provided are left unchanged. Most
-   * parameters can be changed only for Custom accounts. (These are marked <strong>Custom
-   * Only</strong> below.) Parameters marked <strong>Custom and Express</strong> are not supported
-   * for Standard accounts.
+   * the values of the parameters passed. Any parameters not provided are left unchanged.
+   *
+   * <p>For Custom accounts, you can update any information on the account. For other accounts, you
+   * can update all information until that account has started to go through Connect Onboarding.
+   * Once you create an <a href="https://stripe.com/docs/api/account_links">Account Link</a> for a
+   * Standard or Express account, some parameters can no longer be changed. These are marked as
+   * <strong>Custom Only</strong> or <strong>Custom and Express</strong> below.
    *
    * <p>To update your own account, use the <a
    * href="https://dashboard.stripe.com/account">Dashboard</a>. Refer to our <a
@@ -533,10 +561,13 @@ public class Account extends ApiResource implements MetadataStore<Account>, Paym
 
   /**
    * Updates a <a href="https://stripe.com/docs/connect/accounts">connected account</a> by setting
-   * the values of the parameters passed. Any parameters not provided are left unchanged. Most
-   * parameters can be changed only for Custom accounts. (These are marked <strong>Custom
-   * Only</strong> below.) Parameters marked <strong>Custom and Express</strong> are not supported
-   * for Standard accounts.
+   * the values of the parameters passed. Any parameters not provided are left unchanged.
+   *
+   * <p>For Custom accounts, you can update any information on the account. For other accounts, you
+   * can update all information until that account has started to go through Connect Onboarding.
+   * Once you create an <a href="https://stripe.com/docs/api/account_links">Account Link</a> for a
+   * Standard or Express account, some parameters can no longer be changed. These are marked as
+   * <strong>Custom Only</strong> or <strong>Custom and Express</strong> below.
    *
    * <p>To update your own account, use the <a
    * href="https://dashboard.stripe.com/account">Dashboard</a>. Refer to our <a
@@ -555,10 +586,13 @@ public class Account extends ApiResource implements MetadataStore<Account>, Paym
 
   /**
    * Updates a <a href="https://stripe.com/docs/connect/accounts">connected account</a> by setting
-   * the values of the parameters passed. Any parameters not provided are left unchanged. Most
-   * parameters can be changed only for Custom accounts. (These are marked <strong>Custom
-   * Only</strong> below.) Parameters marked <strong>Custom and Express</strong> are not supported
-   * for Standard accounts.
+   * the values of the parameters passed. Any parameters not provided are left unchanged.
+   *
+   * <p>For Custom accounts, you can update any information on the account. For other accounts, you
+   * can update all information until that account has started to go through Connect Onboarding.
+   * Once you create an <a href="https://stripe.com/docs/api/account_links">Account Link</a> for a
+   * Standard or Express account, some parameters can no longer be changed. These are marked as
+   * <strong>Custom Only</strong> or <strong>Custom and Express</strong> below.
    *
    * <p>To update your own account, use the <a
    * href="https://dashboard.stripe.com/account">Dashboard</a>. Refer to our <a
@@ -571,10 +605,13 @@ public class Account extends ApiResource implements MetadataStore<Account>, Paym
 
   /**
    * Updates a <a href="https://stripe.com/docs/connect/accounts">connected account</a> by setting
-   * the values of the parameters passed. Any parameters not provided are left unchanged. Most
-   * parameters can be changed only for Custom accounts. (These are marked <strong>Custom
-   * Only</strong> below.) Parameters marked <strong>Custom and Express</strong> are not supported
-   * for Standard accounts.
+   * the values of the parameters passed. Any parameters not provided are left unchanged.
+   *
+   * <p>For Custom accounts, you can update any information on the account. For other accounts, you
+   * can update all information until that account has started to go through Connect Onboarding.
+   * Once you create an <a href="https://stripe.com/docs/api/account_links">Account Link</a> for a
+   * Standard or Express account, some parameters can no longer be changed. These are marked as
+   * <strong>Custom Only</strong> or <strong>Custom and Express</strong> below.
    *
    * <p>To update your own account, use the <a
    * href="https://dashboard.stripe.com/account">Dashboard</a>. Refer to our <a

@@ -116,7 +116,7 @@ public class InvoiceLineItem extends StripeObject implements HasId {
   String subscription;
 
   /**
-   * The subscription item that generated this invoice item. Left empty if the line item is not an
+   * The subscription item that generated this line item. Left empty if the line item is not an
    * explicit result of a subscription.
    */
   @SerializedName("subscription_item")
