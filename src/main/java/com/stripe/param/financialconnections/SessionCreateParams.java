@@ -32,6 +32,10 @@ public class SessionCreateParams extends ApiRequestParams {
   @SerializedName("filters")
   Filters filters;
 
+  /** Settings for configuring Session-specific limits. */
+  @SerializedName("limits")
+  Limits limits;
+
   /** Settings for configuring manual entry of account details for this Session. */
   @SerializedName("manual_entry")
   ManualEntry manualEntry;
@@ -61,6 +65,7 @@ public class SessionCreateParams extends ApiRequestParams {
       List<String> expand,
       Map<String, Object> extraParams,
       Filters filters,
+      Limits limits,
       ManualEntry manualEntry,
       List<SessionCreateParams.Permission> permissions,
       List<SessionCreateParams.Prefetch> prefetch,
@@ -69,6 +74,7 @@ public class SessionCreateParams extends ApiRequestParams {
     this.expand = expand;
     this.extraParams = extraParams;
     this.filters = filters;
+    this.limits = limits;
     this.manualEntry = manualEntry;
     this.permissions = permissions;
     this.prefetch = prefetch;
@@ -88,6 +94,8 @@ public class SessionCreateParams extends ApiRequestParams {
 
     private Filters filters;
 
+    private Limits limits;
+
     private ManualEntry manualEntry;
 
     private List<SessionCreateParams.Permission> permissions;
@@ -103,6 +111,7 @@ public class SessionCreateParams extends ApiRequestParams {
           this.expand,
           this.extraParams,
           this.filters,
+          this.limits,
           this.manualEntry,
           this.permissions,
           this.prefetch,
@@ -170,6 +179,12 @@ public class SessionCreateParams extends ApiRequestParams {
     /** Filters to restrict the kinds of accounts to collect. */
     public Builder setFilters(SessionCreateParams.Filters filters) {
       this.filters = filters;
+      return this;
+    }
+
+    /** Settings for configuring Session-specific limits. */
+    public Builder setLimits(SessionCreateParams.Limits limits) {
+      this.limits = limits;
       return this;
     }
 
@@ -453,11 +468,75 @@ public class SessionCreateParams extends ApiRequestParams {
   }
 
   @Getter
-  public static class ManualEntry {
-    /** Whether manual entry will be allowed on this Session. */
-    @SerializedName("enabled")
-    Boolean enabled;
+  public static class Limits {
+    /** The number of accounts that can be linked in this Session. */
+    @SerializedName("accounts")
+    Long accounts;
 
+    /**
+     * Map of extra parameters for custom features not available in this client library. The content
+     * in this map is not serialized under this field's {@code @SerializedName} value. Instead, each
+     * key/value pair is serialized as if the key is a root-level field (serialized) name in this
+     * param object. Effectively, this map is flattened to its parent instance.
+     */
+    @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
+    Map<String, Object> extraParams;
+
+    private Limits(Long accounts, Map<String, Object> extraParams) {
+      this.accounts = accounts;
+      this.extraParams = extraParams;
+    }
+
+    public static Builder builder() {
+      return new Builder();
+    }
+
+    public static class Builder {
+      private Long accounts;
+
+      private Map<String, Object> extraParams;
+
+      /** Finalize and obtain parameter instance from this builder. */
+      public SessionCreateParams.Limits build() {
+        return new SessionCreateParams.Limits(this.accounts, this.extraParams);
+      }
+
+      /** The number of accounts that can be linked in this Session. */
+      public Builder setAccounts(Long accounts) {
+        this.accounts = accounts;
+        return this;
+      }
+
+      /**
+       * Add a key/value pair to `extraParams` map. A map is initialized for the first `put/putAll`
+       * call, and subsequent calls add additional key/value pairs to the original map. See {@link
+       * SessionCreateParams.Limits#extraParams} for the field documentation.
+       */
+      public Builder putExtraParam(String key, Object value) {
+        if (this.extraParams == null) {
+          this.extraParams = new HashMap<>();
+        }
+        this.extraParams.put(key, value);
+        return this;
+      }
+
+      /**
+       * Add all map key/value pairs to `extraParams` map. A map is initialized for the first
+       * `put/putAll` call, and subsequent calls add additional key/value pairs to the original map.
+       * See {@link SessionCreateParams.Limits#extraParams} for the field documentation.
+       */
+      public Builder putAllExtraParam(Map<String, Object> map) {
+        if (this.extraParams == null) {
+          this.extraParams = new HashMap<>();
+        }
+        this.extraParams.putAll(map);
+        return this;
+      }
+    }
+  }
+
+  @Getter
+  public static class ManualEntry {
     /**
      * Map of extra parameters for custom features not available in this client library. The content
      * in this map is not serialized under this field's {@code @SerializedName} value. Instead, each
@@ -471,8 +550,7 @@ public class SessionCreateParams extends ApiRequestParams {
     @SerializedName("mode")
     Mode mode;
 
-    private ManualEntry(Boolean enabled, Map<String, Object> extraParams, Mode mode) {
-      this.enabled = enabled;
+    private ManualEntry(Map<String, Object> extraParams, Mode mode) {
       this.extraParams = extraParams;
       this.mode = mode;
     }
@@ -482,21 +560,13 @@ public class SessionCreateParams extends ApiRequestParams {
     }
 
     public static class Builder {
-      private Boolean enabled;
-
       private Map<String, Object> extraParams;
 
       private Mode mode;
 
       /** Finalize and obtain parameter instance from this builder. */
       public SessionCreateParams.ManualEntry build() {
-        return new SessionCreateParams.ManualEntry(this.enabled, this.extraParams, this.mode);
-      }
-
-      /** Whether manual entry will be allowed on this Session. */
-      public Builder setEnabled(Boolean enabled) {
-        this.enabled = enabled;
-        return this;
+        return new SessionCreateParams.ManualEntry(this.extraParams, this.mode);
       }
 
       /**

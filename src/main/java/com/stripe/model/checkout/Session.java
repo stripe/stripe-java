@@ -116,6 +116,10 @@ public class Session extends ApiResource implements HasId {
   @SerializedName("currency")
   String currency;
 
+  /** Currency conversion details for automatic currency conversion sessions. */
+  @SerializedName("currency_conversion")
+  CurrencyConversion currencyConversion;
+
   /**
    * Collect additional information from your customer using custom fields. Up to 2 fields are
    * supported.
@@ -770,6 +774,23 @@ public class Session extends ApiResource implements HasId {
      */
     @SerializedName("terms_of_service")
     String termsOfService;
+  }
+
+  @Getter
+  @Setter
+  @EqualsAndHashCode(callSuper = false)
+  public static class CurrencyConversion extends StripeObject {
+    /** Total of all items in source currency before discounts or taxes are applied. */
+    @SerializedName("amount_subtotal")
+    Long amountSubtotal;
+
+    /** Total of all items in source currency after discounts and taxes are applied. */
+    @SerializedName("amount_total")
+    Long amountTotal;
+
+    /** Creation currency of the CheckoutSession before localization. */
+    @SerializedName("source_currency")
+    String sourceCurrency;
   }
 
   @Getter

@@ -47,6 +47,9 @@ public class Session extends ApiResource implements HasId {
   @SerializedName("id")
   String id;
 
+  @SerializedName("limits")
+  Limits limits;
+
   /**
    * Has the value {@code true} if the object exists in live mode or the value {@code false} if the
    * object exists in test mode.
@@ -237,6 +240,15 @@ public class Session extends ApiResource implements HasId {
     /** List of countries from which to filter accounts. */
     @SerializedName("countries")
     List<String> countries;
+  }
+
+  @Getter
+  @Setter
+  @EqualsAndHashCode(callSuper = false)
+  public static class Limits extends StripeObject {
+    /** The number of accounts that can be linked in this Session. */
+    @SerializedName("accounts")
+    Long accounts;
   }
 
   @Getter

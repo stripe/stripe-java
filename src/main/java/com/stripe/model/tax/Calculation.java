@@ -74,10 +74,6 @@ public class Calculation extends ApiResource implements HasId {
   @SerializedName("object")
   String object;
 
-  /** A custom unique identifier, such as 'myOrder_123'. */
-  @SerializedName("reference")
-  String reference;
-
   /** The amount of tax to be collected on top of the line item prices. */
   @SerializedName("tax_amount_exclusive")
   Long taxAmountExclusive;
