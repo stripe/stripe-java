@@ -2,8 +2,12 @@
 package com.stripe.model.financialconnections;
 
 import com.google.gson.annotations.SerializedName;
+import com.stripe.Stripe;
+import com.stripe.exception.StripeException;
 import com.stripe.model.HasId;
-import com.stripe.model.StripeObject;
+import com.stripe.net.ApiResource;
+import com.stripe.net.RequestOptions;
+import com.stripe.param.financialconnections.InferredBalanceListParams;
 import java.util.Map;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
@@ -16,7 +20,7 @@ import lombok.Setter;
 @Getter
 @Setter
 @EqualsAndHashCode(callSuper = false)
-public class InferredBalance extends StripeObject implements HasId {
+public class InferredBalance extends ApiResource implements HasId {
   /**
    * The time for which this balance was calculated, measured in seconds since the Unix epoch. If
    * the balance was computed by Stripe and not provided directly by a financial institution, it
@@ -49,4 +53,43 @@ public class InferredBalance extends StripeObject implements HasId {
    */
   @SerializedName("object")
   String object;
+
+  /** Lists the recorded inferred balances for a Financial Connections <code>Account</code>. */
+  public static InferredBalanceCollection list(String account, Map<String, Object> params)
+      throws StripeException {
+    return list(account, params, (RequestOptions) null);
+  }
+
+  /** Lists the recorded inferred balances for a Financial Connections <code>Account</code>. */
+  public static InferredBalanceCollection list(
+      String account, Map<String, Object> params, RequestOptions options) throws StripeException {
+    String url =
+        ApiResource.fullUrl(
+            Stripe.getApiBase(),
+            options,
+            String.format(
+                "/v1/financial_connections/accounts/%s/inferred_balances",
+                ApiResource.urlEncodeId(account)));
+    return ApiResource.requestCollection(url, params, InferredBalanceCollection.class, options);
+  }
+
+  /** Lists the recorded inferred balances for a Financial Connections <code>Account</code>. */
+  public static InferredBalanceCollection list(String account, InferredBalanceListParams params)
+      throws StripeException {
+    return list(account, params, (RequestOptions) null);
+  }
+
+  /** Lists the recorded inferred balances for a Financial Connections <code>Account</code>. */
+  public static InferredBalanceCollection list(
+      String account, InferredBalanceListParams params, RequestOptions options)
+      throws StripeException {
+    String url =
+        ApiResource.fullUrl(
+            Stripe.getApiBase(),
+            options,
+            String.format(
+                "/v1/financial_connections/accounts/%s/inferred_balances",
+                ApiResource.urlEncodeId(account)));
+    return ApiResource.requestCollection(url, params, InferredBalanceCollection.class, options);
+  }
 }
