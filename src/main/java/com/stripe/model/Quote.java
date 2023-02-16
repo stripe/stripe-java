@@ -839,27 +839,27 @@ public class Quote extends ApiResource implements HasId, MetadataStore<Quote> {
   }
 
   /**
-   * When retrieving a quote, there is an includable <strong>lines</strong> property containing the
-   * first handful of those items. There is also a URL where you can retrieve the full (paginated)
-   * list of lines.
+   * Retrieves a paginated list of lines for a quote. These lines describe changes that will be used
+   * to create new subscription schedules or update existing subscription schedules when the quote
+   * is accepted.
    */
   public QuoteLineCollection listLines() throws StripeException {
     return listLines((Map<String, Object>) null, (RequestOptions) null);
   }
 
   /**
-   * When retrieving a quote, there is an includable <strong>lines</strong> property containing the
-   * first handful of those items. There is also a URL where you can retrieve the full (paginated)
-   * list of lines.
+   * Retrieves a paginated list of lines for a quote. These lines describe changes that will be used
+   * to create new subscription schedules or update existing subscription schedules when the quote
+   * is accepted.
    */
   public QuoteLineCollection listLines(Map<String, Object> params) throws StripeException {
     return listLines(params, (RequestOptions) null);
   }
 
   /**
-   * When retrieving a quote, there is an includable <strong>lines</strong> property containing the
-   * first handful of those items. There is also a URL where you can retrieve the full (paginated)
-   * list of lines.
+   * Retrieves a paginated list of lines for a quote. These lines describe changes that will be used
+   * to create new subscription schedules or update existing subscription schedules when the quote
+   * is accepted.
    */
   public QuoteLineCollection listLines(Map<String, Object> params, RequestOptions options)
       throws StripeException {
@@ -872,18 +872,18 @@ public class Quote extends ApiResource implements HasId, MetadataStore<Quote> {
   }
 
   /**
-   * When retrieving a quote, there is an includable <strong>lines</strong> property containing the
-   * first handful of those items. There is also a URL where you can retrieve the full (paginated)
-   * list of lines.
+   * Retrieves a paginated list of lines for a quote. These lines describe changes that will be used
+   * to create new subscription schedules or update existing subscription schedules when the quote
+   * is accepted.
    */
   public QuoteLineCollection listLines(QuoteListLinesParams params) throws StripeException {
     return listLines(params, (RequestOptions) null);
   }
 
   /**
-   * When retrieving a quote, there is an includable <strong>lines</strong> property containing the
-   * first handful of those items. There is also a URL where you can retrieve the full (paginated)
-   * list of lines.
+   * Retrieves a paginated list of lines for a quote. These lines describe changes that will be used
+   * to create new subscription schedules or update existing subscription schedules when the quote
+   * is accepted.
    */
   public QuoteLineCollection listLines(QuoteListLinesParams params, RequestOptions options)
       throws StripeException {
@@ -1501,11 +1501,9 @@ public class Quote extends ApiResource implements HasId, MetadataStore<Quote> {
   @Setter
   @EqualsAndHashCode(callSuper = false)
   public static class StatusDetails extends StripeObject {
-    /** Details on when and why a quote has been marked as canceled. */
     @SerializedName("canceled")
     Canceled canceled;
 
-    /** Details on when and why a quote has been marked as stale. */
     @SerializedName("stale")
     Stale stale;
 

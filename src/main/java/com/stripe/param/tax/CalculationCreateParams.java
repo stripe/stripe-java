@@ -53,10 +53,6 @@ public class CalculationCreateParams extends ApiRequestParams {
   @SerializedName("preview")
   Boolean preview;
 
-  /** A custom order or sale identifier, such as 'myOrder_123'. */
-  @SerializedName("reference")
-  String reference;
-
   /**
    * Timestamp of date at which the tax rules and rates in effect applies for the calculation.
    * Measured in seconds since the Unix epoch.
@@ -72,7 +68,6 @@ public class CalculationCreateParams extends ApiRequestParams {
       Map<String, Object> extraParams,
       List<CalculationCreateParams.LineItem> lineItems,
       Boolean preview,
-      String reference,
       Long taxDate) {
     this.currency = currency;
     this.customer = customer;
@@ -81,7 +76,6 @@ public class CalculationCreateParams extends ApiRequestParams {
     this.extraParams = extraParams;
     this.lineItems = lineItems;
     this.preview = preview;
-    this.reference = reference;
     this.taxDate = taxDate;
   }
 
@@ -104,8 +98,6 @@ public class CalculationCreateParams extends ApiRequestParams {
 
     private Boolean preview;
 
-    private String reference;
-
     private Long taxDate;
 
     /** Finalize and obtain parameter instance from this builder. */
@@ -118,7 +110,6 @@ public class CalculationCreateParams extends ApiRequestParams {
           this.extraParams,
           this.lineItems,
           this.preview,
-          this.reference,
           this.taxDate);
     }
 
@@ -231,12 +222,6 @@ public class CalculationCreateParams extends ApiRequestParams {
      */
     public Builder setPreview(Boolean preview) {
       this.preview = preview;
-      return this;
-    }
-
-    /** A custom order or sale identifier, such as 'myOrder_123'. */
-    public Builder setReference(String reference) {
-      this.reference = reference;
       return this;
     }
 

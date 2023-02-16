@@ -86,6 +86,13 @@ public class PaymentLink extends ApiResource implements HasId, MetadataStore<Pay
   @SerializedName("currency")
   String currency;
 
+  /**
+   * Collect additional information from your customer using custom fields. Up to 2 fields are
+   * supported.
+   */
+  @SerializedName("custom_fields")
+  List<PaymentLink.CustomField> customFields;
+
   @SerializedName("custom_text")
   CustomText customText;
 
@@ -474,6 +481,83 @@ public class PaymentLink extends ApiResource implements HasId, MetadataStore<Pay
      */
     @SerializedName("terms_of_service")
     String termsOfService;
+  }
+
+  @Getter
+  @Setter
+  @EqualsAndHashCode(callSuper = false)
+  public static class CustomField extends StripeObject {
+    /** Configuration for {@code type=dropdown} fields. */
+    @SerializedName("dropdown")
+    Dropdown dropdown;
+
+    /**
+     * String of your choice that your integration can use to reconcile this field. Must be unique
+     * to this field, alphanumeric, and up to 200 characters.
+     */
+    @SerializedName("key")
+    String key;
+
+    @SerializedName("label")
+    Label label;
+
+    /**
+     * Whether the customer is required to complete the field before completing the Checkout
+     * Session. Defaults to {@code false}.
+     */
+    @SerializedName("optional")
+    Boolean optional;
+
+    /**
+     * The type of the field.
+     *
+     * <p>One of {@code dropdown}, {@code numeric}, or {@code text}.
+     */
+    @SerializedName("type")
+    String type;
+
+    @Getter
+    @Setter
+    @EqualsAndHashCode(callSuper = false)
+    public static class Dropdown extends StripeObject {
+      /** The options available for the customer to select. Up to 200 options allowed. */
+      @SerializedName("options")
+      List<PaymentLink.CustomField.Dropdown.Option> options;
+
+      @Getter
+      @Setter
+      @EqualsAndHashCode(callSuper = false)
+      public static class Option extends StripeObject {
+        /** The label for the option, displayed to the customer. Up to 100 characters. */
+        @SerializedName("label")
+        String label;
+
+        /**
+         * The value for this option, not displayed to the customer, used by your integration to
+         * reconcile the option selected by the customer. Must be unique to this option,
+         * alphanumeric, and up to 100 characters.
+         */
+        @SerializedName("value")
+        String value;
+      }
+    }
+
+    @Getter
+    @Setter
+    @EqualsAndHashCode(callSuper = false)
+    public static class Label extends StripeObject {
+      /** Custom text for the label, displayed to the customer. Up to 50 characters. */
+      @SerializedName("custom")
+      String custom;
+
+      /**
+       * The type of the label.
+       *
+       * <p>Equal to {@code custom}.
+       */
+      @SerializedName("type")
+      String type;
+    }
   }
 
   @Getter

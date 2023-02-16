@@ -37,15 +37,21 @@ public class TransactionCreateParams extends ApiRequestParams {
   @SerializedName("metadata")
   Map<String, String> metadata;
 
+  /** A custom order or sale identifier, such as 'myOrder_123'. */
+  @SerializedName("reference")
+  String reference;
+
   private TransactionCreateParams(
       List<String> expand,
       Map<String, Object> extraParams,
       String fromCalculation,
-      Map<String, String> metadata) {
+      Map<String, String> metadata,
+      String reference) {
     this.expand = expand;
     this.extraParams = extraParams;
     this.fromCalculation = fromCalculation;
     this.metadata = metadata;
+    this.reference = reference;
   }
 
   public static Builder builder() {
@@ -61,10 +67,12 @@ public class TransactionCreateParams extends ApiRequestParams {
 
     private Map<String, String> metadata;
 
+    private String reference;
+
     /** Finalize and obtain parameter instance from this builder. */
     public TransactionCreateParams build() {
       return new TransactionCreateParams(
-          this.expand, this.extraParams, this.fromCalculation, this.metadata);
+          this.expand, this.extraParams, this.fromCalculation, this.metadata, this.reference);
     }
 
     /**
@@ -148,6 +156,12 @@ public class TransactionCreateParams extends ApiRequestParams {
         this.metadata = new HashMap<>();
       }
       this.metadata.putAll(map);
+      return this;
+    }
+
+    /** A custom order or sale identifier, such as 'myOrder_123'. */
+    public Builder setReference(String reference) {
+      this.reference = reference;
       return this;
     }
   }
