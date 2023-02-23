@@ -1,5 +1,10 @@
 # Changelog
 
+## 22.10.0 - 2023-02-23
+* [#1517](https://github.com/stripe/stripe-java/pull/1517) API Updates
+  * Add support for new value `yoursafe` on enums `PaymentIntentConfirmParams.payment_method_data.ideal.bank`, `PaymentIntentCreateParams.payment_method_data.ideal.bank`, `PaymentIntentUpdateParams.payment_method_data.ideal.bank`, `PaymentMethodCreateParams.ideal.bank`, `SetupIntentConfirmParams.payment_method_data.ideal.bank`, `SetupIntentCreateParams.payment_method_data.ideal.bank`, and `SetupIntentUpdateParams.payment_method_data.ideal.bank`
+  * Add support for new value `igst` on enums `TaxRateCreateParams.tax_type` and `TaxRateUpdateParams.tax_type`
+
 ## 22.9.0 - 2023-02-16
 * [#1514](https://github.com/stripe/stripe-java/pull/1514) API Updates
   * Add support for `refund_payment` method on resource `Terminal.Reader`
