@@ -1980,6 +1980,15 @@ class GeneratedExamples extends BaseStripeTest {
   }
 
   @Test
+  public void testInvoiceRetrieve2() throws StripeException {
+    InvoiceRetrieveParams params = InvoiceRetrieveParams.builder().addExpand("customer").build();
+
+    Invoice invoice = Invoice.retrieve("in_xxxxxxxxxxxxx", params, null);
+    assertNotNull(invoice);
+    verifyRequest(ApiResource.RequestMethod.GET, "/v1/invoices/in_xxxxxxxxxxxxx", params.toMap());
+  }
+
+  @Test
   public void testInvoiceUpdate() throws StripeException {
     Invoice resource = Invoice.retrieve("in_xxxxxxxxxxxxx");
     InvoiceUpdateParams params =

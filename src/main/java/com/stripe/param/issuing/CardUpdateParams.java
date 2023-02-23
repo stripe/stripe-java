@@ -51,8 +51,9 @@ public class CardUpdateParams extends ApiRequestParams {
   SpendingControls spendingControls;
 
   /**
-   * Dictates whether authorizations can be approved on this card. If this card is being canceled
-   * because it was lost or stolen, this information should be provided as {@code
+   * Dictates whether authorizations can be approved on this card. May be blocked from activating
+   * cards depending on past-due Cardholder requirements. Defaults to {@code inactive}. If this card
+   * is being canceled because it was lost or stolen, this information should be provided as {@code
    * cancellation_reason}.
    */
   @SerializedName("status")
@@ -231,9 +232,10 @@ public class CardUpdateParams extends ApiRequestParams {
     }
 
     /**
-     * Dictates whether authorizations can be approved on this card. If this card is being canceled
-     * because it was lost or stolen, this information should be provided as {@code
-     * cancellation_reason}.
+     * Dictates whether authorizations can be approved on this card. May be blocked from activating
+     * cards depending on past-due Cardholder requirements. Defaults to {@code inactive}. If this
+     * card is being canceled because it was lost or stolen, this information should be provided as
+     * {@code cancellation_reason}.
      */
     public Builder setStatus(CardUpdateParams.Status status) {
       this.status = status;

@@ -162,7 +162,8 @@ public class Card extends ApiResource implements HasId, MetadataStore<Card> {
   SpendingControls spendingControls;
 
   /**
-   * Whether authorizations can be approved on this card.
+   * Whether authorizations can be approved on this card. May be blocked from activating cards
+   * depending on past-due Cardholder requirements. Defaults to {@code inactive}.
    *
    * <p>One of {@code active}, {@code canceled}, or {@code inactive}.
    */
