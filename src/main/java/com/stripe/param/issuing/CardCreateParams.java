@@ -69,7 +69,10 @@ public class CardCreateParams extends ApiRequestParams {
   @SerializedName("spending_controls")
   SpendingControls spendingControls;
 
-  /** Whether authorizations can be approved on this card. Defaults to {@code inactive}. */
+  /**
+   * Whether authorizations can be approved on this card. May be blocked from activating cards
+   * depending on past-due Cardholder requirements. Defaults to {@code inactive}.
+   */
   @SerializedName("status")
   Status status;
 
@@ -279,7 +282,10 @@ public class CardCreateParams extends ApiRequestParams {
       return this;
     }
 
-    /** Whether authorizations can be approved on this card. Defaults to {@code inactive}. */
+    /**
+     * Whether authorizations can be approved on this card. May be blocked from activating cards
+     * depending on past-due Cardholder requirements. Defaults to {@code inactive}.
+     */
     public Builder setStatus(CardCreateParams.Status status) {
       this.status = status;
       return this;
