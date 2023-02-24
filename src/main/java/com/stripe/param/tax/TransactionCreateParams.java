@@ -37,7 +37,10 @@ public class TransactionCreateParams extends ApiRequestParams {
   @SerializedName("metadata")
   Map<String, String> metadata;
 
-  /** A custom order or sale identifier, such as 'myOrder_123'. */
+  /**
+   * A custom order or sale identifier, such as 'myOrder_123'. Must be unique across all
+   * transactions.
+   */
   @SerializedName("reference")
   String reference;
 
@@ -159,7 +162,10 @@ public class TransactionCreateParams extends ApiRequestParams {
       return this;
     }
 
-    /** A custom order or sale identifier, such as 'myOrder_123'. */
+    /**
+     * A custom order or sale identifier, such as 'myOrder_123'. Must be unique across all
+     * transactions.
+     */
     public Builder setReference(String reference) {
       this.reference = reference;
       return this;

@@ -306,6 +306,30 @@ public class WebhookEndpointUpdateParams extends ApiRequestParams {
     @SerializedName("capability.updated")
     CAPABILITY__UPDATED("capability.updated"),
 
+    @SerializedName("capital.financing_offer.accepted")
+    CAPITAL__FINANCING_OFFER__ACCEPTED("capital.financing_offer.accepted"),
+
+    @SerializedName("capital.financing_offer.canceled")
+    CAPITAL__FINANCING_OFFER__CANCELED("capital.financing_offer.canceled"),
+
+    @SerializedName("capital.financing_offer.created")
+    CAPITAL__FINANCING_OFFER__CREATED("capital.financing_offer.created"),
+
+    @SerializedName("capital.financing_offer.expired")
+    CAPITAL__FINANCING_OFFER__EXPIRED("capital.financing_offer.expired"),
+
+    @SerializedName("capital.financing_offer.fully_repaid")
+    CAPITAL__FINANCING_OFFER__FULLY_REPAID("capital.financing_offer.fully_repaid"),
+
+    @SerializedName("capital.financing_offer.paid_out")
+    CAPITAL__FINANCING_OFFER__PAID_OUT("capital.financing_offer.paid_out"),
+
+    @SerializedName("capital.financing_offer.rejected")
+    CAPITAL__FINANCING_OFFER__REJECTED("capital.financing_offer.rejected"),
+
+    @SerializedName("capital.financing_offer.replacement_created")
+    CAPITAL__FINANCING_OFFER__REPLACEMENT_CREATED("capital.financing_offer.replacement_created"),
+
     @SerializedName("capital.financing_transaction.created")
     CAPITAL__FINANCING_TRANSACTION__CREATED("capital.financing_transaction.created"),
 

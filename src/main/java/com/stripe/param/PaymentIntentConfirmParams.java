@@ -12306,6 +12306,10 @@ public class PaymentIntentConfirmParams extends ApiRequestParams {
         @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
         Map<String, Object> extraParams;
 
+        /** Customize manual entry behavior. */
+        @SerializedName("manual_entry")
+        ManualEntry manualEntry;
+
         /**
          * The list of permissions to request. If this parameter is passed, the {@code
          * payment_method} permission must be included. Valid permissions include: {@code balances},
@@ -12333,6 +12337,7 @@ public class PaymentIntentConfirmParams extends ApiRequestParams {
 
         private FinancialConnections(
             Map<String, Object> extraParams,
+            ManualEntry manualEntry,
             List<
                     PaymentIntentConfirmParams.PaymentMethodOptions.UsBankAccount
                         .FinancialConnections.Permission>
@@ -12343,6 +12348,7 @@ public class PaymentIntentConfirmParams extends ApiRequestParams {
                 prefetch,
             String returnUrl) {
           this.extraParams = extraParams;
+          this.manualEntry = manualEntry;
           this.permissions = permissions;
           this.prefetch = prefetch;
           this.returnUrl = returnUrl;
@@ -12354,6 +12360,8 @@ public class PaymentIntentConfirmParams extends ApiRequestParams {
 
         public static class Builder {
           private Map<String, Object> extraParams;
+
+          private ManualEntry manualEntry;
 
           private List<
                   PaymentIntentConfirmParams.PaymentMethodOptions.UsBankAccount.FinancialConnections
@@ -12372,7 +12380,11 @@ public class PaymentIntentConfirmParams extends ApiRequestParams {
               build() {
             return new PaymentIntentConfirmParams.PaymentMethodOptions.UsBankAccount
                 .FinancialConnections(
-                this.extraParams, this.permissions, this.prefetch, this.returnUrl);
+                this.extraParams,
+                this.manualEntry,
+                this.permissions,
+                this.prefetch,
+                this.returnUrl);
           }
 
           /**
@@ -12402,6 +12414,15 @@ public class PaymentIntentConfirmParams extends ApiRequestParams {
               this.extraParams = new HashMap<>();
             }
             this.extraParams.putAll(map);
+            return this;
+          }
+
+          /** Customize manual entry behavior. */
+          public Builder setManualEntry(
+              PaymentIntentConfirmParams.PaymentMethodOptions.UsBankAccount.FinancialConnections
+                      .ManualEntry
+                  manualEntry) {
+            this.manualEntry = manualEntry;
             return this;
           }
 
@@ -12483,6 +12504,100 @@ public class PaymentIntentConfirmParams extends ApiRequestParams {
           public Builder setReturnUrl(String returnUrl) {
             this.returnUrl = returnUrl;
             return this;
+          }
+        }
+
+        @Getter
+        public static class ManualEntry {
+          /**
+           * Map of extra parameters for custom features not available in this client library. The
+           * content in this map is not serialized under this field's {@code @SerializedName} value.
+           * Instead, each key/value pair is serialized as if the key is a root-level field
+           * (serialized) name in this param object. Effectively, this map is flattened to its
+           * parent instance.
+           */
+          @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
+          Map<String, Object> extraParams;
+
+          /** Settings for configuring manual entry of account details. */
+          @SerializedName("mode")
+          Mode mode;
+
+          private ManualEntry(Map<String, Object> extraParams, Mode mode) {
+            this.extraParams = extraParams;
+            this.mode = mode;
+          }
+
+          public static Builder builder() {
+            return new Builder();
+          }
+
+          public static class Builder {
+            private Map<String, Object> extraParams;
+
+            private Mode mode;
+
+            /** Finalize and obtain parameter instance from this builder. */
+            public PaymentIntentConfirmParams.PaymentMethodOptions.UsBankAccount
+                    .FinancialConnections.ManualEntry
+                build() {
+              return new PaymentIntentConfirmParams.PaymentMethodOptions.UsBankAccount
+                  .FinancialConnections.ManualEntry(this.extraParams, this.mode);
+            }
+
+            /**
+             * Add a key/value pair to `extraParams` map. A map is initialized for the first
+             * `put/putAll` call, and subsequent calls add additional key/value pairs to the
+             * original map. See {@link
+             * PaymentIntentConfirmParams.PaymentMethodOptions.UsBankAccount.FinancialConnections.ManualEntry#extraParams}
+             * for the field documentation.
+             */
+            public Builder putExtraParam(String key, Object value) {
+              if (this.extraParams == null) {
+                this.extraParams = new HashMap<>();
+              }
+              this.extraParams.put(key, value);
+              return this;
+            }
+
+            /**
+             * Add all map key/value pairs to `extraParams` map. A map is initialized for the first
+             * `put/putAll` call, and subsequent calls add additional key/value pairs to the
+             * original map. See {@link
+             * PaymentIntentConfirmParams.PaymentMethodOptions.UsBankAccount.FinancialConnections.ManualEntry#extraParams}
+             * for the field documentation.
+             */
+            public Builder putAllExtraParam(Map<String, Object> map) {
+              if (this.extraParams == null) {
+                this.extraParams = new HashMap<>();
+              }
+              this.extraParams.putAll(map);
+              return this;
+            }
+
+            /** Settings for configuring manual entry of account details. */
+            public Builder setMode(
+                PaymentIntentConfirmParams.PaymentMethodOptions.UsBankAccount.FinancialConnections
+                        .ManualEntry.Mode
+                    mode) {
+              this.mode = mode;
+              return this;
+            }
+          }
+
+          public enum Mode implements ApiRequestParams.EnumParam {
+            @SerializedName("automatic")
+            AUTOMATIC("automatic"),
+
+            @SerializedName("custom")
+            CUSTOM("custom");
+
+            @Getter(onMethod_ = {@Override})
+            private final String value;
+
+            Mode(String value) {
+              this.value = value;
+            }
           }
         }
 
