@@ -1957,6 +1957,9 @@ public class Session extends ApiResource implements HasId {
       @Setter
       @EqualsAndHashCode(callSuper = false)
       public static class FinancialConnections extends StripeObject {
+        @SerializedName("manual_entry")
+        ManualEntry manualEntry;
+
         /**
          * The list of permissions to request. The {@code payment_method} permission must be
          * included.
@@ -1974,6 +1977,19 @@ public class Session extends ApiResource implements HasId {
          */
         @SerializedName("return_url")
         String returnUrl;
+
+        @Getter
+        @Setter
+        @EqualsAndHashCode(callSuper = false)
+        public static class ManualEntry extends StripeObject {
+          /**
+           * Settings for configuring manual entry of account details.
+           *
+           * <p>One of {@code automatic}, or {@code custom}.
+           */
+          @SerializedName("mode")
+          String mode;
+        }
       }
     }
   }

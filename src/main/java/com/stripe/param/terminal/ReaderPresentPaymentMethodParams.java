@@ -153,7 +153,7 @@ public class ReaderPresentPaymentMethodParams extends ApiRequestParams {
     @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
     Map<String, Object> extraParams;
 
-    /** Card Number. */
+    /** The card number, as a string without any separators. */
     @SerializedName("number")
     String number;
 
@@ -203,7 +203,7 @@ public class ReaderPresentPaymentMethodParams extends ApiRequestParams {
         return this;
       }
 
-      /** Card Number. */
+      /** The card number, as a string without any separators. */
       public Builder setNumber(String number) {
         this.number = number;
         return this;

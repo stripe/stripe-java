@@ -2912,7 +2912,10 @@ public class InvoiceUpcomingParams extends ApiRequestParams {
 
     @Getter
     public static class Period {
-      /** The end of the period, which must be greater than or equal to the start. */
+      /**
+       * The end of the period, which must be greater than or equal to the start. This value is
+       * inclusive.
+       */
       @SerializedName("end")
       Long end;
 
@@ -2925,7 +2928,7 @@ public class InvoiceUpcomingParams extends ApiRequestParams {
       @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
       Map<String, Object> extraParams;
 
-      /** The start of the period. */
+      /** The start of the period. This value is inclusive. */
       @SerializedName("start")
       Long start;
 
@@ -2952,7 +2955,10 @@ public class InvoiceUpcomingParams extends ApiRequestParams {
               this.end, this.extraParams, this.start);
         }
 
-        /** The end of the period, which must be greater than or equal to the start. */
+        /**
+         * The end of the period, which must be greater than or equal to the start. This value is
+         * inclusive.
+         */
         public Builder setEnd(Long end) {
           this.end = end;
           return this;
@@ -2986,7 +2992,7 @@ public class InvoiceUpcomingParams extends ApiRequestParams {
           return this;
         }
 
-        /** The start of the period. */
+        /** The start of the period. This value is inclusive. */
         public Builder setStart(Long start) {
           this.start = start;
           return this;
