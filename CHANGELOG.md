@@ -1,5 +1,10 @@
 # Changelog
 
+## 22.10.0 - 2023-02-23
+* [#1517](https://github.com/stripe/stripe-java/pull/1517) API Updates
+  * Add support for new value `yoursafe` on enums `PaymentIntentConfirmParams.payment_method_data.ideal.bank`, `PaymentIntentCreateParams.payment_method_data.ideal.bank`, `PaymentIntentUpdateParams.payment_method_data.ideal.bank`, `PaymentMethodCreateParams.ideal.bank`, `SetupIntentConfirmParams.payment_method_data.ideal.bank`, `SetupIntentCreateParams.payment_method_data.ideal.bank`, and `SetupIntentUpdateParams.payment_method_data.ideal.bank`
+  * Add support for new value `igst` on enums `TaxRateCreateParams.tax_type` and `TaxRateUpdateParams.tax_type`
+
 ## 22.10.0-beta.1 - 2023-02-16
 * [#1516](https://github.com/stripe/stripe-java/pull/1516) API Updates for beta branch
   * Updated stable APIs to the latest version
@@ -8,6 +13,15 @@
   * Remove support for `enabled` on `FinancialConnectionsSessionCreateParams.manual_entry`
   * Remove support for `reference` on `Tax.Calculation` and `TaxCalculationCreateParams`
   * Add support for `reference` on `TaxTransactionCreateParams`
+
+## 22.9.0 - 2023-02-16
+* [#1514](https://github.com/stripe/stripe-java/pull/1514) API Updates
+  * Add support for `refund_payment` method on resource `Terminal.Reader`
+  * Add support for new value `name` on enums `BillingPortalConfigurationCreateParams.features.customer_update.allowed_updates[]` and `BillingPortalConfigurationUpdateParams.features.customer_update.allowed_updates[]`
+  * Add support for `custom_fields` on `Checkout.Session`, `CheckoutSessionCreateParams`, `PaymentLinkCreateParams`, `PaymentLinkUpdateParams`, and `PaymentLink`
+  * Add support for `interac_present` on `TerminalReaderPresentPaymentMethodParams`
+  * Change type of `TerminalReaderPresentPaymentMethodParams.type` from `literal('card_present')` to `enum('card_present'|'interac_present')`
+  * Add support for `refund_payment` on `Terminal.Reader.action`
 
 ## 22.9.0-beta.2 - 2023-02-15
 * [#1515](https://github.com/stripe/stripe-java/pull/1515) Fix inferred balance beta

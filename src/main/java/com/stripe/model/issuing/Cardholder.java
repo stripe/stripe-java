@@ -284,6 +284,7 @@ public class Cardholder extends ApiResource implements HasId, MetadataStore<Card
   @Setter
   @EqualsAndHashCode(callSuper = false)
   public static class Individual extends StripeObject {
+    /** Information related to the card_issuing program for this cardholder. */
     @SerializedName("card_issuing")
     CardIssuing cardIssuing;
 
@@ -292,15 +293,17 @@ public class Cardholder extends ApiResource implements HasId, MetadataStore<Card
     Dob dob;
 
     /**
-     * The first name of this cardholder. This field cannot contain any numbers, special characters
-     * (except periods, commas, hyphens, spaces and apostrophes) or non-latin letters.
+     * The first name of this cardholder. Required before activating Cards. This field cannot
+     * contain any numbers, special characters (except periods, commas, hyphens, spaces and
+     * apostrophes) or non-latin letters.
      */
     @SerializedName("first_name")
     String firstName;
 
     /**
-     * The last name of this cardholder. This field cannot contain any numbers, special characters
-     * (except periods, commas, hyphens, spaces and apostrophes) or non-latin letters.
+     * The last name of this cardholder. Required before activating Cards. This field cannot contain
+     * any numbers, special characters (except periods, commas, hyphens, spaces and apostrophes) or
+     * non-latin letters.
      */
     @SerializedName("last_name")
     String lastName;
@@ -324,11 +327,17 @@ public class Cardholder extends ApiResource implements HasId, MetadataStore<Card
       @Setter
       @EqualsAndHashCode(callSuper = false)
       public static class UserTermsAcceptance extends StripeObject {
-        /** The Unix timestamp marking when the cardholder accepted the Authorized User Terms. */
+        /**
+         * The Unix timestamp marking when the cardholder accepted the Authorized User Terms.
+         * Required for Celtic Spend Card users.
+         */
         @SerializedName("date")
         Long date;
 
-        /** The IP address from which the cardholder accepted the Authorized User Terms. */
+        /**
+         * The IP address from which the cardholder accepted the Authorized User Terms. Required for
+         * Celtic Spend Card users.
+         */
         @SerializedName("ip")
         String ip;
 

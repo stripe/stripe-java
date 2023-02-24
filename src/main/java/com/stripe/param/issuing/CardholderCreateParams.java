@@ -83,7 +83,11 @@ public class CardholderCreateParams extends ApiRequestParams {
   @SerializedName("status")
   Status status;
 
-  /** One of {@code individual} or {@code company}. */
+  /**
+   * One of {@code individual} or {@code company}. See <a
+   * href="https://stripe.com/docs/issuing/other/choose-cardholder">Choose a cardholder type</a> for
+   * more details.
+   */
   @SerializedName("type")
   Type type;
 
@@ -304,7 +308,11 @@ public class CardholderCreateParams extends ApiRequestParams {
       return this;
     }
 
-    /** One of {@code individual} or {@code company}. */
+    /**
+     * One of {@code individual} or {@code company}. See <a
+     * href="https://stripe.com/docs/issuing/other/choose-cardholder">Choose a cardholder type</a>
+     * for more details.
+     */
     public Builder setType(CardholderCreateParams.Type type) {
       this.type = type;
       return this;
@@ -618,15 +626,17 @@ public class CardholderCreateParams extends ApiRequestParams {
     Map<String, Object> extraParams;
 
     /**
-     * The first name of this cardholder. This field cannot contain any special characters or
-     * numbers.
+     * The first name of this cardholder. Required before activating Cards. This field cannot
+     * contain any numbers, special characters (except periods, commas, hyphens, spaces and
+     * apostrophes) or non-latin letters.
      */
     @SerializedName("first_name")
     String firstName;
 
     /**
-     * The last name of this cardholder. This field cannot contain any special characters or
-     * numbers.
+     * The last name of this cardholder. Required before activating Cards. This field cannot contain
+     * any numbers, special characters (except periods, commas, hyphens, spaces and apostrophes) or
+     * non-latin letters.
      */
     @SerializedName("last_name")
     String lastName;
@@ -702,8 +712,9 @@ public class CardholderCreateParams extends ApiRequestParams {
       }
 
       /**
-       * The first name of this cardholder. This field cannot contain any special characters or
-       * numbers.
+       * The first name of this cardholder. Required before activating Cards. This field cannot
+       * contain any numbers, special characters (except periods, commas, hyphens, spaces and
+       * apostrophes) or non-latin letters.
        */
       public Builder setFirstName(String firstName) {
         this.firstName = firstName;
@@ -711,8 +722,9 @@ public class CardholderCreateParams extends ApiRequestParams {
       }
 
       /**
-       * The last name of this cardholder. This field cannot contain any special characters or
-       * numbers.
+       * The last name of this cardholder. Required before activating Cards. This field cannot
+       * contain any numbers, special characters (except periods, commas, hyphens, spaces and
+       * apostrophes) or non-latin letters.
        */
       public Builder setLastName(String lastName) {
         this.lastName = lastName;

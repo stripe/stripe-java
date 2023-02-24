@@ -2914,7 +2914,10 @@ public class SetupIntentUpdateParams extends ApiRequestParams {
         TRIODOS_BANK("triodos_bank"),
 
         @SerializedName("van_lanschot")
-        VAN_LANSCHOT("van_lanschot");
+        VAN_LANSCHOT("van_lanschot"),
+
+        @SerializedName("yoursafe")
+        YOURSAFE("yoursafe");
 
         @Getter(onMethod_ = {@Override})
         private final String value;

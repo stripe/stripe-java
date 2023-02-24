@@ -252,11 +252,14 @@ public class InvoiceLineItem extends StripeObject implements HasId {
   @Setter
   @EqualsAndHashCode(callSuper = false)
   public static class Period extends StripeObject {
-    /** The end of the period, which must be greater than or equal to the start. */
+    /**
+     * The end of the period, which must be greater than or equal to the start. This value is
+     * inclusive.
+     */
     @SerializedName("end")
     Long end;
 
-    /** The start of the period. */
+    /** The start of the period. This value is inclusive. */
     @SerializedName("start")
     Long start;
   }
