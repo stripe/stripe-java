@@ -321,6 +321,9 @@ public class TaxRateCreateParams extends ApiRequestParams {
     @SerializedName("jct")
     JCT("jct"),
 
+    @SerializedName("lease_tax")
+    LEASE_TAX("lease_tax"),
+
     @SerializedName("pst")
     PST("pst"),
 

@@ -955,6 +955,9 @@ public class CardUpdateParams extends ApiRequestParams {
         @SerializedName("electric_razor_stores")
         ELECTRIC_RAZOR_STORES("electric_razor_stores"),
 
+        @SerializedName("electric_vehicle_charging")
+        ELECTRIC_VEHICLE_CHARGING("electric_vehicle_charging"),
+
         @SerializedName("electrical_parts_and_equipment")
         ELECTRICAL_PARTS_AND_EQUIPMENT("electrical_parts_and_equipment"),
 
@@ -969,6 +972,9 @@ public class CardUpdateParams extends ApiRequestParams {
 
         @SerializedName("elementary_secondary_schools")
         ELEMENTARY_SECONDARY_SCHOOLS("elementary_secondary_schools"),
+
+        @SerializedName("emergency_services_gcas_visa_use_only")
+        EMERGENCY_SERVICES_GCAS_VISA_USE_ONLY("emergency_services_gcas_visa_use_only"),
 
         @SerializedName("employment_temp_agencies")
         EMPLOYMENT_TEMP_AGENCIES("employment_temp_agencies"),
@@ -1037,6 +1043,20 @@ public class CardUpdateParams extends ApiRequestParams {
 
         @SerializedName("golf_courses_public")
         GOLF_COURSES_PUBLIC("golf_courses_public"),
+
+        @SerializedName("government_licensed_horse_dog_racing_us_region_only")
+        GOVERNMENT_LICENSED_HORSE_DOG_RACING_US_REGION_ONLY(
+            "government_licensed_horse_dog_racing_us_region_only"),
+
+        @SerializedName("government_licensed_online_casions_online_gambling_us_region_only")
+        GOVERNMENT_LICENSED_ONLINE_CASIONS_ONLINE_GAMBLING_US_REGION_ONLY(
+            "government_licensed_online_casions_online_gambling_us_region_only"),
+
+        @SerializedName("government_owned_lotteries_non_us_region")
+        GOVERNMENT_OWNED_LOTTERIES_NON_US_REGION("government_owned_lotteries_non_us_region"),
+
+        @SerializedName("government_owned_lotteries_us_region_only")
+        GOVERNMENT_OWNED_LOTTERIES_US_REGION_ONLY("government_owned_lotteries_us_region_only"),
 
         @SerializedName("government_services")
         GOVERNMENT_SERVICES("government_services"),
@@ -1116,6 +1136,9 @@ public class CardUpdateParams extends ApiRequestParams {
 
         @SerializedName("marinas_service_and_supplies")
         MARINAS_SERVICE_AND_SUPPLIES("marinas_service_and_supplies"),
+
+        @SerializedName("marketplaces")
+        MARKETPLACES("marketplaces"),
 
         @SerializedName("masonry_stonework_and_plaster")
         MASONRY_STONEWORK_AND_PLASTER("masonry_stonework_and_plaster"),
@@ -1876,6 +1899,9 @@ public class CardUpdateParams extends ApiRequestParams {
       @SerializedName("electric_razor_stores")
       ELECTRIC_RAZOR_STORES("electric_razor_stores"),
 
+      @SerializedName("electric_vehicle_charging")
+      ELECTRIC_VEHICLE_CHARGING("electric_vehicle_charging"),
+
       @SerializedName("electrical_parts_and_equipment")
       ELECTRICAL_PARTS_AND_EQUIPMENT("electrical_parts_and_equipment"),
 
@@ -1890,6 +1916,9 @@ public class CardUpdateParams extends ApiRequestParams {
 
       @SerializedName("elementary_secondary_schools")
       ELEMENTARY_SECONDARY_SCHOOLS("elementary_secondary_schools"),
+
+      @SerializedName("emergency_services_gcas_visa_use_only")
+      EMERGENCY_SERVICES_GCAS_VISA_USE_ONLY("emergency_services_gcas_visa_use_only"),
 
       @SerializedName("employment_temp_agencies")
       EMPLOYMENT_TEMP_AGENCIES("employment_temp_agencies"),
@@ -1958,6 +1987,20 @@ public class CardUpdateParams extends ApiRequestParams {
 
       @SerializedName("golf_courses_public")
       GOLF_COURSES_PUBLIC("golf_courses_public"),
+
+      @SerializedName("government_licensed_horse_dog_racing_us_region_only")
+      GOVERNMENT_LICENSED_HORSE_DOG_RACING_US_REGION_ONLY(
+          "government_licensed_horse_dog_racing_us_region_only"),
+
+      @SerializedName("government_licensed_online_casions_online_gambling_us_region_only")
+      GOVERNMENT_LICENSED_ONLINE_CASIONS_ONLINE_GAMBLING_US_REGION_ONLY(
+          "government_licensed_online_casions_online_gambling_us_region_only"),
+
+      @SerializedName("government_owned_lotteries_non_us_region")
+      GOVERNMENT_OWNED_LOTTERIES_NON_US_REGION("government_owned_lotteries_non_us_region"),
+
+      @SerializedName("government_owned_lotteries_us_region_only")
+      GOVERNMENT_OWNED_LOTTERIES_US_REGION_ONLY("government_owned_lotteries_us_region_only"),
 
       @SerializedName("government_services")
       GOVERNMENT_SERVICES("government_services"),
@@ -2037,6 +2080,9 @@ public class CardUpdateParams extends ApiRequestParams {
 
       @SerializedName("marinas_service_and_supplies")
       MARINAS_SERVICE_AND_SUPPLIES("marinas_service_and_supplies"),
+
+      @SerializedName("marketplaces")
+      MARKETPLACES("marketplaces"),
 
       @SerializedName("masonry_stonework_and_plaster")
       MASONRY_STONEWORK_AND_PLASTER("masonry_stonework_and_plaster"),
@@ -2769,6 +2815,9 @@ public class CardUpdateParams extends ApiRequestParams {
       @SerializedName("electric_razor_stores")
       ELECTRIC_RAZOR_STORES("electric_razor_stores"),
 
+      @SerializedName("electric_vehicle_charging")
+      ELECTRIC_VEHICLE_CHARGING("electric_vehicle_charging"),
+
       @SerializedName("electrical_parts_and_equipment")
       ELECTRICAL_PARTS_AND_EQUIPMENT("electrical_parts_and_equipment"),
 
@@ -2783,6 +2832,9 @@ public class CardUpdateParams extends ApiRequestParams {
 
       @SerializedName("elementary_secondary_schools")
       ELEMENTARY_SECONDARY_SCHOOLS("elementary_secondary_schools"),
+
+      @SerializedName("emergency_services_gcas_visa_use_only")
+      EMERGENCY_SERVICES_GCAS_VISA_USE_ONLY("emergency_services_gcas_visa_use_only"),
 
       @SerializedName("employment_temp_agencies")
       EMPLOYMENT_TEMP_AGENCIES("employment_temp_agencies"),
@@ -2851,6 +2903,20 @@ public class CardUpdateParams extends ApiRequestParams {
 
       @SerializedName("golf_courses_public")
       GOLF_COURSES_PUBLIC("golf_courses_public"),
+
+      @SerializedName("government_licensed_horse_dog_racing_us_region_only")
+      GOVERNMENT_LICENSED_HORSE_DOG_RACING_US_REGION_ONLY(
+          "government_licensed_horse_dog_racing_us_region_only"),
+
+      @SerializedName("government_licensed_online_casions_online_gambling_us_region_only")
+      GOVERNMENT_LICENSED_ONLINE_CASIONS_ONLINE_GAMBLING_US_REGION_ONLY(
+          "government_licensed_online_casions_online_gambling_us_region_only"),
+
+      @SerializedName("government_owned_lotteries_non_us_region")
+      GOVERNMENT_OWNED_LOTTERIES_NON_US_REGION("government_owned_lotteries_non_us_region"),
+
+      @SerializedName("government_owned_lotteries_us_region_only")
+      GOVERNMENT_OWNED_LOTTERIES_US_REGION_ONLY("government_owned_lotteries_us_region_only"),
 
       @SerializedName("government_services")
       GOVERNMENT_SERVICES("government_services"),
@@ -2930,6 +2996,9 @@ public class CardUpdateParams extends ApiRequestParams {
 
       @SerializedName("marinas_service_and_supplies")
       MARINAS_SERVICE_AND_SUPPLIES("marinas_service_and_supplies"),
+
+      @SerializedName("marketplaces")
+      MARKETPLACES("marketplaces"),
 
       @SerializedName("masonry_stonework_and_plaster")
       MASONRY_STONEWORK_AND_PLASTER("masonry_stonework_and_plaster"),

@@ -146,6 +146,17 @@ public class Payout extends ApiResource implements MetadataStore<Payout>, Balanc
   @Setter(lombok.AccessLevel.NONE)
   ExpandableField<Payout> originalPayout;
 
+  /**
+   * If {@code completed}, the <a
+   * href="https://stripe.com/docs/api/balance_transactions/list#balance_transaction_list-payout">Balance
+   * Transactions API</a> may be used to list all Balance Transactions that were paid out in this
+   * payout.
+   *
+   * <p>One of {@code completed}, {@code in_progress}, or {@code not_applicable}.
+   */
+  @SerializedName("reconciliation_status")
+  String reconciliationStatus;
+
   /** If the payout was reversed, this is the ID of the payout that reverses this payout. */
   @SerializedName("reversed_by")
   @Getter(lombok.AccessLevel.NONE)
