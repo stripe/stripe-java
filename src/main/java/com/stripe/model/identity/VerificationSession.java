@@ -334,7 +334,8 @@ public class VerificationSession extends ApiResource
       Map<String, Object> params, RequestOptions options) throws StripeException {
     String url =
         ApiResource.fullUrl(Stripe.getApiBase(), options, "/v1/identity/verification_sessions");
-    return ApiResource.requestCollection(url, params, VerificationSessionCollection.class, options);
+    return ApiResource.request(
+        ApiResource.RequestMethod.GET, url, params, VerificationSessionCollection.class, options);
   }
 
   /** Returns a list of VerificationSessions. */
@@ -348,7 +349,8 @@ public class VerificationSession extends ApiResource
       VerificationSessionListParams params, RequestOptions options) throws StripeException {
     String url =
         ApiResource.fullUrl(Stripe.getApiBase(), options, "/v1/identity/verification_sessions");
-    return ApiResource.requestCollection(url, params, VerificationSessionCollection.class, options);
+    return ApiResource.request(
+        ApiResource.RequestMethod.GET, url, params, VerificationSessionCollection.class, options);
   }
 
   /**

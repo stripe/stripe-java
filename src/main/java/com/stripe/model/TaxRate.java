@@ -116,8 +116,8 @@ public class TaxRate extends ApiResource implements HasId, MetadataStore<TaxRate
   /**
    * The high-level tax type, such as {@code vat} or {@code sales_tax}.
    *
-   * <p>One of {@code gst}, {@code hst}, {@code igst}, {@code jct}, {@code pst}, {@code qst}, {@code
-   * rst}, {@code sales_tax}, or {@code vat}.
+   * <p>One of {@code gst}, {@code hst}, {@code igst}, {@code jct}, {@code lease_tax}, {@code pst},
+   * {@code qst}, {@code rst}, {@code sales_tax}, or {@code vat}.
    */
   @SerializedName("tax_type")
   String taxType;
@@ -161,7 +161,8 @@ public class TaxRate extends ApiResource implements HasId, MetadataStore<TaxRate
   public static TaxRateCollection list(Map<String, Object> params, RequestOptions options)
       throws StripeException {
     String url = ApiResource.fullUrl(Stripe.getApiBase(), options, "/v1/tax_rates");
-    return ApiResource.requestCollection(url, params, TaxRateCollection.class, options);
+    return ApiResource.request(
+        ApiResource.RequestMethod.GET, url, params, TaxRateCollection.class, options);
   }
 
   /**
@@ -179,7 +180,8 @@ public class TaxRate extends ApiResource implements HasId, MetadataStore<TaxRate
   public static TaxRateCollection list(TaxRateListParams params, RequestOptions options)
       throws StripeException {
     String url = ApiResource.fullUrl(Stripe.getApiBase(), options, "/v1/tax_rates");
-    return ApiResource.requestCollection(url, params, TaxRateCollection.class, options);
+    return ApiResource.request(
+        ApiResource.RequestMethod.GET, url, params, TaxRateCollection.class, options);
   }
 
   /** Retrieves a tax rate with the given ID. */

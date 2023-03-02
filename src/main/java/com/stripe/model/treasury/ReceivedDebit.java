@@ -153,7 +153,8 @@ public class ReceivedDebit extends ApiResource implements HasId {
   public static ReceivedDebitCollection list(Map<String, Object> params, RequestOptions options)
       throws StripeException {
     String url = ApiResource.fullUrl(Stripe.getApiBase(), options, "/v1/treasury/received_debits");
-    return ApiResource.requestCollection(url, params, ReceivedDebitCollection.class, options);
+    return ApiResource.request(
+        ApiResource.RequestMethod.GET, url, params, ReceivedDebitCollection.class, options);
   }
 
   /** Returns a list of ReceivedDebits. */
@@ -166,7 +167,8 @@ public class ReceivedDebit extends ApiResource implements HasId {
   public static ReceivedDebitCollection list(ReceivedDebitListParams params, RequestOptions options)
       throws StripeException {
     String url = ApiResource.fullUrl(Stripe.getApiBase(), options, "/v1/treasury/received_debits");
-    return ApiResource.requestCollection(url, params, ReceivedDebitCollection.class, options);
+    return ApiResource.request(
+        ApiResource.RequestMethod.GET, url, params, ReceivedDebitCollection.class, options);
   }
 
   /**

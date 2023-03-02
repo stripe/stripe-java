@@ -332,7 +332,8 @@ public class Order extends ApiResource implements HasId, MetadataStore<Order> {
   public static OrderCollection list(Map<String, Object> params, RequestOptions options)
       throws StripeException {
     String url = ApiResource.fullUrl(Stripe.getApiBase(), options, "/v1/orders");
-    return ApiResource.requestCollection(url, params, OrderCollection.class, options);
+    return ApiResource.request(
+        ApiResource.RequestMethod.GET, url, params, OrderCollection.class, options);
   }
 
   /**
@@ -350,7 +351,8 @@ public class Order extends ApiResource implements HasId, MetadataStore<Order> {
   public static OrderCollection list(OrderListParams params, RequestOptions options)
       throws StripeException {
     String url = ApiResource.fullUrl(Stripe.getApiBase(), options, "/v1/orders");
-    return ApiResource.requestCollection(url, params, OrderCollection.class, options);
+    return ApiResource.request(
+        ApiResource.RequestMethod.GET, url, params, OrderCollection.class, options);
   }
 
   /**
@@ -383,7 +385,8 @@ public class Order extends ApiResource implements HasId, MetadataStore<Order> {
             Stripe.getApiBase(),
             options,
             String.format("/v1/orders/%s/line_items", ApiResource.urlEncodeId(this.getId())));
-    return ApiResource.requestCollection(url, params, LineItemCollection.class, options);
+    return ApiResource.request(
+        ApiResource.RequestMethod.GET, url, params, LineItemCollection.class, options);
   }
 
   /**
@@ -407,7 +410,8 @@ public class Order extends ApiResource implements HasId, MetadataStore<Order> {
             Stripe.getApiBase(),
             options,
             String.format("/v1/orders/%s/line_items", ApiResource.urlEncodeId(this.getId())));
-    return ApiResource.requestCollection(url, params, LineItemCollection.class, options);
+    return ApiResource.request(
+        ApiResource.RequestMethod.GET, url, params, LineItemCollection.class, options);
   }
 
   /** Reopens a <code>submitted</code> order. */

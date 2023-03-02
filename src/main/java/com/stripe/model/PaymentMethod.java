@@ -463,7 +463,8 @@ public class PaymentMethod extends ApiResource implements HasId, MetadataStore<P
   public static PaymentMethodCollection list(Map<String, Object> params, RequestOptions options)
       throws StripeException {
     String url = ApiResource.fullUrl(Stripe.getApiBase(), options, "/v1/payment_methods");
-    return ApiResource.requestCollection(url, params, PaymentMethodCollection.class, options);
+    return ApiResource.request(
+        ApiResource.RequestMethod.GET, url, params, PaymentMethodCollection.class, options);
   }
 
   /**
@@ -486,7 +487,8 @@ public class PaymentMethod extends ApiResource implements HasId, MetadataStore<P
   public static PaymentMethodCollection list(PaymentMethodListParams params, RequestOptions options)
       throws StripeException {
     String url = ApiResource.fullUrl(Stripe.getApiBase(), options, "/v1/payment_methods");
-    return ApiResource.requestCollection(url, params, PaymentMethodCollection.class, options);
+    return ApiResource.request(
+        ApiResource.RequestMethod.GET, url, params, PaymentMethodCollection.class, options);
   }
 
   /**

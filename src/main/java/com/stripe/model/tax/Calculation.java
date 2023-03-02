@@ -135,7 +135,8 @@ public class Calculation extends ApiResource implements HasId {
             options,
             String.format(
                 "/v1/tax/calculations/%s/line_items", ApiResource.urlEncodeId(this.getId())));
-    return ApiResource.requestCollection(url, params, LineItemCollection.class, options);
+    return ApiResource.request(
+        ApiResource.RequestMethod.GET, url, params, LineItemCollection.class, options);
   }
 
   /** Retrieves the line items of a persisted tax calculation as a collection. */
@@ -153,7 +154,8 @@ public class Calculation extends ApiResource implements HasId {
             options,
             String.format(
                 "/v1/tax/calculations/%s/line_items", ApiResource.urlEncodeId(this.getId())));
-    return ApiResource.requestCollection(url, params, LineItemCollection.class, options);
+    return ApiResource.request(
+        ApiResource.RequestMethod.GET, url, params, LineItemCollection.class, options);
   }
 
   @Getter

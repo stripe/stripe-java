@@ -124,7 +124,8 @@ public class Configuration extends ApiResource implements HasId {
   public static ConfigurationCollection list(Map<String, Object> params, RequestOptions options)
       throws StripeException {
     String url = ApiResource.fullUrl(Stripe.getApiBase(), options, "/v1/terminal/configurations");
-    return ApiResource.requestCollection(url, params, ConfigurationCollection.class, options);
+    return ApiResource.request(
+        ApiResource.RequestMethod.GET, url, params, ConfigurationCollection.class, options);
   }
 
   /** Returns a list of <code>Configuration</code> objects. */
@@ -137,7 +138,8 @@ public class Configuration extends ApiResource implements HasId {
   public static ConfigurationCollection list(ConfigurationListParams params, RequestOptions options)
       throws StripeException {
     String url = ApiResource.fullUrl(Stripe.getApiBase(), options, "/v1/terminal/configurations");
-    return ApiResource.requestCollection(url, params, ConfigurationCollection.class, options);
+    return ApiResource.request(
+        ApiResource.RequestMethod.GET, url, params, ConfigurationCollection.class, options);
   }
 
   /** Retrieves a <code>Configuration</code> object. */

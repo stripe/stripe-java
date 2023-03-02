@@ -128,7 +128,8 @@ public class FileLink extends ApiResource implements HasId, MetadataStore<FileLi
   public static FileLinkCollection list(Map<String, Object> params, RequestOptions options)
       throws StripeException {
     String url = ApiResource.fullUrl(Stripe.getApiBase(), options, "/v1/file_links");
-    return ApiResource.requestCollection(url, params, FileLinkCollection.class, options);
+    return ApiResource.request(
+        ApiResource.RequestMethod.GET, url, params, FileLinkCollection.class, options);
   }
 
   /** Returns a list of file links. */
@@ -140,7 +141,8 @@ public class FileLink extends ApiResource implements HasId, MetadataStore<FileLi
   public static FileLinkCollection list(FileLinkListParams params, RequestOptions options)
       throws StripeException {
     String url = ApiResource.fullUrl(Stripe.getApiBase(), options, "/v1/file_links");
-    return ApiResource.requestCollection(url, params, FileLinkCollection.class, options);
+    return ApiResource.request(
+        ApiResource.RequestMethod.GET, url, params, FileLinkCollection.class, options);
   }
 
   /** Retrieves the file link with the given ID. */

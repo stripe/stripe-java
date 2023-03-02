@@ -29,7 +29,8 @@ public class RefundCollection extends StripeCollection<Refund> {
   public RefundCollection list(Map<String, Object> params, RequestOptions options)
       throws StripeException {
     String url = ApiResource.fullUrl(Stripe.getApiBase(), options, this.getUrl());
-    return ApiResource.requestCollection(url, params, RefundCollection.class, options);
+    return ApiResource.request(
+        ApiResource.RequestMethod.GET, url, params, RefundCollection.class, options);
   }
 
   /**
@@ -51,7 +52,8 @@ public class RefundCollection extends StripeCollection<Refund> {
   public RefundCollection list(RefundCollectionListParams params, RequestOptions options)
       throws StripeException {
     String url = ApiResource.fullUrl(Stripe.getApiBase(), options, this.getUrl());
-    return ApiResource.requestCollection(url, params, RefundCollection.class, options);
+    return ApiResource.request(
+        ApiResource.RequestMethod.GET, url, params, RefundCollection.class, options);
   }
 
   /** Retrieves the details of an existing refund. */

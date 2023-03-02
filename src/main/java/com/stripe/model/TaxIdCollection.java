@@ -43,7 +43,8 @@ public class TaxIdCollection extends StripeCollection<TaxId> {
   public TaxIdCollection list(Map<String, Object> params, RequestOptions options)
       throws StripeException {
     String url = ApiResource.fullUrl(Stripe.getApiBase(), options, this.getUrl());
-    return ApiResource.requestCollection(url, params, TaxIdCollection.class, options);
+    return ApiResource.request(
+        ApiResource.RequestMethod.GET, url, params, TaxIdCollection.class, options);
   }
 
   /** Returns a list of tax IDs for a customer. */
@@ -55,7 +56,8 @@ public class TaxIdCollection extends StripeCollection<TaxId> {
   public TaxIdCollection list(TaxIdCollectionListParams params, RequestOptions options)
       throws StripeException {
     String url = ApiResource.fullUrl(Stripe.getApiBase(), options, this.getUrl());
-    return ApiResource.requestCollection(url, params, TaxIdCollection.class, options);
+    return ApiResource.request(
+        ApiResource.RequestMethod.GET, url, params, TaxIdCollection.class, options);
   }
 
   /** Retrieves the <code>TaxID</code> object with the given identifier. */

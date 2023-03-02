@@ -235,7 +235,8 @@ public class QuotePhase extends ApiResource implements HasId {
             Stripe.getApiBase(),
             options,
             String.format("/v1/quote_phases/%s/line_items", ApiResource.urlEncodeId(this.getId())));
-    return ApiResource.requestCollection(url, params, LineItemCollection.class, options);
+    return ApiResource.request(
+        ApiResource.RequestMethod.GET, url, params, LineItemCollection.class, options);
   }
 
   /**
@@ -260,7 +261,8 @@ public class QuotePhase extends ApiResource implements HasId {
             Stripe.getApiBase(),
             options,
             String.format("/v1/quote_phases/%s/line_items", ApiResource.urlEncodeId(this.getId())));
-    return ApiResource.requestCollection(url, params, LineItemCollection.class, options);
+    return ApiResource.request(
+        ApiResource.RequestMethod.GET, url, params, LineItemCollection.class, options);
   }
 
   /** Retrieves the quote phase with the given ID. */

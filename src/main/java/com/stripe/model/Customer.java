@@ -273,8 +273,12 @@ public class Customer extends ApiResource implements HasId, MetadataStore<Custom
             options,
             String.format(
                 "/v1/customers/%s/balance_transactions", ApiResource.urlEncodeId(this.getId())));
-    return ApiResource.requestCollection(
-        url, params, CustomerBalanceTransactionCollection.class, options);
+    return ApiResource.request(
+        ApiResource.RequestMethod.GET,
+        url,
+        params,
+        CustomerBalanceTransactionCollection.class,
+        options);
   }
 
   /**
@@ -298,8 +302,12 @@ public class Customer extends ApiResource implements HasId, MetadataStore<Custom
             options,
             String.format(
                 "/v1/customers/%s/balance_transactions", ApiResource.urlEncodeId(this.getId())));
-    return ApiResource.requestCollection(
-        url, params, CustomerBalanceTransactionCollection.class, options);
+    return ApiResource.request(
+        ApiResource.RequestMethod.GET,
+        url,
+        params,
+        CustomerBalanceTransactionCollection.class,
+        options);
   }
 
   /** Creates a new customer object. */
@@ -463,7 +471,8 @@ public class Customer extends ApiResource implements HasId, MetadataStore<Custom
   public static CustomerCollection list(Map<String, Object> params, RequestOptions options)
       throws StripeException {
     String url = ApiResource.fullUrl(Stripe.getApiBase(), options, "/v1/customers");
-    return ApiResource.requestCollection(url, params, CustomerCollection.class, options);
+    return ApiResource.request(
+        ApiResource.RequestMethod.GET, url, params, CustomerCollection.class, options);
   }
 
   /**
@@ -481,7 +490,8 @@ public class Customer extends ApiResource implements HasId, MetadataStore<Custom
   public static CustomerCollection list(CustomerListParams params, RequestOptions options)
       throws StripeException {
     String url = ApiResource.fullUrl(Stripe.getApiBase(), options, "/v1/customers");
-    return ApiResource.requestCollection(url, params, CustomerCollection.class, options);
+    return ApiResource.request(
+        ApiResource.RequestMethod.GET, url, params, CustomerCollection.class, options);
   }
 
   /** Returns a list of PaymentMethods for a given Customer. */
@@ -504,7 +514,8 @@ public class Customer extends ApiResource implements HasId, MetadataStore<Custom
             options,
             String.format(
                 "/v1/customers/%s/payment_methods", ApiResource.urlEncodeId(this.getId())));
-    return ApiResource.requestCollection(url, params, PaymentMethodCollection.class, options);
+    return ApiResource.request(
+        ApiResource.RequestMethod.GET, url, params, PaymentMethodCollection.class, options);
   }
 
   /** Returns a list of PaymentMethods for a given Customer. */
@@ -522,7 +533,8 @@ public class Customer extends ApiResource implements HasId, MetadataStore<Custom
             options,
             String.format(
                 "/v1/customers/%s/payment_methods", ApiResource.urlEncodeId(this.getId())));
-    return ApiResource.requestCollection(url, params, PaymentMethodCollection.class, options);
+    return ApiResource.request(
+        ApiResource.RequestMethod.GET, url, params, PaymentMethodCollection.class, options);
   }
 
   /** Retrieves a Customer object. */
@@ -610,7 +622,8 @@ public class Customer extends ApiResource implements HasId, MetadataStore<Custom
   public static CustomerSearchResult search(Map<String, Object> params, RequestOptions options)
       throws StripeException {
     String url = ApiResource.fullUrl(Stripe.getApiBase(), options, "/v1/customers/search");
-    return ApiResource.requestSearchResult(url, params, CustomerSearchResult.class, options);
+    return ApiResource.request(
+        ApiResource.RequestMethod.GET, url, params, CustomerSearchResult.class, options);
   }
 
   /**
@@ -636,7 +649,8 @@ public class Customer extends ApiResource implements HasId, MetadataStore<Custom
   public static CustomerSearchResult search(CustomerSearchParams params, RequestOptions options)
       throws StripeException {
     String url = ApiResource.fullUrl(Stripe.getApiBase(), options, "/v1/customers/search");
-    return ApiResource.requestSearchResult(url, params, CustomerSearchResult.class, options);
+    return ApiResource.request(
+        ApiResource.RequestMethod.GET, url, params, CustomerSearchResult.class, options);
   }
 
   /**

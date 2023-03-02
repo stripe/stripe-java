@@ -111,7 +111,8 @@ public class ApplePayDomain extends ApiResource implements HasId {
   public static ApplePayDomainCollection list(Map<String, Object> params, RequestOptions options)
       throws StripeException {
     String url = ApiResource.fullUrl(Stripe.getApiBase(), options, "/v1/apple_pay/domains");
-    return ApiResource.requestCollection(url, params, ApplePayDomainCollection.class, options);
+    return ApiResource.request(
+        ApiResource.RequestMethod.GET, url, params, ApplePayDomainCollection.class, options);
   }
 
   /** List apple pay domains. */
@@ -124,7 +125,8 @@ public class ApplePayDomain extends ApiResource implements HasId {
   public static ApplePayDomainCollection list(
       ApplePayDomainListParams params, RequestOptions options) throws StripeException {
     String url = ApiResource.fullUrl(Stripe.getApiBase(), options, "/v1/apple_pay/domains");
-    return ApiResource.requestCollection(url, params, ApplePayDomainCollection.class, options);
+    return ApiResource.request(
+        ApiResource.RequestMethod.GET, url, params, ApplePayDomainCollection.class, options);
   }
 
   /** Retrieve an apple pay domain. */

@@ -226,7 +226,8 @@ public class Transaction extends ApiResource implements HasId, MetadataStore<Tra
   public static TransactionCollection list(Map<String, Object> params, RequestOptions options)
       throws StripeException {
     String url = ApiResource.fullUrl(Stripe.getApiBase(), options, "/v1/gift_cards/transactions");
-    return ApiResource.requestCollection(url, params, TransactionCollection.class, options);
+    return ApiResource.request(
+        ApiResource.RequestMethod.GET, url, params, TransactionCollection.class, options);
   }
 
   /** List gift card transactions for a gift card. */
@@ -238,7 +239,8 @@ public class Transaction extends ApiResource implements HasId, MetadataStore<Tra
   public static TransactionCollection list(TransactionListParams params, RequestOptions options)
       throws StripeException {
     String url = ApiResource.fullUrl(Stripe.getApiBase(), options, "/v1/gift_cards/transactions");
-    return ApiResource.requestCollection(url, params, TransactionCollection.class, options);
+    return ApiResource.request(
+        ApiResource.RequestMethod.GET, url, params, TransactionCollection.class, options);
   }
 
   /** Retrieves the gift card transaction. */

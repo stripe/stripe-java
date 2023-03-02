@@ -117,7 +117,8 @@ public class Card extends ApiResource implements HasId, MetadataStore<Card> {
   public static CardCollection list(Map<String, Object> params, RequestOptions options)
       throws StripeException {
     String url = ApiResource.fullUrl(Stripe.getApiBase(), options, "/v1/gift_cards/cards");
-    return ApiResource.requestCollection(url, params, CardCollection.class, options);
+    return ApiResource.request(
+        ApiResource.RequestMethod.GET, url, params, CardCollection.class, options);
   }
 
   /** List gift cards for an account. */
@@ -129,7 +130,8 @@ public class Card extends ApiResource implements HasId, MetadataStore<Card> {
   public static CardCollection list(CardListParams params, RequestOptions options)
       throws StripeException {
     String url = ApiResource.fullUrl(Stripe.getApiBase(), options, "/v1/gift_cards/cards");
-    return ApiResource.requestCollection(url, params, CardCollection.class, options);
+    return ApiResource.request(
+        ApiResource.RequestMethod.GET, url, params, CardCollection.class, options);
   }
 
   /** Retrieve a gift card by id. */

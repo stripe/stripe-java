@@ -70,7 +70,8 @@ public class InferredBalance extends ApiResource implements HasId {
             String.format(
                 "/v1/financial_connections/accounts/%s/inferred_balances",
                 ApiResource.urlEncodeId(account)));
-    return ApiResource.requestCollection(url, params, InferredBalanceCollection.class, options);
+    return ApiResource.request(
+        ApiResource.RequestMethod.GET, url, params, InferredBalanceCollection.class, options);
   }
 
   /** Lists the recorded inferred balances for a Financial Connections <code>Account</code>. */
@@ -90,6 +91,7 @@ public class InferredBalance extends ApiResource implements HasId {
             String.format(
                 "/v1/financial_connections/accounts/%s/inferred_balances",
                 ApiResource.urlEncodeId(account)));
-    return ApiResource.requestCollection(url, params, InferredBalanceCollection.class, options);
+    return ApiResource.request(
+        ApiResource.RequestMethod.GET, url, params, InferredBalanceCollection.class, options);
   }
 }

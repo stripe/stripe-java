@@ -49,7 +49,8 @@ public class PersonCollection extends StripeCollection<Person> {
   public PersonCollection list(Map<String, Object> params, RequestOptions options)
       throws StripeException {
     String url = ApiResource.fullUrl(Stripe.getApiBase(), options, this.getUrl());
-    return ApiResource.requestCollection(url, params, PersonCollection.class, options);
+    return ApiResource.request(
+        ApiResource.RequestMethod.GET, url, params, PersonCollection.class, options);
   }
 
   /**
@@ -67,7 +68,8 @@ public class PersonCollection extends StripeCollection<Person> {
   public PersonCollection list(PersonCollectionListParams params, RequestOptions options)
       throws StripeException {
     String url = ApiResource.fullUrl(Stripe.getApiBase(), options, this.getUrl());
-    return ApiResource.requestCollection(url, params, PersonCollection.class, options);
+    return ApiResource.request(
+        ApiResource.RequestMethod.GET, url, params, PersonCollection.class, options);
   }
 
   /** Retrieves an existing person. */

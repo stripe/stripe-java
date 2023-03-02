@@ -116,7 +116,8 @@ public class Transaction extends ApiResource implements HasId {
   public static TransactionCollection list(Map<String, Object> params, RequestOptions options)
       throws StripeException {
     String url = ApiResource.fullUrl(Stripe.getApiBase(), options, "/v1/treasury/transactions");
-    return ApiResource.requestCollection(url, params, TransactionCollection.class, options);
+    return ApiResource.request(
+        ApiResource.RequestMethod.GET, url, params, TransactionCollection.class, options);
   }
 
   /** Retrieves a list of Transaction objects. */
@@ -128,7 +129,8 @@ public class Transaction extends ApiResource implements HasId {
   public static TransactionCollection list(TransactionListParams params, RequestOptions options)
       throws StripeException {
     String url = ApiResource.fullUrl(Stripe.getApiBase(), options, "/v1/treasury/transactions");
-    return ApiResource.requestCollection(url, params, TransactionCollection.class, options);
+    return ApiResource.request(
+        ApiResource.RequestMethod.GET, url, params, TransactionCollection.class, options);
   }
 
   /** Retrieves the details of an existing Transaction. */

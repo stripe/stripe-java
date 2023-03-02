@@ -121,7 +121,8 @@ public class Event extends ApiResource implements HasId {
   public static EventCollection list(Map<String, Object> params, RequestOptions options)
       throws StripeException {
     String url = ApiResource.fullUrl(Stripe.getApiBase(), options, "/v1/events");
-    return ApiResource.requestCollection(url, params, EventCollection.class, options);
+    return ApiResource.request(
+        ApiResource.RequestMethod.GET, url, params, EventCollection.class, options);
   }
 
   /**
@@ -145,7 +146,8 @@ public class Event extends ApiResource implements HasId {
   public static EventCollection list(EventListParams params, RequestOptions options)
       throws StripeException {
     String url = ApiResource.fullUrl(Stripe.getApiBase(), options, "/v1/events");
-    return ApiResource.requestCollection(url, params, EventCollection.class, options);
+    return ApiResource.request(
+        ApiResource.RequestMethod.GET, url, params, EventCollection.class, options);
   }
 
   /**

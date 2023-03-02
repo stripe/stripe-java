@@ -26,7 +26,8 @@ public class CreditNoteLineItemCollection extends StripeCollection<CreditNoteLin
   public CreditNoteLineItemCollection list(Map<String, Object> params, RequestOptions options)
       throws StripeException {
     String url = ApiResource.fullUrl(Stripe.getApiBase(), options, this.getUrl());
-    return ApiResource.requestCollection(url, params, CreditNoteLineItemCollection.class, options);
+    return ApiResource.request(
+        ApiResource.RequestMethod.GET, url, params, CreditNoteLineItemCollection.class, options);
   }
 
   /**
@@ -48,6 +49,7 @@ public class CreditNoteLineItemCollection extends StripeCollection<CreditNoteLin
       CreditNoteLineItemCollectionListParams params, RequestOptions options)
       throws StripeException {
     String url = ApiResource.fullUrl(Stripe.getApiBase(), options, this.getUrl());
-    return ApiResource.requestCollection(url, params, CreditNoteLineItemCollection.class, options);
+    return ApiResource.request(
+        ApiResource.RequestMethod.GET, url, params, CreditNoteLineItemCollection.class, options);
   }
 }

@@ -163,7 +163,8 @@ public class Secret extends ApiResource implements HasId {
   public static SecretCollection list(Map<String, Object> params, RequestOptions options)
       throws StripeException {
     String url = ApiResource.fullUrl(Stripe.getApiBase(), options, "/v1/apps/secrets");
-    return ApiResource.requestCollection(url, params, SecretCollection.class, options);
+    return ApiResource.request(
+        ApiResource.RequestMethod.GET, url, params, SecretCollection.class, options);
   }
 
   /** List all secrets stored on the given scope. */
@@ -175,7 +176,8 @@ public class Secret extends ApiResource implements HasId {
   public static SecretCollection list(SecretListParams params, RequestOptions options)
       throws StripeException {
     String url = ApiResource.fullUrl(Stripe.getApiBase(), options, "/v1/apps/secrets");
-    return ApiResource.requestCollection(url, params, SecretCollection.class, options);
+    return ApiResource.request(
+        ApiResource.RequestMethod.GET, url, params, SecretCollection.class, options);
   }
 
   @Getter

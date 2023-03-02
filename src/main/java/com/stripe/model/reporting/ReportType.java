@@ -98,7 +98,8 @@ public class ReportType extends ApiResource implements HasId {
   public static ReportTypeCollection list(Map<String, Object> params, RequestOptions options)
       throws StripeException {
     String url = ApiResource.fullUrl(Stripe.getApiBase(), options, "/v1/reporting/report_types");
-    return ApiResource.requestCollection(url, params, ReportTypeCollection.class, options);
+    return ApiResource.request(
+        ApiResource.RequestMethod.GET, url, params, ReportTypeCollection.class, options);
   }
 
   /** Returns a full list of Report Types. */
@@ -110,7 +111,8 @@ public class ReportType extends ApiResource implements HasId {
   public static ReportTypeCollection list(ReportTypeListParams params, RequestOptions options)
       throws StripeException {
     String url = ApiResource.fullUrl(Stripe.getApiBase(), options, "/v1/reporting/report_types");
-    return ApiResource.requestCollection(url, params, ReportTypeCollection.class, options);
+    return ApiResource.request(
+        ApiResource.RequestMethod.GET, url, params, ReportTypeCollection.class, options);
   }
 
   /**

@@ -57,7 +57,8 @@ public class TaxCode extends ApiResource implements HasId {
   public static TaxCodeCollection list(Map<String, Object> params, RequestOptions options)
       throws StripeException {
     String url = ApiResource.fullUrl(Stripe.getApiBase(), options, "/v1/tax_codes");
-    return ApiResource.requestCollection(url, params, TaxCodeCollection.class, options);
+    return ApiResource.request(
+        ApiResource.RequestMethod.GET, url, params, TaxCodeCollection.class, options);
   }
 
   /**
@@ -75,7 +76,8 @@ public class TaxCode extends ApiResource implements HasId {
   public static TaxCodeCollection list(TaxCodeListParams params, RequestOptions options)
       throws StripeException {
     String url = ApiResource.fullUrl(Stripe.getApiBase(), options, "/v1/tax_codes");
-    return ApiResource.requestCollection(url, params, TaxCodeCollection.class, options);
+    return ApiResource.request(
+        ApiResource.RequestMethod.GET, url, params, TaxCodeCollection.class, options);
   }
 
   /**

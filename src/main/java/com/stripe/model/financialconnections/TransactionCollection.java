@@ -19,7 +19,8 @@ public class TransactionCollection extends StripeCollection<Transaction> {
   public TransactionCollection list(Map<String, Object> params, RequestOptions options)
       throws StripeException {
     String url = ApiResource.fullUrl(Stripe.getApiBase(), options, this.getUrl());
-    return ApiResource.requestCollection(url, params, TransactionCollection.class, options);
+    return ApiResource.request(
+        ApiResource.RequestMethod.GET, url, params, TransactionCollection.class, options);
   }
 
   /** Returns a list of Financial Connections <code>Transaction</code> objects. */
@@ -31,6 +32,7 @@ public class TransactionCollection extends StripeCollection<Transaction> {
   public TransactionCollection list(TransactionCollectionListParams params, RequestOptions options)
       throws StripeException {
     String url = ApiResource.fullUrl(Stripe.getApiBase(), options, this.getUrl());
-    return ApiResource.requestCollection(url, params, TransactionCollection.class, options);
+    return ApiResource.request(
+        ApiResource.RequestMethod.GET, url, params, TransactionCollection.class, options);
   }
 }

@@ -586,6 +586,15 @@ public class WebhookEndpointUpdateParams extends ApiRequestParams {
     @SerializedName("issuing_card.updated")
     ISSUING_CARD__UPDATED("issuing_card.updated"),
 
+    @SerializedName("issuing_card_design.activated")
+    ISSUING_CARD_DESIGN__ACTIVATED("issuing_card_design.activated"),
+
+    @SerializedName("issuing_card_design.deactivated")
+    ISSUING_CARD_DESIGN__DEACTIVATED("issuing_card_design.deactivated"),
+
+    @SerializedName("issuing_card_design.updated")
+    ISSUING_CARD_DESIGN__UPDATED("issuing_card_design.updated"),
+
     @SerializedName("issuing_cardholder.created")
     ISSUING_CARDHOLDER__CREATED("issuing_cardholder.created"),
 

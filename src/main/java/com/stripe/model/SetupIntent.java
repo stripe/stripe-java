@@ -597,7 +597,8 @@ public class SetupIntent extends ApiResource implements HasId, MetadataStore<Set
   public static SetupIntentCollection list(Map<String, Object> params, RequestOptions options)
       throws StripeException {
     String url = ApiResource.fullUrl(Stripe.getApiBase(), options, "/v1/setup_intents");
-    return ApiResource.requestCollection(url, params, SetupIntentCollection.class, options);
+    return ApiResource.request(
+        ApiResource.RequestMethod.GET, url, params, SetupIntentCollection.class, options);
   }
 
   /** Returns a list of SetupIntents. */
@@ -609,7 +610,8 @@ public class SetupIntent extends ApiResource implements HasId, MetadataStore<Set
   public static SetupIntentCollection list(SetupIntentListParams params, RequestOptions options)
       throws StripeException {
     String url = ApiResource.fullUrl(Stripe.getApiBase(), options, "/v1/setup_intents");
-    return ApiResource.requestCollection(url, params, SetupIntentCollection.class, options);
+    return ApiResource.request(
+        ApiResource.RequestMethod.GET, url, params, SetupIntentCollection.class, options);
   }
 
   /**

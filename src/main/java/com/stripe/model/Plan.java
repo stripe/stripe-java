@@ -285,7 +285,8 @@ public class Plan extends ApiResource implements HasId, MetadataStore<Plan> {
   public static PlanCollection list(Map<String, Object> params, RequestOptions options)
       throws StripeException {
     String url = ApiResource.fullUrl(Stripe.getApiBase(), options, "/v1/plans");
-    return ApiResource.requestCollection(url, params, PlanCollection.class, options);
+    return ApiResource.request(
+        ApiResource.RequestMethod.GET, url, params, PlanCollection.class, options);
   }
 
   /** Returns a list of your plans. */
@@ -297,7 +298,8 @@ public class Plan extends ApiResource implements HasId, MetadataStore<Plan> {
   public static PlanCollection list(PlanListParams params, RequestOptions options)
       throws StripeException {
     String url = ApiResource.fullUrl(Stripe.getApiBase(), options, "/v1/plans");
-    return ApiResource.requestCollection(url, params, PlanCollection.class, options);
+    return ApiResource.request(
+        ApiResource.RequestMethod.GET, url, params, PlanCollection.class, options);
   }
 
   /** Retrieves the plan with the given ID. */

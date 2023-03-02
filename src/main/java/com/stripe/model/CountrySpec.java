@@ -78,7 +78,8 @@ public class CountrySpec extends ApiResource implements HasId {
   public static CountrySpecCollection list(Map<String, Object> params, RequestOptions options)
       throws StripeException {
     String url = ApiResource.fullUrl(Stripe.getApiBase(), options, "/v1/country_specs");
-    return ApiResource.requestCollection(url, params, CountrySpecCollection.class, options);
+    return ApiResource.request(
+        ApiResource.RequestMethod.GET, url, params, CountrySpecCollection.class, options);
   }
 
   /** Lists all Country Spec objects available in the API. */
@@ -90,7 +91,8 @@ public class CountrySpec extends ApiResource implements HasId {
   public static CountrySpecCollection list(CountrySpecListParams params, RequestOptions options)
       throws StripeException {
     String url = ApiResource.fullUrl(Stripe.getApiBase(), options, "/v1/country_specs");
-    return ApiResource.requestCollection(url, params, CountrySpecCollection.class, options);
+    return ApiResource.request(
+        ApiResource.RequestMethod.GET, url, params, CountrySpecCollection.class, options);
   }
 
   /** Returns a Country Spec for a given Country code. */

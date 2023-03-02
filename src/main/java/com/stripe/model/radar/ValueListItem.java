@@ -146,7 +146,8 @@ public class ValueListItem extends ApiResource implements HasId {
   public static ValueListItemCollection list(Map<String, Object> params, RequestOptions options)
       throws StripeException {
     String url = ApiResource.fullUrl(Stripe.getApiBase(), options, "/v1/radar/value_list_items");
-    return ApiResource.requestCollection(url, params, ValueListItemCollection.class, options);
+    return ApiResource.request(
+        ApiResource.RequestMethod.GET, url, params, ValueListItemCollection.class, options);
   }
 
   /**
@@ -165,7 +166,8 @@ public class ValueListItem extends ApiResource implements HasId {
   public static ValueListItemCollection list(ValueListItemListParams params, RequestOptions options)
       throws StripeException {
     String url = ApiResource.fullUrl(Stripe.getApiBase(), options, "/v1/radar/value_list_items");
-    return ApiResource.requestCollection(url, params, ValueListItemCollection.class, options);
+    return ApiResource.request(
+        ApiResource.RequestMethod.GET, url, params, ValueListItemCollection.class, options);
   }
 
   /** Retrieves a <code>ValueListItem</code> object. */

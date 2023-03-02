@@ -45,6 +45,12 @@ public class Card extends ApiResource implements HasId, MetadataStore<Card> {
   @SerializedName("cancellation_reason")
   String cancellationReason;
 
+  /** The card design object belonging to this card. */
+  @SerializedName("card_design")
+  @Getter(lombok.AccessLevel.NONE)
+  @Setter(lombok.AccessLevel.NONE)
+  ExpandableField<CardDesign> cardDesign;
+
   /**
    * An Issuing {@code Cardholder} object represents an individual or business entity who is <a
    * href="https://stripe.com/docs/issuing">issued</a> cards.
@@ -182,6 +188,24 @@ public class Card extends ApiResource implements HasId, MetadataStore<Card> {
   @SerializedName("wallets")
   Wallets wallets;
 
+  /** Get ID of expandable {@code cardDesign} object. */
+  public String getCardDesign() {
+    return (this.cardDesign != null) ? this.cardDesign.getId() : null;
+  }
+
+  public void setCardDesign(String id) {
+    this.cardDesign = ApiResource.setExpandableFieldId(id, this.cardDesign);
+  }
+
+  /** Get expanded {@code cardDesign}. */
+  public CardDesign getCardDesignObject() {
+    return (this.cardDesign != null) ? this.cardDesign.getExpanded() : null;
+  }
+
+  public void setCardDesignObject(CardDesign expandableObject) {
+    this.cardDesign = new ExpandableField<CardDesign>(expandableObject.getId(), expandableObject);
+  }
+
   /** Get ID of expandable {@code replacedBy} object. */
   public String getReplacedBy() {
     return (this.replacedBy != null) ? this.replacedBy.getId() : null;
@@ -257,7 +281,8 @@ public class Card extends ApiResource implements HasId, MetadataStore<Card> {
   public static CardCollection list(Map<String, Object> params, RequestOptions options)
       throws StripeException {
     String url = ApiResource.fullUrl(Stripe.getApiBase(), options, "/v1/issuing/cards");
-    return ApiResource.requestCollection(url, params, CardCollection.class, options);
+    return ApiResource.request(
+        ApiResource.RequestMethod.GET, url, params, CardCollection.class, options);
   }
 
   /**
@@ -275,7 +300,8 @@ public class Card extends ApiResource implements HasId, MetadataStore<Card> {
   public static CardCollection list(CardListParams params, RequestOptions options)
       throws StripeException {
     String url = ApiResource.fullUrl(Stripe.getApiBase(), options, "/v1/issuing/cards");
-    return ApiResource.requestCollection(url, params, CardCollection.class, options);
+    return ApiResource.request(
+        ApiResource.RequestMethod.GET, url, params, CardCollection.class, options);
   }
 
   /** Retrieves an Issuing <code>Card</code> object. */

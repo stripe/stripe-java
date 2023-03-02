@@ -155,7 +155,8 @@ public class ShippingRate extends ApiResource implements HasId, MetadataStore<Sh
   public static ShippingRateCollection list(Map<String, Object> params, RequestOptions options)
       throws StripeException {
     String url = ApiResource.fullUrl(Stripe.getApiBase(), options, "/v1/shipping_rates");
-    return ApiResource.requestCollection(url, params, ShippingRateCollection.class, options);
+    return ApiResource.request(
+        ApiResource.RequestMethod.GET, url, params, ShippingRateCollection.class, options);
   }
 
   /** Returns a list of your shipping rates. */
@@ -167,7 +168,8 @@ public class ShippingRate extends ApiResource implements HasId, MetadataStore<Sh
   public static ShippingRateCollection list(ShippingRateListParams params, RequestOptions options)
       throws StripeException {
     String url = ApiResource.fullUrl(Stripe.getApiBase(), options, "/v1/shipping_rates");
-    return ApiResource.requestCollection(url, params, ShippingRateCollection.class, options);
+    return ApiResource.request(
+        ApiResource.RequestMethod.GET, url, params, ShippingRateCollection.class, options);
   }
 
   /** Returns the shipping rate object with the given ID. */

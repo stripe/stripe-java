@@ -383,7 +383,8 @@ public class Refund extends ApiResource implements MetadataStore<Refund>, Balanc
   public static RefundCollection list(Map<String, Object> params, RequestOptions options)
       throws StripeException {
     String url = ApiResource.fullUrl(Stripe.getApiBase(), options, "/v1/refunds");
-    return ApiResource.requestCollection(url, params, RefundCollection.class, options);
+    return ApiResource.request(
+        ApiResource.RequestMethod.GET, url, params, RefundCollection.class, options);
   }
 
   /**
@@ -403,7 +404,8 @@ public class Refund extends ApiResource implements MetadataStore<Refund>, Balanc
   public static RefundCollection list(RefundListParams params, RequestOptions options)
       throws StripeException {
     String url = ApiResource.fullUrl(Stripe.getApiBase(), options, "/v1/refunds");
-    return ApiResource.requestCollection(url, params, RefundCollection.class, options);
+    return ApiResource.request(
+        ApiResource.RequestMethod.GET, url, params, RefundCollection.class, options);
   }
 
   /** Retrieves the details of an existing refund. */

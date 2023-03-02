@@ -1158,7 +1158,8 @@ public class PaymentIntent extends ApiResource implements HasId, MetadataStore<P
   public static PaymentIntentCollection list(Map<String, Object> params, RequestOptions options)
       throws StripeException {
     String url = ApiResource.fullUrl(Stripe.getApiBase(), options, "/v1/payment_intents");
-    return ApiResource.requestCollection(url, params, PaymentIntentCollection.class, options);
+    return ApiResource.request(
+        ApiResource.RequestMethod.GET, url, params, PaymentIntentCollection.class, options);
   }
 
   /** Returns a list of PaymentIntents. */
@@ -1171,7 +1172,8 @@ public class PaymentIntent extends ApiResource implements HasId, MetadataStore<P
   public static PaymentIntentCollection list(PaymentIntentListParams params, RequestOptions options)
       throws StripeException {
     String url = ApiResource.fullUrl(Stripe.getApiBase(), options, "/v1/payment_intents");
-    return ApiResource.requestCollection(url, params, PaymentIntentCollection.class, options);
+    return ApiResource.request(
+        ApiResource.RequestMethod.GET, url, params, PaymentIntentCollection.class, options);
   }
 
   /**
@@ -1270,7 +1272,8 @@ public class PaymentIntent extends ApiResource implements HasId, MetadataStore<P
   public static PaymentIntentSearchResult search(Map<String, Object> params, RequestOptions options)
       throws StripeException {
     String url = ApiResource.fullUrl(Stripe.getApiBase(), options, "/v1/payment_intents/search");
-    return ApiResource.requestSearchResult(url, params, PaymentIntentSearchResult.class, options);
+    return ApiResource.request(
+        ApiResource.RequestMethod.GET, url, params, PaymentIntentSearchResult.class, options);
   }
 
   /**
@@ -1297,7 +1300,8 @@ public class PaymentIntent extends ApiResource implements HasId, MetadataStore<P
   public static PaymentIntentSearchResult search(
       PaymentIntentSearchParams params, RequestOptions options) throws StripeException {
     String url = ApiResource.fullUrl(Stripe.getApiBase(), options, "/v1/payment_intents/search");
-    return ApiResource.requestSearchResult(url, params, PaymentIntentSearchResult.class, options);
+    return ApiResource.request(
+        ApiResource.RequestMethod.GET, url, params, PaymentIntentSearchResult.class, options);
   }
 
   /**

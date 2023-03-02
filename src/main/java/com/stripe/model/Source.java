@@ -347,7 +347,8 @@ public class Source extends ApiResource implements MetadataStore<Source>, Paymen
             options,
             String.format(
                 "/v1/sources/%s/source_transactions", ApiResource.urlEncodeId(this.getId())));
-    return ApiResource.requestCollection(url, params, SourceTransactionCollection.class, options);
+    return ApiResource.request(
+        ApiResource.RequestMethod.GET, url, params, SourceTransactionCollection.class, options);
   }
 
   /** List source transactions for a given source. */
@@ -365,7 +366,8 @@ public class Source extends ApiResource implements MetadataStore<Source>, Paymen
             options,
             String.format(
                 "/v1/sources/%s/source_transactions", ApiResource.urlEncodeId(this.getId())));
-    return ApiResource.requestCollection(url, params, SourceTransactionCollection.class, options);
+    return ApiResource.request(
+        ApiResource.RequestMethod.GET, url, params, SourceTransactionCollection.class, options);
   }
 
   /**

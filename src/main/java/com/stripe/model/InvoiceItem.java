@@ -385,7 +385,8 @@ public class InvoiceItem extends ApiResource implements HasId, MetadataStore<Inv
   public static InvoiceItemCollection list(Map<String, Object> params, RequestOptions options)
       throws StripeException {
     String url = ApiResource.fullUrl(Stripe.getApiBase(), options, "/v1/invoiceitems");
-    return ApiResource.requestCollection(url, params, InvoiceItemCollection.class, options);
+    return ApiResource.request(
+        ApiResource.RequestMethod.GET, url, params, InvoiceItemCollection.class, options);
   }
 
   /**
@@ -403,7 +404,8 @@ public class InvoiceItem extends ApiResource implements HasId, MetadataStore<Inv
   public static InvoiceItemCollection list(InvoiceItemListParams params, RequestOptions options)
       throws StripeException {
     String url = ApiResource.fullUrl(Stripe.getApiBase(), options, "/v1/invoiceitems");
-    return ApiResource.requestCollection(url, params, InvoiceItemCollection.class, options);
+    return ApiResource.request(
+        ApiResource.RequestMethod.GET, url, params, InvoiceItemCollection.class, options);
   }
 
   /** Retrieves the invoice item with the given ID. */

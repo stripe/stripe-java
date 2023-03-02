@@ -163,7 +163,8 @@ public class CreditReversal extends ApiResource implements HasId {
   public static CreditReversalCollection list(Map<String, Object> params, RequestOptions options)
       throws StripeException {
     String url = ApiResource.fullUrl(Stripe.getApiBase(), options, "/v1/treasury/credit_reversals");
-    return ApiResource.requestCollection(url, params, CreditReversalCollection.class, options);
+    return ApiResource.request(
+        ApiResource.RequestMethod.GET, url, params, CreditReversalCollection.class, options);
   }
 
   /** Returns a list of CreditReversals. */
@@ -176,7 +177,8 @@ public class CreditReversal extends ApiResource implements HasId {
   public static CreditReversalCollection list(
       CreditReversalListParams params, RequestOptions options) throws StripeException {
     String url = ApiResource.fullUrl(Stripe.getApiBase(), options, "/v1/treasury/credit_reversals");
-    return ApiResource.requestCollection(url, params, CreditReversalCollection.class, options);
+    return ApiResource.request(
+        ApiResource.RequestMethod.GET, url, params, CreditReversalCollection.class, options);
   }
 
   /**

@@ -223,7 +223,8 @@ public class Topup extends ApiResource implements MetadataStore<Topup>, BalanceT
   public static TopupCollection list(Map<String, Object> params, RequestOptions options)
       throws StripeException {
     String url = ApiResource.fullUrl(Stripe.getApiBase(), options, "/v1/topups");
-    return ApiResource.requestCollection(url, params, TopupCollection.class, options);
+    return ApiResource.request(
+        ApiResource.RequestMethod.GET, url, params, TopupCollection.class, options);
   }
 
   /** Returns a list of top-ups. */
@@ -235,7 +236,8 @@ public class Topup extends ApiResource implements MetadataStore<Topup>, BalanceT
   public static TopupCollection list(TopupListParams params, RequestOptions options)
       throws StripeException {
     String url = ApiResource.fullUrl(Stripe.getApiBase(), options, "/v1/topups");
-    return ApiResource.requestCollection(url, params, TopupCollection.class, options);
+    return ApiResource.request(
+        ApiResource.RequestMethod.GET, url, params, TopupCollection.class, options);
   }
 
   /**

@@ -264,7 +264,8 @@ public class Coupon extends ApiResource implements HasId, MetadataStore<Coupon> 
   public static CouponCollection list(Map<String, Object> params, RequestOptions options)
       throws StripeException {
     String url = ApiResource.fullUrl(Stripe.getApiBase(), options, "/v1/coupons");
-    return ApiResource.requestCollection(url, params, CouponCollection.class, options);
+    return ApiResource.request(
+        ApiResource.RequestMethod.GET, url, params, CouponCollection.class, options);
   }
 
   /** Returns a list of your coupons. */
@@ -276,7 +277,8 @@ public class Coupon extends ApiResource implements HasId, MetadataStore<Coupon> 
   public static CouponCollection list(CouponListParams params, RequestOptions options)
       throws StripeException {
     String url = ApiResource.fullUrl(Stripe.getApiBase(), options, "/v1/coupons");
-    return ApiResource.requestCollection(url, params, CouponCollection.class, options);
+    return ApiResource.request(
+        ApiResource.RequestMethod.GET, url, params, CouponCollection.class, options);
   }
 
   /** Retrieves the coupon with the given ID. */

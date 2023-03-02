@@ -275,7 +275,8 @@ public class SubscriptionItem extends ApiResource
   public static SubscriptionItemCollection list(Map<String, Object> params, RequestOptions options)
       throws StripeException {
     String url = ApiResource.fullUrl(Stripe.getApiBase(), options, "/v1/subscription_items");
-    return ApiResource.requestCollection(url, params, SubscriptionItemCollection.class, options);
+    return ApiResource.request(
+        ApiResource.RequestMethod.GET, url, params, SubscriptionItemCollection.class, options);
   }
 
   /** Returns a list of your subscription items for a given subscription. */
@@ -288,7 +289,8 @@ public class SubscriptionItem extends ApiResource
   public static SubscriptionItemCollection list(
       SubscriptionItemListParams params, RequestOptions options) throws StripeException {
     String url = ApiResource.fullUrl(Stripe.getApiBase(), options, "/v1/subscription_items");
-    return ApiResource.requestCollection(url, params, SubscriptionItemCollection.class, options);
+    return ApiResource.request(
+        ApiResource.RequestMethod.GET, url, params, SubscriptionItemCollection.class, options);
   }
 
   /** Retrieves the subscription item with the given ID. */
@@ -411,7 +413,8 @@ public class SubscriptionItem extends ApiResource
             String.format(
                 "/v1/subscription_items/%s/usage_record_summaries",
                 ApiResource.urlEncodeId(this.getId())));
-    return ApiResource.requestCollection(url, params, UsageRecordSummaryCollection.class, options);
+    return ApiResource.request(
+        ApiResource.RequestMethod.GET, url, params, UsageRecordSummaryCollection.class, options);
   }
 
   /**
@@ -449,7 +452,8 @@ public class SubscriptionItem extends ApiResource
             String.format(
                 "/v1/subscription_items/%s/usage_record_summaries",
                 ApiResource.urlEncodeId(this.getId())));
-    return ApiResource.requestCollection(url, params, UsageRecordSummaryCollection.class, options);
+    return ApiResource.request(
+        ApiResource.RequestMethod.GET, url, params, UsageRecordSummaryCollection.class, options);
   }
 
   @Getter
