@@ -197,7 +197,8 @@ public class Review extends ApiResource implements HasId {
   public static ReviewCollection list(Map<String, Object> params, RequestOptions options)
       throws StripeException {
     String url = ApiResource.fullUrl(Stripe.getApiBase(), options, "/v1/reviews");
-    return ApiResource.requestCollection(url, params, ReviewCollection.class, options);
+    return ApiResource.request(
+        ApiResource.RequestMethod.GET, url, params, ReviewCollection.class, options);
   }
 
   /**
@@ -217,7 +218,8 @@ public class Review extends ApiResource implements HasId {
   public static ReviewCollection list(ReviewListParams params, RequestOptions options)
       throws StripeException {
     String url = ApiResource.fullUrl(Stripe.getApiBase(), options, "/v1/reviews");
-    return ApiResource.requestCollection(url, params, ReviewCollection.class, options);
+    return ApiResource.request(
+        ApiResource.RequestMethod.GET, url, params, ReviewCollection.class, options);
   }
 
   /** Retrieves a <code>Review</code> object. */

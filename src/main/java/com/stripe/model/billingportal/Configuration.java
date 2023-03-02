@@ -155,7 +155,8 @@ public class Configuration extends ApiResource implements HasId, MetadataStore<C
       throws StripeException {
     String url =
         ApiResource.fullUrl(Stripe.getApiBase(), options, "/v1/billing_portal/configurations");
-    return ApiResource.requestCollection(url, params, ConfigurationCollection.class, options);
+    return ApiResource.request(
+        ApiResource.RequestMethod.GET, url, params, ConfigurationCollection.class, options);
   }
 
   /** Returns a list of configurations that describe the functionality of the customer portal. */
@@ -169,7 +170,8 @@ public class Configuration extends ApiResource implements HasId, MetadataStore<C
       throws StripeException {
     String url =
         ApiResource.fullUrl(Stripe.getApiBase(), options, "/v1/billing_portal/configurations");
-    return ApiResource.requestCollection(url, params, ConfigurationCollection.class, options);
+    return ApiResource.request(
+        ApiResource.RequestMethod.GET, url, params, ConfigurationCollection.class, options);
   }
 
   /** Retrieves a configuration that describes the functionality of the customer portal. */

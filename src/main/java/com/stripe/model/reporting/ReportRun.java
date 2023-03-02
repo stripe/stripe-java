@@ -144,7 +144,8 @@ public class ReportRun extends ApiResource implements HasId {
   public static ReportRunCollection list(Map<String, Object> params, RequestOptions options)
       throws StripeException {
     String url = ApiResource.fullUrl(Stripe.getApiBase(), options, "/v1/reporting/report_runs");
-    return ApiResource.requestCollection(url, params, ReportRunCollection.class, options);
+    return ApiResource.request(
+        ApiResource.RequestMethod.GET, url, params, ReportRunCollection.class, options);
   }
 
   /** Returns a list of Report Runs, with the most recent appearing first. */
@@ -156,7 +157,8 @@ public class ReportRun extends ApiResource implements HasId {
   public static ReportRunCollection list(ReportRunListParams params, RequestOptions options)
       throws StripeException {
     String url = ApiResource.fullUrl(Stripe.getApiBase(), options, "/v1/reporting/report_runs");
-    return ApiResource.requestCollection(url, params, ReportRunCollection.class, options);
+    return ApiResource.request(
+        ApiResource.RequestMethod.GET, url, params, ReportRunCollection.class, options);
   }
 
   /** Retrieves the details of an existing Report Run. */

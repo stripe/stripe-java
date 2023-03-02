@@ -265,7 +265,8 @@ public class PaymentLink extends ApiResource implements HasId, MetadataStore<Pay
   public static PaymentLinkCollection list(Map<String, Object> params, RequestOptions options)
       throws StripeException {
     String url = ApiResource.fullUrl(Stripe.getApiBase(), options, "/v1/payment_links");
-    return ApiResource.requestCollection(url, params, PaymentLinkCollection.class, options);
+    return ApiResource.request(
+        ApiResource.RequestMethod.GET, url, params, PaymentLinkCollection.class, options);
   }
 
   /** Returns a list of your payment links. */
@@ -277,7 +278,8 @@ public class PaymentLink extends ApiResource implements HasId, MetadataStore<Pay
   public static PaymentLinkCollection list(PaymentLinkListParams params, RequestOptions options)
       throws StripeException {
     String url = ApiResource.fullUrl(Stripe.getApiBase(), options, "/v1/payment_links");
-    return ApiResource.requestCollection(url, params, PaymentLinkCollection.class, options);
+    return ApiResource.request(
+        ApiResource.RequestMethod.GET, url, params, PaymentLinkCollection.class, options);
   }
 
   /**
@@ -311,7 +313,8 @@ public class PaymentLink extends ApiResource implements HasId, MetadataStore<Pay
             options,
             String.format(
                 "/v1/payment_links/%s/line_items", ApiResource.urlEncodeId(this.getId())));
-    return ApiResource.requestCollection(url, params, LineItemCollection.class, options);
+    return ApiResource.request(
+        ApiResource.RequestMethod.GET, url, params, LineItemCollection.class, options);
   }
 
   /**
@@ -337,7 +340,8 @@ public class PaymentLink extends ApiResource implements HasId, MetadataStore<Pay
             options,
             String.format(
                 "/v1/payment_links/%s/line_items", ApiResource.urlEncodeId(this.getId())));
-    return ApiResource.requestCollection(url, params, LineItemCollection.class, options);
+    return ApiResource.request(
+        ApiResource.RequestMethod.GET, url, params, LineItemCollection.class, options);
   }
 
   /** Retrieve a payment link. */

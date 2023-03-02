@@ -11,6 +11,10 @@ import lombok.Getter;
 
 @Getter
 public class CardCreateParams extends ApiRequestParams {
+  /** The card design object belonging to this card. */
+  @SerializedName("card_design")
+  String cardDesign;
+
   /**
    * The <a href="https://stripe.com/docs/api#issuing_cardholder_object">Cardholder</a> object with
    * which the card will be associated.
@@ -81,6 +85,7 @@ public class CardCreateParams extends ApiRequestParams {
   Type type;
 
   private CardCreateParams(
+      String cardDesign,
       String cardholder,
       String currency,
       List<String> expand,
@@ -93,6 +98,7 @@ public class CardCreateParams extends ApiRequestParams {
       SpendingControls spendingControls,
       Status status,
       Type type) {
+    this.cardDesign = cardDesign;
     this.cardholder = cardholder;
     this.currency = currency;
     this.expand = expand;
@@ -112,6 +118,8 @@ public class CardCreateParams extends ApiRequestParams {
   }
 
   public static class Builder {
+    private String cardDesign;
+
     private String cardholder;
 
     private String currency;
@@ -139,6 +147,7 @@ public class CardCreateParams extends ApiRequestParams {
     /** Finalize and obtain parameter instance from this builder. */
     public CardCreateParams build() {
       return new CardCreateParams(
+          this.cardDesign,
           this.cardholder,
           this.currency,
           this.expand,
@@ -151,6 +160,12 @@ public class CardCreateParams extends ApiRequestParams {
           this.spendingControls,
           this.status,
           this.type);
+    }
+
+    /** The card design object belonging to this card. */
+    public Builder setCardDesign(String cardDesign) {
+      this.cardDesign = cardDesign;
+      return this;
     }
 
     /**

@@ -185,7 +185,8 @@ public class Account extends ApiResource implements MetadataStore<Account>, Paym
             Stripe.getApiBase(),
             options,
             String.format("/v1/accounts/%s/capabilities", ApiResource.urlEncodeId(this.getId())));
-    return ApiResource.requestCollection(url, params, CapabilityCollection.class, options);
+    return ApiResource.request(
+        ApiResource.RequestMethod.GET, url, params, CapabilityCollection.class, options);
   }
 
   /**
@@ -208,7 +209,8 @@ public class Account extends ApiResource implements MetadataStore<Account>, Paym
             Stripe.getApiBase(),
             options,
             String.format("/v1/accounts/%s/capabilities", ApiResource.urlEncodeId(this.getId())));
-    return ApiResource.requestCollection(url, params, CapabilityCollection.class, options);
+    return ApiResource.request(
+        ApiResource.RequestMethod.GET, url, params, CapabilityCollection.class, options);
   }
 
   /**
@@ -354,7 +356,8 @@ public class Account extends ApiResource implements MetadataStore<Account>, Paym
   public static AccountCollection list(Map<String, Object> params, RequestOptions options)
       throws StripeException {
     String url = ApiResource.fullUrl(Stripe.getApiBase(), options, "/v1/accounts");
-    return ApiResource.requestCollection(url, params, AccountCollection.class, options);
+    return ApiResource.request(
+        ApiResource.RequestMethod.GET, url, params, AccountCollection.class, options);
   }
 
   /**
@@ -374,7 +377,8 @@ public class Account extends ApiResource implements MetadataStore<Account>, Paym
   public static AccountCollection list(AccountListParams params, RequestOptions options)
       throws StripeException {
     String url = ApiResource.fullUrl(Stripe.getApiBase(), options, "/v1/accounts");
-    return ApiResource.requestCollection(url, params, AccountCollection.class, options);
+    return ApiResource.request(
+        ApiResource.RequestMethod.GET, url, params, AccountCollection.class, options);
   }
 
   /**
@@ -404,7 +408,8 @@ public class Account extends ApiResource implements MetadataStore<Account>, Paym
             Stripe.getApiBase(),
             options,
             String.format("/v1/accounts/%s/persons", ApiResource.urlEncodeId(this.getId())));
-    return ApiResource.requestCollection(url, params, PersonCollection.class, options);
+    return ApiResource.request(
+        ApiResource.RequestMethod.GET, url, params, PersonCollection.class, options);
   }
 
   /**
@@ -426,7 +431,8 @@ public class Account extends ApiResource implements MetadataStore<Account>, Paym
             Stripe.getApiBase(),
             options,
             String.format("/v1/accounts/%s/persons", ApiResource.urlEncodeId(this.getId())));
-    return ApiResource.requestCollection(url, params, PersonCollection.class, options);
+    return ApiResource.request(
+        ApiResource.RequestMethod.GET, url, params, PersonCollection.class, options);
   }
 
   /**

@@ -67,7 +67,8 @@ public class ExchangeRate extends ApiResource implements HasId {
   public static ExchangeRateCollection list(Map<String, Object> params, RequestOptions options)
       throws StripeException {
     String url = ApiResource.fullUrl(Stripe.getApiBase(), options, "/v1/exchange_rates");
-    return ApiResource.requestCollection(url, params, ExchangeRateCollection.class, options);
+    return ApiResource.request(
+        ApiResource.RequestMethod.GET, url, params, ExchangeRateCollection.class, options);
   }
 
   /**
@@ -85,7 +86,8 @@ public class ExchangeRate extends ApiResource implements HasId {
   public static ExchangeRateCollection list(ExchangeRateListParams params, RequestOptions options)
       throws StripeException {
     String url = ApiResource.fullUrl(Stripe.getApiBase(), options, "/v1/exchange_rates");
-    return ApiResource.requestCollection(url, params, ExchangeRateCollection.class, options);
+    return ApiResource.request(
+        ApiResource.RequestMethod.GET, url, params, ExchangeRateCollection.class, options);
   }
 
   /** Retrieves the exchange rates from the given currency to every supported currency. */

@@ -213,7 +213,8 @@ public class ApplicationFee extends ApiResource implements BalanceTransactionSou
   public static ApplicationFeeCollection list(Map<String, Object> params, RequestOptions options)
       throws StripeException {
     String url = ApiResource.fullUrl(Stripe.getApiBase(), options, "/v1/application_fees");
-    return ApiResource.requestCollection(url, params, ApplicationFeeCollection.class, options);
+    return ApiResource.request(
+        ApiResource.RequestMethod.GET, url, params, ApplicationFeeCollection.class, options);
   }
 
   /**
@@ -232,7 +233,8 @@ public class ApplicationFee extends ApiResource implements BalanceTransactionSou
   public static ApplicationFeeCollection list(
       ApplicationFeeListParams params, RequestOptions options) throws StripeException {
     String url = ApiResource.fullUrl(Stripe.getApiBase(), options, "/v1/application_fees");
-    return ApiResource.requestCollection(url, params, ApplicationFeeCollection.class, options);
+    return ApiResource.request(
+        ApiResource.RequestMethod.GET, url, params, ApplicationFeeCollection.class, options);
   }
 
   /**

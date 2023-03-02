@@ -276,7 +276,8 @@ public class Transfer extends ApiResource
   public static TransferCollection list(Map<String, Object> params, RequestOptions options)
       throws StripeException {
     String url = ApiResource.fullUrl(Stripe.getApiBase(), options, "/v1/transfers");
-    return ApiResource.requestCollection(url, params, TransferCollection.class, options);
+    return ApiResource.request(
+        ApiResource.RequestMethod.GET, url, params, TransferCollection.class, options);
   }
 
   /**
@@ -294,7 +295,8 @@ public class Transfer extends ApiResource
   public static TransferCollection list(TransferListParams params, RequestOptions options)
       throws StripeException {
     String url = ApiResource.fullUrl(Stripe.getApiBase(), options, "/v1/transfers");
-    return ApiResource.requestCollection(url, params, TransferCollection.class, options);
+    return ApiResource.request(
+        ApiResource.RequestMethod.GET, url, params, TransferCollection.class, options);
   }
 
   /**

@@ -135,7 +135,8 @@ public class TransactionEntry extends ApiResource implements HasId {
       throws StripeException {
     String url =
         ApiResource.fullUrl(Stripe.getApiBase(), options, "/v1/treasury/transaction_entries");
-    return ApiResource.requestCollection(url, params, TransactionEntryCollection.class, options);
+    return ApiResource.request(
+        ApiResource.RequestMethod.GET, url, params, TransactionEntryCollection.class, options);
   }
 
   /** Retrieves a list of TransactionEntry objects. */
@@ -149,7 +150,8 @@ public class TransactionEntry extends ApiResource implements HasId {
       TransactionEntryListParams params, RequestOptions options) throws StripeException {
     String url =
         ApiResource.fullUrl(Stripe.getApiBase(), options, "/v1/treasury/transaction_entries");
-    return ApiResource.requestCollection(url, params, TransactionEntryCollection.class, options);
+    return ApiResource.request(
+        ApiResource.RequestMethod.GET, url, params, TransactionEntryCollection.class, options);
   }
 
   /** Retrieves a TransactionEntry object. */

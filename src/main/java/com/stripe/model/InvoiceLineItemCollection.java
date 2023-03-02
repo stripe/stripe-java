@@ -26,7 +26,8 @@ public class InvoiceLineItemCollection extends StripeCollection<InvoiceLineItem>
   public InvoiceLineItemCollection list(Map<String, Object> params, RequestOptions options)
       throws StripeException {
     String url = ApiResource.fullUrl(Stripe.getApiBase(), options, this.getUrl());
-    return ApiResource.requestCollection(url, params, InvoiceLineItemCollection.class, options);
+    return ApiResource.request(
+        ApiResource.RequestMethod.GET, url, params, InvoiceLineItemCollection.class, options);
   }
 
   /**
@@ -47,6 +48,7 @@ public class InvoiceLineItemCollection extends StripeCollection<InvoiceLineItem>
   public InvoiceLineItemCollection list(
       InvoiceLineItemCollectionListParams params, RequestOptions options) throws StripeException {
     String url = ApiResource.fullUrl(Stripe.getApiBase(), options, this.getUrl());
-    return ApiResource.requestCollection(url, params, InvoiceLineItemCollection.class, options);
+    return ApiResource.request(
+        ApiResource.RequestMethod.GET, url, params, InvoiceLineItemCollection.class, options);
   }
 }

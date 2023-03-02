@@ -431,7 +431,8 @@ public class Payout extends ApiResource implements MetadataStore<Payout>, Balanc
   public static PayoutCollection list(Map<String, Object> params, RequestOptions options)
       throws StripeException {
     String url = ApiResource.fullUrl(Stripe.getApiBase(), options, "/v1/payouts");
-    return ApiResource.requestCollection(url, params, PayoutCollection.class, options);
+    return ApiResource.request(
+        ApiResource.RequestMethod.GET, url, params, PayoutCollection.class, options);
   }
 
   /**
@@ -451,7 +452,8 @@ public class Payout extends ApiResource implements MetadataStore<Payout>, Balanc
   public static PayoutCollection list(PayoutListParams params, RequestOptions options)
       throws StripeException {
     String url = ApiResource.fullUrl(Stripe.getApiBase(), options, "/v1/payouts");
-    return ApiResource.requestCollection(url, params, PayoutCollection.class, options);
+    return ApiResource.request(
+        ApiResource.RequestMethod.GET, url, params, PayoutCollection.class, options);
   }
 
   /**

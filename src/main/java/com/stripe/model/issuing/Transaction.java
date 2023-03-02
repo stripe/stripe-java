@@ -274,7 +274,8 @@ public class Transaction extends ApiResource
   public static TransactionCollection list(Map<String, Object> params, RequestOptions options)
       throws StripeException {
     String url = ApiResource.fullUrl(Stripe.getApiBase(), options, "/v1/issuing/transactions");
-    return ApiResource.requestCollection(url, params, TransactionCollection.class, options);
+    return ApiResource.request(
+        ApiResource.RequestMethod.GET, url, params, TransactionCollection.class, options);
   }
 
   /**
@@ -292,7 +293,8 @@ public class Transaction extends ApiResource
   public static TransactionCollection list(TransactionListParams params, RequestOptions options)
       throws StripeException {
     String url = ApiResource.fullUrl(Stripe.getApiBase(), options, "/v1/issuing/transactions");
-    return ApiResource.requestCollection(url, params, TransactionCollection.class, options);
+    return ApiResource.request(
+        ApiResource.RequestMethod.GET, url, params, TransactionCollection.class, options);
   }
 
   /** Retrieves an Issuing <code>Transaction</code> object. */

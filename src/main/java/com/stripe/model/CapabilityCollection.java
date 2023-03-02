@@ -25,7 +25,8 @@ public class CapabilityCollection extends StripeCollection<Capability> {
   public CapabilityCollection list(Map<String, Object> params, RequestOptions options)
       throws StripeException {
     String url = ApiResource.fullUrl(Stripe.getApiBase(), options, this.getUrl());
-    return ApiResource.requestCollection(url, params, CapabilityCollection.class, options);
+    return ApiResource.request(
+        ApiResource.RequestMethod.GET, url, params, CapabilityCollection.class, options);
   }
 
   /**
@@ -43,7 +44,8 @@ public class CapabilityCollection extends StripeCollection<Capability> {
   public CapabilityCollection list(CapabilityCollectionListParams params, RequestOptions options)
       throws StripeException {
     String url = ApiResource.fullUrl(Stripe.getApiBase(), options, this.getUrl());
-    return ApiResource.requestCollection(url, params, CapabilityCollection.class, options);
+    return ApiResource.request(
+        ApiResource.RequestMethod.GET, url, params, CapabilityCollection.class, options);
   }
 
   /** Retrieves information about the specified Account Capability. */

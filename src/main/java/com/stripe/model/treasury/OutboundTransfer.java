@@ -251,7 +251,8 @@ public class OutboundTransfer extends ApiResource implements HasId {
       throws StripeException {
     String url =
         ApiResource.fullUrl(Stripe.getApiBase(), options, "/v1/treasury/outbound_transfers");
-    return ApiResource.requestCollection(url, params, OutboundTransferCollection.class, options);
+    return ApiResource.request(
+        ApiResource.RequestMethod.GET, url, params, OutboundTransferCollection.class, options);
   }
 
   /** Returns a list of OutboundTransfers sent from the specified FinancialAccount. */
@@ -265,7 +266,8 @@ public class OutboundTransfer extends ApiResource implements HasId {
       OutboundTransferListParams params, RequestOptions options) throws StripeException {
     String url =
         ApiResource.fullUrl(Stripe.getApiBase(), options, "/v1/treasury/outbound_transfers");
-    return ApiResource.requestCollection(url, params, OutboundTransferCollection.class, options);
+    return ApiResource.request(
+        ApiResource.RequestMethod.GET, url, params, OutboundTransferCollection.class, options);
   }
 
   /**

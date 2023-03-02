@@ -47,7 +47,8 @@ public class ExternalAccountCollection extends StripeCollection<ExternalAccount>
   public ExternalAccountCollection list(Map<String, Object> params, RequestOptions options)
       throws StripeException {
     String url = ApiResource.fullUrl(Stripe.getApiBase(), options, this.getUrl());
-    return ApiResource.requestCollection(url, params, ExternalAccountCollection.class, options);
+    return ApiResource.request(
+        ApiResource.RequestMethod.GET, url, params, ExternalAccountCollection.class, options);
   }
 
   /** List external accounts for an account. */
@@ -60,7 +61,8 @@ public class ExternalAccountCollection extends StripeCollection<ExternalAccount>
   public ExternalAccountCollection list(
       ExternalAccountCollectionListParams params, RequestOptions options) throws StripeException {
     String url = ApiResource.fullUrl(Stripe.getApiBase(), options, this.getUrl());
-    return ApiResource.requestCollection(url, params, ExternalAccountCollection.class, options);
+    return ApiResource.request(
+        ApiResource.RequestMethod.GET, url, params, ExternalAccountCollection.class, options);
   }
 
   /** Retrieve a specified external account for a given account. */

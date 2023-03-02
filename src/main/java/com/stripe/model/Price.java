@@ -244,7 +244,8 @@ public class Price extends ApiResource implements HasId, MetadataStore<Price> {
   public static PriceCollection list(Map<String, Object> params, RequestOptions options)
       throws StripeException {
     String url = ApiResource.fullUrl(Stripe.getApiBase(), options, "/v1/prices");
-    return ApiResource.requestCollection(url, params, PriceCollection.class, options);
+    return ApiResource.request(
+        ApiResource.RequestMethod.GET, url, params, PriceCollection.class, options);
   }
 
   /** Returns a list of your prices. */
@@ -256,7 +257,8 @@ public class Price extends ApiResource implements HasId, MetadataStore<Price> {
   public static PriceCollection list(PriceListParams params, RequestOptions options)
       throws StripeException {
     String url = ApiResource.fullUrl(Stripe.getApiBase(), options, "/v1/prices");
-    return ApiResource.requestCollection(url, params, PriceCollection.class, options);
+    return ApiResource.request(
+        ApiResource.RequestMethod.GET, url, params, PriceCollection.class, options);
   }
 
   /** Retrieves the price with the given ID. */
@@ -314,7 +316,8 @@ public class Price extends ApiResource implements HasId, MetadataStore<Price> {
   public static PriceSearchResult search(Map<String, Object> params, RequestOptions options)
       throws StripeException {
     String url = ApiResource.fullUrl(Stripe.getApiBase(), options, "/v1/prices/search");
-    return ApiResource.requestSearchResult(url, params, PriceSearchResult.class, options);
+    return ApiResource.request(
+        ApiResource.RequestMethod.GET, url, params, PriceSearchResult.class, options);
   }
 
   /**
@@ -340,7 +343,8 @@ public class Price extends ApiResource implements HasId, MetadataStore<Price> {
   public static PriceSearchResult search(PriceSearchParams params, RequestOptions options)
       throws StripeException {
     String url = ApiResource.fullUrl(Stripe.getApiBase(), options, "/v1/prices/search");
-    return ApiResource.requestSearchResult(url, params, PriceSearchResult.class, options);
+    return ApiResource.request(
+        ApiResource.RequestMethod.GET, url, params, PriceSearchResult.class, options);
   }
 
   /**

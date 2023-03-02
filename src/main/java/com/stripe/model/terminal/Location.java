@@ -150,7 +150,8 @@ public class Location extends ApiResource implements HasId, MetadataStore<Locati
   public static LocationCollection list(Map<String, Object> params, RequestOptions options)
       throws StripeException {
     String url = ApiResource.fullUrl(Stripe.getApiBase(), options, "/v1/terminal/locations");
-    return ApiResource.requestCollection(url, params, LocationCollection.class, options);
+    return ApiResource.request(
+        ApiResource.RequestMethod.GET, url, params, LocationCollection.class, options);
   }
 
   /** Returns a list of <code>Location</code> objects. */
@@ -162,7 +163,8 @@ public class Location extends ApiResource implements HasId, MetadataStore<Locati
   public static LocationCollection list(LocationListParams params, RequestOptions options)
       throws StripeException {
     String url = ApiResource.fullUrl(Stripe.getApiBase(), options, "/v1/terminal/locations");
-    return ApiResource.requestCollection(url, params, LocationCollection.class, options);
+    return ApiResource.request(
+        ApiResource.RequestMethod.GET, url, params, LocationCollection.class, options);
   }
 
   /** Retrieves a <code>Location</code> object. */

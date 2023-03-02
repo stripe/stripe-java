@@ -232,7 +232,8 @@ public class SetupAttempt extends ApiResource implements HasId {
   public static SetupAttemptCollection list(Map<String, Object> params, RequestOptions options)
       throws StripeException {
     String url = ApiResource.fullUrl(Stripe.getApiBase(), options, "/v1/setup_attempts");
-    return ApiResource.requestCollection(url, params, SetupAttemptCollection.class, options);
+    return ApiResource.request(
+        ApiResource.RequestMethod.GET, url, params, SetupAttemptCollection.class, options);
   }
 
   /** Returns a list of SetupAttempts associated with a provided SetupIntent. */
@@ -244,7 +245,8 @@ public class SetupAttempt extends ApiResource implements HasId {
   public static SetupAttemptCollection list(SetupAttemptListParams params, RequestOptions options)
       throws StripeException {
     String url = ApiResource.fullUrl(Stripe.getApiBase(), options, "/v1/setup_attempts");
-    return ApiResource.requestCollection(url, params, SetupAttemptCollection.class, options);
+    return ApiResource.request(
+        ApiResource.RequestMethod.GET, url, params, SetupAttemptCollection.class, options);
   }
 
   @Getter

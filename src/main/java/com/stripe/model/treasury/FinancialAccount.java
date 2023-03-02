@@ -172,7 +172,8 @@ public class FinancialAccount extends ApiResource
       throws StripeException {
     String url =
         ApiResource.fullUrl(Stripe.getApiBase(), options, "/v1/treasury/financial_accounts");
-    return ApiResource.requestCollection(url, params, FinancialAccountCollection.class, options);
+    return ApiResource.request(
+        ApiResource.RequestMethod.GET, url, params, FinancialAccountCollection.class, options);
   }
 
   /** Returns a list of FinancialAccounts. */
@@ -186,7 +187,8 @@ public class FinancialAccount extends ApiResource
       FinancialAccountListParams params, RequestOptions options) throws StripeException {
     String url =
         ApiResource.fullUrl(Stripe.getApiBase(), options, "/v1/treasury/financial_accounts");
-    return ApiResource.requestCollection(url, params, FinancialAccountCollection.class, options);
+    return ApiResource.request(
+        ApiResource.RequestMethod.GET, url, params, FinancialAccountCollection.class, options);
   }
 
   /** Retrieves the details of a FinancialAccount. */

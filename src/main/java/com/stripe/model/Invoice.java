@@ -1044,7 +1044,8 @@ public class Invoice extends ApiResource implements HasId, MetadataStore<Invoice
   public static InvoiceCollection list(Map<String, Object> params, RequestOptions options)
       throws StripeException {
     String url = ApiResource.fullUrl(Stripe.getApiBase(), options, "/v1/invoices");
-    return ApiResource.requestCollection(url, params, InvoiceCollection.class, options);
+    return ApiResource.request(
+        ApiResource.RequestMethod.GET, url, params, InvoiceCollection.class, options);
   }
 
   /**
@@ -1062,7 +1063,8 @@ public class Invoice extends ApiResource implements HasId, MetadataStore<Invoice
   public static InvoiceCollection list(InvoiceListParams params, RequestOptions options)
       throws StripeException {
     String url = ApiResource.fullUrl(Stripe.getApiBase(), options, "/v1/invoices");
-    return ApiResource.requestCollection(url, params, InvoiceCollection.class, options);
+    return ApiResource.request(
+        ApiResource.RequestMethod.GET, url, params, InvoiceCollection.class, options);
   }
 
   /**
@@ -1258,7 +1260,8 @@ public class Invoice extends ApiResource implements HasId, MetadataStore<Invoice
   public static InvoiceSearchResult search(Map<String, Object> params, RequestOptions options)
       throws StripeException {
     String url = ApiResource.fullUrl(Stripe.getApiBase(), options, "/v1/invoices/search");
-    return ApiResource.requestSearchResult(url, params, InvoiceSearchResult.class, options);
+    return ApiResource.request(
+        ApiResource.RequestMethod.GET, url, params, InvoiceSearchResult.class, options);
   }
 
   /**
@@ -1284,7 +1287,8 @@ public class Invoice extends ApiResource implements HasId, MetadataStore<Invoice
   public static InvoiceSearchResult search(InvoiceSearchParams params, RequestOptions options)
       throws StripeException {
     String url = ApiResource.fullUrl(Stripe.getApiBase(), options, "/v1/invoices/search");
-    return ApiResource.requestSearchResult(url, params, InvoiceSearchResult.class, options);
+    return ApiResource.request(
+        ApiResource.RequestMethod.GET, url, params, InvoiceSearchResult.class, options);
   }
 
   /**
@@ -1534,7 +1538,8 @@ public class Invoice extends ApiResource implements HasId, MetadataStore<Invoice
   public static InvoiceLineItemCollection upcomingLines(
       Map<String, Object> params, RequestOptions options) throws StripeException {
     String url = ApiResource.fullUrl(Stripe.getApiBase(), options, "/v1/invoices/upcoming/lines");
-    return ApiResource.requestCollection(url, params, InvoiceLineItemCollection.class, options);
+    return ApiResource.request(
+        ApiResource.RequestMethod.GET, url, params, InvoiceLineItemCollection.class, options);
   }
 
   /**
@@ -1555,7 +1560,8 @@ public class Invoice extends ApiResource implements HasId, MetadataStore<Invoice
   public static InvoiceLineItemCollection upcomingLines(
       InvoiceUpcomingLinesParams params, RequestOptions options) throws StripeException {
     String url = ApiResource.fullUrl(Stripe.getApiBase(), options, "/v1/invoices/upcoming/lines");
-    return ApiResource.requestCollection(url, params, InvoiceLineItemCollection.class, options);
+    return ApiResource.request(
+        ApiResource.RequestMethod.GET, url, params, InvoiceLineItemCollection.class, options);
   }
 
   /**

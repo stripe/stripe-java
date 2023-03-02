@@ -292,7 +292,8 @@ public class Product extends ApiResource implements HasId, MetadataStore<Product
   public static ProductCollection list(Map<String, Object> params, RequestOptions options)
       throws StripeException {
     String url = ApiResource.fullUrl(Stripe.getApiBase(), options, "/v1/products");
-    return ApiResource.requestCollection(url, params, ProductCollection.class, options);
+    return ApiResource.request(
+        ApiResource.RequestMethod.GET, url, params, ProductCollection.class, options);
   }
 
   /**
@@ -310,7 +311,8 @@ public class Product extends ApiResource implements HasId, MetadataStore<Product
   public static ProductCollection list(ProductListParams params, RequestOptions options)
       throws StripeException {
     String url = ApiResource.fullUrl(Stripe.getApiBase(), options, "/v1/products");
-    return ApiResource.requestCollection(url, params, ProductCollection.class, options);
+    return ApiResource.request(
+        ApiResource.RequestMethod.GET, url, params, ProductCollection.class, options);
   }
 
   /**
@@ -384,7 +386,8 @@ public class Product extends ApiResource implements HasId, MetadataStore<Product
   public static ProductSearchResult search(Map<String, Object> params, RequestOptions options)
       throws StripeException {
     String url = ApiResource.fullUrl(Stripe.getApiBase(), options, "/v1/products/search");
-    return ApiResource.requestSearchResult(url, params, ProductSearchResult.class, options);
+    return ApiResource.request(
+        ApiResource.RequestMethod.GET, url, params, ProductSearchResult.class, options);
   }
 
   /**
@@ -410,7 +413,8 @@ public class Product extends ApiResource implements HasId, MetadataStore<Product
   public static ProductSearchResult search(ProductSearchParams params, RequestOptions options)
       throws StripeException {
     String url = ApiResource.fullUrl(Stripe.getApiBase(), options, "/v1/products/search");
-    return ApiResource.requestSearchResult(url, params, ProductSearchResult.class, options);
+    return ApiResource.request(
+        ApiResource.RequestMethod.GET, url, params, ProductSearchResult.class, options);
   }
 
   /**

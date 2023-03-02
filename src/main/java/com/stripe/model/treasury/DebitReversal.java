@@ -167,7 +167,8 @@ public class DebitReversal extends ApiResource implements HasId {
   public static DebitReversalCollection list(Map<String, Object> params, RequestOptions options)
       throws StripeException {
     String url = ApiResource.fullUrl(Stripe.getApiBase(), options, "/v1/treasury/debit_reversals");
-    return ApiResource.requestCollection(url, params, DebitReversalCollection.class, options);
+    return ApiResource.request(
+        ApiResource.RequestMethod.GET, url, params, DebitReversalCollection.class, options);
   }
 
   /** Returns a list of DebitReversals. */
@@ -180,7 +181,8 @@ public class DebitReversal extends ApiResource implements HasId {
   public static DebitReversalCollection list(DebitReversalListParams params, RequestOptions options)
       throws StripeException {
     String url = ApiResource.fullUrl(Stripe.getApiBase(), options, "/v1/treasury/debit_reversals");
-    return ApiResource.requestCollection(url, params, DebitReversalCollection.class, options);
+    return ApiResource.request(
+        ApiResource.RequestMethod.GET, url, params, DebitReversalCollection.class, options);
   }
 
   /** Retrieves a DebitReversal object. */

@@ -153,7 +153,8 @@ public class ReceivedCredit extends ApiResource implements HasId {
   public static ReceivedCreditCollection list(Map<String, Object> params, RequestOptions options)
       throws StripeException {
     String url = ApiResource.fullUrl(Stripe.getApiBase(), options, "/v1/treasury/received_credits");
-    return ApiResource.requestCollection(url, params, ReceivedCreditCollection.class, options);
+    return ApiResource.request(
+        ApiResource.RequestMethod.GET, url, params, ReceivedCreditCollection.class, options);
   }
 
   /** Returns a list of ReceivedCredits. */
@@ -166,7 +167,8 @@ public class ReceivedCredit extends ApiResource implements HasId {
   public static ReceivedCreditCollection list(
       ReceivedCreditListParams params, RequestOptions options) throws StripeException {
     String url = ApiResource.fullUrl(Stripe.getApiBase(), options, "/v1/treasury/received_credits");
-    return ApiResource.requestCollection(url, params, ReceivedCreditCollection.class, options);
+    return ApiResource.request(
+        ApiResource.RequestMethod.GET, url, params, ReceivedCreditCollection.class, options);
   }
 
   /**

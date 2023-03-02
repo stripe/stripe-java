@@ -99,7 +99,8 @@ public class VerificationReport extends ApiResource implements HasId {
       Map<String, Object> params, RequestOptions options) throws StripeException {
     String url =
         ApiResource.fullUrl(Stripe.getApiBase(), options, "/v1/identity/verification_reports");
-    return ApiResource.requestCollection(url, params, VerificationReportCollection.class, options);
+    return ApiResource.request(
+        ApiResource.RequestMethod.GET, url, params, VerificationReportCollection.class, options);
   }
 
   /** List all verification reports. */
@@ -113,7 +114,8 @@ public class VerificationReport extends ApiResource implements HasId {
       VerificationReportListParams params, RequestOptions options) throws StripeException {
     String url =
         ApiResource.fullUrl(Stripe.getApiBase(), options, "/v1/identity/verification_reports");
-    return ApiResource.requestCollection(url, params, VerificationReportCollection.class, options);
+    return ApiResource.request(
+        ApiResource.RequestMethod.GET, url, params, VerificationReportCollection.class, options);
   }
 
   /** Retrieves an existing VerificationReport. */

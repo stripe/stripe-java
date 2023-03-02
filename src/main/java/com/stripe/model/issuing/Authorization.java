@@ -402,7 +402,8 @@ public class Authorization extends ApiResource
   public static AuthorizationCollection list(Map<String, Object> params, RequestOptions options)
       throws StripeException {
     String url = ApiResource.fullUrl(Stripe.getApiBase(), options, "/v1/issuing/authorizations");
-    return ApiResource.requestCollection(url, params, AuthorizationCollection.class, options);
+    return ApiResource.request(
+        ApiResource.RequestMethod.GET, url, params, AuthorizationCollection.class, options);
   }
 
   /**
@@ -421,7 +422,8 @@ public class Authorization extends ApiResource
   public static AuthorizationCollection list(AuthorizationListParams params, RequestOptions options)
       throws StripeException {
     String url = ApiResource.fullUrl(Stripe.getApiBase(), options, "/v1/issuing/authorizations");
-    return ApiResource.requestCollection(url, params, AuthorizationCollection.class, options);
+    return ApiResource.request(
+        ApiResource.RequestMethod.GET, url, params, AuthorizationCollection.class, options);
   }
 
   /** Retrieves an Issuing <code>Authorization</code> object. */

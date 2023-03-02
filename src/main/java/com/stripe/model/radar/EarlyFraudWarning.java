@@ -128,7 +128,8 @@ public class EarlyFraudWarning extends ApiResource implements HasId {
       throws StripeException {
     String url =
         ApiResource.fullUrl(Stripe.getApiBase(), options, "/v1/radar/early_fraud_warnings");
-    return ApiResource.requestCollection(url, params, EarlyFraudWarningCollection.class, options);
+    return ApiResource.request(
+        ApiResource.RequestMethod.GET, url, params, EarlyFraudWarningCollection.class, options);
   }
 
   /** Returns a list of early fraud warnings. */
@@ -142,7 +143,8 @@ public class EarlyFraudWarning extends ApiResource implements HasId {
       EarlyFraudWarningListParams params, RequestOptions options) throws StripeException {
     String url =
         ApiResource.fullUrl(Stripe.getApiBase(), options, "/v1/radar/early_fraud_warnings");
-    return ApiResource.requestCollection(url, params, EarlyFraudWarningCollection.class, options);
+    return ApiResource.request(
+        ApiResource.RequestMethod.GET, url, params, EarlyFraudWarningCollection.class, options);
   }
 
   /**

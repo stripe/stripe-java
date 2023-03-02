@@ -564,7 +564,8 @@ public class Session extends ApiResource implements HasId {
   public static SessionCollection list(Map<String, Object> params, RequestOptions options)
       throws StripeException {
     String url = ApiResource.fullUrl(Stripe.getApiBase(), options, "/v1/checkout/sessions");
-    return ApiResource.requestCollection(url, params, SessionCollection.class, options);
+    return ApiResource.request(
+        ApiResource.RequestMethod.GET, url, params, SessionCollection.class, options);
   }
 
   /** Returns a list of Checkout Sessions. */
@@ -576,7 +577,8 @@ public class Session extends ApiResource implements HasId {
   public static SessionCollection list(SessionListParams params, RequestOptions options)
       throws StripeException {
     String url = ApiResource.fullUrl(Stripe.getApiBase(), options, "/v1/checkout/sessions");
-    return ApiResource.requestCollection(url, params, SessionCollection.class, options);
+    return ApiResource.request(
+        ApiResource.RequestMethod.GET, url, params, SessionCollection.class, options);
   }
 
   /**
@@ -610,7 +612,8 @@ public class Session extends ApiResource implements HasId {
             options,
             String.format(
                 "/v1/checkout/sessions/%s/line_items", ApiResource.urlEncodeId(this.getId())));
-    return ApiResource.requestCollection(url, params, LineItemCollection.class, options);
+    return ApiResource.request(
+        ApiResource.RequestMethod.GET, url, params, LineItemCollection.class, options);
   }
 
   /**
@@ -636,7 +639,8 @@ public class Session extends ApiResource implements HasId {
             options,
             String.format(
                 "/v1/checkout/sessions/%s/line_items", ApiResource.urlEncodeId(this.getId())));
-    return ApiResource.requestCollection(url, params, LineItemCollection.class, options);
+    return ApiResource.request(
+        ApiResource.RequestMethod.GET, url, params, LineItemCollection.class, options);
   }
 
   /** Retrieves a Session object. */

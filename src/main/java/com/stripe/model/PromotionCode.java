@@ -170,7 +170,8 @@ public class PromotionCode extends ApiResource implements HasId, MetadataStore<P
   public static PromotionCodeCollection list(Map<String, Object> params, RequestOptions options)
       throws StripeException {
     String url = ApiResource.fullUrl(Stripe.getApiBase(), options, "/v1/promotion_codes");
-    return ApiResource.requestCollection(url, params, PromotionCodeCollection.class, options);
+    return ApiResource.request(
+        ApiResource.RequestMethod.GET, url, params, PromotionCodeCollection.class, options);
   }
 
   /** Returns a list of your promotion codes. */
@@ -183,7 +184,8 @@ public class PromotionCode extends ApiResource implements HasId, MetadataStore<P
   public static PromotionCodeCollection list(PromotionCodeListParams params, RequestOptions options)
       throws StripeException {
     String url = ApiResource.fullUrl(Stripe.getApiBase(), options, "/v1/promotion_codes");
-    return ApiResource.requestCollection(url, params, PromotionCodeCollection.class, options);
+    return ApiResource.request(
+        ApiResource.RequestMethod.GET, url, params, PromotionCodeCollection.class, options);
   }
 
   /**

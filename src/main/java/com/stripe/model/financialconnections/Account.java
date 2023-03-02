@@ -250,7 +250,8 @@ public class Account extends ApiResource implements HasId {
       throws StripeException {
     String url =
         ApiResource.fullUrl(Stripe.getApiBase(), options, "/v1/financial_connections/accounts");
-    return ApiResource.requestCollection(url, params, AccountCollection.class, options);
+    return ApiResource.request(
+        ApiResource.RequestMethod.GET, url, params, AccountCollection.class, options);
   }
 
   /** Returns a list of Financial Connections <code>Account</code> objects. */
@@ -263,7 +264,8 @@ public class Account extends ApiResource implements HasId {
       throws StripeException {
     String url =
         ApiResource.fullUrl(Stripe.getApiBase(), options, "/v1/financial_connections/accounts");
-    return ApiResource.requestCollection(url, params, AccountCollection.class, options);
+    return ApiResource.request(
+        ApiResource.RequestMethod.GET, url, params, AccountCollection.class, options);
   }
 
   /** Lists all owners for a given <code>Account</code>. */
@@ -281,7 +283,8 @@ public class Account extends ApiResource implements HasId {
             String.format(
                 "/v1/financial_connections/accounts/%s/owners",
                 ApiResource.urlEncodeId(this.getId())));
-    return ApiResource.requestCollection(url, params, AccountOwnerCollection.class, options);
+    return ApiResource.request(
+        ApiResource.RequestMethod.GET, url, params, AccountOwnerCollection.class, options);
   }
 
   /** Lists all owners for a given <code>Account</code>. */
@@ -299,7 +302,8 @@ public class Account extends ApiResource implements HasId {
             String.format(
                 "/v1/financial_connections/accounts/%s/owners",
                 ApiResource.urlEncodeId(this.getId())));
-    return ApiResource.requestCollection(url, params, AccountOwnerCollection.class, options);
+    return ApiResource.request(
+        ApiResource.RequestMethod.GET, url, params, AccountOwnerCollection.class, options);
   }
 
   /** Refreshes the data associated with a Financial Connections <code>Account</code>. */

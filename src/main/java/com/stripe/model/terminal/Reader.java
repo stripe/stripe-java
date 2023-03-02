@@ -231,7 +231,8 @@ public class Reader extends ApiResource implements HasId, MetadataStore<Reader> 
   public static ReaderCollection list(Map<String, Object> params, RequestOptions options)
       throws StripeException {
     String url = ApiResource.fullUrl(Stripe.getApiBase(), options, "/v1/terminal/readers");
-    return ApiResource.requestCollection(url, params, ReaderCollection.class, options);
+    return ApiResource.request(
+        ApiResource.RequestMethod.GET, url, params, ReaderCollection.class, options);
   }
 
   /** Returns a list of <code>Reader</code> objects. */
@@ -243,7 +244,8 @@ public class Reader extends ApiResource implements HasId, MetadataStore<Reader> 
   public static ReaderCollection list(ReaderListParams params, RequestOptions options)
       throws StripeException {
     String url = ApiResource.fullUrl(Stripe.getApiBase(), options, "/v1/terminal/readers");
-    return ApiResource.requestCollection(url, params, ReaderCollection.class, options);
+    return ApiResource.request(
+        ApiResource.RequestMethod.GET, url, params, ReaderCollection.class, options);
   }
 
   /** Initiates a payment flow on a Reader. */

@@ -27,8 +27,12 @@ public class CustomerCashBalanceTransactionCollection
   public CustomerCashBalanceTransactionCollection list(
       Map<String, Object> params, RequestOptions options) throws StripeException {
     String url = ApiResource.fullUrl(Stripe.getApiBase(), options, this.getUrl());
-    return ApiResource.requestCollection(
-        url, params, CustomerCashBalanceTransactionCollection.class, options);
+    return ApiResource.request(
+        ApiResource.RequestMethod.GET,
+        url,
+        params,
+        CustomerCashBalanceTransactionCollection.class,
+        options);
   }
 
   /**
@@ -48,8 +52,12 @@ public class CustomerCashBalanceTransactionCollection
       CustomerCashBalanceTransactionCollectionListParams params, RequestOptions options)
       throws StripeException {
     String url = ApiResource.fullUrl(Stripe.getApiBase(), options, this.getUrl());
-    return ApiResource.requestCollection(
-        url, params, CustomerCashBalanceTransactionCollection.class, options);
+    return ApiResource.request(
+        ApiResource.RequestMethod.GET,
+        url,
+        params,
+        CustomerCashBalanceTransactionCollection.class,
+        options);
   }
 
   /**

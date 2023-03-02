@@ -186,7 +186,8 @@ public class TestClock extends ApiResource implements HasId {
   public static TestClockCollection list(Map<String, Object> params, RequestOptions options)
       throws StripeException {
     String url = ApiResource.fullUrl(Stripe.getApiBase(), options, "/v1/test_helpers/test_clocks");
-    return ApiResource.requestCollection(url, params, TestClockCollection.class, options);
+    return ApiResource.request(
+        ApiResource.RequestMethod.GET, url, params, TestClockCollection.class, options);
   }
 
   /** Returns a list of your test clocks. */
@@ -198,7 +199,8 @@ public class TestClock extends ApiResource implements HasId {
   public static TestClockCollection list(TestClockListParams params, RequestOptions options)
       throws StripeException {
     String url = ApiResource.fullUrl(Stripe.getApiBase(), options, "/v1/test_helpers/test_clocks");
-    return ApiResource.requestCollection(url, params, TestClockCollection.class, options);
+    return ApiResource.request(
+        ApiResource.RequestMethod.GET, url, params, TestClockCollection.class, options);
   }
 
   /** Retrieves a test clock. */

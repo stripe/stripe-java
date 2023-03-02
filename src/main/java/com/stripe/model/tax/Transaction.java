@@ -172,7 +172,8 @@ public class Transaction extends ApiResource implements HasId {
             options,
             String.format(
                 "/v1/tax/transactions/%s/line_items", ApiResource.urlEncodeId(this.getId())));
-    return ApiResource.requestCollection(url, params, LineItemCollection.class, options);
+    return ApiResource.request(
+        ApiResource.RequestMethod.GET, url, params, LineItemCollection.class, options);
   }
 
   /** Retrieves the line items of a committed standalone transaction as a collection. */
@@ -190,7 +191,8 @@ public class Transaction extends ApiResource implements HasId {
             options,
             String.format(
                 "/v1/tax/transactions/%s/line_items", ApiResource.urlEncodeId(this.getId())));
-    return ApiResource.requestCollection(url, params, LineItemCollection.class, options);
+    return ApiResource.request(
+        ApiResource.RequestMethod.GET, url, params, LineItemCollection.class, options);
   }
 
   /** Lists Tax Transaction objects. */
@@ -208,7 +210,8 @@ public class Transaction extends ApiResource implements HasId {
   public static TransactionCollection listTransactions(
       Map<String, Object> params, RequestOptions options) throws StripeException {
     String url = ApiResource.fullUrl(Stripe.getApiBase(), options, "/v1/tax/transactions");
-    return ApiResource.requestCollection(url, params, TransactionCollection.class, options);
+    return ApiResource.request(
+        ApiResource.RequestMethod.GET, url, params, TransactionCollection.class, options);
   }
 
   /** Lists Tax Transaction objects. */
@@ -221,7 +224,8 @@ public class Transaction extends ApiResource implements HasId {
   public static TransactionCollection listTransactions(
       TransactionListTransactionsParams params, RequestOptions options) throws StripeException {
     String url = ApiResource.fullUrl(Stripe.getApiBase(), options, "/v1/tax/transactions");
-    return ApiResource.requestCollection(url, params, TransactionCollection.class, options);
+    return ApiResource.request(
+        ApiResource.RequestMethod.GET, url, params, TransactionCollection.class, options);
   }
 
   /** Retrieves a Tax <code>Transaction</code> object. */

@@ -135,7 +135,8 @@ public class FinancingOffer extends ApiResource implements HasId {
   public static FinancingOfferCollection list(Map<String, Object> params, RequestOptions options)
       throws StripeException {
     String url = ApiResource.fullUrl(Stripe.getApiBase(), options, "/v1/capital/financing_offers");
-    return ApiResource.requestCollection(url, params, FinancingOfferCollection.class, options);
+    return ApiResource.request(
+        ApiResource.RequestMethod.GET, url, params, FinancingOfferCollection.class, options);
   }
 
   /**
@@ -152,7 +153,8 @@ public class FinancingOffer extends ApiResource implements HasId {
   public static FinancingOfferCollection list(
       FinancingOfferListParams params, RequestOptions options) throws StripeException {
     String url = ApiResource.fullUrl(Stripe.getApiBase(), options, "/v1/capital/financing_offers");
-    return ApiResource.requestCollection(url, params, FinancingOfferCollection.class, options);
+    return ApiResource.request(
+        ApiResource.RequestMethod.GET, url, params, FinancingOfferCollection.class, options);
   }
 
   /**

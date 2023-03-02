@@ -179,7 +179,8 @@ public class BalanceTransaction extends ApiResource implements HasId {
   public static BalanceTransactionCollection list(
       Map<String, Object> params, RequestOptions options) throws StripeException {
     String url = ApiResource.fullUrl(Stripe.getApiBase(), options, "/v1/balance_transactions");
-    return ApiResource.requestCollection(url, params, BalanceTransactionCollection.class, options);
+    return ApiResource.request(
+        ApiResource.RequestMethod.GET, url, params, BalanceTransactionCollection.class, options);
   }
 
   /**
@@ -206,7 +207,8 @@ public class BalanceTransaction extends ApiResource implements HasId {
   public static BalanceTransactionCollection list(
       BalanceTransactionListParams params, RequestOptions options) throws StripeException {
     String url = ApiResource.fullUrl(Stripe.getApiBase(), options, "/v1/balance_transactions");
-    return ApiResource.requestCollection(url, params, BalanceTransactionCollection.class, options);
+    return ApiResource.request(
+        ApiResource.RequestMethod.GET, url, params, BalanceTransactionCollection.class, options);
   }
 
   /**

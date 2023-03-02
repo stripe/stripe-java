@@ -157,7 +157,8 @@ public class Cardholder extends ApiResource implements HasId, MetadataStore<Card
   public static CardholderCollection list(Map<String, Object> params, RequestOptions options)
       throws StripeException {
     String url = ApiResource.fullUrl(Stripe.getApiBase(), options, "/v1/issuing/cardholders");
-    return ApiResource.requestCollection(url, params, CardholderCollection.class, options);
+    return ApiResource.request(
+        ApiResource.RequestMethod.GET, url, params, CardholderCollection.class, options);
   }
 
   /**
@@ -175,7 +176,8 @@ public class Cardholder extends ApiResource implements HasId, MetadataStore<Card
   public static CardholderCollection list(CardholderListParams params, RequestOptions options)
       throws StripeException {
     String url = ApiResource.fullUrl(Stripe.getApiBase(), options, "/v1/issuing/cardholders");
-    return ApiResource.requestCollection(url, params, CardholderCollection.class, options);
+    return ApiResource.request(
+        ApiResource.RequestMethod.GET, url, params, CardholderCollection.class, options);
   }
 
   /** Retrieves an Issuing <code>Cardholder</code> object. */

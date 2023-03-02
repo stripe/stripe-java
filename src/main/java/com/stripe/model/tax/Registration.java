@@ -128,7 +128,8 @@ public class Registration extends ApiResource implements HasId {
   public static RegistrationCollection list(Map<String, Object> params, RequestOptions options)
       throws StripeException {
     String url = ApiResource.fullUrl(Stripe.getApiBase(), options, "/v1/tax/registrations");
-    return ApiResource.requestCollection(url, params, RegistrationCollection.class, options);
+    return ApiResource.request(
+        ApiResource.RequestMethod.GET, url, params, RegistrationCollection.class, options);
   }
 
   /** Returns a list of Tax <code>Registration</code> objects. */
@@ -140,7 +141,8 @@ public class Registration extends ApiResource implements HasId {
   public static RegistrationCollection list(RegistrationListParams params, RequestOptions options)
       throws StripeException {
     String url = ApiResource.fullUrl(Stripe.getApiBase(), options, "/v1/tax/registrations");
-    return ApiResource.requestCollection(url, params, RegistrationCollection.class, options);
+    return ApiResource.request(
+        ApiResource.RequestMethod.GET, url, params, RegistrationCollection.class, options);
   }
 
   /**

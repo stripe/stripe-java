@@ -759,7 +759,8 @@ public class Charge extends ApiResource implements MetadataStore<Charge>, Balanc
   public static ChargeCollection list(Map<String, Object> params, RequestOptions options)
       throws StripeException {
     String url = ApiResource.fullUrl(Stripe.getApiBase(), options, "/v1/charges");
-    return ApiResource.requestCollection(url, params, ChargeCollection.class, options);
+    return ApiResource.request(
+        ApiResource.RequestMethod.GET, url, params, ChargeCollection.class, options);
   }
 
   /**
@@ -777,7 +778,8 @@ public class Charge extends ApiResource implements MetadataStore<Charge>, Balanc
   public static ChargeCollection list(ChargeListParams params, RequestOptions options)
       throws StripeException {
     String url = ApiResource.fullUrl(Stripe.getApiBase(), options, "/v1/charges");
-    return ApiResource.requestCollection(url, params, ChargeCollection.class, options);
+    return ApiResource.request(
+        ApiResource.RequestMethod.GET, url, params, ChargeCollection.class, options);
   }
 
   /**
@@ -851,7 +853,8 @@ public class Charge extends ApiResource implements MetadataStore<Charge>, Balanc
   public static ChargeSearchResult search(Map<String, Object> params, RequestOptions options)
       throws StripeException {
     String url = ApiResource.fullUrl(Stripe.getApiBase(), options, "/v1/charges/search");
-    return ApiResource.requestSearchResult(url, params, ChargeSearchResult.class, options);
+    return ApiResource.request(
+        ApiResource.RequestMethod.GET, url, params, ChargeSearchResult.class, options);
   }
 
   /**
@@ -877,7 +880,8 @@ public class Charge extends ApiResource implements MetadataStore<Charge>, Balanc
   public static ChargeSearchResult search(ChargeSearchParams params, RequestOptions options)
       throws StripeException {
     String url = ApiResource.fullUrl(Stripe.getApiBase(), options, "/v1/charges/search");
-    return ApiResource.requestSearchResult(url, params, ChargeSearchResult.class, options);
+    return ApiResource.request(
+        ApiResource.RequestMethod.GET, url, params, ChargeSearchResult.class, options);
   }
 
   /**

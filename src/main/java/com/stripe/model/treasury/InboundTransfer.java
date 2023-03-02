@@ -247,7 +247,8 @@ public class InboundTransfer extends ApiResource implements HasId {
       throws StripeException {
     String url =
         ApiResource.fullUrl(Stripe.getApiBase(), options, "/v1/treasury/inbound_transfers");
-    return ApiResource.requestCollection(url, params, InboundTransferCollection.class, options);
+    return ApiResource.request(
+        ApiResource.RequestMethod.GET, url, params, InboundTransferCollection.class, options);
   }
 
   /** Returns a list of InboundTransfers sent from the specified FinancialAccount. */
@@ -261,7 +262,8 @@ public class InboundTransfer extends ApiResource implements HasId {
       InboundTransferListParams params, RequestOptions options) throws StripeException {
     String url =
         ApiResource.fullUrl(Stripe.getApiBase(), options, "/v1/treasury/inbound_transfers");
-    return ApiResource.requestCollection(url, params, InboundTransferCollection.class, options);
+    return ApiResource.request(
+        ApiResource.RequestMethod.GET, url, params, InboundTransferCollection.class, options);
   }
 
   /** Retrieves the details of an existing InboundTransfer. */

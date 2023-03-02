@@ -258,7 +258,8 @@ public class Dispute extends ApiResource
   public static DisputeCollection list(Map<String, Object> params, RequestOptions options)
       throws StripeException {
     String url = ApiResource.fullUrl(Stripe.getApiBase(), options, "/v1/disputes");
-    return ApiResource.requestCollection(url, params, DisputeCollection.class, options);
+    return ApiResource.request(
+        ApiResource.RequestMethod.GET, url, params, DisputeCollection.class, options);
   }
 
   /** Returns a list of your disputes. */
@@ -270,7 +271,8 @@ public class Dispute extends ApiResource
   public static DisputeCollection list(DisputeListParams params, RequestOptions options)
       throws StripeException {
     String url = ApiResource.fullUrl(Stripe.getApiBase(), options, "/v1/disputes");
-    return ApiResource.requestCollection(url, params, DisputeCollection.class, options);
+    return ApiResource.request(
+        ApiResource.RequestMethod.GET, url, params, DisputeCollection.class, options);
   }
 
   /** Retrieves the dispute with the given ID. */
