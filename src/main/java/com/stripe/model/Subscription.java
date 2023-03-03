@@ -85,6 +85,10 @@ public class Subscription extends ApiResource implements HasId, MetadataStore<Su
   @SerializedName("canceled_at")
   Long canceledAt;
 
+  /** Details about why this subscription was cancelled. */
+  @SerializedName("cancellation_details")
+  CancellationDetails cancellationDetails;
+
   /**
    * Either {@code charge_automatically}, or {@code send_invoice}. When charging automatically,
    * Stripe will attempt to pay this subscription at the end of the cycle using the default source
@@ -1075,6 +1079,38 @@ public class Subscription extends ApiResource implements HasId, MetadataStore<Su
     Boolean resetBillingCycleAnchor;
   }
 
+  @Getter
+  @Setter
+  @EqualsAndHashCode(callSuper = false)
+  public static class CancellationDetails extends StripeObject {
+    /**
+     * Additional comments about why the user canceled the subscription, if the subscription was
+     * cancelled explicitly by the user.
+     */
+    @SerializedName("comment")
+    String comment;
+
+    /**
+     * The customer submitted reason for why they cancelled, if the subscription was cancelled
+     * explicitly by the user.
+     *
+     * <p>One of {@code customer_service}, {@code low_quality}, {@code missing_features}, {@code
+     * other}, {@code switched_service}, {@code too_complex}, {@code too_expensive}, or {@code
+     * unused}.
+     */
+    @SerializedName("feedback")
+    String feedback;
+
+    /**
+     * Why this subscription was cancelled.
+     *
+     * <p>One of {@code cancellation_requested}, {@code payment_disputed}, or {@code
+     * payment_failed}.
+     */
+    @SerializedName("reason")
+    String reason;
+  }
+
   /**
    * The Pause Collection settings determine how we will pause collection for this subscription and
    * for how long the subscription should be paused.
@@ -1443,6 +1479,15 @@ public class Subscription extends ApiResource implements HasId, MetadataStore<Su
     /** The start of the first period for which the invoice pre-bills. */
     @SerializedName("period_start")
     Long periodStart;
+
+    /**
+     * Whether to cancel or preserve {@code prebilling} if the subscription is updated during the
+     * prebilled period.
+     *
+     * <p>One of {@code prebill}, or {@code reset}.
+     */
+    @SerializedName("update_behavior")
+    String updateBehavior;
 
     /** Get ID of expandable {@code invoice} object. */
     public String getInvoice() {

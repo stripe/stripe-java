@@ -82,13 +82,13 @@ public class Calculation extends ApiResource implements HasId {
   @SerializedName("tax_amount_inclusive")
   Long taxAmountInclusive;
 
-  /** Breakdown of individual tax amounts that add up to the total. */
-  @SerializedName("tax_breakdown")
-  List<Calculation.TaxBreakdown> taxBreakdown;
-
   /** Timestamp of date at which the tax rules and rates in effect applies for the calculation. */
   @SerializedName("tax_date")
   Long taxDate;
+
+  /** Summary of individual tax amounts that add up to the total. */
+  @SerializedName("tax_summary")
+  List<Calculation.TaxSummary> taxSummary;
 
   /** Calculates tax based on input and returns a Tax <code>Calculation</code> object. */
   public static Calculation create(Map<String, Object> params) throws StripeException {
@@ -182,6 +182,14 @@ public class Calculation extends ApiResource implements HasId {
     @SerializedName("tax_ids")
     List<Calculation.CustomerDetails.TaxId> taxIds;
 
+    /**
+     * The taxability override used for taxation
+     *
+     * <p>One of {@code customer_exempt}, {@code none}, or {@code reverse_charge}.
+     */
+    @SerializedName("taxability_override")
+    String taxabilityOverride;
+
     @Getter
     @Setter
     @EqualsAndHashCode(callSuper = false)
@@ -246,7 +254,7 @@ public class Calculation extends ApiResource implements HasId {
   @Getter
   @Setter
   @EqualsAndHashCode(callSuper = false)
-  public static class TaxBreakdown extends StripeObject {
+  public static class TaxSummary extends StripeObject {
     /** The amount of tax, in integer cents. */
     @SerializedName("amount")
     Long amount;

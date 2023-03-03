@@ -289,6 +289,14 @@ public class Transaction extends ApiResource implements HasId {
     @SerializedName("tax_ids")
     List<Transaction.CustomerDetails.TaxId> taxIds;
 
+    /**
+     * The taxability override used for taxation
+     *
+     * <p>One of {@code customer_exempt}, {@code none}, or {@code reverse_charge}.
+     */
+    @SerializedName("taxability_override")
+    String taxabilityOverride;
+
     @Getter
     @Setter
     @EqualsAndHashCode(callSuper = false)
