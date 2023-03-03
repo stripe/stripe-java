@@ -4704,9 +4704,18 @@ public class SubscriptionScheduleCreateParams extends ApiRequestParams {
     @SerializedName("iterations")
     Long iterations;
 
-    private Prebilling(Map<String, Object> extraParams, Long iterations) {
+    /**
+     * Whether to cancel or preserve {@code prebilling} if the subscription is updated during the
+     * prebilled period. The default value is {@code reset}.
+     */
+    @SerializedName("update_behavior")
+    UpdateBehavior updateBehavior;
+
+    private Prebilling(
+        Map<String, Object> extraParams, Long iterations, UpdateBehavior updateBehavior) {
       this.extraParams = extraParams;
       this.iterations = iterations;
+      this.updateBehavior = updateBehavior;
     }
 
     public static Builder builder() {
@@ -4718,9 +4727,12 @@ public class SubscriptionScheduleCreateParams extends ApiRequestParams {
 
       private Long iterations;
 
+      private UpdateBehavior updateBehavior;
+
       /** Finalize and obtain parameter instance from this builder. */
       public SubscriptionScheduleCreateParams.Prebilling build() {
-        return new SubscriptionScheduleCreateParams.Prebilling(this.extraParams, this.iterations);
+        return new SubscriptionScheduleCreateParams.Prebilling(
+            this.extraParams, this.iterations, this.updateBehavior);
       }
 
       /**
@@ -4754,6 +4766,31 @@ public class SubscriptionScheduleCreateParams extends ApiRequestParams {
       public Builder setIterations(Long iterations) {
         this.iterations = iterations;
         return this;
+      }
+
+      /**
+       * Whether to cancel or preserve {@code prebilling} if the subscription is updated during the
+       * prebilled period. The default value is {@code reset}.
+       */
+      public Builder setUpdateBehavior(
+          SubscriptionScheduleCreateParams.Prebilling.UpdateBehavior updateBehavior) {
+        this.updateBehavior = updateBehavior;
+        return this;
+      }
+    }
+
+    public enum UpdateBehavior implements ApiRequestParams.EnumParam {
+      @SerializedName("prebill")
+      PREBILL("prebill"),
+
+      @SerializedName("reset")
+      RESET("reset");
+
+      @Getter(onMethod_ = {@Override})
+      private final String value;
+
+      UpdateBehavior(String value) {
+        this.value = value;
       }
     }
   }

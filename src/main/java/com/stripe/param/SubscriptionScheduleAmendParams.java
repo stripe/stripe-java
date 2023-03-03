@@ -29,6 +29,10 @@ public class SubscriptionScheduleAmendParams extends ApiRequestParams {
   @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
   Map<String, Object> extraParams;
 
+  /** Provide any time periods to bill in advance. */
+  @SerializedName("prebilling")
+  Object prebilling;
+
   /**
    * In cases where the amendment changes the currently active phase, specifies if and how to
    * prorate at the time of the request.
@@ -44,11 +48,13 @@ public class SubscriptionScheduleAmendParams extends ApiRequestParams {
       List<SubscriptionScheduleAmendParams.Amendment> amendments,
       List<String> expand,
       Map<String, Object> extraParams,
+      Object prebilling,
       ProrationBehavior prorationBehavior,
       ScheduleSettings scheduleSettings) {
     this.amendments = amendments;
     this.expand = expand;
     this.extraParams = extraParams;
+    this.prebilling = prebilling;
     this.prorationBehavior = prorationBehavior;
     this.scheduleSettings = scheduleSettings;
   }
@@ -64,6 +70,8 @@ public class SubscriptionScheduleAmendParams extends ApiRequestParams {
 
     private Map<String, Object> extraParams;
 
+    private Object prebilling;
+
     private ProrationBehavior prorationBehavior;
 
     private ScheduleSettings scheduleSettings;
@@ -74,6 +82,7 @@ public class SubscriptionScheduleAmendParams extends ApiRequestParams {
           this.amendments,
           this.expand,
           this.extraParams,
+          this.prebilling,
           this.prorationBehavior,
           this.scheduleSettings);
     }
@@ -153,6 +162,46 @@ public class SubscriptionScheduleAmendParams extends ApiRequestParams {
         this.extraParams = new HashMap<>();
       }
       this.extraParams.putAll(map);
+      return this;
+    }
+
+    /**
+     * Add an element to `prebilling` list. A list is initialized for the first `add/addAll` call,
+     * and subsequent calls adds additional elements to the original list. See {@link
+     * SubscriptionScheduleAmendParams#prebilling} for the field documentation.
+     */
+    @SuppressWarnings("unchecked")
+    public Builder addPrebilling(SubscriptionScheduleAmendParams.Prebilling element) {
+      if (this.prebilling == null || this.prebilling instanceof EmptyParam) {
+        this.prebilling = new ArrayList<SubscriptionScheduleAmendParams.Prebilling>();
+      }
+      ((List<SubscriptionScheduleAmendParams.Prebilling>) this.prebilling).add(element);
+      return this;
+    }
+
+    /**
+     * Add all elements to `prebilling` list. A list is initialized for the first `add/addAll` call,
+     * and subsequent calls adds additional elements to the original list. See {@link
+     * SubscriptionScheduleAmendParams#prebilling} for the field documentation.
+     */
+    @SuppressWarnings("unchecked")
+    public Builder addAllPrebilling(List<SubscriptionScheduleAmendParams.Prebilling> elements) {
+      if (this.prebilling == null || this.prebilling instanceof EmptyParam) {
+        this.prebilling = new ArrayList<SubscriptionScheduleAmendParams.Prebilling>();
+      }
+      ((List<SubscriptionScheduleAmendParams.Prebilling>) this.prebilling).addAll(elements);
+      return this;
+    }
+
+    /** Provide any time periods to bill in advance. */
+    public Builder setPrebilling(EmptyParam prebilling) {
+      this.prebilling = prebilling;
+      return this;
+    }
+
+    /** Provide any time periods to bill in advance. */
+    public Builder setPrebilling(List<SubscriptionScheduleAmendParams.Prebilling> prebilling) {
+      this.prebilling = prebilling;
       return this;
     }
 
@@ -3767,6 +3816,579 @@ public class SubscriptionScheduleAmendParams extends ApiRequestParams {
       private final String value;
 
       SetScheduleEnd(String value) {
+        this.value = value;
+      }
+    }
+  }
+
+  @Getter
+  public static class Prebilling {
+    /** The beginning of the prebilled time period. The default value is {@code now}. */
+    @SerializedName("bill_from")
+    BillFrom billFrom;
+
+    /** The end of the prebilled time period. */
+    @SerializedName("bill_until")
+    BillUntil billUntil;
+
+    /**
+     * Map of extra parameters for custom features not available in this client library. The content
+     * in this map is not serialized under this field's {@code @SerializedName} value. Instead, each
+     * key/value pair is serialized as if the key is a root-level field (serialized) name in this
+     * param object. Effectively, this map is flattened to its parent instance.
+     */
+    @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
+    Map<String, Object> extraParams;
+
+    /** When the prebilling invoice should be created. The default value is {@code now}. */
+    @SerializedName("invoice_at")
+    InvoiceAt invoiceAt;
+
+    /**
+     * Whether to cancel or preserve {@code prebilling} if the subscription is updated during the
+     * prebilled period. The default value is {@code reset}.
+     */
+    @SerializedName("update_behavior")
+    UpdateBehavior updateBehavior;
+
+    private Prebilling(
+        BillFrom billFrom,
+        BillUntil billUntil,
+        Map<String, Object> extraParams,
+        InvoiceAt invoiceAt,
+        UpdateBehavior updateBehavior) {
+      this.billFrom = billFrom;
+      this.billUntil = billUntil;
+      this.extraParams = extraParams;
+      this.invoiceAt = invoiceAt;
+      this.updateBehavior = updateBehavior;
+    }
+
+    public static Builder builder() {
+      return new Builder();
+    }
+
+    public static class Builder {
+      private BillFrom billFrom;
+
+      private BillUntil billUntil;
+
+      private Map<String, Object> extraParams;
+
+      private InvoiceAt invoiceAt;
+
+      private UpdateBehavior updateBehavior;
+
+      /** Finalize and obtain parameter instance from this builder. */
+      public SubscriptionScheduleAmendParams.Prebilling build() {
+        return new SubscriptionScheduleAmendParams.Prebilling(
+            this.billFrom, this.billUntil, this.extraParams, this.invoiceAt, this.updateBehavior);
+      }
+
+      /** The beginning of the prebilled time period. The default value is {@code now}. */
+      public Builder setBillFrom(SubscriptionScheduleAmendParams.Prebilling.BillFrom billFrom) {
+        this.billFrom = billFrom;
+        return this;
+      }
+
+      /** The end of the prebilled time period. */
+      public Builder setBillUntil(SubscriptionScheduleAmendParams.Prebilling.BillUntil billUntil) {
+        this.billUntil = billUntil;
+        return this;
+      }
+
+      /**
+       * Add a key/value pair to `extraParams` map. A map is initialized for the first `put/putAll`
+       * call, and subsequent calls add additional key/value pairs to the original map. See {@link
+       * SubscriptionScheduleAmendParams.Prebilling#extraParams} for the field documentation.
+       */
+      public Builder putExtraParam(String key, Object value) {
+        if (this.extraParams == null) {
+          this.extraParams = new HashMap<>();
+        }
+        this.extraParams.put(key, value);
+        return this;
+      }
+
+      /**
+       * Add all map key/value pairs to `extraParams` map. A map is initialized for the first
+       * `put/putAll` call, and subsequent calls add additional key/value pairs to the original map.
+       * See {@link SubscriptionScheduleAmendParams.Prebilling#extraParams} for the field
+       * documentation.
+       */
+      public Builder putAllExtraParam(Map<String, Object> map) {
+        if (this.extraParams == null) {
+          this.extraParams = new HashMap<>();
+        }
+        this.extraParams.putAll(map);
+        return this;
+      }
+
+      /** When the prebilling invoice should be created. The default value is {@code now}. */
+      public Builder setInvoiceAt(SubscriptionScheduleAmendParams.Prebilling.InvoiceAt invoiceAt) {
+        this.invoiceAt = invoiceAt;
+        return this;
+      }
+
+      /**
+       * Whether to cancel or preserve {@code prebilling} if the subscription is updated during the
+       * prebilled period. The default value is {@code reset}.
+       */
+      public Builder setUpdateBehavior(
+          SubscriptionScheduleAmendParams.Prebilling.UpdateBehavior updateBehavior) {
+        this.updateBehavior = updateBehavior;
+        return this;
+      }
+    }
+
+    @Getter
+    public static class BillFrom {
+      /**
+       * Map of extra parameters for custom features not available in this client library. The
+       * content in this map is not serialized under this field's {@code @SerializedName} value.
+       * Instead, each key/value pair is serialized as if the key is a root-level field (serialized)
+       * name in this param object. Effectively, this map is flattened to its parent instance.
+       */
+      @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
+      Map<String, Object> extraParams;
+
+      /** Select one of several ways to pass the {@code bill_from} value. */
+      @SerializedName("type")
+      Type type;
+
+      private BillFrom(Map<String, Object> extraParams, Type type) {
+        this.extraParams = extraParams;
+        this.type = type;
+      }
+
+      public static Builder builder() {
+        return new Builder();
+      }
+
+      public static class Builder {
+        private Map<String, Object> extraParams;
+
+        private Type type;
+
+        /** Finalize and obtain parameter instance from this builder. */
+        public SubscriptionScheduleAmendParams.Prebilling.BillFrom build() {
+          return new SubscriptionScheduleAmendParams.Prebilling.BillFrom(
+              this.extraParams, this.type);
+        }
+
+        /**
+         * Add a key/value pair to `extraParams` map. A map is initialized for the first
+         * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
+         * map. See {@link SubscriptionScheduleAmendParams.Prebilling.BillFrom#extraParams} for the
+         * field documentation.
+         */
+        public Builder putExtraParam(String key, Object value) {
+          if (this.extraParams == null) {
+            this.extraParams = new HashMap<>();
+          }
+          this.extraParams.put(key, value);
+          return this;
+        }
+
+        /**
+         * Add all map key/value pairs to `extraParams` map. A map is initialized for the first
+         * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
+         * map. See {@link SubscriptionScheduleAmendParams.Prebilling.BillFrom#extraParams} for the
+         * field documentation.
+         */
+        public Builder putAllExtraParam(Map<String, Object> map) {
+          if (this.extraParams == null) {
+            this.extraParams = new HashMap<>();
+          }
+          this.extraParams.putAll(map);
+          return this;
+        }
+
+        /** Select one of several ways to pass the {@code bill_from} value. */
+        public Builder setType(SubscriptionScheduleAmendParams.Prebilling.BillFrom.Type type) {
+          this.type = type;
+          return this;
+        }
+      }
+
+      public enum Type implements ApiRequestParams.EnumParam {
+        @SerializedName("now")
+        NOW("now");
+
+        @Getter(onMethod_ = {@Override})
+        private final String value;
+
+        Type(String value) {
+          this.value = value;
+        }
+      }
+    }
+
+    @Getter
+    public static class BillUntil {
+      /** End the prebilled period when a specified amendment begins. */
+      @SerializedName("amendment_end")
+      AmendmentEnd amendmentEnd;
+
+      /** Time span for prebilling, starting from {@code bill_from}. */
+      @SerializedName("duration")
+      Duration duration;
+
+      /**
+       * Map of extra parameters for custom features not available in this client library. The
+       * content in this map is not serialized under this field's {@code @SerializedName} value.
+       * Instead, each key/value pair is serialized as if the key is a root-level field (serialized)
+       * name in this param object. Effectively, this map is flattened to its parent instance.
+       */
+      @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
+      Map<String, Object> extraParams;
+
+      /** End the prebilled period at a precise integer timestamp, starting from the Unix epoch. */
+      @SerializedName("timestamp")
+      Long timestamp;
+
+      /** Select one of several ways to pass the {@code bill_until} value. */
+      @SerializedName("type")
+      Type type;
+
+      private BillUntil(
+          AmendmentEnd amendmentEnd,
+          Duration duration,
+          Map<String, Object> extraParams,
+          Long timestamp,
+          Type type) {
+        this.amendmentEnd = amendmentEnd;
+        this.duration = duration;
+        this.extraParams = extraParams;
+        this.timestamp = timestamp;
+        this.type = type;
+      }
+
+      public static Builder builder() {
+        return new Builder();
+      }
+
+      public static class Builder {
+        private AmendmentEnd amendmentEnd;
+
+        private Duration duration;
+
+        private Map<String, Object> extraParams;
+
+        private Long timestamp;
+
+        private Type type;
+
+        /** Finalize and obtain parameter instance from this builder. */
+        public SubscriptionScheduleAmendParams.Prebilling.BillUntil build() {
+          return new SubscriptionScheduleAmendParams.Prebilling.BillUntil(
+              this.amendmentEnd, this.duration, this.extraParams, this.timestamp, this.type);
+        }
+
+        /** End the prebilled period when a specified amendment begins. */
+        public Builder setAmendmentEnd(
+            SubscriptionScheduleAmendParams.Prebilling.BillUntil.AmendmentEnd amendmentEnd) {
+          this.amendmentEnd = amendmentEnd;
+          return this;
+        }
+
+        /** Time span for prebilling, starting from {@code bill_from}. */
+        public Builder setDuration(
+            SubscriptionScheduleAmendParams.Prebilling.BillUntil.Duration duration) {
+          this.duration = duration;
+          return this;
+        }
+
+        /**
+         * Add a key/value pair to `extraParams` map. A map is initialized for the first
+         * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
+         * map. See {@link SubscriptionScheduleAmendParams.Prebilling.BillUntil#extraParams} for the
+         * field documentation.
+         */
+        public Builder putExtraParam(String key, Object value) {
+          if (this.extraParams == null) {
+            this.extraParams = new HashMap<>();
+          }
+          this.extraParams.put(key, value);
+          return this;
+        }
+
+        /**
+         * Add all map key/value pairs to `extraParams` map. A map is initialized for the first
+         * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
+         * map. See {@link SubscriptionScheduleAmendParams.Prebilling.BillUntil#extraParams} for the
+         * field documentation.
+         */
+        public Builder putAllExtraParam(Map<String, Object> map) {
+          if (this.extraParams == null) {
+            this.extraParams = new HashMap<>();
+          }
+          this.extraParams.putAll(map);
+          return this;
+        }
+
+        /**
+         * End the prebilled period at a precise integer timestamp, starting from the Unix epoch.
+         */
+        public Builder setTimestamp(Long timestamp) {
+          this.timestamp = timestamp;
+          return this;
+        }
+
+        /** Select one of several ways to pass the {@code bill_until} value. */
+        public Builder setType(SubscriptionScheduleAmendParams.Prebilling.BillUntil.Type type) {
+          this.type = type;
+          return this;
+        }
+      }
+
+      @Getter
+      public static class AmendmentEnd {
+        /**
+         * Map of extra parameters for custom features not available in this client library. The
+         * content in this map is not serialized under this field's {@code @SerializedName} value.
+         * Instead, each key/value pair is serialized as if the key is a root-level field
+         * (serialized) name in this param object. Effectively, this map is flattened to its parent
+         * instance.
+         */
+        @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
+        Map<String, Object> extraParams;
+
+        /**
+         * The position of the amendment in the {@code amendments} array at which prebilling should
+         * end. Indexes start from 0 and must be less than the total number of supplied amendments.
+         */
+        @SerializedName("index")
+        Long index;
+
+        private AmendmentEnd(Map<String, Object> extraParams, Long index) {
+          this.extraParams = extraParams;
+          this.index = index;
+        }
+
+        public static Builder builder() {
+          return new Builder();
+        }
+
+        public static class Builder {
+          private Map<String, Object> extraParams;
+
+          private Long index;
+
+          /** Finalize and obtain parameter instance from this builder. */
+          public SubscriptionScheduleAmendParams.Prebilling.BillUntil.AmendmentEnd build() {
+            return new SubscriptionScheduleAmendParams.Prebilling.BillUntil.AmendmentEnd(
+                this.extraParams, this.index);
+          }
+
+          /**
+           * Add a key/value pair to `extraParams` map. A map is initialized for the first
+           * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
+           * map. See {@link
+           * SubscriptionScheduleAmendParams.Prebilling.BillUntil.AmendmentEnd#extraParams} for the
+           * field documentation.
+           */
+          public Builder putExtraParam(String key, Object value) {
+            if (this.extraParams == null) {
+              this.extraParams = new HashMap<>();
+            }
+            this.extraParams.put(key, value);
+            return this;
+          }
+
+          /**
+           * Add all map key/value pairs to `extraParams` map. A map is initialized for the first
+           * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
+           * map. See {@link
+           * SubscriptionScheduleAmendParams.Prebilling.BillUntil.AmendmentEnd#extraParams} for the
+           * field documentation.
+           */
+          public Builder putAllExtraParam(Map<String, Object> map) {
+            if (this.extraParams == null) {
+              this.extraParams = new HashMap<>();
+            }
+            this.extraParams.putAll(map);
+            return this;
+          }
+
+          /**
+           * The position of the amendment in the {@code amendments} array at which prebilling
+           * should end. Indexes start from 0 and must be less than the total number of supplied
+           * amendments.
+           */
+          public Builder setIndex(Long index) {
+            this.index = index;
+            return this;
+          }
+        }
+      }
+
+      @Getter
+      public static class Duration {
+        /**
+         * Map of extra parameters for custom features not available in this client library. The
+         * content in this map is not serialized under this field's {@code @SerializedName} value.
+         * Instead, each key/value pair is serialized as if the key is a root-level field
+         * (serialized) name in this param object. Effectively, this map is flattened to its parent
+         * instance.
+         */
+        @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
+        Map<String, Object> extraParams;
+
+        /**
+         * Specifies a type of interval unit. Either {@code day}, {@code week}, {@code month} or
+         * {@code year}.
+         */
+        @SerializedName("interval")
+        Interval interval;
+
+        /**
+         * The number of intervals, as an whole number greater than 0. Stripe multiplies this by the
+         * interval type to get the overall duration.
+         */
+        @SerializedName("interval_count")
+        Long intervalCount;
+
+        private Duration(Map<String, Object> extraParams, Interval interval, Long intervalCount) {
+          this.extraParams = extraParams;
+          this.interval = interval;
+          this.intervalCount = intervalCount;
+        }
+
+        public static Builder builder() {
+          return new Builder();
+        }
+
+        public static class Builder {
+          private Map<String, Object> extraParams;
+
+          private Interval interval;
+
+          private Long intervalCount;
+
+          /** Finalize and obtain parameter instance from this builder. */
+          public SubscriptionScheduleAmendParams.Prebilling.BillUntil.Duration build() {
+            return new SubscriptionScheduleAmendParams.Prebilling.BillUntil.Duration(
+                this.extraParams, this.interval, this.intervalCount);
+          }
+
+          /**
+           * Add a key/value pair to `extraParams` map. A map is initialized for the first
+           * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
+           * map. See {@link
+           * SubscriptionScheduleAmendParams.Prebilling.BillUntil.Duration#extraParams} for the
+           * field documentation.
+           */
+          public Builder putExtraParam(String key, Object value) {
+            if (this.extraParams == null) {
+              this.extraParams = new HashMap<>();
+            }
+            this.extraParams.put(key, value);
+            return this;
+          }
+
+          /**
+           * Add all map key/value pairs to `extraParams` map. A map is initialized for the first
+           * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
+           * map. See {@link
+           * SubscriptionScheduleAmendParams.Prebilling.BillUntil.Duration#extraParams} for the
+           * field documentation.
+           */
+          public Builder putAllExtraParam(Map<String, Object> map) {
+            if (this.extraParams == null) {
+              this.extraParams = new HashMap<>();
+            }
+            this.extraParams.putAll(map);
+            return this;
+          }
+
+          /**
+           * Specifies a type of interval unit. Either {@code day}, {@code week}, {@code month} or
+           * {@code year}.
+           */
+          public Builder setInterval(
+              SubscriptionScheduleAmendParams.Prebilling.BillUntil.Duration.Interval interval) {
+            this.interval = interval;
+            return this;
+          }
+
+          /**
+           * The number of intervals, as an whole number greater than 0. Stripe multiplies this by
+           * the interval type to get the overall duration.
+           */
+          public Builder setIntervalCount(Long intervalCount) {
+            this.intervalCount = intervalCount;
+            return this;
+          }
+        }
+
+        public enum Interval implements ApiRequestParams.EnumParam {
+          @SerializedName("day")
+          DAY("day"),
+
+          @SerializedName("month")
+          MONTH("month"),
+
+          @SerializedName("week")
+          WEEK("week"),
+
+          @SerializedName("year")
+          YEAR("year");
+
+          @Getter(onMethod_ = {@Override})
+          private final String value;
+
+          Interval(String value) {
+            this.value = value;
+          }
+        }
+      }
+
+      public enum Type implements ApiRequestParams.EnumParam {
+        @SerializedName("amendment_end")
+        AMENDMENT_END("amendment_end"),
+
+        @SerializedName("duration")
+        DURATION("duration"),
+
+        @SerializedName("schedule_end")
+        SCHEDULE_END("schedule_end"),
+
+        @SerializedName("timestamp")
+        TIMESTAMP("timestamp");
+
+        @Getter(onMethod_ = {@Override})
+        private final String value;
+
+        Type(String value) {
+          this.value = value;
+        }
+      }
+    }
+
+    public enum InvoiceAt implements ApiRequestParams.EnumParam {
+      @SerializedName("now")
+      NOW("now");
+
+      @Getter(onMethod_ = {@Override})
+      private final String value;
+
+      InvoiceAt(String value) {
+        this.value = value;
+      }
+    }
+
+    public enum UpdateBehavior implements ApiRequestParams.EnumParam {
+      @SerializedName("prebill")
+      PREBILL("prebill"),
+
+      @SerializedName("reset")
+      RESET("reset");
+
+      @Getter(onMethod_ = {@Override})
+      private final String value;
+
+      UpdateBehavior(String value) {
         this.value = value;
       }
     }

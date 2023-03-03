@@ -262,17 +262,27 @@ public class CalculationCreateParams extends ApiRequestParams {
     @SerializedName("tax_ids")
     List<CalculationCreateParams.CustomerDetails.TaxId> taxIds;
 
+    /**
+     * When {@code reverse_charge} is provided, the reverse charge rule is applied for taxation.
+     * When {@code customer_exempt} is sent, it treats the customer as tax exempt. Defaults to
+     * {@code none}.
+     */
+    @SerializedName("taxability_override")
+    TaxabilityOverride taxabilityOverride;
+
     private CustomerDetails(
         Address address,
         AddressSource addressSource,
         Map<String, Object> extraParams,
         String ipAddress,
-        List<CalculationCreateParams.CustomerDetails.TaxId> taxIds) {
+        List<CalculationCreateParams.CustomerDetails.TaxId> taxIds,
+        TaxabilityOverride taxabilityOverride) {
       this.address = address;
       this.addressSource = addressSource;
       this.extraParams = extraParams;
       this.ipAddress = ipAddress;
       this.taxIds = taxIds;
+      this.taxabilityOverride = taxabilityOverride;
     }
 
     public static Builder builder() {
@@ -290,10 +300,17 @@ public class CalculationCreateParams extends ApiRequestParams {
 
       private List<CalculationCreateParams.CustomerDetails.TaxId> taxIds;
 
+      private TaxabilityOverride taxabilityOverride;
+
       /** Finalize and obtain parameter instance from this builder. */
       public CalculationCreateParams.CustomerDetails build() {
         return new CalculationCreateParams.CustomerDetails(
-            this.address, this.addressSource, this.extraParams, this.ipAddress, this.taxIds);
+            this.address,
+            this.addressSource,
+            this.extraParams,
+            this.ipAddress,
+            this.taxIds,
+            this.taxabilityOverride);
       }
 
       /** The customer's postal address (e.g., home or business location). */
@@ -365,6 +382,17 @@ public class CalculationCreateParams extends ApiRequestParams {
           this.taxIds = new ArrayList<>();
         }
         this.taxIds.addAll(elements);
+        return this;
+      }
+
+      /**
+       * When {@code reverse_charge} is provided, the reverse charge rule is applied for taxation.
+       * When {@code customer_exempt} is sent, it treats the customer as tax exempt. Defaults to
+       * {@code none}.
+       */
+      public Builder setTaxabilityOverride(
+          CalculationCreateParams.CustomerDetails.TaxabilityOverride taxabilityOverride) {
+        this.taxabilityOverride = taxabilityOverride;
         return this;
       }
     }
@@ -809,6 +837,24 @@ public class CalculationCreateParams extends ApiRequestParams {
       private final String value;
 
       AddressSource(String value) {
+        this.value = value;
+      }
+    }
+
+    public enum TaxabilityOverride implements ApiRequestParams.EnumParam {
+      @SerializedName("customer_exempt")
+      CUSTOMER_EXEMPT("customer_exempt"),
+
+      @SerializedName("none")
+      NONE("none"),
+
+      @SerializedName("reverse_charge")
+      REVERSE_CHARGE("reverse_charge");
+
+      @Getter(onMethod_ = {@Override})
+      private final String value;
+
+      TaxabilityOverride(String value) {
         this.value = value;
       }
     }

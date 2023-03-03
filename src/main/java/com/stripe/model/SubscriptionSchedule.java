@@ -1572,6 +1572,15 @@ public class SubscriptionSchedule extends ApiResource
     @SerializedName("period_start")
     Long periodStart;
 
+    /**
+     * Whether to cancel or preserve {@code prebilling} if the subscription is updated during the
+     * prebilled period.
+     *
+     * <p>One of {@code prebill}, or {@code reset}.
+     */
+    @SerializedName("update_behavior")
+    String updateBehavior;
+
     /** Get ID of expandable {@code invoice} object. */
     public String getInvoice() {
       return (this.invoice != null) ? this.invoice.getId() : null;
