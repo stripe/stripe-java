@@ -1,5 +1,14 @@
 # Changelog
 
+## 22.12.0-beta.2 - 2023-03-03
+* [#1522](https://github.com/stripe/stripe-java/pull/1522) API Updates for beta branch
+  * Updated stable APIs to the latest version
+  * Add support for `update_behavior` on `Subscription.prebilling`, `SubscriptionCreateParams.prebilling`, `SubscriptionSchedule.prebilling`, `SubscriptionScheduleCreateParams.prebilling`, `SubscriptionScheduleUpdateParams.prebilling`, and `SubscriptionUpdateParams.prebilling`
+  * Add support for `prebilling` on `SubscriptionScheduleAmendParams`
+  * Add support for `taxability_override` on `Tax.Calculation.customer_details`, `Tax.Transaction.customer_details`, and `TaxCalculationCreateParams.customer_details`
+  * Add support for `tax_summary` on `Tax.Calculation`
+  * Remove support for `tax_breakdown` on `Tax.Calculation`
+
 ## 22.12.0-beta.1 - 2023-03-02
 * [#1521](https://github.com/stripe/stripe-java/pull/1521) API Updates for beta branch
   * Updated stable APIs to the latest version
