@@ -69,6 +69,10 @@ public class SubscriptionUpdateParams extends ApiRequestParams {
   @SerializedName("cancel_at_period_end")
   Boolean cancelAtPeriodEnd;
 
+  /** Details about why this subscription was cancelled. */
+  @SerializedName("cancellation_details")
+  CancellationDetails cancellationDetails;
+
   /**
    * Either {@code charge_automatically}, or {@code send_invoice}. When charging automatically,
    * Stripe will attempt to pay this subscription at the end of the cycle using the default source
@@ -279,6 +283,7 @@ public class SubscriptionUpdateParams extends ApiRequestParams {
       Object billingThresholds,
       Object cancelAt,
       Boolean cancelAtPeriodEnd,
+      CancellationDetails cancellationDetails,
       CollectionMethod collectionMethod,
       Object coupon,
       Long daysUntilDue,
@@ -310,6 +315,7 @@ public class SubscriptionUpdateParams extends ApiRequestParams {
     this.billingThresholds = billingThresholds;
     this.cancelAt = cancelAt;
     this.cancelAtPeriodEnd = cancelAtPeriodEnd;
+    this.cancellationDetails = cancellationDetails;
     this.collectionMethod = collectionMethod;
     this.coupon = coupon;
     this.daysUntilDue = daysUntilDue;
@@ -354,6 +360,8 @@ public class SubscriptionUpdateParams extends ApiRequestParams {
     private Object cancelAt;
 
     private Boolean cancelAtPeriodEnd;
+
+    private CancellationDetails cancellationDetails;
 
     private CollectionMethod collectionMethod;
 
@@ -413,6 +421,7 @@ public class SubscriptionUpdateParams extends ApiRequestParams {
           this.billingThresholds,
           this.cancelAt,
           this.cancelAtPeriodEnd,
+          this.cancellationDetails,
           this.collectionMethod,
           this.coupon,
           this.daysUntilDue,
@@ -545,6 +554,13 @@ public class SubscriptionUpdateParams extends ApiRequestParams {
      */
     public Builder setCancelAtPeriodEnd(Boolean cancelAtPeriodEnd) {
       this.cancelAtPeriodEnd = cancelAtPeriodEnd;
+      return this;
+    }
+
+    /** Details about why this subscription was cancelled. */
+    public Builder setCancellationDetails(
+        SubscriptionUpdateParams.CancellationDetails cancellationDetails) {
+      this.cancellationDetails = cancellationDetails;
       return this;
     }
 
@@ -1571,6 +1587,153 @@ public class SubscriptionUpdateParams extends ApiRequestParams {
       public Builder setResetBillingCycleAnchor(Boolean resetBillingCycleAnchor) {
         this.resetBillingCycleAnchor = resetBillingCycleAnchor;
         return this;
+      }
+    }
+  }
+
+  @Getter
+  public static class CancellationDetails {
+    /**
+     * Additional comments about why the user canceled the subscription, if the subscription was
+     * cancelled explicitly by the user.
+     */
+    @SerializedName("comment")
+    Object comment;
+
+    /**
+     * Map of extra parameters for custom features not available in this client library. The content
+     * in this map is not serialized under this field's {@code @SerializedName} value. Instead, each
+     * key/value pair is serialized as if the key is a root-level field (serialized) name in this
+     * param object. Effectively, this map is flattened to its parent instance.
+     */
+    @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
+    Map<String, Object> extraParams;
+
+    /**
+     * The customer submitted reason for why they cancelled, if the subscription was cancelled
+     * explicitly by the user.
+     */
+    @SerializedName("feedback")
+    ApiRequestParams.EnumParam feedback;
+
+    private CancellationDetails(
+        Object comment, Map<String, Object> extraParams, ApiRequestParams.EnumParam feedback) {
+      this.comment = comment;
+      this.extraParams = extraParams;
+      this.feedback = feedback;
+    }
+
+    public static Builder builder() {
+      return new Builder();
+    }
+
+    public static class Builder {
+      private Object comment;
+
+      private Map<String, Object> extraParams;
+
+      private ApiRequestParams.EnumParam feedback;
+
+      /** Finalize and obtain parameter instance from this builder. */
+      public SubscriptionUpdateParams.CancellationDetails build() {
+        return new SubscriptionUpdateParams.CancellationDetails(
+            this.comment, this.extraParams, this.feedback);
+      }
+
+      /**
+       * Additional comments about why the user canceled the subscription, if the subscription was
+       * cancelled explicitly by the user.
+       */
+      public Builder setComment(String comment) {
+        this.comment = comment;
+        return this;
+      }
+
+      /**
+       * Additional comments about why the user canceled the subscription, if the subscription was
+       * cancelled explicitly by the user.
+       */
+      public Builder setComment(EmptyParam comment) {
+        this.comment = comment;
+        return this;
+      }
+
+      /**
+       * Add a key/value pair to `extraParams` map. A map is initialized for the first `put/putAll`
+       * call, and subsequent calls add additional key/value pairs to the original map. See {@link
+       * SubscriptionUpdateParams.CancellationDetails#extraParams} for the field documentation.
+       */
+      public Builder putExtraParam(String key, Object value) {
+        if (this.extraParams == null) {
+          this.extraParams = new HashMap<>();
+        }
+        this.extraParams.put(key, value);
+        return this;
+      }
+
+      /**
+       * Add all map key/value pairs to `extraParams` map. A map is initialized for the first
+       * `put/putAll` call, and subsequent calls add additional key/value pairs to the original map.
+       * See {@link SubscriptionUpdateParams.CancellationDetails#extraParams} for the field
+       * documentation.
+       */
+      public Builder putAllExtraParam(Map<String, Object> map) {
+        if (this.extraParams == null) {
+          this.extraParams = new HashMap<>();
+        }
+        this.extraParams.putAll(map);
+        return this;
+      }
+
+      /**
+       * The customer submitted reason for why they cancelled, if the subscription was cancelled
+       * explicitly by the user.
+       */
+      public Builder setFeedback(SubscriptionUpdateParams.CancellationDetails.Feedback feedback) {
+        this.feedback = feedback;
+        return this;
+      }
+
+      /**
+       * The customer submitted reason for why they cancelled, if the subscription was cancelled
+       * explicitly by the user.
+       */
+      public Builder setFeedback(EmptyParam feedback) {
+        this.feedback = feedback;
+        return this;
+      }
+    }
+
+    public enum Feedback implements ApiRequestParams.EnumParam {
+      @SerializedName("customer_service")
+      CUSTOMER_SERVICE("customer_service"),
+
+      @SerializedName("low_quality")
+      LOW_QUALITY("low_quality"),
+
+      @SerializedName("missing_features")
+      MISSING_FEATURES("missing_features"),
+
+      @SerializedName("other")
+      OTHER("other"),
+
+      @SerializedName("switched_service")
+      SWITCHED_SERVICE("switched_service"),
+
+      @SerializedName("too_complex")
+      TOO_COMPLEX("too_complex"),
+
+      @SerializedName("too_expensive")
+      TOO_EXPENSIVE("too_expensive"),
+
+      @SerializedName("unused")
+      UNUSED("unused");
+
+      @Getter(onMethod_ = {@Override})
+      private final String value;
+
+      Feedback(String value) {
+        this.value = value;
       }
     }
   }

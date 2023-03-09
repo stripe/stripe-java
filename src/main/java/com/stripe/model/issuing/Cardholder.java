@@ -446,7 +446,8 @@ public class Cardholder extends ApiResource implements HasId, MetadataStore<Card
      * If {@code disabled_reason} is present, all cards will decline authorizations with {@code
      * cardholder_verification_required} reason.
      *
-     * <p>One of {@code listed}, {@code rejected.listed}, or {@code under_review}.
+     * <p>One of {@code listed}, {@code rejected.listed}, {@code requirements.past_due}, or {@code
+     * under_review}.
      */
     @SerializedName("disabled_reason")
     String disabledReason;
