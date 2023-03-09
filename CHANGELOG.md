@@ -1,5 +1,10 @@
 # Changelog
 
+## 22.12.0 - 2023-03-09
+* [#1523](https://github.com/stripe/stripe-java/pull/1523) API Updates
+  * Add support for `card_issuing` on `IssuingCardholderCreateParams.individual` and `IssuingCardholderUpdateParams.individual`
+  * Add support for `cancellation_details` on `SubscriptionCancelParams`, `SubscriptionUpdateParams`, and `Subscription`
+
 ## 22.11.0 - 2023-03-02
 * [#1520](https://github.com/stripe/stripe-java/pull/1520) API Updates
   * Add support for new values `electric_vehicle_charging`, `emergency_services_gcas_visa_use_only`, `government_licensed_horse_dog_racing_us_region_only`, `government_licensed_online_casions_online_gambling_us_region_only`, `government_owned_lotteries_non_us_region`, `government_owned_lotteries_us_region_only`, and `marketplaces` on enums `IssuingCardCreateParams.spending_controls.allowed_categories[]`, `IssuingCardCreateParams.spending_controls.blocked_categories[]`, `IssuingCardCreateParams.spending_controls.spending_limits[].categories[]`, `IssuingCardUpdateParams.spending_controls.allowed_categories[]`, `IssuingCardUpdateParams.spending_controls.blocked_categories[]`, `IssuingCardUpdateParams.spending_controls.spending_limits[].categories[]`, `IssuingCardholderCreateParams.spending_controls.allowed_categories[]`, `IssuingCardholderCreateParams.spending_controls.blocked_categories[]`, `IssuingCardholderCreateParams.spending_controls.spending_limits[].categories[]`, `IssuingCardholderUpdateParams.spending_controls.allowed_categories[]`, `IssuingCardholderUpdateParams.spending_controls.blocked_categories[]`, and `IssuingCardholderUpdateParams.spending_controls.spending_limits[].categories[]`
