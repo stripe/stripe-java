@@ -158,12 +158,22 @@ public class SettingsUpdateParams extends ApiRequestParams {
     @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
     Map<String, Object> extraParams;
 
+    /**
+     * Specifies the default <a
+     * href="https://stripe.com/docs/tax/products-prices-tax-categories-tax-behavior#tax-behavior">tax
+     * behavior</a> to be used when the item's price has unspecified tax behavior. One of inclusive,
+     * exclusive, or inferred_by_currency. Once specified, it cannot be changed back to null.
+     */
+    @SerializedName("tax_behavior")
+    TaxBehavior taxBehavior;
+
     /** A <a href="https://stripe.com/docs/tax/tax-categories">tax code</a> ID. */
     @SerializedName("tax_code")
     Object taxCode;
 
-    private Defaults(Map<String, Object> extraParams, Object taxCode) {
+    private Defaults(Map<String, Object> extraParams, TaxBehavior taxBehavior, Object taxCode) {
       this.extraParams = extraParams;
+      this.taxBehavior = taxBehavior;
       this.taxCode = taxCode;
     }
 
@@ -174,11 +184,13 @@ public class SettingsUpdateParams extends ApiRequestParams {
     public static class Builder {
       private Map<String, Object> extraParams;
 
+      private TaxBehavior taxBehavior;
+
       private Object taxCode;
 
       /** Finalize and obtain parameter instance from this builder. */
       public SettingsUpdateParams.Defaults build() {
-        return new SettingsUpdateParams.Defaults(this.extraParams, this.taxCode);
+        return new SettingsUpdateParams.Defaults(this.extraParams, this.taxBehavior, this.taxCode);
       }
 
       /**
@@ -207,6 +219,18 @@ public class SettingsUpdateParams extends ApiRequestParams {
         return this;
       }
 
+      /**
+       * Specifies the default <a
+       * href="https://stripe.com/docs/tax/products-prices-tax-categories-tax-behavior#tax-behavior">tax
+       * behavior</a> to be used when the item's price has unspecified tax behavior. One of
+       * inclusive, exclusive, or inferred_by_currency. Once specified, it cannot be changed back to
+       * null.
+       */
+      public Builder setTaxBehavior(SettingsUpdateParams.Defaults.TaxBehavior taxBehavior) {
+        this.taxBehavior = taxBehavior;
+        return this;
+      }
+
       /** A <a href="https://stripe.com/docs/tax/tax-categories">tax code</a> ID. */
       public Builder setTaxCode(String taxCode) {
         this.taxCode = taxCode;
@@ -217,6 +241,24 @@ public class SettingsUpdateParams extends ApiRequestParams {
       public Builder setTaxCode(EmptyParam taxCode) {
         this.taxCode = taxCode;
         return this;
+      }
+    }
+
+    public enum TaxBehavior implements ApiRequestParams.EnumParam {
+      @SerializedName("exclusive")
+      EXCLUSIVE("exclusive"),
+
+      @SerializedName("inclusive")
+      INCLUSIVE("inclusive"),
+
+      @SerializedName("inferred_by_currency")
+      INFERRED_BY_CURRENCY("inferred_by_currency");
+
+      @Getter(onMethod_ = {@Override})
+      private final String value;
+
+      TaxBehavior(String value) {
+        this.value = value;
       }
     }
   }

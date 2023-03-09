@@ -40,7 +40,6 @@ public class SubscriptionSchedule extends ApiResource
   @Setter(lombok.AccessLevel.NONE)
   ExpandableField<Application> application;
 
-  /** Details to identify the subscription schedule the quote line applies to. */
   @SerializedName("applies_to")
   AppliesTo appliesTo;
 

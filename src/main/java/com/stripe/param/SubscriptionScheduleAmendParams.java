@@ -3943,6 +3943,10 @@ public class SubscriptionScheduleAmendParams extends ApiRequestParams {
 
     @Getter
     public static class BillFrom {
+      /** Start the prebilled period when a specified amendment begins. */
+      @SerializedName("amendment_start")
+      AmendmentStart amendmentStart;
+
       /**
        * Map of extra parameters for custom features not available in this client library. The
        * content in this map is not serialized under this field's {@code @SerializedName} value.
@@ -3952,12 +3956,24 @@ public class SubscriptionScheduleAmendParams extends ApiRequestParams {
       @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
       Map<String, Object> extraParams;
 
+      /**
+       * Start the prebilled period at a precise integer timestamp, starting from the Unix epoch.
+       */
+      @SerializedName("timestamp")
+      Long timestamp;
+
       /** Select one of several ways to pass the {@code bill_from} value. */
       @SerializedName("type")
       Type type;
 
-      private BillFrom(Map<String, Object> extraParams, Type type) {
+      private BillFrom(
+          AmendmentStart amendmentStart,
+          Map<String, Object> extraParams,
+          Long timestamp,
+          Type type) {
+        this.amendmentStart = amendmentStart;
         this.extraParams = extraParams;
+        this.timestamp = timestamp;
         this.type = type;
       }
 
@@ -3966,14 +3982,25 @@ public class SubscriptionScheduleAmendParams extends ApiRequestParams {
       }
 
       public static class Builder {
+        private AmendmentStart amendmentStart;
+
         private Map<String, Object> extraParams;
+
+        private Long timestamp;
 
         private Type type;
 
         /** Finalize and obtain parameter instance from this builder. */
         public SubscriptionScheduleAmendParams.Prebilling.BillFrom build() {
           return new SubscriptionScheduleAmendParams.Prebilling.BillFrom(
-              this.extraParams, this.type);
+              this.amendmentStart, this.extraParams, this.timestamp, this.type);
+        }
+
+        /** Start the prebilled period when a specified amendment begins. */
+        public Builder setAmendmentStart(
+            SubscriptionScheduleAmendParams.Prebilling.BillFrom.AmendmentStart amendmentStart) {
+          this.amendmentStart = amendmentStart;
+          return this;
         }
 
         /**
@@ -4004,6 +4031,14 @@ public class SubscriptionScheduleAmendParams extends ApiRequestParams {
           return this;
         }
 
+        /**
+         * Start the prebilled period at a precise integer timestamp, starting from the Unix epoch.
+         */
+        public Builder setTimestamp(Long timestamp) {
+          this.timestamp = timestamp;
+          return this;
+        }
+
         /** Select one of several ways to pass the {@code bill_from} value. */
         public Builder setType(SubscriptionScheduleAmendParams.Prebilling.BillFrom.Type type) {
           this.type = type;
@@ -4011,9 +4046,97 @@ public class SubscriptionScheduleAmendParams extends ApiRequestParams {
         }
       }
 
+      @Getter
+      public static class AmendmentStart {
+        /**
+         * Map of extra parameters for custom features not available in this client library. The
+         * content in this map is not serialized under this field's {@code @SerializedName} value.
+         * Instead, each key/value pair is serialized as if the key is a root-level field
+         * (serialized) name in this param object. Effectively, this map is flattened to its parent
+         * instance.
+         */
+        @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
+        Map<String, Object> extraParams;
+
+        /**
+         * The position of the amendment in the {@code amendments} array with which prebilling
+         * should begin. Indexes start from 0 and must be less than the total number of supplied
+         * amendments.
+         */
+        @SerializedName("index")
+        Long index;
+
+        private AmendmentStart(Map<String, Object> extraParams, Long index) {
+          this.extraParams = extraParams;
+          this.index = index;
+        }
+
+        public static Builder builder() {
+          return new Builder();
+        }
+
+        public static class Builder {
+          private Map<String, Object> extraParams;
+
+          private Long index;
+
+          /** Finalize and obtain parameter instance from this builder. */
+          public SubscriptionScheduleAmendParams.Prebilling.BillFrom.AmendmentStart build() {
+            return new SubscriptionScheduleAmendParams.Prebilling.BillFrom.AmendmentStart(
+                this.extraParams, this.index);
+          }
+
+          /**
+           * Add a key/value pair to `extraParams` map. A map is initialized for the first
+           * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
+           * map. See {@link
+           * SubscriptionScheduleAmendParams.Prebilling.BillFrom.AmendmentStart#extraParams} for the
+           * field documentation.
+           */
+          public Builder putExtraParam(String key, Object value) {
+            if (this.extraParams == null) {
+              this.extraParams = new HashMap<>();
+            }
+            this.extraParams.put(key, value);
+            return this;
+          }
+
+          /**
+           * Add all map key/value pairs to `extraParams` map. A map is initialized for the first
+           * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
+           * map. See {@link
+           * SubscriptionScheduleAmendParams.Prebilling.BillFrom.AmendmentStart#extraParams} for the
+           * field documentation.
+           */
+          public Builder putAllExtraParam(Map<String, Object> map) {
+            if (this.extraParams == null) {
+              this.extraParams = new HashMap<>();
+            }
+            this.extraParams.putAll(map);
+            return this;
+          }
+
+          /**
+           * The position of the amendment in the {@code amendments} array with which prebilling
+           * should begin. Indexes start from 0 and must be less than the total number of supplied
+           * amendments.
+           */
+          public Builder setIndex(Long index) {
+            this.index = index;
+            return this;
+          }
+        }
+      }
+
       public enum Type implements ApiRequestParams.EnumParam {
+        @SerializedName("amendment_start")
+        AMENDMENT_START("amendment_start"),
+
         @SerializedName("now")
-        NOW("now");
+        NOW("now"),
+
+        @SerializedName("timestamp")
+        TIMESTAMP("timestamp");
 
         @Getter(onMethod_ = {@Override})
         private final String value;
@@ -4026,7 +4149,7 @@ public class SubscriptionScheduleAmendParams extends ApiRequestParams {
 
     @Getter
     public static class BillUntil {
-      /** End the prebilled period when a specified amendment begins. */
+      /** End the prebilled period when a specified amendment ends. */
       @SerializedName("amendment_end")
       AmendmentEnd amendmentEnd;
 
@@ -4085,7 +4208,7 @@ public class SubscriptionScheduleAmendParams extends ApiRequestParams {
               this.amendmentEnd, this.duration, this.extraParams, this.timestamp, this.type);
         }
 
-        /** End the prebilled period when a specified amendment begins. */
+        /** End the prebilled period when a specified amendment ends. */
         public Builder setAmendmentEnd(
             SubscriptionScheduleAmendParams.Prebilling.BillUntil.AmendmentEnd amendmentEnd) {
           this.amendmentEnd = amendmentEnd;
