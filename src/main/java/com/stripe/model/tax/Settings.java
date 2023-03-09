@@ -114,6 +114,18 @@ public class Settings extends ApiResource {
   @EqualsAndHashCode(callSuper = false)
   public static class Defaults extends StripeObject {
     /**
+     * Default <a
+     * href="https://stripe.com/docs/tax/products-prices-tax-categories-tax-behavior#tax-behavior">tax
+     * behavior</a> used to specify whether the price is considered inclusive of taxes or exclusive
+     * of taxes. If the item's price has a tax behavior set, it will take precedence over the
+     * default tax behavior.
+     *
+     * <p>One of {@code exclusive}, {@code inclusive}, or {@code inferred_by_currency}.
+     */
+    @SerializedName("tax_behavior")
+    String taxBehavior;
+
+    /**
      * Default <a href="https://stripe.com/docs/tax/tax-categories">tax code</a> used to classify
      * your products and prices.
      */

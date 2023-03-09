@@ -1,5 +1,10 @@
 # Changelog
 
+## 22.12.0 - 2023-03-09
+* [#1523](https://github.com/stripe/stripe-java/pull/1523) API Updates
+  * Add support for `card_issuing` on `IssuingCardholderCreateParams.individual` and `IssuingCardholderUpdateParams.individual`
+  * Add support for `cancellation_details` on `SubscriptionCancelParams`, `SubscriptionUpdateParams`, and `Subscription`
+
 ## 22.12.0-beta.2 - 2023-03-03
 * [#1522](https://github.com/stripe/stripe-java/pull/1522) API Updates for beta branch
   * Updated stable APIs to the latest version

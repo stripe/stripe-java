@@ -612,6 +612,10 @@ public class CardholderCreateParams extends ApiRequestParams {
 
   @Getter
   public static class Individual {
+    /** Information related to the card_issuing program for this cardholder. */
+    @SerializedName("card_issuing")
+    CardIssuing cardIssuing;
+
     /** The date of birth of this cardholder. */
     @SerializedName("dob")
     Dob dob;
@@ -646,11 +650,13 @@ public class CardholderCreateParams extends ApiRequestParams {
     Verification verification;
 
     private Individual(
+        CardIssuing cardIssuing,
         Dob dob,
         Map<String, Object> extraParams,
         String firstName,
         String lastName,
         Verification verification) {
+      this.cardIssuing = cardIssuing;
       this.dob = dob;
       this.extraParams = extraParams;
       this.firstName = firstName;
@@ -663,6 +669,8 @@ public class CardholderCreateParams extends ApiRequestParams {
     }
 
     public static class Builder {
+      private CardIssuing cardIssuing;
+
       private Dob dob;
 
       private Map<String, Object> extraParams;
@@ -676,7 +684,18 @@ public class CardholderCreateParams extends ApiRequestParams {
       /** Finalize and obtain parameter instance from this builder. */
       public CardholderCreateParams.Individual build() {
         return new CardholderCreateParams.Individual(
-            this.dob, this.extraParams, this.firstName, this.lastName, this.verification);
+            this.cardIssuing,
+            this.dob,
+            this.extraParams,
+            this.firstName,
+            this.lastName,
+            this.verification);
+      }
+
+      /** Information related to the card_issuing program for this cardholder. */
+      public Builder setCardIssuing(CardholderCreateParams.Individual.CardIssuing cardIssuing) {
+        this.cardIssuing = cardIssuing;
+        return this;
       }
 
       /** The date of birth of this cardholder. */
@@ -735,6 +754,204 @@ public class CardholderCreateParams extends ApiRequestParams {
       public Builder setVerification(CardholderCreateParams.Individual.Verification verification) {
         this.verification = verification;
         return this;
+      }
+    }
+
+    @Getter
+    public static class CardIssuing {
+      /**
+       * Map of extra parameters for custom features not available in this client library. The
+       * content in this map is not serialized under this field's {@code @SerializedName} value.
+       * Instead, each key/value pair is serialized as if the key is a root-level field (serialized)
+       * name in this param object. Effectively, this map is flattened to its parent instance.
+       */
+      @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
+      Map<String, Object> extraParams;
+
+      /**
+       * Information about cardholder acceptance of <a
+       * href="https://stripe.com/docs/issuing/cards">Authorized User Terms</a>.
+       */
+      @SerializedName("user_terms_acceptance")
+      UserTermsAcceptance userTermsAcceptance;
+
+      private CardIssuing(
+          Map<String, Object> extraParams, UserTermsAcceptance userTermsAcceptance) {
+        this.extraParams = extraParams;
+        this.userTermsAcceptance = userTermsAcceptance;
+      }
+
+      public static Builder builder() {
+        return new Builder();
+      }
+
+      public static class Builder {
+        private Map<String, Object> extraParams;
+
+        private UserTermsAcceptance userTermsAcceptance;
+
+        /** Finalize and obtain parameter instance from this builder. */
+        public CardholderCreateParams.Individual.CardIssuing build() {
+          return new CardholderCreateParams.Individual.CardIssuing(
+              this.extraParams, this.userTermsAcceptance);
+        }
+
+        /**
+         * Add a key/value pair to `extraParams` map. A map is initialized for the first
+         * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
+         * map. See {@link CardholderCreateParams.Individual.CardIssuing#extraParams} for the field
+         * documentation.
+         */
+        public Builder putExtraParam(String key, Object value) {
+          if (this.extraParams == null) {
+            this.extraParams = new HashMap<>();
+          }
+          this.extraParams.put(key, value);
+          return this;
+        }
+
+        /**
+         * Add all map key/value pairs to `extraParams` map. A map is initialized for the first
+         * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
+         * map. See {@link CardholderCreateParams.Individual.CardIssuing#extraParams} for the field
+         * documentation.
+         */
+        public Builder putAllExtraParam(Map<String, Object> map) {
+          if (this.extraParams == null) {
+            this.extraParams = new HashMap<>();
+          }
+          this.extraParams.putAll(map);
+          return this;
+        }
+
+        /**
+         * Information about cardholder acceptance of <a
+         * href="https://stripe.com/docs/issuing/cards">Authorized User Terms</a>.
+         */
+        public Builder setUserTermsAcceptance(
+            CardholderCreateParams.Individual.CardIssuing.UserTermsAcceptance userTermsAcceptance) {
+          this.userTermsAcceptance = userTermsAcceptance;
+          return this;
+        }
+      }
+
+      @Getter
+      public static class UserTermsAcceptance {
+        /**
+         * The Unix timestamp marking when the cardholder accepted the Authorized User Terms.
+         * Required for Celtic Spend Card users.
+         */
+        @SerializedName("date")
+        Long date;
+
+        /**
+         * Map of extra parameters for custom features not available in this client library. The
+         * content in this map is not serialized under this field's {@code @SerializedName} value.
+         * Instead, each key/value pair is serialized as if the key is a root-level field
+         * (serialized) name in this param object. Effectively, this map is flattened to its parent
+         * instance.
+         */
+        @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
+        Map<String, Object> extraParams;
+
+        /**
+         * The IP address from which the cardholder accepted the Authorized User Terms. Required for
+         * Celtic Spend Card users.
+         */
+        @SerializedName("ip")
+        String ip;
+
+        /**
+         * The user agent of the browser from which the cardholder accepted the Authorized User
+         * Terms.
+         */
+        @SerializedName("user_agent")
+        String userAgent;
+
+        private UserTermsAcceptance(
+            Long date, Map<String, Object> extraParams, String ip, String userAgent) {
+          this.date = date;
+          this.extraParams = extraParams;
+          this.ip = ip;
+          this.userAgent = userAgent;
+        }
+
+        public static Builder builder() {
+          return new Builder();
+        }
+
+        public static class Builder {
+          private Long date;
+
+          private Map<String, Object> extraParams;
+
+          private String ip;
+
+          private String userAgent;
+
+          /** Finalize and obtain parameter instance from this builder. */
+          public CardholderCreateParams.Individual.CardIssuing.UserTermsAcceptance build() {
+            return new CardholderCreateParams.Individual.CardIssuing.UserTermsAcceptance(
+                this.date, this.extraParams, this.ip, this.userAgent);
+          }
+
+          /**
+           * The Unix timestamp marking when the cardholder accepted the Authorized User Terms.
+           * Required for Celtic Spend Card users.
+           */
+          public Builder setDate(Long date) {
+            this.date = date;
+            return this;
+          }
+
+          /**
+           * Add a key/value pair to `extraParams` map. A map is initialized for the first
+           * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
+           * map. See {@link
+           * CardholderCreateParams.Individual.CardIssuing.UserTermsAcceptance#extraParams} for the
+           * field documentation.
+           */
+          public Builder putExtraParam(String key, Object value) {
+            if (this.extraParams == null) {
+              this.extraParams = new HashMap<>();
+            }
+            this.extraParams.put(key, value);
+            return this;
+          }
+
+          /**
+           * Add all map key/value pairs to `extraParams` map. A map is initialized for the first
+           * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
+           * map. See {@link
+           * CardholderCreateParams.Individual.CardIssuing.UserTermsAcceptance#extraParams} for the
+           * field documentation.
+           */
+          public Builder putAllExtraParam(Map<String, Object> map) {
+            if (this.extraParams == null) {
+              this.extraParams = new HashMap<>();
+            }
+            this.extraParams.putAll(map);
+            return this;
+          }
+
+          /**
+           * The IP address from which the cardholder accepted the Authorized User Terms. Required
+           * for Celtic Spend Card users.
+           */
+          public Builder setIp(String ip) {
+            this.ip = ip;
+            return this;
+          }
+
+          /**
+           * The user agent of the browser from which the cardholder accepted the Authorized User
+           * Terms.
+           */
+          public Builder setUserAgent(String userAgent) {
+            this.userAgent = userAgent;
+            return this;
+          }
+        }
       }
     }
 
