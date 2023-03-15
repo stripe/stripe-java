@@ -4366,6 +4366,9 @@ public class SubscriptionUpdateParams extends ApiRequestParams {
       @SerializedName("card")
       CARD("card"),
 
+      @SerializedName("cashapp")
+      CASHAPP("cashapp"),
+
       @SerializedName("customer_balance")
       CUSTOMER_BALANCE("customer_balance"),
 

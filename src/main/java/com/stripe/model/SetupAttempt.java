@@ -275,6 +275,9 @@ public class SetupAttempt extends ApiResource implements HasId {
     @SerializedName("card_present")
     CardPresent cardPresent;
 
+    @SerializedName("cashapp")
+    Cashapp cashapp;
+
     @SerializedName("ideal")
     Ideal ideal;
 
@@ -498,6 +501,11 @@ public class SetupAttempt extends ApiResource implements HasId {
             new ExpandableField<PaymentMethod>(expandableObject.getId(), expandableObject);
       }
     }
+
+    @Getter
+    @Setter
+    @EqualsAndHashCode(callSuper = false)
+    public static class Cashapp extends StripeObject {}
 
     @Getter
     @Setter

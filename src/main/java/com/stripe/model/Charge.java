@@ -1166,6 +1166,9 @@ public class Charge extends ApiResource implements MetadataStore<Charge>, Balanc
     @SerializedName("card_present")
     CardPresent cardPresent;
 
+    @SerializedName("cashapp")
+    Cashapp cashapp;
+
     @SerializedName("customer_balance")
     CustomerBalance customerBalance;
 
@@ -2049,6 +2052,11 @@ public class Charge extends ApiResource implements MetadataStore<Charge>, Balanc
         String transactionStatusInformation;
       }
     }
+
+    @Getter
+    @Setter
+    @EqualsAndHashCode(callSuper = false)
+    public static class Cashapp extends StripeObject {}
 
     @Getter
     @Setter

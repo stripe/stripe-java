@@ -631,6 +631,9 @@ public class WebhookEndpointUpdateParams extends ApiRequestParams {
     @SerializedName("payout.paid")
     PAYOUT__PAID("payout.paid"),
 
+    @SerializedName("payout.reconciliation_completed")
+    PAYOUT__RECONCILIATION_COMPLETED("payout.reconciliation_completed"),
+
     @SerializedName("payout.updated")
     PAYOUT__UPDATED("payout.updated"),
 
