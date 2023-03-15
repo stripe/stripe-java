@@ -9,7 +9,6 @@ import com.stripe.model.StripeObject;
 import com.stripe.net.ApiResource;
 import com.stripe.net.RequestOptions;
 import com.stripe.param.capital.FinancingOfferListParams;
-import com.stripe.param.capital.FinancingOfferMarkDeliveredParams;
 import com.stripe.param.capital.FinancingOfferRetrieveParams;
 import java.math.BigDecimal;
 import java.util.Map;
@@ -155,73 +154,6 @@ public class FinancingOffer extends ApiResource implements HasId {
     String url = ApiResource.fullUrl(Stripe.getApiBase(), options, "/v1/capital/financing_offers");
     return ApiResource.request(
         ApiResource.RequestMethod.GET, url, params, FinancingOfferCollection.class, options);
-  }
-
-  /**
-   * Acknowledges that platform has received and delivered the financing_offer to the intended
-   * merchant recipient. This is required to make the application accessible.
-   */
-  public FinancingOffer markDelivered() throws StripeException {
-    return markDelivered((Map<String, Object>) null, (RequestOptions) null);
-  }
-
-  /**
-   * Acknowledges that platform has received and delivered the financing_offer to the intended
-   * merchant recipient. This is required to make the application accessible.
-   */
-  public FinancingOffer markDelivered(RequestOptions options) throws StripeException {
-    return markDelivered((Map<String, Object>) null, options);
-  }
-
-  /**
-   * Acknowledges that platform has received and delivered the financing_offer to the intended
-   * merchant recipient. This is required to make the application accessible.
-   */
-  public FinancingOffer markDelivered(Map<String, Object> params) throws StripeException {
-    return markDelivered(params, (RequestOptions) null);
-  }
-
-  /**
-   * Acknowledges that platform has received and delivered the financing_offer to the intended
-   * merchant recipient. This is required to make the application accessible.
-   */
-  public FinancingOffer markDelivered(Map<String, Object> params, RequestOptions options)
-      throws StripeException {
-    String url =
-        ApiResource.fullUrl(
-            Stripe.getApiBase(),
-            options,
-            String.format(
-                "/v1/capital/financing_offers/%s/mark_delivered",
-                ApiResource.urlEncodeId(this.getId())));
-    return ApiResource.request(
-        ApiResource.RequestMethod.POST, url, params, FinancingOffer.class, options);
-  }
-
-  /**
-   * Acknowledges that platform has received and delivered the financing_offer to the intended
-   * merchant recipient. This is required to make the application accessible.
-   */
-  public FinancingOffer markDelivered(FinancingOfferMarkDeliveredParams params)
-      throws StripeException {
-    return markDelivered(params, (RequestOptions) null);
-  }
-
-  /**
-   * Acknowledges that platform has received and delivered the financing_offer to the intended
-   * merchant recipient. This is required to make the application accessible.
-   */
-  public FinancingOffer markDelivered(
-      FinancingOfferMarkDeliveredParams params, RequestOptions options) throws StripeException {
-    String url =
-        ApiResource.fullUrl(
-            Stripe.getApiBase(),
-            options,
-            String.format(
-                "/v1/capital/financing_offers/%s/mark_delivered",
-                ApiResource.urlEncodeId(this.getId())));
-    return ApiResource.request(
-        ApiResource.RequestMethod.POST, url, params, FinancingOffer.class, options);
   }
 
   /** Get the details of the financing offer. */

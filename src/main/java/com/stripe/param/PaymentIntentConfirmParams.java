@@ -6157,6 +6157,10 @@ public class PaymentIntentConfirmParams extends ApiRequestParams {
       @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
       Map<String, Object> extraParams;
 
+      /** Preferred language of the Affirm authorization page that the customer is redirected to. */
+      @SerializedName("preferred_locale")
+      String preferredLocale;
+
       /**
        * Indicates that you intend to make future payments with this PaymentIntent's payment method.
        *
@@ -6182,9 +6186,11 @@ public class PaymentIntentConfirmParams extends ApiRequestParams {
       private Affirm(
           ApiRequestParams.EnumParam captureMethod,
           Map<String, Object> extraParams,
+          String preferredLocale,
           SetupFutureUsage setupFutureUsage) {
         this.captureMethod = captureMethod;
         this.extraParams = extraParams;
+        this.preferredLocale = preferredLocale;
         this.setupFutureUsage = setupFutureUsage;
       }
 
@@ -6197,12 +6203,14 @@ public class PaymentIntentConfirmParams extends ApiRequestParams {
 
         private Map<String, Object> extraParams;
 
+        private String preferredLocale;
+
         private SetupFutureUsage setupFutureUsage;
 
         /** Finalize and obtain parameter instance from this builder. */
         public PaymentIntentConfirmParams.PaymentMethodOptions.Affirm build() {
           return new PaymentIntentConfirmParams.PaymentMethodOptions.Affirm(
-              this.captureMethod, this.extraParams, this.setupFutureUsage);
+              this.captureMethod, this.extraParams, this.preferredLocale, this.setupFutureUsage);
         }
 
         /**
@@ -6259,6 +6267,14 @@ public class PaymentIntentConfirmParams extends ApiRequestParams {
             this.extraParams = new HashMap<>();
           }
           this.extraParams.putAll(map);
+          return this;
+        }
+
+        /**
+         * Preferred language of the Affirm authorization page that the customer is redirected to.
+         */
+        public Builder setPreferredLocale(String preferredLocale) {
+          this.preferredLocale = preferredLocale;
           return this;
         }
 
@@ -11217,15 +11233,39 @@ public class PaymentIntentConfirmParams extends ApiRequestParams {
       @SerializedName("reference_id")
       String referenceId;
 
+      /**
+       * Indicates that you intend to make future payments with this PaymentIntent's payment method.
+       *
+       * <p>Providing this parameter will <a
+       * href="https://stripe.com/docs/payments/save-during-payment">attach the payment method</a>
+       * to the PaymentIntent's Customer, if present, after the PaymentIntent is confirmed and any
+       * required actions from the user are complete. If no Customer was provided, the payment
+       * method can still be <a
+       * href="https://stripe.com/docs/api/payment_methods/attach">attached</a> to a Customer after
+       * the transaction completes.
+       *
+       * <p>When processing card payments, Stripe also uses {@code setup_future_usage} to
+       * dynamically optimize your payment flow and comply with regional legislation and network
+       * rules, such as <a href="https://stripe.com/docs/strong-customer-authentication">SCA</a>.
+       *
+       * <p>If {@code setup_future_usage} is already set and you are performing a request using a
+       * publishable key, you may only update the value from {@code on_session} to {@code
+       * off_session}.
+       */
+      @SerializedName("setup_future_usage")
+      ApiRequestParams.EnumParam setupFutureUsage;
+
       private Paypal(
           ApiRequestParams.EnumParam captureMethod,
           Map<String, Object> extraParams,
           PreferredLocale preferredLocale,
-          String referenceId) {
+          String referenceId,
+          ApiRequestParams.EnumParam setupFutureUsage) {
         this.captureMethod = captureMethod;
         this.extraParams = extraParams;
         this.preferredLocale = preferredLocale;
         this.referenceId = referenceId;
+        this.setupFutureUsage = setupFutureUsage;
       }
 
       public static Builder builder() {
@@ -11241,10 +11281,16 @@ public class PaymentIntentConfirmParams extends ApiRequestParams {
 
         private String referenceId;
 
+        private ApiRequestParams.EnumParam setupFutureUsage;
+
         /** Finalize and obtain parameter instance from this builder. */
         public PaymentIntentConfirmParams.PaymentMethodOptions.Paypal build() {
           return new PaymentIntentConfirmParams.PaymentMethodOptions.Paypal(
-              this.captureMethod, this.extraParams, this.preferredLocale, this.referenceId);
+              this.captureMethod,
+              this.extraParams,
+              this.preferredLocale,
+              this.referenceId,
+              this.setupFutureUsage);
         }
 
         public Builder setCaptureMethod(
@@ -11295,6 +11341,58 @@ public class PaymentIntentConfirmParams extends ApiRequestParams {
 
         public Builder setReferenceId(String referenceId) {
           this.referenceId = referenceId;
+          return this;
+        }
+
+        /**
+         * Indicates that you intend to make future payments with this PaymentIntent's payment
+         * method.
+         *
+         * <p>Providing this parameter will <a
+         * href="https://stripe.com/docs/payments/save-during-payment">attach the payment method</a>
+         * to the PaymentIntent's Customer, if present, after the PaymentIntent is confirmed and any
+         * required actions from the user are complete. If no Customer was provided, the payment
+         * method can still be <a
+         * href="https://stripe.com/docs/api/payment_methods/attach">attached</a> to a Customer
+         * after the transaction completes.
+         *
+         * <p>When processing card payments, Stripe also uses {@code setup_future_usage} to
+         * dynamically optimize your payment flow and comply with regional legislation and network
+         * rules, such as <a href="https://stripe.com/docs/strong-customer-authentication">SCA</a>.
+         *
+         * <p>If {@code setup_future_usage} is already set and you are performing a request using a
+         * publishable key, you may only update the value from {@code on_session} to {@code
+         * off_session}.
+         */
+        public Builder setSetupFutureUsage(
+            PaymentIntentConfirmParams.PaymentMethodOptions.Paypal.SetupFutureUsage
+                setupFutureUsage) {
+          this.setupFutureUsage = setupFutureUsage;
+          return this;
+        }
+
+        /**
+         * Indicates that you intend to make future payments with this PaymentIntent's payment
+         * method.
+         *
+         * <p>Providing this parameter will <a
+         * href="https://stripe.com/docs/payments/save-during-payment">attach the payment method</a>
+         * to the PaymentIntent's Customer, if present, after the PaymentIntent is confirmed and any
+         * required actions from the user are complete. If no Customer was provided, the payment
+         * method can still be <a
+         * href="https://stripe.com/docs/api/payment_methods/attach">attached</a> to a Customer
+         * after the transaction completes.
+         *
+         * <p>When processing card payments, Stripe also uses {@code setup_future_usage} to
+         * dynamically optimize your payment flow and comply with regional legislation and network
+         * rules, such as <a href="https://stripe.com/docs/strong-customer-authentication">SCA</a>.
+         *
+         * <p>If {@code setup_future_usage} is already set and you are performing a request using a
+         * publishable key, you may only update the value from {@code on_session} to {@code
+         * off_session}.
+         */
+        public Builder setSetupFutureUsage(EmptyParam setupFutureUsage) {
+          this.setupFutureUsage = setupFutureUsage;
           return this;
         }
       }
@@ -11379,6 +11477,21 @@ public class PaymentIntentConfirmParams extends ApiRequestParams {
         private final String value;
 
         PreferredLocale(String value) {
+          this.value = value;
+        }
+      }
+
+      public enum SetupFutureUsage implements ApiRequestParams.EnumParam {
+        @SerializedName("none")
+        NONE("none"),
+
+        @SerializedName("off_session")
+        OFF_SESSION("off_session");
+
+        @Getter(onMethod_ = {@Override})
+        private final String value;
+
+        SetupFutureUsage(String value) {
           this.value = value;
         }
       }
