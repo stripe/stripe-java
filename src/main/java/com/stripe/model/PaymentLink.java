@@ -29,8 +29,7 @@ import lombok.Setter;
  * href="https://stripe.com/docs/api/events/types#event_types-checkout.session.completed">checkout
  * session events</a> to track payments through payment links.
  *
- * <p>Related guide: <a href="https://stripe.com/docs/payments/payment-links/api">Payment Links
- * API</a>
+ * <p>Related guide: <a href="https://stripe.com/docs/payment-links">Payment Links API</a>
  */
 @Getter
 @Setter

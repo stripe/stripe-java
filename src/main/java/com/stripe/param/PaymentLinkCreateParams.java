@@ -4092,6 +4092,9 @@ public class PaymentLinkCreateParams extends ApiRequestParams {
     @SerializedName("card")
     CARD("card"),
 
+    @SerializedName("cashapp")
+    CASHAPP("cashapp"),
+
     @SerializedName("eps")
     EPS("eps"),
 

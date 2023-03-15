@@ -1448,6 +1448,9 @@ public class PaymentIntent extends ApiResource implements HasId, MetadataStore<P
     @SerializedName("card_await_notification")
     CardAwaitNotification cardAwaitNotification;
 
+    @SerializedName("cashapp_handle_redirect_or_display_qr_code")
+    CashappHandleRedirectOrDisplayQrCode cashappHandleRedirectOrDisplayQrCode;
+
     @SerializedName("display_bank_transfer_instructions")
     DisplayBankTransferInstructions displayBankTransferInstructions;
 
@@ -1568,6 +1571,42 @@ public class PaymentIntent extends ApiResource implements HasId, MetadataStore<P
        */
       @SerializedName("customer_approval_required")
       Boolean customerApprovalRequired;
+    }
+
+    @Getter
+    @Setter
+    @EqualsAndHashCode(callSuper = false)
+    public static class CashappHandleRedirectOrDisplayQrCode extends StripeObject {
+      /**
+       * The URL to the hosted Cash App Pay instructions page, which allows customers to view the QR
+       * code, and supports QR code refreshing on expiration.
+       */
+      @SerializedName("hosted_instructions_url")
+      String hostedInstructionsUrl;
+
+      /** The url for mobile redirect based auth. */
+      @SerializedName("mobile_auth_url")
+      String mobileAuthUrl;
+
+      @SerializedName("qr_code")
+      QrCode qrCode;
+
+      @Getter
+      @Setter
+      @EqualsAndHashCode(callSuper = false)
+      public static class QrCode extends StripeObject {
+        /** The date (unix timestamp) when the QR code expires. */
+        @SerializedName("expires_at")
+        Long expiresAt;
+
+        /** The image_url_png string used to render QR code. */
+        @SerializedName("image_url_png")
+        String imageUrlPng;
+
+        /** The image_url_svg string used to render QR code. */
+        @SerializedName("image_url_svg")
+        String imageUrlSvg;
+      }
     }
 
     @Getter
@@ -2097,6 +2136,9 @@ public class PaymentIntent extends ApiResource implements HasId, MetadataStore<P
     @SerializedName("card_present")
     CardPresent cardPresent;
 
+    @SerializedName("cashapp")
+    Cashapp cashapp;
+
     @SerializedName("customer_balance")
     CustomerBalance customerBalance;
 
@@ -2233,6 +2275,10 @@ public class PaymentIntent extends ApiResource implements HasId, MetadataStore<P
        */
       @SerializedName("capture_method")
       String captureMethod;
+
+      /** Preferred language of the Affirm authorization page that the customer is redirected to. */
+      @SerializedName("preferred_locale")
+      String preferredLocale;
 
       /**
        * Indicates that you intend to make future payments with this PaymentIntent's payment method.
@@ -2679,6 +2725,39 @@ public class PaymentIntent extends ApiResource implements HasId, MetadataStore<P
        */
       @SerializedName("request_incremental_authorization_support")
       Boolean requestIncrementalAuthorizationSupport;
+    }
+
+    @Getter
+    @Setter
+    @EqualsAndHashCode(callSuper = false)
+    public static class Cashapp extends StripeObject {
+      /**
+       * Controls when the funds will be captured from the customer's account.
+       *
+       * <p>Equal to {@code manual}.
+       */
+      @SerializedName("capture_method")
+      String captureMethod;
+
+      /**
+       * Indicates that you intend to make future payments with this PaymentIntent's payment method.
+       *
+       * <p>Providing this parameter will <a
+       * href="https://stripe.com/docs/payments/save-during-payment">attach the payment method</a>
+       * to the PaymentIntent's Customer, if present, after the PaymentIntent is confirmed and any
+       * required actions from the user are complete. If no Customer was provided, the payment
+       * method can still be <a
+       * href="https://stripe.com/docs/api/payment_methods/attach">attached</a> to a Customer after
+       * the transaction completes.
+       *
+       * <p>When processing card payments, Stripe also uses {@code setup_future_usage} to
+       * dynamically optimize your payment flow and comply with regional legislation and network
+       * rules, such as <a href="https://stripe.com/docs/strong-customer-authentication">SCA</a>.
+       *
+       * <p>One of {@code none}, {@code off_session}, or {@code on_session}.
+       */
+      @SerializedName("setup_future_usage")
+      String setupFutureUsage;
     }
 
     @Getter

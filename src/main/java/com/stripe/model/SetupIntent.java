@@ -772,6 +772,9 @@ public class SetupIntent extends ApiResource implements HasId, MetadataStore<Set
   @Setter
   @EqualsAndHashCode(callSuper = false)
   public static class NextAction extends StripeObject {
+    @SerializedName("cashapp_handle_redirect_or_display_qr_code")
+    CashappHandleRedirectOrDisplayQrCode cashappHandleRedirectOrDisplayQrCode;
+
     @SerializedName("redirect_to_url")
     RedirectToUrl redirectToUrl;
 
@@ -793,6 +796,42 @@ public class SetupIntent extends ApiResource implements HasId, MetadataStore<Set
 
     @SerializedName("verify_with_microdeposits")
     VerifyWithMicrodeposits verifyWithMicrodeposits;
+
+    @Getter
+    @Setter
+    @EqualsAndHashCode(callSuper = false)
+    public static class CashappHandleRedirectOrDisplayQrCode extends StripeObject {
+      /**
+       * The URL to the hosted Cash App Pay instructions page, which allows customers to view the QR
+       * code, and supports QR code refreshing on expiration.
+       */
+      @SerializedName("hosted_instructions_url")
+      String hostedInstructionsUrl;
+
+      /** The url for mobile redirect based auth. */
+      @SerializedName("mobile_auth_url")
+      String mobileAuthUrl;
+
+      @SerializedName("qr_code")
+      QrCode qrCode;
+
+      @Getter
+      @Setter
+      @EqualsAndHashCode(callSuper = false)
+      public static class QrCode extends StripeObject {
+        /** The date (unix timestamp) when the QR code expires. */
+        @SerializedName("expires_at")
+        Long expiresAt;
+
+        /** The image_url_png string used to render QR code. */
+        @SerializedName("image_url_png")
+        String imageUrlPng;
+
+        /** The image_url_svg string used to render QR code. */
+        @SerializedName("image_url_svg")
+        String imageUrlSvg;
+      }
+    }
 
     @Getter
     @Setter
