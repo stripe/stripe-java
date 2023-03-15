@@ -893,6 +893,9 @@ public class SetupIntent extends ApiResource implements HasId, MetadataStore<Set
     @SerializedName("link")
     Link link;
 
+    @SerializedName("paypal")
+    Paypal paypal;
+
     @SerializedName("sepa_debit")
     SepaDebit sepaDebit;
 
@@ -1121,6 +1124,23 @@ public class SetupIntent extends ApiResource implements HasId, MetadataStore<Set
       /** Token used for persistent Link logins. */
       @SerializedName("persistent_token")
       String persistentToken;
+    }
+
+    @Getter
+    @Setter
+    @EqualsAndHashCode(callSuper = false)
+    public static class Paypal extends StripeObject {
+      /** The ID of the PayPal Billing Agreement. */
+      @SerializedName("billing_agreement_id")
+      String billingAgreementId;
+
+      /**
+       * Three-letter <a href="https://www.iso.org/iso-4217-currency-codes.html">ISO currency
+       * code</a>, in lowercase. Must be a <a href="https://stripe.com/docs/currencies">supported
+       * currency</a>.
+       */
+      @SerializedName("currency")
+      String currency;
     }
 
     @Getter

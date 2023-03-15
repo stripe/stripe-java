@@ -4407,6 +4407,13 @@ public class SetupIntentUpdateParams extends ApiRequestParams {
     Link link;
 
     /**
+     * If this is a {@code paypal} PaymentMethod, this sub-hash contains details about the PayPal
+     * payment method options.
+     */
+    @SerializedName("paypal")
+    Paypal paypal;
+
+    /**
      * If this is a {@code sepa_debit} SetupIntent, this sub-hash contains details about the SEPA
      * Debit payment method options.
      */
@@ -4426,6 +4433,7 @@ public class SetupIntentUpdateParams extends ApiRequestParams {
         Card card,
         Map<String, Object> extraParams,
         Link link,
+        Paypal paypal,
         SepaDebit sepaDebit,
         UsBankAccount usBankAccount) {
       this.acssDebit = acssDebit;
@@ -4433,6 +4441,7 @@ public class SetupIntentUpdateParams extends ApiRequestParams {
       this.card = card;
       this.extraParams = extraParams;
       this.link = link;
+      this.paypal = paypal;
       this.sepaDebit = sepaDebit;
       this.usBankAccount = usBankAccount;
     }
@@ -4452,6 +4461,8 @@ public class SetupIntentUpdateParams extends ApiRequestParams {
 
       private Link link;
 
+      private Paypal paypal;
+
       private SepaDebit sepaDebit;
 
       private UsBankAccount usBankAccount;
@@ -4464,6 +4475,7 @@ public class SetupIntentUpdateParams extends ApiRequestParams {
             this.card,
             this.extraParams,
             this.link,
+            this.paypal,
             this.sepaDebit,
             this.usBankAccount);
       }
@@ -4526,6 +4538,15 @@ public class SetupIntentUpdateParams extends ApiRequestParams {
        */
       public Builder setLink(SetupIntentUpdateParams.PaymentMethodOptions.Link link) {
         this.link = link;
+        return this;
+      }
+
+      /**
+       * If this is a {@code paypal} PaymentMethod, this sub-hash contains details about the PayPal
+       * payment method options.
+       */
+      public Builder setPaypal(SetupIntentUpdateParams.PaymentMethodOptions.Paypal paypal) {
+        this.paypal = paypal;
         return this;
       }
 
@@ -5694,6 +5715,96 @@ public class SetupIntentUpdateParams extends ApiRequestParams {
         /** Token used for persistent Link logins. */
         public Builder setPersistentToken(EmptyParam persistentToken) {
           this.persistentToken = persistentToken;
+          return this;
+        }
+      }
+    }
+
+    @Getter
+    public static class Paypal {
+      @SerializedName("billing_agreement_id")
+      Object billingAgreementId;
+
+      @SerializedName("currency")
+      Object currency;
+
+      /**
+       * Map of extra parameters for custom features not available in this client library. The
+       * content in this map is not serialized under this field's {@code @SerializedName} value.
+       * Instead, each key/value pair is serialized as if the key is a root-level field (serialized)
+       * name in this param object. Effectively, this map is flattened to its parent instance.
+       */
+      @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
+      Map<String, Object> extraParams;
+
+      private Paypal(Object billingAgreementId, Object currency, Map<String, Object> extraParams) {
+        this.billingAgreementId = billingAgreementId;
+        this.currency = currency;
+        this.extraParams = extraParams;
+      }
+
+      public static Builder builder() {
+        return new Builder();
+      }
+
+      public static class Builder {
+        private Object billingAgreementId;
+
+        private Object currency;
+
+        private Map<String, Object> extraParams;
+
+        /** Finalize and obtain parameter instance from this builder. */
+        public SetupIntentUpdateParams.PaymentMethodOptions.Paypal build() {
+          return new SetupIntentUpdateParams.PaymentMethodOptions.Paypal(
+              this.billingAgreementId, this.currency, this.extraParams);
+        }
+
+        public Builder setBillingAgreementId(String billingAgreementId) {
+          this.billingAgreementId = billingAgreementId;
+          return this;
+        }
+
+        public Builder setBillingAgreementId(EmptyParam billingAgreementId) {
+          this.billingAgreementId = billingAgreementId;
+          return this;
+        }
+
+        public Builder setCurrency(String currency) {
+          this.currency = currency;
+          return this;
+        }
+
+        public Builder setCurrency(EmptyParam currency) {
+          this.currency = currency;
+          return this;
+        }
+
+        /**
+         * Add a key/value pair to `extraParams` map. A map is initialized for the first
+         * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
+         * map. See {@link SetupIntentUpdateParams.PaymentMethodOptions.Paypal#extraParams} for the
+         * field documentation.
+         */
+        public Builder putExtraParam(String key, Object value) {
+          if (this.extraParams == null) {
+            this.extraParams = new HashMap<>();
+          }
+          this.extraParams.put(key, value);
+          return this;
+        }
+
+        /**
+         * Add all map key/value pairs to `extraParams` map. A map is initialized for the first
+         * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
+         * map. See {@link SetupIntentUpdateParams.PaymentMethodOptions.Paypal#extraParams} for the
+         * field documentation.
+         */
+        public Builder putAllExtraParam(Map<String, Object> map) {
+          if (this.extraParams == null) {
+            this.extraParams = new HashMap<>();
+          }
+          this.extraParams.putAll(map);
           return this;
         }
       }

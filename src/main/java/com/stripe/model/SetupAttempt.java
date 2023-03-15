@@ -277,6 +277,9 @@ public class SetupAttempt extends ApiResource implements HasId {
     @SerializedName("card_present")
     CardPresent cardPresent;
 
+    @SerializedName("cashapp")
+    Cashapp cashapp;
+
     @SerializedName("ideal")
     Ideal ideal;
 
@@ -285,6 +288,9 @@ public class SetupAttempt extends ApiResource implements HasId {
 
     @SerializedName("link")
     Link link;
+
+    @SerializedName("paypal")
+    Paypal paypal;
 
     @SerializedName("sepa_debit")
     SepaDebit sepaDebit;
@@ -504,6 +510,11 @@ public class SetupAttempt extends ApiResource implements HasId {
     @Getter
     @Setter
     @EqualsAndHashCode(callSuper = false)
+    public static class Cashapp extends StripeObject {}
+
+    @Getter
+    @Setter
+    @EqualsAndHashCode(callSuper = false)
     public static class Ideal extends StripeObject {
       /**
        * The customer's bank. Can be one of {@code abn_amro}, {@code asn_bank}, {@code bunq}, {@code
@@ -603,6 +614,11 @@ public class SetupAttempt extends ApiResource implements HasId {
     @Setter
     @EqualsAndHashCode(callSuper = false)
     public static class Link extends StripeObject {}
+
+    @Getter
+    @Setter
+    @EqualsAndHashCode(callSuper = false)
+    public static class Paypal extends StripeObject {}
 
     @Getter
     @Setter
