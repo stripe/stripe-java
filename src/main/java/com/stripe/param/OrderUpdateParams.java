@@ -3767,6 +3767,9 @@ public class OrderUpdateParams extends ApiRequestParams {
             @SerializedName("automatic")
             AUTOMATIC("automatic"),
 
+            @SerializedName("automatic_async")
+            AUTOMATIC_ASYNC("automatic_async"),
+
             @SerializedName("manual")
             MANUAL("manual");
 
@@ -4285,6 +4288,9 @@ public class OrderUpdateParams extends ApiRequestParams {
           public enum CaptureMethod implements ApiRequestParams.EnumParam {
             @SerializedName("automatic")
             AUTOMATIC("automatic"),
+
+            @SerializedName("automatic_async")
+            AUTOMATIC_ASYNC("automatic_async"),
 
             @SerializedName("manual")
             MANUAL("manual");

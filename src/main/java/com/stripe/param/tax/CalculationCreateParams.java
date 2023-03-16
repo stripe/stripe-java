@@ -53,6 +53,10 @@ public class CalculationCreateParams extends ApiRequestParams {
   @SerializedName("preview")
   Boolean preview;
 
+  /** Shipping cost details to be used for the calculation. */
+  @SerializedName("shipping_cost")
+  ShippingCost shippingCost;
+
   /**
    * Timestamp of date at which the tax rules and rates in effect applies for the calculation.
    * Measured in seconds since the Unix epoch.
@@ -68,6 +72,7 @@ public class CalculationCreateParams extends ApiRequestParams {
       Map<String, Object> extraParams,
       List<CalculationCreateParams.LineItem> lineItems,
       Boolean preview,
+      ShippingCost shippingCost,
       Long taxDate) {
     this.currency = currency;
     this.customer = customer;
@@ -76,6 +81,7 @@ public class CalculationCreateParams extends ApiRequestParams {
     this.extraParams = extraParams;
     this.lineItems = lineItems;
     this.preview = preview;
+    this.shippingCost = shippingCost;
     this.taxDate = taxDate;
   }
 
@@ -98,6 +104,8 @@ public class CalculationCreateParams extends ApiRequestParams {
 
     private Boolean preview;
 
+    private ShippingCost shippingCost;
+
     private Long taxDate;
 
     /** Finalize and obtain parameter instance from this builder. */
@@ -110,6 +118,7 @@ public class CalculationCreateParams extends ApiRequestParams {
           this.extraParams,
           this.lineItems,
           this.preview,
+          this.shippingCost,
           this.taxDate);
     }
 
@@ -225,6 +234,12 @@ public class CalculationCreateParams extends ApiRequestParams {
       return this;
     }
 
+    /** Shipping cost details to be used for the calculation. */
+    public Builder setShippingCost(CalculationCreateParams.ShippingCost shippingCost) {
+      this.shippingCost = shippingCost;
+      return this;
+    }
+
     /**
      * Timestamp of date at which the tax rules and rates in effect applies for the calculation.
      * Measured in seconds since the Unix epoch.
@@ -241,7 +256,7 @@ public class CalculationCreateParams extends ApiRequestParams {
     @SerializedName("address")
     Address address;
 
-    /** The type of customer address provided. Required when using {@code address}. */
+    /** The type of customer address provided. */
     @SerializedName("address_source")
     AddressSource addressSource;
 
@@ -319,7 +334,7 @@ public class CalculationCreateParams extends ApiRequestParams {
         return this;
       }
 
-      /** The type of customer address provided. Required when using {@code address}. */
+      /** The type of customer address provided. */
       public Builder setAddressSource(
           CalculationCreateParams.CustomerDetails.AddressSource addressSource) {
         this.addressSource = addressSource;
@@ -1040,6 +1055,162 @@ public class CalculationCreateParams extends ApiRequestParams {
        * item. If not provided, we will use the tax code from the provided {@code product} param. If
        * neither {@code tax_code} or {@code product} is provided, we will use the default tax code
        * from your Tax Settings.
+       */
+      public Builder setTaxCode(String taxCode) {
+        this.taxCode = taxCode;
+        return this;
+      }
+    }
+
+    public enum TaxBehavior implements ApiRequestParams.EnumParam {
+      @SerializedName("exclusive")
+      EXCLUSIVE("exclusive"),
+
+      @SerializedName("inclusive")
+      INCLUSIVE("inclusive");
+
+      @Getter(onMethod_ = {@Override})
+      private final String value;
+
+      TaxBehavior(String value) {
+        this.value = value;
+      }
+    }
+  }
+
+  @Getter
+  public static class ShippingCost {
+    /**
+     * A positive integer in cents representing the shipping charge. If {@code
+     * tax_behavior=inclusive}, then this amount includes taxes. Otherwise, taxes are calculated on
+     * top of this amount.
+     */
+    @SerializedName("amount")
+    Long amount;
+
+    /**
+     * Map of extra parameters for custom features not available in this client library. The content
+     * in this map is not serialized under this field's {@code @SerializedName} value. Instead, each
+     * key/value pair is serialized as if the key is a root-level field (serialized) name in this
+     * param object. Effectively, this map is flattened to its parent instance.
+     */
+    @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
+    Map<String, Object> extraParams;
+
+    /**
+     * If provided, the shipping rate's {@code amount}, {@code tax_code} and {@code tax_behavior}
+     * are used. It cannot be used with {@code amount}, {@code tax_code} and {@code tax_behavior}
+     */
+    @SerializedName("shipping_rate")
+    String shippingRate;
+
+    /**
+     * Specifies whether the {@code amount} includes taxes. If {@code tax_behavior=inclusive}, then
+     * the amount includes taxes. Defaults to {@code exclusive}.
+     */
+    @SerializedName("tax_behavior")
+    TaxBehavior taxBehavior;
+
+    /**
+     * The <a href="https://stripe.com/docs/tax/tax-categories">tax code</a> used to calculate tax
+     * on shipping. If not provided, the default shipping tax code from your <a
+     * href="https://stripe.com/settings/tax">Tax Settings</a> is used.
+     */
+    @SerializedName("tax_code")
+    String taxCode;
+
+    private ShippingCost(
+        Long amount,
+        Map<String, Object> extraParams,
+        String shippingRate,
+        TaxBehavior taxBehavior,
+        String taxCode) {
+      this.amount = amount;
+      this.extraParams = extraParams;
+      this.shippingRate = shippingRate;
+      this.taxBehavior = taxBehavior;
+      this.taxCode = taxCode;
+    }
+
+    public static Builder builder() {
+      return new Builder();
+    }
+
+    public static class Builder {
+      private Long amount;
+
+      private Map<String, Object> extraParams;
+
+      private String shippingRate;
+
+      private TaxBehavior taxBehavior;
+
+      private String taxCode;
+
+      /** Finalize and obtain parameter instance from this builder. */
+      public CalculationCreateParams.ShippingCost build() {
+        return new CalculationCreateParams.ShippingCost(
+            this.amount, this.extraParams, this.shippingRate, this.taxBehavior, this.taxCode);
+      }
+
+      /**
+       * A positive integer in cents representing the shipping charge. If {@code
+       * tax_behavior=inclusive}, then this amount includes taxes. Otherwise, taxes are calculated
+       * on top of this amount.
+       */
+      public Builder setAmount(Long amount) {
+        this.amount = amount;
+        return this;
+      }
+
+      /**
+       * Add a key/value pair to `extraParams` map. A map is initialized for the first `put/putAll`
+       * call, and subsequent calls add additional key/value pairs to the original map. See {@link
+       * CalculationCreateParams.ShippingCost#extraParams} for the field documentation.
+       */
+      public Builder putExtraParam(String key, Object value) {
+        if (this.extraParams == null) {
+          this.extraParams = new HashMap<>();
+        }
+        this.extraParams.put(key, value);
+        return this;
+      }
+
+      /**
+       * Add all map key/value pairs to `extraParams` map. A map is initialized for the first
+       * `put/putAll` call, and subsequent calls add additional key/value pairs to the original map.
+       * See {@link CalculationCreateParams.ShippingCost#extraParams} for the field documentation.
+       */
+      public Builder putAllExtraParam(Map<String, Object> map) {
+        if (this.extraParams == null) {
+          this.extraParams = new HashMap<>();
+        }
+        this.extraParams.putAll(map);
+        return this;
+      }
+
+      /**
+       * If provided, the shipping rate's {@code amount}, {@code tax_code} and {@code tax_behavior}
+       * are used. It cannot be used with {@code amount}, {@code tax_code} and {@code tax_behavior}
+       */
+      public Builder setShippingRate(String shippingRate) {
+        this.shippingRate = shippingRate;
+        return this;
+      }
+
+      /**
+       * Specifies whether the {@code amount} includes taxes. If {@code tax_behavior=inclusive},
+       * then the amount includes taxes. Defaults to {@code exclusive}.
+       */
+      public Builder setTaxBehavior(CalculationCreateParams.ShippingCost.TaxBehavior taxBehavior) {
+        this.taxBehavior = taxBehavior;
+        return this;
+      }
+
+      /**
+       * The <a href="https://stripe.com/docs/tax/tax-categories">tax code</a> used to calculate tax
+       * on shipping. If not provided, the default shipping tax code from your <a
+       * href="https://stripe.com/settings/tax">Tax Settings</a> is used.
        */
       public Builder setTaxCode(String taxCode) {
         this.taxCode = taxCode;

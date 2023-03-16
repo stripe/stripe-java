@@ -715,7 +715,7 @@ public class PaymentLink extends ApiResource implements HasId, MetadataStore<Pay
     /**
      * Indicates when the funds will be captured from the customer's account.
      *
-     * <p>One of {@code automatic}, or {@code manual}.
+     * <p>One of {@code automatic}, {@code automatic_async}, or {@code manual}.
      */
     @SerializedName("capture_method")
     String captureMethod;

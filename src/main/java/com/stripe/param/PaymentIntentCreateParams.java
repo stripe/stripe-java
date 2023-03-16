@@ -13983,6 +13983,9 @@ public class PaymentIntentCreateParams extends ApiRequestParams {
     @SerializedName("automatic")
     AUTOMATIC("automatic"),
 
+    @SerializedName("automatic_async")
+    AUTOMATIC_ASYNC("automatic_async"),
+
     @SerializedName("manual")
     MANUAL("manual");
 

@@ -906,7 +906,7 @@ public class Order extends ApiResource implements HasId, MetadataStore<Order> {
           /**
            * Controls when the funds will be captured from the customer's account.
            *
-           * <p>One of {@code automatic}, or {@code manual}.
+           * <p>One of {@code automatic}, {@code automatic_async}, or {@code manual}.
            */
           @SerializedName("capture_method")
           String captureMethod;
@@ -1016,7 +1016,7 @@ public class Order extends ApiResource implements HasId, MetadataStore<Order> {
           /**
            * Controls when the funds will be captured from the customer's account.
            *
-           * <p>One of {@code automatic}, or {@code manual}.
+           * <p>One of {@code automatic}, {@code automatic_async}, or {@code manual}.
            */
           @SerializedName("capture_method")
           String captureMethod;
