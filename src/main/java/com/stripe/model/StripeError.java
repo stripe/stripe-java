@@ -135,17 +135,4 @@ public class StripeError extends StripeObject {
    */
   @SerializedName("type")
   String type;
-
-  @SerializedName("developer_message")
-  String developerMessage;
-
-  @SerializedName("user_message")
-  String userMessage;
-
-  public String getMessage() {
-    if (this.message == null) {
-      return this.developerMessage;
-    }
-    return this.message;
-  }
 }
