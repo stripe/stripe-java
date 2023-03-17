@@ -74,6 +74,10 @@ public class Calculation extends ApiResource implements HasId {
   @SerializedName("object")
   String object;
 
+  /** The shipping cost details for the calculation. */
+  @SerializedName("shipping_cost")
+  ShippingCost shippingCost;
+
   /** The amount of tax to be collected on top of the line item prices. */
   @SerializedName("tax_amount_exclusive")
   Long taxAmountExclusive;
@@ -82,13 +86,13 @@ public class Calculation extends ApiResource implements HasId {
   @SerializedName("tax_amount_inclusive")
   Long taxAmountInclusive;
 
+  /** Breakdown of individual tax amounts that add up to the total. */
+  @SerializedName("tax_breakdown")
+  List<Calculation.TaxBreakdown> taxBreakdown;
+
   /** Timestamp of date at which the tax rules and rates in effect applies for the calculation. */
   @SerializedName("tax_date")
   Long taxDate;
-
-  /** Summary of individual tax amounts that add up to the total. */
-  @SerializedName("tax_summary")
-  List<Calculation.TaxSummary> taxSummary;
 
   /** Calculates tax based on input and returns a Tax <code>Calculation</code> object. */
   public static Calculation create(Map<String, Object> params) throws StripeException {
@@ -254,7 +258,45 @@ public class Calculation extends ApiResource implements HasId {
   @Getter
   @Setter
   @EqualsAndHashCode(callSuper = false)
-  public static class TaxSummary extends StripeObject {
+  public static class ShippingCost extends StripeObject {
+    /**
+     * The shipping amount in integer cents. If {@code tax_behavior=inclusive}, then this amount
+     * includes taxes. Otherwise, taxes were calculated on top of this amount.
+     */
+    @SerializedName("amount")
+    Long amount;
+
+    /** The amount of tax calculated for shipping, in integer cents. */
+    @SerializedName("amount_tax")
+    Long amountTax;
+
+    /**
+     * The ID of an existing <a
+     * href="https://stripe.com/docs/api/shipping_rates/object">ShippingRate.</a>
+     */
+    @SerializedName("shipping_rate")
+    String shippingRate;
+
+    /**
+     * Specifies whether the {@code amount} includes taxes. If {@code tax_behavior=inclusive}, then
+     * the amount includes taxes.
+     *
+     * <p>One of {@code exclusive}, or {@code inclusive}.
+     */
+    @SerializedName("tax_behavior")
+    String taxBehavior;
+
+    /**
+     * The <a href="https://stripe.com/docs/tax/tax-categories">tax code</a> ID used for shipping.
+     */
+    @SerializedName("tax_code")
+    String taxCode;
+  }
+
+  @Getter
+  @Setter
+  @EqualsAndHashCode(callSuper = false)
+  public static class TaxBreakdown extends StripeObject {
     /** The amount of tax, in integer cents. */
     @SerializedName("amount")
     Long amount;

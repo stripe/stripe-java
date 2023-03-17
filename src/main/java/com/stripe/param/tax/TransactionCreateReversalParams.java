@@ -38,8 +38,8 @@ public class TransactionCreateReversalParams extends ApiRequestParams {
   Map<String, String> metadata;
 
   /**
-   * If {@code partial}, the provided line item amounts are reversed. If {@code full}, the original
-   * transaction is fully reversed.
+   * If {@code partial}, the provided line item or shipping cost amounts are reversed. If {@code
+   * full}, the original transaction is fully reversed.
    */
   @SerializedName("mode")
   Mode mode;
@@ -55,6 +55,10 @@ public class TransactionCreateReversalParams extends ApiRequestParams {
   @SerializedName("reference")
   String reference;
 
+  /** The shipping cost to reverse. */
+  @SerializedName("shipping_cost")
+  ShippingCost shippingCost;
+
   private TransactionCreateReversalParams(
       List<String> expand,
       Map<String, Object> extraParams,
@@ -62,7 +66,8 @@ public class TransactionCreateReversalParams extends ApiRequestParams {
       Map<String, String> metadata,
       Mode mode,
       String originalTransaction,
-      String reference) {
+      String reference,
+      ShippingCost shippingCost) {
     this.expand = expand;
     this.extraParams = extraParams;
     this.lineItems = lineItems;
@@ -70,6 +75,7 @@ public class TransactionCreateReversalParams extends ApiRequestParams {
     this.mode = mode;
     this.originalTransaction = originalTransaction;
     this.reference = reference;
+    this.shippingCost = shippingCost;
   }
 
   public static Builder builder() {
@@ -91,6 +97,8 @@ public class TransactionCreateReversalParams extends ApiRequestParams {
 
     private String reference;
 
+    private ShippingCost shippingCost;
+
     /** Finalize and obtain parameter instance from this builder. */
     public TransactionCreateReversalParams build() {
       return new TransactionCreateReversalParams(
@@ -100,7 +108,8 @@ public class TransactionCreateReversalParams extends ApiRequestParams {
           this.metadata,
           this.mode,
           this.originalTransaction,
-          this.reference);
+          this.reference,
+          this.shippingCost);
     }
 
     /**
@@ -208,8 +217,8 @@ public class TransactionCreateReversalParams extends ApiRequestParams {
     }
 
     /**
-     * If {@code partial}, the provided line item amounts are reversed. If {@code full}, the
-     * original transaction is fully reversed.
+     * If {@code partial}, the provided line item or shipping cost amounts are reversed. If {@code
+     * full}, the original transaction is fully reversed.
      */
     public Builder setMode(TransactionCreateReversalParams.Mode mode) {
       this.mode = mode;
@@ -228,6 +237,12 @@ public class TransactionCreateReversalParams extends ApiRequestParams {
      */
     public Builder setReference(String reference) {
       this.reference = reference;
+      return this;
+    }
+
+    /** The shipping cost to reverse. */
+    public Builder setShippingCost(TransactionCreateReversalParams.ShippingCost shippingCost) {
+      this.shippingCost = shippingCost;
       return this;
     }
   }
@@ -401,6 +416,89 @@ public class TransactionCreateReversalParams extends ApiRequestParams {
        */
       public Builder setReference(String reference) {
         this.reference = reference;
+        return this;
+      }
+    }
+  }
+
+  @Getter
+  public static class ShippingCost {
+    /** The amount to reverse, in negative integer cents. */
+    @SerializedName("amount")
+    Long amount;
+
+    /** The amount of tax to reverse, in negative integer cents. */
+    @SerializedName("amount_tax")
+    Long amountTax;
+
+    /**
+     * Map of extra parameters for custom features not available in this client library. The content
+     * in this map is not serialized under this field's {@code @SerializedName} value. Instead, each
+     * key/value pair is serialized as if the key is a root-level field (serialized) name in this
+     * param object. Effectively, this map is flattened to its parent instance.
+     */
+    @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
+    Map<String, Object> extraParams;
+
+    private ShippingCost(Long amount, Long amountTax, Map<String, Object> extraParams) {
+      this.amount = amount;
+      this.amountTax = amountTax;
+      this.extraParams = extraParams;
+    }
+
+    public static Builder builder() {
+      return new Builder();
+    }
+
+    public static class Builder {
+      private Long amount;
+
+      private Long amountTax;
+
+      private Map<String, Object> extraParams;
+
+      /** Finalize and obtain parameter instance from this builder. */
+      public TransactionCreateReversalParams.ShippingCost build() {
+        return new TransactionCreateReversalParams.ShippingCost(
+            this.amount, this.amountTax, this.extraParams);
+      }
+
+      /** The amount to reverse, in negative integer cents. */
+      public Builder setAmount(Long amount) {
+        this.amount = amount;
+        return this;
+      }
+
+      /** The amount of tax to reverse, in negative integer cents. */
+      public Builder setAmountTax(Long amountTax) {
+        this.amountTax = amountTax;
+        return this;
+      }
+
+      /**
+       * Add a key/value pair to `extraParams` map. A map is initialized for the first `put/putAll`
+       * call, and subsequent calls add additional key/value pairs to the original map. See {@link
+       * TransactionCreateReversalParams.ShippingCost#extraParams} for the field documentation.
+       */
+      public Builder putExtraParam(String key, Object value) {
+        if (this.extraParams == null) {
+          this.extraParams = new HashMap<>();
+        }
+        this.extraParams.put(key, value);
+        return this;
+      }
+
+      /**
+       * Add all map key/value pairs to `extraParams` map. A map is initialized for the first
+       * `put/putAll` call, and subsequent calls add additional key/value pairs to the original map.
+       * See {@link TransactionCreateReversalParams.ShippingCost#extraParams} for the field
+       * documentation.
+       */
+      public Builder putAllExtraParam(Map<String, Object> map) {
+        if (this.extraParams == null) {
+          this.extraParams = new HashMap<>();
+        }
+        this.extraParams.putAll(map);
         return this;
       }
     }

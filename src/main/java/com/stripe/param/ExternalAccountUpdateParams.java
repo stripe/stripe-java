@@ -58,6 +58,10 @@ public class ExternalAccountUpdateParams extends ApiRequestParams {
   @SerializedName("default_for_currency")
   Boolean defaultForCurrency;
 
+  /** Documents that may be submitted to satisfy various informational requests. */
+  @SerializedName("documents")
+  Documents documents;
+
   /** Two digit number representing the card’s expiration month. */
   @SerializedName("exp_month")
   Object expMonth;
@@ -103,6 +107,7 @@ public class ExternalAccountUpdateParams extends ApiRequestParams {
       Object addressState,
       Object addressZip,
       Boolean defaultForCurrency,
+      Documents documents,
       Object expMonth,
       Object expYear,
       List<String> expand,
@@ -119,6 +124,7 @@ public class ExternalAccountUpdateParams extends ApiRequestParams {
     this.addressState = addressState;
     this.addressZip = addressZip;
     this.defaultForCurrency = defaultForCurrency;
+    this.documents = documents;
     this.expMonth = expMonth;
     this.expYear = expYear;
     this.expand = expand;
@@ -152,6 +158,8 @@ public class ExternalAccountUpdateParams extends ApiRequestParams {
 
     private Boolean defaultForCurrency;
 
+    private Documents documents;
+
     private Object expMonth;
 
     private Object expYear;
@@ -177,6 +185,7 @@ public class ExternalAccountUpdateParams extends ApiRequestParams {
           this.addressState,
           this.addressZip,
           this.defaultForCurrency,
+          this.documents,
           this.expMonth,
           this.expYear,
           this.expand,
@@ -300,6 +309,12 @@ public class ExternalAccountUpdateParams extends ApiRequestParams {
     /** When set to true, this becomes the default external account for its currency. */
     public Builder setDefaultForCurrency(Boolean defaultForCurrency) {
       this.defaultForCurrency = defaultForCurrency;
+      return this;
+    }
+
+    /** Documents that may be submitted to satisfy various informational requests. */
+    public Builder setDocuments(ExternalAccountUpdateParams.Documents documents) {
+      this.documents = documents;
       return this;
     }
 
@@ -439,6 +454,190 @@ public class ExternalAccountUpdateParams extends ApiRequestParams {
     public Builder setName(EmptyParam name) {
       this.name = name;
       return this;
+    }
+  }
+
+  @Getter
+  public static class Documents {
+    /**
+     * One or more documents that support the <a
+     * href="https://support.stripe.com/questions/bank-account-ownership-verification">Bank account
+     * ownership verification</a> requirement. Must be a document associated with the bank account
+     * that displays the last 4 digits of the account number, either a statement or a voided check.
+     */
+    @SerializedName("bank_account_ownership_verification")
+    BankAccountOwnershipVerification bankAccountOwnershipVerification;
+
+    /**
+     * Map of extra parameters for custom features not available in this client library. The content
+     * in this map is not serialized under this field's {@code @SerializedName} value. Instead, each
+     * key/value pair is serialized as if the key is a root-level field (serialized) name in this
+     * param object. Effectively, this map is flattened to its parent instance.
+     */
+    @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
+    Map<String, Object> extraParams;
+
+    private Documents(
+        BankAccountOwnershipVerification bankAccountOwnershipVerification,
+        Map<String, Object> extraParams) {
+      this.bankAccountOwnershipVerification = bankAccountOwnershipVerification;
+      this.extraParams = extraParams;
+    }
+
+    public static Builder builder() {
+      return new Builder();
+    }
+
+    public static class Builder {
+      private BankAccountOwnershipVerification bankAccountOwnershipVerification;
+
+      private Map<String, Object> extraParams;
+
+      /** Finalize and obtain parameter instance from this builder. */
+      public ExternalAccountUpdateParams.Documents build() {
+        return new ExternalAccountUpdateParams.Documents(
+            this.bankAccountOwnershipVerification, this.extraParams);
+      }
+
+      /**
+       * One or more documents that support the <a
+       * href="https://support.stripe.com/questions/bank-account-ownership-verification">Bank
+       * account ownership verification</a> requirement. Must be a document associated with the bank
+       * account that displays the last 4 digits of the account number, either a statement or a
+       * voided check.
+       */
+      public Builder setBankAccountOwnershipVerification(
+          ExternalAccountUpdateParams.Documents.BankAccountOwnershipVerification
+              bankAccountOwnershipVerification) {
+        this.bankAccountOwnershipVerification = bankAccountOwnershipVerification;
+        return this;
+      }
+
+      /**
+       * Add a key/value pair to `extraParams` map. A map is initialized for the first `put/putAll`
+       * call, and subsequent calls add additional key/value pairs to the original map. See {@link
+       * ExternalAccountUpdateParams.Documents#extraParams} for the field documentation.
+       */
+      public Builder putExtraParam(String key, Object value) {
+        if (this.extraParams == null) {
+          this.extraParams = new HashMap<>();
+        }
+        this.extraParams.put(key, value);
+        return this;
+      }
+
+      /**
+       * Add all map key/value pairs to `extraParams` map. A map is initialized for the first
+       * `put/putAll` call, and subsequent calls add additional key/value pairs to the original map.
+       * See {@link ExternalAccountUpdateParams.Documents#extraParams} for the field documentation.
+       */
+      public Builder putAllExtraParam(Map<String, Object> map) {
+        if (this.extraParams == null) {
+          this.extraParams = new HashMap<>();
+        }
+        this.extraParams.putAll(map);
+        return this;
+      }
+    }
+
+    @Getter
+    public static class BankAccountOwnershipVerification {
+      /**
+       * Map of extra parameters for custom features not available in this client library. The
+       * content in this map is not serialized under this field's {@code @SerializedName} value.
+       * Instead, each key/value pair is serialized as if the key is a root-level field (serialized)
+       * name in this param object. Effectively, this map is flattened to its parent instance.
+       */
+      @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
+      Map<String, Object> extraParams;
+
+      /**
+       * One or more document ids returned by a <a
+       * href="https://stripe.com/docs/api#create_file">file upload</a> with a {@code purpose} value
+       * of {@code account_requirement}.
+       */
+      @SerializedName("files")
+      List<String> files;
+
+      private BankAccountOwnershipVerification(
+          Map<String, Object> extraParams, List<String> files) {
+        this.extraParams = extraParams;
+        this.files = files;
+      }
+
+      public static Builder builder() {
+        return new Builder();
+      }
+
+      public static class Builder {
+        private Map<String, Object> extraParams;
+
+        private List<String> files;
+
+        /** Finalize and obtain parameter instance from this builder. */
+        public ExternalAccountUpdateParams.Documents.BankAccountOwnershipVerification build() {
+          return new ExternalAccountUpdateParams.Documents.BankAccountOwnershipVerification(
+              this.extraParams, this.files);
+        }
+
+        /**
+         * Add a key/value pair to `extraParams` map. A map is initialized for the first
+         * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
+         * map. See {@link
+         * ExternalAccountUpdateParams.Documents.BankAccountOwnershipVerification#extraParams} for
+         * the field documentation.
+         */
+        public Builder putExtraParam(String key, Object value) {
+          if (this.extraParams == null) {
+            this.extraParams = new HashMap<>();
+          }
+          this.extraParams.put(key, value);
+          return this;
+        }
+
+        /**
+         * Add all map key/value pairs to `extraParams` map. A map is initialized for the first
+         * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
+         * map. See {@link
+         * ExternalAccountUpdateParams.Documents.BankAccountOwnershipVerification#extraParams} for
+         * the field documentation.
+         */
+        public Builder putAllExtraParam(Map<String, Object> map) {
+          if (this.extraParams == null) {
+            this.extraParams = new HashMap<>();
+          }
+          this.extraParams.putAll(map);
+          return this;
+        }
+
+        /**
+         * Add an element to `files` list. A list is initialized for the first `add/addAll` call,
+         * and subsequent calls adds additional elements to the original list. See {@link
+         * ExternalAccountUpdateParams.Documents.BankAccountOwnershipVerification#files} for the
+         * field documentation.
+         */
+        public Builder addFile(String element) {
+          if (this.files == null) {
+            this.files = new ArrayList<>();
+          }
+          this.files.add(element);
+          return this;
+        }
+
+        /**
+         * Add all elements to `files` list. A list is initialized for the first `add/addAll` call,
+         * and subsequent calls adds additional elements to the original list. See {@link
+         * ExternalAccountUpdateParams.Documents.BankAccountOwnershipVerification#files} for the
+         * field documentation.
+         */
+        public Builder addAllFile(List<String> elements) {
+          if (this.files == null) {
+            this.files = new ArrayList<>();
+          }
+          this.files.addAll(elements);
+          return this;
+        }
+      }
     }
   }
 

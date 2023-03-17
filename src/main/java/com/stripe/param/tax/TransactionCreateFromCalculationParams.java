@@ -10,7 +10,11 @@ import java.util.Map;
 import lombok.Getter;
 
 @Getter
-public class TransactionCreateParams extends ApiRequestParams {
+public class TransactionCreateFromCalculationParams extends ApiRequestParams {
+  /** Tax Calculation ID to be used as input when creating the transaction. */
+  @SerializedName("calculation")
+  String calculation;
+
   /** Specifies which fields in the response should be expanded. */
   @SerializedName("expand")
   List<String> expand;
@@ -23,10 +27,6 @@ public class TransactionCreateParams extends ApiRequestParams {
    */
   @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
   Map<String, Object> extraParams;
-
-  /** Tax Calculation ID to be used as input when creating the transaction. */
-  @SerializedName("from_calculation")
-  String fromCalculation;
 
   /**
    * Set of <a href="https://stripe.com/docs/api/metadata">key-value pairs</a> that you can attach
@@ -44,15 +44,15 @@ public class TransactionCreateParams extends ApiRequestParams {
   @SerializedName("reference")
   String reference;
 
-  private TransactionCreateParams(
+  private TransactionCreateFromCalculationParams(
+      String calculation,
       List<String> expand,
       Map<String, Object> extraParams,
-      String fromCalculation,
       Map<String, String> metadata,
       String reference) {
+    this.calculation = calculation;
     this.expand = expand;
     this.extraParams = extraParams;
-    this.fromCalculation = fromCalculation;
     this.metadata = metadata;
     this.reference = reference;
   }
@@ -62,26 +62,32 @@ public class TransactionCreateParams extends ApiRequestParams {
   }
 
   public static class Builder {
+    private String calculation;
+
     private List<String> expand;
 
     private Map<String, Object> extraParams;
-
-    private String fromCalculation;
 
     private Map<String, String> metadata;
 
     private String reference;
 
     /** Finalize and obtain parameter instance from this builder. */
-    public TransactionCreateParams build() {
-      return new TransactionCreateParams(
-          this.expand, this.extraParams, this.fromCalculation, this.metadata, this.reference);
+    public TransactionCreateFromCalculationParams build() {
+      return new TransactionCreateFromCalculationParams(
+          this.calculation, this.expand, this.extraParams, this.metadata, this.reference);
+    }
+
+    /** Tax Calculation ID to be used as input when creating the transaction. */
+    public Builder setCalculation(String calculation) {
+      this.calculation = calculation;
+      return this;
     }
 
     /**
      * Add an element to `expand` list. A list is initialized for the first `add/addAll` call, and
      * subsequent calls adds additional elements to the original list. See {@link
-     * TransactionCreateParams#expand} for the field documentation.
+     * TransactionCreateFromCalculationParams#expand} for the field documentation.
      */
     public Builder addExpand(String element) {
       if (this.expand == null) {
@@ -94,7 +100,7 @@ public class TransactionCreateParams extends ApiRequestParams {
     /**
      * Add all elements to `expand` list. A list is initialized for the first `add/addAll` call, and
      * subsequent calls adds additional elements to the original list. See {@link
-     * TransactionCreateParams#expand} for the field documentation.
+     * TransactionCreateFromCalculationParams#expand} for the field documentation.
      */
     public Builder addAllExpand(List<String> elements) {
       if (this.expand == null) {
@@ -107,7 +113,7 @@ public class TransactionCreateParams extends ApiRequestParams {
     /**
      * Add a key/value pair to `extraParams` map. A map is initialized for the first `put/putAll`
      * call, and subsequent calls add additional key/value pairs to the original map. See {@link
-     * TransactionCreateParams#extraParams} for the field documentation.
+     * TransactionCreateFromCalculationParams#extraParams} for the field documentation.
      */
     public Builder putExtraParam(String key, Object value) {
       if (this.extraParams == null) {
@@ -120,7 +126,7 @@ public class TransactionCreateParams extends ApiRequestParams {
     /**
      * Add all map key/value pairs to `extraParams` map. A map is initialized for the first
      * `put/putAll` call, and subsequent calls add additional key/value pairs to the original map.
-     * See {@link TransactionCreateParams#extraParams} for the field documentation.
+     * See {@link TransactionCreateFromCalculationParams#extraParams} for the field documentation.
      */
     public Builder putAllExtraParam(Map<String, Object> map) {
       if (this.extraParams == null) {
@@ -130,16 +136,10 @@ public class TransactionCreateParams extends ApiRequestParams {
       return this;
     }
 
-    /** Tax Calculation ID to be used as input when creating the transaction. */
-    public Builder setFromCalculation(String fromCalculation) {
-      this.fromCalculation = fromCalculation;
-      return this;
-    }
-
     /**
      * Add a key/value pair to `metadata` map. A map is initialized for the first `put/putAll` call,
      * and subsequent calls add additional key/value pairs to the original map. See {@link
-     * TransactionCreateParams#metadata} for the field documentation.
+     * TransactionCreateFromCalculationParams#metadata} for the field documentation.
      */
     public Builder putMetadata(String key, String value) {
       if (this.metadata == null) {
@@ -152,7 +152,7 @@ public class TransactionCreateParams extends ApiRequestParams {
     /**
      * Add all map key/value pairs to `metadata` map. A map is initialized for the first
      * `put/putAll` call, and subsequent calls add additional key/value pairs to the original map.
-     * See {@link TransactionCreateParams#metadata} for the field documentation.
+     * See {@link TransactionCreateFromCalculationParams#metadata} for the field documentation.
      */
     public Builder putAllMetadata(Map<String, String> map) {
       if (this.metadata == null) {

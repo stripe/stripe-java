@@ -9,6 +9,7 @@ import com.stripe.model.LineItemCollection;
 import com.stripe.model.StripeObject;
 import com.stripe.net.ApiResource;
 import com.stripe.net.RequestOptions;
+import com.stripe.param.tax.TransactionCreateFromCalculationParams;
 import com.stripe.param.tax.TransactionCreateParams;
 import com.stripe.param.tax.TransactionCreateReversalParams;
 import com.stripe.param.tax.TransactionListLineItemsParams;
@@ -85,6 +86,10 @@ public class Transaction extends ApiResource implements HasId {
   @SerializedName("reversal")
   Reversal reversal;
 
+  /** The shipping cost details for the transaction. */
+  @SerializedName("shipping_cost")
+  ShippingCost shippingCost;
+
   /** Timestamp of date at which the tax rules and rates in effect applies for the calculation. */
   @SerializedName("tax_date")
   Long taxDate;
@@ -119,6 +124,39 @@ public class Transaction extends ApiResource implements HasId {
   public static Transaction create(TransactionCreateParams params, RequestOptions options)
       throws StripeException {
     String url = ApiResource.fullUrl(Stripe.getApiBase(), options, "/v1/tax/transactions");
+    return ApiResource.request(
+        ApiResource.RequestMethod.POST, url, params, Transaction.class, options);
+  }
+
+  /** Creates a Tax <code>Transaction</code> from a calculation. */
+  public static Transaction createFromCalculation(Map<String, Object> params)
+      throws StripeException {
+    return createFromCalculation(params, (RequestOptions) null);
+  }
+
+  /** Creates a Tax <code>Transaction</code> from a calculation. */
+  public static Transaction createFromCalculation(
+      Map<String, Object> params, RequestOptions options) throws StripeException {
+    String url =
+        ApiResource.fullUrl(
+            Stripe.getApiBase(), options, "/v1/tax/transactions/create_from_calculation");
+    return ApiResource.request(
+        ApiResource.RequestMethod.POST, url, params, Transaction.class, options);
+  }
+
+  /** Creates a Tax <code>Transaction</code> from a calculation. */
+  public static Transaction createFromCalculation(TransactionCreateFromCalculationParams params)
+      throws StripeException {
+    return createFromCalculation(params, (RequestOptions) null);
+  }
+
+  /** Creates a Tax <code>Transaction</code> from a calculation. */
+  public static Transaction createFromCalculation(
+      TransactionCreateFromCalculationParams params, RequestOptions options)
+      throws StripeException {
+    String url =
+        ApiResource.fullUrl(
+            Stripe.getApiBase(), options, "/v1/tax/transactions/create_from_calculation");
     return ApiResource.request(
         ApiResource.RequestMethod.POST, url, params, Transaction.class, options);
   }
@@ -331,5 +369,43 @@ public class Transaction extends ApiResource implements HasId {
     /** The {@code id} of the reversed {@code Transaction} object. */
     @SerializedName("original_transaction")
     String originalTransaction;
+  }
+
+  @Getter
+  @Setter
+  @EqualsAndHashCode(callSuper = false)
+  public static class ShippingCost extends StripeObject {
+    /**
+     * The shipping amount in integer cents. If {@code tax_behavior=inclusive}, then this amount
+     * includes taxes. Otherwise, taxes were calculated on top of this amount.
+     */
+    @SerializedName("amount")
+    Long amount;
+
+    /** The amount of tax calculated for shipping, in integer cents. */
+    @SerializedName("amount_tax")
+    Long amountTax;
+
+    /**
+     * The ID of an existing <a
+     * href="https://stripe.com/docs/api/shipping_rates/object">ShippingRate.</a>
+     */
+    @SerializedName("shipping_rate")
+    String shippingRate;
+
+    /**
+     * Specifies whether the {@code amount} includes taxes. If {@code tax_behavior=inclusive}, then
+     * the amount includes taxes.
+     *
+     * <p>One of {@code exclusive}, or {@code inclusive}.
+     */
+    @SerializedName("tax_behavior")
+    String taxBehavior;
+
+    /**
+     * The <a href="https://stripe.com/docs/tax/tax-categories">tax code</a> ID used for shipping.
+     */
+    @SerializedName("tax_code")
+    String taxCode;
   }
 }

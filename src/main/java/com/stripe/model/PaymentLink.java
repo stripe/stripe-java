@@ -29,8 +29,7 @@ import lombok.Setter;
  * href="https://stripe.com/docs/api/events/types#event_types-checkout.session.completed">checkout
  * session events</a> to track payments through payment links.
  *
- * <p>Related guide: <a href="https://stripe.com/docs/payments/payment-links/api">Payment Links
- * API</a>
+ * <p>Related guide: <a href="https://stripe.com/docs/payment-links">Payment Links API</a>
  */
 @Getter
 @Setter
@@ -716,7 +715,7 @@ public class PaymentLink extends ApiResource implements HasId, MetadataStore<Pay
     /**
      * Indicates when the funds will be captured from the customer's account.
      *
-     * <p>One of {@code automatic}, or {@code manual}.
+     * <p>One of {@code automatic}, {@code automatic_async}, or {@code manual}.
      */
     @SerializedName("capture_method")
     String captureMethod;
