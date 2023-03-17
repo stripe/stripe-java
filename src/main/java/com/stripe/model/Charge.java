@@ -2461,7 +2461,14 @@ public class Charge extends ApiResource implements MetadataStore<Charge>, Balanc
     @Getter
     @Setter
     @EqualsAndHashCode(callSuper = false)
-    public static class Link extends StripeObject {}
+    public static class Link extends StripeObject {
+      /**
+       * Two-letter ISO code representing the funding source country beneath the Link payment. You
+       * could use this attribute to get a sense of international fees.
+       */
+      @SerializedName("country")
+      String country;
+    }
 
     @Getter
     @Setter

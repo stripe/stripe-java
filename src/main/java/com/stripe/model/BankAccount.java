@@ -99,6 +99,13 @@ public class BankAccount extends ApiResource
   @SerializedName("fingerprint")
   String fingerprint;
 
+  /**
+   * Information about upcoming new requirements for the bank account, including what information
+   * needs to be collected.
+   */
+  @SerializedName("future_requirements")
+  FutureRequirements futureRequirements;
+
   /** Unique identifier for the object. */
   @Getter(onMethod_ = {@Override})
   @SerializedName("id")
@@ -124,6 +131,13 @@ public class BankAccount extends ApiResource
    */
   @SerializedName("object")
   String object;
+
+  /**
+   * Information about the requirements for the bank account, including what information needs to be
+   * collected.
+   */
+  @SerializedName("requirements")
+  Requirements requirements;
 
   /** The routing transit number for the bank account. */
   @SerializedName("routing_number")
@@ -474,5 +488,179 @@ public class BankAccount extends ApiResource
           null);
     }
     return request(ApiResource.RequestMethod.DELETE, url, params, BankAccount.class, options);
+  }
+
+  @Getter
+  @Setter
+  @EqualsAndHashCode(callSuper = false)
+  public static class FutureRequirements extends StripeObject {
+    /**
+     * Fields that need to be collected to keep the external account enabled. If not collected by
+     * {@code current_deadline}, these fields appear in {@code past_due} as well, and the account is
+     * disabled.
+     */
+    @SerializedName("currently_due")
+    List<String> currentlyDue;
+
+    /**
+     * Fields that are {@code currently_due} and need to be collected again because validation or
+     * verification failed.
+     */
+    @SerializedName("errors")
+    List<BankAccount.FutureRequirements.Errors> errors;
+
+    /**
+     * Fields that weren't collected by {@code current_deadline}. These fields need to be collected
+     * to enable the external account.
+     */
+    @SerializedName("past_due")
+    List<String> pastDue;
+
+    /**
+     * Fields that may become required depending on the results of verification or review. Will be
+     * an empty array unless an asynchronous verification is pending. If verification fails, these
+     * fields move to {@code eventually_due}, {@code currently_due}, or {@code past_due}.
+     */
+    @SerializedName("pending_verification")
+    List<String> pendingVerification;
+
+    @Getter
+    @Setter
+    @EqualsAndHashCode(callSuper = false)
+    public static class Errors extends StripeObject {
+      /**
+       * The code for the type of error.
+       *
+       * <p>One of {@code invalid_address_city_state_postal_code}, {@code invalid_dob_age_under_18},
+       * {@code invalid_representative_country}, {@code invalid_street_address}, {@code
+       * invalid_tos_acceptance}, {@code invalid_value_other}, {@code
+       * verification_document_address_mismatch}, {@code verification_document_address_missing},
+       * {@code verification_document_corrupt}, {@code verification_document_country_not_supported},
+       * {@code verification_document_dob_mismatch}, {@code verification_document_duplicate_type},
+       * {@code verification_document_expired}, {@code verification_document_failed_copy}, {@code
+       * verification_document_failed_greyscale}, {@code verification_document_failed_other}, {@code
+       * verification_document_failed_test_mode}, {@code verification_document_fraudulent}, {@code
+       * verification_document_id_number_mismatch}, {@code verification_document_id_number_missing},
+       * {@code verification_document_incomplete}, {@code verification_document_invalid}, {@code
+       * verification_document_issue_or_expiry_date_missing}, {@code
+       * verification_document_manipulated}, {@code verification_document_missing_back}, {@code
+       * verification_document_missing_front}, {@code verification_document_name_mismatch}, {@code
+       * verification_document_name_missing}, {@code verification_document_nationality_mismatch},
+       * {@code verification_document_not_readable}, {@code verification_document_not_signed},
+       * {@code verification_document_not_uploaded}, {@code verification_document_photo_mismatch},
+       * {@code verification_document_too_large}, {@code verification_document_type_not_supported},
+       * {@code verification_failed_address_match}, {@code verification_failed_business_iec_number},
+       * {@code verification_failed_document_match}, {@code verification_failed_id_number_match},
+       * {@code verification_failed_keyed_identity}, {@code verification_failed_keyed_match}, {@code
+       * verification_failed_name_match}, {@code verification_failed_other}, {@code
+       * verification_failed_residential_address}, {@code verification_failed_tax_id_match}, {@code
+       * verification_failed_tax_id_not_issued}, {@code verification_missing_executives}, {@code
+       * verification_missing_owners}, or {@code
+       * verification_requires_additional_memorandum_of_associations}.
+       */
+      @SerializedName("code")
+      String code;
+
+      /**
+       * An informative message that indicates the error type and provides additional details about
+       * the error.
+       */
+      @SerializedName("reason")
+      String reason;
+
+      /**
+       * The specific user onboarding requirement field (in the requirements hash) that needs to be
+       * resolved.
+       */
+      @SerializedName("requirement")
+      String requirement;
+    }
+  }
+
+  @Getter
+  @Setter
+  @EqualsAndHashCode(callSuper = false)
+  public static class Requirements extends StripeObject {
+    /**
+     * Fields that need to be collected to keep the external account enabled. If not collected by
+     * {@code current_deadline}, these fields appear in {@code past_due} as well, and the account is
+     * disabled.
+     */
+    @SerializedName("currently_due")
+    List<String> currentlyDue;
+
+    /**
+     * Fields that are {@code currently_due} and need to be collected again because validation or
+     * verification failed.
+     */
+    @SerializedName("errors")
+    List<BankAccount.Requirements.Errors> errors;
+
+    /**
+     * Fields that weren't collected by {@code current_deadline}. These fields need to be collected
+     * to enable the external account.
+     */
+    @SerializedName("past_due")
+    List<String> pastDue;
+
+    /**
+     * Fields that may become required depending on the results of verification or review. Will be
+     * an empty array unless an asynchronous verification is pending. If verification fails, these
+     * fields move to {@code eventually_due}, {@code currently_due}, or {@code past_due}.
+     */
+    @SerializedName("pending_verification")
+    List<String> pendingVerification;
+
+    @Getter
+    @Setter
+    @EqualsAndHashCode(callSuper = false)
+    public static class Errors extends StripeObject {
+      /**
+       * The code for the type of error.
+       *
+       * <p>One of {@code invalid_address_city_state_postal_code}, {@code invalid_dob_age_under_18},
+       * {@code invalid_representative_country}, {@code invalid_street_address}, {@code
+       * invalid_tos_acceptance}, {@code invalid_value_other}, {@code
+       * verification_document_address_mismatch}, {@code verification_document_address_missing},
+       * {@code verification_document_corrupt}, {@code verification_document_country_not_supported},
+       * {@code verification_document_dob_mismatch}, {@code verification_document_duplicate_type},
+       * {@code verification_document_expired}, {@code verification_document_failed_copy}, {@code
+       * verification_document_failed_greyscale}, {@code verification_document_failed_other}, {@code
+       * verification_document_failed_test_mode}, {@code verification_document_fraudulent}, {@code
+       * verification_document_id_number_mismatch}, {@code verification_document_id_number_missing},
+       * {@code verification_document_incomplete}, {@code verification_document_invalid}, {@code
+       * verification_document_issue_or_expiry_date_missing}, {@code
+       * verification_document_manipulated}, {@code verification_document_missing_back}, {@code
+       * verification_document_missing_front}, {@code verification_document_name_mismatch}, {@code
+       * verification_document_name_missing}, {@code verification_document_nationality_mismatch},
+       * {@code verification_document_not_readable}, {@code verification_document_not_signed},
+       * {@code verification_document_not_uploaded}, {@code verification_document_photo_mismatch},
+       * {@code verification_document_too_large}, {@code verification_document_type_not_supported},
+       * {@code verification_failed_address_match}, {@code verification_failed_business_iec_number},
+       * {@code verification_failed_document_match}, {@code verification_failed_id_number_match},
+       * {@code verification_failed_keyed_identity}, {@code verification_failed_keyed_match}, {@code
+       * verification_failed_name_match}, {@code verification_failed_other}, {@code
+       * verification_failed_residential_address}, {@code verification_failed_tax_id_match}, {@code
+       * verification_failed_tax_id_not_issued}, {@code verification_missing_executives}, {@code
+       * verification_missing_owners}, or {@code
+       * verification_requires_additional_memorandum_of_associations}.
+       */
+      @SerializedName("code")
+      String code;
+
+      /**
+       * An informative message that indicates the error type and provides additional details about
+       * the error.
+       */
+      @SerializedName("reason")
+      String reason;
+
+      /**
+       * The specific user onboarding requirement field (in the requirements hash) that needs to be
+       * resolved.
+       */
+      @SerializedName("requirement")
+      String requirement;
+    }
   }
 }
