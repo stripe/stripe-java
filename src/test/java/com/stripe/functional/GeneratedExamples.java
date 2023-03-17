@@ -4608,4 +4608,21 @@ class GeneratedExamples extends BaseStripeTest {
     verifyRequest(
         ApiResource.RequestMethod.POST, "/v1/webhook_endpoints/we_xxxxxxxxxxxxx", params.toMap());
   }
+
+  @Test
+  public void testTransactionCreateFromCalculation() throws StripeException {
+    com.stripe.param.tax.TransactionCreateFromCalculationParams params =
+        com.stripe.param.tax.TransactionCreateFromCalculationParams.builder()
+            .setCalculation("xxx")
+            .setReference("yyy")
+            .build();
+
+    com.stripe.model.tax.Transaction transaction =
+        com.stripe.model.tax.Transaction.createFromCalculation(params);
+    assertNotNull(transaction);
+    verifyRequest(
+        ApiResource.RequestMethod.POST,
+        "/v1/tax/transactions/create_from_calculation",
+        params.toMap());
+  }
 }
