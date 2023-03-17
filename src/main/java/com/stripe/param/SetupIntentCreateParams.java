@@ -23,6 +23,13 @@ public class SetupIntentCreateParams extends ApiRequestParams {
   Boolean attachToSelf;
 
   /**
+   * When enabled, this SetupIntent will accept payment methods that you have enabled in the
+   * Dashboard and are compatible with this SetupIntent's other parameters.
+   */
+  @SerializedName("automatic_payment_methods")
+  AutomaticPaymentMethods automaticPaymentMethods;
+
+  /**
    * Set to {@code true} to attempt to confirm this SetupIntent immediately. This parameter defaults
    * to {@code false}. If the payment method attached is a card, a return_url may be provided in
    * case additional authentication is required.
@@ -137,6 +144,7 @@ public class SetupIntentCreateParams extends ApiRequestParams {
 
   private SetupIntentCreateParams(
       Boolean attachToSelf,
+      AutomaticPaymentMethods automaticPaymentMethods,
       Boolean confirm,
       String customer,
       String description,
@@ -154,6 +162,7 @@ public class SetupIntentCreateParams extends ApiRequestParams {
       SingleUse singleUse,
       Usage usage) {
     this.attachToSelf = attachToSelf;
+    this.automaticPaymentMethods = automaticPaymentMethods;
     this.confirm = confirm;
     this.customer = customer;
     this.description = description;
@@ -178,6 +187,8 @@ public class SetupIntentCreateParams extends ApiRequestParams {
 
   public static class Builder {
     private Boolean attachToSelf;
+
+    private AutomaticPaymentMethods automaticPaymentMethods;
 
     private Boolean confirm;
 
@@ -215,6 +226,7 @@ public class SetupIntentCreateParams extends ApiRequestParams {
     public SetupIntentCreateParams build() {
       return new SetupIntentCreateParams(
           this.attachToSelf,
+          this.automaticPaymentMethods,
           this.confirm,
           this.customer,
           this.description,
@@ -244,6 +256,16 @@ public class SetupIntentCreateParams extends ApiRequestParams {
      */
     public Builder setAttachToSelf(Boolean attachToSelf) {
       this.attachToSelf = attachToSelf;
+      return this;
+    }
+
+    /**
+     * When enabled, this SetupIntent will accept payment methods that you have enabled in the
+     * Dashboard and are compatible with this SetupIntent's other parameters.
+     */
+    public Builder setAutomaticPaymentMethods(
+        SetupIntentCreateParams.AutomaticPaymentMethods automaticPaymentMethods) {
+      this.automaticPaymentMethods = automaticPaymentMethods;
       return this;
     }
 
@@ -475,6 +497,75 @@ public class SetupIntentCreateParams extends ApiRequestParams {
     public Builder setUsage(SetupIntentCreateParams.Usage usage) {
       this.usage = usage;
       return this;
+    }
+  }
+
+  @Getter
+  public static class AutomaticPaymentMethods {
+    /** Whether this feature is enabled. */
+    @SerializedName("enabled")
+    Boolean enabled;
+
+    /**
+     * Map of extra parameters for custom features not available in this client library. The content
+     * in this map is not serialized under this field's {@code @SerializedName} value. Instead, each
+     * key/value pair is serialized as if the key is a root-level field (serialized) name in this
+     * param object. Effectively, this map is flattened to its parent instance.
+     */
+    @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
+    Map<String, Object> extraParams;
+
+    private AutomaticPaymentMethods(Boolean enabled, Map<String, Object> extraParams) {
+      this.enabled = enabled;
+      this.extraParams = extraParams;
+    }
+
+    public static Builder builder() {
+      return new Builder();
+    }
+
+    public static class Builder {
+      private Boolean enabled;
+
+      private Map<String, Object> extraParams;
+
+      /** Finalize and obtain parameter instance from this builder. */
+      public SetupIntentCreateParams.AutomaticPaymentMethods build() {
+        return new SetupIntentCreateParams.AutomaticPaymentMethods(this.enabled, this.extraParams);
+      }
+
+      /** Whether this feature is enabled. */
+      public Builder setEnabled(Boolean enabled) {
+        this.enabled = enabled;
+        return this;
+      }
+
+      /**
+       * Add a key/value pair to `extraParams` map. A map is initialized for the first `put/putAll`
+       * call, and subsequent calls add additional key/value pairs to the original map. See {@link
+       * SetupIntentCreateParams.AutomaticPaymentMethods#extraParams} for the field documentation.
+       */
+      public Builder putExtraParam(String key, Object value) {
+        if (this.extraParams == null) {
+          this.extraParams = new HashMap<>();
+        }
+        this.extraParams.put(key, value);
+        return this;
+      }
+
+      /**
+       * Add all map key/value pairs to `extraParams` map. A map is initialized for the first
+       * `put/putAll` call, and subsequent calls add additional key/value pairs to the original map.
+       * See {@link SetupIntentCreateParams.AutomaticPaymentMethods#extraParams} for the field
+       * documentation.
+       */
+      public Builder putAllExtraParam(Map<String, Object> map) {
+        if (this.extraParams == null) {
+          this.extraParams = new HashMap<>();
+        }
+        this.extraParams.putAll(map);
+        return this;
+      }
     }
   }
 
