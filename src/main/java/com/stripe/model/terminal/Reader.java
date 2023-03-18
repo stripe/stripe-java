@@ -15,6 +15,7 @@ import com.stripe.model.StripeObject;
 import com.stripe.net.ApiResource;
 import com.stripe.net.RequestOptions;
 import com.stripe.param.terminal.ReaderCancelActionParams;
+import com.stripe.param.terminal.ReaderCollectInputsParams;
 import com.stripe.param.terminal.ReaderCreateParams;
 import com.stripe.param.terminal.ReaderListParams;
 import com.stripe.param.terminal.ReaderPresentPaymentMethodParams;
@@ -169,6 +170,40 @@ public class Reader extends ApiResource implements HasId, MetadataStore<Reader> 
             options,
             String.format(
                 "/v1/terminal/readers/%s/cancel_action", ApiResource.urlEncodeId(this.getId())));
+    return ApiResource.request(ApiResource.RequestMethod.POST, url, params, Reader.class, options);
+  }
+
+  /** Initiates an input collection flow on a Reader. */
+  public Reader collectInputs(Map<String, Object> params) throws StripeException {
+    return collectInputs(params, (RequestOptions) null);
+  }
+
+  /** Initiates an input collection flow on a Reader. */
+  public Reader collectInputs(Map<String, Object> params, RequestOptions options)
+      throws StripeException {
+    String url =
+        ApiResource.fullUrl(
+            Stripe.getApiBase(),
+            options,
+            String.format(
+                "/v1/terminal/readers/%s/collect_inputs", ApiResource.urlEncodeId(this.getId())));
+    return ApiResource.request(ApiResource.RequestMethod.POST, url, params, Reader.class, options);
+  }
+
+  /** Initiates an input collection flow on a Reader. */
+  public Reader collectInputs(ReaderCollectInputsParams params) throws StripeException {
+    return collectInputs(params, (RequestOptions) null);
+  }
+
+  /** Initiates an input collection flow on a Reader. */
+  public Reader collectInputs(ReaderCollectInputsParams params, RequestOptions options)
+      throws StripeException {
+    String url =
+        ApiResource.fullUrl(
+            Stripe.getApiBase(),
+            options,
+            String.format(
+                "/v1/terminal/readers/%s/collect_inputs", ApiResource.urlEncodeId(this.getId())));
     return ApiResource.request(ApiResource.RequestMethod.POST, url, params, Reader.class, options);
   }
 
@@ -482,6 +517,10 @@ public class Reader extends ApiResource implements HasId, MetadataStore<Reader> 
   @Setter
   @EqualsAndHashCode(callSuper = false)
   public static class Action extends StripeObject {
+    /** Represents a reader action to collect customer inputs. */
+    @SerializedName("collect_inputs")
+    CollectInputs collectInputs;
+
     /** Failure code, only set if status is {@code failed}. */
     @SerializedName("failure_code")
     String failureCode;
@@ -517,11 +556,124 @@ public class Reader extends ApiResource implements HasId, MetadataStore<Reader> 
     /**
      * Type of action performed by the reader.
      *
-     * <p>One of {@code process_payment_intent}, {@code process_setup_intent}, {@code
-     * refund_payment}, or {@code set_reader_display}.
+     * <p>One of {@code collect_inputs}, {@code process_payment_intent}, {@code
+     * process_setup_intent}, {@code refund_payment}, or {@code set_reader_display}.
      */
     @SerializedName("type")
     String type;
+
+    /** Represents a reader action to collect customer inputs. */
+    @Getter
+    @Setter
+    @EqualsAndHashCode(callSuper = false)
+    public static class CollectInputs extends StripeObject {
+      /** List of inputs to be collected. */
+      @SerializedName("inputs")
+      List<Reader.Action.CollectInputs.Input> inputs;
+
+      /**
+       * Set of <a href="https://stripe.com/docs/api/metadata">key-value pairs</a> that you can
+       * attach to an object. This can be useful for storing additional information about the object
+       * in a structured format.
+       */
+      @SerializedName("metadata")
+      Map<String, String> metadata;
+
+      /** Represents an input to be collected using the reader. */
+      @Getter
+      @Setter
+      @EqualsAndHashCode(callSuper = false)
+      public static class Input extends StripeObject {
+        @SerializedName("custom_text")
+        CustomText customText;
+
+        @SerializedName("required")
+        Boolean required;
+
+        /** Information about a selection being collected using a reader. */
+        @SerializedName("selection")
+        Selection selection;
+
+        /** Information about a signature being collected using a reader. */
+        @SerializedName("signature")
+        Signature signature;
+
+        @SerializedName("skipped")
+        Boolean skipped;
+
+        /**
+         * Which supported input type will be collected.
+         *
+         * <p>One of {@code selection}, or {@code signature}.
+         */
+        @SerializedName("type")
+        String type;
+
+        /** Represents custom text to be displayed when collecting the input using a reader. */
+        @Getter
+        @Setter
+        @EqualsAndHashCode(callSuper = false)
+        public static class CustomText extends StripeObject {
+          /** Customize the default description for this input. */
+          @SerializedName("description")
+          String description;
+
+          /** Customize the default label for this input's skip button. */
+          @SerializedName("skip_button")
+          String skipButton;
+
+          /** Customize the default label for this input's submit button. */
+          @SerializedName("submit_button")
+          String submitButton;
+
+          /** Customize the default title for this input. */
+          @SerializedName("title")
+          String title;
+        }
+
+        /** Information about a selection being collected using a reader. */
+        @Getter
+        @Setter
+        @EqualsAndHashCode(callSuper = false)
+        public static class Selection extends StripeObject {
+          /** List of possible choices to be selected. */
+          @SerializedName("choices")
+          List<Reader.Action.CollectInputs.Input.Selection.Choice> choices;
+
+          /** The value of the selected choice. */
+          @SerializedName("value")
+          String value;
+
+          /** Choice to be selected on a Reader. */
+          @Getter
+          @Setter
+          @EqualsAndHashCode(callSuper = false)
+          public static class Choice extends StripeObject {
+            /**
+             * The button style for the choice
+             *
+             * <p>One of {@code primary}, or {@code secondary}.
+             */
+            @SerializedName("style")
+            String style;
+
+            /** A value to be selected. */
+            @SerializedName("value")
+            String value;
+          }
+        }
+
+        /** Information about a signature being collected using a reader. */
+        @Getter
+        @Setter
+        @EqualsAndHashCode(callSuper = false)
+        public static class Signature extends StripeObject {
+          /** The File ID of a collected signature image. */
+          @SerializedName("value")
+          String value;
+        }
+      }
+    }
 
     /** Represents a reader action to process a payment intent. */
     @Getter
