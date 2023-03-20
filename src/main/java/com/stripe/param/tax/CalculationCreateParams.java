@@ -46,13 +46,6 @@ public class CalculationCreateParams extends ApiRequestParams {
   @SerializedName("line_items")
   List<CalculationCreateParams.LineItem> lineItems;
 
-  /**
-   * The boolean value that indicates if the calculation is a preview. If true, the calculation is
-   * not stored. If false, the calculation is stored for 48 hours. Defaults to true.
-   */
-  @SerializedName("preview")
-  Boolean preview;
-
   /** Shipping cost details to be used for the calculation. */
   @SerializedName("shipping_cost")
   ShippingCost shippingCost;
@@ -71,7 +64,6 @@ public class CalculationCreateParams extends ApiRequestParams {
       List<String> expand,
       Map<String, Object> extraParams,
       List<CalculationCreateParams.LineItem> lineItems,
-      Boolean preview,
       ShippingCost shippingCost,
       Long taxDate) {
     this.currency = currency;
@@ -80,7 +72,6 @@ public class CalculationCreateParams extends ApiRequestParams {
     this.expand = expand;
     this.extraParams = extraParams;
     this.lineItems = lineItems;
-    this.preview = preview;
     this.shippingCost = shippingCost;
     this.taxDate = taxDate;
   }
@@ -102,8 +93,6 @@ public class CalculationCreateParams extends ApiRequestParams {
 
     private List<CalculationCreateParams.LineItem> lineItems;
 
-    private Boolean preview;
-
     private ShippingCost shippingCost;
 
     private Long taxDate;
@@ -117,7 +106,6 @@ public class CalculationCreateParams extends ApiRequestParams {
           this.expand,
           this.extraParams,
           this.lineItems,
-          this.preview,
           this.shippingCost,
           this.taxDate);
     }
@@ -222,15 +210,6 @@ public class CalculationCreateParams extends ApiRequestParams {
         this.lineItems = new ArrayList<>();
       }
       this.lineItems.addAll(elements);
-      return this;
-    }
-
-    /**
-     * The boolean value that indicates if the calculation is a preview. If true, the calculation is
-     * not stored. If false, the calculation is stored for 48 hours. Defaults to true.
-     */
-    public Builder setPreview(Boolean preview) {
-      this.preview = preview;
       return this;
     }
 
