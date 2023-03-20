@@ -91,11 +91,9 @@ jobs:
           ./gradlew --version
           echo "JAVA_TEST_HOME=$JAVA_TEST_HOME"
 
-      - name: Start stripe-mock
-        run: docker run -d -p 12111-12112:12111-12112 stripe/stripe-mock && sleep 5
-
+      - uses: stripe/openapi/actions/stripe-mock@master
       - name: Run test suite
-        run: ./gradlew test
+        run: make ci-test
 
       - name: Send code coverage report to coveralls.io
         run: ./gradlew jacocoTestReport coveralls
@@ -138,6 +136,10 @@ jobs:
           NEXUS_PASSWORD: ${{ secrets.NEXUS_PASSWORD }}
           GPG_SIGNING_KEYID: ${{ secrets.GPG_SIGNING_KEYID }}
           GPG_SIGNING_PASSPHRASE: ${{ secrets.GPG_SIGNING_PASSPHRASE }}
+      - uses: stripe/openapi/actions/notify-release@master
+        if: always()
+        with:
+          bot_token: ${{ secrets.SLACK_BOT_TOKEN }}
 
   publish-docs:
     if: >-
