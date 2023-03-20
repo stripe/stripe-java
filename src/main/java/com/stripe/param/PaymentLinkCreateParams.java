@@ -4119,6 +4119,9 @@ public class PaymentLinkCreateParams extends ApiRequestParams {
     @SerializedName("konbini")
     KONBINI("konbini"),
 
+    @SerializedName("link")
+    LINK("link"),
+
     @SerializedName("oxxo")
     OXXO("oxxo"),
 
