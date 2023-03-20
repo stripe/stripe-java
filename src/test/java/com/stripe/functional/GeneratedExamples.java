@@ -4625,4 +4625,17 @@ class GeneratedExamples extends BaseStripeTest {
         "/v1/tax/transactions/create_from_calculation",
         params.toMap());
   }
+
+  @Test
+  public void testQuotePreviewInvoiceLines() throws StripeException {
+    Quote resource = Quote.retrieve("qt_xyz", "in_xyz");
+    QuotePreviewInvoiceLinesParams params = QuotePreviewInvoiceLinesParams.builder().build();
+
+    InvoiceLineItemCollection invoiceLineItems = resource.previewInvoiceLines(params);
+    assertNotNull(invoiceLineItems);
+    verifyRequest(
+        ApiResource.RequestMethod.GET,
+        "/v1/quotes/qt_xyz/preview_invoices/in_xyz/lines",
+        params.toMap());
+  }
 }
