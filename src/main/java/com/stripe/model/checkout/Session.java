@@ -27,6 +27,7 @@ import com.stripe.param.checkout.SessionExpireParams;
 import com.stripe.param.checkout.SessionListLineItemsParams;
 import com.stripe.param.checkout.SessionListParams;
 import com.stripe.param.checkout.SessionRetrieveParams;
+import java.math.BigDecimal;
 import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
@@ -791,6 +792,10 @@ public class Session extends ApiResource implements HasId {
     /** Total of all items in source currency after discounts and taxes are applied. */
     @SerializedName("amount_total")
     Long amountTotal;
+
+    /** Exchange rate used to convert source currency amounts to customer currency amounts. */
+    @SerializedName("fx_rate")
+    BigDecimal fxRate;
 
     /** Creation currency of the CheckoutSession before localization. */
     @SerializedName("source_currency")
