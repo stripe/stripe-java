@@ -49,8 +49,9 @@ public class TransactionCreateReversalParams extends ApiRequestParams {
   String originalTransaction;
 
   /**
-   * A custom identifier for this reversal, such as 'myOrder_123-refund_1'. Must be unique across
-   * all transactions.
+   * A custom identifier for this reversal, such as 'myOrder_123-refund_1', which must be unique
+   * across all transactions. The reference helps identify this reversal transaction in exported <a
+   * href="https://stripe.com/docs/tax/reports">tax reports</a>.
    */
   @SerializedName("reference")
   String reference;
@@ -232,8 +233,9 @@ public class TransactionCreateReversalParams extends ApiRequestParams {
     }
 
     /**
-     * A custom identifier for this reversal, such as 'myOrder_123-refund_1'. Must be unique across
-     * all transactions.
+     * A custom identifier for this reversal, such as 'myOrder_123-refund_1', which must be unique
+     * across all transactions. The reference helps identify this reversal transaction in exported
+     * <a href="https://stripe.com/docs/tax/reports">tax reports</a>.
      */
     public Builder setReference(String reference) {
       this.reference = reference;
@@ -278,7 +280,10 @@ public class TransactionCreateReversalParams extends ApiRequestParams {
     @SerializedName("original_line_item")
     String originalLineItem;
 
-    /** The quantity reversed. */
+    /**
+     * The quantity reversed. Appears in <a href="https://stripe.com/docs/tax/reports">tax
+     * exports</a>, but does not affect the amount of tax reversed.
+     */
     @SerializedName("quantity")
     Long quantity;
 
@@ -405,7 +410,10 @@ public class TransactionCreateReversalParams extends ApiRequestParams {
         return this;
       }
 
-      /** The quantity reversed. */
+      /**
+       * The quantity reversed. Appears in <a href="https://stripe.com/docs/tax/reports">tax
+       * exports</a>, but does not affect the amount of tax reversed.
+       */
       public Builder setQuantity(Long quantity) {
         this.quantity = quantity;
         return this;
