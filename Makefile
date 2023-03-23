@@ -10,3 +10,9 @@ update-version:
 
 codegen-format:
 	./gradlew spotlessApply
+
+test:
+	./gradlew test
+
+ci-test:
+	./gradlew test

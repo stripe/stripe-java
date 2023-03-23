@@ -19,6 +19,21 @@
   * Change type of `SubscriptionScheduleAmendParams.prebilling[].bill_from.type` from `literal('now')` to `enum('amendment_start'|'now'|'timestamp')`
   * Add support for `tax_behavior` on `Tax.Settings.defaults` and `TaxSettingsUpdateParams.defaults`
 
+## 22.13.0 - 2023-03-16
+* [#1529](https://github.com/stripe/stripe-java/pull/1529) API Updates
+  * Add support for `cashapp_payments` on `Account.capabilities`, `AccountCreateParams.capabilities`, and `AccountUpdateParams.capabilities`
+  * Add support for `future_requirements` and `requirements` on `BankAccount`
+  * Add support for `cashapp` as a new payment method type throughout the API.
+  * Add support for `country` on `Charge.payment_method_details.link`
+  * Add support for new value `automatic_async` on enums `CheckoutSessionCreateParams.payment_intent_data.capture_method`, `PaymentIntentConfirmParams.capture_method`, `PaymentIntentCreateParams.capture_method`, `PaymentIntentUpdateParams.capture_method`, and `PaymentLinkCreateParams.payment_intent_data.capture_method`
+  * Add support for `preferred_locale` on `PaymentIntent.payment_method_options.affirm`, `PaymentIntentConfirmParams.payment_method_options.affirm`, `PaymentIntentCreateParams.payment_method_options.affirm`, and `PaymentIntentUpdateParams.payment_method_options.affirm`
+  * Add support for `cashapp_handle_redirect_or_display_qr_code` on `PaymentIntent.next_action` and `SetupIntent.next_action`
+  * Add support for new value `payout.reconciliation_completed` on enums `WebhookEndpointCreateParams.enabled_events[]` and `WebhookEndpointUpdateParams.enabled_events[]`
+  
+  
+* [#1526](https://github.com/stripe/stripe-java/pull/1526) Update generated code (new)
+  Release specs are identical.
+
 ## 22.12.0 - 2023-03-09
 * [#1523](https://github.com/stripe/stripe-java/pull/1523) API Updates
   * Add support for `card_issuing` on `IssuingCardholderCreateParams.individual` and `IssuingCardholderUpdateParams.individual`
