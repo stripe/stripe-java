@@ -39,7 +39,7 @@ public class TransactionCreateFromCalculationParams extends ApiRequestParams {
 
   /**
    * A custom order or sale identifier, such as 'myOrder_123'. Must be unique across all
-   * transactions including reversals.
+   * transactions, including reversals.
    */
   @SerializedName("reference")
   String reference;
@@ -164,7 +164,7 @@ public class TransactionCreateFromCalculationParams extends ApiRequestParams {
 
     /**
      * A custom order or sale identifier, such as 'myOrder_123'. Must be unique across all
-     * transactions including reversals.
+     * transactions, including reversals.
      */
     public Builder setReference(String reference) {
       this.reference = reference;

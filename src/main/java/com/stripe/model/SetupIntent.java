@@ -70,6 +70,10 @@ public class SetupIntent extends ApiResource implements HasId, MetadataStore<Set
   @SerializedName("attach_to_self")
   Boolean attachToSelf;
 
+  /** Settings for automatic payment methods compatible with this Setup Intent. */
+  @SerializedName("automatic_payment_methods")
+  AutomaticPaymentMethods automaticPaymentMethods;
+
   /**
    * Reason for cancellation of this SetupIntent, one of {@code abandoned}, {@code
    * requested_by_customer}, or {@code duplicate}.
@@ -768,6 +772,15 @@ public class SetupIntent extends ApiResource implements HasId, MetadataStore<Set
                 ApiResource.urlEncodeId(this.getId())));
     return ApiResource.request(
         ApiResource.RequestMethod.POST, url, params, SetupIntent.class, options);
+  }
+
+  @Getter
+  @Setter
+  @EqualsAndHashCode(callSuper = false)
+  public static class AutomaticPaymentMethods extends StripeObject {
+    /** Automatically calculates compatible payment methods. */
+    @SerializedName("enabled")
+    Boolean enabled;
   }
 
   @Getter

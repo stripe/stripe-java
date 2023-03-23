@@ -30,6 +30,10 @@ public class FinancingSummary extends ApiResource {
   @SerializedName("details")
   Details details;
 
+  /** The Financing Offer ID this Financing Summary corresponds to. */
+  @SerializedName("financing_offer")
+  String financingOffer;
+
   /**
    * The object type: financing_summary
    *
