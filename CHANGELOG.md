@@ -1,5 +1,19 @@
 # Changelog
 
+## 22.15.0-beta.1 - 2023-03-23
+* [#1535](https://github.com/stripe/stripe-java/pull/1535) Update generated code for beta (new)
+  * Add support for new resources `Tax.CalculationLineItem` and `Tax.TransactionLineItem`
+  * Add support for `collect_inputs` method on resource `Terminal.Reader`
+  * Add support for `financing_offer` on `Capital.FinancingSummary`
+  * Add support for new value `link` on enum `CheckoutSessionCreateParams.payment_method_types[]`
+  * Add support for `fx_rate` on `Checkout.Session.currency_conversion`
+  * Add support for new value `link` on enums `PaymentLinkCreateParams.payment_method_types[]` and `PaymentLinkUpdateParams.payment_method_types[]`
+  * Add support for `automatic_payment_methods` on `SetupIntentCreateParams` and `SetupIntent`
+  * Remove support for `preview` on `TaxCalculationCreateParams`
+  * Change type of `Tax.Calculation.line_items[]` from `$LineItem` to `$Tax.CalculationLineItem`
+  * Change type of `Tax.Transaction.line_items[]` from `$LineItem` to `$Tax.TransactionLineItem`
+  * Add support for `collect_inputs` on `Terminal.Reader.action`
+
 ## 22.14.0-beta.1 - 2023-03-16
 * [#1528](https://github.com/stripe/stripe-java/pull/1528) API Updates
   * Add support for `create_from_calculation` method on resource `Tax.Transaction`
@@ -29,8 +43,8 @@
   * Add support for `preferred_locale` on `PaymentIntent.payment_method_options.affirm`, `PaymentIntentConfirmParams.payment_method_options.affirm`, `PaymentIntentCreateParams.payment_method_options.affirm`, and `PaymentIntentUpdateParams.payment_method_options.affirm`
   * Add support for `cashapp_handle_redirect_or_display_qr_code` on `PaymentIntent.next_action` and `SetupIntent.next_action`
   * Add support for new value `payout.reconciliation_completed` on enums `WebhookEndpointCreateParams.enabled_events[]` and `WebhookEndpointUpdateParams.enabled_events[]`
-  
-  
+
+
 * [#1526](https://github.com/stripe/stripe-java/pull/1526) Update generated code (new)
   Release specs are identical.
 
