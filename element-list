@@ -12,6 +12,7 @@ com.stripe.model.oauth
 com.stripe.model.radar
 com.stripe.model.reporting
 com.stripe.model.sigma
+com.stripe.model.tax
 com.stripe.model.terminal
 com.stripe.model.testhelpers
 com.stripe.model.treasury
@@ -27,6 +28,7 @@ com.stripe.param.issuing
 com.stripe.param.radar
 com.stripe.param.reporting
 com.stripe.param.sigma
+com.stripe.param.tax
 com.stripe.param.terminal
 com.stripe.param.testhelpers
 com.stripe.param.treasury
