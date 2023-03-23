@@ -5,7 +5,6 @@ import com.google.gson.annotations.SerializedName;
 import com.stripe.Stripe;
 import com.stripe.exception.StripeException;
 import com.stripe.model.HasId;
-import com.stripe.model.LineItemCollection;
 import com.stripe.model.StripeObject;
 import com.stripe.net.ApiResource;
 import com.stripe.net.RequestOptions;
@@ -57,7 +56,7 @@ public class Calculation extends ApiResource implements HasId {
 
   /** The list of items the customer is purchasing. */
   @SerializedName("line_items")
-  LineItemCollection lineItems;
+  CalculationLineItemCollection lineItems;
 
   /**
    * Has the value {@code true} if the object exists in live mode or the value {@code false} if the
@@ -121,18 +120,19 @@ public class Calculation extends ApiResource implements HasId {
   }
 
   /** Retrieves the line items of a persisted tax calculation as a collection. */
-  public LineItemCollection listLineItems() throws StripeException {
+  public CalculationLineItemCollection listLineItems() throws StripeException {
     return listLineItems((Map<String, Object>) null, (RequestOptions) null);
   }
 
   /** Retrieves the line items of a persisted tax calculation as a collection. */
-  public LineItemCollection listLineItems(Map<String, Object> params) throws StripeException {
+  public CalculationLineItemCollection listLineItems(Map<String, Object> params)
+      throws StripeException {
     return listLineItems(params, (RequestOptions) null);
   }
 
   /** Retrieves the line items of a persisted tax calculation as a collection. */
-  public LineItemCollection listLineItems(Map<String, Object> params, RequestOptions options)
-      throws StripeException {
+  public CalculationLineItemCollection listLineItems(
+      Map<String, Object> params, RequestOptions options) throws StripeException {
     String url =
         ApiResource.fullUrl(
             Stripe.getApiBase(),
@@ -140,17 +140,17 @@ public class Calculation extends ApiResource implements HasId {
             String.format(
                 "/v1/tax/calculations/%s/line_items", ApiResource.urlEncodeId(this.getId())));
     return ApiResource.request(
-        ApiResource.RequestMethod.GET, url, params, LineItemCollection.class, options);
+        ApiResource.RequestMethod.GET, url, params, CalculationLineItemCollection.class, options);
   }
 
   /** Retrieves the line items of a persisted tax calculation as a collection. */
-  public LineItemCollection listLineItems(CalculationListLineItemsParams params)
+  public CalculationLineItemCollection listLineItems(CalculationListLineItemsParams params)
       throws StripeException {
     return listLineItems(params, (RequestOptions) null);
   }
 
   /** Retrieves the line items of a persisted tax calculation as a collection. */
-  public LineItemCollection listLineItems(
+  public CalculationLineItemCollection listLineItems(
       CalculationListLineItemsParams params, RequestOptions options) throws StripeException {
     String url =
         ApiResource.fullUrl(
@@ -159,7 +159,7 @@ public class Calculation extends ApiResource implements HasId {
             String.format(
                 "/v1/tax/calculations/%s/line_items", ApiResource.urlEncodeId(this.getId())));
     return ApiResource.request(
-        ApiResource.RequestMethod.GET, url, params, LineItemCollection.class, options);
+        ApiResource.RequestMethod.GET, url, params, CalculationLineItemCollection.class, options);
   }
 
   @Getter
