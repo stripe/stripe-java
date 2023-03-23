@@ -10,7 +10,6 @@ import com.stripe.model.LineItemCollection;
 import com.stripe.model.Quote;
 import com.stripe.model.QuoteCollection;
 import com.stripe.net.ApiResource;
-import com.stripe.param.QuoteListParams;
 import com.stripe.util.StreamUtils;
 import java.io.InputStream;
 import java.util.HashMap;
@@ -147,6 +146,7 @@ public class QuoteTest extends BaseStripeTest {
     Quote quote = Quote.retrieve("q_123");
     InvoiceLineItemCollection lines = quote.previewInvoiceLines("inv_123", null, null);
     assertNotNull(lines);
-    verifyRequest(ApiResource.RequestMethod.GET, "/v1/quotes/q_123/preview_invoices/inv_123/lines", null);
+    verifyRequest(
+        ApiResource.RequestMethod.GET, "/v1/quotes/q_123/preview_invoices/inv_123/lines", null);
   }
 }
