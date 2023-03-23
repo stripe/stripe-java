@@ -1,5 +1,15 @@
 # Changelog
 
+## 22.14.0 - 2023-03-23
+* [#1531](https://github.com/stripe/stripe-java/pull/1531) Update generated code
+  * Add support for new resources `Tax.CalculationLineItem`, `Tax.Calculation`, `Tax.TransactionLineItem`, and `Tax.Transaction`
+  * Add support for `create` and `list_line_items` methods on resource `Calculation`
+  * Add support for `create_from_calculation`, `create_reversal`, `create`, `list_line_items`, and `retrieve` methods on resource `Transaction`
+  * Add support for new value `link` on enum `CheckoutSessionCreateParams.payment_method_types[]`
+  * Add support for `currency_conversion` on `Checkout.Session`
+  * Add support for new value `link` on enums `PaymentLinkCreateParams.payment_method_types[]` and `PaymentLinkUpdateParams.payment_method_types[]`
+  * Add support for `automatic_payment_methods` on `SetupIntentCreateParams` and `SetupIntent`
+
 ## 22.13.0 - 2023-03-16
 * [#1529](https://github.com/stripe/stripe-java/pull/1529) API Updates
   * Add support for `cashapp_payments` on `Account.capabilities`, `AccountCreateParams.capabilities`, and `AccountUpdateParams.capabilities`
@@ -10,8 +20,8 @@
   * Add support for `preferred_locale` on `PaymentIntent.payment_method_options.affirm`, `PaymentIntentConfirmParams.payment_method_options.affirm`, `PaymentIntentCreateParams.payment_method_options.affirm`, and `PaymentIntentUpdateParams.payment_method_options.affirm`
   * Add support for `cashapp_handle_redirect_or_display_qr_code` on `PaymentIntent.next_action` and `SetupIntent.next_action`
   * Add support for new value `payout.reconciliation_completed` on enums `WebhookEndpointCreateParams.enabled_events[]` and `WebhookEndpointUpdateParams.enabled_events[]`
-  
-  
+
+
 * [#1526](https://github.com/stripe/stripe-java/pull/1526) Update generated code (new)
   Release specs are identical.
 
