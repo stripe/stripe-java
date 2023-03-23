@@ -121,6 +121,11 @@ final class EventDataClassLookup {
 
     classLookup.put("scheduled_query_run", com.stripe.model.sigma.ScheduledQueryRun.class);
 
+    classLookup.put("tax.calculation", com.stripe.model.tax.Calculation.class);
+    classLookup.put("tax.calculation_line_item", com.stripe.model.tax.CalculationLineItem.class);
+    classLookup.put("tax.transaction", com.stripe.model.tax.Transaction.class);
+    classLookup.put("tax.transaction_line_item", com.stripe.model.tax.TransactionLineItem.class);
+
     classLookup.put("terminal.configuration", com.stripe.model.terminal.Configuration.class);
     classLookup.put("terminal.connection_token", com.stripe.model.terminal.ConnectionToken.class);
     classLookup.put("terminal.location", com.stripe.model.terminal.Location.class);
