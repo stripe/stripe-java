@@ -5,7 +5,6 @@ import com.google.gson.annotations.SerializedName;
 import com.stripe.Stripe;
 import com.stripe.exception.StripeException;
 import com.stripe.model.HasId;
-import com.stripe.model.LineItemCollection;
 import com.stripe.model.StripeObject;
 import com.stripe.net.ApiResource;
 import com.stripe.net.RequestOptions;
@@ -20,7 +19,7 @@ import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.Setter;
 
-/** A Tax {@code Transaction} records the tax collected from or refunded to your customer. */
+/** A Tax transaction records the tax collected from or refunded to your customer. */
 @Getter
 @Setter
 @EqualsAndHashCode(callSuper = false)
@@ -53,7 +52,7 @@ public class Transaction extends ApiResource implements HasId {
 
   /** The tax collected or refunded, by line item. */
   @SerializedName("line_items")
-  LineItemCollection lineItems;
+  TransactionLineItemCollection lineItems;
 
   /**
    * Has the value {@code true} if the object exists in live mode or the value {@code false} if the
@@ -191,18 +190,19 @@ public class Transaction extends ApiResource implements HasId {
   }
 
   /** Retrieves the line items of a committed standalone transaction as a collection. */
-  public LineItemCollection listLineItems() throws StripeException {
+  public TransactionLineItemCollection listLineItems() throws StripeException {
     return listLineItems((Map<String, Object>) null, (RequestOptions) null);
   }
 
   /** Retrieves the line items of a committed standalone transaction as a collection. */
-  public LineItemCollection listLineItems(Map<String, Object> params) throws StripeException {
+  public TransactionLineItemCollection listLineItems(Map<String, Object> params)
+      throws StripeException {
     return listLineItems(params, (RequestOptions) null);
   }
 
   /** Retrieves the line items of a committed standalone transaction as a collection. */
-  public LineItemCollection listLineItems(Map<String, Object> params, RequestOptions options)
-      throws StripeException {
+  public TransactionLineItemCollection listLineItems(
+      Map<String, Object> params, RequestOptions options) throws StripeException {
     String url =
         ApiResource.fullUrl(
             Stripe.getApiBase(),
@@ -210,17 +210,17 @@ public class Transaction extends ApiResource implements HasId {
             String.format(
                 "/v1/tax/transactions/%s/line_items", ApiResource.urlEncodeId(this.getId())));
     return ApiResource.request(
-        ApiResource.RequestMethod.GET, url, params, LineItemCollection.class, options);
+        ApiResource.RequestMethod.GET, url, params, TransactionLineItemCollection.class, options);
   }
 
   /** Retrieves the line items of a committed standalone transaction as a collection. */
-  public LineItemCollection listLineItems(TransactionListLineItemsParams params)
+  public TransactionLineItemCollection listLineItems(TransactionListLineItemsParams params)
       throws StripeException {
     return listLineItems(params, (RequestOptions) null);
   }
 
   /** Retrieves the line items of a committed standalone transaction as a collection. */
-  public LineItemCollection listLineItems(
+  public TransactionLineItemCollection listLineItems(
       TransactionListLineItemsParams params, RequestOptions options) throws StripeException {
     String url =
         ApiResource.fullUrl(
@@ -229,7 +229,7 @@ public class Transaction extends ApiResource implements HasId {
             String.format(
                 "/v1/tax/transactions/%s/line_items", ApiResource.urlEncodeId(this.getId())));
     return ApiResource.request(
-        ApiResource.RequestMethod.GET, url, params, LineItemCollection.class, options);
+        ApiResource.RequestMethod.GET, url, params, TransactionLineItemCollection.class, options);
   }
 
   /** Retrieves a Tax <code>Transaction</code> object. */
@@ -273,7 +273,7 @@ public class Transaction extends ApiResource implements HasId {
   @Setter
   @EqualsAndHashCode(callSuper = false)
   public static class CustomerDetails extends StripeObject {
-    /** The customer's postal address (e.g., home or business location). */
+    /** The customer's postal address (for example, home or business location). */
     @SerializedName("address")
     Address address;
 
@@ -289,12 +289,12 @@ public class Transaction extends ApiResource implements HasId {
     @SerializedName("ip_address")
     String ipAddress;
 
-    /** The customer's tax IDs (e.g., EU VAT numbers). */
+    /** The customer's tax IDs (for example, EU VAT numbers). */
     @SerializedName("tax_ids")
     List<Transaction.CustomerDetails.TaxId> taxIds;
 
     /**
-     * The taxability override used for taxation
+     * The taxability override used for taxation.
      *
      * <p>One of {@code customer_exempt}, {@code none}, or {@code reverse_charge}.
      */
