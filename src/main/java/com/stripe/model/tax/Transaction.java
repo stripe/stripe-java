@@ -19,7 +19,7 @@ import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.Setter;
 
-/** A Tax {@code Transaction} records the tax collected from or refunded to your customer. */
+/** A Tax transaction records the tax collected from or refunded to your customer. */
 @Getter
 @Setter
 @EqualsAndHashCode(callSuper = false)
@@ -271,7 +271,7 @@ public class Transaction extends ApiResource implements HasId {
   @Setter
   @EqualsAndHashCode(callSuper = false)
   public static class CustomerDetails extends StripeObject {
-    /** The customer's postal address (e.g., home or business location). */
+    /** The customer's postal address (for example, home or business location). */
     @SerializedName("address")
     Address address;
 
@@ -287,12 +287,12 @@ public class Transaction extends ApiResource implements HasId {
     @SerializedName("ip_address")
     String ipAddress;
 
-    /** The customer's tax IDs (e.g., EU VAT numbers). */
+    /** The customer's tax IDs (for example, EU VAT numbers). */
     @SerializedName("tax_ids")
     List<Transaction.CustomerDetails.TaxId> taxIds;
 
     /**
-     * The taxability override used for taxation
+     * The taxability override used for taxation.
      *
      * <p>One of {@code customer_exempt}, {@code none}, or {@code reverse_charge}.
      */

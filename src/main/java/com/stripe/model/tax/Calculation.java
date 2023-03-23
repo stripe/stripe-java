@@ -42,10 +42,7 @@ public class Calculation extends ApiResource implements HasId {
   @SerializedName("customer_details")
   CustomerDetails customerDetails;
 
-  /**
-   * Timestamp of date at which the tax calculation will expire. Empty if the calculation is an
-   * unsaved preview.
-   */
+  /** Timestamp of date at which the tax calculation will expire. */
   @SerializedName("expires_at")
   Long expiresAt;
 
@@ -164,7 +161,7 @@ public class Calculation extends ApiResource implements HasId {
   @Setter
   @EqualsAndHashCode(callSuper = false)
   public static class CustomerDetails extends StripeObject {
-    /** The customer's postal address (e.g., home or business location). */
+    /** The customer's postal address (for example, home or business location). */
     @SerializedName("address")
     Address address;
 
@@ -180,12 +177,12 @@ public class Calculation extends ApiResource implements HasId {
     @SerializedName("ip_address")
     String ipAddress;
 
-    /** The customer's tax IDs (e.g., EU VAT numbers). */
+    /** The customer's tax IDs (for example, EU VAT numbers). */
     @SerializedName("tax_ids")
     List<Calculation.CustomerDetails.TaxId> taxIds;
 
     /**
-     * The taxability override used for taxation
+     * The taxability override used for taxation.
      *
      * <p>One of {@code customer_exempt}, {@code none}, or {@code reverse_charge}.
      */

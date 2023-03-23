@@ -52,7 +52,8 @@ public class CalculationCreateParams extends ApiRequestParams {
 
   /**
    * Timestamp of date at which the tax rules and rates in effect applies for the calculation.
-   * Measured in seconds since the Unix epoch.
+   * Measured in seconds since the Unix epoch. Can be up to 48 hours in the past, and up to 48 hours
+   * in the future.
    */
   @SerializedName("tax_date")
   Long taxDate;
@@ -221,7 +222,8 @@ public class CalculationCreateParams extends ApiRequestParams {
 
     /**
      * Timestamp of date at which the tax rules and rates in effect applies for the calculation.
-     * Measured in seconds since the Unix epoch.
+     * Measured in seconds since the Unix epoch. Can be up to 48 hours in the past, and up to 48
+     * hours in the future.
      */
     public Builder setTaxDate(Long taxDate) {
       this.taxDate = taxDate;
@@ -231,7 +233,7 @@ public class CalculationCreateParams extends ApiRequestParams {
 
   @Getter
   public static class CustomerDetails {
-    /** The customer's postal address (e.g., home or business location). */
+    /** The customer's postal address (for example, home or business location). */
     @SerializedName("address")
     Address address;
 
@@ -257,9 +259,10 @@ public class CalculationCreateParams extends ApiRequestParams {
     List<CalculationCreateParams.CustomerDetails.TaxId> taxIds;
 
     /**
-     * When {@code reverse_charge} is provided, the reverse charge rule is applied for taxation.
-     * When {@code customer_exempt} is sent, it treats the customer as tax exempt. Defaults to
-     * {@code none}.
+     * Overrides the tax calculation result to allow you to not collect tax from your customer. Use
+     * this if you've manually checked your customer's tax exemptions. Prefer providing the
+     * customer's {@code tax_ids} where possible, which automatically determines whether {@code
+     * reverse_charge} applies.
      */
     @SerializedName("taxability_override")
     TaxabilityOverride taxabilityOverride;
@@ -307,7 +310,7 @@ public class CalculationCreateParams extends ApiRequestParams {
             this.taxabilityOverride);
       }
 
-      /** The customer's postal address (e.g., home or business location). */
+      /** The customer's postal address (for example, home or business location). */
       public Builder setAddress(CalculationCreateParams.CustomerDetails.Address address) {
         this.address = address;
         return this;
@@ -380,9 +383,10 @@ public class CalculationCreateParams extends ApiRequestParams {
       }
 
       /**
-       * When {@code reverse_charge} is provided, the reverse charge rule is applied for taxation.
-       * When {@code customer_exempt} is sent, it treats the customer as tax exempt. Defaults to
-       * {@code none}.
+       * Overrides the tax calculation result to allow you to not collect tax from your customer.
+       * Use this if you've manually checked your customer's tax exemptions. Prefer providing the
+       * customer's {@code tax_ids} where possible, which automatically determines whether {@code
+       * reverse_charge} applies.
        */
       public Builder setTaxabilityOverride(
           CalculationCreateParams.CustomerDetails.TaxabilityOverride taxabilityOverride) {
@@ -880,30 +884,29 @@ public class CalculationCreateParams extends ApiRequestParams {
     String product;
 
     /**
-     * The number of units of the item being purchased. The {@code amount} is a total amount for the
-     * whole line. Used to calculate the per-unit price, when required.
+     * The number of units of the item being purchased. Used to calculate the per-unit price from
+     * the total {@code amount} for the line. For example, if {@code amount=100} and {@code
+     * quantity=4}, the calculated unit price is 25.
      */
     @SerializedName("quantity")
     Long quantity;
 
     /**
-     * A custom identifier for this line item. Must be unique across the line items in the
-     * calculation.
+     * A custom identifier for this line item, which must be unique across the line items in the
+     * calculation. The reference helps identify each line item in exported <a
+     * href="https://stripe.com/docs/tax/reports">tax reports</a>.
      */
     @SerializedName("reference")
     String reference;
 
-    /**
-     * Specifies whether the {@code amount} includes taxes. If {@code tax_behavior=inclusive}, then
-     * the amount includes taxes.
-     */
+    /** Specifies whether the {@code amount} includes taxes. Defaults to {@code exclusive}. */
     @SerializedName("tax_behavior")
     TaxBehavior taxBehavior;
 
     /**
      * A <a href="https://stripe.com/docs/tax/tax-categories">tax code</a> ID to use for this line
      * item. If not provided, we will use the tax code from the provided {@code product} param. If
-     * neither {@code tax_code} or {@code product} is provided, we will use the default tax code
+     * neither {@code tax_code} nor {@code product} is provided, we will use the default tax code
      * from your Tax Settings.
      */
     @SerializedName("tax_code")
@@ -1003,8 +1006,9 @@ public class CalculationCreateParams extends ApiRequestParams {
       }
 
       /**
-       * The number of units of the item being purchased. The {@code amount} is a total amount for
-       * the whole line. Used to calculate the per-unit price, when required.
+       * The number of units of the item being purchased. Used to calculate the per-unit price from
+       * the total {@code amount} for the line. For example, if {@code amount=100} and {@code
+       * quantity=4}, the calculated unit price is 25.
        */
       public Builder setQuantity(Long quantity) {
         this.quantity = quantity;
@@ -1012,18 +1016,16 @@ public class CalculationCreateParams extends ApiRequestParams {
       }
 
       /**
-       * A custom identifier for this line item. Must be unique across the line items in the
-       * calculation.
+       * A custom identifier for this line item, which must be unique across the line items in the
+       * calculation. The reference helps identify each line item in exported <a
+       * href="https://stripe.com/docs/tax/reports">tax reports</a>.
        */
       public Builder setReference(String reference) {
         this.reference = reference;
         return this;
       }
 
-      /**
-       * Specifies whether the {@code amount} includes taxes. If {@code tax_behavior=inclusive},
-       * then the amount includes taxes.
-       */
+      /** Specifies whether the {@code amount} includes taxes. Defaults to {@code exclusive}. */
       public Builder setTaxBehavior(CalculationCreateParams.LineItem.TaxBehavior taxBehavior) {
         this.taxBehavior = taxBehavior;
         return this;
@@ -1032,7 +1034,7 @@ public class CalculationCreateParams extends ApiRequestParams {
       /**
        * A <a href="https://stripe.com/docs/tax/tax-categories">tax code</a> ID to use for this line
        * item. If not provided, we will use the tax code from the provided {@code product} param. If
-       * neither {@code tax_code} or {@code product} is provided, we will use the default tax code
+       * neither {@code tax_code} nor {@code product} is provided, we will use the default tax code
        * from your Tax Settings.
        */
       public Builder setTaxCode(String taxCode) {
@@ -1077,8 +1079,10 @@ public class CalculationCreateParams extends ApiRequestParams {
     Map<String, Object> extraParams;
 
     /**
-     * If provided, the shipping rate's {@code amount}, {@code tax_code} and {@code tax_behavior}
-     * are used. It cannot be used with {@code amount}, {@code tax_code} and {@code tax_behavior}
+     * If provided, the <a href="https://stripe.com/docs/api/shipping_rates/object">shipping
+     * rate</a>'s {@code amount}, {@code tax_code} and {@code tax_behavior} are used. If you provide
+     * a shipping rate, then you cannot pass the {@code amount}, {@code tax_code}, or {@code
+     * tax_behavior} parameters.
      */
     @SerializedName("shipping_rate")
     String shippingRate;
@@ -1169,8 +1173,10 @@ public class CalculationCreateParams extends ApiRequestParams {
       }
 
       /**
-       * If provided, the shipping rate's {@code amount}, {@code tax_code} and {@code tax_behavior}
-       * are used. It cannot be used with {@code amount}, {@code tax_code} and {@code tax_behavior}
+       * If provided, the <a href="https://stripe.com/docs/api/shipping_rates/object">shipping
+       * rate</a>'s {@code amount}, {@code tax_code} and {@code tax_behavior} are used. If you
+       * provide a shipping rate, then you cannot pass the {@code amount}, {@code tax_code}, or
+       * {@code tax_behavior} parameters.
        */
       public Builder setShippingRate(String shippingRate) {
         this.shippingRate = shippingRate;
