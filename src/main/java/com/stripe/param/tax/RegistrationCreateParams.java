@@ -201,6 +201,9 @@ public class RegistrationCreateParams extends ApiRequestParams {
     @SerializedName("domestic_small_seller")
     DOMESTIC_SMALL_SELLER("domestic_small_seller"),
 
+    @SerializedName("ioss")
+    IOSS("ioss"),
+
     @SerializedName("simplified")
     SIMPLIFIED("simplified"),
 

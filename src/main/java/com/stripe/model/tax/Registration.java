@@ -87,8 +87,8 @@ public class Registration extends ApiResource implements HasId {
    * The type of the registration. See <a href="https://stripe.com/docs/tax/registering">our
    * guide</a> for more information about registration types.
    *
-   * <p>One of {@code domestic_small_seller}, {@code simplified}, {@code standard}, {@code
-   * vat_oss_non_union}, or {@code vat_oss_union}.
+   * <p>One of {@code domestic_small_seller}, {@code ioss}, {@code simplified}, {@code standard},
+   * {@code vat_oss_non_union}, or {@code vat_oss_union}.
    */
   @SerializedName("type")
   String type;
