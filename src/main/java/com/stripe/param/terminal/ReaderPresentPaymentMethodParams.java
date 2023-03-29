@@ -11,6 +11,10 @@ import lombok.Getter;
 
 @Getter
 public class ReaderPresentPaymentMethodParams extends ApiRequestParams {
+  /** Simulated on-reader tip amount. */
+  @SerializedName("amount_tip")
+  Long amountTip;
+
   /** Simulated data for the card_present payment method. */
   @SerializedName("card_present")
   CardPresent cardPresent;
@@ -37,11 +41,13 @@ public class ReaderPresentPaymentMethodParams extends ApiRequestParams {
   Type type;
 
   private ReaderPresentPaymentMethodParams(
+      Long amountTip,
       CardPresent cardPresent,
       List<String> expand,
       Map<String, Object> extraParams,
       InteracPresent interacPresent,
       Type type) {
+    this.amountTip = amountTip;
     this.cardPresent = cardPresent;
     this.expand = expand;
     this.extraParams = extraParams;
@@ -54,6 +60,8 @@ public class ReaderPresentPaymentMethodParams extends ApiRequestParams {
   }
 
   public static class Builder {
+    private Long amountTip;
+
     private CardPresent cardPresent;
 
     private List<String> expand;
@@ -67,7 +75,18 @@ public class ReaderPresentPaymentMethodParams extends ApiRequestParams {
     /** Finalize and obtain parameter instance from this builder. */
     public ReaderPresentPaymentMethodParams build() {
       return new ReaderPresentPaymentMethodParams(
-          this.cardPresent, this.expand, this.extraParams, this.interacPresent, this.type);
+          this.amountTip,
+          this.cardPresent,
+          this.expand,
+          this.extraParams,
+          this.interacPresent,
+          this.type);
+    }
+
+    /** Simulated on-reader tip amount. */
+    public Builder setAmountTip(Long amountTip) {
+      this.amountTip = amountTip;
+      return this;
     }
 
     /** Simulated data for the card_present payment method. */
