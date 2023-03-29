@@ -14,6 +14,16 @@
   * Change type of `Tax.Transaction.line_items[]` from `$LineItem` to `$Tax.TransactionLineItem`
   * Add support for `collect_inputs` on `Terminal.Reader.action`
 
+## 22.14.0 - 2023-03-23
+* [#1531](https://github.com/stripe/stripe-java/pull/1531) Update generated code
+  * Add support for new resources `Tax.CalculationLineItem`, `Tax.Calculation`, `Tax.TransactionLineItem`, and `Tax.Transaction`
+  * Add support for `create` and `list_line_items` methods on resource `Calculation`
+  * Add support for `create_from_calculation`, `create_reversal`, `create`, `list_line_items`, and `retrieve` methods on resource `Transaction`
+  * Add support for new value `link` on enum `CheckoutSessionCreateParams.payment_method_types[]`
+  * Add support for `currency_conversion` on `Checkout.Session`
+  * Add support for new value `link` on enums `PaymentLinkCreateParams.payment_method_types[]` and `PaymentLinkUpdateParams.payment_method_types[]`
+  * Add support for `automatic_payment_methods` on `SetupIntentCreateParams` and `SetupIntent`
+
 ## 22.14.0-beta.1 - 2023-03-16
 * [#1528](https://github.com/stripe/stripe-java/pull/1528) API Updates
   * Add support for `create_from_calculation` method on resource `Tax.Transaction`
@@ -24,14 +34,6 @@
   * Add support for `shipping_cost` on `Tax.Calculation`, `Tax.Transaction`, `TaxCalculationCreateParams`, and `TaxTransactionCreateReversalParams`
   * Add support for `tax_breakdown` on `Tax.Calculation`
   * Remove support for `tax_summary` on `Tax.Calculation`
-
-## 22.13.0-beta.1 - 2023-03-09
-* [#1524](https://github.com/stripe/stripe-java/pull/1524) API Updates for beta branch
-  * Updated stable APIs to the latest version
-  * Remove support for `list_transactions` method on resource `Tax.Transaction`
-  * Add support for `amendment_start` and `timestamp` on `SubscriptionScheduleAmendParams.prebilling[].bill_from`
-  * Change type of `SubscriptionScheduleAmendParams.prebilling[].bill_from.type` from `literal('now')` to `enum('amendment_start'|'now'|'timestamp')`
-  * Add support for `tax_behavior` on `Tax.Settings.defaults` and `TaxSettingsUpdateParams.defaults`
 
 ## 22.13.0 - 2023-03-16
 * [#1529](https://github.com/stripe/stripe-java/pull/1529) API Updates
@@ -47,6 +49,14 @@
 
 * [#1526](https://github.com/stripe/stripe-java/pull/1526) Update generated code (new)
   Release specs are identical.
+
+## 22.13.0-beta.1 - 2023-03-09
+* [#1524](https://github.com/stripe/stripe-java/pull/1524) API Updates for beta branch
+  * Updated stable APIs to the latest version
+  * Remove support for `list_transactions` method on resource `Tax.Transaction`
+  * Add support for `amendment_start` and `timestamp` on `SubscriptionScheduleAmendParams.prebilling[].bill_from`
+  * Change type of `SubscriptionScheduleAmendParams.prebilling[].bill_from.type` from `literal('now')` to `enum('amendment_start'|'now'|'timestamp')`
+  * Add support for `tax_behavior` on `Tax.Settings.defaults` and `TaxSettingsUpdateParams.defaults`
 
 ## 22.12.0 - 2023-03-09
 * [#1523](https://github.com/stripe/stripe-java/pull/1523) API Updates
