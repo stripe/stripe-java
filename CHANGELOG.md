@@ -1,5 +1,10 @@
 # Changelog
 
+## 22.16.0-beta.1 - 2023-03-30
+* [#1537](https://github.com/stripe/stripe-java/pull/1537) Update generated code
+  * Add support for new value `ioss` on enum `TaxRegistrationCreateParams.type`
+  * Change `TerminalReaderCollectInputsParams.inputs[].custom_text.description` to be optional
+
 ## 22.15.0-beta.1 - 2023-03-23
 * [#1535](https://github.com/stripe/stripe-java/pull/1535) Update generated code for beta (new)
   * Add support for new resources `Tax.CalculationLineItem` and `Tax.TransactionLineItem`
