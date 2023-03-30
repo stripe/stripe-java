@@ -1021,6 +1021,17 @@ public class Account extends ApiResource implements MetadataStore<Account>, Paym
     @SerializedName("executives_provided")
     Boolean executivesProvided;
 
+    /**
+     * The export license ID number of the company, also referred as Import Export Code (India
+     * only).
+     */
+    @SerializedName("export_license_id")
+    String exportLicenseId;
+
+    /** The purpose code to use for export transactions (India only). */
+    @SerializedName("export_purpose_code")
+    String exportPurposeCode;
+
     /** The company's legal name. */
     @SerializedName("name")
     String name;

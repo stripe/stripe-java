@@ -4297,6 +4297,17 @@ public class AccountUpdateParams extends ApiRequestParams {
     Boolean executivesProvided;
 
     /**
+     * The export license ID number of the company, also referred as Import Export Code (India
+     * only).
+     */
+    @SerializedName("export_license_id")
+    Object exportLicenseId;
+
+    /** The purpose code to use for export transactions (India only). */
+    @SerializedName("export_purpose_code")
+    Object exportPurposeCode;
+
+    /**
      * Map of extra parameters for custom features not available in this client library. The content
      * in this map is not serialized under this field's {@code @SerializedName} value. Instead, each
      * key/value pair is serialized as if the key is a root-level field (serialized) name in this
@@ -4381,6 +4392,8 @@ public class AccountUpdateParams extends ApiRequestParams {
         AddressKanji addressKanji,
         Boolean directorsProvided,
         Boolean executivesProvided,
+        Object exportLicenseId,
+        Object exportPurposeCode,
         Map<String, Object> extraParams,
         Object name,
         Object nameKana,
@@ -4399,6 +4412,8 @@ public class AccountUpdateParams extends ApiRequestParams {
       this.addressKanji = addressKanji;
       this.directorsProvided = directorsProvided;
       this.executivesProvided = executivesProvided;
+      this.exportLicenseId = exportLicenseId;
+      this.exportPurposeCode = exportPurposeCode;
       this.extraParams = extraParams;
       this.name = name;
       this.nameKana = nameKana;
@@ -4428,6 +4443,10 @@ public class AccountUpdateParams extends ApiRequestParams {
       private Boolean directorsProvided;
 
       private Boolean executivesProvided;
+
+      private Object exportLicenseId;
+
+      private Object exportPurposeCode;
 
       private Map<String, Object> extraParams;
 
@@ -4463,6 +4482,8 @@ public class AccountUpdateParams extends ApiRequestParams {
             this.addressKanji,
             this.directorsProvided,
             this.executivesProvided,
+            this.exportLicenseId,
+            this.exportPurposeCode,
             this.extraParams,
             this.name,
             this.nameKana,
@@ -4516,6 +4537,36 @@ public class AccountUpdateParams extends ApiRequestParams {
        */
       public Builder setExecutivesProvided(Boolean executivesProvided) {
         this.executivesProvided = executivesProvided;
+        return this;
+      }
+
+      /**
+       * The export license ID number of the company, also referred as Import Export Code (India
+       * only).
+       */
+      public Builder setExportLicenseId(String exportLicenseId) {
+        this.exportLicenseId = exportLicenseId;
+        return this;
+      }
+
+      /**
+       * The export license ID number of the company, also referred as Import Export Code (India
+       * only).
+       */
+      public Builder setExportLicenseId(EmptyParam exportLicenseId) {
+        this.exportLicenseId = exportLicenseId;
+        return this;
+      }
+
+      /** The purpose code to use for export transactions (India only). */
+      public Builder setExportPurposeCode(String exportPurposeCode) {
+        this.exportPurposeCode = exportPurposeCode;
+        return this;
+      }
+
+      /** The purpose code to use for export transactions (India only). */
+      public Builder setExportPurposeCode(EmptyParam exportPurposeCode) {
+        this.exportPurposeCode = exportPurposeCode;
         return this;
       }
 
