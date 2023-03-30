@@ -234,6 +234,9 @@ public class FileCreateParams extends ApiRequestParams {
     @SerializedName("tax_document_user_upload")
     TAX_DOCUMENT_USER_UPLOAD("tax_document_user_upload");
 
+    @SerializedName("terminal_reader_splashscreen")
+    TERMINAL_READER_SPLASHSCREEN("terminal_reader_splashscreen");
+
     @Getter(onMethod_ = {@Override})
     private final String value;
 
