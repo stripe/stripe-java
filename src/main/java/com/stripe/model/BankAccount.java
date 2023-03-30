@@ -154,10 +154,13 @@ public class BankAccount extends ApiResource
    * verification_failed}. If a transfer sent to this bank account fails, we'll set the status to
    * {@code errored} and will not continue to send transfers until the bank details are updated.
    *
-   * <p>For external accounts, possible values are {@code new} and {@code errored}. Validations
-   * aren't run against external accounts because they're only used for payouts. This means the
-   * other statuses don't apply. If a transfer fails, the status is set to {@code errored} and
-   * transfers are stopped until account details are updated.
+   * <p>For external accounts, possible values are {@code new}, {@code errored} and {@code
+   * verification_failed}. If a transfer fails, the status is set to {@code errored} and transfers
+   * are stopped until account details are updated. In India, if we can't <a
+   * href="https://support.stripe.com/questions/bank-account-ownership-verification">verify the
+   * owner of the bank account</a>, we'll set the status to {@code verification_failed}. Other
+   * validations aren't run against external accounts because they're only used for payouts. This
+   * means the other statuses don't apply.
    */
   @SerializedName("status")
   String status;
