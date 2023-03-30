@@ -9,7 +9,6 @@ import com.stripe.model.StripeObject;
 import com.stripe.net.ApiResource;
 import com.stripe.net.RequestOptions;
 import com.stripe.param.tax.TransactionCreateFromCalculationParams;
-import com.stripe.param.tax.TransactionCreateParams;
 import com.stripe.param.tax.TransactionCreateReversalParams;
 import com.stripe.param.tax.TransactionListLineItemsParams;
 import com.stripe.param.tax.TransactionRetrieveParams;
@@ -100,32 +99,6 @@ public class Transaction extends ApiResource implements HasId {
    */
   @SerializedName("type")
   String type;
-
-  /** Creates a Tax <code>Transaction</code> from a calculation. */
-  public static Transaction create(Map<String, Object> params) throws StripeException {
-    return create(params, (RequestOptions) null);
-  }
-
-  /** Creates a Tax <code>Transaction</code> from a calculation. */
-  public static Transaction create(Map<String, Object> params, RequestOptions options)
-      throws StripeException {
-    String url = ApiResource.fullUrl(Stripe.getApiBase(), options, "/v1/tax/transactions");
-    return ApiResource.request(
-        ApiResource.RequestMethod.POST, url, params, Transaction.class, options);
-  }
-
-  /** Creates a Tax <code>Transaction</code> from a calculation. */
-  public static Transaction create(TransactionCreateParams params) throws StripeException {
-    return create(params, (RequestOptions) null);
-  }
-
-  /** Creates a Tax <code>Transaction</code> from a calculation. */
-  public static Transaction create(TransactionCreateParams params, RequestOptions options)
-      throws StripeException {
-    String url = ApiResource.fullUrl(Stripe.getApiBase(), options, "/v1/tax/transactions");
-    return ApiResource.request(
-        ApiResource.RequestMethod.POST, url, params, Transaction.class, options);
-  }
 
   /** Creates a Tax <code>Transaction</code> from a calculation. */
   public static Transaction createFromCalculation(Map<String, Object> params)
