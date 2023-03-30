@@ -266,7 +266,7 @@ public class FileListParams extends ApiRequestParams {
     SIGMA_SCHEDULED_QUERY("sigma_scheduled_query"),
 
     @SerializedName("tax_document_user_upload")
-    TAX_DOCUMENT_USER_UPLOAD("tax_document_user_upload");
+    TAX_DOCUMENT_USER_UPLOAD("tax_document_user_upload"),
 
     @SerializedName("terminal_reader_splashscreen")
     TERMINAL_READER_SPLASHSCREEN("terminal_reader_splashscreen");
