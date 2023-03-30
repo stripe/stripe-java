@@ -383,6 +383,17 @@ public class TokenCreateParams extends ApiRequestParams {
       Boolean executivesProvided;
 
       /**
+       * The export license ID number of the company, also referred as Import Export Code (India
+       * only).
+       */
+      @SerializedName("export_license_id")
+      String exportLicenseId;
+
+      /** The purpose code to use for export transactions (India only). */
+      @SerializedName("export_purpose_code")
+      String exportPurposeCode;
+
+      /**
        * Map of extra parameters for custom features not available in this client library. The
        * content in this map is not serialized under this field's {@code @SerializedName} value.
        * Instead, each key/value pair is serialized as if the key is a root-level field (serialized)
@@ -474,6 +485,8 @@ public class TokenCreateParams extends ApiRequestParams {
           AddressKanji addressKanji,
           Boolean directorsProvided,
           Boolean executivesProvided,
+          String exportLicenseId,
+          String exportPurposeCode,
           Map<String, Object> extraParams,
           String name,
           String nameKana,
@@ -493,6 +506,8 @@ public class TokenCreateParams extends ApiRequestParams {
         this.addressKanji = addressKanji;
         this.directorsProvided = directorsProvided;
         this.executivesProvided = executivesProvided;
+        this.exportLicenseId = exportLicenseId;
+        this.exportPurposeCode = exportPurposeCode;
         this.extraParams = extraParams;
         this.name = name;
         this.nameKana = nameKana;
@@ -523,6 +538,10 @@ public class TokenCreateParams extends ApiRequestParams {
         private Boolean directorsProvided;
 
         private Boolean executivesProvided;
+
+        private String exportLicenseId;
+
+        private String exportPurposeCode;
 
         private Map<String, Object> extraParams;
 
@@ -560,6 +579,8 @@ public class TokenCreateParams extends ApiRequestParams {
               this.addressKanji,
               this.directorsProvided,
               this.executivesProvided,
+              this.exportLicenseId,
+              this.exportPurposeCode,
               this.extraParams,
               this.name,
               this.nameKana,
@@ -616,6 +637,21 @@ public class TokenCreateParams extends ApiRequestParams {
          */
         public Builder setExecutivesProvided(Boolean executivesProvided) {
           this.executivesProvided = executivesProvided;
+          return this;
+        }
+
+        /**
+         * The export license ID number of the company, also referred as Import Export Code (India
+         * only).
+         */
+        public Builder setExportLicenseId(String exportLicenseId) {
+          this.exportLicenseId = exportLicenseId;
+          return this;
+        }
+
+        /** The purpose code to use for export transactions (India only). */
+        public Builder setExportPurposeCode(String exportPurposeCode) {
+          this.exportPurposeCode = exportPurposeCode;
           return this;
         }
 
