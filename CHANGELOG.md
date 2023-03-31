@@ -5,6 +5,14 @@
   * Add support for new value `ioss` on enum `TaxRegistrationCreateParams.type`
   * Change `TerminalReaderCollectInputsParams.inputs[].custom_text.description` to be optional
 
+## 22.15.0 - 2023-03-30
+* [#1536](https://github.com/stripe/stripe-java/pull/1536) Update generated code
+  * Remove support for `create` method on resource `Tax.Transaction`
+    * This is not a breaking change, as this method was deprecated before the Tax Transactions API was released in favor of the `createFromCalculation` method.
+  * Add support for `export_license_id` and `export_purpose_code` on `Account.company`, `AccountCreateParams.company`, `AccountUpdateParams.company`, and `TokenCreateParams.account.company`
+  * Add support for `amount_tip` on `TerminalReaderPresentPaymentMethodParams`
+* [#1538](https://github.com/stripe/stripe-java/pull/1538) Add missing file purpose terminal_reader_splashscreen
+
 ## 22.15.0-beta.1 - 2023-03-23
 * [#1535](https://github.com/stripe/stripe-java/pull/1535) Update generated code for beta (new)
   * Add support for new resources `Tax.CalculationLineItem` and `Tax.TransactionLineItem`
