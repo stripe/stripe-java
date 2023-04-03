@@ -18,7 +18,12 @@ import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.Setter;
 
-/** A Tax transaction records the tax collected from or refunded to your customer. */
+/**
+ * A Tax Transaction records the tax collected from or refunded to your customer.
+ *
+ * <p>Related guide: <a href="https://stripe.com/docs/tax/custom#tax-transaction">Calculate tax in
+ * your custom payment flow</a>.
+ */
 @Getter
 @Setter
 @EqualsAndHashCode(callSuper = false)
