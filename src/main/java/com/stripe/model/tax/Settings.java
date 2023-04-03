@@ -47,24 +47,24 @@ public class Settings extends ApiResource {
   @SerializedName("object")
   String object;
 
-  /** Retrieves Tax <code>Settings</code> for a merchant. */
+  /** Retrieves Tax {@code Settings} for a merchant. */
   public static Settings retrieve() throws StripeException {
     return retrieve((Map<String, Object>) null, (RequestOptions) null);
   }
 
-  /** Retrieves Tax <code>Settings</code> for a merchant. */
+  /** Retrieves Tax {@code Settings} for a merchant. */
   public static Settings retrieve(RequestOptions options) throws StripeException {
     return retrieve((Map<String, Object>) null, options);
   }
 
-  /** Retrieves Tax <code>Settings</code> for a merchant. */
+  /** Retrieves Tax {@code Settings} for a merchant. */
   public static Settings retrieve(Map<String, Object> params, RequestOptions options)
       throws StripeException {
     String url = ApiResource.fullUrl(Stripe.getApiBase(), options, "/v1/tax/settings");
     return ApiResource.request(ApiResource.RequestMethod.GET, url, params, Settings.class, options);
   }
 
-  /** Retrieves Tax <code>Settings</code> for a merchant. */
+  /** Retrieves Tax {@code Settings} for a merchant. */
   public static Settings retrieve(SettingsRetrieveParams params, RequestOptions options)
       throws StripeException {
     String url = ApiResource.fullUrl(Stripe.getApiBase(), options, "/v1/tax/settings");
@@ -72,16 +72,16 @@ public class Settings extends ApiResource {
   }
 
   /**
-   * Updates Tax <code>Settings</code> parameters used in tax calculations. All parameters are
-   * editable but none can be removed once set.
+   * Updates Tax {@code Settings} parameters used in tax calculations. All parameters are editable
+   * but none can be removed once set.
    */
   public static Settings update(Map<String, Object> params) throws StripeException {
     return update(params, (RequestOptions) null);
   }
 
   /**
-   * Updates Tax <code>Settings</code> parameters used in tax calculations. All parameters are
-   * editable but none can be removed once set.
+   * Updates Tax {@code Settings} parameters used in tax calculations. All parameters are editable
+   * but none can be removed once set.
    */
   public static Settings update(Map<String, Object> params, RequestOptions options)
       throws StripeException {
@@ -91,16 +91,16 @@ public class Settings extends ApiResource {
   }
 
   /**
-   * Updates Tax <code>Settings</code> parameters used in tax calculations. All parameters are
-   * editable but none can be removed once set.
+   * Updates Tax {@code Settings} parameters used in tax calculations. All parameters are editable
+   * but none can be removed once set.
    */
   public static Settings update(SettingsUpdateParams params) throws StripeException {
     return update(params, (RequestOptions) null);
   }
 
   /**
-   * Updates Tax <code>Settings</code> parameters used in tax calculations. All parameters are
-   * editable but none can be removed once set.
+   * Updates Tax {@code Settings} parameters used in tax calculations. All parameters are editable
+   * but none can be removed once set.
    */
   public static Settings update(SettingsUpdateParams params, RequestOptions options)
       throws StripeException {

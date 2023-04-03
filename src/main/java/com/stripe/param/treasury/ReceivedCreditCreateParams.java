@@ -11,13 +11,14 @@ import lombok.Getter;
 
 @Getter
 public class ReceivedCreditCreateParams extends ApiRequestParams {
-  /** Amount (in cents) to be transferred. */
+  /** <strong>Required.</strong> Amount (in cents) to be transferred. */
   @SerializedName("amount")
   Long amount;
 
   /**
-   * Three-letter <a href="https://www.iso.org/iso-4217-currency-codes.html">ISO currency code</a>,
-   * in lowercase. Must be a <a href="https://stripe.com/docs/currencies">supported currency</a>.
+   * <strong>Required.</strong> Three-letter <a
+   * href="https://www.iso.org/iso-4217-currency-codes.html">ISO currency code</a>, in lowercase.
+   * Must be a <a href="https://stripe.com/docs/currencies">supported currency</a>.
    */
   @SerializedName("currency")
   String currency;
@@ -39,7 +40,7 @@ public class ReceivedCreditCreateParams extends ApiRequestParams {
   @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
   Map<String, Object> extraParams;
 
-  /** The FinancialAccount to send funds to. */
+  /** <strong>Required.</strong> The FinancialAccount to send funds to. */
   @SerializedName("financial_account")
   String financialAccount;
 
@@ -47,7 +48,7 @@ public class ReceivedCreditCreateParams extends ApiRequestParams {
   @SerializedName("initiating_payment_method_details")
   InitiatingPaymentMethodDetails initiatingPaymentMethodDetails;
 
-  /** The rails used for the object. */
+  /** <strong>Required.</strong> The rails used for the object. */
   @SerializedName("network")
   Network network;
 
@@ -113,16 +114,16 @@ public class ReceivedCreditCreateParams extends ApiRequestParams {
           this.networkDetails);
     }
 
-    /** Amount (in cents) to be transferred. */
+    /** <strong>Required.</strong> Amount (in cents) to be transferred. */
     public Builder setAmount(Long amount) {
       this.amount = amount;
       return this;
     }
 
     /**
-     * Three-letter <a href="https://www.iso.org/iso-4217-currency-codes.html">ISO currency
-     * code</a>, in lowercase. Must be a <a href="https://stripe.com/docs/currencies">supported
-     * currency</a>.
+     * <strong>Required.</strong> Three-letter <a
+     * href="https://www.iso.org/iso-4217-currency-codes.html">ISO currency code</a>, in lowercase.
+     * Must be a <a href="https://stripe.com/docs/currencies">supported currency</a>.
      */
     public Builder setCurrency(String currency) {
       this.currency = currency;
@@ -187,7 +188,7 @@ public class ReceivedCreditCreateParams extends ApiRequestParams {
       return this;
     }
 
-    /** The FinancialAccount to send funds to. */
+    /** <strong>Required.</strong> The FinancialAccount to send funds to. */
     public Builder setFinancialAccount(String financialAccount) {
       this.financialAccount = financialAccount;
       return this;
@@ -200,7 +201,7 @@ public class ReceivedCreditCreateParams extends ApiRequestParams {
       return this;
     }
 
-    /** The rails used for the object. */
+    /** <strong>Required.</strong> The rails used for the object. */
     public Builder setNetwork(ReceivedCreditCreateParams.Network network) {
       this.network = network;
       return this;
@@ -224,7 +225,7 @@ public class ReceivedCreditCreateParams extends ApiRequestParams {
     @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
     Map<String, Object> extraParams;
 
-    /** The source type. */
+    /** <strong>Required.</strong> The source type. */
     @SerializedName("type")
     Type type;
 
@@ -284,7 +285,7 @@ public class ReceivedCreditCreateParams extends ApiRequestParams {
         return this;
       }
 
-      /** The source type. */
+      /** <strong>Required.</strong> The source type. */
       public Builder setType(ReceivedCreditCreateParams.InitiatingPaymentMethodDetails.Type type) {
         this.type = type;
         return this;
@@ -429,7 +430,7 @@ public class ReceivedCreditCreateParams extends ApiRequestParams {
     @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
     Map<String, Object> extraParams;
 
-    /** The type of flow that originated the ReceivedCredit. */
+    /** <strong>Required.</strong> The type of flow that originated the ReceivedCredit. */
     @SerializedName("type")
     Type type;
 
@@ -488,7 +489,7 @@ public class ReceivedCreditCreateParams extends ApiRequestParams {
         return this;
       }
 
-      /** The type of flow that originated the ReceivedCredit. */
+      /** <strong>Required.</strong> The type of flow that originated the ReceivedCredit. */
       public Builder setType(ReceivedCreditCreateParams.NetworkDetails.Type type) {
         this.type = type;
         return this;

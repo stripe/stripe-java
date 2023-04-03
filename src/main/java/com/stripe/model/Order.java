@@ -293,24 +293,24 @@ public class Order extends ApiResource implements HasId, MetadataStore<Order> {
     return ApiResource.request(ApiResource.RequestMethod.POST, url, params, Order.class, options);
   }
 
-  /** Creates a new <code>open</code> order object. */
+  /** Creates a new {@code open} order object. */
   public static Order create(Map<String, Object> params) throws StripeException {
     return create(params, (RequestOptions) null);
   }
 
-  /** Creates a new <code>open</code> order object. */
+  /** Creates a new {@code open} order object. */
   public static Order create(Map<String, Object> params, RequestOptions options)
       throws StripeException {
     String url = ApiResource.fullUrl(Stripe.getApiBase(), options, "/v1/orders");
     return ApiResource.request(ApiResource.RequestMethod.POST, url, params, Order.class, options);
   }
 
-  /** Creates a new <code>open</code> order object. */
+  /** Creates a new {@code open} order object. */
   public static Order create(OrderCreateParams params) throws StripeException {
     return create(params, (RequestOptions) null);
   }
 
-  /** Creates a new <code>open</code> order object. */
+  /** Creates a new {@code open} order object. */
   public static Order create(OrderCreateParams params, RequestOptions options)
       throws StripeException {
     String url = ApiResource.fullUrl(Stripe.getApiBase(), options, "/v1/orders");
@@ -414,22 +414,22 @@ public class Order extends ApiResource implements HasId, MetadataStore<Order> {
         ApiResource.RequestMethod.GET, url, params, LineItemCollection.class, options);
   }
 
-  /** Reopens a <code>submitted</code> order. */
+  /** Reopens a {@code submitted} order. */
   public Order reopen() throws StripeException {
     return reopen((Map<String, Object>) null, (RequestOptions) null);
   }
 
-  /** Reopens a <code>submitted</code> order. */
+  /** Reopens a {@code submitted} order. */
   public Order reopen(RequestOptions options) throws StripeException {
     return reopen((Map<String, Object>) null, options);
   }
 
-  /** Reopens a <code>submitted</code> order. */
+  /** Reopens a {@code submitted} order. */
   public Order reopen(Map<String, Object> params) throws StripeException {
     return reopen(params, (RequestOptions) null);
   }
 
-  /** Reopens a <code>submitted</code> order. */
+  /** Reopens a {@code submitted} order. */
   public Order reopen(Map<String, Object> params, RequestOptions options) throws StripeException {
     String url =
         ApiResource.fullUrl(
@@ -439,12 +439,12 @@ public class Order extends ApiResource implements HasId, MetadataStore<Order> {
     return ApiResource.request(ApiResource.RequestMethod.POST, url, params, Order.class, options);
   }
 
-  /** Reopens a <code>submitted</code> order. */
+  /** Reopens a {@code submitted} order. */
   public Order reopen(OrderReopenParams params) throws StripeException {
     return reopen(params, (RequestOptions) null);
   }
 
-  /** Reopens a <code>submitted</code> order. */
+  /** Reopens a {@code submitted} order. */
   public Order reopen(OrderReopenParams params, RequestOptions options) throws StripeException {
     String url =
         ApiResource.fullUrl(
@@ -499,9 +499,9 @@ public class Order extends ApiResource implements HasId, MetadataStore<Order> {
   }
 
   /**
-   * Submitting an Order transitions the status to <code>processing</code> and creates a
-   * PaymentIntent object so the order can be paid. If the Order has an <code>amount_total</code> of
-   * 0, no PaymentIntent object will be created. Once the order is submitted, its contents cannot be
+   * Submitting an Order transitions the status to {@code processing} and creates a PaymentIntent
+   * object so the order can be paid. If the Order has an {@code amount_total} of 0, no
+   * PaymentIntent object will be created. Once the order is submitted, its contents cannot be
    * changed, unless the <a href="https://stripe.com/docs/api#reopen_order">reopen</a> method is
    * called.
    */
@@ -510,9 +510,9 @@ public class Order extends ApiResource implements HasId, MetadataStore<Order> {
   }
 
   /**
-   * Submitting an Order transitions the status to <code>processing</code> and creates a
-   * PaymentIntent object so the order can be paid. If the Order has an <code>amount_total</code> of
-   * 0, no PaymentIntent object will be created. Once the order is submitted, its contents cannot be
+   * Submitting an Order transitions the status to {@code processing} and creates a PaymentIntent
+   * object so the order can be paid. If the Order has an {@code amount_total} of 0, no
+   * PaymentIntent object will be created. Once the order is submitted, its contents cannot be
    * changed, unless the <a href="https://stripe.com/docs/api#reopen_order">reopen</a> method is
    * called.
    */
@@ -526,9 +526,9 @@ public class Order extends ApiResource implements HasId, MetadataStore<Order> {
   }
 
   /**
-   * Submitting an Order transitions the status to <code>processing</code> and creates a
-   * PaymentIntent object so the order can be paid. If the Order has an <code>amount_total</code> of
-   * 0, no PaymentIntent object will be created. Once the order is submitted, its contents cannot be
+   * Submitting an Order transitions the status to {@code processing} and creates a PaymentIntent
+   * object so the order can be paid. If the Order has an {@code amount_total} of 0, no
+   * PaymentIntent object will be created. Once the order is submitted, its contents cannot be
    * changed, unless the <a href="https://stripe.com/docs/api#reopen_order">reopen</a> method is
    * called.
    */
@@ -537,9 +537,9 @@ public class Order extends ApiResource implements HasId, MetadataStore<Order> {
   }
 
   /**
-   * Submitting an Order transitions the status to <code>processing</code> and creates a
-   * PaymentIntent object so the order can be paid. If the Order has an <code>amount_total</code> of
-   * 0, no PaymentIntent object will be created. Once the order is submitted, its contents cannot be
+   * Submitting an Order transitions the status to {@code processing} and creates a PaymentIntent
+   * object so the order can be paid. If the Order has an {@code amount_total} of 0, no
+   * PaymentIntent object will be created. Once the order is submitted, its contents cannot be
    * changed, unless the <a href="https://stripe.com/docs/api#reopen_order">reopen</a> method is
    * called.
    */

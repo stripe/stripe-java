@@ -2677,7 +2677,7 @@ public class TokenCreateParams extends ApiRequestParams {
 
       @Getter
       public static class Dob {
-        /** The day of birth, between 1 and 31. */
+        /** <strong>Required.</strong> The day of birth, between 1 and 31. */
         @SerializedName("day")
         Long day;
 
@@ -2691,11 +2691,11 @@ public class TokenCreateParams extends ApiRequestParams {
         @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
         Map<String, Object> extraParams;
 
-        /** The month of birth, between 1 and 12. */
+        /** <strong>Required.</strong> The month of birth, between 1 and 12. */
         @SerializedName("month")
         Long month;
 
-        /** The four-digit year of birth. */
+        /** <strong>Required.</strong> The four-digit year of birth. */
         @SerializedName("year")
         Long year;
 
@@ -2725,7 +2725,7 @@ public class TokenCreateParams extends ApiRequestParams {
                 this.day, this.extraParams, this.month, this.year);
           }
 
-          /** The day of birth, between 1 and 31. */
+          /** <strong>Required.</strong> The day of birth, between 1 and 31. */
           public Builder setDay(Long day) {
             this.day = day;
             return this;
@@ -2759,13 +2759,13 @@ public class TokenCreateParams extends ApiRequestParams {
             return this;
           }
 
-          /** The month of birth, between 1 and 12. */
+          /** <strong>Required.</strong> The month of birth, between 1 and 12. */
           public Builder setMonth(Long month) {
             this.month = month;
             return this;
           }
 
-          /** The four-digit year of birth. */
+          /** <strong>Required.</strong> The four-digit year of birth. */
           public Builder setYear(Long year) {
             this.year = year;
             return this;
@@ -3298,7 +3298,10 @@ public class TokenCreateParams extends ApiRequestParams {
     @SerializedName("account_holder_type")
     AccountHolderType accountHolderType;
 
-    /** The account number for the bank account, in string form. Must be a checking account. */
+    /**
+     * <strong>Required.</strong> The account number for the bank account, in string form. Must be a
+     * checking account.
+     */
     @SerializedName("account_number")
     String accountNumber;
 
@@ -3309,7 +3312,7 @@ public class TokenCreateParams extends ApiRequestParams {
     @SerializedName("account_type")
     AccountType accountType;
 
-    /** The country in which the bank account is located. */
+    /** <strong>Required.</strong> The country in which the bank account is located. */
     @SerializedName("country")
     String country;
 
@@ -3410,7 +3413,10 @@ public class TokenCreateParams extends ApiRequestParams {
         return this;
       }
 
-      /** The account number for the bank account, in string form. Must be a checking account. */
+      /**
+       * <strong>Required.</strong> The account number for the bank account, in string form. Must be
+       * a checking account.
+       */
       public Builder setAccountNumber(String accountNumber) {
         this.accountNumber = accountNumber;
         return this;
@@ -3425,7 +3431,7 @@ public class TokenCreateParams extends ApiRequestParams {
         return this;
       }
 
-      /** The country in which the bank account is located. */
+      /** <strong>Required.</strong> The country in which the bank account is located. */
       public Builder setCountry(String country) {
         this.country = country;
         return this;
@@ -3541,9 +3547,11 @@ public class TokenCreateParams extends ApiRequestParams {
     @SerializedName("cvc")
     String cvc;
 
+    /** <strong>Required.</strong> */
     @SerializedName("exp_month")
     String expMonth;
 
+    /** <strong>Required.</strong> */
     @SerializedName("exp_year")
     String expYear;
 
@@ -3559,6 +3567,7 @@ public class TokenCreateParams extends ApiRequestParams {
     @SerializedName("name")
     String name;
 
+    /** <strong>Required.</strong> */
     @SerializedName("number")
     String number;
 
@@ -3680,11 +3689,13 @@ public class TokenCreateParams extends ApiRequestParams {
         return this;
       }
 
+      /** <strong>Required.</strong> */
       public Builder setExpMonth(String expMonth) {
         this.expMonth = expMonth;
         return this;
       }
 
+      /** <strong>Required.</strong> */
       public Builder setExpYear(String expYear) {
         this.expYear = expYear;
         return this;
@@ -3721,6 +3732,7 @@ public class TokenCreateParams extends ApiRequestParams {
         return this;
       }
 
+      /** <strong>Required.</strong> */
       public Builder setNumber(String number) {
         this.number = number;
         return this;
@@ -3730,7 +3742,7 @@ public class TokenCreateParams extends ApiRequestParams {
 
   @Getter
   public static class CvcUpdate {
-    /** The CVC value, in string form. */
+    /** <strong>Required.</strong> The CVC value, in string form. */
     @SerializedName("cvc")
     String cvc;
 
@@ -3762,7 +3774,7 @@ public class TokenCreateParams extends ApiRequestParams {
         return new TokenCreateParams.CvcUpdate(this.cvc, this.extraParams);
       }
 
-      /** The CVC value, in string form. */
+      /** <strong>Required.</strong> The CVC value, in string form. */
       public Builder setCvc(String cvc) {
         this.cvc = cvc;
         return this;
@@ -4860,7 +4872,7 @@ public class TokenCreateParams extends ApiRequestParams {
 
     @Getter
     public static class Dob {
-      /** The day of birth, between 1 and 31. */
+      /** <strong>Required.</strong> The day of birth, between 1 and 31. */
       @SerializedName("day")
       Long day;
 
@@ -4873,11 +4885,11 @@ public class TokenCreateParams extends ApiRequestParams {
       @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
       Map<String, Object> extraParams;
 
-      /** The month of birth, between 1 and 12. */
+      /** <strong>Required.</strong> The month of birth, between 1 and 12. */
       @SerializedName("month")
       Long month;
 
-      /** The four-digit year of birth. */
+      /** <strong>Required.</strong> The four-digit year of birth. */
       @SerializedName("year")
       Long year;
 
@@ -4907,7 +4919,7 @@ public class TokenCreateParams extends ApiRequestParams {
               this.day, this.extraParams, this.month, this.year);
         }
 
-        /** The day of birth, between 1 and 31. */
+        /** <strong>Required.</strong> The day of birth, between 1 and 31. */
         public Builder setDay(Long day) {
           this.day = day;
           return this;
@@ -4939,13 +4951,13 @@ public class TokenCreateParams extends ApiRequestParams {
           return this;
         }
 
-        /** The month of birth, between 1 and 12. */
+        /** <strong>Required.</strong> The month of birth, between 1 and 12. */
         public Builder setMonth(Long month) {
           this.month = month;
           return this;
         }
 
-        /** The four-digit year of birth. */
+        /** <strong>Required.</strong> The four-digit year of birth. */
         public Builder setYear(Long year) {
           this.year = year;
           return this;

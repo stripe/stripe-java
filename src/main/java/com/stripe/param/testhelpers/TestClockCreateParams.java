@@ -24,7 +24,7 @@ public class TestClockCreateParams extends ApiRequestParams {
   @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
   Map<String, Object> extraParams;
 
-  /** The initial frozen time for this test clock. */
+  /** <strong>Required.</strong> The initial frozen time for this test clock. */
   @SerializedName("frozen_time")
   Long frozenTime;
 
@@ -110,7 +110,7 @@ public class TestClockCreateParams extends ApiRequestParams {
       return this;
     }
 
-    /** The initial frozen time for this test clock. */
+    /** <strong>Required.</strong> The initial frozen time for this test clock. */
     public Builder setFrozenTime(Long frozenTime) {
       this.frozenTime = frozenTime;
       return this;

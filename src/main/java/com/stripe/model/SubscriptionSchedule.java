@@ -292,7 +292,7 @@ public class SubscriptionSchedule extends ApiResource
   /**
    * Cancels a subscription schedule and its associated subscription immediately (if the
    * subscription schedule has an active subscription). A subscription schedule can only be canceled
-   * if its status is <code>not_started</code> or <code>active</code>.
+   * if its status is {@code not_started} or {@code active}.
    */
   public SubscriptionSchedule cancel() throws StripeException {
     return cancel((Map<String, Object>) null, (RequestOptions) null);
@@ -301,7 +301,7 @@ public class SubscriptionSchedule extends ApiResource
   /**
    * Cancels a subscription schedule and its associated subscription immediately (if the
    * subscription schedule has an active subscription). A subscription schedule can only be canceled
-   * if its status is <code>not_started</code> or <code>active</code>.
+   * if its status is {@code not_started} or {@code active}.
    */
   public SubscriptionSchedule cancel(RequestOptions options) throws StripeException {
     return cancel((Map<String, Object>) null, options);
@@ -310,7 +310,7 @@ public class SubscriptionSchedule extends ApiResource
   /**
    * Cancels a subscription schedule and its associated subscription immediately (if the
    * subscription schedule has an active subscription). A subscription schedule can only be canceled
-   * if its status is <code>not_started</code> or <code>active</code>.
+   * if its status is {@code not_started} or {@code active}.
    */
   public SubscriptionSchedule cancel(Map<String, Object> params) throws StripeException {
     return cancel(params, (RequestOptions) null);
@@ -319,7 +319,7 @@ public class SubscriptionSchedule extends ApiResource
   /**
    * Cancels a subscription schedule and its associated subscription immediately (if the
    * subscription schedule has an active subscription). A subscription schedule can only be canceled
-   * if its status is <code>not_started</code> or <code>active</code>.
+   * if its status is {@code not_started} or {@code active}.
    */
   public SubscriptionSchedule cancel(Map<String, Object> params, RequestOptions options)
       throws StripeException {
@@ -336,7 +336,7 @@ public class SubscriptionSchedule extends ApiResource
   /**
    * Cancels a subscription schedule and its associated subscription immediately (if the
    * subscription schedule has an active subscription). A subscription schedule can only be canceled
-   * if its status is <code>not_started</code> or <code>active</code>.
+   * if its status is {@code not_started} or {@code active}.
    */
   public SubscriptionSchedule cancel(SubscriptionScheduleCancelParams params)
       throws StripeException {
@@ -346,7 +346,7 @@ public class SubscriptionSchedule extends ApiResource
   /**
    * Cancels a subscription schedule and its associated subscription immediately (if the
    * subscription schedule has an active subscription). A subscription schedule can only be canceled
-   * if its status is <code>not_started</code> or <code>active</code>.
+   * if its status is {@code not_started} or {@code active}.
    */
   public SubscriptionSchedule cancel(
       SubscriptionScheduleCancelParams params, RequestOptions options) throws StripeException {
@@ -430,9 +430,9 @@ public class SubscriptionSchedule extends ApiResource
   /**
    * Releases the subscription schedule immediately, which will stop scheduling of its phases, but
    * leave any existing subscription in place. A schedule can only be released if its status is
-   * <code>not_started</code> or <code>active</code>. If the subscription schedule is currently
-   * associated with a subscription, releasing it will remove its <code>subscription</code> property
-   * and set the subscription’s ID to the <code>released_subscription</code> property.
+   * {@code not_started} or {@code active}. If the subscription schedule is currently associated
+   * with a subscription, releasing it will remove its {@code subscription} property and set the
+   * subscription’s ID to the {@code released_subscription} property.
    */
   public SubscriptionSchedule release() throws StripeException {
     return release((Map<String, Object>) null, (RequestOptions) null);
@@ -441,9 +441,9 @@ public class SubscriptionSchedule extends ApiResource
   /**
    * Releases the subscription schedule immediately, which will stop scheduling of its phases, but
    * leave any existing subscription in place. A schedule can only be released if its status is
-   * <code>not_started</code> or <code>active</code>. If the subscription schedule is currently
-   * associated with a subscription, releasing it will remove its <code>subscription</code> property
-   * and set the subscription’s ID to the <code>released_subscription</code> property.
+   * {@code not_started} or {@code active}. If the subscription schedule is currently associated
+   * with a subscription, releasing it will remove its {@code subscription} property and set the
+   * subscription’s ID to the {@code released_subscription} property.
    */
   public SubscriptionSchedule release(RequestOptions options) throws StripeException {
     return release((Map<String, Object>) null, options);
@@ -452,9 +452,9 @@ public class SubscriptionSchedule extends ApiResource
   /**
    * Releases the subscription schedule immediately, which will stop scheduling of its phases, but
    * leave any existing subscription in place. A schedule can only be released if its status is
-   * <code>not_started</code> or <code>active</code>. If the subscription schedule is currently
-   * associated with a subscription, releasing it will remove its <code>subscription</code> property
-   * and set the subscription’s ID to the <code>released_subscription</code> property.
+   * {@code not_started} or {@code active}. If the subscription schedule is currently associated
+   * with a subscription, releasing it will remove its {@code subscription} property and set the
+   * subscription’s ID to the {@code released_subscription} property.
    */
   public SubscriptionSchedule release(Map<String, Object> params) throws StripeException {
     return release(params, (RequestOptions) null);
@@ -463,9 +463,9 @@ public class SubscriptionSchedule extends ApiResource
   /**
    * Releases the subscription schedule immediately, which will stop scheduling of its phases, but
    * leave any existing subscription in place. A schedule can only be released if its status is
-   * <code>not_started</code> or <code>active</code>. If the subscription schedule is currently
-   * associated with a subscription, releasing it will remove its <code>subscription</code> property
-   * and set the subscription’s ID to the <code>released_subscription</code> property.
+   * {@code not_started} or {@code active}. If the subscription schedule is currently associated
+   * with a subscription, releasing it will remove its {@code subscription} property and set the
+   * subscription’s ID to the {@code released_subscription} property.
    */
   public SubscriptionSchedule release(Map<String, Object> params, RequestOptions options)
       throws StripeException {
@@ -482,9 +482,9 @@ public class SubscriptionSchedule extends ApiResource
   /**
    * Releases the subscription schedule immediately, which will stop scheduling of its phases, but
    * leave any existing subscription in place. A schedule can only be released if its status is
-   * <code>not_started</code> or <code>active</code>. If the subscription schedule is currently
-   * associated with a subscription, releasing it will remove its <code>subscription</code> property
-   * and set the subscription’s ID to the <code>released_subscription</code> property.
+   * {@code not_started} or {@code active}. If the subscription schedule is currently associated
+   * with a subscription, releasing it will remove its {@code subscription} property and set the
+   * subscription’s ID to the {@code released_subscription} property.
    */
   public SubscriptionSchedule release(SubscriptionScheduleReleaseParams params)
       throws StripeException {
@@ -494,9 +494,9 @@ public class SubscriptionSchedule extends ApiResource
   /**
    * Releases the subscription schedule immediately, which will stop scheduling of its phases, but
    * leave any existing subscription in place. A schedule can only be released if its status is
-   * <code>not_started</code> or <code>active</code>. If the subscription schedule is currently
-   * associated with a subscription, releasing it will remove its <code>subscription</code> property
-   * and set the subscription’s ID to the <code>released_subscription</code> property.
+   * {@code not_started} or {@code active}. If the subscription schedule is currently associated
+   * with a subscription, releasing it will remove its {@code subscription} property and set the
+   * subscription’s ID to the {@code released_subscription} property.
    */
   public SubscriptionSchedule release(
       SubscriptionScheduleReleaseParams params, RequestOptions options) throws StripeException {

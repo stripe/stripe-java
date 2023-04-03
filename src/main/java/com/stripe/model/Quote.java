@@ -560,20 +560,18 @@ public class Quote extends ApiResource implements HasId, MetadataStore<Quote> {
   }
 
   /**
-   * A quote models prices and services for a customer. Default options for <code>header</code>,
-   * <code>description</code>, <code>footer</code>, and <code>expires_at</code> can be set in the
-   * dashboard via the <a href="https://dashboard.stripe.com/settings/billing/quote">quote
-   * template</a>.
+   * A quote models prices and services for a customer. Default options for {@code header}, {@code
+   * description}, {@code footer}, and {@code expires_at} can be set in the dashboard via the <a
+   * href="https://dashboard.stripe.com/settings/billing/quote">quote template</a>.
    */
   public static Quote create(Map<String, Object> params) throws StripeException {
     return create(params, (RequestOptions) null);
   }
 
   /**
-   * A quote models prices and services for a customer. Default options for <code>header</code>,
-   * <code>description</code>, <code>footer</code>, and <code>expires_at</code> can be set in the
-   * dashboard via the <a href="https://dashboard.stripe.com/settings/billing/quote">quote
-   * template</a>.
+   * A quote models prices and services for a customer. Default options for {@code header}, {@code
+   * description}, {@code footer}, and {@code expires_at} can be set in the dashboard via the <a
+   * href="https://dashboard.stripe.com/settings/billing/quote">quote template</a>.
    */
   public static Quote create(Map<String, Object> params, RequestOptions options)
       throws StripeException {
@@ -582,20 +580,18 @@ public class Quote extends ApiResource implements HasId, MetadataStore<Quote> {
   }
 
   /**
-   * A quote models prices and services for a customer. Default options for <code>header</code>,
-   * <code>description</code>, <code>footer</code>, and <code>expires_at</code> can be set in the
-   * dashboard via the <a href="https://dashboard.stripe.com/settings/billing/quote">quote
-   * template</a>.
+   * A quote models prices and services for a customer. Default options for {@code header}, {@code
+   * description}, {@code footer}, and {@code expires_at} can be set in the dashboard via the <a
+   * href="https://dashboard.stripe.com/settings/billing/quote">quote template</a>.
    */
   public static Quote create(QuoteCreateParams params) throws StripeException {
     return create(params, (RequestOptions) null);
   }
 
   /**
-   * A quote models prices and services for a customer. Default options for <code>header</code>,
-   * <code>description</code>, <code>footer</code>, and <code>expires_at</code> can be set in the
-   * dashboard via the <a href="https://dashboard.stripe.com/settings/billing/quote">quote
-   * template</a>.
+   * A quote models prices and services for a customer. Default options for {@code header}, {@code
+   * description}, {@code footer}, and {@code expires_at} can be set in the dashboard via the <a
+   * href="https://dashboard.stripe.com/settings/billing/quote">quote template</a>.
    */
   public static Quote create(QuoteCreateParams params, RequestOptions options)
       throws StripeException {

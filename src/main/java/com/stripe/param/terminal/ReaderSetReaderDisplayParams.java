@@ -28,7 +28,7 @@ public class ReaderSetReaderDisplayParams extends ApiRequestParams {
   @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
   Map<String, Object> extraParams;
 
-  /** Type. */
+  /** <strong>Required.</strong> Type */
   @SerializedName("type")
   Type type;
 
@@ -116,7 +116,7 @@ public class ReaderSetReaderDisplayParams extends ApiRequestParams {
       return this;
     }
 
-    /** Type. */
+    /** <strong>Required.</strong> Type */
     public Builder setType(ReaderSetReaderDisplayParams.Type type) {
       this.type = type;
       return this;
@@ -126,9 +126,9 @@ public class ReaderSetReaderDisplayParams extends ApiRequestParams {
   @Getter
   public static class Cart {
     /**
-     * Three-letter <a href="https://www.iso.org/iso-4217-currency-codes.html">ISO currency
-     * code</a>, in lowercase. Must be a <a href="https://stripe.com/docs/currencies">supported
-     * currency</a>.
+     * <strong>Required.</strong> Three-letter <a
+     * href="https://www.iso.org/iso-4217-currency-codes.html">ISO currency code</a>, in lowercase.
+     * Must be a <a href="https://stripe.com/docs/currencies">supported currency</a>.
      */
     @SerializedName("currency")
     String currency;
@@ -142,7 +142,7 @@ public class ReaderSetReaderDisplayParams extends ApiRequestParams {
     @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
     Map<String, Object> extraParams;
 
-    /** Array of line items that were purchased. */
+    /** <strong>Required.</strong> Array of line items that were purchased. */
     @SerializedName("line_items")
     List<ReaderSetReaderDisplayParams.Cart.LineItem> lineItems;
 
@@ -150,7 +150,7 @@ public class ReaderSetReaderDisplayParams extends ApiRequestParams {
     @SerializedName("tax")
     Long tax;
 
-    /** Total balance of cart due in cents. */
+    /** <strong>Required.</strong> Total balance of cart due in cents. */
     @SerializedName("total")
     Long total;
 
@@ -189,9 +189,9 @@ public class ReaderSetReaderDisplayParams extends ApiRequestParams {
       }
 
       /**
-       * Three-letter <a href="https://www.iso.org/iso-4217-currency-codes.html">ISO currency
-       * code</a>, in lowercase. Must be a <a href="https://stripe.com/docs/currencies">supported
-       * currency</a>.
+       * <strong>Required.</strong> Three-letter <a
+       * href="https://www.iso.org/iso-4217-currency-codes.html">ISO currency code</a>, in
+       * lowercase. Must be a <a href="https://stripe.com/docs/currencies">supported currency</a>.
        */
       public Builder setCurrency(String currency) {
         this.currency = currency;
@@ -256,7 +256,7 @@ public class ReaderSetReaderDisplayParams extends ApiRequestParams {
         return this;
       }
 
-      /** Total balance of cart due in cents. */
+      /** <strong>Required.</strong> Total balance of cart due in cents. */
       public Builder setTotal(Long total) {
         this.total = total;
         return this;
@@ -265,11 +265,11 @@ public class ReaderSetReaderDisplayParams extends ApiRequestParams {
 
     @Getter
     public static class LineItem {
-      /** The price of the item in cents. */
+      /** <strong>Required.</strong> The price of the item in cents. */
       @SerializedName("amount")
       Long amount;
 
-      /** The description or name of the item. */
+      /** <strong>Required.</strong> The description or name of the item. */
       @SerializedName("description")
       String description;
 
@@ -282,7 +282,7 @@ public class ReaderSetReaderDisplayParams extends ApiRequestParams {
       @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
       Map<String, Object> extraParams;
 
-      /** The quantity of the line item being purchased. */
+      /** <strong>Required.</strong> The quantity of the line item being purchased. */
       @SerializedName("quantity")
       Long quantity;
 
@@ -313,13 +313,13 @@ public class ReaderSetReaderDisplayParams extends ApiRequestParams {
               this.amount, this.description, this.extraParams, this.quantity);
         }
 
-        /** The price of the item in cents. */
+        /** <strong>Required.</strong> The price of the item in cents. */
         public Builder setAmount(Long amount) {
           this.amount = amount;
           return this;
         }
 
-        /** The description or name of the item. */
+        /** <strong>Required.</strong> The description or name of the item. */
         public Builder setDescription(String description) {
           this.description = description;
           return this;
@@ -353,7 +353,7 @@ public class ReaderSetReaderDisplayParams extends ApiRequestParams {
           return this;
         }
 
-        /** The quantity of the line item being purchased. */
+        /** <strong>Required.</strong> The quantity of the line item being purchased. */
         public Builder setQuantity(Long quantity) {
           this.quantity = quantity;
           return this;

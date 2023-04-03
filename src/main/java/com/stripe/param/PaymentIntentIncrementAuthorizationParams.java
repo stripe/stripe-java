@@ -12,8 +12,8 @@ import lombok.Getter;
 @Getter
 public class PaymentIntentIncrementAuthorizationParams extends ApiRequestParams {
   /**
-   * The updated total amount you intend to collect from the cardholder. This amount must be greater
-   * than the currently authorized amount.
+   * <strong>Required.</strong> The updated total amount you intend to collect from the cardholder.
+   * This amount must be greater than the currently authorized amount.
    */
   @SerializedName("amount")
   Long amount;
@@ -123,8 +123,8 @@ public class PaymentIntentIncrementAuthorizationParams extends ApiRequestParams 
     }
 
     /**
-     * The updated total amount you intend to collect from the cardholder. This amount must be
-     * greater than the currently authorized amount.
+     * <strong>Required.</strong> The updated total amount you intend to collect from the
+     * cardholder. This amount must be greater than the currently authorized amount.
      */
     public Builder setAmount(Long amount) {
       this.amount = amount;

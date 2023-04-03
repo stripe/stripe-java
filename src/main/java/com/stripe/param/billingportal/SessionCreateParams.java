@@ -20,7 +20,7 @@ public class SessionCreateParams extends ApiRequestParams {
   @SerializedName("configuration")
   String configuration;
 
-  /** The ID of an existing customer. */
+  /** <strong>Required.</strong> The ID of an existing customer. */
   @SerializedName("customer")
   String customer;
 
@@ -135,7 +135,7 @@ public class SessionCreateParams extends ApiRequestParams {
       return this;
     }
 
-    /** The ID of an existing customer. */
+    /** <strong>Required.</strong> The ID of an existing customer. */
     public Builder setCustomer(String customer) {
       this.customer = customer;
       return this;
@@ -255,7 +255,7 @@ public class SessionCreateParams extends ApiRequestParams {
     @SerializedName("subscription_cancel")
     SubscriptionCancel subscriptionCancel;
 
-    /** Type of flow that the customer will go through. */
+    /** <strong>Required.</strong> Type of flow that the customer will go through. */
     @SerializedName("type")
     Type type;
 
@@ -329,7 +329,7 @@ public class SessionCreateParams extends ApiRequestParams {
         return this;
       }
 
-      /** Type of flow that the customer will go through. */
+      /** <strong>Required.</strong> Type of flow that the customer will go through. */
       public Builder setType(SessionCreateParams.FlowData.Type type) {
         this.type = type;
         return this;
@@ -355,7 +355,7 @@ public class SessionCreateParams extends ApiRequestParams {
       @SerializedName("redirect")
       Redirect redirect;
 
-      /** The specified behavior after the flow is completed. */
+      /** <strong>Required.</strong> The specified behavior after the flow is completed. */
       @SerializedName("type")
       Type type;
 
@@ -430,7 +430,7 @@ public class SessionCreateParams extends ApiRequestParams {
           return this;
         }
 
-        /** The specified behavior after the flow is completed. */
+        /** <strong>Required.</strong> The specified behavior after the flow is completed. */
         public Builder setType(SessionCreateParams.FlowData.AfterCompletion.Type type) {
           this.type = type;
           return this;
@@ -523,7 +523,10 @@ public class SessionCreateParams extends ApiRequestParams {
         @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
         Map<String, Object> extraParams;
 
-        /** The URL the customer will be redirected to after the flow is completed. */
+        /**
+         * <strong>Required.</strong> The URL the customer will be redirected to after the flow is
+         * completed.
+         */
         @SerializedName("return_url")
         String returnUrl;
 
@@ -575,7 +578,10 @@ public class SessionCreateParams extends ApiRequestParams {
             return this;
           }
 
-          /** The URL the customer will be redirected to after the flow is completed. */
+          /**
+           * <strong>Required.</strong> The URL the customer will be redirected to after the flow is
+           * completed.
+           */
           public Builder setReturnUrl(String returnUrl) {
             this.returnUrl = returnUrl;
             return this;
@@ -613,7 +619,7 @@ public class SessionCreateParams extends ApiRequestParams {
       @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
       Map<String, Object> extraParams;
 
-      /** The ID of the subscription to be canceled. */
+      /** <strong>Required.</strong> The ID of the subscription to be canceled. */
       @SerializedName("subscription")
       String subscription;
 
@@ -665,7 +671,7 @@ public class SessionCreateParams extends ApiRequestParams {
           return this;
         }
 
-        /** The ID of the subscription to be canceled. */
+        /** <strong>Required.</strong> The ID of the subscription to be canceled. */
         public Builder setSubscription(String subscription) {
           this.subscription = subscription;
           return this;

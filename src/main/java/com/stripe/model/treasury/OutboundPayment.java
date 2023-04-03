@@ -525,32 +525,32 @@ public class OutboundPayment extends ApiResource implements HasId {
     }
 
     /**
-     * Transitions a test mode created OutboundPayment to the <code>failed</code> status. The
-     * OutboundPayment must already be in the <code>processing</code> state.
+     * Transitions a test mode created OutboundPayment to the {@code failed} status. The
+     * OutboundPayment must already be in the {@code processing} state.
      */
     public OutboundPayment fail() throws StripeException {
       return fail((Map<String, Object>) null, (RequestOptions) null);
     }
 
     /**
-     * Transitions a test mode created OutboundPayment to the <code>failed</code> status. The
-     * OutboundPayment must already be in the <code>processing</code> state.
+     * Transitions a test mode created OutboundPayment to the {@code failed} status. The
+     * OutboundPayment must already be in the {@code processing} state.
      */
     public OutboundPayment fail(RequestOptions options) throws StripeException {
       return fail((Map<String, Object>) null, options);
     }
 
     /**
-     * Transitions a test mode created OutboundPayment to the <code>failed</code> status. The
-     * OutboundPayment must already be in the <code>processing</code> state.
+     * Transitions a test mode created OutboundPayment to the {@code failed} status. The
+     * OutboundPayment must already be in the {@code processing} state.
      */
     public OutboundPayment fail(Map<String, Object> params) throws StripeException {
       return fail(params, (RequestOptions) null);
     }
 
     /**
-     * Transitions a test mode created OutboundPayment to the <code>failed</code> status. The
-     * OutboundPayment must already be in the <code>processing</code> state.
+     * Transitions a test mode created OutboundPayment to the {@code failed} status. The
+     * OutboundPayment must already be in the {@code processing} state.
      */
     public OutboundPayment fail(Map<String, Object> params, RequestOptions options)
         throws StripeException {
@@ -566,16 +566,16 @@ public class OutboundPayment extends ApiResource implements HasId {
     }
 
     /**
-     * Transitions a test mode created OutboundPayment to the <code>failed</code> status. The
-     * OutboundPayment must already be in the <code>processing</code> state.
+     * Transitions a test mode created OutboundPayment to the {@code failed} status. The
+     * OutboundPayment must already be in the {@code processing} state.
      */
     public OutboundPayment fail(OutboundPaymentFailParams params) throws StripeException {
       return fail(params, (RequestOptions) null);
     }
 
     /**
-     * Transitions a test mode created OutboundPayment to the <code>failed</code> status. The
-     * OutboundPayment must already be in the <code>processing</code> state.
+     * Transitions a test mode created OutboundPayment to the {@code failed} status. The
+     * OutboundPayment must already be in the {@code processing} state.
      */
     public OutboundPayment fail(OutboundPaymentFailParams params, RequestOptions options)
         throws StripeException {
@@ -591,32 +591,32 @@ public class OutboundPayment extends ApiResource implements HasId {
     }
 
     /**
-     * Transitions a test mode created OutboundPayment to the <code>posted</code> status. The
-     * OutboundPayment must already be in the <code>processing</code> state.
+     * Transitions a test mode created OutboundPayment to the {@code posted} status. The
+     * OutboundPayment must already be in the {@code processing} state.
      */
     public OutboundPayment post() throws StripeException {
       return post((Map<String, Object>) null, (RequestOptions) null);
     }
 
     /**
-     * Transitions a test mode created OutboundPayment to the <code>posted</code> status. The
-     * OutboundPayment must already be in the <code>processing</code> state.
+     * Transitions a test mode created OutboundPayment to the {@code posted} status. The
+     * OutboundPayment must already be in the {@code processing} state.
      */
     public OutboundPayment post(RequestOptions options) throws StripeException {
       return post((Map<String, Object>) null, options);
     }
 
     /**
-     * Transitions a test mode created OutboundPayment to the <code>posted</code> status. The
-     * OutboundPayment must already be in the <code>processing</code> state.
+     * Transitions a test mode created OutboundPayment to the {@code posted} status. The
+     * OutboundPayment must already be in the {@code processing} state.
      */
     public OutboundPayment post(Map<String, Object> params) throws StripeException {
       return post(params, (RequestOptions) null);
     }
 
     /**
-     * Transitions a test mode created OutboundPayment to the <code>posted</code> status. The
-     * OutboundPayment must already be in the <code>processing</code> state.
+     * Transitions a test mode created OutboundPayment to the {@code posted} status. The
+     * OutboundPayment must already be in the {@code processing} state.
      */
     public OutboundPayment post(Map<String, Object> params, RequestOptions options)
         throws StripeException {
@@ -632,16 +632,16 @@ public class OutboundPayment extends ApiResource implements HasId {
     }
 
     /**
-     * Transitions a test mode created OutboundPayment to the <code>posted</code> status. The
-     * OutboundPayment must already be in the <code>processing</code> state.
+     * Transitions a test mode created OutboundPayment to the {@code posted} status. The
+     * OutboundPayment must already be in the {@code processing} state.
      */
     public OutboundPayment post(OutboundPaymentPostParams params) throws StripeException {
       return post(params, (RequestOptions) null);
     }
 
     /**
-     * Transitions a test mode created OutboundPayment to the <code>posted</code> status. The
-     * OutboundPayment must already be in the <code>processing</code> state.
+     * Transitions a test mode created OutboundPayment to the {@code posted} status. The
+     * OutboundPayment must already be in the {@code processing} state.
      */
     public OutboundPayment post(OutboundPaymentPostParams params, RequestOptions options)
         throws StripeException {
@@ -657,24 +657,24 @@ public class OutboundPayment extends ApiResource implements HasId {
     }
 
     /**
-     * Transitions a test mode created OutboundPayment to the <code>returned</code> status. The
-     * OutboundPayment must already be in the <code>processing</code> state.
+     * Transitions a test mode created OutboundPayment to the {@code returned} status. The
+     * OutboundPayment must already be in the {@code processing} state.
      */
     public OutboundPayment returnOutboundPayment() throws StripeException {
       return returnOutboundPayment((Map<String, Object>) null, (RequestOptions) null);
     }
 
     /**
-     * Transitions a test mode created OutboundPayment to the <code>returned</code> status. The
-     * OutboundPayment must already be in the <code>processing</code> state.
+     * Transitions a test mode created OutboundPayment to the {@code returned} status. The
+     * OutboundPayment must already be in the {@code processing} state.
      */
     public OutboundPayment returnOutboundPayment(RequestOptions options) throws StripeException {
       return returnOutboundPayment((Map<String, Object>) null, options);
     }
 
     /**
-     * Transitions a test mode created OutboundPayment to the <code>returned</code> status. The
-     * OutboundPayment must already be in the <code>processing</code> state.
+     * Transitions a test mode created OutboundPayment to the {@code returned} status. The
+     * OutboundPayment must already be in the {@code processing} state.
      */
     public OutboundPayment returnOutboundPayment(Map<String, Object> params)
         throws StripeException {
@@ -682,8 +682,8 @@ public class OutboundPayment extends ApiResource implements HasId {
     }
 
     /**
-     * Transitions a test mode created OutboundPayment to the <code>returned</code> status. The
-     * OutboundPayment must already be in the <code>processing</code> state.
+     * Transitions a test mode created OutboundPayment to the {@code returned} status. The
+     * OutboundPayment must already be in the {@code processing} state.
      */
     public OutboundPayment returnOutboundPayment(Map<String, Object> params, RequestOptions options)
         throws StripeException {
@@ -699,8 +699,8 @@ public class OutboundPayment extends ApiResource implements HasId {
     }
 
     /**
-     * Transitions a test mode created OutboundPayment to the <code>returned</code> status. The
-     * OutboundPayment must already be in the <code>processing</code> state.
+     * Transitions a test mode created OutboundPayment to the {@code returned} status. The
+     * OutboundPayment must already be in the {@code processing} state.
      */
     public OutboundPayment returnOutboundPayment(OutboundPaymentReturnOutboundPaymentParams params)
         throws StripeException {
@@ -708,8 +708,8 @@ public class OutboundPayment extends ApiResource implements HasId {
     }
 
     /**
-     * Transitions a test mode created OutboundPayment to the <code>returned</code> status. The
-     * OutboundPayment must already be in the <code>processing</code> state.
+     * Transitions a test mode created OutboundPayment to the {@code returned} status. The
+     * OutboundPayment must already be in the {@code processing} state.
      */
     public OutboundPayment returnOutboundPayment(
         OutboundPaymentReturnOutboundPaymentParams params, RequestOptions options)

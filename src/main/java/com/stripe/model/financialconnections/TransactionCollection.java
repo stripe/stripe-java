@@ -10,12 +10,12 @@ import com.stripe.param.financialconnections.TransactionCollectionListParams;
 import java.util.Map;
 
 public class TransactionCollection extends StripeCollection<Transaction> {
-  /** Returns a list of Financial Connections <code>Transaction</code> objects. */
+  /** Returns a list of Financial Connections {@code Transaction} objects. */
   public TransactionCollection list(Map<String, Object> params) throws StripeException {
     return list(params, (RequestOptions) null);
   }
 
-  /** Returns a list of Financial Connections <code>Transaction</code> objects. */
+  /** Returns a list of Financial Connections {@code Transaction} objects. */
   public TransactionCollection list(Map<String, Object> params, RequestOptions options)
       throws StripeException {
     String url = ApiResource.fullUrl(Stripe.getApiBase(), options, this.getUrl());
@@ -23,12 +23,12 @@ public class TransactionCollection extends StripeCollection<Transaction> {
         ApiResource.RequestMethod.GET, url, params, TransactionCollection.class, options);
   }
 
-  /** Returns a list of Financial Connections <code>Transaction</code> objects. */
+  /** Returns a list of Financial Connections {@code Transaction} objects. */
   public TransactionCollection list(TransactionCollectionListParams params) throws StripeException {
     return list(params, (RequestOptions) null);
   }
 
-  /** Returns a list of Financial Connections <code>Transaction</code> objects. */
+  /** Returns a list of Financial Connections {@code Transaction} objects. */
   public TransactionCollection list(TransactionCollectionListParams params, RequestOptions options)
       throws StripeException {
     String url = ApiResource.fullUrl(Stripe.getApiBase(), options, this.getUrl());

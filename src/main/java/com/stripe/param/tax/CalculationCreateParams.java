@@ -12,8 +12,9 @@ import lombok.Getter;
 @Getter
 public class CalculationCreateParams extends ApiRequestParams {
   /**
-   * Three-letter <a href="https://www.iso.org/iso-4217-currency-codes.html">ISO currency code</a>,
-   * in lowercase. Must be a <a href="https://stripe.com/docs/currencies">supported currency</a>.
+   * <strong>Required.</strong> Three-letter <a
+   * href="https://www.iso.org/iso-4217-currency-codes.html">ISO currency code</a>, in lowercase.
+   * Must be a <a href="https://stripe.com/docs/currencies">supported currency</a>.
    */
   @SerializedName("currency")
   String currency;
@@ -42,7 +43,7 @@ public class CalculationCreateParams extends ApiRequestParams {
   @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
   Map<String, Object> extraParams;
 
-  /** A list of items the customer is purchasing. */
+  /** <strong>Required.</strong> A list of items the customer is purchasing. */
   @SerializedName("line_items")
   List<CalculationCreateParams.LineItem> lineItems;
 
@@ -112,9 +113,9 @@ public class CalculationCreateParams extends ApiRequestParams {
     }
 
     /**
-     * Three-letter <a href="https://www.iso.org/iso-4217-currency-codes.html">ISO currency
-     * code</a>, in lowercase. Must be a <a href="https://stripe.com/docs/currencies">supported
-     * currency</a>.
+     * <strong>Required.</strong> Three-letter <a
+     * href="https://www.iso.org/iso-4217-currency-codes.html">ISO currency code</a>, in lowercase.
+     * Must be a <a href="https://stripe.com/docs/currencies">supported currency</a>.
      */
     public Builder setCurrency(String currency) {
       this.currency = currency;
@@ -402,8 +403,8 @@ public class CalculationCreateParams extends ApiRequestParams {
       String city;
 
       /**
-       * Two-letter country code (<a href="https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2">ISO
-       * 3166-1 alpha-2</a>).
+       * <strong>Required.</strong> Two-letter country code (<a
+       * href="https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2">ISO 3166-1 alpha-2</a>).
        */
       @SerializedName("country")
       String country;
@@ -491,8 +492,8 @@ public class CalculationCreateParams extends ApiRequestParams {
         }
 
         /**
-         * Two-letter country code (<a href="https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2">ISO
-         * 3166-1 alpha-2</a>).
+         * <strong>Required.</strong> Two-letter country code (<a
+         * href="https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2">ISO 3166-1 alpha-2</a>).
          */
         public Builder setCountry(String country) {
           this.country = country;
@@ -568,21 +569,22 @@ public class CalculationCreateParams extends ApiRequestParams {
       Map<String, Object> extraParams;
 
       /**
-       * Type of the tax ID, one of {@code ae_trn}, {@code au_abn}, {@code au_arn}, {@code bg_uic},
-       * {@code br_cnpj}, {@code br_cpf}, {@code ca_bn}, {@code ca_gst_hst}, {@code ca_pst_bc},
-       * {@code ca_pst_mb}, {@code ca_pst_sk}, {@code ca_qst}, {@code ch_vat}, {@code cl_tin},
-       * {@code eg_tin}, {@code es_cif}, {@code eu_oss_vat}, {@code eu_vat}, {@code gb_vat}, {@code
-       * ge_vat}, {@code hk_br}, {@code hu_tin}, {@code id_npwp}, {@code il_vat}, {@code in_gst},
-       * {@code is_vat}, {@code jp_cn}, {@code jp_rn}, {@code jp_trn}, {@code ke_pin}, {@code
-       * kr_brn}, {@code li_uid}, {@code mx_rfc}, {@code my_frp}, {@code my_itn}, {@code my_sst},
-       * {@code no_vat}, {@code nz_gst}, {@code ph_tin}, {@code ru_inn}, {@code ru_kpp}, {@code
-       * sa_vat}, {@code sg_gst}, {@code sg_uen}, {@code si_tin}, {@code th_vat}, {@code tr_tin},
-       * {@code tw_vat}, {@code ua_vat}, {@code us_ein}, or {@code za_vat}.
+       * <strong>Required.</strong> Type of the tax ID, one of {@code ae_trn}, {@code au_abn},
+       * {@code au_arn}, {@code bg_uic}, {@code br_cnpj}, {@code br_cpf}, {@code ca_bn}, {@code
+       * ca_gst_hst}, {@code ca_pst_bc}, {@code ca_pst_mb}, {@code ca_pst_sk}, {@code ca_qst},
+       * {@code ch_vat}, {@code cl_tin}, {@code eg_tin}, {@code es_cif}, {@code eu_oss_vat}, {@code
+       * eu_vat}, {@code gb_vat}, {@code ge_vat}, {@code hk_br}, {@code hu_tin}, {@code id_npwp},
+       * {@code il_vat}, {@code in_gst}, {@code is_vat}, {@code jp_cn}, {@code jp_rn}, {@code
+       * jp_trn}, {@code ke_pin}, {@code kr_brn}, {@code li_uid}, {@code mx_rfc}, {@code my_frp},
+       * {@code my_itn}, {@code my_sst}, {@code no_vat}, {@code nz_gst}, {@code ph_tin}, {@code
+       * ru_inn}, {@code ru_kpp}, {@code sa_vat}, {@code sg_gst}, {@code sg_uen}, {@code si_tin},
+       * {@code th_vat}, {@code tr_tin}, {@code tw_vat}, {@code ua_vat}, {@code us_ein}, or {@code
+       * za_vat}
        */
       @SerializedName("type")
       Type type;
 
-      /** Value of the tax ID. */
+      /** <strong>Required.</strong> Value of the tax ID. */
       @SerializedName("value")
       String value;
 
@@ -638,23 +640,24 @@ public class CalculationCreateParams extends ApiRequestParams {
         }
 
         /**
-         * Type of the tax ID, one of {@code ae_trn}, {@code au_abn}, {@code au_arn}, {@code
-         * bg_uic}, {@code br_cnpj}, {@code br_cpf}, {@code ca_bn}, {@code ca_gst_hst}, {@code
-         * ca_pst_bc}, {@code ca_pst_mb}, {@code ca_pst_sk}, {@code ca_qst}, {@code ch_vat}, {@code
-         * cl_tin}, {@code eg_tin}, {@code es_cif}, {@code eu_oss_vat}, {@code eu_vat}, {@code
-         * gb_vat}, {@code ge_vat}, {@code hk_br}, {@code hu_tin}, {@code id_npwp}, {@code il_vat},
-         * {@code in_gst}, {@code is_vat}, {@code jp_cn}, {@code jp_rn}, {@code jp_trn}, {@code
-         * ke_pin}, {@code kr_brn}, {@code li_uid}, {@code mx_rfc}, {@code my_frp}, {@code my_itn},
-         * {@code my_sst}, {@code no_vat}, {@code nz_gst}, {@code ph_tin}, {@code ru_inn}, {@code
-         * ru_kpp}, {@code sa_vat}, {@code sg_gst}, {@code sg_uen}, {@code si_tin}, {@code th_vat},
-         * {@code tr_tin}, {@code tw_vat}, {@code ua_vat}, {@code us_ein}, or {@code za_vat}.
+         * <strong>Required.</strong> Type of the tax ID, one of {@code ae_trn}, {@code au_abn},
+         * {@code au_arn}, {@code bg_uic}, {@code br_cnpj}, {@code br_cpf}, {@code ca_bn}, {@code
+         * ca_gst_hst}, {@code ca_pst_bc}, {@code ca_pst_mb}, {@code ca_pst_sk}, {@code ca_qst},
+         * {@code ch_vat}, {@code cl_tin}, {@code eg_tin}, {@code es_cif}, {@code eu_oss_vat},
+         * {@code eu_vat}, {@code gb_vat}, {@code ge_vat}, {@code hk_br}, {@code hu_tin}, {@code
+         * id_npwp}, {@code il_vat}, {@code in_gst}, {@code is_vat}, {@code jp_cn}, {@code jp_rn},
+         * {@code jp_trn}, {@code ke_pin}, {@code kr_brn}, {@code li_uid}, {@code mx_rfc}, {@code
+         * my_frp}, {@code my_itn}, {@code my_sst}, {@code no_vat}, {@code nz_gst}, {@code ph_tin},
+         * {@code ru_inn}, {@code ru_kpp}, {@code sa_vat}, {@code sg_gst}, {@code sg_uen}, {@code
+         * si_tin}, {@code th_vat}, {@code tr_tin}, {@code tw_vat}, {@code ua_vat}, {@code us_ein},
+         * or {@code za_vat}
          */
         public Builder setType(CalculationCreateParams.CustomerDetails.TaxId.Type type) {
           this.type = type;
           return this;
         }
 
-        /** Value of the tax ID. */
+        /** <strong>Required.</strong> Value of the tax ID. */
         public Builder setValue(String value) {
           this.value = value;
           return this;
@@ -861,9 +864,9 @@ public class CalculationCreateParams extends ApiRequestParams {
   @Getter
   public static class LineItem {
     /**
-     * A positive integer in cents representing the line item's total price. If {@code
-     * tax_behavior=inclusive}, then this amount includes taxes. Otherwise, taxes are calculated on
-     * top of this amount.
+     * <strong>Required.</strong> A positive integer in cents representing the line item's total
+     * price. If {@code tax_behavior=inclusive}, then this amount includes taxes. Otherwise, taxes
+     * are calculated on top of this amount.
      */
     @SerializedName("amount")
     Long amount;
@@ -961,9 +964,9 @@ public class CalculationCreateParams extends ApiRequestParams {
       }
 
       /**
-       * A positive integer in cents representing the line item's total price. If {@code
-       * tax_behavior=inclusive}, then this amount includes taxes. Otherwise, taxes are calculated
-       * on top of this amount.
+       * <strong>Required.</strong> A positive integer in cents representing the line item's total
+       * price. If {@code tax_behavior=inclusive}, then this amount includes taxes. Otherwise, taxes
+       * are calculated on top of this amount.
        */
       public Builder setAmount(Long amount) {
         this.amount = amount;

@@ -28,17 +28,17 @@ public class SecretCreateParams extends ApiRequestParams {
   @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
   Map<String, Object> extraParams;
 
-  /** A name for the secret that's unique within the scope. */
+  /** <strong>Required.</strong> A name for the secret that's unique within the scope. */
   @SerializedName("name")
   String name;
 
-  /** The plaintext secret value to be stored. */
+  /** <strong>Required.</strong> The plaintext secret value to be stored. */
   @SerializedName("payload")
   String payload;
 
   /**
-   * Specifies the scoping of the secret. Requests originating from UI extensions can only access
-   * account-scoped secrets or secrets scoped to their own user.
+   * <strong>Required.</strong> Specifies the scoping of the secret. Requests originating from UI
+   * extensions can only access account-scoped secrets or secrets scoped to their own user.
    */
   @SerializedName("scope")
   Scope scope;
@@ -139,21 +139,21 @@ public class SecretCreateParams extends ApiRequestParams {
       return this;
     }
 
-    /** A name for the secret that's unique within the scope. */
+    /** <strong>Required.</strong> A name for the secret that's unique within the scope. */
     public Builder setName(String name) {
       this.name = name;
       return this;
     }
 
-    /** The plaintext secret value to be stored. */
+    /** <strong>Required.</strong> The plaintext secret value to be stored. */
     public Builder setPayload(String payload) {
       this.payload = payload;
       return this;
     }
 
     /**
-     * Specifies the scoping of the secret. Requests originating from UI extensions can only access
-     * account-scoped secrets or secrets scoped to their own user.
+     * <strong>Required.</strong> Specifies the scoping of the secret. Requests originating from UI
+     * extensions can only access account-scoped secrets or secrets scoped to their own user.
      */
     public Builder setScope(SecretCreateParams.Scope scope) {
       this.scope = scope;
@@ -172,7 +172,7 @@ public class SecretCreateParams extends ApiRequestParams {
     @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
     Map<String, Object> extraParams;
 
-    /** The secret scope type. */
+    /** <strong>Required.</strong> The secret scope type. */
     @SerializedName("type")
     Type type;
 
@@ -231,7 +231,7 @@ public class SecretCreateParams extends ApiRequestParams {
         return this;
       }
 
-      /** The secret scope type. */
+      /** <strong>Required.</strong> The secret scope type. */
       public Builder setType(SecretCreateParams.Scope.Type type) {
         this.type = type;
         return this;

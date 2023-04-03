@@ -566,7 +566,7 @@ public class ChargeCreateParams extends ApiRequestParams {
 
   @Getter
   public static class Destination {
-    /** ID of an existing, connected Stripe account. */
+    /** <strong>Required.</strong> ID of an existing, connected Stripe account. */
     @SerializedName("account")
     String account;
 
@@ -609,7 +609,7 @@ public class ChargeCreateParams extends ApiRequestParams {
         return new ChargeCreateParams.Destination(this.account, this.amount, this.extraParams);
       }
 
-      /** ID of an existing, connected Stripe account. */
+      /** <strong>Required.</strong> ID of an existing, connected Stripe account. */
       public Builder setAccount(String account) {
         this.account = account;
         return this;
@@ -731,7 +731,7 @@ public class ChargeCreateParams extends ApiRequestParams {
 
   @Getter
   public static class Shipping {
-    /** Shipping address. */
+    /** <strong>Required.</strong> Shipping address. */
     @SerializedName("address")
     Address address;
 
@@ -748,7 +748,7 @@ public class ChargeCreateParams extends ApiRequestParams {
     @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
     Map<String, Object> extraParams;
 
-    /** Recipient name. */
+    /** <strong>Required.</strong> Recipient name. */
     @SerializedName("name")
     String name;
 
@@ -806,7 +806,7 @@ public class ChargeCreateParams extends ApiRequestParams {
             this.trackingNumber);
       }
 
-      /** Shipping address. */
+      /** <strong>Required.</strong> Shipping address. */
       public Builder setAddress(ChargeCreateParams.Shipping.Address address) {
         this.address = address;
         return this;
@@ -844,7 +844,7 @@ public class ChargeCreateParams extends ApiRequestParams {
         return this;
       }
 
-      /** Recipient name. */
+      /** <strong>Required.</strong> Recipient name. */
       public Builder setName(String name) {
         this.name = name;
         return this;
@@ -1031,7 +1031,7 @@ public class ChargeCreateParams extends ApiRequestParams {
     @SerializedName("amount")
     Long amount;
 
-    /** ID of an existing, connected Stripe account. */
+    /** <strong>Required.</strong> ID of an existing, connected Stripe account. */
     @SerializedName("destination")
     String destination;
 
@@ -1075,7 +1075,7 @@ public class ChargeCreateParams extends ApiRequestParams {
         return this;
       }
 
-      /** ID of an existing, connected Stripe account. */
+      /** <strong>Required.</strong> ID of an existing, connected Stripe account. */
       public Builder setDestination(String destination) {
         this.destination = destination;
         return this;

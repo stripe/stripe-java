@@ -494,7 +494,7 @@ public class CardUpdateParams extends ApiRequestParams {
 
     @Getter
     public static class SpendingLimit {
-      /** Maximum amount allowed to spend per interval. */
+      /** <strong>Required.</strong> Maximum amount allowed to spend per interval. */
       @SerializedName("amount")
       Long amount;
 
@@ -515,7 +515,7 @@ public class CardUpdateParams extends ApiRequestParams {
       @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
       Map<String, Object> extraParams;
 
-      /** Interval (or event) to which the amount applies. */
+      /** <strong>Required.</strong> Interval (or event) to which the amount applies. */
       @SerializedName("interval")
       Interval interval;
 
@@ -549,7 +549,7 @@ public class CardUpdateParams extends ApiRequestParams {
               this.amount, this.categories, this.extraParams, this.interval);
         }
 
-        /** Maximum amount allowed to spend per interval. */
+        /** <strong>Required.</strong> Maximum amount allowed to spend per interval. */
         public Builder setAmount(Long amount) {
           this.amount = amount;
           return this;
@@ -611,7 +611,7 @@ public class CardUpdateParams extends ApiRequestParams {
           return this;
         }
 
-        /** Interval (or event) to which the amount applies. */
+        /** <strong>Required.</strong> Interval (or event) to which the amount applies. */
         public Builder setInterval(
             CardUpdateParams.SpendingControls.SpendingLimit.Interval interval) {
           this.interval = interval;

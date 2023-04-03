@@ -248,7 +248,7 @@ public class SessionListParams extends ApiRequestParams {
 
   @Getter
   public static class CustomerDetails {
-    /** Customer's email address. */
+    /** <strong>Required.</strong> Customer's email address. */
     @SerializedName("email")
     String email;
 
@@ -280,7 +280,7 @@ public class SessionListParams extends ApiRequestParams {
         return new SessionListParams.CustomerDetails(this.email, this.extraParams);
       }
 
-      /** Customer's email address. */
+      /** <strong>Required.</strong> Customer's email address. */
       public Builder setEmail(String email) {
         this.email = email;
         return this;

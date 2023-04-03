@@ -40,7 +40,7 @@ public class PaymentIntentSearchParams extends ApiRequestParams {
   String page;
 
   /**
-   * The search query string. See <a
+   * <strong>Required.</strong> The search query string. See <a
    * href="https://stripe.com/docs/search#search-query-language">search query language</a> and the
    * list of supported <a
    * href="https://stripe.com/docs/search#query-fields-for-payment-intents">query fields for payment
@@ -151,7 +151,7 @@ public class PaymentIntentSearchParams extends ApiRequestParams {
     }
 
     /**
-     * The search query string. See <a
+     * <strong>Required.</strong> The search query string. See <a
      * href="https://stripe.com/docs/search#search-query-language">search query language</a> and the
      * list of supported <a
      * href="https://stripe.com/docs/search#query-fields-for-payment-intents">query fields for

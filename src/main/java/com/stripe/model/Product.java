@@ -236,7 +236,7 @@ public class Product extends ApiResource implements HasId, MetadataStore<Product
 
   /**
    * Delete a product. Deleting a product is only possible if it has no prices associated with it.
-   * Additionally, deleting a product with <code>type=good</code> is only possible if it has no SKUs
+   * Additionally, deleting a product with {@code type=good} is only possible if it has no SKUs
    * associated with it.
    */
   public Product delete() throws StripeException {
@@ -245,7 +245,7 @@ public class Product extends ApiResource implements HasId, MetadataStore<Product
 
   /**
    * Delete a product. Deleting a product is only possible if it has no prices associated with it.
-   * Additionally, deleting a product with <code>type=good</code> is only possible if it has no SKUs
+   * Additionally, deleting a product with {@code type=good} is only possible if it has no SKUs
    * associated with it.
    */
   public Product delete(RequestOptions options) throws StripeException {
@@ -254,7 +254,7 @@ public class Product extends ApiResource implements HasId, MetadataStore<Product
 
   /**
    * Delete a product. Deleting a product is only possible if it has no prices associated with it.
-   * Additionally, deleting a product with <code>type=good</code> is only possible if it has no SKUs
+   * Additionally, deleting a product with {@code type=good} is only possible if it has no SKUs
    * associated with it.
    */
   public Product delete(Map<String, Object> params) throws StripeException {
@@ -263,7 +263,7 @@ public class Product extends ApiResource implements HasId, MetadataStore<Product
 
   /**
    * Delete a product. Deleting a product is only possible if it has no prices associated with it.
-   * Additionally, deleting a product with <code>type=good</code> is only possible if it has no SKUs
+   * Additionally, deleting a product with {@code type=good} is only possible if it has no SKUs
    * associated with it.
    */
   public Product delete(Map<String, Object> params, RequestOptions options) throws StripeException {

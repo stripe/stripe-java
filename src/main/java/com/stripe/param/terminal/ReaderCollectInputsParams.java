@@ -24,7 +24,7 @@ public class ReaderCollectInputsParams extends ApiRequestParams {
   @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
   Map<String, Object> extraParams;
 
-  /** List of inputs to be collected using the Reader. */
+  /** <strong>Required.</strong> List of inputs to be collected using the Reader */
   @SerializedName("inputs")
   List<ReaderCollectInputsParams.Input> inputs;
 
@@ -169,7 +169,10 @@ public class ReaderCollectInputsParams extends ApiRequestParams {
 
   @Getter
   public static class Input {
-    /** Customize the text which will be displayed while collecting this input. */
+    /**
+     * <strong>Required.</strong> Customize the text which will be displayed while collecting this
+     * input
+     */
     @SerializedName("custom_text")
     CustomText customText;
 
@@ -190,7 +193,7 @@ public class ReaderCollectInputsParams extends ApiRequestParams {
     @SerializedName("selection")
     Selection selection;
 
-    /** The type of input to collect. */
+    /** <strong>Required.</strong> The type of input to collect */
     @SerializedName("type")
     Type type;
 
@@ -228,7 +231,10 @@ public class ReaderCollectInputsParams extends ApiRequestParams {
             this.customText, this.extraParams, this.required, this.selection, this.type);
       }
 
-      /** Customize the text which will be displayed while collecting this input. */
+      /**
+       * <strong>Required.</strong> Customize the text which will be displayed while collecting this
+       * input
+       */
       public Builder setCustomText(ReaderCollectInputsParams.Input.CustomText customText) {
         this.customText = customText;
         return this;
@@ -272,7 +278,7 @@ public class ReaderCollectInputsParams extends ApiRequestParams {
         return this;
       }
 
-      /** The type of input to collect. */
+      /** <strong>Required.</strong> The type of input to collect */
       public Builder setType(ReaderCollectInputsParams.Input.Type type) {
         this.type = type;
         return this;
@@ -302,7 +308,7 @@ public class ReaderCollectInputsParams extends ApiRequestParams {
       @SerializedName("submit_button")
       String submitButton;
 
-      /** The title which will be displayed when collecting this input. */
+      /** <strong>Required.</strong> The title which will be displayed when collecting this input */
       @SerializedName("title")
       String title;
 
@@ -386,7 +392,9 @@ public class ReaderCollectInputsParams extends ApiRequestParams {
           return this;
         }
 
-        /** The title which will be displayed when collecting this input. */
+        /**
+         * <strong>Required.</strong> The title which will be displayed when collecting this input
+         */
         public Builder setTitle(String title) {
           this.title = title;
           return this;
@@ -396,7 +404,7 @@ public class ReaderCollectInputsParams extends ApiRequestParams {
 
     @Getter
     public static class Selection {
-      /** List of choices for the {@code selection} input. */
+      /** <strong>Required.</strong> List of choices for the {@code selection} input */
       @SerializedName("choices")
       List<ReaderCollectInputsParams.Input.Selection.Choice> choices;
 
@@ -502,7 +510,7 @@ public class ReaderCollectInputsParams extends ApiRequestParams {
         @SerializedName("style")
         Style style;
 
-        /** The text which will be shown on the button for this choice. */
+        /** <strong>Required.</strong> The text which will be shown on the button for this choice */
         @SerializedName("value")
         String value;
 
@@ -563,7 +571,9 @@ public class ReaderCollectInputsParams extends ApiRequestParams {
             return this;
           }
 
-          /** The text which will be shown on the button for this choice. */
+          /**
+           * <strong>Required.</strong> The text which will be shown on the button for this choice
+           */
           public Builder setValue(String value) {
             this.value = value;
             return this;

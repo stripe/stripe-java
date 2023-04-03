@@ -23,8 +23,9 @@ public class CardCreateParams extends ApiRequestParams {
   CreatedBy createdBy;
 
   /**
-   * Three-letter <a href="https://www.iso.org/iso-4217-currency-codes.html">ISO currency code</a>,
-   * in lowercase. Must be a <a href="https://stripe.com/docs/currencies">supported currency</a>.
+   * <strong>Required.</strong> Three-letter <a
+   * href="https://www.iso.org/iso-4217-currency-codes.html">ISO currency code</a>, in lowercase.
+   * Must be a <a href="https://stripe.com/docs/currencies">supported currency</a>.
    */
   @SerializedName("currency")
   String currency;
@@ -119,9 +120,9 @@ public class CardCreateParams extends ApiRequestParams {
     }
 
     /**
-     * Three-letter <a href="https://www.iso.org/iso-4217-currency-codes.html">ISO currency
-     * code</a>, in lowercase. Must be a <a href="https://stripe.com/docs/currencies">supported
-     * currency</a>.
+     * <strong>Required.</strong> Three-letter <a
+     * href="https://www.iso.org/iso-4217-currency-codes.html">ISO currency code</a>, in lowercase.
+     * Must be a <a href="https://stripe.com/docs/currencies">supported currency</a>.
      */
     public Builder setCurrency(String currency) {
       this.currency = currency;
@@ -224,11 +225,11 @@ public class CardCreateParams extends ApiRequestParams {
     @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
     Map<String, Object> extraParams;
 
-    /** The details for the payment that created this object. */
+    /** <strong>Required.</strong> The details for the payment that created this object. */
     @SerializedName("payment")
     Payment payment;
 
-    /** The type of event that created this object. */
+    /** <strong>Required.</strong> The type of event that created this object. */
     @SerializedName("type")
     Type type;
 
@@ -280,13 +281,13 @@ public class CardCreateParams extends ApiRequestParams {
         return this;
       }
 
-      /** The details for the payment that created this object. */
+      /** <strong>Required.</strong> The details for the payment that created this object. */
       public Builder setPayment(CardCreateParams.CreatedBy.Payment payment) {
         this.payment = payment;
         return this;
       }
 
-      /** The type of event that created this object. */
+      /** <strong>Required.</strong> The type of event that created this object. */
       public Builder setType(CardCreateParams.CreatedBy.Type type) {
         this.type = type;
         return this;
@@ -304,7 +305,7 @@ public class CardCreateParams extends ApiRequestParams {
       @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
       Map<String, Object> extraParams;
 
-      /** The PaymentIntent used to collect payment for this object. */
+      /** <strong>Required.</strong> The PaymentIntent used to collect payment for this object. */
       @SerializedName("payment_intent")
       String paymentIntent;
 
@@ -355,7 +356,7 @@ public class CardCreateParams extends ApiRequestParams {
           return this;
         }
 
-        /** The PaymentIntent used to collect payment for this object. */
+        /** <strong>Required.</strong> The PaymentIntent used to collect payment for this object. */
         public Builder setPaymentIntent(String paymentIntent) {
           this.paymentIntent = paymentIntent;
           return this;

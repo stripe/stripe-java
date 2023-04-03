@@ -731,8 +731,8 @@ public class QuoteUpdateParams extends ApiRequestParams {
   @Getter
   public static class AutomaticTax {
     /**
-     * Controls whether Stripe will automatically compute tax on the resulting invoices or
-     * subscriptions as well as the quote itself.
+     * <strong>Required.</strong> Controls whether Stripe will automatically compute tax on the
+     * resulting invoices or subscriptions as well as the quote itself.
      */
     @SerializedName("enabled")
     Boolean enabled;
@@ -766,8 +766,8 @@ public class QuoteUpdateParams extends ApiRequestParams {
       }
 
       /**
-       * Controls whether Stripe will automatically compute tax on the resulting invoices or
-       * subscriptions as well as the quote itself.
+       * <strong>Required.</strong> Controls whether Stripe will automatically compute tax on the
+       * resulting invoices or subscriptions as well as the quote itself.
        */
       public Builder setEnabled(Boolean enabled) {
         this.enabled = enabled;
@@ -928,7 +928,10 @@ public class QuoteUpdateParams extends ApiRequestParams {
       @SerializedName("timestamp")
       Long timestamp;
 
-      /** The type of calculation made to determine when the discount ends. */
+      /**
+       * <strong>Required.</strong> The type of calculation made to determine when the discount
+       * ends.
+       */
       @SerializedName("type")
       Type type;
 
@@ -999,7 +1002,10 @@ public class QuoteUpdateParams extends ApiRequestParams {
           return this;
         }
 
-        /** The type of calculation made to determine when the discount ends. */
+        /**
+         * <strong>Required.</strong> The type of calculation made to determine when the discount
+         * ends.
+         */
         public Builder setType(QuoteUpdateParams.Discount.DiscountEnd.Type type) {
           this.type = type;
           return this;
@@ -1019,15 +1025,15 @@ public class QuoteUpdateParams extends ApiRequestParams {
         Map<String, Object> extraParams;
 
         /**
-         * Specifies a type of interval unit. Either {@code day}, {@code week}, {@code month} or
-         * {@code year}.
+         * <strong>Required.</strong> Specifies a type of interval unit. Either {@code day}, {@code
+         * week}, {@code month} or {@code year}.
          */
         @SerializedName("interval")
         Interval interval;
 
         /**
-         * The number of intervals, as an whole number greater than 0. Stripe multiplies this by the
-         * interval type to get the overall duration.
+         * <strong>Required.</strong> The number of intervals, as an whole number greater than 0.
+         * Stripe multiplies this by the interval type to get the overall duration.
          */
         @SerializedName("interval_count")
         Long intervalCount;
@@ -1084,8 +1090,8 @@ public class QuoteUpdateParams extends ApiRequestParams {
           }
 
           /**
-           * Specifies a type of interval unit. Either {@code day}, {@code week}, {@code month} or
-           * {@code year}.
+           * <strong>Required.</strong> Specifies a type of interval unit. Either {@code day},
+           * {@code week}, {@code month} or {@code year}.
            */
           public Builder setInterval(
               QuoteUpdateParams.Discount.DiscountEnd.Duration.Interval interval) {
@@ -1094,8 +1100,8 @@ public class QuoteUpdateParams extends ApiRequestParams {
           }
 
           /**
-           * The number of intervals, as an whole number greater than 0. Stripe multiplies this by
-           * the interval type to get the overall duration.
+           * <strong>Required.</strong> The number of intervals, as an whole number greater than 0.
+           * Stripe multiplies this by the interval type to get the overall duration.
            */
           public Builder setIntervalCount(Long intervalCount) {
             this.intervalCount = intervalCount;
@@ -1512,7 +1518,7 @@ public class QuoteUpdateParams extends ApiRequestParams {
       @SerializedName("set_metadata")
       Object setMetadata;
 
-      /** The type of action the quote line performs. */
+      /** <strong>Required.</strong> The type of action the quote line performs. */
       @SerializedName("type")
       Type type;
 
@@ -1779,7 +1785,7 @@ public class QuoteUpdateParams extends ApiRequestParams {
           return this;
         }
 
-        /** The type of action the quote line performs. */
+        /** <strong>Required.</strong> The type of action the quote line performs. */
         public Builder setType(QuoteUpdateParams.Line.Action.Type type) {
           this.type = type;
           return this;
@@ -1932,7 +1938,10 @@ public class QuoteUpdateParams extends ApiRequestParams {
           @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
           Map<String, Object> extraParams;
 
-          /** The type of calculation made to determine when the discount ends. */
+          /**
+           * <strong>Required.</strong> The type of calculation made to determine when the discount
+           * ends.
+           */
           @SerializedName("type")
           Type type;
 
@@ -1986,7 +1995,10 @@ public class QuoteUpdateParams extends ApiRequestParams {
               return this;
             }
 
-            /** The type of calculation made to determine when the discount ends. */
+            /**
+             * <strong>Required.</strong> The type of calculation made to determine when the
+             * discount ends.
+             */
             public Builder setType(
                 QuoteUpdateParams.Line.Action.AddDiscount.DiscountEnd.Type type) {
               this.type = type;
@@ -2036,7 +2048,7 @@ public class QuoteUpdateParams extends ApiRequestParams {
         @SerializedName("metadata")
         Map<String, String> metadata;
 
-        /** The ID of the price object. */
+        /** <strong>Required.</strong> The ID of the price object. */
         @SerializedName("price")
         Object price;
 
@@ -2185,13 +2197,13 @@ public class QuoteUpdateParams extends ApiRequestParams {
             return this;
           }
 
-          /** The ID of the price object. */
+          /** <strong>Required.</strong> The ID of the price object. */
           public Builder setPrice(String price) {
             this.price = price;
             return this;
           }
 
-          /** The ID of the price object. */
+          /** <strong>Required.</strong> The ID of the price object. */
           public Builder setPrice(EmptyParam price) {
             this.price = price;
             return this;
@@ -2370,7 +2382,10 @@ public class QuoteUpdateParams extends ApiRequestParams {
             @SerializedName("timestamp")
             Long timestamp;
 
-            /** The type of calculation made to determine when the discount ends. */
+            /**
+             * <strong>Required.</strong> The type of calculation made to determine when the
+             * discount ends.
+             */
             @SerializedName("type")
             Type type;
 
@@ -2444,7 +2459,10 @@ public class QuoteUpdateParams extends ApiRequestParams {
                 return this;
               }
 
-              /** The type of calculation made to determine when the discount ends. */
+              /**
+               * <strong>Required.</strong> The type of calculation made to determine when the
+               * discount ends.
+               */
               public Builder setType(
                   QuoteUpdateParams.Line.Action.AddItem.Discount.DiscountEnd.Type type) {
                 this.type = type;
@@ -2465,15 +2483,15 @@ public class QuoteUpdateParams extends ApiRequestParams {
               Map<String, Object> extraParams;
 
               /**
-               * Specifies a type of interval unit. Either {@code day}, {@code week}, {@code month}
-               * or {@code year}.
+               * <strong>Required.</strong> Specifies a type of interval unit. Either {@code day},
+               * {@code week}, {@code month} or {@code year}.
                */
               @SerializedName("interval")
               Interval interval;
 
               /**
-               * The number of intervals, as an whole number greater than 0. Stripe multiplies this
-               * by the interval type to get the overall duration.
+               * <strong>Required.</strong> The number of intervals, as an whole number greater than
+               * 0. Stripe multiplies this by the interval type to get the overall duration.
                */
               @SerializedName("interval_count")
               Long intervalCount;
@@ -2533,8 +2551,8 @@ public class QuoteUpdateParams extends ApiRequestParams {
                 }
 
                 /**
-                 * Specifies a type of interval unit. Either {@code day}, {@code week}, {@code
-                 * month} or {@code year}.
+                 * <strong>Required.</strong> Specifies a type of interval unit. Either {@code day},
+                 * {@code week}, {@code month} or {@code year}.
                  */
                 public Builder setInterval(
                     QuoteUpdateParams.Line.Action.AddItem.Discount.DiscountEnd.Duration.Interval
@@ -2544,8 +2562,8 @@ public class QuoteUpdateParams extends ApiRequestParams {
                 }
 
                 /**
-                 * The number of intervals, as an whole number greater than 0. Stripe multiplies
-                 * this by the interval type to get the overall duration.
+                 * <strong>Required.</strong> The number of intervals, as an whole number greater
+                 * than 0. Stripe multiplies this by the interval type to get the overall duration.
                  */
                 public Builder setIntervalCount(Long intervalCount) {
                   this.intervalCount = intervalCount;
@@ -2611,7 +2629,7 @@ public class QuoteUpdateParams extends ApiRequestParams {
           @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
           Map<String, Object> extraParams;
 
-          /** Determines the type of trial for this item. */
+          /** <strong>Required.</strong> Determines the type of trial for this item. */
           @SerializedName("type")
           Type type;
 
@@ -2693,7 +2711,7 @@ public class QuoteUpdateParams extends ApiRequestParams {
               return this;
             }
 
-            /** Determines the type of trial for this item. */
+            /** <strong>Required.</strong> Determines the type of trial for this item. */
             public Builder setType(QuoteUpdateParams.Line.Action.AddItem.Trial.Type type) {
               this.type = type;
               return this;
@@ -2826,7 +2844,7 @@ public class QuoteUpdateParams extends ApiRequestParams {
         @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
         Map<String, Object> extraParams;
 
-        /** ID of a price to remove. */
+        /** <strong>Required.</strong> ID of a price to remove. */
         @SerializedName("price")
         Object price;
 
@@ -2877,13 +2895,13 @@ public class QuoteUpdateParams extends ApiRequestParams {
             return this;
           }
 
-          /** ID of a price to remove. */
+          /** <strong>Required.</strong> ID of a price to remove. */
           public Builder setPrice(String price) {
             this.price = price;
             return this;
           }
 
-          /** ID of a price to remove. */
+          /** <strong>Required.</strong> ID of a price to remove. */
           public Builder setPrice(EmptyParam price) {
             this.price = price;
             return this;
@@ -3017,7 +3035,7 @@ public class QuoteUpdateParams extends ApiRequestParams {
         @SerializedName("metadata")
         Map<String, String> metadata;
 
-        /** The ID of the price object. */
+        /** <strong>Required.</strong> The ID of the price object. */
         @SerializedName("price")
         Object price;
 
@@ -3177,13 +3195,13 @@ public class QuoteUpdateParams extends ApiRequestParams {
             return this;
           }
 
-          /** The ID of the price object. */
+          /** <strong>Required.</strong> The ID of the price object. */
           public Builder setPrice(String price) {
             this.price = price;
             return this;
           }
 
-          /** The ID of the price object. */
+          /** <strong>Required.</strong> The ID of the price object. */
           public Builder setPrice(EmptyParam price) {
             this.price = price;
             return this;
@@ -3371,7 +3389,10 @@ public class QuoteUpdateParams extends ApiRequestParams {
             @SerializedName("timestamp")
             Long timestamp;
 
-            /** The type of calculation made to determine when the discount ends. */
+            /**
+             * <strong>Required.</strong> The type of calculation made to determine when the
+             * discount ends.
+             */
             @SerializedName("type")
             Type type;
 
@@ -3445,7 +3466,10 @@ public class QuoteUpdateParams extends ApiRequestParams {
                 return this;
               }
 
-              /** The type of calculation made to determine when the discount ends. */
+              /**
+               * <strong>Required.</strong> The type of calculation made to determine when the
+               * discount ends.
+               */
               public Builder setType(
                   QuoteUpdateParams.Line.Action.SetItem.Discount.DiscountEnd.Type type) {
                 this.type = type;
@@ -3466,15 +3490,15 @@ public class QuoteUpdateParams extends ApiRequestParams {
               Map<String, Object> extraParams;
 
               /**
-               * Specifies a type of interval unit. Either {@code day}, {@code week}, {@code month}
-               * or {@code year}.
+               * <strong>Required.</strong> Specifies a type of interval unit. Either {@code day},
+               * {@code week}, {@code month} or {@code year}.
                */
               @SerializedName("interval")
               Interval interval;
 
               /**
-               * The number of intervals, as an whole number greater than 0. Stripe multiplies this
-               * by the interval type to get the overall duration.
+               * <strong>Required.</strong> The number of intervals, as an whole number greater than
+               * 0. Stripe multiplies this by the interval type to get the overall duration.
                */
               @SerializedName("interval_count")
               Long intervalCount;
@@ -3534,8 +3558,8 @@ public class QuoteUpdateParams extends ApiRequestParams {
                 }
 
                 /**
-                 * Specifies a type of interval unit. Either {@code day}, {@code week}, {@code
-                 * month} or {@code year}.
+                 * <strong>Required.</strong> Specifies a type of interval unit. Either {@code day},
+                 * {@code week}, {@code month} or {@code year}.
                  */
                 public Builder setInterval(
                     QuoteUpdateParams.Line.Action.SetItem.Discount.DiscountEnd.Duration.Interval
@@ -3545,8 +3569,8 @@ public class QuoteUpdateParams extends ApiRequestParams {
                 }
 
                 /**
-                 * The number of intervals, as an whole number greater than 0. Stripe multiplies
-                 * this by the interval type to get the overall duration.
+                 * <strong>Required.</strong> The number of intervals, as an whole number greater
+                 * than 0. Stripe multiplies this by the interval type to get the overall duration.
                  */
                 public Builder setIntervalCount(Long intervalCount) {
                   this.intervalCount = intervalCount;
@@ -3612,7 +3636,7 @@ public class QuoteUpdateParams extends ApiRequestParams {
           @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
           Map<String, Object> extraParams;
 
-          /** Determines the type of trial for this item. */
+          /** <strong>Required.</strong> Determines the type of trial for this item. */
           @SerializedName("type")
           Type type;
 
@@ -3694,7 +3718,7 @@ public class QuoteUpdateParams extends ApiRequestParams {
               return this;
             }
 
-            /** Determines the type of trial for this item. */
+            /** <strong>Required.</strong> Determines the type of trial for this item. */
             public Builder setType(QuoteUpdateParams.Line.Action.SetItem.Trial.Type type) {
               this.type = type;
               return this;
@@ -3784,7 +3808,10 @@ public class QuoteUpdateParams extends ApiRequestParams {
       @SerializedName("subscription_schedule")
       Object subscriptionSchedule;
 
-      /** Describes whether the quote line is affecting a new schedule or an existing schedule. */
+      /**
+       * <strong>Required.</strong> Describes whether the quote line is affecting a new schedule or
+       * an existing schedule.
+       */
       @SerializedName("type")
       Type type;
 
@@ -3878,7 +3905,10 @@ public class QuoteUpdateParams extends ApiRequestParams {
           return this;
         }
 
-        /** Describes whether the quote line is affecting a new schedule or an existing schedule. */
+        /**
+         * <strong>Required.</strong> Describes whether the quote line is affecting a new schedule
+         * or an existing schedule.
+         */
         public Builder setType(QuoteUpdateParams.Line.AppliesTo.Type type) {
           this.type = type;
           return this;
@@ -3924,7 +3954,7 @@ public class QuoteUpdateParams extends ApiRequestParams {
       @SerializedName("timestamp")
       Long timestamp;
 
-      /** Select a way to pass in {@code ends_at}. */
+      /** <strong>Required.</strong> Select a way to pass in {@code ends_at}. */
       @SerializedName("type")
       Type type;
 
@@ -4006,7 +4036,7 @@ public class QuoteUpdateParams extends ApiRequestParams {
           return this;
         }
 
-        /** Select a way to pass in {@code ends_at}. */
+        /** <strong>Required.</strong> Select a way to pass in {@code ends_at}. */
         public Builder setType(QuoteUpdateParams.Line.EndsAt.Type type) {
           this.type = type;
           return this;
@@ -4015,7 +4045,7 @@ public class QuoteUpdateParams extends ApiRequestParams {
 
       @Getter
       public static class DiscountEnd {
-        /** The ID of a specific discount. */
+        /** <strong>Required.</strong> The ID of a specific discount. */
         @SerializedName("discount")
         Object discount;
 
@@ -4048,13 +4078,13 @@ public class QuoteUpdateParams extends ApiRequestParams {
             return new QuoteUpdateParams.Line.EndsAt.DiscountEnd(this.discount, this.extraParams);
           }
 
-          /** The ID of a specific discount. */
+          /** <strong>Required.</strong> The ID of a specific discount. */
           public Builder setDiscount(String discount) {
             this.discount = discount;
             return this;
           }
 
-          /** The ID of a specific discount. */
+          /** <strong>Required.</strong> The ID of a specific discount. */
           public Builder setDiscount(EmptyParam discount) {
             this.discount = discount;
             return this;
@@ -4103,15 +4133,15 @@ public class QuoteUpdateParams extends ApiRequestParams {
         Map<String, Object> extraParams;
 
         /**
-         * Specifies a type of interval unit. Either {@code day}, {@code week}, {@code month} or
-         * {@code year}.
+         * <strong>Required.</strong> Specifies a type of interval unit. Either {@code day}, {@code
+         * week}, {@code month} or {@code year}.
          */
         @SerializedName("interval")
         Interval interval;
 
         /**
-         * The number of intervals, as an whole number greater than 0. Stripe multiplies this by the
-         * interval type to get the overall duration.
+         * <strong>Required.</strong> The number of intervals, as an whole number greater than 0.
+         * Stripe multiplies this by the interval type to get the overall duration.
          */
         @SerializedName("interval_count")
         Long intervalCount;
@@ -4168,8 +4198,8 @@ public class QuoteUpdateParams extends ApiRequestParams {
           }
 
           /**
-           * Specifies a type of interval unit. Either {@code day}, {@code week}, {@code month} or
-           * {@code year}.
+           * <strong>Required.</strong> Specifies a type of interval unit. Either {@code day},
+           * {@code week}, {@code month} or {@code year}.
            */
           public Builder setInterval(QuoteUpdateParams.Line.EndsAt.Duration.Interval interval) {
             this.interval = interval;
@@ -4177,8 +4207,8 @@ public class QuoteUpdateParams extends ApiRequestParams {
           }
 
           /**
-           * The number of intervals, as an whole number greater than 0. Stripe multiplies this by
-           * the interval type to get the overall duration.
+           * <strong>Required.</strong> The number of intervals, as an whole number greater than 0.
+           * Stripe multiplies this by the interval type to get the overall duration.
            */
           public Builder setIntervalCount(Long intervalCount) {
             this.intervalCount = intervalCount;
@@ -4259,7 +4289,7 @@ public class QuoteUpdateParams extends ApiRequestParams {
       @SerializedName("timestamp")
       Long timestamp;
 
-      /** Select a way to pass in {@code starts_at}. */
+      /** <strong>Required.</strong> Select a way to pass in {@code starts_at}. */
       @SerializedName("type")
       Type type;
 
@@ -4341,7 +4371,7 @@ public class QuoteUpdateParams extends ApiRequestParams {
           return this;
         }
 
-        /** Select a way to pass in {@code starts_at}. */
+        /** <strong>Required.</strong> Select a way to pass in {@code starts_at}. */
         public Builder setType(QuoteUpdateParams.Line.StartsAt.Type type) {
           this.type = type;
           return this;
@@ -4350,7 +4380,7 @@ public class QuoteUpdateParams extends ApiRequestParams {
 
       @Getter
       public static class DiscountEnd {
-        /** The ID of a specific discount. */
+        /** <strong>Required.</strong> The ID of a specific discount. */
         @SerializedName("discount")
         Object discount;
 
@@ -4383,13 +4413,13 @@ public class QuoteUpdateParams extends ApiRequestParams {
             return new QuoteUpdateParams.Line.StartsAt.DiscountEnd(this.discount, this.extraParams);
           }
 
-          /** The ID of a specific discount. */
+          /** <strong>Required.</strong> The ID of a specific discount. */
           public Builder setDiscount(String discount) {
             this.discount = discount;
             return this;
           }
 
-          /** The ID of a specific discount. */
+          /** <strong>Required.</strong> The ID of a specific discount. */
           public Builder setDiscount(EmptyParam discount) {
             this.discount = discount;
             return this;
@@ -5142,7 +5172,10 @@ public class QuoteUpdateParams extends ApiRequestParams {
         @SerializedName("timestamp")
         Long timestamp;
 
-        /** The type of calculation made to determine when the discount ends. */
+        /**
+         * <strong>Required.</strong> The type of calculation made to determine when the discount
+         * ends.
+         */
         @SerializedName("type")
         Type type;
 
@@ -5214,7 +5247,10 @@ public class QuoteUpdateParams extends ApiRequestParams {
             return this;
           }
 
-          /** The type of calculation made to determine when the discount ends. */
+          /**
+           * <strong>Required.</strong> The type of calculation made to determine when the discount
+           * ends.
+           */
           public Builder setType(QuoteUpdateParams.LineItem.Discount.DiscountEnd.Type type) {
             this.type = type;
             return this;
@@ -5234,15 +5270,15 @@ public class QuoteUpdateParams extends ApiRequestParams {
           Map<String, Object> extraParams;
 
           /**
-           * Specifies a type of interval unit. Either {@code day}, {@code week}, {@code month} or
-           * {@code year}.
+           * <strong>Required.</strong> Specifies a type of interval unit. Either {@code day},
+           * {@code week}, {@code month} or {@code year}.
            */
           @SerializedName("interval")
           Interval interval;
 
           /**
-           * The number of intervals, as an whole number greater than 0. Stripe multiplies this by
-           * the interval type to get the overall duration.
+           * <strong>Required.</strong> The number of intervals, as an whole number greater than 0.
+           * Stripe multiplies this by the interval type to get the overall duration.
            */
           @SerializedName("interval_count")
           Long intervalCount;
@@ -5301,8 +5337,8 @@ public class QuoteUpdateParams extends ApiRequestParams {
             }
 
             /**
-             * Specifies a type of interval unit. Either {@code day}, {@code week}, {@code month} or
-             * {@code year}.
+             * <strong>Required.</strong> Specifies a type of interval unit. Either {@code day},
+             * {@code week}, {@code month} or {@code year}.
              */
             public Builder setInterval(
                 QuoteUpdateParams.LineItem.Discount.DiscountEnd.Duration.Interval interval) {
@@ -5311,8 +5347,8 @@ public class QuoteUpdateParams extends ApiRequestParams {
             }
 
             /**
-             * The number of intervals, as an whole number greater than 0. Stripe multiplies this by
-             * the interval type to get the overall duration.
+             * <strong>Required.</strong> The number of intervals, as an whole number greater than
+             * 0. Stripe multiplies this by the interval type to get the overall duration.
              */
             public Builder setIntervalCount(Long intervalCount) {
               this.intervalCount = intervalCount;
@@ -5362,9 +5398,9 @@ public class QuoteUpdateParams extends ApiRequestParams {
     @Getter
     public static class PriceData {
       /**
-       * Three-letter <a href="https://www.iso.org/iso-4217-currency-codes.html">ISO currency
-       * code</a>, in lowercase. Must be a <a href="https://stripe.com/docs/currencies">supported
-       * currency</a>.
+       * <strong>Required.</strong> Three-letter <a
+       * href="https://www.iso.org/iso-4217-currency-codes.html">ISO currency code</a>, in
+       * lowercase. Must be a <a href="https://stripe.com/docs/currencies">supported currency</a>.
        */
       @SerializedName("currency")
       Object currency;
@@ -5378,7 +5414,7 @@ public class QuoteUpdateParams extends ApiRequestParams {
       @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
       Map<String, Object> extraParams;
 
-      /** The ID of the product that this price will belong to. */
+      /** <strong>Required.</strong> The ID of the product that this price will belong to. */
       @SerializedName("product")
       Object product;
 
@@ -5460,9 +5496,9 @@ public class QuoteUpdateParams extends ApiRequestParams {
         }
 
         /**
-         * Three-letter <a href="https://www.iso.org/iso-4217-currency-codes.html">ISO currency
-         * code</a>, in lowercase. Must be a <a href="https://stripe.com/docs/currencies">supported
-         * currency</a>.
+         * <strong>Required.</strong> Three-letter <a
+         * href="https://www.iso.org/iso-4217-currency-codes.html">ISO currency code</a>, in
+         * lowercase. Must be a <a href="https://stripe.com/docs/currencies">supported currency</a>.
          */
         public Builder setCurrency(String currency) {
           this.currency = currency;
@@ -5470,9 +5506,9 @@ public class QuoteUpdateParams extends ApiRequestParams {
         }
 
         /**
-         * Three-letter <a href="https://www.iso.org/iso-4217-currency-codes.html">ISO currency
-         * code</a>, in lowercase. Must be a <a href="https://stripe.com/docs/currencies">supported
-         * currency</a>.
+         * <strong>Required.</strong> Three-letter <a
+         * href="https://www.iso.org/iso-4217-currency-codes.html">ISO currency code</a>, in
+         * lowercase. Must be a <a href="https://stripe.com/docs/currencies">supported currency</a>.
          */
         public Builder setCurrency(EmptyParam currency) {
           this.currency = currency;
@@ -5507,13 +5543,13 @@ public class QuoteUpdateParams extends ApiRequestParams {
           return this;
         }
 
-        /** The ID of the product that this price will belong to. */
+        /** <strong>Required.</strong> The ID of the product that this price will belong to. */
         public Builder setProduct(String product) {
           this.product = product;
           return this;
         }
 
-        /** The ID of the product that this price will belong to. */
+        /** <strong>Required.</strong> The ID of the product that this price will belong to. */
         public Builder setProduct(EmptyParam product) {
           this.product = product;
           return this;
@@ -5581,8 +5617,8 @@ public class QuoteUpdateParams extends ApiRequestParams {
         Map<String, Object> extraParams;
 
         /**
-         * Specifies billing frequency. Either {@code day}, {@code week}, {@code month} or {@code
-         * year}.
+         * <strong>Required.</strong> Specifies billing frequency. Either {@code day}, {@code week},
+         * {@code month} or {@code year}.
          */
         @SerializedName("interval")
         Interval interval;
@@ -5647,8 +5683,8 @@ public class QuoteUpdateParams extends ApiRequestParams {
           }
 
           /**
-           * Specifies billing frequency. Either {@code day}, {@code week}, {@code month} or {@code
-           * year}.
+           * <strong>Required.</strong> Specifies billing frequency. Either {@code day}, {@code
+           * week}, {@code month} or {@code year}.
            */
           public Builder setInterval(
               QuoteUpdateParams.LineItem.PriceData.Recurring.Interval interval) {
@@ -5776,8 +5812,9 @@ public class QuoteUpdateParams extends ApiRequestParams {
     Long iterations;
 
     /**
-     * A list of line items the customer is being quoted for within this phase. Each line item
-     * includes information about the product, the quantity, and the resulting cost.
+     * <strong>Required.</strong> A list of line items the customer is being quoted for within this
+     * phase. Each line item includes information about the product, the quantity, and the resulting
+     * cost.
      */
     @SerializedName("line_items")
     List<QuoteUpdateParams.Phase.LineItem> lineItems;
@@ -6239,7 +6276,10 @@ public class QuoteUpdateParams extends ApiRequestParams {
         @SerializedName("timestamp")
         Long timestamp;
 
-        /** The type of calculation made to determine when the discount ends. */
+        /**
+         * <strong>Required.</strong> The type of calculation made to determine when the discount
+         * ends.
+         */
         @SerializedName("type")
         Type type;
 
@@ -6311,7 +6351,10 @@ public class QuoteUpdateParams extends ApiRequestParams {
             return this;
           }
 
-          /** The type of calculation made to determine when the discount ends. */
+          /**
+           * <strong>Required.</strong> The type of calculation made to determine when the discount
+           * ends.
+           */
           public Builder setType(QuoteUpdateParams.Phase.Discount.DiscountEnd.Type type) {
             this.type = type;
             return this;
@@ -6331,15 +6374,15 @@ public class QuoteUpdateParams extends ApiRequestParams {
           Map<String, Object> extraParams;
 
           /**
-           * Specifies a type of interval unit. Either {@code day}, {@code week}, {@code month} or
-           * {@code year}.
+           * <strong>Required.</strong> Specifies a type of interval unit. Either {@code day},
+           * {@code week}, {@code month} or {@code year}.
            */
           @SerializedName("interval")
           Interval interval;
 
           /**
-           * The number of intervals, as an whole number greater than 0. Stripe multiplies this by
-           * the interval type to get the overall duration.
+           * <strong>Required.</strong> The number of intervals, as an whole number greater than 0.
+           * Stripe multiplies this by the interval type to get the overall duration.
            */
           @SerializedName("interval_count")
           Long intervalCount;
@@ -6398,8 +6441,8 @@ public class QuoteUpdateParams extends ApiRequestParams {
             }
 
             /**
-             * Specifies a type of interval unit. Either {@code day}, {@code week}, {@code month} or
-             * {@code year}.
+             * <strong>Required.</strong> Specifies a type of interval unit. Either {@code day},
+             * {@code week}, {@code month} or {@code year}.
              */
             public Builder setInterval(
                 QuoteUpdateParams.Phase.Discount.DiscountEnd.Duration.Interval interval) {
@@ -6408,8 +6451,8 @@ public class QuoteUpdateParams extends ApiRequestParams {
             }
 
             /**
-             * The number of intervals, as an whole number greater than 0. Stripe multiplies this by
-             * the interval type to get the overall duration.
+             * <strong>Required.</strong> The number of intervals, as an whole number greater than
+             * 0. Stripe multiplies this by the interval type to get the overall duration.
              */
             public Builder setIntervalCount(Long intervalCount) {
               this.intervalCount = intervalCount;
@@ -6890,7 +6933,10 @@ public class QuoteUpdateParams extends ApiRequestParams {
           @SerializedName("timestamp")
           Long timestamp;
 
-          /** The type of calculation made to determine when the discount ends. */
+          /**
+           * <strong>Required.</strong> The type of calculation made to determine when the discount
+           * ends.
+           */
           @SerializedName("type")
           Type type;
 
@@ -6964,7 +7010,10 @@ public class QuoteUpdateParams extends ApiRequestParams {
               return this;
             }
 
-            /** The type of calculation made to determine when the discount ends. */
+            /**
+             * <strong>Required.</strong> The type of calculation made to determine when the
+             * discount ends.
+             */
             public Builder setType(
                 QuoteUpdateParams.Phase.LineItem.Discount.DiscountEnd.Type type) {
               this.type = type;
@@ -6985,15 +7034,15 @@ public class QuoteUpdateParams extends ApiRequestParams {
             Map<String, Object> extraParams;
 
             /**
-             * Specifies a type of interval unit. Either {@code day}, {@code week}, {@code month} or
-             * {@code year}.
+             * <strong>Required.</strong> Specifies a type of interval unit. Either {@code day},
+             * {@code week}, {@code month} or {@code year}.
              */
             @SerializedName("interval")
             Interval interval;
 
             /**
-             * The number of intervals, as an whole number greater than 0. Stripe multiplies this by
-             * the interval type to get the overall duration.
+             * <strong>Required.</strong> The number of intervals, as an whole number greater than
+             * 0. Stripe multiplies this by the interval type to get the overall duration.
              */
             @SerializedName("interval_count")
             Long intervalCount;
@@ -7053,8 +7102,8 @@ public class QuoteUpdateParams extends ApiRequestParams {
               }
 
               /**
-               * Specifies a type of interval unit. Either {@code day}, {@code week}, {@code month}
-               * or {@code year}.
+               * <strong>Required.</strong> Specifies a type of interval unit. Either {@code day},
+               * {@code week}, {@code month} or {@code year}.
                */
               public Builder setInterval(
                   QuoteUpdateParams.Phase.LineItem.Discount.DiscountEnd.Duration.Interval
@@ -7064,8 +7113,8 @@ public class QuoteUpdateParams extends ApiRequestParams {
               }
 
               /**
-               * The number of intervals, as an whole number greater than 0. Stripe multiplies this
-               * by the interval type to get the overall duration.
+               * <strong>Required.</strong> The number of intervals, as an whole number greater than
+               * 0. Stripe multiplies this by the interval type to get the overall duration.
                */
               public Builder setIntervalCount(Long intervalCount) {
                 this.intervalCount = intervalCount;
@@ -7115,9 +7164,9 @@ public class QuoteUpdateParams extends ApiRequestParams {
       @Getter
       public static class PriceData {
         /**
-         * Three-letter <a href="https://www.iso.org/iso-4217-currency-codes.html">ISO currency
-         * code</a>, in lowercase. Must be a <a href="https://stripe.com/docs/currencies">supported
-         * currency</a>.
+         * <strong>Required.</strong> Three-letter <a
+         * href="https://www.iso.org/iso-4217-currency-codes.html">ISO currency code</a>, in
+         * lowercase. Must be a <a href="https://stripe.com/docs/currencies">supported currency</a>.
          */
         @SerializedName("currency")
         Object currency;
@@ -7132,7 +7181,7 @@ public class QuoteUpdateParams extends ApiRequestParams {
         @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
         Map<String, Object> extraParams;
 
-        /** The ID of the product that this price will belong to. */
+        /** <strong>Required.</strong> The ID of the product that this price will belong to. */
         @SerializedName("product")
         Object product;
 
@@ -7214,9 +7263,10 @@ public class QuoteUpdateParams extends ApiRequestParams {
           }
 
           /**
-           * Three-letter <a href="https://www.iso.org/iso-4217-currency-codes.html">ISO currency
-           * code</a>, in lowercase. Must be a <a
-           * href="https://stripe.com/docs/currencies">supported currency</a>.
+           * <strong>Required.</strong> Three-letter <a
+           * href="https://www.iso.org/iso-4217-currency-codes.html">ISO currency code</a>, in
+           * lowercase. Must be a <a href="https://stripe.com/docs/currencies">supported
+           * currency</a>.
            */
           public Builder setCurrency(String currency) {
             this.currency = currency;
@@ -7224,9 +7274,10 @@ public class QuoteUpdateParams extends ApiRequestParams {
           }
 
           /**
-           * Three-letter <a href="https://www.iso.org/iso-4217-currency-codes.html">ISO currency
-           * code</a>, in lowercase. Must be a <a
-           * href="https://stripe.com/docs/currencies">supported currency</a>.
+           * <strong>Required.</strong> Three-letter <a
+           * href="https://www.iso.org/iso-4217-currency-codes.html">ISO currency code</a>, in
+           * lowercase. Must be a <a href="https://stripe.com/docs/currencies">supported
+           * currency</a>.
            */
           public Builder setCurrency(EmptyParam currency) {
             this.currency = currency;
@@ -7261,13 +7312,13 @@ public class QuoteUpdateParams extends ApiRequestParams {
             return this;
           }
 
-          /** The ID of the product that this price will belong to. */
+          /** <strong>Required.</strong> The ID of the product that this price will belong to. */
           public Builder setProduct(String product) {
             this.product = product;
             return this;
           }
 
-          /** The ID of the product that this price will belong to. */
+          /** <strong>Required.</strong> The ID of the product that this price will belong to. */
           public Builder setProduct(EmptyParam product) {
             this.product = product;
             return this;
@@ -7337,8 +7388,8 @@ public class QuoteUpdateParams extends ApiRequestParams {
           Map<String, Object> extraParams;
 
           /**
-           * Specifies billing frequency. Either {@code day}, {@code week}, {@code month} or {@code
-           * year}.
+           * <strong>Required.</strong> Specifies billing frequency. Either {@code day}, {@code
+           * week}, {@code month} or {@code year}.
            */
           @SerializedName("interval")
           Interval interval;
@@ -7406,8 +7457,8 @@ public class QuoteUpdateParams extends ApiRequestParams {
             }
 
             /**
-             * Specifies billing frequency. Either {@code day}, {@code week}, {@code month} or
-             * {@code year}.
+             * <strong>Required.</strong> Specifies billing frequency. Either {@code day}, {@code
+             * week}, {@code month} or {@code year}.
              */
             public Builder setInterval(
                 QuoteUpdateParams.Phase.LineItem.PriceData.Recurring.Interval interval) {
@@ -7963,7 +8014,7 @@ public class QuoteUpdateParams extends ApiRequestParams {
         @SerializedName("timestamp")
         Long timestamp;
 
-        /** The type of method to specify the {@code bill_from} time. */
+        /** <strong>Required.</strong> The type of method to specify the {@code bill_from} time. */
         @SerializedName("type")
         Type type;
 
@@ -8038,7 +8089,9 @@ public class QuoteUpdateParams extends ApiRequestParams {
             return this;
           }
 
-          /** The type of method to specify the {@code bill_from} time. */
+          /**
+           * <strong>Required.</strong> The type of method to specify the {@code bill_from} time.
+           */
           public Builder setType(
               QuoteUpdateParams.SubscriptionData.BillOnAcceptance.BillFrom.Type type) {
             this.type = type;
@@ -8194,7 +8247,7 @@ public class QuoteUpdateParams extends ApiRequestParams {
         @SerializedName("timestamp")
         Long timestamp;
 
-        /** The type of method to specify the {@code bill_until} time. */
+        /** <strong>Required.</strong> The type of method to specify the {@code bill_until} time. */
         @SerializedName("type")
         Type type;
 
@@ -8282,7 +8335,9 @@ public class QuoteUpdateParams extends ApiRequestParams {
             return this;
           }
 
-          /** The type of method to specify the {@code bill_until} time. */
+          /**
+           * <strong>Required.</strong> The type of method to specify the {@code bill_until} time.
+           */
           public Builder setType(
               QuoteUpdateParams.SubscriptionData.BillOnAcceptance.BillUntil.Type type) {
             this.type = type;
@@ -8303,15 +8358,15 @@ public class QuoteUpdateParams extends ApiRequestParams {
           Map<String, Object> extraParams;
 
           /**
-           * Specifies a type of interval unit. Either {@code day}, {@code week}, {@code month} or
-           * {@code year}.
+           * <strong>Required.</strong> Specifies a type of interval unit. Either {@code day},
+           * {@code week}, {@code month} or {@code year}.
            */
           @SerializedName("interval")
           Interval interval;
 
           /**
-           * The number of intervals, as an whole number greater than 0. Stripe multiplies this by
-           * the interval type to get the overall duration.
+           * <strong>Required.</strong> The number of intervals, as an whole number greater than 0.
+           * Stripe multiplies this by the interval type to get the overall duration.
            */
           @SerializedName("interval_count")
           Long intervalCount;
@@ -8370,8 +8425,8 @@ public class QuoteUpdateParams extends ApiRequestParams {
             }
 
             /**
-             * Specifies a type of interval unit. Either {@code day}, {@code week}, {@code month} or
-             * {@code year}.
+             * <strong>Required.</strong> Specifies a type of interval unit. Either {@code day},
+             * {@code week}, {@code month} or {@code year}.
              */
             public Builder setInterval(
                 QuoteUpdateParams.SubscriptionData.BillOnAcceptance.BillUntil.Duration.Interval
@@ -8381,8 +8436,8 @@ public class QuoteUpdateParams extends ApiRequestParams {
             }
 
             /**
-             * The number of intervals, as an whole number greater than 0. Stripe multiplies this by
-             * the interval type to get the overall duration.
+             * <strong>Required.</strong> The number of intervals, as an whole number greater than
+             * 0. Stripe multiplies this by the interval type to get the overall duration.
              */
             public Builder setIntervalCount(Long intervalCount) {
               this.intervalCount = intervalCount;
@@ -8551,7 +8606,10 @@ public class QuoteUpdateParams extends ApiRequestParams {
       @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
       Map<String, Object> extraParams;
 
-      /** This is used to determine the number of billing cycles to prebill. */
+      /**
+       * <strong>Required.</strong> This is used to determine the number of billing cycles to
+       * prebill.
+       */
       @SerializedName("iterations")
       Long iterations;
 
@@ -8603,7 +8661,10 @@ public class QuoteUpdateParams extends ApiRequestParams {
           return this;
         }
 
-        /** This is used to determine the number of billing cycles to prebill. */
+        /**
+         * <strong>Required.</strong> This is used to determine the number of billing cycles to
+         * prebill.
+         */
         public Builder setIterations(Long iterations) {
           this.iterations = iterations;
           return this;
@@ -8687,8 +8748,8 @@ public class QuoteUpdateParams extends ApiRequestParams {
   @Getter
   public static class SubscriptionDataOverride {
     /**
-     * Whether the override applies to an existing Subscription Schedule or a new Subscription
-     * Schedule.
+     * <strong>Required.</strong> Whether the override applies to an existing Subscription Schedule
+     * or a new Subscription Schedule.
      */
     @SerializedName("applies_to")
     AppliesTo appliesTo;
@@ -8804,8 +8865,8 @@ public class QuoteUpdateParams extends ApiRequestParams {
       }
 
       /**
-       * Whether the override applies to an existing Subscription Schedule or a new Subscription
-       * Schedule.
+       * <strong>Required.</strong> Whether the override applies to an existing Subscription
+       * Schedule or a new Subscription Schedule.
        */
       public Builder setAppliesTo(QuoteUpdateParams.SubscriptionDataOverride.AppliesTo appliesTo) {
         this.appliesTo = appliesTo;
@@ -8948,7 +9009,10 @@ public class QuoteUpdateParams extends ApiRequestParams {
       @SerializedName("subscription_schedule")
       Object subscriptionSchedule;
 
-      /** Describes whether the quote line is affecting a new schedule or an existing schedule. */
+      /**
+       * <strong>Required.</strong> Describes whether the quote line is affecting a new schedule or
+       * an existing schedule.
+       */
       @SerializedName("type")
       Type type;
 
@@ -9042,7 +9106,10 @@ public class QuoteUpdateParams extends ApiRequestParams {
           return this;
         }
 
-        /** Describes whether the quote line is affecting a new schedule or an existing schedule. */
+        /**
+         * <strong>Required.</strong> Describes whether the quote line is affecting a new schedule
+         * or an existing schedule.
+         */
         public Builder setType(QuoteUpdateParams.SubscriptionDataOverride.AppliesTo.Type type) {
           this.type = type;
           return this;
@@ -9171,7 +9238,7 @@ public class QuoteUpdateParams extends ApiRequestParams {
         @SerializedName("timestamp")
         Long timestamp;
 
-        /** The type of method to specify the {@code bill_from} time. */
+        /** <strong>Required.</strong> The type of method to specify the {@code bill_from} time. */
         @SerializedName("type")
         Type type;
 
@@ -9246,7 +9313,9 @@ public class QuoteUpdateParams extends ApiRequestParams {
             return this;
           }
 
-          /** The type of method to specify the {@code bill_from} time. */
+          /**
+           * <strong>Required.</strong> The type of method to specify the {@code bill_from} time.
+           */
           public Builder setType(
               QuoteUpdateParams.SubscriptionDataOverride.BillOnAcceptance.BillFrom.Type type) {
             this.type = type;
@@ -9402,7 +9471,7 @@ public class QuoteUpdateParams extends ApiRequestParams {
         @SerializedName("timestamp")
         Long timestamp;
 
-        /** The type of method to specify the {@code bill_until} time. */
+        /** <strong>Required.</strong> The type of method to specify the {@code bill_until} time. */
         @SerializedName("type")
         Type type;
 
@@ -9492,7 +9561,9 @@ public class QuoteUpdateParams extends ApiRequestParams {
             return this;
           }
 
-          /** The type of method to specify the {@code bill_until} time. */
+          /**
+           * <strong>Required.</strong> The type of method to specify the {@code bill_until} time.
+           */
           public Builder setType(
               QuoteUpdateParams.SubscriptionDataOverride.BillOnAcceptance.BillUntil.Type type) {
             this.type = type;
@@ -9513,15 +9584,15 @@ public class QuoteUpdateParams extends ApiRequestParams {
           Map<String, Object> extraParams;
 
           /**
-           * Specifies a type of interval unit. Either {@code day}, {@code week}, {@code month} or
-           * {@code year}.
+           * <strong>Required.</strong> Specifies a type of interval unit. Either {@code day},
+           * {@code week}, {@code month} or {@code year}.
            */
           @SerializedName("interval")
           Interval interval;
 
           /**
-           * The number of intervals, as an whole number greater than 0. Stripe multiplies this by
-           * the interval type to get the overall duration.
+           * <strong>Required.</strong> The number of intervals, as an whole number greater than 0.
+           * Stripe multiplies this by the interval type to get the overall duration.
            */
           @SerializedName("interval_count")
           Long intervalCount;
@@ -9581,8 +9652,8 @@ public class QuoteUpdateParams extends ApiRequestParams {
             }
 
             /**
-             * Specifies a type of interval unit. Either {@code day}, {@code week}, {@code month} or
-             * {@code year}.
+             * <strong>Required.</strong> Specifies a type of interval unit. Either {@code day},
+             * {@code week}, {@code month} or {@code year}.
              */
             public Builder setInterval(
                 QuoteUpdateParams.SubscriptionDataOverride.BillOnAcceptance.BillUntil.Duration
@@ -9593,8 +9664,8 @@ public class QuoteUpdateParams extends ApiRequestParams {
             }
 
             /**
-             * The number of intervals, as an whole number greater than 0. Stripe multiplies this by
-             * the interval type to get the overall duration.
+             * <strong>Required.</strong> The number of intervals, as an whole number greater than
+             * 0. Stripe multiplies this by the interval type to get the overall duration.
              */
             public Builder setIntervalCount(Long intervalCount) {
               this.intervalCount = intervalCount;
@@ -9820,7 +9891,7 @@ public class QuoteUpdateParams extends ApiRequestParams {
     @SerializedName("amount_percent")
     BigDecimal amountPercent;
 
-    /** ID of an existing, connected Stripe account. */
+    /** <strong>Required.</strong> ID of an existing, connected Stripe account. */
     @SerializedName("destination")
     Object destination;
 
@@ -9884,13 +9955,13 @@ public class QuoteUpdateParams extends ApiRequestParams {
         return this;
       }
 
-      /** ID of an existing, connected Stripe account. */
+      /** <strong>Required.</strong> ID of an existing, connected Stripe account. */
       public Builder setDestination(String destination) {
         this.destination = destination;
         return this;
       }
 
-      /** ID of an existing, connected Stripe account. */
+      /** <strong>Required.</strong> ID of an existing, connected Stripe account. */
       public Builder setDestination(EmptyParam destination) {
         this.destination = destination;
         return this;

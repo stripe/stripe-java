@@ -450,8 +450,8 @@ public class SourceUpdateParams extends ApiRequestParams {
       Online online;
 
       /**
-       * The status of the mandate acceptance. Either {@code accepted} (the mandate was accepted) or
-       * {@code refused} (the mandate was refused).
+       * <strong>Required.</strong> The status of the mandate acceptance. Either {@code accepted}
+       * (the mandate was accepted) or {@code refused} (the mandate was refused).
        */
       @SerializedName("status")
       Status status;
@@ -590,8 +590,8 @@ public class SourceUpdateParams extends ApiRequestParams {
         }
 
         /**
-         * The status of the mandate acceptance. Either {@code accepted} (the mandate was accepted)
-         * or {@code refused} (the mandate was refused).
+         * <strong>Required.</strong> The status of the mandate acceptance. Either {@code accepted}
+         * (the mandate was accepted) or {@code refused} (the mandate was refused).
          */
         public Builder setStatus(SourceUpdateParams.Mandate.Acceptance.Status status) {
           this.status = status;
@@ -629,8 +629,8 @@ public class SourceUpdateParams extends ApiRequestParams {
       @Getter
       public static class Offline {
         /**
-         * An email to contact you with if a copy of the mandate is requested, required if {@code
-         * type} is {@code offline}.
+         * <strong>Required.</strong> An email to contact you with if a copy of the mandate is
+         * requested, required if {@code type} is {@code offline}.
          */
         @SerializedName("contact_email")
         Object contactEmail;
@@ -666,8 +666,8 @@ public class SourceUpdateParams extends ApiRequestParams {
           }
 
           /**
-           * An email to contact you with if a copy of the mandate is requested, required if {@code
-           * type} is {@code offline}.
+           * <strong>Required.</strong> An email to contact you with if a copy of the mandate is
+           * requested, required if {@code type} is {@code offline}.
            */
           public Builder setContactEmail(String contactEmail) {
             this.contactEmail = contactEmail;
@@ -675,8 +675,8 @@ public class SourceUpdateParams extends ApiRequestParams {
           }
 
           /**
-           * An email to contact you with if a copy of the mandate is requested, required if {@code
-           * type} is {@code offline}.
+           * <strong>Required.</strong> An email to contact you with if a copy of the mandate is
+           * requested, required if {@code type} is {@code offline}.
            */
           public Builder setContactEmail(EmptyParam contactEmail) {
             this.contactEmail = contactEmail;
@@ -1533,7 +1533,7 @@ public class SourceUpdateParams extends ApiRequestParams {
 
     @Getter
     public static class Shipping {
-      /** Shipping address. */
+      /** <strong>Required.</strong> Shipping address. */
       @SerializedName("address")
       Address address;
 
@@ -1608,7 +1608,7 @@ public class SourceUpdateParams extends ApiRequestParams {
               this.trackingNumber);
         }
 
-        /** Shipping address. */
+        /** <strong>Required.</strong> Shipping address. */
         public Builder setAddress(SourceUpdateParams.SourceOrder.Shipping.Address address) {
           this.address = address;
           return this;
@@ -1722,7 +1722,7 @@ public class SourceUpdateParams extends ApiRequestParams {
         @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
         Map<String, Object> extraParams;
 
-        /** Address line 1 (e.g., street, PO Box, or company name). */
+        /** <strong>Required.</strong> Address line 1 (e.g., street, PO Box, or company name). */
         @SerializedName("line1")
         Object line1;
 
@@ -1844,13 +1844,13 @@ public class SourceUpdateParams extends ApiRequestParams {
             return this;
           }
 
-          /** Address line 1 (e.g., street, PO Box, or company name). */
+          /** <strong>Required.</strong> Address line 1 (e.g., street, PO Box, or company name). */
           public Builder setLine1(String line1) {
             this.line1 = line1;
             return this;
           }
 
-          /** Address line 1 (e.g., street, PO Box, or company name). */
+          /** <strong>Required.</strong> Address line 1 (e.g., street, PO Box, or company name). */
           public Builder setLine1(EmptyParam line1) {
             this.line1 = line1;
             return this;

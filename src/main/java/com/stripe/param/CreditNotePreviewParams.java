@@ -40,7 +40,7 @@ public class CreditNotePreviewParams extends ApiRequestParams {
   @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
   Map<String, Object> extraParams;
 
-  /** ID of the invoice. */
+  /** <strong>Required.</strong> ID of the invoice. */
   @SerializedName("invoice")
   String invoice;
 
@@ -241,7 +241,7 @@ public class CreditNotePreviewParams extends ApiRequestParams {
       return this;
     }
 
-    /** ID of the invoice. */
+    /** <strong>Required.</strong> ID of the invoice. */
     public Builder setInvoice(String invoice) {
       this.invoice = invoice;
       return this;
@@ -391,8 +391,8 @@ public class CreditNotePreviewParams extends ApiRequestParams {
     Object taxRates;
 
     /**
-     * Type of the credit note line item, one of {@code invoice_line_item} or {@code
-     * custom_line_item}.
+     * <strong>Required.</strong> Type of the credit note line item, one of {@code
+     * invoice_line_item} or {@code custom_line_item}
      */
     @SerializedName("type")
     Type type;
@@ -576,8 +576,8 @@ public class CreditNotePreviewParams extends ApiRequestParams {
       }
 
       /**
-       * Type of the credit note line item, one of {@code invoice_line_item} or {@code
-       * custom_line_item}.
+       * <strong>Required.</strong> Type of the credit note line item, one of {@code
+       * invoice_line_item} or {@code custom_line_item}
        */
       public Builder setType(CreditNotePreviewParams.Line.Type type) {
         this.type = type;

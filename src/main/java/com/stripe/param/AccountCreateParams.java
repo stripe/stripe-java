@@ -88,10 +88,11 @@ public class AccountCreateParams extends ApiRequestParams {
    * to use it for top-ups). You can provide either a token, like the ones returned by <a
    * href="https://stripe.com/docs/js">Stripe.js</a>, or a dictionary, as documented in the {@code
    * external_account} parameter for <a
-   * href="https://stripe.com/docs/api#account_create_bank_account">bank account</a> creation.
-   * &lt;br&gt;&lt;br&gt;By default, providing an external account sets it as the new default
-   * external account for its currency, and deletes the old default if one exists. To add additional
-   * external accounts without replacing the existing default for the currency, use the <a
+   * href="https://stripe.com/docs/api#account_create_bank_account">bank account</a> creation. <br>
+   * <br>
+   * By default, providing an external account sets it as the new default external account for its
+   * currency, and deletes the old default if one exists. To add additional external accounts
+   * without replacing the existing default for the currency, use the <a
    * href="https://stripe.com/docs/api#account_create_bank_account">bank account</a> or <a
    * href="https://stripe.com/docs/api#account_create_card">card creation</a> APIs.
    */
@@ -365,10 +366,12 @@ public class AccountCreateParams extends ApiRequestParams {
      * href="https://stripe.com/docs/js">Stripe.js</a>, or a dictionary, as documented in the {@code
      * external_account} parameter for <a
      * href="https://stripe.com/docs/api#account_create_bank_account">bank account</a> creation.
-     * &lt;br&gt;&lt;br&gt;By default, providing an external account sets it as the new default
-     * external account for its currency, and deletes the old default if one exists. To add
-     * additional external accounts without replacing the existing default for the currency, use the
-     * <a href="https://stripe.com/docs/api#account_create_bank_account">bank account</a> or <a
+     * <br>
+     * <br>
+     * By default, providing an external account sets it as the new default external account for its
+     * currency, and deletes the old default if one exists. To add additional external accounts
+     * without replacing the existing default for the currency, use the <a
+     * href="https://stripe.com/docs/api#account_create_bank_account">bank account</a> or <a
      * href="https://stripe.com/docs/api#account_create_card">card creation</a> APIs.
      */
     public Builder setExternalAccount(String externalAccount) {
@@ -5656,9 +5659,9 @@ public class AccountCreateParams extends ApiRequestParams {
       Map<String, Object> extraParams;
 
       /**
-       * Whether the controller is liable for losses on this account. For details, see <a
-       * href="https://stripe.com/docs/connect/account-balances">Understanding Connect Account
-       * Balances</a>.
+       * <strong>Required.</strong> Whether the controller is liable for losses on this account. For
+       * details, see <a href="https://stripe.com/docs/connect/account-balances">Understanding
+       * Connect Account Balances</a>.
        */
       @SerializedName("loss_liable")
       Boolean lossLiable;
@@ -5730,9 +5733,9 @@ public class AccountCreateParams extends ApiRequestParams {
         }
 
         /**
-         * Whether the controller is liable for losses on this account. For details, see <a
-         * href="https://stripe.com/docs/connect/account-balances">Understanding Connect Account
-         * Balances</a>.
+         * <strong>Required.</strong> Whether the controller is liable for losses on this account.
+         * For details, see <a href="https://stripe.com/docs/connect/account-balances">Understanding
+         * Connect Account Balances</a>.
          */
         public Builder setLossLiable(Boolean lossLiable) {
           this.lossLiable = lossLiable;
@@ -7743,7 +7746,7 @@ public class AccountCreateParams extends ApiRequestParams {
 
     @Getter
     public static class Dob {
-      /** The day of birth, between 1 and 31. */
+      /** <strong>Required.</strong> The day of birth, between 1 and 31. */
       @SerializedName("day")
       Long day;
 
@@ -7756,11 +7759,11 @@ public class AccountCreateParams extends ApiRequestParams {
       @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
       Map<String, Object> extraParams;
 
-      /** The month of birth, between 1 and 12. */
+      /** <strong>Required.</strong> The month of birth, between 1 and 12. */
       @SerializedName("month")
       Long month;
 
-      /** The four-digit year of birth. */
+      /** <strong>Required.</strong> The four-digit year of birth. */
       @SerializedName("year")
       Long year;
 
@@ -7790,7 +7793,7 @@ public class AccountCreateParams extends ApiRequestParams {
               this.day, this.extraParams, this.month, this.year);
         }
 
-        /** The day of birth, between 1 and 31. */
+        /** <strong>Required.</strong> The day of birth, between 1 and 31. */
         public Builder setDay(Long day) {
           this.day = day;
           return this;
@@ -7824,13 +7827,13 @@ public class AccountCreateParams extends ApiRequestParams {
           return this;
         }
 
-        /** The month of birth, between 1 and 12. */
+        /** <strong>Required.</strong> The month of birth, between 1 and 12. */
         public Builder setMonth(Long month) {
           this.month = month;
           return this;
         }
 
-        /** The four-digit year of birth. */
+        /** <strong>Required.</strong> The four-digit year of birth. */
         public Builder setYear(Long year) {
           this.year = year;
           return this;

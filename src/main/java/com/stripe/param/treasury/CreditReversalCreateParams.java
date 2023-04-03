@@ -33,7 +33,7 @@ public class CreditReversalCreateParams extends ApiRequestParams {
   @SerializedName("metadata")
   Map<String, String> metadata;
 
-  /** The ReceivedCredit to reverse. */
+  /** <strong>Required.</strong> The ReceivedCredit to reverse. */
   @SerializedName("received_credit")
   String receivedCredit;
 
@@ -145,7 +145,7 @@ public class CreditReversalCreateParams extends ApiRequestParams {
       return this;
     }
 
-    /** The ReceivedCredit to reverse. */
+    /** <strong>Required.</strong> The ReceivedCredit to reverse. */
     public Builder setReceivedCredit(String receivedCredit) {
       this.receivedCredit = receivedCredit;
       return this;

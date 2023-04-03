@@ -22,7 +22,7 @@ public class CardCreateParams extends ApiRequestParams {
   @SerializedName("cardholder")
   String cardholder;
 
-  /** The currency for the card. */
+  /** <strong>Required.</strong> The currency for the card. */
   @SerializedName("currency")
   String currency;
 
@@ -80,7 +80,10 @@ public class CardCreateParams extends ApiRequestParams {
   @SerializedName("status")
   Status status;
 
-  /** The type of card to issue. Possible values are {@code physical} or {@code virtual}. */
+  /**
+   * <strong>Required.</strong> The type of card to issue. Possible values are {@code physical} or
+   * {@code virtual}.
+   */
   @SerializedName("type")
   Type type;
 
@@ -177,7 +180,7 @@ public class CardCreateParams extends ApiRequestParams {
       return this;
     }
 
-    /** The currency for the card. */
+    /** <strong>Required.</strong> The currency for the card. */
     public Builder setCurrency(String currency) {
       this.currency = currency;
       return this;
@@ -306,7 +309,10 @@ public class CardCreateParams extends ApiRequestParams {
       return this;
     }
 
-    /** The type of card to issue. Possible values are {@code physical} or {@code virtual}. */
+    /**
+     * <strong>Required.</strong> The type of card to issue. Possible values are {@code physical} or
+     * {@code virtual}.
+     */
     public Builder setType(CardCreateParams.Type type) {
       this.type = type;
       return this;
@@ -315,7 +321,7 @@ public class CardCreateParams extends ApiRequestParams {
 
   @Getter
   public static class Shipping {
-    /** The address that the card is shipped to. */
+    /** <strong>Required.</strong> The address that the card is shipped to. */
     @SerializedName("address")
     Address address;
 
@@ -332,7 +338,7 @@ public class CardCreateParams extends ApiRequestParams {
     @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
     Map<String, Object> extraParams;
 
-    /** The name printed on the shipping label when shipping the card. */
+    /** <strong>Required.</strong> The name printed on the shipping label when shipping the card. */
     @SerializedName("name")
     String name;
 
@@ -405,7 +411,7 @@ public class CardCreateParams extends ApiRequestParams {
             this.type);
       }
 
-      /** The address that the card is shipped to. */
+      /** <strong>Required.</strong> The address that the card is shipped to. */
       public Builder setAddress(CardCreateParams.Shipping.Address address) {
         this.address = address;
         return this;
@@ -443,7 +449,9 @@ public class CardCreateParams extends ApiRequestParams {
         return this;
       }
 
-      /** The name printed on the shipping label when shipping the card. */
+      /**
+       * <strong>Required.</strong> The name printed on the shipping label when shipping the card.
+       */
       public Builder setName(String name) {
         this.name = name;
         return this;
@@ -476,13 +484,13 @@ public class CardCreateParams extends ApiRequestParams {
 
     @Getter
     public static class Address {
-      /** City, district, suburb, town, or village. */
+      /** <strong>Required.</strong> City, district, suburb, town, or village. */
       @SerializedName("city")
       String city;
 
       /**
-       * Two-letter country code (<a href="https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2">ISO
-       * 3166-1 alpha-2</a>).
+       * <strong>Required.</strong> Two-letter country code (<a
+       * href="https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2">ISO 3166-1 alpha-2</a>).
        */
       @SerializedName("country")
       String country;
@@ -496,7 +504,7 @@ public class CardCreateParams extends ApiRequestParams {
       @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
       Map<String, Object> extraParams;
 
-      /** Address line 1 (e.g., street, PO Box, or company name). */
+      /** <strong>Required.</strong> Address line 1 (e.g., street, PO Box, or company name). */
       @SerializedName("line1")
       String line1;
 
@@ -504,7 +512,7 @@ public class CardCreateParams extends ApiRequestParams {
       @SerializedName("line2")
       String line2;
 
-      /** ZIP or postal code. */
+      /** <strong>Required.</strong> ZIP or postal code. */
       @SerializedName("postal_code")
       String postalCode;
 
@@ -560,15 +568,15 @@ public class CardCreateParams extends ApiRequestParams {
               this.state);
         }
 
-        /** City, district, suburb, town, or village. */
+        /** <strong>Required.</strong> City, district, suburb, town, or village. */
         public Builder setCity(String city) {
           this.city = city;
           return this;
         }
 
         /**
-         * Two-letter country code (<a href="https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2">ISO
-         * 3166-1 alpha-2</a>).
+         * <strong>Required.</strong> Two-letter country code (<a
+         * href="https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2">ISO 3166-1 alpha-2</a>).
          */
         public Builder setCountry(String country) {
           this.country = country;
@@ -603,7 +611,7 @@ public class CardCreateParams extends ApiRequestParams {
           return this;
         }
 
-        /** Address line 1 (e.g., street, PO Box, or company name). */
+        /** <strong>Required.</strong> Address line 1 (e.g., street, PO Box, or company name). */
         public Builder setLine1(String line1) {
           this.line1 = line1;
           return this;
@@ -615,7 +623,7 @@ public class CardCreateParams extends ApiRequestParams {
           return this;
         }
 
-        /** ZIP or postal code. */
+        /** <strong>Required.</strong> ZIP or postal code. */
         public Builder setPostalCode(String postalCode) {
           this.postalCode = postalCode;
           return this;
@@ -916,7 +924,7 @@ public class CardCreateParams extends ApiRequestParams {
 
     @Getter
     public static class SpendingLimit {
-      /** Maximum amount allowed to spend per interval. */
+      /** <strong>Required.</strong> Maximum amount allowed to spend per interval. */
       @SerializedName("amount")
       Long amount;
 
@@ -937,7 +945,7 @@ public class CardCreateParams extends ApiRequestParams {
       @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
       Map<String, Object> extraParams;
 
-      /** Interval (or event) to which the amount applies. */
+      /** <strong>Required.</strong> Interval (or event) to which the amount applies. */
       @SerializedName("interval")
       Interval interval;
 
@@ -971,7 +979,7 @@ public class CardCreateParams extends ApiRequestParams {
               this.amount, this.categories, this.extraParams, this.interval);
         }
 
-        /** Maximum amount allowed to spend per interval. */
+        /** <strong>Required.</strong> Maximum amount allowed to spend per interval. */
         public Builder setAmount(Long amount) {
           this.amount = amount;
           return this;
@@ -1033,7 +1041,7 @@ public class CardCreateParams extends ApiRequestParams {
           return this;
         }
 
-        /** Interval (or event) to which the amount applies. */
+        /** <strong>Required.</strong> Interval (or event) to which the amount applies. */
         public Builder setInterval(
             CardCreateParams.SpendingControls.SpendingLimit.Interval interval) {
           this.interval = interval;

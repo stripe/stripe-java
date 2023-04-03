@@ -54,13 +54,13 @@ public class InferredBalance extends ApiResource implements HasId {
   @SerializedName("object")
   String object;
 
-  /** Lists the recorded inferred balances for a Financial Connections <code>Account</code>. */
+  /** Lists the recorded inferred balances for a Financial Connections {@code Account}. */
   public static InferredBalanceCollection list(String account, Map<String, Object> params)
       throws StripeException {
     return list(account, params, (RequestOptions) null);
   }
 
-  /** Lists the recorded inferred balances for a Financial Connections <code>Account</code>. */
+  /** Lists the recorded inferred balances for a Financial Connections {@code Account}. */
   public static InferredBalanceCollection list(
       String account, Map<String, Object> params, RequestOptions options) throws StripeException {
     String url =
@@ -74,13 +74,13 @@ public class InferredBalance extends ApiResource implements HasId {
         ApiResource.RequestMethod.GET, url, params, InferredBalanceCollection.class, options);
   }
 
-  /** Lists the recorded inferred balances for a Financial Connections <code>Account</code>. */
+  /** Lists the recorded inferred balances for a Financial Connections {@code Account}. */
   public static InferredBalanceCollection list(String account, InferredBalanceListParams params)
       throws StripeException {
     return list(account, params, (RequestOptions) null);
   }
 
-  /** Lists the recorded inferred balances for a Financial Connections <code>Account</code>. */
+  /** Lists the recorded inferred balances for a Financial Connections {@code Account}. */
   public static InferredBalanceCollection list(
       String account, InferredBalanceListParams params, RequestOptions options)
       throws StripeException {

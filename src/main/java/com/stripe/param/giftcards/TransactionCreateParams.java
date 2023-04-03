@@ -12,8 +12,8 @@ import lombok.Getter;
 @Getter
 public class TransactionCreateParams extends ApiRequestParams {
   /**
-   * The amount of the transaction. A negative amount deducts funds, and a positive amount adds
-   * funds.
+   * <strong>Required.</strong> The amount of the transaction. A negative amount deducts funds, and
+   * a positive amount adds funds.
    */
   @SerializedName("amount")
   Long amount;
@@ -30,7 +30,10 @@ public class TransactionCreateParams extends ApiRequestParams {
   @SerializedName("created_by")
   CreatedBy createdBy;
 
-  /** The currency of the transaction. This must match the currency of the gift card. */
+  /**
+   * <strong>Required.</strong> The currency of the transaction. This must match the currency of the
+   * gift card.
+   */
   @SerializedName("currency")
   String currency;
 
@@ -51,7 +54,7 @@ public class TransactionCreateParams extends ApiRequestParams {
   @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
   Map<String, Object> extraParams;
 
-  /** The gift card to create a new transaction on. */
+  /** <strong>Required.</strong> The gift card to create a new transaction on. */
   @SerializedName("gift_card")
   String giftCard;
 
@@ -135,8 +138,8 @@ public class TransactionCreateParams extends ApiRequestParams {
     }
 
     /**
-     * The amount of the transaction. A negative amount deducts funds, and a positive amount adds
-     * funds.
+     * <strong>Required.</strong> The amount of the transaction. A negative amount deducts funds,
+     * and a positive amount adds funds.
      */
     public Builder setAmount(Long amount) {
       this.amount = amount;
@@ -159,7 +162,10 @@ public class TransactionCreateParams extends ApiRequestParams {
       return this;
     }
 
-    /** The currency of the transaction. This must match the currency of the gift card. */
+    /**
+     * <strong>Required.</strong> The currency of the transaction. This must match the currency of
+     * the gift card.
+     */
     public Builder setCurrency(String currency) {
       this.currency = currency;
       return this;
@@ -223,7 +229,7 @@ public class TransactionCreateParams extends ApiRequestParams {
       return this;
     }
 
-    /** The gift card to create a new transaction on. */
+    /** <strong>Required.</strong> The gift card to create a new transaction on. */
     public Builder setGiftCard(String giftCard) {
       this.giftCard = giftCard;
       return this;
@@ -277,11 +283,11 @@ public class TransactionCreateParams extends ApiRequestParams {
     @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
     Map<String, Object> extraParams;
 
-    /** The details for the payment that created this object. */
+    /** <strong>Required.</strong> The details for the payment that created this object. */
     @SerializedName("payment")
     Payment payment;
 
-    /** The type of event that created this object. */
+    /** <strong>Required.</strong> The type of event that created this object. */
     @SerializedName("type")
     Type type;
 
@@ -333,13 +339,13 @@ public class TransactionCreateParams extends ApiRequestParams {
         return this;
       }
 
-      /** The details for the payment that created this object. */
+      /** <strong>Required.</strong> The details for the payment that created this object. */
       public Builder setPayment(TransactionCreateParams.CreatedBy.Payment payment) {
         this.payment = payment;
         return this;
       }
 
-      /** The type of event that created this object. */
+      /** <strong>Required.</strong> The type of event that created this object. */
       public Builder setType(TransactionCreateParams.CreatedBy.Type type) {
         this.type = type;
         return this;
@@ -357,7 +363,7 @@ public class TransactionCreateParams extends ApiRequestParams {
       @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
       Map<String, Object> extraParams;
 
-      /** The PaymentIntent used to collect payment for this object. */
+      /** <strong>Required.</strong> The PaymentIntent used to collect payment for this object. */
       @SerializedName("payment_intent")
       String paymentIntent;
 
@@ -409,7 +415,7 @@ public class TransactionCreateParams extends ApiRequestParams {
           return this;
         }
 
-        /** The PaymentIntent used to collect payment for this object. */
+        /** <strong>Required.</strong> The PaymentIntent used to collect payment for this object. */
         public Builder setPaymentIntent(String paymentIntent) {
           this.paymentIntent = paymentIntent;
           return this;

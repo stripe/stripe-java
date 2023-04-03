@@ -29,8 +29,9 @@ public class OrderCreateParams extends ApiRequestParams {
   Object credits;
 
   /**
-   * Three-letter <a href="https://www.iso.org/iso-4217-currency-codes.html">ISO currency code</a>,
-   * in lowercase. Must be a <a href="https://stripe.com/docs/currencies">supported currency</a>.
+   * <strong>Required.</strong> Three-letter <a
+   * href="https://www.iso.org/iso-4217-currency-codes.html">ISO currency code</a>, in lowercase.
+   * Must be a <a href="https://stripe.com/docs/currencies">supported currency</a>.
    */
   @SerializedName("currency")
   String currency;
@@ -65,8 +66,8 @@ public class OrderCreateParams extends ApiRequestParams {
   String ipAddress;
 
   /**
-   * A list of line items the customer is ordering. Each line item includes information about the
-   * product, the quantity, and the resulting cost.
+   * <strong>Required.</strong> A list of line items the customer is ordering. Each line item
+   * includes information about the product, the quantity, and the resulting cost.
    */
   @SerializedName("line_items")
   List<OrderCreateParams.LineItem> lineItems;
@@ -254,9 +255,9 @@ public class OrderCreateParams extends ApiRequestParams {
     }
 
     /**
-     * Three-letter <a href="https://www.iso.org/iso-4217-currency-codes.html">ISO currency
-     * code</a>, in lowercase. Must be a <a href="https://stripe.com/docs/currencies">supported
-     * currency</a>.
+     * <strong>Required.</strong> Three-letter <a
+     * href="https://www.iso.org/iso-4217-currency-codes.html">ISO currency code</a>, in lowercase.
+     * Must be a <a href="https://stripe.com/docs/currencies">supported currency</a>.
      */
     public Builder setCurrency(String currency) {
       this.currency = currency;
@@ -465,7 +466,8 @@ public class OrderCreateParams extends ApiRequestParams {
   @Getter
   public static class AutomaticTax {
     /**
-     * Enable automatic tax calculation which will automatically compute tax rates on this order.
+     * <strong>Required.</strong> Enable automatic tax calculation which will automatically compute
+     * tax rates on this order.
      */
     @SerializedName("enabled")
     Boolean enabled;
@@ -499,7 +501,8 @@ public class OrderCreateParams extends ApiRequestParams {
       }
 
       /**
-       * Enable automatic tax calculation which will automatically compute tax rates on this order.
+       * <strong>Required.</strong> Enable automatic tax calculation which will automatically
+       * compute tax rates on this order.
        */
       public Builder setEnabled(Boolean enabled) {
         this.enabled = enabled;
@@ -819,7 +822,10 @@ public class OrderCreateParams extends ApiRequestParams {
     @SerializedName("gift_card")
     String giftCard;
 
-    /** The type of credit to apply to the order, only {@code gift_card} currently supported. */
+    /**
+     * <strong>Required.</strong> The type of credit to apply to the order, only {@code gift_card}
+     * currently supported.
+     */
     @SerializedName("type")
     Type type;
 
@@ -877,7 +883,10 @@ public class OrderCreateParams extends ApiRequestParams {
         return this;
       }
 
-      /** The type of credit to apply to the order, only {@code gift_card} currently supported. */
+      /**
+       * <strong>Required.</strong> The type of credit to apply to the order, only {@code gift_card}
+       * currently supported.
+       */
       public Builder setType(OrderCreateParams.Credit.Type type) {
         this.type = type;
         return this;
@@ -1604,7 +1613,7 @@ public class OrderCreateParams extends ApiRequestParams {
       Map<String, Object> extraParams;
 
       /**
-       * A unique identifier for this product.
+       * <strong>Required.</strong> A unique identifier for this product.
        *
        * <p>{@code product_data} automatically creates a Product with this ID. If a Product with the
        * same ID already exists, then {@code product_data} re-uses it to avoid duplicates. If any of
@@ -1631,7 +1640,7 @@ public class OrderCreateParams extends ApiRequestParams {
       @SerializedName("metadata")
       Object metadata;
 
-      /** The product's name, meant to be displayable to the customer. */
+      /** <strong>Required.</strong> The product's name, meant to be displayable to the customer. */
       @SerializedName("name")
       String name;
 
@@ -1753,7 +1762,7 @@ public class OrderCreateParams extends ApiRequestParams {
         }
 
         /**
-         * A unique identifier for this product.
+         * <strong>Required.</strong> A unique identifier for this product.
          *
          * <p>{@code product_data} automatically creates a Product with this ID. If a Product with
          * the same ID already exists, then {@code product_data} re-uses it to avoid duplicates. If
@@ -1864,7 +1873,9 @@ public class OrderCreateParams extends ApiRequestParams {
           return this;
         }
 
-        /** The product's name, meant to be displayable to the customer. */
+        /**
+         * <strong>Required.</strong> The product's name, meant to be displayable to the customer.
+         */
         public Builder setName(String name) {
           this.name = name;
           return this;
@@ -1920,19 +1931,19 @@ public class OrderCreateParams extends ApiRequestParams {
         @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
         Map<String, Object> extraParams;
 
-        /** Height, in inches. Maximum precision is 2 decimal places. */
+        /** <strong>Required.</strong> Height, in inches. Maximum precision is 2 decimal places. */
         @SerializedName("height")
         BigDecimal height;
 
-        /** Length, in inches. Maximum precision is 2 decimal places. */
+        /** <strong>Required.</strong> Length, in inches. Maximum precision is 2 decimal places. */
         @SerializedName("length")
         BigDecimal length;
 
-        /** Weight, in ounces. Maximum precision is 2 decimal places. */
+        /** <strong>Required.</strong> Weight, in ounces. Maximum precision is 2 decimal places. */
         @SerializedName("weight")
         BigDecimal weight;
 
-        /** Width, in inches. Maximum precision is 2 decimal places. */
+        /** <strong>Required.</strong> Width, in inches. Maximum precision is 2 decimal places. */
         @SerializedName("width")
         BigDecimal width;
 
@@ -1998,25 +2009,31 @@ public class OrderCreateParams extends ApiRequestParams {
             return this;
           }
 
-          /** Height, in inches. Maximum precision is 2 decimal places. */
+          /**
+           * <strong>Required.</strong> Height, in inches. Maximum precision is 2 decimal places.
+           */
           public Builder setHeight(BigDecimal height) {
             this.height = height;
             return this;
           }
 
-          /** Length, in inches. Maximum precision is 2 decimal places. */
+          /**
+           * <strong>Required.</strong> Length, in inches. Maximum precision is 2 decimal places.
+           */
           public Builder setLength(BigDecimal length) {
             this.length = length;
             return this;
           }
 
-          /** Weight, in ounces. Maximum precision is 2 decimal places. */
+          /**
+           * <strong>Required.</strong> Weight, in ounces. Maximum precision is 2 decimal places.
+           */
           public Builder setWeight(BigDecimal weight) {
             this.weight = weight;
             return this;
           }
 
-          /** Width, in inches. Maximum precision is 2 decimal places. */
+          /** <strong>Required.</strong> Width, in inches. Maximum precision is 2 decimal places. */
           public Builder setWidth(BigDecimal width) {
             this.width = width;
             return this;
@@ -2037,7 +2054,10 @@ public class OrderCreateParams extends ApiRequestParams {
     @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
     Map<String, Object> extraParams;
 
-    /** Settings describing how the order should configure generated PaymentIntents. */
+    /**
+     * <strong>Required.</strong> Settings describing how the order should configure generated
+     * PaymentIntents.
+     */
     @SerializedName("settings")
     Settings settings;
 
@@ -2086,7 +2106,10 @@ public class OrderCreateParams extends ApiRequestParams {
         return this;
       }
 
-      /** Settings describing how the order should configure generated PaymentIntents. */
+      /**
+       * <strong>Required.</strong> Settings describing how the order should configure generated
+       * PaymentIntents.
+       */
       public Builder setSettings(OrderCreateParams.Payment.Settings settings) {
         this.settings = settings;
         return this;
@@ -4032,9 +4055,9 @@ public class OrderCreateParams extends ApiRequestParams {
                 requestedAddressTypes;
 
             /**
-             * The list of bank transfer types that this PaymentIntent is allowed to use for funding
-             * Permitted values include: {@code eu_bank_transfer}, {@code gb_bank_transfer}, {@code
-             * jp_bank_transfer}, or {@code mx_bank_transfer}.
+             * <strong>Required.</strong> The list of bank transfer types that this PaymentIntent is
+             * allowed to use for funding Permitted values include: {@code eu_bank_transfer}, {@code
+             * gb_bank_transfer}, {@code jp_bank_transfer}, or {@code mx_bank_transfer}.
              */
             @SerializedName("type")
             Type type;
@@ -4155,9 +4178,9 @@ public class OrderCreateParams extends ApiRequestParams {
               }
 
               /**
-               * The list of bank transfer types that this PaymentIntent is allowed to use for
-               * funding Permitted values include: {@code eu_bank_transfer}, {@code
-               * gb_bank_transfer}, {@code jp_bank_transfer}, or {@code mx_bank_transfer}.
+               * <strong>Required.</strong> The list of bank transfer types that this PaymentIntent
+               * is allowed to use for funding Permitted values include: {@code eu_bank_transfer},
+               * {@code gb_bank_transfer}, {@code jp_bank_transfer}, or {@code mx_bank_transfer}.
                */
               public Builder setType(
                   OrderCreateParams.Payment.Settings.PaymentMethodOptions.CustomerBalance
@@ -4171,8 +4194,9 @@ public class OrderCreateParams extends ApiRequestParams {
             @Getter
             public static class EuBankTransfer {
               /**
-               * The desired country code of the bank account information. Permitted values include:
-               * {@code BE}, {@code DE}, {@code ES}, {@code FR}, {@code IE}, or {@code NL}.
+               * <strong>Required.</strong> The desired country code of the bank account
+               * information. Permitted values include: {@code BE}, {@code DE}, {@code ES}, {@code
+               * FR}, {@code IE}, or {@code NL}.
                */
               @SerializedName("country")
               String country;
@@ -4210,9 +4234,9 @@ public class OrderCreateParams extends ApiRequestParams {
                 }
 
                 /**
-                 * The desired country code of the bank account information. Permitted values
-                 * include: {@code BE}, {@code DE}, {@code ES}, {@code FR}, {@code IE}, or {@code
-                 * NL}.
+                 * <strong>Required.</strong> The desired country code of the bank account
+                 * information. Permitted values include: {@code BE}, {@code DE}, {@code ES}, {@code
+                 * FR}, {@code IE}, or {@code NL}.
                  */
                 public Builder setCountry(String country) {
                   this.country = country;
@@ -6113,7 +6137,7 @@ public class OrderCreateParams extends ApiRequestParams {
           @SerializedName("app_id")
           String appId;
 
-          /** The client type that the end customer will pay from. */
+          /** <strong>Required.</strong> The client type that the end customer will pay from */
           @SerializedName("client")
           Client client;
 
@@ -6189,7 +6213,7 @@ public class OrderCreateParams extends ApiRequestParams {
               return this;
             }
 
-            /** The client type that the end customer will pay from. */
+            /** <strong>Required.</strong> The client type that the end customer will pay from */
             public Builder setClient(
                 OrderCreateParams.Payment.Settings.PaymentMethodOptions.WechatPay.Client client) {
               this.client = client;
@@ -6297,7 +6321,7 @@ public class OrderCreateParams extends ApiRequestParams {
         @SerializedName("amount")
         Long amount;
 
-        /** ID of the Connected account receiving the transfer. */
+        /** <strong>Required.</strong> ID of the Connected account receiving the transfer. */
         @SerializedName("destination")
         String destination;
 
@@ -6344,7 +6368,7 @@ public class OrderCreateParams extends ApiRequestParams {
             return this;
           }
 
-          /** ID of the Connected account receiving the transfer. */
+          /** <strong>Required.</strong> ID of the Connected account receiving the transfer. */
           public Builder setDestination(String destination) {
             this.destination = destination;
             return this;
@@ -6547,8 +6571,8 @@ public class OrderCreateParams extends ApiRequestParams {
       DeliveryEstimate deliveryEstimate;
 
       /**
-       * The name of the shipping rate, meant to be displayable to the customer. This will appear on
-       * CheckoutSessions.
+       * <strong>Required.</strong> The name of the shipping rate, meant to be displayable to the
+       * customer. This will appear on CheckoutSessions.
        */
       @SerializedName("display_name")
       String displayName;
@@ -6663,8 +6687,8 @@ public class OrderCreateParams extends ApiRequestParams {
         }
 
         /**
-         * The name of the shipping rate, meant to be displayable to the customer. This will appear
-         * on CheckoutSessions.
+         * <strong>Required.</strong> The name of the shipping rate, meant to be displayable to the
+         * customer. This will appear on CheckoutSessions.
          */
         public Builder setDisplayName(String displayName) {
           this.displayName = displayName;
@@ -6872,11 +6896,11 @@ public class OrderCreateParams extends ApiRequestParams {
           @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
           Map<String, Object> extraParams;
 
-          /** A unit of time. */
+          /** <strong>Required.</strong> A unit of time. */
           @SerializedName("unit")
           Unit unit;
 
-          /** Must be greater than 0. */
+          /** <strong>Required.</strong> Must be greater than 0. */
           @SerializedName("value")
           Long value;
 
@@ -6934,7 +6958,7 @@ public class OrderCreateParams extends ApiRequestParams {
               return this;
             }
 
-            /** A unit of time. */
+            /** <strong>Required.</strong> A unit of time. */
             public Builder setUnit(
                 OrderCreateParams.ShippingCost.ShippingRateData.DeliveryEstimate.Maximum.Unit
                     unit) {
@@ -6942,7 +6966,7 @@ public class OrderCreateParams extends ApiRequestParams {
               return this;
             }
 
-            /** Must be greater than 0. */
+            /** <strong>Required.</strong> Must be greater than 0. */
             public Builder setValue(Long value) {
               this.value = value;
               return this;
@@ -6986,11 +7010,11 @@ public class OrderCreateParams extends ApiRequestParams {
           @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
           Map<String, Object> extraParams;
 
-          /** A unit of time. */
+          /** <strong>Required.</strong> A unit of time. */
           @SerializedName("unit")
           Unit unit;
 
-          /** Must be greater than 0. */
+          /** <strong>Required.</strong> Must be greater than 0. */
           @SerializedName("value")
           Long value;
 
@@ -7048,7 +7072,7 @@ public class OrderCreateParams extends ApiRequestParams {
               return this;
             }
 
-            /** A unit of time. */
+            /** <strong>Required.</strong> A unit of time. */
             public Builder setUnit(
                 OrderCreateParams.ShippingCost.ShippingRateData.DeliveryEstimate.Minimum.Unit
                     unit) {
@@ -7056,7 +7080,7 @@ public class OrderCreateParams extends ApiRequestParams {
               return this;
             }
 
-            /** Must be greater than 0. */
+            /** <strong>Required.</strong> Must be greater than 0. */
             public Builder setValue(Long value) {
               this.value = value;
               return this;
@@ -7091,14 +7115,17 @@ public class OrderCreateParams extends ApiRequestParams {
 
       @Getter
       public static class FixedAmount {
-        /** A non-negative integer in cents representing how much to charge. */
+        /**
+         * <strong>Required.</strong> A non-negative integer in cents representing how much to
+         * charge.
+         */
         @SerializedName("amount")
         Long amount;
 
         /**
-         * Three-letter <a href="https://www.iso.org/iso-4217-currency-codes.html">ISO currency
-         * code</a>, in lowercase. Must be a <a href="https://stripe.com/docs/currencies">supported
-         * currency</a>.
+         * <strong>Required.</strong> Three-letter <a
+         * href="https://www.iso.org/iso-4217-currency-codes.html">ISO currency code</a>, in
+         * lowercase. Must be a <a href="https://stripe.com/docs/currencies">supported currency</a>.
          */
         @SerializedName("currency")
         String currency;
@@ -7156,16 +7183,20 @@ public class OrderCreateParams extends ApiRequestParams {
                 this.amount, this.currency, this.currencyOptions, this.extraParams);
           }
 
-          /** A non-negative integer in cents representing how much to charge. */
+          /**
+           * <strong>Required.</strong> A non-negative integer in cents representing how much to
+           * charge.
+           */
           public Builder setAmount(Long amount) {
             this.amount = amount;
             return this;
           }
 
           /**
-           * Three-letter <a href="https://www.iso.org/iso-4217-currency-codes.html">ISO currency
-           * code</a>, in lowercase. Must be a <a
-           * href="https://stripe.com/docs/currencies">supported currency</a>.
+           * <strong>Required.</strong> Three-letter <a
+           * href="https://www.iso.org/iso-4217-currency-codes.html">ISO currency code</a>, in
+           * lowercase. Must be a <a href="https://stripe.com/docs/currencies">supported
+           * currency</a>.
            */
           public Builder setCurrency(String currency) {
             this.currency = currency;
@@ -7241,7 +7272,10 @@ public class OrderCreateParams extends ApiRequestParams {
 
         @Getter
         public static class CurrencyOption {
-          /** A non-negative integer in cents representing how much to charge. */
+          /**
+           * <strong>Required.</strong> A non-negative integer in cents representing how much to
+           * charge.
+           */
           @SerializedName("amount")
           Long amount;
 
@@ -7287,7 +7321,10 @@ public class OrderCreateParams extends ApiRequestParams {
                   this.amount, this.extraParams, this.taxBehavior);
             }
 
-            /** A non-negative integer in cents representing how much to charge. */
+            /**
+             * <strong>Required.</strong> A non-negative integer in cents representing how much to
+             * charge.
+             */
             public Builder setAmount(Long amount) {
               this.amount = amount;
               return this;
@@ -7390,7 +7427,7 @@ public class OrderCreateParams extends ApiRequestParams {
 
   @Getter
   public static class ShippingDetails {
-    /** The shipping address for the order. */
+    /** <strong>Required.</strong> The shipping address for the order. */
     @SerializedName("address")
     Address address;
 
@@ -7403,7 +7440,7 @@ public class OrderCreateParams extends ApiRequestParams {
     @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
     Map<String, Object> extraParams;
 
-    /** The name of the recipient of the order. */
+    /** <strong>Required.</strong> The name of the recipient of the order. */
     @SerializedName("name")
     String name;
 
@@ -7438,7 +7475,7 @@ public class OrderCreateParams extends ApiRequestParams {
             this.address, this.extraParams, this.name, this.phone);
       }
 
-      /** The shipping address for the order. */
+      /** <strong>Required.</strong> The shipping address for the order. */
       public Builder setAddress(OrderCreateParams.ShippingDetails.Address address) {
         this.address = address;
         return this;
@@ -7470,7 +7507,7 @@ public class OrderCreateParams extends ApiRequestParams {
         return this;
       }
 
-      /** The name of the recipient of the order. */
+      /** <strong>Required.</strong> The name of the recipient of the order. */
       public Builder setName(String name) {
         this.name = name;
         return this;
@@ -7775,21 +7812,22 @@ public class OrderCreateParams extends ApiRequestParams {
       Map<String, Object> extraParams;
 
       /**
-       * Type of the tax ID, one of {@code ae_trn}, {@code au_abn}, {@code au_arn}, {@code bg_uic},
-       * {@code br_cnpj}, {@code br_cpf}, {@code ca_bn}, {@code ca_gst_hst}, {@code ca_pst_bc},
-       * {@code ca_pst_mb}, {@code ca_pst_sk}, {@code ca_qst}, {@code ch_vat}, {@code cl_tin},
-       * {@code eg_tin}, {@code es_cif}, {@code eu_oss_vat}, {@code eu_vat}, {@code gb_vat}, {@code
-       * ge_vat}, {@code hk_br}, {@code hu_tin}, {@code id_npwp}, {@code il_vat}, {@code in_gst},
-       * {@code is_vat}, {@code jp_cn}, {@code jp_rn}, {@code jp_trn}, {@code ke_pin}, {@code
-       * kr_brn}, {@code li_uid}, {@code mx_rfc}, {@code my_frp}, {@code my_itn}, {@code my_sst},
-       * {@code no_vat}, {@code nz_gst}, {@code ph_tin}, {@code ru_inn}, {@code ru_kpp}, {@code
-       * sa_vat}, {@code sg_gst}, {@code sg_uen}, {@code si_tin}, {@code th_vat}, {@code tr_tin},
-       * {@code tw_vat}, {@code ua_vat}, {@code us_ein}, or {@code za_vat}.
+       * <strong>Required.</strong> Type of the tax ID, one of {@code ae_trn}, {@code au_abn},
+       * {@code au_arn}, {@code bg_uic}, {@code br_cnpj}, {@code br_cpf}, {@code ca_bn}, {@code
+       * ca_gst_hst}, {@code ca_pst_bc}, {@code ca_pst_mb}, {@code ca_pst_sk}, {@code ca_qst},
+       * {@code ch_vat}, {@code cl_tin}, {@code eg_tin}, {@code es_cif}, {@code eu_oss_vat}, {@code
+       * eu_vat}, {@code gb_vat}, {@code ge_vat}, {@code hk_br}, {@code hu_tin}, {@code id_npwp},
+       * {@code il_vat}, {@code in_gst}, {@code is_vat}, {@code jp_cn}, {@code jp_rn}, {@code
+       * jp_trn}, {@code ke_pin}, {@code kr_brn}, {@code li_uid}, {@code mx_rfc}, {@code my_frp},
+       * {@code my_itn}, {@code my_sst}, {@code no_vat}, {@code nz_gst}, {@code ph_tin}, {@code
+       * ru_inn}, {@code ru_kpp}, {@code sa_vat}, {@code sg_gst}, {@code sg_uen}, {@code si_tin},
+       * {@code th_vat}, {@code tr_tin}, {@code tw_vat}, {@code ua_vat}, {@code us_ein}, or {@code
+       * za_vat}
        */
       @SerializedName("type")
       Type type;
 
-      /** Value of the tax ID. */
+      /** <strong>Required.</strong> Value of the tax ID. */
       @SerializedName("value")
       String value;
 
@@ -7844,23 +7882,24 @@ public class OrderCreateParams extends ApiRequestParams {
         }
 
         /**
-         * Type of the tax ID, one of {@code ae_trn}, {@code au_abn}, {@code au_arn}, {@code
-         * bg_uic}, {@code br_cnpj}, {@code br_cpf}, {@code ca_bn}, {@code ca_gst_hst}, {@code
-         * ca_pst_bc}, {@code ca_pst_mb}, {@code ca_pst_sk}, {@code ca_qst}, {@code ch_vat}, {@code
-         * cl_tin}, {@code eg_tin}, {@code es_cif}, {@code eu_oss_vat}, {@code eu_vat}, {@code
-         * gb_vat}, {@code ge_vat}, {@code hk_br}, {@code hu_tin}, {@code id_npwp}, {@code il_vat},
-         * {@code in_gst}, {@code is_vat}, {@code jp_cn}, {@code jp_rn}, {@code jp_trn}, {@code
-         * ke_pin}, {@code kr_brn}, {@code li_uid}, {@code mx_rfc}, {@code my_frp}, {@code my_itn},
-         * {@code my_sst}, {@code no_vat}, {@code nz_gst}, {@code ph_tin}, {@code ru_inn}, {@code
-         * ru_kpp}, {@code sa_vat}, {@code sg_gst}, {@code sg_uen}, {@code si_tin}, {@code th_vat},
-         * {@code tr_tin}, {@code tw_vat}, {@code ua_vat}, {@code us_ein}, or {@code za_vat}.
+         * <strong>Required.</strong> Type of the tax ID, one of {@code ae_trn}, {@code au_abn},
+         * {@code au_arn}, {@code bg_uic}, {@code br_cnpj}, {@code br_cpf}, {@code ca_bn}, {@code
+         * ca_gst_hst}, {@code ca_pst_bc}, {@code ca_pst_mb}, {@code ca_pst_sk}, {@code ca_qst},
+         * {@code ch_vat}, {@code cl_tin}, {@code eg_tin}, {@code es_cif}, {@code eu_oss_vat},
+         * {@code eu_vat}, {@code gb_vat}, {@code ge_vat}, {@code hk_br}, {@code hu_tin}, {@code
+         * id_npwp}, {@code il_vat}, {@code in_gst}, {@code is_vat}, {@code jp_cn}, {@code jp_rn},
+         * {@code jp_trn}, {@code ke_pin}, {@code kr_brn}, {@code li_uid}, {@code mx_rfc}, {@code
+         * my_frp}, {@code my_itn}, {@code my_sst}, {@code no_vat}, {@code nz_gst}, {@code ph_tin},
+         * {@code ru_inn}, {@code ru_kpp}, {@code sa_vat}, {@code sg_gst}, {@code sg_uen}, {@code
+         * si_tin}, {@code th_vat}, {@code tr_tin}, {@code tw_vat}, {@code ua_vat}, {@code us_ein},
+         * or {@code za_vat}
          */
         public Builder setType(OrderCreateParams.TaxDetails.TaxId.Type type) {
           this.type = type;
           return this;
         }
 
-        /** Value of the tax ID. */
+        /** <strong>Required.</strong> Value of the tax ID. */
         public Builder setValue(String value) {
           this.value = value;
           return this;

@@ -25,9 +25,10 @@ public class TestClockAdvanceParams extends ApiRequestParams {
   Map<String, Object> extraParams;
 
   /**
-   * The time to advance the test clock. Must be after the test clock's current frozen time. Cannot
-   * be more than two intervals in the future from the shortest subscription in this test clock. If
-   * there are no subscriptions in this test clock, it cannot be more than two years in the future.
+   * <strong>Required.</strong> The time to advance the test clock. Must be after the test clock's
+   * current frozen time. Cannot be more than two intervals in the future from the shortest
+   * subscription in this test clock. If there are no subscriptions in this test clock, it cannot be
+   * more than two years in the future.
    */
   @SerializedName("frozen_time")
   Long frozenTime;
@@ -108,10 +109,10 @@ public class TestClockAdvanceParams extends ApiRequestParams {
     }
 
     /**
-     * The time to advance the test clock. Must be after the test clock's current frozen time.
-     * Cannot be more than two intervals in the future from the shortest subscription in this test
-     * clock. If there are no subscriptions in this test clock, it cannot be more than two years in
-     * the future.
+     * <strong>Required.</strong> The time to advance the test clock. Must be after the test clock's
+     * current frozen time. Cannot be more than two intervals in the future from the shortest
+     * subscription in this test clock. If there are no subscriptions in this test clock, it cannot
+     * be more than two years in the future.
      */
     public Builder setFrozenTime(Long frozenTime) {
       this.frozenTime = frozenTime;

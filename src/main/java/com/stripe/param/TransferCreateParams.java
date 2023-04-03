@@ -15,7 +15,10 @@ public class TransferCreateParams extends ApiRequestParams {
   @SerializedName("amount")
   Long amount;
 
-  /** 3-letter <a href="https://stripe.com/docs/payouts">ISO code for currency</a>. */
+  /**
+   * <strong>Required.</strong> 3-letter <a href="https://stripe.com/docs/payouts">ISO code for
+   * currency</a>.
+   */
   @SerializedName("currency")
   String currency;
 
@@ -24,8 +27,8 @@ public class TransferCreateParams extends ApiRequestParams {
   String description;
 
   /**
-   * The ID of a connected Stripe account. &lt;a
-   * href=&quot;/docs/connect/charges-transfers&quot;&gt;See the Connect documentation&lt;/a&gt; for
+   * <strong>Required.</strong> The ID of a connected Stripe account. <a
+   * href="https://stripe.com/docs/connect/charges-transfers">See the Connect documentation</a> for
    * details.
    */
   @SerializedName("destination")
@@ -147,7 +150,10 @@ public class TransferCreateParams extends ApiRequestParams {
       return this;
     }
 
-    /** 3-letter <a href="https://stripe.com/docs/payouts">ISO code for currency</a>. */
+    /**
+     * <strong>Required.</strong> 3-letter <a href="https://stripe.com/docs/payouts">ISO code for
+     * currency</a>.
+     */
     public Builder setCurrency(String currency) {
       this.currency = currency;
       return this;
@@ -160,8 +166,8 @@ public class TransferCreateParams extends ApiRequestParams {
     }
 
     /**
-     * The ID of a connected Stripe account. &lt;a
-     * href=&quot;/docs/connect/charges-transfers&quot;&gt;See the Connect documentation&lt;/a&gt;
+     * <strong>Required.</strong> The ID of a connected Stripe account. <a
+     * href="https://stripe.com/docs/connect/charges-transfers">See the Connect documentation</a>
      * for details.
      */
     public Builder setDestination(String destination) {

@@ -33,7 +33,7 @@ public class ReceivedDebitListParams extends ApiRequestParams {
   @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
   Map<String, Object> extraParams;
 
-  /** The FinancialAccount that funds were pulled from. */
+  /** <strong>Required.</strong> The FinancialAccount that funds were pulled from. */
   @SerializedName("financial_account")
   String financialAccount;
 
@@ -168,7 +168,7 @@ public class ReceivedDebitListParams extends ApiRequestParams {
       return this;
     }
 
-    /** The FinancialAccount that funds were pulled from. */
+    /** <strong>Required.</strong> The FinancialAccount that funds were pulled from. */
     public Builder setFinancialAccount(String financialAccount) {
       this.financialAccount = financialAccount;
       return this;

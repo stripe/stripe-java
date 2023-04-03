@@ -701,20 +701,20 @@ public class Charge extends ApiResource implements MetadataStore<Charge>, Balanc
   }
 
   /**
-   * To charge a credit card or other payment source, you create a <code>Charge</code> object. If
-   * your API key is in test mode, the supplied payment source (e.g., card) won’t actually be
-   * charged, although everything else will occur as if in live mode. (Stripe assumes that the
-   * charge would have completed successfully).
+   * To charge a credit card or other payment source, you create a {@code Charge} object. If your
+   * API key is in test mode, the supplied payment source (e.g., card) won’t actually be charged,
+   * although everything else will occur as if in live mode. (Stripe assumes that the charge would
+   * have completed successfully).
    */
   public static Charge create(Map<String, Object> params) throws StripeException {
     return create(params, (RequestOptions) null);
   }
 
   /**
-   * To charge a credit card or other payment source, you create a <code>Charge</code> object. If
-   * your API key is in test mode, the supplied payment source (e.g., card) won’t actually be
-   * charged, although everything else will occur as if in live mode. (Stripe assumes that the
-   * charge would have completed successfully).
+   * To charge a credit card or other payment source, you create a {@code Charge} object. If your
+   * API key is in test mode, the supplied payment source (e.g., card) won’t actually be charged,
+   * although everything else will occur as if in live mode. (Stripe assumes that the charge would
+   * have completed successfully).
    */
   public static Charge create(Map<String, Object> params, RequestOptions options)
       throws StripeException {
@@ -723,20 +723,20 @@ public class Charge extends ApiResource implements MetadataStore<Charge>, Balanc
   }
 
   /**
-   * To charge a credit card or other payment source, you create a <code>Charge</code> object. If
-   * your API key is in test mode, the supplied payment source (e.g., card) won’t actually be
-   * charged, although everything else will occur as if in live mode. (Stripe assumes that the
-   * charge would have completed successfully).
+   * To charge a credit card or other payment source, you create a {@code Charge} object. If your
+   * API key is in test mode, the supplied payment source (e.g., card) won’t actually be charged,
+   * although everything else will occur as if in live mode. (Stripe assumes that the charge would
+   * have completed successfully).
    */
   public static Charge create(ChargeCreateParams params) throws StripeException {
     return create(params, (RequestOptions) null);
   }
 
   /**
-   * To charge a credit card or other payment source, you create a <code>Charge</code> object. If
-   * your API key is in test mode, the supplied payment source (e.g., card) won’t actually be
-   * charged, although everything else will occur as if in live mode. (Stripe assumes that the
-   * charge would have completed successfully).
+   * To charge a credit card or other payment source, you create a {@code Charge} object. If your
+   * API key is in test mode, the supplied payment source (e.g., card) won’t actually be charged,
+   * although everything else will occur as if in live mode. (Stripe assumes that the charge would
+   * have completed successfully).
    */
   public static Charge create(ChargeCreateParams params, RequestOptions options)
       throws StripeException {

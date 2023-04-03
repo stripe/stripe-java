@@ -223,32 +223,28 @@ public class CardDesign extends ApiResource implements HasId, MetadataStore<Card
     }
 
     /**
-     * Updates the <code>status</code> of the specified testmode card design object to <code>active
-     * </code>.
+     * Updates the {@code status} of the specified testmode card design object to {@code active}.
      */
     public CardDesign activateTestmode() throws StripeException {
       return activateTestmode((Map<String, Object>) null, (RequestOptions) null);
     }
 
     /**
-     * Updates the <code>status</code> of the specified testmode card design object to <code>active
-     * </code>.
+     * Updates the {@code status} of the specified testmode card design object to {@code active}.
      */
     public CardDesign activateTestmode(RequestOptions options) throws StripeException {
       return activateTestmode((Map<String, Object>) null, options);
     }
 
     /**
-     * Updates the <code>status</code> of the specified testmode card design object to <code>active
-     * </code>.
+     * Updates the {@code status} of the specified testmode card design object to {@code active}.
      */
     public CardDesign activateTestmode(Map<String, Object> params) throws StripeException {
       return activateTestmode(params, (RequestOptions) null);
     }
 
     /**
-     * Updates the <code>status</code> of the specified testmode card design object to <code>active
-     * </code>.
+     * Updates the {@code status} of the specified testmode card design object to {@code active}.
      */
     public CardDesign activateTestmode(Map<String, Object> params, RequestOptions options)
         throws StripeException {
@@ -264,8 +260,7 @@ public class CardDesign extends ApiResource implements HasId, MetadataStore<Card
     }
 
     /**
-     * Updates the <code>status</code> of the specified testmode card design object to <code>active
-     * </code>.
+     * Updates the {@code status} of the specified testmode card design object to {@code active}.
      */
     public CardDesign activateTestmode(CardDesignActivateTestmodeParams params)
         throws StripeException {
@@ -273,8 +268,7 @@ public class CardDesign extends ApiResource implements HasId, MetadataStore<Card
     }
 
     /**
-     * Updates the <code>status</code> of the specified testmode card design object to <code>active
-     * </code>.
+     * Updates the {@code status} of the specified testmode card design object to {@code active}.
      */
     public CardDesign activateTestmode(
         CardDesignActivateTestmodeParams params, RequestOptions options) throws StripeException {
@@ -290,32 +284,28 @@ public class CardDesign extends ApiResource implements HasId, MetadataStore<Card
     }
 
     /**
-     * Updates the <code>status</code> of the specified testmode card design object to <code>
-     * inactive</code>.
+     * Updates the {@code status} of the specified testmode card design object to {@code inactive}.
      */
     public CardDesign deactivateTestmode() throws StripeException {
       return deactivateTestmode((Map<String, Object>) null, (RequestOptions) null);
     }
 
     /**
-     * Updates the <code>status</code> of the specified testmode card design object to <code>
-     * inactive</code>.
+     * Updates the {@code status} of the specified testmode card design object to {@code inactive}.
      */
     public CardDesign deactivateTestmode(RequestOptions options) throws StripeException {
       return deactivateTestmode((Map<String, Object>) null, options);
     }
 
     /**
-     * Updates the <code>status</code> of the specified testmode card design object to <code>
-     * inactive</code>.
+     * Updates the {@code status} of the specified testmode card design object to {@code inactive}.
      */
     public CardDesign deactivateTestmode(Map<String, Object> params) throws StripeException {
       return deactivateTestmode(params, (RequestOptions) null);
     }
 
     /**
-     * Updates the <code>status</code> of the specified testmode card design object to <code>
-     * inactive</code>.
+     * Updates the {@code status} of the specified testmode card design object to {@code inactive}.
      */
     public CardDesign deactivateTestmode(Map<String, Object> params, RequestOptions options)
         throws StripeException {
@@ -331,8 +321,7 @@ public class CardDesign extends ApiResource implements HasId, MetadataStore<Card
     }
 
     /**
-     * Updates the <code>status</code> of the specified testmode card design object to <code>
-     * inactive</code>.
+     * Updates the {@code status} of the specified testmode card design object to {@code inactive}.
      */
     public CardDesign deactivateTestmode(CardDesignDeactivateTestmodeParams params)
         throws StripeException {
@@ -340,8 +329,7 @@ public class CardDesign extends ApiResource implements HasId, MetadataStore<Card
     }
 
     /**
-     * Updates the <code>status</code> of the specified testmode card design object to <code>
-     * inactive</code>.
+     * Updates the {@code status} of the specified testmode card design object to {@code inactive}.
      */
     public CardDesign deactivateTestmode(
         CardDesignDeactivateTestmodeParams params, RequestOptions options) throws StripeException {

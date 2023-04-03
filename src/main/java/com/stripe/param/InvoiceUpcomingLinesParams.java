@@ -791,8 +791,8 @@ public class InvoiceUpcomingLinesParams extends ApiRequestParams {
   @Getter
   public static class AutomaticTax {
     /**
-     * Whether Stripe automatically computes tax on this invoice. Note that incompatible invoice
-     * items (invoice items with manually specified <a
+     * <strong>Required.</strong> Whether Stripe automatically computes tax on this invoice. Note
+     * that incompatible invoice items (invoice items with manually specified <a
      * href="https://stripe.com/docs/api/tax_rates">tax rates</a>, negative amounts, or {@code
      * tax_behavior=unspecified}) cannot be added to automatic tax invoices.
      */
@@ -828,8 +828,8 @@ public class InvoiceUpcomingLinesParams extends ApiRequestParams {
       }
 
       /**
-       * Whether Stripe automatically computes tax on this invoice. Note that incompatible invoice
-       * items (invoice items with manually specified <a
+       * <strong>Required.</strong> Whether Stripe automatically computes tax on this invoice. Note
+       * that incompatible invoice items (invoice items with manually specified <a
        * href="https://stripe.com/docs/api/tax_rates">tax rates</a>, negative amounts, or {@code
        * tax_behavior=unspecified}) cannot be added to automatic tax invoices.
        */
@@ -1189,7 +1189,7 @@ public class InvoiceUpcomingLinesParams extends ApiRequestParams {
 
     @Getter
     public static class Shipping {
-      /** Customer shipping address. */
+      /** <strong>Required.</strong> Customer shipping address. */
       @SerializedName("address")
       Address address;
 
@@ -1202,7 +1202,7 @@ public class InvoiceUpcomingLinesParams extends ApiRequestParams {
       @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
       Map<String, Object> extraParams;
 
-      /** Customer name. */
+      /** <strong>Required.</strong> Customer name. */
       @SerializedName("name")
       String name;
 
@@ -1237,7 +1237,7 @@ public class InvoiceUpcomingLinesParams extends ApiRequestParams {
               this.address, this.extraParams, this.name, this.phone);
         }
 
-        /** Customer shipping address. */
+        /** <strong>Required.</strong> Customer shipping address. */
         public Builder setAddress(
             InvoiceUpcomingLinesParams.CustomerDetails.Shipping.Address address) {
           this.address = address;
@@ -1272,7 +1272,7 @@ public class InvoiceUpcomingLinesParams extends ApiRequestParams {
           return this;
         }
 
-        /** Customer name. */
+        /** <strong>Required.</strong> Customer name. */
         public Builder setName(String name) {
           this.name = name;
           return this;
@@ -1548,21 +1548,22 @@ public class InvoiceUpcomingLinesParams extends ApiRequestParams {
       Map<String, Object> extraParams;
 
       /**
-       * Type of the tax ID, one of {@code ae_trn}, {@code au_abn}, {@code au_arn}, {@code bg_uic},
-       * {@code br_cnpj}, {@code br_cpf}, {@code ca_bn}, {@code ca_gst_hst}, {@code ca_pst_bc},
-       * {@code ca_pst_mb}, {@code ca_pst_sk}, {@code ca_qst}, {@code ch_vat}, {@code cl_tin},
-       * {@code eg_tin}, {@code es_cif}, {@code eu_oss_vat}, {@code eu_vat}, {@code gb_vat}, {@code
-       * ge_vat}, {@code hk_br}, {@code hu_tin}, {@code id_npwp}, {@code il_vat}, {@code in_gst},
-       * {@code is_vat}, {@code jp_cn}, {@code jp_rn}, {@code jp_trn}, {@code ke_pin}, {@code
-       * kr_brn}, {@code li_uid}, {@code mx_rfc}, {@code my_frp}, {@code my_itn}, {@code my_sst},
-       * {@code no_vat}, {@code nz_gst}, {@code ph_tin}, {@code ru_inn}, {@code ru_kpp}, {@code
-       * sa_vat}, {@code sg_gst}, {@code sg_uen}, {@code si_tin}, {@code th_vat}, {@code tr_tin},
-       * {@code tw_vat}, {@code ua_vat}, {@code us_ein}, or {@code za_vat}.
+       * <strong>Required.</strong> Type of the tax ID, one of {@code ae_trn}, {@code au_abn},
+       * {@code au_arn}, {@code bg_uic}, {@code br_cnpj}, {@code br_cpf}, {@code ca_bn}, {@code
+       * ca_gst_hst}, {@code ca_pst_bc}, {@code ca_pst_mb}, {@code ca_pst_sk}, {@code ca_qst},
+       * {@code ch_vat}, {@code cl_tin}, {@code eg_tin}, {@code es_cif}, {@code eu_oss_vat}, {@code
+       * eu_vat}, {@code gb_vat}, {@code ge_vat}, {@code hk_br}, {@code hu_tin}, {@code id_npwp},
+       * {@code il_vat}, {@code in_gst}, {@code is_vat}, {@code jp_cn}, {@code jp_rn}, {@code
+       * jp_trn}, {@code ke_pin}, {@code kr_brn}, {@code li_uid}, {@code mx_rfc}, {@code my_frp},
+       * {@code my_itn}, {@code my_sst}, {@code no_vat}, {@code nz_gst}, {@code ph_tin}, {@code
+       * ru_inn}, {@code ru_kpp}, {@code sa_vat}, {@code sg_gst}, {@code sg_uen}, {@code si_tin},
+       * {@code th_vat}, {@code tr_tin}, {@code tw_vat}, {@code ua_vat}, {@code us_ein}, or {@code
+       * za_vat}
        */
       @SerializedName("type")
       Type type;
 
-      /** Value of the tax ID. */
+      /** <strong>Required.</strong> Value of the tax ID. */
       @SerializedName("value")
       String value;
 
@@ -1618,23 +1619,24 @@ public class InvoiceUpcomingLinesParams extends ApiRequestParams {
         }
 
         /**
-         * Type of the tax ID, one of {@code ae_trn}, {@code au_abn}, {@code au_arn}, {@code
-         * bg_uic}, {@code br_cnpj}, {@code br_cpf}, {@code ca_bn}, {@code ca_gst_hst}, {@code
-         * ca_pst_bc}, {@code ca_pst_mb}, {@code ca_pst_sk}, {@code ca_qst}, {@code ch_vat}, {@code
-         * cl_tin}, {@code eg_tin}, {@code es_cif}, {@code eu_oss_vat}, {@code eu_vat}, {@code
-         * gb_vat}, {@code ge_vat}, {@code hk_br}, {@code hu_tin}, {@code id_npwp}, {@code il_vat},
-         * {@code in_gst}, {@code is_vat}, {@code jp_cn}, {@code jp_rn}, {@code jp_trn}, {@code
-         * ke_pin}, {@code kr_brn}, {@code li_uid}, {@code mx_rfc}, {@code my_frp}, {@code my_itn},
-         * {@code my_sst}, {@code no_vat}, {@code nz_gst}, {@code ph_tin}, {@code ru_inn}, {@code
-         * ru_kpp}, {@code sa_vat}, {@code sg_gst}, {@code sg_uen}, {@code si_tin}, {@code th_vat},
-         * {@code tr_tin}, {@code tw_vat}, {@code ua_vat}, {@code us_ein}, or {@code za_vat}.
+         * <strong>Required.</strong> Type of the tax ID, one of {@code ae_trn}, {@code au_abn},
+         * {@code au_arn}, {@code bg_uic}, {@code br_cnpj}, {@code br_cpf}, {@code ca_bn}, {@code
+         * ca_gst_hst}, {@code ca_pst_bc}, {@code ca_pst_mb}, {@code ca_pst_sk}, {@code ca_qst},
+         * {@code ch_vat}, {@code cl_tin}, {@code eg_tin}, {@code es_cif}, {@code eu_oss_vat},
+         * {@code eu_vat}, {@code gb_vat}, {@code ge_vat}, {@code hk_br}, {@code hu_tin}, {@code
+         * id_npwp}, {@code il_vat}, {@code in_gst}, {@code is_vat}, {@code jp_cn}, {@code jp_rn},
+         * {@code jp_trn}, {@code ke_pin}, {@code kr_brn}, {@code li_uid}, {@code mx_rfc}, {@code
+         * my_frp}, {@code my_itn}, {@code my_sst}, {@code no_vat}, {@code nz_gst}, {@code ph_tin},
+         * {@code ru_inn}, {@code ru_kpp}, {@code sa_vat}, {@code sg_gst}, {@code sg_uen}, {@code
+         * si_tin}, {@code th_vat}, {@code tr_tin}, {@code tw_vat}, {@code ua_vat}, {@code us_ein},
+         * or {@code za_vat}
          */
         public Builder setType(InvoiceUpcomingLinesParams.CustomerDetails.TaxId.Type type) {
           this.type = type;
           return this;
         }
 
-        /** Value of the tax ID. */
+        /** <strong>Required.</strong> Value of the tax ID. */
         public Builder setValue(String value) {
           this.value = value;
           return this;
@@ -1937,7 +1939,10 @@ public class InvoiceUpcomingLinesParams extends ApiRequestParams {
       @SerializedName("timestamp")
       Long timestamp;
 
-      /** The type of calculation made to determine when the discount ends. */
+      /**
+       * <strong>Required.</strong> The type of calculation made to determine when the discount
+       * ends.
+       */
       @SerializedName("type")
       Type type;
 
@@ -2009,7 +2014,10 @@ public class InvoiceUpcomingLinesParams extends ApiRequestParams {
           return this;
         }
 
-        /** The type of calculation made to determine when the discount ends. */
+        /**
+         * <strong>Required.</strong> The type of calculation made to determine when the discount
+         * ends.
+         */
         public Builder setType(InvoiceUpcomingLinesParams.Discount.DiscountEnd.Type type) {
           this.type = type;
           return this;
@@ -2029,15 +2037,15 @@ public class InvoiceUpcomingLinesParams extends ApiRequestParams {
         Map<String, Object> extraParams;
 
         /**
-         * Specifies a type of interval unit. Either {@code day}, {@code week}, {@code month} or
-         * {@code year}.
+         * <strong>Required.</strong> Specifies a type of interval unit. Either {@code day}, {@code
+         * week}, {@code month} or {@code year}.
          */
         @SerializedName("interval")
         Interval interval;
 
         /**
-         * The number of intervals, as an whole number greater than 0. Stripe multiplies this by the
-         * interval type to get the overall duration.
+         * <strong>Required.</strong> The number of intervals, as an whole number greater than 0.
+         * Stripe multiplies this by the interval type to get the overall duration.
          */
         @SerializedName("interval_count")
         Long intervalCount;
@@ -2094,8 +2102,8 @@ public class InvoiceUpcomingLinesParams extends ApiRequestParams {
           }
 
           /**
-           * Specifies a type of interval unit. Either {@code day}, {@code week}, {@code month} or
-           * {@code year}.
+           * <strong>Required.</strong> Specifies a type of interval unit. Either {@code day},
+           * {@code week}, {@code month} or {@code year}.
            */
           public Builder setInterval(
               InvoiceUpcomingLinesParams.Discount.DiscountEnd.Duration.Interval interval) {
@@ -2104,8 +2112,8 @@ public class InvoiceUpcomingLinesParams extends ApiRequestParams {
           }
 
           /**
-           * The number of intervals, as an whole number greater than 0. Stripe multiplies this by
-           * the interval type to get the overall duration.
+           * <strong>Required.</strong> The number of intervals, as an whole number greater than 0.
+           * Stripe multiplies this by the interval type to get the overall duration.
            */
           public Builder setIntervalCount(Long intervalCount) {
             this.intervalCount = intervalCount;
@@ -2774,7 +2782,10 @@ public class InvoiceUpcomingLinesParams extends ApiRequestParams {
         @SerializedName("timestamp")
         Long timestamp;
 
-        /** The type of calculation made to determine when the discount ends. */
+        /**
+         * <strong>Required.</strong> The type of calculation made to determine when the discount
+         * ends.
+         */
         @SerializedName("type")
         Type type;
 
@@ -2848,7 +2859,10 @@ public class InvoiceUpcomingLinesParams extends ApiRequestParams {
             return this;
           }
 
-          /** The type of calculation made to determine when the discount ends. */
+          /**
+           * <strong>Required.</strong> The type of calculation made to determine when the discount
+           * ends.
+           */
           public Builder setType(
               InvoiceUpcomingLinesParams.InvoiceItem.Discount.DiscountEnd.Type type) {
             this.type = type;
@@ -2869,15 +2883,15 @@ public class InvoiceUpcomingLinesParams extends ApiRequestParams {
           Map<String, Object> extraParams;
 
           /**
-           * Specifies a type of interval unit. Either {@code day}, {@code week}, {@code month} or
-           * {@code year}.
+           * <strong>Required.</strong> Specifies a type of interval unit. Either {@code day},
+           * {@code week}, {@code month} or {@code year}.
            */
           @SerializedName("interval")
           Interval interval;
 
           /**
-           * The number of intervals, as an whole number greater than 0. Stripe multiplies this by
-           * the interval type to get the overall duration.
+           * <strong>Required.</strong> The number of intervals, as an whole number greater than 0.
+           * Stripe multiplies this by the interval type to get the overall duration.
            */
           @SerializedName("interval_count")
           Long intervalCount;
@@ -2936,8 +2950,8 @@ public class InvoiceUpcomingLinesParams extends ApiRequestParams {
             }
 
             /**
-             * Specifies a type of interval unit. Either {@code day}, {@code week}, {@code month} or
-             * {@code year}.
+             * <strong>Required.</strong> Specifies a type of interval unit. Either {@code day},
+             * {@code week}, {@code month} or {@code year}.
              */
             public Builder setInterval(
                 InvoiceUpcomingLinesParams.InvoiceItem.Discount.DiscountEnd.Duration.Interval
@@ -2947,8 +2961,8 @@ public class InvoiceUpcomingLinesParams extends ApiRequestParams {
             }
 
             /**
-             * The number of intervals, as an whole number greater than 0. Stripe multiplies this by
-             * the interval type to get the overall duration.
+             * <strong>Required.</strong> The number of intervals, as an whole number greater than
+             * 0. Stripe multiplies this by the interval type to get the overall duration.
              */
             public Builder setIntervalCount(Long intervalCount) {
               this.intervalCount = intervalCount;
@@ -2998,8 +3012,8 @@ public class InvoiceUpcomingLinesParams extends ApiRequestParams {
     @Getter
     public static class Period {
       /**
-       * The end of the period, which must be greater than or equal to the start. This value is
-       * inclusive.
+       * <strong>Required.</strong> The end of the period, which must be greater than or equal to
+       * the start. This value is inclusive.
        */
       @SerializedName("end")
       Long end;
@@ -3013,7 +3027,7 @@ public class InvoiceUpcomingLinesParams extends ApiRequestParams {
       @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
       Map<String, Object> extraParams;
 
-      /** The start of the period. This value is inclusive. */
+      /** <strong>Required.</strong> The start of the period. This value is inclusive. */
       @SerializedName("start")
       Long start;
 
@@ -3041,8 +3055,8 @@ public class InvoiceUpcomingLinesParams extends ApiRequestParams {
         }
 
         /**
-         * The end of the period, which must be greater than or equal to the start. This value is
-         * inclusive.
+         * <strong>Required.</strong> The end of the period, which must be greater than or equal to
+         * the start. This value is inclusive.
          */
         public Builder setEnd(Long end) {
           this.end = end;
@@ -3077,7 +3091,7 @@ public class InvoiceUpcomingLinesParams extends ApiRequestParams {
           return this;
         }
 
-        /** The start of the period. This value is inclusive. */
+        /** <strong>Required.</strong> The start of the period. This value is inclusive. */
         public Builder setStart(Long start) {
           this.start = start;
           return this;
@@ -3088,9 +3102,9 @@ public class InvoiceUpcomingLinesParams extends ApiRequestParams {
     @Getter
     public static class PriceData {
       /**
-       * Three-letter <a href="https://www.iso.org/iso-4217-currency-codes.html">ISO currency
-       * code</a>, in lowercase. Must be a <a href="https://stripe.com/docs/currencies">supported
-       * currency</a>.
+       * <strong>Required.</strong> Three-letter <a
+       * href="https://www.iso.org/iso-4217-currency-codes.html">ISO currency code</a>, in
+       * lowercase. Must be a <a href="https://stripe.com/docs/currencies">supported currency</a>.
        */
       @SerializedName("currency")
       String currency;
@@ -3104,7 +3118,7 @@ public class InvoiceUpcomingLinesParams extends ApiRequestParams {
       @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
       Map<String, Object> extraParams;
 
-      /** The ID of the product that this price will belong to. */
+      /** <strong>Required.</strong> The ID of the product that this price will belong to. */
       @SerializedName("product")
       String product;
 
@@ -3175,9 +3189,9 @@ public class InvoiceUpcomingLinesParams extends ApiRequestParams {
         }
 
         /**
-         * Three-letter <a href="https://www.iso.org/iso-4217-currency-codes.html">ISO currency
-         * code</a>, in lowercase. Must be a <a href="https://stripe.com/docs/currencies">supported
-         * currency</a>.
+         * <strong>Required.</strong> Three-letter <a
+         * href="https://www.iso.org/iso-4217-currency-codes.html">ISO currency code</a>, in
+         * lowercase. Must be a <a href="https://stripe.com/docs/currencies">supported currency</a>.
          */
         public Builder setCurrency(String currency) {
           this.currency = currency;
@@ -3212,7 +3226,7 @@ public class InvoiceUpcomingLinesParams extends ApiRequestParams {
           return this;
         }
 
-        /** The ID of the product that this price will belong to. */
+        /** <strong>Required.</strong> The ID of the product that this price will belong to. */
         public Builder setProduct(String product) {
           this.product = product;
           return this;
@@ -3696,8 +3710,8 @@ public class InvoiceUpcomingLinesParams extends ApiRequestParams {
       Map<String, Object> extraParams;
 
       /**
-       * Number of units that meets the billing threshold to advance the subscription to a new
-       * billing period (e.g., it takes 10 $5 units to meet a $50 <a
+       * <strong>Required.</strong> Number of units that meets the billing threshold to advance the
+       * subscription to a new billing period (e.g., it takes 10 $5 units to meet a $50 <a
        * href="https://stripe.com/docs/api/subscriptions/update#update_subscription-billing_thresholds-amount_gte">monetary
        * threshold</a>)
        */
@@ -3755,8 +3769,8 @@ public class InvoiceUpcomingLinesParams extends ApiRequestParams {
         }
 
         /**
-         * Number of units that meets the billing threshold to advance the subscription to a new
-         * billing period (e.g., it takes 10 $5 units to meet a $50 <a
+         * <strong>Required.</strong> Number of units that meets the billing threshold to advance
+         * the subscription to a new billing period (e.g., it takes 10 $5 units to meet a $50 <a
          * href="https://stripe.com/docs/api/subscriptions/update#update_subscription-billing_thresholds-amount_gte">monetary
          * threshold</a>)
          */
@@ -3888,7 +3902,10 @@ public class InvoiceUpcomingLinesParams extends ApiRequestParams {
         @SerializedName("timestamp")
         Long timestamp;
 
-        /** The type of calculation made to determine when the discount ends. */
+        /**
+         * <strong>Required.</strong> The type of calculation made to determine when the discount
+         * ends.
+         */
         @SerializedName("type")
         Type type;
 
@@ -3962,7 +3979,10 @@ public class InvoiceUpcomingLinesParams extends ApiRequestParams {
             return this;
           }
 
-          /** The type of calculation made to determine when the discount ends. */
+          /**
+           * <strong>Required.</strong> The type of calculation made to determine when the discount
+           * ends.
+           */
           public Builder setType(
               InvoiceUpcomingLinesParams.SubscriptionItem.Discount.DiscountEnd.Type type) {
             this.type = type;
@@ -3983,15 +4003,15 @@ public class InvoiceUpcomingLinesParams extends ApiRequestParams {
           Map<String, Object> extraParams;
 
           /**
-           * Specifies a type of interval unit. Either {@code day}, {@code week}, {@code month} or
-           * {@code year}.
+           * <strong>Required.</strong> Specifies a type of interval unit. Either {@code day},
+           * {@code week}, {@code month} or {@code year}.
            */
           @SerializedName("interval")
           Interval interval;
 
           /**
-           * The number of intervals, as an whole number greater than 0. Stripe multiplies this by
-           * the interval type to get the overall duration.
+           * <strong>Required.</strong> The number of intervals, as an whole number greater than 0.
+           * Stripe multiplies this by the interval type to get the overall duration.
            */
           @SerializedName("interval_count")
           Long intervalCount;
@@ -4051,8 +4071,8 @@ public class InvoiceUpcomingLinesParams extends ApiRequestParams {
             }
 
             /**
-             * Specifies a type of interval unit. Either {@code day}, {@code week}, {@code month} or
-             * {@code year}.
+             * <strong>Required.</strong> Specifies a type of interval unit. Either {@code day},
+             * {@code week}, {@code month} or {@code year}.
              */
             public Builder setInterval(
                 InvoiceUpcomingLinesParams.SubscriptionItem.Discount.DiscountEnd.Duration.Interval
@@ -4062,8 +4082,8 @@ public class InvoiceUpcomingLinesParams extends ApiRequestParams {
             }
 
             /**
-             * The number of intervals, as an whole number greater than 0. Stripe multiplies this by
-             * the interval type to get the overall duration.
+             * <strong>Required.</strong> The number of intervals, as an whole number greater than
+             * 0. Stripe multiplies this by the interval type to get the overall duration.
              */
             public Builder setIntervalCount(Long intervalCount) {
               this.intervalCount = intervalCount;
@@ -4113,9 +4133,9 @@ public class InvoiceUpcomingLinesParams extends ApiRequestParams {
     @Getter
     public static class PriceData {
       /**
-       * Three-letter <a href="https://www.iso.org/iso-4217-currency-codes.html">ISO currency
-       * code</a>, in lowercase. Must be a <a href="https://stripe.com/docs/currencies">supported
-       * currency</a>.
+       * <strong>Required.</strong> Three-letter <a
+       * href="https://www.iso.org/iso-4217-currency-codes.html">ISO currency code</a>, in
+       * lowercase. Must be a <a href="https://stripe.com/docs/currencies">supported currency</a>.
        */
       @SerializedName("currency")
       String currency;
@@ -4129,12 +4149,13 @@ public class InvoiceUpcomingLinesParams extends ApiRequestParams {
       @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
       Map<String, Object> extraParams;
 
-      /** The ID of the product that this price will belong to. */
+      /** <strong>Required.</strong> The ID of the product that this price will belong to. */
       @SerializedName("product")
       String product;
 
       /**
-       * The recurring components of a price such as {@code interval} and {@code interval_count}.
+       * <strong>Required.</strong> The recurring components of a price such as {@code interval} and
+       * {@code interval_count}.
        */
       @SerializedName("recurring")
       Recurring recurring;
@@ -4211,9 +4232,9 @@ public class InvoiceUpcomingLinesParams extends ApiRequestParams {
         }
 
         /**
-         * Three-letter <a href="https://www.iso.org/iso-4217-currency-codes.html">ISO currency
-         * code</a>, in lowercase. Must be a <a href="https://stripe.com/docs/currencies">supported
-         * currency</a>.
+         * <strong>Required.</strong> Three-letter <a
+         * href="https://www.iso.org/iso-4217-currency-codes.html">ISO currency code</a>, in
+         * lowercase. Must be a <a href="https://stripe.com/docs/currencies">supported currency</a>.
          */
         public Builder setCurrency(String currency) {
           this.currency = currency;
@@ -4248,14 +4269,15 @@ public class InvoiceUpcomingLinesParams extends ApiRequestParams {
           return this;
         }
 
-        /** The ID of the product that this price will belong to. */
+        /** <strong>Required.</strong> The ID of the product that this price will belong to. */
         public Builder setProduct(String product) {
           this.product = product;
           return this;
         }
 
         /**
-         * The recurring components of a price such as {@code interval} and {@code interval_count}.
+         * <strong>Required.</strong> The recurring components of a price such as {@code interval}
+         * and {@code interval_count}.
          */
         public Builder setRecurring(
             InvoiceUpcomingLinesParams.SubscriptionItem.PriceData.Recurring recurring) {
@@ -4307,8 +4329,8 @@ public class InvoiceUpcomingLinesParams extends ApiRequestParams {
         Map<String, Object> extraParams;
 
         /**
-         * Specifies billing frequency. Either {@code day}, {@code week}, {@code month} or {@code
-         * year}.
+         * <strong>Required.</strong> Specifies billing frequency. Either {@code day}, {@code week},
+         * {@code month} or {@code year}.
          */
         @SerializedName("interval")
         Interval interval;
@@ -4375,8 +4397,8 @@ public class InvoiceUpcomingLinesParams extends ApiRequestParams {
           }
 
           /**
-           * Specifies billing frequency. Either {@code day}, {@code week}, {@code month} or {@code
-           * year}.
+           * <strong>Required.</strong> Specifies billing frequency. Either {@code day}, {@code
+           * week}, {@code month} or {@code year}.
            */
           public Builder setInterval(
               InvoiceUpcomingLinesParams.SubscriptionItem.PriceData.Recurring.Interval interval) {
@@ -4448,7 +4470,9 @@ public class InvoiceUpcomingLinesParams extends ApiRequestParams {
     @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
     Map<String, Object> extraParams;
 
-    /** This is used to determine the number of billing cycles to prebill. */
+    /**
+     * <strong>Required.</strong> This is used to determine the number of billing cycles to prebill.
+     */
     @SerializedName("iterations")
     Long iterations;
 
@@ -4499,7 +4523,10 @@ public class InvoiceUpcomingLinesParams extends ApiRequestParams {
         return this;
       }
 
-      /** This is used to determine the number of billing cycles to prebill. */
+      /**
+       * <strong>Required.</strong> This is used to determine the number of billing cycles to
+       * prebill.
+       */
       public Builder setIterations(Long iterations) {
         this.iterations = iterations;
         return this;

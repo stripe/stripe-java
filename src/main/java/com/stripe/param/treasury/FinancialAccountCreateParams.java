@@ -44,7 +44,7 @@ public class FinancialAccountCreateParams extends ApiRequestParams {
   @SerializedName("platform_restrictions")
   PlatformRestrictions platformRestrictions;
 
-  /** The currencies the FinancialAccount can hold a balance in. */
+  /** <strong>Required.</strong> The currencies the FinancialAccount can hold a balance in. */
   @SerializedName("supported_currencies")
   List<String> supportedCurrencies;
 
@@ -426,7 +426,7 @@ public class FinancialAccountCreateParams extends ApiRequestParams {
       @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
       Map<String, Object> extraParams;
 
-      /** Whether the FinancialAccount should have the Feature. */
+      /** <strong>Required.</strong> Whether the FinancialAccount should have the Feature. */
       @SerializedName("requested")
       Boolean requested;
 
@@ -478,7 +478,7 @@ public class FinancialAccountCreateParams extends ApiRequestParams {
           return this;
         }
 
-        /** Whether the FinancialAccount should have the Feature. */
+        /** <strong>Required.</strong> Whether the FinancialAccount should have the Feature. */
         public Builder setRequested(Boolean requested) {
           this.requested = requested;
           return this;
@@ -497,7 +497,7 @@ public class FinancialAccountCreateParams extends ApiRequestParams {
       @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
       Map<String, Object> extraParams;
 
-      /** Whether the FinancialAccount should have the Feature. */
+      /** <strong>Required.</strong> Whether the FinancialAccount should have the Feature. */
       @SerializedName("requested")
       Boolean requested;
 
@@ -549,7 +549,7 @@ public class FinancialAccountCreateParams extends ApiRequestParams {
           return this;
         }
 
-        /** Whether the FinancialAccount should have the Feature. */
+        /** <strong>Required.</strong> Whether the FinancialAccount should have the Feature. */
         public Builder setRequested(Boolean requested) {
           this.requested = requested;
           return this;
@@ -639,7 +639,7 @@ public class FinancialAccountCreateParams extends ApiRequestParams {
         @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
         Map<String, Object> extraParams;
 
-        /** Whether the FinancialAccount should have the Feature. */
+        /** <strong>Required.</strong> Whether the FinancialAccount should have the Feature. */
         @SerializedName("requested")
         Boolean requested;
 
@@ -693,7 +693,7 @@ public class FinancialAccountCreateParams extends ApiRequestParams {
             return this;
           }
 
-          /** Whether the FinancialAccount should have the Feature. */
+          /** <strong>Required.</strong> Whether the FinancialAccount should have the Feature. */
           public Builder setRequested(Boolean requested) {
             this.requested = requested;
             return this;
@@ -784,7 +784,7 @@ public class FinancialAccountCreateParams extends ApiRequestParams {
         @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
         Map<String, Object> extraParams;
 
-        /** Whether the FinancialAccount should have the Feature. */
+        /** <strong>Required.</strong> Whether the FinancialAccount should have the Feature. */
         @SerializedName("requested")
         Boolean requested;
 
@@ -836,7 +836,7 @@ public class FinancialAccountCreateParams extends ApiRequestParams {
             return this;
           }
 
-          /** Whether the FinancialAccount should have the Feature. */
+          /** <strong>Required.</strong> Whether the FinancialAccount should have the Feature. */
           public Builder setRequested(Boolean requested) {
             this.requested = requested;
             return this;
@@ -856,7 +856,7 @@ public class FinancialAccountCreateParams extends ApiRequestParams {
       @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
       Map<String, Object> extraParams;
 
-      /** Whether the FinancialAccount should have the Feature. */
+      /** <strong>Required.</strong> Whether the FinancialAccount should have the Feature. */
       @SerializedName("requested")
       Boolean requested;
 
@@ -908,7 +908,7 @@ public class FinancialAccountCreateParams extends ApiRequestParams {
           return this;
         }
 
-        /** Whether the FinancialAccount should have the Feature. */
+        /** <strong>Required.</strong> Whether the FinancialAccount should have the Feature. */
         public Builder setRequested(Boolean requested) {
           this.requested = requested;
           return this;
@@ -1013,7 +1013,7 @@ public class FinancialAccountCreateParams extends ApiRequestParams {
         @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
         Map<String, Object> extraParams;
 
-        /** Whether the FinancialAccount should have the Feature. */
+        /** <strong>Required.</strong> Whether the FinancialAccount should have the Feature. */
         @SerializedName("requested")
         Boolean requested;
 
@@ -1065,7 +1065,7 @@ public class FinancialAccountCreateParams extends ApiRequestParams {
             return this;
           }
 
-          /** Whether the FinancialAccount should have the Feature. */
+          /** <strong>Required.</strong> Whether the FinancialAccount should have the Feature. */
           public Builder setRequested(Boolean requested) {
             this.requested = requested;
             return this;
@@ -1085,7 +1085,7 @@ public class FinancialAccountCreateParams extends ApiRequestParams {
         @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
         Map<String, Object> extraParams;
 
-        /** Whether the FinancialAccount should have the Feature. */
+        /** <strong>Required.</strong> Whether the FinancialAccount should have the Feature. */
         @SerializedName("requested")
         Boolean requested;
 
@@ -1139,7 +1139,7 @@ public class FinancialAccountCreateParams extends ApiRequestParams {
             return this;
           }
 
-          /** Whether the FinancialAccount should have the Feature. */
+          /** <strong>Required.</strong> Whether the FinancialAccount should have the Feature. */
           public Builder setRequested(Boolean requested) {
             this.requested = requested;
             return this;
@@ -1245,7 +1245,7 @@ public class FinancialAccountCreateParams extends ApiRequestParams {
         @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
         Map<String, Object> extraParams;
 
-        /** Whether the FinancialAccount should have the Feature. */
+        /** <strong>Required.</strong> Whether the FinancialAccount should have the Feature. */
         @SerializedName("requested")
         Boolean requested;
 
@@ -1299,7 +1299,7 @@ public class FinancialAccountCreateParams extends ApiRequestParams {
             return this;
           }
 
-          /** Whether the FinancialAccount should have the Feature. */
+          /** <strong>Required.</strong> Whether the FinancialAccount should have the Feature. */
           public Builder setRequested(Boolean requested) {
             this.requested = requested;
             return this;
@@ -1319,7 +1319,7 @@ public class FinancialAccountCreateParams extends ApiRequestParams {
         @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
         Map<String, Object> extraParams;
 
-        /** Whether the FinancialAccount should have the Feature. */
+        /** <strong>Required.</strong> Whether the FinancialAccount should have the Feature. */
         @SerializedName("requested")
         Boolean requested;
 
@@ -1373,7 +1373,7 @@ public class FinancialAccountCreateParams extends ApiRequestParams {
             return this;
           }
 
-          /** Whether the FinancialAccount should have the Feature. */
+          /** <strong>Required.</strong> Whether the FinancialAccount should have the Feature. */
           public Builder setRequested(Boolean requested) {
             this.requested = requested;
             return this;

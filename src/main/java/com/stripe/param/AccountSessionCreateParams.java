@@ -11,7 +11,7 @@ import lombok.Getter;
 
 @Getter
 public class AccountSessionCreateParams extends ApiRequestParams {
-  /** The identifier of the account to create an Account Session for. */
+  /** <strong>Required.</strong> The identifier of the account to create an Account Session for. */
   @SerializedName("account")
   String account;
 
@@ -51,7 +51,9 @@ public class AccountSessionCreateParams extends ApiRequestParams {
       return new AccountSessionCreateParams(this.account, this.expand, this.extraParams);
     }
 
-    /** The identifier of the account to create an Account Session for. */
+    /**
+     * <strong>Required.</strong> The identifier of the account to create an Account Session for.
+     */
     public Builder setAccount(String account) {
       this.account = account;
       return this;
