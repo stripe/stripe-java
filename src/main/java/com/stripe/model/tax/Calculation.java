@@ -16,7 +16,12 @@ import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.Setter;
 
-/** A Tax {@code Calculation} allows you to calculate the tax to collect from your customer. */
+/**
+ * A Tax Calculation allows you to calculate the tax to collect from your customer.
+ *
+ * <p>Related guide: <a href="https://stripe.com/docs/tax/custom">Calculate tax in your custom
+ * payment flow</a>.
+ */
 @Getter
 @Setter
 @EqualsAndHashCode(callSuper = false)
