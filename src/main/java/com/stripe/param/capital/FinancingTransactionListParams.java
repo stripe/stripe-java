@@ -64,6 +64,13 @@ public class FinancingTransactionListParams extends ApiRequestParams {
   @SerializedName("starting_after")
   String startingAfter;
 
+  /**
+   * For transactions of type {@code paydown} and reason {@code automatic_withholding} only, only
+   * returns transactions that were created as a result of this Treasury Transaction.
+   */
+  @SerializedName("treasury_transaction")
+  String treasuryTransaction;
+
   private FinancingTransactionListParams(
       String charge,
       String endingBefore,
@@ -72,7 +79,8 @@ public class FinancingTransactionListParams extends ApiRequestParams {
       String financingOffer,
       Long limit,
       String reversedTransaction,
-      String startingAfter) {
+      String startingAfter,
+      String treasuryTransaction) {
     this.charge = charge;
     this.endingBefore = endingBefore;
     this.expand = expand;
@@ -81,6 +89,7 @@ public class FinancingTransactionListParams extends ApiRequestParams {
     this.limit = limit;
     this.reversedTransaction = reversedTransaction;
     this.startingAfter = startingAfter;
+    this.treasuryTransaction = treasuryTransaction;
   }
 
   public static Builder builder() {
@@ -104,6 +113,8 @@ public class FinancingTransactionListParams extends ApiRequestParams {
 
     private String startingAfter;
 
+    private String treasuryTransaction;
+
     /** Finalize and obtain parameter instance from this builder. */
     public FinancingTransactionListParams build() {
       return new FinancingTransactionListParams(
@@ -114,7 +125,8 @@ public class FinancingTransactionListParams extends ApiRequestParams {
           this.financingOffer,
           this.limit,
           this.reversedTransaction,
-          this.startingAfter);
+          this.startingAfter,
+          this.treasuryTransaction);
     }
 
     /**
@@ -220,6 +232,15 @@ public class FinancingTransactionListParams extends ApiRequestParams {
      */
     public Builder setStartingAfter(String startingAfter) {
       this.startingAfter = startingAfter;
+      return this;
+    }
+
+    /**
+     * For transactions of type {@code paydown} and reason {@code automatic_withholding} only, only
+     * returns transactions that were created as a result of this Treasury Transaction.
+     */
+    public Builder setTreasuryTransaction(String treasuryTransaction) {
+      this.treasuryTransaction = treasuryTransaction;
       return this;
     }
   }
