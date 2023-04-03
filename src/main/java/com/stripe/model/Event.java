@@ -103,9 +103,8 @@ public class Event extends ApiResource implements HasId {
   /**
    * List events, going back up to 30 days. Each event data is rendered according to Stripe API
    * version at its creation time, specified in <a
-   * href="https://stripe.com/docs/api/events/object">event object</a> <code>api_version</code>
-   * attribute (not according to your current Stripe API version or <code>Stripe-Version</code>
-   * header).
+   * href="https://stripe.com/docs/api/events/object">event object</a> {@code api_version} attribute
+   * (not according to your current Stripe API version or {@code Stripe-Version} header).
    */
   public static EventCollection list(Map<String, Object> params) throws StripeException {
     return list(params, (RequestOptions) null);
@@ -114,9 +113,8 @@ public class Event extends ApiResource implements HasId {
   /**
    * List events, going back up to 30 days. Each event data is rendered according to Stripe API
    * version at its creation time, specified in <a
-   * href="https://stripe.com/docs/api/events/object">event object</a> <code>api_version</code>
-   * attribute (not according to your current Stripe API version or <code>Stripe-Version</code>
-   * header).
+   * href="https://stripe.com/docs/api/events/object">event object</a> {@code api_version} attribute
+   * (not according to your current Stripe API version or {@code Stripe-Version} header).
    */
   public static EventCollection list(Map<String, Object> params, RequestOptions options)
       throws StripeException {
@@ -127,9 +125,8 @@ public class Event extends ApiResource implements HasId {
   /**
    * List events, going back up to 30 days. Each event data is rendered according to Stripe API
    * version at its creation time, specified in <a
-   * href="https://stripe.com/docs/api/events/object">event object</a> <code>api_version</code>
-   * attribute (not according to your current Stripe API version or <code>Stripe-Version</code>
-   * header).
+   * href="https://stripe.com/docs/api/events/object">event object</a> {@code api_version} attribute
+   * (not according to your current Stripe API version or {@code Stripe-Version} header).
    */
   public static EventCollection list(EventListParams params) throws StripeException {
     return list(params, (RequestOptions) null);
@@ -138,9 +135,8 @@ public class Event extends ApiResource implements HasId {
   /**
    * List events, going back up to 30 days. Each event data is rendered according to Stripe API
    * version at its creation time, specified in <a
-   * href="https://stripe.com/docs/api/events/object">event object</a> <code>api_version</code>
-   * attribute (not according to your current Stripe API version or <code>Stripe-Version</code>
-   * header).
+   * href="https://stripe.com/docs/api/events/object">event object</a> {@code api_version} attribute
+   * (not according to your current Stripe API version or {@code Stripe-Version} header).
    */
   public static EventCollection list(EventListParams params, RequestOptions options)
       throws StripeException {

@@ -12,13 +12,14 @@ import lombok.Getter;
 
 @Getter
 public class OutboundPaymentCreateParams extends ApiRequestParams {
-  /** Amount (in cents) to be transferred. */
+  /** <strong>Required.</strong> Amount (in cents) to be transferred. */
   @SerializedName("amount")
   Long amount;
 
   /**
-   * Three-letter <a href="https://www.iso.org/iso-4217-currency-codes.html">ISO currency code</a>,
-   * in lowercase. Must be a <a href="https://stripe.com/docs/currencies">supported currency</a>.
+   * <strong>Required.</strong> Three-letter <a
+   * href="https://www.iso.org/iso-4217-currency-codes.html">ISO currency code</a>, in lowercase.
+   * Must be a <a href="https://stripe.com/docs/currencies">supported currency</a>.
    */
   @SerializedName("currency")
   String currency;
@@ -69,7 +70,7 @@ public class OutboundPaymentCreateParams extends ApiRequestParams {
   @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
   Map<String, Object> extraParams;
 
-  /** The FinancialAccount to pull funds from. */
+  /** <strong>Required.</strong> The FinancialAccount to pull funds from. */
   @SerializedName("financial_account")
   String financialAccount;
 
@@ -169,16 +170,16 @@ public class OutboundPaymentCreateParams extends ApiRequestParams {
           this.statementDescriptor);
     }
 
-    /** Amount (in cents) to be transferred. */
+    /** <strong>Required.</strong> Amount (in cents) to be transferred. */
     public Builder setAmount(Long amount) {
       this.amount = amount;
       return this;
     }
 
     /**
-     * Three-letter <a href="https://www.iso.org/iso-4217-currency-codes.html">ISO currency
-     * code</a>, in lowercase. Must be a <a href="https://stripe.com/docs/currencies">supported
-     * currency</a>.
+     * <strong>Required.</strong> Three-letter <a
+     * href="https://www.iso.org/iso-4217-currency-codes.html">ISO currency code</a>, in lowercase.
+     * Must be a <a href="https://stripe.com/docs/currencies">supported currency</a>.
      */
     public Builder setCurrency(String currency) {
       this.currency = currency;
@@ -285,7 +286,7 @@ public class OutboundPaymentCreateParams extends ApiRequestParams {
       return this;
     }
 
-    /** The FinancialAccount to pull funds from. */
+    /** <strong>Required.</strong> The FinancialAccount to pull funds from. */
     public Builder setFinancialAccount(String financialAccount) {
       this.financialAccount = financialAccount;
       return this;
@@ -364,9 +365,9 @@ public class OutboundPaymentCreateParams extends ApiRequestParams {
     Map<String, String> metadata;
 
     /**
-     * The type of the PaymentMethod. An additional hash is included on the PaymentMethod with a
-     * name matching this value. It contains additional information specific to the PaymentMethod
-     * type.
+     * <strong>Required.</strong> The type of the PaymentMethod. An additional hash is included on
+     * the PaymentMethod with a name matching this value. It contains additional information
+     * specific to the PaymentMethod type.
      */
     @SerializedName("type")
     Type type;
@@ -494,9 +495,9 @@ public class OutboundPaymentCreateParams extends ApiRequestParams {
       }
 
       /**
-       * The type of the PaymentMethod. An additional hash is included on the PaymentMethod with a
-       * name matching this value. It contains additional information specific to the PaymentMethod
-       * type.
+       * <strong>Required.</strong> The type of the PaymentMethod. An additional hash is included on
+       * the PaymentMethod with a name matching this value. It contains additional information
+       * specific to the PaymentMethod type.
        */
       public Builder setType(OutboundPaymentCreateParams.DestinationPaymentMethodData.Type type) {
         this.type = type;
@@ -1181,8 +1182,8 @@ public class OutboundPaymentCreateParams extends ApiRequestParams {
     String ipAddress;
 
     /**
-     * {@code True} if the OutboundPayment creation request is being made on behalf of an end user
-     * by a platform. Otherwise, {@code false}.
+     * <strong>Required.</strong> {@code True} if the OutboundPayment creation request is being made
+     * on behalf of an end user by a platform. Otherwise, {@code false}.
      */
     @SerializedName("present")
     Boolean present;
@@ -1247,8 +1248,8 @@ public class OutboundPaymentCreateParams extends ApiRequestParams {
       }
 
       /**
-       * {@code True} if the OutboundPayment creation request is being made on behalf of an end user
-       * by a platform. Otherwise, {@code false}.
+       * <strong>Required.</strong> {@code True} if the OutboundPayment creation request is being
+       * made on behalf of an end user by a platform. Otherwise, {@code false}.
        */
       public Builder setPresent(Boolean present) {
         this.present = present;

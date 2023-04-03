@@ -204,7 +204,10 @@ public class SetupIntentConfirmParams extends ApiRequestParams {
 
   @Getter
   public static class MandateData {
-    /** This hash contains details about the customer acceptance of the Mandate. */
+    /**
+     * <strong>Required.</strong> This hash contains details about the customer acceptance of the
+     * Mandate.
+     */
     @SerializedName("customer_acceptance")
     CustomerAcceptance customerAcceptance;
 
@@ -236,7 +239,10 @@ public class SetupIntentConfirmParams extends ApiRequestParams {
         return new SetupIntentConfirmParams.MandateData(this.customerAcceptance, this.extraParams);
       }
 
-      /** This hash contains details about the customer acceptance of the Mandate. */
+      /**
+       * <strong>Required.</strong> This hash contains details about the customer acceptance of the
+       * Mandate.
+       */
       public Builder setCustomerAcceptance(
           SetupIntentConfirmParams.MandateData.CustomerAcceptance customerAcceptance) {
         this.customerAcceptance = customerAcceptance;
@@ -300,8 +306,8 @@ public class SetupIntentConfirmParams extends ApiRequestParams {
       Online online;
 
       /**
-       * The type of customer acceptance information included with the Mandate. One of {@code
-       * online} or {@code offline}.
+       * <strong>Required.</strong> The type of customer acceptance information included with the
+       * Mandate. One of {@code online} or {@code offline}.
        */
       @SerializedName("type")
       Type type;
@@ -395,8 +401,8 @@ public class SetupIntentConfirmParams extends ApiRequestParams {
         }
 
         /**
-         * The type of customer acceptance information included with the Mandate. One of {@code
-         * online} or {@code offline}.
+         * <strong>Required.</strong> The type of customer acceptance information included with the
+         * Mandate. One of {@code online} or {@code offline}.
          */
         public Builder setType(SetupIntentConfirmParams.MandateData.CustomerAcceptance.Type type) {
           this.type = type;
@@ -477,11 +483,17 @@ public class SetupIntentConfirmParams extends ApiRequestParams {
         @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
         Map<String, Object> extraParams;
 
-        /** The IP address from which the Mandate was accepted by the customer. */
+        /**
+         * <strong>Required.</strong> The IP address from which the Mandate was accepted by the
+         * customer.
+         */
         @SerializedName("ip_address")
         String ipAddress;
 
-        /** The user agent of the browser from which the Mandate was accepted by the customer. */
+        /**
+         * <strong>Required.</strong> The user agent of the browser from which the Mandate was
+         * accepted by the customer.
+         */
         @SerializedName("user_agent")
         String userAgent;
 
@@ -538,13 +550,19 @@ public class SetupIntentConfirmParams extends ApiRequestParams {
             return this;
           }
 
-          /** The IP address from which the Mandate was accepted by the customer. */
+          /**
+           * <strong>Required.</strong> The IP address from which the Mandate was accepted by the
+           * customer.
+           */
           public Builder setIpAddress(String ipAddress) {
             this.ipAddress = ipAddress;
             return this;
           }
 
-          /** The user agent of the browser from which the Mandate was accepted by the customer. */
+          /**
+           * <strong>Required.</strong> The user agent of the browser from which the Mandate was
+           * accepted by the customer.
+           */
           public Builder setUserAgent(String userAgent) {
             this.userAgent = userAgent;
             return this;
@@ -793,9 +811,9 @@ public class SetupIntentConfirmParams extends ApiRequestParams {
     Sofort sofort;
 
     /**
-     * The type of the PaymentMethod. An additional hash is included on the PaymentMethod with a
-     * name matching this value. It contains additional information specific to the PaymentMethod
-     * type.
+     * <strong>Required.</strong> The type of the PaymentMethod. An additional hash is included on
+     * the PaymentMethod with a name matching this value. It contains additional information
+     * specific to the PaymentMethod type.
      */
     @SerializedName("type")
     Type type;
@@ -1320,9 +1338,9 @@ public class SetupIntentConfirmParams extends ApiRequestParams {
       }
 
       /**
-       * The type of the PaymentMethod. An additional hash is included on the PaymentMethod with a
-       * name matching this value. It contains additional information specific to the PaymentMethod
-       * type.
+       * <strong>Required.</strong> The type of the PaymentMethod. An additional hash is included on
+       * the PaymentMethod with a name matching this value. It contains additional information
+       * specific to the PaymentMethod type.
        */
       public Builder setType(SetupIntentConfirmParams.PaymentMethodData.Type type) {
         this.type = type;
@@ -1351,7 +1369,7 @@ public class SetupIntentConfirmParams extends ApiRequestParams {
 
     @Getter
     public static class AcssDebit {
-      /** Customer's bank account number. */
+      /** <strong>Required.</strong> Customer's bank account number. */
       @SerializedName("account_number")
       String accountNumber;
 
@@ -1364,11 +1382,11 @@ public class SetupIntentConfirmParams extends ApiRequestParams {
       @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
       Map<String, Object> extraParams;
 
-      /** Institution number of the customer's bank. */
+      /** <strong>Required.</strong> Institution number of the customer's bank. */
       @SerializedName("institution_number")
       String institutionNumber;
 
-      /** Transit number of the customer's bank. */
+      /** <strong>Required.</strong> Transit number of the customer's bank. */
       @SerializedName("transit_number")
       String transitNumber;
 
@@ -1402,7 +1420,7 @@ public class SetupIntentConfirmParams extends ApiRequestParams {
               this.accountNumber, this.extraParams, this.institutionNumber, this.transitNumber);
         }
 
-        /** Customer's bank account number. */
+        /** <strong>Required.</strong> Customer's bank account number. */
         public Builder setAccountNumber(String accountNumber) {
           this.accountNumber = accountNumber;
           return this;
@@ -1436,13 +1454,13 @@ public class SetupIntentConfirmParams extends ApiRequestParams {
           return this;
         }
 
-        /** Institution number of the customer's bank. */
+        /** <strong>Required.</strong> Institution number of the customer's bank. */
         public Builder setInstitutionNumber(String institutionNumber) {
           this.institutionNumber = institutionNumber;
           return this;
         }
 
-        /** Transit number of the customer's bank. */
+        /** <strong>Required.</strong> Transit number of the customer's bank. */
         public Builder setTransitNumber(String transitNumber) {
           this.transitNumber = transitNumber;
           return this;
@@ -1623,11 +1641,11 @@ public class SetupIntentConfirmParams extends ApiRequestParams {
 
     @Getter
     public static class AuBecsDebit {
-      /** The account number for the bank account. */
+      /** <strong>Required.</strong> The account number for the bank account. */
       @SerializedName("account_number")
       String accountNumber;
 
-      /** Bank-State-Branch number of the bank account. */
+      /** <strong>Required.</strong> Bank-State-Branch number of the bank account. */
       @SerializedName("bsb_number")
       String bsbNumber;
 
@@ -1663,13 +1681,13 @@ public class SetupIntentConfirmParams extends ApiRequestParams {
               this.accountNumber, this.bsbNumber, this.extraParams);
         }
 
-        /** The account number for the bank account. */
+        /** <strong>Required.</strong> The account number for the bank account. */
         public Builder setAccountNumber(String accountNumber) {
           this.accountNumber = accountNumber;
           return this;
         }
 
-        /** Bank-State-Branch number of the bank account. */
+        /** <strong>Required.</strong> Bank-State-Branch number of the bank account. */
         public Builder setBsbNumber(String bsbNumber) {
           this.bsbNumber = bsbNumber;
           return this;
@@ -2201,7 +2219,8 @@ public class SetupIntentConfirmParams extends ApiRequestParams {
       Map<String, Object> extraParams;
 
       /**
-       * The tax ID of the customer (CPF for individual consumers or CNPJ for businesses consumers).
+       * <strong>Required.</strong> The tax ID of the customer (CPF for individual consumers or CNPJ
+       * for businesses consumers)
        */
       @SerializedName("tax_id")
       String taxId;
@@ -2255,8 +2274,8 @@ public class SetupIntentConfirmParams extends ApiRequestParams {
         }
 
         /**
-         * The tax ID of the customer (CPF for individual consumers or CNPJ for businesses
-         * consumers).
+         * <strong>Required.</strong> The tax ID of the customer (CPF for individual consumers or
+         * CNPJ for businesses consumers)
          */
         public Builder setTaxId(String taxId) {
           this.taxId = taxId;
@@ -2548,7 +2567,7 @@ public class SetupIntentConfirmParams extends ApiRequestParams {
       @SerializedName("account_holder_type")
       AccountHolderType accountHolderType;
 
-      /** The customer's bank. */
+      /** <strong>Required.</strong> The customer's bank. */
       @SerializedName("bank")
       Bank bank;
 
@@ -2591,7 +2610,7 @@ public class SetupIntentConfirmParams extends ApiRequestParams {
           return this;
         }
 
-        /** The customer's bank. */
+        /** <strong>Required.</strong> The customer's bank. */
         public Builder setBank(SetupIntentConfirmParams.PaymentMethodData.Fpx.Bank bank) {
           this.bank = bank;
           return this;
@@ -3080,7 +3099,7 @@ public class SetupIntentConfirmParams extends ApiRequestParams {
 
       @Getter
       public static class Dob {
-        /** The day of birth, between 1 and 31. */
+        /** <strong>Required.</strong> The day of birth, between 1 and 31. */
         @SerializedName("day")
         Long day;
 
@@ -3094,11 +3113,11 @@ public class SetupIntentConfirmParams extends ApiRequestParams {
         @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
         Map<String, Object> extraParams;
 
-        /** The month of birth, between 1 and 12. */
+        /** <strong>Required.</strong> The month of birth, between 1 and 12. */
         @SerializedName("month")
         Long month;
 
-        /** The four-digit year of birth. */
+        /** <strong>Required.</strong> The four-digit year of birth. */
         @SerializedName("year")
         Long year;
 
@@ -3128,7 +3147,7 @@ public class SetupIntentConfirmParams extends ApiRequestParams {
                 this.day, this.extraParams, this.month, this.year);
           }
 
-          /** The day of birth, between 1 and 31. */
+          /** <strong>Required.</strong> The day of birth, between 1 and 31. */
           public Builder setDay(Long day) {
             this.day = day;
             return this;
@@ -3162,13 +3181,13 @@ public class SetupIntentConfirmParams extends ApiRequestParams {
             return this;
           }
 
-          /** The month of birth, between 1 and 12. */
+          /** <strong>Required.</strong> The month of birth, between 1 and 12. */
           public Builder setMonth(Long month) {
             this.month = month;
             return this;
           }
 
-          /** The four-digit year of birth. */
+          /** <strong>Required.</strong> The four-digit year of birth. */
           public Builder setYear(Long year) {
             this.year = year;
             return this;
@@ -3763,7 +3782,7 @@ public class SetupIntentConfirmParams extends ApiRequestParams {
       @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
       Map<String, Object> extraParams;
 
-      /** IBAN of the bank account. */
+      /** <strong>Required.</strong> IBAN of the bank account. */
       @SerializedName("iban")
       String iban;
 
@@ -3815,7 +3834,7 @@ public class SetupIntentConfirmParams extends ApiRequestParams {
           return this;
         }
 
-        /** IBAN of the bank account. */
+        /** <strong>Required.</strong> IBAN of the bank account. */
         public Builder setIban(String iban) {
           this.iban = iban;
           return this;
@@ -3825,7 +3844,10 @@ public class SetupIntentConfirmParams extends ApiRequestParams {
 
     @Getter
     public static class Sofort {
-      /** Two-letter ISO code representing the country the bank account is located in. */
+      /**
+       * <strong>Required.</strong> Two-letter ISO code representing the country the bank account is
+       * located in.
+       */
       @SerializedName("country")
       Country country;
 
@@ -3858,7 +3880,10 @@ public class SetupIntentConfirmParams extends ApiRequestParams {
               this.country, this.extraParams);
         }
 
-        /** Two-letter ISO code representing the country the bank account is located in. */
+        /**
+         * <strong>Required.</strong> Two-letter ISO code representing the country the bank account
+         * is located in.
+         */
         public Builder setCountry(
             SetupIntentConfirmParams.PaymentMethodData.Sofort.Country country) {
           this.country = country;
@@ -5049,22 +5074,24 @@ public class SetupIntentConfirmParams extends ApiRequestParams {
 
       @Getter
       public static class MandateOptions {
-        /** Amount to be charged for future payments. */
+        /** <strong>Required.</strong> Amount to be charged for future payments. */
         @SerializedName("amount")
         Long amount;
 
         /**
-         * One of {@code fixed} or {@code maximum}. If {@code fixed}, the {@code amount} param
-         * refers to the exact amount to be charged in future payments. If {@code maximum}, the
-         * amount charged can be up to the value passed for the {@code amount} param.
+         * <strong>Required.</strong> One of {@code fixed} or {@code maximum}. If {@code fixed}, the
+         * {@code amount} param refers to the exact amount to be charged in future payments. If
+         * {@code maximum}, the amount charged can be up to the value passed for the {@code amount}
+         * param.
          */
         @SerializedName("amount_type")
         AmountType amountType;
 
         /**
-         * Currency in which future payments will be charged. Three-letter <a
-         * href="https://www.iso.org/iso-4217-currency-codes.html">ISO currency code</a>, in
-         * lowercase. Must be a <a href="https://stripe.com/docs/currencies">supported currency</a>.
+         * <strong>Required.</strong> Currency in which future payments will be charged.
+         * Three-letter <a href="https://www.iso.org/iso-4217-currency-codes.html">ISO currency
+         * code</a>, in lowercase. Must be a <a href="https://stripe.com/docs/currencies">supported
+         * currency</a>.
          */
         @SerializedName("currency")
         String currency;
@@ -5094,8 +5121,8 @@ public class SetupIntentConfirmParams extends ApiRequestParams {
         Map<String, Object> extraParams;
 
         /**
-         * Specifies payment frequency. One of {@code day}, {@code week}, {@code month}, {@code
-         * year}, or {@code sporadic}.
+         * <strong>Required.</strong> Specifies payment frequency. One of {@code day}, {@code week},
+         * {@code month}, {@code year}, or {@code sporadic}.
          */
         @SerializedName("interval")
         Interval interval;
@@ -5109,13 +5136,13 @@ public class SetupIntentConfirmParams extends ApiRequestParams {
         @SerializedName("interval_count")
         Long intervalCount;
 
-        /** Unique identifier for the mandate or subscription. */
+        /** <strong>Required.</strong> Unique identifier for the mandate or subscription. */
         @SerializedName("reference")
         String reference;
 
         /**
-         * Start date of the mandate or subscription. Start date should not be lesser than
-         * yesterday.
+         * <strong>Required.</strong> Start date of the mandate or subscription. Start date should
+         * not be lesser than yesterday.
          */
         @SerializedName("start_date")
         Long startDate;
@@ -5196,16 +5223,17 @@ public class SetupIntentConfirmParams extends ApiRequestParams {
                 this.supportedTypes);
           }
 
-          /** Amount to be charged for future payments. */
+          /** <strong>Required.</strong> Amount to be charged for future payments. */
           public Builder setAmount(Long amount) {
             this.amount = amount;
             return this;
           }
 
           /**
-           * One of {@code fixed} or {@code maximum}. If {@code fixed}, the {@code amount} param
-           * refers to the exact amount to be charged in future payments. If {@code maximum}, the
-           * amount charged can be up to the value passed for the {@code amount} param.
+           * <strong>Required.</strong> One of {@code fixed} or {@code maximum}. If {@code fixed},
+           * the {@code amount} param refers to the exact amount to be charged in future payments.
+           * If {@code maximum}, the amount charged can be up to the value passed for the {@code
+           * amount} param.
            */
           public Builder setAmountType(
               SetupIntentConfirmParams.PaymentMethodOptions.Card.MandateOptions.AmountType
@@ -5215,10 +5243,10 @@ public class SetupIntentConfirmParams extends ApiRequestParams {
           }
 
           /**
-           * Currency in which future payments will be charged. Three-letter <a
-           * href="https://www.iso.org/iso-4217-currency-codes.html">ISO currency code</a>, in
-           * lowercase. Must be a <a href="https://stripe.com/docs/currencies">supported
-           * currency</a>.
+           * <strong>Required.</strong> Currency in which future payments will be charged.
+           * Three-letter <a href="https://www.iso.org/iso-4217-currency-codes.html">ISO currency
+           * code</a>, in lowercase. Must be a <a
+           * href="https://stripe.com/docs/currencies">supported currency</a>.
            */
           public Builder setCurrency(String currency) {
             this.currency = currency;
@@ -5274,8 +5302,8 @@ public class SetupIntentConfirmParams extends ApiRequestParams {
           }
 
           /**
-           * Specifies payment frequency. One of {@code day}, {@code week}, {@code month}, {@code
-           * year}, or {@code sporadic}.
+           * <strong>Required.</strong> Specifies payment frequency. One of {@code day}, {@code
+           * week}, {@code month}, {@code year}, or {@code sporadic}.
            */
           public Builder setInterval(
               SetupIntentConfirmParams.PaymentMethodOptions.Card.MandateOptions.Interval interval) {
@@ -5294,15 +5322,15 @@ public class SetupIntentConfirmParams extends ApiRequestParams {
             return this;
           }
 
-          /** Unique identifier for the mandate or subscription. */
+          /** <strong>Required.</strong> Unique identifier for the mandate or subscription. */
           public Builder setReference(String reference) {
             this.reference = reference;
             return this;
           }
 
           /**
-           * Start date of the mandate or subscription. Start date should not be lesser than
-           * yesterday.
+           * <strong>Required.</strong> Start date of the mandate or subscription. Start date should
+           * not be lesser than yesterday.
            */
           public Builder setStartDate(Long startDate) {
             this.startDate = startDate;

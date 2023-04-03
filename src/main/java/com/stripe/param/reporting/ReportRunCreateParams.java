@@ -34,8 +34,9 @@ public class ReportRunCreateParams extends ApiRequestParams {
   Parameters parameters;
 
   /**
-   * The ID of the <a href="https://stripe.com/docs/reporting/statements/api#report-types">report
-   * type</a> to run, such as {@code "balance.summary.1"}.
+   * <strong>Required.</strong> The ID of the <a
+   * href="https://stripe.com/docs/reporting/statements/api#report-types">report type</a> to run,
+   * such as {@code "balance.summary.1"}.
    */
   @SerializedName("report_type")
   String reportType;
@@ -134,8 +135,9 @@ public class ReportRunCreateParams extends ApiRequestParams {
     }
 
     /**
-     * The ID of the <a href="https://stripe.com/docs/reporting/statements/api#report-types">report
-     * type</a> to run, such as {@code "balance.summary.1"}.
+     * <strong>Required.</strong> The ID of the <a
+     * href="https://stripe.com/docs/reporting/statements/api#report-types">report type</a> to run,
+     * such as {@code "balance.summary.1"}.
      */
     public Builder setReportType(String reportType) {
       this.reportType = reportType;

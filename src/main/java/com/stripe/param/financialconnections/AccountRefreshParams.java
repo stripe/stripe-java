@@ -24,7 +24,7 @@ public class AccountRefreshParams extends ApiRequestParams {
   @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
   Map<String, Object> extraParams;
 
-  /** The list of account features that you would like to refresh. */
+  /** <strong>Required.</strong> The list of account features that you would like to refresh. */
   @SerializedName("features")
   List<AccountRefreshParams.Feature> features;
 

@@ -11,7 +11,10 @@ import lombok.Getter;
 
 @Getter
 public class TransactionCreateFromCalculationParams extends ApiRequestParams {
-  /** Tax Calculation ID to be used as input when creating the transaction. */
+  /**
+   * <strong>Required.</strong> Tax Calculation ID to be used as input when creating the
+   * transaction.
+   */
   @SerializedName("calculation")
   String calculation;
 
@@ -38,8 +41,8 @@ public class TransactionCreateFromCalculationParams extends ApiRequestParams {
   Map<String, String> metadata;
 
   /**
-   * A custom order or sale identifier, such as 'myOrder_123'. Must be unique across all
-   * transactions, including reversals.
+   * <strong>Required.</strong> A custom order or sale identifier, such as 'myOrder_123'. Must be
+   * unique across all transactions, including reversals.
    */
   @SerializedName("reference")
   String reference;
@@ -78,7 +81,10 @@ public class TransactionCreateFromCalculationParams extends ApiRequestParams {
           this.calculation, this.expand, this.extraParams, this.metadata, this.reference);
     }
 
-    /** Tax Calculation ID to be used as input when creating the transaction. */
+    /**
+     * <strong>Required.</strong> Tax Calculation ID to be used as input when creating the
+     * transaction.
+     */
     public Builder setCalculation(String calculation) {
       this.calculation = calculation;
       return this;
@@ -163,8 +169,8 @@ public class TransactionCreateFromCalculationParams extends ApiRequestParams {
     }
 
     /**
-     * A custom order or sale identifier, such as 'myOrder_123'. Must be unique across all
-     * transactions, including reversals.
+     * <strong>Required.</strong> A custom order or sale identifier, such as 'myOrder_123'. Must be
+     * unique across all transactions, including reversals.
      */
     public Builder setReference(String reference) {
       this.reference = reference;

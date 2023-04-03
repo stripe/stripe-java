@@ -13,16 +13,16 @@ import lombok.Getter;
 @Getter
 public class CustomerBalanceTransactionCollectionCreateParams extends ApiRequestParams {
   /**
-   * The integer amount in <strong>cents (or local equivalent)</strong> to apply to the customer's
-   * credit balance.
+   * <strong>Required.</strong> The integer amount in <strong>cents (or local equivalent)</strong>
+   * to apply to the customer's credit balance.
    */
   @SerializedName("amount")
   Long amount;
 
   /**
-   * Three-letter <a href="https://www.iso.org/iso-4217-currency-codes.html">ISO currency code</a>,
-   * in lowercase. Must be a <a href="https://stripe.com/docs/currencies">supported currency</a>.
-   * Specifies the <a
+   * <strong>Required.</strong> Three-letter <a
+   * href="https://www.iso.org/iso-4217-currency-codes.html">ISO currency code</a>, in lowercase.
+   * Must be a <a href="https://stripe.com/docs/currencies">supported currency</a>. Specifies the <a
    * href="https://stripe.com/docs/api/customers/object#customer_object-invoice_credit_balance">{@code
    * invoice_credit_balance}</a> that this transaction will apply to. If the customer's {@code
    * currency} is not set, it will be updated to this value.
@@ -100,8 +100,8 @@ public class CustomerBalanceTransactionCollectionCreateParams extends ApiRequest
     }
 
     /**
-     * The integer amount in <strong>cents (or local equivalent)</strong> to apply to the customer's
-     * credit balance.
+     * <strong>Required.</strong> The integer amount in <strong>cents (or local equivalent)</strong>
+     * to apply to the customer's credit balance.
      */
     public Builder setAmount(Long amount) {
       this.amount = amount;
@@ -109,9 +109,10 @@ public class CustomerBalanceTransactionCollectionCreateParams extends ApiRequest
     }
 
     /**
-     * Three-letter <a href="https://www.iso.org/iso-4217-currency-codes.html">ISO currency
-     * code</a>, in lowercase. Must be a <a href="https://stripe.com/docs/currencies">supported
-     * currency</a>. Specifies the <a
+     * <strong>Required.</strong> Three-letter <a
+     * href="https://www.iso.org/iso-4217-currency-codes.html">ISO currency code</a>, in lowercase.
+     * Must be a <a href="https://stripe.com/docs/currencies">supported currency</a>. Specifies the
+     * <a
      * href="https://stripe.com/docs/api/customers/object#customer_object-invoice_credit_balance">{@code
      * invoice_credit_balance}</a> that this transaction will apply to. If the customer's {@code
      * currency} is not set, it will be updated to this value.

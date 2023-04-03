@@ -110,7 +110,7 @@ public class SubscriptionItemCreateParams extends ApiRequestParams {
   @SerializedName("quantity")
   Long quantity;
 
-  /** The identifier of the subscription to modify. */
+  /** <strong>Required.</strong> The identifier of the subscription to modify. */
   @SerializedName("subscription")
   String subscription;
 
@@ -383,7 +383,7 @@ public class SubscriptionItemCreateParams extends ApiRequestParams {
       return this;
     }
 
-    /** The identifier of the subscription to modify. */
+    /** <strong>Required.</strong> The identifier of the subscription to modify. */
     public Builder setSubscription(String subscription) {
       this.subscription = subscription;
       return this;
@@ -454,8 +454,8 @@ public class SubscriptionItemCreateParams extends ApiRequestParams {
     Map<String, Object> extraParams;
 
     /**
-     * Number of units that meets the billing threshold to advance the subscription to a new billing
-     * period (e.g., it takes 10 $5 units to meet a $50 <a
+     * <strong>Required.</strong> Number of units that meets the billing threshold to advance the
+     * subscription to a new billing period (e.g., it takes 10 $5 units to meet a $50 <a
      * href="https://stripe.com/docs/api/subscriptions/update#update_subscription-billing_thresholds-amount_gte">monetary
      * threshold</a>)
      */
@@ -509,8 +509,8 @@ public class SubscriptionItemCreateParams extends ApiRequestParams {
       }
 
       /**
-       * Number of units that meets the billing threshold to advance the subscription to a new
-       * billing period (e.g., it takes 10 $5 units to meet a $50 <a
+       * <strong>Required.</strong> Number of units that meets the billing threshold to advance the
+       * subscription to a new billing period (e.g., it takes 10 $5 units to meet a $50 <a
        * href="https://stripe.com/docs/api/subscriptions/update#update_subscription-billing_thresholds-amount_gte">monetary
        * threshold</a>)
        */
@@ -524,9 +524,9 @@ public class SubscriptionItemCreateParams extends ApiRequestParams {
   @Getter
   public static class PriceData {
     /**
-     * Three-letter <a href="https://www.iso.org/iso-4217-currency-codes.html">ISO currency
-     * code</a>, in lowercase. Must be a <a href="https://stripe.com/docs/currencies">supported
-     * currency</a>.
+     * <strong>Required.</strong> Three-letter <a
+     * href="https://www.iso.org/iso-4217-currency-codes.html">ISO currency code</a>, in lowercase.
+     * Must be a <a href="https://stripe.com/docs/currencies">supported currency</a>.
      */
     @SerializedName("currency")
     String currency;
@@ -540,11 +540,14 @@ public class SubscriptionItemCreateParams extends ApiRequestParams {
     @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
     Map<String, Object> extraParams;
 
-    /** The ID of the product that this price will belong to. */
+    /** <strong>Required.</strong> The ID of the product that this price will belong to. */
     @SerializedName("product")
     String product;
 
-    /** The recurring components of a price such as {@code interval} and {@code interval_count}. */
+    /**
+     * <strong>Required.</strong> The recurring components of a price such as {@code interval} and
+     * {@code interval_count}.
+     */
     @SerializedName("recurring")
     Recurring recurring;
 
@@ -620,9 +623,9 @@ public class SubscriptionItemCreateParams extends ApiRequestParams {
       }
 
       /**
-       * Three-letter <a href="https://www.iso.org/iso-4217-currency-codes.html">ISO currency
-       * code</a>, in lowercase. Must be a <a href="https://stripe.com/docs/currencies">supported
-       * currency</a>.
+       * <strong>Required.</strong> Three-letter <a
+       * href="https://www.iso.org/iso-4217-currency-codes.html">ISO currency code</a>, in
+       * lowercase. Must be a <a href="https://stripe.com/docs/currencies">supported currency</a>.
        */
       public Builder setCurrency(String currency) {
         this.currency = currency;
@@ -655,14 +658,15 @@ public class SubscriptionItemCreateParams extends ApiRequestParams {
         return this;
       }
 
-      /** The ID of the product that this price will belong to. */
+      /** <strong>Required.</strong> The ID of the product that this price will belong to. */
       public Builder setProduct(String product) {
         this.product = product;
         return this;
       }
 
       /**
-       * The recurring components of a price such as {@code interval} and {@code interval_count}.
+       * <strong>Required.</strong> The recurring components of a price such as {@code interval} and
+       * {@code interval_count}.
        */
       public Builder setRecurring(SubscriptionItemCreateParams.PriceData.Recurring recurring) {
         this.recurring = recurring;
@@ -712,8 +716,8 @@ public class SubscriptionItemCreateParams extends ApiRequestParams {
       Map<String, Object> extraParams;
 
       /**
-       * Specifies billing frequency. Either {@code day}, {@code week}, {@code month} or {@code
-       * year}.
+       * <strong>Required.</strong> Specifies billing frequency. Either {@code day}, {@code week},
+       * {@code month} or {@code year}.
        */
       @SerializedName("interval")
       Interval interval;
@@ -778,8 +782,8 @@ public class SubscriptionItemCreateParams extends ApiRequestParams {
         }
 
         /**
-         * Specifies billing frequency. Either {@code day}, {@code week}, {@code month} or {@code
-         * year}.
+         * <strong>Required.</strong> Specifies billing frequency. Either {@code day}, {@code week},
+         * {@code month} or {@code year}.
          */
         public Builder setInterval(
             SubscriptionItemCreateParams.PriceData.Recurring.Interval interval) {

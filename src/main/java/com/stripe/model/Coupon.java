@@ -146,12 +146,11 @@ public class Coupon extends ApiResource implements HasId, MetadataStore<Coupon> 
    * management</a> page of the Stripe dashboard. Coupon creation is also accessible via the API if
    * you need to create coupons on the fly.
    *
-   * <p>A coupon has either a <code>percent_off</code> or an <code>amount_off</code> and <code>
-   * currency</code>. If you set an <code>amount_off</code>, that amount will be subtracted from any
-   * invoice’s subtotal. For example, an invoice with a subtotal of 100 will have a final total of 0
-   * if a coupon with an <code>amount_off</code> of 200 is applied to it and an invoice with a
-   * subtotal of 300 will have a final total of 100 if a coupon with an <code>amount_off</code> of
-   * 200 is applied to it.
+   * <p>A coupon has either a {@code percent_off} or an {@code amount_off} and {@code currency}. If
+   * you set an {@code amount_off}, that amount will be subtracted from any invoice’s subtotal. For
+   * example, an invoice with a subtotal of 100 will have a final total of 0 if a coupon with an
+   * {@code amount_off} of 200 is applied to it and an invoice with a subtotal of 300 will have a
+   * final total of 100 if a coupon with an {@code amount_off} of 200 is applied to it.
    */
   public static Coupon create(Map<String, Object> params) throws StripeException {
     return create(params, (RequestOptions) null);
@@ -162,12 +161,11 @@ public class Coupon extends ApiResource implements HasId, MetadataStore<Coupon> 
    * management</a> page of the Stripe dashboard. Coupon creation is also accessible via the API if
    * you need to create coupons on the fly.
    *
-   * <p>A coupon has either a <code>percent_off</code> or an <code>amount_off</code> and <code>
-   * currency</code>. If you set an <code>amount_off</code>, that amount will be subtracted from any
-   * invoice’s subtotal. For example, an invoice with a subtotal of 100 will have a final total of 0
-   * if a coupon with an <code>amount_off</code> of 200 is applied to it and an invoice with a
-   * subtotal of 300 will have a final total of 100 if a coupon with an <code>amount_off</code> of
-   * 200 is applied to it.
+   * <p>A coupon has either a {@code percent_off} or an {@code amount_off} and {@code currency}. If
+   * you set an {@code amount_off}, that amount will be subtracted from any invoice’s subtotal. For
+   * example, an invoice with a subtotal of 100 will have a final total of 0 if a coupon with an
+   * {@code amount_off} of 200 is applied to it and an invoice with a subtotal of 300 will have a
+   * final total of 100 if a coupon with an {@code amount_off} of 200 is applied to it.
    */
   public static Coupon create(Map<String, Object> params, RequestOptions options)
       throws StripeException {
@@ -180,12 +178,11 @@ public class Coupon extends ApiResource implements HasId, MetadataStore<Coupon> 
    * management</a> page of the Stripe dashboard. Coupon creation is also accessible via the API if
    * you need to create coupons on the fly.
    *
-   * <p>A coupon has either a <code>percent_off</code> or an <code>amount_off</code> and <code>
-   * currency</code>. If you set an <code>amount_off</code>, that amount will be subtracted from any
-   * invoice’s subtotal. For example, an invoice with a subtotal of 100 will have a final total of 0
-   * if a coupon with an <code>amount_off</code> of 200 is applied to it and an invoice with a
-   * subtotal of 300 will have a final total of 100 if a coupon with an <code>amount_off</code> of
-   * 200 is applied to it.
+   * <p>A coupon has either a {@code percent_off} or an {@code amount_off} and {@code currency}. If
+   * you set an {@code amount_off}, that amount will be subtracted from any invoice’s subtotal. For
+   * example, an invoice with a subtotal of 100 will have a final total of 0 if a coupon with an
+   * {@code amount_off} of 200 is applied to it and an invoice with a subtotal of 300 will have a
+   * final total of 100 if a coupon with an {@code amount_off} of 200 is applied to it.
    */
   public static Coupon create(CouponCreateParams params) throws StripeException {
     return create(params, (RequestOptions) null);
@@ -196,12 +193,11 @@ public class Coupon extends ApiResource implements HasId, MetadataStore<Coupon> 
    * management</a> page of the Stripe dashboard. Coupon creation is also accessible via the API if
    * you need to create coupons on the fly.
    *
-   * <p>A coupon has either a <code>percent_off</code> or an <code>amount_off</code> and <code>
-   * currency</code>. If you set an <code>amount_off</code>, that amount will be subtracted from any
-   * invoice’s subtotal. For example, an invoice with a subtotal of 100 will have a final total of 0
-   * if a coupon with an <code>amount_off</code> of 200 is applied to it and an invoice with a
-   * subtotal of 300 will have a final total of 100 if a coupon with an <code>amount_off</code> of
-   * 200 is applied to it.
+   * <p>A coupon has either a {@code percent_off} or an {@code amount_off} and {@code currency}. If
+   * you set an {@code amount_off}, that amount will be subtracted from any invoice’s subtotal. For
+   * example, an invoice with a subtotal of 100 will have a final total of 0 if a coupon with an
+   * {@code amount_off} of 200 is applied to it and an invoice with a subtotal of 300 will have a
+   * final total of 100 if a coupon with an {@code amount_off} of 200 is applied to it.
    */
   public static Coupon create(CouponCreateParams params, RequestOptions options)
       throws StripeException {

@@ -632,8 +632,8 @@ public class QuoteCreateParams extends ApiRequestParams {
   @Getter
   public static class AutomaticTax {
     /**
-     * Controls whether Stripe will automatically compute tax on the resulting invoices or
-     * subscriptions as well as the quote itself.
+     * <strong>Required.</strong> Controls whether Stripe will automatically compute tax on the
+     * resulting invoices or subscriptions as well as the quote itself.
      */
     @SerializedName("enabled")
     Boolean enabled;
@@ -667,8 +667,8 @@ public class QuoteCreateParams extends ApiRequestParams {
       }
 
       /**
-       * Controls whether Stripe will automatically compute tax on the resulting invoices or
-       * subscriptions as well as the quote itself.
+       * <strong>Required.</strong> Controls whether Stripe will automatically compute tax on the
+       * resulting invoices or subscriptions as well as the quote itself.
        */
       public Builder setEnabled(Boolean enabled) {
         this.enabled = enabled;
@@ -799,7 +799,7 @@ public class QuoteCreateParams extends ApiRequestParams {
     @SerializedName("is_revision")
     Boolean isRevision;
 
-    /** The {@code id} of the quote that will be cloned. */
+    /** <strong>Required.</strong> The {@code id} of the quote that will be cloned. */
     @SerializedName("quote")
     String quote;
 
@@ -857,7 +857,7 @@ public class QuoteCreateParams extends ApiRequestParams {
         return this;
       }
 
-      /** The {@code id} of the quote that will be cloned. */
+      /** <strong>Required.</strong> The {@code id} of the quote that will be cloned. */
       public Builder setQuote(String quote) {
         this.quote = quote;
         return this;
@@ -1103,9 +1103,9 @@ public class QuoteCreateParams extends ApiRequestParams {
     @Getter
     public static class PriceData {
       /**
-       * Three-letter <a href="https://www.iso.org/iso-4217-currency-codes.html">ISO currency
-       * code</a>, in lowercase. Must be a <a href="https://stripe.com/docs/currencies">supported
-       * currency</a>.
+       * <strong>Required.</strong> Three-letter <a
+       * href="https://www.iso.org/iso-4217-currency-codes.html">ISO currency code</a>, in
+       * lowercase. Must be a <a href="https://stripe.com/docs/currencies">supported currency</a>.
        */
       @SerializedName("currency")
       String currency;
@@ -1119,7 +1119,7 @@ public class QuoteCreateParams extends ApiRequestParams {
       @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
       Map<String, Object> extraParams;
 
-      /** The ID of the product that this price will belong to. */
+      /** <strong>Required.</strong> The ID of the product that this price will belong to. */
       @SerializedName("product")
       String product;
 
@@ -1201,9 +1201,9 @@ public class QuoteCreateParams extends ApiRequestParams {
         }
 
         /**
-         * Three-letter <a href="https://www.iso.org/iso-4217-currency-codes.html">ISO currency
-         * code</a>, in lowercase. Must be a <a href="https://stripe.com/docs/currencies">supported
-         * currency</a>.
+         * <strong>Required.</strong> Three-letter <a
+         * href="https://www.iso.org/iso-4217-currency-codes.html">ISO currency code</a>, in
+         * lowercase. Must be a <a href="https://stripe.com/docs/currencies">supported currency</a>.
          */
         public Builder setCurrency(String currency) {
           this.currency = currency;
@@ -1238,7 +1238,7 @@ public class QuoteCreateParams extends ApiRequestParams {
           return this;
         }
 
-        /** The ID of the product that this price will belong to. */
+        /** <strong>Required.</strong> The ID of the product that this price will belong to. */
         public Builder setProduct(String product) {
           this.product = product;
           return this;
@@ -1296,8 +1296,8 @@ public class QuoteCreateParams extends ApiRequestParams {
         Map<String, Object> extraParams;
 
         /**
-         * Specifies billing frequency. Either {@code day}, {@code week}, {@code month} or {@code
-         * year}.
+         * <strong>Required.</strong> Specifies billing frequency. Either {@code day}, {@code week},
+         * {@code month} or {@code year}.
          */
         @SerializedName("interval")
         Interval interval;
@@ -1362,8 +1362,8 @@ public class QuoteCreateParams extends ApiRequestParams {
           }
 
           /**
-           * Specifies billing frequency. Either {@code day}, {@code week}, {@code month} or {@code
-           * year}.
+           * <strong>Required.</strong> Specifies billing frequency. Either {@code day}, {@code
+           * week}, {@code month} or {@code year}.
            */
           public Builder setInterval(
               QuoteCreateParams.LineItem.PriceData.Recurring.Interval interval) {
@@ -1615,7 +1615,7 @@ public class QuoteCreateParams extends ApiRequestParams {
     @SerializedName("amount_percent")
     BigDecimal amountPercent;
 
-    /** ID of an existing, connected Stripe account. */
+    /** <strong>Required.</strong> ID of an existing, connected Stripe account. */
     @SerializedName("destination")
     String destination;
 
@@ -1679,7 +1679,7 @@ public class QuoteCreateParams extends ApiRequestParams {
         return this;
       }
 
-      /** ID of an existing, connected Stripe account. */
+      /** <strong>Required.</strong> ID of an existing, connected Stripe account. */
       public Builder setDestination(String destination) {
         this.destination = destination;
         return this;

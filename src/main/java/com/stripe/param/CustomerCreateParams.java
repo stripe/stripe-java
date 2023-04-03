@@ -1079,11 +1079,15 @@ public class CustomerCreateParams extends ApiRequestParams {
       @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
       Map<String, Object> extraParams;
 
-      /** The name of the custom field. This may be up to 30 characters. */
+      /**
+       * <strong>Required.</strong> The name of the custom field. This may be up to 30 characters.
+       */
       @SerializedName("name")
       String name;
 
-      /** The value of the custom field. This may be up to 30 characters. */
+      /**
+       * <strong>Required.</strong> The value of the custom field. This may be up to 30 characters.
+       */
       @SerializedName("value")
       String value;
 
@@ -1138,13 +1142,18 @@ public class CustomerCreateParams extends ApiRequestParams {
           return this;
         }
 
-        /** The name of the custom field. This may be up to 30 characters. */
+        /**
+         * <strong>Required.</strong> The name of the custom field. This may be up to 30 characters.
+         */
         public Builder setName(String name) {
           this.name = name;
           return this;
         }
 
-        /** The value of the custom field. This may be up to 30 characters. */
+        /**
+         * <strong>Required.</strong> The value of the custom field. This may be up to 30
+         * characters.
+         */
         public Builder setValue(String value) {
           this.value = value;
           return this;
@@ -1267,7 +1276,7 @@ public class CustomerCreateParams extends ApiRequestParams {
 
   @Getter
   public static class Shipping {
-    /** Customer shipping address. */
+    /** <strong>Required.</strong> Customer shipping address. */
     @SerializedName("address")
     Address address;
 
@@ -1280,7 +1289,7 @@ public class CustomerCreateParams extends ApiRequestParams {
     @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
     Map<String, Object> extraParams;
 
-    /** Customer name. */
+    /** <strong>Required.</strong> Customer name. */
     @SerializedName("name")
     String name;
 
@@ -1314,7 +1323,7 @@ public class CustomerCreateParams extends ApiRequestParams {
             this.address, this.extraParams, this.name, this.phone);
       }
 
-      /** Customer shipping address. */
+      /** <strong>Required.</strong> Customer shipping address. */
       public Builder setAddress(CustomerCreateParams.Shipping.Address address) {
         this.address = address;
         return this;
@@ -1346,7 +1355,7 @@ public class CustomerCreateParams extends ApiRequestParams {
         return this;
       }
 
-      /** Customer name. */
+      /** <strong>Required.</strong> Customer name. */
       public Builder setName(String name) {
         this.name = name;
         return this;
@@ -1616,21 +1625,21 @@ public class CustomerCreateParams extends ApiRequestParams {
     Map<String, Object> extraParams;
 
     /**
-     * Type of the tax ID, one of {@code ae_trn}, {@code au_abn}, {@code au_arn}, {@code bg_uic},
-     * {@code br_cnpj}, {@code br_cpf}, {@code ca_bn}, {@code ca_gst_hst}, {@code ca_pst_bc}, {@code
-     * ca_pst_mb}, {@code ca_pst_sk}, {@code ca_qst}, {@code ch_vat}, {@code cl_tin}, {@code
-     * eg_tin}, {@code es_cif}, {@code eu_oss_vat}, {@code eu_vat}, {@code gb_vat}, {@code ge_vat},
-     * {@code hk_br}, {@code hu_tin}, {@code id_npwp}, {@code il_vat}, {@code in_gst}, {@code
-     * is_vat}, {@code jp_cn}, {@code jp_rn}, {@code jp_trn}, {@code ke_pin}, {@code kr_brn}, {@code
-     * li_uid}, {@code mx_rfc}, {@code my_frp}, {@code my_itn}, {@code my_sst}, {@code no_vat},
-     * {@code nz_gst}, {@code ph_tin}, {@code ru_inn}, {@code ru_kpp}, {@code sa_vat}, {@code
-     * sg_gst}, {@code sg_uen}, {@code si_tin}, {@code th_vat}, {@code tr_tin}, {@code tw_vat},
-     * {@code ua_vat}, {@code us_ein}, or {@code za_vat}.
+     * <strong>Required.</strong> Type of the tax ID, one of {@code ae_trn}, {@code au_abn}, {@code
+     * au_arn}, {@code bg_uic}, {@code br_cnpj}, {@code br_cpf}, {@code ca_bn}, {@code ca_gst_hst},
+     * {@code ca_pst_bc}, {@code ca_pst_mb}, {@code ca_pst_sk}, {@code ca_qst}, {@code ch_vat},
+     * {@code cl_tin}, {@code eg_tin}, {@code es_cif}, {@code eu_oss_vat}, {@code eu_vat}, {@code
+     * gb_vat}, {@code ge_vat}, {@code hk_br}, {@code hu_tin}, {@code id_npwp}, {@code il_vat},
+     * {@code in_gst}, {@code is_vat}, {@code jp_cn}, {@code jp_rn}, {@code jp_trn}, {@code ke_pin},
+     * {@code kr_brn}, {@code li_uid}, {@code mx_rfc}, {@code my_frp}, {@code my_itn}, {@code
+     * my_sst}, {@code no_vat}, {@code nz_gst}, {@code ph_tin}, {@code ru_inn}, {@code ru_kpp},
+     * {@code sa_vat}, {@code sg_gst}, {@code sg_uen}, {@code si_tin}, {@code th_vat}, {@code
+     * tr_tin}, {@code tw_vat}, {@code ua_vat}, {@code us_ein}, or {@code za_vat}
      */
     @SerializedName("type")
     Type type;
 
-    /** Value of the tax ID. */
+    /** <strong>Required.</strong> Value of the tax ID. */
     @SerializedName("value")
     String value;
 
@@ -1683,23 +1692,24 @@ public class CustomerCreateParams extends ApiRequestParams {
       }
 
       /**
-       * Type of the tax ID, one of {@code ae_trn}, {@code au_abn}, {@code au_arn}, {@code bg_uic},
-       * {@code br_cnpj}, {@code br_cpf}, {@code ca_bn}, {@code ca_gst_hst}, {@code ca_pst_bc},
-       * {@code ca_pst_mb}, {@code ca_pst_sk}, {@code ca_qst}, {@code ch_vat}, {@code cl_tin},
-       * {@code eg_tin}, {@code es_cif}, {@code eu_oss_vat}, {@code eu_vat}, {@code gb_vat}, {@code
-       * ge_vat}, {@code hk_br}, {@code hu_tin}, {@code id_npwp}, {@code il_vat}, {@code in_gst},
-       * {@code is_vat}, {@code jp_cn}, {@code jp_rn}, {@code jp_trn}, {@code ke_pin}, {@code
-       * kr_brn}, {@code li_uid}, {@code mx_rfc}, {@code my_frp}, {@code my_itn}, {@code my_sst},
-       * {@code no_vat}, {@code nz_gst}, {@code ph_tin}, {@code ru_inn}, {@code ru_kpp}, {@code
-       * sa_vat}, {@code sg_gst}, {@code sg_uen}, {@code si_tin}, {@code th_vat}, {@code tr_tin},
-       * {@code tw_vat}, {@code ua_vat}, {@code us_ein}, or {@code za_vat}.
+       * <strong>Required.</strong> Type of the tax ID, one of {@code ae_trn}, {@code au_abn},
+       * {@code au_arn}, {@code bg_uic}, {@code br_cnpj}, {@code br_cpf}, {@code ca_bn}, {@code
+       * ca_gst_hst}, {@code ca_pst_bc}, {@code ca_pst_mb}, {@code ca_pst_sk}, {@code ca_qst},
+       * {@code ch_vat}, {@code cl_tin}, {@code eg_tin}, {@code es_cif}, {@code eu_oss_vat}, {@code
+       * eu_vat}, {@code gb_vat}, {@code ge_vat}, {@code hk_br}, {@code hu_tin}, {@code id_npwp},
+       * {@code il_vat}, {@code in_gst}, {@code is_vat}, {@code jp_cn}, {@code jp_rn}, {@code
+       * jp_trn}, {@code ke_pin}, {@code kr_brn}, {@code li_uid}, {@code mx_rfc}, {@code my_frp},
+       * {@code my_itn}, {@code my_sst}, {@code no_vat}, {@code nz_gst}, {@code ph_tin}, {@code
+       * ru_inn}, {@code ru_kpp}, {@code sa_vat}, {@code sg_gst}, {@code sg_uen}, {@code si_tin},
+       * {@code th_vat}, {@code tr_tin}, {@code tw_vat}, {@code ua_vat}, {@code us_ein}, or {@code
+       * za_vat}
        */
       public Builder setType(CustomerCreateParams.TaxIdData.Type type) {
         this.type = type;
         return this;
       }
 
-      /** Value of the tax ID. */
+      /** <strong>Required.</strong> Value of the tax ID. */
       public Builder setValue(String value) {
         this.value = value;
         return this;

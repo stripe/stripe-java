@@ -11,7 +11,7 @@ import lombok.Getter;
 
 @Getter
 public class ReaderProcessSetupIntentParams extends ApiRequestParams {
-  /** Customer Consent Collected. */
+  /** <strong>Required.</strong> Customer Consent Collected */
   @SerializedName("customer_consent_collected")
   Boolean customerConsentCollected;
 
@@ -28,7 +28,7 @@ public class ReaderProcessSetupIntentParams extends ApiRequestParams {
   @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
   Map<String, Object> extraParams;
 
-  /** SetupIntent ID. */
+  /** <strong>Required.</strong> SetupIntent ID */
   @SerializedName("setup_intent")
   String setupIntent;
 
@@ -62,7 +62,7 @@ public class ReaderProcessSetupIntentParams extends ApiRequestParams {
           this.customerConsentCollected, this.expand, this.extraParams, this.setupIntent);
     }
 
-    /** Customer Consent Collected. */
+    /** <strong>Required.</strong> Customer Consent Collected */
     public Builder setCustomerConsentCollected(Boolean customerConsentCollected) {
       this.customerConsentCollected = customerConsentCollected;
       return this;
@@ -120,7 +120,7 @@ public class ReaderProcessSetupIntentParams extends ApiRequestParams {
       return this;
     }
 
-    /** SetupIntent ID. */
+    /** <strong>Required.</strong> SetupIntent ID */
     public Builder setSetupIntent(String setupIntent) {
       this.setupIntent = setupIntent;
       return this;

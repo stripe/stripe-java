@@ -34,7 +34,7 @@ public class TaxRateCreateParams extends ApiRequestParams {
   @SerializedName("description")
   String description;
 
-  /** The display name of the tax rate, which will be shown to users. */
+  /** <strong>Required.</strong> The display name of the tax rate, which will be shown to users. */
   @SerializedName("display_name")
   String displayName;
 
@@ -51,7 +51,7 @@ public class TaxRateCreateParams extends ApiRequestParams {
   @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
   Map<String, Object> extraParams;
 
-  /** This specifies if the tax rate is inclusive or exclusive. */
+  /** <strong>Required.</strong> This specifies if the tax rate is inclusive or exclusive. */
   @SerializedName("inclusive")
   Boolean inclusive;
 
@@ -71,7 +71,7 @@ public class TaxRateCreateParams extends ApiRequestParams {
   @SerializedName("metadata")
   Map<String, String> metadata;
 
-  /** This represents the tax rate percent out of 100. */
+  /** <strong>Required.</strong> This represents the tax rate percent out of 100. */
   @SerializedName("percentage")
   BigDecimal percentage;
 
@@ -187,7 +187,9 @@ public class TaxRateCreateParams extends ApiRequestParams {
       return this;
     }
 
-    /** The display name of the tax rate, which will be shown to users. */
+    /**
+     * <strong>Required.</strong> The display name of the tax rate, which will be shown to users.
+     */
     public Builder setDisplayName(String displayName) {
       this.displayName = displayName;
       return this;
@@ -245,7 +247,7 @@ public class TaxRateCreateParams extends ApiRequestParams {
       return this;
     }
 
-    /** This specifies if the tax rate is inclusive or exclusive. */
+    /** <strong>Required.</strong> This specifies if the tax rate is inclusive or exclusive. */
     public Builder setInclusive(Boolean inclusive) {
       this.inclusive = inclusive;
       return this;
@@ -286,7 +288,7 @@ public class TaxRateCreateParams extends ApiRequestParams {
       return this;
     }
 
-    /** This represents the tax rate percent out of 100. */
+    /** <strong>Required.</strong> This represents the tax rate percent out of 100. */
     public Builder setPercentage(BigDecimal percentage) {
       this.percentage = percentage;
       return this;

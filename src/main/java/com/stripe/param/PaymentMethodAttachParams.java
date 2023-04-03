@@ -11,7 +11,7 @@ import lombok.Getter;
 
 @Getter
 public class PaymentMethodAttachParams extends ApiRequestParams {
-  /** The ID of the customer to which to attach the PaymentMethod. */
+  /** <strong>Required.</strong> The ID of the customer to which to attach the PaymentMethod. */
   @SerializedName("customer")
   String customer;
 
@@ -51,7 +51,7 @@ public class PaymentMethodAttachParams extends ApiRequestParams {
       return new PaymentMethodAttachParams(this.customer, this.expand, this.extraParams);
     }
 
-    /** The ID of the customer to which to attach the PaymentMethod. */
+    /** <strong>Required.</strong> The ID of the customer to which to attach the PaymentMethod. */
     public Builder setCustomer(String customer) {
       this.customer = customer;
       return this;

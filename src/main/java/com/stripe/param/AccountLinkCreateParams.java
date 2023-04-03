@@ -11,7 +11,7 @@ import lombok.Getter;
 
 @Getter
 public class AccountLinkCreateParams extends ApiRequestParams {
-  /** The identifier of the account to create an account link for. */
+  /** <strong>Required.</strong> The identifier of the account to create an account link for. */
   @SerializedName("account")
   String account;
 
@@ -51,8 +51,8 @@ public class AccountLinkCreateParams extends ApiRequestParams {
   String returnUrl;
 
   /**
-   * The type of account link the user is requesting. Possible values are {@code account_onboarding}
-   * or {@code account_update}.
+   * <strong>Required.</strong> The type of account link the user is requesting. Possible values are
+   * {@code account_onboarding} or {@code account_update}.
    */
   @SerializedName("type")
   Type type;
@@ -105,7 +105,7 @@ public class AccountLinkCreateParams extends ApiRequestParams {
           this.type);
     }
 
-    /** The identifier of the account to create an account link for. */
+    /** <strong>Required.</strong> The identifier of the account to create an account link for. */
     public Builder setAccount(String account) {
       this.account = account;
       return this;
@@ -192,8 +192,8 @@ public class AccountLinkCreateParams extends ApiRequestParams {
     }
 
     /**
-     * The type of account link the user is requesting. Possible values are {@code
-     * account_onboarding} or {@code account_update}.
+     * <strong>Required.</strong> The type of account link the user is requesting. Possible values
+     * are {@code account_onboarding} or {@code account_update}.
      */
     public Builder setType(AccountLinkCreateParams.Type type) {
       this.type = type;

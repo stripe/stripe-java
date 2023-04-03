@@ -33,7 +33,7 @@ public class ReceivedCreditListParams extends ApiRequestParams {
   @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
   Map<String, Object> extraParams;
 
-  /** The FinancialAccount that received the funds. */
+  /** <strong>Required.</strong> The FinancialAccount that received the funds. */
   @SerializedName("financial_account")
   String financialAccount;
 
@@ -179,7 +179,7 @@ public class ReceivedCreditListParams extends ApiRequestParams {
       return this;
     }
 
-    /** The FinancialAccount that received the funds. */
+    /** <strong>Required.</strong> The FinancialAccount that received the funds. */
     public Builder setFinancialAccount(String financialAccount) {
       this.financialAccount = financialAccount;
       return this;
@@ -231,7 +231,7 @@ public class ReceivedCreditListParams extends ApiRequestParams {
     @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
     Map<String, Object> extraParams;
 
-    /** The source flow type. */
+    /** <strong>Required.</strong> The source flow type. */
     @SerializedName("source_flow_type")
     SourceFlowType sourceFlowType;
 
@@ -280,7 +280,7 @@ public class ReceivedCreditListParams extends ApiRequestParams {
         return this;
       }
 
-      /** The source flow type. */
+      /** <strong>Required.</strong> The source flow type. */
       public Builder setSourceFlowType(
           ReceivedCreditListParams.LinkedFlows.SourceFlowType sourceFlowType) {
         this.sourceFlowType = sourceFlowType;

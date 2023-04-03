@@ -24,7 +24,7 @@ public class ReaderProcessPaymentIntentParams extends ApiRequestParams {
   @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
   Map<String, Object> extraParams;
 
-  /** PaymentIntent ID. */
+  /** <strong>Required.</strong> PaymentIntent ID */
   @SerializedName("payment_intent")
   String paymentIntent;
 
@@ -114,7 +114,7 @@ public class ReaderProcessPaymentIntentParams extends ApiRequestParams {
       return this;
     }
 
-    /** PaymentIntent ID. */
+    /** <strong>Required.</strong> PaymentIntent ID */
     public Builder setPaymentIntent(String paymentIntent) {
       this.paymentIntent = paymentIntent;
       return this;

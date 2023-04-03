@@ -62,12 +62,12 @@ public class Configuration extends ApiResource implements HasId {
   @SerializedName("verifone_p400")
   VerifoneP400 verifoneP400;
 
-  /** Creates a new <code>Configuration</code> object. */
+  /** Creates a new {@code Configuration} object. */
   public static Configuration create(Map<String, Object> params) throws StripeException {
     return create(params, (RequestOptions) null);
   }
 
-  /** Creates a new <code>Configuration</code> object. */
+  /** Creates a new {@code Configuration} object. */
   public static Configuration create(Map<String, Object> params, RequestOptions options)
       throws StripeException {
     String url = ApiResource.fullUrl(Stripe.getApiBase(), options, "/v1/terminal/configurations");
@@ -75,12 +75,12 @@ public class Configuration extends ApiResource implements HasId {
         ApiResource.RequestMethod.POST, url, params, Configuration.class, options);
   }
 
-  /** Creates a new <code>Configuration</code> object. */
+  /** Creates a new {@code Configuration} object. */
   public static Configuration create(ConfigurationCreateParams params) throws StripeException {
     return create(params, (RequestOptions) null);
   }
 
-  /** Creates a new <code>Configuration</code> object. */
+  /** Creates a new {@code Configuration} object. */
   public static Configuration create(ConfigurationCreateParams params, RequestOptions options)
       throws StripeException {
     String url = ApiResource.fullUrl(Stripe.getApiBase(), options, "/v1/terminal/configurations");
@@ -88,22 +88,22 @@ public class Configuration extends ApiResource implements HasId {
         ApiResource.RequestMethod.POST, url, params, Configuration.class, options);
   }
 
-  /** Deletes a <code>Configuration</code> object. */
+  /** Deletes a {@code Configuration} object. */
   public Configuration delete() throws StripeException {
     return delete((Map<String, Object>) null, (RequestOptions) null);
   }
 
-  /** Deletes a <code>Configuration</code> object. */
+  /** Deletes a {@code Configuration} object. */
   public Configuration delete(RequestOptions options) throws StripeException {
     return delete((Map<String, Object>) null, options);
   }
 
-  /** Deletes a <code>Configuration</code> object. */
+  /** Deletes a {@code Configuration} object. */
   public Configuration delete(Map<String, Object> params) throws StripeException {
     return delete(params, (RequestOptions) null);
   }
 
-  /** Deletes a <code>Configuration</code> object. */
+  /** Deletes a {@code Configuration} object. */
   public Configuration delete(Map<String, Object> params, RequestOptions options)
       throws StripeException {
     String url =
@@ -115,43 +115,43 @@ public class Configuration extends ApiResource implements HasId {
         ApiResource.RequestMethod.DELETE, url, params, Configuration.class, options);
   }
 
-  /** Returns a list of <code>Configuration</code> objects. */
+  /** Returns a list of {@code Configuration} objects. */
   public static ConfigurationCollection list(Map<String, Object> params) throws StripeException {
     return list(params, (RequestOptions) null);
   }
 
-  /** Returns a list of <code>Configuration</code> objects. */
+  /** Returns a list of {@code Configuration} objects. */
   public static ConfigurationCollection list(Map<String, Object> params, RequestOptions options)
       throws StripeException {
     String url = ApiResource.fullUrl(Stripe.getApiBase(), options, "/v1/terminal/configurations");
     return ApiResource.requestCollection(url, params, ConfigurationCollection.class, options);
   }
 
-  /** Returns a list of <code>Configuration</code> objects. */
+  /** Returns a list of {@code Configuration} objects. */
   public static ConfigurationCollection list(ConfigurationListParams params)
       throws StripeException {
     return list(params, (RequestOptions) null);
   }
 
-  /** Returns a list of <code>Configuration</code> objects. */
+  /** Returns a list of {@code Configuration} objects. */
   public static ConfigurationCollection list(ConfigurationListParams params, RequestOptions options)
       throws StripeException {
     String url = ApiResource.fullUrl(Stripe.getApiBase(), options, "/v1/terminal/configurations");
     return ApiResource.requestCollection(url, params, ConfigurationCollection.class, options);
   }
 
-  /** Retrieves a <code>Configuration</code> object. */
+  /** Retrieves a {@code Configuration} object. */
   public static Configuration retrieve(String configuration) throws StripeException {
     return retrieve(configuration, (Map<String, Object>) null, (RequestOptions) null);
   }
 
-  /** Retrieves a <code>Configuration</code> object. */
+  /** Retrieves a {@code Configuration} object. */
   public static Configuration retrieve(String configuration, RequestOptions options)
       throws StripeException {
     return retrieve(configuration, (Map<String, Object>) null, options);
   }
 
-  /** Retrieves a <code>Configuration</code> object. */
+  /** Retrieves a {@code Configuration} object. */
   public static Configuration retrieve(
       String configuration, Map<String, Object> params, RequestOptions options)
       throws StripeException {
@@ -165,7 +165,7 @@ public class Configuration extends ApiResource implements HasId {
         ApiResource.RequestMethod.GET, url, params, Configuration.class, options);
   }
 
-  /** Retrieves a <code>Configuration</code> object. */
+  /** Retrieves a {@code Configuration} object. */
   public static Configuration retrieve(
       String configuration, ConfigurationRetrieveParams params, RequestOptions options)
       throws StripeException {
@@ -179,12 +179,12 @@ public class Configuration extends ApiResource implements HasId {
         ApiResource.RequestMethod.GET, url, params, Configuration.class, options);
   }
 
-  /** Updates a new <code>Configuration</code> object. */
+  /** Updates a new {@code Configuration} object. */
   public Configuration update(Map<String, Object> params) throws StripeException {
     return update(params, (RequestOptions) null);
   }
 
-  /** Updates a new <code>Configuration</code> object. */
+  /** Updates a new {@code Configuration} object. */
   public Configuration update(Map<String, Object> params, RequestOptions options)
       throws StripeException {
     String url =
@@ -196,12 +196,12 @@ public class Configuration extends ApiResource implements HasId {
         ApiResource.RequestMethod.POST, url, params, Configuration.class, options);
   }
 
-  /** Updates a new <code>Configuration</code> object. */
+  /** Updates a new {@code Configuration} object. */
   public Configuration update(ConfigurationUpdateParams params) throws StripeException {
     return update(params, (RequestOptions) null);
   }
 
-  /** Updates a new <code>Configuration</code> object. */
+  /** Updates a new {@code Configuration} object. */
   public Configuration update(ConfigurationUpdateParams params, RequestOptions options)
       throws StripeException {
     String url =

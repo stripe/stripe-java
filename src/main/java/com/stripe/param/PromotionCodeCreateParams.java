@@ -22,7 +22,7 @@ public class PromotionCodeCreateParams extends ApiRequestParams {
   @SerializedName("code")
   String code;
 
-  /** The coupon for this promotion code. */
+  /** <strong>Required.</strong> The coupon for this promotion code. */
   @SerializedName("coupon")
   String coupon;
 
@@ -152,7 +152,7 @@ public class PromotionCodeCreateParams extends ApiRequestParams {
       return this;
     }
 
-    /** The coupon for this promotion code. */
+    /** <strong>Required.</strong> The coupon for this promotion code. */
     public Builder setCoupon(String coupon) {
       this.coupon = coupon;
       return this;

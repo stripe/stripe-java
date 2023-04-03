@@ -167,7 +167,7 @@ public class VerificationSession extends ApiResource
   }
 
   /**
-   * A VerificationSession object can be canceled when it is in <code>requires_input</code> <a
+   * A VerificationSession object can be canceled when it is in {@code requires_input} <a
    * href="https://stripe.com/docs/identity/how-sessions-work">status</a>.
    *
    * <p>Once canceled, future submission attempts are disabled. This cannot be undone. <a
@@ -178,7 +178,7 @@ public class VerificationSession extends ApiResource
   }
 
   /**
-   * A VerificationSession object can be canceled when it is in <code>requires_input</code> <a
+   * A VerificationSession object can be canceled when it is in {@code requires_input} <a
    * href="https://stripe.com/docs/identity/how-sessions-work">status</a>.
    *
    * <p>Once canceled, future submission attempts are disabled. This cannot be undone. <a
@@ -189,7 +189,7 @@ public class VerificationSession extends ApiResource
   }
 
   /**
-   * A VerificationSession object can be canceled when it is in <code>requires_input</code> <a
+   * A VerificationSession object can be canceled when it is in {@code requires_input} <a
    * href="https://stripe.com/docs/identity/how-sessions-work">status</a>.
    *
    * <p>Once canceled, future submission attempts are disabled. This cannot be undone. <a
@@ -200,7 +200,7 @@ public class VerificationSession extends ApiResource
   }
 
   /**
-   * A VerificationSession object can be canceled when it is in <code>requires_input</code> <a
+   * A VerificationSession object can be canceled when it is in {@code requires_input} <a
    * href="https://stripe.com/docs/identity/how-sessions-work">status</a>.
    *
    * <p>Once canceled, future submission attempts are disabled. This cannot be undone. <a
@@ -220,7 +220,7 @@ public class VerificationSession extends ApiResource
   }
 
   /**
-   * A VerificationSession object can be canceled when it is in <code>requires_input</code> <a
+   * A VerificationSession object can be canceled when it is in {@code requires_input} <a
    * href="https://stripe.com/docs/identity/how-sessions-work">status</a>.
    *
    * <p>Once canceled, future submission attempts are disabled. This cannot be undone. <a
@@ -231,7 +231,7 @@ public class VerificationSession extends ApiResource
   }
 
   /**
-   * A VerificationSession object can be canceled when it is in <code>requires_input</code> <a
+   * A VerificationSession object can be canceled when it is in {@code requires_input} <a
    * href="https://stripe.com/docs/identity/how-sessions-work">status</a>.
    *
    * <p>Once canceled, future submission attempts are disabled. This cannot be undone. <a
@@ -254,7 +254,7 @@ public class VerificationSession extends ApiResource
    * Creates a VerificationSession object.
    *
    * <p>After the VerificationSession is created, display a verification modal using the session
-   * <code>client_secret</code> or send your users to the session’s <code>url</code>.
+   * {@code client_secret} or send your users to the session’s {@code url}.
    *
    * <p>If your API key is in test mode, verification checks won’t actually process, though
    * everything else will occur as if in live mode.
@@ -270,7 +270,7 @@ public class VerificationSession extends ApiResource
    * Creates a VerificationSession object.
    *
    * <p>After the VerificationSession is created, display a verification modal using the session
-   * <code>client_secret</code> or send your users to the session’s <code>url</code>.
+   * {@code client_secret} or send your users to the session’s {@code url}.
    *
    * <p>If your API key is in test mode, verification checks won’t actually process, though
    * everything else will occur as if in live mode.
@@ -290,7 +290,7 @@ public class VerificationSession extends ApiResource
    * Creates a VerificationSession object.
    *
    * <p>After the VerificationSession is created, display a verification modal using the session
-   * <code>client_secret</code> or send your users to the session’s <code>url</code>.
+   * {@code client_secret} or send your users to the session’s {@code url}.
    *
    * <p>If your API key is in test mode, verification checks won’t actually process, though
    * everything else will occur as if in live mode.
@@ -307,7 +307,7 @@ public class VerificationSession extends ApiResource
    * Creates a VerificationSession object.
    *
    * <p>After the VerificationSession is created, display a verification modal using the session
-   * <code>client_secret</code> or send your users to the session’s <code>url</code>.
+   * {@code client_secret} or send your users to the session’s {@code url}.
    *
    * <p>If your API key is in test mode, verification checks won’t actually process, though
    * everything else will occur as if in live mode.
@@ -356,20 +356,19 @@ public class VerificationSession extends ApiResource
    * the VerificationSession and all objects related to it, including VerificationReports, Events,
    * request logs, etc.
    *
-   * <p>A VerificationSession object can be redacted when it is in <code>requires_input</code> or
-   * <code>verified</code> <a href="https://stripe.com/docs/identity/how-sessions-work">status</a>.
-   * Redacting a VerificationSession in <code>requires_action</code> state will automatically cancel
-   * it.
+   * <p>A VerificationSession object can be redacted when it is in {@code requires_input} or {@code
+   * verified} <a href="https://stripe.com/docs/identity/how-sessions-work">status</a>. Redacting a
+   * VerificationSession in {@code requires_action} state will automatically cancel it.
    *
    * <p>The redaction process may take up to four days. When the redaction process is in progress,
-   * the VerificationSession’s <code>redaction.status</code> field will be set to <code>processing
-   * </code>; when the process is finished, it will change to <code>redacted</code> and an <code>
-   * identity.verification_session.redacted</code> event will be emitted.
+   * the VerificationSession’s {@code redaction.status} field will be set to {@code processing};
+   * when the process is finished, it will change to {@code redacted} and an {@code
+   * identity.verification_session.redacted} event will be emitted.
    *
    * <p>Redaction is irreversible. Redacted objects are still accessible in the Stripe API, but all
-   * the fields that contain personal data will be replaced by the string <code>[redacted]</code> or
-   * a similar placeholder. The <code>metadata</code> field will also be erased. Redacted objects
-   * cannot be updated or used for any purpose.
+   * the fields that contain personal data will be replaced by the string {@code [redacted]} or a
+   * similar placeholder. The {@code metadata} field will also be erased. Redacted objects cannot be
+   * updated or used for any purpose.
    *
    * <p><a href="https://stripe.com/docs/identity/verification-sessions#redact">Learn more</a>.
    */
@@ -382,20 +381,19 @@ public class VerificationSession extends ApiResource
    * the VerificationSession and all objects related to it, including VerificationReports, Events,
    * request logs, etc.
    *
-   * <p>A VerificationSession object can be redacted when it is in <code>requires_input</code> or
-   * <code>verified</code> <a href="https://stripe.com/docs/identity/how-sessions-work">status</a>.
-   * Redacting a VerificationSession in <code>requires_action</code> state will automatically cancel
-   * it.
+   * <p>A VerificationSession object can be redacted when it is in {@code requires_input} or {@code
+   * verified} <a href="https://stripe.com/docs/identity/how-sessions-work">status</a>. Redacting a
+   * VerificationSession in {@code requires_action} state will automatically cancel it.
    *
    * <p>The redaction process may take up to four days. When the redaction process is in progress,
-   * the VerificationSession’s <code>redaction.status</code> field will be set to <code>processing
-   * </code>; when the process is finished, it will change to <code>redacted</code> and an <code>
-   * identity.verification_session.redacted</code> event will be emitted.
+   * the VerificationSession’s {@code redaction.status} field will be set to {@code processing};
+   * when the process is finished, it will change to {@code redacted} and an {@code
+   * identity.verification_session.redacted} event will be emitted.
    *
    * <p>Redaction is irreversible. Redacted objects are still accessible in the Stripe API, but all
-   * the fields that contain personal data will be replaced by the string <code>[redacted]</code> or
-   * a similar placeholder. The <code>metadata</code> field will also be erased. Redacted objects
-   * cannot be updated or used for any purpose.
+   * the fields that contain personal data will be replaced by the string {@code [redacted]} or a
+   * similar placeholder. The {@code metadata} field will also be erased. Redacted objects cannot be
+   * updated or used for any purpose.
    *
    * <p><a href="https://stripe.com/docs/identity/verification-sessions#redact">Learn more</a>.
    */
@@ -408,20 +406,19 @@ public class VerificationSession extends ApiResource
    * the VerificationSession and all objects related to it, including VerificationReports, Events,
    * request logs, etc.
    *
-   * <p>A VerificationSession object can be redacted when it is in <code>requires_input</code> or
-   * <code>verified</code> <a href="https://stripe.com/docs/identity/how-sessions-work">status</a>.
-   * Redacting a VerificationSession in <code>requires_action</code> state will automatically cancel
-   * it.
+   * <p>A VerificationSession object can be redacted when it is in {@code requires_input} or {@code
+   * verified} <a href="https://stripe.com/docs/identity/how-sessions-work">status</a>. Redacting a
+   * VerificationSession in {@code requires_action} state will automatically cancel it.
    *
    * <p>The redaction process may take up to four days. When the redaction process is in progress,
-   * the VerificationSession’s <code>redaction.status</code> field will be set to <code>processing
-   * </code>; when the process is finished, it will change to <code>redacted</code> and an <code>
-   * identity.verification_session.redacted</code> event will be emitted.
+   * the VerificationSession’s {@code redaction.status} field will be set to {@code processing};
+   * when the process is finished, it will change to {@code redacted} and an {@code
+   * identity.verification_session.redacted} event will be emitted.
    *
    * <p>Redaction is irreversible. Redacted objects are still accessible in the Stripe API, but all
-   * the fields that contain personal data will be replaced by the string <code>[redacted]</code> or
-   * a similar placeholder. The <code>metadata</code> field will also be erased. Redacted objects
-   * cannot be updated or used for any purpose.
+   * the fields that contain personal data will be replaced by the string {@code [redacted]} or a
+   * similar placeholder. The {@code metadata} field will also be erased. Redacted objects cannot be
+   * updated or used for any purpose.
    *
    * <p><a href="https://stripe.com/docs/identity/verification-sessions#redact">Learn more</a>.
    */
@@ -434,20 +431,19 @@ public class VerificationSession extends ApiResource
    * the VerificationSession and all objects related to it, including VerificationReports, Events,
    * request logs, etc.
    *
-   * <p>A VerificationSession object can be redacted when it is in <code>requires_input</code> or
-   * <code>verified</code> <a href="https://stripe.com/docs/identity/how-sessions-work">status</a>.
-   * Redacting a VerificationSession in <code>requires_action</code> state will automatically cancel
-   * it.
+   * <p>A VerificationSession object can be redacted when it is in {@code requires_input} or {@code
+   * verified} <a href="https://stripe.com/docs/identity/how-sessions-work">status</a>. Redacting a
+   * VerificationSession in {@code requires_action} state will automatically cancel it.
    *
    * <p>The redaction process may take up to four days. When the redaction process is in progress,
-   * the VerificationSession’s <code>redaction.status</code> field will be set to <code>processing
-   * </code>; when the process is finished, it will change to <code>redacted</code> and an <code>
-   * identity.verification_session.redacted</code> event will be emitted.
+   * the VerificationSession’s {@code redaction.status} field will be set to {@code processing};
+   * when the process is finished, it will change to {@code redacted} and an {@code
+   * identity.verification_session.redacted} event will be emitted.
    *
    * <p>Redaction is irreversible. Redacted objects are still accessible in the Stripe API, but all
-   * the fields that contain personal data will be replaced by the string <code>[redacted]</code> or
-   * a similar placeholder. The <code>metadata</code> field will also be erased. Redacted objects
-   * cannot be updated or used for any purpose.
+   * the fields that contain personal data will be replaced by the string {@code [redacted]} or a
+   * similar placeholder. The {@code metadata} field will also be erased. Redacted objects cannot be
+   * updated or used for any purpose.
    *
    * <p><a href="https://stripe.com/docs/identity/verification-sessions#redact">Learn more</a>.
    */
@@ -469,20 +465,19 @@ public class VerificationSession extends ApiResource
    * the VerificationSession and all objects related to it, including VerificationReports, Events,
    * request logs, etc.
    *
-   * <p>A VerificationSession object can be redacted when it is in <code>requires_input</code> or
-   * <code>verified</code> <a href="https://stripe.com/docs/identity/how-sessions-work">status</a>.
-   * Redacting a VerificationSession in <code>requires_action</code> state will automatically cancel
-   * it.
+   * <p>A VerificationSession object can be redacted when it is in {@code requires_input} or {@code
+   * verified} <a href="https://stripe.com/docs/identity/how-sessions-work">status</a>. Redacting a
+   * VerificationSession in {@code requires_action} state will automatically cancel it.
    *
    * <p>The redaction process may take up to four days. When the redaction process is in progress,
-   * the VerificationSession’s <code>redaction.status</code> field will be set to <code>processing
-   * </code>; when the process is finished, it will change to <code>redacted</code> and an <code>
-   * identity.verification_session.redacted</code> event will be emitted.
+   * the VerificationSession’s {@code redaction.status} field will be set to {@code processing};
+   * when the process is finished, it will change to {@code redacted} and an {@code
+   * identity.verification_session.redacted} event will be emitted.
    *
    * <p>Redaction is irreversible. Redacted objects are still accessible in the Stripe API, but all
-   * the fields that contain personal data will be replaced by the string <code>[redacted]</code> or
-   * a similar placeholder. The <code>metadata</code> field will also be erased. Redacted objects
-   * cannot be updated or used for any purpose.
+   * the fields that contain personal data will be replaced by the string {@code [redacted]} or a
+   * similar placeholder. The {@code metadata} field will also be erased. Redacted objects cannot be
+   * updated or used for any purpose.
    *
    * <p><a href="https://stripe.com/docs/identity/verification-sessions#redact">Learn more</a>.
    */
@@ -495,20 +490,19 @@ public class VerificationSession extends ApiResource
    * the VerificationSession and all objects related to it, including VerificationReports, Events,
    * request logs, etc.
    *
-   * <p>A VerificationSession object can be redacted when it is in <code>requires_input</code> or
-   * <code>verified</code> <a href="https://stripe.com/docs/identity/how-sessions-work">status</a>.
-   * Redacting a VerificationSession in <code>requires_action</code> state will automatically cancel
-   * it.
+   * <p>A VerificationSession object can be redacted when it is in {@code requires_input} or {@code
+   * verified} <a href="https://stripe.com/docs/identity/how-sessions-work">status</a>. Redacting a
+   * VerificationSession in {@code requires_action} state will automatically cancel it.
    *
    * <p>The redaction process may take up to four days. When the redaction process is in progress,
-   * the VerificationSession’s <code>redaction.status</code> field will be set to <code>processing
-   * </code>; when the process is finished, it will change to <code>redacted</code> and an <code>
-   * identity.verification_session.redacted</code> event will be emitted.
+   * the VerificationSession’s {@code redaction.status} field will be set to {@code processing};
+   * when the process is finished, it will change to {@code redacted} and an {@code
+   * identity.verification_session.redacted} event will be emitted.
    *
    * <p>Redaction is irreversible. Redacted objects are still accessible in the Stripe API, but all
-   * the fields that contain personal data will be replaced by the string <code>[redacted]</code> or
-   * a similar placeholder. The <code>metadata</code> field will also be erased. Redacted objects
-   * cannot be updated or used for any purpose.
+   * the fields that contain personal data will be replaced by the string {@code [redacted]} or a
+   * similar placeholder. The {@code metadata} field will also be erased. Redacted objects cannot be
+   * updated or used for any purpose.
    *
    * <p><a href="https://stripe.com/docs/identity/verification-sessions#redact">Learn more</a>.
    */
@@ -528,8 +522,8 @@ public class VerificationSession extends ApiResource
   /**
    * Retrieves the details of a VerificationSession that was previously created.
    *
-   * <p>When the session status is <code>requires_input</code>, you can use this method to retrieve
-   * a valid <code>client_secret</code> or <code>url</code> to allow re-submission.
+   * <p>When the session status is {@code requires_input}, you can use this method to retrieve a
+   * valid {@code client_secret} or {@code url} to allow re-submission.
    */
   public static VerificationSession retrieve(String session) throws StripeException {
     return retrieve(session, (Map<String, Object>) null, (RequestOptions) null);
@@ -538,8 +532,8 @@ public class VerificationSession extends ApiResource
   /**
    * Retrieves the details of a VerificationSession that was previously created.
    *
-   * <p>When the session status is <code>requires_input</code>, you can use this method to retrieve
-   * a valid <code>client_secret</code> or <code>url</code> to allow re-submission.
+   * <p>When the session status is {@code requires_input}, you can use this method to retrieve a
+   * valid {@code client_secret} or {@code url} to allow re-submission.
    */
   public static VerificationSession retrieve(String session, RequestOptions options)
       throws StripeException {
@@ -549,8 +543,8 @@ public class VerificationSession extends ApiResource
   /**
    * Retrieves the details of a VerificationSession that was previously created.
    *
-   * <p>When the session status is <code>requires_input</code>, you can use this method to retrieve
-   * a valid <code>client_secret</code> or <code>url</code> to allow re-submission.
+   * <p>When the session status is {@code requires_input}, you can use this method to retrieve a
+   * valid {@code client_secret} or {@code url} to allow re-submission.
    */
   public static VerificationSession retrieve(
       String session, Map<String, Object> params, RequestOptions options) throws StripeException {
@@ -567,8 +561,8 @@ public class VerificationSession extends ApiResource
   /**
    * Retrieves the details of a VerificationSession that was previously created.
    *
-   * <p>When the session status is <code>requires_input</code>, you can use this method to retrieve
-   * a valid <code>client_secret</code> or <code>url</code> to allow re-submission.
+   * <p>When the session status is {@code requires_input}, you can use this method to retrieve a
+   * valid {@code client_secret} or {@code url} to allow re-submission.
    */
   public static VerificationSession retrieve(
       String session, VerificationSessionRetrieveParams params, RequestOptions options)
@@ -586,8 +580,8 @@ public class VerificationSession extends ApiResource
   /**
    * Updates a VerificationSession object.
    *
-   * <p>When the session status is <code>requires_input</code>, you can use this method to update
-   * the verification check and options.
+   * <p>When the session status is {@code requires_input}, you can use this method to update the
+   * verification check and options.
    */
   @Override
   public VerificationSession update(Map<String, Object> params) throws StripeException {
@@ -597,8 +591,8 @@ public class VerificationSession extends ApiResource
   /**
    * Updates a VerificationSession object.
    *
-   * <p>When the session status is <code>requires_input</code>, you can use this method to update
-   * the verification check and options.
+   * <p>When the session status is {@code requires_input}, you can use this method to update the
+   * verification check and options.
    */
   @Override
   public VerificationSession update(Map<String, Object> params, RequestOptions options)
@@ -616,8 +610,8 @@ public class VerificationSession extends ApiResource
   /**
    * Updates a VerificationSession object.
    *
-   * <p>When the session status is <code>requires_input</code>, you can use this method to update
-   * the verification check and options.
+   * <p>When the session status is {@code requires_input}, you can use this method to update the
+   * verification check and options.
    */
   public VerificationSession update(VerificationSessionUpdateParams params) throws StripeException {
     return update(params, (RequestOptions) null);
@@ -626,8 +620,8 @@ public class VerificationSession extends ApiResource
   /**
    * Updates a VerificationSession object.
    *
-   * <p>When the session status is <code>requires_input</code>, you can use this method to update
-   * the verification check and options.
+   * <p>When the session status is {@code requires_input}, you can use this method to update the
+   * verification check and options.
    */
   public VerificationSession update(VerificationSessionUpdateParams params, RequestOptions options)
       throws StripeException {

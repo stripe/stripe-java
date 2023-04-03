@@ -33,7 +33,7 @@ public class DebitReversalCreateParams extends ApiRequestParams {
   @SerializedName("metadata")
   Map<String, String> metadata;
 
-  /** The ReceivedDebit to reverse. */
+  /** <strong>Required.</strong> The ReceivedDebit to reverse. */
   @SerializedName("received_debit")
   String receivedDebit;
 
@@ -145,7 +145,7 @@ public class DebitReversalCreateParams extends ApiRequestParams {
       return this;
     }
 
-    /** The ReceivedDebit to reverse. */
+    /** <strong>Required.</strong> The ReceivedDebit to reverse. */
     public Builder setReceivedDebit(String receivedDebit) {
       this.receivedDebit = receivedDebit;
       return this;

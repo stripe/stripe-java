@@ -11,7 +11,7 @@ import lombok.Getter;
 
 @Getter
 public class SessionCreateParams extends ApiRequestParams {
-  /** The account holder to link accounts for. */
+  /** <strong>Required.</strong> The account holder to link accounts for. */
   @SerializedName("account_holder")
   AccountHolder accountHolder;
 
@@ -33,7 +33,7 @@ public class SessionCreateParams extends ApiRequestParams {
   Filters filters;
 
   /**
-   * List of data features that you would like to request access to.
+   * <strong>Required.</strong> List of data features that you would like to request access to.
    *
    * <p>Possible values are {@code balances}, {@code transactions}, {@code ownership}, and {@code
    * payment_method}.
@@ -91,7 +91,7 @@ public class SessionCreateParams extends ApiRequestParams {
           this.returnUrl);
     }
 
-    /** The account holder to link accounts for. */
+    /** <strong>Required.</strong> The account holder to link accounts for. */
     public Builder setAccountHolder(SessionCreateParams.AccountHolder accountHolder) {
       this.accountHolder = accountHolder;
       return this;
@@ -216,7 +216,7 @@ public class SessionCreateParams extends ApiRequestParams {
     @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
     Map<String, Object> extraParams;
 
-    /** Type of account holder to collect accounts for. */
+    /** <strong>Required.</strong> Type of account holder to collect accounts for. */
     @SerializedName("type")
     Type type;
 
@@ -291,7 +291,7 @@ public class SessionCreateParams extends ApiRequestParams {
         return this;
       }
 
-      /** Type of account holder to collect accounts for. */
+      /** <strong>Required.</strong> Type of account holder to collect accounts for. */
       public Builder setType(SessionCreateParams.AccountHolder.Type type) {
         this.type = type;
         return this;
@@ -316,7 +316,7 @@ public class SessionCreateParams extends ApiRequestParams {
 
   @Getter
   public static class Filters {
-    /** List of countries from which to collect accounts. */
+    /** <strong>Required.</strong> List of countries from which to collect accounts. */
     @SerializedName("countries")
     List<String> countries;
 

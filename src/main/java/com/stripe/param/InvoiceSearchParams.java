@@ -40,7 +40,7 @@ public class InvoiceSearchParams extends ApiRequestParams {
   String page;
 
   /**
-   * The search query string. See <a
+   * <strong>Required.</strong> The search query string. See <a
    * href="https://stripe.com/docs/search#search-query-language">search query language</a> and the
    * list of supported <a href="https://stripe.com/docs/search#query-fields-for-invoices">query
    * fields for invoices</a>.
@@ -150,7 +150,7 @@ public class InvoiceSearchParams extends ApiRequestParams {
     }
 
     /**
-     * The search query string. See <a
+     * <strong>Required.</strong> The search query string. See <a
      * href="https://stripe.com/docs/search#search-query-language">search query language</a> and the
      * list of supported <a href="https://stripe.com/docs/search#query-fields-for-invoices">query
      * fields for invoices</a>.

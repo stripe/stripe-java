@@ -369,9 +369,9 @@ public class Source extends ApiResource implements MetadataStore<Source>, Paymen
    * Updates the specified source by setting the values of the parameters passed. Any parameters not
    * provided will be left unchanged.
    *
-   * <p>This request accepts the <code>metadata</code> and <code>owner</code> as arguments. It is
-   * also possible to update type specific information for selected payment methods. Please refer to
-   * our <a href="https://stripe.com/docs/sources">payment method guides</a> for more detail.
+   * <p>This request accepts the {@code metadata} and {@code owner} as arguments. It is also
+   * possible to update type specific information for selected payment methods. Please refer to our
+   * <a href="https://stripe.com/docs/sources">payment method guides</a> for more detail.
    */
   @Override
   public Source update(Map<String, Object> params) throws StripeException {
@@ -382,9 +382,9 @@ public class Source extends ApiResource implements MetadataStore<Source>, Paymen
    * Updates the specified source by setting the values of the parameters passed. Any parameters not
    * provided will be left unchanged.
    *
-   * <p>This request accepts the <code>metadata</code> and <code>owner</code> as arguments. It is
-   * also possible to update type specific information for selected payment methods. Please refer to
-   * our <a href="https://stripe.com/docs/sources">payment method guides</a> for more detail.
+   * <p>This request accepts the {@code metadata} and {@code owner} as arguments. It is also
+   * possible to update type specific information for selected payment methods. Please refer to our
+   * <a href="https://stripe.com/docs/sources">payment method guides</a> for more detail.
    */
   @Override
   public Source update(Map<String, Object> params, RequestOptions options) throws StripeException {
@@ -400,9 +400,9 @@ public class Source extends ApiResource implements MetadataStore<Source>, Paymen
    * Updates the specified source by setting the values of the parameters passed. Any parameters not
    * provided will be left unchanged.
    *
-   * <p>This request accepts the <code>metadata</code> and <code>owner</code> as arguments. It is
-   * also possible to update type specific information for selected payment methods. Please refer to
-   * our <a href="https://stripe.com/docs/sources">payment method guides</a> for more detail.
+   * <p>This request accepts the {@code metadata} and {@code owner} as arguments. It is also
+   * possible to update type specific information for selected payment methods. Please refer to our
+   * <a href="https://stripe.com/docs/sources">payment method guides</a> for more detail.
    */
   public Source update(SourceUpdateParams params) throws StripeException {
     return update(params, (RequestOptions) null);
@@ -412,9 +412,9 @@ public class Source extends ApiResource implements MetadataStore<Source>, Paymen
    * Updates the specified source by setting the values of the parameters passed. Any parameters not
    * provided will be left unchanged.
    *
-   * <p>This request accepts the <code>metadata</code> and <code>owner</code> as arguments. It is
-   * also possible to update type specific information for selected payment methods. Please refer to
-   * our <a href="https://stripe.com/docs/sources">payment method guides</a> for more detail.
+   * <p>This request accepts the {@code metadata} and {@code owner} as arguments. It is also
+   * possible to update type specific information for selected payment methods. Please refer to our
+   * <a href="https://stripe.com/docs/sources">payment method guides</a> for more detail.
    */
   public Source update(SourceUpdateParams params, RequestOptions options) throws StripeException {
     String url =
