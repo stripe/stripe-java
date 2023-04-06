@@ -1,5 +1,13 @@
 # Changelog
 
+## 22.17.0-beta.1 - 2023-04-06
+* [#1539](https://github.com/stripe/stripe-java/pull/1539) Update generated code for beta
+  * Add support for `treasury_transaction` on `CapitalFinancingTransactionListParams`
+  * Add support for `transaction` on `Capital.FinancingTransaction.details`
+  * Change `IssuingCardholderCreateParams.type` to be optional
+  * Add support for `country` on `PaymentMethod.link`
+  * Add support for `status_details` on `PaymentMethod.us_bank_account`
+
 ## 22.16.0 - 2023-04-06
 * [#1540](https://github.com/stripe/stripe-java/pull/1540) Update generated code
   * Add support for `country` on `PaymentMethod.link`
