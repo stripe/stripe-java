@@ -74,16 +74,16 @@ public class Session extends ApiResource implements HasId {
   String returnUrl;
 
   /**
-   * To launch the Financial Connections authorization flow, create a <code>Session</code>. The
-   * session’s <code>client_secret</code> can be used to launch the flow using Stripe.js.
+   * To launch the Financial Connections authorization flow, create a {@code Session}. The session’s
+   * {@code client_secret} can be used to launch the flow using Stripe.js.
    */
   public static Session create(Map<String, Object> params) throws StripeException {
     return create(params, (RequestOptions) null);
   }
 
   /**
-   * To launch the Financial Connections authorization flow, create a <code>Session</code>. The
-   * session’s <code>client_secret</code> can be used to launch the flow using Stripe.js.
+   * To launch the Financial Connections authorization flow, create a {@code Session}. The session’s
+   * {@code client_secret} can be used to launch the flow using Stripe.js.
    */
   public static Session create(Map<String, Object> params, RequestOptions options)
       throws StripeException {
@@ -93,16 +93,16 @@ public class Session extends ApiResource implements HasId {
   }
 
   /**
-   * To launch the Financial Connections authorization flow, create a <code>Session</code>. The
-   * session’s <code>client_secret</code> can be used to launch the flow using Stripe.js.
+   * To launch the Financial Connections authorization flow, create a {@code Session}. The session’s
+   * {@code client_secret} can be used to launch the flow using Stripe.js.
    */
   public static Session create(SessionCreateParams params) throws StripeException {
     return create(params, (RequestOptions) null);
   }
 
   /**
-   * To launch the Financial Connections authorization flow, create a <code>Session</code>. The
-   * session’s <code>client_secret</code> can be used to launch the flow using Stripe.js.
+   * To launch the Financial Connections authorization flow, create a {@code Session}. The session’s
+   * {@code client_secret} can be used to launch the flow using Stripe.js.
    */
   public static Session create(SessionCreateParams params, RequestOptions options)
       throws StripeException {
@@ -111,17 +111,17 @@ public class Session extends ApiResource implements HasId {
     return ApiResource.request(ApiResource.RequestMethod.POST, url, params, Session.class, options);
   }
 
-  /** Retrieves the details of a Financial Connections <code>Session</code>. */
+  /** Retrieves the details of a Financial Connections {@code Session}. */
   public static Session retrieve(String session) throws StripeException {
     return retrieve(session, (Map<String, Object>) null, (RequestOptions) null);
   }
 
-  /** Retrieves the details of a Financial Connections <code>Session</code>. */
+  /** Retrieves the details of a Financial Connections {@code Session}. */
   public static Session retrieve(String session, RequestOptions options) throws StripeException {
     return retrieve(session, (Map<String, Object>) null, options);
   }
 
-  /** Retrieves the details of a Financial Connections <code>Session</code>. */
+  /** Retrieves the details of a Financial Connections {@code Session}. */
   public static Session retrieve(String session, Map<String, Object> params, RequestOptions options)
       throws StripeException {
     String url =
@@ -133,7 +133,7 @@ public class Session extends ApiResource implements HasId {
     return ApiResource.request(ApiResource.RequestMethod.GET, url, params, Session.class, options);
   }
 
-  /** Retrieves the details of a Financial Connections <code>Session</code>. */
+  /** Retrieves the details of a Financial Connections {@code Session}. */
   public static Session retrieve(
       String session, SessionRetrieveParams params, RequestOptions options) throws StripeException {
     String url =

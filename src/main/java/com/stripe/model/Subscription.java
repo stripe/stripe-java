@@ -637,12 +637,12 @@ public class Subscription extends ApiResource implements HasId, MetadataStore<Su
    * Creates a new subscription on an existing customer. Each customer can have up to 500 active or
    * scheduled subscriptions.
    *
-   * <p>When you create a subscription with <code>collection_method=charge_automatically</code>, the
-   * first invoice is finalized as part of the request. The <code>payment_behavior</code> parameter
+   * <p>When you create a subscription with {@code collection_method=charge_automatically}, the
+   * first invoice is finalized as part of the request. The {@code payment_behavior} parameter
    * determines the exact behavior of the initial payment.
    *
-   * <p>To start subscriptions where the first invoice always begins in a <code>draft</code> status,
-   * use <a
+   * <p>To start subscriptions where the first invoice always begins in a {@code draft} status, use
+   * <a
    * href="https://stripe.com/docs/billing/subscriptions/subscription-schedules#managing">subscription
    * schedules</a> instead. Schedules provide the flexibility to model more complex billing
    * configurations that change over time.
@@ -655,12 +655,12 @@ public class Subscription extends ApiResource implements HasId, MetadataStore<Su
    * Creates a new subscription on an existing customer. Each customer can have up to 500 active or
    * scheduled subscriptions.
    *
-   * <p>When you create a subscription with <code>collection_method=charge_automatically</code>, the
-   * first invoice is finalized as part of the request. The <code>payment_behavior</code> parameter
+   * <p>When you create a subscription with {@code collection_method=charge_automatically}, the
+   * first invoice is finalized as part of the request. The {@code payment_behavior} parameter
    * determines the exact behavior of the initial payment.
    *
-   * <p>To start subscriptions where the first invoice always begins in a <code>draft</code> status,
-   * use <a
+   * <p>To start subscriptions where the first invoice always begins in a {@code draft} status, use
+   * <a
    * href="https://stripe.com/docs/billing/subscriptions/subscription-schedules#managing">subscription
    * schedules</a> instead. Schedules provide the flexibility to model more complex billing
    * configurations that change over time.
@@ -676,12 +676,12 @@ public class Subscription extends ApiResource implements HasId, MetadataStore<Su
    * Creates a new subscription on an existing customer. Each customer can have up to 500 active or
    * scheduled subscriptions.
    *
-   * <p>When you create a subscription with <code>collection_method=charge_automatically</code>, the
-   * first invoice is finalized as part of the request. The <code>payment_behavior</code> parameter
+   * <p>When you create a subscription with {@code collection_method=charge_automatically}, the
+   * first invoice is finalized as part of the request. The {@code payment_behavior} parameter
    * determines the exact behavior of the initial payment.
    *
-   * <p>To start subscriptions where the first invoice always begins in a <code>draft</code> status,
-   * use <a
+   * <p>To start subscriptions where the first invoice always begins in a {@code draft} status, use
+   * <a
    * href="https://stripe.com/docs/billing/subscriptions/subscription-schedules#managing">subscription
    * schedules</a> instead. Schedules provide the flexibility to model more complex billing
    * configurations that change over time.
@@ -694,12 +694,12 @@ public class Subscription extends ApiResource implements HasId, MetadataStore<Su
    * Creates a new subscription on an existing customer. Each customer can have up to 500 active or
    * scheduled subscriptions.
    *
-   * <p>When you create a subscription with <code>collection_method=charge_automatically</code>, the
-   * first invoice is finalized as part of the request. The <code>payment_behavior</code> parameter
+   * <p>When you create a subscription with {@code collection_method=charge_automatically}, the
+   * first invoice is finalized as part of the request. The {@code payment_behavior} parameter
    * determines the exact behavior of the initial payment.
    *
-   * <p>To start subscriptions where the first invoice always begins in a <code>draft</code> status,
-   * use <a
+   * <p>To start subscriptions where the first invoice always begins in a {@code draft} status, use
+   * <a
    * href="https://stripe.com/docs/billing/subscriptions/subscription-schedules#managing">subscription
    * schedules</a> instead. Schedules provide the flexibility to model more complex billing
    * configurations that change over time.
@@ -735,7 +735,7 @@ public class Subscription extends ApiResource implements HasId, MetadataStore<Su
 
   /**
    * By default, returns a list of subscriptions that have not been canceled. In order to list
-   * canceled subscriptions, specify <code>status=canceled</code>.
+   * canceled subscriptions, specify {@code status=canceled}.
    */
   public static SubscriptionCollection list(Map<String, Object> params) throws StripeException {
     return list(params, (RequestOptions) null);
@@ -743,7 +743,7 @@ public class Subscription extends ApiResource implements HasId, MetadataStore<Su
 
   /**
    * By default, returns a list of subscriptions that have not been canceled. In order to list
-   * canceled subscriptions, specify <code>status=canceled</code>.
+   * canceled subscriptions, specify {@code status=canceled}.
    */
   public static SubscriptionCollection list(Map<String, Object> params, RequestOptions options)
       throws StripeException {
@@ -753,7 +753,7 @@ public class Subscription extends ApiResource implements HasId, MetadataStore<Su
 
   /**
    * By default, returns a list of subscriptions that have not been canceled. In order to list
-   * canceled subscriptions, specify <code>status=canceled</code>.
+   * canceled subscriptions, specify {@code status=canceled}.
    */
   public static SubscriptionCollection list(SubscriptionListParams params) throws StripeException {
     return list(params, (RequestOptions) null);
@@ -761,7 +761,7 @@ public class Subscription extends ApiResource implements HasId, MetadataStore<Su
 
   /**
    * By default, returns a list of subscriptions that have not been canceled. In order to list
-   * canceled subscriptions, specify <code>status=canceled</code>.
+   * canceled subscriptions, specify {@code status=canceled}.
    */
   public static SubscriptionCollection list(SubscriptionListParams params, RequestOptions options)
       throws StripeException {
@@ -773,8 +773,8 @@ public class Subscription extends ApiResource implements HasId, MetadataStore<Su
    * Initiates resumption of a paused subscription, optionally resetting the billing cycle anchor
    * and creating prorations. If a resumption invoice is generated, it must be paid or marked
    * uncollectible before the subscription will be unpaused. If payment succeeds the subscription
-   * will become <code>active</code>, and if payment fails the subscription will be <code>past_due
-   * </code>. The resumption invoice will void automatically if not paid by the expiration date.
+   * will become {@code active}, and if payment fails the subscription will be {@code past_due}. The
+   * resumption invoice will void automatically if not paid by the expiration date.
    */
   public Subscription resume() throws StripeException {
     return resume((Map<String, Object>) null, (RequestOptions) null);
@@ -784,8 +784,8 @@ public class Subscription extends ApiResource implements HasId, MetadataStore<Su
    * Initiates resumption of a paused subscription, optionally resetting the billing cycle anchor
    * and creating prorations. If a resumption invoice is generated, it must be paid or marked
    * uncollectible before the subscription will be unpaused. If payment succeeds the subscription
-   * will become <code>active</code>, and if payment fails the subscription will be <code>past_due
-   * </code>. The resumption invoice will void automatically if not paid by the expiration date.
+   * will become {@code active}, and if payment fails the subscription will be {@code past_due}. The
+   * resumption invoice will void automatically if not paid by the expiration date.
    */
   public Subscription resume(RequestOptions options) throws StripeException {
     return resume((Map<String, Object>) null, options);
@@ -795,8 +795,8 @@ public class Subscription extends ApiResource implements HasId, MetadataStore<Su
    * Initiates resumption of a paused subscription, optionally resetting the billing cycle anchor
    * and creating prorations. If a resumption invoice is generated, it must be paid or marked
    * uncollectible before the subscription will be unpaused. If payment succeeds the subscription
-   * will become <code>active</code>, and if payment fails the subscription will be <code>past_due
-   * </code>. The resumption invoice will void automatically if not paid by the expiration date.
+   * will become {@code active}, and if payment fails the subscription will be {@code past_due}. The
+   * resumption invoice will void automatically if not paid by the expiration date.
    */
   public Subscription resume(Map<String, Object> params) throws StripeException {
     return resume(params, (RequestOptions) null);
@@ -806,8 +806,8 @@ public class Subscription extends ApiResource implements HasId, MetadataStore<Su
    * Initiates resumption of a paused subscription, optionally resetting the billing cycle anchor
    * and creating prorations. If a resumption invoice is generated, it must be paid or marked
    * uncollectible before the subscription will be unpaused. If payment succeeds the subscription
-   * will become <code>active</code>, and if payment fails the subscription will be <code>past_due
-   * </code>. The resumption invoice will void automatically if not paid by the expiration date.
+   * will become {@code active}, and if payment fails the subscription will be {@code past_due}. The
+   * resumption invoice will void automatically if not paid by the expiration date.
    */
   public Subscription resume(Map<String, Object> params, RequestOptions options)
       throws StripeException {
@@ -824,8 +824,8 @@ public class Subscription extends ApiResource implements HasId, MetadataStore<Su
    * Initiates resumption of a paused subscription, optionally resetting the billing cycle anchor
    * and creating prorations. If a resumption invoice is generated, it must be paid or marked
    * uncollectible before the subscription will be unpaused. If payment succeeds the subscription
-   * will become <code>active</code>, and if payment fails the subscription will be <code>past_due
-   * </code>. The resumption invoice will void automatically if not paid by the expiration date.
+   * will become {@code active}, and if payment fails the subscription will be {@code past_due}. The
+   * resumption invoice will void automatically if not paid by the expiration date.
    */
   public Subscription resume(SubscriptionResumeParams params) throws StripeException {
     return resume(params, (RequestOptions) null);
@@ -835,8 +835,8 @@ public class Subscription extends ApiResource implements HasId, MetadataStore<Su
    * Initiates resumption of a paused subscription, optionally resetting the billing cycle anchor
    * and creating prorations. If a resumption invoice is generated, it must be paid or marked
    * uncollectible before the subscription will be unpaused. If payment succeeds the subscription
-   * will become <code>active</code>, and if payment fails the subscription will be <code>past_due
-   * </code>. The resumption invoice will void automatically if not paid by the expiration date.
+   * will become {@code active}, and if payment fails the subscription will be {@code past_due}. The
+   * resumption invoice will void automatically if not paid by the expiration date.
    */
   public Subscription resume(SubscriptionResumeParams params, RequestOptions options)
       throws StripeException {

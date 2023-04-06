@@ -47,7 +47,10 @@ public class SetupAttemptListParams extends ApiRequestParams {
   @SerializedName("limit")
   Long limit;
 
-  /** Only return SetupAttempts created by the SetupIntent specified by this ID. */
+  /**
+   * <strong>Required.</strong> Only return SetupAttempts created by the SetupIntent specified by
+   * this ID.
+   */
   @SerializedName("setup_intent")
   String setupIntent;
 
@@ -200,7 +203,10 @@ public class SetupAttemptListParams extends ApiRequestParams {
       return this;
     }
 
-    /** Only return SetupAttempts created by the SetupIntent specified by this ID. */
+    /**
+     * <strong>Required.</strong> Only return SetupAttempts created by the SetupIntent specified by
+     * this ID.
+     */
     public Builder setSetupIntent(String setupIntent) {
       this.setupIntent = setupIntent;
       return this;

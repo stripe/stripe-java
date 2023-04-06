@@ -11,7 +11,7 @@ import lombok.Getter;
 
 @Getter
 public class CardholderCreateParams extends ApiRequestParams {
-  /** The cardholder's billing address. */
+  /** <strong>Required.</strong> The cardholder's billing address. */
   @SerializedName("billing")
   Billing billing;
 
@@ -50,8 +50,9 @@ public class CardholderCreateParams extends ApiRequestParams {
   Map<String, String> metadata;
 
   /**
-   * The cardholder's name. This will be printed on cards issued to them. The maximum length of this
-   * field is 24 characters. This field cannot contain any special characters or numbers.
+   * <strong>Required.</strong> The cardholder's name. This will be printed on cards issued to them.
+   * The maximum length of this field is 24 characters. This field cannot contain any special
+   * characters or numbers.
    */
   @SerializedName("name")
   String name;
@@ -82,7 +83,7 @@ public class CardholderCreateParams extends ApiRequestParams {
   Status status;
 
   /**
-   * One of {@code individual} or {@code company}. See <a
+   * <strong>Required.</strong> One of {@code individual} or {@code company}. See <a
    * href="https://stripe.com/docs/issuing/other/choose-cardholder">Choose a cardholder type</a> for
    * more details.
    */
@@ -162,7 +163,7 @@ public class CardholderCreateParams extends ApiRequestParams {
           this.type);
     }
 
-    /** The cardholder's billing address. */
+    /** <strong>Required.</strong> The cardholder's billing address. */
     public Builder setBilling(CardholderCreateParams.Billing billing) {
       this.billing = billing;
       return this;
@@ -265,8 +266,9 @@ public class CardholderCreateParams extends ApiRequestParams {
     }
 
     /**
-     * The cardholder's name. This will be printed on cards issued to them. The maximum length of
-     * this field is 24 characters. This field cannot contain any special characters or numbers.
+     * <strong>Required.</strong> The cardholder's name. This will be printed on cards issued to
+     * them. The maximum length of this field is 24 characters. This field cannot contain any
+     * special characters or numbers.
      */
     public Builder setName(String name) {
       this.name = name;
@@ -305,7 +307,7 @@ public class CardholderCreateParams extends ApiRequestParams {
     }
 
     /**
-     * One of {@code individual} or {@code company}. See <a
+     * <strong>Required.</strong> One of {@code individual} or {@code company}. See <a
      * href="https://stripe.com/docs/issuing/other/choose-cardholder">Choose a cardholder type</a>
      * for more details.
      */
@@ -317,7 +319,7 @@ public class CardholderCreateParams extends ApiRequestParams {
 
   @Getter
   public static class Billing {
-    /** The cardholder’s billing address. */
+    /** <strong>Required.</strong> The cardholder’s billing address. */
     @SerializedName("address")
     Address address;
 
@@ -349,7 +351,7 @@ public class CardholderCreateParams extends ApiRequestParams {
         return new CardholderCreateParams.Billing(this.address, this.extraParams);
       }
 
-      /** The cardholder’s billing address. */
+      /** <strong>Required.</strong> The cardholder’s billing address. */
       public Builder setAddress(CardholderCreateParams.Billing.Address address) {
         this.address = address;
         return this;
@@ -384,13 +386,13 @@ public class CardholderCreateParams extends ApiRequestParams {
 
     @Getter
     public static class Address {
-      /** City, district, suburb, town, or village. */
+      /** <strong>Required.</strong> City, district, suburb, town, or village. */
       @SerializedName("city")
       String city;
 
       /**
-       * Two-letter country code (<a href="https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2">ISO
-       * 3166-1 alpha-2</a>).
+       * <strong>Required.</strong> Two-letter country code (<a
+       * href="https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2">ISO 3166-1 alpha-2</a>).
        */
       @SerializedName("country")
       String country;
@@ -404,7 +406,7 @@ public class CardholderCreateParams extends ApiRequestParams {
       @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
       Map<String, Object> extraParams;
 
-      /** Address line 1 (e.g., street, PO Box, or company name). */
+      /** <strong>Required.</strong> Address line 1 (e.g., street, PO Box, or company name). */
       @SerializedName("line1")
       String line1;
 
@@ -412,7 +414,7 @@ public class CardholderCreateParams extends ApiRequestParams {
       @SerializedName("line2")
       String line2;
 
-      /** ZIP or postal code. */
+      /** <strong>Required.</strong> ZIP or postal code. */
       @SerializedName("postal_code")
       String postalCode;
 
@@ -468,15 +470,15 @@ public class CardholderCreateParams extends ApiRequestParams {
               this.state);
         }
 
-        /** City, district, suburb, town, or village. */
+        /** <strong>Required.</strong> City, district, suburb, town, or village. */
         public Builder setCity(String city) {
           this.city = city;
           return this;
         }
 
         /**
-         * Two-letter country code (<a href="https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2">ISO
-         * 3166-1 alpha-2</a>).
+         * <strong>Required.</strong> Two-letter country code (<a
+         * href="https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2">ISO 3166-1 alpha-2</a>).
          */
         public Builder setCountry(String country) {
           this.country = country;
@@ -511,7 +513,7 @@ public class CardholderCreateParams extends ApiRequestParams {
           return this;
         }
 
-        /** Address line 1 (e.g., street, PO Box, or company name). */
+        /** <strong>Required.</strong> Address line 1 (e.g., street, PO Box, or company name). */
         public Builder setLine1(String line1) {
           this.line1 = line1;
           return this;
@@ -523,7 +525,7 @@ public class CardholderCreateParams extends ApiRequestParams {
           return this;
         }
 
-        /** ZIP or postal code. */
+        /** <strong>Required.</strong> ZIP or postal code. */
         public Builder setPostalCode(String postalCode) {
           this.postalCode = postalCode;
           return this;
@@ -953,7 +955,7 @@ public class CardholderCreateParams extends ApiRequestParams {
 
     @Getter
     public static class Dob {
-      /** The day of birth, between 1 and 31. */
+      /** <strong>Required.</strong> The day of birth, between 1 and 31. */
       @SerializedName("day")
       Long day;
 
@@ -966,11 +968,11 @@ public class CardholderCreateParams extends ApiRequestParams {
       @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
       Map<String, Object> extraParams;
 
-      /** The month of birth, between 1 and 12. */
+      /** <strong>Required.</strong> The month of birth, between 1 and 12. */
       @SerializedName("month")
       Long month;
 
-      /** The four-digit year of birth. */
+      /** <strong>Required.</strong> The four-digit year of birth. */
       @SerializedName("year")
       Long year;
 
@@ -1000,7 +1002,7 @@ public class CardholderCreateParams extends ApiRequestParams {
               this.day, this.extraParams, this.month, this.year);
         }
 
-        /** The day of birth, between 1 and 31. */
+        /** <strong>Required.</strong> The day of birth, between 1 and 31. */
         public Builder setDay(Long day) {
           this.day = day;
           return this;
@@ -1034,13 +1036,13 @@ public class CardholderCreateParams extends ApiRequestParams {
           return this;
         }
 
-        /** The month of birth, between 1 and 12. */
+        /** <strong>Required.</strong> The month of birth, between 1 and 12. */
         public Builder setMonth(Long month) {
           this.month = month;
           return this;
         }
 
-        /** The four-digit year of birth. */
+        /** <strong>Required.</strong> The four-digit year of birth. */
         public Builder setYear(Long year) {
           this.year = year;
           return this;
@@ -1423,7 +1425,7 @@ public class CardholderCreateParams extends ApiRequestParams {
 
     @Getter
     public static class SpendingLimit {
-      /** Maximum amount allowed to spend per interval. */
+      /** <strong>Required.</strong> Maximum amount allowed to spend per interval. */
       @SerializedName("amount")
       Long amount;
 
@@ -1444,7 +1446,7 @@ public class CardholderCreateParams extends ApiRequestParams {
       @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
       Map<String, Object> extraParams;
 
-      /** Interval (or event) to which the amount applies. */
+      /** <strong>Required.</strong> Interval (or event) to which the amount applies. */
       @SerializedName("interval")
       Interval interval;
 
@@ -1478,7 +1480,7 @@ public class CardholderCreateParams extends ApiRequestParams {
               this.amount, this.categories, this.extraParams, this.interval);
         }
 
-        /** Maximum amount allowed to spend per interval. */
+        /** <strong>Required.</strong> Maximum amount allowed to spend per interval. */
         public Builder setAmount(Long amount) {
           this.amount = amount;
           return this;
@@ -1542,7 +1544,7 @@ public class CardholderCreateParams extends ApiRequestParams {
           return this;
         }
 
-        /** Interval (or event) to which the amount applies. */
+        /** <strong>Required.</strong> Interval (or event) to which the amount applies. */
         public Builder setInterval(
             CardholderCreateParams.SpendingControls.SpendingLimit.Interval interval) {
           this.interval = interval;

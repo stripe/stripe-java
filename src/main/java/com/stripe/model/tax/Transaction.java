@@ -100,13 +100,13 @@ public class Transaction extends ApiResource implements HasId {
   @SerializedName("type")
   String type;
 
-  /** Creates a Tax <code>Transaction</code> from a calculation. */
+  /** Creates a Tax {@code Transaction} from a calculation. */
   public static Transaction createFromCalculation(Map<String, Object> params)
       throws StripeException {
     return createFromCalculation(params, (RequestOptions) null);
   }
 
-  /** Creates a Tax <code>Transaction</code> from a calculation. */
+  /** Creates a Tax {@code Transaction} from a calculation. */
   public static Transaction createFromCalculation(
       Map<String, Object> params, RequestOptions options) throws StripeException {
     String url =
@@ -116,13 +116,13 @@ public class Transaction extends ApiResource implements HasId {
         ApiResource.RequestMethod.POST, url, params, Transaction.class, options);
   }
 
-  /** Creates a Tax <code>Transaction</code> from a calculation. */
+  /** Creates a Tax {@code Transaction} from a calculation. */
   public static Transaction createFromCalculation(TransactionCreateFromCalculationParams params)
       throws StripeException {
     return createFromCalculation(params, (RequestOptions) null);
   }
 
-  /** Creates a Tax <code>Transaction</code> from a calculation. */
+  /** Creates a Tax {@code Transaction} from a calculation. */
   public static Transaction createFromCalculation(
       TransactionCreateFromCalculationParams params, RequestOptions options)
       throws StripeException {
@@ -133,12 +133,12 @@ public class Transaction extends ApiResource implements HasId {
         ApiResource.RequestMethod.POST, url, params, Transaction.class, options);
   }
 
-  /** Partially or fully reverses a previously created <code>Transaction</code>. */
+  /** Partially or fully reverses a previously created {@code Transaction}. */
   public static Transaction createReversal(Map<String, Object> params) throws StripeException {
     return createReversal(params, (RequestOptions) null);
   }
 
-  /** Partially or fully reverses a previously created <code>Transaction</code>. */
+  /** Partially or fully reverses a previously created {@code Transaction}. */
   public static Transaction createReversal(Map<String, Object> params, RequestOptions options)
       throws StripeException {
     String url =
@@ -147,13 +147,13 @@ public class Transaction extends ApiResource implements HasId {
         ApiResource.RequestMethod.POST, url, params, Transaction.class, options);
   }
 
-  /** Partially or fully reverses a previously created <code>Transaction</code>. */
+  /** Partially or fully reverses a previously created {@code Transaction}. */
   public static Transaction createReversal(TransactionCreateReversalParams params)
       throws StripeException {
     return createReversal(params, (RequestOptions) null);
   }
 
-  /** Partially or fully reverses a previously created <code>Transaction</code>. */
+  /** Partially or fully reverses a previously created {@code Transaction}. */
   public static Transaction createReversal(
       TransactionCreateReversalParams params, RequestOptions options) throws StripeException {
     String url =
@@ -203,18 +203,18 @@ public class Transaction extends ApiResource implements HasId {
     return ApiResource.requestCollection(url, params, TransactionLineItemCollection.class, options);
   }
 
-  /** Retrieves a Tax <code>Transaction</code> object. */
+  /** Retrieves a Tax {@code Transaction} object. */
   public static Transaction retrieve(String transaction) throws StripeException {
     return retrieve(transaction, (Map<String, Object>) null, (RequestOptions) null);
   }
 
-  /** Retrieves a Tax <code>Transaction</code> object. */
+  /** Retrieves a Tax {@code Transaction} object. */
   public static Transaction retrieve(String transaction, RequestOptions options)
       throws StripeException {
     return retrieve(transaction, (Map<String, Object>) null, options);
   }
 
-  /** Retrieves a Tax <code>Transaction</code> object. */
+  /** Retrieves a Tax {@code Transaction} object. */
   public static Transaction retrieve(
       String transaction, Map<String, Object> params, RequestOptions options)
       throws StripeException {
@@ -227,7 +227,7 @@ public class Transaction extends ApiResource implements HasId {
         ApiResource.RequestMethod.GET, url, params, Transaction.class, options);
   }
 
-  /** Retrieves a Tax <code>Transaction</code> object. */
+  /** Retrieves a Tax {@code Transaction} object. */
   public static Transaction retrieve(
       String transaction, TransactionRetrieveParams params, RequestOptions options)
       throws StripeException {

@@ -485,7 +485,7 @@ public class Session extends ApiResource implements HasId {
   }
 
   /**
-   * A Session can be expired when it is in one of these statuses: <code>open</code>
+   * A Session can be expired when it is in one of these statuses: {@code open}
    *
    * <p>After it expires, a customer can’t complete a Session and customers loading the Session see
    * a message saying the Session is expired.
@@ -495,7 +495,7 @@ public class Session extends ApiResource implements HasId {
   }
 
   /**
-   * A Session can be expired when it is in one of these statuses: <code>open</code>
+   * A Session can be expired when it is in one of these statuses: {@code open}
    *
    * <p>After it expires, a customer can’t complete a Session and customers loading the Session see
    * a message saying the Session is expired.
@@ -505,7 +505,7 @@ public class Session extends ApiResource implements HasId {
   }
 
   /**
-   * A Session can be expired when it is in one of these statuses: <code>open</code>
+   * A Session can be expired when it is in one of these statuses: {@code open}
    *
    * <p>After it expires, a customer can’t complete a Session and customers loading the Session see
    * a message saying the Session is expired.
@@ -515,7 +515,7 @@ public class Session extends ApiResource implements HasId {
   }
 
   /**
-   * A Session can be expired when it is in one of these statuses: <code>open</code>
+   * A Session can be expired when it is in one of these statuses: {@code open}
    *
    * <p>After it expires, a customer can’t complete a Session and customers loading the Session see
    * a message saying the Session is expired.
@@ -531,7 +531,7 @@ public class Session extends ApiResource implements HasId {
   }
 
   /**
-   * A Session can be expired when it is in one of these statuses: <code>open</code>
+   * A Session can be expired when it is in one of these statuses: {@code open}
    *
    * <p>After it expires, a customer can’t complete a Session and customers loading the Session see
    * a message saying the Session is expired.
@@ -541,7 +541,7 @@ public class Session extends ApiResource implements HasId {
   }
 
   /**
-   * A Session can be expired when it is in one of these statuses: <code>open</code>
+   * A Session can be expired when it is in one of these statuses: {@code open}
    *
    * <p>After it expires, a customer can’t complete a Session and customers loading the Session see
    * a message saying the Session is expired.

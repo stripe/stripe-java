@@ -272,54 +272,56 @@ public class CreditNote extends ApiResource implements HasId, MetadataStore<Cred
   }
 
   /**
-   * Issue a credit note to adjust the amount of a finalized invoice. For a <code>status=open</code>
-   * invoice, a credit note reduces its <code>amount_due</code>. For a <code>status=paid</code>
-   * invoice, a credit note does not affect its <code>amount_due</code>. Instead, it can result in
-   * any combination of the following:
+   * Issue a credit note to adjust the amount of a finalized invoice. For a {@code status=open}
+   * invoice, a credit note reduces its {@code amount_due}. For a {@code status=paid} invoice, a
+   * credit note does not affect its {@code amount_due}. Instead, it can result in any combination
+   * of the following:
+   *
+   * <p>
    *
    * <ul>
-   *   <li>Refund: create a new refund (using <code>refund_amount</code>) or link an existing refund
-   *       (using <code>refund</code>).
-   *   <li>Customer balance credit: credit the customer’s balance (using <code>credit_amount</code>)
+   *   <li>Refund: create a new refund (using {@code refund_amount}) or link an existing refund
+   *       (using {@code refund}).
+   *   <li>Customer balance credit: credit the customer’s balance (using {@code credit_amount})
    *       which will be automatically applied to their next invoice when it’s finalized.
    *   <li>Outside of Stripe credit: record the amount that is or will be credited outside of Stripe
-   *       (using <code>out_of_band_amount</code>).
+   *       (using {@code out_of_band_amount}).
    * </ul>
    *
    * <p>For post-payment credit notes the sum of the refund, credit and outside of Stripe amounts
    * must equal the credit note total.
    *
    * <p>You may issue multiple credit notes for an invoice. Each credit note will increment the
-   * invoice’s <code>pre_payment_credit_notes_amount</code> or <code>
-   * post_payment_credit_notes_amount</code> depending on its <code>status</code> at the time of
-   * credit note creation.
+   * invoice’s {@code pre_payment_credit_notes_amount} or {@code post_payment_credit_notes_amount}
+   * depending on its {@code status} at the time of credit note creation.
    */
   public static CreditNote create(Map<String, Object> params) throws StripeException {
     return create(params, (RequestOptions) null);
   }
 
   /**
-   * Issue a credit note to adjust the amount of a finalized invoice. For a <code>status=open</code>
-   * invoice, a credit note reduces its <code>amount_due</code>. For a <code>status=paid</code>
-   * invoice, a credit note does not affect its <code>amount_due</code>. Instead, it can result in
-   * any combination of the following:
+   * Issue a credit note to adjust the amount of a finalized invoice. For a {@code status=open}
+   * invoice, a credit note reduces its {@code amount_due}. For a {@code status=paid} invoice, a
+   * credit note does not affect its {@code amount_due}. Instead, it can result in any combination
+   * of the following:
+   *
+   * <p>
    *
    * <ul>
-   *   <li>Refund: create a new refund (using <code>refund_amount</code>) or link an existing refund
-   *       (using <code>refund</code>).
-   *   <li>Customer balance credit: credit the customer’s balance (using <code>credit_amount</code>)
+   *   <li>Refund: create a new refund (using {@code refund_amount}) or link an existing refund
+   *       (using {@code refund}).
+   *   <li>Customer balance credit: credit the customer’s balance (using {@code credit_amount})
    *       which will be automatically applied to their next invoice when it’s finalized.
    *   <li>Outside of Stripe credit: record the amount that is or will be credited outside of Stripe
-   *       (using <code>out_of_band_amount</code>).
+   *       (using {@code out_of_band_amount}).
    * </ul>
    *
    * <p>For post-payment credit notes the sum of the refund, credit and outside of Stripe amounts
    * must equal the credit note total.
    *
    * <p>You may issue multiple credit notes for an invoice. Each credit note will increment the
-   * invoice’s <code>pre_payment_credit_notes_amount</code> or <code>
-   * post_payment_credit_notes_amount</code> depending on its <code>status</code> at the time of
-   * credit note creation.
+   * invoice’s {@code pre_payment_credit_notes_amount} or {@code post_payment_credit_notes_amount}
+   * depending on its {@code status} at the time of credit note creation.
    */
   public static CreditNote create(Map<String, Object> params, RequestOptions options)
       throws StripeException {
@@ -329,54 +331,56 @@ public class CreditNote extends ApiResource implements HasId, MetadataStore<Cred
   }
 
   /**
-   * Issue a credit note to adjust the amount of a finalized invoice. For a <code>status=open</code>
-   * invoice, a credit note reduces its <code>amount_due</code>. For a <code>status=paid</code>
-   * invoice, a credit note does not affect its <code>amount_due</code>. Instead, it can result in
-   * any combination of the following:
+   * Issue a credit note to adjust the amount of a finalized invoice. For a {@code status=open}
+   * invoice, a credit note reduces its {@code amount_due}. For a {@code status=paid} invoice, a
+   * credit note does not affect its {@code amount_due}. Instead, it can result in any combination
+   * of the following:
+   *
+   * <p>
    *
    * <ul>
-   *   <li>Refund: create a new refund (using <code>refund_amount</code>) or link an existing refund
-   *       (using <code>refund</code>).
-   *   <li>Customer balance credit: credit the customer’s balance (using <code>credit_amount</code>)
+   *   <li>Refund: create a new refund (using {@code refund_amount}) or link an existing refund
+   *       (using {@code refund}).
+   *   <li>Customer balance credit: credit the customer’s balance (using {@code credit_amount})
    *       which will be automatically applied to their next invoice when it’s finalized.
    *   <li>Outside of Stripe credit: record the amount that is or will be credited outside of Stripe
-   *       (using <code>out_of_band_amount</code>).
+   *       (using {@code out_of_band_amount}).
    * </ul>
    *
    * <p>For post-payment credit notes the sum of the refund, credit and outside of Stripe amounts
    * must equal the credit note total.
    *
    * <p>You may issue multiple credit notes for an invoice. Each credit note will increment the
-   * invoice’s <code>pre_payment_credit_notes_amount</code> or <code>
-   * post_payment_credit_notes_amount</code> depending on its <code>status</code> at the time of
-   * credit note creation.
+   * invoice’s {@code pre_payment_credit_notes_amount} or {@code post_payment_credit_notes_amount}
+   * depending on its {@code status} at the time of credit note creation.
    */
   public static CreditNote create(CreditNoteCreateParams params) throws StripeException {
     return create(params, (RequestOptions) null);
   }
 
   /**
-   * Issue a credit note to adjust the amount of a finalized invoice. For a <code>status=open</code>
-   * invoice, a credit note reduces its <code>amount_due</code>. For a <code>status=paid</code>
-   * invoice, a credit note does not affect its <code>amount_due</code>. Instead, it can result in
-   * any combination of the following:
+   * Issue a credit note to adjust the amount of a finalized invoice. For a {@code status=open}
+   * invoice, a credit note reduces its {@code amount_due}. For a {@code status=paid} invoice, a
+   * credit note does not affect its {@code amount_due}. Instead, it can result in any combination
+   * of the following:
+   *
+   * <p>
    *
    * <ul>
-   *   <li>Refund: create a new refund (using <code>refund_amount</code>) or link an existing refund
-   *       (using <code>refund</code>).
-   *   <li>Customer balance credit: credit the customer’s balance (using <code>credit_amount</code>)
+   *   <li>Refund: create a new refund (using {@code refund_amount}) or link an existing refund
+   *       (using {@code refund}).
+   *   <li>Customer balance credit: credit the customer’s balance (using {@code credit_amount})
    *       which will be automatically applied to their next invoice when it’s finalized.
    *   <li>Outside of Stripe credit: record the amount that is or will be credited outside of Stripe
-   *       (using <code>out_of_band_amount</code>).
+   *       (using {@code out_of_band_amount}).
    * </ul>
    *
    * <p>For post-payment credit notes the sum of the refund, credit and outside of Stripe amounts
    * must equal the credit note total.
    *
    * <p>You may issue multiple credit notes for an invoice. Each credit note will increment the
-   * invoice’s <code>pre_payment_credit_notes_amount</code> or <code>
-   * post_payment_credit_notes_amount</code> depending on its <code>status</code> at the time of
-   * credit note creation.
+   * invoice’s {@code pre_payment_credit_notes_amount} or {@code post_payment_credit_notes_amount}
+   * depending on its {@code status} at the time of credit note creation.
    */
   public static CreditNote create(CreditNoteCreateParams params, RequestOptions options)
       throws StripeException {

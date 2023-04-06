@@ -22,7 +22,10 @@ public class ExternalAccountCollectionCreateParams extends ApiRequestParams {
   @SerializedName("expand")
   List<String> expand;
 
-  /** Please refer to full <a href="https://stripe.com/docs/api">documentation</a> instead. */
+  /**
+   * <strong>Required.</strong> Please refer to full <a
+   * href="https://stripe.com/docs/api">documentation</a> instead.
+   */
   @SerializedName("external_account")
   String externalAccount;
 
@@ -117,7 +120,10 @@ public class ExternalAccountCollectionCreateParams extends ApiRequestParams {
       return this;
     }
 
-    /** Please refer to full <a href="https://stripe.com/docs/api">documentation</a> instead. */
+    /**
+     * <strong>Required.</strong> Please refer to full <a
+     * href="https://stripe.com/docs/api">documentation</a> instead.
+     */
     public Builder setExternalAccount(String externalAccount) {
       this.externalAccount = externalAccount;
       return this;

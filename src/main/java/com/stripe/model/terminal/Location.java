@@ -73,8 +73,8 @@ public class Location extends ApiResource implements HasId, MetadataStore<Locati
   String object;
 
   /**
-   * Creates a new <code>Location</code> object. For further details, including which address fields
-   * are required in each country, see the <a
+   * Creates a new {@code Location} object. For further details, including which address fields are
+   * required in each country, see the <a
    * href="https://stripe.com/docs/terminal/fleet/locations">Manage locations</a> guide.
    */
   public static Location create(Map<String, Object> params) throws StripeException {
@@ -82,8 +82,8 @@ public class Location extends ApiResource implements HasId, MetadataStore<Locati
   }
 
   /**
-   * Creates a new <code>Location</code> object. For further details, including which address fields
-   * are required in each country, see the <a
+   * Creates a new {@code Location} object. For further details, including which address fields are
+   * required in each country, see the <a
    * href="https://stripe.com/docs/terminal/fleet/locations">Manage locations</a> guide.
    */
   public static Location create(Map<String, Object> params, RequestOptions options)
@@ -94,8 +94,8 @@ public class Location extends ApiResource implements HasId, MetadataStore<Locati
   }
 
   /**
-   * Creates a new <code>Location</code> object. For further details, including which address fields
-   * are required in each country, see the <a
+   * Creates a new {@code Location} object. For further details, including which address fields are
+   * required in each country, see the <a
    * href="https://stripe.com/docs/terminal/fleet/locations">Manage locations</a> guide.
    */
   public static Location create(LocationCreateParams params) throws StripeException {
@@ -103,8 +103,8 @@ public class Location extends ApiResource implements HasId, MetadataStore<Locati
   }
 
   /**
-   * Creates a new <code>Location</code> object. For further details, including which address fields
-   * are required in each country, see the <a
+   * Creates a new {@code Location} object. For further details, including which address fields are
+   * required in each country, see the <a
    * href="https://stripe.com/docs/terminal/fleet/locations">Manage locations</a> guide.
    */
   public static Location create(LocationCreateParams params, RequestOptions options)
@@ -114,22 +114,22 @@ public class Location extends ApiResource implements HasId, MetadataStore<Locati
         ApiResource.RequestMethod.POST, url, params, Location.class, options);
   }
 
-  /** Deletes a <code>Location</code> object. */
+  /** Deletes a {@code Location} object. */
   public Location delete() throws StripeException {
     return delete((Map<String, Object>) null, (RequestOptions) null);
   }
 
-  /** Deletes a <code>Location</code> object. */
+  /** Deletes a {@code Location} object. */
   public Location delete(RequestOptions options) throws StripeException {
     return delete((Map<String, Object>) null, options);
   }
 
-  /** Deletes a <code>Location</code> object. */
+  /** Deletes a {@code Location} object. */
   public Location delete(Map<String, Object> params) throws StripeException {
     return delete(params, (RequestOptions) null);
   }
 
-  /** Deletes a <code>Location</code> object. */
+  /** Deletes a {@code Location} object. */
   public Location delete(Map<String, Object> params, RequestOptions options)
       throws StripeException {
     String url =
@@ -141,41 +141,41 @@ public class Location extends ApiResource implements HasId, MetadataStore<Locati
         ApiResource.RequestMethod.DELETE, url, params, Location.class, options);
   }
 
-  /** Returns a list of <code>Location</code> objects. */
+  /** Returns a list of {@code Location} objects. */
   public static LocationCollection list(Map<String, Object> params) throws StripeException {
     return list(params, (RequestOptions) null);
   }
 
-  /** Returns a list of <code>Location</code> objects. */
+  /** Returns a list of {@code Location} objects. */
   public static LocationCollection list(Map<String, Object> params, RequestOptions options)
       throws StripeException {
     String url = ApiResource.fullUrl(Stripe.getApiBase(), options, "/v1/terminal/locations");
     return ApiResource.requestCollection(url, params, LocationCollection.class, options);
   }
 
-  /** Returns a list of <code>Location</code> objects. */
+  /** Returns a list of {@code Location} objects. */
   public static LocationCollection list(LocationListParams params) throws StripeException {
     return list(params, (RequestOptions) null);
   }
 
-  /** Returns a list of <code>Location</code> objects. */
+  /** Returns a list of {@code Location} objects. */
   public static LocationCollection list(LocationListParams params, RequestOptions options)
       throws StripeException {
     String url = ApiResource.fullUrl(Stripe.getApiBase(), options, "/v1/terminal/locations");
     return ApiResource.requestCollection(url, params, LocationCollection.class, options);
   }
 
-  /** Retrieves a <code>Location</code> object. */
+  /** Retrieves a {@code Location} object. */
   public static Location retrieve(String location) throws StripeException {
     return retrieve(location, (Map<String, Object>) null, (RequestOptions) null);
   }
 
-  /** Retrieves a <code>Location</code> object. */
+  /** Retrieves a {@code Location} object. */
   public static Location retrieve(String location, RequestOptions options) throws StripeException {
     return retrieve(location, (Map<String, Object>) null, options);
   }
 
-  /** Retrieves a <code>Location</code> object. */
+  /** Retrieves a {@code Location} object. */
   public static Location retrieve(
       String location, Map<String, Object> params, RequestOptions options) throws StripeException {
     String url =
@@ -186,7 +186,7 @@ public class Location extends ApiResource implements HasId, MetadataStore<Locati
     return ApiResource.request(ApiResource.RequestMethod.GET, url, params, Location.class, options);
   }
 
-  /** Retrieves a <code>Location</code> object. */
+  /** Retrieves a {@code Location} object. */
   public static Location retrieve(
       String location, LocationRetrieveParams params, RequestOptions options)
       throws StripeException {
@@ -199,7 +199,7 @@ public class Location extends ApiResource implements HasId, MetadataStore<Locati
   }
 
   /**
-   * Updates a <code>Location</code> object by setting the values of the parameters passed. Any
+   * Updates a {@code Location} object by setting the values of the parameters passed. Any
    * parameters not provided will be left unchanged.
    */
   @Override
@@ -208,7 +208,7 @@ public class Location extends ApiResource implements HasId, MetadataStore<Locati
   }
 
   /**
-   * Updates a <code>Location</code> object by setting the values of the parameters passed. Any
+   * Updates a {@code Location} object by setting the values of the parameters passed. Any
    * parameters not provided will be left unchanged.
    */
   @Override
@@ -224,7 +224,7 @@ public class Location extends ApiResource implements HasId, MetadataStore<Locati
   }
 
   /**
-   * Updates a <code>Location</code> object by setting the values of the parameters passed. Any
+   * Updates a {@code Location} object by setting the values of the parameters passed. Any
    * parameters not provided will be left unchanged.
    */
   public Location update(LocationUpdateParams params) throws StripeException {
@@ -232,7 +232,7 @@ public class Location extends ApiResource implements HasId, MetadataStore<Locati
   }
 
   /**
-   * Updates a <code>Location</code> object by setting the values of the parameters passed. Any
+   * Updates a {@code Location} object by setting the values of the parameters passed. Any
    * parameters not provided will be left unchanged.
    */
   public Location update(LocationUpdateParams params, RequestOptions options)

@@ -59,7 +59,7 @@ public class ValueListItemListParams extends ApiRequestParams {
   @SerializedName("value")
   String value;
 
-  /** Identifier for the parent value list this item belongs to. */
+  /** <strong>Required.</strong> Identifier for the parent value list this item belongs to. */
   @SerializedName("value_list")
   String valueList;
 
@@ -218,7 +218,7 @@ public class ValueListItemListParams extends ApiRequestParams {
       return this;
     }
 
-    /** Identifier for the parent value list this item belongs to. */
+    /** <strong>Required.</strong> Identifier for the parent value list this item belongs to. */
     public Builder setValueList(String valueList) {
       this.valueList = valueList;
       return this;

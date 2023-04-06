@@ -24,11 +24,17 @@ public class ValueListItemCreateParams extends ApiRequestParams {
   @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
   Map<String, Object> extraParams;
 
-  /** The value of the item (whose type must match the type of the parent value list). */
+  /**
+   * <strong>Required.</strong> The value of the item (whose type must match the type of the parent
+   * value list).
+   */
   @SerializedName("value")
   String value;
 
-  /** The identifier of the value list which the created item will be added to. */
+  /**
+   * <strong>Required.</strong> The identifier of the value list which the created item will be
+   * added to.
+   */
   @SerializedName("value_list")
   String valueList;
 
@@ -111,13 +117,19 @@ public class ValueListItemCreateParams extends ApiRequestParams {
       return this;
     }
 
-    /** The value of the item (whose type must match the type of the parent value list). */
+    /**
+     * <strong>Required.</strong> The value of the item (whose type must match the type of the
+     * parent value list).
+     */
     public Builder setValue(String value) {
       this.value = value;
       return this;
     }
 
-    /** The identifier of the value list which the created item will be added to. */
+    /**
+     * <strong>Required.</strong> The identifier of the value list which the created item will be
+     * added to.
+     */
     public Builder setValueList(String valueList) {
       this.valueList = valueList;
       return this;

@@ -1781,7 +1781,9 @@ public class DisputeCreateParams extends ApiRequestParams {
     @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
     Map<String, Object> extraParams;
 
-    /** The ID of the ReceivedDebit to initiate an Issuings dispute for. */
+    /**
+     * <strong>Required.</strong> The ID of the ReceivedDebit to initiate an Issuings dispute for.
+     */
     @SerializedName("received_debit")
     String receivedDebit;
 
@@ -1830,7 +1832,9 @@ public class DisputeCreateParams extends ApiRequestParams {
         return this;
       }
 
-      /** The ID of the ReceivedDebit to initiate an Issuings dispute for. */
+      /**
+       * <strong>Required.</strong> The ID of the ReceivedDebit to initiate an Issuings dispute for.
+       */
       public Builder setReceivedDebit(String receivedDebit) {
         this.receivedDebit = receivedDebit;
         return this;

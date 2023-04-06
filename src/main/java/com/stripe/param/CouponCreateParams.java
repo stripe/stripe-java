@@ -504,7 +504,10 @@ public class CouponCreateParams extends ApiRequestParams {
 
   @Getter
   public static class CurrencyOption {
-    /** A positive integer representing the amount to subtract from an invoice total. */
+    /**
+     * <strong>Required.</strong> A positive integer representing the amount to subtract from an
+     * invoice total.
+     */
     @SerializedName("amount_off")
     Long amountOff;
 
@@ -536,7 +539,10 @@ public class CouponCreateParams extends ApiRequestParams {
         return new CouponCreateParams.CurrencyOption(this.amountOff, this.extraParams);
       }
 
-      /** A positive integer representing the amount to subtract from an invoice total. */
+      /**
+       * <strong>Required.</strong> A positive integer representing the amount to subtract from an
+       * invoice total.
+       */
       public Builder setAmountOff(Long amountOff) {
         this.amountOff = amountOff;
         return this;

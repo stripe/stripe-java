@@ -516,8 +516,8 @@ public class PaymentLinkUpdateParams extends ApiRequestParams {
     Redirect redirect;
 
     /**
-     * The specified behavior after the purchase is complete. Either {@code redirect} or {@code
-     * hosted_confirmation}.
+     * <strong>Required.</strong> The specified behavior after the purchase is complete. Either
+     * {@code redirect} or {@code hosted_confirmation}.
      */
     @SerializedName("type")
     Type type;
@@ -593,8 +593,8 @@ public class PaymentLinkUpdateParams extends ApiRequestParams {
       }
 
       /**
-       * The specified behavior after the purchase is complete. Either {@code redirect} or {@code
-       * hosted_confirmation}.
+       * <strong>Required.</strong> The specified behavior after the purchase is complete. Either
+       * {@code redirect} or {@code hosted_confirmation}.
        */
       public Builder setType(PaymentLinkUpdateParams.AfterCompletion.Type type) {
         this.type = type;
@@ -691,8 +691,9 @@ public class PaymentLinkUpdateParams extends ApiRequestParams {
       Map<String, Object> extraParams;
 
       /**
-       * The URL the customer will be redirected to after the purchase is complete. You can embed
-       * {@code {CHECKOUT_SESSION_ID}} into the URL to have the {@code id} of the completed <a
+       * <strong>Required.</strong> The URL the customer will be redirected to after the purchase is
+       * complete. You can embed {@code {CHECKOUT_SESSION_ID}} into the URL to have the {@code id}
+       * of the completed <a
        * href="https://stripe.com/docs/api/checkout/sessions/object#checkout_session_object-id">checkout
        * session</a> included.
        */
@@ -747,8 +748,9 @@ public class PaymentLinkUpdateParams extends ApiRequestParams {
         }
 
         /**
-         * The URL the customer will be redirected to after the purchase is complete. You can embed
-         * {@code {CHECKOUT_SESSION_ID}} into the URL to have the {@code id} of the completed <a
+         * <strong>Required.</strong> The URL the customer will be redirected to after the purchase
+         * is complete. You can embed {@code {CHECKOUT_SESSION_ID}} into the URL to have the {@code
+         * id} of the completed <a
          * href="https://stripe.com/docs/api/checkout/sessions/object#checkout_session_object-id">checkout
          * session</a> included.
          */
@@ -758,8 +760,9 @@ public class PaymentLinkUpdateParams extends ApiRequestParams {
         }
 
         /**
-         * The URL the customer will be redirected to after the purchase is complete. You can embed
-         * {@code {CHECKOUT_SESSION_ID}} into the URL to have the {@code id} of the completed <a
+         * <strong>Required.</strong> The URL the customer will be redirected to after the purchase
+         * is complete. You can embed {@code {CHECKOUT_SESSION_ID}} into the URL to have the {@code
+         * id} of the completed <a
          * href="https://stripe.com/docs/api/checkout/sessions/object#checkout_session_object-id">checkout
          * session</a> included.
          */
@@ -788,7 +791,10 @@ public class PaymentLinkUpdateParams extends ApiRequestParams {
 
   @Getter
   public static class AutomaticTax {
-    /** If {@code true}, tax will be calculated automatically using the customer's location. */
+    /**
+     * <strong>Required.</strong> If {@code true}, tax will be calculated automatically using the
+     * customer's location.
+     */
     @SerializedName("enabled")
     Boolean enabled;
 
@@ -820,7 +826,10 @@ public class PaymentLinkUpdateParams extends ApiRequestParams {
         return new PaymentLinkUpdateParams.AutomaticTax(this.enabled, this.extraParams);
       }
 
-      /** If {@code true}, tax will be calculated automatically using the customer's location. */
+      /**
+       * <strong>Required.</strong> If {@code true}, tax will be calculated automatically using the
+       * customer's location.
+       */
       public Builder setEnabled(Boolean enabled) {
         this.enabled = enabled;
         return this;
@@ -870,13 +879,13 @@ public class PaymentLinkUpdateParams extends ApiRequestParams {
     Map<String, Object> extraParams;
 
     /**
-     * String of your choice that your integration can use to reconcile this field. Must be unique
-     * to this field, alphanumeric, and up to 200 characters.
+     * <strong>Required.</strong> String of your choice that your integration can use to reconcile
+     * this field. Must be unique to this field, alphanumeric, and up to 200 characters.
      */
     @SerializedName("key")
     Object key;
 
-    /** The label for the field, displayed to the customer. */
+    /** <strong>Required.</strong> The label for the field, displayed to the customer. */
     @SerializedName("label")
     Label label;
 
@@ -887,7 +896,7 @@ public class PaymentLinkUpdateParams extends ApiRequestParams {
     @SerializedName("optional")
     Boolean optional;
 
-    /** The type of the field. */
+    /** <strong>Required.</strong> The type of the field. */
     @SerializedName("type")
     Type type;
 
@@ -962,8 +971,8 @@ public class PaymentLinkUpdateParams extends ApiRequestParams {
       }
 
       /**
-       * String of your choice that your integration can use to reconcile this field. Must be unique
-       * to this field, alphanumeric, and up to 200 characters.
+       * <strong>Required.</strong> String of your choice that your integration can use to reconcile
+       * this field. Must be unique to this field, alphanumeric, and up to 200 characters.
        */
       public Builder setKey(String key) {
         this.key = key;
@@ -971,15 +980,15 @@ public class PaymentLinkUpdateParams extends ApiRequestParams {
       }
 
       /**
-       * String of your choice that your integration can use to reconcile this field. Must be unique
-       * to this field, alphanumeric, and up to 200 characters.
+       * <strong>Required.</strong> String of your choice that your integration can use to reconcile
+       * this field. Must be unique to this field, alphanumeric, and up to 200 characters.
        */
       public Builder setKey(EmptyParam key) {
         this.key = key;
         return this;
       }
 
-      /** The label for the field, displayed to the customer. */
+      /** <strong>Required.</strong> The label for the field, displayed to the customer. */
       public Builder setLabel(PaymentLinkUpdateParams.CustomField.Label label) {
         this.label = label;
         return this;
@@ -994,7 +1003,7 @@ public class PaymentLinkUpdateParams extends ApiRequestParams {
         return this;
       }
 
-      /** The type of the field. */
+      /** <strong>Required.</strong> The type of the field. */
       public Builder setType(PaymentLinkUpdateParams.CustomField.Type type) {
         this.type = type;
         return this;
@@ -1012,7 +1021,10 @@ public class PaymentLinkUpdateParams extends ApiRequestParams {
       @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
       Map<String, Object> extraParams;
 
-      /** The options available for the customer to select. Up to 200 options allowed. */
+      /**
+       * <strong>Required.</strong> The options available for the customer to select. Up to 200
+       * options allowed.
+       */
       @SerializedName("options")
       List<PaymentLinkUpdateParams.CustomField.Dropdown.Option> options;
 
@@ -1105,14 +1117,17 @@ public class PaymentLinkUpdateParams extends ApiRequestParams {
         @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
         Map<String, Object> extraParams;
 
-        /** The label for the option, displayed to the customer. Up to 100 characters. */
+        /**
+         * <strong>Required.</strong> The label for the option, displayed to the customer. Up to 100
+         * characters.
+         */
         @SerializedName("label")
         Object label;
 
         /**
-         * The value for this option, not displayed to the customer, used by your integration to
-         * reconcile the option selected by the customer. Must be unique to this option,
-         * alphanumeric, and up to 100 characters.
+         * <strong>Required.</strong> The value for this option, not displayed to the customer, used
+         * by your integration to reconcile the option selected by the customer. Must be unique to
+         * this option, alphanumeric, and up to 100 characters.
          */
         @SerializedName("value")
         Object value;
@@ -1168,22 +1183,28 @@ public class PaymentLinkUpdateParams extends ApiRequestParams {
             return this;
           }
 
-          /** The label for the option, displayed to the customer. Up to 100 characters. */
+          /**
+           * <strong>Required.</strong> The label for the option, displayed to the customer. Up to
+           * 100 characters.
+           */
           public Builder setLabel(String label) {
             this.label = label;
             return this;
           }
 
-          /** The label for the option, displayed to the customer. Up to 100 characters. */
+          /**
+           * <strong>Required.</strong> The label for the option, displayed to the customer. Up to
+           * 100 characters.
+           */
           public Builder setLabel(EmptyParam label) {
             this.label = label;
             return this;
           }
 
           /**
-           * The value for this option, not displayed to the customer, used by your integration to
-           * reconcile the option selected by the customer. Must be unique to this option,
-           * alphanumeric, and up to 100 characters.
+           * <strong>Required.</strong> The value for this option, not displayed to the customer,
+           * used by your integration to reconcile the option selected by the customer. Must be
+           * unique to this option, alphanumeric, and up to 100 characters.
            */
           public Builder setValue(String value) {
             this.value = value;
@@ -1191,9 +1212,9 @@ public class PaymentLinkUpdateParams extends ApiRequestParams {
           }
 
           /**
-           * The value for this option, not displayed to the customer, used by your integration to
-           * reconcile the option selected by the customer. Must be unique to this option,
-           * alphanumeric, and up to 100 characters.
+           * <strong>Required.</strong> The value for this option, not displayed to the customer,
+           * used by your integration to reconcile the option selected by the customer. Must be
+           * unique to this option, alphanumeric, and up to 100 characters.
            */
           public Builder setValue(EmptyParam value) {
             this.value = value;
@@ -1205,7 +1226,10 @@ public class PaymentLinkUpdateParams extends ApiRequestParams {
 
     @Getter
     public static class Label {
-      /** Custom text for the label, displayed to the customer. Up to 50 characters. */
+      /**
+       * <strong>Required.</strong> Custom text for the label, displayed to the customer. Up to 50
+       * characters.
+       */
       @SerializedName("custom")
       Object custom;
 
@@ -1218,7 +1242,7 @@ public class PaymentLinkUpdateParams extends ApiRequestParams {
       @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
       Map<String, Object> extraParams;
 
-      /** The type of the label. */
+      /** <strong>Required.</strong> The type of the label. */
       @SerializedName("type")
       Type type;
 
@@ -1245,13 +1269,19 @@ public class PaymentLinkUpdateParams extends ApiRequestParams {
               this.custom, this.extraParams, this.type);
         }
 
-        /** Custom text for the label, displayed to the customer. Up to 50 characters. */
+        /**
+         * <strong>Required.</strong> Custom text for the label, displayed to the customer. Up to 50
+         * characters.
+         */
         public Builder setCustom(String custom) {
           this.custom = custom;
           return this;
         }
 
-        /** Custom text for the label, displayed to the customer. Up to 50 characters. */
+        /**
+         * <strong>Required.</strong> Custom text for the label, displayed to the customer. Up to 50
+         * characters.
+         */
         public Builder setCustom(EmptyParam custom) {
           this.custom = custom;
           return this;
@@ -1285,7 +1315,7 @@ public class PaymentLinkUpdateParams extends ApiRequestParams {
           return this;
         }
 
-        /** The type of the label. */
+        /** <strong>Required.</strong> The type of the label. */
         public Builder setType(PaymentLinkUpdateParams.CustomField.Label.Type type) {
           this.type = type;
           return this;
@@ -1429,7 +1459,7 @@ public class PaymentLinkUpdateParams extends ApiRequestParams {
       @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
       Map<String, Object> extraParams;
 
-      /** Text may be up to 1000 characters in length. */
+      /** <strong>Required.</strong> Text may be up to 1000 characters in length. */
       @SerializedName("message")
       Object message;
 
@@ -1481,13 +1511,13 @@ public class PaymentLinkUpdateParams extends ApiRequestParams {
           return this;
         }
 
-        /** Text may be up to 1000 characters in length. */
+        /** <strong>Required.</strong> Text may be up to 1000 characters in length. */
         public Builder setMessage(String message) {
           this.message = message;
           return this;
         }
 
-        /** Text may be up to 1000 characters in length. */
+        /** <strong>Required.</strong> Text may be up to 1000 characters in length. */
         public Builder setMessage(EmptyParam message) {
           this.message = message;
           return this;
@@ -1506,7 +1536,7 @@ public class PaymentLinkUpdateParams extends ApiRequestParams {
       @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
       Map<String, Object> extraParams;
 
-      /** Text may be up to 1000 characters in length. */
+      /** <strong>Required.</strong> Text may be up to 1000 characters in length. */
       @SerializedName("message")
       Object message;
 
@@ -1557,13 +1587,13 @@ public class PaymentLinkUpdateParams extends ApiRequestParams {
           return this;
         }
 
-        /** Text may be up to 1000 characters in length. */
+        /** <strong>Required.</strong> Text may be up to 1000 characters in length. */
         public Builder setMessage(String message) {
           this.message = message;
           return this;
         }
 
-        /** Text may be up to 1000 characters in length. */
+        /** <strong>Required.</strong> Text may be up to 1000 characters in length. */
         public Builder setMessage(EmptyParam message) {
           this.message = message;
           return this;
@@ -1574,7 +1604,7 @@ public class PaymentLinkUpdateParams extends ApiRequestParams {
 
   @Getter
   public static class InvoiceCreation {
-    /** Whether the feature is enabled. */
+    /** <strong>Required.</strong> Whether the feature is enabled */
     @SerializedName("enabled")
     Boolean enabled;
 
@@ -1615,7 +1645,7 @@ public class PaymentLinkUpdateParams extends ApiRequestParams {
             this.enabled, this.extraParams, this.invoiceData);
       }
 
-      /** Whether the feature is enabled. */
+      /** <strong>Required.</strong> Whether the feature is enabled */
       public Builder setEnabled(Boolean enabled) {
         this.enabled = enabled;
         return this;
@@ -1967,11 +1997,16 @@ public class PaymentLinkUpdateParams extends ApiRequestParams {
         @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
         Map<String, Object> extraParams;
 
-        /** The name of the custom field. This may be up to 30 characters. */
+        /**
+         * <strong>Required.</strong> The name of the custom field. This may be up to 30 characters.
+         */
         @SerializedName("name")
         Object name;
 
-        /** The value of the custom field. This may be up to 30 characters. */
+        /**
+         * <strong>Required.</strong> The value of the custom field. This may be up to 30
+         * characters.
+         */
         @SerializedName("value")
         Object value;
 
@@ -2028,25 +2063,37 @@ public class PaymentLinkUpdateParams extends ApiRequestParams {
             return this;
           }
 
-          /** The name of the custom field. This may be up to 30 characters. */
+          /**
+           * <strong>Required.</strong> The name of the custom field. This may be up to 30
+           * characters.
+           */
           public Builder setName(String name) {
             this.name = name;
             return this;
           }
 
-          /** The name of the custom field. This may be up to 30 characters. */
+          /**
+           * <strong>Required.</strong> The name of the custom field. This may be up to 30
+           * characters.
+           */
           public Builder setName(EmptyParam name) {
             this.name = name;
             return this;
           }
 
-          /** The value of the custom field. This may be up to 30 characters. */
+          /**
+           * <strong>Required.</strong> The value of the custom field. This may be up to 30
+           * characters.
+           */
           public Builder setValue(String value) {
             this.value = value;
             return this;
           }
 
-          /** The value of the custom field. This may be up to 30 characters. */
+          /**
+           * <strong>Required.</strong> The value of the custom field. This may be up to 30
+           * characters.
+           */
           public Builder setValue(EmptyParam value) {
             this.value = value;
             return this;
@@ -2190,7 +2237,7 @@ public class PaymentLinkUpdateParams extends ApiRequestParams {
     @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
     Map<String, Object> extraParams;
 
-    /** The ID of an existing line item on the payment link. */
+    /** <strong>Required.</strong> The ID of an existing line item on the payment link. */
     @SerializedName("id")
     Object id;
 
@@ -2264,13 +2311,13 @@ public class PaymentLinkUpdateParams extends ApiRequestParams {
         return this;
       }
 
-      /** The ID of an existing line item on the payment link. */
+      /** <strong>Required.</strong> The ID of an existing line item on the payment link. */
       public Builder setId(String id) {
         this.id = id;
         return this;
       }
 
-      /** The ID of an existing line item on the payment link. */
+      /** <strong>Required.</strong> The ID of an existing line item on the payment link. */
       public Builder setId(EmptyParam id) {
         this.id = id;
         return this;
@@ -2285,7 +2332,10 @@ public class PaymentLinkUpdateParams extends ApiRequestParams {
 
     @Getter
     public static class AdjustableQuantity {
-      /** Set to true if the quantity can be adjusted to any non-negative Integer. */
+      /**
+       * <strong>Required.</strong> Set to true if the quantity can be adjusted to any non-negative
+       * Integer.
+       */
       @SerializedName("enabled")
       Boolean enabled;
 
@@ -2339,7 +2389,10 @@ public class PaymentLinkUpdateParams extends ApiRequestParams {
               this.enabled, this.extraParams, this.maximum, this.minimum);
         }
 
-        /** Set to true if the quantity can be adjusted to any non-negative Integer. */
+        /**
+         * <strong>Required.</strong> Set to true if the quantity can be adjusted to any
+         * non-negative Integer.
+         */
         public Builder setEnabled(Boolean enabled) {
           this.enabled = enabled;
           return this;
@@ -2397,9 +2450,9 @@ public class PaymentLinkUpdateParams extends ApiRequestParams {
   @Getter
   public static class ShippingAddressCollection {
     /**
-     * An array of two-letter ISO country codes representing which countries Checkout should provide
-     * as options for shipping locations. Unsupported country codes: {@code AS, CX, CC, CU, HM, IR,
-     * KP, MH, FM, NF, MP, PW, SD, SY, UM, VI}.
+     * <strong>Required.</strong> An array of two-letter ISO country codes representing which
+     * countries Checkout should provide as options for shipping locations. Unsupported country
+     * codes: {@code AS, CX, CC, CU, HM, IR, KP, MH, FM, NF, MP, PW, SD, SY, UM, VI}.
      */
     @SerializedName("allowed_countries")
     List<PaymentLinkUpdateParams.ShippingAddressCollection.AllowedCountry> allowedCountries;

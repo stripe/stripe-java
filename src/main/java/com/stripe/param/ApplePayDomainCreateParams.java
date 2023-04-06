@@ -11,6 +11,7 @@ import lombok.Getter;
 
 @Getter
 public class ApplePayDomainCreateParams extends ApiRequestParams {
+  /** <strong>Required.</strong> */
   @SerializedName("domain_name")
   String domainName;
 
@@ -50,6 +51,7 @@ public class ApplePayDomainCreateParams extends ApiRequestParams {
       return new ApplePayDomainCreateParams(this.domainName, this.expand, this.extraParams);
     }
 
+    /** <strong>Required.</strong> */
     public Builder setDomainName(String domainName) {
       this.domainName = domainName;
       return this;

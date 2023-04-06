@@ -12,16 +12,18 @@ import lombok.Getter;
 @Getter
 public class CustomerFundCashBalanceParams extends ApiRequestParams {
   /**
-   * Amount to be used for this test cash balance transaction. A positive integer representing how
-   * much to fund in the <a href="https://stripe.com/docs/currencies#zero-decimal">smallest currency
-   * unit</a> (e.g., 100 cents to fund $1.00 or 100 to fund ¥100, a zero-decimal currency).
+   * <strong>Required.</strong> Amount to be used for this test cash balance transaction. A positive
+   * integer representing how much to fund in the <a
+   * href="https://stripe.com/docs/currencies#zero-decimal">smallest currency unit</a> (e.g., 100
+   * cents to fund $1.00 or 100 to fund ¥100, a zero-decimal currency).
    */
   @SerializedName("amount")
   Long amount;
 
   /**
-   * Three-letter <a href="https://www.iso.org/iso-4217-currency-codes.html">ISO currency code</a>,
-   * in lowercase. Must be a <a href="https://stripe.com/docs/currencies">supported currency</a>.
+   * <strong>Required.</strong> Three-letter <a
+   * href="https://www.iso.org/iso-4217-currency-codes.html">ISO currency code</a>, in lowercase.
+   * Must be a <a href="https://stripe.com/docs/currencies">supported currency</a>.
    */
   @SerializedName("currency")
   String currency;
@@ -83,10 +85,10 @@ public class CustomerFundCashBalanceParams extends ApiRequestParams {
     }
 
     /**
-     * Amount to be used for this test cash balance transaction. A positive integer representing how
-     * much to fund in the <a href="https://stripe.com/docs/currencies#zero-decimal">smallest
-     * currency unit</a> (e.g., 100 cents to fund $1.00 or 100 to fund ¥100, a zero-decimal
-     * currency).
+     * <strong>Required.</strong> Amount to be used for this test cash balance transaction. A
+     * positive integer representing how much to fund in the <a
+     * href="https://stripe.com/docs/currencies#zero-decimal">smallest currency unit</a> (e.g., 100
+     * cents to fund $1.00 or 100 to fund ¥100, a zero-decimal currency).
      */
     public Builder setAmount(Long amount) {
       this.amount = amount;
@@ -94,9 +96,9 @@ public class CustomerFundCashBalanceParams extends ApiRequestParams {
     }
 
     /**
-     * Three-letter <a href="https://www.iso.org/iso-4217-currency-codes.html">ISO currency
-     * code</a>, in lowercase. Must be a <a href="https://stripe.com/docs/currencies">supported
-     * currency</a>.
+     * <strong>Required.</strong> Three-letter <a
+     * href="https://www.iso.org/iso-4217-currency-codes.html">ISO currency code</a>, in lowercase.
+     * Must be a <a href="https://stripe.com/docs/currencies">supported currency</a>.
      */
     public Builder setCurrency(String currency) {
       this.currency = currency;

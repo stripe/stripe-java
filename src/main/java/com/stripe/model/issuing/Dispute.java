@@ -128,9 +128,9 @@ public class Dispute extends ApiResource
   }
 
   /**
-   * Creates an Issuing <code>Dispute</code> object. Individual pieces of evidence within the <code>
-   * evidence</code> object are optional at this point. Stripe only validates that required evidence
-   * is present during submission. Refer to <a
+   * Creates an Issuing {@code Dispute} object. Individual pieces of evidence within the {@code
+   * evidence} object are optional at this point. Stripe only validates that required evidence is
+   * present during submission. Refer to <a
    * href="https://stripe.com/docs/issuing/purchases/disputes#dispute-reasons-and-evidence">Dispute
    * reasons and evidence</a> for more details about evidence requirements.
    */
@@ -139,9 +139,9 @@ public class Dispute extends ApiResource
   }
 
   /**
-   * Creates an Issuing <code>Dispute</code> object. Individual pieces of evidence within the <code>
-   * evidence</code> object are optional at this point. Stripe only validates that required evidence
-   * is present during submission. Refer to <a
+   * Creates an Issuing {@code Dispute} object. Individual pieces of evidence within the {@code
+   * evidence} object are optional at this point. Stripe only validates that required evidence is
+   * present during submission. Refer to <a
    * href="https://stripe.com/docs/issuing/purchases/disputes#dispute-reasons-and-evidence">Dispute
    * reasons and evidence</a> for more details about evidence requirements.
    */
@@ -152,9 +152,9 @@ public class Dispute extends ApiResource
   }
 
   /**
-   * Creates an Issuing <code>Dispute</code> object. Individual pieces of evidence within the <code>
-   * evidence</code> object are optional at this point. Stripe only validates that required evidence
-   * is present during submission. Refer to <a
+   * Creates an Issuing {@code Dispute} object. Individual pieces of evidence within the {@code
+   * evidence} object are optional at this point. Stripe only validates that required evidence is
+   * present during submission. Refer to <a
    * href="https://stripe.com/docs/issuing/purchases/disputes#dispute-reasons-and-evidence">Dispute
    * reasons and evidence</a> for more details about evidence requirements.
    */
@@ -163,9 +163,9 @@ public class Dispute extends ApiResource
   }
 
   /**
-   * Creates an Issuing <code>Dispute</code> object. Individual pieces of evidence within the <code>
-   * evidence</code> object are optional at this point. Stripe only validates that required evidence
-   * is present during submission. Refer to <a
+   * Creates an Issuing {@code Dispute} object. Individual pieces of evidence within the {@code
+   * evidence} object are optional at this point. Stripe only validates that required evidence is
+   * present during submission. Refer to <a
    * href="https://stripe.com/docs/issuing/purchases/disputes#dispute-reasons-and-evidence">Dispute
    * reasons and evidence</a> for more details about evidence requirements.
    */
@@ -176,16 +176,16 @@ public class Dispute extends ApiResource
   }
 
   /**
-   * Returns a list of Issuing <code>Dispute</code> objects. The objects are sorted in descending
-   * order by creation date, with the most recently created object appearing first.
+   * Returns a list of Issuing {@code Dispute} objects. The objects are sorted in descending order
+   * by creation date, with the most recently created object appearing first.
    */
   public static DisputeCollection list(Map<String, Object> params) throws StripeException {
     return list(params, (RequestOptions) null);
   }
 
   /**
-   * Returns a list of Issuing <code>Dispute</code> objects. The objects are sorted in descending
-   * order by creation date, with the most recently created object appearing first.
+   * Returns a list of Issuing {@code Dispute} objects. The objects are sorted in descending order
+   * by creation date, with the most recently created object appearing first.
    */
   public static DisputeCollection list(Map<String, Object> params, RequestOptions options)
       throws StripeException {
@@ -194,16 +194,16 @@ public class Dispute extends ApiResource
   }
 
   /**
-   * Returns a list of Issuing <code>Dispute</code> objects. The objects are sorted in descending
-   * order by creation date, with the most recently created object appearing first.
+   * Returns a list of Issuing {@code Dispute} objects. The objects are sorted in descending order
+   * by creation date, with the most recently created object appearing first.
    */
   public static DisputeCollection list(DisputeListParams params) throws StripeException {
     return list(params, (RequestOptions) null);
   }
 
   /**
-   * Returns a list of Issuing <code>Dispute</code> objects. The objects are sorted in descending
-   * order by creation date, with the most recently created object appearing first.
+   * Returns a list of Issuing {@code Dispute} objects. The objects are sorted in descending order
+   * by creation date, with the most recently created object appearing first.
    */
   public static DisputeCollection list(DisputeListParams params, RequestOptions options)
       throws StripeException {
@@ -211,17 +211,17 @@ public class Dispute extends ApiResource
     return ApiResource.requestCollection(url, params, DisputeCollection.class, options);
   }
 
-  /** Retrieves an Issuing <code>Dispute</code> object. */
+  /** Retrieves an Issuing {@code Dispute} object. */
   public static Dispute retrieve(String dispute) throws StripeException {
     return retrieve(dispute, (Map<String, Object>) null, (RequestOptions) null);
   }
 
-  /** Retrieves an Issuing <code>Dispute</code> object. */
+  /** Retrieves an Issuing {@code Dispute} object. */
   public static Dispute retrieve(String dispute, RequestOptions options) throws StripeException {
     return retrieve(dispute, (Map<String, Object>) null, options);
   }
 
-  /** Retrieves an Issuing <code>Dispute</code> object. */
+  /** Retrieves an Issuing {@code Dispute} object. */
   public static Dispute retrieve(String dispute, Map<String, Object> params, RequestOptions options)
       throws StripeException {
     String url =
@@ -232,7 +232,7 @@ public class Dispute extends ApiResource
     return ApiResource.request(ApiResource.RequestMethod.GET, url, params, Dispute.class, options);
   }
 
-  /** Retrieves an Issuing <code>Dispute</code> object. */
+  /** Retrieves an Issuing {@code Dispute} object. */
   public static Dispute retrieve(
       String dispute, DisputeRetrieveParams params, RequestOptions options) throws StripeException {
     String url =
@@ -244,7 +244,7 @@ public class Dispute extends ApiResource
   }
 
   /**
-   * Submits an Issuing <code>Dispute</code> to the card network. Stripe validates that all evidence
+   * Submits an Issuing {@code Dispute} to the card network. Stripe validates that all evidence
    * fields required for the dispute’s reason are present. For more details, see <a
    * href="https://stripe.com/docs/issuing/purchases/disputes#dispute-reasons-and-evidence">Dispute
    * reasons and evidence</a>.
@@ -254,7 +254,7 @@ public class Dispute extends ApiResource
   }
 
   /**
-   * Submits an Issuing <code>Dispute</code> to the card network. Stripe validates that all evidence
+   * Submits an Issuing {@code Dispute} to the card network. Stripe validates that all evidence
    * fields required for the dispute’s reason are present. For more details, see <a
    * href="https://stripe.com/docs/issuing/purchases/disputes#dispute-reasons-and-evidence">Dispute
    * reasons and evidence</a>.
@@ -264,7 +264,7 @@ public class Dispute extends ApiResource
   }
 
   /**
-   * Submits an Issuing <code>Dispute</code> to the card network. Stripe validates that all evidence
+   * Submits an Issuing {@code Dispute} to the card network. Stripe validates that all evidence
    * fields required for the dispute’s reason are present. For more details, see <a
    * href="https://stripe.com/docs/issuing/purchases/disputes#dispute-reasons-and-evidence">Dispute
    * reasons and evidence</a>.
@@ -274,7 +274,7 @@ public class Dispute extends ApiResource
   }
 
   /**
-   * Submits an Issuing <code>Dispute</code> to the card network. Stripe validates that all evidence
+   * Submits an Issuing {@code Dispute} to the card network. Stripe validates that all evidence
    * fields required for the dispute’s reason are present. For more details, see <a
    * href="https://stripe.com/docs/issuing/purchases/disputes#dispute-reasons-and-evidence">Dispute
    * reasons and evidence</a>.
@@ -289,7 +289,7 @@ public class Dispute extends ApiResource
   }
 
   /**
-   * Submits an Issuing <code>Dispute</code> to the card network. Stripe validates that all evidence
+   * Submits an Issuing {@code Dispute} to the card network. Stripe validates that all evidence
    * fields required for the dispute’s reason are present. For more details, see <a
    * href="https://stripe.com/docs/issuing/purchases/disputes#dispute-reasons-and-evidence">Dispute
    * reasons and evidence</a>.
@@ -299,7 +299,7 @@ public class Dispute extends ApiResource
   }
 
   /**
-   * Submits an Issuing <code>Dispute</code> to the card network. Stripe validates that all evidence
+   * Submits an Issuing {@code Dispute} to the card network. Stripe validates that all evidence
    * fields required for the dispute’s reason are present. For more details, see <a
    * href="https://stripe.com/docs/issuing/purchases/disputes#dispute-reasons-and-evidence">Dispute
    * reasons and evidence</a>.
@@ -314,9 +314,9 @@ public class Dispute extends ApiResource
   }
 
   /**
-   * Updates the specified Issuing <code>Dispute</code> object by setting the values of the
-   * parameters passed. Any parameters not provided will be left unchanged. Properties on the <code>
-   * evidence</code> object can be unset by passing in an empty string.
+   * Updates the specified Issuing {@code Dispute} object by setting the values of the parameters
+   * passed. Any parameters not provided will be left unchanged. Properties on the {@code evidence}
+   * object can be unset by passing in an empty string.
    */
   @Override
   public Dispute update(Map<String, Object> params) throws StripeException {
@@ -324,9 +324,9 @@ public class Dispute extends ApiResource
   }
 
   /**
-   * Updates the specified Issuing <code>Dispute</code> object by setting the values of the
-   * parameters passed. Any parameters not provided will be left unchanged. Properties on the <code>
-   * evidence</code> object can be unset by passing in an empty string.
+   * Updates the specified Issuing {@code Dispute} object by setting the values of the parameters
+   * passed. Any parameters not provided will be left unchanged. Properties on the {@code evidence}
+   * object can be unset by passing in an empty string.
    */
   @Override
   public Dispute update(Map<String, Object> params, RequestOptions options) throws StripeException {
@@ -339,18 +339,18 @@ public class Dispute extends ApiResource
   }
 
   /**
-   * Updates the specified Issuing <code>Dispute</code> object by setting the values of the
-   * parameters passed. Any parameters not provided will be left unchanged. Properties on the <code>
-   * evidence</code> object can be unset by passing in an empty string.
+   * Updates the specified Issuing {@code Dispute} object by setting the values of the parameters
+   * passed. Any parameters not provided will be left unchanged. Properties on the {@code evidence}
+   * object can be unset by passing in an empty string.
    */
   public Dispute update(DisputeUpdateParams params) throws StripeException {
     return update(params, (RequestOptions) null);
   }
 
   /**
-   * Updates the specified Issuing <code>Dispute</code> object by setting the values of the
-   * parameters passed. Any parameters not provided will be left unchanged. Properties on the <code>
-   * evidence</code> object can be unset by passing in an empty string.
+   * Updates the specified Issuing {@code Dispute} object by setting the values of the parameters
+   * passed. Any parameters not provided will be left unchanged. Properties on the {@code evidence}
+   * object can be unset by passing in an empty string.
    */
   public Dispute update(DisputeUpdateParams params, RequestOptions options) throws StripeException {
     String url =

@@ -1182,11 +1182,15 @@ public class CustomerUpdateParams extends ApiRequestParams {
       @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
       Map<String, Object> extraParams;
 
-      /** The name of the custom field. This may be up to 30 characters. */
+      /**
+       * <strong>Required.</strong> The name of the custom field. This may be up to 30 characters.
+       */
       @SerializedName("name")
       Object name;
 
-      /** The value of the custom field. This may be up to 30 characters. */
+      /**
+       * <strong>Required.</strong> The value of the custom field. This may be up to 30 characters.
+       */
       @SerializedName("value")
       Object value;
 
@@ -1241,25 +1245,35 @@ public class CustomerUpdateParams extends ApiRequestParams {
           return this;
         }
 
-        /** The name of the custom field. This may be up to 30 characters. */
+        /**
+         * <strong>Required.</strong> The name of the custom field. This may be up to 30 characters.
+         */
         public Builder setName(String name) {
           this.name = name;
           return this;
         }
 
-        /** The name of the custom field. This may be up to 30 characters. */
+        /**
+         * <strong>Required.</strong> The name of the custom field. This may be up to 30 characters.
+         */
         public Builder setName(EmptyParam name) {
           this.name = name;
           return this;
         }
 
-        /** The value of the custom field. This may be up to 30 characters. */
+        /**
+         * <strong>Required.</strong> The value of the custom field. This may be up to 30
+         * characters.
+         */
         public Builder setValue(String value) {
           this.value = value;
           return this;
         }
 
-        /** The value of the custom field. This may be up to 30 characters. */
+        /**
+         * <strong>Required.</strong> The value of the custom field. This may be up to 30
+         * characters.
+         */
         public Builder setValue(EmptyParam value) {
           this.value = value;
           return this;
@@ -1382,7 +1396,7 @@ public class CustomerUpdateParams extends ApiRequestParams {
 
   @Getter
   public static class Shipping {
-    /** Customer shipping address. */
+    /** <strong>Required.</strong> Customer shipping address. */
     @SerializedName("address")
     Address address;
 
@@ -1395,7 +1409,7 @@ public class CustomerUpdateParams extends ApiRequestParams {
     @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
     Map<String, Object> extraParams;
 
-    /** Customer name. */
+    /** <strong>Required.</strong> Customer name. */
     @SerializedName("name")
     Object name;
 
@@ -1429,7 +1443,7 @@ public class CustomerUpdateParams extends ApiRequestParams {
             this.address, this.extraParams, this.name, this.phone);
       }
 
-      /** Customer shipping address. */
+      /** <strong>Required.</strong> Customer shipping address. */
       public Builder setAddress(CustomerUpdateParams.Shipping.Address address) {
         this.address = address;
         return this;
@@ -1461,13 +1475,13 @@ public class CustomerUpdateParams extends ApiRequestParams {
         return this;
       }
 
-      /** Customer name. */
+      /** <strong>Required.</strong> Customer name. */
       public Builder setName(String name) {
         this.name = name;
         return this;
       }
 
-      /** Customer name. */
+      /** <strong>Required.</strong> Customer name. */
       public Builder setName(EmptyParam name) {
         this.name = name;
         return this;

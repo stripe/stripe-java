@@ -172,46 +172,46 @@ public class Reader extends ApiResource implements HasId, MetadataStore<Reader> 
     return ApiResource.request(ApiResource.RequestMethod.POST, url, params, Reader.class, options);
   }
 
-  /** Creates a new <code>Reader</code> object. */
+  /** Creates a new {@code Reader} object. */
   public static Reader create(Map<String, Object> params) throws StripeException {
     return create(params, (RequestOptions) null);
   }
 
-  /** Creates a new <code>Reader</code> object. */
+  /** Creates a new {@code Reader} object. */
   public static Reader create(Map<String, Object> params, RequestOptions options)
       throws StripeException {
     String url = ApiResource.fullUrl(Stripe.getApiBase(), options, "/v1/terminal/readers");
     return ApiResource.request(ApiResource.RequestMethod.POST, url, params, Reader.class, options);
   }
 
-  /** Creates a new <code>Reader</code> object. */
+  /** Creates a new {@code Reader} object. */
   public static Reader create(ReaderCreateParams params) throws StripeException {
     return create(params, (RequestOptions) null);
   }
 
-  /** Creates a new <code>Reader</code> object. */
+  /** Creates a new {@code Reader} object. */
   public static Reader create(ReaderCreateParams params, RequestOptions options)
       throws StripeException {
     String url = ApiResource.fullUrl(Stripe.getApiBase(), options, "/v1/terminal/readers");
     return ApiResource.request(ApiResource.RequestMethod.POST, url, params, Reader.class, options);
   }
 
-  /** Deletes a <code>Reader</code> object. */
+  /** Deletes a {@code Reader} object. */
   public Reader delete() throws StripeException {
     return delete((Map<String, Object>) null, (RequestOptions) null);
   }
 
-  /** Deletes a <code>Reader</code> object. */
+  /** Deletes a {@code Reader} object. */
   public Reader delete(RequestOptions options) throws StripeException {
     return delete((Map<String, Object>) null, options);
   }
 
-  /** Deletes a <code>Reader</code> object. */
+  /** Deletes a {@code Reader} object. */
   public Reader delete(Map<String, Object> params) throws StripeException {
     return delete(params, (RequestOptions) null);
   }
 
-  /** Deletes a <code>Reader</code> object. */
+  /** Deletes a {@code Reader} object. */
   public Reader delete(Map<String, Object> params, RequestOptions options) throws StripeException {
     String url =
         ApiResource.fullUrl(
@@ -222,24 +222,24 @@ public class Reader extends ApiResource implements HasId, MetadataStore<Reader> 
         ApiResource.RequestMethod.DELETE, url, params, Reader.class, options);
   }
 
-  /** Returns a list of <code>Reader</code> objects. */
+  /** Returns a list of {@code Reader} objects. */
   public static ReaderCollection list(Map<String, Object> params) throws StripeException {
     return list(params, (RequestOptions) null);
   }
 
-  /** Returns a list of <code>Reader</code> objects. */
+  /** Returns a list of {@code Reader} objects. */
   public static ReaderCollection list(Map<String, Object> params, RequestOptions options)
       throws StripeException {
     String url = ApiResource.fullUrl(Stripe.getApiBase(), options, "/v1/terminal/readers");
     return ApiResource.requestCollection(url, params, ReaderCollection.class, options);
   }
 
-  /** Returns a list of <code>Reader</code> objects. */
+  /** Returns a list of {@code Reader} objects. */
   public static ReaderCollection list(ReaderListParams params) throws StripeException {
     return list(params, (RequestOptions) null);
   }
 
-  /** Returns a list of <code>Reader</code> objects. */
+  /** Returns a list of {@code Reader} objects. */
   public static ReaderCollection list(ReaderListParams params, RequestOptions options)
       throws StripeException {
     String url = ApiResource.fullUrl(Stripe.getApiBase(), options, "/v1/terminal/readers");
@@ -363,17 +363,17 @@ public class Reader extends ApiResource implements HasId, MetadataStore<Reader> 
     return ApiResource.request(ApiResource.RequestMethod.POST, url, params, Reader.class, options);
   }
 
-  /** Retrieves a <code>Reader</code> object. */
+  /** Retrieves a {@code Reader} object. */
   public static Reader retrieve(String reader) throws StripeException {
     return retrieve(reader, (Map<String, Object>) null, (RequestOptions) null);
   }
 
-  /** Retrieves a <code>Reader</code> object. */
+  /** Retrieves a {@code Reader} object. */
   public static Reader retrieve(String reader, RequestOptions options) throws StripeException {
     return retrieve(reader, (Map<String, Object>) null, options);
   }
 
-  /** Retrieves a <code>Reader</code> object. */
+  /** Retrieves a {@code Reader} object. */
   public static Reader retrieve(String reader, Map<String, Object> params, RequestOptions options)
       throws StripeException {
     String url =
@@ -384,7 +384,7 @@ public class Reader extends ApiResource implements HasId, MetadataStore<Reader> 
     return ApiResource.request(ApiResource.RequestMethod.GET, url, params, Reader.class, options);
   }
 
-  /** Retrieves a <code>Reader</code> object. */
+  /** Retrieves a {@code Reader} object. */
   public static Reader retrieve(String reader, ReaderRetrieveParams params, RequestOptions options)
       throws StripeException {
     String url =
@@ -432,8 +432,8 @@ public class Reader extends ApiResource implements HasId, MetadataStore<Reader> 
   }
 
   /**
-   * Updates a <code>Reader</code> object by setting the values of the parameters passed. Any
-   * parameters not provided will be left unchanged.
+   * Updates a {@code Reader} object by setting the values of the parameters passed. Any parameters
+   * not provided will be left unchanged.
    */
   @Override
   public Reader update(Map<String, Object> params) throws StripeException {
@@ -441,8 +441,8 @@ public class Reader extends ApiResource implements HasId, MetadataStore<Reader> 
   }
 
   /**
-   * Updates a <code>Reader</code> object by setting the values of the parameters passed. Any
-   * parameters not provided will be left unchanged.
+   * Updates a {@code Reader} object by setting the values of the parameters passed. Any parameters
+   * not provided will be left unchanged.
    */
   @Override
   public Reader update(Map<String, Object> params, RequestOptions options) throws StripeException {
@@ -455,16 +455,16 @@ public class Reader extends ApiResource implements HasId, MetadataStore<Reader> 
   }
 
   /**
-   * Updates a <code>Reader</code> object by setting the values of the parameters passed. Any
-   * parameters not provided will be left unchanged.
+   * Updates a {@code Reader} object by setting the values of the parameters passed. Any parameters
+   * not provided will be left unchanged.
    */
   public Reader update(ReaderUpdateParams params) throws StripeException {
     return update(params, (RequestOptions) null);
   }
 
   /**
-   * Updates a <code>Reader</code> object by setting the values of the parameters passed. Any
-   * parameters not provided will be left unchanged.
+   * Updates a {@code Reader} object by setting the values of the parameters passed. Any parameters
+   * not provided will be left unchanged.
    */
   public Reader update(ReaderUpdateParams params, RequestOptions options) throws StripeException {
     String url =
