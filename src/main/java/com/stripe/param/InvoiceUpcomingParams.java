@@ -1896,9 +1896,12 @@ public class InvoiceUpcomingParams extends ApiRequestParams {
     Long quantity;
 
     /**
-     * Specifies whether the price is considered inclusive of taxes or exclusive of taxes. One of
-     * {@code inclusive}, {@code exclusive}, or {@code unspecified}. Once specified as either {@code
-     * inclusive} or {@code exclusive}, it cannot be changed.
+     * Only required if a <a
+     * href="https://stripe.com/docs/tax/products-prices-tax-categories-tax-behavior#setting-a-default-tax-behavior-(recommended)">default
+     * tax behavior</a> was not provided in the Stripe Tax settings. Specifies whether the price is
+     * considered inclusive of taxes or exclusive of taxes. One of {@code inclusive}, {@code
+     * exclusive}, or {@code unspecified}. Once specified as either {@code inclusive} or {@code
+     * exclusive}, it cannot be changed.
      */
     @SerializedName("tax_behavior")
     TaxBehavior taxBehavior;
@@ -2222,9 +2225,12 @@ public class InvoiceUpcomingParams extends ApiRequestParams {
       }
 
       /**
-       * Specifies whether the price is considered inclusive of taxes or exclusive of taxes. One of
-       * {@code inclusive}, {@code exclusive}, or {@code unspecified}. Once specified as either
-       * {@code inclusive} or {@code exclusive}, it cannot be changed.
+       * Only required if a <a
+       * href="https://stripe.com/docs/tax/products-prices-tax-categories-tax-behavior#setting-a-default-tax-behavior-(recommended)">default
+       * tax behavior</a> was not provided in the Stripe Tax settings. Specifies whether the price
+       * is considered inclusive of taxes or exclusive of taxes. One of {@code inclusive}, {@code
+       * exclusive}, or {@code unspecified}. Once specified as either {@code inclusive} or {@code
+       * exclusive}, it cannot be changed.
        */
       public Builder setTaxBehavior(InvoiceUpcomingParams.InvoiceItem.TaxBehavior taxBehavior) {
         this.taxBehavior = taxBehavior;
@@ -2509,9 +2515,12 @@ public class InvoiceUpcomingParams extends ApiRequestParams {
       String product;
 
       /**
-       * Specifies whether the price is considered inclusive of taxes or exclusive of taxes. One of
-       * {@code inclusive}, {@code exclusive}, or {@code unspecified}. Once specified as either
-       * {@code inclusive} or {@code exclusive}, it cannot be changed.
+       * Only required if a <a
+       * href="https://stripe.com/docs/tax/products-prices-tax-categories-tax-behavior#setting-a-default-tax-behavior-(recommended)">default
+       * tax behavior</a> was not provided in the Stripe Tax settings. Specifies whether the price
+       * is considered inclusive of taxes or exclusive of taxes. One of {@code inclusive}, {@code
+       * exclusive}, or {@code unspecified}. Once specified as either {@code inclusive} or {@code
+       * exclusive}, it cannot be changed.
        */
       @SerializedName("tax_behavior")
       TaxBehavior taxBehavior;
@@ -2619,9 +2628,12 @@ public class InvoiceUpcomingParams extends ApiRequestParams {
         }
 
         /**
-         * Specifies whether the price is considered inclusive of taxes or exclusive of taxes. One
-         * of {@code inclusive}, {@code exclusive}, or {@code unspecified}. Once specified as either
-         * {@code inclusive} or {@code exclusive}, it cannot be changed.
+         * Only required if a <a
+         * href="https://stripe.com/docs/tax/products-prices-tax-categories-tax-behavior#setting-a-default-tax-behavior-(recommended)">default
+         * tax behavior</a> was not provided in the Stripe Tax settings. Specifies whether the price
+         * is considered inclusive of taxes or exclusive of taxes. One of {@code inclusive}, {@code
+         * exclusive}, or {@code unspecified}. Once specified as either {@code inclusive} or {@code
+         * exclusive}, it cannot be changed.
          */
         public Builder setTaxBehavior(
             InvoiceUpcomingParams.InvoiceItem.PriceData.TaxBehavior taxBehavior) {
@@ -3142,9 +3154,12 @@ public class InvoiceUpcomingParams extends ApiRequestParams {
       Recurring recurring;
 
       /**
-       * Specifies whether the price is considered inclusive of taxes or exclusive of taxes. One of
-       * {@code inclusive}, {@code exclusive}, or {@code unspecified}. Once specified as either
-       * {@code inclusive} or {@code exclusive}, it cannot be changed.
+       * Only required if a <a
+       * href="https://stripe.com/docs/tax/products-prices-tax-categories-tax-behavior#setting-a-default-tax-behavior-(recommended)">default
+       * tax behavior</a> was not provided in the Stripe Tax settings. Specifies whether the price
+       * is considered inclusive of taxes or exclusive of taxes. One of {@code inclusive}, {@code
+       * exclusive}, or {@code unspecified}. Once specified as either {@code inclusive} or {@code
+       * exclusive}, it cannot be changed.
        */
       @SerializedName("tax_behavior")
       TaxBehavior taxBehavior;
@@ -3267,9 +3282,12 @@ public class InvoiceUpcomingParams extends ApiRequestParams {
         }
 
         /**
-         * Specifies whether the price is considered inclusive of taxes or exclusive of taxes. One
-         * of {@code inclusive}, {@code exclusive}, or {@code unspecified}. Once specified as either
-         * {@code inclusive} or {@code exclusive}, it cannot be changed.
+         * Only required if a <a
+         * href="https://stripe.com/docs/tax/products-prices-tax-categories-tax-behavior#setting-a-default-tax-behavior-(recommended)">default
+         * tax behavior</a> was not provided in the Stripe Tax settings. Specifies whether the price
+         * is considered inclusive of taxes or exclusive of taxes. One of {@code inclusive}, {@code
+         * exclusive}, or {@code unspecified}. Once specified as either {@code inclusive} or {@code
+         * exclusive}, it cannot be changed.
          */
         public Builder setTaxBehavior(
             InvoiceUpcomingParams.SubscriptionItem.PriceData.TaxBehavior taxBehavior) {

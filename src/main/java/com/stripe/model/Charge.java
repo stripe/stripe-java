@@ -1537,8 +1537,8 @@ public class Charge extends ApiResource implements MetadataStore<Charge>, Balanc
     @EqualsAndHashCode(callSuper = false)
     public static class Card extends StripeObject {
       /**
-       * Card brand. Can be {@code amex}, {@code diners}, {@code discover}, {@code jcb}, {@code
-       * mastercard}, {@code unionpay}, {@code visa}, or {@code unknown}.
+       * Card brand. Can be {@code amex}, {@code diners}, {@code discover}, {@code eftpos_au},
+       * {@code jcb}, {@code mastercard}, {@code unionpay}, {@code visa}, or {@code unknown}.
        */
       @SerializedName("brand")
       String brand;
@@ -1625,8 +1625,8 @@ public class Charge extends ApiResource implements MetadataStore<Charge>, Balanc
 
       /**
        * Identifies which network this charge was processed on. Can be {@code amex}, {@code
-       * cartes_bancaires}, {@code diners}, {@code discover}, {@code interac}, {@code jcb}, {@code
-       * mastercard}, {@code unionpay}, {@code visa}, or {@code unknown}.
+       * cartes_bancaires}, {@code diners}, {@code discover}, {@code eftpos_au}, {@code interac},
+       * {@code jcb}, {@code mastercard}, {@code unionpay}, {@code visa}, or {@code unknown}.
        */
       @SerializedName("network")
       String network;
@@ -1763,9 +1763,9 @@ public class Charge extends ApiResource implements MetadataStore<Charge>, Balanc
 
         /**
          * The type of the card wallet, one of {@code amex_express_checkout}, {@code apple_pay},
-         * {@code google_pay}, {@code masterpass}, {@code samsung_pay}, or {@code visa_checkout}. An
-         * additional hash is included on the Wallet subhash with a name matching this value. It
-         * contains additional information specific to the card wallet type.
+         * {@code google_pay}, {@code masterpass}, {@code samsung_pay}, {@code visa_checkout}, or
+         * {@code link}. An additional hash is included on the Wallet subhash with a name matching
+         * this value. It contains additional information specific to the card wallet type.
          */
         @SerializedName("type")
         String type;
@@ -1874,8 +1874,8 @@ public class Charge extends ApiResource implements MetadataStore<Charge>, Balanc
       Long amountAuthorized;
 
       /**
-       * Card brand. Can be {@code amex}, {@code diners}, {@code discover}, {@code jcb}, {@code
-       * mastercard}, {@code unionpay}, {@code visa}, or {@code unknown}.
+       * Card brand. Can be {@code amex}, {@code diners}, {@code discover}, {@code eftpos_au},
+       * {@code jcb}, {@code mastercard}, {@code unionpay}, {@code visa}, or {@code unknown}.
        */
       @SerializedName("brand")
       String brand;
@@ -1979,8 +1979,8 @@ public class Charge extends ApiResource implements MetadataStore<Charge>, Balanc
 
       /**
        * Identifies which network this charge was processed on. Can be {@code amex}, {@code
-       * cartes_bancaires}, {@code diners}, {@code discover}, {@code interac}, {@code jcb}, {@code
-       * mastercard}, {@code unionpay}, {@code visa}, or {@code unknown}.
+       * cartes_bancaires}, {@code diners}, {@code discover}, {@code eftpos_au}, {@code interac},
+       * {@code jcb}, {@code mastercard}, {@code unionpay}, {@code visa}, or {@code unknown}.
        */
       @SerializedName("network")
       String network;
@@ -2333,8 +2333,8 @@ public class Charge extends ApiResource implements MetadataStore<Charge>, Balanc
 
       /**
        * Identifies which network this charge was processed on. Can be {@code amex}, {@code
-       * cartes_bancaires}, {@code diners}, {@code discover}, {@code interac}, {@code jcb}, {@code
-       * mastercard}, {@code unionpay}, {@code visa}, or {@code unknown}.
+       * cartes_bancaires}, {@code diners}, {@code discover}, {@code eftpos_au}, {@code interac},
+       * {@code jcb}, {@code mastercard}, {@code unionpay}, {@code visa}, or {@code unknown}.
        */
       @SerializedName("network")
       String network;

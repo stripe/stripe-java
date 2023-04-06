@@ -699,8 +699,8 @@ public class PaymentMethod extends ApiResource implements HasId, MetadataStore<P
   @EqualsAndHashCode(callSuper = false)
   public static class Card extends StripeObject {
     /**
-     * Card brand. Can be {@code amex}, {@code diners}, {@code discover}, {@code jcb}, {@code
-     * mastercard}, {@code unionpay}, {@code visa}, or {@code unknown}.
+     * Card brand. Can be {@code amex}, {@code diners}, {@code discover}, {@code eftpos_au}, {@code
+     * jcb}, {@code mastercard}, {@code unionpay}, {@code visa}, or {@code unknown}.
      */
     @SerializedName("brand")
     String brand;
@@ -852,9 +852,9 @@ public class PaymentMethod extends ApiResource implements HasId, MetadataStore<P
 
       /**
        * The type of the card wallet, one of {@code amex_express_checkout}, {@code apple_pay},
-       * {@code google_pay}, {@code masterpass}, {@code samsung_pay}, or {@code visa_checkout}. An
-       * additional hash is included on the Wallet subhash with a name matching this value. It
-       * contains additional information specific to the card wallet type.
+       * {@code google_pay}, {@code masterpass}, {@code samsung_pay}, {@code visa_checkout}, or
+       * {@code link}. An additional hash is included on the Wallet subhash with a name matching
+       * this value. It contains additional information specific to the card wallet type.
        */
       @SerializedName("type")
       String type;
@@ -1296,6 +1296,10 @@ public class PaymentMethod extends ApiResource implements HasId, MetadataStore<P
     @SerializedName("routing_number")
     String routingNumber;
 
+    /** Contains information about the future reusability of this PaymentMethod. */
+    @SerializedName("status_details")
+    StatusDetails statusDetails;
+
     @Getter
     @Setter
     @EqualsAndHashCode(callSuper = false)
@@ -1307,6 +1311,38 @@ public class PaymentMethod extends ApiResource implements HasId, MetadataStore<P
       /** All supported networks. */
       @SerializedName("supported")
       List<String> supported;
+    }
+
+    @Getter
+    @Setter
+    @EqualsAndHashCode(callSuper = false)
+    public static class StatusDetails extends StripeObject {
+      @SerializedName("blocked")
+      Blocked blocked;
+
+      @Getter
+      @Setter
+      @EqualsAndHashCode(callSuper = false)
+      public static class Blocked extends StripeObject {
+        /**
+         * The ACH network code that resulted in this block.
+         *
+         * <p>One of {@code R02}, {@code R03}, {@code R04}, {@code R05}, {@code R07}, {@code R08},
+         * {@code R10}, {@code R11}, {@code R16}, {@code R20}, {@code R29}, or {@code R31}.
+         */
+        @SerializedName("network_code")
+        String networkCode;
+
+        /**
+         * The reason why this PaymentMethod's fingerprint has been blocked
+         *
+         * <p>One of {@code bank_account_closed}, {@code bank_account_frozen}, {@code
+         * bank_account_invalid_details}, {@code bank_account_restricted}, {@code
+         * bank_account_unusable}, or {@code debit_not_authorized}.
+         */
+        @SerializedName("reason")
+        String reason;
+      }
     }
   }
 
