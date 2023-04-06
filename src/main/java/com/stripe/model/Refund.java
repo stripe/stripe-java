@@ -84,7 +84,10 @@ public class Refund extends ApiResource implements MetadataStore<Refund>, Balanc
   @SerializedName("id")
   String id;
 
-  /** Email to which refund instructions, if required, are sent to. */
+  /**
+   * For payment methods without native refund support (e.g., Konbini, PromptPay), email for the
+   * customer to receive refund instructions.
+   */
   @SerializedName("instructions_email")
   String instructionsEmail;
 

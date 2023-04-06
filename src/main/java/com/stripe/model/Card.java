@@ -82,7 +82,8 @@ public class Card extends ApiResource
 
   /**
    * Card brand. Can be {@code American Express}, {@code Diners Club}, {@code Discover}, {@code
-   * JCB}, {@code MasterCard}, {@code UnionPay}, {@code Visa}, or {@code Unknown}.
+   * Eftpos Australia}, {@code JCB}, {@code MasterCard}, {@code UnionPay}, {@code Visa}, or {@code
+   * Unknown}.
    */
   @SerializedName("brand")
   String brand;

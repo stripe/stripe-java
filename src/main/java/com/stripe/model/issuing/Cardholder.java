@@ -112,7 +112,11 @@ public class Cardholder extends ApiResource implements HasId, MetadataStore<Card
   @SerializedName("status")
   String status;
 
-  /** One of {@code individual} or {@code company}. */
+  /**
+   * One of {@code individual} or {@code company}. See <a
+   * href="https://stripe.com/docs/issuing/other/choose-cardholder">Choose a cardholder type</a> for
+   * more details.
+   */
   @SerializedName("type")
   String type;
 
