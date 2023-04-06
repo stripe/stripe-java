@@ -2380,9 +2380,12 @@ public class SubscriptionScheduleCreateParams extends ApiRequestParams {
         String product;
 
         /**
-         * Specifies whether the price is considered inclusive of taxes or exclusive of taxes. One
-         * of {@code inclusive}, {@code exclusive}, or {@code unspecified}. Once specified as either
-         * {@code inclusive} or {@code exclusive}, it cannot be changed.
+         * Only required if a <a
+         * href="https://stripe.com/docs/tax/products-prices-tax-categories-tax-behavior#setting-a-default-tax-behavior-(recommended)">default
+         * tax behavior</a> was not provided in the Stripe Tax settings. Specifies whether the price
+         * is considered inclusive of taxes or exclusive of taxes. One of {@code inclusive}, {@code
+         * exclusive}, or {@code unspecified}. Once specified as either {@code inclusive} or {@code
+         * exclusive}, it cannot be changed.
          */
         @SerializedName("tax_behavior")
         TaxBehavior taxBehavior;
@@ -2493,9 +2496,12 @@ public class SubscriptionScheduleCreateParams extends ApiRequestParams {
           }
 
           /**
-           * Specifies whether the price is considered inclusive of taxes or exclusive of taxes. One
-           * of {@code inclusive}, {@code exclusive}, or {@code unspecified}. Once specified as
-           * either {@code inclusive} or {@code exclusive}, it cannot be changed.
+           * Only required if a <a
+           * href="https://stripe.com/docs/tax/products-prices-tax-categories-tax-behavior#setting-a-default-tax-behavior-(recommended)">default
+           * tax behavior</a> was not provided in the Stripe Tax settings. Specifies whether the
+           * price is considered inclusive of taxes or exclusive of taxes. One of {@code inclusive},
+           * {@code exclusive}, or {@code unspecified}. Once specified as either {@code inclusive}
+           * or {@code exclusive}, it cannot be changed.
            */
           public Builder setTaxBehavior(
               SubscriptionScheduleCreateParams.Phase.AddInvoiceItem.PriceData.TaxBehavior
@@ -3958,9 +3964,12 @@ public class SubscriptionScheduleCreateParams extends ApiRequestParams {
         Recurring recurring;
 
         /**
-         * Specifies whether the price is considered inclusive of taxes or exclusive of taxes. One
-         * of {@code inclusive}, {@code exclusive}, or {@code unspecified}. Once specified as either
-         * {@code inclusive} or {@code exclusive}, it cannot be changed.
+         * Only required if a <a
+         * href="https://stripe.com/docs/tax/products-prices-tax-categories-tax-behavior#setting-a-default-tax-behavior-(recommended)">default
+         * tax behavior</a> was not provided in the Stripe Tax settings. Specifies whether the price
+         * is considered inclusive of taxes or exclusive of taxes. One of {@code inclusive}, {@code
+         * exclusive}, or {@code unspecified}. Once specified as either {@code inclusive} or {@code
+         * exclusive}, it cannot be changed.
          */
         @SerializedName("tax_behavior")
         TaxBehavior taxBehavior;
@@ -4084,9 +4093,12 @@ public class SubscriptionScheduleCreateParams extends ApiRequestParams {
           }
 
           /**
-           * Specifies whether the price is considered inclusive of taxes or exclusive of taxes. One
-           * of {@code inclusive}, {@code exclusive}, or {@code unspecified}. Once specified as
-           * either {@code inclusive} or {@code exclusive}, it cannot be changed.
+           * Only required if a <a
+           * href="https://stripe.com/docs/tax/products-prices-tax-categories-tax-behavior#setting-a-default-tax-behavior-(recommended)">default
+           * tax behavior</a> was not provided in the Stripe Tax settings. Specifies whether the
+           * price is considered inclusive of taxes or exclusive of taxes. One of {@code inclusive},
+           * {@code exclusive}, or {@code unspecified}. Once specified as either {@code inclusive}
+           * or {@code exclusive}, it cannot be changed.
            */
           public Builder setTaxBehavior(
               SubscriptionScheduleCreateParams.Phase.Item.PriceData.TaxBehavior taxBehavior) {
