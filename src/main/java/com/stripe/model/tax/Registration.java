@@ -93,12 +93,12 @@ public class Registration extends ApiResource implements HasId {
   @SerializedName("type")
   String type;
 
-  /** Creates a new Tax <code>Registration</code> object. */
+  /** Creates a new Tax {@code Registration} object. */
   public static Registration create(Map<String, Object> params) throws StripeException {
     return create(params, (RequestOptions) null);
   }
 
-  /** Creates a new Tax <code>Registration</code> object. */
+  /** Creates a new Tax {@code Registration} object. */
   public static Registration create(Map<String, Object> params, RequestOptions options)
       throws StripeException {
     String url = ApiResource.fullUrl(Stripe.getApiBase(), options, "/v1/tax/registrations");
@@ -106,12 +106,12 @@ public class Registration extends ApiResource implements HasId {
         ApiResource.RequestMethod.POST, url, params, Registration.class, options);
   }
 
-  /** Creates a new Tax <code>Registration</code> object. */
+  /** Creates a new Tax {@code Registration} object. */
   public static Registration create(RegistrationCreateParams params) throws StripeException {
     return create(params, (RequestOptions) null);
   }
 
-  /** Creates a new Tax <code>Registration</code> object. */
+  /** Creates a new Tax {@code Registration} object. */
   public static Registration create(RegistrationCreateParams params, RequestOptions options)
       throws StripeException {
     String url = ApiResource.fullUrl(Stripe.getApiBase(), options, "/v1/tax/registrations");
@@ -119,12 +119,12 @@ public class Registration extends ApiResource implements HasId {
         ApiResource.RequestMethod.POST, url, params, Registration.class, options);
   }
 
-  /** Returns a list of Tax <code>Registration</code> objects. */
+  /** Returns a list of Tax {@code Registration} objects. */
   public static RegistrationCollection list(Map<String, Object> params) throws StripeException {
     return list(params, (RequestOptions) null);
   }
 
-  /** Returns a list of Tax <code>Registration</code> objects. */
+  /** Returns a list of Tax {@code Registration} objects. */
   public static RegistrationCollection list(Map<String, Object> params, RequestOptions options)
       throws StripeException {
     String url = ApiResource.fullUrl(Stripe.getApiBase(), options, "/v1/tax/registrations");
@@ -132,12 +132,12 @@ public class Registration extends ApiResource implements HasId {
         ApiResource.RequestMethod.GET, url, params, RegistrationCollection.class, options);
   }
 
-  /** Returns a list of Tax <code>Registration</code> objects. */
+  /** Returns a list of Tax {@code Registration} objects. */
   public static RegistrationCollection list(RegistrationListParams params) throws StripeException {
     return list(params, (RequestOptions) null);
   }
 
-  /** Returns a list of Tax <code>Registration</code> objects. */
+  /** Returns a list of Tax {@code Registration} objects. */
   public static RegistrationCollection list(RegistrationListParams params, RequestOptions options)
       throws StripeException {
     String url = ApiResource.fullUrl(Stripe.getApiBase(), options, "/v1/tax/registrations");
@@ -146,20 +146,20 @@ public class Registration extends ApiResource implements HasId {
   }
 
   /**
-   * Updates an existing Tax <code>Registration</code> object.
+   * Updates an existing Tax {@code Registration} object.
    *
    * <p>A registration cannot be deleted after it has been created. If you wish to end a
-   * registration you may do so by setting <code>expires_at</code>.
+   * registration you may do so by setting {@code expires_at}.
    */
   public Registration update(Map<String, Object> params) throws StripeException {
     return update(params, (RequestOptions) null);
   }
 
   /**
-   * Updates an existing Tax <code>Registration</code> object.
+   * Updates an existing Tax {@code Registration} object.
    *
    * <p>A registration cannot be deleted after it has been created. If you wish to end a
-   * registration you may do so by setting <code>expires_at</code>.
+   * registration you may do so by setting {@code expires_at}.
    */
   public Registration update(Map<String, Object> params, RequestOptions options)
       throws StripeException {
@@ -173,20 +173,20 @@ public class Registration extends ApiResource implements HasId {
   }
 
   /**
-   * Updates an existing Tax <code>Registration</code> object.
+   * Updates an existing Tax {@code Registration} object.
    *
    * <p>A registration cannot be deleted after it has been created. If you wish to end a
-   * registration you may do so by setting <code>expires_at</code>.
+   * registration you may do so by setting {@code expires_at}.
    */
   public Registration update(RegistrationUpdateParams params) throws StripeException {
     return update(params, (RequestOptions) null);
   }
 
   /**
-   * Updates an existing Tax <code>Registration</code> object.
+   * Updates an existing Tax {@code Registration} object.
    *
    * <p>A registration cannot be deleted after it has been created. If you wish to end a
-   * registration you may do so by setting <code>expires_at</code>.
+   * registration you may do so by setting {@code expires_at}.
    */
   public Registration update(RegistrationUpdateParams params, RequestOptions options)
       throws StripeException {

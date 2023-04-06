@@ -11,13 +11,14 @@ import lombok.Getter;
 
 @Getter
 public class InboundTransferCreateParams extends ApiRequestParams {
-  /** Amount (in cents) to be transferred. */
+  /** <strong>Required.</strong> Amount (in cents) to be transferred. */
   @SerializedName("amount")
   Long amount;
 
   /**
-   * Three-letter <a href="https://www.iso.org/iso-4217-currency-codes.html">ISO currency code</a>,
-   * in lowercase. Must be a <a href="https://stripe.com/docs/currencies">supported currency</a>.
+   * <strong>Required.</strong> Three-letter <a
+   * href="https://www.iso.org/iso-4217-currency-codes.html">ISO currency code</a>, in lowercase.
+   * Must be a <a href="https://stripe.com/docs/currencies">supported currency</a>.
    */
   @SerializedName("currency")
   String currency;
@@ -39,7 +40,7 @@ public class InboundTransferCreateParams extends ApiRequestParams {
   @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
   Map<String, Object> extraParams;
 
-  /** The FinancialAccount to send funds to. */
+  /** <strong>Required.</strong> The FinancialAccount to send funds to. */
   @SerializedName("financial_account")
   String financialAccount;
 
@@ -52,7 +53,7 @@ public class InboundTransferCreateParams extends ApiRequestParams {
   @SerializedName("metadata")
   Map<String, String> metadata;
 
-  /** The origin payment method to be debited for the InboundTransfer. */
+  /** <strong>Required.</strong> The origin payment method to be debited for the InboundTransfer. */
   @SerializedName("origin_payment_method")
   String originPaymentMethod;
 
@@ -118,16 +119,16 @@ public class InboundTransferCreateParams extends ApiRequestParams {
           this.statementDescriptor);
     }
 
-    /** Amount (in cents) to be transferred. */
+    /** <strong>Required.</strong> Amount (in cents) to be transferred. */
     public Builder setAmount(Long amount) {
       this.amount = amount;
       return this;
     }
 
     /**
-     * Three-letter <a href="https://www.iso.org/iso-4217-currency-codes.html">ISO currency
-     * code</a>, in lowercase. Must be a <a href="https://stripe.com/docs/currencies">supported
-     * currency</a>.
+     * <strong>Required.</strong> Three-letter <a
+     * href="https://www.iso.org/iso-4217-currency-codes.html">ISO currency code</a>, in lowercase.
+     * Must be a <a href="https://stripe.com/docs/currencies">supported currency</a>.
      */
     public Builder setCurrency(String currency) {
       this.currency = currency;
@@ -192,7 +193,7 @@ public class InboundTransferCreateParams extends ApiRequestParams {
       return this;
     }
 
-    /** The FinancialAccount to send funds to. */
+    /** <strong>Required.</strong> The FinancialAccount to send funds to. */
     public Builder setFinancialAccount(String financialAccount) {
       this.financialAccount = financialAccount;
       return this;
@@ -224,7 +225,9 @@ public class InboundTransferCreateParams extends ApiRequestParams {
       return this;
     }
 
-    /** The origin payment method to be debited for the InboundTransfer. */
+    /**
+     * <strong>Required.</strong> The origin payment method to be debited for the InboundTransfer.
+     */
     public Builder setOriginPaymentMethod(String originPaymentMethod) {
       this.originPaymentMethod = originPaymentMethod;
       return this;

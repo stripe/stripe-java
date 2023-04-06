@@ -101,7 +101,7 @@ public class SubscriptionCreateParams extends ApiRequestParams {
   @SerializedName("currency")
   String currency;
 
-  /** The identifier of the customer to subscribe. */
+  /** <strong>Required.</strong> The identifier of the customer to subscribe. */
   @SerializedName("customer")
   String customer;
 
@@ -627,7 +627,7 @@ public class SubscriptionCreateParams extends ApiRequestParams {
       return this;
     }
 
-    /** The identifier of the customer to subscribe. */
+    /** <strong>Required.</strong> The identifier of the customer to subscribe. */
     public Builder setCustomer(String customer) {
       this.customer = customer;
       return this;
@@ -1400,7 +1400,10 @@ public class SubscriptionCreateParams extends ApiRequestParams {
         @SerializedName("timestamp")
         Long timestamp;
 
-        /** The type of calculation made to determine when the discount ends. */
+        /**
+         * <strong>Required.</strong> The type of calculation made to determine when the discount
+         * ends.
+         */
         @SerializedName("type")
         Type type;
 
@@ -1474,7 +1477,10 @@ public class SubscriptionCreateParams extends ApiRequestParams {
             return this;
           }
 
-          /** The type of calculation made to determine when the discount ends. */
+          /**
+           * <strong>Required.</strong> The type of calculation made to determine when the discount
+           * ends.
+           */
           public Builder setType(
               SubscriptionCreateParams.AddInvoiceItem.Discount.DiscountEnd.Type type) {
             this.type = type;
@@ -1495,15 +1501,15 @@ public class SubscriptionCreateParams extends ApiRequestParams {
           Map<String, Object> extraParams;
 
           /**
-           * Specifies a type of interval unit. Either {@code day}, {@code week}, {@code month} or
-           * {@code year}.
+           * <strong>Required.</strong> Specifies a type of interval unit. Either {@code day},
+           * {@code week}, {@code month} or {@code year}.
            */
           @SerializedName("interval")
           Interval interval;
 
           /**
-           * The number of intervals, as an whole number greater than 0. Stripe multiplies this by
-           * the interval type to get the overall duration.
+           * <strong>Required.</strong> The number of intervals, as an whole number greater than 0.
+           * Stripe multiplies this by the interval type to get the overall duration.
            */
           @SerializedName("interval_count")
           Long intervalCount;
@@ -1562,8 +1568,8 @@ public class SubscriptionCreateParams extends ApiRequestParams {
             }
 
             /**
-             * Specifies a type of interval unit. Either {@code day}, {@code week}, {@code month} or
-             * {@code year}.
+             * <strong>Required.</strong> Specifies a type of interval unit. Either {@code day},
+             * {@code week}, {@code month} or {@code year}.
              */
             public Builder setInterval(
                 SubscriptionCreateParams.AddInvoiceItem.Discount.DiscountEnd.Duration.Interval
@@ -1573,8 +1579,8 @@ public class SubscriptionCreateParams extends ApiRequestParams {
             }
 
             /**
-             * The number of intervals, as an whole number greater than 0. Stripe multiplies this by
-             * the interval type to get the overall duration.
+             * <strong>Required.</strong> The number of intervals, as an whole number greater than
+             * 0. Stripe multiplies this by the interval type to get the overall duration.
              */
             public Builder setIntervalCount(Long intervalCount) {
               this.intervalCount = intervalCount;
@@ -1624,9 +1630,9 @@ public class SubscriptionCreateParams extends ApiRequestParams {
     @Getter
     public static class PriceData {
       /**
-       * Three-letter <a href="https://www.iso.org/iso-4217-currency-codes.html">ISO currency
-       * code</a>, in lowercase. Must be a <a href="https://stripe.com/docs/currencies">supported
-       * currency</a>.
+       * <strong>Required.</strong> Three-letter <a
+       * href="https://www.iso.org/iso-4217-currency-codes.html">ISO currency code</a>, in
+       * lowercase. Must be a <a href="https://stripe.com/docs/currencies">supported currency</a>.
        */
       @SerializedName("currency")
       String currency;
@@ -1640,14 +1646,17 @@ public class SubscriptionCreateParams extends ApiRequestParams {
       @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
       Map<String, Object> extraParams;
 
-      /** The ID of the product that this price will belong to. */
+      /** <strong>Required.</strong> The ID of the product that this price will belong to. */
       @SerializedName("product")
       String product;
 
       /**
-       * Specifies whether the price is considered inclusive of taxes or exclusive of taxes. One of
-       * {@code inclusive}, {@code exclusive}, or {@code unspecified}. Once specified as either
-       * {@code inclusive} or {@code exclusive}, it cannot be changed.
+       * Only required if a <a
+       * href="https://stripe.com/docs/tax/products-prices-tax-categories-tax-behavior#setting-a-default-tax-behavior-(recommended)">default
+       * tax behavior</a> was not provided in the Stripe Tax settings. Specifies whether the price
+       * is considered inclusive of taxes or exclusive of taxes. One of {@code inclusive}, {@code
+       * exclusive}, or {@code unspecified}. Once specified as either {@code inclusive} or {@code
+       * exclusive}, it cannot be changed.
        */
       @SerializedName("tax_behavior")
       TaxBehavior taxBehavior;
@@ -1711,9 +1720,9 @@ public class SubscriptionCreateParams extends ApiRequestParams {
         }
 
         /**
-         * Three-letter <a href="https://www.iso.org/iso-4217-currency-codes.html">ISO currency
-         * code</a>, in lowercase. Must be a <a href="https://stripe.com/docs/currencies">supported
-         * currency</a>.
+         * <strong>Required.</strong> Three-letter <a
+         * href="https://www.iso.org/iso-4217-currency-codes.html">ISO currency code</a>, in
+         * lowercase. Must be a <a href="https://stripe.com/docs/currencies">supported currency</a>.
          */
         public Builder setCurrency(String currency) {
           this.currency = currency;
@@ -1748,16 +1757,19 @@ public class SubscriptionCreateParams extends ApiRequestParams {
           return this;
         }
 
-        /** The ID of the product that this price will belong to. */
+        /** <strong>Required.</strong> The ID of the product that this price will belong to. */
         public Builder setProduct(String product) {
           this.product = product;
           return this;
         }
 
         /**
-         * Specifies whether the price is considered inclusive of taxes or exclusive of taxes. One
-         * of {@code inclusive}, {@code exclusive}, or {@code unspecified}. Once specified as either
-         * {@code inclusive} or {@code exclusive}, it cannot be changed.
+         * Only required if a <a
+         * href="https://stripe.com/docs/tax/products-prices-tax-categories-tax-behavior#setting-a-default-tax-behavior-(recommended)">default
+         * tax behavior</a> was not provided in the Stripe Tax settings. Specifies whether the price
+         * is considered inclusive of taxes or exclusive of taxes. One of {@code inclusive}, {@code
+         * exclusive}, or {@code unspecified}. Once specified as either {@code inclusive} or {@code
+         * exclusive}, it cannot be changed.
          */
         public Builder setTaxBehavior(
             SubscriptionCreateParams.AddInvoiceItem.PriceData.TaxBehavior taxBehavior) {
@@ -1808,8 +1820,8 @@ public class SubscriptionCreateParams extends ApiRequestParams {
   @Getter
   public static class AutomaticTax {
     /**
-     * Enabled automatic tax calculation which will automatically compute tax rates on all invoices
-     * generated by the subscription.
+     * <strong>Required.</strong> Enabled automatic tax calculation which will automatically compute
+     * tax rates on all invoices generated by the subscription.
      */
     @SerializedName("enabled")
     Boolean enabled;
@@ -1843,8 +1855,8 @@ public class SubscriptionCreateParams extends ApiRequestParams {
       }
 
       /**
-       * Enabled automatic tax calculation which will automatically compute tax rates on all
-       * invoices generated by the subscription.
+       * <strong>Required.</strong> Enabled automatic tax calculation which will automatically
+       * compute tax rates on all invoices generated by the subscription.
        */
       public Builder setEnabled(Boolean enabled) {
         this.enabled = enabled;
@@ -2085,7 +2097,10 @@ public class SubscriptionCreateParams extends ApiRequestParams {
       @SerializedName("timestamp")
       Long timestamp;
 
-      /** The type of calculation made to determine when the discount ends. */
+      /**
+       * <strong>Required.</strong> The type of calculation made to determine when the discount
+       * ends.
+       */
       @SerializedName("type")
       Type type;
 
@@ -2157,7 +2172,10 @@ public class SubscriptionCreateParams extends ApiRequestParams {
           return this;
         }
 
-        /** The type of calculation made to determine when the discount ends. */
+        /**
+         * <strong>Required.</strong> The type of calculation made to determine when the discount
+         * ends.
+         */
         public Builder setType(SubscriptionCreateParams.Discount.DiscountEnd.Type type) {
           this.type = type;
           return this;
@@ -2177,15 +2195,15 @@ public class SubscriptionCreateParams extends ApiRequestParams {
         Map<String, Object> extraParams;
 
         /**
-         * Specifies a type of interval unit. Either {@code day}, {@code week}, {@code month} or
-         * {@code year}.
+         * <strong>Required.</strong> Specifies a type of interval unit. Either {@code day}, {@code
+         * week}, {@code month} or {@code year}.
          */
         @SerializedName("interval")
         Interval interval;
 
         /**
-         * The number of intervals, as an whole number greater than 0. Stripe multiplies this by the
-         * interval type to get the overall duration.
+         * <strong>Required.</strong> The number of intervals, as an whole number greater than 0.
+         * Stripe multiplies this by the interval type to get the overall duration.
          */
         @SerializedName("interval_count")
         Long intervalCount;
@@ -2242,8 +2260,8 @@ public class SubscriptionCreateParams extends ApiRequestParams {
           }
 
           /**
-           * Specifies a type of interval unit. Either {@code day}, {@code week}, {@code month} or
-           * {@code year}.
+           * <strong>Required.</strong> Specifies a type of interval unit. Either {@code day},
+           * {@code week}, {@code month} or {@code year}.
            */
           public Builder setInterval(
               SubscriptionCreateParams.Discount.DiscountEnd.Duration.Interval interval) {
@@ -2252,8 +2270,8 @@ public class SubscriptionCreateParams extends ApiRequestParams {
           }
 
           /**
-           * The number of intervals, as an whole number greater than 0. Stripe multiplies this by
-           * the interval type to get the overall duration.
+           * <strong>Required.</strong> The number of intervals, as an whole number greater than 0.
+           * Stripe multiplies this by the interval type to get the overall duration.
            */
           public Builder setIntervalCount(Long intervalCount) {
             this.intervalCount = intervalCount;
@@ -2638,8 +2656,8 @@ public class SubscriptionCreateParams extends ApiRequestParams {
       Map<String, Object> extraParams;
 
       /**
-       * Number of units that meets the billing threshold to advance the subscription to a new
-       * billing period (e.g., it takes 10 $5 units to meet a $50 <a
+       * <strong>Required.</strong> Number of units that meets the billing threshold to advance the
+       * subscription to a new billing period (e.g., it takes 10 $5 units to meet a $50 <a
        * href="https://stripe.com/docs/api/subscriptions/update#update_subscription-billing_thresholds-amount_gte">monetary
        * threshold</a>)
        */
@@ -2695,8 +2713,8 @@ public class SubscriptionCreateParams extends ApiRequestParams {
         }
 
         /**
-         * Number of units that meets the billing threshold to advance the subscription to a new
-         * billing period (e.g., it takes 10 $5 units to meet a $50 <a
+         * <strong>Required.</strong> Number of units that meets the billing threshold to advance
+         * the subscription to a new billing period (e.g., it takes 10 $5 units to meet a $50 <a
          * href="https://stripe.com/docs/api/subscriptions/update#update_subscription-billing_thresholds-amount_gte">monetary
          * threshold</a>)
          */
@@ -2828,7 +2846,10 @@ public class SubscriptionCreateParams extends ApiRequestParams {
         @SerializedName("timestamp")
         Long timestamp;
 
-        /** The type of calculation made to determine when the discount ends. */
+        /**
+         * <strong>Required.</strong> The type of calculation made to determine when the discount
+         * ends.
+         */
         @SerializedName("type")
         Type type;
 
@@ -2900,7 +2921,10 @@ public class SubscriptionCreateParams extends ApiRequestParams {
             return this;
           }
 
-          /** The type of calculation made to determine when the discount ends. */
+          /**
+           * <strong>Required.</strong> The type of calculation made to determine when the discount
+           * ends.
+           */
           public Builder setType(SubscriptionCreateParams.Item.Discount.DiscountEnd.Type type) {
             this.type = type;
             return this;
@@ -2920,15 +2944,15 @@ public class SubscriptionCreateParams extends ApiRequestParams {
           Map<String, Object> extraParams;
 
           /**
-           * Specifies a type of interval unit. Either {@code day}, {@code week}, {@code month} or
-           * {@code year}.
+           * <strong>Required.</strong> Specifies a type of interval unit. Either {@code day},
+           * {@code week}, {@code month} or {@code year}.
            */
           @SerializedName("interval")
           Interval interval;
 
           /**
-           * The number of intervals, as an whole number greater than 0. Stripe multiplies this by
-           * the interval type to get the overall duration.
+           * <strong>Required.</strong> The number of intervals, as an whole number greater than 0.
+           * Stripe multiplies this by the interval type to get the overall duration.
            */
           @SerializedName("interval_count")
           Long intervalCount;
@@ -2987,8 +3011,8 @@ public class SubscriptionCreateParams extends ApiRequestParams {
             }
 
             /**
-             * Specifies a type of interval unit. Either {@code day}, {@code week}, {@code month} or
-             * {@code year}.
+             * <strong>Required.</strong> Specifies a type of interval unit. Either {@code day},
+             * {@code week}, {@code month} or {@code year}.
              */
             public Builder setInterval(
                 SubscriptionCreateParams.Item.Discount.DiscountEnd.Duration.Interval interval) {
@@ -2997,8 +3021,8 @@ public class SubscriptionCreateParams extends ApiRequestParams {
             }
 
             /**
-             * The number of intervals, as an whole number greater than 0. Stripe multiplies this by
-             * the interval type to get the overall duration.
+             * <strong>Required.</strong> The number of intervals, as an whole number greater than
+             * 0. Stripe multiplies this by the interval type to get the overall duration.
              */
             public Builder setIntervalCount(Long intervalCount) {
               this.intervalCount = intervalCount;
@@ -3048,9 +3072,9 @@ public class SubscriptionCreateParams extends ApiRequestParams {
     @Getter
     public static class PriceData {
       /**
-       * Three-letter <a href="https://www.iso.org/iso-4217-currency-codes.html">ISO currency
-       * code</a>, in lowercase. Must be a <a href="https://stripe.com/docs/currencies">supported
-       * currency</a>.
+       * <strong>Required.</strong> Three-letter <a
+       * href="https://www.iso.org/iso-4217-currency-codes.html">ISO currency code</a>, in
+       * lowercase. Must be a <a href="https://stripe.com/docs/currencies">supported currency</a>.
        */
       @SerializedName("currency")
       String currency;
@@ -3064,20 +3088,24 @@ public class SubscriptionCreateParams extends ApiRequestParams {
       @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
       Map<String, Object> extraParams;
 
-      /** The ID of the product that this price will belong to. */
+      /** <strong>Required.</strong> The ID of the product that this price will belong to. */
       @SerializedName("product")
       String product;
 
       /**
-       * The recurring components of a price such as {@code interval} and {@code interval_count}.
+       * <strong>Required.</strong> The recurring components of a price such as {@code interval} and
+       * {@code interval_count}.
        */
       @SerializedName("recurring")
       Recurring recurring;
 
       /**
-       * Specifies whether the price is considered inclusive of taxes or exclusive of taxes. One of
-       * {@code inclusive}, {@code exclusive}, or {@code unspecified}. Once specified as either
-       * {@code inclusive} or {@code exclusive}, it cannot be changed.
+       * Only required if a <a
+       * href="https://stripe.com/docs/tax/products-prices-tax-categories-tax-behavior#setting-a-default-tax-behavior-(recommended)">default
+       * tax behavior</a> was not provided in the Stripe Tax settings. Specifies whether the price
+       * is considered inclusive of taxes or exclusive of taxes. One of {@code inclusive}, {@code
+       * exclusive}, or {@code unspecified}. Once specified as either {@code inclusive} or {@code
+       * exclusive}, it cannot be changed.
        */
       @SerializedName("tax_behavior")
       TaxBehavior taxBehavior;
@@ -3146,9 +3174,9 @@ public class SubscriptionCreateParams extends ApiRequestParams {
         }
 
         /**
-         * Three-letter <a href="https://www.iso.org/iso-4217-currency-codes.html">ISO currency
-         * code</a>, in lowercase. Must be a <a href="https://stripe.com/docs/currencies">supported
-         * currency</a>.
+         * <strong>Required.</strong> Three-letter <a
+         * href="https://www.iso.org/iso-4217-currency-codes.html">ISO currency code</a>, in
+         * lowercase. Must be a <a href="https://stripe.com/docs/currencies">supported currency</a>.
          */
         public Builder setCurrency(String currency) {
           this.currency = currency;
@@ -3183,14 +3211,15 @@ public class SubscriptionCreateParams extends ApiRequestParams {
           return this;
         }
 
-        /** The ID of the product that this price will belong to. */
+        /** <strong>Required.</strong> The ID of the product that this price will belong to. */
         public Builder setProduct(String product) {
           this.product = product;
           return this;
         }
 
         /**
-         * The recurring components of a price such as {@code interval} and {@code interval_count}.
+         * <strong>Required.</strong> The recurring components of a price such as {@code interval}
+         * and {@code interval_count}.
          */
         public Builder setRecurring(SubscriptionCreateParams.Item.PriceData.Recurring recurring) {
           this.recurring = recurring;
@@ -3198,9 +3227,12 @@ public class SubscriptionCreateParams extends ApiRequestParams {
         }
 
         /**
-         * Specifies whether the price is considered inclusive of taxes or exclusive of taxes. One
-         * of {@code inclusive}, {@code exclusive}, or {@code unspecified}. Once specified as either
-         * {@code inclusive} or {@code exclusive}, it cannot be changed.
+         * Only required if a <a
+         * href="https://stripe.com/docs/tax/products-prices-tax-categories-tax-behavior#setting-a-default-tax-behavior-(recommended)">default
+         * tax behavior</a> was not provided in the Stripe Tax settings. Specifies whether the price
+         * is considered inclusive of taxes or exclusive of taxes. One of {@code inclusive}, {@code
+         * exclusive}, or {@code unspecified}. Once specified as either {@code inclusive} or {@code
+         * exclusive}, it cannot be changed.
          */
         public Builder setTaxBehavior(
             SubscriptionCreateParams.Item.PriceData.TaxBehavior taxBehavior) {
@@ -3241,8 +3273,8 @@ public class SubscriptionCreateParams extends ApiRequestParams {
         Map<String, Object> extraParams;
 
         /**
-         * Specifies billing frequency. Either {@code day}, {@code week}, {@code month} or {@code
-         * year}.
+         * <strong>Required.</strong> Specifies billing frequency. Either {@code day}, {@code week},
+         * {@code month} or {@code year}.
          */
         @SerializedName("interval")
         Interval interval;
@@ -3307,8 +3339,8 @@ public class SubscriptionCreateParams extends ApiRequestParams {
           }
 
           /**
-           * Specifies billing frequency. Either {@code day}, {@code week}, {@code month} or {@code
-           * year}.
+           * <strong>Required.</strong> Specifies billing frequency. Either {@code day}, {@code
+           * week}, {@code month} or {@code year}.
            */
           public Builder setInterval(
               SubscriptionCreateParams.Item.PriceData.Recurring.Interval interval) {
@@ -3386,7 +3418,7 @@ public class SubscriptionCreateParams extends ApiRequestParams {
       @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
       Map<String, Object> extraParams;
 
-      /** Determines the type of trial for this item. */
+      /** <strong>Required.</strong> Determines the type of trial for this item. */
       @SerializedName("type")
       Type type;
 
@@ -3467,7 +3499,7 @@ public class SubscriptionCreateParams extends ApiRequestParams {
           return this;
         }
 
-        /** Determines the type of trial for this item. */
+        /** <strong>Required.</strong> Determines the type of trial for this item. */
         public Builder setType(SubscriptionCreateParams.Item.Trial.Type type) {
           this.type = type;
           return this;
@@ -4754,8 +4786,9 @@ public class SubscriptionCreateParams extends ApiRequestParams {
           @Getter
           public static class EuBankTransfer {
             /**
-             * The desired country code of the bank account information. Permitted values include:
-             * {@code BE}, {@code DE}, {@code ES}, {@code FR}, {@code IE}, or {@code NL}.
+             * <strong>Required.</strong> The desired country code of the bank account information.
+             * Permitted values include: {@code BE}, {@code DE}, {@code ES}, {@code FR}, {@code IE},
+             * or {@code NL}.
              */
             @SerializedName("country")
             String country;
@@ -4793,8 +4826,9 @@ public class SubscriptionCreateParams extends ApiRequestParams {
               }
 
               /**
-               * The desired country code of the bank account information. Permitted values include:
-               * {@code BE}, {@code DE}, {@code ES}, {@code FR}, {@code IE}, or {@code NL}.
+               * <strong>Required.</strong> The desired country code of the bank account
+               * information. Permitted values include: {@code BE}, {@code DE}, {@code ES}, {@code
+               * FR}, {@code IE}, or {@code NL}.
                */
               public Builder setCountry(String country) {
                 this.country = country;
@@ -5337,8 +5371,8 @@ public class SubscriptionCreateParams extends ApiRequestParams {
     Map<String, Object> extraParams;
 
     /**
-     * Specifies invoicing frequency. Either {@code day}, {@code week}, {@code month} or {@code
-     * year}.
+     * <strong>Required.</strong> Specifies invoicing frequency. Either {@code day}, {@code week},
+     * {@code month} or {@code year}.
      */
     @SerializedName("interval")
     Interval interval;
@@ -5404,8 +5438,8 @@ public class SubscriptionCreateParams extends ApiRequestParams {
       }
 
       /**
-       * Specifies invoicing frequency. Either {@code day}, {@code week}, {@code month} or {@code
-       * year}.
+       * <strong>Required.</strong> Specifies invoicing frequency. Either {@code day}, {@code week},
+       * {@code month} or {@code year}.
        */
       public Builder setInterval(
           SubscriptionCreateParams.PendingInvoiceItemInterval.Interval interval) {
@@ -5457,7 +5491,9 @@ public class SubscriptionCreateParams extends ApiRequestParams {
     @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
     Map<String, Object> extraParams;
 
-    /** This is used to determine the number of billing cycles to prebill. */
+    /**
+     * <strong>Required.</strong> This is used to determine the number of billing cycles to prebill.
+     */
     @SerializedName("iterations")
     Long iterations;
 
@@ -5518,7 +5554,10 @@ public class SubscriptionCreateParams extends ApiRequestParams {
         return this;
       }
 
-      /** This is used to determine the number of billing cycles to prebill. */
+      /**
+       * <strong>Required.</strong> This is used to determine the number of billing cycles to
+       * prebill.
+       */
       public Builder setIterations(Long iterations) {
         this.iterations = iterations;
         return this;
@@ -5561,7 +5600,7 @@ public class SubscriptionCreateParams extends ApiRequestParams {
     @SerializedName("amount_percent")
     BigDecimal amountPercent;
 
-    /** ID of an existing, connected Stripe account. */
+    /** <strong>Required.</strong> ID of an existing, connected Stripe account. */
     @SerializedName("destination")
     String destination;
 
@@ -5608,7 +5647,7 @@ public class SubscriptionCreateParams extends ApiRequestParams {
         return this;
       }
 
-      /** ID of an existing, connected Stripe account. */
+      /** <strong>Required.</strong> ID of an existing, connected Stripe account. */
       public Builder setDestination(String destination) {
         this.destination = destination;
         return this;
@@ -5644,7 +5683,10 @@ public class SubscriptionCreateParams extends ApiRequestParams {
 
   @Getter
   public static class TrialSettings {
-    /** Defines how the subscription should behave when the user's free trial ends. */
+    /**
+     * <strong>Required.</strong> Defines how the subscription should behave when the user's free
+     * trial ends.
+     */
     @SerializedName("end_behavior")
     EndBehavior endBehavior;
 
@@ -5676,7 +5718,10 @@ public class SubscriptionCreateParams extends ApiRequestParams {
         return new SubscriptionCreateParams.TrialSettings(this.endBehavior, this.extraParams);
       }
 
-      /** Defines how the subscription should behave when the user's free trial ends. */
+      /**
+       * <strong>Required.</strong> Defines how the subscription should behave when the user's free
+       * trial ends.
+       */
       public Builder setEndBehavior(
           SubscriptionCreateParams.TrialSettings.EndBehavior endBehavior) {
         this.endBehavior = endBehavior;
@@ -5722,8 +5767,8 @@ public class SubscriptionCreateParams extends ApiRequestParams {
       Map<String, Object> extraParams;
 
       /**
-       * Indicates how the subscription should change when the trial ends if the user did not
-       * provide a payment method.
+       * <strong>Required.</strong> Indicates how the subscription should change when the trial ends
+       * if the user did not provide a payment method.
        */
       @SerializedName("missing_payment_method")
       MissingPaymentMethod missingPaymentMethod;
@@ -5778,8 +5823,8 @@ public class SubscriptionCreateParams extends ApiRequestParams {
         }
 
         /**
-         * Indicates how the subscription should change when the trial ends if the user did not
-         * provide a payment method.
+         * <strong>Required.</strong> Indicates how the subscription should change when the trial
+         * ends if the user did not provide a payment method.
          */
         public Builder setMissingPaymentMethod(
             SubscriptionCreateParams.TrialSettings.EndBehavior.MissingPaymentMethod

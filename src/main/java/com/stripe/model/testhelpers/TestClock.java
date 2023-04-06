@@ -77,7 +77,7 @@ public class TestClock extends ApiResource implements HasId {
 
   /**
    * Starts advancing a test clock to a specified time in the future. Advancement is done when
-   * status changes to <code>Ready</code>.
+   * status changes to {@code Ready}.
    */
   public TestClock advance(Map<String, Object> params) throws StripeException {
     return advance(params, (RequestOptions) null);
@@ -85,7 +85,7 @@ public class TestClock extends ApiResource implements HasId {
 
   /**
    * Starts advancing a test clock to a specified time in the future. Advancement is done when
-   * status changes to <code>Ready</code>.
+   * status changes to {@code Ready}.
    */
   public TestClock advance(Map<String, Object> params, RequestOptions options)
       throws StripeException {
@@ -101,7 +101,7 @@ public class TestClock extends ApiResource implements HasId {
 
   /**
    * Starts advancing a test clock to a specified time in the future. Advancement is done when
-   * status changes to <code>Ready</code>.
+   * status changes to {@code Ready}.
    */
   public TestClock advance(TestClockAdvanceParams params) throws StripeException {
     return advance(params, (RequestOptions) null);
@@ -109,7 +109,7 @@ public class TestClock extends ApiResource implements HasId {
 
   /**
    * Starts advancing a test clock to a specified time in the future. Advancement is done when
-   * status changes to <code>Ready</code>.
+   * status changes to {@code Ready}.
    */
   public TestClock advance(TestClockAdvanceParams params, RequestOptions options)
       throws StripeException {

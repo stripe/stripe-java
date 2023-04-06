@@ -260,16 +260,16 @@ public class Transaction extends ApiResource
   }
 
   /**
-   * Returns a list of Issuing <code>Transaction</code> objects. The objects are sorted in
-   * descending order by creation date, with the most recently created object appearing first.
+   * Returns a list of Issuing {@code Transaction} objects. The objects are sorted in descending
+   * order by creation date, with the most recently created object appearing first.
    */
   public static TransactionCollection list(Map<String, Object> params) throws StripeException {
     return list(params, (RequestOptions) null);
   }
 
   /**
-   * Returns a list of Issuing <code>Transaction</code> objects. The objects are sorted in
-   * descending order by creation date, with the most recently created object appearing first.
+   * Returns a list of Issuing {@code Transaction} objects. The objects are sorted in descending
+   * order by creation date, with the most recently created object appearing first.
    */
   public static TransactionCollection list(Map<String, Object> params, RequestOptions options)
       throws StripeException {
@@ -279,16 +279,16 @@ public class Transaction extends ApiResource
   }
 
   /**
-   * Returns a list of Issuing <code>Transaction</code> objects. The objects are sorted in
-   * descending order by creation date, with the most recently created object appearing first.
+   * Returns a list of Issuing {@code Transaction} objects. The objects are sorted in descending
+   * order by creation date, with the most recently created object appearing first.
    */
   public static TransactionCollection list(TransactionListParams params) throws StripeException {
     return list(params, (RequestOptions) null);
   }
 
   /**
-   * Returns a list of Issuing <code>Transaction</code> objects. The objects are sorted in
-   * descending order by creation date, with the most recently created object appearing first.
+   * Returns a list of Issuing {@code Transaction} objects. The objects are sorted in descending
+   * order by creation date, with the most recently created object appearing first.
    */
   public static TransactionCollection list(TransactionListParams params, RequestOptions options)
       throws StripeException {
@@ -297,18 +297,18 @@ public class Transaction extends ApiResource
         ApiResource.RequestMethod.GET, url, params, TransactionCollection.class, options);
   }
 
-  /** Retrieves an Issuing <code>Transaction</code> object. */
+  /** Retrieves an Issuing {@code Transaction} object. */
   public static Transaction retrieve(String transaction) throws StripeException {
     return retrieve(transaction, (Map<String, Object>) null, (RequestOptions) null);
   }
 
-  /** Retrieves an Issuing <code>Transaction</code> object. */
+  /** Retrieves an Issuing {@code Transaction} object. */
   public static Transaction retrieve(String transaction, RequestOptions options)
       throws StripeException {
     return retrieve(transaction, (Map<String, Object>) null, options);
   }
 
-  /** Retrieves an Issuing <code>Transaction</code> object. */
+  /** Retrieves an Issuing {@code Transaction} object. */
   public static Transaction retrieve(
       String transaction, Map<String, Object> params, RequestOptions options)
       throws StripeException {
@@ -321,7 +321,7 @@ public class Transaction extends ApiResource
         ApiResource.RequestMethod.GET, url, params, Transaction.class, options);
   }
 
-  /** Retrieves an Issuing <code>Transaction</code> object. */
+  /** Retrieves an Issuing {@code Transaction} object. */
   public static Transaction retrieve(
       String transaction, TransactionRetrieveParams params, RequestOptions options)
       throws StripeException {
@@ -335,7 +335,7 @@ public class Transaction extends ApiResource
   }
 
   /**
-   * Updates the specified Issuing <code>Transaction</code> object by setting the values of the
+   * Updates the specified Issuing {@code Transaction} object by setting the values of the
    * parameters passed. Any parameters not provided will be left unchanged.
    */
   @Override
@@ -344,7 +344,7 @@ public class Transaction extends ApiResource
   }
 
   /**
-   * Updates the specified Issuing <code>Transaction</code> object by setting the values of the
+   * Updates the specified Issuing {@code Transaction} object by setting the values of the
    * parameters passed. Any parameters not provided will be left unchanged.
    */
   @Override
@@ -360,7 +360,7 @@ public class Transaction extends ApiResource
   }
 
   /**
-   * Updates the specified Issuing <code>Transaction</code> object by setting the values of the
+   * Updates the specified Issuing {@code Transaction} object by setting the values of the
    * parameters passed. Any parameters not provided will be left unchanged.
    */
   public Transaction update(TransactionUpdateParams params) throws StripeException {
@@ -368,7 +368,7 @@ public class Transaction extends ApiResource
   }
 
   /**
-   * Updates the specified Issuing <code>Transaction</code> object by setting the values of the
+   * Updates the specified Issuing {@code Transaction} object by setting the values of the
    * parameters passed. Any parameters not provided will be left unchanged.
    */
   public Transaction update(TransactionUpdateParams params, RequestOptions options)

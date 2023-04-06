@@ -25,8 +25,8 @@ public class AccountRejectParams extends ApiRequestParams {
   Map<String, Object> extraParams;
 
   /**
-   * The reason for rejecting the account. Can be {@code fraud}, {@code terms_of_service}, or {@code
-   * other}.
+   * <strong>Required.</strong> The reason for rejecting the account. Can be {@code fraud}, {@code
+   * terms_of_service}, or {@code other}.
    */
   @SerializedName("reason")
   String reason;
@@ -106,8 +106,8 @@ public class AccountRejectParams extends ApiRequestParams {
     }
 
     /**
-     * The reason for rejecting the account. Can be {@code fraud}, {@code terms_of_service}, or
-     * {@code other}.
+     * <strong>Required.</strong> The reason for rejecting the account. Can be {@code fraud}, {@code
+     * terms_of_service}, or {@code other}.
      */
     public Builder setReason(String reason) {
       this.reason = reason;

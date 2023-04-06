@@ -1298,8 +1298,8 @@ public class Invoice extends ApiResource implements HasId, MetadataStore<Invoice
    * you can do so. When sending invoices that have already been paid, there will be no reference to
    * the payment in the email.
    *
-   * <p>Requests made in test-mode result in no emails being sent, despite sending an <code>
-   * invoice.sent</code> event.
+   * <p>Requests made in test-mode result in no emails being sent, despite sending an {@code
+   * invoice.sent} event.
    */
   public Invoice sendInvoice() throws StripeException {
     return sendInvoice((Map<String, Object>) null, (RequestOptions) null);
@@ -1312,8 +1312,8 @@ public class Invoice extends ApiResource implements HasId, MetadataStore<Invoice
    * you can do so. When sending invoices that have already been paid, there will be no reference to
    * the payment in the email.
    *
-   * <p>Requests made in test-mode result in no emails being sent, despite sending an <code>
-   * invoice.sent</code> event.
+   * <p>Requests made in test-mode result in no emails being sent, despite sending an {@code
+   * invoice.sent} event.
    */
   public Invoice sendInvoice(RequestOptions options) throws StripeException {
     return sendInvoice((Map<String, Object>) null, options);
@@ -1326,8 +1326,8 @@ public class Invoice extends ApiResource implements HasId, MetadataStore<Invoice
    * you can do so. When sending invoices that have already been paid, there will be no reference to
    * the payment in the email.
    *
-   * <p>Requests made in test-mode result in no emails being sent, despite sending an <code>
-   * invoice.sent</code> event.
+   * <p>Requests made in test-mode result in no emails being sent, despite sending an {@code
+   * invoice.sent} event.
    */
   public Invoice sendInvoice(Map<String, Object> params) throws StripeException {
     return sendInvoice(params, (RequestOptions) null);
@@ -1340,8 +1340,8 @@ public class Invoice extends ApiResource implements HasId, MetadataStore<Invoice
    * you can do so. When sending invoices that have already been paid, there will be no reference to
    * the payment in the email.
    *
-   * <p>Requests made in test-mode result in no emails being sent, despite sending an <code>
-   * invoice.sent</code> event.
+   * <p>Requests made in test-mode result in no emails being sent, despite sending an {@code
+   * invoice.sent} event.
    */
   public Invoice sendInvoice(Map<String, Object> params, RequestOptions options)
       throws StripeException {
@@ -1360,8 +1360,8 @@ public class Invoice extends ApiResource implements HasId, MetadataStore<Invoice
    * you can do so. When sending invoices that have already been paid, there will be no reference to
    * the payment in the email.
    *
-   * <p>Requests made in test-mode result in no emails being sent, despite sending an <code>
-   * invoice.sent</code> event.
+   * <p>Requests made in test-mode result in no emails being sent, despite sending an {@code
+   * invoice.sent} event.
    */
   public Invoice sendInvoice(InvoiceSendInvoiceParams params) throws StripeException {
     return sendInvoice(params, (RequestOptions) null);
@@ -1374,8 +1374,8 @@ public class Invoice extends ApiResource implements HasId, MetadataStore<Invoice
    * you can do so. When sending invoices that have already been paid, there will be no reference to
    * the payment in the email.
    *
-   * <p>Requests made in test-mode result in no emails being sent, despite sending an <code>
-   * invoice.sent</code> event.
+   * <p>Requests made in test-mode result in no emails being sent, despite sending an {@code
+   * invoice.sent} event.
    */
   public Invoice sendInvoice(InvoiceSendInvoiceParams params, RequestOptions options)
       throws StripeException {
@@ -1400,12 +1400,12 @@ public class Invoice extends ApiResource implements HasId, MetadataStore<Invoice
    *
    * <p>You can preview the effects of updating a subscription, including a preview of what
    * proration will take place. To ensure that the actual proration is calculated exactly the same
-   * as the previewed proration, you should pass a <code>proration_date</code> parameter when doing
-   * the actual subscription update. The value passed in should be the same as the <code>
-   * subscription_proration_date</code> returned on the upcoming invoice resource. The recommended
-   * way to get only the prorations being previewed is to consider only proration line items where
-   * <code>period[start]</code> is equal to the <code>subscription_proration_date</code> on the
-   * upcoming invoice resource.
+   * as the previewed proration, you should pass a {@code proration_date} parameter when doing the
+   * actual subscription update. The value passed in should be the same as the {@code
+   * subscription_proration_date} returned on the upcoming invoice resource. The recommended way to
+   * get only the prorations being previewed is to consider only proration line items where {@code
+   * period[start]} is equal to the {@code subscription_proration_date} on the upcoming invoice
+   * resource.
    */
   public static Invoice upcoming() throws StripeException {
     return upcoming((Map<String, Object>) null, (RequestOptions) null);
@@ -1424,12 +1424,12 @@ public class Invoice extends ApiResource implements HasId, MetadataStore<Invoice
    *
    * <p>You can preview the effects of updating a subscription, including a preview of what
    * proration will take place. To ensure that the actual proration is calculated exactly the same
-   * as the previewed proration, you should pass a <code>proration_date</code> parameter when doing
-   * the actual subscription update. The value passed in should be the same as the <code>
-   * subscription_proration_date</code> returned on the upcoming invoice resource. The recommended
-   * way to get only the prorations being previewed is to consider only proration line items where
-   * <code>period[start]</code> is equal to the <code>subscription_proration_date</code> on the
-   * upcoming invoice resource.
+   * as the previewed proration, you should pass a {@code proration_date} parameter when doing the
+   * actual subscription update. The value passed in should be the same as the {@code
+   * subscription_proration_date} returned on the upcoming invoice resource. The recommended way to
+   * get only the prorations being previewed is to consider only proration line items where {@code
+   * period[start]} is equal to the {@code subscription_proration_date} on the upcoming invoice
+   * resource.
    */
   public static Invoice upcoming(Map<String, Object> params) throws StripeException {
     return upcoming(params, (RequestOptions) null);
@@ -1448,12 +1448,12 @@ public class Invoice extends ApiResource implements HasId, MetadataStore<Invoice
    *
    * <p>You can preview the effects of updating a subscription, including a preview of what
    * proration will take place. To ensure that the actual proration is calculated exactly the same
-   * as the previewed proration, you should pass a <code>proration_date</code> parameter when doing
-   * the actual subscription update. The value passed in should be the same as the <code>
-   * subscription_proration_date</code> returned on the upcoming invoice resource. The recommended
-   * way to get only the prorations being previewed is to consider only proration line items where
-   * <code>period[start]</code> is equal to the <code>subscription_proration_date</code> on the
-   * upcoming invoice resource.
+   * as the previewed proration, you should pass a {@code proration_date} parameter when doing the
+   * actual subscription update. The value passed in should be the same as the {@code
+   * subscription_proration_date} returned on the upcoming invoice resource. The recommended way to
+   * get only the prorations being previewed is to consider only proration line items where {@code
+   * period[start]} is equal to the {@code subscription_proration_date} on the upcoming invoice
+   * resource.
    */
   public static Invoice upcoming(Map<String, Object> params, RequestOptions options)
       throws StripeException {
@@ -1474,12 +1474,12 @@ public class Invoice extends ApiResource implements HasId, MetadataStore<Invoice
    *
    * <p>You can preview the effects of updating a subscription, including a preview of what
    * proration will take place. To ensure that the actual proration is calculated exactly the same
-   * as the previewed proration, you should pass a <code>proration_date</code> parameter when doing
-   * the actual subscription update. The value passed in should be the same as the <code>
-   * subscription_proration_date</code> returned on the upcoming invoice resource. The recommended
-   * way to get only the prorations being previewed is to consider only proration line items where
-   * <code>period[start]</code> is equal to the <code>subscription_proration_date</code> on the
-   * upcoming invoice resource.
+   * as the previewed proration, you should pass a {@code proration_date} parameter when doing the
+   * actual subscription update. The value passed in should be the same as the {@code
+   * subscription_proration_date} returned on the upcoming invoice resource. The recommended way to
+   * get only the prorations being previewed is to consider only proration line items where {@code
+   * period[start]} is equal to the {@code subscription_proration_date} on the upcoming invoice
+   * resource.
    */
   public static Invoice upcoming(InvoiceUpcomingParams params) throws StripeException {
     return upcoming(params, (RequestOptions) null);
@@ -1498,12 +1498,12 @@ public class Invoice extends ApiResource implements HasId, MetadataStore<Invoice
    *
    * <p>You can preview the effects of updating a subscription, including a preview of what
    * proration will take place. To ensure that the actual proration is calculated exactly the same
-   * as the previewed proration, you should pass a <code>proration_date</code> parameter when doing
-   * the actual subscription update. The value passed in should be the same as the <code>
-   * subscription_proration_date</code> returned on the upcoming invoice resource. The recommended
-   * way to get only the prorations being previewed is to consider only proration line items where
-   * <code>period[start]</code> is equal to the <code>subscription_proration_date</code> on the
-   * upcoming invoice resource.
+   * as the previewed proration, you should pass a {@code proration_date} parameter when doing the
+   * actual subscription update. The value passed in should be the same as the {@code
+   * subscription_proration_date} returned on the upcoming invoice resource. The recommended way to
+   * get only the prorations being previewed is to consider only proration line items where {@code
+   * period[start]} is equal to the {@code subscription_proration_date} on the upcoming invoice
+   * resource.
    */
   public static Invoice upcoming(InvoiceUpcomingParams params, RequestOptions options)
       throws StripeException {
@@ -1567,12 +1567,12 @@ public class Invoice extends ApiResource implements HasId, MetadataStore<Invoice
   /**
    * Draft invoices are fully editable. Once an invoice is <a
    * href="https://stripe.com/docs/billing/invoices/workflow#finalized">finalized</a>, monetary
-   * values, as well as <code>collection_method</code>, become uneditable.
+   * values, as well as {@code collection_method}, become uneditable.
    *
    * <p>If you would like to stop the Stripe Billing engine from automatically finalizing,
    * reattempting payments on, sending reminders for, or <a
    * href="https://stripe.com/docs/billing/invoices/reconciliation">automatically reconciling</a>
-   * invoices, pass <code>auto_advance=false</code>.
+   * invoices, pass {@code auto_advance=false}.
    */
   @Override
   public Invoice update(Map<String, Object> params) throws StripeException {
@@ -1582,12 +1582,12 @@ public class Invoice extends ApiResource implements HasId, MetadataStore<Invoice
   /**
    * Draft invoices are fully editable. Once an invoice is <a
    * href="https://stripe.com/docs/billing/invoices/workflow#finalized">finalized</a>, monetary
-   * values, as well as <code>collection_method</code>, become uneditable.
+   * values, as well as {@code collection_method}, become uneditable.
    *
    * <p>If you would like to stop the Stripe Billing engine from automatically finalizing,
    * reattempting payments on, sending reminders for, or <a
    * href="https://stripe.com/docs/billing/invoices/reconciliation">automatically reconciling</a>
-   * invoices, pass <code>auto_advance=false</code>.
+   * invoices, pass {@code auto_advance=false}.
    */
   @Override
   public Invoice update(Map<String, Object> params, RequestOptions options) throws StripeException {
@@ -1602,12 +1602,12 @@ public class Invoice extends ApiResource implements HasId, MetadataStore<Invoice
   /**
    * Draft invoices are fully editable. Once an invoice is <a
    * href="https://stripe.com/docs/billing/invoices/workflow#finalized">finalized</a>, monetary
-   * values, as well as <code>collection_method</code>, become uneditable.
+   * values, as well as {@code collection_method}, become uneditable.
    *
    * <p>If you would like to stop the Stripe Billing engine from automatically finalizing,
    * reattempting payments on, sending reminders for, or <a
    * href="https://stripe.com/docs/billing/invoices/reconciliation">automatically reconciling</a>
-   * invoices, pass <code>auto_advance=false</code>.
+   * invoices, pass {@code auto_advance=false}.
    */
   public Invoice update(InvoiceUpdateParams params) throws StripeException {
     return update(params, (RequestOptions) null);
@@ -1616,12 +1616,12 @@ public class Invoice extends ApiResource implements HasId, MetadataStore<Invoice
   /**
    * Draft invoices are fully editable. Once an invoice is <a
    * href="https://stripe.com/docs/billing/invoices/workflow#finalized">finalized</a>, monetary
-   * values, as well as <code>collection_method</code>, become uneditable.
+   * values, as well as {@code collection_method}, become uneditable.
    *
    * <p>If you would like to stop the Stripe Billing engine from automatically finalizing,
    * reattempting payments on, sending reminders for, or <a
    * href="https://stripe.com/docs/billing/invoices/reconciliation">automatically reconciling</a>
-   * invoices, pass <code>auto_advance=false</code>.
+   * invoices, pass {@code auto_advance=false}.
    */
   public Invoice update(InvoiceUpdateParams params, RequestOptions options) throws StripeException {
     String url =

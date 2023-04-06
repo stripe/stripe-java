@@ -82,7 +82,7 @@ public class ProductCreateParams extends ApiRequestParams {
   @SerializedName("metadata")
   Map<String, String> metadata;
 
-  /** The product's name, meant to be displayable to the customer. */
+  /** <strong>Required.</strong> The product's name, meant to be displayable to the customer. */
   @SerializedName("name")
   String name;
 
@@ -447,7 +447,7 @@ public class ProductCreateParams extends ApiRequestParams {
       return this;
     }
 
-    /** The product's name, meant to be displayable to the customer. */
+    /** <strong>Required.</strong> The product's name, meant to be displayable to the customer. */
     public Builder setName(String name) {
       this.name = name;
       return this;
@@ -522,9 +522,9 @@ public class ProductCreateParams extends ApiRequestParams {
   @Getter
   public static class DefaultPriceData {
     /**
-     * Three-letter <a href="https://www.iso.org/iso-4217-currency-codes.html">ISO currency
-     * code</a>, in lowercase. Must be a <a href="https://stripe.com/docs/currencies">supported
-     * currency</a>.
+     * <strong>Required.</strong> Three-letter <a
+     * href="https://www.iso.org/iso-4217-currency-codes.html">ISO currency code</a>, in lowercase.
+     * Must be a <a href="https://stripe.com/docs/currencies">supported currency</a>.
      */
     @SerializedName("currency")
     String currency;
@@ -551,9 +551,12 @@ public class ProductCreateParams extends ApiRequestParams {
     Recurring recurring;
 
     /**
-     * Specifies whether the price is considered inclusive of taxes or exclusive of taxes. One of
-     * {@code inclusive}, {@code exclusive}, or {@code unspecified}. Once specified as either {@code
-     * inclusive} or {@code exclusive}, it cannot be changed.
+     * Only required if a <a
+     * href="https://stripe.com/docs/tax/products-prices-tax-categories-tax-behavior#setting-a-default-tax-behavior-(recommended)">default
+     * tax behavior</a> was not provided in the Stripe Tax settings. Specifies whether the price is
+     * considered inclusive of taxes or exclusive of taxes. One of {@code inclusive}, {@code
+     * exclusive}, or {@code unspecified}. Once specified as either {@code inclusive} or {@code
+     * exclusive}, it cannot be changed.
      */
     @SerializedName("tax_behavior")
     TaxBehavior taxBehavior;
@@ -622,9 +625,9 @@ public class ProductCreateParams extends ApiRequestParams {
       }
 
       /**
-       * Three-letter <a href="https://www.iso.org/iso-4217-currency-codes.html">ISO currency
-       * code</a>, in lowercase. Must be a <a href="https://stripe.com/docs/currencies">supported
-       * currency</a>.
+       * <strong>Required.</strong> Three-letter <a
+       * href="https://www.iso.org/iso-4217-currency-codes.html">ISO currency code</a>, in
+       * lowercase. Must be a <a href="https://stripe.com/docs/currencies">supported currency</a>.
        */
       public Builder setCurrency(String currency) {
         this.currency = currency;
@@ -696,9 +699,12 @@ public class ProductCreateParams extends ApiRequestParams {
       }
 
       /**
-       * Specifies whether the price is considered inclusive of taxes or exclusive of taxes. One of
-       * {@code inclusive}, {@code exclusive}, or {@code unspecified}. Once specified as either
-       * {@code inclusive} or {@code exclusive}, it cannot be changed.
+       * Only required if a <a
+       * href="https://stripe.com/docs/tax/products-prices-tax-categories-tax-behavior#setting-a-default-tax-behavior-(recommended)">default
+       * tax behavior</a> was not provided in the Stripe Tax settings. Specifies whether the price
+       * is considered inclusive of taxes or exclusive of taxes. One of {@code inclusive}, {@code
+       * exclusive}, or {@code unspecified}. Once specified as either {@code inclusive} or {@code
+       * exclusive}, it cannot be changed.
        */
       public Builder setTaxBehavior(ProductCreateParams.DefaultPriceData.TaxBehavior taxBehavior) {
         this.taxBehavior = taxBehavior;
@@ -744,9 +750,12 @@ public class ProductCreateParams extends ApiRequestParams {
       Map<String, Object> extraParams;
 
       /**
-       * Specifies whether the price is considered inclusive of taxes or exclusive of taxes. One of
-       * {@code inclusive}, {@code exclusive}, or {@code unspecified}. Once specified as either
-       * {@code inclusive} or {@code exclusive}, it cannot be changed.
+       * Only required if a <a
+       * href="https://stripe.com/docs/tax/products-prices-tax-categories-tax-behavior#setting-a-default-tax-behavior-(recommended)">default
+       * tax behavior</a> was not provided in the Stripe Tax settings. Specifies whether the price
+       * is considered inclusive of taxes or exclusive of taxes. One of {@code inclusive}, {@code
+       * exclusive}, or {@code unspecified}. Once specified as either {@code inclusive} or {@code
+       * exclusive}, it cannot be changed.
        */
       @SerializedName("tax_behavior")
       TaxBehavior taxBehavior;
@@ -855,9 +864,12 @@ public class ProductCreateParams extends ApiRequestParams {
         }
 
         /**
-         * Specifies whether the price is considered inclusive of taxes or exclusive of taxes. One
-         * of {@code inclusive}, {@code exclusive}, or {@code unspecified}. Once specified as either
-         * {@code inclusive} or {@code exclusive}, it cannot be changed.
+         * Only required if a <a
+         * href="https://stripe.com/docs/tax/products-prices-tax-categories-tax-behavior#setting-a-default-tax-behavior-(recommended)">default
+         * tax behavior</a> was not provided in the Stripe Tax settings. Specifies whether the price
+         * is considered inclusive of taxes or exclusive of taxes. One of {@code inclusive}, {@code
+         * exclusive}, or {@code unspecified}. Once specified as either {@code inclusive} or {@code
+         * exclusive}, it cannot be changed.
          */
         public Builder setTaxBehavior(
             ProductCreateParams.DefaultPriceData.CurrencyOption.TaxBehavior taxBehavior) {
@@ -915,8 +927,8 @@ public class ProductCreateParams extends ApiRequestParams {
       @Getter
       public static class CustomUnitAmount {
         /**
-         * Pass in {@code true} to enable {@code custom_unit_amount}, otherwise omit {@code
-         * custom_unit_amount}.
+         * <strong>Required.</strong> Pass in {@code true} to enable {@code custom_unit_amount},
+         * otherwise omit {@code custom_unit_amount}.
          */
         @SerializedName("enabled")
         Boolean enabled;
@@ -981,8 +993,8 @@ public class ProductCreateParams extends ApiRequestParams {
           }
 
           /**
-           * Pass in {@code true} to enable {@code custom_unit_amount}, otherwise omit {@code
-           * custom_unit_amount}.
+           * <strong>Required.</strong> Pass in {@code true} to enable {@code custom_unit_amount},
+           * otherwise omit {@code custom_unit_amount}.
            */
           public Builder setEnabled(Boolean enabled) {
             this.enabled = enabled;
@@ -1082,8 +1094,9 @@ public class ProductCreateParams extends ApiRequestParams {
         BigDecimal unitAmountDecimal;
 
         /**
-         * Specifies the upper bound of this tier. The lower bound of a tier is the upper bound of
-         * the previous tier adding one. Use {@code inf} to define a fallback tier.
+         * <strong>Required.</strong> Specifies the upper bound of this tier. The lower bound of a
+         * tier is the upper bound of the previous tier adding one. Use {@code inf} to define a
+         * fallback tier.
          */
         @SerializedName("up_to")
         Object upTo;
@@ -1195,8 +1208,9 @@ public class ProductCreateParams extends ApiRequestParams {
           }
 
           /**
-           * Specifies the upper bound of this tier. The lower bound of a tier is the upper bound of
-           * the previous tier adding one. Use {@code inf} to define a fallback tier.
+           * <strong>Required.</strong> Specifies the upper bound of this tier. The lower bound of a
+           * tier is the upper bound of the previous tier adding one. Use {@code inf} to define a
+           * fallback tier.
            */
           public Builder setUpTo(
               ProductCreateParams.DefaultPriceData.CurrencyOption.Tier.UpTo upTo) {
@@ -1205,8 +1219,9 @@ public class ProductCreateParams extends ApiRequestParams {
           }
 
           /**
-           * Specifies the upper bound of this tier. The lower bound of a tier is the upper bound of
-           * the previous tier adding one. Use {@code inf} to define a fallback tier.
+           * <strong>Required.</strong> Specifies the upper bound of this tier. The lower bound of a
+           * tier is the upper bound of the previous tier adding one. Use {@code inf} to define a
+           * fallback tier.
            */
           public Builder setUpTo(Long upTo) {
             this.upTo = upTo;
@@ -1258,8 +1273,8 @@ public class ProductCreateParams extends ApiRequestParams {
       Map<String, Object> extraParams;
 
       /**
-       * Specifies billing frequency. Either {@code day}, {@code week}, {@code month} or {@code
-       * year}.
+       * <strong>Required.</strong> Specifies billing frequency. Either {@code day}, {@code week},
+       * {@code month} or {@code year}.
        */
       @SerializedName("interval")
       Interval interval;
@@ -1324,8 +1339,8 @@ public class ProductCreateParams extends ApiRequestParams {
         }
 
         /**
-         * Specifies billing frequency. Either {@code day}, {@code week}, {@code month} or {@code
-         * year}.
+         * <strong>Required.</strong> Specifies billing frequency. Either {@code day}, {@code week},
+         * {@code month} or {@code year}.
          */
         public Builder setInterval(
             ProductCreateParams.DefaultPriceData.Recurring.Interval interval) {
@@ -1396,19 +1411,19 @@ public class ProductCreateParams extends ApiRequestParams {
     @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
     Map<String, Object> extraParams;
 
-    /** Height, in inches. Maximum precision is 2 decimal places. */
+    /** <strong>Required.</strong> Height, in inches. Maximum precision is 2 decimal places. */
     @SerializedName("height")
     BigDecimal height;
 
-    /** Length, in inches. Maximum precision is 2 decimal places. */
+    /** <strong>Required.</strong> Length, in inches. Maximum precision is 2 decimal places. */
     @SerializedName("length")
     BigDecimal length;
 
-    /** Weight, in ounces. Maximum precision is 2 decimal places. */
+    /** <strong>Required.</strong> Weight, in ounces. Maximum precision is 2 decimal places. */
     @SerializedName("weight")
     BigDecimal weight;
 
-    /** Width, in inches. Maximum precision is 2 decimal places. */
+    /** <strong>Required.</strong> Width, in inches. Maximum precision is 2 decimal places. */
     @SerializedName("width")
     BigDecimal width;
 
@@ -1472,25 +1487,25 @@ public class ProductCreateParams extends ApiRequestParams {
         return this;
       }
 
-      /** Height, in inches. Maximum precision is 2 decimal places. */
+      /** <strong>Required.</strong> Height, in inches. Maximum precision is 2 decimal places. */
       public Builder setHeight(BigDecimal height) {
         this.height = height;
         return this;
       }
 
-      /** Length, in inches. Maximum precision is 2 decimal places. */
+      /** <strong>Required.</strong> Length, in inches. Maximum precision is 2 decimal places. */
       public Builder setLength(BigDecimal length) {
         this.length = length;
         return this;
       }
 
-      /** Weight, in ounces. Maximum precision is 2 decimal places. */
+      /** <strong>Required.</strong> Weight, in ounces. Maximum precision is 2 decimal places. */
       public Builder setWeight(BigDecimal weight) {
         this.weight = weight;
         return this;
       }
 
-      /** Width, in inches. Maximum precision is 2 decimal places. */
+      /** <strong>Required.</strong> Width, in inches. Maximum precision is 2 decimal places. */
       public Builder setWidth(BigDecimal width) {
         this.width = width;
         return this;
@@ -1512,7 +1527,10 @@ public class ProductCreateParams extends ApiRequestParams {
     @SerializedName("gift_card")
     GiftCard giftCard;
 
-    /** The type of provisioning, only {@code gift_card} currently supported. */
+    /**
+     * <strong>Required.</strong> The type of provisioning, only {@code gift_card} currently
+     * supported.
+     */
     @SerializedName("type")
     Type type;
 
@@ -1569,7 +1587,10 @@ public class ProductCreateParams extends ApiRequestParams {
         return this;
       }
 
-      /** The type of provisioning, only {@code gift_card} currently supported. */
+      /**
+       * <strong>Required.</strong> The type of provisioning, only {@code gift_card} currently
+       * supported.
+       */
       public Builder setType(ProductCreateParams.Provisioning.Type type) {
         this.type = type;
         return this;
@@ -1591,7 +1612,8 @@ public class ProductCreateParams extends ApiRequestParams {
       FixedAmount fixedAmount;
 
       /**
-       * The specific type of gift_card provisioning, only {@code fixed_amount} currently supported.
+       * <strong>Required.</strong> The specific type of gift_card provisioning, only {@code
+       * fixed_amount} currently supported.
        */
       @SerializedName("type")
       Type type;
@@ -1654,8 +1676,8 @@ public class ProductCreateParams extends ApiRequestParams {
         }
 
         /**
-         * The specific type of gift_card provisioning, only {@code fixed_amount} currently
-         * supported.
+         * <strong>Required.</strong> The specific type of gift_card provisioning, only {@code
+         * fixed_amount} currently supported.
          */
         public Builder setType(ProductCreateParams.Provisioning.GiftCard.Type type) {
           this.type = type;
@@ -1665,10 +1687,14 @@ public class ProductCreateParams extends ApiRequestParams {
 
       @Getter
       public static class FixedAmount {
-        /** The initial amount with which the provisioned gift card will be created. */
+        /**
+         * <strong>Required.</strong> The initial amount with which the provisioned gift card will
+         * be created.
+         */
         @SerializedName("amount")
         Long amount;
 
+        /** <strong>Required.</strong> */
         @SerializedName("currency")
         String currency;
 
@@ -1705,12 +1731,16 @@ public class ProductCreateParams extends ApiRequestParams {
                 this.amount, this.currency, this.extraParams);
           }
 
-          /** The initial amount with which the provisioned gift card will be created. */
+          /**
+           * <strong>Required.</strong> The initial amount with which the provisioned gift card will
+           * be created.
+           */
           public Builder setAmount(Long amount) {
             this.amount = amount;
             return this;
           }
 
+          /** <strong>Required.</strong> */
           public Builder setCurrency(String currency) {
             this.currency = currency;
             return this;

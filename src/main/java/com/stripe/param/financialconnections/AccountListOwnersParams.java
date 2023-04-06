@@ -40,7 +40,7 @@ public class AccountListOwnersParams extends ApiRequestParams {
   @SerializedName("limit")
   Long limit;
 
-  /** The ID of the ownership object to fetch owners from. */
+  /** <strong>Required.</strong> The ID of the ownership object to fetch owners from. */
   @SerializedName("ownership")
   String ownership;
 
@@ -168,7 +168,7 @@ public class AccountListOwnersParams extends ApiRequestParams {
       return this;
     }
 
-    /** The ID of the ownership object to fetch owners from. */
+    /** <strong>Required.</strong> The ID of the ownership object to fetch owners from. */
     public Builder setOwnership(String ownership) {
       this.ownership = ownership;
       return this;

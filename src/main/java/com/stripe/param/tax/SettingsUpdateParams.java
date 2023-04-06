@@ -265,7 +265,7 @@ public class SettingsUpdateParams extends ApiRequestParams {
 
   @Getter
   public static class Location {
-    /** The location of the business for tax purposes. */
+    /** <strong>Required.</strong> The location of the business for tax purposes. */
     @SerializedName("address")
     Address address;
 
@@ -278,7 +278,7 @@ public class SettingsUpdateParams extends ApiRequestParams {
     @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
     Map<String, Object> extraParams;
 
-    /** The role of this location address. */
+    /** <strong>Required.</strong> The role of this location address. */
     @SerializedName("role")
     Role role;
 
@@ -304,7 +304,7 @@ public class SettingsUpdateParams extends ApiRequestParams {
         return new SettingsUpdateParams.Location(this.address, this.extraParams, this.role);
       }
 
-      /** The location of the business for tax purposes. */
+      /** <strong>Required.</strong> The location of the business for tax purposes. */
       public Builder setAddress(SettingsUpdateParams.Location.Address address) {
         this.address = address;
         return this;
@@ -336,7 +336,7 @@ public class SettingsUpdateParams extends ApiRequestParams {
         return this;
       }
 
-      /** The role of this location address. */
+      /** <strong>Required.</strong> The role of this location address. */
       public Builder setRole(SettingsUpdateParams.Location.Role role) {
         this.role = role;
         return this;

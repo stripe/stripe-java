@@ -12,7 +12,7 @@ import lombok.Getter;
 
 @Getter
 public class LocationCreateParams extends ApiRequestParams {
-  /** The full address of the location. */
+  /** <strong>Required.</strong> The full address of the location. */
   @SerializedName("address")
   Address address;
 
@@ -20,7 +20,7 @@ public class LocationCreateParams extends ApiRequestParams {
   @SerializedName("configuration_overrides")
   String configurationOverrides;
 
-  /** A name for the location. */
+  /** <strong>Required.</strong> A name for the location. */
   @SerializedName("display_name")
   String displayName;
 
@@ -89,7 +89,7 @@ public class LocationCreateParams extends ApiRequestParams {
           this.metadata);
     }
 
-    /** The full address of the location. */
+    /** <strong>Required.</strong> The full address of the location. */
     public Builder setAddress(LocationCreateParams.Address address) {
       this.address = address;
       return this;
@@ -101,7 +101,7 @@ public class LocationCreateParams extends ApiRequestParams {
       return this;
     }
 
-    /** A name for the location. */
+    /** <strong>Required.</strong> A name for the location. */
     public Builder setDisplayName(String displayName) {
       this.displayName = displayName;
       return this;
@@ -217,8 +217,8 @@ public class LocationCreateParams extends ApiRequestParams {
     String city;
 
     /**
-     * Two-letter country code (<a href="https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2">ISO
-     * 3166-1 alpha-2</a>).
+     * <strong>Required.</strong> Two-letter country code (<a
+     * href="https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2">ISO 3166-1 alpha-2</a>).
      */
     @SerializedName("country")
     String country;
@@ -303,8 +303,8 @@ public class LocationCreateParams extends ApiRequestParams {
       }
 
       /**
-       * Two-letter country code (<a href="https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2">ISO
-       * 3166-1 alpha-2</a>).
+       * <strong>Required.</strong> Two-letter country code (<a
+       * href="https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2">ISO 3166-1 alpha-2</a>).
        */
       public Builder setCountry(String country) {
         this.country = country;

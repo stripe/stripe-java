@@ -43,7 +43,10 @@ public class RefundCreateParams extends ApiRequestParams {
   @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
   Map<String, Object> extraParams;
 
-  /** Address to send refund email, use customer email if not specified. */
+  /**
+   * For payment methods without native refund support (e.g., Konbini, PromptPay), use this email
+   * from the customer to receive refund instructions.
+   */
   @SerializedName("instructions_email")
   String instructionsEmail;
 
@@ -229,7 +232,10 @@ public class RefundCreateParams extends ApiRequestParams {
       return this;
     }
 
-    /** Address to send refund email, use customer email if not specified. */
+    /**
+     * For payment methods without native refund support (e.g., Konbini, PromptPay), use this email
+     * from the customer to receive refund instructions.
+     */
     public Builder setInstructionsEmail(String instructionsEmail) {
       this.instructionsEmail = instructionsEmail;
       return this;

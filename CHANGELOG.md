@@ -1,9 +1,22 @@
 # Changelog
 
+## 22.16.0 - 2023-04-06
+* [#1540](https://github.com/stripe/stripe-java/pull/1540) Update generated code
+  * Add support for `country` on `PaymentMethod.link`
+  * Add support for `status_details` on `PaymentMethod.us_bank_account`
+
 ## 22.16.0-beta.1 - 2023-03-30
 * [#1537](https://github.com/stripe/stripe-java/pull/1537) Update generated code
   * Add support for new value `ioss` on enum `TaxRegistrationCreateParams.type`
   * Change `TerminalReaderCollectInputsParams.inputs[].custom_text.description` to be optional
+
+## 22.15.0 - 2023-03-30
+* [#1536](https://github.com/stripe/stripe-java/pull/1536) Update generated code
+  * Remove support for `create` method on resource `Tax.Transaction`
+    * This is not a breaking change, as this method was deprecated before the Tax Transactions API was released in favor of the `createFromCalculation` method.
+  * Add support for `export_license_id` and `export_purpose_code` on `Account.company`, `AccountCreateParams.company`, `AccountUpdateParams.company`, and `TokenCreateParams.account.company`
+  * Add support for `amount_tip` on `TerminalReaderPresentPaymentMethodParams`
+* [#1538](https://github.com/stripe/stripe-java/pull/1538) Add missing file purpose terminal_reader_splashscreen
 
 ## 22.15.0-beta.1 - 2023-03-23
 * [#1535](https://github.com/stripe/stripe-java/pull/1535) Update generated code for beta (new)
@@ -274,6 +287,7 @@ Breaking changes that arose during code generation of the library that we postpo
 - ⚠️ Removed deprecated `Amount`, `Currency`, `Description`, `Images`, `Name` properties from `SessionCreateParams.LineItem` (#1473)
 - ⚠️ Remove support for `tos_shown_and_accepted` on `CheckoutSessionCreateParams.payment_method_options.paynow` (#1473)
 - ⚠️ Removed deprecated `Sku` resource (#1459)
+- ⚠️ Removed deprecated `EphemeralKey.associatedObjects` field. ([#1470](https://github.com/stripe/stripe-java/pull/1470))
 - ⚠️ Removed `RequestOptions.getStripeVersionOverride`, `RequestOptions.setStripeVersionOverride`,  and `RequestOptions.clearStripeVersionOverride` (#1464)
 
 Use of `setStripeVersionOverride` is discouraged and can lead to unexpected errors during service calls because Java SDK class shapes are not guaranteed to match API responses on arbitrary versions.

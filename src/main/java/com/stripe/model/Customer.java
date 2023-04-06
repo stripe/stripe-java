@@ -659,11 +659,11 @@ public class Customer extends ApiResource implements HasId, MetadataStore<Custom
    * parameter, that becomes the customer’s active source (e.g., a card) to be used for all charges
    * in the future. When you update a customer to a new valid card source by passing the
    * <strong>source</strong> parameter: for each of the customer’s current subscriptions, if the
-   * subscription bills automatically and is in the <code>past_due</code> state, then the latest
-   * open invoice for the subscription with automatic collection enabled will be retried. This retry
-   * will not count as an automatic retry, and will not affect the next regularly scheduled payment
-   * for the invoice. Changing the <strong>default_source</strong> for a customer will not trigger
-   * this behavior.
+   * subscription bills automatically and is in the {@code past_due} state, then the latest open
+   * invoice for the subscription with automatic collection enabled will be retried. This retry will
+   * not count as an automatic retry, and will not affect the next regularly scheduled payment for
+   * the invoice. Changing the <strong>default_source</strong> for a customer will not trigger this
+   * behavior.
    *
    * <p>This request accepts mostly the same arguments as the customer creation call.
    */
@@ -678,11 +678,11 @@ public class Customer extends ApiResource implements HasId, MetadataStore<Custom
    * parameter, that becomes the customer’s active source (e.g., a card) to be used for all charges
    * in the future. When you update a customer to a new valid card source by passing the
    * <strong>source</strong> parameter: for each of the customer’s current subscriptions, if the
-   * subscription bills automatically and is in the <code>past_due</code> state, then the latest
-   * open invoice for the subscription with automatic collection enabled will be retried. This retry
-   * will not count as an automatic retry, and will not affect the next regularly scheduled payment
-   * for the invoice. Changing the <strong>default_source</strong> for a customer will not trigger
-   * this behavior.
+   * subscription bills automatically and is in the {@code past_due} state, then the latest open
+   * invoice for the subscription with automatic collection enabled will be retried. This retry will
+   * not count as an automatic retry, and will not affect the next regularly scheduled payment for
+   * the invoice. Changing the <strong>default_source</strong> for a customer will not trigger this
+   * behavior.
    *
    * <p>This request accepts mostly the same arguments as the customer creation call.
    */
@@ -704,11 +704,11 @@ public class Customer extends ApiResource implements HasId, MetadataStore<Custom
    * parameter, that becomes the customer’s active source (e.g., a card) to be used for all charges
    * in the future. When you update a customer to a new valid card source by passing the
    * <strong>source</strong> parameter: for each of the customer’s current subscriptions, if the
-   * subscription bills automatically and is in the <code>past_due</code> state, then the latest
-   * open invoice for the subscription with automatic collection enabled will be retried. This retry
-   * will not count as an automatic retry, and will not affect the next regularly scheduled payment
-   * for the invoice. Changing the <strong>default_source</strong> for a customer will not trigger
-   * this behavior.
+   * subscription bills automatically and is in the {@code past_due} state, then the latest open
+   * invoice for the subscription with automatic collection enabled will be retried. This retry will
+   * not count as an automatic retry, and will not affect the next regularly scheduled payment for
+   * the invoice. Changing the <strong>default_source</strong> for a customer will not trigger this
+   * behavior.
    *
    * <p>This request accepts mostly the same arguments as the customer creation call.
    */
@@ -722,11 +722,11 @@ public class Customer extends ApiResource implements HasId, MetadataStore<Custom
    * parameter, that becomes the customer’s active source (e.g., a card) to be used for all charges
    * in the future. When you update a customer to a new valid card source by passing the
    * <strong>source</strong> parameter: for each of the customer’s current subscriptions, if the
-   * subscription bills automatically and is in the <code>past_due</code> state, then the latest
-   * open invoice for the subscription with automatic collection enabled will be retried. This retry
-   * will not count as an automatic retry, and will not affect the next regularly scheduled payment
-   * for the invoice. Changing the <strong>default_source</strong> for a customer will not trigger
-   * this behavior.
+   * subscription bills automatically and is in the {@code past_due} state, then the latest open
+   * invoice for the subscription with automatic collection enabled will be retried. This retry will
+   * not count as an automatic retry, and will not affect the next regularly scheduled payment for
+   * the invoice. Changing the <strong>default_source</strong> for a customer will not trigger this
+   * behavior.
    *
    * <p>This request accepts mostly the same arguments as the customer creation call.
    */

@@ -242,24 +242,24 @@ public class Card extends ApiResource implements HasId, MetadataStore<Card> {
     this.replacementFor = new ExpandableField<Card>(expandableObject.getId(), expandableObject);
   }
 
-  /** Creates an Issuing <code>Card</code> object. */
+  /** Creates an Issuing {@code Card} object. */
   public static Card create(Map<String, Object> params) throws StripeException {
     return create(params, (RequestOptions) null);
   }
 
-  /** Creates an Issuing <code>Card</code> object. */
+  /** Creates an Issuing {@code Card} object. */
   public static Card create(Map<String, Object> params, RequestOptions options)
       throws StripeException {
     String url = ApiResource.fullUrl(Stripe.getApiBase(), options, "/v1/issuing/cards");
     return ApiResource.request(ApiResource.RequestMethod.POST, url, params, Card.class, options);
   }
 
-  /** Creates an Issuing <code>Card</code> object. */
+  /** Creates an Issuing {@code Card} object. */
   public static Card create(CardCreateParams params) throws StripeException {
     return create(params, (RequestOptions) null);
   }
 
-  /** Creates an Issuing <code>Card</code> object. */
+  /** Creates an Issuing {@code Card} object. */
   public static Card create(CardCreateParams params, RequestOptions options)
       throws StripeException {
     String url = ApiResource.fullUrl(Stripe.getApiBase(), options, "/v1/issuing/cards");
@@ -267,16 +267,16 @@ public class Card extends ApiResource implements HasId, MetadataStore<Card> {
   }
 
   /**
-   * Returns a list of Issuing <code>Card</code> objects. The objects are sorted in descending order
-   * by creation date, with the most recently created object appearing first.
+   * Returns a list of Issuing {@code Card} objects. The objects are sorted in descending order by
+   * creation date, with the most recently created object appearing first.
    */
   public static CardCollection list(Map<String, Object> params) throws StripeException {
     return list(params, (RequestOptions) null);
   }
 
   /**
-   * Returns a list of Issuing <code>Card</code> objects. The objects are sorted in descending order
-   * by creation date, with the most recently created object appearing first.
+   * Returns a list of Issuing {@code Card} objects. The objects are sorted in descending order by
+   * creation date, with the most recently created object appearing first.
    */
   public static CardCollection list(Map<String, Object> params, RequestOptions options)
       throws StripeException {
@@ -286,16 +286,16 @@ public class Card extends ApiResource implements HasId, MetadataStore<Card> {
   }
 
   /**
-   * Returns a list of Issuing <code>Card</code> objects. The objects are sorted in descending order
-   * by creation date, with the most recently created object appearing first.
+   * Returns a list of Issuing {@code Card} objects. The objects are sorted in descending order by
+   * creation date, with the most recently created object appearing first.
    */
   public static CardCollection list(CardListParams params) throws StripeException {
     return list(params, (RequestOptions) null);
   }
 
   /**
-   * Returns a list of Issuing <code>Card</code> objects. The objects are sorted in descending order
-   * by creation date, with the most recently created object appearing first.
+   * Returns a list of Issuing {@code Card} objects. The objects are sorted in descending order by
+   * creation date, with the most recently created object appearing first.
    */
   public static CardCollection list(CardListParams params, RequestOptions options)
       throws StripeException {
@@ -304,17 +304,17 @@ public class Card extends ApiResource implements HasId, MetadataStore<Card> {
         ApiResource.RequestMethod.GET, url, params, CardCollection.class, options);
   }
 
-  /** Retrieves an Issuing <code>Card</code> object. */
+  /** Retrieves an Issuing {@code Card} object. */
   public static Card retrieve(String card) throws StripeException {
     return retrieve(card, (Map<String, Object>) null, (RequestOptions) null);
   }
 
-  /** Retrieves an Issuing <code>Card</code> object. */
+  /** Retrieves an Issuing {@code Card} object. */
   public static Card retrieve(String card, RequestOptions options) throws StripeException {
     return retrieve(card, (Map<String, Object>) null, options);
   }
 
-  /** Retrieves an Issuing <code>Card</code> object. */
+  /** Retrieves an Issuing {@code Card} object. */
   public static Card retrieve(String card, Map<String, Object> params, RequestOptions options)
       throws StripeException {
     String url =
@@ -325,7 +325,7 @@ public class Card extends ApiResource implements HasId, MetadataStore<Card> {
     return ApiResource.request(ApiResource.RequestMethod.GET, url, params, Card.class, options);
   }
 
-  /** Retrieves an Issuing <code>Card</code> object. */
+  /** Retrieves an Issuing {@code Card} object. */
   public static Card retrieve(String card, CardRetrieveParams params, RequestOptions options)
       throws StripeException {
     String url =
@@ -337,7 +337,7 @@ public class Card extends ApiResource implements HasId, MetadataStore<Card> {
   }
 
   /**
-   * Updates the specified Issuing <code>Card</code> object by setting the values of the parameters
+   * Updates the specified Issuing {@code Card} object by setting the values of the parameters
    * passed. Any parameters not provided will be left unchanged.
    */
   @Override
@@ -346,7 +346,7 @@ public class Card extends ApiResource implements HasId, MetadataStore<Card> {
   }
 
   /**
-   * Updates the specified Issuing <code>Card</code> object by setting the values of the parameters
+   * Updates the specified Issuing {@code Card} object by setting the values of the parameters
    * passed. Any parameters not provided will be left unchanged.
    */
   @Override
@@ -360,7 +360,7 @@ public class Card extends ApiResource implements HasId, MetadataStore<Card> {
   }
 
   /**
-   * Updates the specified Issuing <code>Card</code> object by setting the values of the parameters
+   * Updates the specified Issuing {@code Card} object by setting the values of the parameters
    * passed. Any parameters not provided will be left unchanged.
    */
   public Card update(CardUpdateParams params) throws StripeException {
@@ -368,7 +368,7 @@ public class Card extends ApiResource implements HasId, MetadataStore<Card> {
   }
 
   /**
-   * Updates the specified Issuing <code>Card</code> object by setting the values of the parameters
+   * Updates the specified Issuing {@code Card} object by setting the values of the parameters
    * passed. Any parameters not provided will be left unchanged.
    */
   public Card update(CardUpdateParams params, RequestOptions options) throws StripeException {
@@ -601,32 +601,32 @@ public class Card extends ApiResource implements HasId, MetadataStore<Card> {
     }
 
     /**
-     * Updates the shipping status of the specified Issuing <code>Card</code> object to <code>
-     * delivered</code>.
+     * Updates the shipping status of the specified Issuing {@code Card} object to {@code
+     * delivered}.
      */
     public Card deliverCard() throws StripeException {
       return deliverCard((Map<String, Object>) null, (RequestOptions) null);
     }
 
     /**
-     * Updates the shipping status of the specified Issuing <code>Card</code> object to <code>
-     * delivered</code>.
+     * Updates the shipping status of the specified Issuing {@code Card} object to {@code
+     * delivered}.
      */
     public Card deliverCard(RequestOptions options) throws StripeException {
       return deliverCard((Map<String, Object>) null, options);
     }
 
     /**
-     * Updates the shipping status of the specified Issuing <code>Card</code> object to <code>
-     * delivered</code>.
+     * Updates the shipping status of the specified Issuing {@code Card} object to {@code
+     * delivered}.
      */
     public Card deliverCard(Map<String, Object> params) throws StripeException {
       return deliverCard(params, (RequestOptions) null);
     }
 
     /**
-     * Updates the shipping status of the specified Issuing <code>Card</code> object to <code>
-     * delivered</code>.
+     * Updates the shipping status of the specified Issuing {@code Card} object to {@code
+     * delivered}.
      */
     public Card deliverCard(Map<String, Object> params, RequestOptions options)
         throws StripeException {
@@ -641,16 +641,16 @@ public class Card extends ApiResource implements HasId, MetadataStore<Card> {
     }
 
     /**
-     * Updates the shipping status of the specified Issuing <code>Card</code> object to <code>
-     * delivered</code>.
+     * Updates the shipping status of the specified Issuing {@code Card} object to {@code
+     * delivered}.
      */
     public Card deliverCard(CardDeliverCardParams params) throws StripeException {
       return deliverCard(params, (RequestOptions) null);
     }
 
     /**
-     * Updates the shipping status of the specified Issuing <code>Card</code> object to <code>
-     * delivered</code>.
+     * Updates the shipping status of the specified Issuing {@code Card} object to {@code
+     * delivered}.
      */
     public Card deliverCard(CardDeliverCardParams params, RequestOptions options)
         throws StripeException {
@@ -665,32 +665,28 @@ public class Card extends ApiResource implements HasId, MetadataStore<Card> {
     }
 
     /**
-     * Updates the shipping status of the specified Issuing <code>Card</code> object to <code>
-     * shipped</code>.
+     * Updates the shipping status of the specified Issuing {@code Card} object to {@code shipped}.
      */
     public Card shipCard() throws StripeException {
       return shipCard((Map<String, Object>) null, (RequestOptions) null);
     }
 
     /**
-     * Updates the shipping status of the specified Issuing <code>Card</code> object to <code>
-     * shipped</code>.
+     * Updates the shipping status of the specified Issuing {@code Card} object to {@code shipped}.
      */
     public Card shipCard(RequestOptions options) throws StripeException {
       return shipCard((Map<String, Object>) null, options);
     }
 
     /**
-     * Updates the shipping status of the specified Issuing <code>Card</code> object to <code>
-     * shipped</code>.
+     * Updates the shipping status of the specified Issuing {@code Card} object to {@code shipped}.
      */
     public Card shipCard(Map<String, Object> params) throws StripeException {
       return shipCard(params, (RequestOptions) null);
     }
 
     /**
-     * Updates the shipping status of the specified Issuing <code>Card</code> object to <code>
-     * shipped</code>.
+     * Updates the shipping status of the specified Issuing {@code Card} object to {@code shipped}.
      */
     public Card shipCard(Map<String, Object> params, RequestOptions options)
         throws StripeException {
@@ -705,16 +701,14 @@ public class Card extends ApiResource implements HasId, MetadataStore<Card> {
     }
 
     /**
-     * Updates the shipping status of the specified Issuing <code>Card</code> object to <code>
-     * shipped</code>.
+     * Updates the shipping status of the specified Issuing {@code Card} object to {@code shipped}.
      */
     public Card shipCard(CardShipCardParams params) throws StripeException {
       return shipCard(params, (RequestOptions) null);
     }
 
     /**
-     * Updates the shipping status of the specified Issuing <code>Card</code> object to <code>
-     * shipped</code>.
+     * Updates the shipping status of the specified Issuing {@code Card} object to {@code shipped}.
      */
     public Card shipCard(CardShipCardParams params, RequestOptions options) throws StripeException {
       String url =
@@ -728,32 +722,28 @@ public class Card extends ApiResource implements HasId, MetadataStore<Card> {
     }
 
     /**
-     * Updates the shipping status of the specified Issuing <code>Card</code> object to <code>
-     * returned</code>.
+     * Updates the shipping status of the specified Issuing {@code Card} object to {@code returned}.
      */
     public Card returnCard() throws StripeException {
       return returnCard((Map<String, Object>) null, (RequestOptions) null);
     }
 
     /**
-     * Updates the shipping status of the specified Issuing <code>Card</code> object to <code>
-     * returned</code>.
+     * Updates the shipping status of the specified Issuing {@code Card} object to {@code returned}.
      */
     public Card returnCard(RequestOptions options) throws StripeException {
       return returnCard((Map<String, Object>) null, options);
     }
 
     /**
-     * Updates the shipping status of the specified Issuing <code>Card</code> object to <code>
-     * returned</code>.
+     * Updates the shipping status of the specified Issuing {@code Card} object to {@code returned}.
      */
     public Card returnCard(Map<String, Object> params) throws StripeException {
       return returnCard(params, (RequestOptions) null);
     }
 
     /**
-     * Updates the shipping status of the specified Issuing <code>Card</code> object to <code>
-     * returned</code>.
+     * Updates the shipping status of the specified Issuing {@code Card} object to {@code returned}.
      */
     public Card returnCard(Map<String, Object> params, RequestOptions options)
         throws StripeException {
@@ -768,16 +758,14 @@ public class Card extends ApiResource implements HasId, MetadataStore<Card> {
     }
 
     /**
-     * Updates the shipping status of the specified Issuing <code>Card</code> object to <code>
-     * returned</code>.
+     * Updates the shipping status of the specified Issuing {@code Card} object to {@code returned}.
      */
     public Card returnCard(CardReturnCardParams params) throws StripeException {
       return returnCard(params, (RequestOptions) null);
     }
 
     /**
-     * Updates the shipping status of the specified Issuing <code>Card</code> object to <code>
-     * returned</code>.
+     * Updates the shipping status of the specified Issuing {@code Card} object to {@code returned}.
      */
     public Card returnCard(CardReturnCardParams params, RequestOptions options)
         throws StripeException {
@@ -792,32 +780,28 @@ public class Card extends ApiResource implements HasId, MetadataStore<Card> {
     }
 
     /**
-     * Updates the shipping status of the specified Issuing <code>Card</code> object to <code>
-     * failure</code>.
+     * Updates the shipping status of the specified Issuing {@code Card} object to {@code failure}.
      */
     public Card failCard() throws StripeException {
       return failCard((Map<String, Object>) null, (RequestOptions) null);
     }
 
     /**
-     * Updates the shipping status of the specified Issuing <code>Card</code> object to <code>
-     * failure</code>.
+     * Updates the shipping status of the specified Issuing {@code Card} object to {@code failure}.
      */
     public Card failCard(RequestOptions options) throws StripeException {
       return failCard((Map<String, Object>) null, options);
     }
 
     /**
-     * Updates the shipping status of the specified Issuing <code>Card</code> object to <code>
-     * failure</code>.
+     * Updates the shipping status of the specified Issuing {@code Card} object to {@code failure}.
      */
     public Card failCard(Map<String, Object> params) throws StripeException {
       return failCard(params, (RequestOptions) null);
     }
 
     /**
-     * Updates the shipping status of the specified Issuing <code>Card</code> object to <code>
-     * failure</code>.
+     * Updates the shipping status of the specified Issuing {@code Card} object to {@code failure}.
      */
     public Card failCard(Map<String, Object> params, RequestOptions options)
         throws StripeException {
@@ -832,16 +816,14 @@ public class Card extends ApiResource implements HasId, MetadataStore<Card> {
     }
 
     /**
-     * Updates the shipping status of the specified Issuing <code>Card</code> object to <code>
-     * failure</code>.
+     * Updates the shipping status of the specified Issuing {@code Card} object to {@code failure}.
      */
     public Card failCard(CardFailCardParams params) throws StripeException {
       return failCard(params, (RequestOptions) null);
     }
 
     /**
-     * Updates the shipping status of the specified Issuing <code>Card</code> object to <code>
-     * failure</code>.
+     * Updates the shipping status of the specified Issuing {@code Card} object to {@code failure}.
      */
     public Card failCard(CardFailCardParams params, RequestOptions options) throws StripeException {
       String url =

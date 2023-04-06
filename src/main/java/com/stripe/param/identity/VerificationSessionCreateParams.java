@@ -43,8 +43,9 @@ public class VerificationSessionCreateParams extends ApiRequestParams {
   String returnUrl;
 
   /**
-   * The type of <a href="https://stripe.com/docs/identity/verification-checks">verification
-   * check</a> to be performed.
+   * <strong>Required.</strong> The type of <a
+   * href="https://stripe.com/docs/identity/verification-checks">verification check</a> to be
+   * performed.
    */
   @SerializedName("type")
   Type type;
@@ -178,8 +179,9 @@ public class VerificationSessionCreateParams extends ApiRequestParams {
     }
 
     /**
-     * The type of <a href="https://stripe.com/docs/identity/verification-checks">verification
-     * check</a> to be performed.
+     * <strong>Required.</strong> The type of <a
+     * href="https://stripe.com/docs/identity/verification-checks">verification check</a> to be
+     * performed.
      */
     public Builder setType(VerificationSessionCreateParams.Type type) {
       this.type = type;

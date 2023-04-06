@@ -69,9 +69,12 @@ public class PriceUpdateParams extends ApiRequestParams {
   Object recurring;
 
   /**
-   * Specifies whether the price is considered inclusive of taxes or exclusive of taxes. One of
-   * {@code inclusive}, {@code exclusive}, or {@code unspecified}. Once specified as either {@code
-   * inclusive} or {@code exclusive}, it cannot be changed.
+   * Only required if a <a
+   * href="https://stripe.com/docs/tax/products-prices-tax-categories-tax-behavior#setting-a-default-tax-behavior-(recommended)">default
+   * tax behavior</a> was not provided in the Stripe Tax settings. Specifies whether the price is
+   * considered inclusive of taxes or exclusive of taxes. One of {@code inclusive}, {@code
+   * exclusive}, or {@code unspecified}. Once specified as either {@code inclusive} or {@code
+   * exclusive}, it cannot be changed.
    */
   @SerializedName("tax_behavior")
   TaxBehavior taxBehavior;
@@ -367,9 +370,12 @@ public class PriceUpdateParams extends ApiRequestParams {
     }
 
     /**
-     * Specifies whether the price is considered inclusive of taxes or exclusive of taxes. One of
-     * {@code inclusive}, {@code exclusive}, or {@code unspecified}. Once specified as either {@code
-     * inclusive} or {@code exclusive}, it cannot be changed.
+     * Only required if a <a
+     * href="https://stripe.com/docs/tax/products-prices-tax-categories-tax-behavior#setting-a-default-tax-behavior-(recommended)">default
+     * tax behavior</a> was not provided in the Stripe Tax settings. Specifies whether the price is
+     * considered inclusive of taxes or exclusive of taxes. One of {@code inclusive}, {@code
+     * exclusive}, or {@code unspecified}. Once specified as either {@code inclusive} or {@code
+     * exclusive}, it cannot be changed.
      */
     public Builder setTaxBehavior(PriceUpdateParams.TaxBehavior taxBehavior) {
       this.taxBehavior = taxBehavior;
@@ -405,9 +411,12 @@ public class PriceUpdateParams extends ApiRequestParams {
     Map<String, Object> extraParams;
 
     /**
-     * Specifies whether the price is considered inclusive of taxes or exclusive of taxes. One of
-     * {@code inclusive}, {@code exclusive}, or {@code unspecified}. Once specified as either {@code
-     * inclusive} or {@code exclusive}, it cannot be changed.
+     * Only required if a <a
+     * href="https://stripe.com/docs/tax/products-prices-tax-categories-tax-behavior#setting-a-default-tax-behavior-(recommended)">default
+     * tax behavior</a> was not provided in the Stripe Tax settings. Specifies whether the price is
+     * considered inclusive of taxes or exclusive of taxes. One of {@code inclusive}, {@code
+     * exclusive}, or {@code unspecified}. Once specified as either {@code inclusive} or {@code
+     * exclusive}, it cannot be changed.
      */
     @SerializedName("tax_behavior")
     TaxBehavior taxBehavior;
@@ -514,9 +523,12 @@ public class PriceUpdateParams extends ApiRequestParams {
       }
 
       /**
-       * Specifies whether the price is considered inclusive of taxes or exclusive of taxes. One of
-       * {@code inclusive}, {@code exclusive}, or {@code unspecified}. Once specified as either
-       * {@code inclusive} or {@code exclusive}, it cannot be changed.
+       * Only required if a <a
+       * href="https://stripe.com/docs/tax/products-prices-tax-categories-tax-behavior#setting-a-default-tax-behavior-(recommended)">default
+       * tax behavior</a> was not provided in the Stripe Tax settings. Specifies whether the price
+       * is considered inclusive of taxes or exclusive of taxes. One of {@code inclusive}, {@code
+       * exclusive}, or {@code unspecified}. Once specified as either {@code inclusive} or {@code
+       * exclusive}, it cannot be changed.
        */
       public Builder setTaxBehavior(PriceUpdateParams.CurrencyOption.TaxBehavior taxBehavior) {
         this.taxBehavior = taxBehavior;
@@ -582,8 +594,8 @@ public class PriceUpdateParams extends ApiRequestParams {
     @Getter
     public static class CustomUnitAmount {
       /**
-       * Pass in {@code true} to enable {@code custom_unit_amount}, otherwise omit {@code
-       * custom_unit_amount}.
+       * <strong>Required.</strong> Pass in {@code true} to enable {@code custom_unit_amount},
+       * otherwise omit {@code custom_unit_amount}.
        */
       @SerializedName("enabled")
       Boolean enabled;
@@ -647,8 +659,8 @@ public class PriceUpdateParams extends ApiRequestParams {
         }
 
         /**
-         * Pass in {@code true} to enable {@code custom_unit_amount}, otherwise omit {@code
-         * custom_unit_amount}.
+         * <strong>Required.</strong> Pass in {@code true} to enable {@code custom_unit_amount},
+         * otherwise omit {@code custom_unit_amount}.
          */
         public Builder setEnabled(Boolean enabled) {
           this.enabled = enabled;
@@ -744,8 +756,9 @@ public class PriceUpdateParams extends ApiRequestParams {
       Object unitAmountDecimal;
 
       /**
-       * Specifies the upper bound of this tier. The lower bound of a tier is the upper bound of the
-       * previous tier adding one. Use {@code inf} to define a fallback tier.
+       * <strong>Required.</strong> Specifies the upper bound of this tier. The lower bound of a
+       * tier is the upper bound of the previous tier adding one. Use {@code inf} to define a
+       * fallback tier.
        */
       @SerializedName("up_to")
       Object upTo;
@@ -877,8 +890,9 @@ public class PriceUpdateParams extends ApiRequestParams {
         }
 
         /**
-         * Specifies the upper bound of this tier. The lower bound of a tier is the upper bound of
-         * the previous tier adding one. Use {@code inf} to define a fallback tier.
+         * <strong>Required.</strong> Specifies the upper bound of this tier. The lower bound of a
+         * tier is the upper bound of the previous tier adding one. Use {@code inf} to define a
+         * fallback tier.
          */
         public Builder setUpTo(PriceUpdateParams.CurrencyOption.Tier.UpTo upTo) {
           this.upTo = upTo;
@@ -886,8 +900,9 @@ public class PriceUpdateParams extends ApiRequestParams {
         }
 
         /**
-         * Specifies the upper bound of this tier. The lower bound of a tier is the upper bound of
-         * the previous tier adding one. Use {@code inf} to define a fallback tier.
+         * <strong>Required.</strong> Specifies the upper bound of this tier. The lower bound of a
+         * tier is the upper bound of the previous tier adding one. Use {@code inf} to define a
+         * fallback tier.
          */
         public Builder setUpTo(Long upTo) {
           this.upTo = upTo;
@@ -930,8 +945,8 @@ public class PriceUpdateParams extends ApiRequestParams {
   @Getter
   public static class MigrateTo {
     /**
-     * The behavior controlling the point in the subscription lifecycle after which to migrate the
-     * price. Currently must be {@code at_cycle_end}.
+     * <strong>Required.</strong> The behavior controlling the point in the subscription lifecycle
+     * after which to migrate the price. Currently must be {@code at_cycle_end}.
      */
     @SerializedName("behavior")
     Behavior behavior;
@@ -949,7 +964,7 @@ public class PriceUpdateParams extends ApiRequestParams {
     @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
     Map<String, Object> extraParams;
 
-    /** The ID of the price object. */
+    /** <strong>Required.</strong> The ID of the price object. */
     @SerializedName("price")
     Object price;
 
@@ -981,8 +996,8 @@ public class PriceUpdateParams extends ApiRequestParams {
       }
 
       /**
-       * The behavior controlling the point in the subscription lifecycle after which to migrate the
-       * price. Currently must be {@code at_cycle_end}.
+       * <strong>Required.</strong> The behavior controlling the point in the subscription lifecycle
+       * after which to migrate the price. Currently must be {@code at_cycle_end}.
        */
       public Builder setBehavior(PriceUpdateParams.MigrateTo.Behavior behavior) {
         this.behavior = behavior;
@@ -1021,13 +1036,13 @@ public class PriceUpdateParams extends ApiRequestParams {
         return this;
       }
 
-      /** The ID of the price object. */
+      /** <strong>Required.</strong> The ID of the price object. */
       public Builder setPrice(String price) {
         this.price = price;
         return this;
       }
 
-      /** The ID of the price object. */
+      /** <strong>Required.</strong> The ID of the price object. */
       public Builder setPrice(EmptyParam price) {
         this.price = price;
         return this;

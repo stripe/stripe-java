@@ -177,7 +177,7 @@ public class Dispute extends ApiResource
    * Closing the dispute for a charge indicates that you do not have any evidence to submit and are
    * essentially dismissing the dispute, acknowledging it as lost.
    *
-   * <p>The status of the dispute will change from <code>needs_response</code> to <code>lost</code>.
+   * <p>The status of the dispute will change from {@code needs_response} to {@code lost}.
    * <em>Closing a dispute is irreversible</em>.
    */
   public Dispute close() throws StripeException {
@@ -188,7 +188,7 @@ public class Dispute extends ApiResource
    * Closing the dispute for a charge indicates that you do not have any evidence to submit and are
    * essentially dismissing the dispute, acknowledging it as lost.
    *
-   * <p>The status of the dispute will change from <code>needs_response</code> to <code>lost</code>.
+   * <p>The status of the dispute will change from {@code needs_response} to {@code lost}.
    * <em>Closing a dispute is irreversible</em>.
    */
   public Dispute close(RequestOptions options) throws StripeException {
@@ -199,7 +199,7 @@ public class Dispute extends ApiResource
    * Closing the dispute for a charge indicates that you do not have any evidence to submit and are
    * essentially dismissing the dispute, acknowledging it as lost.
    *
-   * <p>The status of the dispute will change from <code>needs_response</code> to <code>lost</code>.
+   * <p>The status of the dispute will change from {@code needs_response} to {@code lost}.
    * <em>Closing a dispute is irreversible</em>.
    */
   public Dispute close(Map<String, Object> params) throws StripeException {
@@ -210,7 +210,7 @@ public class Dispute extends ApiResource
    * Closing the dispute for a charge indicates that you do not have any evidence to submit and are
    * essentially dismissing the dispute, acknowledging it as lost.
    *
-   * <p>The status of the dispute will change from <code>needs_response</code> to <code>lost</code>.
+   * <p>The status of the dispute will change from {@code needs_response} to {@code lost}.
    * <em>Closing a dispute is irreversible</em>.
    */
   public Dispute close(Map<String, Object> params, RequestOptions options) throws StripeException {
@@ -226,7 +226,7 @@ public class Dispute extends ApiResource
    * Closing the dispute for a charge indicates that you do not have any evidence to submit and are
    * essentially dismissing the dispute, acknowledging it as lost.
    *
-   * <p>The status of the dispute will change from <code>needs_response</code> to <code>lost</code>.
+   * <p>The status of the dispute will change from {@code needs_response} to {@code lost}.
    * <em>Closing a dispute is irreversible</em>.
    */
   public Dispute close(DisputeCloseParams params) throws StripeException {
@@ -237,7 +237,7 @@ public class Dispute extends ApiResource
    * Closing the dispute for a charge indicates that you do not have any evidence to submit and are
    * essentially dismissing the dispute, acknowledging it as lost.
    *
-   * <p>The status of the dispute will change from <code>needs_response</code> to <code>lost</code>.
+   * <p>The status of the dispute will change from {@code needs_response} to {@code lost}.
    * <em>Closing a dispute is irreversible</em>.
    */
   public Dispute close(DisputeCloseParams params, RequestOptions options) throws StripeException {

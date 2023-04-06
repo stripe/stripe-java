@@ -28,7 +28,10 @@ public class InvoiceItemCreateParams extends ApiRequestParams {
   @SerializedName("currency")
   String currency;
 
-  /** The ID of the customer who will be billed when this invoice item is billed. */
+  /**
+   * <strong>Required.</strong> The ID of the customer who will be billed when this invoice item is
+   * billed.
+   */
   @SerializedName("customer")
   String customer;
 
@@ -117,9 +120,12 @@ public class InvoiceItemCreateParams extends ApiRequestParams {
   String subscription;
 
   /**
-   * Specifies whether the price is considered inclusive of taxes or exclusive of taxes. One of
-   * {@code inclusive}, {@code exclusive}, or {@code unspecified}. Once specified as either {@code
-   * inclusive} or {@code exclusive}, it cannot be changed.
+   * Only required if a <a
+   * href="https://stripe.com/docs/tax/products-prices-tax-categories-tax-behavior#setting-a-default-tax-behavior-(recommended)">default
+   * tax behavior</a> was not provided in the Stripe Tax settings. Specifies whether the price is
+   * considered inclusive of taxes or exclusive of taxes. One of {@code inclusive}, {@code
+   * exclusive}, or {@code unspecified}. Once specified as either {@code inclusive} or {@code
+   * exclusive}, it cannot be changed.
    */
   @SerializedName("tax_behavior")
   TaxBehavior taxBehavior;
@@ -285,7 +291,10 @@ public class InvoiceItemCreateParams extends ApiRequestParams {
       return this;
     }
 
-    /** The ID of the customer who will be billed when this invoice item is billed. */
+    /**
+     * <strong>Required.</strong> The ID of the customer who will be billed when this invoice item
+     * is billed.
+     */
     public Builder setCustomer(String customer) {
       this.customer = customer;
       return this;
@@ -509,9 +518,12 @@ public class InvoiceItemCreateParams extends ApiRequestParams {
     }
 
     /**
-     * Specifies whether the price is considered inclusive of taxes or exclusive of taxes. One of
-     * {@code inclusive}, {@code exclusive}, or {@code unspecified}. Once specified as either {@code
-     * inclusive} or {@code exclusive}, it cannot be changed.
+     * Only required if a <a
+     * href="https://stripe.com/docs/tax/products-prices-tax-categories-tax-behavior#setting-a-default-tax-behavior-(recommended)">default
+     * tax behavior</a> was not provided in the Stripe Tax settings. Specifies whether the price is
+     * considered inclusive of taxes or exclusive of taxes. One of {@code inclusive}, {@code
+     * exclusive}, or {@code unspecified}. Once specified as either {@code inclusive} or {@code
+     * exclusive}, it cannot be changed.
      */
     public Builder setTaxBehavior(InvoiceItemCreateParams.TaxBehavior taxBehavior) {
       this.taxBehavior = taxBehavior;
@@ -692,7 +704,10 @@ public class InvoiceItemCreateParams extends ApiRequestParams {
       @SerializedName("timestamp")
       Long timestamp;
 
-      /** The type of calculation made to determine when the discount ends. */
+      /**
+       * <strong>Required.</strong> The type of calculation made to determine when the discount
+       * ends.
+       */
       @SerializedName("type")
       Type type;
 
@@ -763,7 +778,10 @@ public class InvoiceItemCreateParams extends ApiRequestParams {
           return this;
         }
 
-        /** The type of calculation made to determine when the discount ends. */
+        /**
+         * <strong>Required.</strong> The type of calculation made to determine when the discount
+         * ends.
+         */
         public Builder setType(InvoiceItemCreateParams.Discount.DiscountEnd.Type type) {
           this.type = type;
           return this;
@@ -783,15 +801,15 @@ public class InvoiceItemCreateParams extends ApiRequestParams {
         Map<String, Object> extraParams;
 
         /**
-         * Specifies a type of interval unit. Either {@code day}, {@code week}, {@code month} or
-         * {@code year}.
+         * <strong>Required.</strong> Specifies a type of interval unit. Either {@code day}, {@code
+         * week}, {@code month} or {@code year}.
          */
         @SerializedName("interval")
         Interval interval;
 
         /**
-         * The number of intervals, as an whole number greater than 0. Stripe multiplies this by the
-         * interval type to get the overall duration.
+         * <strong>Required.</strong> The number of intervals, as an whole number greater than 0.
+         * Stripe multiplies this by the interval type to get the overall duration.
          */
         @SerializedName("interval_count")
         Long intervalCount;
@@ -848,8 +866,8 @@ public class InvoiceItemCreateParams extends ApiRequestParams {
           }
 
           /**
-           * Specifies a type of interval unit. Either {@code day}, {@code week}, {@code month} or
-           * {@code year}.
+           * <strong>Required.</strong> Specifies a type of interval unit. Either {@code day},
+           * {@code week}, {@code month} or {@code year}.
            */
           public Builder setInterval(
               InvoiceItemCreateParams.Discount.DiscountEnd.Duration.Interval interval) {
@@ -858,8 +876,8 @@ public class InvoiceItemCreateParams extends ApiRequestParams {
           }
 
           /**
-           * The number of intervals, as an whole number greater than 0. Stripe multiplies this by
-           * the interval type to get the overall duration.
+           * <strong>Required.</strong> The number of intervals, as an whole number greater than 0.
+           * Stripe multiplies this by the interval type to get the overall duration.
            */
           public Builder setIntervalCount(Long intervalCount) {
             this.intervalCount = intervalCount;
@@ -909,8 +927,8 @@ public class InvoiceItemCreateParams extends ApiRequestParams {
   @Getter
   public static class Period {
     /**
-     * The end of the period, which must be greater than or equal to the start. This value is
-     * inclusive.
+     * <strong>Required.</strong> The end of the period, which must be greater than or equal to the
+     * start. This value is inclusive.
      */
     @SerializedName("end")
     Long end;
@@ -924,7 +942,7 @@ public class InvoiceItemCreateParams extends ApiRequestParams {
     @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
     Map<String, Object> extraParams;
 
-    /** The start of the period. This value is inclusive. */
+    /** <strong>Required.</strong> The start of the period. This value is inclusive. */
     @SerializedName("start")
     Long start;
 
@@ -951,8 +969,8 @@ public class InvoiceItemCreateParams extends ApiRequestParams {
       }
 
       /**
-       * The end of the period, which must be greater than or equal to the start. This value is
-       * inclusive.
+       * <strong>Required.</strong> The end of the period, which must be greater than or equal to
+       * the start. This value is inclusive.
        */
       public Builder setEnd(Long end) {
         this.end = end;
@@ -985,7 +1003,7 @@ public class InvoiceItemCreateParams extends ApiRequestParams {
         return this;
       }
 
-      /** The start of the period. This value is inclusive. */
+      /** <strong>Required.</strong> The start of the period. This value is inclusive. */
       public Builder setStart(Long start) {
         this.start = start;
         return this;
@@ -996,9 +1014,9 @@ public class InvoiceItemCreateParams extends ApiRequestParams {
   @Getter
   public static class PriceData {
     /**
-     * Three-letter <a href="https://www.iso.org/iso-4217-currency-codes.html">ISO currency
-     * code</a>, in lowercase. Must be a <a href="https://stripe.com/docs/currencies">supported
-     * currency</a>.
+     * <strong>Required.</strong> Three-letter <a
+     * href="https://www.iso.org/iso-4217-currency-codes.html">ISO currency code</a>, in lowercase.
+     * Must be a <a href="https://stripe.com/docs/currencies">supported currency</a>.
      */
     @SerializedName("currency")
     String currency;
@@ -1012,14 +1030,17 @@ public class InvoiceItemCreateParams extends ApiRequestParams {
     @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
     Map<String, Object> extraParams;
 
-    /** The ID of the product that this price will belong to. */
+    /** <strong>Required.</strong> The ID of the product that this price will belong to. */
     @SerializedName("product")
     String product;
 
     /**
-     * Specifies whether the price is considered inclusive of taxes or exclusive of taxes. One of
-     * {@code inclusive}, {@code exclusive}, or {@code unspecified}. Once specified as either {@code
-     * inclusive} or {@code exclusive}, it cannot be changed.
+     * Only required if a <a
+     * href="https://stripe.com/docs/tax/products-prices-tax-categories-tax-behavior#setting-a-default-tax-behavior-(recommended)">default
+     * tax behavior</a> was not provided in the Stripe Tax settings. Specifies whether the price is
+     * considered inclusive of taxes or exclusive of taxes. One of {@code inclusive}, {@code
+     * exclusive}, or {@code unspecified}. Once specified as either {@code inclusive} or {@code
+     * exclusive}, it cannot be changed.
      */
     @SerializedName("tax_behavior")
     TaxBehavior taxBehavior;
@@ -1083,9 +1104,9 @@ public class InvoiceItemCreateParams extends ApiRequestParams {
       }
 
       /**
-       * Three-letter <a href="https://www.iso.org/iso-4217-currency-codes.html">ISO currency
-       * code</a>, in lowercase. Must be a <a href="https://stripe.com/docs/currencies">supported
-       * currency</a>.
+       * <strong>Required.</strong> Three-letter <a
+       * href="https://www.iso.org/iso-4217-currency-codes.html">ISO currency code</a>, in
+       * lowercase. Must be a <a href="https://stripe.com/docs/currencies">supported currency</a>.
        */
       public Builder setCurrency(String currency) {
         this.currency = currency;
@@ -1118,16 +1139,19 @@ public class InvoiceItemCreateParams extends ApiRequestParams {
         return this;
       }
 
-      /** The ID of the product that this price will belong to. */
+      /** <strong>Required.</strong> The ID of the product that this price will belong to. */
       public Builder setProduct(String product) {
         this.product = product;
         return this;
       }
 
       /**
-       * Specifies whether the price is considered inclusive of taxes or exclusive of taxes. One of
-       * {@code inclusive}, {@code exclusive}, or {@code unspecified}. Once specified as either
-       * {@code inclusive} or {@code exclusive}, it cannot be changed.
+       * Only required if a <a
+       * href="https://stripe.com/docs/tax/products-prices-tax-categories-tax-behavior#setting-a-default-tax-behavior-(recommended)">default
+       * tax behavior</a> was not provided in the Stripe Tax settings. Specifies whether the price
+       * is considered inclusive of taxes or exclusive of taxes. One of {@code inclusive}, {@code
+       * exclusive}, or {@code unspecified}. Once specified as either {@code inclusive} or {@code
+       * exclusive}, it cannot be changed.
        */
       public Builder setTaxBehavior(InvoiceItemCreateParams.PriceData.TaxBehavior taxBehavior) {
         this.taxBehavior = taxBehavior;

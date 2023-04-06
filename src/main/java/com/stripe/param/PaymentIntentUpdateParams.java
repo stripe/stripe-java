@@ -733,7 +733,10 @@ public class PaymentIntentUpdateParams extends ApiRequestParams {
 
   @Getter
   public static class MandateDataPublishableKey {
-    /** This hash contains details about the customer acceptance of the Mandate. */
+    /**
+     * <strong>Required.</strong> This hash contains details about the customer acceptance of the
+     * Mandate.
+     */
     @SerializedName("customer_acceptance")
     CustomerAcceptance customerAcceptance;
 
@@ -767,7 +770,10 @@ public class PaymentIntentUpdateParams extends ApiRequestParams {
             this.customerAcceptance, this.extraParams);
       }
 
-      /** This hash contains details about the customer acceptance of the Mandate. */
+      /**
+       * <strong>Required.</strong> This hash contains details about the customer acceptance of the
+       * Mandate.
+       */
       public Builder setCustomerAcceptance(
           PaymentIntentUpdateParams.MandateDataPublishableKey.CustomerAcceptance
               customerAcceptance) {
@@ -816,13 +822,16 @@ public class PaymentIntentUpdateParams extends ApiRequestParams {
       Map<String, Object> extraParams;
 
       /**
-       * If this is a Mandate accepted online, this hash contains details about the online
-       * acceptance.
+       * <strong>Required.</strong> If this is a Mandate accepted online, this hash contains details
+       * about the online acceptance.
        */
       @SerializedName("online")
       Online online;
 
-      /** The type of customer acceptance information included with the Mandate. */
+      /**
+       * <strong>Required.</strong> The type of customer acceptance information included with the
+       * Mandate.
+       */
       @SerializedName("type")
       Type type;
 
@@ -880,8 +889,8 @@ public class PaymentIntentUpdateParams extends ApiRequestParams {
         }
 
         /**
-         * If this is a Mandate accepted online, this hash contains details about the online
-         * acceptance.
+         * <strong>Required.</strong> If this is a Mandate accepted online, this hash contains
+         * details about the online acceptance.
          */
         public Builder setOnline(
             PaymentIntentUpdateParams.MandateDataPublishableKey.CustomerAcceptance.Online online) {
@@ -889,7 +898,10 @@ public class PaymentIntentUpdateParams extends ApiRequestParams {
           return this;
         }
 
-        /** The type of customer acceptance information included with the Mandate. */
+        /**
+         * <strong>Required.</strong> The type of customer acceptance information included with the
+         * Mandate.
+         */
         public Builder setType(
             PaymentIntentUpdateParams.MandateDataPublishableKey.CustomerAcceptance.Type type) {
           this.type = type;
@@ -1242,9 +1254,9 @@ public class PaymentIntentUpdateParams extends ApiRequestParams {
     Sofort sofort;
 
     /**
-     * The type of the PaymentMethod. An additional hash is included on the PaymentMethod with a
-     * name matching this value. It contains additional information specific to the PaymentMethod
-     * type.
+     * <strong>Required.</strong> The type of the PaymentMethod. An additional hash is included on
+     * the PaymentMethod with a name matching this value. It contains additional information
+     * specific to the PaymentMethod type.
      */
     @SerializedName("type")
     Type type;
@@ -1795,9 +1807,9 @@ public class PaymentIntentUpdateParams extends ApiRequestParams {
       }
 
       /**
-       * The type of the PaymentMethod. An additional hash is included on the PaymentMethod with a
-       * name matching this value. It contains additional information specific to the PaymentMethod
-       * type.
+       * <strong>Required.</strong> The type of the PaymentMethod. An additional hash is included on
+       * the PaymentMethod with a name matching this value. It contains additional information
+       * specific to the PaymentMethod type.
        */
       public Builder setType(PaymentIntentUpdateParams.PaymentMethodData.Type type) {
         this.type = type;
@@ -1835,7 +1847,7 @@ public class PaymentIntentUpdateParams extends ApiRequestParams {
 
     @Getter
     public static class AcssDebit {
-      /** Customer's bank account number. */
+      /** <strong>Required.</strong> Customer's bank account number. */
       @SerializedName("account_number")
       Object accountNumber;
 
@@ -1848,11 +1860,11 @@ public class PaymentIntentUpdateParams extends ApiRequestParams {
       @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
       Map<String, Object> extraParams;
 
-      /** Institution number of the customer's bank. */
+      /** <strong>Required.</strong> Institution number of the customer's bank. */
       @SerializedName("institution_number")
       Object institutionNumber;
 
-      /** Transit number of the customer's bank. */
+      /** <strong>Required.</strong> Transit number of the customer's bank. */
       @SerializedName("transit_number")
       Object transitNumber;
 
@@ -1886,13 +1898,13 @@ public class PaymentIntentUpdateParams extends ApiRequestParams {
               this.accountNumber, this.extraParams, this.institutionNumber, this.transitNumber);
         }
 
-        /** Customer's bank account number. */
+        /** <strong>Required.</strong> Customer's bank account number. */
         public Builder setAccountNumber(String accountNumber) {
           this.accountNumber = accountNumber;
           return this;
         }
 
-        /** Customer's bank account number. */
+        /** <strong>Required.</strong> Customer's bank account number. */
         public Builder setAccountNumber(EmptyParam accountNumber) {
           this.accountNumber = accountNumber;
           return this;
@@ -1926,25 +1938,25 @@ public class PaymentIntentUpdateParams extends ApiRequestParams {
           return this;
         }
 
-        /** Institution number of the customer's bank. */
+        /** <strong>Required.</strong> Institution number of the customer's bank. */
         public Builder setInstitutionNumber(String institutionNumber) {
           this.institutionNumber = institutionNumber;
           return this;
         }
 
-        /** Institution number of the customer's bank. */
+        /** <strong>Required.</strong> Institution number of the customer's bank. */
         public Builder setInstitutionNumber(EmptyParam institutionNumber) {
           this.institutionNumber = institutionNumber;
           return this;
         }
 
-        /** Transit number of the customer's bank. */
+        /** <strong>Required.</strong> Transit number of the customer's bank. */
         public Builder setTransitNumber(String transitNumber) {
           this.transitNumber = transitNumber;
           return this;
         }
 
-        /** Transit number of the customer's bank. */
+        /** <strong>Required.</strong> Transit number of the customer's bank. */
         public Builder setTransitNumber(EmptyParam transitNumber) {
           this.transitNumber = transitNumber;
           return this;
@@ -2125,11 +2137,11 @@ public class PaymentIntentUpdateParams extends ApiRequestParams {
 
     @Getter
     public static class AuBecsDebit {
-      /** The account number for the bank account. */
+      /** <strong>Required.</strong> The account number for the bank account. */
       @SerializedName("account_number")
       Object accountNumber;
 
-      /** Bank-State-Branch number of the bank account. */
+      /** <strong>Required.</strong> Bank-State-Branch number of the bank account. */
       @SerializedName("bsb_number")
       Object bsbNumber;
 
@@ -2165,25 +2177,25 @@ public class PaymentIntentUpdateParams extends ApiRequestParams {
               this.accountNumber, this.bsbNumber, this.extraParams);
         }
 
-        /** The account number for the bank account. */
+        /** <strong>Required.</strong> The account number for the bank account. */
         public Builder setAccountNumber(String accountNumber) {
           this.accountNumber = accountNumber;
           return this;
         }
 
-        /** The account number for the bank account. */
+        /** <strong>Required.</strong> The account number for the bank account. */
         public Builder setAccountNumber(EmptyParam accountNumber) {
           this.accountNumber = accountNumber;
           return this;
         }
 
-        /** Bank-State-Branch number of the bank account. */
+        /** <strong>Required.</strong> Bank-State-Branch number of the bank account. */
         public Builder setBsbNumber(String bsbNumber) {
           this.bsbNumber = bsbNumber;
           return this;
         }
 
-        /** Bank-State-Branch number of the bank account. */
+        /** <strong>Required.</strong> Bank-State-Branch number of the bank account. */
         public Builder setBsbNumber(EmptyParam bsbNumber) {
           this.bsbNumber = bsbNumber;
           return this;
@@ -2778,7 +2790,8 @@ public class PaymentIntentUpdateParams extends ApiRequestParams {
       Map<String, Object> extraParams;
 
       /**
-       * The tax ID of the customer (CPF for individual consumers or CNPJ for businesses consumers).
+       * <strong>Required.</strong> The tax ID of the customer (CPF for individual consumers or CNPJ
+       * for businesses consumers)
        */
       @SerializedName("tax_id")
       Object taxId;
@@ -2832,8 +2845,8 @@ public class PaymentIntentUpdateParams extends ApiRequestParams {
         }
 
         /**
-         * The tax ID of the customer (CPF for individual consumers or CNPJ for businesses
-         * consumers).
+         * <strong>Required.</strong> The tax ID of the customer (CPF for individual consumers or
+         * CNPJ for businesses consumers)
          */
         public Builder setTaxId(String taxId) {
           this.taxId = taxId;
@@ -2841,8 +2854,8 @@ public class PaymentIntentUpdateParams extends ApiRequestParams {
         }
 
         /**
-         * The tax ID of the customer (CPF for individual consumers or CNPJ for businesses
-         * consumers).
+         * <strong>Required.</strong> The tax ID of the customer (CPF for individual consumers or
+         * CNPJ for businesses consumers)
          */
         public Builder setTaxId(EmptyParam taxId) {
           this.taxId = taxId;
@@ -3134,7 +3147,7 @@ public class PaymentIntentUpdateParams extends ApiRequestParams {
       @SerializedName("account_holder_type")
       AccountHolderType accountHolderType;
 
-      /** The customer's bank. */
+      /** <strong>Required.</strong> The customer's bank. */
       @SerializedName("bank")
       Bank bank;
 
@@ -3177,7 +3190,7 @@ public class PaymentIntentUpdateParams extends ApiRequestParams {
           return this;
         }
 
-        /** The customer's bank. */
+        /** <strong>Required.</strong> The customer's bank. */
         public Builder setBank(PaymentIntentUpdateParams.PaymentMethodData.Fpx.Bank bank) {
           this.bank = bank;
           return this;
@@ -3666,7 +3679,7 @@ public class PaymentIntentUpdateParams extends ApiRequestParams {
 
       @Getter
       public static class Dob {
-        /** The day of birth, between 1 and 31. */
+        /** <strong>Required.</strong> The day of birth, between 1 and 31. */
         @SerializedName("day")
         Long day;
 
@@ -3680,11 +3693,11 @@ public class PaymentIntentUpdateParams extends ApiRequestParams {
         @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
         Map<String, Object> extraParams;
 
-        /** The month of birth, between 1 and 12. */
+        /** <strong>Required.</strong> The month of birth, between 1 and 12. */
         @SerializedName("month")
         Long month;
 
-        /** The four-digit year of birth. */
+        /** <strong>Required.</strong> The four-digit year of birth. */
         @SerializedName("year")
         Long year;
 
@@ -3714,7 +3727,7 @@ public class PaymentIntentUpdateParams extends ApiRequestParams {
                 this.day, this.extraParams, this.month, this.year);
           }
 
-          /** The day of birth, between 1 and 31. */
+          /** <strong>Required.</strong> The day of birth, between 1 and 31. */
           public Builder setDay(Long day) {
             this.day = day;
             return this;
@@ -3748,13 +3761,13 @@ public class PaymentIntentUpdateParams extends ApiRequestParams {
             return this;
           }
 
-          /** The month of birth, between 1 and 12. */
+          /** <strong>Required.</strong> The month of birth, between 1 and 12. */
           public Builder setMonth(Long month) {
             this.month = month;
             return this;
           }
 
-          /** The four-digit year of birth. */
+          /** <strong>Required.</strong> The four-digit year of birth. */
           public Builder setYear(Long year) {
             this.year = year;
             return this;
@@ -4416,7 +4429,7 @@ public class PaymentIntentUpdateParams extends ApiRequestParams {
       @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
       Map<String, Object> extraParams;
 
-      /** IBAN of the bank account. */
+      /** <strong>Required.</strong> IBAN of the bank account. */
       @SerializedName("iban")
       Object iban;
 
@@ -4468,13 +4481,13 @@ public class PaymentIntentUpdateParams extends ApiRequestParams {
           return this;
         }
 
-        /** IBAN of the bank account. */
+        /** <strong>Required.</strong> IBAN of the bank account. */
         public Builder setIban(String iban) {
           this.iban = iban;
           return this;
         }
 
-        /** IBAN of the bank account. */
+        /** <strong>Required.</strong> IBAN of the bank account. */
         public Builder setIban(EmptyParam iban) {
           this.iban = iban;
           return this;
@@ -4484,7 +4497,10 @@ public class PaymentIntentUpdateParams extends ApiRequestParams {
 
     @Getter
     public static class Sofort {
-      /** Two-letter ISO code representing the country the bank account is located in. */
+      /**
+       * <strong>Required.</strong> Two-letter ISO code representing the country the bank account is
+       * located in.
+       */
       @SerializedName("country")
       Country country;
 
@@ -4517,7 +4533,10 @@ public class PaymentIntentUpdateParams extends ApiRequestParams {
               this.country, this.extraParams);
         }
 
-        /** Two-letter ISO code representing the country the bank account is located in. */
+        /**
+         * <strong>Required.</strong> Two-letter ISO code representing the country the bank account
+         * is located in.
+         */
         public Builder setCountry(
             PaymentIntentUpdateParams.PaymentMethodData.Sofort.Country country) {
           this.country = country;
@@ -8275,8 +8294,8 @@ public class PaymentIntentUpdateParams extends ApiRequestParams {
         @Getter
         public static class Plan {
           /**
-           * For {@code fixed_count} installment plans, this is the number of installment payments
-           * your customer will make to their credit card.
+           * <strong>Required.</strong> For {@code fixed_count} installment plans, this is the
+           * number of installment payments your customer will make to their credit card.
            */
           @SerializedName("count")
           Long count;
@@ -8292,13 +8311,14 @@ public class PaymentIntentUpdateParams extends ApiRequestParams {
           Map<String, Object> extraParams;
 
           /**
-           * For {@code fixed_count} installment plans, this is the interval between installment
-           * payments your customer will make to their credit card. One of {@code month}.
+           * <strong>Required.</strong> For {@code fixed_count} installment plans, this is the
+           * interval between installment payments your customer will make to their credit card. One
+           * of {@code month}.
            */
           @SerializedName("interval")
           Interval interval;
 
-          /** Type of installment plan, one of {@code fixed_count}. */
+          /** <strong>Required.</strong> Type of installment plan, one of {@code fixed_count}. */
           @SerializedName("type")
           Type type;
 
@@ -8329,8 +8349,8 @@ public class PaymentIntentUpdateParams extends ApiRequestParams {
             }
 
             /**
-             * For {@code fixed_count} installment plans, this is the number of installment payments
-             * your customer will make to their credit card.
+             * <strong>Required.</strong> For {@code fixed_count} installment plans, this is the
+             * number of installment payments your customer will make to their credit card.
              */
             public Builder setCount(Long count) {
               this.count = count;
@@ -8368,8 +8388,9 @@ public class PaymentIntentUpdateParams extends ApiRequestParams {
             }
 
             /**
-             * For {@code fixed_count} installment plans, this is the interval between installment
-             * payments your customer will make to their credit card. One of {@code month}.
+             * <strong>Required.</strong> For {@code fixed_count} installment plans, this is the
+             * interval between installment payments your customer will make to their credit card.
+             * One of {@code month}.
              */
             public Builder setInterval(
                 PaymentIntentUpdateParams.PaymentMethodOptions.Card.Installments.Plan.Interval
@@ -8378,7 +8399,7 @@ public class PaymentIntentUpdateParams extends ApiRequestParams {
               return this;
             }
 
-            /** Type of installment plan, one of {@code fixed_count}. */
+            /** <strong>Required.</strong> Type of installment plan, one of {@code fixed_count}. */
             public Builder setType(
                 PaymentIntentUpdateParams.PaymentMethodOptions.Card.Installments.Plan.Type type) {
               this.type = type;
@@ -8414,14 +8435,15 @@ public class PaymentIntentUpdateParams extends ApiRequestParams {
 
       @Getter
       public static class MandateOptions {
-        /** Amount to be charged for future payments. */
+        /** <strong>Required.</strong> Amount to be charged for future payments. */
         @SerializedName("amount")
         Long amount;
 
         /**
-         * One of {@code fixed} or {@code maximum}. If {@code fixed}, the {@code amount} param
-         * refers to the exact amount to be charged in future payments. If {@code maximum}, the
-         * amount charged can be up to the value passed for the {@code amount} param.
+         * <strong>Required.</strong> One of {@code fixed} or {@code maximum}. If {@code fixed}, the
+         * {@code amount} param refers to the exact amount to be charged in future payments. If
+         * {@code maximum}, the amount charged can be up to the value passed for the {@code amount}
+         * param.
          */
         @SerializedName("amount_type")
         AmountType amountType;
@@ -8451,8 +8473,8 @@ public class PaymentIntentUpdateParams extends ApiRequestParams {
         Map<String, Object> extraParams;
 
         /**
-         * Specifies payment frequency. One of {@code day}, {@code week}, {@code month}, {@code
-         * year}, or {@code sporadic}.
+         * <strong>Required.</strong> Specifies payment frequency. One of {@code day}, {@code week},
+         * {@code month}, {@code year}, or {@code sporadic}.
          */
         @SerializedName("interval")
         Interval interval;
@@ -8466,13 +8488,13 @@ public class PaymentIntentUpdateParams extends ApiRequestParams {
         @SerializedName("interval_count")
         Long intervalCount;
 
-        /** Unique identifier for the mandate or subscription. */
+        /** <strong>Required.</strong> Unique identifier for the mandate or subscription. */
         @SerializedName("reference")
         Object reference;
 
         /**
-         * Start date of the mandate or subscription. Start date should not be lesser than
-         * yesterday.
+         * <strong>Required.</strong> Start date of the mandate or subscription. Start date should
+         * not be lesser than yesterday.
          */
         @SerializedName("start_date")
         Long startDate;
@@ -8548,16 +8570,17 @@ public class PaymentIntentUpdateParams extends ApiRequestParams {
                 this.supportedTypes);
           }
 
-          /** Amount to be charged for future payments. */
+          /** <strong>Required.</strong> Amount to be charged for future payments. */
           public Builder setAmount(Long amount) {
             this.amount = amount;
             return this;
           }
 
           /**
-           * One of {@code fixed} or {@code maximum}. If {@code fixed}, the {@code amount} param
-           * refers to the exact amount to be charged in future payments. If {@code maximum}, the
-           * amount charged can be up to the value passed for the {@code amount} param.
+           * <strong>Required.</strong> One of {@code fixed} or {@code maximum}. If {@code fixed},
+           * the {@code amount} param refers to the exact amount to be charged in future payments.
+           * If {@code maximum}, the amount charged can be up to the value passed for the {@code
+           * amount} param.
            */
           public Builder setAmountType(
               PaymentIntentUpdateParams.PaymentMethodOptions.Card.MandateOptions.AmountType
@@ -8624,8 +8647,8 @@ public class PaymentIntentUpdateParams extends ApiRequestParams {
           }
 
           /**
-           * Specifies payment frequency. One of {@code day}, {@code week}, {@code month}, {@code
-           * year}, or {@code sporadic}.
+           * <strong>Required.</strong> Specifies payment frequency. One of {@code day}, {@code
+           * week}, {@code month}, {@code year}, or {@code sporadic}.
            */
           public Builder setInterval(
               PaymentIntentUpdateParams.PaymentMethodOptions.Card.MandateOptions.Interval
@@ -8645,21 +8668,21 @@ public class PaymentIntentUpdateParams extends ApiRequestParams {
             return this;
           }
 
-          /** Unique identifier for the mandate or subscription. */
+          /** <strong>Required.</strong> Unique identifier for the mandate or subscription. */
           public Builder setReference(String reference) {
             this.reference = reference;
             return this;
           }
 
-          /** Unique identifier for the mandate or subscription. */
+          /** <strong>Required.</strong> Unique identifier for the mandate or subscription. */
           public Builder setReference(EmptyParam reference) {
             this.reference = reference;
             return this;
           }
 
           /**
-           * Start date of the mandate or subscription. Start date should not be lesser than
-           * yesterday.
+           * <strong>Required.</strong> Start date of the mandate or subscription. Start date should
+           * not be lesser than yesterday.
            */
           public Builder setStartDate(Long startDate) {
             this.startDate = startDate;
@@ -9349,9 +9372,9 @@ public class PaymentIntentUpdateParams extends ApiRequestParams {
             requestedAddressTypes;
 
         /**
-         * The list of bank transfer types that this PaymentIntent is allowed to use for funding
-         * Permitted values include: {@code eu_bank_transfer}, {@code gb_bank_transfer}, {@code
-         * jp_bank_transfer}, or {@code mx_bank_transfer}.
+         * <strong>Required.</strong> The list of bank transfer types that this PaymentIntent is
+         * allowed to use for funding Permitted values include: {@code eu_bank_transfer}, {@code
+         * gb_bank_transfer}, {@code jp_bank_transfer}, or {@code mx_bank_transfer}.
          */
         @SerializedName("type")
         Type type;
@@ -9470,9 +9493,9 @@ public class PaymentIntentUpdateParams extends ApiRequestParams {
           }
 
           /**
-           * The list of bank transfer types that this PaymentIntent is allowed to use for funding
-           * Permitted values include: {@code eu_bank_transfer}, {@code gb_bank_transfer}, {@code
-           * jp_bank_transfer}, or {@code mx_bank_transfer}.
+           * <strong>Required.</strong> The list of bank transfer types that this PaymentIntent is
+           * allowed to use for funding Permitted values include: {@code eu_bank_transfer}, {@code
+           * gb_bank_transfer}, {@code jp_bank_transfer}, or {@code mx_bank_transfer}.
            */
           public Builder setType(
               PaymentIntentUpdateParams.PaymentMethodOptions.CustomerBalance.BankTransfer.Type
@@ -9485,8 +9508,9 @@ public class PaymentIntentUpdateParams extends ApiRequestParams {
         @Getter
         public static class EuBankTransfer {
           /**
-           * The desired country code of the bank account information. Permitted values include:
-           * {@code BE}, {@code DE}, {@code ES}, {@code FR}, {@code IE}, or {@code NL}.
+           * <strong>Required.</strong> The desired country code of the bank account information.
+           * Permitted values include: {@code BE}, {@code DE}, {@code ES}, {@code FR}, {@code IE},
+           * or {@code NL}.
            */
           @SerializedName("country")
           Object country;
@@ -9524,8 +9548,9 @@ public class PaymentIntentUpdateParams extends ApiRequestParams {
             }
 
             /**
-             * The desired country code of the bank account information. Permitted values include:
-             * {@code BE}, {@code DE}, {@code ES}, {@code FR}, {@code IE}, or {@code NL}.
+             * <strong>Required.</strong> The desired country code of the bank account information.
+             * Permitted values include: {@code BE}, {@code DE}, {@code ES}, {@code FR}, {@code IE},
+             * or {@code NL}.
              */
             public Builder setCountry(String country) {
               this.country = country;
@@ -9533,8 +9558,9 @@ public class PaymentIntentUpdateParams extends ApiRequestParams {
             }
 
             /**
-             * The desired country code of the bank account information. Permitted values include:
-             * {@code BE}, {@code DE}, {@code ES}, {@code FR}, {@code IE}, or {@code NL}.
+             * <strong>Required.</strong> The desired country code of the bank account information.
+             * Permitted values include: {@code BE}, {@code DE}, {@code ES}, {@code FR}, {@code IE},
+             * or {@code NL}.
              */
             public Builder setCountry(EmptyParam country) {
               this.country = country;
@@ -12995,7 +13021,9 @@ public class PaymentIntentUpdateParams extends ApiRequestParams {
           @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
           Map<String, Object> extraParams;
 
-          /** Settings for configuring manual entry of account details. */
+          /**
+           * <strong>Required.</strong> Settings for configuring manual entry of account details.
+           */
           @SerializedName("mode")
           Mode mode;
 
@@ -13051,7 +13079,9 @@ public class PaymentIntentUpdateParams extends ApiRequestParams {
               return this;
             }
 
-            /** Settings for configuring manual entry of account details. */
+            /**
+             * <strong>Required.</strong> Settings for configuring manual entry of account details.
+             */
             public Builder setMode(
                 PaymentIntentUpdateParams.PaymentMethodOptions.UsBankAccount.FinancialConnections
                         .ManualEntry.Mode
@@ -13284,7 +13314,7 @@ public class PaymentIntentUpdateParams extends ApiRequestParams {
       @SerializedName("app_id")
       Object appId;
 
-      /** The client type that the end customer will pay from. */
+      /** <strong>Required.</strong> The client type that the end customer will pay from */
       @SerializedName("client")
       Client client;
 
@@ -13361,7 +13391,7 @@ public class PaymentIntentUpdateParams extends ApiRequestParams {
           return this;
         }
 
-        /** The client type that the end customer will pay from. */
+        /** <strong>Required.</strong> The client type that the end customer will pay from */
         public Builder setClient(
             PaymentIntentUpdateParams.PaymentMethodOptions.WechatPay.Client client) {
           this.client = client;
@@ -13458,7 +13488,7 @@ public class PaymentIntentUpdateParams extends ApiRequestParams {
 
   @Getter
   public static class Shipping {
-    /** Shipping address. */
+    /** <strong>Required.</strong> Shipping address. */
     @SerializedName("address")
     Address address;
 
@@ -13475,7 +13505,7 @@ public class PaymentIntentUpdateParams extends ApiRequestParams {
     @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
     Map<String, Object> extraParams;
 
-    /** Recipient name. */
+    /** <strong>Required.</strong> Recipient name. */
     @SerializedName("name")
     Object name;
 
@@ -13533,7 +13563,7 @@ public class PaymentIntentUpdateParams extends ApiRequestParams {
             this.trackingNumber);
       }
 
-      /** Shipping address. */
+      /** <strong>Required.</strong> Shipping address. */
       public Builder setAddress(PaymentIntentUpdateParams.Shipping.Address address) {
         this.address = address;
         return this;
@@ -13577,13 +13607,13 @@ public class PaymentIntentUpdateParams extends ApiRequestParams {
         return this;
       }
 
-      /** Recipient name. */
+      /** <strong>Required.</strong> Recipient name. */
       public Builder setName(String name) {
         this.name = name;
         return this;
       }
 
-      /** Recipient name. */
+      /** <strong>Required.</strong> Recipient name. */
       public Builder setName(EmptyParam name) {
         this.name = name;
         return this;

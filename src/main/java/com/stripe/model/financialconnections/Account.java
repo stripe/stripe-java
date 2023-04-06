@@ -164,16 +164,16 @@ public class Account extends ApiResource implements HasId {
   }
 
   /**
-   * Disables your access to a Financial Connections <code>Account</code>. You will no longer be
-   * able to access data associated with the account (e.g. balances, transactions).
+   * Disables your access to a Financial Connections {@code Account}. You will no longer be able to
+   * access data associated with the account (e.g. balances, transactions).
    */
   public com.stripe.model.financialconnections.Account disconnect() throws StripeException {
     return disconnect((Map<String, Object>) null, (RequestOptions) null);
   }
 
   /**
-   * Disables your access to a Financial Connections <code>Account</code>. You will no longer be
-   * able to access data associated with the account (e.g. balances, transactions).
+   * Disables your access to a Financial Connections {@code Account}. You will no longer be able to
+   * access data associated with the account (e.g. balances, transactions).
    */
   public com.stripe.model.financialconnections.Account disconnect(RequestOptions options)
       throws StripeException {
@@ -181,8 +181,8 @@ public class Account extends ApiResource implements HasId {
   }
 
   /**
-   * Disables your access to a Financial Connections <code>Account</code>. You will no longer be
-   * able to access data associated with the account (e.g. balances, transactions).
+   * Disables your access to a Financial Connections {@code Account}. You will no longer be able to
+   * access data associated with the account (e.g. balances, transactions).
    */
   public com.stripe.model.financialconnections.Account disconnect(Map<String, Object> params)
       throws StripeException {
@@ -190,8 +190,8 @@ public class Account extends ApiResource implements HasId {
   }
 
   /**
-   * Disables your access to a Financial Connections <code>Account</code>. You will no longer be
-   * able to access data associated with the account (e.g. balances, transactions).
+   * Disables your access to a Financial Connections {@code Account}. You will no longer be able to
+   * access data associated with the account (e.g. balances, transactions).
    */
   public com.stripe.model.financialconnections.Account disconnect(
       Map<String, Object> params, RequestOptions options) throws StripeException {
@@ -211,8 +211,8 @@ public class Account extends ApiResource implements HasId {
   }
 
   /**
-   * Disables your access to a Financial Connections <code>Account</code>. You will no longer be
-   * able to access data associated with the account (e.g. balances, transactions).
+   * Disables your access to a Financial Connections {@code Account}. You will no longer be able to
+   * access data associated with the account (e.g. balances, transactions).
    */
   public com.stripe.model.financialconnections.Account disconnect(AccountDisconnectParams params)
       throws StripeException {
@@ -220,8 +220,8 @@ public class Account extends ApiResource implements HasId {
   }
 
   /**
-   * Disables your access to a Financial Connections <code>Account</code>. You will no longer be
-   * able to access data associated with the account (e.g. balances, transactions).
+   * Disables your access to a Financial Connections {@code Account}. You will no longer be able to
+   * access data associated with the account (e.g. balances, transactions).
    */
   public com.stripe.model.financialconnections.Account disconnect(
       AccountDisconnectParams params, RequestOptions options) throws StripeException {
@@ -240,12 +240,12 @@ public class Account extends ApiResource implements HasId {
         options);
   }
 
-  /** Returns a list of Financial Connections <code>Account</code> objects. */
+  /** Returns a list of Financial Connections {@code Account} objects. */
   public static AccountCollection list(Map<String, Object> params) throws StripeException {
     return list(params, (RequestOptions) null);
   }
 
-  /** Returns a list of Financial Connections <code>Account</code> objects. */
+  /** Returns a list of Financial Connections {@code Account} objects. */
   public static AccountCollection list(Map<String, Object> params, RequestOptions options)
       throws StripeException {
     String url =
@@ -254,12 +254,12 @@ public class Account extends ApiResource implements HasId {
         ApiResource.RequestMethod.GET, url, params, AccountCollection.class, options);
   }
 
-  /** Returns a list of Financial Connections <code>Account</code> objects. */
+  /** Returns a list of Financial Connections {@code Account} objects. */
   public static AccountCollection list(AccountListParams params) throws StripeException {
     return list(params, (RequestOptions) null);
   }
 
-  /** Returns a list of Financial Connections <code>Account</code> objects. */
+  /** Returns a list of Financial Connections {@code Account} objects. */
   public static AccountCollection list(AccountListParams params, RequestOptions options)
       throws StripeException {
     String url =
@@ -268,12 +268,12 @@ public class Account extends ApiResource implements HasId {
         ApiResource.RequestMethod.GET, url, params, AccountCollection.class, options);
   }
 
-  /** Lists all owners for a given <code>Account</code>. */
+  /** Lists all owners for a given {@code Account}. */
   public AccountOwnerCollection listOwners(Map<String, Object> params) throws StripeException {
     return listOwners(params, (RequestOptions) null);
   }
 
-  /** Lists all owners for a given <code>Account</code>. */
+  /** Lists all owners for a given {@code Account}. */
   public AccountOwnerCollection listOwners(Map<String, Object> params, RequestOptions options)
       throws StripeException {
     String url =
@@ -287,12 +287,12 @@ public class Account extends ApiResource implements HasId {
         ApiResource.RequestMethod.GET, url, params, AccountOwnerCollection.class, options);
   }
 
-  /** Lists all owners for a given <code>Account</code>. */
+  /** Lists all owners for a given {@code Account}. */
   public AccountOwnerCollection listOwners(AccountListOwnersParams params) throws StripeException {
     return listOwners(params, (RequestOptions) null);
   }
 
-  /** Lists all owners for a given <code>Account</code>. */
+  /** Lists all owners for a given {@code Account}. */
   public AccountOwnerCollection listOwners(AccountListOwnersParams params, RequestOptions options)
       throws StripeException {
     String url =
@@ -306,13 +306,13 @@ public class Account extends ApiResource implements HasId {
         ApiResource.RequestMethod.GET, url, params, AccountOwnerCollection.class, options);
   }
 
-  /** Refreshes the data associated with a Financial Connections <code>Account</code>. */
+  /** Refreshes the data associated with a Financial Connections {@code Account}. */
   public com.stripe.model.financialconnections.Account refresh(Map<String, Object> params)
       throws StripeException {
     return refresh(params, (RequestOptions) null);
   }
 
-  /** Refreshes the data associated with a Financial Connections <code>Account</code>. */
+  /** Refreshes the data associated with a Financial Connections {@code Account}. */
   public com.stripe.model.financialconnections.Account refresh(
       Map<String, Object> params, RequestOptions options) throws StripeException {
     String url =
@@ -330,13 +330,13 @@ public class Account extends ApiResource implements HasId {
         options);
   }
 
-  /** Refreshes the data associated with a Financial Connections <code>Account</code>. */
+  /** Refreshes the data associated with a Financial Connections {@code Account}. */
   public com.stripe.model.financialconnections.Account refresh(AccountRefreshParams params)
       throws StripeException {
     return refresh(params, (RequestOptions) null);
   }
 
-  /** Refreshes the data associated with a Financial Connections <code>Account</code>. */
+  /** Refreshes the data associated with a Financial Connections {@code Account}. */
   public com.stripe.model.financialconnections.Account refresh(
       AccountRefreshParams params, RequestOptions options) throws StripeException {
     String url =
@@ -354,19 +354,19 @@ public class Account extends ApiResource implements HasId {
         options);
   }
 
-  /** Retrieves the details of an Financial Connections <code>Account</code>. */
+  /** Retrieves the details of an Financial Connections {@code Account}. */
   public static com.stripe.model.financialconnections.Account retrieve(String account)
       throws StripeException {
     return retrieve(account, (Map<String, Object>) null, (RequestOptions) null);
   }
 
-  /** Retrieves the details of an Financial Connections <code>Account</code>. */
+  /** Retrieves the details of an Financial Connections {@code Account}. */
   public static com.stripe.model.financialconnections.Account retrieve(
       String account, RequestOptions options) throws StripeException {
     return retrieve(account, (Map<String, Object>) null, options);
   }
 
-  /** Retrieves the details of an Financial Connections <code>Account</code>. */
+  /** Retrieves the details of an Financial Connections {@code Account}. */
   public static com.stripe.model.financialconnections.Account retrieve(
       String account, Map<String, Object> params, RequestOptions options) throws StripeException {
     String url =
@@ -383,7 +383,7 @@ public class Account extends ApiResource implements HasId {
         options);
   }
 
-  /** Retrieves the details of an Financial Connections <code>Account</code>. */
+  /** Retrieves the details of an Financial Connections {@code Account}. */
   public static com.stripe.model.financialconnections.Account retrieve(
       String account, AccountRetrieveParams params, RequestOptions options) throws StripeException {
     String url =

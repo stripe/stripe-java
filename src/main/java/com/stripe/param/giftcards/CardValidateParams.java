@@ -11,7 +11,7 @@ import lombok.Getter;
 
 @Getter
 public class CardValidateParams extends ApiRequestParams {
-  /** The gift card code to be validated. */
+  /** <strong>Required.</strong> The gift card code to be validated. */
   @SerializedName("code")
   String code;
 
@@ -58,7 +58,7 @@ public class CardValidateParams extends ApiRequestParams {
       return new CardValidateParams(this.code, this.expand, this.extraParams, this.giftcardPin);
     }
 
-    /** The gift card code to be validated. */
+    /** <strong>Required.</strong> The gift card code to be validated. */
     public Builder setCode(String code) {
       this.code = code;
       return this;

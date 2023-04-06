@@ -204,5 +204,23 @@ public class FinancingTransaction extends ApiResource implements HasId {
     /** The advance and fee amount being repaid, paid out, or reversed in minor units. */
     @SerializedName("total_amount")
     Long totalAmount;
+
+    /** This is an object representing a linked transaction on a Capital Financing Transaction. */
+    @SerializedName("transaction")
+    Transaction transaction;
+
+    /** This is an object representing a linked transaction on a Capital Financing Transaction. */
+    @Getter
+    @Setter
+    @EqualsAndHashCode(callSuper = false)
+    public static class Transaction extends StripeObject {
+      /** The linked payment ID. */
+      @SerializedName("charge")
+      String charge;
+
+      /** The linked Treasury Financing Transaction ID. */
+      @SerializedName("treasury_transaction")
+      String treasuryTransaction;
+    }
   }
 }

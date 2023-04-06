@@ -16,9 +16,9 @@ public class OrderSubmitParams extends ApiRequestParams {
   List<String> expand;
 
   /**
-   * {@code expected_total} should always be set to the order's {@code amount_total} field. If they
-   * don't match, submitting the order will fail. This helps detect race conditions where something
-   * else concurrently modifies the order.
+   * <strong>Required.</strong> {@code expected_total} should always be set to the order's {@code
+   * amount_total} field. If they don't match, submitting the order will fail. This helps detect
+   * race conditions where something else concurrently modifies the order.
    */
   @SerializedName("expected_total")
   Long expectedTotal;
@@ -82,9 +82,9 @@ public class OrderSubmitParams extends ApiRequestParams {
     }
 
     /**
-     * {@code expected_total} should always be set to the order's {@code amount_total} field. If
-     * they don't match, submitting the order will fail. This helps detect race conditions where
-     * something else concurrently modifies the order.
+     * <strong>Required.</strong> {@code expected_total} should always be set to the order's {@code
+     * amount_total} field. If they don't match, submitting the order will fail. This helps detect
+     * race conditions where something else concurrently modifies the order.
      */
     public Builder setExpectedTotal(Long expectedTotal) {
       this.expectedTotal = expectedTotal;

@@ -78,8 +78,8 @@ public class TransferReversalCollection extends StripeCollection<TransferReversa
   /**
    * You can see a list of the reversals belonging to a specific transfer. Note that the 10 most
    * recent reversals are always available by default on the transfer object. If you need more than
-   * those 10, you can use this API method and the <code>limit</code> and <code>starting_after
-   * </code> parameters to page through additional reversals.
+   * those 10, you can use this API method and the {@code limit} and {@code starting_after}
+   * parameters to page through additional reversals.
    */
   public TransferReversalCollection list(Map<String, Object> params) throws StripeException {
     return list(params, (RequestOptions) null);
@@ -88,8 +88,8 @@ public class TransferReversalCollection extends StripeCollection<TransferReversa
   /**
    * You can see a list of the reversals belonging to a specific transfer. Note that the 10 most
    * recent reversals are always available by default on the transfer object. If you need more than
-   * those 10, you can use this API method and the <code>limit</code> and <code>starting_after
-   * </code> parameters to page through additional reversals.
+   * those 10, you can use this API method and the {@code limit} and {@code starting_after}
+   * parameters to page through additional reversals.
    */
   public TransferReversalCollection list(Map<String, Object> params, RequestOptions options)
       throws StripeException {
@@ -101,8 +101,8 @@ public class TransferReversalCollection extends StripeCollection<TransferReversa
   /**
    * You can see a list of the reversals belonging to a specific transfer. Note that the 10 most
    * recent reversals are always available by default on the transfer object. If you need more than
-   * those 10, you can use this API method and the <code>limit</code> and <code>starting_after
-   * </code> parameters to page through additional reversals.
+   * those 10, you can use this API method and the {@code limit} and {@code starting_after}
+   * parameters to page through additional reversals.
    */
   public TransferReversalCollection list(TransferReversalCollectionListParams params)
       throws StripeException {
@@ -112,8 +112,8 @@ public class TransferReversalCollection extends StripeCollection<TransferReversa
   /**
    * You can see a list of the reversals belonging to a specific transfer. Note that the 10 most
    * recent reversals are always available by default on the transfer object. If you need more than
-   * those 10, you can use this API method and the <code>limit</code> and <code>starting_after
-   * </code> parameters to page through additional reversals.
+   * those 10, you can use this API method and the {@code limit} and {@code starting_after}
+   * parameters to page through additional reversals.
    */
   public TransferReversalCollection list(
       TransferReversalCollectionListParams params, RequestOptions options) throws StripeException {

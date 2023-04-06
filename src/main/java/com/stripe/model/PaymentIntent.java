@@ -536,15 +536,15 @@ public class PaymentIntent extends ApiResource implements HasId, MetadataStore<P
   }
 
   /**
-   * A PaymentIntent object can be canceled when it is in one of these statuses: <code>
-   * requires_payment_method</code>, <code>requires_capture</code>, <code>requires_confirmation
-   * </code>, <code>requires_action</code> or, <a href="https://stripe.com/docs/payments/intents">in
-   * rare cases</a>, <code>processing</code>.
+   * A PaymentIntent object can be canceled when it is in one of these statuses: {@code
+   * requires_payment_method}, {@code requires_capture}, {@code requires_confirmation}, {@code
+   * requires_action} or, <a href="https://stripe.com/docs/payments/intents">in rare cases</a>,
+   * {@code processing}.
    *
    * <p>Once canceled, no additional charges will be made by the PaymentIntent and any operations on
-   * the PaymentIntent will fail with an error. For PaymentIntents with <code>
-   * status=’requires_capture’</code>, the remaining <code>amount_capturable</code> will
-   * automatically be refunded.
+   * the PaymentIntent will fail with an error. For PaymentIntents with {@code
+   * status=’requires_capture’}, the remaining {@code amount_capturable} will automatically be
+   * refunded.
    *
    * <p>You cannot cancel the PaymentIntent for a Checkout Session. <a
    * href="https://stripe.com/docs/api/checkout/sessions/expire">Expire the Checkout Session</a>
@@ -555,15 +555,15 @@ public class PaymentIntent extends ApiResource implements HasId, MetadataStore<P
   }
 
   /**
-   * A PaymentIntent object can be canceled when it is in one of these statuses: <code>
-   * requires_payment_method</code>, <code>requires_capture</code>, <code>requires_confirmation
-   * </code>, <code>requires_action</code> or, <a href="https://stripe.com/docs/payments/intents">in
-   * rare cases</a>, <code>processing</code>.
+   * A PaymentIntent object can be canceled when it is in one of these statuses: {@code
+   * requires_payment_method}, {@code requires_capture}, {@code requires_confirmation}, {@code
+   * requires_action} or, <a href="https://stripe.com/docs/payments/intents">in rare cases</a>,
+   * {@code processing}.
    *
    * <p>Once canceled, no additional charges will be made by the PaymentIntent and any operations on
-   * the PaymentIntent will fail with an error. For PaymentIntents with <code>
-   * status=’requires_capture’</code>, the remaining <code>amount_capturable</code> will
-   * automatically be refunded.
+   * the PaymentIntent will fail with an error. For PaymentIntents with {@code
+   * status=’requires_capture’}, the remaining {@code amount_capturable} will automatically be
+   * refunded.
    *
    * <p>You cannot cancel the PaymentIntent for a Checkout Session. <a
    * href="https://stripe.com/docs/api/checkout/sessions/expire">Expire the Checkout Session</a>
@@ -574,15 +574,15 @@ public class PaymentIntent extends ApiResource implements HasId, MetadataStore<P
   }
 
   /**
-   * A PaymentIntent object can be canceled when it is in one of these statuses: <code>
-   * requires_payment_method</code>, <code>requires_capture</code>, <code>requires_confirmation
-   * </code>, <code>requires_action</code> or, <a href="https://stripe.com/docs/payments/intents">in
-   * rare cases</a>, <code>processing</code>.
+   * A PaymentIntent object can be canceled when it is in one of these statuses: {@code
+   * requires_payment_method}, {@code requires_capture}, {@code requires_confirmation}, {@code
+   * requires_action} or, <a href="https://stripe.com/docs/payments/intents">in rare cases</a>,
+   * {@code processing}.
    *
    * <p>Once canceled, no additional charges will be made by the PaymentIntent and any operations on
-   * the PaymentIntent will fail with an error. For PaymentIntents with <code>
-   * status=’requires_capture’</code>, the remaining <code>amount_capturable</code> will
-   * automatically be refunded.
+   * the PaymentIntent will fail with an error. For PaymentIntents with {@code
+   * status=’requires_capture’}, the remaining {@code amount_capturable} will automatically be
+   * refunded.
    *
    * <p>You cannot cancel the PaymentIntent for a Checkout Session. <a
    * href="https://stripe.com/docs/api/checkout/sessions/expire">Expire the Checkout Session</a>
@@ -593,15 +593,15 @@ public class PaymentIntent extends ApiResource implements HasId, MetadataStore<P
   }
 
   /**
-   * A PaymentIntent object can be canceled when it is in one of these statuses: <code>
-   * requires_payment_method</code>, <code>requires_capture</code>, <code>requires_confirmation
-   * </code>, <code>requires_action</code> or, <a href="https://stripe.com/docs/payments/intents">in
-   * rare cases</a>, <code>processing</code>.
+   * A PaymentIntent object can be canceled when it is in one of these statuses: {@code
+   * requires_payment_method}, {@code requires_capture}, {@code requires_confirmation}, {@code
+   * requires_action} or, <a href="https://stripe.com/docs/payments/intents">in rare cases</a>,
+   * {@code processing}.
    *
    * <p>Once canceled, no additional charges will be made by the PaymentIntent and any operations on
-   * the PaymentIntent will fail with an error. For PaymentIntents with <code>
-   * status=’requires_capture’</code>, the remaining <code>amount_capturable</code> will
-   * automatically be refunded.
+   * the PaymentIntent will fail with an error. For PaymentIntents with {@code
+   * status=’requires_capture’}, the remaining {@code amount_capturable} will automatically be
+   * refunded.
    *
    * <p>You cannot cancel the PaymentIntent for a Checkout Session. <a
    * href="https://stripe.com/docs/api/checkout/sessions/expire">Expire the Checkout Session</a>
@@ -619,15 +619,15 @@ public class PaymentIntent extends ApiResource implements HasId, MetadataStore<P
   }
 
   /**
-   * A PaymentIntent object can be canceled when it is in one of these statuses: <code>
-   * requires_payment_method</code>, <code>requires_capture</code>, <code>requires_confirmation
-   * </code>, <code>requires_action</code> or, <a href="https://stripe.com/docs/payments/intents">in
-   * rare cases</a>, <code>processing</code>.
+   * A PaymentIntent object can be canceled when it is in one of these statuses: {@code
+   * requires_payment_method}, {@code requires_capture}, {@code requires_confirmation}, {@code
+   * requires_action} or, <a href="https://stripe.com/docs/payments/intents">in rare cases</a>,
+   * {@code processing}.
    *
    * <p>Once canceled, no additional charges will be made by the PaymentIntent and any operations on
-   * the PaymentIntent will fail with an error. For PaymentIntents with <code>
-   * status=’requires_capture’</code>, the remaining <code>amount_capturable</code> will
-   * automatically be refunded.
+   * the PaymentIntent will fail with an error. For PaymentIntents with {@code
+   * status=’requires_capture’}, the remaining {@code amount_capturable} will automatically be
+   * refunded.
    *
    * <p>You cannot cancel the PaymentIntent for a Checkout Session. <a
    * href="https://stripe.com/docs/api/checkout/sessions/expire">Expire the Checkout Session</a>
@@ -638,15 +638,15 @@ public class PaymentIntent extends ApiResource implements HasId, MetadataStore<P
   }
 
   /**
-   * A PaymentIntent object can be canceled when it is in one of these statuses: <code>
-   * requires_payment_method</code>, <code>requires_capture</code>, <code>requires_confirmation
-   * </code>, <code>requires_action</code> or, <a href="https://stripe.com/docs/payments/intents">in
-   * rare cases</a>, <code>processing</code>.
+   * A PaymentIntent object can be canceled when it is in one of these statuses: {@code
+   * requires_payment_method}, {@code requires_capture}, {@code requires_confirmation}, {@code
+   * requires_action} or, <a href="https://stripe.com/docs/payments/intents">in rare cases</a>,
+   * {@code processing}.
    *
    * <p>Once canceled, no additional charges will be made by the PaymentIntent and any operations on
-   * the PaymentIntent will fail with an error. For PaymentIntents with <code>
-   * status=’requires_capture’</code>, the remaining <code>amount_capturable</code> will
-   * automatically be refunded.
+   * the PaymentIntent will fail with an error. For PaymentIntents with {@code
+   * status=’requires_capture’}, the remaining {@code amount_capturable} will automatically be
+   * refunded.
    *
    * <p>You cannot cancel the PaymentIntent for a Checkout Session. <a
    * href="https://stripe.com/docs/api/checkout/sessions/expire">Expire the Checkout Session</a>
@@ -664,8 +664,8 @@ public class PaymentIntent extends ApiResource implements HasId, MetadataStore<P
   }
 
   /**
-   * Capture the funds of an existing uncaptured PaymentIntent when its status is <code>
-   * requires_capture</code>.
+   * Capture the funds of an existing uncaptured PaymentIntent when its status is {@code
+   * requires_capture}.
    *
    * <p>Uncaptured PaymentIntents will be canceled a set number of days after they are created (7 by
    * default).
@@ -678,8 +678,8 @@ public class PaymentIntent extends ApiResource implements HasId, MetadataStore<P
   }
 
   /**
-   * Capture the funds of an existing uncaptured PaymentIntent when its status is <code>
-   * requires_capture</code>.
+   * Capture the funds of an existing uncaptured PaymentIntent when its status is {@code
+   * requires_capture}.
    *
    * <p>Uncaptured PaymentIntents will be canceled a set number of days after they are created (7 by
    * default).
@@ -692,8 +692,8 @@ public class PaymentIntent extends ApiResource implements HasId, MetadataStore<P
   }
 
   /**
-   * Capture the funds of an existing uncaptured PaymentIntent when its status is <code>
-   * requires_capture</code>.
+   * Capture the funds of an existing uncaptured PaymentIntent when its status is {@code
+   * requires_capture}.
    *
    * <p>Uncaptured PaymentIntents will be canceled a set number of days after they are created (7 by
    * default).
@@ -706,8 +706,8 @@ public class PaymentIntent extends ApiResource implements HasId, MetadataStore<P
   }
 
   /**
-   * Capture the funds of an existing uncaptured PaymentIntent when its status is <code>
-   * requires_capture</code>.
+   * Capture the funds of an existing uncaptured PaymentIntent when its status is {@code
+   * requires_capture}.
    *
    * <p>Uncaptured PaymentIntents will be canceled a set number of days after they are created (7 by
    * default).
@@ -727,8 +727,8 @@ public class PaymentIntent extends ApiResource implements HasId, MetadataStore<P
   }
 
   /**
-   * Capture the funds of an existing uncaptured PaymentIntent when its status is <code>
-   * requires_capture</code>.
+   * Capture the funds of an existing uncaptured PaymentIntent when its status is {@code
+   * requires_capture}.
    *
    * <p>Uncaptured PaymentIntents will be canceled a set number of days after they are created (7 by
    * default).
@@ -741,8 +741,8 @@ public class PaymentIntent extends ApiResource implements HasId, MetadataStore<P
   }
 
   /**
-   * Capture the funds of an existing uncaptured PaymentIntent when its status is <code>
-   * requires_capture</code>.
+   * Capture the funds of an existing uncaptured PaymentIntent when its status is {@code
+   * requires_capture}.
    *
    * <p>Uncaptured PaymentIntents will be canceled a set number of days after they are created (7 by
    * default).
@@ -765,21 +765,20 @@ public class PaymentIntent extends ApiResource implements HasId, MetadataStore<P
    * Confirm that your customer intends to pay with current or provided payment method. Upon
    * confirmation, the PaymentIntent will attempt to initiate a payment. If the selected payment
    * method requires additional authentication steps, the PaymentIntent will transition to the
-   * <code>requires_action</code> status and suggest additional actions via <code>next_action</code>
-   * . If payment fails, the PaymentIntent will transition to the <code>requires_payment_method
-   * </code> status. If payment succeeds, the PaymentIntent will transition to the <code>succeeded
-   * </code> status (or <code>requires_capture</code>, if <code>capture_method</code> is set to
-   * <code>manual</code>). If the <code>confirmation_method</code> is <code>automatic</code>,
-   * payment may be attempted using our <a
+   * {@code requires_action} status and suggest additional actions via {@code next_action}. If
+   * payment fails, the PaymentIntent will transition to the {@code requires_payment_method} status.
+   * If payment succeeds, the PaymentIntent will transition to the {@code succeeded} status (or
+   * {@code requires_capture}, if {@code capture_method} is set to {@code manual}). If the {@code
+   * confirmation_method} is {@code automatic}, payment may be attempted using our <a
    * href="https://stripe.com/docs/stripe-js/reference#stripe-handle-card-payment">client SDKs</a>
    * and the PaymentIntent’s <a
    * href="https://stripe.com/docs/api#payment_intent_object-client_secret">client_secret</a>. After
-   * <code>next_action</code>s are handled by the client, no additional confirmation is required to
-   * complete the payment. If the <code>confirmation_method</code> is <code>manual</code>, all
-   * payment attempts must be initiated using a secret key. If any actions are required for the
-   * payment, the PaymentIntent will return to the <code>requires_confirmation</code> state after
-   * those actions are completed. Your server needs to then explicitly re-confirm the PaymentIntent
-   * to initiate the next payment attempt. Read the <a
+   * {@code next_action}s are handled by the client, no additional confirmation is required to
+   * complete the payment. If the {@code confirmation_method} is {@code manual}, all payment
+   * attempts must be initiated using a secret key. If any actions are required for the payment, the
+   * PaymentIntent will return to the {@code requires_confirmation} state after those actions are
+   * completed. Your server needs to then explicitly re-confirm the PaymentIntent to initiate the
+   * next payment attempt. Read the <a
    * href="https://stripe.com/docs/payments/payment-intents/web-manual">expanded documentation</a>
    * to learn more about manual confirmation.
    */
@@ -791,21 +790,20 @@ public class PaymentIntent extends ApiResource implements HasId, MetadataStore<P
    * Confirm that your customer intends to pay with current or provided payment method. Upon
    * confirmation, the PaymentIntent will attempt to initiate a payment. If the selected payment
    * method requires additional authentication steps, the PaymentIntent will transition to the
-   * <code>requires_action</code> status and suggest additional actions via <code>next_action</code>
-   * . If payment fails, the PaymentIntent will transition to the <code>requires_payment_method
-   * </code> status. If payment succeeds, the PaymentIntent will transition to the <code>succeeded
-   * </code> status (or <code>requires_capture</code>, if <code>capture_method</code> is set to
-   * <code>manual</code>). If the <code>confirmation_method</code> is <code>automatic</code>,
-   * payment may be attempted using our <a
+   * {@code requires_action} status and suggest additional actions via {@code next_action}. If
+   * payment fails, the PaymentIntent will transition to the {@code requires_payment_method} status.
+   * If payment succeeds, the PaymentIntent will transition to the {@code succeeded} status (or
+   * {@code requires_capture}, if {@code capture_method} is set to {@code manual}). If the {@code
+   * confirmation_method} is {@code automatic}, payment may be attempted using our <a
    * href="https://stripe.com/docs/stripe-js/reference#stripe-handle-card-payment">client SDKs</a>
    * and the PaymentIntent’s <a
    * href="https://stripe.com/docs/api#payment_intent_object-client_secret">client_secret</a>. After
-   * <code>next_action</code>s are handled by the client, no additional confirmation is required to
-   * complete the payment. If the <code>confirmation_method</code> is <code>manual</code>, all
-   * payment attempts must be initiated using a secret key. If any actions are required for the
-   * payment, the PaymentIntent will return to the <code>requires_confirmation</code> state after
-   * those actions are completed. Your server needs to then explicitly re-confirm the PaymentIntent
-   * to initiate the next payment attempt. Read the <a
+   * {@code next_action}s are handled by the client, no additional confirmation is required to
+   * complete the payment. If the {@code confirmation_method} is {@code manual}, all payment
+   * attempts must be initiated using a secret key. If any actions are required for the payment, the
+   * PaymentIntent will return to the {@code requires_confirmation} state after those actions are
+   * completed. Your server needs to then explicitly re-confirm the PaymentIntent to initiate the
+   * next payment attempt. Read the <a
    * href="https://stripe.com/docs/payments/payment-intents/web-manual">expanded documentation</a>
    * to learn more about manual confirmation.
    */
@@ -817,21 +815,20 @@ public class PaymentIntent extends ApiResource implements HasId, MetadataStore<P
    * Confirm that your customer intends to pay with current or provided payment method. Upon
    * confirmation, the PaymentIntent will attempt to initiate a payment. If the selected payment
    * method requires additional authentication steps, the PaymentIntent will transition to the
-   * <code>requires_action</code> status and suggest additional actions via <code>next_action</code>
-   * . If payment fails, the PaymentIntent will transition to the <code>requires_payment_method
-   * </code> status. If payment succeeds, the PaymentIntent will transition to the <code>succeeded
-   * </code> status (or <code>requires_capture</code>, if <code>capture_method</code> is set to
-   * <code>manual</code>). If the <code>confirmation_method</code> is <code>automatic</code>,
-   * payment may be attempted using our <a
+   * {@code requires_action} status and suggest additional actions via {@code next_action}. If
+   * payment fails, the PaymentIntent will transition to the {@code requires_payment_method} status.
+   * If payment succeeds, the PaymentIntent will transition to the {@code succeeded} status (or
+   * {@code requires_capture}, if {@code capture_method} is set to {@code manual}). If the {@code
+   * confirmation_method} is {@code automatic}, payment may be attempted using our <a
    * href="https://stripe.com/docs/stripe-js/reference#stripe-handle-card-payment">client SDKs</a>
    * and the PaymentIntent’s <a
    * href="https://stripe.com/docs/api#payment_intent_object-client_secret">client_secret</a>. After
-   * <code>next_action</code>s are handled by the client, no additional confirmation is required to
-   * complete the payment. If the <code>confirmation_method</code> is <code>manual</code>, all
-   * payment attempts must be initiated using a secret key. If any actions are required for the
-   * payment, the PaymentIntent will return to the <code>requires_confirmation</code> state after
-   * those actions are completed. Your server needs to then explicitly re-confirm the PaymentIntent
-   * to initiate the next payment attempt. Read the <a
+   * {@code next_action}s are handled by the client, no additional confirmation is required to
+   * complete the payment. If the {@code confirmation_method} is {@code manual}, all payment
+   * attempts must be initiated using a secret key. If any actions are required for the payment, the
+   * PaymentIntent will return to the {@code requires_confirmation} state after those actions are
+   * completed. Your server needs to then explicitly re-confirm the PaymentIntent to initiate the
+   * next payment attempt. Read the <a
    * href="https://stripe.com/docs/payments/payment-intents/web-manual">expanded documentation</a>
    * to learn more about manual confirmation.
    */
@@ -843,21 +840,20 @@ public class PaymentIntent extends ApiResource implements HasId, MetadataStore<P
    * Confirm that your customer intends to pay with current or provided payment method. Upon
    * confirmation, the PaymentIntent will attempt to initiate a payment. If the selected payment
    * method requires additional authentication steps, the PaymentIntent will transition to the
-   * <code>requires_action</code> status and suggest additional actions via <code>next_action</code>
-   * . If payment fails, the PaymentIntent will transition to the <code>requires_payment_method
-   * </code> status. If payment succeeds, the PaymentIntent will transition to the <code>succeeded
-   * </code> status (or <code>requires_capture</code>, if <code>capture_method</code> is set to
-   * <code>manual</code>). If the <code>confirmation_method</code> is <code>automatic</code>,
-   * payment may be attempted using our <a
+   * {@code requires_action} status and suggest additional actions via {@code next_action}. If
+   * payment fails, the PaymentIntent will transition to the {@code requires_payment_method} status.
+   * If payment succeeds, the PaymentIntent will transition to the {@code succeeded} status (or
+   * {@code requires_capture}, if {@code capture_method} is set to {@code manual}). If the {@code
+   * confirmation_method} is {@code automatic}, payment may be attempted using our <a
    * href="https://stripe.com/docs/stripe-js/reference#stripe-handle-card-payment">client SDKs</a>
    * and the PaymentIntent’s <a
    * href="https://stripe.com/docs/api#payment_intent_object-client_secret">client_secret</a>. After
-   * <code>next_action</code>s are handled by the client, no additional confirmation is required to
-   * complete the payment. If the <code>confirmation_method</code> is <code>manual</code>, all
-   * payment attempts must be initiated using a secret key. If any actions are required for the
-   * payment, the PaymentIntent will return to the <code>requires_confirmation</code> state after
-   * those actions are completed. Your server needs to then explicitly re-confirm the PaymentIntent
-   * to initiate the next payment attempt. Read the <a
+   * {@code next_action}s are handled by the client, no additional confirmation is required to
+   * complete the payment. If the {@code confirmation_method} is {@code manual}, all payment
+   * attempts must be initiated using a secret key. If any actions are required for the payment, the
+   * PaymentIntent will return to the {@code requires_confirmation} state after those actions are
+   * completed. Your server needs to then explicitly re-confirm the PaymentIntent to initiate the
+   * next payment attempt. Read the <a
    * href="https://stripe.com/docs/payments/payment-intents/web-manual">expanded documentation</a>
    * to learn more about manual confirmation.
    */
@@ -876,21 +872,20 @@ public class PaymentIntent extends ApiResource implements HasId, MetadataStore<P
    * Confirm that your customer intends to pay with current or provided payment method. Upon
    * confirmation, the PaymentIntent will attempt to initiate a payment. If the selected payment
    * method requires additional authentication steps, the PaymentIntent will transition to the
-   * <code>requires_action</code> status and suggest additional actions via <code>next_action</code>
-   * . If payment fails, the PaymentIntent will transition to the <code>requires_payment_method
-   * </code> status. If payment succeeds, the PaymentIntent will transition to the <code>succeeded
-   * </code> status (or <code>requires_capture</code>, if <code>capture_method</code> is set to
-   * <code>manual</code>). If the <code>confirmation_method</code> is <code>automatic</code>,
-   * payment may be attempted using our <a
+   * {@code requires_action} status and suggest additional actions via {@code next_action}. If
+   * payment fails, the PaymentIntent will transition to the {@code requires_payment_method} status.
+   * If payment succeeds, the PaymentIntent will transition to the {@code succeeded} status (or
+   * {@code requires_capture}, if {@code capture_method} is set to {@code manual}). If the {@code
+   * confirmation_method} is {@code automatic}, payment may be attempted using our <a
    * href="https://stripe.com/docs/stripe-js/reference#stripe-handle-card-payment">client SDKs</a>
    * and the PaymentIntent’s <a
    * href="https://stripe.com/docs/api#payment_intent_object-client_secret">client_secret</a>. After
-   * <code>next_action</code>s are handled by the client, no additional confirmation is required to
-   * complete the payment. If the <code>confirmation_method</code> is <code>manual</code>, all
-   * payment attempts must be initiated using a secret key. If any actions are required for the
-   * payment, the PaymentIntent will return to the <code>requires_confirmation</code> state after
-   * those actions are completed. Your server needs to then explicitly re-confirm the PaymentIntent
-   * to initiate the next payment attempt. Read the <a
+   * {@code next_action}s are handled by the client, no additional confirmation is required to
+   * complete the payment. If the {@code confirmation_method} is {@code manual}, all payment
+   * attempts must be initiated using a secret key. If any actions are required for the payment, the
+   * PaymentIntent will return to the {@code requires_confirmation} state after those actions are
+   * completed. Your server needs to then explicitly re-confirm the PaymentIntent to initiate the
+   * next payment attempt. Read the <a
    * href="https://stripe.com/docs/payments/payment-intents/web-manual">expanded documentation</a>
    * to learn more about manual confirmation.
    */
@@ -902,21 +897,20 @@ public class PaymentIntent extends ApiResource implements HasId, MetadataStore<P
    * Confirm that your customer intends to pay with current or provided payment method. Upon
    * confirmation, the PaymentIntent will attempt to initiate a payment. If the selected payment
    * method requires additional authentication steps, the PaymentIntent will transition to the
-   * <code>requires_action</code> status and suggest additional actions via <code>next_action</code>
-   * . If payment fails, the PaymentIntent will transition to the <code>requires_payment_method
-   * </code> status. If payment succeeds, the PaymentIntent will transition to the <code>succeeded
-   * </code> status (or <code>requires_capture</code>, if <code>capture_method</code> is set to
-   * <code>manual</code>). If the <code>confirmation_method</code> is <code>automatic</code>,
-   * payment may be attempted using our <a
+   * {@code requires_action} status and suggest additional actions via {@code next_action}. If
+   * payment fails, the PaymentIntent will transition to the {@code requires_payment_method} status.
+   * If payment succeeds, the PaymentIntent will transition to the {@code succeeded} status (or
+   * {@code requires_capture}, if {@code capture_method} is set to {@code manual}). If the {@code
+   * confirmation_method} is {@code automatic}, payment may be attempted using our <a
    * href="https://stripe.com/docs/stripe-js/reference#stripe-handle-card-payment">client SDKs</a>
    * and the PaymentIntent’s <a
    * href="https://stripe.com/docs/api#payment_intent_object-client_secret">client_secret</a>. After
-   * <code>next_action</code>s are handled by the client, no additional confirmation is required to
-   * complete the payment. If the <code>confirmation_method</code> is <code>manual</code>, all
-   * payment attempts must be initiated using a secret key. If any actions are required for the
-   * payment, the PaymentIntent will return to the <code>requires_confirmation</code> state after
-   * those actions are completed. Your server needs to then explicitly re-confirm the PaymentIntent
-   * to initiate the next payment attempt. Read the <a
+   * {@code next_action}s are handled by the client, no additional confirmation is required to
+   * complete the payment. If the {@code confirmation_method} is {@code manual}, all payment
+   * attempts must be initiated using a secret key. If any actions are required for the payment, the
+   * PaymentIntent will return to the {@code requires_confirmation} state after those actions are
+   * completed. Your server needs to then explicitly re-confirm the PaymentIntent to initiate the
+   * next payment attempt. Read the <a
    * href="https://stripe.com/docs/payments/payment-intents/web-manual">expanded documentation</a>
    * to learn more about manual confirmation.
    */
@@ -939,10 +933,10 @@ public class PaymentIntent extends ApiResource implements HasId, MetadataStore<P
    * You can read more about the different payment flows available via the Payment Intents API <a
    * href="https://stripe.com/docs/payments/payment-intents">here</a>.
    *
-   * <p>When <code>confirm=true</code> is used during creation, it is equivalent to creating and
+   * <p>When {@code confirm=true} is used during creation, it is equivalent to creating and
    * confirming the PaymentIntent in the same call. You may use any parameters available in the <a
-   * href="https://stripe.com/docs/api/payment_intents/confirm">confirm API</a> when <code>
-   * confirm=true</code> is supplied.
+   * href="https://stripe.com/docs/api/payment_intents/confirm">confirm API</a> when {@code
+   * confirm=true} is supplied.
    */
   public static PaymentIntent create(Map<String, Object> params) throws StripeException {
     return create(params, (RequestOptions) null);
@@ -956,10 +950,10 @@ public class PaymentIntent extends ApiResource implements HasId, MetadataStore<P
    * You can read more about the different payment flows available via the Payment Intents API <a
    * href="https://stripe.com/docs/payments/payment-intents">here</a>.
    *
-   * <p>When <code>confirm=true</code> is used during creation, it is equivalent to creating and
+   * <p>When {@code confirm=true} is used during creation, it is equivalent to creating and
    * confirming the PaymentIntent in the same call. You may use any parameters available in the <a
-   * href="https://stripe.com/docs/api/payment_intents/confirm">confirm API</a> when <code>
-   * confirm=true</code> is supplied.
+   * href="https://stripe.com/docs/api/payment_intents/confirm">confirm API</a> when {@code
+   * confirm=true} is supplied.
    */
   public static PaymentIntent create(Map<String, Object> params, RequestOptions options)
       throws StripeException {
@@ -976,10 +970,10 @@ public class PaymentIntent extends ApiResource implements HasId, MetadataStore<P
    * You can read more about the different payment flows available via the Payment Intents API <a
    * href="https://stripe.com/docs/payments/payment-intents">here</a>.
    *
-   * <p>When <code>confirm=true</code> is used during creation, it is equivalent to creating and
+   * <p>When {@code confirm=true} is used during creation, it is equivalent to creating and
    * confirming the PaymentIntent in the same call. You may use any parameters available in the <a
-   * href="https://stripe.com/docs/api/payment_intents/confirm">confirm API</a> when <code>
-   * confirm=true</code> is supplied.
+   * href="https://stripe.com/docs/api/payment_intents/confirm">confirm API</a> when {@code
+   * confirm=true} is supplied.
    */
   public static PaymentIntent create(PaymentIntentCreateParams params) throws StripeException {
     return create(params, (RequestOptions) null);
@@ -993,10 +987,10 @@ public class PaymentIntent extends ApiResource implements HasId, MetadataStore<P
    * You can read more about the different payment flows available via the Payment Intents API <a
    * href="https://stripe.com/docs/payments/payment-intents">here</a>.
    *
-   * <p>When <code>confirm=true</code> is used during creation, it is equivalent to creating and
+   * <p>When {@code confirm=true} is used during creation, it is equivalent to creating and
    * confirming the PaymentIntent in the same call. You may use any parameters available in the <a
-   * href="https://stripe.com/docs/api/payment_intents/confirm">confirm API</a> when <code>
-   * confirm=true</code> is supplied.
+   * href="https://stripe.com/docs/api/payment_intents/confirm">confirm API</a> when {@code
+   * confirm=true} is supplied.
    */
   public static PaymentIntent create(PaymentIntentCreateParams params, RequestOptions options)
       throws StripeException {
@@ -1008,12 +1002,12 @@ public class PaymentIntent extends ApiResource implements HasId, MetadataStore<P
   /**
    * Perform an incremental authorization on an eligible <a
    * href="https://stripe.com/docs/api/payment_intents/object">PaymentIntent</a>. To be eligible,
-   * the PaymentIntent’s status must be <code>requires_capture</code> and <a
+   * the PaymentIntent’s status must be {@code requires_capture} and <a
    * href="https://stripe.com/docs/api/charges/object#charge_object-payment_method_details-card_present-incremental_authorization_supported">incremental_authorization_supported</a>
-   * must be <code>true</code>.
+   * must be {@code true}.
    *
    * <p>Incremental authorizations attempt to increase the authorized amount on your customer’s card
-   * to the new, higher <code>amount</code> provided. As with the initial authorization, incremental
+   * to the new, higher {@code amount} provided. As with the initial authorization, incremental
    * authorizations may be declined. A single PaymentIntent can call this endpoint multiple times to
    * further increase the authorized amount.
    *
@@ -1039,12 +1033,12 @@ public class PaymentIntent extends ApiResource implements HasId, MetadataStore<P
   /**
    * Perform an incremental authorization on an eligible <a
    * href="https://stripe.com/docs/api/payment_intents/object">PaymentIntent</a>. To be eligible,
-   * the PaymentIntent’s status must be <code>requires_capture</code> and <a
+   * the PaymentIntent’s status must be {@code requires_capture} and <a
    * href="https://stripe.com/docs/api/charges/object#charge_object-payment_method_details-card_present-incremental_authorization_supported">incremental_authorization_supported</a>
-   * must be <code>true</code>.
+   * must be {@code true}.
    *
    * <p>Incremental authorizations attempt to increase the authorized amount on your customer’s card
-   * to the new, higher <code>amount</code> provided. As with the initial authorization, incremental
+   * to the new, higher {@code amount} provided. As with the initial authorization, incremental
    * authorizations may be declined. A single PaymentIntent can call this endpoint multiple times to
    * further increase the authorized amount.
    *
@@ -1079,12 +1073,12 @@ public class PaymentIntent extends ApiResource implements HasId, MetadataStore<P
   /**
    * Perform an incremental authorization on an eligible <a
    * href="https://stripe.com/docs/api/payment_intents/object">PaymentIntent</a>. To be eligible,
-   * the PaymentIntent’s status must be <code>requires_capture</code> and <a
+   * the PaymentIntent’s status must be {@code requires_capture} and <a
    * href="https://stripe.com/docs/api/charges/object#charge_object-payment_method_details-card_present-incremental_authorization_supported">incremental_authorization_supported</a>
-   * must be <code>true</code>.
+   * must be {@code true}.
    *
    * <p>Incremental authorizations attempt to increase the authorized amount on your customer’s card
-   * to the new, higher <code>amount</code> provided. As with the initial authorization, incremental
+   * to the new, higher {@code amount} provided. As with the initial authorization, incremental
    * authorizations may be declined. A single PaymentIntent can call this endpoint multiple times to
    * further increase the authorized amount.
    *
@@ -1111,12 +1105,12 @@ public class PaymentIntent extends ApiResource implements HasId, MetadataStore<P
   /**
    * Perform an incremental authorization on an eligible <a
    * href="https://stripe.com/docs/api/payment_intents/object">PaymentIntent</a>. To be eligible,
-   * the PaymentIntent’s status must be <code>requires_capture</code> and <a
+   * the PaymentIntent’s status must be {@code requires_capture} and <a
    * href="https://stripe.com/docs/api/charges/object#charge_object-payment_method_details-card_present-incremental_authorization_supported">incremental_authorization_supported</a>
-   * must be <code>true</code>.
+   * must be {@code true}.
    *
    * <p>Incremental authorizations attempt to increase the authorized amount on your customer’s card
-   * to the new, higher <code>amount</code> provided. As with the initial authorization, incremental
+   * to the new, higher {@code amount} provided. As with the initial authorization, incremental
    * authorizations may be declined. A single PaymentIntent can call this endpoint multiple times to
    * further increase the authorized amount.
    *
@@ -1179,8 +1173,8 @@ public class PaymentIntent extends ApiResource implements HasId, MetadataStore<P
   /**
    * Retrieves the details of a PaymentIntent that has previously been created.
    *
-   * <p>Client-side retrieval using a publishable key is allowed when the <code>client_secret</code>
-   * is provided in the query string.
+   * <p>Client-side retrieval using a publishable key is allowed when the {@code client_secret} is
+   * provided in the query string.
    *
    * <p>When retrieved with a publishable key, only a subset of properties will be returned. Please
    * refer to the <a href="https://stripe.com/docs/api#payment_intent_object">payment intent</a>
@@ -1193,8 +1187,8 @@ public class PaymentIntent extends ApiResource implements HasId, MetadataStore<P
   /**
    * Retrieves the details of a PaymentIntent that has previously been created.
    *
-   * <p>Client-side retrieval using a publishable key is allowed when the <code>client_secret</code>
-   * is provided in the query string.
+   * <p>Client-side retrieval using a publishable key is allowed when the {@code client_secret} is
+   * provided in the query string.
    *
    * <p>When retrieved with a publishable key, only a subset of properties will be returned. Please
    * refer to the <a href="https://stripe.com/docs/api#payment_intent_object">payment intent</a>
@@ -1208,8 +1202,8 @@ public class PaymentIntent extends ApiResource implements HasId, MetadataStore<P
   /**
    * Retrieves the details of a PaymentIntent that has previously been created.
    *
-   * <p>Client-side retrieval using a publishable key is allowed when the <code>client_secret</code>
-   * is provided in the query string.
+   * <p>Client-side retrieval using a publishable key is allowed when the {@code client_secret} is
+   * provided in the query string.
    *
    * <p>When retrieved with a publishable key, only a subset of properties will be returned. Please
    * refer to the <a href="https://stripe.com/docs/api#payment_intent_object">payment intent</a>
@@ -1229,8 +1223,8 @@ public class PaymentIntent extends ApiResource implements HasId, MetadataStore<P
   /**
    * Retrieves the details of a PaymentIntent that has previously been created.
    *
-   * <p>Client-side retrieval using a publishable key is allowed when the <code>client_secret</code>
-   * is provided in the query string.
+   * <p>Client-side retrieval using a publishable key is allowed when the {@code client_secret} is
+   * provided in the query string.
    *
    * <p>When retrieved with a publishable key, only a subset of properties will be returned. Please
    * refer to the <a href="https://stripe.com/docs/api#payment_intent_object">payment intent</a>
@@ -1308,7 +1302,7 @@ public class PaymentIntent extends ApiResource implements HasId, MetadataStore<P
    * Updates properties on a PaymentIntent object without confirming.
    *
    * <p>Depending on which properties you update, you may need to confirm the PaymentIntent again.
-   * For example, updating the <code>payment_method</code> will always require you to confirm the
+   * For example, updating the {@code payment_method} will always require you to confirm the
    * PaymentIntent again. If you prefer to update and confirm at the same time, we recommend
    * updating properties via the <a
    * href="https://stripe.com/docs/api/payment_intents/confirm">confirm API</a> instead.
@@ -1322,7 +1316,7 @@ public class PaymentIntent extends ApiResource implements HasId, MetadataStore<P
    * Updates properties on a PaymentIntent object without confirming.
    *
    * <p>Depending on which properties you update, you may need to confirm the PaymentIntent again.
-   * For example, updating the <code>payment_method</code> will always require you to confirm the
+   * For example, updating the {@code payment_method} will always require you to confirm the
    * PaymentIntent again. If you prefer to update and confirm at the same time, we recommend
    * updating properties via the <a
    * href="https://stripe.com/docs/api/payment_intents/confirm">confirm API</a> instead.
@@ -1343,7 +1337,7 @@ public class PaymentIntent extends ApiResource implements HasId, MetadataStore<P
    * Updates properties on a PaymentIntent object without confirming.
    *
    * <p>Depending on which properties you update, you may need to confirm the PaymentIntent again.
-   * For example, updating the <code>payment_method</code> will always require you to confirm the
+   * For example, updating the {@code payment_method} will always require you to confirm the
    * PaymentIntent again. If you prefer to update and confirm at the same time, we recommend
    * updating properties via the <a
    * href="https://stripe.com/docs/api/payment_intents/confirm">confirm API</a> instead.
@@ -1356,7 +1350,7 @@ public class PaymentIntent extends ApiResource implements HasId, MetadataStore<P
    * Updates properties on a PaymentIntent object without confirming.
    *
    * <p>Depending on which properties you update, you may need to confirm the PaymentIntent again.
-   * For example, updating the <code>payment_method</code> will always require you to confirm the
+   * For example, updating the {@code payment_method} will always require you to confirm the
    * PaymentIntent again. If you prefer to update and confirm at the same time, we recommend
    * updating properties via the <a
    * href="https://stripe.com/docs/api/payment_intents/confirm">confirm API</a> instead.

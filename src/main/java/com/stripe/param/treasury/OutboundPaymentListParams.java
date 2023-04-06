@@ -37,7 +37,7 @@ public class OutboundPaymentListParams extends ApiRequestParams {
   @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
   Map<String, Object> extraParams;
 
-  /** Returns objects associated with this FinancialAccount. */
+  /** <strong>Required.</strong> Returns objects associated with this FinancialAccount. */
   @SerializedName("financial_account")
   String financialAccount;
 
@@ -186,7 +186,7 @@ public class OutboundPaymentListParams extends ApiRequestParams {
       return this;
     }
 
-    /** Returns objects associated with this FinancialAccount. */
+    /** <strong>Required.</strong> Returns objects associated with this FinancialAccount. */
     public Builder setFinancialAccount(String financialAccount) {
       this.financialAccount = financialAccount;
       return this;

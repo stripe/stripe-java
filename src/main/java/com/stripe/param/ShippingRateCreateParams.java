@@ -19,8 +19,8 @@ public class ShippingRateCreateParams extends ApiRequestParams {
   DeliveryEstimate deliveryEstimate;
 
   /**
-   * The name of the shipping rate, meant to be displayable to the customer. This will appear on
-   * CheckoutSessions.
+   * <strong>Required.</strong> The name of the shipping rate, meant to be displayable to the
+   * customer. This will appear on CheckoutSessions.
    */
   @SerializedName("display_name")
   String displayName;
@@ -142,8 +142,8 @@ public class ShippingRateCreateParams extends ApiRequestParams {
     }
 
     /**
-     * The name of the shipping rate, meant to be displayable to the customer. This will appear on
-     * CheckoutSessions.
+     * <strong>Required.</strong> The name of the shipping rate, meant to be displayable to the
+     * customer. This will appear on CheckoutSessions.
      */
     public Builder setDisplayName(String displayName) {
       this.displayName = displayName;
@@ -362,11 +362,11 @@ public class ShippingRateCreateParams extends ApiRequestParams {
       @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
       Map<String, Object> extraParams;
 
-      /** A unit of time. */
+      /** <strong>Required.</strong> A unit of time. */
       @SerializedName("unit")
       Unit unit;
 
-      /** Must be greater than 0. */
+      /** <strong>Required.</strong> Must be greater than 0. */
       @SerializedName("value")
       Long value;
 
@@ -421,13 +421,13 @@ public class ShippingRateCreateParams extends ApiRequestParams {
           return this;
         }
 
-        /** A unit of time. */
+        /** <strong>Required.</strong> A unit of time. */
         public Builder setUnit(ShippingRateCreateParams.DeliveryEstimate.Maximum.Unit unit) {
           this.unit = unit;
           return this;
         }
 
-        /** Must be greater than 0. */
+        /** <strong>Required.</strong> Must be greater than 0. */
         public Builder setValue(Long value) {
           this.value = value;
           return this;
@@ -470,11 +470,11 @@ public class ShippingRateCreateParams extends ApiRequestParams {
       @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
       Map<String, Object> extraParams;
 
-      /** A unit of time. */
+      /** <strong>Required.</strong> A unit of time. */
       @SerializedName("unit")
       Unit unit;
 
-      /** Must be greater than 0. */
+      /** <strong>Required.</strong> Must be greater than 0. */
       @SerializedName("value")
       Long value;
 
@@ -529,13 +529,13 @@ public class ShippingRateCreateParams extends ApiRequestParams {
           return this;
         }
 
-        /** A unit of time. */
+        /** <strong>Required.</strong> A unit of time. */
         public Builder setUnit(ShippingRateCreateParams.DeliveryEstimate.Minimum.Unit unit) {
           this.unit = unit;
           return this;
         }
 
-        /** Must be greater than 0. */
+        /** <strong>Required.</strong> Must be greater than 0. */
         public Builder setValue(Long value) {
           this.value = value;
           return this;
@@ -570,14 +570,16 @@ public class ShippingRateCreateParams extends ApiRequestParams {
 
   @Getter
   public static class FixedAmount {
-    /** A non-negative integer in cents representing how much to charge. */
+    /**
+     * <strong>Required.</strong> A non-negative integer in cents representing how much to charge.
+     */
     @SerializedName("amount")
     Long amount;
 
     /**
-     * Three-letter <a href="https://www.iso.org/iso-4217-currency-codes.html">ISO currency
-     * code</a>, in lowercase. Must be a <a href="https://stripe.com/docs/currencies">supported
-     * currency</a>.
+     * <strong>Required.</strong> Three-letter <a
+     * href="https://www.iso.org/iso-4217-currency-codes.html">ISO currency code</a>, in lowercase.
+     * Must be a <a href="https://stripe.com/docs/currencies">supported currency</a>.
      */
     @SerializedName("currency")
     String currency;
@@ -629,16 +631,18 @@ public class ShippingRateCreateParams extends ApiRequestParams {
             this.amount, this.currency, this.currencyOptions, this.extraParams);
       }
 
-      /** A non-negative integer in cents representing how much to charge. */
+      /**
+       * <strong>Required.</strong> A non-negative integer in cents representing how much to charge.
+       */
       public Builder setAmount(Long amount) {
         this.amount = amount;
         return this;
       }
 
       /**
-       * Three-letter <a href="https://www.iso.org/iso-4217-currency-codes.html">ISO currency
-       * code</a>, in lowercase. Must be a <a href="https://stripe.com/docs/currencies">supported
-       * currency</a>.
+       * <strong>Required.</strong> Three-letter <a
+       * href="https://www.iso.org/iso-4217-currency-codes.html">ISO currency code</a>, in
+       * lowercase. Must be a <a href="https://stripe.com/docs/currencies">supported currency</a>.
        */
       public Builder setCurrency(String currency) {
         this.currency = currency;
@@ -704,7 +708,9 @@ public class ShippingRateCreateParams extends ApiRequestParams {
 
     @Getter
     public static class CurrencyOption {
-      /** A non-negative integer in cents representing how much to charge. */
+      /**
+       * <strong>Required.</strong> A non-negative integer in cents representing how much to charge.
+       */
       @SerializedName("amount")
       Long amount;
 
@@ -748,7 +754,10 @@ public class ShippingRateCreateParams extends ApiRequestParams {
               this.amount, this.extraParams, this.taxBehavior);
         }
 
-        /** A non-negative integer in cents representing how much to charge. */
+        /**
+         * <strong>Required.</strong> A non-negative integer in cents representing how much to
+         * charge.
+         */
         public Builder setAmount(Long amount) {
           this.amount = amount;
           return this;

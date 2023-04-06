@@ -41,8 +41,8 @@ public class SecretListParams extends ApiRequestParams {
   Long limit;
 
   /**
-   * Specifies the scoping of the secret. Requests originating from UI extensions can only access
-   * account-scoped secrets or secrets scoped to their own user.
+   * <strong>Required.</strong> Specifies the scoping of the secret. Requests originating from UI
+   * extensions can only access account-scoped secrets or secrets scoped to their own user.
    */
   @SerializedName("scope")
   Scope scope;
@@ -172,8 +172,8 @@ public class SecretListParams extends ApiRequestParams {
     }
 
     /**
-     * Specifies the scoping of the secret. Requests originating from UI extensions can only access
-     * account-scoped secrets or secrets scoped to their own user.
+     * <strong>Required.</strong> Specifies the scoping of the secret. Requests originating from UI
+     * extensions can only access account-scoped secrets or secrets scoped to their own user.
      */
     public Builder setScope(SecretListParams.Scope scope) {
       this.scope = scope;
@@ -203,7 +203,7 @@ public class SecretListParams extends ApiRequestParams {
     @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
     Map<String, Object> extraParams;
 
-    /** The secret scope type. */
+    /** <strong>Required.</strong> The secret scope type. */
     @SerializedName("type")
     Type type;
 
@@ -262,7 +262,7 @@ public class SecretListParams extends ApiRequestParams {
         return this;
       }
 
-      /** The secret scope type. */
+      /** <strong>Required.</strong> The secret scope type. */
       public Builder setType(SecretListParams.Scope.Type type) {
         this.type = type;
         return this;

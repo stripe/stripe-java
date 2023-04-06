@@ -103,26 +103,26 @@ public class WebhookEndpoint extends ApiResource implements HasId, MetadataStore
   String url;
 
   /**
-   * A webhook endpoint must have a <code>url</code> and a list of <code>enabled_events</code>. You
-   * may optionally specify the Boolean <code>connect</code> parameter. If set to true, then a
-   * Connect webhook endpoint that notifies the specified <code>url</code> about events from all
-   * connected accounts is created; otherwise an account webhook endpoint that notifies the
-   * specified <code>url</code> only about events from your account is created. You can also create
-   * webhook endpoints in the <a href="https://dashboard.stripe.com/account/webhooks">webhooks
-   * settings</a> section of the Dashboard.
+   * A webhook endpoint must have a {@code url} and a list of {@code enabled_events}. You may
+   * optionally specify the Boolean {@code connect} parameter. If set to true, then a Connect
+   * webhook endpoint that notifies the specified {@code url} about events from all connected
+   * accounts is created; otherwise an account webhook endpoint that notifies the specified {@code
+   * url} only about events from your account is created. You can also create webhook endpoints in
+   * the <a href="https://dashboard.stripe.com/account/webhooks">webhooks settings</a> section of
+   * the Dashboard.
    */
   public static WebhookEndpoint create(Map<String, Object> params) throws StripeException {
     return create(params, (RequestOptions) null);
   }
 
   /**
-   * A webhook endpoint must have a <code>url</code> and a list of <code>enabled_events</code>. You
-   * may optionally specify the Boolean <code>connect</code> parameter. If set to true, then a
-   * Connect webhook endpoint that notifies the specified <code>url</code> about events from all
-   * connected accounts is created; otherwise an account webhook endpoint that notifies the
-   * specified <code>url</code> only about events from your account is created. You can also create
-   * webhook endpoints in the <a href="https://dashboard.stripe.com/account/webhooks">webhooks
-   * settings</a> section of the Dashboard.
+   * A webhook endpoint must have a {@code url} and a list of {@code enabled_events}. You may
+   * optionally specify the Boolean {@code connect} parameter. If set to true, then a Connect
+   * webhook endpoint that notifies the specified {@code url} about events from all connected
+   * accounts is created; otherwise an account webhook endpoint that notifies the specified {@code
+   * url} only about events from your account is created. You can also create webhook endpoints in
+   * the <a href="https://dashboard.stripe.com/account/webhooks">webhooks settings</a> section of
+   * the Dashboard.
    */
   public static WebhookEndpoint create(Map<String, Object> params, RequestOptions options)
       throws StripeException {
@@ -132,26 +132,26 @@ public class WebhookEndpoint extends ApiResource implements HasId, MetadataStore
   }
 
   /**
-   * A webhook endpoint must have a <code>url</code> and a list of <code>enabled_events</code>. You
-   * may optionally specify the Boolean <code>connect</code> parameter. If set to true, then a
-   * Connect webhook endpoint that notifies the specified <code>url</code> about events from all
-   * connected accounts is created; otherwise an account webhook endpoint that notifies the
-   * specified <code>url</code> only about events from your account is created. You can also create
-   * webhook endpoints in the <a href="https://dashboard.stripe.com/account/webhooks">webhooks
-   * settings</a> section of the Dashboard.
+   * A webhook endpoint must have a {@code url} and a list of {@code enabled_events}. You may
+   * optionally specify the Boolean {@code connect} parameter. If set to true, then a Connect
+   * webhook endpoint that notifies the specified {@code url} about events from all connected
+   * accounts is created; otherwise an account webhook endpoint that notifies the specified {@code
+   * url} only about events from your account is created. You can also create webhook endpoints in
+   * the <a href="https://dashboard.stripe.com/account/webhooks">webhooks settings</a> section of
+   * the Dashboard.
    */
   public static WebhookEndpoint create(WebhookEndpointCreateParams params) throws StripeException {
     return create(params, (RequestOptions) null);
   }
 
   /**
-   * A webhook endpoint must have a <code>url</code> and a list of <code>enabled_events</code>. You
-   * may optionally specify the Boolean <code>connect</code> parameter. If set to true, then a
-   * Connect webhook endpoint that notifies the specified <code>url</code> about events from all
-   * connected accounts is created; otherwise an account webhook endpoint that notifies the
-   * specified <code>url</code> only about events from your account is created. You can also create
-   * webhook endpoints in the <a href="https://dashboard.stripe.com/account/webhooks">webhooks
-   * settings</a> section of the Dashboard.
+   * A webhook endpoint must have a {@code url} and a list of {@code enabled_events}. You may
+   * optionally specify the Boolean {@code connect} parameter. If set to true, then a Connect
+   * webhook endpoint that notifies the specified {@code url} about events from all connected
+   * accounts is created; otherwise an account webhook endpoint that notifies the specified {@code
+   * url} only about events from your account is created. You can also create webhook endpoints in
+   * the <a href="https://dashboard.stripe.com/account/webhooks">webhooks settings</a> section of
+   * the Dashboard.
    */
   public static WebhookEndpoint create(WebhookEndpointCreateParams params, RequestOptions options)
       throws StripeException {
@@ -268,8 +268,8 @@ public class WebhookEndpoint extends ApiResource implements HasId, MetadataStore
   }
 
   /**
-   * Updates the webhook endpoint. You may edit the <code>url</code>, the list of <code>
-   * enabled_events</code>, and the status of your endpoint.
+   * Updates the webhook endpoint. You may edit the {@code url}, the list of {@code enabled_events},
+   * and the status of your endpoint.
    */
   @Override
   public WebhookEndpoint update(Map<String, Object> params) throws StripeException {
@@ -277,8 +277,8 @@ public class WebhookEndpoint extends ApiResource implements HasId, MetadataStore
   }
 
   /**
-   * Updates the webhook endpoint. You may edit the <code>url</code>, the list of <code>
-   * enabled_events</code>, and the status of your endpoint.
+   * Updates the webhook endpoint. You may edit the {@code url}, the list of {@code enabled_events},
+   * and the status of your endpoint.
    */
   @Override
   public WebhookEndpoint update(Map<String, Object> params, RequestOptions options)
@@ -293,16 +293,16 @@ public class WebhookEndpoint extends ApiResource implements HasId, MetadataStore
   }
 
   /**
-   * Updates the webhook endpoint. You may edit the <code>url</code>, the list of <code>
-   * enabled_events</code>, and the status of your endpoint.
+   * Updates the webhook endpoint. You may edit the {@code url}, the list of {@code enabled_events},
+   * and the status of your endpoint.
    */
   public WebhookEndpoint update(WebhookEndpointUpdateParams params) throws StripeException {
     return update(params, (RequestOptions) null);
   }
 
   /**
-   * Updates the webhook endpoint. You may edit the <code>url</code>, the list of <code>
-   * enabled_events</code>, and the status of your endpoint.
+   * Updates the webhook endpoint. You may edit the {@code url}, the list of {@code enabled_events},
+   * and the status of your endpoint.
    */
   public WebhookEndpoint update(WebhookEndpointUpdateParams params, RequestOptions options)
       throws StripeException {

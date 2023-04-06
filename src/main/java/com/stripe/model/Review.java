@@ -140,22 +140,22 @@ public class Review extends ApiResource implements HasId {
         new ExpandableField<PaymentIntent>(expandableObject.getId(), expandableObject);
   }
 
-  /** Approves a <code>Review</code> object, closing it and removing it from the list of reviews. */
+  /** Approves a {@code Review} object, closing it and removing it from the list of reviews. */
   public Review approve() throws StripeException {
     return approve((Map<String, Object>) null, (RequestOptions) null);
   }
 
-  /** Approves a <code>Review</code> object, closing it and removing it from the list of reviews. */
+  /** Approves a {@code Review} object, closing it and removing it from the list of reviews. */
   public Review approve(RequestOptions options) throws StripeException {
     return approve((Map<String, Object>) null, options);
   }
 
-  /** Approves a <code>Review</code> object, closing it and removing it from the list of reviews. */
+  /** Approves a {@code Review} object, closing it and removing it from the list of reviews. */
   public Review approve(Map<String, Object> params) throws StripeException {
     return approve(params, (RequestOptions) null);
   }
 
-  /** Approves a <code>Review</code> object, closing it and removing it from the list of reviews. */
+  /** Approves a {@code Review} object, closing it and removing it from the list of reviews. */
   public Review approve(Map<String, Object> params, RequestOptions options) throws StripeException {
     String url =
         ApiResource.fullUrl(
@@ -165,12 +165,12 @@ public class Review extends ApiResource implements HasId {
     return ApiResource.request(ApiResource.RequestMethod.POST, url, params, Review.class, options);
   }
 
-  /** Approves a <code>Review</code> object, closing it and removing it from the list of reviews. */
+  /** Approves a {@code Review} object, closing it and removing it from the list of reviews. */
   public Review approve(ReviewApproveParams params) throws StripeException {
     return approve(params, (RequestOptions) null);
   }
 
-  /** Approves a <code>Review</code> object, closing it and removing it from the list of reviews. */
+  /** Approves a {@code Review} object, closing it and removing it from the list of reviews. */
   public Review approve(ReviewApproveParams params, RequestOptions options) throws StripeException {
     String url =
         ApiResource.fullUrl(
@@ -181,18 +181,18 @@ public class Review extends ApiResource implements HasId {
   }
 
   /**
-   * Returns a list of <code>Review</code> objects that have <code>open</code> set to <code>true
-   * </code>. The objects are sorted in descending order by creation date, with the most recently
-   * created object appearing first.
+   * Returns a list of {@code Review} objects that have {@code open} set to {@code true}. The
+   * objects are sorted in descending order by creation date, with the most recently created object
+   * appearing first.
    */
   public static ReviewCollection list(Map<String, Object> params) throws StripeException {
     return list(params, (RequestOptions) null);
   }
 
   /**
-   * Returns a list of <code>Review</code> objects that have <code>open</code> set to <code>true
-   * </code>. The objects are sorted in descending order by creation date, with the most recently
-   * created object appearing first.
+   * Returns a list of {@code Review} objects that have {@code open} set to {@code true}. The
+   * objects are sorted in descending order by creation date, with the most recently created object
+   * appearing first.
    */
   public static ReviewCollection list(Map<String, Object> params, RequestOptions options)
       throws StripeException {
@@ -202,18 +202,18 @@ public class Review extends ApiResource implements HasId {
   }
 
   /**
-   * Returns a list of <code>Review</code> objects that have <code>open</code> set to <code>true
-   * </code>. The objects are sorted in descending order by creation date, with the most recently
-   * created object appearing first.
+   * Returns a list of {@code Review} objects that have {@code open} set to {@code true}. The
+   * objects are sorted in descending order by creation date, with the most recently created object
+   * appearing first.
    */
   public static ReviewCollection list(ReviewListParams params) throws StripeException {
     return list(params, (RequestOptions) null);
   }
 
   /**
-   * Returns a list of <code>Review</code> objects that have <code>open</code> set to <code>true
-   * </code>. The objects are sorted in descending order by creation date, with the most recently
-   * created object appearing first.
+   * Returns a list of {@code Review} objects that have {@code open} set to {@code true}. The
+   * objects are sorted in descending order by creation date, with the most recently created object
+   * appearing first.
    */
   public static ReviewCollection list(ReviewListParams params, RequestOptions options)
       throws StripeException {
@@ -222,17 +222,17 @@ public class Review extends ApiResource implements HasId {
         ApiResource.RequestMethod.GET, url, params, ReviewCollection.class, options);
   }
 
-  /** Retrieves a <code>Review</code> object. */
+  /** Retrieves a {@code Review} object. */
   public static Review retrieve(String review) throws StripeException {
     return retrieve(review, (Map<String, Object>) null, (RequestOptions) null);
   }
 
-  /** Retrieves a <code>Review</code> object. */
+  /** Retrieves a {@code Review} object. */
   public static Review retrieve(String review, RequestOptions options) throws StripeException {
     return retrieve(review, (Map<String, Object>) null, options);
   }
 
-  /** Retrieves a <code>Review</code> object. */
+  /** Retrieves a {@code Review} object. */
   public static Review retrieve(String review, Map<String, Object> params, RequestOptions options)
       throws StripeException {
     String url =
@@ -243,7 +243,7 @@ public class Review extends ApiResource implements HasId {
     return ApiResource.request(ApiResource.RequestMethod.GET, url, params, Review.class, options);
   }
 
-  /** Retrieves a <code>Review</code> object. */
+  /** Retrieves a {@code Review} object. */
   public static Review retrieve(String review, ReviewRetrieveParams params, RequestOptions options)
       throws StripeException {
     String url =

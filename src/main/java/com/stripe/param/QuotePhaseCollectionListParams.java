@@ -40,7 +40,7 @@ public class QuotePhaseCollectionListParams extends ApiRequestParams {
   @SerializedName("limit")
   Long limit;
 
-  /** The ID of the quote whose phases will be retrieved. */
+  /** <strong>Required.</strong> The ID of the quote whose phases will be retrieved. */
   @SerializedName("quote")
   String quote;
 
@@ -168,7 +168,7 @@ public class QuotePhaseCollectionListParams extends ApiRequestParams {
       return this;
     }
 
-    /** The ID of the quote whose phases will be retrieved. */
+    /** <strong>Required.</strong> The ID of the quote whose phases will be retrieved. */
     public Builder setQuote(String quote) {
       this.quote = quote;
       return this;

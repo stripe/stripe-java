@@ -38,19 +38,20 @@ public class TransactionCreateReversalParams extends ApiRequestParams {
   Map<String, String> metadata;
 
   /**
-   * If {@code partial}, the provided line item or shipping cost amounts are reversed. If {@code
-   * full}, the original transaction is fully reversed.
+   * <strong>Required.</strong> If {@code partial}, the provided line item or shipping cost amounts
+   * are reversed. If {@code full}, the original transaction is fully reversed.
    */
   @SerializedName("mode")
   Mode mode;
 
-  /** The ID of the Transaction to partially or fully reverse. */
+  /** <strong>Required.</strong> The ID of the Transaction to partially or fully reverse. */
   @SerializedName("original_transaction")
   String originalTransaction;
 
   /**
-   * A custom identifier for this reversal, such as 'myOrder_123-refund_1', which must be unique
-   * across all transactions. The reference helps identify this reversal transaction in exported <a
+   * <strong>Required.</strong> A custom identifier for this reversal, such as
+   * 'myOrder_123-refund_1', which must be unique across all transactions. The reference helps
+   * identify this reversal transaction in exported <a
    * href="https://stripe.com/docs/tax/reports">tax reports</a>.
    */
   @SerializedName("reference")
@@ -218,24 +219,25 @@ public class TransactionCreateReversalParams extends ApiRequestParams {
     }
 
     /**
-     * If {@code partial}, the provided line item or shipping cost amounts are reversed. If {@code
-     * full}, the original transaction is fully reversed.
+     * <strong>Required.</strong> If {@code partial}, the provided line item or shipping cost
+     * amounts are reversed. If {@code full}, the original transaction is fully reversed.
      */
     public Builder setMode(TransactionCreateReversalParams.Mode mode) {
       this.mode = mode;
       return this;
     }
 
-    /** The ID of the Transaction to partially or fully reverse. */
+    /** <strong>Required.</strong> The ID of the Transaction to partially or fully reverse. */
     public Builder setOriginalTransaction(String originalTransaction) {
       this.originalTransaction = originalTransaction;
       return this;
     }
 
     /**
-     * A custom identifier for this reversal, such as 'myOrder_123-refund_1', which must be unique
-     * across all transactions. The reference helps identify this reversal transaction in exported
-     * <a href="https://stripe.com/docs/tax/reports">tax reports</a>.
+     * <strong>Required.</strong> A custom identifier for this reversal, such as
+     * 'myOrder_123-refund_1', which must be unique across all transactions. The reference helps
+     * identify this reversal transaction in exported <a
+     * href="https://stripe.com/docs/tax/reports">tax reports</a>.
      */
     public Builder setReference(String reference) {
       this.reference = reference;
@@ -251,11 +253,11 @@ public class TransactionCreateReversalParams extends ApiRequestParams {
 
   @Getter
   public static class LineItem {
-    /** The amount to reverse, in negative integer cents. */
+    /** <strong>Required.</strong> The amount to reverse, in negative integer cents. */
     @SerializedName("amount")
     Long amount;
 
-    /** The amount of tax to reverse, in negative integer cents. */
+    /** <strong>Required.</strong> The amount of tax to reverse, in negative integer cents. */
     @SerializedName("amount_tax")
     Long amountTax;
 
@@ -276,7 +278,10 @@ public class TransactionCreateReversalParams extends ApiRequestParams {
     @SerializedName("metadata")
     Map<String, String> metadata;
 
-    /** The {@code id} of the line item to reverse in the original transaction. */
+    /**
+     * <strong>Required.</strong> The {@code id} of the line item to reverse in the original
+     * transaction.
+     */
     @SerializedName("original_line_item")
     String originalLineItem;
 
@@ -287,7 +292,10 @@ public class TransactionCreateReversalParams extends ApiRequestParams {
     @SerializedName("quantity")
     Long quantity;
 
-    /** A custom identifier for this line item in the reversal transaction, such as 'L1-refund'. */
+    /**
+     * <strong>Required.</strong> A custom identifier for this line item in the reversal
+     * transaction, such as 'L1-refund'.
+     */
     @SerializedName("reference")
     String reference;
 
@@ -339,13 +347,13 @@ public class TransactionCreateReversalParams extends ApiRequestParams {
             this.reference);
       }
 
-      /** The amount to reverse, in negative integer cents. */
+      /** <strong>Required.</strong> The amount to reverse, in negative integer cents. */
       public Builder setAmount(Long amount) {
         this.amount = amount;
         return this;
       }
 
-      /** The amount of tax to reverse, in negative integer cents. */
+      /** <strong>Required.</strong> The amount of tax to reverse, in negative integer cents. */
       public Builder setAmountTax(Long amountTax) {
         this.amountTax = amountTax;
         return this;
@@ -404,7 +412,10 @@ public class TransactionCreateReversalParams extends ApiRequestParams {
         return this;
       }
 
-      /** The {@code id} of the line item to reverse in the original transaction. */
+      /**
+       * <strong>Required.</strong> The {@code id} of the line item to reverse in the original
+       * transaction.
+       */
       public Builder setOriginalLineItem(String originalLineItem) {
         this.originalLineItem = originalLineItem;
         return this;
@@ -420,7 +431,8 @@ public class TransactionCreateReversalParams extends ApiRequestParams {
       }
 
       /**
-       * A custom identifier for this line item in the reversal transaction, such as 'L1-refund'.
+       * <strong>Required.</strong> A custom identifier for this line item in the reversal
+       * transaction, such as 'L1-refund'.
        */
       public Builder setReference(String reference) {
         this.reference = reference;
@@ -431,11 +443,11 @@ public class TransactionCreateReversalParams extends ApiRequestParams {
 
   @Getter
   public static class ShippingCost {
-    /** The amount to reverse, in negative integer cents. */
+    /** <strong>Required.</strong> The amount to reverse, in negative integer cents. */
     @SerializedName("amount")
     Long amount;
 
-    /** The amount of tax to reverse, in negative integer cents. */
+    /** <strong>Required.</strong> The amount of tax to reverse, in negative integer cents. */
     @SerializedName("amount_tax")
     Long amountTax;
 
@@ -471,13 +483,13 @@ public class TransactionCreateReversalParams extends ApiRequestParams {
             this.amount, this.amountTax, this.extraParams);
       }
 
-      /** The amount to reverse, in negative integer cents. */
+      /** <strong>Required.</strong> The amount to reverse, in negative integer cents. */
       public Builder setAmount(Long amount) {
         this.amount = amount;
         return this;
       }
 
-      /** The amount of tax to reverse, in negative integer cents. */
+      /** <strong>Required.</strong> The amount of tax to reverse, in negative integer cents. */
       public Builder setAmountTax(Long amountTax) {
         this.amountTax = amountTax;
         return this;

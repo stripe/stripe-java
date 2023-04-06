@@ -619,19 +619,19 @@ public class ProductUpdateParams extends ApiRequestParams {
     @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
     Map<String, Object> extraParams;
 
-    /** Height, in inches. Maximum precision is 2 decimal places. */
+    /** <strong>Required.</strong> Height, in inches. Maximum precision is 2 decimal places. */
     @SerializedName("height")
     BigDecimal height;
 
-    /** Length, in inches. Maximum precision is 2 decimal places. */
+    /** <strong>Required.</strong> Length, in inches. Maximum precision is 2 decimal places. */
     @SerializedName("length")
     BigDecimal length;
 
-    /** Weight, in ounces. Maximum precision is 2 decimal places. */
+    /** <strong>Required.</strong> Weight, in ounces. Maximum precision is 2 decimal places. */
     @SerializedName("weight")
     BigDecimal weight;
 
-    /** Width, in inches. Maximum precision is 2 decimal places. */
+    /** <strong>Required.</strong> Width, in inches. Maximum precision is 2 decimal places. */
     @SerializedName("width")
     BigDecimal width;
 
@@ -695,25 +695,25 @@ public class ProductUpdateParams extends ApiRequestParams {
         return this;
       }
 
-      /** Height, in inches. Maximum precision is 2 decimal places. */
+      /** <strong>Required.</strong> Height, in inches. Maximum precision is 2 decimal places. */
       public Builder setHeight(BigDecimal height) {
         this.height = height;
         return this;
       }
 
-      /** Length, in inches. Maximum precision is 2 decimal places. */
+      /** <strong>Required.</strong> Length, in inches. Maximum precision is 2 decimal places. */
       public Builder setLength(BigDecimal length) {
         this.length = length;
         return this;
       }
 
-      /** Weight, in ounces. Maximum precision is 2 decimal places. */
+      /** <strong>Required.</strong> Weight, in ounces. Maximum precision is 2 decimal places. */
       public Builder setWeight(BigDecimal weight) {
         this.weight = weight;
         return this;
       }
 
-      /** Width, in inches. Maximum precision is 2 decimal places. */
+      /** <strong>Required.</strong> Width, in inches. Maximum precision is 2 decimal places. */
       public Builder setWidth(BigDecimal width) {
         this.width = width;
         return this;

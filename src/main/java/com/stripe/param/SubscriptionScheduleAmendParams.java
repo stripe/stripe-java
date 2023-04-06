@@ -234,7 +234,10 @@ public class SubscriptionScheduleAmendParams extends ApiRequestParams {
     @SerializedName("amendment_end")
     AmendmentEnd amendmentEnd;
 
-    /** Details to identify the earliest timestamp where the proposed change should take effect. */
+    /**
+     * <strong>Required.</strong> Details to identify the earliest timestamp where the proposed
+     * change should take effect.
+     */
     @SerializedName("amendment_start")
     AmendmentStart amendmentStart;
 
@@ -366,7 +369,8 @@ public class SubscriptionScheduleAmendParams extends ApiRequestParams {
       }
 
       /**
-       * Details to identify the earliest timestamp where the proposed change should take effect.
+       * <strong>Required.</strong> Details to identify the earliest timestamp where the proposed
+       * change should take effect.
        */
       public Builder setAmendmentStart(
           SubscriptionScheduleAmendParams.Amendment.AmendmentStart amendmentStart) {
@@ -553,7 +557,7 @@ public class SubscriptionScheduleAmendParams extends ApiRequestParams {
       @SerializedName("timestamp")
       Long timestamp;
 
-      /** Select one of three ways to pass the {@code amendment_end}. */
+      /** <strong>Required.</strong> Select one of three ways to pass the {@code amendment_end}. */
       @SerializedName("type")
       Type type;
 
@@ -642,7 +646,9 @@ public class SubscriptionScheduleAmendParams extends ApiRequestParams {
           return this;
         }
 
-        /** Select one of three ways to pass the {@code amendment_end}. */
+        /**
+         * <strong>Required.</strong> Select one of three ways to pass the {@code amendment_end}.
+         */
         public Builder setType(SubscriptionScheduleAmendParams.Amendment.AmendmentEnd.Type type) {
           this.type = type;
           return this;
@@ -651,7 +657,7 @@ public class SubscriptionScheduleAmendParams extends ApiRequestParams {
 
       @Getter
       public static class DiscountEnd {
-        /** The ID of a specific discount. */
+        /** <strong>Required.</strong> The ID of a specific discount. */
         @SerializedName("discount")
         String discount;
 
@@ -685,7 +691,7 @@ public class SubscriptionScheduleAmendParams extends ApiRequestParams {
                 this.discount, this.extraParams);
           }
 
-          /** The ID of a specific discount. */
+          /** <strong>Required.</strong> The ID of a specific discount. */
           public Builder setDiscount(String discount) {
             this.discount = discount;
             return this;
@@ -736,15 +742,15 @@ public class SubscriptionScheduleAmendParams extends ApiRequestParams {
         Map<String, Object> extraParams;
 
         /**
-         * Specifies a type of interval unit. Either {@code day}, {@code week}, {@code month} or
-         * {@code year}.
+         * <strong>Required.</strong> Specifies a type of interval unit. Either {@code day}, {@code
+         * week}, {@code month} or {@code year}.
          */
         @SerializedName("interval")
         Interval interval;
 
         /**
-         * The number of intervals, as an whole number greater than 0. Stripe multiplies this by the
-         * interval type to get the overall duration.
+         * <strong>Required.</strong> The number of intervals, as an whole number greater than 0.
+         * Stripe multiplies this by the interval type to get the overall duration.
          */
         @SerializedName("interval_count")
         Long intervalCount;
@@ -803,8 +809,8 @@ public class SubscriptionScheduleAmendParams extends ApiRequestParams {
           }
 
           /**
-           * Specifies a type of interval unit. Either {@code day}, {@code week}, {@code month} or
-           * {@code year}.
+           * <strong>Required.</strong> Specifies a type of interval unit. Either {@code day},
+           * {@code week}, {@code month} or {@code year}.
            */
           public Builder setInterval(
               SubscriptionScheduleAmendParams.Amendment.AmendmentEnd.Duration.Interval interval) {
@@ -813,8 +819,8 @@ public class SubscriptionScheduleAmendParams extends ApiRequestParams {
           }
 
           /**
-           * The number of intervals, as an whole number greater than 0. Stripe multiplies this by
-           * the interval type to get the overall duration.
+           * <strong>Required.</strong> The number of intervals, as an whole number greater than 0.
+           * Stripe multiplies this by the interval type to get the overall duration.
            */
           public Builder setIntervalCount(Long intervalCount) {
             this.intervalCount = intervalCount;
@@ -901,7 +907,9 @@ public class SubscriptionScheduleAmendParams extends ApiRequestParams {
       @SerializedName("timestamp")
       Long timestamp;
 
-      /** Select one of three ways to pass the {@code amendment_start}. */
+      /**
+       * <strong>Required.</strong> Select one of three ways to pass the {@code amendment_start}.
+       */
       @SerializedName("type")
       Type type;
 
@@ -990,7 +998,9 @@ public class SubscriptionScheduleAmendParams extends ApiRequestParams {
           return this;
         }
 
-        /** Select one of three ways to pass the {@code amendment_start}. */
+        /**
+         * <strong>Required.</strong> Select one of three ways to pass the {@code amendment_start}.
+         */
         public Builder setType(SubscriptionScheduleAmendParams.Amendment.AmendmentStart.Type type) {
           this.type = type;
           return this;
@@ -1010,9 +1020,9 @@ public class SubscriptionScheduleAmendParams extends ApiRequestParams {
         Map<String, Object> extraParams;
 
         /**
-         * The position of the previous amendment in the {@code amendments} array after which this
-         * amendment should begin. Indexes start from 0 and must be less than the index of the
-         * current amendment in the array.
+         * <strong>Required.</strong> The position of the previous amendment in the {@code
+         * amendments} array after which this amendment should begin. Indexes start from 0 and must
+         * be less than the index of the current amendment in the array.
          */
         @SerializedName("index")
         Long index;
@@ -1068,9 +1078,9 @@ public class SubscriptionScheduleAmendParams extends ApiRequestParams {
           }
 
           /**
-           * The position of the previous amendment in the {@code amendments} array after which this
-           * amendment should begin. Indexes start from 0 and must be less than the index of the
-           * current amendment in the array.
+           * <strong>Required.</strong> The position of the previous amendment in the {@code
+           * amendments} array after which this amendment should begin. Indexes start from 0 and
+           * must be less than the index of the current amendment in the array.
            */
           public Builder setIndex(Long index) {
             this.index = index;
@@ -1081,7 +1091,7 @@ public class SubscriptionScheduleAmendParams extends ApiRequestParams {
 
       @Getter
       public static class DiscountEnd {
-        /** The ID of a specific discount. */
+        /** <strong>Required.</strong> The ID of a specific discount. */
         @SerializedName("discount")
         String discount;
 
@@ -1115,7 +1125,7 @@ public class SubscriptionScheduleAmendParams extends ApiRequestParams {
                 this.discount, this.extraParams);
           }
 
-          /** The ID of a specific discount. */
+          /** <strong>Required.</strong> The ID of a specific discount. */
           public Builder setDiscount(String discount) {
             this.discount = discount;
             return this;
@@ -1210,7 +1220,7 @@ public class SubscriptionScheduleAmendParams extends ApiRequestParams {
       @SerializedName("set")
       Set set;
 
-      /** Determines the type of discount action. */
+      /** <strong>Required.</strong> Determines the type of discount action. */
       @SerializedName("type")
       Type type;
 
@@ -1291,7 +1301,7 @@ public class SubscriptionScheduleAmendParams extends ApiRequestParams {
           return this;
         }
 
-        /** Determines the type of discount action. */
+        /** <strong>Required.</strong> Determines the type of discount action. */
         public Builder setType(SubscriptionScheduleAmendParams.Amendment.DiscountAction.Type type) {
           this.type = type;
           return this;
@@ -1435,7 +1445,10 @@ public class SubscriptionScheduleAmendParams extends ApiRequestParams {
           @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
           Map<String, Object> extraParams;
 
-          /** The type of calculation made to determine when the discount ends. */
+          /**
+           * <strong>Required.</strong> The type of calculation made to determine when the discount
+           * ends.
+           */
           @SerializedName("type")
           Type type;
 
@@ -1490,7 +1503,10 @@ public class SubscriptionScheduleAmendParams extends ApiRequestParams {
               return this;
             }
 
-            /** The type of calculation made to determine when the discount ends. */
+            /**
+             * <strong>Required.</strong> The type of calculation made to determine when the
+             * discount ends.
+             */
             public Builder setType(
                 SubscriptionScheduleAmendParams.Amendment.DiscountAction.Add.DiscountEnd.Type
                     type) {
@@ -1737,7 +1753,7 @@ public class SubscriptionScheduleAmendParams extends ApiRequestParams {
       @SerializedName("set")
       Set set;
 
-      /** Determines the type of item action. */
+      /** <strong>Required.</strong> Determines the type of item action. */
       @SerializedName("type")
       Type type;
 
@@ -1826,7 +1842,7 @@ public class SubscriptionScheduleAmendParams extends ApiRequestParams {
           return this;
         }
 
-        /** Determines the type of item action. */
+        /** <strong>Required.</strong> Determines the type of item action. */
         public Builder setType(SubscriptionScheduleAmendParams.Amendment.ItemAction.Type type) {
           this.type = type;
           return this;
@@ -1861,7 +1877,7 @@ public class SubscriptionScheduleAmendParams extends ApiRequestParams {
         @SerializedName("metadata")
         Map<String, String> metadata;
 
-        /** The ID of the price object. */
+        /** <strong>Required.</strong> The ID of the price object. */
         @SerializedName("price")
         String price;
 
@@ -2014,7 +2030,7 @@ public class SubscriptionScheduleAmendParams extends ApiRequestParams {
             return this;
           }
 
-          /** The ID of the price object. */
+          /** <strong>Required.</strong> The ID of the price object. */
           public Builder setPrice(String price) {
             this.price = price;
             return this;
@@ -2187,7 +2203,10 @@ public class SubscriptionScheduleAmendParams extends ApiRequestParams {
             @SerializedName("timestamp")
             Long timestamp;
 
-            /** The type of calculation made to determine when the discount ends. */
+            /**
+             * <strong>Required.</strong> The type of calculation made to determine when the
+             * discount ends.
+             */
             @SerializedName("type")
             Type type;
 
@@ -2264,7 +2283,10 @@ public class SubscriptionScheduleAmendParams extends ApiRequestParams {
                 return this;
               }
 
-              /** The type of calculation made to determine when the discount ends. */
+              /**
+               * <strong>Required.</strong> The type of calculation made to determine when the
+               * discount ends.
+               */
               public Builder setType(
                   SubscriptionScheduleAmendParams.Amendment.ItemAction.Add.Discount.DiscountEnd.Type
                       type) {
@@ -2286,15 +2308,15 @@ public class SubscriptionScheduleAmendParams extends ApiRequestParams {
               Map<String, Object> extraParams;
 
               /**
-               * Specifies a type of interval unit. Either {@code day}, {@code week}, {@code month}
-               * or {@code year}.
+               * <strong>Required.</strong> Specifies a type of interval unit. Either {@code day},
+               * {@code week}, {@code month} or {@code year}.
                */
               @SerializedName("interval")
               Interval interval;
 
               /**
-               * The number of intervals, as an whole number greater than 0. Stripe multiplies this
-               * by the interval type to get the overall duration.
+               * <strong>Required.</strong> The number of intervals, as an whole number greater than
+               * 0. Stripe multiplies this by the interval type to get the overall duration.
                */
               @SerializedName("interval_count")
               Long intervalCount;
@@ -2356,8 +2378,8 @@ public class SubscriptionScheduleAmendParams extends ApiRequestParams {
                 }
 
                 /**
-                 * Specifies a type of interval unit. Either {@code day}, {@code week}, {@code
-                 * month} or {@code year}.
+                 * <strong>Required.</strong> Specifies a type of interval unit. Either {@code day},
+                 * {@code week}, {@code month} or {@code year}.
                  */
                 public Builder setInterval(
                     SubscriptionScheduleAmendParams.Amendment.ItemAction.Add.Discount.DiscountEnd
@@ -2368,8 +2390,8 @@ public class SubscriptionScheduleAmendParams extends ApiRequestParams {
                 }
 
                 /**
-                 * The number of intervals, as an whole number greater than 0. Stripe multiplies
-                 * this by the interval type to get the overall duration.
+                 * <strong>Required.</strong> The number of intervals, as an whole number greater
+                 * than 0. Stripe multiplies this by the interval type to get the overall duration.
                  */
                 public Builder setIntervalCount(Long intervalCount) {
                   this.intervalCount = intervalCount;
@@ -2435,7 +2457,7 @@ public class SubscriptionScheduleAmendParams extends ApiRequestParams {
           @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
           Map<String, Object> extraParams;
 
-          /** Determines the type of trial for this item. */
+          /** <strong>Required.</strong> Determines the type of trial for this item. */
           @SerializedName("type")
           Type type;
 
@@ -2521,7 +2543,7 @@ public class SubscriptionScheduleAmendParams extends ApiRequestParams {
               return this;
             }
 
-            /** Determines the type of trial for this item. */
+            /** <strong>Required.</strong> Determines the type of trial for this item. */
             public Builder setType(
                 SubscriptionScheduleAmendParams.Amendment.ItemAction.Add.Trial.Type type) {
               this.type = type;
@@ -2558,7 +2580,7 @@ public class SubscriptionScheduleAmendParams extends ApiRequestParams {
         @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
         Map<String, Object> extraParams;
 
-        /** ID of a price to remove. */
+        /** <strong>Required.</strong> ID of a price to remove. */
         @SerializedName("price")
         String price;
 
@@ -2612,7 +2634,7 @@ public class SubscriptionScheduleAmendParams extends ApiRequestParams {
             return this;
           }
 
-          /** ID of a price to remove. */
+          /** <strong>Required.</strong> ID of a price to remove. */
           public Builder setPrice(String price) {
             this.price = price;
             return this;
@@ -2649,7 +2671,7 @@ public class SubscriptionScheduleAmendParams extends ApiRequestParams {
         @SerializedName("metadata")
         Map<String, String> metadata;
 
-        /** The ID of the price object. */
+        /** <strong>Required.</strong> The ID of the price object. */
         @SerializedName("price")
         String price;
 
@@ -2813,7 +2835,7 @@ public class SubscriptionScheduleAmendParams extends ApiRequestParams {
             return this;
           }
 
-          /** The ID of the price object. */
+          /** <strong>Required.</strong> The ID of the price object. */
           public Builder setPrice(String price) {
             this.price = price;
             return this;
@@ -2995,7 +3017,10 @@ public class SubscriptionScheduleAmendParams extends ApiRequestParams {
             @SerializedName("timestamp")
             Long timestamp;
 
-            /** The type of calculation made to determine when the discount ends. */
+            /**
+             * <strong>Required.</strong> The type of calculation made to determine when the
+             * discount ends.
+             */
             @SerializedName("type")
             Type type;
 
@@ -3072,7 +3097,10 @@ public class SubscriptionScheduleAmendParams extends ApiRequestParams {
                 return this;
               }
 
-              /** The type of calculation made to determine when the discount ends. */
+              /**
+               * <strong>Required.</strong> The type of calculation made to determine when the
+               * discount ends.
+               */
               public Builder setType(
                   SubscriptionScheduleAmendParams.Amendment.ItemAction.Set.Discount.DiscountEnd.Type
                       type) {
@@ -3094,15 +3122,15 @@ public class SubscriptionScheduleAmendParams extends ApiRequestParams {
               Map<String, Object> extraParams;
 
               /**
-               * Specifies a type of interval unit. Either {@code day}, {@code week}, {@code month}
-               * or {@code year}.
+               * <strong>Required.</strong> Specifies a type of interval unit. Either {@code day},
+               * {@code week}, {@code month} or {@code year}.
                */
               @SerializedName("interval")
               Interval interval;
 
               /**
-               * The number of intervals, as an whole number greater than 0. Stripe multiplies this
-               * by the interval type to get the overall duration.
+               * <strong>Required.</strong> The number of intervals, as an whole number greater than
+               * 0. Stripe multiplies this by the interval type to get the overall duration.
                */
               @SerializedName("interval_count")
               Long intervalCount;
@@ -3164,8 +3192,8 @@ public class SubscriptionScheduleAmendParams extends ApiRequestParams {
                 }
 
                 /**
-                 * Specifies a type of interval unit. Either {@code day}, {@code week}, {@code
-                 * month} or {@code year}.
+                 * <strong>Required.</strong> Specifies a type of interval unit. Either {@code day},
+                 * {@code week}, {@code month} or {@code year}.
                  */
                 public Builder setInterval(
                     SubscriptionScheduleAmendParams.Amendment.ItemAction.Set.Discount.DiscountEnd
@@ -3176,8 +3204,8 @@ public class SubscriptionScheduleAmendParams extends ApiRequestParams {
                 }
 
                 /**
-                 * The number of intervals, as an whole number greater than 0. Stripe multiplies
-                 * this by the interval type to get the overall duration.
+                 * <strong>Required.</strong> The number of intervals, as an whole number greater
+                 * than 0. Stripe multiplies this by the interval type to get the overall duration.
                  */
                 public Builder setIntervalCount(Long intervalCount) {
                   this.intervalCount = intervalCount;
@@ -3243,7 +3271,7 @@ public class SubscriptionScheduleAmendParams extends ApiRequestParams {
           @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
           Map<String, Object> extraParams;
 
-          /** Determines the type of trial for this item. */
+          /** <strong>Required.</strong> Determines the type of trial for this item. */
           @SerializedName("type")
           Type type;
 
@@ -3329,7 +3357,7 @@ public class SubscriptionScheduleAmendParams extends ApiRequestParams {
               return this;
             }
 
-            /** Determines the type of trial for this item. */
+            /** <strong>Required.</strong> Determines the type of trial for this item. */
             public Builder setType(
                 SubscriptionScheduleAmendParams.Amendment.ItemAction.Set.Trial.Type type) {
               this.type = type;
@@ -3403,7 +3431,8 @@ public class SubscriptionScheduleAmendParams extends ApiRequestParams {
       Object set;
 
       /**
-       * Select one of three ways to update phase-level {@code metadata} on subscription schedules.
+       * <strong>Required.</strong> Select one of three ways to update phase-level {@code metadata}
+       * on subscription schedules.
        */
       @SerializedName("type")
       Type type;
@@ -3575,8 +3604,8 @@ public class SubscriptionScheduleAmendParams extends ApiRequestParams {
         }
 
         /**
-         * Select one of three ways to update phase-level {@code metadata} on subscription
-         * schedules.
+         * <strong>Required.</strong> Select one of three ways to update phase-level {@code
+         * metadata} on subscription schedules.
          */
         public Builder setType(SubscriptionScheduleAmendParams.Amendment.MetadataAction.Type type) {
           this.type = type;
@@ -3962,7 +3991,9 @@ public class SubscriptionScheduleAmendParams extends ApiRequestParams {
       @SerializedName("timestamp")
       Long timestamp;
 
-      /** Select one of several ways to pass the {@code bill_from} value. */
+      /**
+       * <strong>Required.</strong> Select one of several ways to pass the {@code bill_from} value.
+       */
       @SerializedName("type")
       Type type;
 
@@ -4039,7 +4070,10 @@ public class SubscriptionScheduleAmendParams extends ApiRequestParams {
           return this;
         }
 
-        /** Select one of several ways to pass the {@code bill_from} value. */
+        /**
+         * <strong>Required.</strong> Select one of several ways to pass the {@code bill_from}
+         * value.
+         */
         public Builder setType(SubscriptionScheduleAmendParams.Prebilling.BillFrom.Type type) {
           this.type = type;
           return this;
@@ -4059,9 +4093,9 @@ public class SubscriptionScheduleAmendParams extends ApiRequestParams {
         Map<String, Object> extraParams;
 
         /**
-         * The position of the amendment in the {@code amendments} array with which prebilling
-         * should begin. Indexes start from 0 and must be less than the total number of supplied
-         * amendments.
+         * <strong>Required.</strong> The position of the amendment in the {@code amendments} array
+         * with which prebilling should begin. Indexes start from 0 and must be less than the total
+         * number of supplied amendments.
          */
         @SerializedName("index")
         Long index;
@@ -4117,9 +4151,9 @@ public class SubscriptionScheduleAmendParams extends ApiRequestParams {
           }
 
           /**
-           * The position of the amendment in the {@code amendments} array with which prebilling
-           * should begin. Indexes start from 0 and must be less than the total number of supplied
-           * amendments.
+           * <strong>Required.</strong> The position of the amendment in the {@code amendments}
+           * array with which prebilling should begin. Indexes start from 0 and must be less than
+           * the total number of supplied amendments.
            */
           public Builder setIndex(Long index) {
             this.index = index;
@@ -4170,7 +4204,9 @@ public class SubscriptionScheduleAmendParams extends ApiRequestParams {
       @SerializedName("timestamp")
       Long timestamp;
 
-      /** Select one of several ways to pass the {@code bill_until} value. */
+      /**
+       * <strong>Required.</strong> Select one of several ways to pass the {@code bill_until} value.
+       */
       @SerializedName("type")
       Type type;
 
@@ -4258,7 +4294,10 @@ public class SubscriptionScheduleAmendParams extends ApiRequestParams {
           return this;
         }
 
-        /** Select one of several ways to pass the {@code bill_until} value. */
+        /**
+         * <strong>Required.</strong> Select one of several ways to pass the {@code bill_until}
+         * value.
+         */
         public Builder setType(SubscriptionScheduleAmendParams.Prebilling.BillUntil.Type type) {
           this.type = type;
           return this;
@@ -4278,8 +4317,9 @@ public class SubscriptionScheduleAmendParams extends ApiRequestParams {
         Map<String, Object> extraParams;
 
         /**
-         * The position of the amendment in the {@code amendments} array at which prebilling should
-         * end. Indexes start from 0 and must be less than the total number of supplied amendments.
+         * <strong>Required.</strong> The position of the amendment in the {@code amendments} array
+         * at which prebilling should end. Indexes start from 0 and must be less than the total
+         * number of supplied amendments.
          */
         @SerializedName("index")
         Long index;
@@ -4335,9 +4375,9 @@ public class SubscriptionScheduleAmendParams extends ApiRequestParams {
           }
 
           /**
-           * The position of the amendment in the {@code amendments} array at which prebilling
-           * should end. Indexes start from 0 and must be less than the total number of supplied
-           * amendments.
+           * <strong>Required.</strong> The position of the amendment in the {@code amendments}
+           * array at which prebilling should end. Indexes start from 0 and must be less than the
+           * total number of supplied amendments.
            */
           public Builder setIndex(Long index) {
             this.index = index;
@@ -4359,15 +4399,15 @@ public class SubscriptionScheduleAmendParams extends ApiRequestParams {
         Map<String, Object> extraParams;
 
         /**
-         * Specifies a type of interval unit. Either {@code day}, {@code week}, {@code month} or
-         * {@code year}.
+         * <strong>Required.</strong> Specifies a type of interval unit. Either {@code day}, {@code
+         * week}, {@code month} or {@code year}.
          */
         @SerializedName("interval")
         Interval interval;
 
         /**
-         * The number of intervals, as an whole number greater than 0. Stripe multiplies this by the
-         * interval type to get the overall duration.
+         * <strong>Required.</strong> The number of intervals, as an whole number greater than 0.
+         * Stripe multiplies this by the interval type to get the overall duration.
          */
         @SerializedName("interval_count")
         Long intervalCount;
@@ -4426,8 +4466,8 @@ public class SubscriptionScheduleAmendParams extends ApiRequestParams {
           }
 
           /**
-           * Specifies a type of interval unit. Either {@code day}, {@code week}, {@code month} or
-           * {@code year}.
+           * <strong>Required.</strong> Specifies a type of interval unit. Either {@code day},
+           * {@code week}, {@code month} or {@code year}.
            */
           public Builder setInterval(
               SubscriptionScheduleAmendParams.Prebilling.BillUntil.Duration.Interval interval) {
@@ -4436,8 +4476,8 @@ public class SubscriptionScheduleAmendParams extends ApiRequestParams {
           }
 
           /**
-           * The number of intervals, as an whole number greater than 0. Stripe multiplies this by
-           * the interval type to get the overall duration.
+           * <strong>Required.</strong> The number of intervals, as an whole number greater than 0.
+           * Stripe multiplies this by the interval type to get the overall duration.
            */
           public Builder setIntervalCount(Long intervalCount) {
             this.intervalCount = intervalCount;

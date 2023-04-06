@@ -288,8 +288,9 @@ public class SessionCreateParams extends ApiRequestParams {
   SubscriptionData subscriptionData;
 
   /**
-   * The URL to which Stripe should send customers when payment or setup is complete. If you’d like
-   * to use information from the successful Checkout Session on your page, read the guide on <a
+   * <strong>Required.</strong> The URL to which Stripe should send customers when payment or setup
+   * is complete. If you’d like to use information from the successful Checkout Session on your
+   * page, read the guide on <a
    * href="https://stripe.com/docs/payments/checkout/custom-success-page">customizing your success
    * page</a>.
    */
@@ -983,10 +984,11 @@ public class SessionCreateParams extends ApiRequestParams {
     }
 
     /**
-     * The URL to which Stripe should send customers when payment or setup is complete. If you’d
-     * like to use information from the successful Checkout Session on your page, read the guide on
-     * <a href="https://stripe.com/docs/payments/checkout/custom-success-page">customizing your
-     * success page</a>.
+     * <strong>Required.</strong> The URL to which Stripe should send customers when payment or
+     * setup is complete. If you’d like to use information from the successful Checkout Session on
+     * your page, read the guide on <a
+     * href="https://stripe.com/docs/payments/checkout/custom-success-page">customizing your success
+     * page</a>.
      */
     public Builder setSuccessUrl(String successUrl) {
       this.successUrl = successUrl;
@@ -1077,9 +1079,9 @@ public class SessionCreateParams extends ApiRequestParams {
       Boolean allowPromotionCodes;
 
       /**
-       * If {@code true}, a recovery URL will be generated to recover this Checkout Session if it
-       * expires before a successful transaction is completed. It will be attached to the Checkout
-       * Session object upon expiration.
+       * <strong>Required.</strong> If {@code true}, a recovery URL will be generated to recover
+       * this Checkout Session if it expires before a successful transaction is completed. It will
+       * be attached to the Checkout Session object upon expiration.
        */
       @SerializedName("enabled")
       Boolean enabled;
@@ -1127,9 +1129,9 @@ public class SessionCreateParams extends ApiRequestParams {
         }
 
         /**
-         * If {@code true}, a recovery URL will be generated to recover this Checkout Session if it
-         * expires before a successful transaction is completed. It will be attached to the Checkout
-         * Session object upon expiration.
+         * <strong>Required.</strong> If {@code true}, a recovery URL will be generated to recover
+         * this Checkout Session if it expires before a successful transaction is completed. It will
+         * be attached to the Checkout Session object upon expiration.
          */
         public Builder setEnabled(Boolean enabled) {
           this.enabled = enabled;
@@ -1169,7 +1171,7 @@ public class SessionCreateParams extends ApiRequestParams {
 
   @Getter
   public static class AutomaticTax {
-    /** Set to true to enable automatic taxes. */
+    /** <strong>Required.</strong> Set to true to enable automatic taxes. */
     @SerializedName("enabled")
     Boolean enabled;
 
@@ -1201,7 +1203,7 @@ public class SessionCreateParams extends ApiRequestParams {
         return new SessionCreateParams.AutomaticTax(this.enabled, this.extraParams);
       }
 
-      /** Set to true to enable automatic taxes. */
+      /** <strong>Required.</strong> Set to true to enable automatic taxes. */
       public Builder setEnabled(Boolean enabled) {
         this.enabled = enabled;
         return this;
@@ -1383,13 +1385,13 @@ public class SessionCreateParams extends ApiRequestParams {
     Map<String, Object> extraParams;
 
     /**
-     * String of your choice that your integration can use to reconcile this field. Must be unique
-     * to this field, alphanumeric, and up to 200 characters.
+     * <strong>Required.</strong> String of your choice that your integration can use to reconcile
+     * this field. Must be unique to this field, alphanumeric, and up to 200 characters.
      */
     @SerializedName("key")
     String key;
 
-    /** The label for the field, displayed to the customer. */
+    /** <strong>Required.</strong> The label for the field, displayed to the customer. */
     @SerializedName("label")
     Label label;
 
@@ -1400,7 +1402,7 @@ public class SessionCreateParams extends ApiRequestParams {
     @SerializedName("optional")
     Boolean optional;
 
-    /** The type of the field. */
+    /** <strong>Required.</strong> The type of the field. */
     @SerializedName("type")
     Type type;
 
@@ -1475,15 +1477,15 @@ public class SessionCreateParams extends ApiRequestParams {
       }
 
       /**
-       * String of your choice that your integration can use to reconcile this field. Must be unique
-       * to this field, alphanumeric, and up to 200 characters.
+       * <strong>Required.</strong> String of your choice that your integration can use to reconcile
+       * this field. Must be unique to this field, alphanumeric, and up to 200 characters.
        */
       public Builder setKey(String key) {
         this.key = key;
         return this;
       }
 
-      /** The label for the field, displayed to the customer. */
+      /** <strong>Required.</strong> The label for the field, displayed to the customer. */
       public Builder setLabel(SessionCreateParams.CustomField.Label label) {
         this.label = label;
         return this;
@@ -1498,7 +1500,7 @@ public class SessionCreateParams extends ApiRequestParams {
         return this;
       }
 
-      /** The type of the field. */
+      /** <strong>Required.</strong> The type of the field. */
       public Builder setType(SessionCreateParams.CustomField.Type type) {
         this.type = type;
         return this;
@@ -1516,7 +1518,10 @@ public class SessionCreateParams extends ApiRequestParams {
       @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
       Map<String, Object> extraParams;
 
-      /** The options available for the customer to select. Up to 200 options allowed. */
+      /**
+       * <strong>Required.</strong> The options available for the customer to select. Up to 200
+       * options allowed.
+       */
       @SerializedName("options")
       List<SessionCreateParams.CustomField.Dropdown.Option> options;
 
@@ -1609,14 +1614,17 @@ public class SessionCreateParams extends ApiRequestParams {
         @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
         Map<String, Object> extraParams;
 
-        /** The label for the option, displayed to the customer. Up to 100 characters. */
+        /**
+         * <strong>Required.</strong> The label for the option, displayed to the customer. Up to 100
+         * characters.
+         */
         @SerializedName("label")
         String label;
 
         /**
-         * The value for this option, not displayed to the customer, used by your integration to
-         * reconcile the option selected by the customer. Must be unique to this option,
-         * alphanumeric, and up to 100 characters.
+         * <strong>Required.</strong> The value for this option, not displayed to the customer, used
+         * by your integration to reconcile the option selected by the customer. Must be unique to
+         * this option, alphanumeric, and up to 100 characters.
          */
         @SerializedName("value")
         String value;
@@ -1672,16 +1680,19 @@ public class SessionCreateParams extends ApiRequestParams {
             return this;
           }
 
-          /** The label for the option, displayed to the customer. Up to 100 characters. */
+          /**
+           * <strong>Required.</strong> The label for the option, displayed to the customer. Up to
+           * 100 characters.
+           */
           public Builder setLabel(String label) {
             this.label = label;
             return this;
           }
 
           /**
-           * The value for this option, not displayed to the customer, used by your integration to
-           * reconcile the option selected by the customer. Must be unique to this option,
-           * alphanumeric, and up to 100 characters.
+           * <strong>Required.</strong> The value for this option, not displayed to the customer,
+           * used by your integration to reconcile the option selected by the customer. Must be
+           * unique to this option, alphanumeric, and up to 100 characters.
            */
           public Builder setValue(String value) {
             this.value = value;
@@ -1693,7 +1704,10 @@ public class SessionCreateParams extends ApiRequestParams {
 
     @Getter
     public static class Label {
-      /** Custom text for the label, displayed to the customer. Up to 50 characters. */
+      /**
+       * <strong>Required.</strong> Custom text for the label, displayed to the customer. Up to 50
+       * characters.
+       */
       @SerializedName("custom")
       String custom;
 
@@ -1706,7 +1720,7 @@ public class SessionCreateParams extends ApiRequestParams {
       @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
       Map<String, Object> extraParams;
 
-      /** The type of the label. */
+      /** <strong>Required.</strong> The type of the label. */
       @SerializedName("type")
       Type type;
 
@@ -1733,7 +1747,10 @@ public class SessionCreateParams extends ApiRequestParams {
               this.custom, this.extraParams, this.type);
         }
 
-        /** Custom text for the label, displayed to the customer. Up to 50 characters. */
+        /**
+         * <strong>Required.</strong> Custom text for the label, displayed to the customer. Up to 50
+         * characters.
+         */
         public Builder setCustom(String custom) {
           this.custom = custom;
           return this;
@@ -1767,7 +1784,7 @@ public class SessionCreateParams extends ApiRequestParams {
           return this;
         }
 
-        /** The type of the label. */
+        /** <strong>Required.</strong> The type of the label. */
         public Builder setType(SessionCreateParams.CustomField.Label.Type type) {
           this.type = type;
           return this;
@@ -1911,7 +1928,7 @@ public class SessionCreateParams extends ApiRequestParams {
       @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
       Map<String, Object> extraParams;
 
-      /** Text may be up to 1000 characters in length. */
+      /** <strong>Required.</strong> Text may be up to 1000 characters in length. */
       @SerializedName("message")
       String message;
 
@@ -1962,7 +1979,7 @@ public class SessionCreateParams extends ApiRequestParams {
           return this;
         }
 
-        /** Text may be up to 1000 characters in length. */
+        /** <strong>Required.</strong> Text may be up to 1000 characters in length. */
         public Builder setMessage(String message) {
           this.message = message;
           return this;
@@ -1981,7 +1998,7 @@ public class SessionCreateParams extends ApiRequestParams {
       @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
       Map<String, Object> extraParams;
 
-      /** Text may be up to 1000 characters in length. */
+      /** <strong>Required.</strong> Text may be up to 1000 characters in length. */
       @SerializedName("message")
       String message;
 
@@ -2032,7 +2049,7 @@ public class SessionCreateParams extends ApiRequestParams {
           return this;
         }
 
-        /** Text may be up to 1000 characters in length. */
+        /** <strong>Required.</strong> Text may be up to 1000 characters in length. */
         public Builder setMessage(String message) {
           this.message = message;
           return this;
@@ -2287,7 +2304,7 @@ public class SessionCreateParams extends ApiRequestParams {
 
   @Getter
   public static class InvoiceCreation {
-    /** Set to {@code true} to enable invoice creation. */
+    /** <strong>Required.</strong> Set to {@code true} to enable invoice creation. */
     @SerializedName("enabled")
     Boolean enabled;
 
@@ -2328,7 +2345,7 @@ public class SessionCreateParams extends ApiRequestParams {
             this.enabled, this.extraParams, this.invoiceData);
       }
 
-      /** Set to {@code true} to enable invoice creation. */
+      /** <strong>Required.</strong> Set to {@code true} to enable invoice creation. */
       public Builder setEnabled(Boolean enabled) {
         this.enabled = enabled;
         return this;
@@ -2639,11 +2656,16 @@ public class SessionCreateParams extends ApiRequestParams {
         @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
         Map<String, Object> extraParams;
 
-        /** The name of the custom field. This may be up to 30 characters. */
+        /**
+         * <strong>Required.</strong> The name of the custom field. This may be up to 30 characters.
+         */
         @SerializedName("name")
         String name;
 
-        /** The value of the custom field. This may be up to 30 characters. */
+        /**
+         * <strong>Required.</strong> The value of the custom field. This may be up to 30
+         * characters.
+         */
         @SerializedName("value")
         String value;
 
@@ -2700,13 +2722,19 @@ public class SessionCreateParams extends ApiRequestParams {
             return this;
           }
 
-          /** The name of the custom field. This may be up to 30 characters. */
+          /**
+           * <strong>Required.</strong> The name of the custom field. This may be up to 30
+           * characters.
+           */
           public Builder setName(String name) {
             this.name = name;
             return this;
           }
 
-          /** The value of the custom field. This may be up to 30 characters. */
+          /**
+           * <strong>Required.</strong> The value of the custom field. This may be up to 30
+           * characters.
+           */
           public Builder setValue(String value) {
             this.value = value;
             return this;
@@ -3055,8 +3083,9 @@ public class SessionCreateParams extends ApiRequestParams {
     @Getter
     public static class AdjustableQuantity {
       /**
-       * Set to true if the quantity can be adjusted to any non-negative integer. By default
-       * customers will be able to remove the line item by setting the quantity to 0.
+       * <strong>Required.</strong> Set to true if the quantity can be adjusted to any non-negative
+       * integer. By default customers will be able to remove the line item by setting the quantity
+       * to 0.
        */
       @SerializedName("enabled")
       Boolean enabled;
@@ -3112,8 +3141,9 @@ public class SessionCreateParams extends ApiRequestParams {
         }
 
         /**
-         * Set to true if the quantity can be adjusted to any non-negative integer. By default
-         * customers will be able to remove the line item by setting the quantity to 0.
+         * <strong>Required.</strong> Set to true if the quantity can be adjusted to any
+         * non-negative integer. By default customers will be able to remove the line item by
+         * setting the quantity to 0.
          */
         public Builder setEnabled(Boolean enabled) {
           this.enabled = enabled;
@@ -3171,9 +3201,9 @@ public class SessionCreateParams extends ApiRequestParams {
     @Getter
     public static class PriceData {
       /**
-       * Three-letter <a href="https://www.iso.org/iso-4217-currency-codes.html">ISO currency
-       * code</a>, in lowercase. Must be a <a href="https://stripe.com/docs/currencies">supported
-       * currency</a>.
+       * <strong>Required.</strong> Three-letter <a
+       * href="https://www.iso.org/iso-4217-currency-codes.html">ISO currency code</a>, in
+       * lowercase. Must be a <a href="https://stripe.com/docs/currencies">supported currency</a>.
        */
       @SerializedName("currency")
       String currency;
@@ -3208,9 +3238,12 @@ public class SessionCreateParams extends ApiRequestParams {
       Recurring recurring;
 
       /**
-       * Specifies whether the price is considered inclusive of taxes or exclusive of taxes. One of
-       * {@code inclusive}, {@code exclusive}, or {@code unspecified}. Once specified as either
-       * {@code inclusive} or {@code exclusive}, it cannot be changed.
+       * Only required if a <a
+       * href="https://stripe.com/docs/tax/products-prices-tax-categories-tax-behavior#setting-a-default-tax-behavior-(recommended)">default
+       * tax behavior</a> was not provided in the Stripe Tax settings. Specifies whether the price
+       * is considered inclusive of taxes or exclusive of taxes. One of {@code inclusive}, {@code
+       * exclusive}, or {@code unspecified}. Once specified as either {@code inclusive} or {@code
+       * exclusive}, it cannot be changed.
        */
       @SerializedName("tax_behavior")
       TaxBehavior taxBehavior;
@@ -3284,9 +3317,9 @@ public class SessionCreateParams extends ApiRequestParams {
         }
 
         /**
-         * Three-letter <a href="https://www.iso.org/iso-4217-currency-codes.html">ISO currency
-         * code</a>, in lowercase. Must be a <a href="https://stripe.com/docs/currencies">supported
-         * currency</a>.
+         * <strong>Required.</strong> Three-letter <a
+         * href="https://www.iso.org/iso-4217-currency-codes.html">ISO currency code</a>, in
+         * lowercase. Must be a <a href="https://stripe.com/docs/currencies">supported currency</a>.
          */
         public Builder setCurrency(String currency) {
           this.currency = currency;
@@ -3349,9 +3382,12 @@ public class SessionCreateParams extends ApiRequestParams {
         }
 
         /**
-         * Specifies whether the price is considered inclusive of taxes or exclusive of taxes. One
-         * of {@code inclusive}, {@code exclusive}, or {@code unspecified}. Once specified as either
-         * {@code inclusive} or {@code exclusive}, it cannot be changed.
+         * Only required if a <a
+         * href="https://stripe.com/docs/tax/products-prices-tax-categories-tax-behavior#setting-a-default-tax-behavior-(recommended)">default
+         * tax behavior</a> was not provided in the Stripe Tax settings. Specifies whether the price
+         * is considered inclusive of taxes or exclusive of taxes. One of {@code inclusive}, {@code
+         * exclusive}, or {@code unspecified}. Once specified as either {@code inclusive} or {@code
+         * exclusive}, it cannot be changed.
          */
         public Builder setTaxBehavior(
             SessionCreateParams.LineItem.PriceData.TaxBehavior taxBehavior) {
@@ -3415,7 +3451,9 @@ public class SessionCreateParams extends ApiRequestParams {
         @SerializedName("metadata")
         Map<String, String> metadata;
 
-        /** The product's name, meant to be displayable to the customer. */
+        /**
+         * <strong>Required.</strong> The product's name, meant to be displayable to the customer.
+         */
         @SerializedName("name")
         String name;
 
@@ -3558,7 +3596,9 @@ public class SessionCreateParams extends ApiRequestParams {
             return this;
           }
 
-          /** The product's name, meant to be displayable to the customer. */
+          /**
+           * <strong>Required.</strong> The product's name, meant to be displayable to the customer.
+           */
           public Builder setName(String name) {
             this.name = name;
             return this;
@@ -3585,8 +3625,8 @@ public class SessionCreateParams extends ApiRequestParams {
         Map<String, Object> extraParams;
 
         /**
-         * Specifies billing frequency. Either {@code day}, {@code week}, {@code month} or {@code
-         * year}.
+         * <strong>Required.</strong> Specifies billing frequency. Either {@code day}, {@code week},
+         * {@code month} or {@code year}.
          */
         @SerializedName("interval")
         Interval interval;
@@ -3651,8 +3691,8 @@ public class SessionCreateParams extends ApiRequestParams {
           }
 
           /**
-           * Specifies billing frequency. Either {@code day}, {@code week}, {@code month} or {@code
-           * year}.
+           * <strong>Required.</strong> Specifies billing frequency. Either {@code day}, {@code
+           * week}, {@code month} or {@code year}.
            */
           public Builder setInterval(
               SessionCreateParams.LineItem.PriceData.Recurring.Interval interval) {
@@ -4082,7 +4122,7 @@ public class SessionCreateParams extends ApiRequestParams {
 
     @Getter
     public static class Shipping {
-      /** Shipping address. */
+      /** <strong>Required.</strong> Shipping address. */
       @SerializedName("address")
       Address address;
 
@@ -4099,7 +4139,7 @@ public class SessionCreateParams extends ApiRequestParams {
       @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
       Map<String, Object> extraParams;
 
-      /** Recipient name. */
+      /** <strong>Required.</strong> Recipient name. */
       @SerializedName("name")
       String name;
 
@@ -4157,7 +4197,7 @@ public class SessionCreateParams extends ApiRequestParams {
               this.trackingNumber);
         }
 
-        /** Shipping address. */
+        /** <strong>Required.</strong> Shipping address. */
         public Builder setAddress(SessionCreateParams.PaymentIntentData.Shipping.Address address) {
           this.address = address;
           return this;
@@ -4197,7 +4237,7 @@ public class SessionCreateParams extends ApiRequestParams {
           return this;
         }
 
-        /** Recipient name. */
+        /** <strong>Required.</strong> Recipient name. */
         public Builder setName(String name) {
           this.name = name;
           return this;
@@ -4243,7 +4283,7 @@ public class SessionCreateParams extends ApiRequestParams {
         @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
         Map<String, Object> extraParams;
 
-        /** Address line 1 (e.g., street, PO Box, or company name). */
+        /** <strong>Required.</strong> Address line 1 (e.g., street, PO Box, or company name). */
         @SerializedName("line1")
         String line1;
 
@@ -4350,7 +4390,7 @@ public class SessionCreateParams extends ApiRequestParams {
             return this;
           }
 
-          /** Address line 1 (e.g., street, PO Box, or company name). */
+          /** <strong>Required.</strong> Address line 1 (e.g., street, PO Box, or company name). */
           public Builder setLine1(String line1) {
             this.line1 = line1;
             return this;
@@ -4384,10 +4424,10 @@ public class SessionCreateParams extends ApiRequestParams {
       Long amount;
 
       /**
-       * If specified, successful charges will be attributed to the destination account for tax
-       * reporting, and the funds from charges will be transferred to the destination account. The
-       * ID of the resulting transfer will be returned on the successful charge's {@code transfer}
-       * field.
+       * <strong>Required.</strong> If specified, successful charges will be attributed to the
+       * destination account for tax reporting, and the funds from charges will be transferred to
+       * the destination account. The ID of the resulting transfer will be returned on the
+       * successful charge's {@code transfer} field.
        */
       @SerializedName("destination")
       String destination;
@@ -4431,10 +4471,10 @@ public class SessionCreateParams extends ApiRequestParams {
         }
 
         /**
-         * If specified, successful charges will be attributed to the destination account for tax
-         * reporting, and the funds from charges will be transferred to the destination account. The
-         * ID of the resulting transfer will be returned on the successful charge's {@code transfer}
-         * field.
+         * <strong>Required.</strong> If specified, successful charges will be attributed to the
+         * destination account for tax reporting, and the funds from charges will be transferred to
+         * the destination account. The ID of the resulting transfer will be returned on the
+         * successful charge's {@code transfer} field.
          */
         public Builder setDestination(String destination) {
           this.destination = destination;
@@ -6821,12 +6861,12 @@ public class SessionCreateParams extends ApiRequestParams {
             requestedAddressTypes;
 
         /**
-         * The list of bank transfer types that this PaymentIntent is allowed to use for funding.
-         * Permitted values include: {@code us_bank_account}, {@code eu_bank_account}, {@code
-         * id_bank_account}, {@code gb_bank_account}, {@code jp_bank_account}, {@code
-         * mx_bank_account}, {@code eu_bank_transfer}, {@code gb_bank_transfer}, {@code
-         * id_bank_transfer}, {@code jp_bank_transfer}, {@code mx_bank_transfer}, or {@code
-         * us_bank_transfer}.
+         * <strong>Required.</strong> The list of bank transfer types that this PaymentIntent is
+         * allowed to use for funding. Permitted values include: {@code us_bank_account}, {@code
+         * eu_bank_account}, {@code id_bank_account}, {@code gb_bank_account}, {@code
+         * jp_bank_account}, {@code mx_bank_account}, {@code eu_bank_transfer}, {@code
+         * gb_bank_transfer}, {@code id_bank_transfer}, {@code jp_bank_transfer}, {@code
+         * mx_bank_transfer}, or {@code us_bank_transfer}.
          */
         @SerializedName("type")
         Type type;
@@ -6943,12 +6983,12 @@ public class SessionCreateParams extends ApiRequestParams {
           }
 
           /**
-           * The list of bank transfer types that this PaymentIntent is allowed to use for funding.
-           * Permitted values include: {@code us_bank_account}, {@code eu_bank_account}, {@code
-           * id_bank_account}, {@code gb_bank_account}, {@code jp_bank_account}, {@code
-           * mx_bank_account}, {@code eu_bank_transfer}, {@code gb_bank_transfer}, {@code
-           * id_bank_transfer}, {@code jp_bank_transfer}, {@code mx_bank_transfer}, or {@code
-           * us_bank_transfer}.
+           * <strong>Required.</strong> The list of bank transfer types that this PaymentIntent is
+           * allowed to use for funding. Permitted values include: {@code us_bank_account}, {@code
+           * eu_bank_account}, {@code id_bank_account}, {@code gb_bank_account}, {@code
+           * jp_bank_account}, {@code mx_bank_account}, {@code eu_bank_transfer}, {@code
+           * gb_bank_transfer}, {@code id_bank_transfer}, {@code jp_bank_transfer}, {@code
+           * mx_bank_transfer}, or {@code us_bank_transfer}.
            */
           public Builder setType(
               SessionCreateParams.PaymentMethodOptions.CustomerBalance.BankTransfer.Type type) {
@@ -6960,8 +7000,9 @@ public class SessionCreateParams extends ApiRequestParams {
         @Getter
         public static class EuBankTransfer {
           /**
-           * The desired country code of the bank account information. Permitted values include:
-           * {@code BE}, {@code DE}, {@code ES}, {@code FR}, {@code IE}, or {@code NL}.
+           * <strong>Required.</strong> The desired country code of the bank account information.
+           * Permitted values include: {@code BE}, {@code DE}, {@code ES}, {@code FR}, {@code IE},
+           * or {@code NL}.
            */
           @SerializedName("country")
           String country;
@@ -6999,8 +7040,9 @@ public class SessionCreateParams extends ApiRequestParams {
             }
 
             /**
-             * The desired country code of the bank account information. Permitted values include:
-             * {@code BE}, {@code DE}, {@code ES}, {@code FR}, {@code IE}, or {@code NL}.
+             * <strong>Required.</strong> The desired country code of the bank account information.
+             * Permitted values include: {@code BE}, {@code DE}, {@code ES}, {@code FR}, {@code IE},
+             * or {@code NL}.
              */
             public Builder setCountry(String country) {
               this.country = country;
@@ -9081,7 +9123,7 @@ public class SessionCreateParams extends ApiRequestParams {
       @SerializedName("app_id")
       String appId;
 
-      /** The client type that the end customer will pay from. */
+      /** <strong>Required.</strong> The client type that the end customer will pay from */
       @SerializedName("client")
       Client client;
 
@@ -9148,7 +9190,7 @@ public class SessionCreateParams extends ApiRequestParams {
           return this;
         }
 
-        /** The client type that the end customer will pay from. */
+        /** <strong>Required.</strong> The client type that the end customer will pay from */
         public Builder setClient(SessionCreateParams.PaymentMethodOptions.WechatPay.Client client) {
           this.client = client;
           return this;
@@ -9239,7 +9281,7 @@ public class SessionCreateParams extends ApiRequestParams {
 
   @Getter
   public static class PhoneNumberCollection {
-    /** Set to {@code true} to enable phone number collection. */
+    /** <strong>Required.</strong> Set to {@code true} to enable phone number collection. */
     @SerializedName("enabled")
     Boolean enabled;
 
@@ -9271,7 +9313,7 @@ public class SessionCreateParams extends ApiRequestParams {
         return new SessionCreateParams.PhoneNumberCollection(this.enabled, this.extraParams);
       }
 
-      /** Set to {@code true} to enable phone number collection. */
+      /** <strong>Required.</strong> Set to {@code true} to enable phone number collection. */
       public Builder setEnabled(Boolean enabled) {
         this.enabled = enabled;
         return this;
@@ -9433,9 +9475,9 @@ public class SessionCreateParams extends ApiRequestParams {
   @Getter
   public static class ShippingAddressCollection {
     /**
-     * An array of two-letter ISO country codes representing which countries Checkout should provide
-     * as options for shipping locations. Unsupported country codes: {@code AS, CX, CC, CU, HM, IR,
-     * KP, MH, FM, NF, MP, PW, SD, SY, UM, VI}.
+     * <strong>Required.</strong> An array of two-letter ISO country codes representing which
+     * countries Checkout should provide as options for shipping locations. Unsupported country
+     * codes: {@code AS, CX, CC, CU, HM, IR, KP, MH, FM, NF, MP, PW, SD, SY, UM, VI}.
      */
     @SerializedName("allowed_countries")
     List<SessionCreateParams.ShippingAddressCollection.AllowedCountry> allowedCountries;
@@ -10343,8 +10385,8 @@ public class SessionCreateParams extends ApiRequestParams {
       DeliveryEstimate deliveryEstimate;
 
       /**
-       * The name of the shipping rate, meant to be displayable to the customer. This will appear on
-       * CheckoutSessions.
+       * <strong>Required.</strong> The name of the shipping rate, meant to be displayable to the
+       * customer. This will appear on CheckoutSessions.
        */
       @SerializedName("display_name")
       String displayName;
@@ -10459,8 +10501,8 @@ public class SessionCreateParams extends ApiRequestParams {
         }
 
         /**
-         * The name of the shipping rate, meant to be displayable to the customer. This will appear
-         * on CheckoutSessions.
+         * <strong>Required.</strong> The name of the shipping rate, meant to be displayable to the
+         * customer. This will appear on CheckoutSessions.
          */
         public Builder setDisplayName(String displayName) {
           this.displayName = displayName;
@@ -10671,11 +10713,11 @@ public class SessionCreateParams extends ApiRequestParams {
           @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
           Map<String, Object> extraParams;
 
-          /** A unit of time. */
+          /** <strong>Required.</strong> A unit of time. */
           @SerializedName("unit")
           Unit unit;
 
-          /** Must be greater than 0. */
+          /** <strong>Required.</strong> Must be greater than 0. */
           @SerializedName("value")
           Long value;
 
@@ -10733,7 +10775,7 @@ public class SessionCreateParams extends ApiRequestParams {
               return this;
             }
 
-            /** A unit of time. */
+            /** <strong>Required.</strong> A unit of time. */
             public Builder setUnit(
                 SessionCreateParams.ShippingOption.ShippingRateData.DeliveryEstimate.Maximum.Unit
                     unit) {
@@ -10741,7 +10783,7 @@ public class SessionCreateParams extends ApiRequestParams {
               return this;
             }
 
-            /** Must be greater than 0. */
+            /** <strong>Required.</strong> Must be greater than 0. */
             public Builder setValue(Long value) {
               this.value = value;
               return this;
@@ -10785,11 +10827,11 @@ public class SessionCreateParams extends ApiRequestParams {
           @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
           Map<String, Object> extraParams;
 
-          /** A unit of time. */
+          /** <strong>Required.</strong> A unit of time. */
           @SerializedName("unit")
           Unit unit;
 
-          /** Must be greater than 0. */
+          /** <strong>Required.</strong> Must be greater than 0. */
           @SerializedName("value")
           Long value;
 
@@ -10847,7 +10889,7 @@ public class SessionCreateParams extends ApiRequestParams {
               return this;
             }
 
-            /** A unit of time. */
+            /** <strong>Required.</strong> A unit of time. */
             public Builder setUnit(
                 SessionCreateParams.ShippingOption.ShippingRateData.DeliveryEstimate.Minimum.Unit
                     unit) {
@@ -10855,7 +10897,7 @@ public class SessionCreateParams extends ApiRequestParams {
               return this;
             }
 
-            /** Must be greater than 0. */
+            /** <strong>Required.</strong> Must be greater than 0. */
             public Builder setValue(Long value) {
               this.value = value;
               return this;
@@ -10890,14 +10932,17 @@ public class SessionCreateParams extends ApiRequestParams {
 
       @Getter
       public static class FixedAmount {
-        /** A non-negative integer in cents representing how much to charge. */
+        /**
+         * <strong>Required.</strong> A non-negative integer in cents representing how much to
+         * charge.
+         */
         @SerializedName("amount")
         Long amount;
 
         /**
-         * Three-letter <a href="https://www.iso.org/iso-4217-currency-codes.html">ISO currency
-         * code</a>, in lowercase. Must be a <a href="https://stripe.com/docs/currencies">supported
-         * currency</a>.
+         * <strong>Required.</strong> Three-letter <a
+         * href="https://www.iso.org/iso-4217-currency-codes.html">ISO currency code</a>, in
+         * lowercase. Must be a <a href="https://stripe.com/docs/currencies">supported currency</a>.
          */
         @SerializedName("currency")
         String currency;
@@ -10957,16 +11002,20 @@ public class SessionCreateParams extends ApiRequestParams {
                 this.amount, this.currency, this.currencyOptions, this.extraParams);
           }
 
-          /** A non-negative integer in cents representing how much to charge. */
+          /**
+           * <strong>Required.</strong> A non-negative integer in cents representing how much to
+           * charge.
+           */
           public Builder setAmount(Long amount) {
             this.amount = amount;
             return this;
           }
 
           /**
-           * Three-letter <a href="https://www.iso.org/iso-4217-currency-codes.html">ISO currency
-           * code</a>, in lowercase. Must be a <a
-           * href="https://stripe.com/docs/currencies">supported currency</a>.
+           * <strong>Required.</strong> Three-letter <a
+           * href="https://www.iso.org/iso-4217-currency-codes.html">ISO currency code</a>, in
+           * lowercase. Must be a <a href="https://stripe.com/docs/currencies">supported
+           * currency</a>.
            */
           public Builder setCurrency(String currency) {
             this.currency = currency;
@@ -11044,7 +11093,10 @@ public class SessionCreateParams extends ApiRequestParams {
 
         @Getter
         public static class CurrencyOption {
-          /** A non-negative integer in cents representing how much to charge. */
+          /**
+           * <strong>Required.</strong> A non-negative integer in cents representing how much to
+           * charge.
+           */
           @SerializedName("amount")
           Long amount;
 
@@ -11090,7 +11142,10 @@ public class SessionCreateParams extends ApiRequestParams {
                   .CurrencyOption(this.amount, this.extraParams, this.taxBehavior);
             }
 
-            /** A non-negative integer in cents representing how much to charge. */
+            /**
+             * <strong>Required.</strong> A non-negative integer in cents representing how much to
+             * charge.
+             */
             public Builder setAmount(Long amount) {
               this.amount = amount;
               return this;
@@ -11526,7 +11581,7 @@ public class SessionCreateParams extends ApiRequestParams {
       @SerializedName("amount_percent")
       BigDecimal amountPercent;
 
-      /** ID of an existing, connected Stripe account. */
+      /** <strong>Required.</strong> ID of an existing, connected Stripe account. */
       @SerializedName("destination")
       String destination;
 
@@ -11574,7 +11629,7 @@ public class SessionCreateParams extends ApiRequestParams {
           return this;
         }
 
-        /** ID of an existing, connected Stripe account. */
+        /** <strong>Required.</strong> ID of an existing, connected Stripe account. */
         public Builder setDestination(String destination) {
           this.destination = destination;
           return this;
@@ -11612,7 +11667,10 @@ public class SessionCreateParams extends ApiRequestParams {
 
     @Getter
     public static class TrialSettings {
-      /** Defines how the subscription should behave when the user's free trial ends. */
+      /**
+       * <strong>Required.</strong> Defines how the subscription should behave when the user's free
+       * trial ends.
+       */
       @SerializedName("end_behavior")
       EndBehavior endBehavior;
 
@@ -11645,7 +11703,10 @@ public class SessionCreateParams extends ApiRequestParams {
               this.endBehavior, this.extraParams);
         }
 
-        /** Defines how the subscription should behave when the user's free trial ends. */
+        /**
+         * <strong>Required.</strong> Defines how the subscription should behave when the user's
+         * free trial ends.
+         */
         public Builder setEndBehavior(
             SessionCreateParams.SubscriptionData.TrialSettings.EndBehavior endBehavior) {
           this.endBehavior = endBehavior;
@@ -11694,8 +11755,8 @@ public class SessionCreateParams extends ApiRequestParams {
         Map<String, Object> extraParams;
 
         /**
-         * Indicates how the subscription should change when the trial ends if the user did not
-         * provide a payment method.
+         * <strong>Required.</strong> Indicates how the subscription should change when the trial
+         * ends if the user did not provide a payment method.
          */
         @SerializedName("missing_payment_method")
         MissingPaymentMethod missingPaymentMethod;
@@ -11752,8 +11813,8 @@ public class SessionCreateParams extends ApiRequestParams {
           }
 
           /**
-           * Indicates how the subscription should change when the trial ends if the user did not
-           * provide a payment method.
+           * <strong>Required.</strong> Indicates how the subscription should change when the trial
+           * ends if the user did not provide a payment method.
            */
           public Builder setMissingPaymentMethod(
               SessionCreateParams.SubscriptionData.TrialSettings.EndBehavior.MissingPaymentMethod
@@ -11786,7 +11847,7 @@ public class SessionCreateParams extends ApiRequestParams {
 
   @Getter
   public static class TaxIdCollection {
-    /** Set to true to enable Tax ID collection. */
+    /** <strong>Required.</strong> Set to true to enable Tax ID collection. */
     @SerializedName("enabled")
     Boolean enabled;
 
@@ -11818,7 +11879,7 @@ public class SessionCreateParams extends ApiRequestParams {
         return new SessionCreateParams.TaxIdCollection(this.enabled, this.extraParams);
       }
 
-      /** Set to true to enable Tax ID collection. */
+      /** <strong>Required.</strong> Set to true to enable Tax ID collection. */
       public Builder setEnabled(Boolean enabled) {
         this.enabled = enabled;
         return this;

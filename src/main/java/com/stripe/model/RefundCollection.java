@@ -13,8 +13,8 @@ public class RefundCollection extends StripeCollection<Refund> {
   /**
    * You can see a list of the refunds belonging to a specific charge. Note that the 10 most recent
    * refunds are always available by default on the charge object. If you need more than those 10,
-   * you can use this API method and the <code>limit</code> and <code>starting_after</code>
-   * parameters to page through additional refunds.
+   * you can use this API method and the {@code limit} and {@code starting_after} parameters to page
+   * through additional refunds.
    */
   public RefundCollection list(Map<String, Object> params) throws StripeException {
     return list(params, (RequestOptions) null);
@@ -23,8 +23,8 @@ public class RefundCollection extends StripeCollection<Refund> {
   /**
    * You can see a list of the refunds belonging to a specific charge. Note that the 10 most recent
    * refunds are always available by default on the charge object. If you need more than those 10,
-   * you can use this API method and the <code>limit</code> and <code>starting_after</code>
-   * parameters to page through additional refunds.
+   * you can use this API method and the {@code limit} and {@code starting_after} parameters to page
+   * through additional refunds.
    */
   public RefundCollection list(Map<String, Object> params, RequestOptions options)
       throws StripeException {
@@ -36,8 +36,8 @@ public class RefundCollection extends StripeCollection<Refund> {
   /**
    * You can see a list of the refunds belonging to a specific charge. Note that the 10 most recent
    * refunds are always available by default on the charge object. If you need more than those 10,
-   * you can use this API method and the <code>limit</code> and <code>starting_after</code>
-   * parameters to page through additional refunds.
+   * you can use this API method and the {@code limit} and {@code starting_after} parameters to page
+   * through additional refunds.
    */
   public RefundCollection list(RefundCollectionListParams params) throws StripeException {
     return list(params, (RequestOptions) null);
@@ -46,8 +46,8 @@ public class RefundCollection extends StripeCollection<Refund> {
   /**
    * You can see a list of the refunds belonging to a specific charge. Note that the 10 most recent
    * refunds are always available by default on the charge object. If you need more than those 10,
-   * you can use this API method and the <code>limit</code> and <code>starting_after</code>
-   * parameters to page through additional refunds.
+   * you can use this API method and the {@code limit} and {@code starting_after} parameters to page
+   * through additional refunds.
    */
   public RefundCollection list(RefundCollectionListParams params, RequestOptions options)
       throws StripeException {

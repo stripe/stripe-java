@@ -88,12 +88,12 @@ public class ValueList extends ApiResource implements HasId, MetadataStore<Value
   @SerializedName("object")
   String object;
 
-  /** Creates a new <code>ValueList</code> object, which can then be referenced in rules. */
+  /** Creates a new {@code ValueList} object, which can then be referenced in rules. */
   public static ValueList create(Map<String, Object> params) throws StripeException {
     return create(params, (RequestOptions) null);
   }
 
-  /** Creates a new <code>ValueList</code> object, which can then be referenced in rules. */
+  /** Creates a new {@code ValueList} object, which can then be referenced in rules. */
   public static ValueList create(Map<String, Object> params, RequestOptions options)
       throws StripeException {
     String url = ApiResource.fullUrl(Stripe.getApiBase(), options, "/v1/radar/value_lists");
@@ -101,12 +101,12 @@ public class ValueList extends ApiResource implements HasId, MetadataStore<Value
         ApiResource.RequestMethod.POST, url, params, ValueList.class, options);
   }
 
-  /** Creates a new <code>ValueList</code> object, which can then be referenced in rules. */
+  /** Creates a new {@code ValueList} object, which can then be referenced in rules. */
   public static ValueList create(ValueListCreateParams params) throws StripeException {
     return create(params, (RequestOptions) null);
   }
 
-  /** Creates a new <code>ValueList</code> object, which can then be referenced in rules. */
+  /** Creates a new {@code ValueList} object, which can then be referenced in rules. */
   public static ValueList create(ValueListCreateParams params, RequestOptions options)
       throws StripeException {
     String url = ApiResource.fullUrl(Stripe.getApiBase(), options, "/v1/radar/value_lists");
@@ -115,32 +115,32 @@ public class ValueList extends ApiResource implements HasId, MetadataStore<Value
   }
 
   /**
-   * Deletes a <code>ValueList</code> object, also deleting any items contained within the value
-   * list. To be deleted, a value list must not be referenced in any rules.
+   * Deletes a {@code ValueList} object, also deleting any items contained within the value list. To
+   * be deleted, a value list must not be referenced in any rules.
    */
   public ValueList delete() throws StripeException {
     return delete((Map<String, Object>) null, (RequestOptions) null);
   }
 
   /**
-   * Deletes a <code>ValueList</code> object, also deleting any items contained within the value
-   * list. To be deleted, a value list must not be referenced in any rules.
+   * Deletes a {@code ValueList} object, also deleting any items contained within the value list. To
+   * be deleted, a value list must not be referenced in any rules.
    */
   public ValueList delete(RequestOptions options) throws StripeException {
     return delete((Map<String, Object>) null, options);
   }
 
   /**
-   * Deletes a <code>ValueList</code> object, also deleting any items contained within the value
-   * list. To be deleted, a value list must not be referenced in any rules.
+   * Deletes a {@code ValueList} object, also deleting any items contained within the value list. To
+   * be deleted, a value list must not be referenced in any rules.
    */
   public ValueList delete(Map<String, Object> params) throws StripeException {
     return delete(params, (RequestOptions) null);
   }
 
   /**
-   * Deletes a <code>ValueList</code> object, also deleting any items contained within the value
-   * list. To be deleted, a value list must not be referenced in any rules.
+   * Deletes a {@code ValueList} object, also deleting any items contained within the value list. To
+   * be deleted, a value list must not be referenced in any rules.
    */
   public ValueList delete(Map<String, Object> params, RequestOptions options)
       throws StripeException {
@@ -154,7 +154,7 @@ public class ValueList extends ApiResource implements HasId, MetadataStore<Value
   }
 
   /**
-   * Returns a list of <code>ValueList</code> objects. The objects are sorted in descending order by
+   * Returns a list of {@code ValueList} objects. The objects are sorted in descending order by
    * creation date, with the most recently created object appearing first.
    */
   public static ValueListCollection list(Map<String, Object> params) throws StripeException {
@@ -162,7 +162,7 @@ public class ValueList extends ApiResource implements HasId, MetadataStore<Value
   }
 
   /**
-   * Returns a list of <code>ValueList</code> objects. The objects are sorted in descending order by
+   * Returns a list of {@code ValueList} objects. The objects are sorted in descending order by
    * creation date, with the most recently created object appearing first.
    */
   public static ValueListCollection list(Map<String, Object> params, RequestOptions options)
@@ -173,7 +173,7 @@ public class ValueList extends ApiResource implements HasId, MetadataStore<Value
   }
 
   /**
-   * Returns a list of <code>ValueList</code> objects. The objects are sorted in descending order by
+   * Returns a list of {@code ValueList} objects. The objects are sorted in descending order by
    * creation date, with the most recently created object appearing first.
    */
   public static ValueListCollection list(ValueListListParams params) throws StripeException {
@@ -181,7 +181,7 @@ public class ValueList extends ApiResource implements HasId, MetadataStore<Value
   }
 
   /**
-   * Returns a list of <code>ValueList</code> objects. The objects are sorted in descending order by
+   * Returns a list of {@code ValueList} objects. The objects are sorted in descending order by
    * creation date, with the most recently created object appearing first.
    */
   public static ValueListCollection list(ValueListListParams params, RequestOptions options)
@@ -191,18 +191,18 @@ public class ValueList extends ApiResource implements HasId, MetadataStore<Value
         ApiResource.RequestMethod.GET, url, params, ValueListCollection.class, options);
   }
 
-  /** Retrieves a <code>ValueList</code> object. */
+  /** Retrieves a {@code ValueList} object. */
   public static ValueList retrieve(String valueList) throws StripeException {
     return retrieve(valueList, (Map<String, Object>) null, (RequestOptions) null);
   }
 
-  /** Retrieves a <code>ValueList</code> object. */
+  /** Retrieves a {@code ValueList} object. */
   public static ValueList retrieve(String valueList, RequestOptions options)
       throws StripeException {
     return retrieve(valueList, (Map<String, Object>) null, options);
   }
 
-  /** Retrieves a <code>ValueList</code> object. */
+  /** Retrieves a {@code ValueList} object. */
   public static ValueList retrieve(
       String valueList, Map<String, Object> params, RequestOptions options) throws StripeException {
     String url =
@@ -214,7 +214,7 @@ public class ValueList extends ApiResource implements HasId, MetadataStore<Value
         ApiResource.RequestMethod.GET, url, params, ValueList.class, options);
   }
 
-  /** Retrieves a <code>ValueList</code> object. */
+  /** Retrieves a {@code ValueList} object. */
   public static ValueList retrieve(
       String valueList, ValueListRetrieveParams params, RequestOptions options)
       throws StripeException {
@@ -228,8 +228,8 @@ public class ValueList extends ApiResource implements HasId, MetadataStore<Value
   }
 
   /**
-   * Updates a <code>ValueList</code> object by setting the values of the parameters passed. Any
-   * parameters not provided will be left unchanged. Note that <code>item_type</code> is immutable.
+   * Updates a {@code ValueList} object by setting the values of the parameters passed. Any
+   * parameters not provided will be left unchanged. Note that {@code item_type} is immutable.
    */
   @Override
   public ValueList update(Map<String, Object> params) throws StripeException {
@@ -237,8 +237,8 @@ public class ValueList extends ApiResource implements HasId, MetadataStore<Value
   }
 
   /**
-   * Updates a <code>ValueList</code> object by setting the values of the parameters passed. Any
-   * parameters not provided will be left unchanged. Note that <code>item_type</code> is immutable.
+   * Updates a {@code ValueList} object by setting the values of the parameters passed. Any
+   * parameters not provided will be left unchanged. Note that {@code item_type} is immutable.
    */
   @Override
   public ValueList update(Map<String, Object> params, RequestOptions options)
@@ -253,16 +253,16 @@ public class ValueList extends ApiResource implements HasId, MetadataStore<Value
   }
 
   /**
-   * Updates a <code>ValueList</code> object by setting the values of the parameters passed. Any
-   * parameters not provided will be left unchanged. Note that <code>item_type</code> is immutable.
+   * Updates a {@code ValueList} object by setting the values of the parameters passed. Any
+   * parameters not provided will be left unchanged. Note that {@code item_type} is immutable.
    */
   public ValueList update(ValueListUpdateParams params) throws StripeException {
     return update(params, (RequestOptions) null);
   }
 
   /**
-   * Updates a <code>ValueList</code> object by setting the values of the parameters passed. Any
-   * parameters not provided will be left unchanged. Note that <code>item_type</code> is immutable.
+   * Updates a {@code ValueList} object by setting the values of the parameters passed. Any
+   * parameters not provided will be left unchanged. Note that {@code item_type} is immutable.
    */
   public ValueList update(ValueListUpdateParams params, RequestOptions options)
       throws StripeException {

@@ -180,9 +180,9 @@ public class Person extends ApiResource implements HasId, MetadataStore<Person> 
 
   /**
    * Deletes an existing person’s relationship to the account’s legal entity. Any person with a
-   * relationship for an account can be deleted through the API, except if the person is the <code>
-   * account_opener</code>. If your integration is using the <code>executive</code> parameter, you
-   * cannot delete the only verified <code>executive</code> on file.
+   * relationship for an account can be deleted through the API, except if the person is the {@code
+   * account_opener}. If your integration is using the {@code executive} parameter, you cannot
+   * delete the only verified {@code executive} on file.
    */
   public Person delete() throws StripeException {
     return delete((Map<String, Object>) null, (RequestOptions) null);
@@ -190,9 +190,9 @@ public class Person extends ApiResource implements HasId, MetadataStore<Person> 
 
   /**
    * Deletes an existing person’s relationship to the account’s legal entity. Any person with a
-   * relationship for an account can be deleted through the API, except if the person is the <code>
-   * account_opener</code>. If your integration is using the <code>executive</code> parameter, you
-   * cannot delete the only verified <code>executive</code> on file.
+   * relationship for an account can be deleted through the API, except if the person is the {@code
+   * account_opener}. If your integration is using the {@code executive} parameter, you cannot
+   * delete the only verified {@code executive} on file.
    */
   public Person delete(RequestOptions options) throws StripeException {
     return delete((Map<String, Object>) null, options);
@@ -200,9 +200,9 @@ public class Person extends ApiResource implements HasId, MetadataStore<Person> 
 
   /**
    * Deletes an existing person’s relationship to the account’s legal entity. Any person with a
-   * relationship for an account can be deleted through the API, except if the person is the <code>
-   * account_opener</code>. If your integration is using the <code>executive</code> parameter, you
-   * cannot delete the only verified <code>executive</code> on file.
+   * relationship for an account can be deleted through the API, except if the person is the {@code
+   * account_opener}. If your integration is using the {@code executive} parameter, you cannot
+   * delete the only verified {@code executive} on file.
    */
   public Person delete(Map<String, Object> params) throws StripeException {
     return delete(params, (RequestOptions) null);
@@ -210,9 +210,9 @@ public class Person extends ApiResource implements HasId, MetadataStore<Person> 
 
   /**
    * Deletes an existing person’s relationship to the account’s legal entity. Any person with a
-   * relationship for an account can be deleted through the API, except if the person is the <code>
-   * account_opener</code>. If your integration is using the <code>executive</code> parameter, you
-   * cannot delete the only verified <code>executive</code> on file.
+   * relationship for an account can be deleted through the API, except if the person is the {@code
+   * account_opener}. If your integration is using the {@code executive} parameter, you cannot
+   * delete the only verified {@code executive} on file.
    */
   public Person delete(Map<String, Object> params, RequestOptions options) throws StripeException {
     String url =

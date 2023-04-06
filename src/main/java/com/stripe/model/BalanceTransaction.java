@@ -160,8 +160,8 @@ public class BalanceTransaction extends ApiResource implements HasId {
    * charges, transfers, and so forth). The transactions are returned in sorted order, with the most
    * recent transactions appearing first.
    *
-   * <p>Note that this endpoint was previously called “Balance history” and used the path <code>
-   * /v1/balance/history</code>.
+   * <p>Note that this endpoint was previously called “Balance history” and used the path {@code
+   * /v1/balance/history}.
    */
   public static BalanceTransactionCollection list(Map<String, Object> params)
       throws StripeException {
@@ -173,8 +173,8 @@ public class BalanceTransaction extends ApiResource implements HasId {
    * charges, transfers, and so forth). The transactions are returned in sorted order, with the most
    * recent transactions appearing first.
    *
-   * <p>Note that this endpoint was previously called “Balance history” and used the path <code>
-   * /v1/balance/history</code>.
+   * <p>Note that this endpoint was previously called “Balance history” and used the path {@code
+   * /v1/balance/history}.
    */
   public static BalanceTransactionCollection list(
       Map<String, Object> params, RequestOptions options) throws StripeException {
@@ -188,8 +188,8 @@ public class BalanceTransaction extends ApiResource implements HasId {
    * charges, transfers, and so forth). The transactions are returned in sorted order, with the most
    * recent transactions appearing first.
    *
-   * <p>Note that this endpoint was previously called “Balance history” and used the path <code>
-   * /v1/balance/history</code>.
+   * <p>Note that this endpoint was previously called “Balance history” and used the path {@code
+   * /v1/balance/history}.
    */
   public static BalanceTransactionCollection list(BalanceTransactionListParams params)
       throws StripeException {
@@ -201,8 +201,8 @@ public class BalanceTransaction extends ApiResource implements HasId {
    * charges, transfers, and so forth). The transactions are returned in sorted order, with the most
    * recent transactions appearing first.
    *
-   * <p>Note that this endpoint was previously called “Balance history” and used the path <code>
-   * /v1/balance/history</code>.
+   * <p>Note that this endpoint was previously called “Balance history” and used the path {@code
+   * /v1/balance/history}.
    */
   public static BalanceTransactionCollection list(
       BalanceTransactionListParams params, RequestOptions options) throws StripeException {
@@ -214,7 +214,7 @@ public class BalanceTransaction extends ApiResource implements HasId {
   /**
    * Retrieves the balance transaction with the given ID.
    *
-   * <p>Note that this endpoint previously used the path <code>/v1/balance/history/:id</code>.
+   * <p>Note that this endpoint previously used the path {@code /v1/balance/history/:id}.
    */
   public static BalanceTransaction retrieve(String id) throws StripeException {
     return retrieve(id, (Map<String, Object>) null, (RequestOptions) null);
@@ -223,7 +223,7 @@ public class BalanceTransaction extends ApiResource implements HasId {
   /**
    * Retrieves the balance transaction with the given ID.
    *
-   * <p>Note that this endpoint previously used the path <code>/v1/balance/history/:id</code>.
+   * <p>Note that this endpoint previously used the path {@code /v1/balance/history/:id}.
    */
   public static BalanceTransaction retrieve(String id, RequestOptions options)
       throws StripeException {
@@ -233,7 +233,7 @@ public class BalanceTransaction extends ApiResource implements HasId {
   /**
    * Retrieves the balance transaction with the given ID.
    *
-   * <p>Note that this endpoint previously used the path <code>/v1/balance/history/:id</code>.
+   * <p>Note that this endpoint previously used the path {@code /v1/balance/history/:id}.
    */
   public static BalanceTransaction retrieve(
       String id, Map<String, Object> params, RequestOptions options) throws StripeException {
@@ -249,7 +249,7 @@ public class BalanceTransaction extends ApiResource implements HasId {
   /**
    * Retrieves the balance transaction with the given ID.
    *
-   * <p>Note that this endpoint previously used the path <code>/v1/balance/history/:id</code>.
+   * <p>Note that this endpoint previously used the path {@code /v1/balance/history/:id}.
    */
   public static BalanceTransaction retrieve(
       String id, BalanceTransactionRetrieveParams params, RequestOptions options)

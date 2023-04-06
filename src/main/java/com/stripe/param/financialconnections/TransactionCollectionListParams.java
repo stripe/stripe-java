@@ -11,7 +11,9 @@ import lombok.Getter;
 
 @Getter
 public class TransactionCollectionListParams extends ApiRequestParams {
-  /** The ID of the Stripe account whose transactions will be retrieved. */
+  /**
+   * <strong>Required.</strong> The ID of the Stripe account whose transactions will be retrieved.
+   */
   @SerializedName("account")
   String account;
 
@@ -120,7 +122,9 @@ public class TransactionCollectionListParams extends ApiRequestParams {
           this.transactionRefresh);
     }
 
-    /** The ID of the Stripe account whose transactions will be retrieved. */
+    /**
+     * <strong>Required.</strong> The ID of the Stripe account whose transactions will be retrieved.
+     */
     public Builder setAccount(String account) {
       this.account = account;
       return this;
@@ -350,8 +354,8 @@ public class TransactionCollectionListParams extends ApiRequestParams {
   @Getter
   public static class TransactionRefresh {
     /**
-     * Return results where the transactions were created or updated by a refresh that took place
-     * after this refresh (non-inclusive).
+     * <strong>Required.</strong> Return results where the transactions were created or updated by a
+     * refresh that took place after this refresh (non-inclusive).
      */
     @SerializedName("after")
     String after;
@@ -385,8 +389,8 @@ public class TransactionCollectionListParams extends ApiRequestParams {
       }
 
       /**
-       * Return results where the transactions were created or updated by a refresh that took place
-       * after this refresh (non-inclusive).
+       * <strong>Required.</strong> Return results where the transactions were created or updated by
+       * a refresh that took place after this refresh (non-inclusive).
        */
       public Builder setAfter(String after) {
         this.after = after;

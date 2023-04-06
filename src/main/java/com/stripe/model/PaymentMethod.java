@@ -221,16 +221,15 @@ public class PaymentMethod extends ApiResource implements HasId, MetadataStore<P
    * href="https://stripe.com/docs/api/setup_intents">SetupIntent</a> or a PaymentIntent with <a
    * href="https://stripe.com/docs/api/payment_intents/create#create_payment_intent-setup_future_usage">setup_future_usage</a>.
    * These approaches will perform any necessary steps to set up the PaymentMethod for future
-   * payments. Using the <code>/v1/payment_methods/:id/attach</code> endpoint without first using a
-   * SetupIntent or PaymentIntent with <code>setup_future_usage</code> does not optimize the
+   * payments. Using the {@code /v1/payment_methods/:id/attach} endpoint without first using a
+   * SetupIntent or PaymentIntent with {@code setup_future_usage} does not optimize the
    * PaymentMethod for future use, which makes later declines and payment friction more likely. See
    * <a href="https://stripe.com/docs/payments/payment-intents#future-usage">Optimizing cards for
    * future payments</a> for more information about setting up future payments.
    *
    * <p>To use this PaymentMethod as the default for invoice or subscription payments, set <a
-   * href="https://stripe.com/docs/api/customers/update#update_customer-invoice_settings-default_payment_method">
-   * <code>invoice_settings.default_payment_method</code></a>, on the Customer to the
-   * PaymentMethod’s ID.
+   * href="https://stripe.com/docs/api/customers/update#update_customer-invoice_settings-default_payment_method">{@code
+   * invoice_settings.default_payment_method}</a>, on the Customer to the PaymentMethod’s ID.
    */
   public PaymentMethod attach(Map<String, Object> params) throws StripeException {
     return attach(params, (RequestOptions) null);
@@ -243,16 +242,15 @@ public class PaymentMethod extends ApiResource implements HasId, MetadataStore<P
    * href="https://stripe.com/docs/api/setup_intents">SetupIntent</a> or a PaymentIntent with <a
    * href="https://stripe.com/docs/api/payment_intents/create#create_payment_intent-setup_future_usage">setup_future_usage</a>.
    * These approaches will perform any necessary steps to set up the PaymentMethod for future
-   * payments. Using the <code>/v1/payment_methods/:id/attach</code> endpoint without first using a
-   * SetupIntent or PaymentIntent with <code>setup_future_usage</code> does not optimize the
+   * payments. Using the {@code /v1/payment_methods/:id/attach} endpoint without first using a
+   * SetupIntent or PaymentIntent with {@code setup_future_usage} does not optimize the
    * PaymentMethod for future use, which makes later declines and payment friction more likely. See
    * <a href="https://stripe.com/docs/payments/payment-intents#future-usage">Optimizing cards for
    * future payments</a> for more information about setting up future payments.
    *
    * <p>To use this PaymentMethod as the default for invoice or subscription payments, set <a
-   * href="https://stripe.com/docs/api/customers/update#update_customer-invoice_settings-default_payment_method">
-   * <code>invoice_settings.default_payment_method</code></a>, on the Customer to the
-   * PaymentMethod’s ID.
+   * href="https://stripe.com/docs/api/customers/update#update_customer-invoice_settings-default_payment_method">{@code
+   * invoice_settings.default_payment_method}</a>, on the Customer to the PaymentMethod’s ID.
    */
   public PaymentMethod attach(Map<String, Object> params, RequestOptions options)
       throws StripeException {
@@ -272,16 +270,15 @@ public class PaymentMethod extends ApiResource implements HasId, MetadataStore<P
    * href="https://stripe.com/docs/api/setup_intents">SetupIntent</a> or a PaymentIntent with <a
    * href="https://stripe.com/docs/api/payment_intents/create#create_payment_intent-setup_future_usage">setup_future_usage</a>.
    * These approaches will perform any necessary steps to set up the PaymentMethod for future
-   * payments. Using the <code>/v1/payment_methods/:id/attach</code> endpoint without first using a
-   * SetupIntent or PaymentIntent with <code>setup_future_usage</code> does not optimize the
+   * payments. Using the {@code /v1/payment_methods/:id/attach} endpoint without first using a
+   * SetupIntent or PaymentIntent with {@code setup_future_usage} does not optimize the
    * PaymentMethod for future use, which makes later declines and payment friction more likely. See
    * <a href="https://stripe.com/docs/payments/payment-intents#future-usage">Optimizing cards for
    * future payments</a> for more information about setting up future payments.
    *
    * <p>To use this PaymentMethod as the default for invoice or subscription payments, set <a
-   * href="https://stripe.com/docs/api/customers/update#update_customer-invoice_settings-default_payment_method">
-   * <code>invoice_settings.default_payment_method</code></a>, on the Customer to the
-   * PaymentMethod’s ID.
+   * href="https://stripe.com/docs/api/customers/update#update_customer-invoice_settings-default_payment_method">{@code
+   * invoice_settings.default_payment_method}</a>, on the Customer to the PaymentMethod’s ID.
    */
   public PaymentMethod attach(PaymentMethodAttachParams params) throws StripeException {
     return attach(params, (RequestOptions) null);
@@ -294,16 +291,15 @@ public class PaymentMethod extends ApiResource implements HasId, MetadataStore<P
    * href="https://stripe.com/docs/api/setup_intents">SetupIntent</a> or a PaymentIntent with <a
    * href="https://stripe.com/docs/api/payment_intents/create#create_payment_intent-setup_future_usage">setup_future_usage</a>.
    * These approaches will perform any necessary steps to set up the PaymentMethod for future
-   * payments. Using the <code>/v1/payment_methods/:id/attach</code> endpoint without first using a
-   * SetupIntent or PaymentIntent with <code>setup_future_usage</code> does not optimize the
+   * payments. Using the {@code /v1/payment_methods/:id/attach} endpoint without first using a
+   * SetupIntent or PaymentIntent with {@code setup_future_usage} does not optimize the
    * PaymentMethod for future use, which makes later declines and payment friction more likely. See
    * <a href="https://stripe.com/docs/payments/payment-intents#future-usage">Optimizing cards for
    * future payments</a> for more information about setting up future payments.
    *
    * <p>To use this PaymentMethod as the default for invoice or subscription payments, set <a
-   * href="https://stripe.com/docs/api/customers/update#update_customer-invoice_settings-default_payment_method">
-   * <code>invoice_settings.default_payment_method</code></a>, on the Customer to the
-   * PaymentMethod’s ID.
+   * href="https://stripe.com/docs/api/customers/update#update_customer-invoice_settings-default_payment_method">{@code
+   * invoice_settings.default_payment_method}</a>, on the Customer to the PaymentMethod’s ID.
    */
   public PaymentMethod attach(PaymentMethodAttachParams params, RequestOptions options)
       throws StripeException {
@@ -712,8 +708,8 @@ public class PaymentMethod extends ApiResource implements HasId, MetadataStore<P
   @EqualsAndHashCode(callSuper = false)
   public static class Card extends StripeObject {
     /**
-     * Card brand. Can be {@code amex}, {@code diners}, {@code discover}, {@code jcb}, {@code
-     * mastercard}, {@code unionpay}, {@code visa}, or {@code unknown}.
+     * Card brand. Can be {@code amex}, {@code diners}, {@code discover}, {@code eftpos_au}, {@code
+     * jcb}, {@code mastercard}, {@code unionpay}, {@code visa}, or {@code unknown}.
      */
     @SerializedName("brand")
     String brand;
@@ -865,9 +861,9 @@ public class PaymentMethod extends ApiResource implements HasId, MetadataStore<P
 
       /**
        * The type of the card wallet, one of {@code amex_express_checkout}, {@code apple_pay},
-       * {@code google_pay}, {@code masterpass}, {@code samsung_pay}, or {@code visa_checkout}. An
-       * additional hash is included on the Wallet subhash with a name matching this value. It
-       * contains additional information specific to the card wallet type.
+       * {@code google_pay}, {@code masterpass}, {@code samsung_pay}, {@code visa_checkout}, or
+       * {@code link}. An additional hash is included on the Wallet subhash with a name matching
+       * this value. It contains additional information specific to the card wallet type.
        */
       @SerializedName("type")
       String type;
@@ -1094,6 +1090,14 @@ public class PaymentMethod extends ApiResource implements HasId, MetadataStore<P
   @Setter
   @EqualsAndHashCode(callSuper = false)
   public static class Link extends StripeObject {
+    /**
+     * Two-letter ISO code representing the funding source (i.e. card, bank) country beneath the
+     * Link payment method. You could use this attribute to get a sense of the international
+     * breakdown of funding sources you've collected.
+     */
+    @SerializedName("country")
+    String country;
+
     /** Account owner's email address. */
     @SerializedName("email")
     String email;
@@ -1310,6 +1314,10 @@ public class PaymentMethod extends ApiResource implements HasId, MetadataStore<P
     @SerializedName("routing_number")
     String routingNumber;
 
+    /** Contains information about the future reusability of this PaymentMethod. */
+    @SerializedName("status_details")
+    StatusDetails statusDetails;
+
     @Getter
     @Setter
     @EqualsAndHashCode(callSuper = false)
@@ -1321,6 +1329,38 @@ public class PaymentMethod extends ApiResource implements HasId, MetadataStore<P
       /** All supported networks. */
       @SerializedName("supported")
       List<String> supported;
+    }
+
+    @Getter
+    @Setter
+    @EqualsAndHashCode(callSuper = false)
+    public static class StatusDetails extends StripeObject {
+      @SerializedName("blocked")
+      Blocked blocked;
+
+      @Getter
+      @Setter
+      @EqualsAndHashCode(callSuper = false)
+      public static class Blocked extends StripeObject {
+        /**
+         * The ACH network code that resulted in this block.
+         *
+         * <p>One of {@code R02}, {@code R03}, {@code R04}, {@code R05}, {@code R07}, {@code R08},
+         * {@code R10}, {@code R11}, {@code R16}, {@code R20}, {@code R29}, or {@code R31}.
+         */
+        @SerializedName("network_code")
+        String networkCode;
+
+        /**
+         * The reason why this PaymentMethod's fingerprint has been blocked
+         *
+         * <p>One of {@code bank_account_closed}, {@code bank_account_frozen}, {@code
+         * bank_account_invalid_details}, {@code bank_account_restricted}, {@code
+         * bank_account_unusable}, or {@code debit_not_authorized}.
+         */
+        @SerializedName("reason")
+        String reason;
+      }
     }
   }
 
