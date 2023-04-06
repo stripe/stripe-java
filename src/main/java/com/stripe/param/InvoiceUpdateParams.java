@@ -841,8 +841,8 @@ public class InvoiceUpdateParams extends ApiRequestParams {
   @Getter
   public static class AutomaticTax {
     /**
-     * Whether Stripe automatically computes tax on this invoice. Note that incompatible invoice
-     * items (invoice items with manually specified <a
+     * <strong>Required.</strong> Whether Stripe automatically computes tax on this invoice. Note
+     * that incompatible invoice items (invoice items with manually specified <a
      * href="https://stripe.com/docs/api/tax_rates">tax rates</a>, negative amounts, or {@code
      * tax_behavior=unspecified}) cannot be added to automatic tax invoices.
      */
@@ -878,8 +878,8 @@ public class InvoiceUpdateParams extends ApiRequestParams {
       }
 
       /**
-       * Whether Stripe automatically computes tax on this invoice. Note that incompatible invoice
-       * items (invoice items with manually specified <a
+       * <strong>Required.</strong> Whether Stripe automatically computes tax on this invoice. Note
+       * that incompatible invoice items (invoice items with manually specified <a
        * href="https://stripe.com/docs/api/tax_rates">tax rates</a>, negative amounts, or {@code
        * tax_behavior=unspecified}) cannot be added to automatic tax invoices.
        */
@@ -927,11 +927,13 @@ public class InvoiceUpdateParams extends ApiRequestParams {
     @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
     Map<String, Object> extraParams;
 
-    /** The name of the custom field. This may be up to 30 characters. */
+    /** <strong>Required.</strong> The name of the custom field. This may be up to 30 characters. */
     @SerializedName("name")
     Object name;
 
-    /** The value of the custom field. This may be up to 30 characters. */
+    /**
+     * <strong>Required.</strong> The value of the custom field. This may be up to 30 characters.
+     */
     @SerializedName("value")
     Object value;
 
@@ -983,25 +985,33 @@ public class InvoiceUpdateParams extends ApiRequestParams {
         return this;
       }
 
-      /** The name of the custom field. This may be up to 30 characters. */
+      /**
+       * <strong>Required.</strong> The name of the custom field. This may be up to 30 characters.
+       */
       public Builder setName(String name) {
         this.name = name;
         return this;
       }
 
-      /** The name of the custom field. This may be up to 30 characters. */
+      /**
+       * <strong>Required.</strong> The name of the custom field. This may be up to 30 characters.
+       */
       public Builder setName(EmptyParam name) {
         this.name = name;
         return this;
       }
 
-      /** The value of the custom field. This may be up to 30 characters. */
+      /**
+       * <strong>Required.</strong> The value of the custom field. This may be up to 30 characters.
+       */
       public Builder setValue(String value) {
         this.value = value;
         return this;
       }
 
-      /** The value of the custom field. This may be up to 30 characters. */
+      /**
+       * <strong>Required.</strong> The value of the custom field. This may be up to 30 characters.
+       */
       public Builder setValue(EmptyParam value) {
         this.value = value;
         return this;
@@ -2058,8 +2068,8 @@ public class InvoiceUpdateParams extends ApiRequestParams {
           @Getter
           public static class Plan {
             /**
-             * For {@code fixed_count} installment plans, this is the number of installment payments
-             * your customer will make to their credit card.
+             * <strong>Required.</strong> For {@code fixed_count} installment plans, this is the
+             * number of installment payments your customer will make to their credit card.
              */
             @SerializedName("count")
             Long count;
@@ -2075,13 +2085,14 @@ public class InvoiceUpdateParams extends ApiRequestParams {
             Map<String, Object> extraParams;
 
             /**
-             * For {@code fixed_count} installment plans, this is the interval between installment
-             * payments your customer will make to their credit card. One of {@code month}.
+             * <strong>Required.</strong> For {@code fixed_count} installment plans, this is the
+             * interval between installment payments your customer will make to their credit card.
+             * One of {@code month}.
              */
             @SerializedName("interval")
             Interval interval;
 
-            /** Type of installment plan, one of {@code fixed_count}. */
+            /** <strong>Required.</strong> Type of installment plan, one of {@code fixed_count}. */
             @SerializedName("type")
             Type type;
 
@@ -2114,8 +2125,8 @@ public class InvoiceUpdateParams extends ApiRequestParams {
               }
 
               /**
-               * For {@code fixed_count} installment plans, this is the number of installment
-               * payments your customer will make to their credit card.
+               * <strong>Required.</strong> For {@code fixed_count} installment plans, this is the
+               * number of installment payments your customer will make to their credit card.
                */
               public Builder setCount(Long count) {
                 this.count = count;
@@ -2153,8 +2164,9 @@ public class InvoiceUpdateParams extends ApiRequestParams {
               }
 
               /**
-               * For {@code fixed_count} installment plans, this is the interval between installment
-               * payments your customer will make to their credit card. One of {@code month}.
+               * <strong>Required.</strong> For {@code fixed_count} installment plans, this is the
+               * interval between installment payments your customer will make to their credit card.
+               * One of {@code month}.
                */
               public Builder setInterval(
                   InvoiceUpdateParams.PaymentSettings.PaymentMethodOptions.Card.Installments.Plan
@@ -2164,7 +2176,9 @@ public class InvoiceUpdateParams extends ApiRequestParams {
                 return this;
               }
 
-              /** Type of installment plan, one of {@code fixed_count}. */
+              /**
+               * <strong>Required.</strong> Type of installment plan, one of {@code fixed_count}.
+               */
               public Builder setType(
                   InvoiceUpdateParams.PaymentSettings.PaymentMethodOptions.Card.Installments.Plan
                           .Type
@@ -2439,8 +2453,9 @@ public class InvoiceUpdateParams extends ApiRequestParams {
           @Getter
           public static class EuBankTransfer {
             /**
-             * The desired country code of the bank account information. Permitted values include:
-             * {@code BE}, {@code DE}, {@code ES}, {@code FR}, {@code IE}, or {@code NL}.
+             * <strong>Required.</strong> The desired country code of the bank account information.
+             * Permitted values include: {@code BE}, {@code DE}, {@code ES}, {@code FR}, {@code IE},
+             * or {@code NL}.
              */
             @SerializedName("country")
             Object country;
@@ -2478,8 +2493,9 @@ public class InvoiceUpdateParams extends ApiRequestParams {
               }
 
               /**
-               * The desired country code of the bank account information. Permitted values include:
-               * {@code BE}, {@code DE}, {@code ES}, {@code FR}, {@code IE}, or {@code NL}.
+               * <strong>Required.</strong> The desired country code of the bank account
+               * information. Permitted values include: {@code BE}, {@code DE}, {@code ES}, {@code
+               * FR}, {@code IE}, or {@code NL}.
                */
               public Builder setCountry(String country) {
                 this.country = country;
@@ -2487,8 +2503,9 @@ public class InvoiceUpdateParams extends ApiRequestParams {
               }
 
               /**
-               * The desired country code of the bank account information. Permitted values include:
-               * {@code BE}, {@code DE}, {@code ES}, {@code FR}, {@code IE}, or {@code NL}.
+               * <strong>Required.</strong> The desired country code of the bank account
+               * information. Permitted values include: {@code BE}, {@code DE}, {@code ES}, {@code
+               * FR}, {@code IE}, or {@code NL}.
                */
               public Builder setCountry(EmptyParam country) {
                 this.country = country;
@@ -3132,8 +3149,8 @@ public class InvoiceUpdateParams extends ApiRequestParams {
       DeliveryEstimate deliveryEstimate;
 
       /**
-       * The name of the shipping rate, meant to be displayable to the customer. This will appear on
-       * CheckoutSessions.
+       * <strong>Required.</strong> The name of the shipping rate, meant to be displayable to the
+       * customer. This will appear on CheckoutSessions.
        */
       @SerializedName("display_name")
       Object displayName;
@@ -3248,8 +3265,8 @@ public class InvoiceUpdateParams extends ApiRequestParams {
         }
 
         /**
-         * The name of the shipping rate, meant to be displayable to the customer. This will appear
-         * on CheckoutSessions.
+         * <strong>Required.</strong> The name of the shipping rate, meant to be displayable to the
+         * customer. This will appear on CheckoutSessions.
          */
         public Builder setDisplayName(String displayName) {
           this.displayName = displayName;
@@ -3257,8 +3274,8 @@ public class InvoiceUpdateParams extends ApiRequestParams {
         }
 
         /**
-         * The name of the shipping rate, meant to be displayable to the customer. This will appear
-         * on CheckoutSessions.
+         * <strong>Required.</strong> The name of the shipping rate, meant to be displayable to the
+         * customer. This will appear on CheckoutSessions.
          */
         public Builder setDisplayName(EmptyParam displayName) {
           this.displayName = displayName;
@@ -3475,11 +3492,11 @@ public class InvoiceUpdateParams extends ApiRequestParams {
           @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
           Map<String, Object> extraParams;
 
-          /** A unit of time. */
+          /** <strong>Required.</strong> A unit of time. */
           @SerializedName("unit")
           Unit unit;
 
-          /** Must be greater than 0. */
+          /** <strong>Required.</strong> Must be greater than 0. */
           @SerializedName("value")
           Long value;
 
@@ -3537,7 +3554,7 @@ public class InvoiceUpdateParams extends ApiRequestParams {
               return this;
             }
 
-            /** A unit of time. */
+            /** <strong>Required.</strong> A unit of time. */
             public Builder setUnit(
                 InvoiceUpdateParams.ShippingCost.ShippingRateData.DeliveryEstimate.Maximum.Unit
                     unit) {
@@ -3545,7 +3562,7 @@ public class InvoiceUpdateParams extends ApiRequestParams {
               return this;
             }
 
-            /** Must be greater than 0. */
+            /** <strong>Required.</strong> Must be greater than 0. */
             public Builder setValue(Long value) {
               this.value = value;
               return this;
@@ -3589,11 +3606,11 @@ public class InvoiceUpdateParams extends ApiRequestParams {
           @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
           Map<String, Object> extraParams;
 
-          /** A unit of time. */
+          /** <strong>Required.</strong> A unit of time. */
           @SerializedName("unit")
           Unit unit;
 
-          /** Must be greater than 0. */
+          /** <strong>Required.</strong> Must be greater than 0. */
           @SerializedName("value")
           Long value;
 
@@ -3651,7 +3668,7 @@ public class InvoiceUpdateParams extends ApiRequestParams {
               return this;
             }
 
-            /** A unit of time. */
+            /** <strong>Required.</strong> A unit of time. */
             public Builder setUnit(
                 InvoiceUpdateParams.ShippingCost.ShippingRateData.DeliveryEstimate.Minimum.Unit
                     unit) {
@@ -3659,7 +3676,7 @@ public class InvoiceUpdateParams extends ApiRequestParams {
               return this;
             }
 
-            /** Must be greater than 0. */
+            /** <strong>Required.</strong> Must be greater than 0. */
             public Builder setValue(Long value) {
               this.value = value;
               return this;
@@ -3694,14 +3711,17 @@ public class InvoiceUpdateParams extends ApiRequestParams {
 
       @Getter
       public static class FixedAmount {
-        /** A non-negative integer in cents representing how much to charge. */
+        /**
+         * <strong>Required.</strong> A non-negative integer in cents representing how much to
+         * charge.
+         */
         @SerializedName("amount")
         Long amount;
 
         /**
-         * Three-letter <a href="https://www.iso.org/iso-4217-currency-codes.html">ISO currency
-         * code</a>, in lowercase. Must be a <a href="https://stripe.com/docs/currencies">supported
-         * currency</a>.
+         * <strong>Required.</strong> Three-letter <a
+         * href="https://www.iso.org/iso-4217-currency-codes.html">ISO currency code</a>, in
+         * lowercase. Must be a <a href="https://stripe.com/docs/currencies">supported currency</a>.
          */
         @SerializedName("currency")
         Object currency;
@@ -3761,16 +3781,20 @@ public class InvoiceUpdateParams extends ApiRequestParams {
                 this.amount, this.currency, this.currencyOptions, this.extraParams);
           }
 
-          /** A non-negative integer in cents representing how much to charge. */
+          /**
+           * <strong>Required.</strong> A non-negative integer in cents representing how much to
+           * charge.
+           */
           public Builder setAmount(Long amount) {
             this.amount = amount;
             return this;
           }
 
           /**
-           * Three-letter <a href="https://www.iso.org/iso-4217-currency-codes.html">ISO currency
-           * code</a>, in lowercase. Must be a <a
-           * href="https://stripe.com/docs/currencies">supported currency</a>.
+           * <strong>Required.</strong> Three-letter <a
+           * href="https://www.iso.org/iso-4217-currency-codes.html">ISO currency code</a>, in
+           * lowercase. Must be a <a href="https://stripe.com/docs/currencies">supported
+           * currency</a>.
            */
           public Builder setCurrency(String currency) {
             this.currency = currency;
@@ -3778,9 +3802,10 @@ public class InvoiceUpdateParams extends ApiRequestParams {
           }
 
           /**
-           * Three-letter <a href="https://www.iso.org/iso-4217-currency-codes.html">ISO currency
-           * code</a>, in lowercase. Must be a <a
-           * href="https://stripe.com/docs/currencies">supported currency</a>.
+           * <strong>Required.</strong> Three-letter <a
+           * href="https://www.iso.org/iso-4217-currency-codes.html">ISO currency code</a>, in
+           * lowercase. Must be a <a href="https://stripe.com/docs/currencies">supported
+           * currency</a>.
            */
           public Builder setCurrency(EmptyParam currency) {
             this.currency = currency;
@@ -3856,7 +3881,10 @@ public class InvoiceUpdateParams extends ApiRequestParams {
 
         @Getter
         public static class CurrencyOption {
-          /** A non-negative integer in cents representing how much to charge. */
+          /**
+           * <strong>Required.</strong> A non-negative integer in cents representing how much to
+           * charge.
+           */
           @SerializedName("amount")
           Long amount;
 
@@ -3902,7 +3930,10 @@ public class InvoiceUpdateParams extends ApiRequestParams {
                   .CurrencyOption(this.amount, this.extraParams, this.taxBehavior);
             }
 
-            /** A non-negative integer in cents representing how much to charge. */
+            /**
+             * <strong>Required.</strong> A non-negative integer in cents representing how much to
+             * charge.
+             */
             public Builder setAmount(Long amount) {
               this.amount = amount;
               return this;
@@ -4005,7 +4036,7 @@ public class InvoiceUpdateParams extends ApiRequestParams {
 
   @Getter
   public static class ShippingDetails {
-    /** Shipping address. */
+    /** <strong>Required.</strong> Shipping address */
     @SerializedName("address")
     Address address;
 
@@ -4018,7 +4049,7 @@ public class InvoiceUpdateParams extends ApiRequestParams {
     @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
     Map<String, Object> extraParams;
 
-    /** Recipient name. */
+    /** <strong>Required.</strong> Recipient name. */
     @SerializedName("name")
     Object name;
 
@@ -4053,7 +4084,7 @@ public class InvoiceUpdateParams extends ApiRequestParams {
             this.address, this.extraParams, this.name, this.phone);
       }
 
-      /** Shipping address. */
+      /** <strong>Required.</strong> Shipping address */
       public Builder setAddress(InvoiceUpdateParams.ShippingDetails.Address address) {
         this.address = address;
         return this;
@@ -4085,13 +4116,13 @@ public class InvoiceUpdateParams extends ApiRequestParams {
         return this;
       }
 
-      /** Recipient name. */
+      /** <strong>Required.</strong> Recipient name. */
       public Builder setName(String name) {
         this.name = name;
         return this;
       }
 
-      /** Recipient name. */
+      /** <strong>Required.</strong> Recipient name. */
       public Builder setName(EmptyParam name) {
         this.name = name;
         return this;
@@ -4314,7 +4345,7 @@ public class InvoiceUpdateParams extends ApiRequestParams {
     @SerializedName("amount")
     Long amount;
 
-    /** ID of an existing, connected Stripe account. */
+    /** <strong>Required.</strong> ID of an existing, connected Stripe account. */
     @SerializedName("destination")
     Object destination;
 
@@ -4359,13 +4390,13 @@ public class InvoiceUpdateParams extends ApiRequestParams {
         return this;
       }
 
-      /** ID of an existing, connected Stripe account. */
+      /** <strong>Required.</strong> ID of an existing, connected Stripe account. */
       public Builder setDestination(String destination) {
         this.destination = destination;
         return this;
       }
 
-      /** ID of an existing, connected Stripe account. */
+      /** <strong>Required.</strong> ID of an existing, connected Stripe account. */
       public Builder setDestination(EmptyParam destination) {
         this.destination = destination;
         return this;

@@ -24,7 +24,7 @@ public class SourceVerifyParams extends ApiRequestParams {
   @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
   Map<String, Object> extraParams;
 
-  /** The values needed to verify the source. */
+  /** <strong>Required.</strong> The values needed to verify the source. */
   @SerializedName("values")
   List<String> values;
 

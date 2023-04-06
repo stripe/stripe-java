@@ -707,7 +707,7 @@ public class ConfigurationUpdateParams extends ApiRequestParams {
 
     @Getter
     public static class InvoiceHistory {
-      /** Whether the feature is enabled. */
+      /** <strong>Required.</strong> Whether the feature is enabled. */
       @SerializedName("enabled")
       Boolean enabled;
 
@@ -740,7 +740,7 @@ public class ConfigurationUpdateParams extends ApiRequestParams {
               this.enabled, this.extraParams);
         }
 
-        /** Whether the feature is enabled. */
+        /** <strong>Required.</strong> Whether the feature is enabled. */
         public Builder setEnabled(Boolean enabled) {
           this.enabled = enabled;
           return this;
@@ -778,7 +778,7 @@ public class ConfigurationUpdateParams extends ApiRequestParams {
 
     @Getter
     public static class PaymentMethodUpdate {
-      /** Whether the feature is enabled. */
+      /** <strong>Required.</strong> Whether the feature is enabled. */
       @SerializedName("enabled")
       Boolean enabled;
 
@@ -811,7 +811,7 @@ public class ConfigurationUpdateParams extends ApiRequestParams {
               this.enabled, this.extraParams);
         }
 
-        /** Whether the feature is enabled. */
+        /** <strong>Required.</strong> Whether the feature is enabled. */
         public Builder setEnabled(Boolean enabled) {
           this.enabled = enabled;
           return this;
@@ -987,7 +987,7 @@ public class ConfigurationUpdateParams extends ApiRequestParams {
 
       @Getter
       public static class CancellationReason {
-        /** Whether the feature is enabled. */
+        /** <strong>Required.</strong> Whether the feature is enabled. */
         @SerializedName("enabled")
         Boolean enabled;
 
@@ -1029,7 +1029,7 @@ public class ConfigurationUpdateParams extends ApiRequestParams {
                 this.enabled, this.extraParams, this.options);
           }
 
-          /** Whether the feature is enabled. */
+          /** <strong>Required.</strong> Whether the feature is enabled. */
           public Builder setEnabled(Boolean enabled) {
             this.enabled = enabled;
             return this;
@@ -1504,11 +1504,14 @@ public class ConfigurationUpdateParams extends ApiRequestParams {
         @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
         Map<String, Object> extraParams;
 
-        /** The list of price IDs for the product that a subscription can be updated to. */
+        /**
+         * <strong>Required.</strong> The list of price IDs for the product that a subscription can
+         * be updated to.
+         */
         @SerializedName("prices")
         List<String> prices;
 
-        /** The product id. */
+        /** <strong>Required.</strong> The product id. */
         @SerializedName("product")
         Object product;
 
@@ -1593,13 +1596,13 @@ public class ConfigurationUpdateParams extends ApiRequestParams {
             return this;
           }
 
-          /** The product id. */
+          /** <strong>Required.</strong> The product id. */
           public Builder setProduct(String product) {
             this.product = product;
             return this;
           }
 
-          /** The product id. */
+          /** <strong>Required.</strong> The product id. */
           public Builder setProduct(EmptyParam product) {
             this.product = product;
             return this;
@@ -1648,7 +1651,7 @@ public class ConfigurationUpdateParams extends ApiRequestParams {
   @Getter
   public static class LoginPage {
     /**
-     * Set to {@code true} to generate a shareable URL <a
+     * <strong>Required.</strong> Set to {@code true} to generate a shareable URL <a
      * href="https://stripe.com/docs/api/customer_portal/configuration#portal_configuration_object-login_page-url">{@code
      * login_page.url}</a> that will take your customers to a hosted login page for the customer
      * portal.
@@ -1687,7 +1690,7 @@ public class ConfigurationUpdateParams extends ApiRequestParams {
       }
 
       /**
-       * Set to {@code true} to generate a shareable URL <a
+       * <strong>Required.</strong> Set to {@code true} to generate a shareable URL <a
        * href="https://stripe.com/docs/api/customer_portal/configuration#portal_configuration_object-login_page-url">{@code
        * login_page.url}</a> that will take your customers to a hosted login page for the customer
        * portal.

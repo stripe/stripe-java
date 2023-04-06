@@ -350,7 +350,7 @@ public class ChargeUpdateParams extends ApiRequestParams {
     @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
     Map<String, Object> extraParams;
 
-    /** Either {@code safe} or {@code fraudulent}. */
+    /** <strong>Required.</strong> Either {@code safe} or {@code fraudulent}. */
     @SerializedName("user_report")
     ApiRequestParams.EnumParam userReport;
 
@@ -399,13 +399,13 @@ public class ChargeUpdateParams extends ApiRequestParams {
         return this;
       }
 
-      /** Either {@code safe} or {@code fraudulent}. */
+      /** <strong>Required.</strong> Either {@code safe} or {@code fraudulent}. */
       public Builder setUserReport(ChargeUpdateParams.FraudDetails.UserReport userReport) {
         this.userReport = userReport;
         return this;
       }
 
-      /** Either {@code safe} or {@code fraudulent}. */
+      /** <strong>Required.</strong> Either {@code safe} or {@code fraudulent}. */
       public Builder setUserReport(EmptyParam userReport) {
         this.userReport = userReport;
         return this;
@@ -430,7 +430,7 @@ public class ChargeUpdateParams extends ApiRequestParams {
 
   @Getter
   public static class Shipping {
-    /** Shipping address. */
+    /** <strong>Required.</strong> Shipping address. */
     @SerializedName("address")
     Address address;
 
@@ -447,7 +447,7 @@ public class ChargeUpdateParams extends ApiRequestParams {
     @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
     Map<String, Object> extraParams;
 
-    /** Recipient name. */
+    /** <strong>Required.</strong> Recipient name. */
     @SerializedName("name")
     Object name;
 
@@ -505,7 +505,7 @@ public class ChargeUpdateParams extends ApiRequestParams {
             this.trackingNumber);
       }
 
-      /** Shipping address. */
+      /** <strong>Required.</strong> Shipping address. */
       public Builder setAddress(ChargeUpdateParams.Shipping.Address address) {
         this.address = address;
         return this;
@@ -549,13 +549,13 @@ public class ChargeUpdateParams extends ApiRequestParams {
         return this;
       }
 
-      /** Recipient name. */
+      /** <strong>Required.</strong> Recipient name. */
       public Builder setName(String name) {
         this.name = name;
         return this;
       }
 
-      /** Recipient name. */
+      /** <strong>Required.</strong> Recipient name. */
       public Builder setName(EmptyParam name) {
         this.name = name;
         return this;

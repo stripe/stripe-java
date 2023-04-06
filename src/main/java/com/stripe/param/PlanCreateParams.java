@@ -53,8 +53,9 @@ public class PlanCreateParams extends ApiRequestParams {
   BillingScheme billingScheme;
 
   /**
-   * Three-letter <a href="https://www.iso.org/iso-4217-currency-codes.html">ISO currency code</a>,
-   * in lowercase. Must be a <a href="https://stripe.com/docs/currencies">supported currency</a>.
+   * <strong>Required.</strong> Three-letter <a
+   * href="https://www.iso.org/iso-4217-currency-codes.html">ISO currency code</a>, in lowercase.
+   * Must be a <a href="https://stripe.com/docs/currencies">supported currency</a>.
    */
   @SerializedName("currency")
   String currency;
@@ -81,7 +82,8 @@ public class PlanCreateParams extends ApiRequestParams {
   String id;
 
   /**
-   * Specifies billing frequency. Either {@code day}, {@code week}, {@code month} or {@code year}.
+   * <strong>Required.</strong> Specifies billing frequency. Either {@code day}, {@code week},
+   * {@code month} or {@code year}.
    */
   @SerializedName("interval")
   Interval interval;
@@ -307,9 +309,9 @@ public class PlanCreateParams extends ApiRequestParams {
     }
 
     /**
-     * Three-letter <a href="https://www.iso.org/iso-4217-currency-codes.html">ISO currency
-     * code</a>, in lowercase. Must be a <a href="https://stripe.com/docs/currencies">supported
-     * currency</a>.
+     * <strong>Required.</strong> Three-letter <a
+     * href="https://www.iso.org/iso-4217-currency-codes.html">ISO currency code</a>, in lowercase.
+     * Must be a <a href="https://stripe.com/docs/currencies">supported currency</a>.
      */
     public Builder setCurrency(String currency) {
       this.currency = currency;
@@ -379,7 +381,8 @@ public class PlanCreateParams extends ApiRequestParams {
     }
 
     /**
-     * Specifies billing frequency. Either {@code day}, {@code week}, {@code month} or {@code year}.
+     * <strong>Required.</strong> Specifies billing frequency. Either {@code day}, {@code week},
+     * {@code month} or {@code year}.
      */
     public Builder setInterval(PlanCreateParams.Interval interval) {
       this.interval = interval;
@@ -560,7 +563,7 @@ public class PlanCreateParams extends ApiRequestParams {
     @SerializedName("metadata")
     Map<String, String> metadata;
 
-    /** The product's name, meant to be displayable to the customer. */
+    /** <strong>Required.</strong> The product's name, meant to be displayable to the customer. */
     @SerializedName("name")
     String name;
 
@@ -707,7 +710,7 @@ public class PlanCreateParams extends ApiRequestParams {
         return this;
       }
 
-      /** The product's name, meant to be displayable to the customer. */
+      /** <strong>Required.</strong> The product's name, meant to be displayable to the customer. */
       public Builder setName(String name) {
         this.name = name;
         return this;
@@ -782,8 +785,9 @@ public class PlanCreateParams extends ApiRequestParams {
     BigDecimal unitAmountDecimal;
 
     /**
-     * Specifies the upper bound of this tier. The lower bound of a tier is the upper bound of the
-     * previous tier adding one. Use {@code inf} to define a fallback tier.
+     * <strong>Required.</strong> Specifies the upper bound of this tier. The lower bound of a tier
+     * is the upper bound of the previous tier adding one. Use {@code inf} to define a fallback
+     * tier.
      */
     @SerializedName("up_to")
     Object upTo;
@@ -892,8 +896,9 @@ public class PlanCreateParams extends ApiRequestParams {
       }
 
       /**
-       * Specifies the upper bound of this tier. The lower bound of a tier is the upper bound of the
-       * previous tier adding one. Use {@code inf} to define a fallback tier.
+       * <strong>Required.</strong> Specifies the upper bound of this tier. The lower bound of a
+       * tier is the upper bound of the previous tier adding one. Use {@code inf} to define a
+       * fallback tier.
        */
       public Builder setUpTo(PlanCreateParams.Tier.UpTo upTo) {
         this.upTo = upTo;
@@ -901,8 +906,9 @@ public class PlanCreateParams extends ApiRequestParams {
       }
 
       /**
-       * Specifies the upper bound of this tier. The lower bound of a tier is the upper bound of the
-       * previous tier adding one. Use {@code inf} to define a fallback tier.
+       * <strong>Required.</strong> Specifies the upper bound of this tier. The lower bound of a
+       * tier is the upper bound of the previous tier adding one. Use {@code inf} to define a
+       * fallback tier.
        */
       public Builder setUpTo(Long upTo) {
         this.upTo = upTo;
@@ -925,7 +931,7 @@ public class PlanCreateParams extends ApiRequestParams {
 
   @Getter
   public static class TransformUsage {
-    /** Divide usage by this number. */
+    /** <strong>Required.</strong> Divide usage by this number. */
     @SerializedName("divide_by")
     Long divideBy;
 
@@ -938,7 +944,10 @@ public class PlanCreateParams extends ApiRequestParams {
     @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
     Map<String, Object> extraParams;
 
-    /** After division, either round the result {@code up} or {@code down}. */
+    /**
+     * <strong>Required.</strong> After division, either round the result {@code up} or {@code
+     * down}.
+     */
     @SerializedName("round")
     Round round;
 
@@ -964,7 +973,7 @@ public class PlanCreateParams extends ApiRequestParams {
         return new PlanCreateParams.TransformUsage(this.divideBy, this.extraParams, this.round);
       }
 
-      /** Divide usage by this number. */
+      /** <strong>Required.</strong> Divide usage by this number. */
       public Builder setDivideBy(Long divideBy) {
         this.divideBy = divideBy;
         return this;
@@ -996,7 +1005,10 @@ public class PlanCreateParams extends ApiRequestParams {
         return this;
       }
 
-      /** After division, either round the result {@code up} or {@code down}. */
+      /**
+       * <strong>Required.</strong> After division, either round the result {@code up} or {@code
+       * down}.
+       */
       public Builder setRound(PlanCreateParams.TransformUsage.Round round) {
         this.round = round;
         return this;

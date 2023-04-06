@@ -12,7 +12,7 @@ import lombok.Getter;
 
 @Getter
 public class ConfigurationCreateParams extends ApiRequestParams {
-  /** The business information shown to customers in the portal. */
+  /** <strong>Required.</strong> The business information shown to customers in the portal. */
   @SerializedName("business_profile")
   BusinessProfile businessProfile;
 
@@ -38,7 +38,7 @@ public class ConfigurationCreateParams extends ApiRequestParams {
   @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
   Map<String, Object> extraParams;
 
-  /** Information about the features available in the portal. */
+  /** <strong>Required.</strong> Information about the features available in the portal. */
   @SerializedName("features")
   Features features;
 
@@ -107,7 +107,7 @@ public class ConfigurationCreateParams extends ApiRequestParams {
           this.metadata);
     }
 
-    /** The business information shown to customers in the portal. */
+    /** <strong>Required.</strong> The business information shown to customers in the portal. */
     public Builder setBusinessProfile(ConfigurationCreateParams.BusinessProfile businessProfile) {
       this.businessProfile = businessProfile;
       return this;
@@ -187,7 +187,7 @@ public class ConfigurationCreateParams extends ApiRequestParams {
       return this;
     }
 
-    /** Information about the features available in the portal. */
+    /** <strong>Required.</strong> Information about the features available in the portal. */
     public Builder setFeatures(ConfigurationCreateParams.Features features) {
       this.features = features;
       return this;
@@ -491,7 +491,7 @@ public class ConfigurationCreateParams extends ApiRequestParams {
       @SerializedName("allowed_updates")
       Object allowedUpdates;
 
-      /** Whether the feature is enabled. */
+      /** <strong>Required.</strong> Whether the feature is enabled. */
       @SerializedName("enabled")
       Boolean enabled;
 
@@ -585,7 +585,7 @@ public class ConfigurationCreateParams extends ApiRequestParams {
           return this;
         }
 
-        /** Whether the feature is enabled. */
+        /** <strong>Required.</strong> Whether the feature is enabled. */
         public Builder setEnabled(Boolean enabled) {
           this.enabled = enabled;
           return this;
@@ -650,7 +650,7 @@ public class ConfigurationCreateParams extends ApiRequestParams {
 
     @Getter
     public static class InvoiceHistory {
-      /** Whether the feature is enabled. */
+      /** <strong>Required.</strong> Whether the feature is enabled. */
       @SerializedName("enabled")
       Boolean enabled;
 
@@ -683,7 +683,7 @@ public class ConfigurationCreateParams extends ApiRequestParams {
               this.enabled, this.extraParams);
         }
 
-        /** Whether the feature is enabled. */
+        /** <strong>Required.</strong> Whether the feature is enabled. */
         public Builder setEnabled(Boolean enabled) {
           this.enabled = enabled;
           return this;
@@ -721,7 +721,7 @@ public class ConfigurationCreateParams extends ApiRequestParams {
 
     @Getter
     public static class PaymentMethodUpdate {
-      /** Whether the feature is enabled. */
+      /** <strong>Required.</strong> Whether the feature is enabled. */
       @SerializedName("enabled")
       Boolean enabled;
 
@@ -754,7 +754,7 @@ public class ConfigurationCreateParams extends ApiRequestParams {
               this.enabled, this.extraParams);
         }
 
-        /** Whether the feature is enabled. */
+        /** <strong>Required.</strong> Whether the feature is enabled. */
         public Builder setEnabled(Boolean enabled) {
           this.enabled = enabled;
           return this;
@@ -799,7 +799,7 @@ public class ConfigurationCreateParams extends ApiRequestParams {
       @SerializedName("cancellation_reason")
       CancellationReason cancellationReason;
 
-      /** Whether the feature is enabled. */
+      /** <strong>Required.</strong> Whether the feature is enabled. */
       @SerializedName("enabled")
       Boolean enabled;
 
@@ -874,7 +874,7 @@ public class ConfigurationCreateParams extends ApiRequestParams {
           return this;
         }
 
-        /** Whether the feature is enabled. */
+        /** <strong>Required.</strong> Whether the feature is enabled. */
         public Builder setEnabled(Boolean enabled) {
           this.enabled = enabled;
           return this;
@@ -930,7 +930,7 @@ public class ConfigurationCreateParams extends ApiRequestParams {
 
       @Getter
       public static class CancellationReason {
-        /** Whether the feature is enabled. */
+        /** <strong>Required.</strong> Whether the feature is enabled. */
         @SerializedName("enabled")
         Boolean enabled;
 
@@ -944,7 +944,10 @@ public class ConfigurationCreateParams extends ApiRequestParams {
         @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
         Map<String, Object> extraParams;
 
-        /** Which cancellation reasons will be given as options to the customer. */
+        /**
+         * <strong>Required.</strong> Which cancellation reasons will be given as options to the
+         * customer.
+         */
         @SerializedName("options")
         Object options;
 
@@ -972,7 +975,7 @@ public class ConfigurationCreateParams extends ApiRequestParams {
                 this.enabled, this.extraParams, this.options);
           }
 
-          /** Whether the feature is enabled. */
+          /** <strong>Required.</strong> Whether the feature is enabled. */
           public Builder setEnabled(Boolean enabled) {
             this.enabled = enabled;
             return this;
@@ -1052,13 +1055,19 @@ public class ConfigurationCreateParams extends ApiRequestParams {
             return this;
           }
 
-          /** Which cancellation reasons will be given as options to the customer. */
+          /**
+           * <strong>Required.</strong> Which cancellation reasons will be given as options to the
+           * customer.
+           */
           public Builder setOptions(EmptyParam options) {
             this.options = options;
             return this;
           }
 
-          /** Which cancellation reasons will be given as options to the customer. */
+          /**
+           * <strong>Required.</strong> Which cancellation reasons will be given as options to the
+           * customer.
+           */
           public Builder setOptions(
               List<ConfigurationCreateParams.Features.SubscriptionCancel.CancellationReason.Option>
                   options) {
@@ -1209,13 +1218,13 @@ public class ConfigurationCreateParams extends ApiRequestParams {
     @Getter
     public static class SubscriptionUpdate {
       /**
-       * The types of subscription updates that are supported. When empty, subscriptions are not
-       * updateable.
+       * <strong>Required.</strong> The types of subscription updates that are supported. When
+       * empty, subscriptions are not updateable.
        */
       @SerializedName("default_allowed_updates")
       Object defaultAllowedUpdates;
 
-      /** Whether the feature is enabled. */
+      /** <strong>Required.</strong> Whether the feature is enabled. */
       @SerializedName("enabled")
       Boolean enabled;
 
@@ -1228,7 +1237,7 @@ public class ConfigurationCreateParams extends ApiRequestParams {
       @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
       Map<String, Object> extraParams;
 
-      /** The list of products that support subscription updates. */
+      /** <strong>Required.</strong> The list of products that support subscription updates. */
       @SerializedName("products")
       Object products;
 
@@ -1321,8 +1330,8 @@ public class ConfigurationCreateParams extends ApiRequestParams {
         }
 
         /**
-         * The types of subscription updates that are supported. When empty, subscriptions are not
-         * updateable.
+         * <strong>Required.</strong> The types of subscription updates that are supported. When
+         * empty, subscriptions are not updateable.
          */
         public Builder setDefaultAllowedUpdates(EmptyParam defaultAllowedUpdates) {
           this.defaultAllowedUpdates = defaultAllowedUpdates;
@@ -1330,8 +1339,8 @@ public class ConfigurationCreateParams extends ApiRequestParams {
         }
 
         /**
-         * The types of subscription updates that are supported. When empty, subscriptions are not
-         * updateable.
+         * <strong>Required.</strong> The types of subscription updates that are supported. When
+         * empty, subscriptions are not updateable.
          */
         public Builder setDefaultAllowedUpdates(
             List<ConfigurationCreateParams.Features.SubscriptionUpdate.DefaultAllowedUpdate>
@@ -1340,7 +1349,7 @@ public class ConfigurationCreateParams extends ApiRequestParams {
           return this;
         }
 
-        /** Whether the feature is enabled. */
+        /** <strong>Required.</strong> Whether the feature is enabled. */
         public Builder setEnabled(Boolean enabled) {
           this.enabled = enabled;
           return this;
@@ -1410,13 +1419,13 @@ public class ConfigurationCreateParams extends ApiRequestParams {
           return this;
         }
 
-        /** The list of products that support subscription updates. */
+        /** <strong>Required.</strong> The list of products that support subscription updates. */
         public Builder setProducts(EmptyParam products) {
           this.products = products;
           return this;
         }
 
-        /** The list of products that support subscription updates. */
+        /** <strong>Required.</strong> The list of products that support subscription updates. */
         public Builder setProducts(
             List<ConfigurationCreateParams.Features.SubscriptionUpdate.Product> products) {
           this.products = products;
@@ -1447,11 +1456,14 @@ public class ConfigurationCreateParams extends ApiRequestParams {
         @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
         Map<String, Object> extraParams;
 
-        /** The list of price IDs for the product that a subscription can be updated to. */
+        /**
+         * <strong>Required.</strong> The list of price IDs for the product that a subscription can
+         * be updated to.
+         */
         @SerializedName("prices")
         List<String> prices;
 
-        /** The product id. */
+        /** <strong>Required.</strong> The product id. */
         @SerializedName("product")
         String product;
 
@@ -1536,7 +1548,7 @@ public class ConfigurationCreateParams extends ApiRequestParams {
             return this;
           }
 
-          /** The product id. */
+          /** <strong>Required.</strong> The product id. */
           public Builder setProduct(String product) {
             this.product = product;
             return this;
@@ -1585,7 +1597,7 @@ public class ConfigurationCreateParams extends ApiRequestParams {
   @Getter
   public static class LoginPage {
     /**
-     * Set to {@code true} to generate a shareable URL <a
+     * <strong>Required.</strong> Set to {@code true} to generate a shareable URL <a
      * href="https://stripe.com/docs/api/customer_portal/configuration#portal_configuration_object-login_page-url">{@code
      * login_page.url}</a> that will take your customers to a hosted login page for the customer
      * portal.
@@ -1622,7 +1634,7 @@ public class ConfigurationCreateParams extends ApiRequestParams {
       }
 
       /**
-       * Set to {@code true} to generate a shareable URL <a
+       * <strong>Required.</strong> Set to {@code true} to generate a shareable URL <a
        * href="https://stripe.com/docs/api/customer_portal/configuration#portal_configuration_object-login_page-url">{@code
        * login_page.url}</a> that will take your customers to a hosted login page for the customer
        * portal.

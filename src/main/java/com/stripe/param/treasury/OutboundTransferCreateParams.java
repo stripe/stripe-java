@@ -12,13 +12,14 @@ import lombok.Getter;
 
 @Getter
 public class OutboundTransferCreateParams extends ApiRequestParams {
-  /** Amount (in cents) to be transferred. */
+  /** <strong>Required.</strong> Amount (in cents) to be transferred. */
   @SerializedName("amount")
   Long amount;
 
   /**
-   * Three-letter <a href="https://www.iso.org/iso-4217-currency-codes.html">ISO currency code</a>,
-   * in lowercase. Must be a <a href="https://stripe.com/docs/currencies">supported currency</a>.
+   * <strong>Required.</strong> Three-letter <a
+   * href="https://www.iso.org/iso-4217-currency-codes.html">ISO currency code</a>, in lowercase.
+   * Must be a <a href="https://stripe.com/docs/currencies">supported currency</a>.
    */
   @SerializedName("currency")
   String currency;
@@ -48,7 +49,7 @@ public class OutboundTransferCreateParams extends ApiRequestParams {
   @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
   Map<String, Object> extraParams;
 
-  /** The FinancialAccount to pull funds from. */
+  /** <strong>Required.</strong> The FinancialAccount to pull funds from. */
   @SerializedName("financial_account")
   String financialAccount;
 
@@ -132,16 +133,16 @@ public class OutboundTransferCreateParams extends ApiRequestParams {
           this.statementDescriptor);
     }
 
-    /** Amount (in cents) to be transferred. */
+    /** <strong>Required.</strong> Amount (in cents) to be transferred. */
     public Builder setAmount(Long amount) {
       this.amount = amount;
       return this;
     }
 
     /**
-     * Three-letter <a href="https://www.iso.org/iso-4217-currency-codes.html">ISO currency
-     * code</a>, in lowercase. Must be a <a href="https://stripe.com/docs/currencies">supported
-     * currency</a>.
+     * <strong>Required.</strong> Three-letter <a
+     * href="https://www.iso.org/iso-4217-currency-codes.html">ISO currency code</a>, in lowercase.
+     * Must be a <a href="https://stripe.com/docs/currencies">supported currency</a>.
      */
     public Builder setCurrency(String currency) {
       this.currency = currency;
@@ -220,7 +221,7 @@ public class OutboundTransferCreateParams extends ApiRequestParams {
       return this;
     }
 
-    /** The FinancialAccount to pull funds from. */
+    /** <strong>Required.</strong> The FinancialAccount to pull funds from. */
     public Builder setFinancialAccount(String financialAccount) {
       this.financialAccount = financialAccount;
       return this;

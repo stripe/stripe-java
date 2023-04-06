@@ -11,7 +11,7 @@ import lombok.Getter;
 
 @Getter
 public class ValueListCreateParams extends ApiRequestParams {
-  /** The name of the value list for use in rules. */
+  /** <strong>Required.</strong> The name of the value list for use in rules. */
   @SerializedName("alias")
   String alias;
 
@@ -45,7 +45,7 @@ public class ValueListCreateParams extends ApiRequestParams {
   @SerializedName("metadata")
   Map<String, String> metadata;
 
-  /** The human-readable name of the value list. */
+  /** <strong>Required.</strong> The human-readable name of the value list. */
   @SerializedName("name")
   String name;
 
@@ -87,7 +87,7 @@ public class ValueListCreateParams extends ApiRequestParams {
           this.alias, this.expand, this.extraParams, this.itemType, this.metadata, this.name);
     }
 
-    /** The name of the value list for use in rules. */
+    /** <strong>Required.</strong> The name of the value list for use in rules. */
     public Builder setAlias(String alias) {
       this.alias = alias;
       return this;
@@ -182,7 +182,7 @@ public class ValueListCreateParams extends ApiRequestParams {
       return this;
     }
 
-    /** The human-readable name of the value list. */
+    /** <strong>Required.</strong> The human-readable name of the value list. */
     public Builder setName(String name) {
       this.name = name;
       return this;

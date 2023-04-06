@@ -49,7 +49,7 @@ public class SubscriptionItemListParams extends ApiRequestParams {
   @SerializedName("starting_after")
   String startingAfter;
 
-  /** The ID of the subscription whose items will be retrieved. */
+  /** <strong>Required.</strong> The ID of the subscription whose items will be retrieved. */
   @SerializedName("subscription")
   String subscription;
 
@@ -179,7 +179,7 @@ public class SubscriptionItemListParams extends ApiRequestParams {
       return this;
     }
 
-    /** The ID of the subscription whose items will be retrieved. */
+    /** <strong>Required.</strong> The ID of the subscription whose items will be retrieved. */
     public Builder setSubscription(String subscription) {
       this.subscription = subscription;
       return this;

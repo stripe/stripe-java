@@ -273,40 +273,40 @@ public class Refund extends ApiResource implements MetadataStore<Refund>, Balanc
   }
 
   /**
-   * Cancels a refund with a status of <code>requires_action</code>.
+   * Cancels a refund with a status of {@code requires_action}.
    *
    * <p>Refunds in other states cannot be canceled, and only refunds for payment methods that
-   * require customer action will enter the <code>requires_action</code> state.
+   * require customer action will enter the {@code requires_action} state.
    */
   public Refund cancel() throws StripeException {
     return cancel((Map<String, Object>) null, (RequestOptions) null);
   }
 
   /**
-   * Cancels a refund with a status of <code>requires_action</code>.
+   * Cancels a refund with a status of {@code requires_action}.
    *
    * <p>Refunds in other states cannot be canceled, and only refunds for payment methods that
-   * require customer action will enter the <code>requires_action</code> state.
+   * require customer action will enter the {@code requires_action} state.
    */
   public Refund cancel(RequestOptions options) throws StripeException {
     return cancel((Map<String, Object>) null, options);
   }
 
   /**
-   * Cancels a refund with a status of <code>requires_action</code>.
+   * Cancels a refund with a status of {@code requires_action}.
    *
    * <p>Refunds in other states cannot be canceled, and only refunds for payment methods that
-   * require customer action will enter the <code>requires_action</code> state.
+   * require customer action will enter the {@code requires_action} state.
    */
   public Refund cancel(Map<String, Object> params) throws StripeException {
     return cancel(params, (RequestOptions) null);
   }
 
   /**
-   * Cancels a refund with a status of <code>requires_action</code>.
+   * Cancels a refund with a status of {@code requires_action}.
    *
    * <p>Refunds in other states cannot be canceled, and only refunds for payment methods that
-   * require customer action will enter the <code>requires_action</code> state.
+   * require customer action will enter the {@code requires_action} state.
    */
   public Refund cancel(Map<String, Object> params, RequestOptions options) throws StripeException {
     String url =
@@ -318,20 +318,20 @@ public class Refund extends ApiResource implements MetadataStore<Refund>, Balanc
   }
 
   /**
-   * Cancels a refund with a status of <code>requires_action</code>.
+   * Cancels a refund with a status of {@code requires_action}.
    *
    * <p>Refunds in other states cannot be canceled, and only refunds for payment methods that
-   * require customer action will enter the <code>requires_action</code> state.
+   * require customer action will enter the {@code requires_action} state.
    */
   public Refund cancel(RefundCancelParams params) throws StripeException {
     return cancel(params, (RequestOptions) null);
   }
 
   /**
-   * Cancels a refund with a status of <code>requires_action</code>.
+   * Cancels a refund with a status of {@code requires_action}.
    *
    * <p>Refunds in other states cannot be canceled, and only refunds for payment methods that
-   * require customer action will enter the <code>requires_action</code> state.
+   * require customer action will enter the {@code requires_action} state.
    */
   public Refund cancel(RefundCancelParams params, RequestOptions options) throws StripeException {
     String url =
@@ -442,7 +442,7 @@ public class Refund extends ApiResource implements MetadataStore<Refund>, Balanc
    * Updates the specified refund by setting the values of the parameters passed. Any parameters not
    * provided will be left unchanged.
    *
-   * <p>This request only accepts <code>metadata</code> as an argument.
+   * <p>This request only accepts {@code metadata} as an argument.
    */
   @Override
   public Refund update(Map<String, Object> params) throws StripeException {
@@ -453,7 +453,7 @@ public class Refund extends ApiResource implements MetadataStore<Refund>, Balanc
    * Updates the specified refund by setting the values of the parameters passed. Any parameters not
    * provided will be left unchanged.
    *
-   * <p>This request only accepts <code>metadata</code> as an argument.
+   * <p>This request only accepts {@code metadata} as an argument.
    */
   @Override
   public Refund update(Map<String, Object> params, RequestOptions options) throws StripeException {
@@ -469,7 +469,7 @@ public class Refund extends ApiResource implements MetadataStore<Refund>, Balanc
    * Updates the specified refund by setting the values of the parameters passed. Any parameters not
    * provided will be left unchanged.
    *
-   * <p>This request only accepts <code>metadata</code> as an argument.
+   * <p>This request only accepts {@code metadata} as an argument.
    */
   public Refund update(RefundUpdateParams params) throws StripeException {
     return update(params, (RequestOptions) null);
@@ -479,7 +479,7 @@ public class Refund extends ApiResource implements MetadataStore<Refund>, Balanc
    * Updates the specified refund by setting the values of the parameters passed. Any parameters not
    * provided will be left unchanged.
    *
-   * <p>This request only accepts <code>metadata</code> as an argument.
+   * <p>This request only accepts {@code metadata} as an argument.
    */
   public Refund update(RefundUpdateParams params, RequestOptions options) throws StripeException {
     String url =
@@ -539,22 +539,22 @@ public class Refund extends ApiResource implements MetadataStore<Refund>, Balanc
       this.resource = resource;
     }
 
-    /** Expire a refund with a status of <code>requires_action</code>. */
+    /** Expire a refund with a status of {@code requires_action}. */
     public Refund expire() throws StripeException {
       return expire((Map<String, Object>) null, (RequestOptions) null);
     }
 
-    /** Expire a refund with a status of <code>requires_action</code>. */
+    /** Expire a refund with a status of {@code requires_action}. */
     public Refund expire(RequestOptions options) throws StripeException {
       return expire((Map<String, Object>) null, options);
     }
 
-    /** Expire a refund with a status of <code>requires_action</code>. */
+    /** Expire a refund with a status of {@code requires_action}. */
     public Refund expire(Map<String, Object> params) throws StripeException {
       return expire(params, (RequestOptions) null);
     }
 
-    /** Expire a refund with a status of <code>requires_action</code>. */
+    /** Expire a refund with a status of {@code requires_action}. */
     public Refund expire(Map<String, Object> params, RequestOptions options)
         throws StripeException {
       String url =
@@ -568,12 +568,12 @@ public class Refund extends ApiResource implements MetadataStore<Refund>, Balanc
           ApiResource.RequestMethod.POST, url, params, Refund.class, options);
     }
 
-    /** Expire a refund with a status of <code>requires_action</code>. */
+    /** Expire a refund with a status of {@code requires_action}. */
     public Refund expire(RefundExpireParams params) throws StripeException {
       return expire(params, (RequestOptions) null);
     }
 
-    /** Expire a refund with a status of <code>requires_action</code>. */
+    /** Expire a refund with a status of {@code requires_action}. */
     public Refund expire(RefundExpireParams params, RequestOptions options) throws StripeException {
       String url =
           ApiResource.fullUrl(

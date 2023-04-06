@@ -116,12 +116,12 @@ public class Cardholder extends ApiResource implements HasId, MetadataStore<Card
   @SerializedName("type")
   String type;
 
-  /** Creates a new Issuing <code>Cardholder</code> object that can be issued cards. */
+  /** Creates a new Issuing {@code Cardholder} object that can be issued cards. */
   public static Cardholder create(Map<String, Object> params) throws StripeException {
     return create(params, (RequestOptions) null);
   }
 
-  /** Creates a new Issuing <code>Cardholder</code> object that can be issued cards. */
+  /** Creates a new Issuing {@code Cardholder} object that can be issued cards. */
   public static Cardholder create(Map<String, Object> params, RequestOptions options)
       throws StripeException {
     String url = ApiResource.fullUrl(Stripe.getApiBase(), options, "/v1/issuing/cardholders");
@@ -129,12 +129,12 @@ public class Cardholder extends ApiResource implements HasId, MetadataStore<Card
         ApiResource.RequestMethod.POST, url, params, Cardholder.class, options);
   }
 
-  /** Creates a new Issuing <code>Cardholder</code> object that can be issued cards. */
+  /** Creates a new Issuing {@code Cardholder} object that can be issued cards. */
   public static Cardholder create(CardholderCreateParams params) throws StripeException {
     return create(params, (RequestOptions) null);
   }
 
-  /** Creates a new Issuing <code>Cardholder</code> object that can be issued cards. */
+  /** Creates a new Issuing {@code Cardholder} object that can be issued cards. */
   public static Cardholder create(CardholderCreateParams params, RequestOptions options)
       throws StripeException {
     String url = ApiResource.fullUrl(Stripe.getApiBase(), options, "/v1/issuing/cardholders");
@@ -143,7 +143,7 @@ public class Cardholder extends ApiResource implements HasId, MetadataStore<Card
   }
 
   /**
-   * Returns a list of Issuing <code>Cardholder</code> objects. The objects are sorted in descending
+   * Returns a list of Issuing {@code Cardholder} objects. The objects are sorted in descending
    * order by creation date, with the most recently created object appearing first.
    */
   public static CardholderCollection list(Map<String, Object> params) throws StripeException {
@@ -151,7 +151,7 @@ public class Cardholder extends ApiResource implements HasId, MetadataStore<Card
   }
 
   /**
-   * Returns a list of Issuing <code>Cardholder</code> objects. The objects are sorted in descending
+   * Returns a list of Issuing {@code Cardholder} objects. The objects are sorted in descending
    * order by creation date, with the most recently created object appearing first.
    */
   public static CardholderCollection list(Map<String, Object> params, RequestOptions options)
@@ -161,7 +161,7 @@ public class Cardholder extends ApiResource implements HasId, MetadataStore<Card
   }
 
   /**
-   * Returns a list of Issuing <code>Cardholder</code> objects. The objects are sorted in descending
+   * Returns a list of Issuing {@code Cardholder} objects. The objects are sorted in descending
    * order by creation date, with the most recently created object appearing first.
    */
   public static CardholderCollection list(CardholderListParams params) throws StripeException {
@@ -169,7 +169,7 @@ public class Cardholder extends ApiResource implements HasId, MetadataStore<Card
   }
 
   /**
-   * Returns a list of Issuing <code>Cardholder</code> objects. The objects are sorted in descending
+   * Returns a list of Issuing {@code Cardholder} objects. The objects are sorted in descending
    * order by creation date, with the most recently created object appearing first.
    */
   public static CardholderCollection list(CardholderListParams params, RequestOptions options)
@@ -178,18 +178,18 @@ public class Cardholder extends ApiResource implements HasId, MetadataStore<Card
     return ApiResource.requestCollection(url, params, CardholderCollection.class, options);
   }
 
-  /** Retrieves an Issuing <code>Cardholder</code> object. */
+  /** Retrieves an Issuing {@code Cardholder} object. */
   public static Cardholder retrieve(String cardholder) throws StripeException {
     return retrieve(cardholder, (Map<String, Object>) null, (RequestOptions) null);
   }
 
-  /** Retrieves an Issuing <code>Cardholder</code> object. */
+  /** Retrieves an Issuing {@code Cardholder} object. */
   public static Cardholder retrieve(String cardholder, RequestOptions options)
       throws StripeException {
     return retrieve(cardholder, (Map<String, Object>) null, options);
   }
 
-  /** Retrieves an Issuing <code>Cardholder</code> object. */
+  /** Retrieves an Issuing {@code Cardholder} object. */
   public static Cardholder retrieve(
       String cardholder, Map<String, Object> params, RequestOptions options)
       throws StripeException {
@@ -202,7 +202,7 @@ public class Cardholder extends ApiResource implements HasId, MetadataStore<Card
         ApiResource.RequestMethod.GET, url, params, Cardholder.class, options);
   }
 
-  /** Retrieves an Issuing <code>Cardholder</code> object. */
+  /** Retrieves an Issuing {@code Cardholder} object. */
   public static Cardholder retrieve(
       String cardholder, CardholderRetrieveParams params, RequestOptions options)
       throws StripeException {
@@ -216,8 +216,8 @@ public class Cardholder extends ApiResource implements HasId, MetadataStore<Card
   }
 
   /**
-   * Updates the specified Issuing <code>Cardholder</code> object by setting the values of the
-   * parameters passed. Any parameters not provided will be left unchanged.
+   * Updates the specified Issuing {@code Cardholder} object by setting the values of the parameters
+   * passed. Any parameters not provided will be left unchanged.
    */
   @Override
   public Cardholder update(Map<String, Object> params) throws StripeException {
@@ -225,8 +225,8 @@ public class Cardholder extends ApiResource implements HasId, MetadataStore<Card
   }
 
   /**
-   * Updates the specified Issuing <code>Cardholder</code> object by setting the values of the
-   * parameters passed. Any parameters not provided will be left unchanged.
+   * Updates the specified Issuing {@code Cardholder} object by setting the values of the parameters
+   * passed. Any parameters not provided will be left unchanged.
    */
   @Override
   public Cardholder update(Map<String, Object> params, RequestOptions options)
@@ -241,16 +241,16 @@ public class Cardholder extends ApiResource implements HasId, MetadataStore<Card
   }
 
   /**
-   * Updates the specified Issuing <code>Cardholder</code> object by setting the values of the
-   * parameters passed. Any parameters not provided will be left unchanged.
+   * Updates the specified Issuing {@code Cardholder} object by setting the values of the parameters
+   * passed. Any parameters not provided will be left unchanged.
    */
   public Cardholder update(CardholderUpdateParams params) throws StripeException {
     return update(params, (RequestOptions) null);
   }
 
   /**
-   * Updates the specified Issuing <code>Cardholder</code> object by setting the values of the
-   * parameters passed. Any parameters not provided will be left unchanged.
+   * Updates the specified Issuing {@code Cardholder} object by setting the values of the parameters
+   * passed. Any parameters not provided will be left unchanged.
    */
   public Cardholder update(CardholderUpdateParams params, RequestOptions options)
       throws StripeException {

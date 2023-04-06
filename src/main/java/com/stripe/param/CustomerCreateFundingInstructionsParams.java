@@ -11,13 +11,14 @@ import lombok.Getter;
 
 @Getter
 public class CustomerCreateFundingInstructionsParams extends ApiRequestParams {
-  /** Additional parameters for {@code bank_transfer} funding types. */
+  /** <strong>Required.</strong> Additional parameters for {@code bank_transfer} funding types */
   @SerializedName("bank_transfer")
   BankTransfer bankTransfer;
 
   /**
-   * Three-letter <a href="https://www.iso.org/iso-4217-currency-codes.html">ISO currency code</a>,
-   * in lowercase. Must be a <a href="https://stripe.com/docs/currencies">supported currency</a>.
+   * <strong>Required.</strong> Three-letter <a
+   * href="https://www.iso.org/iso-4217-currency-codes.html">ISO currency code</a>, in lowercase.
+   * Must be a <a href="https://stripe.com/docs/currencies">supported currency</a>.
    */
   @SerializedName("currency")
   String currency;
@@ -35,7 +36,7 @@ public class CustomerCreateFundingInstructionsParams extends ApiRequestParams {
   @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
   Map<String, Object> extraParams;
 
-  /** The {@code funding_type} to get the instructions for. */
+  /** <strong>Required.</strong> The {@code funding_type} to get the instructions for. */
   @SerializedName("funding_type")
   FundingType fundingType;
 
@@ -73,7 +74,7 @@ public class CustomerCreateFundingInstructionsParams extends ApiRequestParams {
           this.bankTransfer, this.currency, this.expand, this.extraParams, this.fundingType);
     }
 
-    /** Additional parameters for {@code bank_transfer} funding types. */
+    /** <strong>Required.</strong> Additional parameters for {@code bank_transfer} funding types */
     public Builder setBankTransfer(
         CustomerCreateFundingInstructionsParams.BankTransfer bankTransfer) {
       this.bankTransfer = bankTransfer;
@@ -81,9 +82,9 @@ public class CustomerCreateFundingInstructionsParams extends ApiRequestParams {
     }
 
     /**
-     * Three-letter <a href="https://www.iso.org/iso-4217-currency-codes.html">ISO currency
-     * code</a>, in lowercase. Must be a <a href="https://stripe.com/docs/currencies">supported
-     * currency</a>.
+     * <strong>Required.</strong> Three-letter <a
+     * href="https://www.iso.org/iso-4217-currency-codes.html">ISO currency code</a>, in lowercase.
+     * Must be a <a href="https://stripe.com/docs/currencies">supported currency</a>.
      */
     public Builder setCurrency(String currency) {
       this.currency = currency;
@@ -142,7 +143,7 @@ public class CustomerCreateFundingInstructionsParams extends ApiRequestParams {
       return this;
     }
 
-    /** The {@code funding_type} to get the instructions for. */
+    /** <strong>Required.</strong> The {@code funding_type} to get the instructions for. */
     public Builder setFundingType(CustomerCreateFundingInstructionsParams.FundingType fundingType) {
       this.fundingType = fundingType;
       return this;
@@ -175,7 +176,7 @@ public class CustomerCreateFundingInstructionsParams extends ApiRequestParams {
     List<CustomerCreateFundingInstructionsParams.BankTransfer.RequestedAddressType>
         requestedAddressTypes;
 
-    /** The type of the {@code bank_transfer}. */
+    /** <strong>Required.</strong> The type of the {@code bank_transfer} */
     @SerializedName("type")
     Type type;
 
@@ -277,7 +278,7 @@ public class CustomerCreateFundingInstructionsParams extends ApiRequestParams {
         return this;
       }
 
-      /** The type of the {@code bank_transfer}. */
+      /** <strong>Required.</strong> The type of the {@code bank_transfer} */
       public Builder setType(CustomerCreateFundingInstructionsParams.BankTransfer.Type type) {
         this.type = type;
         return this;
@@ -287,8 +288,9 @@ public class CustomerCreateFundingInstructionsParams extends ApiRequestParams {
     @Getter
     public static class EuBankTransfer {
       /**
-       * The desired country code of the bank account information. Permitted values include: {@code
-       * BE}, {@code DE}, {@code ES}, {@code FR}, {@code IE}, or {@code NL}.
+       * <strong>Required.</strong> The desired country code of the bank account information.
+       * Permitted values include: {@code BE}, {@code DE}, {@code ES}, {@code FR}, {@code IE}, or
+       * {@code NL}.
        */
       @SerializedName("country")
       String country;
@@ -323,8 +325,9 @@ public class CustomerCreateFundingInstructionsParams extends ApiRequestParams {
         }
 
         /**
-         * The desired country code of the bank account information. Permitted values include:
-         * {@code BE}, {@code DE}, {@code ES}, {@code FR}, {@code IE}, or {@code NL}.
+         * <strong>Required.</strong> The desired country code of the bank account information.
+         * Permitted values include: {@code BE}, {@code DE}, {@code ES}, {@code FR}, {@code IE}, or
+         * {@code NL}.
          */
         public Builder setCountry(String country) {
           this.country = country;

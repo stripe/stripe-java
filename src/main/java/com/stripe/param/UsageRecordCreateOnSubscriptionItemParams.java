@@ -34,7 +34,7 @@ public class UsageRecordCreateOnSubscriptionItemParams extends ApiRequestParams 
   @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
   Map<String, Object> extraParams;
 
-  /** The usage quantity for the specified timestamp. */
+  /** <strong>Required.</strong> The usage quantity for the specified timestamp. */
   @SerializedName("quantity")
   Long quantity;
 
@@ -146,7 +146,7 @@ public class UsageRecordCreateOnSubscriptionItemParams extends ApiRequestParams 
       return this;
     }
 
-    /** The usage quantity for the specified timestamp. */
+    /** <strong>Required.</strong> The usage quantity for the specified timestamp. */
     public Builder setQuantity(Long quantity) {
       this.quantity = quantity;
       return this;

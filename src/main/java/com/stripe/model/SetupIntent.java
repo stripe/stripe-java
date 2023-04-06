@@ -347,9 +347,8 @@ public class SetupIntent extends ApiResource implements HasId, MetadataStore<Set
   }
 
   /**
-   * A SetupIntent object can be canceled when it is in one of these statuses: <code>
-   * requires_payment_method</code>, <code>requires_confirmation</code>, or <code>requires_action
-   * </code>.
+   * A SetupIntent object can be canceled when it is in one of these statuses: {@code
+   * requires_payment_method}, {@code requires_confirmation}, or {@code requires_action}.
    *
    * <p>Once canceled, setup is abandoned and any operations on the SetupIntent will fail with an
    * error.
@@ -359,9 +358,8 @@ public class SetupIntent extends ApiResource implements HasId, MetadataStore<Set
   }
 
   /**
-   * A SetupIntent object can be canceled when it is in one of these statuses: <code>
-   * requires_payment_method</code>, <code>requires_confirmation</code>, or <code>requires_action
-   * </code>.
+   * A SetupIntent object can be canceled when it is in one of these statuses: {@code
+   * requires_payment_method}, {@code requires_confirmation}, or {@code requires_action}.
    *
    * <p>Once canceled, setup is abandoned and any operations on the SetupIntent will fail with an
    * error.
@@ -371,9 +369,8 @@ public class SetupIntent extends ApiResource implements HasId, MetadataStore<Set
   }
 
   /**
-   * A SetupIntent object can be canceled when it is in one of these statuses: <code>
-   * requires_payment_method</code>, <code>requires_confirmation</code>, or <code>requires_action
-   * </code>.
+   * A SetupIntent object can be canceled when it is in one of these statuses: {@code
+   * requires_payment_method}, {@code requires_confirmation}, or {@code requires_action}.
    *
    * <p>Once canceled, setup is abandoned and any operations on the SetupIntent will fail with an
    * error.
@@ -383,9 +380,8 @@ public class SetupIntent extends ApiResource implements HasId, MetadataStore<Set
   }
 
   /**
-   * A SetupIntent object can be canceled when it is in one of these statuses: <code>
-   * requires_payment_method</code>, <code>requires_confirmation</code>, or <code>requires_action
-   * </code>.
+   * A SetupIntent object can be canceled when it is in one of these statuses: {@code
+   * requires_payment_method}, {@code requires_confirmation}, or {@code requires_action}.
    *
    * <p>Once canceled, setup is abandoned and any operations on the SetupIntent will fail with an
    * error.
@@ -402,9 +398,8 @@ public class SetupIntent extends ApiResource implements HasId, MetadataStore<Set
   }
 
   /**
-   * A SetupIntent object can be canceled when it is in one of these statuses: <code>
-   * requires_payment_method</code>, <code>requires_confirmation</code>, or <code>requires_action
-   * </code>.
+   * A SetupIntent object can be canceled when it is in one of these statuses: {@code
+   * requires_payment_method}, {@code requires_confirmation}, or {@code requires_action}.
    *
    * <p>Once canceled, setup is abandoned and any operations on the SetupIntent will fail with an
    * error.
@@ -414,9 +409,8 @@ public class SetupIntent extends ApiResource implements HasId, MetadataStore<Set
   }
 
   /**
-   * A SetupIntent object can be canceled when it is in one of these statuses: <code>
-   * requires_payment_method</code>, <code>requires_confirmation</code>, or <code>requires_action
-   * </code>.
+   * A SetupIntent object can be canceled when it is in one of these statuses: {@code
+   * requires_payment_method}, {@code requires_confirmation}, or {@code requires_action}.
    *
    * <p>Once canceled, setup is abandoned and any operations on the SetupIntent will fail with an
    * error.
@@ -438,11 +432,11 @@ public class SetupIntent extends ApiResource implements HasId, MetadataStore<Set
    * method management page on your website.
    *
    * <p>If the selected payment method does not require any additional steps from the customer, the
-   * SetupIntent will transition to the <code>succeeded</code> status.
+   * SetupIntent will transition to the {@code succeeded} status.
    *
-   * <p>Otherwise, it will transition to the <code>requires_action</code> status and suggest
-   * additional actions via <code>next_action</code>. If setup fails, the SetupIntent will
-   * transition to the <code>requires_payment_method</code> status.
+   * <p>Otherwise, it will transition to the {@code requires_action} status and suggest additional
+   * actions via {@code next_action}. If setup fails, the SetupIntent will transition to the {@code
+   * requires_payment_method} status.
    */
   public SetupIntent confirm() throws StripeException {
     return confirm((Map<String, Object>) null, (RequestOptions) null);
@@ -454,11 +448,11 @@ public class SetupIntent extends ApiResource implements HasId, MetadataStore<Set
    * method management page on your website.
    *
    * <p>If the selected payment method does not require any additional steps from the customer, the
-   * SetupIntent will transition to the <code>succeeded</code> status.
+   * SetupIntent will transition to the {@code succeeded} status.
    *
-   * <p>Otherwise, it will transition to the <code>requires_action</code> status and suggest
-   * additional actions via <code>next_action</code>. If setup fails, the SetupIntent will
-   * transition to the <code>requires_payment_method</code> status.
+   * <p>Otherwise, it will transition to the {@code requires_action} status and suggest additional
+   * actions via {@code next_action}. If setup fails, the SetupIntent will transition to the {@code
+   * requires_payment_method} status.
    */
   public SetupIntent confirm(RequestOptions options) throws StripeException {
     return confirm((Map<String, Object>) null, options);
@@ -470,11 +464,11 @@ public class SetupIntent extends ApiResource implements HasId, MetadataStore<Set
    * method management page on your website.
    *
    * <p>If the selected payment method does not require any additional steps from the customer, the
-   * SetupIntent will transition to the <code>succeeded</code> status.
+   * SetupIntent will transition to the {@code succeeded} status.
    *
-   * <p>Otherwise, it will transition to the <code>requires_action</code> status and suggest
-   * additional actions via <code>next_action</code>. If setup fails, the SetupIntent will
-   * transition to the <code>requires_payment_method</code> status.
+   * <p>Otherwise, it will transition to the {@code requires_action} status and suggest additional
+   * actions via {@code next_action}. If setup fails, the SetupIntent will transition to the {@code
+   * requires_payment_method} status.
    */
   public SetupIntent confirm(Map<String, Object> params) throws StripeException {
     return confirm(params, (RequestOptions) null);
@@ -486,11 +480,11 @@ public class SetupIntent extends ApiResource implements HasId, MetadataStore<Set
    * method management page on your website.
    *
    * <p>If the selected payment method does not require any additional steps from the customer, the
-   * SetupIntent will transition to the <code>succeeded</code> status.
+   * SetupIntent will transition to the {@code succeeded} status.
    *
-   * <p>Otherwise, it will transition to the <code>requires_action</code> status and suggest
-   * additional actions via <code>next_action</code>. If setup fails, the SetupIntent will
-   * transition to the <code>requires_payment_method</code> status.
+   * <p>Otherwise, it will transition to the {@code requires_action} status and suggest additional
+   * actions via {@code next_action}. If setup fails, the SetupIntent will transition to the {@code
+   * requires_payment_method} status.
    */
   public SetupIntent confirm(Map<String, Object> params, RequestOptions options)
       throws StripeException {
@@ -509,11 +503,11 @@ public class SetupIntent extends ApiResource implements HasId, MetadataStore<Set
    * method management page on your website.
    *
    * <p>If the selected payment method does not require any additional steps from the customer, the
-   * SetupIntent will transition to the <code>succeeded</code> status.
+   * SetupIntent will transition to the {@code succeeded} status.
    *
-   * <p>Otherwise, it will transition to the <code>requires_action</code> status and suggest
-   * additional actions via <code>next_action</code>. If setup fails, the SetupIntent will
-   * transition to the <code>requires_payment_method</code> status.
+   * <p>Otherwise, it will transition to the {@code requires_action} status and suggest additional
+   * actions via {@code next_action}. If setup fails, the SetupIntent will transition to the {@code
+   * requires_payment_method} status.
    */
   public SetupIntent confirm(SetupIntentConfirmParams params) throws StripeException {
     return confirm(params, (RequestOptions) null);
@@ -525,11 +519,11 @@ public class SetupIntent extends ApiResource implements HasId, MetadataStore<Set
    * method management page on your website.
    *
    * <p>If the selected payment method does not require any additional steps from the customer, the
-   * SetupIntent will transition to the <code>succeeded</code> status.
+   * SetupIntent will transition to the {@code succeeded} status.
    *
-   * <p>Otherwise, it will transition to the <code>requires_action</code> status and suggest
-   * additional actions via <code>next_action</code>. If setup fails, the SetupIntent will
-   * transition to the <code>requires_payment_method</code> status.
+   * <p>Otherwise, it will transition to the {@code requires_action} status and suggest additional
+   * actions via {@code next_action}. If setup fails, the SetupIntent will transition to the {@code
+   * requires_payment_method} status.
    */
   public SetupIntent confirm(SetupIntentConfirmParams params, RequestOptions options)
       throws StripeException {
@@ -619,8 +613,8 @@ public class SetupIntent extends ApiResource implements HasId, MetadataStore<Set
   /**
    * Retrieves the details of a SetupIntent that has previously been created.
    *
-   * <p>Client-side retrieval using a publishable key is allowed when the <code>client_secret</code>
-   * is provided in the query string.
+   * <p>Client-side retrieval using a publishable key is allowed when the {@code client_secret} is
+   * provided in the query string.
    *
    * <p>When retrieved with a publishable key, only a subset of properties will be returned. Please
    * refer to the <a href="https://stripe.com/docs/api#setup_intent_object">SetupIntent</a> object
@@ -633,8 +627,8 @@ public class SetupIntent extends ApiResource implements HasId, MetadataStore<Set
   /**
    * Retrieves the details of a SetupIntent that has previously been created.
    *
-   * <p>Client-side retrieval using a publishable key is allowed when the <code>client_secret</code>
-   * is provided in the query string.
+   * <p>Client-side retrieval using a publishable key is allowed when the {@code client_secret} is
+   * provided in the query string.
    *
    * <p>When retrieved with a publishable key, only a subset of properties will be returned. Please
    * refer to the <a href="https://stripe.com/docs/api#setup_intent_object">SetupIntent</a> object
@@ -647,8 +641,8 @@ public class SetupIntent extends ApiResource implements HasId, MetadataStore<Set
   /**
    * Retrieves the details of a SetupIntent that has previously been created.
    *
-   * <p>Client-side retrieval using a publishable key is allowed when the <code>client_secret</code>
-   * is provided in the query string.
+   * <p>Client-side retrieval using a publishable key is allowed when the {@code client_secret} is
+   * provided in the query string.
    *
    * <p>When retrieved with a publishable key, only a subset of properties will be returned. Please
    * refer to the <a href="https://stripe.com/docs/api#setup_intent_object">SetupIntent</a> object
@@ -668,8 +662,8 @@ public class SetupIntent extends ApiResource implements HasId, MetadataStore<Set
   /**
    * Retrieves the details of a SetupIntent that has previously been created.
    *
-   * <p>Client-side retrieval using a publishable key is allowed when the <code>client_secret</code>
-   * is provided in the query string.
+   * <p>Client-side retrieval using a publishable key is allowed when the {@code client_secret} is
+   * provided in the query string.
    *
    * <p>When retrieved with a publishable key, only a subset of properties will be returned. Please
    * refer to the <a href="https://stripe.com/docs/api#setup_intent_object">SetupIntent</a> object

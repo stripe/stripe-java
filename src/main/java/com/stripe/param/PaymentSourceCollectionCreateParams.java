@@ -33,7 +33,10 @@ public class PaymentSourceCollectionCreateParams extends ApiRequestParams {
   @SerializedName("metadata")
   Map<String, String> metadata;
 
-  /** Please refer to full <a href="https://stripe.com/docs/api">documentation</a> instead. */
+  /**
+   * <strong>Required.</strong> Please refer to full <a
+   * href="https://stripe.com/docs/api">documentation</a> instead.
+   */
   @SerializedName("source")
   String source;
 
@@ -152,7 +155,10 @@ public class PaymentSourceCollectionCreateParams extends ApiRequestParams {
       return this;
     }
 
-    /** Please refer to full <a href="https://stripe.com/docs/api">documentation</a> instead. */
+    /**
+     * <strong>Required.</strong> Please refer to full <a
+     * href="https://stripe.com/docs/api">documentation</a> instead.
+     */
     public Builder setSource(String source) {
       this.source = source;
       return this;

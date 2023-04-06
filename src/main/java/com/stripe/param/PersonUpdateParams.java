@@ -1374,7 +1374,7 @@ public class PersonUpdateParams extends ApiRequestParams {
 
   @Getter
   public static class Dob {
-    /** The day of birth, between 1 and 31. */
+    /** <strong>Required.</strong> The day of birth, between 1 and 31. */
     @SerializedName("day")
     Long day;
 
@@ -1387,11 +1387,11 @@ public class PersonUpdateParams extends ApiRequestParams {
     @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
     Map<String, Object> extraParams;
 
-    /** The month of birth, between 1 and 12. */
+    /** <strong>Required.</strong> The month of birth, between 1 and 12. */
     @SerializedName("month")
     Long month;
 
-    /** The four-digit year of birth. */
+    /** <strong>Required.</strong> The four-digit year of birth. */
     @SerializedName("year")
     Long year;
 
@@ -1420,7 +1420,7 @@ public class PersonUpdateParams extends ApiRequestParams {
         return new PersonUpdateParams.Dob(this.day, this.extraParams, this.month, this.year);
       }
 
-      /** The day of birth, between 1 and 31. */
+      /** <strong>Required.</strong> The day of birth, between 1 and 31. */
       public Builder setDay(Long day) {
         this.day = day;
         return this;
@@ -1452,13 +1452,13 @@ public class PersonUpdateParams extends ApiRequestParams {
         return this;
       }
 
-      /** The month of birth, between 1 and 12. */
+      /** <strong>Required.</strong> The month of birth, between 1 and 12. */
       public Builder setMonth(Long month) {
         this.month = month;
         return this;
       }
 
-      /** The four-digit year of birth. */
+      /** <strong>Required.</strong> The four-digit year of birth. */
       public Builder setYear(Long year) {
         this.year = year;
         return this;

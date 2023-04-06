@@ -80,8 +80,8 @@ public class FeeRefundCollection extends StripeCollection<FeeRefund> {
   /**
    * You can see a list of the refunds belonging to a specific application fee. Note that the 10
    * most recent refunds are always available by default on the application fee object. If you need
-   * more than those 10, you can use this API method and the <code>limit</code> and <code>
-   * starting_after</code> parameters to page through additional refunds.
+   * more than those 10, you can use this API method and the {@code limit} and {@code
+   * starting_after} parameters to page through additional refunds.
    */
   public FeeRefundCollection list(Map<String, Object> params) throws StripeException {
     return list(params, (RequestOptions) null);
@@ -90,8 +90,8 @@ public class FeeRefundCollection extends StripeCollection<FeeRefund> {
   /**
    * You can see a list of the refunds belonging to a specific application fee. Note that the 10
    * most recent refunds are always available by default on the application fee object. If you need
-   * more than those 10, you can use this API method and the <code>limit</code> and <code>
-   * starting_after</code> parameters to page through additional refunds.
+   * more than those 10, you can use this API method and the {@code limit} and {@code
+   * starting_after} parameters to page through additional refunds.
    */
   public FeeRefundCollection list(Map<String, Object> params, RequestOptions options)
       throws StripeException {
@@ -102,8 +102,8 @@ public class FeeRefundCollection extends StripeCollection<FeeRefund> {
   /**
    * You can see a list of the refunds belonging to a specific application fee. Note that the 10
    * most recent refunds are always available by default on the application fee object. If you need
-   * more than those 10, you can use this API method and the <code>limit</code> and <code>
-   * starting_after</code> parameters to page through additional refunds.
+   * more than those 10, you can use this API method and the {@code limit} and {@code
+   * starting_after} parameters to page through additional refunds.
    */
   public FeeRefundCollection list(FeeRefundCollectionListParams params) throws StripeException {
     return list(params, (RequestOptions) null);
@@ -112,8 +112,8 @@ public class FeeRefundCollection extends StripeCollection<FeeRefund> {
   /**
    * You can see a list of the refunds belonging to a specific application fee. Note that the 10
    * most recent refunds are always available by default on the application fee object. If you need
-   * more than those 10, you can use this API method and the <code>limit</code> and <code>
-   * starting_after</code> parameters to page through additional refunds.
+   * more than those 10, you can use this API method and the {@code limit} and {@code
+   * starting_after} parameters to page through additional refunds.
    */
   public FeeRefundCollection list(FeeRefundCollectionListParams params, RequestOptions options)
       throws StripeException {

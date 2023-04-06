@@ -644,8 +644,8 @@ public class InvoiceItemUpdateParams extends ApiRequestParams {
   @Getter
   public static class Period {
     /**
-     * The end of the period, which must be greater than or equal to the start. This value is
-     * inclusive.
+     * <strong>Required.</strong> The end of the period, which must be greater than or equal to the
+     * start. This value is inclusive.
      */
     @SerializedName("end")
     Long end;
@@ -659,7 +659,7 @@ public class InvoiceItemUpdateParams extends ApiRequestParams {
     @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
     Map<String, Object> extraParams;
 
-    /** The start of the period. This value is inclusive. */
+    /** <strong>Required.</strong> The start of the period. This value is inclusive. */
     @SerializedName("start")
     Long start;
 
@@ -686,8 +686,8 @@ public class InvoiceItemUpdateParams extends ApiRequestParams {
       }
 
       /**
-       * The end of the period, which must be greater than or equal to the start. This value is
-       * inclusive.
+       * <strong>Required.</strong> The end of the period, which must be greater than or equal to
+       * the start. This value is inclusive.
        */
       public Builder setEnd(Long end) {
         this.end = end;
@@ -720,7 +720,7 @@ public class InvoiceItemUpdateParams extends ApiRequestParams {
         return this;
       }
 
-      /** The start of the period. This value is inclusive. */
+      /** <strong>Required.</strong> The start of the period. This value is inclusive. */
       public Builder setStart(Long start) {
         this.start = start;
         return this;
@@ -731,9 +731,9 @@ public class InvoiceItemUpdateParams extends ApiRequestParams {
   @Getter
   public static class PriceData {
     /**
-     * Three-letter <a href="https://www.iso.org/iso-4217-currency-codes.html">ISO currency
-     * code</a>, in lowercase. Must be a <a href="https://stripe.com/docs/currencies">supported
-     * currency</a>.
+     * <strong>Required.</strong> Three-letter <a
+     * href="https://www.iso.org/iso-4217-currency-codes.html">ISO currency code</a>, in lowercase.
+     * Must be a <a href="https://stripe.com/docs/currencies">supported currency</a>.
      */
     @SerializedName("currency")
     Object currency;
@@ -747,7 +747,7 @@ public class InvoiceItemUpdateParams extends ApiRequestParams {
     @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
     Map<String, Object> extraParams;
 
-    /** The ID of the product that this price will belong to. */
+    /** <strong>Required.</strong> The ID of the product that this price will belong to. */
     @SerializedName("product")
     Object product;
 
@@ -818,9 +818,9 @@ public class InvoiceItemUpdateParams extends ApiRequestParams {
       }
 
       /**
-       * Three-letter <a href="https://www.iso.org/iso-4217-currency-codes.html">ISO currency
-       * code</a>, in lowercase. Must be a <a href="https://stripe.com/docs/currencies">supported
-       * currency</a>.
+       * <strong>Required.</strong> Three-letter <a
+       * href="https://www.iso.org/iso-4217-currency-codes.html">ISO currency code</a>, in
+       * lowercase. Must be a <a href="https://stripe.com/docs/currencies">supported currency</a>.
        */
       public Builder setCurrency(String currency) {
         this.currency = currency;
@@ -828,9 +828,9 @@ public class InvoiceItemUpdateParams extends ApiRequestParams {
       }
 
       /**
-       * Three-letter <a href="https://www.iso.org/iso-4217-currency-codes.html">ISO currency
-       * code</a>, in lowercase. Must be a <a href="https://stripe.com/docs/currencies">supported
-       * currency</a>.
+       * <strong>Required.</strong> Three-letter <a
+       * href="https://www.iso.org/iso-4217-currency-codes.html">ISO currency code</a>, in
+       * lowercase. Must be a <a href="https://stripe.com/docs/currencies">supported currency</a>.
        */
       public Builder setCurrency(EmptyParam currency) {
         this.currency = currency;
@@ -863,13 +863,13 @@ public class InvoiceItemUpdateParams extends ApiRequestParams {
         return this;
       }
 
-      /** The ID of the product that this price will belong to. */
+      /** <strong>Required.</strong> The ID of the product that this price will belong to. */
       public Builder setProduct(String product) {
         this.product = product;
         return this;
       }
 
-      /** The ID of the product that this price will belong to. */
+      /** <strong>Required.</strong> The ID of the product that this price will belong to. */
       public Builder setProduct(EmptyParam product) {
         this.product = product;
         return this;

@@ -31,8 +31,8 @@ public class WebhookEndpointCreateParams extends ApiRequestParams {
   String description;
 
   /**
-   * The list of events to enable for this endpoint. You may specify {@code ['*']} to enable all
-   * events, except those that require explicit selection.
+   * <strong>Required.</strong> The list of events to enable for this endpoint. You may specify
+   * {@code ['*']} to enable all events, except those that require explicit selection.
    */
   @SerializedName("enabled_events")
   List<WebhookEndpointCreateParams.EnabledEvent> enabledEvents;
@@ -59,7 +59,7 @@ public class WebhookEndpointCreateParams extends ApiRequestParams {
   @SerializedName("metadata")
   Object metadata;
 
-  /** The URL of the webhook endpoint. */
+  /** <strong>Required.</strong> The URL of the webhook endpoint. */
   @SerializedName("url")
   String url;
 
@@ -268,7 +268,7 @@ public class WebhookEndpointCreateParams extends ApiRequestParams {
       return this;
     }
 
-    /** The URL of the webhook endpoint. */
+    /** <strong>Required.</strong> The URL of the webhook endpoint. */
     public Builder setUrl(String url) {
       this.url = url;
       return this;
