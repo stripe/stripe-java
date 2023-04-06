@@ -83,7 +83,7 @@ public class CardholderCreateParams extends ApiRequestParams {
   Status status;
 
   /**
-   * One of {@code individual} or {@code company}. See <a
+   * <strong>Required.</strong> One of {@code individual} or {@code company}. See <a
    * href="https://stripe.com/docs/issuing/other/choose-cardholder">Choose a cardholder type</a> for
    * more details.
    */
@@ -307,7 +307,7 @@ public class CardholderCreateParams extends ApiRequestParams {
     }
 
     /**
-     * One of {@code individual} or {@code company}. See <a
+     * <strong>Required.</strong> One of {@code individual} or {@code company}. See <a
      * href="https://stripe.com/docs/issuing/other/choose-cardholder">Choose a cardholder type</a>
      * for more details.
      */
