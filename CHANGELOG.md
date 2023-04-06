@@ -1,5 +1,10 @@
 # Changelog
 
+## 22.16.0 - 2023-04-06
+* [#1540](https://github.com/stripe/stripe-java/pull/1540) Update generated code
+  * Add support for `country` on `PaymentMethod.link`
+  * Add support for `status_details` on `PaymentMethod.us_bank_account`
+
 ## 22.16.0-beta.1 - 2023-03-30
 * [#1537](https://github.com/stripe/stripe-java/pull/1537) Update generated code
   * Add support for new value `ioss` on enum `TaxRegistrationCreateParams.type`
