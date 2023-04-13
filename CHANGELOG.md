@@ -1,5 +1,13 @@
 # Changelog
 
+## 22.17.0-beta.2 - 2023-04-13
+* [#1545](https://github.com/stripe/stripe-java/pull/1545) Update generated code for beta
+  * Add support for `collect_payment_method` and `confirm_payment_intent` methods on resource `Terminal.Reader`
+  * Add support for `paypal_payments` on `Account.capabilities`, `AccountCreateParams.capabilities`, and `AccountUpdateParams.capabilities`
+  * Add support for `collect_payment_method` and `confirm_payment_intent` on `Terminal.Reader.action`
+  * Add support for `stripe_account` on `Terminal.Reader.action.process_payment_intent` and `Terminal.Reader.action.refund_payment`
+  * Add support for new value `terminal.reader.action_updated` on enums `WebhookEndpointCreateParams.enabled_events[]` and `WebhookEndpointUpdateParams.enabled_events[]`
+
 ## 22.17.0-beta.1 - 2023-04-06
 * [#1539](https://github.com/stripe/stripe-java/pull/1539) Update generated code for beta
   * Add support for `treasury_transaction` on `CapitalFinancingTransactionListParams`
