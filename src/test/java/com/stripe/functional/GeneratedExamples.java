@@ -4625,4 +4625,26 @@ class GeneratedExamples extends BaseStripeTest {
         "/v1/tax/transactions/create_from_calculation",
         params.toMap());
   }
+
+  @Test
+  public void testPaymentIntentCreate3() throws StripeException {
+    PaymentIntentCreateParams params =
+        PaymentIntentCreateParams.builder()
+            .setAmount(200L)
+            .setCurrency("usd")
+            .setPaymentMethodData(
+                PaymentIntentCreateParams.PaymentMethodData.builder()
+                    .setType(PaymentIntentCreateParams.PaymentMethodData.Type.P24)
+                    .setP24(
+                        PaymentIntentCreateParams.PaymentMethodData.P24
+                            .builder()
+                            .setBank(PaymentIntentCreateParams.PaymentMethodData.P24.Bank.BLIK)
+                            .build())
+                    .build())
+            .build();
+
+    PaymentIntent paymentIntent = PaymentIntent.create(params);
+    assertNotNull(paymentIntent);
+    verifyRequest(ApiResource.RequestMethod.POST, "/v1/payment_intents", params.toMap());
+  }
 }

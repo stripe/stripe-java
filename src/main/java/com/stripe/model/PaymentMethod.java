@@ -1035,7 +1035,8 @@ public class PaymentMethod extends ApiResource implements HasId, MetadataStore<P
      *
      * <p>One of {@code ABNANL2A}, {@code ASNBNL21}, {@code BITSNL2A}, {@code BUNQNL2A}, {@code
      * FVLBNL22}, {@code HANDNL2A}, {@code INGBNL2A}, {@code KNABNL2H}, {@code MOYONL21}, {@code
-     * RABONL2U}, {@code RBRBNL21}, {@code REVOLT21}, {@code SNSBNL2A}, or {@code TRIONL2U}.
+     * RABONL2U}, {@code RBRBNL21}, {@code REVOIE23}, {@code REVOLT21}, {@code SNSBNL2A}, or {@code
+     * TRIONL2U}.
      */
     @SerializedName("bic")
     String bic;
