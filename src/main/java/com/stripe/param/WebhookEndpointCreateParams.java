@@ -1189,6 +1189,9 @@ public class WebhookEndpointCreateParams extends ApiRequestParams {
     @SerializedName("terminal.reader.action_succeeded")
     TERMINAL__READER__ACTION_SUCCEEDED("terminal.reader.action_succeeded"),
 
+    @SerializedName("terminal.reader.action_updated")
+    TERMINAL__READER__ACTION_UPDATED("terminal.reader.action_updated"),
+
     @SerializedName("test_helpers.test_clock.advancing")
     TEST_HELPERS__TEST_CLOCK__ADVANCING("test_helpers.test_clock.advancing"),
 
