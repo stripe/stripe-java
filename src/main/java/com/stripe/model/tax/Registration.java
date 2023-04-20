@@ -446,7 +446,7 @@ public class Registration extends ApiResource implements HasId {
       @EqualsAndHashCode(callSuper = false)
       public static class ProvinceStandard extends StripeObject {
         /**
-         * Two-letter CA province code (<a href="(https://en.wikipedia.org/wiki/ISO_3166-2)">ISO
+         * Two-letter CA province code (<a href="https://en.wikipedia.org/wiki/ISO_3166-2">ISO
          * 3166-2</a>).
          */
         @SerializedName("province")

@@ -1697,7 +1697,7 @@ public class RegistrationCreateParams extends ApiRequestParams {
 
         /**
          * <strong>Required.</strong> Two-letter CA province code (<a
-         * href="(https://en.wikipedia.org/wiki/ISO_3166-2)">ISO 3166-2</a>).
+         * href="https://en.wikipedia.org/wiki/ISO_3166-2">ISO 3166-2</a>).
          */
         @SerializedName("province")
         String province;
@@ -1754,7 +1754,7 @@ public class RegistrationCreateParams extends ApiRequestParams {
 
           /**
            * <strong>Required.</strong> Two-letter CA province code (<a
-           * href="(https://en.wikipedia.org/wiki/ISO_3166-2)">ISO 3166-2</a>).
+           * href="https://en.wikipedia.org/wiki/ISO_3166-2">ISO 3166-2</a>).
            */
           public Builder setProvince(String province) {
             this.province = province;
